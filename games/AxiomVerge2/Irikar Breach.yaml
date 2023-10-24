@@ -1,0 +1,13 @@
+name: Irikar Breach
+graph_offset: [0, 30]
+data:
+  breach: true
+
+areas:
+- name: Save Room
+  on_entry: $reset_old_area(^newpos)
+  data:
+    flipside: Irikar > Sight Room > Portal
+  spots:
+    - name: Save Point
+      coord: [14.525, 25.35]

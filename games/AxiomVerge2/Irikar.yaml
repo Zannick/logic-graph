@@ -10,5 +10,201 @@ areas:
       coord: [11.3, 20.1]
     - name: Northwest Above Bowl
       coord: [12.25, 20.1]
+      local:
+        - to: West Rim
+        - to: Bowl Top Platform
     - name: Northeast Above Bowl
       coord: [12.8, 20.1]
+      local:
+        - to: East Rim
+
+    # The Bowl
+    - name: West Rim
+      coord: [12.2, 20.45]
+      local:
+        - to: Bowl Top Platform
+      exits:
+        - to: East Rim
+          req: $hover
+          movement: base
+    - name: East Rim
+      coord: [12.8, 20.5]
+      local:
+        - to: Save Point
+          jumps_down: 2
+        - to: Bowl Hole
+          jumps_down: 1
+      exits:
+        - to: Sat Tower Roof West
+          req: $hover
+          movement: base
+          jumps: 1
+    - name: Bowl Top Platform
+      coord: [12.4, 20.85]
+      local:
+        - to: Bowl Midle Ledge
+          jumps_down: 1
+        - to: Bowl Hole
+          jumps_down: 2
+      exits:
+        - to: West Rim
+          req: $hook
+          time: 0.7
+    - name: Bowl Middle Ledge
+      coord: [12.45, 21.45]
+      local:
+        - to: Bowl Middle Platform Center
+      exits:
+        - to: Bowl Top Platform
+          req: $hook
+          time: 1.6
+    - name: Bowl Middle Platform Center
+      coord: [12.5, 22.0]
+      local:
+        - to: Save Point
+          jumps_down: 1
+      exits:
+        - to: Bowl Middle Ledge
+          req: $hook
+          time: 1  # ?
+    - name: Bowl Middle Platform West
+      coord: [12.35, 22.0]
+      local:
+        - to: Bowl Middle Platform Center
+        - to: Save Point
+          jumps_down: 1
+      exits:
+        - to: Bowl Middle Ledge
+          req: $hook
+          time: 1
+    - name: Bowl Platform 3
+      coord: [12.3, 22.25]
+      local:
+        - to: Save Point
+      exits:
+        - to: Bowl Middle Platform Center
+          req: $hook
+          time: 1.2
+    - name: Save Point
+      coord: [12.5, 22.75]
+      local:
+        - to: Bowl Platform 3
+          jumps: 3
+      exits:
+        - to: Bowl Hole
+          req: $hook
+          time: 1.4
+      actions:
+        - name: Save
+          do: $save
+          tags: [save]
+    - name: Bowl Hole
+      coord: [12.95, 22.65]
+      local:
+        - to: Save Point
+          jumps: 2
+        - to: Sat Tower Middle Ledge
+          jumps: 1
+
+    # Satellite Tower
+    - name: Sat Tower Roof West
+      coord: [13.4, 20.4]
+      local:
+        - to: Sat Tower Roof East
+    - name: Sat Tower Roof East
+      coord: [13.65, 20.4]
+      local:
+        - to: Sat Tower Roof West
+    - name: Sat Tower Middle Ledge
+      coord: [13.4, 22.6]
+      local:
+        - to: Bowl Hole
+        - to: Sat Tower Lower Right Ledge
+        - to: Sat Tower Lower Left Ledge
+      exits:
+        - to: Sat Tower Floating Platform
+          req: $hook
+          time: 1.5
+    - name: Sat Tower Floating Platform
+      coord: [13.5, 22.05]
+      local:
+        - to: Sat Tower Middle Ledge
+        - to: Sat Tower Lower Right Ledge
+        - to: Sat Tower Lower Left Ledge
+      exits:
+        - to: Sat Tower Top Ledge
+          req: $hook
+          time: 1
+    - name: Sat Tower Top Ledge
+      coord: [13.55, 21.5]
+      local:
+        - to: Sat Tower Floating Platform
+        - to: Sat Tower Lower Right Ledge
+        - to: Sat Tower Lower Left Ledge
+          thru: [13.6, 22.1]
+      locations:
+        - name: Tablet
+          item: Commemorative_Speech
+          tags: [standing]
+    - name: Sat Tower Lower Right Ledge
+      coord: [13.55, 23.1]
+      local:
+        - to: Sat Tower Lower Left Ledge
+      # TODO: back up?
+    - name: Sat Tower Lower Left Ledge
+      coord: [13.5, 23.6]
+      local:
+        - to: Sat Tower Long Ledge
+    - name: Sat Tower Long Ledge
+      coord: [13.1, 24.2]
+      local:
+        - to: Sat Tower Bottom
+    - name: Sat Tower Bottom
+      coord: [13.4, 24.8]
+      local:
+        - to: Sat Tower East 24
+          jumps: 2
+    - name: Sat Tower East 24
+      coord: [13.95, 24.55]
+      exits:
+        - to: Sight Room > West 24
+          tags: [xshift]
+
+- name: Sight Room
+  on_entry: $reset_old_area(^newpos)
+  spots:
+    - name: West 24
+      coord: [14.05, 24.55]
+      local:
+        - to: Lower Ledge
+      exits:
+        - to: Hub > Sat Tower East 24
+          tags: [xshift]
+    - name: Lower Ledge
+      coord: [14.25, 24.75]
+      local:
+        - to: West 24
+          jumps: 1
+        - to: Portal
+        - to: Item Pedestal
+    - name: Portal
+      coord: [14.525, 25.35]
+      data:
+        flipside: Irikar Breach > Save Room > Save Point
+      local:
+        - to: Item Pedestal
+      actions:
+        - name: Enter Portal
+          req: ^mode == 'drone' and Breach_Sight
+          do: $portal(^flipside)
+          to: ^flipside
+          tags: [portal]
+    - name: Item Pedestal
+      coord: [14.8, 25.6]
+      local:
+        - to: Portal
+          jumps: 2
+      locations:
+        - name: Urn
+          item: Breach_Sight
+          tags: [urn]

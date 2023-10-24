@@ -39,6 +39,7 @@ pub enum RegionId {
     Giguna_Breach,
     Glacier,
     Irikar,
+    Irikar_Breach,
     Menu,
 }
 impl fmt::Display for RegionId {
@@ -51,6 +52,7 @@ impl fmt::Display for RegionId {
             RegionId::Giguna_Breach => write!(f, "{}", "Giguna Breach"),
             RegionId::Glacier => write!(f, "{}", "Glacier"),
             RegionId::Irikar => write!(f, "{}", "Irikar"),
+            RegionId::Irikar_Breach => write!(f, "{}", "Irikar Breach"),
             RegionId::Menu => write!(f, "{}", "Menu"),
         }
     }
@@ -68,6 +70,7 @@ impl std::str::FromStr for RegionId {
             "Giguna Breach" => Ok(RegionId::Giguna_Breach),
             "Glacier" => Ok(RegionId::Glacier),
             "Irikar" => Ok(RegionId::Irikar),
+            "Irikar Breach" => Ok(RegionId::Irikar_Breach),
             "Menu" => Ok(RegionId::Menu),
             _ => Err(format!("Could not recognize as a RegionId: {}", s)),
         }
@@ -178,6 +181,8 @@ pub enum AreaId {
     Glacier__The_Big_Drop,
     Glacier__Vertical_Room,
     Irikar__Hub,
+    Irikar__Sight_Room,
+    Irikar_Breach__Save_Room,
     Menu__Upgrade_Menu,
 }
 impl fmt::Display for AreaId {
@@ -286,6 +291,8 @@ impl fmt::Display for AreaId {
             AreaId::Glacier__The_Big_Drop => write!(f, "{}", "Glacier > The Big Drop"),
             AreaId::Glacier__Vertical_Room => write!(f, "{}", "Glacier > Vertical Room"),
             AreaId::Irikar__Hub => write!(f, "{}", "Irikar > Hub"),
+            AreaId::Irikar__Sight_Room => write!(f, "{}", "Irikar > Sight Room"),
+            AreaId::Irikar_Breach__Save_Room => write!(f, "{}", "Irikar Breach > Save Room"),
             AreaId::Menu__Upgrade_Menu => write!(f, "{}", "Menu > Upgrade Menu"),
         }
     }
@@ -385,6 +392,8 @@ impl std::str::FromStr for AreaId {
             "Glacier > The Big Drop" => Ok(AreaId::Glacier__The_Big_Drop),
             "Glacier > Vertical Room" => Ok(AreaId::Glacier__Vertical_Room),
             "Irikar > Hub" => Ok(AreaId::Irikar__Hub),
+            "Irikar > Sight Room" => Ok(AreaId::Irikar__Sight_Room),
+            "Irikar Breach > Save Room" => Ok(AreaId::Irikar_Breach__Save_Room),
             "Menu > Upgrade Menu" => Ok(AreaId::Menu__Upgrade_Menu),
             _ => Err(format!("Could not recognize as a AreaId: {}", s)),
         }
@@ -1067,10 +1076,10 @@ pub enum SpotId {
     Giguna_Breach__Cubby__Entrance,
     Giguna_Breach__Cubby__Rocks,
     Giguna_Breach__Fire_Room__Cuesta,
-    Giguna_Breach__Fire_Room__East_10,
     Giguna_Breach__Fire_Room__East_11,
     Giguna_Breach__Fire_Room__First_Fire,
     Giguna_Breach__Fire_Room__South,
+    Giguna_Breach__Fire_Room__West_10,
     Giguna_Breach__Fire_Room__West_11,
     Giguna_Breach__Fire_Room__West_Plateau,
     Giguna_Breach__Grid_14_10_11__East_10,
@@ -1196,10 +1205,34 @@ pub enum SpotId {
     Glacier__Vertical_Room__Under_Switch,
     Glacier__Vertical_Room__West_8,
     Glacier__Vertical_Room__West_9,
+    Irikar__Hub__Bowl_Hole,
+    Irikar__Hub__Bowl_Middle_Ledge,
+    Irikar__Hub__Bowl_Middle_Platform_Center,
+    Irikar__Hub__Bowl_Middle_Platform_West,
+    Irikar__Hub__Bowl_Platform_3,
+    Irikar__Hub__Bowl_Top_Platform,
+    Irikar__Hub__East_Rim,
     Irikar__Hub__North_Above_Portal,
     Irikar__Hub__Northeast_Above_Bowl,
     Irikar__Hub__Northwest,
     Irikar__Hub__Northwest_Above_Bowl,
+    Irikar__Hub__Sat_Tower_Bottom,
+    Irikar__Hub__Sat_Tower_East_24,
+    Irikar__Hub__Sat_Tower_Floating_Platform,
+    Irikar__Hub__Sat_Tower_Long_Ledge,
+    Irikar__Hub__Sat_Tower_Lower_Left_Ledge,
+    Irikar__Hub__Sat_Tower_Lower_Right_Ledge,
+    Irikar__Hub__Sat_Tower_Middle_Ledge,
+    Irikar__Hub__Sat_Tower_Roof_East,
+    Irikar__Hub__Sat_Tower_Roof_West,
+    Irikar__Hub__Sat_Tower_Top_Ledge,
+    Irikar__Hub__Save_Point,
+    Irikar__Hub__West_Rim,
+    Irikar__Sight_Room__Item_Pedestal,
+    Irikar__Sight_Room__Lower_Ledge,
+    Irikar__Sight_Room__Portal,
+    Irikar__Sight_Room__West_24,
+    Irikar_Breach__Save_Room__Save_Point,
     Menu__Upgrade_Menu__Combat,
     Menu__Upgrade_Menu__Drone,
     Menu__Upgrade_Menu__Infection,
@@ -2777,9 +2810,6 @@ impl fmt::Display for SpotId {
             SpotId::Giguna_Breach__Fire_Room__Cuesta => {
                 write!(f, "{}", "Giguna Breach > Fire Room > Cuesta")
             }
-            SpotId::Giguna_Breach__Fire_Room__East_10 => {
-                write!(f, "{}", "Giguna Breach > Fire Room > East 10")
-            }
             SpotId::Giguna_Breach__Fire_Room__East_11 => {
                 write!(f, "{}", "Giguna Breach > Fire Room > East 11")
             }
@@ -2788,6 +2818,9 @@ impl fmt::Display for SpotId {
             }
             SpotId::Giguna_Breach__Fire_Room__South => {
                 write!(f, "{}", "Giguna Breach > Fire Room > South")
+            }
+            SpotId::Giguna_Breach__Fire_Room__West_10 => {
+                write!(f, "{}", "Giguna Breach > Fire Room > West 10")
             }
             SpotId::Giguna_Breach__Fire_Room__West_11 => {
                 write!(f, "{}", "Giguna Breach > Fire Room > West 11")
@@ -3124,6 +3157,23 @@ impl fmt::Display for SpotId {
             SpotId::Glacier__Vertical_Room__West_9 => {
                 write!(f, "{}", "Glacier > Vertical Room > West 9")
             }
+            SpotId::Irikar__Hub__Bowl_Hole => write!(f, "{}", "Irikar > Hub > Bowl Hole"),
+            SpotId::Irikar__Hub__Bowl_Middle_Ledge => {
+                write!(f, "{}", "Irikar > Hub > Bowl Middle Ledge")
+            }
+            SpotId::Irikar__Hub__Bowl_Middle_Platform_Center => {
+                write!(f, "{}", "Irikar > Hub > Bowl Middle Platform Center")
+            }
+            SpotId::Irikar__Hub__Bowl_Middle_Platform_West => {
+                write!(f, "{}", "Irikar > Hub > Bowl Middle Platform West")
+            }
+            SpotId::Irikar__Hub__Bowl_Platform_3 => {
+                write!(f, "{}", "Irikar > Hub > Bowl Platform 3")
+            }
+            SpotId::Irikar__Hub__Bowl_Top_Platform => {
+                write!(f, "{}", "Irikar > Hub > Bowl Top Platform")
+            }
+            SpotId::Irikar__Hub__East_Rim => write!(f, "{}", "Irikar > Hub > East Rim"),
             SpotId::Irikar__Hub__North_Above_Portal => {
                 write!(f, "{}", "Irikar > Hub > North Above Portal")
             }
@@ -3133,6 +3183,49 @@ impl fmt::Display for SpotId {
             SpotId::Irikar__Hub__Northwest => write!(f, "{}", "Irikar > Hub > Northwest"),
             SpotId::Irikar__Hub__Northwest_Above_Bowl => {
                 write!(f, "{}", "Irikar > Hub > Northwest Above Bowl")
+            }
+            SpotId::Irikar__Hub__Sat_Tower_Bottom => {
+                write!(f, "{}", "Irikar > Hub > Sat Tower Bottom")
+            }
+            SpotId::Irikar__Hub__Sat_Tower_East_24 => {
+                write!(f, "{}", "Irikar > Hub > Sat Tower East 24")
+            }
+            SpotId::Irikar__Hub__Sat_Tower_Floating_Platform => {
+                write!(f, "{}", "Irikar > Hub > Sat Tower Floating Platform")
+            }
+            SpotId::Irikar__Hub__Sat_Tower_Long_Ledge => {
+                write!(f, "{}", "Irikar > Hub > Sat Tower Long Ledge")
+            }
+            SpotId::Irikar__Hub__Sat_Tower_Lower_Left_Ledge => {
+                write!(f, "{}", "Irikar > Hub > Sat Tower Lower Left Ledge")
+            }
+            SpotId::Irikar__Hub__Sat_Tower_Lower_Right_Ledge => {
+                write!(f, "{}", "Irikar > Hub > Sat Tower Lower Right Ledge")
+            }
+            SpotId::Irikar__Hub__Sat_Tower_Middle_Ledge => {
+                write!(f, "{}", "Irikar > Hub > Sat Tower Middle Ledge")
+            }
+            SpotId::Irikar__Hub__Sat_Tower_Roof_East => {
+                write!(f, "{}", "Irikar > Hub > Sat Tower Roof East")
+            }
+            SpotId::Irikar__Hub__Sat_Tower_Roof_West => {
+                write!(f, "{}", "Irikar > Hub > Sat Tower Roof West")
+            }
+            SpotId::Irikar__Hub__Sat_Tower_Top_Ledge => {
+                write!(f, "{}", "Irikar > Hub > Sat Tower Top Ledge")
+            }
+            SpotId::Irikar__Hub__Save_Point => write!(f, "{}", "Irikar > Hub > Save Point"),
+            SpotId::Irikar__Hub__West_Rim => write!(f, "{}", "Irikar > Hub > West Rim"),
+            SpotId::Irikar__Sight_Room__Item_Pedestal => {
+                write!(f, "{}", "Irikar > Sight Room > Item Pedestal")
+            }
+            SpotId::Irikar__Sight_Room__Lower_Ledge => {
+                write!(f, "{}", "Irikar > Sight Room > Lower Ledge")
+            }
+            SpotId::Irikar__Sight_Room__Portal => write!(f, "{}", "Irikar > Sight Room > Portal"),
+            SpotId::Irikar__Sight_Room__West_24 => write!(f, "{}", "Irikar > Sight Room > West 24"),
+            SpotId::Irikar_Breach__Save_Room__Save_Point => {
+                write!(f, "{}", "Irikar Breach > Save Room > Save Point")
             }
             SpotId::Menu__Upgrade_Menu__Combat => write!(f, "{}", "Menu > Upgrade Menu > Combat"),
             SpotId::Menu__Upgrade_Menu__Drone => write!(f, "{}", "Menu > Upgrade Menu > Drone"),
@@ -4153,12 +4246,12 @@ impl std::str::FromStr for SpotId {
             "Giguna Breach > Cubby > Entrance" => Ok(SpotId::Giguna_Breach__Cubby__Entrance),
             "Giguna Breach > Cubby > Rocks" => Ok(SpotId::Giguna_Breach__Cubby__Rocks),
             "Giguna Breach > Fire Room > Cuesta" => Ok(SpotId::Giguna_Breach__Fire_Room__Cuesta),
-            "Giguna Breach > Fire Room > East 10" => Ok(SpotId::Giguna_Breach__Fire_Room__East_10),
             "Giguna Breach > Fire Room > East 11" => Ok(SpotId::Giguna_Breach__Fire_Room__East_11),
             "Giguna Breach > Fire Room > First Fire" => {
                 Ok(SpotId::Giguna_Breach__Fire_Room__First_Fire)
             }
             "Giguna Breach > Fire Room > South" => Ok(SpotId::Giguna_Breach__Fire_Room__South),
+            "Giguna Breach > Fire Room > West 10" => Ok(SpotId::Giguna_Breach__Fire_Room__West_10),
             "Giguna Breach > Fire Room > West 11" => Ok(SpotId::Giguna_Breach__Fire_Room__West_11),
             "Giguna Breach > Fire Room > West Plateau" => {
                 Ok(SpotId::Giguna_Breach__Fire_Room__West_Plateau)
@@ -4368,10 +4461,48 @@ impl std::str::FromStr for SpotId {
             }
             "Glacier > Vertical Room > West 8" => Ok(SpotId::Glacier__Vertical_Room__West_8),
             "Glacier > Vertical Room > West 9" => Ok(SpotId::Glacier__Vertical_Room__West_9),
+            "Irikar > Hub > Bowl Hole" => Ok(SpotId::Irikar__Hub__Bowl_Hole),
+            "Irikar > Hub > Bowl Middle Ledge" => Ok(SpotId::Irikar__Hub__Bowl_Middle_Ledge),
+            "Irikar > Hub > Bowl Middle Platform Center" => {
+                Ok(SpotId::Irikar__Hub__Bowl_Middle_Platform_Center)
+            }
+            "Irikar > Hub > Bowl Middle Platform West" => {
+                Ok(SpotId::Irikar__Hub__Bowl_Middle_Platform_West)
+            }
+            "Irikar > Hub > Bowl Platform 3" => Ok(SpotId::Irikar__Hub__Bowl_Platform_3),
+            "Irikar > Hub > Bowl Top Platform" => Ok(SpotId::Irikar__Hub__Bowl_Top_Platform),
+            "Irikar > Hub > East Rim" => Ok(SpotId::Irikar__Hub__East_Rim),
             "Irikar > Hub > North Above Portal" => Ok(SpotId::Irikar__Hub__North_Above_Portal),
             "Irikar > Hub > Northeast Above Bowl" => Ok(SpotId::Irikar__Hub__Northeast_Above_Bowl),
             "Irikar > Hub > Northwest" => Ok(SpotId::Irikar__Hub__Northwest),
             "Irikar > Hub > Northwest Above Bowl" => Ok(SpotId::Irikar__Hub__Northwest_Above_Bowl),
+            "Irikar > Hub > Sat Tower Bottom" => Ok(SpotId::Irikar__Hub__Sat_Tower_Bottom),
+            "Irikar > Hub > Sat Tower East 24" => Ok(SpotId::Irikar__Hub__Sat_Tower_East_24),
+            "Irikar > Hub > Sat Tower Floating Platform" => {
+                Ok(SpotId::Irikar__Hub__Sat_Tower_Floating_Platform)
+            }
+            "Irikar > Hub > Sat Tower Long Ledge" => Ok(SpotId::Irikar__Hub__Sat_Tower_Long_Ledge),
+            "Irikar > Hub > Sat Tower Lower Left Ledge" => {
+                Ok(SpotId::Irikar__Hub__Sat_Tower_Lower_Left_Ledge)
+            }
+            "Irikar > Hub > Sat Tower Lower Right Ledge" => {
+                Ok(SpotId::Irikar__Hub__Sat_Tower_Lower_Right_Ledge)
+            }
+            "Irikar > Hub > Sat Tower Middle Ledge" => {
+                Ok(SpotId::Irikar__Hub__Sat_Tower_Middle_Ledge)
+            }
+            "Irikar > Hub > Sat Tower Roof East" => Ok(SpotId::Irikar__Hub__Sat_Tower_Roof_East),
+            "Irikar > Hub > Sat Tower Roof West" => Ok(SpotId::Irikar__Hub__Sat_Tower_Roof_West),
+            "Irikar > Hub > Sat Tower Top Ledge" => Ok(SpotId::Irikar__Hub__Sat_Tower_Top_Ledge),
+            "Irikar > Hub > Save Point" => Ok(SpotId::Irikar__Hub__Save_Point),
+            "Irikar > Hub > West Rim" => Ok(SpotId::Irikar__Hub__West_Rim),
+            "Irikar > Sight Room > Item Pedestal" => Ok(SpotId::Irikar__Sight_Room__Item_Pedestal),
+            "Irikar > Sight Room > Lower Ledge" => Ok(SpotId::Irikar__Sight_Room__Lower_Ledge),
+            "Irikar > Sight Room > Portal" => Ok(SpotId::Irikar__Sight_Room__Portal),
+            "Irikar > Sight Room > West 24" => Ok(SpotId::Irikar__Sight_Room__West_24),
+            "Irikar Breach > Save Room > Save Point" => {
+                Ok(SpotId::Irikar_Breach__Save_Room__Save_Point)
+            }
             "Menu > Upgrade Menu > Combat" => Ok(SpotId::Menu__Upgrade_Menu__Combat),
             "Menu > Upgrade Menu > Drone" => Ok(SpotId::Menu__Upgrade_Menu__Drone),
             "Menu > Upgrade Menu > Infection" => Ok(SpotId::Menu__Upgrade_Menu__Infection),
@@ -4511,6 +4642,8 @@ pub enum LocationId {
     Glacier__The_Big_Drop__Water_Surface__Drown,
     Glacier__Vertical_Room__Peak__Flask,
     Glacier__Vertical_Room__Under_Switch__Switch,
+    Irikar__Hub__Sat_Tower_Top_Ledge__Tablet,
+    Irikar__Sight_Room__Item_Pedestal__Urn,
     Menu__Upgrade_Menu__Combat__Melee_Damage_1,
     Menu__Upgrade_Menu__Combat__Melee_Damage_2,
     Menu__Upgrade_Menu__Combat__Melee_Damage_3,
@@ -4972,6 +5105,12 @@ impl fmt::Display for LocationId {
             }
             LocationId::Glacier__Vertical_Room__Under_Switch__Switch => {
                 write!(f, "{}", "Glacier > Vertical Room > Under Switch > Switch")
+            }
+            LocationId::Irikar__Hub__Sat_Tower_Top_Ledge__Tablet => {
+                write!(f, "{}", "Irikar > Hub > Sat Tower Top Ledge > Tablet")
+            }
+            LocationId::Irikar__Sight_Room__Item_Pedestal__Urn => {
+                write!(f, "{}", "Irikar > Sight Room > Item Pedestal > Urn")
             }
             LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_1 => {
                 write!(f, "{}", "Menu > Upgrade Menu > Combat > Melee Damage 1")
@@ -5435,6 +5574,12 @@ impl std::str::FromStr for LocationId {
             }
             "Glacier > Vertical Room > Under Switch > Switch" => {
                 Ok(LocationId::Glacier__Vertical_Room__Under_Switch__Switch)
+            }
+            "Irikar > Hub > Sat Tower Top Ledge > Tablet" => {
+                Ok(LocationId::Irikar__Hub__Sat_Tower_Top_Ledge__Tablet)
+            }
+            "Irikar > Sight Room > Item Pedestal > Urn" => {
+                Ok(LocationId::Irikar__Sight_Room__Item_Pedestal__Urn)
             }
             "Menu > Upgrade Menu > Combat > Melee Damage 1" => {
                 Ok(LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_1)
@@ -6110,6 +6255,7 @@ pub enum ExitId {
     Giguna_Breach__Ascent__West_6__ex__Peak__East_6_1,
     Giguna_Breach__Ascent__West_9__ex__Central__East_9_1,
     Giguna_Breach__Below_Chimney__Cubby_Entrance__ex__Cubby__Entrance_1,
+    Giguna_Breach__Below_Chimney__North__ex__Chimney__South_1,
     Giguna_Breach__Below_Chimney__Southwest__ex__SW_Save__North_1,
     Giguna_Breach__Central__East_9__ex__Ascent__West_9_1,
     Giguna_Breach__Central__East_9__ex__East_Brick_1,
@@ -6127,13 +6273,14 @@ pub enum ExitId {
     Giguna_Breach__Chimney__East_9__ex__Central__West_9_1,
     Giguna_Breach__Chimney__South__ex__Below_Chimney__North_1,
     Giguna_Breach__Cubby__Entrance__ex__Below_Chimney__Cubby_Entrance_1,
-    Giguna_Breach__Fire_Room__East_10__ex__Grid_14_10_11__East_10_1,
     Giguna_Breach__Fire_Room__East_11__ex__Slingshot__West_1,
     Giguna_Breach__Fire_Room__First_Fire__ex__West_Plateau_1,
     Giguna_Breach__Fire_Room__South__ex__Antechamber__North_1,
     Giguna_Breach__Fire_Room__South__ex__Cuesta_1,
+    Giguna_Breach__Fire_Room__West_10__ex__Grid_14_10_11__East_10_1,
     Giguna_Breach__Fire_Room__West_11__ex__Grid_14_10_11__East_11_1,
-    Giguna_Breach__Fire_Room__West_Plateau__ex__East_10_1,
+    Giguna_Breach__Fire_Room__West_Plateau__ex__West_10_1,
+    Giguna_Breach__Grid_14_10_11__East_10__ex__Fire_Room__West_10_1,
     Giguna_Breach__Grid_14_10_11__East_10__ex__High_Ledge_1,
     Giguna_Breach__Grid_14_10_11__East_11__ex__Fire_Room__West_11_1,
     Giguna_Breach__Grid_14_10_11__North__ex__Central__South_1,
@@ -6235,6 +6382,18 @@ pub enum ExitId {
     Glacier__Vertical_Room__Under_Switch__ex__Past_Gate_1,
     Glacier__Vertical_Room__West_8__ex__Peak__East_8_1,
     Glacier__Vertical_Room__West_9__ex__Ledge_Grab_Room__East_9_1,
+    Irikar__Hub__Bowl_Middle_Ledge__ex__Bowl_Top_Platform_1,
+    Irikar__Hub__Bowl_Middle_Platform_Center__ex__Bowl_Middle_Ledge_1,
+    Irikar__Hub__Bowl_Middle_Platform_West__ex__Bowl_Middle_Ledge_1,
+    Irikar__Hub__Bowl_Platform_3__ex__Bowl_Middle_Platform_Center_1,
+    Irikar__Hub__Bowl_Top_Platform__ex__West_Rim_1,
+    Irikar__Hub__East_Rim__ex__Sat_Tower_Roof_West_1,
+    Irikar__Hub__Sat_Tower_East_24__ex__Sight_Room__West_24_1,
+    Irikar__Hub__Sat_Tower_Floating_Platform__ex__Sat_Tower_Top_Ledge_1,
+    Irikar__Hub__Sat_Tower_Middle_Ledge__ex__Sat_Tower_Floating_Platform_1,
+    Irikar__Hub__Save_Point__ex__Bowl_Hole_1,
+    Irikar__Hub__West_Rim__ex__East_Rim_1,
+    Irikar__Sight_Room__West_24__ex__Hub__Sat_Tower_East_24_1,
     Menu__Upgrade_Menu__Combat__ex__Drone_1,
     Menu__Upgrade_Menu__Combat__ex__Infection_1,
     Menu__Upgrade_Menu__Combat__ex__Physiology_1,
@@ -6800,6 +6959,7 @@ impl fmt::Display for ExitId {
             ExitId::Giguna_Breach__Ascent__West_6__ex__Peak__East_6_1 => write!(f, "{}", "Giguna Breach > Ascent > West 6 ==> Peak > East 6 (1)"),
             ExitId::Giguna_Breach__Ascent__West_9__ex__Central__East_9_1 => write!(f, "{}", "Giguna Breach > Ascent > West 9 ==> Central > East 9 (1)"),
             ExitId::Giguna_Breach__Below_Chimney__Cubby_Entrance__ex__Cubby__Entrance_1 => write!(f, "{}", "Giguna Breach > Below Chimney > Cubby Entrance ==> Cubby > Entrance (1)"),
+            ExitId::Giguna_Breach__Below_Chimney__North__ex__Chimney__South_1 => write!(f, "{}", "Giguna Breach > Below Chimney > North ==> Chimney > South (1)"),
             ExitId::Giguna_Breach__Below_Chimney__Southwest__ex__SW_Save__North_1 => write!(f, "{}", "Giguna Breach > Below Chimney > Southwest ==> SW Save > North (1)"),
             ExitId::Giguna_Breach__Central__East_9__ex__Ascent__West_9_1 => write!(f, "{}", "Giguna Breach > Central > East 9 ==> Ascent > West 9 (1)"),
             ExitId::Giguna_Breach__Central__East_9__ex__East_Brick_1 => write!(f, "{}", "Giguna Breach > Central > East 9 ==> East Brick (1)"),
@@ -6817,13 +6977,14 @@ impl fmt::Display for ExitId {
             ExitId::Giguna_Breach__Chimney__East_9__ex__Central__West_9_1 => write!(f, "{}", "Giguna Breach > Chimney > East 9 ==> Central > West 9 (1)"),
             ExitId::Giguna_Breach__Chimney__South__ex__Below_Chimney__North_1 => write!(f, "{}", "Giguna Breach > Chimney > South ==> Below Chimney > North (1)"),
             ExitId::Giguna_Breach__Cubby__Entrance__ex__Below_Chimney__Cubby_Entrance_1 => write!(f, "{}", "Giguna Breach > Cubby > Entrance ==> Below Chimney > Cubby Entrance (1)"),
-            ExitId::Giguna_Breach__Fire_Room__East_10__ex__Grid_14_10_11__East_10_1 => write!(f, "{}", "Giguna Breach > Fire Room > East 10 ==> Grid 14,10-11 > East 10 (1)"),
             ExitId::Giguna_Breach__Fire_Room__East_11__ex__Slingshot__West_1 => write!(f, "{}", "Giguna Breach > Fire Room > East 11 ==> Slingshot > West (1)"),
             ExitId::Giguna_Breach__Fire_Room__First_Fire__ex__West_Plateau_1 => write!(f, "{}", "Giguna Breach > Fire Room > First Fire ==> West Plateau (1)"),
             ExitId::Giguna_Breach__Fire_Room__South__ex__Antechamber__North_1 => write!(f, "{}", "Giguna Breach > Fire Room > South ==> Antechamber > North (1)"),
             ExitId::Giguna_Breach__Fire_Room__South__ex__Cuesta_1 => write!(f, "{}", "Giguna Breach > Fire Room > South ==> Cuesta (1)"),
+            ExitId::Giguna_Breach__Fire_Room__West_10__ex__Grid_14_10_11__East_10_1 => write!(f, "{}", "Giguna Breach > Fire Room > West 10 ==> Grid 14,10-11 > East 10 (1)"),
             ExitId::Giguna_Breach__Fire_Room__West_11__ex__Grid_14_10_11__East_11_1 => write!(f, "{}", "Giguna Breach > Fire Room > West 11 ==> Grid 14,10-11 > East 11 (1)"),
-            ExitId::Giguna_Breach__Fire_Room__West_Plateau__ex__East_10_1 => write!(f, "{}", "Giguna Breach > Fire Room > West Plateau ==> East 10 (1)"),
+            ExitId::Giguna_Breach__Fire_Room__West_Plateau__ex__West_10_1 => write!(f, "{}", "Giguna Breach > Fire Room > West Plateau ==> West 10 (1)"),
+            ExitId::Giguna_Breach__Grid_14_10_11__East_10__ex__Fire_Room__West_10_1 => write!(f, "{}", "Giguna Breach > Grid 14,10-11 > East 10 ==> Fire Room > West 10 (1)"),
             ExitId::Giguna_Breach__Grid_14_10_11__East_10__ex__High_Ledge_1 => write!(f, "{}", "Giguna Breach > Grid 14,10-11 > East 10 ==> High Ledge (1)"),
             ExitId::Giguna_Breach__Grid_14_10_11__East_11__ex__Fire_Room__West_11_1 => write!(f, "{}", "Giguna Breach > Grid 14,10-11 > East 11 ==> Fire Room > West 11 (1)"),
             ExitId::Giguna_Breach__Grid_14_10_11__North__ex__Central__South_1 => write!(f, "{}", "Giguna Breach > Grid 14,10-11 > North ==> Central > South (1)"),
@@ -6925,6 +7086,18 @@ impl fmt::Display for ExitId {
             ExitId::Glacier__Vertical_Room__Under_Switch__ex__Past_Gate_1 => write!(f, "{}", "Glacier > Vertical Room > Under Switch ==> Past Gate (1)"),
             ExitId::Glacier__Vertical_Room__West_8__ex__Peak__East_8_1 => write!(f, "{}", "Glacier > Vertical Room > West 8 ==> Peak > East 8 (1)"),
             ExitId::Glacier__Vertical_Room__West_9__ex__Ledge_Grab_Room__East_9_1 => write!(f, "{}", "Glacier > Vertical Room > West 9 ==> Ledge Grab Room > East 9 (1)"),
+            ExitId::Irikar__Hub__Bowl_Middle_Ledge__ex__Bowl_Top_Platform_1 => write!(f, "{}", "Irikar > Hub > Bowl Middle Ledge ==> Bowl Top Platform (1)"),
+            ExitId::Irikar__Hub__Bowl_Middle_Platform_Center__ex__Bowl_Middle_Ledge_1 => write!(f, "{}", "Irikar > Hub > Bowl Middle Platform Center ==> Bowl Middle Ledge (1)"),
+            ExitId::Irikar__Hub__Bowl_Middle_Platform_West__ex__Bowl_Middle_Ledge_1 => write!(f, "{}", "Irikar > Hub > Bowl Middle Platform West ==> Bowl Middle Ledge (1)"),
+            ExitId::Irikar__Hub__Bowl_Platform_3__ex__Bowl_Middle_Platform_Center_1 => write!(f, "{}", "Irikar > Hub > Bowl Platform 3 ==> Bowl Middle Platform Center (1)"),
+            ExitId::Irikar__Hub__Bowl_Top_Platform__ex__West_Rim_1 => write!(f, "{}", "Irikar > Hub > Bowl Top Platform ==> West Rim (1)"),
+            ExitId::Irikar__Hub__East_Rim__ex__Sat_Tower_Roof_West_1 => write!(f, "{}", "Irikar > Hub > East Rim ==> Sat Tower Roof West (1)"),
+            ExitId::Irikar__Hub__Sat_Tower_East_24__ex__Sight_Room__West_24_1 => write!(f, "{}", "Irikar > Hub > Sat Tower East 24 ==> Sight Room > West 24 (1)"),
+            ExitId::Irikar__Hub__Sat_Tower_Floating_Platform__ex__Sat_Tower_Top_Ledge_1 => write!(f, "{}", "Irikar > Hub > Sat Tower Floating Platform ==> Sat Tower Top Ledge (1)"),
+            ExitId::Irikar__Hub__Sat_Tower_Middle_Ledge__ex__Sat_Tower_Floating_Platform_1 => write!(f, "{}", "Irikar > Hub > Sat Tower Middle Ledge ==> Sat Tower Floating Platform (1)"),
+            ExitId::Irikar__Hub__Save_Point__ex__Bowl_Hole_1 => write!(f, "{}", "Irikar > Hub > Save Point ==> Bowl Hole (1)"),
+            ExitId::Irikar__Hub__West_Rim__ex__East_Rim_1 => write!(f, "{}", "Irikar > Hub > West Rim ==> East Rim (1)"),
+            ExitId::Irikar__Sight_Room__West_24__ex__Hub__Sat_Tower_East_24_1 => write!(f, "{}", "Irikar > Sight Room > West 24 ==> Hub > Sat Tower East 24 (1)"),
             ExitId::Menu__Upgrade_Menu__Combat__ex__Drone_1 => write!(f, "{}", "Menu > Upgrade Menu > Combat ==> Drone (1)"),
             ExitId::Menu__Upgrade_Menu__Combat__ex__Infection_1 => write!(f, "{}", "Menu > Upgrade Menu > Combat ==> Infection (1)"),
             ExitId::Menu__Upgrade_Menu__Combat__ex__Physiology_1 => write!(f, "{}", "Menu > Upgrade Menu > Combat ==> Physiology (1)"),
@@ -7495,6 +7668,7 @@ impl std::str::FromStr for ExitId {
             "Giguna Breach > Ascent > West 6 ==> Peak > East 6 (1)" => Ok(ExitId::Giguna_Breach__Ascent__West_6__ex__Peak__East_6_1),
             "Giguna Breach > Ascent > West 9 ==> Central > East 9 (1)" => Ok(ExitId::Giguna_Breach__Ascent__West_9__ex__Central__East_9_1),
             "Giguna Breach > Below Chimney > Cubby Entrance ==> Cubby > Entrance (1)" => Ok(ExitId::Giguna_Breach__Below_Chimney__Cubby_Entrance__ex__Cubby__Entrance_1),
+            "Giguna Breach > Below Chimney > North ==> Chimney > South (1)" => Ok(ExitId::Giguna_Breach__Below_Chimney__North__ex__Chimney__South_1),
             "Giguna Breach > Below Chimney > Southwest ==> SW Save > North (1)" => Ok(ExitId::Giguna_Breach__Below_Chimney__Southwest__ex__SW_Save__North_1),
             "Giguna Breach > Central > East 9 ==> Ascent > West 9 (1)" => Ok(ExitId::Giguna_Breach__Central__East_9__ex__Ascent__West_9_1),
             "Giguna Breach > Central > East 9 ==> East Brick (1)" => Ok(ExitId::Giguna_Breach__Central__East_9__ex__East_Brick_1),
@@ -7512,13 +7686,14 @@ impl std::str::FromStr for ExitId {
             "Giguna Breach > Chimney > East 9 ==> Central > West 9 (1)" => Ok(ExitId::Giguna_Breach__Chimney__East_9__ex__Central__West_9_1),
             "Giguna Breach > Chimney > South ==> Below Chimney > North (1)" => Ok(ExitId::Giguna_Breach__Chimney__South__ex__Below_Chimney__North_1),
             "Giguna Breach > Cubby > Entrance ==> Below Chimney > Cubby Entrance (1)" => Ok(ExitId::Giguna_Breach__Cubby__Entrance__ex__Below_Chimney__Cubby_Entrance_1),
-            "Giguna Breach > Fire Room > East 10 ==> Grid 14,10-11 > East 10 (1)" => Ok(ExitId::Giguna_Breach__Fire_Room__East_10__ex__Grid_14_10_11__East_10_1),
             "Giguna Breach > Fire Room > East 11 ==> Slingshot > West (1)" => Ok(ExitId::Giguna_Breach__Fire_Room__East_11__ex__Slingshot__West_1),
             "Giguna Breach > Fire Room > First Fire ==> West Plateau (1)" => Ok(ExitId::Giguna_Breach__Fire_Room__First_Fire__ex__West_Plateau_1),
             "Giguna Breach > Fire Room > South ==> Antechamber > North (1)" => Ok(ExitId::Giguna_Breach__Fire_Room__South__ex__Antechamber__North_1),
             "Giguna Breach > Fire Room > South ==> Cuesta (1)" => Ok(ExitId::Giguna_Breach__Fire_Room__South__ex__Cuesta_1),
+            "Giguna Breach > Fire Room > West 10 ==> Grid 14,10-11 > East 10 (1)" => Ok(ExitId::Giguna_Breach__Fire_Room__West_10__ex__Grid_14_10_11__East_10_1),
             "Giguna Breach > Fire Room > West 11 ==> Grid 14,10-11 > East 11 (1)" => Ok(ExitId::Giguna_Breach__Fire_Room__West_11__ex__Grid_14_10_11__East_11_1),
-            "Giguna Breach > Fire Room > West Plateau ==> East 10 (1)" => Ok(ExitId::Giguna_Breach__Fire_Room__West_Plateau__ex__East_10_1),
+            "Giguna Breach > Fire Room > West Plateau ==> West 10 (1)" => Ok(ExitId::Giguna_Breach__Fire_Room__West_Plateau__ex__West_10_1),
+            "Giguna Breach > Grid 14,10-11 > East 10 ==> Fire Room > West 10 (1)" => Ok(ExitId::Giguna_Breach__Grid_14_10_11__East_10__ex__Fire_Room__West_10_1),
             "Giguna Breach > Grid 14,10-11 > East 10 ==> High Ledge (1)" => Ok(ExitId::Giguna_Breach__Grid_14_10_11__East_10__ex__High_Ledge_1),
             "Giguna Breach > Grid 14,10-11 > East 11 ==> Fire Room > West 11 (1)" => Ok(ExitId::Giguna_Breach__Grid_14_10_11__East_11__ex__Fire_Room__West_11_1),
             "Giguna Breach > Grid 14,10-11 > North ==> Central > South (1)" => Ok(ExitId::Giguna_Breach__Grid_14_10_11__North__ex__Central__South_1),
@@ -7620,6 +7795,18 @@ impl std::str::FromStr for ExitId {
             "Glacier > Vertical Room > Under Switch ==> Past Gate (1)" => Ok(ExitId::Glacier__Vertical_Room__Under_Switch__ex__Past_Gate_1),
             "Glacier > Vertical Room > West 8 ==> Peak > East 8 (1)" => Ok(ExitId::Glacier__Vertical_Room__West_8__ex__Peak__East_8_1),
             "Glacier > Vertical Room > West 9 ==> Ledge Grab Room > East 9 (1)" => Ok(ExitId::Glacier__Vertical_Room__West_9__ex__Ledge_Grab_Room__East_9_1),
+            "Irikar > Hub > Bowl Middle Ledge ==> Bowl Top Platform (1)" => Ok(ExitId::Irikar__Hub__Bowl_Middle_Ledge__ex__Bowl_Top_Platform_1),
+            "Irikar > Hub > Bowl Middle Platform Center ==> Bowl Middle Ledge (1)" => Ok(ExitId::Irikar__Hub__Bowl_Middle_Platform_Center__ex__Bowl_Middle_Ledge_1),
+            "Irikar > Hub > Bowl Middle Platform West ==> Bowl Middle Ledge (1)" => Ok(ExitId::Irikar__Hub__Bowl_Middle_Platform_West__ex__Bowl_Middle_Ledge_1),
+            "Irikar > Hub > Bowl Platform 3 ==> Bowl Middle Platform Center (1)" => Ok(ExitId::Irikar__Hub__Bowl_Platform_3__ex__Bowl_Middle_Platform_Center_1),
+            "Irikar > Hub > Bowl Top Platform ==> West Rim (1)" => Ok(ExitId::Irikar__Hub__Bowl_Top_Platform__ex__West_Rim_1),
+            "Irikar > Hub > East Rim ==> Sat Tower Roof West (1)" => Ok(ExitId::Irikar__Hub__East_Rim__ex__Sat_Tower_Roof_West_1),
+            "Irikar > Hub > Sat Tower East 24 ==> Sight Room > West 24 (1)" => Ok(ExitId::Irikar__Hub__Sat_Tower_East_24__ex__Sight_Room__West_24_1),
+            "Irikar > Hub > Sat Tower Floating Platform ==> Sat Tower Top Ledge (1)" => Ok(ExitId::Irikar__Hub__Sat_Tower_Floating_Platform__ex__Sat_Tower_Top_Ledge_1),
+            "Irikar > Hub > Sat Tower Middle Ledge ==> Sat Tower Floating Platform (1)" => Ok(ExitId::Irikar__Hub__Sat_Tower_Middle_Ledge__ex__Sat_Tower_Floating_Platform_1),
+            "Irikar > Hub > Save Point ==> Bowl Hole (1)" => Ok(ExitId::Irikar__Hub__Save_Point__ex__Bowl_Hole_1),
+            "Irikar > Hub > West Rim ==> East Rim (1)" => Ok(ExitId::Irikar__Hub__West_Rim__ex__East_Rim_1),
+            "Irikar > Sight Room > West 24 ==> Hub > Sat Tower East 24 (1)" => Ok(ExitId::Irikar__Sight_Room__West_24__ex__Hub__Sat_Tower_East_24_1),
             "Menu > Upgrade Menu > Combat ==> Drone (1)" => Ok(ExitId::Menu__Upgrade_Menu__Combat__ex__Drone_1),
             "Menu > Upgrade Menu > Combat ==> Infection (1)" => Ok(ExitId::Menu__Upgrade_Menu__Combat__ex__Infection_1),
             "Menu > Upgrade Menu > Combat ==> Physiology (1)" => Ok(ExitId::Menu__Upgrade_Menu__Combat__ex__Physiology_1),
@@ -7726,6 +7913,8 @@ pub enum ActionId {
     Glacier__Revival__Save_Point__Save,
     Global__Deploy_Drone,
     Global__Recall_Drone,
+    Irikar__Hub__Save_Point__Save,
+    Irikar__Sight_Room__Portal__Enter_Portal,
 }
 impl fmt::Display for ActionId {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
@@ -7996,6 +8185,12 @@ impl fmt::Display for ActionId {
             }
             ActionId::Global__Deploy_Drone => write!(f, "{}", "Deploy Drone"),
             ActionId::Global__Recall_Drone => write!(f, "{}", "Recall Drone"),
+            ActionId::Irikar__Hub__Save_Point__Save => {
+                write!(f, "{}", "Irikar > Hub > Save Point > Save")
+            }
+            ActionId::Irikar__Sight_Room__Portal__Enter_Portal => {
+                write!(f, "{}", "Irikar > Sight Room > Portal > Enter Portal")
+            }
         }
     }
 }
@@ -8221,6 +8416,10 @@ impl std::str::FromStr for ActionId {
             }
             "Deploy Drone" => Ok(ActionId::Global__Deploy_Drone),
             "Recall Drone" => Ok(ActionId::Global__Recall_Drone),
+            "Irikar > Hub > Save Point > Save" => Ok(ActionId::Irikar__Hub__Save_Point__Save),
+            "Irikar > Sight Room > Portal > Enter Portal" => {
+                Ok(ActionId::Irikar__Sight_Room__Portal__Enter_Portal)
+            }
             _ => Err(format!("Could not recognize as a ActionId: {}", s)),
         }
     }
@@ -8809,7 +9008,7 @@ pub fn get_area(spot: SpotId) -> AreaId {
         | SpotId::Giguna_Breach__Fire_Room__South
         | SpotId::Giguna_Breach__Fire_Room__East_11
         | SpotId::Giguna_Breach__Fire_Room__West_Plateau
-        | SpotId::Giguna_Breach__Fire_Room__East_10 => AreaId::Giguna_Breach__Fire_Room,
+        | SpotId::Giguna_Breach__Fire_Room__West_10 => AreaId::Giguna_Breach__Fire_Room,
         SpotId::Giguna_Breach__Slingshot__West
         | SpotId::Giguna_Breach__Slingshot__Column
         | SpotId::Giguna_Breach__Slingshot__Ravine => AreaId::Giguna_Breach__Slingshot,
@@ -9244,10 +9443,34 @@ pub fn get_area(spot: SpotId) -> AreaId {
         SpotId::Glacier__Apocalypse_Entry__West | SpotId::Glacier__Apocalypse_Entry__Terminal => {
             AreaId::Glacier__Apocalypse_Entry
         }
+        SpotId::Irikar_Breach__Save_Room__Save_Point => AreaId::Irikar_Breach__Save_Room,
         SpotId::Irikar__Hub__Northwest
         | SpotId::Irikar__Hub__North_Above_Portal
         | SpotId::Irikar__Hub__Northwest_Above_Bowl
-        | SpotId::Irikar__Hub__Northeast_Above_Bowl => AreaId::Irikar__Hub,
+        | SpotId::Irikar__Hub__Northeast_Above_Bowl
+        | SpotId::Irikar__Hub__West_Rim
+        | SpotId::Irikar__Hub__East_Rim
+        | SpotId::Irikar__Hub__Bowl_Top_Platform
+        | SpotId::Irikar__Hub__Bowl_Middle_Ledge
+        | SpotId::Irikar__Hub__Bowl_Middle_Platform_Center
+        | SpotId::Irikar__Hub__Bowl_Middle_Platform_West
+        | SpotId::Irikar__Hub__Bowl_Platform_3
+        | SpotId::Irikar__Hub__Save_Point
+        | SpotId::Irikar__Hub__Bowl_Hole
+        | SpotId::Irikar__Hub__Sat_Tower_Roof_West
+        | SpotId::Irikar__Hub__Sat_Tower_Roof_East
+        | SpotId::Irikar__Hub__Sat_Tower_Middle_Ledge
+        | SpotId::Irikar__Hub__Sat_Tower_Floating_Platform
+        | SpotId::Irikar__Hub__Sat_Tower_Top_Ledge
+        | SpotId::Irikar__Hub__Sat_Tower_Lower_Right_Ledge
+        | SpotId::Irikar__Hub__Sat_Tower_Lower_Left_Ledge
+        | SpotId::Irikar__Hub__Sat_Tower_Long_Ledge
+        | SpotId::Irikar__Hub__Sat_Tower_Bottom
+        | SpotId::Irikar__Hub__Sat_Tower_East_24 => AreaId::Irikar__Hub,
+        SpotId::Irikar__Sight_Room__West_24
+        | SpotId::Irikar__Sight_Room__Lower_Ledge
+        | SpotId::Irikar__Sight_Room__Portal
+        | SpotId::Irikar__Sight_Room__Item_Pedestal => AreaId::Irikar__Sight_Room,
         SpotId::Menu__Upgrade_Menu__Physiology
         | SpotId::Menu__Upgrade_Menu__Combat
         | SpotId::Menu__Upgrade_Menu__Infection
@@ -9617,7 +9840,7 @@ pub fn get_region(spot: SpotId) -> RegionId {
         | SpotId::Giguna_Breach__Fire_Room__South
         | SpotId::Giguna_Breach__Fire_Room__East_11
         | SpotId::Giguna_Breach__Fire_Room__West_Plateau
-        | SpotId::Giguna_Breach__Fire_Room__East_10 => RegionId::Giguna_Breach,
+        | SpotId::Giguna_Breach__Fire_Room__West_10 => RegionId::Giguna_Breach,
         SpotId::Giguna_Breach__Slingshot__West
         | SpotId::Giguna_Breach__Slingshot__Column
         | SpotId::Giguna_Breach__Slingshot__Ravine => RegionId::Giguna_Breach,
@@ -10050,10 +10273,34 @@ pub fn get_region(spot: SpotId) -> RegionId {
         SpotId::Glacier__Apocalypse_Entry__West | SpotId::Glacier__Apocalypse_Entry__Terminal => {
             RegionId::Glacier
         }
+        SpotId::Irikar_Breach__Save_Room__Save_Point => RegionId::Irikar_Breach,
         SpotId::Irikar__Hub__Northwest
         | SpotId::Irikar__Hub__North_Above_Portal
         | SpotId::Irikar__Hub__Northwest_Above_Bowl
-        | SpotId::Irikar__Hub__Northeast_Above_Bowl => RegionId::Irikar,
+        | SpotId::Irikar__Hub__Northeast_Above_Bowl
+        | SpotId::Irikar__Hub__West_Rim
+        | SpotId::Irikar__Hub__East_Rim
+        | SpotId::Irikar__Hub__Bowl_Top_Platform
+        | SpotId::Irikar__Hub__Bowl_Middle_Ledge
+        | SpotId::Irikar__Hub__Bowl_Middle_Platform_Center
+        | SpotId::Irikar__Hub__Bowl_Middle_Platform_West
+        | SpotId::Irikar__Hub__Bowl_Platform_3
+        | SpotId::Irikar__Hub__Save_Point
+        | SpotId::Irikar__Hub__Bowl_Hole
+        | SpotId::Irikar__Hub__Sat_Tower_Roof_West
+        | SpotId::Irikar__Hub__Sat_Tower_Roof_East
+        | SpotId::Irikar__Hub__Sat_Tower_Middle_Ledge
+        | SpotId::Irikar__Hub__Sat_Tower_Floating_Platform
+        | SpotId::Irikar__Hub__Sat_Tower_Top_Ledge
+        | SpotId::Irikar__Hub__Sat_Tower_Lower_Right_Ledge
+        | SpotId::Irikar__Hub__Sat_Tower_Lower_Left_Ledge
+        | SpotId::Irikar__Hub__Sat_Tower_Long_Ledge
+        | SpotId::Irikar__Hub__Sat_Tower_Bottom
+        | SpotId::Irikar__Hub__Sat_Tower_East_24 => RegionId::Irikar,
+        SpotId::Irikar__Sight_Room__West_24
+        | SpotId::Irikar__Sight_Room__Lower_Ledge
+        | SpotId::Irikar__Sight_Room__Portal
+        | SpotId::Irikar__Sight_Room__Item_Pedestal => RegionId::Irikar,
         SpotId::Menu__Upgrade_Menu__Physiology
         | SpotId::Menu__Upgrade_Menu__Combat
         | SpotId::Menu__Upgrade_Menu__Infection
@@ -10274,6 +10521,8 @@ impl world::Accessible for Location {
             LocationId::Glacier__Vertical_Room__Under_Switch__Switch => {
                 rules::access_boomerang3(&ctx)
             }
+            LocationId::Irikar__Hub__Sat_Tower_Top_Ledge__Tablet => true,
+            LocationId::Irikar__Sight_Room__Item_Pedestal__Urn => true,
             LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_1 => true,
             LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_2 => {
                 rules::access_melee_damage(&ctx)
@@ -10949,6 +11198,7 @@ impl world::Accessible for Exit {
             ExitId::Giguna_Breach__Ascent__West_6__ex__Peak__East_6_1 => true,
             ExitId::Giguna_Breach__Ascent__West_9__ex__Central__East_9_1 => true,
             ExitId::Giguna_Breach__Below_Chimney__Cubby_Entrance__ex__Cubby__Entrance_1 => true,
+            ExitId::Giguna_Breach__Below_Chimney__North__ex__Chimney__South_1 => true,
             ExitId::Giguna_Breach__Below_Chimney__Southwest__ex__SW_Save__North_1 => true,
             ExitId::Giguna_Breach__Central__East_9__ex__Ascent__West_9_1 => true,
             ExitId::Giguna_Breach__Central__East_9__ex__East_Brick_1 => rules::access_hook(&ctx),
@@ -10966,13 +11216,14 @@ impl world::Accessible for Exit {
             ExitId::Giguna_Breach__Chimney__East_9__ex__Central__West_9_1 => true,
             ExitId::Giguna_Breach__Chimney__South__ex__Below_Chimney__North_1 => true,
             ExitId::Giguna_Breach__Cubby__Entrance__ex__Below_Chimney__Cubby_Entrance_1 => true,
-            ExitId::Giguna_Breach__Fire_Room__East_10__ex__Grid_14_10_11__East_10_1 => true,
             ExitId::Giguna_Breach__Fire_Room__East_11__ex__Slingshot__West_1 => true,
             ExitId::Giguna_Breach__Fire_Room__First_Fire__ex__West_Plateau_1 => rules::access_hook(&ctx),
             ExitId::Giguna_Breach__Fire_Room__South__ex__Antechamber__North_1 => true,
             ExitId::Giguna_Breach__Fire_Room__South__ex__Cuesta_1 => rules::access_hook(&ctx),
+            ExitId::Giguna_Breach__Fire_Room__West_10__ex__Grid_14_10_11__East_10_1 => true,
             ExitId::Giguna_Breach__Fire_Room__West_11__ex__Grid_14_10_11__East_11_1 => true,
-            ExitId::Giguna_Breach__Fire_Room__West_Plateau__ex__East_10_1 => rules::access_hook(&ctx),
+            ExitId::Giguna_Breach__Fire_Room__West_Plateau__ex__West_10_1 => rules::access_hook(&ctx),
+            ExitId::Giguna_Breach__Grid_14_10_11__East_10__ex__Fire_Room__West_10_1 => true,
             ExitId::Giguna_Breach__Grid_14_10_11__East_10__ex__High_Ledge_1 => rules::access_hook(&ctx),
             ExitId::Giguna_Breach__Grid_14_10_11__East_11__ex__Fire_Room__West_11_1 => true,
             ExitId::Giguna_Breach__Grid_14_10_11__North__ex__Central__South_1 => true,
@@ -11074,6 +11325,18 @@ impl world::Accessible for Exit {
             ExitId::Glacier__Vertical_Room__Under_Switch__ex__Past_Gate_1 => rules::access_switch_36_11(&ctx),
             ExitId::Glacier__Vertical_Room__West_8__ex__Peak__East_8_1 => true,
             ExitId::Glacier__Vertical_Room__West_9__ex__Ledge_Grab_Room__East_9_1 => true,
+            ExitId::Irikar__Hub__Bowl_Middle_Ledge__ex__Bowl_Top_Platform_1 => rules::access_hook(&ctx),
+            ExitId::Irikar__Hub__Bowl_Middle_Platform_Center__ex__Bowl_Middle_Ledge_1 => rules::access_hook(&ctx),
+            ExitId::Irikar__Hub__Bowl_Middle_Platform_West__ex__Bowl_Middle_Ledge_1 => rules::access_hook(&ctx),
+            ExitId::Irikar__Hub__Bowl_Platform_3__ex__Bowl_Middle_Platform_Center_1 => rules::access_hook(&ctx),
+            ExitId::Irikar__Hub__Bowl_Top_Platform__ex__West_Rim_1 => rules::access_hook(&ctx),
+            ExitId::Irikar__Hub__East_Rim__ex__Sat_Tower_Roof_West_1 => rules::access_hover(&ctx),
+            ExitId::Irikar__Hub__Sat_Tower_East_24__ex__Sight_Room__West_24_1 => true,
+            ExitId::Irikar__Hub__Sat_Tower_Floating_Platform__ex__Sat_Tower_Top_Ledge_1 => rules::access_hook(&ctx),
+            ExitId::Irikar__Hub__Sat_Tower_Middle_Ledge__ex__Sat_Tower_Floating_Platform_1 => rules::access_hook(&ctx),
+            ExitId::Irikar__Hub__Save_Point__ex__Bowl_Hole_1 => rules::access_hook(&ctx),
+            ExitId::Irikar__Hub__West_Rim__ex__East_Rim_1 => rules::access_hover(&ctx),
+            ExitId::Irikar__Sight_Room__West_24__ex__Hub__Sat_Tower_East_24_1 => true,
             ExitId::Menu__Upgrade_Menu__Combat__ex__Drone_1 => rules::access_remote_drone(&ctx),
             ExitId::Menu__Upgrade_Menu__Combat__ex__Infection_1 => rules::access_infect(&ctx),
             ExitId::Menu__Upgrade_Menu__Combat__ex__Physiology_1 => true,
@@ -11282,6 +11545,7 @@ impl world::Exit for Exit {
             ExitId::Giguna_Breach__Ascent__West_6__ex__Peak__East_6_1 => true,
             ExitId::Giguna_Breach__Ascent__West_9__ex__Central__East_9_1 => true,
             ExitId::Giguna_Breach__Below_Chimney__Cubby_Entrance__ex__Cubby__Entrance_1 => true,
+            ExitId::Giguna_Breach__Below_Chimney__North__ex__Chimney__South_1 => true,
             ExitId::Giguna_Breach__Below_Chimney__Southwest__ex__SW_Save__North_1 => true,
             ExitId::Giguna_Breach__Central__East_9__ex__Ascent__West_9_1 => true,
             ExitId::Giguna_Breach__Central__South__ex__Grid_14_10_11__North_1 => true,
@@ -11293,10 +11557,11 @@ impl world::Exit for Exit {
             ExitId::Giguna_Breach__Chimney__East_9__ex__Central__West_9_1 => true,
             ExitId::Giguna_Breach__Chimney__South__ex__Below_Chimney__North_1 => true,
             ExitId::Giguna_Breach__Cubby__Entrance__ex__Below_Chimney__Cubby_Entrance_1 => true,
-            ExitId::Giguna_Breach__Fire_Room__East_10__ex__Grid_14_10_11__East_10_1 => true,
             ExitId::Giguna_Breach__Fire_Room__East_11__ex__Slingshot__West_1 => true,
             ExitId::Giguna_Breach__Fire_Room__South__ex__Antechamber__North_1 => true,
+            ExitId::Giguna_Breach__Fire_Room__West_10__ex__Grid_14_10_11__East_10_1 => true,
             ExitId::Giguna_Breach__Fire_Room__West_11__ex__Grid_14_10_11__East_11_1 => true,
+            ExitId::Giguna_Breach__Grid_14_10_11__East_10__ex__Fire_Room__West_10_1 => true,
             ExitId::Giguna_Breach__Grid_14_10_11__East_11__ex__Fire_Room__West_11_1 => true,
             ExitId::Giguna_Breach__Grid_14_10_11__North__ex__Central__South_1 => true,
             ExitId::Giguna_Breach__Grid_14_10_11__South__ex__Robopede__North_1 => true,
@@ -11351,6 +11616,8 @@ impl world::Exit for Exit {
             ExitId::Glacier__Vertical_Room__Past_Gate__ex__Ledge_Grab_Room__East_11_1 => true,
             ExitId::Glacier__Vertical_Room__West_8__ex__Peak__East_8_1 => true,
             ExitId::Glacier__Vertical_Room__West_9__ex__Ledge_Grab_Room__East_9_1 => true,
+            ExitId::Irikar__Hub__Sat_Tower_East_24__ex__Sight_Room__West_24_1 => true,
+            ExitId::Irikar__Sight_Room__West_24__ex__Hub__Sat_Tower_East_24_1 => true,
             ExitId::Menu__Upgrade_Menu__Combat__ex__Physiology_1 => true,
             ExitId::Menu__Upgrade_Menu__Drone__ex__Combat_1 => true,
             ExitId::Menu__Upgrade_Menu__Drone__ex__Physiology_1 => true,
@@ -11565,6 +11832,10 @@ impl world::Accessible for Action {
                 ActionId::Global__Recall_Drone => {
                     rules::access_not_within_menu_and_not_breach_and_can_recall(&ctx)
                 }
+                ActionId::Irikar__Hub__Save_Point__Save => true,
+                ActionId::Irikar__Sight_Room__Portal__Enter_Portal => {
+                    rules::access_mode__drone_and_breach_sight(&ctx)
+                }
             }
     }
     fn time(&self) -> u32 {
@@ -11653,9 +11924,7 @@ impl world::Action for Action {
                 rules::action_ebih__vertical_interchange__west_13__open_door__do(ctx)
             }
             ActionId::Giguna_Breach__Peak__Save_Point__Save => rules::action_save(ctx),
-            ActionId::Giguna_Breach__Peak__Portal__Portal => {
-                rules::action_portal__giguna__ruins_top__save_point(ctx)
-            }
+            ActionId::Giguna_Breach__Peak__Portal__Portal => rules::action_portal__flipside(ctx),
             ActionId::Giguna_Breach__SW_Save__West_11__Open_Door => {
                 rules::action_giguna_breach__sw_save__west_11__open_door__do(ctx)
             }
@@ -11724,7 +11993,7 @@ impl world::Action for Action {
                 rules::action_giguna__ruins_west__lower_ledge__destroy_kishib__do(ctx)
             }
             ActionId::Giguna__Ruins_Top__Portal__Enter_Portal => {
-                rules::action_portal__giguna_breach__peak__save_point(ctx)
+                rules::action_portal__flipside(ctx)
             }
             ActionId::Giguna__Ruins_Top__Save_Point__Save => rules::action_save(ctx),
             ActionId::Giguna__Ruins_Top__Switch__Open_Doors => {
@@ -11776,6 +12045,10 @@ impl world::Action for Action {
                 rules::action_giguna__gateway__flask_ledge__open_door__do(ctx)
             }
             ActionId::Glacier__Revival__Save_Point__Save => rules::action_save(ctx),
+            ActionId::Irikar__Hub__Save_Point__Save => rules::action_save(ctx),
+            ActionId::Irikar__Sight_Room__Portal__Enter_Portal => {
+                rules::action_portal__flipside(ctx)
+            }
         };
         let dest = self.dest(ctx);
         if dest != SpotId::None {
@@ -11825,7 +12098,7 @@ impl world::Action for Action {
             ActionId::Ebih__Drone_Room__Moving_Platform__Throw_Drone => {
                 SpotId::Ebih__Drone_Room__East_4
             }
-            ActionId::Giguna_Breach__Peak__Portal__Portal => SpotId::Giguna__Ruins_Top__Save_Point,
+            ActionId::Giguna_Breach__Peak__Portal__Portal => data::flipside(ctx.position()),
             ActionId::Giguna__Giguna_Northeast__Save_Point__Save_Recall => ctx.indra(),
             ActionId::Giguna__Giguna_Northeast__Gate_Left__Throw_Drone => {
                 SpotId::Giguna__Giguna_Northeast__Gate_Vent
@@ -11839,9 +12112,7 @@ impl world::Action for Action {
             ActionId::Giguna__Giguna_Base__Stone_Knob__Throw_Drone => {
                 SpotId::Giguna__Giguna_Base__Upper_Cliff
             }
-            ActionId::Giguna__Ruins_Top__Portal__Enter_Portal => {
-                SpotId::Giguna_Breach__Peak__Save_Point
-            }
+            ActionId::Giguna__Ruins_Top__Portal__Enter_Portal => data::flipside(ctx.position()),
             ActionId::Giguna__Ruins_Top__Turret_Balcony_West__Throw_Drone_onto_Tower => {
                 SpotId::Giguna__Ruins_West__Rooftop_East_Edge
             }
@@ -11851,6 +12122,7 @@ impl world::Action for Action {
             ActionId::Giguna__Clouds__Platform_Start__Hack_Deploy_Ride_to_Portal => {
                 SpotId::Giguna__Clouds__Platform_Stop
             }
+            ActionId::Irikar__Sight_Room__Portal__Enter_Portal => data::flipside(ctx.position()),
             _ => SpotId::None,
         }
     }
@@ -11968,7 +12240,7 @@ pub struct World {
     exits: EnumMap<ExitId, Exit>,
     actions: EnumMap<ActionId, Action>,
     warps: EnumMap<WarpId, Warp>,
-    raw_spots: [SpotId; 796],
+    raw_spots: [SpotId; 820],
     // Index ranges for slices into the above arrays
     spots: EnumMap<SpotId, Spot>,
     global_actions: Range<usize>,
@@ -11982,7 +12254,7 @@ impl world::World for World {
     type Exit = Exit;
     type Action = Action;
     type Warp = Warp;
-    const NUM_LOCATIONS: u32 = 150;
+    const NUM_LOCATIONS: u32 = 152;
 
     fn get_location(&self, id: LocationId) -> &Location {
         &self.locations[id]
@@ -12317,6 +12589,10 @@ impl world::World for World {
                 LocationId::Glacier__Ledge_Grab_Room__Pedestal__Item,
             ],
             Item::Escape => vec![LocationId::Glacier__Apocalypse_Entry__Terminal__Escape],
+            Item::Commemorative_Speech => {
+                vec![LocationId::Irikar__Hub__Sat_Tower_Top_Ledge__Tablet]
+            }
+            Item::Breach_Sight => vec![LocationId::Irikar__Sight_Room__Item_Pedestal__Urn],
             Item::Health_Upgrade => vec![
                 LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_1,
                 LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_2,
@@ -12654,6 +12930,12 @@ impl world::World for World {
             LocationId::Glacier__Apocalypse_Entry__Terminal__Escape => {
                 SpotId::Glacier__Apocalypse_Entry__Terminal
             }
+            LocationId::Irikar__Hub__Sat_Tower_Top_Ledge__Tablet => {
+                SpotId::Irikar__Hub__Sat_Tower_Top_Ledge
+            }
+            LocationId::Irikar__Sight_Room__Item_Pedestal__Urn => {
+                SpotId::Irikar__Sight_Room__Item_Pedestal
+            }
             LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_1
             | LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_2
             | LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_3
@@ -12868,6 +13150,10 @@ impl world::World for World {
                 SpotId::Giguna__Gateway__Flask_Ledge
             }
             ActionId::Glacier__Revival__Save_Point__Save => SpotId::Glacier__Revival__Save_Point,
+            ActionId::Irikar__Hub__Save_Point__Save => SpotId::Irikar__Hub__Save_Point,
+            ActionId::Irikar__Sight_Room__Portal__Enter_Portal => {
+                SpotId::Irikar__Sight_Room__Portal
+            }
             _ => SpotId::None,
         }
     }
@@ -13071,6 +13357,7 @@ impl world::World for World {
             ExitId::Giguna_Breach__Chimney__East_9__ex__Central__West_9_1 => SpotId::Giguna_Breach__Chimney__East_9,
             ExitId::Giguna_Breach__Chimney__South__ex__Below_Chimney__North_1 => SpotId::Giguna_Breach__Chimney__South,
             ExitId::Giguna_Breach__Chimney__East_8__ex__Central__West_8_1 => SpotId::Giguna_Breach__Chimney__East_8,
+            ExitId::Giguna_Breach__Below_Chimney__North__ex__Chimney__South_1 => SpotId::Giguna_Breach__Below_Chimney__North,
             ExitId::Giguna_Breach__Below_Chimney__Cubby_Entrance__ex__Cubby__Entrance_1 => SpotId::Giguna_Breach__Below_Chimney__Cubby_Entrance,
             ExitId::Giguna_Breach__Below_Chimney__Southwest__ex__SW_Save__North_1 => SpotId::Giguna_Breach__Below_Chimney__Southwest,
             ExitId::Giguna_Breach__Cubby__Entrance__ex__Below_Chimney__Cubby_Entrance_1 => SpotId::Giguna_Breach__Cubby__Entrance,
@@ -13084,14 +13371,14 @@ impl world::World for World {
             ExitId::Giguna_Breach__Robopede__North__ex__Grid_14_10_11__South_1 => SpotId::Giguna_Breach__Robopede__North,
             ExitId::Giguna_Breach__Grid_14_10_11__South__ex__Robopede__North_1 => SpotId::Giguna_Breach__Grid_14_10_11__South,
             ExitId::Giguna_Breach__Grid_14_10_11__East_11__ex__Fire_Room__West_11_1 => SpotId::Giguna_Breach__Grid_14_10_11__East_11,
-            ExitId::Giguna_Breach__Grid_14_10_11__East_10__ex__High_Ledge_1 => SpotId::Giguna_Breach__Grid_14_10_11__East_10,
+            ExitId::Giguna_Breach__Grid_14_10_11__East_10__ex__High_Ledge_1 | ExitId:: Giguna_Breach__Grid_14_10_11__East_10__ex__Fire_Room__West_10_1 => SpotId::Giguna_Breach__Grid_14_10_11__East_10,
             ExitId::Giguna_Breach__Grid_14_10_11__North__ex__Central__South_1 => SpotId::Giguna_Breach__Grid_14_10_11__North,
             ExitId::Giguna_Breach__Fire_Room__West_11__ex__Grid_14_10_11__East_11_1 => SpotId::Giguna_Breach__Fire_Room__West_11,
             ExitId::Giguna_Breach__Fire_Room__First_Fire__ex__West_Plateau_1 => SpotId::Giguna_Breach__Fire_Room__First_Fire,
             ExitId::Giguna_Breach__Fire_Room__South__ex__Cuesta_1 | ExitId:: Giguna_Breach__Fire_Room__South__ex__Antechamber__North_1 => SpotId::Giguna_Breach__Fire_Room__South,
             ExitId::Giguna_Breach__Fire_Room__East_11__ex__Slingshot__West_1 => SpotId::Giguna_Breach__Fire_Room__East_11,
-            ExitId::Giguna_Breach__Fire_Room__West_Plateau__ex__East_10_1 => SpotId::Giguna_Breach__Fire_Room__West_Plateau,
-            ExitId::Giguna_Breach__Fire_Room__East_10__ex__Grid_14_10_11__East_10_1 => SpotId::Giguna_Breach__Fire_Room__East_10,
+            ExitId::Giguna_Breach__Fire_Room__West_Plateau__ex__West_10_1 => SpotId::Giguna_Breach__Fire_Room__West_Plateau,
+            ExitId::Giguna_Breach__Fire_Room__West_10__ex__Grid_14_10_11__East_10_1 => SpotId::Giguna_Breach__Fire_Room__West_10,
             ExitId::Giguna_Breach__Slingshot__West__ex__Fire_Room__East_11_1 => SpotId::Giguna_Breach__Slingshot__West,
             ExitId::Giguna_Breach__Slingshot__Ravine__ex__Column_1 => SpotId::Giguna_Breach__Slingshot__Ravine,
             ExitId::Giguna_Breach__Antechamber__North__ex__Fire_Room__South_1 => SpotId::Giguna_Breach__Antechamber__North,
@@ -13366,6 +13653,18 @@ impl world::World for World {
             ExitId::Glacier__Lake_Main_Entrance__Lower_Platform__ex__Ledge_1 => SpotId::Glacier__Lake_Main_Entrance__Lower_Platform,
             ExitId::Glacier__Lake_Main_Entrance__Lake_Access__ex__Amagi__Main_Area__East_15_1 => SpotId::Glacier__Lake_Main_Entrance__Lake_Access,
             ExitId::Glacier__Apocalypse_Entry__West__ex__Grid_43_10_11__East_1 => SpotId::Glacier__Apocalypse_Entry__West,
+            ExitId::Irikar__Hub__West_Rim__ex__East_Rim_1 => SpotId::Irikar__Hub__West_Rim,
+            ExitId::Irikar__Hub__East_Rim__ex__Sat_Tower_Roof_West_1 => SpotId::Irikar__Hub__East_Rim,
+            ExitId::Irikar__Hub__Bowl_Top_Platform__ex__West_Rim_1 => SpotId::Irikar__Hub__Bowl_Top_Platform,
+            ExitId::Irikar__Hub__Bowl_Middle_Ledge__ex__Bowl_Top_Platform_1 => SpotId::Irikar__Hub__Bowl_Middle_Ledge,
+            ExitId::Irikar__Hub__Bowl_Middle_Platform_Center__ex__Bowl_Middle_Ledge_1 => SpotId::Irikar__Hub__Bowl_Middle_Platform_Center,
+            ExitId::Irikar__Hub__Bowl_Middle_Platform_West__ex__Bowl_Middle_Ledge_1 => SpotId::Irikar__Hub__Bowl_Middle_Platform_West,
+            ExitId::Irikar__Hub__Bowl_Platform_3__ex__Bowl_Middle_Platform_Center_1 => SpotId::Irikar__Hub__Bowl_Platform_3,
+            ExitId::Irikar__Hub__Save_Point__ex__Bowl_Hole_1 => SpotId::Irikar__Hub__Save_Point,
+            ExitId::Irikar__Hub__Sat_Tower_Middle_Ledge__ex__Sat_Tower_Floating_Platform_1 => SpotId::Irikar__Hub__Sat_Tower_Middle_Ledge,
+            ExitId::Irikar__Hub__Sat_Tower_Floating_Platform__ex__Sat_Tower_Top_Ledge_1 => SpotId::Irikar__Hub__Sat_Tower_Floating_Platform,
+            ExitId::Irikar__Hub__Sat_Tower_East_24__ex__Sight_Room__West_24_1 => SpotId::Irikar__Hub__Sat_Tower_East_24,
+            ExitId::Irikar__Sight_Room__West_24__ex__Hub__Sat_Tower_East_24_1 => SpotId::Irikar__Sight_Room__West_24,
             ExitId::Menu__Upgrade_Menu__Physiology__ex__Combat_1 | ExitId:: Menu__Upgrade_Menu__Physiology__ex__Infection_1 | ExitId:: Menu__Upgrade_Menu__Physiology__ex__Drone_1 => SpotId::Menu__Upgrade_Menu__Physiology,
             ExitId::Menu__Upgrade_Menu__Combat__ex__Physiology_1 | ExitId:: Menu__Upgrade_Menu__Combat__ex__Infection_1 | ExitId:: Menu__Upgrade_Menu__Combat__ex__Drone_1 => SpotId::Menu__Upgrade_Menu__Combat,
             ExitId::Menu__Upgrade_Menu__Infection__ex__Physiology_1 | ExitId:: Menu__Upgrade_Menu__Infection__ex__Combat_1 | ExitId:: Menu__Upgrade_Menu__Infection__ex__Drone_1 => SpotId::Menu__Upgrade_Menu__Infection,
@@ -13414,11 +13713,17 @@ impl world::World for World {
                 if !ctx.has(Item::Boomerang) {
                     vec.push((Item::Boomerang, 1));
                 }
+                if !ctx.has(Item::Breach_Sight) {
+                    vec.push((Item::Breach_Sight, 1));
+                }
                 if !ctx.has(Item::Bronze_Axe) {
                     vec.push((Item::Bronze_Axe, 1));
                 }
                 if !ctx.has(Item::Building_of_the_School) {
                     vec.push((Item::Building_of_the_School, 1));
+                }
+                if !ctx.has(Item::Commemorative_Speech) {
+                    vec.push((Item::Commemorative_Speech, 1));
                 }
                 if !ctx.has(Item::Companies_Layoff) {
                     vec.push((Item::Companies_Layoff, 1));
@@ -13488,8 +13793,10 @@ impl world::World for World {
             Objective::Progress => vec![
                 (Item::Amashilama, 1),
                 (Item::Boomerang, 1),
+                (Item::Breach_Sight, 1),
                 (Item::Bronze_Axe, 1),
                 (Item::Building_of_the_School, 1),
+                (Item::Commemorative_Speech, 1),
                 (Item::Companies_Layoff, 1),
                 (Item::Dear_Ernest, 1),
                 (Item::Flask, 11),
@@ -13839,6 +14146,7 @@ impl world::World for World {
             | SpotId::Giguna_Breach__Ascent__West_6
             | SpotId::Giguna_Breach__Ascent__West_9
             | SpotId::Giguna_Breach__Below_Chimney__Cubby_Entrance
+            | SpotId::Giguna_Breach__Below_Chimney__North
             | SpotId::Giguna_Breach__Below_Chimney__Southwest
             | SpotId::Giguna_Breach__Central__East_9
             | SpotId::Giguna_Breach__Central__South
@@ -13851,10 +14159,11 @@ impl world::World for World {
             | SpotId::Giguna_Breach__Chimney__South
             | SpotId::Giguna_Breach__Cubby__Entrance
             | SpotId::Giguna_Breach__Cubby__Rocks
-            | SpotId::Giguna_Breach__Fire_Room__East_10
             | SpotId::Giguna_Breach__Fire_Room__East_11
             | SpotId::Giguna_Breach__Fire_Room__South
+            | SpotId::Giguna_Breach__Fire_Room__West_10
             | SpotId::Giguna_Breach__Fire_Room__West_11
+            | SpotId::Giguna_Breach__Grid_14_10_11__East_10
             | SpotId::Giguna_Breach__Grid_14_10_11__East_11
             | SpotId::Giguna_Breach__Grid_14_10_11__North
             | SpotId::Giguna_Breach__Grid_14_10_11__South
@@ -13925,6 +14234,12 @@ impl world::World for World {
             | SpotId::Glacier__Vertical_Room__Under_Switch
             | SpotId::Glacier__Vertical_Room__West_8
             | SpotId::Glacier__Vertical_Room__West_9
+            | SpotId::Irikar__Hub__Sat_Tower_East_24
+            | SpotId::Irikar__Hub__Sat_Tower_Top_Ledge
+            | SpotId::Irikar__Hub__Save_Point
+            | SpotId::Irikar__Sight_Room__Item_Pedestal
+            | SpotId::Irikar__Sight_Room__Portal
+            | SpotId::Irikar__Sight_Room__West_24
             | SpotId::Menu__Upgrade_Menu__Combat
             | SpotId::Menu__Upgrade_Menu__Drone
             | SpotId::Menu__Upgrade_Menu__Infection
@@ -14624,10 +14939,10 @@ impl World {
                 SpotId::Giguna_Breach__Cubby__Entrance,
                 SpotId::Giguna_Breach__Cubby__Rocks,
                 SpotId::Giguna_Breach__Fire_Room__Cuesta,
-                SpotId::Giguna_Breach__Fire_Room__East_10,
                 SpotId::Giguna_Breach__Fire_Room__East_11,
                 SpotId::Giguna_Breach__Fire_Room__First_Fire,
                 SpotId::Giguna_Breach__Fire_Room__South,
+                SpotId::Giguna_Breach__Fire_Room__West_10,
                 SpotId::Giguna_Breach__Fire_Room__West_11,
                 SpotId::Giguna_Breach__Fire_Room__West_Plateau,
                 SpotId::Giguna_Breach__Grid_14_10_11__East_10,
@@ -14753,10 +15068,34 @@ impl World {
                 SpotId::Glacier__Vertical_Room__Under_Switch,
                 SpotId::Glacier__Vertical_Room__West_8,
                 SpotId::Glacier__Vertical_Room__West_9,
+                SpotId::Irikar__Hub__Bowl_Hole,
+                SpotId::Irikar__Hub__Bowl_Middle_Ledge,
+                SpotId::Irikar__Hub__Bowl_Middle_Platform_Center,
+                SpotId::Irikar__Hub__Bowl_Middle_Platform_West,
+                SpotId::Irikar__Hub__Bowl_Platform_3,
+                SpotId::Irikar__Hub__Bowl_Top_Platform,
+                SpotId::Irikar__Hub__East_Rim,
                 SpotId::Irikar__Hub__North_Above_Portal,
                 SpotId::Irikar__Hub__Northeast_Above_Bowl,
                 SpotId::Irikar__Hub__Northwest,
                 SpotId::Irikar__Hub__Northwest_Above_Bowl,
+                SpotId::Irikar__Hub__Sat_Tower_Bottom,
+                SpotId::Irikar__Hub__Sat_Tower_East_24,
+                SpotId::Irikar__Hub__Sat_Tower_Floating_Platform,
+                SpotId::Irikar__Hub__Sat_Tower_Long_Ledge,
+                SpotId::Irikar__Hub__Sat_Tower_Lower_Left_Ledge,
+                SpotId::Irikar__Hub__Sat_Tower_Lower_Right_Ledge,
+                SpotId::Irikar__Hub__Sat_Tower_Middle_Ledge,
+                SpotId::Irikar__Hub__Sat_Tower_Roof_East,
+                SpotId::Irikar__Hub__Sat_Tower_Roof_West,
+                SpotId::Irikar__Hub__Sat_Tower_Top_Ledge,
+                SpotId::Irikar__Hub__Save_Point,
+                SpotId::Irikar__Hub__West_Rim,
+                SpotId::Irikar__Sight_Room__Item_Pedestal,
+                SpotId::Irikar__Sight_Room__Lower_Ledge,
+                SpotId::Irikar__Sight_Room__Portal,
+                SpotId::Irikar__Sight_Room__West_24,
+                SpotId::Irikar_Breach__Save_Room__Save_Point,
                 SpotId::Menu__Upgrade_Menu__Combat,
                 SpotId::Menu__Upgrade_Menu__Drone,
                 SpotId::Menu__Upgrade_Menu__Infection,
@@ -14781,6 +15120,7 @@ impl World {
                     | Item::Bronze_Axe
                     | Item::Building_of_the_School
                     | Item::Carnelian_Ring
+                    | Item::Commemorative_Speech
                     | Item::Companies_Layoff
                     | Item::Compass
                     | Item::Dangerous_Ideas
@@ -15741,6 +16081,22 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
             item: Item::Escape,
             price: Currency::Free,
             time: 1000,
+            exit_id: None,
+        },
+        LocationId::Irikar__Hub__Sat_Tower_Top_Ledge__Tablet => Location {
+            id: LocationId::Irikar__Hub__Sat_Tower_Top_Ledge__Tablet,
+            canonical: CanonId::None,
+            item: Item::Commemorative_Speech,
+            price: Currency::Free,
+            time: 0,
+            exit_id: None,
+        },
+        LocationId::Irikar__Sight_Room__Item_Pedestal__Urn => Location {
+            id: LocationId::Irikar__Sight_Room__Item_Pedestal__Urn,
+            canonical: CanonId::None,
+            item: Item::Breach_Sight,
+            price: Currency::Free,
+            time: 5500,
             exit_id: None,
         },
         LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_1 => Location {
@@ -17869,6 +18225,13 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
             price: Currency::Free,
             loc_id: None,
         },
+        ExitId::Giguna_Breach__Below_Chimney__North__ex__Chimney__South_1 => Exit {
+            id: ExitId::Giguna_Breach__Below_Chimney__North__ex__Chimney__South_1,
+            time: 1600,
+            dest: SpotId::Giguna_Breach__Chimney__South,
+            price: Currency::Free,
+            loc_id: None,
+        },
         ExitId::Giguna_Breach__Below_Chimney__Cubby_Entrance__ex__Cubby__Entrance_1 => Exit {
             id: ExitId::Giguna_Breach__Below_Chimney__Cubby_Entrance__ex__Cubby__Entrance_1,
             time: 1600,
@@ -17974,6 +18337,13 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
             price: Currency::Free,
             loc_id: None,
         },
+        ExitId::Giguna_Breach__Grid_14_10_11__East_10__ex__Fire_Room__West_10_1 => Exit {
+            id: ExitId::Giguna_Breach__Grid_14_10_11__East_10__ex__Fire_Room__West_10_1,
+            time: 1600,
+            dest: SpotId::Giguna_Breach__Fire_Room__West_10,
+            price: Currency::Free,
+            loc_id: None,
+        },
         ExitId::Giguna_Breach__Grid_14_10_11__North__ex__Central__South_1 => Exit {
             id: ExitId::Giguna_Breach__Grid_14_10_11__North__ex__Central__South_1,
             time: 1600,
@@ -18016,15 +18386,15 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
             price: Currency::Free,
             loc_id: None,
         },
-        ExitId::Giguna_Breach__Fire_Room__West_Plateau__ex__East_10_1 => Exit {
-            id: ExitId::Giguna_Breach__Fire_Room__West_Plateau__ex__East_10_1,
+        ExitId::Giguna_Breach__Fire_Room__West_Plateau__ex__West_10_1 => Exit {
+            id: ExitId::Giguna_Breach__Fire_Room__West_Plateau__ex__West_10_1,
             time: 700,
-            dest: SpotId::Giguna_Breach__Fire_Room__East_10,
+            dest: SpotId::Giguna_Breach__Fire_Room__West_10,
             price: Currency::Free,
             loc_id: None,
         },
-        ExitId::Giguna_Breach__Fire_Room__East_10__ex__Grid_14_10_11__East_10_1 => Exit {
-            id: ExitId::Giguna_Breach__Fire_Room__East_10__ex__Grid_14_10_11__East_10_1,
+        ExitId::Giguna_Breach__Fire_Room__West_10__ex__Grid_14_10_11__East_10_1 => Exit {
+            id: ExitId::Giguna_Breach__Fire_Room__West_10__ex__Grid_14_10_11__East_10_1,
             time: 1600,
             dest: SpotId::Giguna_Breach__Grid_14_10_11__East_10,
             price: Currency::Free,
@@ -20746,6 +21116,90 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
             price: Currency::Free,
             loc_id: None,
         },
+        ExitId::Irikar__Hub__West_Rim__ex__East_Rim_1 => Exit {
+            id: ExitId::Irikar__Hub__West_Rim__ex__East_Rim_1,
+            time: 2105,
+            dest: SpotId::Irikar__Hub__East_Rim,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Irikar__Hub__East_Rim__ex__Sat_Tower_Roof_West_1 => Exit {
+            id: ExitId::Irikar__Hub__East_Rim__ex__Sat_Tower_Roof_West_1,
+            time: 2105,
+            dest: SpotId::Irikar__Hub__Sat_Tower_Roof_West,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Irikar__Hub__Bowl_Top_Platform__ex__West_Rim_1 => Exit {
+            id: ExitId::Irikar__Hub__Bowl_Top_Platform__ex__West_Rim_1,
+            time: 700,
+            dest: SpotId::Irikar__Hub__West_Rim,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Irikar__Hub__Bowl_Middle_Ledge__ex__Bowl_Top_Platform_1 => Exit {
+            id: ExitId::Irikar__Hub__Bowl_Middle_Ledge__ex__Bowl_Top_Platform_1,
+            time: 1600,
+            dest: SpotId::Irikar__Hub__Bowl_Top_Platform,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Irikar__Hub__Bowl_Middle_Platform_Center__ex__Bowl_Middle_Ledge_1 => Exit {
+            id: ExitId::Irikar__Hub__Bowl_Middle_Platform_Center__ex__Bowl_Middle_Ledge_1,
+            time: 1000,
+            dest: SpotId::Irikar__Hub__Bowl_Middle_Ledge,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Irikar__Hub__Bowl_Middle_Platform_West__ex__Bowl_Middle_Ledge_1 => Exit {
+            id: ExitId::Irikar__Hub__Bowl_Middle_Platform_West__ex__Bowl_Middle_Ledge_1,
+            time: 1000,
+            dest: SpotId::Irikar__Hub__Bowl_Middle_Ledge,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Irikar__Hub__Bowl_Platform_3__ex__Bowl_Middle_Platform_Center_1 => Exit {
+            id: ExitId::Irikar__Hub__Bowl_Platform_3__ex__Bowl_Middle_Platform_Center_1,
+            time: 1200,
+            dest: SpotId::Irikar__Hub__Bowl_Middle_Platform_Center,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Irikar__Hub__Save_Point__ex__Bowl_Hole_1 => Exit {
+            id: ExitId::Irikar__Hub__Save_Point__ex__Bowl_Hole_1,
+            time: 1400,
+            dest: SpotId::Irikar__Hub__Bowl_Hole,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Irikar__Hub__Sat_Tower_Middle_Ledge__ex__Sat_Tower_Floating_Platform_1 => Exit {
+            id: ExitId::Irikar__Hub__Sat_Tower_Middle_Ledge__ex__Sat_Tower_Floating_Platform_1,
+            time: 1500,
+            dest: SpotId::Irikar__Hub__Sat_Tower_Floating_Platform,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Irikar__Hub__Sat_Tower_Floating_Platform__ex__Sat_Tower_Top_Ledge_1 => Exit {
+            id: ExitId::Irikar__Hub__Sat_Tower_Floating_Platform__ex__Sat_Tower_Top_Ledge_1,
+            time: 1000,
+            dest: SpotId::Irikar__Hub__Sat_Tower_Top_Ledge,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Irikar__Hub__Sat_Tower_East_24__ex__Sight_Room__West_24_1 => Exit {
+            id: ExitId::Irikar__Hub__Sat_Tower_East_24__ex__Sight_Room__West_24_1,
+            time: 1350,
+            dest: SpotId::Irikar__Sight_Room__West_24,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Irikar__Sight_Room__West_24__ex__Hub__Sat_Tower_East_24_1 => Exit {
+            id: ExitId::Irikar__Sight_Room__West_24__ex__Hub__Sat_Tower_East_24_1,
+            time: 1350,
+            dest: SpotId::Irikar__Hub__Sat_Tower_East_24,
+            price: Currency::Free,
+            loc_id: None,
+        },
         ExitId::Menu__Upgrade_Menu__Physiology__ex__Combat_1 => Exit {
             id: ExitId::Menu__Upgrade_Menu__Physiology__ex__Combat_1,
             time: 100,
@@ -21203,6 +21657,16 @@ pub fn build_actions() -> EnumMap<ActionId, Action> {
         ActionId::Glacier__Revival__Save_Point__Save => Action {
             id: ActionId::Glacier__Revival__Save_Point__Save,
             time: 1200,
+            price: Currency::Free,
+        },
+        ActionId::Irikar__Hub__Save_Point__Save => Action {
+            id: ActionId::Irikar__Hub__Save_Point__Save,
+            time: 1300,
+            price: Currency::Free,
+        },
+        ActionId::Irikar__Sight_Room__Portal__Enter_Portal => Action {
+            id: ActionId::Irikar__Sight_Room__Portal__Enter_Portal,
+            time: 3600,
             price: Currency::Free,
         },
     }
@@ -26798,7 +27262,8 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             exits: Range {
-                start: 0, end: 0,
+                start: ExitId::Giguna_Breach__Below_Chimney__North__ex__Chimney__South_1.into_usize(),
+                end: ExitId::Giguna_Breach__Below_Chimney__North__ex__Chimney__South_1.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
@@ -27118,7 +27583,7 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             exits: Range {
-                start: ExitId::Giguna_Breach__Grid_14_10_11__East_10__ex__High_Ledge_1.into_usize(),
+                start: ExitId::Giguna_Breach__Grid_14_10_11__East_10__ex__Fire_Room__West_10_1.into_usize(),
                 end: ExitId::Giguna_Breach__Grid_14_10_11__East_10__ex__High_Ledge_1.into_usize() + 1,
             },
             actions: Range {
@@ -27252,8 +27717,8 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             exits: Range {
-                start: ExitId::Giguna_Breach__Fire_Room__West_Plateau__ex__East_10_1.into_usize(),
-                end: ExitId::Giguna_Breach__Fire_Room__West_Plateau__ex__East_10_1.into_usize() + 1,
+                start: ExitId::Giguna_Breach__Fire_Room__West_Plateau__ex__West_10_1.into_usize(),
+                end: ExitId::Giguna_Breach__Fire_Room__West_Plateau__ex__West_10_1.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
@@ -27263,14 +27728,14 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 end: SpotId::Giguna_Breach__Fire_Room__West_Plateau.into_usize() + 1,
             },
         },
-        SpotId::Giguna_Breach__Fire_Room__East_10 => Spot {
-            id: SpotId::Giguna_Breach__Fire_Room__East_10,
+        SpotId::Giguna_Breach__Fire_Room__West_10 => Spot {
+            id: SpotId::Giguna_Breach__Fire_Room__West_10,
             locations: Range {
                 start: 0, end: 0,
             },
             exits: Range {
-                start: ExitId::Giguna_Breach__Fire_Room__East_10__ex__Grid_14_10_11__East_10_1.into_usize(),
-                end: ExitId::Giguna_Breach__Fire_Room__East_10__ex__Grid_14_10_11__East_10_1.into_usize() + 1,
+                start: ExitId::Giguna_Breach__Fire_Room__West_10__ex__Grid_14_10_11__East_10_1.into_usize(),
+                end: ExitId::Giguna_Breach__Fire_Room__West_10__ex__Grid_14_10_11__East_10_1.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
@@ -34447,6 +34912,22 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 end: SpotId::Glacier__Apocalypse_Entry__West.into_usize() + 1,
             },
         },
+        SpotId::Irikar_Breach__Save_Room__Save_Point => Spot {
+            id: SpotId::Irikar_Breach__Save_Room__Save_Point,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Irikar_Breach__Save_Room__Save_Point.into_usize(),
+                end: SpotId::Irikar_Breach__Save_Room__Save_Point.into_usize() + 1,
+            },
+        },
         SpotId::Irikar__Hub__Northwest => Spot {
             id: SpotId::Irikar__Hub__Northwest,
             locations: Range {
@@ -34459,8 +34940,8 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             area_spots: Range {
-                start: SpotId::Irikar__Hub__North_Above_Portal.into_usize(),
-                end: SpotId::Irikar__Hub__Northwest_Above_Bowl.into_usize() + 1,
+                start: SpotId::Irikar__Hub__Bowl_Hole.into_usize(),
+                end: SpotId::Irikar__Hub__West_Rim.into_usize() + 1,
             },
         },
         SpotId::Irikar__Hub__North_Above_Portal => Spot {
@@ -34475,8 +34956,8 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             area_spots: Range {
-                start: SpotId::Irikar__Hub__North_Above_Portal.into_usize(),
-                end: SpotId::Irikar__Hub__Northwest_Above_Bowl.into_usize() + 1,
+                start: SpotId::Irikar__Hub__Bowl_Hole.into_usize(),
+                end: SpotId::Irikar__Hub__West_Rim.into_usize() + 1,
             },
         },
         SpotId::Irikar__Hub__Northwest_Above_Bowl => Spot {
@@ -34491,8 +34972,8 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             area_spots: Range {
-                start: SpotId::Irikar__Hub__North_Above_Portal.into_usize(),
-                end: SpotId::Irikar__Hub__Northwest_Above_Bowl.into_usize() + 1,
+                start: SpotId::Irikar__Hub__Bowl_Hole.into_usize(),
+                end: SpotId::Irikar__Hub__West_Rim.into_usize() + 1,
             },
         },
         SpotId::Irikar__Hub__Northeast_Above_Bowl => Spot {
@@ -34507,8 +34988,392 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             area_spots: Range {
-                start: SpotId::Irikar__Hub__North_Above_Portal.into_usize(),
-                end: SpotId::Irikar__Hub__Northwest_Above_Bowl.into_usize() + 1,
+                start: SpotId::Irikar__Hub__Bowl_Hole.into_usize(),
+                end: SpotId::Irikar__Hub__West_Rim.into_usize() + 1,
+            },
+        },
+        SpotId::Irikar__Hub__West_Rim => Spot {
+            id: SpotId::Irikar__Hub__West_Rim,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Irikar__Hub__West_Rim__ex__East_Rim_1.into_usize(),
+                end: ExitId::Irikar__Hub__West_Rim__ex__East_Rim_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Irikar__Hub__Bowl_Hole.into_usize(),
+                end: SpotId::Irikar__Hub__West_Rim.into_usize() + 1,
+            },
+        },
+        SpotId::Irikar__Hub__East_Rim => Spot {
+            id: SpotId::Irikar__Hub__East_Rim,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Irikar__Hub__East_Rim__ex__Sat_Tower_Roof_West_1.into_usize(),
+                end: ExitId::Irikar__Hub__East_Rim__ex__Sat_Tower_Roof_West_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Irikar__Hub__Bowl_Hole.into_usize(),
+                end: SpotId::Irikar__Hub__West_Rim.into_usize() + 1,
+            },
+        },
+        SpotId::Irikar__Hub__Bowl_Top_Platform => Spot {
+            id: SpotId::Irikar__Hub__Bowl_Top_Platform,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Irikar__Hub__Bowl_Top_Platform__ex__West_Rim_1.into_usize(),
+                end: ExitId::Irikar__Hub__Bowl_Top_Platform__ex__West_Rim_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Irikar__Hub__Bowl_Hole.into_usize(),
+                end: SpotId::Irikar__Hub__West_Rim.into_usize() + 1,
+            },
+        },
+        SpotId::Irikar__Hub__Bowl_Middle_Ledge => Spot {
+            id: SpotId::Irikar__Hub__Bowl_Middle_Ledge,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Irikar__Hub__Bowl_Middle_Ledge__ex__Bowl_Top_Platform_1.into_usize(),
+                end: ExitId::Irikar__Hub__Bowl_Middle_Ledge__ex__Bowl_Top_Platform_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Irikar__Hub__Bowl_Hole.into_usize(),
+                end: SpotId::Irikar__Hub__West_Rim.into_usize() + 1,
+            },
+        },
+        SpotId::Irikar__Hub__Bowl_Middle_Platform_Center => Spot {
+            id: SpotId::Irikar__Hub__Bowl_Middle_Platform_Center,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Irikar__Hub__Bowl_Middle_Platform_Center__ex__Bowl_Middle_Ledge_1.into_usize(),
+                end: ExitId::Irikar__Hub__Bowl_Middle_Platform_Center__ex__Bowl_Middle_Ledge_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Irikar__Hub__Bowl_Hole.into_usize(),
+                end: SpotId::Irikar__Hub__West_Rim.into_usize() + 1,
+            },
+        },
+        SpotId::Irikar__Hub__Bowl_Middle_Platform_West => Spot {
+            id: SpotId::Irikar__Hub__Bowl_Middle_Platform_West,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Irikar__Hub__Bowl_Middle_Platform_West__ex__Bowl_Middle_Ledge_1.into_usize(),
+                end: ExitId::Irikar__Hub__Bowl_Middle_Platform_West__ex__Bowl_Middle_Ledge_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Irikar__Hub__Bowl_Hole.into_usize(),
+                end: SpotId::Irikar__Hub__West_Rim.into_usize() + 1,
+            },
+        },
+        SpotId::Irikar__Hub__Bowl_Platform_3 => Spot {
+            id: SpotId::Irikar__Hub__Bowl_Platform_3,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Irikar__Hub__Bowl_Platform_3__ex__Bowl_Middle_Platform_Center_1.into_usize(),
+                end: ExitId::Irikar__Hub__Bowl_Platform_3__ex__Bowl_Middle_Platform_Center_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Irikar__Hub__Bowl_Hole.into_usize(),
+                end: SpotId::Irikar__Hub__West_Rim.into_usize() + 1,
+            },
+        },
+        SpotId::Irikar__Hub__Save_Point => Spot {
+            id: SpotId::Irikar__Hub__Save_Point,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Irikar__Hub__Save_Point__ex__Bowl_Hole_1.into_usize(),
+                end: ExitId::Irikar__Hub__Save_Point__ex__Bowl_Hole_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: ActionId::Irikar__Hub__Save_Point__Save.into_usize(),
+                end: ActionId::Irikar__Hub__Save_Point__Save.into_usize() + 1,
+            },
+            area_spots: Range {
+                start: SpotId::Irikar__Hub__Bowl_Hole.into_usize(),
+                end: SpotId::Irikar__Hub__West_Rim.into_usize() + 1,
+            },
+        },
+        SpotId::Irikar__Hub__Bowl_Hole => Spot {
+            id: SpotId::Irikar__Hub__Bowl_Hole,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Irikar__Hub__Bowl_Hole.into_usize(),
+                end: SpotId::Irikar__Hub__West_Rim.into_usize() + 1,
+            },
+        },
+        SpotId::Irikar__Hub__Sat_Tower_Roof_West => Spot {
+            id: SpotId::Irikar__Hub__Sat_Tower_Roof_West,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Irikar__Hub__Bowl_Hole.into_usize(),
+                end: SpotId::Irikar__Hub__West_Rim.into_usize() + 1,
+            },
+        },
+        SpotId::Irikar__Hub__Sat_Tower_Roof_East => Spot {
+            id: SpotId::Irikar__Hub__Sat_Tower_Roof_East,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Irikar__Hub__Bowl_Hole.into_usize(),
+                end: SpotId::Irikar__Hub__West_Rim.into_usize() + 1,
+            },
+        },
+        SpotId::Irikar__Hub__Sat_Tower_Middle_Ledge => Spot {
+            id: SpotId::Irikar__Hub__Sat_Tower_Middle_Ledge,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Irikar__Hub__Sat_Tower_Middle_Ledge__ex__Sat_Tower_Floating_Platform_1.into_usize(),
+                end: ExitId::Irikar__Hub__Sat_Tower_Middle_Ledge__ex__Sat_Tower_Floating_Platform_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Irikar__Hub__Bowl_Hole.into_usize(),
+                end: SpotId::Irikar__Hub__West_Rim.into_usize() + 1,
+            },
+        },
+        SpotId::Irikar__Hub__Sat_Tower_Floating_Platform => Spot {
+            id: SpotId::Irikar__Hub__Sat_Tower_Floating_Platform,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Irikar__Hub__Sat_Tower_Floating_Platform__ex__Sat_Tower_Top_Ledge_1.into_usize(),
+                end: ExitId::Irikar__Hub__Sat_Tower_Floating_Platform__ex__Sat_Tower_Top_Ledge_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Irikar__Hub__Bowl_Hole.into_usize(),
+                end: SpotId::Irikar__Hub__West_Rim.into_usize() + 1,
+            },
+        },
+        SpotId::Irikar__Hub__Sat_Tower_Top_Ledge => Spot {
+            id: SpotId::Irikar__Hub__Sat_Tower_Top_Ledge,
+            locations: Range {
+                start: LocationId::Irikar__Hub__Sat_Tower_Top_Ledge__Tablet.into_usize(),
+                end: LocationId::Irikar__Hub__Sat_Tower_Top_Ledge__Tablet.into_usize() + 1,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Irikar__Hub__Bowl_Hole.into_usize(),
+                end: SpotId::Irikar__Hub__West_Rim.into_usize() + 1,
+            },
+        },
+        SpotId::Irikar__Hub__Sat_Tower_Lower_Right_Ledge => Spot {
+            id: SpotId::Irikar__Hub__Sat_Tower_Lower_Right_Ledge,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Irikar__Hub__Bowl_Hole.into_usize(),
+                end: SpotId::Irikar__Hub__West_Rim.into_usize() + 1,
+            },
+        },
+        SpotId::Irikar__Hub__Sat_Tower_Lower_Left_Ledge => Spot {
+            id: SpotId::Irikar__Hub__Sat_Tower_Lower_Left_Ledge,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Irikar__Hub__Bowl_Hole.into_usize(),
+                end: SpotId::Irikar__Hub__West_Rim.into_usize() + 1,
+            },
+        },
+        SpotId::Irikar__Hub__Sat_Tower_Long_Ledge => Spot {
+            id: SpotId::Irikar__Hub__Sat_Tower_Long_Ledge,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Irikar__Hub__Bowl_Hole.into_usize(),
+                end: SpotId::Irikar__Hub__West_Rim.into_usize() + 1,
+            },
+        },
+        SpotId::Irikar__Hub__Sat_Tower_Bottom => Spot {
+            id: SpotId::Irikar__Hub__Sat_Tower_Bottom,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Irikar__Hub__Bowl_Hole.into_usize(),
+                end: SpotId::Irikar__Hub__West_Rim.into_usize() + 1,
+            },
+        },
+        SpotId::Irikar__Hub__Sat_Tower_East_24 => Spot {
+            id: SpotId::Irikar__Hub__Sat_Tower_East_24,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Irikar__Hub__Sat_Tower_East_24__ex__Sight_Room__West_24_1.into_usize(),
+                end: ExitId::Irikar__Hub__Sat_Tower_East_24__ex__Sight_Room__West_24_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Irikar__Hub__Bowl_Hole.into_usize(),
+                end: SpotId::Irikar__Hub__West_Rim.into_usize() + 1,
+            },
+        },
+        SpotId::Irikar__Sight_Room__West_24 => Spot {
+            id: SpotId::Irikar__Sight_Room__West_24,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Irikar__Sight_Room__West_24__ex__Hub__Sat_Tower_East_24_1.into_usize(),
+                end: ExitId::Irikar__Sight_Room__West_24__ex__Hub__Sat_Tower_East_24_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Irikar__Sight_Room__Item_Pedestal.into_usize(),
+                end: SpotId::Irikar__Sight_Room__West_24.into_usize() + 1,
+            },
+        },
+        SpotId::Irikar__Sight_Room__Lower_Ledge => Spot {
+            id: SpotId::Irikar__Sight_Room__Lower_Ledge,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Irikar__Sight_Room__Item_Pedestal.into_usize(),
+                end: SpotId::Irikar__Sight_Room__West_24.into_usize() + 1,
+            },
+        },
+        SpotId::Irikar__Sight_Room__Portal => Spot {
+            id: SpotId::Irikar__Sight_Room__Portal,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: ActionId::Irikar__Sight_Room__Portal__Enter_Portal.into_usize(),
+                end: ActionId::Irikar__Sight_Room__Portal__Enter_Portal.into_usize() + 1,
+            },
+            area_spots: Range {
+                start: SpotId::Irikar__Sight_Room__Item_Pedestal.into_usize(),
+                end: SpotId::Irikar__Sight_Room__West_24.into_usize() + 1,
+            },
+        },
+        SpotId::Irikar__Sight_Room__Item_Pedestal => Spot {
+            id: SpotId::Irikar__Sight_Room__Item_Pedestal,
+            locations: Range {
+                start: LocationId::Irikar__Sight_Room__Item_Pedestal__Urn.into_usize(),
+                end: LocationId::Irikar__Sight_Room__Item_Pedestal__Urn.into_usize() + 1,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Irikar__Sight_Room__Item_Pedestal.into_usize(),
+                end: SpotId::Irikar__Sight_Room__West_24.into_usize() + 1,
             },
         },
         SpotId::Menu__Upgrade_Menu__Physiology => Spot {
@@ -35163,7 +36028,7 @@ pub fn spot_locations(id: SpotId) -> Range<usize> {
         SpotId::Giguna_Breach__Fire_Room__South => Range { start: 0, end: 0 },
         SpotId::Giguna_Breach__Fire_Room__East_11 => Range { start: 0, end: 0 },
         SpotId::Giguna_Breach__Fire_Room__West_Plateau => Range { start: 0, end: 0 },
-        SpotId::Giguna_Breach__Fire_Room__East_10 => Range { start: 0, end: 0 },
+        SpotId::Giguna_Breach__Fire_Room__West_10 => Range { start: 0, end: 0 },
         SpotId::Giguna_Breach__Slingshot__West => Range { start: 0, end: 0 },
         SpotId::Giguna_Breach__Slingshot__Column => Range { start: 0, end: 0 },
         SpotId::Giguna_Breach__Slingshot__Ravine => Range {
@@ -35742,10 +36607,40 @@ pub fn spot_locations(id: SpotId) -> Range<usize> {
             start: LocationId::Glacier__Apocalypse_Entry__Terminal__Escape.into_usize(),
             end: LocationId::Glacier__Apocalypse_Entry__Terminal__Escape.into_usize() + 1,
         },
+        SpotId::Irikar_Breach__Save_Room__Save_Point => Range { start: 0, end: 0 },
         SpotId::Irikar__Hub__Northwest => Range { start: 0, end: 0 },
         SpotId::Irikar__Hub__North_Above_Portal => Range { start: 0, end: 0 },
         SpotId::Irikar__Hub__Northwest_Above_Bowl => Range { start: 0, end: 0 },
         SpotId::Irikar__Hub__Northeast_Above_Bowl => Range { start: 0, end: 0 },
+        SpotId::Irikar__Hub__West_Rim => Range { start: 0, end: 0 },
+        SpotId::Irikar__Hub__East_Rim => Range { start: 0, end: 0 },
+        SpotId::Irikar__Hub__Bowl_Top_Platform => Range { start: 0, end: 0 },
+        SpotId::Irikar__Hub__Bowl_Middle_Ledge => Range { start: 0, end: 0 },
+        SpotId::Irikar__Hub__Bowl_Middle_Platform_Center => Range { start: 0, end: 0 },
+        SpotId::Irikar__Hub__Bowl_Middle_Platform_West => Range { start: 0, end: 0 },
+        SpotId::Irikar__Hub__Bowl_Platform_3 => Range { start: 0, end: 0 },
+        SpotId::Irikar__Hub__Save_Point => Range { start: 0, end: 0 },
+        SpotId::Irikar__Hub__Bowl_Hole => Range { start: 0, end: 0 },
+        SpotId::Irikar__Hub__Sat_Tower_Roof_West => Range { start: 0, end: 0 },
+        SpotId::Irikar__Hub__Sat_Tower_Roof_East => Range { start: 0, end: 0 },
+        SpotId::Irikar__Hub__Sat_Tower_Middle_Ledge => Range { start: 0, end: 0 },
+        SpotId::Irikar__Hub__Sat_Tower_Floating_Platform => Range { start: 0, end: 0 },
+        SpotId::Irikar__Hub__Sat_Tower_Top_Ledge => Range {
+            start: LocationId::Irikar__Hub__Sat_Tower_Top_Ledge__Tablet.into_usize(),
+            end: LocationId::Irikar__Hub__Sat_Tower_Top_Ledge__Tablet.into_usize() + 1,
+        },
+        SpotId::Irikar__Hub__Sat_Tower_Lower_Right_Ledge => Range { start: 0, end: 0 },
+        SpotId::Irikar__Hub__Sat_Tower_Lower_Left_Ledge => Range { start: 0, end: 0 },
+        SpotId::Irikar__Hub__Sat_Tower_Long_Ledge => Range { start: 0, end: 0 },
+        SpotId::Irikar__Hub__Sat_Tower_Bottom => Range { start: 0, end: 0 },
+        SpotId::Irikar__Hub__Sat_Tower_East_24 => Range { start: 0, end: 0 },
+        SpotId::Irikar__Sight_Room__West_24 => Range { start: 0, end: 0 },
+        SpotId::Irikar__Sight_Room__Lower_Ledge => Range { start: 0, end: 0 },
+        SpotId::Irikar__Sight_Room__Portal => Range { start: 0, end: 0 },
+        SpotId::Irikar__Sight_Room__Item_Pedestal => Range {
+            start: LocationId::Irikar__Sight_Room__Item_Pedestal__Urn.into_usize(),
+            end: LocationId::Irikar__Sight_Room__Item_Pedestal__Urn.into_usize() + 1,
+        },
         SpotId::Menu__Upgrade_Menu__Physiology => Range {
             start: LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_1.into_usize(),
             end: LocationId::Menu__Upgrade_Menu__Physiology__Mist_Upgrade.into_usize() + 1,
@@ -36011,7 +36906,15 @@ pub fn area_locations(id: AreaId) -> Range<usize> {
             start: LocationId::Glacier__Apocalypse_Entry__Terminal__Escape.into_usize(),
             end: LocationId::Glacier__Apocalypse_Entry__Terminal__Escape.into_usize(),
         },
-        AreaId::Irikar__Hub => Range { start: 0, end: 0 },
+        AreaId::Irikar_Breach__Save_Room => Range { start: 0, end: 0 },
+        AreaId::Irikar__Hub => Range {
+            start: LocationId::Irikar__Hub__Sat_Tower_Top_Ledge__Tablet.into_usize(),
+            end: LocationId::Irikar__Hub__Sat_Tower_Top_Ledge__Tablet.into_usize(),
+        },
+        AreaId::Irikar__Sight_Room => Range {
+            start: LocationId::Irikar__Sight_Room__Item_Pedestal__Urn.into_usize(),
+            end: LocationId::Irikar__Sight_Room__Item_Pedestal__Urn.into_usize(),
+        },
         AreaId::Menu__Upgrade_Menu => Range {
             start: LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_1.into_usize(),
             end: LocationId::Menu__Upgrade_Menu__Physiology__Mist_Upgrade.into_usize(),
@@ -36046,7 +36949,11 @@ pub fn region_locations(id: RegionId) -> Range<usize> {
             start: LocationId::Glacier__Apocalypse_Entry__Terminal__Escape.into_usize(),
             end: LocationId::Glacier__Vertical_Room__Under_Switch__Switch.into_usize(),
         },
-        RegionId::Irikar => Range { start: 0, end: 0 },
+        RegionId::Irikar_Breach => Range { start: 0, end: 0 },
+        RegionId::Irikar => Range {
+            start: LocationId::Irikar__Hub__Sat_Tower_Top_Ledge__Tablet.into_usize(),
+            end: LocationId::Irikar__Sight_Room__Item_Pedestal__Urn.into_usize(),
+        },
         RegionId::Menu => Range {
             start: LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_1.into_usize(),
             end: LocationId::Menu__Upgrade_Menu__Physiology__Mist_Upgrade.into_usize(),

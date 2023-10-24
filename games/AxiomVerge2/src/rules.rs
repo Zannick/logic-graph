@@ -893,6 +893,10 @@ pub fn access_mode__drone(ctx: &Context) -> bool {
     // ^mode == 'drone'
     ctx.mode() == enums::Mode::Drone
 }
+pub fn access_mode__drone_and_breach_sight(ctx: &Context) -> bool {
+    // ^mode == 'drone' and Breach_Sight
+    (ctx.mode() == enums::Mode::Drone && ctx.has(Item::Breach_Sight))
+}
 pub fn access_mode__drone_and_ebih_wasteland_passage_h(ctx: &Context) -> bool {
     // ^mode == 'drone' and Ebih_Wasteland_Passage_H
     (ctx.mode() == enums::Mode::Drone && ctx.has(Item::Ebih_Wasteland_Passage_H))
@@ -1345,13 +1349,9 @@ pub fn action_mode__indra(ctx: &mut Context) {
     // ^mode = 'Indra'
     ctx.set_mode(enums::Mode::Indra);
 }
-pub fn action_portal__giguna__ruins_top__save_point(ctx: &mut Context) {
-    // $portal(`Giguna > Ruins Top > Save Point`)
-    helper__portal!(ctx, SpotId::Giguna__Ruins_Top__Save_Point);
-}
-pub fn action_portal__giguna_breach__peak__save_point(ctx: &mut Context) {
-    // $portal(`Giguna Breach > Peak > Save Point`)
-    helper__portal!(ctx, SpotId::Giguna_Breach__Peak__Save_Point);
+pub fn action_portal__flipside(ctx: &mut Context) {
+    // $portal(^flipside)
+    helper__portal!(ctx, data::flipside(ctx.position()));
 }
 pub fn action_refills__1(ctx: &mut Context) {
     // ^refills += 1

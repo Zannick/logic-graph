@@ -2373,7 +2373,7 @@ pub fn local_travel_time(
         ) => 2105,
         (
             [false],
-            SpotId::Giguna_Breach__Fire_Room__East_10,
+            SpotId::Giguna_Breach__Fire_Room__West_10,
             SpotId::Giguna_Breach__Fire_Room__West_Plateau,
         ) => 1052,
         (
@@ -5093,6 +5093,141 @@ pub fn local_travel_time(
             SpotId::Glacier__Apocalypse_Entry__Terminal,
             SpotId::Glacier__Apocalypse_Entry__West,
         ) => 1929,
+        ([false], SpotId::Irikar__Hub__Northwest_Above_Bowl, SpotId::Irikar__Hub__West_Rim) => 349,
+        (
+            [false],
+            SpotId::Irikar__Hub__Northwest_Above_Bowl,
+            SpotId::Irikar__Hub__Bowl_Top_Platform,
+        ) => 750,
+        ([false], SpotId::Irikar__Hub__Northeast_Above_Bowl, SpotId::Irikar__Hub__East_Rim) => 399,
+        ([false], SpotId::Irikar__Hub__West_Rim, SpotId::Irikar__Hub__Bowl_Top_Platform) => 701,
+        ([false], SpotId::Irikar__Hub__East_Rim, SpotId::Irikar__Hub__Save_Point) => 2450,
+        ([false], SpotId::Irikar__Hub__East_Rim, SpotId::Irikar__Hub__Bowl_Hole) => 2249,
+        ([false], SpotId::Irikar__Hub__Bowl_Top_Platform, SpotId::Irikar__Hub__Bowl_Hole) => 1999,
+        (
+            [false],
+            SpotId::Irikar__Hub__Bowl_Middle_Ledge,
+            SpotId::Irikar__Hub__Bowl_Middle_Platform_Center,
+        ) => 550,
+        (
+            [false],
+            SpotId::Irikar__Hub__Bowl_Middle_Platform_Center,
+            SpotId::Irikar__Hub__Save_Point,
+        ) => 850,
+        (
+            [false],
+            SpotId::Irikar__Hub__Bowl_Middle_Platform_West,
+            SpotId::Irikar__Hub__Bowl_Middle_Platform_Center,
+        ) => 526,
+        (
+            [false],
+            SpotId::Irikar__Hub__Bowl_Middle_Platform_West,
+            SpotId::Irikar__Hub__Save_Point,
+        ) => 850,
+        ([false], SpotId::Irikar__Hub__Bowl_Platform_3, SpotId::Irikar__Hub__Save_Point) => 701,
+        ([false], SpotId::Irikar__Hub__Save_Point, SpotId::Irikar__Hub__Bowl_Platform_3) => 1799,
+        ([false], SpotId::Irikar__Hub__Bowl_Hole, SpotId::Irikar__Hub__Save_Point) => 1578,
+        ([false], SpotId::Irikar__Hub__Bowl_Hole, SpotId::Irikar__Hub__Sat_Tower_Middle_Ledge) => {
+            1578
+        }
+        (
+            [false],
+            SpotId::Irikar__Hub__Sat_Tower_Roof_West,
+            SpotId::Irikar__Hub__Sat_Tower_Roof_East,
+        ) => 877,
+        (
+            [false],
+            SpotId::Irikar__Hub__Sat_Tower_Roof_East,
+            SpotId::Irikar__Hub__Sat_Tower_Roof_West,
+        ) => 877,
+        ([false], SpotId::Irikar__Hub__Sat_Tower_Middle_Ledge, SpotId::Irikar__Hub__Bowl_Hole) => {
+            1578
+        }
+        (
+            [false],
+            SpotId::Irikar__Hub__Sat_Tower_Middle_Ledge,
+            SpotId::Irikar__Hub__Sat_Tower_Lower_Right_Ledge,
+        ) => 526,
+        (
+            [false],
+            SpotId::Irikar__Hub__Sat_Tower_Middle_Ledge,
+            SpotId::Irikar__Hub__Sat_Tower_Lower_Left_Ledge,
+        ) => 1000,
+        (
+            [false],
+            SpotId::Irikar__Hub__Sat_Tower_Floating_Platform,
+            SpotId::Irikar__Hub__Sat_Tower_Middle_Ledge,
+        ) => 550,
+        (
+            [false],
+            SpotId::Irikar__Hub__Sat_Tower_Floating_Platform,
+            SpotId::Irikar__Hub__Sat_Tower_Lower_Right_Ledge,
+        ) => 1050,
+        (
+            [false],
+            SpotId::Irikar__Hub__Sat_Tower_Floating_Platform,
+            SpotId::Irikar__Hub__Sat_Tower_Lower_Left_Ledge,
+        ) => 1550,
+        (
+            [false],
+            SpotId::Irikar__Hub__Sat_Tower_Top_Ledge,
+            SpotId::Irikar__Hub__Sat_Tower_Floating_Platform,
+        ) => 550,
+        (
+            [false],
+            SpotId::Irikar__Hub__Sat_Tower_Top_Ledge,
+            SpotId::Irikar__Hub__Sat_Tower_Lower_Right_Ledge,
+        ) => 1600,
+        // [0.6, 1.5]
+        (
+            [false],
+            SpotId::Irikar__Hub__Sat_Tower_Top_Ledge,
+            SpotId::Irikar__Hub__Sat_Tower_Lower_Left_Ledge,
+        ) => 2100,
+        (
+            [false],
+            SpotId::Irikar__Hub__Sat_Tower_Lower_Right_Ledge,
+            SpotId::Irikar__Hub__Sat_Tower_Lower_Left_Ledge,
+        ) => 500,
+        (
+            [false],
+            SpotId::Irikar__Hub__Sat_Tower_Lower_Left_Ledge,
+            SpotId::Irikar__Hub__Sat_Tower_Long_Ledge,
+        ) => 1403,
+        (
+            [false],
+            SpotId::Irikar__Hub__Sat_Tower_Long_Ledge,
+            SpotId::Irikar__Hub__Sat_Tower_Bottom,
+        ) => 1052,
+        (
+            [false],
+            SpotId::Irikar__Hub__Sat_Tower_Bottom,
+            SpotId::Irikar__Hub__Sat_Tower_East_24,
+        ) => 1929,
+        ([false], SpotId::Irikar__Sight_Room__West_24, SpotId::Irikar__Sight_Room__Lower_Ledge) => {
+            701
+        }
+        ([false], SpotId::Irikar__Sight_Room__Lower_Ledge, SpotId::Irikar__Sight_Room__West_24) => {
+            701
+        }
+        ([false], SpotId::Irikar__Sight_Room__Lower_Ledge, SpotId::Irikar__Sight_Room__Portal) => {
+            964
+        }
+        (
+            [false],
+            SpotId::Irikar__Sight_Room__Lower_Ledge,
+            SpotId::Irikar__Sight_Room__Item_Pedestal,
+        ) => 1929,
+        (
+            [false],
+            SpotId::Irikar__Sight_Room__Portal,
+            SpotId::Irikar__Sight_Room__Item_Pedestal,
+        ) => 964,
+        (
+            [false],
+            SpotId::Irikar__Sight_Room__Item_Pedestal,
+            SpotId::Irikar__Sight_Room__Portal,
+        ) => 1200,
         ([true], SpotId::Amagi__Main_Area__East_15, SpotId::Amagi__Main_Area__Waters_Edge) => 4035,
         ([true], SpotId::Amagi__Main_Area__Waters_Edge, SpotId::Amagi__Main_Area__East_15) => 4035,
         ([true], SpotId::Amagi__Main_Area__Waters_Edge, SpotId::Amagi__Main_Area__Shallow_End) => {
@@ -7483,7 +7618,7 @@ pub fn local_travel_time(
         ) => 2105,
         (
             [true],
-            SpotId::Giguna_Breach__Fire_Room__East_10,
+            SpotId::Giguna_Breach__Fire_Room__West_10,
             SpotId::Giguna_Breach__Fire_Room__West_Plateau,
         ) => 1052,
         (
@@ -10105,6 +10240,135 @@ pub fn local_travel_time(
             SpotId::Glacier__Apocalypse_Entry__Terminal,
             SpotId::Glacier__Apocalypse_Entry__West,
         ) => 1929,
+        ([true], SpotId::Irikar__Hub__Northwest_Above_Bowl, SpotId::Irikar__Hub__West_Rim) => 349,
+        (
+            [true],
+            SpotId::Irikar__Hub__Northwest_Above_Bowl,
+            SpotId::Irikar__Hub__Bowl_Top_Platform,
+        ) => 750,
+        ([true], SpotId::Irikar__Hub__Northeast_Above_Bowl, SpotId::Irikar__Hub__East_Rim) => 399,
+        ([true], SpotId::Irikar__Hub__West_Rim, SpotId::Irikar__Hub__Bowl_Top_Platform) => 701,
+        ([true], SpotId::Irikar__Hub__East_Rim, SpotId::Irikar__Hub__Save_Point) => 2450,
+        ([true], SpotId::Irikar__Hub__East_Rim, SpotId::Irikar__Hub__Bowl_Hole) => 2249,
+        ([true], SpotId::Irikar__Hub__Bowl_Top_Platform, SpotId::Irikar__Hub__Bowl_Hole) => 1999,
+        (
+            [true],
+            SpotId::Irikar__Hub__Bowl_Middle_Ledge,
+            SpotId::Irikar__Hub__Bowl_Middle_Platform_Center,
+        ) => 550,
+        (
+            [true],
+            SpotId::Irikar__Hub__Bowl_Middle_Platform_Center,
+            SpotId::Irikar__Hub__Save_Point,
+        ) => 850,
+        (
+            [true],
+            SpotId::Irikar__Hub__Bowl_Middle_Platform_West,
+            SpotId::Irikar__Hub__Bowl_Middle_Platform_Center,
+        ) => 526,
+        (
+            [true],
+            SpotId::Irikar__Hub__Bowl_Middle_Platform_West,
+            SpotId::Irikar__Hub__Save_Point,
+        ) => 850,
+        ([true], SpotId::Irikar__Hub__Bowl_Platform_3, SpotId::Irikar__Hub__Save_Point) => 701,
+        ([true], SpotId::Irikar__Hub__Save_Point, SpotId::Irikar__Hub__Bowl_Platform_3) => 1799,
+        ([true], SpotId::Irikar__Hub__Bowl_Hole, SpotId::Irikar__Hub__Save_Point) => 1578,
+        ([true], SpotId::Irikar__Hub__Bowl_Hole, SpotId::Irikar__Hub__Sat_Tower_Middle_Ledge) => {
+            1578
+        }
+        (
+            [true],
+            SpotId::Irikar__Hub__Sat_Tower_Roof_West,
+            SpotId::Irikar__Hub__Sat_Tower_Roof_East,
+        ) => 877,
+        (
+            [true],
+            SpotId::Irikar__Hub__Sat_Tower_Roof_East,
+            SpotId::Irikar__Hub__Sat_Tower_Roof_West,
+        ) => 877,
+        ([true], SpotId::Irikar__Hub__Sat_Tower_Middle_Ledge, SpotId::Irikar__Hub__Bowl_Hole) => {
+            1578
+        }
+        (
+            [true],
+            SpotId::Irikar__Hub__Sat_Tower_Middle_Ledge,
+            SpotId::Irikar__Hub__Sat_Tower_Lower_Right_Ledge,
+        ) => 526,
+        (
+            [true],
+            SpotId::Irikar__Hub__Sat_Tower_Middle_Ledge,
+            SpotId::Irikar__Hub__Sat_Tower_Lower_Left_Ledge,
+        ) => 1000,
+        (
+            [true],
+            SpotId::Irikar__Hub__Sat_Tower_Floating_Platform,
+            SpotId::Irikar__Hub__Sat_Tower_Middle_Ledge,
+        ) => 550,
+        (
+            [true],
+            SpotId::Irikar__Hub__Sat_Tower_Floating_Platform,
+            SpotId::Irikar__Hub__Sat_Tower_Lower_Right_Ledge,
+        ) => 1050,
+        (
+            [true],
+            SpotId::Irikar__Hub__Sat_Tower_Floating_Platform,
+            SpotId::Irikar__Hub__Sat_Tower_Lower_Left_Ledge,
+        ) => 1550,
+        (
+            [true],
+            SpotId::Irikar__Hub__Sat_Tower_Top_Ledge,
+            SpotId::Irikar__Hub__Sat_Tower_Floating_Platform,
+        ) => 550,
+        (
+            [true],
+            SpotId::Irikar__Hub__Sat_Tower_Top_Ledge,
+            SpotId::Irikar__Hub__Sat_Tower_Lower_Right_Ledge,
+        ) => 1600,
+        // [0.6, 1.5]
+        (
+            [true],
+            SpotId::Irikar__Hub__Sat_Tower_Top_Ledge,
+            SpotId::Irikar__Hub__Sat_Tower_Lower_Left_Ledge,
+        ) => 2100,
+        (
+            [true],
+            SpotId::Irikar__Hub__Sat_Tower_Lower_Right_Ledge,
+            SpotId::Irikar__Hub__Sat_Tower_Lower_Left_Ledge,
+        ) => 500,
+        (
+            [true],
+            SpotId::Irikar__Hub__Sat_Tower_Lower_Left_Ledge,
+            SpotId::Irikar__Hub__Sat_Tower_Long_Ledge,
+        ) => 1403,
+        (
+            [true],
+            SpotId::Irikar__Hub__Sat_Tower_Long_Ledge,
+            SpotId::Irikar__Hub__Sat_Tower_Bottom,
+        ) => 1052,
+        ([true], SpotId::Irikar__Hub__Sat_Tower_Bottom, SpotId::Irikar__Hub__Sat_Tower_East_24) => {
+            1929
+        }
+        ([true], SpotId::Irikar__Sight_Room__West_24, SpotId::Irikar__Sight_Room__Lower_Ledge) => {
+            701
+        }
+        ([true], SpotId::Irikar__Sight_Room__Lower_Ledge, SpotId::Irikar__Sight_Room__West_24) => {
+            701
+        }
+        ([true], SpotId::Irikar__Sight_Room__Lower_Ledge, SpotId::Irikar__Sight_Room__Portal) => {
+            964
+        }
+        (
+            [true],
+            SpotId::Irikar__Sight_Room__Lower_Ledge,
+            SpotId::Irikar__Sight_Room__Item_Pedestal,
+        ) => 1929,
+        ([true], SpotId::Irikar__Sight_Room__Portal, SpotId::Irikar__Sight_Room__Item_Pedestal) => {
+            964
+        }
+        ([true], SpotId::Irikar__Sight_Room__Item_Pedestal, SpotId::Irikar__Sight_Room__Portal) => {
+            1200
+        }
         _ => u32::MAX,
     }
 }
@@ -11556,7 +11820,7 @@ pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
             SpotId::Giguna_Breach__Fire_Room__Cuesta,
         ) => true,
         (
-            SpotId::Giguna_Breach__Fire_Room__East_10,
+            SpotId::Giguna_Breach__Fire_Room__West_10,
             SpotId::Giguna_Breach__Fire_Room__West_Plateau,
         ) => true,
         (SpotId::Giguna_Breach__Slingshot__West, SpotId::Giguna_Breach__Slingshot__Column) => true,
@@ -13243,6 +13507,85 @@ pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
         (SpotId::Glacier__Apocalypse_Entry__Terminal, SpotId::Glacier__Apocalypse_Entry__West) => {
             true
         }
+        (SpotId::Irikar__Hub__Northwest_Above_Bowl, SpotId::Irikar__Hub__West_Rim) => true,
+        (SpotId::Irikar__Hub__Northwest_Above_Bowl, SpotId::Irikar__Hub__Bowl_Top_Platform) => true,
+        (SpotId::Irikar__Hub__Northeast_Above_Bowl, SpotId::Irikar__Hub__East_Rim) => true,
+        (SpotId::Irikar__Hub__West_Rim, SpotId::Irikar__Hub__Bowl_Top_Platform) => true,
+        (SpotId::Irikar__Hub__East_Rim, SpotId::Irikar__Hub__Save_Point) => true,
+        (SpotId::Irikar__Hub__East_Rim, SpotId::Irikar__Hub__Bowl_Hole) => true,
+        (SpotId::Irikar__Hub__Bowl_Top_Platform, SpotId::Irikar__Hub__Bowl_Midle_Ledge) => true,
+        (SpotId::Irikar__Hub__Bowl_Top_Platform, SpotId::Irikar__Hub__Bowl_Hole) => true,
+        (
+            SpotId::Irikar__Hub__Bowl_Middle_Ledge,
+            SpotId::Irikar__Hub__Bowl_Middle_Platform_Center,
+        ) => true,
+        (SpotId::Irikar__Hub__Bowl_Middle_Platform_Center, SpotId::Irikar__Hub__Save_Point) => true,
+        (
+            SpotId::Irikar__Hub__Bowl_Middle_Platform_West,
+            SpotId::Irikar__Hub__Bowl_Middle_Platform_Center,
+        ) => true,
+        (SpotId::Irikar__Hub__Bowl_Middle_Platform_West, SpotId::Irikar__Hub__Save_Point) => true,
+        (SpotId::Irikar__Hub__Bowl_Platform_3, SpotId::Irikar__Hub__Save_Point) => true,
+        (SpotId::Irikar__Hub__Save_Point, SpotId::Irikar__Hub__Bowl_Platform_3) => true,
+        (SpotId::Irikar__Hub__Bowl_Hole, SpotId::Irikar__Hub__Save_Point) => true,
+        (SpotId::Irikar__Hub__Bowl_Hole, SpotId::Irikar__Hub__Sat_Tower_Middle_Ledge) => true,
+        (SpotId::Irikar__Hub__Sat_Tower_Roof_West, SpotId::Irikar__Hub__Sat_Tower_Roof_East) => {
+            true
+        }
+        (SpotId::Irikar__Hub__Sat_Tower_Roof_East, SpotId::Irikar__Hub__Sat_Tower_Roof_West) => {
+            true
+        }
+        (SpotId::Irikar__Hub__Sat_Tower_Middle_Ledge, SpotId::Irikar__Hub__Bowl_Hole) => true,
+        (
+            SpotId::Irikar__Hub__Sat_Tower_Middle_Ledge,
+            SpotId::Irikar__Hub__Sat_Tower_Lower_Right_Ledge,
+        ) => true,
+        (
+            SpotId::Irikar__Hub__Sat_Tower_Middle_Ledge,
+            SpotId::Irikar__Hub__Sat_Tower_Lower_Left_Ledge,
+        ) => true,
+        (
+            SpotId::Irikar__Hub__Sat_Tower_Floating_Platform,
+            SpotId::Irikar__Hub__Sat_Tower_Middle_Ledge,
+        ) => true,
+        (
+            SpotId::Irikar__Hub__Sat_Tower_Floating_Platform,
+            SpotId::Irikar__Hub__Sat_Tower_Lower_Right_Ledge,
+        ) => true,
+        (
+            SpotId::Irikar__Hub__Sat_Tower_Floating_Platform,
+            SpotId::Irikar__Hub__Sat_Tower_Lower_Left_Ledge,
+        ) => true,
+        (
+            SpotId::Irikar__Hub__Sat_Tower_Top_Ledge,
+            SpotId::Irikar__Hub__Sat_Tower_Floating_Platform,
+        ) => true,
+        (
+            SpotId::Irikar__Hub__Sat_Tower_Top_Ledge,
+            SpotId::Irikar__Hub__Sat_Tower_Lower_Right_Ledge,
+        ) => true,
+        (
+            SpotId::Irikar__Hub__Sat_Tower_Top_Ledge,
+            SpotId::Irikar__Hub__Sat_Tower_Lower_Left_Ledge,
+        ) => true,
+        (
+            SpotId::Irikar__Hub__Sat_Tower_Lower_Right_Ledge,
+            SpotId::Irikar__Hub__Sat_Tower_Lower_Left_Ledge,
+        ) => true,
+        (
+            SpotId::Irikar__Hub__Sat_Tower_Lower_Left_Ledge,
+            SpotId::Irikar__Hub__Sat_Tower_Long_Ledge,
+        ) => true,
+        (SpotId::Irikar__Hub__Sat_Tower_Long_Ledge, SpotId::Irikar__Hub__Sat_Tower_Bottom) => true,
+        (SpotId::Irikar__Hub__Sat_Tower_Bottom, SpotId::Irikar__Hub__Sat_Tower_East_24) => true,
+        (SpotId::Irikar__Sight_Room__West_24, SpotId::Irikar__Sight_Room__Lower_Ledge) => true,
+        (SpotId::Irikar__Sight_Room__Lower_Ledge, SpotId::Irikar__Sight_Room__West_24) => true,
+        (SpotId::Irikar__Sight_Room__Lower_Ledge, SpotId::Irikar__Sight_Room__Portal) => true,
+        (SpotId::Irikar__Sight_Room__Lower_Ledge, SpotId::Irikar__Sight_Room__Item_Pedestal) => {
+            true
+        }
+        (SpotId::Irikar__Sight_Room__Portal, SpotId::Irikar__Sight_Room__Item_Pedestal) => true,
+        (SpotId::Irikar__Sight_Room__Item_Pedestal, SpotId::Irikar__Sight_Room__Portal) => true,
         _ => false,
     }
 }
@@ -19291,11 +19634,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna_Breach__Peak__Portal,
-            SpotId::Giguna__Ruins_Top__Save_Point,
-            3600,
-        ),
-        (
-            SpotId::Giguna_Breach__Peak__Portal,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -19413,6 +19751,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna_Breach__Chimney__Cache,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
+        ),
+        (
+            SpotId::Giguna_Breach__Below_Chimney__North,
+            SpotId::Giguna_Breach__Chimney__South,
+            1600,
         ),
         (
             SpotId::Giguna_Breach__Below_Chimney__North,
@@ -19746,6 +20089,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna_Breach__Grid_14_10_11__East_10,
+            SpotId::Giguna_Breach__Fire_Room__West_10,
+            1600,
+        ),
+        (
+            SpotId::Giguna_Breach__Grid_14_10_11__East_10,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -19886,7 +20234,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna_Breach__Fire_Room__West_Plateau,
-            SpotId::Giguna_Breach__Fire_Room__East_10,
+            SpotId::Giguna_Breach__Fire_Room__West_10,
             700,
         ),
         (
@@ -19895,17 +20243,17 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             1000,
         ),
         (
-            SpotId::Giguna_Breach__Fire_Room__East_10,
+            SpotId::Giguna_Breach__Fire_Room__West_10,
             SpotId::Giguna_Breach__Grid_14_10_11__East_10,
             1600,
         ),
         (
-            SpotId::Giguna_Breach__Fire_Room__East_10,
+            SpotId::Giguna_Breach__Fire_Room__West_10,
             SpotId::Giguna_Breach__Fire_Room__West_Plateau,
             1052,
         ),
         (
-            SpotId::Giguna_Breach__Fire_Room__East_10,
+            SpotId::Giguna_Breach__Fire_Room__West_10,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -22568,11 +22916,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna__Ruins_Top__Small_Ledge,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
-        ),
-        (
-            SpotId::Giguna__Ruins_Top__Portal,
-            SpotId::Giguna_Breach__Peak__Save_Point,
-            3600,
         ),
         (
             SpotId::Giguna__Ruins_Top__Portal,
@@ -27050,6 +27393,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             1000,
         ),
         (
+            SpotId::Irikar_Breach__Save_Room__Save_Point,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
             SpotId::Irikar__Hub__Northwest,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
@@ -27061,11 +27409,366 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Irikar__Hub__Northwest_Above_Bowl,
+            SpotId::Irikar__Hub__West_Rim,
+            349,
+        ),
+        (
+            SpotId::Irikar__Hub__Northwest_Above_Bowl,
+            SpotId::Irikar__Hub__Bowl_Top_Platform,
+            750,
+        ),
+        (
+            SpotId::Irikar__Hub__Northwest_Above_Bowl,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
         (
             SpotId::Irikar__Hub__Northeast_Above_Bowl,
+            SpotId::Irikar__Hub__East_Rim,
+            399,
+        ),
+        (
+            SpotId::Irikar__Hub__Northeast_Above_Bowl,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Irikar__Hub__West_Rim,
+            SpotId::Irikar__Hub__East_Rim,
+            2105,
+        ),
+        (
+            SpotId::Irikar__Hub__West_Rim,
+            SpotId::Irikar__Hub__Bowl_Top_Platform,
+            701,
+        ),
+        (
+            SpotId::Irikar__Hub__West_Rim,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Irikar__Hub__East_Rim,
+            SpotId::Irikar__Hub__Save_Point,
+            2450,
+        ),
+        (
+            SpotId::Irikar__Hub__East_Rim,
+            SpotId::Irikar__Hub__Bowl_Hole,
+            2249,
+        ),
+        (
+            SpotId::Irikar__Hub__East_Rim,
+            SpotId::Irikar__Hub__Sat_Tower_Roof_West,
+            2105,
+        ),
+        (
+            SpotId::Irikar__Hub__East_Rim,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Irikar__Hub__Bowl_Top_Platform,
+            SpotId::Irikar__Hub__West_Rim,
+            700,
+        ),
+        (
+            SpotId::Irikar__Hub__Bowl_Top_Platform,
+            SpotId::Irikar__Hub__Bowl_Hole,
+            1999,
+        ),
+        (
+            SpotId::Irikar__Hub__Bowl_Top_Platform,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Irikar__Hub__Bowl_Middle_Ledge,
+            SpotId::Irikar__Hub__Bowl_Top_Platform,
+            1600,
+        ),
+        (
+            SpotId::Irikar__Hub__Bowl_Middle_Ledge,
+            SpotId::Irikar__Hub__Bowl_Middle_Platform_Center,
+            550,
+        ),
+        (
+            SpotId::Irikar__Hub__Bowl_Middle_Ledge,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Irikar__Hub__Bowl_Middle_Platform_Center,
+            SpotId::Irikar__Hub__Bowl_Middle_Ledge,
+            1000,
+        ),
+        (
+            SpotId::Irikar__Hub__Bowl_Middle_Platform_Center,
+            SpotId::Irikar__Hub__Save_Point,
+            850,
+        ),
+        (
+            SpotId::Irikar__Hub__Bowl_Middle_Platform_Center,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Irikar__Hub__Bowl_Middle_Platform_West,
+            SpotId::Irikar__Hub__Bowl_Middle_Ledge,
+            1000,
+        ),
+        (
+            SpotId::Irikar__Hub__Bowl_Middle_Platform_West,
+            SpotId::Irikar__Hub__Bowl_Middle_Platform_Center,
+            526,
+        ),
+        (
+            SpotId::Irikar__Hub__Bowl_Middle_Platform_West,
+            SpotId::Irikar__Hub__Save_Point,
+            850,
+        ),
+        (
+            SpotId::Irikar__Hub__Bowl_Middle_Platform_West,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Irikar__Hub__Bowl_Platform_3,
+            SpotId::Irikar__Hub__Bowl_Middle_Platform_Center,
+            1200,
+        ),
+        (
+            SpotId::Irikar__Hub__Bowl_Platform_3,
+            SpotId::Irikar__Hub__Save_Point,
+            701,
+        ),
+        (
+            SpotId::Irikar__Hub__Bowl_Platform_3,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Irikar__Hub__Save_Point,
+            SpotId::Irikar__Hub__Bowl_Platform_3,
+            1799,
+        ),
+        (
+            SpotId::Irikar__Hub__Save_Point,
+            SpotId::Irikar__Hub__Bowl_Hole,
+            1400,
+        ),
+        (
+            SpotId::Irikar__Hub__Save_Point,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Irikar__Hub__Bowl_Hole,
+            SpotId::Irikar__Hub__Save_Point,
+            1578,
+        ),
+        (
+            SpotId::Irikar__Hub__Bowl_Hole,
+            SpotId::Irikar__Hub__Sat_Tower_Middle_Ledge,
+            1578,
+        ),
+        (
+            SpotId::Irikar__Hub__Bowl_Hole,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Irikar__Hub__Sat_Tower_Roof_West,
+            SpotId::Irikar__Hub__Sat_Tower_Roof_East,
+            877,
+        ),
+        (
+            SpotId::Irikar__Hub__Sat_Tower_Roof_West,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Irikar__Hub__Sat_Tower_Roof_East,
+            SpotId::Irikar__Hub__Sat_Tower_Roof_West,
+            877,
+        ),
+        (
+            SpotId::Irikar__Hub__Sat_Tower_Roof_East,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Irikar__Hub__Sat_Tower_Middle_Ledge,
+            SpotId::Irikar__Hub__Bowl_Hole,
+            1578,
+        ),
+        (
+            SpotId::Irikar__Hub__Sat_Tower_Middle_Ledge,
+            SpotId::Irikar__Hub__Sat_Tower_Floating_Platform,
+            1500,
+        ),
+        (
+            SpotId::Irikar__Hub__Sat_Tower_Middle_Ledge,
+            SpotId::Irikar__Hub__Sat_Tower_Lower_Right_Ledge,
+            526,
+        ),
+        (
+            SpotId::Irikar__Hub__Sat_Tower_Middle_Ledge,
+            SpotId::Irikar__Hub__Sat_Tower_Lower_Left_Ledge,
+            1000,
+        ),
+        (
+            SpotId::Irikar__Hub__Sat_Tower_Middle_Ledge,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Irikar__Hub__Sat_Tower_Floating_Platform,
+            SpotId::Irikar__Hub__Sat_Tower_Middle_Ledge,
+            550,
+        ),
+        (
+            SpotId::Irikar__Hub__Sat_Tower_Floating_Platform,
+            SpotId::Irikar__Hub__Sat_Tower_Top_Ledge,
+            1000,
+        ),
+        (
+            SpotId::Irikar__Hub__Sat_Tower_Floating_Platform,
+            SpotId::Irikar__Hub__Sat_Tower_Lower_Right_Ledge,
+            1050,
+        ),
+        (
+            SpotId::Irikar__Hub__Sat_Tower_Floating_Platform,
+            SpotId::Irikar__Hub__Sat_Tower_Lower_Left_Ledge,
+            1550,
+        ),
+        (
+            SpotId::Irikar__Hub__Sat_Tower_Floating_Platform,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Irikar__Hub__Sat_Tower_Top_Ledge,
+            SpotId::Irikar__Hub__Sat_Tower_Floating_Platform,
+            550,
+        ),
+        (
+            SpotId::Irikar__Hub__Sat_Tower_Top_Ledge,
+            SpotId::Irikar__Hub__Sat_Tower_Lower_Right_Ledge,
+            1600,
+        ),
+        (
+            SpotId::Irikar__Hub__Sat_Tower_Top_Ledge,
+            SpotId::Irikar__Hub__Sat_Tower_Lower_Left_Ledge,
+            2100,
+        ),
+        (
+            SpotId::Irikar__Hub__Sat_Tower_Top_Ledge,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Irikar__Hub__Sat_Tower_Lower_Right_Ledge,
+            SpotId::Irikar__Hub__Sat_Tower_Lower_Left_Ledge,
+            500,
+        ),
+        (
+            SpotId::Irikar__Hub__Sat_Tower_Lower_Right_Ledge,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Irikar__Hub__Sat_Tower_Lower_Left_Ledge,
+            SpotId::Irikar__Hub__Sat_Tower_Long_Ledge,
+            1403,
+        ),
+        (
+            SpotId::Irikar__Hub__Sat_Tower_Lower_Left_Ledge,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Irikar__Hub__Sat_Tower_Long_Ledge,
+            SpotId::Irikar__Hub__Sat_Tower_Bottom,
+            1052,
+        ),
+        (
+            SpotId::Irikar__Hub__Sat_Tower_Long_Ledge,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Irikar__Hub__Sat_Tower_Bottom,
+            SpotId::Irikar__Hub__Sat_Tower_East_24,
+            1929,
+        ),
+        (
+            SpotId::Irikar__Hub__Sat_Tower_Bottom,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Irikar__Hub__Sat_Tower_East_24,
+            SpotId::Irikar__Sight_Room__West_24,
+            1350,
+        ),
+        (
+            SpotId::Irikar__Hub__Sat_Tower_East_24,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Irikar__Sight_Room__West_24,
+            SpotId::Irikar__Hub__Sat_Tower_East_24,
+            1350,
+        ),
+        (
+            SpotId::Irikar__Sight_Room__West_24,
+            SpotId::Irikar__Sight_Room__Lower_Ledge,
+            701,
+        ),
+        (
+            SpotId::Irikar__Sight_Room__West_24,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Irikar__Sight_Room__Lower_Ledge,
+            SpotId::Irikar__Sight_Room__West_24,
+            701,
+        ),
+        (
+            SpotId::Irikar__Sight_Room__Lower_Ledge,
+            SpotId::Irikar__Sight_Room__Portal,
+            964,
+        ),
+        (
+            SpotId::Irikar__Sight_Room__Lower_Ledge,
+            SpotId::Irikar__Sight_Room__Item_Pedestal,
+            1929,
+        ),
+        (
+            SpotId::Irikar__Sight_Room__Lower_Ledge,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Irikar__Sight_Room__Portal,
+            SpotId::Irikar__Sight_Room__Item_Pedestal,
+            964,
+        ),
+        (
+            SpotId::Irikar__Sight_Room__Portal,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Irikar__Sight_Room__Item_Pedestal,
+            SpotId::Irikar__Sight_Room__Portal,
+            1200,
+        ),
+        (
+            SpotId::Irikar__Sight_Room__Item_Pedestal,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -28714,10 +29417,6 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
         (SpotId::Giguna_Breach__Fire_Room__Cuesta, SpotId::Giguna_Breach__Fire_Room__South) => {
             Some(1754)
         }
-        (
-            SpotId::Giguna_Breach__Fire_Room__East_10,
-            SpotId::Giguna_Breach__Fire_Room__West_Plateau,
-        ) => Some(1052),
         (SpotId::Giguna_Breach__Fire_Room__East_11, SpotId::Giguna_Breach__Fire_Room__South) => {
             Some(1403)
         }
@@ -28735,6 +29434,10 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
         (SpotId::Giguna_Breach__Fire_Room__South, SpotId::Giguna_Breach__Fire_Room__East_11) => {
             Some(1403)
         }
+        (
+            SpotId::Giguna_Breach__Fire_Room__West_10,
+            SpotId::Giguna_Breach__Fire_Room__West_Plateau,
+        ) => Some(1052),
         (
             SpotId::Giguna_Breach__Fire_Room__West_11,
             SpotId::Giguna_Breach__Fire_Room__First_Fire,
@@ -30624,6 +31327,98 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
         (SpotId::Glacier__Vertical_Room__West_9, SpotId::Glacier__Vertical_Room__Under_Switch) => {
             Some(1949)
         }
+        (SpotId::Irikar__Hub__Bowl_Hole, SpotId::Irikar__Hub__Sat_Tower_Middle_Ledge) => Some(1578),
+        (SpotId::Irikar__Hub__Bowl_Hole, SpotId::Irikar__Hub__Save_Point) => Some(1578),
+        (
+            SpotId::Irikar__Hub__Bowl_Middle_Ledge,
+            SpotId::Irikar__Hub__Bowl_Middle_Platform_Center,
+        ) => Some(550),
+        (SpotId::Irikar__Hub__Bowl_Middle_Platform_Center, SpotId::Irikar__Hub__Save_Point) => {
+            Some(850)
+        }
+        (
+            SpotId::Irikar__Hub__Bowl_Middle_Platform_West,
+            SpotId::Irikar__Hub__Bowl_Middle_Platform_Center,
+        ) => Some(526),
+        (SpotId::Irikar__Hub__Bowl_Middle_Platform_West, SpotId::Irikar__Hub__Save_Point) => {
+            Some(850)
+        }
+        (SpotId::Irikar__Hub__Bowl_Platform_3, SpotId::Irikar__Hub__Save_Point) => Some(701),
+        (SpotId::Irikar__Hub__Bowl_Top_Platform, SpotId::Irikar__Hub__Bowl_Hole) => Some(1999),
+        (SpotId::Irikar__Hub__East_Rim, SpotId::Irikar__Hub__Bowl_Hole) => Some(2249),
+        (SpotId::Irikar__Hub__East_Rim, SpotId::Irikar__Hub__Save_Point) => Some(2450),
+        (SpotId::Irikar__Hub__Northeast_Above_Bowl, SpotId::Irikar__Hub__East_Rim) => Some(399),
+        (SpotId::Irikar__Hub__Northwest_Above_Bowl, SpotId::Irikar__Hub__Bowl_Top_Platform) => {
+            Some(750)
+        }
+        (SpotId::Irikar__Hub__Northwest_Above_Bowl, SpotId::Irikar__Hub__West_Rim) => Some(349),
+        (SpotId::Irikar__Hub__Sat_Tower_Bottom, SpotId::Irikar__Hub__Sat_Tower_East_24) => {
+            Some(1929)
+        }
+        (
+            SpotId::Irikar__Hub__Sat_Tower_Floating_Platform,
+            SpotId::Irikar__Hub__Sat_Tower_Lower_Left_Ledge,
+        ) => Some(1550),
+        (
+            SpotId::Irikar__Hub__Sat_Tower_Floating_Platform,
+            SpotId::Irikar__Hub__Sat_Tower_Lower_Right_Ledge,
+        ) => Some(1050),
+        (
+            SpotId::Irikar__Hub__Sat_Tower_Floating_Platform,
+            SpotId::Irikar__Hub__Sat_Tower_Middle_Ledge,
+        ) => Some(550),
+        (SpotId::Irikar__Hub__Sat_Tower_Long_Ledge, SpotId::Irikar__Hub__Sat_Tower_Bottom) => {
+            Some(1052)
+        }
+        (
+            SpotId::Irikar__Hub__Sat_Tower_Lower_Left_Ledge,
+            SpotId::Irikar__Hub__Sat_Tower_Long_Ledge,
+        ) => Some(1403),
+        (
+            SpotId::Irikar__Hub__Sat_Tower_Lower_Right_Ledge,
+            SpotId::Irikar__Hub__Sat_Tower_Lower_Left_Ledge,
+        ) => Some(500),
+        (SpotId::Irikar__Hub__Sat_Tower_Middle_Ledge, SpotId::Irikar__Hub__Bowl_Hole) => Some(1578),
+        (
+            SpotId::Irikar__Hub__Sat_Tower_Middle_Ledge,
+            SpotId::Irikar__Hub__Sat_Tower_Lower_Left_Ledge,
+        ) => Some(1000),
+        (
+            SpotId::Irikar__Hub__Sat_Tower_Middle_Ledge,
+            SpotId::Irikar__Hub__Sat_Tower_Lower_Right_Ledge,
+        ) => Some(526),
+        (SpotId::Irikar__Hub__Sat_Tower_Roof_East, SpotId::Irikar__Hub__Sat_Tower_Roof_West) => {
+            Some(877)
+        }
+        (SpotId::Irikar__Hub__Sat_Tower_Roof_West, SpotId::Irikar__Hub__Sat_Tower_Roof_East) => {
+            Some(877)
+        }
+        (
+            SpotId::Irikar__Hub__Sat_Tower_Top_Ledge,
+            SpotId::Irikar__Hub__Sat_Tower_Floating_Platform,
+        ) => Some(550),
+        (
+            SpotId::Irikar__Hub__Sat_Tower_Top_Ledge,
+            SpotId::Irikar__Hub__Sat_Tower_Lower_Left_Ledge,
+        ) => Some(2100),
+        (
+            SpotId::Irikar__Hub__Sat_Tower_Top_Ledge,
+            SpotId::Irikar__Hub__Sat_Tower_Lower_Right_Ledge,
+        ) => Some(1600),
+        (SpotId::Irikar__Hub__Save_Point, SpotId::Irikar__Hub__Bowl_Platform_3) => Some(1799),
+        (SpotId::Irikar__Hub__West_Rim, SpotId::Irikar__Hub__Bowl_Top_Platform) => Some(701),
+        (SpotId::Irikar__Sight_Room__Item_Pedestal, SpotId::Irikar__Sight_Room__Portal) => {
+            Some(1200)
+        }
+        (SpotId::Irikar__Sight_Room__Lower_Ledge, SpotId::Irikar__Sight_Room__Item_Pedestal) => {
+            Some(1929)
+        }
+        (SpotId::Irikar__Sight_Room__Lower_Ledge, SpotId::Irikar__Sight_Room__Portal) => Some(964),
+        (SpotId::Irikar__Sight_Room__Lower_Ledge, SpotId::Irikar__Sight_Room__West_24) => Some(701),
+        (SpotId::Irikar__Sight_Room__Portal, SpotId::Irikar__Sight_Room__Item_Pedestal) => {
+            Some(964)
+        }
+        (SpotId::Irikar__Sight_Room__West_24, SpotId::Irikar__Sight_Room__Lower_Ledge) => Some(701),
         _ => None,
     }
 }
@@ -32774,10 +33569,6 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
         (SpotId::Giguna_Breach__Fire_Room__Cuesta, SpotId::Giguna_Breach__Fire_Room__South) => {
             (Some(1754), vec![])
         }
-        (
-            SpotId::Giguna_Breach__Fire_Room__East_10,
-            SpotId::Giguna_Breach__Fire_Room__West_Plateau,
-        ) => (Some(1052), vec![]),
         (SpotId::Giguna_Breach__Fire_Room__East_11, SpotId::Giguna_Breach__Fire_Room__South) => {
             (Some(1403), vec![])
         }
@@ -32795,6 +33586,10 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
         (SpotId::Giguna_Breach__Fire_Room__South, SpotId::Giguna_Breach__Fire_Room__East_11) => {
             (Some(1403), vec![])
         }
+        (
+            SpotId::Giguna_Breach__Fire_Room__West_10,
+            SpotId::Giguna_Breach__Fire_Room__West_Plateau,
+        ) => (Some(1052), vec![]),
         (
             SpotId::Giguna_Breach__Fire_Room__West_11,
             SpotId::Giguna_Breach__Fire_Room__First_Fire,
@@ -35051,6 +35846,120 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
         }
         (SpotId::Glacier__Vertical_Room__West_9, SpotId::Glacier__Vertical_Room__Under_Switch) => {
             (Some(1949), vec![])
+        }
+        (SpotId::Irikar__Hub__Bowl_Hole, SpotId::Irikar__Hub__Sat_Tower_Middle_Ledge) => {
+            (Some(1578), vec![])
+        }
+        (SpotId::Irikar__Hub__Bowl_Hole, SpotId::Irikar__Hub__Save_Point) => (Some(1578), vec![]),
+        (
+            SpotId::Irikar__Hub__Bowl_Middle_Ledge,
+            SpotId::Irikar__Hub__Bowl_Middle_Platform_Center,
+        ) => (Some(550), vec![]),
+        (SpotId::Irikar__Hub__Bowl_Middle_Platform_Center, SpotId::Irikar__Hub__Save_Point) => {
+            (Some(850), vec![])
+        }
+        (
+            SpotId::Irikar__Hub__Bowl_Middle_Platform_West,
+            SpotId::Irikar__Hub__Bowl_Middle_Platform_Center,
+        ) => (Some(526), vec![]),
+        (SpotId::Irikar__Hub__Bowl_Middle_Platform_West, SpotId::Irikar__Hub__Save_Point) => {
+            (Some(850), vec![])
+        }
+        (SpotId::Irikar__Hub__Bowl_Platform_3, SpotId::Irikar__Hub__Save_Point) => {
+            (Some(701), vec![])
+        }
+        (SpotId::Irikar__Hub__Bowl_Top_Platform, SpotId::Irikar__Hub__Bowl_Hole) => {
+            (Some(1999), vec![])
+        }
+        (SpotId::Irikar__Hub__East_Rim, SpotId::Irikar__Hub__Bowl_Hole) => (Some(2249), vec![]),
+        (SpotId::Irikar__Hub__East_Rim, SpotId::Irikar__Hub__Save_Point) => (Some(2450), vec![]),
+        (SpotId::Irikar__Hub__Northeast_Above_Bowl, SpotId::Irikar__Hub__East_Rim) => {
+            (Some(399), vec![])
+        }
+        (SpotId::Irikar__Hub__Northwest_Above_Bowl, SpotId::Irikar__Hub__Bowl_Top_Platform) => {
+            (Some(750), vec![])
+        }
+        (SpotId::Irikar__Hub__Northwest_Above_Bowl, SpotId::Irikar__Hub__West_Rim) => {
+            (Some(349), vec![])
+        }
+        (SpotId::Irikar__Hub__Sat_Tower_Bottom, SpotId::Irikar__Hub__Sat_Tower_East_24) => {
+            (Some(1929), vec![])
+        }
+        (
+            SpotId::Irikar__Hub__Sat_Tower_Floating_Platform,
+            SpotId::Irikar__Hub__Sat_Tower_Lower_Left_Ledge,
+        ) => (Some(1550), vec![]),
+        (
+            SpotId::Irikar__Hub__Sat_Tower_Floating_Platform,
+            SpotId::Irikar__Hub__Sat_Tower_Lower_Right_Ledge,
+        ) => (Some(1050), vec![]),
+        (
+            SpotId::Irikar__Hub__Sat_Tower_Floating_Platform,
+            SpotId::Irikar__Hub__Sat_Tower_Middle_Ledge,
+        ) => (Some(550), vec![]),
+        (SpotId::Irikar__Hub__Sat_Tower_Long_Ledge, SpotId::Irikar__Hub__Sat_Tower_Bottom) => {
+            (Some(1052), vec![])
+        }
+        (
+            SpotId::Irikar__Hub__Sat_Tower_Lower_Left_Ledge,
+            SpotId::Irikar__Hub__Sat_Tower_Long_Ledge,
+        ) => (Some(1403), vec![]),
+        (
+            SpotId::Irikar__Hub__Sat_Tower_Lower_Right_Ledge,
+            SpotId::Irikar__Hub__Sat_Tower_Lower_Left_Ledge,
+        ) => (Some(500), vec![]),
+        (SpotId::Irikar__Hub__Sat_Tower_Middle_Ledge, SpotId::Irikar__Hub__Bowl_Hole) => {
+            (Some(1578), vec![])
+        }
+        (
+            SpotId::Irikar__Hub__Sat_Tower_Middle_Ledge,
+            SpotId::Irikar__Hub__Sat_Tower_Lower_Left_Ledge,
+        ) => (Some(1000), vec![]),
+        (
+            SpotId::Irikar__Hub__Sat_Tower_Middle_Ledge,
+            SpotId::Irikar__Hub__Sat_Tower_Lower_Right_Ledge,
+        ) => (Some(526), vec![]),
+        (SpotId::Irikar__Hub__Sat_Tower_Roof_East, SpotId::Irikar__Hub__Sat_Tower_Roof_West) => {
+            (Some(877), vec![])
+        }
+        (SpotId::Irikar__Hub__Sat_Tower_Roof_West, SpotId::Irikar__Hub__Sat_Tower_Roof_East) => {
+            (Some(877), vec![])
+        }
+        (
+            SpotId::Irikar__Hub__Sat_Tower_Top_Ledge,
+            SpotId::Irikar__Hub__Sat_Tower_Floating_Platform,
+        ) => (Some(550), vec![]),
+        (
+            SpotId::Irikar__Hub__Sat_Tower_Top_Ledge,
+            SpotId::Irikar__Hub__Sat_Tower_Lower_Left_Ledge,
+        ) => (Some(2100), vec![]),
+        (
+            SpotId::Irikar__Hub__Sat_Tower_Top_Ledge,
+            SpotId::Irikar__Hub__Sat_Tower_Lower_Right_Ledge,
+        ) => (Some(1600), vec![]),
+        (SpotId::Irikar__Hub__Save_Point, SpotId::Irikar__Hub__Bowl_Platform_3) => {
+            (Some(1799), vec![])
+        }
+        (SpotId::Irikar__Hub__West_Rim, SpotId::Irikar__Hub__Bowl_Top_Platform) => {
+            (Some(701), vec![])
+        }
+        (SpotId::Irikar__Sight_Room__Item_Pedestal, SpotId::Irikar__Sight_Room__Portal) => {
+            (Some(1200), vec![])
+        }
+        (SpotId::Irikar__Sight_Room__Lower_Ledge, SpotId::Irikar__Sight_Room__Item_Pedestal) => {
+            (Some(1929), vec![])
+        }
+        (SpotId::Irikar__Sight_Room__Lower_Ledge, SpotId::Irikar__Sight_Room__Portal) => {
+            (Some(964), vec![])
+        }
+        (SpotId::Irikar__Sight_Room__Lower_Ledge, SpotId::Irikar__Sight_Room__West_24) => {
+            (Some(701), vec![])
+        }
+        (SpotId::Irikar__Sight_Room__Portal, SpotId::Irikar__Sight_Room__Item_Pedestal) => {
+            (Some(964), vec![])
+        }
+        (SpotId::Irikar__Sight_Room__West_24, SpotId::Irikar__Sight_Room__Lower_Ledge) => {
+            (Some(701), vec![])
         }
         _ => (None, Vec::new()),
     }

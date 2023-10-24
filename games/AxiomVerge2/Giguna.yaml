@@ -1429,6 +1429,8 @@ areas:
           time: 1.5  # ?
     - name: Portal
       coord: [15.475, 6.6]
+      data:
+        flipside: Giguna Breach > Peak > Save Point
       local:
         - to: Portal Left
         - to: Small Ledge
@@ -1442,9 +1444,9 @@ areas:
           movement: base
       actions:
         - name: Enter Portal
-          to: Giguna Breach > Peak > Save Point
           req: ^mode == 'drone'
-          do: $portal(`Giguna Breach > Peak > Save Point`)
+          do: $portal(^flipside)
+          to: ^flipside
           tags: [portal]
     - name: Interior Ledge
       coord: [15.65, 6.2]
@@ -1494,6 +1496,8 @@ areas:
     # post-breach
     - name: Save Point
       coord: [14.8, 5.8]
+      data:
+        flipside: Giguna Breach > Peak > Portal
       local:
         - to: Switch
           jumps: 1

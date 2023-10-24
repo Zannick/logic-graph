@@ -487,6 +487,7 @@ areas:
         - to: Bottom
           jumps_down: 1
     - name: Hidden Exit
+      coord: [33.95, 18.8]
 
 # TODO: most of this movement requires Underwater_Movement
 # but we can't (yet) restrict to that other than making exits

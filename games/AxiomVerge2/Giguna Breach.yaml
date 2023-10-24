@@ -9,6 +9,8 @@ areas:
   spots:
     - name: Save Point
       coord: [15.475, 6.6]
+      data:
+        flipside: Giguna > Ruins Top > Portal
       local:
         - to: East Passage
       actions:
@@ -55,6 +57,8 @@ areas:
         - to: Portal
     - name: Portal
       coord: [14.8, 5.8]
+      data:
+        flipside: Giguna > Ruins Top > Save Point
       local:
         - to: Upper West
           jumps: 3
@@ -64,8 +68,8 @@ areas:
           time: 1  # ?
       actions:
         - name: Portal
-          to: Giguna > Ruins Top > Save Point
-          do: $portal(`Giguna > Ruins Top > Save Point`)
+          do: $portal(^flipside)
+          to: ^flipside
           tags: [portal]
 
 - name: Chimney
@@ -136,6 +140,9 @@ areas:
         - to: Passage Lip
         - to: East Ledge
         - to: Cubby Entrance
+      exits:
+        - to: Chimney > South
+          tags: [ydoor]
     - name: Passage Lip
       coord: [13.4, 9.3]
       local:
@@ -310,6 +317,8 @@ areas:
         - to: High Ledge
           req: $hook
           time: 1.3
+        - to: Fire Room > West 10
+          tags: [xdoor]
     - name: High Ledge
       coord: [14.65, 9.4]
       local:
@@ -378,10 +387,10 @@ areas:
         - to: First Fire
         - to: Cuesta
       exits:
-        - to: East 10
+        - to: West 10
           req: $hook
           time: 0.7
-    - name: East 10
+    - name: West 10
       coord: [15.1, 9.8]
       local:
         - to: West Plateau

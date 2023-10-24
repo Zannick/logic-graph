@@ -449,7 +449,7 @@ subgraph Giguna_Breach
         Giguna_Breach__Fire_Room__South(South);
         Giguna_Breach__Fire_Room__East_11(East 11);
         Giguna_Breach__Fire_Room__West_Plateau(West Plateau);
-        Giguna_Breach__Fire_Room__East_10(East 10);
+        Giguna_Breach__Fire_Room__West_10(West 10);
     end
     subgraph Giguna_Breach__Slingshot[Slingshot]
         Giguna_Breach__Slingshot__West(West);
@@ -976,12 +976,42 @@ subgraph Glacier
         Glacier__Apocalypse_Entry__Terminal(Terminal);
     end
 end
+subgraph Irikar_Breach
+    subgraph Irikar_Breach__Save_Room[Save Room]
+        Irikar_Breach__Save_Room__Save_Point(Save Point);
+    end
+end
 subgraph Irikar
     subgraph Irikar__Hub[Hub]
         Irikar__Hub__Northwest(Northwest);
         Irikar__Hub__North_Above_Portal(North Above Portal);
         Irikar__Hub__Northwest_Above_Bowl(Northwest Above Bowl);
         Irikar__Hub__Northeast_Above_Bowl(Northeast Above Bowl);
+        Irikar__Hub__West_Rim(West Rim);
+        Irikar__Hub__East_Rim(East Rim);
+        Irikar__Hub__Bowl_Top_Platform(Bowl Top Platform);
+        Irikar__Hub__Bowl_Middle_Ledge(Bowl Middle Ledge);
+        Irikar__Hub__Bowl_Middle_Platform_Center(Bowl Middle Platform Center);
+        Irikar__Hub__Bowl_Middle_Platform_West(Bowl Middle Platform West);
+        Irikar__Hub__Bowl_Platform_3(Bowl Platform 3);
+        Irikar__Hub__Save_Point(Save Point);
+        Irikar__Hub__Bowl_Hole(Bowl Hole);
+        Irikar__Hub__Sat_Tower_Roof_West(Sat Tower Roof West);
+        Irikar__Hub__Sat_Tower_Roof_East(Sat Tower Roof East);
+        Irikar__Hub__Sat_Tower_Middle_Ledge(Sat Tower Middle Ledge);
+        Irikar__Hub__Sat_Tower_Floating_Platform(Sat Tower Floating Platform);
+        Irikar__Hub__Sat_Tower_Top_Ledge(Sat Tower Top Ledge);
+        Irikar__Hub__Sat_Tower_Lower_Right_Ledge(Sat Tower Lower Right Ledge);
+        Irikar__Hub__Sat_Tower_Lower_Left_Ledge(Sat Tower Lower Left Ledge);
+        Irikar__Hub__Sat_Tower_Long_Ledge(Sat Tower Long Ledge);
+        Irikar__Hub__Sat_Tower_Bottom(Sat Tower Bottom);
+        Irikar__Hub__Sat_Tower_East_24(Sat Tower East 24);
+    end
+    subgraph Irikar__Sight_Room[Sight Room]
+        Irikar__Sight_Room__West_24(West 24);
+        Irikar__Sight_Room__Lower_Ledge(Lower Ledge);
+        Irikar__Sight_Room__Portal(Portal);
+        Irikar__Sight_Room__Item_Pedestal(Item Pedestal);
     end
 end
 subgraph Menu
@@ -1164,6 +1194,7 @@ Giguna_Breach__Ascent__Bottom --> Giguna_Breach__Ascent__Top
 Giguna_Breach__Ascent__West_6 <--> Giguna_Breach__Peak__East_6
 Giguna_Breach__Ascent__West_9 <--> Giguna_Breach__Central__East_9
 Giguna_Breach__Below_Chimney__Cubby_Entrance <--> Giguna_Breach__Cubby__Entrance
+Giguna_Breach__Below_Chimney__North <--> Giguna_Breach__Chimney__South
 Giguna_Breach__Below_Chimney__Southwest <--> Giguna_Breach__SW_Save__North
 Giguna_Breach__Central__East_9 --> Giguna_Breach__Central__East_Brick
 Giguna_Breach__Central__East_Brick --> Giguna_Breach__Central__Middle_Statue
@@ -1176,13 +1207,12 @@ Giguna_Breach__Central__West_8 <--> Giguna_Breach__Chimney__East_8
 Giguna_Breach__Central__West_9 --> Giguna_Breach__Central__Wall
 Giguna_Breach__Central__West_9 <--> Giguna_Breach__Chimney__East_9
 Giguna_Breach__Chimney__East_7 <--> Giguna_Breach__Peak__West_7
-Giguna_Breach__Chimney__South --> Giguna_Breach__Below_Chimney__North
-Giguna_Breach__Fire_Room__East_10 --> Giguna_Breach__Grid_14_10_11__East_10
 Giguna_Breach__Fire_Room__East_11 <--> Giguna_Breach__Slingshot__West
 Giguna_Breach__Fire_Room__First_Fire --> Giguna_Breach__Fire_Room__West_Plateau
 Giguna_Breach__Fire_Room__South --> Giguna_Breach__Fire_Room__Cuesta
+Giguna_Breach__Fire_Room__West_10 <--> Giguna_Breach__Grid_14_10_11__East_10
 Giguna_Breach__Fire_Room__West_11 <--> Giguna_Breach__Grid_14_10_11__East_11
-Giguna_Breach__Fire_Room__West_Plateau --> Giguna_Breach__Fire_Room__East_10
+Giguna_Breach__Fire_Room__West_Plateau --> Giguna_Breach__Fire_Room__West_10
 Giguna_Breach__Grid_14_10_11__East_10 --> Giguna_Breach__Grid_14_10_11__High_Ledge
 Giguna_Breach__Grid_14_10_11__South <--> Giguna_Breach__Robopede__North
 Giguna_Breach__Peak__East_6 --> Giguna_Breach__Peak__Upper_East
@@ -1429,6 +1459,17 @@ Glacier__Vertical_Room__Mid_9 --> Glacier__Vertical_Room__Peak
 Glacier__Vertical_Room__Past_Gate <--> Glacier__Vertical_Room__Under_Switch
 Glacier__Vertical_Room__Peak --> Glacier__Vertical_Room__West_8
 Glacier__Vertical_Room__Under_Switch --> Glacier__Vertical_Room__Mid_9
+Irikar__Hub__Bowl_Middle_Ledge --> Irikar__Hub__Bowl_Top_Platform
+Irikar__Hub__Bowl_Middle_Platform_Center --> Irikar__Hub__Bowl_Middle_Ledge
+Irikar__Hub__Bowl_Middle_Platform_West --> Irikar__Hub__Bowl_Middle_Ledge
+Irikar__Hub__Bowl_Platform_3 --> Irikar__Hub__Bowl_Middle_Platform_Center
+Irikar__Hub__Bowl_Top_Platform --> Irikar__Hub__West_Rim
+Irikar__Hub__East_Rim --> Irikar__Hub__Sat_Tower_Roof_West
+Irikar__Hub__Sat_Tower_East_24 <--> Irikar__Sight_Room__West_24
+Irikar__Hub__Sat_Tower_Floating_Platform --> Irikar__Hub__Sat_Tower_Top_Ledge
+Irikar__Hub__Sat_Tower_Middle_Ledge --> Irikar__Hub__Sat_Tower_Floating_Platform
+Irikar__Hub__Save_Point --> Irikar__Hub__Bowl_Hole
+Irikar__Hub__West_Rim --> Irikar__Hub__East_Rim
 Menu__Upgrade_Menu__Combat <--> Menu__Upgrade_Menu__Drone
 Menu__Upgrade_Menu__Combat <--> Menu__Upgrade_Menu__Infection
 Menu__Upgrade_Menu__Combat <--> Menu__Upgrade_Menu__Physiology

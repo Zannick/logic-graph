@@ -347,7 +347,7 @@ macro_rules! helper__attract {
 }
 
 /// $all_notes (  )
-/// [Dear_Ernest, Researchers_Missing, Letter_from_Trace,  Heretics_Tablet, Terminal_Breakthrough_1, Companies_Layoff, Record_Losses,  Under_Siege, The_Ideal_Kiengir, Building_of_the_School]
+/// [Dear_Ernest, Researchers_Missing, Letter_from_Trace,  Heretics_Tablet, Terminal_Breakthrough_1, Companies_Layoff, Record_Losses,  Under_Siege, The_Ideal_Kiengir, Building_of_the_School, Commemorative_Speech]
 #[macro_export]
 macro_rules! helper__all_notes {
     ($ctx:expr) => {{
@@ -363,6 +363,7 @@ macro_rules! helper__all_notes {
             && $ctx.has(Item::Under_Siege)
             && $ctx.has(Item::The_Ideal_Kiengir)
             && $ctx.has(Item::Building_of_the_School)
+            && $ctx.has(Item::Commemorative_Speech)
     }};
 }
 
@@ -411,7 +412,7 @@ macro_rules! helper__other_items {
 }
 
 /// $all_urns (  )
-/// [Amashilama, Ledge_Grab, Infect, Remote_Drone, Shockwave, Wall_Climb, Slingshot_Hook]
+/// [Amashilama, Ledge_Grab, Infect, Remote_Drone, Shockwave, Wall_Climb, Slingshot_Hook, Breach_Sight]
 #[macro_export]
 macro_rules! helper__all_urns {
     ($ctx:expr) => {{
@@ -424,6 +425,7 @@ macro_rules! helper__all_urns {
             && $ctx.has(Item::Shockwave)
             && $ctx.has(Item::Wall_Climb)
             && $ctx.has(Item::Slingshot_Hook)
+            && $ctx.has(Item::Breach_Sight)
     }};
 }
 
