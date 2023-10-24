@@ -5103,6 +5103,11 @@ pub fn local_travel_time(
         ([false], SpotId::Irikar__Hub__West_Rim, SpotId::Irikar__Hub__Bowl_Top_Platform) => 701,
         ([false], SpotId::Irikar__Hub__East_Rim, SpotId::Irikar__Hub__Save_Point) => 2450,
         ([false], SpotId::Irikar__Hub__East_Rim, SpotId::Irikar__Hub__Bowl_Hole) => 2249,
+        (
+            [false],
+            SpotId::Irikar__Hub__Bowl_Top_Platform,
+            SpotId::Irikar__Hub__Bowl_Middle_Ledge,
+        ) => 699,
         ([false], SpotId::Irikar__Hub__Bowl_Top_Platform, SpotId::Irikar__Hub__Bowl_Hole) => 1999,
         (
             [false],
@@ -10250,6 +10255,11 @@ pub fn local_travel_time(
         ([true], SpotId::Irikar__Hub__West_Rim, SpotId::Irikar__Hub__Bowl_Top_Platform) => 701,
         ([true], SpotId::Irikar__Hub__East_Rim, SpotId::Irikar__Hub__Save_Point) => 2450,
         ([true], SpotId::Irikar__Hub__East_Rim, SpotId::Irikar__Hub__Bowl_Hole) => 2249,
+        (
+            [true],
+            SpotId::Irikar__Hub__Bowl_Top_Platform,
+            SpotId::Irikar__Hub__Bowl_Middle_Ledge,
+        ) => 699,
         ([true], SpotId::Irikar__Hub__Bowl_Top_Platform, SpotId::Irikar__Hub__Bowl_Hole) => 1999,
         (
             [true],
@@ -13513,7 +13523,7 @@ pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
         (SpotId::Irikar__Hub__West_Rim, SpotId::Irikar__Hub__Bowl_Top_Platform) => true,
         (SpotId::Irikar__Hub__East_Rim, SpotId::Irikar__Hub__Save_Point) => true,
         (SpotId::Irikar__Hub__East_Rim, SpotId::Irikar__Hub__Bowl_Hole) => true,
-        (SpotId::Irikar__Hub__Bowl_Top_Platform, SpotId::Irikar__Hub__Bowl_Midle_Ledge) => true,
+        (SpotId::Irikar__Hub__Bowl_Top_Platform, SpotId::Irikar__Hub__Bowl_Middle_Ledge) => true,
         (SpotId::Irikar__Hub__Bowl_Top_Platform, SpotId::Irikar__Hub__Bowl_Hole) => true,
         (
             SpotId::Irikar__Hub__Bowl_Middle_Ledge,
@@ -27474,6 +27484,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Irikar__Hub__Bowl_Top_Platform,
+            SpotId::Irikar__Hub__Bowl_Middle_Ledge,
+            699,
+        ),
+        (
+            SpotId::Irikar__Hub__Bowl_Top_Platform,
             SpotId::Irikar__Hub__Bowl_Hole,
             1999,
         ),
@@ -31345,6 +31360,9 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
         }
         (SpotId::Irikar__Hub__Bowl_Platform_3, SpotId::Irikar__Hub__Save_Point) => Some(701),
         (SpotId::Irikar__Hub__Bowl_Top_Platform, SpotId::Irikar__Hub__Bowl_Hole) => Some(1999),
+        (SpotId::Irikar__Hub__Bowl_Top_Platform, SpotId::Irikar__Hub__Bowl_Middle_Ledge) => {
+            Some(699)
+        }
         (SpotId::Irikar__Hub__East_Rim, SpotId::Irikar__Hub__Bowl_Hole) => Some(2249),
         (SpotId::Irikar__Hub__East_Rim, SpotId::Irikar__Hub__Save_Point) => Some(2450),
         (SpotId::Irikar__Hub__Northeast_Above_Bowl, SpotId::Irikar__Hub__East_Rim) => Some(399),
@@ -35870,6 +35888,9 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
         }
         (SpotId::Irikar__Hub__Bowl_Top_Platform, SpotId::Irikar__Hub__Bowl_Hole) => {
             (Some(1999), vec![])
+        }
+        (SpotId::Irikar__Hub__Bowl_Top_Platform, SpotId::Irikar__Hub__Bowl_Middle_Ledge) => {
+            (Some(699), vec![])
         }
         (SpotId::Irikar__Hub__East_Rim, SpotId::Irikar__Hub__Bowl_Hole) => (Some(2249), vec![]),
         (SpotId::Irikar__Hub__East_Rim, SpotId::Irikar__Hub__Save_Point) => (Some(2450), vec![]),

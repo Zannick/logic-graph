@@ -42,7 +42,7 @@ areas:
     - name: Bowl Top Platform
       coord: [12.4, 20.85]
       local:
-        - to: Bowl Midle Ledge
+        - to: Bowl Middle Ledge
           jumps_down: 1
         - to: Bowl Hole
           jumps_down: 2

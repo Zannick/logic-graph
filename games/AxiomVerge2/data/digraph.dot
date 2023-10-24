@@ -3032,6 +3032,7 @@ digraph AxiomVerge2 {
     Irikar__Hub__West_Rim -> Irikar__Hub__Bowl_Top_Platform;
     Irikar__Hub__East_Rim -> Irikar__Hub__Save_Point;
     Irikar__Hub__East_Rim -> Irikar__Hub__Bowl_Hole;
+    Irikar__Hub__Bowl_Top_Platform -> Irikar__Hub__Bowl_Middle_Ledge;
     Irikar__Hub__Bowl_Top_Platform -> Irikar__Hub__Bowl_Hole;
     Irikar__Hub__Bowl_Middle_Ledge -> Irikar__Hub__Bowl_Middle_Platform_Center;
     Irikar__Hub__Bowl_Middle_Platform_Center -> Irikar__Hub__Save_Point;
