@@ -469,7 +469,7 @@ class GameLogic(object):
         for s in self.settings.keys() - self.used_settings.keys():
             logging.warning(f'Did not find usage of setting {s}')
 
-        hv = HelperVisitor(self.helpers, self.context_types, self.settings)
+        hv = HelperVisitor(self.helpers, self.context_types, self.data_types, self.settings)
         _visit(hv, True)
 
         cv = ContextVisitor(self.context_types, self.context_values, self.data_types, self.data_defaults)

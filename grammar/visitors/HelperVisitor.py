@@ -7,9 +7,10 @@ from grammar import RulesParser, RulesVisitor
 
 class HelperVisitor(RulesVisitor):
 
-    def __init__(self, helpers, context_types, settings):
+    def __init__(self, helpers, context_types, data_types, settings):
         self.helpers = helpers
         self.context_types = context_types
+        self.data_types = data_types
         self.settings = settings
         self.ctxdict = {}
         self.name = ''
@@ -35,7 +36,11 @@ class HelperVisitor(RulesVisitor):
             return self.settings[s]['type']
         else:
             ref = self._getFullRef(str(valueCtx.REF())[1:])
-            if ref not in self.context_types:
+            if ref in self.context_types:
+                return self.context_types[ref]
+            elif ref in self.data_types:
+                return self.data_types[ref]
+            else:
                 # might be an arg
                 if self.name.startswith('helpers:'):
                     args = self.helpers[self.name.split(':', 1)[1]]['args']
@@ -44,7 +49,6 @@ class HelperVisitor(RulesVisitor):
                     return args[0].type
                 self.errors.append(f'Unrecognized ctxvar in rule {self.name}: ^{ref}')
                 return ''
-            return self.context_types[ref]
         
 
     def visitInvoke(self, ctx):
