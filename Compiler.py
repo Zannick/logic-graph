@@ -1412,6 +1412,7 @@ class GameLogic(object):
             'get_exit_target': get_exit_target,
             'get_int_type_for_max': get_int_type_for_max,
             'get_spot_reference': get_spot_reference,
+            'hex': hex,
             'prToRust': self.prToRust,
             'str_to_rusttype': str_to_rusttype,
             'translate_ctx': self.translate_ctx,

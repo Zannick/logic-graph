@@ -60,7 +60,7 @@ bitflags!{
     #[derive(Copy, Clone, Debug, {% if not defaults %}Default, {% endif %}PartialEq, Eq, Hash, Serialize, Deserialize)]
     pub struct ContextBits{{ loop.index }} : u{{ size }} {
 %% for v in vars
-        const {{ v|upper }} = 1 << {{ loop.index0 }};
+        const {{ v|upper }} = {{ (2 ** loop.index0) | hex }};
 %% endfor
     }
 }
