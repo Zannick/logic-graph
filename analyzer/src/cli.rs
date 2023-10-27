@@ -1,5 +1,6 @@
 use crate::algo::Search;
 use crate::context::*;
+use crate::db::HeapDB;
 use crate::route::*;
 use crate::world::*;
 use clap::{Parser, Subcommand};
@@ -89,8 +90,11 @@ where
         }
         Commands::Info => {
             println!(
-                "data sizes: Context={} ContextWrapper={} World={}\nstart overrides: {}\nobjective: {}",
-                size_of::<T>(), size_of::<ContextWrapper<T>>(), size_of::<W>(),
+                "data sizes: Context={} ContextWrapper={} serialized={} World={}\nstart overrides: {}\nobjective: {}",
+                size_of::<T>(),
+                size_of::<ContextWrapper<T>>(),
+                HeapDB::<W, T>::serialize_state(&startctx).len(),
+                size_of::<W>(),
                 startctx.diff(&T::default()),
                 world.objective_name()
             );

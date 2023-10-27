@@ -429,7 +429,7 @@ where
 
     /// The key for a T (Ctx) in the statedb, and the value in the queue db
     /// are all T itself.
-    fn serialize_state(el: &T) -> Vec<u8> {
+    pub(crate) fn serialize_state(el: &T) -> Vec<u8> {
         let mut key = Vec::with_capacity(std::mem::size_of::<T>());
         el.serialize(&mut Serializer::new(&mut key)).unwrap();
         key
