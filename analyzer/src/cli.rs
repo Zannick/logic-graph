@@ -89,7 +89,7 @@ where
         }
         Commands::Info => {
             println!(
-                "data sizes: Context={} with wrapper={} World={}\nstart overrides: {}\nobjective: {}",
+                "data sizes: Context={} ContextWrapper={} World={}\nstart overrides: {}\nobjective: {}",
                 size_of::<T>(), size_of::<ContextWrapper<T>>(), size_of::<W>(),
                 startctx.diff(&T::default()),
                 world.objective_name()

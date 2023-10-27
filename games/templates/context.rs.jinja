@@ -504,7 +504,11 @@ impl context::Ctx for Context {
             list.push(format!("Skips: {:+}", self.skips - old.skips));
         }
 
-        list.join("\n")
+        if list.is_empty() {
+            String::from("NONE")
+        } else {
+            list.join("\n")
+        }
     }
 }
 
