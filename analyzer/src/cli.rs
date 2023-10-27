@@ -6,6 +6,7 @@ use clap::{Parser, Subcommand};
 use std::fmt::Debug;
 use std::fs::File;
 use std::io::Read;
+use std::mem::size_of;
 use std::path::{Path, PathBuf};
 
 #[derive(Parser)]
@@ -40,6 +41,9 @@ pub enum Commands {
         #[arg(value_name = "FILE")]
         route: PathBuf,
     },
+
+    /// provides debug info about the binary
+    Info,
 }
 
 pub fn read_from_file<P>(p: &P) -> String
@@ -80,6 +84,15 @@ where
                 match debug_route(world, &startctx, &rstr) {
                     Ok(s) | Err(s) => s,
                 }
+            );
+            Ok(())
+        }
+        Commands::Info => {
+            println!(
+                "data sizes: Context={} with wrapper={} World={}\nstart overrides: {}\nobjective: {}",
+                size_of::<T>(), size_of::<ContextWrapper<T>>(), size_of::<W>(),
+                startctx.diff(&T::default()),
+                world.objective_name()
             );
             Ok(())
         }

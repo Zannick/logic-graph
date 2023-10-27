@@ -301,6 +301,10 @@ impl world::World for World {
     type Warp = Warp;
     const NUM_LOCATIONS: u32 = {{ gl.locations()|list|count }};
 
+    fn objective_name(&self) -> String {
+        format!("{}", self.objective)
+    }
+
 %% for point in ['Location', 'Exit', 'Action']
     fn get_{{ point|lower }}(&self, id: {{ point }}Id)
          -> &{{ point }} { &self.{{ point|lower }}s[id] }

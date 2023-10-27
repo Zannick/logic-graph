@@ -12406,6 +12406,10 @@ impl world::World for World {
     type Warp = Warp;
     const NUM_LOCATIONS: u32 = 152;
 
+    fn objective_name(&self) -> String {
+        format!("{}", self.objective)
+    }
+
     fn get_location(&self, id: LocationId) -> &Location {
         &self.locations[id]
     }
