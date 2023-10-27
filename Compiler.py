@@ -1443,6 +1443,7 @@ class GameLogic(object):
                     'prices.rs', 'rules.rs', 'movements.rs', 'settings.rs'],
             'benches': ['bench.rs'],
             'bin': ['main.rs'],
+            'tests': ['unittest.rs'],
         }
         rustfiles = []
         for dirname, fnames in files.items():
