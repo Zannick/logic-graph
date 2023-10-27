@@ -272,6 +272,13 @@ pub struct Spot {
     pub area_spots: Range<usize>,
 }
 
+static RAW_SPOTS: [SpotId; {{ gl.spots()|list|length + 1 }}] = [ %# +1 as long as we have a default
+    SpotId::None,
+%% for spot_id in gl.spots()|map(attribute='id')|sort
+    SpotId::{{ spot_id }},
+%% endfor
+];
+
 #[derive(Clone, Debug)]
 pub struct World {
     pub objective: Objective,
@@ -285,7 +292,6 @@ pub struct World {
     exits: EnumMap<ExitId, Exit>,
     actions: EnumMap<ActionId, Action>,
     warps: EnumMap<WarpId, Warp>,
-    raw_spots: [SpotId; {{ gl.spots()|list|length + 1 }}], %# +1 as long as we have a default
     // Index ranges for slices into the above arrays
     spots: EnumMap<SpotId, Spot>,
     global_actions: Range<usize>,
@@ -347,7 +353,7 @@ impl world::World for World {
     }
     fn get_area_spots(&self, spot_id: SpotId) -> &[SpotId] {
         let r = &self.spots[spot_id].area_spots;
-        &self.raw_spots[r.start..r.end]
+        &RAW_SPOTS[r.start..r.end]
     }
     fn get_warps(&self) -> &[Warp] { &self.warps.as_slice() }
 
@@ -392,7 +398,7 @@ impl world::World for World {
     }
 
     fn get_all_spots(&self) -> &[SpotId] {
-        self.raw_spots.as_slice()
+        RAW_SPOTS.as_slice()
     }
 
     fn skip_unused_items(&self, ctx: &mut Context) {
@@ -501,7 +507,6 @@ impl World {
             exits: build_exits(),
             actions: build_actions(),
             warps: build_warps(),
-            raw_spots: [SpotId::None, SpotId::{{ gl.spots()|map(attribute='id')|sort|join(', SpotId::') }}],
             spots: build_spots(),
             global_actions: Range {
                 {% if global_actions -%}
