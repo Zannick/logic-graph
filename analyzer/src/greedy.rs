@@ -21,7 +21,6 @@ where
     let spot_map = accessible_spots(world, ctx, max_time);
     let mut orig_vec: Vec<ContextWrapper<T>> = spot_map
         .into_values()
-        .filter_map(|x| x)
         .collect();
     orig_vec.sort_unstable_by_key(|ctx| ctx.elapsed());
     if let Some(ctx) = orig_vec
@@ -55,7 +54,6 @@ where
                 newctx.activate(action);
                 for nextctx in accessible_spots(world, newctx, max_time)
                     .into_values()
-                    .flatten()
                 {
                     if spot_has_locations(world, nextctx.get()) {
                         if depth > 0 {
@@ -80,7 +78,6 @@ where
                 newctx.activate(action);
                 for nextctx in accessible_spots(world, newctx, max_time)
                     .into_values()
-                    .flatten()
                 {
                     if spot_has_locations(world, nextctx.get()) {
                         return Ok(nextctx);

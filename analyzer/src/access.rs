@@ -1,13 +1,12 @@
 //! Functions related to access graphs, and accessing locations.
 
-use enum_map::EnumMap;
-
 use crate::context::*;
 use crate::greedy::greedy_search_from;
 use crate::heap::HeapElement;
 use crate::world::*;
+use crate::{new_hashmap, CommonHasher};
 use std::cmp::Reverse;
-use std::collections::BinaryHeap;
+use std::collections::{BinaryHeap, HashMap};
 
 /// Check whether there are available locations at this position.
 pub fn spot_has_locations<W, T, L, E>(world: &W, ctx: &T) -> bool
@@ -51,7 +50,7 @@ where
 fn expand<W, T, E, Wp>(
     world: &W,
     ctx: &ContextWrapper<T>,
-    spot_map: &Box<EnumMap<E::SpotId, Option<ContextWrapper<T>>>>,
+    spot_map: &HashMap<E::SpotId, ContextWrapper<T>, CommonHasher>,
     max_time: u32,
     spot_heap: &mut BinaryHeap<Reverse<HeapElement<T>>>,
 ) where
@@ -65,7 +64,7 @@ fn expand<W, T, E, Wp>(
     let cedges = world.get_condensed_edges_from(ctx.get().position());
     if !cedges.is_empty() {
         for ce in cedges {
-            if spot_map[ce.dst].is_none() && ce.can_access(world, ctx.get(), movement_state) {
+            if !spot_map.contains_key(&ce.dst) && ce.can_access(world, ctx.get(), movement_state) {
                 let mut newctx = ctx.clone();
                 newctx.move_condensed_edge(ce);
                 let elapsed = newctx.elapsed();
@@ -84,7 +83,7 @@ fn expand<W, T, E, Wp>(
     expand_exits(world, ctx, spot_map, max_time, spot_heap);
 
     for warp in world.get_warps() {
-        if spot_map[warp.dest(ctx.get())].is_none() && warp.can_access(ctx.get()) {
+        if !spot_map.contains_key(&warp.dest(ctx.get())) && warp.can_access(ctx.get()) {
             let mut newctx = ctx.clone();
             newctx.warp(warp);
             let elapsed = newctx.elapsed();
@@ -101,7 +100,7 @@ fn expand<W, T, E, Wp>(
 fn expand_exits<W, T, E>(
     world: &W,
     ctx: &ContextWrapper<T>,
-    spot_map: &Box<EnumMap<E::SpotId, Option<ContextWrapper<T>>>>,
+    spot_map: &HashMap<E::SpotId, ContextWrapper<T>, CommonHasher>,
     max_time: u32,
     spot_heap: &mut BinaryHeap<Reverse<HeapElement<T>>>,
 ) where
@@ -111,7 +110,7 @@ fn expand_exits<W, T, E>(
     W::Location: Location<Context = T>,
 {
     for exit in world.get_spot_exits(ctx.get().position()) {
-        if spot_map[exit.dest()].is_none() && exit.can_access(ctx.get()) {
+        if !spot_map.contains_key(&exit.dest()) && exit.can_access(ctx.get()) {
             let mut newctx = ctx.clone();
             newctx.exit(exit);
             let elapsed = newctx.elapsed();
@@ -130,7 +129,7 @@ fn expand_local<W, T, E, Wp>(
     world: &W,
     ctx: &ContextWrapper<T>,
     movement_state: T::MovementState,
-    spot_map: &Box<EnumMap<E::SpotId, Option<ContextWrapper<T>>>>,
+    spot_map: &HashMap<E::SpotId, ContextWrapper<T>, CommonHasher>,
     max_time: u32,
     spot_heap: &mut BinaryHeap<Reverse<HeapElement<T>>>,
 ) where
@@ -142,7 +141,7 @@ fn expand_local<W, T, E, Wp>(
 {
     for &dest in world.get_area_spots(ctx.get().position()) {
         let ltt = ctx.get().local_travel_time(movement_state, dest);
-        if spot_map[dest].is_none() && ltt < u32::MAX {
+        if !spot_map.contains_key(&dest) && ltt < u32::MAX {
             let mut newctx = ctx.clone();
             newctx.move_local(dest, ltt);
             let elapsed = newctx.elapsed();
@@ -161,7 +160,7 @@ pub fn accessible_spots<W, T, E>(
     world: &W,
     ctx: ContextWrapper<T>,
     max_time: u32,
-) -> Box<EnumMap<E::SpotId, Option<ContextWrapper<T>>>>
+) -> HashMap<E::SpotId, ContextWrapper<T>, CommonHasher>
 where
     W: World<Exit = E>,
     T: Ctx<World = W>,
@@ -171,14 +170,14 @@ where
         Warp<Context = T, SpotId = E::SpotId, Currency = <W::Location as Accessible>::Currency>,
 {
     // return: spotid -> ctxwrapper
-    let mut spot_enum_map: Box<EnumMap<E::SpotId, Option<ContextWrapper<T>>>> = Box::default();
+    let mut spot_enum_map = new_hashmap();
     let mut spot_heap = BinaryHeap::new();
     let pos = ctx.get().position();
-    spot_enum_map[pos] = Some(ctx);
+    spot_enum_map.insert(pos, ctx);
 
     expand(
         world,
-        spot_enum_map[pos].as_ref().unwrap(),
+        &spot_enum_map[&pos],
         &spot_enum_map,
         max_time,
         &mut spot_heap,
@@ -186,11 +185,11 @@ where
     while let Some(Reverse(el)) = spot_heap.pop() {
         let spot_found = el.el;
         let pos = spot_found.get().position();
-        if spot_enum_map[pos].is_none() {
-            spot_enum_map[pos] = Some(spot_found);
+        if !spot_enum_map.contains_key(&pos) {
+            spot_enum_map.insert(pos, spot_found);
             expand(
                 world,
-                spot_enum_map[pos].as_ref().unwrap(),
+                &spot_enum_map[&pos],
                 &spot_enum_map,
                 max_time,
                 &mut spot_heap,
@@ -218,14 +217,14 @@ where
     if ctx.get().position() == spot {
         return Some(ctx);
     }
-    let mut spot_enum_map: Box<EnumMap<E::SpotId, Option<ContextWrapper<T>>>> = Box::default();
+    let mut spot_enum_map = new_hashmap();
     let mut spot_heap = BinaryHeap::new();
     let pos = ctx.get().position();
-    spot_enum_map[pos] = Some(ctx);
+    spot_enum_map.insert(pos, ctx);
 
     expand(
         world,
-        spot_enum_map[pos].as_ref().unwrap(),
+        &spot_enum_map[&pos],
         &spot_enum_map,
         u32::MAX,
         &mut spot_heap,
@@ -237,11 +236,11 @@ where
         if pos == spot {
             return Some(spot_found);
         }
-        if spot_enum_map[pos].is_none() {
-            spot_enum_map[pos] = Some(spot_found);
+        if !spot_enum_map.contains_key(&pos) {
+            spot_enum_map.insert(pos, spot_found);
             expand(
                 world,
-                spot_enum_map[pos].as_ref().unwrap(),
+                &spot_enum_map[&pos],
                 &spot_enum_map,
                 u32::MAX,
                 &mut spot_heap,
@@ -251,7 +250,7 @@ where
 
     // Didn't find a condensed-edge-only route, so process all local edges
     for pos in world.get_area_spots(spot) {
-        if let Some(ctx) = &spot_enum_map[*pos] {
+        if let Some(ctx) = spot_enum_map.get(&pos) {
             spot_heap.push(Reverse(HeapElement {
                 score: ctx.elapsed(),
                 el: ctx.clone(),
@@ -274,13 +273,13 @@ where
             return Some(spot_found);
         }
         // Process this position if it's better than our best or not found.
-        if let Some(c) = &spot_enum_map[pos] {
+        if let Some(c) = spot_enum_map.get(&pos) {
             if spot_found.elapsed() >= c.elapsed() {
                 continue;
             }
         }
-        spot_enum_map[pos] = Some(spot_found);
-        let ctx = spot_enum_map[pos].as_ref().unwrap();
+        spot_enum_map.insert(pos, spot_found);
+        let ctx = &spot_enum_map[&pos];
         let movement_state = ctx.get().get_movement_state();
         expand_local(
             world,
@@ -409,7 +408,7 @@ where
 
 pub fn find_unused_links<W, T, E, Wp>(
     world: &W,
-    spot_map: &Box<EnumMap<E::SpotId, Option<ContextWrapper<T>>>>,
+    spot_map: &HashMap<E::SpotId, ContextWrapper<T>, CommonHasher>,
 ) -> String
 where
     W: World<Exit = E, Warp = Wp>,
@@ -417,13 +416,12 @@ where
     E: Exit<Context = T, Currency = <W::Location as Accessible>::Currency>,
     Wp: Warp<Context = T, SpotId = E::SpotId, Currency = <W::Location as Accessible>::Currency>,
 {
-    let mut accessible: Vec<ContextWrapper<T>> =
-        spot_map.values().filter_map(Clone::clone).collect();
+    let mut accessible: Vec<_> = spot_map.values().collect();
     accessible.sort_unstable_by_key(|el| el.elapsed());
     let mut vec = Vec::new();
     for ctx in accessible {
         for spot in world.get_area_spots(ctx.get().position()) {
-            if spot_map[*spot].is_none()
+            if !spot_map.contains_key(spot)
                 && world
                     .get_condensed_edges_from(ctx.get().position())
                     .into_iter()
@@ -438,7 +436,7 @@ where
         }
 
         for exit in world.get_spot_exits(ctx.get().position()) {
-            if spot_map[exit.dest()].is_none()
+            if !spot_map.contains_key(&exit.dest())
                 && (!W::same_area(ctx.get().position(), exit.dest())
                     || world
                         .get_condensed_edges_from(ctx.get().position())
@@ -450,7 +448,7 @@ where
         }
 
         for warp in world.get_warps() {
-            if spot_map[warp.dest(ctx.get())].is_none() {
+            if !spot_map.contains_key(&warp.dest(ctx.get())) {
                 vec.push(format!(
                     "{}: warp {} not usable",
                     ctx.get().position(),
