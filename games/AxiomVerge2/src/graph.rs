@@ -981,6 +981,22 @@ pub enum SpotId {
     Giguna__Ruins_West__Save_Point,
     Giguna__Ruins_West__Upper_Ledge,
     Giguna__Ruins_West__West_7,
+    Giguna__Vertical_Interchange__Dead_end,
+    Giguna__Vertical_Interchange__Dead_end_Ledge,
+    Giguna__Vertical_Interchange__East_20,
+    Giguna__Vertical_Interchange__Gate,
+    Giguna__Vertical_Interchange__Ledge_19,
+    Giguna__Vertical_Interchange__Middle_Below_Top,
+    Giguna__Vertical_Interchange__Middle_Hill_By_Switch,
+    Giguna__Vertical_Interchange__Middle_Ledge_Below_Gate,
+    Giguna__Vertical_Interchange__Middle_Plateau,
+    Giguna__Vertical_Interchange__North,
+    Giguna__Vertical_Interchange__Switch,
+    Giguna__Vertical_Interchange__Top_Left_Ledge,
+    Giguna__Vertical_Interchange__Top_Passage_Bottom,
+    Giguna__Vertical_Interchange__Top_Right_Ledge,
+    Giguna__Vertical_Interchange__Top_Rocky_Ledge,
+    Giguna__Vertical_Interchange__Top_Rocky_Outcrop,
     Giguna__Vertical_Interchange__West_17,
     Giguna__Vertical_Interchange__West_19,
     Giguna__Wasteland__Bluff_by_Door,
@@ -2553,6 +2569,60 @@ impl fmt::Display for SpotId {
                 write!(f, "{}", "Giguna > Ruins West > Upper Ledge")
             }
             SpotId::Giguna__Ruins_West__West_7 => write!(f, "{}", "Giguna > Ruins West > West 7"),
+            SpotId::Giguna__Vertical_Interchange__Dead_end => {
+                write!(f, "{}", "Giguna > Vertical Interchange > Dead-end")
+            }
+            SpotId::Giguna__Vertical_Interchange__Dead_end_Ledge => {
+                write!(f, "{}", "Giguna > Vertical Interchange > Dead-end Ledge")
+            }
+            SpotId::Giguna__Vertical_Interchange__East_20 => {
+                write!(f, "{}", "Giguna > Vertical Interchange > East 20")
+            }
+            SpotId::Giguna__Vertical_Interchange__Gate => {
+                write!(f, "{}", "Giguna > Vertical Interchange > Gate")
+            }
+            SpotId::Giguna__Vertical_Interchange__Ledge_19 => {
+                write!(f, "{}", "Giguna > Vertical Interchange > Ledge 19")
+            }
+            SpotId::Giguna__Vertical_Interchange__Middle_Below_Top => {
+                write!(f, "{}", "Giguna > Vertical Interchange > Middle Below Top")
+            }
+            SpotId::Giguna__Vertical_Interchange__Middle_Hill_By_Switch => write!(
+                f,
+                "{}",
+                "Giguna > Vertical Interchange > Middle Hill By Switch"
+            ),
+            SpotId::Giguna__Vertical_Interchange__Middle_Ledge_Below_Gate => write!(
+                f,
+                "{}",
+                "Giguna > Vertical Interchange > Middle Ledge Below Gate"
+            ),
+            SpotId::Giguna__Vertical_Interchange__Middle_Plateau => {
+                write!(f, "{}", "Giguna > Vertical Interchange > Middle Plateau")
+            }
+            SpotId::Giguna__Vertical_Interchange__North => {
+                write!(f, "{}", "Giguna > Vertical Interchange > North")
+            }
+            SpotId::Giguna__Vertical_Interchange__Switch => {
+                write!(f, "{}", "Giguna > Vertical Interchange > Switch")
+            }
+            SpotId::Giguna__Vertical_Interchange__Top_Left_Ledge => {
+                write!(f, "{}", "Giguna > Vertical Interchange > Top Left Ledge")
+            }
+            SpotId::Giguna__Vertical_Interchange__Top_Passage_Bottom => write!(
+                f,
+                "{}",
+                "Giguna > Vertical Interchange > Top Passage Bottom"
+            ),
+            SpotId::Giguna__Vertical_Interchange__Top_Right_Ledge => {
+                write!(f, "{}", "Giguna > Vertical Interchange > Top Right Ledge")
+            }
+            SpotId::Giguna__Vertical_Interchange__Top_Rocky_Ledge => {
+                write!(f, "{}", "Giguna > Vertical Interchange > Top Rocky Ledge")
+            }
+            SpotId::Giguna__Vertical_Interchange__Top_Rocky_Outcrop => {
+                write!(f, "{}", "Giguna > Vertical Interchange > Top Rocky Outcrop")
+            }
             SpotId::Giguna__Vertical_Interchange__West_17 => {
                 write!(f, "{}", "Giguna > Vertical Interchange > West 17")
             }
@@ -4079,6 +4149,54 @@ impl std::str::FromStr for SpotId {
             "Giguna > Ruins West > Save Point" => Ok(SpotId::Giguna__Ruins_West__Save_Point),
             "Giguna > Ruins West > Upper Ledge" => Ok(SpotId::Giguna__Ruins_West__Upper_Ledge),
             "Giguna > Ruins West > West 7" => Ok(SpotId::Giguna__Ruins_West__West_7),
+            "Giguna > Vertical Interchange > Dead-end" => {
+                Ok(SpotId::Giguna__Vertical_Interchange__Dead_end)
+            }
+            "Giguna > Vertical Interchange > Dead-end Ledge" => {
+                Ok(SpotId::Giguna__Vertical_Interchange__Dead_end_Ledge)
+            }
+            "Giguna > Vertical Interchange > East 20" => {
+                Ok(SpotId::Giguna__Vertical_Interchange__East_20)
+            }
+            "Giguna > Vertical Interchange > Gate" => {
+                Ok(SpotId::Giguna__Vertical_Interchange__Gate)
+            }
+            "Giguna > Vertical Interchange > Ledge 19" => {
+                Ok(SpotId::Giguna__Vertical_Interchange__Ledge_19)
+            }
+            "Giguna > Vertical Interchange > Middle Below Top" => {
+                Ok(SpotId::Giguna__Vertical_Interchange__Middle_Below_Top)
+            }
+            "Giguna > Vertical Interchange > Middle Hill By Switch" => {
+                Ok(SpotId::Giguna__Vertical_Interchange__Middle_Hill_By_Switch)
+            }
+            "Giguna > Vertical Interchange > Middle Ledge Below Gate" => {
+                Ok(SpotId::Giguna__Vertical_Interchange__Middle_Ledge_Below_Gate)
+            }
+            "Giguna > Vertical Interchange > Middle Plateau" => {
+                Ok(SpotId::Giguna__Vertical_Interchange__Middle_Plateau)
+            }
+            "Giguna > Vertical Interchange > North" => {
+                Ok(SpotId::Giguna__Vertical_Interchange__North)
+            }
+            "Giguna > Vertical Interchange > Switch" => {
+                Ok(SpotId::Giguna__Vertical_Interchange__Switch)
+            }
+            "Giguna > Vertical Interchange > Top Left Ledge" => {
+                Ok(SpotId::Giguna__Vertical_Interchange__Top_Left_Ledge)
+            }
+            "Giguna > Vertical Interchange > Top Passage Bottom" => {
+                Ok(SpotId::Giguna__Vertical_Interchange__Top_Passage_Bottom)
+            }
+            "Giguna > Vertical Interchange > Top Right Ledge" => {
+                Ok(SpotId::Giguna__Vertical_Interchange__Top_Right_Ledge)
+            }
+            "Giguna > Vertical Interchange > Top Rocky Ledge" => {
+                Ok(SpotId::Giguna__Vertical_Interchange__Top_Rocky_Ledge)
+            }
+            "Giguna > Vertical Interchange > Top Rocky Outcrop" => {
+                Ok(SpotId::Giguna__Vertical_Interchange__Top_Rocky_Outcrop)
+            }
             "Giguna > Vertical Interchange > West 17" => {
                 Ok(SpotId::Giguna__Vertical_Interchange__West_17)
             }
@@ -9318,7 +9436,23 @@ pub fn get_area(spot: SpotId) -> AreaId {
         | SpotId::Giguna__Gateway__East_19 => AreaId::Giguna__Gateway,
         SpotId::Giguna__Labyrinth_East__East_19 => AreaId::Giguna__Labyrinth_East,
         SpotId::Giguna__Vertical_Interchange__West_17
-        | SpotId::Giguna__Vertical_Interchange__West_19 => AreaId::Giguna__Vertical_Interchange,
+        | SpotId::Giguna__Vertical_Interchange__West_19
+        | SpotId::Giguna__Vertical_Interchange__North
+        | SpotId::Giguna__Vertical_Interchange__Top_Left_Ledge
+        | SpotId::Giguna__Vertical_Interchange__Top_Right_Ledge
+        | SpotId::Giguna__Vertical_Interchange__Top_Rocky_Ledge
+        | SpotId::Giguna__Vertical_Interchange__Top_Rocky_Outcrop
+        | SpotId::Giguna__Vertical_Interchange__Top_Passage_Bottom
+        | SpotId::Giguna__Vertical_Interchange__Ledge_19
+        | SpotId::Giguna__Vertical_Interchange__East_20
+        | SpotId::Giguna__Vertical_Interchange__Middle_Below_Top
+        | SpotId::Giguna__Vertical_Interchange__Middle_Plateau
+        | SpotId::Giguna__Vertical_Interchange__Gate
+        | SpotId::Giguna__Vertical_Interchange__Dead_end
+        | SpotId::Giguna__Vertical_Interchange__Dead_end_Ledge
+        | SpotId::Giguna__Vertical_Interchange__Middle_Ledge_Below_Gate
+        | SpotId::Giguna__Vertical_Interchange__Middle_Hill_By_Switch
+        | SpotId::Giguna__Vertical_Interchange__Switch => AreaId::Giguna__Vertical_Interchange,
         SpotId::Giguna__Antechamber__East_16
         | SpotId::Giguna__Antechamber__Statues_Ledge
         | SpotId::Giguna__Antechamber__Bottom
@@ -10150,7 +10284,23 @@ pub fn get_region(spot: SpotId) -> RegionId {
         | SpotId::Giguna__Gateway__East_19 => RegionId::Giguna,
         SpotId::Giguna__Labyrinth_East__East_19 => RegionId::Giguna,
         SpotId::Giguna__Vertical_Interchange__West_17
-        | SpotId::Giguna__Vertical_Interchange__West_19 => RegionId::Giguna,
+        | SpotId::Giguna__Vertical_Interchange__West_19
+        | SpotId::Giguna__Vertical_Interchange__North
+        | SpotId::Giguna__Vertical_Interchange__Top_Left_Ledge
+        | SpotId::Giguna__Vertical_Interchange__Top_Right_Ledge
+        | SpotId::Giguna__Vertical_Interchange__Top_Rocky_Ledge
+        | SpotId::Giguna__Vertical_Interchange__Top_Rocky_Outcrop
+        | SpotId::Giguna__Vertical_Interchange__Top_Passage_Bottom
+        | SpotId::Giguna__Vertical_Interchange__Ledge_19
+        | SpotId::Giguna__Vertical_Interchange__East_20
+        | SpotId::Giguna__Vertical_Interchange__Middle_Below_Top
+        | SpotId::Giguna__Vertical_Interchange__Middle_Plateau
+        | SpotId::Giguna__Vertical_Interchange__Gate
+        | SpotId::Giguna__Vertical_Interchange__Dead_end
+        | SpotId::Giguna__Vertical_Interchange__Dead_end_Ledge
+        | SpotId::Giguna__Vertical_Interchange__Middle_Ledge_Below_Gate
+        | SpotId::Giguna__Vertical_Interchange__Middle_Hill_By_Switch
+        | SpotId::Giguna__Vertical_Interchange__Switch => RegionId::Giguna,
         SpotId::Giguna__Antechamber__East_16
         | SpotId::Giguna__Antechamber__Statues_Ledge
         | SpotId::Giguna__Antechamber__Bottom
@@ -12240,7 +12390,7 @@ pub struct World {
     exits: EnumMap<ExitId, Exit>,
     actions: EnumMap<ActionId, Action>,
     warps: EnumMap<WarpId, Warp>,
-    raw_spots: [SpotId; 820],
+    raw_spots: [SpotId; 836],
     // Index ranges for slices into the above arrays
     spots: EnumMap<SpotId, Spot>,
     global_actions: Range<usize>,
@@ -14844,6 +14994,22 @@ impl World {
                 SpotId::Giguna__Ruins_West__Save_Point,
                 SpotId::Giguna__Ruins_West__Upper_Ledge,
                 SpotId::Giguna__Ruins_West__West_7,
+                SpotId::Giguna__Vertical_Interchange__Dead_end,
+                SpotId::Giguna__Vertical_Interchange__Dead_end_Ledge,
+                SpotId::Giguna__Vertical_Interchange__East_20,
+                SpotId::Giguna__Vertical_Interchange__Gate,
+                SpotId::Giguna__Vertical_Interchange__Ledge_19,
+                SpotId::Giguna__Vertical_Interchange__Middle_Below_Top,
+                SpotId::Giguna__Vertical_Interchange__Middle_Hill_By_Switch,
+                SpotId::Giguna__Vertical_Interchange__Middle_Ledge_Below_Gate,
+                SpotId::Giguna__Vertical_Interchange__Middle_Plateau,
+                SpotId::Giguna__Vertical_Interchange__North,
+                SpotId::Giguna__Vertical_Interchange__Switch,
+                SpotId::Giguna__Vertical_Interchange__Top_Left_Ledge,
+                SpotId::Giguna__Vertical_Interchange__Top_Passage_Bottom,
+                SpotId::Giguna__Vertical_Interchange__Top_Right_Ledge,
+                SpotId::Giguna__Vertical_Interchange__Top_Rocky_Ledge,
+                SpotId::Giguna__Vertical_Interchange__Top_Rocky_Outcrop,
                 SpotId::Giguna__Vertical_Interchange__West_17,
                 SpotId::Giguna__Vertical_Interchange__West_19,
                 SpotId::Giguna__Wasteland__Bluff_by_Door,
@@ -32921,7 +33087,7 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             area_spots: Range {
-                start: SpotId::Giguna__Vertical_Interchange__West_17.into_usize(),
+                start: SpotId::Giguna__Vertical_Interchange__Dead_end.into_usize(),
                 end: SpotId::Giguna__Vertical_Interchange__West_19.into_usize() + 1,
             },
         },
@@ -32937,7 +33103,263 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             area_spots: Range {
-                start: SpotId::Giguna__Vertical_Interchange__West_17.into_usize(),
+                start: SpotId::Giguna__Vertical_Interchange__Dead_end.into_usize(),
+                end: SpotId::Giguna__Vertical_Interchange__West_19.into_usize() + 1,
+            },
+        },
+        SpotId::Giguna__Vertical_Interchange__North => Spot {
+            id: SpotId::Giguna__Vertical_Interchange__North,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Giguna__Vertical_Interchange__Dead_end.into_usize(),
+                end: SpotId::Giguna__Vertical_Interchange__West_19.into_usize() + 1,
+            },
+        },
+        SpotId::Giguna__Vertical_Interchange__Top_Left_Ledge => Spot {
+            id: SpotId::Giguna__Vertical_Interchange__Top_Left_Ledge,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Giguna__Vertical_Interchange__Dead_end.into_usize(),
+                end: SpotId::Giguna__Vertical_Interchange__West_19.into_usize() + 1,
+            },
+        },
+        SpotId::Giguna__Vertical_Interchange__Top_Right_Ledge => Spot {
+            id: SpotId::Giguna__Vertical_Interchange__Top_Right_Ledge,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Giguna__Vertical_Interchange__Dead_end.into_usize(),
+                end: SpotId::Giguna__Vertical_Interchange__West_19.into_usize() + 1,
+            },
+        },
+        SpotId::Giguna__Vertical_Interchange__Top_Rocky_Ledge => Spot {
+            id: SpotId::Giguna__Vertical_Interchange__Top_Rocky_Ledge,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Giguna__Vertical_Interchange__Dead_end.into_usize(),
+                end: SpotId::Giguna__Vertical_Interchange__West_19.into_usize() + 1,
+            },
+        },
+        SpotId::Giguna__Vertical_Interchange__Top_Rocky_Outcrop => Spot {
+            id: SpotId::Giguna__Vertical_Interchange__Top_Rocky_Outcrop,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Giguna__Vertical_Interchange__Dead_end.into_usize(),
+                end: SpotId::Giguna__Vertical_Interchange__West_19.into_usize() + 1,
+            },
+        },
+        SpotId::Giguna__Vertical_Interchange__Top_Passage_Bottom => Spot {
+            id: SpotId::Giguna__Vertical_Interchange__Top_Passage_Bottom,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Giguna__Vertical_Interchange__Dead_end.into_usize(),
+                end: SpotId::Giguna__Vertical_Interchange__West_19.into_usize() + 1,
+            },
+        },
+        SpotId::Giguna__Vertical_Interchange__Ledge_19 => Spot {
+            id: SpotId::Giguna__Vertical_Interchange__Ledge_19,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Giguna__Vertical_Interchange__Dead_end.into_usize(),
+                end: SpotId::Giguna__Vertical_Interchange__West_19.into_usize() + 1,
+            },
+        },
+        SpotId::Giguna__Vertical_Interchange__East_20 => Spot {
+            id: SpotId::Giguna__Vertical_Interchange__East_20,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Giguna__Vertical_Interchange__Dead_end.into_usize(),
+                end: SpotId::Giguna__Vertical_Interchange__West_19.into_usize() + 1,
+            },
+        },
+        SpotId::Giguna__Vertical_Interchange__Middle_Below_Top => Spot {
+            id: SpotId::Giguna__Vertical_Interchange__Middle_Below_Top,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Giguna__Vertical_Interchange__Dead_end.into_usize(),
+                end: SpotId::Giguna__Vertical_Interchange__West_19.into_usize() + 1,
+            },
+        },
+        SpotId::Giguna__Vertical_Interchange__Middle_Plateau => Spot {
+            id: SpotId::Giguna__Vertical_Interchange__Middle_Plateau,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Giguna__Vertical_Interchange__Dead_end.into_usize(),
+                end: SpotId::Giguna__Vertical_Interchange__West_19.into_usize() + 1,
+            },
+        },
+        SpotId::Giguna__Vertical_Interchange__Gate => Spot {
+            id: SpotId::Giguna__Vertical_Interchange__Gate,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Giguna__Vertical_Interchange__Dead_end.into_usize(),
+                end: SpotId::Giguna__Vertical_Interchange__West_19.into_usize() + 1,
+            },
+        },
+        SpotId::Giguna__Vertical_Interchange__Dead_end => Spot {
+            id: SpotId::Giguna__Vertical_Interchange__Dead_end,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Giguna__Vertical_Interchange__Dead_end.into_usize(),
+                end: SpotId::Giguna__Vertical_Interchange__West_19.into_usize() + 1,
+            },
+        },
+        SpotId::Giguna__Vertical_Interchange__Dead_end_Ledge => Spot {
+            id: SpotId::Giguna__Vertical_Interchange__Dead_end_Ledge,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Giguna__Vertical_Interchange__Dead_end.into_usize(),
+                end: SpotId::Giguna__Vertical_Interchange__West_19.into_usize() + 1,
+            },
+        },
+        SpotId::Giguna__Vertical_Interchange__Middle_Ledge_Below_Gate => Spot {
+            id: SpotId::Giguna__Vertical_Interchange__Middle_Ledge_Below_Gate,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Giguna__Vertical_Interchange__Dead_end.into_usize(),
+                end: SpotId::Giguna__Vertical_Interchange__West_19.into_usize() + 1,
+            },
+        },
+        SpotId::Giguna__Vertical_Interchange__Middle_Hill_By_Switch => Spot {
+            id: SpotId::Giguna__Vertical_Interchange__Middle_Hill_By_Switch,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Giguna__Vertical_Interchange__Dead_end.into_usize(),
+                end: SpotId::Giguna__Vertical_Interchange__West_19.into_usize() + 1,
+            },
+        },
+        SpotId::Giguna__Vertical_Interchange__Switch => Spot {
+            id: SpotId::Giguna__Vertical_Interchange__Switch,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Giguna__Vertical_Interchange__Dead_end.into_usize(),
                 end: SpotId::Giguna__Vertical_Interchange__West_19.into_usize() + 1,
             },
         },
@@ -36457,6 +36879,22 @@ pub fn spot_locations(id: SpotId) -> Range<usize> {
         SpotId::Giguna__Labyrinth_East__East_19 => Range { start: 0, end: 0 },
         SpotId::Giguna__Vertical_Interchange__West_17 => Range { start: 0, end: 0 },
         SpotId::Giguna__Vertical_Interchange__West_19 => Range { start: 0, end: 0 },
+        SpotId::Giguna__Vertical_Interchange__North => Range { start: 0, end: 0 },
+        SpotId::Giguna__Vertical_Interchange__Top_Left_Ledge => Range { start: 0, end: 0 },
+        SpotId::Giguna__Vertical_Interchange__Top_Right_Ledge => Range { start: 0, end: 0 },
+        SpotId::Giguna__Vertical_Interchange__Top_Rocky_Ledge => Range { start: 0, end: 0 },
+        SpotId::Giguna__Vertical_Interchange__Top_Rocky_Outcrop => Range { start: 0, end: 0 },
+        SpotId::Giguna__Vertical_Interchange__Top_Passage_Bottom => Range { start: 0, end: 0 },
+        SpotId::Giguna__Vertical_Interchange__Ledge_19 => Range { start: 0, end: 0 },
+        SpotId::Giguna__Vertical_Interchange__East_20 => Range { start: 0, end: 0 },
+        SpotId::Giguna__Vertical_Interchange__Middle_Below_Top => Range { start: 0, end: 0 },
+        SpotId::Giguna__Vertical_Interchange__Middle_Plateau => Range { start: 0, end: 0 },
+        SpotId::Giguna__Vertical_Interchange__Gate => Range { start: 0, end: 0 },
+        SpotId::Giguna__Vertical_Interchange__Dead_end => Range { start: 0, end: 0 },
+        SpotId::Giguna__Vertical_Interchange__Dead_end_Ledge => Range { start: 0, end: 0 },
+        SpotId::Giguna__Vertical_Interchange__Middle_Ledge_Below_Gate => Range { start: 0, end: 0 },
+        SpotId::Giguna__Vertical_Interchange__Middle_Hill_By_Switch => Range { start: 0, end: 0 },
+        SpotId::Giguna__Vertical_Interchange__Switch => Range { start: 0, end: 0 },
         SpotId::Giguna__Antechamber__East_16 => Range { start: 0, end: 0 },
         SpotId::Giguna__Antechamber__Statues_Ledge => Range { start: 0, end: 0 },
         SpotId::Giguna__Antechamber__Bottom => Range { start: 0, end: 0 },

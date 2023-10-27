@@ -2911,6 +2911,40 @@ areas:
       coord: [21.05, 16.3]
     - name: West 19
       coord: [21.05, 18.8]
+    - name: North
+      coord: [21.5, 16.2]
+    - name: Top Left Ledge
+      coord: [21.25, 16.45]
+    - name: Top Right Ledge
+      coord: [21.45, 16.45]
+    - name: Top Rocky Ledge
+      coord: [21.3, 17.6]
+    - name: Top Rocky Outcrop
+      coord: [21.4, 18.0]
+    - name: Top Passage Bottom
+      coord: [21.35, 18.25]
+    - name: Ledge 19
+      coord: [21.65, 18.7]
+    - name: East 20
+      coord: [21.9, 19.8]
+
+    - name: Middle Below Top
+      coord: [21.4, 19.1]
+    - name: Middle Plateau
+      coord: [21.75, 19.6]
+    - name: Gate
+      coord: [21.55, 19.85]
+    - name: Dead-end
+      coord: [21.2, 19.5]
+    - name: Dead-end Ledge
+      coord: [21.3, 19.65]
+    - name: Middle Ledge Below Gate
+      coord: [21.45, 20.3]
+
+    - name: Middle Hill By Switch
+      coord: [21.65, 20.7]
+    - name: Switch
+      coord: [21.8, 20.8]
 
 - name: Antechamber
   on_entry: $reset_old_area(^newpos)
