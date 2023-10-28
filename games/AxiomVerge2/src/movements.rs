@@ -20304,7 +20304,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna_Breach__Peak__Portal,
-            SpotId::Giguna_Breach__Peak__flipside,
+            SpotId::Giguna__Ruins_Top__Save_Point,
             3600,
         ),
         (
@@ -23184,11 +23184,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Giguna_Northeast__Save_Point,
-            SpotId::Giguna__Giguna_Northeast__indra,
-            4300,
-        ),
-        (
-            SpotId::Giguna__Giguna_Northeast__Save_Point,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -24424,6 +24419,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Ruins_Top__Portal,
+            SpotId::Giguna_Breach__Peak__Save_Point,
+            3600,
+        ),
+        (
+            SpotId::Giguna__Ruins_Top__Portal,
             SpotId::Giguna__Ruins_Top__East_Door,
             877,
         ),
@@ -24441,11 +24441,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna__Ruins_Top__Portal,
             SpotId::Giguna__Ruins_Top__Small_Ledge,
             789,
-        ),
-        (
-            SpotId::Giguna__Ruins_Top__Portal,
-            SpotId::Giguna__Ruins_Top__flipside,
-            3600,
         ),
         (
             SpotId::Giguna__Ruins_Top__Portal,
@@ -27859,13 +27854,13 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Irikar__Sight_Room__Portal,
-            SpotId::Irikar__Sight_Room__Item_Pedestal,
-            964,
+            SpotId::Irikar_Breach__Save_Room__Save_Point,
+            3600,
         ),
         (
             SpotId::Irikar__Sight_Room__Portal,
-            SpotId::Irikar__Sight_Room__flipside,
-            3600,
+            SpotId::Irikar__Sight_Room__Item_Pedestal,
+            964,
         ),
         (
             SpotId::Irikar__Sight_Room__Portal,

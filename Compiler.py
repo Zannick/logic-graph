@@ -340,7 +340,14 @@ class GameLogic(object):
                             act['act_post'] = parseAction(
                                     act['after'], name=f'{act["name"]}:after')
                             act['after_id'] = self.make_funcid(act, 'act_post', 'after')
-
+                        if 'to' in act:
+                            dest = act['to']
+                            if dest.startswith('^'):
+                                if d := spot.get('data', {}).get(dest[1:]):
+                                    if self.data_types[dest[1:]] != 'SpotId':
+                                        self._errors.append(f'Action {act["fullname"]} moves to non-spot data: {dest}')
+                                    else:
+                                        act['to'] = d
 
     def process_exit_movements(self):
         for spot in self.spots():
@@ -801,7 +808,7 @@ class GameLogic(object):
                     raise Exception(f'"time" not defined for exit {ex["fullname"]}')
                 _update(key, float(ex['time']))
             for act in s.get('actions', []):
-                if 'to' in act:
+                if 'to' in act and not act['to'].startswith('^'):
                     key = (s['id'], get_exit_target(act))
                     _update(key, act['time'])
             for w, t in warp_dests:
