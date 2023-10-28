@@ -1413,6 +1413,7 @@ class GameLogic(object):
                                  line_comment_prefix='%#')
         env.filters.update({
             'camelize': inflection.camelize,
+            'chain_from_iterable': itertools.chain.from_iterable,
             'construct_id': construct_id,
             'construct_test_name': construct_test_name,
             'escape_ctx': partial(re.compile(r'\bctx\b').sub, '$ctx'),

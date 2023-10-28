@@ -16,3 +16,77 @@ use std::fmt;
 {{ enum('CanonId', canon_places, True, id=True) }}
 {{ enum('WarpId', warps.values()|list, id=True) }}
 {{ enum('Objective', objectives, default_value=default_objective) }}
+
+%% for r in regions
+{{ enum(r.id + 'SpotId', r.areas|map(attribute='spot_ids')|chain_from_iterable|list, id=True) }}
+%% endfor
+
+#[derive(Debug, PartialEq, Eq, Copy, Clone, Hash, Ord, PartialOrd, Default, serde::Serialize, serde::Deserialize)]
+pub enum BigSpotId {
+    #[default] None,
+%% for r in regions
+    {{ r.id }}({{ r.id }}SpotId),
+%% endfor
+}
+
+impl fmt::Display for BigSpotId {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        match self {
+            BigSpotId::None => write!(f, "{}", "None"),
+%% for r in regions
+            BigSpotId::{{ r.id }}(s) => s.fmt(f),
+%% endfor
+        }
+    }
+}
+
+impl analyzer::world::Id for BigSpotId {}
+
+impl std::str::FromStr for BigSpotId {
+    type Err = String;
+
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        match s {
+%% for r in regions
+%% for area in r.areas
+%% for spot in area.spots
+            "{{ spot.fullname }}" => Ok(BigSpotId::{{ r.id }}({{ r.id }}SpotId::{{ spot.id }})),
+%% endfor
+%% endfor
+%% endfor
+            _ => Err(format!("Could not recognize as a BigSpotId: {}", s)),
+        }
+    }
+}
+
+trait GetArea {
+    fn get_area(&self) -> AreaId;
+}
+%% for r in regions
+impl GetArea for {{ r.id }}SpotId {
+    fn get_area(&self) -> AreaId {
+        match *self {
+%% for a in r.areas
+            {{ r.id }}SpotId::{{ a.spot_ids|join(' | ' + r.id + 'SpotId::') }} => AreaId::{{ a.id }},
+%% endfor
+        }
+    }
+}
+%% endfor
+
+pub fn get_region_b(spot: BigSpotId) -> RegionId {
+    match spot {
+        BigSpotId::None => panic!("Spot not valid"),
+%% for r in regions
+        BigSpotId::{{ r.id }}(_) => RegionId::{{ r.id }},
+%% endfor
+    }
+}
+pub fn get_area_b(spot: BigSpotId) -> AreaId {
+    match spot {
+        BigSpotId::None => panic!("Spot not valid"),
+%% for r in regions
+        BigSpotId::{{ r.id }}(s) => s.get_area(),
+%% endfor
+    }
+}
