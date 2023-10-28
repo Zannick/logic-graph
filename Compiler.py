@@ -1,5 +1,5 @@
 import argparse
-from collections import namedtuple, Counter, defaultdict
+from collections import namedtuple, Counter, defaultdict, ChainMap
 from functools import cache, cached_property, partial
 import itertools
 import logging
@@ -702,61 +702,82 @@ class GameLogic(object):
         
 
     @cached_property
-    def local_distances(self):
-        # create a distances table: (spot, spot) -> [(x, y), ...]
-        d = defaultdict(list)
-        for a in self.areas():
-            errors = []
-            for sp in a['spots']:
-                if c := sp.get('coord'):
-                    self._validate_pair(c, f'coord for {sp["fullname"]}')
-                elif sp.get('local'):
-                    errors.append(f'Expected coord for spot {sp["fullname"]} with local rules')
-            if errors:
-                self._errors.extend(errors)
-                break
-            spot_errors = set()
-            for sp1, sp2 in itertools.permutations(a['spots'], 2):
-                if 'coord' not in sp1 or 'local' not in sp1:
-                    continue
-                if sp1['name'] not in spot_errors and any(link.get('to') is None for link in sp1['local']):
-                    spot_errors.add(sp1['name'])
-                    self._errors.append(f'Expected "to:" in all local movement for spot {sp1["fullname"]}')
-                    continue
-                if 'coord' not in sp2:
-                    if sp2['name'] not in spot_errors and any(link["to"] == sp2['name'] for link in sp1['local']):
-                        spot_errors.add(sp2['name'])
-                        self._errors.append(f'Expected coord for spot {sp2["fullname"]} used in local rules')
-                    continue
-                coords, jumps, jumps_down, jmvmt = self.spot_distance(sp1, sp2)
-                if not coords:
-                    continue
-                for ((sx, sy), (cx, cy)), j, jd in zip(itertools.pairwise(coords), jumps, jumps_down):
-                    d[(sp1['id'], sp2['id'])].append(
-                            (abs(cx - sx), cy - sy, j, jd, jmvmt))
+    def local_distances_by_region(self):
+        # create a distances table: region -> (spot, spot) -> [(x, y), ...]
+        d = {}
+        for region in self.regions:
+            d[region['id']] = defaultdict(list)
+            for a in region['areas']:
+                errors = []
+                for sp in a['spots']:
+                    if c := sp.get('coord'):
+                        self._validate_pair(c, f'coord for {sp["fullname"]}')
+                    elif sp.get('local'):
+                        errors.append(f'Expected coord for spot {sp["fullname"]} with local rules')
+                if errors:
+                    self._errors.extend(errors)
+                    break
+                spot_errors = set()
+                for sp1, sp2 in itertools.permutations(a['spots'], 2):
+                    if 'coord' not in sp1 or 'local' not in sp1:
+                        continue
+                    if sp1['name'] not in spot_errors and any(link.get('to') is None for link in sp1['local']):
+                        spot_errors.add(sp1['name'])
+                        self._errors.append(f'Expected "to:" in all local movement for spot {sp1["fullname"]}')
+                        continue
+                    if 'coord' not in sp2:
+                        if sp2['name'] not in spot_errors and any(link["to"] == sp2['name'] for link in sp1['local']):
+                            spot_errors.add(sp2['name'])
+                            self._errors.append(f'Expected coord for spot {sp2["fullname"]} used in local rules')
+                        continue
+                    coords, jumps, jumps_down, jmvmt = self.spot_distance(sp1, sp2)
+                    if not coords:
+                        continue
+                    for ((sx, sy), (cx, cy)), j, jd in zip(itertools.pairwise(coords), jumps, jumps_down):
+                        d[region['id']][(sp1['id'], sp2['id'])].append(
+                                (abs(cx - sx), cy - sy, j, jd, jmvmt))
         return d
 
 
     @cached_property
-    def movement_tables(self):
+    def local_distances(self):
+        d = {}
+        for region_map in self.local_distances_by_region.values():
+            d |= region_map
+        return d
+
+
+    @cached_property
+    def movement_tables_by_region(self):
         # create a movement table for each movement "combo"
         # (generally we'll use only 1 free, or 1 xy, or 1x, or 1x+1y, at a time,
         #  but we can't guarantee which is best for all situations.
         #  It might be simplest to determine which movements we have available in
         #  the area we're in, and then look up the travel time from that.)
-        table = {}
-        for mset in itertools.chain.from_iterable(
-                itertools.combinations(self.non_default_movements, r)
-                for r in range(0, len(self.non_default_movements) + 1)):
-            key = tuple(m in mset for m in self.non_default_movements)
-            table[key] = local_time = {}
-            for k, dlist in self.local_distances.items():
-                base = self.id_lookup[k[0]]['base_movement']
-                times = [self.movement_time(mset, base, a, b, j, jd, jmvmt) for a,b, j, jd, jmvmt in dlist]
-                if all(t is not None for t in times):
-                    local_time[k] = times
-        return table
+        # dict: region -> mkey -> (src, dest) -> [times]
+        full_table = {}
+        for region, region_local_distances in self.local_distances_by_region.items():
+            full_table[region] = table = {}
+            for mset in itertools.chain.from_iterable(
+                    itertools.combinations(self.non_default_movements, r)
+                    for r in range(0, len(self.non_default_movements) + 1)):
+                key = tuple(m in mset for m in self.non_default_movements)
+                table[key] = local_time = {}
+                for k, dlist in region_local_distances.items():
+                    base = self.id_lookup[k[0]]['base_movement']
+                    times = [self.movement_time(mset, base, a, b, j, jd, jmvmt) for a,b, j, jd, jmvmt in dlist]
+                    if all(t is not None for t in times):
+                        local_time[k] = times
+        return full_table
 
+    @cached_property
+    def movement_tables(self):
+        d = defaultdict(dict)
+        for key_region_map in self.movement_tables_by_region.values():
+            for key, region_map in key_region_map.items():
+                d[key] |= region_map
+        return d
+    
     def iter_movement_set_keys(self):
         for mset in itertools.chain.from_iterable(
                 itertools.combinations(self.non_default_movements, r)
@@ -764,21 +785,31 @@ class GameLogic(object):
             yield tuple(m in mset for m in self.non_default_movements)
 
     @cached_property
-    def movements_rev_lookup(self):
+    def movements_rev_lookup_by_region(self):
         # Precalculating which movement types we need available for what movement times
         # so this will look like (sp1, sp2) -> (base movement time, [(mkey, time)])
         base, *mkeys = list(self.iter_movement_set_keys())
-        table = {k: (sum(times), []) for k, times in self.movement_tables[base].items()}
         def is_subset(x, y):
             return all(b or not a for a, b in zip(x, y))
-        for mkey in mkeys:
-            for k, times in self.movement_tables[mkey].items():
-                t = sum(times)
-                if k not in table:
-                    table[k] = (-1, [])
-                if table[k][0] < 0 or (t < table[k][0] and not any(st < t for v, st in table[k][1] if is_subset(v, mkey))):
-                    table[k][1].append((mkey, t))
-        return table
+        # dict: region -> (src, dst) -> (base time, [(mkey, time)])
+        full_table = {}
+        for region, region_tables in self.movement_tables_by_region.items():
+            full_table[region] = table = {k: (sum(times), []) for k, times in region_tables[base].items()}
+            for mkey in mkeys:
+                for k, times in region_tables[mkey].items():
+                    t = sum(times)
+                    if k not in table:
+                        table[k] = (-1, [])
+                    if table[k][0] < 0 or (t < table[k][0] and not any(st < t for v, st in table[k][1] if is_subset(v, mkey))):
+                        table[k][1].append((mkey, t))
+        return full_table
+
+    @cached_property
+    def movements_rev_lookup(self):
+        d = defaultdict(dict)
+        for region_map in self.movements_rev_lookup_by_region.values():
+            d |= region_map
+        return d
 
     
     @cached_property
