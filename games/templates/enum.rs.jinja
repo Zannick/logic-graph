@@ -1,6 +1,6 @@
 %% macro enum(name, values, default=False, id=False, default_value=None, allow_lower=false)
 #[derive(Debug, PartialEq, Eq, Copy, Clone, Hash, Ord, PartialOrd{% if id %}, enum_map::Enum{% endif %}{% if default or default_value %}, Default{% endif %}, serde_repr::Serialize_repr, serde_repr::Deserialize_repr)]
-#[repr(u{{ ((values|count).bit_length() / 8)|round(0, 'ceil')|int * 8 }})]
+#[repr(u{{ (((values|count) + (1 if default or default_value else 0)).bit_length() / 8)|round(0, 'ceil')|int * 8 }})]
 pub enum {{ name }} {
 %% if default or default_value
     #[default] {{ default_value }},
