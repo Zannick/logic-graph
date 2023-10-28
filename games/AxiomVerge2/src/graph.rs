@@ -3637,6 +3637,16 @@ pub struct Spot {
     pub area_spots: Range<usize>,
 }
 
+#[derive(Clone, Debug, Default)]
+pub struct BigSpot {
+    pub id: BigSpotId,
+    pub locations: Range<usize>,
+    pub exits: Range<usize>,
+    pub actions: Range<usize>,
+    // spots don't reference their area, so we index these by spot
+    pub area_spots: Range<usize>,
+}
+
 static RAW_SPOTS: [SpotId; 836] = [
     SpotId::None,
     SpotId::Amagi__Cave_Behind_Waterfall__Bottom,
@@ -4476,6 +4486,858 @@ static RAW_SPOTS: [SpotId; 836] = [
     SpotId::Menu__Upgrade_Menu__Physiology,
 ];
 
+static RAW_AMAGI_SPOTS: [AmagiSpotId; 94] = [
+    AmagiSpotId::Amagi__Main_Area__East_15,
+    AmagiSpotId::Amagi__Main_Area__Waters_Edge,
+    AmagiSpotId::Amagi__Main_Area__Shallow_End,
+    AmagiSpotId::Amagi__Main_Area__Cliff,
+    AmagiSpotId::Amagi__Main_Area__Upper_Platform,
+    AmagiSpotId::Amagi__Main_Area__West_Shelf,
+    AmagiSpotId::Amagi__Main_Area__West_Side,
+    AmagiSpotId::Amagi__Main_Area__Platform_2,
+    AmagiSpotId::Amagi__Main_Area__East_Ledge,
+    AmagiSpotId::Amagi__Main_Area__Carving,
+    AmagiSpotId::Amagi__Main_Area__West_15,
+    AmagiSpotId::Amagi__Main_Area__Secret_Outcropping,
+    AmagiSpotId::Amagi__Main_Area__Platform_3,
+    AmagiSpotId::Amagi__Main_Area__Catwalk_Center,
+    AmagiSpotId::Amagi__Main_Area__Catwalk_Broken_Part,
+    AmagiSpotId::Amagi__Main_Area__Catwalk_East_Edge,
+    AmagiSpotId::Amagi__Main_Area__Save_Point,
+    AmagiSpotId::Amagi__Main_Area__Enemy_Side,
+    AmagiSpotId::Amagi__Main_Area__Small_Cliff,
+    AmagiSpotId::Amagi__Main_Area__East_19,
+    AmagiSpotId::Amagi__Main_Area__Broken_Wall,
+    AmagiSpotId::Amagi__Main_Area__Wall_Stuck_Spot,
+    AmagiSpotId::Amagi__Main_Area__Half_Pillar,
+    AmagiSpotId::Amagi__Main_Area__Flat_Ruin,
+    AmagiSpotId::Amagi__Main_Area__West_Mini_Hill,
+    AmagiSpotId::Amagi__Main_Area__West_18,
+    AmagiSpotId::Amagi__Main_Area__West_19,
+    AmagiSpotId::Amagi__Main_Area__Secret_Waterfall,
+    AmagiSpotId::Amagi__Main_Area__Way_Off_To_The_Side,
+    AmagiSpotId::Amagi__Cave_Behind_Waterfall__Bottom,
+    AmagiSpotId::Amagi__Cave_Behind_Waterfall__Middle,
+    AmagiSpotId::Amagi__Cave_Behind_Waterfall__Top,
+    AmagiSpotId::Amagi__Grid_31_19__West,
+    AmagiSpotId::Amagi__Grid_31_19__East,
+    AmagiSpotId::Amagi__Liru_Room__West_19,
+    AmagiSpotId::Amagi__Liru_Room__Hidden_Enemies,
+    AmagiSpotId::Amagi__Liru_Room__Platform_1_Left,
+    AmagiSpotId::Amagi__Liru_Room__Platform_1_Right,
+    AmagiSpotId::Amagi__Liru_Room__Platform_2_Left,
+    AmagiSpotId::Amagi__Liru_Room__Platform_2_Right,
+    AmagiSpotId::Amagi__Liru_Room__Platform_3_Left,
+    AmagiSpotId::Amagi__Liru_Room__Platform_3_Right,
+    AmagiSpotId::Amagi__Liru_Room__Platform_4_Left,
+    AmagiSpotId::Amagi__Liru_Room__Platform_4_Right,
+    AmagiSpotId::Amagi__Liru_Room__Bottom,
+    AmagiSpotId::Amagi__Liru_Room__Shrine,
+    AmagiSpotId::Amagi__Liru_Room__West_20,
+    AmagiSpotId::Amagi__Liru_Room__East_Passage,
+    AmagiSpotId::Amagi__Liru_Room__Hidden_Exit,
+    AmagiSpotId::Amagi__West_Lake__East_15,
+    AmagiSpotId::Amagi__West_Lake__East_Shore,
+    AmagiSpotId::Amagi__West_Lake__East_Bank,
+    AmagiSpotId::Amagi__West_Lake__Northeast_Platform,
+    AmagiSpotId::Amagi__West_Lake__Northwest_Platform,
+    AmagiSpotId::Amagi__West_Lake__Upper_Center_Platform,
+    AmagiSpotId::Amagi__West_Lake__East_Platform,
+    AmagiSpotId::Amagi__West_Lake__East_18,
+    AmagiSpotId::Amagi__West_Lake__Pillar,
+    AmagiSpotId::Amagi__West_Lake__Pillar_Platform,
+    AmagiSpotId::Amagi__West_Lake__East_19,
+    AmagiSpotId::Amagi__West_Lake__Somewhat_Central_Platform,
+    AmagiSpotId::Amagi__West_Lake__West_Platform,
+    AmagiSpotId::Amagi__West_Lake__Cavern_Front_Teeth,
+    AmagiSpotId::Amagi__West_Lake__Cavern_Back_Teeth,
+    AmagiSpotId::Amagi__West_Lake__Cavern_Jaw,
+    AmagiSpotId::Amagi__West_Lake__Cavern_Neck,
+    AmagiSpotId::Amagi__West_Lake__Cavern_Chin,
+    AmagiSpotId::Amagi__West_Lake__Cavern_Refill_Station,
+    AmagiSpotId::Amagi__West_Lake__Cavern_Tear_Duct,
+    AmagiSpotId::Amagi__West_Lake__Cavern_Eye,
+    AmagiSpotId::Amagi__West_Lake__Cavern_Front_Pillar,
+    AmagiSpotId::Amagi__West_Lake__Cavern_Middle_Pillar,
+    AmagiSpotId::Amagi__West_Lake__Cavern_Rear_Pillar,
+    AmagiSpotId::Amagi__West_Lake__Cavern_Lower_Trachea,
+    AmagiSpotId::Amagi__West_Lake__Stronghold_Top,
+    AmagiSpotId::Amagi__West_Lake__Stronghold_Item,
+    AmagiSpotId::Amagi__West_Lake__Stronghold_Rear_Wall,
+    AmagiSpotId::Amagi__West_Lake__Stronghold_Middle_Column,
+    AmagiSpotId::Amagi__West_Lake__Stronghold_Ceiling_Left,
+    AmagiSpotId::Amagi__West_Lake__Stronghold_Ceiling_Right,
+    AmagiSpotId::Amagi__West_Lake__Stronghold_Front_Room,
+    AmagiSpotId::Amagi__West_Lake__Stronghold_Front_Door,
+    AmagiSpotId::Amagi__West_Lake__Some_Rock,
+    AmagiSpotId::Amagi__West_Lake__Small_Hill,
+    AmagiSpotId::Amagi__West_Lake__Tentacle_Gap,
+    AmagiSpotId::Amagi__West_Lake__Left_of_Enemy,
+    AmagiSpotId::Amagi__West_Lake__East_20,
+    AmagiSpotId::Amagi__West_Lake__West_Cliff,
+    AmagiSpotId::Amagi__West_Lake__West_Bank,
+    AmagiSpotId::Amagi__West_Lake__Water_Surface,
+    AmagiSpotId::Amagi__West_Lake__West_Shore,
+    AmagiSpotId::Amagi__West_Lake__Surface_Wall_Right,
+    AmagiSpotId::Amagi__West_Lake__Surface_Wall_Left,
+    AmagiSpotId::Amagi__West_Lake__West_15,
+];
+static RAW_ANTARCTICA_SPOTS: [AntarcticaSpotId; 21] = [
+    AntarcticaSpotId::Antarctica__West__Helipad,
+    AntarcticaSpotId::Antarctica__West__Shed_Entry,
+    AntarcticaSpotId::Antarctica__West__Boxes,
+    AntarcticaSpotId::Antarctica__Shed__Interior,
+    AntarcticaSpotId::Antarctica__Building_1W__West_Entry,
+    AntarcticaSpotId::Antarctica__Building_1W__Connector,
+    AntarcticaSpotId::Antarctica__Building_1E__Connector,
+    AntarcticaSpotId::Antarctica__Building_1E__East_Entry,
+    AntarcticaSpotId::Antarctica__East__Building_1_Entry,
+    AntarcticaSpotId::Antarctica__East__Save_Point,
+    AntarcticaSpotId::Antarctica__East__Building_2_Entry,
+    AntarcticaSpotId::Antarctica__East__Building_2_Upper,
+    AntarcticaSpotId::Antarctica__Building_2__Entry,
+    AntarcticaSpotId::Antarctica__Building_2__Stairs,
+    AntarcticaSpotId::Antarctica__Building_2__Upper_Door,
+    AntarcticaSpotId::Antarctica__Building_2__Behind_Boxes,
+    AntarcticaSpotId::Antarctica__Top__Power_Entry,
+    AntarcticaSpotId::Antarctica__Power_Room__Entry,
+    AntarcticaSpotId::Antarctica__Power_Room__Switch,
+    AntarcticaSpotId::Antarctica__Freight_Elevator__Left,
+    AntarcticaSpotId::Antarctica__Freight_Elevator__Controls,
+];
+static RAW_EBIH_SPOTS: [EbihSpotId; 202] = [
+    EbihSpotId::Ebih__Base_Camp__East_11,
+    EbihSpotId::Ebih__Base_Camp__East_12,
+    EbihSpotId::Ebih__Base_Camp__Staircase,
+    EbihSpotId::Ebih__Base_Camp__Save_Point,
+    EbihSpotId::Ebih__Base_Camp__Bunker_Entry,
+    EbihSpotId::Ebih__Base_Camp__Lake_Access,
+    EbihSpotId::Ebih__Base_Camp__Behind_Vehicle,
+    EbihSpotId::Ebih__Base_Camp__Building_Entry,
+    EbihSpotId::Ebih__Base_Camp__Tent_Entry,
+    EbihSpotId::Ebih__Base_Camp__West_13,
+    EbihSpotId::Ebih__Base_Camp__West_11,
+    EbihSpotId::Ebih__Base_Camp__West_Midair,
+    EbihSpotId::Ebih__Base_Camp__West_12,
+    EbihSpotId::Ebih__Base_Camp__Left_Platform,
+    EbihSpotId::Ebih__Base_Camp__Left_Platform_Moved,
+    EbihSpotId::Ebih__Base_Camp__Top_Platform,
+    EbihSpotId::Ebih__Bunker_Interior__Entry,
+    EbihSpotId::Ebih__Bunker_Interior__Desk,
+    EbihSpotId::Ebih__Building_Interior__Entry,
+    EbihSpotId::Ebih__Building_Interior__Corner,
+    EbihSpotId::Ebih__Tent_Interior__Entry,
+    EbihSpotId::Ebih__Tent_Interior__Desk,
+    EbihSpotId::Ebih__By_Garage__East_13,
+    EbihSpotId::Ebih__By_Garage__East_Platform,
+    EbihSpotId::Ebih__By_Garage__Crawlspace_Opening,
+    EbihSpotId::Ebih__By_Garage__Crawlspace,
+    EbihSpotId::Ebih__By_Garage__Outcropping,
+    EbihSpotId::Ebih__By_Garage__East_Bush,
+    EbihSpotId::Ebih__By_Garage__Lower_Platform,
+    EbihSpotId::Ebih__By_Garage__West_Bush,
+    EbihSpotId::Ebih__By_Garage__West_12,
+    EbihSpotId::Ebih__By_Garage__West_13,
+    EbihSpotId::Ebih__By_Garage__West_Below_Platforms,
+    EbihSpotId::Ebih__By_Garage__Garage_Entry,
+    EbihSpotId::Ebih__By_Garage__East_Below_Platforms,
+    EbihSpotId::Ebih__By_Garage__East_12,
+    EbihSpotId::Ebih__Garage__Entry,
+    EbihSpotId::Ebih__Garage__Boxes,
+    EbihSpotId::Ebih__Grid_25_10_12__East_12,
+    EbihSpotId::Ebih__Grid_25_10_12__Bush,
+    EbihSpotId::Ebih__Grid_25_10_12__West_12,
+    EbihSpotId::Ebih__Grid_25_10_12__Below_Bush,
+    EbihSpotId::Ebih__Grid_25_10_12__Mid_Ledge,
+    EbihSpotId::Ebih__Grid_25_10_12__Door_Left,
+    EbihSpotId::Ebih__Grid_25_10_12__Top_Platform,
+    EbihSpotId::Ebih__Grid_25_10_12__West_11,
+    EbihSpotId::Ebih__Grid_25_10_12__West_10,
+    EbihSpotId::Ebih__Grid_25_10_12__Door,
+    EbihSpotId::Ebih__Grid_25_10_12__East_11,
+    EbihSpotId::Ebih__Grid_25_10_12__East_10,
+    EbihSpotId::Ebih__Grid_25_10_12__Hidden_Bush,
+    EbihSpotId::Ebih__Waterfall__East_10,
+    EbihSpotId::Ebih__Waterfall__East_Ledge,
+    EbihSpotId::Ebih__Waterfall__East_11,
+    EbihSpotId::Ebih__Waterfall__Near_East_Tree,
+    EbihSpotId::Ebih__Waterfall__Waterfall_Right,
+    EbihSpotId::Ebih__Waterfall__Alcove_Right,
+    EbihSpotId::Ebih__Waterfall__Waterfall_Center_Right,
+    EbihSpotId::Ebih__Waterfall__Waterfall_Center_Center,
+    EbihSpotId::Ebih__Waterfall__Waterfall_Center_Left,
+    EbihSpotId::Ebih__Waterfall__Alcove_Left,
+    EbihSpotId::Ebih__Waterfall__Alcove,
+    EbihSpotId::Ebih__Waterfall__Under_Waterfall,
+    EbihSpotId::Ebih__Waterfall__Waterfall_Left,
+    EbihSpotId::Ebih__Waterfall__Wall_Right,
+    EbihSpotId::Ebih__Waterfall__Wall_Left,
+    EbihSpotId::Ebih__Waterfall__West_11,
+    EbihSpotId::Ebih__Waterfall__Lower_West_Tree,
+    EbihSpotId::Ebih__Waterfall__West_Lower_Path,
+    EbihSpotId::Ebih__Waterfall__West_10,
+    EbihSpotId::Ebih__Waterfall__West_9,
+    EbihSpotId::Ebih__Waterfall__West_Climb,
+    EbihSpotId::Ebih__Waterfall__Ledge_Below_Hole,
+    EbihSpotId::Ebih__Waterfall__Below_Left_Switch,
+    EbihSpotId::Ebih__Waterfall__West_8,
+    EbihSpotId::Ebih__Waterfall__West_Door_Left,
+    EbihSpotId::Ebih__Waterfall__West_Door,
+    EbihSpotId::Ebih__Waterfall__West_Door_Right,
+    EbihSpotId::Ebih__Waterfall__Middle_West_Tree,
+    EbihSpotId::Ebih__Waterfall__West_Main_Path,
+    EbihSpotId::Ebih__Waterfall__Cave_Entrance,
+    EbihSpotId::Ebih__Waterfall__Center_Main_Path,
+    EbihSpotId::Ebih__Waterfall__Big_Tree,
+    EbihSpotId::Ebih__Waterfall__Below_Tree,
+    EbihSpotId::Ebih__Waterfall__Platform,
+    EbihSpotId::Ebih__Waterfall__East_8,
+    EbihSpotId::Ebih__Waterfall__East_7,
+    EbihSpotId::Ebih__Waterfall__Top_Waterfall,
+    EbihSpotId::Ebih__Waterfall__West_7,
+    EbihSpotId::Ebih__Ebih_West__East_10,
+    EbihSpotId::Ebih__Ebih_West__Mid_Save,
+    EbihSpotId::Ebih__Ebih_West__Alcove_Entrance,
+    EbihSpotId::Ebih__Ebih_West__Alcove,
+    EbihSpotId::Ebih__Ebih_West__Above_Alcove,
+    EbihSpotId::Ebih__Ebih_West__East_9,
+    EbihSpotId::Ebih__Ebih_West__Block_Left,
+    EbihSpotId::Ebih__Ebih_West__East_7,
+    EbihSpotId::Ebih__Ebih_West__Above_Chute,
+    EbihSpotId::Ebih__Ebih_West__Upper_Save,
+    EbihSpotId::Ebih__Ebih_West__Medium_High_Platform,
+    EbihSpotId::Ebih__Ebih_West__High_Platform,
+    EbihSpotId::Ebih__Ebih_West__High_Ledge,
+    EbihSpotId::Ebih__Ebih_West__East_6,
+    EbihSpotId::Ebih__Ebih_West__East_8,
+    EbihSpotId::Ebih__Ebih_West__Middle_Middle,
+    EbihSpotId::Ebih__Ebih_West__Middle_Cliff,
+    EbihSpotId::Ebih__Ebih_West__Giguna_Pillar,
+    EbihSpotId::Ebih__Ebih_West__West_9,
+    EbihSpotId::Ebih__Ebih_West__Block_Right,
+    EbihSpotId::Ebih__Ebih_West__Refill_Station,
+    EbihSpotId::Ebih__Ebih_West__East_11,
+    EbihSpotId::Ebih__Ebih_West__Above_Door,
+    EbihSpotId::Ebih__Ebih_West__Below_Door,
+    EbihSpotId::Ebih__Ebih_West__Small_Gap,
+    EbihSpotId::Ebih__Ebih_West__Left_of_Gap,
+    EbihSpotId::Ebih__Ebih_West__Left_of_Switch,
+    EbihSpotId::Ebih__Ebih_West__Lower_Hill,
+    EbihSpotId::Ebih__Ebih_West__Lower_Cliff,
+    EbihSpotId::Ebih__Ebih_West__Lower_Platform,
+    EbihSpotId::Ebih__Ebih_West__Lower_Save,
+    EbihSpotId::Ebih__Ebih_West__West_High_Cliff,
+    EbihSpotId::Ebih__Ebih_West__West_Fork,
+    EbihSpotId::Ebih__Ebih_West__West_11,
+    EbihSpotId::Ebih__Ebih_West__West_12,
+    EbihSpotId::Ebih__Ebih_West__West_13,
+    EbihSpotId::Ebih__Ebih_West__East_13,
+    EbihSpotId::Ebih__Cave__Entry,
+    EbihSpotId::Ebih__Ebih_East__West_8,
+    EbihSpotId::Ebih__Ebih_East__Moving_Platform,
+    EbihSpotId::Ebih__Ebih_East__Ledge_End,
+    EbihSpotId::Ebih__Ebih_East__Lower_Moving_Platform,
+    EbihSpotId::Ebih__Ebih_East__Corner,
+    EbihSpotId::Ebih__Ebih_East__Dispenser,
+    EbihSpotId::Ebih__Ebih_East__East_Ledge,
+    EbihSpotId::Ebih__Ebih_East__Middle_Platform,
+    EbihSpotId::Ebih__Ebih_East__Upper_Ledge,
+    EbihSpotId::Ebih__Ebih_East__West_7,
+    EbihSpotId::Ebih__Ebih_East__East_Hill,
+    EbihSpotId::Ebih__Ebih_East__East_9,
+    EbihSpotId::Ebih__Grid_21_2_6__West_6,
+    EbihSpotId::Ebih__Grid_21_2_6__Portal_Stand,
+    EbihSpotId::Ebih__Grid_21_2_6__East_6,
+    EbihSpotId::Ebih__Boss_Room__West_6,
+    EbihSpotId::Ebih__Boss_Room__Boss,
+    EbihSpotId::Ebih__Boss_Room__Past_Boss,
+    EbihSpotId::Ebih__Boss_Room__Lower_Tree,
+    EbihSpotId::Ebih__Boss_Room__Lower_Ledge,
+    EbihSpotId::Ebih__Boss_Room__East_6,
+    EbihSpotId::Ebih__Boss_Room__East_4,
+    EbihSpotId::Ebih__Boss_Room__East_Ledge,
+    EbihSpotId::Ebih__Boss_Room__Upper_Tree,
+    EbihSpotId::Ebih__Boss_Room__High_Platform,
+    EbihSpotId::Ebih__Boss_Room__West_5,
+    EbihSpotId::Ebih__Drone_Room__West_6,
+    EbihSpotId::Ebih__Drone_Room__West_4,
+    EbihSpotId::Ebih__Drone_Room__Pit_Left,
+    EbihSpotId::Ebih__Drone_Room__Portal,
+    EbihSpotId::Ebih__Drone_Room__Item,
+    EbihSpotId::Ebih__Drone_Room__Middle_Platform,
+    EbihSpotId::Ebih__Drone_Room__Portal_Exit,
+    EbihSpotId::Ebih__Drone_Room__Moving_Platform,
+    EbihSpotId::Ebih__Drone_Room__Left_Platform,
+    EbihSpotId::Ebih__Drone_Room__Tree,
+    EbihSpotId::Ebih__Drone_Room__East_4,
+    EbihSpotId::Ebih__Grid_25_2_6__West_4,
+    EbihSpotId::Ebih__Grid_25_2_6__Pit,
+    EbihSpotId::Ebih__Grid_26_10_11__West_11,
+    EbihSpotId::Ebih__Grid_26_10_11__Middle_Bottom,
+    EbihSpotId::Ebih__Grid_26_10_11__Under_Ledge,
+    EbihSpotId::Ebih__Grid_26_10_11__Ledge,
+    EbihSpotId::Ebih__Grid_26_10_11__Middle_Platform,
+    EbihSpotId::Ebih__Grid_26_10_11__Upper_Platform,
+    EbihSpotId::Ebih__Grid_26_10_11__West_10,
+    EbihSpotId::Ebih__Grid_26_10_11__Cliff,
+    EbihSpotId::Ebih__Grid_26_10_11__East_10,
+    EbihSpotId::Ebih__Observation_Tower_Room__West_9,
+    EbihSpotId::Ebih__Observation_Tower_Room__Tower_Top,
+    EbihSpotId::Ebih__Observation_Tower_Room__Tower_Bottom,
+    EbihSpotId::Ebih__Observation_Tower_Room__Cliff,
+    EbihSpotId::Ebih__Observation_Tower_Room__West_10,
+    EbihSpotId::Ebih__Observation_Tower_Room__East_11,
+    EbihSpotId::Ebih__Vertical_Interchange__West_13,
+    EbihSpotId::Ebih__Vertical_Interchange__Passage_West,
+    EbihSpotId::Ebih__Vertical_Interchange__Door_West,
+    EbihSpotId::Ebih__Vertical_Interchange__Door,
+    EbihSpotId::Ebih__Vertical_Interchange__Door_East,
+    EbihSpotId::Ebih__Vertical_Interchange__Passage_East,
+    EbihSpotId::Ebih__Vertical_Interchange__East_13,
+    EbihSpotId::Ebih__Vertical_Interchange__Middle_Descent,
+    EbihSpotId::Ebih__Vertical_Interchange__Middle_Drop,
+    EbihSpotId::Ebih__Vertical_Interchange__Cliff_by_Refill,
+    EbihSpotId::Ebih__Vertical_Interchange__Refill_Station,
+    EbihSpotId::Ebih__Vertical_Interchange__Blocked_Refill_Station,
+    EbihSpotId::Ebih__Vertical_Interchange__Block_Cubby,
+    EbihSpotId::Ebih__Vertical_Interchange__Cubby_Exit,
+    EbihSpotId::Ebih__Vertical_Interchange__East_Tunnel,
+    EbihSpotId::Ebih__Vertical_Interchange__East_15,
+    EbihSpotId::Ebih__Vertical_Interchange__Below_Door,
+    EbihSpotId::Ebih__Vertical_Interchange__Lower_West_Cliff,
+    EbihSpotId::Ebih__Vertical_Interchange__Switch,
+    EbihSpotId::Ebih__Vertical_Interchange__South,
+    EbihSpotId::Ebih__Gem_Room__West_13,
+];
+static RAW_GIGUNA_BREACH_SPOTS: [Giguna_BreachSpotId; 66] = [
+    Giguna_BreachSpotId::Giguna_Breach__Peak__Save_Point,
+    Giguna_BreachSpotId::Giguna_Breach__Peak__East_Passage,
+    Giguna_BreachSpotId::Giguna_Breach__Peak__Column,
+    Giguna_BreachSpotId::Giguna_Breach__Peak__West_7,
+    Giguna_BreachSpotId::Giguna_Breach__Peak__East_6,
+    Giguna_BreachSpotId::Giguna_Breach__Peak__Upper_East,
+    Giguna_BreachSpotId::Giguna_Breach__Peak__Upper_West,
+    Giguna_BreachSpotId::Giguna_Breach__Peak__Portal,
+    Giguna_BreachSpotId::Giguna_Breach__Chimney__East_7,
+    Giguna_BreachSpotId::Giguna_Breach__Chimney__Top,
+    Giguna_BreachSpotId::Giguna_Breach__Chimney__Middle_Platform,
+    Giguna_BreachSpotId::Giguna_Breach__Chimney__East_9,
+    Giguna_BreachSpotId::Giguna_Breach__Chimney__South,
+    Giguna_BreachSpotId::Giguna_Breach__Chimney__East_8,
+    Giguna_BreachSpotId::Giguna_Breach__Chimney__Cache,
+    Giguna_BreachSpotId::Giguna_Breach__Below_Chimney__North,
+    Giguna_BreachSpotId::Giguna_Breach__Below_Chimney__Passage_Lip,
+    Giguna_BreachSpotId::Giguna_Breach__Below_Chimney__East_Ledge,
+    Giguna_BreachSpotId::Giguna_Breach__Below_Chimney__Cubby_Entrance,
+    Giguna_BreachSpotId::Giguna_Breach__Below_Chimney__West_Passage,
+    Giguna_BreachSpotId::Giguna_Breach__Below_Chimney__Southwest,
+    Giguna_BreachSpotId::Giguna_Breach__Cubby__Entrance,
+    Giguna_BreachSpotId::Giguna_Breach__Cubby__Rocks,
+    Giguna_BreachSpotId::Giguna_Breach__SW_Save__North,
+    Giguna_BreachSpotId::Giguna_Breach__SW_Save__Lower_Platform,
+    Giguna_BreachSpotId::Giguna_Breach__SW_Save__Side_Door,
+    Giguna_BreachSpotId::Giguna_Breach__SW_Save__West_11,
+    Giguna_BreachSpotId::Giguna_Breach__SW_Save__Save_Point,
+    Giguna_BreachSpotId::Giguna_Breach__SW_Save__East_12,
+    Giguna_BreachSpotId::Giguna_Breach__Robopede__West,
+    Giguna_BreachSpotId::Giguna_Breach__Robopede__Center,
+    Giguna_BreachSpotId::Giguna_Breach__Robopede__North,
+    Giguna_BreachSpotId::Giguna_Breach__Grid_14_10_11__South,
+    Giguna_BreachSpotId::Giguna_Breach__Grid_14_10_11__East_11,
+    Giguna_BreachSpotId::Giguna_Breach__Grid_14_10_11__East_10,
+    Giguna_BreachSpotId::Giguna_Breach__Grid_14_10_11__High_Ledge,
+    Giguna_BreachSpotId::Giguna_Breach__Grid_14_10_11__North,
+    Giguna_BreachSpotId::Giguna_Breach__Fire_Room__West_11,
+    Giguna_BreachSpotId::Giguna_Breach__Fire_Room__First_Fire,
+    Giguna_BreachSpotId::Giguna_Breach__Fire_Room__Cuesta,
+    Giguna_BreachSpotId::Giguna_Breach__Fire_Room__South,
+    Giguna_BreachSpotId::Giguna_Breach__Fire_Room__East_11,
+    Giguna_BreachSpotId::Giguna_Breach__Fire_Room__West_Plateau,
+    Giguna_BreachSpotId::Giguna_Breach__Fire_Room__West_10,
+    Giguna_BreachSpotId::Giguna_Breach__Slingshot__West,
+    Giguna_BreachSpotId::Giguna_Breach__Slingshot__Column,
+    Giguna_BreachSpotId::Giguna_Breach__Slingshot__Ravine,
+    Giguna_BreachSpotId::Giguna_Breach__Antechamber__North,
+    Giguna_BreachSpotId::Giguna_Breach__Central__West_9,
+    Giguna_BreachSpotId::Giguna_Breach__Central__Wall,
+    Giguna_BreachSpotId::Giguna_Breach__Central__South,
+    Giguna_BreachSpotId::Giguna_Breach__Central__Upper_Floating_Brick,
+    Giguna_BreachSpotId::Giguna_Breach__Central__West_Statue,
+    Giguna_BreachSpotId::Giguna_Breach__Central__Statuette,
+    Giguna_BreachSpotId::Giguna_Breach__Central__Tunnel,
+    Giguna_BreachSpotId::Giguna_Breach__Central__West_8,
+    Giguna_BreachSpotId::Giguna_Breach__Central__Middle_Statue,
+    Giguna_BreachSpotId::Giguna_Breach__Central__East_Brick,
+    Giguna_BreachSpotId::Giguna_Breach__Central__East_9,
+    Giguna_BreachSpotId::Giguna_Breach__Ascent__West_9,
+    Giguna_BreachSpotId::Giguna_Breach__Ascent__Bottom,
+    Giguna_BreachSpotId::Giguna_Breach__Ascent__Top,
+    Giguna_BreachSpotId::Giguna_Breach__Ascent__West_6,
+    Giguna_BreachSpotId::Giguna_Breach__Pink_Clouds__Normal_Entry,
+    Giguna_BreachSpotId::Giguna_Breach__Pink_Clouds__Quick_Entry,
+    Giguna_BreachSpotId::Giguna_Breach__Pink_Clouds__Corner,
+];
+static RAW_GIGUNA_SPOTS: [GigunaSpotId; 325] = [
+    GigunaSpotId::Giguna__Giguna_Northeast__East_9,
+    GigunaSpotId::Giguna__Giguna_Northeast__Inner_Wall,
+    GigunaSpotId::Giguna__Giguna_Northeast__Crow_Eating,
+    GigunaSpotId::Giguna__Giguna_Northeast__Save_Point,
+    GigunaSpotId::Giguna__Giguna_Northeast__Step,
+    GigunaSpotId::Giguna__Giguna_Northeast__West_10,
+    GigunaSpotId::Giguna__Giguna_Northeast__West_9,
+    GigunaSpotId::Giguna__Giguna_Northeast__Gate_Left,
+    GigunaSpotId::Giguna__Giguna_Northeast__Gate_Vent,
+    GigunaSpotId::Giguna__Giguna_Northeast__Gate_Button,
+    GigunaSpotId::Giguna__Giguna_Northeast__Gate_Right,
+    GigunaSpotId::Giguna__Giguna_Northeast__Shaft_Bottom,
+    GigunaSpotId::Giguna__Giguna_Northeast__East_11,
+    GigunaSpotId::Giguna__Giguna_Northeast__Right_Column,
+    GigunaSpotId::Giguna__Giguna_Northeast__Switch,
+    GigunaSpotId::Giguna__Giguna_Northeast__Door,
+    GigunaSpotId::Giguna__Giguna_Northeast__Vault,
+    GigunaSpotId::Giguna__Carnelian__East_10,
+    GigunaSpotId::Giguna__Carnelian__East_Cliff,
+    GigunaSpotId::Giguna__Carnelian__Upper_Susar,
+    GigunaSpotId::Giguna__Carnelian__Middle_Platforms,
+    GigunaSpotId::Giguna__Carnelian__Switch,
+    GigunaSpotId::Giguna__Carnelian__Door,
+    GigunaSpotId::Giguna__Carnelian__Vault,
+    GigunaSpotId::Giguna__Carnelian__Rock,
+    GigunaSpotId::Giguna__Carnelian__Lower_Susar,
+    GigunaSpotId::Giguna__Carnelian__Upper_Path,
+    GigunaSpotId::Giguna__Carnelian__West_Ledge,
+    GigunaSpotId::Giguna__Carnelian__West_10,
+    GigunaSpotId::Giguna__West_Caverns__East_10,
+    GigunaSpotId::Giguna__West_Caverns__East_Platform,
+    GigunaSpotId::Giguna__West_Caverns__Small_Staircase,
+    GigunaSpotId::Giguna__West_Caverns__Tunnel_Entrance,
+    GigunaSpotId::Giguna__West_Caverns__Small_Platform,
+    GigunaSpotId::Giguna__West_Caverns__Higher_Ledge,
+    GigunaSpotId::Giguna__West_Caverns__Floating_Brick,
+    GigunaSpotId::Giguna__West_Caverns__Column_2_Top,
+    GigunaSpotId::Giguna__West_Caverns__Top_Gap_Right,
+    GigunaSpotId::Giguna__West_Caverns__Top_Gap_Left,
+    GigunaSpotId::Giguna__West_Caverns__Column_1_Top_Right,
+    GigunaSpotId::Giguna__West_Caverns__Column_1_Top_Left,
+    GigunaSpotId::Giguna__West_Caverns__Cache,
+    GigunaSpotId::Giguna__West_Caverns__Bush,
+    GigunaSpotId::Giguna__West_Caverns__Tunnel_Bottom,
+    GigunaSpotId::Giguna__West_Caverns__Tunnel_Fork,
+    GigunaSpotId::Giguna__West_Caverns__East_Susar,
+    GigunaSpotId::Giguna__West_Caverns__East_12,
+    GigunaSpotId::Giguna__West_Caverns__East_13,
+    GigunaSpotId::Giguna__West_Caverns__Northwest,
+    GigunaSpotId::Giguna__West_Caverns__West_13,
+    GigunaSpotId::Giguna__Wasteland__West_12,
+    GigunaSpotId::Giguna__Wasteland__Upper_Cliff,
+    GigunaSpotId::Giguna__Wasteland__West_13,
+    GigunaSpotId::Giguna__Wasteland__Middle_Path,
+    GigunaSpotId::Giguna__Wasteland__Middle_Cliff,
+    GigunaSpotId::Giguna__Wasteland__Lower_Path_Right,
+    GigunaSpotId::Giguna__Wasteland__Lower_Path_Left,
+    GigunaSpotId::Giguna__Wasteland__Lower_Cliff,
+    GigunaSpotId::Giguna__Wasteland__West_14,
+    GigunaSpotId::Giguna__Wasteland__East_12,
+    GigunaSpotId::Giguna__Wasteland__East_13,
+    GigunaSpotId::Giguna__Wasteland__East_14,
+    GigunaSpotId::Giguna__Wasteland__East_Ledge,
+    GigunaSpotId::Giguna__Wasteland__Door_Left,
+    GigunaSpotId::Giguna__Wasteland__Door_Right,
+    GigunaSpotId::Giguna__Wasteland__Bluff_by_Door,
+    GigunaSpotId::Giguna__Wasteland__Tiny_Hill,
+    GigunaSpotId::Giguna__Wasteland__Steeper_Hill,
+    GigunaSpotId::Giguna__Wasteland__Center_Plains,
+    GigunaSpotId::Giguna__Wasteland__West_Plains,
+    GigunaSpotId::Giguna__Wasteland__Passage_East,
+    GigunaSpotId::Giguna__Wasteland__Passage_Cache,
+    GigunaSpotId::Giguna__Wasteland__Westward_Hill,
+    GigunaSpotId::Giguna__Wasteland__Upper_Cache,
+    GigunaSpotId::Giguna__Wasteland__Cache_Ledge,
+    GigunaSpotId::Giguna__Wasteland__Left_Platform_West,
+    GigunaSpotId::Giguna__Wasteland__Left_Platform_East,
+    GigunaSpotId::Giguna__Wasteland__Center_Platform_West,
+    GigunaSpotId::Giguna__Wasteland__Center_Platform_East,
+    GigunaSpotId::Giguna__Wasteland__Right_Platform_West,
+    GigunaSpotId::Giguna__Wasteland__Right_Platform_East,
+    GigunaSpotId::Giguna__Wasteland__Lower_Platform_West,
+    GigunaSpotId::Giguna__Wasteland__Lower_Platform_East,
+    GigunaSpotId::Giguna__Wasteland__Ladder_Ledge,
+    GigunaSpotId::Giguna__Wasteland__Switch_Ledge,
+    GigunaSpotId::Giguna__Wasteland__Switch_Approach,
+    GigunaSpotId::Giguna__Wasteland__Switch,
+    GigunaSpotId::Giguna__Giguna_Base__East_14,
+    GigunaSpotId::Giguna__Giguna_Base__Stone_Knob,
+    GigunaSpotId::Giguna__Giguna_Base__Upper_Cliff,
+    GigunaSpotId::Giguna__Giguna_Base__Right_Pillar,
+    GigunaSpotId::Giguna__Giguna_Base__Left_Pillar,
+    GigunaSpotId::Giguna__Giguna_Base__Ruin,
+    GigunaSpotId::Giguna__Giguna_Base__Middle_Platform,
+    GigunaSpotId::Giguna__Giguna_Base__Kari,
+    GigunaSpotId::Giguna__Giguna_Base__Building_Entry,
+    GigunaSpotId::Giguna__Giguna_Base__Staircase_Top,
+    GigunaSpotId::Giguna__Giguna_Base__West_Grate,
+    GigunaSpotId::Giguna__Giguna_Base__West_15,
+    GigunaSpotId::Giguna__Giguna_Base__Staircase_Bottom,
+    GigunaSpotId::Giguna__Giguna_Base__Table,
+    GigunaSpotId::Giguna__Giguna_Base__Save_Point,
+    GigunaSpotId::Giguna__Giguna_Base__West_16,
+    GigunaSpotId::Giguna__Giguna_Base__East_17,
+    GigunaSpotId::Giguna__Giguna_Base__Lower_Fork,
+    GigunaSpotId::Giguna__Giguna_Base__Below_Gate,
+    GigunaSpotId::Giguna__Giguna_Base__Switch_Distance_1,
+    GigunaSpotId::Giguna__Giguna_Base__Switch_Distance_2,
+    GigunaSpotId::Giguna__Giguna_Base__Switch_Distance_3,
+    GigunaSpotId::Giguna__Giguna_Base__Switch_Distance_4,
+    GigunaSpotId::Giguna__Building_Interior__Entry,
+    GigunaSpotId::Giguna__Building_Interior__Bookshelf,
+    GigunaSpotId::Giguna__Ruins_East__East_9,
+    GigunaSpotId::Giguna__Ruins_East__Bottom_Rock,
+    GigunaSpotId::Giguna__Ruins_East__West_9,
+    GigunaSpotId::Giguna__Ruins_East__Cliff,
+    GigunaSpotId::Giguna__Ruins_East__Ledge,
+    GigunaSpotId::Giguna__Ruins_East__Small_Passage,
+    GigunaSpotId::Giguna__Ruins_East__West_8,
+    GigunaSpotId::Giguna__Ruins_East__Pillar,
+    GigunaSpotId::Giguna__Ruins_East__West_7,
+    GigunaSpotId::Giguna__Ruins_East__Way_Up_High,
+    GigunaSpotId::Giguna__Ruins_Center__East_8,
+    GigunaSpotId::Giguna__Ruins_Center__Tablet,
+    GigunaSpotId::Giguna__Ruins_Center__East_9,
+    GigunaSpotId::Giguna__Ruins_Center__Wall_Bottom,
+    GigunaSpotId::Giguna__Ruins_Center__Wall_Top,
+    GigunaSpotId::Giguna__Ruins_Center__Center_Top,
+    GigunaSpotId::Giguna__Ruins_Center__West_Platform_Right,
+    GigunaSpotId::Giguna__Ruins_Center__West_Platform_Left,
+    GigunaSpotId::Giguna__Ruins_Center__West_9,
+    GigunaSpotId::Giguna__Ruins_West__East_9,
+    GigunaSpotId::Giguna__Ruins_West__Save_Point,
+    GigunaSpotId::Giguna__Ruins_West__Platform,
+    GigunaSpotId::Giguna__Ruins_West__Nook,
+    GigunaSpotId::Giguna__Ruins_West__Lower_Ledge,
+    GigunaSpotId::Giguna__Ruins_West__Upper_Ledge,
+    GigunaSpotId::Giguna__Ruins_West__East_7,
+    GigunaSpotId::Giguna__Ruins_West__Rooftop_East_Edge,
+    GigunaSpotId::Giguna__Ruins_West__Rooftop_West_Edge,
+    GigunaSpotId::Giguna__Ruins_West__West_7,
+    GigunaSpotId::Giguna__Ruins_Top__West_7,
+    GigunaSpotId::Giguna__Ruins_Top__West_Door,
+    GigunaSpotId::Giguna__Ruins_Top__West_Pillar,
+    GigunaSpotId::Giguna__Ruins_Top__Entryway,
+    GigunaSpotId::Giguna__Ruins_Top__Portal_Left,
+    GigunaSpotId::Giguna__Ruins_Top__Small_Ledge,
+    GigunaSpotId::Giguna__Ruins_Top__Portal,
+    GigunaSpotId::Giguna__Ruins_Top__Interior_Ledge,
+    GigunaSpotId::Giguna__Ruins_Top__Upper_Tunnel,
+    GigunaSpotId::Giguna__Ruins_Top__Flask,
+    GigunaSpotId::Giguna__Ruins_Top__East_Door,
+    GigunaSpotId::Giguna__Ruins_Top__East_7,
+    GigunaSpotId::Giguna__Ruins_Top__Save_Point,
+    GigunaSpotId::Giguna__Ruins_Top__Switch,
+    GigunaSpotId::Giguna__Ruins_Top__Rooftop_West,
+    GigunaSpotId::Giguna__Ruins_Top__Rooftop_East,
+    GigunaSpotId::Giguna__Ruins_Top__Rooftop_Gutter,
+    GigunaSpotId::Giguna__Ruins_Top__Turret_Balcony_East,
+    GigunaSpotId::Giguna__Ruins_Top__Turret_Balcony_West,
+    GigunaSpotId::Giguna__West_Tower__East_7,
+    GigunaSpotId::Giguna__West_Tower__Top,
+    GigunaSpotId::Giguna__West_Tower__Southwest,
+    GigunaSpotId::Giguna__Far_Corner__East_13,
+    GigunaSpotId::Giguna__Far_Corner__Grass,
+    GigunaSpotId::Giguna__Far_Corner__South,
+    GigunaSpotId::Giguna__Helipad__East_15,
+    GigunaSpotId::Giguna__Helipad__North,
+    GigunaSpotId::Giguna__Helipad__Helicopter,
+    GigunaSpotId::Giguna__Helipad__East_16,
+    GigunaSpotId::Giguna__Helipad__Irikar_Drop,
+    GigunaSpotId::Giguna__Helipad__Wall_Top,
+    GigunaSpotId::Giguna__Helipad__Railing,
+    GigunaSpotId::Giguna__Helipad__Wall_Bottom,
+    GigunaSpotId::Giguna__Helipad__So_Close,
+    GigunaSpotId::Giguna__Helipad__Tablet_Ledge,
+    GigunaSpotId::Giguna__Helipad__Staircase_Top,
+    GigunaSpotId::Giguna__Helipad__East_18,
+    GigunaSpotId::Giguna__Helipad__South_Left,
+    GigunaSpotId::Giguna__Helipad__South_Middle,
+    GigunaSpotId::Giguna__Helipad__South_Right,
+    GigunaSpotId::Giguna__Helipad__Lowest_Ledge,
+    GigunaSpotId::Giguna__Clouds__North_Left,
+    GigunaSpotId::Giguna__Clouds__North_Middle,
+    GigunaSpotId::Giguna__Clouds__North_Right,
+    GigunaSpotId::Giguna__Clouds__North_Under_Ledge,
+    GigunaSpotId::Giguna__Clouds__Platform_Start,
+    GigunaSpotId::Giguna__Clouds__Platform_Stop,
+    GigunaSpotId::Giguna__Clouds__Cache,
+    GigunaSpotId::Giguna__Clouds__Platform_Early_Portal,
+    GigunaSpotId::Giguna__Clouds__Southwest,
+    GigunaSpotId::Giguna__Clouds__Straight_Down,
+    GigunaSpotId::Giguna__Clouds__Pull_Right,
+    GigunaSpotId::Giguna__Clouds__Southeast,
+    GigunaSpotId::Giguna__Lamassu__West_18,
+    GigunaSpotId::Giguna__Lamassu__Staircase_Top,
+    GigunaSpotId::Giguna__Lamassu__Staircase_Bottom,
+    GigunaSpotId::Giguna__Lamassu__Staircase_Landing,
+    GigunaSpotId::Giguna__Lamassu__Broken_Pillar,
+    GigunaSpotId::Giguna__Lamassu__Upper_Platform_Edge,
+    GigunaSpotId::Giguna__Lamassu__Lower_Platform_Left,
+    GigunaSpotId::Giguna__Lamassu__Lower_Platform_Right,
+    GigunaSpotId::Giguna__Lamassu__Head,
+    GigunaSpotId::Giguna__Lamassu__Rear_Platform,
+    GigunaSpotId::Giguna__Lamassu__Wingtip,
+    GigunaSpotId::Giguna__Lamassu__Rear_Gap,
+    GigunaSpotId::Giguna__Lamassu__Deposit,
+    GigunaSpotId::Giguna__Lamassu__East_18,
+    GigunaSpotId::Giguna__Dual_Path__West_18,
+    GigunaSpotId::Giguna__Dual_Path__Below_Left_Switch,
+    GigunaSpotId::Giguna__Dual_Path__Left_Switch,
+    GigunaSpotId::Giguna__Dual_Path__West_Slope,
+    GigunaSpotId::Giguna__Dual_Path__In_the_Grass,
+    GigunaSpotId::Giguna__Dual_Path__Base_of_Wall,
+    GigunaSpotId::Giguna__Dual_Path__Wall_Secret,
+    GigunaSpotId::Giguna__Dual_Path__Wall_Top,
+    GigunaSpotId::Giguna__Dual_Path__Right_Switch,
+    GigunaSpotId::Giguna__Dual_Path__Below_Right_Switch,
+    GigunaSpotId::Giguna__Dual_Path__East_Gate,
+    GigunaSpotId::Giguna__Dual_Path__East_18,
+    GigunaSpotId::Giguna__Dual_Path__West_Gate,
+    GigunaSpotId::Giguna__Dual_Path__West_Gate_NW,
+    GigunaSpotId::Giguna__Dual_Path__West_Gate_NE,
+    GigunaSpotId::Giguna__Dual_Path__West_17,
+    GigunaSpotId::Giguna__Dual_Path__Midway,
+    GigunaSpotId::Giguna__Dual_Path__Midway_Plateau,
+    GigunaSpotId::Giguna__Dual_Path__East_Gate_NW,
+    GigunaSpotId::Giguna__Dual_Path__East_Gate_NE,
+    GigunaSpotId::Giguna__Dual_Path__East_17,
+    GigunaSpotId::Giguna__Hard_Rock__East_17,
+    GigunaSpotId::Giguna__Hard_Rock__Rock_Right,
+    GigunaSpotId::Giguna__Hard_Rock__Rock_Center,
+    GigunaSpotId::Giguna__Hard_Rock__Rock_Left,
+    GigunaSpotId::Giguna__Hard_Rock__West_17,
+    GigunaSpotId::Giguna__East_Caverns__West_14,
+    GigunaSpotId::Giguna__East_Caverns__Upper_Platforms_Left,
+    GigunaSpotId::Giguna__East_Caverns__Upper_Platforms_Right,
+    GigunaSpotId::Giguna__East_Caverns__Upper_Floor,
+    GigunaSpotId::Giguna__East_Caverns__Upper_Floor_Ledge,
+    GigunaSpotId::Giguna__East_Caverns__Upper_Susar,
+    GigunaSpotId::Giguna__East_Caverns__Upper_Susar_Mid_jump,
+    GigunaSpotId::Giguna__East_Caverns__Upper_Susar_Jump_from_East,
+    GigunaSpotId::Giguna__East_Caverns__Top_Past_Susar,
+    GigunaSpotId::Giguna__East_Caverns__Top_Ledge,
+    GigunaSpotId::Giguna__East_Caverns__Upper_Passage_West,
+    GigunaSpotId::Giguna__East_Caverns__Upper_Passage_East,
+    GigunaSpotId::Giguna__East_Caverns__East_Shaft,
+    GigunaSpotId::Giguna__East_Caverns__East_Side,
+    GigunaSpotId::Giguna__East_Caverns__Carving,
+    GigunaSpotId::Giguna__East_Caverns__Middle_Ledge,
+    GigunaSpotId::Giguna__East_Caverns__Mid_Susar,
+    GigunaSpotId::Giguna__East_Caverns__Middle_Rock,
+    GigunaSpotId::Giguna__East_Caverns__Hidden_Passage_East,
+    GigunaSpotId::Giguna__East_Caverns__Hidden_Passage_Center,
+    GigunaSpotId::Giguna__East_Caverns__Hidden_Passage_West,
+    GigunaSpotId::Giguna__East_Caverns__Midwest_Ledge,
+    GigunaSpotId::Giguna__East_Caverns__Statues_Ledge,
+    GigunaSpotId::Giguna__East_Caverns__Switch,
+    GigunaSpotId::Giguna__East_Caverns__Door,
+    GigunaSpotId::Giguna__East_Caverns__West_16,
+    GigunaSpotId::Giguna__East_Caverns__Arc_Ledge,
+    GigunaSpotId::Giguna__East_Caverns__Arc_Passage,
+    GigunaSpotId::Giguna__East_Caverns__Lower_Ledge,
+    GigunaSpotId::Giguna__East_Caverns__West_17,
+    GigunaSpotId::Giguna__East_Caverns__West_Grass,
+    GigunaSpotId::Giguna__East_Caverns__Under_Lower_Ledge,
+    GigunaSpotId::Giguna__East_Caverns__East_Grass,
+    GigunaSpotId::Giguna__East_Caverns__East_17,
+    GigunaSpotId::Giguna__Gateway__West_18,
+    GigunaSpotId::Giguna__Gateway__Passage_Entry,
+    GigunaSpotId::Giguna__Gateway__Passage_Exit,
+    GigunaSpotId::Giguna__Gateway__Door,
+    GigunaSpotId::Giguna__Gateway__Left_Platform,
+    GigunaSpotId::Giguna__Gateway__Right_Platform,
+    GigunaSpotId::Giguna__Gateway__Block_Left,
+    GigunaSpotId::Giguna__Gateway__Block_Right,
+    GigunaSpotId::Giguna__Gateway__Refill_Station,
+    GigunaSpotId::Giguna__Gateway__Far_Ledge,
+    GigunaSpotId::Giguna__Gateway__One_Jump,
+    GigunaSpotId::Giguna__Gateway__Flask_Ledge,
+    GigunaSpotId::Giguna__Gateway__Block_Lowered,
+    GigunaSpotId::Giguna__Gateway__West_19,
+    GigunaSpotId::Giguna__Gateway__Button,
+    GigunaSpotId::Giguna__Gateway__East_19,
+    GigunaSpotId::Giguna__Labyrinth_East__East_19,
+    GigunaSpotId::Giguna__Vertical_Interchange__West_17,
+    GigunaSpotId::Giguna__Vertical_Interchange__West_19,
+    GigunaSpotId::Giguna__Vertical_Interchange__North,
+    GigunaSpotId::Giguna__Vertical_Interchange__Top_Left_Ledge,
+    GigunaSpotId::Giguna__Vertical_Interchange__Top_Right_Ledge,
+    GigunaSpotId::Giguna__Vertical_Interchange__Top_Rocky_Ledge,
+    GigunaSpotId::Giguna__Vertical_Interchange__Top_Rocky_Outcrop,
+    GigunaSpotId::Giguna__Vertical_Interchange__Top_Passage_Bottom,
+    GigunaSpotId::Giguna__Vertical_Interchange__Ledge_19,
+    GigunaSpotId::Giguna__Vertical_Interchange__East_20,
+    GigunaSpotId::Giguna__Vertical_Interchange__Middle_Below_Top,
+    GigunaSpotId::Giguna__Vertical_Interchange__Middle_Plateau,
+    GigunaSpotId::Giguna__Vertical_Interchange__Gate,
+    GigunaSpotId::Giguna__Vertical_Interchange__Dead_end,
+    GigunaSpotId::Giguna__Vertical_Interchange__Dead_end_Ledge,
+    GigunaSpotId::Giguna__Vertical_Interchange__Middle_Ledge_Below_Gate,
+    GigunaSpotId::Giguna__Vertical_Interchange__Middle_Hill_By_Switch,
+    GigunaSpotId::Giguna__Vertical_Interchange__Switch,
+    GigunaSpotId::Giguna__Antechamber__East_16,
+    GigunaSpotId::Giguna__Antechamber__Statues_Ledge,
+    GigunaSpotId::Giguna__Antechamber__Bottom,
+    GigunaSpotId::Giguna__Antechamber__Small_Bricks,
+    GigunaSpotId::Giguna__Antechamber__Statue_Head,
+    GigunaSpotId::Giguna__Antechamber__Middle_Bricks_Right,
+    GigunaSpotId::Giguna__Antechamber__Middle_Bricks_Left,
+    GigunaSpotId::Giguna__Antechamber__Left_Wall_Lower,
+    GigunaSpotId::Giguna__Antechamber__Left_Wall_Mid,
+    GigunaSpotId::Giguna__Antechamber__West_15,
+    GigunaSpotId::Giguna__Gubi_Lair__East_15,
+    GigunaSpotId::Giguna__Gubi_Lair__East_Tree,
+    GigunaSpotId::Giguna__Gubi_Lair__Rightmost_Platform,
+    GigunaSpotId::Giguna__Gubi_Lair__Lower_Platform,
+    GigunaSpotId::Giguna__Gubi_Lair__Center_East_Sapling,
+    GigunaSpotId::Giguna__Gubi_Lair__Center_West_Sapling,
+    GigunaSpotId::Giguna__Gubi_Lair__Center_Platform,
+    GigunaSpotId::Giguna__Gubi_Lair__Leftmost_Platform,
+    GigunaSpotId::Giguna__Gubi_Lair__Grass_by_Wall,
+    GigunaSpotId::Giguna__Gubi_Lair__West_Brickwork,
+    GigunaSpotId::Giguna__Gubi_Lair__Shaft_Bottom,
+    GigunaSpotId::Giguna__Gubi_Lair__Pedestal,
+];
+static RAW_GLACIER_SPOTS: [GlacierSpotId; 95] = [
+    GlacierSpotId::Glacier__Dock_Elevator__Elevator,
+    GlacierSpotId::Glacier__Dock_Elevator__Connector,
+    GlacierSpotId::Glacier__Dock_Interior__Connector,
+    GlacierSpotId::Glacier__Dock_Interior__Entry,
+    GlacierSpotId::Glacier__Dock_Outside__Entry,
+    GlacierSpotId::Glacier__Dock_Outside__Do_Not_Enter,
+    GlacierSpotId::Glacier__Revival__East_9,
+    GlacierSpotId::Glacier__Revival__Overhang,
+    GlacierSpotId::Glacier__Revival__Ledge,
+    GlacierSpotId::Glacier__Revival__Lower_East,
+    GlacierSpotId::Glacier__Revival__Save_Point,
+    GlacierSpotId::Glacier__Revival__West_8,
+    GlacierSpotId::Glacier__Grid_42_10__West,
+    GlacierSpotId::Glacier__Grid_42_10__East,
+    GlacierSpotId::Glacier__Grid_43_10_11__Top,
+    GlacierSpotId::Glacier__Grid_43_10_11__East,
+    GlacierSpotId::Glacier__Grid_43_10_11__Lower,
+    GlacierSpotId::Glacier__Compass_Room__East,
+    GlacierSpotId::Glacier__Compass_Room__Center,
+    GlacierSpotId::Glacier__Compass_Room__West,
+    GlacierSpotId::Glacier__The_Big_Drop__East,
+    GlacierSpotId::Glacier__The_Big_Drop__Small_Path,
+    GlacierSpotId::Glacier__The_Big_Drop__Water_Surface,
+    GlacierSpotId::Glacier__Grid_39_40_7_9__Upper_East,
+    GlacierSpotId::Glacier__Grid_39_40_7_9__West,
+    GlacierSpotId::Glacier__Grid_37_38_9__East,
+    GlacierSpotId::Glacier__Grid_37_38_9__West,
+    GlacierSpotId::Glacier__Vertical_Room__East_9,
+    GlacierSpotId::Glacier__Vertical_Room__West_9,
+    GlacierSpotId::Glacier__Vertical_Room__Mid_9,
+    GlacierSpotId::Glacier__Vertical_Room__Mid_11,
+    GlacierSpotId::Glacier__Vertical_Room__Under_Switch,
+    GlacierSpotId::Glacier__Vertical_Room__Past_Gate,
+    GlacierSpotId::Glacier__Vertical_Room__Peak,
+    GlacierSpotId::Glacier__Vertical_Room__West_8,
+    GlacierSpotId::Glacier__Vertical_Room__East_Corner,
+    GlacierSpotId::Glacier__Vertical_Room__East_12,
+    GlacierSpotId::Glacier__Vertical_Room__Lower_West_Corner,
+    GlacierSpotId::Glacier__Vertical_Room__East_13,
+    GlacierSpotId::Glacier__Boomerang_Antechamber__West_13,
+    GlacierSpotId::Glacier__Boomerang_Antechamber__East_12,
+    GlacierSpotId::Glacier__Boomerang_Antechamber__Upper_East,
+    GlacierSpotId::Glacier__Boomerang_Antechamber__West_12,
+    GlacierSpotId::Glacier__Boomerang_Room__West,
+    GlacierSpotId::Glacier__Boomerang_Room__Platform,
+    GlacierSpotId::Glacier__Boomerang_Room__Center_ish,
+    GlacierSpotId::Glacier__Boomerang_Room__Pedestal,
+    GlacierSpotId::Glacier__Boomerang_Room__Upper_Gate_East,
+    GlacierSpotId::Glacier__Boomerang_Room__Center_Ledge,
+    GlacierSpotId::Glacier__Boomerang_Room__Upper_West,
+    GlacierSpotId::Glacier__Ledge_Grab_Room__East_9,
+    GlacierSpotId::Glacier__Ledge_Grab_Room__Column,
+    GlacierSpotId::Glacier__Ledge_Grab_Room__Gate_Ledge,
+    GlacierSpotId::Glacier__Ledge_Grab_Room__East_11,
+    GlacierSpotId::Glacier__Ledge_Grab_Room__Mid_35,
+    GlacierSpotId::Glacier__Ledge_Grab_Room__Mid_34,
+    GlacierSpotId::Glacier__Ledge_Grab_Room__Cliff,
+    GlacierSpotId::Glacier__Ledge_Grab_Room__Cliff_Bottom,
+    GlacierSpotId::Glacier__Ledge_Grab_Room__Pedestal,
+    GlacierSpotId::Glacier__Ledge_Grab_Room__Gate,
+    GlacierSpotId::Glacier__Ledge_Grab_Room__West,
+    GlacierSpotId::Glacier__Ledge_Grab_Room__Lower_Platform,
+    GlacierSpotId::Glacier__Ledge_Grab_Room__Upper_Platform,
+    GlacierSpotId::Glacier__Ledge_Grab_Room__Fork,
+    GlacierSpotId::Glacier__Peak__East_8,
+    GlacierSpotId::Glacier__Peak__Top_Platform_East,
+    GlacierSpotId::Glacier__Peak__Top_Rock,
+    GlacierSpotId::Glacier__Peak__Highest_Platform,
+    GlacierSpotId::Glacier__Peak__West_Cliff,
+    GlacierSpotId::Glacier__Peak__Under_West_Cliff,
+    GlacierSpotId::Glacier__Peak__West_8,
+    GlacierSpotId::Glacier__Grid_32_7_10__East_8,
+    GlacierSpotId::Glacier__Grid_32_7_10__Center_Platform,
+    GlacierSpotId::Glacier__Grid_32_7_10__Column,
+    GlacierSpotId::Glacier__Grid_32_7_10__Left_Rock,
+    GlacierSpotId::Glacier__Grid_32_7_10__West_9,
+    GlacierSpotId::Glacier__Grid_32_7_10__West_10,
+    GlacierSpotId::Glacier__Grid_31_9_12__East_9,
+    GlacierSpotId::Glacier__Grid_31_9_12__East_10,
+    GlacierSpotId::Glacier__Grid_31_9_12__Observation_Tower,
+    GlacierSpotId::Glacier__Grid_31_9_12__Observation_Tower_L4,
+    GlacierSpotId::Glacier__Grid_31_9_12__West_12,
+    GlacierSpotId::Glacier__Grid_31_9_12__Midair,
+    GlacierSpotId::Glacier__Lake_Main_Entrance__Ebih_Access,
+    GlacierSpotId::Glacier__Lake_Main_Entrance__Upper,
+    GlacierSpotId::Glacier__Lake_Main_Entrance__Upper_Platform,
+    GlacierSpotId::Glacier__Lake_Main_Entrance__Ledge,
+    GlacierSpotId::Glacier__Lake_Main_Entrance__Lower_Platform,
+    GlacierSpotId::Glacier__Lake_Main_Entrance__Hill,
+    GlacierSpotId::Glacier__Lake_Main_Entrance__Bottom,
+    GlacierSpotId::Glacier__Lake_Main_Entrance__Side_Jump,
+    GlacierSpotId::Glacier__Lake_Main_Entrance__Side,
+    GlacierSpotId::Glacier__Lake_Main_Entrance__Lake_Access,
+    GlacierSpotId::Glacier__Apocalypse_Entry__West,
+    GlacierSpotId::Glacier__Apocalypse_Entry__Terminal,
+];
+static RAW_IRIKAR_BREACH_SPOTS: [Irikar_BreachSpotId; 1] =
+    [Irikar_BreachSpotId::Irikar_Breach__Save_Room__Save_Point];
+static RAW_IRIKAR_SPOTS: [IrikarSpotId; 27] = [
+    IrikarSpotId::Irikar__Hub__Northwest,
+    IrikarSpotId::Irikar__Hub__North_Above_Portal,
+    IrikarSpotId::Irikar__Hub__Northwest_Above_Bowl,
+    IrikarSpotId::Irikar__Hub__Northeast_Above_Bowl,
+    IrikarSpotId::Irikar__Hub__West_Rim,
+    IrikarSpotId::Irikar__Hub__East_Rim,
+    IrikarSpotId::Irikar__Hub__Bowl_Top_Platform,
+    IrikarSpotId::Irikar__Hub__Bowl_Middle_Ledge,
+    IrikarSpotId::Irikar__Hub__Bowl_Middle_Platform_Center,
+    IrikarSpotId::Irikar__Hub__Bowl_Middle_Platform_West,
+    IrikarSpotId::Irikar__Hub__Bowl_Platform_3,
+    IrikarSpotId::Irikar__Hub__Save_Point,
+    IrikarSpotId::Irikar__Hub__Bowl_Hole,
+    IrikarSpotId::Irikar__Hub__Sat_Tower_Roof_West,
+    IrikarSpotId::Irikar__Hub__Sat_Tower_Roof_East,
+    IrikarSpotId::Irikar__Hub__Sat_Tower_Middle_Ledge,
+    IrikarSpotId::Irikar__Hub__Sat_Tower_Floating_Platform,
+    IrikarSpotId::Irikar__Hub__Sat_Tower_Top_Ledge,
+    IrikarSpotId::Irikar__Hub__Sat_Tower_Lower_Right_Ledge,
+    IrikarSpotId::Irikar__Hub__Sat_Tower_Lower_Left_Ledge,
+    IrikarSpotId::Irikar__Hub__Sat_Tower_Long_Ledge,
+    IrikarSpotId::Irikar__Hub__Sat_Tower_Bottom,
+    IrikarSpotId::Irikar__Hub__Sat_Tower_East_24,
+    IrikarSpotId::Irikar__Sight_Room__West_24,
+    IrikarSpotId::Irikar__Sight_Room__Lower_Ledge,
+    IrikarSpotId::Irikar__Sight_Room__Portal,
+    IrikarSpotId::Irikar__Sight_Room__Item_Pedestal,
+];
+static RAW_MENU_SPOTS: [MenuSpotId; 4] = [
+    MenuSpotId::Menu__Upgrade_Menu__Physiology,
+    MenuSpotId::Menu__Upgrade_Menu__Combat,
+    MenuSpotId::Menu__Upgrade_Menu__Infection,
+    MenuSpotId::Menu__Upgrade_Menu__Drone,
+];
 #[derive(Clone, Debug)]
 pub struct World {
     pub objective: Objective,
@@ -4491,6 +5353,15 @@ pub struct World {
     warps: EnumMap<WarpId, Warp>,
     // Index ranges for slices into the above arrays
     spots: EnumMap<SpotId, Spot>,
+    amagi_spots: EnumMap<AmagiSpotId, BigSpot>,
+    antarctica_spots: EnumMap<AntarcticaSpotId, BigSpot>,
+    ebih_spots: EnumMap<EbihSpotId, BigSpot>,
+    giguna_breach_spots: EnumMap<Giguna_BreachSpotId, BigSpot>,
+    giguna_spots: EnumMap<GigunaSpotId, BigSpot>,
+    glacier_spots: EnumMap<GlacierSpotId, BigSpot>,
+    irikar_breach_spots: EnumMap<Irikar_BreachSpotId, BigSpot>,
+    irikar_spots: EnumMap<IrikarSpotId, BigSpot>,
+    menu_spots: EnumMap<MenuSpotId, BigSpot>,
     global_actions: Range<usize>,
     min_warp_time: u32,
     // Condensed edges
@@ -6532,6 +7403,15 @@ impl World {
             actions: build_actions(),
             warps: build_warps(),
             spots: build_spots(),
+            amagi_spots: build_amagi_spots(),
+            antarctica_spots: build_antarctica_spots(),
+            ebih_spots: build_ebih_spots(),
+            giguna_breach_spots: build_giguna_breach_spots(),
+            giguna_spots: build_giguna_spots(),
+            glacier_spots: build_glacier_spots(),
+            irikar_breach_spots: build_irikar_breach_spots(),
+            irikar_spots: build_irikar_spots(),
+            menu_spots: build_menu_spots(),
             global_actions: Range {
                 start: ActionId::Global__Deploy_Drone.into_usize(),
                 end: ActionId::Global__Recall_Drone.into_usize() + 1,
@@ -27137,6 +28017,14071 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
     }
 }
 
+pub fn build_amagi_spots() -> EnumMap<AmagiSpotId, BigSpot> {
+    enum_map! {
+        AmagiSpotId::Amagi__Main_Area__East_15 => BigSpot {
+            id: BigSpotId::Amagi(AmagiSpotId::Amagi__Main_Area__East_15),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Amagi__Main_Area__East_15__ex__Glacier__Lake_Main_Entrance__Lake_Access_1.into_usize(),
+                end: ExitId::Amagi__Main_Area__East_15__ex__Glacier__Lake_Main_Entrance__Lake_Access_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: AmagiSpotId::Amagi__Main_Area__Broken_Wall.into_usize(),
+                end: AmagiSpotId::Amagi__Main_Area__West_Side.into_usize() + 1,
+            },
+        },
+        AmagiSpotId::Amagi__Main_Area__Waters_Edge => BigSpot {
+            id: BigSpotId::Amagi(AmagiSpotId::Amagi__Main_Area__Waters_Edge),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: AmagiSpotId::Amagi__Main_Area__Broken_Wall.into_usize(),
+                end: AmagiSpotId::Amagi__Main_Area__West_Side.into_usize() + 1,
+            },
+        },
+        AmagiSpotId::Amagi__Main_Area__Shallow_End => BigSpot {
+            id: BigSpotId::Amagi(AmagiSpotId::Amagi__Main_Area__Shallow_End),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Amagi__Main_Area__Shallow_End__ex__Waters_Edge_1.into_usize(),
+                end: ExitId::Amagi__Main_Area__Shallow_End__ex__Waters_Edge_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: AmagiSpotId::Amagi__Main_Area__Broken_Wall.into_usize(),
+                end: AmagiSpotId::Amagi__Main_Area__West_Side.into_usize() + 1,
+            },
+        },
+        AmagiSpotId::Amagi__Main_Area__Cliff => BigSpot {
+            id: BigSpotId::Amagi(AmagiSpotId::Amagi__Main_Area__Cliff),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: AmagiSpotId::Amagi__Main_Area__Broken_Wall.into_usize(),
+                end: AmagiSpotId::Amagi__Main_Area__West_Side.into_usize() + 1,
+            },
+        },
+        AmagiSpotId::Amagi__Main_Area__Upper_Platform => BigSpot {
+            id: BigSpotId::Amagi(AmagiSpotId::Amagi__Main_Area__Upper_Platform),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: AmagiSpotId::Amagi__Main_Area__Broken_Wall.into_usize(),
+                end: AmagiSpotId::Amagi__Main_Area__West_Side.into_usize() + 1,
+            },
+        },
+        AmagiSpotId::Amagi__Main_Area__West_Shelf => BigSpot {
+            id: BigSpotId::Amagi(AmagiSpotId::Amagi__Main_Area__West_Shelf),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: AmagiSpotId::Amagi__Main_Area__Broken_Wall.into_usize(),
+                end: AmagiSpotId::Amagi__Main_Area__West_Side.into_usize() + 1,
+            },
+        },
+        AmagiSpotId::Amagi__Main_Area__West_Side => BigSpot {
+            id: BigSpotId::Amagi(AmagiSpotId::Amagi__Main_Area__West_Side),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Amagi__Main_Area__West_Side__ex__Carving_1.into_usize(),
+                end: ExitId::Amagi__Main_Area__West_Side__ex__Carving_2.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: AmagiSpotId::Amagi__Main_Area__Broken_Wall.into_usize(),
+                end: AmagiSpotId::Amagi__Main_Area__West_Side.into_usize() + 1,
+            },
+        },
+        AmagiSpotId::Amagi__Main_Area__Platform_2 => BigSpot {
+            id: BigSpotId::Amagi(AmagiSpotId::Amagi__Main_Area__Platform_2),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Amagi__Main_Area__Platform_2__ex__West_Shelf_1.into_usize(),
+                end: ExitId::Amagi__Main_Area__Platform_2__ex__West_Shelf_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: AmagiSpotId::Amagi__Main_Area__Broken_Wall.into_usize(),
+                end: AmagiSpotId::Amagi__Main_Area__West_Side.into_usize() + 1,
+            },
+        },
+        AmagiSpotId::Amagi__Main_Area__East_Ledge => BigSpot {
+            id: BigSpotId::Amagi(AmagiSpotId::Amagi__Main_Area__East_Ledge),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: AmagiSpotId::Amagi__Main_Area__Broken_Wall.into_usize(),
+                end: AmagiSpotId::Amagi__Main_Area__West_Side.into_usize() + 1,
+            },
+        },
+        AmagiSpotId::Amagi__Main_Area__Carving => BigSpot {
+            id: BigSpotId::Amagi(AmagiSpotId::Amagi__Main_Area__Carving),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Amagi__Main_Area__Carving__ex__Secret_Outcropping_1.into_usize(),
+                end: ExitId::Amagi__Main_Area__Carving__ex__Secret_Outcropping_2.into_usize() + 1,
+            },
+            actions: Range {
+                start: ActionId::Amagi__Main_Area__Carving__Key_Combo.into_usize(),
+                end: ActionId::Amagi__Main_Area__Carving__Key_Combo.into_usize() + 1,
+            },
+            area_spots: Range {
+                start: AmagiSpotId::Amagi__Main_Area__Broken_Wall.into_usize(),
+                end: AmagiSpotId::Amagi__Main_Area__West_Side.into_usize() + 1,
+            },
+        },
+        AmagiSpotId::Amagi__Main_Area__West_15 => BigSpot {
+            id: BigSpotId::Amagi(AmagiSpotId::Amagi__Main_Area__West_15),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Amagi__Main_Area__West_15__ex__West_Lake__East_15_1.into_usize(),
+                end: ExitId::Amagi__Main_Area__West_15__ex__West_Lake__East_15_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: AmagiSpotId::Amagi__Main_Area__Broken_Wall.into_usize(),
+                end: AmagiSpotId::Amagi__Main_Area__West_Side.into_usize() + 1,
+            },
+        },
+        AmagiSpotId::Amagi__Main_Area__Secret_Outcropping => BigSpot {
+            id: BigSpotId::Amagi(AmagiSpotId::Amagi__Main_Area__Secret_Outcropping),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Amagi__Main_Area__Secret_Outcropping__ex__Cave_Behind_Waterfall__Bottom_1.into_usize(),
+                end: ExitId::Amagi__Main_Area__Secret_Outcropping__ex__Cave_Behind_Waterfall__Bottom_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: AmagiSpotId::Amagi__Main_Area__Broken_Wall.into_usize(),
+                end: AmagiSpotId::Amagi__Main_Area__West_Side.into_usize() + 1,
+            },
+        },
+        AmagiSpotId::Amagi__Main_Area__Platform_3 => BigSpot {
+            id: BigSpotId::Amagi(AmagiSpotId::Amagi__Main_Area__Platform_3),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: AmagiSpotId::Amagi__Main_Area__Broken_Wall.into_usize(),
+                end: AmagiSpotId::Amagi__Main_Area__West_Side.into_usize() + 1,
+            },
+        },
+        AmagiSpotId::Amagi__Main_Area__Catwalk_Center => BigSpot {
+            id: BigSpotId::Amagi(AmagiSpotId::Amagi__Main_Area__Catwalk_Center),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Amagi__Main_Area__Catwalk_Center__ex__East_Ledge_1.into_usize(),
+                end: ExitId::Amagi__Main_Area__Catwalk_Center__ex__Platform_3_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: AmagiSpotId::Amagi__Main_Area__Broken_Wall.into_usize(),
+                end: AmagiSpotId::Amagi__Main_Area__West_Side.into_usize() + 1,
+            },
+        },
+        AmagiSpotId::Amagi__Main_Area__Catwalk_Broken_Part => BigSpot {
+            id: BigSpotId::Amagi(AmagiSpotId::Amagi__Main_Area__Catwalk_Broken_Part),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: AmagiSpotId::Amagi__Main_Area__Broken_Wall.into_usize(),
+                end: AmagiSpotId::Amagi__Main_Area__West_Side.into_usize() + 1,
+            },
+        },
+        AmagiSpotId::Amagi__Main_Area__Catwalk_East_Edge => BigSpot {
+            id: BigSpotId::Amagi(AmagiSpotId::Amagi__Main_Area__Catwalk_East_Edge),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: AmagiSpotId::Amagi__Main_Area__Broken_Wall.into_usize(),
+                end: AmagiSpotId::Amagi__Main_Area__West_Side.into_usize() + 1,
+            },
+        },
+        AmagiSpotId::Amagi__Main_Area__Save_Point => BigSpot {
+            id: BigSpotId::Amagi(AmagiSpotId::Amagi__Main_Area__Save_Point),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: ActionId::Amagi__Main_Area__Save_Point__Save.into_usize(),
+                end: ActionId::Amagi__Main_Area__Save_Point__Save.into_usize() + 1,
+            },
+            area_spots: Range {
+                start: AmagiSpotId::Amagi__Main_Area__Broken_Wall.into_usize(),
+                end: AmagiSpotId::Amagi__Main_Area__West_Side.into_usize() + 1,
+            },
+        },
+        AmagiSpotId::Amagi__Main_Area__Enemy_Side => BigSpot {
+            id: BigSpotId::Amagi(AmagiSpotId::Amagi__Main_Area__Enemy_Side),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: AmagiSpotId::Amagi__Main_Area__Broken_Wall.into_usize(),
+                end: AmagiSpotId::Amagi__Main_Area__West_Side.into_usize() + 1,
+            },
+        },
+        AmagiSpotId::Amagi__Main_Area__Small_Cliff => BigSpot {
+            id: BigSpotId::Amagi(AmagiSpotId::Amagi__Main_Area__Small_Cliff),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: AmagiSpotId::Amagi__Main_Area__Broken_Wall.into_usize(),
+                end: AmagiSpotId::Amagi__Main_Area__West_Side.into_usize() + 1,
+            },
+        },
+        AmagiSpotId::Amagi__Main_Area__East_19 => BigSpot {
+            id: BigSpotId::Amagi(AmagiSpotId::Amagi__Main_Area__East_19),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Amagi__Main_Area__East_19__ex__Grid_31_19__West_1.into_usize(),
+                end: ExitId::Amagi__Main_Area__East_19__ex__Grid_31_19__West_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: AmagiSpotId::Amagi__Main_Area__Broken_Wall.into_usize(),
+                end: AmagiSpotId::Amagi__Main_Area__West_Side.into_usize() + 1,
+            },
+        },
+        AmagiSpotId::Amagi__Main_Area__Broken_Wall => BigSpot {
+            id: BigSpotId::Amagi(AmagiSpotId::Amagi__Main_Area__Broken_Wall),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: AmagiSpotId::Amagi__Main_Area__Broken_Wall.into_usize(),
+                end: AmagiSpotId::Amagi__Main_Area__West_Side.into_usize() + 1,
+            },
+        },
+        AmagiSpotId::Amagi__Main_Area__Wall_Stuck_Spot => BigSpot {
+            id: BigSpotId::Amagi(AmagiSpotId::Amagi__Main_Area__Wall_Stuck_Spot),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: AmagiSpotId::Amagi__Main_Area__Broken_Wall.into_usize(),
+                end: AmagiSpotId::Amagi__Main_Area__West_Side.into_usize() + 1,
+            },
+        },
+        AmagiSpotId::Amagi__Main_Area__Half_Pillar => BigSpot {
+            id: BigSpotId::Amagi(AmagiSpotId::Amagi__Main_Area__Half_Pillar),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: AmagiSpotId::Amagi__Main_Area__Broken_Wall.into_usize(),
+                end: AmagiSpotId::Amagi__Main_Area__West_Side.into_usize() + 1,
+            },
+        },
+        AmagiSpotId::Amagi__Main_Area__Flat_Ruin => BigSpot {
+            id: BigSpotId::Amagi(AmagiSpotId::Amagi__Main_Area__Flat_Ruin),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: AmagiSpotId::Amagi__Main_Area__Broken_Wall.into_usize(),
+                end: AmagiSpotId::Amagi__Main_Area__West_Side.into_usize() + 1,
+            },
+        },
+        AmagiSpotId::Amagi__Main_Area__West_Mini_Hill => BigSpot {
+            id: BigSpotId::Amagi(AmagiSpotId::Amagi__Main_Area__West_Mini_Hill),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: AmagiSpotId::Amagi__Main_Area__Broken_Wall.into_usize(),
+                end: AmagiSpotId::Amagi__Main_Area__West_Side.into_usize() + 1,
+            },
+        },
+        AmagiSpotId::Amagi__Main_Area__West_18 => BigSpot {
+            id: BigSpotId::Amagi(AmagiSpotId::Amagi__Main_Area__West_18),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Amagi__Main_Area__West_18__ex__West_Lake__East_18_1.into_usize(),
+                end: ExitId::Amagi__Main_Area__West_18__ex__West_Lake__East_18_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: AmagiSpotId::Amagi__Main_Area__Broken_Wall.into_usize(),
+                end: AmagiSpotId::Amagi__Main_Area__West_Side.into_usize() + 1,
+            },
+        },
+        AmagiSpotId::Amagi__Main_Area__West_19 => BigSpot {
+            id: BigSpotId::Amagi(AmagiSpotId::Amagi__Main_Area__West_19),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Amagi__Main_Area__West_19__ex__West_Lake__East_19_1.into_usize(),
+                end: ExitId::Amagi__Main_Area__West_19__ex__West_Lake__East_19_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: AmagiSpotId::Amagi__Main_Area__Broken_Wall.into_usize(),
+                end: AmagiSpotId::Amagi__Main_Area__West_Side.into_usize() + 1,
+            },
+        },
+        AmagiSpotId::Amagi__Main_Area__Secret_Waterfall => BigSpot {
+            id: BigSpotId::Amagi(AmagiSpotId::Amagi__Main_Area__Secret_Waterfall),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Amagi__Main_Area__Secret_Waterfall__ex__Cave_Behind_Waterfall__Top_1.into_usize(),
+                end: ExitId::Amagi__Main_Area__Secret_Waterfall__ex__Cave_Behind_Waterfall__Top_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: AmagiSpotId::Amagi__Main_Area__Broken_Wall.into_usize(),
+                end: AmagiSpotId::Amagi__Main_Area__West_Side.into_usize() + 1,
+            },
+        },
+        AmagiSpotId::Amagi__Main_Area__Way_Off_To_The_Side => BigSpot {
+            id: BigSpotId::Amagi(AmagiSpotId::Amagi__Main_Area__Way_Off_To_The_Side),
+            locations: Range {
+                start: LocationId::Amagi__Main_Area__Way_Off_To_The_Side__Item.into_usize(),
+                end: LocationId::Amagi__Main_Area__Way_Off_To_The_Side__Item.into_usize() + 1,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: AmagiSpotId::Amagi__Main_Area__Broken_Wall.into_usize(),
+                end: AmagiSpotId::Amagi__Main_Area__West_Side.into_usize() + 1,
+            },
+        },
+        AmagiSpotId::Amagi__Cave_Behind_Waterfall__Bottom => BigSpot {
+            id: BigSpotId::Amagi(AmagiSpotId::Amagi__Cave_Behind_Waterfall__Bottom),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Amagi__Cave_Behind_Waterfall__Bottom__ex__Main_Area__Secret_Outcropping_1.into_usize(),
+                end: ExitId::Amagi__Cave_Behind_Waterfall__Bottom__ex__Top_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: AmagiSpotId::Amagi__Cave_Behind_Waterfall__Bottom.into_usize(),
+                end: AmagiSpotId::Amagi__Cave_Behind_Waterfall__Top.into_usize() + 1,
+            },
+        },
+        AmagiSpotId::Amagi__Cave_Behind_Waterfall__Middle => BigSpot {
+            id: BigSpotId::Amagi(AmagiSpotId::Amagi__Cave_Behind_Waterfall__Middle),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Amagi__Cave_Behind_Waterfall__Middle__ex__Top_1.into_usize(),
+                end: ExitId::Amagi__Cave_Behind_Waterfall__Middle__ex__Top_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: ActionId::Amagi__Cave_Behind_Waterfall__Middle__Throw_Drone.into_usize(),
+                end: ActionId::Amagi__Cave_Behind_Waterfall__Middle__Throw_Drone.into_usize() + 1,
+            },
+            area_spots: Range {
+                start: AmagiSpotId::Amagi__Cave_Behind_Waterfall__Bottom.into_usize(),
+                end: AmagiSpotId::Amagi__Cave_Behind_Waterfall__Top.into_usize() + 1,
+            },
+        },
+        AmagiSpotId::Amagi__Cave_Behind_Waterfall__Top => BigSpot {
+            id: BigSpotId::Amagi(AmagiSpotId::Amagi__Cave_Behind_Waterfall__Top),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Amagi__Cave_Behind_Waterfall__Top__ex__Main_Area__Secret_Waterfall_1.into_usize(),
+                end: ExitId::Amagi__Cave_Behind_Waterfall__Top__ex__Main_Area__Secret_Waterfall_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: AmagiSpotId::Amagi__Cave_Behind_Waterfall__Bottom.into_usize(),
+                end: AmagiSpotId::Amagi__Cave_Behind_Waterfall__Top.into_usize() + 1,
+            },
+        },
+        AmagiSpotId::Amagi__Grid_31_19__West => BigSpot {
+            id: BigSpotId::Amagi(AmagiSpotId::Amagi__Grid_31_19__West),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Amagi__Grid_31_19__West__ex__Main_Area__East_19_1.into_usize(),
+                end: ExitId::Amagi__Grid_31_19__West__ex__Main_Area__East_19_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: AmagiSpotId::Amagi__Grid_31_19__East.into_usize(),
+                end: AmagiSpotId::Amagi__Grid_31_19__West.into_usize() + 1,
+            },
+        },
+        AmagiSpotId::Amagi__Grid_31_19__East => BigSpot {
+            id: BigSpotId::Amagi(AmagiSpotId::Amagi__Grid_31_19__East),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Amagi__Grid_31_19__East__ex__Liru_Room__West_19_1.into_usize(),
+                end: ExitId::Amagi__Grid_31_19__East__ex__Liru_Room__West_19_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: AmagiSpotId::Amagi__Grid_31_19__East.into_usize(),
+                end: AmagiSpotId::Amagi__Grid_31_19__West.into_usize() + 1,
+            },
+        },
+        AmagiSpotId::Amagi__Liru_Room__West_19 => BigSpot {
+            id: BigSpotId::Amagi(AmagiSpotId::Amagi__Liru_Room__West_19),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Amagi__Liru_Room__West_19__ex__Grid_31_19__East_1.into_usize(),
+                end: ExitId::Amagi__Liru_Room__West_19__ex__Grid_31_19__East_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: AmagiSpotId::Amagi__Liru_Room__Bottom.into_usize(),
+                end: AmagiSpotId::Amagi__Liru_Room__West_20.into_usize() + 1,
+            },
+        },
+        AmagiSpotId::Amagi__Liru_Room__Hidden_Enemies => BigSpot {
+            id: BigSpotId::Amagi(AmagiSpotId::Amagi__Liru_Room__Hidden_Enemies),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: AmagiSpotId::Amagi__Liru_Room__Bottom.into_usize(),
+                end: AmagiSpotId::Amagi__Liru_Room__West_20.into_usize() + 1,
+            },
+        },
+        AmagiSpotId::Amagi__Liru_Room__Platform_1_Left => BigSpot {
+            id: BigSpotId::Amagi(AmagiSpotId::Amagi__Liru_Room__Platform_1_Left),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: AmagiSpotId::Amagi__Liru_Room__Bottom.into_usize(),
+                end: AmagiSpotId::Amagi__Liru_Room__West_20.into_usize() + 1,
+            },
+        },
+        AmagiSpotId::Amagi__Liru_Room__Platform_1_Right => BigSpot {
+            id: BigSpotId::Amagi(AmagiSpotId::Amagi__Liru_Room__Platform_1_Right),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: AmagiSpotId::Amagi__Liru_Room__Bottom.into_usize(),
+                end: AmagiSpotId::Amagi__Liru_Room__West_20.into_usize() + 1,
+            },
+        },
+        AmagiSpotId::Amagi__Liru_Room__Platform_2_Left => BigSpot {
+            id: BigSpotId::Amagi(AmagiSpotId::Amagi__Liru_Room__Platform_2_Left),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: AmagiSpotId::Amagi__Liru_Room__Bottom.into_usize(),
+                end: AmagiSpotId::Amagi__Liru_Room__West_20.into_usize() + 1,
+            },
+        },
+        AmagiSpotId::Amagi__Liru_Room__Platform_2_Right => BigSpot {
+            id: BigSpotId::Amagi(AmagiSpotId::Amagi__Liru_Room__Platform_2_Right),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: AmagiSpotId::Amagi__Liru_Room__Bottom.into_usize(),
+                end: AmagiSpotId::Amagi__Liru_Room__West_20.into_usize() + 1,
+            },
+        },
+        AmagiSpotId::Amagi__Liru_Room__Platform_3_Left => BigSpot {
+            id: BigSpotId::Amagi(AmagiSpotId::Amagi__Liru_Room__Platform_3_Left),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: AmagiSpotId::Amagi__Liru_Room__Bottom.into_usize(),
+                end: AmagiSpotId::Amagi__Liru_Room__West_20.into_usize() + 1,
+            },
+        },
+        AmagiSpotId::Amagi__Liru_Room__Platform_3_Right => BigSpot {
+            id: BigSpotId::Amagi(AmagiSpotId::Amagi__Liru_Room__Platform_3_Right),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: AmagiSpotId::Amagi__Liru_Room__Bottom.into_usize(),
+                end: AmagiSpotId::Amagi__Liru_Room__West_20.into_usize() + 1,
+            },
+        },
+        AmagiSpotId::Amagi__Liru_Room__Platform_4_Left => BigSpot {
+            id: BigSpotId::Amagi(AmagiSpotId::Amagi__Liru_Room__Platform_4_Left),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Amagi__Liru_Room__Platform_4_Left__ex__West_20_1.into_usize(),
+                end: ExitId::Amagi__Liru_Room__Platform_4_Left__ex__West_20_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: AmagiSpotId::Amagi__Liru_Room__Bottom.into_usize(),
+                end: AmagiSpotId::Amagi__Liru_Room__West_20.into_usize() + 1,
+            },
+        },
+        AmagiSpotId::Amagi__Liru_Room__Platform_4_Right => BigSpot {
+            id: BigSpotId::Amagi(AmagiSpotId::Amagi__Liru_Room__Platform_4_Right),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Amagi__Liru_Room__Platform_4_Right__ex__East_Passage_1.into_usize(),
+                end: ExitId::Amagi__Liru_Room__Platform_4_Right__ex__East_Passage_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: AmagiSpotId::Amagi__Liru_Room__Bottom.into_usize(),
+                end: AmagiSpotId::Amagi__Liru_Room__West_20.into_usize() + 1,
+            },
+        },
+        AmagiSpotId::Amagi__Liru_Room__Bottom => BigSpot {
+            id: BigSpotId::Amagi(AmagiSpotId::Amagi__Liru_Room__Bottom),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: AmagiSpotId::Amagi__Liru_Room__Bottom.into_usize(),
+                end: AmagiSpotId::Amagi__Liru_Room__West_20.into_usize() + 1,
+            },
+        },
+        AmagiSpotId::Amagi__Liru_Room__Shrine => BigSpot {
+            id: BigSpotId::Amagi(AmagiSpotId::Amagi__Liru_Room__Shrine),
+            locations: Range {
+                start: LocationId::Amagi__Liru_Room__Shrine__Item.into_usize(),
+                end: LocationId::Amagi__Liru_Room__Shrine__Item.into_usize() + 1,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: AmagiSpotId::Amagi__Liru_Room__Bottom.into_usize(),
+                end: AmagiSpotId::Amagi__Liru_Room__West_20.into_usize() + 1,
+            },
+        },
+        AmagiSpotId::Amagi__Liru_Room__West_20 => BigSpot {
+            id: BigSpotId::Amagi(AmagiSpotId::Amagi__Liru_Room__West_20),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Amagi__Liru_Room__West_20__ex__Platform_4_Left_1.into_usize(),
+                end: ExitId::Amagi__Liru_Room__West_20__ex__Shrine_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: AmagiSpotId::Amagi__Liru_Room__Bottom.into_usize(),
+                end: AmagiSpotId::Amagi__Liru_Room__West_20.into_usize() + 1,
+            },
+        },
+        AmagiSpotId::Amagi__Liru_Room__East_Passage => BigSpot {
+            id: BigSpotId::Amagi(AmagiSpotId::Amagi__Liru_Room__East_Passage),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: AmagiSpotId::Amagi__Liru_Room__Bottom.into_usize(),
+                end: AmagiSpotId::Amagi__Liru_Room__West_20.into_usize() + 1,
+            },
+        },
+        AmagiSpotId::Amagi__Liru_Room__Hidden_Exit => BigSpot {
+            id: BigSpotId::Amagi(AmagiSpotId::Amagi__Liru_Room__Hidden_Exit),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: AmagiSpotId::Amagi__Liru_Room__Bottom.into_usize(),
+                end: AmagiSpotId::Amagi__Liru_Room__West_20.into_usize() + 1,
+            },
+        },
+        AmagiSpotId::Amagi__West_Lake__East_15 => BigSpot {
+            id: BigSpotId::Amagi(AmagiSpotId::Amagi__West_Lake__East_15),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Amagi__West_Lake__East_15__ex__Main_Area__West_15_1.into_usize(),
+                end: ExitId::Amagi__West_Lake__East_15__ex__Main_Area__West_15_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: AmagiSpotId::Amagi__West_Lake__Cavern_Back_Teeth.into_usize(),
+                end: AmagiSpotId::Amagi__West_Lake__West_Shore.into_usize() + 1,
+            },
+        },
+        AmagiSpotId::Amagi__West_Lake__East_Shore => BigSpot {
+            id: BigSpotId::Amagi(AmagiSpotId::Amagi__West_Lake__East_Shore),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: AmagiSpotId::Amagi__West_Lake__Cavern_Back_Teeth.into_usize(),
+                end: AmagiSpotId::Amagi__West_Lake__West_Shore.into_usize() + 1,
+            },
+        },
+        AmagiSpotId::Amagi__West_Lake__East_Bank => BigSpot {
+            id: BigSpotId::Amagi(AmagiSpotId::Amagi__West_Lake__East_Bank),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: AmagiSpotId::Amagi__West_Lake__Cavern_Back_Teeth.into_usize(),
+                end: AmagiSpotId::Amagi__West_Lake__West_Shore.into_usize() + 1,
+            },
+        },
+        AmagiSpotId::Amagi__West_Lake__Northeast_Platform => BigSpot {
+            id: BigSpotId::Amagi(AmagiSpotId::Amagi__West_Lake__Northeast_Platform),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: AmagiSpotId::Amagi__West_Lake__Cavern_Back_Teeth.into_usize(),
+                end: AmagiSpotId::Amagi__West_Lake__West_Shore.into_usize() + 1,
+            },
+        },
+        AmagiSpotId::Amagi__West_Lake__Northwest_Platform => BigSpot {
+            id: BigSpotId::Amagi(AmagiSpotId::Amagi__West_Lake__Northwest_Platform),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Amagi__West_Lake__Northwest_Platform__ex__West_Cliff_1.into_usize(),
+                end: ExitId::Amagi__West_Lake__Northwest_Platform__ex__West_Cliff_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: AmagiSpotId::Amagi__West_Lake__Cavern_Back_Teeth.into_usize(),
+                end: AmagiSpotId::Amagi__West_Lake__West_Shore.into_usize() + 1,
+            },
+        },
+        AmagiSpotId::Amagi__West_Lake__Upper_Center_Platform => BigSpot {
+            id: BigSpotId::Amagi(AmagiSpotId::Amagi__West_Lake__Upper_Center_Platform),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: AmagiSpotId::Amagi__West_Lake__Cavern_Back_Teeth.into_usize(),
+                end: AmagiSpotId::Amagi__West_Lake__West_Shore.into_usize() + 1,
+            },
+        },
+        AmagiSpotId::Amagi__West_Lake__East_Platform => BigSpot {
+            id: BigSpotId::Amagi(AmagiSpotId::Amagi__West_Lake__East_Platform),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: AmagiSpotId::Amagi__West_Lake__Cavern_Back_Teeth.into_usize(),
+                end: AmagiSpotId::Amagi__West_Lake__West_Shore.into_usize() + 1,
+            },
+        },
+        AmagiSpotId::Amagi__West_Lake__East_18 => BigSpot {
+            id: BigSpotId::Amagi(AmagiSpotId::Amagi__West_Lake__East_18),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Amagi__West_Lake__East_18__ex__Main_Area__West_18_1.into_usize(),
+                end: ExitId::Amagi__West_Lake__East_18__ex__Main_Area__West_18_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: AmagiSpotId::Amagi__West_Lake__Cavern_Back_Teeth.into_usize(),
+                end: AmagiSpotId::Amagi__West_Lake__West_Shore.into_usize() + 1,
+            },
+        },
+        AmagiSpotId::Amagi__West_Lake__Pillar => BigSpot {
+            id: BigSpotId::Amagi(AmagiSpotId::Amagi__West_Lake__Pillar),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: AmagiSpotId::Amagi__West_Lake__Cavern_Back_Teeth.into_usize(),
+                end: AmagiSpotId::Amagi__West_Lake__West_Shore.into_usize() + 1,
+            },
+        },
+        AmagiSpotId::Amagi__West_Lake__Pillar_Platform => BigSpot {
+            id: BigSpotId::Amagi(AmagiSpotId::Amagi__West_Lake__Pillar_Platform),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: AmagiSpotId::Amagi__West_Lake__Cavern_Back_Teeth.into_usize(),
+                end: AmagiSpotId::Amagi__West_Lake__West_Shore.into_usize() + 1,
+            },
+        },
+        AmagiSpotId::Amagi__West_Lake__East_19 => BigSpot {
+            id: BigSpotId::Amagi(AmagiSpotId::Amagi__West_Lake__East_19),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Amagi__West_Lake__East_19__ex__Main_Area__West_19_1.into_usize(),
+                end: ExitId::Amagi__West_Lake__East_19__ex__Main_Area__West_19_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: AmagiSpotId::Amagi__West_Lake__Cavern_Back_Teeth.into_usize(),
+                end: AmagiSpotId::Amagi__West_Lake__West_Shore.into_usize() + 1,
+            },
+        },
+        AmagiSpotId::Amagi__West_Lake__Somewhat_Central_Platform => BigSpot {
+            id: BigSpotId::Amagi(AmagiSpotId::Amagi__West_Lake__Somewhat_Central_Platform),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: AmagiSpotId::Amagi__West_Lake__Cavern_Back_Teeth.into_usize(),
+                end: AmagiSpotId::Amagi__West_Lake__West_Shore.into_usize() + 1,
+            },
+        },
+        AmagiSpotId::Amagi__West_Lake__West_Platform => BigSpot {
+            id: BigSpotId::Amagi(AmagiSpotId::Amagi__West_Lake__West_Platform),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: AmagiSpotId::Amagi__West_Lake__Cavern_Back_Teeth.into_usize(),
+                end: AmagiSpotId::Amagi__West_Lake__West_Shore.into_usize() + 1,
+            },
+        },
+        AmagiSpotId::Amagi__West_Lake__Cavern_Front_Teeth => BigSpot {
+            id: BigSpotId::Amagi(AmagiSpotId::Amagi__West_Lake__Cavern_Front_Teeth),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: AmagiSpotId::Amagi__West_Lake__Cavern_Back_Teeth.into_usize(),
+                end: AmagiSpotId::Amagi__West_Lake__West_Shore.into_usize() + 1,
+            },
+        },
+        AmagiSpotId::Amagi__West_Lake__Cavern_Back_Teeth => BigSpot {
+            id: BigSpotId::Amagi(AmagiSpotId::Amagi__West_Lake__Cavern_Back_Teeth),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: AmagiSpotId::Amagi__West_Lake__Cavern_Back_Teeth.into_usize(),
+                end: AmagiSpotId::Amagi__West_Lake__West_Shore.into_usize() + 1,
+            },
+        },
+        AmagiSpotId::Amagi__West_Lake__Cavern_Jaw => BigSpot {
+            id: BigSpotId::Amagi(AmagiSpotId::Amagi__West_Lake__Cavern_Jaw),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: AmagiSpotId::Amagi__West_Lake__Cavern_Back_Teeth.into_usize(),
+                end: AmagiSpotId::Amagi__West_Lake__West_Shore.into_usize() + 1,
+            },
+        },
+        AmagiSpotId::Amagi__West_Lake__Cavern_Neck => BigSpot {
+            id: BigSpotId::Amagi(AmagiSpotId::Amagi__West_Lake__Cavern_Neck),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: AmagiSpotId::Amagi__West_Lake__Cavern_Back_Teeth.into_usize(),
+                end: AmagiSpotId::Amagi__West_Lake__West_Shore.into_usize() + 1,
+            },
+        },
+        AmagiSpotId::Amagi__West_Lake__Cavern_Chin => BigSpot {
+            id: BigSpotId::Amagi(AmagiSpotId::Amagi__West_Lake__Cavern_Chin),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: AmagiSpotId::Amagi__West_Lake__Cavern_Back_Teeth.into_usize(),
+                end: AmagiSpotId::Amagi__West_Lake__West_Shore.into_usize() + 1,
+            },
+        },
+        AmagiSpotId::Amagi__West_Lake__Cavern_Refill_Station => BigSpot {
+            id: BigSpotId::Amagi(AmagiSpotId::Amagi__West_Lake__Cavern_Refill_Station),
+            locations: Range {
+                start: LocationId::Amagi__West_Lake__Cavern_Refill_Station__Break_Wall.into_usize(),
+                end: LocationId::Amagi__West_Lake__Cavern_Refill_Station__Defeat_MUS_A_M20.into_usize() + 1,
+            },
+            exits: Range {
+                start: ExitId::Amagi__West_Lake__Cavern_Refill_Station__ex__Cavern_Tear_Duct_1.into_usize(),
+                end: ExitId::Amagi__West_Lake__Cavern_Refill_Station__ex__Cavern_Tear_Duct_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: AmagiSpotId::Amagi__West_Lake__Cavern_Back_Teeth.into_usize(),
+                end: AmagiSpotId::Amagi__West_Lake__West_Shore.into_usize() + 1,
+            },
+        },
+        AmagiSpotId::Amagi__West_Lake__Cavern_Tear_Duct => BigSpot {
+            id: BigSpotId::Amagi(AmagiSpotId::Amagi__West_Lake__Cavern_Tear_Duct),
+            locations: Range {
+                start: LocationId::Amagi__West_Lake__Cavern_Tear_Duct__Remote_Flask.into_usize(),
+                end: LocationId::Amagi__West_Lake__Cavern_Tear_Duct__Remote_Flask.into_usize() + 1,
+            },
+            exits: Range {
+                start: ExitId::Amagi__West_Lake__Cavern_Tear_Duct__ex__Cavern_Refill_Station_1.into_usize(),
+                end: ExitId::Amagi__West_Lake__Cavern_Tear_Duct__ex__Cavern_Refill_Station_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: AmagiSpotId::Amagi__West_Lake__Cavern_Back_Teeth.into_usize(),
+                end: AmagiSpotId::Amagi__West_Lake__West_Shore.into_usize() + 1,
+            },
+        },
+        AmagiSpotId::Amagi__West_Lake__Cavern_Eye => BigSpot {
+            id: BigSpotId::Amagi(AmagiSpotId::Amagi__West_Lake__Cavern_Eye),
+            locations: Range {
+                start: LocationId::Amagi__West_Lake__Cavern_Eye__Item.into_usize(),
+                end: LocationId::Amagi__West_Lake__Cavern_Eye__Item.into_usize() + 1,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: AmagiSpotId::Amagi__West_Lake__Cavern_Back_Teeth.into_usize(),
+                end: AmagiSpotId::Amagi__West_Lake__West_Shore.into_usize() + 1,
+            },
+        },
+        AmagiSpotId::Amagi__West_Lake__Cavern_Front_Pillar => BigSpot {
+            id: BigSpotId::Amagi(AmagiSpotId::Amagi__West_Lake__Cavern_Front_Pillar),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: AmagiSpotId::Amagi__West_Lake__Cavern_Back_Teeth.into_usize(),
+                end: AmagiSpotId::Amagi__West_Lake__West_Shore.into_usize() + 1,
+            },
+        },
+        AmagiSpotId::Amagi__West_Lake__Cavern_Middle_Pillar => BigSpot {
+            id: BigSpotId::Amagi(AmagiSpotId::Amagi__West_Lake__Cavern_Middle_Pillar),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: AmagiSpotId::Amagi__West_Lake__Cavern_Back_Teeth.into_usize(),
+                end: AmagiSpotId::Amagi__West_Lake__West_Shore.into_usize() + 1,
+            },
+        },
+        AmagiSpotId::Amagi__West_Lake__Cavern_Rear_Pillar => BigSpot {
+            id: BigSpotId::Amagi(AmagiSpotId::Amagi__West_Lake__Cavern_Rear_Pillar),
+            locations: Range {
+                start: LocationId::Amagi__West_Lake__Cavern_Rear_Pillar__Boss_Reward.into_usize(),
+                end: LocationId::Amagi__West_Lake__Cavern_Rear_Pillar__Boss_Reward.into_usize() + 1,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: AmagiSpotId::Amagi__West_Lake__Cavern_Back_Teeth.into_usize(),
+                end: AmagiSpotId::Amagi__West_Lake__West_Shore.into_usize() + 1,
+            },
+        },
+        AmagiSpotId::Amagi__West_Lake__Cavern_Lower_Trachea => BigSpot {
+            id: BigSpotId::Amagi(AmagiSpotId::Amagi__West_Lake__Cavern_Lower_Trachea),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: AmagiSpotId::Amagi__West_Lake__Cavern_Back_Teeth.into_usize(),
+                end: AmagiSpotId::Amagi__West_Lake__West_Shore.into_usize() + 1,
+            },
+        },
+        AmagiSpotId::Amagi__West_Lake__Stronghold_Top => BigSpot {
+            id: BigSpotId::Amagi(AmagiSpotId::Amagi__West_Lake__Stronghold_Top),
+            locations: Range {
+                start: LocationId::Amagi__West_Lake__Stronghold_Top__Remote_Urn.into_usize(),
+                end: LocationId::Amagi__West_Lake__Stronghold_Top__Remote_Urn.into_usize() + 1,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: AmagiSpotId::Amagi__West_Lake__Cavern_Back_Teeth.into_usize(),
+                end: AmagiSpotId::Amagi__West_Lake__West_Shore.into_usize() + 1,
+            },
+        },
+        AmagiSpotId::Amagi__West_Lake__Stronghold_Item => BigSpot {
+            id: BigSpotId::Amagi(AmagiSpotId::Amagi__West_Lake__Stronghold_Item),
+            locations: Range {
+                start: LocationId::Amagi__West_Lake__Stronghold_Item__Break_Wall.into_usize(),
+                end: LocationId::Amagi__West_Lake__Stronghold_Item__Item.into_usize() + 1,
+            },
+            exits: Range {
+                start: ExitId::Amagi__West_Lake__Stronghold_Item__ex__Stronghold_Middle_Column_1.into_usize(),
+                end: ExitId::Amagi__West_Lake__Stronghold_Item__ex__Stronghold_Middle_Column_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: AmagiSpotId::Amagi__West_Lake__Cavern_Back_Teeth.into_usize(),
+                end: AmagiSpotId::Amagi__West_Lake__West_Shore.into_usize() + 1,
+            },
+        },
+        AmagiSpotId::Amagi__West_Lake__Stronghold_Rear_Wall => BigSpot {
+            id: BigSpotId::Amagi(AmagiSpotId::Amagi__West_Lake__Stronghold_Rear_Wall),
+            locations: Range {
+                start: LocationId::Amagi__West_Lake__Stronghold_Rear_Wall__Break_Left_Wall.into_usize(),
+                end: LocationId::Amagi__West_Lake__Stronghold_Rear_Wall__Break_Left_Wall.into_usize() + 1,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: AmagiSpotId::Amagi__West_Lake__Cavern_Back_Teeth.into_usize(),
+                end: AmagiSpotId::Amagi__West_Lake__West_Shore.into_usize() + 1,
+            },
+        },
+        AmagiSpotId::Amagi__West_Lake__Stronghold_Middle_Column => BigSpot {
+            id: BigSpotId::Amagi(AmagiSpotId::Amagi__West_Lake__Stronghold_Middle_Column),
+            locations: Range {
+                start: LocationId::Amagi__West_Lake__Stronghold_Middle_Column__Break_Wall.into_usize(),
+                end: LocationId::Amagi__West_Lake__Stronghold_Middle_Column__Break_Wall.into_usize() + 1,
+            },
+            exits: Range {
+                start: ExitId::Amagi__West_Lake__Stronghold_Middle_Column__ex__Stronghold_Ceiling_Left_1.into_usize(),
+                end: ExitId::Amagi__West_Lake__Stronghold_Middle_Column__ex__Stronghold_Item_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: AmagiSpotId::Amagi__West_Lake__Cavern_Back_Teeth.into_usize(),
+                end: AmagiSpotId::Amagi__West_Lake__West_Shore.into_usize() + 1,
+            },
+        },
+        AmagiSpotId::Amagi__West_Lake__Stronghold_Ceiling_Left => BigSpot {
+            id: BigSpotId::Amagi(AmagiSpotId::Amagi__West_Lake__Stronghold_Ceiling_Left),
+            locations: Range {
+                start: LocationId::Amagi__West_Lake__Stronghold_Ceiling_Left__Knock_Down_Left_Boulder.into_usize(),
+                end: LocationId::Amagi__West_Lake__Stronghold_Ceiling_Left__Knock_Down_Left_Boulder.into_usize() + 1,
+            },
+            exits: Range {
+                start: ExitId::Amagi__West_Lake__Stronghold_Ceiling_Left__ex__Stronghold_Middle_Column_1.into_usize(),
+                end: ExitId::Amagi__West_Lake__Stronghold_Ceiling_Left__ex__Stronghold_Middle_Column_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: AmagiSpotId::Amagi__West_Lake__Cavern_Back_Teeth.into_usize(),
+                end: AmagiSpotId::Amagi__West_Lake__West_Shore.into_usize() + 1,
+            },
+        },
+        AmagiSpotId::Amagi__West_Lake__Stronghold_Ceiling_Right => BigSpot {
+            id: BigSpotId::Amagi(AmagiSpotId::Amagi__West_Lake__Stronghold_Ceiling_Right),
+            locations: Range {
+                start: LocationId::Amagi__West_Lake__Stronghold_Ceiling_Right__Knock_Down_Right_Boulder.into_usize(),
+                end: LocationId::Amagi__West_Lake__Stronghold_Ceiling_Right__Knock_Down_Right_Boulder.into_usize() + 1,
+            },
+            exits: Range {
+                start: ExitId::Amagi__West_Lake__Stronghold_Ceiling_Right__ex__Stronghold_Front_Room_1.into_usize(),
+                end: ExitId::Amagi__West_Lake__Stronghold_Ceiling_Right__ex__Stronghold_Front_Room_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: AmagiSpotId::Amagi__West_Lake__Cavern_Back_Teeth.into_usize(),
+                end: AmagiSpotId::Amagi__West_Lake__West_Shore.into_usize() + 1,
+            },
+        },
+        AmagiSpotId::Amagi__West_Lake__Stronghold_Front_Room => BigSpot {
+            id: BigSpotId::Amagi(AmagiSpotId::Amagi__West_Lake__Stronghold_Front_Room),
+            locations: Range {
+                start: LocationId::Amagi__West_Lake__Stronghold_Front_Room__Break_Wall.into_usize(),
+                end: LocationId::Amagi__West_Lake__Stronghold_Front_Room__Break_Wall.into_usize() + 1,
+            },
+            exits: Range {
+                start: ExitId::Amagi__West_Lake__Stronghold_Front_Room__ex__Stronghold_Ceiling_Right_1.into_usize(),
+                end: ExitId::Amagi__West_Lake__Stronghold_Front_Room__ex__Stronghold_Front_Door_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: AmagiSpotId::Amagi__West_Lake__Cavern_Back_Teeth.into_usize(),
+                end: AmagiSpotId::Amagi__West_Lake__West_Shore.into_usize() + 1,
+            },
+        },
+        AmagiSpotId::Amagi__West_Lake__Stronghold_Front_Door => BigSpot {
+            id: BigSpotId::Amagi(AmagiSpotId::Amagi__West_Lake__Stronghold_Front_Door),
+            locations: Range {
+                start: LocationId::Amagi__West_Lake__Stronghold_Front_Door__Break_Wall.into_usize(),
+                end: LocationId::Amagi__West_Lake__Stronghold_Front_Door__Break_Wall.into_usize() + 1,
+            },
+            exits: Range {
+                start: ExitId::Amagi__West_Lake__Stronghold_Front_Door__ex__Stronghold_Front_Room_1.into_usize(),
+                end: ExitId::Amagi__West_Lake__Stronghold_Front_Door__ex__Stronghold_Front_Room_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: AmagiSpotId::Amagi__West_Lake__Cavern_Back_Teeth.into_usize(),
+                end: AmagiSpotId::Amagi__West_Lake__West_Shore.into_usize() + 1,
+            },
+        },
+        AmagiSpotId::Amagi__West_Lake__Some_Rock => BigSpot {
+            id: BigSpotId::Amagi(AmagiSpotId::Amagi__West_Lake__Some_Rock),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: AmagiSpotId::Amagi__West_Lake__Cavern_Back_Teeth.into_usize(),
+                end: AmagiSpotId::Amagi__West_Lake__West_Shore.into_usize() + 1,
+            },
+        },
+        AmagiSpotId::Amagi__West_Lake__Small_Hill => BigSpot {
+            id: BigSpotId::Amagi(AmagiSpotId::Amagi__West_Lake__Small_Hill),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: AmagiSpotId::Amagi__West_Lake__Cavern_Back_Teeth.into_usize(),
+                end: AmagiSpotId::Amagi__West_Lake__West_Shore.into_usize() + 1,
+            },
+        },
+        AmagiSpotId::Amagi__West_Lake__Tentacle_Gap => BigSpot {
+            id: BigSpotId::Amagi(AmagiSpotId::Amagi__West_Lake__Tentacle_Gap),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: AmagiSpotId::Amagi__West_Lake__Cavern_Back_Teeth.into_usize(),
+                end: AmagiSpotId::Amagi__West_Lake__West_Shore.into_usize() + 1,
+            },
+        },
+        AmagiSpotId::Amagi__West_Lake__Left_of_Enemy => BigSpot {
+            id: BigSpotId::Amagi(AmagiSpotId::Amagi__West_Lake__Left_of_Enemy),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: AmagiSpotId::Amagi__West_Lake__Cavern_Back_Teeth.into_usize(),
+                end: AmagiSpotId::Amagi__West_Lake__West_Shore.into_usize() + 1,
+            },
+        },
+        AmagiSpotId::Amagi__West_Lake__East_20 => BigSpot {
+            id: BigSpotId::Amagi(AmagiSpotId::Amagi__West_Lake__East_20),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: AmagiSpotId::Amagi__West_Lake__Cavern_Back_Teeth.into_usize(),
+                end: AmagiSpotId::Amagi__West_Lake__West_Shore.into_usize() + 1,
+            },
+        },
+        AmagiSpotId::Amagi__West_Lake__West_Cliff => BigSpot {
+            id: BigSpotId::Amagi(AmagiSpotId::Amagi__West_Lake__West_Cliff),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: AmagiSpotId::Amagi__West_Lake__Cavern_Back_Teeth.into_usize(),
+                end: AmagiSpotId::Amagi__West_Lake__West_Shore.into_usize() + 1,
+            },
+        },
+        AmagiSpotId::Amagi__West_Lake__West_Bank => BigSpot {
+            id: BigSpotId::Amagi(AmagiSpotId::Amagi__West_Lake__West_Bank),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Amagi__West_Lake__West_Bank__ex__West_Shore_1.into_usize(),
+                end: ExitId::Amagi__West_Lake__West_Bank__ex__West_Shore_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: AmagiSpotId::Amagi__West_Lake__Cavern_Back_Teeth.into_usize(),
+                end: AmagiSpotId::Amagi__West_Lake__West_Shore.into_usize() + 1,
+            },
+        },
+        AmagiSpotId::Amagi__West_Lake__Water_Surface => BigSpot {
+            id: BigSpotId::Amagi(AmagiSpotId::Amagi__West_Lake__Water_Surface),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: AmagiSpotId::Amagi__West_Lake__Cavern_Back_Teeth.into_usize(),
+                end: AmagiSpotId::Amagi__West_Lake__West_Shore.into_usize() + 1,
+            },
+        },
+        AmagiSpotId::Amagi__West_Lake__West_Shore => BigSpot {
+            id: BigSpotId::Amagi(AmagiSpotId::Amagi__West_Lake__West_Shore),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: AmagiSpotId::Amagi__West_Lake__Cavern_Back_Teeth.into_usize(),
+                end: AmagiSpotId::Amagi__West_Lake__West_Shore.into_usize() + 1,
+            },
+        },
+        AmagiSpotId::Amagi__West_Lake__Surface_Wall_Right => BigSpot {
+            id: BigSpotId::Amagi(AmagiSpotId::Amagi__West_Lake__Surface_Wall_Right),
+            locations: Range {
+                start: LocationId::Amagi__West_Lake__Surface_Wall_Right__Break_Wall.into_usize(),
+                end: LocationId::Amagi__West_Lake__Surface_Wall_Right__Break_Wall.into_usize() + 1,
+            },
+            exits: Range {
+                start: ExitId::Amagi__West_Lake__Surface_Wall_Right__ex__Surface_Wall_Left_1.into_usize(),
+                end: ExitId::Amagi__West_Lake__Surface_Wall_Right__ex__Surface_Wall_Left_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: AmagiSpotId::Amagi__West_Lake__Cavern_Back_Teeth.into_usize(),
+                end: AmagiSpotId::Amagi__West_Lake__West_Shore.into_usize() + 1,
+            },
+        },
+        AmagiSpotId::Amagi__West_Lake__Surface_Wall_Left => BigSpot {
+            id: BigSpotId::Amagi(AmagiSpotId::Amagi__West_Lake__Surface_Wall_Left),
+            locations: Range {
+                start: LocationId::Amagi__West_Lake__Surface_Wall_Left__Break_Wall.into_usize(),
+                end: LocationId::Amagi__West_Lake__Surface_Wall_Left__Break_Wall.into_usize() + 1,
+            },
+            exits: Range {
+                start: ExitId::Amagi__West_Lake__Surface_Wall_Left__ex__Surface_Wall_Right_1.into_usize(),
+                end: ExitId::Amagi__West_Lake__Surface_Wall_Left__ex__Surface_Wall_Right_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: AmagiSpotId::Amagi__West_Lake__Cavern_Back_Teeth.into_usize(),
+                end: AmagiSpotId::Amagi__West_Lake__West_Shore.into_usize() + 1,
+            },
+        },
+        AmagiSpotId::Amagi__West_Lake__West_15 => BigSpot {
+            id: BigSpotId::Amagi(AmagiSpotId::Amagi__West_Lake__West_15),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Amagi__West_Lake__West_15__ex__Ebih__Vertical_Interchange__East_15_1.into_usize(),
+                end: ExitId::Amagi__West_Lake__West_15__ex__Ebih__Vertical_Interchange__East_15_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: AmagiSpotId::Amagi__West_Lake__Cavern_Back_Teeth.into_usize(),
+                end: AmagiSpotId::Amagi__West_Lake__West_Shore.into_usize() + 1,
+            },
+        },
+    }
+}
+pub fn build_antarctica_spots() -> EnumMap<AntarcticaSpotId, BigSpot> {
+    enum_map! {
+        AntarcticaSpotId::Antarctica__West__Helipad => BigSpot {
+            id: BigSpotId::Antarctica(AntarcticaSpotId::Antarctica__West__Helipad),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: AntarcticaSpotId::Antarctica__West__Boxes.into_usize(),
+                end: AntarcticaSpotId::Antarctica__West__Shed_Entry.into_usize() + 1,
+            },
+        },
+        AntarcticaSpotId::Antarctica__West__Shed_Entry => BigSpot {
+            id: BigSpotId::Antarctica(AntarcticaSpotId::Antarctica__West__Shed_Entry),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Antarctica__West__Shed_Entry__ex__Helipad_1.into_usize(),
+                end: ExitId::Antarctica__West__Shed_Entry__ex__Shed__Interior_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: AntarcticaSpotId::Antarctica__West__Boxes.into_usize(),
+                end: AntarcticaSpotId::Antarctica__West__Shed_Entry.into_usize() + 1,
+            },
+        },
+        AntarcticaSpotId::Antarctica__West__Boxes => BigSpot {
+            id: BigSpotId::Antarctica(AntarcticaSpotId::Antarctica__West__Boxes),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Antarctica__West__Boxes__ex__Building_1W__West_Entry_1.into_usize(),
+                end: ExitId::Antarctica__West__Boxes__ex__Building_1W__West_Entry_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: AntarcticaSpotId::Antarctica__West__Boxes.into_usize(),
+                end: AntarcticaSpotId::Antarctica__West__Shed_Entry.into_usize() + 1,
+            },
+        },
+        AntarcticaSpotId::Antarctica__Shed__Interior => BigSpot {
+            id: BigSpotId::Antarctica(AntarcticaSpotId::Antarctica__Shed__Interior),
+            locations: Range {
+                start: LocationId::Antarctica__Shed__Interior__Shelf.into_usize(),
+                end: LocationId::Antarctica__Shed__Interior__Shelf.into_usize() + 1,
+            },
+            exits: Range {
+                start: ExitId::Antarctica__Shed__Interior__ex__West__Shed_Entry_1.into_usize(),
+                end: ExitId::Antarctica__Shed__Interior__ex__West__Shed_Entry_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: AntarcticaSpotId::Antarctica__Shed__Interior.into_usize(),
+                end: AntarcticaSpotId::Antarctica__Shed__Interior.into_usize() + 1,
+            },
+        },
+        AntarcticaSpotId::Antarctica__Building_1W__West_Entry => BigSpot {
+            id: BigSpotId::Antarctica(AntarcticaSpotId::Antarctica__Building_1W__West_Entry),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Antarctica__Building_1W__West_Entry__ex__West__Boxes_1.into_usize(),
+                end: ExitId::Antarctica__Building_1W__West_Entry__ex__West__Boxes_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: AntarcticaSpotId::Antarctica__Building_1W__Connector.into_usize(),
+                end: AntarcticaSpotId::Antarctica__Building_1W__West_Entry.into_usize() + 1,
+            },
+        },
+        AntarcticaSpotId::Antarctica__Building_1W__Connector => BigSpot {
+            id: BigSpotId::Antarctica(AntarcticaSpotId::Antarctica__Building_1W__Connector),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Antarctica__Building_1W__Connector__ex__Building_1E__Connector_1.into_usize(),
+                end: ExitId::Antarctica__Building_1W__Connector__ex__Building_1E__Connector_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: AntarcticaSpotId::Antarctica__Building_1W__Connector.into_usize(),
+                end: AntarcticaSpotId::Antarctica__Building_1W__West_Entry.into_usize() + 1,
+            },
+        },
+        AntarcticaSpotId::Antarctica__Building_1E__Connector => BigSpot {
+            id: BigSpotId::Antarctica(AntarcticaSpotId::Antarctica__Building_1E__Connector),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Antarctica__Building_1E__Connector__ex__Building_1W__Connector_1.into_usize(),
+                end: ExitId::Antarctica__Building_1E__Connector__ex__East_Entry_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: AntarcticaSpotId::Antarctica__Building_1E__Connector.into_usize(),
+                end: AntarcticaSpotId::Antarctica__Building_1E__East_Entry.into_usize() + 1,
+            },
+        },
+        AntarcticaSpotId::Antarctica__Building_1E__East_Entry => BigSpot {
+            id: BigSpotId::Antarctica(AntarcticaSpotId::Antarctica__Building_1E__East_Entry),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Antarctica__Building_1E__East_Entry__ex__East__Building_1_Entry_1.into_usize(),
+                end: ExitId::Antarctica__Building_1E__East_Entry__ex__East__Building_1_Entry_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: AntarcticaSpotId::Antarctica__Building_1E__Connector.into_usize(),
+                end: AntarcticaSpotId::Antarctica__Building_1E__East_Entry.into_usize() + 1,
+            },
+        },
+        AntarcticaSpotId::Antarctica__East__Building_1_Entry => BigSpot {
+            id: BigSpotId::Antarctica(AntarcticaSpotId::Antarctica__East__Building_1_Entry),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Antarctica__East__Building_1_Entry__ex__Building_1E__East_Entry_1.into_usize(),
+                end: ExitId::Antarctica__East__Building_1_Entry__ex__Building_2_Upper_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: AntarcticaSpotId::Antarctica__East__Building_1_Entry.into_usize(),
+                end: AntarcticaSpotId::Antarctica__East__Save_Point.into_usize() + 1,
+            },
+        },
+        AntarcticaSpotId::Antarctica__East__Save_Point => BigSpot {
+            id: BigSpotId::Antarctica(AntarcticaSpotId::Antarctica__East__Save_Point),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: AntarcticaSpotId::Antarctica__East__Building_1_Entry.into_usize(),
+                end: AntarcticaSpotId::Antarctica__East__Save_Point.into_usize() + 1,
+            },
+        },
+        AntarcticaSpotId::Antarctica__East__Building_2_Entry => BigSpot {
+            id: BigSpotId::Antarctica(AntarcticaSpotId::Antarctica__East__Building_2_Entry),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Antarctica__East__Building_2_Entry__ex__Building_2__Entry_1.into_usize(),
+                end: ExitId::Antarctica__East__Building_2_Entry__ex__Building_2_Upper_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: AntarcticaSpotId::Antarctica__East__Building_1_Entry.into_usize(),
+                end: AntarcticaSpotId::Antarctica__East__Save_Point.into_usize() + 1,
+            },
+        },
+        AntarcticaSpotId::Antarctica__East__Building_2_Upper => BigSpot {
+            id: BigSpotId::Antarctica(AntarcticaSpotId::Antarctica__East__Building_2_Upper),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Antarctica__East__Building_2_Upper__ex__Building_2__Upper_Door_1.into_usize(),
+                end: ExitId::Antarctica__East__Building_2_Upper__ex__Top__Power_Entry_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: AntarcticaSpotId::Antarctica__East__Building_1_Entry.into_usize(),
+                end: AntarcticaSpotId::Antarctica__East__Save_Point.into_usize() + 1,
+            },
+        },
+        AntarcticaSpotId::Antarctica__Building_2__Entry => BigSpot {
+            id: BigSpotId::Antarctica(AntarcticaSpotId::Antarctica__Building_2__Entry),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Antarctica__Building_2__Entry__ex__East__Building_2_Entry_1.into_usize(),
+                end: ExitId::Antarctica__Building_2__Entry__ex__Stairs_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: AntarcticaSpotId::Antarctica__Building_2__Behind_Boxes.into_usize(),
+                end: AntarcticaSpotId::Antarctica__Building_2__Upper_Door.into_usize() + 1,
+            },
+        },
+        AntarcticaSpotId::Antarctica__Building_2__Stairs => BigSpot {
+            id: BigSpotId::Antarctica(AntarcticaSpotId::Antarctica__Building_2__Stairs),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Antarctica__Building_2__Stairs__ex__Behind_Boxes_1.into_usize(),
+                end: ExitId::Antarctica__Building_2__Stairs__ex__Entry_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: AntarcticaSpotId::Antarctica__Building_2__Behind_Boxes.into_usize(),
+                end: AntarcticaSpotId::Antarctica__Building_2__Upper_Door.into_usize() + 1,
+            },
+        },
+        AntarcticaSpotId::Antarctica__Building_2__Upper_Door => BigSpot {
+            id: BigSpotId::Antarctica(AntarcticaSpotId::Antarctica__Building_2__Upper_Door),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Antarctica__Building_2__Upper_Door__ex__East__Building_2_Upper_1.into_usize(),
+                end: ExitId::Antarctica__Building_2__Upper_Door__ex__East__Building_2_Upper_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: AntarcticaSpotId::Antarctica__Building_2__Behind_Boxes.into_usize(),
+                end: AntarcticaSpotId::Antarctica__Building_2__Upper_Door.into_usize() + 1,
+            },
+        },
+        AntarcticaSpotId::Antarctica__Building_2__Behind_Boxes => BigSpot {
+            id: BigSpotId::Antarctica(AntarcticaSpotId::Antarctica__Building_2__Behind_Boxes),
+            locations: Range {
+                start: LocationId::Antarctica__Building_2__Behind_Boxes__Note.into_usize(),
+                end: LocationId::Antarctica__Building_2__Behind_Boxes__Note.into_usize() + 1,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: AntarcticaSpotId::Antarctica__Building_2__Behind_Boxes.into_usize(),
+                end: AntarcticaSpotId::Antarctica__Building_2__Upper_Door.into_usize() + 1,
+            },
+        },
+        AntarcticaSpotId::Antarctica__Top__Power_Entry => BigSpot {
+            id: BigSpotId::Antarctica(AntarcticaSpotId::Antarctica__Top__Power_Entry),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Antarctica__Top__Power_Entry__ex__East__Building_2_Upper_1.into_usize(),
+                end: ExitId::Antarctica__Top__Power_Entry__ex__Power_Room__Entry_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: AntarcticaSpotId::Antarctica__Top__Power_Entry.into_usize(),
+                end: AntarcticaSpotId::Antarctica__Top__Power_Entry.into_usize() + 1,
+            },
+        },
+        AntarcticaSpotId::Antarctica__Power_Room__Entry => BigSpot {
+            id: BigSpotId::Antarctica(AntarcticaSpotId::Antarctica__Power_Room__Entry),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Antarctica__Power_Room__Entry__ex__Top__Power_Entry_1.into_usize(),
+                end: ExitId::Antarctica__Power_Room__Entry__ex__Top__Power_Entry_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: AntarcticaSpotId::Antarctica__Power_Room__Entry.into_usize(),
+                end: AntarcticaSpotId::Antarctica__Power_Room__Switch.into_usize() + 1,
+            },
+        },
+        AntarcticaSpotId::Antarctica__Power_Room__Switch => BigSpot {
+            id: BigSpotId::Antarctica(AntarcticaSpotId::Antarctica__Power_Room__Switch),
+            locations: Range {
+                start: LocationId::Antarctica__Power_Room__Switch__Flip.into_usize(),
+                end: LocationId::Antarctica__Power_Room__Switch__Flip.into_usize() + 1,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: AntarcticaSpotId::Antarctica__Power_Room__Entry.into_usize(),
+                end: AntarcticaSpotId::Antarctica__Power_Room__Switch.into_usize() + 1,
+            },
+        },
+        AntarcticaSpotId::Antarctica__Freight_Elevator__Left => BigSpot {
+            id: BigSpotId::Antarctica(AntarcticaSpotId::Antarctica__Freight_Elevator__Left),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Antarctica__Freight_Elevator__Left__ex__Building_2__Entry_1.into_usize(),
+                end: ExitId::Antarctica__Freight_Elevator__Left__ex__Building_2__Entry_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: AntarcticaSpotId::Antarctica__Freight_Elevator__Controls.into_usize(),
+                end: AntarcticaSpotId::Antarctica__Freight_Elevator__Left.into_usize() + 1,
+            },
+        },
+        AntarcticaSpotId::Antarctica__Freight_Elevator__Controls => BigSpot {
+            id: BigSpotId::Antarctica(AntarcticaSpotId::Antarctica__Freight_Elevator__Controls),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Antarctica__Freight_Elevator__Controls__ex__Glacier__Dock_Elevator__Elevator_1.into_usize(),
+                end: ExitId::Antarctica__Freight_Elevator__Controls__ex__Glacier__Dock_Elevator__Elevator_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: AntarcticaSpotId::Antarctica__Freight_Elevator__Controls.into_usize(),
+                end: AntarcticaSpotId::Antarctica__Freight_Elevator__Left.into_usize() + 1,
+            },
+        },
+    }
+}
+pub fn build_ebih_spots() -> EnumMap<EbihSpotId, BigSpot> {
+    enum_map! {
+        EbihSpotId::Ebih__Base_Camp__East_11 => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Base_Camp__East_11),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Ebih__Base_Camp__East_11__ex__Glacier__Grid_31_9_12__Midair_1.into_usize(),
+                end: ExitId::Ebih__Base_Camp__East_11__ex__Top_Platform_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Base_Camp__Behind_Vehicle.into_usize(),
+                end: EbihSpotId::Ebih__Base_Camp__West_Midair.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Base_Camp__East_12 => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Base_Camp__East_12),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Ebih__Base_Camp__East_12__ex__Glacier__Grid_31_9_12__West_12_1.into_usize(),
+                end: ExitId::Ebih__Base_Camp__East_12__ex__Glacier__Grid_31_9_12__West_12_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Base_Camp__Behind_Vehicle.into_usize(),
+                end: EbihSpotId::Ebih__Base_Camp__West_Midair.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Base_Camp__Staircase => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Base_Camp__Staircase),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Base_Camp__Behind_Vehicle.into_usize(),
+                end: EbihSpotId::Ebih__Base_Camp__West_Midair.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Base_Camp__Save_Point => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Base_Camp__Save_Point),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: ActionId::Ebih__Base_Camp__Save_Point__Save.into_usize(),
+                end: ActionId::Ebih__Base_Camp__Save_Point__Save.into_usize() + 1,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Base_Camp__Behind_Vehicle.into_usize(),
+                end: EbihSpotId::Ebih__Base_Camp__West_Midair.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Base_Camp__Bunker_Entry => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Base_Camp__Bunker_Entry),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Ebih__Base_Camp__Bunker_Entry__ex__Bunker_Interior__Entry_1.into_usize(),
+                end: ExitId::Ebih__Base_Camp__Bunker_Entry__ex__Bunker_Interior__Entry_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Base_Camp__Behind_Vehicle.into_usize(),
+                end: EbihSpotId::Ebih__Base_Camp__West_Midair.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Base_Camp__Lake_Access => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Base_Camp__Lake_Access),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Ebih__Base_Camp__Lake_Access__ex__Glacier__Lake_Main_Entrance__Ebih_Access_1.into_usize(),
+                end: ExitId::Ebih__Base_Camp__Lake_Access__ex__Glacier__Lake_Main_Entrance__Ebih_Access_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Base_Camp__Behind_Vehicle.into_usize(),
+                end: EbihSpotId::Ebih__Base_Camp__West_Midair.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Base_Camp__Behind_Vehicle => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Base_Camp__Behind_Vehicle),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Base_Camp__Behind_Vehicle.into_usize(),
+                end: EbihSpotId::Ebih__Base_Camp__West_Midair.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Base_Camp__Building_Entry => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Base_Camp__Building_Entry),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Ebih__Base_Camp__Building_Entry__ex__Building_Interior__Entry_1.into_usize(),
+                end: ExitId::Ebih__Base_Camp__Building_Entry__ex__Building_Interior__Entry_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Base_Camp__Behind_Vehicle.into_usize(),
+                end: EbihSpotId::Ebih__Base_Camp__West_Midair.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Base_Camp__Tent_Entry => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Base_Camp__Tent_Entry),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Ebih__Base_Camp__Tent_Entry__ex__Tent_Interior__Entry_1.into_usize(),
+                end: ExitId::Ebih__Base_Camp__Tent_Entry__ex__Tent_Interior__Entry_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Base_Camp__Behind_Vehicle.into_usize(),
+                end: EbihSpotId::Ebih__Base_Camp__West_Midair.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Base_Camp__West_13 => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Base_Camp__West_13),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Ebih__Base_Camp__West_13__ex__By_Garage__East_13_1.into_usize(),
+                end: ExitId::Ebih__Base_Camp__West_13__ex__By_Garage__East_13_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Base_Camp__Behind_Vehicle.into_usize(),
+                end: EbihSpotId::Ebih__Base_Camp__West_Midair.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Base_Camp__West_11 => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Base_Camp__West_11),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Ebih__Base_Camp__West_11__ex__Left_Platform_1.into_usize(),
+                end: ExitId::Ebih__Base_Camp__West_11__ex__Observation_Tower_Room__East_11_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Base_Camp__Behind_Vehicle.into_usize(),
+                end: EbihSpotId::Ebih__Base_Camp__West_Midair.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Base_Camp__West_Midair => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Base_Camp__West_Midair),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Base_Camp__Behind_Vehicle.into_usize(),
+                end: EbihSpotId::Ebih__Base_Camp__West_Midair.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Base_Camp__West_12 => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Base_Camp__West_12),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Ebih__Base_Camp__West_12__ex__By_Garage__East_12_1.into_usize(),
+                end: ExitId::Ebih__Base_Camp__West_12__ex__By_Garage__East_12_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Base_Camp__Behind_Vehicle.into_usize(),
+                end: EbihSpotId::Ebih__Base_Camp__West_Midair.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Base_Camp__Left_Platform => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Base_Camp__Left_Platform),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Ebih__Base_Camp__Left_Platform__ex__Top_Platform_1.into_usize(),
+                end: ExitId::Ebih__Base_Camp__Left_Platform__ex__Top_Platform_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: ActionId::Ebih__Base_Camp__Left_Platform__Move_Left_Platform.into_usize(),
+                end: ActionId::Ebih__Base_Camp__Left_Platform__Move_Left_Platform.into_usize() + 1,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Base_Camp__Behind_Vehicle.into_usize(),
+                end: EbihSpotId::Ebih__Base_Camp__West_Midair.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Base_Camp__Left_Platform_Moved => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Base_Camp__Left_Platform_Moved),
+            locations: Range {
+                start: LocationId::Ebih__Base_Camp__Left_Platform_Moved__Item_From_The_Side.into_usize(),
+                end: LocationId::Ebih__Base_Camp__Left_Platform_Moved__Item_From_The_Side.into_usize() + 1,
+            },
+            exits: Range {
+                start: ExitId::Ebih__Base_Camp__Left_Platform_Moved__ex__Top_Platform_1.into_usize(),
+                end: ExitId::Ebih__Base_Camp__Left_Platform_Moved__ex__Top_Platform_2.into_usize() + 1,
+            },
+            actions: Range {
+                start: ActionId::Ebih__Base_Camp__Left_Platform_Moved__Reset_Left_Platform.into_usize(),
+                end: ActionId::Ebih__Base_Camp__Left_Platform_Moved__Reset_Left_Platform.into_usize() + 1,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Base_Camp__Behind_Vehicle.into_usize(),
+                end: EbihSpotId::Ebih__Base_Camp__West_Midair.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Base_Camp__Top_Platform => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Base_Camp__Top_Platform),
+            locations: Range {
+                start: LocationId::Ebih__Base_Camp__Top_Platform__Item.into_usize(),
+                end: LocationId::Ebih__Base_Camp__Top_Platform__Item.into_usize() + 1,
+            },
+            exits: Range {
+                start: ExitId::Ebih__Base_Camp__Top_Platform__ex__Left_Platform_1.into_usize(),
+                end: ExitId::Ebih__Base_Camp__Top_Platform__ex__Left_Platform_Moved_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Base_Camp__Behind_Vehicle.into_usize(),
+                end: EbihSpotId::Ebih__Base_Camp__West_Midair.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Bunker_Interior__Entry => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Bunker_Interior__Entry),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Ebih__Bunker_Interior__Entry__ex__Base_Camp__Bunker_Entry_1.into_usize(),
+                end: ExitId::Ebih__Bunker_Interior__Entry__ex__Base_Camp__Bunker_Entry_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Bunker_Interior__Desk.into_usize(),
+                end: EbihSpotId::Ebih__Bunker_Interior__Entry.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Bunker_Interior__Desk => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Bunker_Interior__Desk),
+            locations: Range {
+                start: LocationId::Ebih__Bunker_Interior__Desk__Note.into_usize(),
+                end: LocationId::Ebih__Bunker_Interior__Desk__Note.into_usize() + 1,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Bunker_Interior__Desk.into_usize(),
+                end: EbihSpotId::Ebih__Bunker_Interior__Entry.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Building_Interior__Entry => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Building_Interior__Entry),
+            locations: Range {
+                start: LocationId::Ebih__Building_Interior__Entry__Remote_Urn.into_usize(),
+                end: LocationId::Ebih__Building_Interior__Entry__Remote_Urn.into_usize() + 1,
+            },
+            exits: Range {
+                start: ExitId::Ebih__Building_Interior__Entry__ex__Base_Camp__Building_Entry_1.into_usize(),
+                end: ExitId::Ebih__Building_Interior__Entry__ex__Base_Camp__Building_Entry_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Building_Interior__Corner.into_usize(),
+                end: EbihSpotId::Ebih__Building_Interior__Entry.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Building_Interior__Corner => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Building_Interior__Corner),
+            locations: Range {
+                start: LocationId::Ebih__Building_Interior__Corner__Urn.into_usize(),
+                end: LocationId::Ebih__Building_Interior__Corner__Urn.into_usize() + 1,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Building_Interior__Corner.into_usize(),
+                end: EbihSpotId::Ebih__Building_Interior__Entry.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Tent_Interior__Entry => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Tent_Interior__Entry),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Ebih__Tent_Interior__Entry__ex__Base_Camp__Tent_Entry_1.into_usize(),
+                end: ExitId::Ebih__Tent_Interior__Entry__ex__Base_Camp__Tent_Entry_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Tent_Interior__Desk.into_usize(),
+                end: EbihSpotId::Ebih__Tent_Interior__Entry.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Tent_Interior__Desk => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Tent_Interior__Desk),
+            locations: Range {
+                start: LocationId::Ebih__Tent_Interior__Desk__Note.into_usize(),
+                end: LocationId::Ebih__Tent_Interior__Desk__Note.into_usize() + 1,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Tent_Interior__Desk.into_usize(),
+                end: EbihSpotId::Ebih__Tent_Interior__Entry.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__By_Garage__East_13 => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__By_Garage__East_13),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Ebih__By_Garage__East_13__ex__Base_Camp__West_13_1.into_usize(),
+                end: ExitId::Ebih__By_Garage__East_13__ex__Base_Camp__West_13_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__By_Garage__Crawlspace.into_usize(),
+                end: EbihSpotId::Ebih__By_Garage__West_Bush.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__By_Garage__East_Platform => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__By_Garage__East_Platform),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Ebih__By_Garage__East_Platform__ex__Crawlspace_Opening_1.into_usize(),
+                end: ExitId::Ebih__By_Garage__East_Platform__ex__Outcropping_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__By_Garage__Crawlspace.into_usize(),
+                end: EbihSpotId::Ebih__By_Garage__West_Bush.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__By_Garage__Crawlspace_Opening => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__By_Garage__Crawlspace_Opening),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Ebih__By_Garage__Crawlspace_Opening__ex__Crawlspace_1.into_usize(),
+                end: ExitId::Ebih__By_Garage__Crawlspace_Opening__ex__Crawlspace_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__By_Garage__Crawlspace.into_usize(),
+                end: EbihSpotId::Ebih__By_Garage__West_Bush.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__By_Garage__Crawlspace => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__By_Garage__Crawlspace),
+            locations: Range {
+                start: LocationId::Ebih__By_Garage__Crawlspace__Fragment.into_usize(),
+                end: LocationId::Ebih__By_Garage__Crawlspace__Fragment.into_usize() + 1,
+            },
+            exits: Range {
+                start: ExitId::Ebih__By_Garage__Crawlspace__ex__Crawlspace_Opening_1.into_usize(),
+                end: ExitId::Ebih__By_Garage__Crawlspace__ex__Crawlspace_Opening_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__By_Garage__Crawlspace.into_usize(),
+                end: EbihSpotId::Ebih__By_Garage__West_Bush.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__By_Garage__Outcropping => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__By_Garage__Outcropping),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__By_Garage__Crawlspace.into_usize(),
+                end: EbihSpotId::Ebih__By_Garage__West_Bush.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__By_Garage__East_Bush => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__By_Garage__East_Bush),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__By_Garage__Crawlspace.into_usize(),
+                end: EbihSpotId::Ebih__By_Garage__West_Bush.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__By_Garage__Lower_Platform => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__By_Garage__Lower_Platform),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Ebih__By_Garage__Lower_Platform__ex__East_Bush_1.into_usize(),
+                end: ExitId::Ebih__By_Garage__Lower_Platform__ex__West_Bush_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__By_Garage__Crawlspace.into_usize(),
+                end: EbihSpotId::Ebih__By_Garage__West_Bush.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__By_Garage__West_Bush => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__By_Garage__West_Bush),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__By_Garage__Crawlspace.into_usize(),
+                end: EbihSpotId::Ebih__By_Garage__West_Bush.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__By_Garage__West_12 => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__By_Garage__West_12),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Ebih__By_Garage__West_12__ex__Grid_25_10_12__East_12_1.into_usize(),
+                end: ExitId::Ebih__By_Garage__West_12__ex__Grid_25_10_12__East_12_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__By_Garage__Crawlspace.into_usize(),
+                end: EbihSpotId::Ebih__By_Garage__West_Bush.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__By_Garage__West_13 => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__By_Garage__West_13),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__By_Garage__Crawlspace.into_usize(),
+                end: EbihSpotId::Ebih__By_Garage__West_Bush.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__By_Garage__West_Below_Platforms => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__By_Garage__West_Below_Platforms),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__By_Garage__Crawlspace.into_usize(),
+                end: EbihSpotId::Ebih__By_Garage__West_Bush.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__By_Garage__Garage_Entry => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__By_Garage__Garage_Entry),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Ebih__By_Garage__Garage_Entry__ex__Garage__Entry_1.into_usize(),
+                end: ExitId::Ebih__By_Garage__Garage_Entry__ex__Garage__Entry_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__By_Garage__Crawlspace.into_usize(),
+                end: EbihSpotId::Ebih__By_Garage__West_Bush.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__By_Garage__East_Below_Platforms => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__By_Garage__East_Below_Platforms),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__By_Garage__Crawlspace.into_usize(),
+                end: EbihSpotId::Ebih__By_Garage__West_Bush.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__By_Garage__East_12 => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__By_Garage__East_12),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__By_Garage__Crawlspace.into_usize(),
+                end: EbihSpotId::Ebih__By_Garage__West_Bush.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Garage__Entry => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Garage__Entry),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Ebih__Garage__Entry__ex__By_Garage__Garage_Entry_1.into_usize(),
+                end: ExitId::Ebih__Garage__Entry__ex__By_Garage__Garage_Entry_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Garage__Boxes.into_usize(),
+                end: EbihSpotId::Ebih__Garage__Entry.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Garage__Boxes => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Garage__Boxes),
+            locations: Range {
+                start: LocationId::Ebih__Garage__Boxes__Under_Boxes.into_usize(),
+                end: LocationId::Ebih__Garage__Boxes__Under_Boxes.into_usize() + 1,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Garage__Boxes.into_usize(),
+                end: EbihSpotId::Ebih__Garage__Entry.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Grid_25_10_12__East_12 => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Grid_25_10_12__East_12),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Ebih__Grid_25_10_12__East_12__ex__By_Garage__West_12_1.into_usize(),
+                end: ExitId::Ebih__Grid_25_10_12__East_12__ex__By_Garage__West_12_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Grid_25_10_12__Below_Bush.into_usize(),
+                end: EbihSpotId::Ebih__Grid_25_10_12__West_12.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Grid_25_10_12__Bush => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Grid_25_10_12__Bush),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Ebih__Grid_25_10_12__Bush__ex__Mid_Ledge_1.into_usize(),
+                end: ExitId::Ebih__Grid_25_10_12__Bush__ex__Mid_Ledge_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Grid_25_10_12__Below_Bush.into_usize(),
+                end: EbihSpotId::Ebih__Grid_25_10_12__West_12.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Grid_25_10_12__West_12 => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Grid_25_10_12__West_12),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Grid_25_10_12__Below_Bush.into_usize(),
+                end: EbihSpotId::Ebih__Grid_25_10_12__West_12.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Grid_25_10_12__Below_Bush => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Grid_25_10_12__Below_Bush),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Ebih__Grid_25_10_12__Below_Bush__ex__Bush_1.into_usize(),
+                end: ExitId::Ebih__Grid_25_10_12__Below_Bush__ex__Bush_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Grid_25_10_12__Below_Bush.into_usize(),
+                end: EbihSpotId::Ebih__Grid_25_10_12__West_12.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Grid_25_10_12__Mid_Ledge => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Grid_25_10_12__Mid_Ledge),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Ebih__Grid_25_10_12__Mid_Ledge__ex__West_11_1.into_usize(),
+                end: ExitId::Ebih__Grid_25_10_12__Mid_Ledge__ex__West_11_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Grid_25_10_12__Below_Bush.into_usize(),
+                end: EbihSpotId::Ebih__Grid_25_10_12__West_12.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Grid_25_10_12__Door_Left => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Grid_25_10_12__Door_Left),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Ebih__Grid_25_10_12__Door_Left__ex__Door_1.into_usize(),
+                end: ExitId::Ebih__Grid_25_10_12__Door_Left__ex__Door_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: ActionId::Ebih__Grid_25_10_12__Door_Left__Open_Door.into_usize(),
+                end: ActionId::Ebih__Grid_25_10_12__Door_Left__Open_Door.into_usize() + 1,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Grid_25_10_12__Below_Bush.into_usize(),
+                end: EbihSpotId::Ebih__Grid_25_10_12__West_12.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Grid_25_10_12__Top_Platform => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Grid_25_10_12__Top_Platform),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Ebih__Grid_25_10_12__Top_Platform__ex__West_10_1.into_usize(),
+                end: ExitId::Ebih__Grid_25_10_12__Top_Platform__ex__West_10_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Grid_25_10_12__Below_Bush.into_usize(),
+                end: EbihSpotId::Ebih__Grid_25_10_12__West_12.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Grid_25_10_12__West_11 => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Grid_25_10_12__West_11),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Ebih__Grid_25_10_12__West_11__ex__Waterfall__East_11_1.into_usize(),
+                end: ExitId::Ebih__Grid_25_10_12__West_11__ex__Waterfall__East_11_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Grid_25_10_12__Below_Bush.into_usize(),
+                end: EbihSpotId::Ebih__Grid_25_10_12__West_12.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Grid_25_10_12__West_10 => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Grid_25_10_12__West_10),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Ebih__Grid_25_10_12__West_10__ex__Waterfall__East_10_1.into_usize(),
+                end: ExitId::Ebih__Grid_25_10_12__West_10__ex__Waterfall__East_10_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Grid_25_10_12__Below_Bush.into_usize(),
+                end: EbihSpotId::Ebih__Grid_25_10_12__West_12.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Grid_25_10_12__Door => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Grid_25_10_12__Door),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Ebih__Grid_25_10_12__Door__ex__Door_Left_1.into_usize(),
+                end: ExitId::Ebih__Grid_25_10_12__Door__ex__East_11_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Grid_25_10_12__Below_Bush.into_usize(),
+                end: EbihSpotId::Ebih__Grid_25_10_12__West_12.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Grid_25_10_12__East_11 => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Grid_25_10_12__East_11),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Ebih__Grid_25_10_12__East_11__ex__Door_1.into_usize(),
+                end: ExitId::Ebih__Grid_25_10_12__East_11__ex__Grid_26_10_11__West_11_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: ActionId::Ebih__Grid_25_10_12__East_11__Open_Door.into_usize(),
+                end: ActionId::Ebih__Grid_25_10_12__East_11__Open_Door.into_usize() + 1,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Grid_25_10_12__Below_Bush.into_usize(),
+                end: EbihSpotId::Ebih__Grid_25_10_12__West_12.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Grid_25_10_12__East_10 => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Grid_25_10_12__East_10),
+            locations: Range {
+                start: LocationId::Ebih__Grid_25_10_12__East_10__Remote_Bush.into_usize(),
+                end: LocationId::Ebih__Grid_25_10_12__East_10__Remote_Bush.into_usize() + 1,
+            },
+            exits: Range {
+                start: ExitId::Ebih__Grid_25_10_12__East_10__ex__Grid_26_10_11__West_10_1.into_usize(),
+                end: ExitId::Ebih__Grid_25_10_12__East_10__ex__Grid_26_10_11__West_10_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Grid_25_10_12__Below_Bush.into_usize(),
+                end: EbihSpotId::Ebih__Grid_25_10_12__West_12.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Grid_25_10_12__Hidden_Bush => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Grid_25_10_12__Hidden_Bush),
+            locations: Range {
+                start: LocationId::Ebih__Grid_25_10_12__Hidden_Bush__Behind_Bush.into_usize(),
+                end: LocationId::Ebih__Grid_25_10_12__Hidden_Bush__Behind_Bush.into_usize() + 1,
+            },
+            exits: Range {
+                start: ExitId::Ebih__Grid_25_10_12__Hidden_Bush__ex__East_10_1.into_usize(),
+                end: ExitId::Ebih__Grid_25_10_12__Hidden_Bush__ex__East_10_2.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Grid_25_10_12__Below_Bush.into_usize(),
+                end: EbihSpotId::Ebih__Grid_25_10_12__West_12.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Waterfall__East_10 => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Waterfall__East_10),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Ebih__Waterfall__East_10__ex__Grid_25_10_12__West_10_1.into_usize(),
+                end: ExitId::Ebih__Waterfall__East_10__ex__Grid_25_10_12__West_10_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Waterfall__Alcove.into_usize(),
+                end: EbihSpotId::Ebih__Waterfall__West_Main_Path.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Waterfall__East_Ledge => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Waterfall__East_Ledge),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Waterfall__Alcove.into_usize(),
+                end: EbihSpotId::Ebih__Waterfall__West_Main_Path.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Waterfall__East_11 => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Waterfall__East_11),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Ebih__Waterfall__East_11__ex__Grid_25_10_12__West_11_1.into_usize(),
+                end: ExitId::Ebih__Waterfall__East_11__ex__Grid_25_10_12__West_11_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Waterfall__Alcove.into_usize(),
+                end: EbihSpotId::Ebih__Waterfall__West_Main_Path.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Waterfall__Near_East_Tree => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Waterfall__Near_East_Tree),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Waterfall__Alcove.into_usize(),
+                end: EbihSpotId::Ebih__Waterfall__West_Main_Path.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Waterfall__Waterfall_Right => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Waterfall__Waterfall_Right),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Waterfall__Alcove.into_usize(),
+                end: EbihSpotId::Ebih__Waterfall__West_Main_Path.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Waterfall__Alcove_Right => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Waterfall__Alcove_Right),
+            locations: Range {
+                start: LocationId::Ebih__Waterfall__Alcove_Right__Block_Right.into_usize(),
+                end: LocationId::Ebih__Waterfall__Alcove_Right__Block_Right.into_usize() + 1,
+            },
+            exits: Range {
+                start: ExitId::Ebih__Waterfall__Alcove_Right__ex__Alcove_1.into_usize(),
+                end: ExitId::Ebih__Waterfall__Alcove_Right__ex__Alcove_2.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Waterfall__Alcove.into_usize(),
+                end: EbihSpotId::Ebih__Waterfall__West_Main_Path.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Waterfall__Waterfall_Center_Right => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Waterfall__Waterfall_Center_Right),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Waterfall__Alcove.into_usize(),
+                end: EbihSpotId::Ebih__Waterfall__West_Main_Path.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Waterfall__Waterfall_Center_Center => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Waterfall__Waterfall_Center_Center),
+            locations: Range {
+                start: LocationId::Ebih__Waterfall__Waterfall_Center_Center__Both_Blocks.into_usize(),
+                end: LocationId::Ebih__Waterfall__Waterfall_Center_Center__Both_Blocks.into_usize() + 1,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Waterfall__Alcove.into_usize(),
+                end: EbihSpotId::Ebih__Waterfall__West_Main_Path.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Waterfall__Waterfall_Center_Left => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Waterfall__Waterfall_Center_Left),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Waterfall__Alcove.into_usize(),
+                end: EbihSpotId::Ebih__Waterfall__West_Main_Path.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Waterfall__Alcove_Left => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Waterfall__Alcove_Left),
+            locations: Range {
+                start: LocationId::Ebih__Waterfall__Alcove_Left__Block_Left.into_usize(),
+                end: LocationId::Ebih__Waterfall__Alcove_Left__Block_Left.into_usize() + 1,
+            },
+            exits: Range {
+                start: ExitId::Ebih__Waterfall__Alcove_Left__ex__Alcove_1.into_usize(),
+                end: ExitId::Ebih__Waterfall__Alcove_Left__ex__Waterfall_Center_Left_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Waterfall__Alcove.into_usize(),
+                end: EbihSpotId::Ebih__Waterfall__West_Main_Path.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Waterfall__Alcove => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Waterfall__Alcove),
+            locations: Range {
+                start: LocationId::Ebih__Waterfall__Alcove__Block_Left.into_usize(),
+                end: LocationId::Ebih__Waterfall__Alcove__Pedestal.into_usize() + 1,
+            },
+            exits: Range {
+                start: ExitId::Ebih__Waterfall__Alcove__ex__Alcove_Left_1.into_usize(),
+                end: ExitId::Ebih__Waterfall__Alcove__ex__Alcove_Right_2.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Waterfall__Alcove.into_usize(),
+                end: EbihSpotId::Ebih__Waterfall__West_Main_Path.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Waterfall__Under_Waterfall => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Waterfall__Under_Waterfall),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Ebih__Waterfall__Under_Waterfall__ex__Waterfall_Left_1.into_usize(),
+                end: ExitId::Ebih__Waterfall__Under_Waterfall__ex__Waterfall_Left_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Waterfall__Alcove.into_usize(),
+                end: EbihSpotId::Ebih__Waterfall__West_Main_Path.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Waterfall__Waterfall_Left => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Waterfall__Waterfall_Left),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Waterfall__Alcove.into_usize(),
+                end: EbihSpotId::Ebih__Waterfall__West_Main_Path.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Waterfall__Wall_Right => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Waterfall__Wall_Right),
+            locations: Range {
+                start: LocationId::Ebih__Waterfall__Wall_Right__Break_Through_Wall.into_usize(),
+                end: LocationId::Ebih__Waterfall__Wall_Right__Break_Wall.into_usize() + 1,
+            },
+            exits: Range {
+                start: ExitId::Ebih__Waterfall__Wall_Right__ex__Lower_West_Tree_1.into_usize(),
+                end: ExitId::Ebih__Waterfall__Wall_Right__ex__Wall_Left_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Waterfall__Alcove.into_usize(),
+                end: EbihSpotId::Ebih__Waterfall__West_Main_Path.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Waterfall__Wall_Left => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Waterfall__Wall_Left),
+            locations: Range {
+                start: LocationId::Ebih__Waterfall__Wall_Left__Break_Through_Wall.into_usize(),
+                end: LocationId::Ebih__Waterfall__Wall_Left__Break_Wall.into_usize() + 1,
+            },
+            exits: Range {
+                start: ExitId::Ebih__Waterfall__Wall_Left__ex__Wall_Right_1.into_usize(),
+                end: ExitId::Ebih__Waterfall__Wall_Left__ex__Wall_Right_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Waterfall__Alcove.into_usize(),
+                end: EbihSpotId::Ebih__Waterfall__West_Main_Path.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Waterfall__West_11 => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Waterfall__West_11),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Ebih__Waterfall__West_11__ex__Ebih_West__East_11_1.into_usize(),
+                end: ExitId::Ebih__Waterfall__West_11__ex__Ebih_West__East_11_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Waterfall__Alcove.into_usize(),
+                end: EbihSpotId::Ebih__Waterfall__West_Main_Path.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Waterfall__Lower_West_Tree => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Waterfall__Lower_West_Tree),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Ebih__Waterfall__Lower_West_Tree__ex__West_Lower_Path_1.into_usize(),
+                end: ExitId::Ebih__Waterfall__Lower_West_Tree__ex__West_Lower_Path_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Waterfall__Alcove.into_usize(),
+                end: EbihSpotId::Ebih__Waterfall__West_Main_Path.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Waterfall__West_Lower_Path => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Waterfall__West_Lower_Path),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Waterfall__Alcove.into_usize(),
+                end: EbihSpotId::Ebih__Waterfall__West_Main_Path.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Waterfall__West_10 => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Waterfall__West_10),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Ebih__Waterfall__West_10__ex__Ebih_West__East_10_1.into_usize(),
+                end: ExitId::Ebih__Waterfall__West_10__ex__Ebih_West__East_10_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Waterfall__Alcove.into_usize(),
+                end: EbihSpotId::Ebih__Waterfall__West_Main_Path.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Waterfall__West_9 => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Waterfall__West_9),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Ebih__Waterfall__West_9__ex__Ebih_West__East_9_1.into_usize(),
+                end: ExitId::Ebih__Waterfall__West_9__ex__Ebih_West__East_9_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Waterfall__Alcove.into_usize(),
+                end: EbihSpotId::Ebih__Waterfall__West_Main_Path.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Waterfall__West_Climb => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Waterfall__West_Climb),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Ebih__Waterfall__West_Climb__ex__Ledge_Below_Hole_1.into_usize(),
+                end: ExitId::Ebih__Waterfall__West_Climb__ex__Ledge_Below_Hole_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Waterfall__Alcove.into_usize(),
+                end: EbihSpotId::Ebih__Waterfall__West_Main_Path.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Waterfall__Ledge_Below_Hole => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Waterfall__Ledge_Below_Hole),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Ebih__Waterfall__Ledge_Below_Hole__ex__Below_Left_Switch_1.into_usize(),
+                end: ExitId::Ebih__Waterfall__Ledge_Below_Hole__ex__Middle_West_Tree_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: ActionId::Ebih__Waterfall__Ledge_Below_Hole__Throw_Drone.into_usize(),
+                end: ActionId::Ebih__Waterfall__Ledge_Below_Hole__Throw_Drone.into_usize() + 1,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Waterfall__Alcove.into_usize(),
+                end: EbihSpotId::Ebih__Waterfall__West_Main_Path.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Waterfall__Below_Left_Switch => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Waterfall__Below_Left_Switch),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Ebih__Waterfall__Below_Left_Switch__ex__Ledge_Below_Hole_1.into_usize(),
+                end: ExitId::Ebih__Waterfall__Below_Left_Switch__ex__Ledge_Below_Hole_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: ActionId::Ebih__Waterfall__Below_Left_Switch__Open_Door.into_usize(),
+                end: ActionId::Ebih__Waterfall__Below_Left_Switch__Open_Door.into_usize() + 1,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Waterfall__Alcove.into_usize(),
+                end: EbihSpotId::Ebih__Waterfall__West_Main_Path.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Waterfall__West_8 => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Waterfall__West_8),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Ebih__Waterfall__West_8__ex__Ebih_West__East_8_1.into_usize(),
+                end: ExitId::Ebih__Waterfall__West_8__ex__Ebih_West__East_8_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: ActionId::Ebih__Waterfall__West_8__Open_Door.into_usize(),
+                end: ActionId::Ebih__Waterfall__West_8__Open_Door.into_usize() + 1,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Waterfall__Alcove.into_usize(),
+                end: EbihSpotId::Ebih__Waterfall__West_Main_Path.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Waterfall__West_Door_Left => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Waterfall__West_Door_Left),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Ebih__Waterfall__West_Door_Left__ex__West_Door_1.into_usize(),
+                end: ExitId::Ebih__Waterfall__West_Door_Left__ex__West_Door_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Waterfall__Alcove.into_usize(),
+                end: EbihSpotId::Ebih__Waterfall__West_Main_Path.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Waterfall__West_Door => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Waterfall__West_Door),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Ebih__Waterfall__West_Door__ex__West_Door_Left_1.into_usize(),
+                end: ExitId::Ebih__Waterfall__West_Door__ex__West_Door_Right_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Waterfall__Alcove.into_usize(),
+                end: EbihSpotId::Ebih__Waterfall__West_Main_Path.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Waterfall__West_Door_Right => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Waterfall__West_Door_Right),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Ebih__Waterfall__West_Door_Right__ex__West_Door_1.into_usize(),
+                end: ExitId::Ebih__Waterfall__West_Door_Right__ex__West_Door_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Waterfall__Alcove.into_usize(),
+                end: EbihSpotId::Ebih__Waterfall__West_Main_Path.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Waterfall__Middle_West_Tree => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Waterfall__Middle_West_Tree),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Ebih__Waterfall__Middle_West_Tree__ex__West_Main_Path_1.into_usize(),
+                end: ExitId::Ebih__Waterfall__Middle_West_Tree__ex__West_Main_Path_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Waterfall__Alcove.into_usize(),
+                end: EbihSpotId::Ebih__Waterfall__West_Main_Path.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Waterfall__West_Main_Path => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Waterfall__West_Main_Path),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Waterfall__Alcove.into_usize(),
+                end: EbihSpotId::Ebih__Waterfall__West_Main_Path.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Waterfall__Cave_Entrance => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Waterfall__Cave_Entrance),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Ebih__Waterfall__Cave_Entrance__ex__Cave__Entry_1.into_usize(),
+                end: ExitId::Ebih__Waterfall__Cave_Entrance__ex__Cave__Entry_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Waterfall__Alcove.into_usize(),
+                end: EbihSpotId::Ebih__Waterfall__West_Main_Path.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Waterfall__Center_Main_Path => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Waterfall__Center_Main_Path),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Waterfall__Alcove.into_usize(),
+                end: EbihSpotId::Ebih__Waterfall__West_Main_Path.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Waterfall__Big_Tree => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Waterfall__Big_Tree),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Waterfall__Alcove.into_usize(),
+                end: EbihSpotId::Ebih__Waterfall__West_Main_Path.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Waterfall__Below_Tree => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Waterfall__Below_Tree),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Ebih__Waterfall__Below_Tree__ex__Big_Tree_1.into_usize(),
+                end: ExitId::Ebih__Waterfall__Below_Tree__ex__Big_Tree_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Waterfall__Alcove.into_usize(),
+                end: EbihSpotId::Ebih__Waterfall__West_Main_Path.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Waterfall__Platform => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Waterfall__Platform),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Ebih__Waterfall__Platform__ex__Big_Tree_1.into_usize(),
+                end: ExitId::Ebih__Waterfall__Platform__ex__Big_Tree_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Waterfall__Alcove.into_usize(),
+                end: EbihSpotId::Ebih__Waterfall__West_Main_Path.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Waterfall__East_8 => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Waterfall__East_8),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Ebih__Waterfall__East_8__ex__Ebih_East__West_8_1.into_usize(),
+                end: ExitId::Ebih__Waterfall__East_8__ex__Ebih_East__West_8_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Waterfall__Alcove.into_usize(),
+                end: EbihSpotId::Ebih__Waterfall__West_Main_Path.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Waterfall__East_7 => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Waterfall__East_7),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Ebih__Waterfall__East_7__ex__Ebih_East__West_7_1.into_usize(),
+                end: ExitId::Ebih__Waterfall__East_7__ex__Ebih_East__West_7_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Waterfall__Alcove.into_usize(),
+                end: EbihSpotId::Ebih__Waterfall__West_Main_Path.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Waterfall__Top_Waterfall => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Waterfall__Top_Waterfall),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Waterfall__Alcove.into_usize(),
+                end: EbihSpotId::Ebih__Waterfall__West_Main_Path.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Waterfall__West_7 => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Waterfall__West_7),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Ebih__Waterfall__West_7__ex__Ebih_West__East_7_1.into_usize(),
+                end: ExitId::Ebih__Waterfall__West_7__ex__Ebih_West__East_7_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Waterfall__Alcove.into_usize(),
+                end: EbihSpotId::Ebih__Waterfall__West_Main_Path.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Ebih_West__East_10 => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Ebih_West__East_10),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Ebih__Ebih_West__East_10__ex__Waterfall__West_10_1.into_usize(),
+                end: ExitId::Ebih__Ebih_West__East_10__ex__Waterfall__West_10_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Ebih_West__Above_Alcove.into_usize(),
+                end: EbihSpotId::Ebih__Ebih_West__West_High_Cliff.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Ebih_West__Mid_Save => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Ebih_West__Mid_Save),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: ActionId::Ebih__Ebih_West__Mid_Save__Save.into_usize(),
+                end: ActionId::Ebih__Ebih_West__Mid_Save__Save.into_usize() + 1,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Ebih_West__Above_Alcove.into_usize(),
+                end: EbihSpotId::Ebih__Ebih_West__West_High_Cliff.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Ebih_West__Alcove_Entrance => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Ebih_West__Alcove_Entrance),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Ebih__Ebih_West__Alcove_Entrance__ex__Above_Alcove_1.into_usize(),
+                end: ExitId::Ebih__Ebih_West__Alcove_Entrance__ex__Above_Alcove_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Ebih_West__Above_Alcove.into_usize(),
+                end: EbihSpotId::Ebih__Ebih_West__West_High_Cliff.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Ebih_West__Alcove => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Ebih_West__Alcove),
+            locations: Range {
+                start: LocationId::Ebih__Ebih_West__Alcove__Tablet.into_usize(),
+                end: LocationId::Ebih__Ebih_West__Alcove__Tablet.into_usize() + 1,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Ebih_West__Above_Alcove.into_usize(),
+                end: EbihSpotId::Ebih__Ebih_West__West_High_Cliff.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Ebih_West__Above_Alcove => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Ebih_West__Above_Alcove),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Ebih_West__Above_Alcove.into_usize(),
+                end: EbihSpotId::Ebih__Ebih_West__West_High_Cliff.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Ebih_West__East_9 => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Ebih_West__East_9),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Ebih__Ebih_West__East_9__ex__Waterfall__West_9_1.into_usize(),
+                end: ExitId::Ebih__Ebih_West__East_9__ex__Waterfall__West_9_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Ebih_West__Above_Alcove.into_usize(),
+                end: EbihSpotId::Ebih__Ebih_West__West_High_Cliff.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Ebih_West__Block_Left => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Ebih_West__Block_Left),
+            locations: Range {
+                start: LocationId::Ebih__Ebih_West__Block_Left__Break_Block.into_usize(),
+                end: LocationId::Ebih__Ebih_West__Block_Left__Break_Block.into_usize() + 1,
+            },
+            exits: Range {
+                start: ExitId::Ebih__Ebih_West__Block_Left__ex__Alcove_Entrance_1.into_usize(),
+                end: ExitId::Ebih__Ebih_West__Block_Left__ex__Mid_Save_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Ebih_West__Above_Alcove.into_usize(),
+                end: EbihSpotId::Ebih__Ebih_West__West_High_Cliff.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Ebih_West__East_7 => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Ebih_West__East_7),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Ebih__Ebih_West__East_7__ex__Waterfall__West_7_1.into_usize(),
+                end: ExitId::Ebih__Ebih_West__East_7__ex__Waterfall__West_7_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Ebih_West__Above_Alcove.into_usize(),
+                end: EbihSpotId::Ebih__Ebih_West__West_High_Cliff.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Ebih_West__Above_Chute => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Ebih_West__Above_Chute),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Ebih_West__Above_Alcove.into_usize(),
+                end: EbihSpotId::Ebih__Ebih_West__West_High_Cliff.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Ebih_West__Upper_Save => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Ebih_West__Upper_Save),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: ActionId::Ebih__Ebih_West__Upper_Save__Save.into_usize(),
+                end: ActionId::Ebih__Ebih_West__Upper_Save__Save.into_usize() + 1,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Ebih_West__Above_Alcove.into_usize(),
+                end: EbihSpotId::Ebih__Ebih_West__West_High_Cliff.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Ebih_West__Medium_High_Platform => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Ebih_West__Medium_High_Platform),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: ActionId::Ebih__Ebih_West__Medium_High_Platform__Throw_Drone_Long.into_usize(),
+                end: ActionId::Ebih__Ebih_West__Medium_High_Platform__Throw_Drone_Long.into_usize() + 1,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Ebih_West__Above_Alcove.into_usize(),
+                end: EbihSpotId::Ebih__Ebih_West__West_High_Cliff.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Ebih_West__High_Platform => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Ebih_West__High_Platform),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Ebih__Ebih_West__High_Platform__ex__High_Ledge_1.into_usize(),
+                end: ExitId::Ebih__Ebih_West__High_Platform__ex__High_Ledge_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Ebih_West__Above_Alcove.into_usize(),
+                end: EbihSpotId::Ebih__Ebih_West__West_High_Cliff.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Ebih_West__High_Ledge => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Ebih_West__High_Ledge),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Ebih_West__Above_Alcove.into_usize(),
+                end: EbihSpotId::Ebih__Ebih_West__West_High_Cliff.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Ebih_West__East_6 => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Ebih_West__East_6),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Ebih__Ebih_West__East_6__ex__Grid_21_2_6__West_6_1.into_usize(),
+                end: ExitId::Ebih__Ebih_West__East_6__ex__Grid_21_2_6__West_6_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Ebih_West__Above_Alcove.into_usize(),
+                end: EbihSpotId::Ebih__Ebih_West__West_High_Cliff.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Ebih_West__East_8 => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Ebih_West__East_8),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Ebih__Ebih_West__East_8__ex__Waterfall__West_8_1.into_usize(),
+                end: ExitId::Ebih__Ebih_West__East_8__ex__Waterfall__West_8_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Ebih_West__Above_Alcove.into_usize(),
+                end: EbihSpotId::Ebih__Ebih_West__West_High_Cliff.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Ebih_West__Middle_Middle => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Ebih_West__Middle_Middle),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Ebih__Ebih_West__Middle_Middle__ex__Above_Chute_1.into_usize(),
+                end: ExitId::Ebih__Ebih_West__Middle_Middle__ex__East_7_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Ebih_West__Above_Alcove.into_usize(),
+                end: EbihSpotId::Ebih__Ebih_West__West_High_Cliff.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Ebih_West__Middle_Cliff => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Ebih_West__Middle_Cliff),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Ebih_West__Above_Alcove.into_usize(),
+                end: EbihSpotId::Ebih__Ebih_West__West_High_Cliff.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Ebih_West__Giguna_Pillar => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Ebih_West__Giguna_Pillar),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Ebih__Ebih_West__Giguna_Pillar__ex__Giguna__Giguna_Northeast__Inner_Wall_1.into_usize(),
+                end: ExitId::Ebih__Ebih_West__Giguna_Pillar__ex__Giguna__Giguna_Northeast__Inner_Wall_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Ebih_West__Above_Alcove.into_usize(),
+                end: EbihSpotId::Ebih__Ebih_West__West_High_Cliff.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Ebih_West__West_9 => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Ebih_West__West_9),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Ebih__Ebih_West__West_9__ex__Giguna__Giguna_Northeast__East_9_1.into_usize(),
+                end: ExitId::Ebih__Ebih_West__West_9__ex__Giguna_Pillar_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Ebih_West__Above_Alcove.into_usize(),
+                end: EbihSpotId::Ebih__Ebih_West__West_High_Cliff.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Ebih_West__Block_Right => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Ebih_West__Block_Right),
+            locations: Range {
+                start: LocationId::Ebih__Ebih_West__Block_Right__Break_Block.into_usize(),
+                end: LocationId::Ebih__Ebih_West__Block_Right__Break_Block.into_usize() + 1,
+            },
+            exits: Range {
+                start: ExitId::Ebih__Ebih_West__Block_Right__ex__Block_Left_1.into_usize(),
+                end: ExitId::Ebih__Ebih_West__Block_Right__ex__Block_Left_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Ebih_West__Above_Alcove.into_usize(),
+                end: EbihSpotId::Ebih__Ebih_West__West_High_Cliff.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Ebih_West__Refill_Station => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Ebih_West__Refill_Station),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Ebih_West__Above_Alcove.into_usize(),
+                end: EbihSpotId::Ebih__Ebih_West__West_High_Cliff.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Ebih_West__East_11 => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Ebih_West__East_11),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Ebih__Ebih_West__East_11__ex__Waterfall__West_11_1.into_usize(),
+                end: ExitId::Ebih__Ebih_West__East_11__ex__Waterfall__West_11_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Ebih_West__Above_Alcove.into_usize(),
+                end: EbihSpotId::Ebih__Ebih_West__West_High_Cliff.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Ebih_West__Above_Door => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Ebih_West__Above_Door),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Ebih__Ebih_West__Above_Door__ex__Below_Door_1.into_usize(),
+                end: ExitId::Ebih__Ebih_West__Above_Door__ex__Small_Gap_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Ebih_West__Above_Alcove.into_usize(),
+                end: EbihSpotId::Ebih__Ebih_West__West_High_Cliff.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Ebih_West__Below_Door => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Ebih_West__Below_Door),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Ebih__Ebih_West__Below_Door__ex__Above_Door_1.into_usize(),
+                end: ExitId::Ebih__Ebih_West__Below_Door__ex__Refill_Station_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: ActionId::Ebih__Ebih_West__Below_Door__Open_Door.into_usize(),
+                end: ActionId::Ebih__Ebih_West__Below_Door__Open_Door.into_usize() + 1,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Ebih_West__Above_Alcove.into_usize(),
+                end: EbihSpotId::Ebih__Ebih_West__West_High_Cliff.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Ebih_West__Small_Gap => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Ebih_West__Small_Gap),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Ebih__Ebih_West__Small_Gap__ex__Left_of_Gap_1.into_usize(),
+                end: ExitId::Ebih__Ebih_West__Small_Gap__ex__Left_of_Gap_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Ebih_West__Above_Alcove.into_usize(),
+                end: EbihSpotId::Ebih__Ebih_West__West_High_Cliff.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Ebih_West__Left_of_Gap => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Ebih_West__Left_of_Gap),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Ebih__Ebih_West__Left_of_Gap__ex__Small_Gap_1.into_usize(),
+                end: ExitId::Ebih__Ebih_West__Left_of_Gap__ex__Small_Gap_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Ebih_West__Above_Alcove.into_usize(),
+                end: EbihSpotId::Ebih__Ebih_West__West_High_Cliff.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Ebih_West__Left_of_Switch => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Ebih_West__Left_of_Switch),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: ActionId::Ebih__Ebih_West__Left_of_Switch__Open_Door.into_usize(),
+                end: ActionId::Ebih__Ebih_West__Left_of_Switch__Open_Door.into_usize() + 1,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Ebih_West__Above_Alcove.into_usize(),
+                end: EbihSpotId::Ebih__Ebih_West__West_High_Cliff.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Ebih_West__Lower_Hill => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Ebih_West__Lower_Hill),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Ebih__Ebih_West__Lower_Hill__ex__Left_of_Gap_1.into_usize(),
+                end: ExitId::Ebih__Ebih_West__Lower_Hill__ex__Left_of_Gap_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Ebih_West__Above_Alcove.into_usize(),
+                end: EbihSpotId::Ebih__Ebih_West__West_High_Cliff.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Ebih_West__Lower_Cliff => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Ebih_West__Lower_Cliff),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Ebih_West__Above_Alcove.into_usize(),
+                end: EbihSpotId::Ebih__Ebih_West__West_High_Cliff.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Ebih_West__Lower_Platform => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Ebih_West__Lower_Platform),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Ebih__Ebih_West__Lower_Platform__ex__Lower_Cliff_1.into_usize(),
+                end: ExitId::Ebih__Ebih_West__Lower_Platform__ex__Lower_Cliff_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Ebih_West__Above_Alcove.into_usize(),
+                end: EbihSpotId::Ebih__Ebih_West__West_High_Cliff.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Ebih_West__Lower_Save => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Ebih_West__Lower_Save),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: ActionId::Ebih__Ebih_West__Lower_Save__Save.into_usize(),
+                end: ActionId::Ebih__Ebih_West__Lower_Save__Save.into_usize() + 1,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Ebih_West__Above_Alcove.into_usize(),
+                end: EbihSpotId::Ebih__Ebih_West__West_High_Cliff.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Ebih_West__West_High_Cliff => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Ebih_West__West_High_Cliff),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Ebih_West__Above_Alcove.into_usize(),
+                end: EbihSpotId::Ebih__Ebih_West__West_High_Cliff.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Ebih_West__West_Fork => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Ebih_West__West_Fork),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Ebih_West__Above_Alcove.into_usize(),
+                end: EbihSpotId::Ebih__Ebih_West__West_High_Cliff.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Ebih_West__West_11 => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Ebih_West__West_11),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Ebih__Ebih_West__West_11__ex__Giguna__Giguna_Northeast__East_11_1.into_usize(),
+                end: ExitId::Ebih__Ebih_West__West_11__ex__Giguna__Giguna_Northeast__East_11_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Ebih_West__Above_Alcove.into_usize(),
+                end: EbihSpotId::Ebih__Ebih_West__West_High_Cliff.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Ebih_West__West_12 => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Ebih_West__West_12),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Ebih__Ebih_West__West_12__ex__Giguna__Wasteland__East_12_1.into_usize(),
+                end: ExitId::Ebih__Ebih_West__West_12__ex__West_Fork_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Ebih_West__Above_Alcove.into_usize(),
+                end: EbihSpotId::Ebih__Ebih_West__West_High_Cliff.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Ebih_West__West_13 => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Ebih_West__West_13),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Ebih__Ebih_West__West_13__ex__Giguna__Wasteland__East_13_1.into_usize(),
+                end: ExitId::Ebih__Ebih_West__West_13__ex__Giguna__Wasteland__East_13_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Ebih_West__Above_Alcove.into_usize(),
+                end: EbihSpotId::Ebih__Ebih_West__West_High_Cliff.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Ebih_West__East_13 => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Ebih_West__East_13),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Ebih__Ebih_West__East_13__ex__Vertical_Interchange__West_13_1.into_usize(),
+                end: ExitId::Ebih__Ebih_West__East_13__ex__Vertical_Interchange__West_13_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Ebih_West__Above_Alcove.into_usize(),
+                end: EbihSpotId::Ebih__Ebih_West__West_High_Cliff.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Cave__Entry => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Cave__Entry),
+            locations: Range {
+                start: LocationId::Ebih__Cave__Entry__Health.into_usize(),
+                end: LocationId::Ebih__Cave__Entry__Health.into_usize() + 1,
+            },
+            exits: Range {
+                start: ExitId::Ebih__Cave__Entry__ex__Waterfall__Cave_Entrance_1.into_usize(),
+                end: ExitId::Ebih__Cave__Entry__ex__Waterfall__Cave_Entrance_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Cave__Entry.into_usize(),
+                end: EbihSpotId::Ebih__Cave__Entry.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Ebih_East__West_8 => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Ebih_East__West_8),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Ebih__Ebih_East__West_8__ex__Waterfall__East_8_1.into_usize(),
+                end: ExitId::Ebih__Ebih_East__West_8__ex__Waterfall__East_8_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Ebih_East__Corner.into_usize(),
+                end: EbihSpotId::Ebih__Ebih_East__West_8.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Ebih_East__Moving_Platform => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Ebih_East__Moving_Platform),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: ActionId::Ebih__Ebih_East__Moving_Platform__Activate_Ride.into_usize(),
+                end: ActionId::Ebih__Ebih_East__Moving_Platform__Activate_Ride.into_usize() + 1,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Ebih_East__Corner.into_usize(),
+                end: EbihSpotId::Ebih__Ebih_East__West_8.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Ebih_East__Ledge_End => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Ebih_East__Ledge_End),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Ebih_East__Corner.into_usize(),
+                end: EbihSpotId::Ebih__Ebih_East__West_8.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Ebih_East__Lower_Moving_Platform => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Ebih_East__Lower_Moving_Platform),
+            locations: Range {
+                start: LocationId::Ebih__Ebih_East__Lower_Moving_Platform__Remote_Urn.into_usize(),
+                end: LocationId::Ebih__Ebih_East__Lower_Moving_Platform__Remote_Urn.into_usize() + 1,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: ActionId::Ebih__Ebih_East__Lower_Moving_Platform__Activate_Lift.into_usize(),
+                end: ActionId::Ebih__Ebih_East__Lower_Moving_Platform__Activate_Ride.into_usize() + 1,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Ebih_East__Corner.into_usize(),
+                end: EbihSpotId::Ebih__Ebih_East__West_8.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Ebih_East__Corner => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Ebih_East__Corner),
+            locations: Range {
+                start: LocationId::Ebih__Ebih_East__Corner__Urn.into_usize(),
+                end: LocationId::Ebih__Ebih_East__Corner__Urn.into_usize() + 1,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Ebih_East__Corner.into_usize(),
+                end: EbihSpotId::Ebih__Ebih_East__West_8.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Ebih_East__Dispenser => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Ebih_East__Dispenser),
+            locations: Range {
+                start: LocationId::Ebih__Ebih_East__Dispenser__Vend.into_usize(),
+                end: LocationId::Ebih__Ebih_East__Dispenser__Vend.into_usize() + 1,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: ActionId::Ebih__Ebih_East__Dispenser__Activate_Lift.into_usize(),
+                end: ActionId::Ebih__Ebih_East__Dispenser__Activate_Lift.into_usize() + 1,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Ebih_East__Corner.into_usize(),
+                end: EbihSpotId::Ebih__Ebih_East__West_8.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Ebih_East__East_Ledge => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Ebih_East__East_Ledge),
+            locations: Range {
+                start: LocationId::Ebih__Ebih_East__East_Ledge__Note.into_usize(),
+                end: LocationId::Ebih__Ebih_East__East_Ledge__Note.into_usize() + 1,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Ebih_East__Corner.into_usize(),
+                end: EbihSpotId::Ebih__Ebih_East__West_8.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Ebih_East__Middle_Platform => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Ebih_East__Middle_Platform),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Ebih_East__Corner.into_usize(),
+                end: EbihSpotId::Ebih__Ebih_East__West_8.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Ebih_East__Upper_Ledge => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Ebih_East__Upper_Ledge),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Ebih_East__Corner.into_usize(),
+                end: EbihSpotId::Ebih__Ebih_East__West_8.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Ebih_East__West_7 => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Ebih_East__West_7),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Ebih__Ebih_East__West_7__ex__Waterfall__East_7_1.into_usize(),
+                end: ExitId::Ebih__Ebih_East__West_7__ex__Waterfall__East_7_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Ebih_East__Corner.into_usize(),
+                end: EbihSpotId::Ebih__Ebih_East__West_8.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Ebih_East__East_Hill => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Ebih_East__East_Hill),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Ebih_East__Corner.into_usize(),
+                end: EbihSpotId::Ebih__Ebih_East__West_8.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Ebih_East__East_9 => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Ebih_East__East_9),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Ebih__Ebih_East__East_9__ex__East_Hill_1.into_usize(),
+                end: ExitId::Ebih__Ebih_East__East_9__ex__Observation_Tower_Room__West_9_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Ebih_East__Corner.into_usize(),
+                end: EbihSpotId::Ebih__Ebih_East__West_8.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Grid_21_2_6__West_6 => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Grid_21_2_6__West_6),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Ebih__Grid_21_2_6__West_6__ex__Ebih_West__East_6_1.into_usize(),
+                end: ExitId::Ebih__Grid_21_2_6__West_6__ex__Ebih_West__East_6_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Grid_21_2_6__East_6.into_usize(),
+                end: EbihSpotId::Ebih__Grid_21_2_6__West_6.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Grid_21_2_6__Portal_Stand => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Grid_21_2_6__Portal_Stand),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Grid_21_2_6__East_6.into_usize(),
+                end: EbihSpotId::Ebih__Grid_21_2_6__West_6.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Grid_21_2_6__East_6 => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Grid_21_2_6__East_6),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Ebih__Grid_21_2_6__East_6__ex__Boss_Room__West_6_1.into_usize(),
+                end: ExitId::Ebih__Grid_21_2_6__East_6__ex__Boss_Room__West_6_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Grid_21_2_6__East_6.into_usize(),
+                end: EbihSpotId::Ebih__Grid_21_2_6__West_6.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Boss_Room__West_6 => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Boss_Room__West_6),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Ebih__Boss_Room__West_6__ex__Grid_21_2_6__East_6_1.into_usize(),
+                end: ExitId::Ebih__Boss_Room__West_6__ex__Grid_21_2_6__East_6_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Boss_Room__Boss.into_usize(),
+                end: EbihSpotId::Ebih__Boss_Room__West_6.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Boss_Room__Boss => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Boss_Room__Boss),
+            locations: Range {
+                start: LocationId::Ebih__Boss_Room__Boss__Boss_Reward.into_usize(),
+                end: LocationId::Ebih__Boss_Room__Boss__Hack_Alu.into_usize() + 1,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Boss_Room__Boss.into_usize(),
+                end: EbihSpotId::Ebih__Boss_Room__West_6.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Boss_Room__Past_Boss => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Boss_Room__Past_Boss),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Boss_Room__Boss.into_usize(),
+                end: EbihSpotId::Ebih__Boss_Room__West_6.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Boss_Room__Lower_Tree => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Boss_Room__Lower_Tree),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Ebih__Boss_Room__Lower_Tree__ex__Lower_Ledge_1.into_usize(),
+                end: ExitId::Ebih__Boss_Room__Lower_Tree__ex__Lower_Ledge_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Boss_Room__Boss.into_usize(),
+                end: EbihSpotId::Ebih__Boss_Room__West_6.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Boss_Room__Lower_Ledge => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Boss_Room__Lower_Ledge),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Boss_Room__Boss.into_usize(),
+                end: EbihSpotId::Ebih__Boss_Room__West_6.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Boss_Room__East_6 => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Boss_Room__East_6),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Ebih__Boss_Room__East_6__ex__Drone_Room__West_6_1.into_usize(),
+                end: ExitId::Ebih__Boss_Room__East_6__ex__Drone_Room__West_6_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Boss_Room__Boss.into_usize(),
+                end: EbihSpotId::Ebih__Boss_Room__West_6.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Boss_Room__East_4 => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Boss_Room__East_4),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Ebih__Boss_Room__East_4__ex__Drone_Room__West_4_1.into_usize(),
+                end: ExitId::Ebih__Boss_Room__East_4__ex__Drone_Room__West_4_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Boss_Room__Boss.into_usize(),
+                end: EbihSpotId::Ebih__Boss_Room__West_6.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Boss_Room__East_Ledge => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Boss_Room__East_Ledge),
+            locations: Range {
+                start: LocationId::Ebih__Boss_Room__East_Ledge__Item.into_usize(),
+                end: LocationId::Ebih__Boss_Room__East_Ledge__Item.into_usize() + 1,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Boss_Room__Boss.into_usize(),
+                end: EbihSpotId::Ebih__Boss_Room__West_6.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Boss_Room__Upper_Tree => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Boss_Room__Upper_Tree),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Boss_Room__Boss.into_usize(),
+                end: EbihSpotId::Ebih__Boss_Room__West_6.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Boss_Room__High_Platform => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Boss_Room__High_Platform),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Boss_Room__Boss.into_usize(),
+                end: EbihSpotId::Ebih__Boss_Room__West_6.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Boss_Room__West_5 => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Boss_Room__West_5),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Boss_Room__Boss.into_usize(),
+                end: EbihSpotId::Ebih__Boss_Room__West_6.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Drone_Room__West_6 => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Drone_Room__West_6),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Ebih__Drone_Room__West_6__ex__Boss_Room__East_6_1.into_usize(),
+                end: ExitId::Ebih__Drone_Room__West_6__ex__Boss_Room__East_6_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Drone_Room__East_4.into_usize(),
+                end: EbihSpotId::Ebih__Drone_Room__West_6.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Drone_Room__West_4 => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Drone_Room__West_4),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Ebih__Drone_Room__West_4__ex__Boss_Room__East_4_1.into_usize(),
+                end: ExitId::Ebih__Drone_Room__West_4__ex__Boss_Room__East_4_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Drone_Room__East_4.into_usize(),
+                end: EbihSpotId::Ebih__Drone_Room__West_6.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Drone_Room__Pit_Left => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Drone_Room__Pit_Left),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Ebih__Drone_Room__Pit_Left__ex__West_6_1.into_usize(),
+                end: ExitId::Ebih__Drone_Room__Pit_Left__ex__West_6_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: ActionId::Ebih__Drone_Room__Pit_Left__Activate_Lift.into_usize(),
+                end: ActionId::Ebih__Drone_Room__Pit_Left__Activate_Lift_But_Get_Off_Early.into_usize() + 1,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Drone_Room__East_4.into_usize(),
+                end: EbihSpotId::Ebih__Drone_Room__West_6.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Drone_Room__Portal => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Drone_Room__Portal),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Ebih__Drone_Room__Portal__ex__Portal_Exit_1.into_usize(),
+                end: ExitId::Ebih__Drone_Room__Portal__ex__Portal_Exit_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Drone_Room__East_4.into_usize(),
+                end: EbihSpotId::Ebih__Drone_Room__West_6.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Drone_Room__Item => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Drone_Room__Item),
+            locations: Range {
+                start: LocationId::Ebih__Drone_Room__Item__Urn.into_usize(),
+                end: LocationId::Ebih__Drone_Room__Item__Urn.into_usize() + 1,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Drone_Room__East_4.into_usize(),
+                end: EbihSpotId::Ebih__Drone_Room__West_6.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Drone_Room__Middle_Platform => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Drone_Room__Middle_Platform),
+            locations: Range {
+                start: LocationId::Ebih__Drone_Room__Middle_Platform__Urn_Quick_Grab.into_usize(),
+                end: LocationId::Ebih__Drone_Room__Middle_Platform__Urn_Quick_Grab.into_usize() + 1,
+            },
+            exits: Range {
+                start: ExitId::Ebih__Drone_Room__Middle_Platform__ex__Portal_Exit_1.into_usize(),
+                end: ExitId::Ebih__Drone_Room__Middle_Platform__ex__Portal_Exit_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Drone_Room__East_4.into_usize(),
+                end: EbihSpotId::Ebih__Drone_Room__West_6.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Drone_Room__Portal_Exit => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Drone_Room__Portal_Exit),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Ebih__Drone_Room__Portal_Exit__ex__Moving_Platform_1.into_usize(),
+                end: ExitId::Ebih__Drone_Room__Portal_Exit__ex__Moving_Platform_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: ActionId::Ebih__Drone_Room__Portal_Exit__Activate_Platform.into_usize(),
+                end: ActionId::Ebih__Drone_Room__Portal_Exit__Activate_Platform.into_usize() + 1,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Drone_Room__East_4.into_usize(),
+                end: EbihSpotId::Ebih__Drone_Room__West_6.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Drone_Room__Moving_Platform => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Drone_Room__Moving_Platform),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: ActionId::Ebih__Drone_Room__Moving_Platform__Throw_Drone.into_usize(),
+                end: ActionId::Ebih__Drone_Room__Moving_Platform__Throw_Drone.into_usize() + 1,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Drone_Room__East_4.into_usize(),
+                end: EbihSpotId::Ebih__Drone_Room__West_6.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Drone_Room__Left_Platform => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Drone_Room__Left_Platform),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Drone_Room__East_4.into_usize(),
+                end: EbihSpotId::Ebih__Drone_Room__West_6.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Drone_Room__Tree => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Drone_Room__Tree),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Drone_Room__East_4.into_usize(),
+                end: EbihSpotId::Ebih__Drone_Room__West_6.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Drone_Room__East_4 => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Drone_Room__East_4),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Ebih__Drone_Room__East_4__ex__Grid_25_2_6__West_4_1.into_usize(),
+                end: ExitId::Ebih__Drone_Room__East_4__ex__Grid_25_2_6__West_4_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Drone_Room__East_4.into_usize(),
+                end: EbihSpotId::Ebih__Drone_Room__West_6.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Grid_25_2_6__West_4 => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Grid_25_2_6__West_4),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Ebih__Grid_25_2_6__West_4__ex__Drone_Room__East_4_1.into_usize(),
+                end: ExitId::Ebih__Grid_25_2_6__West_4__ex__Pit_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Grid_25_2_6__Pit.into_usize(),
+                end: EbihSpotId::Ebih__Grid_25_2_6__West_4.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Grid_25_2_6__Pit => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Grid_25_2_6__Pit),
+            locations: Range {
+                start: LocationId::Ebih__Grid_25_2_6__Pit__Item.into_usize(),
+                end: LocationId::Ebih__Grid_25_2_6__Pit__Item.into_usize() + 1,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Grid_25_2_6__Pit.into_usize(),
+                end: EbihSpotId::Ebih__Grid_25_2_6__West_4.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Grid_26_10_11__West_11 => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Grid_26_10_11__West_11),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Ebih__Grid_26_10_11__West_11__ex__Grid_25_10_12__East_11_1.into_usize(),
+                end: ExitId::Ebih__Grid_26_10_11__West_11__ex__Grid_25_10_12__East_11_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Grid_26_10_11__Cliff.into_usize(),
+                end: EbihSpotId::Ebih__Grid_26_10_11__West_11.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Grid_26_10_11__Middle_Bottom => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Grid_26_10_11__Middle_Bottom),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Ebih__Grid_26_10_11__Middle_Bottom__ex__Middle_Platform_1.into_usize(),
+                end: ExitId::Ebih__Grid_26_10_11__Middle_Bottom__ex__Middle_Platform_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Grid_26_10_11__Cliff.into_usize(),
+                end: EbihSpotId::Ebih__Grid_26_10_11__West_11.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Grid_26_10_11__Under_Ledge => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Grid_26_10_11__Under_Ledge),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Ebih__Grid_26_10_11__Under_Ledge__ex__Ledge_1.into_usize(),
+                end: ExitId::Ebih__Grid_26_10_11__Under_Ledge__ex__Ledge_2.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Grid_26_10_11__Cliff.into_usize(),
+                end: EbihSpotId::Ebih__Grid_26_10_11__West_11.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Grid_26_10_11__Ledge => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Grid_26_10_11__Ledge),
+            locations: Range {
+                start: LocationId::Ebih__Grid_26_10_11__Ledge__Note.into_usize(),
+                end: LocationId::Ebih__Grid_26_10_11__Ledge__Note.into_usize() + 1,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Grid_26_10_11__Cliff.into_usize(),
+                end: EbihSpotId::Ebih__Grid_26_10_11__West_11.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Grid_26_10_11__Middle_Platform => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Grid_26_10_11__Middle_Platform),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Ebih__Grid_26_10_11__Middle_Platform__ex__West_10_1.into_usize(),
+                end: ExitId::Ebih__Grid_26_10_11__Middle_Platform__ex__West_10_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Grid_26_10_11__Cliff.into_usize(),
+                end: EbihSpotId::Ebih__Grid_26_10_11__West_11.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Grid_26_10_11__Upper_Platform => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Grid_26_10_11__Upper_Platform),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Ebih__Grid_26_10_11__Upper_Platform__ex__Cliff_1.into_usize(),
+                end: ExitId::Ebih__Grid_26_10_11__Upper_Platform__ex__West_10_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Grid_26_10_11__Cliff.into_usize(),
+                end: EbihSpotId::Ebih__Grid_26_10_11__West_11.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Grid_26_10_11__West_10 => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Grid_26_10_11__West_10),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Ebih__Grid_26_10_11__West_10__ex__Grid_25_10_12__East_10_1.into_usize(),
+                end: ExitId::Ebih__Grid_26_10_11__West_10__ex__Grid_25_10_12__East_10_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Grid_26_10_11__Cliff.into_usize(),
+                end: EbihSpotId::Ebih__Grid_26_10_11__West_11.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Grid_26_10_11__Cliff => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Grid_26_10_11__Cliff),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Grid_26_10_11__Cliff.into_usize(),
+                end: EbihSpotId::Ebih__Grid_26_10_11__West_11.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Grid_26_10_11__East_10 => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Grid_26_10_11__East_10),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Ebih__Grid_26_10_11__East_10__ex__Observation_Tower_Room__West_10_1.into_usize(),
+                end: ExitId::Ebih__Grid_26_10_11__East_10__ex__Observation_Tower_Room__West_10_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Grid_26_10_11__Cliff.into_usize(),
+                end: EbihSpotId::Ebih__Grid_26_10_11__West_11.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Observation_Tower_Room__West_9 => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Observation_Tower_Room__West_9),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Ebih__Observation_Tower_Room__West_9__ex__Ebih_East__East_9_1.into_usize(),
+                end: ExitId::Ebih__Observation_Tower_Room__West_9__ex__Ebih_East__East_9_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Observation_Tower_Room__Cliff.into_usize(),
+                end: EbihSpotId::Ebih__Observation_Tower_Room__West_9.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Observation_Tower_Room__Tower_Top => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Observation_Tower_Room__Tower_Top),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Ebih__Observation_Tower_Room__Tower_Top__ex__West_9_1.into_usize(),
+                end: ExitId::Ebih__Observation_Tower_Room__Tower_Top__ex__West_9_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Observation_Tower_Room__Cliff.into_usize(),
+                end: EbihSpotId::Ebih__Observation_Tower_Room__West_9.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Observation_Tower_Room__Tower_Bottom => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Observation_Tower_Room__Tower_Bottom),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Observation_Tower_Room__Cliff.into_usize(),
+                end: EbihSpotId::Ebih__Observation_Tower_Room__West_9.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Observation_Tower_Room__Cliff => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Observation_Tower_Room__Cliff),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Observation_Tower_Room__Cliff.into_usize(),
+                end: EbihSpotId::Ebih__Observation_Tower_Room__West_9.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Observation_Tower_Room__West_10 => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Observation_Tower_Room__West_10),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Ebih__Observation_Tower_Room__West_10__ex__Grid_26_10_11__East_10_1.into_usize(),
+                end: ExitId::Ebih__Observation_Tower_Room__West_10__ex__Grid_26_10_11__East_10_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Observation_Tower_Room__Cliff.into_usize(),
+                end: EbihSpotId::Ebih__Observation_Tower_Room__West_9.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Observation_Tower_Room__East_11 => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Observation_Tower_Room__East_11),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Ebih__Observation_Tower_Room__East_11__ex__Base_Camp__West_11_1.into_usize(),
+                end: ExitId::Ebih__Observation_Tower_Room__East_11__ex__Cliff_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Observation_Tower_Room__Cliff.into_usize(),
+                end: EbihSpotId::Ebih__Observation_Tower_Room__West_9.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Vertical_Interchange__West_13 => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Vertical_Interchange__West_13),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Ebih__Vertical_Interchange__West_13__ex__Ebih_West__East_13_1.into_usize(),
+                end: ExitId::Ebih__Vertical_Interchange__West_13__ex__Ebih_West__East_13_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: ActionId::Ebih__Vertical_Interchange__West_13__Open_Door.into_usize(),
+                end: ActionId::Ebih__Vertical_Interchange__West_13__Open_Door.into_usize() + 1,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Vertical_Interchange__Below_Door.into_usize(),
+                end: EbihSpotId::Ebih__Vertical_Interchange__West_13.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Vertical_Interchange__Passage_West => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Vertical_Interchange__Passage_West),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Ebih__Vertical_Interchange__Passage_West__ex__Door_West_1.into_usize(),
+                end: ExitId::Ebih__Vertical_Interchange__Passage_West__ex__Passage_East_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Vertical_Interchange__Below_Door.into_usize(),
+                end: EbihSpotId::Ebih__Vertical_Interchange__West_13.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Vertical_Interchange__Door_West => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Vertical_Interchange__Door_West),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Ebih__Vertical_Interchange__Door_West__ex__Door_1.into_usize(),
+                end: ExitId::Ebih__Vertical_Interchange__Door_West__ex__Door_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Vertical_Interchange__Below_Door.into_usize(),
+                end: EbihSpotId::Ebih__Vertical_Interchange__West_13.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Vertical_Interchange__Door => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Vertical_Interchange__Door),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Ebih__Vertical_Interchange__Door__ex__Door_East_1.into_usize(),
+                end: ExitId::Ebih__Vertical_Interchange__Door__ex__Door_West_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Vertical_Interchange__Below_Door.into_usize(),
+                end: EbihSpotId::Ebih__Vertical_Interchange__West_13.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Vertical_Interchange__Door_East => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Vertical_Interchange__Door_East),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Ebih__Vertical_Interchange__Door_East__ex__Door_1.into_usize(),
+                end: ExitId::Ebih__Vertical_Interchange__Door_East__ex__Door_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Vertical_Interchange__Below_Door.into_usize(),
+                end: EbihSpotId::Ebih__Vertical_Interchange__West_13.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Vertical_Interchange__Passage_East => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Vertical_Interchange__Passage_East),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Ebih__Vertical_Interchange__Passage_East__ex__Door_West_1.into_usize(),
+                end: ExitId::Ebih__Vertical_Interchange__Passage_East__ex__Passage_West_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Vertical_Interchange__Below_Door.into_usize(),
+                end: EbihSpotId::Ebih__Vertical_Interchange__West_13.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Vertical_Interchange__East_13 => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Vertical_Interchange__East_13),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Ebih__Vertical_Interchange__East_13__ex__Gem_Room__West_13_1.into_usize(),
+                end: ExitId::Ebih__Vertical_Interchange__East_13__ex__Gem_Room__West_13_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Vertical_Interchange__Below_Door.into_usize(),
+                end: EbihSpotId::Ebih__Vertical_Interchange__West_13.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Vertical_Interchange__Middle_Descent => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Vertical_Interchange__Middle_Descent),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Ebih__Vertical_Interchange__Middle_Descent__ex__East_13_1.into_usize(),
+                end: ExitId::Ebih__Vertical_Interchange__Middle_Descent__ex__Passage_East_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Vertical_Interchange__Below_Door.into_usize(),
+                end: EbihSpotId::Ebih__Vertical_Interchange__West_13.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Vertical_Interchange__Middle_Drop => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Vertical_Interchange__Middle_Drop),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Vertical_Interchange__Below_Door.into_usize(),
+                end: EbihSpotId::Ebih__Vertical_Interchange__West_13.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Vertical_Interchange__Cliff_by_Refill => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Vertical_Interchange__Cliff_by_Refill),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Ebih__Vertical_Interchange__Cliff_by_Refill__ex__Blocked_Refill_Station_1.into_usize(),
+                end: ExitId::Ebih__Vertical_Interchange__Cliff_by_Refill__ex__Refill_Station_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Vertical_Interchange__Below_Door.into_usize(),
+                end: EbihSpotId::Ebih__Vertical_Interchange__West_13.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Vertical_Interchange__Refill_Station => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Vertical_Interchange__Refill_Station),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Ebih__Vertical_Interchange__Refill_Station__ex__Below_Door_1.into_usize(),
+                end: ExitId::Ebih__Vertical_Interchange__Refill_Station__ex__Cliff_by_Refill_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Vertical_Interchange__Below_Door.into_usize(),
+                end: EbihSpotId::Ebih__Vertical_Interchange__West_13.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Vertical_Interchange__Blocked_Refill_Station => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Vertical_Interchange__Blocked_Refill_Station),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Ebih__Vertical_Interchange__Blocked_Refill_Station__ex__Below_Door_1.into_usize(),
+                end: ExitId::Ebih__Vertical_Interchange__Blocked_Refill_Station__ex__Cliff_by_Refill_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Vertical_Interchange__Below_Door.into_usize(),
+                end: EbihSpotId::Ebih__Vertical_Interchange__West_13.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Vertical_Interchange__Block_Cubby => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Vertical_Interchange__Block_Cubby),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Vertical_Interchange__Below_Door.into_usize(),
+                end: EbihSpotId::Ebih__Vertical_Interchange__West_13.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Vertical_Interchange__Cubby_Exit => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Vertical_Interchange__Cubby_Exit),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Ebih__Vertical_Interchange__Cubby_Exit__ex__Below_Door_1.into_usize(),
+                end: ExitId::Ebih__Vertical_Interchange__Cubby_Exit__ex__Blocked_Refill_Station_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Vertical_Interchange__Below_Door.into_usize(),
+                end: EbihSpotId::Ebih__Vertical_Interchange__West_13.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Vertical_Interchange__East_Tunnel => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Vertical_Interchange__East_Tunnel),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Ebih__Vertical_Interchange__East_Tunnel__ex__Below_Door_1.into_usize(),
+                end: ExitId::Ebih__Vertical_Interchange__East_Tunnel__ex__Refill_Station_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Vertical_Interchange__Below_Door.into_usize(),
+                end: EbihSpotId::Ebih__Vertical_Interchange__West_13.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Vertical_Interchange__East_15 => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Vertical_Interchange__East_15),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Ebih__Vertical_Interchange__East_15__ex__Amagi__West_Lake__West_15_1.into_usize(),
+                end: ExitId::Ebih__Vertical_Interchange__East_15__ex__Amagi__West_Lake__West_15_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Vertical_Interchange__Below_Door.into_usize(),
+                end: EbihSpotId::Ebih__Vertical_Interchange__West_13.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Vertical_Interchange__Below_Door => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Vertical_Interchange__Below_Door),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Ebih__Vertical_Interchange__Below_Door__ex__Blocked_Refill_Station_1.into_usize(),
+                end: ExitId::Ebih__Vertical_Interchange__Below_Door__ex__Refill_Station_2.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Vertical_Interchange__Below_Door.into_usize(),
+                end: EbihSpotId::Ebih__Vertical_Interchange__West_13.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Vertical_Interchange__Lower_West_Cliff => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Vertical_Interchange__Lower_West_Cliff),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Vertical_Interchange__Below_Door.into_usize(),
+                end: EbihSpotId::Ebih__Vertical_Interchange__West_13.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Vertical_Interchange__Switch => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Vertical_Interchange__Switch),
+            locations: Range {
+                start: LocationId::Ebih__Vertical_Interchange__Switch__Activate_Switch.into_usize(),
+                end: LocationId::Ebih__Vertical_Interchange__Switch__Activate_Switch.into_usize() + 1,
+            },
+            exits: Range {
+                start: ExitId::Ebih__Vertical_Interchange__Switch__ex__Below_Door_1.into_usize(),
+                end: ExitId::Ebih__Vertical_Interchange__Switch__ex__Below_Door_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Vertical_Interchange__Below_Door.into_usize(),
+                end: EbihSpotId::Ebih__Vertical_Interchange__West_13.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Vertical_Interchange__South => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Vertical_Interchange__South),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Ebih__Vertical_Interchange__South__ex__Below_Door_1.into_usize(),
+                end: ExitId::Ebih__Vertical_Interchange__South__ex__Below_Door_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Vertical_Interchange__Below_Door.into_usize(),
+                end: EbihSpotId::Ebih__Vertical_Interchange__West_13.into_usize() + 1,
+            },
+        },
+        EbihSpotId::Ebih__Gem_Room__West_13 => BigSpot {
+            id: BigSpotId::Ebih(EbihSpotId::Ebih__Gem_Room__West_13),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Ebih__Gem_Room__West_13__ex__Vertical_Interchange__East_13_1.into_usize(),
+                end: ExitId::Ebih__Gem_Room__West_13__ex__Vertical_Interchange__East_13_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: EbihSpotId::Ebih__Gem_Room__West_13.into_usize(),
+                end: EbihSpotId::Ebih__Gem_Room__West_13.into_usize() + 1,
+            },
+        },
+    }
+}
+pub fn build_giguna_breach_spots() -> EnumMap<Giguna_BreachSpotId, BigSpot> {
+    enum_map! {
+        Giguna_BreachSpotId::Giguna_Breach__Peak__Save_Point => BigSpot {
+            id: BigSpotId::Giguna_Breach(Giguna_BreachSpotId::Giguna_Breach__Peak__Save_Point),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: ActionId::Giguna_Breach__Peak__Save_Point__Save.into_usize(),
+                end: ActionId::Giguna_Breach__Peak__Save_Point__Save.into_usize() + 1,
+            },
+            area_spots: Range {
+                start: Giguna_BreachSpotId::Giguna_Breach__Peak__Column.into_usize(),
+                end: Giguna_BreachSpotId::Giguna_Breach__Peak__West_7.into_usize() + 1,
+            },
+        },
+        Giguna_BreachSpotId::Giguna_Breach__Peak__East_Passage => BigSpot {
+            id: BigSpotId::Giguna_Breach(Giguna_BreachSpotId::Giguna_Breach__Peak__East_Passage),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: Giguna_BreachSpotId::Giguna_Breach__Peak__Column.into_usize(),
+                end: Giguna_BreachSpotId::Giguna_Breach__Peak__West_7.into_usize() + 1,
+            },
+        },
+        Giguna_BreachSpotId::Giguna_Breach__Peak__Column => BigSpot {
+            id: BigSpotId::Giguna_Breach(Giguna_BreachSpotId::Giguna_Breach__Peak__Column),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: Giguna_BreachSpotId::Giguna_Breach__Peak__Column.into_usize(),
+                end: Giguna_BreachSpotId::Giguna_Breach__Peak__West_7.into_usize() + 1,
+            },
+        },
+        Giguna_BreachSpotId::Giguna_Breach__Peak__West_7 => BigSpot {
+            id: BigSpotId::Giguna_Breach(Giguna_BreachSpotId::Giguna_Breach__Peak__West_7),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna_Breach__Peak__West_7__ex__Chimney__East_7_1.into_usize(),
+                end: ExitId::Giguna_Breach__Peak__West_7__ex__Chimney__East_7_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: Giguna_BreachSpotId::Giguna_Breach__Peak__Column.into_usize(),
+                end: Giguna_BreachSpotId::Giguna_Breach__Peak__West_7.into_usize() + 1,
+            },
+        },
+        Giguna_BreachSpotId::Giguna_Breach__Peak__East_6 => BigSpot {
+            id: BigSpotId::Giguna_Breach(Giguna_BreachSpotId::Giguna_Breach__Peak__East_6),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna_Breach__Peak__East_6__ex__Ascent__West_6_1.into_usize(),
+                end: ExitId::Giguna_Breach__Peak__East_6__ex__Upper_East_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: Giguna_BreachSpotId::Giguna_Breach__Peak__Column.into_usize(),
+                end: Giguna_BreachSpotId::Giguna_Breach__Peak__West_7.into_usize() + 1,
+            },
+        },
+        Giguna_BreachSpotId::Giguna_Breach__Peak__Upper_East => BigSpot {
+            id: BigSpotId::Giguna_Breach(Giguna_BreachSpotId::Giguna_Breach__Peak__Upper_East),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: Giguna_BreachSpotId::Giguna_Breach__Peak__Column.into_usize(),
+                end: Giguna_BreachSpotId::Giguna_Breach__Peak__West_7.into_usize() + 1,
+            },
+        },
+        Giguna_BreachSpotId::Giguna_Breach__Peak__Upper_West => BigSpot {
+            id: BigSpotId::Giguna_Breach(Giguna_BreachSpotId::Giguna_Breach__Peak__Upper_West),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: Giguna_BreachSpotId::Giguna_Breach__Peak__Column.into_usize(),
+                end: Giguna_BreachSpotId::Giguna_Breach__Peak__West_7.into_usize() + 1,
+            },
+        },
+        Giguna_BreachSpotId::Giguna_Breach__Peak__Portal => BigSpot {
+            id: BigSpotId::Giguna_Breach(Giguna_BreachSpotId::Giguna_Breach__Peak__Portal),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna_Breach__Peak__Portal__ex__Upper_West_1.into_usize(),
+                end: ExitId::Giguna_Breach__Peak__Portal__ex__Upper_West_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: ActionId::Giguna_Breach__Peak__Portal__Portal.into_usize(),
+                end: ActionId::Giguna_Breach__Peak__Portal__Portal.into_usize() + 1,
+            },
+            area_spots: Range {
+                start: Giguna_BreachSpotId::Giguna_Breach__Peak__Column.into_usize(),
+                end: Giguna_BreachSpotId::Giguna_Breach__Peak__West_7.into_usize() + 1,
+            },
+        },
+        Giguna_BreachSpotId::Giguna_Breach__Chimney__East_7 => BigSpot {
+            id: BigSpotId::Giguna_Breach(Giguna_BreachSpotId::Giguna_Breach__Chimney__East_7),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna_Breach__Chimney__East_7__ex__Peak__West_7_1.into_usize(),
+                end: ExitId::Giguna_Breach__Chimney__East_7__ex__Peak__West_7_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: Giguna_BreachSpotId::Giguna_Breach__Chimney__Cache.into_usize(),
+                end: Giguna_BreachSpotId::Giguna_Breach__Chimney__Top.into_usize() + 1,
+            },
+        },
+        Giguna_BreachSpotId::Giguna_Breach__Chimney__Top => BigSpot {
+            id: BigSpotId::Giguna_Breach(Giguna_BreachSpotId::Giguna_Breach__Chimney__Top),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: Giguna_BreachSpotId::Giguna_Breach__Chimney__Cache.into_usize(),
+                end: Giguna_BreachSpotId::Giguna_Breach__Chimney__Top.into_usize() + 1,
+            },
+        },
+        Giguna_BreachSpotId::Giguna_Breach__Chimney__Middle_Platform => BigSpot {
+            id: BigSpotId::Giguna_Breach(Giguna_BreachSpotId::Giguna_Breach__Chimney__Middle_Platform),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: Giguna_BreachSpotId::Giguna_Breach__Chimney__Cache.into_usize(),
+                end: Giguna_BreachSpotId::Giguna_Breach__Chimney__Top.into_usize() + 1,
+            },
+        },
+        Giguna_BreachSpotId::Giguna_Breach__Chimney__East_9 => BigSpot {
+            id: BigSpotId::Giguna_Breach(Giguna_BreachSpotId::Giguna_Breach__Chimney__East_9),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna_Breach__Chimney__East_9__ex__Central__West_9_1.into_usize(),
+                end: ExitId::Giguna_Breach__Chimney__East_9__ex__Central__West_9_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: Giguna_BreachSpotId::Giguna_Breach__Chimney__Cache.into_usize(),
+                end: Giguna_BreachSpotId::Giguna_Breach__Chimney__Top.into_usize() + 1,
+            },
+        },
+        Giguna_BreachSpotId::Giguna_Breach__Chimney__South => BigSpot {
+            id: BigSpotId::Giguna_Breach(Giguna_BreachSpotId::Giguna_Breach__Chimney__South),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna_Breach__Chimney__South__ex__Below_Chimney__North_1.into_usize(),
+                end: ExitId::Giguna_Breach__Chimney__South__ex__Below_Chimney__North_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: Giguna_BreachSpotId::Giguna_Breach__Chimney__Cache.into_usize(),
+                end: Giguna_BreachSpotId::Giguna_Breach__Chimney__Top.into_usize() + 1,
+            },
+        },
+        Giguna_BreachSpotId::Giguna_Breach__Chimney__East_8 => BigSpot {
+            id: BigSpotId::Giguna_Breach(Giguna_BreachSpotId::Giguna_Breach__Chimney__East_8),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna_Breach__Chimney__East_8__ex__Central__West_8_1.into_usize(),
+                end: ExitId::Giguna_Breach__Chimney__East_8__ex__Central__West_8_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: Giguna_BreachSpotId::Giguna_Breach__Chimney__Cache.into_usize(),
+                end: Giguna_BreachSpotId::Giguna_Breach__Chimney__Top.into_usize() + 1,
+            },
+        },
+        Giguna_BreachSpotId::Giguna_Breach__Chimney__Cache => BigSpot {
+            id: BigSpotId::Giguna_Breach(Giguna_BreachSpotId::Giguna_Breach__Chimney__Cache),
+            locations: Range {
+                start: LocationId::Giguna_Breach__Chimney__Cache__Flask.into_usize(),
+                end: LocationId::Giguna_Breach__Chimney__Cache__Flask.into_usize() + 1,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: Giguna_BreachSpotId::Giguna_Breach__Chimney__Cache.into_usize(),
+                end: Giguna_BreachSpotId::Giguna_Breach__Chimney__Top.into_usize() + 1,
+            },
+        },
+        Giguna_BreachSpotId::Giguna_Breach__Below_Chimney__North => BigSpot {
+            id: BigSpotId::Giguna_Breach(Giguna_BreachSpotId::Giguna_Breach__Below_Chimney__North),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna_Breach__Below_Chimney__North__ex__Chimney__South_1.into_usize(),
+                end: ExitId::Giguna_Breach__Below_Chimney__North__ex__Chimney__South_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: Giguna_BreachSpotId::Giguna_Breach__Below_Chimney__Cubby_Entrance.into_usize(),
+                end: Giguna_BreachSpotId::Giguna_Breach__Below_Chimney__West_Passage.into_usize() + 1,
+            },
+        },
+        Giguna_BreachSpotId::Giguna_Breach__Below_Chimney__Passage_Lip => BigSpot {
+            id: BigSpotId::Giguna_Breach(Giguna_BreachSpotId::Giguna_Breach__Below_Chimney__Passage_Lip),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: Giguna_BreachSpotId::Giguna_Breach__Below_Chimney__Cubby_Entrance.into_usize(),
+                end: Giguna_BreachSpotId::Giguna_Breach__Below_Chimney__West_Passage.into_usize() + 1,
+            },
+        },
+        Giguna_BreachSpotId::Giguna_Breach__Below_Chimney__East_Ledge => BigSpot {
+            id: BigSpotId::Giguna_Breach(Giguna_BreachSpotId::Giguna_Breach__Below_Chimney__East_Ledge),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: Giguna_BreachSpotId::Giguna_Breach__Below_Chimney__Cubby_Entrance.into_usize(),
+                end: Giguna_BreachSpotId::Giguna_Breach__Below_Chimney__West_Passage.into_usize() + 1,
+            },
+        },
+        Giguna_BreachSpotId::Giguna_Breach__Below_Chimney__Cubby_Entrance => BigSpot {
+            id: BigSpotId::Giguna_Breach(Giguna_BreachSpotId::Giguna_Breach__Below_Chimney__Cubby_Entrance),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna_Breach__Below_Chimney__Cubby_Entrance__ex__Cubby__Entrance_1.into_usize(),
+                end: ExitId::Giguna_Breach__Below_Chimney__Cubby_Entrance__ex__Cubby__Entrance_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: Giguna_BreachSpotId::Giguna_Breach__Below_Chimney__Cubby_Entrance.into_usize(),
+                end: Giguna_BreachSpotId::Giguna_Breach__Below_Chimney__West_Passage.into_usize() + 1,
+            },
+        },
+        Giguna_BreachSpotId::Giguna_Breach__Below_Chimney__West_Passage => BigSpot {
+            id: BigSpotId::Giguna_Breach(Giguna_BreachSpotId::Giguna_Breach__Below_Chimney__West_Passage),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: Giguna_BreachSpotId::Giguna_Breach__Below_Chimney__Cubby_Entrance.into_usize(),
+                end: Giguna_BreachSpotId::Giguna_Breach__Below_Chimney__West_Passage.into_usize() + 1,
+            },
+        },
+        Giguna_BreachSpotId::Giguna_Breach__Below_Chimney__Southwest => BigSpot {
+            id: BigSpotId::Giguna_Breach(Giguna_BreachSpotId::Giguna_Breach__Below_Chimney__Southwest),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna_Breach__Below_Chimney__Southwest__ex__SW_Save__North_1.into_usize(),
+                end: ExitId::Giguna_Breach__Below_Chimney__Southwest__ex__SW_Save__North_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: Giguna_BreachSpotId::Giguna_Breach__Below_Chimney__Cubby_Entrance.into_usize(),
+                end: Giguna_BreachSpotId::Giguna_Breach__Below_Chimney__West_Passage.into_usize() + 1,
+            },
+        },
+        Giguna_BreachSpotId::Giguna_Breach__Cubby__Entrance => BigSpot {
+            id: BigSpotId::Giguna_Breach(Giguna_BreachSpotId::Giguna_Breach__Cubby__Entrance),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna_Breach__Cubby__Entrance__ex__Below_Chimney__Cubby_Entrance_1.into_usize(),
+                end: ExitId::Giguna_Breach__Cubby__Entrance__ex__Below_Chimney__Cubby_Entrance_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: Giguna_BreachSpotId::Giguna_Breach__Cubby__Entrance.into_usize(),
+                end: Giguna_BreachSpotId::Giguna_Breach__Cubby__Rocks.into_usize() + 1,
+            },
+        },
+        Giguna_BreachSpotId::Giguna_Breach__Cubby__Rocks => BigSpot {
+            id: BigSpotId::Giguna_Breach(Giguna_BreachSpotId::Giguna_Breach__Cubby__Rocks),
+            locations: Range {
+                start: LocationId::Giguna_Breach__Cubby__Rocks__Health.into_usize(),
+                end: LocationId::Giguna_Breach__Cubby__Rocks__Health.into_usize() + 1,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: Giguna_BreachSpotId::Giguna_Breach__Cubby__Entrance.into_usize(),
+                end: Giguna_BreachSpotId::Giguna_Breach__Cubby__Rocks.into_usize() + 1,
+            },
+        },
+        Giguna_BreachSpotId::Giguna_Breach__SW_Save__North => BigSpot {
+            id: BigSpotId::Giguna_Breach(Giguna_BreachSpotId::Giguna_Breach__SW_Save__North),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna_Breach__SW_Save__North__ex__Below_Chimney__Southwest_1.into_usize(),
+                end: ExitId::Giguna_Breach__SW_Save__North__ex__Below_Chimney__Southwest_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: Giguna_BreachSpotId::Giguna_Breach__SW_Save__East_12.into_usize(),
+                end: Giguna_BreachSpotId::Giguna_Breach__SW_Save__West_11.into_usize() + 1,
+            },
+        },
+        Giguna_BreachSpotId::Giguna_Breach__SW_Save__Lower_Platform => BigSpot {
+            id: BigSpotId::Giguna_Breach(Giguna_BreachSpotId::Giguna_Breach__SW_Save__Lower_Platform),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna_Breach__SW_Save__Lower_Platform__ex__Side_Door_1.into_usize(),
+                end: ExitId::Giguna_Breach__SW_Save__Lower_Platform__ex__Side_Door_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: Giguna_BreachSpotId::Giguna_Breach__SW_Save__East_12.into_usize(),
+                end: Giguna_BreachSpotId::Giguna_Breach__SW_Save__West_11.into_usize() + 1,
+            },
+        },
+        Giguna_BreachSpotId::Giguna_Breach__SW_Save__Side_Door => BigSpot {
+            id: BigSpotId::Giguna_Breach(Giguna_BreachSpotId::Giguna_Breach__SW_Save__Side_Door),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna_Breach__SW_Save__Side_Door__ex__West_11_1.into_usize(),
+                end: ExitId::Giguna_Breach__SW_Save__Side_Door__ex__West_11_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: Giguna_BreachSpotId::Giguna_Breach__SW_Save__East_12.into_usize(),
+                end: Giguna_BreachSpotId::Giguna_Breach__SW_Save__West_11.into_usize() + 1,
+            },
+        },
+        Giguna_BreachSpotId::Giguna_Breach__SW_Save__West_11 => BigSpot {
+            id: BigSpotId::Giguna_Breach(Giguna_BreachSpotId::Giguna_Breach__SW_Save__West_11),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna_Breach__SW_Save__West_11__ex__Side_Door_1.into_usize(),
+                end: ExitId::Giguna_Breach__SW_Save__West_11__ex__Side_Door_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: ActionId::Giguna_Breach__SW_Save__West_11__Open_Door.into_usize(),
+                end: ActionId::Giguna_Breach__SW_Save__West_11__Open_Door.into_usize() + 1,
+            },
+            area_spots: Range {
+                start: Giguna_BreachSpotId::Giguna_Breach__SW_Save__East_12.into_usize(),
+                end: Giguna_BreachSpotId::Giguna_Breach__SW_Save__West_11.into_usize() + 1,
+            },
+        },
+        Giguna_BreachSpotId::Giguna_Breach__SW_Save__Save_Point => BigSpot {
+            id: BigSpotId::Giguna_Breach(Giguna_BreachSpotId::Giguna_Breach__SW_Save__Save_Point),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna_Breach__SW_Save__Save_Point__ex__Lower_Platform_1.into_usize(),
+                end: ExitId::Giguna_Breach__SW_Save__Save_Point__ex__Lower_Platform_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: ActionId::Giguna_Breach__SW_Save__Save_Point__Save.into_usize(),
+                end: ActionId::Giguna_Breach__SW_Save__Save_Point__Save.into_usize() + 1,
+            },
+            area_spots: Range {
+                start: Giguna_BreachSpotId::Giguna_Breach__SW_Save__East_12.into_usize(),
+                end: Giguna_BreachSpotId::Giguna_Breach__SW_Save__West_11.into_usize() + 1,
+            },
+        },
+        Giguna_BreachSpotId::Giguna_Breach__SW_Save__East_12 => BigSpot {
+            id: BigSpotId::Giguna_Breach(Giguna_BreachSpotId::Giguna_Breach__SW_Save__East_12),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna_Breach__SW_Save__East_12__ex__Lower_Platform_1.into_usize(),
+                end: ExitId::Giguna_Breach__SW_Save__East_12__ex__Robopede__West_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: Giguna_BreachSpotId::Giguna_Breach__SW_Save__East_12.into_usize(),
+                end: Giguna_BreachSpotId::Giguna_Breach__SW_Save__West_11.into_usize() + 1,
+            },
+        },
+        Giguna_BreachSpotId::Giguna_Breach__Robopede__West => BigSpot {
+            id: BigSpotId::Giguna_Breach(Giguna_BreachSpotId::Giguna_Breach__Robopede__West),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna_Breach__Robopede__West__ex__SW_Save__East_12_1.into_usize(),
+                end: ExitId::Giguna_Breach__Robopede__West__ex__SW_Save__East_12_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: Giguna_BreachSpotId::Giguna_Breach__Robopede__Center.into_usize(),
+                end: Giguna_BreachSpotId::Giguna_Breach__Robopede__West.into_usize() + 1,
+            },
+        },
+        Giguna_BreachSpotId::Giguna_Breach__Robopede__Center => BigSpot {
+            id: BigSpotId::Giguna_Breach(Giguna_BreachSpotId::Giguna_Breach__Robopede__Center),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: Giguna_BreachSpotId::Giguna_Breach__Robopede__Center.into_usize(),
+                end: Giguna_BreachSpotId::Giguna_Breach__Robopede__West.into_usize() + 1,
+            },
+        },
+        Giguna_BreachSpotId::Giguna_Breach__Robopede__North => BigSpot {
+            id: BigSpotId::Giguna_Breach(Giguna_BreachSpotId::Giguna_Breach__Robopede__North),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna_Breach__Robopede__North__ex__Grid_14_10_11__South_1.into_usize(),
+                end: ExitId::Giguna_Breach__Robopede__North__ex__Grid_14_10_11__South_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: Giguna_BreachSpotId::Giguna_Breach__Robopede__Center.into_usize(),
+                end: Giguna_BreachSpotId::Giguna_Breach__Robopede__West.into_usize() + 1,
+            },
+        },
+        Giguna_BreachSpotId::Giguna_Breach__Grid_14_10_11__South => BigSpot {
+            id: BigSpotId::Giguna_Breach(Giguna_BreachSpotId::Giguna_Breach__Grid_14_10_11__South),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna_Breach__Grid_14_10_11__South__ex__Robopede__North_1.into_usize(),
+                end: ExitId::Giguna_Breach__Grid_14_10_11__South__ex__Robopede__North_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: Giguna_BreachSpotId::Giguna_Breach__Grid_14_10_11__East_10.into_usize(),
+                end: Giguna_BreachSpotId::Giguna_Breach__Grid_14_10_11__South.into_usize() + 1,
+            },
+        },
+        Giguna_BreachSpotId::Giguna_Breach__Grid_14_10_11__East_11 => BigSpot {
+            id: BigSpotId::Giguna_Breach(Giguna_BreachSpotId::Giguna_Breach__Grid_14_10_11__East_11),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna_Breach__Grid_14_10_11__East_11__ex__Fire_Room__West_11_1.into_usize(),
+                end: ExitId::Giguna_Breach__Grid_14_10_11__East_11__ex__Fire_Room__West_11_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: Giguna_BreachSpotId::Giguna_Breach__Grid_14_10_11__East_10.into_usize(),
+                end: Giguna_BreachSpotId::Giguna_Breach__Grid_14_10_11__South.into_usize() + 1,
+            },
+        },
+        Giguna_BreachSpotId::Giguna_Breach__Grid_14_10_11__East_10 => BigSpot {
+            id: BigSpotId::Giguna_Breach(Giguna_BreachSpotId::Giguna_Breach__Grid_14_10_11__East_10),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna_Breach__Grid_14_10_11__East_10__ex__Fire_Room__West_10_1.into_usize(),
+                end: ExitId::Giguna_Breach__Grid_14_10_11__East_10__ex__High_Ledge_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: Giguna_BreachSpotId::Giguna_Breach__Grid_14_10_11__East_10.into_usize(),
+                end: Giguna_BreachSpotId::Giguna_Breach__Grid_14_10_11__South.into_usize() + 1,
+            },
+        },
+        Giguna_BreachSpotId::Giguna_Breach__Grid_14_10_11__High_Ledge => BigSpot {
+            id: BigSpotId::Giguna_Breach(Giguna_BreachSpotId::Giguna_Breach__Grid_14_10_11__High_Ledge),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: Giguna_BreachSpotId::Giguna_Breach__Grid_14_10_11__East_10.into_usize(),
+                end: Giguna_BreachSpotId::Giguna_Breach__Grid_14_10_11__South.into_usize() + 1,
+            },
+        },
+        Giguna_BreachSpotId::Giguna_Breach__Grid_14_10_11__North => BigSpot {
+            id: BigSpotId::Giguna_Breach(Giguna_BreachSpotId::Giguna_Breach__Grid_14_10_11__North),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna_Breach__Grid_14_10_11__North__ex__Central__South_1.into_usize(),
+                end: ExitId::Giguna_Breach__Grid_14_10_11__North__ex__Central__South_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: Giguna_BreachSpotId::Giguna_Breach__Grid_14_10_11__East_10.into_usize(),
+                end: Giguna_BreachSpotId::Giguna_Breach__Grid_14_10_11__South.into_usize() + 1,
+            },
+        },
+        Giguna_BreachSpotId::Giguna_Breach__Fire_Room__West_11 => BigSpot {
+            id: BigSpotId::Giguna_Breach(Giguna_BreachSpotId::Giguna_Breach__Fire_Room__West_11),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna_Breach__Fire_Room__West_11__ex__Grid_14_10_11__East_11_1.into_usize(),
+                end: ExitId::Giguna_Breach__Fire_Room__West_11__ex__Grid_14_10_11__East_11_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: Giguna_BreachSpotId::Giguna_Breach__Fire_Room__Cuesta.into_usize(),
+                end: Giguna_BreachSpotId::Giguna_Breach__Fire_Room__West_Plateau.into_usize() + 1,
+            },
+        },
+        Giguna_BreachSpotId::Giguna_Breach__Fire_Room__First_Fire => BigSpot {
+            id: BigSpotId::Giguna_Breach(Giguna_BreachSpotId::Giguna_Breach__Fire_Room__First_Fire),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna_Breach__Fire_Room__First_Fire__ex__West_Plateau_1.into_usize(),
+                end: ExitId::Giguna_Breach__Fire_Room__First_Fire__ex__West_Plateau_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: Giguna_BreachSpotId::Giguna_Breach__Fire_Room__Cuesta.into_usize(),
+                end: Giguna_BreachSpotId::Giguna_Breach__Fire_Room__West_Plateau.into_usize() + 1,
+            },
+        },
+        Giguna_BreachSpotId::Giguna_Breach__Fire_Room__Cuesta => BigSpot {
+            id: BigSpotId::Giguna_Breach(Giguna_BreachSpotId::Giguna_Breach__Fire_Room__Cuesta),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: Giguna_BreachSpotId::Giguna_Breach__Fire_Room__Cuesta.into_usize(),
+                end: Giguna_BreachSpotId::Giguna_Breach__Fire_Room__West_Plateau.into_usize() + 1,
+            },
+        },
+        Giguna_BreachSpotId::Giguna_Breach__Fire_Room__South => BigSpot {
+            id: BigSpotId::Giguna_Breach(Giguna_BreachSpotId::Giguna_Breach__Fire_Room__South),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna_Breach__Fire_Room__South__ex__Antechamber__North_1.into_usize(),
+                end: ExitId::Giguna_Breach__Fire_Room__South__ex__Cuesta_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: Giguna_BreachSpotId::Giguna_Breach__Fire_Room__Cuesta.into_usize(),
+                end: Giguna_BreachSpotId::Giguna_Breach__Fire_Room__West_Plateau.into_usize() + 1,
+            },
+        },
+        Giguna_BreachSpotId::Giguna_Breach__Fire_Room__East_11 => BigSpot {
+            id: BigSpotId::Giguna_Breach(Giguna_BreachSpotId::Giguna_Breach__Fire_Room__East_11),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna_Breach__Fire_Room__East_11__ex__Slingshot__West_1.into_usize(),
+                end: ExitId::Giguna_Breach__Fire_Room__East_11__ex__Slingshot__West_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: Giguna_BreachSpotId::Giguna_Breach__Fire_Room__Cuesta.into_usize(),
+                end: Giguna_BreachSpotId::Giguna_Breach__Fire_Room__West_Plateau.into_usize() + 1,
+            },
+        },
+        Giguna_BreachSpotId::Giguna_Breach__Fire_Room__West_Plateau => BigSpot {
+            id: BigSpotId::Giguna_Breach(Giguna_BreachSpotId::Giguna_Breach__Fire_Room__West_Plateau),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna_Breach__Fire_Room__West_Plateau__ex__West_10_1.into_usize(),
+                end: ExitId::Giguna_Breach__Fire_Room__West_Plateau__ex__West_10_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: Giguna_BreachSpotId::Giguna_Breach__Fire_Room__Cuesta.into_usize(),
+                end: Giguna_BreachSpotId::Giguna_Breach__Fire_Room__West_Plateau.into_usize() + 1,
+            },
+        },
+        Giguna_BreachSpotId::Giguna_Breach__Fire_Room__West_10 => BigSpot {
+            id: BigSpotId::Giguna_Breach(Giguna_BreachSpotId::Giguna_Breach__Fire_Room__West_10),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna_Breach__Fire_Room__West_10__ex__Grid_14_10_11__East_10_1.into_usize(),
+                end: ExitId::Giguna_Breach__Fire_Room__West_10__ex__Grid_14_10_11__East_10_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: Giguna_BreachSpotId::Giguna_Breach__Fire_Room__Cuesta.into_usize(),
+                end: Giguna_BreachSpotId::Giguna_Breach__Fire_Room__West_Plateau.into_usize() + 1,
+            },
+        },
+        Giguna_BreachSpotId::Giguna_Breach__Slingshot__West => BigSpot {
+            id: BigSpotId::Giguna_Breach(Giguna_BreachSpotId::Giguna_Breach__Slingshot__West),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna_Breach__Slingshot__West__ex__Fire_Room__East_11_1.into_usize(),
+                end: ExitId::Giguna_Breach__Slingshot__West__ex__Fire_Room__East_11_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: Giguna_BreachSpotId::Giguna_Breach__Slingshot__Column.into_usize(),
+                end: Giguna_BreachSpotId::Giguna_Breach__Slingshot__West.into_usize() + 1,
+            },
+        },
+        Giguna_BreachSpotId::Giguna_Breach__Slingshot__Column => BigSpot {
+            id: BigSpotId::Giguna_Breach(Giguna_BreachSpotId::Giguna_Breach__Slingshot__Column),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: Giguna_BreachSpotId::Giguna_Breach__Slingshot__Column.into_usize(),
+                end: Giguna_BreachSpotId::Giguna_Breach__Slingshot__West.into_usize() + 1,
+            },
+        },
+        Giguna_BreachSpotId::Giguna_Breach__Slingshot__Ravine => BigSpot {
+            id: BigSpotId::Giguna_Breach(Giguna_BreachSpotId::Giguna_Breach__Slingshot__Ravine),
+            locations: Range {
+                start: LocationId::Giguna_Breach__Slingshot__Ravine__Urn.into_usize(),
+                end: LocationId::Giguna_Breach__Slingshot__Ravine__Urn.into_usize() + 1,
+            },
+            exits: Range {
+                start: ExitId::Giguna_Breach__Slingshot__Ravine__ex__Column_1.into_usize(),
+                end: ExitId::Giguna_Breach__Slingshot__Ravine__ex__Column_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: Giguna_BreachSpotId::Giguna_Breach__Slingshot__Column.into_usize(),
+                end: Giguna_BreachSpotId::Giguna_Breach__Slingshot__West.into_usize() + 1,
+            },
+        },
+        Giguna_BreachSpotId::Giguna_Breach__Antechamber__North => BigSpot {
+            id: BigSpotId::Giguna_Breach(Giguna_BreachSpotId::Giguna_Breach__Antechamber__North),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna_Breach__Antechamber__North__ex__Fire_Room__South_1.into_usize(),
+                end: ExitId::Giguna_Breach__Antechamber__North__ex__Fire_Room__South_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: Giguna_BreachSpotId::Giguna_Breach__Antechamber__North.into_usize(),
+                end: Giguna_BreachSpotId::Giguna_Breach__Antechamber__North.into_usize() + 1,
+            },
+        },
+        Giguna_BreachSpotId::Giguna_Breach__Central__West_9 => BigSpot {
+            id: BigSpotId::Giguna_Breach(Giguna_BreachSpotId::Giguna_Breach__Central__West_9),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna_Breach__Central__West_9__ex__Chimney__East_9_1.into_usize(),
+                end: ExitId::Giguna_Breach__Central__West_9__ex__Wall_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: Giguna_BreachSpotId::Giguna_Breach__Central__East_9.into_usize(),
+                end: Giguna_BreachSpotId::Giguna_Breach__Central__West_Statue.into_usize() + 1,
+            },
+        },
+        Giguna_BreachSpotId::Giguna_Breach__Central__Wall => BigSpot {
+            id: BigSpotId::Giguna_Breach(Giguna_BreachSpotId::Giguna_Breach__Central__Wall),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna_Breach__Central__Wall__ex__Upper_Floating_Brick_1.into_usize(),
+                end: ExitId::Giguna_Breach__Central__Wall__ex__Upper_Floating_Brick_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: Giguna_BreachSpotId::Giguna_Breach__Central__East_9.into_usize(),
+                end: Giguna_BreachSpotId::Giguna_Breach__Central__West_Statue.into_usize() + 1,
+            },
+        },
+        Giguna_BreachSpotId::Giguna_Breach__Central__South => BigSpot {
+            id: BigSpotId::Giguna_Breach(Giguna_BreachSpotId::Giguna_Breach__Central__South),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna_Breach__Central__South__ex__Grid_14_10_11__North_1.into_usize(),
+                end: ExitId::Giguna_Breach__Central__South__ex__Upper_Floating_Brick_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: Giguna_BreachSpotId::Giguna_Breach__Central__East_9.into_usize(),
+                end: Giguna_BreachSpotId::Giguna_Breach__Central__West_Statue.into_usize() + 1,
+            },
+        },
+        Giguna_BreachSpotId::Giguna_Breach__Central__Upper_Floating_Brick => BigSpot {
+            id: BigSpotId::Giguna_Breach(Giguna_BreachSpotId::Giguna_Breach__Central__Upper_Floating_Brick),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna_Breach__Central__Upper_Floating_Brick__ex__West_Statue_1.into_usize(),
+                end: ExitId::Giguna_Breach__Central__Upper_Floating_Brick__ex__West_Statue_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: Giguna_BreachSpotId::Giguna_Breach__Central__East_9.into_usize(),
+                end: Giguna_BreachSpotId::Giguna_Breach__Central__West_Statue.into_usize() + 1,
+            },
+        },
+        Giguna_BreachSpotId::Giguna_Breach__Central__West_Statue => BigSpot {
+            id: BigSpotId::Giguna_Breach(Giguna_BreachSpotId::Giguna_Breach__Central__West_Statue),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: Giguna_BreachSpotId::Giguna_Breach__Central__East_9.into_usize(),
+                end: Giguna_BreachSpotId::Giguna_Breach__Central__West_Statue.into_usize() + 1,
+            },
+        },
+        Giguna_BreachSpotId::Giguna_Breach__Central__Statuette => BigSpot {
+            id: BigSpotId::Giguna_Breach(Giguna_BreachSpotId::Giguna_Breach__Central__Statuette),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna_Breach__Central__Statuette__ex__Tunnel_1.into_usize(),
+                end: ExitId::Giguna_Breach__Central__Statuette__ex__Tunnel_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: Giguna_BreachSpotId::Giguna_Breach__Central__East_9.into_usize(),
+                end: Giguna_BreachSpotId::Giguna_Breach__Central__West_Statue.into_usize() + 1,
+            },
+        },
+        Giguna_BreachSpotId::Giguna_Breach__Central__Tunnel => BigSpot {
+            id: BigSpotId::Giguna_Breach(Giguna_BreachSpotId::Giguna_Breach__Central__Tunnel),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: Giguna_BreachSpotId::Giguna_Breach__Central__East_9.into_usize(),
+                end: Giguna_BreachSpotId::Giguna_Breach__Central__West_Statue.into_usize() + 1,
+            },
+        },
+        Giguna_BreachSpotId::Giguna_Breach__Central__West_8 => BigSpot {
+            id: BigSpotId::Giguna_Breach(Giguna_BreachSpotId::Giguna_Breach__Central__West_8),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna_Breach__Central__West_8__ex__Chimney__East_8_1.into_usize(),
+                end: ExitId::Giguna_Breach__Central__West_8__ex__Chimney__East_8_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: Giguna_BreachSpotId::Giguna_Breach__Central__East_9.into_usize(),
+                end: Giguna_BreachSpotId::Giguna_Breach__Central__West_Statue.into_usize() + 1,
+            },
+        },
+        Giguna_BreachSpotId::Giguna_Breach__Central__Middle_Statue => BigSpot {
+            id: BigSpotId::Giguna_Breach(Giguna_BreachSpotId::Giguna_Breach__Central__Middle_Statue),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: Giguna_BreachSpotId::Giguna_Breach__Central__East_9.into_usize(),
+                end: Giguna_BreachSpotId::Giguna_Breach__Central__West_Statue.into_usize() + 1,
+            },
+        },
+        Giguna_BreachSpotId::Giguna_Breach__Central__East_Brick => BigSpot {
+            id: BigSpotId::Giguna_Breach(Giguna_BreachSpotId::Giguna_Breach__Central__East_Brick),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna_Breach__Central__East_Brick__ex__Middle_Statue_1.into_usize(),
+                end: ExitId::Giguna_Breach__Central__East_Brick__ex__Middle_Statue_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: Giguna_BreachSpotId::Giguna_Breach__Central__East_9.into_usize(),
+                end: Giguna_BreachSpotId::Giguna_Breach__Central__West_Statue.into_usize() + 1,
+            },
+        },
+        Giguna_BreachSpotId::Giguna_Breach__Central__East_9 => BigSpot {
+            id: BigSpotId::Giguna_Breach(Giguna_BreachSpotId::Giguna_Breach__Central__East_9),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna_Breach__Central__East_9__ex__Ascent__West_9_1.into_usize(),
+                end: ExitId::Giguna_Breach__Central__East_9__ex__East_Brick_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: Giguna_BreachSpotId::Giguna_Breach__Central__East_9.into_usize(),
+                end: Giguna_BreachSpotId::Giguna_Breach__Central__West_Statue.into_usize() + 1,
+            },
+        },
+        Giguna_BreachSpotId::Giguna_Breach__Ascent__West_9 => BigSpot {
+            id: BigSpotId::Giguna_Breach(Giguna_BreachSpotId::Giguna_Breach__Ascent__West_9),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna_Breach__Ascent__West_9__ex__Central__East_9_1.into_usize(),
+                end: ExitId::Giguna_Breach__Ascent__West_9__ex__Central__East_9_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: Giguna_BreachSpotId::Giguna_Breach__Ascent__Bottom.into_usize(),
+                end: Giguna_BreachSpotId::Giguna_Breach__Ascent__West_9.into_usize() + 1,
+            },
+        },
+        Giguna_BreachSpotId::Giguna_Breach__Ascent__Bottom => BigSpot {
+            id: BigSpotId::Giguna_Breach(Giguna_BreachSpotId::Giguna_Breach__Ascent__Bottom),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna_Breach__Ascent__Bottom__ex__Top_1.into_usize(),
+                end: ExitId::Giguna_Breach__Ascent__Bottom__ex__Top_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: Giguna_BreachSpotId::Giguna_Breach__Ascent__Bottom.into_usize(),
+                end: Giguna_BreachSpotId::Giguna_Breach__Ascent__West_9.into_usize() + 1,
+            },
+        },
+        Giguna_BreachSpotId::Giguna_Breach__Ascent__Top => BigSpot {
+            id: BigSpotId::Giguna_Breach(Giguna_BreachSpotId::Giguna_Breach__Ascent__Top),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: Giguna_BreachSpotId::Giguna_Breach__Ascent__Bottom.into_usize(),
+                end: Giguna_BreachSpotId::Giguna_Breach__Ascent__West_9.into_usize() + 1,
+            },
+        },
+        Giguna_BreachSpotId::Giguna_Breach__Ascent__West_6 => BigSpot {
+            id: BigSpotId::Giguna_Breach(Giguna_BreachSpotId::Giguna_Breach__Ascent__West_6),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna_Breach__Ascent__West_6__ex__Peak__East_6_1.into_usize(),
+                end: ExitId::Giguna_Breach__Ascent__West_6__ex__Peak__East_6_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: Giguna_BreachSpotId::Giguna_Breach__Ascent__Bottom.into_usize(),
+                end: Giguna_BreachSpotId::Giguna_Breach__Ascent__West_9.into_usize() + 1,
+            },
+        },
+        Giguna_BreachSpotId::Giguna_Breach__Pink_Clouds__Normal_Entry => BigSpot {
+            id: BigSpotId::Giguna_Breach(Giguna_BreachSpotId::Giguna_Breach__Pink_Clouds__Normal_Entry),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna_Breach__Pink_Clouds__Normal_Entry__ex__Corner_1.into_usize(),
+                end: ExitId::Giguna_Breach__Pink_Clouds__Normal_Entry__ex__Corner_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: Giguna_BreachSpotId::Giguna_Breach__Pink_Clouds__Corner.into_usize(),
+                end: Giguna_BreachSpotId::Giguna_Breach__Pink_Clouds__Quick_Entry.into_usize() + 1,
+            },
+        },
+        Giguna_BreachSpotId::Giguna_Breach__Pink_Clouds__Quick_Entry => BigSpot {
+            id: BigSpotId::Giguna_Breach(Giguna_BreachSpotId::Giguna_Breach__Pink_Clouds__Quick_Entry),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: Giguna_BreachSpotId::Giguna_Breach__Pink_Clouds__Corner.into_usize(),
+                end: Giguna_BreachSpotId::Giguna_Breach__Pink_Clouds__Quick_Entry.into_usize() + 1,
+            },
+        },
+        Giguna_BreachSpotId::Giguna_Breach__Pink_Clouds__Corner => BigSpot {
+            id: BigSpotId::Giguna_Breach(Giguna_BreachSpotId::Giguna_Breach__Pink_Clouds__Corner),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: Giguna_BreachSpotId::Giguna_Breach__Pink_Clouds__Corner.into_usize(),
+                end: Giguna_BreachSpotId::Giguna_Breach__Pink_Clouds__Quick_Entry.into_usize() + 1,
+            },
+        },
+    }
+}
+pub fn build_giguna_spots() -> EnumMap<GigunaSpotId, BigSpot> {
+    enum_map! {
+        GigunaSpotId::Giguna__Giguna_Northeast__East_9 => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Giguna_Northeast__East_9),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Giguna_Northeast__East_9__ex__Ebih__Ebih_West__West_9_1.into_usize(),
+                end: ExitId::Giguna__Giguna_Northeast__East_9__ex__Ebih__Ebih_West__West_9_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Giguna_Northeast__Crow_Eating.into_usize(),
+                end: GigunaSpotId::Giguna__Giguna_Northeast__West_9.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Giguna_Northeast__Inner_Wall => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Giguna_Northeast__Inner_Wall),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Giguna_Northeast__Crow_Eating.into_usize(),
+                end: GigunaSpotId::Giguna__Giguna_Northeast__West_9.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Giguna_Northeast__Crow_Eating => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Giguna_Northeast__Crow_Eating),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Giguna_Northeast__Crow_Eating__ex__Gate_Vent_1.into_usize(),
+                end: ExitId::Giguna__Giguna_Northeast__Crow_Eating__ex__Gate_Vent_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Giguna_Northeast__Crow_Eating.into_usize(),
+                end: GigunaSpotId::Giguna__Giguna_Northeast__West_9.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Giguna_Northeast__Save_Point => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Giguna_Northeast__Save_Point),
+            locations: Range {
+                start: LocationId::Giguna__Giguna_Northeast__Save_Point__Seen.into_usize(),
+                end: LocationId::Giguna__Giguna_Northeast__Save_Point__Seen.into_usize() + 1,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Giguna_Northeast__Save_Point__ex__Gate_Vent_1.into_usize(),
+                end: ExitId::Giguna__Giguna_Northeast__Save_Point__ex__Gate_Vent_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: ActionId::Giguna__Giguna_Northeast__Save_Point__Save.into_usize(),
+                end: ActionId::Giguna__Giguna_Northeast__Save_Point__Save_Recall.into_usize() + 1,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Giguna_Northeast__Crow_Eating.into_usize(),
+                end: GigunaSpotId::Giguna__Giguna_Northeast__West_9.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Giguna_Northeast__Step => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Giguna_Northeast__Step),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Giguna_Northeast__Step__ex__Gate_Vent_1.into_usize(),
+                end: ExitId::Giguna__Giguna_Northeast__Step__ex__West_9_2.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Giguna_Northeast__Crow_Eating.into_usize(),
+                end: GigunaSpotId::Giguna__Giguna_Northeast__West_9.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Giguna_Northeast__West_10 => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Giguna_Northeast__West_10),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Giguna_Northeast__West_10__ex__Carnelian__East_10_1.into_usize(),
+                end: ExitId::Giguna__Giguna_Northeast__West_10__ex__Carnelian__East_10_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Giguna_Northeast__Crow_Eating.into_usize(),
+                end: GigunaSpotId::Giguna__Giguna_Northeast__West_9.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Giguna_Northeast__West_9 => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Giguna_Northeast__West_9),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Giguna_Northeast__West_9__ex__Ruins_East__East_9_1.into_usize(),
+                end: ExitId::Giguna__Giguna_Northeast__West_9__ex__Ruins_East__East_9_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Giguna_Northeast__Crow_Eating.into_usize(),
+                end: GigunaSpotId::Giguna__Giguna_Northeast__West_9.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Giguna_Northeast__Gate_Left => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Giguna_Northeast__Gate_Left),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Giguna_Northeast__Gate_Left__ex__Gate_Button_1.into_usize(),
+                end: ExitId::Giguna__Giguna_Northeast__Gate_Left__ex__Gate_Button_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: ActionId::Giguna__Giguna_Northeast__Gate_Left__Throw_Drone.into_usize(),
+                end: ActionId::Giguna__Giguna_Northeast__Gate_Left__Throw_Drone.into_usize() + 1,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Giguna_Northeast__Crow_Eating.into_usize(),
+                end: GigunaSpotId::Giguna__Giguna_Northeast__West_9.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Giguna_Northeast__Gate_Vent => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Giguna_Northeast__Gate_Vent),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Giguna_Northeast__Crow_Eating.into_usize(),
+                end: GigunaSpotId::Giguna__Giguna_Northeast__West_9.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Giguna_Northeast__Gate_Button => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Giguna_Northeast__Gate_Button),
+            locations: Range {
+                start: LocationId::Giguna__Giguna_Northeast__Gate_Button__Open_Gate.into_usize(),
+                end: LocationId::Giguna__Giguna_Northeast__Gate_Button__Open_Gate.into_usize() + 1,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Giguna_Northeast__Gate_Button__ex__Gate_Left_1.into_usize(),
+                end: ExitId::Giguna__Giguna_Northeast__Gate_Button__ex__Gate_Left_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Giguna_Northeast__Crow_Eating.into_usize(),
+                end: GigunaSpotId::Giguna__Giguna_Northeast__West_9.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Giguna_Northeast__Gate_Right => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Giguna_Northeast__Gate_Right),
+            locations: Range {
+                start: LocationId::Giguna__Giguna_Northeast__Gate_Right__Remote_Button.into_usize(),
+                end: LocationId::Giguna__Giguna_Northeast__Gate_Right__Remote_Button.into_usize() + 1,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Giguna_Northeast__Crow_Eating.into_usize(),
+                end: GigunaSpotId::Giguna__Giguna_Northeast__West_9.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Giguna_Northeast__Shaft_Bottom => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Giguna_Northeast__Shaft_Bottom),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Giguna_Northeast__Crow_Eating.into_usize(),
+                end: GigunaSpotId::Giguna__Giguna_Northeast__West_9.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Giguna_Northeast__East_11 => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Giguna_Northeast__East_11),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Giguna_Northeast__East_11__ex__Ebih__Ebih_West__West_11_1.into_usize(),
+                end: ExitId::Giguna__Giguna_Northeast__East_11__ex__Ebih__Ebih_West__West_11_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Giguna_Northeast__Crow_Eating.into_usize(),
+                end: GigunaSpotId::Giguna__Giguna_Northeast__West_9.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Giguna_Northeast__Right_Column => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Giguna_Northeast__Right_Column),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Giguna_Northeast__Right_Column__ex__Door_1.into_usize(),
+                end: ExitId::Giguna__Giguna_Northeast__Right_Column__ex__Door_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: ActionId::Giguna__Giguna_Northeast__Right_Column__Open_Door_From_Afar.into_usize(),
+                end: ActionId::Giguna__Giguna_Northeast__Right_Column__Open_Door_From_Afar.into_usize() + 1,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Giguna_Northeast__Crow_Eating.into_usize(),
+                end: GigunaSpotId::Giguna__Giguna_Northeast__West_9.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Giguna_Northeast__Switch => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Giguna_Northeast__Switch),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Giguna_Northeast__Switch__ex__Door_1.into_usize(),
+                end: ExitId::Giguna__Giguna_Northeast__Switch__ex__Right_Column_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: ActionId::Giguna__Giguna_Northeast__Switch__Open_Door.into_usize(),
+                end: ActionId::Giguna__Giguna_Northeast__Switch__Open_Door.into_usize() + 1,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Giguna_Northeast__Crow_Eating.into_usize(),
+                end: GigunaSpotId::Giguna__Giguna_Northeast__West_9.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Giguna_Northeast__Door => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Giguna_Northeast__Door),
+            locations: Range {
+                start: LocationId::Giguna__Giguna_Northeast__Door__Remote_Flask.into_usize(),
+                end: LocationId::Giguna__Giguna_Northeast__Door__Remote_Flask.into_usize() + 1,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Giguna_Northeast__Crow_Eating.into_usize(),
+                end: GigunaSpotId::Giguna__Giguna_Northeast__West_9.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Giguna_Northeast__Vault => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Giguna_Northeast__Vault),
+            locations: Range {
+                start: LocationId::Giguna__Giguna_Northeast__Vault__Item.into_usize(),
+                end: LocationId::Giguna__Giguna_Northeast__Vault__Item.into_usize() + 1,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Giguna_Northeast__Vault__ex__Door_1.into_usize(),
+                end: ExitId::Giguna__Giguna_Northeast__Vault__ex__Door_2.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Giguna_Northeast__Crow_Eating.into_usize(),
+                end: GigunaSpotId::Giguna__Giguna_Northeast__West_9.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Carnelian__East_10 => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Carnelian__East_10),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Carnelian__East_10__ex__Giguna_Northeast__West_10_1.into_usize(),
+                end: ExitId::Giguna__Carnelian__East_10__ex__Giguna_Northeast__West_10_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Carnelian__Door.into_usize(),
+                end: GigunaSpotId::Giguna__Carnelian__West_Ledge.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Carnelian__East_Cliff => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Carnelian__East_Cliff),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Carnelian__Door.into_usize(),
+                end: GigunaSpotId::Giguna__Carnelian__West_Ledge.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Carnelian__Upper_Susar => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Carnelian__Upper_Susar),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Carnelian__Upper_Susar__ex__East_Cliff_1.into_usize(),
+                end: ExitId::Giguna__Carnelian__Upper_Susar__ex__Upper_Path_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: ActionId::Giguna__Carnelian__Upper_Susar__Caught.into_usize(),
+                end: ActionId::Giguna__Carnelian__Upper_Susar__Hack.into_usize() + 1,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Carnelian__Door.into_usize(),
+                end: GigunaSpotId::Giguna__Carnelian__West_Ledge.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Carnelian__Middle_Platforms => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Carnelian__Middle_Platforms),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Carnelian__Middle_Platforms__ex__East_Cliff_1.into_usize(),
+                end: ExitId::Giguna__Carnelian__Middle_Platforms__ex__Upper_Susar_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Carnelian__Door.into_usize(),
+                end: GigunaSpotId::Giguna__Carnelian__West_Ledge.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Carnelian__Switch => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Carnelian__Switch),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Carnelian__Switch__ex__Door_1.into_usize(),
+                end: ExitId::Giguna__Carnelian__Switch__ex__Door_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: ActionId::Giguna__Carnelian__Switch__Open_Door.into_usize(),
+                end: ActionId::Giguna__Carnelian__Switch__Open_Door.into_usize() + 1,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Carnelian__Door.into_usize(),
+                end: GigunaSpotId::Giguna__Carnelian__West_Ledge.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Carnelian__Door => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Carnelian__Door),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Carnelian__Door__ex__Switch_1.into_usize(),
+                end: ExitId::Giguna__Carnelian__Door__ex__Vault_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Carnelian__Door.into_usize(),
+                end: GigunaSpotId::Giguna__Carnelian__West_Ledge.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Carnelian__Vault => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Carnelian__Vault),
+            locations: Range {
+                start: LocationId::Giguna__Carnelian__Vault__Item.into_usize(),
+                end: LocationId::Giguna__Carnelian__Vault__Item.into_usize() + 1,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Carnelian__Vault__ex__Door_1.into_usize(),
+                end: ExitId::Giguna__Carnelian__Vault__ex__Door_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Carnelian__Door.into_usize(),
+                end: GigunaSpotId::Giguna__Carnelian__West_Ledge.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Carnelian__Rock => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Carnelian__Rock),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Carnelian__Door.into_usize(),
+                end: GigunaSpotId::Giguna__Carnelian__West_Ledge.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Carnelian__Lower_Susar => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Carnelian__Lower_Susar),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Carnelian__Lower_Susar__ex__Rock_1.into_usize(),
+                end: ExitId::Giguna__Carnelian__Lower_Susar__ex__West_Ledge_2.into_usize() + 1,
+            },
+            actions: Range {
+                start: ActionId::Giguna__Carnelian__Lower_Susar__Caught.into_usize(),
+                end: ActionId::Giguna__Carnelian__Lower_Susar__Hack.into_usize() + 1,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Carnelian__Door.into_usize(),
+                end: GigunaSpotId::Giguna__Carnelian__West_Ledge.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Carnelian__Upper_Path => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Carnelian__Upper_Path),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Carnelian__Door.into_usize(),
+                end: GigunaSpotId::Giguna__Carnelian__West_Ledge.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Carnelian__West_Ledge => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Carnelian__West_Ledge),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Carnelian__West_Ledge__ex__West_10_1.into_usize(),
+                end: ExitId::Giguna__Carnelian__West_Ledge__ex__West_10_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Carnelian__Door.into_usize(),
+                end: GigunaSpotId::Giguna__Carnelian__West_Ledge.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Carnelian__West_10 => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Carnelian__West_10),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Carnelian__West_10__ex__West_Caverns__East_10_1.into_usize(),
+                end: ExitId::Giguna__Carnelian__West_10__ex__West_Caverns__East_10_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Carnelian__Door.into_usize(),
+                end: GigunaSpotId::Giguna__Carnelian__West_Ledge.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__West_Caverns__East_10 => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__West_Caverns__East_10),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__West_Caverns__East_10__ex__Carnelian__West_10_1.into_usize(),
+                end: ExitId::Giguna__West_Caverns__East_10__ex__Column_2_Top_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__West_Caverns__Bush.into_usize(),
+                end: GigunaSpotId::Giguna__West_Caverns__West_13.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__West_Caverns__East_Platform => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__West_Caverns__East_Platform),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__West_Caverns__Bush.into_usize(),
+                end: GigunaSpotId::Giguna__West_Caverns__West_13.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__West_Caverns__Small_Staircase => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__West_Caverns__Small_Staircase),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__West_Caverns__Small_Staircase__ex__East_10_1.into_usize(),
+                end: ExitId::Giguna__West_Caverns__Small_Staircase__ex__East_10_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__West_Caverns__Bush.into_usize(),
+                end: GigunaSpotId::Giguna__West_Caverns__West_13.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__West_Caverns__Tunnel_Entrance => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__West_Caverns__Tunnel_Entrance),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__West_Caverns__Bush.into_usize(),
+                end: GigunaSpotId::Giguna__West_Caverns__West_13.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__West_Caverns__Small_Platform => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__West_Caverns__Small_Platform),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: ActionId::Giguna__West_Caverns__Small_Platform__Throw_Drone_Up.into_usize(),
+                end: ActionId::Giguna__West_Caverns__Small_Platform__Throw_Drone_Up.into_usize() + 1,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__West_Caverns__Bush.into_usize(),
+                end: GigunaSpotId::Giguna__West_Caverns__West_13.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__West_Caverns__Higher_Ledge => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__West_Caverns__Higher_Ledge),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__West_Caverns__Bush.into_usize(),
+                end: GigunaSpotId::Giguna__West_Caverns__West_13.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__West_Caverns__Floating_Brick => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__West_Caverns__Floating_Brick),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__West_Caverns__Bush.into_usize(),
+                end: GigunaSpotId::Giguna__West_Caverns__West_13.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__West_Caverns__Column_2_Top => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__West_Caverns__Column_2_Top),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__West_Caverns__Bush.into_usize(),
+                end: GigunaSpotId::Giguna__West_Caverns__West_13.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__West_Caverns__Top_Gap_Right => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__West_Caverns__Top_Gap_Right),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__West_Caverns__Bush.into_usize(),
+                end: GigunaSpotId::Giguna__West_Caverns__West_13.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__West_Caverns__Top_Gap_Left => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__West_Caverns__Top_Gap_Left),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__West_Caverns__Bush.into_usize(),
+                end: GigunaSpotId::Giguna__West_Caverns__West_13.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__West_Caverns__Column_1_Top_Right => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__West_Caverns__Column_1_Top_Right),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__West_Caverns__Bush.into_usize(),
+                end: GigunaSpotId::Giguna__West_Caverns__West_13.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__West_Caverns__Column_1_Top_Left => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__West_Caverns__Column_1_Top_Left),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__West_Caverns__Bush.into_usize(),
+                end: GigunaSpotId::Giguna__West_Caverns__West_13.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__West_Caverns__Cache => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__West_Caverns__Cache),
+            locations: Range {
+                start: LocationId::Giguna__West_Caverns__Cache__Item.into_usize(),
+                end: LocationId::Giguna__West_Caverns__Cache__Item.into_usize() + 1,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__West_Caverns__Bush.into_usize(),
+                end: GigunaSpotId::Giguna__West_Caverns__West_13.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__West_Caverns__Bush => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__West_Caverns__Bush),
+            locations: Range {
+                start: LocationId::Giguna__West_Caverns__Bush__Item.into_usize(),
+                end: LocationId::Giguna__West_Caverns__Bush__Item.into_usize() + 1,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__West_Caverns__Bush.into_usize(),
+                end: GigunaSpotId::Giguna__West_Caverns__West_13.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__West_Caverns__Tunnel_Bottom => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__West_Caverns__Tunnel_Bottom),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__West_Caverns__Tunnel_Bottom__ex__Tunnel_Entrance_1.into_usize(),
+                end: ExitId::Giguna__West_Caverns__Tunnel_Bottom__ex__Tunnel_Entrance_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__West_Caverns__Bush.into_usize(),
+                end: GigunaSpotId::Giguna__West_Caverns__West_13.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__West_Caverns__Tunnel_Fork => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__West_Caverns__Tunnel_Fork),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__West_Caverns__Tunnel_Fork__ex__Tunnel_Bottom_1.into_usize(),
+                end: ExitId::Giguna__West_Caverns__Tunnel_Fork__ex__Tunnel_Entrance_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__West_Caverns__Bush.into_usize(),
+                end: GigunaSpotId::Giguna__West_Caverns__West_13.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__West_Caverns__East_Susar => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__West_Caverns__East_Susar),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__West_Caverns__East_Susar__ex__East_12_1.into_usize(),
+                end: ExitId::Giguna__West_Caverns__East_Susar__ex__Tunnel_Fork_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: ActionId::Giguna__West_Caverns__East_Susar__Caught.into_usize(),
+                end: ActionId::Giguna__West_Caverns__East_Susar__Hack.into_usize() + 1,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__West_Caverns__Bush.into_usize(),
+                end: GigunaSpotId::Giguna__West_Caverns__West_13.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__West_Caverns__East_12 => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__West_Caverns__East_12),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__West_Caverns__East_12__ex__Wasteland__West_12_1.into_usize(),
+                end: ExitId::Giguna__West_Caverns__East_12__ex__Wasteland__West_12_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__West_Caverns__Bush.into_usize(),
+                end: GigunaSpotId::Giguna__West_Caverns__West_13.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__West_Caverns__East_13 => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__West_Caverns__East_13),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__West_Caverns__East_13__ex__Wasteland__West_13_1.into_usize(),
+                end: ExitId::Giguna__West_Caverns__East_13__ex__Wasteland__West_13_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__West_Caverns__Bush.into_usize(),
+                end: GigunaSpotId::Giguna__West_Caverns__West_13.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__West_Caverns__Northwest => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__West_Caverns__Northwest),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__West_Caverns__Bush.into_usize(),
+                end: GigunaSpotId::Giguna__West_Caverns__West_13.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__West_Caverns__West_13 => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__West_Caverns__West_13),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__West_Caverns__West_13__ex__Far_Corner__East_13_1.into_usize(),
+                end: ExitId::Giguna__West_Caverns__West_13__ex__Far_Corner__East_13_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__West_Caverns__Bush.into_usize(),
+                end: GigunaSpotId::Giguna__West_Caverns__West_13.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Wasteland__West_12 => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Wasteland__West_12),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Wasteland__West_12__ex__West_Caverns__East_12_1.into_usize(),
+                end: ExitId::Giguna__Wasteland__West_12__ex__West_Caverns__East_12_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Wasteland__Bluff_by_Door.into_usize(),
+                end: GigunaSpotId::Giguna__Wasteland__Westward_Hill.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Wasteland__Upper_Cliff => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Wasteland__Upper_Cliff),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Wasteland__Bluff_by_Door.into_usize(),
+                end: GigunaSpotId::Giguna__Wasteland__Westward_Hill.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Wasteland__West_13 => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Wasteland__West_13),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Wasteland__West_13__ex__West_Caverns__East_13_1.into_usize(),
+                end: ExitId::Giguna__Wasteland__West_13__ex__West_Caverns__East_13_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Wasteland__Bluff_by_Door.into_usize(),
+                end: GigunaSpotId::Giguna__Wasteland__Westward_Hill.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Wasteland__Middle_Path => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Wasteland__Middle_Path),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Wasteland__Bluff_by_Door.into_usize(),
+                end: GigunaSpotId::Giguna__Wasteland__Westward_Hill.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Wasteland__Middle_Cliff => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Wasteland__Middle_Cliff),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: ActionId::Giguna__Wasteland__Middle_Cliff__Throw_Drone.into_usize(),
+                end: ActionId::Giguna__Wasteland__Middle_Cliff__Throw_Drone.into_usize() + 1,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Wasteland__Bluff_by_Door.into_usize(),
+                end: GigunaSpotId::Giguna__Wasteland__Westward_Hill.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Wasteland__Lower_Path_Right => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Wasteland__Lower_Path_Right),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Wasteland__Lower_Path_Right__ex__Lower_Cliff_1.into_usize(),
+                end: ExitId::Giguna__Wasteland__Lower_Path_Right__ex__Lower_Cliff_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Wasteland__Bluff_by_Door.into_usize(),
+                end: GigunaSpotId::Giguna__Wasteland__Westward_Hill.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Wasteland__Lower_Path_Left => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Wasteland__Lower_Path_Left),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Wasteland__Bluff_by_Door.into_usize(),
+                end: GigunaSpotId::Giguna__Wasteland__Westward_Hill.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Wasteland__Lower_Cliff => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Wasteland__Lower_Cliff),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Wasteland__Lower_Cliff__ex__Middle_Cliff_1.into_usize(),
+                end: ExitId::Giguna__Wasteland__Lower_Cliff__ex__Middle_Cliff_2.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Wasteland__Bluff_by_Door.into_usize(),
+                end: GigunaSpotId::Giguna__Wasteland__Westward_Hill.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Wasteland__West_14 => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Wasteland__West_14),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Wasteland__West_14__ex__Giguna_Base__East_14_1.into_usize(),
+                end: ExitId::Giguna__Wasteland__West_14__ex__Giguna_Base__East_14_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Wasteland__Bluff_by_Door.into_usize(),
+                end: GigunaSpotId::Giguna__Wasteland__Westward_Hill.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Wasteland__East_12 => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Wasteland__East_12),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Wasteland__East_12__ex__Ebih__Ebih_West__West_12_1.into_usize(),
+                end: ExitId::Giguna__Wasteland__East_12__ex__Ebih__Ebih_West__West_12_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Wasteland__Bluff_by_Door.into_usize(),
+                end: GigunaSpotId::Giguna__Wasteland__Westward_Hill.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Wasteland__East_13 => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Wasteland__East_13),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Wasteland__East_13__ex__Ebih__Ebih_West__West_13_1.into_usize(),
+                end: ExitId::Giguna__Wasteland__East_13__ex__Ebih__Ebih_West__West_13_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Wasteland__Bluff_by_Door.into_usize(),
+                end: GigunaSpotId::Giguna__Wasteland__Westward_Hill.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Wasteland__East_14 => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Wasteland__East_14),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Wasteland__East_14__ex__East_Caverns__West_14_1.into_usize(),
+                end: ExitId::Giguna__Wasteland__East_14__ex__East_Caverns__West_14_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Wasteland__Bluff_by_Door.into_usize(),
+                end: GigunaSpotId::Giguna__Wasteland__Westward_Hill.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Wasteland__East_Ledge => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Wasteland__East_Ledge),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Wasteland__East_Ledge__ex__East_12_1.into_usize(),
+                end: ExitId::Giguna__Wasteland__East_Ledge__ex__East_12_2.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Wasteland__Bluff_by_Door.into_usize(),
+                end: GigunaSpotId::Giguna__Wasteland__Westward_Hill.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Wasteland__Door_Left => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Wasteland__Door_Left),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Wasteland__Door_Left__ex__Door_Right_1.into_usize(),
+                end: ExitId::Giguna__Wasteland__Door_Left__ex__Door_Right_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Wasteland__Bluff_by_Door.into_usize(),
+                end: GigunaSpotId::Giguna__Wasteland__Westward_Hill.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Wasteland__Door_Right => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Wasteland__Door_Right),
+            locations: Range {
+                start: LocationId::Giguna__Wasteland__Door_Right__Health.into_usize(),
+                end: LocationId::Giguna__Wasteland__Door_Right__Health.into_usize() + 1,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Wasteland__Door_Right__ex__Door_Left_1.into_usize(),
+                end: ExitId::Giguna__Wasteland__Door_Right__ex__Door_Left_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Wasteland__Bluff_by_Door.into_usize(),
+                end: GigunaSpotId::Giguna__Wasteland__Westward_Hill.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Wasteland__Bluff_by_Door => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Wasteland__Bluff_by_Door),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Wasteland__Bluff_by_Door__ex__Door_Left_1.into_usize(),
+                end: ExitId::Giguna__Wasteland__Bluff_by_Door__ex__Door_Left_2.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Wasteland__Bluff_by_Door.into_usize(),
+                end: GigunaSpotId::Giguna__Wasteland__Westward_Hill.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Wasteland__Tiny_Hill => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Wasteland__Tiny_Hill),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Wasteland__Bluff_by_Door.into_usize(),
+                end: GigunaSpotId::Giguna__Wasteland__Westward_Hill.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Wasteland__Steeper_Hill => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Wasteland__Steeper_Hill),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Wasteland__Bluff_by_Door.into_usize(),
+                end: GigunaSpotId::Giguna__Wasteland__Westward_Hill.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Wasteland__Center_Plains => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Wasteland__Center_Plains),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Wasteland__Center_Plains__ex__Steeper_Hill_1.into_usize(),
+                end: ExitId::Giguna__Wasteland__Center_Plains__ex__Steeper_Hill_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Wasteland__Bluff_by_Door.into_usize(),
+                end: GigunaSpotId::Giguna__Wasteland__Westward_Hill.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Wasteland__West_Plains => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Wasteland__West_Plains),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Wasteland__Bluff_by_Door.into_usize(),
+                end: GigunaSpotId::Giguna__Wasteland__Westward_Hill.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Wasteland__Passage_East => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Wasteland__Passage_East),
+            locations: Range {
+                start: LocationId::Giguna__Wasteland__Passage_East__Clear_Horizontal_Passage_Manually.into_usize(),
+                end: LocationId::Giguna__Wasteland__Passage_East__Mist_through_Horizontal_Passage.into_usize() + 1,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Wasteland__Passage_East__ex__Passage_Cache_1.into_usize(),
+                end: ExitId::Giguna__Wasteland__Passage_East__ex__Passage_Cache_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Wasteland__Bluff_by_Door.into_usize(),
+                end: GigunaSpotId::Giguna__Wasteland__Westward_Hill.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Wasteland__Passage_Cache => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Wasteland__Passage_Cache),
+            locations: Range {
+                start: LocationId::Giguna__Wasteland__Passage_Cache__Clear_Horizontal_Passage_Manually.into_usize(),
+                end: LocationId::Giguna__Wasteland__Passage_Cache__Mist_through_Horizontal_Passage.into_usize() + 1,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Wasteland__Passage_Cache__ex__Passage_East_1.into_usize(),
+                end: ExitId::Giguna__Wasteland__Passage_Cache__ex__Passage_East_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Wasteland__Bluff_by_Door.into_usize(),
+                end: GigunaSpotId::Giguna__Wasteland__Westward_Hill.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Wasteland__Westward_Hill => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Wasteland__Westward_Hill),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Wasteland__Bluff_by_Door.into_usize(),
+                end: GigunaSpotId::Giguna__Wasteland__Westward_Hill.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Wasteland__Upper_Cache => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Wasteland__Upper_Cache),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Wasteland__Bluff_by_Door.into_usize(),
+                end: GigunaSpotId::Giguna__Wasteland__Westward_Hill.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Wasteland__Cache_Ledge => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Wasteland__Cache_Ledge),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Wasteland__Bluff_by_Door.into_usize(),
+                end: GigunaSpotId::Giguna__Wasteland__Westward_Hill.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Wasteland__Left_Platform_West => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Wasteland__Left_Platform_West),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Wasteland__Bluff_by_Door.into_usize(),
+                end: GigunaSpotId::Giguna__Wasteland__Westward_Hill.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Wasteland__Left_Platform_East => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Wasteland__Left_Platform_East),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Wasteland__Bluff_by_Door.into_usize(),
+                end: GigunaSpotId::Giguna__Wasteland__Westward_Hill.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Wasteland__Center_Platform_West => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Wasteland__Center_Platform_West),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Wasteland__Bluff_by_Door.into_usize(),
+                end: GigunaSpotId::Giguna__Wasteland__Westward_Hill.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Wasteland__Center_Platform_East => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Wasteland__Center_Platform_East),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Wasteland__Bluff_by_Door.into_usize(),
+                end: GigunaSpotId::Giguna__Wasteland__Westward_Hill.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Wasteland__Right_Platform_West => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Wasteland__Right_Platform_West),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Wasteland__Bluff_by_Door.into_usize(),
+                end: GigunaSpotId::Giguna__Wasteland__Westward_Hill.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Wasteland__Right_Platform_East => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Wasteland__Right_Platform_East),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Wasteland__Bluff_by_Door.into_usize(),
+                end: GigunaSpotId::Giguna__Wasteland__Westward_Hill.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Wasteland__Lower_Platform_West => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Wasteland__Lower_Platform_West),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Wasteland__Bluff_by_Door.into_usize(),
+                end: GigunaSpotId::Giguna__Wasteland__Westward_Hill.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Wasteland__Lower_Platform_East => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Wasteland__Lower_Platform_East),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Wasteland__Bluff_by_Door.into_usize(),
+                end: GigunaSpotId::Giguna__Wasteland__Westward_Hill.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Wasteland__Ladder_Ledge => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Wasteland__Ladder_Ledge),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Wasteland__Bluff_by_Door.into_usize(),
+                end: GigunaSpotId::Giguna__Wasteland__Westward_Hill.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Wasteland__Switch_Ledge => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Wasteland__Switch_Ledge),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Wasteland__Bluff_by_Door.into_usize(),
+                end: GigunaSpotId::Giguna__Wasteland__Westward_Hill.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Wasteland__Switch_Approach => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Wasteland__Switch_Approach),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Wasteland__Bluff_by_Door.into_usize(),
+                end: GigunaSpotId::Giguna__Wasteland__Westward_Hill.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Wasteland__Switch => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Wasteland__Switch),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Wasteland__Bluff_by_Door.into_usize(),
+                end: GigunaSpotId::Giguna__Wasteland__Westward_Hill.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Giguna_Base__East_14 => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Giguna_Base__East_14),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Giguna_Base__East_14__ex__Wasteland__West_14_1.into_usize(),
+                end: ExitId::Giguna__Giguna_Base__East_14__ex__Wasteland__West_14_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Giguna_Base__Below_Gate.into_usize(),
+                end: GigunaSpotId::Giguna__Giguna_Base__West_Grate.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Giguna_Base__Stone_Knob => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Giguna_Base__Stone_Knob),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Giguna_Base__Stone_Knob__ex__Upper_Cliff_1.into_usize(),
+                end: ExitId::Giguna__Giguna_Base__Stone_Knob__ex__Upper_Cliff_2.into_usize() + 1,
+            },
+            actions: Range {
+                start: ActionId::Giguna__Giguna_Base__Stone_Knob__Throw_Drone.into_usize(),
+                end: ActionId::Giguna__Giguna_Base__Stone_Knob__Throw_Drone.into_usize() + 1,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Giguna_Base__Below_Gate.into_usize(),
+                end: GigunaSpotId::Giguna__Giguna_Base__West_Grate.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Giguna_Base__Upper_Cliff => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Giguna_Base__Upper_Cliff),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Giguna_Base__Below_Gate.into_usize(),
+                end: GigunaSpotId::Giguna__Giguna_Base__West_Grate.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Giguna_Base__Right_Pillar => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Giguna_Base__Right_Pillar),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Giguna_Base__Right_Pillar__ex__Left_Pillar_1.into_usize(),
+                end: ExitId::Giguna__Giguna_Base__Right_Pillar__ex__Left_Pillar_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Giguna_Base__Below_Gate.into_usize(),
+                end: GigunaSpotId::Giguna__Giguna_Base__West_Grate.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Giguna_Base__Left_Pillar => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Giguna_Base__Left_Pillar),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Giguna_Base__Left_Pillar__ex__Right_Pillar_1.into_usize(),
+                end: ExitId::Giguna__Giguna_Base__Left_Pillar__ex__Right_Pillar_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Giguna_Base__Below_Gate.into_usize(),
+                end: GigunaSpotId::Giguna__Giguna_Base__West_Grate.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Giguna_Base__Ruin => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Giguna_Base__Ruin),
+            locations: Range {
+                start: LocationId::Giguna__Giguna_Base__Ruin__Item.into_usize(),
+                end: LocationId::Giguna__Giguna_Base__Ruin__Item.into_usize() + 1,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Giguna_Base__Ruin__ex__Left_Pillar_1.into_usize(),
+                end: ExitId::Giguna__Giguna_Base__Ruin__ex__Right_Pillar_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Giguna_Base__Below_Gate.into_usize(),
+                end: GigunaSpotId::Giguna__Giguna_Base__West_Grate.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Giguna_Base__Middle_Platform => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Giguna_Base__Middle_Platform),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Giguna_Base__Middle_Platform__ex__Below_Gate_1.into_usize(),
+                end: ExitId::Giguna__Giguna_Base__Middle_Platform__ex__Stone_Knob_2.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Giguna_Base__Below_Gate.into_usize(),
+                end: GigunaSpotId::Giguna__Giguna_Base__West_Grate.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Giguna_Base__Kari => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Giguna_Base__Kari),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Giguna_Base__Kari__ex__Below_Gate_1.into_usize(),
+                end: ExitId::Giguna__Giguna_Base__Kari__ex__Below_Gate_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Giguna_Base__Below_Gate.into_usize(),
+                end: GigunaSpotId::Giguna__Giguna_Base__West_Grate.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Giguna_Base__Building_Entry => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Giguna_Base__Building_Entry),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Giguna_Base__Building_Entry__ex__Building_Interior__Entry_1.into_usize(),
+                end: ExitId::Giguna__Giguna_Base__Building_Entry__ex__Building_Interior__Entry_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Giguna_Base__Below_Gate.into_usize(),
+                end: GigunaSpotId::Giguna__Giguna_Base__West_Grate.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Giguna_Base__Staircase_Top => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Giguna_Base__Staircase_Top),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Giguna_Base__Staircase_Top__ex__Left_Pillar_1.into_usize(),
+                end: ExitId::Giguna__Giguna_Base__Staircase_Top__ex__Left_Pillar_2.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Giguna_Base__Below_Gate.into_usize(),
+                end: GigunaSpotId::Giguna__Giguna_Base__West_Grate.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Giguna_Base__West_Grate => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Giguna_Base__West_Grate),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Giguna_Base__West_Grate__ex__West_15_1.into_usize(),
+                end: ExitId::Giguna__Giguna_Base__West_Grate__ex__West_15_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Giguna_Base__Below_Gate.into_usize(),
+                end: GigunaSpotId::Giguna__Giguna_Base__West_Grate.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Giguna_Base__West_15 => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Giguna_Base__West_15),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Giguna_Base__West_15__ex__Helipad__East_15_1.into_usize(),
+                end: ExitId::Giguna__Giguna_Base__West_15__ex__West_Grate_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Giguna_Base__Below_Gate.into_usize(),
+                end: GigunaSpotId::Giguna__Giguna_Base__West_Grate.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Giguna_Base__Staircase_Bottom => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Giguna_Base__Staircase_Bottom),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Giguna_Base__Below_Gate.into_usize(),
+                end: GigunaSpotId::Giguna__Giguna_Base__West_Grate.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Giguna_Base__Table => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Giguna_Base__Table),
+            locations: Range {
+                start: LocationId::Giguna__Giguna_Base__Table__News.into_usize(),
+                end: LocationId::Giguna__Giguna_Base__Table__News.into_usize() + 1,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Giguna_Base__Below_Gate.into_usize(),
+                end: GigunaSpotId::Giguna__Giguna_Base__West_Grate.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Giguna_Base__Save_Point => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Giguna_Base__Save_Point),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: ActionId::Giguna__Giguna_Base__Save_Point__Save.into_usize(),
+                end: ActionId::Giguna__Giguna_Base__Save_Point__Save.into_usize() + 1,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Giguna_Base__Below_Gate.into_usize(),
+                end: GigunaSpotId::Giguna__Giguna_Base__West_Grate.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Giguna_Base__West_16 => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Giguna_Base__West_16),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Giguna_Base__West_16__ex__Helipad__East_16_1.into_usize(),
+                end: ExitId::Giguna__Giguna_Base__West_16__ex__Helipad__East_16_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Giguna_Base__Below_Gate.into_usize(),
+                end: GigunaSpotId::Giguna__Giguna_Base__West_Grate.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Giguna_Base__East_17 => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Giguna_Base__East_17),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Giguna_Base__East_17__ex__Hard_Rock__West_17_1.into_usize(),
+                end: ExitId::Giguna__Giguna_Base__East_17__ex__Hard_Rock__West_17_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Giguna_Base__Below_Gate.into_usize(),
+                end: GigunaSpotId::Giguna__Giguna_Base__West_Grate.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Giguna_Base__Lower_Fork => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Giguna_Base__Lower_Fork),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Giguna_Base__Lower_Fork__ex__Below_Gate_1.into_usize(),
+                end: ExitId::Giguna__Giguna_Base__Lower_Fork__ex__Below_Gate_2.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Giguna_Base__Below_Gate.into_usize(),
+                end: GigunaSpotId::Giguna__Giguna_Base__West_Grate.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Giguna_Base__Below_Gate => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Giguna_Base__Below_Gate),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Giguna_Base__Below_Gate__ex__Kari_1.into_usize(),
+                end: ExitId::Giguna__Giguna_Base__Below_Gate__ex__Middle_Platform_2.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Giguna_Base__Below_Gate.into_usize(),
+                end: GigunaSpotId::Giguna__Giguna_Base__West_Grate.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Giguna_Base__Switch_Distance_1 => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Giguna_Base__Switch_Distance_1),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: ActionId::Giguna__Giguna_Base__Switch_Distance_1__Open_Door.into_usize(),
+                end: ActionId::Giguna__Giguna_Base__Switch_Distance_1__Open_Door.into_usize() + 1,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Giguna_Base__Below_Gate.into_usize(),
+                end: GigunaSpotId::Giguna__Giguna_Base__West_Grate.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Giguna_Base__Switch_Distance_2 => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Giguna_Base__Switch_Distance_2),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: ActionId::Giguna__Giguna_Base__Switch_Distance_2__Open_Door.into_usize(),
+                end: ActionId::Giguna__Giguna_Base__Switch_Distance_2__Open_Door.into_usize() + 1,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Giguna_Base__Below_Gate.into_usize(),
+                end: GigunaSpotId::Giguna__Giguna_Base__West_Grate.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Giguna_Base__Switch_Distance_3 => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Giguna_Base__Switch_Distance_3),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: ActionId::Giguna__Giguna_Base__Switch_Distance_3__Open_Door.into_usize(),
+                end: ActionId::Giguna__Giguna_Base__Switch_Distance_3__Open_Door.into_usize() + 1,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Giguna_Base__Below_Gate.into_usize(),
+                end: GigunaSpotId::Giguna__Giguna_Base__West_Grate.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Giguna_Base__Switch_Distance_4 => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Giguna_Base__Switch_Distance_4),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: ActionId::Giguna__Giguna_Base__Switch_Distance_4__Open_Door.into_usize(),
+                end: ActionId::Giguna__Giguna_Base__Switch_Distance_4__Open_Door.into_usize() + 1,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Giguna_Base__Below_Gate.into_usize(),
+                end: GigunaSpotId::Giguna__Giguna_Base__West_Grate.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Building_Interior__Entry => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Building_Interior__Entry),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Building_Interior__Entry__ex__Bookshelf_1.into_usize(),
+                end: ExitId::Giguna__Building_Interior__Entry__ex__Giguna_Base__Building_Entry_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Building_Interior__Bookshelf.into_usize(),
+                end: GigunaSpotId::Giguna__Building_Interior__Entry.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Building_Interior__Bookshelf => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Building_Interior__Bookshelf),
+            locations: Range {
+                start: LocationId::Giguna__Building_Interior__Bookshelf__Note.into_usize(),
+                end: LocationId::Giguna__Building_Interior__Bookshelf__Note.into_usize() + 1,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Building_Interior__Bookshelf.into_usize(),
+                end: GigunaSpotId::Giguna__Building_Interior__Entry.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Ruins_East__East_9 => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Ruins_East__East_9),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Ruins_East__East_9__ex__Giguna_Northeast__West_9_1.into_usize(),
+                end: ExitId::Giguna__Ruins_East__East_9__ex__Giguna_Northeast__West_9_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Ruins_East__Bottom_Rock.into_usize(),
+                end: GigunaSpotId::Giguna__Ruins_East__West_9.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Ruins_East__Bottom_Rock => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Ruins_East__Bottom_Rock),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Ruins_East__Bottom_Rock__ex__Cliff_1.into_usize(),
+                end: ExitId::Giguna__Ruins_East__Bottom_Rock__ex__Cliff_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Ruins_East__Bottom_Rock.into_usize(),
+                end: GigunaSpotId::Giguna__Ruins_East__West_9.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Ruins_East__West_9 => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Ruins_East__West_9),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Ruins_East__West_9__ex__Ruins_Center__East_9_1.into_usize(),
+                end: ExitId::Giguna__Ruins_East__West_9__ex__Ruins_Center__East_9_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Ruins_East__Bottom_Rock.into_usize(),
+                end: GigunaSpotId::Giguna__Ruins_East__West_9.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Ruins_East__Cliff => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Ruins_East__Cliff),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Ruins_East__Cliff__ex__Ledge_1.into_usize(),
+                end: ExitId::Giguna__Ruins_East__Cliff__ex__Ledge_2.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Ruins_East__Bottom_Rock.into_usize(),
+                end: GigunaSpotId::Giguna__Ruins_East__West_9.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Ruins_East__Ledge => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Ruins_East__Ledge),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Ruins_East__Ledge__ex__Pillar_1.into_usize(),
+                end: ExitId::Giguna__Ruins_East__Ledge__ex__Small_Passage_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Ruins_East__Bottom_Rock.into_usize(),
+                end: GigunaSpotId::Giguna__Ruins_East__West_9.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Ruins_East__Small_Passage => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Ruins_East__Small_Passage),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Ruins_East__Small_Passage__ex__Ledge_1.into_usize(),
+                end: ExitId::Giguna__Ruins_East__Small_Passage__ex__Ledge_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Ruins_East__Bottom_Rock.into_usize(),
+                end: GigunaSpotId::Giguna__Ruins_East__West_9.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Ruins_East__West_8 => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Ruins_East__West_8),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Ruins_East__West_8__ex__Ruins_Center__East_8_1.into_usize(),
+                end: ExitId::Giguna__Ruins_East__West_8__ex__Ruins_Center__East_8_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Ruins_East__Bottom_Rock.into_usize(),
+                end: GigunaSpotId::Giguna__Ruins_East__West_9.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Ruins_East__Pillar => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Ruins_East__Pillar),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Ruins_East__Bottom_Rock.into_usize(),
+                end: GigunaSpotId::Giguna__Ruins_East__West_9.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Ruins_East__West_7 => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Ruins_East__West_7),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Ruins_East__West_7__ex__Pillar_1.into_usize(),
+                end: ExitId::Giguna__Ruins_East__West_7__ex__Ruins_Top__East_7_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Ruins_East__Bottom_Rock.into_usize(),
+                end: GigunaSpotId::Giguna__Ruins_East__West_9.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Ruins_East__Way_Up_High => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Ruins_East__Way_Up_High),
+            locations: Range {
+                start: LocationId::Giguna__Ruins_East__Way_Up_High__Item.into_usize(),
+                end: LocationId::Giguna__Ruins_East__Way_Up_High__Item.into_usize() + 1,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Ruins_East__Bottom_Rock.into_usize(),
+                end: GigunaSpotId::Giguna__Ruins_East__West_9.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Ruins_Center__East_8 => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Ruins_Center__East_8),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Ruins_Center__East_8__ex__Ruins_East__West_8_1.into_usize(),
+                end: ExitId::Giguna__Ruins_Center__East_8__ex__Ruins_East__West_8_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Ruins_Center__Center_Top.into_usize(),
+                end: GigunaSpotId::Giguna__Ruins_Center__West_Platform_Right.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Ruins_Center__Tablet => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Ruins_Center__Tablet),
+            locations: Range {
+                start: LocationId::Giguna__Ruins_Center__Tablet__Item.into_usize(),
+                end: LocationId::Giguna__Ruins_Center__Tablet__Item.into_usize() + 1,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Ruins_Center__Center_Top.into_usize(),
+                end: GigunaSpotId::Giguna__Ruins_Center__West_Platform_Right.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Ruins_Center__East_9 => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Ruins_Center__East_9),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Ruins_Center__East_9__ex__Ruins_East__West_9_1.into_usize(),
+                end: ExitId::Giguna__Ruins_Center__East_9__ex__Ruins_East__West_9_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Ruins_Center__Center_Top.into_usize(),
+                end: GigunaSpotId::Giguna__Ruins_Center__West_Platform_Right.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Ruins_Center__Wall_Bottom => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Ruins_Center__Wall_Bottom),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Ruins_Center__Wall_Bottom__ex__Wall_Top_1.into_usize(),
+                end: ExitId::Giguna__Ruins_Center__Wall_Bottom__ex__Wall_Top_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Ruins_Center__Center_Top.into_usize(),
+                end: GigunaSpotId::Giguna__Ruins_Center__West_Platform_Right.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Ruins_Center__Wall_Top => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Ruins_Center__Wall_Top),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Ruins_Center__Wall_Top__ex__Center_Top_1.into_usize(),
+                end: ExitId::Giguna__Ruins_Center__Wall_Top__ex__Center_Top_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Ruins_Center__Center_Top.into_usize(),
+                end: GigunaSpotId::Giguna__Ruins_Center__West_Platform_Right.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Ruins_Center__Center_Top => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Ruins_Center__Center_Top),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Ruins_Center__Center_Top.into_usize(),
+                end: GigunaSpotId::Giguna__Ruins_Center__West_Platform_Right.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Ruins_Center__West_Platform_Right => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Ruins_Center__West_Platform_Right),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Ruins_Center__Center_Top.into_usize(),
+                end: GigunaSpotId::Giguna__Ruins_Center__West_Platform_Right.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Ruins_Center__West_Platform_Left => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Ruins_Center__West_Platform_Left),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Ruins_Center__Center_Top.into_usize(),
+                end: GigunaSpotId::Giguna__Ruins_Center__West_Platform_Right.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Ruins_Center__West_9 => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Ruins_Center__West_9),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Ruins_Center__West_9__ex__Ruins_West__East_9_1.into_usize(),
+                end: ExitId::Giguna__Ruins_Center__West_9__ex__Ruins_West__East_9_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Ruins_Center__Center_Top.into_usize(),
+                end: GigunaSpotId::Giguna__Ruins_Center__West_Platform_Right.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Ruins_West__East_9 => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Ruins_West__East_9),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Ruins_West__East_9__ex__Ruins_Center__West_9_1.into_usize(),
+                end: ExitId::Giguna__Ruins_West__East_9__ex__Ruins_Center__West_9_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Ruins_West__East_7.into_usize(),
+                end: GigunaSpotId::Giguna__Ruins_West__West_7.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Ruins_West__Save_Point => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Ruins_West__Save_Point),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: ActionId::Giguna__Ruins_West__Save_Point__Save.into_usize(),
+                end: ActionId::Giguna__Ruins_West__Save_Point__Save.into_usize() + 1,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Ruins_West__East_7.into_usize(),
+                end: GigunaSpotId::Giguna__Ruins_West__West_7.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Ruins_West__Platform => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Ruins_West__Platform),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Ruins_West__East_7.into_usize(),
+                end: GigunaSpotId::Giguna__Ruins_West__West_7.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Ruins_West__Nook => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Ruins_West__Nook),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Ruins_West__Nook__ex__Lower_Ledge_1.into_usize(),
+                end: ExitId::Giguna__Ruins_West__Nook__ex__Lower_Ledge_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Ruins_West__East_7.into_usize(),
+                end: GigunaSpotId::Giguna__Ruins_West__West_7.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Ruins_West__Lower_Ledge => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Ruins_West__Lower_Ledge),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Ruins_West__Lower_Ledge__ex__Upper_Ledge_1.into_usize(),
+                end: ExitId::Giguna__Ruins_West__Lower_Ledge__ex__Upper_Ledge_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: ActionId::Giguna__Ruins_West__Lower_Ledge__Destroy_Kishib.into_usize(),
+                end: ActionId::Giguna__Ruins_West__Lower_Ledge__Hack_Kishib.into_usize() + 1,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Ruins_West__East_7.into_usize(),
+                end: GigunaSpotId::Giguna__Ruins_West__West_7.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Ruins_West__Upper_Ledge => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Ruins_West__Upper_Ledge),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Ruins_West__East_7.into_usize(),
+                end: GigunaSpotId::Giguna__Ruins_West__West_7.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Ruins_West__East_7 => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Ruins_West__East_7),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Ruins_West__East_7__ex__Ruins_Top__West_7_1.into_usize(),
+                end: ExitId::Giguna__Ruins_West__East_7__ex__Upper_Ledge_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Ruins_West__East_7.into_usize(),
+                end: GigunaSpotId::Giguna__Ruins_West__West_7.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Ruins_West__Rooftop_East_Edge => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Ruins_West__Rooftop_East_Edge),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Ruins_West__East_7.into_usize(),
+                end: GigunaSpotId::Giguna__Ruins_West__West_7.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Ruins_West__Rooftop_West_Edge => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Ruins_West__Rooftop_West_Edge),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Ruins_West__East_7.into_usize(),
+                end: GigunaSpotId::Giguna__Ruins_West__West_7.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Ruins_West__West_7 => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Ruins_West__West_7),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Ruins_West__West_7__ex__West_Tower__East_7_1.into_usize(),
+                end: ExitId::Giguna__Ruins_West__West_7__ex__West_Tower__East_7_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Ruins_West__East_7.into_usize(),
+                end: GigunaSpotId::Giguna__Ruins_West__West_7.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Ruins_Top__West_7 => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Ruins_Top__West_7),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Ruins_Top__West_7__ex__Ruins_West__East_7_1.into_usize(),
+                end: ExitId::Giguna__Ruins_Top__West_7__ex__West_Pillar_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Ruins_Top__East_7.into_usize(),
+                end: GigunaSpotId::Giguna__Ruins_Top__West_Pillar.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Ruins_Top__West_Door => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Ruins_Top__West_Door),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Ruins_Top__West_Door__ex__Entryway_1.into_usize(),
+                end: ExitId::Giguna__Ruins_Top__West_Door__ex__West_7_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Ruins_Top__East_7.into_usize(),
+                end: GigunaSpotId::Giguna__Ruins_Top__West_Pillar.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Ruins_Top__West_Pillar => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Ruins_Top__West_Pillar),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Ruins_Top__East_7.into_usize(),
+                end: GigunaSpotId::Giguna__Ruins_Top__West_Pillar.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Ruins_Top__Entryway => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Ruins_Top__Entryway),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Ruins_Top__Entryway__ex__West_Door_1.into_usize(),
+                end: ExitId::Giguna__Ruins_Top__Entryway__ex__West_Door_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Ruins_Top__East_7.into_usize(),
+                end: GigunaSpotId::Giguna__Ruins_Top__West_Pillar.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Ruins_Top__Portal_Left => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Ruins_Top__Portal_Left),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Ruins_Top__Portal_Left__ex__Small_Ledge_1.into_usize(),
+                end: ExitId::Giguna__Ruins_Top__Portal_Left__ex__Small_Ledge_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Ruins_Top__East_7.into_usize(),
+                end: GigunaSpotId::Giguna__Ruins_Top__West_Pillar.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Ruins_Top__Small_Ledge => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Ruins_Top__Small_Ledge),
+            locations: Range {
+                start: LocationId::Giguna__Ruins_Top__Small_Ledge__Shockwave_Flask.into_usize(),
+                end: LocationId::Giguna__Ruins_Top__Small_Ledge__Shockwave_Flask.into_usize() + 1,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Ruins_Top__Small_Ledge__ex__Interior_Ledge_1.into_usize(),
+                end: ExitId::Giguna__Ruins_Top__Small_Ledge__ex__Interior_Ledge_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Ruins_Top__East_7.into_usize(),
+                end: GigunaSpotId::Giguna__Ruins_Top__West_Pillar.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Ruins_Top__Portal => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Ruins_Top__Portal),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Ruins_Top__Portal__ex__East_Door_1.into_usize(),
+                end: ExitId::Giguna__Ruins_Top__Portal__ex__Interior_Ledge_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: ActionId::Giguna__Ruins_Top__Portal__Enter_Portal.into_usize(),
+                end: ActionId::Giguna__Ruins_Top__Portal__Enter_Portal.into_usize() + 1,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Ruins_Top__East_7.into_usize(),
+                end: GigunaSpotId::Giguna__Ruins_Top__West_Pillar.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Ruins_Top__Interior_Ledge => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Ruins_Top__Interior_Ledge),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Ruins_Top__Interior_Ledge__ex__Portal_1.into_usize(),
+                end: ExitId::Giguna__Ruins_Top__Interior_Ledge__ex__Upper_Tunnel_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Ruins_Top__East_7.into_usize(),
+                end: GigunaSpotId::Giguna__Ruins_Top__West_Pillar.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Ruins_Top__Upper_Tunnel => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Ruins_Top__Upper_Tunnel),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Ruins_Top__East_7.into_usize(),
+                end: GigunaSpotId::Giguna__Ruins_Top__West_Pillar.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Ruins_Top__Flask => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Ruins_Top__Flask),
+            locations: Range {
+                start: LocationId::Giguna__Ruins_Top__Flask__Flask.into_usize(),
+                end: LocationId::Giguna__Ruins_Top__Flask__Flask.into_usize() + 1,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Ruins_Top__East_7.into_usize(),
+                end: GigunaSpotId::Giguna__Ruins_Top__West_Pillar.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Ruins_Top__East_Door => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Ruins_Top__East_Door),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Ruins_Top__East_Door__ex__East_7_1.into_usize(),
+                end: ExitId::Giguna__Ruins_Top__East_Door__ex__Portal_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Ruins_Top__East_7.into_usize(),
+                end: GigunaSpotId::Giguna__Ruins_Top__West_Pillar.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Ruins_Top__East_7 => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Ruins_Top__East_7),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Ruins_Top__East_7__ex__East_Door_1.into_usize(),
+                end: ExitId::Giguna__Ruins_Top__East_7__ex__Ruins_East__West_7_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Ruins_Top__East_7.into_usize(),
+                end: GigunaSpotId::Giguna__Ruins_Top__West_Pillar.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Ruins_Top__Save_Point => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Ruins_Top__Save_Point),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: ActionId::Giguna__Ruins_Top__Save_Point__Save.into_usize(),
+                end: ActionId::Giguna__Ruins_Top__Save_Point__Save.into_usize() + 1,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Ruins_Top__East_7.into_usize(),
+                end: GigunaSpotId::Giguna__Ruins_Top__West_Pillar.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Ruins_Top__Switch => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Ruins_Top__Switch),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Ruins_Top__Switch__ex__Rooftop_West_1.into_usize(),
+                end: ExitId::Giguna__Ruins_Top__Switch__ex__Turret_Balcony_East_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: ActionId::Giguna__Ruins_Top__Switch__Open_Doors.into_usize(),
+                end: ActionId::Giguna__Ruins_Top__Switch__Open_Doors.into_usize() + 1,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Ruins_Top__East_7.into_usize(),
+                end: GigunaSpotId::Giguna__Ruins_Top__West_Pillar.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Ruins_Top__Rooftop_West => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Ruins_Top__Rooftop_West),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Ruins_Top__Rooftop_West__ex__Turret_Balcony_East_1.into_usize(),
+                end: ExitId::Giguna__Ruins_Top__Rooftop_West__ex__Turret_Balcony_East_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Ruins_Top__East_7.into_usize(),
+                end: GigunaSpotId::Giguna__Ruins_Top__West_Pillar.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Ruins_Top__Rooftop_East => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Ruins_Top__Rooftop_East),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Ruins_Top__East_7.into_usize(),
+                end: GigunaSpotId::Giguna__Ruins_Top__West_Pillar.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Ruins_Top__Rooftop_Gutter => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Ruins_Top__Rooftop_Gutter),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Ruins_Top__East_7.into_usize(),
+                end: GigunaSpotId::Giguna__Ruins_Top__West_Pillar.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Ruins_Top__Turret_Balcony_East => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Ruins_Top__Turret_Balcony_East),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Ruins_Top__Turret_Balcony_East__ex__Rooftop_West_1.into_usize(),
+                end: ExitId::Giguna__Ruins_Top__Turret_Balcony_East__ex__Rooftop_West_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Ruins_Top__East_7.into_usize(),
+                end: GigunaSpotId::Giguna__Ruins_Top__West_Pillar.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Ruins_Top__Turret_Balcony_West => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Ruins_Top__Turret_Balcony_West),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: ActionId::Giguna__Ruins_Top__Turret_Balcony_West__Throw_Drone_onto_Tower.into_usize(),
+                end: ActionId::Giguna__Ruins_Top__Turret_Balcony_West__Throw_Drone_onto_Tower.into_usize() + 1,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Ruins_Top__East_7.into_usize(),
+                end: GigunaSpotId::Giguna__Ruins_Top__West_Pillar.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__West_Tower__East_7 => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__West_Tower__East_7),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__West_Tower__East_7.into_usize(),
+                end: GigunaSpotId::Giguna__West_Tower__Top.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__West_Tower__Top => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__West_Tower__Top),
+            locations: Range {
+                start: LocationId::Giguna__West_Tower__Top__Tablet.into_usize(),
+                end: LocationId::Giguna__West_Tower__Top__Tablet.into_usize() + 1,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__West_Tower__East_7.into_usize(),
+                end: GigunaSpotId::Giguna__West_Tower__Top.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__West_Tower__Southwest => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__West_Tower__Southwest),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__West_Tower__Southwest__ex__West_Caverns__Northwest_1.into_usize(),
+                end: ExitId::Giguna__West_Tower__Southwest__ex__West_Caverns__Northwest_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__West_Tower__East_7.into_usize(),
+                end: GigunaSpotId::Giguna__West_Tower__Top.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Far_Corner__East_13 => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Far_Corner__East_13),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Far_Corner__East_13.into_usize(),
+                end: GigunaSpotId::Giguna__Far_Corner__South.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Far_Corner__Grass => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Far_Corner__Grass),
+            locations: Range {
+                start: LocationId::Giguna__Far_Corner__Grass__Obscured_Item.into_usize(),
+                end: LocationId::Giguna__Far_Corner__Grass__Obscured_Item.into_usize() + 1,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Far_Corner__East_13.into_usize(),
+                end: GigunaSpotId::Giguna__Far_Corner__South.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Far_Corner__South => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Far_Corner__South),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Far_Corner__South__ex__Helipad__North_1.into_usize(),
+                end: ExitId::Giguna__Far_Corner__South__ex__Helipad__North_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Far_Corner__East_13.into_usize(),
+                end: GigunaSpotId::Giguna__Far_Corner__South.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Helipad__East_15 => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Helipad__East_15),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Helipad__East_15__ex__Giguna_Base__West_15_1.into_usize(),
+                end: ExitId::Giguna__Helipad__East_15__ex__Giguna_Base__West_15_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Helipad__East_15.into_usize(),
+                end: GigunaSpotId::Giguna__Helipad__Wall_Top.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Helipad__North => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Helipad__North),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Helipad__East_15.into_usize(),
+                end: GigunaSpotId::Giguna__Helipad__Wall_Top.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Helipad__Helicopter => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Helipad__Helicopter),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Helipad__East_15.into_usize(),
+                end: GigunaSpotId::Giguna__Helipad__Wall_Top.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Helipad__East_16 => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Helipad__East_16),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Helipad__East_16__ex__Giguna_Base__West_16_1.into_usize(),
+                end: ExitId::Giguna__Helipad__East_16__ex__Giguna_Base__West_16_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Helipad__East_15.into_usize(),
+                end: GigunaSpotId::Giguna__Helipad__Wall_Top.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Helipad__Irikar_Drop => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Helipad__Irikar_Drop),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Helipad__East_15.into_usize(),
+                end: GigunaSpotId::Giguna__Helipad__Wall_Top.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Helipad__Wall_Top => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Helipad__Wall_Top),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Helipad__Wall_Top__ex__Railing_1.into_usize(),
+                end: ExitId::Giguna__Helipad__Wall_Top__ex__Railing_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Helipad__East_15.into_usize(),
+                end: GigunaSpotId::Giguna__Helipad__Wall_Top.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Helipad__Railing => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Helipad__Railing),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Helipad__Railing__ex__Wall_Top_1.into_usize(),
+                end: ExitId::Giguna__Helipad__Railing__ex__Wall_Top_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Helipad__East_15.into_usize(),
+                end: GigunaSpotId::Giguna__Helipad__Wall_Top.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Helipad__Wall_Bottom => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Helipad__Wall_Bottom),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Helipad__East_15.into_usize(),
+                end: GigunaSpotId::Giguna__Helipad__Wall_Top.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Helipad__So_Close => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Helipad__So_Close),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Helipad__So_Close__ex__Tablet_Ledge_1.into_usize(),
+                end: ExitId::Giguna__Helipad__So_Close__ex__Tablet_Ledge_2.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Helipad__East_15.into_usize(),
+                end: GigunaSpotId::Giguna__Helipad__Wall_Top.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Helipad__Tablet_Ledge => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Helipad__Tablet_Ledge),
+            locations: Range {
+                start: LocationId::Giguna__Helipad__Tablet_Ledge__Tablet.into_usize(),
+                end: LocationId::Giguna__Helipad__Tablet_Ledge__Tablet.into_usize() + 1,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Helipad__East_15.into_usize(),
+                end: GigunaSpotId::Giguna__Helipad__Wall_Top.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Helipad__Staircase_Top => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Helipad__Staircase_Top),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Helipad__East_15.into_usize(),
+                end: GigunaSpotId::Giguna__Helipad__Wall_Top.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Helipad__East_18 => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Helipad__East_18),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Helipad__East_18__ex__Lamassu__West_18_1.into_usize(),
+                end: ExitId::Giguna__Helipad__East_18__ex__Lamassu__West_18_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Helipad__East_15.into_usize(),
+                end: GigunaSpotId::Giguna__Helipad__Wall_Top.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Helipad__South_Left => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Helipad__South_Left),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Helipad__East_15.into_usize(),
+                end: GigunaSpotId::Giguna__Helipad__Wall_Top.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Helipad__South_Middle => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Helipad__South_Middle),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Helipad__East_15.into_usize(),
+                end: GigunaSpotId::Giguna__Helipad__Wall_Top.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Helipad__South_Right => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Helipad__South_Right),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Helipad__East_15.into_usize(),
+                end: GigunaSpotId::Giguna__Helipad__Wall_Top.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Helipad__Lowest_Ledge => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Helipad__Lowest_Ledge),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Helipad__East_15.into_usize(),
+                end: GigunaSpotId::Giguna__Helipad__Wall_Top.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Clouds__North_Left => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Clouds__North_Left),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Clouds__Cache.into_usize(),
+                end: GigunaSpotId::Giguna__Clouds__Straight_Down.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Clouds__North_Middle => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Clouds__North_Middle),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Clouds__Cache.into_usize(),
+                end: GigunaSpotId::Giguna__Clouds__Straight_Down.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Clouds__North_Right => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Clouds__North_Right),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Clouds__Cache.into_usize(),
+                end: GigunaSpotId::Giguna__Clouds__Straight_Down.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Clouds__North_Under_Ledge => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Clouds__North_Under_Ledge),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Clouds__Cache.into_usize(),
+                end: GigunaSpotId::Giguna__Clouds__Straight_Down.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Clouds__Platform_Start => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Clouds__Platform_Start),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: ActionId::Giguna__Clouds__Platform_Start__Hack_and_Ride_to_Portal.into_usize(),
+                end: ActionId::Giguna__Clouds__Platform_Start__Hack_Deploy_Ride_to_Portal.into_usize() + 1,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Clouds__Cache.into_usize(),
+                end: GigunaSpotId::Giguna__Clouds__Straight_Down.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Clouds__Platform_Stop => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Clouds__Platform_Stop),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Clouds__Platform_Stop__ex__flipside_1.into_usize(),
+                end: ExitId::Giguna__Clouds__Platform_Stop__ex__flipside_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Clouds__Cache.into_usize(),
+                end: GigunaSpotId::Giguna__Clouds__Straight_Down.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Clouds__Cache => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Clouds__Cache),
+            locations: Range {
+                start: LocationId::Giguna__Clouds__Cache__Item.into_usize(),
+                end: LocationId::Giguna__Clouds__Cache__Item.into_usize() + 1,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Clouds__Cache.into_usize(),
+                end: GigunaSpotId::Giguna__Clouds__Straight_Down.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Clouds__Platform_Early_Portal => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Clouds__Platform_Early_Portal),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Clouds__Cache.into_usize(),
+                end: GigunaSpotId::Giguna__Clouds__Straight_Down.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Clouds__Southwest => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Clouds__Southwest),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Clouds__Southwest__ex__Irikar__Hub__Northwest_1.into_usize(),
+                end: ExitId::Giguna__Clouds__Southwest__ex__Irikar__Hub__Northwest_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Clouds__Cache.into_usize(),
+                end: GigunaSpotId::Giguna__Clouds__Straight_Down.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Clouds__Straight_Down => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Clouds__Straight_Down),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Clouds__Straight_Down__ex__Irikar__Hub__North_Above_Portal_1.into_usize(),
+                end: ExitId::Giguna__Clouds__Straight_Down__ex__Irikar__Hub__North_Above_Portal_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Clouds__Cache.into_usize(),
+                end: GigunaSpotId::Giguna__Clouds__Straight_Down.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Clouds__Pull_Right => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Clouds__Pull_Right),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Clouds__Pull_Right__ex__Irikar__Hub__Northwest_Above_Bowl_1.into_usize(),
+                end: ExitId::Giguna__Clouds__Pull_Right__ex__Irikar__Hub__Northwest_Above_Bowl_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Clouds__Cache.into_usize(),
+                end: GigunaSpotId::Giguna__Clouds__Straight_Down.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Clouds__Southeast => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Clouds__Southeast),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Clouds__Southeast__ex__Irikar__Hub__Northeast_Above_Bowl_1.into_usize(),
+                end: ExitId::Giguna__Clouds__Southeast__ex__Irikar__Hub__Northeast_Above_Bowl_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Clouds__Cache.into_usize(),
+                end: GigunaSpotId::Giguna__Clouds__Straight_Down.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Lamassu__West_18 => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Lamassu__West_18),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Lamassu__West_18__ex__Helipad__East_18_1.into_usize(),
+                end: ExitId::Giguna__Lamassu__West_18__ex__Helipad__East_18_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Lamassu__Broken_Pillar.into_usize(),
+                end: GigunaSpotId::Giguna__Lamassu__Wingtip.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Lamassu__Staircase_Top => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Lamassu__Staircase_Top),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Lamassu__Broken_Pillar.into_usize(),
+                end: GigunaSpotId::Giguna__Lamassu__Wingtip.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Lamassu__Staircase_Bottom => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Lamassu__Staircase_Bottom),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Lamassu__Broken_Pillar.into_usize(),
+                end: GigunaSpotId::Giguna__Lamassu__Wingtip.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Lamassu__Staircase_Landing => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Lamassu__Staircase_Landing),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Lamassu__Broken_Pillar.into_usize(),
+                end: GigunaSpotId::Giguna__Lamassu__Wingtip.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Lamassu__Broken_Pillar => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Lamassu__Broken_Pillar),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Lamassu__Broken_Pillar__ex__Staircase_Landing_1.into_usize(),
+                end: ExitId::Giguna__Lamassu__Broken_Pillar__ex__Staircase_Landing_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Lamassu__Broken_Pillar.into_usize(),
+                end: GigunaSpotId::Giguna__Lamassu__Wingtip.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Lamassu__Upper_Platform_Edge => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Lamassu__Upper_Platform_Edge),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Lamassu__Broken_Pillar.into_usize(),
+                end: GigunaSpotId::Giguna__Lamassu__Wingtip.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Lamassu__Lower_Platform_Left => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Lamassu__Lower_Platform_Left),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Lamassu__Lower_Platform_Left__ex__Upper_Platform_Edge_1.into_usize(),
+                end: ExitId::Giguna__Lamassu__Lower_Platform_Left__ex__Upper_Platform_Edge_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Lamassu__Broken_Pillar.into_usize(),
+                end: GigunaSpotId::Giguna__Lamassu__Wingtip.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Lamassu__Lower_Platform_Right => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Lamassu__Lower_Platform_Right),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Lamassu__Lower_Platform_Right__ex__Head_1.into_usize(),
+                end: ExitId::Giguna__Lamassu__Lower_Platform_Right__ex__Head_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Lamassu__Broken_Pillar.into_usize(),
+                end: GigunaSpotId::Giguna__Lamassu__Wingtip.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Lamassu__Head => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Lamassu__Head),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Lamassu__Broken_Pillar.into_usize(),
+                end: GigunaSpotId::Giguna__Lamassu__Wingtip.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Lamassu__Rear_Platform => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Lamassu__Rear_Platform),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Lamassu__Broken_Pillar.into_usize(),
+                end: GigunaSpotId::Giguna__Lamassu__Wingtip.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Lamassu__Wingtip => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Lamassu__Wingtip),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Lamassu__Broken_Pillar.into_usize(),
+                end: GigunaSpotId::Giguna__Lamassu__Wingtip.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Lamassu__Rear_Gap => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Lamassu__Rear_Gap),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Lamassu__Rear_Gap__ex__East_18_1.into_usize(),
+                end: ExitId::Giguna__Lamassu__Rear_Gap__ex__East_18_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Lamassu__Broken_Pillar.into_usize(),
+                end: GigunaSpotId::Giguna__Lamassu__Wingtip.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Lamassu__Deposit => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Lamassu__Deposit),
+            locations: Range {
+                start: LocationId::Giguna__Lamassu__Deposit__Flask.into_usize(),
+                end: LocationId::Giguna__Lamassu__Deposit__Flask.into_usize() + 1,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Lamassu__Broken_Pillar.into_usize(),
+                end: GigunaSpotId::Giguna__Lamassu__Wingtip.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Lamassu__East_18 => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Lamassu__East_18),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Lamassu__East_18__ex__Dual_Path__West_18_1.into_usize(),
+                end: ExitId::Giguna__Lamassu__East_18__ex__Dual_Path__West_18_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Lamassu__Broken_Pillar.into_usize(),
+                end: GigunaSpotId::Giguna__Lamassu__Wingtip.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Dual_Path__West_18 => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Dual_Path__West_18),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Dual_Path__West_18__ex__Lamassu__East_18_1.into_usize(),
+                end: ExitId::Giguna__Dual_Path__West_18__ex__West_Gate_2.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Dual_Path__Base_of_Wall.into_usize(),
+                end: GigunaSpotId::Giguna__Dual_Path__West_Slope.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Dual_Path__Below_Left_Switch => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Dual_Path__Below_Left_Switch),
+            locations: Range {
+                start: LocationId::Giguna__Dual_Path__Below_Left_Switch__Remote_Switch.into_usize(),
+                end: LocationId::Giguna__Dual_Path__Below_Left_Switch__Remote_Switch.into_usize() + 1,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Dual_Path__Base_of_Wall.into_usize(),
+                end: GigunaSpotId::Giguna__Dual_Path__West_Slope.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Dual_Path__Left_Switch => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Dual_Path__Left_Switch),
+            locations: Range {
+                start: LocationId::Giguna__Dual_Path__Left_Switch__Hit_Switch.into_usize(),
+                end: LocationId::Giguna__Dual_Path__Left_Switch__Hit_Switch.into_usize() + 1,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Dual_Path__Base_of_Wall.into_usize(),
+                end: GigunaSpotId::Giguna__Dual_Path__West_Slope.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Dual_Path__West_Slope => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Dual_Path__West_Slope),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Dual_Path__Base_of_Wall.into_usize(),
+                end: GigunaSpotId::Giguna__Dual_Path__West_Slope.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Dual_Path__In_the_Grass => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Dual_Path__In_the_Grass),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Dual_Path__In_the_Grass__ex__Wall_Top_1.into_usize(),
+                end: ExitId::Giguna__Dual_Path__In_the_Grass__ex__Wall_Top_2.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Dual_Path__Base_of_Wall.into_usize(),
+                end: GigunaSpotId::Giguna__Dual_Path__West_Slope.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Dual_Path__Base_of_Wall => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Dual_Path__Base_of_Wall),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Dual_Path__Base_of_Wall__ex__Wall_Secret_1.into_usize(),
+                end: ExitId::Giguna__Dual_Path__Base_of_Wall__ex__Wall_Top_2.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Dual_Path__Base_of_Wall.into_usize(),
+                end: GigunaSpotId::Giguna__Dual_Path__West_Slope.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Dual_Path__Wall_Secret => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Dual_Path__Wall_Secret),
+            locations: Range {
+                start: LocationId::Giguna__Dual_Path__Wall_Secret__Health.into_usize(),
+                end: LocationId::Giguna__Dual_Path__Wall_Secret__Health.into_usize() + 1,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Dual_Path__Wall_Secret__ex__Base_of_Wall_1.into_usize(),
+                end: ExitId::Giguna__Dual_Path__Wall_Secret__ex__Base_of_Wall_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Dual_Path__Base_of_Wall.into_usize(),
+                end: GigunaSpotId::Giguna__Dual_Path__West_Slope.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Dual_Path__Wall_Top => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Dual_Path__Wall_Top),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Dual_Path__Base_of_Wall.into_usize(),
+                end: GigunaSpotId::Giguna__Dual_Path__West_Slope.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Dual_Path__Right_Switch => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Dual_Path__Right_Switch),
+            locations: Range {
+                start: LocationId::Giguna__Dual_Path__Right_Switch__Hit_Switch.into_usize(),
+                end: LocationId::Giguna__Dual_Path__Right_Switch__Hit_Switch.into_usize() + 1,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Dual_Path__Base_of_Wall.into_usize(),
+                end: GigunaSpotId::Giguna__Dual_Path__West_Slope.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Dual_Path__Below_Right_Switch => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Dual_Path__Below_Right_Switch),
+            locations: Range {
+                start: LocationId::Giguna__Dual_Path__Below_Right_Switch__Remote_Switch.into_usize(),
+                end: LocationId::Giguna__Dual_Path__Below_Right_Switch__Remote_Switch.into_usize() + 1,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Dual_Path__Base_of_Wall.into_usize(),
+                end: GigunaSpotId::Giguna__Dual_Path__West_Slope.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Dual_Path__East_Gate => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Dual_Path__East_Gate),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Dual_Path__East_Gate__ex__East_Gate_NW_1.into_usize(),
+                end: ExitId::Giguna__Dual_Path__East_Gate__ex__East_Gate_NW_2.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Dual_Path__Base_of_Wall.into_usize(),
+                end: GigunaSpotId::Giguna__Dual_Path__West_Slope.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Dual_Path__East_18 => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Dual_Path__East_18),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Dual_Path__East_18__ex__Gateway__West_18_1.into_usize(),
+                end: ExitId::Giguna__Dual_Path__East_18__ex__Gateway__West_18_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Dual_Path__Base_of_Wall.into_usize(),
+                end: GigunaSpotId::Giguna__Dual_Path__West_Slope.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Dual_Path__West_Gate => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Dual_Path__West_Gate),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Dual_Path__West_Gate__ex__West_Gate_NE_1.into_usize(),
+                end: ExitId::Giguna__Dual_Path__West_Gate__ex__West_Gate_NW_2.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Dual_Path__Base_of_Wall.into_usize(),
+                end: GigunaSpotId::Giguna__Dual_Path__West_Slope.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Dual_Path__West_Gate_NW => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Dual_Path__West_Gate_NW),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Dual_Path__West_Gate_NW__ex__West_Gate_1.into_usize(),
+                end: ExitId::Giguna__Dual_Path__West_Gate_NW__ex__West_Gate_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Dual_Path__Base_of_Wall.into_usize(),
+                end: GigunaSpotId::Giguna__Dual_Path__West_Slope.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Dual_Path__West_Gate_NE => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Dual_Path__West_Gate_NE),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Dual_Path__West_Gate_NE__ex__West_Gate_1.into_usize(),
+                end: ExitId::Giguna__Dual_Path__West_Gate_NE__ex__West_Gate_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Dual_Path__Base_of_Wall.into_usize(),
+                end: GigunaSpotId::Giguna__Dual_Path__West_Slope.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Dual_Path__West_17 => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Dual_Path__West_17),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Dual_Path__West_17__ex__Hard_Rock__East_17_1.into_usize(),
+                end: ExitId::Giguna__Dual_Path__West_17__ex__Hard_Rock__East_17_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Dual_Path__Base_of_Wall.into_usize(),
+                end: GigunaSpotId::Giguna__Dual_Path__West_Slope.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Dual_Path__Midway => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Dual_Path__Midway),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Dual_Path__Midway__ex__Midway_Plateau_1.into_usize(),
+                end: ExitId::Giguna__Dual_Path__Midway__ex__Midway_Plateau_2.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Dual_Path__Base_of_Wall.into_usize(),
+                end: GigunaSpotId::Giguna__Dual_Path__West_Slope.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Dual_Path__Midway_Plateau => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Dual_Path__Midway_Plateau),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Dual_Path__Base_of_Wall.into_usize(),
+                end: GigunaSpotId::Giguna__Dual_Path__West_Slope.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Dual_Path__East_Gate_NW => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Dual_Path__East_Gate_NW),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Dual_Path__East_Gate_NW__ex__East_Gate_NE_1.into_usize(),
+                end: ExitId::Giguna__Dual_Path__East_Gate_NW__ex__East_Gate_NE_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Dual_Path__Base_of_Wall.into_usize(),
+                end: GigunaSpotId::Giguna__Dual_Path__West_Slope.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Dual_Path__East_Gate_NE => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Dual_Path__East_Gate_NE),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Dual_Path__East_Gate_NE__ex__East_Gate_1.into_usize(),
+                end: ExitId::Giguna__Dual_Path__East_Gate_NE__ex__East_Gate_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Dual_Path__Base_of_Wall.into_usize(),
+                end: GigunaSpotId::Giguna__Dual_Path__West_Slope.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Dual_Path__East_17 => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Dual_Path__East_17),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Dual_Path__East_17__ex__East_Caverns__West_17_1.into_usize(),
+                end: ExitId::Giguna__Dual_Path__East_17__ex__East_Caverns__West_17_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Dual_Path__Base_of_Wall.into_usize(),
+                end: GigunaSpotId::Giguna__Dual_Path__West_Slope.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Hard_Rock__East_17 => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Hard_Rock__East_17),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Hard_Rock__East_17__ex__Dual_Path__West_17_1.into_usize(),
+                end: ExitId::Giguna__Hard_Rock__East_17__ex__Dual_Path__West_17_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Hard_Rock__East_17.into_usize(),
+                end: GigunaSpotId::Giguna__Hard_Rock__West_17.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Hard_Rock__Rock_Right => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Hard_Rock__Rock_Right),
+            locations: Range {
+                start: LocationId::Giguna__Hard_Rock__Rock_Right__Enter_Rock_as_Mist.into_usize(),
+                end: LocationId::Giguna__Hard_Rock__Rock_Right__Shockwave_Boulder.into_usize() + 1,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Hard_Rock__Rock_Right__ex__Rock_Center_1.into_usize(),
+                end: ExitId::Giguna__Hard_Rock__Rock_Right__ex__Rock_Center_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Hard_Rock__East_17.into_usize(),
+                end: GigunaSpotId::Giguna__Hard_Rock__West_17.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Hard_Rock__Rock_Center => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Hard_Rock__Rock_Center),
+            locations: Range {
+                start: LocationId::Giguna__Hard_Rock__Rock_Center__Tablet.into_usize(),
+                end: LocationId::Giguna__Hard_Rock__Rock_Center__Tablet.into_usize() + 1,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Hard_Rock__East_17.into_usize(),
+                end: GigunaSpotId::Giguna__Hard_Rock__West_17.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Hard_Rock__Rock_Left => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Hard_Rock__Rock_Left),
+            locations: Range {
+                start: LocationId::Giguna__Hard_Rock__Rock_Left__Enter_Rock_as_Mist.into_usize(),
+                end: LocationId::Giguna__Hard_Rock__Rock_Left__Shockwave_Boulder.into_usize() + 1,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Hard_Rock__Rock_Left__ex__Rock_Center_1.into_usize(),
+                end: ExitId::Giguna__Hard_Rock__Rock_Left__ex__Rock_Center_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Hard_Rock__East_17.into_usize(),
+                end: GigunaSpotId::Giguna__Hard_Rock__West_17.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Hard_Rock__West_17 => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Hard_Rock__West_17),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Hard_Rock__West_17__ex__Giguna_Base__East_17_1.into_usize(),
+                end: ExitId::Giguna__Hard_Rock__West_17__ex__Giguna_Base__East_17_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Hard_Rock__East_17.into_usize(),
+                end: GigunaSpotId::Giguna__Hard_Rock__West_17.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__East_Caverns__West_14 => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__East_Caverns__West_14),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__East_Caverns__West_14__ex__Wasteland__East_14_1.into_usize(),
+                end: ExitId::Giguna__East_Caverns__West_14__ex__Wasteland__East_14_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: ActionId::Giguna__East_Caverns__West_14__Enter_Combo.into_usize(),
+                end: ActionId::Giguna__East_Caverns__West_14__Enter_Combo.into_usize() + 1,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__East_Caverns__Arc_Ledge.into_usize(),
+                end: GigunaSpotId::Giguna__East_Caverns__West_Grass.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__East_Caverns__Upper_Platforms_Left => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__East_Caverns__Upper_Platforms_Left),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__East_Caverns__Arc_Ledge.into_usize(),
+                end: GigunaSpotId::Giguna__East_Caverns__West_Grass.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__East_Caverns__Upper_Platforms_Right => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__East_Caverns__Upper_Platforms_Right),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__East_Caverns__Upper_Platforms_Right__ex__Upper_Passage_West_1.into_usize(),
+                end: ExitId::Giguna__East_Caverns__Upper_Platforms_Right__ex__Upper_Passage_West_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__East_Caverns__Arc_Ledge.into_usize(),
+                end: GigunaSpotId::Giguna__East_Caverns__West_Grass.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__East_Caverns__Upper_Floor => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__East_Caverns__Upper_Floor),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__East_Caverns__Upper_Floor__ex__Upper_Passage_West_1.into_usize(),
+                end: ExitId::Giguna__East_Caverns__Upper_Floor__ex__West_14_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__East_Caverns__Arc_Ledge.into_usize(),
+                end: GigunaSpotId::Giguna__East_Caverns__West_Grass.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__East_Caverns__Upper_Floor_Ledge => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__East_Caverns__Upper_Floor_Ledge),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__East_Caverns__Arc_Ledge.into_usize(),
+                end: GigunaSpotId::Giguna__East_Caverns__West_Grass.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__East_Caverns__Upper_Susar => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__East_Caverns__Upper_Susar),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__East_Caverns__Upper_Susar__ex__Middle_Ledge_1.into_usize(),
+                end: ExitId::Giguna__East_Caverns__Upper_Susar__ex__Upper_Platforms_Right_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: ActionId::Giguna__East_Caverns__Upper_Susar__Caught.into_usize(),
+                end: ActionId::Giguna__East_Caverns__Upper_Susar__Caught.into_usize() + 1,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__East_Caverns__Arc_Ledge.into_usize(),
+                end: GigunaSpotId::Giguna__East_Caverns__West_Grass.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__East_Caverns__Upper_Susar_Mid_jump => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__East_Caverns__Upper_Susar_Mid_jump),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__East_Caverns__Upper_Susar_Mid_jump__ex__Top_Past_Susar_1.into_usize(),
+                end: ExitId::Giguna__East_Caverns__Upper_Susar_Mid_jump__ex__Top_Past_Susar_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: ActionId::Giguna__East_Caverns__Upper_Susar_Mid_jump__Hack.into_usize(),
+                end: ActionId::Giguna__East_Caverns__Upper_Susar_Mid_jump__Hack.into_usize() + 1,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__East_Caverns__Arc_Ledge.into_usize(),
+                end: GigunaSpotId::Giguna__East_Caverns__West_Grass.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__East_Caverns__Upper_Susar_Jump_from_East => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__East_Caverns__Upper_Susar_Jump_from_East),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__East_Caverns__Upper_Susar_Jump_from_East__ex__Middle_Ledge_1.into_usize(),
+                end: ExitId::Giguna__East_Caverns__Upper_Susar_Jump_from_East__ex__Midwest_Ledge_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: ActionId::Giguna__East_Caverns__Upper_Susar_Jump_from_East__Caught.into_usize(),
+                end: ActionId::Giguna__East_Caverns__Upper_Susar_Jump_from_East__Hack.into_usize() + 1,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__East_Caverns__Arc_Ledge.into_usize(),
+                end: GigunaSpotId::Giguna__East_Caverns__West_Grass.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__East_Caverns__Top_Past_Susar => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__East_Caverns__Top_Past_Susar),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__East_Caverns__Arc_Ledge.into_usize(),
+                end: GigunaSpotId::Giguna__East_Caverns__West_Grass.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__East_Caverns__Top_Ledge => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__East_Caverns__Top_Ledge),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__East_Caverns__Arc_Ledge.into_usize(),
+                end: GigunaSpotId::Giguna__East_Caverns__West_Grass.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__East_Caverns__Upper_Passage_West => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__East_Caverns__Upper_Passage_West),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__East_Caverns__Upper_Passage_West__ex__Upper_Passage_East_1.into_usize(),
+                end: ExitId::Giguna__East_Caverns__Upper_Passage_West__ex__Upper_Passage_East_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__East_Caverns__Arc_Ledge.into_usize(),
+                end: GigunaSpotId::Giguna__East_Caverns__West_Grass.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__East_Caverns__Upper_Passage_East => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__East_Caverns__Upper_Passage_East),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__East_Caverns__Upper_Passage_East__ex__Top_Ledge_1.into_usize(),
+                end: ExitId::Giguna__East_Caverns__Upper_Passage_East__ex__Upper_Passage_West_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__East_Caverns__Arc_Ledge.into_usize(),
+                end: GigunaSpotId::Giguna__East_Caverns__West_Grass.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__East_Caverns__East_Shaft => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__East_Caverns__East_Shaft),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__East_Caverns__Arc_Ledge.into_usize(),
+                end: GigunaSpotId::Giguna__East_Caverns__West_Grass.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__East_Caverns__East_Side => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__East_Caverns__East_Side),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__East_Caverns__East_Side__ex__East_Shaft_1.into_usize(),
+                end: ExitId::Giguna__East_Caverns__East_Side__ex__Middle_Rock_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__East_Caverns__Arc_Ledge.into_usize(),
+                end: GigunaSpotId::Giguna__East_Caverns__West_Grass.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__East_Caverns__Carving => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__East_Caverns__Carving),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__East_Caverns__Carving__ex__East_Side_1.into_usize(),
+                end: ExitId::Giguna__East_Caverns__Carving__ex__Middle_Rock_2.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__East_Caverns__Arc_Ledge.into_usize(),
+                end: GigunaSpotId::Giguna__East_Caverns__West_Grass.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__East_Caverns__Middle_Ledge => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__East_Caverns__Middle_Ledge),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__East_Caverns__Middle_Ledge__ex__Upper_Floor_Ledge_1.into_usize(),
+                end: ExitId::Giguna__East_Caverns__Middle_Ledge__ex__Upper_Passage_West_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__East_Caverns__Arc_Ledge.into_usize(),
+                end: GigunaSpotId::Giguna__East_Caverns__West_Grass.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__East_Caverns__Mid_Susar => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__East_Caverns__Mid_Susar),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__East_Caverns__Mid_Susar__ex__Middle_Ledge_1.into_usize(),
+                end: ExitId::Giguna__East_Caverns__Mid_Susar__ex__Middle_Rock_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: ActionId::Giguna__East_Caverns__Mid_Susar__Caught.into_usize(),
+                end: ActionId::Giguna__East_Caverns__Mid_Susar__Hack.into_usize() + 1,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__East_Caverns__Arc_Ledge.into_usize(),
+                end: GigunaSpotId::Giguna__East_Caverns__West_Grass.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__East_Caverns__Middle_Rock => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__East_Caverns__Middle_Rock),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__East_Caverns__Middle_Rock__ex__Hidden_Passage_East_1.into_usize(),
+                end: ExitId::Giguna__East_Caverns__Middle_Rock__ex__Hidden_Passage_East_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__East_Caverns__Arc_Ledge.into_usize(),
+                end: GigunaSpotId::Giguna__East_Caverns__West_Grass.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__East_Caverns__Hidden_Passage_East => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__East_Caverns__Hidden_Passage_East),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__East_Caverns__Hidden_Passage_East__ex__Hidden_Passage_Center_1.into_usize(),
+                end: ExitId::Giguna__East_Caverns__Hidden_Passage_East__ex__Hidden_Passage_Center_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__East_Caverns__Arc_Ledge.into_usize(),
+                end: GigunaSpotId::Giguna__East_Caverns__West_Grass.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__East_Caverns__Hidden_Passage_Center => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__East_Caverns__Hidden_Passage_Center),
+            locations: Range {
+                start: LocationId::Giguna__East_Caverns__Hidden_Passage_Center__Hidden_Flask.into_usize(),
+                end: LocationId::Giguna__East_Caverns__Hidden_Passage_Center__Hidden_Flask.into_usize() + 1,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__East_Caverns__Arc_Ledge.into_usize(),
+                end: GigunaSpotId::Giguna__East_Caverns__West_Grass.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__East_Caverns__Hidden_Passage_West => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__East_Caverns__Hidden_Passage_West),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__East_Caverns__Hidden_Passage_West__ex__Hidden_Passage_Center_1.into_usize(),
+                end: ExitId::Giguna__East_Caverns__Hidden_Passage_West__ex__Statues_Ledge_2.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__East_Caverns__Arc_Ledge.into_usize(),
+                end: GigunaSpotId::Giguna__East_Caverns__West_Grass.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__East_Caverns__Midwest_Ledge => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__East_Caverns__Midwest_Ledge),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__East_Caverns__Midwest_Ledge__ex__Hidden_Passage_East_1.into_usize(),
+                end: ExitId::Giguna__East_Caverns__Midwest_Ledge__ex__Middle_Ledge_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__East_Caverns__Arc_Ledge.into_usize(),
+                end: GigunaSpotId::Giguna__East_Caverns__West_Grass.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__East_Caverns__Statues_Ledge => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__East_Caverns__Statues_Ledge),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__East_Caverns__Statues_Ledge__ex__Hidden_Passage_West_1.into_usize(),
+                end: ExitId::Giguna__East_Caverns__Statues_Ledge__ex__Midwest_Ledge_2.into_usize() + 1,
+            },
+            actions: Range {
+                start: ActionId::Giguna__East_Caverns__Statues_Ledge__Open_Door.into_usize(),
+                end: ActionId::Giguna__East_Caverns__Statues_Ledge__Open_Door.into_usize() + 1,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__East_Caverns__Arc_Ledge.into_usize(),
+                end: GigunaSpotId::Giguna__East_Caverns__West_Grass.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__East_Caverns__Switch => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__East_Caverns__Switch),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__East_Caverns__Switch__ex__Door_1.into_usize(),
+                end: ExitId::Giguna__East_Caverns__Switch__ex__Door_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: ActionId::Giguna__East_Caverns__Switch__Open_Door.into_usize(),
+                end: ActionId::Giguna__East_Caverns__Switch__Open_Door.into_usize() + 1,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__East_Caverns__Arc_Ledge.into_usize(),
+                end: GigunaSpotId::Giguna__East_Caverns__West_Grass.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__East_Caverns__Door => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__East_Caverns__Door),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__East_Caverns__Arc_Ledge.into_usize(),
+                end: GigunaSpotId::Giguna__East_Caverns__West_Grass.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__East_Caverns__West_16 => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__East_Caverns__West_16),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__East_Caverns__West_16__ex__Antechamber__East_16_1.into_usize(),
+                end: ExitId::Giguna__East_Caverns__West_16__ex__Door_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: ActionId::Giguna__East_Caverns__West_16__Open_Door.into_usize(),
+                end: ActionId::Giguna__East_Caverns__West_16__Open_Door.into_usize() + 1,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__East_Caverns__Arc_Ledge.into_usize(),
+                end: GigunaSpotId::Giguna__East_Caverns__West_Grass.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__East_Caverns__Arc_Ledge => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__East_Caverns__Arc_Ledge),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__East_Caverns__Arc_Ledge__ex__Hidden_Passage_West_1.into_usize(),
+                end: ExitId::Giguna__East_Caverns__Arc_Ledge__ex__Statues_Ledge_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__East_Caverns__Arc_Ledge.into_usize(),
+                end: GigunaSpotId::Giguna__East_Caverns__West_Grass.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__East_Caverns__Arc_Passage => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__East_Caverns__Arc_Passage),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__East_Caverns__Arc_Passage__ex__Hidden_Passage_West_1.into_usize(),
+                end: ExitId::Giguna__East_Caverns__Arc_Passage__ex__Hidden_Passage_West_2.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__East_Caverns__Arc_Ledge.into_usize(),
+                end: GigunaSpotId::Giguna__East_Caverns__West_Grass.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__East_Caverns__Lower_Ledge => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__East_Caverns__Lower_Ledge),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__East_Caverns__Lower_Ledge__ex__Arc_Ledge_1.into_usize(),
+                end: ExitId::Giguna__East_Caverns__Lower_Ledge__ex__Arc_Ledge_2.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__East_Caverns__Arc_Ledge.into_usize(),
+                end: GigunaSpotId::Giguna__East_Caverns__West_Grass.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__East_Caverns__West_17 => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__East_Caverns__West_17),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__East_Caverns__West_17__ex__Dual_Path__East_17_1.into_usize(),
+                end: ExitId::Giguna__East_Caverns__West_17__ex__Dual_Path__East_17_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__East_Caverns__Arc_Ledge.into_usize(),
+                end: GigunaSpotId::Giguna__East_Caverns__West_Grass.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__East_Caverns__West_Grass => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__East_Caverns__West_Grass),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__East_Caverns__West_Grass__ex__Lower_Ledge_1.into_usize(),
+                end: ExitId::Giguna__East_Caverns__West_Grass__ex__Lower_Ledge_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__East_Caverns__Arc_Ledge.into_usize(),
+                end: GigunaSpotId::Giguna__East_Caverns__West_Grass.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__East_Caverns__Under_Lower_Ledge => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__East_Caverns__Under_Lower_Ledge),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__East_Caverns__Arc_Ledge.into_usize(),
+                end: GigunaSpotId::Giguna__East_Caverns__West_Grass.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__East_Caverns__East_Grass => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__East_Caverns__East_Grass),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__East_Caverns__East_Grass__ex__East_17_1.into_usize(),
+                end: ExitId::Giguna__East_Caverns__East_Grass__ex__East_17_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__East_Caverns__Arc_Ledge.into_usize(),
+                end: GigunaSpotId::Giguna__East_Caverns__West_Grass.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__East_Caverns__East_17 => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__East_Caverns__East_17),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__East_Caverns__East_17__ex__Vertical_Interchange__West_17_1.into_usize(),
+                end: ExitId::Giguna__East_Caverns__East_17__ex__Vertical_Interchange__West_17_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__East_Caverns__Arc_Ledge.into_usize(),
+                end: GigunaSpotId::Giguna__East_Caverns__West_Grass.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Gateway__West_18 => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Gateway__West_18),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Gateway__West_18__ex__Dual_Path__East_18_1.into_usize(),
+                end: ExitId::Giguna__Gateway__West_18__ex__Dual_Path__East_18_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Gateway__Block_Left.into_usize(),
+                end: GigunaSpotId::Giguna__Gateway__West_19.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Gateway__Passage_Entry => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Gateway__Passage_Entry),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Gateway__Passage_Entry__ex__Door_1.into_usize(),
+                end: ExitId::Giguna__Gateway__Passage_Entry__ex__Passage_Exit_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Gateway__Block_Left.into_usize(),
+                end: GigunaSpotId::Giguna__Gateway__West_19.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Gateway__Passage_Exit => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Gateway__Passage_Exit),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Gateway__Passage_Exit__ex__Left_Platform_1.into_usize(),
+                end: ExitId::Giguna__Gateway__Passage_Exit__ex__Passage_Entry_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Gateway__Block_Left.into_usize(),
+                end: GigunaSpotId::Giguna__Gateway__West_19.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Gateway__Door => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Gateway__Door),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Gateway__Door__ex__Block_Left_1.into_usize(),
+                end: ExitId::Giguna__Gateway__Door__ex__Passage_Entry_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Gateway__Block_Left.into_usize(),
+                end: GigunaSpotId::Giguna__Gateway__West_19.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Gateway__Left_Platform => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Gateway__Left_Platform),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Gateway__Left_Platform__ex__Block_Lowered_1.into_usize(),
+                end: ExitId::Giguna__Gateway__Left_Platform__ex__Block_Lowered_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Gateway__Block_Left.into_usize(),
+                end: GigunaSpotId::Giguna__Gateway__West_19.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Gateway__Right_Platform => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Gateway__Right_Platform),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Gateway__Right_Platform__ex__Far_Ledge_1.into_usize(),
+                end: ExitId::Giguna__Gateway__Right_Platform__ex__Far_Ledge_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Gateway__Block_Left.into_usize(),
+                end: GigunaSpotId::Giguna__Gateway__West_19.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Gateway__Block_Left => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Gateway__Block_Left),
+            locations: Range {
+                start: LocationId::Giguna__Gateway__Block_Left__Shockwave.into_usize(),
+                end: LocationId::Giguna__Gateway__Block_Left__Shockwave.into_usize() + 1,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Gateway__Block_Left__ex__Block_Lowered_1.into_usize(),
+                end: ExitId::Giguna__Gateway__Block_Left__ex__Block_Lowered_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Gateway__Block_Left.into_usize(),
+                end: GigunaSpotId::Giguna__Gateway__West_19.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Gateway__Block_Right => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Gateway__Block_Right),
+            locations: Range {
+                start: LocationId::Giguna__Gateway__Block_Right__Shockwave.into_usize(),
+                end: LocationId::Giguna__Gateway__Block_Right__Shockwave.into_usize() + 1,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Gateway__Block_Right__ex__Block_Lowered_1.into_usize(),
+                end: ExitId::Giguna__Gateway__Block_Right__ex__Block_Lowered_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Gateway__Block_Left.into_usize(),
+                end: GigunaSpotId::Giguna__Gateway__West_19.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Gateway__Refill_Station => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Gateway__Refill_Station),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Gateway__Refill_Station__ex__Far_Ledge_1.into_usize(),
+                end: ExitId::Giguna__Gateway__Refill_Station__ex__Far_Ledge_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Gateway__Block_Left.into_usize(),
+                end: GigunaSpotId::Giguna__Gateway__West_19.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Gateway__Far_Ledge => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Gateway__Far_Ledge),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Gateway__Far_Ledge__ex__Flask_Ledge_1.into_usize(),
+                end: ExitId::Giguna__Gateway__Far_Ledge__ex__Right_Platform_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Gateway__Block_Left.into_usize(),
+                end: GigunaSpotId::Giguna__Gateway__West_19.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Gateway__One_Jump => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Gateway__One_Jump),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: ActionId::Giguna__Gateway__One_Jump__Open_Door.into_usize(),
+                end: ActionId::Giguna__Gateway__One_Jump__Open_Door.into_usize() + 1,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Gateway__Block_Left.into_usize(),
+                end: GigunaSpotId::Giguna__Gateway__West_19.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Gateway__Flask_Ledge => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Gateway__Flask_Ledge),
+            locations: Range {
+                start: LocationId::Giguna__Gateway__Flask_Ledge__Item.into_usize(),
+                end: LocationId::Giguna__Gateway__Flask_Ledge__Item.into_usize() + 1,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: ActionId::Giguna__Gateway__Flask_Ledge__Open_Door.into_usize(),
+                end: ActionId::Giguna__Gateway__Flask_Ledge__Open_Door.into_usize() + 1,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Gateway__Block_Left.into_usize(),
+                end: GigunaSpotId::Giguna__Gateway__West_19.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Gateway__Block_Lowered => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Gateway__Block_Lowered),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Gateway__Block_Lowered__ex__Block_Left_1.into_usize(),
+                end: ExitId::Giguna__Gateway__Block_Lowered__ex__Block_Right_2.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Gateway__Block_Left.into_usize(),
+                end: GigunaSpotId::Giguna__Gateway__West_19.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Gateway__West_19 => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Gateway__West_19),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Gateway__West_19__ex__Labyrinth_East__East_19_1.into_usize(),
+                end: ExitId::Giguna__Gateway__West_19__ex__Labyrinth_East__East_19_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Gateway__Block_Left.into_usize(),
+                end: GigunaSpotId::Giguna__Gateway__West_19.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Gateway__Button => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Gateway__Button),
+            locations: Range {
+                start: LocationId::Giguna__Gateway__Button__Hit_Switch.into_usize(),
+                end: LocationId::Giguna__Gateway__Button__Hit_Switch.into_usize() + 1,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Gateway__Button__ex__East_19_1.into_usize(),
+                end: ExitId::Giguna__Gateway__Button__ex__East_19_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Gateway__Block_Left.into_usize(),
+                end: GigunaSpotId::Giguna__Gateway__West_19.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Gateway__East_19 => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Gateway__East_19),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Gateway__East_19__ex__Button_1.into_usize(),
+                end: ExitId::Giguna__Gateway__East_19__ex__Vertical_Interchange__West_19_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Gateway__Block_Left.into_usize(),
+                end: GigunaSpotId::Giguna__Gateway__West_19.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Labyrinth_East__East_19 => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Labyrinth_East__East_19),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Labyrinth_East__East_19.into_usize(),
+                end: GigunaSpotId::Giguna__Labyrinth_East__East_19.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Vertical_Interchange__West_17 => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Vertical_Interchange__West_17),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Vertical_Interchange__Dead_end.into_usize(),
+                end: GigunaSpotId::Giguna__Vertical_Interchange__West_19.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Vertical_Interchange__West_19 => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Vertical_Interchange__West_19),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Vertical_Interchange__Dead_end.into_usize(),
+                end: GigunaSpotId::Giguna__Vertical_Interchange__West_19.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Vertical_Interchange__North => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Vertical_Interchange__North),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Vertical_Interchange__Dead_end.into_usize(),
+                end: GigunaSpotId::Giguna__Vertical_Interchange__West_19.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Vertical_Interchange__Top_Left_Ledge => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Vertical_Interchange__Top_Left_Ledge),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Vertical_Interchange__Dead_end.into_usize(),
+                end: GigunaSpotId::Giguna__Vertical_Interchange__West_19.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Vertical_Interchange__Top_Right_Ledge => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Vertical_Interchange__Top_Right_Ledge),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Vertical_Interchange__Dead_end.into_usize(),
+                end: GigunaSpotId::Giguna__Vertical_Interchange__West_19.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Vertical_Interchange__Top_Rocky_Ledge => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Vertical_Interchange__Top_Rocky_Ledge),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Vertical_Interchange__Dead_end.into_usize(),
+                end: GigunaSpotId::Giguna__Vertical_Interchange__West_19.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Vertical_Interchange__Top_Rocky_Outcrop => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Vertical_Interchange__Top_Rocky_Outcrop),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Vertical_Interchange__Dead_end.into_usize(),
+                end: GigunaSpotId::Giguna__Vertical_Interchange__West_19.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Vertical_Interchange__Top_Passage_Bottom => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Vertical_Interchange__Top_Passage_Bottom),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Vertical_Interchange__Dead_end.into_usize(),
+                end: GigunaSpotId::Giguna__Vertical_Interchange__West_19.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Vertical_Interchange__Ledge_19 => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Vertical_Interchange__Ledge_19),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Vertical_Interchange__Dead_end.into_usize(),
+                end: GigunaSpotId::Giguna__Vertical_Interchange__West_19.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Vertical_Interchange__East_20 => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Vertical_Interchange__East_20),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Vertical_Interchange__Dead_end.into_usize(),
+                end: GigunaSpotId::Giguna__Vertical_Interchange__West_19.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Vertical_Interchange__Middle_Below_Top => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Vertical_Interchange__Middle_Below_Top),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Vertical_Interchange__Dead_end.into_usize(),
+                end: GigunaSpotId::Giguna__Vertical_Interchange__West_19.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Vertical_Interchange__Middle_Plateau => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Vertical_Interchange__Middle_Plateau),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Vertical_Interchange__Dead_end.into_usize(),
+                end: GigunaSpotId::Giguna__Vertical_Interchange__West_19.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Vertical_Interchange__Gate => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Vertical_Interchange__Gate),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Vertical_Interchange__Dead_end.into_usize(),
+                end: GigunaSpotId::Giguna__Vertical_Interchange__West_19.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Vertical_Interchange__Dead_end => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Vertical_Interchange__Dead_end),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Vertical_Interchange__Dead_end.into_usize(),
+                end: GigunaSpotId::Giguna__Vertical_Interchange__West_19.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Vertical_Interchange__Dead_end_Ledge => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Vertical_Interchange__Dead_end_Ledge),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Vertical_Interchange__Dead_end.into_usize(),
+                end: GigunaSpotId::Giguna__Vertical_Interchange__West_19.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Vertical_Interchange__Middle_Ledge_Below_Gate => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Vertical_Interchange__Middle_Ledge_Below_Gate),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Vertical_Interchange__Dead_end.into_usize(),
+                end: GigunaSpotId::Giguna__Vertical_Interchange__West_19.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Vertical_Interchange__Middle_Hill_By_Switch => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Vertical_Interchange__Middle_Hill_By_Switch),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Vertical_Interchange__Dead_end.into_usize(),
+                end: GigunaSpotId::Giguna__Vertical_Interchange__West_19.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Vertical_Interchange__Switch => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Vertical_Interchange__Switch),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Vertical_Interchange__Dead_end.into_usize(),
+                end: GigunaSpotId::Giguna__Vertical_Interchange__West_19.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Antechamber__East_16 => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Antechamber__East_16),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Antechamber__East_16__ex__East_Caverns__West_16_1.into_usize(),
+                end: ExitId::Giguna__Antechamber__East_16__ex__East_Caverns__West_16_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Antechamber__Bottom.into_usize(),
+                end: GigunaSpotId::Giguna__Antechamber__West_15.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Antechamber__Statues_Ledge => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Antechamber__Statues_Ledge),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Antechamber__Statues_Ledge__ex__Small_Bricks_1.into_usize(),
+                end: ExitId::Giguna__Antechamber__Statues_Ledge__ex__Small_Bricks_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Antechamber__Bottom.into_usize(),
+                end: GigunaSpotId::Giguna__Antechamber__West_15.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Antechamber__Bottom => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Antechamber__Bottom),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Antechamber__Bottom__ex__Left_Wall_Lower_1.into_usize(),
+                end: ExitId::Giguna__Antechamber__Bottom__ex__Left_Wall_Lower_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Antechamber__Bottom.into_usize(),
+                end: GigunaSpotId::Giguna__Antechamber__West_15.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Antechamber__Small_Bricks => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Antechamber__Small_Bricks),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Antechamber__Small_Bricks__ex__Middle_Bricks_Right_1.into_usize(),
+                end: ExitId::Giguna__Antechamber__Small_Bricks__ex__Statue_Head_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Antechamber__Bottom.into_usize(),
+                end: GigunaSpotId::Giguna__Antechamber__West_15.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Antechamber__Statue_Head => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Antechamber__Statue_Head),
+            locations: Range {
+                start: LocationId::Giguna__Antechamber__Statue_Head__Tablet.into_usize(),
+                end: LocationId::Giguna__Antechamber__Statue_Head__Tablet.into_usize() + 1,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Antechamber__Statue_Head__ex__Middle_Bricks_Right_1.into_usize(),
+                end: ExitId::Giguna__Antechamber__Statue_Head__ex__Middle_Bricks_Right_2.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Antechamber__Bottom.into_usize(),
+                end: GigunaSpotId::Giguna__Antechamber__West_15.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Antechamber__Middle_Bricks_Right => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Antechamber__Middle_Bricks_Right),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Antechamber__Middle_Bricks_Right__ex__Statue_Head_1.into_usize(),
+                end: ExitId::Giguna__Antechamber__Middle_Bricks_Right__ex__Statue_Head_2.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Antechamber__Bottom.into_usize(),
+                end: GigunaSpotId::Giguna__Antechamber__West_15.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Antechamber__Middle_Bricks_Left => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Antechamber__Middle_Bricks_Left),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Antechamber__Middle_Bricks_Left__ex__West_15_1.into_usize(),
+                end: ExitId::Giguna__Antechamber__Middle_Bricks_Left__ex__West_15_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Antechamber__Bottom.into_usize(),
+                end: GigunaSpotId::Giguna__Antechamber__West_15.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Antechamber__Left_Wall_Lower => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Antechamber__Left_Wall_Lower),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Antechamber__Left_Wall_Lower__ex__Left_Wall_Mid_1.into_usize(),
+                end: ExitId::Giguna__Antechamber__Left_Wall_Lower__ex__Left_Wall_Mid_2.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Antechamber__Bottom.into_usize(),
+                end: GigunaSpotId::Giguna__Antechamber__West_15.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Antechamber__Left_Wall_Mid => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Antechamber__Left_Wall_Mid),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Antechamber__Left_Wall_Mid__ex__West_15_1.into_usize(),
+                end: ExitId::Giguna__Antechamber__Left_Wall_Mid__ex__West_15_2.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Antechamber__Bottom.into_usize(),
+                end: GigunaSpotId::Giguna__Antechamber__West_15.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Antechamber__West_15 => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Antechamber__West_15),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Antechamber__West_15__ex__Gubi_Lair__East_15_1.into_usize(),
+                end: ExitId::Giguna__Antechamber__West_15__ex__Small_Bricks_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Antechamber__Bottom.into_usize(),
+                end: GigunaSpotId::Giguna__Antechamber__West_15.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Gubi_Lair__East_15 => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Gubi_Lair__East_15),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Gubi_Lair__East_15__ex__Antechamber__West_15_1.into_usize(),
+                end: ExitId::Giguna__Gubi_Lair__East_15__ex__Center_Platform_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Gubi_Lair__Center_East_Sapling.into_usize(),
+                end: GigunaSpotId::Giguna__Gubi_Lair__West_Brickwork.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Gubi_Lair__East_Tree => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Gubi_Lair__East_Tree),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Gubi_Lair__East_Tree__ex__Center_Platform_1.into_usize(),
+                end: ExitId::Giguna__Gubi_Lair__East_Tree__ex__East_15_2.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Gubi_Lair__Center_East_Sapling.into_usize(),
+                end: GigunaSpotId::Giguna__Gubi_Lair__West_Brickwork.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Gubi_Lair__Rightmost_Platform => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Gubi_Lair__Rightmost_Platform),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Gubi_Lair__Rightmost_Platform__ex__Center_Platform_1.into_usize(),
+                end: ExitId::Giguna__Gubi_Lair__Rightmost_Platform__ex__Center_Platform_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Gubi_Lair__Center_East_Sapling.into_usize(),
+                end: GigunaSpotId::Giguna__Gubi_Lair__West_Brickwork.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Gubi_Lair__Lower_Platform => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Gubi_Lair__Lower_Platform),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Gubi_Lair__Center_East_Sapling.into_usize(),
+                end: GigunaSpotId::Giguna__Gubi_Lair__West_Brickwork.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Gubi_Lair__Center_East_Sapling => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Gubi_Lair__Center_East_Sapling),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Gubi_Lair__Center_East_Sapling.into_usize(),
+                end: GigunaSpotId::Giguna__Gubi_Lair__West_Brickwork.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Gubi_Lair__Center_West_Sapling => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Gubi_Lair__Center_West_Sapling),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Gubi_Lair__Center_East_Sapling.into_usize(),
+                end: GigunaSpotId::Giguna__Gubi_Lair__West_Brickwork.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Gubi_Lair__Center_Platform => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Gubi_Lair__Center_Platform),
+            locations: Range {
+                start: LocationId::Giguna__Gubi_Lair__Center_Platform__Boss_Reward.into_usize(),
+                end: LocationId::Giguna__Gubi_Lair__Center_Platform__Hack_Gubi.into_usize() + 1,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Gubi_Lair__Center_East_Sapling.into_usize(),
+                end: GigunaSpotId::Giguna__Gubi_Lair__West_Brickwork.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Gubi_Lair__Leftmost_Platform => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Gubi_Lair__Leftmost_Platform),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Gubi_Lair__Center_East_Sapling.into_usize(),
+                end: GigunaSpotId::Giguna__Gubi_Lair__West_Brickwork.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Gubi_Lair__Grass_by_Wall => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Gubi_Lair__Grass_by_Wall),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Gubi_Lair__Grass_by_Wall__ex__Center_West_Sapling_1.into_usize(),
+                end: ExitId::Giguna__Gubi_Lair__Grass_by_Wall__ex__Center_West_Sapling_2.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Gubi_Lair__Center_East_Sapling.into_usize(),
+                end: GigunaSpotId::Giguna__Gubi_Lair__West_Brickwork.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Gubi_Lair__West_Brickwork => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Gubi_Lair__West_Brickwork),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Gubi_Lair__Center_East_Sapling.into_usize(),
+                end: GigunaSpotId::Giguna__Gubi_Lair__West_Brickwork.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Gubi_Lair__Shaft_Bottom => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Gubi_Lair__Shaft_Bottom),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Gubi_Lair__Shaft_Bottom__ex__Pedestal_1.into_usize(),
+                end: ExitId::Giguna__Gubi_Lair__Shaft_Bottom__ex__Pedestal_3.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Gubi_Lair__Center_East_Sapling.into_usize(),
+                end: GigunaSpotId::Giguna__Gubi_Lair__West_Brickwork.into_usize() + 1,
+            },
+        },
+        GigunaSpotId::Giguna__Gubi_Lair__Pedestal => BigSpot {
+            id: BigSpotId::Giguna(GigunaSpotId::Giguna__Gubi_Lair__Pedestal),
+            locations: Range {
+                start: LocationId::Giguna__Gubi_Lair__Pedestal__Axe.into_usize(),
+                end: LocationId::Giguna__Gubi_Lair__Pedestal__Axe.into_usize() + 1,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GigunaSpotId::Giguna__Gubi_Lair__Center_East_Sapling.into_usize(),
+                end: GigunaSpotId::Giguna__Gubi_Lair__West_Brickwork.into_usize() + 1,
+            },
+        },
+    }
+}
+pub fn build_glacier_spots() -> EnumMap<GlacierSpotId, BigSpot> {
+    enum_map! {
+        GlacierSpotId::Glacier__Dock_Elevator__Elevator => BigSpot {
+            id: BigSpotId::Glacier(GlacierSpotId::Glacier__Dock_Elevator__Elevator),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GlacierSpotId::Glacier__Dock_Elevator__Connector.into_usize(),
+                end: GlacierSpotId::Glacier__Dock_Elevator__Elevator.into_usize() + 1,
+            },
+        },
+        GlacierSpotId::Glacier__Dock_Elevator__Connector => BigSpot {
+            id: BigSpotId::Glacier(GlacierSpotId::Glacier__Dock_Elevator__Connector),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Glacier__Dock_Elevator__Connector__ex__Dock_Interior__Connector_1.into_usize(),
+                end: ExitId::Glacier__Dock_Elevator__Connector__ex__Dock_Interior__Connector_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GlacierSpotId::Glacier__Dock_Elevator__Connector.into_usize(),
+                end: GlacierSpotId::Glacier__Dock_Elevator__Elevator.into_usize() + 1,
+            },
+        },
+        GlacierSpotId::Glacier__Dock_Interior__Connector => BigSpot {
+            id: BigSpotId::Glacier(GlacierSpotId::Glacier__Dock_Interior__Connector),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Glacier__Dock_Interior__Connector__ex__Dock_Elevator__Connector_1.into_usize(),
+                end: ExitId::Glacier__Dock_Interior__Connector__ex__Dock_Elevator__Connector_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GlacierSpotId::Glacier__Dock_Interior__Connector.into_usize(),
+                end: GlacierSpotId::Glacier__Dock_Interior__Entry.into_usize() + 1,
+            },
+        },
+        GlacierSpotId::Glacier__Dock_Interior__Entry => BigSpot {
+            id: BigSpotId::Glacier(GlacierSpotId::Glacier__Dock_Interior__Entry),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Glacier__Dock_Interior__Entry__ex__Dock_Outside__Entry_1.into_usize(),
+                end: ExitId::Glacier__Dock_Interior__Entry__ex__Dock_Outside__Entry_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GlacierSpotId::Glacier__Dock_Interior__Connector.into_usize(),
+                end: GlacierSpotId::Glacier__Dock_Interior__Entry.into_usize() + 1,
+            },
+        },
+        GlacierSpotId::Glacier__Dock_Outside__Entry => BigSpot {
+            id: BigSpotId::Glacier(GlacierSpotId::Glacier__Dock_Outside__Entry),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Glacier__Dock_Outside__Entry__ex__Dock_Interior__Entry_1.into_usize(),
+                end: ExitId::Glacier__Dock_Outside__Entry__ex__Dock_Interior__Entry_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GlacierSpotId::Glacier__Dock_Outside__Do_Not_Enter.into_usize(),
+                end: GlacierSpotId::Glacier__Dock_Outside__Entry.into_usize() + 1,
+            },
+        },
+        GlacierSpotId::Glacier__Dock_Outside__Do_Not_Enter => BigSpot {
+            id: BigSpotId::Glacier(GlacierSpotId::Glacier__Dock_Outside__Do_Not_Enter),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Glacier__Dock_Outside__Do_Not_Enter__ex__Revival__East_9_1.into_usize(),
+                end: ExitId::Glacier__Dock_Outside__Do_Not_Enter__ex__Revival__East_9_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GlacierSpotId::Glacier__Dock_Outside__Do_Not_Enter.into_usize(),
+                end: GlacierSpotId::Glacier__Dock_Outside__Entry.into_usize() + 1,
+            },
+        },
+        GlacierSpotId::Glacier__Revival__East_9 => BigSpot {
+            id: BigSpotId::Glacier(GlacierSpotId::Glacier__Revival__East_9),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Glacier__Revival__East_9__ex__Dock_Outside__Do_Not_Enter_1.into_usize(),
+                end: ExitId::Glacier__Revival__East_9__ex__Dock_Outside__Do_Not_Enter_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GlacierSpotId::Glacier__Revival__East_9.into_usize(),
+                end: GlacierSpotId::Glacier__Revival__West_8.into_usize() + 1,
+            },
+        },
+        GlacierSpotId::Glacier__Revival__Overhang => BigSpot {
+            id: BigSpotId::Glacier(GlacierSpotId::Glacier__Revival__Overhang),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GlacierSpotId::Glacier__Revival__East_9.into_usize(),
+                end: GlacierSpotId::Glacier__Revival__West_8.into_usize() + 1,
+            },
+        },
+        GlacierSpotId::Glacier__Revival__Ledge => BigSpot {
+            id: BigSpotId::Glacier(GlacierSpotId::Glacier__Revival__Ledge),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GlacierSpotId::Glacier__Revival__East_9.into_usize(),
+                end: GlacierSpotId::Glacier__Revival__West_8.into_usize() + 1,
+            },
+        },
+        GlacierSpotId::Glacier__Revival__Lower_East => BigSpot {
+            id: BigSpotId::Glacier(GlacierSpotId::Glacier__Revival__Lower_East),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Glacier__Revival__Lower_East__ex__Grid_42_10__West_1.into_usize(),
+                end: ExitId::Glacier__Revival__Lower_East__ex__Grid_42_10__West_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GlacierSpotId::Glacier__Revival__East_9.into_usize(),
+                end: GlacierSpotId::Glacier__Revival__West_8.into_usize() + 1,
+            },
+        },
+        GlacierSpotId::Glacier__Revival__Save_Point => BigSpot {
+            id: BigSpotId::Glacier(GlacierSpotId::Glacier__Revival__Save_Point),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: ActionId::Glacier__Revival__Save_Point__Save.into_usize(),
+                end: ActionId::Glacier__Revival__Save_Point__Save.into_usize() + 1,
+            },
+            area_spots: Range {
+                start: GlacierSpotId::Glacier__Revival__East_9.into_usize(),
+                end: GlacierSpotId::Glacier__Revival__West_8.into_usize() + 1,
+            },
+        },
+        GlacierSpotId::Glacier__Revival__West_8 => BigSpot {
+            id: BigSpotId::Glacier(GlacierSpotId::Glacier__Revival__West_8),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Glacier__Revival__West_8__ex__Grid_39_40_7_9__Upper_East_1.into_usize(),
+                end: ExitId::Glacier__Revival__West_8__ex__Grid_39_40_7_9__Upper_East_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GlacierSpotId::Glacier__Revival__East_9.into_usize(),
+                end: GlacierSpotId::Glacier__Revival__West_8.into_usize() + 1,
+            },
+        },
+        GlacierSpotId::Glacier__Grid_42_10__West => BigSpot {
+            id: BigSpotId::Glacier(GlacierSpotId::Glacier__Grid_42_10__West),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Glacier__Grid_42_10__West__ex__Revival__Lower_East_1.into_usize(),
+                end: ExitId::Glacier__Grid_42_10__West__ex__Revival__Lower_East_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GlacierSpotId::Glacier__Grid_42_10__East.into_usize(),
+                end: GlacierSpotId::Glacier__Grid_42_10__West.into_usize() + 1,
+            },
+        },
+        GlacierSpotId::Glacier__Grid_42_10__East => BigSpot {
+            id: BigSpotId::Glacier(GlacierSpotId::Glacier__Grid_42_10__East),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Glacier__Grid_42_10__East__ex__Grid_43_10_11__Top_1.into_usize(),
+                end: ExitId::Glacier__Grid_42_10__East__ex__Grid_43_10_11__Top_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GlacierSpotId::Glacier__Grid_42_10__East.into_usize(),
+                end: GlacierSpotId::Glacier__Grid_42_10__West.into_usize() + 1,
+            },
+        },
+        GlacierSpotId::Glacier__Grid_43_10_11__Top => BigSpot {
+            id: BigSpotId::Glacier(GlacierSpotId::Glacier__Grid_43_10_11__Top),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Glacier__Grid_43_10_11__Top__ex__Grid_42_10__East_1.into_usize(),
+                end: ExitId::Glacier__Grid_43_10_11__Top__ex__Grid_42_10__East_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GlacierSpotId::Glacier__Grid_43_10_11__East.into_usize(),
+                end: GlacierSpotId::Glacier__Grid_43_10_11__Top.into_usize() + 1,
+            },
+        },
+        GlacierSpotId::Glacier__Grid_43_10_11__East => BigSpot {
+            id: BigSpotId::Glacier(GlacierSpotId::Glacier__Grid_43_10_11__East),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Glacier__Grid_43_10_11__East__ex__Apocalypse_Entry__West_1.into_usize(),
+                end: ExitId::Glacier__Grid_43_10_11__East__ex__Apocalypse_Entry__West_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GlacierSpotId::Glacier__Grid_43_10_11__East.into_usize(),
+                end: GlacierSpotId::Glacier__Grid_43_10_11__Top.into_usize() + 1,
+            },
+        },
+        GlacierSpotId::Glacier__Grid_43_10_11__Lower => BigSpot {
+            id: BigSpotId::Glacier(GlacierSpotId::Glacier__Grid_43_10_11__Lower),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Glacier__Grid_43_10_11__Lower__ex__Compass_Room__East_1.into_usize(),
+                end: ExitId::Glacier__Grid_43_10_11__Lower__ex__Compass_Room__East_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GlacierSpotId::Glacier__Grid_43_10_11__East.into_usize(),
+                end: GlacierSpotId::Glacier__Grid_43_10_11__Top.into_usize() + 1,
+            },
+        },
+        GlacierSpotId::Glacier__Compass_Room__East => BigSpot {
+            id: BigSpotId::Glacier(GlacierSpotId::Glacier__Compass_Room__East),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Glacier__Compass_Room__East__ex__Grid_43_10_11__Lower_1.into_usize(),
+                end: ExitId::Glacier__Compass_Room__East__ex__Grid_43_10_11__Lower_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GlacierSpotId::Glacier__Compass_Room__Center.into_usize(),
+                end: GlacierSpotId::Glacier__Compass_Room__West.into_usize() + 1,
+            },
+        },
+        GlacierSpotId::Glacier__Compass_Room__Center => BigSpot {
+            id: BigSpotId::Glacier(GlacierSpotId::Glacier__Compass_Room__Center),
+            locations: Range {
+                start: LocationId::Glacier__Compass_Room__Center__Table.into_usize(),
+                end: LocationId::Glacier__Compass_Room__Center__Table.into_usize() + 1,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GlacierSpotId::Glacier__Compass_Room__Center.into_usize(),
+                end: GlacierSpotId::Glacier__Compass_Room__West.into_usize() + 1,
+            },
+        },
+        GlacierSpotId::Glacier__Compass_Room__West => BigSpot {
+            id: BigSpotId::Glacier(GlacierSpotId::Glacier__Compass_Room__West),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Glacier__Compass_Room__West__ex__The_Big_Drop__East_1.into_usize(),
+                end: ExitId::Glacier__Compass_Room__West__ex__The_Big_Drop__East_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GlacierSpotId::Glacier__Compass_Room__Center.into_usize(),
+                end: GlacierSpotId::Glacier__Compass_Room__West.into_usize() + 1,
+            },
+        },
+        GlacierSpotId::Glacier__The_Big_Drop__East => BigSpot {
+            id: BigSpotId::Glacier(GlacierSpotId::Glacier__The_Big_Drop__East),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Glacier__The_Big_Drop__East__ex__Compass_Room__West_1.into_usize(),
+                end: ExitId::Glacier__The_Big_Drop__East__ex__Compass_Room__West_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GlacierSpotId::Glacier__The_Big_Drop__East.into_usize(),
+                end: GlacierSpotId::Glacier__The_Big_Drop__Water_Surface.into_usize() + 1,
+            },
+        },
+        GlacierSpotId::Glacier__The_Big_Drop__Small_Path => BigSpot {
+            id: BigSpotId::Glacier(GlacierSpotId::Glacier__The_Big_Drop__Small_Path),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GlacierSpotId::Glacier__The_Big_Drop__East.into_usize(),
+                end: GlacierSpotId::Glacier__The_Big_Drop__Water_Surface.into_usize() + 1,
+            },
+        },
+        GlacierSpotId::Glacier__The_Big_Drop__Water_Surface => BigSpot {
+            id: BigSpotId::Glacier(GlacierSpotId::Glacier__The_Big_Drop__Water_Surface),
+            locations: Range {
+                start: LocationId::Glacier__The_Big_Drop__Water_Surface__Drown.into_usize(),
+                end: LocationId::Glacier__The_Big_Drop__Water_Surface__Drown.into_usize() + 1,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GlacierSpotId::Glacier__The_Big_Drop__East.into_usize(),
+                end: GlacierSpotId::Glacier__The_Big_Drop__Water_Surface.into_usize() + 1,
+            },
+        },
+        GlacierSpotId::Glacier__Grid_39_40_7_9__Upper_East => BigSpot {
+            id: BigSpotId::Glacier(GlacierSpotId::Glacier__Grid_39_40_7_9__Upper_East),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Glacier__Grid_39_40_7_9__Upper_East__ex__Revival__West_8_1.into_usize(),
+                end: ExitId::Glacier__Grid_39_40_7_9__Upper_East__ex__Revival__West_8_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GlacierSpotId::Glacier__Grid_39_40_7_9__Upper_East.into_usize(),
+                end: GlacierSpotId::Glacier__Grid_39_40_7_9__West.into_usize() + 1,
+            },
+        },
+        GlacierSpotId::Glacier__Grid_39_40_7_9__West => BigSpot {
+            id: BigSpotId::Glacier(GlacierSpotId::Glacier__Grid_39_40_7_9__West),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Glacier__Grid_39_40_7_9__West__ex__Grid_37_38_9__East_1.into_usize(),
+                end: ExitId::Glacier__Grid_39_40_7_9__West__ex__Grid_37_38_9__East_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GlacierSpotId::Glacier__Grid_39_40_7_9__Upper_East.into_usize(),
+                end: GlacierSpotId::Glacier__Grid_39_40_7_9__West.into_usize() + 1,
+            },
+        },
+        GlacierSpotId::Glacier__Grid_37_38_9__East => BigSpot {
+            id: BigSpotId::Glacier(GlacierSpotId::Glacier__Grid_37_38_9__East),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Glacier__Grid_37_38_9__East__ex__Grid_39_40_7_9__West_1.into_usize(),
+                end: ExitId::Glacier__Grid_37_38_9__East__ex__Grid_39_40_7_9__West_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GlacierSpotId::Glacier__Grid_37_38_9__East.into_usize(),
+                end: GlacierSpotId::Glacier__Grid_37_38_9__West.into_usize() + 1,
+            },
+        },
+        GlacierSpotId::Glacier__Grid_37_38_9__West => BigSpot {
+            id: BigSpotId::Glacier(GlacierSpotId::Glacier__Grid_37_38_9__West),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Glacier__Grid_37_38_9__West__ex__Vertical_Room__East_9_1.into_usize(),
+                end: ExitId::Glacier__Grid_37_38_9__West__ex__Vertical_Room__East_9_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GlacierSpotId::Glacier__Grid_37_38_9__East.into_usize(),
+                end: GlacierSpotId::Glacier__Grid_37_38_9__West.into_usize() + 1,
+            },
+        },
+        GlacierSpotId::Glacier__Vertical_Room__East_9 => BigSpot {
+            id: BigSpotId::Glacier(GlacierSpotId::Glacier__Vertical_Room__East_9),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Glacier__Vertical_Room__East_9__ex__Grid_37_38_9__West_1.into_usize(),
+                end: ExitId::Glacier__Vertical_Room__East_9__ex__Peak_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GlacierSpotId::Glacier__Vertical_Room__East_12.into_usize(),
+                end: GlacierSpotId::Glacier__Vertical_Room__West_9.into_usize() + 1,
+            },
+        },
+        GlacierSpotId::Glacier__Vertical_Room__West_9 => BigSpot {
+            id: BigSpotId::Glacier(GlacierSpotId::Glacier__Vertical_Room__West_9),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Glacier__Vertical_Room__West_9__ex__Ledge_Grab_Room__East_9_1.into_usize(),
+                end: ExitId::Glacier__Vertical_Room__West_9__ex__Ledge_Grab_Room__East_9_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GlacierSpotId::Glacier__Vertical_Room__East_12.into_usize(),
+                end: GlacierSpotId::Glacier__Vertical_Room__West_9.into_usize() + 1,
+            },
+        },
+        GlacierSpotId::Glacier__Vertical_Room__Mid_9 => BigSpot {
+            id: BigSpotId::Glacier(GlacierSpotId::Glacier__Vertical_Room__Mid_9),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Glacier__Vertical_Room__Mid_9__ex__Peak_1.into_usize(),
+                end: ExitId::Glacier__Vertical_Room__Mid_9__ex__Peak_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GlacierSpotId::Glacier__Vertical_Room__East_12.into_usize(),
+                end: GlacierSpotId::Glacier__Vertical_Room__West_9.into_usize() + 1,
+            },
+        },
+        GlacierSpotId::Glacier__Vertical_Room__Mid_11 => BigSpot {
+            id: BigSpotId::Glacier(GlacierSpotId::Glacier__Vertical_Room__Mid_11),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Glacier__Vertical_Room__Mid_11__ex__Mid_9_1.into_usize(),
+                end: ExitId::Glacier__Vertical_Room__Mid_11__ex__Mid_9_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GlacierSpotId::Glacier__Vertical_Room__East_12.into_usize(),
+                end: GlacierSpotId::Glacier__Vertical_Room__West_9.into_usize() + 1,
+            },
+        },
+        GlacierSpotId::Glacier__Vertical_Room__Under_Switch => BigSpot {
+            id: BigSpotId::Glacier(GlacierSpotId::Glacier__Vertical_Room__Under_Switch),
+            locations: Range {
+                start: LocationId::Glacier__Vertical_Room__Under_Switch__Switch.into_usize(),
+                end: LocationId::Glacier__Vertical_Room__Under_Switch__Switch.into_usize() + 1,
+            },
+            exits: Range {
+                start: ExitId::Glacier__Vertical_Room__Under_Switch__ex__Mid_9_1.into_usize(),
+                end: ExitId::Glacier__Vertical_Room__Under_Switch__ex__Past_Gate_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GlacierSpotId::Glacier__Vertical_Room__East_12.into_usize(),
+                end: GlacierSpotId::Glacier__Vertical_Room__West_9.into_usize() + 1,
+            },
+        },
+        GlacierSpotId::Glacier__Vertical_Room__Past_Gate => BigSpot {
+            id: BigSpotId::Glacier(GlacierSpotId::Glacier__Vertical_Room__Past_Gate),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Glacier__Vertical_Room__Past_Gate__ex__Ledge_Grab_Room__East_11_1.into_usize(),
+                end: ExitId::Glacier__Vertical_Room__Past_Gate__ex__Under_Switch_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GlacierSpotId::Glacier__Vertical_Room__East_12.into_usize(),
+                end: GlacierSpotId::Glacier__Vertical_Room__West_9.into_usize() + 1,
+            },
+        },
+        GlacierSpotId::Glacier__Vertical_Room__Peak => BigSpot {
+            id: BigSpotId::Glacier(GlacierSpotId::Glacier__Vertical_Room__Peak),
+            locations: Range {
+                start: LocationId::Glacier__Vertical_Room__Peak__Flask.into_usize(),
+                end: LocationId::Glacier__Vertical_Room__Peak__Flask.into_usize() + 1,
+            },
+            exits: Range {
+                start: ExitId::Glacier__Vertical_Room__Peak__ex__West_8_1.into_usize(),
+                end: ExitId::Glacier__Vertical_Room__Peak__ex__West_8_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GlacierSpotId::Glacier__Vertical_Room__East_12.into_usize(),
+                end: GlacierSpotId::Glacier__Vertical_Room__West_9.into_usize() + 1,
+            },
+        },
+        GlacierSpotId::Glacier__Vertical_Room__West_8 => BigSpot {
+            id: BigSpotId::Glacier(GlacierSpotId::Glacier__Vertical_Room__West_8),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Glacier__Vertical_Room__West_8__ex__Peak__East_8_1.into_usize(),
+                end: ExitId::Glacier__Vertical_Room__West_8__ex__Peak__East_8_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GlacierSpotId::Glacier__Vertical_Room__East_12.into_usize(),
+                end: GlacierSpotId::Glacier__Vertical_Room__West_9.into_usize() + 1,
+            },
+        },
+        GlacierSpotId::Glacier__Vertical_Room__East_Corner => BigSpot {
+            id: BigSpotId::Glacier(GlacierSpotId::Glacier__Vertical_Room__East_Corner),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Glacier__Vertical_Room__East_Corner__ex__East_12_1.into_usize(),
+                end: ExitId::Glacier__Vertical_Room__East_Corner__ex__East_12_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GlacierSpotId::Glacier__Vertical_Room__East_12.into_usize(),
+                end: GlacierSpotId::Glacier__Vertical_Room__West_9.into_usize() + 1,
+            },
+        },
+        GlacierSpotId::Glacier__Vertical_Room__East_12 => BigSpot {
+            id: BigSpotId::Glacier(GlacierSpotId::Glacier__Vertical_Room__East_12),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Glacier__Vertical_Room__East_12__ex__Boomerang_Antechamber__West_12_1.into_usize(),
+                end: ExitId::Glacier__Vertical_Room__East_12__ex__Boomerang_Antechamber__West_12_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GlacierSpotId::Glacier__Vertical_Room__East_12.into_usize(),
+                end: GlacierSpotId::Glacier__Vertical_Room__West_9.into_usize() + 1,
+            },
+        },
+        GlacierSpotId::Glacier__Vertical_Room__Lower_West_Corner => BigSpot {
+            id: BigSpotId::Glacier(GlacierSpotId::Glacier__Vertical_Room__Lower_West_Corner),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GlacierSpotId::Glacier__Vertical_Room__East_12.into_usize(),
+                end: GlacierSpotId::Glacier__Vertical_Room__West_9.into_usize() + 1,
+            },
+        },
+        GlacierSpotId::Glacier__Vertical_Room__East_13 => BigSpot {
+            id: BigSpotId::Glacier(GlacierSpotId::Glacier__Vertical_Room__East_13),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Glacier__Vertical_Room__East_13__ex__Boomerang_Antechamber__West_13_1.into_usize(),
+                end: ExitId::Glacier__Vertical_Room__East_13__ex__Boomerang_Antechamber__West_13_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GlacierSpotId::Glacier__Vertical_Room__East_12.into_usize(),
+                end: GlacierSpotId::Glacier__Vertical_Room__West_9.into_usize() + 1,
+            },
+        },
+        GlacierSpotId::Glacier__Boomerang_Antechamber__West_13 => BigSpot {
+            id: BigSpotId::Glacier(GlacierSpotId::Glacier__Boomerang_Antechamber__West_13),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Glacier__Boomerang_Antechamber__West_13__ex__Vertical_Room__East_13_1.into_usize(),
+                end: ExitId::Glacier__Boomerang_Antechamber__West_13__ex__Vertical_Room__East_13_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GlacierSpotId::Glacier__Boomerang_Antechamber__East_12.into_usize(),
+                end: GlacierSpotId::Glacier__Boomerang_Antechamber__West_13.into_usize() + 1,
+            },
+        },
+        GlacierSpotId::Glacier__Boomerang_Antechamber__East_12 => BigSpot {
+            id: BigSpotId::Glacier(GlacierSpotId::Glacier__Boomerang_Antechamber__East_12),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Glacier__Boomerang_Antechamber__East_12__ex__Boomerang_Room__West_1.into_usize(),
+                end: ExitId::Glacier__Boomerang_Antechamber__East_12__ex__Boomerang_Room__West_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GlacierSpotId::Glacier__Boomerang_Antechamber__East_12.into_usize(),
+                end: GlacierSpotId::Glacier__Boomerang_Antechamber__West_13.into_usize() + 1,
+            },
+        },
+        GlacierSpotId::Glacier__Boomerang_Antechamber__Upper_East => BigSpot {
+            id: BigSpotId::Glacier(GlacierSpotId::Glacier__Boomerang_Antechamber__Upper_East),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Glacier__Boomerang_Antechamber__Upper_East__ex__Boomerang_Room__Upper_West_1.into_usize(),
+                end: ExitId::Glacier__Boomerang_Antechamber__Upper_East__ex__Boomerang_Room__Upper_West_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GlacierSpotId::Glacier__Boomerang_Antechamber__East_12.into_usize(),
+                end: GlacierSpotId::Glacier__Boomerang_Antechamber__West_13.into_usize() + 1,
+            },
+        },
+        GlacierSpotId::Glacier__Boomerang_Antechamber__West_12 => BigSpot {
+            id: BigSpotId::Glacier(GlacierSpotId::Glacier__Boomerang_Antechamber__West_12),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Glacier__Boomerang_Antechamber__West_12__ex__Vertical_Room__East_12_1.into_usize(),
+                end: ExitId::Glacier__Boomerang_Antechamber__West_12__ex__Vertical_Room__East_12_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GlacierSpotId::Glacier__Boomerang_Antechamber__East_12.into_usize(),
+                end: GlacierSpotId::Glacier__Boomerang_Antechamber__West_13.into_usize() + 1,
+            },
+        },
+        GlacierSpotId::Glacier__Boomerang_Room__West => BigSpot {
+            id: BigSpotId::Glacier(GlacierSpotId::Glacier__Boomerang_Room__West),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Glacier__Boomerang_Room__West__ex__Boomerang_Antechamber__East_12_1.into_usize(),
+                end: ExitId::Glacier__Boomerang_Room__West__ex__Boomerang_Antechamber__East_12_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GlacierSpotId::Glacier__Boomerang_Room__Center_ish.into_usize(),
+                end: GlacierSpotId::Glacier__Boomerang_Room__West.into_usize() + 1,
+            },
+        },
+        GlacierSpotId::Glacier__Boomerang_Room__Platform => BigSpot {
+            id: BigSpotId::Glacier(GlacierSpotId::Glacier__Boomerang_Room__Platform),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Glacier__Boomerang_Room__Platform__ex__Upper_West_1.into_usize(),
+                end: ExitId::Glacier__Boomerang_Room__Platform__ex__Upper_West_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GlacierSpotId::Glacier__Boomerang_Room__Center_ish.into_usize(),
+                end: GlacierSpotId::Glacier__Boomerang_Room__West.into_usize() + 1,
+            },
+        },
+        GlacierSpotId::Glacier__Boomerang_Room__Center_ish => BigSpot {
+            id: BigSpotId::Glacier(GlacierSpotId::Glacier__Boomerang_Room__Center_ish),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Glacier__Boomerang_Room__Center_ish__ex__Center_Ledge_1.into_usize(),
+                end: ExitId::Glacier__Boomerang_Room__Center_ish__ex__Center_Ledge_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GlacierSpotId::Glacier__Boomerang_Room__Center_ish.into_usize(),
+                end: GlacierSpotId::Glacier__Boomerang_Room__West.into_usize() + 1,
+            },
+        },
+        GlacierSpotId::Glacier__Boomerang_Room__Pedestal => BigSpot {
+            id: BigSpotId::Glacier(GlacierSpotId::Glacier__Boomerang_Room__Pedestal),
+            locations: Range {
+                start: LocationId::Glacier__Boomerang_Room__Pedestal__Item.into_usize(),
+                end: LocationId::Glacier__Boomerang_Room__Pedestal__Switch.into_usize() + 1,
+            },
+            exits: Range {
+                start: ExitId::Glacier__Boomerang_Room__Pedestal__ex__Upper_Gate_East_1.into_usize(),
+                end: ExitId::Glacier__Boomerang_Room__Pedestal__ex__Upper_Gate_East_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GlacierSpotId::Glacier__Boomerang_Room__Center_ish.into_usize(),
+                end: GlacierSpotId::Glacier__Boomerang_Room__West.into_usize() + 1,
+            },
+        },
+        GlacierSpotId::Glacier__Boomerang_Room__Upper_Gate_East => BigSpot {
+            id: BigSpotId::Glacier(GlacierSpotId::Glacier__Boomerang_Room__Upper_Gate_East),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Glacier__Boomerang_Room__Upper_Gate_East__ex__Center_Ledge_1.into_usize(),
+                end: ExitId::Glacier__Boomerang_Room__Upper_Gate_East__ex__Center_Ledge_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GlacierSpotId::Glacier__Boomerang_Room__Center_ish.into_usize(),
+                end: GlacierSpotId::Glacier__Boomerang_Room__West.into_usize() + 1,
+            },
+        },
+        GlacierSpotId::Glacier__Boomerang_Room__Center_Ledge => BigSpot {
+            id: BigSpotId::Glacier(GlacierSpotId::Glacier__Boomerang_Room__Center_Ledge),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Glacier__Boomerang_Room__Center_Ledge__ex__Upper_Gate_East_1.into_usize(),
+                end: ExitId::Glacier__Boomerang_Room__Center_Ledge__ex__Upper_Gate_East_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GlacierSpotId::Glacier__Boomerang_Room__Center_ish.into_usize(),
+                end: GlacierSpotId::Glacier__Boomerang_Room__West.into_usize() + 1,
+            },
+        },
+        GlacierSpotId::Glacier__Boomerang_Room__Upper_West => BigSpot {
+            id: BigSpotId::Glacier(GlacierSpotId::Glacier__Boomerang_Room__Upper_West),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Glacier__Boomerang_Room__Upper_West__ex__Boomerang_Antechamber__Upper_East_1.into_usize(),
+                end: ExitId::Glacier__Boomerang_Room__Upper_West__ex__Platform_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GlacierSpotId::Glacier__Boomerang_Room__Center_ish.into_usize(),
+                end: GlacierSpotId::Glacier__Boomerang_Room__West.into_usize() + 1,
+            },
+        },
+        GlacierSpotId::Glacier__Ledge_Grab_Room__East_9 => BigSpot {
+            id: BigSpotId::Glacier(GlacierSpotId::Glacier__Ledge_Grab_Room__East_9),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Glacier__Ledge_Grab_Room__East_9__ex__Column_1.into_usize(),
+                end: ExitId::Glacier__Ledge_Grab_Room__East_9__ex__Vertical_Room__West_9_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GlacierSpotId::Glacier__Ledge_Grab_Room__Cliff.into_usize(),
+                end: GlacierSpotId::Glacier__Ledge_Grab_Room__West.into_usize() + 1,
+            },
+        },
+        GlacierSpotId::Glacier__Ledge_Grab_Room__Column => BigSpot {
+            id: BigSpotId::Glacier(GlacierSpotId::Glacier__Ledge_Grab_Room__Column),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Glacier__Ledge_Grab_Room__Column__ex__Ledge_Grab_Room__Mid_35_1.into_usize(),
+                end: ExitId::Glacier__Ledge_Grab_Room__Column__ex__Ledge_Grab_Room__Mid_35_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GlacierSpotId::Glacier__Ledge_Grab_Room__Cliff.into_usize(),
+                end: GlacierSpotId::Glacier__Ledge_Grab_Room__West.into_usize() + 1,
+            },
+        },
+        GlacierSpotId::Glacier__Ledge_Grab_Room__Gate_Ledge => BigSpot {
+            id: BigSpotId::Glacier(GlacierSpotId::Glacier__Ledge_Grab_Room__Gate_Ledge),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Glacier__Ledge_Grab_Room__Gate_Ledge__ex__Column_1.into_usize(),
+                end: ExitId::Glacier__Ledge_Grab_Room__Gate_Ledge__ex__Column_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GlacierSpotId::Glacier__Ledge_Grab_Room__Cliff.into_usize(),
+                end: GlacierSpotId::Glacier__Ledge_Grab_Room__West.into_usize() + 1,
+            },
+        },
+        GlacierSpotId::Glacier__Ledge_Grab_Room__East_11 => BigSpot {
+            id: BigSpotId::Glacier(GlacierSpotId::Glacier__Ledge_Grab_Room__East_11),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Glacier__Ledge_Grab_Room__East_11__ex__Vertical_Room__Past_Gate_1.into_usize(),
+                end: ExitId::Glacier__Ledge_Grab_Room__East_11__ex__Vertical_Room__Past_Gate_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GlacierSpotId::Glacier__Ledge_Grab_Room__Cliff.into_usize(),
+                end: GlacierSpotId::Glacier__Ledge_Grab_Room__West.into_usize() + 1,
+            },
+        },
+        GlacierSpotId::Glacier__Ledge_Grab_Room__Mid_35 => BigSpot {
+            id: BigSpotId::Glacier(GlacierSpotId::Glacier__Ledge_Grab_Room__Mid_35),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Glacier__Ledge_Grab_Room__Mid_35__ex__Fork_1.into_usize(),
+                end: ExitId::Glacier__Ledge_Grab_Room__Mid_35__ex__Fork_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GlacierSpotId::Glacier__Ledge_Grab_Room__Cliff.into_usize(),
+                end: GlacierSpotId::Glacier__Ledge_Grab_Room__West.into_usize() + 1,
+            },
+        },
+        GlacierSpotId::Glacier__Ledge_Grab_Room__Mid_34 => BigSpot {
+            id: BigSpotId::Glacier(GlacierSpotId::Glacier__Ledge_Grab_Room__Mid_34),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Glacier__Ledge_Grab_Room__Mid_34__ex__Lower_Platform_1.into_usize(),
+                end: ExitId::Glacier__Ledge_Grab_Room__Mid_34__ex__Lower_Platform_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GlacierSpotId::Glacier__Ledge_Grab_Room__Cliff.into_usize(),
+                end: GlacierSpotId::Glacier__Ledge_Grab_Room__West.into_usize() + 1,
+            },
+        },
+        GlacierSpotId::Glacier__Ledge_Grab_Room__Cliff => BigSpot {
+            id: BigSpotId::Glacier(GlacierSpotId::Glacier__Ledge_Grab_Room__Cliff),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Glacier__Ledge_Grab_Room__Cliff__ex__Lower_Platform_1.into_usize(),
+                end: ExitId::Glacier__Ledge_Grab_Room__Cliff__ex__Lower_Platform_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GlacierSpotId::Glacier__Ledge_Grab_Room__Cliff.into_usize(),
+                end: GlacierSpotId::Glacier__Ledge_Grab_Room__West.into_usize() + 1,
+            },
+        },
+        GlacierSpotId::Glacier__Ledge_Grab_Room__Cliff_Bottom => BigSpot {
+            id: BigSpotId::Glacier(GlacierSpotId::Glacier__Ledge_Grab_Room__Cliff_Bottom),
+            locations: Range {
+                start: LocationId::Glacier__Ledge_Grab_Room__Cliff_Bottom__Quick_Grab.into_usize(),
+                end: LocationId::Glacier__Ledge_Grab_Room__Cliff_Bottom__Quick_Grab.into_usize() + 1,
+            },
+            exits: Range {
+                start: ExitId::Glacier__Ledge_Grab_Room__Cliff_Bottom__ex__Cliff_1.into_usize(),
+                end: ExitId::Glacier__Ledge_Grab_Room__Cliff_Bottom__ex__Cliff_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GlacierSpotId::Glacier__Ledge_Grab_Room__Cliff.into_usize(),
+                end: GlacierSpotId::Glacier__Ledge_Grab_Room__West.into_usize() + 1,
+            },
+        },
+        GlacierSpotId::Glacier__Ledge_Grab_Room__Pedestal => BigSpot {
+            id: BigSpotId::Glacier(GlacierSpotId::Glacier__Ledge_Grab_Room__Pedestal),
+            locations: Range {
+                start: LocationId::Glacier__Ledge_Grab_Room__Pedestal__Item.into_usize(),
+                end: LocationId::Glacier__Ledge_Grab_Room__Pedestal__Item.into_usize() + 1,
+            },
+            exits: Range {
+                start: ExitId::Glacier__Ledge_Grab_Room__Pedestal__ex__West_1.into_usize(),
+                end: ExitId::Glacier__Ledge_Grab_Room__Pedestal__ex__West_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GlacierSpotId::Glacier__Ledge_Grab_Room__Cliff.into_usize(),
+                end: GlacierSpotId::Glacier__Ledge_Grab_Room__West.into_usize() + 1,
+            },
+        },
+        GlacierSpotId::Glacier__Ledge_Grab_Room__Gate => BigSpot {
+            id: BigSpotId::Glacier(GlacierSpotId::Glacier__Ledge_Grab_Room__Gate),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Glacier__Ledge_Grab_Room__Gate__ex__West_1.into_usize(),
+                end: ExitId::Glacier__Ledge_Grab_Room__Gate__ex__West_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GlacierSpotId::Glacier__Ledge_Grab_Room__Cliff.into_usize(),
+                end: GlacierSpotId::Glacier__Ledge_Grab_Room__West.into_usize() + 1,
+            },
+        },
+        GlacierSpotId::Glacier__Ledge_Grab_Room__West => BigSpot {
+            id: BigSpotId::Glacier(GlacierSpotId::Glacier__Ledge_Grab_Room__West),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GlacierSpotId::Glacier__Ledge_Grab_Room__Cliff.into_usize(),
+                end: GlacierSpotId::Glacier__Ledge_Grab_Room__West.into_usize() + 1,
+            },
+        },
+        GlacierSpotId::Glacier__Ledge_Grab_Room__Lower_Platform => BigSpot {
+            id: BigSpotId::Glacier(GlacierSpotId::Glacier__Ledge_Grab_Room__Lower_Platform),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Glacier__Ledge_Grab_Room__Lower_Platform__ex__Upper_Platform_1.into_usize(),
+                end: ExitId::Glacier__Ledge_Grab_Room__Lower_Platform__ex__Upper_Platform_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GlacierSpotId::Glacier__Ledge_Grab_Room__Cliff.into_usize(),
+                end: GlacierSpotId::Glacier__Ledge_Grab_Room__West.into_usize() + 1,
+            },
+        },
+        GlacierSpotId::Glacier__Ledge_Grab_Room__Upper_Platform => BigSpot {
+            id: BigSpotId::Glacier(GlacierSpotId::Glacier__Ledge_Grab_Room__Upper_Platform),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Glacier__Ledge_Grab_Room__Upper_Platform__ex__Fork_1.into_usize(),
+                end: ExitId::Glacier__Ledge_Grab_Room__Upper_Platform__ex__Fork_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GlacierSpotId::Glacier__Ledge_Grab_Room__Cliff.into_usize(),
+                end: GlacierSpotId::Glacier__Ledge_Grab_Room__West.into_usize() + 1,
+            },
+        },
+        GlacierSpotId::Glacier__Ledge_Grab_Room__Fork => BigSpot {
+            id: BigSpotId::Glacier(GlacierSpotId::Glacier__Ledge_Grab_Room__Fork),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Glacier__Ledge_Grab_Room__Fork__ex__Column_1.into_usize(),
+                end: ExitId::Glacier__Ledge_Grab_Room__Fork__ex__Gate_Ledge_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GlacierSpotId::Glacier__Ledge_Grab_Room__Cliff.into_usize(),
+                end: GlacierSpotId::Glacier__Ledge_Grab_Room__West.into_usize() + 1,
+            },
+        },
+        GlacierSpotId::Glacier__Peak__East_8 => BigSpot {
+            id: BigSpotId::Glacier(GlacierSpotId::Glacier__Peak__East_8),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Glacier__Peak__East_8__ex__Top_Platform_East_1.into_usize(),
+                end: ExitId::Glacier__Peak__East_8__ex__Vertical_Room__West_8_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GlacierSpotId::Glacier__Peak__East_8.into_usize(),
+                end: GlacierSpotId::Glacier__Peak__West_Cliff.into_usize() + 1,
+            },
+        },
+        GlacierSpotId::Glacier__Peak__Top_Platform_East => BigSpot {
+            id: BigSpotId::Glacier(GlacierSpotId::Glacier__Peak__Top_Platform_East),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GlacierSpotId::Glacier__Peak__East_8.into_usize(),
+                end: GlacierSpotId::Glacier__Peak__West_Cliff.into_usize() + 1,
+            },
+        },
+        GlacierSpotId::Glacier__Peak__Top_Rock => BigSpot {
+            id: BigSpotId::Glacier(GlacierSpotId::Glacier__Peak__Top_Rock),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GlacierSpotId::Glacier__Peak__East_8.into_usize(),
+                end: GlacierSpotId::Glacier__Peak__West_Cliff.into_usize() + 1,
+            },
+        },
+        GlacierSpotId::Glacier__Peak__Highest_Platform => BigSpot {
+            id: BigSpotId::Glacier(GlacierSpotId::Glacier__Peak__Highest_Platform),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GlacierSpotId::Glacier__Peak__East_8.into_usize(),
+                end: GlacierSpotId::Glacier__Peak__West_Cliff.into_usize() + 1,
+            },
+        },
+        GlacierSpotId::Glacier__Peak__West_Cliff => BigSpot {
+            id: BigSpotId::Glacier(GlacierSpotId::Glacier__Peak__West_Cliff),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GlacierSpotId::Glacier__Peak__East_8.into_usize(),
+                end: GlacierSpotId::Glacier__Peak__West_Cliff.into_usize() + 1,
+            },
+        },
+        GlacierSpotId::Glacier__Peak__Under_West_Cliff => BigSpot {
+            id: BigSpotId::Glacier(GlacierSpotId::Glacier__Peak__Under_West_Cliff),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Glacier__Peak__Under_West_Cliff__ex__West_Cliff_1.into_usize(),
+                end: ExitId::Glacier__Peak__Under_West_Cliff__ex__West_Cliff_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GlacierSpotId::Glacier__Peak__East_8.into_usize(),
+                end: GlacierSpotId::Glacier__Peak__West_Cliff.into_usize() + 1,
+            },
+        },
+        GlacierSpotId::Glacier__Peak__West_8 => BigSpot {
+            id: BigSpotId::Glacier(GlacierSpotId::Glacier__Peak__West_8),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Glacier__Peak__West_8__ex__Grid_32_7_10__East_8_1.into_usize(),
+                end: ExitId::Glacier__Peak__West_8__ex__Grid_32_7_10__East_8_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GlacierSpotId::Glacier__Peak__East_8.into_usize(),
+                end: GlacierSpotId::Glacier__Peak__West_Cliff.into_usize() + 1,
+            },
+        },
+        GlacierSpotId::Glacier__Grid_32_7_10__East_8 => BigSpot {
+            id: BigSpotId::Glacier(GlacierSpotId::Glacier__Grid_32_7_10__East_8),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Glacier__Grid_32_7_10__East_8__ex__Peak__West_8_1.into_usize(),
+                end: ExitId::Glacier__Grid_32_7_10__East_8__ex__Peak__West_8_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GlacierSpotId::Glacier__Grid_32_7_10__Center_Platform.into_usize(),
+                end: GlacierSpotId::Glacier__Grid_32_7_10__West_9.into_usize() + 1,
+            },
+        },
+        GlacierSpotId::Glacier__Grid_32_7_10__Center_Platform => BigSpot {
+            id: BigSpotId::Glacier(GlacierSpotId::Glacier__Grid_32_7_10__Center_Platform),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GlacierSpotId::Glacier__Grid_32_7_10__Center_Platform.into_usize(),
+                end: GlacierSpotId::Glacier__Grid_32_7_10__West_9.into_usize() + 1,
+            },
+        },
+        GlacierSpotId::Glacier__Grid_32_7_10__Column => BigSpot {
+            id: BigSpotId::Glacier(GlacierSpotId::Glacier__Grid_32_7_10__Column),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GlacierSpotId::Glacier__Grid_32_7_10__Center_Platform.into_usize(),
+                end: GlacierSpotId::Glacier__Grid_32_7_10__West_9.into_usize() + 1,
+            },
+        },
+        GlacierSpotId::Glacier__Grid_32_7_10__Left_Rock => BigSpot {
+            id: BigSpotId::Glacier(GlacierSpotId::Glacier__Grid_32_7_10__Left_Rock),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Glacier__Grid_32_7_10__Left_Rock__ex__Column_1.into_usize(),
+                end: ExitId::Glacier__Grid_32_7_10__Left_Rock__ex__Column_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GlacierSpotId::Glacier__Grid_32_7_10__Center_Platform.into_usize(),
+                end: GlacierSpotId::Glacier__Grid_32_7_10__West_9.into_usize() + 1,
+            },
+        },
+        GlacierSpotId::Glacier__Grid_32_7_10__West_9 => BigSpot {
+            id: BigSpotId::Glacier(GlacierSpotId::Glacier__Grid_32_7_10__West_9),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Glacier__Grid_32_7_10__West_9__ex__Grid_31_9_12__East_9_1.into_usize(),
+                end: ExitId::Glacier__Grid_32_7_10__West_9__ex__Grid_31_9_12__East_9_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GlacierSpotId::Glacier__Grid_32_7_10__Center_Platform.into_usize(),
+                end: GlacierSpotId::Glacier__Grid_32_7_10__West_9.into_usize() + 1,
+            },
+        },
+        GlacierSpotId::Glacier__Grid_32_7_10__West_10 => BigSpot {
+            id: BigSpotId::Glacier(GlacierSpotId::Glacier__Grid_32_7_10__West_10),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Glacier__Grid_32_7_10__West_10__ex__Left_Rock_1.into_usize(),
+                end: ExitId::Glacier__Grid_32_7_10__West_10__ex__Left_Rock_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GlacierSpotId::Glacier__Grid_32_7_10__Center_Platform.into_usize(),
+                end: GlacierSpotId::Glacier__Grid_32_7_10__West_9.into_usize() + 1,
+            },
+        },
+        GlacierSpotId::Glacier__Grid_31_9_12__East_9 => BigSpot {
+            id: BigSpotId::Glacier(GlacierSpotId::Glacier__Grid_31_9_12__East_9),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Glacier__Grid_31_9_12__East_9__ex__Grid_32_7_10__West_9_1.into_usize(),
+                end: ExitId::Glacier__Grid_31_9_12__East_9__ex__Grid_32_7_10__West_9_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GlacierSpotId::Glacier__Grid_31_9_12__East_10.into_usize(),
+                end: GlacierSpotId::Glacier__Grid_31_9_12__West_12.into_usize() + 1,
+            },
+        },
+        GlacierSpotId::Glacier__Grid_31_9_12__East_10 => BigSpot {
+            id: BigSpotId::Glacier(GlacierSpotId::Glacier__Grid_31_9_12__East_10),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Glacier__Grid_31_9_12__East_10__ex__Grid_32_7_10__West_10_1.into_usize(),
+                end: ExitId::Glacier__Grid_31_9_12__East_10__ex__Grid_32_7_10__West_10_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GlacierSpotId::Glacier__Grid_31_9_12__East_10.into_usize(),
+                end: GlacierSpotId::Glacier__Grid_31_9_12__West_12.into_usize() + 1,
+            },
+        },
+        GlacierSpotId::Glacier__Grid_31_9_12__Observation_Tower => BigSpot {
+            id: BigSpotId::Glacier(GlacierSpotId::Glacier__Grid_31_9_12__Observation_Tower),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GlacierSpotId::Glacier__Grid_31_9_12__East_10.into_usize(),
+                end: GlacierSpotId::Glacier__Grid_31_9_12__West_12.into_usize() + 1,
+            },
+        },
+        GlacierSpotId::Glacier__Grid_31_9_12__Observation_Tower_L4 => BigSpot {
+            id: BigSpotId::Glacier(GlacierSpotId::Glacier__Grid_31_9_12__Observation_Tower_L4),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GlacierSpotId::Glacier__Grid_31_9_12__East_10.into_usize(),
+                end: GlacierSpotId::Glacier__Grid_31_9_12__West_12.into_usize() + 1,
+            },
+        },
+        GlacierSpotId::Glacier__Grid_31_9_12__West_12 => BigSpot {
+            id: BigSpotId::Glacier(GlacierSpotId::Glacier__Grid_31_9_12__West_12),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Glacier__Grid_31_9_12__West_12__ex__Ebih__Base_Camp__East_12_1.into_usize(),
+                end: ExitId::Glacier__Grid_31_9_12__West_12__ex__Ebih__Base_Camp__East_12_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GlacierSpotId::Glacier__Grid_31_9_12__East_10.into_usize(),
+                end: GlacierSpotId::Glacier__Grid_31_9_12__West_12.into_usize() + 1,
+            },
+        },
+        GlacierSpotId::Glacier__Grid_31_9_12__Midair => BigSpot {
+            id: BigSpotId::Glacier(GlacierSpotId::Glacier__Grid_31_9_12__Midair),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Glacier__Grid_31_9_12__Midair__ex__Ebih__Base_Camp__East_11_1.into_usize(),
+                end: ExitId::Glacier__Grid_31_9_12__Midair__ex__Ebih__Base_Camp__East_11_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GlacierSpotId::Glacier__Grid_31_9_12__East_10.into_usize(),
+                end: GlacierSpotId::Glacier__Grid_31_9_12__West_12.into_usize() + 1,
+            },
+        },
+        GlacierSpotId::Glacier__Lake_Main_Entrance__Ebih_Access => BigSpot {
+            id: BigSpotId::Glacier(GlacierSpotId::Glacier__Lake_Main_Entrance__Ebih_Access),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Glacier__Lake_Main_Entrance__Ebih_Access__ex__Ebih__Base_Camp__Lake_Access_1.into_usize(),
+                end: ExitId::Glacier__Lake_Main_Entrance__Ebih_Access__ex__Ebih__Base_Camp__Lake_Access_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GlacierSpotId::Glacier__Lake_Main_Entrance__Bottom.into_usize(),
+                end: GlacierSpotId::Glacier__Lake_Main_Entrance__Upper_Platform.into_usize() + 1,
+            },
+        },
+        GlacierSpotId::Glacier__Lake_Main_Entrance__Upper => BigSpot {
+            id: BigSpotId::Glacier(GlacierSpotId::Glacier__Lake_Main_Entrance__Upper),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GlacierSpotId::Glacier__Lake_Main_Entrance__Bottom.into_usize(),
+                end: GlacierSpotId::Glacier__Lake_Main_Entrance__Upper_Platform.into_usize() + 1,
+            },
+        },
+        GlacierSpotId::Glacier__Lake_Main_Entrance__Upper_Platform => BigSpot {
+            id: BigSpotId::Glacier(GlacierSpotId::Glacier__Lake_Main_Entrance__Upper_Platform),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Glacier__Lake_Main_Entrance__Upper_Platform__ex__Upper_1.into_usize(),
+                end: ExitId::Glacier__Lake_Main_Entrance__Upper_Platform__ex__Upper_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GlacierSpotId::Glacier__Lake_Main_Entrance__Bottom.into_usize(),
+                end: GlacierSpotId::Glacier__Lake_Main_Entrance__Upper_Platform.into_usize() + 1,
+            },
+        },
+        GlacierSpotId::Glacier__Lake_Main_Entrance__Ledge => BigSpot {
+            id: BigSpotId::Glacier(GlacierSpotId::Glacier__Lake_Main_Entrance__Ledge),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Glacier__Lake_Main_Entrance__Ledge__ex__Upper_1.into_usize(),
+                end: ExitId::Glacier__Lake_Main_Entrance__Ledge__ex__Upper_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GlacierSpotId::Glacier__Lake_Main_Entrance__Bottom.into_usize(),
+                end: GlacierSpotId::Glacier__Lake_Main_Entrance__Upper_Platform.into_usize() + 1,
+            },
+        },
+        GlacierSpotId::Glacier__Lake_Main_Entrance__Lower_Platform => BigSpot {
+            id: BigSpotId::Glacier(GlacierSpotId::Glacier__Lake_Main_Entrance__Lower_Platform),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Glacier__Lake_Main_Entrance__Lower_Platform__ex__Ledge_1.into_usize(),
+                end: ExitId::Glacier__Lake_Main_Entrance__Lower_Platform__ex__Ledge_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GlacierSpotId::Glacier__Lake_Main_Entrance__Bottom.into_usize(),
+                end: GlacierSpotId::Glacier__Lake_Main_Entrance__Upper_Platform.into_usize() + 1,
+            },
+        },
+        GlacierSpotId::Glacier__Lake_Main_Entrance__Hill => BigSpot {
+            id: BigSpotId::Glacier(GlacierSpotId::Glacier__Lake_Main_Entrance__Hill),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GlacierSpotId::Glacier__Lake_Main_Entrance__Bottom.into_usize(),
+                end: GlacierSpotId::Glacier__Lake_Main_Entrance__Upper_Platform.into_usize() + 1,
+            },
+        },
+        GlacierSpotId::Glacier__Lake_Main_Entrance__Bottom => BigSpot {
+            id: BigSpotId::Glacier(GlacierSpotId::Glacier__Lake_Main_Entrance__Bottom),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GlacierSpotId::Glacier__Lake_Main_Entrance__Bottom.into_usize(),
+                end: GlacierSpotId::Glacier__Lake_Main_Entrance__Upper_Platform.into_usize() + 1,
+            },
+        },
+        GlacierSpotId::Glacier__Lake_Main_Entrance__Side_Jump => BigSpot {
+            id: BigSpotId::Glacier(GlacierSpotId::Glacier__Lake_Main_Entrance__Side_Jump),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GlacierSpotId::Glacier__Lake_Main_Entrance__Bottom.into_usize(),
+                end: GlacierSpotId::Glacier__Lake_Main_Entrance__Upper_Platform.into_usize() + 1,
+            },
+        },
+        GlacierSpotId::Glacier__Lake_Main_Entrance__Side => BigSpot {
+            id: BigSpotId::Glacier(GlacierSpotId::Glacier__Lake_Main_Entrance__Side),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GlacierSpotId::Glacier__Lake_Main_Entrance__Bottom.into_usize(),
+                end: GlacierSpotId::Glacier__Lake_Main_Entrance__Upper_Platform.into_usize() + 1,
+            },
+        },
+        GlacierSpotId::Glacier__Lake_Main_Entrance__Lake_Access => BigSpot {
+            id: BigSpotId::Glacier(GlacierSpotId::Glacier__Lake_Main_Entrance__Lake_Access),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Glacier__Lake_Main_Entrance__Lake_Access__ex__Amagi__Main_Area__East_15_1.into_usize(),
+                end: ExitId::Glacier__Lake_Main_Entrance__Lake_Access__ex__Amagi__Main_Area__East_15_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GlacierSpotId::Glacier__Lake_Main_Entrance__Bottom.into_usize(),
+                end: GlacierSpotId::Glacier__Lake_Main_Entrance__Upper_Platform.into_usize() + 1,
+            },
+        },
+        GlacierSpotId::Glacier__Apocalypse_Entry__West => BigSpot {
+            id: BigSpotId::Glacier(GlacierSpotId::Glacier__Apocalypse_Entry__West),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Glacier__Apocalypse_Entry__West__ex__Grid_43_10_11__East_1.into_usize(),
+                end: ExitId::Glacier__Apocalypse_Entry__West__ex__Grid_43_10_11__East_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GlacierSpotId::Glacier__Apocalypse_Entry__Terminal.into_usize(),
+                end: GlacierSpotId::Glacier__Apocalypse_Entry__West.into_usize() + 1,
+            },
+        },
+        GlacierSpotId::Glacier__Apocalypse_Entry__Terminal => BigSpot {
+            id: BigSpotId::Glacier(GlacierSpotId::Glacier__Apocalypse_Entry__Terminal),
+            locations: Range {
+                start: LocationId::Glacier__Apocalypse_Entry__Terminal__Escape.into_usize(),
+                end: LocationId::Glacier__Apocalypse_Entry__Terminal__Escape.into_usize() + 1,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: GlacierSpotId::Glacier__Apocalypse_Entry__Terminal.into_usize(),
+                end: GlacierSpotId::Glacier__Apocalypse_Entry__West.into_usize() + 1,
+            },
+        },
+    }
+}
+pub fn build_irikar_breach_spots() -> EnumMap<Irikar_BreachSpotId, BigSpot> {
+    enum_map! {
+        Irikar_BreachSpotId::Irikar_Breach__Save_Room__Save_Point => BigSpot {
+            id: BigSpotId::Irikar_Breach(Irikar_BreachSpotId::Irikar_Breach__Save_Room__Save_Point),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: Irikar_BreachSpotId::Irikar_Breach__Save_Room__Save_Point.into_usize(),
+                end: Irikar_BreachSpotId::Irikar_Breach__Save_Room__Save_Point.into_usize() + 1,
+            },
+        },
+    }
+}
+pub fn build_irikar_spots() -> EnumMap<IrikarSpotId, BigSpot> {
+    enum_map! {
+        IrikarSpotId::Irikar__Hub__Northwest => BigSpot {
+            id: BigSpotId::Irikar(IrikarSpotId::Irikar__Hub__Northwest),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: IrikarSpotId::Irikar__Hub__Bowl_Hole.into_usize(),
+                end: IrikarSpotId::Irikar__Hub__West_Rim.into_usize() + 1,
+            },
+        },
+        IrikarSpotId::Irikar__Hub__North_Above_Portal => BigSpot {
+            id: BigSpotId::Irikar(IrikarSpotId::Irikar__Hub__North_Above_Portal),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: IrikarSpotId::Irikar__Hub__Bowl_Hole.into_usize(),
+                end: IrikarSpotId::Irikar__Hub__West_Rim.into_usize() + 1,
+            },
+        },
+        IrikarSpotId::Irikar__Hub__Northwest_Above_Bowl => BigSpot {
+            id: BigSpotId::Irikar(IrikarSpotId::Irikar__Hub__Northwest_Above_Bowl),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: IrikarSpotId::Irikar__Hub__Bowl_Hole.into_usize(),
+                end: IrikarSpotId::Irikar__Hub__West_Rim.into_usize() + 1,
+            },
+        },
+        IrikarSpotId::Irikar__Hub__Northeast_Above_Bowl => BigSpot {
+            id: BigSpotId::Irikar(IrikarSpotId::Irikar__Hub__Northeast_Above_Bowl),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: IrikarSpotId::Irikar__Hub__Bowl_Hole.into_usize(),
+                end: IrikarSpotId::Irikar__Hub__West_Rim.into_usize() + 1,
+            },
+        },
+        IrikarSpotId::Irikar__Hub__West_Rim => BigSpot {
+            id: BigSpotId::Irikar(IrikarSpotId::Irikar__Hub__West_Rim),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Irikar__Hub__West_Rim__ex__East_Rim_1.into_usize(),
+                end: ExitId::Irikar__Hub__West_Rim__ex__East_Rim_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: IrikarSpotId::Irikar__Hub__Bowl_Hole.into_usize(),
+                end: IrikarSpotId::Irikar__Hub__West_Rim.into_usize() + 1,
+            },
+        },
+        IrikarSpotId::Irikar__Hub__East_Rim => BigSpot {
+            id: BigSpotId::Irikar(IrikarSpotId::Irikar__Hub__East_Rim),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Irikar__Hub__East_Rim__ex__Sat_Tower_Roof_West_1.into_usize(),
+                end: ExitId::Irikar__Hub__East_Rim__ex__Sat_Tower_Roof_West_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: IrikarSpotId::Irikar__Hub__Bowl_Hole.into_usize(),
+                end: IrikarSpotId::Irikar__Hub__West_Rim.into_usize() + 1,
+            },
+        },
+        IrikarSpotId::Irikar__Hub__Bowl_Top_Platform => BigSpot {
+            id: BigSpotId::Irikar(IrikarSpotId::Irikar__Hub__Bowl_Top_Platform),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Irikar__Hub__Bowl_Top_Platform__ex__West_Rim_1.into_usize(),
+                end: ExitId::Irikar__Hub__Bowl_Top_Platform__ex__West_Rim_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: IrikarSpotId::Irikar__Hub__Bowl_Hole.into_usize(),
+                end: IrikarSpotId::Irikar__Hub__West_Rim.into_usize() + 1,
+            },
+        },
+        IrikarSpotId::Irikar__Hub__Bowl_Middle_Ledge => BigSpot {
+            id: BigSpotId::Irikar(IrikarSpotId::Irikar__Hub__Bowl_Middle_Ledge),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Irikar__Hub__Bowl_Middle_Ledge__ex__Bowl_Top_Platform_1.into_usize(),
+                end: ExitId::Irikar__Hub__Bowl_Middle_Ledge__ex__Bowl_Top_Platform_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: IrikarSpotId::Irikar__Hub__Bowl_Hole.into_usize(),
+                end: IrikarSpotId::Irikar__Hub__West_Rim.into_usize() + 1,
+            },
+        },
+        IrikarSpotId::Irikar__Hub__Bowl_Middle_Platform_Center => BigSpot {
+            id: BigSpotId::Irikar(IrikarSpotId::Irikar__Hub__Bowl_Middle_Platform_Center),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Irikar__Hub__Bowl_Middle_Platform_Center__ex__Bowl_Middle_Ledge_1.into_usize(),
+                end: ExitId::Irikar__Hub__Bowl_Middle_Platform_Center__ex__Bowl_Middle_Ledge_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: IrikarSpotId::Irikar__Hub__Bowl_Hole.into_usize(),
+                end: IrikarSpotId::Irikar__Hub__West_Rim.into_usize() + 1,
+            },
+        },
+        IrikarSpotId::Irikar__Hub__Bowl_Middle_Platform_West => BigSpot {
+            id: BigSpotId::Irikar(IrikarSpotId::Irikar__Hub__Bowl_Middle_Platform_West),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Irikar__Hub__Bowl_Middle_Platform_West__ex__Bowl_Middle_Ledge_1.into_usize(),
+                end: ExitId::Irikar__Hub__Bowl_Middle_Platform_West__ex__Bowl_Middle_Ledge_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: IrikarSpotId::Irikar__Hub__Bowl_Hole.into_usize(),
+                end: IrikarSpotId::Irikar__Hub__West_Rim.into_usize() + 1,
+            },
+        },
+        IrikarSpotId::Irikar__Hub__Bowl_Platform_3 => BigSpot {
+            id: BigSpotId::Irikar(IrikarSpotId::Irikar__Hub__Bowl_Platform_3),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Irikar__Hub__Bowl_Platform_3__ex__Bowl_Middle_Platform_Center_1.into_usize(),
+                end: ExitId::Irikar__Hub__Bowl_Platform_3__ex__Bowl_Middle_Platform_Center_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: IrikarSpotId::Irikar__Hub__Bowl_Hole.into_usize(),
+                end: IrikarSpotId::Irikar__Hub__West_Rim.into_usize() + 1,
+            },
+        },
+        IrikarSpotId::Irikar__Hub__Save_Point => BigSpot {
+            id: BigSpotId::Irikar(IrikarSpotId::Irikar__Hub__Save_Point),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Irikar__Hub__Save_Point__ex__Bowl_Hole_1.into_usize(),
+                end: ExitId::Irikar__Hub__Save_Point__ex__Bowl_Hole_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: ActionId::Irikar__Hub__Save_Point__Save.into_usize(),
+                end: ActionId::Irikar__Hub__Save_Point__Save.into_usize() + 1,
+            },
+            area_spots: Range {
+                start: IrikarSpotId::Irikar__Hub__Bowl_Hole.into_usize(),
+                end: IrikarSpotId::Irikar__Hub__West_Rim.into_usize() + 1,
+            },
+        },
+        IrikarSpotId::Irikar__Hub__Bowl_Hole => BigSpot {
+            id: BigSpotId::Irikar(IrikarSpotId::Irikar__Hub__Bowl_Hole),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: IrikarSpotId::Irikar__Hub__Bowl_Hole.into_usize(),
+                end: IrikarSpotId::Irikar__Hub__West_Rim.into_usize() + 1,
+            },
+        },
+        IrikarSpotId::Irikar__Hub__Sat_Tower_Roof_West => BigSpot {
+            id: BigSpotId::Irikar(IrikarSpotId::Irikar__Hub__Sat_Tower_Roof_West),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: IrikarSpotId::Irikar__Hub__Bowl_Hole.into_usize(),
+                end: IrikarSpotId::Irikar__Hub__West_Rim.into_usize() + 1,
+            },
+        },
+        IrikarSpotId::Irikar__Hub__Sat_Tower_Roof_East => BigSpot {
+            id: BigSpotId::Irikar(IrikarSpotId::Irikar__Hub__Sat_Tower_Roof_East),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: IrikarSpotId::Irikar__Hub__Bowl_Hole.into_usize(),
+                end: IrikarSpotId::Irikar__Hub__West_Rim.into_usize() + 1,
+            },
+        },
+        IrikarSpotId::Irikar__Hub__Sat_Tower_Middle_Ledge => BigSpot {
+            id: BigSpotId::Irikar(IrikarSpotId::Irikar__Hub__Sat_Tower_Middle_Ledge),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Irikar__Hub__Sat_Tower_Middle_Ledge__ex__Sat_Tower_Floating_Platform_1.into_usize(),
+                end: ExitId::Irikar__Hub__Sat_Tower_Middle_Ledge__ex__Sat_Tower_Floating_Platform_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: IrikarSpotId::Irikar__Hub__Bowl_Hole.into_usize(),
+                end: IrikarSpotId::Irikar__Hub__West_Rim.into_usize() + 1,
+            },
+        },
+        IrikarSpotId::Irikar__Hub__Sat_Tower_Floating_Platform => BigSpot {
+            id: BigSpotId::Irikar(IrikarSpotId::Irikar__Hub__Sat_Tower_Floating_Platform),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Irikar__Hub__Sat_Tower_Floating_Platform__ex__Sat_Tower_Top_Ledge_1.into_usize(),
+                end: ExitId::Irikar__Hub__Sat_Tower_Floating_Platform__ex__Sat_Tower_Top_Ledge_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: IrikarSpotId::Irikar__Hub__Bowl_Hole.into_usize(),
+                end: IrikarSpotId::Irikar__Hub__West_Rim.into_usize() + 1,
+            },
+        },
+        IrikarSpotId::Irikar__Hub__Sat_Tower_Top_Ledge => BigSpot {
+            id: BigSpotId::Irikar(IrikarSpotId::Irikar__Hub__Sat_Tower_Top_Ledge),
+            locations: Range {
+                start: LocationId::Irikar__Hub__Sat_Tower_Top_Ledge__Tablet.into_usize(),
+                end: LocationId::Irikar__Hub__Sat_Tower_Top_Ledge__Tablet.into_usize() + 1,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: IrikarSpotId::Irikar__Hub__Bowl_Hole.into_usize(),
+                end: IrikarSpotId::Irikar__Hub__West_Rim.into_usize() + 1,
+            },
+        },
+        IrikarSpotId::Irikar__Hub__Sat_Tower_Lower_Right_Ledge => BigSpot {
+            id: BigSpotId::Irikar(IrikarSpotId::Irikar__Hub__Sat_Tower_Lower_Right_Ledge),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: IrikarSpotId::Irikar__Hub__Bowl_Hole.into_usize(),
+                end: IrikarSpotId::Irikar__Hub__West_Rim.into_usize() + 1,
+            },
+        },
+        IrikarSpotId::Irikar__Hub__Sat_Tower_Lower_Left_Ledge => BigSpot {
+            id: BigSpotId::Irikar(IrikarSpotId::Irikar__Hub__Sat_Tower_Lower_Left_Ledge),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: IrikarSpotId::Irikar__Hub__Bowl_Hole.into_usize(),
+                end: IrikarSpotId::Irikar__Hub__West_Rim.into_usize() + 1,
+            },
+        },
+        IrikarSpotId::Irikar__Hub__Sat_Tower_Long_Ledge => BigSpot {
+            id: BigSpotId::Irikar(IrikarSpotId::Irikar__Hub__Sat_Tower_Long_Ledge),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: IrikarSpotId::Irikar__Hub__Bowl_Hole.into_usize(),
+                end: IrikarSpotId::Irikar__Hub__West_Rim.into_usize() + 1,
+            },
+        },
+        IrikarSpotId::Irikar__Hub__Sat_Tower_Bottom => BigSpot {
+            id: BigSpotId::Irikar(IrikarSpotId::Irikar__Hub__Sat_Tower_Bottom),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: IrikarSpotId::Irikar__Hub__Bowl_Hole.into_usize(),
+                end: IrikarSpotId::Irikar__Hub__West_Rim.into_usize() + 1,
+            },
+        },
+        IrikarSpotId::Irikar__Hub__Sat_Tower_East_24 => BigSpot {
+            id: BigSpotId::Irikar(IrikarSpotId::Irikar__Hub__Sat_Tower_East_24),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Irikar__Hub__Sat_Tower_East_24__ex__Sight_Room__West_24_1.into_usize(),
+                end: ExitId::Irikar__Hub__Sat_Tower_East_24__ex__Sight_Room__West_24_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: IrikarSpotId::Irikar__Hub__Bowl_Hole.into_usize(),
+                end: IrikarSpotId::Irikar__Hub__West_Rim.into_usize() + 1,
+            },
+        },
+        IrikarSpotId::Irikar__Sight_Room__West_24 => BigSpot {
+            id: BigSpotId::Irikar(IrikarSpotId::Irikar__Sight_Room__West_24),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Irikar__Sight_Room__West_24__ex__Hub__Sat_Tower_East_24_1.into_usize(),
+                end: ExitId::Irikar__Sight_Room__West_24__ex__Hub__Sat_Tower_East_24_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: IrikarSpotId::Irikar__Sight_Room__Item_Pedestal.into_usize(),
+                end: IrikarSpotId::Irikar__Sight_Room__West_24.into_usize() + 1,
+            },
+        },
+        IrikarSpotId::Irikar__Sight_Room__Lower_Ledge => BigSpot {
+            id: BigSpotId::Irikar(IrikarSpotId::Irikar__Sight_Room__Lower_Ledge),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: IrikarSpotId::Irikar__Sight_Room__Item_Pedestal.into_usize(),
+                end: IrikarSpotId::Irikar__Sight_Room__West_24.into_usize() + 1,
+            },
+        },
+        IrikarSpotId::Irikar__Sight_Room__Portal => BigSpot {
+            id: BigSpotId::Irikar(IrikarSpotId::Irikar__Sight_Room__Portal),
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: ActionId::Irikar__Sight_Room__Portal__Enter_Portal.into_usize(),
+                end: ActionId::Irikar__Sight_Room__Portal__Enter_Portal.into_usize() + 1,
+            },
+            area_spots: Range {
+                start: IrikarSpotId::Irikar__Sight_Room__Item_Pedestal.into_usize(),
+                end: IrikarSpotId::Irikar__Sight_Room__West_24.into_usize() + 1,
+            },
+        },
+        IrikarSpotId::Irikar__Sight_Room__Item_Pedestal => BigSpot {
+            id: BigSpotId::Irikar(IrikarSpotId::Irikar__Sight_Room__Item_Pedestal),
+            locations: Range {
+                start: LocationId::Irikar__Sight_Room__Item_Pedestal__Urn.into_usize(),
+                end: LocationId::Irikar__Sight_Room__Item_Pedestal__Urn.into_usize() + 1,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: IrikarSpotId::Irikar__Sight_Room__Item_Pedestal.into_usize(),
+                end: IrikarSpotId::Irikar__Sight_Room__West_24.into_usize() + 1,
+            },
+        },
+    }
+}
+pub fn build_menu_spots() -> EnumMap<MenuSpotId, BigSpot> {
+    enum_map! {
+        MenuSpotId::Menu__Upgrade_Menu__Physiology => BigSpot {
+            id: BigSpotId::Menu(MenuSpotId::Menu__Upgrade_Menu__Physiology),
+            locations: Range {
+                start: LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_1.into_usize(),
+                end: LocationId::Menu__Upgrade_Menu__Physiology__Mist_Upgrade.into_usize() + 1,
+            },
+            exits: Range {
+                start: ExitId::Menu__Upgrade_Menu__Physiology__ex__Combat_1.into_usize(),
+                end: ExitId::Menu__Upgrade_Menu__Physiology__ex__Infection_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: MenuSpotId::Menu__Upgrade_Menu__Combat.into_usize(),
+                end: MenuSpotId::Menu__Upgrade_Menu__Physiology.into_usize() + 1,
+            },
+        },
+        MenuSpotId::Menu__Upgrade_Menu__Combat => BigSpot {
+            id: BigSpotId::Menu(MenuSpotId::Menu__Upgrade_Menu__Combat),
+            locations: Range {
+                start: LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_1.into_usize(),
+                end: LocationId::Menu__Upgrade_Menu__Combat__Ranged_Speed_3.into_usize() + 1,
+            },
+            exits: Range {
+                start: ExitId::Menu__Upgrade_Menu__Combat__ex__Drone_1.into_usize(),
+                end: ExitId::Menu__Upgrade_Menu__Combat__ex__Physiology_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: MenuSpotId::Menu__Upgrade_Menu__Combat.into_usize(),
+                end: MenuSpotId::Menu__Upgrade_Menu__Physiology.into_usize() + 1,
+            },
+        },
+        MenuSpotId::Menu__Upgrade_Menu__Infection => BigSpot {
+            id: BigSpotId::Menu(MenuSpotId::Menu__Upgrade_Menu__Infection),
+            locations: Range {
+                start: LocationId::Menu__Upgrade_Menu__Infection__Infection_Level_1.into_usize(),
+                end: LocationId::Menu__Upgrade_Menu__Infection__Nano_Points_3.into_usize() + 1,
+            },
+            exits: Range {
+                start: ExitId::Menu__Upgrade_Menu__Infection__ex__Combat_1.into_usize(),
+                end: ExitId::Menu__Upgrade_Menu__Infection__ex__Physiology_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: MenuSpotId::Menu__Upgrade_Menu__Combat.into_usize(),
+                end: MenuSpotId::Menu__Upgrade_Menu__Physiology.into_usize() + 1,
+            },
+        },
+        MenuSpotId::Menu__Upgrade_Menu__Drone => BigSpot {
+            id: BigSpotId::Menu(MenuSpotId::Menu__Upgrade_Menu__Drone),
+            locations: Range {
+                start: LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_1.into_usize(),
+                end: LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_3.into_usize() + 1,
+            },
+            exits: Range {
+                start: ExitId::Menu__Upgrade_Menu__Drone__ex__Combat_1.into_usize(),
+                end: ExitId::Menu__Upgrade_Menu__Drone__ex__Physiology_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: MenuSpotId::Menu__Upgrade_Menu__Combat.into_usize(),
+                end: MenuSpotId::Menu__Upgrade_Menu__Physiology.into_usize() + 1,
+            },
+        },
+    }
+}
 pub fn build_warps() -> EnumMap<WarpId, Warp> {
     enum_map! {
         WarpId::DroneSave => Warp {

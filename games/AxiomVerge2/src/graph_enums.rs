@@ -16125,7 +16125,7 @@ impl std::str::FromStr for BigSpotId {
     }
 }
 
-pub trait GetArea {
+trait GetArea {
     fn get_area(&self) -> AreaId;
 }
 impl GetArea for AmagiSpotId {

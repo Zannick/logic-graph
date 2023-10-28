@@ -261,12 +261,32 @@ pub struct Spot {
     pub area_spots: Range<usize>,
 }
 
+#[derive(Clone, Debug, Default)]
+pub struct BigSpot {
+    pub id: BigSpotId,
+    pub locations: Range<usize>,
+    pub exits: Range<usize>,
+    pub actions: Range<usize>,
+    // spots don't reference their area, so we index these by spot
+    pub area_spots: Range<usize>,
+}
+
 static RAW_SPOTS: [SpotId; {{ gl.spots()|list|length + 1 }}] = [ %# +1 as long as we have a default
     SpotId::None,
 %% for spot_id in gl.spots()|map(attribute='id')|sort
     SpotId::{{ spot_id }},
 %% endfor
 ];
+
+%% for r in regions
+static RAW_{{ r.id|upper }}_SPOTS: [{{ r.id }}SpotId; {{ r.areas|map(attribute='spot_ids')|map('count')|sum }}] = [
+%% for area in r.areas
+%% for spot_id in area.spot_ids
+    {{ r.id }}SpotId::{{ spot_id }},
+%% endfor
+%% endfor
+];
+%% endfor
 
 #[derive(Clone, Debug)]
 pub struct World {
@@ -283,6 +303,9 @@ pub struct World {
     warps: EnumMap<WarpId, Warp>,
     // Index ranges for slices into the above arrays
     spots: EnumMap<SpotId, Spot>,
+%% for r in regions
+    {{ r.id|lower }}_spots: EnumMap<{{ r.id }}SpotId, BigSpot>,
+%% endfor
     global_actions: Range<usize>,
     min_warp_time: u32,
     // Condensed edges
@@ -497,6 +520,9 @@ impl World {
             actions: build_actions(),
             warps: build_warps(),
             spots: build_spots(),
+%% for r in regions:
+            {{ r.id|lower }}_spots: build_{{ r.id|lower }}_spots(),
+%% endfor
             global_actions: Range {
                 {% if global_actions -%}
                 start: ActionId::{{ global_actions|map(attribute='id')|min }}.into_usize(),
@@ -612,6 +638,42 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
 %% endfor
     }
 }
+
+%% for r in regions
+pub fn build_{{ r.id|lower }}_spots() -> EnumMap<{{ r.id }}SpotId, BigSpot> {
+    enum_map! {
+%% for area in r.areas
+%% for sp in area.spots
+        {{ r.id }}SpotId::{{ sp.id }} => BigSpot {
+            id: BigSpotId::{{ r.id}}({{ r.id }}SpotId::{{ sp.id }}),
+            locations: Range {
+                {% if sp.loc_ids -%}
+                start: LocationId::{{ sp.loc_ids|min }}.into_usize(),
+                end: LocationId::{{ sp.loc_ids|max }}.into_usize() + 1,
+                {%- else %}start: 0, end: 0,{% endif %}
+            },
+            exits: Range {
+                {% if sp.exit_ids -%}
+                start: ExitId::{{ sp.exit_ids|min }}.into_usize(),
+                end: ExitId::{{ sp.exit_ids|max }}.into_usize() + 1,
+                {%- else %}start: 0, end: 0,{% endif %}
+            },
+            actions: Range {
+                {% if sp.action_ids -%}
+                start: ActionId::{{ sp.action_ids|min }}.into_usize(),
+                end: ActionId::{{ sp.action_ids|max }}.into_usize() + 1,
+                {%- else %}start: 0, end: 0,{% endif %}
+            },
+            area_spots: Range {
+                start: {{ r.id }}SpotId::{{ area.spots|map(attribute='id')|min }}.into_usize(),
+                end: {{ r.id }}SpotId::{{ area.spots|map(attribute='id')|max }}.into_usize() + 1,
+            },
+        },
+%% endfor
+%% endfor
+    }
+}
+%% endfor
 
 pub fn build_warps() -> EnumMap<WarpId, Warp> {
     enum_map! {
