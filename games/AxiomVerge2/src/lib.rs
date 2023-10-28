@@ -9,6 +9,7 @@ extern crate yaml_rust;
 
 pub mod context;
 pub mod graph;
+pub mod graph_enums;
 pub mod helpers;
 pub mod items;
 pub mod movements;

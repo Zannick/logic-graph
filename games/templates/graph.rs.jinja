@@ -5,6 +5,7 @@
 #![allow(unused)]
 
 use crate::context::*;
+use crate::graph_enums::*;
 use crate::items::*;
 use crate::movements;
 use crate::prices::Currency;
@@ -13,20 +14,8 @@ use analyzer::condense::{condense_graph, CondensedEdge};
 use analyzer::context::Ctx;
 use analyzer::world;
 use enum_map::{enum_map, Enum, EnumMap};
-use std::fmt;
 use std::ops::Range;
 use std::option::Option;
-
-%% from 'enum.rs.jinja' import enum
-{{ enum('RegionId', regions, id=True) }}
-{{ enum('AreaId', gl.areas()|list, id=True) }}
-{{ enum('SpotId', gl.spots()|list, True, id=True) }}
-{{ enum('LocationId', gl.locations()|list, id=True) }}
-{{ enum('ExitId', gl.exits()|list, id=True) }}
-{{ enum('ActionId', gl.actions()|list, id=True) }}
-{{ enum('CanonId', canon_places, True, id=True) }}
-{{ enum('WarpId', warps.values()|list, id=True) }}
-{{ enum('Objective', objectives, default_value=default_objective) }}
 
 pub fn get_area(spot: SpotId) -> AreaId {
     match spot {

@@ -4,6 +4,7 @@
 #![allow(unused)]
 
 use crate::graph::{self, *};
+use crate::graph_enums::*;
 use crate::items::Item;
 use crate::movements;
 use crate::prices::Currency;
@@ -38,7 +39,7 @@ pub enum Expectation {
 pub mod data {
     #[allow(unused_imports)]
     use crate::context::enums;
-    use crate::graph::*;
+    use crate::graph_enums::*;
 %% for c, overrides in data_values.items()
 pub fn {{ c }}(spot_id: SpotId) -> {{ data_types[c] }} {
     match spot_id {

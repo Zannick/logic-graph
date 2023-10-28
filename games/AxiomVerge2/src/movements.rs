@@ -5,7 +5,7 @@
 #![allow(unused)]
 
 use crate::context::Context;
-use crate::graph::SpotId;
+use crate::graph_enums::SpotId;
 use crate::rules;
 use analyzer::context::Ctx;
 

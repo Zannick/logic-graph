@@ -1439,7 +1439,7 @@ class GameLogic(object):
         files = {
             '.': ['Cargo.toml'],
             'data': ['digraph.dot', 'digraph.mmd', 'graph_map.sh'],
-            'src': ['lib.rs', 'items.rs', 'helpers.rs', 'graph.rs', 'context.rs',
+            'src': ['lib.rs', 'items.rs', 'helpers.rs', 'graph.rs', 'graph_enums.rs', 'context.rs',
                     'prices.rs', 'rules.rs', 'movements.rs', 'settings.rs'],
             'benches': ['bench.rs'],
             'bin': ['main.rs'],

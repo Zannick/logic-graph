@@ -1,0 +1,18 @@
+%% include 'header.rs.jinja'
+
+#![allow(non_camel_case_types)]
+#![allow(non_snake_case)]
+#![allow(unused)]
+
+use std::fmt;
+
+%% from 'enum.rs.jinja' import enum
+{{ enum('RegionId', regions, id=True) }}
+{{ enum('AreaId', gl.areas()|list, id=True) }}
+{{ enum('SpotId', gl.spots()|list, True, id=True) }}
+{{ enum('LocationId', gl.locations()|list, id=True) }}
+{{ enum('ExitId', gl.exits()|list, id=True) }}
+{{ enum('ActionId', gl.actions()|list, id=True) }}
+{{ enum('CanonId', canon_places, True, id=True) }}
+{{ enum('WarpId', warps.values()|list, id=True) }}
+{{ enum('Objective', objectives, default_value=default_objective) }}

@@ -4,6 +4,7 @@
 #![allow(unused)]
 
 use crate::graph::{self, *};
+use crate::graph_enums::*;
 use crate::items::Item;
 use crate::movements;
 use crate::prices::Currency;
@@ -172,7 +173,7 @@ pub enum Expectation {
 pub mod data {
     #[allow(unused_imports)]
     use crate::context::enums;
-    use crate::graph::*;
+    use crate::graph_enums::*;
     pub fn breach(spot_id: SpotId) -> bool {
         match spot_id {
             SpotId::Giguna_Breach__Antechamber__North => true,

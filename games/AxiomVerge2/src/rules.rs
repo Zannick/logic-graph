@@ -6,6 +6,7 @@
 
 use crate::context::*;
 use crate::graph::*;
+use crate::graph_enums::*;
 use crate::items::Item;
 use crate::prices::Currency;
 use crate::*;
