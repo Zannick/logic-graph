@@ -4975,6 +4975,14 @@ impl context::Ctx for Context {
 }
 
 impl Context {
+    fn local_travel_time_b(
+        &self,
+        movement_state: movements::MovementState,
+        dest: BigSpotId,
+    ) -> u32 {
+        movements::local_travel_time_b(movement_state, BigSpotId::None /*self.position*/, dest)
+    }
+
     // settings
     pub fn boomerang_steering(&self) -> bool {
         self.cbits1

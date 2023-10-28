@@ -36921,6 +36921,27 @@ pub fn local_movements(movement_state: MovementState, src: BigSpotId) -> Vec<(Bi
     }
 }
 
+pub fn local_travel_time_b(movement_state: MovementState, src: BigSpotId, dest: BigSpotId) -> u32 {
+    match (src, dest) {
+        (BigSpotId::Amagi(s), BigSpotId::Amagi(d)) => s.local_travel_time(d, movement_state),
+        (BigSpotId::Antarctica(s), BigSpotId::Antarctica(d)) => {
+            s.local_travel_time(d, movement_state)
+        }
+        (BigSpotId::Ebih(s), BigSpotId::Ebih(d)) => s.local_travel_time(d, movement_state),
+        (BigSpotId::Giguna_Breach(s), BigSpotId::Giguna_Breach(d)) => {
+            s.local_travel_time(d, movement_state)
+        }
+        (BigSpotId::Giguna(s), BigSpotId::Giguna(d)) => s.local_travel_time(d, movement_state),
+        (BigSpotId::Glacier(s), BigSpotId::Glacier(d)) => s.local_travel_time(d, movement_state),
+        (BigSpotId::Irikar_Breach(s), BigSpotId::Irikar_Breach(d)) => {
+            s.local_travel_time(d, movement_state)
+        }
+        (BigSpotId::Irikar(s), BigSpotId::Irikar(d)) => s.local_travel_time(d, movement_state),
+        (BigSpotId::Menu(s), BigSpotId::Menu(d)) => s.local_travel_time(d, movement_state),
+        _ => u32::MAX,
+    }
+}
+
 pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
     match (src, dest) {
         (SpotId::Amagi__Main_Area__East_15, SpotId::Amagi__Main_Area__Waters_Edge) => true,

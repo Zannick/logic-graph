@@ -99,6 +99,15 @@ pub fn local_movements(movement_state: MovementState, src: BigSpotId) -> Vec<(Bi
     }
 }
 
+pub fn local_travel_time_b(movement_state: MovementState, src: BigSpotId, dest: BigSpotId) -> u32 {
+    match (src, dest) {
+%% for r in regions
+        (BigSpotId::{{ r.id }}(s), BigSpotId::{{ r.id }}(d)) => s.local_travel_time(d, movement_state),
+%% endfor
+        _ => u32::MAX,
+    }
+}
+
 pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
     match (src, dest) {
 %% for s in gl.spots()
