@@ -41,9 +41,11 @@ fn read_key_value(
     Ok(())
 }
 
-pub fn load_settings(filename: Option<&PathBuf>) -> (World, Context, Vec<ContextWrapper<Context>>) {
-    let mut world = World::new();
-    analyzer::world::World::condense_graph(&mut world);
+pub fn load_settings(
+    filename: Option<&PathBuf>,
+) -> (Box<World>, Context, Vec<ContextWrapper<Context>>) {
+    let mut world: Box<World> = Box::default();
+    analyzer::world::World::condense_graph(world.as_mut());
     let mut ctx = Context::default();
     let mut vec = Vec::new();
     let route_key = Yaml::String(String::from("routes"));
@@ -69,12 +71,12 @@ pub fn load_settings(filename: Option<&PathBuf>) -> (World, Context, Vec<Context
                         value
                     ));
                 }
-            } else if let Err(e) = read_key_value(&mut world, &mut ctx, key, value) {
+            } else if let Err(e) = read_key_value(world.as_mut(), &mut ctx, key, value) {
                 errs.push(e);
             }
         }
         for s in route_strs {
-            match route_from_yaml_string(&world, &ctx, s) {
+            match route_from_yaml_string(world.as_ref(), &ctx, s) {
                 Ok(c) => vec.push(c),
                 Err(e) => errs.push(e),
             }
