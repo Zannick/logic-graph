@@ -5,7 +5,7 @@
 #![allow(unused)]
 
 use crate::context::Context;
-use crate::graph_enums::SpotId;
+use crate::graph_enums::*;
 use crate::rules;
 use analyzer::context::Ctx;
 
@@ -46,6 +46,56 @@ pub fn local_travel_time(ctx: &Context, movement_state: MovementState, src: Spot
 %% endfor
 %% endfor
         _ => u32::MAX,
+    }
+}
+
+trait LocalTravelTime {
+    fn local_travel_time(&self, dest: Self, movement_state: MovementState) -> u32;
+    fn local_movements(&self, movement_state: MovementState) -> Vec<(BigSpotId, u32)>;
+}
+
+%% for r in regions
+impl LocalTravelTime for {{ r.id }}SpotId {
+    fn local_travel_time(&self, dest: Self, movement_state: MovementState) -> u32 {
+        match (movement_state, *self, dest) {
+%% for k, table in movement_tables_by_region[r.id].items()|sort
+%% for (s, d), f in table.items()|sort
+    {% if f|count > 1 %}// {{ f|map('round', 6)|list }}
+{% endif -%}
+    ([{{ k|map('lower')|join(', ') }}], {{ r.id }}SpotId::{{ s }}, {{ r.id }}SpotId::{{ d }}) => {{ ((f|sum)*1000)|int }},
+%% endfor
+%% endfor
+        _ => u32::MAX,
+        }
+    }
+
+    fn local_movements(&self, movement_state: MovementState) -> Vec<(BigSpotId, u32)> {
+        match (movement_state, *self) {
+%% for k, table in movement_tables_by_region[r.id].items()|sort
+%% for a in r.areas
+%% for s in a.spots
+            ([{{ k|map('lower')|join(', ') }}], {{ r.id }}SpotId::{{ s.id }}) => vec![
+%% for d in a.spots
+%% if (s.id, d.id) in table
+                (BigSpotId::{{ r.id }}({{ r.id }}SpotId::{{ d.id }}), {{ ((table[(s.id, d.id)]|sum)*1000)|int }}),
+%% endif
+%% endfor
+            ],
+%% endfor
+%% endfor
+%% endfor
+            _ => Vec::new()
+        }
+    }
+}
+%% endfor
+
+pub fn local_movements(movement_state: MovementState, src: BigSpotId) -> Vec<(BigSpotId, u32)> {
+    match src {
+        BigSpotId::None => Vec::new(),
+%% for r in regions
+        BigSpotId::{{ r.id }}(s) => s.local_movements(movement_state),
+%% endfor
     }
 }
 
