@@ -64,12 +64,10 @@ pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
 
 pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
     vec![
-%% for s in gl.spots()|map(attribute='id')
-%% for t in gl.spots()|map(attribute='id')
-%% if (s, t) in base_distances and s != t
+%% for (s, t), dist in base_distances.items()|sort
+%% if s != t
         (SpotId::{{ s }}, SpotId::{{ t }}, {{ (base_distances[(s, t)] * 1000)|int }}),
 %% endif
-%% endfor
 %% endfor
     ]
 }
