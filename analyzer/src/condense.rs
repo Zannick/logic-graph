@@ -112,6 +112,9 @@ enum HeapEdge<M, S, E> {
     Exit(E),
 }
 
+/// Creates a map of condensed edges, keyed by SpotIds.
+/// 
+/// Not every spot may be represented in the map, but every value is guaranteed to be non-empty.
 pub fn condense_graph<T, W, S, E>(
     world: &W,
 ) -> HashMap<S, Vec<CondensedEdge<T, S, E>>, CommonHasher>

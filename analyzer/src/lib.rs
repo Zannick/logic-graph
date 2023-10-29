@@ -178,10 +178,13 @@ pub mod testlib {
                 }
             }
             if !done {
+                let mut keys: Vec<_> = spot_map.keys().map(|k| format!("{}", k)).collect();
+                keys.sort_unstable();
                 panic!(
-                    "Unable to reach any unvisited location with {}:\n{}\n",
+                    "Unable to reach any unvisited location with {}:\n{}\nSpots reached:\n{}\n",
                     $item,
-                    errors.join("\n")
+                    errors.join("\n"),
+                    keys.join("\n")
                 );
             }
         }};
