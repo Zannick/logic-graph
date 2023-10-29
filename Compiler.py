@@ -898,6 +898,13 @@ class GameLogic(object):
             lambda s: s.get('keep') or 'locations' in s or 'actions' in s or 'hybrid' in s
                 or any(e['keep'] for e in s.get('exits', ())),
             self.spots())
+    
+    def interesting_spots_by_region(self):
+        for region in self.regions:
+            yield (region['id'], list(filter(
+                    lambda s: s.get('keep') or 'locations' in s or 'actions' in s or 'hybrid' in s
+                        or any(e['keep'] for e in s.get('exits', ())),
+                    itertools.chain.from_iterable(a['spots'] for a in region['areas']))))
 
     # Hybrids are both locations and exits, so they have to be returned here
     # for both in order to create the appropriate ids.

@@ -649,6 +649,17 @@ impl World {
             _ => BigSpotId::None,
         }
     }
+
+    fn spot_of_interest_b(&self, sp: BigSpotId) -> bool {
+        match sp {
+%% for r_id, spots in gl.interesting_spots_by_region()
+%% if spots
+            BigSpotId::{{ r_id }}({{ r_id }}SpotId::{{ spots|map(attribute='id')|sort|join(' | ' + r_id + 'SpotId::') }}) => true,
+%% endif
+%% endfor
+            _ => false,
+        }
+    }
 }
 
 %% macro price(price, costs)
