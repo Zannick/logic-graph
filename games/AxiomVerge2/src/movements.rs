@@ -93822,3 +93822,12 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
         _ => (None, Vec::new()),
     }
 }
+
+pub fn best_movements_b(
+    src: BigSpotId,
+    dest: BigSpotId,
+) -> (Option<u32>, Vec<(MovementState, u32)>) {
+    match (src, dest) {
+        _ => (None, Vec::new()),
+    }
+}
