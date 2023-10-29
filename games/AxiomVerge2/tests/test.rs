@@ -5,6 +5,7 @@ use analyzer::world::*;
 use analyzer::*;
 use libaxiom_verge2::context::Context;
 use libaxiom_verge2::graph::{self, *};
+use libaxiom_verge2::graph_enums::*;
 use libaxiom_verge2::items::Item;
 use rmp_serde::{Deserializer, Serializer};
 use serde::{Deserialize, Serialize};
