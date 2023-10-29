@@ -579,6 +579,18 @@ impl World {
         }
     }
 
+%% for point in ['Location', 'Exit', 'Action']
+    fn get_spot_{{ point|lower }}s_b(&self, spot_id: BigSpotId) -> &[{{ point }}] {
+        let r = match spot_id {
+            BigSpotId::None => &Range { start: 0, end: 0 },
+%% for r in regions
+            BigSpotId::{{ r.id }}(s) => &self.{{ r.id|lower }}_spots[s].{{ point|lower }}s,
+%% endfor
+        };
+        &self.{{ point|lower }}s.as_slice()[r.start..r.end]
+    }
+%% endfor
+
     fn get_local_spots(
         movement_state: movements::MovementState,
         spot_id: BigSpotId,
@@ -594,6 +606,20 @@ impl World {
             AreaId::{{ a.id }} => RAW_{{ r.id|upper }}_SPOTS[r.start..r.end].iter().map(|s| BigSpotId::{{ r.id }}(*s)).collect(),
 %% endfor
 %% endfor
+        }
+    }
+
+    fn get_exit_spot_b(&self, exit_id: ExitId) -> BigSpotId {
+        match exit_id {
+%% for spot in gl.spots()
+%% if spot.exit_ids
+            ExitId::{{ spot.exit_ids|join(' | ExitId:: ') }} => BigSpotId::{{ spot.region|construct_id }}({{ spot.region|construct_id }}SpotId::{{ spot.id }}),
+%% endif
+%% if spot.hybrid
+            ExitId::{{ spot.hybrid|map(attribute='id')|sort|join(' | ExitId::') }} => BigSpotId::{{ spot.region|construct_id }}({{ spot.region|construct_id }}SpotId::{{ spot.id }}),
+%% endif
+%% endfor
+            _ => BigSpotId::None,
         }
     }
 }
