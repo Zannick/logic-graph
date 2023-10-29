@@ -609,6 +609,33 @@ impl World {
         }
     }
 
+    fn get_location_spot_b(&self, loc_id: LocationId) -> BigSpotId {
+        match loc_id {
+%% for spot in gl.spots()
+%% if spot.locations
+            LocationId::{{ spot.locations|map(attribute='id')|sort|join(' | LocationId::') }} => BigSpotId::{{ spot.region|construct_id }}(
+                {{ spot.region|construct_id }}SpotId::{{ spot.id }}),
+%% endif
+%% if spot.hybrid
+            LocationId::{{ spot.hybrid|map(attribute='id')|sort|join(' | LocationId::') }} => BigSpotId::{{ spot.region|construct_id }}(
+                {{ spot.region|construct_id }}SpotId::{{ spot.id }}),
+%% endif
+%% endfor
+        }
+    }
+
+    fn get_action_spot(&self, act_id: ActionId) -> BigSpotId {
+        match act_id {
+%% for spot in gl.spots()
+%% if spot.actions
+            ActionId::{{ spot.actions|map(attribute='id')|sort|join(' | ActionId::') }} => BigSpotId::{{ spot.region|construct_id }}(
+                {{ spot.region|construct_id }}SpotId::{{ spot.id }}),
+%% endif
+%% endfor
+            _ => BigSpotId::None,
+        }
+    }
+
     fn get_exit_spot_b(&self, exit_id: ExitId) -> BigSpotId {
         match exit_id {
 %% for spot in gl.spots()

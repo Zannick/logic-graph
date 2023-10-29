@@ -9113,6 +9113,591 @@ impl World {
         }
     }
 
+    fn get_location_spot_b(&self, loc_id: LocationId) -> BigSpotId {
+        match loc_id {
+            LocationId::Amagi__Main_Area__Way_Off_To_The_Side__Item => {
+                BigSpotId::Amagi(AmagiSpotId::Amagi__Main_Area__Way_Off_To_The_Side)
+            }
+            LocationId::Amagi__Liru_Room__Shrine__Item => {
+                BigSpotId::Amagi(AmagiSpotId::Amagi__Liru_Room__Shrine)
+            }
+            LocationId::Amagi__West_Lake__Cavern_Refill_Station__Break_Wall => {
+                BigSpotId::Amagi(AmagiSpotId::Amagi__West_Lake__Cavern_Refill_Station)
+            }
+            LocationId::Amagi__West_Lake__Cavern_Refill_Station__Defeat_MUS_A_M20 => {
+                BigSpotId::Amagi(AmagiSpotId::Amagi__West_Lake__Cavern_Refill_Station)
+            }
+            LocationId::Amagi__West_Lake__Cavern_Tear_Duct__Remote_Flask => {
+                BigSpotId::Amagi(AmagiSpotId::Amagi__West_Lake__Cavern_Tear_Duct)
+            }
+            LocationId::Amagi__West_Lake__Cavern_Eye__Item => {
+                BigSpotId::Amagi(AmagiSpotId::Amagi__West_Lake__Cavern_Eye)
+            }
+            LocationId::Amagi__West_Lake__Cavern_Rear_Pillar__Boss_Reward => {
+                BigSpotId::Amagi(AmagiSpotId::Amagi__West_Lake__Cavern_Rear_Pillar)
+            }
+            LocationId::Amagi__West_Lake__Stronghold_Top__Remote_Urn => {
+                BigSpotId::Amagi(AmagiSpotId::Amagi__West_Lake__Stronghold_Top)
+            }
+            LocationId::Amagi__West_Lake__Stronghold_Item__Break_Wall
+            | LocationId::Amagi__West_Lake__Stronghold_Item__Item => {
+                BigSpotId::Amagi(AmagiSpotId::Amagi__West_Lake__Stronghold_Item)
+            }
+            LocationId::Amagi__West_Lake__Stronghold_Rear_Wall__Break_Left_Wall => {
+                BigSpotId::Amagi(AmagiSpotId::Amagi__West_Lake__Stronghold_Rear_Wall)
+            }
+            LocationId::Amagi__West_Lake__Stronghold_Middle_Column__Break_Wall => {
+                BigSpotId::Amagi(AmagiSpotId::Amagi__West_Lake__Stronghold_Middle_Column)
+            }
+            LocationId::Amagi__West_Lake__Stronghold_Ceiling_Left__Knock_Down_Left_Boulder => {
+                BigSpotId::Amagi(AmagiSpotId::Amagi__West_Lake__Stronghold_Ceiling_Left)
+            }
+            LocationId::Amagi__West_Lake__Stronghold_Ceiling_Right__Knock_Down_Right_Boulder => {
+                BigSpotId::Amagi(AmagiSpotId::Amagi__West_Lake__Stronghold_Ceiling_Right)
+            }
+            LocationId::Amagi__West_Lake__Stronghold_Front_Room__Break_Wall => {
+                BigSpotId::Amagi(AmagiSpotId::Amagi__West_Lake__Stronghold_Front_Room)
+            }
+            LocationId::Amagi__West_Lake__Stronghold_Front_Door__Break_Wall => {
+                BigSpotId::Amagi(AmagiSpotId::Amagi__West_Lake__Stronghold_Front_Door)
+            }
+            LocationId::Amagi__West_Lake__Surface_Wall_Right__Break_Wall => {
+                BigSpotId::Amagi(AmagiSpotId::Amagi__West_Lake__Surface_Wall_Right)
+            }
+            LocationId::Amagi__West_Lake__Surface_Wall_Left__Break_Wall => {
+                BigSpotId::Amagi(AmagiSpotId::Amagi__West_Lake__Surface_Wall_Left)
+            }
+            LocationId::Antarctica__Shed__Interior__Shelf => {
+                BigSpotId::Antarctica(AntarcticaSpotId::Antarctica__Shed__Interior)
+            }
+            LocationId::Antarctica__Building_2__Behind_Boxes__Note => {
+                BigSpotId::Antarctica(AntarcticaSpotId::Antarctica__Building_2__Behind_Boxes)
+            }
+            LocationId::Antarctica__Power_Room__Switch__Flip => {
+                BigSpotId::Antarctica(AntarcticaSpotId::Antarctica__Power_Room__Switch)
+            }
+            LocationId::Ebih__Base_Camp__Left_Platform_Moved__Item_From_The_Side => {
+                BigSpotId::Ebih(EbihSpotId::Ebih__Base_Camp__Left_Platform_Moved)
+            }
+            LocationId::Ebih__Base_Camp__Top_Platform__Item => {
+                BigSpotId::Ebih(EbihSpotId::Ebih__Base_Camp__Top_Platform)
+            }
+            LocationId::Ebih__Bunker_Interior__Desk__Note => {
+                BigSpotId::Ebih(EbihSpotId::Ebih__Bunker_Interior__Desk)
+            }
+            LocationId::Ebih__Building_Interior__Entry__Remote_Urn => {
+                BigSpotId::Ebih(EbihSpotId::Ebih__Building_Interior__Entry)
+            }
+            LocationId::Ebih__Building_Interior__Corner__Urn => {
+                BigSpotId::Ebih(EbihSpotId::Ebih__Building_Interior__Corner)
+            }
+            LocationId::Ebih__Tent_Interior__Desk__Note => {
+                BigSpotId::Ebih(EbihSpotId::Ebih__Tent_Interior__Desk)
+            }
+            LocationId::Ebih__By_Garage__Crawlspace__Fragment => {
+                BigSpotId::Ebih(EbihSpotId::Ebih__By_Garage__Crawlspace)
+            }
+            LocationId::Ebih__Garage__Boxes__Under_Boxes => {
+                BigSpotId::Ebih(EbihSpotId::Ebih__Garage__Boxes)
+            }
+            LocationId::Ebih__Grid_25_10_12__East_10__Remote_Bush => {
+                BigSpotId::Ebih(EbihSpotId::Ebih__Grid_25_10_12__East_10)
+            }
+            LocationId::Ebih__Grid_25_10_12__Hidden_Bush__Behind_Bush => {
+                BigSpotId::Ebih(EbihSpotId::Ebih__Grid_25_10_12__Hidden_Bush)
+            }
+            LocationId::Ebih__Waterfall__Alcove_Right__Block_Right => {
+                BigSpotId::Ebih(EbihSpotId::Ebih__Waterfall__Alcove_Right)
+            }
+            LocationId::Ebih__Waterfall__Waterfall_Center_Center__Both_Blocks => {
+                BigSpotId::Ebih(EbihSpotId::Ebih__Waterfall__Waterfall_Center_Center)
+            }
+            LocationId::Ebih__Waterfall__Alcove_Left__Block_Left => {
+                BigSpotId::Ebih(EbihSpotId::Ebih__Waterfall__Alcove_Left)
+            }
+            LocationId::Ebih__Waterfall__Alcove__Block_Left
+            | LocationId::Ebih__Waterfall__Alcove__Block_Right
+            | LocationId::Ebih__Waterfall__Alcove__Pedestal => {
+                BigSpotId::Ebih(EbihSpotId::Ebih__Waterfall__Alcove)
+            }
+            LocationId::Ebih__Waterfall__Wall_Right__Break_Wall => {
+                BigSpotId::Ebih(EbihSpotId::Ebih__Waterfall__Wall_Right)
+            }
+            LocationId::Ebih__Waterfall__Wall_Right__Break_Through_Wall => {
+                BigSpotId::Ebih(EbihSpotId::Ebih__Waterfall__Wall_Right)
+            }
+            LocationId::Ebih__Waterfall__Wall_Left__Break_Wall => {
+                BigSpotId::Ebih(EbihSpotId::Ebih__Waterfall__Wall_Left)
+            }
+            LocationId::Ebih__Waterfall__Wall_Left__Break_Through_Wall => {
+                BigSpotId::Ebih(EbihSpotId::Ebih__Waterfall__Wall_Left)
+            }
+            LocationId::Ebih__Ebih_West__Alcove__Tablet => {
+                BigSpotId::Ebih(EbihSpotId::Ebih__Ebih_West__Alcove)
+            }
+            LocationId::Ebih__Ebih_West__Block_Left__Break_Block => {
+                BigSpotId::Ebih(EbihSpotId::Ebih__Ebih_West__Block_Left)
+            }
+            LocationId::Ebih__Ebih_West__Block_Right__Break_Block => {
+                BigSpotId::Ebih(EbihSpotId::Ebih__Ebih_West__Block_Right)
+            }
+            LocationId::Ebih__Cave__Entry__Health => BigSpotId::Ebih(EbihSpotId::Ebih__Cave__Entry),
+            LocationId::Ebih__Ebih_East__Lower_Moving_Platform__Remote_Urn => {
+                BigSpotId::Ebih(EbihSpotId::Ebih__Ebih_East__Lower_Moving_Platform)
+            }
+            LocationId::Ebih__Ebih_East__Corner__Urn => {
+                BigSpotId::Ebih(EbihSpotId::Ebih__Ebih_East__Corner)
+            }
+            LocationId::Ebih__Ebih_East__Dispenser__Vend => {
+                BigSpotId::Ebih(EbihSpotId::Ebih__Ebih_East__Dispenser)
+            }
+            LocationId::Ebih__Ebih_East__East_Ledge__Note => {
+                BigSpotId::Ebih(EbihSpotId::Ebih__Ebih_East__East_Ledge)
+            }
+            LocationId::Ebih__Boss_Room__Boss__Boss_Reward
+            | LocationId::Ebih__Boss_Room__Boss__Fight_Alu
+            | LocationId::Ebih__Boss_Room__Boss__Hack_Alu => {
+                BigSpotId::Ebih(EbihSpotId::Ebih__Boss_Room__Boss)
+            }
+            LocationId::Ebih__Boss_Room__East_Ledge__Item => {
+                BigSpotId::Ebih(EbihSpotId::Ebih__Boss_Room__East_Ledge)
+            }
+            LocationId::Ebih__Drone_Room__Item__Urn => {
+                BigSpotId::Ebih(EbihSpotId::Ebih__Drone_Room__Item)
+            }
+            LocationId::Ebih__Drone_Room__Middle_Platform__Urn_Quick_Grab => {
+                BigSpotId::Ebih(EbihSpotId::Ebih__Drone_Room__Middle_Platform)
+            }
+            LocationId::Ebih__Grid_25_2_6__Pit__Item => {
+                BigSpotId::Ebih(EbihSpotId::Ebih__Grid_25_2_6__Pit)
+            }
+            LocationId::Ebih__Grid_26_10_11__Ledge__Note => {
+                BigSpotId::Ebih(EbihSpotId::Ebih__Grid_26_10_11__Ledge)
+            }
+            LocationId::Ebih__Vertical_Interchange__Switch__Activate_Switch => {
+                BigSpotId::Ebih(EbihSpotId::Ebih__Vertical_Interchange__Switch)
+            }
+            LocationId::Giguna_Breach__Chimney__Cache__Flask => {
+                BigSpotId::Giguna_Breach(Giguna_BreachSpotId::Giguna_Breach__Chimney__Cache)
+            }
+            LocationId::Giguna_Breach__Cubby__Rocks__Health => {
+                BigSpotId::Giguna_Breach(Giguna_BreachSpotId::Giguna_Breach__Cubby__Rocks)
+            }
+            LocationId::Giguna_Breach__Slingshot__Ravine__Urn => {
+                BigSpotId::Giguna_Breach(Giguna_BreachSpotId::Giguna_Breach__Slingshot__Ravine)
+            }
+            LocationId::Giguna__Giguna_Northeast__Save_Point__Seen => {
+                BigSpotId::Giguna(GigunaSpotId::Giguna__Giguna_Northeast__Save_Point)
+            }
+            LocationId::Giguna__Giguna_Northeast__Gate_Button__Open_Gate => {
+                BigSpotId::Giguna(GigunaSpotId::Giguna__Giguna_Northeast__Gate_Button)
+            }
+            LocationId::Giguna__Giguna_Northeast__Gate_Right__Remote_Button => {
+                BigSpotId::Giguna(GigunaSpotId::Giguna__Giguna_Northeast__Gate_Right)
+            }
+            LocationId::Giguna__Giguna_Northeast__Door__Remote_Flask => {
+                BigSpotId::Giguna(GigunaSpotId::Giguna__Giguna_Northeast__Door)
+            }
+            LocationId::Giguna__Giguna_Northeast__Vault__Item => {
+                BigSpotId::Giguna(GigunaSpotId::Giguna__Giguna_Northeast__Vault)
+            }
+            LocationId::Giguna__Carnelian__Vault__Item => {
+                BigSpotId::Giguna(GigunaSpotId::Giguna__Carnelian__Vault)
+            }
+            LocationId::Giguna__West_Caverns__Cache__Item => {
+                BigSpotId::Giguna(GigunaSpotId::Giguna__West_Caverns__Cache)
+            }
+            LocationId::Giguna__West_Caverns__Bush__Item => {
+                BigSpotId::Giguna(GigunaSpotId::Giguna__West_Caverns__Bush)
+            }
+            LocationId::Giguna__Wasteland__Door_Right__Health => {
+                BigSpotId::Giguna(GigunaSpotId::Giguna__Wasteland__Door_Right)
+            }
+            LocationId::Giguna__Wasteland__Passage_East__Clear_Horizontal_Passage_Manually
+            | LocationId::Giguna__Wasteland__Passage_East__Mist_through_Horizontal_Passage => {
+                BigSpotId::Giguna(GigunaSpotId::Giguna__Wasteland__Passage_East)
+            }
+            LocationId::Giguna__Wasteland__Passage_Cache__Clear_Horizontal_Passage_Manually
+            | LocationId::Giguna__Wasteland__Passage_Cache__Mist_through_Horizontal_Passage => {
+                BigSpotId::Giguna(GigunaSpotId::Giguna__Wasteland__Passage_Cache)
+            }
+            LocationId::Giguna__Giguna_Base__Ruin__Item => {
+                BigSpotId::Giguna(GigunaSpotId::Giguna__Giguna_Base__Ruin)
+            }
+            LocationId::Giguna__Giguna_Base__Table__News => {
+                BigSpotId::Giguna(GigunaSpotId::Giguna__Giguna_Base__Table)
+            }
+            LocationId::Giguna__Building_Interior__Bookshelf__Note => {
+                BigSpotId::Giguna(GigunaSpotId::Giguna__Building_Interior__Bookshelf)
+            }
+            LocationId::Giguna__Ruins_East__Way_Up_High__Item => {
+                BigSpotId::Giguna(GigunaSpotId::Giguna__Ruins_East__Way_Up_High)
+            }
+            LocationId::Giguna__Ruins_Center__Tablet__Item => {
+                BigSpotId::Giguna(GigunaSpotId::Giguna__Ruins_Center__Tablet)
+            }
+            LocationId::Giguna__Ruins_Top__Small_Ledge__Shockwave_Flask => {
+                BigSpotId::Giguna(GigunaSpotId::Giguna__Ruins_Top__Small_Ledge)
+            }
+            LocationId::Giguna__Ruins_Top__Flask__Flask => {
+                BigSpotId::Giguna(GigunaSpotId::Giguna__Ruins_Top__Flask)
+            }
+            LocationId::Giguna__West_Tower__Top__Tablet => {
+                BigSpotId::Giguna(GigunaSpotId::Giguna__West_Tower__Top)
+            }
+            LocationId::Giguna__Far_Corner__Grass__Obscured_Item => {
+                BigSpotId::Giguna(GigunaSpotId::Giguna__Far_Corner__Grass)
+            }
+            LocationId::Giguna__Helipad__Tablet_Ledge__Tablet => {
+                BigSpotId::Giguna(GigunaSpotId::Giguna__Helipad__Tablet_Ledge)
+            }
+            LocationId::Giguna__Clouds__Cache__Item => {
+                BigSpotId::Giguna(GigunaSpotId::Giguna__Clouds__Cache)
+            }
+            LocationId::Giguna__Lamassu__Deposit__Flask => {
+                BigSpotId::Giguna(GigunaSpotId::Giguna__Lamassu__Deposit)
+            }
+            LocationId::Giguna__Dual_Path__Below_Left_Switch__Remote_Switch => {
+                BigSpotId::Giguna(GigunaSpotId::Giguna__Dual_Path__Below_Left_Switch)
+            }
+            LocationId::Giguna__Dual_Path__Left_Switch__Hit_Switch => {
+                BigSpotId::Giguna(GigunaSpotId::Giguna__Dual_Path__Left_Switch)
+            }
+            LocationId::Giguna__Dual_Path__Wall_Secret__Health => {
+                BigSpotId::Giguna(GigunaSpotId::Giguna__Dual_Path__Wall_Secret)
+            }
+            LocationId::Giguna__Dual_Path__Right_Switch__Hit_Switch => {
+                BigSpotId::Giguna(GigunaSpotId::Giguna__Dual_Path__Right_Switch)
+            }
+            LocationId::Giguna__Dual_Path__Below_Right_Switch__Remote_Switch => {
+                BigSpotId::Giguna(GigunaSpotId::Giguna__Dual_Path__Below_Right_Switch)
+            }
+            LocationId::Giguna__Hard_Rock__Rock_Right__Shockwave_Boulder => {
+                BigSpotId::Giguna(GigunaSpotId::Giguna__Hard_Rock__Rock_Right)
+            }
+            LocationId::Giguna__Hard_Rock__Rock_Right__Enter_Rock_as_Mist => {
+                BigSpotId::Giguna(GigunaSpotId::Giguna__Hard_Rock__Rock_Right)
+            }
+            LocationId::Giguna__Hard_Rock__Rock_Center__Tablet => {
+                BigSpotId::Giguna(GigunaSpotId::Giguna__Hard_Rock__Rock_Center)
+            }
+            LocationId::Giguna__Hard_Rock__Rock_Left__Shockwave_Boulder => {
+                BigSpotId::Giguna(GigunaSpotId::Giguna__Hard_Rock__Rock_Left)
+            }
+            LocationId::Giguna__Hard_Rock__Rock_Left__Enter_Rock_as_Mist => {
+                BigSpotId::Giguna(GigunaSpotId::Giguna__Hard_Rock__Rock_Left)
+            }
+            LocationId::Giguna__East_Caverns__Hidden_Passage_Center__Hidden_Flask => {
+                BigSpotId::Giguna(GigunaSpotId::Giguna__East_Caverns__Hidden_Passage_Center)
+            }
+            LocationId::Giguna__Gateway__Block_Left__Shockwave => {
+                BigSpotId::Giguna(GigunaSpotId::Giguna__Gateway__Block_Left)
+            }
+            LocationId::Giguna__Gateway__Block_Right__Shockwave => {
+                BigSpotId::Giguna(GigunaSpotId::Giguna__Gateway__Block_Right)
+            }
+            LocationId::Giguna__Gateway__Flask_Ledge__Item => {
+                BigSpotId::Giguna(GigunaSpotId::Giguna__Gateway__Flask_Ledge)
+            }
+            LocationId::Giguna__Gateway__Button__Hit_Switch => {
+                BigSpotId::Giguna(GigunaSpotId::Giguna__Gateway__Button)
+            }
+            LocationId::Giguna__Antechamber__Statue_Head__Tablet => {
+                BigSpotId::Giguna(GigunaSpotId::Giguna__Antechamber__Statue_Head)
+            }
+            LocationId::Giguna__Gubi_Lair__Center_Platform__Boss_Reward
+            | LocationId::Giguna__Gubi_Lair__Center_Platform__Fight_Gubi
+            | LocationId::Giguna__Gubi_Lair__Center_Platform__Hack_Gubi => {
+                BigSpotId::Giguna(GigunaSpotId::Giguna__Gubi_Lair__Center_Platform)
+            }
+            LocationId::Giguna__Gubi_Lair__Pedestal__Axe => {
+                BigSpotId::Giguna(GigunaSpotId::Giguna__Gubi_Lair__Pedestal)
+            }
+            LocationId::Glacier__Compass_Room__Center__Table => {
+                BigSpotId::Glacier(GlacierSpotId::Glacier__Compass_Room__Center)
+            }
+            LocationId::Glacier__The_Big_Drop__Water_Surface__Drown => {
+                BigSpotId::Glacier(GlacierSpotId::Glacier__The_Big_Drop__Water_Surface)
+            }
+            LocationId::Glacier__Vertical_Room__Under_Switch__Switch => {
+                BigSpotId::Glacier(GlacierSpotId::Glacier__Vertical_Room__Under_Switch)
+            }
+            LocationId::Glacier__Vertical_Room__Peak__Flask => {
+                BigSpotId::Glacier(GlacierSpotId::Glacier__Vertical_Room__Peak)
+            }
+            LocationId::Glacier__Boomerang_Room__Pedestal__Item
+            | LocationId::Glacier__Boomerang_Room__Pedestal__Switch => {
+                BigSpotId::Glacier(GlacierSpotId::Glacier__Boomerang_Room__Pedestal)
+            }
+            LocationId::Glacier__Ledge_Grab_Room__Cliff_Bottom__Quick_Grab => {
+                BigSpotId::Glacier(GlacierSpotId::Glacier__Ledge_Grab_Room__Cliff_Bottom)
+            }
+            LocationId::Glacier__Ledge_Grab_Room__Pedestal__Item => {
+                BigSpotId::Glacier(GlacierSpotId::Glacier__Ledge_Grab_Room__Pedestal)
+            }
+            LocationId::Glacier__Apocalypse_Entry__Terminal__Escape => {
+                BigSpotId::Glacier(GlacierSpotId::Glacier__Apocalypse_Entry__Terminal)
+            }
+            LocationId::Irikar__Hub__Sat_Tower_Top_Ledge__Tablet => {
+                BigSpotId::Irikar(IrikarSpotId::Irikar__Hub__Sat_Tower_Top_Ledge)
+            }
+            LocationId::Irikar__Sight_Room__Item_Pedestal__Urn => {
+                BigSpotId::Irikar(IrikarSpotId::Irikar__Sight_Room__Item_Pedestal)
+            }
+            LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_1
+            | LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_2
+            | LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_3
+            | LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_4
+            | LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_5
+            | LocationId::Menu__Upgrade_Menu__Physiology__Mist_Upgrade => {
+                BigSpotId::Menu(MenuSpotId::Menu__Upgrade_Menu__Physiology)
+            }
+            LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_1
+            | LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_2
+            | LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_3
+            | LocationId::Menu__Upgrade_Menu__Combat__Melee_Speed_1
+            | LocationId::Menu__Upgrade_Menu__Combat__Melee_Speed_2
+            | LocationId::Menu__Upgrade_Menu__Combat__Melee_Speed_3
+            | LocationId::Menu__Upgrade_Menu__Combat__Ranged_Damage_1
+            | LocationId::Menu__Upgrade_Menu__Combat__Ranged_Damage_2
+            | LocationId::Menu__Upgrade_Menu__Combat__Ranged_Damage_3
+            | LocationId::Menu__Upgrade_Menu__Combat__Ranged_Speed_1
+            | LocationId::Menu__Upgrade_Menu__Combat__Ranged_Speed_2
+            | LocationId::Menu__Upgrade_Menu__Combat__Ranged_Speed_3 => {
+                BigSpotId::Menu(MenuSpotId::Menu__Upgrade_Menu__Combat)
+            }
+            LocationId::Menu__Upgrade_Menu__Infection__Infection_Level_1
+            | LocationId::Menu__Upgrade_Menu__Infection__Infection_Level_2
+            | LocationId::Menu__Upgrade_Menu__Infection__Infection_Level_3
+            | LocationId::Menu__Upgrade_Menu__Infection__Infection_Range_1
+            | LocationId::Menu__Upgrade_Menu__Infection__Infection_Range_2
+            | LocationId::Menu__Upgrade_Menu__Infection__Infection_Range_3
+            | LocationId::Menu__Upgrade_Menu__Infection__Infection_Speed_1
+            | LocationId::Menu__Upgrade_Menu__Infection__Infection_Speed_2
+            | LocationId::Menu__Upgrade_Menu__Infection__Nano_Points_1
+            | LocationId::Menu__Upgrade_Menu__Infection__Nano_Points_2
+            | LocationId::Menu__Upgrade_Menu__Infection__Nano_Points_3 => {
+                BigSpotId::Menu(MenuSpotId::Menu__Upgrade_Menu__Infection)
+            }
+            LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_1
+            | LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_2
+            | LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_3
+            | LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_1
+            | LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_2
+            | LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_3 => {
+                BigSpotId::Menu(MenuSpotId::Menu__Upgrade_Menu__Drone)
+            }
+        }
+    }
+
+    fn get_action_spot(&self, act_id: ActionId) -> BigSpotId {
+        match act_id {
+            ActionId::Amagi__Main_Area__Carving__Key_Combo => {
+                BigSpotId::Amagi(AmagiSpotId::Amagi__Main_Area__Carving)
+            }
+            ActionId::Amagi__Main_Area__Save_Point__Save => {
+                BigSpotId::Amagi(AmagiSpotId::Amagi__Main_Area__Save_Point)
+            }
+            ActionId::Amagi__Cave_Behind_Waterfall__Middle__Throw_Drone => {
+                BigSpotId::Amagi(AmagiSpotId::Amagi__Cave_Behind_Waterfall__Middle)
+            }
+            ActionId::Ebih__Base_Camp__Save_Point__Save => {
+                BigSpotId::Ebih(EbihSpotId::Ebih__Base_Camp__Save_Point)
+            }
+            ActionId::Ebih__Base_Camp__Left_Platform__Move_Left_Platform => {
+                BigSpotId::Ebih(EbihSpotId::Ebih__Base_Camp__Left_Platform)
+            }
+            ActionId::Ebih__Base_Camp__Left_Platform_Moved__Reset_Left_Platform => {
+                BigSpotId::Ebih(EbihSpotId::Ebih__Base_Camp__Left_Platform_Moved)
+            }
+            ActionId::Ebih__Grid_25_10_12__Door_Left__Open_Door => {
+                BigSpotId::Ebih(EbihSpotId::Ebih__Grid_25_10_12__Door_Left)
+            }
+            ActionId::Ebih__Grid_25_10_12__East_11__Open_Door => {
+                BigSpotId::Ebih(EbihSpotId::Ebih__Grid_25_10_12__East_11)
+            }
+            ActionId::Ebih__Waterfall__Ledge_Below_Hole__Throw_Drone => {
+                BigSpotId::Ebih(EbihSpotId::Ebih__Waterfall__Ledge_Below_Hole)
+            }
+            ActionId::Ebih__Waterfall__Below_Left_Switch__Open_Door => {
+                BigSpotId::Ebih(EbihSpotId::Ebih__Waterfall__Below_Left_Switch)
+            }
+            ActionId::Ebih__Waterfall__West_8__Open_Door => {
+                BigSpotId::Ebih(EbihSpotId::Ebih__Waterfall__West_8)
+            }
+            ActionId::Ebih__Ebih_West__Mid_Save__Save => {
+                BigSpotId::Ebih(EbihSpotId::Ebih__Ebih_West__Mid_Save)
+            }
+            ActionId::Ebih__Ebih_West__Upper_Save__Save => {
+                BigSpotId::Ebih(EbihSpotId::Ebih__Ebih_West__Upper_Save)
+            }
+            ActionId::Ebih__Ebih_West__Medium_High_Platform__Throw_Drone_Long => {
+                BigSpotId::Ebih(EbihSpotId::Ebih__Ebih_West__Medium_High_Platform)
+            }
+            ActionId::Ebih__Ebih_West__Below_Door__Open_Door => {
+                BigSpotId::Ebih(EbihSpotId::Ebih__Ebih_West__Below_Door)
+            }
+            ActionId::Ebih__Ebih_West__Left_of_Switch__Open_Door => {
+                BigSpotId::Ebih(EbihSpotId::Ebih__Ebih_West__Left_of_Switch)
+            }
+            ActionId::Ebih__Ebih_West__Lower_Save__Save => {
+                BigSpotId::Ebih(EbihSpotId::Ebih__Ebih_West__Lower_Save)
+            }
+            ActionId::Ebih__Ebih_East__Moving_Platform__Activate_Ride => {
+                BigSpotId::Ebih(EbihSpotId::Ebih__Ebih_East__Moving_Platform)
+            }
+            ActionId::Ebih__Ebih_East__Lower_Moving_Platform__Activate_Lift
+            | ActionId::Ebih__Ebih_East__Lower_Moving_Platform__Activate_Ride => {
+                BigSpotId::Ebih(EbihSpotId::Ebih__Ebih_East__Lower_Moving_Platform)
+            }
+            ActionId::Ebih__Ebih_East__Dispenser__Activate_Lift => {
+                BigSpotId::Ebih(EbihSpotId::Ebih__Ebih_East__Dispenser)
+            }
+            ActionId::Ebih__Drone_Room__Pit_Left__Activate_Lift
+            | ActionId::Ebih__Drone_Room__Pit_Left__Activate_Lift_But_Get_Off_Early => {
+                BigSpotId::Ebih(EbihSpotId::Ebih__Drone_Room__Pit_Left)
+            }
+            ActionId::Ebih__Drone_Room__Portal_Exit__Activate_Platform => {
+                BigSpotId::Ebih(EbihSpotId::Ebih__Drone_Room__Portal_Exit)
+            }
+            ActionId::Ebih__Drone_Room__Moving_Platform__Throw_Drone => {
+                BigSpotId::Ebih(EbihSpotId::Ebih__Drone_Room__Moving_Platform)
+            }
+            ActionId::Ebih__Vertical_Interchange__West_13__Open_Door => {
+                BigSpotId::Ebih(EbihSpotId::Ebih__Vertical_Interchange__West_13)
+            }
+            ActionId::Giguna_Breach__Peak__Save_Point__Save => {
+                BigSpotId::Giguna_Breach(Giguna_BreachSpotId::Giguna_Breach__Peak__Save_Point)
+            }
+            ActionId::Giguna_Breach__Peak__Portal__Portal => {
+                BigSpotId::Giguna_Breach(Giguna_BreachSpotId::Giguna_Breach__Peak__Portal)
+            }
+            ActionId::Giguna_Breach__SW_Save__West_11__Open_Door => {
+                BigSpotId::Giguna_Breach(Giguna_BreachSpotId::Giguna_Breach__SW_Save__West_11)
+            }
+            ActionId::Giguna_Breach__SW_Save__Save_Point__Save => {
+                BigSpotId::Giguna_Breach(Giguna_BreachSpotId::Giguna_Breach__SW_Save__Save_Point)
+            }
+            ActionId::Giguna__Giguna_Northeast__Save_Point__Save
+            | ActionId::Giguna__Giguna_Northeast__Save_Point__Save_Recall => {
+                BigSpotId::Giguna(GigunaSpotId::Giguna__Giguna_Northeast__Save_Point)
+            }
+            ActionId::Giguna__Giguna_Northeast__Gate_Left__Throw_Drone => {
+                BigSpotId::Giguna(GigunaSpotId::Giguna__Giguna_Northeast__Gate_Left)
+            }
+            ActionId::Giguna__Giguna_Northeast__Right_Column__Open_Door_From_Afar => {
+                BigSpotId::Giguna(GigunaSpotId::Giguna__Giguna_Northeast__Right_Column)
+            }
+            ActionId::Giguna__Giguna_Northeast__Switch__Open_Door => {
+                BigSpotId::Giguna(GigunaSpotId::Giguna__Giguna_Northeast__Switch)
+            }
+            ActionId::Giguna__Carnelian__Upper_Susar__Caught
+            | ActionId::Giguna__Carnelian__Upper_Susar__Hack => {
+                BigSpotId::Giguna(GigunaSpotId::Giguna__Carnelian__Upper_Susar)
+            }
+            ActionId::Giguna__Carnelian__Switch__Open_Door => {
+                BigSpotId::Giguna(GigunaSpotId::Giguna__Carnelian__Switch)
+            }
+            ActionId::Giguna__Carnelian__Lower_Susar__Caught
+            | ActionId::Giguna__Carnelian__Lower_Susar__Hack => {
+                BigSpotId::Giguna(GigunaSpotId::Giguna__Carnelian__Lower_Susar)
+            }
+            ActionId::Giguna__West_Caverns__Small_Platform__Throw_Drone_Up => {
+                BigSpotId::Giguna(GigunaSpotId::Giguna__West_Caverns__Small_Platform)
+            }
+            ActionId::Giguna__West_Caverns__East_Susar__Caught
+            | ActionId::Giguna__West_Caverns__East_Susar__Hack => {
+                BigSpotId::Giguna(GigunaSpotId::Giguna__West_Caverns__East_Susar)
+            }
+            ActionId::Giguna__Wasteland__Middle_Cliff__Throw_Drone => {
+                BigSpotId::Giguna(GigunaSpotId::Giguna__Wasteland__Middle_Cliff)
+            }
+            ActionId::Giguna__Giguna_Base__Stone_Knob__Throw_Drone => {
+                BigSpotId::Giguna(GigunaSpotId::Giguna__Giguna_Base__Stone_Knob)
+            }
+            ActionId::Giguna__Giguna_Base__Save_Point__Save => {
+                BigSpotId::Giguna(GigunaSpotId::Giguna__Giguna_Base__Save_Point)
+            }
+            ActionId::Giguna__Giguna_Base__Switch_Distance_1__Open_Door => {
+                BigSpotId::Giguna(GigunaSpotId::Giguna__Giguna_Base__Switch_Distance_1)
+            }
+            ActionId::Giguna__Giguna_Base__Switch_Distance_2__Open_Door => {
+                BigSpotId::Giguna(GigunaSpotId::Giguna__Giguna_Base__Switch_Distance_2)
+            }
+            ActionId::Giguna__Giguna_Base__Switch_Distance_3__Open_Door => {
+                BigSpotId::Giguna(GigunaSpotId::Giguna__Giguna_Base__Switch_Distance_3)
+            }
+            ActionId::Giguna__Giguna_Base__Switch_Distance_4__Open_Door => {
+                BigSpotId::Giguna(GigunaSpotId::Giguna__Giguna_Base__Switch_Distance_4)
+            }
+            ActionId::Giguna__Ruins_West__Save_Point__Save => {
+                BigSpotId::Giguna(GigunaSpotId::Giguna__Ruins_West__Save_Point)
+            }
+            ActionId::Giguna__Ruins_West__Lower_Ledge__Destroy_Kishib
+            | ActionId::Giguna__Ruins_West__Lower_Ledge__Hack_Kishib => {
+                BigSpotId::Giguna(GigunaSpotId::Giguna__Ruins_West__Lower_Ledge)
+            }
+            ActionId::Giguna__Ruins_Top__Portal__Enter_Portal => {
+                BigSpotId::Giguna(GigunaSpotId::Giguna__Ruins_Top__Portal)
+            }
+            ActionId::Giguna__Ruins_Top__Save_Point__Save => {
+                BigSpotId::Giguna(GigunaSpotId::Giguna__Ruins_Top__Save_Point)
+            }
+            ActionId::Giguna__Ruins_Top__Switch__Open_Doors => {
+                BigSpotId::Giguna(GigunaSpotId::Giguna__Ruins_Top__Switch)
+            }
+            ActionId::Giguna__Ruins_Top__Turret_Balcony_West__Throw_Drone_onto_Tower => {
+                BigSpotId::Giguna(GigunaSpotId::Giguna__Ruins_Top__Turret_Balcony_West)
+            }
+            ActionId::Giguna__Clouds__Platform_Start__Hack_and_Ride_to_Portal
+            | ActionId::Giguna__Clouds__Platform_Start__Hack_Deploy_Ride_to_Portal => {
+                BigSpotId::Giguna(GigunaSpotId::Giguna__Clouds__Platform_Start)
+            }
+            ActionId::Giguna__East_Caverns__West_14__Enter_Combo => {
+                BigSpotId::Giguna(GigunaSpotId::Giguna__East_Caverns__West_14)
+            }
+            ActionId::Giguna__East_Caverns__Upper_Susar__Caught => {
+                BigSpotId::Giguna(GigunaSpotId::Giguna__East_Caverns__Upper_Susar)
+            }
+            ActionId::Giguna__East_Caverns__Upper_Susar_Mid_jump__Hack => {
+                BigSpotId::Giguna(GigunaSpotId::Giguna__East_Caverns__Upper_Susar_Mid_jump)
+            }
+            ActionId::Giguna__East_Caverns__Upper_Susar_Jump_from_East__Caught
+            | ActionId::Giguna__East_Caverns__Upper_Susar_Jump_from_East__Hack => {
+                BigSpotId::Giguna(GigunaSpotId::Giguna__East_Caverns__Upper_Susar_Jump_from_East)
+            }
+            ActionId::Giguna__East_Caverns__Mid_Susar__Caught
+            | ActionId::Giguna__East_Caverns__Mid_Susar__Hack => {
+                BigSpotId::Giguna(GigunaSpotId::Giguna__East_Caverns__Mid_Susar)
+            }
+            ActionId::Giguna__East_Caverns__Statues_Ledge__Open_Door => {
+                BigSpotId::Giguna(GigunaSpotId::Giguna__East_Caverns__Statues_Ledge)
+            }
+            ActionId::Giguna__East_Caverns__Switch__Open_Door => {
+                BigSpotId::Giguna(GigunaSpotId::Giguna__East_Caverns__Switch)
+            }
+            ActionId::Giguna__East_Caverns__West_16__Open_Door => {
+                BigSpotId::Giguna(GigunaSpotId::Giguna__East_Caverns__West_16)
+            }
+            ActionId::Giguna__Gateway__One_Jump__Open_Door => {
+                BigSpotId::Giguna(GigunaSpotId::Giguna__Gateway__One_Jump)
+            }
+            ActionId::Giguna__Gateway__Flask_Ledge__Open_Door => {
+                BigSpotId::Giguna(GigunaSpotId::Giguna__Gateway__Flask_Ledge)
+            }
+            ActionId::Glacier__Revival__Save_Point__Save => {
+                BigSpotId::Glacier(GlacierSpotId::Glacier__Revival__Save_Point)
+            }
+            ActionId::Irikar__Hub__Save_Point__Save => {
+                BigSpotId::Irikar(IrikarSpotId::Irikar__Hub__Save_Point)
+            }
+            ActionId::Irikar__Sight_Room__Portal__Enter_Portal => {
+                BigSpotId::Irikar(IrikarSpotId::Irikar__Sight_Room__Portal)
+            }
+            _ => BigSpotId::None,
+        }
+    }
+
     fn get_exit_spot_b(&self, exit_id: ExitId) -> BigSpotId {
         match exit_id {
             ExitId::Amagi__Main_Area__East_15__ex__Glacier__Lake_Main_Entrance__Lake_Access_1 => BigSpotId::Amagi(AmagiSpotId::Amagi__Main_Area__East_15),
