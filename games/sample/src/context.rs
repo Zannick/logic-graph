@@ -4,6 +4,7 @@
 #![allow(unused)]
 
 use crate::graph::{self, *};
+use crate::graph_enums::*;
 use crate::items::Item;
 use crate::movements;
 use crate::prices::Currency;
@@ -103,7 +104,7 @@ pub enum Expectation {
 pub mod data {
     #[allow(unused_imports)]
     use crate::context::enums;
-    use crate::graph::*;
+    use crate::graph_enums::*;
 }
 
 pub mod flags {
@@ -113,37 +114,37 @@ pub mod flags {
     bitflags! {
         #[derive(Copy, Clone, Debug, PartialEq, Eq, Hash, Serialize, Deserialize)]
         pub struct ContextBits1 : u32 {
-            const CHILD = 1 << 0;
-            const DEKU_TREE__COMPASS_ROOM__CTX__TORCH = 1 << 1;
-            const LOGIC_DEKU_B1_SKIP = 1 << 2;
-            const BIGGORON_SWORD = 1 << 3;
-            const BOMBS = 1 << 4;
-            const BOOMERANG = 1 << 5;
-            const BOW = 1 << 6;
-            const BUY_DEKU_NUT_10 = 1 << 7;
-            const BUY_DEKU_NUT_5 = 1 << 8;
-            const BUY_DEKU_SHIELD = 1 << 9;
-            const BUY_DEKU_STICK_1 = 1 << 10;
-            const DEFEAT_GANON = 1 << 11;
-            const DEFEAT_GOHMA = 1 << 12;
-            const DEKU_BACK_ROOM_WALL = 1 << 13;
-            const DEKU_BACK_ROOM_WEB = 1 << 14;
-            const DEKU_BASEMENT_BLOCK = 1 << 15;
-            const DEKU_BASEMENT_SCRUBS = 1 << 16;
-            const DEKU_BASEMENT_SWITCH = 1 << 17;
-            const DEKU_BASEMENT_WEB = 1 << 18;
-            const DEKU_LOBBY_WEB = 1 << 19;
-            const DEKU_NUT_DROP = 1 << 20;
-            const DEKU_SHIELD_DROP = 1 << 21;
-            const DEKU_SLINGSHOT_SCRUB = 1 << 22;
-            const DEKU_STICK_DROP = 1 << 23;
-            const HYLIAN_SHIELD = 1 << 24;
-            const KOKIRI_EMERALD = 1 << 25;
-            const KOKIRI_SWORD = 1 << 26;
-            const MAGIC_METER = 1 << 27;
-            const OCARINA = 1 << 28;
-            const SHOWED_MIDO = 1 << 29;
-            const SLINGSHOT = 1 << 30;
+            const CHILD = 0x1;
+            const DEKU_TREE__COMPASS_ROOM__CTX__TORCH = 0x2;
+            const LOGIC_DEKU_B1_SKIP = 0x4;
+            const BIGGORON_SWORD = 0x8;
+            const BOMBS = 0x10;
+            const BOOMERANG = 0x20;
+            const BOW = 0x40;
+            const BUY_DEKU_NUT_10 = 0x80;
+            const BUY_DEKU_NUT_5 = 0x100;
+            const BUY_DEKU_SHIELD = 0x200;
+            const BUY_DEKU_STICK_1 = 0x400;
+            const DEFEAT_GANON = 0x800;
+            const DEFEAT_GOHMA = 0x1000;
+            const DEKU_BACK_ROOM_WALL = 0x2000;
+            const DEKU_BACK_ROOM_WEB = 0x4000;
+            const DEKU_BASEMENT_BLOCK = 0x8000;
+            const DEKU_BASEMENT_SCRUBS = 0x10000;
+            const DEKU_BASEMENT_SWITCH = 0x20000;
+            const DEKU_BASEMENT_WEB = 0x40000;
+            const DEKU_LOBBY_WEB = 0x80000;
+            const DEKU_NUT_DROP = 0x100000;
+            const DEKU_SHIELD_DROP = 0x200000;
+            const DEKU_SLINGSHOT_SCRUB = 0x400000;
+            const DEKU_STICK_DROP = 0x800000;
+            const HYLIAN_SHIELD = 0x1000000;
+            const KOKIRI_EMERALD = 0x2000000;
+            const KOKIRI_SWORD = 0x4000000;
+            const MAGIC_METER = 0x8000000;
+            const OCARINA = 0x10000000;
+            const SHOWED_MIDO = 0x20000000;
+            const SLINGSHOT = 0x40000000;
         }
     }
     impl Default for ContextBits1 {
@@ -1577,11 +1578,23 @@ impl context::Ctx for Context {
             list.push(format!("Skips: {:+}", self.skips - old.skips));
         }
 
-        list.join("\n")
+        if list.is_empty() {
+            String::from("NONE")
+        } else {
+            list.join("\n")
+        }
     }
 }
 
 impl Context {
+    fn local_travel_time_b(
+        &self,
+        movement_state: movements::MovementState,
+        dest: BigSpotId,
+    ) -> u32 {
+        movements::local_travel_time_b(movement_state, BigSpotId::None /*self.position*/, dest)
+    }
+
     // settings
     pub fn triforce_count(&self) -> i16 {
         self.triforce_count

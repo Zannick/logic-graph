@@ -7,18 +7,22 @@ use libsample::*;
 
 fn main() -> Result<(), std::io::Error> {
     let args = Cli::parse();
+    println!(
+        "bigspot size: {}",
+        std::mem::size_of::<libaxiom_verge2::graph_enums::BigSpotId>()
+    );
     let (world, context, routes) = settings::load_settings(args.settings_file());
-    if let Err(items) = can_win_just_items(&world, &context) {
+    if let Err(items) = can_win_just_items(world.as_ref(), &context) {
         panic!(
             "Available items not enough to complete objective {}: missing {:?}",
             world.objective, items
         );
     }
-    if let Err(items) = can_win_just_locations(&world, &context) {
+    if let Err(items) = can_win_just_locations(world.as_ref(), &context) {
         panic!(
             "Unable to complete objective {} with only location checks: missing {:?}",
             world.objective, items
         );
     }
-    run(&world, context, routes, &args)
+    run(world.as_ref(), context, routes, &args)
 }
