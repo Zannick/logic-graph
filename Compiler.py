@@ -542,6 +542,10 @@ class GameLogic(object):
             del d['data']
         return d
 
+    @cache
+    def region_id_from_id(self, id):
+        return construct_id(self.id_lookup[id]['region'])
+
     @cached_property
     def movements_by_type(self):
         """Returns a mapping of movement type to movement names (excluding exit-movements)."""
@@ -1453,6 +1457,7 @@ class GameLogic(object):
             'get_spot_reference': get_spot_reference,
             'hex': hex,
             'prToRust': self.prToRust,
+            'region_id_from_id': self.region_id_from_id,
             'str_to_rusttype': str_to_rusttype,
             'translate_ctx': self.translate_ctx,
             'treeToString': treeToString,

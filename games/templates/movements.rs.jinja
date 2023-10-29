@@ -54,6 +54,7 @@ trait LocalTravel {
     fn local_movements(&self, movement_state: MovementState) -> Vec<(BigSpotId, u32)>;
     fn is_connected_to(&self, dest: Self) -> bool;
     fn free_movement(&self, dest: Self) -> Option<u32>;
+    fn best_movements(&self, dest: Self) -> (Option<u32>, Vec<(MovementState, u32)>);
 }
 
 %% for r in regions
@@ -114,6 +115,21 @@ impl LocalTravel for {{ r.id }}SpotId {
             _ => None,
         }
     }
+
+    fn best_movements(&self, dest: Self) -> (Option<u32>, Vec<(MovementState, u32)>) {
+        match (*self, dest) {
+%% for (s, t), (time, mvmts) in movements_rev_lookup_by_region[r.id].items()|sort
+            ({{ r.id }}SpotId::{{ s }}, {{ r.id }}SpotId::{{ t }}) => (
+                {% if time < 0 %}None{% else %}Some({{ (time*1000)|int }}){% endif %},
+                vec![
+%% for m, mt in mvmts
+                    ([{{ m|map('lower')|join(', ') }}], {{ (mt*1000)|int }}),
+%% endfor
+                ]),
+%% endfor
+            _ => (None, Vec::new()),
+        }
+    }
 }
 %% endfor
 
@@ -162,6 +178,18 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
 %% for (s, t), dist in base_distances.items()|sort
 %% if s != t
         (SpotId::{{ s }}, SpotId::{{ t }}, {{ (base_distances[(s, t)] * 1000)|int }}),
+%% endif
+%% endfor
+    ]
+}
+
+pub fn base_edges_b() -> Vec<(BigSpotId, BigSpotId, u32)> {
+    vec![
+%% for (s, t), dist in base_distances.items()|sort
+%% if s != t
+        (BigSpotId::{{ s|region_id_from_id }}({{ s|region_id_from_id }}SpotId::{{ s }}),
+         BigSpotId::{{ t|region_id_from_id }}({{ t|region_id_from_id }}SpotId::{{ t }}),
+         {{ (base_distances[(s, t)] * 1000)|int }}),
 %% endif
 %% endfor
     ]
