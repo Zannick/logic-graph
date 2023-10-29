@@ -246,8 +246,8 @@ pub struct Spot {
 
 %% for r in regions
 static RAW_{{ r.id|upper }}_SPOTS: [{{ r.id }}SpotId; {{ r.areas|map(attribute='spot_ids')|map('count')|sum }}] = [
-%% for area in r.areas
-%% for spot_id in area.spot_ids
+%% for area in r.areas|sort(attribute='id')
+%% for spot_id in area.spot_ids|sort
     {{ r.id }}SpotId::{{ spot_id }},
 %% endfor
 %% endfor
@@ -257,6 +257,7 @@ static RAW_{{ r.id|upper }}_SPOTS: [{{ r.id }}SpotId; {{ r.areas|map(attribute='
 lazy_static! {
     // Using get_area, we we can get the nearby spots by indexing into the spot lists
     static ref RAW_AREA_SPOT_RANGES: EnumMap<AreaId, Range<usize>> = enum_map! {
+    %# this order doesn't matter
     %% for r in regions
     %% for area in r.areas
         AreaId::{{ area.id }} => Range {
@@ -271,8 +272,8 @@ lazy_static! {
 static RAW_SPOTS: [SpotId; {{ gl.spots()|list|length + 1 }}] = [ %# +1 as long as we have a default
     SpotId::None,
 %% for r in regions
-%% for area in r.areas
-%% for spot_id in area.spot_ids
+%% for area in r.areas|sort(attribute='id')
+%% for spot_id in area.spot_ids|sort
     SpotId::{{ r.id }}({{ r.id }}SpotId::{{ spot_id }}),
 %% endfor
 %% endfor
