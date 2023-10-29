@@ -8695,7 +8695,7 @@ impl World {
     }
 
     fn get_area_spots_b(area_id: AreaId) -> Vec<BigSpotId> {
-        let r = RAW_AREA_SPOT_RANGES[area_id];
+        let r = &RAW_AREA_SPOT_RANGES[area_id];
         match area_id {
             AreaId::Amagi__Main_Area => RAW_AMAGI_SPOTS[r.start..r.end]
                 .iter()

@@ -49,13 +49,15 @@ pub fn local_travel_time(ctx: &Context, movement_state: MovementState, src: Spot
     }
 }
 
-trait LocalTravelTime {
+trait LocalTravel {
     fn local_travel_time(&self, dest: Self, movement_state: MovementState) -> u32;
     fn local_movements(&self, movement_state: MovementState) -> Vec<(BigSpotId, u32)>;
+    fn is_connected_to(&self, dest: Self) -> bool;
+    fn free_movement(&self, dest: Self) -> Option<u32>;
 }
 
 %% for r in regions
-impl LocalTravelTime for {{ r.id }}SpotId {
+impl LocalTravel for {{ r.id }}SpotId {
     fn local_travel_time(&self, dest: Self, movement_state: MovementState) -> u32 {
         match (movement_state, *self, dest) {
 %% for k, table in movement_tables_by_region[r.id].items()|sort
@@ -85,6 +87,31 @@ impl LocalTravelTime for {{ r.id }}SpotId {
 %% endfor
 %% endfor
             _ => Vec::new()
+        }
+    }
+
+    fn is_connected_to(&self, dest: Self) -> bool {
+        match (*self, dest) {
+%% for a in r.areas
+%% for s in a.spots
+%% for t in (s.local or ())
+%% if s != t
+            ({{ r.id }}SpotId::{{ s.id }}, {{ r.id }}SpotId::{{ t.to|get_spot_reference(s) }}) => true,
+%% endif
+%% endfor
+%% endfor
+%% endfor
+            _ => false,
+        }
+    }
+
+    fn free_movement(&self, dest: Self) -> Option<u32> {
+        match (*self, dest) {
+%% for (s, t), (time, mvmts) in movements_rev_lookup_by_region[r.id].items()|sort
+            ({{ r.id }}SpotId::{{ s }}, {{ r.id }}SpotId::{{ t }}) =>
+                {% if time < 0 %}None{% else %}Some({{ (time*1000)|int }}){% endif %},
+%% endfor
+            _ => None,
         }
     }
 }
@@ -121,6 +148,15 @@ pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
     }
 }
 
+pub fn are_spots_connected_b(src: BigSpotId, dest: BigSpotId) -> bool {
+    match (src, dest) {
+%% for r in region
+        (BigSpotId::{{ r.id }}(s), BigSpotId::{{ r.id }}(d)) -> s.is_connected_to(d),
+%% endfor
+        _ => false,
+    }
+}
+
 pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
     vec![
 %% for (s, t), dist in base_distances.items()|sort
@@ -136,6 +172,15 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
 %% for (s, t), (time, mvmts) in movements_rev_lookup.items()|sort
         (SpotId::{{ s }}, SpotId::{{ t }}) =>
             {% if time < 0 %}None{% else %}Some({{ (time*1000)|int }}){% endif %},
+%% endfor
+        _ => None,
+    }
+}
+
+pub fn free_movement_b(src: BigSpotId, dest: BigSpotId) -> Option<u32> {
+    match (src, dest) {
+%% for r in region
+        (BigSpotId::{{ r.id }}(s), BigSpotId::{{ r.id }}(d)) -> s.free_movement(d),
 %% endfor
         _ => None,
     }

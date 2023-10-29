@@ -587,7 +587,7 @@ impl World {
     }
 
     fn get_area_spots_b(area_id: AreaId) -> Vec<BigSpotId> {
-        let r = RAW_AREA_SPOT_RANGES[area_id];
+        let r = &RAW_AREA_SPOT_RANGES[area_id];
         match area_id {
 %% for r in regions
 %% for a in r.areas
