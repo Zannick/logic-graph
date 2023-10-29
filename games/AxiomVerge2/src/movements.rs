@@ -56737,12 +56737,30 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
 
 pub fn free_movement(src: SpotId, dest: SpotId) -> Option<u32> {
     match (src, dest) {
+        (SpotId::Amagi(s), SpotId::Amagi(d)) => s.free_movement(d),
+        (SpotId::Antarctica(s), SpotId::Antarctica(d)) => s.free_movement(d),
+        (SpotId::Ebih(s), SpotId::Ebih(d)) => s.free_movement(d),
+        (SpotId::Giguna_Breach(s), SpotId::Giguna_Breach(d)) => s.free_movement(d),
+        (SpotId::Giguna(s), SpotId::Giguna(d)) => s.free_movement(d),
+        (SpotId::Glacier(s), SpotId::Glacier(d)) => s.free_movement(d),
+        (SpotId::Irikar_Breach(s), SpotId::Irikar_Breach(d)) => s.free_movement(d),
+        (SpotId::Irikar(s), SpotId::Irikar(d)) => s.free_movement(d),
+        (SpotId::Menu(s), SpotId::Menu(d)) => s.free_movement(d),
         _ => None,
     }
 }
 
 pub fn best_movements(src: SpotId, dest: SpotId) -> (Option<u32>, Vec<(MovementState, u32)>) {
     match (src, dest) {
+        (SpotId::Amagi(s), SpotId::Amagi(d)) => s.best_movements(d),
+        (SpotId::Antarctica(s), SpotId::Antarctica(d)) => s.best_movements(d),
+        (SpotId::Ebih(s), SpotId::Ebih(d)) => s.best_movements(d),
+        (SpotId::Giguna_Breach(s), SpotId::Giguna_Breach(d)) => s.best_movements(d),
+        (SpotId::Giguna(s), SpotId::Giguna(d)) => s.best_movements(d),
+        (SpotId::Glacier(s), SpotId::Glacier(d)) => s.best_movements(d),
+        (SpotId::Irikar_Breach(s), SpotId::Irikar_Breach(d)) => s.best_movements(d),
+        (SpotId::Irikar(s), SpotId::Irikar(d)) => s.best_movements(d),
+        (SpotId::Menu(s), SpotId::Menu(d)) => s.best_movements(d),
         _ => (None, Vec::new()),
     }
 }
