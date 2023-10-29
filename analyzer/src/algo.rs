@@ -171,11 +171,15 @@ where
     // One movement total
     let movement_state = ctx.get().get_movement_state();
     let mut results = Vec::new();
-    for ce in world.get_condensed_edges_from(ctx.get().position()) {
-        if ce.time + ctx.elapsed() <= max_time && ce.can_access(world, ctx.get(), movement_state) {
-            let mut newctx = ctx.clone();
-            newctx.move_condensed_edge(ce);
-            results.push(newctx);
+    if let Some(edges) = world.get_condensed_edges_from(ctx.get().position()) {
+        for ce in edges {
+            if ce.time + ctx.elapsed() <= max_time
+                && ce.can_access(world, ctx.get(), movement_state)
+            {
+                let mut newctx = ctx.clone();
+                newctx.move_condensed_edge(ce);
+                results.push(newctx);
+            }
         }
     }
     for exit in world.get_spot_exits(ctx.get().position()) {

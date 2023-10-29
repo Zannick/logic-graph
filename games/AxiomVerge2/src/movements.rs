@@ -36399,6 +36399,11 @@ impl LocalTravel for GlacierSpotId {
             (
                 [false],
                 GlacierSpotId::Glacier__Vertical_Room__Mid_9,
+                GlacierSpotId::Glacier__Vertical_Room__East_9,
+            ) => 1578,
+            (
+                [false],
+                GlacierSpotId::Glacier__Vertical_Room__Mid_9,
                 GlacierSpotId::Glacier__Vertical_Room__Mid_11,
             ) => 2500,
             (
@@ -37256,6 +37261,11 @@ impl LocalTravel for GlacierSpotId {
             (
                 [true],
                 GlacierSpotId::Glacier__Vertical_Room__Mid_9,
+                GlacierSpotId::Glacier__Vertical_Room__East_9,
+            ) => 1578,
+            (
+                [true],
+                GlacierSpotId::Glacier__Vertical_Room__Mid_9,
                 GlacierSpotId::Glacier__Vertical_Room__Mid_11,
             ) => 2500,
             (
@@ -37491,6 +37501,10 @@ impl LocalTravel for GlacierSpotId {
                 ),
             ],
             ([false], GlacierSpotId::Glacier__Vertical_Room__Mid_9) => vec![
+                (
+                    SpotId::Glacier(GlacierSpotId::Glacier__Vertical_Room__East_9),
+                    1578,
+                ),
                 (
                     SpotId::Glacier(GlacierSpotId::Glacier__Vertical_Room__Mid_11),
                     2500,
@@ -38264,6 +38278,10 @@ impl LocalTravel for GlacierSpotId {
                 ),
             ],
             ([true], GlacierSpotId::Glacier__Vertical_Room__Mid_9) => vec![
+                (
+                    SpotId::Glacier(GlacierSpotId::Glacier__Vertical_Room__East_9),
+                    1578,
+                ),
                 (
                     SpotId::Glacier(GlacierSpotId::Glacier__Vertical_Room__Mid_11),
                     2500,
@@ -40383,6 +40401,10 @@ impl LocalTravel for GlacierSpotId {
             ) => Some(2400),
             (
                 GlacierSpotId::Glacier__Vertical_Room__Mid_9,
+                GlacierSpotId::Glacier__Vertical_Room__East_9,
+            ) => Some(1578),
+            (
+                GlacierSpotId::Glacier__Vertical_Room__Mid_9,
                 GlacierSpotId::Glacier__Vertical_Room__Mid_11,
             ) => Some(2500),
             (
@@ -41058,6 +41080,10 @@ impl LocalTravel for GlacierSpotId {
                 GlacierSpotId::Glacier__Vertical_Room__Mid_11,
                 GlacierSpotId::Glacier__Vertical_Room__Under_Switch,
             ) => (Some(2400), vec![]),
+            (
+                GlacierSpotId::Glacier__Vertical_Room__Mid_9,
+                GlacierSpotId::Glacier__Vertical_Room__East_9,
+            ) => (Some(1578), vec![]),
             (
                 GlacierSpotId::Glacier__Vertical_Room__Mid_9,
                 GlacierSpotId::Glacier__Vertical_Room__Mid_11,
@@ -56130,6 +56156,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Glacier(GlacierSpotId::Glacier__Vertical_Room__Mid_11),
             SpotId::Menu(MenuSpotId::Menu__Upgrade_Menu__Physiology),
             1000,
+        ),
+        (
+            SpotId::Glacier(GlacierSpotId::Glacier__Vertical_Room__Mid_9),
+            SpotId::Glacier(GlacierSpotId::Glacier__Vertical_Room__East_9),
+            1578,
         ),
         (
             SpotId::Glacier(GlacierSpotId::Glacier__Vertical_Room__Mid_9),

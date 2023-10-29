@@ -61,8 +61,7 @@ fn expand<W, T, E, Wp>(
     Wp: Warp<Context = T, SpotId = E::SpotId, Currency = <W::Location as Accessible>::Currency>,
 {
     let movement_state = ctx.get().get_movement_state();
-    let cedges = world.get_condensed_edges_from(ctx.get().position());
-    if !cedges.is_empty() {
+    if let Some(cedges) = world.get_condensed_edges_from(ctx.get().position()) {
         for ce in cedges {
             if !spot_map.contains_key(&ce.dst) && ce.can_access(world, ctx.get(), movement_state) {
                 let mut newctx = ctx.clone();
@@ -423,8 +422,7 @@ where
             if !spot_map.contains_key(&spot)
                 && world
                     .get_condensed_edges_from(ctx.get().position())
-                    .into_iter()
-                    .any(|ce| ce.dst == spot)
+                    .is_some_and(|edges| edges.into_iter().any(|ce| ce.dst == spot))
             {
                 vec.push(format!(
                     "{} -> {}: movement not available",
@@ -439,8 +437,7 @@ where
                 && (!W::same_area(ctx.get().position(), exit.dest())
                     || world
                         .get_condensed_edges_from(ctx.get().position())
-                        .into_iter()
-                        .any(|ce| ce.dst == exit.dest()))
+                        .is_some_and(|edges| edges.into_iter().any(|ce| ce.dst == exit.dest())))
             {
                 vec.push(format!("{}: exit not usable", exit.id()));
             }

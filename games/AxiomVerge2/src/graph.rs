@@ -4487,6 +4487,9 @@ impl world::World for World {
     }
 
     fn get_area_spots(&self, spot_id: SpotId) -> Vec<SpotId> {
+        if spot_id == SpotId::None {
+            return Vec::new();
+        }
         let area_id = get_area(spot_id);
         let r = &RAW_AREA_SPOT_RANGES[area_id];
         match area_id {
@@ -6324,11 +6327,11 @@ impl world::World for World {
     fn get_condensed_edges_from(
         &self,
         spot_id: SpotId,
-    ) -> &[CondensedEdge<Context, SpotId, ExitId>] {
-        &self
-            .condensed
+    ) -> Option<&Vec<CondensedEdge<Context, SpotId, ExitId>>> {
+        self.condensed
             .as_ref()
-            .expect("Graph must be condensed first!")[&spot_id]
+            .expect("Graph must be condensed first!")
+            .get(&spot_id)
     }
 }
 

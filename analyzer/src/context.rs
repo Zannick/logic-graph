@@ -560,10 +560,13 @@ impl<T: Ctx> ContextWrapper<T> {
             }
             History::C(spot_id) => {
                 let movement_state = self.ctx.get_movement_state();
-                let edges = world.get_condensed_edges_from(self.ctx.position());
-                edges.iter().any(|edge| {
-                    edge.dst == spot_id && edge.can_access(world, &self.ctx, movement_state)
-                })
+                world
+                    .get_condensed_edges_from(self.ctx.position())
+                    .is_some_and(|edges| {
+                        edges.iter().any(|edge| {
+                            edge.dst == spot_id && edge.can_access(world, &self.ctx, movement_state)
+                        })
+                    })
             }
         }
     }
@@ -618,18 +621,19 @@ impl<T: Ctx> ContextWrapper<T> {
                 self.activate(action);
             }
             History::C(spot) => {
-                let vce = world.get_condensed_edges_from(self.ctx.position());
-                // Find the minimum of these edges that goes to spot that we can take
-                let ce = vce
-                    .iter()
-                    .filter(|&c| {
-                        c.dst == spot
-                            && c.can_access(world, self.get(), self.ctx.get_movement_state())
-                    })
-                    .min_by_key(|c| c.time);
-                self.move_condensed_edge(
-                    ce.unwrap_or_else(|| panic!("Invalid replay: move-condensed {:?}", spot)),
-                );
+                if let Some(vce) = world.get_condensed_edges_from(self.ctx.position()) {
+                    // Find the minimum of these edges that goes to spot that we can take
+                    let ce = vce
+                        .iter()
+                        .filter(|&c| {
+                            c.dst == spot
+                                && c.can_access(world, self.get(), self.ctx.get_movement_state())
+                        })
+                        .min_by_key(|c| c.time);
+                    self.move_condensed_edge(
+                        ce.unwrap_or_else(|| panic!("Invalid replay: move-condensed {:?}", spot)),
+                    );
+                }
             }
         }
     }

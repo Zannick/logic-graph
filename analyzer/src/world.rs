@@ -206,9 +206,13 @@ pub trait World: Sync + Default {
     fn get_condensed_edges_from(
         &self,
         spot_id: <Self::Exit as Exit>::SpotId,
-    ) -> &[CondensedEdge<
-        <Self::Location as Accessible>::Context,
-        <Self::Exit as Exit>::SpotId,
-        <Self::Exit as Exit>::ExitId,
-    >];
+    ) -> Option<
+        &Vec<
+            CondensedEdge<
+                <Self::Location as Accessible>::Context,
+                <Self::Exit as Exit>::SpotId,
+                <Self::Exit as Exit>::ExitId,
+            >,
+        >,
+    >;
 }

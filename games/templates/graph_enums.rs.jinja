@@ -17,7 +17,7 @@ use std::fmt;
 {{ enum('Objective', objectives, default_value=default_objective) }}
 
 %% for r in regions
-{{ enum(r.id + 'SpotId', r.areas|map(attribute='spot_ids')|chain_from_iterable|list, id=True) }}
+{{ enum(r.id + 'SpotId', r.areas|map(attribute='spot_ids')|chain_from_iterable|sort, id=True) }}
 %% endfor
 
 #[derive(Debug, PartialEq, Eq, Copy, Clone, Hash, Ord, PartialOrd, Default, serde::Serialize, serde::Deserialize)]

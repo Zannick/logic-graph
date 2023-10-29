@@ -96,7 +96,10 @@ pub mod testlib {
                         $ctx.set_position(next_spot);
                         continue;
                     } else if $ctx.position() == next_spot {
-                        errors.push(format!("attempting to move to current position: {}", next_spot));
+                        errors.push(format!(
+                            "attempting to move to current position: {}",
+                            next_spot
+                        ));
                     } else if $world.are_spots_connected($ctx.position(), next_spot) {
                         errors.push(String::from("local travel not available"));
                     }
@@ -131,7 +134,11 @@ pub mod testlib {
                     "Path breaks at {}: cannot get to {}:\n{}\n",
                     $ctx.position(),
                     next_spot,
-                    errors.join("\n")
+                    if !errors.is_empty() {
+                        errors.join("\n")
+                    } else {
+                        format!("area spots: {:?}", $world.get_area_spots($ctx.position()))
+                    }
                 );
             }
         }};

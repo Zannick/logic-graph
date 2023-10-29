@@ -289,6 +289,7 @@ areas:
       local:
         - to: West 9
         - to: East 9
+          jumps: 1
         - to: Peak
         - to: Mid 11
         - to: Under Switch
