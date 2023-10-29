@@ -2767,6 +2767,7 @@ areas:
       coord: [19.9, 18.2]
       local:
         - to: Passage Exit
+          jumps: 1
         - to: Block Right
       locations:
         - name: Shockwave

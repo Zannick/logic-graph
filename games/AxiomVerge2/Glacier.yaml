@@ -288,6 +288,7 @@ areas:
       coord: [36.5, 8.8]
       local:
         - to: West 9
+          jumps: 1
         - to: East 9
           jumps: 1
         - to: Peak

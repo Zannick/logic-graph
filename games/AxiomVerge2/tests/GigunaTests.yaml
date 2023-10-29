@@ -35,6 +35,14 @@ tests:
   - start: Giguna > Giguna Northeast > Save Point
     can_activate: Giguna > Carnelian > Switch > Open Door
 
+  - name: Giguna Route to Carnelian
+    start: Giguna > Giguna Northeast > Save Point
+    path:
+      - Giguna > Giguna Northeast > Step
+      - Giguna > Giguna Northeast > West 10
+      - Giguna > Carnelian > East 10
+      - Giguna > Carnelian > Switch
+
   - start: Giguna > Carnelian > Switch
     context:
       giguna__carnelian__ctx__door_opened: true

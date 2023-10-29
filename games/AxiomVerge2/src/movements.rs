@@ -21583,6 +21583,11 @@ impl LocalTravel for GigunaSpotId {
             ) => 701,
             (
                 [false],
+                GigunaSpotId::Giguna__Gateway__Block_Left,
+                GigunaSpotId::Giguna__Gateway__Passage_Exit,
+            ) => 600,
+            (
+                [false],
                 GigunaSpotId::Giguna__Gateway__Block_Lowered,
                 GigunaSpotId::Giguna__Gateway__Button,
             ) => 1929,
@@ -23965,6 +23970,11 @@ impl LocalTravel for GigunaSpotId {
                 GigunaSpotId::Giguna__Gateway__Block_Left,
                 GigunaSpotId::Giguna__Gateway__Block_Right,
             ) => 701,
+            (
+                [true],
+                GigunaSpotId::Giguna__Gateway__Block_Left,
+                GigunaSpotId::Giguna__Gateway__Passage_Exit,
+            ) => 600,
             (
                 [true],
                 GigunaSpotId::Giguna__Gateway__Block_Lowered,
@@ -27501,10 +27511,16 @@ impl LocalTravel for GigunaSpotId {
                     701,
                 ),
             ],
-            ([false], GigunaSpotId::Giguna__Gateway__Block_Left) => vec![(
-                SpotId::Giguna(GigunaSpotId::Giguna__Gateway__Block_Right),
-                701,
-            )],
+            ([false], GigunaSpotId::Giguna__Gateway__Block_Left) => vec![
+                (
+                    SpotId::Giguna(GigunaSpotId::Giguna__Gateway__Passage_Exit),
+                    600,
+                ),
+                (
+                    SpotId::Giguna(GigunaSpotId::Giguna__Gateway__Block_Right),
+                    701,
+                ),
+            ],
             ([false], GigunaSpotId::Giguna__Gateway__Block_Right) => vec![
                 (
                     SpotId::Giguna(GigunaSpotId::Giguna__Gateway__Block_Left),
@@ -29656,10 +29672,16 @@ impl LocalTravel for GigunaSpotId {
                     701,
                 ),
             ],
-            ([true], GigunaSpotId::Giguna__Gateway__Block_Left) => vec![(
-                SpotId::Giguna(GigunaSpotId::Giguna__Gateway__Block_Right),
-                701,
-            )],
+            ([true], GigunaSpotId::Giguna__Gateway__Block_Left) => vec![
+                (
+                    SpotId::Giguna(GigunaSpotId::Giguna__Gateway__Passage_Exit),
+                    600,
+                ),
+                (
+                    SpotId::Giguna(GigunaSpotId::Giguna__Gateway__Block_Right),
+                    701,
+                ),
+            ],
             ([true], GigunaSpotId::Giguna__Gateway__Block_Right) => vec![
                 (
                     SpotId::Giguna(GigunaSpotId::Giguna__Gateway__Block_Left),
@@ -32448,6 +32470,10 @@ impl LocalTravel for GigunaSpotId {
                 GigunaSpotId::Giguna__Gateway__Block_Right,
             ) => Some(701),
             (
+                GigunaSpotId::Giguna__Gateway__Block_Left,
+                GigunaSpotId::Giguna__Gateway__Passage_Exit,
+            ) => Some(600),
+            (
                 GigunaSpotId::Giguna__Gateway__Block_Lowered,
                 GigunaSpotId::Giguna__Gateway__Button,
             ) => Some(1929),
@@ -34314,6 +34340,10 @@ impl LocalTravel for GigunaSpotId {
                 GigunaSpotId::Giguna__Gateway__Block_Left,
                 GigunaSpotId::Giguna__Gateway__Block_Right,
             ) => (Some(701), vec![]),
+            (
+                GigunaSpotId::Giguna__Gateway__Block_Left,
+                GigunaSpotId::Giguna__Gateway__Passage_Exit,
+            ) => (Some(600), vec![]),
             (
                 GigunaSpotId::Giguna__Gateway__Block_Lowered,
                 GigunaSpotId::Giguna__Gateway__Button,
@@ -36413,6 +36443,11 @@ impl LocalTravel for GlacierSpotId {
             ) => 1899,
             (
                 [false],
+                GlacierSpotId::Glacier__Vertical_Room__Mid_9,
+                GlacierSpotId::Glacier__Vertical_Room__West_9,
+            ) => 1578,
+            (
+                [false],
                 GlacierSpotId::Glacier__Vertical_Room__Peak,
                 GlacierSpotId::Glacier__Vertical_Room__East_9,
             ) => 1929,
@@ -37275,6 +37310,11 @@ impl LocalTravel for GlacierSpotId {
             ) => 1899,
             (
                 [true],
+                GlacierSpotId::Glacier__Vertical_Room__Mid_9,
+                GlacierSpotId::Glacier__Vertical_Room__West_9,
+            ) => 1578,
+            (
+                [true],
                 GlacierSpotId::Glacier__Vertical_Room__Peak,
                 GlacierSpotId::Glacier__Vertical_Room__East_9,
             ) => 1929,
@@ -37503,6 +37543,10 @@ impl LocalTravel for GlacierSpotId {
             ([false], GlacierSpotId::Glacier__Vertical_Room__Mid_9) => vec![
                 (
                     SpotId::Glacier(GlacierSpotId::Glacier__Vertical_Room__East_9),
+                    1578,
+                ),
+                (
+                    SpotId::Glacier(GlacierSpotId::Glacier__Vertical_Room__West_9),
                     1578,
                 ),
                 (
@@ -38280,6 +38324,10 @@ impl LocalTravel for GlacierSpotId {
             ([true], GlacierSpotId::Glacier__Vertical_Room__Mid_9) => vec![
                 (
                     SpotId::Glacier(GlacierSpotId::Glacier__Vertical_Room__East_9),
+                    1578,
+                ),
+                (
+                    SpotId::Glacier(GlacierSpotId::Glacier__Vertical_Room__West_9),
                     1578,
                 ),
                 (
@@ -40412,6 +40460,10 @@ impl LocalTravel for GlacierSpotId {
                 GlacierSpotId::Glacier__Vertical_Room__Under_Switch,
             ) => Some(1899),
             (
+                GlacierSpotId::Glacier__Vertical_Room__Mid_9,
+                GlacierSpotId::Glacier__Vertical_Room__West_9,
+            ) => Some(1578),
+            (
                 GlacierSpotId::Glacier__Vertical_Room__Peak,
                 GlacierSpotId::Glacier__Vertical_Room__East_9,
             ) => Some(1929),
@@ -41092,6 +41144,10 @@ impl LocalTravel for GlacierSpotId {
                 GlacierSpotId::Glacier__Vertical_Room__Mid_9,
                 GlacierSpotId::Glacier__Vertical_Room__Under_Switch,
             ) => (Some(1899), vec![]),
+            (
+                GlacierSpotId::Glacier__Vertical_Room__Mid_9,
+                GlacierSpotId::Glacier__Vertical_Room__West_9,
+            ) => (Some(1578), vec![]),
             (
                 GlacierSpotId::Glacier__Vertical_Room__Peak,
                 GlacierSpotId::Glacier__Vertical_Room__East_9,
@@ -51034,6 +51090,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna(GigunaSpotId::Giguna__Gateway__Block_Left),
+            SpotId::Giguna(GigunaSpotId::Giguna__Gateway__Passage_Exit),
+            600,
+        ),
+        (
+            SpotId::Giguna(GigunaSpotId::Giguna__Gateway__Block_Left),
             SpotId::Menu(MenuSpotId::Menu__Upgrade_Menu__Physiology),
             1000,
         ),
@@ -56176,6 +56237,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Glacier(GlacierSpotId::Glacier__Vertical_Room__Mid_9),
             SpotId::Glacier(GlacierSpotId::Glacier__Vertical_Room__Under_Switch),
             1899,
+        ),
+        (
+            SpotId::Glacier(GlacierSpotId::Glacier__Vertical_Room__Mid_9),
+            SpotId::Glacier(GlacierSpotId::Glacier__Vertical_Room__West_9),
+            1578,
         ),
         (
             SpotId::Glacier(GlacierSpotId::Glacier__Vertical_Room__Mid_9),
