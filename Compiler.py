@@ -122,6 +122,8 @@ def str_to_rusttype(val: str, t: str) -> str:
         return f'{t}::{inflection.camelize(val)}'
     if isinstance(val, str) and '::' in val:
         return f'{t}::{trim_type_prefix(val)}'
+    if t == 'SpotId':
+        return construct_place_id(val)
     if 'Id' in t:
         return f'{t}::{construct_id(val)}'
     if t == 'bool':
@@ -133,17 +135,23 @@ def treeToString(tree: antlr4.ParserRuleContext):
     return StringVisitor().visit(tree)
 
 
-def get_spot_reference(target, source):
+def get_spot_reference_names(target, source):
     local = [source['region'], source['area'],
              source.get('spot') or source.get('name')]
     targ = target.split('>')
     # targ length = 1 (just spot) => leave 2 (reg/area), 2 (spot+area) => leave 1 (region)
     # 3 => 0.
-    res = local[:-len(targ)] + [t.strip() for t in targ]
-    return construct_id(*res)
+    return local[:-len(targ)] + [t.strip() for t in targ]
+
+def get_spot_reference(target, source):
+    return construct_id(*get_spot_reference_names(target, source))
 
 def get_exit_target(ex):
     return get_spot_reference(ex['to'], ex)
+
+def get_exit_target_id(ex):
+    return construct_spot_id(*get_spot_reference_names(ex['to'], ex))
+
 
 class GameLogic(object):
 
@@ -418,7 +426,7 @@ class GameLogic(object):
                 id = construct_id(info['to'])
                 if not any(info['id'] == id for info in self.spots()):
                     self._errors.append(f'Warp {name} goes to unrecognized spot: {info["to"]}')
-                info['target_id'] = 'SpotId::' + id
+                info['target_id'] = self.target_id_from_id(id)
             if 'req' in info:
                 info['pr'] = _parseExpression(info['req'], name, 'warps')
                 info['access_id'] = self.make_funcid(info)
@@ -545,6 +553,11 @@ class GameLogic(object):
     @cache
     def region_id_from_id(self, id):
         return construct_id(self.id_lookup[id]['region'])
+    
+    @cache
+    def target_id_from_id(self, spot_id):
+        r_id = self.region_id_from_id(spot_id)
+        return f'SpotId::{r_id}({r_id}SpotId::{spot_id})'
 
     @cached_property
     def movements_by_type(self):
@@ -1457,15 +1470,18 @@ class GameLogic(object):
             'camelize': inflection.camelize,
             'chain_from_iterable': itertools.chain.from_iterable,
             'construct_id': construct_id,
+            'construct_place_id': construct_place_id,
             'construct_test_name': construct_test_name,
             'escape_ctx': partial(re.compile(r'\bctx\b').sub, '$ctx'),
             'get_exit_target': get_exit_target,
+            'get_exit_target_id': get_exit_target_id,
             'get_int_type_for_max': get_int_type_for_max,
             'get_spot_reference': get_spot_reference,
             'hex': hex,
             'prToRust': self.prToRust,
             'region_id_from_id': self.region_id_from_id,
             'str_to_rusttype': str_to_rusttype,
+            'target_id_from_id': self.target_id_from_id,
             'translate_ctx': self.translate_ctx,
             'treeToString': treeToString,
             'trim_type_prefix': trim_type_prefix,

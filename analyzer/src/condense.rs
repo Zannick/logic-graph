@@ -139,7 +139,7 @@ where
                     // don't travel through spots of interest
                     continue;
                 }
-                for &local_dst in world.get_area_spots(cur) {
+                for local_dst in world.get_area_spots(cur) {
                     if let Some(dist) = W::free_movement(cur, local_dst) {
                         let mut p2 = path.clone();
                         p2.push(local_dst);
@@ -237,7 +237,7 @@ where
                 continue;
             }
             // 2. Insert movements to area spots.
-            for &local_dst in world.get_area_spots(cur) {
+            for local_dst in world.get_area_spots(cur) {
                 if local_dst == start {
                     continue;
                 }

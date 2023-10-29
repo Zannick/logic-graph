@@ -36,22 +36,9 @@ pub fn get_movement_state(ctx: &Context) -> MovementState {
     ]
 }
 
-pub fn local_travel_time(ctx: &Context, movement_state: MovementState, src: SpotId, dest: SpotId) -> u32 {
-    match (movement_state, src, dest) {
-%% for k, table in movement_tables.items()|sort
-%% for (s, d), f in table.items()|sort
-    {% if f|count > 1 %}// {{ f|map('round', 6)|list }}
-{% endif -%}
-    ([{{ k|map('lower')|join(', ') }}], SpotId::{{ s }}, SpotId::{{ d }}) => {{ ((f|sum)*1000)|int }},
-%% endfor
-%% endfor
-        _ => u32::MAX,
-    }
-}
-
 trait LocalTravel {
     fn local_travel_time(&self, dest: Self, movement_state: MovementState) -> u32;
-    fn local_movements(&self, movement_state: MovementState) -> Vec<(BigSpotId, u32)>;
+    fn local_movements(&self, movement_state: MovementState) -> Vec<(SpotId, u32)>;
     fn is_connected_to(&self, dest: Self) -> bool;
     fn free_movement(&self, dest: Self) -> Option<u32>;
     fn best_movements(&self, dest: Self) -> (Option<u32>, Vec<(MovementState, u32)>);
@@ -72,7 +59,7 @@ impl LocalTravel for {{ r.id }}SpotId {
         }
     }
 
-    fn local_movements(&self, movement_state: MovementState) -> Vec<(BigSpotId, u32)> {
+    fn local_movements(&self, movement_state: MovementState) -> Vec<(SpotId, u32)> {
         match (movement_state, *self) {
 %% for k, table in movement_tables_by_region[r.id].items()|sort
 %% for a in r.areas
@@ -80,7 +67,7 @@ impl LocalTravel for {{ r.id }}SpotId {
             ([{{ k|map('lower')|join(', ') }}], {{ r.id }}SpotId::{{ s.id }}) => vec![
 %% for d in a.spots
 %% if (s.id, d.id) in table
-                (BigSpotId::{{ r.id }}({{ r.id }}SpotId::{{ d.id }}), {{ ((table[(s.id, d.id)]|sum)*1000)|int }}),
+                (SpotId::{{ r.id }}({{ r.id }}SpotId::{{ d.id }}), {{ ((table[(s.id, d.id)]|sum)*1000)|int }}),
 %% endif
 %% endfor
             ],
@@ -133,19 +120,19 @@ impl LocalTravel for {{ r.id }}SpotId {
 }
 %% endfor
 
-pub fn local_movements(movement_state: MovementState, src: BigSpotId) -> Vec<(BigSpotId, u32)> {
+pub fn local_movements(movement_state: MovementState, src: SpotId) -> Vec<(SpotId, u32)> {
     match src {
-        BigSpotId::None => Vec::new(),
+        SpotId::None => Vec::new(),
 %% for r in regions
-        BigSpotId::{{ r.id }}(s) => s.local_movements(movement_state),
+        SpotId::{{ r.id }}(s) => s.local_movements(movement_state),
 %% endfor
     }
 }
 
-pub fn local_travel_time_b(movement_state: MovementState, src: BigSpotId, dest: BigSpotId) -> u32 {
+pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotId) -> u32 {
     match (src, dest) {
 %% for r in regions
-        (BigSpotId::{{ r.id }}(s), BigSpotId::{{ r.id }}(d)) => s.local_travel_time(d, movement_state),
+        (SpotId::{{ r.id }}(s), SpotId::{{ r.id }}(d)) => s.local_travel_time(d, movement_state),
 %% endfor
         _ => u32::MAX,
     }
@@ -153,21 +140,8 @@ pub fn local_travel_time_b(movement_state: MovementState, src: BigSpotId, dest: 
 
 pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
     match (src, dest) {
-%% for s in gl.spots()
-%% for t in (s.local or ())
-%% if s != t
-        (SpotId::{{ s.id }}, SpotId::{{ t.to|get_spot_reference(s) }}) => true,
-%% endif
-%% endfor
-%% endfor
-        _ => false,
-    }
-}
-
-pub fn are_spots_connected_b(src: BigSpotId, dest: BigSpotId) -> bool {
-    match (src, dest) {
 %% for r in region
-        (BigSpotId::{{ r.id }}(s), BigSpotId::{{ r.id }}(d)) -> s.is_connected_to(d),
+        (SpotId::{{ r.id }}(s), SpotId::{{ r.id }}(d)) -> s.is_connected_to(d),
 %% endfor
         _ => false,
     }
@@ -177,62 +151,27 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
     vec![
 %% for (s, t), dist in base_distances.items()|sort
 %% if s != t
-        (SpotId::{{ s }}, SpotId::{{ t }}, {{ (base_distances[(s, t)] * 1000)|int }}),
-%% endif
-%% endfor
-    ]
-}
-
-pub fn base_edges_b() -> Vec<(BigSpotId, BigSpotId, u32)> {
-    vec![
-%% for (s, t), dist in base_distances.items()|sort
-%% if s != t
-        (BigSpotId::{{ s|region_id_from_id }}({{ s|region_id_from_id }}SpotId::{{ s }}),
-         BigSpotId::{{ t|region_id_from_id }}({{ t|region_id_from_id }}SpotId::{{ t }}),
+        ({{ s|target_id_from_id }},
+         {{ t|target_id_from_id }},
          {{ (base_distances[(s, t)] * 1000)|int }}),
 %% endif
 %% endfor
     ]
 }
 
-pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
-    match (sp1, sp2) {
-%% for (s, t), (time, mvmts) in movements_rev_lookup.items()|sort
-        (SpotId::{{ s }}, SpotId::{{ t }}) =>
-            {% if time < 0 %}None{% else %}Some({{ (time*1000)|int }}){% endif %},
+pub fn free_movement(src: SpotId, dest: SpotId) -> Option<u32> {
+    match (src, dest) {
+%% for r in region
+        (SpotId::{{ r.id }}(s), SpotId::{{ r.id }}(d)) -> s.free_movement(d),
 %% endfor
         _ => None,
     }
 }
 
-pub fn free_movement_b(src: BigSpotId, dest: BigSpotId) -> Option<u32> {
+pub fn best_movements(src: SpotId, dest: SpotId) -> (Option<u32>, Vec<(MovementState, u32)>) {
     match (src, dest) {
 %% for r in region
-        (BigSpotId::{{ r.id }}(s), BigSpotId::{{ r.id }}(d)) -> s.free_movement(d),
-%% endfor
-        _ => None,
-    }
-}
-
-pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementState, u32)>) {
-    match (sp1, sp2) {
-%% for (s, t), (time, mvmts) in movements_rev_lookup.items()|sort
-        (SpotId::{{ s }}, SpotId::{{ t }}) => (
-            {% if time < 0 %}None{% else %}Some({{ (time*1000)|int }}){% endif %},
-            vec![
-%% for m, mt in mvmts
-                ([{{ m|map('lower')|join(', ') }}], {{ (mt*1000)|int }}),
-%% endfor
-            ]),
-%% endfor
-        _ => (None, Vec::new()),
-    }
-}
-
-pub fn best_movements_b(src: BigSpotId, dest: BigSpotId) -> (Option<u32>, Vec<(MovementState, u32)>) {
-    match (src, dest) {
-%% for r in region
-        (BigSpotId::{{ r.id }}(s), BigSpotId::{{ r.id }}(d)) -> s.best_movements(d),
+        (SpotId::{{ r.id }}(s), SpotId::{{ r.id }}(d)) -> s.best_movements(d),
 %% endfor
         _ => (None, Vec::new()),
     }

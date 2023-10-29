@@ -3,7 +3,7 @@ from itertools import chain
 import logging
 
 from grammar import RulesParser, RulesVisitor
-from Utils import construct_id, getPlaceType, BUILTINS
+from Utils import construct_id, construct_place_id, construct_spot_id, getPlaceType, place_to_names, BUILTINS
 
 import inflection
 
@@ -84,7 +84,7 @@ class RustVisitor(RulesVisitor):
             args = f'{self.visit(ctx.value())}'
         elif ctx.PLACE():
             places = [str(p)[1:-1] for p in ctx.PLACE()]
-            args = ', '.join(f'{getPlaceType(pl)}::{construct_id(pl)}' for pl in places)
+            args = ', '.join(construct_place_id(pl) for pl in places)
         elif ctx.REF():
             args = self._getRefGetter(str(ctx.REF())[1:])
         else:
@@ -207,7 +207,7 @@ class RustVisitor(RulesVisitor):
             places[getPlaceType(pl)].append(pl)
         per_type = [('(match ctx.position()' if pt == 'SpotId' else f'(match get_{pt.lower()[:-2]}(ctx.position())')
                     + ' {'
-                    + ' | '.join(f'{pt}::{construct_id(pl)}' for pl in plist)
+                    + ' | '.join(construct_place_id(pl) for pl in plist)
                     + ' => true, _ => false })'
                     for pt, plist in places.items()
                     ]
@@ -227,7 +227,7 @@ class RustVisitor(RulesVisitor):
             val = self._getRefGetter(str(ctx.REF(1))[1:])
         elif ctx.PLACE():
             pl = str(ctx.PLACE())[1:-1]
-            val = f'{getPlaceType(pl)}::{construct_id(pl)}'
+            val = construct_place_id(pl)
         elif ctx.num():
             val = self.visit(ctx.num())
         else:
@@ -265,9 +265,12 @@ class RustVisitor(RulesVisitor):
         ptype = getPlaceType(pl)
         eq = '!' if ctx.NOT() else '='
         get = f'{self._getRefGetter(str(ctx.REF())[1:])}'
-        if ptype != 'SpotId':
+        if ptype == 'SpotId':
+            val = construct_spot_id(*place_to_names(pl))
+        else:
             get = f'get_{ptype[:-2].lower()}({get})'
-        return f'{get} {eq}= {ptype}::{construct_id(pl)}'
+            val = f'{ptype}::{construct_id(pl)}'
+        return f'{get} {eq}= {val}'
 
     def visitRefInFunc(self, ctx):
         func = str(ctx.invoke().FUNC())[1:]

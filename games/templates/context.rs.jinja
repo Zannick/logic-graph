@@ -44,7 +44,7 @@ pub mod data {
 pub fn {{ c }}(spot_id: SpotId) -> {{ data_types[c] }} {
     match spot_id {
 %% for sp, val in overrides.items()|sort
-        SpotId::{{ sp }} => {{ val|str_to_rusttype(data_types[c]) }},
+        {{ sp|target_id_from_id }} => {{ val|str_to_rusttype(data_types[c]) }},
 %% endfor
         _ => {{ data_defaults[c]|str_to_rusttype(data_types[c]) }}
     }
@@ -440,7 +440,7 @@ impl context::Ctx for Context {
     }
 
     fn local_travel_time(&self, movement_state: movements::MovementState, dest: SpotId) -> u32 {
-        movements::local_travel_time(self, movement_state, self.position, dest)
+        movements::local_travel_time(movement_state, self.position, dest)
     }
 
     fn count_visits(&self) -> u32 {
@@ -514,10 +514,6 @@ impl context::Ctx for Context {
 }
 
 impl Context {
-    fn local_travel_time_b(&self, movement_state: movements::MovementState, dest: BigSpotId) -> u32 {
-        movements::local_travel_time_b(movement_state, BigSpotId::None/*self.position*/, dest)
-    }
-
     // settings
 %% for s, info in settings.items()
     pub fn {{ s }}(&self) -> {{ info.rust_type }} {
@@ -542,7 +538,7 @@ impl Context {
 %#- Spots have priority over areas which have priority over regions
         match self.position {
 %% for spot, override in context_here_overrides[ctx]['spot'].items()
-            SpotId::{{ spot }} => {{ override }},
+            {{ spot|target_id_from_id }} => {{ override }},
 %% endfor
             _ => match get_area(self.position) {
 %% for area, override in context_here_overrides[ctx]['area'].items()

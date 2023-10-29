@@ -1101,23 +1101,29 @@ pub fn action_deploy_drone(ctx: &mut Context) {
 }
 pub fn action_deploy_drone_and_move__ebih__drone_room__tree(ctx: &mut Context) {
     // $deploy_drone_and_move(`Ebih > Drone Room > Tree`)
-    helper__deploy_drone_and_move!(ctx, SpotId::Ebih__Drone_Room__Tree);
+    helper__deploy_drone_and_move!(ctx, SpotId::Ebih(EbihSpotId::Ebih__Drone_Room__Tree));
 }
 pub fn action_deploy_drone_and_move__ebih__ebih_west__alcove_entrance(ctx: &mut Context) {
     // $deploy_drone_and_move(`Ebih > Ebih West > Alcove Entrance`)
-    helper__deploy_drone_and_move!(ctx, SpotId::Ebih__Ebih_West__Alcove_Entrance);
+    helper__deploy_drone_and_move!(
+        ctx,
+        SpotId::Ebih(EbihSpotId::Ebih__Ebih_West__Alcove_Entrance)
+    );
 }
 pub fn action_deploy_drone_and_move__giguna__giguna_base__kari(ctx: &mut Context) {
     // $deploy_drone_and_move(`Giguna > Giguna Base > Kari`)
-    helper__deploy_drone_and_move!(ctx, SpotId::Giguna__Giguna_Base__Kari);
+    helper__deploy_drone_and_move!(ctx, SpotId::Giguna(GigunaSpotId::Giguna__Giguna_Base__Kari));
 }
 pub fn action_deploy_drone_and_move__giguna__ruins_top__west_7(ctx: &mut Context) {
     // $deploy_drone_and_move(`Giguna > Ruins Top > West 7`)
-    helper__deploy_drone_and_move!(ctx, SpotId::Giguna__Ruins_Top__West_7);
+    helper__deploy_drone_and_move!(ctx, SpotId::Giguna(GigunaSpotId::Giguna__Ruins_Top__West_7));
 }
 pub fn action_deploy_drone_and_move__giguna__wasteland__middle_path(ctx: &mut Context) {
     // $deploy_drone_and_move(`Giguna > Wasteland > Middle Path`)
-    helper__deploy_drone_and_move!(ctx, SpotId::Giguna__Wasteland__Middle_Path);
+    helper__deploy_drone_and_move!(
+        ctx,
+        SpotId::Giguna(GigunaSpotId::Giguna__Wasteland__Middle_Path)
+    );
 }
 pub fn action_ebih__base_camp__left_platform__move_left_platform__do(ctx: &mut Context) {
     // ^_left_platform_moved = true
@@ -1158,15 +1164,15 @@ pub fn action_ebih__ebih_east__moving_platform__activate_ride__do(ctx: &mut Cont
 pub fn action_ebih__ebih_west__below_door__open_door__do(ctx: &mut Context) {
     // ^_door_open = true; IF (^indra WITHIN `Ebih > Ebih West > Above Door`) { ^indra = `Ebih > Ebih West > Below Door`; }
     ctx.set_ebih__ebih_west__ctx__door_open(true);
-    if ctx.indra() == SpotId::Ebih__Ebih_West__Above_Door {
-        ctx.set_indra(SpotId::Ebih__Ebih_West__Below_Door);
+    if ctx.indra() == SpotId::Ebih(EbihSpotId::Ebih__Ebih_West__Above_Door) {
+        ctx.set_indra(SpotId::Ebih(EbihSpotId::Ebih__Ebih_West__Below_Door));
     }
 }
 pub fn action_ebih__ebih_west__left_of_switch__open_door__do(ctx: &mut Context) {
     // ^_door_open = true; IF (^indra WITHIN `Ebih > Ebih West > Above Door`) { ^indra = `Ebih > Ebih West > Below Door`; }
     ctx.set_ebih__ebih_west__ctx__door_open(true);
-    if ctx.indra() == SpotId::Ebih__Ebih_West__Above_Door {
-        ctx.set_indra(SpotId::Ebih__Ebih_West__Below_Door);
+    if ctx.indra() == SpotId::Ebih(EbihSpotId::Ebih__Ebih_West__Above_Door) {
+        ctx.set_indra(SpotId::Ebih(EbihSpotId::Ebih__Ebih_West__Below_Door));
     }
 }
 pub fn action_ebih__grid_25_10_12__door_left__open_door__do(ctx: &mut Context) {
@@ -1225,13 +1231,16 @@ pub fn action_giguna__clouds__platform_start__hack_and_ride_to_portal__do(ctx: &
     // ^_platform_and_portal = true; if (^indra WITHIN ^position) { ^indra = `Giguna > Clouds > Platform Stop` }
     ctx.set_giguna__clouds__ctx__platform_and_portal(true);
     if ctx.indra() == ctx.position() {
-        ctx.set_indra(SpotId::Giguna__Clouds__Platform_Stop);
+        ctx.set_indra(SpotId::Giguna(GigunaSpotId::Giguna__Clouds__Platform_Stop));
     }
 }
 pub fn action_giguna__clouds__platform_start__hack_deploy_ride_to_portal__do(ctx: &mut Context) {
     // ^_platform_and_portal = true; $deploy_drone_and_move(`Giguna > Clouds > Platform Stop`)
     ctx.set_giguna__clouds__ctx__platform_and_portal(true);
-    helper__deploy_drone_and_move!(ctx, SpotId::Giguna__Clouds__Platform_Stop);
+    helper__deploy_drone_and_move!(
+        ctx,
+        SpotId::Giguna(GigunaSpotId::Giguna__Clouds__Platform_Stop)
+    );
 }
 pub fn action_giguna__east_caverns__mid_susar__caught__do(ctx: &mut Context) {
     // ^_mid_susar = true
@@ -1420,7 +1429,7 @@ pub fn action_save(ctx: &mut Context) {
 }
 pub fn action_save__glacier__revival__save_point(ctx: &mut Context) {
     // ^save = `Glacier > Revival > Save Point`
-    ctx.set_save(SpotId::Glacier__Revival__Save_Point);
+    ctx.set_save(SpotId::Glacier(GlacierSpotId::Glacier__Revival__Save_Point));
 }
 pub fn action_save_mode__indra(ctx: &mut Context) {
     // $save; ^mode = 'Indra'

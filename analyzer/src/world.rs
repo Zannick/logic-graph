@@ -133,7 +133,7 @@ pub trait World: Sync + Default {
     fn get_area_spots(
         &self,
         spot_id: <Self::Exit as Exit>::SpotId,
-    ) -> &[<Self::Exit as Exit>::SpotId];
+    ) -> Vec<<Self::Exit as Exit>::SpotId>;
     fn get_warps(&self) -> &[Self::Warp];
     fn get_all_locations(&self) -> &[Self::Location];
     fn get_location_spot(
@@ -148,6 +148,11 @@ pub trait World: Sync + Default {
     fn is_global_action(&self, act_id: <Self::Action as Action>::ActionId) -> bool {
         self.get_action_spot(act_id) == <Self::Exit as Exit>::SpotId::default()
     }
+
+    fn get_local_spots(
+        movement_state: <<Self::Location as Accessible>::Context as Ctx>::MovementState,
+        spot_id: <Self::Exit as Exit>::SpotId,
+    ) -> Vec<(<Self::Exit as Exit>::SpotId, u32)>;
 
     fn skip_unused_items(&self, ctx: &mut <Self::Location as Accessible>::Context);
     fn won(&self, ctx: &<Self::Location as Accessible>::Context) -> bool;

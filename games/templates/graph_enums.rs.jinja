@@ -9,7 +9,6 @@ use std::fmt;
 %% from 'enum.rs.jinja' import enum
 {{ enum('RegionId', regions, id=True) }}
 {{ enum('AreaId', gl.areas()|list, id=True) }}
-{{ enum('SpotId', gl.spots()|list, True, id=True) }}
 {{ enum('LocationId', gl.locations()|list, id=True) }}
 {{ enum('ExitId', gl.exits()|list, id=True) }}
 {{ enum('ActionId', gl.actions()|list, id=True) }}
@@ -22,27 +21,27 @@ use std::fmt;
 %% endfor
 
 #[derive(Debug, PartialEq, Eq, Copy, Clone, Hash, Ord, PartialOrd, Default, serde::Serialize, serde::Deserialize)]
-pub enum BigSpotId {
+pub enum SpotId {
     #[default] None,
 %% for r in regions
     {{ r.id }}({{ r.id }}SpotId),
 %% endfor
 }
 
-impl fmt::Display for BigSpotId {
+impl fmt::Display for SpotId {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         match self {
-            BigSpotId::None => write!(f, "{}", "None"),
+            SpotId::None => write!(f, "{}", "None"),
 %% for r in regions
-            BigSpotId::{{ r.id }}(s) => s.fmt(f),
+            SpotId::{{ r.id }}(s) => s.fmt(f),
 %% endfor
         }
     }
 }
 
-impl analyzer::world::Id for BigSpotId {}
+impl analyzer::world::Id for SpotId {}
 
-impl std::str::FromStr for BigSpotId {
+impl std::str::FromStr for SpotId {
     type Err = String;
 
     fn from_str(s: &str) -> Result<Self, Self::Err> {
@@ -50,11 +49,11 @@ impl std::str::FromStr for BigSpotId {
 %% for r in regions
 %% for area in r.areas
 %% for spot in area.spots
-            "{{ spot.fullname }}" => Ok(BigSpotId::{{ r.id }}({{ r.id }}SpotId::{{ spot.id }})),
+            "{{ spot.fullname }}" => Ok(SpotId::{{ r.id }}({{ r.id }}SpotId::{{ spot.id }})),
 %% endfor
 %% endfor
 %% endfor
-            _ => Err(format!("Could not recognize as a BigSpotId: {}", s)),
+            _ => Err(format!("Could not recognize as a SpotId: {}", s)),
         }
     }
 }
@@ -74,19 +73,19 @@ impl GetArea for {{ r.id }}SpotId {
 }
 %% endfor
 
-pub fn get_region_b(spot: BigSpotId) -> RegionId {
+pub fn get_region(spot: SpotId) -> RegionId {
     match spot {
-        BigSpotId::None => panic!("Spot not valid"),
+        SpotId::None => panic!("Spot not valid"),
 %% for r in regions
-        BigSpotId::{{ r.id }}(_) => RegionId::{{ r.id }},
+        SpotId::{{ r.id }}(_) => RegionId::{{ r.id }},
 %% endfor
     }
 }
-pub fn get_area_b(spot: BigSpotId) -> AreaId {
+pub fn get_area(spot: SpotId) -> AreaId {
     match spot {
-        BigSpotId::None => panic!("Spot not valid"),
+        SpotId::None => panic!("Spot not valid"),
 %% for r in regions
-        BigSpotId::{{ r.id }}(s) => s.get_area(),
+        SpotId::{{ r.id }}(s) => s.get_area(),
 %% endfor
     }
 }

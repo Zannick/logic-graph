@@ -23,14 +23,14 @@ fn test_name() {
     ctx.energy = 30;
     ctx.flasks = 1;
     ctx.add_item(Item::Amashilama);
-    ctx.save = SpotId::Glacier__Revival__Save_Point;
+    ctx.save = SpotId::Glacier(GlacierSpotId::Glacier__Revival__Save_Point);
 
     expect_no_route!(
         &*world,
         ctx,
         Context,
-        SpotId::Glacier__Vertical_Room__East_9,
-        SpotId::Glacier__Vertical_Room__Peak
+        SpotId::Glacier(GlacierSpotId::Glacier__Vertical_Room__East_9),
+        SpotId::Glacier(GlacierSpotId::Glacier__Vertical_Room__Peak)
     );
 }
 
@@ -44,16 +44,16 @@ fn test_route() {
     ctx.flasks = 1;
     ctx.add_item(Item::Amashilama);
     ctx.add_item(Item::Ledge_Grab);
-    ctx.save = SpotId::Glacier__Revival__Save_Point;
+    ctx.save = SpotId::Glacier(GlacierSpotId::Glacier__Revival__Save_Point);
 
     expect_this_route!(
         &*world,
         ctx,
-        SpotId::Glacier__Vertical_Room__Mid_9,
+        SpotId::Glacier(GlacierSpotId::Glacier__Vertical_Room__Mid_9),
         vec![
-            SpotId::Glacier__Vertical_Room__East_9,
-            SpotId::Glacier__Vertical_Room__Mid_9,
-            SpotId::Glacier__Vertical_Room__Peak,
+            SpotId::Glacier(GlacierSpotId::Glacier__Vertical_Room__East_9),
+            SpotId::Glacier(GlacierSpotId::Glacier__Vertical_Room__Mid_9),
+            SpotId::Glacier(GlacierSpotId::Glacier__Vertical_Room__Peak),
         ]
     );
 }
@@ -69,12 +69,12 @@ fn test_obtain() {
     ctx.add_item(Item::Amashilama);
     ctx.add_item(Item::Ice_Axe);
     ctx.set_major_glitches(true);
-    ctx.save = SpotId::Glacier__Revival__Save_Point;
+    ctx.save = SpotId::Glacier(GlacierSpotId::Glacier__Revival__Save_Point);
 
     expect_obtainable!(
         &*world,
         ctx,
-        SpotId::Glacier__Revival__Save_Point,
+        SpotId::Glacier(GlacierSpotId::Glacier__Revival__Save_Point),
         Item::Ledge_Grab
     );
 }
@@ -88,7 +88,7 @@ fn test_require() {
     ctx.flasks = 1;
     ctx.add_item(Item::Amashilama);
     ctx.add_item(Item::Ice_Axe);
-    ctx.save = SpotId::Glacier__Revival__Save_Point;
+    ctx.save = SpotId::Glacier(GlacierSpotId::Glacier__Revival__Save_Point);
 
     let mut ctx2 = ctx.clone();
     ctx2.set_major_glitches(true);
@@ -96,13 +96,13 @@ fn test_require() {
         &*world,
         ctx,
         Context,
-        SpotId::Glacier__Vertical_Room__East_9,
+        SpotId::Glacier(GlacierSpotId::Glacier__Vertical_Room__East_9),
         Item::Ledge_Grab
     );
     expect_obtainable!(
         &*world,
         ctx2,
-        SpotId::Glacier__Vertical_Room__East_9,
+        SpotId::Glacier(GlacierSpotId::Glacier__Vertical_Room__East_9),
         Item::Ledge_Grab
     );
 }
@@ -117,7 +117,7 @@ fn search() {
     ctx.flasks = 1;
     ctx.add_item(Item::Amashilama);
     ctx.add_item(Item::Ice_Axe);
-    ctx.save = SpotId::Glacier__Revival__Save_Point;
+    ctx.save = SpotId::Glacier(GlacierSpotId::Glacier__Revival__Save_Point);
     ctx.visit(LocationId::Glacier__The_Big_Drop__Water_Surface__Drown);
     ctx.skip(LocationId::Glacier__Compass_Room__Center__Table);
     let verify = |c: &Context| {
@@ -132,7 +132,7 @@ fn search() {
         &*world,
         ctx,
         Context,
-        SpotId::Glacier__Vertical_Room__East_9,
+        SpotId::Glacier(GlacierSpotId::Glacier__Vertical_Room__East_9),
         Item::Ledge_Grab,
         verify,
         500
@@ -154,7 +154,7 @@ fn asserde_true() {
     ctx.flasks = 1;
     ctx.add_item(Item::Amashilama);
     ctx.add_item(Item::Ice_Axe);
-    ctx.save = SpotId::Glacier__Revival__Save_Point;
+    ctx.save = SpotId::Glacier(GlacierSpotId::Glacier__Revival__Save_Point);
     ctx.visit(LocationId::Glacier__The_Big_Drop__Water_Surface__Drown);
     ctx.skip(LocationId::Glacier__Compass_Room__Center__Table);
 

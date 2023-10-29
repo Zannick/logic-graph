@@ -33,6 +33,21 @@ def construct_id(*args: list[str]) -> str:
                      for a in args
                      for s in nested.split(a))
 
+def construct_spot_id(*args: list[str]) -> str:
+    r_id = construct_id(args[0])
+    return f'SpotId::{r_id}({r_id}SpotId::{construct_id(*args)})'
+
+def place_to_names(pl: str) -> list[str]:
+    names = pl.split('>')
+    return [n.strip() for n in names]
+
+def construct_place_id(pl: str) -> str:
+    pt = getPlaceType(pl)
+    if pt == 'SpotId':
+        return construct_spot_id(*place_to_names(pl))
+    else:
+        return f'{pt}::{construct_id(pl)}'
+
 def construct_test_name(test_dict):
     if 'name' in test_dict:
         return test_dict['name']

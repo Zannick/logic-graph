@@ -176,191 +176,241 @@ pub mod data {
     use crate::graph_enums::*;
     pub fn breach(spot_id: SpotId) -> bool {
         match spot_id {
-            SpotId::Giguna_Breach__Antechamber__North => true,
-            SpotId::Giguna_Breach__Ascent__Bottom => true,
-            SpotId::Giguna_Breach__Ascent__Top => true,
-            SpotId::Giguna_Breach__Ascent__West_6 => true,
-            SpotId::Giguna_Breach__Ascent__West_9 => true,
-            SpotId::Giguna_Breach__Below_Chimney__Cubby_Entrance => true,
-            SpotId::Giguna_Breach__Below_Chimney__East_Ledge => true,
-            SpotId::Giguna_Breach__Below_Chimney__North => true,
-            SpotId::Giguna_Breach__Below_Chimney__Passage_Lip => true,
-            SpotId::Giguna_Breach__Below_Chimney__Southwest => true,
-            SpotId::Giguna_Breach__Below_Chimney__West_Passage => true,
-            SpotId::Giguna_Breach__Central__East_9 => true,
-            SpotId::Giguna_Breach__Central__East_Brick => true,
-            SpotId::Giguna_Breach__Central__Middle_Statue => true,
-            SpotId::Giguna_Breach__Central__South => true,
-            SpotId::Giguna_Breach__Central__Statuette => true,
-            SpotId::Giguna_Breach__Central__Tunnel => true,
-            SpotId::Giguna_Breach__Central__Upper_Floating_Brick => true,
-            SpotId::Giguna_Breach__Central__Wall => true,
-            SpotId::Giguna_Breach__Central__West_8 => true,
-            SpotId::Giguna_Breach__Central__West_9 => true,
-            SpotId::Giguna_Breach__Central__West_Statue => true,
-            SpotId::Giguna_Breach__Chimney__Cache => true,
-            SpotId::Giguna_Breach__Chimney__East_7 => true,
-            SpotId::Giguna_Breach__Chimney__East_8 => true,
-            SpotId::Giguna_Breach__Chimney__East_9 => true,
-            SpotId::Giguna_Breach__Chimney__Middle_Platform => true,
-            SpotId::Giguna_Breach__Chimney__South => true,
-            SpotId::Giguna_Breach__Chimney__Top => true,
-            SpotId::Giguna_Breach__Cubby__Entrance => true,
-            SpotId::Giguna_Breach__Cubby__Rocks => true,
-            SpotId::Giguna_Breach__Fire_Room__Cuesta => true,
-            SpotId::Giguna_Breach__Fire_Room__East_11 => true,
-            SpotId::Giguna_Breach__Fire_Room__First_Fire => true,
-            SpotId::Giguna_Breach__Fire_Room__South => true,
-            SpotId::Giguna_Breach__Fire_Room__West_10 => true,
-            SpotId::Giguna_Breach__Fire_Room__West_11 => true,
-            SpotId::Giguna_Breach__Fire_Room__West_Plateau => true,
-            SpotId::Giguna_Breach__Grid_14_10_11__East_10 => true,
-            SpotId::Giguna_Breach__Grid_14_10_11__East_11 => true,
-            SpotId::Giguna_Breach__Grid_14_10_11__High_Ledge => true,
-            SpotId::Giguna_Breach__Grid_14_10_11__North => true,
-            SpotId::Giguna_Breach__Grid_14_10_11__South => true,
-            SpotId::Giguna_Breach__Peak__Column => true,
-            SpotId::Giguna_Breach__Peak__East_6 => true,
-            SpotId::Giguna_Breach__Peak__East_Passage => true,
-            SpotId::Giguna_Breach__Peak__Portal => true,
-            SpotId::Giguna_Breach__Peak__Save_Point => true,
-            SpotId::Giguna_Breach__Peak__Upper_East => true,
-            SpotId::Giguna_Breach__Peak__Upper_West => true,
-            SpotId::Giguna_Breach__Peak__West_7 => true,
-            SpotId::Giguna_Breach__Pink_Clouds__Corner => true,
-            SpotId::Giguna_Breach__Pink_Clouds__Normal_Entry => true,
-            SpotId::Giguna_Breach__Pink_Clouds__Quick_Entry => true,
-            SpotId::Giguna_Breach__Robopede__Center => true,
-            SpotId::Giguna_Breach__Robopede__North => true,
-            SpotId::Giguna_Breach__Robopede__West => true,
-            SpotId::Giguna_Breach__SW_Save__East_12 => true,
-            SpotId::Giguna_Breach__SW_Save__Lower_Platform => true,
-            SpotId::Giguna_Breach__SW_Save__North => true,
-            SpotId::Giguna_Breach__SW_Save__Save_Point => true,
-            SpotId::Giguna_Breach__SW_Save__Side_Door => true,
-            SpotId::Giguna_Breach__SW_Save__West_11 => true,
-            SpotId::Giguna_Breach__Slingshot__Column => true,
-            SpotId::Giguna_Breach__Slingshot__Ravine => true,
-            SpotId::Giguna_Breach__Slingshot__West => true,
-            SpotId::Irikar_Breach__Save_Room__Save_Point => true,
+            SpotId::Giguna_Breach(Giguna_BreachSpotId::Giguna_Breach__Antechamber__North) => true,
+            SpotId::Giguna_Breach(Giguna_BreachSpotId::Giguna_Breach__Ascent__Bottom) => true,
+            SpotId::Giguna_Breach(Giguna_BreachSpotId::Giguna_Breach__Ascent__Top) => true,
+            SpotId::Giguna_Breach(Giguna_BreachSpotId::Giguna_Breach__Ascent__West_6) => true,
+            SpotId::Giguna_Breach(Giguna_BreachSpotId::Giguna_Breach__Ascent__West_9) => true,
+            SpotId::Giguna_Breach(
+                Giguna_BreachSpotId::Giguna_Breach__Below_Chimney__Cubby_Entrance,
+            ) => true,
+            SpotId::Giguna_Breach(
+                Giguna_BreachSpotId::Giguna_Breach__Below_Chimney__East_Ledge,
+            ) => true,
+            SpotId::Giguna_Breach(Giguna_BreachSpotId::Giguna_Breach__Below_Chimney__North) => true,
+            SpotId::Giguna_Breach(
+                Giguna_BreachSpotId::Giguna_Breach__Below_Chimney__Passage_Lip,
+            ) => true,
+            SpotId::Giguna_Breach(Giguna_BreachSpotId::Giguna_Breach__Below_Chimney__Southwest) => {
+                true
+            }
+            SpotId::Giguna_Breach(
+                Giguna_BreachSpotId::Giguna_Breach__Below_Chimney__West_Passage,
+            ) => true,
+            SpotId::Giguna_Breach(Giguna_BreachSpotId::Giguna_Breach__Central__East_9) => true,
+            SpotId::Giguna_Breach(Giguna_BreachSpotId::Giguna_Breach__Central__East_Brick) => true,
+            SpotId::Giguna_Breach(Giguna_BreachSpotId::Giguna_Breach__Central__Middle_Statue) => {
+                true
+            }
+            SpotId::Giguna_Breach(Giguna_BreachSpotId::Giguna_Breach__Central__South) => true,
+            SpotId::Giguna_Breach(Giguna_BreachSpotId::Giguna_Breach__Central__Statuette) => true,
+            SpotId::Giguna_Breach(Giguna_BreachSpotId::Giguna_Breach__Central__Tunnel) => true,
+            SpotId::Giguna_Breach(
+                Giguna_BreachSpotId::Giguna_Breach__Central__Upper_Floating_Brick,
+            ) => true,
+            SpotId::Giguna_Breach(Giguna_BreachSpotId::Giguna_Breach__Central__Wall) => true,
+            SpotId::Giguna_Breach(Giguna_BreachSpotId::Giguna_Breach__Central__West_8) => true,
+            SpotId::Giguna_Breach(Giguna_BreachSpotId::Giguna_Breach__Central__West_9) => true,
+            SpotId::Giguna_Breach(Giguna_BreachSpotId::Giguna_Breach__Central__West_Statue) => true,
+            SpotId::Giguna_Breach(Giguna_BreachSpotId::Giguna_Breach__Chimney__Cache) => true,
+            SpotId::Giguna_Breach(Giguna_BreachSpotId::Giguna_Breach__Chimney__East_7) => true,
+            SpotId::Giguna_Breach(Giguna_BreachSpotId::Giguna_Breach__Chimney__East_8) => true,
+            SpotId::Giguna_Breach(Giguna_BreachSpotId::Giguna_Breach__Chimney__East_9) => true,
+            SpotId::Giguna_Breach(Giguna_BreachSpotId::Giguna_Breach__Chimney__Middle_Platform) => {
+                true
+            }
+            SpotId::Giguna_Breach(Giguna_BreachSpotId::Giguna_Breach__Chimney__South) => true,
+            SpotId::Giguna_Breach(Giguna_BreachSpotId::Giguna_Breach__Chimney__Top) => true,
+            SpotId::Giguna_Breach(Giguna_BreachSpotId::Giguna_Breach__Cubby__Entrance) => true,
+            SpotId::Giguna_Breach(Giguna_BreachSpotId::Giguna_Breach__Cubby__Rocks) => true,
+            SpotId::Giguna_Breach(Giguna_BreachSpotId::Giguna_Breach__Fire_Room__Cuesta) => true,
+            SpotId::Giguna_Breach(Giguna_BreachSpotId::Giguna_Breach__Fire_Room__East_11) => true,
+            SpotId::Giguna_Breach(Giguna_BreachSpotId::Giguna_Breach__Fire_Room__First_Fire) => {
+                true
+            }
+            SpotId::Giguna_Breach(Giguna_BreachSpotId::Giguna_Breach__Fire_Room__South) => true,
+            SpotId::Giguna_Breach(Giguna_BreachSpotId::Giguna_Breach__Fire_Room__West_10) => true,
+            SpotId::Giguna_Breach(Giguna_BreachSpotId::Giguna_Breach__Fire_Room__West_11) => true,
+            SpotId::Giguna_Breach(Giguna_BreachSpotId::Giguna_Breach__Fire_Room__West_Plateau) => {
+                true
+            }
+            SpotId::Giguna_Breach(Giguna_BreachSpotId::Giguna_Breach__Grid_14_10_11__East_10) => {
+                true
+            }
+            SpotId::Giguna_Breach(Giguna_BreachSpotId::Giguna_Breach__Grid_14_10_11__East_11) => {
+                true
+            }
+            SpotId::Giguna_Breach(
+                Giguna_BreachSpotId::Giguna_Breach__Grid_14_10_11__High_Ledge,
+            ) => true,
+            SpotId::Giguna_Breach(Giguna_BreachSpotId::Giguna_Breach__Grid_14_10_11__North) => true,
+            SpotId::Giguna_Breach(Giguna_BreachSpotId::Giguna_Breach__Grid_14_10_11__South) => true,
+            SpotId::Giguna_Breach(Giguna_BreachSpotId::Giguna_Breach__Peak__Column) => true,
+            SpotId::Giguna_Breach(Giguna_BreachSpotId::Giguna_Breach__Peak__East_6) => true,
+            SpotId::Giguna_Breach(Giguna_BreachSpotId::Giguna_Breach__Peak__East_Passage) => true,
+            SpotId::Giguna_Breach(Giguna_BreachSpotId::Giguna_Breach__Peak__Portal) => true,
+            SpotId::Giguna_Breach(Giguna_BreachSpotId::Giguna_Breach__Peak__Save_Point) => true,
+            SpotId::Giguna_Breach(Giguna_BreachSpotId::Giguna_Breach__Peak__Upper_East) => true,
+            SpotId::Giguna_Breach(Giguna_BreachSpotId::Giguna_Breach__Peak__Upper_West) => true,
+            SpotId::Giguna_Breach(Giguna_BreachSpotId::Giguna_Breach__Peak__West_7) => true,
+            SpotId::Giguna_Breach(Giguna_BreachSpotId::Giguna_Breach__Pink_Clouds__Corner) => true,
+            SpotId::Giguna_Breach(
+                Giguna_BreachSpotId::Giguna_Breach__Pink_Clouds__Normal_Entry,
+            ) => true,
+            SpotId::Giguna_Breach(Giguna_BreachSpotId::Giguna_Breach__Pink_Clouds__Quick_Entry) => {
+                true
+            }
+            SpotId::Giguna_Breach(Giguna_BreachSpotId::Giguna_Breach__Robopede__Center) => true,
+            SpotId::Giguna_Breach(Giguna_BreachSpotId::Giguna_Breach__Robopede__North) => true,
+            SpotId::Giguna_Breach(Giguna_BreachSpotId::Giguna_Breach__Robopede__West) => true,
+            SpotId::Giguna_Breach(Giguna_BreachSpotId::Giguna_Breach__SW_Save__East_12) => true,
+            SpotId::Giguna_Breach(Giguna_BreachSpotId::Giguna_Breach__SW_Save__Lower_Platform) => {
+                true
+            }
+            SpotId::Giguna_Breach(Giguna_BreachSpotId::Giguna_Breach__SW_Save__North) => true,
+            SpotId::Giguna_Breach(Giguna_BreachSpotId::Giguna_Breach__SW_Save__Save_Point) => true,
+            SpotId::Giguna_Breach(Giguna_BreachSpotId::Giguna_Breach__SW_Save__Side_Door) => true,
+            SpotId::Giguna_Breach(Giguna_BreachSpotId::Giguna_Breach__SW_Save__West_11) => true,
+            SpotId::Giguna_Breach(Giguna_BreachSpotId::Giguna_Breach__Slingshot__Column) => true,
+            SpotId::Giguna_Breach(Giguna_BreachSpotId::Giguna_Breach__Slingshot__Ravine) => true,
+            SpotId::Giguna_Breach(Giguna_BreachSpotId::Giguna_Breach__Slingshot__West) => true,
+            SpotId::Irikar_Breach(Irikar_BreachSpotId::Irikar_Breach__Save_Room__Save_Point) => {
+                true
+            }
             _ => false,
         }
     }
     pub fn water(spot_id: SpotId) -> bool {
         match spot_id {
-            SpotId::Amagi__Cave_Behind_Waterfall__Bottom => false,
-            SpotId::Amagi__Cave_Behind_Waterfall__Middle => false,
-            SpotId::Amagi__Cave_Behind_Waterfall__Top => false,
-            SpotId::Amagi__Grid_31_19__East => true,
-            SpotId::Amagi__Grid_31_19__West => true,
-            SpotId::Amagi__Liru_Room__Bottom => true,
-            SpotId::Amagi__Liru_Room__East_Passage => true,
-            SpotId::Amagi__Liru_Room__Hidden_Enemies => true,
-            SpotId::Amagi__Liru_Room__Hidden_Exit => true,
-            SpotId::Amagi__Liru_Room__Platform_1_Left => true,
-            SpotId::Amagi__Liru_Room__Platform_1_Right => true,
-            SpotId::Amagi__Liru_Room__Platform_2_Left => true,
-            SpotId::Amagi__Liru_Room__Platform_2_Right => true,
-            SpotId::Amagi__Liru_Room__Platform_3_Left => true,
-            SpotId::Amagi__Liru_Room__Platform_3_Right => true,
-            SpotId::Amagi__Liru_Room__Platform_4_Left => true,
-            SpotId::Amagi__Liru_Room__Platform_4_Right => true,
-            SpotId::Amagi__Liru_Room__Shrine => true,
-            SpotId::Amagi__Liru_Room__West_19 => true,
-            SpotId::Amagi__Liru_Room__West_20 => true,
-            SpotId::Amagi__Main_Area__Broken_Wall => true,
-            SpotId::Amagi__Main_Area__Carving => false,
-            SpotId::Amagi__Main_Area__Catwalk_Broken_Part => true,
-            SpotId::Amagi__Main_Area__Catwalk_Center => true,
-            SpotId::Amagi__Main_Area__Catwalk_East_Edge => true,
-            SpotId::Amagi__Main_Area__Cliff => true,
-            SpotId::Amagi__Main_Area__East_15 => false,
-            SpotId::Amagi__Main_Area__East_19 => true,
-            SpotId::Amagi__Main_Area__East_Ledge => true,
-            SpotId::Amagi__Main_Area__Enemy_Side => true,
-            SpotId::Amagi__Main_Area__Flat_Ruin => true,
-            SpotId::Amagi__Main_Area__Half_Pillar => true,
-            SpotId::Amagi__Main_Area__Platform_2 => true,
-            SpotId::Amagi__Main_Area__Platform_3 => true,
-            SpotId::Amagi__Main_Area__Save_Point => true,
-            SpotId::Amagi__Main_Area__Secret_Outcropping => false,
-            SpotId::Amagi__Main_Area__Secret_Waterfall => false,
-            SpotId::Amagi__Main_Area__Shallow_End => true,
-            SpotId::Amagi__Main_Area__Small_Cliff => true,
-            SpotId::Amagi__Main_Area__Upper_Platform => true,
-            SpotId::Amagi__Main_Area__Wall_Stuck_Spot => true,
-            SpotId::Amagi__Main_Area__Waters_Edge => false,
-            SpotId::Amagi__Main_Area__Way_Off_To_The_Side => false,
-            SpotId::Amagi__Main_Area__West_15 => false,
-            SpotId::Amagi__Main_Area__West_18 => true,
-            SpotId::Amagi__Main_Area__West_19 => true,
-            SpotId::Amagi__Main_Area__West_Mini_Hill => true,
-            SpotId::Amagi__Main_Area__West_Shelf => true,
-            SpotId::Amagi__Main_Area__West_Side => true,
-            SpotId::Amagi__West_Lake__Cavern_Back_Teeth => true,
-            SpotId::Amagi__West_Lake__Cavern_Chin => true,
-            SpotId::Amagi__West_Lake__Cavern_Eye => true,
-            SpotId::Amagi__West_Lake__Cavern_Front_Pillar => true,
-            SpotId::Amagi__West_Lake__Cavern_Front_Teeth => true,
-            SpotId::Amagi__West_Lake__Cavern_Jaw => true,
-            SpotId::Amagi__West_Lake__Cavern_Lower_Trachea => true,
-            SpotId::Amagi__West_Lake__Cavern_Middle_Pillar => true,
-            SpotId::Amagi__West_Lake__Cavern_Neck => true,
-            SpotId::Amagi__West_Lake__Cavern_Rear_Pillar => true,
-            SpotId::Amagi__West_Lake__Cavern_Refill_Station => true,
-            SpotId::Amagi__West_Lake__Cavern_Tear_Duct => true,
-            SpotId::Amagi__West_Lake__East_15 => false,
-            SpotId::Amagi__West_Lake__East_18 => true,
-            SpotId::Amagi__West_Lake__East_19 => true,
-            SpotId::Amagi__West_Lake__East_20 => true,
-            SpotId::Amagi__West_Lake__East_Bank => true,
-            SpotId::Amagi__West_Lake__East_Platform => true,
-            SpotId::Amagi__West_Lake__East_Shore => false,
-            SpotId::Amagi__West_Lake__Left_of_Enemy => true,
-            SpotId::Amagi__West_Lake__Northeast_Platform => true,
-            SpotId::Amagi__West_Lake__Northwest_Platform => true,
-            SpotId::Amagi__West_Lake__Pillar => true,
-            SpotId::Amagi__West_Lake__Pillar_Platform => true,
-            SpotId::Amagi__West_Lake__Small_Hill => true,
-            SpotId::Amagi__West_Lake__Some_Rock => true,
-            SpotId::Amagi__West_Lake__Somewhat_Central_Platform => true,
-            SpotId::Amagi__West_Lake__Stronghold_Ceiling_Left => true,
-            SpotId::Amagi__West_Lake__Stronghold_Ceiling_Right => true,
-            SpotId::Amagi__West_Lake__Stronghold_Front_Door => true,
-            SpotId::Amagi__West_Lake__Stronghold_Front_Room => true,
-            SpotId::Amagi__West_Lake__Stronghold_Item => true,
-            SpotId::Amagi__West_Lake__Stronghold_Middle_Column => true,
-            SpotId::Amagi__West_Lake__Stronghold_Rear_Wall => true,
-            SpotId::Amagi__West_Lake__Stronghold_Top => true,
-            SpotId::Amagi__West_Lake__Surface_Wall_Left => false,
-            SpotId::Amagi__West_Lake__Surface_Wall_Right => false,
-            SpotId::Amagi__West_Lake__Tentacle_Gap => true,
-            SpotId::Amagi__West_Lake__Upper_Center_Platform => true,
-            SpotId::Amagi__West_Lake__Water_Surface => false,
-            SpotId::Amagi__West_Lake__West_15 => false,
-            SpotId::Amagi__West_Lake__West_Bank => true,
-            SpotId::Amagi__West_Lake__West_Cliff => true,
-            SpotId::Amagi__West_Lake__West_Platform => true,
-            SpotId::Amagi__West_Lake__West_Shore => false,
+            SpotId::Amagi(AmagiSpotId::Amagi__Cave_Behind_Waterfall__Bottom) => false,
+            SpotId::Amagi(AmagiSpotId::Amagi__Cave_Behind_Waterfall__Middle) => false,
+            SpotId::Amagi(AmagiSpotId::Amagi__Cave_Behind_Waterfall__Top) => false,
+            SpotId::Amagi(AmagiSpotId::Amagi__Grid_31_19__East) => true,
+            SpotId::Amagi(AmagiSpotId::Amagi__Grid_31_19__West) => true,
+            SpotId::Amagi(AmagiSpotId::Amagi__Liru_Room__Bottom) => true,
+            SpotId::Amagi(AmagiSpotId::Amagi__Liru_Room__East_Passage) => true,
+            SpotId::Amagi(AmagiSpotId::Amagi__Liru_Room__Hidden_Enemies) => true,
+            SpotId::Amagi(AmagiSpotId::Amagi__Liru_Room__Hidden_Exit) => true,
+            SpotId::Amagi(AmagiSpotId::Amagi__Liru_Room__Platform_1_Left) => true,
+            SpotId::Amagi(AmagiSpotId::Amagi__Liru_Room__Platform_1_Right) => true,
+            SpotId::Amagi(AmagiSpotId::Amagi__Liru_Room__Platform_2_Left) => true,
+            SpotId::Amagi(AmagiSpotId::Amagi__Liru_Room__Platform_2_Right) => true,
+            SpotId::Amagi(AmagiSpotId::Amagi__Liru_Room__Platform_3_Left) => true,
+            SpotId::Amagi(AmagiSpotId::Amagi__Liru_Room__Platform_3_Right) => true,
+            SpotId::Amagi(AmagiSpotId::Amagi__Liru_Room__Platform_4_Left) => true,
+            SpotId::Amagi(AmagiSpotId::Amagi__Liru_Room__Platform_4_Right) => true,
+            SpotId::Amagi(AmagiSpotId::Amagi__Liru_Room__Shrine) => true,
+            SpotId::Amagi(AmagiSpotId::Amagi__Liru_Room__West_19) => true,
+            SpotId::Amagi(AmagiSpotId::Amagi__Liru_Room__West_20) => true,
+            SpotId::Amagi(AmagiSpotId::Amagi__Main_Area__Broken_Wall) => true,
+            SpotId::Amagi(AmagiSpotId::Amagi__Main_Area__Carving) => false,
+            SpotId::Amagi(AmagiSpotId::Amagi__Main_Area__Catwalk_Broken_Part) => true,
+            SpotId::Amagi(AmagiSpotId::Amagi__Main_Area__Catwalk_Center) => true,
+            SpotId::Amagi(AmagiSpotId::Amagi__Main_Area__Catwalk_East_Edge) => true,
+            SpotId::Amagi(AmagiSpotId::Amagi__Main_Area__Cliff) => true,
+            SpotId::Amagi(AmagiSpotId::Amagi__Main_Area__East_15) => false,
+            SpotId::Amagi(AmagiSpotId::Amagi__Main_Area__East_19) => true,
+            SpotId::Amagi(AmagiSpotId::Amagi__Main_Area__East_Ledge) => true,
+            SpotId::Amagi(AmagiSpotId::Amagi__Main_Area__Enemy_Side) => true,
+            SpotId::Amagi(AmagiSpotId::Amagi__Main_Area__Flat_Ruin) => true,
+            SpotId::Amagi(AmagiSpotId::Amagi__Main_Area__Half_Pillar) => true,
+            SpotId::Amagi(AmagiSpotId::Amagi__Main_Area__Platform_2) => true,
+            SpotId::Amagi(AmagiSpotId::Amagi__Main_Area__Platform_3) => true,
+            SpotId::Amagi(AmagiSpotId::Amagi__Main_Area__Save_Point) => true,
+            SpotId::Amagi(AmagiSpotId::Amagi__Main_Area__Secret_Outcropping) => false,
+            SpotId::Amagi(AmagiSpotId::Amagi__Main_Area__Secret_Waterfall) => false,
+            SpotId::Amagi(AmagiSpotId::Amagi__Main_Area__Shallow_End) => true,
+            SpotId::Amagi(AmagiSpotId::Amagi__Main_Area__Small_Cliff) => true,
+            SpotId::Amagi(AmagiSpotId::Amagi__Main_Area__Upper_Platform) => true,
+            SpotId::Amagi(AmagiSpotId::Amagi__Main_Area__Wall_Stuck_Spot) => true,
+            SpotId::Amagi(AmagiSpotId::Amagi__Main_Area__Waters_Edge) => false,
+            SpotId::Amagi(AmagiSpotId::Amagi__Main_Area__Way_Off_To_The_Side) => false,
+            SpotId::Amagi(AmagiSpotId::Amagi__Main_Area__West_15) => false,
+            SpotId::Amagi(AmagiSpotId::Amagi__Main_Area__West_18) => true,
+            SpotId::Amagi(AmagiSpotId::Amagi__Main_Area__West_19) => true,
+            SpotId::Amagi(AmagiSpotId::Amagi__Main_Area__West_Mini_Hill) => true,
+            SpotId::Amagi(AmagiSpotId::Amagi__Main_Area__West_Shelf) => true,
+            SpotId::Amagi(AmagiSpotId::Amagi__Main_Area__West_Side) => true,
+            SpotId::Amagi(AmagiSpotId::Amagi__West_Lake__Cavern_Back_Teeth) => true,
+            SpotId::Amagi(AmagiSpotId::Amagi__West_Lake__Cavern_Chin) => true,
+            SpotId::Amagi(AmagiSpotId::Amagi__West_Lake__Cavern_Eye) => true,
+            SpotId::Amagi(AmagiSpotId::Amagi__West_Lake__Cavern_Front_Pillar) => true,
+            SpotId::Amagi(AmagiSpotId::Amagi__West_Lake__Cavern_Front_Teeth) => true,
+            SpotId::Amagi(AmagiSpotId::Amagi__West_Lake__Cavern_Jaw) => true,
+            SpotId::Amagi(AmagiSpotId::Amagi__West_Lake__Cavern_Lower_Trachea) => true,
+            SpotId::Amagi(AmagiSpotId::Amagi__West_Lake__Cavern_Middle_Pillar) => true,
+            SpotId::Amagi(AmagiSpotId::Amagi__West_Lake__Cavern_Neck) => true,
+            SpotId::Amagi(AmagiSpotId::Amagi__West_Lake__Cavern_Rear_Pillar) => true,
+            SpotId::Amagi(AmagiSpotId::Amagi__West_Lake__Cavern_Refill_Station) => true,
+            SpotId::Amagi(AmagiSpotId::Amagi__West_Lake__Cavern_Tear_Duct) => true,
+            SpotId::Amagi(AmagiSpotId::Amagi__West_Lake__East_15) => false,
+            SpotId::Amagi(AmagiSpotId::Amagi__West_Lake__East_18) => true,
+            SpotId::Amagi(AmagiSpotId::Amagi__West_Lake__East_19) => true,
+            SpotId::Amagi(AmagiSpotId::Amagi__West_Lake__East_20) => true,
+            SpotId::Amagi(AmagiSpotId::Amagi__West_Lake__East_Bank) => true,
+            SpotId::Amagi(AmagiSpotId::Amagi__West_Lake__East_Platform) => true,
+            SpotId::Amagi(AmagiSpotId::Amagi__West_Lake__East_Shore) => false,
+            SpotId::Amagi(AmagiSpotId::Amagi__West_Lake__Left_of_Enemy) => true,
+            SpotId::Amagi(AmagiSpotId::Amagi__West_Lake__Northeast_Platform) => true,
+            SpotId::Amagi(AmagiSpotId::Amagi__West_Lake__Northwest_Platform) => true,
+            SpotId::Amagi(AmagiSpotId::Amagi__West_Lake__Pillar) => true,
+            SpotId::Amagi(AmagiSpotId::Amagi__West_Lake__Pillar_Platform) => true,
+            SpotId::Amagi(AmagiSpotId::Amagi__West_Lake__Small_Hill) => true,
+            SpotId::Amagi(AmagiSpotId::Amagi__West_Lake__Some_Rock) => true,
+            SpotId::Amagi(AmagiSpotId::Amagi__West_Lake__Somewhat_Central_Platform) => true,
+            SpotId::Amagi(AmagiSpotId::Amagi__West_Lake__Stronghold_Ceiling_Left) => true,
+            SpotId::Amagi(AmagiSpotId::Amagi__West_Lake__Stronghold_Ceiling_Right) => true,
+            SpotId::Amagi(AmagiSpotId::Amagi__West_Lake__Stronghold_Front_Door) => true,
+            SpotId::Amagi(AmagiSpotId::Amagi__West_Lake__Stronghold_Front_Room) => true,
+            SpotId::Amagi(AmagiSpotId::Amagi__West_Lake__Stronghold_Item) => true,
+            SpotId::Amagi(AmagiSpotId::Amagi__West_Lake__Stronghold_Middle_Column) => true,
+            SpotId::Amagi(AmagiSpotId::Amagi__West_Lake__Stronghold_Rear_Wall) => true,
+            SpotId::Amagi(AmagiSpotId::Amagi__West_Lake__Stronghold_Top) => true,
+            SpotId::Amagi(AmagiSpotId::Amagi__West_Lake__Surface_Wall_Left) => false,
+            SpotId::Amagi(AmagiSpotId::Amagi__West_Lake__Surface_Wall_Right) => false,
+            SpotId::Amagi(AmagiSpotId::Amagi__West_Lake__Tentacle_Gap) => true,
+            SpotId::Amagi(AmagiSpotId::Amagi__West_Lake__Upper_Center_Platform) => true,
+            SpotId::Amagi(AmagiSpotId::Amagi__West_Lake__Water_Surface) => false,
+            SpotId::Amagi(AmagiSpotId::Amagi__West_Lake__West_15) => false,
+            SpotId::Amagi(AmagiSpotId::Amagi__West_Lake__West_Bank) => true,
+            SpotId::Amagi(AmagiSpotId::Amagi__West_Lake__West_Cliff) => true,
+            SpotId::Amagi(AmagiSpotId::Amagi__West_Lake__West_Platform) => true,
+            SpotId::Amagi(AmagiSpotId::Amagi__West_Lake__West_Shore) => false,
             _ => false,
         }
     }
     pub fn flipside(spot_id: SpotId) -> SpotId {
         match spot_id {
-            SpotId::Giguna_Breach__Peak__Portal => SpotId::Giguna__Ruins_Top__Save_Point,
-            SpotId::Giguna_Breach__Peak__Save_Point => SpotId::Giguna__Ruins_Top__Portal,
-            SpotId::Giguna_Breach__Pink_Clouds__Corner => SpotId::Giguna__Clouds__Cache,
-            SpotId::Giguna_Breach__Pink_Clouds__Normal_Entry => {
-                SpotId::Giguna__Clouds__Platform_Stop
+            SpotId::Giguna_Breach(Giguna_BreachSpotId::Giguna_Breach__Peak__Portal) => {
+                SpotId::Giguna(GigunaSpotId::Giguna__Ruins_Top__Save_Point)
             }
-            SpotId::Giguna__Clouds__Cache => SpotId::Giguna_Breach__Pink_Clouds__Corner,
-            SpotId::Giguna__Clouds__Platform_Stop => {
-                SpotId::Giguna_Breach__Pink_Clouds__Normal_Entry
+            SpotId::Giguna_Breach(Giguna_BreachSpotId::Giguna_Breach__Peak__Save_Point) => {
+                SpotId::Giguna(GigunaSpotId::Giguna__Ruins_Top__Portal)
             }
-            SpotId::Giguna__Ruins_Top__Portal => SpotId::Giguna_Breach__Peak__Save_Point,
-            SpotId::Giguna__Ruins_Top__Save_Point => SpotId::Giguna_Breach__Peak__Portal,
-            SpotId::Irikar_Breach__Save_Room__Save_Point => SpotId::Irikar__Sight_Room__Portal,
-            SpotId::Irikar__Sight_Room__Portal => SpotId::Irikar_Breach__Save_Room__Save_Point,
+            SpotId::Giguna_Breach(Giguna_BreachSpotId::Giguna_Breach__Pink_Clouds__Corner) => {
+                SpotId::Giguna(GigunaSpotId::Giguna__Clouds__Cache)
+            }
+            SpotId::Giguna_Breach(
+                Giguna_BreachSpotId::Giguna_Breach__Pink_Clouds__Normal_Entry,
+            ) => SpotId::Giguna(GigunaSpotId::Giguna__Clouds__Platform_Stop),
+            SpotId::Giguna(GigunaSpotId::Giguna__Clouds__Cache) => {
+                SpotId::Giguna_Breach(Giguna_BreachSpotId::Giguna_Breach__Pink_Clouds__Corner)
+            }
+            SpotId::Giguna(GigunaSpotId::Giguna__Clouds__Platform_Stop) => {
+                SpotId::Giguna_Breach(Giguna_BreachSpotId::Giguna_Breach__Pink_Clouds__Normal_Entry)
+            }
+            SpotId::Giguna(GigunaSpotId::Giguna__Ruins_Top__Portal) => {
+                SpotId::Giguna_Breach(Giguna_BreachSpotId::Giguna_Breach__Peak__Save_Point)
+            }
+            SpotId::Giguna(GigunaSpotId::Giguna__Ruins_Top__Save_Point) => {
+                SpotId::Giguna_Breach(Giguna_BreachSpotId::Giguna_Breach__Peak__Portal)
+            }
+            SpotId::Irikar_Breach(Irikar_BreachSpotId::Irikar_Breach__Save_Room__Save_Point) => {
+                SpotId::Irikar(IrikarSpotId::Irikar__Sight_Room__Portal)
+            }
+            SpotId::Irikar(IrikarSpotId::Irikar__Sight_Room__Portal) => {
+                SpotId::Irikar_Breach(Irikar_BreachSpotId::Irikar_Breach__Save_Room__Save_Point)
+            }
             _ => SpotId::None,
         }
     }
@@ -524,8 +574,8 @@ pub struct Context {
 impl Default for Context {
     fn default() -> Context {
         Context {
-            position: SpotId::Antarctica__West__Helipad,
-            save: SpotId::Antarctica__West__Helipad,
+            position: SpotId::Antarctica(AntarcticaSpotId::Antarctica__West__Helipad),
+            save: SpotId::Antarctica(AntarcticaSpotId::Antarctica__West__Helipad),
             indra: SpotId::None,
             last: SpotId::None,
             prev_area: AreaId::Antarctica__West,
@@ -3545,7 +3595,7 @@ impl context::Ctx for Context {
             }
             AreaId::Antarctica__East => {
                 if get_area(self.position) != area {
-                    self.save = SpotId::Antarctica__East__Save_Point;
+                    self.save = SpotId::Antarctica(AntarcticaSpotId::Antarctica__East__Save_Point);
                 }
             }
             AreaId::Ebih__Base_Camp => {
@@ -4089,7 +4139,7 @@ impl context::Ctx for Context {
     }
 
     fn local_travel_time(&self, movement_state: movements::MovementState, dest: SpotId) -> u32 {
-        movements::local_travel_time(self, movement_state, self.position, dest)
+        movements::local_travel_time(movement_state, self.position, dest)
     }
 
     fn count_visits(&self) -> u32 {
@@ -4975,14 +5025,6 @@ impl context::Ctx for Context {
 }
 
 impl Context {
-    fn local_travel_time_b(
-        &self,
-        movement_state: movements::MovementState,
-        dest: BigSpotId,
-    ) -> u32 {
-        movements::local_travel_time_b(movement_state, BigSpotId::None /*self.position*/, dest)
-    }
-
     // settings
     pub fn boomerang_steering(&self) -> bool {
         self.cbits1

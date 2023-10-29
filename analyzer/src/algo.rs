@@ -210,8 +210,7 @@ where
 {
     let movement_state = ctx.get().get_movement_state();
     let mut results = Vec::new();
-    for &dest in world.get_area_spots(ctx.get().position()) {
-        let ltt = ctx.get().local_travel_time(movement_state, dest);
+    for (dest, ltt) in W::get_local_spots(movement_state, ctx.get().position()) {
         if ltt < u32::MAX && ltt + ctx.elapsed() <= max_time {
             let mut newctx = ctx.clone();
             newctx.move_local(dest, ltt);

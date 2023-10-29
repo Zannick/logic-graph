@@ -126,7 +126,7 @@ fn expand_exits<W, T, E>(
 
 // This is mainly for move_to which is used from tests.
 fn expand_local<W, T, E, Wp>(
-    world: &W,
+    _world: &W,
     ctx: &ContextWrapper<T>,
     movement_state: T::MovementState,
     spot_map: &HashMap<E::SpotId, ContextWrapper<T>, CommonHasher>,
@@ -139,8 +139,7 @@ fn expand_local<W, T, E, Wp>(
     W::Location: Location<Context = T>,
     Wp: Warp<Context = T, SpotId = E::SpotId, Currency = <W::Location as Accessible>::Currency>,
 {
-    for &dest in world.get_area_spots(ctx.get().position()) {
-        let ltt = ctx.get().local_travel_time(movement_state, dest);
+    for (dest, ltt) in W::get_local_spots(movement_state, ctx.get().position()) {
         if !spot_map.contains_key(&dest) && ltt < u32::MAX {
             let mut newctx = ctx.clone();
             newctx.move_local(dest, ltt);
@@ -421,11 +420,11 @@ where
     let mut vec = Vec::new();
     for ctx in accessible {
         for spot in world.get_area_spots(ctx.get().position()) {
-            if !spot_map.contains_key(spot)
+            if !spot_map.contains_key(&spot)
                 && world
                     .get_condensed_edges_from(ctx.get().position())
                     .into_iter()
-                    .any(|ce| ce.dst == *spot)
+                    .any(|ce| ce.dst == spot)
             {
                 vec.push(format!(
                     "{} -> {}: movement not available",
