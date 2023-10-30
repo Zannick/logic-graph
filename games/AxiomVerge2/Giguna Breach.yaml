@@ -5,7 +5,7 @@ data:
 
 areas:
 - name: Peak
-  on_entry: $reset_old_area(^newpos);
+  on_entry: $reset_old_area(^newpos)
   data:
     portal_default: Giguna > Ruins Top > Save Point
   spots:
@@ -70,12 +70,12 @@ areas:
           time: 1  # ?
       actions:
         - name: Portal
-          do: $portal_save_update
+          do: $main_portal_save_update
           to: ^flipside
           tags: [portal]
 
 - name: Chimney
-  on_entry: $reset_old_area(^newpos);
+  on_entry: $reset_old_area(^newpos)
   spots:
     - name: East 7
       coord: [13.9, 6.7]
@@ -134,7 +134,7 @@ areas:
           tags: [flask]
 
 - name: Below Chimney
-  on_entry: $reset_old_area(^newpos);
+  on_entry: $reset_old_area(^newpos)
   spots:
     - name: North
       coord: [13.5, 9.2]
@@ -182,7 +182,7 @@ areas:
           tags: [ydoor]
 
 - name: Cubby
-  on_entry: $reset_old_area(^newpos);
+  on_entry: $reset_old_area(^newpos)
   spots:
     - name: Entrance
       coord: [13.5, 10.2]
@@ -203,7 +203,7 @@ areas:
           time: 0.6
 
 - name: SW Save
-  on_entry: $reset_old_area(^newpos);
+  on_entry: $reset_old_area(^newpos)
   start:
     _door_opened: false
   spots:
@@ -273,7 +273,7 @@ areas:
           tags: [xdoor]
 
 - name: Robopede
-  on_entry: $reset_old_area(^newpos);
+  on_entry: $reset_old_area(^newpos)
   spots:
     - name: West
       coord: [13.1, 11.55]
@@ -297,7 +297,7 @@ areas:
           tags: [ydoor]
 
 - name: Grid 14,10-11
-  on_entry: $reset_old_area(^newpos);
+  on_entry: $reset_old_area(^newpos)
   spots:
     - name: South
       coord: [14.5, 10.8]
@@ -338,7 +338,7 @@ areas:
           tags: [ydoor]
 
 - name: Fire Room
-  on_entry: $reset_old_area(^newpos);
+  on_entry: $reset_old_area(^newpos)
   spots:
     - name: West 11
       coord: [15.1, 10.8]
@@ -401,7 +401,7 @@ areas:
           tags: [xdoor]
 
 - name: Slingshot
-  on_entry: $reset_old_area(^newpos);
+  on_entry: $reset_old_area(^newpos)
   spots:
     - name: West
       coord: [17.1, 10.65]
@@ -427,7 +427,7 @@ areas:
           req: $hook
 
 - name: Antechamber
-  on_entry: $reset_old_area(^newpos);
+  on_entry: $reset_old_area(^newpos)
   spots:
     - name: North
       coord: [16.5, 11.2]
@@ -437,7 +437,7 @@ areas:
     # TODO: Breach exit to Wasteland flask
 
 - name: Central
-  on_entry: $reset_old_area(^newpos);
+  on_entry: $reset_old_area(^newpos)
   spots:
     - name: West 9
       coord: [14.1, 8.6]
@@ -523,7 +523,7 @@ areas:
           tags: [xdoor]
 
 - name: Ascent
-  on_entry: $reset_old_area(^newpos);
+  on_entry: $reset_old_area(^newpos)
   spots:
     - name: West 9
       coord: [16.1, 8.5]
@@ -555,7 +555,7 @@ areas:
           tags: [xdoor]
 
 - name: Pink Clouds
-  on_entry: $reset_old_area(^newpos);
+  on_entry: $reset_old_area(^newpos)
   spots:
     - name: Normal Entry
       coord: [12.5, 18.7]

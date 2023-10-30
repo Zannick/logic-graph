@@ -1447,7 +1447,7 @@ areas:
       actions:
         - name: Enter Portal
           req: ^mode == 'drone'
-          do: $portal_save_update
+          do: $breach_portal_save_update
           to: ^flipside
           tags: [portal]
     - name: Interior Ledge

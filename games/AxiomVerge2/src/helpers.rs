@@ -495,16 +495,25 @@ macro_rules! helper__portal {
     }};
 }
 
-/// $portal_save_update (  )
-/// IF (^breach) { ^save = ^portal_default; } ELSE { ^breach_save = ^portal_default; }
+/// $main_portal_save_update (  )
+/// ^save = ^portal_default
 #[macro_export]
-macro_rules! helper__portal_save_update {
+macro_rules! helper__main_portal_save_update {
     ($ctx:expr) => {{
         #[allow(unused_imports)]
         use $crate::items::Item;
-        if data::breach($ctx.position()) {
-            $ctx.set_save(data::portal_default($ctx.position()));
-        }
+        $ctx.set_save(data::portal_default($ctx.position()));
+    }};
+}
+
+/// $breach_portal_save_update (  )
+/// ^breach_save = ^portal_default
+#[macro_export]
+macro_rules! helper__breach_portal_save_update {
+    ($ctx:expr) => {{
+        #[allow(unused_imports)]
+        use $crate::items::Item;
+        $ctx.set_breach_save(data::portal_default($ctx.position()));
     }};
 }
 

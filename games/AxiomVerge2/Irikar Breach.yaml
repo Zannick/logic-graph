@@ -6,8 +6,117 @@ data:
 areas:
 - name: Save Room
   on_entry: $reset_old_area(^newpos)
-  data:
-    flipside: Irikar > Sight Room > Portal
   spots:
     - name: Save Point
       coord: [14.525, 25.35]
+      data:
+        flipside: Irikar > Sight Room > Portal
+
+- name: Gauntlet
+  on_entry: $reset_old_area(^newpos)
+  spots:
+    - name: Save Point
+      coord: [11.3, 21.7]
+      data:
+        flipside: Irikar > Hub > Portal Stand
+      local:
+        - to: East 22
+      exits:
+        - to: Hidden Path Upper Entry
+          req: $hover
+          movement: base
+          jumps: 1
+        - to: Hidden Path Upper Entry
+          req: $hook
+          time: .85
+    - name: East 22
+      coord: [11.9, 21.8]
+      local:
+        - to: Save Point
+          jumps: 2
+      exits:
+        - to: Hover Room > West
+          tags: [xdoor]
+    - name: Hidden Path Upper Entry
+      coord: [11.6, 21.35]
+      local:
+        - to: Save Point
+        - to: East 22
+        - to: Hidden Path Upper Right
+          jumps: 1
+    - name: Hidden Path Upper Right
+      coord: [11.55, 21.15]
+      local:
+        - to: Hidden Path Upper Entry
+          jumps_down: 1
+        - to: Hidden Path Upper Left
+    - name: Hidden Path Upper Left
+      coord: [10.25, 21.3]
+      local:
+        - to: Hidden Path Upper Right
+          jumps: 1
+        - to: Hidden Path Top Ledge
+    - name: Hidden Path Top Ledge
+      coord: [10.15, 21.7]
+      local:
+        - to: Hidden Path Upper Left
+          jumps: 2
+        - to: Hidden Path Reward
+    - name: Hidden Path Reward
+      coord: [10.05, 22.2]
+      locations:
+        - name: Item
+          item: Flask
+          tags: [flask]
+      exits:
+        - to: Hidden Path Top Ledge
+          req: $hook
+          movement: base
+          jumps: 2
+    - name: Hidden Path Bottom
+      coord: [10.15, 24.55]
+    - name: Hidden Path Lower Entry
+      coord: [10.25, 24.55]
+
+- name: Hover Room
+  on_entry: $reset_old_area(^newpos)
+  spots:
+    - name: West
+      coord: [12.1, 21.8]
+      local:
+        - to: Bottom
+      exits:
+        - to: East
+          req: $hover
+          movement: base
+        - to: Gauntlet > East 22
+          tags: [xdoor]
+    - name: Bottom
+      coord: [12.5, 22.75]
+      locations:
+        - name: Item
+          item: Drone_Hover
+          tags: [urn]
+      exits:
+        - to: West
+          req: $hook
+          time: 1.5  # ?
+        - to: East
+          req: $hook and $hover
+          time: 3
+    - name: East
+      coord: [12.9, 21.8]
+      local:
+        - to: Bottom
+      exits:
+        - to: West
+          req: $hover or $hook
+          movement: base
+        - to: Flappy Drone > West Door
+          tags: [xdoor]
+
+- name: Flappy Drone
+  on_entry: $reset_old_area(^newpos)
+  spots:
+    - name: West Door
+      coord: [13.1, 21.8]

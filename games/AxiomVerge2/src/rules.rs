@@ -1121,6 +1121,10 @@ pub fn action_amagi__main_area__carving__key_combo__do(ctx: &mut Context) {
     // ^_combo = true
     ctx.set_amagi__main_area__ctx__combo(true);
 }
+pub fn action_breach_portal_save_update(ctx: &mut Context) {
+    // $breach_portal_save_update
+    helper__breach_portal_save_update!(ctx);
+}
 pub fn action_clear_breach_save(ctx: &mut Context) {
     // $clear_breach_save
     helper__clear_breach_save!(ctx);
@@ -1379,6 +1383,10 @@ pub fn action_last__position(ctx: &mut Context) {
     // ^last = ^position
     ctx.set_last(ctx.position());
 }
+pub fn action_main_portal_save_update(ctx: &mut Context) {
+    // $main_portal_save_update
+    helper__main_portal_save_update!(ctx);
+}
 pub fn action_mode__drone_indra__position(ctx: &mut Context) {
     // ^mode = 'drone'; ^indra = ^position
     ctx.set_mode(enums::Mode::Drone);
@@ -1388,68 +1396,12 @@ pub fn action_mode__indra(ctx: &mut Context) {
     // ^mode = 'Indra'
     ctx.set_mode(enums::Mode::Indra);
 }
-pub fn action_portal_save_update(ctx: &mut Context) {
-    // $portal_save_update
-    helper__portal_save_update!(ctx);
-}
 pub fn action_refills__1(ctx: &mut Context) {
     // ^refills += 1
     ctx.refills += 1;
 }
 pub fn action_reset_old_area__newpos(ctx: &mut Context, newpos: SpotId) {
     // $reset_old_area(^newpos)
-    helper__reset_old_area!(ctx, newpos);
-}
-pub fn action_reset_old_area__newpos1(ctx: &mut Context, newpos: SpotId) {
-    // $reset_old_area(^newpos);
-    helper__reset_old_area!(ctx, newpos);
-}
-pub fn action_reset_old_area__newpos10(ctx: &mut Context, newpos: SpotId) {
-    // $reset_old_area(^newpos);
-    helper__reset_old_area!(ctx, newpos);
-}
-pub fn action_reset_old_area__newpos11(ctx: &mut Context, newpos: SpotId) {
-    // $reset_old_area(^newpos);
-    helper__reset_old_area!(ctx, newpos);
-}
-pub fn action_reset_old_area__newpos12(ctx: &mut Context, newpos: SpotId) {
-    // $reset_old_area(^newpos);
-    helper__reset_old_area!(ctx, newpos);
-}
-pub fn action_reset_old_area__newpos13(ctx: &mut Context, newpos: SpotId) {
-    // $reset_old_area(^newpos);
-    helper__reset_old_area!(ctx, newpos);
-}
-pub fn action_reset_old_area__newpos2(ctx: &mut Context, newpos: SpotId) {
-    // $reset_old_area(^newpos);
-    helper__reset_old_area!(ctx, newpos);
-}
-pub fn action_reset_old_area__newpos3(ctx: &mut Context, newpos: SpotId) {
-    // $reset_old_area(^newpos);
-    helper__reset_old_area!(ctx, newpos);
-}
-pub fn action_reset_old_area__newpos4(ctx: &mut Context, newpos: SpotId) {
-    // $reset_old_area(^newpos);
-    helper__reset_old_area!(ctx, newpos);
-}
-pub fn action_reset_old_area__newpos5(ctx: &mut Context, newpos: SpotId) {
-    // $reset_old_area(^newpos);
-    helper__reset_old_area!(ctx, newpos);
-}
-pub fn action_reset_old_area__newpos6(ctx: &mut Context, newpos: SpotId) {
-    // $reset_old_area(^newpos);
-    helper__reset_old_area!(ctx, newpos);
-}
-pub fn action_reset_old_area__newpos7(ctx: &mut Context, newpos: SpotId) {
-    // $reset_old_area(^newpos);
-    helper__reset_old_area!(ctx, newpos);
-}
-pub fn action_reset_old_area__newpos8(ctx: &mut Context, newpos: SpotId) {
-    // $reset_old_area(^newpos);
-    helper__reset_old_area!(ctx, newpos);
-}
-pub fn action_reset_old_area__newpos9(ctx: &mut Context, newpos: SpotId) {
-    // $reset_old_area(^newpos);
     helper__reset_old_area!(ctx, newpos);
 }
 pub fn action_save(ctx: &mut Context) {

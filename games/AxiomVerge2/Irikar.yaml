@@ -3,26 +3,33 @@ name: Irikar
 areas:
 - name: Hub
   on_entry: $reset_old_area(^newpos)
+  data:
+    portal_default: Irikar Breach > Gauntlet > Save Point
   spots:
     - name: Northwest
       coord: [11.0, 20.1]
     - name: North Above Portal
       coord: [11.3, 20.1]
+      local:
+        - to: Portal Stand
+        - to: NW Middle Building Corner
     - name: Northwest Above Bowl
       coord: [12.25, 20.1]
       local:
         - to: West Rim
         - to: Bowl Top Platform
+        - to: NW Bowl Edifice
     - name: Northeast Above Bowl
       coord: [12.8, 20.1]
       local:
         - to: East Rim
 
-    # The Bowl
+    #region The Bowl
     - name: West Rim
       coord: [12.2, 20.45]
       local:
         - to: Bowl Top Platform
+        - to: NW Bowl Edifice
       exits:
         - to: East Rim
           req: $hover
@@ -105,8 +112,9 @@ areas:
           jumps: 2
         - to: Sat Tower Middle Ledge
           jumps: 1
+    #endregion
 
-    # Satellite Tower
+    #region Satellite Tower
     - name: Sat Tower Roof West
       coord: [13.4, 20.4]
       local:
@@ -169,6 +177,58 @@ areas:
       exits:
         - to: Sight Room > West 24
           tags: [xshift]
+    #endregion
+
+    #region Northwest Building/Portal
+    - name: NW Bowl Edifice
+      coord: [11.95, 20.5]
+      local:
+        - to: West Rim
+          jumps: 1
+        - to: NW Roof
+          jumps: 1
+        - to: NW Staircase Upper
+    - name: NW Roof
+      coord: [11.4, 20.4]
+      local:
+        - to: NW Bowl Edifice
+        - to: NW Middle Building Corner
+    - name: NW Staircase Upper
+      coord: [11.8, 20.9]
+      local:
+        - to: Portal Stand
+          jumps_down: 2
+      exits:
+        - to: NW Bowl Edifice
+          req: $grab
+          movement: base
+          jumps: 3
+        - to: NW Bowl Edifice
+          req: $hook
+          movement: base
+          jumps: 1
+        - to: NW Middle Building Corner
+    - name: Portal Stand
+      coord: [11.3, 21.7]
+      data:
+        flipside: Irikar Breach > Gauntlet > Save Point
+      local:
+        - to: NW Staircase Upper
+          jumps: 4
+        - to: NW Middle Building Corner
+      actions:
+        - name: Enter Portal
+          req: ^mode == 'drone' and Breach_Sight
+          do: $breach_portal_save_update
+          to: ^flipside
+          tags: [portal]
+    - name: NW Middle Building Corner
+      coord: [11.0, 22.2]
+      local:
+        - to: NW Middle Building West Entry
+    - name: NW Middle Building West Entry
+      coord: [10.9, 22.9]
+    #endregion
 
 - name: Sight Room
   on_entry: $reset_old_area(^newpos)
@@ -198,7 +258,7 @@ areas:
       actions:
         - name: Enter Portal
           req: ^mode == 'drone' and Breach_Sight
-          do: $portal_save_update
+          do: $breach_portal_save_update
           to: ^flipside
           tags: [portal]
     - name: Item Pedestal

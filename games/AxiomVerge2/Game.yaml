@@ -240,7 +240,7 @@ helpers:
     [Boomerang, Power_Matrix]
   $all_urns:itemList: >
     [Amashilama, Ledge_Grab, Infect, Remote_Drone, Shockwave, Wall_Climb, Slingshot_Hook, Breach_Sight]
-  # To be added: 2 Flask, 2 Big_Flask, Dangerous_Ideas, Double_Axe
+  # To be added: 3 Flask, 2 Big_Flask, Dangerous_Ideas, Double_Axe, Drone_Hover
 
   $save:action: ^save = ^position; ^energy = $max_energy
   $deploy_drone:action: >
@@ -267,7 +267,8 @@ helpers:
   # and the Enter action should include $portal_save_update in the `do` effect
   # (since it needs to happen on the old position).
   # TODO: Is this true of portals leaving the breach?
-  $portal_save_update:action: IF (^breach) { ^save = ^portal_default; } ELSE { ^breach_save = ^portal_default; }
+  $main_portal_save_update:action: ^save = ^portal_default
+  $breach_portal_save_update:action: ^breach_save = ^portal_default
   $clear_breach_save:action: ^breach_save = $default
 
 collect:

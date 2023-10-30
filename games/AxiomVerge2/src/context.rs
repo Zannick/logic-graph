@@ -244,6 +244,19 @@ pub mod data {
             SpotId::Giguna_Breach__Slingshot__Column => true,
             SpotId::Giguna_Breach__Slingshot__Ravine => true,
             SpotId::Giguna_Breach__Slingshot__West => true,
+            SpotId::Irikar_Breach__Flappy_Drone__West_Door => true,
+            SpotId::Irikar_Breach__Gauntlet__East_22 => true,
+            SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Bottom => true,
+            SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Lower_Entry => true,
+            SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Reward => true,
+            SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Top_Ledge => true,
+            SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Upper_Entry => true,
+            SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Upper_Left => true,
+            SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Upper_Right => true,
+            SpotId::Irikar_Breach__Gauntlet__Save_Point => true,
+            SpotId::Irikar_Breach__Hover_Room__Bottom => true,
+            SpotId::Irikar_Breach__Hover_Room__East => true,
+            SpotId::Irikar_Breach__Hover_Room__West => true,
             SpotId::Irikar_Breach__Save_Room__Save_Point => true,
             _ => false,
         }
@@ -361,7 +374,9 @@ pub mod data {
             }
             SpotId::Giguna__Ruins_Top__Portal => SpotId::Giguna_Breach__Peak__Save_Point,
             SpotId::Giguna__Ruins_Top__Save_Point => SpotId::Giguna_Breach__Peak__Portal,
+            SpotId::Irikar_Breach__Gauntlet__Save_Point => SpotId::Irikar__Hub__Portal_Stand,
             SpotId::Irikar_Breach__Save_Room__Save_Point => SpotId::Irikar__Sight_Room__Portal,
+            SpotId::Irikar__Hub__Portal_Stand => SpotId::Irikar_Breach__Gauntlet__Save_Point,
             SpotId::Irikar__Sight_Room__Portal => SpotId::Irikar_Breach__Save_Room__Save_Point,
             _ => SpotId::None,
         }
@@ -399,6 +414,57 @@ pub mod data {
             SpotId::Giguna__Ruins_Top__West_7 => SpotId::Giguna_Breach__Peak__Save_Point,
             SpotId::Giguna__Ruins_Top__West_Door => SpotId::Giguna_Breach__Peak__Save_Point,
             SpotId::Giguna__Ruins_Top__West_Pillar => SpotId::Giguna_Breach__Peak__Save_Point,
+            SpotId::Irikar__Hub__Bowl_Hole => SpotId::Irikar_Breach__Gauntlet__Save_Point,
+            SpotId::Irikar__Hub__Bowl_Middle_Ledge => SpotId::Irikar_Breach__Gauntlet__Save_Point,
+            SpotId::Irikar__Hub__Bowl_Middle_Platform_Center => {
+                SpotId::Irikar_Breach__Gauntlet__Save_Point
+            }
+            SpotId::Irikar__Hub__Bowl_Middle_Platform_West => {
+                SpotId::Irikar_Breach__Gauntlet__Save_Point
+            }
+            SpotId::Irikar__Hub__Bowl_Platform_3 => SpotId::Irikar_Breach__Gauntlet__Save_Point,
+            SpotId::Irikar__Hub__Bowl_Top_Platform => SpotId::Irikar_Breach__Gauntlet__Save_Point,
+            SpotId::Irikar__Hub__East_Rim => SpotId::Irikar_Breach__Gauntlet__Save_Point,
+            SpotId::Irikar__Hub__NW_Bowl_Edifice => SpotId::Irikar_Breach__Gauntlet__Save_Point,
+            SpotId::Irikar__Hub__NW_Middle_Building_Corner => {
+                SpotId::Irikar_Breach__Gauntlet__Save_Point
+            }
+            SpotId::Irikar__Hub__NW_Middle_Building_West_Entry => {
+                SpotId::Irikar_Breach__Gauntlet__Save_Point
+            }
+            SpotId::Irikar__Hub__NW_Roof => SpotId::Irikar_Breach__Gauntlet__Save_Point,
+            SpotId::Irikar__Hub__NW_Staircase_Upper => SpotId::Irikar_Breach__Gauntlet__Save_Point,
+            SpotId::Irikar__Hub__North_Above_Portal => SpotId::Irikar_Breach__Gauntlet__Save_Point,
+            SpotId::Irikar__Hub__Northeast_Above_Bowl => {
+                SpotId::Irikar_Breach__Gauntlet__Save_Point
+            }
+            SpotId::Irikar__Hub__Northwest => SpotId::Irikar_Breach__Gauntlet__Save_Point,
+            SpotId::Irikar__Hub__Northwest_Above_Bowl => {
+                SpotId::Irikar_Breach__Gauntlet__Save_Point
+            }
+            SpotId::Irikar__Hub__Portal_Stand => SpotId::Irikar_Breach__Gauntlet__Save_Point,
+            SpotId::Irikar__Hub__Sat_Tower_Bottom => SpotId::Irikar_Breach__Gauntlet__Save_Point,
+            SpotId::Irikar__Hub__Sat_Tower_East_24 => SpotId::Irikar_Breach__Gauntlet__Save_Point,
+            SpotId::Irikar__Hub__Sat_Tower_Floating_Platform => {
+                SpotId::Irikar_Breach__Gauntlet__Save_Point
+            }
+            SpotId::Irikar__Hub__Sat_Tower_Long_Ledge => {
+                SpotId::Irikar_Breach__Gauntlet__Save_Point
+            }
+            SpotId::Irikar__Hub__Sat_Tower_Lower_Left_Ledge => {
+                SpotId::Irikar_Breach__Gauntlet__Save_Point
+            }
+            SpotId::Irikar__Hub__Sat_Tower_Lower_Right_Ledge => {
+                SpotId::Irikar_Breach__Gauntlet__Save_Point
+            }
+            SpotId::Irikar__Hub__Sat_Tower_Middle_Ledge => {
+                SpotId::Irikar_Breach__Gauntlet__Save_Point
+            }
+            SpotId::Irikar__Hub__Sat_Tower_Roof_East => SpotId::Irikar_Breach__Gauntlet__Save_Point,
+            SpotId::Irikar__Hub__Sat_Tower_Roof_West => SpotId::Irikar_Breach__Gauntlet__Save_Point,
+            SpotId::Irikar__Hub__Sat_Tower_Top_Ledge => SpotId::Irikar_Breach__Gauntlet__Save_Point,
+            SpotId::Irikar__Hub__Save_Point => SpotId::Irikar_Breach__Gauntlet__Save_Point,
+            SpotId::Irikar__Hub__West_Rim => SpotId::Irikar_Breach__Gauntlet__Save_Point,
             SpotId::Irikar__Sight_Room__Item_Pedestal => {
                 SpotId::Irikar_Breach__Save_Room__Save_Point
             }
@@ -3858,67 +3924,67 @@ impl context::Ctx for Context {
             }
             AreaId::Giguna_Breach__Antechamber => {
                 if get_area(self.position) != area {
-                    rules::action_reset_old_area__newpos10(self, pos);
+                    rules::action_reset_old_area__newpos(self, pos);
                 }
             }
             AreaId::Giguna_Breach__Ascent => {
                 if get_area(self.position) != area {
-                    rules::action_reset_old_area__newpos12(self, pos);
+                    rules::action_reset_old_area__newpos(self, pos);
                 }
             }
             AreaId::Giguna_Breach__Below_Chimney => {
                 if get_area(self.position) != area {
-                    rules::action_reset_old_area__newpos3(self, pos);
+                    rules::action_reset_old_area__newpos(self, pos);
                 }
             }
             AreaId::Giguna_Breach__Central => {
                 if get_area(self.position) != area {
-                    rules::action_reset_old_area__newpos11(self, pos);
+                    rules::action_reset_old_area__newpos(self, pos);
                 }
             }
             AreaId::Giguna_Breach__Chimney => {
                 if get_area(self.position) != area {
-                    rules::action_reset_old_area__newpos2(self, pos);
+                    rules::action_reset_old_area__newpos(self, pos);
                 }
             }
             AreaId::Giguna_Breach__Cubby => {
                 if get_area(self.position) != area {
-                    rules::action_reset_old_area__newpos4(self, pos);
+                    rules::action_reset_old_area__newpos(self, pos);
                 }
             }
             AreaId::Giguna_Breach__Fire_Room => {
                 if get_area(self.position) != area {
-                    rules::action_reset_old_area__newpos8(self, pos);
+                    rules::action_reset_old_area__newpos(self, pos);
                 }
             }
             AreaId::Giguna_Breach__Grid_14_10_11 => {
                 if get_area(self.position) != area {
-                    rules::action_reset_old_area__newpos7(self, pos);
+                    rules::action_reset_old_area__newpos(self, pos);
                 }
             }
             AreaId::Giguna_Breach__Peak => {
                 if get_area(self.position) != area {
-                    rules::action_reset_old_area__newpos1(self, pos);
+                    rules::action_reset_old_area__newpos(self, pos);
                 }
             }
             AreaId::Giguna_Breach__Pink_Clouds => {
                 if get_area(self.position) != area {
-                    rules::action_reset_old_area__newpos13(self, pos);
+                    rules::action_reset_old_area__newpos(self, pos);
                 }
             }
             AreaId::Giguna_Breach__Robopede => {
                 if get_area(self.position) != area {
-                    rules::action_reset_old_area__newpos6(self, pos);
+                    rules::action_reset_old_area__newpos(self, pos);
                 }
             }
             AreaId::Giguna_Breach__Slingshot => {
                 if get_area(self.position) != area {
-                    rules::action_reset_old_area__newpos9(self, pos);
+                    rules::action_reset_old_area__newpos(self, pos);
                 }
             }
             AreaId::Giguna_Breach__SW_Save => {
                 if get_area(self.position) != area {
-                    rules::action_reset_old_area__newpos5(self, pos);
+                    rules::action_reset_old_area__newpos(self, pos);
                 }
             }
             AreaId::Glacier__Apocalypse_Entry => {
@@ -4012,6 +4078,21 @@ impl context::Ctx for Context {
                 }
             }
             AreaId::Irikar__Sight_Room => {
+                if get_area(self.position) != area {
+                    rules::action_reset_old_area__newpos(self, pos);
+                }
+            }
+            AreaId::Irikar_Breach__Flappy_Drone => {
+                if get_area(self.position) != area {
+                    rules::action_reset_old_area__newpos(self, pos);
+                }
+            }
+            AreaId::Irikar_Breach__Gauntlet => {
+                if get_area(self.position) != area {
+                    rules::action_reset_old_area__newpos(self, pos);
+                }
+            }
+            AreaId::Irikar_Breach__Hover_Room => {
                 if get_area(self.position) != area {
                     rules::action_reset_old_area__newpos(self, pos);
                 }

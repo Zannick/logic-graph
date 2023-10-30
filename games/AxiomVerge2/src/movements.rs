@@ -5088,6 +5088,71 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
             SpotId::Glacier__Vertical_Room__West_9,
             SpotId::Glacier__Vertical_Room__Under_Switch,
         ) => 1949,
+        (
+            [false],
+            SpotId::Irikar_Breach__Gauntlet__East_22,
+            SpotId::Irikar_Breach__Gauntlet__Save_Point,
+        ) => 2105,
+        (
+            [false],
+            SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Top_Ledge,
+            SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Reward,
+        ) => 500,
+        (
+            [false],
+            SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Top_Ledge,
+            SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Upper_Left,
+        ) => 1200,
+        (
+            [false],
+            SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Upper_Entry,
+            SpotId::Irikar_Breach__Gauntlet__East_22,
+        ) => 1052,
+        (
+            [false],
+            SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Upper_Entry,
+            SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Upper_Right,
+        ) => 600,
+        (
+            [false],
+            SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Upper_Entry,
+            SpotId::Irikar_Breach__Gauntlet__Save_Point,
+        ) => 1052,
+        (
+            [false],
+            SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Upper_Left,
+            SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Top_Ledge,
+        ) => 399,
+        (
+            [false],
+            SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Upper_Left,
+            SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Upper_Right,
+        ) => 4561,
+        (
+            [false],
+            SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Upper_Right,
+            SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Upper_Entry,
+        ) => 300,
+        (
+            [false],
+            SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Upper_Right,
+            SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Upper_Left,
+        ) => 4561,
+        (
+            [false],
+            SpotId::Irikar_Breach__Gauntlet__Save_Point,
+            SpotId::Irikar_Breach__Gauntlet__East_22,
+        ) => 2105,
+        (
+            [false],
+            SpotId::Irikar_Breach__Hover_Room__East,
+            SpotId::Irikar_Breach__Hover_Room__Bottom,
+        ) => 1403,
+        (
+            [false],
+            SpotId::Irikar_Breach__Hover_Room__West,
+            SpotId::Irikar_Breach__Hover_Room__Bottom,
+        ) => 1403,
         ([false], SpotId::Irikar__Hub__Bowl_Hole, SpotId::Irikar__Hub__Sat_Tower_Middle_Ledge) => {
             1578
         }
@@ -5121,13 +5186,53 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
         ) => 699,
         ([false], SpotId::Irikar__Hub__East_Rim, SpotId::Irikar__Hub__Bowl_Hole) => 2249,
         ([false], SpotId::Irikar__Hub__East_Rim, SpotId::Irikar__Hub__Save_Point) => 2450,
+        ([false], SpotId::Irikar__Hub__NW_Bowl_Edifice, SpotId::Irikar__Hub__NW_Roof) => 1929,
+        (
+            [false],
+            SpotId::Irikar__Hub__NW_Bowl_Edifice,
+            SpotId::Irikar__Hub__NW_Staircase_Upper,
+        ) => 526,
+        ([false], SpotId::Irikar__Hub__NW_Bowl_Edifice, SpotId::Irikar__Hub__West_Rim) => 877,
+        (
+            [false],
+            SpotId::Irikar__Hub__NW_Middle_Building_Corner,
+            SpotId::Irikar__Hub__NW_Middle_Building_West_Entry,
+        ) => 699,
+        ([false], SpotId::Irikar__Hub__NW_Roof, SpotId::Irikar__Hub__NW_Bowl_Edifice) => 1929,
+        ([false], SpotId::Irikar__Hub__NW_Roof, SpotId::Irikar__Hub__NW_Middle_Building_Corner) => {
+            1800
+        }
+        ([false], SpotId::Irikar__Hub__NW_Staircase_Upper, SpotId::Irikar__Hub__Portal_Stand) => {
+            1754
+        }
+        (
+            [false],
+            SpotId::Irikar__Hub__North_Above_Portal,
+            SpotId::Irikar__Hub__NW_Middle_Building_Corner,
+        ) => 2099,
+        ([false], SpotId::Irikar__Hub__North_Above_Portal, SpotId::Irikar__Hub__Portal_Stand) => {
+            1599
+        }
         ([false], SpotId::Irikar__Hub__Northeast_Above_Bowl, SpotId::Irikar__Hub__East_Rim) => 399,
         (
             [false],
             SpotId::Irikar__Hub__Northwest_Above_Bowl,
             SpotId::Irikar__Hub__Bowl_Top_Platform,
         ) => 750,
+        (
+            [false],
+            SpotId::Irikar__Hub__Northwest_Above_Bowl,
+            SpotId::Irikar__Hub__NW_Bowl_Edifice,
+        ) => 1052,
         ([false], SpotId::Irikar__Hub__Northwest_Above_Bowl, SpotId::Irikar__Hub__West_Rim) => 349,
+        (
+            [false],
+            SpotId::Irikar__Hub__Portal_Stand,
+            SpotId::Irikar__Hub__NW_Middle_Building_Corner,
+        ) => 1052,
+        ([false], SpotId::Irikar__Hub__Portal_Stand, SpotId::Irikar__Hub__NW_Staircase_Upper) => {
+            2400
+        }
         (
             [false],
             SpotId::Irikar__Hub__Sat_Tower_Bottom,
@@ -5204,6 +5309,7 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
         ) => 1600,
         ([false], SpotId::Irikar__Hub__Save_Point, SpotId::Irikar__Hub__Bowl_Platform_3) => 1799,
         ([false], SpotId::Irikar__Hub__West_Rim, SpotId::Irikar__Hub__Bowl_Top_Platform) => 701,
+        ([false], SpotId::Irikar__Hub__West_Rim, SpotId::Irikar__Hub__NW_Bowl_Edifice) => 877,
         (
             [false],
             SpotId::Irikar__Sight_Room__Item_Pedestal,
@@ -10240,6 +10346,71 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
             SpotId::Glacier__Vertical_Room__West_9,
             SpotId::Glacier__Vertical_Room__Under_Switch,
         ) => 1949,
+        (
+            [true],
+            SpotId::Irikar_Breach__Gauntlet__East_22,
+            SpotId::Irikar_Breach__Gauntlet__Save_Point,
+        ) => 2105,
+        (
+            [true],
+            SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Top_Ledge,
+            SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Reward,
+        ) => 500,
+        (
+            [true],
+            SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Top_Ledge,
+            SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Upper_Left,
+        ) => 1200,
+        (
+            [true],
+            SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Upper_Entry,
+            SpotId::Irikar_Breach__Gauntlet__East_22,
+        ) => 1052,
+        (
+            [true],
+            SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Upper_Entry,
+            SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Upper_Right,
+        ) => 600,
+        (
+            [true],
+            SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Upper_Entry,
+            SpotId::Irikar_Breach__Gauntlet__Save_Point,
+        ) => 1052,
+        (
+            [true],
+            SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Upper_Left,
+            SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Top_Ledge,
+        ) => 399,
+        (
+            [true],
+            SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Upper_Left,
+            SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Upper_Right,
+        ) => 4561,
+        (
+            [true],
+            SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Upper_Right,
+            SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Upper_Entry,
+        ) => 300,
+        (
+            [true],
+            SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Upper_Right,
+            SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Upper_Left,
+        ) => 4561,
+        (
+            [true],
+            SpotId::Irikar_Breach__Gauntlet__Save_Point,
+            SpotId::Irikar_Breach__Gauntlet__East_22,
+        ) => 2105,
+        (
+            [true],
+            SpotId::Irikar_Breach__Hover_Room__East,
+            SpotId::Irikar_Breach__Hover_Room__Bottom,
+        ) => 1403,
+        (
+            [true],
+            SpotId::Irikar_Breach__Hover_Room__West,
+            SpotId::Irikar_Breach__Hover_Room__Bottom,
+        ) => 1403,
         ([true], SpotId::Irikar__Hub__Bowl_Hole, SpotId::Irikar__Hub__Sat_Tower_Middle_Ledge) => {
             1578
         }
@@ -10273,13 +10444,51 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
         ) => 699,
         ([true], SpotId::Irikar__Hub__East_Rim, SpotId::Irikar__Hub__Bowl_Hole) => 2249,
         ([true], SpotId::Irikar__Hub__East_Rim, SpotId::Irikar__Hub__Save_Point) => 2450,
+        ([true], SpotId::Irikar__Hub__NW_Bowl_Edifice, SpotId::Irikar__Hub__NW_Roof) => 1929,
+        ([true], SpotId::Irikar__Hub__NW_Bowl_Edifice, SpotId::Irikar__Hub__NW_Staircase_Upper) => {
+            526
+        }
+        ([true], SpotId::Irikar__Hub__NW_Bowl_Edifice, SpotId::Irikar__Hub__West_Rim) => 877,
+        (
+            [true],
+            SpotId::Irikar__Hub__NW_Middle_Building_Corner,
+            SpotId::Irikar__Hub__NW_Middle_Building_West_Entry,
+        ) => 699,
+        ([true], SpotId::Irikar__Hub__NW_Roof, SpotId::Irikar__Hub__NW_Bowl_Edifice) => 1929,
+        ([true], SpotId::Irikar__Hub__NW_Roof, SpotId::Irikar__Hub__NW_Middle_Building_Corner) => {
+            1800
+        }
+        ([true], SpotId::Irikar__Hub__NW_Staircase_Upper, SpotId::Irikar__Hub__Portal_Stand) => {
+            1754
+        }
+        (
+            [true],
+            SpotId::Irikar__Hub__North_Above_Portal,
+            SpotId::Irikar__Hub__NW_Middle_Building_Corner,
+        ) => 2099,
+        ([true], SpotId::Irikar__Hub__North_Above_Portal, SpotId::Irikar__Hub__Portal_Stand) => {
+            1599
+        }
         ([true], SpotId::Irikar__Hub__Northeast_Above_Bowl, SpotId::Irikar__Hub__East_Rim) => 399,
         (
             [true],
             SpotId::Irikar__Hub__Northwest_Above_Bowl,
             SpotId::Irikar__Hub__Bowl_Top_Platform,
         ) => 750,
+        (
+            [true],
+            SpotId::Irikar__Hub__Northwest_Above_Bowl,
+            SpotId::Irikar__Hub__NW_Bowl_Edifice,
+        ) => 1052,
         ([true], SpotId::Irikar__Hub__Northwest_Above_Bowl, SpotId::Irikar__Hub__West_Rim) => 349,
+        (
+            [true],
+            SpotId::Irikar__Hub__Portal_Stand,
+            SpotId::Irikar__Hub__NW_Middle_Building_Corner,
+        ) => 1052,
+        ([true], SpotId::Irikar__Hub__Portal_Stand, SpotId::Irikar__Hub__NW_Staircase_Upper) => {
+            2400
+        }
         ([true], SpotId::Irikar__Hub__Sat_Tower_Bottom, SpotId::Irikar__Hub__Sat_Tower_East_24) => {
             1929
         }
@@ -10354,6 +10563,7 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
         ) => 1600,
         ([true], SpotId::Irikar__Hub__Save_Point, SpotId::Irikar__Hub__Bowl_Platform_3) => 1799,
         ([true], SpotId::Irikar__Hub__West_Rim, SpotId::Irikar__Hub__Bowl_Top_Platform) => 701,
+        ([true], SpotId::Irikar__Hub__West_Rim, SpotId::Irikar__Hub__NW_Bowl_Edifice) => 877,
         ([true], SpotId::Irikar__Sight_Room__Item_Pedestal, SpotId::Irikar__Sight_Room__Portal) => {
             1200
         }
@@ -13511,10 +13721,65 @@ pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
         (SpotId::Glacier__Apocalypse_Entry__Terminal, SpotId::Glacier__Apocalypse_Entry__West) => {
             true
         }
+        (SpotId::Irikar_Breach__Gauntlet__Save_Point, SpotId::Irikar_Breach__Gauntlet__East_22) => {
+            true
+        }
+        (SpotId::Irikar_Breach__Gauntlet__East_22, SpotId::Irikar_Breach__Gauntlet__Save_Point) => {
+            true
+        }
+        (
+            SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Upper_Entry,
+            SpotId::Irikar_Breach__Gauntlet__Save_Point,
+        ) => true,
+        (
+            SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Upper_Entry,
+            SpotId::Irikar_Breach__Gauntlet__East_22,
+        ) => true,
+        (
+            SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Upper_Entry,
+            SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Upper_Right,
+        ) => true,
+        (
+            SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Upper_Right,
+            SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Upper_Entry,
+        ) => true,
+        (
+            SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Upper_Right,
+            SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Upper_Left,
+        ) => true,
+        (
+            SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Upper_Left,
+            SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Upper_Right,
+        ) => true,
+        (
+            SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Upper_Left,
+            SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Top_Ledge,
+        ) => true,
+        (
+            SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Top_Ledge,
+            SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Upper_Left,
+        ) => true,
+        (
+            SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Top_Ledge,
+            SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Reward,
+        ) => true,
+        (SpotId::Irikar_Breach__Hover_Room__West, SpotId::Irikar_Breach__Hover_Room__Bottom) => {
+            true
+        }
+        (SpotId::Irikar_Breach__Hover_Room__East, SpotId::Irikar_Breach__Hover_Room__Bottom) => {
+            true
+        }
+        (SpotId::Irikar__Hub__North_Above_Portal, SpotId::Irikar__Hub__Portal_Stand) => true,
+        (
+            SpotId::Irikar__Hub__North_Above_Portal,
+            SpotId::Irikar__Hub__NW_Middle_Building_Corner,
+        ) => true,
         (SpotId::Irikar__Hub__Northwest_Above_Bowl, SpotId::Irikar__Hub__West_Rim) => true,
         (SpotId::Irikar__Hub__Northwest_Above_Bowl, SpotId::Irikar__Hub__Bowl_Top_Platform) => true,
+        (SpotId::Irikar__Hub__Northwest_Above_Bowl, SpotId::Irikar__Hub__NW_Bowl_Edifice) => true,
         (SpotId::Irikar__Hub__Northeast_Above_Bowl, SpotId::Irikar__Hub__East_Rim) => true,
         (SpotId::Irikar__Hub__West_Rim, SpotId::Irikar__Hub__Bowl_Top_Platform) => true,
+        (SpotId::Irikar__Hub__West_Rim, SpotId::Irikar__Hub__NW_Bowl_Edifice) => true,
         (SpotId::Irikar__Hub__East_Rim, SpotId::Irikar__Hub__Save_Point) => true,
         (SpotId::Irikar__Hub__East_Rim, SpotId::Irikar__Hub__Bowl_Hole) => true,
         (SpotId::Irikar__Hub__Bowl_Top_Platform, SpotId::Irikar__Hub__Bowl_Middle_Ledge) => true,
@@ -13582,6 +13847,18 @@ pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
         ) => true,
         (SpotId::Irikar__Hub__Sat_Tower_Long_Ledge, SpotId::Irikar__Hub__Sat_Tower_Bottom) => true,
         (SpotId::Irikar__Hub__Sat_Tower_Bottom, SpotId::Irikar__Hub__Sat_Tower_East_24) => true,
+        (SpotId::Irikar__Hub__NW_Bowl_Edifice, SpotId::Irikar__Hub__West_Rim) => true,
+        (SpotId::Irikar__Hub__NW_Bowl_Edifice, SpotId::Irikar__Hub__NW_Roof) => true,
+        (SpotId::Irikar__Hub__NW_Bowl_Edifice, SpotId::Irikar__Hub__NW_Staircase_Upper) => true,
+        (SpotId::Irikar__Hub__NW_Roof, SpotId::Irikar__Hub__NW_Bowl_Edifice) => true,
+        (SpotId::Irikar__Hub__NW_Roof, SpotId::Irikar__Hub__NW_Middle_Building_Corner) => true,
+        (SpotId::Irikar__Hub__NW_Staircase_Upper, SpotId::Irikar__Hub__Portal_Stand) => true,
+        (SpotId::Irikar__Hub__Portal_Stand, SpotId::Irikar__Hub__NW_Staircase_Upper) => true,
+        (SpotId::Irikar__Hub__Portal_Stand, SpotId::Irikar__Hub__NW_Middle_Building_Corner) => true,
+        (
+            SpotId::Irikar__Hub__NW_Middle_Building_Corner,
+            SpotId::Irikar__Hub__NW_Middle_Building_West_Entry,
+        ) => true,
         (SpotId::Irikar__Sight_Room__West_24, SpotId::Irikar__Sight_Room__Lower_Ledge) => true,
         (SpotId::Irikar__Sight_Room__Lower_Ledge, SpotId::Irikar__Sight_Room__West_24) => true,
         (SpotId::Irikar__Sight_Room__Lower_Ledge, SpotId::Irikar__Sight_Room__Portal) => true,
@@ -27502,6 +27779,181 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             1000,
         ),
         (
+            SpotId::Irikar_Breach__Flappy_Drone__West_Door,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Irikar_Breach__Gauntlet__East_22,
+            SpotId::Irikar_Breach__Gauntlet__Save_Point,
+            2105,
+        ),
+        (
+            SpotId::Irikar_Breach__Gauntlet__East_22,
+            SpotId::Irikar_Breach__Hover_Room__West,
+            1600,
+        ),
+        (
+            SpotId::Irikar_Breach__Gauntlet__East_22,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Bottom,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Lower_Entry,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Reward,
+            SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Top_Ledge,
+            1200,
+        ),
+        (
+            SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Reward,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Top_Ledge,
+            SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Reward,
+            500,
+        ),
+        (
+            SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Top_Ledge,
+            SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Upper_Left,
+            1200,
+        ),
+        (
+            SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Top_Ledge,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Upper_Entry,
+            SpotId::Irikar_Breach__Gauntlet__East_22,
+            1052,
+        ),
+        (
+            SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Upper_Entry,
+            SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Upper_Right,
+            600,
+        ),
+        (
+            SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Upper_Entry,
+            SpotId::Irikar_Breach__Gauntlet__Save_Point,
+            1052,
+        ),
+        (
+            SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Upper_Entry,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Upper_Left,
+            SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Top_Ledge,
+            399,
+        ),
+        (
+            SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Upper_Left,
+            SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Upper_Right,
+            4561,
+        ),
+        (
+            SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Upper_Left,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Upper_Right,
+            SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Upper_Entry,
+            300,
+        ),
+        (
+            SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Upper_Right,
+            SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Upper_Left,
+            4561,
+        ),
+        (
+            SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Upper_Right,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Irikar_Breach__Gauntlet__Save_Point,
+            SpotId::Irikar_Breach__Gauntlet__East_22,
+            2105,
+        ),
+        (
+            SpotId::Irikar_Breach__Gauntlet__Save_Point,
+            SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Upper_Entry,
+            850,
+        ),
+        (
+            SpotId::Irikar_Breach__Gauntlet__Save_Point,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Irikar_Breach__Hover_Room__Bottom,
+            SpotId::Irikar_Breach__Hover_Room__East,
+            3000,
+        ),
+        (
+            SpotId::Irikar_Breach__Hover_Room__Bottom,
+            SpotId::Irikar_Breach__Hover_Room__West,
+            1500,
+        ),
+        (
+            SpotId::Irikar_Breach__Hover_Room__Bottom,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Irikar_Breach__Hover_Room__East,
+            SpotId::Irikar_Breach__Flappy_Drone__West_Door,
+            1600,
+        ),
+        (
+            SpotId::Irikar_Breach__Hover_Room__East,
+            SpotId::Irikar_Breach__Hover_Room__Bottom,
+            1403,
+        ),
+        (
+            SpotId::Irikar_Breach__Hover_Room__East,
+            SpotId::Irikar_Breach__Hover_Room__West,
+            2807,
+        ),
+        (
+            SpotId::Irikar_Breach__Hover_Room__East,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Irikar_Breach__Hover_Room__West,
+            SpotId::Irikar_Breach__Gauntlet__East_22,
+            1600,
+        ),
+        (
+            SpotId::Irikar_Breach__Hover_Room__West,
+            SpotId::Irikar_Breach__Hover_Room__Bottom,
+            1403,
+        ),
+        (
+            SpotId::Irikar_Breach__Hover_Room__West,
+            SpotId::Irikar_Breach__Hover_Room__East,
+            2807,
+        ),
+        (
+            SpotId::Irikar_Breach__Hover_Room__West,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
             SpotId::Irikar_Breach__Save_Room__Save_Point,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
@@ -27627,6 +28079,86 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             1000,
         ),
         (
+            SpotId::Irikar__Hub__NW_Bowl_Edifice,
+            SpotId::Irikar__Hub__NW_Roof,
+            1929,
+        ),
+        (
+            SpotId::Irikar__Hub__NW_Bowl_Edifice,
+            SpotId::Irikar__Hub__NW_Staircase_Upper,
+            526,
+        ),
+        (
+            SpotId::Irikar__Hub__NW_Bowl_Edifice,
+            SpotId::Irikar__Hub__West_Rim,
+            877,
+        ),
+        (
+            SpotId::Irikar__Hub__NW_Bowl_Edifice,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Irikar__Hub__NW_Middle_Building_Corner,
+            SpotId::Irikar__Hub__NW_Middle_Building_West_Entry,
+            699,
+        ),
+        (
+            SpotId::Irikar__Hub__NW_Middle_Building_Corner,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Irikar__Hub__NW_Middle_Building_West_Entry,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Irikar__Hub__NW_Roof,
+            SpotId::Irikar__Hub__NW_Bowl_Edifice,
+            1929,
+        ),
+        (
+            SpotId::Irikar__Hub__NW_Roof,
+            SpotId::Irikar__Hub__NW_Middle_Building_Corner,
+            1800,
+        ),
+        (
+            SpotId::Irikar__Hub__NW_Roof,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Irikar__Hub__NW_Staircase_Upper,
+            SpotId::Irikar__Hub__NW_Bowl_Edifice,
+            600,
+        ),
+        (
+            SpotId::Irikar__Hub__NW_Staircase_Upper,
+            SpotId::Irikar__Hub__NW_Middle_Building_Corner,
+            1000,
+        ),
+        (
+            SpotId::Irikar__Hub__NW_Staircase_Upper,
+            SpotId::Irikar__Hub__Portal_Stand,
+            1754,
+        ),
+        (
+            SpotId::Irikar__Hub__NW_Staircase_Upper,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Irikar__Hub__North_Above_Portal,
+            SpotId::Irikar__Hub__NW_Middle_Building_Corner,
+            2099,
+        ),
+        (
+            SpotId::Irikar__Hub__North_Above_Portal,
+            SpotId::Irikar__Hub__Portal_Stand,
+            1599,
+        ),
+        (
             SpotId::Irikar__Hub__North_Above_Portal,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
@@ -27653,11 +28185,36 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Irikar__Hub__Northwest_Above_Bowl,
+            SpotId::Irikar__Hub__NW_Bowl_Edifice,
+            1052,
+        ),
+        (
+            SpotId::Irikar__Hub__Northwest_Above_Bowl,
             SpotId::Irikar__Hub__West_Rim,
             349,
         ),
         (
             SpotId::Irikar__Hub__Northwest_Above_Bowl,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Irikar__Hub__Portal_Stand,
+            SpotId::Irikar_Breach__Gauntlet__Save_Point,
+            3600,
+        ),
+        (
+            SpotId::Irikar__Hub__Portal_Stand,
+            SpotId::Irikar__Hub__NW_Middle_Building_Corner,
+            1052,
+        ),
+        (
+            SpotId::Irikar__Hub__Portal_Stand,
+            SpotId::Irikar__Hub__NW_Staircase_Upper,
+            2400,
+        ),
+        (
+            SpotId::Irikar__Hub__Portal_Stand,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -27825,6 +28382,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Irikar__Hub__West_Rim,
             SpotId::Irikar__Hub__East_Rim,
             2105,
+        ),
+        (
+            SpotId::Irikar__Hub__West_Rim,
+            SpotId::Irikar__Hub__NW_Bowl_Edifice,
+            877,
         ),
         (
             SpotId::Irikar__Hub__West_Rim,
@@ -31445,6 +32007,54 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
         (SpotId::Glacier__Vertical_Room__West_9, SpotId::Glacier__Vertical_Room__Under_Switch) => {
             Some(1949)
         }
+        (SpotId::Irikar_Breach__Gauntlet__East_22, SpotId::Irikar_Breach__Gauntlet__Save_Point) => {
+            Some(2105)
+        }
+        (
+            SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Top_Ledge,
+            SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Reward,
+        ) => Some(500),
+        (
+            SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Top_Ledge,
+            SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Upper_Left,
+        ) => Some(1200),
+        (
+            SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Upper_Entry,
+            SpotId::Irikar_Breach__Gauntlet__East_22,
+        ) => Some(1052),
+        (
+            SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Upper_Entry,
+            SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Upper_Right,
+        ) => Some(600),
+        (
+            SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Upper_Entry,
+            SpotId::Irikar_Breach__Gauntlet__Save_Point,
+        ) => Some(1052),
+        (
+            SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Upper_Left,
+            SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Top_Ledge,
+        ) => Some(399),
+        (
+            SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Upper_Left,
+            SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Upper_Right,
+        ) => Some(4561),
+        (
+            SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Upper_Right,
+            SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Upper_Entry,
+        ) => Some(300),
+        (
+            SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Upper_Right,
+            SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Upper_Left,
+        ) => Some(4561),
+        (SpotId::Irikar_Breach__Gauntlet__Save_Point, SpotId::Irikar_Breach__Gauntlet__East_22) => {
+            Some(2105)
+        }
+        (SpotId::Irikar_Breach__Hover_Room__East, SpotId::Irikar_Breach__Hover_Room__Bottom) => {
+            Some(1403)
+        }
+        (SpotId::Irikar_Breach__Hover_Room__West, SpotId::Irikar_Breach__Hover_Room__Bottom) => {
+            Some(1403)
+        }
         (SpotId::Irikar__Hub__Bowl_Hole, SpotId::Irikar__Hub__Sat_Tower_Middle_Ledge) => Some(1578),
         (SpotId::Irikar__Hub__Bowl_Hole, SpotId::Irikar__Hub__Save_Point) => Some(1578),
         (
@@ -31468,11 +32078,37 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
         }
         (SpotId::Irikar__Hub__East_Rim, SpotId::Irikar__Hub__Bowl_Hole) => Some(2249),
         (SpotId::Irikar__Hub__East_Rim, SpotId::Irikar__Hub__Save_Point) => Some(2450),
+        (SpotId::Irikar__Hub__NW_Bowl_Edifice, SpotId::Irikar__Hub__NW_Roof) => Some(1929),
+        (SpotId::Irikar__Hub__NW_Bowl_Edifice, SpotId::Irikar__Hub__NW_Staircase_Upper) => {
+            Some(526)
+        }
+        (SpotId::Irikar__Hub__NW_Bowl_Edifice, SpotId::Irikar__Hub__West_Rim) => Some(877),
+        (
+            SpotId::Irikar__Hub__NW_Middle_Building_Corner,
+            SpotId::Irikar__Hub__NW_Middle_Building_West_Entry,
+        ) => Some(699),
+        (SpotId::Irikar__Hub__NW_Roof, SpotId::Irikar__Hub__NW_Bowl_Edifice) => Some(1929),
+        (SpotId::Irikar__Hub__NW_Roof, SpotId::Irikar__Hub__NW_Middle_Building_Corner) => {
+            Some(1800)
+        }
+        (SpotId::Irikar__Hub__NW_Staircase_Upper, SpotId::Irikar__Hub__Portal_Stand) => Some(1754),
+        (
+            SpotId::Irikar__Hub__North_Above_Portal,
+            SpotId::Irikar__Hub__NW_Middle_Building_Corner,
+        ) => Some(2099),
+        (SpotId::Irikar__Hub__North_Above_Portal, SpotId::Irikar__Hub__Portal_Stand) => Some(1599),
         (SpotId::Irikar__Hub__Northeast_Above_Bowl, SpotId::Irikar__Hub__East_Rim) => Some(399),
         (SpotId::Irikar__Hub__Northwest_Above_Bowl, SpotId::Irikar__Hub__Bowl_Top_Platform) => {
             Some(750)
         }
+        (SpotId::Irikar__Hub__Northwest_Above_Bowl, SpotId::Irikar__Hub__NW_Bowl_Edifice) => {
+            Some(1052)
+        }
         (SpotId::Irikar__Hub__Northwest_Above_Bowl, SpotId::Irikar__Hub__West_Rim) => Some(349),
+        (SpotId::Irikar__Hub__Portal_Stand, SpotId::Irikar__Hub__NW_Middle_Building_Corner) => {
+            Some(1052)
+        }
+        (SpotId::Irikar__Hub__Portal_Stand, SpotId::Irikar__Hub__NW_Staircase_Upper) => Some(2400),
         (SpotId::Irikar__Hub__Sat_Tower_Bottom, SpotId::Irikar__Hub__Sat_Tower_East_24) => {
             Some(1929)
         }
@@ -31528,6 +32164,7 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
         ) => Some(1600),
         (SpotId::Irikar__Hub__Save_Point, SpotId::Irikar__Hub__Bowl_Platform_3) => Some(1799),
         (SpotId::Irikar__Hub__West_Rim, SpotId::Irikar__Hub__Bowl_Top_Platform) => Some(701),
+        (SpotId::Irikar__Hub__West_Rim, SpotId::Irikar__Hub__NW_Bowl_Edifice) => Some(877),
         (SpotId::Irikar__Sight_Room__Item_Pedestal, SpotId::Irikar__Sight_Room__Portal) => {
             Some(1200)
         }
@@ -35967,6 +36604,54 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
         (SpotId::Glacier__Vertical_Room__West_9, SpotId::Glacier__Vertical_Room__Under_Switch) => {
             (Some(1949), vec![])
         }
+        (SpotId::Irikar_Breach__Gauntlet__East_22, SpotId::Irikar_Breach__Gauntlet__Save_Point) => {
+            (Some(2105), vec![])
+        }
+        (
+            SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Top_Ledge,
+            SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Reward,
+        ) => (Some(500), vec![]),
+        (
+            SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Top_Ledge,
+            SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Upper_Left,
+        ) => (Some(1200), vec![]),
+        (
+            SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Upper_Entry,
+            SpotId::Irikar_Breach__Gauntlet__East_22,
+        ) => (Some(1052), vec![]),
+        (
+            SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Upper_Entry,
+            SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Upper_Right,
+        ) => (Some(600), vec![]),
+        (
+            SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Upper_Entry,
+            SpotId::Irikar_Breach__Gauntlet__Save_Point,
+        ) => (Some(1052), vec![]),
+        (
+            SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Upper_Left,
+            SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Top_Ledge,
+        ) => (Some(399), vec![]),
+        (
+            SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Upper_Left,
+            SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Upper_Right,
+        ) => (Some(4561), vec![]),
+        (
+            SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Upper_Right,
+            SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Upper_Entry,
+        ) => (Some(300), vec![]),
+        (
+            SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Upper_Right,
+            SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Upper_Left,
+        ) => (Some(4561), vec![]),
+        (SpotId::Irikar_Breach__Gauntlet__Save_Point, SpotId::Irikar_Breach__Gauntlet__East_22) => {
+            (Some(2105), vec![])
+        }
+        (SpotId::Irikar_Breach__Hover_Room__East, SpotId::Irikar_Breach__Hover_Room__Bottom) => {
+            (Some(1403), vec![])
+        }
+        (SpotId::Irikar_Breach__Hover_Room__West, SpotId::Irikar_Breach__Hover_Room__Bottom) => {
+            (Some(1403), vec![])
+        }
         (SpotId::Irikar__Hub__Bowl_Hole, SpotId::Irikar__Hub__Sat_Tower_Middle_Ledge) => {
             (Some(1578), vec![])
         }
@@ -35996,14 +36681,52 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
         }
         (SpotId::Irikar__Hub__East_Rim, SpotId::Irikar__Hub__Bowl_Hole) => (Some(2249), vec![]),
         (SpotId::Irikar__Hub__East_Rim, SpotId::Irikar__Hub__Save_Point) => (Some(2450), vec![]),
+        (SpotId::Irikar__Hub__NW_Bowl_Edifice, SpotId::Irikar__Hub__NW_Roof) => {
+            (Some(1929), vec![])
+        }
+        (SpotId::Irikar__Hub__NW_Bowl_Edifice, SpotId::Irikar__Hub__NW_Staircase_Upper) => {
+            (Some(526), vec![])
+        }
+        (SpotId::Irikar__Hub__NW_Bowl_Edifice, SpotId::Irikar__Hub__West_Rim) => {
+            (Some(877), vec![])
+        }
+        (
+            SpotId::Irikar__Hub__NW_Middle_Building_Corner,
+            SpotId::Irikar__Hub__NW_Middle_Building_West_Entry,
+        ) => (Some(699), vec![]),
+        (SpotId::Irikar__Hub__NW_Roof, SpotId::Irikar__Hub__NW_Bowl_Edifice) => {
+            (Some(1929), vec![])
+        }
+        (SpotId::Irikar__Hub__NW_Roof, SpotId::Irikar__Hub__NW_Middle_Building_Corner) => {
+            (Some(1800), vec![])
+        }
+        (SpotId::Irikar__Hub__NW_Staircase_Upper, SpotId::Irikar__Hub__Portal_Stand) => {
+            (Some(1754), vec![])
+        }
+        (
+            SpotId::Irikar__Hub__North_Above_Portal,
+            SpotId::Irikar__Hub__NW_Middle_Building_Corner,
+        ) => (Some(2099), vec![]),
+        (SpotId::Irikar__Hub__North_Above_Portal, SpotId::Irikar__Hub__Portal_Stand) => {
+            (Some(1599), vec![])
+        }
         (SpotId::Irikar__Hub__Northeast_Above_Bowl, SpotId::Irikar__Hub__East_Rim) => {
             (Some(399), vec![])
         }
         (SpotId::Irikar__Hub__Northwest_Above_Bowl, SpotId::Irikar__Hub__Bowl_Top_Platform) => {
             (Some(750), vec![])
         }
+        (SpotId::Irikar__Hub__Northwest_Above_Bowl, SpotId::Irikar__Hub__NW_Bowl_Edifice) => {
+            (Some(1052), vec![])
+        }
         (SpotId::Irikar__Hub__Northwest_Above_Bowl, SpotId::Irikar__Hub__West_Rim) => {
             (Some(349), vec![])
+        }
+        (SpotId::Irikar__Hub__Portal_Stand, SpotId::Irikar__Hub__NW_Middle_Building_Corner) => {
+            (Some(1052), vec![])
+        }
+        (SpotId::Irikar__Hub__Portal_Stand, SpotId::Irikar__Hub__NW_Staircase_Upper) => {
+            (Some(2400), vec![])
         }
         (SpotId::Irikar__Hub__Sat_Tower_Bottom, SpotId::Irikar__Hub__Sat_Tower_East_24) => {
             (Some(1929), vec![])
@@ -36065,6 +36788,9 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
         }
         (SpotId::Irikar__Hub__West_Rim, SpotId::Irikar__Hub__Bowl_Top_Platform) => {
             (Some(701), vec![])
+        }
+        (SpotId::Irikar__Hub__West_Rim, SpotId::Irikar__Hub__NW_Bowl_Edifice) => {
+            (Some(877), vec![])
         }
         (SpotId::Irikar__Sight_Room__Item_Pedestal, SpotId::Irikar__Sight_Room__Portal) => {
             (Some(1200), vec![])
