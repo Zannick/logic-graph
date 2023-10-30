@@ -2832,8 +2832,8 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
         (
             [false],
             SpotId::Giguna__East_Caverns__East_Grass,
-            SpotId::Giguna__East_Caverns__Under_Lower_Ledge,
-        ) => 2982,
+            SpotId::Giguna__East_Caverns__Lower_Susar,
+        ) => 1228,
         (
             [false],
             SpotId::Giguna__East_Caverns__East_Shaft,
@@ -2989,8 +2989,8 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
         (
             [false],
             SpotId::Giguna__East_Caverns__Under_Lower_Ledge,
-            SpotId::Giguna__East_Caverns__East_Grass,
-        ) => 2982,
+            SpotId::Giguna__East_Caverns__Lower_Susar,
+        ) => 1754,
         (
             [false],
             SpotId::Giguna__East_Caverns__Under_Lower_Ledge,
@@ -8058,8 +8058,8 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
         (
             [true],
             SpotId::Giguna__East_Caverns__East_Grass,
-            SpotId::Giguna__East_Caverns__Under_Lower_Ledge,
-        ) => 2982,
+            SpotId::Giguna__East_Caverns__Lower_Susar,
+        ) => 1228,
         (
             [true],
             SpotId::Giguna__East_Caverns__East_Shaft,
@@ -8215,8 +8215,8 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
         (
             [true],
             SpotId::Giguna__East_Caverns__Under_Lower_Ledge,
-            SpotId::Giguna__East_Caverns__East_Grass,
-        ) => 2982,
+            SpotId::Giguna__East_Caverns__Lower_Susar,
+        ) => 1754,
         (
             [true],
             SpotId::Giguna__East_Caverns__Under_Lower_Ledge,
@@ -12794,12 +12794,11 @@ pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
         ) => true,
         (
             SpotId::Giguna__East_Caverns__Under_Lower_Ledge,
-            SpotId::Giguna__East_Caverns__East_Grass,
+            SpotId::Giguna__East_Caverns__Lower_Susar,
         ) => true,
-        (
-            SpotId::Giguna__East_Caverns__East_Grass,
-            SpotId::Giguna__East_Caverns__Under_Lower_Ledge,
-        ) => true,
+        (SpotId::Giguna__East_Caverns__East_Grass, SpotId::Giguna__East_Caverns__Lower_Susar) => {
+            true
+        }
         (SpotId::Giguna__East_Caverns__East_17, SpotId::Giguna__East_Caverns__East_Grass) => true,
         (SpotId::Giguna__Gateway__West_18, SpotId::Giguna__Gateway__Passage_Entry) => true,
         (SpotId::Giguna__Gateway__Passage_Entry, SpotId::Giguna__Gateway__West_18) => true,
@@ -21614,8 +21613,8 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__East_Caverns__East_Grass,
-            SpotId::Giguna__East_Caverns__Under_Lower_Ledge,
-            2982,
+            SpotId::Giguna__East_Caverns__Lower_Susar,
+            1228,
         ),
         (
             SpotId::Giguna__East_Caverns__East_Grass,
@@ -21734,6 +21733,21 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__East_Caverns__Lower_Ledge,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__East_Caverns__Lower_Susar,
+            SpotId::Giguna__East_Caverns__East_Grass,
+            1228,
+        ),
+        (
+            SpotId::Giguna__East_Caverns__Lower_Susar,
+            SpotId::Giguna__East_Caverns__Under_Lower_Ledge,
+            1754,
+        ),
+        (
+            SpotId::Giguna__East_Caverns__Lower_Susar,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -21914,8 +21928,8 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__East_Caverns__Under_Lower_Ledge,
-            SpotId::Giguna__East_Caverns__East_Grass,
-            2982,
+            SpotId::Giguna__East_Caverns__Lower_Susar,
+            1754,
         ),
         (
             SpotId::Giguna__East_Caverns__Under_Lower_Ledge,
@@ -29891,10 +29905,9 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
         (SpotId::Giguna__East_Caverns__East_17, SpotId::Giguna__East_Caverns__East_Grass) => {
             Some(1754)
         }
-        (
-            SpotId::Giguna__East_Caverns__East_Grass,
-            SpotId::Giguna__East_Caverns__Under_Lower_Ledge,
-        ) => Some(2982),
+        (SpotId::Giguna__East_Caverns__East_Grass, SpotId::Giguna__East_Caverns__Lower_Susar) => {
+            Some(1228)
+        }
         (SpotId::Giguna__East_Caverns__East_Shaft, SpotId::Giguna__East_Caverns__East_Side) => {
             Some(399)
         }
@@ -30002,8 +30015,8 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
         ) => Some(600),
         (
             SpotId::Giguna__East_Caverns__Under_Lower_Ledge,
-            SpotId::Giguna__East_Caverns__East_Grass,
-        ) => Some(2982),
+            SpotId::Giguna__East_Caverns__Lower_Susar,
+        ) => Some(1754),
         (
             SpotId::Giguna__East_Caverns__Under_Lower_Ledge,
             SpotId::Giguna__East_Caverns__West_Grass,
@@ -34104,10 +34117,9 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
         (SpotId::Giguna__East_Caverns__East_17, SpotId::Giguna__East_Caverns__East_Grass) => {
             (Some(1754), vec![])
         }
-        (
-            SpotId::Giguna__East_Caverns__East_Grass,
-            SpotId::Giguna__East_Caverns__Under_Lower_Ledge,
-        ) => (Some(2982), vec![]),
+        (SpotId::Giguna__East_Caverns__East_Grass, SpotId::Giguna__East_Caverns__Lower_Susar) => {
+            (Some(1228), vec![])
+        }
         (SpotId::Giguna__East_Caverns__East_Shaft, SpotId::Giguna__East_Caverns__East_Side) => {
             (Some(399), vec![])
         }
@@ -34215,8 +34227,8 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
         ) => (Some(600), vec![]),
         (
             SpotId::Giguna__East_Caverns__Under_Lower_Ledge,
-            SpotId::Giguna__East_Caverns__East_Grass,
-        ) => (Some(2982), vec![]),
+            SpotId::Giguna__East_Caverns__Lower_Susar,
+        ) => (Some(1754), vec![]),
         (
             SpotId::Giguna__East_Caverns__Under_Lower_Ledge,
             SpotId::Giguna__East_Caverns__West_Grass,

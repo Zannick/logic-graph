@@ -1364,6 +1364,8 @@ areas:
 
 - name: Ruins Top
   on_entry: $reset_old_area(^newpos)
+  data:
+    portal_default: Giguna Breach > Peak > Save Point
   start:
     _doors_open: false
   spots:
@@ -1445,7 +1447,7 @@ areas:
       actions:
         - name: Enter Portal
           req: ^mode == 'drone'
-          do: $portal(^flipside)
+          do: $portal_save_update
           to: ^flipside
           tags: [portal]
     - name: Interior Ledge
@@ -2243,6 +2245,7 @@ areas:
   reset:
     _upper_susar: false
     _mid_susar: false
+    _lower_susar: false
   spots:
     - name: West 14
       coord: [19.05, 13.6]
@@ -2672,12 +2675,32 @@ areas:
       coord: [19.6, 16.8]
       local:
         - to: West Grass
-        - to: East Grass
+        - to: Lower Susar
           jumps: 2
+    - name: Lower Susar
+      coord: [20.1, 16.5]
+      exits:
+        - to: Under Lower Ledge
+          req: ^_lower_susar
+          movement: base
+        - to: East Grass
+          req: ^_lower_susar
+          movement: base
+      actions:
+        - name: Hack
+          req: not ^_lower_susar and $allegiance1
+          price: 100
+          do: ^_lower_susar = true
+          tags: [hack]
+        - name: Caught
+          req: not ^_lower_susar
+          do: ^_lower_susar = true
+          tags: [susar]
     - name: East Grass
       coord: [20.45, 16.7]
       local:
-        - to: Under Lower Ledge
+        - to: Lower Susar
+          jumps: 1
       exits:
         - to: East 17
           req: $hook

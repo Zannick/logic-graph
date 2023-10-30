@@ -677,6 +677,7 @@ pub fn get_area(spot: SpotId) -> AreaId {
         | SpotId::Giguna__East_Caverns__West_17
         | SpotId::Giguna__East_Caverns__West_Grass
         | SpotId::Giguna__East_Caverns__Under_Lower_Ledge
+        | SpotId::Giguna__East_Caverns__Lower_Susar
         | SpotId::Giguna__East_Caverns__East_Grass
         | SpotId::Giguna__East_Caverns__East_17 => AreaId::Giguna__East_Caverns,
         SpotId::Giguna__Gateway__West_18
@@ -1525,6 +1526,7 @@ pub fn get_region(spot: SpotId) -> RegionId {
         | SpotId::Giguna__East_Caverns__West_17
         | SpotId::Giguna__East_Caverns__West_Grass
         | SpotId::Giguna__East_Caverns__Under_Lower_Ledge
+        | SpotId::Giguna__East_Caverns__Lower_Susar
         | SpotId::Giguna__East_Caverns__East_Grass
         | SpotId::Giguna__East_Caverns__East_17 => RegionId::Giguna,
         SpotId::Giguna__Gateway__West_18
@@ -2397,6 +2399,8 @@ impl world::Accessible for Exit {
             ExitId::Giguna__East_Caverns__Hidden_Passage_West__ex__Statues_Ledge_2 => rules::access_hook(&ctx),
             ExitId::Giguna__East_Caverns__Lower_Ledge__ex__Arc_Ledge_1 => rules::access_grab(&ctx),
             ExitId::Giguna__East_Caverns__Lower_Ledge__ex__Arc_Ledge_2 => rules::access_hook(&ctx),
+            ExitId::Giguna__East_Caverns__Lower_Susar__ex__East_Grass_1 => rules::access_giguna__east_caverns__lower_susar__ex__east_grass_1__req(&ctx),
+            ExitId::Giguna__East_Caverns__Lower_Susar__ex__Under_Lower_Ledge_1 => rules::access_giguna__east_caverns__lower_susar__ex__under_lower_ledge_1__req(&ctx),
             ExitId::Giguna__East_Caverns__Mid_Susar__ex__Middle_Ledge_1 => rules::access_giguna__east_caverns__mid_susar__ex__middle_ledge_1__req(&ctx),
             ExitId::Giguna__East_Caverns__Mid_Susar__ex__Middle_Ledge_2 => rules::access_giguna__east_caverns__mid_susar__ex__middle_ledge_2__req(&ctx),
             ExitId::Giguna__East_Caverns__Mid_Susar__ex__Middle_Rock_1 => rules::access_giguna__east_caverns__mid_susar__ex__middle_rock_1__req(&ctx),
@@ -3136,6 +3140,12 @@ impl world::Accessible for Action {
                         &ctx,
                     )
                 }
+                ActionId::Giguna__East_Caverns__Lower_Susar__Caught => {
+                    rules::access_giguna__east_caverns__lower_susar__caught__req(&ctx)
+                }
+                ActionId::Giguna__East_Caverns__Lower_Susar__Hack => {
+                    rules::access_giguna__east_caverns__lower_susar__hack__req(&ctx)
+                }
                 ActionId::Giguna__East_Caverns__Mid_Susar__Caught => {
                     rules::access_giguna__east_caverns__mid_susar__caught__req(&ctx)
                 }
@@ -3335,7 +3345,7 @@ impl world::Action for Action {
                 rules::action_ebih__vertical_interchange__west_13__open_door__do(ctx)
             }
             ActionId::Giguna_Breach__Peak__Save_Point__Save => rules::action_save(ctx),
-            ActionId::Giguna_Breach__Peak__Portal__Portal => rules::action_portal__flipside(ctx),
+            ActionId::Giguna_Breach__Peak__Portal__Portal => rules::action_portal_save_update(ctx),
             ActionId::Giguna_Breach__SW_Save__West_11__Open_Door => {
                 rules::action_giguna_breach__sw_save__west_11__open_door__do(ctx)
             }
@@ -3404,7 +3414,7 @@ impl world::Action for Action {
                 rules::action_giguna__ruins_west__lower_ledge__destroy_kishib__do(ctx)
             }
             ActionId::Giguna__Ruins_Top__Portal__Enter_Portal => {
-                rules::action_portal__flipside(ctx)
+                rules::action_portal_save_update(ctx)
             }
             ActionId::Giguna__Ruins_Top__Save_Point__Save => rules::action_save(ctx),
             ActionId::Giguna__Ruins_Top__Switch__Open_Doors => {
@@ -3449,6 +3459,12 @@ impl world::Action for Action {
             ActionId::Giguna__East_Caverns__West_16__Open_Door => {
                 rules::action_giguna__east_caverns__west_16__open_door__do(ctx)
             }
+            ActionId::Giguna__East_Caverns__Lower_Susar__Hack => {
+                rules::action_giguna__east_caverns__lower_susar__hack__do(ctx)
+            }
+            ActionId::Giguna__East_Caverns__Lower_Susar__Caught => {
+                rules::action_giguna__east_caverns__lower_susar__caught__do(ctx)
+            }
             ActionId::Giguna__Gateway__One_Jump__Open_Door => {
                 rules::action_giguna__gateway__one_jump__open_door__do(ctx)
             }
@@ -3458,7 +3474,7 @@ impl world::Action for Action {
             ActionId::Glacier__Revival__Save_Point__Save => rules::action_save(ctx),
             ActionId::Irikar__Hub__Save_Point__Save => rules::action_save(ctx),
             ActionId::Irikar__Sight_Room__Portal__Enter_Portal => {
-                rules::action_portal__flipside(ctx)
+                rules::action_portal_save_update(ctx)
             }
         };
         let dest = self.dest(ctx);
@@ -3557,7 +3573,10 @@ impl world::Accessible for Warp {
     fn can_access(&self, ctx: &Context) -> bool {
         ctx.can_afford(&self.price)
             && match self.id {
-                WarpId::DroneSave => rules::access_not_within_menu_and_mode__drone(&ctx),
+                WarpId::BreachSave => rules::access_not_within_menu_and_breach(&ctx),
+                WarpId::DroneSave => {
+                    rules::access_not_within_menu_and_not_breach_and_mode__drone(&ctx)
+                }
                 WarpId::EarthSave => rules::access_within_antarctica(&ctx),
                 WarpId::ExitBreach => {
                     rules::access_breach_and_exit_breach_and___flipside_not_within_default(&ctx)
@@ -3589,6 +3608,7 @@ impl world::Warp for Warp {
     fn dest(&self, ctx: &Context) -> SpotId {
         if self.dest == SpotId::None {
             match self.id {
+                WarpId::BreachSave => ctx.breach_save(),
                 WarpId::DroneSave => ctx.save(),
                 WarpId::EarthSave => ctx.save(),
                 WarpId::ExitBreach => data::flipside(ctx.position()),
@@ -3612,7 +3632,9 @@ impl world::Warp for Warp {
     }
     fn postwarp(&self, ctx: &mut Context) {
         match self.id {
+            WarpId::BreachSave => rules::action_energy__max_energy(ctx),
             WarpId::DroneSave => rules::action_energy__max_energy(ctx),
+            WarpId::ExitBreach => rules::action_clear_breach_save(ctx),
             WarpId::ExitMenu => rules::action_last__default(ctx),
             WarpId::FastTravel1710 => rules::action_energy__max_energy(ctx),
             WarpId::IndraSave => rules::action_energy__max_energy(ctx),
@@ -3621,6 +3643,7 @@ impl world::Warp for Warp {
     }
     fn should_reload(&self) -> bool {
         match self.id {
+            WarpId::BreachSave => true,
             WarpId::DroneSave => true,
             WarpId::EarthSave => true,
             WarpId::ExitBreach => false,
@@ -3640,7 +3663,7 @@ pub struct Spot {
     pub actions: Range<usize>,
 }
 
-static RAW_SPOTS: [SpotId; 836] = [
+static RAW_SPOTS: [SpotId; 837] = [
     SpotId::None,
     SpotId::Amagi__Cave_Behind_Waterfall__Bottom,
     SpotId::Amagi__Cave_Behind_Waterfall__Middle,
@@ -4028,6 +4051,7 @@ static RAW_SPOTS: [SpotId; 836] = [
     SpotId::Giguna__East_Caverns__Hidden_Passage_East,
     SpotId::Giguna__East_Caverns__Hidden_Passage_West,
     SpotId::Giguna__East_Caverns__Lower_Ledge,
+    SpotId::Giguna__East_Caverns__Lower_Susar,
     SpotId::Giguna__East_Caverns__Mid_Susar,
     SpotId::Giguna__East_Caverns__Middle_Ledge,
     SpotId::Giguna__East_Caverns__Middle_Rock,
@@ -5779,6 +5803,10 @@ impl world::World for World {
             ActionId::Giguna__East_Caverns__West_16__Open_Door => {
                 SpotId::Giguna__East_Caverns__West_16
             }
+            ActionId::Giguna__East_Caverns__Lower_Susar__Caught
+            | ActionId::Giguna__East_Caverns__Lower_Susar__Hack => {
+                SpotId::Giguna__East_Caverns__Lower_Susar
+            }
             ActionId::Giguna__Gateway__One_Jump__Open_Door => SpotId::Giguna__Gateway__One_Jump,
             ActionId::Giguna__Gateway__Flask_Ledge__Open_Door => {
                 SpotId::Giguna__Gateway__Flask_Ledge
@@ -6183,6 +6211,7 @@ impl world::World for World {
             ExitId::Giguna__East_Caverns__Lower_Ledge__ex__Arc_Ledge_1 | ExitId:: Giguna__East_Caverns__Lower_Ledge__ex__Arc_Ledge_2 => SpotId::Giguna__East_Caverns__Lower_Ledge,
             ExitId::Giguna__East_Caverns__West_17__ex__Dual_Path__East_17_1 => SpotId::Giguna__East_Caverns__West_17,
             ExitId::Giguna__East_Caverns__West_Grass__ex__Lower_Ledge_1 => SpotId::Giguna__East_Caverns__West_Grass,
+            ExitId::Giguna__East_Caverns__Lower_Susar__ex__Under_Lower_Ledge_1 | ExitId:: Giguna__East_Caverns__Lower_Susar__ex__East_Grass_1 => SpotId::Giguna__East_Caverns__Lower_Susar,
             ExitId::Giguna__East_Caverns__East_Grass__ex__East_17_1 => SpotId::Giguna__East_Caverns__East_Grass,
             ExitId::Giguna__East_Caverns__East_17__ex__Vertical_Interchange__West_17_1 => SpotId::Giguna__East_Caverns__East_17,
             ExitId::Giguna__Gateway__West_18__ex__Dual_Path__East_18_1 => SpotId::Giguna__Gateway__West_18,
@@ -6675,6 +6704,7 @@ impl world::World for World {
             | SpotId::Giguna__Dual_Path__West_18
             | SpotId::Giguna__East_Caverns__East_17
             | SpotId::Giguna__East_Caverns__Hidden_Passage_Center
+            | SpotId::Giguna__East_Caverns__Lower_Susar
             | SpotId::Giguna__East_Caverns__Mid_Susar
             | SpotId::Giguna__East_Caverns__Statues_Ledge
             | SpotId::Giguna__East_Caverns__Switch
@@ -11990,6 +12020,20 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
             price: Currency::Free,
             loc_id: None,
         },
+        ExitId::Giguna__East_Caverns__Lower_Susar__ex__Under_Lower_Ledge_1 => Exit {
+            id: ExitId::Giguna__East_Caverns__Lower_Susar__ex__Under_Lower_Ledge_1,
+            time: 1754,
+            dest: SpotId::Giguna__East_Caverns__Under_Lower_Ledge,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Giguna__East_Caverns__Lower_Susar__ex__East_Grass_1 => Exit {
+            id: ExitId::Giguna__East_Caverns__Lower_Susar__ex__East_Grass_1,
+            time: 1228,
+            dest: SpotId::Giguna__East_Caverns__East_Grass,
+            price: Currency::Free,
+            loc_id: None,
+        },
         ExitId::Giguna__East_Caverns__East_Grass__ex__East_17_1 => Exit {
             id: ExitId::Giguna__East_Caverns__East_Grass__ex__East_17_1,
             time: 1500,
@@ -13454,6 +13498,16 @@ pub fn build_actions() -> EnumMap<ActionId, Action> {
         ActionId::Giguna__East_Caverns__West_16__Open_Door => Action {
             id: ActionId::Giguna__East_Caverns__West_16__Open_Door,
             time: 500,
+            price: Currency::Free,
+        },
+        ActionId::Giguna__East_Caverns__Lower_Susar__Hack => Action {
+            id: ActionId::Giguna__East_Caverns__Lower_Susar__Hack,
+            time: 500,
+            price: Currency::Energy(100),
+        },
+        ActionId::Giguna__East_Caverns__Lower_Susar__Caught => Action {
+            id: ActionId::Giguna__East_Caverns__Lower_Susar__Caught,
+            time: 3000,
             price: Currency::Free,
         },
         ActionId::Giguna__Gateway__One_Jump__Open_Door => Action {
@@ -21799,6 +21853,20 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
         },
+        SpotId::Giguna__East_Caverns__Lower_Susar => Spot {
+            id: SpotId::Giguna__East_Caverns__Lower_Susar,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__East_Caverns__Lower_Susar__ex__East_Grass_1.into_usize(),
+                end: ExitId::Giguna__East_Caverns__Lower_Susar__ex__Under_Lower_Ledge_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: ActionId::Giguna__East_Caverns__Lower_Susar__Caught.into_usize(),
+                end: ActionId::Giguna__East_Caverns__Lower_Susar__Hack.into_usize() + 1,
+            },
+        },
         SpotId::Giguna__East_Caverns__East_Grass => Spot {
             id: SpotId::Giguna__East_Caverns__East_Grass,
             locations: Range {
@@ -24181,6 +24249,12 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
 
 pub fn build_warps() -> EnumMap<WarpId, Warp> {
     enum_map! {
+        WarpId::BreachSave => Warp {
+            id: WarpId::BreachSave,
+            dest: SpotId::None,
+            time: 12000,
+            price: Currency::Free,
+        },
         WarpId::DroneSave => Warp {
             id: WarpId::DroneSave,
             dest: SpotId::None,
@@ -25152,6 +25226,7 @@ pub fn spot_locations(id: SpotId) -> Range<usize> {
         SpotId::Giguna__East_Caverns__West_17 => Range { start: 0, end: 0 },
         SpotId::Giguna__East_Caverns__West_Grass => Range { start: 0, end: 0 },
         SpotId::Giguna__East_Caverns__Under_Lower_Ledge => Range { start: 0, end: 0 },
+        SpotId::Giguna__East_Caverns__Lower_Susar => Range { start: 0, end: 0 },
         SpotId::Giguna__East_Caverns__East_Grass => Range { start: 0, end: 0 },
         SpotId::Giguna__East_Caverns__East_17 => Range { start: 0, end: 0 },
         SpotId::Giguna__Gateway__West_18 => Range { start: 0, end: 0 },

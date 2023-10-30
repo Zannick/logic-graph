@@ -6,6 +6,8 @@ data:
 areas:
 - name: Peak
   on_entry: $reset_old_area(^newpos);
+  data:
+    portal_default: Giguna > Ruins Top > Save Point
   spots:
     - name: Save Point
       coord: [15.475, 6.6]
@@ -68,7 +70,7 @@ areas:
           time: 1  # ?
       actions:
         - name: Portal
-          do: $portal(^flipside)
+          do: $portal_save_update
           to: ^flipside
           tags: [portal]
 

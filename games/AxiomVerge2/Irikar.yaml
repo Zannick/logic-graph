@@ -172,6 +172,8 @@ areas:
 
 - name: Sight Room
   on_entry: $reset_old_area(^newpos)
+  data:
+    portal_default: Irikar Breach > Save Room > Save Point
   spots:
     - name: West 24
       coord: [14.05, 24.55]
@@ -196,7 +198,7 @@ areas:
       actions:
         - name: Enter Portal
           req: ^mode == 'drone' and Breach_Sight
-          do: $portal(^flipside)
+          do: $portal_save_update
           to: ^flipside
           tags: [portal]
     - name: Item Pedestal

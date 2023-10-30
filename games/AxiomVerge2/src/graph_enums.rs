@@ -793,6 +793,7 @@ pub enum SpotId {
     Giguna__East_Caverns__Hidden_Passage_East,
     Giguna__East_Caverns__Hidden_Passage_West,
     Giguna__East_Caverns__Lower_Ledge,
+    Giguna__East_Caverns__Lower_Susar,
     Giguna__East_Caverns__Mid_Susar,
     Giguna__East_Caverns__Middle_Ledge,
     Giguna__East_Caverns__Middle_Rock,
@@ -2124,6 +2125,9 @@ impl fmt::Display for SpotId {
             }
             SpotId::Giguna__East_Caverns__Lower_Ledge => {
                 write!(f, "{}", "Giguna > East Caverns > Lower Ledge")
+            }
+            SpotId::Giguna__East_Caverns__Lower_Susar => {
+                write!(f, "{}", "Giguna > East Caverns > Lower Susar")
             }
             SpotId::Giguna__East_Caverns__Mid_Susar => {
                 write!(f, "{}", "Giguna > East Caverns > Mid Susar")
@@ -3873,6 +3877,7 @@ impl std::str::FromStr for SpotId {
                 Ok(SpotId::Giguna__East_Caverns__Hidden_Passage_West)
             }
             "Giguna > East Caverns > Lower Ledge" => Ok(SpotId::Giguna__East_Caverns__Lower_Ledge),
+            "Giguna > East Caverns > Lower Susar" => Ok(SpotId::Giguna__East_Caverns__Lower_Susar),
             "Giguna > East Caverns > Mid Susar" => Ok(SpotId::Giguna__East_Caverns__Mid_Susar),
             "Giguna > East Caverns > Middle Ledge" => {
                 Ok(SpotId::Giguna__East_Caverns__Middle_Ledge)
@@ -6150,6 +6155,8 @@ pub enum ExitId {
     Giguna__East_Caverns__Hidden_Passage_West__ex__Statues_Ledge_2,
     Giguna__East_Caverns__Lower_Ledge__ex__Arc_Ledge_1,
     Giguna__East_Caverns__Lower_Ledge__ex__Arc_Ledge_2,
+    Giguna__East_Caverns__Lower_Susar__ex__East_Grass_1,
+    Giguna__East_Caverns__Lower_Susar__ex__Under_Lower_Ledge_1,
     Giguna__East_Caverns__Mid_Susar__ex__Middle_Ledge_1,
     Giguna__East_Caverns__Mid_Susar__ex__Middle_Ledge_2,
     Giguna__East_Caverns__Mid_Susar__ex__Middle_Rock_1,
@@ -6854,6 +6861,8 @@ impl fmt::Display for ExitId {
             ExitId::Giguna__East_Caverns__Hidden_Passage_West__ex__Statues_Ledge_2 => write!(f, "{}", "Giguna > East Caverns > Hidden Passage West ==> Statues Ledge (2)"),
             ExitId::Giguna__East_Caverns__Lower_Ledge__ex__Arc_Ledge_1 => write!(f, "{}", "Giguna > East Caverns > Lower Ledge ==> Arc Ledge (1)"),
             ExitId::Giguna__East_Caverns__Lower_Ledge__ex__Arc_Ledge_2 => write!(f, "{}", "Giguna > East Caverns > Lower Ledge ==> Arc Ledge (2)"),
+            ExitId::Giguna__East_Caverns__Lower_Susar__ex__East_Grass_1 => write!(f, "{}", "Giguna > East Caverns > Lower Susar ==> East Grass (1)"),
+            ExitId::Giguna__East_Caverns__Lower_Susar__ex__Under_Lower_Ledge_1 => write!(f, "{}", "Giguna > East Caverns > Lower Susar ==> Under Lower Ledge (1)"),
             ExitId::Giguna__East_Caverns__Mid_Susar__ex__Middle_Ledge_1 => write!(f, "{}", "Giguna > East Caverns > Mid Susar ==> Middle Ledge (1)"),
             ExitId::Giguna__East_Caverns__Mid_Susar__ex__Middle_Ledge_2 => write!(f, "{}", "Giguna > East Caverns > Mid Susar ==> Middle Ledge (2)"),
             ExitId::Giguna__East_Caverns__Mid_Susar__ex__Middle_Rock_1 => write!(f, "{}", "Giguna > East Caverns > Mid Susar ==> Middle Rock (1)"),
@@ -7563,6 +7572,8 @@ impl std::str::FromStr for ExitId {
             "Giguna > East Caverns > Hidden Passage West ==> Statues Ledge (2)" => Ok(ExitId::Giguna__East_Caverns__Hidden_Passage_West__ex__Statues_Ledge_2),
             "Giguna > East Caverns > Lower Ledge ==> Arc Ledge (1)" => Ok(ExitId::Giguna__East_Caverns__Lower_Ledge__ex__Arc_Ledge_1),
             "Giguna > East Caverns > Lower Ledge ==> Arc Ledge (2)" => Ok(ExitId::Giguna__East_Caverns__Lower_Ledge__ex__Arc_Ledge_2),
+            "Giguna > East Caverns > Lower Susar ==> East Grass (1)" => Ok(ExitId::Giguna__East_Caverns__Lower_Susar__ex__East_Grass_1),
+            "Giguna > East Caverns > Lower Susar ==> Under Lower Ledge (1)" => Ok(ExitId::Giguna__East_Caverns__Lower_Susar__ex__Under_Lower_Ledge_1),
             "Giguna > East Caverns > Mid Susar ==> Middle Ledge (1)" => Ok(ExitId::Giguna__East_Caverns__Mid_Susar__ex__Middle_Ledge_1),
             "Giguna > East Caverns > Mid Susar ==> Middle Ledge (2)" => Ok(ExitId::Giguna__East_Caverns__Mid_Susar__ex__Middle_Ledge_2),
             "Giguna > East Caverns > Mid Susar ==> Middle Rock (1)" => Ok(ExitId::Giguna__East_Caverns__Mid_Susar__ex__Middle_Rock_1),
@@ -7979,6 +7990,8 @@ pub enum ActionId {
     Giguna__Carnelian__Upper_Susar__Hack,
     Giguna__Clouds__Platform_Start__Hack_and_Ride_to_Portal,
     Giguna__Clouds__Platform_Start__Hack_Deploy_Ride_to_Portal,
+    Giguna__East_Caverns__Lower_Susar__Caught,
+    Giguna__East_Caverns__Lower_Susar__Hack,
     Giguna__East_Caverns__Mid_Susar__Caught,
     Giguna__East_Caverns__Mid_Susar__Hack,
     Giguna__East_Caverns__Statues_Ledge__Open_Door,
@@ -8147,6 +8160,12 @@ impl fmt::Display for ActionId {
                 "{}",
                 "Giguna > Clouds > Platform Start > Hack, Deploy, Ride to Portal"
             ),
+            ActionId::Giguna__East_Caverns__Lower_Susar__Caught => {
+                write!(f, "{}", "Giguna > East Caverns > Lower Susar > Caught")
+            }
+            ActionId::Giguna__East_Caverns__Lower_Susar__Hack => {
+                write!(f, "{}", "Giguna > East Caverns > Lower Susar > Hack")
+            }
             ActionId::Giguna__East_Caverns__Mid_Susar__Caught => {
                 write!(f, "{}", "Giguna > East Caverns > Mid Susar > Caught")
             }
@@ -8403,6 +8422,12 @@ impl std::str::FromStr for ActionId {
             }
             "Giguna > Clouds > Platform Start > Hack, Deploy, Ride to Portal" => {
                 Ok(ActionId::Giguna__Clouds__Platform_Start__Hack_Deploy_Ride_to_Portal)
+            }
+            "Giguna > East Caverns > Lower Susar > Caught" => {
+                Ok(ActionId::Giguna__East_Caverns__Lower_Susar__Caught)
+            }
+            "Giguna > East Caverns > Lower Susar > Hack" => {
+                Ok(ActionId::Giguna__East_Caverns__Lower_Susar__Hack)
             }
             "Giguna > East Caverns > Mid Susar > Caught" => {
                 Ok(ActionId::Giguna__East_Caverns__Mid_Susar__Caught)
@@ -8667,6 +8692,7 @@ impl std::str::FromStr for CanonId {
 )]
 #[repr(u8)]
 pub enum WarpId {
+    BreachSave,
     DroneSave,
     EarthSave,
     ExitBreach,
@@ -8678,6 +8704,7 @@ pub enum WarpId {
 impl fmt::Display for WarpId {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         match self {
+            WarpId::BreachSave => write!(f, "{}", "BreachSave"),
             WarpId::DroneSave => write!(f, "{}", "DroneSave"),
             WarpId::EarthSave => write!(f, "{}", "EarthSave"),
             WarpId::ExitBreach => write!(f, "{}", "ExitBreach"),
@@ -8694,6 +8721,7 @@ impl std::str::FromStr for WarpId {
 
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         match s {
+            "BreachSave" => Ok(WarpId::BreachSave),
             "DroneSave" => Ok(WarpId::DroneSave),
             "EarthSave" => Ok(WarpId::EarthSave),
             "ExitBreach" => Ok(WarpId::ExitBreach),

@@ -67,6 +67,7 @@ pub enum Expectation {
     Refills(i8),
     Mode(enums::Mode),
     Save(SpotId),
+    BreachSave(SpotId),
     Indra(SpotId),
     Last(SpotId),
     PrevArea(AreaId),
@@ -93,6 +94,7 @@ pub enum Expectation {
     GigunaEastCavernsCtxComboEntered(bool),
     GigunaEastCavernsCtxUpperSusar(bool),
     GigunaEastCavernsCtxMidSusar(bool),
+    GigunaEastCavernsCtxLowerSusar(bool),
     GigunaGatewayCtxDoorOpened(bool),
     // items
     AmagiDragonEyePassage(bool),
@@ -364,6 +366,48 @@ pub mod data {
             _ => SpotId::None,
         }
     }
+    pub fn portal_default(spot_id: SpotId) -> SpotId {
+        match spot_id {
+            SpotId::Giguna_Breach__Peak__Column => SpotId::Giguna__Ruins_Top__Save_Point,
+            SpotId::Giguna_Breach__Peak__East_6 => SpotId::Giguna__Ruins_Top__Save_Point,
+            SpotId::Giguna_Breach__Peak__East_Passage => SpotId::Giguna__Ruins_Top__Save_Point,
+            SpotId::Giguna_Breach__Peak__Portal => SpotId::Giguna__Ruins_Top__Save_Point,
+            SpotId::Giguna_Breach__Peak__Save_Point => SpotId::Giguna__Ruins_Top__Save_Point,
+            SpotId::Giguna_Breach__Peak__Upper_East => SpotId::Giguna__Ruins_Top__Save_Point,
+            SpotId::Giguna_Breach__Peak__Upper_West => SpotId::Giguna__Ruins_Top__Save_Point,
+            SpotId::Giguna_Breach__Peak__West_7 => SpotId::Giguna__Ruins_Top__Save_Point,
+            SpotId::Giguna__Ruins_Top__East_7 => SpotId::Giguna_Breach__Peak__Save_Point,
+            SpotId::Giguna__Ruins_Top__East_Door => SpotId::Giguna_Breach__Peak__Save_Point,
+            SpotId::Giguna__Ruins_Top__Entryway => SpotId::Giguna_Breach__Peak__Save_Point,
+            SpotId::Giguna__Ruins_Top__Flask => SpotId::Giguna_Breach__Peak__Save_Point,
+            SpotId::Giguna__Ruins_Top__Interior_Ledge => SpotId::Giguna_Breach__Peak__Save_Point,
+            SpotId::Giguna__Ruins_Top__Portal => SpotId::Giguna_Breach__Peak__Save_Point,
+            SpotId::Giguna__Ruins_Top__Portal_Left => SpotId::Giguna_Breach__Peak__Save_Point,
+            SpotId::Giguna__Ruins_Top__Rooftop_East => SpotId::Giguna_Breach__Peak__Save_Point,
+            SpotId::Giguna__Ruins_Top__Rooftop_Gutter => SpotId::Giguna_Breach__Peak__Save_Point,
+            SpotId::Giguna__Ruins_Top__Rooftop_West => SpotId::Giguna_Breach__Peak__Save_Point,
+            SpotId::Giguna__Ruins_Top__Save_Point => SpotId::Giguna_Breach__Peak__Save_Point,
+            SpotId::Giguna__Ruins_Top__Small_Ledge => SpotId::Giguna_Breach__Peak__Save_Point,
+            SpotId::Giguna__Ruins_Top__Switch => SpotId::Giguna_Breach__Peak__Save_Point,
+            SpotId::Giguna__Ruins_Top__Turret_Balcony_East => {
+                SpotId::Giguna_Breach__Peak__Save_Point
+            }
+            SpotId::Giguna__Ruins_Top__Turret_Balcony_West => {
+                SpotId::Giguna_Breach__Peak__Save_Point
+            }
+            SpotId::Giguna__Ruins_Top__Upper_Tunnel => SpotId::Giguna_Breach__Peak__Save_Point,
+            SpotId::Giguna__Ruins_Top__West_7 => SpotId::Giguna_Breach__Peak__Save_Point,
+            SpotId::Giguna__Ruins_Top__West_Door => SpotId::Giguna_Breach__Peak__Save_Point,
+            SpotId::Giguna__Ruins_Top__West_Pillar => SpotId::Giguna_Breach__Peak__Save_Point,
+            SpotId::Irikar__Sight_Room__Item_Pedestal => {
+                SpotId::Irikar_Breach__Save_Room__Save_Point
+            }
+            SpotId::Irikar__Sight_Room__Lower_Ledge => SpotId::Irikar_Breach__Save_Room__Save_Point,
+            SpotId::Irikar__Sight_Room__Portal => SpotId::Irikar_Breach__Save_Room__Save_Point,
+            SpotId::Irikar__Sight_Room__West_24 => SpotId::Irikar_Breach__Save_Room__Save_Point,
+            _ => SpotId::None,
+        }
+    }
 }
 
 pub mod flags {
@@ -396,81 +440,82 @@ pub mod flags {
             const GIGUNA__EAST_CAVERNS__CTX__COMBO_ENTERED = 0x100000;
             const GIGUNA__EAST_CAVERNS__CTX__UPPER_SUSAR = 0x200000;
             const GIGUNA__EAST_CAVERNS__CTX__MID_SUSAR = 0x400000;
-            const GIGUNA__GATEWAY__CTX__DOOR_OPENED = 0x800000;
-            const BOOMERANG_STEERING = 0x1000000;
-            const MAJOR_GLITCHES = 0x2000000;
-            const MINOR_GLITCHES = 0x4000000;
-            const AMAGI_DRAGON_EYE_PASSAGE = 0x8000000;
-            const AMAGI_STRONGHOLD_BOULDER_1 = 0x10000000;
-            const AMAGI_STRONGHOLD_BOULDER_2 = 0x20000000;
-            const AMAGI_STRONGHOLD_WALL_1 = 0x40000000;
-            const AMAGI_STRONGHOLD_WALL_2 = 0x80000000;
+            const GIGUNA__EAST_CAVERNS__CTX__LOWER_SUSAR = 0x800000;
+            const GIGUNA__GATEWAY__CTX__DOOR_OPENED = 0x1000000;
+            const BOOMERANG_STEERING = 0x2000000;
+            const MAJOR_GLITCHES = 0x4000000;
+            const MINOR_GLITCHES = 0x8000000;
+            const AMAGI_DRAGON_EYE_PASSAGE = 0x10000000;
+            const AMAGI_STRONGHOLD_BOULDER_1 = 0x20000000;
+            const AMAGI_STRONGHOLD_BOULDER_2 = 0x40000000;
+            const AMAGI_STRONGHOLD_WALL_1 = 0x80000000;
         }
     }
     bitflags! {
         #[derive(Copy, Clone, Debug, Default, PartialEq, Eq, Hash, Serialize, Deserialize)]
         pub struct ContextBits2 : u32 {
-            const AMAGI_WEST_LAKE_SURFACE_WALL = 0x1;
-            const AMASHILAMA = 0x2;
-            const ANUMAN = 0x4;
-            const APOCALYPSE_BOMB = 0x8;
-            const BOOMERANG = 0x10;
-            const BREACH_ATTRACTOR = 0x20;
-            const BREACH_SIGHT = 0x40;
-            const BRONZE_AXE = 0x80;
-            const BUILDING_OF_THE_SCHOOL = 0x100;
-            const COMMEMORATIVE_SPEECH = 0x200;
-            const COMPANIES_LAYOFF = 0x400;
-            const DEAR_ERNEST = 0x800;
-            const DEFEAT_EBIH_ALU = 0x1000;
-            const DEFEAT_MUS_A_M20 = 0x2000;
-            const DRONE_HOVER = 0x4000;
-            const EBIH_INTERCHANGE_BLOCK = 0x8000;
-            const EBIH_INTERCHANGE_GATE = 0x10000;
-            const EBIH_WASTELAND_DOOR = 0x20000;
-            const EBIH_WASTELAND_PASSAGE_H = 0x40000;
-            const EBIH_WATERFALL_BLOCK_LEFT = 0x80000;
-            const EBIH_WATERFALL_BLOCK_RIGHT = 0x100000;
-            const EBIH_WATERFALL_WALL = 0x200000;
-            const EBIH_WEST_BLOCK = 0x400000;
-            const EXIT_BREACH = 0x800000;
-            const FAST_TRAVEL = 0x1000000;
-            const GIGUNA_BOULDER = 0x2000000;
-            const GIGUNA_DUAL_PATH_SWITCH = 0x4000000;
-            const GIGUNA_GATEWAY_BLOCK = 0x8000000;
-            const GIGUNA_GATEWAY_GATE = 0x10000000;
-            const GIGUNA_GUBI = 0x20000000;
-            const GIGUNA_NORTHEAST_GATE = 0x40000000;
-            const HEALTH_NODE = 0x80000000;
+            const AMAGI_STRONGHOLD_WALL_2 = 0x1;
+            const AMAGI_WEST_LAKE_SURFACE_WALL = 0x2;
+            const AMASHILAMA = 0x4;
+            const ANUMAN = 0x8;
+            const APOCALYPSE_BOMB = 0x10;
+            const BOOMERANG = 0x20;
+            const BREACH_ATTRACTOR = 0x40;
+            const BREACH_SIGHT = 0x80;
+            const BRONZE_AXE = 0x100;
+            const BUILDING_OF_THE_SCHOOL = 0x200;
+            const COMMEMORATIVE_SPEECH = 0x400;
+            const COMPANIES_LAYOFF = 0x800;
+            const DEAR_ERNEST = 0x1000;
+            const DEFEAT_EBIH_ALU = 0x2000;
+            const DEFEAT_MUS_A_M20 = 0x4000;
+            const DRONE_HOVER = 0x8000;
+            const EBIH_INTERCHANGE_BLOCK = 0x10000;
+            const EBIH_INTERCHANGE_GATE = 0x20000;
+            const EBIH_WASTELAND_DOOR = 0x40000;
+            const EBIH_WASTELAND_PASSAGE_H = 0x80000;
+            const EBIH_WATERFALL_BLOCK_LEFT = 0x100000;
+            const EBIH_WATERFALL_BLOCK_RIGHT = 0x200000;
+            const EBIH_WATERFALL_WALL = 0x400000;
+            const EBIH_WEST_BLOCK = 0x800000;
+            const EXIT_BREACH = 0x1000000;
+            const FAST_TRAVEL = 0x2000000;
+            const GIGUNA_BOULDER = 0x4000000;
+            const GIGUNA_DUAL_PATH_SWITCH = 0x8000000;
+            const GIGUNA_GATEWAY_BLOCK = 0x10000000;
+            const GIGUNA_GATEWAY_GATE = 0x20000000;
+            const GIGUNA_GUBI = 0x40000000;
+            const GIGUNA_NORTHEAST_GATE = 0x80000000;
         }
     }
     bitflags! {
         #[derive(Copy, Clone, Debug, Default, PartialEq, Eq, Hash, Serialize, Deserialize)]
         pub struct ContextBits3 : u32 {
-            const HERETICS_TABLET = 0x1;
-            const ICE_AXE = 0x2;
-            const INFECTION_SPEED = 0x4;
-            const LEDGE_GRAB = 0x8;
-            const LETTER_FROM_TRACE = 0x10;
-            const MAP_17_10 = 0x20;
-            const MIST_UPGRADE = 0x40;
-            const NANITE_MIST = 0x80;
-            const POWER_MATRIX = 0x100;
-            const RECORD_LOSSES = 0x200;
-            const REMOTE_DRONE = 0x400;
-            const RESEARCHERS_MISSING = 0x800;
-            const SHOCKWAVE = 0x1000;
-            const SLINGSHOT_CHARGE = 0x2000;
-            const SLINGSHOT_HOOK = 0x4000;
-            const SLINGSHOT_WEAPON = 0x8000;
-            const STATION_POWER = 0x10000;
-            const SWITCH_36_11 = 0x20000;
-            const SWITCH_40_12 = 0x40000;
-            const TERMINAL_BREAKTHROUGH_1 = 0x80000;
-            const THE_IDEAL_KIENGIR = 0x100000;
-            const UNDER_SIEGE = 0x200000;
-            const UNDERWATER_MOVEMENT = 0x400000;
-            const WALL_CLIMB = 0x800000;
+            const HEALTH_NODE = 0x1;
+            const HERETICS_TABLET = 0x2;
+            const ICE_AXE = 0x4;
+            const INFECTION_SPEED = 0x8;
+            const LEDGE_GRAB = 0x10;
+            const LETTER_FROM_TRACE = 0x20;
+            const MAP_17_10 = 0x40;
+            const MIST_UPGRADE = 0x80;
+            const NANITE_MIST = 0x100;
+            const POWER_MATRIX = 0x200;
+            const RECORD_LOSSES = 0x400;
+            const REMOTE_DRONE = 0x800;
+            const RESEARCHERS_MISSING = 0x1000;
+            const SHOCKWAVE = 0x2000;
+            const SLINGSHOT_CHARGE = 0x4000;
+            const SLINGSHOT_HOOK = 0x8000;
+            const SLINGSHOT_WEAPON = 0x10000;
+            const STATION_POWER = 0x20000;
+            const SWITCH_36_11 = 0x40000;
+            const SWITCH_40_12 = 0x80000;
+            const TERMINAL_BREAKTHROUGH_1 = 0x100000;
+            const THE_IDEAL_KIENGIR = 0x200000;
+            const UNDER_SIEGE = 0x400000;
+            const UNDERWATER_MOVEMENT = 0x800000;
+            const WALL_CLIMB = 0x1000000;
         }
     }
 }
@@ -493,6 +538,7 @@ pub struct Context {
     pub refills: i8,
     pub mode: enums::Mode,
     pub save: SpotId,
+    pub breach_save: SpotId,
     pub indra: SpotId,
     pub last: SpotId,
     pub prev_area: AreaId,
@@ -526,6 +572,7 @@ impl Default for Context {
         Context {
             position: SpotId::Antarctica__West__Helipad,
             save: SpotId::Antarctica__West__Helipad,
+            breach_save: SpotId::None,
             indra: SpotId::None,
             last: SpotId::None,
             prev_area: AreaId::Antarctica__West,
@@ -583,8 +630,8 @@ impl context::Ctx for Context {
                 .cbits1
                 .contains(flags::ContextBits1::AMAGI_STRONGHOLD_WALL_1),
             Item::Amagi_Stronghold_Wall_2 => self
-                .cbits1
-                .contains(flags::ContextBits1::AMAGI_STRONGHOLD_WALL_2),
+                .cbits2
+                .contains(flags::ContextBits2::AMAGI_STRONGHOLD_WALL_2),
             Item::Amagi_West_Lake_Surface_Wall => self
                 .cbits2
                 .contains(flags::ContextBits2::AMAGI_WEST_LAKE_SURFACE_WALL),
@@ -648,7 +695,7 @@ impl context::Ctx for Context {
                 .cbits2
                 .contains(flags::ContextBits2::GIGUNA_NORTHEAST_GATE),
             Item::Health_Fragment => self.health_fragment >= 1,
-            Item::Health_Node => self.cbits2.contains(flags::ContextBits2::HEALTH_NODE),
+            Item::Health_Node => self.cbits3.contains(flags::ContextBits3::HEALTH_NODE),
             Item::Health_Upgrade => self.health_upgrade >= 1,
             Item::Heretics_Tablet => self.cbits3.contains(flags::ContextBits3::HERETICS_TABLET),
             Item::Ice_Axe => self.cbits3.contains(flags::ContextBits3::ICE_AXE),
@@ -709,8 +756,8 @@ impl context::Ctx for Context {
                 .contains(flags::ContextBits1::AMAGI_STRONGHOLD_WALL_1)
                 .into(),
             Item::Amagi_Stronghold_Wall_2 => self
-                .cbits1
-                .contains(flags::ContextBits1::AMAGI_STRONGHOLD_WALL_2)
+                .cbits2
+                .contains(flags::ContextBits2::AMAGI_STRONGHOLD_WALL_2)
                 .into(),
             Item::Amagi_West_Lake_Surface_Wall => self
                 .cbits2
@@ -829,8 +876,8 @@ impl context::Ctx for Context {
                 .into(),
             Item::Health_Fragment => self.health_fragment.into(),
             Item::Health_Node => self
-                .cbits2
-                .contains(flags::ContextBits2::HEALTH_NODE)
+                .cbits3
+                .contains(flags::ContextBits3::HEALTH_NODE)
                 .into(),
             Item::Health_Upgrade => self.health_upgrade.into(),
             Item::Heretics_Tablet => self
@@ -939,7 +986,7 @@ impl context::Ctx for Context {
                 self.cbits1.insert(flags::ContextBits1::AMAGI_STRONGHOLD_WALL_1);
             },
             Item::Amagi_Stronghold_Wall_2 => {
-                self.cbits1.insert(flags::ContextBits1::AMAGI_STRONGHOLD_WALL_2);
+                self.cbits2.insert(flags::ContextBits2::AMAGI_STRONGHOLD_WALL_2);
             },
             Item::Amagi_West_Lake_Surface_Wall => {
                 self.cbits2.insert(flags::ContextBits2::AMAGI_WEST_LAKE_SURFACE_WALL);
@@ -1050,7 +1097,7 @@ impl context::Ctx for Context {
                 self.health_fragment += 1;
             },
             Item::Health_Node => {
-                self.cbits2.insert(flags::ContextBits2::HEALTH_NODE);
+                self.cbits3.insert(flags::ContextBits3::HEALTH_NODE);
                 rules::action_energy__max_energy(self);
             },
             Item::Health_Upgrade => {
@@ -1179,8 +1226,8 @@ impl context::Ctx for Context {
                     .insert(flags::ContextBits1::AMAGI_STRONGHOLD_WALL_1);
             }
             Item::Amagi_Stronghold_Wall_2 => {
-                self.cbits1
-                    .insert(flags::ContextBits1::AMAGI_STRONGHOLD_WALL_2);
+                self.cbits2
+                    .insert(flags::ContextBits2::AMAGI_STRONGHOLD_WALL_2);
             }
             Item::Amagi_West_Lake_Surface_Wall => {
                 self.cbits2
@@ -1299,7 +1346,7 @@ impl context::Ctx for Context {
                 self.health_fragment += 1;
             }
             Item::Health_Node => {
-                self.cbits2.insert(flags::ContextBits2::HEALTH_NODE);
+                self.cbits3.insert(flags::ContextBits3::HEALTH_NODE);
             }
             Item::Health_Upgrade => {
                 self.health_upgrade += 1;
@@ -1454,6 +1501,15 @@ impl context::Ctx for Context {
                 self.set_save(SpotId::from_str(s).map_err(|e| format!("{}", e))?)
             }
             ("save", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("breach_save", Yaml::String(s)) => {
+                self.set_breach_save(SpotId::from_str(s).map_err(|e| format!("{}", e))?)
+            }
+            ("breach_save", _) => {
                 return Err(format!(
                     "Key {:?} has value of disallowed type: {:?}",
                     ckey, cval
@@ -1693,6 +1749,15 @@ impl context::Ctx for Context {
                     ckey, cval
                 ));
             }
+            ("giguna__east_caverns__ctx__lower_susar", Yaml::Boolean(b)) => {
+                self.set_giguna__east_caverns__ctx__lower_susar(*b)
+            }
+            ("giguna__east_caverns__ctx__lower_susar", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
             ("giguna__gateway__ctx__door_opened", Yaml::Boolean(b)) => {
                 self.set_giguna__gateway__ctx__door_opened(*b)
             }
@@ -1781,6 +1846,15 @@ impl context::Ctx for Context {
                 Expectation::Save(SpotId::from_str(s).map_err(|e| format!("{}", e))?)
             }
             ("save", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("breach_save", Yaml::String(s)) => {
+                Expectation::BreachSave(SpotId::from_str(s).map_err(|e| format!("{}", e))?)
+            }
+            ("breach_save", _) => {
                 return Err(format!(
                     "Key {:?} has value of disallowed type: {:?}",
                     ckey, cval
@@ -2015,6 +2089,15 @@ impl context::Ctx for Context {
                 Expectation::GigunaEastCavernsCtxMidSusar(*b)
             }
             ("giguna__east_caverns__ctx__mid_susar", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("giguna__east_caverns__ctx__lower_susar", Yaml::Boolean(b)) => {
+                Expectation::GigunaEastCavernsCtxLowerSusar(*b)
+            }
+            ("giguna__east_caverns__ctx__lower_susar", _) => {
                 return Err(format!(
                     "Key {:?} has value of disallowed type: {:?}",
                     ckey, cval
@@ -2714,6 +2797,12 @@ impl context::Ctx for Context {
                         errs.push(format!("Expected {} = {}, got: {}", "save", e, v));
                     }
                 }
+                Expectation::BreachSave(e) => {
+                    let v = self.breach_save();
+                    if v != *e {
+                        errs.push(format!("Expected {} = {}, got: {}", "breach_save", e, v));
+                    }
+                }
                 Expectation::Indra(e) => {
                     let v = self.indra();
                     if v != *e {
@@ -2936,6 +3025,15 @@ impl context::Ctx for Context {
                         errs.push(format!(
                             "Expected {} = {}, got: {}",
                             "giguna__east_caverns__ctx__mid_susar", e, v
+                        ));
+                    }
+                }
+                Expectation::GigunaEastCavernsCtxLowerSusar(e) => {
+                    let v = self.giguna__east_caverns__ctx__lower_susar();
+                    if v != *e {
+                        errs.push(format!(
+                            "Expected {} = {}, got: {}",
+                            "giguna__east_caverns__ctx__lower_susar", e, v
                         ));
                     }
                 }
@@ -3960,6 +4058,8 @@ impl context::Ctx for Context {
         self.cbits1
             .remove(flags::ContextBits1::GIGUNA__EAST_CAVERNS__CTX__MID_SUSAR);
         self.cbits1
+            .remove(flags::ContextBits1::GIGUNA__EAST_CAVERNS__CTX__LOWER_SUSAR);
+        self.cbits1
             .remove(flags::ContextBits1::GIGUNA__GATEWAY__CTX__DOOR_OPENED);
     }
 
@@ -4003,6 +4103,8 @@ impl context::Ctx for Context {
                     .remove(flags::ContextBits1::GIGUNA__EAST_CAVERNS__CTX__UPPER_SUSAR);
                 self.cbits1
                     .remove(flags::ContextBits1::GIGUNA__EAST_CAVERNS__CTX__MID_SUSAR);
+                self.cbits1
+                    .remove(flags::ContextBits1::GIGUNA__EAST_CAVERNS__CTX__LOWER_SUSAR);
             }
             AreaId::Giguna__Gateway => {
                 self.cbits1
@@ -4129,6 +4231,12 @@ impl context::Ctx for Context {
         }
         if old.save != self.save {
             list.push(format!("save: {:?} → {:?}", old.save, self.save));
+        }
+        if old.breach_save != self.breach_save {
+            list.push(format!(
+                "breach_save: {:?} → {:?}",
+                old.breach_save, self.breach_save
+            ));
         }
         if old.indra != self.indra {
             list.push(format!("indra: {:?} → {:?}", old.indra, self.indra));
@@ -4487,6 +4595,18 @@ impl context::Ctx for Context {
         }
         let n = self
             .cbits1
+            .contains(flags::ContextBits1::GIGUNA__EAST_CAVERNS__CTX__LOWER_SUSAR);
+        let p = old
+            .cbits1
+            .contains(flags::ContextBits1::GIGUNA__EAST_CAVERNS__CTX__LOWER_SUSAR);
+        if n != p {
+            list.push(format!(
+                "{}GIGUNA__EAST_CAVERNS__CTX__LOWER_SUSAR",
+                if n { "+" } else { "-" }
+            ));
+        }
+        let n = self
+            .cbits1
             .contains(flags::ContextBits1::GIGUNA__GATEWAY__CTX__DOOR_OPENED);
         let p = old
             .cbits1
@@ -4563,11 +4683,11 @@ impl context::Ctx for Context {
             ));
         }
         let n = self
-            .cbits1
-            .contains(flags::ContextBits1::AMAGI_STRONGHOLD_WALL_2);
+            .cbits2
+            .contains(flags::ContextBits2::AMAGI_STRONGHOLD_WALL_2);
         let p = old
-            .cbits1
-            .contains(flags::ContextBits1::AMAGI_STRONGHOLD_WALL_2);
+            .cbits2
+            .contains(flags::ContextBits2::AMAGI_STRONGHOLD_WALL_2);
         if n != p {
             list.push(format!(
                 "{}AMAGI_STRONGHOLD_WALL_2",
@@ -4812,8 +4932,8 @@ impl context::Ctx for Context {
                 if n { "+" } else { "-" }
             ));
         }
-        let n = self.cbits2.contains(flags::ContextBits2::HEALTH_NODE);
-        let p = old.cbits2.contains(flags::ContextBits2::HEALTH_NODE);
+        let n = self.cbits3.contains(flags::ContextBits3::HEALTH_NODE);
+        let p = old.cbits3.contains(flags::ContextBits3::HEALTH_NODE);
         if n != p {
             list.push(format!("{}HEALTH_NODE", if n { "+" } else { "-" }));
         }
@@ -5065,6 +5185,18 @@ impl Context {
     }
     pub fn set_save(&mut self, val: SpotId) {
         self.save = val;
+    }
+    pub fn breach_save(&self) -> SpotId {
+        match self.position {
+            _ => match get_area(self.position) {
+                _ => match get_region(self.position) {
+                    _ => self.breach_save,
+                },
+            },
+        }
+    }
+    pub fn set_breach_save(&mut self, val: SpotId) {
+        self.breach_save = val;
     }
     pub fn indra(&self) -> SpotId {
         match self.position {
@@ -5484,6 +5616,23 @@ impl Context {
     pub fn set_giguna__east_caverns__ctx__mid_susar(&mut self, val: bool) {
         self.cbits1.set(
             flags::ContextBits1::GIGUNA__EAST_CAVERNS__CTX__MID_SUSAR,
+            val,
+        );
+    }
+    pub fn giguna__east_caverns__ctx__lower_susar(&self) -> bool {
+        match self.position {
+            _ => match get_area(self.position) {
+                _ => match get_region(self.position) {
+                    _ => self
+                        .cbits1
+                        .contains(flags::ContextBits1::GIGUNA__EAST_CAVERNS__CTX__LOWER_SUSAR),
+                },
+            },
+        }
+    }
+    pub fn set_giguna__east_caverns__ctx__lower_susar(&mut self, val: bool) {
+        self.cbits1.set(
+            flags::ContextBits1::GIGUNA__EAST_CAVERNS__CTX__LOWER_SUSAR,
             val,
         );
     }

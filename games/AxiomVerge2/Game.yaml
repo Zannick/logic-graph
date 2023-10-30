@@ -14,6 +14,7 @@ context:
 start:
   position: Antarctica > West > Helipad
   save: Antarctica > West > Helipad
+  breach_save: SpotId::None
   # By itself 'None' would be interpreted as a string,
   # which becomes its own independent per-variable enum type.
   indra: SpotId::None
@@ -25,7 +26,7 @@ data:
   breach: false
   water: false
   flipside: SpotId::None
-
+  portal_default: SpotId::None
 
 # TODO: the win condition should be an item Victory,
 # whose requirement is $objective corresponding to the current objective.
@@ -128,8 +129,14 @@ warps:
     loads: true
   drone_save:
     time: 12
-    req: NOT WITHIN `Menu` and ^mode == 'drone'
+    req: NOT WITHIN `Menu` and not ^breach and ^mode == 'drone'
     to: ^save
+    after: ^energy = $max_energy
+    loads: true
+  breach_save:
+    time: 12
+    req: NOT WITHIN `Menu` and ^breach
+    to: ^breach_save
     after: ^energy = $max_energy
     loads: true
   menu:
@@ -148,7 +155,10 @@ warps:
     time: 3
     req: ^breach and Exit_Breach and (^flipside NOT WITHIN $default)
     to: ^flipside
+    after: $clear_breach_save
+    # Instead of making this base movement, anywhere it's strictly required needs a real Exit
     tags: [exit]
+  # Fast travel times are slightly different when travelling within an area
   fast_travel_17_10:
     time: 12
     req: NOT WITHIN `Menu` and NOT ^breach and Map_17_10 and Fast_Travel
@@ -252,6 +262,13 @@ helpers:
   # Save is updated when you traverse a portal
   # We could probably rename this to be clearer what it's for
   $portal:action(newsave:SpotId): ^save = ^newsave
+  # Breach portals are tied to particular save points in the breach
+  # The area with the portal should define the data portal_default to be that point,
+  # and the Enter action should include $portal_save_update in the `do` effect
+  # (since it needs to happen on the old position).
+  # TODO: Is this true of portals leaving the breach?
+  $portal_save_update:action: IF (^breach) { ^save = ^portal_default; } ELSE { ^breach_save = ^portal_default; }
+  $clear_breach_save:action: ^breach_save = $default
 
 collect:
   Amashilama: ^save = `Glacier > Revival > Save Point`

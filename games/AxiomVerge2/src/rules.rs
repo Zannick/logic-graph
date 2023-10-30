@@ -448,6 +448,24 @@ pub fn access_giguna__east_caverns__arc_passage__ex__hidden_passage_west_2__req(
     // $hook and ^_combo_entered
     (helper__hook!(ctx) && ctx.giguna__east_caverns__ctx__combo_entered())
 }
+pub fn access_giguna__east_caverns__lower_susar__caught__req(ctx: &Context) -> bool {
+    // not ^_lower_susar
+    !ctx.giguna__east_caverns__ctx__lower_susar()
+}
+pub fn access_giguna__east_caverns__lower_susar__ex__east_grass_1__req(ctx: &Context) -> bool {
+    // ^_lower_susar
+    ctx.giguna__east_caverns__ctx__lower_susar()
+}
+pub fn access_giguna__east_caverns__lower_susar__ex__under_lower_ledge_1__req(
+    ctx: &Context,
+) -> bool {
+    // ^_lower_susar
+    ctx.giguna__east_caverns__ctx__lower_susar()
+}
+pub fn access_giguna__east_caverns__lower_susar__hack__req(ctx: &Context) -> bool {
+    // not ^_lower_susar and $allegiance1
+    (!ctx.giguna__east_caverns__ctx__lower_susar() && helper__allegiance1!(ctx))
+}
 pub fn access_giguna__east_caverns__mid_susar__caught__req(ctx: &Context) -> bool {
     // not ^_mid_susar
     !ctx.giguna__east_caverns__ctx__mid_susar()
@@ -955,6 +973,13 @@ pub fn access_not_within_menu_and_amashilama_and_mode__drone(ctx: &Context) -> b
     }) && ctx.has(Item::Amashilama))
         && ctx.mode() != enums::Mode::Drone)
 }
+pub fn access_not_within_menu_and_breach(ctx: &Context) -> bool {
+    // NOT WITHIN `Menu` and ^breach
+    (!(match get_region(ctx.position()) {
+        RegionId::Menu => true,
+        _ => false,
+    }) && data::breach(ctx.position()))
+}
 pub fn access_not_within_menu_and_can_deploy(ctx: &Context) -> bool {
     // NOT WITHIN `Menu` and $can_deploy
     (!(match get_region(ctx.position()) {
@@ -968,13 +993,6 @@ pub fn access_not_within_menu_and_flasks__0(ctx: &Context) -> bool {
         RegionId::Menu => true,
         _ => false,
     }) && Into::<i32>::into(ctx.flasks()) > 0.into())
-}
-pub fn access_not_within_menu_and_mode__drone(ctx: &Context) -> bool {
-    // NOT WITHIN `Menu` and ^mode == 'drone'
-    (!(match get_region(ctx.position()) {
-        RegionId::Menu => true,
-        _ => false,
-    }) && ctx.mode() == enums::Mode::Drone)
 }
 pub fn access_not_within_menu_and_not_breach_and_can_recall(ctx: &Context) -> bool {
     // NOT WITHIN `Menu` and not ^breach and $can_recall
@@ -992,6 +1010,14 @@ pub fn access_not_within_menu_and_not_breach_and_map_17_10_and_fast_travel(ctx: 
     }) && !data::breach(ctx.position()))
         && ctx.has(Item::Map_17_10))
         && ctx.has(Item::Fast_Travel))
+}
+pub fn access_not_within_menu_and_not_breach_and_mode__drone(ctx: &Context) -> bool {
+    // NOT WITHIN `Menu` and not ^breach and ^mode == 'drone'
+    ((!(match get_region(ctx.position()) {
+        RegionId::Menu => true,
+        _ => false,
+    }) && !data::breach(ctx.position()))
+        && ctx.mode() == enums::Mode::Drone)
 }
 pub fn access_offset(ctx: &Context) -> bool {
     // $offset
@@ -1094,6 +1120,10 @@ pub fn access_within_menu(ctx: &Context) -> bool {
 pub fn action_amagi__main_area__carving__key_combo__do(ctx: &mut Context) {
     // ^_combo = true
     ctx.set_amagi__main_area__ctx__combo(true);
+}
+pub fn action_clear_breach_save(ctx: &mut Context) {
+    // $clear_breach_save
+    helper__clear_breach_save!(ctx);
 }
 pub fn action_deploy_drone(ctx: &mut Context) {
     // $deploy_drone
@@ -1233,6 +1263,14 @@ pub fn action_giguna__clouds__platform_start__hack_deploy_ride_to_portal__do(ctx
     ctx.set_giguna__clouds__ctx__platform_and_portal(true);
     helper__deploy_drone_and_move!(ctx, SpotId::Giguna__Clouds__Platform_Stop);
 }
+pub fn action_giguna__east_caverns__lower_susar__caught__do(ctx: &mut Context) {
+    // ^_lower_susar = true
+    ctx.set_giguna__east_caverns__ctx__lower_susar(true);
+}
+pub fn action_giguna__east_caverns__lower_susar__hack__do(ctx: &mut Context) {
+    // ^_lower_susar = true
+    ctx.set_giguna__east_caverns__ctx__lower_susar(true);
+}
 pub fn action_giguna__east_caverns__mid_susar__caught__do(ctx: &mut Context) {
     // ^_mid_susar = true
     ctx.set_giguna__east_caverns__ctx__mid_susar(true);
@@ -1350,9 +1388,9 @@ pub fn action_mode__indra(ctx: &mut Context) {
     // ^mode = 'Indra'
     ctx.set_mode(enums::Mode::Indra);
 }
-pub fn action_portal__flipside(ctx: &mut Context) {
-    // $portal(^flipside)
-    helper__portal!(ctx, data::flipside(ctx.position()));
+pub fn action_portal_save_update(ctx: &mut Context) {
+    // $portal_save_update
+    helper__portal_save_update!(ctx);
 }
 pub fn action_refills__1(ctx: &mut Context) {
     // ^refills += 1
