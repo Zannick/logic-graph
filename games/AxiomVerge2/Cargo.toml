@@ -17,6 +17,7 @@ analyzer = { path = "../../analyzer" }
 bitflags = { version = "2.*", features = ["serde"] }
 clap = { version = "4.*", features = ["derive"] }
 enum-map = { version = "2.5", features = ["serde"] }
+lazy_static = "*"
 serde = { version = "1.0", features = ["derive"] }
 serde_repr = "*"
 yaml-rust = "*"

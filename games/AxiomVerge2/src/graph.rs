@@ -14,6 +14,7 @@ use analyzer::condense::{condense_graph, CondensedEdge};
 use analyzer::context::Ctx;
 use analyzer::world;
 use enum_map::{enum_map, Enum, EnumMap};
+use lazy_static::lazy_static;
 use std::ops::Range;
 use std::option::Option;
 
@@ -3508,7 +3509,7 @@ impl world::Action for Action {
             ActionId::Ebih__Drone_Room__Moving_Platform__Throw_Drone => {
                 SpotId::Ebih__Drone_Room__East_4
             }
-            ActionId::Giguna_Breach__Peak__Portal__Portal => data::flipside(ctx.position()),
+            ActionId::Giguna_Breach__Peak__Portal__Portal => SpotId::Giguna__Ruins_Top__Save_Point,
             ActionId::Giguna__Giguna_Northeast__Save_Point__Save_Recall => ctx.indra(),
             ActionId::Giguna__Giguna_Northeast__Gate_Left__Throw_Drone => {
                 SpotId::Giguna__Giguna_Northeast__Gate_Vent
@@ -3522,7 +3523,9 @@ impl world::Action for Action {
             ActionId::Giguna__Giguna_Base__Stone_Knob__Throw_Drone => {
                 SpotId::Giguna__Giguna_Base__Upper_Cliff
             }
-            ActionId::Giguna__Ruins_Top__Portal__Enter_Portal => data::flipside(ctx.position()),
+            ActionId::Giguna__Ruins_Top__Portal__Enter_Portal => {
+                SpotId::Giguna_Breach__Peak__Save_Point
+            }
             ActionId::Giguna__Ruins_Top__Turret_Balcony_West__Throw_Drone_onto_Tower => {
                 SpotId::Giguna__Ruins_West__Rooftop_East_Edge
             }
@@ -3532,7 +3535,9 @@ impl world::Action for Action {
             ActionId::Giguna__Clouds__Platform_Start__Hack_Deploy_Ride_to_Portal => {
                 SpotId::Giguna__Clouds__Platform_Stop
             }
-            ActionId::Irikar__Sight_Room__Portal__Enter_Portal => data::flipside(ctx.position()),
+            ActionId::Irikar__Sight_Room__Portal__Enter_Portal => {
+                SpotId::Irikar_Breach__Save_Room__Save_Point
+            }
             _ => SpotId::None,
         }
     }
@@ -3633,8 +3638,6 @@ pub struct Spot {
     pub locations: Range<usize>,
     pub exits: Range<usize>,
     pub actions: Range<usize>,
-    // spots don't reference their area, so we index these by spot
-    pub area_spots: Range<usize>,
 }
 
 static RAW_SPOTS: [SpotId; 836] = [
@@ -4476,6 +4479,380 @@ static RAW_SPOTS: [SpotId; 836] = [
     SpotId::Menu__Upgrade_Menu__Physiology,
 ];
 
+lazy_static! {
+    // Using get_area, we can get the nearby spots by indexing into the spot lists
+    static ref RAW_AREA_SPOT_RANGES: EnumMap<AreaId, Range<usize>> = enum_map! {
+        AreaId::Amagi__Cave_Behind_Waterfall => Range {
+            start: SpotId::Amagi__Cave_Behind_Waterfall__Bottom.into_usize(),
+            end: SpotId::Amagi__Cave_Behind_Waterfall__Top.into_usize() + 1,
+        },
+        AreaId::Amagi__Grid_31_19 => Range {
+            start: SpotId::Amagi__Grid_31_19__East.into_usize(),
+            end: SpotId::Amagi__Grid_31_19__West.into_usize() + 1,
+        },
+        AreaId::Amagi__Liru_Room => Range {
+            start: SpotId::Amagi__Liru_Room__Bottom.into_usize(),
+            end: SpotId::Amagi__Liru_Room__West_20.into_usize() + 1,
+        },
+        AreaId::Amagi__Main_Area => Range {
+            start: SpotId::Amagi__Main_Area__Broken_Wall.into_usize(),
+            end: SpotId::Amagi__Main_Area__West_Side.into_usize() + 1,
+        },
+        AreaId::Amagi__West_Lake => Range {
+            start: SpotId::Amagi__West_Lake__Cavern_Back_Teeth.into_usize(),
+            end: SpotId::Amagi__West_Lake__West_Shore.into_usize() + 1,
+        },
+        AreaId::Antarctica__Building_1E => Range {
+            start: SpotId::Antarctica__Building_1E__Connector.into_usize(),
+            end: SpotId::Antarctica__Building_1E__East_Entry.into_usize() + 1,
+        },
+        AreaId::Antarctica__Building_1W => Range {
+            start: SpotId::Antarctica__Building_1W__Connector.into_usize(),
+            end: SpotId::Antarctica__Building_1W__West_Entry.into_usize() + 1,
+        },
+        AreaId::Antarctica__Building_2 => Range {
+            start: SpotId::Antarctica__Building_2__Behind_Boxes.into_usize(),
+            end: SpotId::Antarctica__Building_2__Upper_Door.into_usize() + 1,
+        },
+        AreaId::Antarctica__East => Range {
+            start: SpotId::Antarctica__East__Building_1_Entry.into_usize(),
+            end: SpotId::Antarctica__East__Save_Point.into_usize() + 1,
+        },
+        AreaId::Antarctica__Freight_Elevator => Range {
+            start: SpotId::Antarctica__Freight_Elevator__Controls.into_usize(),
+            end: SpotId::Antarctica__Freight_Elevator__Left.into_usize() + 1,
+        },
+        AreaId::Antarctica__Power_Room => Range {
+            start: SpotId::Antarctica__Power_Room__Entry.into_usize(),
+            end: SpotId::Antarctica__Power_Room__Switch.into_usize() + 1,
+        },
+        AreaId::Antarctica__Shed => Range {
+            start: SpotId::Antarctica__Shed__Interior.into_usize(),
+            end: SpotId::Antarctica__Shed__Interior.into_usize() + 1,
+        },
+        AreaId::Antarctica__Top => Range {
+            start: SpotId::Antarctica__Top__Power_Entry.into_usize(),
+            end: SpotId::Antarctica__Top__Power_Entry.into_usize() + 1,
+        },
+        AreaId::Antarctica__West => Range {
+            start: SpotId::Antarctica__West__Boxes.into_usize(),
+            end: SpotId::Antarctica__West__Shed_Entry.into_usize() + 1,
+        },
+        AreaId::Ebih__Base_Camp => Range {
+            start: SpotId::Ebih__Base_Camp__Behind_Vehicle.into_usize(),
+            end: SpotId::Ebih__Base_Camp__West_Midair.into_usize() + 1,
+        },
+        AreaId::Ebih__Boss_Room => Range {
+            start: SpotId::Ebih__Boss_Room__Boss.into_usize(),
+            end: SpotId::Ebih__Boss_Room__West_6.into_usize() + 1,
+        },
+        AreaId::Ebih__Building_Interior => Range {
+            start: SpotId::Ebih__Building_Interior__Corner.into_usize(),
+            end: SpotId::Ebih__Building_Interior__Entry.into_usize() + 1,
+        },
+        AreaId::Ebih__Bunker_Interior => Range {
+            start: SpotId::Ebih__Bunker_Interior__Desk.into_usize(),
+            end: SpotId::Ebih__Bunker_Interior__Entry.into_usize() + 1,
+        },
+        AreaId::Ebih__By_Garage => Range {
+            start: SpotId::Ebih__By_Garage__Crawlspace.into_usize(),
+            end: SpotId::Ebih__By_Garage__West_Bush.into_usize() + 1,
+        },
+        AreaId::Ebih__Cave => Range {
+            start: SpotId::Ebih__Cave__Entry.into_usize(),
+            end: SpotId::Ebih__Cave__Entry.into_usize() + 1,
+        },
+        AreaId::Ebih__Drone_Room => Range {
+            start: SpotId::Ebih__Drone_Room__East_4.into_usize(),
+            end: SpotId::Ebih__Drone_Room__West_6.into_usize() + 1,
+        },
+        AreaId::Ebih__Ebih_East => Range {
+            start: SpotId::Ebih__Ebih_East__Corner.into_usize(),
+            end: SpotId::Ebih__Ebih_East__West_8.into_usize() + 1,
+        },
+        AreaId::Ebih__Ebih_West => Range {
+            start: SpotId::Ebih__Ebih_West__Above_Alcove.into_usize(),
+            end: SpotId::Ebih__Ebih_West__West_High_Cliff.into_usize() + 1,
+        },
+        AreaId::Ebih__Garage => Range {
+            start: SpotId::Ebih__Garage__Boxes.into_usize(),
+            end: SpotId::Ebih__Garage__Entry.into_usize() + 1,
+        },
+        AreaId::Ebih__Gem_Room => Range {
+            start: SpotId::Ebih__Gem_Room__West_13.into_usize(),
+            end: SpotId::Ebih__Gem_Room__West_13.into_usize() + 1,
+        },
+        AreaId::Ebih__Grid_21_2_6 => Range {
+            start: SpotId::Ebih__Grid_21_2_6__East_6.into_usize(),
+            end: SpotId::Ebih__Grid_21_2_6__West_6.into_usize() + 1,
+        },
+        AreaId::Ebih__Grid_25_10_12 => Range {
+            start: SpotId::Ebih__Grid_25_10_12__Below_Bush.into_usize(),
+            end: SpotId::Ebih__Grid_25_10_12__West_12.into_usize() + 1,
+        },
+        AreaId::Ebih__Grid_25_2_6 => Range {
+            start: SpotId::Ebih__Grid_25_2_6__Pit.into_usize(),
+            end: SpotId::Ebih__Grid_25_2_6__West_4.into_usize() + 1,
+        },
+        AreaId::Ebih__Grid_26_10_11 => Range {
+            start: SpotId::Ebih__Grid_26_10_11__Cliff.into_usize(),
+            end: SpotId::Ebih__Grid_26_10_11__West_11.into_usize() + 1,
+        },
+        AreaId::Ebih__Observation_Tower_Room => Range {
+            start: SpotId::Ebih__Observation_Tower_Room__Cliff.into_usize(),
+            end: SpotId::Ebih__Observation_Tower_Room__West_9.into_usize() + 1,
+        },
+        AreaId::Ebih__Tent_Interior => Range {
+            start: SpotId::Ebih__Tent_Interior__Desk.into_usize(),
+            end: SpotId::Ebih__Tent_Interior__Entry.into_usize() + 1,
+        },
+        AreaId::Ebih__Vertical_Interchange => Range {
+            start: SpotId::Ebih__Vertical_Interchange__Below_Door.into_usize(),
+            end: SpotId::Ebih__Vertical_Interchange__West_13.into_usize() + 1,
+        },
+        AreaId::Ebih__Waterfall => Range {
+            start: SpotId::Ebih__Waterfall__Alcove.into_usize(),
+            end: SpotId::Ebih__Waterfall__West_Main_Path.into_usize() + 1,
+        },
+        AreaId::Giguna_Breach__Antechamber => Range {
+            start: SpotId::Giguna_Breach__Antechamber__North.into_usize(),
+            end: SpotId::Giguna_Breach__Antechamber__North.into_usize() + 1,
+        },
+        AreaId::Giguna_Breach__Ascent => Range {
+            start: SpotId::Giguna_Breach__Ascent__Bottom.into_usize(),
+            end: SpotId::Giguna_Breach__Ascent__West_9.into_usize() + 1,
+        },
+        AreaId::Giguna_Breach__Below_Chimney => Range {
+            start: SpotId::Giguna_Breach__Below_Chimney__Cubby_Entrance.into_usize(),
+            end: SpotId::Giguna_Breach__Below_Chimney__West_Passage.into_usize() + 1,
+        },
+        AreaId::Giguna_Breach__Central => Range {
+            start: SpotId::Giguna_Breach__Central__East_9.into_usize(),
+            end: SpotId::Giguna_Breach__Central__West_Statue.into_usize() + 1,
+        },
+        AreaId::Giguna_Breach__Chimney => Range {
+            start: SpotId::Giguna_Breach__Chimney__Cache.into_usize(),
+            end: SpotId::Giguna_Breach__Chimney__Top.into_usize() + 1,
+        },
+        AreaId::Giguna_Breach__Cubby => Range {
+            start: SpotId::Giguna_Breach__Cubby__Entrance.into_usize(),
+            end: SpotId::Giguna_Breach__Cubby__Rocks.into_usize() + 1,
+        },
+        AreaId::Giguna_Breach__Fire_Room => Range {
+            start: SpotId::Giguna_Breach__Fire_Room__Cuesta.into_usize(),
+            end: SpotId::Giguna_Breach__Fire_Room__West_Plateau.into_usize() + 1,
+        },
+        AreaId::Giguna_Breach__Grid_14_10_11 => Range {
+            start: SpotId::Giguna_Breach__Grid_14_10_11__East_10.into_usize(),
+            end: SpotId::Giguna_Breach__Grid_14_10_11__South.into_usize() + 1,
+        },
+        AreaId::Giguna_Breach__Peak => Range {
+            start: SpotId::Giguna_Breach__Peak__Column.into_usize(),
+            end: SpotId::Giguna_Breach__Peak__West_7.into_usize() + 1,
+        },
+        AreaId::Giguna_Breach__Pink_Clouds => Range {
+            start: SpotId::Giguna_Breach__Pink_Clouds__Corner.into_usize(),
+            end: SpotId::Giguna_Breach__Pink_Clouds__Quick_Entry.into_usize() + 1,
+        },
+        AreaId::Giguna_Breach__Robopede => Range {
+            start: SpotId::Giguna_Breach__Robopede__Center.into_usize(),
+            end: SpotId::Giguna_Breach__Robopede__West.into_usize() + 1,
+        },
+        AreaId::Giguna_Breach__Slingshot => Range {
+            start: SpotId::Giguna_Breach__Slingshot__Column.into_usize(),
+            end: SpotId::Giguna_Breach__Slingshot__West.into_usize() + 1,
+        },
+        AreaId::Giguna_Breach__SW_Save => Range {
+            start: SpotId::Giguna_Breach__SW_Save__East_12.into_usize(),
+            end: SpotId::Giguna_Breach__SW_Save__West_11.into_usize() + 1,
+        },
+        AreaId::Giguna__Antechamber => Range {
+            start: SpotId::Giguna__Antechamber__Bottom.into_usize(),
+            end: SpotId::Giguna__Antechamber__West_15.into_usize() + 1,
+        },
+        AreaId::Giguna__Building_Interior => Range {
+            start: SpotId::Giguna__Building_Interior__Bookshelf.into_usize(),
+            end: SpotId::Giguna__Building_Interior__Entry.into_usize() + 1,
+        },
+        AreaId::Giguna__Carnelian => Range {
+            start: SpotId::Giguna__Carnelian__Door.into_usize(),
+            end: SpotId::Giguna__Carnelian__West_Ledge.into_usize() + 1,
+        },
+        AreaId::Giguna__Clouds => Range {
+            start: SpotId::Giguna__Clouds__Cache.into_usize(),
+            end: SpotId::Giguna__Clouds__Straight_Down.into_usize() + 1,
+        },
+        AreaId::Giguna__Dual_Path => Range {
+            start: SpotId::Giguna__Dual_Path__Base_of_Wall.into_usize(),
+            end: SpotId::Giguna__Dual_Path__West_Slope.into_usize() + 1,
+        },
+        AreaId::Giguna__East_Caverns => Range {
+            start: SpotId::Giguna__East_Caverns__Arc_Ledge.into_usize(),
+            end: SpotId::Giguna__East_Caverns__West_Grass.into_usize() + 1,
+        },
+        AreaId::Giguna__Far_Corner => Range {
+            start: SpotId::Giguna__Far_Corner__East_13.into_usize(),
+            end: SpotId::Giguna__Far_Corner__South.into_usize() + 1,
+        },
+        AreaId::Giguna__Gateway => Range {
+            start: SpotId::Giguna__Gateway__Block_Left.into_usize(),
+            end: SpotId::Giguna__Gateway__West_19.into_usize() + 1,
+        },
+        AreaId::Giguna__Giguna_Base => Range {
+            start: SpotId::Giguna__Giguna_Base__Below_Gate.into_usize(),
+            end: SpotId::Giguna__Giguna_Base__West_Grate.into_usize() + 1,
+        },
+        AreaId::Giguna__Giguna_Northeast => Range {
+            start: SpotId::Giguna__Giguna_Northeast__Crow_Eating.into_usize(),
+            end: SpotId::Giguna__Giguna_Northeast__West_9.into_usize() + 1,
+        },
+        AreaId::Giguna__Gubi_Lair => Range {
+            start: SpotId::Giguna__Gubi_Lair__Center_East_Sapling.into_usize(),
+            end: SpotId::Giguna__Gubi_Lair__West_Brickwork.into_usize() + 1,
+        },
+        AreaId::Giguna__Hard_Rock => Range {
+            start: SpotId::Giguna__Hard_Rock__East_17.into_usize(),
+            end: SpotId::Giguna__Hard_Rock__West_17.into_usize() + 1,
+        },
+        AreaId::Giguna__Helipad => Range {
+            start: SpotId::Giguna__Helipad__East_15.into_usize(),
+            end: SpotId::Giguna__Helipad__Wall_Top.into_usize() + 1,
+        },
+        AreaId::Giguna__Labyrinth_East => Range {
+            start: SpotId::Giguna__Labyrinth_East__East_19.into_usize(),
+            end: SpotId::Giguna__Labyrinth_East__East_19.into_usize() + 1,
+        },
+        AreaId::Giguna__Lamassu => Range {
+            start: SpotId::Giguna__Lamassu__Broken_Pillar.into_usize(),
+            end: SpotId::Giguna__Lamassu__Wingtip.into_usize() + 1,
+        },
+        AreaId::Giguna__Ruins_Center => Range {
+            start: SpotId::Giguna__Ruins_Center__Center_Top.into_usize(),
+            end: SpotId::Giguna__Ruins_Center__West_Platform_Right.into_usize() + 1,
+        },
+        AreaId::Giguna__Ruins_East => Range {
+            start: SpotId::Giguna__Ruins_East__Bottom_Rock.into_usize(),
+            end: SpotId::Giguna__Ruins_East__West_9.into_usize() + 1,
+        },
+        AreaId::Giguna__Ruins_Top => Range {
+            start: SpotId::Giguna__Ruins_Top__East_7.into_usize(),
+            end: SpotId::Giguna__Ruins_Top__West_Pillar.into_usize() + 1,
+        },
+        AreaId::Giguna__Ruins_West => Range {
+            start: SpotId::Giguna__Ruins_West__East_7.into_usize(),
+            end: SpotId::Giguna__Ruins_West__West_7.into_usize() + 1,
+        },
+        AreaId::Giguna__Vertical_Interchange => Range {
+            start: SpotId::Giguna__Vertical_Interchange__Dead_end.into_usize(),
+            end: SpotId::Giguna__Vertical_Interchange__West_19.into_usize() + 1,
+        },
+        AreaId::Giguna__Wasteland => Range {
+            start: SpotId::Giguna__Wasteland__Bluff_by_Door.into_usize(),
+            end: SpotId::Giguna__Wasteland__Westward_Hill.into_usize() + 1,
+        },
+        AreaId::Giguna__West_Caverns => Range {
+            start: SpotId::Giguna__West_Caverns__Bush.into_usize(),
+            end: SpotId::Giguna__West_Caverns__West_13.into_usize() + 1,
+        },
+        AreaId::Giguna__West_Tower => Range {
+            start: SpotId::Giguna__West_Tower__East_7.into_usize(),
+            end: SpotId::Giguna__West_Tower__Top.into_usize() + 1,
+        },
+        AreaId::Glacier__Apocalypse_Entry => Range {
+            start: SpotId::Glacier__Apocalypse_Entry__Terminal.into_usize(),
+            end: SpotId::Glacier__Apocalypse_Entry__West.into_usize() + 1,
+        },
+        AreaId::Glacier__Boomerang_Antechamber => Range {
+            start: SpotId::Glacier__Boomerang_Antechamber__East_12.into_usize(),
+            end: SpotId::Glacier__Boomerang_Antechamber__West_13.into_usize() + 1,
+        },
+        AreaId::Glacier__Boomerang_Room => Range {
+            start: SpotId::Glacier__Boomerang_Room__Center_ish.into_usize(),
+            end: SpotId::Glacier__Boomerang_Room__West.into_usize() + 1,
+        },
+        AreaId::Glacier__Compass_Room => Range {
+            start: SpotId::Glacier__Compass_Room__Center.into_usize(),
+            end: SpotId::Glacier__Compass_Room__West.into_usize() + 1,
+        },
+        AreaId::Glacier__Dock_Elevator => Range {
+            start: SpotId::Glacier__Dock_Elevator__Connector.into_usize(),
+            end: SpotId::Glacier__Dock_Elevator__Elevator.into_usize() + 1,
+        },
+        AreaId::Glacier__Dock_Interior => Range {
+            start: SpotId::Glacier__Dock_Interior__Connector.into_usize(),
+            end: SpotId::Glacier__Dock_Interior__Entry.into_usize() + 1,
+        },
+        AreaId::Glacier__Dock_Outside => Range {
+            start: SpotId::Glacier__Dock_Outside__Do_Not_Enter.into_usize(),
+            end: SpotId::Glacier__Dock_Outside__Entry.into_usize() + 1,
+        },
+        AreaId::Glacier__Grid_31_9_12 => Range {
+            start: SpotId::Glacier__Grid_31_9_12__East_10.into_usize(),
+            end: SpotId::Glacier__Grid_31_9_12__West_12.into_usize() + 1,
+        },
+        AreaId::Glacier__Grid_32_7_10 => Range {
+            start: SpotId::Glacier__Grid_32_7_10__Center_Platform.into_usize(),
+            end: SpotId::Glacier__Grid_32_7_10__West_9.into_usize() + 1,
+        },
+        AreaId::Glacier__Grid_37_38_9 => Range {
+            start: SpotId::Glacier__Grid_37_38_9__East.into_usize(),
+            end: SpotId::Glacier__Grid_37_38_9__West.into_usize() + 1,
+        },
+        AreaId::Glacier__Grid_39_40_7_9 => Range {
+            start: SpotId::Glacier__Grid_39_40_7_9__Upper_East.into_usize(),
+            end: SpotId::Glacier__Grid_39_40_7_9__West.into_usize() + 1,
+        },
+        AreaId::Glacier__Grid_42_10 => Range {
+            start: SpotId::Glacier__Grid_42_10__East.into_usize(),
+            end: SpotId::Glacier__Grid_42_10__West.into_usize() + 1,
+        },
+        AreaId::Glacier__Grid_43_10_11 => Range {
+            start: SpotId::Glacier__Grid_43_10_11__East.into_usize(),
+            end: SpotId::Glacier__Grid_43_10_11__Top.into_usize() + 1,
+        },
+        AreaId::Glacier__Lake_Main_Entrance => Range {
+            start: SpotId::Glacier__Lake_Main_Entrance__Bottom.into_usize(),
+            end: SpotId::Glacier__Lake_Main_Entrance__Upper_Platform.into_usize() + 1,
+        },
+        AreaId::Glacier__Ledge_Grab_Room => Range {
+            start: SpotId::Glacier__Ledge_Grab_Room__Cliff.into_usize(),
+            end: SpotId::Glacier__Ledge_Grab_Room__West.into_usize() + 1,
+        },
+        AreaId::Glacier__Peak => Range {
+            start: SpotId::Glacier__Peak__East_8.into_usize(),
+            end: SpotId::Glacier__Peak__West_Cliff.into_usize() + 1,
+        },
+        AreaId::Glacier__Revival => Range {
+            start: SpotId::Glacier__Revival__East_9.into_usize(),
+            end: SpotId::Glacier__Revival__West_8.into_usize() + 1,
+        },
+        AreaId::Glacier__The_Big_Drop => Range {
+            start: SpotId::Glacier__The_Big_Drop__East.into_usize(),
+            end: SpotId::Glacier__The_Big_Drop__Water_Surface.into_usize() + 1,
+        },
+        AreaId::Glacier__Vertical_Room => Range {
+            start: SpotId::Glacier__Vertical_Room__East_12.into_usize(),
+            end: SpotId::Glacier__Vertical_Room__West_9.into_usize() + 1,
+        },
+        AreaId::Irikar_Breach__Save_Room => Range {
+            start: SpotId::Irikar_Breach__Save_Room__Save_Point.into_usize(),
+            end: SpotId::Irikar_Breach__Save_Room__Save_Point.into_usize() + 1,
+        },
+        AreaId::Irikar__Hub => Range {
+            start: SpotId::Irikar__Hub__Bowl_Hole.into_usize(),
+            end: SpotId::Irikar__Hub__West_Rim.into_usize() + 1,
+        },
+        AreaId::Irikar__Sight_Room => Range {
+            start: SpotId::Irikar__Sight_Room__Item_Pedestal.into_usize(),
+            end: SpotId::Irikar__Sight_Room__West_24.into_usize() + 1,
+        },
+        AreaId::Menu__Upgrade_Menu => Range {
+            start: SpotId::Menu__Upgrade_Menu__Combat.into_usize(),
+            end: SpotId::Menu__Upgrade_Menu__Physiology.into_usize() + 1,
+        },
+    };
+}
+
 #[derive(Clone, Debug)]
 pub struct World {
     pub objective: Objective,
@@ -4908,8 +5285,13 @@ impl world::World for World {
         get_area(sp1) == get_area(sp2)
     }
     fn get_area_spots(&self, spot_id: SpotId) -> &[SpotId] {
-        let r = &self.spots[spot_id].area_spots;
-        &RAW_SPOTS[r.start..r.end]
+        if spot_id == SpotId::None {
+            &RAW_SPOTS[0..0]
+        } else {
+            let area_id = get_area(spot_id);
+            let r = &RAW_AREA_SPOT_RANGES[area_id];
+            &RAW_SPOTS[r.start..r.end]
+        }
     }
     fn get_warps(&self) -> &[Warp] {
         &self.warps.as_slice()
@@ -13117,10 +13499,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Amagi__Main_Area__Broken_Wall.into_usize(),
-                end: SpotId::Amagi__Main_Area__West_Side.into_usize() + 1,
-            },
         },
         SpotId::Amagi__Main_Area__Waters_Edge => Spot {
             id: SpotId::Amagi__Main_Area__Waters_Edge,
@@ -13132,10 +13510,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Amagi__Main_Area__Broken_Wall.into_usize(),
-                end: SpotId::Amagi__Main_Area__West_Side.into_usize() + 1,
             },
         },
         SpotId::Amagi__Main_Area__Shallow_End => Spot {
@@ -13150,10 +13524,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Amagi__Main_Area__Broken_Wall.into_usize(),
-                end: SpotId::Amagi__Main_Area__West_Side.into_usize() + 1,
-            },
         },
         SpotId::Amagi__Main_Area__Cliff => Spot {
             id: SpotId::Amagi__Main_Area__Cliff,
@@ -13165,10 +13535,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Amagi__Main_Area__Broken_Wall.into_usize(),
-                end: SpotId::Amagi__Main_Area__West_Side.into_usize() + 1,
             },
         },
         SpotId::Amagi__Main_Area__Upper_Platform => Spot {
@@ -13182,10 +13548,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Amagi__Main_Area__Broken_Wall.into_usize(),
-                end: SpotId::Amagi__Main_Area__West_Side.into_usize() + 1,
-            },
         },
         SpotId::Amagi__Main_Area__West_Shelf => Spot {
             id: SpotId::Amagi__Main_Area__West_Shelf,
@@ -13197,10 +13559,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Amagi__Main_Area__Broken_Wall.into_usize(),
-                end: SpotId::Amagi__Main_Area__West_Side.into_usize() + 1,
             },
         },
         SpotId::Amagi__Main_Area__West_Side => Spot {
@@ -13215,10 +13573,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Amagi__Main_Area__Broken_Wall.into_usize(),
-                end: SpotId::Amagi__Main_Area__West_Side.into_usize() + 1,
-            },
         },
         SpotId::Amagi__Main_Area__Platform_2 => Spot {
             id: SpotId::Amagi__Main_Area__Platform_2,
@@ -13232,10 +13586,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Amagi__Main_Area__Broken_Wall.into_usize(),
-                end: SpotId::Amagi__Main_Area__West_Side.into_usize() + 1,
-            },
         },
         SpotId::Amagi__Main_Area__East_Ledge => Spot {
             id: SpotId::Amagi__Main_Area__East_Ledge,
@@ -13247,10 +13597,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Amagi__Main_Area__Broken_Wall.into_usize(),
-                end: SpotId::Amagi__Main_Area__West_Side.into_usize() + 1,
             },
         },
         SpotId::Amagi__Main_Area__Carving => Spot {
@@ -13266,10 +13612,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: ActionId::Amagi__Main_Area__Carving__Key_Combo.into_usize(),
                 end: ActionId::Amagi__Main_Area__Carving__Key_Combo.into_usize() + 1,
             },
-            area_spots: Range {
-                start: SpotId::Amagi__Main_Area__Broken_Wall.into_usize(),
-                end: SpotId::Amagi__Main_Area__West_Side.into_usize() + 1,
-            },
         },
         SpotId::Amagi__Main_Area__West_15 => Spot {
             id: SpotId::Amagi__Main_Area__West_15,
@@ -13282,10 +13624,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Amagi__Main_Area__Broken_Wall.into_usize(),
-                end: SpotId::Amagi__Main_Area__West_Side.into_usize() + 1,
             },
         },
         SpotId::Amagi__Main_Area__Secret_Outcropping => Spot {
@@ -13300,10 +13638,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Amagi__Main_Area__Broken_Wall.into_usize(),
-                end: SpotId::Amagi__Main_Area__West_Side.into_usize() + 1,
-            },
         },
         SpotId::Amagi__Main_Area__Platform_3 => Spot {
             id: SpotId::Amagi__Main_Area__Platform_3,
@@ -13315,10 +13649,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Amagi__Main_Area__Broken_Wall.into_usize(),
-                end: SpotId::Amagi__Main_Area__West_Side.into_usize() + 1,
             },
         },
         SpotId::Amagi__Main_Area__Catwalk_Center => Spot {
@@ -13333,10 +13663,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Amagi__Main_Area__Broken_Wall.into_usize(),
-                end: SpotId::Amagi__Main_Area__West_Side.into_usize() + 1,
-            },
         },
         SpotId::Amagi__Main_Area__Catwalk_Broken_Part => Spot {
             id: SpotId::Amagi__Main_Area__Catwalk_Broken_Part,
@@ -13349,10 +13675,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Amagi__Main_Area__Broken_Wall.into_usize(),
-                end: SpotId::Amagi__Main_Area__West_Side.into_usize() + 1,
-            },
         },
         SpotId::Amagi__Main_Area__Catwalk_East_Edge => Spot {
             id: SpotId::Amagi__Main_Area__Catwalk_East_Edge,
@@ -13364,10 +13686,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Amagi__Main_Area__Broken_Wall.into_usize(),
-                end: SpotId::Amagi__Main_Area__West_Side.into_usize() + 1,
             },
         },
         SpotId::Amagi__Main_Area__Save_Point => Spot {
@@ -13382,10 +13700,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: ActionId::Amagi__Main_Area__Save_Point__Save.into_usize(),
                 end: ActionId::Amagi__Main_Area__Save_Point__Save.into_usize() + 1,
             },
-            area_spots: Range {
-                start: SpotId::Amagi__Main_Area__Broken_Wall.into_usize(),
-                end: SpotId::Amagi__Main_Area__West_Side.into_usize() + 1,
-            },
         },
         SpotId::Amagi__Main_Area__Enemy_Side => Spot {
             id: SpotId::Amagi__Main_Area__Enemy_Side,
@@ -13398,10 +13712,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Amagi__Main_Area__Broken_Wall.into_usize(),
-                end: SpotId::Amagi__Main_Area__West_Side.into_usize() + 1,
-            },
         },
         SpotId::Amagi__Main_Area__Small_Cliff => Spot {
             id: SpotId::Amagi__Main_Area__Small_Cliff,
@@ -13413,10 +13723,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Amagi__Main_Area__Broken_Wall.into_usize(),
-                end: SpotId::Amagi__Main_Area__West_Side.into_usize() + 1,
             },
         },
         SpotId::Amagi__Main_Area__East_19 => Spot {
@@ -13431,10 +13737,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Amagi__Main_Area__Broken_Wall.into_usize(),
-                end: SpotId::Amagi__Main_Area__West_Side.into_usize() + 1,
-            },
         },
         SpotId::Amagi__Main_Area__Broken_Wall => Spot {
             id: SpotId::Amagi__Main_Area__Broken_Wall,
@@ -13446,10 +13748,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Amagi__Main_Area__Broken_Wall.into_usize(),
-                end: SpotId::Amagi__Main_Area__West_Side.into_usize() + 1,
             },
         },
         SpotId::Amagi__Main_Area__Wall_Stuck_Spot => Spot {
@@ -13463,10 +13761,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Amagi__Main_Area__Broken_Wall.into_usize(),
-                end: SpotId::Amagi__Main_Area__West_Side.into_usize() + 1,
-            },
         },
         SpotId::Amagi__Main_Area__Half_Pillar => Spot {
             id: SpotId::Amagi__Main_Area__Half_Pillar,
@@ -13478,10 +13772,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Amagi__Main_Area__Broken_Wall.into_usize(),
-                end: SpotId::Amagi__Main_Area__West_Side.into_usize() + 1,
             },
         },
         SpotId::Amagi__Main_Area__Flat_Ruin => Spot {
@@ -13495,10 +13785,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Amagi__Main_Area__Broken_Wall.into_usize(),
-                end: SpotId::Amagi__Main_Area__West_Side.into_usize() + 1,
-            },
         },
         SpotId::Amagi__Main_Area__West_Mini_Hill => Spot {
             id: SpotId::Amagi__Main_Area__West_Mini_Hill,
@@ -13510,10 +13796,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Amagi__Main_Area__Broken_Wall.into_usize(),
-                end: SpotId::Amagi__Main_Area__West_Side.into_usize() + 1,
             },
         },
         SpotId::Amagi__Main_Area__West_18 => Spot {
@@ -13528,10 +13810,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Amagi__Main_Area__Broken_Wall.into_usize(),
-                end: SpotId::Amagi__Main_Area__West_Side.into_usize() + 1,
-            },
         },
         SpotId::Amagi__Main_Area__West_19 => Spot {
             id: SpotId::Amagi__Main_Area__West_19,
@@ -13544,10 +13822,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Amagi__Main_Area__Broken_Wall.into_usize(),
-                end: SpotId::Amagi__Main_Area__West_Side.into_usize() + 1,
             },
         },
         SpotId::Amagi__Main_Area__Secret_Waterfall => Spot {
@@ -13562,10 +13836,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Amagi__Main_Area__Broken_Wall.into_usize(),
-                end: SpotId::Amagi__Main_Area__West_Side.into_usize() + 1,
-            },
         },
         SpotId::Amagi__Main_Area__Way_Off_To_The_Side => Spot {
             id: SpotId::Amagi__Main_Area__Way_Off_To_The_Side,
@@ -13579,10 +13849,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Amagi__Main_Area__Broken_Wall.into_usize(),
-                end: SpotId::Amagi__Main_Area__West_Side.into_usize() + 1,
-            },
         },
         SpotId::Amagi__Cave_Behind_Waterfall__Bottom => Spot {
             id: SpotId::Amagi__Cave_Behind_Waterfall__Bottom,
@@ -13595,10 +13861,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Amagi__Cave_Behind_Waterfall__Bottom.into_usize(),
-                end: SpotId::Amagi__Cave_Behind_Waterfall__Top.into_usize() + 1,
             },
         },
         SpotId::Amagi__Cave_Behind_Waterfall__Middle => Spot {
@@ -13614,10 +13876,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: ActionId::Amagi__Cave_Behind_Waterfall__Middle__Throw_Drone.into_usize(),
                 end: ActionId::Amagi__Cave_Behind_Waterfall__Middle__Throw_Drone.into_usize() + 1,
             },
-            area_spots: Range {
-                start: SpotId::Amagi__Cave_Behind_Waterfall__Bottom.into_usize(),
-                end: SpotId::Amagi__Cave_Behind_Waterfall__Top.into_usize() + 1,
-            },
         },
         SpotId::Amagi__Cave_Behind_Waterfall__Top => Spot {
             id: SpotId::Amagi__Cave_Behind_Waterfall__Top,
@@ -13630,10 +13888,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Amagi__Cave_Behind_Waterfall__Bottom.into_usize(),
-                end: SpotId::Amagi__Cave_Behind_Waterfall__Top.into_usize() + 1,
             },
         },
         SpotId::Amagi__Grid_31_19__West => Spot {
@@ -13648,10 +13902,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Amagi__Grid_31_19__East.into_usize(),
-                end: SpotId::Amagi__Grid_31_19__West.into_usize() + 1,
-            },
         },
         SpotId::Amagi__Grid_31_19__East => Spot {
             id: SpotId::Amagi__Grid_31_19__East,
@@ -13664,10 +13914,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Amagi__Grid_31_19__East.into_usize(),
-                end: SpotId::Amagi__Grid_31_19__West.into_usize() + 1,
             },
         },
         SpotId::Amagi__Liru_Room__West_19 => Spot {
@@ -13682,10 +13928,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Amagi__Liru_Room__Bottom.into_usize(),
-                end: SpotId::Amagi__Liru_Room__West_20.into_usize() + 1,
-            },
         },
         SpotId::Amagi__Liru_Room__Hidden_Enemies => Spot {
             id: SpotId::Amagi__Liru_Room__Hidden_Enemies,
@@ -13697,10 +13939,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Amagi__Liru_Room__Bottom.into_usize(),
-                end: SpotId::Amagi__Liru_Room__West_20.into_usize() + 1,
             },
         },
         SpotId::Amagi__Liru_Room__Platform_1_Left => Spot {
@@ -13714,10 +13952,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Amagi__Liru_Room__Bottom.into_usize(),
-                end: SpotId::Amagi__Liru_Room__West_20.into_usize() + 1,
-            },
         },
         SpotId::Amagi__Liru_Room__Platform_1_Right => Spot {
             id: SpotId::Amagi__Liru_Room__Platform_1_Right,
@@ -13729,10 +13963,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Amagi__Liru_Room__Bottom.into_usize(),
-                end: SpotId::Amagi__Liru_Room__West_20.into_usize() + 1,
             },
         },
         SpotId::Amagi__Liru_Room__Platform_2_Left => Spot {
@@ -13746,10 +13976,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Amagi__Liru_Room__Bottom.into_usize(),
-                end: SpotId::Amagi__Liru_Room__West_20.into_usize() + 1,
-            },
         },
         SpotId::Amagi__Liru_Room__Platform_2_Right => Spot {
             id: SpotId::Amagi__Liru_Room__Platform_2_Right,
@@ -13761,10 +13987,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Amagi__Liru_Room__Bottom.into_usize(),
-                end: SpotId::Amagi__Liru_Room__West_20.into_usize() + 1,
             },
         },
         SpotId::Amagi__Liru_Room__Platform_3_Left => Spot {
@@ -13778,10 +14000,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Amagi__Liru_Room__Bottom.into_usize(),
-                end: SpotId::Amagi__Liru_Room__West_20.into_usize() + 1,
-            },
         },
         SpotId::Amagi__Liru_Room__Platform_3_Right => Spot {
             id: SpotId::Amagi__Liru_Room__Platform_3_Right,
@@ -13793,10 +14011,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Amagi__Liru_Room__Bottom.into_usize(),
-                end: SpotId::Amagi__Liru_Room__West_20.into_usize() + 1,
             },
         },
         SpotId::Amagi__Liru_Room__Platform_4_Left => Spot {
@@ -13811,10 +14025,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Amagi__Liru_Room__Bottom.into_usize(),
-                end: SpotId::Amagi__Liru_Room__West_20.into_usize() + 1,
-            },
         },
         SpotId::Amagi__Liru_Room__Platform_4_Right => Spot {
             id: SpotId::Amagi__Liru_Room__Platform_4_Right,
@@ -13828,10 +14038,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Amagi__Liru_Room__Bottom.into_usize(),
-                end: SpotId::Amagi__Liru_Room__West_20.into_usize() + 1,
-            },
         },
         SpotId::Amagi__Liru_Room__Bottom => Spot {
             id: SpotId::Amagi__Liru_Room__Bottom,
@@ -13843,10 +14049,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Amagi__Liru_Room__Bottom.into_usize(),
-                end: SpotId::Amagi__Liru_Room__West_20.into_usize() + 1,
             },
         },
         SpotId::Amagi__Liru_Room__Shrine => Spot {
@@ -13861,10 +14063,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Amagi__Liru_Room__Bottom.into_usize(),
-                end: SpotId::Amagi__Liru_Room__West_20.into_usize() + 1,
-            },
         },
         SpotId::Amagi__Liru_Room__West_20 => Spot {
             id: SpotId::Amagi__Liru_Room__West_20,
@@ -13878,10 +14076,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Amagi__Liru_Room__Bottom.into_usize(),
-                end: SpotId::Amagi__Liru_Room__West_20.into_usize() + 1,
-            },
         },
         SpotId::Amagi__Liru_Room__East_Passage => Spot {
             id: SpotId::Amagi__Liru_Room__East_Passage,
@@ -13894,10 +14088,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Amagi__Liru_Room__Bottom.into_usize(),
-                end: SpotId::Amagi__Liru_Room__West_20.into_usize() + 1,
-            },
         },
         SpotId::Amagi__Liru_Room__Hidden_Exit => Spot {
             id: SpotId::Amagi__Liru_Room__Hidden_Exit,
@@ -13909,10 +14099,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Amagi__Liru_Room__Bottom.into_usize(),
-                end: SpotId::Amagi__Liru_Room__West_20.into_usize() + 1,
             },
         },
         SpotId::Amagi__West_Lake__East_15 => Spot {
@@ -13927,10 +14113,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Amagi__West_Lake__Cavern_Back_Teeth.into_usize(),
-                end: SpotId::Amagi__West_Lake__West_Shore.into_usize() + 1,
-            },
         },
         SpotId::Amagi__West_Lake__East_Shore => Spot {
             id: SpotId::Amagi__West_Lake__East_Shore,
@@ -13942,10 +14124,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Amagi__West_Lake__Cavern_Back_Teeth.into_usize(),
-                end: SpotId::Amagi__West_Lake__West_Shore.into_usize() + 1,
             },
         },
         SpotId::Amagi__West_Lake__East_Bank => Spot {
@@ -13959,10 +14137,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Amagi__West_Lake__Cavern_Back_Teeth.into_usize(),
-                end: SpotId::Amagi__West_Lake__West_Shore.into_usize() + 1,
-            },
         },
         SpotId::Amagi__West_Lake__Northeast_Platform => Spot {
             id: SpotId::Amagi__West_Lake__Northeast_Platform,
@@ -13974,10 +14148,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Amagi__West_Lake__Cavern_Back_Teeth.into_usize(),
-                end: SpotId::Amagi__West_Lake__West_Shore.into_usize() + 1,
             },
         },
         SpotId::Amagi__West_Lake__Northwest_Platform => Spot {
@@ -13992,10 +14162,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Amagi__West_Lake__Cavern_Back_Teeth.into_usize(),
-                end: SpotId::Amagi__West_Lake__West_Shore.into_usize() + 1,
-            },
         },
         SpotId::Amagi__West_Lake__Upper_Center_Platform => Spot {
             id: SpotId::Amagi__West_Lake__Upper_Center_Platform,
@@ -14008,10 +14174,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Amagi__West_Lake__Cavern_Back_Teeth.into_usize(),
-                end: SpotId::Amagi__West_Lake__West_Shore.into_usize() + 1,
-            },
         },
         SpotId::Amagi__West_Lake__East_Platform => Spot {
             id: SpotId::Amagi__West_Lake__East_Platform,
@@ -14023,10 +14185,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Amagi__West_Lake__Cavern_Back_Teeth.into_usize(),
-                end: SpotId::Amagi__West_Lake__West_Shore.into_usize() + 1,
             },
         },
         SpotId::Amagi__West_Lake__East_18 => Spot {
@@ -14041,10 +14199,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Amagi__West_Lake__Cavern_Back_Teeth.into_usize(),
-                end: SpotId::Amagi__West_Lake__West_Shore.into_usize() + 1,
-            },
         },
         SpotId::Amagi__West_Lake__Pillar => Spot {
             id: SpotId::Amagi__West_Lake__Pillar,
@@ -14057,10 +14211,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Amagi__West_Lake__Cavern_Back_Teeth.into_usize(),
-                end: SpotId::Amagi__West_Lake__West_Shore.into_usize() + 1,
-            },
         },
         SpotId::Amagi__West_Lake__Pillar_Platform => Spot {
             id: SpotId::Amagi__West_Lake__Pillar_Platform,
@@ -14072,10 +14222,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Amagi__West_Lake__Cavern_Back_Teeth.into_usize(),
-                end: SpotId::Amagi__West_Lake__West_Shore.into_usize() + 1,
             },
         },
         SpotId::Amagi__West_Lake__East_19 => Spot {
@@ -14090,10 +14236,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Amagi__West_Lake__Cavern_Back_Teeth.into_usize(),
-                end: SpotId::Amagi__West_Lake__West_Shore.into_usize() + 1,
-            },
         },
         SpotId::Amagi__West_Lake__Somewhat_Central_Platform => Spot {
             id: SpotId::Amagi__West_Lake__Somewhat_Central_Platform,
@@ -14105,10 +14247,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Amagi__West_Lake__Cavern_Back_Teeth.into_usize(),
-                end: SpotId::Amagi__West_Lake__West_Shore.into_usize() + 1,
             },
         },
         SpotId::Amagi__West_Lake__West_Platform => Spot {
@@ -14122,10 +14260,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Amagi__West_Lake__Cavern_Back_Teeth.into_usize(),
-                end: SpotId::Amagi__West_Lake__West_Shore.into_usize() + 1,
-            },
         },
         SpotId::Amagi__West_Lake__Cavern_Front_Teeth => Spot {
             id: SpotId::Amagi__West_Lake__Cavern_Front_Teeth,
@@ -14137,10 +14271,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Amagi__West_Lake__Cavern_Back_Teeth.into_usize(),
-                end: SpotId::Amagi__West_Lake__West_Shore.into_usize() + 1,
             },
         },
         SpotId::Amagi__West_Lake__Cavern_Back_Teeth => Spot {
@@ -14154,10 +14284,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Amagi__West_Lake__Cavern_Back_Teeth.into_usize(),
-                end: SpotId::Amagi__West_Lake__West_Shore.into_usize() + 1,
-            },
         },
         SpotId::Amagi__West_Lake__Cavern_Jaw => Spot {
             id: SpotId::Amagi__West_Lake__Cavern_Jaw,
@@ -14169,10 +14295,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Amagi__West_Lake__Cavern_Back_Teeth.into_usize(),
-                end: SpotId::Amagi__West_Lake__West_Shore.into_usize() + 1,
             },
         },
         SpotId::Amagi__West_Lake__Cavern_Neck => Spot {
@@ -14186,10 +14308,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Amagi__West_Lake__Cavern_Back_Teeth.into_usize(),
-                end: SpotId::Amagi__West_Lake__West_Shore.into_usize() + 1,
-            },
         },
         SpotId::Amagi__West_Lake__Cavern_Chin => Spot {
             id: SpotId::Amagi__West_Lake__Cavern_Chin,
@@ -14201,10 +14319,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Amagi__West_Lake__Cavern_Back_Teeth.into_usize(),
-                end: SpotId::Amagi__West_Lake__West_Shore.into_usize() + 1,
             },
         },
         SpotId::Amagi__West_Lake__Cavern_Refill_Station => Spot {
@@ -14220,10 +14334,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Amagi__West_Lake__Cavern_Back_Teeth.into_usize(),
-                end: SpotId::Amagi__West_Lake__West_Shore.into_usize() + 1,
-            },
         },
         SpotId::Amagi__West_Lake__Cavern_Tear_Duct => Spot {
             id: SpotId::Amagi__West_Lake__Cavern_Tear_Duct,
@@ -14238,10 +14348,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Amagi__West_Lake__Cavern_Back_Teeth.into_usize(),
-                end: SpotId::Amagi__West_Lake__West_Shore.into_usize() + 1,
-            },
         },
         SpotId::Amagi__West_Lake__Cavern_Eye => Spot {
             id: SpotId::Amagi__West_Lake__Cavern_Eye,
@@ -14255,10 +14361,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Amagi__West_Lake__Cavern_Back_Teeth.into_usize(),
-                end: SpotId::Amagi__West_Lake__West_Shore.into_usize() + 1,
-            },
         },
         SpotId::Amagi__West_Lake__Cavern_Front_Pillar => Spot {
             id: SpotId::Amagi__West_Lake__Cavern_Front_Pillar,
@@ -14271,10 +14373,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Amagi__West_Lake__Cavern_Back_Teeth.into_usize(),
-                end: SpotId::Amagi__West_Lake__West_Shore.into_usize() + 1,
-            },
         },
         SpotId::Amagi__West_Lake__Cavern_Middle_Pillar => Spot {
             id: SpotId::Amagi__West_Lake__Cavern_Middle_Pillar,
@@ -14286,10 +14384,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Amagi__West_Lake__Cavern_Back_Teeth.into_usize(),
-                end: SpotId::Amagi__West_Lake__West_Shore.into_usize() + 1,
             },
         },
         SpotId::Amagi__West_Lake__Cavern_Rear_Pillar => Spot {
@@ -14304,10 +14398,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Amagi__West_Lake__Cavern_Back_Teeth.into_usize(),
-                end: SpotId::Amagi__West_Lake__West_Shore.into_usize() + 1,
-            },
         },
         SpotId::Amagi__West_Lake__Cavern_Lower_Trachea => Spot {
             id: SpotId::Amagi__West_Lake__Cavern_Lower_Trachea,
@@ -14319,10 +14409,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Amagi__West_Lake__Cavern_Back_Teeth.into_usize(),
-                end: SpotId::Amagi__West_Lake__West_Shore.into_usize() + 1,
             },
         },
         SpotId::Amagi__West_Lake__Stronghold_Top => Spot {
@@ -14336,10 +14422,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Amagi__West_Lake__Cavern_Back_Teeth.into_usize(),
-                end: SpotId::Amagi__West_Lake__West_Shore.into_usize() + 1,
             },
         },
         SpotId::Amagi__West_Lake__Stronghold_Item => Spot {
@@ -14355,10 +14437,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Amagi__West_Lake__Cavern_Back_Teeth.into_usize(),
-                end: SpotId::Amagi__West_Lake__West_Shore.into_usize() + 1,
-            },
         },
         SpotId::Amagi__West_Lake__Stronghold_Rear_Wall => Spot {
             id: SpotId::Amagi__West_Lake__Stronghold_Rear_Wall,
@@ -14371,10 +14449,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Amagi__West_Lake__Cavern_Back_Teeth.into_usize(),
-                end: SpotId::Amagi__West_Lake__West_Shore.into_usize() + 1,
             },
         },
         SpotId::Amagi__West_Lake__Stronghold_Middle_Column => Spot {
@@ -14390,10 +14464,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Amagi__West_Lake__Cavern_Back_Teeth.into_usize(),
-                end: SpotId::Amagi__West_Lake__West_Shore.into_usize() + 1,
-            },
         },
         SpotId::Amagi__West_Lake__Stronghold_Ceiling_Left => Spot {
             id: SpotId::Amagi__West_Lake__Stronghold_Ceiling_Left,
@@ -14407,10 +14477,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Amagi__West_Lake__Cavern_Back_Teeth.into_usize(),
-                end: SpotId::Amagi__West_Lake__West_Shore.into_usize() + 1,
             },
         },
         SpotId::Amagi__West_Lake__Stronghold_Ceiling_Right => Spot {
@@ -14426,10 +14492,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Amagi__West_Lake__Cavern_Back_Teeth.into_usize(),
-                end: SpotId::Amagi__West_Lake__West_Shore.into_usize() + 1,
-            },
         },
         SpotId::Amagi__West_Lake__Stronghold_Front_Room => Spot {
             id: SpotId::Amagi__West_Lake__Stronghold_Front_Room,
@@ -14443,10 +14505,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Amagi__West_Lake__Cavern_Back_Teeth.into_usize(),
-                end: SpotId::Amagi__West_Lake__West_Shore.into_usize() + 1,
             },
         },
         SpotId::Amagi__West_Lake__Stronghold_Front_Door => Spot {
@@ -14462,10 +14520,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Amagi__West_Lake__Cavern_Back_Teeth.into_usize(),
-                end: SpotId::Amagi__West_Lake__West_Shore.into_usize() + 1,
-            },
         },
         SpotId::Amagi__West_Lake__Some_Rock => Spot {
             id: SpotId::Amagi__West_Lake__Some_Rock,
@@ -14477,10 +14531,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Amagi__West_Lake__Cavern_Back_Teeth.into_usize(),
-                end: SpotId::Amagi__West_Lake__West_Shore.into_usize() + 1,
             },
         },
         SpotId::Amagi__West_Lake__Small_Hill => Spot {
@@ -14494,10 +14544,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Amagi__West_Lake__Cavern_Back_Teeth.into_usize(),
-                end: SpotId::Amagi__West_Lake__West_Shore.into_usize() + 1,
-            },
         },
         SpotId::Amagi__West_Lake__Tentacle_Gap => Spot {
             id: SpotId::Amagi__West_Lake__Tentacle_Gap,
@@ -14509,10 +14555,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Amagi__West_Lake__Cavern_Back_Teeth.into_usize(),
-                end: SpotId::Amagi__West_Lake__West_Shore.into_usize() + 1,
             },
         },
         SpotId::Amagi__West_Lake__Left_of_Enemy => Spot {
@@ -14526,10 +14568,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Amagi__West_Lake__Cavern_Back_Teeth.into_usize(),
-                end: SpotId::Amagi__West_Lake__West_Shore.into_usize() + 1,
-            },
         },
         SpotId::Amagi__West_Lake__East_20 => Spot {
             id: SpotId::Amagi__West_Lake__East_20,
@@ -14542,10 +14580,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Amagi__West_Lake__Cavern_Back_Teeth.into_usize(),
-                end: SpotId::Amagi__West_Lake__West_Shore.into_usize() + 1,
-            },
         },
         SpotId::Amagi__West_Lake__West_Cliff => Spot {
             id: SpotId::Amagi__West_Lake__West_Cliff,
@@ -14557,10 +14591,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Amagi__West_Lake__Cavern_Back_Teeth.into_usize(),
-                end: SpotId::Amagi__West_Lake__West_Shore.into_usize() + 1,
             },
         },
         SpotId::Amagi__West_Lake__West_Bank => Spot {
@@ -14575,10 +14605,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Amagi__West_Lake__Cavern_Back_Teeth.into_usize(),
-                end: SpotId::Amagi__West_Lake__West_Shore.into_usize() + 1,
-            },
         },
         SpotId::Amagi__West_Lake__Water_Surface => Spot {
             id: SpotId::Amagi__West_Lake__Water_Surface,
@@ -14591,10 +14617,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Amagi__West_Lake__Cavern_Back_Teeth.into_usize(),
-                end: SpotId::Amagi__West_Lake__West_Shore.into_usize() + 1,
-            },
         },
         SpotId::Amagi__West_Lake__West_Shore => Spot {
             id: SpotId::Amagi__West_Lake__West_Shore,
@@ -14606,10 +14628,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Amagi__West_Lake__Cavern_Back_Teeth.into_usize(),
-                end: SpotId::Amagi__West_Lake__West_Shore.into_usize() + 1,
             },
         },
         SpotId::Amagi__West_Lake__Surface_Wall_Right => Spot {
@@ -14625,10 +14643,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Amagi__West_Lake__Cavern_Back_Teeth.into_usize(),
-                end: SpotId::Amagi__West_Lake__West_Shore.into_usize() + 1,
-            },
         },
         SpotId::Amagi__West_Lake__Surface_Wall_Left => Spot {
             id: SpotId::Amagi__West_Lake__Surface_Wall_Left,
@@ -14643,10 +14657,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Amagi__West_Lake__Cavern_Back_Teeth.into_usize(),
-                end: SpotId::Amagi__West_Lake__West_Shore.into_usize() + 1,
-            },
         },
         SpotId::Amagi__West_Lake__West_15 => Spot {
             id: SpotId::Amagi__West_Lake__West_15,
@@ -14660,10 +14670,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Amagi__West_Lake__Cavern_Back_Teeth.into_usize(),
-                end: SpotId::Amagi__West_Lake__West_Shore.into_usize() + 1,
-            },
         },
         SpotId::Antarctica__West__Helipad => Spot {
             id: SpotId::Antarctica__West__Helipad,
@@ -14675,10 +14681,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Antarctica__West__Boxes.into_usize(),
-                end: SpotId::Antarctica__West__Shed_Entry.into_usize() + 1,
             },
         },
         SpotId::Antarctica__West__Shed_Entry => Spot {
@@ -14693,10 +14695,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Antarctica__West__Boxes.into_usize(),
-                end: SpotId::Antarctica__West__Shed_Entry.into_usize() + 1,
-            },
         },
         SpotId::Antarctica__West__Boxes => Spot {
             id: SpotId::Antarctica__West__Boxes,
@@ -14709,10 +14707,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Antarctica__West__Boxes.into_usize(),
-                end: SpotId::Antarctica__West__Shed_Entry.into_usize() + 1,
             },
         },
         SpotId::Antarctica__Shed__Interior => Spot {
@@ -14728,10 +14722,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Antarctica__Shed__Interior.into_usize(),
-                end: SpotId::Antarctica__Shed__Interior.into_usize() + 1,
-            },
         },
         SpotId::Antarctica__Building_1W__West_Entry => Spot {
             id: SpotId::Antarctica__Building_1W__West_Entry,
@@ -14744,10 +14734,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Antarctica__Building_1W__Connector.into_usize(),
-                end: SpotId::Antarctica__Building_1W__West_Entry.into_usize() + 1,
             },
         },
         SpotId::Antarctica__Building_1W__Connector => Spot {
@@ -14762,10 +14748,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Antarctica__Building_1W__Connector.into_usize(),
-                end: SpotId::Antarctica__Building_1W__West_Entry.into_usize() + 1,
-            },
         },
         SpotId::Antarctica__Building_1E__Connector => Spot {
             id: SpotId::Antarctica__Building_1E__Connector,
@@ -14778,10 +14760,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Antarctica__Building_1E__Connector.into_usize(),
-                end: SpotId::Antarctica__Building_1E__East_Entry.into_usize() + 1,
             },
         },
         SpotId::Antarctica__Building_1E__East_Entry => Spot {
@@ -14796,10 +14774,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Antarctica__Building_1E__Connector.into_usize(),
-                end: SpotId::Antarctica__Building_1E__East_Entry.into_usize() + 1,
-            },
         },
         SpotId::Antarctica__East__Building_1_Entry => Spot {
             id: SpotId::Antarctica__East__Building_1_Entry,
@@ -14813,10 +14787,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Antarctica__East__Building_1_Entry.into_usize(),
-                end: SpotId::Antarctica__East__Save_Point.into_usize() + 1,
-            },
         },
         SpotId::Antarctica__East__Save_Point => Spot {
             id: SpotId::Antarctica__East__Save_Point,
@@ -14828,10 +14798,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Antarctica__East__Building_1_Entry.into_usize(),
-                end: SpotId::Antarctica__East__Save_Point.into_usize() + 1,
             },
         },
         SpotId::Antarctica__East__Building_2_Entry => Spot {
@@ -14846,10 +14812,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Antarctica__East__Building_1_Entry.into_usize(),
-                end: SpotId::Antarctica__East__Save_Point.into_usize() + 1,
-            },
         },
         SpotId::Antarctica__East__Building_2_Upper => Spot {
             id: SpotId::Antarctica__East__Building_2_Upper,
@@ -14862,10 +14824,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Antarctica__East__Building_1_Entry.into_usize(),
-                end: SpotId::Antarctica__East__Save_Point.into_usize() + 1,
             },
         },
         SpotId::Antarctica__Building_2__Entry => Spot {
@@ -14880,10 +14838,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Antarctica__Building_2__Behind_Boxes.into_usize(),
-                end: SpotId::Antarctica__Building_2__Upper_Door.into_usize() + 1,
-            },
         },
         SpotId::Antarctica__Building_2__Stairs => Spot {
             id: SpotId::Antarctica__Building_2__Stairs,
@@ -14896,10 +14850,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Antarctica__Building_2__Behind_Boxes.into_usize(),
-                end: SpotId::Antarctica__Building_2__Upper_Door.into_usize() + 1,
             },
         },
         SpotId::Antarctica__Building_2__Upper_Door => Spot {
@@ -14914,10 +14864,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Antarctica__Building_2__Behind_Boxes.into_usize(),
-                end: SpotId::Antarctica__Building_2__Upper_Door.into_usize() + 1,
-            },
         },
         SpotId::Antarctica__Building_2__Behind_Boxes => Spot {
             id: SpotId::Antarctica__Building_2__Behind_Boxes,
@@ -14930,10 +14876,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Antarctica__Building_2__Behind_Boxes.into_usize(),
-                end: SpotId::Antarctica__Building_2__Upper_Door.into_usize() + 1,
             },
         },
         SpotId::Antarctica__Top__Power_Entry => Spot {
@@ -14948,10 +14890,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Antarctica__Top__Power_Entry.into_usize(),
-                end: SpotId::Antarctica__Top__Power_Entry.into_usize() + 1,
-            },
         },
         SpotId::Antarctica__Power_Room__Entry => Spot {
             id: SpotId::Antarctica__Power_Room__Entry,
@@ -14964,10 +14902,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Antarctica__Power_Room__Entry.into_usize(),
-                end: SpotId::Antarctica__Power_Room__Switch.into_usize() + 1,
             },
         },
         SpotId::Antarctica__Power_Room__Switch => Spot {
@@ -14982,10 +14916,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Antarctica__Power_Room__Entry.into_usize(),
-                end: SpotId::Antarctica__Power_Room__Switch.into_usize() + 1,
-            },
         },
         SpotId::Antarctica__Freight_Elevator__Left => Spot {
             id: SpotId::Antarctica__Freight_Elevator__Left,
@@ -14998,10 +14928,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Antarctica__Freight_Elevator__Controls.into_usize(),
-                end: SpotId::Antarctica__Freight_Elevator__Left.into_usize() + 1,
             },
         },
         SpotId::Antarctica__Freight_Elevator__Controls => Spot {
@@ -15016,10 +14942,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Antarctica__Freight_Elevator__Controls.into_usize(),
-                end: SpotId::Antarctica__Freight_Elevator__Left.into_usize() + 1,
-            },
         },
         SpotId::Ebih__Base_Camp__East_11 => Spot {
             id: SpotId::Ebih__Base_Camp__East_11,
@@ -15032,10 +14954,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Ebih__Base_Camp__Behind_Vehicle.into_usize(),
-                end: SpotId::Ebih__Base_Camp__West_Midair.into_usize() + 1,
             },
         },
         SpotId::Ebih__Base_Camp__East_12 => Spot {
@@ -15050,10 +14968,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Ebih__Base_Camp__Behind_Vehicle.into_usize(),
-                end: SpotId::Ebih__Base_Camp__West_Midair.into_usize() + 1,
-            },
         },
         SpotId::Ebih__Base_Camp__Staircase => Spot {
             id: SpotId::Ebih__Base_Camp__Staircase,
@@ -15065,10 +14979,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Ebih__Base_Camp__Behind_Vehicle.into_usize(),
-                end: SpotId::Ebih__Base_Camp__West_Midair.into_usize() + 1,
             },
         },
         SpotId::Ebih__Base_Camp__Save_Point => Spot {
@@ -15083,10 +14993,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: ActionId::Ebih__Base_Camp__Save_Point__Save.into_usize(),
                 end: ActionId::Ebih__Base_Camp__Save_Point__Save.into_usize() + 1,
             },
-            area_spots: Range {
-                start: SpotId::Ebih__Base_Camp__Behind_Vehicle.into_usize(),
-                end: SpotId::Ebih__Base_Camp__West_Midair.into_usize() + 1,
-            },
         },
         SpotId::Ebih__Base_Camp__Bunker_Entry => Spot {
             id: SpotId::Ebih__Base_Camp__Bunker_Entry,
@@ -15099,10 +15005,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Ebih__Base_Camp__Behind_Vehicle.into_usize(),
-                end: SpotId::Ebih__Base_Camp__West_Midair.into_usize() + 1,
             },
         },
         SpotId::Ebih__Base_Camp__Lake_Access => Spot {
@@ -15117,10 +15019,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Ebih__Base_Camp__Behind_Vehicle.into_usize(),
-                end: SpotId::Ebih__Base_Camp__West_Midair.into_usize() + 1,
-            },
         },
         SpotId::Ebih__Base_Camp__Behind_Vehicle => Spot {
             id: SpotId::Ebih__Base_Camp__Behind_Vehicle,
@@ -15132,10 +15030,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Ebih__Base_Camp__Behind_Vehicle.into_usize(),
-                end: SpotId::Ebih__Base_Camp__West_Midair.into_usize() + 1,
             },
         },
         SpotId::Ebih__Base_Camp__Building_Entry => Spot {
@@ -15150,10 +15044,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Ebih__Base_Camp__Behind_Vehicle.into_usize(),
-                end: SpotId::Ebih__Base_Camp__West_Midair.into_usize() + 1,
-            },
         },
         SpotId::Ebih__Base_Camp__Tent_Entry => Spot {
             id: SpotId::Ebih__Base_Camp__Tent_Entry,
@@ -15166,10 +15056,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Ebih__Base_Camp__Behind_Vehicle.into_usize(),
-                end: SpotId::Ebih__Base_Camp__West_Midair.into_usize() + 1,
             },
         },
         SpotId::Ebih__Base_Camp__West_13 => Spot {
@@ -15184,10 +15070,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Ebih__Base_Camp__Behind_Vehicle.into_usize(),
-                end: SpotId::Ebih__Base_Camp__West_Midair.into_usize() + 1,
-            },
         },
         SpotId::Ebih__Base_Camp__West_11 => Spot {
             id: SpotId::Ebih__Base_Camp__West_11,
@@ -15201,10 +15083,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Ebih__Base_Camp__Behind_Vehicle.into_usize(),
-                end: SpotId::Ebih__Base_Camp__West_Midair.into_usize() + 1,
-            },
         },
         SpotId::Ebih__Base_Camp__West_Midair => Spot {
             id: SpotId::Ebih__Base_Camp__West_Midair,
@@ -15216,10 +15094,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Ebih__Base_Camp__Behind_Vehicle.into_usize(),
-                end: SpotId::Ebih__Base_Camp__West_Midair.into_usize() + 1,
             },
         },
         SpotId::Ebih__Base_Camp__West_12 => Spot {
@@ -15234,10 +15108,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Ebih__Base_Camp__Behind_Vehicle.into_usize(),
-                end: SpotId::Ebih__Base_Camp__West_Midair.into_usize() + 1,
-            },
         },
         SpotId::Ebih__Base_Camp__Left_Platform => Spot {
             id: SpotId::Ebih__Base_Camp__Left_Platform,
@@ -15251,10 +15121,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: ActionId::Ebih__Base_Camp__Left_Platform__Move_Left_Platform.into_usize(),
                 end: ActionId::Ebih__Base_Camp__Left_Platform__Move_Left_Platform.into_usize() + 1,
-            },
-            area_spots: Range {
-                start: SpotId::Ebih__Base_Camp__Behind_Vehicle.into_usize(),
-                end: SpotId::Ebih__Base_Camp__West_Midair.into_usize() + 1,
             },
         },
         SpotId::Ebih__Base_Camp__Left_Platform_Moved => Spot {
@@ -15271,10 +15137,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: ActionId::Ebih__Base_Camp__Left_Platform_Moved__Reset_Left_Platform.into_usize(),
                 end: ActionId::Ebih__Base_Camp__Left_Platform_Moved__Reset_Left_Platform.into_usize() + 1,
             },
-            area_spots: Range {
-                start: SpotId::Ebih__Base_Camp__Behind_Vehicle.into_usize(),
-                end: SpotId::Ebih__Base_Camp__West_Midair.into_usize() + 1,
-            },
         },
         SpotId::Ebih__Base_Camp__Top_Platform => Spot {
             id: SpotId::Ebih__Base_Camp__Top_Platform,
@@ -15289,10 +15151,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Ebih__Base_Camp__Behind_Vehicle.into_usize(),
-                end: SpotId::Ebih__Base_Camp__West_Midair.into_usize() + 1,
-            },
         },
         SpotId::Ebih__Bunker_Interior__Entry => Spot {
             id: SpotId::Ebih__Bunker_Interior__Entry,
@@ -15306,10 +15164,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Ebih__Bunker_Interior__Desk.into_usize(),
-                end: SpotId::Ebih__Bunker_Interior__Entry.into_usize() + 1,
-            },
         },
         SpotId::Ebih__Bunker_Interior__Desk => Spot {
             id: SpotId::Ebih__Bunker_Interior__Desk,
@@ -15322,10 +15176,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Ebih__Bunker_Interior__Desk.into_usize(),
-                end: SpotId::Ebih__Bunker_Interior__Entry.into_usize() + 1,
             },
         },
         SpotId::Ebih__Building_Interior__Entry => Spot {
@@ -15341,10 +15191,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Ebih__Building_Interior__Corner.into_usize(),
-                end: SpotId::Ebih__Building_Interior__Entry.into_usize() + 1,
-            },
         },
         SpotId::Ebih__Building_Interior__Corner => Spot {
             id: SpotId::Ebih__Building_Interior__Corner,
@@ -15357,10 +15203,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Ebih__Building_Interior__Corner.into_usize(),
-                end: SpotId::Ebih__Building_Interior__Entry.into_usize() + 1,
             },
         },
         SpotId::Ebih__Tent_Interior__Entry => Spot {
@@ -15375,10 +15217,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Ebih__Tent_Interior__Desk.into_usize(),
-                end: SpotId::Ebih__Tent_Interior__Entry.into_usize() + 1,
-            },
         },
         SpotId::Ebih__Tent_Interior__Desk => Spot {
             id: SpotId::Ebih__Tent_Interior__Desk,
@@ -15391,10 +15229,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Ebih__Tent_Interior__Desk.into_usize(),
-                end: SpotId::Ebih__Tent_Interior__Entry.into_usize() + 1,
             },
         },
         SpotId::Ebih__By_Garage__East_13 => Spot {
@@ -15409,10 +15243,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Ebih__By_Garage__Crawlspace.into_usize(),
-                end: SpotId::Ebih__By_Garage__West_Bush.into_usize() + 1,
-            },
         },
         SpotId::Ebih__By_Garage__East_Platform => Spot {
             id: SpotId::Ebih__By_Garage__East_Platform,
@@ -15426,10 +15256,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Ebih__By_Garage__Crawlspace.into_usize(),
-                end: SpotId::Ebih__By_Garage__West_Bush.into_usize() + 1,
-            },
         },
         SpotId::Ebih__By_Garage__Crawlspace_Opening => Spot {
             id: SpotId::Ebih__By_Garage__Crawlspace_Opening,
@@ -15442,10 +15268,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Ebih__By_Garage__Crawlspace.into_usize(),
-                end: SpotId::Ebih__By_Garage__West_Bush.into_usize() + 1,
             },
         },
         SpotId::Ebih__By_Garage__Crawlspace => Spot {
@@ -15461,10 +15283,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Ebih__By_Garage__Crawlspace.into_usize(),
-                end: SpotId::Ebih__By_Garage__West_Bush.into_usize() + 1,
-            },
         },
         SpotId::Ebih__By_Garage__Outcropping => Spot {
             id: SpotId::Ebih__By_Garage__Outcropping,
@@ -15477,10 +15295,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Ebih__By_Garage__Crawlspace.into_usize(),
-                end: SpotId::Ebih__By_Garage__West_Bush.into_usize() + 1,
-            },
         },
         SpotId::Ebih__By_Garage__East_Bush => Spot {
             id: SpotId::Ebih__By_Garage__East_Bush,
@@ -15492,10 +15306,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Ebih__By_Garage__Crawlspace.into_usize(),
-                end: SpotId::Ebih__By_Garage__West_Bush.into_usize() + 1,
             },
         },
         SpotId::Ebih__By_Garage__Lower_Platform => Spot {
@@ -15510,10 +15320,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Ebih__By_Garage__Crawlspace.into_usize(),
-                end: SpotId::Ebih__By_Garage__West_Bush.into_usize() + 1,
-            },
         },
         SpotId::Ebih__By_Garage__West_Bush => Spot {
             id: SpotId::Ebih__By_Garage__West_Bush,
@@ -15525,10 +15331,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Ebih__By_Garage__Crawlspace.into_usize(),
-                end: SpotId::Ebih__By_Garage__West_Bush.into_usize() + 1,
             },
         },
         SpotId::Ebih__By_Garage__West_12 => Spot {
@@ -15543,10 +15345,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Ebih__By_Garage__Crawlspace.into_usize(),
-                end: SpotId::Ebih__By_Garage__West_Bush.into_usize() + 1,
-            },
         },
         SpotId::Ebih__By_Garage__West_13 => Spot {
             id: SpotId::Ebih__By_Garage__West_13,
@@ -15559,10 +15357,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Ebih__By_Garage__Crawlspace.into_usize(),
-                end: SpotId::Ebih__By_Garage__West_Bush.into_usize() + 1,
-            },
         },
         SpotId::Ebih__By_Garage__West_Below_Platforms => Spot {
             id: SpotId::Ebih__By_Garage__West_Below_Platforms,
@@ -15574,10 +15368,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Ebih__By_Garage__Crawlspace.into_usize(),
-                end: SpotId::Ebih__By_Garage__West_Bush.into_usize() + 1,
             },
         },
         SpotId::Ebih__By_Garage__Garage_Entry => Spot {
@@ -15592,10 +15382,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Ebih__By_Garage__Crawlspace.into_usize(),
-                end: SpotId::Ebih__By_Garage__West_Bush.into_usize() + 1,
-            },
         },
         SpotId::Ebih__By_Garage__East_Below_Platforms => Spot {
             id: SpotId::Ebih__By_Garage__East_Below_Platforms,
@@ -15608,10 +15394,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Ebih__By_Garage__Crawlspace.into_usize(),
-                end: SpotId::Ebih__By_Garage__West_Bush.into_usize() + 1,
-            },
         },
         SpotId::Ebih__By_Garage__East_12 => Spot {
             id: SpotId::Ebih__By_Garage__East_12,
@@ -15623,10 +15405,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Ebih__By_Garage__Crawlspace.into_usize(),
-                end: SpotId::Ebih__By_Garage__West_Bush.into_usize() + 1,
             },
         },
         SpotId::Ebih__Garage__Entry => Spot {
@@ -15641,10 +15419,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Ebih__Garage__Boxes.into_usize(),
-                end: SpotId::Ebih__Garage__Entry.into_usize() + 1,
-            },
         },
         SpotId::Ebih__Garage__Boxes => Spot {
             id: SpotId::Ebih__Garage__Boxes,
@@ -15657,10 +15431,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Ebih__Garage__Boxes.into_usize(),
-                end: SpotId::Ebih__Garage__Entry.into_usize() + 1,
             },
         },
         SpotId::Ebih__Grid_25_10_12__East_12 => Spot {
@@ -15675,10 +15445,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Ebih__Grid_25_10_12__Below_Bush.into_usize(),
-                end: SpotId::Ebih__Grid_25_10_12__West_12.into_usize() + 1,
-            },
         },
         SpotId::Ebih__Grid_25_10_12__Bush => Spot {
             id: SpotId::Ebih__Grid_25_10_12__Bush,
@@ -15692,10 +15458,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Ebih__Grid_25_10_12__Below_Bush.into_usize(),
-                end: SpotId::Ebih__Grid_25_10_12__West_12.into_usize() + 1,
-            },
         },
         SpotId::Ebih__Grid_25_10_12__West_12 => Spot {
             id: SpotId::Ebih__Grid_25_10_12__West_12,
@@ -15707,10 +15469,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Ebih__Grid_25_10_12__Below_Bush.into_usize(),
-                end: SpotId::Ebih__Grid_25_10_12__West_12.into_usize() + 1,
             },
         },
         SpotId::Ebih__Grid_25_10_12__Below_Bush => Spot {
@@ -15725,10 +15483,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Ebih__Grid_25_10_12__Below_Bush.into_usize(),
-                end: SpotId::Ebih__Grid_25_10_12__West_12.into_usize() + 1,
-            },
         },
         SpotId::Ebih__Grid_25_10_12__Mid_Ledge => Spot {
             id: SpotId::Ebih__Grid_25_10_12__Mid_Ledge,
@@ -15741,10 +15495,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Ebih__Grid_25_10_12__Below_Bush.into_usize(),
-                end: SpotId::Ebih__Grid_25_10_12__West_12.into_usize() + 1,
             },
         },
         SpotId::Ebih__Grid_25_10_12__Door_Left => Spot {
@@ -15760,10 +15510,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: ActionId::Ebih__Grid_25_10_12__Door_Left__Open_Door.into_usize(),
                 end: ActionId::Ebih__Grid_25_10_12__Door_Left__Open_Door.into_usize() + 1,
             },
-            area_spots: Range {
-                start: SpotId::Ebih__Grid_25_10_12__Below_Bush.into_usize(),
-                end: SpotId::Ebih__Grid_25_10_12__West_12.into_usize() + 1,
-            },
         },
         SpotId::Ebih__Grid_25_10_12__Top_Platform => Spot {
             id: SpotId::Ebih__Grid_25_10_12__Top_Platform,
@@ -15776,10 +15522,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Ebih__Grid_25_10_12__Below_Bush.into_usize(),
-                end: SpotId::Ebih__Grid_25_10_12__West_12.into_usize() + 1,
             },
         },
         SpotId::Ebih__Grid_25_10_12__West_11 => Spot {
@@ -15794,10 +15536,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Ebih__Grid_25_10_12__Below_Bush.into_usize(),
-                end: SpotId::Ebih__Grid_25_10_12__West_12.into_usize() + 1,
-            },
         },
         SpotId::Ebih__Grid_25_10_12__West_10 => Spot {
             id: SpotId::Ebih__Grid_25_10_12__West_10,
@@ -15811,10 +15549,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Ebih__Grid_25_10_12__Below_Bush.into_usize(),
-                end: SpotId::Ebih__Grid_25_10_12__West_12.into_usize() + 1,
-            },
         },
         SpotId::Ebih__Grid_25_10_12__Door => Spot {
             id: SpotId::Ebih__Grid_25_10_12__Door,
@@ -15827,10 +15561,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Ebih__Grid_25_10_12__Below_Bush.into_usize(),
-                end: SpotId::Ebih__Grid_25_10_12__West_12.into_usize() + 1,
             },
         },
         SpotId::Ebih__Grid_25_10_12__East_11 => Spot {
@@ -15846,10 +15576,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: ActionId::Ebih__Grid_25_10_12__East_11__Open_Door.into_usize(),
                 end: ActionId::Ebih__Grid_25_10_12__East_11__Open_Door.into_usize() + 1,
             },
-            area_spots: Range {
-                start: SpotId::Ebih__Grid_25_10_12__Below_Bush.into_usize(),
-                end: SpotId::Ebih__Grid_25_10_12__West_12.into_usize() + 1,
-            },
         },
         SpotId::Ebih__Grid_25_10_12__East_10 => Spot {
             id: SpotId::Ebih__Grid_25_10_12__East_10,
@@ -15863,10 +15589,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Ebih__Grid_25_10_12__Below_Bush.into_usize(),
-                end: SpotId::Ebih__Grid_25_10_12__West_12.into_usize() + 1,
             },
         },
         SpotId::Ebih__Grid_25_10_12__Hidden_Bush => Spot {
@@ -15882,10 +15604,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Ebih__Grid_25_10_12__Below_Bush.into_usize(),
-                end: SpotId::Ebih__Grid_25_10_12__West_12.into_usize() + 1,
-            },
         },
         SpotId::Ebih__Waterfall__East_10 => Spot {
             id: SpotId::Ebih__Waterfall__East_10,
@@ -15899,10 +15617,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Ebih__Waterfall__Alcove.into_usize(),
-                end: SpotId::Ebih__Waterfall__West_Main_Path.into_usize() + 1,
-            },
         },
         SpotId::Ebih__Waterfall__East_Ledge => Spot {
             id: SpotId::Ebih__Waterfall__East_Ledge,
@@ -15914,10 +15628,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Ebih__Waterfall__Alcove.into_usize(),
-                end: SpotId::Ebih__Waterfall__West_Main_Path.into_usize() + 1,
             },
         },
         SpotId::Ebih__Waterfall__East_11 => Spot {
@@ -15932,10 +15642,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Ebih__Waterfall__Alcove.into_usize(),
-                end: SpotId::Ebih__Waterfall__West_Main_Path.into_usize() + 1,
-            },
         },
         SpotId::Ebih__Waterfall__Near_East_Tree => Spot {
             id: SpotId::Ebih__Waterfall__Near_East_Tree,
@@ -15948,10 +15654,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Ebih__Waterfall__Alcove.into_usize(),
-                end: SpotId::Ebih__Waterfall__West_Main_Path.into_usize() + 1,
-            },
         },
         SpotId::Ebih__Waterfall__Waterfall_Right => Spot {
             id: SpotId::Ebih__Waterfall__Waterfall_Right,
@@ -15963,10 +15665,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Ebih__Waterfall__Alcove.into_usize(),
-                end: SpotId::Ebih__Waterfall__West_Main_Path.into_usize() + 1,
             },
         },
         SpotId::Ebih__Waterfall__Alcove_Right => Spot {
@@ -15982,10 +15680,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Ebih__Waterfall__Alcove.into_usize(),
-                end: SpotId::Ebih__Waterfall__West_Main_Path.into_usize() + 1,
-            },
         },
         SpotId::Ebih__Waterfall__Waterfall_Center_Right => Spot {
             id: SpotId::Ebih__Waterfall__Waterfall_Center_Right,
@@ -15997,10 +15691,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Ebih__Waterfall__Alcove.into_usize(),
-                end: SpotId::Ebih__Waterfall__West_Main_Path.into_usize() + 1,
             },
         },
         SpotId::Ebih__Waterfall__Waterfall_Center_Center => Spot {
@@ -16015,10 +15705,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Ebih__Waterfall__Alcove.into_usize(),
-                end: SpotId::Ebih__Waterfall__West_Main_Path.into_usize() + 1,
-            },
         },
         SpotId::Ebih__Waterfall__Waterfall_Center_Left => Spot {
             id: SpotId::Ebih__Waterfall__Waterfall_Center_Left,
@@ -16030,10 +15716,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Ebih__Waterfall__Alcove.into_usize(),
-                end: SpotId::Ebih__Waterfall__West_Main_Path.into_usize() + 1,
             },
         },
         SpotId::Ebih__Waterfall__Alcove_Left => Spot {
@@ -16049,10 +15731,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Ebih__Waterfall__Alcove.into_usize(),
-                end: SpotId::Ebih__Waterfall__West_Main_Path.into_usize() + 1,
-            },
         },
         SpotId::Ebih__Waterfall__Alcove => Spot {
             id: SpotId::Ebih__Waterfall__Alcove,
@@ -16067,10 +15745,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Ebih__Waterfall__Alcove.into_usize(),
-                end: SpotId::Ebih__Waterfall__West_Main_Path.into_usize() + 1,
-            },
         },
         SpotId::Ebih__Waterfall__Under_Waterfall => Spot {
             id: SpotId::Ebih__Waterfall__Under_Waterfall,
@@ -16084,10 +15758,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Ebih__Waterfall__Alcove.into_usize(),
-                end: SpotId::Ebih__Waterfall__West_Main_Path.into_usize() + 1,
-            },
         },
         SpotId::Ebih__Waterfall__Waterfall_Left => Spot {
             id: SpotId::Ebih__Waterfall__Waterfall_Left,
@@ -16099,10 +15769,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Ebih__Waterfall__Alcove.into_usize(),
-                end: SpotId::Ebih__Waterfall__West_Main_Path.into_usize() + 1,
             },
         },
         SpotId::Ebih__Waterfall__Wall_Right => Spot {
@@ -16118,10 +15784,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Ebih__Waterfall__Alcove.into_usize(),
-                end: SpotId::Ebih__Waterfall__West_Main_Path.into_usize() + 1,
-            },
         },
         SpotId::Ebih__Waterfall__Wall_Left => Spot {
             id: SpotId::Ebih__Waterfall__Wall_Left,
@@ -16136,10 +15798,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Ebih__Waterfall__Alcove.into_usize(),
-                end: SpotId::Ebih__Waterfall__West_Main_Path.into_usize() + 1,
-            },
         },
         SpotId::Ebih__Waterfall__West_11 => Spot {
             id: SpotId::Ebih__Waterfall__West_11,
@@ -16152,10 +15810,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Ebih__Waterfall__Alcove.into_usize(),
-                end: SpotId::Ebih__Waterfall__West_Main_Path.into_usize() + 1,
             },
         },
         SpotId::Ebih__Waterfall__Lower_West_Tree => Spot {
@@ -16170,10 +15824,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Ebih__Waterfall__Alcove.into_usize(),
-                end: SpotId::Ebih__Waterfall__West_Main_Path.into_usize() + 1,
-            },
         },
         SpotId::Ebih__Waterfall__West_Lower_Path => Spot {
             id: SpotId::Ebih__Waterfall__West_Lower_Path,
@@ -16185,10 +15835,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Ebih__Waterfall__Alcove.into_usize(),
-                end: SpotId::Ebih__Waterfall__West_Main_Path.into_usize() + 1,
             },
         },
         SpotId::Ebih__Waterfall__West_10 => Spot {
@@ -16203,10 +15849,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Ebih__Waterfall__Alcove.into_usize(),
-                end: SpotId::Ebih__Waterfall__West_Main_Path.into_usize() + 1,
-            },
         },
         SpotId::Ebih__Waterfall__West_9 => Spot {
             id: SpotId::Ebih__Waterfall__West_9,
@@ -16220,10 +15862,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Ebih__Waterfall__Alcove.into_usize(),
-                end: SpotId::Ebih__Waterfall__West_Main_Path.into_usize() + 1,
-            },
         },
         SpotId::Ebih__Waterfall__West_Climb => Spot {
             id: SpotId::Ebih__Waterfall__West_Climb,
@@ -16236,10 +15874,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Ebih__Waterfall__Alcove.into_usize(),
-                end: SpotId::Ebih__Waterfall__West_Main_Path.into_usize() + 1,
             },
         },
         SpotId::Ebih__Waterfall__Ledge_Below_Hole => Spot {
@@ -16255,10 +15889,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: ActionId::Ebih__Waterfall__Ledge_Below_Hole__Throw_Drone.into_usize(),
                 end: ActionId::Ebih__Waterfall__Ledge_Below_Hole__Throw_Drone.into_usize() + 1,
             },
-            area_spots: Range {
-                start: SpotId::Ebih__Waterfall__Alcove.into_usize(),
-                end: SpotId::Ebih__Waterfall__West_Main_Path.into_usize() + 1,
-            },
         },
         SpotId::Ebih__Waterfall__Below_Left_Switch => Spot {
             id: SpotId::Ebih__Waterfall__Below_Left_Switch,
@@ -16272,10 +15902,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: ActionId::Ebih__Waterfall__Below_Left_Switch__Open_Door.into_usize(),
                 end: ActionId::Ebih__Waterfall__Below_Left_Switch__Open_Door.into_usize() + 1,
-            },
-            area_spots: Range {
-                start: SpotId::Ebih__Waterfall__Alcove.into_usize(),
-                end: SpotId::Ebih__Waterfall__West_Main_Path.into_usize() + 1,
             },
         },
         SpotId::Ebih__Waterfall__West_8 => Spot {
@@ -16291,10 +15917,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: ActionId::Ebih__Waterfall__West_8__Open_Door.into_usize(),
                 end: ActionId::Ebih__Waterfall__West_8__Open_Door.into_usize() + 1,
             },
-            area_spots: Range {
-                start: SpotId::Ebih__Waterfall__Alcove.into_usize(),
-                end: SpotId::Ebih__Waterfall__West_Main_Path.into_usize() + 1,
-            },
         },
         SpotId::Ebih__Waterfall__West_Door_Left => Spot {
             id: SpotId::Ebih__Waterfall__West_Door_Left,
@@ -16307,10 +15929,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Ebih__Waterfall__Alcove.into_usize(),
-                end: SpotId::Ebih__Waterfall__West_Main_Path.into_usize() + 1,
             },
         },
         SpotId::Ebih__Waterfall__West_Door => Spot {
@@ -16325,10 +15943,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Ebih__Waterfall__Alcove.into_usize(),
-                end: SpotId::Ebih__Waterfall__West_Main_Path.into_usize() + 1,
-            },
         },
         SpotId::Ebih__Waterfall__West_Door_Right => Spot {
             id: SpotId::Ebih__Waterfall__West_Door_Right,
@@ -16341,10 +15955,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Ebih__Waterfall__Alcove.into_usize(),
-                end: SpotId::Ebih__Waterfall__West_Main_Path.into_usize() + 1,
             },
         },
         SpotId::Ebih__Waterfall__Middle_West_Tree => Spot {
@@ -16359,10 +15969,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Ebih__Waterfall__Alcove.into_usize(),
-                end: SpotId::Ebih__Waterfall__West_Main_Path.into_usize() + 1,
-            },
         },
         SpotId::Ebih__Waterfall__West_Main_Path => Spot {
             id: SpotId::Ebih__Waterfall__West_Main_Path,
@@ -16374,10 +15980,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Ebih__Waterfall__Alcove.into_usize(),
-                end: SpotId::Ebih__Waterfall__West_Main_Path.into_usize() + 1,
             },
         },
         SpotId::Ebih__Waterfall__Cave_Entrance => Spot {
@@ -16392,10 +15994,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Ebih__Waterfall__Alcove.into_usize(),
-                end: SpotId::Ebih__Waterfall__West_Main_Path.into_usize() + 1,
-            },
         },
         SpotId::Ebih__Waterfall__Center_Main_Path => Spot {
             id: SpotId::Ebih__Waterfall__Center_Main_Path,
@@ -16408,10 +16006,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Ebih__Waterfall__Alcove.into_usize(),
-                end: SpotId::Ebih__Waterfall__West_Main_Path.into_usize() + 1,
-            },
         },
         SpotId::Ebih__Waterfall__Big_Tree => Spot {
             id: SpotId::Ebih__Waterfall__Big_Tree,
@@ -16423,10 +16017,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Ebih__Waterfall__Alcove.into_usize(),
-                end: SpotId::Ebih__Waterfall__West_Main_Path.into_usize() + 1,
             },
         },
         SpotId::Ebih__Waterfall__Below_Tree => Spot {
@@ -16441,10 +16031,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Ebih__Waterfall__Alcove.into_usize(),
-                end: SpotId::Ebih__Waterfall__West_Main_Path.into_usize() + 1,
-            },
         },
         SpotId::Ebih__Waterfall__Platform => Spot {
             id: SpotId::Ebih__Waterfall__Platform,
@@ -16457,10 +16043,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Ebih__Waterfall__Alcove.into_usize(),
-                end: SpotId::Ebih__Waterfall__West_Main_Path.into_usize() + 1,
             },
         },
         SpotId::Ebih__Waterfall__East_8 => Spot {
@@ -16475,10 +16057,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Ebih__Waterfall__Alcove.into_usize(),
-                end: SpotId::Ebih__Waterfall__West_Main_Path.into_usize() + 1,
-            },
         },
         SpotId::Ebih__Waterfall__East_7 => Spot {
             id: SpotId::Ebih__Waterfall__East_7,
@@ -16492,10 +16070,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Ebih__Waterfall__Alcove.into_usize(),
-                end: SpotId::Ebih__Waterfall__West_Main_Path.into_usize() + 1,
-            },
         },
         SpotId::Ebih__Waterfall__Top_Waterfall => Spot {
             id: SpotId::Ebih__Waterfall__Top_Waterfall,
@@ -16507,10 +16081,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Ebih__Waterfall__Alcove.into_usize(),
-                end: SpotId::Ebih__Waterfall__West_Main_Path.into_usize() + 1,
             },
         },
         SpotId::Ebih__Waterfall__West_7 => Spot {
@@ -16525,10 +16095,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Ebih__Waterfall__Alcove.into_usize(),
-                end: SpotId::Ebih__Waterfall__West_Main_Path.into_usize() + 1,
-            },
         },
         SpotId::Ebih__Ebih_West__East_10 => Spot {
             id: SpotId::Ebih__Ebih_West__East_10,
@@ -16541,10 +16107,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Ebih__Ebih_West__Above_Alcove.into_usize(),
-                end: SpotId::Ebih__Ebih_West__West_High_Cliff.into_usize() + 1,
             },
         },
         SpotId::Ebih__Ebih_West__Mid_Save => Spot {
@@ -16559,10 +16121,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: ActionId::Ebih__Ebih_West__Mid_Save__Save.into_usize(),
                 end: ActionId::Ebih__Ebih_West__Mid_Save__Save.into_usize() + 1,
             },
-            area_spots: Range {
-                start: SpotId::Ebih__Ebih_West__Above_Alcove.into_usize(),
-                end: SpotId::Ebih__Ebih_West__West_High_Cliff.into_usize() + 1,
-            },
         },
         SpotId::Ebih__Ebih_West__Alcove_Entrance => Spot {
             id: SpotId::Ebih__Ebih_West__Alcove_Entrance,
@@ -16575,10 +16133,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Ebih__Ebih_West__Above_Alcove.into_usize(),
-                end: SpotId::Ebih__Ebih_West__West_High_Cliff.into_usize() + 1,
             },
         },
         SpotId::Ebih__Ebih_West__Alcove => Spot {
@@ -16593,10 +16147,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Ebih__Ebih_West__Above_Alcove.into_usize(),
-                end: SpotId::Ebih__Ebih_West__West_High_Cliff.into_usize() + 1,
-            },
         },
         SpotId::Ebih__Ebih_West__Above_Alcove => Spot {
             id: SpotId::Ebih__Ebih_West__Above_Alcove,
@@ -16608,10 +16158,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Ebih__Ebih_West__Above_Alcove.into_usize(),
-                end: SpotId::Ebih__Ebih_West__West_High_Cliff.into_usize() + 1,
             },
         },
         SpotId::Ebih__Ebih_West__East_9 => Spot {
@@ -16625,10 +16171,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Ebih__Ebih_West__Above_Alcove.into_usize(),
-                end: SpotId::Ebih__Ebih_West__West_High_Cliff.into_usize() + 1,
             },
         },
         SpotId::Ebih__Ebih_West__Block_Left => Spot {
@@ -16644,10 +16186,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Ebih__Ebih_West__Above_Alcove.into_usize(),
-                end: SpotId::Ebih__Ebih_West__West_High_Cliff.into_usize() + 1,
-            },
         },
         SpotId::Ebih__Ebih_West__East_7 => Spot {
             id: SpotId::Ebih__Ebih_West__East_7,
@@ -16661,10 +16199,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Ebih__Ebih_West__Above_Alcove.into_usize(),
-                end: SpotId::Ebih__Ebih_West__West_High_Cliff.into_usize() + 1,
-            },
         },
         SpotId::Ebih__Ebih_West__Above_Chute => Spot {
             id: SpotId::Ebih__Ebih_West__Above_Chute,
@@ -16676,10 +16210,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Ebih__Ebih_West__Above_Alcove.into_usize(),
-                end: SpotId::Ebih__Ebih_West__West_High_Cliff.into_usize() + 1,
             },
         },
         SpotId::Ebih__Ebih_West__Upper_Save => Spot {
@@ -16694,10 +16224,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: ActionId::Ebih__Ebih_West__Upper_Save__Save.into_usize(),
                 end: ActionId::Ebih__Ebih_West__Upper_Save__Save.into_usize() + 1,
             },
-            area_spots: Range {
-                start: SpotId::Ebih__Ebih_West__Above_Alcove.into_usize(),
-                end: SpotId::Ebih__Ebih_West__West_High_Cliff.into_usize() + 1,
-            },
         },
         SpotId::Ebih__Ebih_West__Medium_High_Platform => Spot {
             id: SpotId::Ebih__Ebih_West__Medium_High_Platform,
@@ -16710,10 +16236,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: ActionId::Ebih__Ebih_West__Medium_High_Platform__Throw_Drone_Long.into_usize(),
                 end: ActionId::Ebih__Ebih_West__Medium_High_Platform__Throw_Drone_Long.into_usize() + 1,
-            },
-            area_spots: Range {
-                start: SpotId::Ebih__Ebih_West__Above_Alcove.into_usize(),
-                end: SpotId::Ebih__Ebih_West__West_High_Cliff.into_usize() + 1,
             },
         },
         SpotId::Ebih__Ebih_West__High_Platform => Spot {
@@ -16728,10 +16250,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Ebih__Ebih_West__Above_Alcove.into_usize(),
-                end: SpotId::Ebih__Ebih_West__West_High_Cliff.into_usize() + 1,
-            },
         },
         SpotId::Ebih__Ebih_West__High_Ledge => Spot {
             id: SpotId::Ebih__Ebih_West__High_Ledge,
@@ -16743,10 +16261,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Ebih__Ebih_West__Above_Alcove.into_usize(),
-                end: SpotId::Ebih__Ebih_West__West_High_Cliff.into_usize() + 1,
             },
         },
         SpotId::Ebih__Ebih_West__East_6 => Spot {
@@ -16761,10 +16275,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Ebih__Ebih_West__Above_Alcove.into_usize(),
-                end: SpotId::Ebih__Ebih_West__West_High_Cliff.into_usize() + 1,
-            },
         },
         SpotId::Ebih__Ebih_West__East_8 => Spot {
             id: SpotId::Ebih__Ebih_West__East_8,
@@ -16777,10 +16287,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Ebih__Ebih_West__Above_Alcove.into_usize(),
-                end: SpotId::Ebih__Ebih_West__West_High_Cliff.into_usize() + 1,
             },
         },
         SpotId::Ebih__Ebih_West__Middle_Middle => Spot {
@@ -16795,10 +16301,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Ebih__Ebih_West__Above_Alcove.into_usize(),
-                end: SpotId::Ebih__Ebih_West__West_High_Cliff.into_usize() + 1,
-            },
         },
         SpotId::Ebih__Ebih_West__Middle_Cliff => Spot {
             id: SpotId::Ebih__Ebih_West__Middle_Cliff,
@@ -16810,10 +16312,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Ebih__Ebih_West__Above_Alcove.into_usize(),
-                end: SpotId::Ebih__Ebih_West__West_High_Cliff.into_usize() + 1,
             },
         },
         SpotId::Ebih__Ebih_West__Giguna_Pillar => Spot {
@@ -16828,10 +16326,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Ebih__Ebih_West__Above_Alcove.into_usize(),
-                end: SpotId::Ebih__Ebih_West__West_High_Cliff.into_usize() + 1,
-            },
         },
         SpotId::Ebih__Ebih_West__West_9 => Spot {
             id: SpotId::Ebih__Ebih_West__West_9,
@@ -16844,10 +16338,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Ebih__Ebih_West__Above_Alcove.into_usize(),
-                end: SpotId::Ebih__Ebih_West__West_High_Cliff.into_usize() + 1,
             },
         },
         SpotId::Ebih__Ebih_West__Block_Right => Spot {
@@ -16863,10 +16353,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Ebih__Ebih_West__Above_Alcove.into_usize(),
-                end: SpotId::Ebih__Ebih_West__West_High_Cliff.into_usize() + 1,
-            },
         },
         SpotId::Ebih__Ebih_West__Refill_Station => Spot {
             id: SpotId::Ebih__Ebih_West__Refill_Station,
@@ -16878,10 +16364,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Ebih__Ebih_West__Above_Alcove.into_usize(),
-                end: SpotId::Ebih__Ebih_West__West_High_Cliff.into_usize() + 1,
             },
         },
         SpotId::Ebih__Ebih_West__East_11 => Spot {
@@ -16896,10 +16378,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Ebih__Ebih_West__Above_Alcove.into_usize(),
-                end: SpotId::Ebih__Ebih_West__West_High_Cliff.into_usize() + 1,
-            },
         },
         SpotId::Ebih__Ebih_West__Above_Door => Spot {
             id: SpotId::Ebih__Ebih_West__Above_Door,
@@ -16912,10 +16390,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Ebih__Ebih_West__Above_Alcove.into_usize(),
-                end: SpotId::Ebih__Ebih_West__West_High_Cliff.into_usize() + 1,
             },
         },
         SpotId::Ebih__Ebih_West__Below_Door => Spot {
@@ -16931,10 +16405,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: ActionId::Ebih__Ebih_West__Below_Door__Open_Door.into_usize(),
                 end: ActionId::Ebih__Ebih_West__Below_Door__Open_Door.into_usize() + 1,
             },
-            area_spots: Range {
-                start: SpotId::Ebih__Ebih_West__Above_Alcove.into_usize(),
-                end: SpotId::Ebih__Ebih_West__West_High_Cliff.into_usize() + 1,
-            },
         },
         SpotId::Ebih__Ebih_West__Small_Gap => Spot {
             id: SpotId::Ebih__Ebih_West__Small_Gap,
@@ -16947,10 +16417,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Ebih__Ebih_West__Above_Alcove.into_usize(),
-                end: SpotId::Ebih__Ebih_West__West_High_Cliff.into_usize() + 1,
             },
         },
         SpotId::Ebih__Ebih_West__Left_of_Gap => Spot {
@@ -16965,10 +16431,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Ebih__Ebih_West__Above_Alcove.into_usize(),
-                end: SpotId::Ebih__Ebih_West__West_High_Cliff.into_usize() + 1,
-            },
         },
         SpotId::Ebih__Ebih_West__Left_of_Switch => Spot {
             id: SpotId::Ebih__Ebih_West__Left_of_Switch,
@@ -16981,10 +16443,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: ActionId::Ebih__Ebih_West__Left_of_Switch__Open_Door.into_usize(),
                 end: ActionId::Ebih__Ebih_West__Left_of_Switch__Open_Door.into_usize() + 1,
-            },
-            area_spots: Range {
-                start: SpotId::Ebih__Ebih_West__Above_Alcove.into_usize(),
-                end: SpotId::Ebih__Ebih_West__West_High_Cliff.into_usize() + 1,
             },
         },
         SpotId::Ebih__Ebih_West__Lower_Hill => Spot {
@@ -16999,10 +16457,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Ebih__Ebih_West__Above_Alcove.into_usize(),
-                end: SpotId::Ebih__Ebih_West__West_High_Cliff.into_usize() + 1,
-            },
         },
         SpotId::Ebih__Ebih_West__Lower_Cliff => Spot {
             id: SpotId::Ebih__Ebih_West__Lower_Cliff,
@@ -17014,10 +16468,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Ebih__Ebih_West__Above_Alcove.into_usize(),
-                end: SpotId::Ebih__Ebih_West__West_High_Cliff.into_usize() + 1,
             },
         },
         SpotId::Ebih__Ebih_West__Lower_Platform => Spot {
@@ -17032,10 +16482,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Ebih__Ebih_West__Above_Alcove.into_usize(),
-                end: SpotId::Ebih__Ebih_West__West_High_Cliff.into_usize() + 1,
-            },
         },
         SpotId::Ebih__Ebih_West__Lower_Save => Spot {
             id: SpotId::Ebih__Ebih_West__Lower_Save,
@@ -17049,10 +16495,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: ActionId::Ebih__Ebih_West__Lower_Save__Save.into_usize(),
                 end: ActionId::Ebih__Ebih_West__Lower_Save__Save.into_usize() + 1,
             },
-            area_spots: Range {
-                start: SpotId::Ebih__Ebih_West__Above_Alcove.into_usize(),
-                end: SpotId::Ebih__Ebih_West__West_High_Cliff.into_usize() + 1,
-            },
         },
         SpotId::Ebih__Ebih_West__West_High_Cliff => Spot {
             id: SpotId::Ebih__Ebih_West__West_High_Cliff,
@@ -17065,10 +16507,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Ebih__Ebih_West__Above_Alcove.into_usize(),
-                end: SpotId::Ebih__Ebih_West__West_High_Cliff.into_usize() + 1,
-            },
         },
         SpotId::Ebih__Ebih_West__West_Fork => Spot {
             id: SpotId::Ebih__Ebih_West__West_Fork,
@@ -17080,10 +16518,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Ebih__Ebih_West__Above_Alcove.into_usize(),
-                end: SpotId::Ebih__Ebih_West__West_High_Cliff.into_usize() + 1,
             },
         },
         SpotId::Ebih__Ebih_West__West_11 => Spot {
@@ -17098,10 +16532,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Ebih__Ebih_West__Above_Alcove.into_usize(),
-                end: SpotId::Ebih__Ebih_West__West_High_Cliff.into_usize() + 1,
-            },
         },
         SpotId::Ebih__Ebih_West__West_12 => Spot {
             id: SpotId::Ebih__Ebih_West__West_12,
@@ -17114,10 +16544,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Ebih__Ebih_West__Above_Alcove.into_usize(),
-                end: SpotId::Ebih__Ebih_West__West_High_Cliff.into_usize() + 1,
             },
         },
         SpotId::Ebih__Ebih_West__West_13 => Spot {
@@ -17132,10 +16558,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Ebih__Ebih_West__Above_Alcove.into_usize(),
-                end: SpotId::Ebih__Ebih_West__West_High_Cliff.into_usize() + 1,
-            },
         },
         SpotId::Ebih__Ebih_West__East_13 => Spot {
             id: SpotId::Ebih__Ebih_West__East_13,
@@ -17148,10 +16570,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Ebih__Ebih_West__Above_Alcove.into_usize(),
-                end: SpotId::Ebih__Ebih_West__West_High_Cliff.into_usize() + 1,
             },
         },
         SpotId::Ebih__Cave__Entry => Spot {
@@ -17167,10 +16585,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Ebih__Cave__Entry.into_usize(),
-                end: SpotId::Ebih__Cave__Entry.into_usize() + 1,
-            },
         },
         SpotId::Ebih__Ebih_East__West_8 => Spot {
             id: SpotId::Ebih__Ebih_East__West_8,
@@ -17183,10 +16597,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Ebih__Ebih_East__Corner.into_usize(),
-                end: SpotId::Ebih__Ebih_East__West_8.into_usize() + 1,
             },
         },
         SpotId::Ebih__Ebih_East__Moving_Platform => Spot {
@@ -17201,10 +16611,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: ActionId::Ebih__Ebih_East__Moving_Platform__Activate_Ride.into_usize(),
                 end: ActionId::Ebih__Ebih_East__Moving_Platform__Activate_Ride.into_usize() + 1,
             },
-            area_spots: Range {
-                start: SpotId::Ebih__Ebih_East__Corner.into_usize(),
-                end: SpotId::Ebih__Ebih_East__West_8.into_usize() + 1,
-            },
         },
         SpotId::Ebih__Ebih_East__Ledge_End => Spot {
             id: SpotId::Ebih__Ebih_East__Ledge_End,
@@ -17216,10 +16622,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Ebih__Ebih_East__Corner.into_usize(),
-                end: SpotId::Ebih__Ebih_East__West_8.into_usize() + 1,
             },
         },
         SpotId::Ebih__Ebih_East__Lower_Moving_Platform => Spot {
@@ -17235,10 +16637,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: ActionId::Ebih__Ebih_East__Lower_Moving_Platform__Activate_Lift.into_usize(),
                 end: ActionId::Ebih__Ebih_East__Lower_Moving_Platform__Activate_Ride.into_usize() + 1,
             },
-            area_spots: Range {
-                start: SpotId::Ebih__Ebih_East__Corner.into_usize(),
-                end: SpotId::Ebih__Ebih_East__West_8.into_usize() + 1,
-            },
         },
         SpotId::Ebih__Ebih_East__Corner => Spot {
             id: SpotId::Ebih__Ebih_East__Corner,
@@ -17251,10 +16649,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Ebih__Ebih_East__Corner.into_usize(),
-                end: SpotId::Ebih__Ebih_East__West_8.into_usize() + 1,
             },
         },
         SpotId::Ebih__Ebih_East__Dispenser => Spot {
@@ -17270,10 +16664,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: ActionId::Ebih__Ebih_East__Dispenser__Activate_Lift.into_usize(),
                 end: ActionId::Ebih__Ebih_East__Dispenser__Activate_Lift.into_usize() + 1,
             },
-            area_spots: Range {
-                start: SpotId::Ebih__Ebih_East__Corner.into_usize(),
-                end: SpotId::Ebih__Ebih_East__West_8.into_usize() + 1,
-            },
         },
         SpotId::Ebih__Ebih_East__East_Ledge => Spot {
             id: SpotId::Ebih__Ebih_East__East_Ledge,
@@ -17287,10 +16677,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Ebih__Ebih_East__Corner.into_usize(),
-                end: SpotId::Ebih__Ebih_East__West_8.into_usize() + 1,
-            },
         },
         SpotId::Ebih__Ebih_East__Middle_Platform => Spot {
             id: SpotId::Ebih__Ebih_East__Middle_Platform,
@@ -17303,10 +16689,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Ebih__Ebih_East__Corner.into_usize(),
-                end: SpotId::Ebih__Ebih_East__West_8.into_usize() + 1,
-            },
         },
         SpotId::Ebih__Ebih_East__Upper_Ledge => Spot {
             id: SpotId::Ebih__Ebih_East__Upper_Ledge,
@@ -17318,10 +16700,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Ebih__Ebih_East__Corner.into_usize(),
-                end: SpotId::Ebih__Ebih_East__West_8.into_usize() + 1,
             },
         },
         SpotId::Ebih__Ebih_East__West_7 => Spot {
@@ -17336,10 +16714,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Ebih__Ebih_East__Corner.into_usize(),
-                end: SpotId::Ebih__Ebih_East__West_8.into_usize() + 1,
-            },
         },
         SpotId::Ebih__Ebih_East__East_Hill => Spot {
             id: SpotId::Ebih__Ebih_East__East_Hill,
@@ -17351,10 +16725,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Ebih__Ebih_East__Corner.into_usize(),
-                end: SpotId::Ebih__Ebih_East__West_8.into_usize() + 1,
             },
         },
         SpotId::Ebih__Ebih_East__East_9 => Spot {
@@ -17369,10 +16739,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Ebih__Ebih_East__Corner.into_usize(),
-                end: SpotId::Ebih__Ebih_East__West_8.into_usize() + 1,
-            },
         },
         SpotId::Ebih__Grid_21_2_6__West_6 => Spot {
             id: SpotId::Ebih__Grid_21_2_6__West_6,
@@ -17386,10 +16752,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Ebih__Grid_21_2_6__East_6.into_usize(),
-                end: SpotId::Ebih__Grid_21_2_6__West_6.into_usize() + 1,
-            },
         },
         SpotId::Ebih__Grid_21_2_6__Portal_Stand => Spot {
             id: SpotId::Ebih__Grid_21_2_6__Portal_Stand,
@@ -17401,10 +16763,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Ebih__Grid_21_2_6__East_6.into_usize(),
-                end: SpotId::Ebih__Grid_21_2_6__West_6.into_usize() + 1,
             },
         },
         SpotId::Ebih__Grid_21_2_6__East_6 => Spot {
@@ -17419,10 +16777,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Ebih__Grid_21_2_6__East_6.into_usize(),
-                end: SpotId::Ebih__Grid_21_2_6__West_6.into_usize() + 1,
-            },
         },
         SpotId::Ebih__Boss_Room__West_6 => Spot {
             id: SpotId::Ebih__Boss_Room__West_6,
@@ -17435,10 +16789,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Ebih__Boss_Room__Boss.into_usize(),
-                end: SpotId::Ebih__Boss_Room__West_6.into_usize() + 1,
             },
         },
         SpotId::Ebih__Boss_Room__Boss => Spot {
@@ -17453,10 +16803,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Ebih__Boss_Room__Boss.into_usize(),
-                end: SpotId::Ebih__Boss_Room__West_6.into_usize() + 1,
-            },
         },
         SpotId::Ebih__Boss_Room__Past_Boss => Spot {
             id: SpotId::Ebih__Boss_Room__Past_Boss,
@@ -17468,10 +16814,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Ebih__Boss_Room__Boss.into_usize(),
-                end: SpotId::Ebih__Boss_Room__West_6.into_usize() + 1,
             },
         },
         SpotId::Ebih__Boss_Room__Lower_Tree => Spot {
@@ -17486,10 +16828,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Ebih__Boss_Room__Boss.into_usize(),
-                end: SpotId::Ebih__Boss_Room__West_6.into_usize() + 1,
-            },
         },
         SpotId::Ebih__Boss_Room__Lower_Ledge => Spot {
             id: SpotId::Ebih__Boss_Room__Lower_Ledge,
@@ -17501,10 +16839,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Ebih__Boss_Room__Boss.into_usize(),
-                end: SpotId::Ebih__Boss_Room__West_6.into_usize() + 1,
             },
         },
         SpotId::Ebih__Boss_Room__East_6 => Spot {
@@ -17519,10 +16853,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Ebih__Boss_Room__Boss.into_usize(),
-                end: SpotId::Ebih__Boss_Room__West_6.into_usize() + 1,
-            },
         },
         SpotId::Ebih__Boss_Room__East_4 => Spot {
             id: SpotId::Ebih__Boss_Room__East_4,
@@ -17535,10 +16865,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Ebih__Boss_Room__Boss.into_usize(),
-                end: SpotId::Ebih__Boss_Room__West_6.into_usize() + 1,
             },
         },
         SpotId::Ebih__Boss_Room__East_Ledge => Spot {
@@ -17553,10 +16879,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Ebih__Boss_Room__Boss.into_usize(),
-                end: SpotId::Ebih__Boss_Room__West_6.into_usize() + 1,
-            },
         },
         SpotId::Ebih__Boss_Room__Upper_Tree => Spot {
             id: SpotId::Ebih__Boss_Room__Upper_Tree,
@@ -17568,10 +16890,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Ebih__Boss_Room__Boss.into_usize(),
-                end: SpotId::Ebih__Boss_Room__West_6.into_usize() + 1,
             },
         },
         SpotId::Ebih__Boss_Room__High_Platform => Spot {
@@ -17585,10 +16903,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Ebih__Boss_Room__Boss.into_usize(),
-                end: SpotId::Ebih__Boss_Room__West_6.into_usize() + 1,
-            },
         },
         SpotId::Ebih__Boss_Room__West_5 => Spot {
             id: SpotId::Ebih__Boss_Room__West_5,
@@ -17600,10 +16914,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Ebih__Boss_Room__Boss.into_usize(),
-                end: SpotId::Ebih__Boss_Room__West_6.into_usize() + 1,
             },
         },
         SpotId::Ebih__Drone_Room__West_6 => Spot {
@@ -17618,10 +16928,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Ebih__Drone_Room__East_4.into_usize(),
-                end: SpotId::Ebih__Drone_Room__West_6.into_usize() + 1,
-            },
         },
         SpotId::Ebih__Drone_Room__West_4 => Spot {
             id: SpotId::Ebih__Drone_Room__West_4,
@@ -17634,10 +16940,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Ebih__Drone_Room__East_4.into_usize(),
-                end: SpotId::Ebih__Drone_Room__West_6.into_usize() + 1,
             },
         },
         SpotId::Ebih__Drone_Room__Pit_Left => Spot {
@@ -17653,10 +16955,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: ActionId::Ebih__Drone_Room__Pit_Left__Activate_Lift.into_usize(),
                 end: ActionId::Ebih__Drone_Room__Pit_Left__Activate_Lift_But_Get_Off_Early.into_usize() + 1,
             },
-            area_spots: Range {
-                start: SpotId::Ebih__Drone_Room__East_4.into_usize(),
-                end: SpotId::Ebih__Drone_Room__West_6.into_usize() + 1,
-            },
         },
         SpotId::Ebih__Drone_Room__Portal => Spot {
             id: SpotId::Ebih__Drone_Room__Portal,
@@ -17670,10 +16968,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Ebih__Drone_Room__East_4.into_usize(),
-                end: SpotId::Ebih__Drone_Room__West_6.into_usize() + 1,
-            },
         },
         SpotId::Ebih__Drone_Room__Item => Spot {
             id: SpotId::Ebih__Drone_Room__Item,
@@ -17686,10 +16980,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Ebih__Drone_Room__East_4.into_usize(),
-                end: SpotId::Ebih__Drone_Room__West_6.into_usize() + 1,
             },
         },
         SpotId::Ebih__Drone_Room__Middle_Platform => Spot {
@@ -17705,10 +16995,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Ebih__Drone_Room__East_4.into_usize(),
-                end: SpotId::Ebih__Drone_Room__West_6.into_usize() + 1,
-            },
         },
         SpotId::Ebih__Drone_Room__Portal_Exit => Spot {
             id: SpotId::Ebih__Drone_Room__Portal_Exit,
@@ -17723,10 +17009,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: ActionId::Ebih__Drone_Room__Portal_Exit__Activate_Platform.into_usize(),
                 end: ActionId::Ebih__Drone_Room__Portal_Exit__Activate_Platform.into_usize() + 1,
             },
-            area_spots: Range {
-                start: SpotId::Ebih__Drone_Room__East_4.into_usize(),
-                end: SpotId::Ebih__Drone_Room__West_6.into_usize() + 1,
-            },
         },
         SpotId::Ebih__Drone_Room__Moving_Platform => Spot {
             id: SpotId::Ebih__Drone_Room__Moving_Platform,
@@ -17740,10 +17022,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: ActionId::Ebih__Drone_Room__Moving_Platform__Throw_Drone.into_usize(),
                 end: ActionId::Ebih__Drone_Room__Moving_Platform__Throw_Drone.into_usize() + 1,
             },
-            area_spots: Range {
-                start: SpotId::Ebih__Drone_Room__East_4.into_usize(),
-                end: SpotId::Ebih__Drone_Room__West_6.into_usize() + 1,
-            },
         },
         SpotId::Ebih__Drone_Room__Left_Platform => Spot {
             id: SpotId::Ebih__Drone_Room__Left_Platform,
@@ -17756,10 +17034,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Ebih__Drone_Room__East_4.into_usize(),
-                end: SpotId::Ebih__Drone_Room__West_6.into_usize() + 1,
-            },
         },
         SpotId::Ebih__Drone_Room__Tree => Spot {
             id: SpotId::Ebih__Drone_Room__Tree,
@@ -17771,10 +17045,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Ebih__Drone_Room__East_4.into_usize(),
-                end: SpotId::Ebih__Drone_Room__West_6.into_usize() + 1,
             },
         },
         SpotId::Ebih__Drone_Room__East_4 => Spot {
@@ -17789,10 +17059,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Ebih__Drone_Room__East_4.into_usize(),
-                end: SpotId::Ebih__Drone_Room__West_6.into_usize() + 1,
-            },
         },
         SpotId::Ebih__Grid_25_2_6__West_4 => Spot {
             id: SpotId::Ebih__Grid_25_2_6__West_4,
@@ -17805,10 +17071,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Ebih__Grid_25_2_6__Pit.into_usize(),
-                end: SpotId::Ebih__Grid_25_2_6__West_4.into_usize() + 1,
             },
         },
         SpotId::Ebih__Grid_25_2_6__Pit => Spot {
@@ -17823,10 +17085,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Ebih__Grid_25_2_6__Pit.into_usize(),
-                end: SpotId::Ebih__Grid_25_2_6__West_4.into_usize() + 1,
-            },
         },
         SpotId::Ebih__Grid_26_10_11__West_11 => Spot {
             id: SpotId::Ebih__Grid_26_10_11__West_11,
@@ -17839,10 +17097,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Ebih__Grid_26_10_11__Cliff.into_usize(),
-                end: SpotId::Ebih__Grid_26_10_11__West_11.into_usize() + 1,
             },
         },
         SpotId::Ebih__Grid_26_10_11__Middle_Bottom => Spot {
@@ -17857,10 +17111,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Ebih__Grid_26_10_11__Cliff.into_usize(),
-                end: SpotId::Ebih__Grid_26_10_11__West_11.into_usize() + 1,
-            },
         },
         SpotId::Ebih__Grid_26_10_11__Under_Ledge => Spot {
             id: SpotId::Ebih__Grid_26_10_11__Under_Ledge,
@@ -17873,10 +17123,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Ebih__Grid_26_10_11__Cliff.into_usize(),
-                end: SpotId::Ebih__Grid_26_10_11__West_11.into_usize() + 1,
             },
         },
         SpotId::Ebih__Grid_26_10_11__Ledge => Spot {
@@ -17891,10 +17137,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Ebih__Grid_26_10_11__Cliff.into_usize(),
-                end: SpotId::Ebih__Grid_26_10_11__West_11.into_usize() + 1,
-            },
         },
         SpotId::Ebih__Grid_26_10_11__Middle_Platform => Spot {
             id: SpotId::Ebih__Grid_26_10_11__Middle_Platform,
@@ -17907,10 +17149,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Ebih__Grid_26_10_11__Cliff.into_usize(),
-                end: SpotId::Ebih__Grid_26_10_11__West_11.into_usize() + 1,
             },
         },
         SpotId::Ebih__Grid_26_10_11__Upper_Platform => Spot {
@@ -17925,10 +17163,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Ebih__Grid_26_10_11__Cliff.into_usize(),
-                end: SpotId::Ebih__Grid_26_10_11__West_11.into_usize() + 1,
-            },
         },
         SpotId::Ebih__Grid_26_10_11__West_10 => Spot {
             id: SpotId::Ebih__Grid_26_10_11__West_10,
@@ -17942,10 +17176,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Ebih__Grid_26_10_11__Cliff.into_usize(),
-                end: SpotId::Ebih__Grid_26_10_11__West_11.into_usize() + 1,
-            },
         },
         SpotId::Ebih__Grid_26_10_11__Cliff => Spot {
             id: SpotId::Ebih__Grid_26_10_11__Cliff,
@@ -17957,10 +17187,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Ebih__Grid_26_10_11__Cliff.into_usize(),
-                end: SpotId::Ebih__Grid_26_10_11__West_11.into_usize() + 1,
             },
         },
         SpotId::Ebih__Grid_26_10_11__East_10 => Spot {
@@ -17975,10 +17201,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Ebih__Grid_26_10_11__Cliff.into_usize(),
-                end: SpotId::Ebih__Grid_26_10_11__West_11.into_usize() + 1,
-            },
         },
         SpotId::Ebih__Observation_Tower_Room__West_9 => Spot {
             id: SpotId::Ebih__Observation_Tower_Room__West_9,
@@ -17991,10 +17213,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Ebih__Observation_Tower_Room__Cliff.into_usize(),
-                end: SpotId::Ebih__Observation_Tower_Room__West_9.into_usize() + 1,
             },
         },
         SpotId::Ebih__Observation_Tower_Room__Tower_Top => Spot {
@@ -18009,10 +17227,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Ebih__Observation_Tower_Room__Cliff.into_usize(),
-                end: SpotId::Ebih__Observation_Tower_Room__West_9.into_usize() + 1,
-            },
         },
         SpotId::Ebih__Observation_Tower_Room__Tower_Bottom => Spot {
             id: SpotId::Ebih__Observation_Tower_Room__Tower_Bottom,
@@ -18025,10 +17239,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Ebih__Observation_Tower_Room__Cliff.into_usize(),
-                end: SpotId::Ebih__Observation_Tower_Room__West_9.into_usize() + 1,
-            },
         },
         SpotId::Ebih__Observation_Tower_Room__Cliff => Spot {
             id: SpotId::Ebih__Observation_Tower_Room__Cliff,
@@ -18040,10 +17250,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Ebih__Observation_Tower_Room__Cliff.into_usize(),
-                end: SpotId::Ebih__Observation_Tower_Room__West_9.into_usize() + 1,
             },
         },
         SpotId::Ebih__Observation_Tower_Room__West_10 => Spot {
@@ -18058,10 +17264,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Ebih__Observation_Tower_Room__Cliff.into_usize(),
-                end: SpotId::Ebih__Observation_Tower_Room__West_9.into_usize() + 1,
-            },
         },
         SpotId::Ebih__Observation_Tower_Room__East_11 => Spot {
             id: SpotId::Ebih__Observation_Tower_Room__East_11,
@@ -18074,10 +17276,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Ebih__Observation_Tower_Room__Cliff.into_usize(),
-                end: SpotId::Ebih__Observation_Tower_Room__West_9.into_usize() + 1,
             },
         },
         SpotId::Ebih__Vertical_Interchange__West_13 => Spot {
@@ -18093,10 +17291,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: ActionId::Ebih__Vertical_Interchange__West_13__Open_Door.into_usize(),
                 end: ActionId::Ebih__Vertical_Interchange__West_13__Open_Door.into_usize() + 1,
             },
-            area_spots: Range {
-                start: SpotId::Ebih__Vertical_Interchange__Below_Door.into_usize(),
-                end: SpotId::Ebih__Vertical_Interchange__West_13.into_usize() + 1,
-            },
         },
         SpotId::Ebih__Vertical_Interchange__Passage_West => Spot {
             id: SpotId::Ebih__Vertical_Interchange__Passage_West,
@@ -18109,10 +17303,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Ebih__Vertical_Interchange__Below_Door.into_usize(),
-                end: SpotId::Ebih__Vertical_Interchange__West_13.into_usize() + 1,
             },
         },
         SpotId::Ebih__Vertical_Interchange__Door_West => Spot {
@@ -18127,10 +17317,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Ebih__Vertical_Interchange__Below_Door.into_usize(),
-                end: SpotId::Ebih__Vertical_Interchange__West_13.into_usize() + 1,
-            },
         },
         SpotId::Ebih__Vertical_Interchange__Door => Spot {
             id: SpotId::Ebih__Vertical_Interchange__Door,
@@ -18143,10 +17329,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Ebih__Vertical_Interchange__Below_Door.into_usize(),
-                end: SpotId::Ebih__Vertical_Interchange__West_13.into_usize() + 1,
             },
         },
         SpotId::Ebih__Vertical_Interchange__Door_East => Spot {
@@ -18161,10 +17343,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Ebih__Vertical_Interchange__Below_Door.into_usize(),
-                end: SpotId::Ebih__Vertical_Interchange__West_13.into_usize() + 1,
-            },
         },
         SpotId::Ebih__Vertical_Interchange__Passage_East => Spot {
             id: SpotId::Ebih__Vertical_Interchange__Passage_East,
@@ -18177,10 +17355,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Ebih__Vertical_Interchange__Below_Door.into_usize(),
-                end: SpotId::Ebih__Vertical_Interchange__West_13.into_usize() + 1,
             },
         },
         SpotId::Ebih__Vertical_Interchange__East_13 => Spot {
@@ -18195,10 +17369,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Ebih__Vertical_Interchange__Below_Door.into_usize(),
-                end: SpotId::Ebih__Vertical_Interchange__West_13.into_usize() + 1,
-            },
         },
         SpotId::Ebih__Vertical_Interchange__Middle_Descent => Spot {
             id: SpotId::Ebih__Vertical_Interchange__Middle_Descent,
@@ -18212,10 +17382,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Ebih__Vertical_Interchange__Below_Door.into_usize(),
-                end: SpotId::Ebih__Vertical_Interchange__West_13.into_usize() + 1,
-            },
         },
         SpotId::Ebih__Vertical_Interchange__Middle_Drop => Spot {
             id: SpotId::Ebih__Vertical_Interchange__Middle_Drop,
@@ -18227,10 +17393,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Ebih__Vertical_Interchange__Below_Door.into_usize(),
-                end: SpotId::Ebih__Vertical_Interchange__West_13.into_usize() + 1,
             },
         },
         SpotId::Ebih__Vertical_Interchange__Cliff_by_Refill => Spot {
@@ -18245,10 +17407,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Ebih__Vertical_Interchange__Below_Door.into_usize(),
-                end: SpotId::Ebih__Vertical_Interchange__West_13.into_usize() + 1,
-            },
         },
         SpotId::Ebih__Vertical_Interchange__Refill_Station => Spot {
             id: SpotId::Ebih__Vertical_Interchange__Refill_Station,
@@ -18261,10 +17419,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Ebih__Vertical_Interchange__Below_Door.into_usize(),
-                end: SpotId::Ebih__Vertical_Interchange__West_13.into_usize() + 1,
             },
         },
         SpotId::Ebih__Vertical_Interchange__Blocked_Refill_Station => Spot {
@@ -18279,10 +17433,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Ebih__Vertical_Interchange__Below_Door.into_usize(),
-                end: SpotId::Ebih__Vertical_Interchange__West_13.into_usize() + 1,
-            },
         },
         SpotId::Ebih__Vertical_Interchange__Block_Cubby => Spot {
             id: SpotId::Ebih__Vertical_Interchange__Block_Cubby,
@@ -18294,10 +17444,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Ebih__Vertical_Interchange__Below_Door.into_usize(),
-                end: SpotId::Ebih__Vertical_Interchange__West_13.into_usize() + 1,
             },
         },
         SpotId::Ebih__Vertical_Interchange__Cubby_Exit => Spot {
@@ -18312,10 +17458,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Ebih__Vertical_Interchange__Below_Door.into_usize(),
-                end: SpotId::Ebih__Vertical_Interchange__West_13.into_usize() + 1,
-            },
         },
         SpotId::Ebih__Vertical_Interchange__East_Tunnel => Spot {
             id: SpotId::Ebih__Vertical_Interchange__East_Tunnel,
@@ -18328,10 +17470,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Ebih__Vertical_Interchange__Below_Door.into_usize(),
-                end: SpotId::Ebih__Vertical_Interchange__West_13.into_usize() + 1,
             },
         },
         SpotId::Ebih__Vertical_Interchange__East_15 => Spot {
@@ -18346,10 +17484,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Ebih__Vertical_Interchange__Below_Door.into_usize(),
-                end: SpotId::Ebih__Vertical_Interchange__West_13.into_usize() + 1,
-            },
         },
         SpotId::Ebih__Vertical_Interchange__Below_Door => Spot {
             id: SpotId::Ebih__Vertical_Interchange__Below_Door,
@@ -18363,10 +17497,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Ebih__Vertical_Interchange__Below_Door.into_usize(),
-                end: SpotId::Ebih__Vertical_Interchange__West_13.into_usize() + 1,
-            },
         },
         SpotId::Ebih__Vertical_Interchange__Lower_West_Cliff => Spot {
             id: SpotId::Ebih__Vertical_Interchange__Lower_West_Cliff,
@@ -18378,10 +17508,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Ebih__Vertical_Interchange__Below_Door.into_usize(),
-                end: SpotId::Ebih__Vertical_Interchange__West_13.into_usize() + 1,
             },
         },
         SpotId::Ebih__Vertical_Interchange__Switch => Spot {
@@ -18397,10 +17523,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Ebih__Vertical_Interchange__Below_Door.into_usize(),
-                end: SpotId::Ebih__Vertical_Interchange__West_13.into_usize() + 1,
-            },
         },
         SpotId::Ebih__Vertical_Interchange__South => Spot {
             id: SpotId::Ebih__Vertical_Interchange__South,
@@ -18413,10 +17535,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Ebih__Vertical_Interchange__Below_Door.into_usize(),
-                end: SpotId::Ebih__Vertical_Interchange__West_13.into_usize() + 1,
             },
         },
         SpotId::Ebih__Gem_Room__West_13 => Spot {
@@ -18431,10 +17549,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Ebih__Gem_Room__West_13.into_usize(),
-                end: SpotId::Ebih__Gem_Room__West_13.into_usize() + 1,
-            },
         },
         SpotId::Giguna_Breach__Peak__Save_Point => Spot {
             id: SpotId::Giguna_Breach__Peak__Save_Point,
@@ -18448,10 +17562,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: ActionId::Giguna_Breach__Peak__Save_Point__Save.into_usize(),
                 end: ActionId::Giguna_Breach__Peak__Save_Point__Save.into_usize() + 1,
             },
-            area_spots: Range {
-                start: SpotId::Giguna_Breach__Peak__Column.into_usize(),
-                end: SpotId::Giguna_Breach__Peak__West_7.into_usize() + 1,
-            },
         },
         SpotId::Giguna_Breach__Peak__East_Passage => Spot {
             id: SpotId::Giguna_Breach__Peak__East_Passage,
@@ -18464,10 +17574,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna_Breach__Peak__Column.into_usize(),
-                end: SpotId::Giguna_Breach__Peak__West_7.into_usize() + 1,
-            },
         },
         SpotId::Giguna_Breach__Peak__Column => Spot {
             id: SpotId::Giguna_Breach__Peak__Column,
@@ -18479,10 +17585,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna_Breach__Peak__Column.into_usize(),
-                end: SpotId::Giguna_Breach__Peak__West_7.into_usize() + 1,
             },
         },
         SpotId::Giguna_Breach__Peak__West_7 => Spot {
@@ -18497,10 +17599,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna_Breach__Peak__Column.into_usize(),
-                end: SpotId::Giguna_Breach__Peak__West_7.into_usize() + 1,
-            },
         },
         SpotId::Giguna_Breach__Peak__East_6 => Spot {
             id: SpotId::Giguna_Breach__Peak__East_6,
@@ -18514,10 +17612,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna_Breach__Peak__Column.into_usize(),
-                end: SpotId::Giguna_Breach__Peak__West_7.into_usize() + 1,
-            },
         },
         SpotId::Giguna_Breach__Peak__Upper_East => Spot {
             id: SpotId::Giguna_Breach__Peak__Upper_East,
@@ -18530,10 +17624,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna_Breach__Peak__Column.into_usize(),
-                end: SpotId::Giguna_Breach__Peak__West_7.into_usize() + 1,
-            },
         },
         SpotId::Giguna_Breach__Peak__Upper_West => Spot {
             id: SpotId::Giguna_Breach__Peak__Upper_West,
@@ -18545,10 +17635,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna_Breach__Peak__Column.into_usize(),
-                end: SpotId::Giguna_Breach__Peak__West_7.into_usize() + 1,
             },
         },
         SpotId::Giguna_Breach__Peak__Portal => Spot {
@@ -18564,10 +17650,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: ActionId::Giguna_Breach__Peak__Portal__Portal.into_usize(),
                 end: ActionId::Giguna_Breach__Peak__Portal__Portal.into_usize() + 1,
             },
-            area_spots: Range {
-                start: SpotId::Giguna_Breach__Peak__Column.into_usize(),
-                end: SpotId::Giguna_Breach__Peak__West_7.into_usize() + 1,
-            },
         },
         SpotId::Giguna_Breach__Chimney__East_7 => Spot {
             id: SpotId::Giguna_Breach__Chimney__East_7,
@@ -18581,10 +17663,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna_Breach__Chimney__Cache.into_usize(),
-                end: SpotId::Giguna_Breach__Chimney__Top.into_usize() + 1,
-            },
         },
         SpotId::Giguna_Breach__Chimney__Top => Spot {
             id: SpotId::Giguna_Breach__Chimney__Top,
@@ -18597,10 +17675,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna_Breach__Chimney__Cache.into_usize(),
-                end: SpotId::Giguna_Breach__Chimney__Top.into_usize() + 1,
-            },
         },
         SpotId::Giguna_Breach__Chimney__Middle_Platform => Spot {
             id: SpotId::Giguna_Breach__Chimney__Middle_Platform,
@@ -18612,10 +17686,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna_Breach__Chimney__Cache.into_usize(),
-                end: SpotId::Giguna_Breach__Chimney__Top.into_usize() + 1,
             },
         },
         SpotId::Giguna_Breach__Chimney__East_9 => Spot {
@@ -18630,10 +17700,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna_Breach__Chimney__Cache.into_usize(),
-                end: SpotId::Giguna_Breach__Chimney__Top.into_usize() + 1,
-            },
         },
         SpotId::Giguna_Breach__Chimney__South => Spot {
             id: SpotId::Giguna_Breach__Chimney__South,
@@ -18646,10 +17712,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna_Breach__Chimney__Cache.into_usize(),
-                end: SpotId::Giguna_Breach__Chimney__Top.into_usize() + 1,
             },
         },
         SpotId::Giguna_Breach__Chimney__East_8 => Spot {
@@ -18664,10 +17726,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna_Breach__Chimney__Cache.into_usize(),
-                end: SpotId::Giguna_Breach__Chimney__Top.into_usize() + 1,
-            },
         },
         SpotId::Giguna_Breach__Chimney__Cache => Spot {
             id: SpotId::Giguna_Breach__Chimney__Cache,
@@ -18680,10 +17738,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna_Breach__Chimney__Cache.into_usize(),
-                end: SpotId::Giguna_Breach__Chimney__Top.into_usize() + 1,
             },
         },
         SpotId::Giguna_Breach__Below_Chimney__North => Spot {
@@ -18698,10 +17752,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna_Breach__Below_Chimney__Cubby_Entrance.into_usize(),
-                end: SpotId::Giguna_Breach__Below_Chimney__West_Passage.into_usize() + 1,
-            },
         },
         SpotId::Giguna_Breach__Below_Chimney__Passage_Lip => Spot {
             id: SpotId::Giguna_Breach__Below_Chimney__Passage_Lip,
@@ -18714,10 +17764,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna_Breach__Below_Chimney__Cubby_Entrance.into_usize(),
-                end: SpotId::Giguna_Breach__Below_Chimney__West_Passage.into_usize() + 1,
-            },
         },
         SpotId::Giguna_Breach__Below_Chimney__East_Ledge => Spot {
             id: SpotId::Giguna_Breach__Below_Chimney__East_Ledge,
@@ -18729,10 +17775,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna_Breach__Below_Chimney__Cubby_Entrance.into_usize(),
-                end: SpotId::Giguna_Breach__Below_Chimney__West_Passage.into_usize() + 1,
             },
         },
         SpotId::Giguna_Breach__Below_Chimney__Cubby_Entrance => Spot {
@@ -18747,10 +17789,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna_Breach__Below_Chimney__Cubby_Entrance.into_usize(),
-                end: SpotId::Giguna_Breach__Below_Chimney__West_Passage.into_usize() + 1,
-            },
         },
         SpotId::Giguna_Breach__Below_Chimney__West_Passage => Spot {
             id: SpotId::Giguna_Breach__Below_Chimney__West_Passage,
@@ -18762,10 +17800,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna_Breach__Below_Chimney__Cubby_Entrance.into_usize(),
-                end: SpotId::Giguna_Breach__Below_Chimney__West_Passage.into_usize() + 1,
             },
         },
         SpotId::Giguna_Breach__Below_Chimney__Southwest => Spot {
@@ -18780,10 +17814,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna_Breach__Below_Chimney__Cubby_Entrance.into_usize(),
-                end: SpotId::Giguna_Breach__Below_Chimney__West_Passage.into_usize() + 1,
-            },
         },
         SpotId::Giguna_Breach__Cubby__Entrance => Spot {
             id: SpotId::Giguna_Breach__Cubby__Entrance,
@@ -18796,10 +17826,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna_Breach__Cubby__Entrance.into_usize(),
-                end: SpotId::Giguna_Breach__Cubby__Rocks.into_usize() + 1,
             },
         },
         SpotId::Giguna_Breach__Cubby__Rocks => Spot {
@@ -18814,10 +17840,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna_Breach__Cubby__Entrance.into_usize(),
-                end: SpotId::Giguna_Breach__Cubby__Rocks.into_usize() + 1,
-            },
         },
         SpotId::Giguna_Breach__SW_Save__North => Spot {
             id: SpotId::Giguna_Breach__SW_Save__North,
@@ -18830,10 +17852,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna_Breach__SW_Save__East_12.into_usize(),
-                end: SpotId::Giguna_Breach__SW_Save__West_11.into_usize() + 1,
             },
         },
         SpotId::Giguna_Breach__SW_Save__Lower_Platform => Spot {
@@ -18848,10 +17866,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna_Breach__SW_Save__East_12.into_usize(),
-                end: SpotId::Giguna_Breach__SW_Save__West_11.into_usize() + 1,
-            },
         },
         SpotId::Giguna_Breach__SW_Save__Side_Door => Spot {
             id: SpotId::Giguna_Breach__SW_Save__Side_Door,
@@ -18864,10 +17878,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna_Breach__SW_Save__East_12.into_usize(),
-                end: SpotId::Giguna_Breach__SW_Save__West_11.into_usize() + 1,
             },
         },
         SpotId::Giguna_Breach__SW_Save__West_11 => Spot {
@@ -18883,10 +17893,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: ActionId::Giguna_Breach__SW_Save__West_11__Open_Door.into_usize(),
                 end: ActionId::Giguna_Breach__SW_Save__West_11__Open_Door.into_usize() + 1,
             },
-            area_spots: Range {
-                start: SpotId::Giguna_Breach__SW_Save__East_12.into_usize(),
-                end: SpotId::Giguna_Breach__SW_Save__West_11.into_usize() + 1,
-            },
         },
         SpotId::Giguna_Breach__SW_Save__Save_Point => Spot {
             id: SpotId::Giguna_Breach__SW_Save__Save_Point,
@@ -18901,10 +17907,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: ActionId::Giguna_Breach__SW_Save__Save_Point__Save.into_usize(),
                 end: ActionId::Giguna_Breach__SW_Save__Save_Point__Save.into_usize() + 1,
             },
-            area_spots: Range {
-                start: SpotId::Giguna_Breach__SW_Save__East_12.into_usize(),
-                end: SpotId::Giguna_Breach__SW_Save__West_11.into_usize() + 1,
-            },
         },
         SpotId::Giguna_Breach__SW_Save__East_12 => Spot {
             id: SpotId::Giguna_Breach__SW_Save__East_12,
@@ -18917,10 +17919,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna_Breach__SW_Save__East_12.into_usize(),
-                end: SpotId::Giguna_Breach__SW_Save__West_11.into_usize() + 1,
             },
         },
         SpotId::Giguna_Breach__Robopede__West => Spot {
@@ -18935,10 +17933,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna_Breach__Robopede__Center.into_usize(),
-                end: SpotId::Giguna_Breach__Robopede__West.into_usize() + 1,
-            },
         },
         SpotId::Giguna_Breach__Robopede__Center => Spot {
             id: SpotId::Giguna_Breach__Robopede__Center,
@@ -18950,10 +17944,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna_Breach__Robopede__Center.into_usize(),
-                end: SpotId::Giguna_Breach__Robopede__West.into_usize() + 1,
             },
         },
         SpotId::Giguna_Breach__Robopede__North => Spot {
@@ -18968,10 +17958,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna_Breach__Robopede__Center.into_usize(),
-                end: SpotId::Giguna_Breach__Robopede__West.into_usize() + 1,
-            },
         },
         SpotId::Giguna_Breach__Grid_14_10_11__South => Spot {
             id: SpotId::Giguna_Breach__Grid_14_10_11__South,
@@ -18984,10 +17970,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna_Breach__Grid_14_10_11__East_10.into_usize(),
-                end: SpotId::Giguna_Breach__Grid_14_10_11__South.into_usize() + 1,
             },
         },
         SpotId::Giguna_Breach__Grid_14_10_11__East_11 => Spot {
@@ -19002,10 +17984,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna_Breach__Grid_14_10_11__East_10.into_usize(),
-                end: SpotId::Giguna_Breach__Grid_14_10_11__South.into_usize() + 1,
-            },
         },
         SpotId::Giguna_Breach__Grid_14_10_11__East_10 => Spot {
             id: SpotId::Giguna_Breach__Grid_14_10_11__East_10,
@@ -19019,10 +17997,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna_Breach__Grid_14_10_11__East_10.into_usize(),
-                end: SpotId::Giguna_Breach__Grid_14_10_11__South.into_usize() + 1,
-            },
         },
         SpotId::Giguna_Breach__Grid_14_10_11__High_Ledge => Spot {
             id: SpotId::Giguna_Breach__Grid_14_10_11__High_Ledge,
@@ -19034,10 +18008,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna_Breach__Grid_14_10_11__East_10.into_usize(),
-                end: SpotId::Giguna_Breach__Grid_14_10_11__South.into_usize() + 1,
             },
         },
         SpotId::Giguna_Breach__Grid_14_10_11__North => Spot {
@@ -19052,10 +18022,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna_Breach__Grid_14_10_11__East_10.into_usize(),
-                end: SpotId::Giguna_Breach__Grid_14_10_11__South.into_usize() + 1,
-            },
         },
         SpotId::Giguna_Breach__Fire_Room__West_11 => Spot {
             id: SpotId::Giguna_Breach__Fire_Room__West_11,
@@ -19068,10 +18034,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna_Breach__Fire_Room__Cuesta.into_usize(),
-                end: SpotId::Giguna_Breach__Fire_Room__West_Plateau.into_usize() + 1,
             },
         },
         SpotId::Giguna_Breach__Fire_Room__First_Fire => Spot {
@@ -19086,10 +18048,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna_Breach__Fire_Room__Cuesta.into_usize(),
-                end: SpotId::Giguna_Breach__Fire_Room__West_Plateau.into_usize() + 1,
-            },
         },
         SpotId::Giguna_Breach__Fire_Room__Cuesta => Spot {
             id: SpotId::Giguna_Breach__Fire_Room__Cuesta,
@@ -19101,10 +18059,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna_Breach__Fire_Room__Cuesta.into_usize(),
-                end: SpotId::Giguna_Breach__Fire_Room__West_Plateau.into_usize() + 1,
             },
         },
         SpotId::Giguna_Breach__Fire_Room__South => Spot {
@@ -19119,10 +18073,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna_Breach__Fire_Room__Cuesta.into_usize(),
-                end: SpotId::Giguna_Breach__Fire_Room__West_Plateau.into_usize() + 1,
-            },
         },
         SpotId::Giguna_Breach__Fire_Room__East_11 => Spot {
             id: SpotId::Giguna_Breach__Fire_Room__East_11,
@@ -19135,10 +18085,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna_Breach__Fire_Room__Cuesta.into_usize(),
-                end: SpotId::Giguna_Breach__Fire_Room__West_Plateau.into_usize() + 1,
             },
         },
         SpotId::Giguna_Breach__Fire_Room__West_Plateau => Spot {
@@ -19153,10 +18099,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna_Breach__Fire_Room__Cuesta.into_usize(),
-                end: SpotId::Giguna_Breach__Fire_Room__West_Plateau.into_usize() + 1,
-            },
         },
         SpotId::Giguna_Breach__Fire_Room__West_10 => Spot {
             id: SpotId::Giguna_Breach__Fire_Room__West_10,
@@ -19169,10 +18111,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna_Breach__Fire_Room__Cuesta.into_usize(),
-                end: SpotId::Giguna_Breach__Fire_Room__West_Plateau.into_usize() + 1,
             },
         },
         SpotId::Giguna_Breach__Slingshot__West => Spot {
@@ -19187,10 +18125,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna_Breach__Slingshot__Column.into_usize(),
-                end: SpotId::Giguna_Breach__Slingshot__West.into_usize() + 1,
-            },
         },
         SpotId::Giguna_Breach__Slingshot__Column => Spot {
             id: SpotId::Giguna_Breach__Slingshot__Column,
@@ -19202,10 +18136,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna_Breach__Slingshot__Column.into_usize(),
-                end: SpotId::Giguna_Breach__Slingshot__West.into_usize() + 1,
             },
         },
         SpotId::Giguna_Breach__Slingshot__Ravine => Spot {
@@ -19221,10 +18151,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna_Breach__Slingshot__Column.into_usize(),
-                end: SpotId::Giguna_Breach__Slingshot__West.into_usize() + 1,
-            },
         },
         SpotId::Giguna_Breach__Antechamber__North => Spot {
             id: SpotId::Giguna_Breach__Antechamber__North,
@@ -19237,10 +18163,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna_Breach__Antechamber__North.into_usize(),
-                end: SpotId::Giguna_Breach__Antechamber__North.into_usize() + 1,
             },
         },
         SpotId::Giguna_Breach__Central__West_9 => Spot {
@@ -19255,10 +18177,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna_Breach__Central__East_9.into_usize(),
-                end: SpotId::Giguna_Breach__Central__West_Statue.into_usize() + 1,
-            },
         },
         SpotId::Giguna_Breach__Central__Wall => Spot {
             id: SpotId::Giguna_Breach__Central__Wall,
@@ -19271,10 +18189,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna_Breach__Central__East_9.into_usize(),
-                end: SpotId::Giguna_Breach__Central__West_Statue.into_usize() + 1,
             },
         },
         SpotId::Giguna_Breach__Central__South => Spot {
@@ -19289,10 +18203,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna_Breach__Central__East_9.into_usize(),
-                end: SpotId::Giguna_Breach__Central__West_Statue.into_usize() + 1,
-            },
         },
         SpotId::Giguna_Breach__Central__Upper_Floating_Brick => Spot {
             id: SpotId::Giguna_Breach__Central__Upper_Floating_Brick,
@@ -19306,10 +18216,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna_Breach__Central__East_9.into_usize(),
-                end: SpotId::Giguna_Breach__Central__West_Statue.into_usize() + 1,
-            },
         },
         SpotId::Giguna_Breach__Central__West_Statue => Spot {
             id: SpotId::Giguna_Breach__Central__West_Statue,
@@ -19321,10 +18227,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna_Breach__Central__East_9.into_usize(),
-                end: SpotId::Giguna_Breach__Central__West_Statue.into_usize() + 1,
             },
         },
         SpotId::Giguna_Breach__Central__Statuette => Spot {
@@ -19339,10 +18241,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna_Breach__Central__East_9.into_usize(),
-                end: SpotId::Giguna_Breach__Central__West_Statue.into_usize() + 1,
-            },
         },
         SpotId::Giguna_Breach__Central__Tunnel => Spot {
             id: SpotId::Giguna_Breach__Central__Tunnel,
@@ -19354,10 +18252,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna_Breach__Central__East_9.into_usize(),
-                end: SpotId::Giguna_Breach__Central__West_Statue.into_usize() + 1,
             },
         },
         SpotId::Giguna_Breach__Central__West_8 => Spot {
@@ -19372,10 +18266,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna_Breach__Central__East_9.into_usize(),
-                end: SpotId::Giguna_Breach__Central__West_Statue.into_usize() + 1,
-            },
         },
         SpotId::Giguna_Breach__Central__Middle_Statue => Spot {
             id: SpotId::Giguna_Breach__Central__Middle_Statue,
@@ -19387,10 +18277,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna_Breach__Central__East_9.into_usize(),
-                end: SpotId::Giguna_Breach__Central__West_Statue.into_usize() + 1,
             },
         },
         SpotId::Giguna_Breach__Central__East_Brick => Spot {
@@ -19405,10 +18291,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna_Breach__Central__East_9.into_usize(),
-                end: SpotId::Giguna_Breach__Central__West_Statue.into_usize() + 1,
-            },
         },
         SpotId::Giguna_Breach__Central__East_9 => Spot {
             id: SpotId::Giguna_Breach__Central__East_9,
@@ -19421,10 +18303,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna_Breach__Central__East_9.into_usize(),
-                end: SpotId::Giguna_Breach__Central__West_Statue.into_usize() + 1,
             },
         },
         SpotId::Giguna_Breach__Ascent__West_9 => Spot {
@@ -19439,10 +18317,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna_Breach__Ascent__Bottom.into_usize(),
-                end: SpotId::Giguna_Breach__Ascent__West_9.into_usize() + 1,
-            },
         },
         SpotId::Giguna_Breach__Ascent__Bottom => Spot {
             id: SpotId::Giguna_Breach__Ascent__Bottom,
@@ -19456,10 +18330,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna_Breach__Ascent__Bottom.into_usize(),
-                end: SpotId::Giguna_Breach__Ascent__West_9.into_usize() + 1,
-            },
         },
         SpotId::Giguna_Breach__Ascent__Top => Spot {
             id: SpotId::Giguna_Breach__Ascent__Top,
@@ -19471,10 +18341,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna_Breach__Ascent__Bottom.into_usize(),
-                end: SpotId::Giguna_Breach__Ascent__West_9.into_usize() + 1,
             },
         },
         SpotId::Giguna_Breach__Ascent__West_6 => Spot {
@@ -19489,10 +18355,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna_Breach__Ascent__Bottom.into_usize(),
-                end: SpotId::Giguna_Breach__Ascent__West_9.into_usize() + 1,
-            },
         },
         SpotId::Giguna_Breach__Pink_Clouds__Normal_Entry => Spot {
             id: SpotId::Giguna_Breach__Pink_Clouds__Normal_Entry,
@@ -19506,10 +18368,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna_Breach__Pink_Clouds__Corner.into_usize(),
-                end: SpotId::Giguna_Breach__Pink_Clouds__Quick_Entry.into_usize() + 1,
-            },
         },
         SpotId::Giguna_Breach__Pink_Clouds__Quick_Entry => Spot {
             id: SpotId::Giguna_Breach__Pink_Clouds__Quick_Entry,
@@ -19522,10 +18380,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna_Breach__Pink_Clouds__Corner.into_usize(),
-                end: SpotId::Giguna_Breach__Pink_Clouds__Quick_Entry.into_usize() + 1,
-            },
         },
         SpotId::Giguna_Breach__Pink_Clouds__Corner => Spot {
             id: SpotId::Giguna_Breach__Pink_Clouds__Corner,
@@ -19537,10 +18391,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna_Breach__Pink_Clouds__Corner.into_usize(),
-                end: SpotId::Giguna_Breach__Pink_Clouds__Quick_Entry.into_usize() + 1,
             },
         },
         SpotId::Giguna__Giguna_Northeast__East_9 => Spot {
@@ -19555,10 +18405,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__Giguna_Northeast__Crow_Eating.into_usize(),
-                end: SpotId::Giguna__Giguna_Northeast__West_9.into_usize() + 1,
-            },
         },
         SpotId::Giguna__Giguna_Northeast__Inner_Wall => Spot {
             id: SpotId::Giguna__Giguna_Northeast__Inner_Wall,
@@ -19570,10 +18416,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna__Giguna_Northeast__Crow_Eating.into_usize(),
-                end: SpotId::Giguna__Giguna_Northeast__West_9.into_usize() + 1,
             },
         },
         SpotId::Giguna__Giguna_Northeast__Crow_Eating => Spot {
@@ -19587,10 +18429,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna__Giguna_Northeast__Crow_Eating.into_usize(),
-                end: SpotId::Giguna__Giguna_Northeast__West_9.into_usize() + 1,
             },
         },
         SpotId::Giguna__Giguna_Northeast__Save_Point => Spot {
@@ -19607,10 +18445,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: ActionId::Giguna__Giguna_Northeast__Save_Point__Save.into_usize(),
                 end: ActionId::Giguna__Giguna_Northeast__Save_Point__Save_Recall.into_usize() + 1,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__Giguna_Northeast__Crow_Eating.into_usize(),
-                end: SpotId::Giguna__Giguna_Northeast__West_9.into_usize() + 1,
-            },
         },
         SpotId::Giguna__Giguna_Northeast__Step => Spot {
             id: SpotId::Giguna__Giguna_Northeast__Step,
@@ -19623,10 +18457,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna__Giguna_Northeast__Crow_Eating.into_usize(),
-                end: SpotId::Giguna__Giguna_Northeast__West_9.into_usize() + 1,
             },
         },
         SpotId::Giguna__Giguna_Northeast__West_10 => Spot {
@@ -19641,10 +18471,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__Giguna_Northeast__Crow_Eating.into_usize(),
-                end: SpotId::Giguna__Giguna_Northeast__West_9.into_usize() + 1,
-            },
         },
         SpotId::Giguna__Giguna_Northeast__West_9 => Spot {
             id: SpotId::Giguna__Giguna_Northeast__West_9,
@@ -19657,10 +18483,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna__Giguna_Northeast__Crow_Eating.into_usize(),
-                end: SpotId::Giguna__Giguna_Northeast__West_9.into_usize() + 1,
             },
         },
         SpotId::Giguna__Giguna_Northeast__Gate_Left => Spot {
@@ -19676,10 +18498,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: ActionId::Giguna__Giguna_Northeast__Gate_Left__Throw_Drone.into_usize(),
                 end: ActionId::Giguna__Giguna_Northeast__Gate_Left__Throw_Drone.into_usize() + 1,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__Giguna_Northeast__Crow_Eating.into_usize(),
-                end: SpotId::Giguna__Giguna_Northeast__West_9.into_usize() + 1,
-            },
         },
         SpotId::Giguna__Giguna_Northeast__Gate_Vent => Spot {
             id: SpotId::Giguna__Giguna_Northeast__Gate_Vent,
@@ -19691,10 +18509,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna__Giguna_Northeast__Crow_Eating.into_usize(),
-                end: SpotId::Giguna__Giguna_Northeast__West_9.into_usize() + 1,
             },
         },
         SpotId::Giguna__Giguna_Northeast__Gate_Button => Spot {
@@ -19710,10 +18524,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__Giguna_Northeast__Crow_Eating.into_usize(),
-                end: SpotId::Giguna__Giguna_Northeast__West_9.into_usize() + 1,
-            },
         },
         SpotId::Giguna__Giguna_Northeast__Gate_Right => Spot {
             id: SpotId::Giguna__Giguna_Northeast__Gate_Right,
@@ -19727,10 +18537,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__Giguna_Northeast__Crow_Eating.into_usize(),
-                end: SpotId::Giguna__Giguna_Northeast__West_9.into_usize() + 1,
-            },
         },
         SpotId::Giguna__Giguna_Northeast__Shaft_Bottom => Spot {
             id: SpotId::Giguna__Giguna_Northeast__Shaft_Bottom,
@@ -19742,10 +18548,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna__Giguna_Northeast__Crow_Eating.into_usize(),
-                end: SpotId::Giguna__Giguna_Northeast__West_9.into_usize() + 1,
             },
         },
         SpotId::Giguna__Giguna_Northeast__East_11 => Spot {
@@ -19759,10 +18561,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna__Giguna_Northeast__Crow_Eating.into_usize(),
-                end: SpotId::Giguna__Giguna_Northeast__West_9.into_usize() + 1,
             },
         },
         SpotId::Giguna__Giguna_Northeast__Right_Column => Spot {
@@ -19778,10 +18576,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: ActionId::Giguna__Giguna_Northeast__Right_Column__Open_Door_From_Afar.into_usize(),
                 end: ActionId::Giguna__Giguna_Northeast__Right_Column__Open_Door_From_Afar.into_usize() + 1,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__Giguna_Northeast__Crow_Eating.into_usize(),
-                end: SpotId::Giguna__Giguna_Northeast__West_9.into_usize() + 1,
-            },
         },
         SpotId::Giguna__Giguna_Northeast__Switch => Spot {
             id: SpotId::Giguna__Giguna_Northeast__Switch,
@@ -19796,10 +18590,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: ActionId::Giguna__Giguna_Northeast__Switch__Open_Door.into_usize(),
                 end: ActionId::Giguna__Giguna_Northeast__Switch__Open_Door.into_usize() + 1,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__Giguna_Northeast__Crow_Eating.into_usize(),
-                end: SpotId::Giguna__Giguna_Northeast__West_9.into_usize() + 1,
-            },
         },
         SpotId::Giguna__Giguna_Northeast__Door => Spot {
             id: SpotId::Giguna__Giguna_Northeast__Door,
@@ -19812,10 +18602,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna__Giguna_Northeast__Crow_Eating.into_usize(),
-                end: SpotId::Giguna__Giguna_Northeast__West_9.into_usize() + 1,
             },
         },
         SpotId::Giguna__Giguna_Northeast__Vault => Spot {
@@ -19831,10 +18617,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__Giguna_Northeast__Crow_Eating.into_usize(),
-                end: SpotId::Giguna__Giguna_Northeast__West_9.into_usize() + 1,
-            },
         },
         SpotId::Giguna__Carnelian__East_10 => Spot {
             id: SpotId::Giguna__Carnelian__East_10,
@@ -19848,10 +18630,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__Carnelian__Door.into_usize(),
-                end: SpotId::Giguna__Carnelian__West_Ledge.into_usize() + 1,
-            },
         },
         SpotId::Giguna__Carnelian__East_Cliff => Spot {
             id: SpotId::Giguna__Carnelian__East_Cliff,
@@ -19863,10 +18641,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna__Carnelian__Door.into_usize(),
-                end: SpotId::Giguna__Carnelian__West_Ledge.into_usize() + 1,
             },
         },
         SpotId::Giguna__Carnelian__Upper_Susar => Spot {
@@ -19882,10 +18656,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: ActionId::Giguna__Carnelian__Upper_Susar__Caught.into_usize(),
                 end: ActionId::Giguna__Carnelian__Upper_Susar__Hack.into_usize() + 1,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__Carnelian__Door.into_usize(),
-                end: SpotId::Giguna__Carnelian__West_Ledge.into_usize() + 1,
-            },
         },
         SpotId::Giguna__Carnelian__Middle_Platforms => Spot {
             id: SpotId::Giguna__Carnelian__Middle_Platforms,
@@ -19898,10 +18668,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna__Carnelian__Door.into_usize(),
-                end: SpotId::Giguna__Carnelian__West_Ledge.into_usize() + 1,
             },
         },
         SpotId::Giguna__Carnelian__Switch => Spot {
@@ -19917,10 +18683,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: ActionId::Giguna__Carnelian__Switch__Open_Door.into_usize(),
                 end: ActionId::Giguna__Carnelian__Switch__Open_Door.into_usize() + 1,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__Carnelian__Door.into_usize(),
-                end: SpotId::Giguna__Carnelian__West_Ledge.into_usize() + 1,
-            },
         },
         SpotId::Giguna__Carnelian__Door => Spot {
             id: SpotId::Giguna__Carnelian__Door,
@@ -19933,10 +18695,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna__Carnelian__Door.into_usize(),
-                end: SpotId::Giguna__Carnelian__West_Ledge.into_usize() + 1,
             },
         },
         SpotId::Giguna__Carnelian__Vault => Spot {
@@ -19952,10 +18710,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__Carnelian__Door.into_usize(),
-                end: SpotId::Giguna__Carnelian__West_Ledge.into_usize() + 1,
-            },
         },
         SpotId::Giguna__Carnelian__Rock => Spot {
             id: SpotId::Giguna__Carnelian__Rock,
@@ -19967,10 +18721,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna__Carnelian__Door.into_usize(),
-                end: SpotId::Giguna__Carnelian__West_Ledge.into_usize() + 1,
             },
         },
         SpotId::Giguna__Carnelian__Lower_Susar => Spot {
@@ -19986,10 +18736,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: ActionId::Giguna__Carnelian__Lower_Susar__Caught.into_usize(),
                 end: ActionId::Giguna__Carnelian__Lower_Susar__Hack.into_usize() + 1,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__Carnelian__Door.into_usize(),
-                end: SpotId::Giguna__Carnelian__West_Ledge.into_usize() + 1,
-            },
         },
         SpotId::Giguna__Carnelian__Upper_Path => Spot {
             id: SpotId::Giguna__Carnelian__Upper_Path,
@@ -20001,10 +18747,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna__Carnelian__Door.into_usize(),
-                end: SpotId::Giguna__Carnelian__West_Ledge.into_usize() + 1,
             },
         },
         SpotId::Giguna__Carnelian__West_Ledge => Spot {
@@ -20019,10 +18761,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__Carnelian__Door.into_usize(),
-                end: SpotId::Giguna__Carnelian__West_Ledge.into_usize() + 1,
-            },
         },
         SpotId::Giguna__Carnelian__West_10 => Spot {
             id: SpotId::Giguna__Carnelian__West_10,
@@ -20035,10 +18773,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna__Carnelian__Door.into_usize(),
-                end: SpotId::Giguna__Carnelian__West_Ledge.into_usize() + 1,
             },
         },
         SpotId::Giguna__West_Caverns__East_10 => Spot {
@@ -20053,10 +18787,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__West_Caverns__Bush.into_usize(),
-                end: SpotId::Giguna__West_Caverns__West_13.into_usize() + 1,
-            },
         },
         SpotId::Giguna__West_Caverns__East_Platform => Spot {
             id: SpotId::Giguna__West_Caverns__East_Platform,
@@ -20068,10 +18798,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna__West_Caverns__Bush.into_usize(),
-                end: SpotId::Giguna__West_Caverns__West_13.into_usize() + 1,
             },
         },
         SpotId::Giguna__West_Caverns__Small_Staircase => Spot {
@@ -20086,10 +18812,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__West_Caverns__Bush.into_usize(),
-                end: SpotId::Giguna__West_Caverns__West_13.into_usize() + 1,
-            },
         },
         SpotId::Giguna__West_Caverns__Tunnel_Entrance => Spot {
             id: SpotId::Giguna__West_Caverns__Tunnel_Entrance,
@@ -20101,10 +18823,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna__West_Caverns__Bush.into_usize(),
-                end: SpotId::Giguna__West_Caverns__West_13.into_usize() + 1,
             },
         },
         SpotId::Giguna__West_Caverns__Small_Platform => Spot {
@@ -20119,10 +18837,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: ActionId::Giguna__West_Caverns__Small_Platform__Throw_Drone_Up.into_usize(),
                 end: ActionId::Giguna__West_Caverns__Small_Platform__Throw_Drone_Up.into_usize() + 1,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__West_Caverns__Bush.into_usize(),
-                end: SpotId::Giguna__West_Caverns__West_13.into_usize() + 1,
-            },
         },
         SpotId::Giguna__West_Caverns__Higher_Ledge => Spot {
             id: SpotId::Giguna__West_Caverns__Higher_Ledge,
@@ -20134,10 +18848,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna__West_Caverns__Bush.into_usize(),
-                end: SpotId::Giguna__West_Caverns__West_13.into_usize() + 1,
             },
         },
         SpotId::Giguna__West_Caverns__Floating_Brick => Spot {
@@ -20151,10 +18861,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__West_Caverns__Bush.into_usize(),
-                end: SpotId::Giguna__West_Caverns__West_13.into_usize() + 1,
-            },
         },
         SpotId::Giguna__West_Caverns__Column_2_Top => Spot {
             id: SpotId::Giguna__West_Caverns__Column_2_Top,
@@ -20166,10 +18872,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna__West_Caverns__Bush.into_usize(),
-                end: SpotId::Giguna__West_Caverns__West_13.into_usize() + 1,
             },
         },
         SpotId::Giguna__West_Caverns__Top_Gap_Right => Spot {
@@ -20183,10 +18885,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__West_Caverns__Bush.into_usize(),
-                end: SpotId::Giguna__West_Caverns__West_13.into_usize() + 1,
-            },
         },
         SpotId::Giguna__West_Caverns__Top_Gap_Left => Spot {
             id: SpotId::Giguna__West_Caverns__Top_Gap_Left,
@@ -20198,10 +18896,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna__West_Caverns__Bush.into_usize(),
-                end: SpotId::Giguna__West_Caverns__West_13.into_usize() + 1,
             },
         },
         SpotId::Giguna__West_Caverns__Column_1_Top_Right => Spot {
@@ -20215,10 +18909,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__West_Caverns__Bush.into_usize(),
-                end: SpotId::Giguna__West_Caverns__West_13.into_usize() + 1,
-            },
         },
         SpotId::Giguna__West_Caverns__Column_1_Top_Left => Spot {
             id: SpotId::Giguna__West_Caverns__Column_1_Top_Left,
@@ -20230,10 +18920,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna__West_Caverns__Bush.into_usize(),
-                end: SpotId::Giguna__West_Caverns__West_13.into_usize() + 1,
             },
         },
         SpotId::Giguna__West_Caverns__Cache => Spot {
@@ -20248,10 +18934,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__West_Caverns__Bush.into_usize(),
-                end: SpotId::Giguna__West_Caverns__West_13.into_usize() + 1,
-            },
         },
         SpotId::Giguna__West_Caverns__Bush => Spot {
             id: SpotId::Giguna__West_Caverns__Bush,
@@ -20264,10 +18946,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna__West_Caverns__Bush.into_usize(),
-                end: SpotId::Giguna__West_Caverns__West_13.into_usize() + 1,
             },
         },
         SpotId::Giguna__West_Caverns__Tunnel_Bottom => Spot {
@@ -20282,10 +18960,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__West_Caverns__Bush.into_usize(),
-                end: SpotId::Giguna__West_Caverns__West_13.into_usize() + 1,
-            },
         },
         SpotId::Giguna__West_Caverns__Tunnel_Fork => Spot {
             id: SpotId::Giguna__West_Caverns__Tunnel_Fork,
@@ -20298,10 +18972,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna__West_Caverns__Bush.into_usize(),
-                end: SpotId::Giguna__West_Caverns__West_13.into_usize() + 1,
             },
         },
         SpotId::Giguna__West_Caverns__East_Susar => Spot {
@@ -20317,10 +18987,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: ActionId::Giguna__West_Caverns__East_Susar__Caught.into_usize(),
                 end: ActionId::Giguna__West_Caverns__East_Susar__Hack.into_usize() + 1,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__West_Caverns__Bush.into_usize(),
-                end: SpotId::Giguna__West_Caverns__West_13.into_usize() + 1,
-            },
         },
         SpotId::Giguna__West_Caverns__East_12 => Spot {
             id: SpotId::Giguna__West_Caverns__East_12,
@@ -20333,10 +18999,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna__West_Caverns__Bush.into_usize(),
-                end: SpotId::Giguna__West_Caverns__West_13.into_usize() + 1,
             },
         },
         SpotId::Giguna__West_Caverns__East_13 => Spot {
@@ -20351,10 +19013,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__West_Caverns__Bush.into_usize(),
-                end: SpotId::Giguna__West_Caverns__West_13.into_usize() + 1,
-            },
         },
         SpotId::Giguna__West_Caverns__Northwest => Spot {
             id: SpotId::Giguna__West_Caverns__Northwest,
@@ -20366,10 +19024,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna__West_Caverns__Bush.into_usize(),
-                end: SpotId::Giguna__West_Caverns__West_13.into_usize() + 1,
             },
         },
         SpotId::Giguna__West_Caverns__West_13 => Spot {
@@ -20384,10 +19038,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__West_Caverns__Bush.into_usize(),
-                end: SpotId::Giguna__West_Caverns__West_13.into_usize() + 1,
-            },
         },
         SpotId::Giguna__Wasteland__West_12 => Spot {
             id: SpotId::Giguna__Wasteland__West_12,
@@ -20401,10 +19051,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__Wasteland__Bluff_by_Door.into_usize(),
-                end: SpotId::Giguna__Wasteland__Westward_Hill.into_usize() + 1,
-            },
         },
         SpotId::Giguna__Wasteland__Upper_Cliff => Spot {
             id: SpotId::Giguna__Wasteland__Upper_Cliff,
@@ -20416,10 +19062,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna__Wasteland__Bluff_by_Door.into_usize(),
-                end: SpotId::Giguna__Wasteland__Westward_Hill.into_usize() + 1,
             },
         },
         SpotId::Giguna__Wasteland__West_13 => Spot {
@@ -20434,10 +19076,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__Wasteland__Bluff_by_Door.into_usize(),
-                end: SpotId::Giguna__Wasteland__Westward_Hill.into_usize() + 1,
-            },
         },
         SpotId::Giguna__Wasteland__Middle_Path => Spot {
             id: SpotId::Giguna__Wasteland__Middle_Path,
@@ -20449,10 +19087,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna__Wasteland__Bluff_by_Door.into_usize(),
-                end: SpotId::Giguna__Wasteland__Westward_Hill.into_usize() + 1,
             },
         },
         SpotId::Giguna__Wasteland__Middle_Cliff => Spot {
@@ -20467,10 +19101,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: ActionId::Giguna__Wasteland__Middle_Cliff__Throw_Drone.into_usize(),
                 end: ActionId::Giguna__Wasteland__Middle_Cliff__Throw_Drone.into_usize() + 1,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__Wasteland__Bluff_by_Door.into_usize(),
-                end: SpotId::Giguna__Wasteland__Westward_Hill.into_usize() + 1,
-            },
         },
         SpotId::Giguna__Wasteland__Lower_Path_Right => Spot {
             id: SpotId::Giguna__Wasteland__Lower_Path_Right,
@@ -20484,10 +19114,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__Wasteland__Bluff_by_Door.into_usize(),
-                end: SpotId::Giguna__Wasteland__Westward_Hill.into_usize() + 1,
-            },
         },
         SpotId::Giguna__Wasteland__Lower_Path_Left => Spot {
             id: SpotId::Giguna__Wasteland__Lower_Path_Left,
@@ -20499,10 +19125,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna__Wasteland__Bluff_by_Door.into_usize(),
-                end: SpotId::Giguna__Wasteland__Westward_Hill.into_usize() + 1,
             },
         },
         SpotId::Giguna__Wasteland__Lower_Cliff => Spot {
@@ -20517,10 +19139,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__Wasteland__Bluff_by_Door.into_usize(),
-                end: SpotId::Giguna__Wasteland__Westward_Hill.into_usize() + 1,
-            },
         },
         SpotId::Giguna__Wasteland__West_14 => Spot {
             id: SpotId::Giguna__Wasteland__West_14,
@@ -20533,10 +19151,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna__Wasteland__Bluff_by_Door.into_usize(),
-                end: SpotId::Giguna__Wasteland__Westward_Hill.into_usize() + 1,
             },
         },
         SpotId::Giguna__Wasteland__East_12 => Spot {
@@ -20551,10 +19165,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__Wasteland__Bluff_by_Door.into_usize(),
-                end: SpotId::Giguna__Wasteland__Westward_Hill.into_usize() + 1,
-            },
         },
         SpotId::Giguna__Wasteland__East_13 => Spot {
             id: SpotId::Giguna__Wasteland__East_13,
@@ -20567,10 +19177,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna__Wasteland__Bluff_by_Door.into_usize(),
-                end: SpotId::Giguna__Wasteland__Westward_Hill.into_usize() + 1,
             },
         },
         SpotId::Giguna__Wasteland__East_14 => Spot {
@@ -20585,10 +19191,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__Wasteland__Bluff_by_Door.into_usize(),
-                end: SpotId::Giguna__Wasteland__Westward_Hill.into_usize() + 1,
-            },
         },
         SpotId::Giguna__Wasteland__East_Ledge => Spot {
             id: SpotId::Giguna__Wasteland__East_Ledge,
@@ -20602,10 +19204,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__Wasteland__Bluff_by_Door.into_usize(),
-                end: SpotId::Giguna__Wasteland__Westward_Hill.into_usize() + 1,
-            },
         },
         SpotId::Giguna__Wasteland__Door_Left => Spot {
             id: SpotId::Giguna__Wasteland__Door_Left,
@@ -20618,10 +19216,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna__Wasteland__Bluff_by_Door.into_usize(),
-                end: SpotId::Giguna__Wasteland__Westward_Hill.into_usize() + 1,
             },
         },
         SpotId::Giguna__Wasteland__Door_Right => Spot {
@@ -20637,10 +19231,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__Wasteland__Bluff_by_Door.into_usize(),
-                end: SpotId::Giguna__Wasteland__Westward_Hill.into_usize() + 1,
-            },
         },
         SpotId::Giguna__Wasteland__Bluff_by_Door => Spot {
             id: SpotId::Giguna__Wasteland__Bluff_by_Door,
@@ -20654,10 +19244,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__Wasteland__Bluff_by_Door.into_usize(),
-                end: SpotId::Giguna__Wasteland__Westward_Hill.into_usize() + 1,
-            },
         },
         SpotId::Giguna__Wasteland__Tiny_Hill => Spot {
             id: SpotId::Giguna__Wasteland__Tiny_Hill,
@@ -20670,10 +19256,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__Wasteland__Bluff_by_Door.into_usize(),
-                end: SpotId::Giguna__Wasteland__Westward_Hill.into_usize() + 1,
-            },
         },
         SpotId::Giguna__Wasteland__Steeper_Hill => Spot {
             id: SpotId::Giguna__Wasteland__Steeper_Hill,
@@ -20685,10 +19267,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna__Wasteland__Bluff_by_Door.into_usize(),
-                end: SpotId::Giguna__Wasteland__Westward_Hill.into_usize() + 1,
             },
         },
         SpotId::Giguna__Wasteland__Center_Plains => Spot {
@@ -20703,10 +19281,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__Wasteland__Bluff_by_Door.into_usize(),
-                end: SpotId::Giguna__Wasteland__Westward_Hill.into_usize() + 1,
-            },
         },
         SpotId::Giguna__Wasteland__West_Plains => Spot {
             id: SpotId::Giguna__Wasteland__West_Plains,
@@ -20718,10 +19292,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna__Wasteland__Bluff_by_Door.into_usize(),
-                end: SpotId::Giguna__Wasteland__Westward_Hill.into_usize() + 1,
             },
         },
         SpotId::Giguna__Wasteland__Passage_East => Spot {
@@ -20737,10 +19307,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__Wasteland__Bluff_by_Door.into_usize(),
-                end: SpotId::Giguna__Wasteland__Westward_Hill.into_usize() + 1,
-            },
         },
         SpotId::Giguna__Wasteland__Passage_Cache => Spot {
             id: SpotId::Giguna__Wasteland__Passage_Cache,
@@ -20755,10 +19321,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__Wasteland__Bluff_by_Door.into_usize(),
-                end: SpotId::Giguna__Wasteland__Westward_Hill.into_usize() + 1,
-            },
         },
         SpotId::Giguna__Wasteland__Westward_Hill => Spot {
             id: SpotId::Giguna__Wasteland__Westward_Hill,
@@ -20770,10 +19332,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna__Wasteland__Bluff_by_Door.into_usize(),
-                end: SpotId::Giguna__Wasteland__Westward_Hill.into_usize() + 1,
             },
         },
         SpotId::Giguna__Wasteland__Upper_Cache => Spot {
@@ -20787,10 +19345,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__Wasteland__Bluff_by_Door.into_usize(),
-                end: SpotId::Giguna__Wasteland__Westward_Hill.into_usize() + 1,
-            },
         },
         SpotId::Giguna__Wasteland__Cache_Ledge => Spot {
             id: SpotId::Giguna__Wasteland__Cache_Ledge,
@@ -20802,10 +19356,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna__Wasteland__Bluff_by_Door.into_usize(),
-                end: SpotId::Giguna__Wasteland__Westward_Hill.into_usize() + 1,
             },
         },
         SpotId::Giguna__Wasteland__Left_Platform_West => Spot {
@@ -20819,10 +19369,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__Wasteland__Bluff_by_Door.into_usize(),
-                end: SpotId::Giguna__Wasteland__Westward_Hill.into_usize() + 1,
-            },
         },
         SpotId::Giguna__Wasteland__Left_Platform_East => Spot {
             id: SpotId::Giguna__Wasteland__Left_Platform_East,
@@ -20834,10 +19380,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna__Wasteland__Bluff_by_Door.into_usize(),
-                end: SpotId::Giguna__Wasteland__Westward_Hill.into_usize() + 1,
             },
         },
         SpotId::Giguna__Wasteland__Center_Platform_West => Spot {
@@ -20851,10 +19393,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__Wasteland__Bluff_by_Door.into_usize(),
-                end: SpotId::Giguna__Wasteland__Westward_Hill.into_usize() + 1,
-            },
         },
         SpotId::Giguna__Wasteland__Center_Platform_East => Spot {
             id: SpotId::Giguna__Wasteland__Center_Platform_East,
@@ -20866,10 +19404,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna__Wasteland__Bluff_by_Door.into_usize(),
-                end: SpotId::Giguna__Wasteland__Westward_Hill.into_usize() + 1,
             },
         },
         SpotId::Giguna__Wasteland__Right_Platform_West => Spot {
@@ -20883,10 +19417,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__Wasteland__Bluff_by_Door.into_usize(),
-                end: SpotId::Giguna__Wasteland__Westward_Hill.into_usize() + 1,
-            },
         },
         SpotId::Giguna__Wasteland__Right_Platform_East => Spot {
             id: SpotId::Giguna__Wasteland__Right_Platform_East,
@@ -20898,10 +19428,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna__Wasteland__Bluff_by_Door.into_usize(),
-                end: SpotId::Giguna__Wasteland__Westward_Hill.into_usize() + 1,
             },
         },
         SpotId::Giguna__Wasteland__Lower_Platform_West => Spot {
@@ -20915,10 +19441,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__Wasteland__Bluff_by_Door.into_usize(),
-                end: SpotId::Giguna__Wasteland__Westward_Hill.into_usize() + 1,
-            },
         },
         SpotId::Giguna__Wasteland__Lower_Platform_East => Spot {
             id: SpotId::Giguna__Wasteland__Lower_Platform_East,
@@ -20930,10 +19452,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna__Wasteland__Bluff_by_Door.into_usize(),
-                end: SpotId::Giguna__Wasteland__Westward_Hill.into_usize() + 1,
             },
         },
         SpotId::Giguna__Wasteland__Ladder_Ledge => Spot {
@@ -20947,10 +19465,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__Wasteland__Bluff_by_Door.into_usize(),
-                end: SpotId::Giguna__Wasteland__Westward_Hill.into_usize() + 1,
-            },
         },
         SpotId::Giguna__Wasteland__Switch_Ledge => Spot {
             id: SpotId::Giguna__Wasteland__Switch_Ledge,
@@ -20962,10 +19476,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna__Wasteland__Bluff_by_Door.into_usize(),
-                end: SpotId::Giguna__Wasteland__Westward_Hill.into_usize() + 1,
             },
         },
         SpotId::Giguna__Wasteland__Switch_Approach => Spot {
@@ -20979,10 +19489,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__Wasteland__Bluff_by_Door.into_usize(),
-                end: SpotId::Giguna__Wasteland__Westward_Hill.into_usize() + 1,
-            },
         },
         SpotId::Giguna__Wasteland__Switch => Spot {
             id: SpotId::Giguna__Wasteland__Switch,
@@ -20994,10 +19500,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna__Wasteland__Bluff_by_Door.into_usize(),
-                end: SpotId::Giguna__Wasteland__Westward_Hill.into_usize() + 1,
             },
         },
         SpotId::Giguna__Giguna_Base__East_14 => Spot {
@@ -21011,10 +19513,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna__Giguna_Base__Below_Gate.into_usize(),
-                end: SpotId::Giguna__Giguna_Base__West_Grate.into_usize() + 1,
             },
         },
         SpotId::Giguna__Giguna_Base__Stone_Knob => Spot {
@@ -21030,10 +19528,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: ActionId::Giguna__Giguna_Base__Stone_Knob__Throw_Drone.into_usize(),
                 end: ActionId::Giguna__Giguna_Base__Stone_Knob__Throw_Drone.into_usize() + 1,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__Giguna_Base__Below_Gate.into_usize(),
-                end: SpotId::Giguna__Giguna_Base__West_Grate.into_usize() + 1,
-            },
         },
         SpotId::Giguna__Giguna_Base__Upper_Cliff => Spot {
             id: SpotId::Giguna__Giguna_Base__Upper_Cliff,
@@ -21045,10 +19539,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna__Giguna_Base__Below_Gate.into_usize(),
-                end: SpotId::Giguna__Giguna_Base__West_Grate.into_usize() + 1,
             },
         },
         SpotId::Giguna__Giguna_Base__Right_Pillar => Spot {
@@ -21063,10 +19553,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__Giguna_Base__Below_Gate.into_usize(),
-                end: SpotId::Giguna__Giguna_Base__West_Grate.into_usize() + 1,
-            },
         },
         SpotId::Giguna__Giguna_Base__Left_Pillar => Spot {
             id: SpotId::Giguna__Giguna_Base__Left_Pillar,
@@ -21079,10 +19565,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna__Giguna_Base__Below_Gate.into_usize(),
-                end: SpotId::Giguna__Giguna_Base__West_Grate.into_usize() + 1,
             },
         },
         SpotId::Giguna__Giguna_Base__Ruin => Spot {
@@ -21098,10 +19580,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__Giguna_Base__Below_Gate.into_usize(),
-                end: SpotId::Giguna__Giguna_Base__West_Grate.into_usize() + 1,
-            },
         },
         SpotId::Giguna__Giguna_Base__Middle_Platform => Spot {
             id: SpotId::Giguna__Giguna_Base__Middle_Platform,
@@ -21114,10 +19592,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna__Giguna_Base__Below_Gate.into_usize(),
-                end: SpotId::Giguna__Giguna_Base__West_Grate.into_usize() + 1,
             },
         },
         SpotId::Giguna__Giguna_Base__Kari => Spot {
@@ -21132,10 +19606,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__Giguna_Base__Below_Gate.into_usize(),
-                end: SpotId::Giguna__Giguna_Base__West_Grate.into_usize() + 1,
-            },
         },
         SpotId::Giguna__Giguna_Base__Building_Entry => Spot {
             id: SpotId::Giguna__Giguna_Base__Building_Entry,
@@ -21148,10 +19618,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna__Giguna_Base__Below_Gate.into_usize(),
-                end: SpotId::Giguna__Giguna_Base__West_Grate.into_usize() + 1,
             },
         },
         SpotId::Giguna__Giguna_Base__Staircase_Top => Spot {
@@ -21166,10 +19632,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__Giguna_Base__Below_Gate.into_usize(),
-                end: SpotId::Giguna__Giguna_Base__West_Grate.into_usize() + 1,
-            },
         },
         SpotId::Giguna__Giguna_Base__West_Grate => Spot {
             id: SpotId::Giguna__Giguna_Base__West_Grate,
@@ -21182,10 +19644,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna__Giguna_Base__Below_Gate.into_usize(),
-                end: SpotId::Giguna__Giguna_Base__West_Grate.into_usize() + 1,
             },
         },
         SpotId::Giguna__Giguna_Base__West_15 => Spot {
@@ -21200,10 +19658,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__Giguna_Base__Below_Gate.into_usize(),
-                end: SpotId::Giguna__Giguna_Base__West_Grate.into_usize() + 1,
-            },
         },
         SpotId::Giguna__Giguna_Base__Staircase_Bottom => Spot {
             id: SpotId::Giguna__Giguna_Base__Staircase_Bottom,
@@ -21215,10 +19669,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna__Giguna_Base__Below_Gate.into_usize(),
-                end: SpotId::Giguna__Giguna_Base__West_Grate.into_usize() + 1,
             },
         },
         SpotId::Giguna__Giguna_Base__Table => Spot {
@@ -21233,10 +19683,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__Giguna_Base__Below_Gate.into_usize(),
-                end: SpotId::Giguna__Giguna_Base__West_Grate.into_usize() + 1,
-            },
         },
         SpotId::Giguna__Giguna_Base__Save_Point => Spot {
             id: SpotId::Giguna__Giguna_Base__Save_Point,
@@ -21249,10 +19695,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: ActionId::Giguna__Giguna_Base__Save_Point__Save.into_usize(),
                 end: ActionId::Giguna__Giguna_Base__Save_Point__Save.into_usize() + 1,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna__Giguna_Base__Below_Gate.into_usize(),
-                end: SpotId::Giguna__Giguna_Base__West_Grate.into_usize() + 1,
             },
         },
         SpotId::Giguna__Giguna_Base__West_16 => Spot {
@@ -21267,10 +19709,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__Giguna_Base__Below_Gate.into_usize(),
-                end: SpotId::Giguna__Giguna_Base__West_Grate.into_usize() + 1,
-            },
         },
         SpotId::Giguna__Giguna_Base__East_17 => Spot {
             id: SpotId::Giguna__Giguna_Base__East_17,
@@ -21283,10 +19721,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna__Giguna_Base__Below_Gate.into_usize(),
-                end: SpotId::Giguna__Giguna_Base__West_Grate.into_usize() + 1,
             },
         },
         SpotId::Giguna__Giguna_Base__Lower_Fork => Spot {
@@ -21301,10 +19735,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__Giguna_Base__Below_Gate.into_usize(),
-                end: SpotId::Giguna__Giguna_Base__West_Grate.into_usize() + 1,
-            },
         },
         SpotId::Giguna__Giguna_Base__Below_Gate => Spot {
             id: SpotId::Giguna__Giguna_Base__Below_Gate,
@@ -21317,10 +19747,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna__Giguna_Base__Below_Gate.into_usize(),
-                end: SpotId::Giguna__Giguna_Base__West_Grate.into_usize() + 1,
             },
         },
         SpotId::Giguna__Giguna_Base__Switch_Distance_1 => Spot {
@@ -21335,10 +19761,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: ActionId::Giguna__Giguna_Base__Switch_Distance_1__Open_Door.into_usize(),
                 end: ActionId::Giguna__Giguna_Base__Switch_Distance_1__Open_Door.into_usize() + 1,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__Giguna_Base__Below_Gate.into_usize(),
-                end: SpotId::Giguna__Giguna_Base__West_Grate.into_usize() + 1,
-            },
         },
         SpotId::Giguna__Giguna_Base__Switch_Distance_2 => Spot {
             id: SpotId::Giguna__Giguna_Base__Switch_Distance_2,
@@ -21351,10 +19773,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: ActionId::Giguna__Giguna_Base__Switch_Distance_2__Open_Door.into_usize(),
                 end: ActionId::Giguna__Giguna_Base__Switch_Distance_2__Open_Door.into_usize() + 1,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna__Giguna_Base__Below_Gate.into_usize(),
-                end: SpotId::Giguna__Giguna_Base__West_Grate.into_usize() + 1,
             },
         },
         SpotId::Giguna__Giguna_Base__Switch_Distance_3 => Spot {
@@ -21369,10 +19787,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: ActionId::Giguna__Giguna_Base__Switch_Distance_3__Open_Door.into_usize(),
                 end: ActionId::Giguna__Giguna_Base__Switch_Distance_3__Open_Door.into_usize() + 1,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__Giguna_Base__Below_Gate.into_usize(),
-                end: SpotId::Giguna__Giguna_Base__West_Grate.into_usize() + 1,
-            },
         },
         SpotId::Giguna__Giguna_Base__Switch_Distance_4 => Spot {
             id: SpotId::Giguna__Giguna_Base__Switch_Distance_4,
@@ -21385,10 +19799,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: ActionId::Giguna__Giguna_Base__Switch_Distance_4__Open_Door.into_usize(),
                 end: ActionId::Giguna__Giguna_Base__Switch_Distance_4__Open_Door.into_usize() + 1,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna__Giguna_Base__Below_Gate.into_usize(),
-                end: SpotId::Giguna__Giguna_Base__West_Grate.into_usize() + 1,
             },
         },
         SpotId::Giguna__Building_Interior__Entry => Spot {
@@ -21403,10 +19813,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__Building_Interior__Bookshelf.into_usize(),
-                end: SpotId::Giguna__Building_Interior__Entry.into_usize() + 1,
-            },
         },
         SpotId::Giguna__Building_Interior__Bookshelf => Spot {
             id: SpotId::Giguna__Building_Interior__Bookshelf,
@@ -21419,10 +19825,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna__Building_Interior__Bookshelf.into_usize(),
-                end: SpotId::Giguna__Building_Interior__Entry.into_usize() + 1,
             },
         },
         SpotId::Giguna__Ruins_East__East_9 => Spot {
@@ -21437,10 +19839,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__Ruins_East__Bottom_Rock.into_usize(),
-                end: SpotId::Giguna__Ruins_East__West_9.into_usize() + 1,
-            },
         },
         SpotId::Giguna__Ruins_East__Bottom_Rock => Spot {
             id: SpotId::Giguna__Ruins_East__Bottom_Rock,
@@ -21453,10 +19851,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna__Ruins_East__Bottom_Rock.into_usize(),
-                end: SpotId::Giguna__Ruins_East__West_9.into_usize() + 1,
             },
         },
         SpotId::Giguna__Ruins_East__West_9 => Spot {
@@ -21471,10 +19865,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__Ruins_East__Bottom_Rock.into_usize(),
-                end: SpotId::Giguna__Ruins_East__West_9.into_usize() + 1,
-            },
         },
         SpotId::Giguna__Ruins_East__Cliff => Spot {
             id: SpotId::Giguna__Ruins_East__Cliff,
@@ -21487,10 +19877,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna__Ruins_East__Bottom_Rock.into_usize(),
-                end: SpotId::Giguna__Ruins_East__West_9.into_usize() + 1,
             },
         },
         SpotId::Giguna__Ruins_East__Ledge => Spot {
@@ -21505,10 +19891,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__Ruins_East__Bottom_Rock.into_usize(),
-                end: SpotId::Giguna__Ruins_East__West_9.into_usize() + 1,
-            },
         },
         SpotId::Giguna__Ruins_East__Small_Passage => Spot {
             id: SpotId::Giguna__Ruins_East__Small_Passage,
@@ -21521,10 +19903,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna__Ruins_East__Bottom_Rock.into_usize(),
-                end: SpotId::Giguna__Ruins_East__West_9.into_usize() + 1,
             },
         },
         SpotId::Giguna__Ruins_East__West_8 => Spot {
@@ -21539,10 +19917,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__Ruins_East__Bottom_Rock.into_usize(),
-                end: SpotId::Giguna__Ruins_East__West_9.into_usize() + 1,
-            },
         },
         SpotId::Giguna__Ruins_East__Pillar => Spot {
             id: SpotId::Giguna__Ruins_East__Pillar,
@@ -21554,10 +19928,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna__Ruins_East__Bottom_Rock.into_usize(),
-                end: SpotId::Giguna__Ruins_East__West_9.into_usize() + 1,
             },
         },
         SpotId::Giguna__Ruins_East__West_7 => Spot {
@@ -21572,10 +19942,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__Ruins_East__Bottom_Rock.into_usize(),
-                end: SpotId::Giguna__Ruins_East__West_9.into_usize() + 1,
-            },
         },
         SpotId::Giguna__Ruins_East__Way_Up_High => Spot {
             id: SpotId::Giguna__Ruins_East__Way_Up_High,
@@ -21588,10 +19954,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna__Ruins_East__Bottom_Rock.into_usize(),
-                end: SpotId::Giguna__Ruins_East__West_9.into_usize() + 1,
             },
         },
         SpotId::Giguna__Ruins_Center__East_8 => Spot {
@@ -21606,10 +19968,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__Ruins_Center__Center_Top.into_usize(),
-                end: SpotId::Giguna__Ruins_Center__West_Platform_Right.into_usize() + 1,
-            },
         },
         SpotId::Giguna__Ruins_Center__Tablet => Spot {
             id: SpotId::Giguna__Ruins_Center__Tablet,
@@ -21622,10 +19980,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna__Ruins_Center__Center_Top.into_usize(),
-                end: SpotId::Giguna__Ruins_Center__West_Platform_Right.into_usize() + 1,
             },
         },
         SpotId::Giguna__Ruins_Center__East_9 => Spot {
@@ -21640,10 +19994,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__Ruins_Center__Center_Top.into_usize(),
-                end: SpotId::Giguna__Ruins_Center__West_Platform_Right.into_usize() + 1,
-            },
         },
         SpotId::Giguna__Ruins_Center__Wall_Bottom => Spot {
             id: SpotId::Giguna__Ruins_Center__Wall_Bottom,
@@ -21656,10 +20006,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna__Ruins_Center__Center_Top.into_usize(),
-                end: SpotId::Giguna__Ruins_Center__West_Platform_Right.into_usize() + 1,
             },
         },
         SpotId::Giguna__Ruins_Center__Wall_Top => Spot {
@@ -21674,10 +20020,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__Ruins_Center__Center_Top.into_usize(),
-                end: SpotId::Giguna__Ruins_Center__West_Platform_Right.into_usize() + 1,
-            },
         },
         SpotId::Giguna__Ruins_Center__Center_Top => Spot {
             id: SpotId::Giguna__Ruins_Center__Center_Top,
@@ -21689,10 +20031,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna__Ruins_Center__Center_Top.into_usize(),
-                end: SpotId::Giguna__Ruins_Center__West_Platform_Right.into_usize() + 1,
             },
         },
         SpotId::Giguna__Ruins_Center__West_Platform_Right => Spot {
@@ -21706,10 +20044,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__Ruins_Center__Center_Top.into_usize(),
-                end: SpotId::Giguna__Ruins_Center__West_Platform_Right.into_usize() + 1,
-            },
         },
         SpotId::Giguna__Ruins_Center__West_Platform_Left => Spot {
             id: SpotId::Giguna__Ruins_Center__West_Platform_Left,
@@ -21721,10 +20055,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna__Ruins_Center__Center_Top.into_usize(),
-                end: SpotId::Giguna__Ruins_Center__West_Platform_Right.into_usize() + 1,
             },
         },
         SpotId::Giguna__Ruins_Center__West_9 => Spot {
@@ -21739,10 +20069,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__Ruins_Center__Center_Top.into_usize(),
-                end: SpotId::Giguna__Ruins_Center__West_Platform_Right.into_usize() + 1,
-            },
         },
         SpotId::Giguna__Ruins_West__East_9 => Spot {
             id: SpotId::Giguna__Ruins_West__East_9,
@@ -21755,10 +20081,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna__Ruins_West__East_7.into_usize(),
-                end: SpotId::Giguna__Ruins_West__West_7.into_usize() + 1,
             },
         },
         SpotId::Giguna__Ruins_West__Save_Point => Spot {
@@ -21773,10 +20095,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: ActionId::Giguna__Ruins_West__Save_Point__Save.into_usize(),
                 end: ActionId::Giguna__Ruins_West__Save_Point__Save.into_usize() + 1,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__Ruins_West__East_7.into_usize(),
-                end: SpotId::Giguna__Ruins_West__West_7.into_usize() + 1,
-            },
         },
         SpotId::Giguna__Ruins_West__Platform => Spot {
             id: SpotId::Giguna__Ruins_West__Platform,
@@ -21788,10 +20106,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna__Ruins_West__East_7.into_usize(),
-                end: SpotId::Giguna__Ruins_West__West_7.into_usize() + 1,
             },
         },
         SpotId::Giguna__Ruins_West__Nook => Spot {
@@ -21805,10 +20119,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna__Ruins_West__East_7.into_usize(),
-                end: SpotId::Giguna__Ruins_West__West_7.into_usize() + 1,
             },
         },
         SpotId::Giguna__Ruins_West__Lower_Ledge => Spot {
@@ -21824,10 +20134,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: ActionId::Giguna__Ruins_West__Lower_Ledge__Destroy_Kishib.into_usize(),
                 end: ActionId::Giguna__Ruins_West__Lower_Ledge__Hack_Kishib.into_usize() + 1,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__Ruins_West__East_7.into_usize(),
-                end: SpotId::Giguna__Ruins_West__West_7.into_usize() + 1,
-            },
         },
         SpotId::Giguna__Ruins_West__Upper_Ledge => Spot {
             id: SpotId::Giguna__Ruins_West__Upper_Ledge,
@@ -21839,10 +20145,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna__Ruins_West__East_7.into_usize(),
-                end: SpotId::Giguna__Ruins_West__West_7.into_usize() + 1,
             },
         },
         SpotId::Giguna__Ruins_West__East_7 => Spot {
@@ -21857,10 +20159,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__Ruins_West__East_7.into_usize(),
-                end: SpotId::Giguna__Ruins_West__West_7.into_usize() + 1,
-            },
         },
         SpotId::Giguna__Ruins_West__Rooftop_East_Edge => Spot {
             id: SpotId::Giguna__Ruins_West__Rooftop_East_Edge,
@@ -21873,10 +20171,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__Ruins_West__East_7.into_usize(),
-                end: SpotId::Giguna__Ruins_West__West_7.into_usize() + 1,
-            },
         },
         SpotId::Giguna__Ruins_West__Rooftop_West_Edge => Spot {
             id: SpotId::Giguna__Ruins_West__Rooftop_West_Edge,
@@ -21888,10 +20182,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna__Ruins_West__East_7.into_usize(),
-                end: SpotId::Giguna__Ruins_West__West_7.into_usize() + 1,
             },
         },
         SpotId::Giguna__Ruins_West__West_7 => Spot {
@@ -21906,10 +20196,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__Ruins_West__East_7.into_usize(),
-                end: SpotId::Giguna__Ruins_West__West_7.into_usize() + 1,
-            },
         },
         SpotId::Giguna__Ruins_Top__West_7 => Spot {
             id: SpotId::Giguna__Ruins_Top__West_7,
@@ -21922,10 +20208,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna__Ruins_Top__East_7.into_usize(),
-                end: SpotId::Giguna__Ruins_Top__West_Pillar.into_usize() + 1,
             },
         },
         SpotId::Giguna__Ruins_Top__West_Door => Spot {
@@ -21940,10 +20222,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__Ruins_Top__East_7.into_usize(),
-                end: SpotId::Giguna__Ruins_Top__West_Pillar.into_usize() + 1,
-            },
         },
         SpotId::Giguna__Ruins_Top__West_Pillar => Spot {
             id: SpotId::Giguna__Ruins_Top__West_Pillar,
@@ -21955,10 +20233,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna__Ruins_Top__East_7.into_usize(),
-                end: SpotId::Giguna__Ruins_Top__West_Pillar.into_usize() + 1,
             },
         },
         SpotId::Giguna__Ruins_Top__Entryway => Spot {
@@ -21973,10 +20247,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__Ruins_Top__East_7.into_usize(),
-                end: SpotId::Giguna__Ruins_Top__West_Pillar.into_usize() + 1,
-            },
         },
         SpotId::Giguna__Ruins_Top__Portal_Left => Spot {
             id: SpotId::Giguna__Ruins_Top__Portal_Left,
@@ -21989,10 +20259,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna__Ruins_Top__East_7.into_usize(),
-                end: SpotId::Giguna__Ruins_Top__West_Pillar.into_usize() + 1,
             },
         },
         SpotId::Giguna__Ruins_Top__Small_Ledge => Spot {
@@ -22008,10 +20274,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__Ruins_Top__East_7.into_usize(),
-                end: SpotId::Giguna__Ruins_Top__West_Pillar.into_usize() + 1,
-            },
         },
         SpotId::Giguna__Ruins_Top__Portal => Spot {
             id: SpotId::Giguna__Ruins_Top__Portal,
@@ -22026,10 +20288,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: ActionId::Giguna__Ruins_Top__Portal__Enter_Portal.into_usize(),
                 end: ActionId::Giguna__Ruins_Top__Portal__Enter_Portal.into_usize() + 1,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__Ruins_Top__East_7.into_usize(),
-                end: SpotId::Giguna__Ruins_Top__West_Pillar.into_usize() + 1,
-            },
         },
         SpotId::Giguna__Ruins_Top__Interior_Ledge => Spot {
             id: SpotId::Giguna__Ruins_Top__Interior_Ledge,
@@ -22043,10 +20301,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__Ruins_Top__East_7.into_usize(),
-                end: SpotId::Giguna__Ruins_Top__West_Pillar.into_usize() + 1,
-            },
         },
         SpotId::Giguna__Ruins_Top__Upper_Tunnel => Spot {
             id: SpotId::Giguna__Ruins_Top__Upper_Tunnel,
@@ -22058,10 +20312,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna__Ruins_Top__East_7.into_usize(),
-                end: SpotId::Giguna__Ruins_Top__West_Pillar.into_usize() + 1,
             },
         },
         SpotId::Giguna__Ruins_Top__Flask => Spot {
@@ -22076,10 +20326,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__Ruins_Top__East_7.into_usize(),
-                end: SpotId::Giguna__Ruins_Top__West_Pillar.into_usize() + 1,
-            },
         },
         SpotId::Giguna__Ruins_Top__East_Door => Spot {
             id: SpotId::Giguna__Ruins_Top__East_Door,
@@ -22092,10 +20338,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna__Ruins_Top__East_7.into_usize(),
-                end: SpotId::Giguna__Ruins_Top__West_Pillar.into_usize() + 1,
             },
         },
         SpotId::Giguna__Ruins_Top__East_7 => Spot {
@@ -22110,10 +20352,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__Ruins_Top__East_7.into_usize(),
-                end: SpotId::Giguna__Ruins_Top__West_Pillar.into_usize() + 1,
-            },
         },
         SpotId::Giguna__Ruins_Top__Save_Point => Spot {
             id: SpotId::Giguna__Ruins_Top__Save_Point,
@@ -22126,10 +20364,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: ActionId::Giguna__Ruins_Top__Save_Point__Save.into_usize(),
                 end: ActionId::Giguna__Ruins_Top__Save_Point__Save.into_usize() + 1,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna__Ruins_Top__East_7.into_usize(),
-                end: SpotId::Giguna__Ruins_Top__West_Pillar.into_usize() + 1,
             },
         },
         SpotId::Giguna__Ruins_Top__Switch => Spot {
@@ -22145,10 +20379,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: ActionId::Giguna__Ruins_Top__Switch__Open_Doors.into_usize(),
                 end: ActionId::Giguna__Ruins_Top__Switch__Open_Doors.into_usize() + 1,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__Ruins_Top__East_7.into_usize(),
-                end: SpotId::Giguna__Ruins_Top__West_Pillar.into_usize() + 1,
-            },
         },
         SpotId::Giguna__Ruins_Top__Rooftop_West => Spot {
             id: SpotId::Giguna__Ruins_Top__Rooftop_West,
@@ -22162,10 +20392,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__Ruins_Top__East_7.into_usize(),
-                end: SpotId::Giguna__Ruins_Top__West_Pillar.into_usize() + 1,
-            },
         },
         SpotId::Giguna__Ruins_Top__Rooftop_East => Spot {
             id: SpotId::Giguna__Ruins_Top__Rooftop_East,
@@ -22178,10 +20404,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__Ruins_Top__East_7.into_usize(),
-                end: SpotId::Giguna__Ruins_Top__West_Pillar.into_usize() + 1,
-            },
         },
         SpotId::Giguna__Ruins_Top__Rooftop_Gutter => Spot {
             id: SpotId::Giguna__Ruins_Top__Rooftop_Gutter,
@@ -22193,10 +20415,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna__Ruins_Top__East_7.into_usize(),
-                end: SpotId::Giguna__Ruins_Top__West_Pillar.into_usize() + 1,
             },
         },
         SpotId::Giguna__Ruins_Top__Turret_Balcony_East => Spot {
@@ -22211,10 +20429,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__Ruins_Top__East_7.into_usize(),
-                end: SpotId::Giguna__Ruins_Top__West_Pillar.into_usize() + 1,
-            },
         },
         SpotId::Giguna__Ruins_Top__Turret_Balcony_West => Spot {
             id: SpotId::Giguna__Ruins_Top__Turret_Balcony_West,
@@ -22228,10 +20442,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: ActionId::Giguna__Ruins_Top__Turret_Balcony_West__Throw_Drone_onto_Tower.into_usize(),
                 end: ActionId::Giguna__Ruins_Top__Turret_Balcony_West__Throw_Drone_onto_Tower.into_usize() + 1,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__Ruins_Top__East_7.into_usize(),
-                end: SpotId::Giguna__Ruins_Top__West_Pillar.into_usize() + 1,
-            },
         },
         SpotId::Giguna__West_Tower__East_7 => Spot {
             id: SpotId::Giguna__West_Tower__East_7,
@@ -22243,10 +20453,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna__West_Tower__East_7.into_usize(),
-                end: SpotId::Giguna__West_Tower__Top.into_usize() + 1,
             },
         },
         SpotId::Giguna__West_Tower__Top => Spot {
@@ -22261,10 +20467,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__West_Tower__East_7.into_usize(),
-                end: SpotId::Giguna__West_Tower__Top.into_usize() + 1,
-            },
         },
         SpotId::Giguna__West_Tower__Southwest => Spot {
             id: SpotId::Giguna__West_Tower__Southwest,
@@ -22278,10 +20480,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__West_Tower__East_7.into_usize(),
-                end: SpotId::Giguna__West_Tower__Top.into_usize() + 1,
-            },
         },
         SpotId::Giguna__Far_Corner__East_13 => Spot {
             id: SpotId::Giguna__Far_Corner__East_13,
@@ -22293,10 +20491,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna__Far_Corner__East_13.into_usize(),
-                end: SpotId::Giguna__Far_Corner__South.into_usize() + 1,
             },
         },
         SpotId::Giguna__Far_Corner__Grass => Spot {
@@ -22311,10 +20505,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__Far_Corner__East_13.into_usize(),
-                end: SpotId::Giguna__Far_Corner__South.into_usize() + 1,
-            },
         },
         SpotId::Giguna__Far_Corner__South => Spot {
             id: SpotId::Giguna__Far_Corner__South,
@@ -22327,10 +20517,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna__Far_Corner__East_13.into_usize(),
-                end: SpotId::Giguna__Far_Corner__South.into_usize() + 1,
             },
         },
         SpotId::Giguna__Helipad__East_15 => Spot {
@@ -22345,10 +20531,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__Helipad__East_15.into_usize(),
-                end: SpotId::Giguna__Helipad__Wall_Top.into_usize() + 1,
-            },
         },
         SpotId::Giguna__Helipad__North => Spot {
             id: SpotId::Giguna__Helipad__North,
@@ -22361,10 +20543,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__Helipad__East_15.into_usize(),
-                end: SpotId::Giguna__Helipad__Wall_Top.into_usize() + 1,
-            },
         },
         SpotId::Giguna__Helipad__Helicopter => Spot {
             id: SpotId::Giguna__Helipad__Helicopter,
@@ -22376,10 +20554,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna__Helipad__East_15.into_usize(),
-                end: SpotId::Giguna__Helipad__Wall_Top.into_usize() + 1,
             },
         },
         SpotId::Giguna__Helipad__East_16 => Spot {
@@ -22394,10 +20568,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__Helipad__East_15.into_usize(),
-                end: SpotId::Giguna__Helipad__Wall_Top.into_usize() + 1,
-            },
         },
         SpotId::Giguna__Helipad__Irikar_Drop => Spot {
             id: SpotId::Giguna__Helipad__Irikar_Drop,
@@ -22409,10 +20579,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna__Helipad__East_15.into_usize(),
-                end: SpotId::Giguna__Helipad__Wall_Top.into_usize() + 1,
             },
         },
         SpotId::Giguna__Helipad__Wall_Top => Spot {
@@ -22427,10 +20593,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__Helipad__East_15.into_usize(),
-                end: SpotId::Giguna__Helipad__Wall_Top.into_usize() + 1,
-            },
         },
         SpotId::Giguna__Helipad__Railing => Spot {
             id: SpotId::Giguna__Helipad__Railing,
@@ -22444,10 +20606,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__Helipad__East_15.into_usize(),
-                end: SpotId::Giguna__Helipad__Wall_Top.into_usize() + 1,
-            },
         },
         SpotId::Giguna__Helipad__Wall_Bottom => Spot {
             id: SpotId::Giguna__Helipad__Wall_Bottom,
@@ -22459,10 +20617,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna__Helipad__East_15.into_usize(),
-                end: SpotId::Giguna__Helipad__Wall_Top.into_usize() + 1,
             },
         },
         SpotId::Giguna__Helipad__So_Close => Spot {
@@ -22477,10 +20631,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__Helipad__East_15.into_usize(),
-                end: SpotId::Giguna__Helipad__Wall_Top.into_usize() + 1,
-            },
         },
         SpotId::Giguna__Helipad__Tablet_Ledge => Spot {
             id: SpotId::Giguna__Helipad__Tablet_Ledge,
@@ -22494,10 +20644,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__Helipad__East_15.into_usize(),
-                end: SpotId::Giguna__Helipad__Wall_Top.into_usize() + 1,
-            },
         },
         SpotId::Giguna__Helipad__Staircase_Top => Spot {
             id: SpotId::Giguna__Helipad__Staircase_Top,
@@ -22509,10 +20655,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna__Helipad__East_15.into_usize(),
-                end: SpotId::Giguna__Helipad__Wall_Top.into_usize() + 1,
             },
         },
         SpotId::Giguna__Helipad__East_18 => Spot {
@@ -22527,10 +20669,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__Helipad__East_15.into_usize(),
-                end: SpotId::Giguna__Helipad__Wall_Top.into_usize() + 1,
-            },
         },
         SpotId::Giguna__Helipad__South_Left => Spot {
             id: SpotId::Giguna__Helipad__South_Left,
@@ -22542,10 +20680,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna__Helipad__East_15.into_usize(),
-                end: SpotId::Giguna__Helipad__Wall_Top.into_usize() + 1,
             },
         },
         SpotId::Giguna__Helipad__South_Middle => Spot {
@@ -22559,10 +20693,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__Helipad__East_15.into_usize(),
-                end: SpotId::Giguna__Helipad__Wall_Top.into_usize() + 1,
-            },
         },
         SpotId::Giguna__Helipad__South_Right => Spot {
             id: SpotId::Giguna__Helipad__South_Right,
@@ -22574,10 +20704,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna__Helipad__East_15.into_usize(),
-                end: SpotId::Giguna__Helipad__Wall_Top.into_usize() + 1,
             },
         },
         SpotId::Giguna__Helipad__Lowest_Ledge => Spot {
@@ -22591,10 +20717,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__Helipad__East_15.into_usize(),
-                end: SpotId::Giguna__Helipad__Wall_Top.into_usize() + 1,
-            },
         },
         SpotId::Giguna__Clouds__North_Left => Spot {
             id: SpotId::Giguna__Clouds__North_Left,
@@ -22606,10 +20728,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna__Clouds__Cache.into_usize(),
-                end: SpotId::Giguna__Clouds__Straight_Down.into_usize() + 1,
             },
         },
         SpotId::Giguna__Clouds__North_Middle => Spot {
@@ -22623,10 +20741,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__Clouds__Cache.into_usize(),
-                end: SpotId::Giguna__Clouds__Straight_Down.into_usize() + 1,
-            },
         },
         SpotId::Giguna__Clouds__North_Right => Spot {
             id: SpotId::Giguna__Clouds__North_Right,
@@ -22639,10 +20753,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__Clouds__Cache.into_usize(),
-                end: SpotId::Giguna__Clouds__Straight_Down.into_usize() + 1,
-            },
         },
         SpotId::Giguna__Clouds__North_Under_Ledge => Spot {
             id: SpotId::Giguna__Clouds__North_Under_Ledge,
@@ -22654,10 +20764,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna__Clouds__Cache.into_usize(),
-                end: SpotId::Giguna__Clouds__Straight_Down.into_usize() + 1,
             },
         },
         SpotId::Giguna__Clouds__Platform_Start => Spot {
@@ -22672,10 +20778,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: ActionId::Giguna__Clouds__Platform_Start__Hack_and_Ride_to_Portal.into_usize(),
                 end: ActionId::Giguna__Clouds__Platform_Start__Hack_Deploy_Ride_to_Portal.into_usize() + 1,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__Clouds__Cache.into_usize(),
-                end: SpotId::Giguna__Clouds__Straight_Down.into_usize() + 1,
-            },
         },
         SpotId::Giguna__Clouds__Platform_Stop => Spot {
             id: SpotId::Giguna__Clouds__Platform_Stop,
@@ -22688,10 +20790,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna__Clouds__Cache.into_usize(),
-                end: SpotId::Giguna__Clouds__Straight_Down.into_usize() + 1,
             },
         },
         SpotId::Giguna__Clouds__Cache => Spot {
@@ -22706,10 +20804,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__Clouds__Cache.into_usize(),
-                end: SpotId::Giguna__Clouds__Straight_Down.into_usize() + 1,
-            },
         },
         SpotId::Giguna__Clouds__Platform_Early_Portal => Spot {
             id: SpotId::Giguna__Clouds__Platform_Early_Portal,
@@ -22721,10 +20815,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna__Clouds__Cache.into_usize(),
-                end: SpotId::Giguna__Clouds__Straight_Down.into_usize() + 1,
             },
         },
         SpotId::Giguna__Clouds__Southwest => Spot {
@@ -22739,10 +20829,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__Clouds__Cache.into_usize(),
-                end: SpotId::Giguna__Clouds__Straight_Down.into_usize() + 1,
-            },
         },
         SpotId::Giguna__Clouds__Straight_Down => Spot {
             id: SpotId::Giguna__Clouds__Straight_Down,
@@ -22755,10 +20841,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna__Clouds__Cache.into_usize(),
-                end: SpotId::Giguna__Clouds__Straight_Down.into_usize() + 1,
             },
         },
         SpotId::Giguna__Clouds__Pull_Right => Spot {
@@ -22773,10 +20855,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__Clouds__Cache.into_usize(),
-                end: SpotId::Giguna__Clouds__Straight_Down.into_usize() + 1,
-            },
         },
         SpotId::Giguna__Clouds__Southeast => Spot {
             id: SpotId::Giguna__Clouds__Southeast,
@@ -22789,10 +20867,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna__Clouds__Cache.into_usize(),
-                end: SpotId::Giguna__Clouds__Straight_Down.into_usize() + 1,
             },
         },
         SpotId::Giguna__Lamassu__West_18 => Spot {
@@ -22807,10 +20881,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__Lamassu__Broken_Pillar.into_usize(),
-                end: SpotId::Giguna__Lamassu__Wingtip.into_usize() + 1,
-            },
         },
         SpotId::Giguna__Lamassu__Staircase_Top => Spot {
             id: SpotId::Giguna__Lamassu__Staircase_Top,
@@ -22822,10 +20892,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna__Lamassu__Broken_Pillar.into_usize(),
-                end: SpotId::Giguna__Lamassu__Wingtip.into_usize() + 1,
             },
         },
         SpotId::Giguna__Lamassu__Staircase_Bottom => Spot {
@@ -22839,10 +20905,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__Lamassu__Broken_Pillar.into_usize(),
-                end: SpotId::Giguna__Lamassu__Wingtip.into_usize() + 1,
-            },
         },
         SpotId::Giguna__Lamassu__Staircase_Landing => Spot {
             id: SpotId::Giguna__Lamassu__Staircase_Landing,
@@ -22854,10 +20916,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna__Lamassu__Broken_Pillar.into_usize(),
-                end: SpotId::Giguna__Lamassu__Wingtip.into_usize() + 1,
             },
         },
         SpotId::Giguna__Lamassu__Broken_Pillar => Spot {
@@ -22872,10 +20930,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__Lamassu__Broken_Pillar.into_usize(),
-                end: SpotId::Giguna__Lamassu__Wingtip.into_usize() + 1,
-            },
         },
         SpotId::Giguna__Lamassu__Upper_Platform_Edge => Spot {
             id: SpotId::Giguna__Lamassu__Upper_Platform_Edge,
@@ -22887,10 +20941,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna__Lamassu__Broken_Pillar.into_usize(),
-                end: SpotId::Giguna__Lamassu__Wingtip.into_usize() + 1,
             },
         },
         SpotId::Giguna__Lamassu__Lower_Platform_Left => Spot {
@@ -22905,10 +20955,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__Lamassu__Broken_Pillar.into_usize(),
-                end: SpotId::Giguna__Lamassu__Wingtip.into_usize() + 1,
-            },
         },
         SpotId::Giguna__Lamassu__Lower_Platform_Right => Spot {
             id: SpotId::Giguna__Lamassu__Lower_Platform_Right,
@@ -22922,10 +20968,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__Lamassu__Broken_Pillar.into_usize(),
-                end: SpotId::Giguna__Lamassu__Wingtip.into_usize() + 1,
-            },
         },
         SpotId::Giguna__Lamassu__Head => Spot {
             id: SpotId::Giguna__Lamassu__Head,
@@ -22937,10 +20979,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna__Lamassu__Broken_Pillar.into_usize(),
-                end: SpotId::Giguna__Lamassu__Wingtip.into_usize() + 1,
             },
         },
         SpotId::Giguna__Lamassu__Rear_Platform => Spot {
@@ -22954,10 +20992,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__Lamassu__Broken_Pillar.into_usize(),
-                end: SpotId::Giguna__Lamassu__Wingtip.into_usize() + 1,
-            },
         },
         SpotId::Giguna__Lamassu__Wingtip => Spot {
             id: SpotId::Giguna__Lamassu__Wingtip,
@@ -22969,10 +21003,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna__Lamassu__Broken_Pillar.into_usize(),
-                end: SpotId::Giguna__Lamassu__Wingtip.into_usize() + 1,
             },
         },
         SpotId::Giguna__Lamassu__Rear_Gap => Spot {
@@ -22987,10 +21017,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__Lamassu__Broken_Pillar.into_usize(),
-                end: SpotId::Giguna__Lamassu__Wingtip.into_usize() + 1,
-            },
         },
         SpotId::Giguna__Lamassu__Deposit => Spot {
             id: SpotId::Giguna__Lamassu__Deposit,
@@ -23003,10 +21029,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna__Lamassu__Broken_Pillar.into_usize(),
-                end: SpotId::Giguna__Lamassu__Wingtip.into_usize() + 1,
             },
         },
         SpotId::Giguna__Lamassu__East_18 => Spot {
@@ -23021,10 +21043,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__Lamassu__Broken_Pillar.into_usize(),
-                end: SpotId::Giguna__Lamassu__Wingtip.into_usize() + 1,
-            },
         },
         SpotId::Giguna__Dual_Path__West_18 => Spot {
             id: SpotId::Giguna__Dual_Path__West_18,
@@ -23037,10 +21055,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna__Dual_Path__Base_of_Wall.into_usize(),
-                end: SpotId::Giguna__Dual_Path__West_Slope.into_usize() + 1,
             },
         },
         SpotId::Giguna__Dual_Path__Below_Left_Switch => Spot {
@@ -23055,10 +21069,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__Dual_Path__Base_of_Wall.into_usize(),
-                end: SpotId::Giguna__Dual_Path__West_Slope.into_usize() + 1,
-            },
         },
         SpotId::Giguna__Dual_Path__Left_Switch => Spot {
             id: SpotId::Giguna__Dual_Path__Left_Switch,
@@ -23072,10 +21082,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__Dual_Path__Base_of_Wall.into_usize(),
-                end: SpotId::Giguna__Dual_Path__West_Slope.into_usize() + 1,
-            },
         },
         SpotId::Giguna__Dual_Path__West_Slope => Spot {
             id: SpotId::Giguna__Dual_Path__West_Slope,
@@ -23087,10 +21093,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna__Dual_Path__Base_of_Wall.into_usize(),
-                end: SpotId::Giguna__Dual_Path__West_Slope.into_usize() + 1,
             },
         },
         SpotId::Giguna__Dual_Path__In_the_Grass => Spot {
@@ -23105,10 +21107,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__Dual_Path__Base_of_Wall.into_usize(),
-                end: SpotId::Giguna__Dual_Path__West_Slope.into_usize() + 1,
-            },
         },
         SpotId::Giguna__Dual_Path__Base_of_Wall => Spot {
             id: SpotId::Giguna__Dual_Path__Base_of_Wall,
@@ -23121,10 +21119,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna__Dual_Path__Base_of_Wall.into_usize(),
-                end: SpotId::Giguna__Dual_Path__West_Slope.into_usize() + 1,
             },
         },
         SpotId::Giguna__Dual_Path__Wall_Secret => Spot {
@@ -23140,10 +21134,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__Dual_Path__Base_of_Wall.into_usize(),
-                end: SpotId::Giguna__Dual_Path__West_Slope.into_usize() + 1,
-            },
         },
         SpotId::Giguna__Dual_Path__Wall_Top => Spot {
             id: SpotId::Giguna__Dual_Path__Wall_Top,
@@ -23155,10 +21145,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna__Dual_Path__Base_of_Wall.into_usize(),
-                end: SpotId::Giguna__Dual_Path__West_Slope.into_usize() + 1,
             },
         },
         SpotId::Giguna__Dual_Path__Right_Switch => Spot {
@@ -23173,10 +21159,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__Dual_Path__Base_of_Wall.into_usize(),
-                end: SpotId::Giguna__Dual_Path__West_Slope.into_usize() + 1,
-            },
         },
         SpotId::Giguna__Dual_Path__Below_Right_Switch => Spot {
             id: SpotId::Giguna__Dual_Path__Below_Right_Switch,
@@ -23189,10 +21171,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna__Dual_Path__Base_of_Wall.into_usize(),
-                end: SpotId::Giguna__Dual_Path__West_Slope.into_usize() + 1,
             },
         },
         SpotId::Giguna__Dual_Path__East_Gate => Spot {
@@ -23207,10 +21185,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__Dual_Path__Base_of_Wall.into_usize(),
-                end: SpotId::Giguna__Dual_Path__West_Slope.into_usize() + 1,
-            },
         },
         SpotId::Giguna__Dual_Path__East_18 => Spot {
             id: SpotId::Giguna__Dual_Path__East_18,
@@ -23223,10 +21197,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna__Dual_Path__Base_of_Wall.into_usize(),
-                end: SpotId::Giguna__Dual_Path__West_Slope.into_usize() + 1,
             },
         },
         SpotId::Giguna__Dual_Path__West_Gate => Spot {
@@ -23241,10 +21211,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__Dual_Path__Base_of_Wall.into_usize(),
-                end: SpotId::Giguna__Dual_Path__West_Slope.into_usize() + 1,
-            },
         },
         SpotId::Giguna__Dual_Path__West_Gate_NW => Spot {
             id: SpotId::Giguna__Dual_Path__West_Gate_NW,
@@ -23257,10 +21223,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna__Dual_Path__Base_of_Wall.into_usize(),
-                end: SpotId::Giguna__Dual_Path__West_Slope.into_usize() + 1,
             },
         },
         SpotId::Giguna__Dual_Path__West_Gate_NE => Spot {
@@ -23275,10 +21237,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__Dual_Path__Base_of_Wall.into_usize(),
-                end: SpotId::Giguna__Dual_Path__West_Slope.into_usize() + 1,
-            },
         },
         SpotId::Giguna__Dual_Path__West_17 => Spot {
             id: SpotId::Giguna__Dual_Path__West_17,
@@ -23291,10 +21249,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna__Dual_Path__Base_of_Wall.into_usize(),
-                end: SpotId::Giguna__Dual_Path__West_Slope.into_usize() + 1,
             },
         },
         SpotId::Giguna__Dual_Path__Midway => Spot {
@@ -23309,10 +21263,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__Dual_Path__Base_of_Wall.into_usize(),
-                end: SpotId::Giguna__Dual_Path__West_Slope.into_usize() + 1,
-            },
         },
         SpotId::Giguna__Dual_Path__Midway_Plateau => Spot {
             id: SpotId::Giguna__Dual_Path__Midway_Plateau,
@@ -23324,10 +21274,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna__Dual_Path__Base_of_Wall.into_usize(),
-                end: SpotId::Giguna__Dual_Path__West_Slope.into_usize() + 1,
             },
         },
         SpotId::Giguna__Dual_Path__East_Gate_NW => Spot {
@@ -23342,10 +21288,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__Dual_Path__Base_of_Wall.into_usize(),
-                end: SpotId::Giguna__Dual_Path__West_Slope.into_usize() + 1,
-            },
         },
         SpotId::Giguna__Dual_Path__East_Gate_NE => Spot {
             id: SpotId::Giguna__Dual_Path__East_Gate_NE,
@@ -23358,10 +21300,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna__Dual_Path__Base_of_Wall.into_usize(),
-                end: SpotId::Giguna__Dual_Path__West_Slope.into_usize() + 1,
             },
         },
         SpotId::Giguna__Dual_Path__East_17 => Spot {
@@ -23376,10 +21314,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__Dual_Path__Base_of_Wall.into_usize(),
-                end: SpotId::Giguna__Dual_Path__West_Slope.into_usize() + 1,
-            },
         },
         SpotId::Giguna__Hard_Rock__East_17 => Spot {
             id: SpotId::Giguna__Hard_Rock__East_17,
@@ -23392,10 +21326,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna__Hard_Rock__East_17.into_usize(),
-                end: SpotId::Giguna__Hard_Rock__West_17.into_usize() + 1,
             },
         },
         SpotId::Giguna__Hard_Rock__Rock_Right => Spot {
@@ -23411,10 +21341,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__Hard_Rock__East_17.into_usize(),
-                end: SpotId::Giguna__Hard_Rock__West_17.into_usize() + 1,
-            },
         },
         SpotId::Giguna__Hard_Rock__Rock_Center => Spot {
             id: SpotId::Giguna__Hard_Rock__Rock_Center,
@@ -23427,10 +21353,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna__Hard_Rock__East_17.into_usize(),
-                end: SpotId::Giguna__Hard_Rock__West_17.into_usize() + 1,
             },
         },
         SpotId::Giguna__Hard_Rock__Rock_Left => Spot {
@@ -23446,10 +21368,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__Hard_Rock__East_17.into_usize(),
-                end: SpotId::Giguna__Hard_Rock__West_17.into_usize() + 1,
-            },
         },
         SpotId::Giguna__Hard_Rock__West_17 => Spot {
             id: SpotId::Giguna__Hard_Rock__West_17,
@@ -23462,10 +21380,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna__Hard_Rock__East_17.into_usize(),
-                end: SpotId::Giguna__Hard_Rock__West_17.into_usize() + 1,
             },
         },
         SpotId::Giguna__East_Caverns__West_14 => Spot {
@@ -23481,10 +21395,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: ActionId::Giguna__East_Caverns__West_14__Enter_Combo.into_usize(),
                 end: ActionId::Giguna__East_Caverns__West_14__Enter_Combo.into_usize() + 1,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__East_Caverns__Arc_Ledge.into_usize(),
-                end: SpotId::Giguna__East_Caverns__West_Grass.into_usize() + 1,
-            },
         },
         SpotId::Giguna__East_Caverns__Upper_Platforms_Left => Spot {
             id: SpotId::Giguna__East_Caverns__Upper_Platforms_Left,
@@ -23496,10 +21406,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna__East_Caverns__Arc_Ledge.into_usize(),
-                end: SpotId::Giguna__East_Caverns__West_Grass.into_usize() + 1,
             },
         },
         SpotId::Giguna__East_Caverns__Upper_Platforms_Right => Spot {
@@ -23514,10 +21420,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__East_Caverns__Arc_Ledge.into_usize(),
-                end: SpotId::Giguna__East_Caverns__West_Grass.into_usize() + 1,
-            },
         },
         SpotId::Giguna__East_Caverns__Upper_Floor => Spot {
             id: SpotId::Giguna__East_Caverns__Upper_Floor,
@@ -23531,10 +21433,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__East_Caverns__Arc_Ledge.into_usize(),
-                end: SpotId::Giguna__East_Caverns__West_Grass.into_usize() + 1,
-            },
         },
         SpotId::Giguna__East_Caverns__Upper_Floor_Ledge => Spot {
             id: SpotId::Giguna__East_Caverns__Upper_Floor_Ledge,
@@ -23546,10 +21444,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna__East_Caverns__Arc_Ledge.into_usize(),
-                end: SpotId::Giguna__East_Caverns__West_Grass.into_usize() + 1,
             },
         },
         SpotId::Giguna__East_Caverns__Upper_Susar => Spot {
@@ -23565,10 +21459,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: ActionId::Giguna__East_Caverns__Upper_Susar__Caught.into_usize(),
                 end: ActionId::Giguna__East_Caverns__Upper_Susar__Caught.into_usize() + 1,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__East_Caverns__Arc_Ledge.into_usize(),
-                end: SpotId::Giguna__East_Caverns__West_Grass.into_usize() + 1,
-            },
         },
         SpotId::Giguna__East_Caverns__Upper_Susar_Mid_jump => Spot {
             id: SpotId::Giguna__East_Caverns__Upper_Susar_Mid_jump,
@@ -23582,10 +21472,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: ActionId::Giguna__East_Caverns__Upper_Susar_Mid_jump__Hack.into_usize(),
                 end: ActionId::Giguna__East_Caverns__Upper_Susar_Mid_jump__Hack.into_usize() + 1,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna__East_Caverns__Arc_Ledge.into_usize(),
-                end: SpotId::Giguna__East_Caverns__West_Grass.into_usize() + 1,
             },
         },
         SpotId::Giguna__East_Caverns__Upper_Susar_Jump_from_East => Spot {
@@ -23601,10 +21487,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: ActionId::Giguna__East_Caverns__Upper_Susar_Jump_from_East__Caught.into_usize(),
                 end: ActionId::Giguna__East_Caverns__Upper_Susar_Jump_from_East__Hack.into_usize() + 1,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__East_Caverns__Arc_Ledge.into_usize(),
-                end: SpotId::Giguna__East_Caverns__West_Grass.into_usize() + 1,
-            },
         },
         SpotId::Giguna__East_Caverns__Top_Past_Susar => Spot {
             id: SpotId::Giguna__East_Caverns__Top_Past_Susar,
@@ -23617,10 +21499,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__East_Caverns__Arc_Ledge.into_usize(),
-                end: SpotId::Giguna__East_Caverns__West_Grass.into_usize() + 1,
-            },
         },
         SpotId::Giguna__East_Caverns__Top_Ledge => Spot {
             id: SpotId::Giguna__East_Caverns__Top_Ledge,
@@ -23632,10 +21510,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna__East_Caverns__Arc_Ledge.into_usize(),
-                end: SpotId::Giguna__East_Caverns__West_Grass.into_usize() + 1,
             },
         },
         SpotId::Giguna__East_Caverns__Upper_Passage_West => Spot {
@@ -23650,10 +21524,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__East_Caverns__Arc_Ledge.into_usize(),
-                end: SpotId::Giguna__East_Caverns__West_Grass.into_usize() + 1,
-            },
         },
         SpotId::Giguna__East_Caverns__Upper_Passage_East => Spot {
             id: SpotId::Giguna__East_Caverns__Upper_Passage_East,
@@ -23667,10 +21537,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__East_Caverns__Arc_Ledge.into_usize(),
-                end: SpotId::Giguna__East_Caverns__West_Grass.into_usize() + 1,
-            },
         },
         SpotId::Giguna__East_Caverns__East_Shaft => Spot {
             id: SpotId::Giguna__East_Caverns__East_Shaft,
@@ -23682,10 +21548,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna__East_Caverns__Arc_Ledge.into_usize(),
-                end: SpotId::Giguna__East_Caverns__West_Grass.into_usize() + 1,
             },
         },
         SpotId::Giguna__East_Caverns__East_Side => Spot {
@@ -23700,10 +21562,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__East_Caverns__Arc_Ledge.into_usize(),
-                end: SpotId::Giguna__East_Caverns__West_Grass.into_usize() + 1,
-            },
         },
         SpotId::Giguna__East_Caverns__Carving => Spot {
             id: SpotId::Giguna__East_Caverns__Carving,
@@ -23717,10 +21575,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__East_Caverns__Arc_Ledge.into_usize(),
-                end: SpotId::Giguna__East_Caverns__West_Grass.into_usize() + 1,
-            },
         },
         SpotId::Giguna__East_Caverns__Middle_Ledge => Spot {
             id: SpotId::Giguna__East_Caverns__Middle_Ledge,
@@ -23733,10 +21587,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna__East_Caverns__Arc_Ledge.into_usize(),
-                end: SpotId::Giguna__East_Caverns__West_Grass.into_usize() + 1,
             },
         },
         SpotId::Giguna__East_Caverns__Mid_Susar => Spot {
@@ -23752,10 +21602,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: ActionId::Giguna__East_Caverns__Mid_Susar__Caught.into_usize(),
                 end: ActionId::Giguna__East_Caverns__Mid_Susar__Hack.into_usize() + 1,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__East_Caverns__Arc_Ledge.into_usize(),
-                end: SpotId::Giguna__East_Caverns__West_Grass.into_usize() + 1,
-            },
         },
         SpotId::Giguna__East_Caverns__Middle_Rock => Spot {
             id: SpotId::Giguna__East_Caverns__Middle_Rock,
@@ -23768,10 +21614,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna__East_Caverns__Arc_Ledge.into_usize(),
-                end: SpotId::Giguna__East_Caverns__West_Grass.into_usize() + 1,
             },
         },
         SpotId::Giguna__East_Caverns__Hidden_Passage_East => Spot {
@@ -23786,10 +21628,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__East_Caverns__Arc_Ledge.into_usize(),
-                end: SpotId::Giguna__East_Caverns__West_Grass.into_usize() + 1,
-            },
         },
         SpotId::Giguna__East_Caverns__Hidden_Passage_Center => Spot {
             id: SpotId::Giguna__East_Caverns__Hidden_Passage_Center,
@@ -23802,10 +21640,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna__East_Caverns__Arc_Ledge.into_usize(),
-                end: SpotId::Giguna__East_Caverns__West_Grass.into_usize() + 1,
             },
         },
         SpotId::Giguna__East_Caverns__Hidden_Passage_West => Spot {
@@ -23820,10 +21654,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__East_Caverns__Arc_Ledge.into_usize(),
-                end: SpotId::Giguna__East_Caverns__West_Grass.into_usize() + 1,
-            },
         },
         SpotId::Giguna__East_Caverns__Midwest_Ledge => Spot {
             id: SpotId::Giguna__East_Caverns__Midwest_Ledge,
@@ -23836,10 +21666,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna__East_Caverns__Arc_Ledge.into_usize(),
-                end: SpotId::Giguna__East_Caverns__West_Grass.into_usize() + 1,
             },
         },
         SpotId::Giguna__East_Caverns__Statues_Ledge => Spot {
@@ -23855,10 +21681,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: ActionId::Giguna__East_Caverns__Statues_Ledge__Open_Door.into_usize(),
                 end: ActionId::Giguna__East_Caverns__Statues_Ledge__Open_Door.into_usize() + 1,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__East_Caverns__Arc_Ledge.into_usize(),
-                end: SpotId::Giguna__East_Caverns__West_Grass.into_usize() + 1,
-            },
         },
         SpotId::Giguna__East_Caverns__Switch => Spot {
             id: SpotId::Giguna__East_Caverns__Switch,
@@ -23873,10 +21695,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: ActionId::Giguna__East_Caverns__Switch__Open_Door.into_usize(),
                 end: ActionId::Giguna__East_Caverns__Switch__Open_Door.into_usize() + 1,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__East_Caverns__Arc_Ledge.into_usize(),
-                end: SpotId::Giguna__East_Caverns__West_Grass.into_usize() + 1,
-            },
         },
         SpotId::Giguna__East_Caverns__Door => Spot {
             id: SpotId::Giguna__East_Caverns__Door,
@@ -23888,10 +21706,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna__East_Caverns__Arc_Ledge.into_usize(),
-                end: SpotId::Giguna__East_Caverns__West_Grass.into_usize() + 1,
             },
         },
         SpotId::Giguna__East_Caverns__West_16 => Spot {
@@ -23907,10 +21721,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: ActionId::Giguna__East_Caverns__West_16__Open_Door.into_usize(),
                 end: ActionId::Giguna__East_Caverns__West_16__Open_Door.into_usize() + 1,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__East_Caverns__Arc_Ledge.into_usize(),
-                end: SpotId::Giguna__East_Caverns__West_Grass.into_usize() + 1,
-            },
         },
         SpotId::Giguna__East_Caverns__Arc_Ledge => Spot {
             id: SpotId::Giguna__East_Caverns__Arc_Ledge,
@@ -23923,10 +21733,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna__East_Caverns__Arc_Ledge.into_usize(),
-                end: SpotId::Giguna__East_Caverns__West_Grass.into_usize() + 1,
             },
         },
         SpotId::Giguna__East_Caverns__Arc_Passage => Spot {
@@ -23941,10 +21747,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__East_Caverns__Arc_Ledge.into_usize(),
-                end: SpotId::Giguna__East_Caverns__West_Grass.into_usize() + 1,
-            },
         },
         SpotId::Giguna__East_Caverns__Lower_Ledge => Spot {
             id: SpotId::Giguna__East_Caverns__Lower_Ledge,
@@ -23957,10 +21759,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna__East_Caverns__Arc_Ledge.into_usize(),
-                end: SpotId::Giguna__East_Caverns__West_Grass.into_usize() + 1,
             },
         },
         SpotId::Giguna__East_Caverns__West_17 => Spot {
@@ -23975,10 +21773,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__East_Caverns__Arc_Ledge.into_usize(),
-                end: SpotId::Giguna__East_Caverns__West_Grass.into_usize() + 1,
-            },
         },
         SpotId::Giguna__East_Caverns__West_Grass => Spot {
             id: SpotId::Giguna__East_Caverns__West_Grass,
@@ -23992,10 +21786,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__East_Caverns__Arc_Ledge.into_usize(),
-                end: SpotId::Giguna__East_Caverns__West_Grass.into_usize() + 1,
-            },
         },
         SpotId::Giguna__East_Caverns__Under_Lower_Ledge => Spot {
             id: SpotId::Giguna__East_Caverns__Under_Lower_Ledge,
@@ -24007,10 +21797,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna__East_Caverns__Arc_Ledge.into_usize(),
-                end: SpotId::Giguna__East_Caverns__West_Grass.into_usize() + 1,
             },
         },
         SpotId::Giguna__East_Caverns__East_Grass => Spot {
@@ -24025,10 +21811,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__East_Caverns__Arc_Ledge.into_usize(),
-                end: SpotId::Giguna__East_Caverns__West_Grass.into_usize() + 1,
-            },
         },
         SpotId::Giguna__East_Caverns__East_17 => Spot {
             id: SpotId::Giguna__East_Caverns__East_17,
@@ -24041,10 +21823,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna__East_Caverns__Arc_Ledge.into_usize(),
-                end: SpotId::Giguna__East_Caverns__West_Grass.into_usize() + 1,
             },
         },
         SpotId::Giguna__Gateway__West_18 => Spot {
@@ -24059,10 +21837,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__Gateway__Block_Left.into_usize(),
-                end: SpotId::Giguna__Gateway__West_19.into_usize() + 1,
-            },
         },
         SpotId::Giguna__Gateway__Passage_Entry => Spot {
             id: SpotId::Giguna__Gateway__Passage_Entry,
@@ -24075,10 +21849,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna__Gateway__Block_Left.into_usize(),
-                end: SpotId::Giguna__Gateway__West_19.into_usize() + 1,
             },
         },
         SpotId::Giguna__Gateway__Passage_Exit => Spot {
@@ -24093,10 +21863,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__Gateway__Block_Left.into_usize(),
-                end: SpotId::Giguna__Gateway__West_19.into_usize() + 1,
-            },
         },
         SpotId::Giguna__Gateway__Door => Spot {
             id: SpotId::Giguna__Gateway__Door,
@@ -24109,10 +21875,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna__Gateway__Block_Left.into_usize(),
-                end: SpotId::Giguna__Gateway__West_19.into_usize() + 1,
             },
         },
         SpotId::Giguna__Gateway__Left_Platform => Spot {
@@ -24127,10 +21889,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__Gateway__Block_Left.into_usize(),
-                end: SpotId::Giguna__Gateway__West_19.into_usize() + 1,
-            },
         },
         SpotId::Giguna__Gateway__Right_Platform => Spot {
             id: SpotId::Giguna__Gateway__Right_Platform,
@@ -24143,10 +21901,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna__Gateway__Block_Left.into_usize(),
-                end: SpotId::Giguna__Gateway__West_19.into_usize() + 1,
             },
         },
         SpotId::Giguna__Gateway__Block_Left => Spot {
@@ -24162,10 +21916,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__Gateway__Block_Left.into_usize(),
-                end: SpotId::Giguna__Gateway__West_19.into_usize() + 1,
-            },
         },
         SpotId::Giguna__Gateway__Block_Right => Spot {
             id: SpotId::Giguna__Gateway__Block_Right,
@@ -24180,10 +21930,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__Gateway__Block_Left.into_usize(),
-                end: SpotId::Giguna__Gateway__West_19.into_usize() + 1,
-            },
         },
         SpotId::Giguna__Gateway__Refill_Station => Spot {
             id: SpotId::Giguna__Gateway__Refill_Station,
@@ -24196,10 +21942,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna__Gateway__Block_Left.into_usize(),
-                end: SpotId::Giguna__Gateway__West_19.into_usize() + 1,
             },
         },
         SpotId::Giguna__Gateway__Far_Ledge => Spot {
@@ -24214,10 +21956,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__Gateway__Block_Left.into_usize(),
-                end: SpotId::Giguna__Gateway__West_19.into_usize() + 1,
-            },
         },
         SpotId::Giguna__Gateway__One_Jump => Spot {
             id: SpotId::Giguna__Gateway__One_Jump,
@@ -24230,10 +21968,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: ActionId::Giguna__Gateway__One_Jump__Open_Door.into_usize(),
                 end: ActionId::Giguna__Gateway__One_Jump__Open_Door.into_usize() + 1,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna__Gateway__Block_Left.into_usize(),
-                end: SpotId::Giguna__Gateway__West_19.into_usize() + 1,
             },
         },
         SpotId::Giguna__Gateway__Flask_Ledge => Spot {
@@ -24249,10 +21983,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: ActionId::Giguna__Gateway__Flask_Ledge__Open_Door.into_usize(),
                 end: ActionId::Giguna__Gateway__Flask_Ledge__Open_Door.into_usize() + 1,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__Gateway__Block_Left.into_usize(),
-                end: SpotId::Giguna__Gateway__West_19.into_usize() + 1,
-            },
         },
         SpotId::Giguna__Gateway__Block_Lowered => Spot {
             id: SpotId::Giguna__Gateway__Block_Lowered,
@@ -24266,10 +21996,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__Gateway__Block_Left.into_usize(),
-                end: SpotId::Giguna__Gateway__West_19.into_usize() + 1,
-            },
         },
         SpotId::Giguna__Gateway__West_19 => Spot {
             id: SpotId::Giguna__Gateway__West_19,
@@ -24282,10 +22008,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna__Gateway__Block_Left.into_usize(),
-                end: SpotId::Giguna__Gateway__West_19.into_usize() + 1,
             },
         },
         SpotId::Giguna__Gateway__Button => Spot {
@@ -24301,10 +22023,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__Gateway__Block_Left.into_usize(),
-                end: SpotId::Giguna__Gateway__West_19.into_usize() + 1,
-            },
         },
         SpotId::Giguna__Gateway__East_19 => Spot {
             id: SpotId::Giguna__Gateway__East_19,
@@ -24318,10 +22036,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__Gateway__Block_Left.into_usize(),
-                end: SpotId::Giguna__Gateway__West_19.into_usize() + 1,
-            },
         },
         SpotId::Giguna__Labyrinth_East__East_19 => Spot {
             id: SpotId::Giguna__Labyrinth_East__East_19,
@@ -24333,10 +22047,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna__Labyrinth_East__East_19.into_usize(),
-                end: SpotId::Giguna__Labyrinth_East__East_19.into_usize() + 1,
             },
         },
         SpotId::Giguna__Vertical_Interchange__West_17 => Spot {
@@ -24350,10 +22060,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__Vertical_Interchange__Dead_end.into_usize(),
-                end: SpotId::Giguna__Vertical_Interchange__West_19.into_usize() + 1,
-            },
         },
         SpotId::Giguna__Vertical_Interchange__West_19 => Spot {
             id: SpotId::Giguna__Vertical_Interchange__West_19,
@@ -24365,10 +22071,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna__Vertical_Interchange__Dead_end.into_usize(),
-                end: SpotId::Giguna__Vertical_Interchange__West_19.into_usize() + 1,
             },
         },
         SpotId::Giguna__Vertical_Interchange__North => Spot {
@@ -24382,10 +22084,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__Vertical_Interchange__Dead_end.into_usize(),
-                end: SpotId::Giguna__Vertical_Interchange__West_19.into_usize() + 1,
-            },
         },
         SpotId::Giguna__Vertical_Interchange__Top_Left_Ledge => Spot {
             id: SpotId::Giguna__Vertical_Interchange__Top_Left_Ledge,
@@ -24397,10 +22095,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna__Vertical_Interchange__Dead_end.into_usize(),
-                end: SpotId::Giguna__Vertical_Interchange__West_19.into_usize() + 1,
             },
         },
         SpotId::Giguna__Vertical_Interchange__Top_Right_Ledge => Spot {
@@ -24414,10 +22108,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__Vertical_Interchange__Dead_end.into_usize(),
-                end: SpotId::Giguna__Vertical_Interchange__West_19.into_usize() + 1,
-            },
         },
         SpotId::Giguna__Vertical_Interchange__Top_Rocky_Ledge => Spot {
             id: SpotId::Giguna__Vertical_Interchange__Top_Rocky_Ledge,
@@ -24429,10 +22119,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna__Vertical_Interchange__Dead_end.into_usize(),
-                end: SpotId::Giguna__Vertical_Interchange__West_19.into_usize() + 1,
             },
         },
         SpotId::Giguna__Vertical_Interchange__Top_Rocky_Outcrop => Spot {
@@ -24446,10 +22132,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__Vertical_Interchange__Dead_end.into_usize(),
-                end: SpotId::Giguna__Vertical_Interchange__West_19.into_usize() + 1,
-            },
         },
         SpotId::Giguna__Vertical_Interchange__Top_Passage_Bottom => Spot {
             id: SpotId::Giguna__Vertical_Interchange__Top_Passage_Bottom,
@@ -24461,10 +22143,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna__Vertical_Interchange__Dead_end.into_usize(),
-                end: SpotId::Giguna__Vertical_Interchange__West_19.into_usize() + 1,
             },
         },
         SpotId::Giguna__Vertical_Interchange__Ledge_19 => Spot {
@@ -24478,10 +22156,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__Vertical_Interchange__Dead_end.into_usize(),
-                end: SpotId::Giguna__Vertical_Interchange__West_19.into_usize() + 1,
-            },
         },
         SpotId::Giguna__Vertical_Interchange__East_20 => Spot {
             id: SpotId::Giguna__Vertical_Interchange__East_20,
@@ -24493,10 +22167,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna__Vertical_Interchange__Dead_end.into_usize(),
-                end: SpotId::Giguna__Vertical_Interchange__West_19.into_usize() + 1,
             },
         },
         SpotId::Giguna__Vertical_Interchange__Middle_Below_Top => Spot {
@@ -24510,10 +22180,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__Vertical_Interchange__Dead_end.into_usize(),
-                end: SpotId::Giguna__Vertical_Interchange__West_19.into_usize() + 1,
-            },
         },
         SpotId::Giguna__Vertical_Interchange__Middle_Plateau => Spot {
             id: SpotId::Giguna__Vertical_Interchange__Middle_Plateau,
@@ -24525,10 +22191,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna__Vertical_Interchange__Dead_end.into_usize(),
-                end: SpotId::Giguna__Vertical_Interchange__West_19.into_usize() + 1,
             },
         },
         SpotId::Giguna__Vertical_Interchange__Gate => Spot {
@@ -24542,10 +22204,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__Vertical_Interchange__Dead_end.into_usize(),
-                end: SpotId::Giguna__Vertical_Interchange__West_19.into_usize() + 1,
-            },
         },
         SpotId::Giguna__Vertical_Interchange__Dead_end => Spot {
             id: SpotId::Giguna__Vertical_Interchange__Dead_end,
@@ -24557,10 +22215,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna__Vertical_Interchange__Dead_end.into_usize(),
-                end: SpotId::Giguna__Vertical_Interchange__West_19.into_usize() + 1,
             },
         },
         SpotId::Giguna__Vertical_Interchange__Dead_end_Ledge => Spot {
@@ -24574,10 +22228,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__Vertical_Interchange__Dead_end.into_usize(),
-                end: SpotId::Giguna__Vertical_Interchange__West_19.into_usize() + 1,
-            },
         },
         SpotId::Giguna__Vertical_Interchange__Middle_Ledge_Below_Gate => Spot {
             id: SpotId::Giguna__Vertical_Interchange__Middle_Ledge_Below_Gate,
@@ -24589,10 +22239,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna__Vertical_Interchange__Dead_end.into_usize(),
-                end: SpotId::Giguna__Vertical_Interchange__West_19.into_usize() + 1,
             },
         },
         SpotId::Giguna__Vertical_Interchange__Middle_Hill_By_Switch => Spot {
@@ -24606,10 +22252,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__Vertical_Interchange__Dead_end.into_usize(),
-                end: SpotId::Giguna__Vertical_Interchange__West_19.into_usize() + 1,
-            },
         },
         SpotId::Giguna__Vertical_Interchange__Switch => Spot {
             id: SpotId::Giguna__Vertical_Interchange__Switch,
@@ -24621,10 +22263,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna__Vertical_Interchange__Dead_end.into_usize(),
-                end: SpotId::Giguna__Vertical_Interchange__West_19.into_usize() + 1,
             },
         },
         SpotId::Giguna__Antechamber__East_16 => Spot {
@@ -24639,10 +22277,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__Antechamber__Bottom.into_usize(),
-                end: SpotId::Giguna__Antechamber__West_15.into_usize() + 1,
-            },
         },
         SpotId::Giguna__Antechamber__Statues_Ledge => Spot {
             id: SpotId::Giguna__Antechamber__Statues_Ledge,
@@ -24655,10 +22289,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna__Antechamber__Bottom.into_usize(),
-                end: SpotId::Giguna__Antechamber__West_15.into_usize() + 1,
             },
         },
         SpotId::Giguna__Antechamber__Bottom => Spot {
@@ -24673,10 +22303,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__Antechamber__Bottom.into_usize(),
-                end: SpotId::Giguna__Antechamber__West_15.into_usize() + 1,
-            },
         },
         SpotId::Giguna__Antechamber__Small_Bricks => Spot {
             id: SpotId::Giguna__Antechamber__Small_Bricks,
@@ -24689,10 +22315,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna__Antechamber__Bottom.into_usize(),
-                end: SpotId::Giguna__Antechamber__West_15.into_usize() + 1,
             },
         },
         SpotId::Giguna__Antechamber__Statue_Head => Spot {
@@ -24708,10 +22330,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__Antechamber__Bottom.into_usize(),
-                end: SpotId::Giguna__Antechamber__West_15.into_usize() + 1,
-            },
         },
         SpotId::Giguna__Antechamber__Middle_Bricks_Right => Spot {
             id: SpotId::Giguna__Antechamber__Middle_Bricks_Right,
@@ -24724,10 +22342,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna__Antechamber__Bottom.into_usize(),
-                end: SpotId::Giguna__Antechamber__West_15.into_usize() + 1,
             },
         },
         SpotId::Giguna__Antechamber__Middle_Bricks_Left => Spot {
@@ -24742,10 +22356,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__Antechamber__Bottom.into_usize(),
-                end: SpotId::Giguna__Antechamber__West_15.into_usize() + 1,
-            },
         },
         SpotId::Giguna__Antechamber__Left_Wall_Lower => Spot {
             id: SpotId::Giguna__Antechamber__Left_Wall_Lower,
@@ -24758,10 +22368,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna__Antechamber__Bottom.into_usize(),
-                end: SpotId::Giguna__Antechamber__West_15.into_usize() + 1,
             },
         },
         SpotId::Giguna__Antechamber__Left_Wall_Mid => Spot {
@@ -24776,10 +22382,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__Antechamber__Bottom.into_usize(),
-                end: SpotId::Giguna__Antechamber__West_15.into_usize() + 1,
-            },
         },
         SpotId::Giguna__Antechamber__West_15 => Spot {
             id: SpotId::Giguna__Antechamber__West_15,
@@ -24792,10 +22394,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna__Antechamber__Bottom.into_usize(),
-                end: SpotId::Giguna__Antechamber__West_15.into_usize() + 1,
             },
         },
         SpotId::Giguna__Gubi_Lair__East_15 => Spot {
@@ -24810,10 +22408,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__Gubi_Lair__Center_East_Sapling.into_usize(),
-                end: SpotId::Giguna__Gubi_Lair__West_Brickwork.into_usize() + 1,
-            },
         },
         SpotId::Giguna__Gubi_Lair__East_Tree => Spot {
             id: SpotId::Giguna__Gubi_Lair__East_Tree,
@@ -24826,10 +22420,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna__Gubi_Lair__Center_East_Sapling.into_usize(),
-                end: SpotId::Giguna__Gubi_Lair__West_Brickwork.into_usize() + 1,
             },
         },
         SpotId::Giguna__Gubi_Lair__Rightmost_Platform => Spot {
@@ -24844,10 +22434,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__Gubi_Lair__Center_East_Sapling.into_usize(),
-                end: SpotId::Giguna__Gubi_Lair__West_Brickwork.into_usize() + 1,
-            },
         },
         SpotId::Giguna__Gubi_Lair__Lower_Platform => Spot {
             id: SpotId::Giguna__Gubi_Lair__Lower_Platform,
@@ -24859,10 +22445,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna__Gubi_Lair__Center_East_Sapling.into_usize(),
-                end: SpotId::Giguna__Gubi_Lair__West_Brickwork.into_usize() + 1,
             },
         },
         SpotId::Giguna__Gubi_Lair__Center_East_Sapling => Spot {
@@ -24876,10 +22458,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__Gubi_Lair__Center_East_Sapling.into_usize(),
-                end: SpotId::Giguna__Gubi_Lair__West_Brickwork.into_usize() + 1,
-            },
         },
         SpotId::Giguna__Gubi_Lair__Center_West_Sapling => Spot {
             id: SpotId::Giguna__Gubi_Lair__Center_West_Sapling,
@@ -24891,10 +22469,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna__Gubi_Lair__Center_East_Sapling.into_usize(),
-                end: SpotId::Giguna__Gubi_Lair__West_Brickwork.into_usize() + 1,
             },
         },
         SpotId::Giguna__Gubi_Lair__Center_Platform => Spot {
@@ -24909,10 +22483,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__Gubi_Lair__Center_East_Sapling.into_usize(),
-                end: SpotId::Giguna__Gubi_Lair__West_Brickwork.into_usize() + 1,
-            },
         },
         SpotId::Giguna__Gubi_Lair__Leftmost_Platform => Spot {
             id: SpotId::Giguna__Gubi_Lair__Leftmost_Platform,
@@ -24924,10 +22494,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna__Gubi_Lair__Center_East_Sapling.into_usize(),
-                end: SpotId::Giguna__Gubi_Lair__West_Brickwork.into_usize() + 1,
             },
         },
         SpotId::Giguna__Gubi_Lair__Grass_by_Wall => Spot {
@@ -24942,10 +22508,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__Gubi_Lair__Center_East_Sapling.into_usize(),
-                end: SpotId::Giguna__Gubi_Lair__West_Brickwork.into_usize() + 1,
-            },
         },
         SpotId::Giguna__Gubi_Lair__West_Brickwork => Spot {
             id: SpotId::Giguna__Gubi_Lair__West_Brickwork,
@@ -24957,10 +22519,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Giguna__Gubi_Lair__Center_East_Sapling.into_usize(),
-                end: SpotId::Giguna__Gubi_Lair__West_Brickwork.into_usize() + 1,
             },
         },
         SpotId::Giguna__Gubi_Lair__Shaft_Bottom => Spot {
@@ -24975,10 +22533,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__Gubi_Lair__Center_East_Sapling.into_usize(),
-                end: SpotId::Giguna__Gubi_Lair__West_Brickwork.into_usize() + 1,
-            },
         },
         SpotId::Giguna__Gubi_Lair__Pedestal => Spot {
             id: SpotId::Giguna__Gubi_Lair__Pedestal,
@@ -24992,10 +22546,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Giguna__Gubi_Lair__Center_East_Sapling.into_usize(),
-                end: SpotId::Giguna__Gubi_Lair__West_Brickwork.into_usize() + 1,
-            },
         },
         SpotId::Glacier__Dock_Elevator__Elevator => Spot {
             id: SpotId::Glacier__Dock_Elevator__Elevator,
@@ -25007,10 +22557,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Glacier__Dock_Elevator__Connector.into_usize(),
-                end: SpotId::Glacier__Dock_Elevator__Elevator.into_usize() + 1,
             },
         },
         SpotId::Glacier__Dock_Elevator__Connector => Spot {
@@ -25025,10 +22571,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Glacier__Dock_Elevator__Connector.into_usize(),
-                end: SpotId::Glacier__Dock_Elevator__Elevator.into_usize() + 1,
-            },
         },
         SpotId::Glacier__Dock_Interior__Connector => Spot {
             id: SpotId::Glacier__Dock_Interior__Connector,
@@ -25041,10 +22583,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Glacier__Dock_Interior__Connector.into_usize(),
-                end: SpotId::Glacier__Dock_Interior__Entry.into_usize() + 1,
             },
         },
         SpotId::Glacier__Dock_Interior__Entry => Spot {
@@ -25059,10 +22597,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Glacier__Dock_Interior__Connector.into_usize(),
-                end: SpotId::Glacier__Dock_Interior__Entry.into_usize() + 1,
-            },
         },
         SpotId::Glacier__Dock_Outside__Entry => Spot {
             id: SpotId::Glacier__Dock_Outside__Entry,
@@ -25075,10 +22609,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Glacier__Dock_Outside__Do_Not_Enter.into_usize(),
-                end: SpotId::Glacier__Dock_Outside__Entry.into_usize() + 1,
             },
         },
         SpotId::Glacier__Dock_Outside__Do_Not_Enter => Spot {
@@ -25093,10 +22623,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Glacier__Dock_Outside__Do_Not_Enter.into_usize(),
-                end: SpotId::Glacier__Dock_Outside__Entry.into_usize() + 1,
-            },
         },
         SpotId::Glacier__Revival__East_9 => Spot {
             id: SpotId::Glacier__Revival__East_9,
@@ -25110,10 +22636,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Glacier__Revival__East_9.into_usize(),
-                end: SpotId::Glacier__Revival__West_8.into_usize() + 1,
-            },
         },
         SpotId::Glacier__Revival__Overhang => Spot {
             id: SpotId::Glacier__Revival__Overhang,
@@ -25126,10 +22648,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Glacier__Revival__East_9.into_usize(),
-                end: SpotId::Glacier__Revival__West_8.into_usize() + 1,
-            },
         },
         SpotId::Glacier__Revival__Ledge => Spot {
             id: SpotId::Glacier__Revival__Ledge,
@@ -25141,10 +22659,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Glacier__Revival__East_9.into_usize(),
-                end: SpotId::Glacier__Revival__West_8.into_usize() + 1,
             },
         },
         SpotId::Glacier__Revival__Lower_East => Spot {
@@ -25159,10 +22673,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Glacier__Revival__East_9.into_usize(),
-                end: SpotId::Glacier__Revival__West_8.into_usize() + 1,
-            },
         },
         SpotId::Glacier__Revival__Save_Point => Spot {
             id: SpotId::Glacier__Revival__Save_Point,
@@ -25175,10 +22685,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: ActionId::Glacier__Revival__Save_Point__Save.into_usize(),
                 end: ActionId::Glacier__Revival__Save_Point__Save.into_usize() + 1,
-            },
-            area_spots: Range {
-                start: SpotId::Glacier__Revival__East_9.into_usize(),
-                end: SpotId::Glacier__Revival__West_8.into_usize() + 1,
             },
         },
         SpotId::Glacier__Revival__West_8 => Spot {
@@ -25193,10 +22699,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Glacier__Revival__East_9.into_usize(),
-                end: SpotId::Glacier__Revival__West_8.into_usize() + 1,
-            },
         },
         SpotId::Glacier__Grid_42_10__West => Spot {
             id: SpotId::Glacier__Grid_42_10__West,
@@ -25209,10 +22711,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Glacier__Grid_42_10__East.into_usize(),
-                end: SpotId::Glacier__Grid_42_10__West.into_usize() + 1,
             },
         },
         SpotId::Glacier__Grid_42_10__East => Spot {
@@ -25227,10 +22725,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Glacier__Grid_42_10__East.into_usize(),
-                end: SpotId::Glacier__Grid_42_10__West.into_usize() + 1,
-            },
         },
         SpotId::Glacier__Grid_43_10_11__Top => Spot {
             id: SpotId::Glacier__Grid_43_10_11__Top,
@@ -25243,10 +22737,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Glacier__Grid_43_10_11__East.into_usize(),
-                end: SpotId::Glacier__Grid_43_10_11__Top.into_usize() + 1,
             },
         },
         SpotId::Glacier__Grid_43_10_11__East => Spot {
@@ -25261,10 +22751,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Glacier__Grid_43_10_11__East.into_usize(),
-                end: SpotId::Glacier__Grid_43_10_11__Top.into_usize() + 1,
-            },
         },
         SpotId::Glacier__Grid_43_10_11__Lower => Spot {
             id: SpotId::Glacier__Grid_43_10_11__Lower,
@@ -25277,10 +22763,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Glacier__Grid_43_10_11__East.into_usize(),
-                end: SpotId::Glacier__Grid_43_10_11__Top.into_usize() + 1,
             },
         },
         SpotId::Glacier__Compass_Room__East => Spot {
@@ -25295,10 +22777,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Glacier__Compass_Room__Center.into_usize(),
-                end: SpotId::Glacier__Compass_Room__West.into_usize() + 1,
-            },
         },
         SpotId::Glacier__Compass_Room__Center => Spot {
             id: SpotId::Glacier__Compass_Room__Center,
@@ -25311,10 +22789,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Glacier__Compass_Room__Center.into_usize(),
-                end: SpotId::Glacier__Compass_Room__West.into_usize() + 1,
             },
         },
         SpotId::Glacier__Compass_Room__West => Spot {
@@ -25329,10 +22803,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Glacier__Compass_Room__Center.into_usize(),
-                end: SpotId::Glacier__Compass_Room__West.into_usize() + 1,
-            },
         },
         SpotId::Glacier__The_Big_Drop__East => Spot {
             id: SpotId::Glacier__The_Big_Drop__East,
@@ -25346,10 +22816,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Glacier__The_Big_Drop__East.into_usize(),
-                end: SpotId::Glacier__The_Big_Drop__Water_Surface.into_usize() + 1,
-            },
         },
         SpotId::Glacier__The_Big_Drop__Small_Path => Spot {
             id: SpotId::Glacier__The_Big_Drop__Small_Path,
@@ -25361,10 +22827,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Glacier__The_Big_Drop__East.into_usize(),
-                end: SpotId::Glacier__The_Big_Drop__Water_Surface.into_usize() + 1,
             },
         },
         SpotId::Glacier__The_Big_Drop__Water_Surface => Spot {
@@ -25379,10 +22841,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Glacier__The_Big_Drop__East.into_usize(),
-                end: SpotId::Glacier__The_Big_Drop__Water_Surface.into_usize() + 1,
-            },
         },
         SpotId::Glacier__Grid_39_40_7_9__Upper_East => Spot {
             id: SpotId::Glacier__Grid_39_40_7_9__Upper_East,
@@ -25395,10 +22853,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Glacier__Grid_39_40_7_9__Upper_East.into_usize(),
-                end: SpotId::Glacier__Grid_39_40_7_9__West.into_usize() + 1,
             },
         },
         SpotId::Glacier__Grid_39_40_7_9__West => Spot {
@@ -25413,10 +22867,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Glacier__Grid_39_40_7_9__Upper_East.into_usize(),
-                end: SpotId::Glacier__Grid_39_40_7_9__West.into_usize() + 1,
-            },
         },
         SpotId::Glacier__Grid_37_38_9__East => Spot {
             id: SpotId::Glacier__Grid_37_38_9__East,
@@ -25429,10 +22879,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Glacier__Grid_37_38_9__East.into_usize(),
-                end: SpotId::Glacier__Grid_37_38_9__West.into_usize() + 1,
             },
         },
         SpotId::Glacier__Grid_37_38_9__West => Spot {
@@ -25447,10 +22893,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Glacier__Grid_37_38_9__East.into_usize(),
-                end: SpotId::Glacier__Grid_37_38_9__West.into_usize() + 1,
-            },
         },
         SpotId::Glacier__Vertical_Room__East_9 => Spot {
             id: SpotId::Glacier__Vertical_Room__East_9,
@@ -25463,10 +22905,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Glacier__Vertical_Room__East_12.into_usize(),
-                end: SpotId::Glacier__Vertical_Room__West_9.into_usize() + 1,
             },
         },
         SpotId::Glacier__Vertical_Room__West_9 => Spot {
@@ -25481,10 +22919,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Glacier__Vertical_Room__East_12.into_usize(),
-                end: SpotId::Glacier__Vertical_Room__West_9.into_usize() + 1,
-            },
         },
         SpotId::Glacier__Vertical_Room__Mid_9 => Spot {
             id: SpotId::Glacier__Vertical_Room__Mid_9,
@@ -25498,10 +22932,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Glacier__Vertical_Room__East_12.into_usize(),
-                end: SpotId::Glacier__Vertical_Room__West_9.into_usize() + 1,
-            },
         },
         SpotId::Glacier__Vertical_Room__Mid_11 => Spot {
             id: SpotId::Glacier__Vertical_Room__Mid_11,
@@ -25514,10 +22944,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Glacier__Vertical_Room__East_12.into_usize(),
-                end: SpotId::Glacier__Vertical_Room__West_9.into_usize() + 1,
             },
         },
         SpotId::Glacier__Vertical_Room__Under_Switch => Spot {
@@ -25533,10 +22959,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Glacier__Vertical_Room__East_12.into_usize(),
-                end: SpotId::Glacier__Vertical_Room__West_9.into_usize() + 1,
-            },
         },
         SpotId::Glacier__Vertical_Room__Past_Gate => Spot {
             id: SpotId::Glacier__Vertical_Room__Past_Gate,
@@ -25549,10 +22971,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Glacier__Vertical_Room__East_12.into_usize(),
-                end: SpotId::Glacier__Vertical_Room__West_9.into_usize() + 1,
             },
         },
         SpotId::Glacier__Vertical_Room__Peak => Spot {
@@ -25568,10 +22986,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Glacier__Vertical_Room__East_12.into_usize(),
-                end: SpotId::Glacier__Vertical_Room__West_9.into_usize() + 1,
-            },
         },
         SpotId::Glacier__Vertical_Room__West_8 => Spot {
             id: SpotId::Glacier__Vertical_Room__West_8,
@@ -25584,10 +22998,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Glacier__Vertical_Room__East_12.into_usize(),
-                end: SpotId::Glacier__Vertical_Room__West_9.into_usize() + 1,
             },
         },
         SpotId::Glacier__Vertical_Room__East_Corner => Spot {
@@ -25602,10 +23012,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Glacier__Vertical_Room__East_12.into_usize(),
-                end: SpotId::Glacier__Vertical_Room__West_9.into_usize() + 1,
-            },
         },
         SpotId::Glacier__Vertical_Room__East_12 => Spot {
             id: SpotId::Glacier__Vertical_Room__East_12,
@@ -25619,10 +23025,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Glacier__Vertical_Room__East_12.into_usize(),
-                end: SpotId::Glacier__Vertical_Room__West_9.into_usize() + 1,
-            },
         },
         SpotId::Glacier__Vertical_Room__Lower_West_Corner => Spot {
             id: SpotId::Glacier__Vertical_Room__Lower_West_Corner,
@@ -25634,10 +23036,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Glacier__Vertical_Room__East_12.into_usize(),
-                end: SpotId::Glacier__Vertical_Room__West_9.into_usize() + 1,
             },
         },
         SpotId::Glacier__Vertical_Room__East_13 => Spot {
@@ -25652,10 +23050,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Glacier__Vertical_Room__East_12.into_usize(),
-                end: SpotId::Glacier__Vertical_Room__West_9.into_usize() + 1,
-            },
         },
         SpotId::Glacier__Boomerang_Antechamber__West_13 => Spot {
             id: SpotId::Glacier__Boomerang_Antechamber__West_13,
@@ -25668,10 +23062,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Glacier__Boomerang_Antechamber__East_12.into_usize(),
-                end: SpotId::Glacier__Boomerang_Antechamber__West_13.into_usize() + 1,
             },
         },
         SpotId::Glacier__Boomerang_Antechamber__East_12 => Spot {
@@ -25686,10 +23076,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Glacier__Boomerang_Antechamber__East_12.into_usize(),
-                end: SpotId::Glacier__Boomerang_Antechamber__West_13.into_usize() + 1,
-            },
         },
         SpotId::Glacier__Boomerang_Antechamber__Upper_East => Spot {
             id: SpotId::Glacier__Boomerang_Antechamber__Upper_East,
@@ -25702,10 +23088,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Glacier__Boomerang_Antechamber__East_12.into_usize(),
-                end: SpotId::Glacier__Boomerang_Antechamber__West_13.into_usize() + 1,
             },
         },
         SpotId::Glacier__Boomerang_Antechamber__West_12 => Spot {
@@ -25720,10 +23102,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Glacier__Boomerang_Antechamber__East_12.into_usize(),
-                end: SpotId::Glacier__Boomerang_Antechamber__West_13.into_usize() + 1,
-            },
         },
         SpotId::Glacier__Boomerang_Room__West => Spot {
             id: SpotId::Glacier__Boomerang_Room__West,
@@ -25736,10 +23114,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Glacier__Boomerang_Room__Center_ish.into_usize(),
-                end: SpotId::Glacier__Boomerang_Room__West.into_usize() + 1,
             },
         },
         SpotId::Glacier__Boomerang_Room__Platform => Spot {
@@ -25754,10 +23128,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Glacier__Boomerang_Room__Center_ish.into_usize(),
-                end: SpotId::Glacier__Boomerang_Room__West.into_usize() + 1,
-            },
         },
         SpotId::Glacier__Boomerang_Room__Center_ish => Spot {
             id: SpotId::Glacier__Boomerang_Room__Center_ish,
@@ -25770,10 +23140,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Glacier__Boomerang_Room__Center_ish.into_usize(),
-                end: SpotId::Glacier__Boomerang_Room__West.into_usize() + 1,
             },
         },
         SpotId::Glacier__Boomerang_Room__Pedestal => Spot {
@@ -25789,10 +23155,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Glacier__Boomerang_Room__Center_ish.into_usize(),
-                end: SpotId::Glacier__Boomerang_Room__West.into_usize() + 1,
-            },
         },
         SpotId::Glacier__Boomerang_Room__Upper_Gate_East => Spot {
             id: SpotId::Glacier__Boomerang_Room__Upper_Gate_East,
@@ -25805,10 +23167,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Glacier__Boomerang_Room__Center_ish.into_usize(),
-                end: SpotId::Glacier__Boomerang_Room__West.into_usize() + 1,
             },
         },
         SpotId::Glacier__Boomerang_Room__Center_Ledge => Spot {
@@ -25823,10 +23181,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Glacier__Boomerang_Room__Center_ish.into_usize(),
-                end: SpotId::Glacier__Boomerang_Room__West.into_usize() + 1,
-            },
         },
         SpotId::Glacier__Boomerang_Room__Upper_West => Spot {
             id: SpotId::Glacier__Boomerang_Room__Upper_West,
@@ -25839,10 +23193,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Glacier__Boomerang_Room__Center_ish.into_usize(),
-                end: SpotId::Glacier__Boomerang_Room__West.into_usize() + 1,
             },
         },
         SpotId::Glacier__Ledge_Grab_Room__East_9 => Spot {
@@ -25857,10 +23207,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Glacier__Ledge_Grab_Room__Cliff.into_usize(),
-                end: SpotId::Glacier__Ledge_Grab_Room__West.into_usize() + 1,
-            },
         },
         SpotId::Glacier__Ledge_Grab_Room__Column => Spot {
             id: SpotId::Glacier__Ledge_Grab_Room__Column,
@@ -25873,10 +23219,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Glacier__Ledge_Grab_Room__Cliff.into_usize(),
-                end: SpotId::Glacier__Ledge_Grab_Room__West.into_usize() + 1,
             },
         },
         SpotId::Glacier__Ledge_Grab_Room__Gate_Ledge => Spot {
@@ -25891,10 +23233,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Glacier__Ledge_Grab_Room__Cliff.into_usize(),
-                end: SpotId::Glacier__Ledge_Grab_Room__West.into_usize() + 1,
-            },
         },
         SpotId::Glacier__Ledge_Grab_Room__East_11 => Spot {
             id: SpotId::Glacier__Ledge_Grab_Room__East_11,
@@ -25907,10 +23245,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Glacier__Ledge_Grab_Room__Cliff.into_usize(),
-                end: SpotId::Glacier__Ledge_Grab_Room__West.into_usize() + 1,
             },
         },
         SpotId::Glacier__Ledge_Grab_Room__Mid_35 => Spot {
@@ -25925,10 +23259,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Glacier__Ledge_Grab_Room__Cliff.into_usize(),
-                end: SpotId::Glacier__Ledge_Grab_Room__West.into_usize() + 1,
-            },
         },
         SpotId::Glacier__Ledge_Grab_Room__Mid_34 => Spot {
             id: SpotId::Glacier__Ledge_Grab_Room__Mid_34,
@@ -25942,10 +23272,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Glacier__Ledge_Grab_Room__Cliff.into_usize(),
-                end: SpotId::Glacier__Ledge_Grab_Room__West.into_usize() + 1,
-            },
         },
         SpotId::Glacier__Ledge_Grab_Room__Cliff => Spot {
             id: SpotId::Glacier__Ledge_Grab_Room__Cliff,
@@ -25958,10 +23284,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Glacier__Ledge_Grab_Room__Cliff.into_usize(),
-                end: SpotId::Glacier__Ledge_Grab_Room__West.into_usize() + 1,
             },
         },
         SpotId::Glacier__Ledge_Grab_Room__Cliff_Bottom => Spot {
@@ -25977,10 +23299,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Glacier__Ledge_Grab_Room__Cliff.into_usize(),
-                end: SpotId::Glacier__Ledge_Grab_Room__West.into_usize() + 1,
-            },
         },
         SpotId::Glacier__Ledge_Grab_Room__Pedestal => Spot {
             id: SpotId::Glacier__Ledge_Grab_Room__Pedestal,
@@ -25995,10 +23313,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Glacier__Ledge_Grab_Room__Cliff.into_usize(),
-                end: SpotId::Glacier__Ledge_Grab_Room__West.into_usize() + 1,
-            },
         },
         SpotId::Glacier__Ledge_Grab_Room__Gate => Spot {
             id: SpotId::Glacier__Ledge_Grab_Room__Gate,
@@ -26012,10 +23326,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Glacier__Ledge_Grab_Room__Cliff.into_usize(),
-                end: SpotId::Glacier__Ledge_Grab_Room__West.into_usize() + 1,
-            },
         },
         SpotId::Glacier__Ledge_Grab_Room__West => Spot {
             id: SpotId::Glacier__Ledge_Grab_Room__West,
@@ -26027,10 +23337,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Glacier__Ledge_Grab_Room__Cliff.into_usize(),
-                end: SpotId::Glacier__Ledge_Grab_Room__West.into_usize() + 1,
             },
         },
         SpotId::Glacier__Ledge_Grab_Room__Lower_Platform => Spot {
@@ -26045,10 +23351,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Glacier__Ledge_Grab_Room__Cliff.into_usize(),
-                end: SpotId::Glacier__Ledge_Grab_Room__West.into_usize() + 1,
-            },
         },
         SpotId::Glacier__Ledge_Grab_Room__Upper_Platform => Spot {
             id: SpotId::Glacier__Ledge_Grab_Room__Upper_Platform,
@@ -26061,10 +23363,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Glacier__Ledge_Grab_Room__Cliff.into_usize(),
-                end: SpotId::Glacier__Ledge_Grab_Room__West.into_usize() + 1,
             },
         },
         SpotId::Glacier__Ledge_Grab_Room__Fork => Spot {
@@ -26079,10 +23377,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Glacier__Ledge_Grab_Room__Cliff.into_usize(),
-                end: SpotId::Glacier__Ledge_Grab_Room__West.into_usize() + 1,
-            },
         },
         SpotId::Glacier__Peak__East_8 => Spot {
             id: SpotId::Glacier__Peak__East_8,
@@ -26096,10 +23390,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Glacier__Peak__East_8.into_usize(),
-                end: SpotId::Glacier__Peak__West_Cliff.into_usize() + 1,
-            },
         },
         SpotId::Glacier__Peak__Top_Platform_East => Spot {
             id: SpotId::Glacier__Peak__Top_Platform_East,
@@ -26111,10 +23401,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Glacier__Peak__East_8.into_usize(),
-                end: SpotId::Glacier__Peak__West_Cliff.into_usize() + 1,
             },
         },
         SpotId::Glacier__Peak__Top_Rock => Spot {
@@ -26128,10 +23414,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Glacier__Peak__East_8.into_usize(),
-                end: SpotId::Glacier__Peak__West_Cliff.into_usize() + 1,
-            },
         },
         SpotId::Glacier__Peak__Highest_Platform => Spot {
             id: SpotId::Glacier__Peak__Highest_Platform,
@@ -26144,10 +23426,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Glacier__Peak__East_8.into_usize(),
-                end: SpotId::Glacier__Peak__West_Cliff.into_usize() + 1,
-            },
         },
         SpotId::Glacier__Peak__West_Cliff => Spot {
             id: SpotId::Glacier__Peak__West_Cliff,
@@ -26159,10 +23437,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Glacier__Peak__East_8.into_usize(),
-                end: SpotId::Glacier__Peak__West_Cliff.into_usize() + 1,
             },
         },
         SpotId::Glacier__Peak__Under_West_Cliff => Spot {
@@ -26177,10 +23451,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Glacier__Peak__East_8.into_usize(),
-                end: SpotId::Glacier__Peak__West_Cliff.into_usize() + 1,
-            },
         },
         SpotId::Glacier__Peak__West_8 => Spot {
             id: SpotId::Glacier__Peak__West_8,
@@ -26193,10 +23463,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Glacier__Peak__East_8.into_usize(),
-                end: SpotId::Glacier__Peak__West_Cliff.into_usize() + 1,
             },
         },
         SpotId::Glacier__Grid_32_7_10__East_8 => Spot {
@@ -26211,10 +23477,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Glacier__Grid_32_7_10__Center_Platform.into_usize(),
-                end: SpotId::Glacier__Grid_32_7_10__West_9.into_usize() + 1,
-            },
         },
         SpotId::Glacier__Grid_32_7_10__Center_Platform => Spot {
             id: SpotId::Glacier__Grid_32_7_10__Center_Platform,
@@ -26227,10 +23489,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Glacier__Grid_32_7_10__Center_Platform.into_usize(),
-                end: SpotId::Glacier__Grid_32_7_10__West_9.into_usize() + 1,
-            },
         },
         SpotId::Glacier__Grid_32_7_10__Column => Spot {
             id: SpotId::Glacier__Grid_32_7_10__Column,
@@ -26242,10 +23500,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Glacier__Grid_32_7_10__Center_Platform.into_usize(),
-                end: SpotId::Glacier__Grid_32_7_10__West_9.into_usize() + 1,
             },
         },
         SpotId::Glacier__Grid_32_7_10__Left_Rock => Spot {
@@ -26260,10 +23514,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Glacier__Grid_32_7_10__Center_Platform.into_usize(),
-                end: SpotId::Glacier__Grid_32_7_10__West_9.into_usize() + 1,
-            },
         },
         SpotId::Glacier__Grid_32_7_10__West_9 => Spot {
             id: SpotId::Glacier__Grid_32_7_10__West_9,
@@ -26276,10 +23526,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Glacier__Grid_32_7_10__Center_Platform.into_usize(),
-                end: SpotId::Glacier__Grid_32_7_10__West_9.into_usize() + 1,
             },
         },
         SpotId::Glacier__Grid_32_7_10__West_10 => Spot {
@@ -26294,10 +23540,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Glacier__Grid_32_7_10__Center_Platform.into_usize(),
-                end: SpotId::Glacier__Grid_32_7_10__West_9.into_usize() + 1,
-            },
         },
         SpotId::Glacier__Grid_31_9_12__East_9 => Spot {
             id: SpotId::Glacier__Grid_31_9_12__East_9,
@@ -26310,10 +23552,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Glacier__Grid_31_9_12__East_10.into_usize(),
-                end: SpotId::Glacier__Grid_31_9_12__West_12.into_usize() + 1,
             },
         },
         SpotId::Glacier__Grid_31_9_12__East_10 => Spot {
@@ -26328,10 +23566,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Glacier__Grid_31_9_12__East_10.into_usize(),
-                end: SpotId::Glacier__Grid_31_9_12__West_12.into_usize() + 1,
-            },
         },
         SpotId::Glacier__Grid_31_9_12__Observation_Tower => Spot {
             id: SpotId::Glacier__Grid_31_9_12__Observation_Tower,
@@ -26344,10 +23578,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Glacier__Grid_31_9_12__East_10.into_usize(),
-                end: SpotId::Glacier__Grid_31_9_12__West_12.into_usize() + 1,
-            },
         },
         SpotId::Glacier__Grid_31_9_12__Observation_Tower_L4 => Spot {
             id: SpotId::Glacier__Grid_31_9_12__Observation_Tower_L4,
@@ -26359,10 +23589,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Glacier__Grid_31_9_12__East_10.into_usize(),
-                end: SpotId::Glacier__Grid_31_9_12__West_12.into_usize() + 1,
             },
         },
         SpotId::Glacier__Grid_31_9_12__West_12 => Spot {
@@ -26377,10 +23603,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Glacier__Grid_31_9_12__East_10.into_usize(),
-                end: SpotId::Glacier__Grid_31_9_12__West_12.into_usize() + 1,
-            },
         },
         SpotId::Glacier__Grid_31_9_12__Midair => Spot {
             id: SpotId::Glacier__Grid_31_9_12__Midair,
@@ -26393,10 +23615,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Glacier__Grid_31_9_12__East_10.into_usize(),
-                end: SpotId::Glacier__Grid_31_9_12__West_12.into_usize() + 1,
             },
         },
         SpotId::Glacier__Lake_Main_Entrance__Ebih_Access => Spot {
@@ -26411,10 +23629,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Glacier__Lake_Main_Entrance__Bottom.into_usize(),
-                end: SpotId::Glacier__Lake_Main_Entrance__Upper_Platform.into_usize() + 1,
-            },
         },
         SpotId::Glacier__Lake_Main_Entrance__Upper => Spot {
             id: SpotId::Glacier__Lake_Main_Entrance__Upper,
@@ -26426,10 +23640,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Glacier__Lake_Main_Entrance__Bottom.into_usize(),
-                end: SpotId::Glacier__Lake_Main_Entrance__Upper_Platform.into_usize() + 1,
             },
         },
         SpotId::Glacier__Lake_Main_Entrance__Upper_Platform => Spot {
@@ -26444,10 +23654,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Glacier__Lake_Main_Entrance__Bottom.into_usize(),
-                end: SpotId::Glacier__Lake_Main_Entrance__Upper_Platform.into_usize() + 1,
-            },
         },
         SpotId::Glacier__Lake_Main_Entrance__Ledge => Spot {
             id: SpotId::Glacier__Lake_Main_Entrance__Ledge,
@@ -26460,10 +23666,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Glacier__Lake_Main_Entrance__Bottom.into_usize(),
-                end: SpotId::Glacier__Lake_Main_Entrance__Upper_Platform.into_usize() + 1,
             },
         },
         SpotId::Glacier__Lake_Main_Entrance__Lower_Platform => Spot {
@@ -26478,10 +23680,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Glacier__Lake_Main_Entrance__Bottom.into_usize(),
-                end: SpotId::Glacier__Lake_Main_Entrance__Upper_Platform.into_usize() + 1,
-            },
         },
         SpotId::Glacier__Lake_Main_Entrance__Hill => Spot {
             id: SpotId::Glacier__Lake_Main_Entrance__Hill,
@@ -26493,10 +23691,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Glacier__Lake_Main_Entrance__Bottom.into_usize(),
-                end: SpotId::Glacier__Lake_Main_Entrance__Upper_Platform.into_usize() + 1,
             },
         },
         SpotId::Glacier__Lake_Main_Entrance__Bottom => Spot {
@@ -26510,10 +23704,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Glacier__Lake_Main_Entrance__Bottom.into_usize(),
-                end: SpotId::Glacier__Lake_Main_Entrance__Upper_Platform.into_usize() + 1,
-            },
         },
         SpotId::Glacier__Lake_Main_Entrance__Side_Jump => Spot {
             id: SpotId::Glacier__Lake_Main_Entrance__Side_Jump,
@@ -26526,10 +23716,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Glacier__Lake_Main_Entrance__Bottom.into_usize(),
-                end: SpotId::Glacier__Lake_Main_Entrance__Upper_Platform.into_usize() + 1,
-            },
         },
         SpotId::Glacier__Lake_Main_Entrance__Side => Spot {
             id: SpotId::Glacier__Lake_Main_Entrance__Side,
@@ -26541,10 +23727,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Glacier__Lake_Main_Entrance__Bottom.into_usize(),
-                end: SpotId::Glacier__Lake_Main_Entrance__Upper_Platform.into_usize() + 1,
             },
         },
         SpotId::Glacier__Lake_Main_Entrance__Lake_Access => Spot {
@@ -26559,10 +23741,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Glacier__Lake_Main_Entrance__Bottom.into_usize(),
-                end: SpotId::Glacier__Lake_Main_Entrance__Upper_Platform.into_usize() + 1,
-            },
         },
         SpotId::Glacier__Apocalypse_Entry__West => Spot {
             id: SpotId::Glacier__Apocalypse_Entry__West,
@@ -26575,10 +23753,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Glacier__Apocalypse_Entry__Terminal.into_usize(),
-                end: SpotId::Glacier__Apocalypse_Entry__West.into_usize() + 1,
             },
         },
         SpotId::Glacier__Apocalypse_Entry__Terminal => Spot {
@@ -26593,10 +23767,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Glacier__Apocalypse_Entry__Terminal.into_usize(),
-                end: SpotId::Glacier__Apocalypse_Entry__West.into_usize() + 1,
-            },
         },
         SpotId::Irikar_Breach__Save_Room__Save_Point => Spot {
             id: SpotId::Irikar_Breach__Save_Room__Save_Point,
@@ -26608,10 +23778,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Irikar_Breach__Save_Room__Save_Point.into_usize(),
-                end: SpotId::Irikar_Breach__Save_Room__Save_Point.into_usize() + 1,
             },
         },
         SpotId::Irikar__Hub__Northwest => Spot {
@@ -26625,10 +23791,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Irikar__Hub__Bowl_Hole.into_usize(),
-                end: SpotId::Irikar__Hub__West_Rim.into_usize() + 1,
-            },
         },
         SpotId::Irikar__Hub__North_Above_Portal => Spot {
             id: SpotId::Irikar__Hub__North_Above_Portal,
@@ -26640,10 +23802,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Irikar__Hub__Bowl_Hole.into_usize(),
-                end: SpotId::Irikar__Hub__West_Rim.into_usize() + 1,
             },
         },
         SpotId::Irikar__Hub__Northwest_Above_Bowl => Spot {
@@ -26657,10 +23815,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Irikar__Hub__Bowl_Hole.into_usize(),
-                end: SpotId::Irikar__Hub__West_Rim.into_usize() + 1,
-            },
         },
         SpotId::Irikar__Hub__Northeast_Above_Bowl => Spot {
             id: SpotId::Irikar__Hub__Northeast_Above_Bowl,
@@ -26672,10 +23826,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Irikar__Hub__Bowl_Hole.into_usize(),
-                end: SpotId::Irikar__Hub__West_Rim.into_usize() + 1,
             },
         },
         SpotId::Irikar__Hub__West_Rim => Spot {
@@ -26690,10 +23840,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Irikar__Hub__Bowl_Hole.into_usize(),
-                end: SpotId::Irikar__Hub__West_Rim.into_usize() + 1,
-            },
         },
         SpotId::Irikar__Hub__East_Rim => Spot {
             id: SpotId::Irikar__Hub__East_Rim,
@@ -26706,10 +23852,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Irikar__Hub__Bowl_Hole.into_usize(),
-                end: SpotId::Irikar__Hub__West_Rim.into_usize() + 1,
             },
         },
         SpotId::Irikar__Hub__Bowl_Top_Platform => Spot {
@@ -26724,10 +23866,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Irikar__Hub__Bowl_Hole.into_usize(),
-                end: SpotId::Irikar__Hub__West_Rim.into_usize() + 1,
-            },
         },
         SpotId::Irikar__Hub__Bowl_Middle_Ledge => Spot {
             id: SpotId::Irikar__Hub__Bowl_Middle_Ledge,
@@ -26740,10 +23878,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Irikar__Hub__Bowl_Hole.into_usize(),
-                end: SpotId::Irikar__Hub__West_Rim.into_usize() + 1,
             },
         },
         SpotId::Irikar__Hub__Bowl_Middle_Platform_Center => Spot {
@@ -26758,10 +23892,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Irikar__Hub__Bowl_Hole.into_usize(),
-                end: SpotId::Irikar__Hub__West_Rim.into_usize() + 1,
-            },
         },
         SpotId::Irikar__Hub__Bowl_Middle_Platform_West => Spot {
             id: SpotId::Irikar__Hub__Bowl_Middle_Platform_West,
@@ -26775,10 +23905,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Irikar__Hub__Bowl_Hole.into_usize(),
-                end: SpotId::Irikar__Hub__West_Rim.into_usize() + 1,
-            },
         },
         SpotId::Irikar__Hub__Bowl_Platform_3 => Spot {
             id: SpotId::Irikar__Hub__Bowl_Platform_3,
@@ -26791,10 +23917,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Irikar__Hub__Bowl_Hole.into_usize(),
-                end: SpotId::Irikar__Hub__West_Rim.into_usize() + 1,
             },
         },
         SpotId::Irikar__Hub__Save_Point => Spot {
@@ -26810,10 +23932,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: ActionId::Irikar__Hub__Save_Point__Save.into_usize(),
                 end: ActionId::Irikar__Hub__Save_Point__Save.into_usize() + 1,
             },
-            area_spots: Range {
-                start: SpotId::Irikar__Hub__Bowl_Hole.into_usize(),
-                end: SpotId::Irikar__Hub__West_Rim.into_usize() + 1,
-            },
         },
         SpotId::Irikar__Hub__Bowl_Hole => Spot {
             id: SpotId::Irikar__Hub__Bowl_Hole,
@@ -26825,10 +23943,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Irikar__Hub__Bowl_Hole.into_usize(),
-                end: SpotId::Irikar__Hub__West_Rim.into_usize() + 1,
             },
         },
         SpotId::Irikar__Hub__Sat_Tower_Roof_West => Spot {
@@ -26842,10 +23956,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Irikar__Hub__Bowl_Hole.into_usize(),
-                end: SpotId::Irikar__Hub__West_Rim.into_usize() + 1,
-            },
         },
         SpotId::Irikar__Hub__Sat_Tower_Roof_East => Spot {
             id: SpotId::Irikar__Hub__Sat_Tower_Roof_East,
@@ -26857,10 +23967,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Irikar__Hub__Bowl_Hole.into_usize(),
-                end: SpotId::Irikar__Hub__West_Rim.into_usize() + 1,
             },
         },
         SpotId::Irikar__Hub__Sat_Tower_Middle_Ledge => Spot {
@@ -26875,10 +23981,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Irikar__Hub__Bowl_Hole.into_usize(),
-                end: SpotId::Irikar__Hub__West_Rim.into_usize() + 1,
-            },
         },
         SpotId::Irikar__Hub__Sat_Tower_Floating_Platform => Spot {
             id: SpotId::Irikar__Hub__Sat_Tower_Floating_Platform,
@@ -26891,10 +23993,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Irikar__Hub__Bowl_Hole.into_usize(),
-                end: SpotId::Irikar__Hub__West_Rim.into_usize() + 1,
             },
         },
         SpotId::Irikar__Hub__Sat_Tower_Top_Ledge => Spot {
@@ -26909,10 +24007,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Irikar__Hub__Bowl_Hole.into_usize(),
-                end: SpotId::Irikar__Hub__West_Rim.into_usize() + 1,
-            },
         },
         SpotId::Irikar__Hub__Sat_Tower_Lower_Right_Ledge => Spot {
             id: SpotId::Irikar__Hub__Sat_Tower_Lower_Right_Ledge,
@@ -26924,10 +24018,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Irikar__Hub__Bowl_Hole.into_usize(),
-                end: SpotId::Irikar__Hub__West_Rim.into_usize() + 1,
             },
         },
         SpotId::Irikar__Hub__Sat_Tower_Lower_Left_Ledge => Spot {
@@ -26941,10 +24031,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Irikar__Hub__Bowl_Hole.into_usize(),
-                end: SpotId::Irikar__Hub__West_Rim.into_usize() + 1,
-            },
         },
         SpotId::Irikar__Hub__Sat_Tower_Long_Ledge => Spot {
             id: SpotId::Irikar__Hub__Sat_Tower_Long_Ledge,
@@ -26957,10 +24043,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Irikar__Hub__Bowl_Hole.into_usize(),
-                end: SpotId::Irikar__Hub__West_Rim.into_usize() + 1,
-            },
         },
         SpotId::Irikar__Hub__Sat_Tower_Bottom => Spot {
             id: SpotId::Irikar__Hub__Sat_Tower_Bottom,
@@ -26972,10 +24054,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Irikar__Hub__Bowl_Hole.into_usize(),
-                end: SpotId::Irikar__Hub__West_Rim.into_usize() + 1,
             },
         },
         SpotId::Irikar__Hub__Sat_Tower_East_24 => Spot {
@@ -26990,10 +24068,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Irikar__Hub__Bowl_Hole.into_usize(),
-                end: SpotId::Irikar__Hub__West_Rim.into_usize() + 1,
-            },
         },
         SpotId::Irikar__Sight_Room__West_24 => Spot {
             id: SpotId::Irikar__Sight_Room__West_24,
@@ -27007,10 +24081,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Irikar__Sight_Room__Item_Pedestal.into_usize(),
-                end: SpotId::Irikar__Sight_Room__West_24.into_usize() + 1,
-            },
         },
         SpotId::Irikar__Sight_Room__Lower_Ledge => Spot {
             id: SpotId::Irikar__Sight_Room__Lower_Ledge,
@@ -27022,10 +24092,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Irikar__Sight_Room__Item_Pedestal.into_usize(),
-                end: SpotId::Irikar__Sight_Room__West_24.into_usize() + 1,
             },
         },
         SpotId::Irikar__Sight_Room__Portal => Spot {
@@ -27040,10 +24106,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: ActionId::Irikar__Sight_Room__Portal__Enter_Portal.into_usize(),
                 end: ActionId::Irikar__Sight_Room__Portal__Enter_Portal.into_usize() + 1,
             },
-            area_spots: Range {
-                start: SpotId::Irikar__Sight_Room__Item_Pedestal.into_usize(),
-                end: SpotId::Irikar__Sight_Room__West_24.into_usize() + 1,
-            },
         },
         SpotId::Irikar__Sight_Room__Item_Pedestal => Spot {
             id: SpotId::Irikar__Sight_Room__Item_Pedestal,
@@ -27056,10 +24118,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Irikar__Sight_Room__Item_Pedestal.into_usize(),
-                end: SpotId::Irikar__Sight_Room__West_24.into_usize() + 1,
             },
         },
         SpotId::Menu__Upgrade_Menu__Physiology => Spot {
@@ -27075,10 +24133,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Menu__Upgrade_Menu__Combat.into_usize(),
-                end: SpotId::Menu__Upgrade_Menu__Physiology.into_usize() + 1,
-            },
         },
         SpotId::Menu__Upgrade_Menu__Combat => Spot {
             id: SpotId::Menu__Upgrade_Menu__Combat,
@@ -27092,10 +24146,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Menu__Upgrade_Menu__Combat.into_usize(),
-                end: SpotId::Menu__Upgrade_Menu__Physiology.into_usize() + 1,
             },
         },
         SpotId::Menu__Upgrade_Menu__Infection => Spot {
@@ -27111,10 +24161,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: 0, end: 0,
             },
-            area_spots: Range {
-                start: SpotId::Menu__Upgrade_Menu__Combat.into_usize(),
-                end: SpotId::Menu__Upgrade_Menu__Physiology.into_usize() + 1,
-            },
         },
         SpotId::Menu__Upgrade_Menu__Drone => Spot {
             id: SpotId::Menu__Upgrade_Menu__Drone,
@@ -27128,10 +24174,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Menu__Upgrade_Menu__Combat.into_usize(),
-                end: SpotId::Menu__Upgrade_Menu__Physiology.into_usize() + 1,
             },
         },
     }

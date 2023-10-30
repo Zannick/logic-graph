@@ -14,6 +14,7 @@ use analyzer::condense::{condense_graph, CondensedEdge};
 use analyzer::context::Ctx;
 use analyzer::world;
 use enum_map::{enum_map, Enum, EnumMap};
+use lazy_static::lazy_static;
 use std::ops::Range;
 use std::option::Option;
 
@@ -257,8 +258,6 @@ pub struct Spot {
     pub locations: Range<usize>,
     pub exits: Range<usize>,
     pub actions: Range<usize>,
-    // spots don't reference their area, so we index these by spot
-    pub area_spots: Range<usize>,
 }
 
 static RAW_SPOTS: [SpotId; {{ gl.spots()|list|length + 1 }}] = [ %# +1 as long as we have a default
@@ -267,6 +266,20 @@ static RAW_SPOTS: [SpotId; {{ gl.spots()|list|length + 1 }}] = [ %# +1 as long a
     SpotId::{{ spot_id }},
 %% endfor
 ];
+
+lazy_static! {
+    // Using get_area, we can get the nearby spots by indexing into the spot lists
+    static ref RAW_AREA_SPOT_RANGES: EnumMap<AreaId, Range<usize>> = enum_map! {
+    %% for r in regions
+    %% for area in r.areas|sort(attribute='id')
+        AreaId::{{ area.id }} => Range {
+            start: SpotId::{{ area.spots|map(attribute='id')|min }}.into_usize(),
+            end: SpotId::{{ area.spots|map(attribute='id')|max }}.into_usize() + 1,
+        },
+    %% endfor
+    %% endfor
+    };
+}
 
 #[derive(Clone, Debug)]
 pub struct World {
@@ -341,8 +354,13 @@ impl world::World for World {
         get_area(sp1) == get_area(sp2)
     }
     fn get_area_spots(&self, spot_id: SpotId) -> &[SpotId] {
-        let r = &self.spots[spot_id].area_spots;
-        &RAW_SPOTS[r.start..r.end]
+        if spot_id == SpotId::None {
+            &RAW_SPOTS[0..0]
+        } else {
+            let area_id = get_area(spot_id);
+            let r = &RAW_AREA_SPOT_RANGES[area_id];
+            &RAW_SPOTS[r.start..r.end]
+        }
     }
     fn get_warps(&self) -> &[Warp] { &self.warps.as_slice() }
 
@@ -602,10 +620,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: ActionId::{{ sp.action_ids|min }}.into_usize(),
                 end: ActionId::{{ sp.action_ids|max }}.into_usize() + 1,
                 {%- else %}start: 0, end: 0,{% endif %}
-            },
-            area_spots: Range {
-                start: SpotId::{{ area.spots|map(attribute='id')|min }}.into_usize(),
-                end: SpotId::{{ area.spots|map(attribute='id')|max }}.into_usize() + 1,
             },
         },
 %% endfor

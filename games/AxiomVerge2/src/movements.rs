@@ -5,7 +5,7 @@
 #![allow(unused)]
 
 use crate::context::Context;
-use crate::graph_enums::SpotId;
+use crate::graph_enums::*;
 use crate::rules;
 use analyzer::context::Ctx;
 
@@ -29,12 +29,7 @@ pub fn get_movement_state(ctx: &Context) -> MovementState {
     [has_movement(ctx, Movement::Water)]
 }
 
-pub fn local_travel_time(
-    ctx: &Context,
-    movement_state: MovementState,
-    src: SpotId,
-    dest: SpotId,
-) -> u32 {
+pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotId) -> u32 {
     match (movement_state, src, dest) {
         // [0.2, 0.35]
         (
