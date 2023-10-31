@@ -132,6 +132,7 @@ pub enum Expectation {
     Flask(i8),
     GigunaBoulder(bool),
     GigunaDualPathSwitch(bool),
+    GigunaDualPathWall(bool),
     GigunaGatewayBlock(bool),
     GigunaGatewayGate(bool),
     GigunaGubi(bool),
@@ -548,40 +549,41 @@ pub mod flags {
             const FAST_TRAVEL = 0x2000000;
             const GIGUNA_BOULDER = 0x4000000;
             const GIGUNA_DUAL_PATH_SWITCH = 0x8000000;
-            const GIGUNA_GATEWAY_BLOCK = 0x10000000;
-            const GIGUNA_GATEWAY_GATE = 0x20000000;
-            const GIGUNA_GUBI = 0x40000000;
-            const GIGUNA_NORTHEAST_GATE = 0x80000000;
+            const GIGUNA_DUAL_PATH_WALL = 0x10000000;
+            const GIGUNA_GATEWAY_BLOCK = 0x20000000;
+            const GIGUNA_GATEWAY_GATE = 0x40000000;
+            const GIGUNA_GUBI = 0x80000000;
         }
     }
     bitflags! {
         #[derive(Copy, Clone, Debug, Default, PartialEq, Eq, Hash, Serialize, Deserialize)]
         pub struct ContextBits3 : u32 {
-            const HEALTH_NODE = 0x1;
-            const HERETICS_TABLET = 0x2;
-            const ICE_AXE = 0x4;
-            const INFECTION_SPEED = 0x8;
-            const LEDGE_GRAB = 0x10;
-            const LETTER_FROM_TRACE = 0x20;
-            const MAP_17_10 = 0x40;
-            const MIST_UPGRADE = 0x80;
-            const NANITE_MIST = 0x100;
-            const POWER_MATRIX = 0x200;
-            const RECORD_LOSSES = 0x400;
-            const REMOTE_DRONE = 0x800;
-            const RESEARCHERS_MISSING = 0x1000;
-            const SHOCKWAVE = 0x2000;
-            const SLINGSHOT_CHARGE = 0x4000;
-            const SLINGSHOT_HOOK = 0x8000;
-            const SLINGSHOT_WEAPON = 0x10000;
-            const STATION_POWER = 0x20000;
-            const SWITCH_36_11 = 0x40000;
-            const SWITCH_40_12 = 0x80000;
-            const TERMINAL_BREAKTHROUGH_1 = 0x100000;
-            const THE_IDEAL_KIENGIR = 0x200000;
-            const UNDER_SIEGE = 0x400000;
-            const UNDERWATER_MOVEMENT = 0x800000;
-            const WALL_CLIMB = 0x1000000;
+            const GIGUNA_NORTHEAST_GATE = 0x1;
+            const HEALTH_NODE = 0x2;
+            const HERETICS_TABLET = 0x4;
+            const ICE_AXE = 0x8;
+            const INFECTION_SPEED = 0x10;
+            const LEDGE_GRAB = 0x20;
+            const LETTER_FROM_TRACE = 0x40;
+            const MAP_17_10 = 0x80;
+            const MIST_UPGRADE = 0x100;
+            const NANITE_MIST = 0x200;
+            const POWER_MATRIX = 0x400;
+            const RECORD_LOSSES = 0x800;
+            const REMOTE_DRONE = 0x1000;
+            const RESEARCHERS_MISSING = 0x2000;
+            const SHOCKWAVE = 0x4000;
+            const SLINGSHOT_CHARGE = 0x8000;
+            const SLINGSHOT_HOOK = 0x10000;
+            const SLINGSHOT_WEAPON = 0x20000;
+            const STATION_POWER = 0x40000;
+            const SWITCH_36_11 = 0x80000;
+            const SWITCH_40_12 = 0x100000;
+            const TERMINAL_BREAKTHROUGH_1 = 0x200000;
+            const THE_IDEAL_KIENGIR = 0x400000;
+            const UNDER_SIEGE = 0x800000;
+            const UNDERWATER_MOVEMENT = 0x1000000;
+            const WALL_CLIMB = 0x2000000;
         }
     }
 }
@@ -679,7 +681,7 @@ impl context::Ctx for Context {
     type RegionId = RegionId;
     type MovementState = movements::MovementState;
     type Expectation = Expectation;
-    const NUM_ITEMS: u32 = 73;
+    const NUM_ITEMS: u32 = 74;
 
     fn has(&self, item: Item) -> bool {
         match item {
@@ -750,6 +752,9 @@ impl context::Ctx for Context {
             Item::Giguna_Dual_Path_Switch => self
                 .cbits2
                 .contains(flags::ContextBits2::GIGUNA_DUAL_PATH_SWITCH),
+            Item::Giguna_Dual_Path_Wall => self
+                .cbits2
+                .contains(flags::ContextBits2::GIGUNA_DUAL_PATH_WALL),
             Item::Giguna_Gateway_Block => self
                 .cbits2
                 .contains(flags::ContextBits2::GIGUNA_GATEWAY_BLOCK),
@@ -758,8 +763,8 @@ impl context::Ctx for Context {
                 .contains(flags::ContextBits2::GIGUNA_GATEWAY_GATE),
             Item::Giguna_Gubi => self.cbits2.contains(flags::ContextBits2::GIGUNA_GUBI),
             Item::Giguna_Northeast_Gate => self
-                .cbits2
-                .contains(flags::ContextBits2::GIGUNA_NORTHEAST_GATE),
+                .cbits3
+                .contains(flags::ContextBits3::GIGUNA_NORTHEAST_GATE),
             Item::Health_Fragment => self.health_fragment >= 1,
             Item::Health_Node => self.cbits3.contains(flags::ContextBits3::HEALTH_NODE),
             Item::Health_Upgrade => self.health_upgrade >= 1,
@@ -924,6 +929,10 @@ impl context::Ctx for Context {
                 .cbits2
                 .contains(flags::ContextBits2::GIGUNA_DUAL_PATH_SWITCH)
                 .into(),
+            Item::Giguna_Dual_Path_Wall => self
+                .cbits2
+                .contains(flags::ContextBits2::GIGUNA_DUAL_PATH_WALL)
+                .into(),
             Item::Giguna_Gateway_Block => self
                 .cbits2
                 .contains(flags::ContextBits2::GIGUNA_GATEWAY_BLOCK)
@@ -937,8 +946,8 @@ impl context::Ctx for Context {
                 .contains(flags::ContextBits2::GIGUNA_GUBI)
                 .into(),
             Item::Giguna_Northeast_Gate => self
-                .cbits2
-                .contains(flags::ContextBits2::GIGUNA_NORTHEAST_GATE)
+                .cbits3
+                .contains(flags::ContextBits3::GIGUNA_NORTHEAST_GATE)
                 .into(),
             Item::Health_Fragment => self.health_fragment.into(),
             Item::Health_Node => self
@@ -1147,6 +1156,9 @@ impl context::Ctx for Context {
             Item::Giguna_Dual_Path_Switch => {
                 self.cbits2.insert(flags::ContextBits2::GIGUNA_DUAL_PATH_SWITCH);
             },
+            Item::Giguna_Dual_Path_Wall => {
+                self.cbits2.insert(flags::ContextBits2::GIGUNA_DUAL_PATH_WALL);
+            },
             Item::Giguna_Gateway_Block => {
                 self.cbits2.insert(flags::ContextBits2::GIGUNA_GATEWAY_BLOCK);
             },
@@ -1157,7 +1169,7 @@ impl context::Ctx for Context {
                 self.cbits2.insert(flags::ContextBits2::GIGUNA_GUBI);
             },
             Item::Giguna_Northeast_Gate => {
-                self.cbits2.insert(flags::ContextBits2::GIGUNA_NORTHEAST_GATE);
+                self.cbits3.insert(flags::ContextBits3::GIGUNA_NORTHEAST_GATE);
             },
             Item::Health_Fragment => {
                 self.health_fragment += 1;
@@ -1394,6 +1406,10 @@ impl context::Ctx for Context {
                 self.cbits2
                     .insert(flags::ContextBits2::GIGUNA_DUAL_PATH_SWITCH);
             }
+            Item::Giguna_Dual_Path_Wall => {
+                self.cbits2
+                    .insert(flags::ContextBits2::GIGUNA_DUAL_PATH_WALL);
+            }
             Item::Giguna_Gateway_Block => {
                 self.cbits2
                     .insert(flags::ContextBits2::GIGUNA_GATEWAY_BLOCK);
@@ -1405,8 +1421,8 @@ impl context::Ctx for Context {
                 self.cbits2.insert(flags::ContextBits2::GIGUNA_GUBI);
             }
             Item::Giguna_Northeast_Gate => {
-                self.cbits2
-                    .insert(flags::ContextBits2::GIGUNA_NORTHEAST_GATE);
+                self.cbits3
+                    .insert(flags::ContextBits3::GIGUNA_NORTHEAST_GATE);
             }
             Item::Health_Fragment => {
                 self.health_fragment += 1;
@@ -2499,6 +2515,14 @@ impl context::Ctx for Context {
                     ckey, cval
                 ));
             }
+            ("Giguna_Dual_Path_Wall", Yaml::Boolean(b)) => Expectation::GigunaDualPathWall(*b),
+            ("Giguna_Dual_Path_Wall", Yaml::Integer(i)) => Expectation::GigunaDualPathWall(*i > 0),
+            ("Giguna_Dual_Path_Wall", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
             ("Giguna_Gateway_Block", Yaml::Boolean(b)) => Expectation::GigunaGatewayBlock(*b),
             ("Giguna_Gateway_Block", Yaml::Integer(i)) => Expectation::GigunaGatewayBlock(*i > 0),
             ("Giguna_Gateway_Block", _) => {
@@ -3391,6 +3415,15 @@ impl context::Ctx for Context {
                         errs.push(format!(
                             "Expected {} = {}, got: {}",
                             "Giguna_Dual_Path_Switch", e, v
+                        ));
+                    }
+                }
+                Expectation::GigunaDualPathWall(e) => {
+                    let v = self.has(Item::Giguna_Dual_Path_Wall);
+                    if v != (*e).into() {
+                        errs.push(format!(
+                            "Expected {} = {}, got: {}",
+                            "Giguna_Dual_Path_Wall", e, v
                         ));
                     }
                 }
@@ -4980,6 +5013,18 @@ impl context::Ctx for Context {
         }
         let n = self
             .cbits2
+            .contains(flags::ContextBits2::GIGUNA_DUAL_PATH_WALL);
+        let p = old
+            .cbits2
+            .contains(flags::ContextBits2::GIGUNA_DUAL_PATH_WALL);
+        if n != p {
+            list.push(format!(
+                "{}GIGUNA_DUAL_PATH_WALL",
+                if n { "+" } else { "-" }
+            ));
+        }
+        let n = self
+            .cbits2
             .contains(flags::ContextBits2::GIGUNA_GATEWAY_BLOCK);
         let p = old
             .cbits2
@@ -5002,11 +5047,11 @@ impl context::Ctx for Context {
             list.push(format!("{}GIGUNA_GUBI", if n { "+" } else { "-" }));
         }
         let n = self
-            .cbits2
-            .contains(flags::ContextBits2::GIGUNA_NORTHEAST_GATE);
+            .cbits3
+            .contains(flags::ContextBits3::GIGUNA_NORTHEAST_GATE);
         let p = old
-            .cbits2
-            .contains(flags::ContextBits2::GIGUNA_NORTHEAST_GATE);
+            .cbits3
+            .contains(flags::ContextBits3::GIGUNA_NORTHEAST_GATE);
         if n != p {
             list.push(format!(
                 "{}GIGUNA_NORTHEAST_GATE",

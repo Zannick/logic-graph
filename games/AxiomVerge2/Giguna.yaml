@@ -1983,6 +1983,13 @@ areas:
           time: 1  # ?
     - name: Base of Wall
       coord: [17.85, 17.75]
+      locations:
+        - name: Break Wall
+          item: Giguna_Dual_Path_Wall
+          canon: Giguna_Dual_Path_Wall
+          req: $shockwave
+          price: 100
+          tags: [shockwave, event]
       local:
         - to: In the Grass
       exits:
@@ -1994,12 +2001,17 @@ areas:
           req: $hook
           time: 1  # ?
         - to: Wall Secret
-          req: ^mode == 'drone'
-          time: 1  # ?
-        - to: Wall Secret
+          req: ^mode == 'drone' and Giguna_Dual_Path_Wall
+          movement: base
+      hybrid:
+        - name: Mist into Wall
+          to: Wall Secret
+          item: Giguna_Dual_Path_Wall
+          canon: Giguna_Dual_Path_Wall
           req: ^mode == 'drone' and Mist_Upgrade
           movement: mist2
           price: 20  # ?
+          tags: [event]
     - name: Wall Secret
       coord: [17.95, 17.75]
       locations:

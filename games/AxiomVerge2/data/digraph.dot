@@ -1308,9 +1308,9 @@ digraph AxiomVerge2 {
     Giguna__Dual_Path__In_the_Grass -> Giguna__Dual_Path__Wall_Top;
     Giguna__Dual_Path__In_the_Grass -> Giguna__Dual_Path__Wall_Top;
     Giguna__Dual_Path__Base_of_Wall -> Giguna__Dual_Path__Wall_Secret;
+    Giguna__Dual_Path__Base_of_Wall -> Giguna__Dual_Path__Wall_Top;
+    Giguna__Dual_Path__Base_of_Wall -> Giguna__Dual_Path__Wall_Top;
     Giguna__Dual_Path__Base_of_Wall -> Giguna__Dual_Path__Wall_Secret;
-    Giguna__Dual_Path__Base_of_Wall -> Giguna__Dual_Path__Wall_Top;
-    Giguna__Dual_Path__Base_of_Wall -> Giguna__Dual_Path__Wall_Top;
     Giguna__Dual_Path__Wall_Secret -> Giguna__Dual_Path__Base_of_Wall;
     Giguna__Dual_Path__East_Gate -> Giguna__Dual_Path__East_Gate_NW;
     Giguna__Dual_Path__East_Gate -> Giguna__Dual_Path__East_Gate_NW;

@@ -4829,6 +4829,8 @@ pub enum LocationId {
     Giguna__Building_Interior__Bookshelf__Note,
     Giguna__Carnelian__Vault__Item,
     Giguna__Clouds__Cache__Item,
+    Giguna__Dual_Path__Base_of_Wall__Break_Wall,
+    Giguna__Dual_Path__Base_of_Wall__Mist_into_Wall,
     Giguna__Dual_Path__Below_Left_Switch__Remote_Switch,
     Giguna__Dual_Path__Below_Right_Switch__Remote_Switch,
     Giguna__Dual_Path__Left_Switch__Hit_Switch,
@@ -5151,6 +5153,14 @@ impl fmt::Display for LocationId {
             LocationId::Giguna__Clouds__Cache__Item => {
                 write!(f, "{}", "Giguna > Clouds > Cache > Item")
             }
+            LocationId::Giguna__Dual_Path__Base_of_Wall__Break_Wall => {
+                write!(f, "{}", "Giguna > Dual Path > Base of Wall > Break Wall")
+            }
+            LocationId::Giguna__Dual_Path__Base_of_Wall__Mist_into_Wall => write!(
+                f,
+                "{}",
+                "Giguna > Dual Path > Base of Wall > Mist into Wall"
+            ),
             LocationId::Giguna__Dual_Path__Below_Left_Switch__Remote_Switch => write!(
                 f,
                 "{}",
@@ -5674,6 +5684,12 @@ impl std::str::FromStr for LocationId {
             }
             "Giguna > Carnelian > Vault > Item" => Ok(LocationId::Giguna__Carnelian__Vault__Item),
             "Giguna > Clouds > Cache > Item" => Ok(LocationId::Giguna__Clouds__Cache__Item),
+            "Giguna > Dual Path > Base of Wall > Break Wall" => {
+                Ok(LocationId::Giguna__Dual_Path__Base_of_Wall__Break_Wall)
+            }
+            "Giguna > Dual Path > Base of Wall > Mist into Wall" => {
+                Ok(LocationId::Giguna__Dual_Path__Base_of_Wall__Mist_into_Wall)
+            }
             "Giguna > Dual Path > Below Left Switch > Remote Switch" => {
                 Ok(LocationId::Giguna__Dual_Path__Below_Left_Switch__Remote_Switch)
             }
@@ -6257,9 +6273,9 @@ pub enum ExitId {
     Giguna__Clouds__Southwest__ex__Irikar__Hub__Northwest_1,
     Giguna__Clouds__Straight_Down__ex__Irikar__Hub__North_Above_Portal_1,
     Giguna__Dual_Path__Base_of_Wall__ex__Wall_Secret_1,
-    Giguna__Dual_Path__Base_of_Wall__ex__Wall_Secret_2,
     Giguna__Dual_Path__Base_of_Wall__ex__Wall_Top_1,
     Giguna__Dual_Path__Base_of_Wall__ex__Wall_Top_2,
+    Giguna__Dual_Path__Base_of_Wall__Mist_into_Wall,
     Giguna__Dual_Path__East_17__ex__East_Caverns__West_17_1,
     Giguna__Dual_Path__East_18__ex__Gateway__West_18_1,
     Giguna__Dual_Path__East_Gate__ex__East_Gate_NW_1,
@@ -6976,9 +6992,9 @@ impl fmt::Display for ExitId {
             ExitId::Giguna__Clouds__Southwest__ex__Irikar__Hub__Northwest_1 => write!(f, "{}", "Giguna > Clouds > Southwest ==> Irikar > Hub > Northwest (1)"),
             ExitId::Giguna__Clouds__Straight_Down__ex__Irikar__Hub__North_Above_Portal_1 => write!(f, "{}", "Giguna > Clouds > Straight Down ==> Irikar > Hub > North Above Portal (1)"),
             ExitId::Giguna__Dual_Path__Base_of_Wall__ex__Wall_Secret_1 => write!(f, "{}", "Giguna > Dual Path > Base of Wall ==> Wall Secret (1)"),
-            ExitId::Giguna__Dual_Path__Base_of_Wall__ex__Wall_Secret_2 => write!(f, "{}", "Giguna > Dual Path > Base of Wall ==> Wall Secret (2)"),
             ExitId::Giguna__Dual_Path__Base_of_Wall__ex__Wall_Top_1 => write!(f, "{}", "Giguna > Dual Path > Base of Wall ==> Wall Top (1)"),
             ExitId::Giguna__Dual_Path__Base_of_Wall__ex__Wall_Top_2 => write!(f, "{}", "Giguna > Dual Path > Base of Wall ==> Wall Top (2)"),
+            ExitId::Giguna__Dual_Path__Base_of_Wall__Mist_into_Wall => write!(f, "{}", "Giguna > Dual Path > Base of Wall > Mist into Wall"),
             ExitId::Giguna__Dual_Path__East_17__ex__East_Caverns__West_17_1 => write!(f, "{}", "Giguna > Dual Path > East 17 ==> East Caverns > West 17 (1)"),
             ExitId::Giguna__Dual_Path__East_18__ex__Gateway__West_18_1 => write!(f, "{}", "Giguna > Dual Path > East 18 ==> Gateway > West 18 (1)"),
             ExitId::Giguna__Dual_Path__East_Gate__ex__East_Gate_NW_1 => write!(f, "{}", "Giguna > Dual Path > East Gate ==> East Gate NW (1)"),
@@ -7700,9 +7716,9 @@ impl std::str::FromStr for ExitId {
             "Giguna > Clouds > Southwest ==> Irikar > Hub > Northwest (1)" => Ok(ExitId::Giguna__Clouds__Southwest__ex__Irikar__Hub__Northwest_1),
             "Giguna > Clouds > Straight Down ==> Irikar > Hub > North Above Portal (1)" => Ok(ExitId::Giguna__Clouds__Straight_Down__ex__Irikar__Hub__North_Above_Portal_1),
             "Giguna > Dual Path > Base of Wall ==> Wall Secret (1)" => Ok(ExitId::Giguna__Dual_Path__Base_of_Wall__ex__Wall_Secret_1),
-            "Giguna > Dual Path > Base of Wall ==> Wall Secret (2)" => Ok(ExitId::Giguna__Dual_Path__Base_of_Wall__ex__Wall_Secret_2),
             "Giguna > Dual Path > Base of Wall ==> Wall Top (1)" => Ok(ExitId::Giguna__Dual_Path__Base_of_Wall__ex__Wall_Top_1),
             "Giguna > Dual Path > Base of Wall ==> Wall Top (2)" => Ok(ExitId::Giguna__Dual_Path__Base_of_Wall__ex__Wall_Top_2),
+            "Giguna > Dual Path > Base of Wall > Mist into Wall" => Ok(ExitId::Giguna__Dual_Path__Base_of_Wall__Mist_into_Wall),
             "Giguna > Dual Path > East 17 ==> East Caverns > West 17 (1)" => Ok(ExitId::Giguna__Dual_Path__East_17__ex__East_Caverns__West_17_1),
             "Giguna > Dual Path > East 18 ==> Gateway > West 18 (1)" => Ok(ExitId::Giguna__Dual_Path__East_18__ex__Gateway__West_18_1),
             "Giguna > Dual Path > East Gate ==> East Gate NW (1)" => Ok(ExitId::Giguna__Dual_Path__East_Gate__ex__East_Gate_NW_1),
@@ -8788,6 +8804,7 @@ pub enum CanonId {
     Ebih_Wasteland_Passage_H,
     Giguna_Top_Flask,
     Giguna_Dual_Path_Switch,
+    Giguna_Dual_Path_Wall,
     Giguna_Boulder,
     Giguna_Gateway_Block,
     Giguna_Gubi,
@@ -8822,6 +8839,7 @@ impl fmt::Display for CanonId {
             CanonId::Ebih_Wasteland_Passage_H => write!(f, "{}", "Ebih_Wasteland_Passage_H"),
             CanonId::Giguna_Top_Flask => write!(f, "{}", "Giguna_Top_Flask"),
             CanonId::Giguna_Dual_Path_Switch => write!(f, "{}", "Giguna_Dual_Path_Switch"),
+            CanonId::Giguna_Dual_Path_Wall => write!(f, "{}", "Giguna_Dual_Path_Wall"),
             CanonId::Giguna_Boulder => write!(f, "{}", "Giguna_Boulder"),
             CanonId::Giguna_Gateway_Block => write!(f, "{}", "Giguna_Gateway_Block"),
             CanonId::Giguna_Gubi => write!(f, "{}", "Giguna_Gubi"),
@@ -8858,6 +8876,7 @@ impl std::str::FromStr for CanonId {
             "Ebih_Wasteland_Passage_H" => Ok(CanonId::Ebih_Wasteland_Passage_H),
             "Giguna_Top_Flask" => Ok(CanonId::Giguna_Top_Flask),
             "Giguna_Dual_Path_Switch" => Ok(CanonId::Giguna_Dual_Path_Switch),
+            "Giguna_Dual_Path_Wall" => Ok(CanonId::Giguna_Dual_Path_Wall),
             "Giguna_Boulder" => Ok(CanonId::Giguna_Boulder),
             "Giguna_Gateway_Block" => Ok(CanonId::Giguna_Gateway_Block),
             "Giguna_Gubi" => Ok(CanonId::Giguna_Gubi),

@@ -11,6 +11,22 @@ areas:
       coord: [14.525, 25.35]
       data:
         flipside: Irikar > Sight Room > Portal
+      local:
+        - to: West
+      # TODO: can we reach the map tile with hover alone? or need mist?
+    - name: Upper Area
+      coord: [14.5, 25.0]
+      local:
+        - to: Save Point
+        - to: West
+    - name: West
+      coord: [14.1, 25.75]
+      local:
+        - to: Save Point
+          jumps: 2
+      exits:
+        - to: Four-way
+          tags: [xdoor]
 
 - name: Gauntlet
   on_entry: $reset_old_area(^newpos)
@@ -120,3 +136,17 @@ areas:
   spots:
     - name: West Door
       coord: [13.1, 21.8]
+
+- name: Four-way
+  on_entry: $reset_old_area(^newpos)
+  spots:
+    - name: North
+      coord: [13.5, 25.2]
+    - name: South
+      coord: [13.5, 25.8]
+    - name: Ledge
+      coord: [13.675, 25.35]
+    - name: East
+      coord: [13.9, 25.75]
+    - name: West
+      coord: [13.1, 25.3]

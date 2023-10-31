@@ -1881,6 +1881,12 @@ impl world::Accessible for Location {
             LocationId::Giguna__Building_Interior__Bookshelf__Note => true,
             LocationId::Giguna__Carnelian__Vault__Item => true,
             LocationId::Giguna__Clouds__Cache__Item => true,
+            LocationId::Giguna__Dual_Path__Base_of_Wall__Break_Wall => {
+                rules::access_shockwave(&ctx)
+            }
+            LocationId::Giguna__Dual_Path__Base_of_Wall__Mist_into_Wall => {
+                rules::access_mode__drone_and_mist_upgrade(&ctx)
+            }
             LocationId::Giguna__Dual_Path__Below_Left_Switch__Remote_Switch => {
                 rules::access_boomerang(&ctx)
             }
@@ -2398,10 +2404,10 @@ impl world::Accessible for Exit {
             ExitId::Giguna__Clouds__Southeast__ex__Irikar__Hub__Northeast_Above_Bowl_1 => true,
             ExitId::Giguna__Clouds__Southwest__ex__Irikar__Hub__Northwest_1 => true,
             ExitId::Giguna__Clouds__Straight_Down__ex__Irikar__Hub__North_Above_Portal_1 => true,
-            ExitId::Giguna__Dual_Path__Base_of_Wall__ex__Wall_Secret_1 => rules::access_mode__drone(&ctx),
-            ExitId::Giguna__Dual_Path__Base_of_Wall__ex__Wall_Secret_2 => rules::access_mode__drone_and_mist_upgrade(&ctx),
+            ExitId::Giguna__Dual_Path__Base_of_Wall__ex__Wall_Secret_1 => rules::access_mode__drone_and_giguna_dual_path_wall(&ctx),
             ExitId::Giguna__Dual_Path__Base_of_Wall__ex__Wall_Top_1 => rules::access_grab_and_climb(&ctx),
             ExitId::Giguna__Dual_Path__Base_of_Wall__ex__Wall_Top_2 => rules::access_hook(&ctx),
+            ExitId::Giguna__Dual_Path__Base_of_Wall__Mist_into_Wall => rules::access_mode__drone_and_mist_upgrade(&ctx),
             ExitId::Giguna__Dual_Path__East_17__ex__East_Caverns__West_17_1 => true,
             ExitId::Giguna__Dual_Path__East_18__ex__Gateway__West_18_1 => true,
             ExitId::Giguna__Dual_Path__East_Gate__ex__East_Gate_NW_1 => rules::access_giguna_dual_path_switch_and___grab_or_climb(&ctx),
@@ -3313,7 +3319,7 @@ impl world::Accessible for Action {
                     rules::access_not_within_menu_and_not_breach_and_can_recall(&ctx)
                 }
                 ActionId::Irikar__Hub__Portal_Stand__Enter_Portal => {
-                    rules::access_mode__drone(&ctx)
+                    rules::access_mode__drone_and_breach_sight(&ctx)
                 }
                 ActionId::Irikar__Hub__Save_Point__Save => true,
                 ActionId::Irikar__Sight_Room__Portal__Enter_Portal => {
@@ -5004,7 +5010,7 @@ impl world::World for World {
     type Exit = Exit;
     type Action = Action;
     type Warp = Warp;
-    const NUM_LOCATIONS: u32 = 154;
+    const NUM_LOCATIONS: u32 = 156;
 
     fn objective_name(&self) -> String {
         format!("{}", self.objective)
@@ -5136,6 +5142,10 @@ impl world::World for World {
                 LocationId::Giguna__Dual_Path__Left_Switch__Hit_Switch,
                 LocationId::Giguna__Dual_Path__Right_Switch__Hit_Switch,
                 LocationId::Giguna__Dual_Path__Below_Right_Switch__Remote_Switch,
+            ],
+            CanonId::Giguna_Dual_Path_Wall => vec![
+                LocationId::Giguna__Dual_Path__Base_of_Wall__Break_Wall,
+                LocationId::Giguna__Dual_Path__Base_of_Wall__Mist_into_Wall,
             ],
             CanonId::Giguna_Boulder => vec![
                 LocationId::Giguna__Hard_Rock__Rock_Right__Shockwave_Boulder,
@@ -5313,6 +5323,10 @@ impl world::World for World {
                 LocationId::Giguna__Dual_Path__Left_Switch__Hit_Switch,
                 LocationId::Giguna__Dual_Path__Right_Switch__Hit_Switch,
                 LocationId::Giguna__Dual_Path__Below_Right_Switch__Remote_Switch,
+            ],
+            Item::Giguna_Dual_Path_Wall => vec![
+                LocationId::Giguna__Dual_Path__Base_of_Wall__Break_Wall,
+                LocationId::Giguna__Dual_Path__Base_of_Wall__Mist_into_Wall,
             ],
             Item::Giguna_Boulder => vec![
                 LocationId::Giguna__Hard_Rock__Rock_Right__Shockwave_Boulder,
@@ -5623,6 +5637,12 @@ impl world::World for World {
             }
             LocationId::Giguna__Dual_Path__Left_Switch__Hit_Switch => {
                 SpotId::Giguna__Dual_Path__Left_Switch
+            }
+            LocationId::Giguna__Dual_Path__Base_of_Wall__Break_Wall => {
+                SpotId::Giguna__Dual_Path__Base_of_Wall
+            }
+            LocationId::Giguna__Dual_Path__Base_of_Wall__Mist_into_Wall => {
+                SpotId::Giguna__Dual_Path__Base_of_Wall
             }
             LocationId::Giguna__Dual_Path__Wall_Secret__Health => {
                 SpotId::Giguna__Dual_Path__Wall_Secret
@@ -6279,7 +6299,8 @@ impl world::World for World {
             ExitId::Giguna__Lamassu__East_18__ex__Dual_Path__West_18_1 => SpotId::Giguna__Lamassu__East_18,
             ExitId::Giguna__Dual_Path__West_18__ex__West_Gate_1 | ExitId:: Giguna__Dual_Path__West_18__ex__West_Gate_2 | ExitId:: Giguna__Dual_Path__West_18__ex__Lamassu__East_18_1 => SpotId::Giguna__Dual_Path__West_18,
             ExitId::Giguna__Dual_Path__In_the_Grass__ex__Wall_Top_1 | ExitId:: Giguna__Dual_Path__In_the_Grass__ex__Wall_Top_2 => SpotId::Giguna__Dual_Path__In_the_Grass,
-            ExitId::Giguna__Dual_Path__Base_of_Wall__ex__Wall_Top_1 | ExitId:: Giguna__Dual_Path__Base_of_Wall__ex__Wall_Top_2 | ExitId:: Giguna__Dual_Path__Base_of_Wall__ex__Wall_Secret_1 | ExitId:: Giguna__Dual_Path__Base_of_Wall__ex__Wall_Secret_2 => SpotId::Giguna__Dual_Path__Base_of_Wall,
+            ExitId::Giguna__Dual_Path__Base_of_Wall__ex__Wall_Top_1 | ExitId:: Giguna__Dual_Path__Base_of_Wall__ex__Wall_Top_2 | ExitId:: Giguna__Dual_Path__Base_of_Wall__ex__Wall_Secret_1 => SpotId::Giguna__Dual_Path__Base_of_Wall,
+            ExitId::Giguna__Dual_Path__Base_of_Wall__Mist_into_Wall => SpotId::Giguna__Dual_Path__Base_of_Wall,
             ExitId::Giguna__Dual_Path__Wall_Secret__ex__Base_of_Wall_1 => SpotId::Giguna__Dual_Path__Wall_Secret,
             ExitId::Giguna__Dual_Path__East_Gate__ex__East_Gate_NW_1 | ExitId:: Giguna__Dual_Path__East_Gate__ex__East_Gate_NW_2 => SpotId::Giguna__Dual_Path__East_Gate,
             ExitId::Giguna__Dual_Path__East_18__ex__Gateway__West_18_1 => SpotId::Giguna__Dual_Path__East_18,
@@ -6810,6 +6831,7 @@ impl world::World for World {
             | SpotId::Giguna__Clouds__Southeast
             | SpotId::Giguna__Clouds__Southwest
             | SpotId::Giguna__Clouds__Straight_Down
+            | SpotId::Giguna__Dual_Path__Base_of_Wall
             | SpotId::Giguna__Dual_Path__Below_Left_Switch
             | SpotId::Giguna__Dual_Path__Below_Right_Switch
             | SpotId::Giguna__Dual_Path__East_17
@@ -7831,6 +7853,22 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
             price: Currency::Free,
             time: 0,
             exit_id: None,
+        },
+        LocationId::Giguna__Dual_Path__Base_of_Wall__Break_Wall => Location {
+            id: LocationId::Giguna__Dual_Path__Base_of_Wall__Break_Wall,
+            canonical: CanonId::Giguna_Dual_Path_Wall,
+            item: Item::Giguna_Dual_Path_Wall,
+            price: Currency::Energy(100),
+            time: 3500,
+            exit_id: None,
+        },
+        LocationId::Giguna__Dual_Path__Base_of_Wall__Mist_into_Wall => Location {
+            id: LocationId::Giguna__Dual_Path__Base_of_Wall__Mist_into_Wall,
+            canonical: CanonId::Giguna_Dual_Path_Wall,
+            item: Item::Giguna_Dual_Path_Wall,
+            price: Currency::Energy(20),
+            time: 1000,
+            exit_id: Some(ExitId::Giguna__Dual_Path__Base_of_Wall__Mist_into_Wall),
         },
         LocationId::Giguna__Dual_Path__Wall_Secret__Health => Location {
             id: LocationId::Giguna__Dual_Path__Wall_Secret__Health,
@@ -11643,17 +11681,17 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
         },
         ExitId::Giguna__Dual_Path__Base_of_Wall__ex__Wall_Secret_1 => Exit {
             id: ExitId::Giguna__Dual_Path__Base_of_Wall__ex__Wall_Secret_1,
-            time: 1000,
+            time: 350,
             dest: SpotId::Giguna__Dual_Path__Wall_Secret,
             price: Currency::Free,
             loc_id: None,
         },
-        ExitId::Giguna__Dual_Path__Base_of_Wall__ex__Wall_Secret_2 => Exit {
-            id: ExitId::Giguna__Dual_Path__Base_of_Wall__ex__Wall_Secret_2,
+        ExitId::Giguna__Dual_Path__Base_of_Wall__Mist_into_Wall => Exit {
+            id: ExitId::Giguna__Dual_Path__Base_of_Wall__Mist_into_Wall,
             time: 350,
             dest: SpotId::Giguna__Dual_Path__Wall_Secret,
-            price: Currency::Energy(20),
-            loc_id: None,
+            price: Currency::Free,
+            loc_id: Some(LocationId::Giguna__Dual_Path__Base_of_Wall__Mist_into_Wall),
         },
         ExitId::Giguna__Dual_Path__Wall_Secret__ex__Base_of_Wall_1 => Exit {
             id: ExitId::Giguna__Dual_Path__Wall_Secret__ex__Base_of_Wall_1,
@@ -21400,7 +21438,8 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
         SpotId::Giguna__Dual_Path__Base_of_Wall => Spot {
             id: SpotId::Giguna__Dual_Path__Base_of_Wall,
             locations: Range {
-                start: 0, end: 0,
+                start: LocationId::Giguna__Dual_Path__Base_of_Wall__Break_Wall.into_usize(),
+                end: LocationId::Giguna__Dual_Path__Base_of_Wall__Mist_into_Wall.into_usize() + 1,
             },
             exits: Range {
                 start: ExitId::Giguna__Dual_Path__Base_of_Wall__ex__Wall_Secret_1.into_usize(),
@@ -25623,7 +25662,10 @@ pub fn spot_locations(id: SpotId) -> Range<usize> {
         },
         SpotId::Giguna__Dual_Path__West_Slope => Range { start: 0, end: 0 },
         SpotId::Giguna__Dual_Path__In_the_Grass => Range { start: 0, end: 0 },
-        SpotId::Giguna__Dual_Path__Base_of_Wall => Range { start: 0, end: 0 },
+        SpotId::Giguna__Dual_Path__Base_of_Wall => Range {
+            start: LocationId::Giguna__Dual_Path__Base_of_Wall__Break_Wall.into_usize(),
+            end: LocationId::Giguna__Dual_Path__Base_of_Wall__Mist_into_Wall.into_usize() + 1,
+        },
         SpotId::Giguna__Dual_Path__Wall_Secret => Range {
             start: LocationId::Giguna__Dual_Path__Wall_Secret__Health.into_usize(),
             end: LocationId::Giguna__Dual_Path__Wall_Secret__Health.into_usize() + 1,
@@ -26160,7 +26202,7 @@ pub fn area_locations(id: AreaId) -> Range<usize> {
             end: LocationId::Giguna__Lamassu__Deposit__Flask.into_usize(),
         },
         AreaId::Giguna__Dual_Path => Range {
-            start: LocationId::Giguna__Dual_Path__Below_Left_Switch__Remote_Switch.into_usize(),
+            start: LocationId::Giguna__Dual_Path__Base_of_Wall__Break_Wall.into_usize(),
             end: LocationId::Giguna__Dual_Path__Wall_Secret__Health.into_usize(),
         },
         AreaId::Giguna__Hard_Rock => Range {

@@ -928,6 +928,10 @@ pub fn access_mode__drone_and_ebih_waterfall_block_right(ctx: &Context) -> bool 
     // ^mode == 'drone' and Ebih_Waterfall_Block_Right
     (ctx.mode() == enums::Mode::Drone && ctx.has(Item::Ebih_Waterfall_Block_Right))
 }
+pub fn access_mode__drone_and_giguna_dual_path_wall(ctx: &Context) -> bool {
+    // ^mode == 'drone' and Giguna_Dual_Path_Wall
+    (ctx.mode() == enums::Mode::Drone && ctx.has(Item::Giguna_Dual_Path_Wall))
+}
 pub fn access_mode__drone_and_mist_upgrade(ctx: &Context) -> bool {
     // ^mode == 'drone' and Mist_Upgrade
     (ctx.mode() == enums::Mode::Drone && ctx.has(Item::Mist_Upgrade))
