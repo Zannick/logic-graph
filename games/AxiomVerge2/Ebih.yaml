@@ -381,7 +381,7 @@ areas:
         - to: East Platform
 
 - name: Garage
-  graph_offset: [0, 0.15]
+  graph_offset: [0, 60]
   on_entry: $reset_old_area(^newpos)
   spots:
     - name: Entry

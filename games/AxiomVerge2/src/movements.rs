@@ -5090,6 +5090,98 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
         ) => 1949,
         (
             [false],
+            SpotId::Irikar_Breach__Flappy_Drone__Initial_Drop,
+            SpotId::Irikar_Breach__Flappy_Drone__Upper_Valley_Left,
+        ) => 250,
+        (
+            [false],
+            SpotId::Irikar_Breach__Flappy_Drone__Initial_Drop,
+            SpotId::Irikar_Breach__Flappy_Drone__Upper_Valley_Right,
+        ) => 701,
+        (
+            [false],
+            SpotId::Irikar_Breach__Flappy_Drone__Passage_Corner,
+            SpotId::Irikar_Breach__Flappy_Drone__Side,
+        ) => 350,
+        // [0.2, 1.403509]
+        (
+            [false],
+            SpotId::Irikar_Breach__Flappy_Drone__Passage_Corner,
+            SpotId::Irikar_Breach__Flappy_Drone__South,
+        ) => 1603,
+        (
+            [false],
+            SpotId::Irikar_Breach__Flappy_Drone__Passage_Corner,
+            SpotId::Irikar_Breach__Flappy_Drone__Zigzag_Bottom,
+        ) => 701,
+        (
+            [false],
+            SpotId::Irikar_Breach__Flappy_Drone__Pillar_Underside,
+            SpotId::Irikar_Breach__Flappy_Drone__Upper_Valley_Left,
+        ) => 350,
+        (
+            [false],
+            SpotId::Irikar_Breach__Flappy_Drone__Pillar_Underside,
+            SpotId::Irikar_Breach__Flappy_Drone__Upper_Valley_Right,
+        ) => 350,
+        (
+            [false],
+            SpotId::Irikar_Breach__Flappy_Drone__Side,
+            SpotId::Irikar_Breach__Flappy_Drone__South,
+        ) => 1403,
+        (
+            [false],
+            SpotId::Irikar_Breach__Flappy_Drone__South,
+            SpotId::Irikar_Breach__Flappy_Drone__Side,
+        ) => 1403,
+        (
+            [false],
+            SpotId::Irikar_Breach__Flappy_Drone__Top_Pillar,
+            SpotId::Irikar_Breach__Flappy_Drone__Upper_Valley_Left,
+        ) => 877,
+        (
+            [false],
+            SpotId::Irikar_Breach__Flappy_Drone__Top_Pillar,
+            SpotId::Irikar_Breach__Flappy_Drone__Upper_Valley_Right,
+        ) => 550,
+        // [0.526316, 0.7, 0.526316, 0.55, 0.15, 0.789474]
+        (
+            [false],
+            SpotId::Irikar_Breach__Flappy_Drone__Top_Pillar,
+            SpotId::Irikar_Breach__Flappy_Drone__Zigzag_Bottom,
+        ) => 3242,
+        (
+            [false],
+            SpotId::Irikar_Breach__Flappy_Drone__Upper_Valley_Left,
+            SpotId::Irikar_Breach__Flappy_Drone__Pillar_Underside,
+        ) => 600,
+        (
+            [false],
+            SpotId::Irikar_Breach__Flappy_Drone__Upper_Valley_Left,
+            SpotId::Irikar_Breach__Flappy_Drone__Upper_Valley_Right,
+        ) => 701,
+        (
+            [false],
+            SpotId::Irikar_Breach__Flappy_Drone__Upper_Valley_Right,
+            SpotId::Irikar_Breach__Flappy_Drone__Pillar_Underside,
+        ) => 600,
+        (
+            [false],
+            SpotId::Irikar_Breach__Flappy_Drone__Upper_Valley_Right,
+            SpotId::Irikar_Breach__Flappy_Drone__Upper_Valley_Left,
+        ) => 701,
+        (
+            [false],
+            SpotId::Irikar_Breach__Flappy_Drone__West_Door,
+            SpotId::Irikar_Breach__Flappy_Drone__Initial_Drop,
+        ) => 500,
+        (
+            [false],
+            SpotId::Irikar_Breach__Flappy_Drone__Zigzag_Bottom,
+            SpotId::Irikar_Breach__Flappy_Drone__Passage_Corner,
+        ) => 701,
+        (
+            [false],
             SpotId::Irikar_Breach__Gauntlet__East_22,
             SpotId::Irikar_Breach__Gauntlet__Save_Point,
         ) => 2105,
@@ -5153,6 +5245,26 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
             SpotId::Irikar_Breach__Hover_Room__West,
             SpotId::Irikar_Breach__Hover_Room__Bottom,
         ) => 1403,
+        (
+            [false],
+            SpotId::Irikar_Breach__Save_Room__Save_Point,
+            SpotId::Irikar_Breach__Save_Room__West,
+        ) => 1491,
+        (
+            [false],
+            SpotId::Irikar_Breach__Save_Room__Upper_Area,
+            SpotId::Irikar_Breach__Save_Room__Save_Point,
+        ) => 350,
+        (
+            [false],
+            SpotId::Irikar_Breach__Save_Room__Upper_Area,
+            SpotId::Irikar_Breach__Save_Room__West,
+        ) => 1403,
+        (
+            [false],
+            SpotId::Irikar_Breach__Save_Room__West,
+            SpotId::Irikar_Breach__Save_Room__Save_Point,
+        ) => 1491,
         ([false], SpotId::Irikar__Hub__Bowl_Hole, SpotId::Irikar__Hub__Sat_Tower_Middle_Ledge) => {
             1578
         }
@@ -5202,6 +5314,11 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
         ([false], SpotId::Irikar__Hub__NW_Roof, SpotId::Irikar__Hub__NW_Middle_Building_Corner) => {
             1800
         }
+        (
+            [false],
+            SpotId::Irikar__Hub__NW_Staircase_Upper,
+            SpotId::Irikar__Hub__NW_Middle_Building_Corner,
+        ) => 2807,
         ([false], SpotId::Irikar__Hub__NW_Staircase_Upper, SpotId::Irikar__Hub__Portal_Stand) => {
             1754
         }
@@ -10348,6 +10465,98 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
         ) => 1949,
         (
             [true],
+            SpotId::Irikar_Breach__Flappy_Drone__Initial_Drop,
+            SpotId::Irikar_Breach__Flappy_Drone__Upper_Valley_Left,
+        ) => 250,
+        (
+            [true],
+            SpotId::Irikar_Breach__Flappy_Drone__Initial_Drop,
+            SpotId::Irikar_Breach__Flappy_Drone__Upper_Valley_Right,
+        ) => 701,
+        (
+            [true],
+            SpotId::Irikar_Breach__Flappy_Drone__Passage_Corner,
+            SpotId::Irikar_Breach__Flappy_Drone__Side,
+        ) => 350,
+        // [0.2, 1.403509]
+        (
+            [true],
+            SpotId::Irikar_Breach__Flappy_Drone__Passage_Corner,
+            SpotId::Irikar_Breach__Flappy_Drone__South,
+        ) => 1603,
+        (
+            [true],
+            SpotId::Irikar_Breach__Flappy_Drone__Passage_Corner,
+            SpotId::Irikar_Breach__Flappy_Drone__Zigzag_Bottom,
+        ) => 701,
+        (
+            [true],
+            SpotId::Irikar_Breach__Flappy_Drone__Pillar_Underside,
+            SpotId::Irikar_Breach__Flappy_Drone__Upper_Valley_Left,
+        ) => 350,
+        (
+            [true],
+            SpotId::Irikar_Breach__Flappy_Drone__Pillar_Underside,
+            SpotId::Irikar_Breach__Flappy_Drone__Upper_Valley_Right,
+        ) => 350,
+        (
+            [true],
+            SpotId::Irikar_Breach__Flappy_Drone__Side,
+            SpotId::Irikar_Breach__Flappy_Drone__South,
+        ) => 1403,
+        (
+            [true],
+            SpotId::Irikar_Breach__Flappy_Drone__South,
+            SpotId::Irikar_Breach__Flappy_Drone__Side,
+        ) => 1403,
+        (
+            [true],
+            SpotId::Irikar_Breach__Flappy_Drone__Top_Pillar,
+            SpotId::Irikar_Breach__Flappy_Drone__Upper_Valley_Left,
+        ) => 877,
+        (
+            [true],
+            SpotId::Irikar_Breach__Flappy_Drone__Top_Pillar,
+            SpotId::Irikar_Breach__Flappy_Drone__Upper_Valley_Right,
+        ) => 550,
+        // [0.526316, 0.7, 0.526316, 0.55, 0.15, 0.789474]
+        (
+            [true],
+            SpotId::Irikar_Breach__Flappy_Drone__Top_Pillar,
+            SpotId::Irikar_Breach__Flappy_Drone__Zigzag_Bottom,
+        ) => 3242,
+        (
+            [true],
+            SpotId::Irikar_Breach__Flappy_Drone__Upper_Valley_Left,
+            SpotId::Irikar_Breach__Flappy_Drone__Pillar_Underside,
+        ) => 600,
+        (
+            [true],
+            SpotId::Irikar_Breach__Flappy_Drone__Upper_Valley_Left,
+            SpotId::Irikar_Breach__Flappy_Drone__Upper_Valley_Right,
+        ) => 701,
+        (
+            [true],
+            SpotId::Irikar_Breach__Flappy_Drone__Upper_Valley_Right,
+            SpotId::Irikar_Breach__Flappy_Drone__Pillar_Underside,
+        ) => 600,
+        (
+            [true],
+            SpotId::Irikar_Breach__Flappy_Drone__Upper_Valley_Right,
+            SpotId::Irikar_Breach__Flappy_Drone__Upper_Valley_Left,
+        ) => 701,
+        (
+            [true],
+            SpotId::Irikar_Breach__Flappy_Drone__West_Door,
+            SpotId::Irikar_Breach__Flappy_Drone__Initial_Drop,
+        ) => 500,
+        (
+            [true],
+            SpotId::Irikar_Breach__Flappy_Drone__Zigzag_Bottom,
+            SpotId::Irikar_Breach__Flappy_Drone__Passage_Corner,
+        ) => 701,
+        (
+            [true],
             SpotId::Irikar_Breach__Gauntlet__East_22,
             SpotId::Irikar_Breach__Gauntlet__Save_Point,
         ) => 2105,
@@ -10411,6 +10620,26 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
             SpotId::Irikar_Breach__Hover_Room__West,
             SpotId::Irikar_Breach__Hover_Room__Bottom,
         ) => 1403,
+        (
+            [true],
+            SpotId::Irikar_Breach__Save_Room__Save_Point,
+            SpotId::Irikar_Breach__Save_Room__West,
+        ) => 1491,
+        (
+            [true],
+            SpotId::Irikar_Breach__Save_Room__Upper_Area,
+            SpotId::Irikar_Breach__Save_Room__Save_Point,
+        ) => 350,
+        (
+            [true],
+            SpotId::Irikar_Breach__Save_Room__Upper_Area,
+            SpotId::Irikar_Breach__Save_Room__West,
+        ) => 1403,
+        (
+            [true],
+            SpotId::Irikar_Breach__Save_Room__West,
+            SpotId::Irikar_Breach__Save_Room__Save_Point,
+        ) => 1491,
         ([true], SpotId::Irikar__Hub__Bowl_Hole, SpotId::Irikar__Hub__Sat_Tower_Middle_Ledge) => {
             1578
         }
@@ -10458,6 +10687,11 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
         ([true], SpotId::Irikar__Hub__NW_Roof, SpotId::Irikar__Hub__NW_Middle_Building_Corner) => {
             1800
         }
+        (
+            [true],
+            SpotId::Irikar__Hub__NW_Staircase_Upper,
+            SpotId::Irikar__Hub__NW_Middle_Building_Corner,
+        ) => 2807,
         ([true], SpotId::Irikar__Hub__NW_Staircase_Upper, SpotId::Irikar__Hub__Portal_Stand) => {
             1754
         }
@@ -13721,6 +13955,19 @@ pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
         (SpotId::Glacier__Apocalypse_Entry__Terminal, SpotId::Glacier__Apocalypse_Entry__West) => {
             true
         }
+        (SpotId::Irikar_Breach__Save_Room__Save_Point, SpotId::Irikar_Breach__Save_Room__West) => {
+            true
+        }
+        (
+            SpotId::Irikar_Breach__Save_Room__Upper_Area,
+            SpotId::Irikar_Breach__Save_Room__Save_Point,
+        ) => true,
+        (SpotId::Irikar_Breach__Save_Room__Upper_Area, SpotId::Irikar_Breach__Save_Room__West) => {
+            true
+        }
+        (SpotId::Irikar_Breach__Save_Room__West, SpotId::Irikar_Breach__Save_Room__Save_Point) => {
+            true
+        }
         (SpotId::Irikar_Breach__Gauntlet__Save_Point, SpotId::Irikar_Breach__Gauntlet__East_22) => {
             true
         }
@@ -13767,6 +14014,76 @@ pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
             true
         }
         (SpotId::Irikar_Breach__Hover_Room__East, SpotId::Irikar_Breach__Hover_Room__Bottom) => {
+            true
+        }
+        (
+            SpotId::Irikar_Breach__Flappy_Drone__West_Door,
+            SpotId::Irikar_Breach__Flappy_Drone__Initial_Drop,
+        ) => true,
+        (
+            SpotId::Irikar_Breach__Flappy_Drone__Initial_Drop,
+            SpotId::Irikar_Breach__Flappy_Drone__Upper_Valley_Left,
+        ) => true,
+        (
+            SpotId::Irikar_Breach__Flappy_Drone__Initial_Drop,
+            SpotId::Irikar_Breach__Flappy_Drone__Upper_Valley_Right,
+        ) => true,
+        (
+            SpotId::Irikar_Breach__Flappy_Drone__Pillar_Underside,
+            SpotId::Irikar_Breach__Flappy_Drone__Upper_Valley_Left,
+        ) => true,
+        (
+            SpotId::Irikar_Breach__Flappy_Drone__Pillar_Underside,
+            SpotId::Irikar_Breach__Flappy_Drone__Upper_Valley_Right,
+        ) => true,
+        (
+            SpotId::Irikar_Breach__Flappy_Drone__Upper_Valley_Left,
+            SpotId::Irikar_Breach__Flappy_Drone__Upper_Valley_Right,
+        ) => true,
+        (
+            SpotId::Irikar_Breach__Flappy_Drone__Upper_Valley_Left,
+            SpotId::Irikar_Breach__Flappy_Drone__Pillar_Underside,
+        ) => true,
+        (
+            SpotId::Irikar_Breach__Flappy_Drone__Upper_Valley_Right,
+            SpotId::Irikar_Breach__Flappy_Drone__Upper_Valley_Left,
+        ) => true,
+        (
+            SpotId::Irikar_Breach__Flappy_Drone__Upper_Valley_Right,
+            SpotId::Irikar_Breach__Flappy_Drone__Pillar_Underside,
+        ) => true,
+        (
+            SpotId::Irikar_Breach__Flappy_Drone__Top_Pillar,
+            SpotId::Irikar_Breach__Flappy_Drone__Upper_Valley_Left,
+        ) => true,
+        (
+            SpotId::Irikar_Breach__Flappy_Drone__Top_Pillar,
+            SpotId::Irikar_Breach__Flappy_Drone__Upper_Valley_Right,
+        ) => true,
+        (
+            SpotId::Irikar_Breach__Flappy_Drone__Top_Pillar,
+            SpotId::Irikar_Breach__Flappy_Drone__Zigzag_Bottom,
+        ) => true,
+        (
+            SpotId::Irikar_Breach__Flappy_Drone__Zigzag_Bottom,
+            SpotId::Irikar_Breach__Flappy_Drone__Passage_Corner,
+        ) => true,
+        (
+            SpotId::Irikar_Breach__Flappy_Drone__Passage_Corner,
+            SpotId::Irikar_Breach__Flappy_Drone__Side,
+        ) => true,
+        (
+            SpotId::Irikar_Breach__Flappy_Drone__Passage_Corner,
+            SpotId::Irikar_Breach__Flappy_Drone__Zigzag_Bottom,
+        ) => true,
+        (
+            SpotId::Irikar_Breach__Flappy_Drone__Passage_Corner,
+            SpotId::Irikar_Breach__Flappy_Drone__South,
+        ) => true,
+        (SpotId::Irikar_Breach__Flappy_Drone__Side, SpotId::Irikar_Breach__Flappy_Drone__South) => {
+            true
+        }
+        (SpotId::Irikar_Breach__Flappy_Drone__South, SpotId::Irikar_Breach__Flappy_Drone__Side) => {
             true
         }
         (SpotId::Irikar__Hub__North_Above_Portal, SpotId::Irikar__Hub__Portal_Stand) => true,
@@ -13853,6 +14170,10 @@ pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
         (SpotId::Irikar__Hub__NW_Roof, SpotId::Irikar__Hub__NW_Bowl_Edifice) => true,
         (SpotId::Irikar__Hub__NW_Roof, SpotId::Irikar__Hub__NW_Middle_Building_Corner) => true,
         (SpotId::Irikar__Hub__NW_Staircase_Upper, SpotId::Irikar__Hub__Portal_Stand) => true,
+        (
+            SpotId::Irikar__Hub__NW_Staircase_Upper,
+            SpotId::Irikar__Hub__NW_Middle_Building_Corner,
+        ) => true,
         (SpotId::Irikar__Hub__Portal_Stand, SpotId::Irikar__Hub__NW_Staircase_Upper) => true,
         (SpotId::Irikar__Hub__Portal_Stand, SpotId::Irikar__Hub__NW_Middle_Building_Corner) => true,
         (
@@ -27779,7 +28100,197 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             1000,
         ),
         (
+            SpotId::Irikar_Breach__Flappy_Drone__Initial_Drop,
+            SpotId::Irikar_Breach__Flappy_Drone__Pillar_Underside,
+            350,
+        ),
+        (
+            SpotId::Irikar_Breach__Flappy_Drone__Initial_Drop,
+            SpotId::Irikar_Breach__Flappy_Drone__Upper_Valley_Left,
+            250,
+        ),
+        (
+            SpotId::Irikar_Breach__Flappy_Drone__Initial_Drop,
+            SpotId::Irikar_Breach__Flappy_Drone__Upper_Valley_Right,
+            701,
+        ),
+        (
+            SpotId::Irikar_Breach__Flappy_Drone__Initial_Drop,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Irikar_Breach__Flappy_Drone__Passage_Corner,
+            SpotId::Irikar_Breach__Flappy_Drone__Side,
+            350,
+        ),
+        (
+            SpotId::Irikar_Breach__Flappy_Drone__Passage_Corner,
+            SpotId::Irikar_Breach__Flappy_Drone__South,
+            1603,
+        ),
+        (
+            SpotId::Irikar_Breach__Flappy_Drone__Passage_Corner,
+            SpotId::Irikar_Breach__Flappy_Drone__Zigzag_Bottom,
+            701,
+        ),
+        (
+            SpotId::Irikar_Breach__Flappy_Drone__Passage_Corner,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Irikar_Breach__Flappy_Drone__Pillar_Underside,
+            SpotId::Irikar_Breach__Flappy_Drone__Top_Pillar,
+            1000,
+        ),
+        (
+            SpotId::Irikar_Breach__Flappy_Drone__Pillar_Underside,
+            SpotId::Irikar_Breach__Flappy_Drone__Upper_Valley_Left,
+            350,
+        ),
+        (
+            SpotId::Irikar_Breach__Flappy_Drone__Pillar_Underside,
+            SpotId::Irikar_Breach__Flappy_Drone__Upper_Valley_Right,
+            350,
+        ),
+        (
+            SpotId::Irikar_Breach__Flappy_Drone__Pillar_Underside,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Irikar_Breach__Flappy_Drone__Side,
+            SpotId::Irikar_Breach__Flappy_Drone__South,
+            1403,
+        ),
+        (
+            SpotId::Irikar_Breach__Flappy_Drone__Side,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Irikar_Breach__Flappy_Drone__South,
+            SpotId::Irikar_Breach__Flappy_Drone__Side,
+            1403,
+        ),
+        (
+            SpotId::Irikar_Breach__Flappy_Drone__South,
+            SpotId::Irikar_Breach__Four_way__North,
+            1600,
+        ),
+        (
+            SpotId::Irikar_Breach__Flappy_Drone__South,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Irikar_Breach__Flappy_Drone__Top_Pillar,
+            SpotId::Irikar_Breach__Flappy_Drone__Pillar_Underside,
+            526,
+        ),
+        (
+            SpotId::Irikar_Breach__Flappy_Drone__Top_Pillar,
+            SpotId::Irikar_Breach__Flappy_Drone__Upper_Valley_Left,
+            877,
+        ),
+        (
+            SpotId::Irikar_Breach__Flappy_Drone__Top_Pillar,
+            SpotId::Irikar_Breach__Flappy_Drone__Upper_Valley_Right,
+            550,
+        ),
+        (
+            SpotId::Irikar_Breach__Flappy_Drone__Top_Pillar,
+            SpotId::Irikar_Breach__Flappy_Drone__Zigzag_Bottom,
+            3242,
+        ),
+        (
+            SpotId::Irikar_Breach__Flappy_Drone__Top_Pillar,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Irikar_Breach__Flappy_Drone__Upper_Valley_Left,
+            SpotId::Irikar_Breach__Flappy_Drone__Pillar_Underside,
+            600,
+        ),
+        (
+            SpotId::Irikar_Breach__Flappy_Drone__Upper_Valley_Left,
+            SpotId::Irikar_Breach__Flappy_Drone__Upper_Valley_Right,
+            701,
+        ),
+        (
+            SpotId::Irikar_Breach__Flappy_Drone__Upper_Valley_Left,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Irikar_Breach__Flappy_Drone__Upper_Valley_Right,
+            SpotId::Irikar_Breach__Flappy_Drone__Pillar_Underside,
+            600,
+        ),
+        (
+            SpotId::Irikar_Breach__Flappy_Drone__Upper_Valley_Right,
+            SpotId::Irikar_Breach__Flappy_Drone__Top_Pillar,
+            2000,
+        ),
+        (
+            SpotId::Irikar_Breach__Flappy_Drone__Upper_Valley_Right,
+            SpotId::Irikar_Breach__Flappy_Drone__Upper_Valley_Left,
+            701,
+        ),
+        (
+            SpotId::Irikar_Breach__Flappy_Drone__Upper_Valley_Right,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
             SpotId::Irikar_Breach__Flappy_Drone__West_Door,
+            SpotId::Irikar_Breach__Flappy_Drone__Initial_Drop,
+            500,
+        ),
+        (
+            SpotId::Irikar_Breach__Flappy_Drone__West_Door,
+            SpotId::Irikar_Breach__Hover_Room__East,
+            1000,
+        ),
+        (
+            SpotId::Irikar_Breach__Flappy_Drone__West_Door,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Irikar_Breach__Flappy_Drone__Zigzag_Bottom,
+            SpotId::Irikar_Breach__Flappy_Drone__Passage_Corner,
+            701,
+        ),
+        (
+            SpotId::Irikar_Breach__Flappy_Drone__Zigzag_Bottom,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Irikar_Breach__Four_way__East,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Irikar_Breach__Four_way__Ledge,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Irikar_Breach__Four_way__North,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Irikar_Breach__Four_way__South,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Irikar_Breach__Four_way__West,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -27955,6 +28466,41 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Irikar_Breach__Save_Room__Save_Point,
+            SpotId::Irikar_Breach__Save_Room__West,
+            1491,
+        ),
+        (
+            SpotId::Irikar_Breach__Save_Room__Save_Point,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Irikar_Breach__Save_Room__Upper_Area,
+            SpotId::Irikar_Breach__Save_Room__Save_Point,
+            350,
+        ),
+        (
+            SpotId::Irikar_Breach__Save_Room__Upper_Area,
+            SpotId::Irikar_Breach__Save_Room__West,
+            1403,
+        ),
+        (
+            SpotId::Irikar_Breach__Save_Room__Upper_Area,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Irikar_Breach__Save_Room__West,
+            SpotId::Irikar_Breach__Four_way__East,
+            1600,
+        ),
+        (
+            SpotId::Irikar_Breach__Save_Room__West,
+            SpotId::Irikar_Breach__Save_Room__Save_Point,
+            1491,
+        ),
+        (
+            SpotId::Irikar_Breach__Save_Room__West,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -28136,7 +28682,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Irikar__Hub__NW_Staircase_Upper,
             SpotId::Irikar__Hub__NW_Middle_Building_Corner,
-            1000,
+            2807,
         ),
         (
             SpotId::Irikar__Hub__NW_Staircase_Upper,
@@ -32007,6 +32553,76 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
         (SpotId::Glacier__Vertical_Room__West_9, SpotId::Glacier__Vertical_Room__Under_Switch) => {
             Some(1949)
         }
+        (
+            SpotId::Irikar_Breach__Flappy_Drone__Initial_Drop,
+            SpotId::Irikar_Breach__Flappy_Drone__Upper_Valley_Left,
+        ) => Some(250),
+        (
+            SpotId::Irikar_Breach__Flappy_Drone__Initial_Drop,
+            SpotId::Irikar_Breach__Flappy_Drone__Upper_Valley_Right,
+        ) => Some(701),
+        (
+            SpotId::Irikar_Breach__Flappy_Drone__Passage_Corner,
+            SpotId::Irikar_Breach__Flappy_Drone__Side,
+        ) => Some(350),
+        (
+            SpotId::Irikar_Breach__Flappy_Drone__Passage_Corner,
+            SpotId::Irikar_Breach__Flappy_Drone__South,
+        ) => Some(1603),
+        (
+            SpotId::Irikar_Breach__Flappy_Drone__Passage_Corner,
+            SpotId::Irikar_Breach__Flappy_Drone__Zigzag_Bottom,
+        ) => Some(701),
+        (
+            SpotId::Irikar_Breach__Flappy_Drone__Pillar_Underside,
+            SpotId::Irikar_Breach__Flappy_Drone__Upper_Valley_Left,
+        ) => Some(350),
+        (
+            SpotId::Irikar_Breach__Flappy_Drone__Pillar_Underside,
+            SpotId::Irikar_Breach__Flappy_Drone__Upper_Valley_Right,
+        ) => Some(350),
+        (SpotId::Irikar_Breach__Flappy_Drone__Side, SpotId::Irikar_Breach__Flappy_Drone__South) => {
+            Some(1403)
+        }
+        (SpotId::Irikar_Breach__Flappy_Drone__South, SpotId::Irikar_Breach__Flappy_Drone__Side) => {
+            Some(1403)
+        }
+        (
+            SpotId::Irikar_Breach__Flappy_Drone__Top_Pillar,
+            SpotId::Irikar_Breach__Flappy_Drone__Upper_Valley_Left,
+        ) => Some(877),
+        (
+            SpotId::Irikar_Breach__Flappy_Drone__Top_Pillar,
+            SpotId::Irikar_Breach__Flappy_Drone__Upper_Valley_Right,
+        ) => Some(550),
+        (
+            SpotId::Irikar_Breach__Flappy_Drone__Top_Pillar,
+            SpotId::Irikar_Breach__Flappy_Drone__Zigzag_Bottom,
+        ) => Some(3242),
+        (
+            SpotId::Irikar_Breach__Flappy_Drone__Upper_Valley_Left,
+            SpotId::Irikar_Breach__Flappy_Drone__Pillar_Underside,
+        ) => Some(600),
+        (
+            SpotId::Irikar_Breach__Flappy_Drone__Upper_Valley_Left,
+            SpotId::Irikar_Breach__Flappy_Drone__Upper_Valley_Right,
+        ) => Some(701),
+        (
+            SpotId::Irikar_Breach__Flappy_Drone__Upper_Valley_Right,
+            SpotId::Irikar_Breach__Flappy_Drone__Pillar_Underside,
+        ) => Some(600),
+        (
+            SpotId::Irikar_Breach__Flappy_Drone__Upper_Valley_Right,
+            SpotId::Irikar_Breach__Flappy_Drone__Upper_Valley_Left,
+        ) => Some(701),
+        (
+            SpotId::Irikar_Breach__Flappy_Drone__West_Door,
+            SpotId::Irikar_Breach__Flappy_Drone__Initial_Drop,
+        ) => Some(500),
+        (
+            SpotId::Irikar_Breach__Flappy_Drone__Zigzag_Bottom,
+            SpotId::Irikar_Breach__Flappy_Drone__Passage_Corner,
+        ) => Some(701),
         (SpotId::Irikar_Breach__Gauntlet__East_22, SpotId::Irikar_Breach__Gauntlet__Save_Point) => {
             Some(2105)
         }
@@ -32055,6 +32671,19 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
         (SpotId::Irikar_Breach__Hover_Room__West, SpotId::Irikar_Breach__Hover_Room__Bottom) => {
             Some(1403)
         }
+        (SpotId::Irikar_Breach__Save_Room__Save_Point, SpotId::Irikar_Breach__Save_Room__West) => {
+            Some(1491)
+        }
+        (
+            SpotId::Irikar_Breach__Save_Room__Upper_Area,
+            SpotId::Irikar_Breach__Save_Room__Save_Point,
+        ) => Some(350),
+        (SpotId::Irikar_Breach__Save_Room__Upper_Area, SpotId::Irikar_Breach__Save_Room__West) => {
+            Some(1403)
+        }
+        (SpotId::Irikar_Breach__Save_Room__West, SpotId::Irikar_Breach__Save_Room__Save_Point) => {
+            Some(1491)
+        }
         (SpotId::Irikar__Hub__Bowl_Hole, SpotId::Irikar__Hub__Sat_Tower_Middle_Ledge) => Some(1578),
         (SpotId::Irikar__Hub__Bowl_Hole, SpotId::Irikar__Hub__Save_Point) => Some(1578),
         (
@@ -32091,6 +32720,10 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
         (SpotId::Irikar__Hub__NW_Roof, SpotId::Irikar__Hub__NW_Middle_Building_Corner) => {
             Some(1800)
         }
+        (
+            SpotId::Irikar__Hub__NW_Staircase_Upper,
+            SpotId::Irikar__Hub__NW_Middle_Building_Corner,
+        ) => Some(2807),
         (SpotId::Irikar__Hub__NW_Staircase_Upper, SpotId::Irikar__Hub__Portal_Stand) => Some(1754),
         (
             SpotId::Irikar__Hub__North_Above_Portal,
@@ -36604,6 +37237,76 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
         (SpotId::Glacier__Vertical_Room__West_9, SpotId::Glacier__Vertical_Room__Under_Switch) => {
             (Some(1949), vec![])
         }
+        (
+            SpotId::Irikar_Breach__Flappy_Drone__Initial_Drop,
+            SpotId::Irikar_Breach__Flappy_Drone__Upper_Valley_Left,
+        ) => (Some(250), vec![]),
+        (
+            SpotId::Irikar_Breach__Flappy_Drone__Initial_Drop,
+            SpotId::Irikar_Breach__Flappy_Drone__Upper_Valley_Right,
+        ) => (Some(701), vec![]),
+        (
+            SpotId::Irikar_Breach__Flappy_Drone__Passage_Corner,
+            SpotId::Irikar_Breach__Flappy_Drone__Side,
+        ) => (Some(350), vec![]),
+        (
+            SpotId::Irikar_Breach__Flappy_Drone__Passage_Corner,
+            SpotId::Irikar_Breach__Flappy_Drone__South,
+        ) => (Some(1603), vec![]),
+        (
+            SpotId::Irikar_Breach__Flappy_Drone__Passage_Corner,
+            SpotId::Irikar_Breach__Flappy_Drone__Zigzag_Bottom,
+        ) => (Some(701), vec![]),
+        (
+            SpotId::Irikar_Breach__Flappy_Drone__Pillar_Underside,
+            SpotId::Irikar_Breach__Flappy_Drone__Upper_Valley_Left,
+        ) => (Some(350), vec![]),
+        (
+            SpotId::Irikar_Breach__Flappy_Drone__Pillar_Underside,
+            SpotId::Irikar_Breach__Flappy_Drone__Upper_Valley_Right,
+        ) => (Some(350), vec![]),
+        (SpotId::Irikar_Breach__Flappy_Drone__Side, SpotId::Irikar_Breach__Flappy_Drone__South) => {
+            (Some(1403), vec![])
+        }
+        (SpotId::Irikar_Breach__Flappy_Drone__South, SpotId::Irikar_Breach__Flappy_Drone__Side) => {
+            (Some(1403), vec![])
+        }
+        (
+            SpotId::Irikar_Breach__Flappy_Drone__Top_Pillar,
+            SpotId::Irikar_Breach__Flappy_Drone__Upper_Valley_Left,
+        ) => (Some(877), vec![]),
+        (
+            SpotId::Irikar_Breach__Flappy_Drone__Top_Pillar,
+            SpotId::Irikar_Breach__Flappy_Drone__Upper_Valley_Right,
+        ) => (Some(550), vec![]),
+        (
+            SpotId::Irikar_Breach__Flappy_Drone__Top_Pillar,
+            SpotId::Irikar_Breach__Flappy_Drone__Zigzag_Bottom,
+        ) => (Some(3242), vec![]),
+        (
+            SpotId::Irikar_Breach__Flappy_Drone__Upper_Valley_Left,
+            SpotId::Irikar_Breach__Flappy_Drone__Pillar_Underside,
+        ) => (Some(600), vec![]),
+        (
+            SpotId::Irikar_Breach__Flappy_Drone__Upper_Valley_Left,
+            SpotId::Irikar_Breach__Flappy_Drone__Upper_Valley_Right,
+        ) => (Some(701), vec![]),
+        (
+            SpotId::Irikar_Breach__Flappy_Drone__Upper_Valley_Right,
+            SpotId::Irikar_Breach__Flappy_Drone__Pillar_Underside,
+        ) => (Some(600), vec![]),
+        (
+            SpotId::Irikar_Breach__Flappy_Drone__Upper_Valley_Right,
+            SpotId::Irikar_Breach__Flappy_Drone__Upper_Valley_Left,
+        ) => (Some(701), vec![]),
+        (
+            SpotId::Irikar_Breach__Flappy_Drone__West_Door,
+            SpotId::Irikar_Breach__Flappy_Drone__Initial_Drop,
+        ) => (Some(500), vec![]),
+        (
+            SpotId::Irikar_Breach__Flappy_Drone__Zigzag_Bottom,
+            SpotId::Irikar_Breach__Flappy_Drone__Passage_Corner,
+        ) => (Some(701), vec![]),
         (SpotId::Irikar_Breach__Gauntlet__East_22, SpotId::Irikar_Breach__Gauntlet__Save_Point) => {
             (Some(2105), vec![])
         }
@@ -36651,6 +37354,19 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
         }
         (SpotId::Irikar_Breach__Hover_Room__West, SpotId::Irikar_Breach__Hover_Room__Bottom) => {
             (Some(1403), vec![])
+        }
+        (SpotId::Irikar_Breach__Save_Room__Save_Point, SpotId::Irikar_Breach__Save_Room__West) => {
+            (Some(1491), vec![])
+        }
+        (
+            SpotId::Irikar_Breach__Save_Room__Upper_Area,
+            SpotId::Irikar_Breach__Save_Room__Save_Point,
+        ) => (Some(350), vec![]),
+        (SpotId::Irikar_Breach__Save_Room__Upper_Area, SpotId::Irikar_Breach__Save_Room__West) => {
+            (Some(1403), vec![])
+        }
+        (SpotId::Irikar_Breach__Save_Room__West, SpotId::Irikar_Breach__Save_Room__Save_Point) => {
+            (Some(1491), vec![])
         }
         (SpotId::Irikar__Hub__Bowl_Hole, SpotId::Irikar__Hub__Sat_Tower_Middle_Ledge) => {
             (Some(1578), vec![])
@@ -36700,6 +37416,10 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
         (SpotId::Irikar__Hub__NW_Roof, SpotId::Irikar__Hub__NW_Middle_Building_Corner) => {
             (Some(1800), vec![])
         }
+        (
+            SpotId::Irikar__Hub__NW_Staircase_Upper,
+            SpotId::Irikar__Hub__NW_Middle_Building_Corner,
+        ) => (Some(2807), vec![]),
         (SpotId::Irikar__Hub__NW_Staircase_Upper, SpotId::Irikar__Hub__Portal_Stand) => {
             (Some(1754), vec![])
         }

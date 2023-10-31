@@ -172,6 +172,7 @@ pub enum AreaId {
     Irikar__Hub,
     Irikar__Sight_Room,
     Irikar_Breach__Flappy_Drone,
+    Irikar_Breach__Four_way,
     Irikar_Breach__Gauntlet,
     Irikar_Breach__Hover_Room,
     Irikar_Breach__Save_Room,
@@ -285,6 +286,7 @@ impl fmt::Display for AreaId {
             AreaId::Irikar__Hub => write!(f, "{}", "Irikar > Hub"),
             AreaId::Irikar__Sight_Room => write!(f, "{}", "Irikar > Sight Room"),
             AreaId::Irikar_Breach__Flappy_Drone => write!(f, "{}", "Irikar Breach > Flappy Drone"),
+            AreaId::Irikar_Breach__Four_way => write!(f, "{}", "Irikar Breach > Four-way"),
             AreaId::Irikar_Breach__Gauntlet => write!(f, "{}", "Irikar Breach > Gauntlet"),
             AreaId::Irikar_Breach__Hover_Room => write!(f, "{}", "Irikar Breach > Hover Room"),
             AreaId::Irikar_Breach__Save_Room => write!(f, "{}", "Irikar Breach > Save Room"),
@@ -389,6 +391,7 @@ impl std::str::FromStr for AreaId {
             "Irikar > Hub" => Ok(AreaId::Irikar__Hub),
             "Irikar > Sight Room" => Ok(AreaId::Irikar__Sight_Room),
             "Irikar Breach > Flappy Drone" => Ok(AreaId::Irikar_Breach__Flappy_Drone),
+            "Irikar Breach > Four-way" => Ok(AreaId::Irikar_Breach__Four_way),
             "Irikar Breach > Gauntlet" => Ok(AreaId::Irikar_Breach__Gauntlet),
             "Irikar Breach > Hover Room" => Ok(AreaId::Irikar_Breach__Hover_Room),
             "Irikar Breach > Save Room" => Ok(AreaId::Irikar_Breach__Save_Room),
@@ -1253,7 +1256,21 @@ pub enum SpotId {
     Irikar__Sight_Room__Lower_Ledge,
     Irikar__Sight_Room__Portal,
     Irikar__Sight_Room__West_24,
+    Irikar_Breach__Flappy_Drone__Initial_Drop,
+    Irikar_Breach__Flappy_Drone__Passage_Corner,
+    Irikar_Breach__Flappy_Drone__Pillar_Underside,
+    Irikar_Breach__Flappy_Drone__Side,
+    Irikar_Breach__Flappy_Drone__South,
+    Irikar_Breach__Flappy_Drone__Top_Pillar,
+    Irikar_Breach__Flappy_Drone__Upper_Valley_Left,
+    Irikar_Breach__Flappy_Drone__Upper_Valley_Right,
     Irikar_Breach__Flappy_Drone__West_Door,
+    Irikar_Breach__Flappy_Drone__Zigzag_Bottom,
+    Irikar_Breach__Four_way__East,
+    Irikar_Breach__Four_way__Ledge,
+    Irikar_Breach__Four_way__North,
+    Irikar_Breach__Four_way__South,
+    Irikar_Breach__Four_way__West,
     Irikar_Breach__Gauntlet__East_22,
     Irikar_Breach__Gauntlet__Hidden_Path_Bottom,
     Irikar_Breach__Gauntlet__Hidden_Path_Lower_Entry,
@@ -1267,6 +1284,8 @@ pub enum SpotId {
     Irikar_Breach__Hover_Room__East,
     Irikar_Breach__Hover_Room__West,
     Irikar_Breach__Save_Room__Save_Point,
+    Irikar_Breach__Save_Room__Upper_Area,
+    Irikar_Breach__Save_Room__West,
     Menu__Upgrade_Menu__Combat,
     Menu__Upgrade_Menu__Drone,
     Menu__Upgrade_Menu__Infection,
@@ -3329,8 +3348,50 @@ impl fmt::Display for SpotId {
             }
             SpotId::Irikar__Sight_Room__Portal => write!(f, "{}", "Irikar > Sight Room > Portal"),
             SpotId::Irikar__Sight_Room__West_24 => write!(f, "{}", "Irikar > Sight Room > West 24"),
+            SpotId::Irikar_Breach__Flappy_Drone__Initial_Drop => {
+                write!(f, "{}", "Irikar Breach > Flappy Drone > Initial Drop")
+            }
+            SpotId::Irikar_Breach__Flappy_Drone__Passage_Corner => {
+                write!(f, "{}", "Irikar Breach > Flappy Drone > Passage Corner")
+            }
+            SpotId::Irikar_Breach__Flappy_Drone__Pillar_Underside => {
+                write!(f, "{}", "Irikar Breach > Flappy Drone > Pillar Underside")
+            }
+            SpotId::Irikar_Breach__Flappy_Drone__Side => {
+                write!(f, "{}", "Irikar Breach > Flappy Drone > Side")
+            }
+            SpotId::Irikar_Breach__Flappy_Drone__South => {
+                write!(f, "{}", "Irikar Breach > Flappy Drone > South")
+            }
+            SpotId::Irikar_Breach__Flappy_Drone__Top_Pillar => {
+                write!(f, "{}", "Irikar Breach > Flappy Drone > Top Pillar")
+            }
+            SpotId::Irikar_Breach__Flappy_Drone__Upper_Valley_Left => {
+                write!(f, "{}", "Irikar Breach > Flappy Drone > Upper Valley Left")
+            }
+            SpotId::Irikar_Breach__Flappy_Drone__Upper_Valley_Right => {
+                write!(f, "{}", "Irikar Breach > Flappy Drone > Upper Valley Right")
+            }
             SpotId::Irikar_Breach__Flappy_Drone__West_Door => {
                 write!(f, "{}", "Irikar Breach > Flappy Drone > West Door")
+            }
+            SpotId::Irikar_Breach__Flappy_Drone__Zigzag_Bottom => {
+                write!(f, "{}", "Irikar Breach > Flappy Drone > Zigzag Bottom")
+            }
+            SpotId::Irikar_Breach__Four_way__East => {
+                write!(f, "{}", "Irikar Breach > Four-way > East")
+            }
+            SpotId::Irikar_Breach__Four_way__Ledge => {
+                write!(f, "{}", "Irikar Breach > Four-way > Ledge")
+            }
+            SpotId::Irikar_Breach__Four_way__North => {
+                write!(f, "{}", "Irikar Breach > Four-way > North")
+            }
+            SpotId::Irikar_Breach__Four_way__South => {
+                write!(f, "{}", "Irikar Breach > Four-way > South")
+            }
+            SpotId::Irikar_Breach__Four_way__West => {
+                write!(f, "{}", "Irikar Breach > Four-way > West")
             }
             SpotId::Irikar_Breach__Gauntlet__East_22 => {
                 write!(f, "{}", "Irikar Breach > Gauntlet > East 22")
@@ -3376,6 +3437,12 @@ impl fmt::Display for SpotId {
             }
             SpotId::Irikar_Breach__Save_Room__Save_Point => {
                 write!(f, "{}", "Irikar Breach > Save Room > Save Point")
+            }
+            SpotId::Irikar_Breach__Save_Room__Upper_Area => {
+                write!(f, "{}", "Irikar Breach > Save Room > Upper Area")
+            }
+            SpotId::Irikar_Breach__Save_Room__West => {
+                write!(f, "{}", "Irikar Breach > Save Room > West")
             }
             SpotId::Menu__Upgrade_Menu__Combat => write!(f, "{}", "Menu > Upgrade Menu > Combat"),
             SpotId::Menu__Upgrade_Menu__Drone => write!(f, "{}", "Menu > Upgrade Menu > Drone"),
@@ -4709,9 +4776,39 @@ impl std::str::FromStr for SpotId {
             "Irikar > Sight Room > Lower Ledge" => Ok(SpotId::Irikar__Sight_Room__Lower_Ledge),
             "Irikar > Sight Room > Portal" => Ok(SpotId::Irikar__Sight_Room__Portal),
             "Irikar > Sight Room > West 24" => Ok(SpotId::Irikar__Sight_Room__West_24),
+            "Irikar Breach > Flappy Drone > Initial Drop" => {
+                Ok(SpotId::Irikar_Breach__Flappy_Drone__Initial_Drop)
+            }
+            "Irikar Breach > Flappy Drone > Passage Corner" => {
+                Ok(SpotId::Irikar_Breach__Flappy_Drone__Passage_Corner)
+            }
+            "Irikar Breach > Flappy Drone > Pillar Underside" => {
+                Ok(SpotId::Irikar_Breach__Flappy_Drone__Pillar_Underside)
+            }
+            "Irikar Breach > Flappy Drone > Side" => Ok(SpotId::Irikar_Breach__Flappy_Drone__Side),
+            "Irikar Breach > Flappy Drone > South" => {
+                Ok(SpotId::Irikar_Breach__Flappy_Drone__South)
+            }
+            "Irikar Breach > Flappy Drone > Top Pillar" => {
+                Ok(SpotId::Irikar_Breach__Flappy_Drone__Top_Pillar)
+            }
+            "Irikar Breach > Flappy Drone > Upper Valley Left" => {
+                Ok(SpotId::Irikar_Breach__Flappy_Drone__Upper_Valley_Left)
+            }
+            "Irikar Breach > Flappy Drone > Upper Valley Right" => {
+                Ok(SpotId::Irikar_Breach__Flappy_Drone__Upper_Valley_Right)
+            }
             "Irikar Breach > Flappy Drone > West Door" => {
                 Ok(SpotId::Irikar_Breach__Flappy_Drone__West_Door)
             }
+            "Irikar Breach > Flappy Drone > Zigzag Bottom" => {
+                Ok(SpotId::Irikar_Breach__Flappy_Drone__Zigzag_Bottom)
+            }
+            "Irikar Breach > Four-way > East" => Ok(SpotId::Irikar_Breach__Four_way__East),
+            "Irikar Breach > Four-way > Ledge" => Ok(SpotId::Irikar_Breach__Four_way__Ledge),
+            "Irikar Breach > Four-way > North" => Ok(SpotId::Irikar_Breach__Four_way__North),
+            "Irikar Breach > Four-way > South" => Ok(SpotId::Irikar_Breach__Four_way__South),
+            "Irikar Breach > Four-way > West" => Ok(SpotId::Irikar_Breach__Four_way__West),
             "Irikar Breach > Gauntlet > East 22" => Ok(SpotId::Irikar_Breach__Gauntlet__East_22),
             "Irikar Breach > Gauntlet > Hidden Path Bottom" => {
                 Ok(SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Bottom)
@@ -4743,6 +4840,10 @@ impl std::str::FromStr for SpotId {
             "Irikar Breach > Save Room > Save Point" => {
                 Ok(SpotId::Irikar_Breach__Save_Room__Save_Point)
             }
+            "Irikar Breach > Save Room > Upper Area" => {
+                Ok(SpotId::Irikar_Breach__Save_Room__Upper_Area)
+            }
+            "Irikar Breach > Save Room > West" => Ok(SpotId::Irikar_Breach__Save_Room__West),
             "Menu > Upgrade Menu > Combat" => Ok(SpotId::Menu__Upgrade_Menu__Combat),
             "Menu > Upgrade Menu > Drone" => Ok(SpotId::Menu__Upgrade_Menu__Drone),
             "Menu > Upgrade Menu > Infection" => Ok(SpotId::Menu__Upgrade_Menu__Infection),
@@ -6664,13 +6765,18 @@ pub enum ExitId {
     Irikar__Hub__East_Rim__ex__Sat_Tower_Roof_West_1,
     Irikar__Hub__NW_Staircase_Upper__ex__NW_Bowl_Edifice_1,
     Irikar__Hub__NW_Staircase_Upper__ex__NW_Bowl_Edifice_2,
-    Irikar__Hub__NW_Staircase_Upper__ex__NW_Middle_Building_Corner_1,
     Irikar__Hub__Sat_Tower_East_24__ex__Sight_Room__West_24_1,
     Irikar__Hub__Sat_Tower_Floating_Platform__ex__Sat_Tower_Top_Ledge_1,
     Irikar__Hub__Sat_Tower_Middle_Ledge__ex__Sat_Tower_Floating_Platform_1,
     Irikar__Hub__Save_Point__ex__Bowl_Hole_1,
     Irikar__Hub__West_Rim__ex__East_Rim_1,
     Irikar__Sight_Room__West_24__ex__Hub__Sat_Tower_East_24_1,
+    Irikar_Breach__Flappy_Drone__Initial_Drop__ex__Pillar_Underside_1,
+    Irikar_Breach__Flappy_Drone__Pillar_Underside__ex__Top_Pillar_1,
+    Irikar_Breach__Flappy_Drone__South__ex__Four_way__North_1,
+    Irikar_Breach__Flappy_Drone__Top_Pillar__ex__Pillar_Underside_1,
+    Irikar_Breach__Flappy_Drone__Upper_Valley_Right__ex__Top_Pillar_1,
+    Irikar_Breach__Flappy_Drone__West_Door__ex__Hover_Room__East_1,
     Irikar_Breach__Gauntlet__East_22__ex__Hover_Room__West_1,
     Irikar_Breach__Gauntlet__Hidden_Path_Reward__ex__Hidden_Path_Top_Ledge_1,
     Irikar_Breach__Gauntlet__Save_Point__ex__Hidden_Path_Upper_Entry_1,
@@ -6681,6 +6787,7 @@ pub enum ExitId {
     Irikar_Breach__Hover_Room__East__ex__West_1,
     Irikar_Breach__Hover_Room__West__ex__East_1,
     Irikar_Breach__Hover_Room__West__ex__Gauntlet__East_22_1,
+    Irikar_Breach__Save_Room__West__ex__Four_way__East_1,
     Menu__Upgrade_Menu__Combat__ex__Drone_1,
     Menu__Upgrade_Menu__Combat__ex__Infection_1,
     Menu__Upgrade_Menu__Combat__ex__Physiology_1,
@@ -7383,13 +7490,18 @@ impl fmt::Display for ExitId {
             ExitId::Irikar__Hub__East_Rim__ex__Sat_Tower_Roof_West_1 => write!(f, "{}", "Irikar > Hub > East Rim ==> Sat Tower Roof West (1)"),
             ExitId::Irikar__Hub__NW_Staircase_Upper__ex__NW_Bowl_Edifice_1 => write!(f, "{}", "Irikar > Hub > NW Staircase Upper ==> NW Bowl Edifice (1)"),
             ExitId::Irikar__Hub__NW_Staircase_Upper__ex__NW_Bowl_Edifice_2 => write!(f, "{}", "Irikar > Hub > NW Staircase Upper ==> NW Bowl Edifice (2)"),
-            ExitId::Irikar__Hub__NW_Staircase_Upper__ex__NW_Middle_Building_Corner_1 => write!(f, "{}", "Irikar > Hub > NW Staircase Upper ==> NW Middle Building Corner (1)"),
             ExitId::Irikar__Hub__Sat_Tower_East_24__ex__Sight_Room__West_24_1 => write!(f, "{}", "Irikar > Hub > Sat Tower East 24 ==> Sight Room > West 24 (1)"),
             ExitId::Irikar__Hub__Sat_Tower_Floating_Platform__ex__Sat_Tower_Top_Ledge_1 => write!(f, "{}", "Irikar > Hub > Sat Tower Floating Platform ==> Sat Tower Top Ledge (1)"),
             ExitId::Irikar__Hub__Sat_Tower_Middle_Ledge__ex__Sat_Tower_Floating_Platform_1 => write!(f, "{}", "Irikar > Hub > Sat Tower Middle Ledge ==> Sat Tower Floating Platform (1)"),
             ExitId::Irikar__Hub__Save_Point__ex__Bowl_Hole_1 => write!(f, "{}", "Irikar > Hub > Save Point ==> Bowl Hole (1)"),
             ExitId::Irikar__Hub__West_Rim__ex__East_Rim_1 => write!(f, "{}", "Irikar > Hub > West Rim ==> East Rim (1)"),
             ExitId::Irikar__Sight_Room__West_24__ex__Hub__Sat_Tower_East_24_1 => write!(f, "{}", "Irikar > Sight Room > West 24 ==> Hub > Sat Tower East 24 (1)"),
+            ExitId::Irikar_Breach__Flappy_Drone__Initial_Drop__ex__Pillar_Underside_1 => write!(f, "{}", "Irikar Breach > Flappy Drone > Initial Drop ==> Pillar Underside (1)"),
+            ExitId::Irikar_Breach__Flappy_Drone__Pillar_Underside__ex__Top_Pillar_1 => write!(f, "{}", "Irikar Breach > Flappy Drone > Pillar Underside ==> Top Pillar (1)"),
+            ExitId::Irikar_Breach__Flappy_Drone__South__ex__Four_way__North_1 => write!(f, "{}", "Irikar Breach > Flappy Drone > South ==> Four-way > North (1)"),
+            ExitId::Irikar_Breach__Flappy_Drone__Top_Pillar__ex__Pillar_Underside_1 => write!(f, "{}", "Irikar Breach > Flappy Drone > Top Pillar ==> Pillar Underside (1)"),
+            ExitId::Irikar_Breach__Flappy_Drone__Upper_Valley_Right__ex__Top_Pillar_1 => write!(f, "{}", "Irikar Breach > Flappy Drone > Upper Valley Right ==> Top Pillar (1)"),
+            ExitId::Irikar_Breach__Flappy_Drone__West_Door__ex__Hover_Room__East_1 => write!(f, "{}", "Irikar Breach > Flappy Drone > West Door ==> Hover Room > East (1)"),
             ExitId::Irikar_Breach__Gauntlet__East_22__ex__Hover_Room__West_1 => write!(f, "{}", "Irikar Breach > Gauntlet > East 22 ==> Hover Room > West (1)"),
             ExitId::Irikar_Breach__Gauntlet__Hidden_Path_Reward__ex__Hidden_Path_Top_Ledge_1 => write!(f, "{}", "Irikar Breach > Gauntlet > Hidden Path Reward ==> Hidden Path Top Ledge (1)"),
             ExitId::Irikar_Breach__Gauntlet__Save_Point__ex__Hidden_Path_Upper_Entry_1 => write!(f, "{}", "Irikar Breach > Gauntlet > Save Point ==> Hidden Path Upper Entry (1)"),
@@ -7400,6 +7512,7 @@ impl fmt::Display for ExitId {
             ExitId::Irikar_Breach__Hover_Room__East__ex__West_1 => write!(f, "{}", "Irikar Breach > Hover Room > East ==> West (1)"),
             ExitId::Irikar_Breach__Hover_Room__West__ex__East_1 => write!(f, "{}", "Irikar Breach > Hover Room > West ==> East (1)"),
             ExitId::Irikar_Breach__Hover_Room__West__ex__Gauntlet__East_22_1 => write!(f, "{}", "Irikar Breach > Hover Room > West ==> Gauntlet > East 22 (1)"),
+            ExitId::Irikar_Breach__Save_Room__West__ex__Four_way__East_1 => write!(f, "{}", "Irikar Breach > Save Room > West ==> Four-way > East (1)"),
             ExitId::Menu__Upgrade_Menu__Combat__ex__Drone_1 => write!(f, "{}", "Menu > Upgrade Menu > Combat ==> Drone (1)"),
             ExitId::Menu__Upgrade_Menu__Combat__ex__Infection_1 => write!(f, "{}", "Menu > Upgrade Menu > Combat ==> Infection (1)"),
             ExitId::Menu__Upgrade_Menu__Combat__ex__Physiology_1 => write!(f, "{}", "Menu > Upgrade Menu > Combat ==> Physiology (1)"),
@@ -8107,13 +8220,18 @@ impl std::str::FromStr for ExitId {
             "Irikar > Hub > East Rim ==> Sat Tower Roof West (1)" => Ok(ExitId::Irikar__Hub__East_Rim__ex__Sat_Tower_Roof_West_1),
             "Irikar > Hub > NW Staircase Upper ==> NW Bowl Edifice (1)" => Ok(ExitId::Irikar__Hub__NW_Staircase_Upper__ex__NW_Bowl_Edifice_1),
             "Irikar > Hub > NW Staircase Upper ==> NW Bowl Edifice (2)" => Ok(ExitId::Irikar__Hub__NW_Staircase_Upper__ex__NW_Bowl_Edifice_2),
-            "Irikar > Hub > NW Staircase Upper ==> NW Middle Building Corner (1)" => Ok(ExitId::Irikar__Hub__NW_Staircase_Upper__ex__NW_Middle_Building_Corner_1),
             "Irikar > Hub > Sat Tower East 24 ==> Sight Room > West 24 (1)" => Ok(ExitId::Irikar__Hub__Sat_Tower_East_24__ex__Sight_Room__West_24_1),
             "Irikar > Hub > Sat Tower Floating Platform ==> Sat Tower Top Ledge (1)" => Ok(ExitId::Irikar__Hub__Sat_Tower_Floating_Platform__ex__Sat_Tower_Top_Ledge_1),
             "Irikar > Hub > Sat Tower Middle Ledge ==> Sat Tower Floating Platform (1)" => Ok(ExitId::Irikar__Hub__Sat_Tower_Middle_Ledge__ex__Sat_Tower_Floating_Platform_1),
             "Irikar > Hub > Save Point ==> Bowl Hole (1)" => Ok(ExitId::Irikar__Hub__Save_Point__ex__Bowl_Hole_1),
             "Irikar > Hub > West Rim ==> East Rim (1)" => Ok(ExitId::Irikar__Hub__West_Rim__ex__East_Rim_1),
             "Irikar > Sight Room > West 24 ==> Hub > Sat Tower East 24 (1)" => Ok(ExitId::Irikar__Sight_Room__West_24__ex__Hub__Sat_Tower_East_24_1),
+            "Irikar Breach > Flappy Drone > Initial Drop ==> Pillar Underside (1)" => Ok(ExitId::Irikar_Breach__Flappy_Drone__Initial_Drop__ex__Pillar_Underside_1),
+            "Irikar Breach > Flappy Drone > Pillar Underside ==> Top Pillar (1)" => Ok(ExitId::Irikar_Breach__Flappy_Drone__Pillar_Underside__ex__Top_Pillar_1),
+            "Irikar Breach > Flappy Drone > South ==> Four-way > North (1)" => Ok(ExitId::Irikar_Breach__Flappy_Drone__South__ex__Four_way__North_1),
+            "Irikar Breach > Flappy Drone > Top Pillar ==> Pillar Underside (1)" => Ok(ExitId::Irikar_Breach__Flappy_Drone__Top_Pillar__ex__Pillar_Underside_1),
+            "Irikar Breach > Flappy Drone > Upper Valley Right ==> Top Pillar (1)" => Ok(ExitId::Irikar_Breach__Flappy_Drone__Upper_Valley_Right__ex__Top_Pillar_1),
+            "Irikar Breach > Flappy Drone > West Door ==> Hover Room > East (1)" => Ok(ExitId::Irikar_Breach__Flappy_Drone__West_Door__ex__Hover_Room__East_1),
             "Irikar Breach > Gauntlet > East 22 ==> Hover Room > West (1)" => Ok(ExitId::Irikar_Breach__Gauntlet__East_22__ex__Hover_Room__West_1),
             "Irikar Breach > Gauntlet > Hidden Path Reward ==> Hidden Path Top Ledge (1)" => Ok(ExitId::Irikar_Breach__Gauntlet__Hidden_Path_Reward__ex__Hidden_Path_Top_Ledge_1),
             "Irikar Breach > Gauntlet > Save Point ==> Hidden Path Upper Entry (1)" => Ok(ExitId::Irikar_Breach__Gauntlet__Save_Point__ex__Hidden_Path_Upper_Entry_1),
@@ -8124,6 +8242,7 @@ impl std::str::FromStr for ExitId {
             "Irikar Breach > Hover Room > East ==> West (1)" => Ok(ExitId::Irikar_Breach__Hover_Room__East__ex__West_1),
             "Irikar Breach > Hover Room > West ==> East (1)" => Ok(ExitId::Irikar_Breach__Hover_Room__West__ex__East_1),
             "Irikar Breach > Hover Room > West ==> Gauntlet > East 22 (1)" => Ok(ExitId::Irikar_Breach__Hover_Room__West__ex__Gauntlet__East_22_1),
+            "Irikar Breach > Save Room > West ==> Four-way > East (1)" => Ok(ExitId::Irikar_Breach__Save_Room__West__ex__Four_way__East_1),
             "Menu > Upgrade Menu > Combat ==> Drone (1)" => Ok(ExitId::Menu__Upgrade_Menu__Combat__ex__Drone_1),
             "Menu > Upgrade Menu > Combat ==> Infection (1)" => Ok(ExitId::Menu__Upgrade_Menu__Combat__ex__Infection_1),
             "Menu > Upgrade Menu > Combat ==> Physiology (1)" => Ok(ExitId::Menu__Upgrade_Menu__Combat__ex__Physiology_1),

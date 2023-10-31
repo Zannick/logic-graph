@@ -25,7 +25,7 @@ areas:
         - to: Save Point
           jumps: 2
       exits:
-        - to: Four-way
+        - to: Four-way > East
           tags: [xdoor]
 
 - name: Gauntlet
@@ -136,6 +136,78 @@ areas:
   spots:
     - name: West Door
       coord: [13.1, 21.8]
+      local:
+        - to: Initial Drop
+      exits:
+        - to: Hover Room > East
+    - name: Initial Drop
+      coord: [13.2, 22.3]
+      local:
+        - to: Upper Valley Left
+        - to: Upper Valley Right
+      exits:
+        - to: Pillar Underside
+          req: $hover
+          movement: base
+    - name: Pillar Underside
+      coord: [13.3, 22.4]
+      local:
+        - to: Upper Valley Left
+        - to: Upper Valley Right
+      exits:
+        - to: Top Pillar
+          req: $hover and $hook
+          time: 1  # ?
+    - name: Upper Valley Left
+      coord: [13.2, 22.55]
+      local:
+        - to: Upper Valley Right
+        - to: Pillar Underside
+          jumps: 1
+    - name: Upper Valley Right
+      coord: [13.4, 22.55]
+      local:
+        - to: Upper Valley Left
+        - to: Pillar Underside
+          jumps: 1
+      exits:
+        - to: Top Pillar
+          req: $hover and $hook
+          time: 2  # ?
+    - name: Top Pillar
+      coord: [13.45, 22.0]
+      local:
+        - to: Upper Valley Left
+        - to: Upper Valley Right
+        - to: Zigzag Bottom
+          thru: [[13.6, 22.0], [13.6, 22.7], [13.45, 23.1], [13.525, 23.65], [13.525, 23.8]]
+      exits:
+        - to: Pillar Underside
+          req: $hover
+          movement: base
+    - name: Zigzag Bottom
+      coord: [13.3, 24.2]
+      local:
+        - to: Passage Corner
+    - name: Passage Corner
+      coord: [13.1, 24.2]
+      local:
+        - to: Side
+        - to: Zigzag Bottom
+        - to: South
+          thru: [13.1, 24.4]
+    - name: Side
+      coord: [13.1, 24.55]
+      local:
+        - to: South
+    - name: South
+      coord: [13.5, 24.8]
+      local:
+        - to: Side
+          jumps: 2
+      exits:
+        - to: Four-way > North
+          tags: [ydoor]
 
 - name: Four-way
   on_entry: $reset_old_area(^newpos)

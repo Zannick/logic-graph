@@ -245,7 +245,21 @@ pub mod data {
             SpotId::Giguna_Breach__Slingshot__Column => true,
             SpotId::Giguna_Breach__Slingshot__Ravine => true,
             SpotId::Giguna_Breach__Slingshot__West => true,
+            SpotId::Irikar_Breach__Flappy_Drone__Initial_Drop => true,
+            SpotId::Irikar_Breach__Flappy_Drone__Passage_Corner => true,
+            SpotId::Irikar_Breach__Flappy_Drone__Pillar_Underside => true,
+            SpotId::Irikar_Breach__Flappy_Drone__Side => true,
+            SpotId::Irikar_Breach__Flappy_Drone__South => true,
+            SpotId::Irikar_Breach__Flappy_Drone__Top_Pillar => true,
+            SpotId::Irikar_Breach__Flappy_Drone__Upper_Valley_Left => true,
+            SpotId::Irikar_Breach__Flappy_Drone__Upper_Valley_Right => true,
             SpotId::Irikar_Breach__Flappy_Drone__West_Door => true,
+            SpotId::Irikar_Breach__Flappy_Drone__Zigzag_Bottom => true,
+            SpotId::Irikar_Breach__Four_way__East => true,
+            SpotId::Irikar_Breach__Four_way__Ledge => true,
+            SpotId::Irikar_Breach__Four_way__North => true,
+            SpotId::Irikar_Breach__Four_way__South => true,
+            SpotId::Irikar_Breach__Four_way__West => true,
             SpotId::Irikar_Breach__Gauntlet__East_22 => true,
             SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Bottom => true,
             SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Lower_Entry => true,
@@ -259,6 +273,8 @@ pub mod data {
             SpotId::Irikar_Breach__Hover_Room__East => true,
             SpotId::Irikar_Breach__Hover_Room__West => true,
             SpotId::Irikar_Breach__Save_Room__Save_Point => true,
+            SpotId::Irikar_Breach__Save_Room__Upper_Area => true,
+            SpotId::Irikar_Breach__Save_Room__West => true,
             _ => false,
         }
     }
@@ -4116,6 +4132,11 @@ impl context::Ctx for Context {
                 }
             }
             AreaId::Irikar_Breach__Flappy_Drone => {
+                if get_area(self.position) != area {
+                    rules::action_reset_old_area__newpos(self, pos);
+                }
+            }
+            AreaId::Irikar_Breach__Four_way => {
                 if get_area(self.position) != area {
                     rules::action_reset_old_area__newpos(self, pos);
                 }

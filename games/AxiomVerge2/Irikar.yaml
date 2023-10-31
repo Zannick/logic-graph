@@ -198,6 +198,7 @@ areas:
       local:
         - to: Portal Stand
           jumps_down: 2
+        - to: NW Middle Building Corner
       exits:
         - to: NW Bowl Edifice
           req: $grab
@@ -207,7 +208,6 @@ areas:
           req: $hook
           movement: base
           jumps: 1
-        - to: NW Middle Building Corner
     - name: Portal Stand
       coord: [11.3, 21.7]
       data:

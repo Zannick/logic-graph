@@ -996,6 +996,8 @@ end
 subgraph Irikar_Breach
     subgraph Irikar_Breach__Save_Room[Save Room]
         Irikar_Breach__Save_Room__Save_Point(Save Point);
+        Irikar_Breach__Save_Room__Upper_Area(Upper Area);
+        Irikar_Breach__Save_Room__West(West);
     end
     subgraph Irikar_Breach__Gauntlet[Gauntlet]
         Irikar_Breach__Gauntlet__Save_Point(Save Point);
@@ -1015,6 +1017,22 @@ subgraph Irikar_Breach
     end
     subgraph Irikar_Breach__Flappy_Drone[Flappy Drone]
         Irikar_Breach__Flappy_Drone__West_Door(West Door);
+        Irikar_Breach__Flappy_Drone__Initial_Drop(Initial Drop);
+        Irikar_Breach__Flappy_Drone__Pillar_Underside(Pillar Underside);
+        Irikar_Breach__Flappy_Drone__Upper_Valley_Left(Upper Valley Left);
+        Irikar_Breach__Flappy_Drone__Upper_Valley_Right(Upper Valley Right);
+        Irikar_Breach__Flappy_Drone__Top_Pillar(Top Pillar);
+        Irikar_Breach__Flappy_Drone__Zigzag_Bottom(Zigzag Bottom);
+        Irikar_Breach__Flappy_Drone__Passage_Corner(Passage Corner);
+        Irikar_Breach__Flappy_Drone__Side(Side);
+        Irikar_Breach__Flappy_Drone__South(South);
+    end
+    subgraph Irikar_Breach__Four_way[Four-way]
+        Irikar_Breach__Four_way__North(North);
+        Irikar_Breach__Four_way__South(South);
+        Irikar_Breach__Four_way__Ledge(Ledge);
+        Irikar_Breach__Four_way__East(East);
+        Irikar_Breach__Four_way__West(West);
     end
 end
 subgraph Irikar
@@ -1503,13 +1521,18 @@ Glacier__Vertical_Room__Mid_9 --> Glacier__Vertical_Room__Peak
 Glacier__Vertical_Room__Past_Gate <--> Glacier__Vertical_Room__Under_Switch
 Glacier__Vertical_Room__Peak --> Glacier__Vertical_Room__West_8
 Glacier__Vertical_Room__Under_Switch --> Glacier__Vertical_Room__Mid_9
+Irikar_Breach__Flappy_Drone__Initial_Drop --> Irikar_Breach__Flappy_Drone__Pillar_Underside
+Irikar_Breach__Flappy_Drone__Pillar_Underside <--> Irikar_Breach__Flappy_Drone__Top_Pillar
+Irikar_Breach__Flappy_Drone__South --> Irikar_Breach__Four_way__North
+Irikar_Breach__Flappy_Drone__Upper_Valley_Right --> Irikar_Breach__Flappy_Drone__Top_Pillar
+Irikar_Breach__Flappy_Drone__West_Door <--> Irikar_Breach__Hover_Room__East
 Irikar_Breach__Gauntlet__East_22 <--> Irikar_Breach__Hover_Room__West
 Irikar_Breach__Gauntlet__Hidden_Path_Reward --> Irikar_Breach__Gauntlet__Hidden_Path_Top_Ledge
 Irikar_Breach__Gauntlet__Save_Point --> Irikar_Breach__Gauntlet__Hidden_Path_Upper_Entry
 Irikar_Breach__Hover_Room__Bottom --> Irikar_Breach__Hover_Room__East
 Irikar_Breach__Hover_Room__Bottom --> Irikar_Breach__Hover_Room__West
-Irikar_Breach__Hover_Room__East --> Irikar_Breach__Flappy_Drone__West_Door
 Irikar_Breach__Hover_Room__East <--> Irikar_Breach__Hover_Room__West
+Irikar_Breach__Save_Room__West --> Irikar_Breach__Four_way__East
 Irikar__Hub__Bowl_Middle_Ledge --> Irikar__Hub__Bowl_Top_Platform
 Irikar__Hub__Bowl_Middle_Platform_Center --> Irikar__Hub__Bowl_Middle_Ledge
 Irikar__Hub__Bowl_Middle_Platform_West --> Irikar__Hub__Bowl_Middle_Ledge
@@ -1517,7 +1540,6 @@ Irikar__Hub__Bowl_Platform_3 --> Irikar__Hub__Bowl_Middle_Platform_Center
 Irikar__Hub__Bowl_Top_Platform --> Irikar__Hub__West_Rim
 Irikar__Hub__East_Rim --> Irikar__Hub__Sat_Tower_Roof_West
 Irikar__Hub__NW_Staircase_Upper --> Irikar__Hub__NW_Bowl_Edifice
-Irikar__Hub__NW_Staircase_Upper --> Irikar__Hub__NW_Middle_Building_Corner
 Irikar__Hub__Sat_Tower_East_24 <--> Irikar__Sight_Room__West_24
 Irikar__Hub__Sat_Tower_Floating_Platform --> Irikar__Hub__Sat_Tower_Top_Ledge
 Irikar__Hub__Sat_Tower_Middle_Ledge --> Irikar__Hub__Sat_Tower_Floating_Platform
