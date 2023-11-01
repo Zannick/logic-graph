@@ -230,6 +230,68 @@ areas:
       coord: [10.9, 22.9]
     #endregion
 
+    #region Royal Storage
+    - name: Royal Storage South
+      coord: [13.5, 25.8]
+      local:
+        - to: Dagger Altar
+          jumps: 1
+      exits:
+        - to: Basement Portal > North
+          tags: [ydoor]
+    - name: Dagger Altar
+      coord: [12.75, 25.6]
+      local:
+        - to: Royal Storage South
+        - to: Royal Storage By Wall
+      locations:
+        - name: Weapon
+          item: Royal_Dagger
+          tags: [standing]
+    - name: Royal Storage By Wall
+      coord: [12.2, 25.7]
+      local:
+        - to: Dagger Altar
+      locations:
+        # TODO: collect two items with two different canons at the same time?
+        - name: Shockwave Wall
+          item: Irikar_Royal_Storage_Wall
+          canon: Irikar_Royal_Storage_Wall
+          price: 100
+          tags: [shockwave, event]
+      exits:
+        - to: Royal Storage in Wall
+          req: Irikar_Royal_Storage_Wall
+          movement: base
+      hybrid:
+        - name: Mist into Wall
+          to: Royal Storage in Wall
+          item: Irikar_Royal_Storage_Wall
+          req: not Irikar_Royal_Storage_Wall and Mist_Upgrade
+          price: 20
+          movement: mist2
+          tags: [event]
+      actions:
+        # if the item is a flask or urn, this will collect it
+        - name: Shockwave Wall
+          req: not Irikar_Royal_Storage_Wall and $shockwave
+          do: >
+            $collect(Irikar_Royal_Storage_Wall);
+            $collect(Flask);
+            $visit(`Irikar > Hub > Royal Storage in Wall > Item`);
+          price: 100
+          tags: [shockwave]
+    - name: Royal Storage in Wall
+      coord: [12.1, 25.7]
+      local:
+        - to: Royal Storage By Wall
+      locations:
+        - name: Item
+          item: Flask
+          canon: Irikar_Royal_Storage_Flask
+          tags: [flask]
+    #endregion
+
 - name: Sight Room
   on_entry: $reset_old_area(^newpos)
   data:
@@ -276,3 +338,51 @@ areas:
   spots:
     - name: Empty Pedestal
       coord: [14.525, 26.7]
+      local:
+        - to: Corner Core
+        - to: West
+    - name: Corner Core
+      coord: [14.8, 26.7]
+      local:
+        - to: Empty Pedestal
+      locations:
+        - name: Core
+          item: Power_Core
+          req: $more_refills
+          tags: [standing]
+    - name: West
+      coord: [14.05, 26.8]
+      local:
+        - to: Empty Pedestal
+          jumps: 1
+      exits:
+        - to: Basement Portal > East 27
+          tags: [xshift]
+
+- name: Basement Portal
+  on_entry: $reset_old_area(^newpos)
+  data:
+    portal_default: Irikar Breach > Basement Save > Save Point
+  reset:
+    _platform_moved: false
+  spots:
+    - name: East 27
+      coord: [13.95, 26.8]
+    - name: Ledge
+      coord: [12.7, 26.9]
+    - name: Moving Platform Start
+      coord: [12.3, 27.2]
+    - name: Westmost Platform
+      coord: [12.3, 26.6]
+    - name: Middle Platform
+      coord: [12.6, 26.5]
+    - name: East Platform
+      coord: [13.5, 26.35]
+    - name: North
+      coord: [13.5, 26.2]
+
+- name: Basement Pipes
+  on_entry: $reset_old_area(^newpos)
+  spots:
+    - name: East 28
+      coord: [11.95, 27.55]

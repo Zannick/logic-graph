@@ -241,7 +241,7 @@ helpers:
     [Boomerang, Power_Matrix]
   $all_urns:itemList: >
     [Amashilama, Ledge_Grab, Infect, Remote_Drone, Shockwave, Wall_Climb, Slingshot_Hook, Breach_Sight]
-  # To be added: 4 Flask, 2 Big_Flask, Dangerous_Ideas, Double_Axe, Drone_Hover
+  # To be added: 5 Flask, 2 Big_Flask, Dangerous_Ideas, Double_Axe, Drone_Hover, Royal_Dagger
 
   $save:action: ^save = ^position; ^energy = $max_energy
   $deploy_drone:action: >

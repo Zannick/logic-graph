@@ -17,7 +17,9 @@ BUILTINS = {
     '$reset_area': 'ctx.reset_area',
     '$get_region': 'get_region',
     '$get_area': 'get_area',
+    # TODO: Add a collect_from builtin. Note we need the world for this.
     '$skip': 'ctx.skip',
+    '$visit': 'ctx.visit',
     '$count': 'ctx.count',
     '$add_item': 'ctx.add_item',
     '$default': 'Default::default()',

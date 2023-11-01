@@ -5399,6 +5399,26 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
             SpotId::Irikar_Breach__Worm_Rave__South,
             SpotId::Irikar_Breach__Worm_Rave__Corner,
         ) => 1052,
+        (
+            [false],
+            SpotId::Irikar__Abandoned_Room__Corner_Core,
+            SpotId::Irikar__Abandoned_Room__Empty_Pedestal,
+        ) => 964,
+        (
+            [false],
+            SpotId::Irikar__Abandoned_Room__Empty_Pedestal,
+            SpotId::Irikar__Abandoned_Room__Corner_Core,
+        ) => 964,
+        (
+            [false],
+            SpotId::Irikar__Abandoned_Room__Empty_Pedestal,
+            SpotId::Irikar__Abandoned_Room__West,
+        ) => 1666,
+        (
+            [false],
+            SpotId::Irikar__Abandoned_Room__West,
+            SpotId::Irikar__Abandoned_Room__Empty_Pedestal,
+        ) => 1666,
         ([false], SpotId::Irikar__Hub__Bowl_Hole, SpotId::Irikar__Hub__Sat_Tower_Middle_Ledge) => {
             1578
         }
@@ -5430,6 +5450,14 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
             SpotId::Irikar__Hub__Bowl_Top_Platform,
             SpotId::Irikar__Hub__Bowl_Middle_Ledge,
         ) => 699,
+        (
+            [false],
+            SpotId::Irikar__Hub__Dagger_Altar,
+            SpotId::Irikar__Hub__Royal_Storage_By_Wall,
+        ) => 1929,
+        ([false], SpotId::Irikar__Hub__Dagger_Altar, SpotId::Irikar__Hub__Royal_Storage_South) => {
+            2631
+        }
         ([false], SpotId::Irikar__Hub__East_Rim, SpotId::Irikar__Hub__Bowl_Hole) => 2249,
         ([false], SpotId::Irikar__Hub__East_Rim, SpotId::Irikar__Hub__Save_Point) => 2450,
         ([false], SpotId::Irikar__Hub__NW_Bowl_Edifice, SpotId::Irikar__Hub__NW_Roof) => 1929,
@@ -5484,6 +5512,14 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
         ([false], SpotId::Irikar__Hub__Portal_Stand, SpotId::Irikar__Hub__NW_Staircase_Upper) => {
             2400
         }
+        ([false], SpotId::Irikar__Hub__Royal_Storage_South, SpotId::Irikar__Hub__Dagger_Altar) => {
+            2631
+        }
+        (
+            [false],
+            SpotId::Irikar__Hub__Royal_Storage_in_Wall,
+            SpotId::Irikar__Hub__Royal_Storage_By_Wall,
+        ) => 350,
         (
             [false],
             SpotId::Irikar__Hub__Sat_Tower_Bottom,
@@ -10898,6 +10934,26 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
             SpotId::Irikar_Breach__Worm_Rave__South,
             SpotId::Irikar_Breach__Worm_Rave__Corner,
         ) => 1052,
+        (
+            [true],
+            SpotId::Irikar__Abandoned_Room__Corner_Core,
+            SpotId::Irikar__Abandoned_Room__Empty_Pedestal,
+        ) => 964,
+        (
+            [true],
+            SpotId::Irikar__Abandoned_Room__Empty_Pedestal,
+            SpotId::Irikar__Abandoned_Room__Corner_Core,
+        ) => 964,
+        (
+            [true],
+            SpotId::Irikar__Abandoned_Room__Empty_Pedestal,
+            SpotId::Irikar__Abandoned_Room__West,
+        ) => 1666,
+        (
+            [true],
+            SpotId::Irikar__Abandoned_Room__West,
+            SpotId::Irikar__Abandoned_Room__Empty_Pedestal,
+        ) => 1666,
         ([true], SpotId::Irikar__Hub__Bowl_Hole, SpotId::Irikar__Hub__Sat_Tower_Middle_Ledge) => {
             1578
         }
@@ -10929,6 +10985,12 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
             SpotId::Irikar__Hub__Bowl_Top_Platform,
             SpotId::Irikar__Hub__Bowl_Middle_Ledge,
         ) => 699,
+        ([true], SpotId::Irikar__Hub__Dagger_Altar, SpotId::Irikar__Hub__Royal_Storage_By_Wall) => {
+            1929
+        }
+        ([true], SpotId::Irikar__Hub__Dagger_Altar, SpotId::Irikar__Hub__Royal_Storage_South) => {
+            2631
+        }
         ([true], SpotId::Irikar__Hub__East_Rim, SpotId::Irikar__Hub__Bowl_Hole) => 2249,
         ([true], SpotId::Irikar__Hub__East_Rim, SpotId::Irikar__Hub__Save_Point) => 2450,
         ([true], SpotId::Irikar__Hub__NW_Bowl_Edifice, SpotId::Irikar__Hub__NW_Roof) => 1929,
@@ -10981,6 +11043,14 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
         ([true], SpotId::Irikar__Hub__Portal_Stand, SpotId::Irikar__Hub__NW_Staircase_Upper) => {
             2400
         }
+        ([true], SpotId::Irikar__Hub__Royal_Storage_South, SpotId::Irikar__Hub__Dagger_Altar) => {
+            2631
+        }
+        (
+            [true],
+            SpotId::Irikar__Hub__Royal_Storage_in_Wall,
+            SpotId::Irikar__Hub__Royal_Storage_By_Wall,
+        ) => 350,
         ([true], SpotId::Irikar__Hub__Sat_Tower_Bottom, SpotId::Irikar__Hub__Sat_Tower_East_24) => {
             1929
         }
@@ -14514,6 +14584,14 @@ pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
             SpotId::Irikar__Hub__NW_Middle_Building_Corner,
             SpotId::Irikar__Hub__NW_Middle_Building_West_Entry,
         ) => true,
+        (SpotId::Irikar__Hub__Royal_Storage_South, SpotId::Irikar__Hub__Dagger_Altar) => true,
+        (SpotId::Irikar__Hub__Dagger_Altar, SpotId::Irikar__Hub__Royal_Storage_South) => true,
+        (SpotId::Irikar__Hub__Dagger_Altar, SpotId::Irikar__Hub__Royal_Storage_By_Wall) => true,
+        (SpotId::Irikar__Hub__Royal_Storage_By_Wall, SpotId::Irikar__Hub__Dagger_Altar) => true,
+        (
+            SpotId::Irikar__Hub__Royal_Storage_in_Wall,
+            SpotId::Irikar__Hub__Royal_Storage_By_Wall,
+        ) => true,
         (SpotId::Irikar__Sight_Room__West_24, SpotId::Irikar__Sight_Room__Lower_Ledge) => true,
         (SpotId::Irikar__Sight_Room__Lower_Ledge, SpotId::Irikar__Sight_Room__West_24) => true,
         (SpotId::Irikar__Sight_Room__Lower_Ledge, SpotId::Irikar__Sight_Room__Portal) => true,
@@ -14522,6 +14600,20 @@ pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
         }
         (SpotId::Irikar__Sight_Room__Portal, SpotId::Irikar__Sight_Room__Item_Pedestal) => true,
         (SpotId::Irikar__Sight_Room__Item_Pedestal, SpotId::Irikar__Sight_Room__Portal) => true,
+        (
+            SpotId::Irikar__Abandoned_Room__Empty_Pedestal,
+            SpotId::Irikar__Abandoned_Room__Corner_Core,
+        ) => true,
+        (SpotId::Irikar__Abandoned_Room__Empty_Pedestal, SpotId::Irikar__Abandoned_Room__West) => {
+            true
+        }
+        (
+            SpotId::Irikar__Abandoned_Room__Corner_Core,
+            SpotId::Irikar__Abandoned_Room__Empty_Pedestal,
+        ) => true,
+        (SpotId::Irikar__Abandoned_Room__West, SpotId::Irikar__Abandoned_Room__Empty_Pedestal) => {
+            true
+        }
         _ => false,
     }
 }
@@ -28434,6 +28526,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             1000,
         ),
         (
+            SpotId::Irikar_Breach__Basement_Save__Save_Point,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
             SpotId::Irikar_Breach__Exit_Corridor__East,
             SpotId::Irikar_Breach__Exit_Corridor__Portal_Stand,
             1315,
@@ -29179,7 +29276,82 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             1000,
         ),
         (
+            SpotId::Irikar__Abandoned_Room__Corner_Core,
             SpotId::Irikar__Abandoned_Room__Empty_Pedestal,
+            964,
+        ),
+        (
+            SpotId::Irikar__Abandoned_Room__Corner_Core,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Irikar__Abandoned_Room__Empty_Pedestal,
+            SpotId::Irikar__Abandoned_Room__Corner_Core,
+            964,
+        ),
+        (
+            SpotId::Irikar__Abandoned_Room__Empty_Pedestal,
+            SpotId::Irikar__Abandoned_Room__West,
+            1666,
+        ),
+        (
+            SpotId::Irikar__Abandoned_Room__Empty_Pedestal,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Irikar__Abandoned_Room__West,
+            SpotId::Irikar__Abandoned_Room__Empty_Pedestal,
+            1666,
+        ),
+        (
+            SpotId::Irikar__Abandoned_Room__West,
+            SpotId::Irikar__Basement_Portal__East_27,
+            1350,
+        ),
+        (
+            SpotId::Irikar__Abandoned_Room__West,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Irikar__Basement_Pipes__East_28,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Irikar__Basement_Portal__East_27,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Irikar__Basement_Portal__East_Platform,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Irikar__Basement_Portal__Ledge,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Irikar__Basement_Portal__Middle_Platform,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Irikar__Basement_Portal__Moving_Platform_Start,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Irikar__Basement_Portal__North,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Irikar__Basement_Portal__Westmost_Platform,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -29280,6 +29452,21 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Irikar__Hub__Bowl_Top_Platform,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Irikar__Hub__Dagger_Altar,
+            SpotId::Irikar__Hub__Royal_Storage_By_Wall,
+            1929,
+        ),
+        (
+            SpotId::Irikar__Hub__Dagger_Altar,
+            SpotId::Irikar__Hub__Royal_Storage_South,
+            2631,
+        ),
+        (
+            SpotId::Irikar__Hub__Dagger_Altar,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -29440,6 +29627,41 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Irikar__Hub__Portal_Stand,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Irikar__Hub__Royal_Storage_By_Wall,
+            SpotId::Irikar__Hub__Royal_Storage_in_Wall,
+            350,
+        ),
+        (
+            SpotId::Irikar__Hub__Royal_Storage_By_Wall,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Irikar__Hub__Royal_Storage_South,
+            SpotId::Irikar__Basement_Portal__North,
+            1600,
+        ),
+        (
+            SpotId::Irikar__Hub__Royal_Storage_South,
+            SpotId::Irikar__Hub__Dagger_Altar,
+            2631,
+        ),
+        (
+            SpotId::Irikar__Hub__Royal_Storage_South,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Irikar__Hub__Royal_Storage_in_Wall,
+            SpotId::Irikar__Hub__Royal_Storage_By_Wall,
+            350,
+        ),
+        (
+            SpotId::Irikar__Hub__Royal_Storage_in_Wall,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -33459,6 +33681,20 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
         (SpotId::Irikar_Breach__Worm_Rave__South, SpotId::Irikar_Breach__Worm_Rave__Corner) => {
             Some(1052)
         }
+        (
+            SpotId::Irikar__Abandoned_Room__Corner_Core,
+            SpotId::Irikar__Abandoned_Room__Empty_Pedestal,
+        ) => Some(964),
+        (
+            SpotId::Irikar__Abandoned_Room__Empty_Pedestal,
+            SpotId::Irikar__Abandoned_Room__Corner_Core,
+        ) => Some(964),
+        (SpotId::Irikar__Abandoned_Room__Empty_Pedestal, SpotId::Irikar__Abandoned_Room__West) => {
+            Some(1666)
+        }
+        (SpotId::Irikar__Abandoned_Room__West, SpotId::Irikar__Abandoned_Room__Empty_Pedestal) => {
+            Some(1666)
+        }
         (SpotId::Irikar__Hub__Bowl_Hole, SpotId::Irikar__Hub__Sat_Tower_Middle_Ledge) => Some(1578),
         (SpotId::Irikar__Hub__Bowl_Hole, SpotId::Irikar__Hub__Save_Point) => Some(1578),
         (
@@ -33480,6 +33716,10 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
         (SpotId::Irikar__Hub__Bowl_Top_Platform, SpotId::Irikar__Hub__Bowl_Middle_Ledge) => {
             Some(699)
         }
+        (SpotId::Irikar__Hub__Dagger_Altar, SpotId::Irikar__Hub__Royal_Storage_By_Wall) => {
+            Some(1929)
+        }
+        (SpotId::Irikar__Hub__Dagger_Altar, SpotId::Irikar__Hub__Royal_Storage_South) => Some(2631),
         (SpotId::Irikar__Hub__East_Rim, SpotId::Irikar__Hub__Bowl_Hole) => Some(2249),
         (SpotId::Irikar__Hub__East_Rim, SpotId::Irikar__Hub__Save_Point) => Some(2450),
         (SpotId::Irikar__Hub__NW_Bowl_Edifice, SpotId::Irikar__Hub__NW_Roof) => Some(1929),
@@ -33517,6 +33757,11 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
             Some(1052)
         }
         (SpotId::Irikar__Hub__Portal_Stand, SpotId::Irikar__Hub__NW_Staircase_Upper) => Some(2400),
+        (SpotId::Irikar__Hub__Royal_Storage_South, SpotId::Irikar__Hub__Dagger_Altar) => Some(2631),
+        (
+            SpotId::Irikar__Hub__Royal_Storage_in_Wall,
+            SpotId::Irikar__Hub__Royal_Storage_By_Wall,
+        ) => Some(350),
         (SpotId::Irikar__Hub__Sat_Tower_Bottom, SpotId::Irikar__Hub__Sat_Tower_East_24) => {
             Some(1929)
         }
@@ -38239,6 +38484,20 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
         (SpotId::Irikar_Breach__Worm_Rave__South, SpotId::Irikar_Breach__Worm_Rave__Corner) => {
             (Some(1052), vec![])
         }
+        (
+            SpotId::Irikar__Abandoned_Room__Corner_Core,
+            SpotId::Irikar__Abandoned_Room__Empty_Pedestal,
+        ) => (Some(964), vec![]),
+        (
+            SpotId::Irikar__Abandoned_Room__Empty_Pedestal,
+            SpotId::Irikar__Abandoned_Room__Corner_Core,
+        ) => (Some(964), vec![]),
+        (SpotId::Irikar__Abandoned_Room__Empty_Pedestal, SpotId::Irikar__Abandoned_Room__West) => {
+            (Some(1666), vec![])
+        }
+        (SpotId::Irikar__Abandoned_Room__West, SpotId::Irikar__Abandoned_Room__Empty_Pedestal) => {
+            (Some(1666), vec![])
+        }
         (SpotId::Irikar__Hub__Bowl_Hole, SpotId::Irikar__Hub__Sat_Tower_Middle_Ledge) => {
             (Some(1578), vec![])
         }
@@ -38265,6 +38524,12 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
         }
         (SpotId::Irikar__Hub__Bowl_Top_Platform, SpotId::Irikar__Hub__Bowl_Middle_Ledge) => {
             (Some(699), vec![])
+        }
+        (SpotId::Irikar__Hub__Dagger_Altar, SpotId::Irikar__Hub__Royal_Storage_By_Wall) => {
+            (Some(1929), vec![])
+        }
+        (SpotId::Irikar__Hub__Dagger_Altar, SpotId::Irikar__Hub__Royal_Storage_South) => {
+            (Some(2631), vec![])
         }
         (SpotId::Irikar__Hub__East_Rim, SpotId::Irikar__Hub__Bowl_Hole) => (Some(2249), vec![]),
         (SpotId::Irikar__Hub__East_Rim, SpotId::Irikar__Hub__Save_Point) => (Some(2450), vec![]),
@@ -38319,6 +38584,13 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
         (SpotId::Irikar__Hub__Portal_Stand, SpotId::Irikar__Hub__NW_Staircase_Upper) => {
             (Some(2400), vec![])
         }
+        (SpotId::Irikar__Hub__Royal_Storage_South, SpotId::Irikar__Hub__Dagger_Altar) => {
+            (Some(2631), vec![])
+        }
+        (
+            SpotId::Irikar__Hub__Royal_Storage_in_Wall,
+            SpotId::Irikar__Hub__Royal_Storage_By_Wall,
+        ) => (Some(350), vec![]),
         (SpotId::Irikar__Hub__Sat_Tower_Bottom, SpotId::Irikar__Hub__Sat_Tower_East_24) => {
             (Some(1929), vec![])
         }

@@ -892,6 +892,10 @@ pub fn access_infection_speed(ctx: &Context) -> bool {
     // Infection_Speed
     ctx.has(Item::Infection_Speed)
 }
+pub fn access_irikar_royal_storage_wall(ctx: &Context) -> bool {
+    // Irikar_Royal_Storage_Wall
+    ctx.has(Item::Irikar_Royal_Storage_Wall)
+}
 pub fn access_melee_damage(ctx: &Context) -> bool {
     // Melee_Damage
     ctx.has(Item::Melee_Damage)
@@ -972,6 +976,14 @@ pub fn access_not_ebih_waterfall_wall_and_nanite_mist_and_mist_upgrade(ctx: &Con
     // not Ebih_Waterfall_Wall and Nanite_Mist and Mist_Upgrade
     ((!ctx.has(Item::Ebih_Waterfall_Wall) && ctx.has(Item::Nanite_Mist))
         && ctx.has(Item::Mist_Upgrade))
+}
+pub fn access_not_irikar_royal_storage_wall_and_mist_upgrade(ctx: &Context) -> bool {
+    // not Irikar_Royal_Storage_Wall and Mist_Upgrade
+    (!ctx.has(Item::Irikar_Royal_Storage_Wall) && ctx.has(Item::Mist_Upgrade))
+}
+pub fn access_not_irikar_royal_storage_wall_and_shockwave(ctx: &Context) -> bool {
+    // not Irikar_Royal_Storage_Wall and $shockwave
+    (!ctx.has(Item::Irikar_Royal_Storage_Wall) && helper__shockwave!(ctx))
 }
 pub fn access_not_within_menu_and_amashilama_and_mode__drone(ctx: &Context) -> bool {
     // NOT WITHIN `Menu` and Amashilama and ^mode != 'drone'
@@ -1136,6 +1148,14 @@ pub fn action_breach_portal_save_update(ctx: &mut Context) {
 pub fn action_clear_breach_save(ctx: &mut Context) {
     // $clear_breach_save
     helper__clear_breach_save!(ctx);
+}
+pub fn action_collect__irikar_royal_storage_wall_collect__flask_visit__irikar__hub__royal_storage_in_wall__item(
+    ctx: &mut Context,
+) {
+    // $collect(Irikar_Royal_Storage_Wall); $collect(Flask); $visit(`Irikar > Hub > Royal Storage in Wall > Item`);
+    ctx.collect(Item::Irikar_Royal_Storage_Wall);
+    ctx.collect(Item::Flask);
+    ctx.visit(LocationId::Irikar__Hub__Royal_Storage_in_Wall__Item);
 }
 pub fn action_deploy_drone(ctx: &mut Context) {
     // $deploy_drone

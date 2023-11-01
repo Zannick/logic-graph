@@ -890,6 +890,7 @@ pub fn get_area(spot: SpotId) -> AreaId {
             AreaId::Irikar_Breach__Sandy_Lair
         }
         SpotId::Irikar_Breach__Uhrum_Connector__West => AreaId::Irikar_Breach__Uhrum_Connector,
+        SpotId::Irikar_Breach__Basement_Save__Save_Point => AreaId::Irikar_Breach__Basement_Save,
         SpotId::Irikar__Hub__Northwest
         | SpotId::Irikar__Hub__North_Above_Portal
         | SpotId::Irikar__Hub__Northwest_Above_Bowl
@@ -918,12 +919,26 @@ pub fn get_area(spot: SpotId) -> AreaId {
         | SpotId::Irikar__Hub__NW_Staircase_Upper
         | SpotId::Irikar__Hub__Portal_Stand
         | SpotId::Irikar__Hub__NW_Middle_Building_Corner
-        | SpotId::Irikar__Hub__NW_Middle_Building_West_Entry => AreaId::Irikar__Hub,
+        | SpotId::Irikar__Hub__NW_Middle_Building_West_Entry
+        | SpotId::Irikar__Hub__Royal_Storage_South
+        | SpotId::Irikar__Hub__Dagger_Altar
+        | SpotId::Irikar__Hub__Royal_Storage_By_Wall
+        | SpotId::Irikar__Hub__Royal_Storage_in_Wall => AreaId::Irikar__Hub,
         SpotId::Irikar__Sight_Room__West_24
         | SpotId::Irikar__Sight_Room__Lower_Ledge
         | SpotId::Irikar__Sight_Room__Portal
         | SpotId::Irikar__Sight_Room__Item_Pedestal => AreaId::Irikar__Sight_Room,
-        SpotId::Irikar__Abandoned_Room__Empty_Pedestal => AreaId::Irikar__Abandoned_Room,
+        SpotId::Irikar__Abandoned_Room__Empty_Pedestal
+        | SpotId::Irikar__Abandoned_Room__Corner_Core
+        | SpotId::Irikar__Abandoned_Room__West => AreaId::Irikar__Abandoned_Room,
+        SpotId::Irikar__Basement_Portal__East_27
+        | SpotId::Irikar__Basement_Portal__Ledge
+        | SpotId::Irikar__Basement_Portal__Moving_Platform_Start
+        | SpotId::Irikar__Basement_Portal__Westmost_Platform
+        | SpotId::Irikar__Basement_Portal__Middle_Platform
+        | SpotId::Irikar__Basement_Portal__East_Platform
+        | SpotId::Irikar__Basement_Portal__North => AreaId::Irikar__Basement_Portal,
+        SpotId::Irikar__Basement_Pipes__East_28 => AreaId::Irikar__Basement_Pipes,
         SpotId::Menu__Upgrade_Menu__Physiology
         | SpotId::Menu__Upgrade_Menu__Combat
         | SpotId::Menu__Upgrade_Menu__Infection
@@ -1792,6 +1807,7 @@ pub fn get_region(spot: SpotId) -> RegionId {
             RegionId::Irikar_Breach
         }
         SpotId::Irikar_Breach__Uhrum_Connector__West => RegionId::Irikar_Breach,
+        SpotId::Irikar_Breach__Basement_Save__Save_Point => RegionId::Irikar_Breach,
         SpotId::Irikar__Hub__Northwest
         | SpotId::Irikar__Hub__North_Above_Portal
         | SpotId::Irikar__Hub__Northwest_Above_Bowl
@@ -1820,12 +1836,26 @@ pub fn get_region(spot: SpotId) -> RegionId {
         | SpotId::Irikar__Hub__NW_Staircase_Upper
         | SpotId::Irikar__Hub__Portal_Stand
         | SpotId::Irikar__Hub__NW_Middle_Building_Corner
-        | SpotId::Irikar__Hub__NW_Middle_Building_West_Entry => RegionId::Irikar,
+        | SpotId::Irikar__Hub__NW_Middle_Building_West_Entry
+        | SpotId::Irikar__Hub__Royal_Storage_South
+        | SpotId::Irikar__Hub__Dagger_Altar
+        | SpotId::Irikar__Hub__Royal_Storage_By_Wall
+        | SpotId::Irikar__Hub__Royal_Storage_in_Wall => RegionId::Irikar,
         SpotId::Irikar__Sight_Room__West_24
         | SpotId::Irikar__Sight_Room__Lower_Ledge
         | SpotId::Irikar__Sight_Room__Portal
         | SpotId::Irikar__Sight_Room__Item_Pedestal => RegionId::Irikar,
-        SpotId::Irikar__Abandoned_Room__Empty_Pedestal => RegionId::Irikar,
+        SpotId::Irikar__Abandoned_Room__Empty_Pedestal
+        | SpotId::Irikar__Abandoned_Room__Corner_Core
+        | SpotId::Irikar__Abandoned_Room__West => RegionId::Irikar,
+        SpotId::Irikar__Basement_Portal__East_27
+        | SpotId::Irikar__Basement_Portal__Ledge
+        | SpotId::Irikar__Basement_Portal__Moving_Platform_Start
+        | SpotId::Irikar__Basement_Portal__Westmost_Platform
+        | SpotId::Irikar__Basement_Portal__Middle_Platform
+        | SpotId::Irikar__Basement_Portal__East_Platform
+        | SpotId::Irikar__Basement_Portal__North => RegionId::Irikar,
+        SpotId::Irikar__Basement_Pipes__East_28 => RegionId::Irikar,
         SpotId::Menu__Upgrade_Menu__Physiology
         | SpotId::Menu__Upgrade_Menu__Combat
         | SpotId::Menu__Upgrade_Menu__Infection
@@ -2052,6 +2082,15 @@ impl world::Accessible for Location {
             LocationId::Glacier__Vertical_Room__Under_Switch__Switch => {
                 rules::access_boomerang3(&ctx)
             }
+            LocationId::Irikar__Abandoned_Room__Corner_Core__Core => {
+                rules::access_more_refills(&ctx)
+            }
+            LocationId::Irikar__Hub__Dagger_Altar__Weapon => true,
+            LocationId::Irikar__Hub__Royal_Storage_By_Wall__Mist_into_Wall => {
+                rules::access_not_irikar_royal_storage_wall_and_mist_upgrade(&ctx)
+            }
+            LocationId::Irikar__Hub__Royal_Storage_By_Wall__Shockwave_Wall => true,
+            LocationId::Irikar__Hub__Royal_Storage_in_Wall__Item => true,
             LocationId::Irikar__Hub__Sat_Tower_Top_Ledge__Tablet => true,
             LocationId::Irikar__Sight_Room__Item_Pedestal__Urn => true,
             LocationId::Irikar_Breach__Gauntlet__Hidden_Path_Reward__Item => true,
@@ -2861,6 +2900,7 @@ impl world::Accessible for Exit {
             ExitId::Glacier__Vertical_Room__Under_Switch__ex__Past_Gate_1 => rules::access_switch_36_11(&ctx),
             ExitId::Glacier__Vertical_Room__West_8__ex__Peak__East_8_1 => true,
             ExitId::Glacier__Vertical_Room__West_9__ex__Ledge_Grab_Room__East_9_1 => true,
+            ExitId::Irikar__Abandoned_Room__West__ex__Basement_Portal__East_27_1 => true,
             ExitId::Irikar__Hub__Bowl_Middle_Ledge__ex__Bowl_Top_Platform_1 => rules::access_hook(&ctx),
             ExitId::Irikar__Hub__Bowl_Middle_Platform_Center__ex__Bowl_Middle_Ledge_1 => rules::access_hook(&ctx),
             ExitId::Irikar__Hub__Bowl_Middle_Platform_West__ex__Bowl_Middle_Ledge_1 => rules::access_hook(&ctx),
@@ -2869,6 +2909,9 @@ impl world::Accessible for Exit {
             ExitId::Irikar__Hub__East_Rim__ex__Sat_Tower_Roof_West_1 => rules::access_hover(&ctx),
             ExitId::Irikar__Hub__NW_Staircase_Upper__ex__NW_Bowl_Edifice_1 => rules::access_grab(&ctx),
             ExitId::Irikar__Hub__NW_Staircase_Upper__ex__NW_Bowl_Edifice_2 => rules::access_hook(&ctx),
+            ExitId::Irikar__Hub__Royal_Storage_By_Wall__ex__Royal_Storage_in_Wall_1 => rules::access_irikar_royal_storage_wall(&ctx),
+            ExitId::Irikar__Hub__Royal_Storage_By_Wall__Mist_into_Wall => rules::access_not_irikar_royal_storage_wall_and_mist_upgrade(&ctx),
+            ExitId::Irikar__Hub__Royal_Storage_South__ex__Basement_Portal__North_1 => true,
             ExitId::Irikar__Hub__Sat_Tower_East_24__ex__Sight_Room__West_24_1 => true,
             ExitId::Irikar__Hub__Sat_Tower_Floating_Platform__ex__Sat_Tower_Top_Ledge_1 => rules::access_hook(&ctx),
             ExitId::Irikar__Hub__Sat_Tower_Middle_Ledge__ex__Sat_Tower_Floating_Platform_1 => rules::access_hook(&ctx),
@@ -3195,6 +3238,8 @@ impl world::Exit for Exit {
             ExitId::Glacier__Vertical_Room__Past_Gate__ex__Ledge_Grab_Room__East_11_1 => true,
             ExitId::Glacier__Vertical_Room__West_8__ex__Peak__East_8_1 => true,
             ExitId::Glacier__Vertical_Room__West_9__ex__Ledge_Grab_Room__East_9_1 => true,
+            ExitId::Irikar__Abandoned_Room__West__ex__Basement_Portal__East_27_1 => true,
+            ExitId::Irikar__Hub__Royal_Storage_South__ex__Basement_Portal__North_1 => true,
             ExitId::Irikar__Hub__Sat_Tower_East_24__ex__Sight_Room__West_24_1 => true,
             ExitId::Irikar__Sight_Room__West_24__ex__Hub__Sat_Tower_East_24_1 => true,
             ExitId::Irikar_Breach__Exit_Corridor__East__ex__Uhrum_Connector__West_1 => true,
@@ -3438,6 +3483,9 @@ impl world::Accessible for Action {
                 ActionId::Irikar__Hub__Portal_Stand__Enter_Portal => {
                     rules::access_mode__drone_and_breach_sight(&ctx)
                 }
+                ActionId::Irikar__Hub__Royal_Storage_By_Wall__Shockwave_Wall => {
+                    rules::access_not_irikar_royal_storage_wall_and_shockwave(&ctx)
+                }
                 ActionId::Irikar__Hub__Save_Point__Save => true,
                 ActionId::Irikar__Sight_Room__Portal__Enter_Portal => {
                     rules::access_mode__drone_and_breach_sight(&ctx)
@@ -3462,214 +3510,85 @@ impl world::Action for Action {
         match self.id {
             ActionId::Global__Recall_Drone => rules::action_mode__indra(ctx),
             ActionId::Global__Deploy_Drone => rules::action_mode__drone_indra__position(ctx),
-            ActionId::Amagi__Main_Area__Carving__Key_Combo => {
-                rules::action_amagi__main_area__carving__key_combo__do(ctx)
-            }
+            ActionId::Amagi__Main_Area__Carving__Key_Combo => rules::action_amagi__main_area__carving__key_combo__do(ctx),
             ActionId::Amagi__Main_Area__Save_Point__Save => rules::action_save(ctx),
-            ActionId::Amagi__Cave_Behind_Waterfall__Middle__Throw_Drone => {
-                rules::action_deploy_drone(ctx)
-            }
+            ActionId::Amagi__Cave_Behind_Waterfall__Middle__Throw_Drone => rules::action_deploy_drone(ctx),
             ActionId::Ebih__Base_Camp__Save_Point__Save => rules::action_save(ctx),
-            ActionId::Ebih__Base_Camp__Left_Platform__Move_Left_Platform => {
-                rules::action_ebih__base_camp__left_platform__move_left_platform__do(ctx)
-            }
-            ActionId::Ebih__Base_Camp__Left_Platform_Moved__Reset_Left_Platform => {
-                rules::action_ebih__base_camp__left_platform_moved__reset_left_platform__do(ctx)
-            }
-            ActionId::Ebih__Grid_25_10_12__Door_Left__Open_Door => {
-                rules::action_ebih__grid_25_10_12__door_left__open_door__do(ctx)
-            }
-            ActionId::Ebih__Grid_25_10_12__East_11__Open_Door => {
-                rules::action_ebih__grid_25_10_12__east_11__open_door__do(ctx)
-            }
-            ActionId::Ebih__Waterfall__Ledge_Below_Hole__Throw_Drone => {
-                rules::action_deploy_drone(ctx)
-            }
-            ActionId::Ebih__Waterfall__Below_Left_Switch__Open_Door => {
-                rules::action_ebih__waterfall__below_left_switch__open_door__do(ctx)
-            }
-            ActionId::Ebih__Waterfall__West_8__Open_Door => {
-                rules::action_ebih__waterfall__west_8__open_door__do(ctx)
-            }
+            ActionId::Ebih__Base_Camp__Left_Platform__Move_Left_Platform => rules::action_ebih__base_camp__left_platform__move_left_platform__do(ctx),
+            ActionId::Ebih__Base_Camp__Left_Platform_Moved__Reset_Left_Platform => rules::action_ebih__base_camp__left_platform_moved__reset_left_platform__do(ctx),
+            ActionId::Ebih__Grid_25_10_12__Door_Left__Open_Door => rules::action_ebih__grid_25_10_12__door_left__open_door__do(ctx),
+            ActionId::Ebih__Grid_25_10_12__East_11__Open_Door => rules::action_ebih__grid_25_10_12__east_11__open_door__do(ctx),
+            ActionId::Ebih__Waterfall__Ledge_Below_Hole__Throw_Drone => rules::action_deploy_drone(ctx),
+            ActionId::Ebih__Waterfall__Below_Left_Switch__Open_Door => rules::action_ebih__waterfall__below_left_switch__open_door__do(ctx),
+            ActionId::Ebih__Waterfall__West_8__Open_Door => rules::action_ebih__waterfall__west_8__open_door__do(ctx),
             ActionId::Ebih__Ebih_West__Mid_Save__Save => rules::action_save(ctx),
             ActionId::Ebih__Ebih_West__Upper_Save__Save => rules::action_save(ctx),
-            ActionId::Ebih__Ebih_West__Medium_High_Platform__Throw_Drone_Long => {
-                rules::action_deploy_drone_and_move__ebih__ebih_west__alcove_entrance(ctx)
-            }
-            ActionId::Ebih__Ebih_West__Below_Door__Open_Door => {
-                rules::action_ebih__ebih_west__below_door__open_door__do(ctx)
-            }
-            ActionId::Ebih__Ebih_West__Left_of_Switch__Open_Door => {
-                rules::action_ebih__ebih_west__left_of_switch__open_door__do(ctx)
-            }
+            ActionId::Ebih__Ebih_West__Medium_High_Platform__Throw_Drone_Long => rules::action_deploy_drone_and_move__ebih__ebih_west__alcove_entrance(ctx),
+            ActionId::Ebih__Ebih_West__Below_Door__Open_Door => rules::action_ebih__ebih_west__below_door__open_door__do(ctx),
+            ActionId::Ebih__Ebih_West__Left_of_Switch__Open_Door => rules::action_ebih__ebih_west__left_of_switch__open_door__do(ctx),
             ActionId::Ebih__Ebih_West__Lower_Save__Save => rules::action_save(ctx),
-            ActionId::Ebih__Ebih_East__Moving_Platform__Activate_Ride => {
-                rules::action_ebih__ebih_east__moving_platform__activate_ride__do(ctx)
-            }
-            ActionId::Ebih__Ebih_East__Lower_Moving_Platform__Activate_Ride => {
-                rules::action_ebih__ebih_east__lower_moving_platform__activate_ride__do(ctx)
-            }
-            ActionId::Ebih__Ebih_East__Lower_Moving_Platform__Activate_Lift => {
-                rules::action_ebih__ebih_east__lower_moving_platform__activate_lift__do(ctx)
-            }
-            ActionId::Ebih__Ebih_East__Dispenser__Activate_Lift => {
-                rules::action_ebih__ebih_east__dispenser__activate_lift__do(ctx)
-            }
-            ActionId::Ebih__Drone_Room__Pit_Left__Activate_Lift => {
-                rules::action_ebih__drone_room__pit_left__activate_lift__do(ctx)
-            }
-            ActionId::Ebih__Drone_Room__Pit_Left__Activate_Lift_But_Get_Off_Early => {
-                rules::action_ebih__drone_room__pit_left__activate_lift_but_get_off_early__do(ctx)
-            }
-            ActionId::Ebih__Drone_Room__Portal_Exit__Activate_Platform => {
-                rules::action_ebih__drone_room__portal_exit__activate_platform__do(ctx)
-            }
-            ActionId::Ebih__Drone_Room__Moving_Platform__Throw_Drone => {
-                rules::action_deploy_drone_and_move__ebih__drone_room__tree(ctx)
-            }
-            ActionId::Ebih__Vertical_Interchange__West_13__Open_Door => {
-                rules::action_ebih__vertical_interchange__west_13__open_door__do(ctx)
-            }
+            ActionId::Ebih__Ebih_East__Moving_Platform__Activate_Ride => rules::action_ebih__ebih_east__moving_platform__activate_ride__do(ctx),
+            ActionId::Ebih__Ebih_East__Lower_Moving_Platform__Activate_Ride => rules::action_ebih__ebih_east__lower_moving_platform__activate_ride__do(ctx),
+            ActionId::Ebih__Ebih_East__Lower_Moving_Platform__Activate_Lift => rules::action_ebih__ebih_east__lower_moving_platform__activate_lift__do(ctx),
+            ActionId::Ebih__Ebih_East__Dispenser__Activate_Lift => rules::action_ebih__ebih_east__dispenser__activate_lift__do(ctx),
+            ActionId::Ebih__Drone_Room__Pit_Left__Activate_Lift => rules::action_ebih__drone_room__pit_left__activate_lift__do(ctx),
+            ActionId::Ebih__Drone_Room__Pit_Left__Activate_Lift_But_Get_Off_Early => rules::action_ebih__drone_room__pit_left__activate_lift_but_get_off_early__do(ctx),
+            ActionId::Ebih__Drone_Room__Portal_Exit__Activate_Platform => rules::action_ebih__drone_room__portal_exit__activate_platform__do(ctx),
+            ActionId::Ebih__Drone_Room__Moving_Platform__Throw_Drone => rules::action_deploy_drone_and_move__ebih__drone_room__tree(ctx),
+            ActionId::Ebih__Vertical_Interchange__West_13__Open_Door => rules::action_ebih__vertical_interchange__west_13__open_door__do(ctx),
             ActionId::Giguna_Breach__Peak__Save_Point__Save => rules::action_save(ctx),
-            ActionId::Giguna_Breach__Peak__Portal__Portal => {
-                rules::action_main_portal_save_update(ctx)
-            }
-            ActionId::Giguna_Breach__SW_Save__West_11__Open_Door => {
-                rules::action_giguna_breach__sw_save__west_11__open_door__do(ctx)
-            }
+            ActionId::Giguna_Breach__Peak__Portal__Portal => rules::action_main_portal_save_update(ctx),
+            ActionId::Giguna_Breach__SW_Save__West_11__Open_Door => rules::action_giguna_breach__sw_save__west_11__open_door__do(ctx),
             ActionId::Giguna_Breach__SW_Save__Save_Point__Save => rules::action_save(ctx),
             ActionId::Giguna__Giguna_Northeast__Save_Point__Save => rules::action_save(ctx),
-            ActionId::Giguna__Giguna_Northeast__Save_Point__Save_Recall => {
-                rules::action_save_mode__indra(ctx)
-            }
-            ActionId::Giguna__Giguna_Northeast__Gate_Left__Throw_Drone => {
-                rules::action_deploy_drone(ctx)
-            }
-            ActionId::Giguna__Giguna_Northeast__Right_Column__Open_Door_From_Afar => {
-                rules::action_giguna__giguna_northeast__right_column__open_door_from_afar__do(ctx)
-            }
-            ActionId::Giguna__Giguna_Northeast__Switch__Open_Door => {
-                rules::action_giguna__giguna_northeast__switch__open_door__do(ctx)
-            }
-            ActionId::Giguna__Carnelian__Upper_Susar__Caught => {
-                rules::action_giguna__carnelian__upper_susar__caught__do(ctx)
-            }
-            ActionId::Giguna__Carnelian__Upper_Susar__Hack => {
-                rules::action_giguna__carnelian__upper_susar__hack__do(ctx)
-            }
-            ActionId::Giguna__Carnelian__Switch__Open_Door => {
-                rules::action_giguna__carnelian__switch__open_door__do(ctx)
-            }
-            ActionId::Giguna__Carnelian__Lower_Susar__Caught => {
-                rules::action_giguna__carnelian__lower_susar__caught__do(ctx)
-            }
-            ActionId::Giguna__Carnelian__Lower_Susar__Hack => {
-                rules::action_giguna__carnelian__lower_susar__hack__do(ctx)
-            }
-            ActionId::Giguna__West_Caverns__Small_Platform__Throw_Drone_Up => {
-                rules::action_deploy_drone(ctx)
-            }
-            ActionId::Giguna__West_Caverns__East_Susar__Caught => {
-                rules::action_giguna__west_caverns__east_susar__caught__do(ctx)
-            }
-            ActionId::Giguna__West_Caverns__East_Susar__Hack => {
-                rules::action_giguna__west_caverns__east_susar__hack__do(ctx)
-            }
-            ActionId::Giguna__Wasteland__Middle_Cliff__Throw_Drone => {
-                rules::action_deploy_drone_and_move__giguna__wasteland__middle_path(ctx)
-            }
-            ActionId::Giguna__Giguna_Base__Stone_Knob__Throw_Drone => {
-                rules::action_deploy_drone_and_move__giguna__giguna_base__kari(ctx)
-            }
+            ActionId::Giguna__Giguna_Northeast__Save_Point__Save_Recall => rules::action_save_mode__indra(ctx),
+            ActionId::Giguna__Giguna_Northeast__Gate_Left__Throw_Drone => rules::action_deploy_drone(ctx),
+            ActionId::Giguna__Giguna_Northeast__Right_Column__Open_Door_From_Afar => rules::action_giguna__giguna_northeast__right_column__open_door_from_afar__do(ctx),
+            ActionId::Giguna__Giguna_Northeast__Switch__Open_Door => rules::action_giguna__giguna_northeast__switch__open_door__do(ctx),
+            ActionId::Giguna__Carnelian__Upper_Susar__Caught => rules::action_giguna__carnelian__upper_susar__caught__do(ctx),
+            ActionId::Giguna__Carnelian__Upper_Susar__Hack => rules::action_giguna__carnelian__upper_susar__hack__do(ctx),
+            ActionId::Giguna__Carnelian__Switch__Open_Door => rules::action_giguna__carnelian__switch__open_door__do(ctx),
+            ActionId::Giguna__Carnelian__Lower_Susar__Caught => rules::action_giguna__carnelian__lower_susar__caught__do(ctx),
+            ActionId::Giguna__Carnelian__Lower_Susar__Hack => rules::action_giguna__carnelian__lower_susar__hack__do(ctx),
+            ActionId::Giguna__West_Caverns__Small_Platform__Throw_Drone_Up => rules::action_deploy_drone(ctx),
+            ActionId::Giguna__West_Caverns__East_Susar__Caught => rules::action_giguna__west_caverns__east_susar__caught__do(ctx),
+            ActionId::Giguna__West_Caverns__East_Susar__Hack => rules::action_giguna__west_caverns__east_susar__hack__do(ctx),
+            ActionId::Giguna__Wasteland__Middle_Cliff__Throw_Drone => rules::action_deploy_drone_and_move__giguna__wasteland__middle_path(ctx),
+            ActionId::Giguna__Giguna_Base__Stone_Knob__Throw_Drone => rules::action_deploy_drone_and_move__giguna__giguna_base__kari(ctx),
             ActionId::Giguna__Giguna_Base__Save_Point__Save => rules::action_save(ctx),
-            ActionId::Giguna__Giguna_Base__Switch_Distance_1__Open_Door => {
-                rules::action_giguna__giguna_base__switch_distance_1__open_door__do(ctx)
-            }
-            ActionId::Giguna__Giguna_Base__Switch_Distance_2__Open_Door => {
-                rules::action_giguna__giguna_base__switch_distance_2__open_door__do(ctx)
-            }
-            ActionId::Giguna__Giguna_Base__Switch_Distance_3__Open_Door => {
-                rules::action_giguna__giguna_base__switch_distance_3__open_door__do(ctx)
-            }
-            ActionId::Giguna__Giguna_Base__Switch_Distance_4__Open_Door => {
-                rules::action_giguna__giguna_base__switch_distance_4__open_door__do(ctx)
-            }
+            ActionId::Giguna__Giguna_Base__Switch_Distance_1__Open_Door => rules::action_giguna__giguna_base__switch_distance_1__open_door__do(ctx),
+            ActionId::Giguna__Giguna_Base__Switch_Distance_2__Open_Door => rules::action_giguna__giguna_base__switch_distance_2__open_door__do(ctx),
+            ActionId::Giguna__Giguna_Base__Switch_Distance_3__Open_Door => rules::action_giguna__giguna_base__switch_distance_3__open_door__do(ctx),
+            ActionId::Giguna__Giguna_Base__Switch_Distance_4__Open_Door => rules::action_giguna__giguna_base__switch_distance_4__open_door__do(ctx),
             ActionId::Giguna__Ruins_West__Save_Point__Save => rules::action_save(ctx),
-            ActionId::Giguna__Ruins_West__Lower_Ledge__Hack_Kishib => {
-                rules::action_giguna__ruins_west__lower_ledge__hack_kishib__do(ctx)
-            }
-            ActionId::Giguna__Ruins_West__Lower_Ledge__Destroy_Kishib => {
-                rules::action_giguna__ruins_west__lower_ledge__destroy_kishib__do(ctx)
-            }
-            ActionId::Giguna__Ruins_Top__Portal__Enter_Portal => {
-                rules::action_breach_portal_save_update(ctx)
-            }
+            ActionId::Giguna__Ruins_West__Lower_Ledge__Hack_Kishib => rules::action_giguna__ruins_west__lower_ledge__hack_kishib__do(ctx),
+            ActionId::Giguna__Ruins_West__Lower_Ledge__Destroy_Kishib => rules::action_giguna__ruins_west__lower_ledge__destroy_kishib__do(ctx),
+            ActionId::Giguna__Ruins_Top__Portal__Enter_Portal => rules::action_breach_portal_save_update(ctx),
             ActionId::Giguna__Ruins_Top__Save_Point__Save => rules::action_save(ctx),
-            ActionId::Giguna__Ruins_Top__Switch__Open_Doors => {
-                rules::action_giguna__ruins_top__switch__open_doors__do(ctx)
-            }
-            ActionId::Giguna__Ruins_Top__Turret_Balcony_West__Throw_Drone_onto_Tower => {
-                rules::action_deploy_drone_and_move__giguna__ruins_top__west_7(ctx)
-            }
-            ActionId::Giguna__Clouds__Platform_Start__Hack_and_Ride_to_Portal => {
-                rules::action_giguna__clouds__platform_start__hack_and_ride_to_portal__do(ctx)
-            }
-            ActionId::Giguna__Clouds__Platform_Start__Hack_Deploy_Ride_to_Portal => {
-                rules::action_giguna__clouds__platform_start__hack_deploy_ride_to_portal__do(ctx)
-            }
-            ActionId::Giguna__East_Caverns__West_14__Enter_Combo => {
-                rules::action_giguna__east_caverns__west_14__enter_combo__do(ctx)
-            }
-            ActionId::Giguna__East_Caverns__Upper_Susar__Caught => {
-                rules::action_giguna__east_caverns__upper_susar__caught__do(ctx)
-            }
-            ActionId::Giguna__East_Caverns__Upper_Susar_Mid_jump__Hack => {
-                rules::action_giguna__east_caverns__upper_susar_mid_jump__hack__do(ctx)
-            }
-            ActionId::Giguna__East_Caverns__Upper_Susar_Jump_from_East__Hack => {
-                rules::action_giguna__east_caverns__upper_susar_jump_from_east__hack__do(ctx)
-            }
-            ActionId::Giguna__East_Caverns__Upper_Susar_Jump_from_East__Caught => {
-                rules::action_giguna__east_caverns__upper_susar_jump_from_east__caught__do(ctx)
-            }
-            ActionId::Giguna__East_Caverns__Mid_Susar__Hack => {
-                rules::action_giguna__east_caverns__mid_susar__hack__do(ctx)
-            }
-            ActionId::Giguna__East_Caverns__Mid_Susar__Caught => {
-                rules::action_giguna__east_caverns__mid_susar__caught__do(ctx)
-            }
-            ActionId::Giguna__East_Caverns__Statues_Ledge__Open_Door => {
-                rules::action_giguna__east_caverns__statues_ledge__open_door__do(ctx)
-            }
-            ActionId::Giguna__East_Caverns__Switch__Open_Door => {
-                rules::action_giguna__east_caverns__switch__open_door__do(ctx)
-            }
-            ActionId::Giguna__East_Caverns__West_16__Open_Door => {
-                rules::action_giguna__east_caverns__west_16__open_door__do(ctx)
-            }
-            ActionId::Giguna__East_Caverns__Lower_Susar__Hack => {
-                rules::action_giguna__east_caverns__lower_susar__hack__do(ctx)
-            }
-            ActionId::Giguna__East_Caverns__Lower_Susar__Caught => {
-                rules::action_giguna__east_caverns__lower_susar__caught__do(ctx)
-            }
-            ActionId::Giguna__Gateway__One_Jump__Open_Door => {
-                rules::action_giguna__gateway__one_jump__open_door__do(ctx)
-            }
-            ActionId::Giguna__Gateway__Flask_Ledge__Open_Door => {
-                rules::action_giguna__gateway__flask_ledge__open_door__do(ctx)
-            }
+            ActionId::Giguna__Ruins_Top__Switch__Open_Doors => rules::action_giguna__ruins_top__switch__open_doors__do(ctx),
+            ActionId::Giguna__Ruins_Top__Turret_Balcony_West__Throw_Drone_onto_Tower => rules::action_deploy_drone_and_move__giguna__ruins_top__west_7(ctx),
+            ActionId::Giguna__Clouds__Platform_Start__Hack_and_Ride_to_Portal => rules::action_giguna__clouds__platform_start__hack_and_ride_to_portal__do(ctx),
+            ActionId::Giguna__Clouds__Platform_Start__Hack_Deploy_Ride_to_Portal => rules::action_giguna__clouds__platform_start__hack_deploy_ride_to_portal__do(ctx),
+            ActionId::Giguna__East_Caverns__West_14__Enter_Combo => rules::action_giguna__east_caverns__west_14__enter_combo__do(ctx),
+            ActionId::Giguna__East_Caverns__Upper_Susar__Caught => rules::action_giguna__east_caverns__upper_susar__caught__do(ctx),
+            ActionId::Giguna__East_Caverns__Upper_Susar_Mid_jump__Hack => rules::action_giguna__east_caverns__upper_susar_mid_jump__hack__do(ctx),
+            ActionId::Giguna__East_Caverns__Upper_Susar_Jump_from_East__Hack => rules::action_giguna__east_caverns__upper_susar_jump_from_east__hack__do(ctx),
+            ActionId::Giguna__East_Caverns__Upper_Susar_Jump_from_East__Caught => rules::action_giguna__east_caverns__upper_susar_jump_from_east__caught__do(ctx),
+            ActionId::Giguna__East_Caverns__Mid_Susar__Hack => rules::action_giguna__east_caverns__mid_susar__hack__do(ctx),
+            ActionId::Giguna__East_Caverns__Mid_Susar__Caught => rules::action_giguna__east_caverns__mid_susar__caught__do(ctx),
+            ActionId::Giguna__East_Caverns__Statues_Ledge__Open_Door => rules::action_giguna__east_caverns__statues_ledge__open_door__do(ctx),
+            ActionId::Giguna__East_Caverns__Switch__Open_Door => rules::action_giguna__east_caverns__switch__open_door__do(ctx),
+            ActionId::Giguna__East_Caverns__West_16__Open_Door => rules::action_giguna__east_caverns__west_16__open_door__do(ctx),
+            ActionId::Giguna__East_Caverns__Lower_Susar__Hack => rules::action_giguna__east_caverns__lower_susar__hack__do(ctx),
+            ActionId::Giguna__East_Caverns__Lower_Susar__Caught => rules::action_giguna__east_caverns__lower_susar__caught__do(ctx),
+            ActionId::Giguna__Gateway__One_Jump__Open_Door => rules::action_giguna__gateway__one_jump__open_door__do(ctx),
+            ActionId::Giguna__Gateway__Flask_Ledge__Open_Door => rules::action_giguna__gateway__flask_ledge__open_door__do(ctx),
             ActionId::Glacier__Revival__Save_Point__Save => rules::action_save(ctx),
-            ActionId::Irikar_Breach__Exit_Corridor__Portal_Stand__Enter_Portal => {
-                rules::action_main_portal_save_update(ctx)
-            }
+            ActionId::Irikar_Breach__Exit_Corridor__Portal_Stand__Enter_Portal => rules::action_main_portal_save_update(ctx),
             ActionId::Irikar__Hub__Save_Point__Save => rules::action_save(ctx),
-            ActionId::Irikar__Hub__Portal_Stand__Enter_Portal => {
-                rules::action_breach_portal_save_update(ctx)
-            }
-            ActionId::Irikar__Sight_Room__Portal__Enter_Portal => {
-                rules::action_breach_portal_save_update(ctx)
-            }
+            ActionId::Irikar__Hub__Portal_Stand__Enter_Portal => rules::action_breach_portal_save_update(ctx),
+            ActionId::Irikar__Hub__Royal_Storage_By_Wall__Shockwave_Wall => rules::action_collect__irikar_royal_storage_wall_collect__flask_visit__irikar__hub__royal_storage_in_wall__item(ctx),
+            ActionId::Irikar__Sight_Room__Portal__Enter_Portal => rules::action_breach_portal_save_update(ctx),
         };
         let dest = self.dest(ctx);
         if dest != SpotId::None {
@@ -3866,7 +3785,7 @@ pub struct Spot {
     pub actions: Range<usize>,
 }
 
-static RAW_SPOTS: [SpotId; 891] = [
+static RAW_SPOTS: [SpotId; 906] = [
     SpotId::None,
     SpotId::Amagi__Cave_Behind_Waterfall__Bottom,
     SpotId::Amagi__Cave_Behind_Waterfall__Middle,
@@ -4672,13 +4591,24 @@ static RAW_SPOTS: [SpotId; 891] = [
     SpotId::Glacier__Vertical_Room__Under_Switch,
     SpotId::Glacier__Vertical_Room__West_8,
     SpotId::Glacier__Vertical_Room__West_9,
+    SpotId::Irikar__Abandoned_Room__Corner_Core,
     SpotId::Irikar__Abandoned_Room__Empty_Pedestal,
+    SpotId::Irikar__Abandoned_Room__West,
+    SpotId::Irikar__Basement_Pipes__East_28,
+    SpotId::Irikar__Basement_Portal__East_27,
+    SpotId::Irikar__Basement_Portal__East_Platform,
+    SpotId::Irikar__Basement_Portal__Ledge,
+    SpotId::Irikar__Basement_Portal__Middle_Platform,
+    SpotId::Irikar__Basement_Portal__Moving_Platform_Start,
+    SpotId::Irikar__Basement_Portal__North,
+    SpotId::Irikar__Basement_Portal__Westmost_Platform,
     SpotId::Irikar__Hub__Bowl_Hole,
     SpotId::Irikar__Hub__Bowl_Middle_Ledge,
     SpotId::Irikar__Hub__Bowl_Middle_Platform_Center,
     SpotId::Irikar__Hub__Bowl_Middle_Platform_West,
     SpotId::Irikar__Hub__Bowl_Platform_3,
     SpotId::Irikar__Hub__Bowl_Top_Platform,
+    SpotId::Irikar__Hub__Dagger_Altar,
     SpotId::Irikar__Hub__East_Rim,
     SpotId::Irikar__Hub__North_Above_Portal,
     SpotId::Irikar__Hub__Northeast_Above_Bowl,
@@ -4690,6 +4620,9 @@ static RAW_SPOTS: [SpotId; 891] = [
     SpotId::Irikar__Hub__NW_Roof,
     SpotId::Irikar__Hub__NW_Staircase_Upper,
     SpotId::Irikar__Hub__Portal_Stand,
+    SpotId::Irikar__Hub__Royal_Storage_By_Wall,
+    SpotId::Irikar__Hub__Royal_Storage_in_Wall,
+    SpotId::Irikar__Hub__Royal_Storage_South,
     SpotId::Irikar__Hub__Sat_Tower_Bottom,
     SpotId::Irikar__Hub__Sat_Tower_East_24,
     SpotId::Irikar__Hub__Sat_Tower_Floating_Platform,
@@ -4706,6 +4639,7 @@ static RAW_SPOTS: [SpotId; 891] = [
     SpotId::Irikar__Sight_Room__Lower_Ledge,
     SpotId::Irikar__Sight_Room__Portal,
     SpotId::Irikar__Sight_Room__West_24,
+    SpotId::Irikar_Breach__Basement_Save__Save_Point,
     SpotId::Irikar_Breach__Exit_Corridor__East,
     SpotId::Irikar_Breach__Exit_Corridor__North_12,
     SpotId::Irikar_Breach__Exit_Corridor__North_13,
@@ -5115,6 +5049,10 @@ lazy_static! {
             start: SpotId::Glacier__Vertical_Room__East_12.into_usize(),
             end: SpotId::Glacier__Vertical_Room__West_9.into_usize() + 1,
         },
+        AreaId::Irikar_Breach__Basement_Save => Range {
+            start: SpotId::Irikar_Breach__Basement_Save__Save_Point.into_usize(),
+            end: SpotId::Irikar_Breach__Basement_Save__Save_Point.into_usize() + 1,
+        },
         AreaId::Irikar_Breach__Exit_Corridor => Range {
             start: SpotId::Irikar_Breach__Exit_Corridor__East.into_usize(),
             end: SpotId::Irikar_Breach__Exit_Corridor__West_of_Pillar.into_usize() + 1,
@@ -5156,8 +5094,16 @@ lazy_static! {
             end: SpotId::Irikar_Breach__Worm_Rave__South.into_usize() + 1,
         },
         AreaId::Irikar__Abandoned_Room => Range {
-            start: SpotId::Irikar__Abandoned_Room__Empty_Pedestal.into_usize(),
-            end: SpotId::Irikar__Abandoned_Room__Empty_Pedestal.into_usize() + 1,
+            start: SpotId::Irikar__Abandoned_Room__Corner_Core.into_usize(),
+            end: SpotId::Irikar__Abandoned_Room__West.into_usize() + 1,
+        },
+        AreaId::Irikar__Basement_Pipes => Range {
+            start: SpotId::Irikar__Basement_Pipes__East_28.into_usize(),
+            end: SpotId::Irikar__Basement_Pipes__East_28.into_usize() + 1,
+        },
+        AreaId::Irikar__Basement_Portal => Range {
+            start: SpotId::Irikar__Basement_Portal__East_27.into_usize(),
+            end: SpotId::Irikar__Basement_Portal__Westmost_Platform.into_usize() + 1,
         },
         AreaId::Irikar__Hub => Range {
             start: SpotId::Irikar__Hub__Bowl_Hole.into_usize(),
@@ -5200,7 +5146,7 @@ impl world::World for World {
     type Exit = Exit;
     type Action = Action;
     type Warp = Warp;
-    const NUM_LOCATIONS: u32 = 157;
+    const NUM_LOCATIONS: u32 = 162;
 
     fn objective_name(&self) -> String {
         format!("{}", self.objective)
@@ -5355,6 +5301,12 @@ impl world::World for World {
                 LocationId::Glacier__Ledge_Grab_Room__Cliff_Bottom__Quick_Grab,
                 LocationId::Glacier__Ledge_Grab_Room__Pedestal__Item,
             ],
+            CanonId::Irikar_Royal_Storage_Wall => {
+                vec![LocationId::Irikar__Hub__Royal_Storage_By_Wall__Shockwave_Wall]
+            }
+            CanonId::Irikar_Royal_Storage_Flask => {
+                vec![LocationId::Irikar__Hub__Royal_Storage_in_Wall__Item]
+            }
         }
     }
 
@@ -5383,6 +5335,7 @@ impl world::World for World {
                 LocationId::Glacier__Vertical_Room__Peak__Flask,
                 LocationId::Irikar_Breach__Gauntlet__Hidden_Path_Reward__Item,
                 LocationId::Irikar_Breach__Worm_Rave__Corner__Item,
+                LocationId::Irikar__Hub__Royal_Storage_in_Wall__Item,
             ],
             Item::Underwater_Movement => vec![LocationId::Amagi__Liru_Room__Shrine__Item],
             Item::Amagi_Dragon_Eye_Passage => {
@@ -5492,7 +5445,10 @@ impl world::World for World {
             ],
             Item::Carnelian_Ring => vec![LocationId::Giguna__Carnelian__Vault__Item],
             Item::Power_Matrix => vec![LocationId::Giguna__West_Caverns__Cache__Item],
-            Item::Power_Core => vec![LocationId::Giguna__West_Caverns__Bush__Item],
+            Item::Power_Core => vec![
+                LocationId::Giguna__West_Caverns__Bush__Item,
+                LocationId::Irikar__Abandoned_Room__Corner_Core__Core,
+            ],
             Item::Ebih_Wasteland_Passage_H => vec![
                 LocationId::Giguna__Wasteland__Passage_East__Clear_Horizontal_Passage_Manually,
                 LocationId::Giguna__Wasteland__Passage_East__Mist_through_Horizontal_Passage,
@@ -5553,6 +5509,11 @@ impl world::World for World {
             Item::Commemorative_Speech => {
                 vec![LocationId::Irikar__Hub__Sat_Tower_Top_Ledge__Tablet]
             }
+            Item::Royal_Dagger => vec![LocationId::Irikar__Hub__Dagger_Altar__Weapon],
+            Item::Irikar_Royal_Storage_Wall => vec![
+                LocationId::Irikar__Hub__Royal_Storage_By_Wall__Shockwave_Wall,
+                LocationId::Irikar__Hub__Royal_Storage_By_Wall__Mist_into_Wall,
+            ],
             Item::Breach_Sight => vec![LocationId::Irikar__Sight_Room__Item_Pedestal__Urn],
             Item::Health_Upgrade => vec![
                 LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_1,
@@ -5914,8 +5875,21 @@ impl world::World for World {
             LocationId::Irikar__Hub__Sat_Tower_Top_Ledge__Tablet => {
                 SpotId::Irikar__Hub__Sat_Tower_Top_Ledge
             }
+            LocationId::Irikar__Hub__Dagger_Altar__Weapon => SpotId::Irikar__Hub__Dagger_Altar,
+            LocationId::Irikar__Hub__Royal_Storage_By_Wall__Shockwave_Wall => {
+                SpotId::Irikar__Hub__Royal_Storage_By_Wall
+            }
+            LocationId::Irikar__Hub__Royal_Storage_By_Wall__Mist_into_Wall => {
+                SpotId::Irikar__Hub__Royal_Storage_By_Wall
+            }
+            LocationId::Irikar__Hub__Royal_Storage_in_Wall__Item => {
+                SpotId::Irikar__Hub__Royal_Storage_in_Wall
+            }
             LocationId::Irikar__Sight_Room__Item_Pedestal__Urn => {
                 SpotId::Irikar__Sight_Room__Item_Pedestal
+            }
+            LocationId::Irikar__Abandoned_Room__Corner_Core__Core => {
+                SpotId::Irikar__Abandoned_Room__Corner_Core
             }
             LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_1
             | LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_2
@@ -6140,6 +6114,9 @@ impl world::World for World {
             }
             ActionId::Irikar__Hub__Save_Point__Save => SpotId::Irikar__Hub__Save_Point,
             ActionId::Irikar__Hub__Portal_Stand__Enter_Portal => SpotId::Irikar__Hub__Portal_Stand,
+            ActionId::Irikar__Hub__Royal_Storage_By_Wall__Shockwave_Wall => {
+                SpotId::Irikar__Hub__Royal_Storage_By_Wall
+            }
             ActionId::Irikar__Sight_Room__Portal__Enter_Portal => {
                 SpotId::Irikar__Sight_Room__Portal
             }
@@ -6684,7 +6661,11 @@ impl world::World for World {
             ExitId::Irikar__Hub__Sat_Tower_Floating_Platform__ex__Sat_Tower_Top_Ledge_1 => SpotId::Irikar__Hub__Sat_Tower_Floating_Platform,
             ExitId::Irikar__Hub__Sat_Tower_East_24__ex__Sight_Room__West_24_1 => SpotId::Irikar__Hub__Sat_Tower_East_24,
             ExitId::Irikar__Hub__NW_Staircase_Upper__ex__NW_Bowl_Edifice_1 | ExitId:: Irikar__Hub__NW_Staircase_Upper__ex__NW_Bowl_Edifice_2 => SpotId::Irikar__Hub__NW_Staircase_Upper,
+            ExitId::Irikar__Hub__Royal_Storage_South__ex__Basement_Portal__North_1 => SpotId::Irikar__Hub__Royal_Storage_South,
+            ExitId::Irikar__Hub__Royal_Storage_By_Wall__ex__Royal_Storage_in_Wall_1 => SpotId::Irikar__Hub__Royal_Storage_By_Wall,
+            ExitId::Irikar__Hub__Royal_Storage_By_Wall__Mist_into_Wall => SpotId::Irikar__Hub__Royal_Storage_By_Wall,
             ExitId::Irikar__Sight_Room__West_24__ex__Hub__Sat_Tower_East_24_1 => SpotId::Irikar__Sight_Room__West_24,
+            ExitId::Irikar__Abandoned_Room__West__ex__Basement_Portal__East_27_1 => SpotId::Irikar__Abandoned_Room__West,
             ExitId::Menu__Upgrade_Menu__Physiology__ex__Combat_1 | ExitId:: Menu__Upgrade_Menu__Physiology__ex__Infection_1 | ExitId:: Menu__Upgrade_Menu__Physiology__ex__Drone_1 => SpotId::Menu__Upgrade_Menu__Physiology,
             ExitId::Menu__Upgrade_Menu__Combat__ex__Physiology_1 | ExitId:: Menu__Upgrade_Menu__Combat__ex__Infection_1 | ExitId:: Menu__Upgrade_Menu__Combat__ex__Drone_1 => SpotId::Menu__Upgrade_Menu__Combat,
             ExitId::Menu__Upgrade_Menu__Infection__ex__Physiology_1 | ExitId:: Menu__Upgrade_Menu__Infection__ex__Combat_1 | ExitId:: Menu__Upgrade_Menu__Infection__ex__Drone_1 => SpotId::Menu__Upgrade_Menu__Infection,
@@ -7256,7 +7237,13 @@ impl world::World for World {
             | SpotId::Glacier__Vertical_Room__Under_Switch
             | SpotId::Glacier__Vertical_Room__West_8
             | SpotId::Glacier__Vertical_Room__West_9
+            | SpotId::Irikar__Abandoned_Room__Corner_Core
+            | SpotId::Irikar__Abandoned_Room__West
+            | SpotId::Irikar__Hub__Dagger_Altar
             | SpotId::Irikar__Hub__Portal_Stand
+            | SpotId::Irikar__Hub__Royal_Storage_By_Wall
+            | SpotId::Irikar__Hub__Royal_Storage_in_Wall
+            | SpotId::Irikar__Hub__Royal_Storage_South
             | SpotId::Irikar__Hub__Sat_Tower_East_24
             | SpotId::Irikar__Hub__Sat_Tower_Top_Ledge
             | SpotId::Irikar__Hub__Save_Point
@@ -7358,6 +7345,7 @@ impl World {
                     | Item::Notes_2053_02_27
                     | Item::Record_Losses
                     | Item::Researchers_Missing
+                    | Item::Royal_Dagger
                     | Item::Slingshot_Charge
                     | Item::Slingshot_Weapon
                     | Item::Terminal_Breakthrough_1
@@ -7376,6 +7364,7 @@ impl World {
                     | Item::Journal_2049_10_29
                     | Item::Melee_Charge
                     | Item::Notes_2053_02_27
+                    | Item::Royal_Dagger
                     | Item::Slingshot_Charge
                     | Item::Slingshot_Weapon
             ),
@@ -8354,12 +8343,52 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
             time: 0,
             exit_id: None,
         },
+        LocationId::Irikar__Hub__Dagger_Altar__Weapon => Location {
+            id: LocationId::Irikar__Hub__Dagger_Altar__Weapon,
+            canonical: CanonId::None,
+            item: Item::Royal_Dagger,
+            price: Currency::Free,
+            time: 0,
+            exit_id: None,
+        },
+        LocationId::Irikar__Hub__Royal_Storage_By_Wall__Shockwave_Wall => Location {
+            id: LocationId::Irikar__Hub__Royal_Storage_By_Wall__Shockwave_Wall,
+            canonical: CanonId::Irikar_Royal_Storage_Wall,
+            item: Item::Irikar_Royal_Storage_Wall,
+            price: Currency::Energy(100),
+            time: 3500,
+            exit_id: None,
+        },
+        LocationId::Irikar__Hub__Royal_Storage_By_Wall__Mist_into_Wall => Location {
+            id: LocationId::Irikar__Hub__Royal_Storage_By_Wall__Mist_into_Wall,
+            canonical: CanonId::None,
+            item: Item::Irikar_Royal_Storage_Wall,
+            price: Currency::Energy(20),
+            time: 1000,
+            exit_id: Some(ExitId::Irikar__Hub__Royal_Storage_By_Wall__Mist_into_Wall),
+        },
+        LocationId::Irikar__Hub__Royal_Storage_in_Wall__Item => Location {
+            id: LocationId::Irikar__Hub__Royal_Storage_in_Wall__Item,
+            canonical: CanonId::Irikar_Royal_Storage_Flask,
+            item: Item::Flask,
+            price: Currency::Free,
+            time: 5500,
+            exit_id: None,
+        },
         LocationId::Irikar__Sight_Room__Item_Pedestal__Urn => Location {
             id: LocationId::Irikar__Sight_Room__Item_Pedestal__Urn,
             canonical: CanonId::None,
             item: Item::Breach_Sight,
             price: Currency::Free,
             time: 5500,
+            exit_id: None,
+        },
+        LocationId::Irikar__Abandoned_Room__Corner_Core__Core => Location {
+            id: LocationId::Irikar__Abandoned_Room__Corner_Core__Core,
+            canonical: CanonId::None,
+            item: Item::Power_Core,
+            price: Currency::Free,
+            time: 0,
             exit_id: None,
         },
         LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_1 => Location {
@@ -13771,10 +13800,38 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
             price: Currency::Free,
             loc_id: None,
         },
+        ExitId::Irikar__Hub__Royal_Storage_South__ex__Basement_Portal__North_1 => Exit {
+            id: ExitId::Irikar__Hub__Royal_Storage_South__ex__Basement_Portal__North_1,
+            time: 1600,
+            dest: SpotId::Irikar__Basement_Portal__North,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Irikar__Hub__Royal_Storage_By_Wall__ex__Royal_Storage_in_Wall_1 => Exit {
+            id: ExitId::Irikar__Hub__Royal_Storage_By_Wall__ex__Royal_Storage_in_Wall_1,
+            time: 350,
+            dest: SpotId::Irikar__Hub__Royal_Storage_in_Wall,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Irikar__Hub__Royal_Storage_By_Wall__Mist_into_Wall => Exit {
+            id: ExitId::Irikar__Hub__Royal_Storage_By_Wall__Mist_into_Wall,
+            time: 350,
+            dest: SpotId::Irikar__Hub__Royal_Storage_in_Wall,
+            price: Currency::Free,
+            loc_id: Some(LocationId::Irikar__Hub__Royal_Storage_By_Wall__Mist_into_Wall),
+        },
         ExitId::Irikar__Sight_Room__West_24__ex__Hub__Sat_Tower_East_24_1 => Exit {
             id: ExitId::Irikar__Sight_Room__West_24__ex__Hub__Sat_Tower_East_24_1,
             time: 1350,
             dest: SpotId::Irikar__Hub__Sat_Tower_East_24,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Irikar__Abandoned_Room__West__ex__Basement_Portal__East_27_1 => Exit {
+            id: ExitId::Irikar__Abandoned_Room__West__ex__Basement_Portal__East_27_1,
+            time: 1350,
+            dest: SpotId::Irikar__Basement_Portal__East_27,
             price: Currency::Free,
             loc_id: None,
         },
@@ -14261,6 +14318,11 @@ pub fn build_actions() -> EnumMap<ActionId, Action> {
             id: ActionId::Irikar__Hub__Portal_Stand__Enter_Portal,
             time: 3600,
             price: Currency::Free,
+        },
+        ActionId::Irikar__Hub__Royal_Storage_By_Wall__Shockwave_Wall => Action {
+            id: ActionId::Irikar__Hub__Royal_Storage_By_Wall__Shockwave_Wall,
+            time: 3500,
+            price: Currency::Energy(100),
         },
         ActionId::Irikar__Sight_Room__Portal__Enter_Portal => Action {
             id: ActionId::Irikar__Sight_Room__Portal__Enter_Portal,
@@ -25177,6 +25239,18 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
         },
+        SpotId::Irikar_Breach__Basement_Save__Save_Point => Spot {
+            id: SpotId::Irikar_Breach__Basement_Save__Save_Point,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
         SpotId::Irikar__Hub__Northwest => Spot {
             id: SpotId::Irikar__Hub__Northwest,
             locations: Range {
@@ -25540,6 +25614,60 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
         },
+        SpotId::Irikar__Hub__Royal_Storage_South => Spot {
+            id: SpotId::Irikar__Hub__Royal_Storage_South,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Irikar__Hub__Royal_Storage_South__ex__Basement_Portal__North_1.into_usize(),
+                end: ExitId::Irikar__Hub__Royal_Storage_South__ex__Basement_Portal__North_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Irikar__Hub__Dagger_Altar => Spot {
+            id: SpotId::Irikar__Hub__Dagger_Altar,
+            locations: Range {
+                start: LocationId::Irikar__Hub__Dagger_Altar__Weapon.into_usize(),
+                end: LocationId::Irikar__Hub__Dagger_Altar__Weapon.into_usize() + 1,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Irikar__Hub__Royal_Storage_By_Wall => Spot {
+            id: SpotId::Irikar__Hub__Royal_Storage_By_Wall,
+            locations: Range {
+                start: LocationId::Irikar__Hub__Royal_Storage_By_Wall__Mist_into_Wall.into_usize(),
+                end: LocationId::Irikar__Hub__Royal_Storage_By_Wall__Shockwave_Wall.into_usize() + 1,
+            },
+            exits: Range {
+                start: ExitId::Irikar__Hub__Royal_Storage_By_Wall__ex__Royal_Storage_in_Wall_1.into_usize(),
+                end: ExitId::Irikar__Hub__Royal_Storage_By_Wall__ex__Royal_Storage_in_Wall_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: ActionId::Irikar__Hub__Royal_Storage_By_Wall__Shockwave_Wall.into_usize(),
+                end: ActionId::Irikar__Hub__Royal_Storage_By_Wall__Shockwave_Wall.into_usize() + 1,
+            },
+        },
+        SpotId::Irikar__Hub__Royal_Storage_in_Wall => Spot {
+            id: SpotId::Irikar__Hub__Royal_Storage_in_Wall,
+            locations: Range {
+                start: LocationId::Irikar__Hub__Royal_Storage_in_Wall__Item.into_usize(),
+                end: LocationId::Irikar__Hub__Royal_Storage_in_Wall__Item.into_usize() + 1,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
         SpotId::Irikar__Sight_Room__West_24 => Spot {
             id: SpotId::Irikar__Sight_Room__West_24,
             locations: Range {
@@ -25593,6 +25721,128 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
         },
         SpotId::Irikar__Abandoned_Room__Empty_Pedestal => Spot {
             id: SpotId::Irikar__Abandoned_Room__Empty_Pedestal,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Irikar__Abandoned_Room__Corner_Core => Spot {
+            id: SpotId::Irikar__Abandoned_Room__Corner_Core,
+            locations: Range {
+                start: LocationId::Irikar__Abandoned_Room__Corner_Core__Core.into_usize(),
+                end: LocationId::Irikar__Abandoned_Room__Corner_Core__Core.into_usize() + 1,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Irikar__Abandoned_Room__West => Spot {
+            id: SpotId::Irikar__Abandoned_Room__West,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Irikar__Abandoned_Room__West__ex__Basement_Portal__East_27_1.into_usize(),
+                end: ExitId::Irikar__Abandoned_Room__West__ex__Basement_Portal__East_27_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Irikar__Basement_Portal__East_27 => Spot {
+            id: SpotId::Irikar__Basement_Portal__East_27,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Irikar__Basement_Portal__Ledge => Spot {
+            id: SpotId::Irikar__Basement_Portal__Ledge,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Irikar__Basement_Portal__Moving_Platform_Start => Spot {
+            id: SpotId::Irikar__Basement_Portal__Moving_Platform_Start,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Irikar__Basement_Portal__Westmost_Platform => Spot {
+            id: SpotId::Irikar__Basement_Portal__Westmost_Platform,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Irikar__Basement_Portal__Middle_Platform => Spot {
+            id: SpotId::Irikar__Basement_Portal__Middle_Platform,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Irikar__Basement_Portal__East_Platform => Spot {
+            id: SpotId::Irikar__Basement_Portal__East_Platform,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Irikar__Basement_Portal__North => Spot {
+            id: SpotId::Irikar__Basement_Portal__North,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Irikar__Basement_Pipes__East_28 => Spot {
+            id: SpotId::Irikar__Basement_Pipes__East_28,
             locations: Range {
                 start: 0, end: 0,
             },
@@ -26901,6 +27151,7 @@ pub fn spot_locations(id: SpotId) -> Range<usize> {
         SpotId::Irikar_Breach__Sandy_Lair__East_27 => Range { start: 0, end: 0 },
         SpotId::Irikar_Breach__Sandy_Lair__East_28 => Range { start: 0, end: 0 },
         SpotId::Irikar_Breach__Uhrum_Connector__West => Range { start: 0, end: 0 },
+        SpotId::Irikar_Breach__Basement_Save__Save_Point => Range { start: 0, end: 0 },
         SpotId::Irikar__Hub__Northwest => Range { start: 0, end: 0 },
         SpotId::Irikar__Hub__North_Above_Portal => Range { start: 0, end: 0 },
         SpotId::Irikar__Hub__Northwest_Above_Bowl => Range { start: 0, end: 0 },
@@ -26933,6 +27184,19 @@ pub fn spot_locations(id: SpotId) -> Range<usize> {
         SpotId::Irikar__Hub__Portal_Stand => Range { start: 0, end: 0 },
         SpotId::Irikar__Hub__NW_Middle_Building_Corner => Range { start: 0, end: 0 },
         SpotId::Irikar__Hub__NW_Middle_Building_West_Entry => Range { start: 0, end: 0 },
+        SpotId::Irikar__Hub__Royal_Storage_South => Range { start: 0, end: 0 },
+        SpotId::Irikar__Hub__Dagger_Altar => Range {
+            start: LocationId::Irikar__Hub__Dagger_Altar__Weapon.into_usize(),
+            end: LocationId::Irikar__Hub__Dagger_Altar__Weapon.into_usize() + 1,
+        },
+        SpotId::Irikar__Hub__Royal_Storage_By_Wall => Range {
+            start: LocationId::Irikar__Hub__Royal_Storage_By_Wall__Mist_into_Wall.into_usize(),
+            end: LocationId::Irikar__Hub__Royal_Storage_By_Wall__Shockwave_Wall.into_usize() + 1,
+        },
+        SpotId::Irikar__Hub__Royal_Storage_in_Wall => Range {
+            start: LocationId::Irikar__Hub__Royal_Storage_in_Wall__Item.into_usize(),
+            end: LocationId::Irikar__Hub__Royal_Storage_in_Wall__Item.into_usize() + 1,
+        },
         SpotId::Irikar__Sight_Room__West_24 => Range { start: 0, end: 0 },
         SpotId::Irikar__Sight_Room__Lower_Ledge => Range { start: 0, end: 0 },
         SpotId::Irikar__Sight_Room__Portal => Range { start: 0, end: 0 },
@@ -26941,6 +27205,19 @@ pub fn spot_locations(id: SpotId) -> Range<usize> {
             end: LocationId::Irikar__Sight_Room__Item_Pedestal__Urn.into_usize() + 1,
         },
         SpotId::Irikar__Abandoned_Room__Empty_Pedestal => Range { start: 0, end: 0 },
+        SpotId::Irikar__Abandoned_Room__Corner_Core => Range {
+            start: LocationId::Irikar__Abandoned_Room__Corner_Core__Core.into_usize(),
+            end: LocationId::Irikar__Abandoned_Room__Corner_Core__Core.into_usize() + 1,
+        },
+        SpotId::Irikar__Abandoned_Room__West => Range { start: 0, end: 0 },
+        SpotId::Irikar__Basement_Portal__East_27 => Range { start: 0, end: 0 },
+        SpotId::Irikar__Basement_Portal__Ledge => Range { start: 0, end: 0 },
+        SpotId::Irikar__Basement_Portal__Moving_Platform_Start => Range { start: 0, end: 0 },
+        SpotId::Irikar__Basement_Portal__Westmost_Platform => Range { start: 0, end: 0 },
+        SpotId::Irikar__Basement_Portal__Middle_Platform => Range { start: 0, end: 0 },
+        SpotId::Irikar__Basement_Portal__East_Platform => Range { start: 0, end: 0 },
+        SpotId::Irikar__Basement_Portal__North => Range { start: 0, end: 0 },
+        SpotId::Irikar__Basement_Pipes__East_28 => Range { start: 0, end: 0 },
         SpotId::Menu__Upgrade_Menu__Physiology => Range {
             start: LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_1.into_usize(),
             end: LocationId::Menu__Upgrade_Menu__Physiology__Mist_Upgrade.into_usize() + 1,
@@ -27225,15 +27502,21 @@ pub fn area_locations(id: AreaId) -> Range<usize> {
         AreaId::Irikar_Breach__Neon_Corridor => Range { start: 0, end: 0 },
         AreaId::Irikar_Breach__Sandy_Lair => Range { start: 0, end: 0 },
         AreaId::Irikar_Breach__Uhrum_Connector => Range { start: 0, end: 0 },
+        AreaId::Irikar_Breach__Basement_Save => Range { start: 0, end: 0 },
         AreaId::Irikar__Hub => Range {
-            start: LocationId::Irikar__Hub__Sat_Tower_Top_Ledge__Tablet.into_usize(),
+            start: LocationId::Irikar__Hub__Dagger_Altar__Weapon.into_usize(),
             end: LocationId::Irikar__Hub__Sat_Tower_Top_Ledge__Tablet.into_usize(),
         },
         AreaId::Irikar__Sight_Room => Range {
             start: LocationId::Irikar__Sight_Room__Item_Pedestal__Urn.into_usize(),
             end: LocationId::Irikar__Sight_Room__Item_Pedestal__Urn.into_usize(),
         },
-        AreaId::Irikar__Abandoned_Room => Range { start: 0, end: 0 },
+        AreaId::Irikar__Abandoned_Room => Range {
+            start: LocationId::Irikar__Abandoned_Room__Corner_Core__Core.into_usize(),
+            end: LocationId::Irikar__Abandoned_Room__Corner_Core__Core.into_usize(),
+        },
+        AreaId::Irikar__Basement_Portal => Range { start: 0, end: 0 },
+        AreaId::Irikar__Basement_Pipes => Range { start: 0, end: 0 },
         AreaId::Menu__Upgrade_Menu => Range {
             start: LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_1.into_usize(),
             end: LocationId::Menu__Upgrade_Menu__Physiology__Mist_Upgrade.into_usize(),
@@ -27273,7 +27556,7 @@ pub fn region_locations(id: RegionId) -> Range<usize> {
             end: LocationId::Irikar_Breach__Worm_Rave__Corner__Item.into_usize(),
         },
         RegionId::Irikar => Range {
-            start: LocationId::Irikar__Hub__Sat_Tower_Top_Ledge__Tablet.into_usize(),
+            start: LocationId::Irikar__Abandoned_Room__Corner_Core__Core.into_usize(),
             end: LocationId::Irikar__Sight_Room__Item_Pedestal__Urn.into_usize(),
         },
         RegionId::Menu => Range {

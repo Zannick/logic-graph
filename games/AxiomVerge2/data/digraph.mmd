@@ -1062,6 +1062,9 @@ subgraph Irikar_Breach
     subgraph Irikar_Breach__Uhrum_Connector[Uhrum Connector]
         Irikar_Breach__Uhrum_Connector__West(West);
     end
+    subgraph Irikar_Breach__Basement_Save[Basement Save]
+        Irikar_Breach__Basement_Save__Save_Point(Save Point);
+    end
 end
 subgraph Irikar
     subgraph Irikar__Hub[Hub]
@@ -1094,6 +1097,10 @@ subgraph Irikar
         Irikar__Hub__Portal_Stand(Portal Stand);
         Irikar__Hub__NW_Middle_Building_Corner(NW Middle Building Corner);
         Irikar__Hub__NW_Middle_Building_West_Entry(NW Middle Building West Entry);
+        Irikar__Hub__Royal_Storage_South(Royal Storage South);
+        Irikar__Hub__Dagger_Altar(Dagger Altar);
+        Irikar__Hub__Royal_Storage_By_Wall(Royal Storage By Wall);
+        Irikar__Hub__Royal_Storage_in_Wall(Royal Storage in Wall);
     end
     subgraph Irikar__Sight_Room[Sight Room]
         Irikar__Sight_Room__West_24(West 24);
@@ -1103,6 +1110,20 @@ subgraph Irikar
     end
     subgraph Irikar__Abandoned_Room[Abandoned Room]
         Irikar__Abandoned_Room__Empty_Pedestal(Empty Pedestal);
+        Irikar__Abandoned_Room__Corner_Core(Corner Core);
+        Irikar__Abandoned_Room__West(West);
+    end
+    subgraph Irikar__Basement_Portal[Basement Portal]
+        Irikar__Basement_Portal__East_27(East 27);
+        Irikar__Basement_Portal__Ledge(Ledge);
+        Irikar__Basement_Portal__Moving_Platform_Start(Moving Platform Start);
+        Irikar__Basement_Portal__Westmost_Platform(Westmost Platform);
+        Irikar__Basement_Portal__Middle_Platform(Middle Platform);
+        Irikar__Basement_Portal__East_Platform(East Platform);
+        Irikar__Basement_Portal__North(North);
+    end
+    subgraph Irikar__Basement_Pipes[Basement Pipes]
+        Irikar__Basement_Pipes__East_28(East 28);
     end
 end
 subgraph Menu
@@ -1582,6 +1603,7 @@ Irikar_Breach__Neon_Corridor__West_Basin --> Irikar_Breach__Neon_Corridor__Cente
 Irikar_Breach__Neon_Corridor__West_Basin --> Irikar_Breach__Neon_Corridor__West
 Irikar_Breach__Worm_Rave__South --> Irikar_Breach__Worm_Rave__Corner
 Irikar_Breach__Worm_Rave__South --> Irikar_Breach__Worm_Rave__East
+Irikar__Abandoned_Room__West --> Irikar__Basement_Portal__East_27
 Irikar__Hub__Bowl_Middle_Ledge --> Irikar__Hub__Bowl_Top_Platform
 Irikar__Hub__Bowl_Middle_Platform_Center --> Irikar__Hub__Bowl_Middle_Ledge
 Irikar__Hub__Bowl_Middle_Platform_West --> Irikar__Hub__Bowl_Middle_Ledge
@@ -1589,6 +1611,8 @@ Irikar__Hub__Bowl_Platform_3 --> Irikar__Hub__Bowl_Middle_Platform_Center
 Irikar__Hub__Bowl_Top_Platform --> Irikar__Hub__West_Rim
 Irikar__Hub__East_Rim --> Irikar__Hub__Sat_Tower_Roof_West
 Irikar__Hub__NW_Staircase_Upper --> Irikar__Hub__NW_Bowl_Edifice
+Irikar__Hub__Royal_Storage_By_Wall --> Irikar__Hub__Royal_Storage_in_Wall
+Irikar__Hub__Royal_Storage_South --> Irikar__Basement_Portal__North
 Irikar__Hub__Sat_Tower_East_24 <--> Irikar__Sight_Room__West_24
 Irikar__Hub__Sat_Tower_Floating_Platform --> Irikar__Hub__Sat_Tower_Top_Ledge
 Irikar__Hub__Sat_Tower_Middle_Ledge --> Irikar__Hub__Sat_Tower_Floating_Platform

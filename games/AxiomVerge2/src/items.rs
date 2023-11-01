@@ -81,6 +81,7 @@ pub enum Item {
     Infect,
     Infection_Range,
     Infection_Speed,
+    Irikar_Royal_Storage_Wall,
     Journal_2049_10_29,
     Ledge_Grab,
     Letter_from_Trace,
@@ -99,6 +100,7 @@ pub enum Item {
     Record_Losses,
     Remote_Drone,
     Researchers_Missing,
+    Royal_Dagger,
     Shockwave,
     Slingshot_Charge,
     Slingshot_Hook,
@@ -179,6 +181,7 @@ impl fmt::Display for Item {
             Item::Infect => write!(f, "{}", "Infect"),
             Item::Infection_Range => write!(f, "{}", "Infection_Range"),
             Item::Infection_Speed => write!(f, "{}", "Infection_Speed"),
+            Item::Irikar_Royal_Storage_Wall => write!(f, "{}", "Irikar_Royal_Storage_Wall"),
             Item::Journal_2049_10_29 => write!(f, "{}", "Journal_2049_10_29"),
             Item::Ledge_Grab => write!(f, "{}", "Ledge_Grab"),
             Item::Letter_from_Trace => write!(f, "{}", "Letter_from_Trace"),
@@ -197,6 +200,7 @@ impl fmt::Display for Item {
             Item::Record_Losses => write!(f, "{}", "Record_Losses"),
             Item::Remote_Drone => write!(f, "{}", "Remote_Drone"),
             Item::Researchers_Missing => write!(f, "{}", "Researchers_Missing"),
+            Item::Royal_Dagger => write!(f, "{}", "Royal_Dagger"),
             Item::Shockwave => write!(f, "{}", "Shockwave"),
             Item::Slingshot_Charge => write!(f, "{}", "Slingshot_Charge"),
             Item::Slingshot_Hook => write!(f, "{}", "Slingshot_Hook"),
@@ -277,6 +281,7 @@ impl std::str::FromStr for Item {
             "Infect" => Ok(Item::Infect),
             "Infection_Range" => Ok(Item::Infection_Range),
             "Infection_Speed" => Ok(Item::Infection_Speed),
+            "Irikar_Royal_Storage_Wall" => Ok(Item::Irikar_Royal_Storage_Wall),
             "Journal_2049_10_29" => Ok(Item::Journal_2049_10_29),
             "Ledge_Grab" => Ok(Item::Ledge_Grab),
             "Letter_from_Trace" => Ok(Item::Letter_from_Trace),
@@ -295,6 +300,7 @@ impl std::str::FromStr for Item {
             "Record_Losses" => Ok(Item::Record_Losses),
             "Remote_Drone" => Ok(Item::Remote_Drone),
             "Researchers_Missing" => Ok(Item::Researchers_Missing),
+            "Royal_Dagger" => Ok(Item::Royal_Dagger),
             "Shockwave" => Ok(Item::Shockwave),
             "Slingshot_Charge" => Ok(Item::Slingshot_Charge),
             "Slingshot_Hook" => Ok(Item::Slingshot_Hook),
@@ -326,5 +332,6 @@ pub fn unused_item(id: Item) -> bool {
             | Item::Journal_2049_10_29
             | Item::Melee_Charge
             | Item::Notes_2053_02_27
+            | Item::Royal_Dagger
     )
 }

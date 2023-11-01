@@ -427,3 +427,9 @@ areas:
   spots:
     - name: West
       coord: [15.1, 26.3]
+
+- name: Basement Save
+  on_entry: $reset_old_area(^newpos)
+  spots:
+    - name: Save Point
+      coord: [12.525, 27.5]
