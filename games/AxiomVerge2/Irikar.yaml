@@ -270,3 +270,9 @@ areas:
         - name: Urn
           item: Breach_Sight
           tags: [urn]
+
+- name: Abandoned Room
+  on_entry: $reset_old_area(^newpos)
+  spots:
+    - name: Empty Pedestal
+      coord: [14.525, 26.7]

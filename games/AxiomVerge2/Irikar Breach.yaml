@@ -214,11 +214,216 @@ areas:
   spots:
     - name: North
       coord: [13.5, 25.2]
+      local:
+        - to: South
+        - to: East
+      exits:
+        - to: West
+          req: $hover
+          movement: base
+        - to: Flappy Drone > South
+          tags: [ydoor]
     - name: South
       coord: [13.5, 25.8]
+      local:
+        - to: East
+          jumps: 1
+      exits:
+        - to: Ledge
+          req: $hook
+          time: 1  # ?
+        - to: Exit Corridor > North 13
+          tags: [ydoor]
     - name: Ledge
       coord: [13.675, 25.35]
+      local:
+        - to: South
+        - to: East
+          thru: [13.675, 25.6]
+      exits:
+        - to: North
+          req: $hover  # or is mist required?
+          movement: base
+          jumps: 1
+        - to: West
+          req: $hover
+          movement: base
+          jumps: 1
     - name: East
       coord: [13.9, 25.75]
+      local:
+        - to: South
+      exits:
+        - to: Ledge
+          req: $hook
+          time: 1  # ?
+        - to: Save Room > West
+          tags: [xdoor]
     - name: West
       coord: [13.1, 25.3]
+      local:
+        - to: South
+        - to: East
+      exits:
+        - to: Worm Rave > East
+          tags: [xdoor]
+
+- name: Worm Rave
+  on_entry: $reset_old_area(^newpos)
+  spots:
+    - name: East
+      coord: [12.9, 25.3]
+      local:
+        - to: South
+        - to: Corner
+      exits:
+        - to: Four-way > West
+          tags: [xdoor]
+    - name: South
+      coord: [12.5, 25.8]
+      local:
+        - to: Corner
+          jumps: 1
+      exits:
+        - to: Corner
+          req: $hook
+          time: 0.8  # ?
+        - to: East
+          req: $hook
+          time: 1.2  # ?
+        - to: Exit Corridor > North 12
+          tags: [ydoor]
+    - name: Corner
+      coord: [12.2, 25.7]
+      local:
+        - to: South
+      locations:
+        - name: Item
+          item: Flask
+          tags: [flask]
+
+- name: Exit Corridor
+  on_entry: $reset_old_area(^newpos)
+  data:
+    portal_default: Irikar > Abandoned Room > Empty Pedestal
+  spots:
+    - name: North 12
+      coord: [12.5, 26.2]
+      local:
+        - to: West
+        - to: West of Pillar
+      exits:
+        - to: Pillar
+          req: $hover and $hook
+          movement: base
+        - to: Worm Rave > South
+          tags: [ydoor]
+    - name: West
+      coord: [12.1, 26.75]
+      local:
+        - to: West of Pillar
+      exits:
+        - to: Neon Corridor > East
+          tags: [xdoor]
+    - name: West of Pillar
+      coord: [12.6, 26.8]
+      local:
+        - to: West
+      exits:
+        - to: Pillar
+          req: $hook
+          time: 1.4  # ?
+    - name: Pillar
+      coord: [13.05, 26.2]
+      local:
+         - to: West of Pillar
+         - to: Passage
+    - name: North 13
+      coord: [13.5, 26.2]
+      local:
+        - to: Passage
+      exits:
+        - to: Four-way > South
+          tags: [ydoor]
+        - to: Pillar
+          req: $hover and Mist_Upgrade
+          price: 20
+          movement: base
+    - name: Passage
+      coord: [13.9, 26.8]
+      local:
+        - to: Portal Stand
+          jumps: 1
+    - name: Portal Stand
+      coord: [14.525, 26.7]
+      data:
+        flipside: Irikar > Abandoned Room > Empty Pedestal
+      local:
+        - to: Passage
+        - to: East
+          jumps: 3
+      actions:
+        - name: Enter Portal
+          do: $main_portal_save_update
+          to: ^flipside
+          after: $clear_breach_save
+          tags: [portal]
+    - name: East
+      coord: [14.9, 26.3]
+      local:
+        - to: Portal Stand
+      exits:
+        - to: Uhrum Connector > West
+          tags: [xdoor]
+
+- name: Neon Corridor
+  on_entry: $reset_old_area(^newpos)
+  spots:
+    - name: East
+      coord: [11.9, 26.75]
+      local:
+        - to: Center
+          jumps: 1
+      exits:
+        - to: Exit Corridor > West
+          tags: [xdoor]
+    - name: Center
+      coord: [11.0, 26.55]
+      local:
+        - to: East
+        - to: West Basin
+    - name: West Basin
+      coord: [10.6, 26.8]
+      local:
+        - to: Center
+          jumps: 1
+      exits:
+        - to: West
+          req: $hook
+          movement: base
+          jumps: 1
+        - to: Center
+          req: $hook
+          time: 1  # ?
+    - name: West
+      coord: [10.1, 26.35]
+      local:
+        - to: West Basin
+      exits:
+        - to: Sandy Lair > East 27
+          tags: [xdoor]
+
+- name: Sandy Lair
+  on_entry: $reset_old_area(^newpos)
+  spots:
+    - name: East 27
+      coord: [9.9, 26.35]
+
+    - name: East 28
+      coord: [9.9, 27.6]
+
+- name: Uhrum Connector
+  on_entry: $reset_old_area(^newpos)
+  spots:
+    - name: West
+      coord: [15.1, 26.3]

@@ -871,6 +871,25 @@ pub fn get_area(spot: SpotId) -> AreaId {
         | SpotId::Irikar_Breach__Four_way__Ledge
         | SpotId::Irikar_Breach__Four_way__East
         | SpotId::Irikar_Breach__Four_way__West => AreaId::Irikar_Breach__Four_way,
+        SpotId::Irikar_Breach__Worm_Rave__East
+        | SpotId::Irikar_Breach__Worm_Rave__South
+        | SpotId::Irikar_Breach__Worm_Rave__Corner => AreaId::Irikar_Breach__Worm_Rave,
+        SpotId::Irikar_Breach__Exit_Corridor__North_12
+        | SpotId::Irikar_Breach__Exit_Corridor__West
+        | SpotId::Irikar_Breach__Exit_Corridor__West_of_Pillar
+        | SpotId::Irikar_Breach__Exit_Corridor__Pillar
+        | SpotId::Irikar_Breach__Exit_Corridor__North_13
+        | SpotId::Irikar_Breach__Exit_Corridor__Passage
+        | SpotId::Irikar_Breach__Exit_Corridor__Portal_Stand
+        | SpotId::Irikar_Breach__Exit_Corridor__East => AreaId::Irikar_Breach__Exit_Corridor,
+        SpotId::Irikar_Breach__Neon_Corridor__East
+        | SpotId::Irikar_Breach__Neon_Corridor__Center
+        | SpotId::Irikar_Breach__Neon_Corridor__West_Basin
+        | SpotId::Irikar_Breach__Neon_Corridor__West => AreaId::Irikar_Breach__Neon_Corridor,
+        SpotId::Irikar_Breach__Sandy_Lair__East_27 | SpotId::Irikar_Breach__Sandy_Lair__East_28 => {
+            AreaId::Irikar_Breach__Sandy_Lair
+        }
+        SpotId::Irikar_Breach__Uhrum_Connector__West => AreaId::Irikar_Breach__Uhrum_Connector,
         SpotId::Irikar__Hub__Northwest
         | SpotId::Irikar__Hub__North_Above_Portal
         | SpotId::Irikar__Hub__Northwest_Above_Bowl
@@ -904,6 +923,7 @@ pub fn get_area(spot: SpotId) -> AreaId {
         | SpotId::Irikar__Sight_Room__Lower_Ledge
         | SpotId::Irikar__Sight_Room__Portal
         | SpotId::Irikar__Sight_Room__Item_Pedestal => AreaId::Irikar__Sight_Room,
+        SpotId::Irikar__Abandoned_Room__Empty_Pedestal => AreaId::Irikar__Abandoned_Room,
         SpotId::Menu__Upgrade_Menu__Physiology
         | SpotId::Menu__Upgrade_Menu__Combat
         | SpotId::Menu__Upgrade_Menu__Infection
@@ -1753,6 +1773,25 @@ pub fn get_region(spot: SpotId) -> RegionId {
         | SpotId::Irikar_Breach__Four_way__Ledge
         | SpotId::Irikar_Breach__Four_way__East
         | SpotId::Irikar_Breach__Four_way__West => RegionId::Irikar_Breach,
+        SpotId::Irikar_Breach__Worm_Rave__East
+        | SpotId::Irikar_Breach__Worm_Rave__South
+        | SpotId::Irikar_Breach__Worm_Rave__Corner => RegionId::Irikar_Breach,
+        SpotId::Irikar_Breach__Exit_Corridor__North_12
+        | SpotId::Irikar_Breach__Exit_Corridor__West
+        | SpotId::Irikar_Breach__Exit_Corridor__West_of_Pillar
+        | SpotId::Irikar_Breach__Exit_Corridor__Pillar
+        | SpotId::Irikar_Breach__Exit_Corridor__North_13
+        | SpotId::Irikar_Breach__Exit_Corridor__Passage
+        | SpotId::Irikar_Breach__Exit_Corridor__Portal_Stand
+        | SpotId::Irikar_Breach__Exit_Corridor__East => RegionId::Irikar_Breach,
+        SpotId::Irikar_Breach__Neon_Corridor__East
+        | SpotId::Irikar_Breach__Neon_Corridor__Center
+        | SpotId::Irikar_Breach__Neon_Corridor__West_Basin
+        | SpotId::Irikar_Breach__Neon_Corridor__West => RegionId::Irikar_Breach,
+        SpotId::Irikar_Breach__Sandy_Lair__East_27 | SpotId::Irikar_Breach__Sandy_Lair__East_28 => {
+            RegionId::Irikar_Breach
+        }
+        SpotId::Irikar_Breach__Uhrum_Connector__West => RegionId::Irikar_Breach,
         SpotId::Irikar__Hub__Northwest
         | SpotId::Irikar__Hub__North_Above_Portal
         | SpotId::Irikar__Hub__Northwest_Above_Bowl
@@ -1786,6 +1825,7 @@ pub fn get_region(spot: SpotId) -> RegionId {
         | SpotId::Irikar__Sight_Room__Lower_Ledge
         | SpotId::Irikar__Sight_Room__Portal
         | SpotId::Irikar__Sight_Room__Item_Pedestal => RegionId::Irikar,
+        SpotId::Irikar__Abandoned_Room__Empty_Pedestal => RegionId::Irikar,
         SpotId::Menu__Upgrade_Menu__Physiology
         | SpotId::Menu__Upgrade_Menu__Combat
         | SpotId::Menu__Upgrade_Menu__Infection
@@ -2016,6 +2056,7 @@ impl world::Accessible for Location {
             LocationId::Irikar__Sight_Room__Item_Pedestal__Urn => true,
             LocationId::Irikar_Breach__Gauntlet__Hidden_Path_Reward__Item => true,
             LocationId::Irikar_Breach__Hover_Room__Bottom__Item => true,
+            LocationId::Irikar_Breach__Worm_Rave__Corner__Item => true,
             LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_1 => true,
             LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_2 => {
                 rules::access_melee_damage(&ctx)
@@ -2834,12 +2875,28 @@ impl world::Accessible for Exit {
             ExitId::Irikar__Hub__Save_Point__ex__Bowl_Hole_1 => rules::access_hook(&ctx),
             ExitId::Irikar__Hub__West_Rim__ex__East_Rim_1 => rules::access_hover(&ctx),
             ExitId::Irikar__Sight_Room__West_24__ex__Hub__Sat_Tower_East_24_1 => true,
+            ExitId::Irikar_Breach__Exit_Corridor__East__ex__Uhrum_Connector__West_1 => true,
+            ExitId::Irikar_Breach__Exit_Corridor__North_12__ex__Pillar_1 => rules::access_hover_and_hook(&ctx),
+            ExitId::Irikar_Breach__Exit_Corridor__North_12__ex__Worm_Rave__South_1 => true,
+            ExitId::Irikar_Breach__Exit_Corridor__North_13__ex__Four_way__South_1 => true,
+            ExitId::Irikar_Breach__Exit_Corridor__North_13__ex__Pillar_1 => rules::access_hover_and_mist_upgrade(&ctx),
+            ExitId::Irikar_Breach__Exit_Corridor__West__ex__Neon_Corridor__East_1 => true,
+            ExitId::Irikar_Breach__Exit_Corridor__West_of_Pillar__ex__Pillar_1 => rules::access_hook(&ctx),
             ExitId::Irikar_Breach__Flappy_Drone__Initial_Drop__ex__Pillar_Underside_1 => rules::access_hover(&ctx),
             ExitId::Irikar_Breach__Flappy_Drone__Pillar_Underside__ex__Top_Pillar_1 => rules::access_hover_and_hook(&ctx),
             ExitId::Irikar_Breach__Flappy_Drone__South__ex__Four_way__North_1 => true,
             ExitId::Irikar_Breach__Flappy_Drone__Top_Pillar__ex__Pillar_Underside_1 => rules::access_hover(&ctx),
             ExitId::Irikar_Breach__Flappy_Drone__Upper_Valley_Right__ex__Top_Pillar_1 => rules::access_hover_and_hook(&ctx),
             ExitId::Irikar_Breach__Flappy_Drone__West_Door__ex__Hover_Room__East_1 => true,
+            ExitId::Irikar_Breach__Four_way__East__ex__Ledge_1 => rules::access_hook(&ctx),
+            ExitId::Irikar_Breach__Four_way__East__ex__Save_Room__West_1 => true,
+            ExitId::Irikar_Breach__Four_way__Ledge__ex__North_1 => rules::access_hover(&ctx),
+            ExitId::Irikar_Breach__Four_way__Ledge__ex__West_1 => rules::access_hover(&ctx),
+            ExitId::Irikar_Breach__Four_way__North__ex__Flappy_Drone__South_1 => true,
+            ExitId::Irikar_Breach__Four_way__North__ex__West_1 => rules::access_hover(&ctx),
+            ExitId::Irikar_Breach__Four_way__South__ex__Exit_Corridor__North_13_1 => true,
+            ExitId::Irikar_Breach__Four_way__South__ex__Ledge_1 => rules::access_hook(&ctx),
+            ExitId::Irikar_Breach__Four_way__West__ex__Worm_Rave__East_1 => true,
             ExitId::Irikar_Breach__Gauntlet__East_22__ex__Hover_Room__West_1 => true,
             ExitId::Irikar_Breach__Gauntlet__Hidden_Path_Reward__ex__Hidden_Path_Top_Ledge_1 => rules::access_hook(&ctx),
             ExitId::Irikar_Breach__Gauntlet__Save_Point__ex__Hidden_Path_Upper_Entry_1 => rules::access_hover(&ctx),
@@ -2850,7 +2907,15 @@ impl world::Accessible for Exit {
             ExitId::Irikar_Breach__Hover_Room__East__ex__West_1 => rules::access_hover_or_hook(&ctx),
             ExitId::Irikar_Breach__Hover_Room__West__ex__East_1 => rules::access_hover(&ctx),
             ExitId::Irikar_Breach__Hover_Room__West__ex__Gauntlet__East_22_1 => true,
+            ExitId::Irikar_Breach__Neon_Corridor__East__ex__Exit_Corridor__West_1 => true,
+            ExitId::Irikar_Breach__Neon_Corridor__West__ex__Sandy_Lair__East_27_1 => true,
+            ExitId::Irikar_Breach__Neon_Corridor__West_Basin__ex__Center_1 => rules::access_hook(&ctx),
+            ExitId::Irikar_Breach__Neon_Corridor__West_Basin__ex__West_1 => rules::access_hook(&ctx),
             ExitId::Irikar_Breach__Save_Room__West__ex__Four_way__East_1 => true,
+            ExitId::Irikar_Breach__Worm_Rave__East__ex__Four_way__West_1 => true,
+            ExitId::Irikar_Breach__Worm_Rave__South__ex__Corner_1 => rules::access_hook(&ctx),
+            ExitId::Irikar_Breach__Worm_Rave__South__ex__East_1 => rules::access_hook(&ctx),
+            ExitId::Irikar_Breach__Worm_Rave__South__ex__Exit_Corridor__North_12_1 => true,
             ExitId::Menu__Upgrade_Menu__Combat__ex__Drone_1 => rules::access_remote_drone(&ctx),
             ExitId::Menu__Upgrade_Menu__Combat__ex__Infection_1 => rules::access_infect(&ctx),
             ExitId::Menu__Upgrade_Menu__Combat__ex__Physiology_1 => true,
@@ -3132,12 +3197,24 @@ impl world::Exit for Exit {
             ExitId::Glacier__Vertical_Room__West_9__ex__Ledge_Grab_Room__East_9_1 => true,
             ExitId::Irikar__Hub__Sat_Tower_East_24__ex__Sight_Room__West_24_1 => true,
             ExitId::Irikar__Sight_Room__West_24__ex__Hub__Sat_Tower_East_24_1 => true,
+            ExitId::Irikar_Breach__Exit_Corridor__East__ex__Uhrum_Connector__West_1 => true,
+            ExitId::Irikar_Breach__Exit_Corridor__North_12__ex__Worm_Rave__South_1 => true,
+            ExitId::Irikar_Breach__Exit_Corridor__North_13__ex__Four_way__South_1 => true,
+            ExitId::Irikar_Breach__Exit_Corridor__West__ex__Neon_Corridor__East_1 => true,
             ExitId::Irikar_Breach__Flappy_Drone__South__ex__Four_way__North_1 => true,
             ExitId::Irikar_Breach__Flappy_Drone__West_Door__ex__Hover_Room__East_1 => true,
+            ExitId::Irikar_Breach__Four_way__East__ex__Save_Room__West_1 => true,
+            ExitId::Irikar_Breach__Four_way__North__ex__Flappy_Drone__South_1 => true,
+            ExitId::Irikar_Breach__Four_way__South__ex__Exit_Corridor__North_13_1 => true,
+            ExitId::Irikar_Breach__Four_way__West__ex__Worm_Rave__East_1 => true,
             ExitId::Irikar_Breach__Gauntlet__East_22__ex__Hover_Room__West_1 => true,
             ExitId::Irikar_Breach__Hover_Room__East__ex__Flappy_Drone__West_Door_1 => true,
             ExitId::Irikar_Breach__Hover_Room__West__ex__Gauntlet__East_22_1 => true,
+            ExitId::Irikar_Breach__Neon_Corridor__East__ex__Exit_Corridor__West_1 => true,
+            ExitId::Irikar_Breach__Neon_Corridor__West__ex__Sandy_Lair__East_27_1 => true,
             ExitId::Irikar_Breach__Save_Room__West__ex__Four_way__East_1 => true,
+            ExitId::Irikar_Breach__Worm_Rave__East__ex__Four_way__West_1 => true,
+            ExitId::Irikar_Breach__Worm_Rave__South__ex__Exit_Corridor__North_12_1 => true,
             ExitId::Menu__Upgrade_Menu__Combat__ex__Physiology_1 => true,
             ExitId::Menu__Upgrade_Menu__Drone__ex__Combat_1 => true,
             ExitId::Menu__Upgrade_Menu__Drone__ex__Physiology_1 => true,
@@ -3365,6 +3442,7 @@ impl world::Accessible for Action {
                 ActionId::Irikar__Sight_Room__Portal__Enter_Portal => {
                     rules::access_mode__drone_and_breach_sight(&ctx)
                 }
+                ActionId::Irikar_Breach__Exit_Corridor__Portal_Stand__Enter_Portal => true,
             }
     }
     fn time(&self) -> u32 {
@@ -3582,6 +3660,9 @@ impl world::Action for Action {
                 rules::action_giguna__gateway__flask_ledge__open_door__do(ctx)
             }
             ActionId::Glacier__Revival__Save_Point__Save => rules::action_save(ctx),
+            ActionId::Irikar_Breach__Exit_Corridor__Portal_Stand__Enter_Portal => {
+                rules::action_main_portal_save_update(ctx)
+            }
             ActionId::Irikar__Hub__Save_Point__Save => rules::action_save(ctx),
             ActionId::Irikar__Hub__Portal_Stand__Enter_Portal => {
                 rules::action_breach_portal_save_update(ctx)
@@ -3596,6 +3677,9 @@ impl world::Action for Action {
         }
         match self.id {
             ActionId::Global__Recall_Drone => rules::action_indra__default(ctx),
+            ActionId::Irikar_Breach__Exit_Corridor__Portal_Stand__Enter_Portal => {
+                rules::action_clear_breach_save(ctx)
+            }
             _ => (),
         };
     }
@@ -3663,6 +3747,9 @@ impl world::Action for Action {
             }
             ActionId::Giguna__Clouds__Platform_Start__Hack_Deploy_Ride_to_Portal => {
                 SpotId::Giguna__Clouds__Platform_Stop
+            }
+            ActionId::Irikar_Breach__Exit_Corridor__Portal_Stand__Enter_Portal => {
+                SpotId::Irikar__Abandoned_Room__Empty_Pedestal
             }
             ActionId::Irikar__Hub__Portal_Stand__Enter_Portal => {
                 SpotId::Irikar_Breach__Gauntlet__Save_Point
@@ -3779,7 +3866,7 @@ pub struct Spot {
     pub actions: Range<usize>,
 }
 
-static RAW_SPOTS: [SpotId; 872] = [
+static RAW_SPOTS: [SpotId; 891] = [
     SpotId::None,
     SpotId::Amagi__Cave_Behind_Waterfall__Bottom,
     SpotId::Amagi__Cave_Behind_Waterfall__Middle,
@@ -4585,6 +4672,7 @@ static RAW_SPOTS: [SpotId; 872] = [
     SpotId::Glacier__Vertical_Room__Under_Switch,
     SpotId::Glacier__Vertical_Room__West_8,
     SpotId::Glacier__Vertical_Room__West_9,
+    SpotId::Irikar__Abandoned_Room__Empty_Pedestal,
     SpotId::Irikar__Hub__Bowl_Hole,
     SpotId::Irikar__Hub__Bowl_Middle_Ledge,
     SpotId::Irikar__Hub__Bowl_Middle_Platform_Center,
@@ -4618,6 +4706,14 @@ static RAW_SPOTS: [SpotId; 872] = [
     SpotId::Irikar__Sight_Room__Lower_Ledge,
     SpotId::Irikar__Sight_Room__Portal,
     SpotId::Irikar__Sight_Room__West_24,
+    SpotId::Irikar_Breach__Exit_Corridor__East,
+    SpotId::Irikar_Breach__Exit_Corridor__North_12,
+    SpotId::Irikar_Breach__Exit_Corridor__North_13,
+    SpotId::Irikar_Breach__Exit_Corridor__Passage,
+    SpotId::Irikar_Breach__Exit_Corridor__Pillar,
+    SpotId::Irikar_Breach__Exit_Corridor__Portal_Stand,
+    SpotId::Irikar_Breach__Exit_Corridor__West,
+    SpotId::Irikar_Breach__Exit_Corridor__West_of_Pillar,
     SpotId::Irikar_Breach__Flappy_Drone__Initial_Drop,
     SpotId::Irikar_Breach__Flappy_Drone__Passage_Corner,
     SpotId::Irikar_Breach__Flappy_Drone__Pillar_Underside,
@@ -4645,9 +4741,19 @@ static RAW_SPOTS: [SpotId; 872] = [
     SpotId::Irikar_Breach__Hover_Room__Bottom,
     SpotId::Irikar_Breach__Hover_Room__East,
     SpotId::Irikar_Breach__Hover_Room__West,
+    SpotId::Irikar_Breach__Neon_Corridor__Center,
+    SpotId::Irikar_Breach__Neon_Corridor__East,
+    SpotId::Irikar_Breach__Neon_Corridor__West,
+    SpotId::Irikar_Breach__Neon_Corridor__West_Basin,
+    SpotId::Irikar_Breach__Sandy_Lair__East_27,
+    SpotId::Irikar_Breach__Sandy_Lair__East_28,
     SpotId::Irikar_Breach__Save_Room__Save_Point,
     SpotId::Irikar_Breach__Save_Room__Upper_Area,
     SpotId::Irikar_Breach__Save_Room__West,
+    SpotId::Irikar_Breach__Uhrum_Connector__West,
+    SpotId::Irikar_Breach__Worm_Rave__Corner,
+    SpotId::Irikar_Breach__Worm_Rave__East,
+    SpotId::Irikar_Breach__Worm_Rave__South,
     SpotId::Menu__Upgrade_Menu__Combat,
     SpotId::Menu__Upgrade_Menu__Drone,
     SpotId::Menu__Upgrade_Menu__Infection,
@@ -5009,6 +5115,10 @@ lazy_static! {
             start: SpotId::Glacier__Vertical_Room__East_12.into_usize(),
             end: SpotId::Glacier__Vertical_Room__West_9.into_usize() + 1,
         },
+        AreaId::Irikar_Breach__Exit_Corridor => Range {
+            start: SpotId::Irikar_Breach__Exit_Corridor__East.into_usize(),
+            end: SpotId::Irikar_Breach__Exit_Corridor__West_of_Pillar.into_usize() + 1,
+        },
         AreaId::Irikar_Breach__Flappy_Drone => Range {
             start: SpotId::Irikar_Breach__Flappy_Drone__Initial_Drop.into_usize(),
             end: SpotId::Irikar_Breach__Flappy_Drone__Zigzag_Bottom.into_usize() + 1,
@@ -5025,9 +5135,29 @@ lazy_static! {
             start: SpotId::Irikar_Breach__Hover_Room__Bottom.into_usize(),
             end: SpotId::Irikar_Breach__Hover_Room__West.into_usize() + 1,
         },
+        AreaId::Irikar_Breach__Neon_Corridor => Range {
+            start: SpotId::Irikar_Breach__Neon_Corridor__Center.into_usize(),
+            end: SpotId::Irikar_Breach__Neon_Corridor__West_Basin.into_usize() + 1,
+        },
+        AreaId::Irikar_Breach__Sandy_Lair => Range {
+            start: SpotId::Irikar_Breach__Sandy_Lair__East_27.into_usize(),
+            end: SpotId::Irikar_Breach__Sandy_Lair__East_28.into_usize() + 1,
+        },
         AreaId::Irikar_Breach__Save_Room => Range {
             start: SpotId::Irikar_Breach__Save_Room__Save_Point.into_usize(),
             end: SpotId::Irikar_Breach__Save_Room__West.into_usize() + 1,
+        },
+        AreaId::Irikar_Breach__Uhrum_Connector => Range {
+            start: SpotId::Irikar_Breach__Uhrum_Connector__West.into_usize(),
+            end: SpotId::Irikar_Breach__Uhrum_Connector__West.into_usize() + 1,
+        },
+        AreaId::Irikar_Breach__Worm_Rave => Range {
+            start: SpotId::Irikar_Breach__Worm_Rave__Corner.into_usize(),
+            end: SpotId::Irikar_Breach__Worm_Rave__South.into_usize() + 1,
+        },
+        AreaId::Irikar__Abandoned_Room => Range {
+            start: SpotId::Irikar__Abandoned_Room__Empty_Pedestal.into_usize(),
+            end: SpotId::Irikar__Abandoned_Room__Empty_Pedestal.into_usize() + 1,
         },
         AreaId::Irikar__Hub => Range {
             start: SpotId::Irikar__Hub__Bowl_Hole.into_usize(),
@@ -5070,7 +5200,7 @@ impl world::World for World {
     type Exit = Exit;
     type Action = Action;
     type Warp = Warp;
-    const NUM_LOCATIONS: u32 = 156;
+    const NUM_LOCATIONS: u32 = 157;
 
     fn objective_name(&self) -> String {
         format!("{}", self.objective)
@@ -5252,6 +5382,7 @@ impl world::World for World {
                 LocationId::Giguna__Gateway__Flask_Ledge__Item,
                 LocationId::Glacier__Vertical_Room__Peak__Flask,
                 LocationId::Irikar_Breach__Gauntlet__Hidden_Path_Reward__Item,
+                LocationId::Irikar_Breach__Worm_Rave__Corner__Item,
             ],
             Item::Underwater_Movement => vec![LocationId::Amagi__Liru_Room__Shrine__Item],
             Item::Amagi_Dragon_Eye_Passage => {
@@ -5777,6 +5908,9 @@ impl world::World for World {
             LocationId::Irikar_Breach__Hover_Room__Bottom__Item => {
                 SpotId::Irikar_Breach__Hover_Room__Bottom
             }
+            LocationId::Irikar_Breach__Worm_Rave__Corner__Item => {
+                SpotId::Irikar_Breach__Worm_Rave__Corner
+            }
             LocationId::Irikar__Hub__Sat_Tower_Top_Ledge__Tablet => {
                 SpotId::Irikar__Hub__Sat_Tower_Top_Ledge
             }
@@ -6001,6 +6135,9 @@ impl world::World for World {
                 SpotId::Giguna__Gateway__Flask_Ledge
             }
             ActionId::Glacier__Revival__Save_Point__Save => SpotId::Glacier__Revival__Save_Point,
+            ActionId::Irikar_Breach__Exit_Corridor__Portal_Stand__Enter_Portal => {
+                SpotId::Irikar_Breach__Exit_Corridor__Portal_Stand
+            }
             ActionId::Irikar__Hub__Save_Point__Save => SpotId::Irikar__Hub__Save_Point,
             ActionId::Irikar__Hub__Portal_Stand__Enter_Portal => SpotId::Irikar__Hub__Portal_Stand,
             ActionId::Irikar__Sight_Room__Portal__Enter_Portal => {
@@ -6520,6 +6657,21 @@ impl world::World for World {
             ExitId::Irikar_Breach__Flappy_Drone__Upper_Valley_Right__ex__Top_Pillar_1 => SpotId::Irikar_Breach__Flappy_Drone__Upper_Valley_Right,
             ExitId::Irikar_Breach__Flappy_Drone__Top_Pillar__ex__Pillar_Underside_1 => SpotId::Irikar_Breach__Flappy_Drone__Top_Pillar,
             ExitId::Irikar_Breach__Flappy_Drone__South__ex__Four_way__North_1 => SpotId::Irikar_Breach__Flappy_Drone__South,
+            ExitId::Irikar_Breach__Four_way__North__ex__West_1 | ExitId:: Irikar_Breach__Four_way__North__ex__Flappy_Drone__South_1 => SpotId::Irikar_Breach__Four_way__North,
+            ExitId::Irikar_Breach__Four_way__South__ex__Ledge_1 | ExitId:: Irikar_Breach__Four_way__South__ex__Exit_Corridor__North_13_1 => SpotId::Irikar_Breach__Four_way__South,
+            ExitId::Irikar_Breach__Four_way__Ledge__ex__North_1 | ExitId:: Irikar_Breach__Four_way__Ledge__ex__West_1 => SpotId::Irikar_Breach__Four_way__Ledge,
+            ExitId::Irikar_Breach__Four_way__East__ex__Ledge_1 | ExitId:: Irikar_Breach__Four_way__East__ex__Save_Room__West_1 => SpotId::Irikar_Breach__Four_way__East,
+            ExitId::Irikar_Breach__Four_way__West__ex__Worm_Rave__East_1 => SpotId::Irikar_Breach__Four_way__West,
+            ExitId::Irikar_Breach__Worm_Rave__East__ex__Four_way__West_1 => SpotId::Irikar_Breach__Worm_Rave__East,
+            ExitId::Irikar_Breach__Worm_Rave__South__ex__Corner_1 | ExitId:: Irikar_Breach__Worm_Rave__South__ex__East_1 | ExitId:: Irikar_Breach__Worm_Rave__South__ex__Exit_Corridor__North_12_1 => SpotId::Irikar_Breach__Worm_Rave__South,
+            ExitId::Irikar_Breach__Exit_Corridor__North_12__ex__Pillar_1 | ExitId:: Irikar_Breach__Exit_Corridor__North_12__ex__Worm_Rave__South_1 => SpotId::Irikar_Breach__Exit_Corridor__North_12,
+            ExitId::Irikar_Breach__Exit_Corridor__West__ex__Neon_Corridor__East_1 => SpotId::Irikar_Breach__Exit_Corridor__West,
+            ExitId::Irikar_Breach__Exit_Corridor__West_of_Pillar__ex__Pillar_1 => SpotId::Irikar_Breach__Exit_Corridor__West_of_Pillar,
+            ExitId::Irikar_Breach__Exit_Corridor__North_13__ex__Four_way__South_1 | ExitId:: Irikar_Breach__Exit_Corridor__North_13__ex__Pillar_1 => SpotId::Irikar_Breach__Exit_Corridor__North_13,
+            ExitId::Irikar_Breach__Exit_Corridor__East__ex__Uhrum_Connector__West_1 => SpotId::Irikar_Breach__Exit_Corridor__East,
+            ExitId::Irikar_Breach__Neon_Corridor__East__ex__Exit_Corridor__West_1 => SpotId::Irikar_Breach__Neon_Corridor__East,
+            ExitId::Irikar_Breach__Neon_Corridor__West_Basin__ex__West_1 | ExitId:: Irikar_Breach__Neon_Corridor__West_Basin__ex__Center_1 => SpotId::Irikar_Breach__Neon_Corridor__West_Basin,
+            ExitId::Irikar_Breach__Neon_Corridor__West__ex__Sandy_Lair__East_27_1 => SpotId::Irikar_Breach__Neon_Corridor__West,
             ExitId::Irikar__Hub__West_Rim__ex__East_Rim_1 => SpotId::Irikar__Hub__West_Rim,
             ExitId::Irikar__Hub__East_Rim__ex__Sat_Tower_Roof_West_1 => SpotId::Irikar__Hub__East_Rim,
             ExitId::Irikar__Hub__Bowl_Top_Platform__ex__West_Rim_1 => SpotId::Irikar__Hub__Bowl_Top_Platform,
@@ -7111,14 +7263,28 @@ impl world::World for World {
             | SpotId::Irikar__Sight_Room__Item_Pedestal
             | SpotId::Irikar__Sight_Room__Portal
             | SpotId::Irikar__Sight_Room__West_24
+            | SpotId::Irikar_Breach__Exit_Corridor__East
+            | SpotId::Irikar_Breach__Exit_Corridor__North_12
+            | SpotId::Irikar_Breach__Exit_Corridor__North_13
+            | SpotId::Irikar_Breach__Exit_Corridor__Portal_Stand
+            | SpotId::Irikar_Breach__Exit_Corridor__West
             | SpotId::Irikar_Breach__Flappy_Drone__South
             | SpotId::Irikar_Breach__Flappy_Drone__West_Door
+            | SpotId::Irikar_Breach__Four_way__East
+            | SpotId::Irikar_Breach__Four_way__North
+            | SpotId::Irikar_Breach__Four_way__South
+            | SpotId::Irikar_Breach__Four_way__West
             | SpotId::Irikar_Breach__Gauntlet__East_22
             | SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Reward
             | SpotId::Irikar_Breach__Hover_Room__Bottom
             | SpotId::Irikar_Breach__Hover_Room__East
             | SpotId::Irikar_Breach__Hover_Room__West
+            | SpotId::Irikar_Breach__Neon_Corridor__East
+            | SpotId::Irikar_Breach__Neon_Corridor__West
             | SpotId::Irikar_Breach__Save_Room__West
+            | SpotId::Irikar_Breach__Worm_Rave__Corner
+            | SpotId::Irikar_Breach__Worm_Rave__East
+            | SpotId::Irikar_Breach__Worm_Rave__South
             | SpotId::Menu__Upgrade_Menu__Combat
             | SpotId::Menu__Upgrade_Menu__Drone
             | SpotId::Menu__Upgrade_Menu__Infection
@@ -8168,6 +8334,14 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
             id: LocationId::Irikar_Breach__Hover_Room__Bottom__Item,
             canonical: CanonId::None,
             item: Item::Drone_Hover,
+            price: Currency::Free,
+            time: 5500,
+            exit_id: None,
+        },
+        LocationId::Irikar_Breach__Worm_Rave__Corner__Item => Location {
+            id: LocationId::Irikar_Breach__Worm_Rave__Corner__Item,
+            canonical: CanonId::None,
+            item: Item::Flask,
             price: Currency::Free,
             time: 5500,
             exit_id: None,
@@ -13338,6 +13512,174 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
             price: Currency::Free,
             loc_id: None,
         },
+        ExitId::Irikar_Breach__Four_way__North__ex__West_1 => Exit {
+            id: ExitId::Irikar_Breach__Four_way__North__ex__West_1,
+            time: 1403,
+            dest: SpotId::Irikar_Breach__Four_way__West,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Irikar_Breach__Four_way__North__ex__Flappy_Drone__South_1 => Exit {
+            id: ExitId::Irikar_Breach__Four_way__North__ex__Flappy_Drone__South_1,
+            time: 1600,
+            dest: SpotId::Irikar_Breach__Flappy_Drone__South,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Irikar_Breach__Four_way__South__ex__Ledge_1 => Exit {
+            id: ExitId::Irikar_Breach__Four_way__South__ex__Ledge_1,
+            time: 1000,
+            dest: SpotId::Irikar_Breach__Four_way__Ledge,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Irikar_Breach__Four_way__South__ex__Exit_Corridor__North_13_1 => Exit {
+            id: ExitId::Irikar_Breach__Four_way__South__ex__Exit_Corridor__North_13_1,
+            time: 1600,
+            dest: SpotId::Irikar_Breach__Exit_Corridor__North_13,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Irikar_Breach__Four_way__Ledge__ex__North_1 => Exit {
+            id: ExitId::Irikar_Breach__Four_way__Ledge__ex__North_1,
+            time: 614,
+            dest: SpotId::Irikar_Breach__Four_way__North,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Irikar_Breach__Four_way__Ledge__ex__West_1 => Exit {
+            id: ExitId::Irikar_Breach__Four_way__Ledge__ex__West_1,
+            time: 2017,
+            dest: SpotId::Irikar_Breach__Four_way__West,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Irikar_Breach__Four_way__East__ex__Ledge_1 => Exit {
+            id: ExitId::Irikar_Breach__Four_way__East__ex__Ledge_1,
+            time: 1000,
+            dest: SpotId::Irikar_Breach__Four_way__Ledge,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Irikar_Breach__Four_way__East__ex__Save_Room__West_1 => Exit {
+            id: ExitId::Irikar_Breach__Four_way__East__ex__Save_Room__West_1,
+            time: 1600,
+            dest: SpotId::Irikar_Breach__Save_Room__West,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Irikar_Breach__Four_way__West__ex__Worm_Rave__East_1 => Exit {
+            id: ExitId::Irikar_Breach__Four_way__West__ex__Worm_Rave__East_1,
+            time: 1600,
+            dest: SpotId::Irikar_Breach__Worm_Rave__East,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Irikar_Breach__Worm_Rave__East__ex__Four_way__West_1 => Exit {
+            id: ExitId::Irikar_Breach__Worm_Rave__East__ex__Four_way__West_1,
+            time: 1600,
+            dest: SpotId::Irikar_Breach__Four_way__West,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Irikar_Breach__Worm_Rave__South__ex__Corner_1 => Exit {
+            id: ExitId::Irikar_Breach__Worm_Rave__South__ex__Corner_1,
+            time: 800,
+            dest: SpotId::Irikar_Breach__Worm_Rave__Corner,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Irikar_Breach__Worm_Rave__South__ex__East_1 => Exit {
+            id: ExitId::Irikar_Breach__Worm_Rave__South__ex__East_1,
+            time: 1200,
+            dest: SpotId::Irikar_Breach__Worm_Rave__East,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Irikar_Breach__Worm_Rave__South__ex__Exit_Corridor__North_12_1 => Exit {
+            id: ExitId::Irikar_Breach__Worm_Rave__South__ex__Exit_Corridor__North_12_1,
+            time: 1600,
+            dest: SpotId::Irikar_Breach__Exit_Corridor__North_12,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Irikar_Breach__Exit_Corridor__North_12__ex__Pillar_1 => Exit {
+            id: ExitId::Irikar_Breach__Exit_Corridor__North_12__ex__Pillar_1,
+            time: 1929,
+            dest: SpotId::Irikar_Breach__Exit_Corridor__Pillar,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Irikar_Breach__Exit_Corridor__North_12__ex__Worm_Rave__South_1 => Exit {
+            id: ExitId::Irikar_Breach__Exit_Corridor__North_12__ex__Worm_Rave__South_1,
+            time: 1600,
+            dest: SpotId::Irikar_Breach__Worm_Rave__South,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Irikar_Breach__Exit_Corridor__West__ex__Neon_Corridor__East_1 => Exit {
+            id: ExitId::Irikar_Breach__Exit_Corridor__West__ex__Neon_Corridor__East_1,
+            time: 1600,
+            dest: SpotId::Irikar_Breach__Neon_Corridor__East,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Irikar_Breach__Exit_Corridor__West_of_Pillar__ex__Pillar_1 => Exit {
+            id: ExitId::Irikar_Breach__Exit_Corridor__West_of_Pillar__ex__Pillar_1,
+            time: 1400,
+            dest: SpotId::Irikar_Breach__Exit_Corridor__Pillar,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Irikar_Breach__Exit_Corridor__North_13__ex__Four_way__South_1 => Exit {
+            id: ExitId::Irikar_Breach__Exit_Corridor__North_13__ex__Four_way__South_1,
+            time: 1600,
+            dest: SpotId::Irikar_Breach__Four_way__South,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Irikar_Breach__Exit_Corridor__North_13__ex__Pillar_1 => Exit {
+            id: ExitId::Irikar_Breach__Exit_Corridor__North_13__ex__Pillar_1,
+            time: 1578,
+            dest: SpotId::Irikar_Breach__Exit_Corridor__Pillar,
+            price: Currency::Energy(20),
+            loc_id: None,
+        },
+        ExitId::Irikar_Breach__Exit_Corridor__East__ex__Uhrum_Connector__West_1 => Exit {
+            id: ExitId::Irikar_Breach__Exit_Corridor__East__ex__Uhrum_Connector__West_1,
+            time: 1600,
+            dest: SpotId::Irikar_Breach__Uhrum_Connector__West,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Irikar_Breach__Neon_Corridor__East__ex__Exit_Corridor__West_1 => Exit {
+            id: ExitId::Irikar_Breach__Neon_Corridor__East__ex__Exit_Corridor__West_1,
+            time: 1600,
+            dest: SpotId::Irikar_Breach__Exit_Corridor__West,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Irikar_Breach__Neon_Corridor__West_Basin__ex__West_1 => Exit {
+            id: ExitId::Irikar_Breach__Neon_Corridor__West_Basin__ex__West_1,
+            time: 1754,
+            dest: SpotId::Irikar_Breach__Neon_Corridor__West,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Irikar_Breach__Neon_Corridor__West_Basin__ex__Center_1 => Exit {
+            id: ExitId::Irikar_Breach__Neon_Corridor__West_Basin__ex__Center_1,
+            time: 1000,
+            dest: SpotId::Irikar_Breach__Neon_Corridor__Center,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Irikar_Breach__Neon_Corridor__West__ex__Sandy_Lair__East_27_1 => Exit {
+            id: ExitId::Irikar_Breach__Neon_Corridor__West__ex__Sandy_Lair__East_27_1,
+            time: 1600,
+            dest: SpotId::Irikar_Breach__Sandy_Lair__East_27,
+            price: Currency::Free,
+            loc_id: None,
+        },
         ExitId::Irikar__Hub__West_Rim__ex__East_Rim_1 => Exit {
             id: ExitId::Irikar__Hub__West_Rim__ex__East_Rim_1,
             time: 2105,
@@ -13903,6 +14245,11 @@ pub fn build_actions() -> EnumMap<ActionId, Action> {
         ActionId::Glacier__Revival__Save_Point__Save => Action {
             id: ActionId::Glacier__Revival__Save_Point__Save,
             time: 1200,
+            price: Currency::Free,
+        },
+        ActionId::Irikar_Breach__Exit_Corridor__Portal_Stand__Enter_Portal => Action {
+            id: ActionId::Irikar_Breach__Exit_Corridor__Portal_Stand__Enter_Portal,
+            time: 3600,
             price: Currency::Free,
         },
         ActionId::Irikar__Hub__Save_Point__Save => Action {
@@ -24543,7 +24890,8 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             exits: Range {
-                start: 0, end: 0,
+                start: ExitId::Irikar_Breach__Four_way__North__ex__Flappy_Drone__South_1.into_usize(),
+                end: ExitId::Irikar_Breach__Four_way__North__ex__West_1.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
@@ -24555,7 +24903,8 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             exits: Range {
-                start: 0, end: 0,
+                start: ExitId::Irikar_Breach__Four_way__South__ex__Exit_Corridor__North_13_1.into_usize(),
+                end: ExitId::Irikar_Breach__Four_way__South__ex__Ledge_1.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
@@ -24567,7 +24916,8 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             exits: Range {
-                start: 0, end: 0,
+                start: ExitId::Irikar_Breach__Four_way__Ledge__ex__North_1.into_usize(),
+                end: ExitId::Irikar_Breach__Four_way__Ledge__ex__West_1.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
@@ -24579,7 +24929,8 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             exits: Range {
-                start: 0, end: 0,
+                start: ExitId::Irikar_Breach__Four_way__East__ex__Ledge_1.into_usize(),
+                end: ExitId::Irikar_Breach__Four_way__East__ex__Save_Room__West_1.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
@@ -24587,6 +24938,235 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
         },
         SpotId::Irikar_Breach__Four_way__West => Spot {
             id: SpotId::Irikar_Breach__Four_way__West,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Irikar_Breach__Four_way__West__ex__Worm_Rave__East_1.into_usize(),
+                end: ExitId::Irikar_Breach__Four_way__West__ex__Worm_Rave__East_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Irikar_Breach__Worm_Rave__East => Spot {
+            id: SpotId::Irikar_Breach__Worm_Rave__East,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Irikar_Breach__Worm_Rave__East__ex__Four_way__West_1.into_usize(),
+                end: ExitId::Irikar_Breach__Worm_Rave__East__ex__Four_way__West_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Irikar_Breach__Worm_Rave__South => Spot {
+            id: SpotId::Irikar_Breach__Worm_Rave__South,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Irikar_Breach__Worm_Rave__South__ex__Corner_1.into_usize(),
+                end: ExitId::Irikar_Breach__Worm_Rave__South__ex__Exit_Corridor__North_12_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Irikar_Breach__Worm_Rave__Corner => Spot {
+            id: SpotId::Irikar_Breach__Worm_Rave__Corner,
+            locations: Range {
+                start: LocationId::Irikar_Breach__Worm_Rave__Corner__Item.into_usize(),
+                end: LocationId::Irikar_Breach__Worm_Rave__Corner__Item.into_usize() + 1,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Irikar_Breach__Exit_Corridor__North_12 => Spot {
+            id: SpotId::Irikar_Breach__Exit_Corridor__North_12,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Irikar_Breach__Exit_Corridor__North_12__ex__Pillar_1.into_usize(),
+                end: ExitId::Irikar_Breach__Exit_Corridor__North_12__ex__Worm_Rave__South_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Irikar_Breach__Exit_Corridor__West => Spot {
+            id: SpotId::Irikar_Breach__Exit_Corridor__West,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Irikar_Breach__Exit_Corridor__West__ex__Neon_Corridor__East_1.into_usize(),
+                end: ExitId::Irikar_Breach__Exit_Corridor__West__ex__Neon_Corridor__East_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Irikar_Breach__Exit_Corridor__West_of_Pillar => Spot {
+            id: SpotId::Irikar_Breach__Exit_Corridor__West_of_Pillar,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Irikar_Breach__Exit_Corridor__West_of_Pillar__ex__Pillar_1.into_usize(),
+                end: ExitId::Irikar_Breach__Exit_Corridor__West_of_Pillar__ex__Pillar_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Irikar_Breach__Exit_Corridor__Pillar => Spot {
+            id: SpotId::Irikar_Breach__Exit_Corridor__Pillar,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Irikar_Breach__Exit_Corridor__North_13 => Spot {
+            id: SpotId::Irikar_Breach__Exit_Corridor__North_13,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Irikar_Breach__Exit_Corridor__North_13__ex__Four_way__South_1.into_usize(),
+                end: ExitId::Irikar_Breach__Exit_Corridor__North_13__ex__Pillar_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Irikar_Breach__Exit_Corridor__Passage => Spot {
+            id: SpotId::Irikar_Breach__Exit_Corridor__Passage,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Irikar_Breach__Exit_Corridor__Portal_Stand => Spot {
+            id: SpotId::Irikar_Breach__Exit_Corridor__Portal_Stand,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: ActionId::Irikar_Breach__Exit_Corridor__Portal_Stand__Enter_Portal.into_usize(),
+                end: ActionId::Irikar_Breach__Exit_Corridor__Portal_Stand__Enter_Portal.into_usize() + 1,
+            },
+        },
+        SpotId::Irikar_Breach__Exit_Corridor__East => Spot {
+            id: SpotId::Irikar_Breach__Exit_Corridor__East,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Irikar_Breach__Exit_Corridor__East__ex__Uhrum_Connector__West_1.into_usize(),
+                end: ExitId::Irikar_Breach__Exit_Corridor__East__ex__Uhrum_Connector__West_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Irikar_Breach__Neon_Corridor__East => Spot {
+            id: SpotId::Irikar_Breach__Neon_Corridor__East,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Irikar_Breach__Neon_Corridor__East__ex__Exit_Corridor__West_1.into_usize(),
+                end: ExitId::Irikar_Breach__Neon_Corridor__East__ex__Exit_Corridor__West_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Irikar_Breach__Neon_Corridor__Center => Spot {
+            id: SpotId::Irikar_Breach__Neon_Corridor__Center,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Irikar_Breach__Neon_Corridor__West_Basin => Spot {
+            id: SpotId::Irikar_Breach__Neon_Corridor__West_Basin,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Irikar_Breach__Neon_Corridor__West_Basin__ex__Center_1.into_usize(),
+                end: ExitId::Irikar_Breach__Neon_Corridor__West_Basin__ex__West_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Irikar_Breach__Neon_Corridor__West => Spot {
+            id: SpotId::Irikar_Breach__Neon_Corridor__West,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Irikar_Breach__Neon_Corridor__West__ex__Sandy_Lair__East_27_1.into_usize(),
+                end: ExitId::Irikar_Breach__Neon_Corridor__West__ex__Sandy_Lair__East_27_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Irikar_Breach__Sandy_Lair__East_27 => Spot {
+            id: SpotId::Irikar_Breach__Sandy_Lair__East_27,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Irikar_Breach__Sandy_Lair__East_28 => Spot {
+            id: SpotId::Irikar_Breach__Sandy_Lair__East_28,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Irikar_Breach__Uhrum_Connector__West => Spot {
+            id: SpotId::Irikar_Breach__Uhrum_Connector__West,
             locations: Range {
                 start: 0, end: 0,
             },
@@ -25003,6 +25583,18 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             locations: Range {
                 start: LocationId::Irikar__Sight_Room__Item_Pedestal__Urn.into_usize(),
                 end: LocationId::Irikar__Sight_Room__Item_Pedestal__Urn.into_usize() + 1,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Irikar__Abandoned_Room__Empty_Pedestal => Spot {
+            id: SpotId::Irikar__Abandoned_Room__Empty_Pedestal,
+            locations: Range {
+                start: 0, end: 0,
             },
             exits: Range {
                 start: 0, end: 0,
@@ -26288,6 +26880,27 @@ pub fn spot_locations(id: SpotId) -> Range<usize> {
         SpotId::Irikar_Breach__Four_way__Ledge => Range { start: 0, end: 0 },
         SpotId::Irikar_Breach__Four_way__East => Range { start: 0, end: 0 },
         SpotId::Irikar_Breach__Four_way__West => Range { start: 0, end: 0 },
+        SpotId::Irikar_Breach__Worm_Rave__East => Range { start: 0, end: 0 },
+        SpotId::Irikar_Breach__Worm_Rave__South => Range { start: 0, end: 0 },
+        SpotId::Irikar_Breach__Worm_Rave__Corner => Range {
+            start: LocationId::Irikar_Breach__Worm_Rave__Corner__Item.into_usize(),
+            end: LocationId::Irikar_Breach__Worm_Rave__Corner__Item.into_usize() + 1,
+        },
+        SpotId::Irikar_Breach__Exit_Corridor__North_12 => Range { start: 0, end: 0 },
+        SpotId::Irikar_Breach__Exit_Corridor__West => Range { start: 0, end: 0 },
+        SpotId::Irikar_Breach__Exit_Corridor__West_of_Pillar => Range { start: 0, end: 0 },
+        SpotId::Irikar_Breach__Exit_Corridor__Pillar => Range { start: 0, end: 0 },
+        SpotId::Irikar_Breach__Exit_Corridor__North_13 => Range { start: 0, end: 0 },
+        SpotId::Irikar_Breach__Exit_Corridor__Passage => Range { start: 0, end: 0 },
+        SpotId::Irikar_Breach__Exit_Corridor__Portal_Stand => Range { start: 0, end: 0 },
+        SpotId::Irikar_Breach__Exit_Corridor__East => Range { start: 0, end: 0 },
+        SpotId::Irikar_Breach__Neon_Corridor__East => Range { start: 0, end: 0 },
+        SpotId::Irikar_Breach__Neon_Corridor__Center => Range { start: 0, end: 0 },
+        SpotId::Irikar_Breach__Neon_Corridor__West_Basin => Range { start: 0, end: 0 },
+        SpotId::Irikar_Breach__Neon_Corridor__West => Range { start: 0, end: 0 },
+        SpotId::Irikar_Breach__Sandy_Lair__East_27 => Range { start: 0, end: 0 },
+        SpotId::Irikar_Breach__Sandy_Lair__East_28 => Range { start: 0, end: 0 },
+        SpotId::Irikar_Breach__Uhrum_Connector__West => Range { start: 0, end: 0 },
         SpotId::Irikar__Hub__Northwest => Range { start: 0, end: 0 },
         SpotId::Irikar__Hub__North_Above_Portal => Range { start: 0, end: 0 },
         SpotId::Irikar__Hub__Northwest_Above_Bowl => Range { start: 0, end: 0 },
@@ -26327,6 +26940,7 @@ pub fn spot_locations(id: SpotId) -> Range<usize> {
             start: LocationId::Irikar__Sight_Room__Item_Pedestal__Urn.into_usize(),
             end: LocationId::Irikar__Sight_Room__Item_Pedestal__Urn.into_usize() + 1,
         },
+        SpotId::Irikar__Abandoned_Room__Empty_Pedestal => Range { start: 0, end: 0 },
         SpotId::Menu__Upgrade_Menu__Physiology => Range {
             start: LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_1.into_usize(),
             end: LocationId::Menu__Upgrade_Menu__Physiology__Mist_Upgrade.into_usize() + 1,
@@ -26603,6 +27217,14 @@ pub fn area_locations(id: AreaId) -> Range<usize> {
         },
         AreaId::Irikar_Breach__Flappy_Drone => Range { start: 0, end: 0 },
         AreaId::Irikar_Breach__Four_way => Range { start: 0, end: 0 },
+        AreaId::Irikar_Breach__Worm_Rave => Range {
+            start: LocationId::Irikar_Breach__Worm_Rave__Corner__Item.into_usize(),
+            end: LocationId::Irikar_Breach__Worm_Rave__Corner__Item.into_usize(),
+        },
+        AreaId::Irikar_Breach__Exit_Corridor => Range { start: 0, end: 0 },
+        AreaId::Irikar_Breach__Neon_Corridor => Range { start: 0, end: 0 },
+        AreaId::Irikar_Breach__Sandy_Lair => Range { start: 0, end: 0 },
+        AreaId::Irikar_Breach__Uhrum_Connector => Range { start: 0, end: 0 },
         AreaId::Irikar__Hub => Range {
             start: LocationId::Irikar__Hub__Sat_Tower_Top_Ledge__Tablet.into_usize(),
             end: LocationId::Irikar__Hub__Sat_Tower_Top_Ledge__Tablet.into_usize(),
@@ -26611,6 +27233,7 @@ pub fn area_locations(id: AreaId) -> Range<usize> {
             start: LocationId::Irikar__Sight_Room__Item_Pedestal__Urn.into_usize(),
             end: LocationId::Irikar__Sight_Room__Item_Pedestal__Urn.into_usize(),
         },
+        AreaId::Irikar__Abandoned_Room => Range { start: 0, end: 0 },
         AreaId::Menu__Upgrade_Menu => Range {
             start: LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_1.into_usize(),
             end: LocationId::Menu__Upgrade_Menu__Physiology__Mist_Upgrade.into_usize(),
@@ -26647,7 +27270,7 @@ pub fn region_locations(id: RegionId) -> Range<usize> {
         },
         RegionId::Irikar_Breach => Range {
             start: LocationId::Irikar_Breach__Gauntlet__Hidden_Path_Reward__Item.into_usize(),
-            end: LocationId::Irikar_Breach__Hover_Room__Bottom__Item.into_usize(),
+            end: LocationId::Irikar_Breach__Worm_Rave__Corner__Item.into_usize(),
         },
         RegionId::Irikar => Range {
             start: LocationId::Irikar__Hub__Sat_Tower_Top_Ledge__Tablet.into_usize(),

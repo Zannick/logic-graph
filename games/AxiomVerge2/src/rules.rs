@@ -860,6 +860,10 @@ pub fn access_hover_and_hook(ctx: &Context) -> bool {
     // $hover and $hook
     (helper__hover!(ctx) && helper__hook!(ctx))
 }
+pub fn access_hover_and_mist_upgrade(ctx: &Context) -> bool {
+    // $hover and Mist_Upgrade
+    (helper__hover!(ctx) && ctx.has(Item::Mist_Upgrade))
+}
 pub fn access_hover_or_hook(ctx: &Context) -> bool {
     // $hover or $hook
     (helper__hover!(ctx) || helper__hook!(ctx))

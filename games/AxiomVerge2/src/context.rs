@@ -245,6 +245,14 @@ pub mod data {
             SpotId::Giguna_Breach__Slingshot__Column => true,
             SpotId::Giguna_Breach__Slingshot__Ravine => true,
             SpotId::Giguna_Breach__Slingshot__West => true,
+            SpotId::Irikar_Breach__Exit_Corridor__East => true,
+            SpotId::Irikar_Breach__Exit_Corridor__North_12 => true,
+            SpotId::Irikar_Breach__Exit_Corridor__North_13 => true,
+            SpotId::Irikar_Breach__Exit_Corridor__Passage => true,
+            SpotId::Irikar_Breach__Exit_Corridor__Pillar => true,
+            SpotId::Irikar_Breach__Exit_Corridor__Portal_Stand => true,
+            SpotId::Irikar_Breach__Exit_Corridor__West => true,
+            SpotId::Irikar_Breach__Exit_Corridor__West_of_Pillar => true,
             SpotId::Irikar_Breach__Flappy_Drone__Initial_Drop => true,
             SpotId::Irikar_Breach__Flappy_Drone__Passage_Corner => true,
             SpotId::Irikar_Breach__Flappy_Drone__Pillar_Underside => true,
@@ -272,9 +280,19 @@ pub mod data {
             SpotId::Irikar_Breach__Hover_Room__Bottom => true,
             SpotId::Irikar_Breach__Hover_Room__East => true,
             SpotId::Irikar_Breach__Hover_Room__West => true,
+            SpotId::Irikar_Breach__Neon_Corridor__Center => true,
+            SpotId::Irikar_Breach__Neon_Corridor__East => true,
+            SpotId::Irikar_Breach__Neon_Corridor__West => true,
+            SpotId::Irikar_Breach__Neon_Corridor__West_Basin => true,
+            SpotId::Irikar_Breach__Sandy_Lair__East_27 => true,
+            SpotId::Irikar_Breach__Sandy_Lair__East_28 => true,
             SpotId::Irikar_Breach__Save_Room__Save_Point => true,
             SpotId::Irikar_Breach__Save_Room__Upper_Area => true,
             SpotId::Irikar_Breach__Save_Room__West => true,
+            SpotId::Irikar_Breach__Uhrum_Connector__West => true,
+            SpotId::Irikar_Breach__Worm_Rave__Corner => true,
+            SpotId::Irikar_Breach__Worm_Rave__East => true,
+            SpotId::Irikar_Breach__Worm_Rave__South => true,
             _ => false,
         }
     }
@@ -391,6 +409,9 @@ pub mod data {
             }
             SpotId::Giguna__Ruins_Top__Portal => SpotId::Giguna_Breach__Peak__Save_Point,
             SpotId::Giguna__Ruins_Top__Save_Point => SpotId::Giguna_Breach__Peak__Portal,
+            SpotId::Irikar_Breach__Exit_Corridor__Portal_Stand => {
+                SpotId::Irikar__Abandoned_Room__Empty_Pedestal
+            }
             SpotId::Irikar_Breach__Gauntlet__Save_Point => SpotId::Irikar__Hub__Portal_Stand,
             SpotId::Irikar_Breach__Save_Room__Save_Point => SpotId::Irikar__Sight_Room__Portal,
             SpotId::Irikar__Hub__Portal_Stand => SpotId::Irikar_Breach__Gauntlet__Save_Point,
@@ -431,6 +452,30 @@ pub mod data {
             SpotId::Giguna__Ruins_Top__West_7 => SpotId::Giguna_Breach__Peak__Save_Point,
             SpotId::Giguna__Ruins_Top__West_Door => SpotId::Giguna_Breach__Peak__Save_Point,
             SpotId::Giguna__Ruins_Top__West_Pillar => SpotId::Giguna_Breach__Peak__Save_Point,
+            SpotId::Irikar_Breach__Exit_Corridor__East => {
+                SpotId::Irikar__Abandoned_Room__Empty_Pedestal
+            }
+            SpotId::Irikar_Breach__Exit_Corridor__North_12 => {
+                SpotId::Irikar__Abandoned_Room__Empty_Pedestal
+            }
+            SpotId::Irikar_Breach__Exit_Corridor__North_13 => {
+                SpotId::Irikar__Abandoned_Room__Empty_Pedestal
+            }
+            SpotId::Irikar_Breach__Exit_Corridor__Passage => {
+                SpotId::Irikar__Abandoned_Room__Empty_Pedestal
+            }
+            SpotId::Irikar_Breach__Exit_Corridor__Pillar => {
+                SpotId::Irikar__Abandoned_Room__Empty_Pedestal
+            }
+            SpotId::Irikar_Breach__Exit_Corridor__Portal_Stand => {
+                SpotId::Irikar__Abandoned_Room__Empty_Pedestal
+            }
+            SpotId::Irikar_Breach__Exit_Corridor__West => {
+                SpotId::Irikar__Abandoned_Room__Empty_Pedestal
+            }
+            SpotId::Irikar_Breach__Exit_Corridor__West_of_Pillar => {
+                SpotId::Irikar__Abandoned_Room__Empty_Pedestal
+            }
             SpotId::Irikar__Hub__Bowl_Hole => SpotId::Irikar_Breach__Gauntlet__Save_Point,
             SpotId::Irikar__Hub__Bowl_Middle_Ledge => SpotId::Irikar_Breach__Gauntlet__Save_Point,
             SpotId::Irikar__Hub__Bowl_Middle_Platform_Center => {
@@ -4121,12 +4166,22 @@ impl context::Ctx for Context {
                     rules::action_reset_old_area__newpos(self, pos);
                 }
             }
+            AreaId::Irikar__Abandoned_Room => {
+                if get_area(self.position) != area {
+                    rules::action_reset_old_area__newpos(self, pos);
+                }
+            }
             AreaId::Irikar__Hub => {
                 if get_area(self.position) != area {
                     rules::action_reset_old_area__newpos(self, pos);
                 }
             }
             AreaId::Irikar__Sight_Room => {
+                if get_area(self.position) != area {
+                    rules::action_reset_old_area__newpos(self, pos);
+                }
+            }
+            AreaId::Irikar_Breach__Exit_Corridor => {
                 if get_area(self.position) != area {
                     rules::action_reset_old_area__newpos(self, pos);
                 }
@@ -4151,7 +4206,27 @@ impl context::Ctx for Context {
                     rules::action_reset_old_area__newpos(self, pos);
                 }
             }
+            AreaId::Irikar_Breach__Neon_Corridor => {
+                if get_area(self.position) != area {
+                    rules::action_reset_old_area__newpos(self, pos);
+                }
+            }
+            AreaId::Irikar_Breach__Sandy_Lair => {
+                if get_area(self.position) != area {
+                    rules::action_reset_old_area__newpos(self, pos);
+                }
+            }
             AreaId::Irikar_Breach__Save_Room => {
+                if get_area(self.position) != area {
+                    rules::action_reset_old_area__newpos(self, pos);
+                }
+            }
+            AreaId::Irikar_Breach__Uhrum_Connector => {
+                if get_area(self.position) != area {
+                    rules::action_reset_old_area__newpos(self, pos);
+                }
+            }
+            AreaId::Irikar_Breach__Worm_Rave => {
                 if get_area(self.position) != area {
                     rules::action_reset_old_area__newpos(self, pos);
                 }

@@ -1034,6 +1034,34 @@ subgraph Irikar_Breach
         Irikar_Breach__Four_way__East(East);
         Irikar_Breach__Four_way__West(West);
     end
+    subgraph Irikar_Breach__Worm_Rave[Worm Rave]
+        Irikar_Breach__Worm_Rave__East(East);
+        Irikar_Breach__Worm_Rave__South(South);
+        Irikar_Breach__Worm_Rave__Corner(Corner);
+    end
+    subgraph Irikar_Breach__Exit_Corridor[Exit Corridor]
+        Irikar_Breach__Exit_Corridor__North_12(North 12);
+        Irikar_Breach__Exit_Corridor__West(West);
+        Irikar_Breach__Exit_Corridor__West_of_Pillar(West of Pillar);
+        Irikar_Breach__Exit_Corridor__Pillar(Pillar);
+        Irikar_Breach__Exit_Corridor__North_13(North 13);
+        Irikar_Breach__Exit_Corridor__Passage(Passage);
+        Irikar_Breach__Exit_Corridor__Portal_Stand(Portal Stand);
+        Irikar_Breach__Exit_Corridor__East(East);
+    end
+    subgraph Irikar_Breach__Neon_Corridor[Neon Corridor]
+        Irikar_Breach__Neon_Corridor__East(East);
+        Irikar_Breach__Neon_Corridor__Center(Center);
+        Irikar_Breach__Neon_Corridor__West_Basin(West Basin);
+        Irikar_Breach__Neon_Corridor__West(West);
+    end
+    subgraph Irikar_Breach__Sandy_Lair[Sandy Lair]
+        Irikar_Breach__Sandy_Lair__East_27(East 27);
+        Irikar_Breach__Sandy_Lair__East_28(East 28);
+    end
+    subgraph Irikar_Breach__Uhrum_Connector[Uhrum Connector]
+        Irikar_Breach__Uhrum_Connector__West(West);
+    end
 end
 subgraph Irikar
     subgraph Irikar__Hub[Hub]
@@ -1072,6 +1100,9 @@ subgraph Irikar
         Irikar__Sight_Room__Lower_Ledge(Lower Ledge);
         Irikar__Sight_Room__Portal(Portal);
         Irikar__Sight_Room__Item_Pedestal(Item Pedestal);
+    end
+    subgraph Irikar__Abandoned_Room[Abandoned Room]
+        Irikar__Abandoned_Room__Empty_Pedestal(Empty Pedestal);
     end
 end
 subgraph Menu
@@ -1521,18 +1552,36 @@ Glacier__Vertical_Room__Mid_9 --> Glacier__Vertical_Room__Peak
 Glacier__Vertical_Room__Past_Gate <--> Glacier__Vertical_Room__Under_Switch
 Glacier__Vertical_Room__Peak --> Glacier__Vertical_Room__West_8
 Glacier__Vertical_Room__Under_Switch --> Glacier__Vertical_Room__Mid_9
+Irikar_Breach__Exit_Corridor__East --> Irikar_Breach__Uhrum_Connector__West
+Irikar_Breach__Exit_Corridor__North_12 --> Irikar_Breach__Exit_Corridor__Pillar
+Irikar_Breach__Exit_Corridor__North_12 <--> Irikar_Breach__Worm_Rave__South
+Irikar_Breach__Exit_Corridor__North_13 --> Irikar_Breach__Exit_Corridor__Pillar
+Irikar_Breach__Exit_Corridor__North_13 <--> Irikar_Breach__Four_way__South
+Irikar_Breach__Exit_Corridor__West <--> Irikar_Breach__Neon_Corridor__East
+Irikar_Breach__Exit_Corridor__West_of_Pillar --> Irikar_Breach__Exit_Corridor__Pillar
 Irikar_Breach__Flappy_Drone__Initial_Drop --> Irikar_Breach__Flappy_Drone__Pillar_Underside
 Irikar_Breach__Flappy_Drone__Pillar_Underside <--> Irikar_Breach__Flappy_Drone__Top_Pillar
-Irikar_Breach__Flappy_Drone__South --> Irikar_Breach__Four_way__North
+Irikar_Breach__Flappy_Drone__South <--> Irikar_Breach__Four_way__North
 Irikar_Breach__Flappy_Drone__Upper_Valley_Right --> Irikar_Breach__Flappy_Drone__Top_Pillar
 Irikar_Breach__Flappy_Drone__West_Door <--> Irikar_Breach__Hover_Room__East
+Irikar_Breach__Four_way__East --> Irikar_Breach__Four_way__Ledge
+Irikar_Breach__Four_way__East <--> Irikar_Breach__Save_Room__West
+Irikar_Breach__Four_way__Ledge --> Irikar_Breach__Four_way__North
+Irikar_Breach__Four_way__Ledge --> Irikar_Breach__Four_way__West
+Irikar_Breach__Four_way__North --> Irikar_Breach__Four_way__West
+Irikar_Breach__Four_way__South --> Irikar_Breach__Four_way__Ledge
+Irikar_Breach__Four_way__West <--> Irikar_Breach__Worm_Rave__East
 Irikar_Breach__Gauntlet__East_22 <--> Irikar_Breach__Hover_Room__West
 Irikar_Breach__Gauntlet__Hidden_Path_Reward --> Irikar_Breach__Gauntlet__Hidden_Path_Top_Ledge
 Irikar_Breach__Gauntlet__Save_Point --> Irikar_Breach__Gauntlet__Hidden_Path_Upper_Entry
 Irikar_Breach__Hover_Room__Bottom --> Irikar_Breach__Hover_Room__East
 Irikar_Breach__Hover_Room__Bottom --> Irikar_Breach__Hover_Room__West
 Irikar_Breach__Hover_Room__East <--> Irikar_Breach__Hover_Room__West
-Irikar_Breach__Save_Room__West --> Irikar_Breach__Four_way__East
+Irikar_Breach__Neon_Corridor__West --> Irikar_Breach__Sandy_Lair__East_27
+Irikar_Breach__Neon_Corridor__West_Basin --> Irikar_Breach__Neon_Corridor__Center
+Irikar_Breach__Neon_Corridor__West_Basin --> Irikar_Breach__Neon_Corridor__West
+Irikar_Breach__Worm_Rave__South --> Irikar_Breach__Worm_Rave__Corner
+Irikar_Breach__Worm_Rave__South --> Irikar_Breach__Worm_Rave__East
 Irikar__Hub__Bowl_Middle_Ledge --> Irikar__Hub__Bowl_Top_Platform
 Irikar__Hub__Bowl_Middle_Platform_Center --> Irikar__Hub__Bowl_Middle_Ledge
 Irikar__Hub__Bowl_Middle_Platform_West --> Irikar__Hub__Bowl_Middle_Ledge
