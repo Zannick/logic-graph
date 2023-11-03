@@ -879,8 +879,8 @@ digraph AxiomVerge2 {
         Irikar__Hub__Bowl_Platform_3 [label = "", pos = "36.9,-37.083333!"];
         Irikar__Hub__Save_Point [label = "", pos = "37.5,-37.916667!"];
         Irikar__Hub__Bowl_Hole [label = "", pos = "38.85,-37.75!"];
-        Irikar__Hub__Sat_Tower_Roof_West [label = "", pos = "40.2,-34.0!"];
-        Irikar__Hub__Sat_Tower_Roof_East [label = "", pos = "40.95,-34.0!"];
+        Irikar__Hub__Sat_Tower_Roof_West [label = "", pos = "40.2,-34.166667!"];
+        Irikar__Hub__Sat_Tower_Roof_East [label = "", pos = "40.95,-34.166667!"];
         Irikar__Hub__Sat_Tower_Middle_Ledge [label = "", pos = "40.2,-37.666667!"];
         Irikar__Hub__Sat_Tower_Floating_Platform [label = "", pos = "40.5,-36.75!"];
         Irikar__Hub__Sat_Tower_Top_Ledge [label = "", pos = "40.65,-35.833333!"];
@@ -917,7 +917,7 @@ digraph AxiomVerge2 {
         Irikar__Basement_Portal__Portal_Stand [label = "", pos = "37.575,-45.833333!"];
         Irikar__Basement_Portal__West_28 [label = "", pos = "36.15,-45.916667!"];
         Irikar__Basement_Portal__Bottom_Middle [label = "", pos = "39.0,-45.916667!"];
-        Irikar__Basement_Portal__East_28 [label = "", pos = "41.85,-47.833333!"];
+        Irikar__Basement_Portal__East_28 [label = "", pos = "41.85,-46.166667!"];
         Irikar__Basement_Pipes__East_28 [label = "", pos = "35.85,-45.916667!"];
         Irikar__Basement_Pipes__Lower_Pipe_Right [label = "", pos = "35.1,-45.666667!"];
         Irikar__Basement_Pipes__Lower_Pipe_Under_Ledge [label = "", pos = "33.9,-45.666667!"];

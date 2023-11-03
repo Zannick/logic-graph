@@ -116,11 +116,11 @@ areas:
 
     #region Satellite Tower
     - name: Sat Tower Roof West
-      coord: [13.4, 20.4]
+      coord: [13.4, 20.5]
       local:
         - to: Sat Tower Roof East
     - name: Sat Tower Roof East
-      coord: [13.65, 20.4]
+      coord: [13.65, 20.5]
       local:
         - to: Sat Tower Roof West
     - name: Sat Tower Middle Ledge
@@ -506,7 +506,7 @@ areas:
           price: 20
           time: 2  # ?
     - name: East 28
-      coord: [13.95, 28.7]
+      coord: [13.95, 27.7]
       local:
         - to: Bottom Middle
           jumps: 2
