@@ -417,6 +417,9 @@ pub mod data {
             }
             SpotId::Irikar_Breach__Gauntlet__Save_Point => SpotId::Irikar__Hub__Portal_Stand,
             SpotId::Irikar_Breach__Save_Room__Save_Point => SpotId::Irikar__Sight_Room__Portal,
+            SpotId::Irikar__Basement_Portal__Portal_Stand => {
+                SpotId::Irikar_Breach__Basement_Save__Save_Point
+            }
             SpotId::Irikar__Hub__Portal_Stand => SpotId::Irikar_Breach__Gauntlet__Save_Point,
             SpotId::Irikar__Sight_Room__Portal => SpotId::Irikar_Breach__Save_Room__Save_Point,
             _ => SpotId::None,
@@ -479,7 +482,13 @@ pub mod data {
             SpotId::Irikar_Breach__Exit_Corridor__West_of_Pillar => {
                 SpotId::Irikar__Abandoned_Room__Empty_Pedestal
             }
+            SpotId::Irikar__Basement_Portal__Bottom_Middle => {
+                SpotId::Irikar_Breach__Basement_Save__Save_Point
+            }
             SpotId::Irikar__Basement_Portal__East_27 => {
+                SpotId::Irikar_Breach__Basement_Save__Save_Point
+            }
+            SpotId::Irikar__Basement_Portal__East_28 => {
                 SpotId::Irikar_Breach__Basement_Save__Save_Point
             }
             SpotId::Irikar__Basement_Portal__East_Platform => {
@@ -491,10 +500,19 @@ pub mod data {
             SpotId::Irikar__Basement_Portal__Middle_Platform => {
                 SpotId::Irikar_Breach__Basement_Save__Save_Point
             }
+            SpotId::Irikar__Basement_Portal__Moving_Platform_End => {
+                SpotId::Irikar_Breach__Basement_Save__Save_Point
+            }
             SpotId::Irikar__Basement_Portal__Moving_Platform_Start => {
                 SpotId::Irikar_Breach__Basement_Save__Save_Point
             }
             SpotId::Irikar__Basement_Portal__North => {
+                SpotId::Irikar_Breach__Basement_Save__Save_Point
+            }
+            SpotId::Irikar__Basement_Portal__Portal_Stand => {
+                SpotId::Irikar_Breach__Basement_Save__Save_Point
+            }
+            SpotId::Irikar__Basement_Portal__West_28 => {
                 SpotId::Irikar_Breach__Basement_Save__Save_Point
             }
             SpotId::Irikar__Basement_Portal__Westmost_Platform => {
@@ -4277,7 +4295,22 @@ impl context::Ctx for Context {
                     rules::action_reset_old_area__newpos(self, pos);
                 }
             }
+            AreaId::Irikar__Boss_Room => {
+                if get_area(self.position) != area {
+                    rules::action_reset_old_area__newpos(self, pos);
+                }
+            }
+            AreaId::Irikar__Empty_Foyer => {
+                if get_area(self.position) != area {
+                    rules::action_reset_old_area__newpos(self, pos);
+                }
+            }
             AreaId::Irikar__Hub => {
+                if get_area(self.position) != area {
+                    rules::action_reset_old_area__newpos(self, pos);
+                }
+            }
+            AreaId::Irikar__Midwest => {
                 if get_area(self.position) != area {
                     rules::action_reset_old_area__newpos(self, pos);
                 }

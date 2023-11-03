@@ -368,21 +368,312 @@ areas:
   spots:
     - name: East 27
       coord: [13.95, 26.8]
+      local:
+        - to: Ledge
+      exits:
+        - to: Abandoned Room > West
+          tags: [xshift]
     - name: Ledge
       coord: [12.7, 26.9]
+      local:
+        - to: East 27
+          jumps: 1
+        - to: Portal Stand
+        - to: West 28
+        - to: Bottom Middle
+      exits:
+        - to: Moving Platform Start
+          req: not ^_platform_moved
+          movement: base
+        - to: Westmost Platform
+          req: $hover
+          movement: base
+          jumps: 1
+        - to: East Platform
+          req: $mist2
+          price: 60
+          time: 3
     - name: Moving Platform Start
       coord: [12.3, 27.2]
+      local:
+        - to: East 28
+        - to: Portal Stand
+      exits:
+        - to: Ledge
+          req: $hook
+          time: 1.2  # ?
+      actions:
+        - name: Activate Platform
+          req: $activate
+          do: ^_platform_moved = true
+          to: Moving Platform End
+          time: 8  #y=.9, x=.7
+          tags: [hack]
+    - name: Moving Platform End
+      coord: [13.0, 26.3]
+      local:
+        - to: Ledge
+        - to: East 27
+      exits:
+        - to: East Platform
+          req: $hover
+          movement: base
     - name: Westmost Platform
       coord: [12.3, 26.6]
+      local:
+        - to: Middle Platform
+        - to: West 28
+          jumps_down: 1
+        - to: Portal Stand
+        - to: Bottom Middle
     - name: Middle Platform
       coord: [12.6, 26.5]
+      local:
+        - to: East 27
+        - to: Ledge
+          jumps_down: 1
+        - to: Portal Stand
+          jumps_down: 1
+        - to: West 28
+          jumps_down: 1
+        - to: Bottom Middle
+          jumps_down: 1
+      exits:
+        - to: East Platform
+          req: $hover  # TODO: does this work?
+          movement: base
+          jumps: 1
+        - to: Moving Platform End
+          req: ^_platform_moved and $hook
     - name: East Platform
       coord: [13.5, 26.35]
+      local:
+        - to: North
+          jumps: 1
+        - to: East 27
+        - to: Ledge
     - name: North
       coord: [13.5, 26.2]
+      local:
+        - to: East Platform
+        - to: Ledge
+        - to: East 27
+      exits:
+        - to: Hub > Royal Storage South
+          tags: [ydoor]
+    - name: Portal Stand
+      coord: [12.525, 27.5]
+      data:
+        flipside: Irikar Breach > Basement Save > Save Point
+      local:
+        - to: West 28
+        - to: Bottom Middle
+      exits:
+        - to: Moving Platform Start
+          req: not ^_platform_moved
+          movement: base
+          jumps: 1
+        - to: Ledge
+          req: $hover and $hook
+          time: 1  # ?
+      actions:
+        - name: Enter Portal
+          req: ^mode == 'drone' and Breach_Sight
+          do: $breach_portal_save_update
+          to: ^flipside
+          tags: [portal]
+    - name: West 28
+      coord: [12.05, 27.55]
+      local:
+        - to: Portal Stand
+          jumps: 1
+      exits:
+        - to: Moving Platform Start
+          req: $hook
+          time: 1  # ?
+        - to: Basement Pipes > East 28
+          tags: [xshift]
+    - name: Bottom Middle
+      coord: [13.0, 27.55]
+      local:
+        - to: Portal Stand
+          jumps: 1
+        - to: East 28
+          jumps: 2
+      exits:
+        - to: Ledge
+          req: $mist2
+          price: 20
+          time: 2  # ?
+    - name: East 28
+      coord: [13.95, 28.7]
+      local:
+        - to: Bottom Middle
+          jumps: 2
+      exits:
+        - to: Empty Foyer > West
+          tags: [xshift]
+        - to: Ledge
+          req: $hover and $hook and $mist2
+          time: 4.8  # ?
 
 - name: Basement Pipes
   on_entry: $reset_old_area(^newpos)
   spots:
     - name: East 28
       coord: [11.95, 27.55]
+      local:
+        - to: Lower Pipe Right
+          jumps: 1
+      exits:
+        - to: Basement Portal > West 28
+          tags: [xshift]
+    - name: Lower Pipe Right
+      coord: [11.7, 27.4]
+      local:
+        - to: Lower Pipe Under Ledge
+        - to: East 28
+    - name: Lower Pipe Under Ledge
+      coord: [11.3, 27.4]
+      local:
+        - to: Lower Pipe Right
+      exits:
+        - to: Brick Ledge
+          req: $hook
+          time: 1  # ?
+        - to: Brick Ledge
+          req: $climb
+          movement: base
+          jumps: 3
+    - name: Brick Ledge
+      coord: [11.2, 26.95]
+      local:
+        - to: Lower Pipe Under Ledge
+        - to: Bricks Under Pipes
+    - name: Bricks Under Pipes
+      coord: [11.5, 26.95]
+      local:
+        - to: Brick Ledge
+      exits:
+        - to: Double Pipe Right
+          req: $grab
+          movement: base
+          jumps: 2
+        - to: Double Pipe Right
+          req: $hook
+          movement: base
+          jumps: 1
+    - name: Double Pipe Right
+      coord: [11.5, 26.6]
+      local:
+        - to: Double Pipe Left
+        - to: Bricks Under Pipes
+    - name: Double Pipe Left
+      coord: [11.0, 26.6]
+      local:
+        - to: Left Vertical Pipe
+        - to: Right Vertical Pipe
+        - to: Double Pipe Right
+      exits:
+        - to: High Pipe
+          req: $hover and $hook
+          movement: base
+          jumps: 1
+    - name: Right Vertical Pipe
+      coord: [10.9, 27.15]
+      local:
+        - to: Left Vertical Pipe
+      exits:
+        - to: Double Pipe Left
+          req: $grab
+          movement: base
+          jumps: 4
+        - to: Double Pipe Left
+          req: $grab and $climb
+          movement: base
+          jumps: 3
+        - to: Double Pipe Left
+          req: $hook
+          time: 1  # ?
+    - name: Left Vertical Pipe
+      coord: [10.45, 27.35]
+      local:
+        - to: West 28
+        - to: Right Vertical Pipe
+          thru: [10.85, 27.25]
+          jumps: [0, 1]
+      location:
+        - name: Health Pickup
+          item: Power_Core
+          req: $more_refills
+          tags: [standing]
+    - name: West 28
+      coord: [10.05, 27.6]
+      local:
+        - to: Left Vertical Pipe
+          jumps: 3
+      exits:
+        - to: Midwest > East 28
+          tags: [xshift]
+    - name: West 27
+      coord: [10.05, 26.35]
+      local:
+        - to: High Pipe
+      exits:
+        - to: Midwest > East 27
+          tags: [xshift]
+    - name: High Pipe
+      coord: [10.2, 26.4]
+      local:
+        - to: West 27
+          jumps: 1
+        - to: Left Vertical Pipe
+        - to: West 28
+          thru: [10.275, 26.5]
+        - to: Right Vertical Pipe
+          thru: [10.85, 27.25]
+          jumps: [0, 1]
+
+- name: Empty Foyer
+  on_entry: $reset_old_area(^newpos)
+  spots:
+    - name: West
+      coord: [14.05, 27.7]
+      local:
+        - to: East
+      exits:
+        - to: Basement Portal > East 28
+          tags: [xshift]
+    - name: East
+      coord: [14.95, 27.7]
+      local:
+        - to: West
+      exits:
+        - to: Boss Room > West 28
+          tags: [xshift]
+
+- name: Boss Room
+  on_entry: $reset_old_area(^newpos)
+  spots:
+    - name: West 28
+      coord: [15.05, 27.7]
+    - name: East 28
+      coord: [16.95, 27.7]
+
+- name: Midwest
+  on_entry: $reset_old_area(^newpos)
+  spots:
+    - name: East 23
+      coord: [9.95, 22.8]  # Arbitrary positioning, just so it's possible to go directly
+    - name: East 24 on Building
+      coord: [9.95, 23.3]
+    - name: East 24 on Floor
+      coord: [9.95, 23.7]
+    - name: East 25
+      coord: [9.95, 24.25]
+    - name: East 26
+      coord: [9.95, 25.35]
+    - name: East 27
+      coord: [9.95, 26.35]
+    - name: East 28
+      coord: [9.95, 27.6]

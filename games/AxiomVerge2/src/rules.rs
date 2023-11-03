@@ -32,6 +32,10 @@ pub fn access___remote_drone(ctx: &Context) -> bool {
     // [Remote_Drone]
     ctx.has(Item::Remote_Drone)
 }
+pub fn access_activate(ctx: &Context) -> bool {
+    // $activate
+    helper__activate!(ctx)
+}
 pub fn access_amagi__main_area__carving__ex__secret_outcropping_1__req(ctx: &Context) -> bool {
     // ^_combo and ($grab or $climb)
     (ctx.amagi__main_area__ctx__combo() && (helper__grab!(ctx) || helper__climb!(ctx)))
@@ -860,6 +864,10 @@ pub fn access_hover_and_hook(ctx: &Context) -> bool {
     // $hover and $hook
     (helper__hover!(ctx) && helper__hook!(ctx))
 }
+pub fn access_hover_and_hook_and_mist2(ctx: &Context) -> bool {
+    // $hover and $hook and $mist2
+    ((helper__hover!(ctx) && helper__hook!(ctx)) && helper__mist2!(ctx))
+}
 pub fn access_hover_and_mist_upgrade(ctx: &Context) -> bool {
     // $hover and Mist_Upgrade
     (helper__hover!(ctx) && ctx.has(Item::Mist_Upgrade))
@@ -892,6 +900,24 @@ pub fn access_infection_speed(ctx: &Context) -> bool {
     // Infection_Speed
     ctx.has(Item::Infection_Speed)
 }
+pub fn access_irikar__basement_portal__ledge__ex__moving_platform_start_1__req(
+    ctx: &Context,
+) -> bool {
+    // not ^_platform_moved
+    !ctx.irikar__basement_portal__ctx__platform_moved()
+}
+pub fn access_irikar__basement_portal__middle_platform__ex__moving_platform_end_1__req(
+    ctx: &Context,
+) -> bool {
+    // ^_platform_moved and $hook
+    (ctx.irikar__basement_portal__ctx__platform_moved() && helper__hook!(ctx))
+}
+pub fn access_irikar__basement_portal__portal_stand__ex__moving_platform_start_1__req(
+    ctx: &Context,
+) -> bool {
+    // not ^_platform_moved
+    !ctx.irikar__basement_portal__ctx__platform_moved()
+}
 pub fn access_irikar_royal_storage_wall(ctx: &Context) -> bool {
     // Irikar_Royal_Storage_Wall
     ctx.has(Item::Irikar_Royal_Storage_Wall)
@@ -911,6 +937,10 @@ pub fn access_melee_speed(ctx: &Context) -> bool {
 pub fn access_melee_speed__2(ctx: &Context) -> bool {
     // Melee_Speed{2}
     ctx.count(Item::Melee_Speed) >= 2
+}
+pub fn access_mist2(ctx: &Context) -> bool {
+    // $mist2
+    helper__mist2!(ctx)
 }
 pub fn access_mist_upgrade(ctx: &Context) -> bool {
     // Mist_Upgrade
@@ -1402,6 +1432,12 @@ pub fn action_giguna_breach__sw_save__west_11__open_door__do(ctx: &mut Context) 
 pub fn action_indra__default(ctx: &mut Context) {
     // ^indra = $default
     ctx.set_indra(Default::default());
+}
+pub fn action_irikar__basement_portal__moving_platform_start__activate_platform__do(
+    ctx: &mut Context,
+) {
+    // ^_platform_moved = true
+    ctx.set_irikar__basement_portal__ctx__platform_moved(true);
 }
 pub fn action_last__default(ctx: &mut Context) {
     // ^last = $default

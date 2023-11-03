@@ -205,6 +205,17 @@ macro_rules! helper__unlock3 {
     }};
 }
 
+/// $mist2 (  )
+/// Nanite_Mist and Mist_Upgrade
+#[macro_export]
+macro_rules! helper__mist2 {
+    ($ctx:expr) => {{
+        #[allow(unused_imports)]
+        use $crate::items::Item;
+        ($ctx.has(Item::Nanite_Mist) && $ctx.has(Item::Mist_Upgrade))
+    }};
+}
+
 /// $range1 (  )
 /// Infection_Range{2} or (Infection_Range and ^mode != 'drone')
 #[macro_export]

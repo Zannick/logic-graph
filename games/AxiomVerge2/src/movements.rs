@@ -5419,6 +5419,255 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
             SpotId::Irikar__Abandoned_Room__West,
             SpotId::Irikar__Abandoned_Room__Empty_Pedestal,
         ) => 1666,
+        (
+            [false],
+            SpotId::Irikar__Basement_Pipes__Brick_Ledge,
+            SpotId::Irikar__Basement_Pipes__Bricks_Under_Pipes,
+        ) => 1052,
+        (
+            [false],
+            SpotId::Irikar__Basement_Pipes__Brick_Ledge,
+            SpotId::Irikar__Basement_Pipes__Lower_Pipe_Under_Ledge,
+        ) => 449,
+        (
+            [false],
+            SpotId::Irikar__Basement_Pipes__Bricks_Under_Pipes,
+            SpotId::Irikar__Basement_Pipes__Brick_Ledge,
+        ) => 1052,
+        (
+            [false],
+            SpotId::Irikar__Basement_Pipes__Double_Pipe_Left,
+            SpotId::Irikar__Basement_Pipes__Double_Pipe_Right,
+        ) => 1754,
+        (
+            [false],
+            SpotId::Irikar__Basement_Pipes__Double_Pipe_Left,
+            SpotId::Irikar__Basement_Pipes__Left_Vertical_Pipe,
+        ) => 1929,
+        (
+            [false],
+            SpotId::Irikar__Basement_Pipes__Double_Pipe_Left,
+            SpotId::Irikar__Basement_Pipes__Right_Vertical_Pipe,
+        ) => 549,
+        (
+            [false],
+            SpotId::Irikar__Basement_Pipes__Double_Pipe_Right,
+            SpotId::Irikar__Basement_Pipes__Bricks_Under_Pipes,
+        ) => 349,
+        (
+            [false],
+            SpotId::Irikar__Basement_Pipes__Double_Pipe_Right,
+            SpotId::Irikar__Basement_Pipes__Double_Pipe_Left,
+        ) => 1754,
+        (
+            [false],
+            SpotId::Irikar__Basement_Pipes__East_28,
+            SpotId::Irikar__Basement_Pipes__Lower_Pipe_Right,
+        ) => 877,
+        (
+            [false],
+            SpotId::Irikar__Basement_Pipes__High_Pipe,
+            SpotId::Irikar__Basement_Pipes__Left_Vertical_Pipe,
+        ) => 950,
+        // [2.280702, 0.6]
+        (
+            [false],
+            SpotId::Irikar__Basement_Pipes__High_Pipe,
+            SpotId::Irikar__Basement_Pipes__Right_Vertical_Pipe,
+        ) => 2880,
+        (
+            [false],
+            SpotId::Irikar__Basement_Pipes__High_Pipe,
+            SpotId::Irikar__Basement_Pipes__West_27,
+        ) => 600,
+        // [0.263158, 1.1]
+        (
+            [false],
+            SpotId::Irikar__Basement_Pipes__High_Pipe,
+            SpotId::Irikar__Basement_Pipes__West_28,
+        ) => 1363,
+        (
+            [false],
+            SpotId::Irikar__Basement_Pipes__Left_Vertical_Pipe,
+            SpotId::Irikar__Basement_Pipes__West_28,
+        ) => 1403,
+        (
+            [false],
+            SpotId::Irikar__Basement_Pipes__Lower_Pipe_Right,
+            SpotId::Irikar__Basement_Pipes__East_28,
+        ) => 877,
+        (
+            [false],
+            SpotId::Irikar__Basement_Pipes__Lower_Pipe_Right,
+            SpotId::Irikar__Basement_Pipes__Lower_Pipe_Under_Ledge,
+        ) => 1403,
+        (
+            [false],
+            SpotId::Irikar__Basement_Pipes__Lower_Pipe_Under_Ledge,
+            SpotId::Irikar__Basement_Pipes__Lower_Pipe_Right,
+        ) => 1403,
+        (
+            [false],
+            SpotId::Irikar__Basement_Pipes__Right_Vertical_Pipe,
+            SpotId::Irikar__Basement_Pipes__Left_Vertical_Pipe,
+        ) => 1578,
+        (
+            [false],
+            SpotId::Irikar__Basement_Pipes__West_27,
+            SpotId::Irikar__Basement_Pipes__High_Pipe,
+        ) => 526,
+        (
+            [false],
+            SpotId::Irikar__Basement_Pipes__West_28,
+            SpotId::Irikar__Basement_Pipes__Left_Vertical_Pipe,
+        ) => 1799,
+        (
+            [false],
+            SpotId::Irikar__Basement_Portal__Bottom_Middle,
+            SpotId::Irikar__Basement_Portal__East_28,
+        ) => 3333,
+        (
+            [false],
+            SpotId::Irikar__Basement_Portal__Bottom_Middle,
+            SpotId::Irikar__Basement_Portal__Portal_Stand,
+        ) => 1666,
+        (
+            [false],
+            SpotId::Irikar__Basement_Portal__East_27,
+            SpotId::Irikar__Basement_Portal__Ledge,
+        ) => 4385,
+        (
+            [false],
+            SpotId::Irikar__Basement_Portal__East_28,
+            SpotId::Irikar__Basement_Portal__Bottom_Middle,
+        ) => 3333,
+        (
+            [false],
+            SpotId::Irikar__Basement_Portal__East_Platform,
+            SpotId::Irikar__Basement_Portal__East_27,
+        ) => 1578,
+        (
+            [false],
+            SpotId::Irikar__Basement_Portal__East_Platform,
+            SpotId::Irikar__Basement_Portal__Ledge,
+        ) => 2807,
+        (
+            [false],
+            SpotId::Irikar__Basement_Portal__East_Platform,
+            SpotId::Irikar__Basement_Portal__North,
+        ) => 600,
+        (
+            [false],
+            SpotId::Irikar__Basement_Portal__Ledge,
+            SpotId::Irikar__Basement_Portal__Bottom_Middle,
+        ) => 1052,
+        (
+            [false],
+            SpotId::Irikar__Basement_Portal__Ledge,
+            SpotId::Irikar__Basement_Portal__East_27,
+        ) => 4385,
+        (
+            [false],
+            SpotId::Irikar__Basement_Portal__Ledge,
+            SpotId::Irikar__Basement_Portal__Portal_Stand,
+        ) => 614,
+        (
+            [false],
+            SpotId::Irikar__Basement_Portal__Ledge,
+            SpotId::Irikar__Basement_Portal__West_28,
+        ) => 2280,
+        (
+            [false],
+            SpotId::Irikar__Basement_Portal__Middle_Platform,
+            SpotId::Irikar__Basement_Portal__Bottom_Middle,
+        ) => 1403,
+        (
+            [false],
+            SpotId::Irikar__Basement_Portal__Middle_Platform,
+            SpotId::Irikar__Basement_Portal__East_27,
+        ) => 4736,
+        (
+            [false],
+            SpotId::Irikar__Basement_Portal__Middle_Platform,
+            SpotId::Irikar__Basement_Portal__Ledge,
+        ) => 499,
+        (
+            [false],
+            SpotId::Irikar__Basement_Portal__Middle_Platform,
+            SpotId::Irikar__Basement_Portal__Portal_Stand,
+        ) => 1100,
+        (
+            [false],
+            SpotId::Irikar__Basement_Portal__Middle_Platform,
+            SpotId::Irikar__Basement_Portal__West_28,
+        ) => 1929,
+        (
+            [false],
+            SpotId::Irikar__Basement_Portal__Moving_Platform_End,
+            SpotId::Irikar__Basement_Portal__East_27,
+        ) => 3333,
+        (
+            [false],
+            SpotId::Irikar__Basement_Portal__Moving_Platform_End,
+            SpotId::Irikar__Basement_Portal__Ledge,
+        ) => 1052,
+        (
+            [false],
+            SpotId::Irikar__Basement_Portal__Moving_Platform_Start,
+            SpotId::Irikar__Basement_Portal__East_28,
+        ) => 5789,
+        (
+            [false],
+            SpotId::Irikar__Basement_Portal__Moving_Platform_Start,
+            SpotId::Irikar__Basement_Portal__Portal_Stand,
+        ) => 789,
+        (
+            [false],
+            SpotId::Irikar__Basement_Portal__North,
+            SpotId::Irikar__Basement_Portal__East_27,
+        ) => 1578,
+        (
+            [false],
+            SpotId::Irikar__Basement_Portal__North,
+            SpotId::Irikar__Basement_Portal__East_Platform,
+        ) => 150,
+        (
+            [false],
+            SpotId::Irikar__Basement_Portal__North,
+            SpotId::Irikar__Basement_Portal__Ledge,
+        ) => 2807,
+        (
+            [false],
+            SpotId::Irikar__Basement_Portal__Portal_Stand,
+            SpotId::Irikar__Basement_Portal__Bottom_Middle,
+        ) => 1666,
+        (
+            [false],
+            SpotId::Irikar__Basement_Portal__Portal_Stand,
+            SpotId::Irikar__Basement_Portal__West_28,
+        ) => 1666,
+        (
+            [false],
+            SpotId::Irikar__Basement_Portal__West_28,
+            SpotId::Irikar__Basement_Portal__Portal_Stand,
+        ) => 1666,
+        (
+            [false],
+            SpotId::Irikar__Basement_Portal__Westmost_Platform,
+            SpotId::Irikar__Basement_Portal__Bottom_Middle,
+        ) => 2456,
+        (
+            [false],
+            SpotId::Irikar__Basement_Portal__Westmost_Platform,
+            SpotId::Irikar__Basement_Portal__Portal_Stand,
+        ) => 899,
+        (
+            [false],
+            SpotId::Irikar__Basement_Portal__Westmost_Platform,
+            SpotId::Irikar__Basement_Portal__West_28,
+        ) => 1049,
+        ([false], SpotId::Irikar__Empty_Foyer__East, SpotId::Irikar__Empty_Foyer__West) => 3157,
+        ([false], SpotId::Irikar__Empty_Foyer__West, SpotId::Irikar__Empty_Foyer__East) => 3157,
         ([false], SpotId::Irikar__Hub__Bowl_Hole, SpotId::Irikar__Hub__Sat_Tower_Middle_Ledge) => {
             1578
         }
@@ -10954,6 +11203,255 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
             SpotId::Irikar__Abandoned_Room__West,
             SpotId::Irikar__Abandoned_Room__Empty_Pedestal,
         ) => 1666,
+        (
+            [true],
+            SpotId::Irikar__Basement_Pipes__Brick_Ledge,
+            SpotId::Irikar__Basement_Pipes__Bricks_Under_Pipes,
+        ) => 1052,
+        (
+            [true],
+            SpotId::Irikar__Basement_Pipes__Brick_Ledge,
+            SpotId::Irikar__Basement_Pipes__Lower_Pipe_Under_Ledge,
+        ) => 449,
+        (
+            [true],
+            SpotId::Irikar__Basement_Pipes__Bricks_Under_Pipes,
+            SpotId::Irikar__Basement_Pipes__Brick_Ledge,
+        ) => 1052,
+        (
+            [true],
+            SpotId::Irikar__Basement_Pipes__Double_Pipe_Left,
+            SpotId::Irikar__Basement_Pipes__Double_Pipe_Right,
+        ) => 1754,
+        (
+            [true],
+            SpotId::Irikar__Basement_Pipes__Double_Pipe_Left,
+            SpotId::Irikar__Basement_Pipes__Left_Vertical_Pipe,
+        ) => 1929,
+        (
+            [true],
+            SpotId::Irikar__Basement_Pipes__Double_Pipe_Left,
+            SpotId::Irikar__Basement_Pipes__Right_Vertical_Pipe,
+        ) => 549,
+        (
+            [true],
+            SpotId::Irikar__Basement_Pipes__Double_Pipe_Right,
+            SpotId::Irikar__Basement_Pipes__Bricks_Under_Pipes,
+        ) => 349,
+        (
+            [true],
+            SpotId::Irikar__Basement_Pipes__Double_Pipe_Right,
+            SpotId::Irikar__Basement_Pipes__Double_Pipe_Left,
+        ) => 1754,
+        (
+            [true],
+            SpotId::Irikar__Basement_Pipes__East_28,
+            SpotId::Irikar__Basement_Pipes__Lower_Pipe_Right,
+        ) => 877,
+        (
+            [true],
+            SpotId::Irikar__Basement_Pipes__High_Pipe,
+            SpotId::Irikar__Basement_Pipes__Left_Vertical_Pipe,
+        ) => 950,
+        // [2.280702, 0.6]
+        (
+            [true],
+            SpotId::Irikar__Basement_Pipes__High_Pipe,
+            SpotId::Irikar__Basement_Pipes__Right_Vertical_Pipe,
+        ) => 2880,
+        (
+            [true],
+            SpotId::Irikar__Basement_Pipes__High_Pipe,
+            SpotId::Irikar__Basement_Pipes__West_27,
+        ) => 600,
+        // [0.263158, 1.1]
+        (
+            [true],
+            SpotId::Irikar__Basement_Pipes__High_Pipe,
+            SpotId::Irikar__Basement_Pipes__West_28,
+        ) => 1363,
+        (
+            [true],
+            SpotId::Irikar__Basement_Pipes__Left_Vertical_Pipe,
+            SpotId::Irikar__Basement_Pipes__West_28,
+        ) => 1403,
+        (
+            [true],
+            SpotId::Irikar__Basement_Pipes__Lower_Pipe_Right,
+            SpotId::Irikar__Basement_Pipes__East_28,
+        ) => 877,
+        (
+            [true],
+            SpotId::Irikar__Basement_Pipes__Lower_Pipe_Right,
+            SpotId::Irikar__Basement_Pipes__Lower_Pipe_Under_Ledge,
+        ) => 1403,
+        (
+            [true],
+            SpotId::Irikar__Basement_Pipes__Lower_Pipe_Under_Ledge,
+            SpotId::Irikar__Basement_Pipes__Lower_Pipe_Right,
+        ) => 1403,
+        (
+            [true],
+            SpotId::Irikar__Basement_Pipes__Right_Vertical_Pipe,
+            SpotId::Irikar__Basement_Pipes__Left_Vertical_Pipe,
+        ) => 1578,
+        (
+            [true],
+            SpotId::Irikar__Basement_Pipes__West_27,
+            SpotId::Irikar__Basement_Pipes__High_Pipe,
+        ) => 526,
+        (
+            [true],
+            SpotId::Irikar__Basement_Pipes__West_28,
+            SpotId::Irikar__Basement_Pipes__Left_Vertical_Pipe,
+        ) => 1799,
+        (
+            [true],
+            SpotId::Irikar__Basement_Portal__Bottom_Middle,
+            SpotId::Irikar__Basement_Portal__East_28,
+        ) => 3333,
+        (
+            [true],
+            SpotId::Irikar__Basement_Portal__Bottom_Middle,
+            SpotId::Irikar__Basement_Portal__Portal_Stand,
+        ) => 1666,
+        (
+            [true],
+            SpotId::Irikar__Basement_Portal__East_27,
+            SpotId::Irikar__Basement_Portal__Ledge,
+        ) => 4385,
+        (
+            [true],
+            SpotId::Irikar__Basement_Portal__East_28,
+            SpotId::Irikar__Basement_Portal__Bottom_Middle,
+        ) => 3333,
+        (
+            [true],
+            SpotId::Irikar__Basement_Portal__East_Platform,
+            SpotId::Irikar__Basement_Portal__East_27,
+        ) => 1578,
+        (
+            [true],
+            SpotId::Irikar__Basement_Portal__East_Platform,
+            SpotId::Irikar__Basement_Portal__Ledge,
+        ) => 2807,
+        (
+            [true],
+            SpotId::Irikar__Basement_Portal__East_Platform,
+            SpotId::Irikar__Basement_Portal__North,
+        ) => 600,
+        (
+            [true],
+            SpotId::Irikar__Basement_Portal__Ledge,
+            SpotId::Irikar__Basement_Portal__Bottom_Middle,
+        ) => 1052,
+        (
+            [true],
+            SpotId::Irikar__Basement_Portal__Ledge,
+            SpotId::Irikar__Basement_Portal__East_27,
+        ) => 4385,
+        (
+            [true],
+            SpotId::Irikar__Basement_Portal__Ledge,
+            SpotId::Irikar__Basement_Portal__Portal_Stand,
+        ) => 614,
+        (
+            [true],
+            SpotId::Irikar__Basement_Portal__Ledge,
+            SpotId::Irikar__Basement_Portal__West_28,
+        ) => 2280,
+        (
+            [true],
+            SpotId::Irikar__Basement_Portal__Middle_Platform,
+            SpotId::Irikar__Basement_Portal__Bottom_Middle,
+        ) => 1403,
+        (
+            [true],
+            SpotId::Irikar__Basement_Portal__Middle_Platform,
+            SpotId::Irikar__Basement_Portal__East_27,
+        ) => 4736,
+        (
+            [true],
+            SpotId::Irikar__Basement_Portal__Middle_Platform,
+            SpotId::Irikar__Basement_Portal__Ledge,
+        ) => 499,
+        (
+            [true],
+            SpotId::Irikar__Basement_Portal__Middle_Platform,
+            SpotId::Irikar__Basement_Portal__Portal_Stand,
+        ) => 1100,
+        (
+            [true],
+            SpotId::Irikar__Basement_Portal__Middle_Platform,
+            SpotId::Irikar__Basement_Portal__West_28,
+        ) => 1929,
+        (
+            [true],
+            SpotId::Irikar__Basement_Portal__Moving_Platform_End,
+            SpotId::Irikar__Basement_Portal__East_27,
+        ) => 3333,
+        (
+            [true],
+            SpotId::Irikar__Basement_Portal__Moving_Platform_End,
+            SpotId::Irikar__Basement_Portal__Ledge,
+        ) => 1052,
+        (
+            [true],
+            SpotId::Irikar__Basement_Portal__Moving_Platform_Start,
+            SpotId::Irikar__Basement_Portal__East_28,
+        ) => 5789,
+        (
+            [true],
+            SpotId::Irikar__Basement_Portal__Moving_Platform_Start,
+            SpotId::Irikar__Basement_Portal__Portal_Stand,
+        ) => 789,
+        (
+            [true],
+            SpotId::Irikar__Basement_Portal__North,
+            SpotId::Irikar__Basement_Portal__East_27,
+        ) => 1578,
+        (
+            [true],
+            SpotId::Irikar__Basement_Portal__North,
+            SpotId::Irikar__Basement_Portal__East_Platform,
+        ) => 150,
+        (
+            [true],
+            SpotId::Irikar__Basement_Portal__North,
+            SpotId::Irikar__Basement_Portal__Ledge,
+        ) => 2807,
+        (
+            [true],
+            SpotId::Irikar__Basement_Portal__Portal_Stand,
+            SpotId::Irikar__Basement_Portal__Bottom_Middle,
+        ) => 1666,
+        (
+            [true],
+            SpotId::Irikar__Basement_Portal__Portal_Stand,
+            SpotId::Irikar__Basement_Portal__West_28,
+        ) => 1666,
+        (
+            [true],
+            SpotId::Irikar__Basement_Portal__West_28,
+            SpotId::Irikar__Basement_Portal__Portal_Stand,
+        ) => 1666,
+        (
+            [true],
+            SpotId::Irikar__Basement_Portal__Westmost_Platform,
+            SpotId::Irikar__Basement_Portal__Bottom_Middle,
+        ) => 2456,
+        (
+            [true],
+            SpotId::Irikar__Basement_Portal__Westmost_Platform,
+            SpotId::Irikar__Basement_Portal__Portal_Stand,
+        ) => 899,
+        (
+            [true],
+            SpotId::Irikar__Basement_Portal__Westmost_Platform,
+            SpotId::Irikar__Basement_Portal__West_28,
+        ) => 1049,
+        ([true], SpotId::Irikar__Empty_Foyer__East, SpotId::Irikar__Empty_Foyer__West) => 3157,
+        ([true], SpotId::Irikar__Empty_Foyer__West, SpotId::Irikar__Empty_Foyer__East) => 3157,
         ([true], SpotId::Irikar__Hub__Bowl_Hole, SpotId::Irikar__Hub__Sat_Tower_Middle_Ledge) => {
             1578
         }
@@ -14614,6 +15112,193 @@ pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
         (SpotId::Irikar__Abandoned_Room__West, SpotId::Irikar__Abandoned_Room__Empty_Pedestal) => {
             true
         }
+        (SpotId::Irikar__Basement_Portal__East_27, SpotId::Irikar__Basement_Portal__Ledge) => true,
+        (SpotId::Irikar__Basement_Portal__Ledge, SpotId::Irikar__Basement_Portal__East_27) => true,
+        (SpotId::Irikar__Basement_Portal__Ledge, SpotId::Irikar__Basement_Portal__Portal_Stand) => {
+            true
+        }
+        (SpotId::Irikar__Basement_Portal__Ledge, SpotId::Irikar__Basement_Portal__West_28) => true,
+        (
+            SpotId::Irikar__Basement_Portal__Ledge,
+            SpotId::Irikar__Basement_Portal__Bottom_Middle,
+        ) => true,
+        (
+            SpotId::Irikar__Basement_Portal__Moving_Platform_Start,
+            SpotId::Irikar__Basement_Portal__East_28,
+        ) => true,
+        (
+            SpotId::Irikar__Basement_Portal__Moving_Platform_Start,
+            SpotId::Irikar__Basement_Portal__Portal_Stand,
+        ) => true,
+        (
+            SpotId::Irikar__Basement_Portal__Moving_Platform_End,
+            SpotId::Irikar__Basement_Portal__Ledge,
+        ) => true,
+        (
+            SpotId::Irikar__Basement_Portal__Moving_Platform_End,
+            SpotId::Irikar__Basement_Portal__East_27,
+        ) => true,
+        (
+            SpotId::Irikar__Basement_Portal__Westmost_Platform,
+            SpotId::Irikar__Basement_Portal__Middle_Platform,
+        ) => true,
+        (
+            SpotId::Irikar__Basement_Portal__Westmost_Platform,
+            SpotId::Irikar__Basement_Portal__West_28,
+        ) => true,
+        (
+            SpotId::Irikar__Basement_Portal__Westmost_Platform,
+            SpotId::Irikar__Basement_Portal__Portal_Stand,
+        ) => true,
+        (
+            SpotId::Irikar__Basement_Portal__Westmost_Platform,
+            SpotId::Irikar__Basement_Portal__Bottom_Middle,
+        ) => true,
+        (
+            SpotId::Irikar__Basement_Portal__Middle_Platform,
+            SpotId::Irikar__Basement_Portal__East_27,
+        ) => true,
+        (
+            SpotId::Irikar__Basement_Portal__Middle_Platform,
+            SpotId::Irikar__Basement_Portal__Ledge,
+        ) => true,
+        (
+            SpotId::Irikar__Basement_Portal__Middle_Platform,
+            SpotId::Irikar__Basement_Portal__Portal_Stand,
+        ) => true,
+        (
+            SpotId::Irikar__Basement_Portal__Middle_Platform,
+            SpotId::Irikar__Basement_Portal__West_28,
+        ) => true,
+        (
+            SpotId::Irikar__Basement_Portal__Middle_Platform,
+            SpotId::Irikar__Basement_Portal__Bottom_Middle,
+        ) => true,
+        (
+            SpotId::Irikar__Basement_Portal__East_Platform,
+            SpotId::Irikar__Basement_Portal__North,
+        ) => true,
+        (
+            SpotId::Irikar__Basement_Portal__East_Platform,
+            SpotId::Irikar__Basement_Portal__East_27,
+        ) => true,
+        (
+            SpotId::Irikar__Basement_Portal__East_Platform,
+            SpotId::Irikar__Basement_Portal__Ledge,
+        ) => true,
+        (
+            SpotId::Irikar__Basement_Portal__North,
+            SpotId::Irikar__Basement_Portal__East_Platform,
+        ) => true,
+        (SpotId::Irikar__Basement_Portal__North, SpotId::Irikar__Basement_Portal__Ledge) => true,
+        (SpotId::Irikar__Basement_Portal__North, SpotId::Irikar__Basement_Portal__East_27) => true,
+        (
+            SpotId::Irikar__Basement_Portal__Portal_Stand,
+            SpotId::Irikar__Basement_Portal__West_28,
+        ) => true,
+        (
+            SpotId::Irikar__Basement_Portal__Portal_Stand,
+            SpotId::Irikar__Basement_Portal__Bottom_Middle,
+        ) => true,
+        (
+            SpotId::Irikar__Basement_Portal__West_28,
+            SpotId::Irikar__Basement_Portal__Portal_Stand,
+        ) => true,
+        (
+            SpotId::Irikar__Basement_Portal__Bottom_Middle,
+            SpotId::Irikar__Basement_Portal__Portal_Stand,
+        ) => true,
+        (
+            SpotId::Irikar__Basement_Portal__Bottom_Middle,
+            SpotId::Irikar__Basement_Portal__East_28,
+        ) => true,
+        (
+            SpotId::Irikar__Basement_Portal__East_28,
+            SpotId::Irikar__Basement_Portal__Bottom_Middle,
+        ) => true,
+        (
+            SpotId::Irikar__Basement_Pipes__East_28,
+            SpotId::Irikar__Basement_Pipes__Lower_Pipe_Right,
+        ) => true,
+        (
+            SpotId::Irikar__Basement_Pipes__Lower_Pipe_Right,
+            SpotId::Irikar__Basement_Pipes__Lower_Pipe_Under_Ledge,
+        ) => true,
+        (
+            SpotId::Irikar__Basement_Pipes__Lower_Pipe_Right,
+            SpotId::Irikar__Basement_Pipes__East_28,
+        ) => true,
+        (
+            SpotId::Irikar__Basement_Pipes__Lower_Pipe_Under_Ledge,
+            SpotId::Irikar__Basement_Pipes__Lower_Pipe_Right,
+        ) => true,
+        (
+            SpotId::Irikar__Basement_Pipes__Brick_Ledge,
+            SpotId::Irikar__Basement_Pipes__Lower_Pipe_Under_Ledge,
+        ) => true,
+        (
+            SpotId::Irikar__Basement_Pipes__Brick_Ledge,
+            SpotId::Irikar__Basement_Pipes__Bricks_Under_Pipes,
+        ) => true,
+        (
+            SpotId::Irikar__Basement_Pipes__Bricks_Under_Pipes,
+            SpotId::Irikar__Basement_Pipes__Brick_Ledge,
+        ) => true,
+        (
+            SpotId::Irikar__Basement_Pipes__Double_Pipe_Right,
+            SpotId::Irikar__Basement_Pipes__Double_Pipe_Left,
+        ) => true,
+        (
+            SpotId::Irikar__Basement_Pipes__Double_Pipe_Right,
+            SpotId::Irikar__Basement_Pipes__Bricks_Under_Pipes,
+        ) => true,
+        (
+            SpotId::Irikar__Basement_Pipes__Double_Pipe_Left,
+            SpotId::Irikar__Basement_Pipes__Left_Vertical_Pipe,
+        ) => true,
+        (
+            SpotId::Irikar__Basement_Pipes__Double_Pipe_Left,
+            SpotId::Irikar__Basement_Pipes__Right_Vertical_Pipe,
+        ) => true,
+        (
+            SpotId::Irikar__Basement_Pipes__Double_Pipe_Left,
+            SpotId::Irikar__Basement_Pipes__Double_Pipe_Right,
+        ) => true,
+        (
+            SpotId::Irikar__Basement_Pipes__Right_Vertical_Pipe,
+            SpotId::Irikar__Basement_Pipes__Left_Vertical_Pipe,
+        ) => true,
+        (
+            SpotId::Irikar__Basement_Pipes__Left_Vertical_Pipe,
+            SpotId::Irikar__Basement_Pipes__West_28,
+        ) => true,
+        (
+            SpotId::Irikar__Basement_Pipes__Left_Vertical_Pipe,
+            SpotId::Irikar__Basement_Pipes__Right_Vertical_Pipe,
+        ) => true,
+        (
+            SpotId::Irikar__Basement_Pipes__West_28,
+            SpotId::Irikar__Basement_Pipes__Left_Vertical_Pipe,
+        ) => true,
+        (SpotId::Irikar__Basement_Pipes__West_27, SpotId::Irikar__Basement_Pipes__High_Pipe) => {
+            true
+        }
+        (SpotId::Irikar__Basement_Pipes__High_Pipe, SpotId::Irikar__Basement_Pipes__West_27) => {
+            true
+        }
+        (
+            SpotId::Irikar__Basement_Pipes__High_Pipe,
+            SpotId::Irikar__Basement_Pipes__Left_Vertical_Pipe,
+        ) => true,
+        (SpotId::Irikar__Basement_Pipes__High_Pipe, SpotId::Irikar__Basement_Pipes__West_28) => {
+            true
+        }
+        (
+            SpotId::Irikar__Basement_Pipes__High_Pipe,
+            SpotId::Irikar__Basement_Pipes__Right_Vertical_Pipe,
+        ) => true,
+        (SpotId::Irikar__Empty_Foyer__West, SpotId::Irikar__Empty_Foyer__East) => true,
+        (SpotId::Irikar__Empty_Foyer__East, SpotId::Irikar__Empty_Foyer__West) => true,
         _ => false,
     }
 }
@@ -29316,14 +30001,269 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             1000,
         ),
         (
+            SpotId::Irikar__Basement_Pipes__Brick_Ledge,
+            SpotId::Irikar__Basement_Pipes__Bricks_Under_Pipes,
+            1052,
+        ),
+        (
+            SpotId::Irikar__Basement_Pipes__Brick_Ledge,
+            SpotId::Irikar__Basement_Pipes__Lower_Pipe_Under_Ledge,
+            449,
+        ),
+        (
+            SpotId::Irikar__Basement_Pipes__Brick_Ledge,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Irikar__Basement_Pipes__Bricks_Under_Pipes,
+            SpotId::Irikar__Basement_Pipes__Brick_Ledge,
+            1052,
+        ),
+        (
+            SpotId::Irikar__Basement_Pipes__Bricks_Under_Pipes,
+            SpotId::Irikar__Basement_Pipes__Double_Pipe_Right,
+            600,
+        ),
+        (
+            SpotId::Irikar__Basement_Pipes__Bricks_Under_Pipes,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Irikar__Basement_Pipes__Double_Pipe_Left,
+            SpotId::Irikar__Basement_Pipes__Double_Pipe_Right,
+            1754,
+        ),
+        (
+            SpotId::Irikar__Basement_Pipes__Double_Pipe_Left,
+            SpotId::Irikar__Basement_Pipes__High_Pipe,
+            2807,
+        ),
+        (
+            SpotId::Irikar__Basement_Pipes__Double_Pipe_Left,
+            SpotId::Irikar__Basement_Pipes__Left_Vertical_Pipe,
+            1929,
+        ),
+        (
+            SpotId::Irikar__Basement_Pipes__Double_Pipe_Left,
+            SpotId::Irikar__Basement_Pipes__Right_Vertical_Pipe,
+            549,
+        ),
+        (
+            SpotId::Irikar__Basement_Pipes__Double_Pipe_Left,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Irikar__Basement_Pipes__Double_Pipe_Right,
+            SpotId::Irikar__Basement_Pipes__Bricks_Under_Pipes,
+            349,
+        ),
+        (
+            SpotId::Irikar__Basement_Pipes__Double_Pipe_Right,
+            SpotId::Irikar__Basement_Pipes__Double_Pipe_Left,
+            1754,
+        ),
+        (
+            SpotId::Irikar__Basement_Pipes__Double_Pipe_Right,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Irikar__Basement_Pipes__East_28,
+            SpotId::Irikar__Basement_Pipes__Lower_Pipe_Right,
+            877,
+        ),
+        (
+            SpotId::Irikar__Basement_Pipes__East_28,
+            SpotId::Irikar__Basement_Portal__West_28,
+            1350,
+        ),
+        (
             SpotId::Irikar__Basement_Pipes__East_28,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
         (
+            SpotId::Irikar__Basement_Pipes__High_Pipe,
+            SpotId::Irikar__Basement_Pipes__Left_Vertical_Pipe,
+            950,
+        ),
+        (
+            SpotId::Irikar__Basement_Pipes__High_Pipe,
+            SpotId::Irikar__Basement_Pipes__Right_Vertical_Pipe,
+            2880,
+        ),
+        (
+            SpotId::Irikar__Basement_Pipes__High_Pipe,
+            SpotId::Irikar__Basement_Pipes__West_27,
+            600,
+        ),
+        (
+            SpotId::Irikar__Basement_Pipes__High_Pipe,
+            SpotId::Irikar__Basement_Pipes__West_28,
+            1363,
+        ),
+        (
+            SpotId::Irikar__Basement_Pipes__High_Pipe,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Irikar__Basement_Pipes__Left_Vertical_Pipe,
+            SpotId::Irikar__Basement_Pipes__West_28,
+            1403,
+        ),
+        (
+            SpotId::Irikar__Basement_Pipes__Left_Vertical_Pipe,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Irikar__Basement_Pipes__Lower_Pipe_Right,
+            SpotId::Irikar__Basement_Pipes__East_28,
+            877,
+        ),
+        (
+            SpotId::Irikar__Basement_Pipes__Lower_Pipe_Right,
+            SpotId::Irikar__Basement_Pipes__Lower_Pipe_Under_Ledge,
+            1403,
+        ),
+        (
+            SpotId::Irikar__Basement_Pipes__Lower_Pipe_Right,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Irikar__Basement_Pipes__Lower_Pipe_Under_Ledge,
+            SpotId::Irikar__Basement_Pipes__Brick_Ledge,
+            1000,
+        ),
+        (
+            SpotId::Irikar__Basement_Pipes__Lower_Pipe_Under_Ledge,
+            SpotId::Irikar__Basement_Pipes__Lower_Pipe_Right,
+            1403,
+        ),
+        (
+            SpotId::Irikar__Basement_Pipes__Lower_Pipe_Under_Ledge,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Irikar__Basement_Pipes__Right_Vertical_Pipe,
+            SpotId::Irikar__Basement_Pipes__Double_Pipe_Left,
+            1000,
+        ),
+        (
+            SpotId::Irikar__Basement_Pipes__Right_Vertical_Pipe,
+            SpotId::Irikar__Basement_Pipes__Left_Vertical_Pipe,
+            1578,
+        ),
+        (
+            SpotId::Irikar__Basement_Pipes__Right_Vertical_Pipe,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Irikar__Basement_Pipes__West_27,
+            SpotId::Irikar__Basement_Pipes__High_Pipe,
+            526,
+        ),
+        (
+            SpotId::Irikar__Basement_Pipes__West_27,
+            SpotId::Irikar__Midwest__East_27,
+            1350,
+        ),
+        (
+            SpotId::Irikar__Basement_Pipes__West_27,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Irikar__Basement_Pipes__West_28,
+            SpotId::Irikar__Basement_Pipes__Left_Vertical_Pipe,
+            1799,
+        ),
+        (
+            SpotId::Irikar__Basement_Pipes__West_28,
+            SpotId::Irikar__Midwest__East_28,
+            1350,
+        ),
+        (
+            SpotId::Irikar__Basement_Pipes__West_28,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Irikar__Basement_Portal__Bottom_Middle,
+            SpotId::Irikar__Basement_Portal__East_28,
+            3333,
+        ),
+        (
+            SpotId::Irikar__Basement_Portal__Bottom_Middle,
+            SpotId::Irikar__Basement_Portal__Ledge,
+            2000,
+        ),
+        (
+            SpotId::Irikar__Basement_Portal__Bottom_Middle,
+            SpotId::Irikar__Basement_Portal__Portal_Stand,
+            1666,
+        ),
+        (
+            SpotId::Irikar__Basement_Portal__Bottom_Middle,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Irikar__Basement_Portal__East_27,
+            SpotId::Irikar__Abandoned_Room__West,
+            1350,
+        ),
+        (
+            SpotId::Irikar__Basement_Portal__East_27,
+            SpotId::Irikar__Basement_Portal__Ledge,
+            4385,
+        ),
+        (
             SpotId::Irikar__Basement_Portal__East_27,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
+        ),
+        (
+            SpotId::Irikar__Basement_Portal__East_28,
+            SpotId::Irikar__Basement_Portal__Bottom_Middle,
+            3333,
+        ),
+        (
+            SpotId::Irikar__Basement_Portal__East_28,
+            SpotId::Irikar__Basement_Portal__Ledge,
+            4800,
+        ),
+        (
+            SpotId::Irikar__Basement_Portal__East_28,
+            SpotId::Irikar__Empty_Foyer__West,
+            1350,
+        ),
+        (
+            SpotId::Irikar__Basement_Portal__East_28,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Irikar__Basement_Portal__East_Platform,
+            SpotId::Irikar__Basement_Portal__East_27,
+            1578,
+        ),
+        (
+            SpotId::Irikar__Basement_Portal__East_Platform,
+            SpotId::Irikar__Basement_Portal__Ledge,
+            2807,
+        ),
+        (
+            SpotId::Irikar__Basement_Portal__East_Platform,
+            SpotId::Irikar__Basement_Portal__North,
+            600,
         ),
         (
             SpotId::Irikar__Basement_Portal__East_Platform,
@@ -29332,13 +30272,123 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Irikar__Basement_Portal__Ledge,
+            SpotId::Irikar__Basement_Portal__Bottom_Middle,
+            1052,
+        ),
+        (
+            SpotId::Irikar__Basement_Portal__Ledge,
+            SpotId::Irikar__Basement_Portal__East_27,
+            4385,
+        ),
+        (
+            SpotId::Irikar__Basement_Portal__Ledge,
+            SpotId::Irikar__Basement_Portal__East_Platform,
+            3000,
+        ),
+        (
+            SpotId::Irikar__Basement_Portal__Ledge,
+            SpotId::Irikar__Basement_Portal__Moving_Platform_Start,
+            1403,
+        ),
+        (
+            SpotId::Irikar__Basement_Portal__Ledge,
+            SpotId::Irikar__Basement_Portal__Portal_Stand,
+            614,
+        ),
+        (
+            SpotId::Irikar__Basement_Portal__Ledge,
+            SpotId::Irikar__Basement_Portal__West_28,
+            2280,
+        ),
+        (
+            SpotId::Irikar__Basement_Portal__Ledge,
+            SpotId::Irikar__Basement_Portal__Westmost_Platform,
+            1403,
+        ),
+        (
+            SpotId::Irikar__Basement_Portal__Ledge,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
         (
             SpotId::Irikar__Basement_Portal__Middle_Platform,
+            SpotId::Irikar__Basement_Portal__Bottom_Middle,
+            1403,
+        ),
+        (
+            SpotId::Irikar__Basement_Portal__Middle_Platform,
+            SpotId::Irikar__Basement_Portal__East_27,
+            4736,
+        ),
+        (
+            SpotId::Irikar__Basement_Portal__Middle_Platform,
+            SpotId::Irikar__Basement_Portal__East_Platform,
+            3157,
+        ),
+        (
+            SpotId::Irikar__Basement_Portal__Middle_Platform,
+            SpotId::Irikar__Basement_Portal__Ledge,
+            499,
+        ),
+        (
+            SpotId::Irikar__Basement_Portal__Middle_Platform,
+            SpotId::Irikar__Basement_Portal__Moving_Platform_End,
+            1000,
+        ),
+        (
+            SpotId::Irikar__Basement_Portal__Middle_Platform,
+            SpotId::Irikar__Basement_Portal__Portal_Stand,
+            1100,
+        ),
+        (
+            SpotId::Irikar__Basement_Portal__Middle_Platform,
+            SpotId::Irikar__Basement_Portal__West_28,
+            1929,
+        ),
+        (
+            SpotId::Irikar__Basement_Portal__Middle_Platform,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
+        ),
+        (
+            SpotId::Irikar__Basement_Portal__Moving_Platform_End,
+            SpotId::Irikar__Basement_Portal__East_27,
+            3333,
+        ),
+        (
+            SpotId::Irikar__Basement_Portal__Moving_Platform_End,
+            SpotId::Irikar__Basement_Portal__East_Platform,
+            1754,
+        ),
+        (
+            SpotId::Irikar__Basement_Portal__Moving_Platform_End,
+            SpotId::Irikar__Basement_Portal__Ledge,
+            1052,
+        ),
+        (
+            SpotId::Irikar__Basement_Portal__Moving_Platform_End,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Irikar__Basement_Portal__Moving_Platform_Start,
+            SpotId::Irikar__Basement_Portal__East_28,
+            5789,
+        ),
+        (
+            SpotId::Irikar__Basement_Portal__Moving_Platform_Start,
+            SpotId::Irikar__Basement_Portal__Ledge,
+            1200,
+        ),
+        (
+            SpotId::Irikar__Basement_Portal__Moving_Platform_Start,
+            SpotId::Irikar__Basement_Portal__Moving_Platform_End,
+            8000,
+        ),
+        (
+            SpotId::Irikar__Basement_Portal__Moving_Platform_Start,
+            SpotId::Irikar__Basement_Portal__Portal_Stand,
+            789,
         ),
         (
             SpotId::Irikar__Basement_Portal__Moving_Platform_Start,
@@ -29347,11 +30397,136 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Irikar__Basement_Portal__North,
+            SpotId::Irikar__Basement_Portal__East_27,
+            1578,
+        ),
+        (
+            SpotId::Irikar__Basement_Portal__North,
+            SpotId::Irikar__Basement_Portal__East_Platform,
+            150,
+        ),
+        (
+            SpotId::Irikar__Basement_Portal__North,
+            SpotId::Irikar__Basement_Portal__Ledge,
+            2807,
+        ),
+        (
+            SpotId::Irikar__Basement_Portal__North,
+            SpotId::Irikar__Hub__Royal_Storage_South,
+            1600,
+        ),
+        (
+            SpotId::Irikar__Basement_Portal__North,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Irikar__Basement_Portal__Portal_Stand,
+            SpotId::Irikar_Breach__Basement_Save__Save_Point,
+            3600,
+        ),
+        (
+            SpotId::Irikar__Basement_Portal__Portal_Stand,
+            SpotId::Irikar__Basement_Portal__Bottom_Middle,
+            1666,
+        ),
+        (
+            SpotId::Irikar__Basement_Portal__Portal_Stand,
+            SpotId::Irikar__Basement_Portal__Ledge,
+            1000,
+        ),
+        (
+            SpotId::Irikar__Basement_Portal__Portal_Stand,
+            SpotId::Irikar__Basement_Portal__Moving_Platform_Start,
+            789,
+        ),
+        (
+            SpotId::Irikar__Basement_Portal__Portal_Stand,
+            SpotId::Irikar__Basement_Portal__West_28,
+            1666,
+        ),
+        (
+            SpotId::Irikar__Basement_Portal__Portal_Stand,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Irikar__Basement_Portal__West_28,
+            SpotId::Irikar__Basement_Pipes__East_28,
+            1350,
+        ),
+        (
+            SpotId::Irikar__Basement_Portal__West_28,
+            SpotId::Irikar__Basement_Portal__Moving_Platform_Start,
+            1000,
+        ),
+        (
+            SpotId::Irikar__Basement_Portal__West_28,
+            SpotId::Irikar__Basement_Portal__Portal_Stand,
+            1666,
+        ),
+        (
+            SpotId::Irikar__Basement_Portal__West_28,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
         (
             SpotId::Irikar__Basement_Portal__Westmost_Platform,
+            SpotId::Irikar__Basement_Portal__Bottom_Middle,
+            2456,
+        ),
+        (
+            SpotId::Irikar__Basement_Portal__Westmost_Platform,
+            SpotId::Irikar__Basement_Portal__Portal_Stand,
+            899,
+        ),
+        (
+            SpotId::Irikar__Basement_Portal__Westmost_Platform,
+            SpotId::Irikar__Basement_Portal__West_28,
+            1049,
+        ),
+        (
+            SpotId::Irikar__Basement_Portal__Westmost_Platform,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Irikar__Boss_Room__East_28,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Irikar__Boss_Room__West_28,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Irikar__Empty_Foyer__East,
+            SpotId::Irikar__Boss_Room__West_28,
+            1350,
+        ),
+        (
+            SpotId::Irikar__Empty_Foyer__East,
+            SpotId::Irikar__Empty_Foyer__West,
+            3157,
+        ),
+        (
+            SpotId::Irikar__Empty_Foyer__East,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Irikar__Empty_Foyer__West,
+            SpotId::Irikar__Basement_Portal__East_28,
+            1350,
+        ),
+        (
+            SpotId::Irikar__Empty_Foyer__West,
+            SpotId::Irikar__Empty_Foyer__East,
+            3157,
+        ),
+        (
+            SpotId::Irikar__Empty_Foyer__West,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -29837,6 +31012,41 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Irikar__Hub__West_Rim,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Irikar__Midwest__East_23,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Irikar__Midwest__East_24_on_Building,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Irikar__Midwest__East_24_on_Floor,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Irikar__Midwest__East_25,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Irikar__Midwest__East_26,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Irikar__Midwest__East_27,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Irikar__Midwest__East_28,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -33695,6 +34905,195 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
         (SpotId::Irikar__Abandoned_Room__West, SpotId::Irikar__Abandoned_Room__Empty_Pedestal) => {
             Some(1666)
         }
+        (
+            SpotId::Irikar__Basement_Pipes__Brick_Ledge,
+            SpotId::Irikar__Basement_Pipes__Bricks_Under_Pipes,
+        ) => Some(1052),
+        (
+            SpotId::Irikar__Basement_Pipes__Brick_Ledge,
+            SpotId::Irikar__Basement_Pipes__Lower_Pipe_Under_Ledge,
+        ) => Some(449),
+        (
+            SpotId::Irikar__Basement_Pipes__Bricks_Under_Pipes,
+            SpotId::Irikar__Basement_Pipes__Brick_Ledge,
+        ) => Some(1052),
+        (
+            SpotId::Irikar__Basement_Pipes__Double_Pipe_Left,
+            SpotId::Irikar__Basement_Pipes__Double_Pipe_Right,
+        ) => Some(1754),
+        (
+            SpotId::Irikar__Basement_Pipes__Double_Pipe_Left,
+            SpotId::Irikar__Basement_Pipes__Left_Vertical_Pipe,
+        ) => Some(1929),
+        (
+            SpotId::Irikar__Basement_Pipes__Double_Pipe_Left,
+            SpotId::Irikar__Basement_Pipes__Right_Vertical_Pipe,
+        ) => Some(549),
+        (
+            SpotId::Irikar__Basement_Pipes__Double_Pipe_Right,
+            SpotId::Irikar__Basement_Pipes__Bricks_Under_Pipes,
+        ) => Some(349),
+        (
+            SpotId::Irikar__Basement_Pipes__Double_Pipe_Right,
+            SpotId::Irikar__Basement_Pipes__Double_Pipe_Left,
+        ) => Some(1754),
+        (
+            SpotId::Irikar__Basement_Pipes__East_28,
+            SpotId::Irikar__Basement_Pipes__Lower_Pipe_Right,
+        ) => Some(877),
+        (
+            SpotId::Irikar__Basement_Pipes__High_Pipe,
+            SpotId::Irikar__Basement_Pipes__Left_Vertical_Pipe,
+        ) => Some(950),
+        (
+            SpotId::Irikar__Basement_Pipes__High_Pipe,
+            SpotId::Irikar__Basement_Pipes__Right_Vertical_Pipe,
+        ) => Some(2880),
+        (SpotId::Irikar__Basement_Pipes__High_Pipe, SpotId::Irikar__Basement_Pipes__West_27) => {
+            Some(600)
+        }
+        (SpotId::Irikar__Basement_Pipes__High_Pipe, SpotId::Irikar__Basement_Pipes__West_28) => {
+            Some(1363)
+        }
+        (
+            SpotId::Irikar__Basement_Pipes__Left_Vertical_Pipe,
+            SpotId::Irikar__Basement_Pipes__West_28,
+        ) => Some(1403),
+        (
+            SpotId::Irikar__Basement_Pipes__Lower_Pipe_Right,
+            SpotId::Irikar__Basement_Pipes__East_28,
+        ) => Some(877),
+        (
+            SpotId::Irikar__Basement_Pipes__Lower_Pipe_Right,
+            SpotId::Irikar__Basement_Pipes__Lower_Pipe_Under_Ledge,
+        ) => Some(1403),
+        (
+            SpotId::Irikar__Basement_Pipes__Lower_Pipe_Under_Ledge,
+            SpotId::Irikar__Basement_Pipes__Lower_Pipe_Right,
+        ) => Some(1403),
+        (
+            SpotId::Irikar__Basement_Pipes__Right_Vertical_Pipe,
+            SpotId::Irikar__Basement_Pipes__Left_Vertical_Pipe,
+        ) => Some(1578),
+        (SpotId::Irikar__Basement_Pipes__West_27, SpotId::Irikar__Basement_Pipes__High_Pipe) => {
+            Some(526)
+        }
+        (
+            SpotId::Irikar__Basement_Pipes__West_28,
+            SpotId::Irikar__Basement_Pipes__Left_Vertical_Pipe,
+        ) => Some(1799),
+        (
+            SpotId::Irikar__Basement_Portal__Bottom_Middle,
+            SpotId::Irikar__Basement_Portal__East_28,
+        ) => Some(3333),
+        (
+            SpotId::Irikar__Basement_Portal__Bottom_Middle,
+            SpotId::Irikar__Basement_Portal__Portal_Stand,
+        ) => Some(1666),
+        (SpotId::Irikar__Basement_Portal__East_27, SpotId::Irikar__Basement_Portal__Ledge) => {
+            Some(4385)
+        }
+        (
+            SpotId::Irikar__Basement_Portal__East_28,
+            SpotId::Irikar__Basement_Portal__Bottom_Middle,
+        ) => Some(3333),
+        (
+            SpotId::Irikar__Basement_Portal__East_Platform,
+            SpotId::Irikar__Basement_Portal__East_27,
+        ) => Some(1578),
+        (
+            SpotId::Irikar__Basement_Portal__East_Platform,
+            SpotId::Irikar__Basement_Portal__Ledge,
+        ) => Some(2807),
+        (
+            SpotId::Irikar__Basement_Portal__East_Platform,
+            SpotId::Irikar__Basement_Portal__North,
+        ) => Some(600),
+        (
+            SpotId::Irikar__Basement_Portal__Ledge,
+            SpotId::Irikar__Basement_Portal__Bottom_Middle,
+        ) => Some(1052),
+        (SpotId::Irikar__Basement_Portal__Ledge, SpotId::Irikar__Basement_Portal__East_27) => {
+            Some(4385)
+        }
+        (SpotId::Irikar__Basement_Portal__Ledge, SpotId::Irikar__Basement_Portal__Portal_Stand) => {
+            Some(614)
+        }
+        (SpotId::Irikar__Basement_Portal__Ledge, SpotId::Irikar__Basement_Portal__West_28) => {
+            Some(2280)
+        }
+        (
+            SpotId::Irikar__Basement_Portal__Middle_Platform,
+            SpotId::Irikar__Basement_Portal__Bottom_Middle,
+        ) => Some(1403),
+        (
+            SpotId::Irikar__Basement_Portal__Middle_Platform,
+            SpotId::Irikar__Basement_Portal__East_27,
+        ) => Some(4736),
+        (
+            SpotId::Irikar__Basement_Portal__Middle_Platform,
+            SpotId::Irikar__Basement_Portal__Ledge,
+        ) => Some(499),
+        (
+            SpotId::Irikar__Basement_Portal__Middle_Platform,
+            SpotId::Irikar__Basement_Portal__Portal_Stand,
+        ) => Some(1100),
+        (
+            SpotId::Irikar__Basement_Portal__Middle_Platform,
+            SpotId::Irikar__Basement_Portal__West_28,
+        ) => Some(1929),
+        (
+            SpotId::Irikar__Basement_Portal__Moving_Platform_End,
+            SpotId::Irikar__Basement_Portal__East_27,
+        ) => Some(3333),
+        (
+            SpotId::Irikar__Basement_Portal__Moving_Platform_End,
+            SpotId::Irikar__Basement_Portal__Ledge,
+        ) => Some(1052),
+        (
+            SpotId::Irikar__Basement_Portal__Moving_Platform_Start,
+            SpotId::Irikar__Basement_Portal__East_28,
+        ) => Some(5789),
+        (
+            SpotId::Irikar__Basement_Portal__Moving_Platform_Start,
+            SpotId::Irikar__Basement_Portal__Portal_Stand,
+        ) => Some(789),
+        (SpotId::Irikar__Basement_Portal__North, SpotId::Irikar__Basement_Portal__East_27) => {
+            Some(1578)
+        }
+        (
+            SpotId::Irikar__Basement_Portal__North,
+            SpotId::Irikar__Basement_Portal__East_Platform,
+        ) => Some(150),
+        (SpotId::Irikar__Basement_Portal__North, SpotId::Irikar__Basement_Portal__Ledge) => {
+            Some(2807)
+        }
+        (
+            SpotId::Irikar__Basement_Portal__Portal_Stand,
+            SpotId::Irikar__Basement_Portal__Bottom_Middle,
+        ) => Some(1666),
+        (
+            SpotId::Irikar__Basement_Portal__Portal_Stand,
+            SpotId::Irikar__Basement_Portal__West_28,
+        ) => Some(1666),
+        (
+            SpotId::Irikar__Basement_Portal__West_28,
+            SpotId::Irikar__Basement_Portal__Portal_Stand,
+        ) => Some(1666),
+        (
+            SpotId::Irikar__Basement_Portal__Westmost_Platform,
+            SpotId::Irikar__Basement_Portal__Bottom_Middle,
+        ) => Some(2456),
+        (
+            SpotId::Irikar__Basement_Portal__Westmost_Platform,
+            SpotId::Irikar__Basement_Portal__Portal_Stand,
+        ) => Some(899),
+        (
+            SpotId::Irikar__Basement_Portal__Westmost_Platform,
+            SpotId::Irikar__Basement_Portal__West_28,
+        ) => Some(1049),
+        (SpotId::Irikar__Empty_Foyer__East, SpotId::Irikar__Empty_Foyer__West) => Some(3157),
+        (SpotId::Irikar__Empty_Foyer__West, SpotId::Irikar__Empty_Foyer__East) => Some(3157),
         (SpotId::Irikar__Hub__Bowl_Hole, SpotId::Irikar__Hub__Sat_Tower_Middle_Ledge) => Some(1578),
         (SpotId::Irikar__Hub__Bowl_Hole, SpotId::Irikar__Hub__Save_Point) => Some(1578),
         (
@@ -38497,6 +39896,199 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
         }
         (SpotId::Irikar__Abandoned_Room__West, SpotId::Irikar__Abandoned_Room__Empty_Pedestal) => {
             (Some(1666), vec![])
+        }
+        (
+            SpotId::Irikar__Basement_Pipes__Brick_Ledge,
+            SpotId::Irikar__Basement_Pipes__Bricks_Under_Pipes,
+        ) => (Some(1052), vec![]),
+        (
+            SpotId::Irikar__Basement_Pipes__Brick_Ledge,
+            SpotId::Irikar__Basement_Pipes__Lower_Pipe_Under_Ledge,
+        ) => (Some(449), vec![]),
+        (
+            SpotId::Irikar__Basement_Pipes__Bricks_Under_Pipes,
+            SpotId::Irikar__Basement_Pipes__Brick_Ledge,
+        ) => (Some(1052), vec![]),
+        (
+            SpotId::Irikar__Basement_Pipes__Double_Pipe_Left,
+            SpotId::Irikar__Basement_Pipes__Double_Pipe_Right,
+        ) => (Some(1754), vec![]),
+        (
+            SpotId::Irikar__Basement_Pipes__Double_Pipe_Left,
+            SpotId::Irikar__Basement_Pipes__Left_Vertical_Pipe,
+        ) => (Some(1929), vec![]),
+        (
+            SpotId::Irikar__Basement_Pipes__Double_Pipe_Left,
+            SpotId::Irikar__Basement_Pipes__Right_Vertical_Pipe,
+        ) => (Some(549), vec![]),
+        (
+            SpotId::Irikar__Basement_Pipes__Double_Pipe_Right,
+            SpotId::Irikar__Basement_Pipes__Bricks_Under_Pipes,
+        ) => (Some(349), vec![]),
+        (
+            SpotId::Irikar__Basement_Pipes__Double_Pipe_Right,
+            SpotId::Irikar__Basement_Pipes__Double_Pipe_Left,
+        ) => (Some(1754), vec![]),
+        (
+            SpotId::Irikar__Basement_Pipes__East_28,
+            SpotId::Irikar__Basement_Pipes__Lower_Pipe_Right,
+        ) => (Some(877), vec![]),
+        (
+            SpotId::Irikar__Basement_Pipes__High_Pipe,
+            SpotId::Irikar__Basement_Pipes__Left_Vertical_Pipe,
+        ) => (Some(950), vec![]),
+        (
+            SpotId::Irikar__Basement_Pipes__High_Pipe,
+            SpotId::Irikar__Basement_Pipes__Right_Vertical_Pipe,
+        ) => (Some(2880), vec![]),
+        (SpotId::Irikar__Basement_Pipes__High_Pipe, SpotId::Irikar__Basement_Pipes__West_27) => {
+            (Some(600), vec![])
+        }
+        (SpotId::Irikar__Basement_Pipes__High_Pipe, SpotId::Irikar__Basement_Pipes__West_28) => {
+            (Some(1363), vec![])
+        }
+        (
+            SpotId::Irikar__Basement_Pipes__Left_Vertical_Pipe,
+            SpotId::Irikar__Basement_Pipes__West_28,
+        ) => (Some(1403), vec![]),
+        (
+            SpotId::Irikar__Basement_Pipes__Lower_Pipe_Right,
+            SpotId::Irikar__Basement_Pipes__East_28,
+        ) => (Some(877), vec![]),
+        (
+            SpotId::Irikar__Basement_Pipes__Lower_Pipe_Right,
+            SpotId::Irikar__Basement_Pipes__Lower_Pipe_Under_Ledge,
+        ) => (Some(1403), vec![]),
+        (
+            SpotId::Irikar__Basement_Pipes__Lower_Pipe_Under_Ledge,
+            SpotId::Irikar__Basement_Pipes__Lower_Pipe_Right,
+        ) => (Some(1403), vec![]),
+        (
+            SpotId::Irikar__Basement_Pipes__Right_Vertical_Pipe,
+            SpotId::Irikar__Basement_Pipes__Left_Vertical_Pipe,
+        ) => (Some(1578), vec![]),
+        (SpotId::Irikar__Basement_Pipes__West_27, SpotId::Irikar__Basement_Pipes__High_Pipe) => {
+            (Some(526), vec![])
+        }
+        (
+            SpotId::Irikar__Basement_Pipes__West_28,
+            SpotId::Irikar__Basement_Pipes__Left_Vertical_Pipe,
+        ) => (Some(1799), vec![]),
+        (
+            SpotId::Irikar__Basement_Portal__Bottom_Middle,
+            SpotId::Irikar__Basement_Portal__East_28,
+        ) => (Some(3333), vec![]),
+        (
+            SpotId::Irikar__Basement_Portal__Bottom_Middle,
+            SpotId::Irikar__Basement_Portal__Portal_Stand,
+        ) => (Some(1666), vec![]),
+        (SpotId::Irikar__Basement_Portal__East_27, SpotId::Irikar__Basement_Portal__Ledge) => {
+            (Some(4385), vec![])
+        }
+        (
+            SpotId::Irikar__Basement_Portal__East_28,
+            SpotId::Irikar__Basement_Portal__Bottom_Middle,
+        ) => (Some(3333), vec![]),
+        (
+            SpotId::Irikar__Basement_Portal__East_Platform,
+            SpotId::Irikar__Basement_Portal__East_27,
+        ) => (Some(1578), vec![]),
+        (
+            SpotId::Irikar__Basement_Portal__East_Platform,
+            SpotId::Irikar__Basement_Portal__Ledge,
+        ) => (Some(2807), vec![]),
+        (
+            SpotId::Irikar__Basement_Portal__East_Platform,
+            SpotId::Irikar__Basement_Portal__North,
+        ) => (Some(600), vec![]),
+        (
+            SpotId::Irikar__Basement_Portal__Ledge,
+            SpotId::Irikar__Basement_Portal__Bottom_Middle,
+        ) => (Some(1052), vec![]),
+        (SpotId::Irikar__Basement_Portal__Ledge, SpotId::Irikar__Basement_Portal__East_27) => {
+            (Some(4385), vec![])
+        }
+        (SpotId::Irikar__Basement_Portal__Ledge, SpotId::Irikar__Basement_Portal__Portal_Stand) => {
+            (Some(614), vec![])
+        }
+        (SpotId::Irikar__Basement_Portal__Ledge, SpotId::Irikar__Basement_Portal__West_28) => {
+            (Some(2280), vec![])
+        }
+        (
+            SpotId::Irikar__Basement_Portal__Middle_Platform,
+            SpotId::Irikar__Basement_Portal__Bottom_Middle,
+        ) => (Some(1403), vec![]),
+        (
+            SpotId::Irikar__Basement_Portal__Middle_Platform,
+            SpotId::Irikar__Basement_Portal__East_27,
+        ) => (Some(4736), vec![]),
+        (
+            SpotId::Irikar__Basement_Portal__Middle_Platform,
+            SpotId::Irikar__Basement_Portal__Ledge,
+        ) => (Some(499), vec![]),
+        (
+            SpotId::Irikar__Basement_Portal__Middle_Platform,
+            SpotId::Irikar__Basement_Portal__Portal_Stand,
+        ) => (Some(1100), vec![]),
+        (
+            SpotId::Irikar__Basement_Portal__Middle_Platform,
+            SpotId::Irikar__Basement_Portal__West_28,
+        ) => (Some(1929), vec![]),
+        (
+            SpotId::Irikar__Basement_Portal__Moving_Platform_End,
+            SpotId::Irikar__Basement_Portal__East_27,
+        ) => (Some(3333), vec![]),
+        (
+            SpotId::Irikar__Basement_Portal__Moving_Platform_End,
+            SpotId::Irikar__Basement_Portal__Ledge,
+        ) => (Some(1052), vec![]),
+        (
+            SpotId::Irikar__Basement_Portal__Moving_Platform_Start,
+            SpotId::Irikar__Basement_Portal__East_28,
+        ) => (Some(5789), vec![]),
+        (
+            SpotId::Irikar__Basement_Portal__Moving_Platform_Start,
+            SpotId::Irikar__Basement_Portal__Portal_Stand,
+        ) => (Some(789), vec![]),
+        (SpotId::Irikar__Basement_Portal__North, SpotId::Irikar__Basement_Portal__East_27) => {
+            (Some(1578), vec![])
+        }
+        (
+            SpotId::Irikar__Basement_Portal__North,
+            SpotId::Irikar__Basement_Portal__East_Platform,
+        ) => (Some(150), vec![]),
+        (SpotId::Irikar__Basement_Portal__North, SpotId::Irikar__Basement_Portal__Ledge) => {
+            (Some(2807), vec![])
+        }
+        (
+            SpotId::Irikar__Basement_Portal__Portal_Stand,
+            SpotId::Irikar__Basement_Portal__Bottom_Middle,
+        ) => (Some(1666), vec![]),
+        (
+            SpotId::Irikar__Basement_Portal__Portal_Stand,
+            SpotId::Irikar__Basement_Portal__West_28,
+        ) => (Some(1666), vec![]),
+        (
+            SpotId::Irikar__Basement_Portal__West_28,
+            SpotId::Irikar__Basement_Portal__Portal_Stand,
+        ) => (Some(1666), vec![]),
+        (
+            SpotId::Irikar__Basement_Portal__Westmost_Platform,
+            SpotId::Irikar__Basement_Portal__Bottom_Middle,
+        ) => (Some(2456), vec![]),
+        (
+            SpotId::Irikar__Basement_Portal__Westmost_Platform,
+            SpotId::Irikar__Basement_Portal__Portal_Stand,
+        ) => (Some(899), vec![]),
+        (
+            SpotId::Irikar__Basement_Portal__Westmost_Platform,
+            SpotId::Irikar__Basement_Portal__West_28,
+        ) => (Some(1049), vec![]),
+        (SpotId::Irikar__Empty_Foyer__East, SpotId::Irikar__Empty_Foyer__West) => {
+            (Some(3157), vec![])
+        }
+        (SpotId::Irikar__Empty_Foyer__West, SpotId::Irikar__Empty_Foyer__East) => {
+            (Some(3157), vec![])
         }
         (SpotId::Irikar__Hub__Bowl_Hole, SpotId::Irikar__Hub__Sat_Tower_Middle_Ledge) => {
             (Some(1578), vec![])

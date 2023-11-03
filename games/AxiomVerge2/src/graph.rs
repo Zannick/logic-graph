@@ -934,11 +934,40 @@ pub fn get_area(spot: SpotId) -> AreaId {
         SpotId::Irikar__Basement_Portal__East_27
         | SpotId::Irikar__Basement_Portal__Ledge
         | SpotId::Irikar__Basement_Portal__Moving_Platform_Start
+        | SpotId::Irikar__Basement_Portal__Moving_Platform_End
         | SpotId::Irikar__Basement_Portal__Westmost_Platform
         | SpotId::Irikar__Basement_Portal__Middle_Platform
         | SpotId::Irikar__Basement_Portal__East_Platform
-        | SpotId::Irikar__Basement_Portal__North => AreaId::Irikar__Basement_Portal,
-        SpotId::Irikar__Basement_Pipes__East_28 => AreaId::Irikar__Basement_Pipes,
+        | SpotId::Irikar__Basement_Portal__North
+        | SpotId::Irikar__Basement_Portal__Portal_Stand
+        | SpotId::Irikar__Basement_Portal__West_28
+        | SpotId::Irikar__Basement_Portal__Bottom_Middle
+        | SpotId::Irikar__Basement_Portal__East_28 => AreaId::Irikar__Basement_Portal,
+        SpotId::Irikar__Basement_Pipes__East_28
+        | SpotId::Irikar__Basement_Pipes__Lower_Pipe_Right
+        | SpotId::Irikar__Basement_Pipes__Lower_Pipe_Under_Ledge
+        | SpotId::Irikar__Basement_Pipes__Brick_Ledge
+        | SpotId::Irikar__Basement_Pipes__Bricks_Under_Pipes
+        | SpotId::Irikar__Basement_Pipes__Double_Pipe_Right
+        | SpotId::Irikar__Basement_Pipes__Double_Pipe_Left
+        | SpotId::Irikar__Basement_Pipes__Right_Vertical_Pipe
+        | SpotId::Irikar__Basement_Pipes__Left_Vertical_Pipe
+        | SpotId::Irikar__Basement_Pipes__West_28
+        | SpotId::Irikar__Basement_Pipes__West_27
+        | SpotId::Irikar__Basement_Pipes__High_Pipe => AreaId::Irikar__Basement_Pipes,
+        SpotId::Irikar__Empty_Foyer__West | SpotId::Irikar__Empty_Foyer__East => {
+            AreaId::Irikar__Empty_Foyer
+        }
+        SpotId::Irikar__Boss_Room__West_28 | SpotId::Irikar__Boss_Room__East_28 => {
+            AreaId::Irikar__Boss_Room
+        }
+        SpotId::Irikar__Midwest__East_23
+        | SpotId::Irikar__Midwest__East_24_on_Building
+        | SpotId::Irikar__Midwest__East_24_on_Floor
+        | SpotId::Irikar__Midwest__East_25
+        | SpotId::Irikar__Midwest__East_26
+        | SpotId::Irikar__Midwest__East_27
+        | SpotId::Irikar__Midwest__East_28 => AreaId::Irikar__Midwest,
         SpotId::Menu__Upgrade_Menu__Physiology
         | SpotId::Menu__Upgrade_Menu__Combat
         | SpotId::Menu__Upgrade_Menu__Infection
@@ -1851,11 +1880,36 @@ pub fn get_region(spot: SpotId) -> RegionId {
         SpotId::Irikar__Basement_Portal__East_27
         | SpotId::Irikar__Basement_Portal__Ledge
         | SpotId::Irikar__Basement_Portal__Moving_Platform_Start
+        | SpotId::Irikar__Basement_Portal__Moving_Platform_End
         | SpotId::Irikar__Basement_Portal__Westmost_Platform
         | SpotId::Irikar__Basement_Portal__Middle_Platform
         | SpotId::Irikar__Basement_Portal__East_Platform
-        | SpotId::Irikar__Basement_Portal__North => RegionId::Irikar,
-        SpotId::Irikar__Basement_Pipes__East_28 => RegionId::Irikar,
+        | SpotId::Irikar__Basement_Portal__North
+        | SpotId::Irikar__Basement_Portal__Portal_Stand
+        | SpotId::Irikar__Basement_Portal__West_28
+        | SpotId::Irikar__Basement_Portal__Bottom_Middle
+        | SpotId::Irikar__Basement_Portal__East_28 => RegionId::Irikar,
+        SpotId::Irikar__Basement_Pipes__East_28
+        | SpotId::Irikar__Basement_Pipes__Lower_Pipe_Right
+        | SpotId::Irikar__Basement_Pipes__Lower_Pipe_Under_Ledge
+        | SpotId::Irikar__Basement_Pipes__Brick_Ledge
+        | SpotId::Irikar__Basement_Pipes__Bricks_Under_Pipes
+        | SpotId::Irikar__Basement_Pipes__Double_Pipe_Right
+        | SpotId::Irikar__Basement_Pipes__Double_Pipe_Left
+        | SpotId::Irikar__Basement_Pipes__Right_Vertical_Pipe
+        | SpotId::Irikar__Basement_Pipes__Left_Vertical_Pipe
+        | SpotId::Irikar__Basement_Pipes__West_28
+        | SpotId::Irikar__Basement_Pipes__West_27
+        | SpotId::Irikar__Basement_Pipes__High_Pipe => RegionId::Irikar,
+        SpotId::Irikar__Empty_Foyer__West | SpotId::Irikar__Empty_Foyer__East => RegionId::Irikar,
+        SpotId::Irikar__Boss_Room__West_28 | SpotId::Irikar__Boss_Room__East_28 => RegionId::Irikar,
+        SpotId::Irikar__Midwest__East_23
+        | SpotId::Irikar__Midwest__East_24_on_Building
+        | SpotId::Irikar__Midwest__East_24_on_Floor
+        | SpotId::Irikar__Midwest__East_25
+        | SpotId::Irikar__Midwest__East_26
+        | SpotId::Irikar__Midwest__East_27
+        | SpotId::Irikar__Midwest__East_28 => RegionId::Irikar,
         SpotId::Menu__Upgrade_Menu__Physiology
         | SpotId::Menu__Upgrade_Menu__Combat
         | SpotId::Menu__Upgrade_Menu__Infection
@@ -2901,6 +2955,35 @@ impl world::Accessible for Exit {
             ExitId::Glacier__Vertical_Room__West_8__ex__Peak__East_8_1 => true,
             ExitId::Glacier__Vertical_Room__West_9__ex__Ledge_Grab_Room__East_9_1 => true,
             ExitId::Irikar__Abandoned_Room__West__ex__Basement_Portal__East_27_1 => true,
+            ExitId::Irikar__Basement_Pipes__Bricks_Under_Pipes__ex__Double_Pipe_Right_1 => rules::access_grab(&ctx),
+            ExitId::Irikar__Basement_Pipes__Bricks_Under_Pipes__ex__Double_Pipe_Right_2 => rules::access_hook(&ctx),
+            ExitId::Irikar__Basement_Pipes__Double_Pipe_Left__ex__High_Pipe_1 => rules::access_hover_and_hook(&ctx),
+            ExitId::Irikar__Basement_Pipes__East_28__ex__Basement_Portal__West_28_1 => true,
+            ExitId::Irikar__Basement_Pipes__Lower_Pipe_Under_Ledge__ex__Brick_Ledge_1 => rules::access_hook(&ctx),
+            ExitId::Irikar__Basement_Pipes__Lower_Pipe_Under_Ledge__ex__Brick_Ledge_2 => rules::access_climb(&ctx),
+            ExitId::Irikar__Basement_Pipes__Right_Vertical_Pipe__ex__Double_Pipe_Left_1 => rules::access_grab(&ctx),
+            ExitId::Irikar__Basement_Pipes__Right_Vertical_Pipe__ex__Double_Pipe_Left_2 => rules::access_grab_and_climb(&ctx),
+            ExitId::Irikar__Basement_Pipes__Right_Vertical_Pipe__ex__Double_Pipe_Left_3 => rules::access_hook(&ctx),
+            ExitId::Irikar__Basement_Pipes__West_27__ex__Midwest__East_27_1 => true,
+            ExitId::Irikar__Basement_Pipes__West_28__ex__Midwest__East_28_1 => true,
+            ExitId::Irikar__Basement_Portal__Bottom_Middle__ex__Ledge_1 => rules::access_mist2(&ctx),
+            ExitId::Irikar__Basement_Portal__East_27__ex__Abandoned_Room__West_1 => true,
+            ExitId::Irikar__Basement_Portal__East_28__ex__Empty_Foyer__West_1 => true,
+            ExitId::Irikar__Basement_Portal__East_28__ex__Ledge_1 => rules::access_hover_and_hook_and_mist2(&ctx),
+            ExitId::Irikar__Basement_Portal__Ledge__ex__East_Platform_1 => rules::access_mist2(&ctx),
+            ExitId::Irikar__Basement_Portal__Ledge__ex__Moving_Platform_Start_1 => rules::access_irikar__basement_portal__ledge__ex__moving_platform_start_1__req(&ctx),
+            ExitId::Irikar__Basement_Portal__Ledge__ex__Westmost_Platform_1 => rules::access_hover(&ctx),
+            ExitId::Irikar__Basement_Portal__Middle_Platform__ex__East_Platform_1 => rules::access_hover(&ctx),
+            ExitId::Irikar__Basement_Portal__Middle_Platform__ex__Moving_Platform_End_1 => rules::access_irikar__basement_portal__middle_platform__ex__moving_platform_end_1__req(&ctx),
+            ExitId::Irikar__Basement_Portal__Moving_Platform_End__ex__East_Platform_1 => rules::access_hover(&ctx),
+            ExitId::Irikar__Basement_Portal__Moving_Platform_Start__ex__Ledge_1 => rules::access_hook(&ctx),
+            ExitId::Irikar__Basement_Portal__North__ex__Hub__Royal_Storage_South_1 => true,
+            ExitId::Irikar__Basement_Portal__Portal_Stand__ex__Ledge_1 => rules::access_hover_and_hook(&ctx),
+            ExitId::Irikar__Basement_Portal__Portal_Stand__ex__Moving_Platform_Start_1 => rules::access_irikar__basement_portal__portal_stand__ex__moving_platform_start_1__req(&ctx),
+            ExitId::Irikar__Basement_Portal__West_28__ex__Basement_Pipes__East_28_1 => true,
+            ExitId::Irikar__Basement_Portal__West_28__ex__Moving_Platform_Start_1 => rules::access_hook(&ctx),
+            ExitId::Irikar__Empty_Foyer__East__ex__Boss_Room__West_28_1 => true,
+            ExitId::Irikar__Empty_Foyer__West__ex__Basement_Portal__East_28_1 => true,
             ExitId::Irikar__Hub__Bowl_Middle_Ledge__ex__Bowl_Top_Platform_1 => rules::access_hook(&ctx),
             ExitId::Irikar__Hub__Bowl_Middle_Platform_Center__ex__Bowl_Middle_Ledge_1 => rules::access_hook(&ctx),
             ExitId::Irikar__Hub__Bowl_Middle_Platform_West__ex__Bowl_Middle_Ledge_1 => rules::access_hook(&ctx),
@@ -3239,6 +3322,15 @@ impl world::Exit for Exit {
             ExitId::Glacier__Vertical_Room__West_8__ex__Peak__East_8_1 => true,
             ExitId::Glacier__Vertical_Room__West_9__ex__Ledge_Grab_Room__East_9_1 => true,
             ExitId::Irikar__Abandoned_Room__West__ex__Basement_Portal__East_27_1 => true,
+            ExitId::Irikar__Basement_Pipes__East_28__ex__Basement_Portal__West_28_1 => true,
+            ExitId::Irikar__Basement_Pipes__West_27__ex__Midwest__East_27_1 => true,
+            ExitId::Irikar__Basement_Pipes__West_28__ex__Midwest__East_28_1 => true,
+            ExitId::Irikar__Basement_Portal__East_27__ex__Abandoned_Room__West_1 => true,
+            ExitId::Irikar__Basement_Portal__East_28__ex__Empty_Foyer__West_1 => true,
+            ExitId::Irikar__Basement_Portal__North__ex__Hub__Royal_Storage_South_1 => true,
+            ExitId::Irikar__Basement_Portal__West_28__ex__Basement_Pipes__East_28_1 => true,
+            ExitId::Irikar__Empty_Foyer__East__ex__Boss_Room__West_28_1 => true,
+            ExitId::Irikar__Empty_Foyer__West__ex__Basement_Portal__East_28_1 => true,
             ExitId::Irikar__Hub__Royal_Storage_South__ex__Basement_Portal__North_1 => true,
             ExitId::Irikar__Hub__Sat_Tower_East_24__ex__Sight_Room__West_24_1 => true,
             ExitId::Irikar__Sight_Room__West_24__ex__Hub__Sat_Tower_East_24_1 => true,
@@ -3480,6 +3572,12 @@ impl world::Accessible for Action {
                 ActionId::Global__Recall_Drone => {
                     rules::access_not_within_menu_and_not_breach_and_can_recall(&ctx)
                 }
+                ActionId::Irikar__Basement_Portal__Moving_Platform_Start__Activate_Platform => {
+                    rules::access_activate(&ctx)
+                }
+                ActionId::Irikar__Basement_Portal__Portal_Stand__Enter_Portal => {
+                    rules::access_mode__drone_and_breach_sight(&ctx)
+                }
                 ActionId::Irikar__Hub__Portal_Stand__Enter_Portal => {
                     rules::access_mode__drone_and_breach_sight(&ctx)
                 }
@@ -3589,6 +3687,8 @@ impl world::Action for Action {
             ActionId::Irikar__Hub__Portal_Stand__Enter_Portal => rules::action_breach_portal_save_update(ctx),
             ActionId::Irikar__Hub__Royal_Storage_By_Wall__Shockwave_Wall => rules::action_collect__irikar_royal_storage_wall_collect__flask_visit__irikar__hub__royal_storage_in_wall__item(ctx),
             ActionId::Irikar__Sight_Room__Portal__Enter_Portal => rules::action_breach_portal_save_update(ctx),
+            ActionId::Irikar__Basement_Portal__Moving_Platform_Start__Activate_Platform => rules::action_irikar__basement_portal__moving_platform_start__activate_platform__do(ctx),
+            ActionId::Irikar__Basement_Portal__Portal_Stand__Enter_Portal => rules::action_breach_portal_save_update(ctx),
         };
         let dest = self.dest(ctx);
         if dest != SpotId::None {
@@ -3675,6 +3775,12 @@ impl world::Action for Action {
             }
             ActionId::Irikar__Sight_Room__Portal__Enter_Portal => {
                 SpotId::Irikar_Breach__Save_Room__Save_Point
+            }
+            ActionId::Irikar__Basement_Portal__Moving_Platform_Start__Activate_Platform => {
+                SpotId::Irikar__Basement_Portal__Moving_Platform_End
+            }
+            ActionId::Irikar__Basement_Portal__Portal_Stand__Enter_Portal => {
+                SpotId::Irikar_Breach__Basement_Save__Save_Point
             }
             _ => SpotId::None,
         }
@@ -3785,7 +3891,7 @@ pub struct Spot {
     pub actions: Range<usize>,
 }
 
-static RAW_SPOTS: [SpotId; 906] = [
+static RAW_SPOTS: [SpotId; 933] = [
     SpotId::None,
     SpotId::Amagi__Cave_Behind_Waterfall__Bottom,
     SpotId::Amagi__Cave_Behind_Waterfall__Middle,
@@ -4594,14 +4700,34 @@ static RAW_SPOTS: [SpotId; 906] = [
     SpotId::Irikar__Abandoned_Room__Corner_Core,
     SpotId::Irikar__Abandoned_Room__Empty_Pedestal,
     SpotId::Irikar__Abandoned_Room__West,
+    SpotId::Irikar__Basement_Pipes__Brick_Ledge,
+    SpotId::Irikar__Basement_Pipes__Bricks_Under_Pipes,
+    SpotId::Irikar__Basement_Pipes__Double_Pipe_Left,
+    SpotId::Irikar__Basement_Pipes__Double_Pipe_Right,
     SpotId::Irikar__Basement_Pipes__East_28,
+    SpotId::Irikar__Basement_Pipes__High_Pipe,
+    SpotId::Irikar__Basement_Pipes__Left_Vertical_Pipe,
+    SpotId::Irikar__Basement_Pipes__Lower_Pipe_Right,
+    SpotId::Irikar__Basement_Pipes__Lower_Pipe_Under_Ledge,
+    SpotId::Irikar__Basement_Pipes__Right_Vertical_Pipe,
+    SpotId::Irikar__Basement_Pipes__West_27,
+    SpotId::Irikar__Basement_Pipes__West_28,
+    SpotId::Irikar__Basement_Portal__Bottom_Middle,
     SpotId::Irikar__Basement_Portal__East_27,
+    SpotId::Irikar__Basement_Portal__East_28,
     SpotId::Irikar__Basement_Portal__East_Platform,
     SpotId::Irikar__Basement_Portal__Ledge,
     SpotId::Irikar__Basement_Portal__Middle_Platform,
+    SpotId::Irikar__Basement_Portal__Moving_Platform_End,
     SpotId::Irikar__Basement_Portal__Moving_Platform_Start,
     SpotId::Irikar__Basement_Portal__North,
+    SpotId::Irikar__Basement_Portal__Portal_Stand,
+    SpotId::Irikar__Basement_Portal__West_28,
     SpotId::Irikar__Basement_Portal__Westmost_Platform,
+    SpotId::Irikar__Boss_Room__East_28,
+    SpotId::Irikar__Boss_Room__West_28,
+    SpotId::Irikar__Empty_Foyer__East,
+    SpotId::Irikar__Empty_Foyer__West,
     SpotId::Irikar__Hub__Bowl_Hole,
     SpotId::Irikar__Hub__Bowl_Middle_Ledge,
     SpotId::Irikar__Hub__Bowl_Middle_Platform_Center,
@@ -4635,6 +4761,13 @@ static RAW_SPOTS: [SpotId; 906] = [
     SpotId::Irikar__Hub__Sat_Tower_Top_Ledge,
     SpotId::Irikar__Hub__Save_Point,
     SpotId::Irikar__Hub__West_Rim,
+    SpotId::Irikar__Midwest__East_23,
+    SpotId::Irikar__Midwest__East_24_on_Building,
+    SpotId::Irikar__Midwest__East_24_on_Floor,
+    SpotId::Irikar__Midwest__East_25,
+    SpotId::Irikar__Midwest__East_26,
+    SpotId::Irikar__Midwest__East_27,
+    SpotId::Irikar__Midwest__East_28,
     SpotId::Irikar__Sight_Room__Item_Pedestal,
     SpotId::Irikar__Sight_Room__Lower_Ledge,
     SpotId::Irikar__Sight_Room__Portal,
@@ -5098,16 +5231,28 @@ lazy_static! {
             end: SpotId::Irikar__Abandoned_Room__West.into_usize() + 1,
         },
         AreaId::Irikar__Basement_Pipes => Range {
-            start: SpotId::Irikar__Basement_Pipes__East_28.into_usize(),
-            end: SpotId::Irikar__Basement_Pipes__East_28.into_usize() + 1,
+            start: SpotId::Irikar__Basement_Pipes__Brick_Ledge.into_usize(),
+            end: SpotId::Irikar__Basement_Pipes__West_28.into_usize() + 1,
         },
         AreaId::Irikar__Basement_Portal => Range {
-            start: SpotId::Irikar__Basement_Portal__East_27.into_usize(),
+            start: SpotId::Irikar__Basement_Portal__Bottom_Middle.into_usize(),
             end: SpotId::Irikar__Basement_Portal__Westmost_Platform.into_usize() + 1,
+        },
+        AreaId::Irikar__Boss_Room => Range {
+            start: SpotId::Irikar__Boss_Room__East_28.into_usize(),
+            end: SpotId::Irikar__Boss_Room__West_28.into_usize() + 1,
+        },
+        AreaId::Irikar__Empty_Foyer => Range {
+            start: SpotId::Irikar__Empty_Foyer__East.into_usize(),
+            end: SpotId::Irikar__Empty_Foyer__West.into_usize() + 1,
         },
         AreaId::Irikar__Hub => Range {
             start: SpotId::Irikar__Hub__Bowl_Hole.into_usize(),
             end: SpotId::Irikar__Hub__West_Rim.into_usize() + 1,
+        },
+        AreaId::Irikar__Midwest => Range {
+            start: SpotId::Irikar__Midwest__East_23.into_usize(),
+            end: SpotId::Irikar__Midwest__East_28.into_usize() + 1,
         },
         AreaId::Irikar__Sight_Room => Range {
             start: SpotId::Irikar__Sight_Room__Item_Pedestal.into_usize(),
@@ -6120,6 +6265,12 @@ impl world::World for World {
             ActionId::Irikar__Sight_Room__Portal__Enter_Portal => {
                 SpotId::Irikar__Sight_Room__Portal
             }
+            ActionId::Irikar__Basement_Portal__Moving_Platform_Start__Activate_Platform => {
+                SpotId::Irikar__Basement_Portal__Moving_Platform_Start
+            }
+            ActionId::Irikar__Basement_Portal__Portal_Stand__Enter_Portal => {
+                SpotId::Irikar__Basement_Portal__Portal_Stand
+            }
             _ => SpotId::None,
         }
     }
@@ -6666,6 +6817,25 @@ impl world::World for World {
             ExitId::Irikar__Hub__Royal_Storage_By_Wall__Mist_into_Wall => SpotId::Irikar__Hub__Royal_Storage_By_Wall,
             ExitId::Irikar__Sight_Room__West_24__ex__Hub__Sat_Tower_East_24_1 => SpotId::Irikar__Sight_Room__West_24,
             ExitId::Irikar__Abandoned_Room__West__ex__Basement_Portal__East_27_1 => SpotId::Irikar__Abandoned_Room__West,
+            ExitId::Irikar__Basement_Portal__East_27__ex__Abandoned_Room__West_1 => SpotId::Irikar__Basement_Portal__East_27,
+            ExitId::Irikar__Basement_Portal__Ledge__ex__Moving_Platform_Start_1 | ExitId:: Irikar__Basement_Portal__Ledge__ex__Westmost_Platform_1 | ExitId:: Irikar__Basement_Portal__Ledge__ex__East_Platform_1 => SpotId::Irikar__Basement_Portal__Ledge,
+            ExitId::Irikar__Basement_Portal__Moving_Platform_Start__ex__Ledge_1 => SpotId::Irikar__Basement_Portal__Moving_Platform_Start,
+            ExitId::Irikar__Basement_Portal__Moving_Platform_End__ex__East_Platform_1 => SpotId::Irikar__Basement_Portal__Moving_Platform_End,
+            ExitId::Irikar__Basement_Portal__Middle_Platform__ex__East_Platform_1 | ExitId:: Irikar__Basement_Portal__Middle_Platform__ex__Moving_Platform_End_1 => SpotId::Irikar__Basement_Portal__Middle_Platform,
+            ExitId::Irikar__Basement_Portal__North__ex__Hub__Royal_Storage_South_1 => SpotId::Irikar__Basement_Portal__North,
+            ExitId::Irikar__Basement_Portal__Portal_Stand__ex__Moving_Platform_Start_1 | ExitId:: Irikar__Basement_Portal__Portal_Stand__ex__Ledge_1 => SpotId::Irikar__Basement_Portal__Portal_Stand,
+            ExitId::Irikar__Basement_Portal__West_28__ex__Moving_Platform_Start_1 | ExitId:: Irikar__Basement_Portal__West_28__ex__Basement_Pipes__East_28_1 => SpotId::Irikar__Basement_Portal__West_28,
+            ExitId::Irikar__Basement_Portal__Bottom_Middle__ex__Ledge_1 => SpotId::Irikar__Basement_Portal__Bottom_Middle,
+            ExitId::Irikar__Basement_Portal__East_28__ex__Empty_Foyer__West_1 | ExitId:: Irikar__Basement_Portal__East_28__ex__Ledge_1 => SpotId::Irikar__Basement_Portal__East_28,
+            ExitId::Irikar__Basement_Pipes__East_28__ex__Basement_Portal__West_28_1 => SpotId::Irikar__Basement_Pipes__East_28,
+            ExitId::Irikar__Basement_Pipes__Lower_Pipe_Under_Ledge__ex__Brick_Ledge_1 | ExitId:: Irikar__Basement_Pipes__Lower_Pipe_Under_Ledge__ex__Brick_Ledge_2 => SpotId::Irikar__Basement_Pipes__Lower_Pipe_Under_Ledge,
+            ExitId::Irikar__Basement_Pipes__Bricks_Under_Pipes__ex__Double_Pipe_Right_1 | ExitId:: Irikar__Basement_Pipes__Bricks_Under_Pipes__ex__Double_Pipe_Right_2 => SpotId::Irikar__Basement_Pipes__Bricks_Under_Pipes,
+            ExitId::Irikar__Basement_Pipes__Double_Pipe_Left__ex__High_Pipe_1 => SpotId::Irikar__Basement_Pipes__Double_Pipe_Left,
+            ExitId::Irikar__Basement_Pipes__Right_Vertical_Pipe__ex__Double_Pipe_Left_1 | ExitId:: Irikar__Basement_Pipes__Right_Vertical_Pipe__ex__Double_Pipe_Left_2 | ExitId:: Irikar__Basement_Pipes__Right_Vertical_Pipe__ex__Double_Pipe_Left_3 => SpotId::Irikar__Basement_Pipes__Right_Vertical_Pipe,
+            ExitId::Irikar__Basement_Pipes__West_28__ex__Midwest__East_28_1 => SpotId::Irikar__Basement_Pipes__West_28,
+            ExitId::Irikar__Basement_Pipes__West_27__ex__Midwest__East_27_1 => SpotId::Irikar__Basement_Pipes__West_27,
+            ExitId::Irikar__Empty_Foyer__West__ex__Basement_Portal__East_28_1 => SpotId::Irikar__Empty_Foyer__West,
+            ExitId::Irikar__Empty_Foyer__East__ex__Boss_Room__West_28_1 => SpotId::Irikar__Empty_Foyer__East,
             ExitId::Menu__Upgrade_Menu__Physiology__ex__Combat_1 | ExitId:: Menu__Upgrade_Menu__Physiology__ex__Infection_1 | ExitId:: Menu__Upgrade_Menu__Physiology__ex__Drone_1 => SpotId::Menu__Upgrade_Menu__Physiology,
             ExitId::Menu__Upgrade_Menu__Combat__ex__Physiology_1 | ExitId:: Menu__Upgrade_Menu__Combat__ex__Infection_1 | ExitId:: Menu__Upgrade_Menu__Combat__ex__Drone_1 => SpotId::Menu__Upgrade_Menu__Combat,
             ExitId::Menu__Upgrade_Menu__Infection__ex__Physiology_1 | ExitId:: Menu__Upgrade_Menu__Infection__ex__Combat_1 | ExitId:: Menu__Upgrade_Menu__Infection__ex__Drone_1 => SpotId::Menu__Upgrade_Menu__Infection,
@@ -7239,6 +7409,17 @@ impl world::World for World {
             | SpotId::Glacier__Vertical_Room__West_9
             | SpotId::Irikar__Abandoned_Room__Corner_Core
             | SpotId::Irikar__Abandoned_Room__West
+            | SpotId::Irikar__Basement_Pipes__East_28
+            | SpotId::Irikar__Basement_Pipes__West_27
+            | SpotId::Irikar__Basement_Pipes__West_28
+            | SpotId::Irikar__Basement_Portal__East_27
+            | SpotId::Irikar__Basement_Portal__East_28
+            | SpotId::Irikar__Basement_Portal__Moving_Platform_Start
+            | SpotId::Irikar__Basement_Portal__North
+            | SpotId::Irikar__Basement_Portal__Portal_Stand
+            | SpotId::Irikar__Basement_Portal__West_28
+            | SpotId::Irikar__Empty_Foyer__East
+            | SpotId::Irikar__Empty_Foyer__West
             | SpotId::Irikar__Hub__Dagger_Altar
             | SpotId::Irikar__Hub__Portal_Stand
             | SpotId::Irikar__Hub__Royal_Storage_By_Wall
@@ -13835,6 +14016,209 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
             price: Currency::Free,
             loc_id: None,
         },
+        ExitId::Irikar__Basement_Portal__East_27__ex__Abandoned_Room__West_1 => Exit {
+            id: ExitId::Irikar__Basement_Portal__East_27__ex__Abandoned_Room__West_1,
+            time: 1350,
+            dest: SpotId::Irikar__Abandoned_Room__West,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Irikar__Basement_Portal__Ledge__ex__Moving_Platform_Start_1 => Exit {
+            id: ExitId::Irikar__Basement_Portal__Ledge__ex__Moving_Platform_Start_1,
+            time: 1403,
+            dest: SpotId::Irikar__Basement_Portal__Moving_Platform_Start,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Irikar__Basement_Portal__Ledge__ex__Westmost_Platform_1 => Exit {
+            id: ExitId::Irikar__Basement_Portal__Ledge__ex__Westmost_Platform_1,
+            time: 1403,
+            dest: SpotId::Irikar__Basement_Portal__Westmost_Platform,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Irikar__Basement_Portal__Ledge__ex__East_Platform_1 => Exit {
+            id: ExitId::Irikar__Basement_Portal__Ledge__ex__East_Platform_1,
+            time: 3000,
+            dest: SpotId::Irikar__Basement_Portal__East_Platform,
+            price: Currency::Energy(60),
+            loc_id: None,
+        },
+        ExitId::Irikar__Basement_Portal__Moving_Platform_Start__ex__Ledge_1 => Exit {
+            id: ExitId::Irikar__Basement_Portal__Moving_Platform_Start__ex__Ledge_1,
+            time: 1200,
+            dest: SpotId::Irikar__Basement_Portal__Ledge,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Irikar__Basement_Portal__Moving_Platform_End__ex__East_Platform_1 => Exit {
+            id: ExitId::Irikar__Basement_Portal__Moving_Platform_End__ex__East_Platform_1,
+            time: 1754,
+            dest: SpotId::Irikar__Basement_Portal__East_Platform,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Irikar__Basement_Portal__Middle_Platform__ex__East_Platform_1 => Exit {
+            id: ExitId::Irikar__Basement_Portal__Middle_Platform__ex__East_Platform_1,
+            time: 3157,
+            dest: SpotId::Irikar__Basement_Portal__East_Platform,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Irikar__Basement_Portal__Middle_Platform__ex__Moving_Platform_End_1 => Exit {
+            id: ExitId::Irikar__Basement_Portal__Middle_Platform__ex__Moving_Platform_End_1,
+            time: 1000,
+            dest: SpotId::Irikar__Basement_Portal__Moving_Platform_End,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Irikar__Basement_Portal__North__ex__Hub__Royal_Storage_South_1 => Exit {
+            id: ExitId::Irikar__Basement_Portal__North__ex__Hub__Royal_Storage_South_1,
+            time: 1600,
+            dest: SpotId::Irikar__Hub__Royal_Storage_South,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Irikar__Basement_Portal__Portal_Stand__ex__Moving_Platform_Start_1 => Exit {
+            id: ExitId::Irikar__Basement_Portal__Portal_Stand__ex__Moving_Platform_Start_1,
+            time: 789,
+            dest: SpotId::Irikar__Basement_Portal__Moving_Platform_Start,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Irikar__Basement_Portal__Portal_Stand__ex__Ledge_1 => Exit {
+            id: ExitId::Irikar__Basement_Portal__Portal_Stand__ex__Ledge_1,
+            time: 1000,
+            dest: SpotId::Irikar__Basement_Portal__Ledge,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Irikar__Basement_Portal__West_28__ex__Moving_Platform_Start_1 => Exit {
+            id: ExitId::Irikar__Basement_Portal__West_28__ex__Moving_Platform_Start_1,
+            time: 1000,
+            dest: SpotId::Irikar__Basement_Portal__Moving_Platform_Start,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Irikar__Basement_Portal__West_28__ex__Basement_Pipes__East_28_1 => Exit {
+            id: ExitId::Irikar__Basement_Portal__West_28__ex__Basement_Pipes__East_28_1,
+            time: 1350,
+            dest: SpotId::Irikar__Basement_Pipes__East_28,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Irikar__Basement_Portal__Bottom_Middle__ex__Ledge_1 => Exit {
+            id: ExitId::Irikar__Basement_Portal__Bottom_Middle__ex__Ledge_1,
+            time: 2000,
+            dest: SpotId::Irikar__Basement_Portal__Ledge,
+            price: Currency::Energy(20),
+            loc_id: None,
+        },
+        ExitId::Irikar__Basement_Portal__East_28__ex__Empty_Foyer__West_1 => Exit {
+            id: ExitId::Irikar__Basement_Portal__East_28__ex__Empty_Foyer__West_1,
+            time: 1350,
+            dest: SpotId::Irikar__Empty_Foyer__West,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Irikar__Basement_Portal__East_28__ex__Ledge_1 => Exit {
+            id: ExitId::Irikar__Basement_Portal__East_28__ex__Ledge_1,
+            time: 4800,
+            dest: SpotId::Irikar__Basement_Portal__Ledge,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Irikar__Basement_Pipes__East_28__ex__Basement_Portal__West_28_1 => Exit {
+            id: ExitId::Irikar__Basement_Pipes__East_28__ex__Basement_Portal__West_28_1,
+            time: 1350,
+            dest: SpotId::Irikar__Basement_Portal__West_28,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Irikar__Basement_Pipes__Lower_Pipe_Under_Ledge__ex__Brick_Ledge_1 => Exit {
+            id: ExitId::Irikar__Basement_Pipes__Lower_Pipe_Under_Ledge__ex__Brick_Ledge_1,
+            time: 1000,
+            dest: SpotId::Irikar__Basement_Pipes__Brick_Ledge,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Irikar__Basement_Pipes__Lower_Pipe_Under_Ledge__ex__Brick_Ledge_2 => Exit {
+            id: ExitId::Irikar__Basement_Pipes__Lower_Pipe_Under_Ledge__ex__Brick_Ledge_2,
+            time: 1799,
+            dest: SpotId::Irikar__Basement_Pipes__Brick_Ledge,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Irikar__Basement_Pipes__Bricks_Under_Pipes__ex__Double_Pipe_Right_1 => Exit {
+            id: ExitId::Irikar__Basement_Pipes__Bricks_Under_Pipes__ex__Double_Pipe_Right_1,
+            time: 1200,
+            dest: SpotId::Irikar__Basement_Pipes__Double_Pipe_Right,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Irikar__Basement_Pipes__Bricks_Under_Pipes__ex__Double_Pipe_Right_2 => Exit {
+            id: ExitId::Irikar__Basement_Pipes__Bricks_Under_Pipes__ex__Double_Pipe_Right_2,
+            time: 600,
+            dest: SpotId::Irikar__Basement_Pipes__Double_Pipe_Right,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Irikar__Basement_Pipes__Double_Pipe_Left__ex__High_Pipe_1 => Exit {
+            id: ExitId::Irikar__Basement_Pipes__Double_Pipe_Left__ex__High_Pipe_1,
+            time: 2807,
+            dest: SpotId::Irikar__Basement_Pipes__High_Pipe,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Irikar__Basement_Pipes__Right_Vertical_Pipe__ex__Double_Pipe_Left_1 => Exit {
+            id: ExitId::Irikar__Basement_Pipes__Right_Vertical_Pipe__ex__Double_Pipe_Left_1,
+            time: 2400,
+            dest: SpotId::Irikar__Basement_Pipes__Double_Pipe_Left,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Irikar__Basement_Pipes__Right_Vertical_Pipe__ex__Double_Pipe_Left_2 => Exit {
+            id: ExitId::Irikar__Basement_Pipes__Right_Vertical_Pipe__ex__Double_Pipe_Left_2,
+            time: 1799,
+            dest: SpotId::Irikar__Basement_Pipes__Double_Pipe_Left,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Irikar__Basement_Pipes__Right_Vertical_Pipe__ex__Double_Pipe_Left_3 => Exit {
+            id: ExitId::Irikar__Basement_Pipes__Right_Vertical_Pipe__ex__Double_Pipe_Left_3,
+            time: 1000,
+            dest: SpotId::Irikar__Basement_Pipes__Double_Pipe_Left,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Irikar__Basement_Pipes__West_28__ex__Midwest__East_28_1 => Exit {
+            id: ExitId::Irikar__Basement_Pipes__West_28__ex__Midwest__East_28_1,
+            time: 1350,
+            dest: SpotId::Irikar__Midwest__East_28,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Irikar__Basement_Pipes__West_27__ex__Midwest__East_27_1 => Exit {
+            id: ExitId::Irikar__Basement_Pipes__West_27__ex__Midwest__East_27_1,
+            time: 1350,
+            dest: SpotId::Irikar__Midwest__East_27,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Irikar__Empty_Foyer__West__ex__Basement_Portal__East_28_1 => Exit {
+            id: ExitId::Irikar__Empty_Foyer__West__ex__Basement_Portal__East_28_1,
+            time: 1350,
+            dest: SpotId::Irikar__Basement_Portal__East_28,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Irikar__Empty_Foyer__East__ex__Boss_Room__West_28_1 => Exit {
+            id: ExitId::Irikar__Empty_Foyer__East__ex__Boss_Room__West_28_1,
+            time: 1350,
+            dest: SpotId::Irikar__Boss_Room__West_28,
+            price: Currency::Free,
+            loc_id: None,
+        },
         ExitId::Menu__Upgrade_Menu__Physiology__ex__Combat_1 => Exit {
             id: ExitId::Menu__Upgrade_Menu__Physiology__ex__Combat_1,
             time: 100,
@@ -14326,6 +14710,16 @@ pub fn build_actions() -> EnumMap<ActionId, Action> {
         },
         ActionId::Irikar__Sight_Room__Portal__Enter_Portal => Action {
             id: ActionId::Irikar__Sight_Room__Portal__Enter_Portal,
+            time: 3600,
+            price: Currency::Free,
+        },
+        ActionId::Irikar__Basement_Portal__Moving_Platform_Start__Activate_Platform => Action {
+            id: ActionId::Irikar__Basement_Portal__Moving_Platform_Start__Activate_Platform,
+            time: 8000,
+            price: Currency::Free,
+        },
+        ActionId::Irikar__Basement_Portal__Portal_Stand__Enter_Portal => Action {
+            id: ActionId::Irikar__Basement_Portal__Portal_Stand__Enter_Portal,
             time: 3600,
             price: Currency::Free,
         },
@@ -25763,7 +26157,8 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             exits: Range {
-                start: 0, end: 0,
+                start: ExitId::Irikar__Basement_Portal__East_27__ex__Abandoned_Room__West_1.into_usize(),
+                end: ExitId::Irikar__Basement_Portal__East_27__ex__Abandoned_Room__West_1.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
@@ -25775,7 +26170,8 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             exits: Range {
-                start: 0, end: 0,
+                start: ExitId::Irikar__Basement_Portal__Ledge__ex__East_Platform_1.into_usize(),
+                end: ExitId::Irikar__Basement_Portal__Ledge__ex__Westmost_Platform_1.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
@@ -25787,7 +26183,22 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             exits: Range {
+                start: ExitId::Irikar__Basement_Portal__Moving_Platform_Start__ex__Ledge_1.into_usize(),
+                end: ExitId::Irikar__Basement_Portal__Moving_Platform_Start__ex__Ledge_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: ActionId::Irikar__Basement_Portal__Moving_Platform_Start__Activate_Platform.into_usize(),
+                end: ActionId::Irikar__Basement_Portal__Moving_Platform_Start__Activate_Platform.into_usize() + 1,
+            },
+        },
+        SpotId::Irikar__Basement_Portal__Moving_Platform_End => Spot {
+            id: SpotId::Irikar__Basement_Portal__Moving_Platform_End,
+            locations: Range {
                 start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Irikar__Basement_Portal__Moving_Platform_End__ex__East_Platform_1.into_usize(),
+                end: ExitId::Irikar__Basement_Portal__Moving_Platform_End__ex__East_Platform_1.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
@@ -25811,7 +26222,8 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             exits: Range {
-                start: 0, end: 0,
+                start: ExitId::Irikar__Basement_Portal__Middle_Platform__ex__East_Platform_1.into_usize(),
+                end: ExitId::Irikar__Basement_Portal__Middle_Platform__ex__Moving_Platform_End_1.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
@@ -25835,7 +26247,61 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             exits: Range {
+                start: ExitId::Irikar__Basement_Portal__North__ex__Hub__Royal_Storage_South_1.into_usize(),
+                end: ExitId::Irikar__Basement_Portal__North__ex__Hub__Royal_Storage_South_1.into_usize() + 1,
+            },
+            actions: Range {
                 start: 0, end: 0,
+            },
+        },
+        SpotId::Irikar__Basement_Portal__Portal_Stand => Spot {
+            id: SpotId::Irikar__Basement_Portal__Portal_Stand,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Irikar__Basement_Portal__Portal_Stand__ex__Ledge_1.into_usize(),
+                end: ExitId::Irikar__Basement_Portal__Portal_Stand__ex__Moving_Platform_Start_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: ActionId::Irikar__Basement_Portal__Portal_Stand__Enter_Portal.into_usize(),
+                end: ActionId::Irikar__Basement_Portal__Portal_Stand__Enter_Portal.into_usize() + 1,
+            },
+        },
+        SpotId::Irikar__Basement_Portal__West_28 => Spot {
+            id: SpotId::Irikar__Basement_Portal__West_28,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Irikar__Basement_Portal__West_28__ex__Basement_Pipes__East_28_1.into_usize(),
+                end: ExitId::Irikar__Basement_Portal__West_28__ex__Moving_Platform_Start_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Irikar__Basement_Portal__Bottom_Middle => Spot {
+            id: SpotId::Irikar__Basement_Portal__Bottom_Middle,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Irikar__Basement_Portal__Bottom_Middle__ex__Ledge_1.into_usize(),
+                end: ExitId::Irikar__Basement_Portal__Bottom_Middle__ex__Ledge_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Irikar__Basement_Portal__East_28 => Spot {
+            id: SpotId::Irikar__Basement_Portal__East_28,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Irikar__Basement_Portal__East_28__ex__Empty_Foyer__West_1.into_usize(),
+                end: ExitId::Irikar__Basement_Portal__East_28__ex__Ledge_1.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
@@ -25843,6 +26309,279 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
         },
         SpotId::Irikar__Basement_Pipes__East_28 => Spot {
             id: SpotId::Irikar__Basement_Pipes__East_28,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Irikar__Basement_Pipes__East_28__ex__Basement_Portal__West_28_1.into_usize(),
+                end: ExitId::Irikar__Basement_Pipes__East_28__ex__Basement_Portal__West_28_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Irikar__Basement_Pipes__Lower_Pipe_Right => Spot {
+            id: SpotId::Irikar__Basement_Pipes__Lower_Pipe_Right,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Irikar__Basement_Pipes__Lower_Pipe_Under_Ledge => Spot {
+            id: SpotId::Irikar__Basement_Pipes__Lower_Pipe_Under_Ledge,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Irikar__Basement_Pipes__Lower_Pipe_Under_Ledge__ex__Brick_Ledge_1.into_usize(),
+                end: ExitId::Irikar__Basement_Pipes__Lower_Pipe_Under_Ledge__ex__Brick_Ledge_2.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Irikar__Basement_Pipes__Brick_Ledge => Spot {
+            id: SpotId::Irikar__Basement_Pipes__Brick_Ledge,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Irikar__Basement_Pipes__Bricks_Under_Pipes => Spot {
+            id: SpotId::Irikar__Basement_Pipes__Bricks_Under_Pipes,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Irikar__Basement_Pipes__Bricks_Under_Pipes__ex__Double_Pipe_Right_1.into_usize(),
+                end: ExitId::Irikar__Basement_Pipes__Bricks_Under_Pipes__ex__Double_Pipe_Right_2.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Irikar__Basement_Pipes__Double_Pipe_Right => Spot {
+            id: SpotId::Irikar__Basement_Pipes__Double_Pipe_Right,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Irikar__Basement_Pipes__Double_Pipe_Left => Spot {
+            id: SpotId::Irikar__Basement_Pipes__Double_Pipe_Left,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Irikar__Basement_Pipes__Double_Pipe_Left__ex__High_Pipe_1.into_usize(),
+                end: ExitId::Irikar__Basement_Pipes__Double_Pipe_Left__ex__High_Pipe_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Irikar__Basement_Pipes__Right_Vertical_Pipe => Spot {
+            id: SpotId::Irikar__Basement_Pipes__Right_Vertical_Pipe,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Irikar__Basement_Pipes__Right_Vertical_Pipe__ex__Double_Pipe_Left_1.into_usize(),
+                end: ExitId::Irikar__Basement_Pipes__Right_Vertical_Pipe__ex__Double_Pipe_Left_3.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Irikar__Basement_Pipes__Left_Vertical_Pipe => Spot {
+            id: SpotId::Irikar__Basement_Pipes__Left_Vertical_Pipe,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Irikar__Basement_Pipes__West_28 => Spot {
+            id: SpotId::Irikar__Basement_Pipes__West_28,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Irikar__Basement_Pipes__West_28__ex__Midwest__East_28_1.into_usize(),
+                end: ExitId::Irikar__Basement_Pipes__West_28__ex__Midwest__East_28_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Irikar__Basement_Pipes__West_27 => Spot {
+            id: SpotId::Irikar__Basement_Pipes__West_27,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Irikar__Basement_Pipes__West_27__ex__Midwest__East_27_1.into_usize(),
+                end: ExitId::Irikar__Basement_Pipes__West_27__ex__Midwest__East_27_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Irikar__Basement_Pipes__High_Pipe => Spot {
+            id: SpotId::Irikar__Basement_Pipes__High_Pipe,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Irikar__Empty_Foyer__West => Spot {
+            id: SpotId::Irikar__Empty_Foyer__West,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Irikar__Empty_Foyer__West__ex__Basement_Portal__East_28_1.into_usize(),
+                end: ExitId::Irikar__Empty_Foyer__West__ex__Basement_Portal__East_28_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Irikar__Empty_Foyer__East => Spot {
+            id: SpotId::Irikar__Empty_Foyer__East,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Irikar__Empty_Foyer__East__ex__Boss_Room__West_28_1.into_usize(),
+                end: ExitId::Irikar__Empty_Foyer__East__ex__Boss_Room__West_28_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Irikar__Boss_Room__West_28 => Spot {
+            id: SpotId::Irikar__Boss_Room__West_28,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Irikar__Boss_Room__East_28 => Spot {
+            id: SpotId::Irikar__Boss_Room__East_28,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Irikar__Midwest__East_23 => Spot {
+            id: SpotId::Irikar__Midwest__East_23,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Irikar__Midwest__East_24_on_Building => Spot {
+            id: SpotId::Irikar__Midwest__East_24_on_Building,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Irikar__Midwest__East_24_on_Floor => Spot {
+            id: SpotId::Irikar__Midwest__East_24_on_Floor,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Irikar__Midwest__East_25 => Spot {
+            id: SpotId::Irikar__Midwest__East_25,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Irikar__Midwest__East_26 => Spot {
+            id: SpotId::Irikar__Midwest__East_26,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Irikar__Midwest__East_27 => Spot {
+            id: SpotId::Irikar__Midwest__East_27,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Irikar__Midwest__East_28 => Spot {
+            id: SpotId::Irikar__Midwest__East_28,
             locations: Range {
                 start: 0, end: 0,
             },
@@ -27213,11 +27952,38 @@ pub fn spot_locations(id: SpotId) -> Range<usize> {
         SpotId::Irikar__Basement_Portal__East_27 => Range { start: 0, end: 0 },
         SpotId::Irikar__Basement_Portal__Ledge => Range { start: 0, end: 0 },
         SpotId::Irikar__Basement_Portal__Moving_Platform_Start => Range { start: 0, end: 0 },
+        SpotId::Irikar__Basement_Portal__Moving_Platform_End => Range { start: 0, end: 0 },
         SpotId::Irikar__Basement_Portal__Westmost_Platform => Range { start: 0, end: 0 },
         SpotId::Irikar__Basement_Portal__Middle_Platform => Range { start: 0, end: 0 },
         SpotId::Irikar__Basement_Portal__East_Platform => Range { start: 0, end: 0 },
         SpotId::Irikar__Basement_Portal__North => Range { start: 0, end: 0 },
+        SpotId::Irikar__Basement_Portal__Portal_Stand => Range { start: 0, end: 0 },
+        SpotId::Irikar__Basement_Portal__West_28 => Range { start: 0, end: 0 },
+        SpotId::Irikar__Basement_Portal__Bottom_Middle => Range { start: 0, end: 0 },
+        SpotId::Irikar__Basement_Portal__East_28 => Range { start: 0, end: 0 },
         SpotId::Irikar__Basement_Pipes__East_28 => Range { start: 0, end: 0 },
+        SpotId::Irikar__Basement_Pipes__Lower_Pipe_Right => Range { start: 0, end: 0 },
+        SpotId::Irikar__Basement_Pipes__Lower_Pipe_Under_Ledge => Range { start: 0, end: 0 },
+        SpotId::Irikar__Basement_Pipes__Brick_Ledge => Range { start: 0, end: 0 },
+        SpotId::Irikar__Basement_Pipes__Bricks_Under_Pipes => Range { start: 0, end: 0 },
+        SpotId::Irikar__Basement_Pipes__Double_Pipe_Right => Range { start: 0, end: 0 },
+        SpotId::Irikar__Basement_Pipes__Double_Pipe_Left => Range { start: 0, end: 0 },
+        SpotId::Irikar__Basement_Pipes__Right_Vertical_Pipe => Range { start: 0, end: 0 },
+        SpotId::Irikar__Basement_Pipes__Left_Vertical_Pipe => Range { start: 0, end: 0 },
+        SpotId::Irikar__Basement_Pipes__West_28 => Range { start: 0, end: 0 },
+        SpotId::Irikar__Basement_Pipes__West_27 => Range { start: 0, end: 0 },
+        SpotId::Irikar__Basement_Pipes__High_Pipe => Range { start: 0, end: 0 },
+        SpotId::Irikar__Empty_Foyer__West => Range { start: 0, end: 0 },
+        SpotId::Irikar__Empty_Foyer__East => Range { start: 0, end: 0 },
+        SpotId::Irikar__Boss_Room__West_28 => Range { start: 0, end: 0 },
+        SpotId::Irikar__Boss_Room__East_28 => Range { start: 0, end: 0 },
+        SpotId::Irikar__Midwest__East_23 => Range { start: 0, end: 0 },
+        SpotId::Irikar__Midwest__East_24_on_Building => Range { start: 0, end: 0 },
+        SpotId::Irikar__Midwest__East_24_on_Floor => Range { start: 0, end: 0 },
+        SpotId::Irikar__Midwest__East_25 => Range { start: 0, end: 0 },
+        SpotId::Irikar__Midwest__East_26 => Range { start: 0, end: 0 },
+        SpotId::Irikar__Midwest__East_27 => Range { start: 0, end: 0 },
+        SpotId::Irikar__Midwest__East_28 => Range { start: 0, end: 0 },
         SpotId::Menu__Upgrade_Menu__Physiology => Range {
             start: LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_1.into_usize(),
             end: LocationId::Menu__Upgrade_Menu__Physiology__Mist_Upgrade.into_usize() + 1,
@@ -27517,6 +28283,9 @@ pub fn area_locations(id: AreaId) -> Range<usize> {
         },
         AreaId::Irikar__Basement_Portal => Range { start: 0, end: 0 },
         AreaId::Irikar__Basement_Pipes => Range { start: 0, end: 0 },
+        AreaId::Irikar__Empty_Foyer => Range { start: 0, end: 0 },
+        AreaId::Irikar__Boss_Room => Range { start: 0, end: 0 },
+        AreaId::Irikar__Midwest => Range { start: 0, end: 0 },
         AreaId::Menu__Upgrade_Menu => Range {
             start: LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_1.into_usize(),
             end: LocationId::Menu__Upgrade_Menu__Physiology__Mist_Upgrade.into_usize(),

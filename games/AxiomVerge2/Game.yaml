@@ -203,6 +203,8 @@ helpers:
   $unlock2: Infect{2}
   $unlock3: Infect{3}
 
+  $mist2: Nanite_Mist and Mist_Upgrade
+
   # shockwave range: ~.2 in width (.35 height)
   # boomerang range: ~.3 in width?
   # infection ranges (approx)

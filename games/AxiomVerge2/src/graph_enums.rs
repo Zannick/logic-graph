@@ -172,7 +172,10 @@ pub enum AreaId {
     Irikar__Abandoned_Room,
     Irikar__Basement_Pipes,
     Irikar__Basement_Portal,
+    Irikar__Boss_Room,
+    Irikar__Empty_Foyer,
     Irikar__Hub,
+    Irikar__Midwest,
     Irikar__Sight_Room,
     Irikar_Breach__Basement_Save,
     Irikar_Breach__Exit_Corridor,
@@ -295,7 +298,10 @@ impl fmt::Display for AreaId {
             AreaId::Irikar__Abandoned_Room => write!(f, "{}", "Irikar > Abandoned Room"),
             AreaId::Irikar__Basement_Pipes => write!(f, "{}", "Irikar > Basement Pipes"),
             AreaId::Irikar__Basement_Portal => write!(f, "{}", "Irikar > Basement Portal"),
+            AreaId::Irikar__Boss_Room => write!(f, "{}", "Irikar > Boss Room"),
+            AreaId::Irikar__Empty_Foyer => write!(f, "{}", "Irikar > Empty Foyer"),
             AreaId::Irikar__Hub => write!(f, "{}", "Irikar > Hub"),
+            AreaId::Irikar__Midwest => write!(f, "{}", "Irikar > Midwest"),
             AreaId::Irikar__Sight_Room => write!(f, "{}", "Irikar > Sight Room"),
             AreaId::Irikar_Breach__Basement_Save => {
                 write!(f, "{}", "Irikar Breach > Basement Save")
@@ -417,7 +423,10 @@ impl std::str::FromStr for AreaId {
             "Irikar > Abandoned Room" => Ok(AreaId::Irikar__Abandoned_Room),
             "Irikar > Basement Pipes" => Ok(AreaId::Irikar__Basement_Pipes),
             "Irikar > Basement Portal" => Ok(AreaId::Irikar__Basement_Portal),
+            "Irikar > Boss Room" => Ok(AreaId::Irikar__Boss_Room),
+            "Irikar > Empty Foyer" => Ok(AreaId::Irikar__Empty_Foyer),
             "Irikar > Hub" => Ok(AreaId::Irikar__Hub),
+            "Irikar > Midwest" => Ok(AreaId::Irikar__Midwest),
             "Irikar > Sight Room" => Ok(AreaId::Irikar__Sight_Room),
             "Irikar Breach > Basement Save" => Ok(AreaId::Irikar_Breach__Basement_Save),
             "Irikar Breach > Exit Corridor" => Ok(AreaId::Irikar_Breach__Exit_Corridor),
@@ -1261,14 +1270,34 @@ pub enum SpotId {
     Irikar__Abandoned_Room__Corner_Core,
     Irikar__Abandoned_Room__Empty_Pedestal,
     Irikar__Abandoned_Room__West,
+    Irikar__Basement_Pipes__Brick_Ledge,
+    Irikar__Basement_Pipes__Bricks_Under_Pipes,
+    Irikar__Basement_Pipes__Double_Pipe_Left,
+    Irikar__Basement_Pipes__Double_Pipe_Right,
     Irikar__Basement_Pipes__East_28,
+    Irikar__Basement_Pipes__High_Pipe,
+    Irikar__Basement_Pipes__Left_Vertical_Pipe,
+    Irikar__Basement_Pipes__Lower_Pipe_Right,
+    Irikar__Basement_Pipes__Lower_Pipe_Under_Ledge,
+    Irikar__Basement_Pipes__Right_Vertical_Pipe,
+    Irikar__Basement_Pipes__West_27,
+    Irikar__Basement_Pipes__West_28,
+    Irikar__Basement_Portal__Bottom_Middle,
     Irikar__Basement_Portal__East_27,
+    Irikar__Basement_Portal__East_28,
     Irikar__Basement_Portal__East_Platform,
     Irikar__Basement_Portal__Ledge,
     Irikar__Basement_Portal__Middle_Platform,
+    Irikar__Basement_Portal__Moving_Platform_End,
     Irikar__Basement_Portal__Moving_Platform_Start,
     Irikar__Basement_Portal__North,
+    Irikar__Basement_Portal__Portal_Stand,
+    Irikar__Basement_Portal__West_28,
     Irikar__Basement_Portal__Westmost_Platform,
+    Irikar__Boss_Room__East_28,
+    Irikar__Boss_Room__West_28,
+    Irikar__Empty_Foyer__East,
+    Irikar__Empty_Foyer__West,
     Irikar__Hub__Bowl_Hole,
     Irikar__Hub__Bowl_Middle_Ledge,
     Irikar__Hub__Bowl_Middle_Platform_Center,
@@ -1302,6 +1331,13 @@ pub enum SpotId {
     Irikar__Hub__Sat_Tower_Top_Ledge,
     Irikar__Hub__Save_Point,
     Irikar__Hub__West_Rim,
+    Irikar__Midwest__East_23,
+    Irikar__Midwest__East_24_on_Building,
+    Irikar__Midwest__East_24_on_Floor,
+    Irikar__Midwest__East_25,
+    Irikar__Midwest__East_26,
+    Irikar__Midwest__East_27,
+    Irikar__Midwest__East_28,
     Irikar__Sight_Room__Item_Pedestal,
     Irikar__Sight_Room__Lower_Ledge,
     Irikar__Sight_Room__Portal,
@@ -3345,11 +3381,50 @@ impl fmt::Display for SpotId {
             SpotId::Irikar__Abandoned_Room__West => {
                 write!(f, "{}", "Irikar > Abandoned Room > West")
             }
+            SpotId::Irikar__Basement_Pipes__Brick_Ledge => {
+                write!(f, "{}", "Irikar > Basement Pipes > Brick Ledge")
+            }
+            SpotId::Irikar__Basement_Pipes__Bricks_Under_Pipes => {
+                write!(f, "{}", "Irikar > Basement Pipes > Bricks Under Pipes")
+            }
+            SpotId::Irikar__Basement_Pipes__Double_Pipe_Left => {
+                write!(f, "{}", "Irikar > Basement Pipes > Double Pipe Left")
+            }
+            SpotId::Irikar__Basement_Pipes__Double_Pipe_Right => {
+                write!(f, "{}", "Irikar > Basement Pipes > Double Pipe Right")
+            }
             SpotId::Irikar__Basement_Pipes__East_28 => {
                 write!(f, "{}", "Irikar > Basement Pipes > East 28")
             }
+            SpotId::Irikar__Basement_Pipes__High_Pipe => {
+                write!(f, "{}", "Irikar > Basement Pipes > High Pipe")
+            }
+            SpotId::Irikar__Basement_Pipes__Left_Vertical_Pipe => {
+                write!(f, "{}", "Irikar > Basement Pipes > Left Vertical Pipe")
+            }
+            SpotId::Irikar__Basement_Pipes__Lower_Pipe_Right => {
+                write!(f, "{}", "Irikar > Basement Pipes > Lower Pipe Right")
+            }
+            SpotId::Irikar__Basement_Pipes__Lower_Pipe_Under_Ledge => {
+                write!(f, "{}", "Irikar > Basement Pipes > Lower Pipe Under Ledge")
+            }
+            SpotId::Irikar__Basement_Pipes__Right_Vertical_Pipe => {
+                write!(f, "{}", "Irikar > Basement Pipes > Right Vertical Pipe")
+            }
+            SpotId::Irikar__Basement_Pipes__West_27 => {
+                write!(f, "{}", "Irikar > Basement Pipes > West 27")
+            }
+            SpotId::Irikar__Basement_Pipes__West_28 => {
+                write!(f, "{}", "Irikar > Basement Pipes > West 28")
+            }
+            SpotId::Irikar__Basement_Portal__Bottom_Middle => {
+                write!(f, "{}", "Irikar > Basement Portal > Bottom Middle")
+            }
             SpotId::Irikar__Basement_Portal__East_27 => {
                 write!(f, "{}", "Irikar > Basement Portal > East 27")
+            }
+            SpotId::Irikar__Basement_Portal__East_28 => {
+                write!(f, "{}", "Irikar > Basement Portal > East 28")
             }
             SpotId::Irikar__Basement_Portal__East_Platform => {
                 write!(f, "{}", "Irikar > Basement Portal > East Platform")
@@ -3360,15 +3435,28 @@ impl fmt::Display for SpotId {
             SpotId::Irikar__Basement_Portal__Middle_Platform => {
                 write!(f, "{}", "Irikar > Basement Portal > Middle Platform")
             }
+            SpotId::Irikar__Basement_Portal__Moving_Platform_End => {
+                write!(f, "{}", "Irikar > Basement Portal > Moving Platform End")
+            }
             SpotId::Irikar__Basement_Portal__Moving_Platform_Start => {
                 write!(f, "{}", "Irikar > Basement Portal > Moving Platform Start")
             }
             SpotId::Irikar__Basement_Portal__North => {
                 write!(f, "{}", "Irikar > Basement Portal > North")
             }
+            SpotId::Irikar__Basement_Portal__Portal_Stand => {
+                write!(f, "{}", "Irikar > Basement Portal > Portal Stand")
+            }
+            SpotId::Irikar__Basement_Portal__West_28 => {
+                write!(f, "{}", "Irikar > Basement Portal > West 28")
+            }
             SpotId::Irikar__Basement_Portal__Westmost_Platform => {
                 write!(f, "{}", "Irikar > Basement Portal > Westmost Platform")
             }
+            SpotId::Irikar__Boss_Room__East_28 => write!(f, "{}", "Irikar > Boss Room > East 28"),
+            SpotId::Irikar__Boss_Room__West_28 => write!(f, "{}", "Irikar > Boss Room > West 28"),
+            SpotId::Irikar__Empty_Foyer__East => write!(f, "{}", "Irikar > Empty Foyer > East"),
+            SpotId::Irikar__Empty_Foyer__West => write!(f, "{}", "Irikar > Empty Foyer > West"),
             SpotId::Irikar__Hub__Bowl_Hole => write!(f, "{}", "Irikar > Hub > Bowl Hole"),
             SpotId::Irikar__Hub__Bowl_Middle_Ledge => {
                 write!(f, "{}", "Irikar > Hub > Bowl Middle Ledge")
@@ -3452,6 +3540,17 @@ impl fmt::Display for SpotId {
             }
             SpotId::Irikar__Hub__Save_Point => write!(f, "{}", "Irikar > Hub > Save Point"),
             SpotId::Irikar__Hub__West_Rim => write!(f, "{}", "Irikar > Hub > West Rim"),
+            SpotId::Irikar__Midwest__East_23 => write!(f, "{}", "Irikar > Midwest > East 23"),
+            SpotId::Irikar__Midwest__East_24_on_Building => {
+                write!(f, "{}", "Irikar > Midwest > East 24 on Building")
+            }
+            SpotId::Irikar__Midwest__East_24_on_Floor => {
+                write!(f, "{}", "Irikar > Midwest > East 24 on Floor")
+            }
+            SpotId::Irikar__Midwest__East_25 => write!(f, "{}", "Irikar > Midwest > East 25"),
+            SpotId::Irikar__Midwest__East_26 => write!(f, "{}", "Irikar > Midwest > East 26"),
+            SpotId::Irikar__Midwest__East_27 => write!(f, "{}", "Irikar > Midwest > East 27"),
+            SpotId::Irikar__Midwest__East_28 => write!(f, "{}", "Irikar > Midwest > East 28"),
             SpotId::Irikar__Sight_Room__Item_Pedestal => {
                 write!(f, "{}", "Irikar > Sight Room > Item Pedestal")
             }
@@ -4903,8 +5002,39 @@ impl std::str::FromStr for SpotId {
                 Ok(SpotId::Irikar__Abandoned_Room__Empty_Pedestal)
             }
             "Irikar > Abandoned Room > West" => Ok(SpotId::Irikar__Abandoned_Room__West),
+            "Irikar > Basement Pipes > Brick Ledge" => {
+                Ok(SpotId::Irikar__Basement_Pipes__Brick_Ledge)
+            }
+            "Irikar > Basement Pipes > Bricks Under Pipes" => {
+                Ok(SpotId::Irikar__Basement_Pipes__Bricks_Under_Pipes)
+            }
+            "Irikar > Basement Pipes > Double Pipe Left" => {
+                Ok(SpotId::Irikar__Basement_Pipes__Double_Pipe_Left)
+            }
+            "Irikar > Basement Pipes > Double Pipe Right" => {
+                Ok(SpotId::Irikar__Basement_Pipes__Double_Pipe_Right)
+            }
             "Irikar > Basement Pipes > East 28" => Ok(SpotId::Irikar__Basement_Pipes__East_28),
+            "Irikar > Basement Pipes > High Pipe" => Ok(SpotId::Irikar__Basement_Pipes__High_Pipe),
+            "Irikar > Basement Pipes > Left Vertical Pipe" => {
+                Ok(SpotId::Irikar__Basement_Pipes__Left_Vertical_Pipe)
+            }
+            "Irikar > Basement Pipes > Lower Pipe Right" => {
+                Ok(SpotId::Irikar__Basement_Pipes__Lower_Pipe_Right)
+            }
+            "Irikar > Basement Pipes > Lower Pipe Under Ledge" => {
+                Ok(SpotId::Irikar__Basement_Pipes__Lower_Pipe_Under_Ledge)
+            }
+            "Irikar > Basement Pipes > Right Vertical Pipe" => {
+                Ok(SpotId::Irikar__Basement_Pipes__Right_Vertical_Pipe)
+            }
+            "Irikar > Basement Pipes > West 27" => Ok(SpotId::Irikar__Basement_Pipes__West_27),
+            "Irikar > Basement Pipes > West 28" => Ok(SpotId::Irikar__Basement_Pipes__West_28),
+            "Irikar > Basement Portal > Bottom Middle" => {
+                Ok(SpotId::Irikar__Basement_Portal__Bottom_Middle)
+            }
             "Irikar > Basement Portal > East 27" => Ok(SpotId::Irikar__Basement_Portal__East_27),
+            "Irikar > Basement Portal > East 28" => Ok(SpotId::Irikar__Basement_Portal__East_28),
             "Irikar > Basement Portal > East Platform" => {
                 Ok(SpotId::Irikar__Basement_Portal__East_Platform)
             }
@@ -4912,13 +5042,24 @@ impl std::str::FromStr for SpotId {
             "Irikar > Basement Portal > Middle Platform" => {
                 Ok(SpotId::Irikar__Basement_Portal__Middle_Platform)
             }
+            "Irikar > Basement Portal > Moving Platform End" => {
+                Ok(SpotId::Irikar__Basement_Portal__Moving_Platform_End)
+            }
             "Irikar > Basement Portal > Moving Platform Start" => {
                 Ok(SpotId::Irikar__Basement_Portal__Moving_Platform_Start)
             }
             "Irikar > Basement Portal > North" => Ok(SpotId::Irikar__Basement_Portal__North),
+            "Irikar > Basement Portal > Portal Stand" => {
+                Ok(SpotId::Irikar__Basement_Portal__Portal_Stand)
+            }
+            "Irikar > Basement Portal > West 28" => Ok(SpotId::Irikar__Basement_Portal__West_28),
             "Irikar > Basement Portal > Westmost Platform" => {
                 Ok(SpotId::Irikar__Basement_Portal__Westmost_Platform)
             }
+            "Irikar > Boss Room > East 28" => Ok(SpotId::Irikar__Boss_Room__East_28),
+            "Irikar > Boss Room > West 28" => Ok(SpotId::Irikar__Boss_Room__West_28),
+            "Irikar > Empty Foyer > East" => Ok(SpotId::Irikar__Empty_Foyer__East),
+            "Irikar > Empty Foyer > West" => Ok(SpotId::Irikar__Empty_Foyer__West),
             "Irikar > Hub > Bowl Hole" => Ok(SpotId::Irikar__Hub__Bowl_Hole),
             "Irikar > Hub > Bowl Middle Ledge" => Ok(SpotId::Irikar__Hub__Bowl_Middle_Ledge),
             "Irikar > Hub > Bowl Middle Platform Center" => {
@@ -4972,6 +5113,15 @@ impl std::str::FromStr for SpotId {
             "Irikar > Hub > Sat Tower Top Ledge" => Ok(SpotId::Irikar__Hub__Sat_Tower_Top_Ledge),
             "Irikar > Hub > Save Point" => Ok(SpotId::Irikar__Hub__Save_Point),
             "Irikar > Hub > West Rim" => Ok(SpotId::Irikar__Hub__West_Rim),
+            "Irikar > Midwest > East 23" => Ok(SpotId::Irikar__Midwest__East_23),
+            "Irikar > Midwest > East 24 on Building" => {
+                Ok(SpotId::Irikar__Midwest__East_24_on_Building)
+            }
+            "Irikar > Midwest > East 24 on Floor" => Ok(SpotId::Irikar__Midwest__East_24_on_Floor),
+            "Irikar > Midwest > East 25" => Ok(SpotId::Irikar__Midwest__East_25),
+            "Irikar > Midwest > East 26" => Ok(SpotId::Irikar__Midwest__East_26),
+            "Irikar > Midwest > East 27" => Ok(SpotId::Irikar__Midwest__East_27),
+            "Irikar > Midwest > East 28" => Ok(SpotId::Irikar__Midwest__East_28),
             "Irikar > Sight Room > Item Pedestal" => Ok(SpotId::Irikar__Sight_Room__Item_Pedestal),
             "Irikar > Sight Room > Lower Ledge" => Ok(SpotId::Irikar__Sight_Room__Lower_Ledge),
             "Irikar > Sight Room > Portal" => Ok(SpotId::Irikar__Sight_Room__Portal),
@@ -7055,6 +7205,35 @@ pub enum ExitId {
     Glacier__Vertical_Room__West_8__ex__Peak__East_8_1,
     Glacier__Vertical_Room__West_9__ex__Ledge_Grab_Room__East_9_1,
     Irikar__Abandoned_Room__West__ex__Basement_Portal__East_27_1,
+    Irikar__Basement_Pipes__Bricks_Under_Pipes__ex__Double_Pipe_Right_1,
+    Irikar__Basement_Pipes__Bricks_Under_Pipes__ex__Double_Pipe_Right_2,
+    Irikar__Basement_Pipes__Double_Pipe_Left__ex__High_Pipe_1,
+    Irikar__Basement_Pipes__East_28__ex__Basement_Portal__West_28_1,
+    Irikar__Basement_Pipes__Lower_Pipe_Under_Ledge__ex__Brick_Ledge_1,
+    Irikar__Basement_Pipes__Lower_Pipe_Under_Ledge__ex__Brick_Ledge_2,
+    Irikar__Basement_Pipes__Right_Vertical_Pipe__ex__Double_Pipe_Left_1,
+    Irikar__Basement_Pipes__Right_Vertical_Pipe__ex__Double_Pipe_Left_2,
+    Irikar__Basement_Pipes__Right_Vertical_Pipe__ex__Double_Pipe_Left_3,
+    Irikar__Basement_Pipes__West_27__ex__Midwest__East_27_1,
+    Irikar__Basement_Pipes__West_28__ex__Midwest__East_28_1,
+    Irikar__Basement_Portal__Bottom_Middle__ex__Ledge_1,
+    Irikar__Basement_Portal__East_27__ex__Abandoned_Room__West_1,
+    Irikar__Basement_Portal__East_28__ex__Empty_Foyer__West_1,
+    Irikar__Basement_Portal__East_28__ex__Ledge_1,
+    Irikar__Basement_Portal__Ledge__ex__East_Platform_1,
+    Irikar__Basement_Portal__Ledge__ex__Moving_Platform_Start_1,
+    Irikar__Basement_Portal__Ledge__ex__Westmost_Platform_1,
+    Irikar__Basement_Portal__Middle_Platform__ex__East_Platform_1,
+    Irikar__Basement_Portal__Middle_Platform__ex__Moving_Platform_End_1,
+    Irikar__Basement_Portal__Moving_Platform_End__ex__East_Platform_1,
+    Irikar__Basement_Portal__Moving_Platform_Start__ex__Ledge_1,
+    Irikar__Basement_Portal__North__ex__Hub__Royal_Storage_South_1,
+    Irikar__Basement_Portal__Portal_Stand__ex__Ledge_1,
+    Irikar__Basement_Portal__Portal_Stand__ex__Moving_Platform_Start_1,
+    Irikar__Basement_Portal__West_28__ex__Basement_Pipes__East_28_1,
+    Irikar__Basement_Portal__West_28__ex__Moving_Platform_Start_1,
+    Irikar__Empty_Foyer__East__ex__Boss_Room__West_28_1,
+    Irikar__Empty_Foyer__West__ex__Basement_Portal__East_28_1,
     Irikar__Hub__Bowl_Middle_Ledge__ex__Bowl_Top_Platform_1,
     Irikar__Hub__Bowl_Middle_Platform_Center__ex__Bowl_Middle_Ledge_1,
     Irikar__Hub__Bowl_Middle_Platform_West__ex__Bowl_Middle_Ledge_1,
@@ -7808,6 +7987,35 @@ impl fmt::Display for ExitId {
             ExitId::Glacier__Vertical_Room__West_8__ex__Peak__East_8_1 => write!(f, "{}", "Glacier > Vertical Room > West 8 ==> Peak > East 8 (1)"),
             ExitId::Glacier__Vertical_Room__West_9__ex__Ledge_Grab_Room__East_9_1 => write!(f, "{}", "Glacier > Vertical Room > West 9 ==> Ledge Grab Room > East 9 (1)"),
             ExitId::Irikar__Abandoned_Room__West__ex__Basement_Portal__East_27_1 => write!(f, "{}", "Irikar > Abandoned Room > West ==> Basement Portal > East 27 (1)"),
+            ExitId::Irikar__Basement_Pipes__Bricks_Under_Pipes__ex__Double_Pipe_Right_1 => write!(f, "{}", "Irikar > Basement Pipes > Bricks Under Pipes ==> Double Pipe Right (1)"),
+            ExitId::Irikar__Basement_Pipes__Bricks_Under_Pipes__ex__Double_Pipe_Right_2 => write!(f, "{}", "Irikar > Basement Pipes > Bricks Under Pipes ==> Double Pipe Right (2)"),
+            ExitId::Irikar__Basement_Pipes__Double_Pipe_Left__ex__High_Pipe_1 => write!(f, "{}", "Irikar > Basement Pipes > Double Pipe Left ==> High Pipe (1)"),
+            ExitId::Irikar__Basement_Pipes__East_28__ex__Basement_Portal__West_28_1 => write!(f, "{}", "Irikar > Basement Pipes > East 28 ==> Basement Portal > West 28 (1)"),
+            ExitId::Irikar__Basement_Pipes__Lower_Pipe_Under_Ledge__ex__Brick_Ledge_1 => write!(f, "{}", "Irikar > Basement Pipes > Lower Pipe Under Ledge ==> Brick Ledge (1)"),
+            ExitId::Irikar__Basement_Pipes__Lower_Pipe_Under_Ledge__ex__Brick_Ledge_2 => write!(f, "{}", "Irikar > Basement Pipes > Lower Pipe Under Ledge ==> Brick Ledge (2)"),
+            ExitId::Irikar__Basement_Pipes__Right_Vertical_Pipe__ex__Double_Pipe_Left_1 => write!(f, "{}", "Irikar > Basement Pipes > Right Vertical Pipe ==> Double Pipe Left (1)"),
+            ExitId::Irikar__Basement_Pipes__Right_Vertical_Pipe__ex__Double_Pipe_Left_2 => write!(f, "{}", "Irikar > Basement Pipes > Right Vertical Pipe ==> Double Pipe Left (2)"),
+            ExitId::Irikar__Basement_Pipes__Right_Vertical_Pipe__ex__Double_Pipe_Left_3 => write!(f, "{}", "Irikar > Basement Pipes > Right Vertical Pipe ==> Double Pipe Left (3)"),
+            ExitId::Irikar__Basement_Pipes__West_27__ex__Midwest__East_27_1 => write!(f, "{}", "Irikar > Basement Pipes > West 27 ==> Midwest > East 27 (1)"),
+            ExitId::Irikar__Basement_Pipes__West_28__ex__Midwest__East_28_1 => write!(f, "{}", "Irikar > Basement Pipes > West 28 ==> Midwest > East 28 (1)"),
+            ExitId::Irikar__Basement_Portal__Bottom_Middle__ex__Ledge_1 => write!(f, "{}", "Irikar > Basement Portal > Bottom Middle ==> Ledge (1)"),
+            ExitId::Irikar__Basement_Portal__East_27__ex__Abandoned_Room__West_1 => write!(f, "{}", "Irikar > Basement Portal > East 27 ==> Abandoned Room > West (1)"),
+            ExitId::Irikar__Basement_Portal__East_28__ex__Empty_Foyer__West_1 => write!(f, "{}", "Irikar > Basement Portal > East 28 ==> Empty Foyer > West (1)"),
+            ExitId::Irikar__Basement_Portal__East_28__ex__Ledge_1 => write!(f, "{}", "Irikar > Basement Portal > East 28 ==> Ledge (1)"),
+            ExitId::Irikar__Basement_Portal__Ledge__ex__East_Platform_1 => write!(f, "{}", "Irikar > Basement Portal > Ledge ==> East Platform (1)"),
+            ExitId::Irikar__Basement_Portal__Ledge__ex__Moving_Platform_Start_1 => write!(f, "{}", "Irikar > Basement Portal > Ledge ==> Moving Platform Start (1)"),
+            ExitId::Irikar__Basement_Portal__Ledge__ex__Westmost_Platform_1 => write!(f, "{}", "Irikar > Basement Portal > Ledge ==> Westmost Platform (1)"),
+            ExitId::Irikar__Basement_Portal__Middle_Platform__ex__East_Platform_1 => write!(f, "{}", "Irikar > Basement Portal > Middle Platform ==> East Platform (1)"),
+            ExitId::Irikar__Basement_Portal__Middle_Platform__ex__Moving_Platform_End_1 => write!(f, "{}", "Irikar > Basement Portal > Middle Platform ==> Moving Platform End (1)"),
+            ExitId::Irikar__Basement_Portal__Moving_Platform_End__ex__East_Platform_1 => write!(f, "{}", "Irikar > Basement Portal > Moving Platform End ==> East Platform (1)"),
+            ExitId::Irikar__Basement_Portal__Moving_Platform_Start__ex__Ledge_1 => write!(f, "{}", "Irikar > Basement Portal > Moving Platform Start ==> Ledge (1)"),
+            ExitId::Irikar__Basement_Portal__North__ex__Hub__Royal_Storage_South_1 => write!(f, "{}", "Irikar > Basement Portal > North ==> Hub > Royal Storage South (1)"),
+            ExitId::Irikar__Basement_Portal__Portal_Stand__ex__Ledge_1 => write!(f, "{}", "Irikar > Basement Portal > Portal Stand ==> Ledge (1)"),
+            ExitId::Irikar__Basement_Portal__Portal_Stand__ex__Moving_Platform_Start_1 => write!(f, "{}", "Irikar > Basement Portal > Portal Stand ==> Moving Platform Start (1)"),
+            ExitId::Irikar__Basement_Portal__West_28__ex__Basement_Pipes__East_28_1 => write!(f, "{}", "Irikar > Basement Portal > West 28 ==> Basement Pipes > East 28 (1)"),
+            ExitId::Irikar__Basement_Portal__West_28__ex__Moving_Platform_Start_1 => write!(f, "{}", "Irikar > Basement Portal > West 28 ==> Moving Platform Start (1)"),
+            ExitId::Irikar__Empty_Foyer__East__ex__Boss_Room__West_28_1 => write!(f, "{}", "Irikar > Empty Foyer > East ==> Boss Room > West 28 (1)"),
+            ExitId::Irikar__Empty_Foyer__West__ex__Basement_Portal__East_28_1 => write!(f, "{}", "Irikar > Empty Foyer > West ==> Basement Portal > East 28 (1)"),
             ExitId::Irikar__Hub__Bowl_Middle_Ledge__ex__Bowl_Top_Platform_1 => write!(f, "{}", "Irikar > Hub > Bowl Middle Ledge ==> Bowl Top Platform (1)"),
             ExitId::Irikar__Hub__Bowl_Middle_Platform_Center__ex__Bowl_Middle_Ledge_1 => write!(f, "{}", "Irikar > Hub > Bowl Middle Platform Center ==> Bowl Middle Ledge (1)"),
             ExitId::Irikar__Hub__Bowl_Middle_Platform_West__ex__Bowl_Middle_Ledge_1 => write!(f, "{}", "Irikar > Hub > Bowl Middle Platform West ==> Bowl Middle Ledge (1)"),
@@ -8566,6 +8774,35 @@ impl std::str::FromStr for ExitId {
             "Glacier > Vertical Room > West 8 ==> Peak > East 8 (1)" => Ok(ExitId::Glacier__Vertical_Room__West_8__ex__Peak__East_8_1),
             "Glacier > Vertical Room > West 9 ==> Ledge Grab Room > East 9 (1)" => Ok(ExitId::Glacier__Vertical_Room__West_9__ex__Ledge_Grab_Room__East_9_1),
             "Irikar > Abandoned Room > West ==> Basement Portal > East 27 (1)" => Ok(ExitId::Irikar__Abandoned_Room__West__ex__Basement_Portal__East_27_1),
+            "Irikar > Basement Pipes > Bricks Under Pipes ==> Double Pipe Right (1)" => Ok(ExitId::Irikar__Basement_Pipes__Bricks_Under_Pipes__ex__Double_Pipe_Right_1),
+            "Irikar > Basement Pipes > Bricks Under Pipes ==> Double Pipe Right (2)" => Ok(ExitId::Irikar__Basement_Pipes__Bricks_Under_Pipes__ex__Double_Pipe_Right_2),
+            "Irikar > Basement Pipes > Double Pipe Left ==> High Pipe (1)" => Ok(ExitId::Irikar__Basement_Pipes__Double_Pipe_Left__ex__High_Pipe_1),
+            "Irikar > Basement Pipes > East 28 ==> Basement Portal > West 28 (1)" => Ok(ExitId::Irikar__Basement_Pipes__East_28__ex__Basement_Portal__West_28_1),
+            "Irikar > Basement Pipes > Lower Pipe Under Ledge ==> Brick Ledge (1)" => Ok(ExitId::Irikar__Basement_Pipes__Lower_Pipe_Under_Ledge__ex__Brick_Ledge_1),
+            "Irikar > Basement Pipes > Lower Pipe Under Ledge ==> Brick Ledge (2)" => Ok(ExitId::Irikar__Basement_Pipes__Lower_Pipe_Under_Ledge__ex__Brick_Ledge_2),
+            "Irikar > Basement Pipes > Right Vertical Pipe ==> Double Pipe Left (1)" => Ok(ExitId::Irikar__Basement_Pipes__Right_Vertical_Pipe__ex__Double_Pipe_Left_1),
+            "Irikar > Basement Pipes > Right Vertical Pipe ==> Double Pipe Left (2)" => Ok(ExitId::Irikar__Basement_Pipes__Right_Vertical_Pipe__ex__Double_Pipe_Left_2),
+            "Irikar > Basement Pipes > Right Vertical Pipe ==> Double Pipe Left (3)" => Ok(ExitId::Irikar__Basement_Pipes__Right_Vertical_Pipe__ex__Double_Pipe_Left_3),
+            "Irikar > Basement Pipes > West 27 ==> Midwest > East 27 (1)" => Ok(ExitId::Irikar__Basement_Pipes__West_27__ex__Midwest__East_27_1),
+            "Irikar > Basement Pipes > West 28 ==> Midwest > East 28 (1)" => Ok(ExitId::Irikar__Basement_Pipes__West_28__ex__Midwest__East_28_1),
+            "Irikar > Basement Portal > Bottom Middle ==> Ledge (1)" => Ok(ExitId::Irikar__Basement_Portal__Bottom_Middle__ex__Ledge_1),
+            "Irikar > Basement Portal > East 27 ==> Abandoned Room > West (1)" => Ok(ExitId::Irikar__Basement_Portal__East_27__ex__Abandoned_Room__West_1),
+            "Irikar > Basement Portal > East 28 ==> Empty Foyer > West (1)" => Ok(ExitId::Irikar__Basement_Portal__East_28__ex__Empty_Foyer__West_1),
+            "Irikar > Basement Portal > East 28 ==> Ledge (1)" => Ok(ExitId::Irikar__Basement_Portal__East_28__ex__Ledge_1),
+            "Irikar > Basement Portal > Ledge ==> East Platform (1)" => Ok(ExitId::Irikar__Basement_Portal__Ledge__ex__East_Platform_1),
+            "Irikar > Basement Portal > Ledge ==> Moving Platform Start (1)" => Ok(ExitId::Irikar__Basement_Portal__Ledge__ex__Moving_Platform_Start_1),
+            "Irikar > Basement Portal > Ledge ==> Westmost Platform (1)" => Ok(ExitId::Irikar__Basement_Portal__Ledge__ex__Westmost_Platform_1),
+            "Irikar > Basement Portal > Middle Platform ==> East Platform (1)" => Ok(ExitId::Irikar__Basement_Portal__Middle_Platform__ex__East_Platform_1),
+            "Irikar > Basement Portal > Middle Platform ==> Moving Platform End (1)" => Ok(ExitId::Irikar__Basement_Portal__Middle_Platform__ex__Moving_Platform_End_1),
+            "Irikar > Basement Portal > Moving Platform End ==> East Platform (1)" => Ok(ExitId::Irikar__Basement_Portal__Moving_Platform_End__ex__East_Platform_1),
+            "Irikar > Basement Portal > Moving Platform Start ==> Ledge (1)" => Ok(ExitId::Irikar__Basement_Portal__Moving_Platform_Start__ex__Ledge_1),
+            "Irikar > Basement Portal > North ==> Hub > Royal Storage South (1)" => Ok(ExitId::Irikar__Basement_Portal__North__ex__Hub__Royal_Storage_South_1),
+            "Irikar > Basement Portal > Portal Stand ==> Ledge (1)" => Ok(ExitId::Irikar__Basement_Portal__Portal_Stand__ex__Ledge_1),
+            "Irikar > Basement Portal > Portal Stand ==> Moving Platform Start (1)" => Ok(ExitId::Irikar__Basement_Portal__Portal_Stand__ex__Moving_Platform_Start_1),
+            "Irikar > Basement Portal > West 28 ==> Basement Pipes > East 28 (1)" => Ok(ExitId::Irikar__Basement_Portal__West_28__ex__Basement_Pipes__East_28_1),
+            "Irikar > Basement Portal > West 28 ==> Moving Platform Start (1)" => Ok(ExitId::Irikar__Basement_Portal__West_28__ex__Moving_Platform_Start_1),
+            "Irikar > Empty Foyer > East ==> Boss Room > West 28 (1)" => Ok(ExitId::Irikar__Empty_Foyer__East__ex__Boss_Room__West_28_1),
+            "Irikar > Empty Foyer > West ==> Basement Portal > East 28 (1)" => Ok(ExitId::Irikar__Empty_Foyer__West__ex__Basement_Portal__East_28_1),
             "Irikar > Hub > Bowl Middle Ledge ==> Bowl Top Platform (1)" => Ok(ExitId::Irikar__Hub__Bowl_Middle_Ledge__ex__Bowl_Top_Platform_1),
             "Irikar > Hub > Bowl Middle Platform Center ==> Bowl Middle Ledge (1)" => Ok(ExitId::Irikar__Hub__Bowl_Middle_Platform_Center__ex__Bowl_Middle_Ledge_1),
             "Irikar > Hub > Bowl Middle Platform West ==> Bowl Middle Ledge (1)" => Ok(ExitId::Irikar__Hub__Bowl_Middle_Platform_West__ex__Bowl_Middle_Ledge_1),
@@ -8732,6 +8969,8 @@ pub enum ActionId {
     Glacier__Revival__Save_Point__Save,
     Global__Deploy_Drone,
     Global__Recall_Drone,
+    Irikar__Basement_Portal__Moving_Platform_Start__Activate_Platform,
+    Irikar__Basement_Portal__Portal_Stand__Enter_Portal,
     Irikar__Hub__Portal_Stand__Enter_Portal,
     Irikar__Hub__Royal_Storage_By_Wall__Shockwave_Wall,
     Irikar__Hub__Save_Point__Save,
@@ -9013,6 +9252,16 @@ impl fmt::Display for ActionId {
             }
             ActionId::Global__Deploy_Drone => write!(f, "{}", "Deploy Drone"),
             ActionId::Global__Recall_Drone => write!(f, "{}", "Recall Drone"),
+            ActionId::Irikar__Basement_Portal__Moving_Platform_Start__Activate_Platform => write!(
+                f,
+                "{}",
+                "Irikar > Basement Portal > Moving Platform Start > Activate Platform"
+            ),
+            ActionId::Irikar__Basement_Portal__Portal_Stand__Enter_Portal => write!(
+                f,
+                "{}",
+                "Irikar > Basement Portal > Portal Stand > Enter Portal"
+            ),
             ActionId::Irikar__Hub__Portal_Stand__Enter_Portal => {
                 write!(f, "{}", "Irikar > Hub > Portal Stand > Enter Portal")
             }
@@ -9263,6 +9512,12 @@ impl std::str::FromStr for ActionId {
             }
             "Deploy Drone" => Ok(ActionId::Global__Deploy_Drone),
             "Recall Drone" => Ok(ActionId::Global__Recall_Drone),
+            "Irikar > Basement Portal > Moving Platform Start > Activate Platform" => {
+                Ok(ActionId::Irikar__Basement_Portal__Moving_Platform_Start__Activate_Platform)
+            }
+            "Irikar > Basement Portal > Portal Stand > Enter Portal" => {
+                Ok(ActionId::Irikar__Basement_Portal__Portal_Stand__Enter_Portal)
+            }
             "Irikar > Hub > Portal Stand > Enter Portal" => {
                 Ok(ActionId::Irikar__Hub__Portal_Stand__Enter_Portal)
             }
