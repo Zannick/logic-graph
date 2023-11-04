@@ -30,6 +30,7 @@ pub enum RegionId {
     Irikar,
     Irikar_Breach,
     Menu,
+    Uhrum,
 }
 impl fmt::Display for RegionId {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
@@ -43,6 +44,7 @@ impl fmt::Display for RegionId {
             RegionId::Irikar => write!(f, "{}", "Irikar"),
             RegionId::Irikar_Breach => write!(f, "{}", "Irikar Breach"),
             RegionId::Menu => write!(f, "{}", "Menu"),
+            RegionId::Uhrum => write!(f, "{}", "Uhrum Valley"),
         }
     }
 }
@@ -61,6 +63,7 @@ impl std::str::FromStr for RegionId {
             "Irikar" => Ok(RegionId::Irikar),
             "Irikar Breach" => Ok(RegionId::Irikar_Breach),
             "Menu" => Ok(RegionId::Menu),
+            "Uhrum Valley" => Ok(RegionId::Uhrum),
             _ => Err(format!("Could not recognize as a RegionId: {}", s)),
         }
     }
@@ -115,6 +118,7 @@ pub enum AreaId {
     Ebih__Vertical_Interchange,
     Ebih__Waterfall,
     Giguna__Antechamber,
+    Giguna__Breachable_Wall,
     Giguna__Building_Interior,
     Giguna__Carnelian,
     Giguna__Clouds,
@@ -170,11 +174,14 @@ pub enum AreaId {
     Glacier__The_Big_Drop,
     Glacier__Vertical_Room,
     Irikar__Abandoned_Room,
+    Irikar__Airy,
     Irikar__Basement_Pipes,
     Irikar__Basement_Portal,
     Irikar__Boss_Room,
+    Irikar__East_Rooftops,
     Irikar__Empty_Foyer,
     Irikar__Hub,
+    Irikar__Lamassu,
     Irikar__Midwest,
     Irikar__Sight_Room,
     Irikar_Breach__Basement_Save,
@@ -189,6 +196,7 @@ pub enum AreaId {
     Irikar_Breach__Uhrum_Connector,
     Irikar_Breach__Worm_Rave,
     Menu__Upgrade_Menu,
+    Uhrum__West_Entrance,
 }
 impl fmt::Display for AreaId {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
@@ -233,6 +241,7 @@ impl fmt::Display for AreaId {
             AreaId::Ebih__Vertical_Interchange => write!(f, "{}", "Ebih > Vertical Interchange"),
             AreaId::Ebih__Waterfall => write!(f, "{}", "Ebih > Waterfall"),
             AreaId::Giguna__Antechamber => write!(f, "{}", "Giguna > Antechamber"),
+            AreaId::Giguna__Breachable_Wall => write!(f, "{}", "Giguna > Breachable Wall"),
             AreaId::Giguna__Building_Interior => write!(f, "{}", "Giguna > Building Interior"),
             AreaId::Giguna__Carnelian => write!(f, "{}", "Giguna > Carnelian"),
             AreaId::Giguna__Clouds => write!(f, "{}", "Giguna > Clouds"),
@@ -296,11 +305,14 @@ impl fmt::Display for AreaId {
             AreaId::Glacier__The_Big_Drop => write!(f, "{}", "Glacier > The Big Drop"),
             AreaId::Glacier__Vertical_Room => write!(f, "{}", "Glacier > Vertical Room"),
             AreaId::Irikar__Abandoned_Room => write!(f, "{}", "Irikar > Abandoned Room"),
+            AreaId::Irikar__Airy => write!(f, "{}", "Irikar > Airy"),
             AreaId::Irikar__Basement_Pipes => write!(f, "{}", "Irikar > Basement Pipes"),
             AreaId::Irikar__Basement_Portal => write!(f, "{}", "Irikar > Basement Portal"),
             AreaId::Irikar__Boss_Room => write!(f, "{}", "Irikar > Boss Room"),
+            AreaId::Irikar__East_Rooftops => write!(f, "{}", "Irikar > East Rooftops"),
             AreaId::Irikar__Empty_Foyer => write!(f, "{}", "Irikar > Empty Foyer"),
             AreaId::Irikar__Hub => write!(f, "{}", "Irikar > Hub"),
+            AreaId::Irikar__Lamassu => write!(f, "{}", "Irikar > Lamassu"),
             AreaId::Irikar__Midwest => write!(f, "{}", "Irikar > Midwest"),
             AreaId::Irikar__Sight_Room => write!(f, "{}", "Irikar > Sight Room"),
             AreaId::Irikar_Breach__Basement_Save => {
@@ -323,6 +335,7 @@ impl fmt::Display for AreaId {
             }
             AreaId::Irikar_Breach__Worm_Rave => write!(f, "{}", "Irikar Breach > Worm Rave"),
             AreaId::Menu__Upgrade_Menu => write!(f, "{}", "Menu > Upgrade Menu"),
+            AreaId::Uhrum__West_Entrance => write!(f, "{}", "Uhrum > West Entrance"),
         }
     }
 }
@@ -366,6 +379,7 @@ impl std::str::FromStr for AreaId {
             "Ebih > Vertical Interchange" => Ok(AreaId::Ebih__Vertical_Interchange),
             "Ebih > Waterfall" => Ok(AreaId::Ebih__Waterfall),
             "Giguna > Antechamber" => Ok(AreaId::Giguna__Antechamber),
+            "Giguna > Breachable Wall" => Ok(AreaId::Giguna__Breachable_Wall),
             "Giguna > Building Interior" => Ok(AreaId::Giguna__Building_Interior),
             "Giguna > Carnelian" => Ok(AreaId::Giguna__Carnelian),
             "Giguna > Clouds" => Ok(AreaId::Giguna__Clouds),
@@ -421,11 +435,14 @@ impl std::str::FromStr for AreaId {
             "Glacier > The Big Drop" => Ok(AreaId::Glacier__The_Big_Drop),
             "Glacier > Vertical Room" => Ok(AreaId::Glacier__Vertical_Room),
             "Irikar > Abandoned Room" => Ok(AreaId::Irikar__Abandoned_Room),
+            "Irikar > Airy" => Ok(AreaId::Irikar__Airy),
             "Irikar > Basement Pipes" => Ok(AreaId::Irikar__Basement_Pipes),
             "Irikar > Basement Portal" => Ok(AreaId::Irikar__Basement_Portal),
             "Irikar > Boss Room" => Ok(AreaId::Irikar__Boss_Room),
+            "Irikar > East Rooftops" => Ok(AreaId::Irikar__East_Rooftops),
             "Irikar > Empty Foyer" => Ok(AreaId::Irikar__Empty_Foyer),
             "Irikar > Hub" => Ok(AreaId::Irikar__Hub),
+            "Irikar > Lamassu" => Ok(AreaId::Irikar__Lamassu),
             "Irikar > Midwest" => Ok(AreaId::Irikar__Midwest),
             "Irikar > Sight Room" => Ok(AreaId::Irikar__Sight_Room),
             "Irikar Breach > Basement Save" => Ok(AreaId::Irikar_Breach__Basement_Save),
@@ -440,6 +457,7 @@ impl std::str::FromStr for AreaId {
             "Irikar Breach > Uhrum Connector" => Ok(AreaId::Irikar_Breach__Uhrum_Connector),
             "Irikar Breach > Worm Rave" => Ok(AreaId::Irikar_Breach__Worm_Rave),
             "Menu > Upgrade Menu" => Ok(AreaId::Menu__Upgrade_Menu),
+            "Uhrum > West Entrance" => Ok(AreaId::Uhrum__West_Entrance),
             _ => Err(format!("Could not recognize as a AreaId: {}", s)),
         }
     }
@@ -790,6 +808,10 @@ pub enum SpotId {
     Giguna__Antechamber__Statue_Head,
     Giguna__Antechamber__Statues_Ledge,
     Giguna__Antechamber__West_15,
+    Giguna__Breachable_Wall__Above_Middle_Catwalk,
+    Giguna__Breachable_Wall__Above_West_Catwalk,
+    Giguna__Breachable_Wall__Wall_Interior,
+    Giguna__Breachable_Wall__West_Mid_air,
     Giguna__Building_Interior__Bookshelf,
     Giguna__Building_Interior__Entry,
     Giguna__Carnelian__Door,
@@ -809,6 +831,7 @@ pub enum SpotId {
     Giguna__Clouds__North_Middle,
     Giguna__Clouds__North_Right,
     Giguna__Clouds__North_Under_Ledge,
+    Giguna__Clouds__Platform_Early,
     Giguna__Clouds__Platform_Early_Portal,
     Giguna__Clouds__Platform_Start,
     Giguna__Clouds__Platform_Stop,
@@ -1270,6 +1293,8 @@ pub enum SpotId {
     Irikar__Abandoned_Room__Corner_Core,
     Irikar__Abandoned_Room__Empty_Pedestal,
     Irikar__Abandoned_Room__West,
+    Irikar__Airy__Middle_South,
+    Irikar__Airy__Northwest,
     Irikar__Basement_Pipes__Brick_Ledge,
     Irikar__Basement_Pipes__Bricks_Under_Pipes,
     Irikar__Basement_Pipes__Double_Pipe_Left,
@@ -1294,8 +1319,22 @@ pub enum SpotId {
     Irikar__Basement_Portal__Portal_Stand,
     Irikar__Basement_Portal__West_28,
     Irikar__Basement_Portal__Westmost_Platform,
+    Irikar__Boss_Room__Above_Catwalk,
+    Irikar__Boss_Room__Bulls_Feet,
+    Irikar__Boss_Room__Catwalk_East,
+    Irikar__Boss_Room__Catwalk_West,
     Irikar__Boss_Room__East_28,
+    Irikar__Boss_Room__Healthy_Rooftop,
+    Irikar__Boss_Room__Northwest,
+    Irikar__Boss_Room__Sat_Tower_Roof_East,
+    Irikar__Boss_Room__Sat_Tower_Roof_West,
+    Irikar__Boss_Room__Upper_Rooftops,
     Irikar__Boss_Room__West_28,
+    Irikar__East_Rooftops__Directly_Down,
+    Irikar__East_Rooftops__East_Mid_air,
+    Irikar__East_Rooftops__Off_the_Edge,
+    Irikar__East_Rooftops__Top_Rooftop,
+    Irikar__East_Rooftops__Upper_West,
     Irikar__Empty_Foyer__East,
     Irikar__Empty_Foyer__West,
     Irikar__Hub__Bowl_Hole,
@@ -1326,11 +1365,23 @@ pub enum SpotId {
     Irikar__Hub__Sat_Tower_Lower_Left_Ledge,
     Irikar__Hub__Sat_Tower_Lower_Right_Ledge,
     Irikar__Hub__Sat_Tower_Middle_Ledge,
+    Irikar__Hub__Sat_Tower_Northeast,
     Irikar__Hub__Sat_Tower_Roof_East,
     Irikar__Hub__Sat_Tower_Roof_West,
     Irikar__Hub__Sat_Tower_Top_Ledge,
+    Irikar__Hub__Sat_Tower_West_Valley,
     Irikar__Hub__Save_Point,
     Irikar__Hub__West_Rim,
+    Irikar__Lamassu__Bottom_Middle,
+    Irikar__Lamassu__Catwalk_Middle,
+    Irikar__Lamassu__Catwalk_West,
+    Irikar__Lamassu__Desk,
+    Irikar__Lamassu__East_26,
+    Irikar__Lamassu__East_27,
+    Irikar__Lamassu__Hidden_Passage_East,
+    Irikar__Lamassu__Hidden_Passage_West,
+    Irikar__Lamassu__Northwest,
+    Irikar__Lamassu__West_28,
     Irikar__Midwest__East_23,
     Irikar__Midwest__East_24_on_Building,
     Irikar__Midwest__East_24_on_Floor,
@@ -1338,6 +1389,8 @@ pub enum SpotId {
     Irikar__Midwest__East_26,
     Irikar__Midwest__East_27,
     Irikar__Midwest__East_28,
+    Irikar__Sight_Room__Above_Room_East,
+    Irikar__Sight_Room__Above_Room_North,
     Irikar__Sight_Room__Item_Pedestal,
     Irikar__Sight_Room__Lower_Ledge,
     Irikar__Sight_Room__Portal,
@@ -1395,6 +1448,13 @@ pub enum SpotId {
     Menu__Upgrade_Menu__Drone,
     Menu__Upgrade_Menu__Infection,
     Menu__Upgrade_Menu__Physiology,
+    Uhrum__West_Entrance__Hidden_Passage_Entry,
+    Uhrum__West_Entrance__Hidden_Passage_West,
+    Uhrum__West_Entrance__Portal_Stand,
+    Uhrum__West_Entrance__Save_Point,
+    Uhrum__West_Entrance__West_25,
+    Uhrum__West_Entrance__West_26,
+    Uhrum__West_Entrance__West_27,
 }
 impl fmt::Display for SpotId {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
@@ -2139,6 +2199,18 @@ impl fmt::Display for SpotId {
             SpotId::Giguna__Antechamber__West_15 => {
                 write!(f, "{}", "Giguna > Antechamber > West 15")
             }
+            SpotId::Giguna__Breachable_Wall__Above_Middle_Catwalk => {
+                write!(f, "{}", "Giguna > Breachable Wall > Above Middle Catwalk")
+            }
+            SpotId::Giguna__Breachable_Wall__Above_West_Catwalk => {
+                write!(f, "{}", "Giguna > Breachable Wall > Above West Catwalk")
+            }
+            SpotId::Giguna__Breachable_Wall__Wall_Interior => {
+                write!(f, "{}", "Giguna > Breachable Wall > Wall Interior")
+            }
+            SpotId::Giguna__Breachable_Wall__West_Mid_air => {
+                write!(f, "{}", "Giguna > Breachable Wall > West Mid-air")
+            }
             SpotId::Giguna__Building_Interior__Bookshelf => {
                 write!(f, "{}", "Giguna > Building Interior > Bookshelf")
             }
@@ -2177,6 +2249,9 @@ impl fmt::Display for SpotId {
             SpotId::Giguna__Clouds__North_Right => write!(f, "{}", "Giguna > Clouds > North Right"),
             SpotId::Giguna__Clouds__North_Under_Ledge => {
                 write!(f, "{}", "Giguna > Clouds > North Under Ledge")
+            }
+            SpotId::Giguna__Clouds__Platform_Early => {
+                write!(f, "{}", "Giguna > Clouds > Platform Early")
             }
             SpotId::Giguna__Clouds__Platform_Early_Portal => {
                 write!(f, "{}", "Giguna > Clouds > Platform Early Portal")
@@ -3381,6 +3456,8 @@ impl fmt::Display for SpotId {
             SpotId::Irikar__Abandoned_Room__West => {
                 write!(f, "{}", "Irikar > Abandoned Room > West")
             }
+            SpotId::Irikar__Airy__Middle_South => write!(f, "{}", "Irikar > Airy > Middle South"),
+            SpotId::Irikar__Airy__Northwest => write!(f, "{}", "Irikar > Airy > Northwest"),
             SpotId::Irikar__Basement_Pipes__Brick_Ledge => {
                 write!(f, "{}", "Irikar > Basement Pipes > Brick Ledge")
             }
@@ -3453,8 +3530,50 @@ impl fmt::Display for SpotId {
             SpotId::Irikar__Basement_Portal__Westmost_Platform => {
                 write!(f, "{}", "Irikar > Basement Portal > Westmost Platform")
             }
+            SpotId::Irikar__Boss_Room__Above_Catwalk => {
+                write!(f, "{}", "Irikar > Boss Room > Above Catwalk")
+            }
+            SpotId::Irikar__Boss_Room__Bulls_Feet => {
+                write!(f, "{}", "Irikar > Boss Room > Bull's Feet")
+            }
+            SpotId::Irikar__Boss_Room__Catwalk_East => {
+                write!(f, "{}", "Irikar > Boss Room > Catwalk East")
+            }
+            SpotId::Irikar__Boss_Room__Catwalk_West => {
+                write!(f, "{}", "Irikar > Boss Room > Catwalk West")
+            }
             SpotId::Irikar__Boss_Room__East_28 => write!(f, "{}", "Irikar > Boss Room > East 28"),
+            SpotId::Irikar__Boss_Room__Healthy_Rooftop => {
+                write!(f, "{}", "Irikar > Boss Room > Healthy Rooftop")
+            }
+            SpotId::Irikar__Boss_Room__Northwest => {
+                write!(f, "{}", "Irikar > Boss Room > Northwest")
+            }
+            SpotId::Irikar__Boss_Room__Sat_Tower_Roof_East => {
+                write!(f, "{}", "Irikar > Boss Room > Sat Tower Roof East")
+            }
+            SpotId::Irikar__Boss_Room__Sat_Tower_Roof_West => {
+                write!(f, "{}", "Irikar > Boss Room > Sat Tower Roof West")
+            }
+            SpotId::Irikar__Boss_Room__Upper_Rooftops => {
+                write!(f, "{}", "Irikar > Boss Room > Upper Rooftops")
+            }
             SpotId::Irikar__Boss_Room__West_28 => write!(f, "{}", "Irikar > Boss Room > West 28"),
+            SpotId::Irikar__East_Rooftops__Directly_Down => {
+                write!(f, "{}", "Irikar > East Rooftops > Directly Down")
+            }
+            SpotId::Irikar__East_Rooftops__East_Mid_air => {
+                write!(f, "{}", "Irikar > East Rooftops > East Mid-air")
+            }
+            SpotId::Irikar__East_Rooftops__Off_the_Edge => {
+                write!(f, "{}", "Irikar > East Rooftops > Off the Edge")
+            }
+            SpotId::Irikar__East_Rooftops__Top_Rooftop => {
+                write!(f, "{}", "Irikar > East Rooftops > Top Rooftop")
+            }
+            SpotId::Irikar__East_Rooftops__Upper_West => {
+                write!(f, "{}", "Irikar > East Rooftops > Upper West")
+            }
             SpotId::Irikar__Empty_Foyer__East => write!(f, "{}", "Irikar > Empty Foyer > East"),
             SpotId::Irikar__Empty_Foyer__West => write!(f, "{}", "Irikar > Empty Foyer > West"),
             SpotId::Irikar__Hub__Bowl_Hole => write!(f, "{}", "Irikar > Hub > Bowl Hole"),
@@ -3529,6 +3648,9 @@ impl fmt::Display for SpotId {
             SpotId::Irikar__Hub__Sat_Tower_Middle_Ledge => {
                 write!(f, "{}", "Irikar > Hub > Sat Tower Middle Ledge")
             }
+            SpotId::Irikar__Hub__Sat_Tower_Northeast => {
+                write!(f, "{}", "Irikar > Hub > Sat Tower Northeast")
+            }
             SpotId::Irikar__Hub__Sat_Tower_Roof_East => {
                 write!(f, "{}", "Irikar > Hub > Sat Tower Roof East")
             }
@@ -3538,8 +3660,31 @@ impl fmt::Display for SpotId {
             SpotId::Irikar__Hub__Sat_Tower_Top_Ledge => {
                 write!(f, "{}", "Irikar > Hub > Sat Tower Top Ledge")
             }
+            SpotId::Irikar__Hub__Sat_Tower_West_Valley => {
+                write!(f, "{}", "Irikar > Hub > Sat Tower West Valley")
+            }
             SpotId::Irikar__Hub__Save_Point => write!(f, "{}", "Irikar > Hub > Save Point"),
             SpotId::Irikar__Hub__West_Rim => write!(f, "{}", "Irikar > Hub > West Rim"),
+            SpotId::Irikar__Lamassu__Bottom_Middle => {
+                write!(f, "{}", "Irikar > Lamassu > Bottom Middle")
+            }
+            SpotId::Irikar__Lamassu__Catwalk_Middle => {
+                write!(f, "{}", "Irikar > Lamassu > Catwalk Middle")
+            }
+            SpotId::Irikar__Lamassu__Catwalk_West => {
+                write!(f, "{}", "Irikar > Lamassu > Catwalk West")
+            }
+            SpotId::Irikar__Lamassu__Desk => write!(f, "{}", "Irikar > Lamassu > Desk"),
+            SpotId::Irikar__Lamassu__East_26 => write!(f, "{}", "Irikar > Lamassu > East 26"),
+            SpotId::Irikar__Lamassu__East_27 => write!(f, "{}", "Irikar > Lamassu > East 27"),
+            SpotId::Irikar__Lamassu__Hidden_Passage_East => {
+                write!(f, "{}", "Irikar > Lamassu > Hidden Passage East")
+            }
+            SpotId::Irikar__Lamassu__Hidden_Passage_West => {
+                write!(f, "{}", "Irikar > Lamassu > Hidden Passage West")
+            }
+            SpotId::Irikar__Lamassu__Northwest => write!(f, "{}", "Irikar > Lamassu > Northwest"),
+            SpotId::Irikar__Lamassu__West_28 => write!(f, "{}", "Irikar > Lamassu > West 28"),
             SpotId::Irikar__Midwest__East_23 => write!(f, "{}", "Irikar > Midwest > East 23"),
             SpotId::Irikar__Midwest__East_24_on_Building => {
                 write!(f, "{}", "Irikar > Midwest > East 24 on Building")
@@ -3551,6 +3696,12 @@ impl fmt::Display for SpotId {
             SpotId::Irikar__Midwest__East_26 => write!(f, "{}", "Irikar > Midwest > East 26"),
             SpotId::Irikar__Midwest__East_27 => write!(f, "{}", "Irikar > Midwest > East 27"),
             SpotId::Irikar__Midwest__East_28 => write!(f, "{}", "Irikar > Midwest > East 28"),
+            SpotId::Irikar__Sight_Room__Above_Room_East => {
+                write!(f, "{}", "Irikar > Sight Room > Above Room East")
+            }
+            SpotId::Irikar__Sight_Room__Above_Room_North => {
+                write!(f, "{}", "Irikar > Sight Room > Above Room North")
+            }
             SpotId::Irikar__Sight_Room__Item_Pedestal => {
                 write!(f, "{}", "Irikar > Sight Room > Item Pedestal")
             }
@@ -3719,6 +3870,27 @@ impl fmt::Display for SpotId {
             }
             SpotId::Menu__Upgrade_Menu__Physiology => {
                 write!(f, "{}", "Menu > Upgrade Menu > Physiology")
+            }
+            SpotId::Uhrum__West_Entrance__Hidden_Passage_Entry => {
+                write!(f, "{}", "Uhrum > West Entrance > Hidden Passage Entry")
+            }
+            SpotId::Uhrum__West_Entrance__Hidden_Passage_West => {
+                write!(f, "{}", "Uhrum > West Entrance > Hidden Passage West")
+            }
+            SpotId::Uhrum__West_Entrance__Portal_Stand => {
+                write!(f, "{}", "Uhrum > West Entrance > Portal Stand")
+            }
+            SpotId::Uhrum__West_Entrance__Save_Point => {
+                write!(f, "{}", "Uhrum > West Entrance > Save Point")
+            }
+            SpotId::Uhrum__West_Entrance__West_25 => {
+                write!(f, "{}", "Uhrum > West Entrance > West 25")
+            }
+            SpotId::Uhrum__West_Entrance__West_26 => {
+                write!(f, "{}", "Uhrum > West Entrance > West 26")
+            }
+            SpotId::Uhrum__West_Entrance__West_27 => {
+                write!(f, "{}", "Uhrum > West Entrance > West 27")
             }
         }
     }
@@ -4224,6 +4396,18 @@ impl std::str::FromStr for SpotId {
                 Ok(SpotId::Giguna__Antechamber__Statues_Ledge)
             }
             "Giguna > Antechamber > West 15" => Ok(SpotId::Giguna__Antechamber__West_15),
+            "Giguna > Breachable Wall > Above Middle Catwalk" => {
+                Ok(SpotId::Giguna__Breachable_Wall__Above_Middle_Catwalk)
+            }
+            "Giguna > Breachable Wall > Above West Catwalk" => {
+                Ok(SpotId::Giguna__Breachable_Wall__Above_West_Catwalk)
+            }
+            "Giguna > Breachable Wall > Wall Interior" => {
+                Ok(SpotId::Giguna__Breachable_Wall__Wall_Interior)
+            }
+            "Giguna > Breachable Wall > West Mid-air" => {
+                Ok(SpotId::Giguna__Breachable_Wall__West_Mid_air)
+            }
             "Giguna > Building Interior > Bookshelf" => {
                 Ok(SpotId::Giguna__Building_Interior__Bookshelf)
             }
@@ -4247,6 +4431,7 @@ impl std::str::FromStr for SpotId {
             "Giguna > Clouds > North Middle" => Ok(SpotId::Giguna__Clouds__North_Middle),
             "Giguna > Clouds > North Right" => Ok(SpotId::Giguna__Clouds__North_Right),
             "Giguna > Clouds > North Under Ledge" => Ok(SpotId::Giguna__Clouds__North_Under_Ledge),
+            "Giguna > Clouds > Platform Early" => Ok(SpotId::Giguna__Clouds__Platform_Early),
             "Giguna > Clouds > Platform Early Portal" => {
                 Ok(SpotId::Giguna__Clouds__Platform_Early_Portal)
             }
@@ -5002,6 +5187,8 @@ impl std::str::FromStr for SpotId {
                 Ok(SpotId::Irikar__Abandoned_Room__Empty_Pedestal)
             }
             "Irikar > Abandoned Room > West" => Ok(SpotId::Irikar__Abandoned_Room__West),
+            "Irikar > Airy > Middle South" => Ok(SpotId::Irikar__Airy__Middle_South),
+            "Irikar > Airy > Northwest" => Ok(SpotId::Irikar__Airy__Northwest),
             "Irikar > Basement Pipes > Brick Ledge" => {
                 Ok(SpotId::Irikar__Basement_Pipes__Brick_Ledge)
             }
@@ -5056,8 +5243,36 @@ impl std::str::FromStr for SpotId {
             "Irikar > Basement Portal > Westmost Platform" => {
                 Ok(SpotId::Irikar__Basement_Portal__Westmost_Platform)
             }
+            "Irikar > Boss Room > Above Catwalk" => Ok(SpotId::Irikar__Boss_Room__Above_Catwalk),
+            "Irikar > Boss Room > Bull's Feet" => Ok(SpotId::Irikar__Boss_Room__Bulls_Feet),
+            "Irikar > Boss Room > Catwalk East" => Ok(SpotId::Irikar__Boss_Room__Catwalk_East),
+            "Irikar > Boss Room > Catwalk West" => Ok(SpotId::Irikar__Boss_Room__Catwalk_West),
             "Irikar > Boss Room > East 28" => Ok(SpotId::Irikar__Boss_Room__East_28),
+            "Irikar > Boss Room > Healthy Rooftop" => {
+                Ok(SpotId::Irikar__Boss_Room__Healthy_Rooftop)
+            }
+            "Irikar > Boss Room > Northwest" => Ok(SpotId::Irikar__Boss_Room__Northwest),
+            "Irikar > Boss Room > Sat Tower Roof East" => {
+                Ok(SpotId::Irikar__Boss_Room__Sat_Tower_Roof_East)
+            }
+            "Irikar > Boss Room > Sat Tower Roof West" => {
+                Ok(SpotId::Irikar__Boss_Room__Sat_Tower_Roof_West)
+            }
+            "Irikar > Boss Room > Upper Rooftops" => Ok(SpotId::Irikar__Boss_Room__Upper_Rooftops),
             "Irikar > Boss Room > West 28" => Ok(SpotId::Irikar__Boss_Room__West_28),
+            "Irikar > East Rooftops > Directly Down" => {
+                Ok(SpotId::Irikar__East_Rooftops__Directly_Down)
+            }
+            "Irikar > East Rooftops > East Mid-air" => {
+                Ok(SpotId::Irikar__East_Rooftops__East_Mid_air)
+            }
+            "Irikar > East Rooftops > Off the Edge" => {
+                Ok(SpotId::Irikar__East_Rooftops__Off_the_Edge)
+            }
+            "Irikar > East Rooftops > Top Rooftop" => {
+                Ok(SpotId::Irikar__East_Rooftops__Top_Rooftop)
+            }
+            "Irikar > East Rooftops > Upper West" => Ok(SpotId::Irikar__East_Rooftops__Upper_West),
             "Irikar > Empty Foyer > East" => Ok(SpotId::Irikar__Empty_Foyer__East),
             "Irikar > Empty Foyer > West" => Ok(SpotId::Irikar__Empty_Foyer__West),
             "Irikar > Hub > Bowl Hole" => Ok(SpotId::Irikar__Hub__Bowl_Hole),
@@ -5108,11 +5323,29 @@ impl std::str::FromStr for SpotId {
             "Irikar > Hub > Sat Tower Middle Ledge" => {
                 Ok(SpotId::Irikar__Hub__Sat_Tower_Middle_Ledge)
             }
+            "Irikar > Hub > Sat Tower Northeast" => Ok(SpotId::Irikar__Hub__Sat_Tower_Northeast),
             "Irikar > Hub > Sat Tower Roof East" => Ok(SpotId::Irikar__Hub__Sat_Tower_Roof_East),
             "Irikar > Hub > Sat Tower Roof West" => Ok(SpotId::Irikar__Hub__Sat_Tower_Roof_West),
             "Irikar > Hub > Sat Tower Top Ledge" => Ok(SpotId::Irikar__Hub__Sat_Tower_Top_Ledge),
+            "Irikar > Hub > Sat Tower West Valley" => {
+                Ok(SpotId::Irikar__Hub__Sat_Tower_West_Valley)
+            }
             "Irikar > Hub > Save Point" => Ok(SpotId::Irikar__Hub__Save_Point),
             "Irikar > Hub > West Rim" => Ok(SpotId::Irikar__Hub__West_Rim),
+            "Irikar > Lamassu > Bottom Middle" => Ok(SpotId::Irikar__Lamassu__Bottom_Middle),
+            "Irikar > Lamassu > Catwalk Middle" => Ok(SpotId::Irikar__Lamassu__Catwalk_Middle),
+            "Irikar > Lamassu > Catwalk West" => Ok(SpotId::Irikar__Lamassu__Catwalk_West),
+            "Irikar > Lamassu > Desk" => Ok(SpotId::Irikar__Lamassu__Desk),
+            "Irikar > Lamassu > East 26" => Ok(SpotId::Irikar__Lamassu__East_26),
+            "Irikar > Lamassu > East 27" => Ok(SpotId::Irikar__Lamassu__East_27),
+            "Irikar > Lamassu > Hidden Passage East" => {
+                Ok(SpotId::Irikar__Lamassu__Hidden_Passage_East)
+            }
+            "Irikar > Lamassu > Hidden Passage West" => {
+                Ok(SpotId::Irikar__Lamassu__Hidden_Passage_West)
+            }
+            "Irikar > Lamassu > Northwest" => Ok(SpotId::Irikar__Lamassu__Northwest),
+            "Irikar > Lamassu > West 28" => Ok(SpotId::Irikar__Lamassu__West_28),
             "Irikar > Midwest > East 23" => Ok(SpotId::Irikar__Midwest__East_23),
             "Irikar > Midwest > East 24 on Building" => {
                 Ok(SpotId::Irikar__Midwest__East_24_on_Building)
@@ -5122,6 +5355,12 @@ impl std::str::FromStr for SpotId {
             "Irikar > Midwest > East 26" => Ok(SpotId::Irikar__Midwest__East_26),
             "Irikar > Midwest > East 27" => Ok(SpotId::Irikar__Midwest__East_27),
             "Irikar > Midwest > East 28" => Ok(SpotId::Irikar__Midwest__East_28),
+            "Irikar > Sight Room > Above Room East" => {
+                Ok(SpotId::Irikar__Sight_Room__Above_Room_East)
+            }
+            "Irikar > Sight Room > Above Room North" => {
+                Ok(SpotId::Irikar__Sight_Room__Above_Room_North)
+            }
             "Irikar > Sight Room > Item Pedestal" => Ok(SpotId::Irikar__Sight_Room__Item_Pedestal),
             "Irikar > Sight Room > Lower Ledge" => Ok(SpotId::Irikar__Sight_Room__Lower_Ledge),
             "Irikar > Sight Room > Portal" => Ok(SpotId::Irikar__Sight_Room__Portal),
@@ -5249,6 +5488,19 @@ impl std::str::FromStr for SpotId {
             "Menu > Upgrade Menu > Drone" => Ok(SpotId::Menu__Upgrade_Menu__Drone),
             "Menu > Upgrade Menu > Infection" => Ok(SpotId::Menu__Upgrade_Menu__Infection),
             "Menu > Upgrade Menu > Physiology" => Ok(SpotId::Menu__Upgrade_Menu__Physiology),
+            "Uhrum > West Entrance > Hidden Passage Entry" => {
+                Ok(SpotId::Uhrum__West_Entrance__Hidden_Passage_Entry)
+            }
+            "Uhrum > West Entrance > Hidden Passage West" => {
+                Ok(SpotId::Uhrum__West_Entrance__Hidden_Passage_West)
+            }
+            "Uhrum > West Entrance > Portal Stand" => {
+                Ok(SpotId::Uhrum__West_Entrance__Portal_Stand)
+            }
+            "Uhrum > West Entrance > Save Point" => Ok(SpotId::Uhrum__West_Entrance__Save_Point),
+            "Uhrum > West Entrance > West 25" => Ok(SpotId::Uhrum__West_Entrance__West_25),
+            "Uhrum > West Entrance > West 26" => Ok(SpotId::Uhrum__West_Entrance__West_26),
+            "Uhrum > West Entrance > West 27" => Ok(SpotId::Uhrum__West_Entrance__West_27),
             _ => Err(format!("Could not recognize as a SpotId: {}", s)),
         }
     }
@@ -5387,11 +5639,17 @@ pub enum LocationId {
     Glacier__Vertical_Room__Peak__Flask,
     Glacier__Vertical_Room__Under_Switch__Switch,
     Irikar__Abandoned_Room__Corner_Core__Core,
+    Irikar__Boss_Room__Bulls_Feet__Boss_Reward,
+    Irikar__Boss_Room__Bulls_Feet__Defeat_Gudam,
+    Irikar__Boss_Room__Bulls_Feet__Shockwave_Gudam,
+    Irikar__Boss_Room__Healthy_Rooftop__Health,
+    Irikar__East_Rooftops__Top_Rooftop__Tablet,
     Irikar__Hub__Dagger_Altar__Weapon,
     Irikar__Hub__Royal_Storage_By_Wall__Mist_into_Wall,
     Irikar__Hub__Royal_Storage_By_Wall__Shockwave_Wall,
     Irikar__Hub__Royal_Storage_in_Wall__Item,
     Irikar__Hub__Sat_Tower_Top_Ledge__Tablet,
+    Irikar__Lamassu__Desk__Item,
     Irikar__Sight_Room__Item_Pedestal__Urn,
     Irikar_Breach__Gauntlet__Hidden_Path_Reward__Item,
     Irikar_Breach__Hover_Room__Bottom__Item,
@@ -5869,6 +6127,23 @@ impl fmt::Display for LocationId {
             LocationId::Irikar__Abandoned_Room__Corner_Core__Core => {
                 write!(f, "{}", "Irikar > Abandoned Room > Corner Core > Core")
             }
+            LocationId::Irikar__Boss_Room__Bulls_Feet__Boss_Reward => {
+                write!(f, "{}", "Irikar > Boss Room > Bull's Feet > Boss Reward")
+            }
+            LocationId::Irikar__Boss_Room__Bulls_Feet__Defeat_Gudam => {
+                write!(f, "{}", "Irikar > Boss Room > Bull's Feet > Defeat Gudam")
+            }
+            LocationId::Irikar__Boss_Room__Bulls_Feet__Shockwave_Gudam => write!(
+                f,
+                "{}",
+                "Irikar > Boss Room > Bull's Feet > Shockwave Gudam"
+            ),
+            LocationId::Irikar__Boss_Room__Healthy_Rooftop__Health => {
+                write!(f, "{}", "Irikar > Boss Room > Healthy Rooftop > Health")
+            }
+            LocationId::Irikar__East_Rooftops__Top_Rooftop__Tablet => {
+                write!(f, "{}", "Irikar > East Rooftops > Top Rooftop > Tablet")
+            }
             LocationId::Irikar__Hub__Dagger_Altar__Weapon => {
                 write!(f, "{}", "Irikar > Hub > Dagger Altar > Weapon")
             }
@@ -5887,6 +6162,9 @@ impl fmt::Display for LocationId {
             }
             LocationId::Irikar__Hub__Sat_Tower_Top_Ledge__Tablet => {
                 write!(f, "{}", "Irikar > Hub > Sat Tower Top Ledge > Tablet")
+            }
+            LocationId::Irikar__Lamassu__Desk__Item => {
+                write!(f, "{}", "Irikar > Lamassu > Desk > Item")
             }
             LocationId::Irikar__Sight_Room__Item_Pedestal__Urn => {
                 write!(f, "{}", "Irikar > Sight Room > Item Pedestal > Urn")
@@ -6374,6 +6652,21 @@ impl std::str::FromStr for LocationId {
             "Irikar > Abandoned Room > Corner Core > Core" => {
                 Ok(LocationId::Irikar__Abandoned_Room__Corner_Core__Core)
             }
+            "Irikar > Boss Room > Bull's Feet > Boss Reward" => {
+                Ok(LocationId::Irikar__Boss_Room__Bulls_Feet__Boss_Reward)
+            }
+            "Irikar > Boss Room > Bull's Feet > Defeat Gudam" => {
+                Ok(LocationId::Irikar__Boss_Room__Bulls_Feet__Defeat_Gudam)
+            }
+            "Irikar > Boss Room > Bull's Feet > Shockwave Gudam" => {
+                Ok(LocationId::Irikar__Boss_Room__Bulls_Feet__Shockwave_Gudam)
+            }
+            "Irikar > Boss Room > Healthy Rooftop > Health" => {
+                Ok(LocationId::Irikar__Boss_Room__Healthy_Rooftop__Health)
+            }
+            "Irikar > East Rooftops > Top Rooftop > Tablet" => {
+                Ok(LocationId::Irikar__East_Rooftops__Top_Rooftop__Tablet)
+            }
             "Irikar > Hub > Dagger Altar > Weapon" => {
                 Ok(LocationId::Irikar__Hub__Dagger_Altar__Weapon)
             }
@@ -6389,6 +6682,7 @@ impl std::str::FromStr for LocationId {
             "Irikar > Hub > Sat Tower Top Ledge > Tablet" => {
                 Ok(LocationId::Irikar__Hub__Sat_Tower_Top_Ledge__Tablet)
             }
+            "Irikar > Lamassu > Desk > Item" => Ok(LocationId::Irikar__Lamassu__Desk__Item),
             "Irikar > Sight Room > Item Pedestal > Urn" => {
                 Ok(LocationId::Irikar__Sight_Room__Item_Pedestal__Urn)
             }
@@ -6797,6 +7091,8 @@ pub enum ExitId {
     Giguna__Antechamber__Statues_Ledge__ex__Small_Bricks_1,
     Giguna__Antechamber__West_15__ex__Gubi_Lair__East_15_1,
     Giguna__Antechamber__West_15__ex__Small_Bricks_1,
+    Giguna__Breachable_Wall__Above_West_Catwalk__ex__Irikar__Boss_Room__Above_Catwalk_1,
+    Giguna__Breachable_Wall__West_Mid_air__ex__Irikar__East_Rooftops__East_Mid_air_1,
     Giguna__Building_Interior__Entry__ex__Bookshelf_1,
     Giguna__Building_Interior__Entry__ex__Bookshelf_2,
     Giguna__Building_Interior__Entry__ex__Giguna_Base__Building_Entry_1,
@@ -7205,6 +7501,7 @@ pub enum ExitId {
     Glacier__Vertical_Room__West_8__ex__Peak__East_8_1,
     Glacier__Vertical_Room__West_9__ex__Ledge_Grab_Room__East_9_1,
     Irikar__Abandoned_Room__West__ex__Basement_Portal__East_27_1,
+    Irikar__Airy__Middle_South__ex__Sight_Room__Above_Room_North_1,
     Irikar__Basement_Pipes__Bricks_Under_Pipes__ex__Double_Pipe_Right_1,
     Irikar__Basement_Pipes__Bricks_Under_Pipes__ex__Double_Pipe_Right_2,
     Irikar__Basement_Pipes__Double_Pipe_Left__ex__High_Pipe_1,
@@ -7232,6 +7529,17 @@ pub enum ExitId {
     Irikar__Basement_Portal__Portal_Stand__ex__Moving_Platform_Start_1,
     Irikar__Basement_Portal__West_28__ex__Basement_Pipes__East_28_1,
     Irikar__Basement_Portal__West_28__ex__Moving_Platform_Start_1,
+    Irikar__Boss_Room__Catwalk_East__ex__Lamassu__Catwalk_West_1,
+    Irikar__Boss_Room__Catwalk_West__ex__Upper_Rooftops_1,
+    Irikar__Boss_Room__East_28__ex__Lamassu__West_28_1,
+    Irikar__Boss_Room__Upper_Rooftops__ex__East_Rooftops__Off_the_Edge_1,
+    Irikar__Boss_Room__West_28__ex__Empty_Foyer__East_1,
+    Irikar__East_Rooftops__Directly_Down__ex__Boss_Room__Northwest_1,
+    Irikar__East_Rooftops__East_Mid_air__ex__Giguna__Breachable_Wall__West_Mid_air_1,
+    Irikar__East_Rooftops__East_Mid_air__ex__Top_Rooftop_1,
+    Irikar__East_Rooftops__Off_the_Edge__ex__Top_Rooftop_1,
+    Irikar__East_Rooftops__Off_the_Edge__ex__Top_Rooftop_2,
+    Irikar__East_Rooftops__Upper_West__ex__East_Mid_air_1,
     Irikar__Empty_Foyer__East__ex__Boss_Room__West_28_1,
     Irikar__Empty_Foyer__West__ex__Basement_Portal__East_28_1,
     Irikar__Hub__Bowl_Middle_Ledge__ex__Bowl_Top_Platform_1,
@@ -7248,8 +7556,17 @@ pub enum ExitId {
     Irikar__Hub__Sat_Tower_East_24__ex__Sight_Room__West_24_1,
     Irikar__Hub__Sat_Tower_Floating_Platform__ex__Sat_Tower_Top_Ledge_1,
     Irikar__Hub__Sat_Tower_Middle_Ledge__ex__Sat_Tower_Floating_Platform_1,
+    Irikar__Hub__Sat_Tower_Northeast__ex__Airy__Northwest_1,
     Irikar__Hub__Save_Point__ex__Bowl_Hole_1,
     Irikar__Hub__West_Rim__ex__East_Rim_1,
+    Irikar__Lamassu__Catwalk_Middle__ex__Desk_1,
+    Irikar__Lamassu__Catwalk_Middle__ex__Hidden_Passage_West_1,
+    Irikar__Lamassu__Catwalk_West__ex__Boss_Room__Catwalk_East_1,
+    Irikar__Lamassu__East_26__ex__Uhrum__West_Entrance__West_26_1,
+    Irikar__Lamassu__East_27__ex__Uhrum__West_Entrance__West_27_1,
+    Irikar__Lamassu__Hidden_Passage_East__ex__Uhrum__West_Entrance__Hidden_Passage_West_1,
+    Irikar__Lamassu__West_28__ex__Boss_Room__East_28_1,
+    Irikar__Sight_Room__Above_Room_East__ex__East_Rooftops__Upper_West_1,
     Irikar__Sight_Room__West_24__ex__Hub__Sat_Tower_East_24_1,
     Irikar_Breach__Exit_Corridor__East__ex__Uhrum_Connector__West_1,
     Irikar_Breach__Exit_Corridor__North_12__ex__Pillar_1,
@@ -7579,6 +7896,8 @@ impl fmt::Display for ExitId {
             ExitId::Giguna__Antechamber__Statues_Ledge__ex__Small_Bricks_1 => write!(f, "{}", "Giguna > Antechamber > Statues Ledge ==> Small Bricks (1)"),
             ExitId::Giguna__Antechamber__West_15__ex__Gubi_Lair__East_15_1 => write!(f, "{}", "Giguna > Antechamber > West 15 ==> Gubi Lair > East 15 (1)"),
             ExitId::Giguna__Antechamber__West_15__ex__Small_Bricks_1 => write!(f, "{}", "Giguna > Antechamber > West 15 ==> Small Bricks (1)"),
+            ExitId::Giguna__Breachable_Wall__Above_West_Catwalk__ex__Irikar__Boss_Room__Above_Catwalk_1 => write!(f, "{}", "Giguna > Breachable Wall > Above West Catwalk ==> Irikar > Boss Room > Above Catwalk (1)"),
+            ExitId::Giguna__Breachable_Wall__West_Mid_air__ex__Irikar__East_Rooftops__East_Mid_air_1 => write!(f, "{}", "Giguna > Breachable Wall > West Mid-air ==> Irikar > East Rooftops > East Mid-air (1)"),
             ExitId::Giguna__Building_Interior__Entry__ex__Bookshelf_1 => write!(f, "{}", "Giguna > Building Interior > Entry ==> Bookshelf (1)"),
             ExitId::Giguna__Building_Interior__Entry__ex__Bookshelf_2 => write!(f, "{}", "Giguna > Building Interior > Entry ==> Bookshelf (2)"),
             ExitId::Giguna__Building_Interior__Entry__ex__Giguna_Base__Building_Entry_1 => write!(f, "{}", "Giguna > Building Interior > Entry ==> Giguna Base > Building Entry (1)"),
@@ -7987,6 +8306,7 @@ impl fmt::Display for ExitId {
             ExitId::Glacier__Vertical_Room__West_8__ex__Peak__East_8_1 => write!(f, "{}", "Glacier > Vertical Room > West 8 ==> Peak > East 8 (1)"),
             ExitId::Glacier__Vertical_Room__West_9__ex__Ledge_Grab_Room__East_9_1 => write!(f, "{}", "Glacier > Vertical Room > West 9 ==> Ledge Grab Room > East 9 (1)"),
             ExitId::Irikar__Abandoned_Room__West__ex__Basement_Portal__East_27_1 => write!(f, "{}", "Irikar > Abandoned Room > West ==> Basement Portal > East 27 (1)"),
+            ExitId::Irikar__Airy__Middle_South__ex__Sight_Room__Above_Room_North_1 => write!(f, "{}", "Irikar > Airy > Middle South ==> Sight Room > Above Room North (1)"),
             ExitId::Irikar__Basement_Pipes__Bricks_Under_Pipes__ex__Double_Pipe_Right_1 => write!(f, "{}", "Irikar > Basement Pipes > Bricks Under Pipes ==> Double Pipe Right (1)"),
             ExitId::Irikar__Basement_Pipes__Bricks_Under_Pipes__ex__Double_Pipe_Right_2 => write!(f, "{}", "Irikar > Basement Pipes > Bricks Under Pipes ==> Double Pipe Right (2)"),
             ExitId::Irikar__Basement_Pipes__Double_Pipe_Left__ex__High_Pipe_1 => write!(f, "{}", "Irikar > Basement Pipes > Double Pipe Left ==> High Pipe (1)"),
@@ -8014,6 +8334,17 @@ impl fmt::Display for ExitId {
             ExitId::Irikar__Basement_Portal__Portal_Stand__ex__Moving_Platform_Start_1 => write!(f, "{}", "Irikar > Basement Portal > Portal Stand ==> Moving Platform Start (1)"),
             ExitId::Irikar__Basement_Portal__West_28__ex__Basement_Pipes__East_28_1 => write!(f, "{}", "Irikar > Basement Portal > West 28 ==> Basement Pipes > East 28 (1)"),
             ExitId::Irikar__Basement_Portal__West_28__ex__Moving_Platform_Start_1 => write!(f, "{}", "Irikar > Basement Portal > West 28 ==> Moving Platform Start (1)"),
+            ExitId::Irikar__Boss_Room__Catwalk_East__ex__Lamassu__Catwalk_West_1 => write!(f, "{}", "Irikar > Boss Room > Catwalk East ==> Lamassu > Catwalk West (1)"),
+            ExitId::Irikar__Boss_Room__Catwalk_West__ex__Upper_Rooftops_1 => write!(f, "{}", "Irikar > Boss Room > Catwalk West ==> Upper Rooftops (1)"),
+            ExitId::Irikar__Boss_Room__East_28__ex__Lamassu__West_28_1 => write!(f, "{}", "Irikar > Boss Room > East 28 ==> Lamassu > West 28 (1)"),
+            ExitId::Irikar__Boss_Room__Upper_Rooftops__ex__East_Rooftops__Off_the_Edge_1 => write!(f, "{}", "Irikar > Boss Room > Upper Rooftops ==> East Rooftops > Off the Edge (1)"),
+            ExitId::Irikar__Boss_Room__West_28__ex__Empty_Foyer__East_1 => write!(f, "{}", "Irikar > Boss Room > West 28 ==> Empty Foyer > East (1)"),
+            ExitId::Irikar__East_Rooftops__Directly_Down__ex__Boss_Room__Northwest_1 => write!(f, "{}", "Irikar > East Rooftops > Directly Down ==> Boss Room > Northwest (1)"),
+            ExitId::Irikar__East_Rooftops__East_Mid_air__ex__Giguna__Breachable_Wall__West_Mid_air_1 => write!(f, "{}", "Irikar > East Rooftops > East Mid-air ==> Giguna > Breachable Wall > West Mid-air (1)"),
+            ExitId::Irikar__East_Rooftops__East_Mid_air__ex__Top_Rooftop_1 => write!(f, "{}", "Irikar > East Rooftops > East Mid-air ==> Top Rooftop (1)"),
+            ExitId::Irikar__East_Rooftops__Off_the_Edge__ex__Top_Rooftop_1 => write!(f, "{}", "Irikar > East Rooftops > Off the Edge ==> Top Rooftop (1)"),
+            ExitId::Irikar__East_Rooftops__Off_the_Edge__ex__Top_Rooftop_2 => write!(f, "{}", "Irikar > East Rooftops > Off the Edge ==> Top Rooftop (2)"),
+            ExitId::Irikar__East_Rooftops__Upper_West__ex__East_Mid_air_1 => write!(f, "{}", "Irikar > East Rooftops > Upper West ==> East Mid-air (1)"),
             ExitId::Irikar__Empty_Foyer__East__ex__Boss_Room__West_28_1 => write!(f, "{}", "Irikar > Empty Foyer > East ==> Boss Room > West 28 (1)"),
             ExitId::Irikar__Empty_Foyer__West__ex__Basement_Portal__East_28_1 => write!(f, "{}", "Irikar > Empty Foyer > West ==> Basement Portal > East 28 (1)"),
             ExitId::Irikar__Hub__Bowl_Middle_Ledge__ex__Bowl_Top_Platform_1 => write!(f, "{}", "Irikar > Hub > Bowl Middle Ledge ==> Bowl Top Platform (1)"),
@@ -8030,8 +8361,17 @@ impl fmt::Display for ExitId {
             ExitId::Irikar__Hub__Sat_Tower_East_24__ex__Sight_Room__West_24_1 => write!(f, "{}", "Irikar > Hub > Sat Tower East 24 ==> Sight Room > West 24 (1)"),
             ExitId::Irikar__Hub__Sat_Tower_Floating_Platform__ex__Sat_Tower_Top_Ledge_1 => write!(f, "{}", "Irikar > Hub > Sat Tower Floating Platform ==> Sat Tower Top Ledge (1)"),
             ExitId::Irikar__Hub__Sat_Tower_Middle_Ledge__ex__Sat_Tower_Floating_Platform_1 => write!(f, "{}", "Irikar > Hub > Sat Tower Middle Ledge ==> Sat Tower Floating Platform (1)"),
+            ExitId::Irikar__Hub__Sat_Tower_Northeast__ex__Airy__Northwest_1 => write!(f, "{}", "Irikar > Hub > Sat Tower Northeast ==> Airy > Northwest (1)"),
             ExitId::Irikar__Hub__Save_Point__ex__Bowl_Hole_1 => write!(f, "{}", "Irikar > Hub > Save Point ==> Bowl Hole (1)"),
             ExitId::Irikar__Hub__West_Rim__ex__East_Rim_1 => write!(f, "{}", "Irikar > Hub > West Rim ==> East Rim (1)"),
+            ExitId::Irikar__Lamassu__Catwalk_Middle__ex__Desk_1 => write!(f, "{}", "Irikar > Lamassu > Catwalk Middle ==> Desk (1)"),
+            ExitId::Irikar__Lamassu__Catwalk_Middle__ex__Hidden_Passage_West_1 => write!(f, "{}", "Irikar > Lamassu > Catwalk Middle ==> Hidden Passage West (1)"),
+            ExitId::Irikar__Lamassu__Catwalk_West__ex__Boss_Room__Catwalk_East_1 => write!(f, "{}", "Irikar > Lamassu > Catwalk West ==> Boss Room > Catwalk East (1)"),
+            ExitId::Irikar__Lamassu__East_26__ex__Uhrum__West_Entrance__West_26_1 => write!(f, "{}", "Irikar > Lamassu > East 26 ==> Uhrum > West Entrance > West 26 (1)"),
+            ExitId::Irikar__Lamassu__East_27__ex__Uhrum__West_Entrance__West_27_1 => write!(f, "{}", "Irikar > Lamassu > East 27 ==> Uhrum > West Entrance > West 27 (1)"),
+            ExitId::Irikar__Lamassu__Hidden_Passage_East__ex__Uhrum__West_Entrance__Hidden_Passage_West_1 => write!(f, "{}", "Irikar > Lamassu > Hidden Passage East ==> Uhrum > West Entrance > Hidden Passage West (1)"),
+            ExitId::Irikar__Lamassu__West_28__ex__Boss_Room__East_28_1 => write!(f, "{}", "Irikar > Lamassu > West 28 ==> Boss Room > East 28 (1)"),
+            ExitId::Irikar__Sight_Room__Above_Room_East__ex__East_Rooftops__Upper_West_1 => write!(f, "{}", "Irikar > Sight Room > Above Room East ==> East Rooftops > Upper West (1)"),
             ExitId::Irikar__Sight_Room__West_24__ex__Hub__Sat_Tower_East_24_1 => write!(f, "{}", "Irikar > Sight Room > West 24 ==> Hub > Sat Tower East 24 (1)"),
             ExitId::Irikar_Breach__Exit_Corridor__East__ex__Uhrum_Connector__West_1 => write!(f, "{}", "Irikar Breach > Exit Corridor > East ==> Uhrum Connector > West (1)"),
             ExitId::Irikar_Breach__Exit_Corridor__North_12__ex__Pillar_1 => write!(f, "{}", "Irikar Breach > Exit Corridor > North 12 ==> Pillar (1)"),
@@ -8366,6 +8706,8 @@ impl std::str::FromStr for ExitId {
             "Giguna > Antechamber > Statues Ledge ==> Small Bricks (1)" => Ok(ExitId::Giguna__Antechamber__Statues_Ledge__ex__Small_Bricks_1),
             "Giguna > Antechamber > West 15 ==> Gubi Lair > East 15 (1)" => Ok(ExitId::Giguna__Antechamber__West_15__ex__Gubi_Lair__East_15_1),
             "Giguna > Antechamber > West 15 ==> Small Bricks (1)" => Ok(ExitId::Giguna__Antechamber__West_15__ex__Small_Bricks_1),
+            "Giguna > Breachable Wall > Above West Catwalk ==> Irikar > Boss Room > Above Catwalk (1)" => Ok(ExitId::Giguna__Breachable_Wall__Above_West_Catwalk__ex__Irikar__Boss_Room__Above_Catwalk_1),
+            "Giguna > Breachable Wall > West Mid-air ==> Irikar > East Rooftops > East Mid-air (1)" => Ok(ExitId::Giguna__Breachable_Wall__West_Mid_air__ex__Irikar__East_Rooftops__East_Mid_air_1),
             "Giguna > Building Interior > Entry ==> Bookshelf (1)" => Ok(ExitId::Giguna__Building_Interior__Entry__ex__Bookshelf_1),
             "Giguna > Building Interior > Entry ==> Bookshelf (2)" => Ok(ExitId::Giguna__Building_Interior__Entry__ex__Bookshelf_2),
             "Giguna > Building Interior > Entry ==> Giguna Base > Building Entry (1)" => Ok(ExitId::Giguna__Building_Interior__Entry__ex__Giguna_Base__Building_Entry_1),
@@ -8774,6 +9116,7 @@ impl std::str::FromStr for ExitId {
             "Glacier > Vertical Room > West 8 ==> Peak > East 8 (1)" => Ok(ExitId::Glacier__Vertical_Room__West_8__ex__Peak__East_8_1),
             "Glacier > Vertical Room > West 9 ==> Ledge Grab Room > East 9 (1)" => Ok(ExitId::Glacier__Vertical_Room__West_9__ex__Ledge_Grab_Room__East_9_1),
             "Irikar > Abandoned Room > West ==> Basement Portal > East 27 (1)" => Ok(ExitId::Irikar__Abandoned_Room__West__ex__Basement_Portal__East_27_1),
+            "Irikar > Airy > Middle South ==> Sight Room > Above Room North (1)" => Ok(ExitId::Irikar__Airy__Middle_South__ex__Sight_Room__Above_Room_North_1),
             "Irikar > Basement Pipes > Bricks Under Pipes ==> Double Pipe Right (1)" => Ok(ExitId::Irikar__Basement_Pipes__Bricks_Under_Pipes__ex__Double_Pipe_Right_1),
             "Irikar > Basement Pipes > Bricks Under Pipes ==> Double Pipe Right (2)" => Ok(ExitId::Irikar__Basement_Pipes__Bricks_Under_Pipes__ex__Double_Pipe_Right_2),
             "Irikar > Basement Pipes > Double Pipe Left ==> High Pipe (1)" => Ok(ExitId::Irikar__Basement_Pipes__Double_Pipe_Left__ex__High_Pipe_1),
@@ -8801,6 +9144,17 @@ impl std::str::FromStr for ExitId {
             "Irikar > Basement Portal > Portal Stand ==> Moving Platform Start (1)" => Ok(ExitId::Irikar__Basement_Portal__Portal_Stand__ex__Moving_Platform_Start_1),
             "Irikar > Basement Portal > West 28 ==> Basement Pipes > East 28 (1)" => Ok(ExitId::Irikar__Basement_Portal__West_28__ex__Basement_Pipes__East_28_1),
             "Irikar > Basement Portal > West 28 ==> Moving Platform Start (1)" => Ok(ExitId::Irikar__Basement_Portal__West_28__ex__Moving_Platform_Start_1),
+            "Irikar > Boss Room > Catwalk East ==> Lamassu > Catwalk West (1)" => Ok(ExitId::Irikar__Boss_Room__Catwalk_East__ex__Lamassu__Catwalk_West_1),
+            "Irikar > Boss Room > Catwalk West ==> Upper Rooftops (1)" => Ok(ExitId::Irikar__Boss_Room__Catwalk_West__ex__Upper_Rooftops_1),
+            "Irikar > Boss Room > East 28 ==> Lamassu > West 28 (1)" => Ok(ExitId::Irikar__Boss_Room__East_28__ex__Lamassu__West_28_1),
+            "Irikar > Boss Room > Upper Rooftops ==> East Rooftops > Off the Edge (1)" => Ok(ExitId::Irikar__Boss_Room__Upper_Rooftops__ex__East_Rooftops__Off_the_Edge_1),
+            "Irikar > Boss Room > West 28 ==> Empty Foyer > East (1)" => Ok(ExitId::Irikar__Boss_Room__West_28__ex__Empty_Foyer__East_1),
+            "Irikar > East Rooftops > Directly Down ==> Boss Room > Northwest (1)" => Ok(ExitId::Irikar__East_Rooftops__Directly_Down__ex__Boss_Room__Northwest_1),
+            "Irikar > East Rooftops > East Mid-air ==> Giguna > Breachable Wall > West Mid-air (1)" => Ok(ExitId::Irikar__East_Rooftops__East_Mid_air__ex__Giguna__Breachable_Wall__West_Mid_air_1),
+            "Irikar > East Rooftops > East Mid-air ==> Top Rooftop (1)" => Ok(ExitId::Irikar__East_Rooftops__East_Mid_air__ex__Top_Rooftop_1),
+            "Irikar > East Rooftops > Off the Edge ==> Top Rooftop (1)" => Ok(ExitId::Irikar__East_Rooftops__Off_the_Edge__ex__Top_Rooftop_1),
+            "Irikar > East Rooftops > Off the Edge ==> Top Rooftop (2)" => Ok(ExitId::Irikar__East_Rooftops__Off_the_Edge__ex__Top_Rooftop_2),
+            "Irikar > East Rooftops > Upper West ==> East Mid-air (1)" => Ok(ExitId::Irikar__East_Rooftops__Upper_West__ex__East_Mid_air_1),
             "Irikar > Empty Foyer > East ==> Boss Room > West 28 (1)" => Ok(ExitId::Irikar__Empty_Foyer__East__ex__Boss_Room__West_28_1),
             "Irikar > Empty Foyer > West ==> Basement Portal > East 28 (1)" => Ok(ExitId::Irikar__Empty_Foyer__West__ex__Basement_Portal__East_28_1),
             "Irikar > Hub > Bowl Middle Ledge ==> Bowl Top Platform (1)" => Ok(ExitId::Irikar__Hub__Bowl_Middle_Ledge__ex__Bowl_Top_Platform_1),
@@ -8817,8 +9171,17 @@ impl std::str::FromStr for ExitId {
             "Irikar > Hub > Sat Tower East 24 ==> Sight Room > West 24 (1)" => Ok(ExitId::Irikar__Hub__Sat_Tower_East_24__ex__Sight_Room__West_24_1),
             "Irikar > Hub > Sat Tower Floating Platform ==> Sat Tower Top Ledge (1)" => Ok(ExitId::Irikar__Hub__Sat_Tower_Floating_Platform__ex__Sat_Tower_Top_Ledge_1),
             "Irikar > Hub > Sat Tower Middle Ledge ==> Sat Tower Floating Platform (1)" => Ok(ExitId::Irikar__Hub__Sat_Tower_Middle_Ledge__ex__Sat_Tower_Floating_Platform_1),
+            "Irikar > Hub > Sat Tower Northeast ==> Airy > Northwest (1)" => Ok(ExitId::Irikar__Hub__Sat_Tower_Northeast__ex__Airy__Northwest_1),
             "Irikar > Hub > Save Point ==> Bowl Hole (1)" => Ok(ExitId::Irikar__Hub__Save_Point__ex__Bowl_Hole_1),
             "Irikar > Hub > West Rim ==> East Rim (1)" => Ok(ExitId::Irikar__Hub__West_Rim__ex__East_Rim_1),
+            "Irikar > Lamassu > Catwalk Middle ==> Desk (1)" => Ok(ExitId::Irikar__Lamassu__Catwalk_Middle__ex__Desk_1),
+            "Irikar > Lamassu > Catwalk Middle ==> Hidden Passage West (1)" => Ok(ExitId::Irikar__Lamassu__Catwalk_Middle__ex__Hidden_Passage_West_1),
+            "Irikar > Lamassu > Catwalk West ==> Boss Room > Catwalk East (1)" => Ok(ExitId::Irikar__Lamassu__Catwalk_West__ex__Boss_Room__Catwalk_East_1),
+            "Irikar > Lamassu > East 26 ==> Uhrum > West Entrance > West 26 (1)" => Ok(ExitId::Irikar__Lamassu__East_26__ex__Uhrum__West_Entrance__West_26_1),
+            "Irikar > Lamassu > East 27 ==> Uhrum > West Entrance > West 27 (1)" => Ok(ExitId::Irikar__Lamassu__East_27__ex__Uhrum__West_Entrance__West_27_1),
+            "Irikar > Lamassu > Hidden Passage East ==> Uhrum > West Entrance > Hidden Passage West (1)" => Ok(ExitId::Irikar__Lamassu__Hidden_Passage_East__ex__Uhrum__West_Entrance__Hidden_Passage_West_1),
+            "Irikar > Lamassu > West 28 ==> Boss Room > East 28 (1)" => Ok(ExitId::Irikar__Lamassu__West_28__ex__Boss_Room__East_28_1),
+            "Irikar > Sight Room > Above Room East ==> East Rooftops > Upper West (1)" => Ok(ExitId::Irikar__Sight_Room__Above_Room_East__ex__East_Rooftops__Upper_West_1),
             "Irikar > Sight Room > West 24 ==> Hub > Sat Tower East 24 (1)" => Ok(ExitId::Irikar__Sight_Room__West_24__ex__Hub__Sat_Tower_East_24_1),
             "Irikar Breach > Exit Corridor > East ==> Uhrum Connector > West (1)" => Ok(ExitId::Irikar_Breach__Exit_Corridor__East__ex__Uhrum_Connector__West_1),
             "Irikar Breach > Exit Corridor > North 12 ==> Pillar (1)" => Ok(ExitId::Irikar_Breach__Exit_Corridor__North_12__ex__Pillar_1),
@@ -8924,6 +9287,7 @@ pub enum ActionId {
     Giguna__Carnelian__Switch__Open_Door,
     Giguna__Carnelian__Upper_Susar__Caught,
     Giguna__Carnelian__Upper_Susar__Hack,
+    Giguna__Clouds__Platform_Start__Hack_and_Get_Off_Early,
     Giguna__Clouds__Platform_Start__Hack_and_Ride_to_Portal,
     Giguna__Clouds__Platform_Start__Hack_Deploy_Ride_to_Portal,
     Giguna__East_Caverns__Lower_Susar__Caught,
@@ -9091,6 +9455,11 @@ impl fmt::Display for ActionId {
             ActionId::Giguna__Carnelian__Upper_Susar__Hack => {
                 write!(f, "{}", "Giguna > Carnelian > Upper Susar > Hack")
             }
+            ActionId::Giguna__Clouds__Platform_Start__Hack_and_Get_Off_Early => write!(
+                f,
+                "{}",
+                "Giguna > Clouds > Platform Start > Hack and Get Off Early"
+            ),
             ActionId::Giguna__Clouds__Platform_Start__Hack_and_Ride_to_Portal => write!(
                 f,
                 "{}",
@@ -9381,6 +9750,9 @@ impl std::str::FromStr for ActionId {
             "Giguna > Carnelian > Upper Susar > Hack" => {
                 Ok(ActionId::Giguna__Carnelian__Upper_Susar__Hack)
             }
+            "Giguna > Clouds > Platform Start > Hack and Get Off Early" => {
+                Ok(ActionId::Giguna__Clouds__Platform_Start__Hack_and_Get_Off_Early)
+            }
             "Giguna > Clouds > Platform Start > Hack and Ride to Portal" => {
                 Ok(ActionId::Giguna__Clouds__Platform_Start__Hack_and_Ride_to_Portal)
             }
@@ -9570,7 +9942,7 @@ pub enum CanonId {
     Ebih_Waterfall_Wall,
     Ebih_West_Block,
     Infect,
-    Defeat_Ebih_Alu,
+    Ebih_Alu,
     Remote_Drone,
     Giguna_Northeast_Gate,
     Giguna_Northeast_Flask,
@@ -9584,6 +9956,7 @@ pub enum CanonId {
     Ledge_Grab,
     Irikar_Royal_Storage_Wall,
     Irikar_Royal_Storage_Flask,
+    Irikar_Gudam,
 }
 impl fmt::Display for CanonId {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
@@ -9607,7 +9980,7 @@ impl fmt::Display for CanonId {
             CanonId::Ebih_Waterfall_Wall => write!(f, "{}", "Ebih_Waterfall_Wall"),
             CanonId::Ebih_West_Block => write!(f, "{}", "Ebih_West_Block"),
             CanonId::Infect => write!(f, "{}", "Infect"),
-            CanonId::Defeat_Ebih_Alu => write!(f, "{}", "Defeat_Ebih_Alu"),
+            CanonId::Ebih_Alu => write!(f, "{}", "Ebih_Alu"),
             CanonId::Remote_Drone => write!(f, "{}", "Remote_Drone"),
             CanonId::Giguna_Northeast_Gate => write!(f, "{}", "Giguna_Northeast_Gate"),
             CanonId::Giguna_Northeast_Flask => write!(f, "{}", "Giguna_Northeast_Flask"),
@@ -9621,6 +9994,7 @@ impl fmt::Display for CanonId {
             CanonId::Ledge_Grab => write!(f, "{}", "Ledge_Grab"),
             CanonId::Irikar_Royal_Storage_Wall => write!(f, "{}", "Irikar_Royal_Storage_Wall"),
             CanonId::Irikar_Royal_Storage_Flask => write!(f, "{}", "Irikar_Royal_Storage_Flask"),
+            CanonId::Irikar_Gudam => write!(f, "{}", "Irikar_Gudam"),
         }
     }
 }
@@ -9646,7 +10020,7 @@ impl std::str::FromStr for CanonId {
             "Ebih_Waterfall_Wall" => Ok(CanonId::Ebih_Waterfall_Wall),
             "Ebih_West_Block" => Ok(CanonId::Ebih_West_Block),
             "Infect" => Ok(CanonId::Infect),
-            "Defeat_Ebih_Alu" => Ok(CanonId::Defeat_Ebih_Alu),
+            "Ebih_Alu" => Ok(CanonId::Ebih_Alu),
             "Remote_Drone" => Ok(CanonId::Remote_Drone),
             "Giguna_Northeast_Gate" => Ok(CanonId::Giguna_Northeast_Gate),
             "Giguna_Northeast_Flask" => Ok(CanonId::Giguna_Northeast_Flask),
@@ -9660,6 +10034,7 @@ impl std::str::FromStr for CanonId {
             "Ledge_Grab" => Ok(CanonId::Ledge_Grab),
             "Irikar_Royal_Storage_Wall" => Ok(CanonId::Irikar_Royal_Storage_Wall),
             "Irikar_Royal_Storage_Flask" => Ok(CanonId::Irikar_Royal_Storage_Flask),
+            "Irikar_Gudam" => Ok(CanonId::Irikar_Gudam),
             _ => Err(format!("Could not recognize as a CanonId: {}", s)),
         }
     }

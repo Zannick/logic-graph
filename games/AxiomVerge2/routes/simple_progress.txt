@@ -25,7 +25,7 @@
 * Collect Flask from Ebih > Grid 25,2-6 > Pit > Item
 ! Do Recall Drone
 * Collect Health_Node from Ebih > Boss Room > East Ledge > Item
-* Collect Defeat_Ebih_Alu from Ebih > Boss Room > Boss > Fight Alu
+* Collect Ebih_Alu from Ebih > Boss Room > Boss > Fight Alu
 * Collect Flask from Ebih > Boss Room > Boss > Boss Reward
 
   Move... to Amagi > Main Area > Platform 2

@@ -115,11 +115,11 @@ pub enum Expectation {
     CommemorativeSpeech(bool),
     CompaniesLayoff(bool),
     DearErnest(bool),
-    DefeatEbihAlu(bool),
     DefeatMUSAM20(bool),
     DroneHover(bool),
     DroneMeleeDamage(i8),
     DroneMeleeSpeed(i8),
+    EbihAlu(bool),
     EbihInterchangeBlock(bool),
     EbihInterchangeGate(bool),
     EbihWastelandDoor(bool),
@@ -146,6 +146,7 @@ pub enum Expectation {
     Infect(i8),
     InfectionRange(i8),
     InfectionSpeed(bool),
+    IrikarGudam(bool),
     IrikarRoyalStorageWall(bool),
     LedgeGrab(bool),
     LetterFromTrace(bool),
@@ -572,11 +573,21 @@ pub mod data {
             SpotId::Irikar__Hub__Sat_Tower_Middle_Ledge => {
                 SpotId::Irikar_Breach__Gauntlet__Save_Point
             }
+            SpotId::Irikar__Hub__Sat_Tower_Northeast => SpotId::Irikar_Breach__Gauntlet__Save_Point,
             SpotId::Irikar__Hub__Sat_Tower_Roof_East => SpotId::Irikar_Breach__Gauntlet__Save_Point,
             SpotId::Irikar__Hub__Sat_Tower_Roof_West => SpotId::Irikar_Breach__Gauntlet__Save_Point,
             SpotId::Irikar__Hub__Sat_Tower_Top_Ledge => SpotId::Irikar_Breach__Gauntlet__Save_Point,
+            SpotId::Irikar__Hub__Sat_Tower_West_Valley => {
+                SpotId::Irikar_Breach__Gauntlet__Save_Point
+            }
             SpotId::Irikar__Hub__Save_Point => SpotId::Irikar_Breach__Gauntlet__Save_Point,
             SpotId::Irikar__Hub__West_Rim => SpotId::Irikar_Breach__Gauntlet__Save_Point,
+            SpotId::Irikar__Sight_Room__Above_Room_East => {
+                SpotId::Irikar_Breach__Save_Room__Save_Point
+            }
+            SpotId::Irikar__Sight_Room__Above_Room_North => {
+                SpotId::Irikar_Breach__Save_Room__Save_Point
+            }
             SpotId::Irikar__Sight_Room__Item_Pedestal => {
                 SpotId::Irikar_Breach__Save_Room__Save_Point
             }
@@ -646,9 +657,9 @@ pub mod flags {
             const COMMEMORATIVE_SPEECH = 0x800;
             const COMPANIES_LAYOFF = 0x1000;
             const DEAR_ERNEST = 0x2000;
-            const DEFEAT_EBIH_ALU = 0x4000;
-            const DEFEAT_MUS_A_M20 = 0x8000;
-            const DRONE_HOVER = 0x10000;
+            const DEFEAT_MUS_A_M20 = 0x4000;
+            const DRONE_HOVER = 0x8000;
+            const EBIH_ALU = 0x10000;
             const EBIH_INTERCHANGE_BLOCK = 0x20000;
             const EBIH_INTERCHANGE_GATE = 0x40000;
             const EBIH_WASTELAND_DOOR = 0x80000;
@@ -675,28 +686,29 @@ pub mod flags {
             const HERETICS_TABLET = 0x8;
             const ICE_AXE = 0x10;
             const INFECTION_SPEED = 0x20;
-            const IRIKAR_ROYAL_STORAGE_WALL = 0x40;
-            const LEDGE_GRAB = 0x80;
-            const LETTER_FROM_TRACE = 0x100;
-            const MAP_17_10 = 0x200;
-            const MIST_UPGRADE = 0x400;
-            const NANITE_MIST = 0x800;
-            const POWER_MATRIX = 0x1000;
-            const RECORD_LOSSES = 0x2000;
-            const REMOTE_DRONE = 0x4000;
-            const RESEARCHERS_MISSING = 0x8000;
-            const SHOCKWAVE = 0x10000;
-            const SLINGSHOT_CHARGE = 0x20000;
-            const SLINGSHOT_HOOK = 0x40000;
-            const SLINGSHOT_WEAPON = 0x80000;
-            const STATION_POWER = 0x100000;
-            const SWITCH_36_11 = 0x200000;
-            const SWITCH_40_12 = 0x400000;
-            const TERMINAL_BREAKTHROUGH_1 = 0x800000;
-            const THE_IDEAL_KIENGIR = 0x1000000;
-            const UNDER_SIEGE = 0x2000000;
-            const UNDERWATER_MOVEMENT = 0x4000000;
-            const WALL_CLIMB = 0x8000000;
+            const IRIKAR_GUDAM = 0x40;
+            const IRIKAR_ROYAL_STORAGE_WALL = 0x80;
+            const LEDGE_GRAB = 0x100;
+            const LETTER_FROM_TRACE = 0x200;
+            const MAP_17_10 = 0x400;
+            const MIST_UPGRADE = 0x800;
+            const NANITE_MIST = 0x1000;
+            const POWER_MATRIX = 0x2000;
+            const RECORD_LOSSES = 0x4000;
+            const REMOTE_DRONE = 0x8000;
+            const RESEARCHERS_MISSING = 0x10000;
+            const SHOCKWAVE = 0x20000;
+            const SLINGSHOT_CHARGE = 0x40000;
+            const SLINGSHOT_HOOK = 0x80000;
+            const SLINGSHOT_WEAPON = 0x100000;
+            const STATION_POWER = 0x200000;
+            const SWITCH_36_11 = 0x400000;
+            const SWITCH_40_12 = 0x800000;
+            const TERMINAL_BREAKTHROUGH_1 = 0x1000000;
+            const THE_IDEAL_KIENGIR = 0x2000000;
+            const UNDER_SIEGE = 0x4000000;
+            const UNDERWATER_MOVEMENT = 0x8000000;
+            const WALL_CLIMB = 0x10000000;
         }
     }
 }
@@ -794,7 +806,7 @@ impl context::Ctx for Context {
     type RegionId = RegionId;
     type MovementState = movements::MovementState;
     type Expectation = Expectation;
-    const NUM_ITEMS: u32 = 75;
+    const NUM_ITEMS: u32 = 76;
 
     fn has(&self, item: Item) -> bool {
         match item {
@@ -831,11 +843,11 @@ impl context::Ctx for Context {
                 .contains(flags::ContextBits2::COMMEMORATIVE_SPEECH),
             Item::Companies_Layoff => self.cbits2.contains(flags::ContextBits2::COMPANIES_LAYOFF),
             Item::Dear_Ernest => self.cbits2.contains(flags::ContextBits2::DEAR_ERNEST),
-            Item::Defeat_Ebih_Alu => self.cbits2.contains(flags::ContextBits2::DEFEAT_EBIH_ALU),
             Item::Defeat_MUS_A_M20 => self.cbits2.contains(flags::ContextBits2::DEFEAT_MUS_A_M20),
             Item::Drone_Hover => self.cbits2.contains(flags::ContextBits2::DRONE_HOVER),
             Item::Drone_Melee_Damage => self.drone_melee_damage >= 1,
             Item::Drone_Melee_Speed => self.drone_melee_speed >= 1,
+            Item::Ebih_Alu => self.cbits2.contains(flags::ContextBits2::EBIH_ALU),
             Item::Ebih_Interchange_Block => self
                 .cbits2
                 .contains(flags::ContextBits2::EBIH_INTERCHANGE_BLOCK),
@@ -886,6 +898,7 @@ impl context::Ctx for Context {
             Item::Infect => self.infect >= 1,
             Item::Infection_Range => self.infection_range >= 1,
             Item::Infection_Speed => self.cbits3.contains(flags::ContextBits3::INFECTION_SPEED),
+            Item::Irikar_Gudam => self.cbits3.contains(flags::ContextBits3::IRIKAR_GUDAM),
             Item::Irikar_Royal_Storage_Wall => self
                 .cbits3
                 .contains(flags::ContextBits3::IRIKAR_ROYAL_STORAGE_WALL),
@@ -982,10 +995,6 @@ impl context::Ctx for Context {
                 .cbits2
                 .contains(flags::ContextBits2::DEAR_ERNEST)
                 .into(),
-            Item::Defeat_Ebih_Alu => self
-                .cbits2
-                .contains(flags::ContextBits2::DEFEAT_EBIH_ALU)
-                .into(),
             Item::Defeat_MUS_A_M20 => self
                 .cbits2
                 .contains(flags::ContextBits2::DEFEAT_MUS_A_M20)
@@ -996,6 +1005,7 @@ impl context::Ctx for Context {
                 .into(),
             Item::Drone_Melee_Damage => self.drone_melee_damage.into(),
             Item::Drone_Melee_Speed => self.drone_melee_speed.into(),
+            Item::Ebih_Alu => self.cbits2.contains(flags::ContextBits2::EBIH_ALU).into(),
             Item::Ebih_Interchange_Block => self
                 .cbits2
                 .contains(flags::ContextBits2::EBIH_INTERCHANGE_BLOCK)
@@ -1081,6 +1091,10 @@ impl context::Ctx for Context {
             Item::Infection_Speed => self
                 .cbits3
                 .contains(flags::ContextBits3::INFECTION_SPEED)
+                .into(),
+            Item::Irikar_Gudam => self
+                .cbits3
+                .contains(flags::ContextBits3::IRIKAR_GUDAM)
                 .into(),
             Item::Irikar_Royal_Storage_Wall => self
                 .cbits3
@@ -1220,9 +1234,6 @@ impl context::Ctx for Context {
             Item::Dear_Ernest => {
                 self.cbits2.insert(flags::ContextBits2::DEAR_ERNEST);
             },
-            Item::Defeat_Ebih_Alu => {
-                self.cbits2.insert(flags::ContextBits2::DEFEAT_EBIH_ALU);
-            },
             Item::Defeat_MUS_A_M20 => {
                 self.cbits2.insert(flags::ContextBits2::DEFEAT_MUS_A_M20);
                 rules::action_skip__amagi__west_lake__cavern_refill_station__break_wall_add_item__amagi_dragon_eye_passage(self);
@@ -1235,6 +1246,9 @@ impl context::Ctx for Context {
             },
             Item::Drone_Melee_Speed => {
                 self.drone_melee_speed += 1;
+            },
+            Item::Ebih_Alu => {
+                self.cbits2.insert(flags::ContextBits2::EBIH_ALU);
             },
             Item::Ebih_Interchange_Block => {
                 self.cbits2.insert(flags::ContextBits2::EBIH_INTERCHANGE_BLOCK);
@@ -1316,6 +1330,9 @@ impl context::Ctx for Context {
             },
             Item::Infection_Speed => {
                 self.cbits3.insert(flags::ContextBits3::INFECTION_SPEED);
+            },
+            Item::Irikar_Gudam => {
+                self.cbits3.insert(flags::ContextBits3::IRIKAR_GUDAM);
             },
             Item::Irikar_Royal_Storage_Wall => {
                 self.cbits3.insert(flags::ContextBits3::IRIKAR_ROYAL_STORAGE_WALL);
@@ -1469,9 +1486,6 @@ impl context::Ctx for Context {
             Item::Dear_Ernest => {
                 self.cbits2.insert(flags::ContextBits2::DEAR_ERNEST);
             }
-            Item::Defeat_Ebih_Alu => {
-                self.cbits2.insert(flags::ContextBits2::DEFEAT_EBIH_ALU);
-            }
             Item::Defeat_MUS_A_M20 => {
                 self.cbits2.insert(flags::ContextBits2::DEFEAT_MUS_A_M20);
             }
@@ -1483,6 +1497,9 @@ impl context::Ctx for Context {
             }
             Item::Drone_Melee_Speed => {
                 self.drone_melee_speed += 1;
+            }
+            Item::Ebih_Alu => {
+                self.cbits2.insert(flags::ContextBits2::EBIH_ALU);
             }
             Item::Ebih_Interchange_Block => {
                 self.cbits2
@@ -1570,6 +1587,9 @@ impl context::Ctx for Context {
             }
             Item::Infection_Speed => {
                 self.cbits3.insert(flags::ContextBits3::INFECTION_SPEED);
+            }
+            Item::Irikar_Gudam => {
+                self.cbits3.insert(flags::ContextBits3::IRIKAR_GUDAM);
             }
             Item::Irikar_Royal_Storage_Wall => {
                 self.cbits3
@@ -2497,14 +2517,6 @@ impl context::Ctx for Context {
                     ckey, cval
                 ));
             }
-            ("Defeat_Ebih_Alu", Yaml::Boolean(b)) => Expectation::DefeatEbihAlu(*b),
-            ("Defeat_Ebih_Alu", Yaml::Integer(i)) => Expectation::DefeatEbihAlu(*i > 0),
-            ("Defeat_Ebih_Alu", _) => {
-                return Err(format!(
-                    "Key {:?} has value of disallowed type: {:?}",
-                    ckey, cval
-                ));
-            }
             ("Defeat_MUS_A_M20", Yaml::Boolean(b)) => Expectation::DefeatMUSAM20(*b),
             ("Defeat_MUS_A_M20", Yaml::Integer(i)) => Expectation::DefeatMUSAM20(*i > 0),
             ("Defeat_MUS_A_M20", _) => {
@@ -2534,6 +2546,14 @@ impl context::Ctx for Context {
                 Expectation::DroneMeleeSpeed(i8::try_from(*i).map_err(|e| format!("{}", e))?)
             }
             ("Drone_Melee_Speed", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("Ebih_Alu", Yaml::Boolean(b)) => Expectation::EbihAlu(*b),
+            ("Ebih_Alu", Yaml::Integer(i)) => Expectation::EbihAlu(*i > 0),
+            ("Ebih_Alu", _) => {
                 return Err(format!(
                     "Key {:?} has value of disallowed type: {:?}",
                     ckey, cval
@@ -2763,6 +2783,14 @@ impl context::Ctx for Context {
             ("Infection_Speed", Yaml::Boolean(b)) => Expectation::InfectionSpeed(*b),
             ("Infection_Speed", Yaml::Integer(i)) => Expectation::InfectionSpeed(*i > 0),
             ("Infection_Speed", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("Irikar_Gudam", Yaml::Boolean(b)) => Expectation::IrikarGudam(*b),
+            ("Irikar_Gudam", Yaml::Integer(i)) => Expectation::IrikarGudam(*i > 0),
+            ("Irikar_Gudam", _) => {
                 return Err(format!(
                     "Key {:?} has value of disallowed type: {:?}",
                     ckey, cval
@@ -3437,15 +3465,6 @@ impl context::Ctx for Context {
                         errs.push(format!("Expected {} = {}, got: {}", "Dear_Ernest", e, v));
                     }
                 }
-                Expectation::DefeatEbihAlu(e) => {
-                    let v = self.has(Item::Defeat_Ebih_Alu);
-                    if v != (*e).into() {
-                        errs.push(format!(
-                            "Expected {} = {}, got: {}",
-                            "Defeat_Ebih_Alu", e, v
-                        ));
-                    }
-                }
                 Expectation::DefeatMUSAM20(e) => {
                     let v = self.has(Item::Defeat_MUS_A_M20);
                     if v != (*e).into() {
@@ -3477,6 +3496,12 @@ impl context::Ctx for Context {
                             "Expected {} = {}, got: {}",
                             "Drone_Melee_Speed", e, v
                         ));
+                    }
+                }
+                Expectation::EbihAlu(e) => {
+                    let v = self.has(Item::Ebih_Alu);
+                    if v != (*e).into() {
+                        errs.push(format!("Expected {} = {}, got: {}", "Ebih_Alu", e, v));
                     }
                 }
                 Expectation::EbihInterchangeBlock(e) => {
@@ -3684,6 +3709,12 @@ impl context::Ctx for Context {
                             "Expected {} = {}, got: {}",
                             "Infection_Speed", e, v
                         ));
+                    }
+                }
+                Expectation::IrikarGudam(e) => {
+                    let v = self.has(Item::Irikar_Gudam);
+                    if v != (*e).into() {
+                        errs.push(format!("Expected {} = {}, got: {}", "Irikar_Gudam", e, v));
                     }
                 }
                 Expectation::IrikarRoyalStorageWall(e) => {
@@ -4020,6 +4051,11 @@ impl context::Ctx for Context {
                     rules::action_reset_old_area__newpos(self, pos);
                 }
             }
+            AreaId::Giguna__Breachable_Wall => {
+                if get_area(self.position) != area {
+                    rules::action_reset_old_area__newpos(self, pos);
+                }
+            }
             AreaId::Giguna__Building_Interior => {
                 if get_area(self.position) != area {
                     rules::action_reset_old_area__newpos(self, pos);
@@ -4285,6 +4321,11 @@ impl context::Ctx for Context {
                     rules::action_reset_old_area__newpos(self, pos);
                 }
             }
+            AreaId::Irikar__Airy => {
+                if get_area(self.position) != area {
+                    rules::action_reset_old_area__newpos(self, pos);
+                }
+            }
             AreaId::Irikar__Basement_Pipes => {
                 if get_area(self.position) != area {
                     rules::action_reset_old_area__newpos(self, pos);
@@ -4300,12 +4341,22 @@ impl context::Ctx for Context {
                     rules::action_reset_old_area__newpos(self, pos);
                 }
             }
+            AreaId::Irikar__East_Rooftops => {
+                if get_area(self.position) != area {
+                    rules::action_reset_old_area__newpos(self, pos);
+                }
+            }
             AreaId::Irikar__Empty_Foyer => {
                 if get_area(self.position) != area {
                     rules::action_reset_old_area__newpos(self, pos);
                 }
             }
             AreaId::Irikar__Hub => {
+                if get_area(self.position) != area {
+                    rules::action_reset_old_area__newpos(self, pos);
+                }
+            }
+            AreaId::Irikar__Lamassu => {
                 if get_area(self.position) != area {
                     rules::action_reset_old_area__newpos(self, pos);
                 }
@@ -4371,6 +4422,11 @@ impl context::Ctx for Context {
                 }
             }
             AreaId::Irikar_Breach__Worm_Rave => {
+                if get_area(self.position) != area {
+                    rules::action_reset_old_area__newpos(self, pos);
+                }
+            }
+            AreaId::Uhrum__West_Entrance => {
                 if get_area(self.position) != area {
                     rules::action_reset_old_area__newpos(self, pos);
                 }
@@ -5144,11 +5200,6 @@ impl context::Ctx for Context {
         if n != p {
             list.push(format!("{}DEAR_ERNEST", if n { "+" } else { "-" }));
         }
-        let n = self.cbits2.contains(flags::ContextBits2::DEFEAT_EBIH_ALU);
-        let p = old.cbits2.contains(flags::ContextBits2::DEFEAT_EBIH_ALU);
-        if n != p {
-            list.push(format!("{}DEFEAT_EBIH_ALU", if n { "+" } else { "-" }));
-        }
         let n = self.cbits2.contains(flags::ContextBits2::DEFEAT_MUS_A_M20);
         let p = old.cbits2.contains(flags::ContextBits2::DEFEAT_MUS_A_M20);
         if n != p {
@@ -5158,6 +5209,11 @@ impl context::Ctx for Context {
         let p = old.cbits2.contains(flags::ContextBits2::DRONE_HOVER);
         if n != p {
             list.push(format!("{}DRONE_HOVER", if n { "+" } else { "-" }));
+        }
+        let n = self.cbits2.contains(flags::ContextBits2::EBIH_ALU);
+        let p = old.cbits2.contains(flags::ContextBits2::EBIH_ALU);
+        if n != p {
+            list.push(format!("{}EBIH_ALU", if n { "+" } else { "-" }));
         }
         let n = self
             .cbits2
@@ -5335,6 +5391,11 @@ impl context::Ctx for Context {
         let p = old.cbits3.contains(flags::ContextBits3::INFECTION_SPEED);
         if n != p {
             list.push(format!("{}INFECTION_SPEED", if n { "+" } else { "-" }));
+        }
+        let n = self.cbits3.contains(flags::ContextBits3::IRIKAR_GUDAM);
+        let p = old.cbits3.contains(flags::ContextBits3::IRIKAR_GUDAM);
+        if n != p {
+            list.push(format!("{}IRIKAR_GUDAM", if n { "+" } else { "-" }));
         }
         let n = self
             .cbits3

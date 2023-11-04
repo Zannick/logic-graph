@@ -156,10 +156,6 @@ pub fn access_climb_or_hook(ctx: &Context) -> bool {
     // $climb or $hook
     (helper__climb!(ctx) || helper__hook!(ctx))
 }
-pub fn access_defeat_ebih_alu(ctx: &Context) -> bool {
-    // Defeat_Ebih_Alu
-    ctx.has(Item::Defeat_Ebih_Alu)
-}
 pub fn access_defeat_mus_a_m20(ctx: &Context) -> bool {
     // Defeat_MUS_A_M20
     ctx.has(Item::Defeat_MUS_A_M20)
@@ -313,6 +309,10 @@ pub fn access_ebih__waterfall__west_door_right__ex__west_door_1__req(ctx: &Conte
     // ^_west_door_open
     ctx.ebih__waterfall__ctx__west_door_open()
 }
+pub fn access_ebih_alu(ctx: &Context) -> bool {
+    // Ebih_Alu
+    ctx.has(Item::Ebih_Alu)
+}
 pub fn access_ebih_interchange_block(ctx: &Context) -> bool {
     // Ebih_Interchange_Block
     ctx.has(Item::Ebih_Interchange_Block)
@@ -412,6 +412,10 @@ pub fn access_giguna__carnelian__upper_susar__hack__req(ctx: &Context) -> bool {
 pub fn access_giguna__carnelian__vault__ex__door_1__req(ctx: &Context) -> bool {
     // ^_door_opened
     ctx.giguna__carnelian__ctx__door_opened()
+}
+pub fn access_giguna__clouds__platform_start__hack_and_get_off_early__req(ctx: &Context) -> bool {
+    // not ^_platform_and_portal and $activate
+    (!ctx.giguna__clouds__ctx__platform_and_portal() && helper__activate!(ctx))
 }
 pub fn access_giguna__clouds__platform_start__hack_and_ride_to_portal__req(ctx: &Context) -> bool {
     // not ^_platform_and_portal and $activate and $attract and Breach_Sight and Remote_Drone
@@ -876,6 +880,10 @@ pub fn access_hover_or_hook(ctx: &Context) -> bool {
     // $hover or $hook
     (helper__hover!(ctx) || helper__hook!(ctx))
 }
+pub fn access_hover_or_mist2(ctx: &Context) -> bool {
+    // $hover or $mist2
+    (helper__hover!(ctx) || helper__mist2!(ctx))
+}
 pub fn access_infect(ctx: &Context) -> bool {
     // Infect
     ctx.has(Item::Infect)
@@ -917,6 +925,10 @@ pub fn access_irikar__basement_portal__portal_stand__ex__moving_platform_start_1
 ) -> bool {
     // not ^_platform_moved
     !ctx.irikar__basement_portal__ctx__platform_moved()
+}
+pub fn access_irikar_gudam(ctx: &Context) -> bool {
+    // Irikar_Gudam
+    ctx.has(Item::Irikar_Gudam)
 }
 pub fn access_irikar_royal_storage_wall(ctx: &Context) -> bool {
     // Irikar_Royal_Storage_Wall
@@ -1312,6 +1324,10 @@ pub fn action_giguna__carnelian__upper_susar__caught__do(ctx: &mut Context) {
 pub fn action_giguna__carnelian__upper_susar__hack__do(ctx: &mut Context) {
     // ^_upper_susar = true
     ctx.set_giguna__carnelian__ctx__upper_susar(true);
+}
+pub fn action_giguna__clouds__platform_start__hack_and_get_off_early__do(ctx: &mut Context) {
+    // ^_platform_and_portal = true
+    ctx.set_giguna__clouds__ctx__platform_and_portal(true);
 }
 pub fn action_giguna__clouds__platform_start__hack_and_ride_to_portal__do(ctx: &mut Context) {
     // ^_platform_and_portal = true; if (^indra WITHIN ^position) { ^indra = `Giguna > Clouds > Platform Stop` }

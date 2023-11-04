@@ -598,6 +598,7 @@ pub fn get_area(spot: SpotId) -> AreaId {
         | SpotId::Giguna__Clouds__North_Right
         | SpotId::Giguna__Clouds__North_Under_Ledge
         | SpotId::Giguna__Clouds__Platform_Start
+        | SpotId::Giguna__Clouds__Platform_Early
         | SpotId::Giguna__Clouds__Platform_Stop
         | SpotId::Giguna__Clouds__Cache
         | SpotId::Giguna__Clouds__Platform_Early_Portal
@@ -737,6 +738,10 @@ pub fn get_area(spot: SpotId) -> AreaId {
         | SpotId::Giguna__Gubi_Lair__West_Brickwork
         | SpotId::Giguna__Gubi_Lair__Shaft_Bottom
         | SpotId::Giguna__Gubi_Lair__Pedestal => AreaId::Giguna__Gubi_Lair,
+        SpotId::Giguna__Breachable_Wall__West_Mid_air
+        | SpotId::Giguna__Breachable_Wall__Above_West_Catwalk
+        | SpotId::Giguna__Breachable_Wall__Above_Middle_Catwalk
+        | SpotId::Giguna__Breachable_Wall__Wall_Interior => AreaId::Giguna__Breachable_Wall,
         SpotId::Glacier__Dock_Elevator__Elevator | SpotId::Glacier__Dock_Elevator__Connector => {
             AreaId::Glacier__Dock_Elevator
         }
@@ -906,6 +911,8 @@ pub fn get_area(spot: SpotId) -> AreaId {
         | SpotId::Irikar__Hub__Bowl_Hole
         | SpotId::Irikar__Hub__Sat_Tower_Roof_West
         | SpotId::Irikar__Hub__Sat_Tower_Roof_East
+        | SpotId::Irikar__Hub__Sat_Tower_West_Valley
+        | SpotId::Irikar__Hub__Sat_Tower_Northeast
         | SpotId::Irikar__Hub__Sat_Tower_Middle_Ledge
         | SpotId::Irikar__Hub__Sat_Tower_Floating_Platform
         | SpotId::Irikar__Hub__Sat_Tower_Top_Ledge
@@ -924,10 +931,15 @@ pub fn get_area(spot: SpotId) -> AreaId {
         | SpotId::Irikar__Hub__Dagger_Altar
         | SpotId::Irikar__Hub__Royal_Storage_By_Wall
         | SpotId::Irikar__Hub__Royal_Storage_in_Wall => AreaId::Irikar__Hub,
+        SpotId::Irikar__Airy__Northwest | SpotId::Irikar__Airy__Middle_South => {
+            AreaId::Irikar__Airy
+        }
         SpotId::Irikar__Sight_Room__West_24
         | SpotId::Irikar__Sight_Room__Lower_Ledge
         | SpotId::Irikar__Sight_Room__Portal
-        | SpotId::Irikar__Sight_Room__Item_Pedestal => AreaId::Irikar__Sight_Room,
+        | SpotId::Irikar__Sight_Room__Item_Pedestal
+        | SpotId::Irikar__Sight_Room__Above_Room_North
+        | SpotId::Irikar__Sight_Room__Above_Room_East => AreaId::Irikar__Sight_Room,
         SpotId::Irikar__Abandoned_Room__Empty_Pedestal
         | SpotId::Irikar__Abandoned_Room__Corner_Core
         | SpotId::Irikar__Abandoned_Room__West => AreaId::Irikar__Abandoned_Room,
@@ -958,9 +970,22 @@ pub fn get_area(spot: SpotId) -> AreaId {
         SpotId::Irikar__Empty_Foyer__West | SpotId::Irikar__Empty_Foyer__East => {
             AreaId::Irikar__Empty_Foyer
         }
-        SpotId::Irikar__Boss_Room__West_28 | SpotId::Irikar__Boss_Room__East_28 => {
-            AreaId::Irikar__Boss_Room
-        }
+        SpotId::Irikar__Boss_Room__West_28
+        | SpotId::Irikar__Boss_Room__Bulls_Feet
+        | SpotId::Irikar__Boss_Room__East_28
+        | SpotId::Irikar__Boss_Room__Northwest
+        | SpotId::Irikar__Boss_Room__Upper_Rooftops
+        | SpotId::Irikar__Boss_Room__Healthy_Rooftop
+        | SpotId::Irikar__Boss_Room__Sat_Tower_Roof_West
+        | SpotId::Irikar__Boss_Room__Sat_Tower_Roof_East
+        | SpotId::Irikar__Boss_Room__Catwalk_West
+        | SpotId::Irikar__Boss_Room__Catwalk_East
+        | SpotId::Irikar__Boss_Room__Above_Catwalk => AreaId::Irikar__Boss_Room,
+        SpotId::Irikar__East_Rooftops__Upper_West
+        | SpotId::Irikar__East_Rooftops__Top_Rooftop
+        | SpotId::Irikar__East_Rooftops__Directly_Down
+        | SpotId::Irikar__East_Rooftops__Off_the_Edge
+        | SpotId::Irikar__East_Rooftops__East_Mid_air => AreaId::Irikar__East_Rooftops,
         SpotId::Irikar__Midwest__East_23
         | SpotId::Irikar__Midwest__East_24_on_Building
         | SpotId::Irikar__Midwest__East_24_on_Floor
@@ -968,10 +993,27 @@ pub fn get_area(spot: SpotId) -> AreaId {
         | SpotId::Irikar__Midwest__East_26
         | SpotId::Irikar__Midwest__East_27
         | SpotId::Irikar__Midwest__East_28 => AreaId::Irikar__Midwest,
+        SpotId::Irikar__Lamassu__West_28
+        | SpotId::Irikar__Lamassu__Bottom_Middle
+        | SpotId::Irikar__Lamassu__East_27
+        | SpotId::Irikar__Lamassu__East_26
+        | SpotId::Irikar__Lamassu__Desk
+        | SpotId::Irikar__Lamassu__Hidden_Passage_East
+        | SpotId::Irikar__Lamassu__Hidden_Passage_West
+        | SpotId::Irikar__Lamassu__Northwest
+        | SpotId::Irikar__Lamassu__Catwalk_West
+        | SpotId::Irikar__Lamassu__Catwalk_Middle => AreaId::Irikar__Lamassu,
         SpotId::Menu__Upgrade_Menu__Physiology
         | SpotId::Menu__Upgrade_Menu__Combat
         | SpotId::Menu__Upgrade_Menu__Infection
         | SpotId::Menu__Upgrade_Menu__Drone => AreaId::Menu__Upgrade_Menu,
+        SpotId::Uhrum__West_Entrance__West_27
+        | SpotId::Uhrum__West_Entrance__West_26
+        | SpotId::Uhrum__West_Entrance__Hidden_Passage_West
+        | SpotId::Uhrum__West_Entrance__Hidden_Passage_Entry
+        | SpotId::Uhrum__West_Entrance__West_25
+        | SpotId::Uhrum__West_Entrance__Save_Point
+        | SpotId::Uhrum__West_Entrance__Portal_Stand => AreaId::Uhrum__West_Entrance,
     }
 }
 pub fn get_region(spot: SpotId) -> RegionId {
@@ -1548,6 +1590,7 @@ pub fn get_region(spot: SpotId) -> RegionId {
         | SpotId::Giguna__Clouds__North_Right
         | SpotId::Giguna__Clouds__North_Under_Ledge
         | SpotId::Giguna__Clouds__Platform_Start
+        | SpotId::Giguna__Clouds__Platform_Early
         | SpotId::Giguna__Clouds__Platform_Stop
         | SpotId::Giguna__Clouds__Cache
         | SpotId::Giguna__Clouds__Platform_Early_Portal
@@ -1687,6 +1730,10 @@ pub fn get_region(spot: SpotId) -> RegionId {
         | SpotId::Giguna__Gubi_Lair__West_Brickwork
         | SpotId::Giguna__Gubi_Lair__Shaft_Bottom
         | SpotId::Giguna__Gubi_Lair__Pedestal => RegionId::Giguna,
+        SpotId::Giguna__Breachable_Wall__West_Mid_air
+        | SpotId::Giguna__Breachable_Wall__Above_West_Catwalk
+        | SpotId::Giguna__Breachable_Wall__Above_Middle_Catwalk
+        | SpotId::Giguna__Breachable_Wall__Wall_Interior => RegionId::Giguna,
         SpotId::Glacier__Dock_Elevator__Elevator | SpotId::Glacier__Dock_Elevator__Connector => {
             RegionId::Glacier
         }
@@ -1852,6 +1899,8 @@ pub fn get_region(spot: SpotId) -> RegionId {
         | SpotId::Irikar__Hub__Bowl_Hole
         | SpotId::Irikar__Hub__Sat_Tower_Roof_West
         | SpotId::Irikar__Hub__Sat_Tower_Roof_East
+        | SpotId::Irikar__Hub__Sat_Tower_West_Valley
+        | SpotId::Irikar__Hub__Sat_Tower_Northeast
         | SpotId::Irikar__Hub__Sat_Tower_Middle_Ledge
         | SpotId::Irikar__Hub__Sat_Tower_Floating_Platform
         | SpotId::Irikar__Hub__Sat_Tower_Top_Ledge
@@ -1870,10 +1919,13 @@ pub fn get_region(spot: SpotId) -> RegionId {
         | SpotId::Irikar__Hub__Dagger_Altar
         | SpotId::Irikar__Hub__Royal_Storage_By_Wall
         | SpotId::Irikar__Hub__Royal_Storage_in_Wall => RegionId::Irikar,
+        SpotId::Irikar__Airy__Northwest | SpotId::Irikar__Airy__Middle_South => RegionId::Irikar,
         SpotId::Irikar__Sight_Room__West_24
         | SpotId::Irikar__Sight_Room__Lower_Ledge
         | SpotId::Irikar__Sight_Room__Portal
-        | SpotId::Irikar__Sight_Room__Item_Pedestal => RegionId::Irikar,
+        | SpotId::Irikar__Sight_Room__Item_Pedestal
+        | SpotId::Irikar__Sight_Room__Above_Room_North
+        | SpotId::Irikar__Sight_Room__Above_Room_East => RegionId::Irikar,
         SpotId::Irikar__Abandoned_Room__Empty_Pedestal
         | SpotId::Irikar__Abandoned_Room__Corner_Core
         | SpotId::Irikar__Abandoned_Room__West => RegionId::Irikar,
@@ -1902,7 +1954,22 @@ pub fn get_region(spot: SpotId) -> RegionId {
         | SpotId::Irikar__Basement_Pipes__West_27
         | SpotId::Irikar__Basement_Pipes__High_Pipe => RegionId::Irikar,
         SpotId::Irikar__Empty_Foyer__West | SpotId::Irikar__Empty_Foyer__East => RegionId::Irikar,
-        SpotId::Irikar__Boss_Room__West_28 | SpotId::Irikar__Boss_Room__East_28 => RegionId::Irikar,
+        SpotId::Irikar__Boss_Room__West_28
+        | SpotId::Irikar__Boss_Room__Bulls_Feet
+        | SpotId::Irikar__Boss_Room__East_28
+        | SpotId::Irikar__Boss_Room__Northwest
+        | SpotId::Irikar__Boss_Room__Upper_Rooftops
+        | SpotId::Irikar__Boss_Room__Healthy_Rooftop
+        | SpotId::Irikar__Boss_Room__Sat_Tower_Roof_West
+        | SpotId::Irikar__Boss_Room__Sat_Tower_Roof_East
+        | SpotId::Irikar__Boss_Room__Catwalk_West
+        | SpotId::Irikar__Boss_Room__Catwalk_East
+        | SpotId::Irikar__Boss_Room__Above_Catwalk => RegionId::Irikar,
+        SpotId::Irikar__East_Rooftops__Upper_West
+        | SpotId::Irikar__East_Rooftops__Top_Rooftop
+        | SpotId::Irikar__East_Rooftops__Directly_Down
+        | SpotId::Irikar__East_Rooftops__Off_the_Edge
+        | SpotId::Irikar__East_Rooftops__East_Mid_air => RegionId::Irikar,
         SpotId::Irikar__Midwest__East_23
         | SpotId::Irikar__Midwest__East_24_on_Building
         | SpotId::Irikar__Midwest__East_24_on_Floor
@@ -1910,10 +1977,27 @@ pub fn get_region(spot: SpotId) -> RegionId {
         | SpotId::Irikar__Midwest__East_26
         | SpotId::Irikar__Midwest__East_27
         | SpotId::Irikar__Midwest__East_28 => RegionId::Irikar,
+        SpotId::Irikar__Lamassu__West_28
+        | SpotId::Irikar__Lamassu__Bottom_Middle
+        | SpotId::Irikar__Lamassu__East_27
+        | SpotId::Irikar__Lamassu__East_26
+        | SpotId::Irikar__Lamassu__Desk
+        | SpotId::Irikar__Lamassu__Hidden_Passage_East
+        | SpotId::Irikar__Lamassu__Hidden_Passage_West
+        | SpotId::Irikar__Lamassu__Northwest
+        | SpotId::Irikar__Lamassu__Catwalk_West
+        | SpotId::Irikar__Lamassu__Catwalk_Middle => RegionId::Irikar,
         SpotId::Menu__Upgrade_Menu__Physiology
         | SpotId::Menu__Upgrade_Menu__Combat
         | SpotId::Menu__Upgrade_Menu__Infection
         | SpotId::Menu__Upgrade_Menu__Drone => RegionId::Menu,
+        SpotId::Uhrum__West_Entrance__West_27
+        | SpotId::Uhrum__West_Entrance__West_26
+        | SpotId::Uhrum__West_Entrance__Hidden_Passage_West
+        | SpotId::Uhrum__West_Entrance__Hidden_Passage_Entry
+        | SpotId::Uhrum__West_Entrance__West_25
+        | SpotId::Uhrum__West_Entrance__Save_Point
+        | SpotId::Uhrum__West_Entrance__Portal_Stand => RegionId::Uhrum,
     }
 }
 
@@ -1984,7 +2068,7 @@ impl world::Accessible for Location {
             LocationId::Antarctica__Shed__Interior__Shelf => true,
             LocationId::Ebih__Base_Camp__Left_Platform_Moved__Item_From_The_Side => true,
             LocationId::Ebih__Base_Camp__Top_Platform__Item => true,
-            LocationId::Ebih__Boss_Room__Boss__Boss_Reward => rules::access_defeat_ebih_alu(&ctx),
+            LocationId::Ebih__Boss_Room__Boss__Boss_Reward => rules::access_ebih_alu(&ctx),
             LocationId::Ebih__Boss_Room__Boss__Fight_Alu => rules::access_can_damage(&ctx),
             LocationId::Ebih__Boss_Room__Boss__Hack_Alu => {
                 rules::access_overheat_and_can_damage(&ctx)
@@ -2139,6 +2223,17 @@ impl world::Accessible for Location {
             LocationId::Irikar__Abandoned_Room__Corner_Core__Core => {
                 rules::access_more_refills(&ctx)
             }
+            LocationId::Irikar__Boss_Room__Bulls_Feet__Boss_Reward => {
+                rules::access_irikar_gudam(&ctx)
+            }
+            LocationId::Irikar__Boss_Room__Bulls_Feet__Defeat_Gudam => {
+                rules::access_can_damage(&ctx)
+            }
+            LocationId::Irikar__Boss_Room__Bulls_Feet__Shockwave_Gudam => {
+                rules::access_shockwave(&ctx)
+            }
+            LocationId::Irikar__Boss_Room__Healthy_Rooftop__Health => true,
+            LocationId::Irikar__East_Rooftops__Top_Rooftop__Tablet => true,
             LocationId::Irikar__Hub__Dagger_Altar__Weapon => true,
             LocationId::Irikar__Hub__Royal_Storage_By_Wall__Mist_into_Wall => {
                 rules::access_not_irikar_royal_storage_wall_and_mist_upgrade(&ctx)
@@ -2146,6 +2241,7 @@ impl world::Accessible for Location {
             LocationId::Irikar__Hub__Royal_Storage_By_Wall__Shockwave_Wall => true,
             LocationId::Irikar__Hub__Royal_Storage_in_Wall__Item => true,
             LocationId::Irikar__Hub__Sat_Tower_Top_Ledge__Tablet => true,
+            LocationId::Irikar__Lamassu__Desk__Item => true,
             LocationId::Irikar__Sight_Room__Item_Pedestal__Urn => true,
             LocationId::Irikar_Breach__Gauntlet__Hidden_Path_Reward__Item => true,
             LocationId::Irikar_Breach__Hover_Room__Bottom__Item => true,
@@ -2547,6 +2643,8 @@ impl world::Accessible for Exit {
             ExitId::Giguna__Antechamber__Statues_Ledge__ex__Small_Bricks_1 => rules::access_hook(&ctx),
             ExitId::Giguna__Antechamber__West_15__ex__Gubi_Lair__East_15_1 => true,
             ExitId::Giguna__Antechamber__West_15__ex__Small_Bricks_1 => rules::access_hook(&ctx),
+            ExitId::Giguna__Breachable_Wall__Above_West_Catwalk__ex__Irikar__Boss_Room__Above_Catwalk_1 => true,
+            ExitId::Giguna__Breachable_Wall__West_Mid_air__ex__Irikar__East_Rooftops__East_Mid_air_1 => true,
             ExitId::Giguna__Building_Interior__Entry__ex__Bookshelf_1 => rules::access_grab_or_climb(&ctx),
             ExitId::Giguna__Building_Interior__Entry__ex__Bookshelf_2 => rules::access_hook(&ctx),
             ExitId::Giguna__Building_Interior__Entry__ex__Giguna_Base__Building_Entry_1 => true,
@@ -2955,6 +3053,7 @@ impl world::Accessible for Exit {
             ExitId::Glacier__Vertical_Room__West_8__ex__Peak__East_8_1 => true,
             ExitId::Glacier__Vertical_Room__West_9__ex__Ledge_Grab_Room__East_9_1 => true,
             ExitId::Irikar__Abandoned_Room__West__ex__Basement_Portal__East_27_1 => true,
+            ExitId::Irikar__Airy__Middle_South__ex__Sight_Room__Above_Room_North_1 => true,
             ExitId::Irikar__Basement_Pipes__Bricks_Under_Pipes__ex__Double_Pipe_Right_1 => rules::access_grab(&ctx),
             ExitId::Irikar__Basement_Pipes__Bricks_Under_Pipes__ex__Double_Pipe_Right_2 => rules::access_hook(&ctx),
             ExitId::Irikar__Basement_Pipes__Double_Pipe_Left__ex__High_Pipe_1 => rules::access_hover_and_hook(&ctx),
@@ -2982,6 +3081,17 @@ impl world::Accessible for Exit {
             ExitId::Irikar__Basement_Portal__Portal_Stand__ex__Moving_Platform_Start_1 => rules::access_irikar__basement_portal__portal_stand__ex__moving_platform_start_1__req(&ctx),
             ExitId::Irikar__Basement_Portal__West_28__ex__Basement_Pipes__East_28_1 => true,
             ExitId::Irikar__Basement_Portal__West_28__ex__Moving_Platform_Start_1 => rules::access_hook(&ctx),
+            ExitId::Irikar__Boss_Room__Catwalk_East__ex__Lamassu__Catwalk_West_1 => true,
+            ExitId::Irikar__Boss_Room__Catwalk_West__ex__Upper_Rooftops_1 => rules::access_hover(&ctx),
+            ExitId::Irikar__Boss_Room__East_28__ex__Lamassu__West_28_1 => true,
+            ExitId::Irikar__Boss_Room__Upper_Rooftops__ex__East_Rooftops__Off_the_Edge_1 => rules::access_hover_or_mist2(&ctx),
+            ExitId::Irikar__Boss_Room__West_28__ex__Empty_Foyer__East_1 => true,
+            ExitId::Irikar__East_Rooftops__Directly_Down__ex__Boss_Room__Northwest_1 => true,
+            ExitId::Irikar__East_Rooftops__East_Mid_air__ex__Giguna__Breachable_Wall__West_Mid_air_1 => true,
+            ExitId::Irikar__East_Rooftops__East_Mid_air__ex__Top_Rooftop_1 => rules::access_hover(&ctx),
+            ExitId::Irikar__East_Rooftops__Off_the_Edge__ex__Top_Rooftop_1 => rules::access_hover(&ctx),
+            ExitId::Irikar__East_Rooftops__Off_the_Edge__ex__Top_Rooftop_2 => rules::access_mist2(&ctx),
+            ExitId::Irikar__East_Rooftops__Upper_West__ex__East_Mid_air_1 => rules::access_hover(&ctx),
             ExitId::Irikar__Empty_Foyer__East__ex__Boss_Room__West_28_1 => true,
             ExitId::Irikar__Empty_Foyer__West__ex__Basement_Portal__East_28_1 => true,
             ExitId::Irikar__Hub__Bowl_Middle_Ledge__ex__Bowl_Top_Platform_1 => rules::access_hook(&ctx),
@@ -2998,8 +3108,17 @@ impl world::Accessible for Exit {
             ExitId::Irikar__Hub__Sat_Tower_East_24__ex__Sight_Room__West_24_1 => true,
             ExitId::Irikar__Hub__Sat_Tower_Floating_Platform__ex__Sat_Tower_Top_Ledge_1 => rules::access_hook(&ctx),
             ExitId::Irikar__Hub__Sat_Tower_Middle_Ledge__ex__Sat_Tower_Floating_Platform_1 => rules::access_hook(&ctx),
+            ExitId::Irikar__Hub__Sat_Tower_Northeast__ex__Airy__Northwest_1 => true,
             ExitId::Irikar__Hub__Save_Point__ex__Bowl_Hole_1 => rules::access_hook(&ctx),
             ExitId::Irikar__Hub__West_Rim__ex__East_Rim_1 => rules::access_hover(&ctx),
+            ExitId::Irikar__Lamassu__Catwalk_Middle__ex__Desk_1 => rules::access_hover(&ctx),
+            ExitId::Irikar__Lamassu__Catwalk_Middle__ex__Hidden_Passage_West_1 => rules::access_hook(&ctx),
+            ExitId::Irikar__Lamassu__Catwalk_West__ex__Boss_Room__Catwalk_East_1 => true,
+            ExitId::Irikar__Lamassu__East_26__ex__Uhrum__West_Entrance__West_26_1 => true,
+            ExitId::Irikar__Lamassu__East_27__ex__Uhrum__West_Entrance__West_27_1 => true,
+            ExitId::Irikar__Lamassu__Hidden_Passage_East__ex__Uhrum__West_Entrance__Hidden_Passage_West_1 => true,
+            ExitId::Irikar__Lamassu__West_28__ex__Boss_Room__East_28_1 => true,
+            ExitId::Irikar__Sight_Room__Above_Room_East__ex__East_Rooftops__Upper_West_1 => true,
             ExitId::Irikar__Sight_Room__West_24__ex__Hub__Sat_Tower_East_24_1 => true,
             ExitId::Irikar_Breach__Exit_Corridor__East__ex__Uhrum_Connector__West_1 => true,
             ExitId::Irikar_Breach__Exit_Corridor__North_12__ex__Pillar_1 => rules::access_hover_and_hook(&ctx),
@@ -3186,6 +3305,8 @@ impl world::Exit for Exit {
             ExitId::Ebih__Waterfall__West_9__ex__Ebih_West__East_9_1 => true,
             ExitId::Giguna__Antechamber__East_16__ex__East_Caverns__West_16_1 => true,
             ExitId::Giguna__Antechamber__West_15__ex__Gubi_Lair__East_15_1 => true,
+            ExitId::Giguna__Breachable_Wall__Above_West_Catwalk__ex__Irikar__Boss_Room__Above_Catwalk_1 => true,
+            ExitId::Giguna__Breachable_Wall__West_Mid_air__ex__Irikar__East_Rooftops__East_Mid_air_1 => true,
             ExitId::Giguna__Building_Interior__Entry__ex__Giguna_Base__Building_Entry_1 => true,
             ExitId::Giguna__Carnelian__East_10__ex__Giguna_Northeast__West_10_1 => true,
             ExitId::Giguna__Carnelian__West_10__ex__West_Caverns__East_10_1 => true,
@@ -3322,6 +3443,7 @@ impl world::Exit for Exit {
             ExitId::Glacier__Vertical_Room__West_8__ex__Peak__East_8_1 => true,
             ExitId::Glacier__Vertical_Room__West_9__ex__Ledge_Grab_Room__East_9_1 => true,
             ExitId::Irikar__Abandoned_Room__West__ex__Basement_Portal__East_27_1 => true,
+            ExitId::Irikar__Airy__Middle_South__ex__Sight_Room__Above_Room_North_1 => true,
             ExitId::Irikar__Basement_Pipes__East_28__ex__Basement_Portal__West_28_1 => true,
             ExitId::Irikar__Basement_Pipes__West_27__ex__Midwest__East_27_1 => true,
             ExitId::Irikar__Basement_Pipes__West_28__ex__Midwest__East_28_1 => true,
@@ -3329,10 +3451,22 @@ impl world::Exit for Exit {
             ExitId::Irikar__Basement_Portal__East_28__ex__Empty_Foyer__West_1 => true,
             ExitId::Irikar__Basement_Portal__North__ex__Hub__Royal_Storage_South_1 => true,
             ExitId::Irikar__Basement_Portal__West_28__ex__Basement_Pipes__East_28_1 => true,
+            ExitId::Irikar__Boss_Room__Catwalk_East__ex__Lamassu__Catwalk_West_1 => true,
+            ExitId::Irikar__Boss_Room__East_28__ex__Lamassu__West_28_1 => true,
+            ExitId::Irikar__Boss_Room__West_28__ex__Empty_Foyer__East_1 => true,
+            ExitId::Irikar__East_Rooftops__Directly_Down__ex__Boss_Room__Northwest_1 => true,
+            ExitId::Irikar__East_Rooftops__East_Mid_air__ex__Giguna__Breachable_Wall__West_Mid_air_1 => true,
             ExitId::Irikar__Empty_Foyer__East__ex__Boss_Room__West_28_1 => true,
             ExitId::Irikar__Empty_Foyer__West__ex__Basement_Portal__East_28_1 => true,
             ExitId::Irikar__Hub__Royal_Storage_South__ex__Basement_Portal__North_1 => true,
             ExitId::Irikar__Hub__Sat_Tower_East_24__ex__Sight_Room__West_24_1 => true,
+            ExitId::Irikar__Hub__Sat_Tower_Northeast__ex__Airy__Northwest_1 => true,
+            ExitId::Irikar__Lamassu__Catwalk_West__ex__Boss_Room__Catwalk_East_1 => true,
+            ExitId::Irikar__Lamassu__East_26__ex__Uhrum__West_Entrance__West_26_1 => true,
+            ExitId::Irikar__Lamassu__East_27__ex__Uhrum__West_Entrance__West_27_1 => true,
+            ExitId::Irikar__Lamassu__Hidden_Passage_East__ex__Uhrum__West_Entrance__Hidden_Passage_West_1 => true,
+            ExitId::Irikar__Lamassu__West_28__ex__Boss_Room__East_28_1 => true,
+            ExitId::Irikar__Sight_Room__Above_Room_East__ex__East_Rooftops__Upper_West_1 => true,
             ExitId::Irikar__Sight_Room__West_24__ex__Hub__Sat_Tower_East_24_1 => true,
             ExitId::Irikar_Breach__Exit_Corridor__East__ex__Uhrum_Connector__West_1 => true,
             ExitId::Irikar_Breach__Exit_Corridor__North_12__ex__Worm_Rave__South_1 => true,
@@ -3450,6 +3584,9 @@ impl world::Accessible for Action {
                 }
                 ActionId::Giguna__Carnelian__Upper_Susar__Hack => {
                     rules::access_giguna__carnelian__upper_susar__hack__req(&ctx)
+                }
+                ActionId::Giguna__Clouds__Platform_Start__Hack_and_Get_Off_Early => {
+                    rules::access_giguna__clouds__platform_start__hack_and_get_off_early__req(&ctx)
                 }
                 ActionId::Giguna__Clouds__Platform_Start__Hack_and_Ride_to_Portal => {
                     rules::access_giguna__clouds__platform_start__hack_and_ride_to_portal__req(&ctx)
@@ -3667,6 +3804,7 @@ impl world::Action for Action {
             ActionId::Giguna__Ruins_Top__Turret_Balcony_West__Throw_Drone_onto_Tower => rules::action_deploy_drone_and_move__giguna__ruins_top__west_7(ctx),
             ActionId::Giguna__Clouds__Platform_Start__Hack_and_Ride_to_Portal => rules::action_giguna__clouds__platform_start__hack_and_ride_to_portal__do(ctx),
             ActionId::Giguna__Clouds__Platform_Start__Hack_Deploy_Ride_to_Portal => rules::action_giguna__clouds__platform_start__hack_deploy_ride_to_portal__do(ctx),
+            ActionId::Giguna__Clouds__Platform_Start__Hack_and_Get_Off_Early => rules::action_giguna__clouds__platform_start__hack_and_get_off_early__do(ctx),
             ActionId::Giguna__East_Caverns__West_14__Enter_Combo => rules::action_giguna__east_caverns__west_14__enter_combo__do(ctx),
             ActionId::Giguna__East_Caverns__Upper_Susar__Caught => rules::action_giguna__east_caverns__upper_susar__caught__do(ctx),
             ActionId::Giguna__East_Caverns__Upper_Susar_Mid_jump__Hack => rules::action_giguna__east_caverns__upper_susar_mid_jump__hack__do(ctx),
@@ -3766,6 +3904,9 @@ impl world::Action for Action {
             }
             ActionId::Giguna__Clouds__Platform_Start__Hack_Deploy_Ride_to_Portal => {
                 SpotId::Giguna__Clouds__Platform_Stop
+            }
+            ActionId::Giguna__Clouds__Platform_Start__Hack_and_Get_Off_Early => {
+                SpotId::Giguna__Clouds__Platform_Early
             }
             ActionId::Irikar_Breach__Exit_Corridor__Portal_Stand__Enter_Portal => {
                 SpotId::Irikar__Abandoned_Room__Empty_Pedestal
@@ -3891,7 +4032,7 @@ pub struct Spot {
     pub actions: Range<usize>,
 }
 
-static RAW_SPOTS: [SpotId; 933] = [
+static RAW_SPOTS: [SpotId; 975] = [
     SpotId::None,
     SpotId::Amagi__Cave_Behind_Waterfall__Bottom,
     SpotId::Amagi__Cave_Behind_Waterfall__Middle,
@@ -4220,6 +4361,10 @@ static RAW_SPOTS: [SpotId; 933] = [
     SpotId::Giguna__Antechamber__Statue_Head,
     SpotId::Giguna__Antechamber__Statues_Ledge,
     SpotId::Giguna__Antechamber__West_15,
+    SpotId::Giguna__Breachable_Wall__Above_Middle_Catwalk,
+    SpotId::Giguna__Breachable_Wall__Above_West_Catwalk,
+    SpotId::Giguna__Breachable_Wall__Wall_Interior,
+    SpotId::Giguna__Breachable_Wall__West_Mid_air,
     SpotId::Giguna__Building_Interior__Bookshelf,
     SpotId::Giguna__Building_Interior__Entry,
     SpotId::Giguna__Carnelian__Door,
@@ -4239,6 +4384,7 @@ static RAW_SPOTS: [SpotId; 933] = [
     SpotId::Giguna__Clouds__North_Middle,
     SpotId::Giguna__Clouds__North_Right,
     SpotId::Giguna__Clouds__North_Under_Ledge,
+    SpotId::Giguna__Clouds__Platform_Early,
     SpotId::Giguna__Clouds__Platform_Early_Portal,
     SpotId::Giguna__Clouds__Platform_Start,
     SpotId::Giguna__Clouds__Platform_Stop,
@@ -4700,6 +4846,8 @@ static RAW_SPOTS: [SpotId; 933] = [
     SpotId::Irikar__Abandoned_Room__Corner_Core,
     SpotId::Irikar__Abandoned_Room__Empty_Pedestal,
     SpotId::Irikar__Abandoned_Room__West,
+    SpotId::Irikar__Airy__Middle_South,
+    SpotId::Irikar__Airy__Northwest,
     SpotId::Irikar__Basement_Pipes__Brick_Ledge,
     SpotId::Irikar__Basement_Pipes__Bricks_Under_Pipes,
     SpotId::Irikar__Basement_Pipes__Double_Pipe_Left,
@@ -4724,8 +4872,22 @@ static RAW_SPOTS: [SpotId; 933] = [
     SpotId::Irikar__Basement_Portal__Portal_Stand,
     SpotId::Irikar__Basement_Portal__West_28,
     SpotId::Irikar__Basement_Portal__Westmost_Platform,
+    SpotId::Irikar__Boss_Room__Above_Catwalk,
+    SpotId::Irikar__Boss_Room__Bulls_Feet,
+    SpotId::Irikar__Boss_Room__Catwalk_East,
+    SpotId::Irikar__Boss_Room__Catwalk_West,
     SpotId::Irikar__Boss_Room__East_28,
+    SpotId::Irikar__Boss_Room__Healthy_Rooftop,
+    SpotId::Irikar__Boss_Room__Northwest,
+    SpotId::Irikar__Boss_Room__Sat_Tower_Roof_East,
+    SpotId::Irikar__Boss_Room__Sat_Tower_Roof_West,
+    SpotId::Irikar__Boss_Room__Upper_Rooftops,
     SpotId::Irikar__Boss_Room__West_28,
+    SpotId::Irikar__East_Rooftops__Directly_Down,
+    SpotId::Irikar__East_Rooftops__East_Mid_air,
+    SpotId::Irikar__East_Rooftops__Off_the_Edge,
+    SpotId::Irikar__East_Rooftops__Top_Rooftop,
+    SpotId::Irikar__East_Rooftops__Upper_West,
     SpotId::Irikar__Empty_Foyer__East,
     SpotId::Irikar__Empty_Foyer__West,
     SpotId::Irikar__Hub__Bowl_Hole,
@@ -4756,11 +4918,23 @@ static RAW_SPOTS: [SpotId; 933] = [
     SpotId::Irikar__Hub__Sat_Tower_Lower_Left_Ledge,
     SpotId::Irikar__Hub__Sat_Tower_Lower_Right_Ledge,
     SpotId::Irikar__Hub__Sat_Tower_Middle_Ledge,
+    SpotId::Irikar__Hub__Sat_Tower_Northeast,
     SpotId::Irikar__Hub__Sat_Tower_Roof_East,
     SpotId::Irikar__Hub__Sat_Tower_Roof_West,
     SpotId::Irikar__Hub__Sat_Tower_Top_Ledge,
+    SpotId::Irikar__Hub__Sat_Tower_West_Valley,
     SpotId::Irikar__Hub__Save_Point,
     SpotId::Irikar__Hub__West_Rim,
+    SpotId::Irikar__Lamassu__Bottom_Middle,
+    SpotId::Irikar__Lamassu__Catwalk_Middle,
+    SpotId::Irikar__Lamassu__Catwalk_West,
+    SpotId::Irikar__Lamassu__Desk,
+    SpotId::Irikar__Lamassu__East_26,
+    SpotId::Irikar__Lamassu__East_27,
+    SpotId::Irikar__Lamassu__Hidden_Passage_East,
+    SpotId::Irikar__Lamassu__Hidden_Passage_West,
+    SpotId::Irikar__Lamassu__Northwest,
+    SpotId::Irikar__Lamassu__West_28,
     SpotId::Irikar__Midwest__East_23,
     SpotId::Irikar__Midwest__East_24_on_Building,
     SpotId::Irikar__Midwest__East_24_on_Floor,
@@ -4768,6 +4942,8 @@ static RAW_SPOTS: [SpotId; 933] = [
     SpotId::Irikar__Midwest__East_26,
     SpotId::Irikar__Midwest__East_27,
     SpotId::Irikar__Midwest__East_28,
+    SpotId::Irikar__Sight_Room__Above_Room_East,
+    SpotId::Irikar__Sight_Room__Above_Room_North,
     SpotId::Irikar__Sight_Room__Item_Pedestal,
     SpotId::Irikar__Sight_Room__Lower_Ledge,
     SpotId::Irikar__Sight_Room__Portal,
@@ -4825,6 +5001,13 @@ static RAW_SPOTS: [SpotId; 933] = [
     SpotId::Menu__Upgrade_Menu__Drone,
     SpotId::Menu__Upgrade_Menu__Infection,
     SpotId::Menu__Upgrade_Menu__Physiology,
+    SpotId::Uhrum__West_Entrance__Hidden_Passage_Entry,
+    SpotId::Uhrum__West_Entrance__Hidden_Passage_West,
+    SpotId::Uhrum__West_Entrance__Portal_Stand,
+    SpotId::Uhrum__West_Entrance__Save_Point,
+    SpotId::Uhrum__West_Entrance__West_25,
+    SpotId::Uhrum__West_Entrance__West_26,
+    SpotId::Uhrum__West_Entrance__West_27,
 ];
 
 lazy_static! {
@@ -5017,6 +5200,10 @@ lazy_static! {
         AreaId::Giguna__Antechamber => Range {
             start: SpotId::Giguna__Antechamber__Bottom.into_usize(),
             end: SpotId::Giguna__Antechamber__West_15.into_usize() + 1,
+        },
+        AreaId::Giguna__Breachable_Wall => Range {
+            start: SpotId::Giguna__Breachable_Wall__Above_Middle_Catwalk.into_usize(),
+            end: SpotId::Giguna__Breachable_Wall__West_Mid_air.into_usize() + 1,
         },
         AreaId::Giguna__Building_Interior => Range {
             start: SpotId::Giguna__Building_Interior__Bookshelf.into_usize(),
@@ -5230,6 +5417,10 @@ lazy_static! {
             start: SpotId::Irikar__Abandoned_Room__Corner_Core.into_usize(),
             end: SpotId::Irikar__Abandoned_Room__West.into_usize() + 1,
         },
+        AreaId::Irikar__Airy => Range {
+            start: SpotId::Irikar__Airy__Middle_South.into_usize(),
+            end: SpotId::Irikar__Airy__Northwest.into_usize() + 1,
+        },
         AreaId::Irikar__Basement_Pipes => Range {
             start: SpotId::Irikar__Basement_Pipes__Brick_Ledge.into_usize(),
             end: SpotId::Irikar__Basement_Pipes__West_28.into_usize() + 1,
@@ -5239,8 +5430,12 @@ lazy_static! {
             end: SpotId::Irikar__Basement_Portal__Westmost_Platform.into_usize() + 1,
         },
         AreaId::Irikar__Boss_Room => Range {
-            start: SpotId::Irikar__Boss_Room__East_28.into_usize(),
+            start: SpotId::Irikar__Boss_Room__Above_Catwalk.into_usize(),
             end: SpotId::Irikar__Boss_Room__West_28.into_usize() + 1,
+        },
+        AreaId::Irikar__East_Rooftops => Range {
+            start: SpotId::Irikar__East_Rooftops__Directly_Down.into_usize(),
+            end: SpotId::Irikar__East_Rooftops__Upper_West.into_usize() + 1,
         },
         AreaId::Irikar__Empty_Foyer => Range {
             start: SpotId::Irikar__Empty_Foyer__East.into_usize(),
@@ -5250,17 +5445,25 @@ lazy_static! {
             start: SpotId::Irikar__Hub__Bowl_Hole.into_usize(),
             end: SpotId::Irikar__Hub__West_Rim.into_usize() + 1,
         },
+        AreaId::Irikar__Lamassu => Range {
+            start: SpotId::Irikar__Lamassu__Bottom_Middle.into_usize(),
+            end: SpotId::Irikar__Lamassu__West_28.into_usize() + 1,
+        },
         AreaId::Irikar__Midwest => Range {
             start: SpotId::Irikar__Midwest__East_23.into_usize(),
             end: SpotId::Irikar__Midwest__East_28.into_usize() + 1,
         },
         AreaId::Irikar__Sight_Room => Range {
-            start: SpotId::Irikar__Sight_Room__Item_Pedestal.into_usize(),
+            start: SpotId::Irikar__Sight_Room__Above_Room_East.into_usize(),
             end: SpotId::Irikar__Sight_Room__West_24.into_usize() + 1,
         },
         AreaId::Menu__Upgrade_Menu => Range {
             start: SpotId::Menu__Upgrade_Menu__Combat.into_usize(),
             end: SpotId::Menu__Upgrade_Menu__Physiology.into_usize() + 1,
+        },
+        AreaId::Uhrum__West_Entrance => Range {
+            start: SpotId::Uhrum__West_Entrance__Hidden_Passage_Entry.into_usize(),
+            end: SpotId::Uhrum__West_Entrance__West_27.into_usize() + 1,
         },
     };
 }
@@ -5291,7 +5494,7 @@ impl world::World for World {
     type Exit = Exit;
     type Action = Action;
     type Warp = Warp;
-    const NUM_LOCATIONS: u32 = 162;
+    const NUM_LOCATIONS: u32 = 168;
 
     fn objective_name(&self) -> String {
         format!("{}", self.objective)
@@ -5392,7 +5595,7 @@ impl world::World for World {
                 LocationId::Ebih__Ebih_East__Lower_Moving_Platform__Remote_Urn,
                 LocationId::Ebih__Ebih_East__Corner__Urn,
             ],
-            CanonId::Defeat_Ebih_Alu => vec![
+            CanonId::Ebih_Alu => vec![
                 LocationId::Ebih__Boss_Room__Boss__Hack_Alu,
                 LocationId::Ebih__Boss_Room__Boss__Fight_Alu,
             ],
@@ -5452,6 +5655,10 @@ impl world::World for World {
             CanonId::Irikar_Royal_Storage_Flask => {
                 vec![LocationId::Irikar__Hub__Royal_Storage_in_Wall__Item]
             }
+            CanonId::Irikar_Gudam => vec![
+                LocationId::Irikar__Boss_Room__Bulls_Feet__Defeat_Gudam,
+                LocationId::Irikar__Boss_Room__Bulls_Feet__Shockwave_Gudam,
+            ],
         }
     }
 
@@ -5530,6 +5737,7 @@ impl world::World for World {
                 LocationId::Giguna_Breach__Cubby__Rocks__Health,
                 LocationId::Giguna__Wasteland__Door_Right__Health,
                 LocationId::Giguna__Dual_Path__Wall_Secret__Health,
+                LocationId::Irikar__Boss_Room__Healthy_Rooftop__Health,
             ],
             Item::Dear_Ernest => vec![LocationId::Ebih__Bunker_Interior__Desk__Note],
             Item::Melee_Charge => vec![
@@ -5569,7 +5777,7 @@ impl world::World for World {
                 LocationId::Menu__Upgrade_Menu__Infection__Infection_Level_3,
             ],
             Item::Under_Siege => vec![LocationId::Ebih__Ebih_East__East_Ledge__Note],
-            Item::Defeat_Ebih_Alu => vec![
+            Item::Ebih_Alu => vec![
                 LocationId::Ebih__Boss_Room__Boss__Hack_Alu,
                 LocationId::Ebih__Boss_Room__Boss__Fight_Alu,
             ],
@@ -5609,6 +5817,7 @@ impl world::World for World {
             Item::Big_Flask => vec![
                 LocationId::Giguna__Clouds__Cache__Item,
                 LocationId::Giguna__Gubi_Lair__Center_Platform__Boss_Reward,
+                LocationId::Irikar__Boss_Room__Bulls_Feet__Boss_Reward,
             ],
             Item::Giguna_Dual_Path_Switch => vec![
                 LocationId::Giguna__Dual_Path__Below_Left_Switch__Remote_Switch,
@@ -5660,6 +5869,14 @@ impl world::World for World {
                 LocationId::Irikar__Hub__Royal_Storage_By_Wall__Mist_into_Wall,
             ],
             Item::Breach_Sight => vec![LocationId::Irikar__Sight_Room__Item_Pedestal__Urn],
+            Item::Irikar_Gudam => vec![
+                LocationId::Irikar__Boss_Room__Bulls_Feet__Defeat_Gudam,
+                LocationId::Irikar__Boss_Room__Bulls_Feet__Shockwave_Gudam,
+            ],
+            Item::Heretics_Granddaughter => {
+                vec![LocationId::Irikar__East_Rooftops__Top_Rooftop__Tablet]
+            }
+            Item::Terminal_Breakthrough_2 => vec![LocationId::Irikar__Lamassu__Desk__Item],
             Item::Health_Upgrade => vec![
                 LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_1,
                 LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_2,
@@ -6036,6 +6253,18 @@ impl world::World for World {
             LocationId::Irikar__Abandoned_Room__Corner_Core__Core => {
                 SpotId::Irikar__Abandoned_Room__Corner_Core
             }
+            LocationId::Irikar__Boss_Room__Bulls_Feet__Boss_Reward
+            | LocationId::Irikar__Boss_Room__Bulls_Feet__Defeat_Gudam
+            | LocationId::Irikar__Boss_Room__Bulls_Feet__Shockwave_Gudam => {
+                SpotId::Irikar__Boss_Room__Bulls_Feet
+            }
+            LocationId::Irikar__Boss_Room__Healthy_Rooftop__Health => {
+                SpotId::Irikar__Boss_Room__Healthy_Rooftop
+            }
+            LocationId::Irikar__East_Rooftops__Top_Rooftop__Tablet => {
+                SpotId::Irikar__East_Rooftops__Top_Rooftop
+            }
+            LocationId::Irikar__Lamassu__Desk__Item => SpotId::Irikar__Lamassu__Desk,
             LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_1
             | LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_2
             | LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_3
@@ -6215,7 +6444,8 @@ impl world::World for World {
             ActionId::Giguna__Ruins_Top__Turret_Balcony_West__Throw_Drone_onto_Tower => {
                 SpotId::Giguna__Ruins_Top__Turret_Balcony_West
             }
-            ActionId::Giguna__Clouds__Platform_Start__Hack_and_Ride_to_Portal
+            ActionId::Giguna__Clouds__Platform_Start__Hack_and_Get_Off_Early
+            | ActionId::Giguna__Clouds__Platform_Start__Hack_and_Ride_to_Portal
             | ActionId::Giguna__Clouds__Platform_Start__Hack_Deploy_Ride_to_Portal => {
                 SpotId::Giguna__Clouds__Platform_Start
             }
@@ -6699,6 +6929,8 @@ impl world::World for World {
             ExitId::Giguna__Gubi_Lair__Rightmost_Platform__ex__Center_Platform_1 => SpotId::Giguna__Gubi_Lair__Rightmost_Platform,
             ExitId::Giguna__Gubi_Lair__Grass_by_Wall__ex__Center_West_Sapling_1 | ExitId:: Giguna__Gubi_Lair__Grass_by_Wall__ex__Center_West_Sapling_2 => SpotId::Giguna__Gubi_Lair__Grass_by_Wall,
             ExitId::Giguna__Gubi_Lair__Shaft_Bottom__ex__Pedestal_1 | ExitId:: Giguna__Gubi_Lair__Shaft_Bottom__ex__Pedestal_2 | ExitId:: Giguna__Gubi_Lair__Shaft_Bottom__ex__Pedestal_3 => SpotId::Giguna__Gubi_Lair__Shaft_Bottom,
+            ExitId::Giguna__Breachable_Wall__West_Mid_air__ex__Irikar__East_Rooftops__East_Mid_air_1 => SpotId::Giguna__Breachable_Wall__West_Mid_air,
+            ExitId::Giguna__Breachable_Wall__Above_West_Catwalk__ex__Irikar__Boss_Room__Above_Catwalk_1 => SpotId::Giguna__Breachable_Wall__Above_West_Catwalk,
             ExitId::Glacier__Dock_Elevator__Connector__ex__Dock_Interior__Connector_1 => SpotId::Glacier__Dock_Elevator__Connector,
             ExitId::Glacier__Dock_Interior__Connector__ex__Dock_Elevator__Connector_1 => SpotId::Glacier__Dock_Interior__Connector,
             ExitId::Glacier__Dock_Interior__Entry__ex__Dock_Outside__Entry_1 => SpotId::Glacier__Dock_Interior__Entry,
@@ -6808,6 +7040,7 @@ impl world::World for World {
             ExitId::Irikar__Hub__Bowl_Middle_Platform_West__ex__Bowl_Middle_Ledge_1 => SpotId::Irikar__Hub__Bowl_Middle_Platform_West,
             ExitId::Irikar__Hub__Bowl_Platform_3__ex__Bowl_Middle_Platform_Center_1 => SpotId::Irikar__Hub__Bowl_Platform_3,
             ExitId::Irikar__Hub__Save_Point__ex__Bowl_Hole_1 => SpotId::Irikar__Hub__Save_Point,
+            ExitId::Irikar__Hub__Sat_Tower_Northeast__ex__Airy__Northwest_1 => SpotId::Irikar__Hub__Sat_Tower_Northeast,
             ExitId::Irikar__Hub__Sat_Tower_Middle_Ledge__ex__Sat_Tower_Floating_Platform_1 => SpotId::Irikar__Hub__Sat_Tower_Middle_Ledge,
             ExitId::Irikar__Hub__Sat_Tower_Floating_Platform__ex__Sat_Tower_Top_Ledge_1 => SpotId::Irikar__Hub__Sat_Tower_Floating_Platform,
             ExitId::Irikar__Hub__Sat_Tower_East_24__ex__Sight_Room__West_24_1 => SpotId::Irikar__Hub__Sat_Tower_East_24,
@@ -6815,7 +7048,9 @@ impl world::World for World {
             ExitId::Irikar__Hub__Royal_Storage_South__ex__Basement_Portal__North_1 => SpotId::Irikar__Hub__Royal_Storage_South,
             ExitId::Irikar__Hub__Royal_Storage_By_Wall__ex__Royal_Storage_in_Wall_1 => SpotId::Irikar__Hub__Royal_Storage_By_Wall,
             ExitId::Irikar__Hub__Royal_Storage_By_Wall__Mist_into_Wall => SpotId::Irikar__Hub__Royal_Storage_By_Wall,
+            ExitId::Irikar__Airy__Middle_South__ex__Sight_Room__Above_Room_North_1 => SpotId::Irikar__Airy__Middle_South,
             ExitId::Irikar__Sight_Room__West_24__ex__Hub__Sat_Tower_East_24_1 => SpotId::Irikar__Sight_Room__West_24,
+            ExitId::Irikar__Sight_Room__Above_Room_East__ex__East_Rooftops__Upper_West_1 => SpotId::Irikar__Sight_Room__Above_Room_East,
             ExitId::Irikar__Abandoned_Room__West__ex__Basement_Portal__East_27_1 => SpotId::Irikar__Abandoned_Room__West,
             ExitId::Irikar__Basement_Portal__East_27__ex__Abandoned_Room__West_1 => SpotId::Irikar__Basement_Portal__East_27,
             ExitId::Irikar__Basement_Portal__Ledge__ex__Moving_Platform_Start_1 | ExitId:: Irikar__Basement_Portal__Ledge__ex__Westmost_Platform_1 | ExitId:: Irikar__Basement_Portal__Ledge__ex__East_Platform_1 => SpotId::Irikar__Basement_Portal__Ledge,
@@ -6836,6 +7071,21 @@ impl world::World for World {
             ExitId::Irikar__Basement_Pipes__West_27__ex__Midwest__East_27_1 => SpotId::Irikar__Basement_Pipes__West_27,
             ExitId::Irikar__Empty_Foyer__West__ex__Basement_Portal__East_28_1 => SpotId::Irikar__Empty_Foyer__West,
             ExitId::Irikar__Empty_Foyer__East__ex__Boss_Room__West_28_1 => SpotId::Irikar__Empty_Foyer__East,
+            ExitId::Irikar__Boss_Room__West_28__ex__Empty_Foyer__East_1 => SpotId::Irikar__Boss_Room__West_28,
+            ExitId::Irikar__Boss_Room__East_28__ex__Lamassu__West_28_1 => SpotId::Irikar__Boss_Room__East_28,
+            ExitId::Irikar__Boss_Room__Upper_Rooftops__ex__East_Rooftops__Off_the_Edge_1 => SpotId::Irikar__Boss_Room__Upper_Rooftops,
+            ExitId::Irikar__Boss_Room__Catwalk_West__ex__Upper_Rooftops_1 => SpotId::Irikar__Boss_Room__Catwalk_West,
+            ExitId::Irikar__Boss_Room__Catwalk_East__ex__Lamassu__Catwalk_West_1 => SpotId::Irikar__Boss_Room__Catwalk_East,
+            ExitId::Irikar__East_Rooftops__Upper_West__ex__East_Mid_air_1 => SpotId::Irikar__East_Rooftops__Upper_West,
+            ExitId::Irikar__East_Rooftops__Directly_Down__ex__Boss_Room__Northwest_1 => SpotId::Irikar__East_Rooftops__Directly_Down,
+            ExitId::Irikar__East_Rooftops__Off_the_Edge__ex__Top_Rooftop_1 | ExitId:: Irikar__East_Rooftops__Off_the_Edge__ex__Top_Rooftop_2 => SpotId::Irikar__East_Rooftops__Off_the_Edge,
+            ExitId::Irikar__East_Rooftops__East_Mid_air__ex__Top_Rooftop_1 | ExitId:: Irikar__East_Rooftops__East_Mid_air__ex__Giguna__Breachable_Wall__West_Mid_air_1 => SpotId::Irikar__East_Rooftops__East_Mid_air,
+            ExitId::Irikar__Lamassu__West_28__ex__Boss_Room__East_28_1 => SpotId::Irikar__Lamassu__West_28,
+            ExitId::Irikar__Lamassu__East_27__ex__Uhrum__West_Entrance__West_27_1 => SpotId::Irikar__Lamassu__East_27,
+            ExitId::Irikar__Lamassu__East_26__ex__Uhrum__West_Entrance__West_26_1 => SpotId::Irikar__Lamassu__East_26,
+            ExitId::Irikar__Lamassu__Hidden_Passage_East__ex__Uhrum__West_Entrance__Hidden_Passage_West_1 => SpotId::Irikar__Lamassu__Hidden_Passage_East,
+            ExitId::Irikar__Lamassu__Catwalk_West__ex__Boss_Room__Catwalk_East_1 => SpotId::Irikar__Lamassu__Catwalk_West,
+            ExitId::Irikar__Lamassu__Catwalk_Middle__ex__Hidden_Passage_West_1 | ExitId:: Irikar__Lamassu__Catwalk_Middle__ex__Desk_1 => SpotId::Irikar__Lamassu__Catwalk_Middle,
             ExitId::Menu__Upgrade_Menu__Physiology__ex__Combat_1 | ExitId:: Menu__Upgrade_Menu__Physiology__ex__Infection_1 | ExitId:: Menu__Upgrade_Menu__Physiology__ex__Drone_1 => SpotId::Menu__Upgrade_Menu__Physiology,
             ExitId::Menu__Upgrade_Menu__Combat__ex__Physiology_1 | ExitId:: Menu__Upgrade_Menu__Combat__ex__Infection_1 | ExitId:: Menu__Upgrade_Menu__Combat__ex__Drone_1 => SpotId::Menu__Upgrade_Menu__Combat,
             ExitId::Menu__Upgrade_Menu__Infection__ex__Physiology_1 | ExitId:: Menu__Upgrade_Menu__Infection__ex__Combat_1 | ExitId:: Menu__Upgrade_Menu__Infection__ex__Drone_1 => SpotId::Menu__Upgrade_Menu__Infection,
@@ -7186,6 +7436,8 @@ impl world::World for World {
             | SpotId::Giguna__Antechamber__East_16
             | SpotId::Giguna__Antechamber__Statue_Head
             | SpotId::Giguna__Antechamber__West_15
+            | SpotId::Giguna__Breachable_Wall__Above_West_Catwalk
+            | SpotId::Giguna__Breachable_Wall__West_Mid_air
             | SpotId::Giguna__Building_Interior__Bookshelf
             | SpotId::Giguna__Building_Interior__Entry
             | SpotId::Giguna__Carnelian__East_10
@@ -7409,6 +7661,7 @@ impl world::World for World {
             | SpotId::Glacier__Vertical_Room__West_9
             | SpotId::Irikar__Abandoned_Room__Corner_Core
             | SpotId::Irikar__Abandoned_Room__West
+            | SpotId::Irikar__Airy__Middle_South
             | SpotId::Irikar__Basement_Pipes__East_28
             | SpotId::Irikar__Basement_Pipes__West_27
             | SpotId::Irikar__Basement_Pipes__West_28
@@ -7418,6 +7671,15 @@ impl world::World for World {
             | SpotId::Irikar__Basement_Portal__North
             | SpotId::Irikar__Basement_Portal__Portal_Stand
             | SpotId::Irikar__Basement_Portal__West_28
+            | SpotId::Irikar__Boss_Room__Bulls_Feet
+            | SpotId::Irikar__Boss_Room__Catwalk_East
+            | SpotId::Irikar__Boss_Room__East_28
+            | SpotId::Irikar__Boss_Room__Healthy_Rooftop
+            | SpotId::Irikar__Boss_Room__Upper_Rooftops
+            | SpotId::Irikar__Boss_Room__West_28
+            | SpotId::Irikar__East_Rooftops__Directly_Down
+            | SpotId::Irikar__East_Rooftops__East_Mid_air
+            | SpotId::Irikar__East_Rooftops__Top_Rooftop
             | SpotId::Irikar__Empty_Foyer__East
             | SpotId::Irikar__Empty_Foyer__West
             | SpotId::Irikar__Hub__Dagger_Altar
@@ -7426,8 +7688,16 @@ impl world::World for World {
             | SpotId::Irikar__Hub__Royal_Storage_in_Wall
             | SpotId::Irikar__Hub__Royal_Storage_South
             | SpotId::Irikar__Hub__Sat_Tower_East_24
+            | SpotId::Irikar__Hub__Sat_Tower_Northeast
             | SpotId::Irikar__Hub__Sat_Tower_Top_Ledge
             | SpotId::Irikar__Hub__Save_Point
+            | SpotId::Irikar__Lamassu__Catwalk_West
+            | SpotId::Irikar__Lamassu__Desk
+            | SpotId::Irikar__Lamassu__East_26
+            | SpotId::Irikar__Lamassu__East_27
+            | SpotId::Irikar__Lamassu__Hidden_Passage_East
+            | SpotId::Irikar__Lamassu__West_28
+            | SpotId::Irikar__Sight_Room__Above_Room_East
             | SpotId::Irikar__Sight_Room__Item_Pedestal
             | SpotId::Irikar__Sight_Room__Portal
             | SpotId::Irikar__Sight_Room__West_24
@@ -7519,6 +7789,7 @@ impl World {
                     | Item::Double_Axe
                     | Item::Escape
                     | Item::Health_Fragment
+                    | Item::Heretics_Granddaughter
                     | Item::Heretics_Tablet
                     | Item::Journal_2049_10_29
                     | Item::Letter_from_Trace
@@ -7530,6 +7801,7 @@ impl World {
                     | Item::Slingshot_Charge
                     | Item::Slingshot_Weapon
                     | Item::Terminal_Breakthrough_1
+                    | Item::Terminal_Breakthrough_2
                     | Item::The_Ideal_Kiengir
                     | Item::Under_Siege
             ),
@@ -7542,12 +7814,14 @@ impl World {
                     | Item::Dangerous_Ideas
                     | Item::Double_Axe
                     | Item::Escape
+                    | Item::Heretics_Granddaughter
                     | Item::Journal_2049_10_29
                     | Item::Melee_Charge
                     | Item::Notes_2053_02_27
                     | Item::Royal_Dagger
                     | Item::Slingshot_Charge
                     | Item::Slingshot_Weapon
+                    | Item::Terminal_Breakthrough_2
             ),
             _ => false,
         }
@@ -7950,16 +8224,16 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         },
         LocationId::Ebih__Boss_Room__Boss__Hack_Alu => Location {
             id: LocationId::Ebih__Boss_Room__Boss__Hack_Alu,
-            canonical: CanonId::Defeat_Ebih_Alu,
-            item: Item::Defeat_Ebih_Alu,
+            canonical: CanonId::Ebih_Alu,
+            item: Item::Ebih_Alu,
             price: Currency::Energy(280),
             time: 25000,
             exit_id: None,
         },
         LocationId::Ebih__Boss_Room__Boss__Fight_Alu => Location {
             id: LocationId::Ebih__Boss_Room__Boss__Fight_Alu,
-            canonical: CanonId::Defeat_Ebih_Alu,
-            item: Item::Defeat_Ebih_Alu,
+            canonical: CanonId::Ebih_Alu,
+            item: Item::Ebih_Alu,
             price: Currency::Free,
             time: 50000,
             exit_id: None,
@@ -8568,6 +8842,54 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
             id: LocationId::Irikar__Abandoned_Room__Corner_Core__Core,
             canonical: CanonId::None,
             item: Item::Power_Core,
+            price: Currency::Free,
+            time: 0,
+            exit_id: None,
+        },
+        LocationId::Irikar__Boss_Room__Bulls_Feet__Defeat_Gudam => Location {
+            id: LocationId::Irikar__Boss_Room__Bulls_Feet__Defeat_Gudam,
+            canonical: CanonId::Irikar_Gudam,
+            item: Item::Irikar_Gudam,
+            price: Currency::Free,
+            time: 20000,
+            exit_id: None,
+        },
+        LocationId::Irikar__Boss_Room__Bulls_Feet__Shockwave_Gudam => Location {
+            id: LocationId::Irikar__Boss_Room__Bulls_Feet__Shockwave_Gudam,
+            canonical: CanonId::Irikar_Gudam,
+            item: Item::Irikar_Gudam,
+            price: Currency::Energy(200),
+            time: 10000,
+            exit_id: None,
+        },
+        LocationId::Irikar__Boss_Room__Bulls_Feet__Boss_Reward => Location {
+            id: LocationId::Irikar__Boss_Room__Bulls_Feet__Boss_Reward,
+            canonical: CanonId::None,
+            item: Item::Big_Flask,
+            price: Currency::Free,
+            time: 5500,
+            exit_id: None,
+        },
+        LocationId::Irikar__Boss_Room__Healthy_Rooftop__Health => Location {
+            id: LocationId::Irikar__Boss_Room__Healthy_Rooftop__Health,
+            canonical: CanonId::None,
+            item: Item::Health_Fragment,
+            price: Currency::Free,
+            time: 0,
+            exit_id: None,
+        },
+        LocationId::Irikar__East_Rooftops__Top_Rooftop__Tablet => Location {
+            id: LocationId::Irikar__East_Rooftops__Top_Rooftop__Tablet,
+            canonical: CanonId::None,
+            item: Item::Heretics_Granddaughter,
+            price: Currency::Free,
+            time: 0,
+            exit_id: None,
+        },
+        LocationId::Irikar__Lamassu__Desk__Item => Location {
+            id: LocationId::Irikar__Lamassu__Desk__Item,
+            canonical: CanonId::None,
+            item: Item::Terminal_Breakthrough_2,
             price: Currency::Free,
             time: 0,
             exit_id: None,
@@ -13036,6 +13358,20 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
             price: Currency::Free,
             loc_id: None,
         },
+        ExitId::Giguna__Breachable_Wall__West_Mid_air__ex__Irikar__East_Rooftops__East_Mid_air_1 => Exit {
+            id: ExitId::Giguna__Breachable_Wall__West_Mid_air__ex__Irikar__East_Rooftops__East_Mid_air_1,
+            time: 1350,
+            dest: SpotId::Irikar__East_Rooftops__East_Mid_air,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Giguna__Breachable_Wall__Above_West_Catwalk__ex__Irikar__Boss_Room__Above_Catwalk_1 => Exit {
+            id: ExitId::Giguna__Breachable_Wall__Above_West_Catwalk__ex__Irikar__Boss_Room__Above_Catwalk_1,
+            time: 1000,
+            dest: SpotId::Irikar__Boss_Room__Above_Catwalk,
+            price: Currency::Free,
+            loc_id: None,
+        },
         ExitId::Glacier__Dock_Elevator__Connector__ex__Dock_Interior__Connector_1 => Exit {
             id: ExitId::Glacier__Dock_Elevator__Connector__ex__Dock_Interior__Connector_1,
             time: 1350,
@@ -13946,6 +14282,13 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
             price: Currency::Free,
             loc_id: None,
         },
+        ExitId::Irikar__Hub__Sat_Tower_Northeast__ex__Airy__Northwest_1 => Exit {
+            id: ExitId::Irikar__Hub__Sat_Tower_Northeast__ex__Airy__Northwest_1,
+            time: 1350,
+            dest: SpotId::Irikar__Airy__Northwest,
+            price: Currency::Free,
+            loc_id: None,
+        },
         ExitId::Irikar__Hub__Sat_Tower_Middle_Ledge__ex__Sat_Tower_Floating_Platform_1 => Exit {
             id: ExitId::Irikar__Hub__Sat_Tower_Middle_Ledge__ex__Sat_Tower_Floating_Platform_1,
             time: 1500,
@@ -14002,10 +14345,24 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
             price: Currency::Free,
             loc_id: Some(LocationId::Irikar__Hub__Royal_Storage_By_Wall__Mist_into_Wall),
         },
+        ExitId::Irikar__Airy__Middle_South__ex__Sight_Room__Above_Room_North_1 => Exit {
+            id: ExitId::Irikar__Airy__Middle_South__ex__Sight_Room__Above_Room_North_1,
+            time: 1000,
+            dest: SpotId::Irikar__Sight_Room__Above_Room_North,
+            price: Currency::Free,
+            loc_id: None,
+        },
         ExitId::Irikar__Sight_Room__West_24__ex__Hub__Sat_Tower_East_24_1 => Exit {
             id: ExitId::Irikar__Sight_Room__West_24__ex__Hub__Sat_Tower_East_24_1,
             time: 1350,
             dest: SpotId::Irikar__Hub__Sat_Tower_East_24,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Irikar__Sight_Room__Above_Room_East__ex__East_Rooftops__Upper_West_1 => Exit {
+            id: ExitId::Irikar__Sight_Room__Above_Room_East__ex__East_Rooftops__Upper_West_1,
+            time: 1350,
+            dest: SpotId::Irikar__East_Rooftops__Upper_West,
             price: Currency::Free,
             loc_id: None,
         },
@@ -14216,6 +14573,132 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
             id: ExitId::Irikar__Empty_Foyer__East__ex__Boss_Room__West_28_1,
             time: 1350,
             dest: SpotId::Irikar__Boss_Room__West_28,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Irikar__Boss_Room__West_28__ex__Empty_Foyer__East_1 => Exit {
+            id: ExitId::Irikar__Boss_Room__West_28__ex__Empty_Foyer__East_1,
+            time: 1350,
+            dest: SpotId::Irikar__Empty_Foyer__East,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Irikar__Boss_Room__East_28__ex__Lamassu__West_28_1 => Exit {
+            id: ExitId::Irikar__Boss_Room__East_28__ex__Lamassu__West_28_1,
+            time: 1350,
+            dest: SpotId::Irikar__Lamassu__West_28,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Irikar__Boss_Room__Upper_Rooftops__ex__East_Rooftops__Off_the_Edge_1 => Exit {
+            id: ExitId::Irikar__Boss_Room__Upper_Rooftops__ex__East_Rooftops__Off_the_Edge_1,
+            time: 1000,
+            dest: SpotId::Irikar__East_Rooftops__Off_the_Edge,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Irikar__Boss_Room__Catwalk_West__ex__Upper_Rooftops_1 => Exit {
+            id: ExitId::Irikar__Boss_Room__Catwalk_West__ex__Upper_Rooftops_1,
+            time: 3333,
+            dest: SpotId::Irikar__Boss_Room__Upper_Rooftops,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Irikar__Boss_Room__Catwalk_East__ex__Lamassu__Catwalk_West_1 => Exit {
+            id: ExitId::Irikar__Boss_Room__Catwalk_East__ex__Lamassu__Catwalk_West_1,
+            time: 1350,
+            dest: SpotId::Irikar__Lamassu__Catwalk_West,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Irikar__East_Rooftops__Upper_West__ex__East_Mid_air_1 => Exit {
+            id: ExitId::Irikar__East_Rooftops__Upper_West__ex__East_Mid_air_1,
+            time: 3157,
+            dest: SpotId::Irikar__East_Rooftops__East_Mid_air,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Irikar__East_Rooftops__Directly_Down__ex__Boss_Room__Northwest_1 => Exit {
+            id: ExitId::Irikar__East_Rooftops__Directly_Down__ex__Boss_Room__Northwest_1,
+            time: 1000,
+            dest: SpotId::Irikar__Boss_Room__Northwest,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Irikar__East_Rooftops__Off_the_Edge__ex__Top_Rooftop_1 => Exit {
+            id: ExitId::Irikar__East_Rooftops__Off_the_Edge__ex__Top_Rooftop_1,
+            time: 1403,
+            dest: SpotId::Irikar__East_Rooftops__Top_Rooftop,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Irikar__East_Rooftops__Off_the_Edge__ex__Top_Rooftop_2 => Exit {
+            id: ExitId::Irikar__East_Rooftops__Off_the_Edge__ex__Top_Rooftop_2,
+            time: 1403,
+            dest: SpotId::Irikar__East_Rooftops__Top_Rooftop,
+            price: Currency::Energy(20),
+            loc_id: None,
+        },
+        ExitId::Irikar__East_Rooftops__East_Mid_air__ex__Top_Rooftop_1 => Exit {
+            id: ExitId::Irikar__East_Rooftops__East_Mid_air__ex__Top_Rooftop_1,
+            time: 2631,
+            dest: SpotId::Irikar__East_Rooftops__Top_Rooftop,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Irikar__East_Rooftops__East_Mid_air__ex__Giguna__Breachable_Wall__West_Mid_air_1 => Exit {
+            id: ExitId::Irikar__East_Rooftops__East_Mid_air__ex__Giguna__Breachable_Wall__West_Mid_air_1,
+            time: 1350,
+            dest: SpotId::Giguna__Breachable_Wall__West_Mid_air,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Irikar__Lamassu__West_28__ex__Boss_Room__East_28_1 => Exit {
+            id: ExitId::Irikar__Lamassu__West_28__ex__Boss_Room__East_28_1,
+            time: 1350,
+            dest: SpotId::Irikar__Boss_Room__East_28,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Irikar__Lamassu__East_27__ex__Uhrum__West_Entrance__West_27_1 => Exit {
+            id: ExitId::Irikar__Lamassu__East_27__ex__Uhrum__West_Entrance__West_27_1,
+            time: 1350,
+            dest: SpotId::Uhrum__West_Entrance__West_27,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Irikar__Lamassu__East_26__ex__Uhrum__West_Entrance__West_26_1 => Exit {
+            id: ExitId::Irikar__Lamassu__East_26__ex__Uhrum__West_Entrance__West_26_1,
+            time: 1350,
+            dest: SpotId::Uhrum__West_Entrance__West_26,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Irikar__Lamassu__Hidden_Passage_East__ex__Uhrum__West_Entrance__Hidden_Passage_West_1 => Exit {
+            id: ExitId::Irikar__Lamassu__Hidden_Passage_East__ex__Uhrum__West_Entrance__Hidden_Passage_West_1,
+            time: 1350,
+            dest: SpotId::Uhrum__West_Entrance__Hidden_Passage_West,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Irikar__Lamassu__Catwalk_West__ex__Boss_Room__Catwalk_East_1 => Exit {
+            id: ExitId::Irikar__Lamassu__Catwalk_West__ex__Boss_Room__Catwalk_East_1,
+            time: 1350,
+            dest: SpotId::Irikar__Boss_Room__Catwalk_East,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Irikar__Lamassu__Catwalk_Middle__ex__Hidden_Passage_West_1 => Exit {
+            id: ExitId::Irikar__Lamassu__Catwalk_Middle__ex__Hidden_Passage_West_1,
+            time: 1228,
+            dest: SpotId::Irikar__Lamassu__Hidden_Passage_West,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Irikar__Lamassu__Catwalk_Middle__ex__Desk_1 => Exit {
+            id: ExitId::Irikar__Lamassu__Catwalk_Middle__ex__Desk_1,
+            time: 4210,
+            dest: SpotId::Irikar__Lamassu__Desk,
             price: Currency::Free,
             loc_id: None,
         },
@@ -14611,6 +15094,11 @@ pub fn build_actions() -> EnumMap<ActionId, Action> {
         ActionId::Giguna__Clouds__Platform_Start__Hack_Deploy_Ride_to_Portal => Action {
             id: ActionId::Giguna__Clouds__Platform_Start__Hack_Deploy_Ride_to_Portal,
             time: 12000,
+            price: Currency::Free,
+        },
+        ActionId::Giguna__Clouds__Platform_Start__Hack_and_Get_Off_Early => Action {
+            id: ActionId::Giguna__Clouds__Platform_Start__Hack_and_Get_Off_Early,
+            time: 9000,
             price: Currency::Free,
         },
         ActionId::Giguna__East_Caverns__West_14__Enter_Combo => Action {
@@ -22017,8 +22505,20 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             actions: Range {
-                start: ActionId::Giguna__Clouds__Platform_Start__Hack_and_Ride_to_Portal.into_usize(),
+                start: ActionId::Giguna__Clouds__Platform_Start__Hack_and_Get_Off_Early.into_usize(),
                 end: ActionId::Giguna__Clouds__Platform_Start__Hack_Deploy_Ride_to_Portal.into_usize() + 1,
+            },
+        },
+        SpotId::Giguna__Clouds__Platform_Early => Spot {
+            id: SpotId::Giguna__Clouds__Platform_Early,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
             },
         },
         SpotId::Giguna__Clouds__Platform_Stop => Spot {
@@ -23796,6 +24296,56 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             locations: Range {
                 start: LocationId::Giguna__Gubi_Lair__Pedestal__Axe.into_usize(),
                 end: LocationId::Giguna__Gubi_Lair__Pedestal__Axe.into_usize() + 1,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Giguna__Breachable_Wall__West_Mid_air => Spot {
+            id: SpotId::Giguna__Breachable_Wall__West_Mid_air,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Breachable_Wall__West_Mid_air__ex__Irikar__East_Rooftops__East_Mid_air_1.into_usize(),
+                end: ExitId::Giguna__Breachable_Wall__West_Mid_air__ex__Irikar__East_Rooftops__East_Mid_air_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Giguna__Breachable_Wall__Above_West_Catwalk => Spot {
+            id: SpotId::Giguna__Breachable_Wall__Above_West_Catwalk,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Breachable_Wall__Above_West_Catwalk__ex__Irikar__Boss_Room__Above_Catwalk_1.into_usize(),
+                end: ExitId::Giguna__Breachable_Wall__Above_West_Catwalk__ex__Irikar__Boss_Room__Above_Catwalk_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Giguna__Breachable_Wall__Above_Middle_Catwalk => Spot {
+            id: SpotId::Giguna__Breachable_Wall__Above_Middle_Catwalk,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Giguna__Breachable_Wall__Wall_Interior => Spot {
+            id: SpotId::Giguna__Breachable_Wall__Wall_Interior,
+            locations: Range {
+                start: 0, end: 0,
             },
             exits: Range {
                 start: 0, end: 0,
@@ -25834,6 +26384,31 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
         },
+        SpotId::Irikar__Hub__Sat_Tower_West_Valley => Spot {
+            id: SpotId::Irikar__Hub__Sat_Tower_West_Valley,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Irikar__Hub__Sat_Tower_Northeast => Spot {
+            id: SpotId::Irikar__Hub__Sat_Tower_Northeast,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Irikar__Hub__Sat_Tower_Northeast__ex__Airy__Northwest_1.into_usize(),
+                end: ExitId::Irikar__Hub__Sat_Tower_Northeast__ex__Airy__Northwest_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
         SpotId::Irikar__Hub__Sat_Tower_Middle_Ledge => Spot {
             id: SpotId::Irikar__Hub__Sat_Tower_Middle_Ledge,
             locations: Range {
@@ -26062,6 +26637,31 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
         },
+        SpotId::Irikar__Airy__Northwest => Spot {
+            id: SpotId::Irikar__Airy__Northwest,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Irikar__Airy__Middle_South => Spot {
+            id: SpotId::Irikar__Airy__Middle_South,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Irikar__Airy__Middle_South__ex__Sight_Room__Above_Room_North_1.into_usize(),
+                end: ExitId::Irikar__Airy__Middle_South__ex__Sight_Room__Above_Room_North_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
         SpotId::Irikar__Sight_Room__West_24 => Spot {
             id: SpotId::Irikar__Sight_Room__West_24,
             locations: Range {
@@ -26108,6 +26708,31 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             exits: Range {
                 start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Irikar__Sight_Room__Above_Room_North => Spot {
+            id: SpotId::Irikar__Sight_Room__Above_Room_North,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Irikar__Sight_Room__Above_Room_East => Spot {
+            id: SpotId::Irikar__Sight_Room__Above_Room_East,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Irikar__Sight_Room__Above_Room_East__ex__East_Rooftops__Upper_West_1.into_usize(),
+                end: ExitId::Irikar__Sight_Room__Above_Room_East__ex__East_Rooftops__Upper_West_1.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
@@ -26490,6 +27115,20 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             exits: Range {
+                start: ExitId::Irikar__Boss_Room__West_28__ex__Empty_Foyer__East_1.into_usize(),
+                end: ExitId::Irikar__Boss_Room__West_28__ex__Empty_Foyer__East_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Irikar__Boss_Room__Bulls_Feet => Spot {
+            id: SpotId::Irikar__Boss_Room__Bulls_Feet,
+            locations: Range {
+                start: LocationId::Irikar__Boss_Room__Bulls_Feet__Boss_Reward.into_usize(),
+                end: LocationId::Irikar__Boss_Room__Bulls_Feet__Shockwave_Gudam.into_usize() + 1,
+            },
+            exits: Range {
                 start: 0, end: 0,
             },
             actions: Range {
@@ -26502,7 +27141,173 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             exits: Range {
+                start: ExitId::Irikar__Boss_Room__East_28__ex__Lamassu__West_28_1.into_usize(),
+                end: ExitId::Irikar__Boss_Room__East_28__ex__Lamassu__West_28_1.into_usize() + 1,
+            },
+            actions: Range {
                 start: 0, end: 0,
+            },
+        },
+        SpotId::Irikar__Boss_Room__Northwest => Spot {
+            id: SpotId::Irikar__Boss_Room__Northwest,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Irikar__Boss_Room__Upper_Rooftops => Spot {
+            id: SpotId::Irikar__Boss_Room__Upper_Rooftops,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Irikar__Boss_Room__Upper_Rooftops__ex__East_Rooftops__Off_the_Edge_1.into_usize(),
+                end: ExitId::Irikar__Boss_Room__Upper_Rooftops__ex__East_Rooftops__Off_the_Edge_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Irikar__Boss_Room__Healthy_Rooftop => Spot {
+            id: SpotId::Irikar__Boss_Room__Healthy_Rooftop,
+            locations: Range {
+                start: LocationId::Irikar__Boss_Room__Healthy_Rooftop__Health.into_usize(),
+                end: LocationId::Irikar__Boss_Room__Healthy_Rooftop__Health.into_usize() + 1,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Irikar__Boss_Room__Sat_Tower_Roof_West => Spot {
+            id: SpotId::Irikar__Boss_Room__Sat_Tower_Roof_West,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Irikar__Boss_Room__Sat_Tower_Roof_East => Spot {
+            id: SpotId::Irikar__Boss_Room__Sat_Tower_Roof_East,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Irikar__Boss_Room__Catwalk_West => Spot {
+            id: SpotId::Irikar__Boss_Room__Catwalk_West,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Irikar__Boss_Room__Catwalk_West__ex__Upper_Rooftops_1.into_usize(),
+                end: ExitId::Irikar__Boss_Room__Catwalk_West__ex__Upper_Rooftops_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Irikar__Boss_Room__Catwalk_East => Spot {
+            id: SpotId::Irikar__Boss_Room__Catwalk_East,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Irikar__Boss_Room__Catwalk_East__ex__Lamassu__Catwalk_West_1.into_usize(),
+                end: ExitId::Irikar__Boss_Room__Catwalk_East__ex__Lamassu__Catwalk_West_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Irikar__Boss_Room__Above_Catwalk => Spot {
+            id: SpotId::Irikar__Boss_Room__Above_Catwalk,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Irikar__East_Rooftops__Upper_West => Spot {
+            id: SpotId::Irikar__East_Rooftops__Upper_West,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Irikar__East_Rooftops__Upper_West__ex__East_Mid_air_1.into_usize(),
+                end: ExitId::Irikar__East_Rooftops__Upper_West__ex__East_Mid_air_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Irikar__East_Rooftops__Top_Rooftop => Spot {
+            id: SpotId::Irikar__East_Rooftops__Top_Rooftop,
+            locations: Range {
+                start: LocationId::Irikar__East_Rooftops__Top_Rooftop__Tablet.into_usize(),
+                end: LocationId::Irikar__East_Rooftops__Top_Rooftop__Tablet.into_usize() + 1,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Irikar__East_Rooftops__Directly_Down => Spot {
+            id: SpotId::Irikar__East_Rooftops__Directly_Down,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Irikar__East_Rooftops__Directly_Down__ex__Boss_Room__Northwest_1.into_usize(),
+                end: ExitId::Irikar__East_Rooftops__Directly_Down__ex__Boss_Room__Northwest_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Irikar__East_Rooftops__Off_the_Edge => Spot {
+            id: SpotId::Irikar__East_Rooftops__Off_the_Edge,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Irikar__East_Rooftops__Off_the_Edge__ex__Top_Rooftop_1.into_usize(),
+                end: ExitId::Irikar__East_Rooftops__Off_the_Edge__ex__Top_Rooftop_2.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Irikar__East_Rooftops__East_Mid_air => Spot {
+            id: SpotId::Irikar__East_Rooftops__East_Mid_air,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Irikar__East_Rooftops__East_Mid_air__ex__Giguna__Breachable_Wall__West_Mid_air_1.into_usize(),
+                end: ExitId::Irikar__East_Rooftops__East_Mid_air__ex__Top_Rooftop_1.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
@@ -26592,6 +27397,133 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
         },
+        SpotId::Irikar__Lamassu__West_28 => Spot {
+            id: SpotId::Irikar__Lamassu__West_28,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Irikar__Lamassu__West_28__ex__Boss_Room__East_28_1.into_usize(),
+                end: ExitId::Irikar__Lamassu__West_28__ex__Boss_Room__East_28_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Irikar__Lamassu__Bottom_Middle => Spot {
+            id: SpotId::Irikar__Lamassu__Bottom_Middle,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Irikar__Lamassu__East_27 => Spot {
+            id: SpotId::Irikar__Lamassu__East_27,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Irikar__Lamassu__East_27__ex__Uhrum__West_Entrance__West_27_1.into_usize(),
+                end: ExitId::Irikar__Lamassu__East_27__ex__Uhrum__West_Entrance__West_27_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Irikar__Lamassu__East_26 => Spot {
+            id: SpotId::Irikar__Lamassu__East_26,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Irikar__Lamassu__East_26__ex__Uhrum__West_Entrance__West_26_1.into_usize(),
+                end: ExitId::Irikar__Lamassu__East_26__ex__Uhrum__West_Entrance__West_26_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Irikar__Lamassu__Desk => Spot {
+            id: SpotId::Irikar__Lamassu__Desk,
+            locations: Range {
+                start: LocationId::Irikar__Lamassu__Desk__Item.into_usize(),
+                end: LocationId::Irikar__Lamassu__Desk__Item.into_usize() + 1,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Irikar__Lamassu__Hidden_Passage_East => Spot {
+            id: SpotId::Irikar__Lamassu__Hidden_Passage_East,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Irikar__Lamassu__Hidden_Passage_East__ex__Uhrum__West_Entrance__Hidden_Passage_West_1.into_usize(),
+                end: ExitId::Irikar__Lamassu__Hidden_Passage_East__ex__Uhrum__West_Entrance__Hidden_Passage_West_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Irikar__Lamassu__Hidden_Passage_West => Spot {
+            id: SpotId::Irikar__Lamassu__Hidden_Passage_West,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Irikar__Lamassu__Northwest => Spot {
+            id: SpotId::Irikar__Lamassu__Northwest,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Irikar__Lamassu__Catwalk_West => Spot {
+            id: SpotId::Irikar__Lamassu__Catwalk_West,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Irikar__Lamassu__Catwalk_West__ex__Boss_Room__Catwalk_East_1.into_usize(),
+                end: ExitId::Irikar__Lamassu__Catwalk_West__ex__Boss_Room__Catwalk_East_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Irikar__Lamassu__Catwalk_Middle => Spot {
+            id: SpotId::Irikar__Lamassu__Catwalk_Middle,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Irikar__Lamassu__Catwalk_Middle__ex__Desk_1.into_usize(),
+                end: ExitId::Irikar__Lamassu__Catwalk_Middle__ex__Hidden_Passage_West_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
         SpotId::Menu__Upgrade_Menu__Physiology => Spot {
             id: SpotId::Menu__Upgrade_Menu__Physiology,
             locations: Range {
@@ -26643,6 +27575,90 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             exits: Range {
                 start: ExitId::Menu__Upgrade_Menu__Drone__ex__Combat_1.into_usize(),
                 end: ExitId::Menu__Upgrade_Menu__Drone__ex__Physiology_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Uhrum__West_Entrance__West_27 => Spot {
+            id: SpotId::Uhrum__West_Entrance__West_27,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Uhrum__West_Entrance__West_26 => Spot {
+            id: SpotId::Uhrum__West_Entrance__West_26,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Uhrum__West_Entrance__Hidden_Passage_West => Spot {
+            id: SpotId::Uhrum__West_Entrance__Hidden_Passage_West,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Uhrum__West_Entrance__Hidden_Passage_Entry => Spot {
+            id: SpotId::Uhrum__West_Entrance__Hidden_Passage_Entry,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Uhrum__West_Entrance__West_25 => Spot {
+            id: SpotId::Uhrum__West_Entrance__West_25,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Uhrum__West_Entrance__Save_Point => Spot {
+            id: SpotId::Uhrum__West_Entrance__Save_Point,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Uhrum__West_Entrance__Portal_Stand => Spot {
+            id: SpotId::Uhrum__West_Entrance__Portal_Stand,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
             },
             actions: Range {
                 start: 0, end: 0,
@@ -27516,6 +28532,7 @@ pub fn spot_locations(id: SpotId) -> Range<usize> {
         SpotId::Giguna__Clouds__North_Right => Range { start: 0, end: 0 },
         SpotId::Giguna__Clouds__North_Under_Ledge => Range { start: 0, end: 0 },
         SpotId::Giguna__Clouds__Platform_Start => Range { start: 0, end: 0 },
+        SpotId::Giguna__Clouds__Platform_Early => Range { start: 0, end: 0 },
         SpotId::Giguna__Clouds__Platform_Stop => Range { start: 0, end: 0 },
         SpotId::Giguna__Clouds__Cache => Range {
             start: LocationId::Giguna__Clouds__Cache__Item.into_usize(),
@@ -27714,6 +28731,10 @@ pub fn spot_locations(id: SpotId) -> Range<usize> {
             start: LocationId::Giguna__Gubi_Lair__Pedestal__Axe.into_usize(),
             end: LocationId::Giguna__Gubi_Lair__Pedestal__Axe.into_usize() + 1,
         },
+        SpotId::Giguna__Breachable_Wall__West_Mid_air => Range { start: 0, end: 0 },
+        SpotId::Giguna__Breachable_Wall__Above_West_Catwalk => Range { start: 0, end: 0 },
+        SpotId::Giguna__Breachable_Wall__Above_Middle_Catwalk => Range { start: 0, end: 0 },
+        SpotId::Giguna__Breachable_Wall__Wall_Interior => Range { start: 0, end: 0 },
         SpotId::Glacier__Dock_Elevator__Elevator => Range { start: 0, end: 0 },
         SpotId::Glacier__Dock_Elevator__Connector => Range { start: 0, end: 0 },
         SpotId::Glacier__Dock_Interior__Connector => Range { start: 0, end: 0 },
@@ -27906,6 +28927,8 @@ pub fn spot_locations(id: SpotId) -> Range<usize> {
         SpotId::Irikar__Hub__Bowl_Hole => Range { start: 0, end: 0 },
         SpotId::Irikar__Hub__Sat_Tower_Roof_West => Range { start: 0, end: 0 },
         SpotId::Irikar__Hub__Sat_Tower_Roof_East => Range { start: 0, end: 0 },
+        SpotId::Irikar__Hub__Sat_Tower_West_Valley => Range { start: 0, end: 0 },
+        SpotId::Irikar__Hub__Sat_Tower_Northeast => Range { start: 0, end: 0 },
         SpotId::Irikar__Hub__Sat_Tower_Middle_Ledge => Range { start: 0, end: 0 },
         SpotId::Irikar__Hub__Sat_Tower_Floating_Platform => Range { start: 0, end: 0 },
         SpotId::Irikar__Hub__Sat_Tower_Top_Ledge => Range {
@@ -27936,6 +28959,8 @@ pub fn spot_locations(id: SpotId) -> Range<usize> {
             start: LocationId::Irikar__Hub__Royal_Storage_in_Wall__Item.into_usize(),
             end: LocationId::Irikar__Hub__Royal_Storage_in_Wall__Item.into_usize() + 1,
         },
+        SpotId::Irikar__Airy__Northwest => Range { start: 0, end: 0 },
+        SpotId::Irikar__Airy__Middle_South => Range { start: 0, end: 0 },
         SpotId::Irikar__Sight_Room__West_24 => Range { start: 0, end: 0 },
         SpotId::Irikar__Sight_Room__Lower_Ledge => Range { start: 0, end: 0 },
         SpotId::Irikar__Sight_Room__Portal => Range { start: 0, end: 0 },
@@ -27943,6 +28968,8 @@ pub fn spot_locations(id: SpotId) -> Range<usize> {
             start: LocationId::Irikar__Sight_Room__Item_Pedestal__Urn.into_usize(),
             end: LocationId::Irikar__Sight_Room__Item_Pedestal__Urn.into_usize() + 1,
         },
+        SpotId::Irikar__Sight_Room__Above_Room_North => Range { start: 0, end: 0 },
+        SpotId::Irikar__Sight_Room__Above_Room_East => Range { start: 0, end: 0 },
         SpotId::Irikar__Abandoned_Room__Empty_Pedestal => Range { start: 0, end: 0 },
         SpotId::Irikar__Abandoned_Room__Corner_Core => Range {
             start: LocationId::Irikar__Abandoned_Room__Corner_Core__Core.into_usize(),
@@ -27976,7 +29003,30 @@ pub fn spot_locations(id: SpotId) -> Range<usize> {
         SpotId::Irikar__Empty_Foyer__West => Range { start: 0, end: 0 },
         SpotId::Irikar__Empty_Foyer__East => Range { start: 0, end: 0 },
         SpotId::Irikar__Boss_Room__West_28 => Range { start: 0, end: 0 },
+        SpotId::Irikar__Boss_Room__Bulls_Feet => Range {
+            start: LocationId::Irikar__Boss_Room__Bulls_Feet__Boss_Reward.into_usize(),
+            end: LocationId::Irikar__Boss_Room__Bulls_Feet__Shockwave_Gudam.into_usize() + 1,
+        },
         SpotId::Irikar__Boss_Room__East_28 => Range { start: 0, end: 0 },
+        SpotId::Irikar__Boss_Room__Northwest => Range { start: 0, end: 0 },
+        SpotId::Irikar__Boss_Room__Upper_Rooftops => Range { start: 0, end: 0 },
+        SpotId::Irikar__Boss_Room__Healthy_Rooftop => Range {
+            start: LocationId::Irikar__Boss_Room__Healthy_Rooftop__Health.into_usize(),
+            end: LocationId::Irikar__Boss_Room__Healthy_Rooftop__Health.into_usize() + 1,
+        },
+        SpotId::Irikar__Boss_Room__Sat_Tower_Roof_West => Range { start: 0, end: 0 },
+        SpotId::Irikar__Boss_Room__Sat_Tower_Roof_East => Range { start: 0, end: 0 },
+        SpotId::Irikar__Boss_Room__Catwalk_West => Range { start: 0, end: 0 },
+        SpotId::Irikar__Boss_Room__Catwalk_East => Range { start: 0, end: 0 },
+        SpotId::Irikar__Boss_Room__Above_Catwalk => Range { start: 0, end: 0 },
+        SpotId::Irikar__East_Rooftops__Upper_West => Range { start: 0, end: 0 },
+        SpotId::Irikar__East_Rooftops__Top_Rooftop => Range {
+            start: LocationId::Irikar__East_Rooftops__Top_Rooftop__Tablet.into_usize(),
+            end: LocationId::Irikar__East_Rooftops__Top_Rooftop__Tablet.into_usize() + 1,
+        },
+        SpotId::Irikar__East_Rooftops__Directly_Down => Range { start: 0, end: 0 },
+        SpotId::Irikar__East_Rooftops__Off_the_Edge => Range { start: 0, end: 0 },
+        SpotId::Irikar__East_Rooftops__East_Mid_air => Range { start: 0, end: 0 },
         SpotId::Irikar__Midwest__East_23 => Range { start: 0, end: 0 },
         SpotId::Irikar__Midwest__East_24_on_Building => Range { start: 0, end: 0 },
         SpotId::Irikar__Midwest__East_24_on_Floor => Range { start: 0, end: 0 },
@@ -27984,6 +29034,19 @@ pub fn spot_locations(id: SpotId) -> Range<usize> {
         SpotId::Irikar__Midwest__East_26 => Range { start: 0, end: 0 },
         SpotId::Irikar__Midwest__East_27 => Range { start: 0, end: 0 },
         SpotId::Irikar__Midwest__East_28 => Range { start: 0, end: 0 },
+        SpotId::Irikar__Lamassu__West_28 => Range { start: 0, end: 0 },
+        SpotId::Irikar__Lamassu__Bottom_Middle => Range { start: 0, end: 0 },
+        SpotId::Irikar__Lamassu__East_27 => Range { start: 0, end: 0 },
+        SpotId::Irikar__Lamassu__East_26 => Range { start: 0, end: 0 },
+        SpotId::Irikar__Lamassu__Desk => Range {
+            start: LocationId::Irikar__Lamassu__Desk__Item.into_usize(),
+            end: LocationId::Irikar__Lamassu__Desk__Item.into_usize() + 1,
+        },
+        SpotId::Irikar__Lamassu__Hidden_Passage_East => Range { start: 0, end: 0 },
+        SpotId::Irikar__Lamassu__Hidden_Passage_West => Range { start: 0, end: 0 },
+        SpotId::Irikar__Lamassu__Northwest => Range { start: 0, end: 0 },
+        SpotId::Irikar__Lamassu__Catwalk_West => Range { start: 0, end: 0 },
+        SpotId::Irikar__Lamassu__Catwalk_Middle => Range { start: 0, end: 0 },
         SpotId::Menu__Upgrade_Menu__Physiology => Range {
             start: LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_1.into_usize(),
             end: LocationId::Menu__Upgrade_Menu__Physiology__Mist_Upgrade.into_usize() + 1,
@@ -28000,6 +29063,13 @@ pub fn spot_locations(id: SpotId) -> Range<usize> {
             start: LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_1.into_usize(),
             end: LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_3.into_usize() + 1,
         },
+        SpotId::Uhrum__West_Entrance__West_27 => Range { start: 0, end: 0 },
+        SpotId::Uhrum__West_Entrance__West_26 => Range { start: 0, end: 0 },
+        SpotId::Uhrum__West_Entrance__Hidden_Passage_West => Range { start: 0, end: 0 },
+        SpotId::Uhrum__West_Entrance__Hidden_Passage_Entry => Range { start: 0, end: 0 },
+        SpotId::Uhrum__West_Entrance__West_25 => Range { start: 0, end: 0 },
+        SpotId::Uhrum__West_Entrance__Save_Point => Range { start: 0, end: 0 },
+        SpotId::Uhrum__West_Entrance__Portal_Stand => Range { start: 0, end: 0 },
     }
 }
 
@@ -28212,6 +29282,7 @@ pub fn area_locations(id: AreaId) -> Range<usize> {
             start: LocationId::Giguna__Gubi_Lair__Center_Platform__Boss_Reward.into_usize(),
             end: LocationId::Giguna__Gubi_Lair__Pedestal__Axe.into_usize(),
         },
+        AreaId::Giguna__Breachable_Wall => Range { start: 0, end: 0 },
         AreaId::Glacier__Dock_Elevator => Range { start: 0, end: 0 },
         AreaId::Glacier__Dock_Interior => Range { start: 0, end: 0 },
         AreaId::Glacier__Dock_Outside => Range { start: 0, end: 0 },
@@ -28273,6 +29344,7 @@ pub fn area_locations(id: AreaId) -> Range<usize> {
             start: LocationId::Irikar__Hub__Dagger_Altar__Weapon.into_usize(),
             end: LocationId::Irikar__Hub__Sat_Tower_Top_Ledge__Tablet.into_usize(),
         },
+        AreaId::Irikar__Airy => Range { start: 0, end: 0 },
         AreaId::Irikar__Sight_Room => Range {
             start: LocationId::Irikar__Sight_Room__Item_Pedestal__Urn.into_usize(),
             end: LocationId::Irikar__Sight_Room__Item_Pedestal__Urn.into_usize(),
@@ -28284,12 +29356,24 @@ pub fn area_locations(id: AreaId) -> Range<usize> {
         AreaId::Irikar__Basement_Portal => Range { start: 0, end: 0 },
         AreaId::Irikar__Basement_Pipes => Range { start: 0, end: 0 },
         AreaId::Irikar__Empty_Foyer => Range { start: 0, end: 0 },
-        AreaId::Irikar__Boss_Room => Range { start: 0, end: 0 },
+        AreaId::Irikar__Boss_Room => Range {
+            start: LocationId::Irikar__Boss_Room__Bulls_Feet__Boss_Reward.into_usize(),
+            end: LocationId::Irikar__Boss_Room__Healthy_Rooftop__Health.into_usize(),
+        },
+        AreaId::Irikar__East_Rooftops => Range {
+            start: LocationId::Irikar__East_Rooftops__Top_Rooftop__Tablet.into_usize(),
+            end: LocationId::Irikar__East_Rooftops__Top_Rooftop__Tablet.into_usize(),
+        },
         AreaId::Irikar__Midwest => Range { start: 0, end: 0 },
+        AreaId::Irikar__Lamassu => Range {
+            start: LocationId::Irikar__Lamassu__Desk__Item.into_usize(),
+            end: LocationId::Irikar__Lamassu__Desk__Item.into_usize(),
+        },
         AreaId::Menu__Upgrade_Menu => Range {
             start: LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_1.into_usize(),
             end: LocationId::Menu__Upgrade_Menu__Physiology__Mist_Upgrade.into_usize(),
         },
+        AreaId::Uhrum__West_Entrance => Range { start: 0, end: 0 },
     }
 }
 
@@ -28332,5 +29416,6 @@ pub fn region_locations(id: RegionId) -> Range<usize> {
             start: LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_1.into_usize(),
             end: LocationId::Menu__Upgrade_Menu__Physiology__Mist_Upgrade.into_usize(),
         },
+        RegionId::Uhrum => Range { start: 0, end: 0 },
     }
 }

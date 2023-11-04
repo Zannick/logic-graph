@@ -1,0 +1,23 @@
+name: Uhrum Valley
+short: Uhrum
+
+areas:
+- name: West Entrance
+  on_entry: $reset_old_area(^newpos)
+  spots:
+    - name: West 27
+      coord: [19.05, 26.8]
+    - name: West 26
+      coord: [19.05, 25.85]
+    - name: Hidden Passage West
+      coord: [19.05, 25.2]
+    - name: Hidden Passage Entry
+      coord: [19.2, 25.2]
+    - name: West 25
+      coord: [19.05, 24.75]
+
+    - name: Save Point
+      coord: [19.5, 27.45]
+    - name: Portal Stand
+      coord: [19.525, 25.5]
+

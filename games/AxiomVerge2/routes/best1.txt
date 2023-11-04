@@ -36,7 +36,7 @@
   Move... to Ebih > Ebih West > Upper Save
 ! Do Ebih > Ebih West > Upper Save > Save
   Move... to Ebih > Boss Room > Boss
-* Collect Defeat_Ebih_Alu from Ebih > Boss Room > Boss > Hack Alu
+* Collect Ebih_Alu from Ebih > Boss Room > Boss > Hack Alu
 * Collect Flask from Ebih > Boss Room > Boss > Boss Reward
   Move... to Ebih > Drone Room > Portal Exit
 ! Do Ebih > Drone Room > Portal Exit > Activate Platform

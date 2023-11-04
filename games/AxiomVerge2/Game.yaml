@@ -27,6 +27,7 @@ data:
   water: false
   flipside: SpotId::None
   portal_default: SpotId::None
+  # fallthrough: SpotId::None  # Where Indra will fall to if the room is reset
 
 # TODO: the win condition should be an item Victory,
 # whose requirement is $objective corresponding to the current objective.
@@ -243,7 +244,8 @@ helpers:
     [Boomerang, Power_Matrix]
   $all_urns:itemList: >
     [Amashilama, Ledge_Grab, Infect, Remote_Drone, Shockwave, Wall_Climb, Slingshot_Hook, Breach_Sight]
-  # To be added: 5 Flask, 2 Big_Flask, Dangerous_Ideas, Double_Axe, Drone_Hover, Royal_Dagger
+  # To be added: 5 Flask, 3 Big_Flask, Dangerous_Ideas, Double_Axe, Drone_Hover, Royal_Dagger
+  # 1 Health_Fragment, The_Student, Heretics_Granddaughter, Terminal_Breakthrough_2
 
   $save:action: ^save = ^position; ^energy = $max_energy
   $deploy_drone:action: >

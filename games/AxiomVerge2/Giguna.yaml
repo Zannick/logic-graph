@@ -1762,7 +1762,17 @@ areas:
           to: Platform Stop
           time: 12  # it's not really additional time
         # Early portal gives us about .5s savings, is that worth modeling?
+        # TODO: early platform exit to jump to the Irikar Hub Sat Tower
+        - name: Hack and Get Off Early
+          req: not ^_platform_and_portal and $activate
+          do: ^_platform_and_portal = true  # technically not the portal though
+          to: Platform Early
+          time: 9
 
+    - name: Platform Early
+      coord: [12.5, 19.5]
+      local:
+        - to: Southeast
     - name: Platform Stop
       coord: [12.5, 18.7]
       data:
@@ -3229,3 +3239,24 @@ areas:
         - name: Axe
           item: Double_Axe
           tags: [standing]
+
+- name: Breachable Wall
+  on_entry: $reset_old_area(^newpos)
+  spots:
+    - name: West Mid-air
+      coord: [16.05, 25.0]
+      local:
+        - to: Above West Catwalk
+      exits:
+        - to: Irikar > East Rooftops > East Mid-air
+          tags: [xshift]
+    - name: Above West Catwalk
+      coord: [16.55, 25.9]
+      exits:
+        - to: Irikar > Boss Room > Above Catwalk
+          tags: [yshift]
+    - name: Above Middle Catwalk
+      coord: [17.1, 25.9]
+
+    - name: Wall Interior
+      coord: [16.9, 24.6]

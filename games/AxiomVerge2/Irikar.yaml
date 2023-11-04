@@ -23,6 +23,7 @@ areas:
       coord: [12.8, 20.1]
       local:
         - to: East Rim
+        - to: Sat Tower West Valley
 
     #region The Bowl
     - name: West Rim
@@ -41,6 +42,7 @@ areas:
           jumps_down: 2
         - to: Bowl Hole
           jumps_down: 1
+        - to: Sat Tower West Valley
       exits:
         - to: Sat Tower Roof West
           req: $hover
@@ -97,6 +99,10 @@ areas:
       local:
         - to: Bowl Platform 3
           jumps: 3
+        - to: Bowl Hole
+          thru: [[12.5, 22.4], [12.85, 22.4]]
+          jumps: [2, 0, 0]
+          jumps_down: [0, 0, 1]
       exits:
         - to: Bowl Hole
           req: $hook
@@ -119,10 +125,24 @@ areas:
       coord: [13.4, 20.5]
       local:
         - to: Sat Tower Roof East
+        - to: Sat Tower West Valley
     - name: Sat Tower Roof East
       coord: [13.65, 20.5]
       local:
         - to: Sat Tower Roof West
+        - to: Sat Tower Northeast
+    - name: Sat Tower West Valley
+      coord: [13.15, 21.2]
+      local:
+        - to: East Rim
+          jumps: 5
+        - to: Sat Tower Roof West
+          jumps: 4
+    - name: Sat Tower Northeast
+      coord: [13.95, 20.7]
+      exits:
+        - to: Airy > Northwest
+          tags: [xshift]
     - name: Sat Tower Middle Ledge
       coord: [13.4, 22.6]
       local:
@@ -292,6 +312,19 @@ areas:
           tags: [flask]
     #endregion
 
+- name: Airy
+  on_entry: $reset_old_area(^newpos)
+  spots:
+    - name: Northwest
+      coord: [14.05, 20.7]
+      local:
+        - to: Middle South
+    - name: Middle South
+      coord: [14.65, 22.9]
+      exits:
+        - to: Sight Room > Above Room North
+          tags: [yshift]
+
 - name: Sight Room
   on_entry: $reset_old_area(^newpos)
   data:
@@ -332,6 +365,16 @@ areas:
         - name: Urn
           item: Breach_Sight
           tags: [urn]
+
+    - name: Above Room North
+      coord: [14.65, 23.1]
+      local:
+        - to: Above Room East
+    - name: Above Room East
+      coord: [14.95, 23.4]
+      exits:
+        - to: East Rooftops > Upper West
+          tags: [xshift]
 
 - name: Abandoned Room
   on_entry: $reset_old_area(^newpos)
@@ -657,8 +700,168 @@ areas:
   spots:
     - name: West 28
       coord: [15.05, 27.7]
+      local:
+        - to: Bull's Feet
+      exits:
+        - to: Empty Foyer > East
+          tags: [xshift]
+    - name: Bull's Feet
+      coord: [15.8, 27.7]
+      local:
+        - to: West 28
+        - to: East 28
+      # TODO: wall climb
+      locations:
+        - name: Defeat Gudam
+          item: Irikar_Gudam
+          canon: Irikar_Gudam
+          req: $can_damage
+          time: 20  # around 10s with fully upgraded drone + 3s explode animation
+        - name: Shockwave Gudam
+          item: Irikar_Gudam
+          canon: Irikar_Gudam
+          req: $shockwave
+          price: 200
+          time: 10
+          tags: [shockwave]
+        - name: Boss Reward
+          item: Big_Flask
+          req: Irikar_Gudam
+          tags: [flask]
+      # TODO: is it possible to climb up as drone?
     - name: East 28
       coord: [16.95, 27.7]
+      local:
+        - to: Bull's Feet
+      exits:
+        - to: Lamassu > West 28
+          tags: [xshift]
+
+    - name: Northwest
+      coord: [15.2, 25.1]
+      local:
+        - to: West 28
+          thru: [15.15, 27.5]
+    - name: Upper Rooftops
+      coord: [15.6, 25.1]
+      local:
+        - to: West 28
+          jumps_down: 3
+        - to: Bull's Feet
+          jumps_down: 3
+        - to: Healthy Rooftop
+        - to: Sat Tower Roof West
+      exits:
+        - to: East Rooftops > Off the Edge
+          req: $hover or $mist2
+          tags: [yshift]
+    - name: Healthy Rooftop
+      coord: [15.85, 26.05]
+      local:
+        - to: West 28
+          jumps_down: 2
+        - to: Bull's Feet
+          jumps_down: 2
+        - to: Sat Tower Roof West
+        - to: East 28
+      locations:
+        - name: Health
+          item: Health_Fragment
+          tags: [standing]
+    - name: Sat Tower Roof West
+      coord: [16.25, 26.15]
+      local:
+        - to: Healthy Rooftop
+          jumps: 1
+        - to: Sat Tower Roof East
+        - to: West 28
+          jumps_down: 1
+        - to: Bull's Feet
+          jumps_down: 1
+    - name: Sat Tower Roof East
+      coord: [16.45, 26.15]
+      local:
+        - to: Sat Tower Roof West
+        - to: Bull's Feet
+          jumps_down: 1
+        - to: East 28
+    - name: Catwalk West
+      coord: [16.55, 25.7]
+      local:
+        - to: Catwalk East
+        - to: Healthy Rooftop
+        - to: Sat Tower Roof West
+        - to: Sat Tower Roof East
+      exits:
+        - to: Upper Rooftops
+          req: $hover
+          movement: base
+          jumps: 3
+    - name: Catwalk East
+      coord: [16.95, 25.7]
+      local:
+        - to: Catwalk West
+        - to: Bull's Feet
+          jumps_down: 1
+      exits:
+        - to: Lamassu > Catwalk West
+          tags: [xshift]
+    - name: Above Catwalk
+      coord: [26.55, 25.1]
+      local:
+        - to: Healthy Rooftop
+        - to: Sat Tower Roof West
+
+- name: East Rooftops
+  on_entry: $reset_old_area(^newpos)
+  spots:
+    - name: Upper West
+      coord: [15.05, 23.4]
+      local:
+        - to: Top Rooftop
+        - to: Off the Edge
+      exits:
+        - to: East Mid-air
+          req: $hover
+          movement: base
+    - name: Top Rooftop
+      coord: [15.2, 24.65]
+      local:
+        - to: Directly Down
+          jumps_down: 1
+        - to: Off the Edge
+      locations:
+        - name: Tablet
+          item: Heretics_Granddaughter
+          tags: [standing]
+    - name: Directly Down
+      coord: [15.2, 24.9]
+      exits:
+        - to: Boss Room > Northwest
+          tags: [yshift]
+    - name: Off the Edge
+      coord: [15.6, 24.9]
+      exits:
+        - to: Top Rooftop
+          req: $hover
+          movement: base
+          jumps: 2
+        - to: Top Rooftop
+          req: $mist2
+          price: 20
+          movement: base
+          jumps: 1
+    - name: East Mid-air
+      coord: [15.95, 25.0]
+      local:
+        - to: Off the Edge
+      exits:
+        - to: Top Rooftop
+          req: $hover
+          movement: base
+          jumps: 1
+        - to: Giguna > Breachable Wall > West Mid-air
+          tags: [xshift]
 
 - name: Midwest
   on_entry: $reset_old_area(^newpos)
@@ -677,3 +880,87 @@ areas:
       coord: [9.95, 26.35]
     - name: East 28
       coord: [9.95, 27.6]
+
+- name: Lamassu
+  on_entry: $reset_old_area(^newpos)
+  spots:
+    - name: West 28
+      coord: [17.05, 27.7]
+      local:
+        - to: Bottom Middle
+          jumps: 3
+      exits:
+        - to: Boss Room > East 28
+          tags: [xshift]
+    - name: Bottom Middle
+      coord: [18.1, 27.55]
+      local:
+        - to: West 28
+          jumps: 3
+        - to: East 27
+          jumps: 4
+    - name: East 27
+      coord: [18.95, 26.8]
+      local:
+        - to: Bottom Middle
+      exits:
+        - to: Uhrum > West Entrance > West 27
+          tags: [xshift]
+    - name: East 26
+      coord: [18.95, 25.85]
+      local:
+        - to: Desk
+      exits:
+        - to: Uhrum > West Entrance > West 26
+          tags: [xshift]
+    - name: Desk
+      coord: [18.7, 26.0]
+      local:
+        - to: Bottom Middle
+        - to: East 26
+          jumps: 1
+      locations:
+        - name: Item
+          item: Terminal_Breakthrough_2
+          tags: [standing]
+    - name: Hidden Passage East
+      coord: [18.95, 25.2]
+      local:
+        - to: Hidden Passage West
+          jumps: 1
+      exits:
+        - to: Uhrum > West Entrance > Hidden Passage West
+          tags: [xshift]
+    - name: Hidden Passage West
+      coord: [17.85, 25.1]
+      local:
+        - to: Hidden Passage East
+        - to: Catwalk Middle
+    - name: Northwest
+      coord: [17.1, 25.1]
+      local:
+        - to: Catwalk Middle  # maybe technically has to jump off the lower catwalk?
+        - to: Bottom Middle
+    - name: Catwalk West
+      coord: [17.05, 25.7]
+      local:
+        - to: Catwalk Middle
+          jumps: 1
+        - to: Bottom Middle
+      exits:
+        - to: Boss Room > Catwalk East
+          tags: [xshift]
+    - name: Catwalk Middle
+      coord: [17.5, 25.5]
+      local:
+        - to: Catwalk West
+        - to: East 27
+      exits:
+        - to: Hidden Passage West
+          req: $hook
+          movement: base
+          jumps: 1
+        - to: Desk
+          req: $hover
+          movement: base
+

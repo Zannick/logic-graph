@@ -699,6 +699,7 @@ subgraph Giguna
         Giguna__Clouds__North_Right(North Right);
         Giguna__Clouds__North_Under_Ledge(North Under Ledge);
         Giguna__Clouds__Platform_Start(Platform Start);
+        Giguna__Clouds__Platform_Early(Platform Early);
         Giguna__Clouds__Platform_Stop(Platform Stop);
         Giguna__Clouds__Cache(Cache);
         Giguna__Clouds__Platform_Early_Portal(Platform Early Portal);
@@ -856,6 +857,12 @@ subgraph Giguna
         Giguna__Gubi_Lair__West_Brickwork(West Brickwork);
         Giguna__Gubi_Lair__Shaft_Bottom(Shaft Bottom);
         Giguna__Gubi_Lair__Pedestal(Pedestal);
+    end
+    subgraph Giguna__Breachable_Wall[Breachable Wall]
+        Giguna__Breachable_Wall__West_Mid_air(West Mid-air);
+        Giguna__Breachable_Wall__Above_West_Catwalk(Above West Catwalk);
+        Giguna__Breachable_Wall__Above_Middle_Catwalk(Above Middle Catwalk);
+        Giguna__Breachable_Wall__Wall_Interior(Wall Interior);
     end
 end
 subgraph Glacier
@@ -1083,6 +1090,8 @@ subgraph Irikar
         Irikar__Hub__Bowl_Hole(Bowl Hole);
         Irikar__Hub__Sat_Tower_Roof_West(Sat Tower Roof West);
         Irikar__Hub__Sat_Tower_Roof_East(Sat Tower Roof East);
+        Irikar__Hub__Sat_Tower_West_Valley(Sat Tower West Valley);
+        Irikar__Hub__Sat_Tower_Northeast(Sat Tower Northeast);
         Irikar__Hub__Sat_Tower_Middle_Ledge(Sat Tower Middle Ledge);
         Irikar__Hub__Sat_Tower_Floating_Platform(Sat Tower Floating Platform);
         Irikar__Hub__Sat_Tower_Top_Ledge(Sat Tower Top Ledge);
@@ -1102,11 +1111,17 @@ subgraph Irikar
         Irikar__Hub__Royal_Storage_By_Wall(Royal Storage By Wall);
         Irikar__Hub__Royal_Storage_in_Wall(Royal Storage in Wall);
     end
+    subgraph Irikar__Airy[Airy]
+        Irikar__Airy__Northwest(Northwest);
+        Irikar__Airy__Middle_South(Middle South);
+    end
     subgraph Irikar__Sight_Room[Sight Room]
         Irikar__Sight_Room__West_24(West 24);
         Irikar__Sight_Room__Lower_Ledge(Lower Ledge);
         Irikar__Sight_Room__Portal(Portal);
         Irikar__Sight_Room__Item_Pedestal(Item Pedestal);
+        Irikar__Sight_Room__Above_Room_North(Above Room North);
+        Irikar__Sight_Room__Above_Room_East(Above Room East);
     end
     subgraph Irikar__Abandoned_Room[Abandoned Room]
         Irikar__Abandoned_Room__Empty_Pedestal(Empty Pedestal);
@@ -1147,7 +1162,23 @@ subgraph Irikar
     end
     subgraph Irikar__Boss_Room[Boss Room]
         Irikar__Boss_Room__West_28(West 28);
+        Irikar__Boss_Room__Bulls_Feet(Bull's Feet);
         Irikar__Boss_Room__East_28(East 28);
+        Irikar__Boss_Room__Northwest(Northwest);
+        Irikar__Boss_Room__Upper_Rooftops(Upper Rooftops);
+        Irikar__Boss_Room__Healthy_Rooftop(Healthy Rooftop);
+        Irikar__Boss_Room__Sat_Tower_Roof_West(Sat Tower Roof West);
+        Irikar__Boss_Room__Sat_Tower_Roof_East(Sat Tower Roof East);
+        Irikar__Boss_Room__Catwalk_West(Catwalk West);
+        Irikar__Boss_Room__Catwalk_East(Catwalk East);
+        Irikar__Boss_Room__Above_Catwalk(Above Catwalk);
+    end
+    subgraph Irikar__East_Rooftops[East Rooftops]
+        Irikar__East_Rooftops__Upper_West(Upper West);
+        Irikar__East_Rooftops__Top_Rooftop(Top Rooftop);
+        Irikar__East_Rooftops__Directly_Down(Directly Down);
+        Irikar__East_Rooftops__Off_the_Edge(Off the Edge);
+        Irikar__East_Rooftops__East_Mid_air(East Mid-air);
     end
     subgraph Irikar__Midwest[Midwest]
         Irikar__Midwest__East_23(East 23);
@@ -1158,6 +1189,18 @@ subgraph Irikar
         Irikar__Midwest__East_27(East 27);
         Irikar__Midwest__East_28(East 28);
     end
+    subgraph Irikar__Lamassu[Lamassu]
+        Irikar__Lamassu__West_28(West 28);
+        Irikar__Lamassu__Bottom_Middle(Bottom Middle);
+        Irikar__Lamassu__East_27(East 27);
+        Irikar__Lamassu__East_26(East 26);
+        Irikar__Lamassu__Desk(Desk);
+        Irikar__Lamassu__Hidden_Passage_East(Hidden Passage East);
+        Irikar__Lamassu__Hidden_Passage_West(Hidden Passage West);
+        Irikar__Lamassu__Northwest(Northwest);
+        Irikar__Lamassu__Catwalk_West(Catwalk West);
+        Irikar__Lamassu__Catwalk_Middle(Catwalk Middle);
+    end
 end
 subgraph Menu
     subgraph Menu__Upgrade_Menu[Upgrade Menu]
@@ -1165,6 +1208,17 @@ subgraph Menu
         Menu__Upgrade_Menu__Combat(Combat);
         Menu__Upgrade_Menu__Infection(Infection);
         Menu__Upgrade_Menu__Drone(Drone);
+    end
+end
+subgraph Uhrum
+    subgraph Uhrum__West_Entrance[West Entrance]
+        Uhrum__West_Entrance__West_27(West 27);
+        Uhrum__West_Entrance__West_26(West 26);
+        Uhrum__West_Entrance__Hidden_Passage_West(Hidden Passage West);
+        Uhrum__West_Entrance__Hidden_Passage_Entry(Hidden Passage Entry);
+        Uhrum__West_Entrance__West_25(West 25);
+        Uhrum__West_Entrance__Save_Point(Save Point);
+        Uhrum__West_Entrance__Portal_Stand(Portal Stand);
     end
 end
 Amagi__Cave_Behind_Waterfall__Bottom --> Amagi__Cave_Behind_Waterfall__Middle
@@ -1380,6 +1434,8 @@ Giguna__Antechamber__Small_Bricks --> Giguna__Antechamber__Statue_Head
 Giguna__Antechamber__Statues_Ledge --> Giguna__Antechamber__Small_Bricks
 Giguna__Antechamber__West_15 --> Giguna__Antechamber__Small_Bricks
 Giguna__Antechamber__West_15 <--> Giguna__Gubi_Lair__East_15
+Giguna__Breachable_Wall__Above_West_Catwalk --> Irikar__Boss_Room__Above_Catwalk
+Giguna__Breachable_Wall__West_Mid_air <--> Irikar__East_Rooftops__East_Mid_air
 Giguna__Building_Interior__Entry --> Giguna__Building_Interior__Bookshelf
 Giguna__Building_Interior__Entry <--> Giguna__Giguna_Base__Building_Entry
 Giguna__Carnelian__Door <--> Giguna__Carnelian__Switch
@@ -1637,6 +1693,7 @@ Irikar_Breach__Neon_Corridor__West_Basin --> Irikar_Breach__Neon_Corridor__West
 Irikar_Breach__Worm_Rave__South --> Irikar_Breach__Worm_Rave__Corner
 Irikar_Breach__Worm_Rave__South --> Irikar_Breach__Worm_Rave__East
 Irikar__Abandoned_Room__West <--> Irikar__Basement_Portal__East_27
+Irikar__Airy__Middle_South --> Irikar__Sight_Room__Above_Room_North
 Irikar__Basement_Pipes__Bricks_Under_Pipes --> Irikar__Basement_Pipes__Double_Pipe_Right
 Irikar__Basement_Pipes__Double_Pipe_Left --> Irikar__Basement_Pipes__High_Pipe
 Irikar__Basement_Pipes__East_28 <--> Irikar__Basement_Portal__West_28
@@ -1657,7 +1714,15 @@ Irikar__Basement_Portal__North <--> Irikar__Hub__Royal_Storage_South
 Irikar__Basement_Portal__Portal_Stand --> Irikar__Basement_Portal__Ledge
 Irikar__Basement_Portal__Portal_Stand --> Irikar__Basement_Portal__Moving_Platform_Start
 Irikar__Basement_Portal__West_28 --> Irikar__Basement_Portal__Moving_Platform_Start
-Irikar__Empty_Foyer__East --> Irikar__Boss_Room__West_28
+Irikar__Boss_Room__Catwalk_East <--> Irikar__Lamassu__Catwalk_West
+Irikar__Boss_Room__Catwalk_West --> Irikar__Boss_Room__Upper_Rooftops
+Irikar__Boss_Room__East_28 <--> Irikar__Lamassu__West_28
+Irikar__Boss_Room__Upper_Rooftops --> Irikar__East_Rooftops__Off_the_Edge
+Irikar__Boss_Room__West_28 <--> Irikar__Empty_Foyer__East
+Irikar__East_Rooftops__Directly_Down --> Irikar__Boss_Room__Northwest
+Irikar__East_Rooftops__East_Mid_air --> Irikar__East_Rooftops__Top_Rooftop
+Irikar__East_Rooftops__Off_the_Edge --> Irikar__East_Rooftops__Top_Rooftop
+Irikar__East_Rooftops__Upper_West --> Irikar__East_Rooftops__East_Mid_air
 Irikar__Hub__Bowl_Middle_Ledge --> Irikar__Hub__Bowl_Top_Platform
 Irikar__Hub__Bowl_Middle_Platform_Center --> Irikar__Hub__Bowl_Middle_Ledge
 Irikar__Hub__Bowl_Middle_Platform_West --> Irikar__Hub__Bowl_Middle_Ledge
@@ -1669,8 +1734,15 @@ Irikar__Hub__Royal_Storage_By_Wall --> Irikar__Hub__Royal_Storage_in_Wall
 Irikar__Hub__Sat_Tower_East_24 <--> Irikar__Sight_Room__West_24
 Irikar__Hub__Sat_Tower_Floating_Platform --> Irikar__Hub__Sat_Tower_Top_Ledge
 Irikar__Hub__Sat_Tower_Middle_Ledge --> Irikar__Hub__Sat_Tower_Floating_Platform
+Irikar__Hub__Sat_Tower_Northeast --> Irikar__Airy__Northwest
 Irikar__Hub__Save_Point --> Irikar__Hub__Bowl_Hole
 Irikar__Hub__West_Rim --> Irikar__Hub__East_Rim
+Irikar__Lamassu__Catwalk_Middle --> Irikar__Lamassu__Desk
+Irikar__Lamassu__Catwalk_Middle --> Irikar__Lamassu__Hidden_Passage_West
+Irikar__Lamassu__East_26 --> Uhrum__West_Entrance__West_26
+Irikar__Lamassu__East_27 --> Uhrum__West_Entrance__West_27
+Irikar__Lamassu__Hidden_Passage_East --> Uhrum__West_Entrance__Hidden_Passage_West
+Irikar__Sight_Room__Above_Room_East --> Irikar__East_Rooftops__Upper_West
 Menu__Upgrade_Menu__Combat <--> Menu__Upgrade_Menu__Drone
 Menu__Upgrade_Menu__Combat <--> Menu__Upgrade_Menu__Infection
 Menu__Upgrade_Menu__Combat <--> Menu__Upgrade_Menu__Physiology

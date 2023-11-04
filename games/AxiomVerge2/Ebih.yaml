@@ -1578,19 +1578,19 @@ areas:
         - to: West 5
       locations:
         - name: Hack Alu
-          item: Defeat_Ebih_Alu
-          canon: Defeat_Ebih_Alu
+          item: Ebih_Alu
+          canon: Ebih_Alu
           req: $overheat and $can_damage
           price: 280  # Overheat (100) x2 + Overload (80)
           time: 25  # can be split across fetching the health node, too
         - name: Fight Alu
-          item: Defeat_Ebih_Alu
-          canon: Defeat_Ebih_Alu
+          item: Ebih_Alu
+          canon: Ebih_Alu
           req: $can_damage
           time: 50  # an estimate... includes risk of taking too much damage, I guess?
         - name: Boss Reward
           item: Flask
-          req: Defeat_Ebih_Alu
+          req: Ebih_Alu
           tags: [flask]
 
     - name: Past Boss
