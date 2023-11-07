@@ -1480,7 +1480,7 @@ class GameLogic(object):
                 name = os.path.join(self.game_dir, dirname, tname)
                 if name.endswith('.rs'):
                     rustfiles.append(name)
-                with open(name, 'w') as f:
+                with open(name, 'w', encoding='utf-8') as f:
                     f.write(template.render(gl=self, int_types=int_types, **self.__dict__))
 
         cmd = ['rustfmt'] + rustfiles
