@@ -807,7 +807,7 @@ areas:
         - to: Lamassu > Catwalk West
           tags: [xshift]
     - name: Above Catwalk
-      coord: [26.55, 25.1]
+      coord: [16.55, 25.1]
       local:
         - to: Healthy Rooftop
         - to: Sat Tower Roof West
@@ -851,8 +851,10 @@ areas:
           price: 20
           movement: base
           jumps: 1
+        - to: Boss Room > Upper Rooftops
+          tags: [yshift]
     - name: East Mid-air
-      coord: [15.95, 25.0]
+      coord: [15.95, 24.0]
       local:
         - to: Off the Edge
       exits:

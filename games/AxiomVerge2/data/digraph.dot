@@ -720,10 +720,10 @@ digraph AxiomVerge2 {
         Giguna__Gubi_Lair__West_Brickwork [label = "", pos = "47.25,-26.333333!"];
         Giguna__Gubi_Lair__Shaft_Bottom [label = "", pos = "45.75,-26.166667!"];
         Giguna__Gubi_Lair__Pedestal [label = "", pos = "46.2,-24.0!"];
-        Giguna__Breachable_Wall__West_Mid_air [label = "", pos = "48.15,-41.666667!"];
-        Giguna__Breachable_Wall__Above_West_Catwalk [label = "", pos = "49.65,-43.166667!"];
-        Giguna__Breachable_Wall__Above_Middle_Catwalk [label = "", pos = "51.3,-43.166667!"];
-        Giguna__Breachable_Wall__Wall_Interior [label = "", pos = "50.7,-41.0!"];
+        Giguna__Breachable_Wall__West_Mid_air [label = "", pos = "48.15,-40.0!"];
+        Giguna__Breachable_Wall__Above_West_Catwalk [label = "", pos = "49.65,-41.5!"];
+        Giguna__Breachable_Wall__Above_Middle_Catwalk [label = "", pos = "51.3,-41.5!"];
+        Giguna__Breachable_Wall__Wall_Interior [label = "", pos = "50.7,-39.333333!"];
         node[fillcolor="6"];
         Glacier__Dock_Elevator__Elevator [label = "", pos = "133.5,-114.166667!"];
         Glacier__Dock_Elevator__Connector [label = "", pos = "132.15,-113.916667!"];
@@ -953,12 +953,12 @@ digraph AxiomVerge2 {
         Irikar__Boss_Room__Sat_Tower_Roof_East [label = "", pos = "49.35,-43.583333!"];
         Irikar__Boss_Room__Catwalk_West [label = "", pos = "49.65,-42.833333!"];
         Irikar__Boss_Room__Catwalk_East [label = "", pos = "50.85,-42.833333!"];
-        Irikar__Boss_Room__Above_Catwalk [label = "", pos = "79.65,-41.833333!"];
+        Irikar__Boss_Room__Above_Catwalk [label = "", pos = "49.65,-41.833333!"];
         Irikar__East_Rooftops__Upper_West [label = "", pos = "45.15,-39.0!"];
         Irikar__East_Rooftops__Top_Rooftop [label = "", pos = "45.6,-41.083333!"];
         Irikar__East_Rooftops__Directly_Down [label = "", pos = "45.6,-41.5!"];
         Irikar__East_Rooftops__Off_the_Edge [label = "", pos = "46.8,-41.5!"];
-        Irikar__East_Rooftops__East_Mid_air [label = "", pos = "47.85,-41.666667!"];
+        Irikar__East_Rooftops__East_Mid_air [label = "", pos = "47.85,-40.0!"];
         Irikar__Midwest__East_23 [label = "", pos = "29.85,-38.0!"];
         Irikar__Midwest__East_24_on_Building [label = "", pos = "29.85,-38.833333!"];
         Irikar__Midwest__East_24_on_Floor [label = "", pos = "29.85,-39.5!"];
@@ -1412,6 +1412,10 @@ digraph AxiomVerge2 {
     Giguna__Helipad__So_Close -> Giguna__Helipad__Tablet_Ledge;
     Giguna__Helipad__So_Close -> Giguna__Helipad__Tablet_Ledge;
     Giguna__Helipad__East_18 -> Giguna__Lamassu__West_18;
+    Giguna__Helipad__South_Left -> Giguna__Clouds__North_Left;
+    Giguna__Helipad__South_Middle -> Giguna__Clouds__North_Middle;
+    Giguna__Helipad__South_Right -> Giguna__Clouds__North_Right;
+    Giguna__Helipad__Lowest_Ledge -> Giguna__Clouds__North_Under_Ledge;
     Giguna__Clouds__Southwest -> Irikar__Hub__Northwest;
     Giguna__Clouds__Straight_Down -> Irikar__Hub__North_Above_Portal;
     Giguna__Clouds__Pull_Right -> Irikar__Hub__Northwest_Above_Bowl;
@@ -1737,6 +1741,7 @@ digraph AxiomVerge2 {
     Irikar__Boss_Room__Catwalk_East -> Irikar__Lamassu__Catwalk_West;
     Irikar__East_Rooftops__Upper_West -> Irikar__East_Rooftops__East_Mid_air;
     Irikar__East_Rooftops__Directly_Down -> Irikar__Boss_Room__Northwest;
+    Irikar__East_Rooftops__Off_the_Edge -> Irikar__Boss_Room__Upper_Rooftops;
     Irikar__East_Rooftops__Off_the_Edge -> Irikar__East_Rooftops__Top_Rooftop;
     Irikar__East_Rooftops__Off_the_Edge -> Irikar__East_Rooftops__Top_Rooftop;
     Irikar__East_Rooftops__East_Mid_air -> Giguna__Breachable_Wall__West_Mid_air;

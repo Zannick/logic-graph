@@ -1718,12 +1718,24 @@ areas:
           tags: [xshift]
     - name: South Left
       coord: [11.1, 17.9]
+      exits:
+        - to: Clouds > North Left
+          tags: [yshift]
     - name: South Middle
       coord: [11.3, 17.9]
+      exits:
+        - to: Clouds > North Middle
+          tags: [yshift]
     - name: South Right
       coord: [11.75, 17.9]
+      exits:
+        - to: Clouds > North Right
+          tags: [yshift]
     - name: Lowest Ledge
       coord: [12.3, 17.9]
+      exits:
+        - to: Clouds > North Under Ledge
+          tags: [yshift]
 
 - name: Clouds
   on_entry: $reset_old_area(^newpos)
@@ -3244,19 +3256,19 @@ areas:
   on_entry: $reset_old_area(^newpos)
   spots:
     - name: West Mid-air
-      coord: [16.05, 25.0]
+      coord: [16.05, 24.0]
       local:
         - to: Above West Catwalk
       exits:
         - to: Irikar > East Rooftops > East Mid-air
           tags: [xshift]
     - name: Above West Catwalk
-      coord: [16.55, 25.9]
+      coord: [16.55, 24.9]
       exits:
         - to: Irikar > Boss Room > Above Catwalk
           tags: [yshift]
     - name: Above Middle Catwalk
-      coord: [17.1, 25.9]
+      coord: [17.1, 24.9]
 
     - name: Wall Interior
-      coord: [16.9, 24.6]
+      coord: [16.9, 23.6]

@@ -2834,9 +2834,13 @@ impl world::Accessible for Exit {
             ExitId::Giguna__Helipad__East_15__ex__Giguna_Base__West_15_1 => true,
             ExitId::Giguna__Helipad__East_16__ex__Giguna_Base__West_16_1 => true,
             ExitId::Giguna__Helipad__East_18__ex__Lamassu__West_18_1 => true,
+            ExitId::Giguna__Helipad__Lowest_Ledge__ex__Clouds__North_Under_Ledge_1 => true,
             ExitId::Giguna__Helipad__Railing__ex__Wall_Top_1 => rules::access_nanite_mist_and_mist_upgrade(&ctx),
             ExitId::Giguna__Helipad__So_Close__ex__Tablet_Ledge_1 => rules::access_hover(&ctx),
             ExitId::Giguna__Helipad__So_Close__ex__Tablet_Ledge_2 => rules::access_nanite_mist_and_mist_upgrade(&ctx),
+            ExitId::Giguna__Helipad__South_Left__ex__Clouds__North_Left_1 => true,
+            ExitId::Giguna__Helipad__South_Middle__ex__Clouds__North_Middle_1 => true,
+            ExitId::Giguna__Helipad__South_Right__ex__Clouds__North_Right_1 => true,
             ExitId::Giguna__Helipad__Wall_Top__ex__Railing_1 => rules::access_hover(&ctx),
             ExitId::Giguna__Lamassu__Broken_Pillar__ex__Staircase_Landing_1 => rules::access_grab(&ctx),
             ExitId::Giguna__Lamassu__East_18__ex__Dual_Path__West_18_1 => true,
@@ -3089,6 +3093,7 @@ impl world::Accessible for Exit {
             ExitId::Irikar__East_Rooftops__Directly_Down__ex__Boss_Room__Northwest_1 => true,
             ExitId::Irikar__East_Rooftops__East_Mid_air__ex__Giguna__Breachable_Wall__West_Mid_air_1 => true,
             ExitId::Irikar__East_Rooftops__East_Mid_air__ex__Top_Rooftop_1 => rules::access_hover(&ctx),
+            ExitId::Irikar__East_Rooftops__Off_the_Edge__ex__Boss_Room__Upper_Rooftops_1 => true,
             ExitId::Irikar__East_Rooftops__Off_the_Edge__ex__Top_Rooftop_1 => rules::access_hover(&ctx),
             ExitId::Irikar__East_Rooftops__Off_the_Edge__ex__Top_Rooftop_2 => rules::access_mist2(&ctx),
             ExitId::Irikar__East_Rooftops__Upper_West__ex__East_Mid_air_1 => rules::access_hover(&ctx),
@@ -3342,6 +3347,10 @@ impl world::Exit for Exit {
             ExitId::Giguna__Helipad__East_15__ex__Giguna_Base__West_15_1 => true,
             ExitId::Giguna__Helipad__East_16__ex__Giguna_Base__West_16_1 => true,
             ExitId::Giguna__Helipad__East_18__ex__Lamassu__West_18_1 => true,
+            ExitId::Giguna__Helipad__Lowest_Ledge__ex__Clouds__North_Under_Ledge_1 => true,
+            ExitId::Giguna__Helipad__South_Left__ex__Clouds__North_Left_1 => true,
+            ExitId::Giguna__Helipad__South_Middle__ex__Clouds__North_Middle_1 => true,
+            ExitId::Giguna__Helipad__South_Right__ex__Clouds__North_Right_1 => true,
             ExitId::Giguna__Lamassu__East_18__ex__Dual_Path__West_18_1 => true,
             ExitId::Giguna__Lamassu__West_18__ex__Helipad__East_18_1 => true,
             ExitId::Giguna__Ruins_Center__East_8__ex__Ruins_East__West_8_1 => true,
@@ -3456,6 +3465,7 @@ impl world::Exit for Exit {
             ExitId::Irikar__Boss_Room__West_28__ex__Empty_Foyer__East_1 => true,
             ExitId::Irikar__East_Rooftops__Directly_Down__ex__Boss_Room__Northwest_1 => true,
             ExitId::Irikar__East_Rooftops__East_Mid_air__ex__Giguna__Breachable_Wall__West_Mid_air_1 => true,
+            ExitId::Irikar__East_Rooftops__Off_the_Edge__ex__Boss_Room__Upper_Rooftops_1 => true,
             ExitId::Irikar__Empty_Foyer__East__ex__Boss_Room__West_28_1 => true,
             ExitId::Irikar__Empty_Foyer__West__ex__Basement_Portal__East_28_1 => true,
             ExitId::Irikar__Hub__Royal_Storage_South__ex__Basement_Portal__North_1 => true,
@@ -6841,6 +6851,10 @@ impl world::World for World {
             ExitId::Giguna__Helipad__Railing__ex__Wall_Top_1 => SpotId::Giguna__Helipad__Railing,
             ExitId::Giguna__Helipad__So_Close__ex__Tablet_Ledge_1 | ExitId:: Giguna__Helipad__So_Close__ex__Tablet_Ledge_2 => SpotId::Giguna__Helipad__So_Close,
             ExitId::Giguna__Helipad__East_18__ex__Lamassu__West_18_1 => SpotId::Giguna__Helipad__East_18,
+            ExitId::Giguna__Helipad__South_Left__ex__Clouds__North_Left_1 => SpotId::Giguna__Helipad__South_Left,
+            ExitId::Giguna__Helipad__South_Middle__ex__Clouds__North_Middle_1 => SpotId::Giguna__Helipad__South_Middle,
+            ExitId::Giguna__Helipad__South_Right__ex__Clouds__North_Right_1 => SpotId::Giguna__Helipad__South_Right,
+            ExitId::Giguna__Helipad__Lowest_Ledge__ex__Clouds__North_Under_Ledge_1 => SpotId::Giguna__Helipad__Lowest_Ledge,
             ExitId::Giguna__Clouds__Platform_Stop__ex__flipside_1 => SpotId::Giguna__Clouds__Platform_Stop,
             ExitId::Giguna__Clouds__Southwest__ex__Irikar__Hub__Northwest_1 => SpotId::Giguna__Clouds__Southwest,
             ExitId::Giguna__Clouds__Straight_Down__ex__Irikar__Hub__North_Above_Portal_1 => SpotId::Giguna__Clouds__Straight_Down,
@@ -7078,7 +7092,7 @@ impl world::World for World {
             ExitId::Irikar__Boss_Room__Catwalk_East__ex__Lamassu__Catwalk_West_1 => SpotId::Irikar__Boss_Room__Catwalk_East,
             ExitId::Irikar__East_Rooftops__Upper_West__ex__East_Mid_air_1 => SpotId::Irikar__East_Rooftops__Upper_West,
             ExitId::Irikar__East_Rooftops__Directly_Down__ex__Boss_Room__Northwest_1 => SpotId::Irikar__East_Rooftops__Directly_Down,
-            ExitId::Irikar__East_Rooftops__Off_the_Edge__ex__Top_Rooftop_1 | ExitId:: Irikar__East_Rooftops__Off_the_Edge__ex__Top_Rooftop_2 => SpotId::Irikar__East_Rooftops__Off_the_Edge,
+            ExitId::Irikar__East_Rooftops__Off_the_Edge__ex__Top_Rooftop_1 | ExitId:: Irikar__East_Rooftops__Off_the_Edge__ex__Top_Rooftop_2 | ExitId:: Irikar__East_Rooftops__Off_the_Edge__ex__Boss_Room__Upper_Rooftops_1 => SpotId::Irikar__East_Rooftops__Off_the_Edge,
             ExitId::Irikar__East_Rooftops__East_Mid_air__ex__Top_Rooftop_1 | ExitId:: Irikar__East_Rooftops__East_Mid_air__ex__Giguna__Breachable_Wall__West_Mid_air_1 => SpotId::Irikar__East_Rooftops__East_Mid_air,
             ExitId::Irikar__Lamassu__West_28__ex__Boss_Room__East_28_1 => SpotId::Irikar__Lamassu__West_28,
             ExitId::Irikar__Lamassu__East_27__ex__Uhrum__West_Entrance__West_27_1 => SpotId::Irikar__Lamassu__East_27,
@@ -7521,6 +7535,10 @@ impl world::World for World {
             | SpotId::Giguna__Helipad__East_15
             | SpotId::Giguna__Helipad__East_16
             | SpotId::Giguna__Helipad__East_18
+            | SpotId::Giguna__Helipad__Lowest_Ledge
+            | SpotId::Giguna__Helipad__South_Left
+            | SpotId::Giguna__Helipad__South_Middle
+            | SpotId::Giguna__Helipad__South_Right
             | SpotId::Giguna__Helipad__Tablet_Ledge
             | SpotId::Giguna__Lamassu__Deposit
             | SpotId::Giguna__Lamassu__East_18
@@ -7679,6 +7697,7 @@ impl world::World for World {
             | SpotId::Irikar__Boss_Room__West_28
             | SpotId::Irikar__East_Rooftops__Directly_Down
             | SpotId::Irikar__East_Rooftops__East_Mid_air
+            | SpotId::Irikar__East_Rooftops__Off_the_Edge
             | SpotId::Irikar__East_Rooftops__Top_Rooftop
             | SpotId::Irikar__Empty_Foyer__East
             | SpotId::Irikar__Empty_Foyer__West
@@ -12329,6 +12348,34 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
             price: Currency::Free,
             loc_id: None,
         },
+        ExitId::Giguna__Helipad__South_Left__ex__Clouds__North_Left_1 => Exit {
+            id: ExitId::Giguna__Helipad__South_Left__ex__Clouds__North_Left_1,
+            time: 1000,
+            dest: SpotId::Giguna__Clouds__North_Left,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Giguna__Helipad__South_Middle__ex__Clouds__North_Middle_1 => Exit {
+            id: ExitId::Giguna__Helipad__South_Middle__ex__Clouds__North_Middle_1,
+            time: 1000,
+            dest: SpotId::Giguna__Clouds__North_Middle,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Giguna__Helipad__South_Right__ex__Clouds__North_Right_1 => Exit {
+            id: ExitId::Giguna__Helipad__South_Right__ex__Clouds__North_Right_1,
+            time: 1000,
+            dest: SpotId::Giguna__Clouds__North_Right,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Giguna__Helipad__Lowest_Ledge__ex__Clouds__North_Under_Ledge_1 => Exit {
+            id: ExitId::Giguna__Helipad__Lowest_Ledge__ex__Clouds__North_Under_Ledge_1,
+            time: 1000,
+            dest: SpotId::Giguna__Clouds__North_Under_Ledge,
+            price: Currency::Free,
+            loc_id: None,
+        },
         ExitId::Giguna__Clouds__Platform_Stop__ex__flipside_1 => Exit {
             id: ExitId::Giguna__Clouds__Platform_Stop__ex__flipside_1,
             time: 3600,
@@ -14637,6 +14684,13 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
             time: 1403,
             dest: SpotId::Irikar__East_Rooftops__Top_Rooftop,
             price: Currency::Energy(20),
+            loc_id: None,
+        },
+        ExitId::Irikar__East_Rooftops__Off_the_Edge__ex__Boss_Room__Upper_Rooftops_1 => Exit {
+            id: ExitId::Irikar__East_Rooftops__Off_the_Edge__ex__Boss_Room__Upper_Rooftops_1,
+            time: 1000,
+            dest: SpotId::Irikar__Boss_Room__Upper_Rooftops,
+            price: Currency::Free,
             loc_id: None,
         },
         ExitId::Irikar__East_Rooftops__East_Mid_air__ex__Top_Rooftop_1 => Exit {
@@ -22406,7 +22460,8 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             exits: Range {
-                start: 0, end: 0,
+                start: ExitId::Giguna__Helipad__South_Left__ex__Clouds__North_Left_1.into_usize(),
+                end: ExitId::Giguna__Helipad__South_Left__ex__Clouds__North_Left_1.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
@@ -22418,7 +22473,8 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             exits: Range {
-                start: 0, end: 0,
+                start: ExitId::Giguna__Helipad__South_Middle__ex__Clouds__North_Middle_1.into_usize(),
+                end: ExitId::Giguna__Helipad__South_Middle__ex__Clouds__North_Middle_1.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
@@ -22430,7 +22486,8 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             exits: Range {
-                start: 0, end: 0,
+                start: ExitId::Giguna__Helipad__South_Right__ex__Clouds__North_Right_1.into_usize(),
+                end: ExitId::Giguna__Helipad__South_Right__ex__Clouds__North_Right_1.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
@@ -22442,7 +22499,8 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             exits: Range {
-                start: 0, end: 0,
+                start: ExitId::Giguna__Helipad__Lowest_Ledge__ex__Clouds__North_Under_Ledge_1.into_usize(),
+                end: ExitId::Giguna__Helipad__Lowest_Ledge__ex__Clouds__North_Under_Ledge_1.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
@@ -27293,7 +27351,7 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             exits: Range {
-                start: ExitId::Irikar__East_Rooftops__Off_the_Edge__ex__Top_Rooftop_1.into_usize(),
+                start: ExitId::Irikar__East_Rooftops__Off_the_Edge__ex__Boss_Room__Upper_Rooftops_1.into_usize(),
                 end: ExitId::Irikar__East_Rooftops__Off_the_Edge__ex__Top_Rooftop_2.into_usize() + 1,
             },
             actions: Range {

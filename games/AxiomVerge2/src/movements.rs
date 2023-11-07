@@ -5679,12 +5679,12 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
             [false],
             SpotId::Irikar__Boss_Room__Above_Catwalk,
             SpotId::Irikar__Boss_Room__Healthy_Rooftop,
-        ) => 37543,
+        ) => 2456,
         (
             [false],
             SpotId::Irikar__Boss_Room__Above_Catwalk,
             SpotId::Irikar__Boss_Room__Sat_Tower_Roof_West,
-        ) => 36140,
+        ) => 1052,
         ([false], SpotId::Irikar__Boss_Room__Bulls_Feet, SpotId::Irikar__Boss_Room__East_28) => {
             4035
         }
@@ -5804,6 +5804,11 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
         ([false], SpotId::Irikar__Boss_Room__West_28, SpotId::Irikar__Boss_Room__Bulls_Feet) => {
             2631
         }
+        (
+            [false],
+            SpotId::Irikar__East_Rooftops__East_Mid_air,
+            SpotId::Irikar__East_Rooftops__Off_the_Edge,
+        ) => 1228,
         (
             [false],
             SpotId::Irikar__East_Rooftops__Top_Rooftop,
@@ -11698,12 +11703,12 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
             [true],
             SpotId::Irikar__Boss_Room__Above_Catwalk,
             SpotId::Irikar__Boss_Room__Healthy_Rooftop,
-        ) => 37543,
+        ) => 2456,
         (
             [true],
             SpotId::Irikar__Boss_Room__Above_Catwalk,
             SpotId::Irikar__Boss_Room__Sat_Tower_Roof_West,
-        ) => 36140,
+        ) => 1052,
         ([true], SpotId::Irikar__Boss_Room__Bulls_Feet, SpotId::Irikar__Boss_Room__East_28) => 4035,
         ([true], SpotId::Irikar__Boss_Room__Bulls_Feet, SpotId::Irikar__Boss_Room__West_28) => 2631,
         (
@@ -11813,6 +11818,11 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
             2899
         }
         ([true], SpotId::Irikar__Boss_Room__West_28, SpotId::Irikar__Boss_Room__Bulls_Feet) => 2631,
+        (
+            [true],
+            SpotId::Irikar__East_Rooftops__East_Mid_air,
+            SpotId::Irikar__East_Rooftops__Off_the_Edge,
+        ) => 1228,
         (
             [true],
             SpotId::Irikar__East_Rooftops__Top_Rooftop,
@@ -26015,6 +26025,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Helipad__Lowest_Ledge,
+            SpotId::Giguna__Clouds__North_Under_Ledge,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Helipad__Lowest_Ledge,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -26085,12 +26100,27 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Helipad__South_Left,
+            SpotId::Giguna__Clouds__North_Left,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Helipad__South_Left,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
         (
             SpotId::Giguna__Helipad__South_Middle,
+            SpotId::Giguna__Clouds__North_Middle,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Helipad__South_Middle,
             SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Helipad__South_Right,
+            SpotId::Giguna__Clouds__North_Right,
             1000,
         ),
         (
@@ -31151,12 +31181,12 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Irikar__Boss_Room__Above_Catwalk,
             SpotId::Irikar__Boss_Room__Healthy_Rooftop,
-            37543,
+            2456,
         ),
         (
             SpotId::Irikar__Boss_Room__Above_Catwalk,
             SpotId::Irikar__Boss_Room__Sat_Tower_Roof_West,
-            36140,
+            1052,
         ),
         (
             SpotId::Irikar__Boss_Room__Above_Catwalk,
@@ -31385,12 +31415,22 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Irikar__East_Rooftops__East_Mid_air,
+            SpotId::Irikar__East_Rooftops__Off_the_Edge,
+            1228,
+        ),
+        (
+            SpotId::Irikar__East_Rooftops__East_Mid_air,
             SpotId::Irikar__East_Rooftops__Top_Rooftop,
             2631,
         ),
         (
             SpotId::Irikar__East_Rooftops__East_Mid_air,
             SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Irikar__East_Rooftops__Off_the_Edge,
+            SpotId::Irikar__Boss_Room__Upper_Rooftops,
             1000,
         ),
         (
@@ -36302,12 +36342,12 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
             SpotId::Irikar__Basement_Portal__West_28,
         ) => Some(1049),
         (SpotId::Irikar__Boss_Room__Above_Catwalk, SpotId::Irikar__Boss_Room__Healthy_Rooftop) => {
-            Some(37543)
+            Some(2456)
         }
         (
             SpotId::Irikar__Boss_Room__Above_Catwalk,
             SpotId::Irikar__Boss_Room__Sat_Tower_Roof_West,
-        ) => Some(36140),
+        ) => Some(1052),
         (SpotId::Irikar__Boss_Room__Bulls_Feet, SpotId::Irikar__Boss_Room__East_28) => Some(4035),
         (SpotId::Irikar__Boss_Room__Bulls_Feet, SpotId::Irikar__Boss_Room__West_28) => Some(2631),
         (SpotId::Irikar__Boss_Room__Catwalk_East, SpotId::Irikar__Boss_Room__Bulls_Feet) => {
@@ -36383,6 +36423,10 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
             Some(2899)
         }
         (SpotId::Irikar__Boss_Room__West_28, SpotId::Irikar__Boss_Room__Bulls_Feet) => Some(2631),
+        (
+            SpotId::Irikar__East_Rooftops__East_Mid_air,
+            SpotId::Irikar__East_Rooftops__Off_the_Edge,
+        ) => Some(1228),
         (
             SpotId::Irikar__East_Rooftops__Top_Rooftop,
             SpotId::Irikar__East_Rooftops__Directly_Down,
@@ -41450,12 +41494,12 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
             SpotId::Irikar__Basement_Portal__West_28,
         ) => (Some(1049), vec![]),
         (SpotId::Irikar__Boss_Room__Above_Catwalk, SpotId::Irikar__Boss_Room__Healthy_Rooftop) => {
-            (Some(37543), vec![])
+            (Some(2456), vec![])
         }
         (
             SpotId::Irikar__Boss_Room__Above_Catwalk,
             SpotId::Irikar__Boss_Room__Sat_Tower_Roof_West,
-        ) => (Some(36140), vec![]),
+        ) => (Some(1052), vec![]),
         (SpotId::Irikar__Boss_Room__Bulls_Feet, SpotId::Irikar__Boss_Room__East_28) => {
             (Some(4035), vec![])
         }
@@ -41541,6 +41585,10 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
         (SpotId::Irikar__Boss_Room__West_28, SpotId::Irikar__Boss_Room__Bulls_Feet) => {
             (Some(2631), vec![])
         }
+        (
+            SpotId::Irikar__East_Rooftops__East_Mid_air,
+            SpotId::Irikar__East_Rooftops__Off_the_Edge,
+        ) => (Some(1228), vec![]),
         (
             SpotId::Irikar__East_Rooftops__Top_Rooftop,
             SpotId::Irikar__East_Rooftops__Directly_Down,
