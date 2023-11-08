@@ -8,6 +8,7 @@ use crate::world::*;
 use anyhow::Result;
 use rayon::prelude::*;
 use std::fmt::Debug;
+use std::path::Path;
 use std::sync::atomic::{AtomicBool, AtomicU32, AtomicUsize, Ordering};
 use std::sync::Arc;
 use std::sync::Mutex;
@@ -269,11 +270,15 @@ where
         }
     }
 
-    pub fn new(
+    pub fn new<P>(
         world: &'a W,
         mut ctx: T,
         routes: Vec<ContextWrapper<T>>,
-    ) -> Result<Search<'a, W, T>, std::io::Error> {
+        db_path: P,
+    ) -> Result<Search<'a, W, T>, std::io::Error>
+    where
+        P: AsRef<Path>,
+    {
         world.skip_unused_items(&mut ctx);
 
         let startctx = ContextWrapper::new(ctx);
@@ -339,7 +344,7 @@ where
         let solutions = Arc::new(Mutex::new(solutions));
 
         let queue = RocksBackedQueue::new(
-            ".db",
+            db_path,
             world,
             &startctx,
             max_time + max_time / 128,

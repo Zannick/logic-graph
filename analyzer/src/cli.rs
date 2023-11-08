@@ -34,6 +34,10 @@ pub enum Commands {
         /// Text files with routes to start from
         #[arg(long, value_name = "FILE")]
         routes: Vec<PathBuf>,
+
+        /// Directory in which to place the databases
+        #[arg(long, value_name = "DIR")]
+        db: Option<PathBuf>,
     },
 
     /// evaluates a route and shows stepwise diffs
@@ -70,12 +74,17 @@ where
     L: Location<Context = T>,
 {
     match &args.command {
-        Commands::Search { routes } => {
+        Commands::Search { routes, db } => {
             route_ctxs.extend(routes.into_iter().map(|route| {
                 let rstr = read_from_file(route);
                 route_from_string(world, &startctx, &rstr).unwrap()
             }));
-            let search = Search::new(world, startctx, route_ctxs)?;
+            let search = Search::new(
+                world,
+                startctx,
+                route_ctxs,
+                db.as_ref().unwrap_or(&".db".into()),
+            )?;
             search.search()
         }
         Commands::Route { route, .. } => {
