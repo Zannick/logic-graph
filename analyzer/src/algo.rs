@@ -349,9 +349,9 @@ where
             &startctx,
             max_time + max_time / 128,
             1_048_576,
-            131_072,
             262_144,
-            1_024,
+            524_288,
+            4_096,
             32_768,
             solutions.clone(),
         )
