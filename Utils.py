@@ -110,3 +110,7 @@ def fits_in_expected_int(t, expected):
     if t in int_types and expected in int_types:
         return int_types.index(t) <= int_types.index(expected)
     return False
+
+
+def field_size(max_value: int):
+    return max(8, (max_value.bit_length() / 8) * 8)

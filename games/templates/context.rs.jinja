@@ -60,9 +60,20 @@ use serde::{self, Serialize, Deserialize};
 bitflags!{
     #[derive(Copy, Clone, Debug, {% if not defaults %}Default, {% endif %}PartialEq, Eq, Hash, Serialize, Deserialize)]
     pub struct ContextBits{{ loop.index }} : u{{ size }} {
+%% set outer = loop
 %% for v in vars
         const {{ v|upper }} = {{ (2 ** loop.index0) | hex }};
 %% endfor
+%% if outer.index >= bfp.visit_groups.start_group and outer.index <= bfp.visit_groups.end_group
+%% set min_index = bfp.visit_groups.start_index if outer.index == bfp.visit_groups.start_group else 0
+%% set max_index = bfp.visit_groups.end_index + 1 if outer.index == bfp.visit_groups.end_group else size
+        const ALL_VISIT_FLAGS = {{ (2 ** max_index - 2 ** min_index) | hex }};
+%% endif
+%% if outer.index >= bfp.skip_groups.start_group and outer.index <= bfp.skip_groups.end_group
+%% set min_index = bfp.skip_groups.start_index if outer.index == bfp.skip_groups.start_group else 0
+%% set max_index = bfp.skip_groups.end_index + 1 if outer.index == bfp.skip_groups.end_group else size
+        const ALL_SKIP_FLAGS = {{ (2 ** max_index - 2 ** min_index) | hex }};
+%% endif
     }
 }
 %% if defaults
@@ -75,13 +86,6 @@ impl Default for ContextBits{{ loop.index }} {
 %% endfor
 }
 
-#[derive(Copy, Clone, Debug, Default, PartialEq, Eq, Hash, Serialize_repr, Deserialize_repr)]
-#[repr(u8)]
-pub enum Status {
-    #[default] None,
-    Visited,
-    Skipped,
-}
 
 #[derive(Clone, Debug, Eq, PartialEq, Hash, Serialize, Deserialize)]
 pub struct Context {
@@ -102,12 +106,6 @@ pub struct Context {
 %% for group in bfp.flag_groups
     pub cbits{{ loop.index }}: flags::ContextBits{{ loop.index }},
 %% endfor
-    // other
-%# This is part of the core state, should be included when deduplicating
-    pub status: EnumMap<LocationId, Status>,
-%# Shrinking these to fit NUM_LOCATIONS only might make sense.
-    visits: u32,
-    skips: u32,
 }
 
 impl Default for Context {
@@ -128,10 +126,6 @@ impl Default for Context {
 %% for group in bfp.flag_groups
             cbits{{ loop.index }}: Default::default(),
 %% endfor
-            // other
-            status: Default::default(),
-            visits: Default::default(),
-            skips: Default::default(),
         }
     }
 }
@@ -403,35 +397,75 @@ impl context::Ctx for Context {
     }
 
     fn visit(&mut self, loc_id: LocationId) {
-        self.status[loc_id] = Status::Visited;
-        self.visits += 1;
+        match loc_id {
+%% for loc in gl.locations()
+%% set visit = 'VISITED_' + loc.id
+            LocationId::{{ loc.id }} => self.cbits{{ bfp.varmap[visit] }}.insert(flags::ContextBits{{ bfp.varmap[visit] }}::{{ visit|upper }}),
+%% endfor
+        }
     }
     fn skip(&mut self, loc_id: LocationId) {
-        if self.status[loc_id] == Status::None {
-            self.status[loc_id] = Status::Skipped;
-            self.skips += 1;
+        match loc_id {
+%% for loc in gl.locations()
+%% set visit = 'VISITED_' + loc.id
+%% set skip = 'SKIPPED_' + loc.id
+            LocationId::{{ loc.id }} =>  {
+                if !self.cbits{{ bfp.varmap[visit] }}.contains(flags::ContextBits{{ bfp.varmap[visit] }}::{{ visit|upper }}) {
+                    self.cbits{{ bfp.varmap[skip] }}.insert(flags::ContextBits{{ bfp.varmap[skip] }}::{{ skip|upper }});
+                }
+            }
+%% endfor
         }
     }
     fn reset(&mut self, loc_id: LocationId) {
-        match self.status[loc_id] {
-            Status::Visited => self.visits -= 1,
-            Status::Skipped => self.skips -= 1,
-            _ => (),
+        match loc_id {
+%% for loc in gl.locations()
+%% set visit = 'VISITED_' + loc.id
+%% set skip = 'SKIPPED_' + loc.id
+            LocationId::{{ loc.id }} => {
+                self.cbits{{ bfp.varmap[visit] }}.remove(flags::ContextBits{{ bfp.varmap[visit] }}::{{ visit|upper }});
+                self.cbits{{ bfp.varmap[skip] }}.remove(flags::ContextBits{{ bfp.varmap[skip] }}::{{ skip|upper }});
+            }
+%% endfor
         }
-        self.status[loc_id] = Status::None;
     }
     
-    fn todo(&self, loc_id: LocationId) -> bool { self.status[loc_id] == Status::None }
-    fn visited(&self, loc_id: LocationId) -> bool { self.status[loc_id] == Status::Visited }
-    fn skipped(&self, loc_id: LocationId) -> bool { self.status[loc_id] == Status::Skipped }
+    fn todo(&self, loc_id: LocationId) -> bool {
+        match loc_id {
+%% for loc in gl.locations()
+%% set visit = 'VISITED_' + loc.id
+%% set skip = 'SKIPPED_' + loc.id
+            LocationId::{{ loc.id }} => {
+                !self.cbits{{ bfp.varmap[visit] }}.contains(flags::ContextBits{{ bfp.varmap[visit] }}::{{ visit|upper }})
+                && !self.cbits{{ bfp.varmap[skip] }}.contains(flags::ContextBits{{ bfp.varmap[skip] }}::{{ skip|upper }})
+            }
+%% endfor
+        }
+    }
+    fn visited(&self, loc_id: LocationId) -> bool {
+        match loc_id {
+%% for loc in gl.locations()
+%% set visit = 'VISITED_' + loc.id
+            LocationId::{{ loc.id }} => {
+                self.cbits{{ bfp.varmap[visit] }}.contains(flags::ContextBits{{ bfp.varmap[visit] }}::{{ visit|upper }})
+            }
+%% endfor
+        }
+    }
+    fn skipped(&self, loc_id: LocationId) -> bool {
+        match loc_id {
+%% for loc in gl.locations()
+%% set skip = 'SKIPPED_' + loc.id
+            LocationId::{{ loc.id }} => {
+                self.cbits{{ bfp.varmap[skip] }}.contains(flags::ContextBits{{ bfp.varmap[skip] }}::{{ skip|upper }})
+            }
+%% endfor
+        }
+    }
 
 %% for ptype in ['Spot', 'Area', 'Region']
     fn all_{{ ptype|lower }}_checks(&self, id: {{ ptype }}Id) -> bool {
-        let r = {{ ptype|lower }}_locations(id);
-        for status in self.status.as_slice()[r.start..r.end].iter() {
-            if status == &Status::None { return false; }
-        }
-        true
+        false
     }
 %% endfor
 
@@ -444,16 +478,21 @@ impl context::Ctx for Context {
     }
 
     fn count_visits(&self) -> u32 {
-        self.visits
+%% for group in range(bfp.visit_groups.start_group, bfp.visit_groups.end_group + 1)
+        {% if not loop.first %}    + {% endif %}self.cbits{{ group }}.intersection(flags::ContextBits{{ group }}::ALL_VISIT_FLAGS).bits().count_ones()
+%% endfor
     }
     fn count_skips(&self) -> u32 {
-        self.skips
+%% for group in range(bfp.skip_groups.start_group, bfp.skip_groups.end_group + 1)
+        {% if not loop.first %}    + {% endif %}self.cbits{{ group }}.intersection(flags::ContextBits{{ group }}::ALL_SKIP_FLAGS).bits().count_ones()
+%% endfor
     }
     fn progress(&self) -> u32 {
-        if self.visits <= 0 {
+        let visits = self.count_visits();
+        if visits <= 0 {
             0
         } else {
-            self.visits * 100 / (Self::World::NUM_LOCATIONS - self.skips)
+            visits * 100 / (Self::World::NUM_LOCATIONS - self.count_skips())
         }
     }
 
@@ -490,20 +529,6 @@ impl context::Ctx for Context {
         }
 %% endfor
 %% endfor
-
-        for (loc_id, status) in self.status.iter() {
-            if *status != old.status[loc_id] {
-                list.push(format!("{:?}: {}", status, loc_id));
-            }
-        }
-        
-        if self.visits != old.visits {
-            list.push(format!("Visits: {:+}", self.visits - old.visits));
-        }
-
-        if self.skips != old.skips {
-            list.push(format!("Skips: {:+}", self.skips - old.skips));
-        }
 
         if list.is_empty() {
             String::from("NONE")

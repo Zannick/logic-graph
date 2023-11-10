@@ -235,6 +235,7 @@ class GameLogic(object):
         self.canon_places = defaultdict(list)
         # regions/areas/etc are dicts {name: blah, req: blah} (at whatever level)
         self.regions = self._info['regions']
+        num_locs = 0
         for region in self.regions:
             rname = region.get('short', region['name'])
             region['id'] = construct_id(rname)
@@ -356,6 +357,9 @@ class GameLogic(object):
                                         self._errors.append(f'Action {act["fullname"]} moves to non-spot data: {dest}')
                                     else:
                                         act['to'] = d
+
+            num_locs += len(region['loc_ids'])
+        self.num_locations = num_locs
 
     def process_exit_movements(self):
         for spot in self.spots():
@@ -492,8 +496,9 @@ class GameLogic(object):
         self.context_str_values = cv.values
 
     def process_bitflags(self):
-        self.bfp = BitFlagProcessor(self.context_values, self.settings, self.item_max_counts)
+        self.bfp = BitFlagProcessor(self.context_values, self.settings, self.item_max_counts, list(self.locations()))
         self.bfp.process()
+        self.bfp.process_place_groups(self.regions)
 
     def process_special(self):
         if sc := self.special.get('graph_scale'):
@@ -1433,6 +1438,7 @@ class GameLogic(object):
             'construct_place_id': construct_place_id,
             'construct_test_name': construct_test_name,
             'escape_ctx': partial(re.compile(r'\bctx\b').sub, '$ctx'),
+            'field_size': field_size,
             'get_exit_target': get_exit_target,
             'get_exit_target_id': get_exit_target_id,
             'get_int_type_for_max': get_int_type_for_max,

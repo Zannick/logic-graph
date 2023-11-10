@@ -307,7 +307,7 @@ impl world::World for World {
     type Exit = Exit;
     type Action = Action;
     type Warp = Warp;
-    const NUM_LOCATIONS: u32 = {{ gl.locations()|list|count }};
+    const NUM_LOCATIONS: u32 = {{ gl.num_locations }};
 
     fn objective_name(&self) -> String {
         format!("{}", self.objective)
@@ -637,46 +637,6 @@ pub fn build_warps() -> EnumMap<WarpId, Warp> {
             price: Currency::{% if w.price and w.price > 0 -%}
                 {{ (w.costs or default_price_type)|camelize }}({{ w.price }})
                 {%- else %}Free{% endif %},
-        },
-%% endfor
-    }
-}
-
-pub fn spot_locations(id: SpotId) -> Range<usize> {
-    match id {
-        SpotId::None => Range { start: 0, end: 0, },
-%% for sp in gl.spots()
-        SpotId::{{ sp.id }} => Range {
-            {% if sp.loc_ids -%}
-            start: LocationId::{{ sp.loc_ids|min }}.into_usize(),
-            end: LocationId::{{ sp.loc_ids|max }}.into_usize() + 1,
-            {%- else %}start: 0, end: 0,{% endif %}
-        },
-%% endfor
-    }
-}
-
-pub fn area_locations(id: AreaId) -> Range<usize> {
-    match id {
-%% for a in gl.areas()
-        AreaId::{{ a.id }} => Range {
-            {% if a.loc_ids -%}
-            start: LocationId::{{ a.loc_ids|min }}.into_usize(),
-            end: LocationId::{{ a.loc_ids|max }}.into_usize(),
-            {%- else %}start: 0, end: 0,{% endif %}
-        },
-%% endfor
-    }
-}
-
-pub fn region_locations(id: RegionId) -> Range<usize> {
-    match id {
-%% for r in gl.regions
-        RegionId::{{ r.id }} => Range {
-            {% if r.loc_ids -%}
-            start: LocationId::{{ r.loc_ids|min }}.into_usize(),
-            end: LocationId::{{ r.loc_ids|max }}.into_usize(),
-            {%- else %}start: 0, end: 0,{% endif %}
         },
 %% endfor
     }
