@@ -4,6 +4,7 @@
 #![allow(unused)]
 
 use crate::graph::{self, *};
+use crate::graph_enums::*;
 use crate::items::Item;
 use crate::movements;
 use crate::prices::Currency;
@@ -103,7 +104,7 @@ pub enum Expectation {
 pub mod data {
     #[allow(unused_imports)]
     use crate::context::enums;
-    use crate::graph::*;
+    use crate::graph_enums::*;
 }
 
 pub mod flags {
@@ -113,37 +114,39 @@ pub mod flags {
     bitflags! {
         #[derive(Copy, Clone, Debug, PartialEq, Eq, Hash, Serialize, Deserialize)]
         pub struct ContextBits1 : u32 {
-            const CHILD = 1 << 0;
-            const DEKU_TREE__COMPASS_ROOM__CTX__TORCH = 1 << 1;
-            const LOGIC_DEKU_B1_SKIP = 1 << 2;
-            const BIGGORON_SWORD = 1 << 3;
-            const BOMBS = 1 << 4;
-            const BOOMERANG = 1 << 5;
-            const BOW = 1 << 6;
-            const BUY_DEKU_NUT_10 = 1 << 7;
-            const BUY_DEKU_NUT_5 = 1 << 8;
-            const BUY_DEKU_SHIELD = 1 << 9;
-            const BUY_DEKU_STICK_1 = 1 << 10;
-            const DEFEAT_GANON = 1 << 11;
-            const DEFEAT_GOHMA = 1 << 12;
-            const DEKU_BACK_ROOM_WALL = 1 << 13;
-            const DEKU_BACK_ROOM_WEB = 1 << 14;
-            const DEKU_BASEMENT_BLOCK = 1 << 15;
-            const DEKU_BASEMENT_SCRUBS = 1 << 16;
-            const DEKU_BASEMENT_SWITCH = 1 << 17;
-            const DEKU_BASEMENT_WEB = 1 << 18;
-            const DEKU_LOBBY_WEB = 1 << 19;
-            const DEKU_NUT_DROP = 1 << 20;
-            const DEKU_SHIELD_DROP = 1 << 21;
-            const DEKU_SLINGSHOT_SCRUB = 1 << 22;
-            const DEKU_STICK_DROP = 1 << 23;
-            const HYLIAN_SHIELD = 1 << 24;
-            const KOKIRI_EMERALD = 1 << 25;
-            const KOKIRI_SWORD = 1 << 26;
-            const MAGIC_METER = 1 << 27;
-            const OCARINA = 1 << 28;
-            const SHOWED_MIDO = 1 << 29;
-            const SLINGSHOT = 1 << 30;
+            const CHILD = 0x1;
+            const DEKU_TREE__COMPASS_ROOM__CTX__TORCH = 0x2;
+            const LOGIC_DEKU_B1_SKIP = 0x4;
+            const BIGGORON_SWORD = 0x8;
+            const BOMBS = 0x10;
+            const BOOMERANG = 0x20;
+            const BOW = 0x40;
+            const BUY_DEKU_NUT_10 = 0x80;
+            const BUY_DEKU_NUT_5 = 0x100;
+            const BUY_DEKU_SHIELD = 0x200;
+            const BUY_DEKU_STICK_1 = 0x400;
+            const DEFEAT_GANON = 0x800;
+            const DEFEAT_GOHMA = 0x1000;
+            const DEKU_BACK_ROOM_WALL = 0x2000;
+            const DEKU_BACK_ROOM_WEB = 0x4000;
+            const DEKU_BASEMENT_BLOCK = 0x8000;
+            const DEKU_BASEMENT_SCRUBS = 0x10000;
+            const DEKU_BASEMENT_SWITCH = 0x20000;
+            const DEKU_BASEMENT_WEB = 0x40000;
+            const DEKU_LOBBY_WEB = 0x80000;
+            const DEKU_NUT_DROP = 0x100000;
+            const DEKU_SHIELD_DROP = 0x200000;
+            const DEKU_SLINGSHOT_SCRUB = 0x400000;
+            const DEKU_STICK_DROP = 0x800000;
+            const HYLIAN_SHIELD = 0x1000000;
+            const KOKIRI_EMERALD = 0x2000000;
+            const KOKIRI_SWORD = 0x4000000;
+            const MAGIC_METER = 0x8000000;
+            const OCARINA = 0x10000000;
+            const SHOWED_MIDO = 0x20000000;
+            const SLINGSHOT = 0x40000000;
+            const VISITED_DEKU_TREE__BACK_ROOM__NORTHWEST__BREAK_WALL = 0x80000000;
+            const ALL_VISIT_FLAGS = 0x80000000;
         }
     }
     impl Default for ContextBits1 {
@@ -151,15 +154,118 @@ pub mod flags {
             ContextBits1::CHILD
         }
     }
-}
-
-#[derive(Copy, Clone, Debug, Default, PartialEq, Eq, Hash, Serialize_repr, Deserialize_repr)]
-#[repr(u8)]
-pub enum Status {
-    #[default]
-    None,
-    Visited,
-    Skipped,
+    bitflags! {
+        #[derive(Copy, Clone, Debug, Default, PartialEq, Eq, Hash, Serialize, Deserialize)]
+        pub struct ContextBits2 : u32 {
+            const VISITED_DEKU_TREE__BACK_ROOM__NORTHWEST__BURN_WEB = 0x1;
+            const VISITED_DEKU_TREE__BASEMENT_1__CENTER__VINES_GS = 0x2;
+            const VISITED_DEKU_TREE__BASEMENT_1__CORNER__BURN_BASEMENT_WEB = 0x4;
+            const VISITED_DEKU_TREE__BASEMENT_1__CORNER__CHEST = 0x8;
+            const VISITED_DEKU_TREE__BASEMENT_1__CORNER__GATE_GS = 0x10;
+            const VISITED_DEKU_TREE__BASEMENT_1__CORNER__SWITCH = 0x20;
+            const VISITED_DEKU_TREE__BASEMENT_2__BOSS_DOOR__SCRUBS = 0x40;
+            const VISITED_DEKU_TREE__BASEMENT_LEDGE__BLOCK__PUSH_BLOCK = 0x80;
+            const VISITED_DEKU_TREE__BASEMENT_LEDGE__WEB__BURN_WEB = 0x100;
+            const VISITED_DEKU_TREE__BOSS_ROOM__ARENA__BLUE_WARP = 0x200;
+            const VISITED_DEKU_TREE__BOSS_ROOM__ARENA__GOHMA = 0x400;
+            const VISITED_DEKU_TREE__BOSS_ROOM__ARENA__GOHMA_HEART = 0x800;
+            const VISITED_DEKU_TREE__BOSS_ROOM__ARENA__GOHMA_QUICK_KILL = 0x1000;
+            const VISITED_DEKU_TREE__COMPASS_ROOM__COMPASS__CHEST = 0x2000;
+            const VISITED_DEKU_TREE__COMPASS_ROOM__ENTRY__BURN_WEB = 0x4000;
+            const VISITED_DEKU_TREE__COMPASS_ROOM__LEDGE__CHEST = 0x8000;
+            const VISITED_DEKU_TREE__COMPASS_ROOM__LEDGE__GS = 0x10000;
+            const VISITED_DEKU_TREE__FLOOR_2__VINES__MAP_CHEST = 0x20000;
+            const VISITED_DEKU_TREE__FLOOR_3__DOOR__BREAK_WEB = 0x40000;
+            const VISITED_DEKU_TREE__LOBBY__CENTER__DEKU_BABA_NUTS = 0x80000;
+            const VISITED_DEKU_TREE__LOBBY__CENTER__DEKU_BABA_STICKS = 0x100000;
+            const VISITED_DEKU_TREE__LOBBY__CENTER__WEB = 0x200000;
+            const VISITED_DEKU_TREE__SCRUB_ROOM__ENTRY__SCRUB = 0x400000;
+            const VISITED_DEKU_TREE__SKULL_ROOM__ENTRY__GS = 0x800000;
+            const VISITED_DEKU_TREE__SLINGSHOT_ROOM__SLINGSHOT__CHEST = 0x1000000;
+            const VISITED_DEKU_TREE__SLINGSHOT_UPPER__LEDGE__CHEST = 0x2000000;
+            const VISITED_KF__BABA_CORRIDOR__DEKU_BABAS__NUTS = 0x4000000;
+            const VISITED_KF__BABA_CORRIDOR__DEKU_BABAS__STICKS = 0x8000000;
+            const VISITED_KF__BOULDER_MAZE__REWARD__CHEST = 0x10000000;
+            const VISITED_KF__KOKIRI_VILLAGE__MIDOS_GUARDPOST__SHOW_MIDO = 0x20000000;
+            const VISITED_KF__MIDOS_HOUSE__ENTRY__BOTTOM_LEFT_CHEST = 0x40000000;
+            const VISITED_KF__MIDOS_HOUSE__ENTRY__BOTTOM_RIGHT_CHEST = 0x80000000;
+            const ALL_VISIT_FLAGS = 0xffffffff;
+        }
+    }
+    bitflags! {
+        #[derive(Copy, Clone, Debug, Default, PartialEq, Eq, Hash, Serialize, Deserialize)]
+        pub struct ContextBits3 : u32 {
+            const VISITED_KF__MIDOS_HOUSE__ENTRY__TOP_LEFT_CHEST = 0x1;
+            const VISITED_KF__MIDOS_HOUSE__ENTRY__TOP_RIGHT_CHEST = 0x2;
+            const VISITED_KF__OUTSIDE_DEKU_TREE__LEFT__GOSSIP_STONE = 0x4;
+            const VISITED_KF__OUTSIDE_DEKU_TREE__RIGHT__GOSSIP_STONE = 0x8;
+            const VISITED_KF__SHOP__ENTRY__BLUE_RUPEE = 0x10;
+            const VISITED_KF__SHOP__ENTRY__ITEM_1 = 0x20;
+            const VISITED_KF__SHOP__ENTRY__ITEM_2 = 0x40;
+            const VISITED_KF__SHOP__ENTRY__ITEM_3 = 0x80;
+            const VISITED_KF__SHOP__ENTRY__ITEM_4 = 0x100;
+            const VISITED_KF__SHOP__ENTRY__ITEM_5 = 0x200;
+            const VISITED_KF__SHOP__ENTRY__ITEM_6 = 0x400;
+            const VISITED_KF__SHOP__ENTRY__ITEM_7 = 0x800;
+            const VISITED_KF__SHOP__ENTRY__ITEM_8 = 0x1000;
+            const VISITED_KAK__SPIDER_HOUSE__ENTRY__SKULLS_10 = 0x2000;
+            const SKIPPED_DEKU_TREE__BACK_ROOM__NORTHWEST__BREAK_WALL = 0x4000;
+            const SKIPPED_DEKU_TREE__BACK_ROOM__NORTHWEST__BURN_WEB = 0x8000;
+            const SKIPPED_DEKU_TREE__BASEMENT_1__CENTER__VINES_GS = 0x10000;
+            const SKIPPED_DEKU_TREE__BASEMENT_1__CORNER__BURN_BASEMENT_WEB = 0x20000;
+            const SKIPPED_DEKU_TREE__BASEMENT_1__CORNER__CHEST = 0x40000;
+            const SKIPPED_DEKU_TREE__BASEMENT_1__CORNER__GATE_GS = 0x80000;
+            const SKIPPED_DEKU_TREE__BASEMENT_1__CORNER__SWITCH = 0x100000;
+            const SKIPPED_DEKU_TREE__BASEMENT_2__BOSS_DOOR__SCRUBS = 0x200000;
+            const SKIPPED_DEKU_TREE__BASEMENT_LEDGE__BLOCK__PUSH_BLOCK = 0x400000;
+            const SKIPPED_DEKU_TREE__BASEMENT_LEDGE__WEB__BURN_WEB = 0x800000;
+            const SKIPPED_DEKU_TREE__BOSS_ROOM__ARENA__BLUE_WARP = 0x1000000;
+            const SKIPPED_DEKU_TREE__BOSS_ROOM__ARENA__GOHMA = 0x2000000;
+            const SKIPPED_DEKU_TREE__BOSS_ROOM__ARENA__GOHMA_HEART = 0x4000000;
+            const SKIPPED_DEKU_TREE__BOSS_ROOM__ARENA__GOHMA_QUICK_KILL = 0x8000000;
+            const SKIPPED_DEKU_TREE__COMPASS_ROOM__COMPASS__CHEST = 0x10000000;
+            const SKIPPED_DEKU_TREE__COMPASS_ROOM__ENTRY__BURN_WEB = 0x20000000;
+            const SKIPPED_DEKU_TREE__COMPASS_ROOM__LEDGE__CHEST = 0x40000000;
+            const SKIPPED_DEKU_TREE__COMPASS_ROOM__LEDGE__GS = 0x80000000;
+            const ALL_VISIT_FLAGS = 0x3fff;
+            const ALL_SKIP_FLAGS = 0xffffc000;
+        }
+    }
+    bitflags! {
+        #[derive(Copy, Clone, Debug, Default, PartialEq, Eq, Hash, Serialize, Deserialize)]
+        pub struct ContextBits4 : u32 {
+            const SKIPPED_DEKU_TREE__FLOOR_2__VINES__MAP_CHEST = 0x1;
+            const SKIPPED_DEKU_TREE__FLOOR_3__DOOR__BREAK_WEB = 0x2;
+            const SKIPPED_DEKU_TREE__LOBBY__CENTER__DEKU_BABA_NUTS = 0x4;
+            const SKIPPED_DEKU_TREE__LOBBY__CENTER__DEKU_BABA_STICKS = 0x8;
+            const SKIPPED_DEKU_TREE__LOBBY__CENTER__WEB = 0x10;
+            const SKIPPED_DEKU_TREE__SCRUB_ROOM__ENTRY__SCRUB = 0x20;
+            const SKIPPED_DEKU_TREE__SKULL_ROOM__ENTRY__GS = 0x40;
+            const SKIPPED_DEKU_TREE__SLINGSHOT_ROOM__SLINGSHOT__CHEST = 0x80;
+            const SKIPPED_DEKU_TREE__SLINGSHOT_UPPER__LEDGE__CHEST = 0x100;
+            const SKIPPED_KF__BABA_CORRIDOR__DEKU_BABAS__NUTS = 0x200;
+            const SKIPPED_KF__BABA_CORRIDOR__DEKU_BABAS__STICKS = 0x400;
+            const SKIPPED_KF__BOULDER_MAZE__REWARD__CHEST = 0x800;
+            const SKIPPED_KF__KOKIRI_VILLAGE__MIDOS_GUARDPOST__SHOW_MIDO = 0x1000;
+            const SKIPPED_KF__MIDOS_HOUSE__ENTRY__BOTTOM_LEFT_CHEST = 0x2000;
+            const SKIPPED_KF__MIDOS_HOUSE__ENTRY__BOTTOM_RIGHT_CHEST = 0x4000;
+            const SKIPPED_KF__MIDOS_HOUSE__ENTRY__TOP_LEFT_CHEST = 0x8000;
+            const SKIPPED_KF__MIDOS_HOUSE__ENTRY__TOP_RIGHT_CHEST = 0x10000;
+            const SKIPPED_KF__OUTSIDE_DEKU_TREE__LEFT__GOSSIP_STONE = 0x20000;
+            const SKIPPED_KF__OUTSIDE_DEKU_TREE__RIGHT__GOSSIP_STONE = 0x40000;
+            const SKIPPED_KF__SHOP__ENTRY__BLUE_RUPEE = 0x80000;
+            const SKIPPED_KF__SHOP__ENTRY__ITEM_1 = 0x100000;
+            const SKIPPED_KF__SHOP__ENTRY__ITEM_2 = 0x200000;
+            const SKIPPED_KF__SHOP__ENTRY__ITEM_3 = 0x400000;
+            const SKIPPED_KF__SHOP__ENTRY__ITEM_4 = 0x800000;
+            const SKIPPED_KF__SHOP__ENTRY__ITEM_5 = 0x1000000;
+            const SKIPPED_KF__SHOP__ENTRY__ITEM_6 = 0x2000000;
+            const SKIPPED_KF__SHOP__ENTRY__ITEM_7 = 0x4000000;
+            const SKIPPED_KF__SHOP__ENTRY__ITEM_8 = 0x8000000;
+            const SKIPPED_KAK__SPIDER_HOUSE__ENTRY__SKULLS_10 = 0x10000000;
+            const ALL_SKIP_FLAGS = 0x1fffffff;
+        }
+    }
 }
 
 #[derive(Clone, Debug, Eq, PartialEq, Hash, Serialize, Deserialize)]
@@ -176,11 +282,9 @@ pub struct Context {
     pub triforce_piece: i16,
     // bitflags
     pub cbits1: flags::ContextBits1,
-    // other
-    pub status: EnumMap<LocationId, Status>,
-
-    visits: u32,
-    skips: u32,
+    pub cbits2: flags::ContextBits2,
+    pub cbits3: flags::ContextBits3,
+    pub cbits4: flags::ContextBits4,
 }
 
 impl Default for Context {
@@ -197,10 +301,9 @@ impl Default for Context {
             triforce_piece: Default::default(),
             // bitflags
             cbits1: Default::default(),
-            // other
-            status: Default::default(),
-            visits: Default::default(),
-            skips: Default::default(),
+            cbits2: Default::default(),
+            cbits3: Default::default(),
+            cbits4: Default::default(),
         }
     }
 }
@@ -1263,80 +1366,1601 @@ impl context::Ctx for Context {
     }
 
     fn visit(&mut self, loc_id: LocationId) {
-        self.status[loc_id] = Status::Visited;
-        self.visits += 1;
+        match loc_id {
+            LocationId::Deku_Tree__Lobby__Center__Deku_Baba_Sticks => self
+                .cbits2
+                .insert(flags::ContextBits2::VISITED_DEKU_TREE__LOBBY__CENTER__DEKU_BABA_STICKS),
+            LocationId::Deku_Tree__Lobby__Center__Deku_Baba_Nuts => self
+                .cbits2
+                .insert(flags::ContextBits2::VISITED_DEKU_TREE__LOBBY__CENTER__DEKU_BABA_NUTS),
+            LocationId::Deku_Tree__Lobby__Center__Web => self
+                .cbits2
+                .insert(flags::ContextBits2::VISITED_DEKU_TREE__LOBBY__CENTER__WEB),
+            LocationId::Deku_Tree__Floor_2__Vines__Map_Chest => self
+                .cbits2
+                .insert(flags::ContextBits2::VISITED_DEKU_TREE__FLOOR_2__VINES__MAP_CHEST),
+            LocationId::Deku_Tree__Scrub_Room__Entry__Scrub => self
+                .cbits2
+                .insert(flags::ContextBits2::VISITED_DEKU_TREE__SCRUB_ROOM__ENTRY__SCRUB),
+            LocationId::Deku_Tree__Slingshot_Room__Slingshot__Chest => self
+                .cbits2
+                .insert(flags::ContextBits2::VISITED_DEKU_TREE__SLINGSHOT_ROOM__SLINGSHOT__CHEST),
+            LocationId::Deku_Tree__Slingshot_Upper__Ledge__Chest => self
+                .cbits2
+                .insert(flags::ContextBits2::VISITED_DEKU_TREE__SLINGSHOT_UPPER__LEDGE__CHEST),
+            LocationId::Deku_Tree__Floor_3__Door__Break_Web => self
+                .cbits2
+                .insert(flags::ContextBits2::VISITED_DEKU_TREE__FLOOR_3__DOOR__BREAK_WEB),
+            LocationId::Deku_Tree__Compass_Room__Entry__Burn_Web => self
+                .cbits2
+                .insert(flags::ContextBits2::VISITED_DEKU_TREE__COMPASS_ROOM__ENTRY__BURN_WEB),
+            LocationId::Deku_Tree__Compass_Room__Compass__Chest => self
+                .cbits2
+                .insert(flags::ContextBits2::VISITED_DEKU_TREE__COMPASS_ROOM__COMPASS__CHEST),
+            LocationId::Deku_Tree__Compass_Room__Ledge__Chest => self
+                .cbits2
+                .insert(flags::ContextBits2::VISITED_DEKU_TREE__COMPASS_ROOM__LEDGE__CHEST),
+            LocationId::Deku_Tree__Compass_Room__Ledge__GS => self
+                .cbits2
+                .insert(flags::ContextBits2::VISITED_DEKU_TREE__COMPASS_ROOM__LEDGE__GS),
+            LocationId::Deku_Tree__Basement_1__Center__Vines_GS => self
+                .cbits2
+                .insert(flags::ContextBits2::VISITED_DEKU_TREE__BASEMENT_1__CENTER__VINES_GS),
+            LocationId::Deku_Tree__Basement_1__Corner__Switch => self
+                .cbits2
+                .insert(flags::ContextBits2::VISITED_DEKU_TREE__BASEMENT_1__CORNER__SWITCH),
+            LocationId::Deku_Tree__Basement_1__Corner__Chest => self
+                .cbits2
+                .insert(flags::ContextBits2::VISITED_DEKU_TREE__BASEMENT_1__CORNER__CHEST),
+            LocationId::Deku_Tree__Basement_1__Corner__Gate_GS => self
+                .cbits2
+                .insert(flags::ContextBits2::VISITED_DEKU_TREE__BASEMENT_1__CORNER__GATE_GS),
+            LocationId::Deku_Tree__Basement_1__Corner__Burn_Basement_Web => self.cbits2.insert(
+                flags::ContextBits2::VISITED_DEKU_TREE__BASEMENT_1__CORNER__BURN_BASEMENT_WEB,
+            ),
+            LocationId::Deku_Tree__Back_Room__Northwest__Burn_Web => self
+                .cbits2
+                .insert(flags::ContextBits2::VISITED_DEKU_TREE__BACK_ROOM__NORTHWEST__BURN_WEB),
+            LocationId::Deku_Tree__Back_Room__Northwest__Break_Wall => self
+                .cbits1
+                .insert(flags::ContextBits1::VISITED_DEKU_TREE__BACK_ROOM__NORTHWEST__BREAK_WALL),
+            LocationId::Deku_Tree__Skull_Room__Entry__GS => self
+                .cbits2
+                .insert(flags::ContextBits2::VISITED_DEKU_TREE__SKULL_ROOM__ENTRY__GS),
+            LocationId::Deku_Tree__Basement_Ledge__Block__Push_Block => self
+                .cbits2
+                .insert(flags::ContextBits2::VISITED_DEKU_TREE__BASEMENT_LEDGE__BLOCK__PUSH_BLOCK),
+            LocationId::Deku_Tree__Basement_Ledge__Web__Burn_Web => self
+                .cbits2
+                .insert(flags::ContextBits2::VISITED_DEKU_TREE__BASEMENT_LEDGE__WEB__BURN_WEB),
+            LocationId::Deku_Tree__Basement_2__Boss_Door__Scrubs => self
+                .cbits2
+                .insert(flags::ContextBits2::VISITED_DEKU_TREE__BASEMENT_2__BOSS_DOOR__SCRUBS),
+            LocationId::Deku_Tree__Boss_Room__Arena__Gohma => self
+                .cbits2
+                .insert(flags::ContextBits2::VISITED_DEKU_TREE__BOSS_ROOM__ARENA__GOHMA),
+            LocationId::Deku_Tree__Boss_Room__Arena__Gohma_Quick_Kill => self
+                .cbits2
+                .insert(flags::ContextBits2::VISITED_DEKU_TREE__BOSS_ROOM__ARENA__GOHMA_QUICK_KILL),
+            LocationId::Deku_Tree__Boss_Room__Arena__Gohma_Heart => self
+                .cbits2
+                .insert(flags::ContextBits2::VISITED_DEKU_TREE__BOSS_ROOM__ARENA__GOHMA_HEART),
+            LocationId::Deku_Tree__Boss_Room__Arena__Blue_Warp => self
+                .cbits2
+                .insert(flags::ContextBits2::VISITED_DEKU_TREE__BOSS_ROOM__ARENA__BLUE_WARP),
+            LocationId::KF__Kokiri_Village__Midos_Guardpost__Show_Mido => self.cbits2.insert(
+                flags::ContextBits2::VISITED_KF__KOKIRI_VILLAGE__MIDOS_GUARDPOST__SHOW_MIDO,
+            ),
+            LocationId::KF__Boulder_Maze__Reward__Chest => self
+                .cbits2
+                .insert(flags::ContextBits2::VISITED_KF__BOULDER_MAZE__REWARD__CHEST),
+            LocationId::KF__Baba_Corridor__Deku_Babas__Sticks => self
+                .cbits2
+                .insert(flags::ContextBits2::VISITED_KF__BABA_CORRIDOR__DEKU_BABAS__STICKS),
+            LocationId::KF__Baba_Corridor__Deku_Babas__Nuts => self
+                .cbits2
+                .insert(flags::ContextBits2::VISITED_KF__BABA_CORRIDOR__DEKU_BABAS__NUTS),
+            LocationId::KF__Outside_Deku_Tree__Left__Gossip_Stone => self
+                .cbits3
+                .insert(flags::ContextBits3::VISITED_KF__OUTSIDE_DEKU_TREE__LEFT__GOSSIP_STONE),
+            LocationId::KF__Outside_Deku_Tree__Right__Gossip_Stone => self
+                .cbits3
+                .insert(flags::ContextBits3::VISITED_KF__OUTSIDE_DEKU_TREE__RIGHT__GOSSIP_STONE),
+            LocationId::KF__Midos_House__Entry__Top_Left_Chest => self
+                .cbits3
+                .insert(flags::ContextBits3::VISITED_KF__MIDOS_HOUSE__ENTRY__TOP_LEFT_CHEST),
+            LocationId::KF__Midos_House__Entry__Top_Right_Chest => self
+                .cbits3
+                .insert(flags::ContextBits3::VISITED_KF__MIDOS_HOUSE__ENTRY__TOP_RIGHT_CHEST),
+            LocationId::KF__Midos_House__Entry__Bottom_Left_Chest => self
+                .cbits2
+                .insert(flags::ContextBits2::VISITED_KF__MIDOS_HOUSE__ENTRY__BOTTOM_LEFT_CHEST),
+            LocationId::KF__Midos_House__Entry__Bottom_Right_Chest => self
+                .cbits2
+                .insert(flags::ContextBits2::VISITED_KF__MIDOS_HOUSE__ENTRY__BOTTOM_RIGHT_CHEST),
+            LocationId::KF__Shop__Entry__Blue_Rupee => self
+                .cbits3
+                .insert(flags::ContextBits3::VISITED_KF__SHOP__ENTRY__BLUE_RUPEE),
+            LocationId::KF__Shop__Entry__Item_1 => self
+                .cbits3
+                .insert(flags::ContextBits3::VISITED_KF__SHOP__ENTRY__ITEM_1),
+            LocationId::KF__Shop__Entry__Item_2 => self
+                .cbits3
+                .insert(flags::ContextBits3::VISITED_KF__SHOP__ENTRY__ITEM_2),
+            LocationId::KF__Shop__Entry__Item_3 => self
+                .cbits3
+                .insert(flags::ContextBits3::VISITED_KF__SHOP__ENTRY__ITEM_3),
+            LocationId::KF__Shop__Entry__Item_4 => self
+                .cbits3
+                .insert(flags::ContextBits3::VISITED_KF__SHOP__ENTRY__ITEM_4),
+            LocationId::KF__Shop__Entry__Item_5 => self
+                .cbits3
+                .insert(flags::ContextBits3::VISITED_KF__SHOP__ENTRY__ITEM_5),
+            LocationId::KF__Shop__Entry__Item_6 => self
+                .cbits3
+                .insert(flags::ContextBits3::VISITED_KF__SHOP__ENTRY__ITEM_6),
+            LocationId::KF__Shop__Entry__Item_7 => self
+                .cbits3
+                .insert(flags::ContextBits3::VISITED_KF__SHOP__ENTRY__ITEM_7),
+            LocationId::KF__Shop__Entry__Item_8 => self
+                .cbits3
+                .insert(flags::ContextBits3::VISITED_KF__SHOP__ENTRY__ITEM_8),
+            LocationId::Kak__Spider_House__Entry__Skulls_10 => self
+                .cbits3
+                .insert(flags::ContextBits3::VISITED_KAK__SPIDER_HOUSE__ENTRY__SKULLS_10),
+        }
     }
     fn skip(&mut self, loc_id: LocationId) {
-        if self.status[loc_id] == Status::None {
-            self.status[loc_id] = Status::Skipped;
-            self.skips += 1;
+        match loc_id {
+            LocationId::Deku_Tree__Lobby__Center__Deku_Baba_Sticks => {
+                if !self.cbits2.contains(
+                    flags::ContextBits2::VISITED_DEKU_TREE__LOBBY__CENTER__DEKU_BABA_STICKS,
+                ) {
+                    self.cbits4.insert(
+                        flags::ContextBits4::SKIPPED_DEKU_TREE__LOBBY__CENTER__DEKU_BABA_STICKS,
+                    );
+                }
+            }
+            LocationId::Deku_Tree__Lobby__Center__Deku_Baba_Nuts => {
+                if !self
+                    .cbits2
+                    .contains(flags::ContextBits2::VISITED_DEKU_TREE__LOBBY__CENTER__DEKU_BABA_NUTS)
+                {
+                    self.cbits4.insert(
+                        flags::ContextBits4::SKIPPED_DEKU_TREE__LOBBY__CENTER__DEKU_BABA_NUTS,
+                    );
+                }
+            }
+            LocationId::Deku_Tree__Lobby__Center__Web => {
+                if !self
+                    .cbits2
+                    .contains(flags::ContextBits2::VISITED_DEKU_TREE__LOBBY__CENTER__WEB)
+                {
+                    self.cbits4
+                        .insert(flags::ContextBits4::SKIPPED_DEKU_TREE__LOBBY__CENTER__WEB);
+                }
+            }
+            LocationId::Deku_Tree__Floor_2__Vines__Map_Chest => {
+                if !self
+                    .cbits2
+                    .contains(flags::ContextBits2::VISITED_DEKU_TREE__FLOOR_2__VINES__MAP_CHEST)
+                {
+                    self.cbits4
+                        .insert(flags::ContextBits4::SKIPPED_DEKU_TREE__FLOOR_2__VINES__MAP_CHEST);
+                }
+            }
+            LocationId::Deku_Tree__Scrub_Room__Entry__Scrub => {
+                if !self
+                    .cbits2
+                    .contains(flags::ContextBits2::VISITED_DEKU_TREE__SCRUB_ROOM__ENTRY__SCRUB)
+                {
+                    self.cbits4
+                        .insert(flags::ContextBits4::SKIPPED_DEKU_TREE__SCRUB_ROOM__ENTRY__SCRUB);
+                }
+            }
+            LocationId::Deku_Tree__Slingshot_Room__Slingshot__Chest => {
+                if !self.cbits2.contains(
+                    flags::ContextBits2::VISITED_DEKU_TREE__SLINGSHOT_ROOM__SLINGSHOT__CHEST,
+                ) {
+                    self.cbits4.insert(
+                        flags::ContextBits4::SKIPPED_DEKU_TREE__SLINGSHOT_ROOM__SLINGSHOT__CHEST,
+                    );
+                }
+            }
+            LocationId::Deku_Tree__Slingshot_Upper__Ledge__Chest => {
+                if !self
+                    .cbits2
+                    .contains(flags::ContextBits2::VISITED_DEKU_TREE__SLINGSHOT_UPPER__LEDGE__CHEST)
+                {
+                    self.cbits4.insert(
+                        flags::ContextBits4::SKIPPED_DEKU_TREE__SLINGSHOT_UPPER__LEDGE__CHEST,
+                    );
+                }
+            }
+            LocationId::Deku_Tree__Floor_3__Door__Break_Web => {
+                if !self
+                    .cbits2
+                    .contains(flags::ContextBits2::VISITED_DEKU_TREE__FLOOR_3__DOOR__BREAK_WEB)
+                {
+                    self.cbits4
+                        .insert(flags::ContextBits4::SKIPPED_DEKU_TREE__FLOOR_3__DOOR__BREAK_WEB);
+                }
+            }
+            LocationId::Deku_Tree__Compass_Room__Entry__Burn_Web => {
+                if !self
+                    .cbits2
+                    .contains(flags::ContextBits2::VISITED_DEKU_TREE__COMPASS_ROOM__ENTRY__BURN_WEB)
+                {
+                    self.cbits3.insert(
+                        flags::ContextBits3::SKIPPED_DEKU_TREE__COMPASS_ROOM__ENTRY__BURN_WEB,
+                    );
+                }
+            }
+            LocationId::Deku_Tree__Compass_Room__Compass__Chest => {
+                if !self
+                    .cbits2
+                    .contains(flags::ContextBits2::VISITED_DEKU_TREE__COMPASS_ROOM__COMPASS__CHEST)
+                {
+                    self.cbits3.insert(
+                        flags::ContextBits3::SKIPPED_DEKU_TREE__COMPASS_ROOM__COMPASS__CHEST,
+                    );
+                }
+            }
+            LocationId::Deku_Tree__Compass_Room__Ledge__Chest => {
+                if !self
+                    .cbits2
+                    .contains(flags::ContextBits2::VISITED_DEKU_TREE__COMPASS_ROOM__LEDGE__CHEST)
+                {
+                    self.cbits3
+                        .insert(flags::ContextBits3::SKIPPED_DEKU_TREE__COMPASS_ROOM__LEDGE__CHEST);
+                }
+            }
+            LocationId::Deku_Tree__Compass_Room__Ledge__GS => {
+                if !self
+                    .cbits2
+                    .contains(flags::ContextBits2::VISITED_DEKU_TREE__COMPASS_ROOM__LEDGE__GS)
+                {
+                    self.cbits3
+                        .insert(flags::ContextBits3::SKIPPED_DEKU_TREE__COMPASS_ROOM__LEDGE__GS);
+                }
+            }
+            LocationId::Deku_Tree__Basement_1__Center__Vines_GS => {
+                if !self
+                    .cbits2
+                    .contains(flags::ContextBits2::VISITED_DEKU_TREE__BASEMENT_1__CENTER__VINES_GS)
+                {
+                    self.cbits3.insert(
+                        flags::ContextBits3::SKIPPED_DEKU_TREE__BASEMENT_1__CENTER__VINES_GS,
+                    );
+                }
+            }
+            LocationId::Deku_Tree__Basement_1__Corner__Switch => {
+                if !self
+                    .cbits2
+                    .contains(flags::ContextBits2::VISITED_DEKU_TREE__BASEMENT_1__CORNER__SWITCH)
+                {
+                    self.cbits3
+                        .insert(flags::ContextBits3::SKIPPED_DEKU_TREE__BASEMENT_1__CORNER__SWITCH);
+                }
+            }
+            LocationId::Deku_Tree__Basement_1__Corner__Chest => {
+                if !self
+                    .cbits2
+                    .contains(flags::ContextBits2::VISITED_DEKU_TREE__BASEMENT_1__CORNER__CHEST)
+                {
+                    self.cbits3
+                        .insert(flags::ContextBits3::SKIPPED_DEKU_TREE__BASEMENT_1__CORNER__CHEST);
+                }
+            }
+            LocationId::Deku_Tree__Basement_1__Corner__Gate_GS => {
+                if !self
+                    .cbits2
+                    .contains(flags::ContextBits2::VISITED_DEKU_TREE__BASEMENT_1__CORNER__GATE_GS)
+                {
+                    self.cbits3.insert(
+                        flags::ContextBits3::SKIPPED_DEKU_TREE__BASEMENT_1__CORNER__GATE_GS,
+                    );
+                }
+            }
+            LocationId::Deku_Tree__Basement_1__Corner__Burn_Basement_Web => {
+                if !self.cbits2.contains(
+                    flags::ContextBits2::VISITED_DEKU_TREE__BASEMENT_1__CORNER__BURN_BASEMENT_WEB,
+                ) {
+                    self.cbits3.insert(flags::ContextBits3::SKIPPED_DEKU_TREE__BASEMENT_1__CORNER__BURN_BASEMENT_WEB);
+                }
+            }
+            LocationId::Deku_Tree__Back_Room__Northwest__Burn_Web => {
+                if !self.cbits2.contains(
+                    flags::ContextBits2::VISITED_DEKU_TREE__BACK_ROOM__NORTHWEST__BURN_WEB,
+                ) {
+                    self.cbits3.insert(
+                        flags::ContextBits3::SKIPPED_DEKU_TREE__BACK_ROOM__NORTHWEST__BURN_WEB,
+                    );
+                }
+            }
+            LocationId::Deku_Tree__Back_Room__Northwest__Break_Wall => {
+                if !self.cbits1.contains(
+                    flags::ContextBits1::VISITED_DEKU_TREE__BACK_ROOM__NORTHWEST__BREAK_WALL,
+                ) {
+                    self.cbits3.insert(
+                        flags::ContextBits3::SKIPPED_DEKU_TREE__BACK_ROOM__NORTHWEST__BREAK_WALL,
+                    );
+                }
+            }
+            LocationId::Deku_Tree__Skull_Room__Entry__GS => {
+                if !self
+                    .cbits2
+                    .contains(flags::ContextBits2::VISITED_DEKU_TREE__SKULL_ROOM__ENTRY__GS)
+                {
+                    self.cbits4
+                        .insert(flags::ContextBits4::SKIPPED_DEKU_TREE__SKULL_ROOM__ENTRY__GS);
+                }
+            }
+            LocationId::Deku_Tree__Basement_Ledge__Block__Push_Block => {
+                if !self.cbits2.contains(
+                    flags::ContextBits2::VISITED_DEKU_TREE__BASEMENT_LEDGE__BLOCK__PUSH_BLOCK,
+                ) {
+                    self.cbits3.insert(
+                        flags::ContextBits3::SKIPPED_DEKU_TREE__BASEMENT_LEDGE__BLOCK__PUSH_BLOCK,
+                    );
+                }
+            }
+            LocationId::Deku_Tree__Basement_Ledge__Web__Burn_Web => {
+                if !self
+                    .cbits2
+                    .contains(flags::ContextBits2::VISITED_DEKU_TREE__BASEMENT_LEDGE__WEB__BURN_WEB)
+                {
+                    self.cbits3.insert(
+                        flags::ContextBits3::SKIPPED_DEKU_TREE__BASEMENT_LEDGE__WEB__BURN_WEB,
+                    );
+                }
+            }
+            LocationId::Deku_Tree__Basement_2__Boss_Door__Scrubs => {
+                if !self
+                    .cbits2
+                    .contains(flags::ContextBits2::VISITED_DEKU_TREE__BASEMENT_2__BOSS_DOOR__SCRUBS)
+                {
+                    self.cbits3.insert(
+                        flags::ContextBits3::SKIPPED_DEKU_TREE__BASEMENT_2__BOSS_DOOR__SCRUBS,
+                    );
+                }
+            }
+            LocationId::Deku_Tree__Boss_Room__Arena__Gohma => {
+                if !self
+                    .cbits2
+                    .contains(flags::ContextBits2::VISITED_DEKU_TREE__BOSS_ROOM__ARENA__GOHMA)
+                {
+                    self.cbits3
+                        .insert(flags::ContextBits3::SKIPPED_DEKU_TREE__BOSS_ROOM__ARENA__GOHMA);
+                }
+            }
+            LocationId::Deku_Tree__Boss_Room__Arena__Gohma_Quick_Kill => {
+                if !self.cbits2.contains(
+                    flags::ContextBits2::VISITED_DEKU_TREE__BOSS_ROOM__ARENA__GOHMA_QUICK_KILL,
+                ) {
+                    self.cbits3.insert(
+                        flags::ContextBits3::SKIPPED_DEKU_TREE__BOSS_ROOM__ARENA__GOHMA_QUICK_KILL,
+                    );
+                }
+            }
+            LocationId::Deku_Tree__Boss_Room__Arena__Gohma_Heart => {
+                if !self
+                    .cbits2
+                    .contains(flags::ContextBits2::VISITED_DEKU_TREE__BOSS_ROOM__ARENA__GOHMA_HEART)
+                {
+                    self.cbits3.insert(
+                        flags::ContextBits3::SKIPPED_DEKU_TREE__BOSS_ROOM__ARENA__GOHMA_HEART,
+                    );
+                }
+            }
+            LocationId::Deku_Tree__Boss_Room__Arena__Blue_Warp => {
+                if !self
+                    .cbits2
+                    .contains(flags::ContextBits2::VISITED_DEKU_TREE__BOSS_ROOM__ARENA__BLUE_WARP)
+                {
+                    self.cbits3.insert(
+                        flags::ContextBits3::SKIPPED_DEKU_TREE__BOSS_ROOM__ARENA__BLUE_WARP,
+                    );
+                }
+            }
+            LocationId::KF__Kokiri_Village__Midos_Guardpost__Show_Mido => {
+                if !self.cbits2.contains(
+                    flags::ContextBits2::VISITED_KF__KOKIRI_VILLAGE__MIDOS_GUARDPOST__SHOW_MIDO,
+                ) {
+                    self.cbits4.insert(
+                        flags::ContextBits4::SKIPPED_KF__KOKIRI_VILLAGE__MIDOS_GUARDPOST__SHOW_MIDO,
+                    );
+                }
+            }
+            LocationId::KF__Boulder_Maze__Reward__Chest => {
+                if !self
+                    .cbits2
+                    .contains(flags::ContextBits2::VISITED_KF__BOULDER_MAZE__REWARD__CHEST)
+                {
+                    self.cbits4
+                        .insert(flags::ContextBits4::SKIPPED_KF__BOULDER_MAZE__REWARD__CHEST);
+                }
+            }
+            LocationId::KF__Baba_Corridor__Deku_Babas__Sticks => {
+                if !self
+                    .cbits2
+                    .contains(flags::ContextBits2::VISITED_KF__BABA_CORRIDOR__DEKU_BABAS__STICKS)
+                {
+                    self.cbits4
+                        .insert(flags::ContextBits4::SKIPPED_KF__BABA_CORRIDOR__DEKU_BABAS__STICKS);
+                }
+            }
+            LocationId::KF__Baba_Corridor__Deku_Babas__Nuts => {
+                if !self
+                    .cbits2
+                    .contains(flags::ContextBits2::VISITED_KF__BABA_CORRIDOR__DEKU_BABAS__NUTS)
+                {
+                    self.cbits4
+                        .insert(flags::ContextBits4::SKIPPED_KF__BABA_CORRIDOR__DEKU_BABAS__NUTS);
+                }
+            }
+            LocationId::KF__Outside_Deku_Tree__Left__Gossip_Stone => {
+                if !self.cbits3.contains(
+                    flags::ContextBits3::VISITED_KF__OUTSIDE_DEKU_TREE__LEFT__GOSSIP_STONE,
+                ) {
+                    self.cbits4.insert(
+                        flags::ContextBits4::SKIPPED_KF__OUTSIDE_DEKU_TREE__LEFT__GOSSIP_STONE,
+                    );
+                }
+            }
+            LocationId::KF__Outside_Deku_Tree__Right__Gossip_Stone => {
+                if !self.cbits3.contains(
+                    flags::ContextBits3::VISITED_KF__OUTSIDE_DEKU_TREE__RIGHT__GOSSIP_STONE,
+                ) {
+                    self.cbits4.insert(
+                        flags::ContextBits4::SKIPPED_KF__OUTSIDE_DEKU_TREE__RIGHT__GOSSIP_STONE,
+                    );
+                }
+            }
+            LocationId::KF__Midos_House__Entry__Top_Left_Chest => {
+                if !self
+                    .cbits3
+                    .contains(flags::ContextBits3::VISITED_KF__MIDOS_HOUSE__ENTRY__TOP_LEFT_CHEST)
+                {
+                    self.cbits4.insert(
+                        flags::ContextBits4::SKIPPED_KF__MIDOS_HOUSE__ENTRY__TOP_LEFT_CHEST,
+                    );
+                }
+            }
+            LocationId::KF__Midos_House__Entry__Top_Right_Chest => {
+                if !self
+                    .cbits3
+                    .contains(flags::ContextBits3::VISITED_KF__MIDOS_HOUSE__ENTRY__TOP_RIGHT_CHEST)
+                {
+                    self.cbits4.insert(
+                        flags::ContextBits4::SKIPPED_KF__MIDOS_HOUSE__ENTRY__TOP_RIGHT_CHEST,
+                    );
+                }
+            }
+            LocationId::KF__Midos_House__Entry__Bottom_Left_Chest => {
+                if !self.cbits2.contains(
+                    flags::ContextBits2::VISITED_KF__MIDOS_HOUSE__ENTRY__BOTTOM_LEFT_CHEST,
+                ) {
+                    self.cbits4.insert(
+                        flags::ContextBits4::SKIPPED_KF__MIDOS_HOUSE__ENTRY__BOTTOM_LEFT_CHEST,
+                    );
+                }
+            }
+            LocationId::KF__Midos_House__Entry__Bottom_Right_Chest => {
+                if !self.cbits2.contains(
+                    flags::ContextBits2::VISITED_KF__MIDOS_HOUSE__ENTRY__BOTTOM_RIGHT_CHEST,
+                ) {
+                    self.cbits4.insert(
+                        flags::ContextBits4::SKIPPED_KF__MIDOS_HOUSE__ENTRY__BOTTOM_RIGHT_CHEST,
+                    );
+                }
+            }
+            LocationId::KF__Shop__Entry__Blue_Rupee => {
+                if !self
+                    .cbits3
+                    .contains(flags::ContextBits3::VISITED_KF__SHOP__ENTRY__BLUE_RUPEE)
+                {
+                    self.cbits4
+                        .insert(flags::ContextBits4::SKIPPED_KF__SHOP__ENTRY__BLUE_RUPEE);
+                }
+            }
+            LocationId::KF__Shop__Entry__Item_1 => {
+                if !self
+                    .cbits3
+                    .contains(flags::ContextBits3::VISITED_KF__SHOP__ENTRY__ITEM_1)
+                {
+                    self.cbits4
+                        .insert(flags::ContextBits4::SKIPPED_KF__SHOP__ENTRY__ITEM_1);
+                }
+            }
+            LocationId::KF__Shop__Entry__Item_2 => {
+                if !self
+                    .cbits3
+                    .contains(flags::ContextBits3::VISITED_KF__SHOP__ENTRY__ITEM_2)
+                {
+                    self.cbits4
+                        .insert(flags::ContextBits4::SKIPPED_KF__SHOP__ENTRY__ITEM_2);
+                }
+            }
+            LocationId::KF__Shop__Entry__Item_3 => {
+                if !self
+                    .cbits3
+                    .contains(flags::ContextBits3::VISITED_KF__SHOP__ENTRY__ITEM_3)
+                {
+                    self.cbits4
+                        .insert(flags::ContextBits4::SKIPPED_KF__SHOP__ENTRY__ITEM_3);
+                }
+            }
+            LocationId::KF__Shop__Entry__Item_4 => {
+                if !self
+                    .cbits3
+                    .contains(flags::ContextBits3::VISITED_KF__SHOP__ENTRY__ITEM_4)
+                {
+                    self.cbits4
+                        .insert(flags::ContextBits4::SKIPPED_KF__SHOP__ENTRY__ITEM_4);
+                }
+            }
+            LocationId::KF__Shop__Entry__Item_5 => {
+                if !self
+                    .cbits3
+                    .contains(flags::ContextBits3::VISITED_KF__SHOP__ENTRY__ITEM_5)
+                {
+                    self.cbits4
+                        .insert(flags::ContextBits4::SKIPPED_KF__SHOP__ENTRY__ITEM_5);
+                }
+            }
+            LocationId::KF__Shop__Entry__Item_6 => {
+                if !self
+                    .cbits3
+                    .contains(flags::ContextBits3::VISITED_KF__SHOP__ENTRY__ITEM_6)
+                {
+                    self.cbits4
+                        .insert(flags::ContextBits4::SKIPPED_KF__SHOP__ENTRY__ITEM_6);
+                }
+            }
+            LocationId::KF__Shop__Entry__Item_7 => {
+                if !self
+                    .cbits3
+                    .contains(flags::ContextBits3::VISITED_KF__SHOP__ENTRY__ITEM_7)
+                {
+                    self.cbits4
+                        .insert(flags::ContextBits4::SKIPPED_KF__SHOP__ENTRY__ITEM_7);
+                }
+            }
+            LocationId::KF__Shop__Entry__Item_8 => {
+                if !self
+                    .cbits3
+                    .contains(flags::ContextBits3::VISITED_KF__SHOP__ENTRY__ITEM_8)
+                {
+                    self.cbits4
+                        .insert(flags::ContextBits4::SKIPPED_KF__SHOP__ENTRY__ITEM_8);
+                }
+            }
+            LocationId::Kak__Spider_House__Entry__Skulls_10 => {
+                if !self
+                    .cbits3
+                    .contains(flags::ContextBits3::VISITED_KAK__SPIDER_HOUSE__ENTRY__SKULLS_10)
+                {
+                    self.cbits4
+                        .insert(flags::ContextBits4::SKIPPED_KAK__SPIDER_HOUSE__ENTRY__SKULLS_10);
+                }
+            }
         }
     }
     fn reset(&mut self, loc_id: LocationId) {
-        match self.status[loc_id] {
-            Status::Visited => self.visits -= 1,
-            Status::Skipped => self.skips -= 1,
-            _ => (),
+        match loc_id {
+            LocationId::Deku_Tree__Lobby__Center__Deku_Baba_Sticks => {
+                self.cbits2.remove(
+                    flags::ContextBits2::VISITED_DEKU_TREE__LOBBY__CENTER__DEKU_BABA_STICKS,
+                );
+                self.cbits4.remove(
+                    flags::ContextBits4::SKIPPED_DEKU_TREE__LOBBY__CENTER__DEKU_BABA_STICKS,
+                );
+            }
+            LocationId::Deku_Tree__Lobby__Center__Deku_Baba_Nuts => {
+                self.cbits2
+                    .remove(flags::ContextBits2::VISITED_DEKU_TREE__LOBBY__CENTER__DEKU_BABA_NUTS);
+                self.cbits4
+                    .remove(flags::ContextBits4::SKIPPED_DEKU_TREE__LOBBY__CENTER__DEKU_BABA_NUTS);
+            }
+            LocationId::Deku_Tree__Lobby__Center__Web => {
+                self.cbits2
+                    .remove(flags::ContextBits2::VISITED_DEKU_TREE__LOBBY__CENTER__WEB);
+                self.cbits4
+                    .remove(flags::ContextBits4::SKIPPED_DEKU_TREE__LOBBY__CENTER__WEB);
+            }
+            LocationId::Deku_Tree__Floor_2__Vines__Map_Chest => {
+                self.cbits2
+                    .remove(flags::ContextBits2::VISITED_DEKU_TREE__FLOOR_2__VINES__MAP_CHEST);
+                self.cbits4
+                    .remove(flags::ContextBits4::SKIPPED_DEKU_TREE__FLOOR_2__VINES__MAP_CHEST);
+            }
+            LocationId::Deku_Tree__Scrub_Room__Entry__Scrub => {
+                self.cbits2
+                    .remove(flags::ContextBits2::VISITED_DEKU_TREE__SCRUB_ROOM__ENTRY__SCRUB);
+                self.cbits4
+                    .remove(flags::ContextBits4::SKIPPED_DEKU_TREE__SCRUB_ROOM__ENTRY__SCRUB);
+            }
+            LocationId::Deku_Tree__Slingshot_Room__Slingshot__Chest => {
+                self.cbits2.remove(
+                    flags::ContextBits2::VISITED_DEKU_TREE__SLINGSHOT_ROOM__SLINGSHOT__CHEST,
+                );
+                self.cbits4.remove(
+                    flags::ContextBits4::SKIPPED_DEKU_TREE__SLINGSHOT_ROOM__SLINGSHOT__CHEST,
+                );
+            }
+            LocationId::Deku_Tree__Slingshot_Upper__Ledge__Chest => {
+                self.cbits2
+                    .remove(flags::ContextBits2::VISITED_DEKU_TREE__SLINGSHOT_UPPER__LEDGE__CHEST);
+                self.cbits4
+                    .remove(flags::ContextBits4::SKIPPED_DEKU_TREE__SLINGSHOT_UPPER__LEDGE__CHEST);
+            }
+            LocationId::Deku_Tree__Floor_3__Door__Break_Web => {
+                self.cbits2
+                    .remove(flags::ContextBits2::VISITED_DEKU_TREE__FLOOR_3__DOOR__BREAK_WEB);
+                self.cbits4
+                    .remove(flags::ContextBits4::SKIPPED_DEKU_TREE__FLOOR_3__DOOR__BREAK_WEB);
+            }
+            LocationId::Deku_Tree__Compass_Room__Entry__Burn_Web => {
+                self.cbits2
+                    .remove(flags::ContextBits2::VISITED_DEKU_TREE__COMPASS_ROOM__ENTRY__BURN_WEB);
+                self.cbits3
+                    .remove(flags::ContextBits3::SKIPPED_DEKU_TREE__COMPASS_ROOM__ENTRY__BURN_WEB);
+            }
+            LocationId::Deku_Tree__Compass_Room__Compass__Chest => {
+                self.cbits2
+                    .remove(flags::ContextBits2::VISITED_DEKU_TREE__COMPASS_ROOM__COMPASS__CHEST);
+                self.cbits3
+                    .remove(flags::ContextBits3::SKIPPED_DEKU_TREE__COMPASS_ROOM__COMPASS__CHEST);
+            }
+            LocationId::Deku_Tree__Compass_Room__Ledge__Chest => {
+                self.cbits2
+                    .remove(flags::ContextBits2::VISITED_DEKU_TREE__COMPASS_ROOM__LEDGE__CHEST);
+                self.cbits3
+                    .remove(flags::ContextBits3::SKIPPED_DEKU_TREE__COMPASS_ROOM__LEDGE__CHEST);
+            }
+            LocationId::Deku_Tree__Compass_Room__Ledge__GS => {
+                self.cbits2
+                    .remove(flags::ContextBits2::VISITED_DEKU_TREE__COMPASS_ROOM__LEDGE__GS);
+                self.cbits3
+                    .remove(flags::ContextBits3::SKIPPED_DEKU_TREE__COMPASS_ROOM__LEDGE__GS);
+            }
+            LocationId::Deku_Tree__Basement_1__Center__Vines_GS => {
+                self.cbits2
+                    .remove(flags::ContextBits2::VISITED_DEKU_TREE__BASEMENT_1__CENTER__VINES_GS);
+                self.cbits3
+                    .remove(flags::ContextBits3::SKIPPED_DEKU_TREE__BASEMENT_1__CENTER__VINES_GS);
+            }
+            LocationId::Deku_Tree__Basement_1__Corner__Switch => {
+                self.cbits2
+                    .remove(flags::ContextBits2::VISITED_DEKU_TREE__BASEMENT_1__CORNER__SWITCH);
+                self.cbits3
+                    .remove(flags::ContextBits3::SKIPPED_DEKU_TREE__BASEMENT_1__CORNER__SWITCH);
+            }
+            LocationId::Deku_Tree__Basement_1__Corner__Chest => {
+                self.cbits2
+                    .remove(flags::ContextBits2::VISITED_DEKU_TREE__BASEMENT_1__CORNER__CHEST);
+                self.cbits3
+                    .remove(flags::ContextBits3::SKIPPED_DEKU_TREE__BASEMENT_1__CORNER__CHEST);
+            }
+            LocationId::Deku_Tree__Basement_1__Corner__Gate_GS => {
+                self.cbits2
+                    .remove(flags::ContextBits2::VISITED_DEKU_TREE__BASEMENT_1__CORNER__GATE_GS);
+                self.cbits3
+                    .remove(flags::ContextBits3::SKIPPED_DEKU_TREE__BASEMENT_1__CORNER__GATE_GS);
+            }
+            LocationId::Deku_Tree__Basement_1__Corner__Burn_Basement_Web => {
+                self.cbits2.remove(
+                    flags::ContextBits2::VISITED_DEKU_TREE__BASEMENT_1__CORNER__BURN_BASEMENT_WEB,
+                );
+                self.cbits3.remove(
+                    flags::ContextBits3::SKIPPED_DEKU_TREE__BASEMENT_1__CORNER__BURN_BASEMENT_WEB,
+                );
+            }
+            LocationId::Deku_Tree__Back_Room__Northwest__Burn_Web => {
+                self.cbits2
+                    .remove(flags::ContextBits2::VISITED_DEKU_TREE__BACK_ROOM__NORTHWEST__BURN_WEB);
+                self.cbits3
+                    .remove(flags::ContextBits3::SKIPPED_DEKU_TREE__BACK_ROOM__NORTHWEST__BURN_WEB);
+            }
+            LocationId::Deku_Tree__Back_Room__Northwest__Break_Wall => {
+                self.cbits1.remove(
+                    flags::ContextBits1::VISITED_DEKU_TREE__BACK_ROOM__NORTHWEST__BREAK_WALL,
+                );
+                self.cbits3.remove(
+                    flags::ContextBits3::SKIPPED_DEKU_TREE__BACK_ROOM__NORTHWEST__BREAK_WALL,
+                );
+            }
+            LocationId::Deku_Tree__Skull_Room__Entry__GS => {
+                self.cbits2
+                    .remove(flags::ContextBits2::VISITED_DEKU_TREE__SKULL_ROOM__ENTRY__GS);
+                self.cbits4
+                    .remove(flags::ContextBits4::SKIPPED_DEKU_TREE__SKULL_ROOM__ENTRY__GS);
+            }
+            LocationId::Deku_Tree__Basement_Ledge__Block__Push_Block => {
+                self.cbits2.remove(
+                    flags::ContextBits2::VISITED_DEKU_TREE__BASEMENT_LEDGE__BLOCK__PUSH_BLOCK,
+                );
+                self.cbits3.remove(
+                    flags::ContextBits3::SKIPPED_DEKU_TREE__BASEMENT_LEDGE__BLOCK__PUSH_BLOCK,
+                );
+            }
+            LocationId::Deku_Tree__Basement_Ledge__Web__Burn_Web => {
+                self.cbits2
+                    .remove(flags::ContextBits2::VISITED_DEKU_TREE__BASEMENT_LEDGE__WEB__BURN_WEB);
+                self.cbits3
+                    .remove(flags::ContextBits3::SKIPPED_DEKU_TREE__BASEMENT_LEDGE__WEB__BURN_WEB);
+            }
+            LocationId::Deku_Tree__Basement_2__Boss_Door__Scrubs => {
+                self.cbits2
+                    .remove(flags::ContextBits2::VISITED_DEKU_TREE__BASEMENT_2__BOSS_DOOR__SCRUBS);
+                self.cbits3
+                    .remove(flags::ContextBits3::SKIPPED_DEKU_TREE__BASEMENT_2__BOSS_DOOR__SCRUBS);
+            }
+            LocationId::Deku_Tree__Boss_Room__Arena__Gohma => {
+                self.cbits2
+                    .remove(flags::ContextBits2::VISITED_DEKU_TREE__BOSS_ROOM__ARENA__GOHMA);
+                self.cbits3
+                    .remove(flags::ContextBits3::SKIPPED_DEKU_TREE__BOSS_ROOM__ARENA__GOHMA);
+            }
+            LocationId::Deku_Tree__Boss_Room__Arena__Gohma_Quick_Kill => {
+                self.cbits2.remove(
+                    flags::ContextBits2::VISITED_DEKU_TREE__BOSS_ROOM__ARENA__GOHMA_QUICK_KILL,
+                );
+                self.cbits3.remove(
+                    flags::ContextBits3::SKIPPED_DEKU_TREE__BOSS_ROOM__ARENA__GOHMA_QUICK_KILL,
+                );
+            }
+            LocationId::Deku_Tree__Boss_Room__Arena__Gohma_Heart => {
+                self.cbits2
+                    .remove(flags::ContextBits2::VISITED_DEKU_TREE__BOSS_ROOM__ARENA__GOHMA_HEART);
+                self.cbits3
+                    .remove(flags::ContextBits3::SKIPPED_DEKU_TREE__BOSS_ROOM__ARENA__GOHMA_HEART);
+            }
+            LocationId::Deku_Tree__Boss_Room__Arena__Blue_Warp => {
+                self.cbits2
+                    .remove(flags::ContextBits2::VISITED_DEKU_TREE__BOSS_ROOM__ARENA__BLUE_WARP);
+                self.cbits3
+                    .remove(flags::ContextBits3::SKIPPED_DEKU_TREE__BOSS_ROOM__ARENA__BLUE_WARP);
+            }
+            LocationId::KF__Kokiri_Village__Midos_Guardpost__Show_Mido => {
+                self.cbits2.remove(
+                    flags::ContextBits2::VISITED_KF__KOKIRI_VILLAGE__MIDOS_GUARDPOST__SHOW_MIDO,
+                );
+                self.cbits4.remove(
+                    flags::ContextBits4::SKIPPED_KF__KOKIRI_VILLAGE__MIDOS_GUARDPOST__SHOW_MIDO,
+                );
+            }
+            LocationId::KF__Boulder_Maze__Reward__Chest => {
+                self.cbits2
+                    .remove(flags::ContextBits2::VISITED_KF__BOULDER_MAZE__REWARD__CHEST);
+                self.cbits4
+                    .remove(flags::ContextBits4::SKIPPED_KF__BOULDER_MAZE__REWARD__CHEST);
+            }
+            LocationId::KF__Baba_Corridor__Deku_Babas__Sticks => {
+                self.cbits2
+                    .remove(flags::ContextBits2::VISITED_KF__BABA_CORRIDOR__DEKU_BABAS__STICKS);
+                self.cbits4
+                    .remove(flags::ContextBits4::SKIPPED_KF__BABA_CORRIDOR__DEKU_BABAS__STICKS);
+            }
+            LocationId::KF__Baba_Corridor__Deku_Babas__Nuts => {
+                self.cbits2
+                    .remove(flags::ContextBits2::VISITED_KF__BABA_CORRIDOR__DEKU_BABAS__NUTS);
+                self.cbits4
+                    .remove(flags::ContextBits4::SKIPPED_KF__BABA_CORRIDOR__DEKU_BABAS__NUTS);
+            }
+            LocationId::KF__Outside_Deku_Tree__Left__Gossip_Stone => {
+                self.cbits3
+                    .remove(flags::ContextBits3::VISITED_KF__OUTSIDE_DEKU_TREE__LEFT__GOSSIP_STONE);
+                self.cbits4
+                    .remove(flags::ContextBits4::SKIPPED_KF__OUTSIDE_DEKU_TREE__LEFT__GOSSIP_STONE);
+            }
+            LocationId::KF__Outside_Deku_Tree__Right__Gossip_Stone => {
+                self.cbits3.remove(
+                    flags::ContextBits3::VISITED_KF__OUTSIDE_DEKU_TREE__RIGHT__GOSSIP_STONE,
+                );
+                self.cbits4.remove(
+                    flags::ContextBits4::SKIPPED_KF__OUTSIDE_DEKU_TREE__RIGHT__GOSSIP_STONE,
+                );
+            }
+            LocationId::KF__Midos_House__Entry__Top_Left_Chest => {
+                self.cbits3
+                    .remove(flags::ContextBits3::VISITED_KF__MIDOS_HOUSE__ENTRY__TOP_LEFT_CHEST);
+                self.cbits4
+                    .remove(flags::ContextBits4::SKIPPED_KF__MIDOS_HOUSE__ENTRY__TOP_LEFT_CHEST);
+            }
+            LocationId::KF__Midos_House__Entry__Top_Right_Chest => {
+                self.cbits3
+                    .remove(flags::ContextBits3::VISITED_KF__MIDOS_HOUSE__ENTRY__TOP_RIGHT_CHEST);
+                self.cbits4
+                    .remove(flags::ContextBits4::SKIPPED_KF__MIDOS_HOUSE__ENTRY__TOP_RIGHT_CHEST);
+            }
+            LocationId::KF__Midos_House__Entry__Bottom_Left_Chest => {
+                self.cbits2
+                    .remove(flags::ContextBits2::VISITED_KF__MIDOS_HOUSE__ENTRY__BOTTOM_LEFT_CHEST);
+                self.cbits4
+                    .remove(flags::ContextBits4::SKIPPED_KF__MIDOS_HOUSE__ENTRY__BOTTOM_LEFT_CHEST);
+            }
+            LocationId::KF__Midos_House__Entry__Bottom_Right_Chest => {
+                self.cbits2.remove(
+                    flags::ContextBits2::VISITED_KF__MIDOS_HOUSE__ENTRY__BOTTOM_RIGHT_CHEST,
+                );
+                self.cbits4.remove(
+                    flags::ContextBits4::SKIPPED_KF__MIDOS_HOUSE__ENTRY__BOTTOM_RIGHT_CHEST,
+                );
+            }
+            LocationId::KF__Shop__Entry__Blue_Rupee => {
+                self.cbits3
+                    .remove(flags::ContextBits3::VISITED_KF__SHOP__ENTRY__BLUE_RUPEE);
+                self.cbits4
+                    .remove(flags::ContextBits4::SKIPPED_KF__SHOP__ENTRY__BLUE_RUPEE);
+            }
+            LocationId::KF__Shop__Entry__Item_1 => {
+                self.cbits3
+                    .remove(flags::ContextBits3::VISITED_KF__SHOP__ENTRY__ITEM_1);
+                self.cbits4
+                    .remove(flags::ContextBits4::SKIPPED_KF__SHOP__ENTRY__ITEM_1);
+            }
+            LocationId::KF__Shop__Entry__Item_2 => {
+                self.cbits3
+                    .remove(flags::ContextBits3::VISITED_KF__SHOP__ENTRY__ITEM_2);
+                self.cbits4
+                    .remove(flags::ContextBits4::SKIPPED_KF__SHOP__ENTRY__ITEM_2);
+            }
+            LocationId::KF__Shop__Entry__Item_3 => {
+                self.cbits3
+                    .remove(flags::ContextBits3::VISITED_KF__SHOP__ENTRY__ITEM_3);
+                self.cbits4
+                    .remove(flags::ContextBits4::SKIPPED_KF__SHOP__ENTRY__ITEM_3);
+            }
+            LocationId::KF__Shop__Entry__Item_4 => {
+                self.cbits3
+                    .remove(flags::ContextBits3::VISITED_KF__SHOP__ENTRY__ITEM_4);
+                self.cbits4
+                    .remove(flags::ContextBits4::SKIPPED_KF__SHOP__ENTRY__ITEM_4);
+            }
+            LocationId::KF__Shop__Entry__Item_5 => {
+                self.cbits3
+                    .remove(flags::ContextBits3::VISITED_KF__SHOP__ENTRY__ITEM_5);
+                self.cbits4
+                    .remove(flags::ContextBits4::SKIPPED_KF__SHOP__ENTRY__ITEM_5);
+            }
+            LocationId::KF__Shop__Entry__Item_6 => {
+                self.cbits3
+                    .remove(flags::ContextBits3::VISITED_KF__SHOP__ENTRY__ITEM_6);
+                self.cbits4
+                    .remove(flags::ContextBits4::SKIPPED_KF__SHOP__ENTRY__ITEM_6);
+            }
+            LocationId::KF__Shop__Entry__Item_7 => {
+                self.cbits3
+                    .remove(flags::ContextBits3::VISITED_KF__SHOP__ENTRY__ITEM_7);
+                self.cbits4
+                    .remove(flags::ContextBits4::SKIPPED_KF__SHOP__ENTRY__ITEM_7);
+            }
+            LocationId::KF__Shop__Entry__Item_8 => {
+                self.cbits3
+                    .remove(flags::ContextBits3::VISITED_KF__SHOP__ENTRY__ITEM_8);
+                self.cbits4
+                    .remove(flags::ContextBits4::SKIPPED_KF__SHOP__ENTRY__ITEM_8);
+            }
+            LocationId::Kak__Spider_House__Entry__Skulls_10 => {
+                self.cbits3
+                    .remove(flags::ContextBits3::VISITED_KAK__SPIDER_HOUSE__ENTRY__SKULLS_10);
+                self.cbits4
+                    .remove(flags::ContextBits4::SKIPPED_KAK__SPIDER_HOUSE__ENTRY__SKULLS_10);
+            }
         }
-        self.status[loc_id] = Status::None;
     }
 
     fn todo(&self, loc_id: LocationId) -> bool {
-        self.status[loc_id] == Status::None
+        match loc_id {
+            LocationId::Deku_Tree__Lobby__Center__Deku_Baba_Sticks => {
+                !self.cbits2.contains(
+                    flags::ContextBits2::VISITED_DEKU_TREE__LOBBY__CENTER__DEKU_BABA_STICKS,
+                ) && !self.cbits4.contains(
+                    flags::ContextBits4::SKIPPED_DEKU_TREE__LOBBY__CENTER__DEKU_BABA_STICKS,
+                )
+            }
+            LocationId::Deku_Tree__Lobby__Center__Deku_Baba_Nuts => {
+                !self
+                    .cbits2
+                    .contains(flags::ContextBits2::VISITED_DEKU_TREE__LOBBY__CENTER__DEKU_BABA_NUTS)
+                    && !self.cbits4.contains(
+                        flags::ContextBits4::SKIPPED_DEKU_TREE__LOBBY__CENTER__DEKU_BABA_NUTS,
+                    )
+            }
+            LocationId::Deku_Tree__Lobby__Center__Web => {
+                !self
+                    .cbits2
+                    .contains(flags::ContextBits2::VISITED_DEKU_TREE__LOBBY__CENTER__WEB)
+                    && !self
+                        .cbits4
+                        .contains(flags::ContextBits4::SKIPPED_DEKU_TREE__LOBBY__CENTER__WEB)
+            }
+            LocationId::Deku_Tree__Floor_2__Vines__Map_Chest => {
+                !self
+                    .cbits2
+                    .contains(flags::ContextBits2::VISITED_DEKU_TREE__FLOOR_2__VINES__MAP_CHEST)
+                    && !self
+                        .cbits4
+                        .contains(flags::ContextBits4::SKIPPED_DEKU_TREE__FLOOR_2__VINES__MAP_CHEST)
+            }
+            LocationId::Deku_Tree__Scrub_Room__Entry__Scrub => {
+                !self
+                    .cbits2
+                    .contains(flags::ContextBits2::VISITED_DEKU_TREE__SCRUB_ROOM__ENTRY__SCRUB)
+                    && !self
+                        .cbits4
+                        .contains(flags::ContextBits4::SKIPPED_DEKU_TREE__SCRUB_ROOM__ENTRY__SCRUB)
+            }
+            LocationId::Deku_Tree__Slingshot_Room__Slingshot__Chest => {
+                !self.cbits2.contains(
+                    flags::ContextBits2::VISITED_DEKU_TREE__SLINGSHOT_ROOM__SLINGSHOT__CHEST,
+                ) && !self.cbits4.contains(
+                    flags::ContextBits4::SKIPPED_DEKU_TREE__SLINGSHOT_ROOM__SLINGSHOT__CHEST,
+                )
+            }
+            LocationId::Deku_Tree__Slingshot_Upper__Ledge__Chest => {
+                !self
+                    .cbits2
+                    .contains(flags::ContextBits2::VISITED_DEKU_TREE__SLINGSHOT_UPPER__LEDGE__CHEST)
+                    && !self.cbits4.contains(
+                        flags::ContextBits4::SKIPPED_DEKU_TREE__SLINGSHOT_UPPER__LEDGE__CHEST,
+                    )
+            }
+            LocationId::Deku_Tree__Floor_3__Door__Break_Web => {
+                !self
+                    .cbits2
+                    .contains(flags::ContextBits2::VISITED_DEKU_TREE__FLOOR_3__DOOR__BREAK_WEB)
+                    && !self
+                        .cbits4
+                        .contains(flags::ContextBits4::SKIPPED_DEKU_TREE__FLOOR_3__DOOR__BREAK_WEB)
+            }
+            LocationId::Deku_Tree__Compass_Room__Entry__Burn_Web => {
+                !self
+                    .cbits2
+                    .contains(flags::ContextBits2::VISITED_DEKU_TREE__COMPASS_ROOM__ENTRY__BURN_WEB)
+                    && !self.cbits3.contains(
+                        flags::ContextBits3::SKIPPED_DEKU_TREE__COMPASS_ROOM__ENTRY__BURN_WEB,
+                    )
+            }
+            LocationId::Deku_Tree__Compass_Room__Compass__Chest => {
+                !self
+                    .cbits2
+                    .contains(flags::ContextBits2::VISITED_DEKU_TREE__COMPASS_ROOM__COMPASS__CHEST)
+                    && !self.cbits3.contains(
+                        flags::ContextBits3::SKIPPED_DEKU_TREE__COMPASS_ROOM__COMPASS__CHEST,
+                    )
+            }
+            LocationId::Deku_Tree__Compass_Room__Ledge__Chest => {
+                !self
+                    .cbits2
+                    .contains(flags::ContextBits2::VISITED_DEKU_TREE__COMPASS_ROOM__LEDGE__CHEST)
+                    && !self.cbits3.contains(
+                        flags::ContextBits3::SKIPPED_DEKU_TREE__COMPASS_ROOM__LEDGE__CHEST,
+                    )
+            }
+            LocationId::Deku_Tree__Compass_Room__Ledge__GS => {
+                !self
+                    .cbits2
+                    .contains(flags::ContextBits2::VISITED_DEKU_TREE__COMPASS_ROOM__LEDGE__GS)
+                    && !self
+                        .cbits3
+                        .contains(flags::ContextBits3::SKIPPED_DEKU_TREE__COMPASS_ROOM__LEDGE__GS)
+            }
+            LocationId::Deku_Tree__Basement_1__Center__Vines_GS => {
+                !self
+                    .cbits2
+                    .contains(flags::ContextBits2::VISITED_DEKU_TREE__BASEMENT_1__CENTER__VINES_GS)
+                    && !self.cbits3.contains(
+                        flags::ContextBits3::SKIPPED_DEKU_TREE__BASEMENT_1__CENTER__VINES_GS,
+                    )
+            }
+            LocationId::Deku_Tree__Basement_1__Corner__Switch => {
+                !self
+                    .cbits2
+                    .contains(flags::ContextBits2::VISITED_DEKU_TREE__BASEMENT_1__CORNER__SWITCH)
+                    && !self.cbits3.contains(
+                        flags::ContextBits3::SKIPPED_DEKU_TREE__BASEMENT_1__CORNER__SWITCH,
+                    )
+            }
+            LocationId::Deku_Tree__Basement_1__Corner__Chest => {
+                !self
+                    .cbits2
+                    .contains(flags::ContextBits2::VISITED_DEKU_TREE__BASEMENT_1__CORNER__CHEST)
+                    && !self
+                        .cbits3
+                        .contains(flags::ContextBits3::SKIPPED_DEKU_TREE__BASEMENT_1__CORNER__CHEST)
+            }
+            LocationId::Deku_Tree__Basement_1__Corner__Gate_GS => {
+                !self
+                    .cbits2
+                    .contains(flags::ContextBits2::VISITED_DEKU_TREE__BASEMENT_1__CORNER__GATE_GS)
+                    && !self.cbits3.contains(
+                        flags::ContextBits3::SKIPPED_DEKU_TREE__BASEMENT_1__CORNER__GATE_GS,
+                    )
+            }
+            LocationId::Deku_Tree__Basement_1__Corner__Burn_Basement_Web => {
+                !self.cbits2.contains(
+                    flags::ContextBits2::VISITED_DEKU_TREE__BASEMENT_1__CORNER__BURN_BASEMENT_WEB,
+                ) && !self.cbits3.contains(
+                    flags::ContextBits3::SKIPPED_DEKU_TREE__BASEMENT_1__CORNER__BURN_BASEMENT_WEB,
+                )
+            }
+            LocationId::Deku_Tree__Back_Room__Northwest__Burn_Web => {
+                !self.cbits2.contains(
+                    flags::ContextBits2::VISITED_DEKU_TREE__BACK_ROOM__NORTHWEST__BURN_WEB,
+                ) && !self.cbits3.contains(
+                    flags::ContextBits3::SKIPPED_DEKU_TREE__BACK_ROOM__NORTHWEST__BURN_WEB,
+                )
+            }
+            LocationId::Deku_Tree__Back_Room__Northwest__Break_Wall => {
+                !self.cbits1.contains(
+                    flags::ContextBits1::VISITED_DEKU_TREE__BACK_ROOM__NORTHWEST__BREAK_WALL,
+                ) && !self.cbits3.contains(
+                    flags::ContextBits3::SKIPPED_DEKU_TREE__BACK_ROOM__NORTHWEST__BREAK_WALL,
+                )
+            }
+            LocationId::Deku_Tree__Skull_Room__Entry__GS => {
+                !self
+                    .cbits2
+                    .contains(flags::ContextBits2::VISITED_DEKU_TREE__SKULL_ROOM__ENTRY__GS)
+                    && !self
+                        .cbits4
+                        .contains(flags::ContextBits4::SKIPPED_DEKU_TREE__SKULL_ROOM__ENTRY__GS)
+            }
+            LocationId::Deku_Tree__Basement_Ledge__Block__Push_Block => {
+                !self.cbits2.contains(
+                    flags::ContextBits2::VISITED_DEKU_TREE__BASEMENT_LEDGE__BLOCK__PUSH_BLOCK,
+                ) && !self.cbits3.contains(
+                    flags::ContextBits3::SKIPPED_DEKU_TREE__BASEMENT_LEDGE__BLOCK__PUSH_BLOCK,
+                )
+            }
+            LocationId::Deku_Tree__Basement_Ledge__Web__Burn_Web => {
+                !self
+                    .cbits2
+                    .contains(flags::ContextBits2::VISITED_DEKU_TREE__BASEMENT_LEDGE__WEB__BURN_WEB)
+                    && !self.cbits3.contains(
+                        flags::ContextBits3::SKIPPED_DEKU_TREE__BASEMENT_LEDGE__WEB__BURN_WEB,
+                    )
+            }
+            LocationId::Deku_Tree__Basement_2__Boss_Door__Scrubs => {
+                !self
+                    .cbits2
+                    .contains(flags::ContextBits2::VISITED_DEKU_TREE__BASEMENT_2__BOSS_DOOR__SCRUBS)
+                    && !self.cbits3.contains(
+                        flags::ContextBits3::SKIPPED_DEKU_TREE__BASEMENT_2__BOSS_DOOR__SCRUBS,
+                    )
+            }
+            LocationId::Deku_Tree__Boss_Room__Arena__Gohma => {
+                !self
+                    .cbits2
+                    .contains(flags::ContextBits2::VISITED_DEKU_TREE__BOSS_ROOM__ARENA__GOHMA)
+                    && !self
+                        .cbits3
+                        .contains(flags::ContextBits3::SKIPPED_DEKU_TREE__BOSS_ROOM__ARENA__GOHMA)
+            }
+            LocationId::Deku_Tree__Boss_Room__Arena__Gohma_Quick_Kill => {
+                !self.cbits2.contains(
+                    flags::ContextBits2::VISITED_DEKU_TREE__BOSS_ROOM__ARENA__GOHMA_QUICK_KILL,
+                ) && !self.cbits3.contains(
+                    flags::ContextBits3::SKIPPED_DEKU_TREE__BOSS_ROOM__ARENA__GOHMA_QUICK_KILL,
+                )
+            }
+            LocationId::Deku_Tree__Boss_Room__Arena__Gohma_Heart => {
+                !self
+                    .cbits2
+                    .contains(flags::ContextBits2::VISITED_DEKU_TREE__BOSS_ROOM__ARENA__GOHMA_HEART)
+                    && !self.cbits3.contains(
+                        flags::ContextBits3::SKIPPED_DEKU_TREE__BOSS_ROOM__ARENA__GOHMA_HEART,
+                    )
+            }
+            LocationId::Deku_Tree__Boss_Room__Arena__Blue_Warp => {
+                !self
+                    .cbits2
+                    .contains(flags::ContextBits2::VISITED_DEKU_TREE__BOSS_ROOM__ARENA__BLUE_WARP)
+                    && !self.cbits3.contains(
+                        flags::ContextBits3::SKIPPED_DEKU_TREE__BOSS_ROOM__ARENA__BLUE_WARP,
+                    )
+            }
+            LocationId::KF__Kokiri_Village__Midos_Guardpost__Show_Mido => {
+                !self.cbits2.contains(
+                    flags::ContextBits2::VISITED_KF__KOKIRI_VILLAGE__MIDOS_GUARDPOST__SHOW_MIDO,
+                ) && !self.cbits4.contains(
+                    flags::ContextBits4::SKIPPED_KF__KOKIRI_VILLAGE__MIDOS_GUARDPOST__SHOW_MIDO,
+                )
+            }
+            LocationId::KF__Boulder_Maze__Reward__Chest => {
+                !self
+                    .cbits2
+                    .contains(flags::ContextBits2::VISITED_KF__BOULDER_MAZE__REWARD__CHEST)
+                    && !self
+                        .cbits4
+                        .contains(flags::ContextBits4::SKIPPED_KF__BOULDER_MAZE__REWARD__CHEST)
+            }
+            LocationId::KF__Baba_Corridor__Deku_Babas__Sticks => {
+                !self
+                    .cbits2
+                    .contains(flags::ContextBits2::VISITED_KF__BABA_CORRIDOR__DEKU_BABAS__STICKS)
+                    && !self.cbits4.contains(
+                        flags::ContextBits4::SKIPPED_KF__BABA_CORRIDOR__DEKU_BABAS__STICKS,
+                    )
+            }
+            LocationId::KF__Baba_Corridor__Deku_Babas__Nuts => {
+                !self
+                    .cbits2
+                    .contains(flags::ContextBits2::VISITED_KF__BABA_CORRIDOR__DEKU_BABAS__NUTS)
+                    && !self
+                        .cbits4
+                        .contains(flags::ContextBits4::SKIPPED_KF__BABA_CORRIDOR__DEKU_BABAS__NUTS)
+            }
+            LocationId::KF__Outside_Deku_Tree__Left__Gossip_Stone => {
+                !self.cbits3.contains(
+                    flags::ContextBits3::VISITED_KF__OUTSIDE_DEKU_TREE__LEFT__GOSSIP_STONE,
+                ) && !self.cbits4.contains(
+                    flags::ContextBits4::SKIPPED_KF__OUTSIDE_DEKU_TREE__LEFT__GOSSIP_STONE,
+                )
+            }
+            LocationId::KF__Outside_Deku_Tree__Right__Gossip_Stone => {
+                !self.cbits3.contains(
+                    flags::ContextBits3::VISITED_KF__OUTSIDE_DEKU_TREE__RIGHT__GOSSIP_STONE,
+                ) && !self.cbits4.contains(
+                    flags::ContextBits4::SKIPPED_KF__OUTSIDE_DEKU_TREE__RIGHT__GOSSIP_STONE,
+                )
+            }
+            LocationId::KF__Midos_House__Entry__Top_Left_Chest => {
+                !self
+                    .cbits3
+                    .contains(flags::ContextBits3::VISITED_KF__MIDOS_HOUSE__ENTRY__TOP_LEFT_CHEST)
+                    && !self.cbits4.contains(
+                        flags::ContextBits4::SKIPPED_KF__MIDOS_HOUSE__ENTRY__TOP_LEFT_CHEST,
+                    )
+            }
+            LocationId::KF__Midos_House__Entry__Top_Right_Chest => {
+                !self
+                    .cbits3
+                    .contains(flags::ContextBits3::VISITED_KF__MIDOS_HOUSE__ENTRY__TOP_RIGHT_CHEST)
+                    && !self.cbits4.contains(
+                        flags::ContextBits4::SKIPPED_KF__MIDOS_HOUSE__ENTRY__TOP_RIGHT_CHEST,
+                    )
+            }
+            LocationId::KF__Midos_House__Entry__Bottom_Left_Chest => {
+                !self.cbits2.contains(
+                    flags::ContextBits2::VISITED_KF__MIDOS_HOUSE__ENTRY__BOTTOM_LEFT_CHEST,
+                ) && !self.cbits4.contains(
+                    flags::ContextBits4::SKIPPED_KF__MIDOS_HOUSE__ENTRY__BOTTOM_LEFT_CHEST,
+                )
+            }
+            LocationId::KF__Midos_House__Entry__Bottom_Right_Chest => {
+                !self.cbits2.contains(
+                    flags::ContextBits2::VISITED_KF__MIDOS_HOUSE__ENTRY__BOTTOM_RIGHT_CHEST,
+                ) && !self.cbits4.contains(
+                    flags::ContextBits4::SKIPPED_KF__MIDOS_HOUSE__ENTRY__BOTTOM_RIGHT_CHEST,
+                )
+            }
+            LocationId::KF__Shop__Entry__Blue_Rupee => {
+                !self
+                    .cbits3
+                    .contains(flags::ContextBits3::VISITED_KF__SHOP__ENTRY__BLUE_RUPEE)
+                    && !self
+                        .cbits4
+                        .contains(flags::ContextBits4::SKIPPED_KF__SHOP__ENTRY__BLUE_RUPEE)
+            }
+            LocationId::KF__Shop__Entry__Item_1 => {
+                !self
+                    .cbits3
+                    .contains(flags::ContextBits3::VISITED_KF__SHOP__ENTRY__ITEM_1)
+                    && !self
+                        .cbits4
+                        .contains(flags::ContextBits4::SKIPPED_KF__SHOP__ENTRY__ITEM_1)
+            }
+            LocationId::KF__Shop__Entry__Item_2 => {
+                !self
+                    .cbits3
+                    .contains(flags::ContextBits3::VISITED_KF__SHOP__ENTRY__ITEM_2)
+                    && !self
+                        .cbits4
+                        .contains(flags::ContextBits4::SKIPPED_KF__SHOP__ENTRY__ITEM_2)
+            }
+            LocationId::KF__Shop__Entry__Item_3 => {
+                !self
+                    .cbits3
+                    .contains(flags::ContextBits3::VISITED_KF__SHOP__ENTRY__ITEM_3)
+                    && !self
+                        .cbits4
+                        .contains(flags::ContextBits4::SKIPPED_KF__SHOP__ENTRY__ITEM_3)
+            }
+            LocationId::KF__Shop__Entry__Item_4 => {
+                !self
+                    .cbits3
+                    .contains(flags::ContextBits3::VISITED_KF__SHOP__ENTRY__ITEM_4)
+                    && !self
+                        .cbits4
+                        .contains(flags::ContextBits4::SKIPPED_KF__SHOP__ENTRY__ITEM_4)
+            }
+            LocationId::KF__Shop__Entry__Item_5 => {
+                !self
+                    .cbits3
+                    .contains(flags::ContextBits3::VISITED_KF__SHOP__ENTRY__ITEM_5)
+                    && !self
+                        .cbits4
+                        .contains(flags::ContextBits4::SKIPPED_KF__SHOP__ENTRY__ITEM_5)
+            }
+            LocationId::KF__Shop__Entry__Item_6 => {
+                !self
+                    .cbits3
+                    .contains(flags::ContextBits3::VISITED_KF__SHOP__ENTRY__ITEM_6)
+                    && !self
+                        .cbits4
+                        .contains(flags::ContextBits4::SKIPPED_KF__SHOP__ENTRY__ITEM_6)
+            }
+            LocationId::KF__Shop__Entry__Item_7 => {
+                !self
+                    .cbits3
+                    .contains(flags::ContextBits3::VISITED_KF__SHOP__ENTRY__ITEM_7)
+                    && !self
+                        .cbits4
+                        .contains(flags::ContextBits4::SKIPPED_KF__SHOP__ENTRY__ITEM_7)
+            }
+            LocationId::KF__Shop__Entry__Item_8 => {
+                !self
+                    .cbits3
+                    .contains(flags::ContextBits3::VISITED_KF__SHOP__ENTRY__ITEM_8)
+                    && !self
+                        .cbits4
+                        .contains(flags::ContextBits4::SKIPPED_KF__SHOP__ENTRY__ITEM_8)
+            }
+            LocationId::Kak__Spider_House__Entry__Skulls_10 => {
+                !self
+                    .cbits3
+                    .contains(flags::ContextBits3::VISITED_KAK__SPIDER_HOUSE__ENTRY__SKULLS_10)
+                    && !self
+                        .cbits4
+                        .contains(flags::ContextBits4::SKIPPED_KAK__SPIDER_HOUSE__ENTRY__SKULLS_10)
+            }
+        }
     }
     fn visited(&self, loc_id: LocationId) -> bool {
-        self.status[loc_id] == Status::Visited
+        match loc_id {
+            LocationId::Deku_Tree__Lobby__Center__Deku_Baba_Sticks => self
+                .cbits2
+                .contains(flags::ContextBits2::VISITED_DEKU_TREE__LOBBY__CENTER__DEKU_BABA_STICKS),
+            LocationId::Deku_Tree__Lobby__Center__Deku_Baba_Nuts => self
+                .cbits2
+                .contains(flags::ContextBits2::VISITED_DEKU_TREE__LOBBY__CENTER__DEKU_BABA_NUTS),
+            LocationId::Deku_Tree__Lobby__Center__Web => self
+                .cbits2
+                .contains(flags::ContextBits2::VISITED_DEKU_TREE__LOBBY__CENTER__WEB),
+            LocationId::Deku_Tree__Floor_2__Vines__Map_Chest => self
+                .cbits2
+                .contains(flags::ContextBits2::VISITED_DEKU_TREE__FLOOR_2__VINES__MAP_CHEST),
+            LocationId::Deku_Tree__Scrub_Room__Entry__Scrub => self
+                .cbits2
+                .contains(flags::ContextBits2::VISITED_DEKU_TREE__SCRUB_ROOM__ENTRY__SCRUB),
+            LocationId::Deku_Tree__Slingshot_Room__Slingshot__Chest => self
+                .cbits2
+                .contains(flags::ContextBits2::VISITED_DEKU_TREE__SLINGSHOT_ROOM__SLINGSHOT__CHEST),
+            LocationId::Deku_Tree__Slingshot_Upper__Ledge__Chest => self
+                .cbits2
+                .contains(flags::ContextBits2::VISITED_DEKU_TREE__SLINGSHOT_UPPER__LEDGE__CHEST),
+            LocationId::Deku_Tree__Floor_3__Door__Break_Web => self
+                .cbits2
+                .contains(flags::ContextBits2::VISITED_DEKU_TREE__FLOOR_3__DOOR__BREAK_WEB),
+            LocationId::Deku_Tree__Compass_Room__Entry__Burn_Web => self
+                .cbits2
+                .contains(flags::ContextBits2::VISITED_DEKU_TREE__COMPASS_ROOM__ENTRY__BURN_WEB),
+            LocationId::Deku_Tree__Compass_Room__Compass__Chest => self
+                .cbits2
+                .contains(flags::ContextBits2::VISITED_DEKU_TREE__COMPASS_ROOM__COMPASS__CHEST),
+            LocationId::Deku_Tree__Compass_Room__Ledge__Chest => self
+                .cbits2
+                .contains(flags::ContextBits2::VISITED_DEKU_TREE__COMPASS_ROOM__LEDGE__CHEST),
+            LocationId::Deku_Tree__Compass_Room__Ledge__GS => self
+                .cbits2
+                .contains(flags::ContextBits2::VISITED_DEKU_TREE__COMPASS_ROOM__LEDGE__GS),
+            LocationId::Deku_Tree__Basement_1__Center__Vines_GS => self
+                .cbits2
+                .contains(flags::ContextBits2::VISITED_DEKU_TREE__BASEMENT_1__CENTER__VINES_GS),
+            LocationId::Deku_Tree__Basement_1__Corner__Switch => self
+                .cbits2
+                .contains(flags::ContextBits2::VISITED_DEKU_TREE__BASEMENT_1__CORNER__SWITCH),
+            LocationId::Deku_Tree__Basement_1__Corner__Chest => self
+                .cbits2
+                .contains(flags::ContextBits2::VISITED_DEKU_TREE__BASEMENT_1__CORNER__CHEST),
+            LocationId::Deku_Tree__Basement_1__Corner__Gate_GS => self
+                .cbits2
+                .contains(flags::ContextBits2::VISITED_DEKU_TREE__BASEMENT_1__CORNER__GATE_GS),
+            LocationId::Deku_Tree__Basement_1__Corner__Burn_Basement_Web => self.cbits2.contains(
+                flags::ContextBits2::VISITED_DEKU_TREE__BASEMENT_1__CORNER__BURN_BASEMENT_WEB,
+            ),
+            LocationId::Deku_Tree__Back_Room__Northwest__Burn_Web => self
+                .cbits2
+                .contains(flags::ContextBits2::VISITED_DEKU_TREE__BACK_ROOM__NORTHWEST__BURN_WEB),
+            LocationId::Deku_Tree__Back_Room__Northwest__Break_Wall => self
+                .cbits1
+                .contains(flags::ContextBits1::VISITED_DEKU_TREE__BACK_ROOM__NORTHWEST__BREAK_WALL),
+            LocationId::Deku_Tree__Skull_Room__Entry__GS => self
+                .cbits2
+                .contains(flags::ContextBits2::VISITED_DEKU_TREE__SKULL_ROOM__ENTRY__GS),
+            LocationId::Deku_Tree__Basement_Ledge__Block__Push_Block => self.cbits2.contains(
+                flags::ContextBits2::VISITED_DEKU_TREE__BASEMENT_LEDGE__BLOCK__PUSH_BLOCK,
+            ),
+            LocationId::Deku_Tree__Basement_Ledge__Web__Burn_Web => self
+                .cbits2
+                .contains(flags::ContextBits2::VISITED_DEKU_TREE__BASEMENT_LEDGE__WEB__BURN_WEB),
+            LocationId::Deku_Tree__Basement_2__Boss_Door__Scrubs => self
+                .cbits2
+                .contains(flags::ContextBits2::VISITED_DEKU_TREE__BASEMENT_2__BOSS_DOOR__SCRUBS),
+            LocationId::Deku_Tree__Boss_Room__Arena__Gohma => self
+                .cbits2
+                .contains(flags::ContextBits2::VISITED_DEKU_TREE__BOSS_ROOM__ARENA__GOHMA),
+            LocationId::Deku_Tree__Boss_Room__Arena__Gohma_Quick_Kill => self.cbits2.contains(
+                flags::ContextBits2::VISITED_DEKU_TREE__BOSS_ROOM__ARENA__GOHMA_QUICK_KILL,
+            ),
+            LocationId::Deku_Tree__Boss_Room__Arena__Gohma_Heart => self
+                .cbits2
+                .contains(flags::ContextBits2::VISITED_DEKU_TREE__BOSS_ROOM__ARENA__GOHMA_HEART),
+            LocationId::Deku_Tree__Boss_Room__Arena__Blue_Warp => self
+                .cbits2
+                .contains(flags::ContextBits2::VISITED_DEKU_TREE__BOSS_ROOM__ARENA__BLUE_WARP),
+            LocationId::KF__Kokiri_Village__Midos_Guardpost__Show_Mido => self.cbits2.contains(
+                flags::ContextBits2::VISITED_KF__KOKIRI_VILLAGE__MIDOS_GUARDPOST__SHOW_MIDO,
+            ),
+            LocationId::KF__Boulder_Maze__Reward__Chest => self
+                .cbits2
+                .contains(flags::ContextBits2::VISITED_KF__BOULDER_MAZE__REWARD__CHEST),
+            LocationId::KF__Baba_Corridor__Deku_Babas__Sticks => self
+                .cbits2
+                .contains(flags::ContextBits2::VISITED_KF__BABA_CORRIDOR__DEKU_BABAS__STICKS),
+            LocationId::KF__Baba_Corridor__Deku_Babas__Nuts => self
+                .cbits2
+                .contains(flags::ContextBits2::VISITED_KF__BABA_CORRIDOR__DEKU_BABAS__NUTS),
+            LocationId::KF__Outside_Deku_Tree__Left__Gossip_Stone => self
+                .cbits3
+                .contains(flags::ContextBits3::VISITED_KF__OUTSIDE_DEKU_TREE__LEFT__GOSSIP_STONE),
+            LocationId::KF__Outside_Deku_Tree__Right__Gossip_Stone => self
+                .cbits3
+                .contains(flags::ContextBits3::VISITED_KF__OUTSIDE_DEKU_TREE__RIGHT__GOSSIP_STONE),
+            LocationId::KF__Midos_House__Entry__Top_Left_Chest => self
+                .cbits3
+                .contains(flags::ContextBits3::VISITED_KF__MIDOS_HOUSE__ENTRY__TOP_LEFT_CHEST),
+            LocationId::KF__Midos_House__Entry__Top_Right_Chest => self
+                .cbits3
+                .contains(flags::ContextBits3::VISITED_KF__MIDOS_HOUSE__ENTRY__TOP_RIGHT_CHEST),
+            LocationId::KF__Midos_House__Entry__Bottom_Left_Chest => self
+                .cbits2
+                .contains(flags::ContextBits2::VISITED_KF__MIDOS_HOUSE__ENTRY__BOTTOM_LEFT_CHEST),
+            LocationId::KF__Midos_House__Entry__Bottom_Right_Chest => self
+                .cbits2
+                .contains(flags::ContextBits2::VISITED_KF__MIDOS_HOUSE__ENTRY__BOTTOM_RIGHT_CHEST),
+            LocationId::KF__Shop__Entry__Blue_Rupee => self
+                .cbits3
+                .contains(flags::ContextBits3::VISITED_KF__SHOP__ENTRY__BLUE_RUPEE),
+            LocationId::KF__Shop__Entry__Item_1 => self
+                .cbits3
+                .contains(flags::ContextBits3::VISITED_KF__SHOP__ENTRY__ITEM_1),
+            LocationId::KF__Shop__Entry__Item_2 => self
+                .cbits3
+                .contains(flags::ContextBits3::VISITED_KF__SHOP__ENTRY__ITEM_2),
+            LocationId::KF__Shop__Entry__Item_3 => self
+                .cbits3
+                .contains(flags::ContextBits3::VISITED_KF__SHOP__ENTRY__ITEM_3),
+            LocationId::KF__Shop__Entry__Item_4 => self
+                .cbits3
+                .contains(flags::ContextBits3::VISITED_KF__SHOP__ENTRY__ITEM_4),
+            LocationId::KF__Shop__Entry__Item_5 => self
+                .cbits3
+                .contains(flags::ContextBits3::VISITED_KF__SHOP__ENTRY__ITEM_5),
+            LocationId::KF__Shop__Entry__Item_6 => self
+                .cbits3
+                .contains(flags::ContextBits3::VISITED_KF__SHOP__ENTRY__ITEM_6),
+            LocationId::KF__Shop__Entry__Item_7 => self
+                .cbits3
+                .contains(flags::ContextBits3::VISITED_KF__SHOP__ENTRY__ITEM_7),
+            LocationId::KF__Shop__Entry__Item_8 => self
+                .cbits3
+                .contains(flags::ContextBits3::VISITED_KF__SHOP__ENTRY__ITEM_8),
+            LocationId::Kak__Spider_House__Entry__Skulls_10 => self
+                .cbits3
+                .contains(flags::ContextBits3::VISITED_KAK__SPIDER_HOUSE__ENTRY__SKULLS_10),
+        }
     }
     fn skipped(&self, loc_id: LocationId) -> bool {
-        self.status[loc_id] == Status::Skipped
+        match loc_id {
+            LocationId::Deku_Tree__Lobby__Center__Deku_Baba_Sticks => self
+                .cbits4
+                .contains(flags::ContextBits4::SKIPPED_DEKU_TREE__LOBBY__CENTER__DEKU_BABA_STICKS),
+            LocationId::Deku_Tree__Lobby__Center__Deku_Baba_Nuts => self
+                .cbits4
+                .contains(flags::ContextBits4::SKIPPED_DEKU_TREE__LOBBY__CENTER__DEKU_BABA_NUTS),
+            LocationId::Deku_Tree__Lobby__Center__Web => self
+                .cbits4
+                .contains(flags::ContextBits4::SKIPPED_DEKU_TREE__LOBBY__CENTER__WEB),
+            LocationId::Deku_Tree__Floor_2__Vines__Map_Chest => self
+                .cbits4
+                .contains(flags::ContextBits4::SKIPPED_DEKU_TREE__FLOOR_2__VINES__MAP_CHEST),
+            LocationId::Deku_Tree__Scrub_Room__Entry__Scrub => self
+                .cbits4
+                .contains(flags::ContextBits4::SKIPPED_DEKU_TREE__SCRUB_ROOM__ENTRY__SCRUB),
+            LocationId::Deku_Tree__Slingshot_Room__Slingshot__Chest => self
+                .cbits4
+                .contains(flags::ContextBits4::SKIPPED_DEKU_TREE__SLINGSHOT_ROOM__SLINGSHOT__CHEST),
+            LocationId::Deku_Tree__Slingshot_Upper__Ledge__Chest => self
+                .cbits4
+                .contains(flags::ContextBits4::SKIPPED_DEKU_TREE__SLINGSHOT_UPPER__LEDGE__CHEST),
+            LocationId::Deku_Tree__Floor_3__Door__Break_Web => self
+                .cbits4
+                .contains(flags::ContextBits4::SKIPPED_DEKU_TREE__FLOOR_3__DOOR__BREAK_WEB),
+            LocationId::Deku_Tree__Compass_Room__Entry__Burn_Web => self
+                .cbits3
+                .contains(flags::ContextBits3::SKIPPED_DEKU_TREE__COMPASS_ROOM__ENTRY__BURN_WEB),
+            LocationId::Deku_Tree__Compass_Room__Compass__Chest => self
+                .cbits3
+                .contains(flags::ContextBits3::SKIPPED_DEKU_TREE__COMPASS_ROOM__COMPASS__CHEST),
+            LocationId::Deku_Tree__Compass_Room__Ledge__Chest => self
+                .cbits3
+                .contains(flags::ContextBits3::SKIPPED_DEKU_TREE__COMPASS_ROOM__LEDGE__CHEST),
+            LocationId::Deku_Tree__Compass_Room__Ledge__GS => self
+                .cbits3
+                .contains(flags::ContextBits3::SKIPPED_DEKU_TREE__COMPASS_ROOM__LEDGE__GS),
+            LocationId::Deku_Tree__Basement_1__Center__Vines_GS => self
+                .cbits3
+                .contains(flags::ContextBits3::SKIPPED_DEKU_TREE__BASEMENT_1__CENTER__VINES_GS),
+            LocationId::Deku_Tree__Basement_1__Corner__Switch => self
+                .cbits3
+                .contains(flags::ContextBits3::SKIPPED_DEKU_TREE__BASEMENT_1__CORNER__SWITCH),
+            LocationId::Deku_Tree__Basement_1__Corner__Chest => self
+                .cbits3
+                .contains(flags::ContextBits3::SKIPPED_DEKU_TREE__BASEMENT_1__CORNER__CHEST),
+            LocationId::Deku_Tree__Basement_1__Corner__Gate_GS => self
+                .cbits3
+                .contains(flags::ContextBits3::SKIPPED_DEKU_TREE__BASEMENT_1__CORNER__GATE_GS),
+            LocationId::Deku_Tree__Basement_1__Corner__Burn_Basement_Web => self.cbits3.contains(
+                flags::ContextBits3::SKIPPED_DEKU_TREE__BASEMENT_1__CORNER__BURN_BASEMENT_WEB,
+            ),
+            LocationId::Deku_Tree__Back_Room__Northwest__Burn_Web => self
+                .cbits3
+                .contains(flags::ContextBits3::SKIPPED_DEKU_TREE__BACK_ROOM__NORTHWEST__BURN_WEB),
+            LocationId::Deku_Tree__Back_Room__Northwest__Break_Wall => self
+                .cbits3
+                .contains(flags::ContextBits3::SKIPPED_DEKU_TREE__BACK_ROOM__NORTHWEST__BREAK_WALL),
+            LocationId::Deku_Tree__Skull_Room__Entry__GS => self
+                .cbits4
+                .contains(flags::ContextBits4::SKIPPED_DEKU_TREE__SKULL_ROOM__ENTRY__GS),
+            LocationId::Deku_Tree__Basement_Ledge__Block__Push_Block => self.cbits3.contains(
+                flags::ContextBits3::SKIPPED_DEKU_TREE__BASEMENT_LEDGE__BLOCK__PUSH_BLOCK,
+            ),
+            LocationId::Deku_Tree__Basement_Ledge__Web__Burn_Web => self
+                .cbits3
+                .contains(flags::ContextBits3::SKIPPED_DEKU_TREE__BASEMENT_LEDGE__WEB__BURN_WEB),
+            LocationId::Deku_Tree__Basement_2__Boss_Door__Scrubs => self
+                .cbits3
+                .contains(flags::ContextBits3::SKIPPED_DEKU_TREE__BASEMENT_2__BOSS_DOOR__SCRUBS),
+            LocationId::Deku_Tree__Boss_Room__Arena__Gohma => self
+                .cbits3
+                .contains(flags::ContextBits3::SKIPPED_DEKU_TREE__BOSS_ROOM__ARENA__GOHMA),
+            LocationId::Deku_Tree__Boss_Room__Arena__Gohma_Quick_Kill => self.cbits3.contains(
+                flags::ContextBits3::SKIPPED_DEKU_TREE__BOSS_ROOM__ARENA__GOHMA_QUICK_KILL,
+            ),
+            LocationId::Deku_Tree__Boss_Room__Arena__Gohma_Heart => self
+                .cbits3
+                .contains(flags::ContextBits3::SKIPPED_DEKU_TREE__BOSS_ROOM__ARENA__GOHMA_HEART),
+            LocationId::Deku_Tree__Boss_Room__Arena__Blue_Warp => self
+                .cbits3
+                .contains(flags::ContextBits3::SKIPPED_DEKU_TREE__BOSS_ROOM__ARENA__BLUE_WARP),
+            LocationId::KF__Kokiri_Village__Midos_Guardpost__Show_Mido => self.cbits4.contains(
+                flags::ContextBits4::SKIPPED_KF__KOKIRI_VILLAGE__MIDOS_GUARDPOST__SHOW_MIDO,
+            ),
+            LocationId::KF__Boulder_Maze__Reward__Chest => self
+                .cbits4
+                .contains(flags::ContextBits4::SKIPPED_KF__BOULDER_MAZE__REWARD__CHEST),
+            LocationId::KF__Baba_Corridor__Deku_Babas__Sticks => self
+                .cbits4
+                .contains(flags::ContextBits4::SKIPPED_KF__BABA_CORRIDOR__DEKU_BABAS__STICKS),
+            LocationId::KF__Baba_Corridor__Deku_Babas__Nuts => self
+                .cbits4
+                .contains(flags::ContextBits4::SKIPPED_KF__BABA_CORRIDOR__DEKU_BABAS__NUTS),
+            LocationId::KF__Outside_Deku_Tree__Left__Gossip_Stone => self
+                .cbits4
+                .contains(flags::ContextBits4::SKIPPED_KF__OUTSIDE_DEKU_TREE__LEFT__GOSSIP_STONE),
+            LocationId::KF__Outside_Deku_Tree__Right__Gossip_Stone => self
+                .cbits4
+                .contains(flags::ContextBits4::SKIPPED_KF__OUTSIDE_DEKU_TREE__RIGHT__GOSSIP_STONE),
+            LocationId::KF__Midos_House__Entry__Top_Left_Chest => self
+                .cbits4
+                .contains(flags::ContextBits4::SKIPPED_KF__MIDOS_HOUSE__ENTRY__TOP_LEFT_CHEST),
+            LocationId::KF__Midos_House__Entry__Top_Right_Chest => self
+                .cbits4
+                .contains(flags::ContextBits4::SKIPPED_KF__MIDOS_HOUSE__ENTRY__TOP_RIGHT_CHEST),
+            LocationId::KF__Midos_House__Entry__Bottom_Left_Chest => self
+                .cbits4
+                .contains(flags::ContextBits4::SKIPPED_KF__MIDOS_HOUSE__ENTRY__BOTTOM_LEFT_CHEST),
+            LocationId::KF__Midos_House__Entry__Bottom_Right_Chest => self
+                .cbits4
+                .contains(flags::ContextBits4::SKIPPED_KF__MIDOS_HOUSE__ENTRY__BOTTOM_RIGHT_CHEST),
+            LocationId::KF__Shop__Entry__Blue_Rupee => self
+                .cbits4
+                .contains(flags::ContextBits4::SKIPPED_KF__SHOP__ENTRY__BLUE_RUPEE),
+            LocationId::KF__Shop__Entry__Item_1 => self
+                .cbits4
+                .contains(flags::ContextBits4::SKIPPED_KF__SHOP__ENTRY__ITEM_1),
+            LocationId::KF__Shop__Entry__Item_2 => self
+                .cbits4
+                .contains(flags::ContextBits4::SKIPPED_KF__SHOP__ENTRY__ITEM_2),
+            LocationId::KF__Shop__Entry__Item_3 => self
+                .cbits4
+                .contains(flags::ContextBits4::SKIPPED_KF__SHOP__ENTRY__ITEM_3),
+            LocationId::KF__Shop__Entry__Item_4 => self
+                .cbits4
+                .contains(flags::ContextBits4::SKIPPED_KF__SHOP__ENTRY__ITEM_4),
+            LocationId::KF__Shop__Entry__Item_5 => self
+                .cbits4
+                .contains(flags::ContextBits4::SKIPPED_KF__SHOP__ENTRY__ITEM_5),
+            LocationId::KF__Shop__Entry__Item_6 => self
+                .cbits4
+                .contains(flags::ContextBits4::SKIPPED_KF__SHOP__ENTRY__ITEM_6),
+            LocationId::KF__Shop__Entry__Item_7 => self
+                .cbits4
+                .contains(flags::ContextBits4::SKIPPED_KF__SHOP__ENTRY__ITEM_7),
+            LocationId::KF__Shop__Entry__Item_8 => self
+                .cbits4
+                .contains(flags::ContextBits4::SKIPPED_KF__SHOP__ENTRY__ITEM_8),
+            LocationId::Kak__Spider_House__Entry__Skulls_10 => self
+                .cbits4
+                .contains(flags::ContextBits4::SKIPPED_KAK__SPIDER_HOUSE__ENTRY__SKULLS_10),
+        }
     }
 
     fn all_spot_checks(&self, id: SpotId) -> bool {
-        let r = spot_locations(id);
-        for status in self.status.as_slice()[r.start..r.end].iter() {
-            if status == &Status::None {
-                return false;
-            }
-        }
-        true
+        false
     }
     fn all_area_checks(&self, id: AreaId) -> bool {
-        let r = area_locations(id);
-        for status in self.status.as_slice()[r.start..r.end].iter() {
-            if status == &Status::None {
-                return false;
-            }
-        }
-        true
+        false
     }
     fn all_region_checks(&self, id: RegionId) -> bool {
-        let r = region_locations(id);
-        for status in self.status.as_slice()[r.start..r.end].iter() {
-            if status == &Status::None {
-                return false;
-            }
-        }
-        true
+        false
     }
     fn get_movement_state(&self) -> movements::MovementState {
         movements::get_movement_state(self)
     }
 
     fn local_travel_time(&self, movement_state: movements::MovementState, dest: SpotId) -> u32 {
-        movements::local_travel_time(self, movement_state, self.position, dest)
+        movements::local_travel_time(movement_state, self.position, dest)
     }
 
     fn count_visits(&self) -> u32 {
-        self.visits
+        self.cbits1
+            .intersection(flags::ContextBits1::ALL_VISIT_FLAGS)
+            .bits()
+            .count_ones()
+            + self
+                .cbits2
+                .intersection(flags::ContextBits2::ALL_VISIT_FLAGS)
+                .bits()
+                .count_ones()
+            + self
+                .cbits3
+                .intersection(flags::ContextBits3::ALL_VISIT_FLAGS)
+                .bits()
+                .count_ones()
     }
     fn count_skips(&self) -> u32 {
-        self.skips
+        self.cbits3
+            .intersection(flags::ContextBits3::ALL_SKIP_FLAGS)
+            .bits()
+            .count_ones()
+            + self
+                .cbits4
+                .intersection(flags::ContextBits4::ALL_SKIP_FLAGS)
+                .bits()
+                .count_ones()
     }
     fn progress(&self) -> u32 {
-        if self.visits <= 0 {
+        let visits = self.count_visits();
+        if visits <= 0 {
             0
         } else {
-            self.visits * 100 / (Self::World::NUM_LOCATIONS - self.skips)
+            visits * 100 / (Self::World::NUM_LOCATIONS - self.count_skips())
         }
     }
 
@@ -1563,21 +3187,1139 @@ impl context::Ctx for Context {
         if n != p {
             list.push(format!("{}SLINGSHOT", if n { "+" } else { "-" }));
         }
-        for (loc_id, status) in self.status.iter() {
-            if *status != old.status[loc_id] {
-                list.push(format!("{:?}: {}", status, loc_id));
-            }
+        let n = self
+            .cbits1
+            .contains(flags::ContextBits1::VISITED_DEKU_TREE__BACK_ROOM__NORTHWEST__BREAK_WALL);
+        let p = old
+            .cbits1
+            .contains(flags::ContextBits1::VISITED_DEKU_TREE__BACK_ROOM__NORTHWEST__BREAK_WALL);
+        if n != p {
+            list.push(format!(
+                "{}VISITED_DEKU_TREE__BACK_ROOM__NORTHWEST__BREAK_WALL",
+                if n { "+" } else { "-" }
+            ));
         }
-
-        if self.visits != old.visits {
-            list.push(format!("Visits: {:+}", self.visits - old.visits));
+        let n = self
+            .cbits2
+            .contains(flags::ContextBits2::VISITED_DEKU_TREE__BACK_ROOM__NORTHWEST__BURN_WEB);
+        let p = old
+            .cbits2
+            .contains(flags::ContextBits2::VISITED_DEKU_TREE__BACK_ROOM__NORTHWEST__BURN_WEB);
+        if n != p {
+            list.push(format!(
+                "{}VISITED_DEKU_TREE__BACK_ROOM__NORTHWEST__BURN_WEB",
+                if n { "+" } else { "-" }
+            ));
         }
-
-        if self.skips != old.skips {
-            list.push(format!("Skips: {:+}", self.skips - old.skips));
+        let n = self
+            .cbits2
+            .contains(flags::ContextBits2::VISITED_DEKU_TREE__BASEMENT_1__CENTER__VINES_GS);
+        let p = old
+            .cbits2
+            .contains(flags::ContextBits2::VISITED_DEKU_TREE__BASEMENT_1__CENTER__VINES_GS);
+        if n != p {
+            list.push(format!(
+                "{}VISITED_DEKU_TREE__BASEMENT_1__CENTER__VINES_GS",
+                if n { "+" } else { "-" }
+            ));
         }
-
-        list.join("\n")
+        let n = self.cbits2.contains(
+            flags::ContextBits2::VISITED_DEKU_TREE__BASEMENT_1__CORNER__BURN_BASEMENT_WEB,
+        );
+        let p = old.cbits2.contains(
+            flags::ContextBits2::VISITED_DEKU_TREE__BASEMENT_1__CORNER__BURN_BASEMENT_WEB,
+        );
+        if n != p {
+            list.push(format!(
+                "{}VISITED_DEKU_TREE__BASEMENT_1__CORNER__BURN_BASEMENT_WEB",
+                if n { "+" } else { "-" }
+            ));
+        }
+        let n = self
+            .cbits2
+            .contains(flags::ContextBits2::VISITED_DEKU_TREE__BASEMENT_1__CORNER__CHEST);
+        let p = old
+            .cbits2
+            .contains(flags::ContextBits2::VISITED_DEKU_TREE__BASEMENT_1__CORNER__CHEST);
+        if n != p {
+            list.push(format!(
+                "{}VISITED_DEKU_TREE__BASEMENT_1__CORNER__CHEST",
+                if n { "+" } else { "-" }
+            ));
+        }
+        let n = self
+            .cbits2
+            .contains(flags::ContextBits2::VISITED_DEKU_TREE__BASEMENT_1__CORNER__GATE_GS);
+        let p = old
+            .cbits2
+            .contains(flags::ContextBits2::VISITED_DEKU_TREE__BASEMENT_1__CORNER__GATE_GS);
+        if n != p {
+            list.push(format!(
+                "{}VISITED_DEKU_TREE__BASEMENT_1__CORNER__GATE_GS",
+                if n { "+" } else { "-" }
+            ));
+        }
+        let n = self
+            .cbits2
+            .contains(flags::ContextBits2::VISITED_DEKU_TREE__BASEMENT_1__CORNER__SWITCH);
+        let p = old
+            .cbits2
+            .contains(flags::ContextBits2::VISITED_DEKU_TREE__BASEMENT_1__CORNER__SWITCH);
+        if n != p {
+            list.push(format!(
+                "{}VISITED_DEKU_TREE__BASEMENT_1__CORNER__SWITCH",
+                if n { "+" } else { "-" }
+            ));
+        }
+        let n = self
+            .cbits2
+            .contains(flags::ContextBits2::VISITED_DEKU_TREE__BASEMENT_2__BOSS_DOOR__SCRUBS);
+        let p = old
+            .cbits2
+            .contains(flags::ContextBits2::VISITED_DEKU_TREE__BASEMENT_2__BOSS_DOOR__SCRUBS);
+        if n != p {
+            list.push(format!(
+                "{}VISITED_DEKU_TREE__BASEMENT_2__BOSS_DOOR__SCRUBS",
+                if n { "+" } else { "-" }
+            ));
+        }
+        let n = self
+            .cbits2
+            .contains(flags::ContextBits2::VISITED_DEKU_TREE__BASEMENT_LEDGE__BLOCK__PUSH_BLOCK);
+        let p = old
+            .cbits2
+            .contains(flags::ContextBits2::VISITED_DEKU_TREE__BASEMENT_LEDGE__BLOCK__PUSH_BLOCK);
+        if n != p {
+            list.push(format!(
+                "{}VISITED_DEKU_TREE__BASEMENT_LEDGE__BLOCK__PUSH_BLOCK",
+                if n { "+" } else { "-" }
+            ));
+        }
+        let n = self
+            .cbits2
+            .contains(flags::ContextBits2::VISITED_DEKU_TREE__BASEMENT_LEDGE__WEB__BURN_WEB);
+        let p = old
+            .cbits2
+            .contains(flags::ContextBits2::VISITED_DEKU_TREE__BASEMENT_LEDGE__WEB__BURN_WEB);
+        if n != p {
+            list.push(format!(
+                "{}VISITED_DEKU_TREE__BASEMENT_LEDGE__WEB__BURN_WEB",
+                if n { "+" } else { "-" }
+            ));
+        }
+        let n = self
+            .cbits2
+            .contains(flags::ContextBits2::VISITED_DEKU_TREE__BOSS_ROOM__ARENA__BLUE_WARP);
+        let p = old
+            .cbits2
+            .contains(flags::ContextBits2::VISITED_DEKU_TREE__BOSS_ROOM__ARENA__BLUE_WARP);
+        if n != p {
+            list.push(format!(
+                "{}VISITED_DEKU_TREE__BOSS_ROOM__ARENA__BLUE_WARP",
+                if n { "+" } else { "-" }
+            ));
+        }
+        let n = self
+            .cbits2
+            .contains(flags::ContextBits2::VISITED_DEKU_TREE__BOSS_ROOM__ARENA__GOHMA);
+        let p = old
+            .cbits2
+            .contains(flags::ContextBits2::VISITED_DEKU_TREE__BOSS_ROOM__ARENA__GOHMA);
+        if n != p {
+            list.push(format!(
+                "{}VISITED_DEKU_TREE__BOSS_ROOM__ARENA__GOHMA",
+                if n { "+" } else { "-" }
+            ));
+        }
+        let n = self
+            .cbits2
+            .contains(flags::ContextBits2::VISITED_DEKU_TREE__BOSS_ROOM__ARENA__GOHMA_HEART);
+        let p = old
+            .cbits2
+            .contains(flags::ContextBits2::VISITED_DEKU_TREE__BOSS_ROOM__ARENA__GOHMA_HEART);
+        if n != p {
+            list.push(format!(
+                "{}VISITED_DEKU_TREE__BOSS_ROOM__ARENA__GOHMA_HEART",
+                if n { "+" } else { "-" }
+            ));
+        }
+        let n = self
+            .cbits2
+            .contains(flags::ContextBits2::VISITED_DEKU_TREE__BOSS_ROOM__ARENA__GOHMA_QUICK_KILL);
+        let p = old
+            .cbits2
+            .contains(flags::ContextBits2::VISITED_DEKU_TREE__BOSS_ROOM__ARENA__GOHMA_QUICK_KILL);
+        if n != p {
+            list.push(format!(
+                "{}VISITED_DEKU_TREE__BOSS_ROOM__ARENA__GOHMA_QUICK_KILL",
+                if n { "+" } else { "-" }
+            ));
+        }
+        let n = self
+            .cbits2
+            .contains(flags::ContextBits2::VISITED_DEKU_TREE__COMPASS_ROOM__COMPASS__CHEST);
+        let p = old
+            .cbits2
+            .contains(flags::ContextBits2::VISITED_DEKU_TREE__COMPASS_ROOM__COMPASS__CHEST);
+        if n != p {
+            list.push(format!(
+                "{}VISITED_DEKU_TREE__COMPASS_ROOM__COMPASS__CHEST",
+                if n { "+" } else { "-" }
+            ));
+        }
+        let n = self
+            .cbits2
+            .contains(flags::ContextBits2::VISITED_DEKU_TREE__COMPASS_ROOM__ENTRY__BURN_WEB);
+        let p = old
+            .cbits2
+            .contains(flags::ContextBits2::VISITED_DEKU_TREE__COMPASS_ROOM__ENTRY__BURN_WEB);
+        if n != p {
+            list.push(format!(
+                "{}VISITED_DEKU_TREE__COMPASS_ROOM__ENTRY__BURN_WEB",
+                if n { "+" } else { "-" }
+            ));
+        }
+        let n = self
+            .cbits2
+            .contains(flags::ContextBits2::VISITED_DEKU_TREE__COMPASS_ROOM__LEDGE__CHEST);
+        let p = old
+            .cbits2
+            .contains(flags::ContextBits2::VISITED_DEKU_TREE__COMPASS_ROOM__LEDGE__CHEST);
+        if n != p {
+            list.push(format!(
+                "{}VISITED_DEKU_TREE__COMPASS_ROOM__LEDGE__CHEST",
+                if n { "+" } else { "-" }
+            ));
+        }
+        let n = self
+            .cbits2
+            .contains(flags::ContextBits2::VISITED_DEKU_TREE__COMPASS_ROOM__LEDGE__GS);
+        let p = old
+            .cbits2
+            .contains(flags::ContextBits2::VISITED_DEKU_TREE__COMPASS_ROOM__LEDGE__GS);
+        if n != p {
+            list.push(format!(
+                "{}VISITED_DEKU_TREE__COMPASS_ROOM__LEDGE__GS",
+                if n { "+" } else { "-" }
+            ));
+        }
+        let n = self
+            .cbits2
+            .contains(flags::ContextBits2::VISITED_DEKU_TREE__FLOOR_2__VINES__MAP_CHEST);
+        let p = old
+            .cbits2
+            .contains(flags::ContextBits2::VISITED_DEKU_TREE__FLOOR_2__VINES__MAP_CHEST);
+        if n != p {
+            list.push(format!(
+                "{}VISITED_DEKU_TREE__FLOOR_2__VINES__MAP_CHEST",
+                if n { "+" } else { "-" }
+            ));
+        }
+        let n = self
+            .cbits2
+            .contains(flags::ContextBits2::VISITED_DEKU_TREE__FLOOR_3__DOOR__BREAK_WEB);
+        let p = old
+            .cbits2
+            .contains(flags::ContextBits2::VISITED_DEKU_TREE__FLOOR_3__DOOR__BREAK_WEB);
+        if n != p {
+            list.push(format!(
+                "{}VISITED_DEKU_TREE__FLOOR_3__DOOR__BREAK_WEB",
+                if n { "+" } else { "-" }
+            ));
+        }
+        let n = self
+            .cbits2
+            .contains(flags::ContextBits2::VISITED_DEKU_TREE__LOBBY__CENTER__DEKU_BABA_NUTS);
+        let p = old
+            .cbits2
+            .contains(flags::ContextBits2::VISITED_DEKU_TREE__LOBBY__CENTER__DEKU_BABA_NUTS);
+        if n != p {
+            list.push(format!(
+                "{}VISITED_DEKU_TREE__LOBBY__CENTER__DEKU_BABA_NUTS",
+                if n { "+" } else { "-" }
+            ));
+        }
+        let n = self
+            .cbits2
+            .contains(flags::ContextBits2::VISITED_DEKU_TREE__LOBBY__CENTER__DEKU_BABA_STICKS);
+        let p = old
+            .cbits2
+            .contains(flags::ContextBits2::VISITED_DEKU_TREE__LOBBY__CENTER__DEKU_BABA_STICKS);
+        if n != p {
+            list.push(format!(
+                "{}VISITED_DEKU_TREE__LOBBY__CENTER__DEKU_BABA_STICKS",
+                if n { "+" } else { "-" }
+            ));
+        }
+        let n = self
+            .cbits2
+            .contains(flags::ContextBits2::VISITED_DEKU_TREE__LOBBY__CENTER__WEB);
+        let p = old
+            .cbits2
+            .contains(flags::ContextBits2::VISITED_DEKU_TREE__LOBBY__CENTER__WEB);
+        if n != p {
+            list.push(format!(
+                "{}VISITED_DEKU_TREE__LOBBY__CENTER__WEB",
+                if n { "+" } else { "-" }
+            ));
+        }
+        let n = self
+            .cbits2
+            .contains(flags::ContextBits2::VISITED_DEKU_TREE__SCRUB_ROOM__ENTRY__SCRUB);
+        let p = old
+            .cbits2
+            .contains(flags::ContextBits2::VISITED_DEKU_TREE__SCRUB_ROOM__ENTRY__SCRUB);
+        if n != p {
+            list.push(format!(
+                "{}VISITED_DEKU_TREE__SCRUB_ROOM__ENTRY__SCRUB",
+                if n { "+" } else { "-" }
+            ));
+        }
+        let n = self
+            .cbits2
+            .contains(flags::ContextBits2::VISITED_DEKU_TREE__SKULL_ROOM__ENTRY__GS);
+        let p = old
+            .cbits2
+            .contains(flags::ContextBits2::VISITED_DEKU_TREE__SKULL_ROOM__ENTRY__GS);
+        if n != p {
+            list.push(format!(
+                "{}VISITED_DEKU_TREE__SKULL_ROOM__ENTRY__GS",
+                if n { "+" } else { "-" }
+            ));
+        }
+        let n = self
+            .cbits2
+            .contains(flags::ContextBits2::VISITED_DEKU_TREE__SLINGSHOT_ROOM__SLINGSHOT__CHEST);
+        let p = old
+            .cbits2
+            .contains(flags::ContextBits2::VISITED_DEKU_TREE__SLINGSHOT_ROOM__SLINGSHOT__CHEST);
+        if n != p {
+            list.push(format!(
+                "{}VISITED_DEKU_TREE__SLINGSHOT_ROOM__SLINGSHOT__CHEST",
+                if n { "+" } else { "-" }
+            ));
+        }
+        let n = self
+            .cbits2
+            .contains(flags::ContextBits2::VISITED_DEKU_TREE__SLINGSHOT_UPPER__LEDGE__CHEST);
+        let p = old
+            .cbits2
+            .contains(flags::ContextBits2::VISITED_DEKU_TREE__SLINGSHOT_UPPER__LEDGE__CHEST);
+        if n != p {
+            list.push(format!(
+                "{}VISITED_DEKU_TREE__SLINGSHOT_UPPER__LEDGE__CHEST",
+                if n { "+" } else { "-" }
+            ));
+        }
+        let n = self
+            .cbits2
+            .contains(flags::ContextBits2::VISITED_KF__BABA_CORRIDOR__DEKU_BABAS__NUTS);
+        let p = old
+            .cbits2
+            .contains(flags::ContextBits2::VISITED_KF__BABA_CORRIDOR__DEKU_BABAS__NUTS);
+        if n != p {
+            list.push(format!(
+                "{}VISITED_KF__BABA_CORRIDOR__DEKU_BABAS__NUTS",
+                if n { "+" } else { "-" }
+            ));
+        }
+        let n = self
+            .cbits2
+            .contains(flags::ContextBits2::VISITED_KF__BABA_CORRIDOR__DEKU_BABAS__STICKS);
+        let p = old
+            .cbits2
+            .contains(flags::ContextBits2::VISITED_KF__BABA_CORRIDOR__DEKU_BABAS__STICKS);
+        if n != p {
+            list.push(format!(
+                "{}VISITED_KF__BABA_CORRIDOR__DEKU_BABAS__STICKS",
+                if n { "+" } else { "-" }
+            ));
+        }
+        let n = self
+            .cbits2
+            .contains(flags::ContextBits2::VISITED_KF__BOULDER_MAZE__REWARD__CHEST);
+        let p = old
+            .cbits2
+            .contains(flags::ContextBits2::VISITED_KF__BOULDER_MAZE__REWARD__CHEST);
+        if n != p {
+            list.push(format!(
+                "{}VISITED_KF__BOULDER_MAZE__REWARD__CHEST",
+                if n { "+" } else { "-" }
+            ));
+        }
+        let n = self
+            .cbits2
+            .contains(flags::ContextBits2::VISITED_KF__KOKIRI_VILLAGE__MIDOS_GUARDPOST__SHOW_MIDO);
+        let p = old
+            .cbits2
+            .contains(flags::ContextBits2::VISITED_KF__KOKIRI_VILLAGE__MIDOS_GUARDPOST__SHOW_MIDO);
+        if n != p {
+            list.push(format!(
+                "{}VISITED_KF__KOKIRI_VILLAGE__MIDOS_GUARDPOST__SHOW_MIDO",
+                if n { "+" } else { "-" }
+            ));
+        }
+        let n = self
+            .cbits2
+            .contains(flags::ContextBits2::VISITED_KF__MIDOS_HOUSE__ENTRY__BOTTOM_LEFT_CHEST);
+        let p = old
+            .cbits2
+            .contains(flags::ContextBits2::VISITED_KF__MIDOS_HOUSE__ENTRY__BOTTOM_LEFT_CHEST);
+        if n != p {
+            list.push(format!(
+                "{}VISITED_KF__MIDOS_HOUSE__ENTRY__BOTTOM_LEFT_CHEST",
+                if n { "+" } else { "-" }
+            ));
+        }
+        let n = self
+            .cbits2
+            .contains(flags::ContextBits2::VISITED_KF__MIDOS_HOUSE__ENTRY__BOTTOM_RIGHT_CHEST);
+        let p = old
+            .cbits2
+            .contains(flags::ContextBits2::VISITED_KF__MIDOS_HOUSE__ENTRY__BOTTOM_RIGHT_CHEST);
+        if n != p {
+            list.push(format!(
+                "{}VISITED_KF__MIDOS_HOUSE__ENTRY__BOTTOM_RIGHT_CHEST",
+                if n { "+" } else { "-" }
+            ));
+        }
+        let n = self
+            .cbits3
+            .contains(flags::ContextBits3::VISITED_KF__MIDOS_HOUSE__ENTRY__TOP_LEFT_CHEST);
+        let p = old
+            .cbits3
+            .contains(flags::ContextBits3::VISITED_KF__MIDOS_HOUSE__ENTRY__TOP_LEFT_CHEST);
+        if n != p {
+            list.push(format!(
+                "{}VISITED_KF__MIDOS_HOUSE__ENTRY__TOP_LEFT_CHEST",
+                if n { "+" } else { "-" }
+            ));
+        }
+        let n = self
+            .cbits3
+            .contains(flags::ContextBits3::VISITED_KF__MIDOS_HOUSE__ENTRY__TOP_RIGHT_CHEST);
+        let p = old
+            .cbits3
+            .contains(flags::ContextBits3::VISITED_KF__MIDOS_HOUSE__ENTRY__TOP_RIGHT_CHEST);
+        if n != p {
+            list.push(format!(
+                "{}VISITED_KF__MIDOS_HOUSE__ENTRY__TOP_RIGHT_CHEST",
+                if n { "+" } else { "-" }
+            ));
+        }
+        let n = self
+            .cbits3
+            .contains(flags::ContextBits3::VISITED_KF__OUTSIDE_DEKU_TREE__LEFT__GOSSIP_STONE);
+        let p = old
+            .cbits3
+            .contains(flags::ContextBits3::VISITED_KF__OUTSIDE_DEKU_TREE__LEFT__GOSSIP_STONE);
+        if n != p {
+            list.push(format!(
+                "{}VISITED_KF__OUTSIDE_DEKU_TREE__LEFT__GOSSIP_STONE",
+                if n { "+" } else { "-" }
+            ));
+        }
+        let n = self
+            .cbits3
+            .contains(flags::ContextBits3::VISITED_KF__OUTSIDE_DEKU_TREE__RIGHT__GOSSIP_STONE);
+        let p = old
+            .cbits3
+            .contains(flags::ContextBits3::VISITED_KF__OUTSIDE_DEKU_TREE__RIGHT__GOSSIP_STONE);
+        if n != p {
+            list.push(format!(
+                "{}VISITED_KF__OUTSIDE_DEKU_TREE__RIGHT__GOSSIP_STONE",
+                if n { "+" } else { "-" }
+            ));
+        }
+        let n = self
+            .cbits3
+            .contains(flags::ContextBits3::VISITED_KF__SHOP__ENTRY__BLUE_RUPEE);
+        let p = old
+            .cbits3
+            .contains(flags::ContextBits3::VISITED_KF__SHOP__ENTRY__BLUE_RUPEE);
+        if n != p {
+            list.push(format!(
+                "{}VISITED_KF__SHOP__ENTRY__BLUE_RUPEE",
+                if n { "+" } else { "-" }
+            ));
+        }
+        let n = self
+            .cbits3
+            .contains(flags::ContextBits3::VISITED_KF__SHOP__ENTRY__ITEM_1);
+        let p = old
+            .cbits3
+            .contains(flags::ContextBits3::VISITED_KF__SHOP__ENTRY__ITEM_1);
+        if n != p {
+            list.push(format!(
+                "{}VISITED_KF__SHOP__ENTRY__ITEM_1",
+                if n { "+" } else { "-" }
+            ));
+        }
+        let n = self
+            .cbits3
+            .contains(flags::ContextBits3::VISITED_KF__SHOP__ENTRY__ITEM_2);
+        let p = old
+            .cbits3
+            .contains(flags::ContextBits3::VISITED_KF__SHOP__ENTRY__ITEM_2);
+        if n != p {
+            list.push(format!(
+                "{}VISITED_KF__SHOP__ENTRY__ITEM_2",
+                if n { "+" } else { "-" }
+            ));
+        }
+        let n = self
+            .cbits3
+            .contains(flags::ContextBits3::VISITED_KF__SHOP__ENTRY__ITEM_3);
+        let p = old
+            .cbits3
+            .contains(flags::ContextBits3::VISITED_KF__SHOP__ENTRY__ITEM_3);
+        if n != p {
+            list.push(format!(
+                "{}VISITED_KF__SHOP__ENTRY__ITEM_3",
+                if n { "+" } else { "-" }
+            ));
+        }
+        let n = self
+            .cbits3
+            .contains(flags::ContextBits3::VISITED_KF__SHOP__ENTRY__ITEM_4);
+        let p = old
+            .cbits3
+            .contains(flags::ContextBits3::VISITED_KF__SHOP__ENTRY__ITEM_4);
+        if n != p {
+            list.push(format!(
+                "{}VISITED_KF__SHOP__ENTRY__ITEM_4",
+                if n { "+" } else { "-" }
+            ));
+        }
+        let n = self
+            .cbits3
+            .contains(flags::ContextBits3::VISITED_KF__SHOP__ENTRY__ITEM_5);
+        let p = old
+            .cbits3
+            .contains(flags::ContextBits3::VISITED_KF__SHOP__ENTRY__ITEM_5);
+        if n != p {
+            list.push(format!(
+                "{}VISITED_KF__SHOP__ENTRY__ITEM_5",
+                if n { "+" } else { "-" }
+            ));
+        }
+        let n = self
+            .cbits3
+            .contains(flags::ContextBits3::VISITED_KF__SHOP__ENTRY__ITEM_6);
+        let p = old
+            .cbits3
+            .contains(flags::ContextBits3::VISITED_KF__SHOP__ENTRY__ITEM_6);
+        if n != p {
+            list.push(format!(
+                "{}VISITED_KF__SHOP__ENTRY__ITEM_6",
+                if n { "+" } else { "-" }
+            ));
+        }
+        let n = self
+            .cbits3
+            .contains(flags::ContextBits3::VISITED_KF__SHOP__ENTRY__ITEM_7);
+        let p = old
+            .cbits3
+            .contains(flags::ContextBits3::VISITED_KF__SHOP__ENTRY__ITEM_7);
+        if n != p {
+            list.push(format!(
+                "{}VISITED_KF__SHOP__ENTRY__ITEM_7",
+                if n { "+" } else { "-" }
+            ));
+        }
+        let n = self
+            .cbits3
+            .contains(flags::ContextBits3::VISITED_KF__SHOP__ENTRY__ITEM_8);
+        let p = old
+            .cbits3
+            .contains(flags::ContextBits3::VISITED_KF__SHOP__ENTRY__ITEM_8);
+        if n != p {
+            list.push(format!(
+                "{}VISITED_KF__SHOP__ENTRY__ITEM_8",
+                if n { "+" } else { "-" }
+            ));
+        }
+        let n = self
+            .cbits3
+            .contains(flags::ContextBits3::VISITED_KAK__SPIDER_HOUSE__ENTRY__SKULLS_10);
+        let p = old
+            .cbits3
+            .contains(flags::ContextBits3::VISITED_KAK__SPIDER_HOUSE__ENTRY__SKULLS_10);
+        if n != p {
+            list.push(format!(
+                "{}VISITED_KAK__SPIDER_HOUSE__ENTRY__SKULLS_10",
+                if n { "+" } else { "-" }
+            ));
+        }
+        let n = self
+            .cbits3
+            .contains(flags::ContextBits3::SKIPPED_DEKU_TREE__BACK_ROOM__NORTHWEST__BREAK_WALL);
+        let p = old
+            .cbits3
+            .contains(flags::ContextBits3::SKIPPED_DEKU_TREE__BACK_ROOM__NORTHWEST__BREAK_WALL);
+        if n != p {
+            list.push(format!(
+                "{}SKIPPED_DEKU_TREE__BACK_ROOM__NORTHWEST__BREAK_WALL",
+                if n { "+" } else { "-" }
+            ));
+        }
+        let n = self
+            .cbits3
+            .contains(flags::ContextBits3::SKIPPED_DEKU_TREE__BACK_ROOM__NORTHWEST__BURN_WEB);
+        let p = old
+            .cbits3
+            .contains(flags::ContextBits3::SKIPPED_DEKU_TREE__BACK_ROOM__NORTHWEST__BURN_WEB);
+        if n != p {
+            list.push(format!(
+                "{}SKIPPED_DEKU_TREE__BACK_ROOM__NORTHWEST__BURN_WEB",
+                if n { "+" } else { "-" }
+            ));
+        }
+        let n = self
+            .cbits3
+            .contains(flags::ContextBits3::SKIPPED_DEKU_TREE__BASEMENT_1__CENTER__VINES_GS);
+        let p = old
+            .cbits3
+            .contains(flags::ContextBits3::SKIPPED_DEKU_TREE__BASEMENT_1__CENTER__VINES_GS);
+        if n != p {
+            list.push(format!(
+                "{}SKIPPED_DEKU_TREE__BASEMENT_1__CENTER__VINES_GS",
+                if n { "+" } else { "-" }
+            ));
+        }
+        let n = self.cbits3.contains(
+            flags::ContextBits3::SKIPPED_DEKU_TREE__BASEMENT_1__CORNER__BURN_BASEMENT_WEB,
+        );
+        let p = old.cbits3.contains(
+            flags::ContextBits3::SKIPPED_DEKU_TREE__BASEMENT_1__CORNER__BURN_BASEMENT_WEB,
+        );
+        if n != p {
+            list.push(format!(
+                "{}SKIPPED_DEKU_TREE__BASEMENT_1__CORNER__BURN_BASEMENT_WEB",
+                if n { "+" } else { "-" }
+            ));
+        }
+        let n = self
+            .cbits3
+            .contains(flags::ContextBits3::SKIPPED_DEKU_TREE__BASEMENT_1__CORNER__CHEST);
+        let p = old
+            .cbits3
+            .contains(flags::ContextBits3::SKIPPED_DEKU_TREE__BASEMENT_1__CORNER__CHEST);
+        if n != p {
+            list.push(format!(
+                "{}SKIPPED_DEKU_TREE__BASEMENT_1__CORNER__CHEST",
+                if n { "+" } else { "-" }
+            ));
+        }
+        let n = self
+            .cbits3
+            .contains(flags::ContextBits3::SKIPPED_DEKU_TREE__BASEMENT_1__CORNER__GATE_GS);
+        let p = old
+            .cbits3
+            .contains(flags::ContextBits3::SKIPPED_DEKU_TREE__BASEMENT_1__CORNER__GATE_GS);
+        if n != p {
+            list.push(format!(
+                "{}SKIPPED_DEKU_TREE__BASEMENT_1__CORNER__GATE_GS",
+                if n { "+" } else { "-" }
+            ));
+        }
+        let n = self
+            .cbits3
+            .contains(flags::ContextBits3::SKIPPED_DEKU_TREE__BASEMENT_1__CORNER__SWITCH);
+        let p = old
+            .cbits3
+            .contains(flags::ContextBits3::SKIPPED_DEKU_TREE__BASEMENT_1__CORNER__SWITCH);
+        if n != p {
+            list.push(format!(
+                "{}SKIPPED_DEKU_TREE__BASEMENT_1__CORNER__SWITCH",
+                if n { "+" } else { "-" }
+            ));
+        }
+        let n = self
+            .cbits3
+            .contains(flags::ContextBits3::SKIPPED_DEKU_TREE__BASEMENT_2__BOSS_DOOR__SCRUBS);
+        let p = old
+            .cbits3
+            .contains(flags::ContextBits3::SKIPPED_DEKU_TREE__BASEMENT_2__BOSS_DOOR__SCRUBS);
+        if n != p {
+            list.push(format!(
+                "{}SKIPPED_DEKU_TREE__BASEMENT_2__BOSS_DOOR__SCRUBS",
+                if n { "+" } else { "-" }
+            ));
+        }
+        let n = self
+            .cbits3
+            .contains(flags::ContextBits3::SKIPPED_DEKU_TREE__BASEMENT_LEDGE__BLOCK__PUSH_BLOCK);
+        let p = old
+            .cbits3
+            .contains(flags::ContextBits3::SKIPPED_DEKU_TREE__BASEMENT_LEDGE__BLOCK__PUSH_BLOCK);
+        if n != p {
+            list.push(format!(
+                "{}SKIPPED_DEKU_TREE__BASEMENT_LEDGE__BLOCK__PUSH_BLOCK",
+                if n { "+" } else { "-" }
+            ));
+        }
+        let n = self
+            .cbits3
+            .contains(flags::ContextBits3::SKIPPED_DEKU_TREE__BASEMENT_LEDGE__WEB__BURN_WEB);
+        let p = old
+            .cbits3
+            .contains(flags::ContextBits3::SKIPPED_DEKU_TREE__BASEMENT_LEDGE__WEB__BURN_WEB);
+        if n != p {
+            list.push(format!(
+                "{}SKIPPED_DEKU_TREE__BASEMENT_LEDGE__WEB__BURN_WEB",
+                if n { "+" } else { "-" }
+            ));
+        }
+        let n = self
+            .cbits3
+            .contains(flags::ContextBits3::SKIPPED_DEKU_TREE__BOSS_ROOM__ARENA__BLUE_WARP);
+        let p = old
+            .cbits3
+            .contains(flags::ContextBits3::SKIPPED_DEKU_TREE__BOSS_ROOM__ARENA__BLUE_WARP);
+        if n != p {
+            list.push(format!(
+                "{}SKIPPED_DEKU_TREE__BOSS_ROOM__ARENA__BLUE_WARP",
+                if n { "+" } else { "-" }
+            ));
+        }
+        let n = self
+            .cbits3
+            .contains(flags::ContextBits3::SKIPPED_DEKU_TREE__BOSS_ROOM__ARENA__GOHMA);
+        let p = old
+            .cbits3
+            .contains(flags::ContextBits3::SKIPPED_DEKU_TREE__BOSS_ROOM__ARENA__GOHMA);
+        if n != p {
+            list.push(format!(
+                "{}SKIPPED_DEKU_TREE__BOSS_ROOM__ARENA__GOHMA",
+                if n { "+" } else { "-" }
+            ));
+        }
+        let n = self
+            .cbits3
+            .contains(flags::ContextBits3::SKIPPED_DEKU_TREE__BOSS_ROOM__ARENA__GOHMA_HEART);
+        let p = old
+            .cbits3
+            .contains(flags::ContextBits3::SKIPPED_DEKU_TREE__BOSS_ROOM__ARENA__GOHMA_HEART);
+        if n != p {
+            list.push(format!(
+                "{}SKIPPED_DEKU_TREE__BOSS_ROOM__ARENA__GOHMA_HEART",
+                if n { "+" } else { "-" }
+            ));
+        }
+        let n = self
+            .cbits3
+            .contains(flags::ContextBits3::SKIPPED_DEKU_TREE__BOSS_ROOM__ARENA__GOHMA_QUICK_KILL);
+        let p = old
+            .cbits3
+            .contains(flags::ContextBits3::SKIPPED_DEKU_TREE__BOSS_ROOM__ARENA__GOHMA_QUICK_KILL);
+        if n != p {
+            list.push(format!(
+                "{}SKIPPED_DEKU_TREE__BOSS_ROOM__ARENA__GOHMA_QUICK_KILL",
+                if n { "+" } else { "-" }
+            ));
+        }
+        let n = self
+            .cbits3
+            .contains(flags::ContextBits3::SKIPPED_DEKU_TREE__COMPASS_ROOM__COMPASS__CHEST);
+        let p = old
+            .cbits3
+            .contains(flags::ContextBits3::SKIPPED_DEKU_TREE__COMPASS_ROOM__COMPASS__CHEST);
+        if n != p {
+            list.push(format!(
+                "{}SKIPPED_DEKU_TREE__COMPASS_ROOM__COMPASS__CHEST",
+                if n { "+" } else { "-" }
+            ));
+        }
+        let n = self
+            .cbits3
+            .contains(flags::ContextBits3::SKIPPED_DEKU_TREE__COMPASS_ROOM__ENTRY__BURN_WEB);
+        let p = old
+            .cbits3
+            .contains(flags::ContextBits3::SKIPPED_DEKU_TREE__COMPASS_ROOM__ENTRY__BURN_WEB);
+        if n != p {
+            list.push(format!(
+                "{}SKIPPED_DEKU_TREE__COMPASS_ROOM__ENTRY__BURN_WEB",
+                if n { "+" } else { "-" }
+            ));
+        }
+        let n = self
+            .cbits3
+            .contains(flags::ContextBits3::SKIPPED_DEKU_TREE__COMPASS_ROOM__LEDGE__CHEST);
+        let p = old
+            .cbits3
+            .contains(flags::ContextBits3::SKIPPED_DEKU_TREE__COMPASS_ROOM__LEDGE__CHEST);
+        if n != p {
+            list.push(format!(
+                "{}SKIPPED_DEKU_TREE__COMPASS_ROOM__LEDGE__CHEST",
+                if n { "+" } else { "-" }
+            ));
+        }
+        let n = self
+            .cbits3
+            .contains(flags::ContextBits3::SKIPPED_DEKU_TREE__COMPASS_ROOM__LEDGE__GS);
+        let p = old
+            .cbits3
+            .contains(flags::ContextBits3::SKIPPED_DEKU_TREE__COMPASS_ROOM__LEDGE__GS);
+        if n != p {
+            list.push(format!(
+                "{}SKIPPED_DEKU_TREE__COMPASS_ROOM__LEDGE__GS",
+                if n { "+" } else { "-" }
+            ));
+        }
+        let n = self
+            .cbits4
+            .contains(flags::ContextBits4::SKIPPED_DEKU_TREE__FLOOR_2__VINES__MAP_CHEST);
+        let p = old
+            .cbits4
+            .contains(flags::ContextBits4::SKIPPED_DEKU_TREE__FLOOR_2__VINES__MAP_CHEST);
+        if n != p {
+            list.push(format!(
+                "{}SKIPPED_DEKU_TREE__FLOOR_2__VINES__MAP_CHEST",
+                if n { "+" } else { "-" }
+            ));
+        }
+        let n = self
+            .cbits4
+            .contains(flags::ContextBits4::SKIPPED_DEKU_TREE__FLOOR_3__DOOR__BREAK_WEB);
+        let p = old
+            .cbits4
+            .contains(flags::ContextBits4::SKIPPED_DEKU_TREE__FLOOR_3__DOOR__BREAK_WEB);
+        if n != p {
+            list.push(format!(
+                "{}SKIPPED_DEKU_TREE__FLOOR_3__DOOR__BREAK_WEB",
+                if n { "+" } else { "-" }
+            ));
+        }
+        let n = self
+            .cbits4
+            .contains(flags::ContextBits4::SKIPPED_DEKU_TREE__LOBBY__CENTER__DEKU_BABA_NUTS);
+        let p = old
+            .cbits4
+            .contains(flags::ContextBits4::SKIPPED_DEKU_TREE__LOBBY__CENTER__DEKU_BABA_NUTS);
+        if n != p {
+            list.push(format!(
+                "{}SKIPPED_DEKU_TREE__LOBBY__CENTER__DEKU_BABA_NUTS",
+                if n { "+" } else { "-" }
+            ));
+        }
+        let n = self
+            .cbits4
+            .contains(flags::ContextBits4::SKIPPED_DEKU_TREE__LOBBY__CENTER__DEKU_BABA_STICKS);
+        let p = old
+            .cbits4
+            .contains(flags::ContextBits4::SKIPPED_DEKU_TREE__LOBBY__CENTER__DEKU_BABA_STICKS);
+        if n != p {
+            list.push(format!(
+                "{}SKIPPED_DEKU_TREE__LOBBY__CENTER__DEKU_BABA_STICKS",
+                if n { "+" } else { "-" }
+            ));
+        }
+        let n = self
+            .cbits4
+            .contains(flags::ContextBits4::SKIPPED_DEKU_TREE__LOBBY__CENTER__WEB);
+        let p = old
+            .cbits4
+            .contains(flags::ContextBits4::SKIPPED_DEKU_TREE__LOBBY__CENTER__WEB);
+        if n != p {
+            list.push(format!(
+                "{}SKIPPED_DEKU_TREE__LOBBY__CENTER__WEB",
+                if n { "+" } else { "-" }
+            ));
+        }
+        let n = self
+            .cbits4
+            .contains(flags::ContextBits4::SKIPPED_DEKU_TREE__SCRUB_ROOM__ENTRY__SCRUB);
+        let p = old
+            .cbits4
+            .contains(flags::ContextBits4::SKIPPED_DEKU_TREE__SCRUB_ROOM__ENTRY__SCRUB);
+        if n != p {
+            list.push(format!(
+                "{}SKIPPED_DEKU_TREE__SCRUB_ROOM__ENTRY__SCRUB",
+                if n { "+" } else { "-" }
+            ));
+        }
+        let n = self
+            .cbits4
+            .contains(flags::ContextBits4::SKIPPED_DEKU_TREE__SKULL_ROOM__ENTRY__GS);
+        let p = old
+            .cbits4
+            .contains(flags::ContextBits4::SKIPPED_DEKU_TREE__SKULL_ROOM__ENTRY__GS);
+        if n != p {
+            list.push(format!(
+                "{}SKIPPED_DEKU_TREE__SKULL_ROOM__ENTRY__GS",
+                if n { "+" } else { "-" }
+            ));
+        }
+        let n = self
+            .cbits4
+            .contains(flags::ContextBits4::SKIPPED_DEKU_TREE__SLINGSHOT_ROOM__SLINGSHOT__CHEST);
+        let p = old
+            .cbits4
+            .contains(flags::ContextBits4::SKIPPED_DEKU_TREE__SLINGSHOT_ROOM__SLINGSHOT__CHEST);
+        if n != p {
+            list.push(format!(
+                "{}SKIPPED_DEKU_TREE__SLINGSHOT_ROOM__SLINGSHOT__CHEST",
+                if n { "+" } else { "-" }
+            ));
+        }
+        let n = self
+            .cbits4
+            .contains(flags::ContextBits4::SKIPPED_DEKU_TREE__SLINGSHOT_UPPER__LEDGE__CHEST);
+        let p = old
+            .cbits4
+            .contains(flags::ContextBits4::SKIPPED_DEKU_TREE__SLINGSHOT_UPPER__LEDGE__CHEST);
+        if n != p {
+            list.push(format!(
+                "{}SKIPPED_DEKU_TREE__SLINGSHOT_UPPER__LEDGE__CHEST",
+                if n { "+" } else { "-" }
+            ));
+        }
+        let n = self
+            .cbits4
+            .contains(flags::ContextBits4::SKIPPED_KF__BABA_CORRIDOR__DEKU_BABAS__NUTS);
+        let p = old
+            .cbits4
+            .contains(flags::ContextBits4::SKIPPED_KF__BABA_CORRIDOR__DEKU_BABAS__NUTS);
+        if n != p {
+            list.push(format!(
+                "{}SKIPPED_KF__BABA_CORRIDOR__DEKU_BABAS__NUTS",
+                if n { "+" } else { "-" }
+            ));
+        }
+        let n = self
+            .cbits4
+            .contains(flags::ContextBits4::SKIPPED_KF__BABA_CORRIDOR__DEKU_BABAS__STICKS);
+        let p = old
+            .cbits4
+            .contains(flags::ContextBits4::SKIPPED_KF__BABA_CORRIDOR__DEKU_BABAS__STICKS);
+        if n != p {
+            list.push(format!(
+                "{}SKIPPED_KF__BABA_CORRIDOR__DEKU_BABAS__STICKS",
+                if n { "+" } else { "-" }
+            ));
+        }
+        let n = self
+            .cbits4
+            .contains(flags::ContextBits4::SKIPPED_KF__BOULDER_MAZE__REWARD__CHEST);
+        let p = old
+            .cbits4
+            .contains(flags::ContextBits4::SKIPPED_KF__BOULDER_MAZE__REWARD__CHEST);
+        if n != p {
+            list.push(format!(
+                "{}SKIPPED_KF__BOULDER_MAZE__REWARD__CHEST",
+                if n { "+" } else { "-" }
+            ));
+        }
+        let n = self
+            .cbits4
+            .contains(flags::ContextBits4::SKIPPED_KF__KOKIRI_VILLAGE__MIDOS_GUARDPOST__SHOW_MIDO);
+        let p = old
+            .cbits4
+            .contains(flags::ContextBits4::SKIPPED_KF__KOKIRI_VILLAGE__MIDOS_GUARDPOST__SHOW_MIDO);
+        if n != p {
+            list.push(format!(
+                "{}SKIPPED_KF__KOKIRI_VILLAGE__MIDOS_GUARDPOST__SHOW_MIDO",
+                if n { "+" } else { "-" }
+            ));
+        }
+        let n = self
+            .cbits4
+            .contains(flags::ContextBits4::SKIPPED_KF__MIDOS_HOUSE__ENTRY__BOTTOM_LEFT_CHEST);
+        let p = old
+            .cbits4
+            .contains(flags::ContextBits4::SKIPPED_KF__MIDOS_HOUSE__ENTRY__BOTTOM_LEFT_CHEST);
+        if n != p {
+            list.push(format!(
+                "{}SKIPPED_KF__MIDOS_HOUSE__ENTRY__BOTTOM_LEFT_CHEST",
+                if n { "+" } else { "-" }
+            ));
+        }
+        let n = self
+            .cbits4
+            .contains(flags::ContextBits4::SKIPPED_KF__MIDOS_HOUSE__ENTRY__BOTTOM_RIGHT_CHEST);
+        let p = old
+            .cbits4
+            .contains(flags::ContextBits4::SKIPPED_KF__MIDOS_HOUSE__ENTRY__BOTTOM_RIGHT_CHEST);
+        if n != p {
+            list.push(format!(
+                "{}SKIPPED_KF__MIDOS_HOUSE__ENTRY__BOTTOM_RIGHT_CHEST",
+                if n { "+" } else { "-" }
+            ));
+        }
+        let n = self
+            .cbits4
+            .contains(flags::ContextBits4::SKIPPED_KF__MIDOS_HOUSE__ENTRY__TOP_LEFT_CHEST);
+        let p = old
+            .cbits4
+            .contains(flags::ContextBits4::SKIPPED_KF__MIDOS_HOUSE__ENTRY__TOP_LEFT_CHEST);
+        if n != p {
+            list.push(format!(
+                "{}SKIPPED_KF__MIDOS_HOUSE__ENTRY__TOP_LEFT_CHEST",
+                if n { "+" } else { "-" }
+            ));
+        }
+        let n = self
+            .cbits4
+            .contains(flags::ContextBits4::SKIPPED_KF__MIDOS_HOUSE__ENTRY__TOP_RIGHT_CHEST);
+        let p = old
+            .cbits4
+            .contains(flags::ContextBits4::SKIPPED_KF__MIDOS_HOUSE__ENTRY__TOP_RIGHT_CHEST);
+        if n != p {
+            list.push(format!(
+                "{}SKIPPED_KF__MIDOS_HOUSE__ENTRY__TOP_RIGHT_CHEST",
+                if n { "+" } else { "-" }
+            ));
+        }
+        let n = self
+            .cbits4
+            .contains(flags::ContextBits4::SKIPPED_KF__OUTSIDE_DEKU_TREE__LEFT__GOSSIP_STONE);
+        let p = old
+            .cbits4
+            .contains(flags::ContextBits4::SKIPPED_KF__OUTSIDE_DEKU_TREE__LEFT__GOSSIP_STONE);
+        if n != p {
+            list.push(format!(
+                "{}SKIPPED_KF__OUTSIDE_DEKU_TREE__LEFT__GOSSIP_STONE",
+                if n { "+" } else { "-" }
+            ));
+        }
+        let n = self
+            .cbits4
+            .contains(flags::ContextBits4::SKIPPED_KF__OUTSIDE_DEKU_TREE__RIGHT__GOSSIP_STONE);
+        let p = old
+            .cbits4
+            .contains(flags::ContextBits4::SKIPPED_KF__OUTSIDE_DEKU_TREE__RIGHT__GOSSIP_STONE);
+        if n != p {
+            list.push(format!(
+                "{}SKIPPED_KF__OUTSIDE_DEKU_TREE__RIGHT__GOSSIP_STONE",
+                if n { "+" } else { "-" }
+            ));
+        }
+        let n = self
+            .cbits4
+            .contains(flags::ContextBits4::SKIPPED_KF__SHOP__ENTRY__BLUE_RUPEE);
+        let p = old
+            .cbits4
+            .contains(flags::ContextBits4::SKIPPED_KF__SHOP__ENTRY__BLUE_RUPEE);
+        if n != p {
+            list.push(format!(
+                "{}SKIPPED_KF__SHOP__ENTRY__BLUE_RUPEE",
+                if n { "+" } else { "-" }
+            ));
+        }
+        let n = self
+            .cbits4
+            .contains(flags::ContextBits4::SKIPPED_KF__SHOP__ENTRY__ITEM_1);
+        let p = old
+            .cbits4
+            .contains(flags::ContextBits4::SKIPPED_KF__SHOP__ENTRY__ITEM_1);
+        if n != p {
+            list.push(format!(
+                "{}SKIPPED_KF__SHOP__ENTRY__ITEM_1",
+                if n { "+" } else { "-" }
+            ));
+        }
+        let n = self
+            .cbits4
+            .contains(flags::ContextBits4::SKIPPED_KF__SHOP__ENTRY__ITEM_2);
+        let p = old
+            .cbits4
+            .contains(flags::ContextBits4::SKIPPED_KF__SHOP__ENTRY__ITEM_2);
+        if n != p {
+            list.push(format!(
+                "{}SKIPPED_KF__SHOP__ENTRY__ITEM_2",
+                if n { "+" } else { "-" }
+            ));
+        }
+        let n = self
+            .cbits4
+            .contains(flags::ContextBits4::SKIPPED_KF__SHOP__ENTRY__ITEM_3);
+        let p = old
+            .cbits4
+            .contains(flags::ContextBits4::SKIPPED_KF__SHOP__ENTRY__ITEM_3);
+        if n != p {
+            list.push(format!(
+                "{}SKIPPED_KF__SHOP__ENTRY__ITEM_3",
+                if n { "+" } else { "-" }
+            ));
+        }
+        let n = self
+            .cbits4
+            .contains(flags::ContextBits4::SKIPPED_KF__SHOP__ENTRY__ITEM_4);
+        let p = old
+            .cbits4
+            .contains(flags::ContextBits4::SKIPPED_KF__SHOP__ENTRY__ITEM_4);
+        if n != p {
+            list.push(format!(
+                "{}SKIPPED_KF__SHOP__ENTRY__ITEM_4",
+                if n { "+" } else { "-" }
+            ));
+        }
+        let n = self
+            .cbits4
+            .contains(flags::ContextBits4::SKIPPED_KF__SHOP__ENTRY__ITEM_5);
+        let p = old
+            .cbits4
+            .contains(flags::ContextBits4::SKIPPED_KF__SHOP__ENTRY__ITEM_5);
+        if n != p {
+            list.push(format!(
+                "{}SKIPPED_KF__SHOP__ENTRY__ITEM_5",
+                if n { "+" } else { "-" }
+            ));
+        }
+        let n = self
+            .cbits4
+            .contains(flags::ContextBits4::SKIPPED_KF__SHOP__ENTRY__ITEM_6);
+        let p = old
+            .cbits4
+            .contains(flags::ContextBits4::SKIPPED_KF__SHOP__ENTRY__ITEM_6);
+        if n != p {
+            list.push(format!(
+                "{}SKIPPED_KF__SHOP__ENTRY__ITEM_6",
+                if n { "+" } else { "-" }
+            ));
+        }
+        let n = self
+            .cbits4
+            .contains(flags::ContextBits4::SKIPPED_KF__SHOP__ENTRY__ITEM_7);
+        let p = old
+            .cbits4
+            .contains(flags::ContextBits4::SKIPPED_KF__SHOP__ENTRY__ITEM_7);
+        if n != p {
+            list.push(format!(
+                "{}SKIPPED_KF__SHOP__ENTRY__ITEM_7",
+                if n { "+" } else { "-" }
+            ));
+        }
+        let n = self
+            .cbits4
+            .contains(flags::ContextBits4::SKIPPED_KF__SHOP__ENTRY__ITEM_8);
+        let p = old
+            .cbits4
+            .contains(flags::ContextBits4::SKIPPED_KF__SHOP__ENTRY__ITEM_8);
+        if n != p {
+            list.push(format!(
+                "{}SKIPPED_KF__SHOP__ENTRY__ITEM_8",
+                if n { "+" } else { "-" }
+            ));
+        }
+        let n = self
+            .cbits4
+            .contains(flags::ContextBits4::SKIPPED_KAK__SPIDER_HOUSE__ENTRY__SKULLS_10);
+        let p = old
+            .cbits4
+            .contains(flags::ContextBits4::SKIPPED_KAK__SPIDER_HOUSE__ENTRY__SKULLS_10);
+        if n != p {
+            list.push(format!(
+                "{}SKIPPED_KAK__SPIDER_HOUSE__ENTRY__SKULLS_10",
+                if n { "+" } else { "-" }
+            ));
+        }
+        if list.is_empty() {
+            String::from("NONE")
+        } else {
+            list.join("\n")
+        }
     }
 }
 
