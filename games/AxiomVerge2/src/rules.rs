@@ -144,6 +144,10 @@ pub fn access_can_recall(ctx: &Context) -> bool {
     // $can_recall
     helper__can_recall!(ctx)
 }
+pub fn access_charge(ctx: &Context) -> bool {
+    // $charge
+    helper__charge!(ctx)
+}
 pub fn access_climb(ctx: &Context) -> bool {
     // $climb
     helper__climb!(ctx)
@@ -1141,6 +1145,10 @@ pub fn access_shockwave_and_not_defeat_mus_a_m20(ctx: &Context) -> bool {
     // $shockwave and not Defeat_MUS_A_M20
     (helper__shockwave!(ctx) && !ctx.has(Item::Defeat_MUS_A_M20))
 }
+pub fn access_spin(ctx: &Context) -> bool {
+    // $spin
+    helper__spin!(ctx)
+}
 pub fn access_station_power(ctx: &Context) -> bool {
     // Station_Power
     ctx.has(Item::Station_Power)
@@ -1152,6 +1160,18 @@ pub fn access_switch_36_11(ctx: &Context) -> bool {
 pub fn access_switch_40_12(ctx: &Context) -> bool {
     // Switch_40_12
     ctx.has(Item::Switch_40_12)
+}
+pub fn access_uhrum_west_entrance_gate(ctx: &Context) -> bool {
+    // Uhrum_West_Entrance_Gate
+    ctx.has(Item::Uhrum_West_Entrance_Gate)
+}
+pub fn access_uhrum_west_entrance_gate_and_hover(ctx: &Context) -> bool {
+    // Uhrum_West_Entrance_Gate and $hover
+    (ctx.has(Item::Uhrum_West_Entrance_Gate) && helper__hover!(ctx))
+}
+pub fn access_uhrum_west_entrance_upper_wall(ctx: &Context) -> bool {
+    // Uhrum_West_Entrance_Upper_Wall
+    ctx.has(Item::Uhrum_West_Entrance_Upper_Wall)
 }
 pub fn access_underwater_movement(ctx: &Context) -> bool {
     // Underwater_Movement

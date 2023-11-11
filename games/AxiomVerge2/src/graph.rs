@@ -742,6 +742,7 @@ pub fn get_area(spot: SpotId) -> AreaId {
         | SpotId::Giguna__Breachable_Wall__Above_West_Catwalk
         | SpotId::Giguna__Breachable_Wall__Above_Middle_Catwalk
         | SpotId::Giguna__Breachable_Wall__Wall_Interior => AreaId::Giguna__Breachable_Wall,
+        SpotId::Giguna__Separator__East_25 => AreaId::Giguna__Separator,
         SpotId::Glacier__Dock_Elevator__Elevator | SpotId::Glacier__Dock_Elevator__Connector => {
             AreaId::Glacier__Dock_Elevator
         }
@@ -1012,8 +1013,23 @@ pub fn get_area(spot: SpotId) -> AreaId {
         | SpotId::Uhrum__West_Entrance__Hidden_Passage_West
         | SpotId::Uhrum__West_Entrance__Hidden_Passage_Entry
         | SpotId::Uhrum__West_Entrance__West_25
+        | SpotId::Uhrum__West_Entrance__Top_West_Ledge
+        | SpotId::Uhrum__West_Entrance__Middle_West_Ledge
+        | SpotId::Uhrum__West_Entrance__Southeast_Tree
+        | SpotId::Uhrum__West_Entrance__South_Platform
         | SpotId::Uhrum__West_Entrance__Save_Point
-        | SpotId::Uhrum__West_Entrance__Portal_Stand => AreaId::Uhrum__West_Entrance,
+        | SpotId::Uhrum__West_Entrance__Portal_Stand
+        | SpotId::Uhrum__West_Entrance__Clear_Passage
+        | SpotId::Uhrum__West_Entrance__West_of_Gate
+        | SpotId::Uhrum__West_Entrance__Inner_Dais
+        | SpotId::Uhrum__West_Entrance__Portal_Exit
+        | SpotId::Uhrum__West_Entrance__Gate_Switch
+        | SpotId::Uhrum__West_Entrance__Upper_Wall_West
+        | SpotId::Uhrum__West_Entrance__Upper_Wall_East
+        | SpotId::Uhrum__West_Entrance__Upper_Fork
+        | SpotId::Uhrum__West_Entrance__East_26
+        | SpotId::Uhrum__West_Entrance__Lower_Wall_West => AreaId::Uhrum__West_Entrance,
+        SpotId::Uhrum__Siege_Corridor__West_26 => AreaId::Uhrum__Siege_Corridor,
     }
 }
 pub fn get_region(spot: SpotId) -> RegionId {
@@ -1734,6 +1750,7 @@ pub fn get_region(spot: SpotId) -> RegionId {
         | SpotId::Giguna__Breachable_Wall__Above_West_Catwalk
         | SpotId::Giguna__Breachable_Wall__Above_Middle_Catwalk
         | SpotId::Giguna__Breachable_Wall__Wall_Interior => RegionId::Giguna,
+        SpotId::Giguna__Separator__East_25 => RegionId::Giguna,
         SpotId::Glacier__Dock_Elevator__Elevator | SpotId::Glacier__Dock_Elevator__Connector => {
             RegionId::Glacier
         }
@@ -1996,8 +2013,23 @@ pub fn get_region(spot: SpotId) -> RegionId {
         | SpotId::Uhrum__West_Entrance__Hidden_Passage_West
         | SpotId::Uhrum__West_Entrance__Hidden_Passage_Entry
         | SpotId::Uhrum__West_Entrance__West_25
+        | SpotId::Uhrum__West_Entrance__Top_West_Ledge
+        | SpotId::Uhrum__West_Entrance__Middle_West_Ledge
+        | SpotId::Uhrum__West_Entrance__Southeast_Tree
+        | SpotId::Uhrum__West_Entrance__South_Platform
         | SpotId::Uhrum__West_Entrance__Save_Point
-        | SpotId::Uhrum__West_Entrance__Portal_Stand => RegionId::Uhrum,
+        | SpotId::Uhrum__West_Entrance__Portal_Stand
+        | SpotId::Uhrum__West_Entrance__Clear_Passage
+        | SpotId::Uhrum__West_Entrance__West_of_Gate
+        | SpotId::Uhrum__West_Entrance__Inner_Dais
+        | SpotId::Uhrum__West_Entrance__Portal_Exit
+        | SpotId::Uhrum__West_Entrance__Gate_Switch
+        | SpotId::Uhrum__West_Entrance__Upper_Wall_West
+        | SpotId::Uhrum__West_Entrance__Upper_Wall_East
+        | SpotId::Uhrum__West_Entrance__Upper_Fork
+        | SpotId::Uhrum__West_Entrance__East_26
+        | SpotId::Uhrum__West_Entrance__Lower_Wall_West => RegionId::Uhrum,
+        SpotId::Uhrum__Siege_Corridor__West_26 => RegionId::Uhrum,
     }
 }
 
@@ -2328,6 +2360,22 @@ impl world::Accessible for Location {
             }
             LocationId::Menu__Upgrade_Menu__Physiology__Mist_Upgrade => {
                 rules::access_nanite_mist(&ctx)
+            }
+            LocationId::Uhrum__West_Entrance__Gate_Switch__Open_Gate => {
+                rules::access_can_damage(&ctx)
+            }
+            LocationId::Uhrum__West_Entrance__Inner_Dais__Item => true,
+            LocationId::Uhrum__West_Entrance__Upper_Wall_East__Charge_through_Wall => {
+                rules::access_charge(&ctx)
+            }
+            LocationId::Uhrum__West_Entrance__Upper_Wall_East__Mist_through_Wall => {
+                rules::access_mist2(&ctx)
+            }
+            LocationId::Uhrum__West_Entrance__Upper_Wall_East__Spin_through_Wall => {
+                rules::access_spin(&ctx)
+            }
+            LocationId::Uhrum__West_Entrance__Upper_Wall_West__Mist_through_Wall => {
+                rules::access_mist2(&ctx)
             }
         }
     }
@@ -3178,6 +3226,45 @@ impl world::Accessible for Exit {
             ExitId::Menu__Upgrade_Menu__Physiology__ex__Combat_1 => true,
             ExitId::Menu__Upgrade_Menu__Physiology__ex__Drone_1 => rules::access_remote_drone(&ctx),
             ExitId::Menu__Upgrade_Menu__Physiology__ex__Infection_1 => rules::access_infect(&ctx),
+            ExitId::Uhrum__West_Entrance__Clear_Passage__ex__Portal_Stand_1 => rules::access_grab_and_climb(&ctx),
+            ExitId::Uhrum__West_Entrance__Clear_Passage__ex__Portal_Stand_2 => rules::access_hook(&ctx),
+            ExitId::Uhrum__West_Entrance__East_26__ex__Siege_Corridor__West_26_1 => true,
+            ExitId::Uhrum__West_Entrance__Hidden_Passage_West__ex__Irikar__Lamassu__Hidden_Passage_East_1 => true,
+            ExitId::Uhrum__West_Entrance__Inner_Dais__ex__Top_West_Ledge_1 => rules::access_uhrum_west_entrance_gate_and_hover(&ctx),
+            ExitId::Uhrum__West_Entrance__Inner_Dais__ex__West_of_Gate_1 => rules::access_uhrum_west_entrance_gate(&ctx),
+            ExitId::Uhrum__West_Entrance__Middle_West_Ledge__ex__Portal_Stand_1 => rules::access_grab_and_climb(&ctx),
+            ExitId::Uhrum__West_Entrance__Middle_West_Ledge__ex__Portal_Stand_2 => rules::access_hook(&ctx),
+            ExitId::Uhrum__West_Entrance__Portal_Stand__ex__Hidden_Passage_Entry_1 => rules::access_hook(&ctx),
+            ExitId::Uhrum__West_Entrance__Portal_Stand__ex__West_of_Gate_1 => rules::access_grab(&ctx),
+            ExitId::Uhrum__West_Entrance__Portal_Stand__ex__West_of_Gate_2 => rules::access_hook(&ctx),
+            ExitId::Uhrum__West_Entrance__Save_Point__ex__Lower_Wall_West_1 => rules::access_grab(&ctx),
+            ExitId::Uhrum__West_Entrance__Save_Point__ex__Lower_Wall_West_2 => rules::access_hook(&ctx),
+            ExitId::Uhrum__West_Entrance__Save_Point__ex__South_Platform_1 => rules::access_hook(&ctx),
+            ExitId::Uhrum__West_Entrance__South_Platform__ex__Middle_West_Ledge_1 => rules::access_hook(&ctx),
+            ExitId::Uhrum__West_Entrance__South_Platform__ex__West_27_1 => rules::access_hover(&ctx),
+            ExitId::Uhrum__West_Entrance__Southeast_Tree__ex__South_Platform_1 => rules::access_hook(&ctx),
+            ExitId::Uhrum__West_Entrance__Top_West_Ledge__ex__Hidden_Passage_Entry_1 => rules::access_mode__drone(&ctx),
+            ExitId::Uhrum__West_Entrance__Top_West_Ledge__ex__West_of_Gate_1 => rules::access_hover(&ctx),
+            ExitId::Uhrum__West_Entrance__Upper_Fork__ex__Upper_Wall_East_1 => rules::access_hook(&ctx),
+            ExitId::Uhrum__West_Entrance__Upper_Fork__ex__Upper_Wall_East_2 => rules::access_mist2(&ctx),
+            ExitId::Uhrum__West_Entrance__Upper_Wall_East__Charge_through_Wall => rules::access_charge(&ctx),
+            ExitId::Uhrum__West_Entrance__Upper_Wall_East__ex__Upper_Wall_West_1 => rules::access_uhrum_west_entrance_upper_wall(&ctx),
+            ExitId::Uhrum__West_Entrance__Upper_Wall_East__Mist_through_Wall => rules::access_mist2(&ctx),
+            ExitId::Uhrum__West_Entrance__Upper_Wall_East__Spin_through_Wall => rules::access_spin(&ctx),
+            ExitId::Uhrum__West_Entrance__Upper_Wall_West__ex__Portal_Exit_1 => rules::access_grab(&ctx),
+            ExitId::Uhrum__West_Entrance__Upper_Wall_West__ex__Portal_Exit_2 => rules::access_hook(&ctx),
+            ExitId::Uhrum__West_Entrance__Upper_Wall_West__ex__Upper_Wall_East_1 => rules::access_uhrum_west_entrance_upper_wall(&ctx),
+            ExitId::Uhrum__West_Entrance__Upper_Wall_West__Mist_through_Wall => rules::access_mist2(&ctx),
+            ExitId::Uhrum__West_Entrance__West_25__ex__Giguna__Separator__East_25_1 => true,
+            ExitId::Uhrum__West_Entrance__West_26__ex__Hidden_Passage_Entry_1 => rules::access_hook(&ctx),
+            ExitId::Uhrum__West_Entrance__West_26__ex__Irikar__Lamassu__East_26_1 => true,
+            ExitId::Uhrum__West_Entrance__West_26__ex__Portal_Stand_1 => rules::access_grab_and_climb(&ctx),
+            ExitId::Uhrum__West_Entrance__West_26__ex__Portal_Stand_2 => rules::access_hook(&ctx),
+            ExitId::Uhrum__West_Entrance__West_27__ex__Irikar__Lamassu__East_27_1 => true,
+            ExitId::Uhrum__West_Entrance__West_27__ex__South_Platform_1 => rules::access_hover(&ctx),
+            ExitId::Uhrum__West_Entrance__West_of_Gate__ex__Inner_Dais_1 => rules::access_uhrum_west_entrance_gate(&ctx),
+            ExitId::Uhrum__West_Entrance__West_of_Gate__ex__Top_West_Ledge_1 => rules::access_hover(&ctx),
+            ExitId::Uhrum__West_Entrance__West_of_Gate__ex__Top_West_Ledge_2 => rules::access_hook(&ctx),
         }
     }
     fn time(&self) -> u32 {
@@ -3502,6 +3589,11 @@ impl world::Exit for Exit {
             ExitId::Menu__Upgrade_Menu__Infection__ex__Combat_1 => true,
             ExitId::Menu__Upgrade_Menu__Infection__ex__Physiology_1 => true,
             ExitId::Menu__Upgrade_Menu__Physiology__ex__Combat_1 => true,
+            ExitId::Uhrum__West_Entrance__East_26__ex__Siege_Corridor__West_26_1 => true,
+            ExitId::Uhrum__West_Entrance__Hidden_Passage_West__ex__Irikar__Lamassu__Hidden_Passage_East_1 => true,
+            ExitId::Uhrum__West_Entrance__West_25__ex__Giguna__Separator__East_25_1 => true,
+            ExitId::Uhrum__West_Entrance__West_26__ex__Irikar__Lamassu__East_26_1 => true,
+            ExitId::Uhrum__West_Entrance__West_27__ex__Irikar__Lamassu__East_27_1 => true,
             _ => false,
         }
     }
@@ -3736,6 +3828,7 @@ impl world::Accessible for Action {
                     rules::access_mode__drone_and_breach_sight(&ctx)
                 }
                 ActionId::Irikar_Breach__Exit_Corridor__Portal_Stand__Enter_Portal => true,
+                ActionId::Uhrum__West_Entrance__Save_Point__Save => true,
             }
     }
     fn time(&self) -> u32 {
@@ -3837,6 +3930,7 @@ impl world::Action for Action {
             ActionId::Irikar__Sight_Room__Portal__Enter_Portal => rules::action_breach_portal_save_update(ctx),
             ActionId::Irikar__Basement_Portal__Moving_Platform_Start__Activate_Platform => rules::action_irikar__basement_portal__moving_platform_start__activate_platform__do(ctx),
             ActionId::Irikar__Basement_Portal__Portal_Stand__Enter_Portal => rules::action_breach_portal_save_update(ctx),
+            ActionId::Uhrum__West_Entrance__Save_Point__Save => rules::action_save(ctx),
         };
         let dest = self.dest(ctx);
         if dest != SpotId::None {
@@ -4042,7 +4136,7 @@ pub struct Spot {
     pub actions: Range<usize>,
 }
 
-static RAW_SPOTS: [SpotId; 975] = [
+static RAW_SPOTS: [SpotId; 991] = [
     SpotId::None,
     SpotId::Amagi__Cave_Behind_Waterfall__Bottom,
     SpotId::Amagi__Cave_Behind_Waterfall__Middle,
@@ -4613,6 +4707,7 @@ static RAW_SPOTS: [SpotId; 975] = [
     SpotId::Giguna__Ruins_West__Save_Point,
     SpotId::Giguna__Ruins_West__Upper_Ledge,
     SpotId::Giguna__Ruins_West__West_7,
+    SpotId::Giguna__Separator__East_25,
     SpotId::Giguna__Vertical_Interchange__Dead_end,
     SpotId::Giguna__Vertical_Interchange__Dead_end_Ledge,
     SpotId::Giguna__Vertical_Interchange__East_20,
@@ -5011,13 +5106,28 @@ static RAW_SPOTS: [SpotId; 975] = [
     SpotId::Menu__Upgrade_Menu__Drone,
     SpotId::Menu__Upgrade_Menu__Infection,
     SpotId::Menu__Upgrade_Menu__Physiology,
+    SpotId::Uhrum__Siege_Corridor__West_26,
+    SpotId::Uhrum__West_Entrance__Clear_Passage,
+    SpotId::Uhrum__West_Entrance__East_26,
+    SpotId::Uhrum__West_Entrance__Gate_Switch,
     SpotId::Uhrum__West_Entrance__Hidden_Passage_Entry,
     SpotId::Uhrum__West_Entrance__Hidden_Passage_West,
+    SpotId::Uhrum__West_Entrance__Inner_Dais,
+    SpotId::Uhrum__West_Entrance__Lower_Wall_West,
+    SpotId::Uhrum__West_Entrance__Middle_West_Ledge,
+    SpotId::Uhrum__West_Entrance__Portal_Exit,
     SpotId::Uhrum__West_Entrance__Portal_Stand,
     SpotId::Uhrum__West_Entrance__Save_Point,
+    SpotId::Uhrum__West_Entrance__South_Platform,
+    SpotId::Uhrum__West_Entrance__Southeast_Tree,
+    SpotId::Uhrum__West_Entrance__Top_West_Ledge,
+    SpotId::Uhrum__West_Entrance__Upper_Fork,
+    SpotId::Uhrum__West_Entrance__Upper_Wall_East,
+    SpotId::Uhrum__West_Entrance__Upper_Wall_West,
     SpotId::Uhrum__West_Entrance__West_25,
     SpotId::Uhrum__West_Entrance__West_26,
     SpotId::Uhrum__West_Entrance__West_27,
+    SpotId::Uhrum__West_Entrance__West_of_Gate,
 ];
 
 lazy_static! {
@@ -5287,6 +5397,10 @@ lazy_static! {
             start: SpotId::Giguna__Ruins_West__East_7.into_usize(),
             end: SpotId::Giguna__Ruins_West__West_7.into_usize() + 1,
         },
+        AreaId::Giguna__Separator => Range {
+            start: SpotId::Giguna__Separator__East_25.into_usize(),
+            end: SpotId::Giguna__Separator__East_25.into_usize() + 1,
+        },
         AreaId::Giguna__Vertical_Interchange => Range {
             start: SpotId::Giguna__Vertical_Interchange__Dead_end.into_usize(),
             end: SpotId::Giguna__Vertical_Interchange__West_19.into_usize() + 1,
@@ -5471,9 +5585,13 @@ lazy_static! {
             start: SpotId::Menu__Upgrade_Menu__Combat.into_usize(),
             end: SpotId::Menu__Upgrade_Menu__Physiology.into_usize() + 1,
         },
+        AreaId::Uhrum__Siege_Corridor => Range {
+            start: SpotId::Uhrum__Siege_Corridor__West_26.into_usize(),
+            end: SpotId::Uhrum__Siege_Corridor__West_26.into_usize() + 1,
+        },
         AreaId::Uhrum__West_Entrance => Range {
-            start: SpotId::Uhrum__West_Entrance__Hidden_Passage_Entry.into_usize(),
-            end: SpotId::Uhrum__West_Entrance__West_27.into_usize() + 1,
+            start: SpotId::Uhrum__West_Entrance__Clear_Passage.into_usize(),
+            end: SpotId::Uhrum__West_Entrance__West_of_Gate.into_usize() + 1,
         },
     };
 }
@@ -5504,7 +5622,7 @@ impl world::World for World {
     type Exit = Exit;
     type Action = Action;
     type Warp = Warp;
-    const NUM_LOCATIONS: u32 = 168;
+    const NUM_LOCATIONS: u32 = 174;
 
     fn objective_name(&self) -> String {
         format!("{}", self.objective)
@@ -5668,6 +5786,12 @@ impl world::World for World {
             CanonId::Irikar_Gudam => vec![
                 LocationId::Irikar__Boss_Room__Bulls_Feet__Defeat_Gudam,
                 LocationId::Irikar__Boss_Room__Bulls_Feet__Shockwave_Gudam,
+            ],
+            CanonId::Uhrum_West_Entrance_Upper_Wall => vec![
+                LocationId::Uhrum__West_Entrance__Upper_Wall_West__Mist_through_Wall,
+                LocationId::Uhrum__West_Entrance__Upper_Wall_East__Charge_through_Wall,
+                LocationId::Uhrum__West_Entrance__Upper_Wall_East__Spin_through_Wall,
+                LocationId::Uhrum__West_Entrance__Upper_Wall_East__Mist_through_Wall,
             ],
         }
     }
@@ -5938,6 +6062,16 @@ impl world::World for World {
                 LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_1,
                 LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_2,
                 LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_3,
+            ],
+            Item::Udusan => vec![LocationId::Uhrum__West_Entrance__Inner_Dais__Item],
+            Item::Uhrum_West_Entrance_Gate => {
+                vec![LocationId::Uhrum__West_Entrance__Gate_Switch__Open_Gate]
+            }
+            Item::Uhrum_West_Entrance_Upper_Wall => vec![
+                LocationId::Uhrum__West_Entrance__Upper_Wall_West__Mist_through_Wall,
+                LocationId::Uhrum__West_Entrance__Upper_Wall_East__Charge_through_Wall,
+                LocationId::Uhrum__West_Entrance__Upper_Wall_East__Spin_through_Wall,
+                LocationId::Uhrum__West_Entrance__Upper_Wall_East__Mist_through_Wall,
             ],
             _ => Vec::new(),
         }
@@ -6318,6 +6452,20 @@ impl world::World for World {
             | LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_3 => {
                 SpotId::Menu__Upgrade_Menu__Drone
             }
+            LocationId::Uhrum__West_Entrance__Inner_Dais__Item => {
+                SpotId::Uhrum__West_Entrance__Inner_Dais
+            }
+            LocationId::Uhrum__West_Entrance__Gate_Switch__Open_Gate => {
+                SpotId::Uhrum__West_Entrance__Gate_Switch
+            }
+            LocationId::Uhrum__West_Entrance__Upper_Wall_West__Mist_through_Wall => {
+                SpotId::Uhrum__West_Entrance__Upper_Wall_West
+            }
+            LocationId::Uhrum__West_Entrance__Upper_Wall_East__Charge_through_Wall
+            | LocationId::Uhrum__West_Entrance__Upper_Wall_East__Mist_through_Wall
+            | LocationId::Uhrum__West_Entrance__Upper_Wall_East__Spin_through_Wall => {
+                SpotId::Uhrum__West_Entrance__Upper_Wall_East
+            }
         }
     }
 
@@ -6510,6 +6658,9 @@ impl world::World for World {
             }
             ActionId::Irikar__Basement_Portal__Portal_Stand__Enter_Portal => {
                 SpotId::Irikar__Basement_Portal__Portal_Stand
+            }
+            ActionId::Uhrum__West_Entrance__Save_Point__Save => {
+                SpotId::Uhrum__West_Entrance__Save_Point
             }
             _ => SpotId::None,
         }
@@ -7104,6 +7255,25 @@ impl world::World for World {
             ExitId::Menu__Upgrade_Menu__Combat__ex__Physiology_1 | ExitId:: Menu__Upgrade_Menu__Combat__ex__Infection_1 | ExitId:: Menu__Upgrade_Menu__Combat__ex__Drone_1 => SpotId::Menu__Upgrade_Menu__Combat,
             ExitId::Menu__Upgrade_Menu__Infection__ex__Physiology_1 | ExitId:: Menu__Upgrade_Menu__Infection__ex__Combat_1 | ExitId:: Menu__Upgrade_Menu__Infection__ex__Drone_1 => SpotId::Menu__Upgrade_Menu__Infection,
             ExitId::Menu__Upgrade_Menu__Drone__ex__Physiology_1 | ExitId:: Menu__Upgrade_Menu__Drone__ex__Combat_1 | ExitId:: Menu__Upgrade_Menu__Drone__ex__Infection_1 => SpotId::Menu__Upgrade_Menu__Drone,
+            ExitId::Uhrum__West_Entrance__West_27__ex__Irikar__Lamassu__East_27_1 | ExitId:: Uhrum__West_Entrance__West_27__ex__South_Platform_1 => SpotId::Uhrum__West_Entrance__West_27,
+            ExitId::Uhrum__West_Entrance__West_26__ex__Irikar__Lamassu__East_26_1 | ExitId:: Uhrum__West_Entrance__West_26__ex__Hidden_Passage_Entry_1 | ExitId:: Uhrum__West_Entrance__West_26__ex__Portal_Stand_1 | ExitId:: Uhrum__West_Entrance__West_26__ex__Portal_Stand_2 => SpotId::Uhrum__West_Entrance__West_26,
+            ExitId::Uhrum__West_Entrance__Hidden_Passage_West__ex__Irikar__Lamassu__Hidden_Passage_East_1 => SpotId::Uhrum__West_Entrance__Hidden_Passage_West,
+            ExitId::Uhrum__West_Entrance__West_25__ex__Giguna__Separator__East_25_1 => SpotId::Uhrum__West_Entrance__West_25,
+            ExitId::Uhrum__West_Entrance__Top_West_Ledge__ex__Hidden_Passage_Entry_1 | ExitId:: Uhrum__West_Entrance__Top_West_Ledge__ex__West_of_Gate_1 => SpotId::Uhrum__West_Entrance__Top_West_Ledge,
+            ExitId::Uhrum__West_Entrance__Middle_West_Ledge__ex__Portal_Stand_1 | ExitId:: Uhrum__West_Entrance__Middle_West_Ledge__ex__Portal_Stand_2 => SpotId::Uhrum__West_Entrance__Middle_West_Ledge,
+            ExitId::Uhrum__West_Entrance__Southeast_Tree__ex__South_Platform_1 => SpotId::Uhrum__West_Entrance__Southeast_Tree,
+            ExitId::Uhrum__West_Entrance__South_Platform__ex__Middle_West_Ledge_1 | ExitId:: Uhrum__West_Entrance__South_Platform__ex__West_27_1 => SpotId::Uhrum__West_Entrance__South_Platform,
+            ExitId::Uhrum__West_Entrance__Save_Point__ex__South_Platform_1 | ExitId:: Uhrum__West_Entrance__Save_Point__ex__Lower_Wall_West_1 | ExitId:: Uhrum__West_Entrance__Save_Point__ex__Lower_Wall_West_2 => SpotId::Uhrum__West_Entrance__Save_Point,
+            ExitId::Uhrum__West_Entrance__Portal_Stand__ex__Hidden_Passage_Entry_1 | ExitId:: Uhrum__West_Entrance__Portal_Stand__ex__West_of_Gate_1 | ExitId:: Uhrum__West_Entrance__Portal_Stand__ex__West_of_Gate_2 => SpotId::Uhrum__West_Entrance__Portal_Stand,
+            ExitId::Uhrum__West_Entrance__Clear_Passage__ex__Portal_Stand_1 | ExitId:: Uhrum__West_Entrance__Clear_Passage__ex__Portal_Stand_2 => SpotId::Uhrum__West_Entrance__Clear_Passage,
+            ExitId::Uhrum__West_Entrance__West_of_Gate__ex__Top_West_Ledge_1 | ExitId:: Uhrum__West_Entrance__West_of_Gate__ex__Top_West_Ledge_2 | ExitId:: Uhrum__West_Entrance__West_of_Gate__ex__Inner_Dais_1 => SpotId::Uhrum__West_Entrance__West_of_Gate,
+            ExitId::Uhrum__West_Entrance__Inner_Dais__ex__West_of_Gate_1 | ExitId:: Uhrum__West_Entrance__Inner_Dais__ex__Top_West_Ledge_1 => SpotId::Uhrum__West_Entrance__Inner_Dais,
+            ExitId::Uhrum__West_Entrance__Upper_Wall_West__ex__Portal_Exit_1 | ExitId:: Uhrum__West_Entrance__Upper_Wall_West__ex__Portal_Exit_2 | ExitId:: Uhrum__West_Entrance__Upper_Wall_West__ex__Upper_Wall_East_1 => SpotId::Uhrum__West_Entrance__Upper_Wall_West,
+            ExitId::Uhrum__West_Entrance__Upper_Wall_West__Mist_through_Wall => SpotId::Uhrum__West_Entrance__Upper_Wall_West,
+            ExitId::Uhrum__West_Entrance__Upper_Wall_East__ex__Upper_Wall_West_1 => SpotId::Uhrum__West_Entrance__Upper_Wall_East,
+            ExitId::Uhrum__West_Entrance__Upper_Wall_East__Charge_through_Wall | ExitId::Uhrum__West_Entrance__Upper_Wall_East__Mist_through_Wall | ExitId::Uhrum__West_Entrance__Upper_Wall_East__Spin_through_Wall => SpotId::Uhrum__West_Entrance__Upper_Wall_East,
+            ExitId::Uhrum__West_Entrance__Upper_Fork__ex__Upper_Wall_East_1 | ExitId:: Uhrum__West_Entrance__Upper_Fork__ex__Upper_Wall_East_2 => SpotId::Uhrum__West_Entrance__Upper_Fork,
+            ExitId::Uhrum__West_Entrance__East_26__ex__Siege_Corridor__West_26_1 => SpotId::Uhrum__West_Entrance__East_26,
             _ => SpotId::None,
         }
     }
@@ -7745,7 +7915,17 @@ impl world::World for World {
             | SpotId::Menu__Upgrade_Menu__Combat
             | SpotId::Menu__Upgrade_Menu__Drone
             | SpotId::Menu__Upgrade_Menu__Infection
-            | SpotId::Menu__Upgrade_Menu__Physiology => true,
+            | SpotId::Menu__Upgrade_Menu__Physiology
+            | SpotId::Uhrum__West_Entrance__East_26
+            | SpotId::Uhrum__West_Entrance__Gate_Switch
+            | SpotId::Uhrum__West_Entrance__Hidden_Passage_West
+            | SpotId::Uhrum__West_Entrance__Inner_Dais
+            | SpotId::Uhrum__West_Entrance__Save_Point
+            | SpotId::Uhrum__West_Entrance__Upper_Wall_East
+            | SpotId::Uhrum__West_Entrance__Upper_Wall_West
+            | SpotId::Uhrum__West_Entrance__West_25
+            | SpotId::Uhrum__West_Entrance__West_26
+            | SpotId::Uhrum__West_Entrance__West_27 => true,
             _ => false,
         }
     }
@@ -7817,11 +7997,10 @@ impl World {
                     | Item::Record_Losses
                     | Item::Researchers_Missing
                     | Item::Royal_Dagger
-                    | Item::Slingshot_Charge
-                    | Item::Slingshot_Weapon
                     | Item::Terminal_Breakthrough_1
                     | Item::Terminal_Breakthrough_2
                     | Item::The_Ideal_Kiengir
+                    | Item::Udusan
                     | Item::Under_Siege
             ),
             Objective::Progress => matches!(
@@ -7838,9 +8017,8 @@ impl World {
                     | Item::Melee_Charge
                     | Item::Notes_2053_02_27
                     | Item::Royal_Dagger
-                    | Item::Slingshot_Charge
-                    | Item::Slingshot_Weapon
                     | Item::Terminal_Breakthrough_2
+                    | Item::Udusan
             ),
             _ => false,
         }
@@ -9192,6 +9370,54 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
             price: Currency::Flasks(5),
             time: 1000,
             exit_id: None,
+        },
+        LocationId::Uhrum__West_Entrance__Inner_Dais__Item => Location {
+            id: LocationId::Uhrum__West_Entrance__Inner_Dais__Item,
+            canonical: CanonId::None,
+            item: Item::Udusan,
+            price: Currency::Free,
+            time: 0,
+            exit_id: None,
+        },
+        LocationId::Uhrum__West_Entrance__Gate_Switch__Open_Gate => Location {
+            id: LocationId::Uhrum__West_Entrance__Gate_Switch__Open_Gate,
+            canonical: CanonId::None,
+            item: Item::Uhrum_West_Entrance_Gate,
+            price: Currency::Free,
+            time: 250,
+            exit_id: None,
+        },
+        LocationId::Uhrum__West_Entrance__Upper_Wall_West__Mist_through_Wall => Location {
+            id: LocationId::Uhrum__West_Entrance__Upper_Wall_West__Mist_through_Wall,
+            canonical: CanonId::Uhrum_West_Entrance_Upper_Wall,
+            item: Item::Uhrum_West_Entrance_Upper_Wall,
+            price: Currency::Energy(20),
+            time: 1000,
+            exit_id: Some(ExitId::Uhrum__West_Entrance__Upper_Wall_West__Mist_through_Wall),
+        },
+        LocationId::Uhrum__West_Entrance__Upper_Wall_East__Charge_through_Wall => Location {
+            id: LocationId::Uhrum__West_Entrance__Upper_Wall_East__Charge_through_Wall,
+            canonical: CanonId::Uhrum_West_Entrance_Upper_Wall,
+            item: Item::Uhrum_West_Entrance_Upper_Wall,
+            price: Currency::Free,
+            time: 1000,
+            exit_id: Some(ExitId::Uhrum__West_Entrance__Upper_Wall_East__Charge_through_Wall),
+        },
+        LocationId::Uhrum__West_Entrance__Upper_Wall_East__Spin_through_Wall => Location {
+            id: LocationId::Uhrum__West_Entrance__Upper_Wall_East__Spin_through_Wall,
+            canonical: CanonId::Uhrum_West_Entrance_Upper_Wall,
+            item: Item::Uhrum_West_Entrance_Upper_Wall,
+            price: Currency::Free,
+            time: 1000,
+            exit_id: Some(ExitId::Uhrum__West_Entrance__Upper_Wall_East__Spin_through_Wall),
+        },
+        LocationId::Uhrum__West_Entrance__Upper_Wall_East__Mist_through_Wall => Location {
+            id: LocationId::Uhrum__West_Entrance__Upper_Wall_East__Mist_through_Wall,
+            canonical: CanonId::Uhrum_West_Entrance_Upper_Wall,
+            item: Item::Uhrum_West_Entrance_Upper_Wall,
+            price: Currency::Energy(20),
+            time: 1000,
+            exit_id: Some(ExitId::Uhrum__West_Entrance__Upper_Wall_East__Mist_through_Wall),
         },
     }
 }
@@ -14840,6 +15066,279 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
             price: Currency::Free,
             loc_id: None,
         },
+        ExitId::Uhrum__West_Entrance__West_27__ex__Irikar__Lamassu__East_27_1 => Exit {
+            id: ExitId::Uhrum__West_Entrance__West_27__ex__Irikar__Lamassu__East_27_1,
+            time: 1350,
+            dest: SpotId::Irikar__Lamassu__East_27,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Uhrum__West_Entrance__West_27__ex__South_Platform_1 => Exit {
+            id: ExitId::Uhrum__West_Entrance__West_27__ex__South_Platform_1,
+            time: 1403,
+            dest: SpotId::Uhrum__West_Entrance__South_Platform,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Uhrum__West_Entrance__West_26__ex__Irikar__Lamassu__East_26_1 => Exit {
+            id: ExitId::Uhrum__West_Entrance__West_26__ex__Irikar__Lamassu__East_26_1,
+            time: 1350,
+            dest: SpotId::Irikar__Lamassu__East_26,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Uhrum__West_Entrance__West_26__ex__Hidden_Passage_Entry_1 => Exit {
+            id: ExitId::Uhrum__West_Entrance__West_26__ex__Hidden_Passage_Entry_1,
+            time: 1799,
+            dest: SpotId::Uhrum__West_Entrance__Hidden_Passage_Entry,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Uhrum__West_Entrance__West_26__ex__Portal_Stand_1 => Exit {
+            id: ExitId::Uhrum__West_Entrance__West_26__ex__Portal_Stand_1,
+            time: 1799,
+            dest: SpotId::Uhrum__West_Entrance__Portal_Stand,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Uhrum__West_Entrance__West_26__ex__Portal_Stand_2 => Exit {
+            id: ExitId::Uhrum__West_Entrance__West_26__ex__Portal_Stand_2,
+            time: 1000,
+            dest: SpotId::Uhrum__West_Entrance__Portal_Stand,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Uhrum__West_Entrance__Hidden_Passage_West__ex__Irikar__Lamassu__Hidden_Passage_East_1 => Exit {
+            id: ExitId::Uhrum__West_Entrance__Hidden_Passage_West__ex__Irikar__Lamassu__Hidden_Passage_East_1,
+            time: 1350,
+            dest: SpotId::Irikar__Lamassu__Hidden_Passage_East,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Uhrum__West_Entrance__West_25__ex__Giguna__Separator__East_25_1 => Exit {
+            id: ExitId::Uhrum__West_Entrance__West_25__ex__Giguna__Separator__East_25_1,
+            time: 1350,
+            dest: SpotId::Giguna__Separator__East_25,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Uhrum__West_Entrance__Top_West_Ledge__ex__Hidden_Passage_Entry_1 => Exit {
+            id: ExitId::Uhrum__West_Entrance__Top_West_Ledge__ex__Hidden_Passage_Entry_1,
+            time: 300,
+            dest: SpotId::Uhrum__West_Entrance__Hidden_Passage_Entry,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Uhrum__West_Entrance__Top_West_Ledge__ex__West_of_Gate_1 => Exit {
+            id: ExitId::Uhrum__West_Entrance__Top_West_Ledge__ex__West_of_Gate_1,
+            time: 1578,
+            dest: SpotId::Uhrum__West_Entrance__West_of_Gate,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Uhrum__West_Entrance__Middle_West_Ledge__ex__Portal_Stand_1 => Exit {
+            id: ExitId::Uhrum__West_Entrance__Middle_West_Ledge__ex__Portal_Stand_1,
+            time: 4200,
+            dest: SpotId::Uhrum__West_Entrance__Portal_Stand,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Uhrum__West_Entrance__Middle_West_Ledge__ex__Portal_Stand_2 => Exit {
+            id: ExitId::Uhrum__West_Entrance__Middle_West_Ledge__ex__Portal_Stand_2,
+            time: 2400,
+            dest: SpotId::Uhrum__West_Entrance__Portal_Stand,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Uhrum__West_Entrance__Southeast_Tree__ex__South_Platform_1 => Exit {
+            id: ExitId::Uhrum__West_Entrance__Southeast_Tree__ex__South_Platform_1,
+            time: 877,
+            dest: SpotId::Uhrum__West_Entrance__South_Platform,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Uhrum__West_Entrance__South_Platform__ex__Middle_West_Ledge_1 => Exit {
+            id: ExitId::Uhrum__West_Entrance__South_Platform__ex__Middle_West_Ledge_1,
+            time: 1200,
+            dest: SpotId::Uhrum__West_Entrance__Middle_West_Ledge,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Uhrum__West_Entrance__South_Platform__ex__West_27_1 => Exit {
+            id: ExitId::Uhrum__West_Entrance__South_Platform__ex__West_27_1,
+            time: 1403,
+            dest: SpotId::Uhrum__West_Entrance__West_27,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Uhrum__West_Entrance__Save_Point__ex__South_Platform_1 => Exit {
+            id: ExitId::Uhrum__West_Entrance__Save_Point__ex__South_Platform_1,
+            time: 1200,
+            dest: SpotId::Uhrum__West_Entrance__South_Platform,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Uhrum__West_Entrance__Save_Point__ex__Lower_Wall_West_1 => Exit {
+            id: ExitId::Uhrum__West_Entrance__Save_Point__ex__Lower_Wall_West_1,
+            time: 2400,
+            dest: SpotId::Uhrum__West_Entrance__Lower_Wall_West,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Uhrum__West_Entrance__Save_Point__ex__Lower_Wall_West_2 => Exit {
+            id: ExitId::Uhrum__West_Entrance__Save_Point__ex__Lower_Wall_West_2,
+            time: 1228,
+            dest: SpotId::Uhrum__West_Entrance__Lower_Wall_West,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Uhrum__West_Entrance__Portal_Stand__ex__Hidden_Passage_Entry_1 => Exit {
+            id: ExitId::Uhrum__West_Entrance__Portal_Stand__ex__Hidden_Passage_Entry_1,
+            time: 1140,
+            dest: SpotId::Uhrum__West_Entrance__Hidden_Passage_Entry,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Uhrum__West_Entrance__Portal_Stand__ex__West_of_Gate_1 => Exit {
+            id: ExitId::Uhrum__West_Entrance__Portal_Stand__ex__West_of_Gate_1,
+            time: 1799,
+            dest: SpotId::Uhrum__West_Entrance__West_of_Gate,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Uhrum__West_Entrance__Portal_Stand__ex__West_of_Gate_2 => Exit {
+            id: ExitId::Uhrum__West_Entrance__Portal_Stand__ex__West_of_Gate_2,
+            time: 1200,
+            dest: SpotId::Uhrum__West_Entrance__West_of_Gate,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Uhrum__West_Entrance__Clear_Passage__ex__Portal_Stand_1 => Exit {
+            id: ExitId::Uhrum__West_Entrance__Clear_Passage__ex__Portal_Stand_1,
+            time: 2400,
+            dest: SpotId::Uhrum__West_Entrance__Portal_Stand,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Uhrum__West_Entrance__Clear_Passage__ex__Portal_Stand_2 => Exit {
+            id: ExitId::Uhrum__West_Entrance__Clear_Passage__ex__Portal_Stand_2,
+            time: 1491,
+            dest: SpotId::Uhrum__West_Entrance__Portal_Stand,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Uhrum__West_Entrance__West_of_Gate__ex__Top_West_Ledge_1 => Exit {
+            id: ExitId::Uhrum__West_Entrance__West_of_Gate__ex__Top_West_Ledge_1,
+            time: 1578,
+            dest: SpotId::Uhrum__West_Entrance__Top_West_Ledge,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Uhrum__West_Entrance__West_of_Gate__ex__Top_West_Ledge_2 => Exit {
+            id: ExitId::Uhrum__West_Entrance__West_of_Gate__ex__Top_West_Ledge_2,
+            time: 1578,
+            dest: SpotId::Uhrum__West_Entrance__Top_West_Ledge,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Uhrum__West_Entrance__West_of_Gate__ex__Inner_Dais_1 => Exit {
+            id: ExitId::Uhrum__West_Entrance__West_of_Gate__ex__Inner_Dais_1,
+            time: 1200,
+            dest: SpotId::Uhrum__West_Entrance__Inner_Dais,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Uhrum__West_Entrance__Inner_Dais__ex__West_of_Gate_1 => Exit {
+            id: ExitId::Uhrum__West_Entrance__Inner_Dais__ex__West_of_Gate_1,
+            time: 1052,
+            dest: SpotId::Uhrum__West_Entrance__West_of_Gate,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Uhrum__West_Entrance__Inner_Dais__ex__Top_West_Ledge_1 => Exit {
+            id: ExitId::Uhrum__West_Entrance__Inner_Dais__ex__Top_West_Ledge_1,
+            time: 2631,
+            dest: SpotId::Uhrum__West_Entrance__Top_West_Ledge,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Uhrum__West_Entrance__Upper_Wall_West__ex__Portal_Exit_1 => Exit {
+            id: ExitId::Uhrum__West_Entrance__Upper_Wall_West__ex__Portal_Exit_1,
+            time: 1200,
+            dest: SpotId::Uhrum__West_Entrance__Portal_Exit,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Uhrum__West_Entrance__Upper_Wall_West__ex__Portal_Exit_2 => Exit {
+            id: ExitId::Uhrum__West_Entrance__Upper_Wall_West__ex__Portal_Exit_2,
+            time: 789,
+            dest: SpotId::Uhrum__West_Entrance__Portal_Exit,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Uhrum__West_Entrance__Upper_Wall_West__ex__Upper_Wall_East_1 => Exit {
+            id: ExitId::Uhrum__West_Entrance__Upper_Wall_West__ex__Upper_Wall_East_1,
+            time: 526,
+            dest: SpotId::Uhrum__West_Entrance__Upper_Wall_East,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Uhrum__West_Entrance__Upper_Wall_West__Mist_through_Wall => Exit {
+            id: ExitId::Uhrum__West_Entrance__Upper_Wall_West__Mist_through_Wall,
+            time: 1000,
+            dest: SpotId::Uhrum__West_Entrance__Upper_Wall_East,
+            price: Currency::Free,
+            loc_id: Some(LocationId::Uhrum__West_Entrance__Upper_Wall_West__Mist_through_Wall),
+        },
+        ExitId::Uhrum__West_Entrance__Upper_Wall_East__ex__Upper_Wall_West_1 => Exit {
+            id: ExitId::Uhrum__West_Entrance__Upper_Wall_East__ex__Upper_Wall_West_1,
+            time: 600,
+            dest: SpotId::Uhrum__West_Entrance__Upper_Wall_West,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Uhrum__West_Entrance__Upper_Wall_East__Charge_through_Wall => Exit {
+            id: ExitId::Uhrum__West_Entrance__Upper_Wall_East__Charge_through_Wall,
+            time: 1000,
+            dest: SpotId::Uhrum__West_Entrance__Upper_Wall_West,
+            price: Currency::Free,
+            loc_id: Some(LocationId::Uhrum__West_Entrance__Upper_Wall_East__Charge_through_Wall),
+        },
+        ExitId::Uhrum__West_Entrance__Upper_Wall_East__Spin_through_Wall => Exit {
+            id: ExitId::Uhrum__West_Entrance__Upper_Wall_East__Spin_through_Wall,
+            time: 300,
+            dest: SpotId::Uhrum__West_Entrance__Upper_Wall_West,
+            price: Currency::Free,
+            loc_id: Some(LocationId::Uhrum__West_Entrance__Upper_Wall_East__Spin_through_Wall),
+        },
+        ExitId::Uhrum__West_Entrance__Upper_Wall_East__Mist_through_Wall => Exit {
+            id: ExitId::Uhrum__West_Entrance__Upper_Wall_East__Mist_through_Wall,
+            time: 526,
+            dest: SpotId::Uhrum__West_Entrance__Upper_Wall_West,
+            price: Currency::Free,
+            loc_id: Some(LocationId::Uhrum__West_Entrance__Upper_Wall_East__Mist_through_Wall),
+        },
+        ExitId::Uhrum__West_Entrance__Upper_Fork__ex__Upper_Wall_East_1 => Exit {
+            id: ExitId::Uhrum__West_Entrance__Upper_Fork__ex__Upper_Wall_East_1,
+            time: 600,
+            dest: SpotId::Uhrum__West_Entrance__Upper_Wall_East,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Uhrum__West_Entrance__Upper_Fork__ex__Upper_Wall_East_2 => Exit {
+            id: ExitId::Uhrum__West_Entrance__Upper_Fork__ex__Upper_Wall_East_2,
+            time: 600,
+            dest: SpotId::Uhrum__West_Entrance__Upper_Wall_East,
+            price: Currency::Energy(30),
+            loc_id: None,
+        },
+        ExitId::Uhrum__West_Entrance__East_26__ex__Siege_Corridor__West_26_1 => Exit {
+            id: ExitId::Uhrum__West_Entrance__East_26__ex__Siege_Corridor__West_26_1,
+            time: 1350,
+            dest: SpotId::Uhrum__Siege_Corridor__West_26,
+            price: Currency::Free,
+            loc_id: None,
+        },
     }
 }
 
@@ -15263,6 +15762,11 @@ pub fn build_actions() -> EnumMap<ActionId, Action> {
         ActionId::Irikar__Basement_Portal__Portal_Stand__Enter_Portal => Action {
             id: ActionId::Irikar__Basement_Portal__Portal_Stand__Enter_Portal,
             time: 3600,
+            price: Currency::Free,
+        },
+        ActionId::Uhrum__West_Entrance__Save_Point__Save => Action {
+            id: ActionId::Uhrum__West_Entrance__Save_Point__Save,
+            time: 1300,
             price: Currency::Free,
         },
     }
@@ -24412,6 +24916,18 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
         },
+        SpotId::Giguna__Separator__East_25 => Spot {
+            id: SpotId::Giguna__Separator__East_25,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
         SpotId::Glacier__Dock_Elevator__Elevator => Spot {
             id: SpotId::Glacier__Dock_Elevator__Elevator,
             locations: Range {
@@ -27644,7 +28160,8 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             exits: Range {
-                start: 0, end: 0,
+                start: ExitId::Uhrum__West_Entrance__West_27__ex__Irikar__Lamassu__East_27_1.into_usize(),
+                end: ExitId::Uhrum__West_Entrance__West_27__ex__South_Platform_1.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
@@ -27656,7 +28173,8 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             exits: Range {
-                start: 0, end: 0,
+                start: ExitId::Uhrum__West_Entrance__West_26__ex__Hidden_Passage_Entry_1.into_usize(),
+                end: ExitId::Uhrum__West_Entrance__West_26__ex__Portal_Stand_2.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
@@ -27668,7 +28186,8 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             exits: Range {
-                start: 0, end: 0,
+                start: ExitId::Uhrum__West_Entrance__Hidden_Passage_West__ex__Irikar__Lamassu__Hidden_Passage_East_1.into_usize(),
+                end: ExitId::Uhrum__West_Entrance__Hidden_Passage_West__ex__Irikar__Lamassu__Hidden_Passage_East_1.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
@@ -27692,7 +28211,60 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             exits: Range {
+                start: ExitId::Uhrum__West_Entrance__West_25__ex__Giguna__Separator__East_25_1.into_usize(),
+                end: ExitId::Uhrum__West_Entrance__West_25__ex__Giguna__Separator__East_25_1.into_usize() + 1,
+            },
+            actions: Range {
                 start: 0, end: 0,
+            },
+        },
+        SpotId::Uhrum__West_Entrance__Top_West_Ledge => Spot {
+            id: SpotId::Uhrum__West_Entrance__Top_West_Ledge,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Uhrum__West_Entrance__Top_West_Ledge__ex__Hidden_Passage_Entry_1.into_usize(),
+                end: ExitId::Uhrum__West_Entrance__Top_West_Ledge__ex__West_of_Gate_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Uhrum__West_Entrance__Middle_West_Ledge => Spot {
+            id: SpotId::Uhrum__West_Entrance__Middle_West_Ledge,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Uhrum__West_Entrance__Middle_West_Ledge__ex__Portal_Stand_1.into_usize(),
+                end: ExitId::Uhrum__West_Entrance__Middle_West_Ledge__ex__Portal_Stand_2.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Uhrum__West_Entrance__Southeast_Tree => Spot {
+            id: SpotId::Uhrum__West_Entrance__Southeast_Tree,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Uhrum__West_Entrance__Southeast_Tree__ex__South_Platform_1.into_usize(),
+                end: ExitId::Uhrum__West_Entrance__Southeast_Tree__ex__South_Platform_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Uhrum__West_Entrance__South_Platform => Spot {
+            id: SpotId::Uhrum__West_Entrance__South_Platform,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Uhrum__West_Entrance__South_Platform__ex__Middle_West_Ledge_1.into_usize(),
+                end: ExitId::Uhrum__West_Entrance__South_Platform__ex__West_27_1.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
@@ -27704,14 +28276,160 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             exits: Range {
+                start: ExitId::Uhrum__West_Entrance__Save_Point__ex__Lower_Wall_West_1.into_usize(),
+                end: ExitId::Uhrum__West_Entrance__Save_Point__ex__South_Platform_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: ActionId::Uhrum__West_Entrance__Save_Point__Save.into_usize(),
+                end: ActionId::Uhrum__West_Entrance__Save_Point__Save.into_usize() + 1,
+            },
+        },
+        SpotId::Uhrum__West_Entrance__Portal_Stand => Spot {
+            id: SpotId::Uhrum__West_Entrance__Portal_Stand,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Uhrum__West_Entrance__Portal_Stand__ex__Hidden_Passage_Entry_1.into_usize(),
+                end: ExitId::Uhrum__West_Entrance__Portal_Stand__ex__West_of_Gate_2.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Uhrum__West_Entrance__Clear_Passage => Spot {
+            id: SpotId::Uhrum__West_Entrance__Clear_Passage,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Uhrum__West_Entrance__Clear_Passage__ex__Portal_Stand_1.into_usize(),
+                end: ExitId::Uhrum__West_Entrance__Clear_Passage__ex__Portal_Stand_2.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Uhrum__West_Entrance__West_of_Gate => Spot {
+            id: SpotId::Uhrum__West_Entrance__West_of_Gate,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Uhrum__West_Entrance__West_of_Gate__ex__Inner_Dais_1.into_usize(),
+                end: ExitId::Uhrum__West_Entrance__West_of_Gate__ex__Top_West_Ledge_2.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Uhrum__West_Entrance__Inner_Dais => Spot {
+            id: SpotId::Uhrum__West_Entrance__Inner_Dais,
+            locations: Range {
+                start: LocationId::Uhrum__West_Entrance__Inner_Dais__Item.into_usize(),
+                end: LocationId::Uhrum__West_Entrance__Inner_Dais__Item.into_usize() + 1,
+            },
+            exits: Range {
+                start: ExitId::Uhrum__West_Entrance__Inner_Dais__ex__Top_West_Ledge_1.into_usize(),
+                end: ExitId::Uhrum__West_Entrance__Inner_Dais__ex__West_of_Gate_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Uhrum__West_Entrance__Portal_Exit => Spot {
+            id: SpotId::Uhrum__West_Entrance__Portal_Exit,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
                 start: 0, end: 0,
             },
             actions: Range {
                 start: 0, end: 0,
             },
         },
-        SpotId::Uhrum__West_Entrance__Portal_Stand => Spot {
-            id: SpotId::Uhrum__West_Entrance__Portal_Stand,
+        SpotId::Uhrum__West_Entrance__Gate_Switch => Spot {
+            id: SpotId::Uhrum__West_Entrance__Gate_Switch,
+            locations: Range {
+                start: LocationId::Uhrum__West_Entrance__Gate_Switch__Open_Gate.into_usize(),
+                end: LocationId::Uhrum__West_Entrance__Gate_Switch__Open_Gate.into_usize() + 1,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Uhrum__West_Entrance__Upper_Wall_West => Spot {
+            id: SpotId::Uhrum__West_Entrance__Upper_Wall_West,
+            locations: Range {
+                start: LocationId::Uhrum__West_Entrance__Upper_Wall_West__Mist_through_Wall.into_usize(),
+                end: LocationId::Uhrum__West_Entrance__Upper_Wall_West__Mist_through_Wall.into_usize() + 1,
+            },
+            exits: Range {
+                start: ExitId::Uhrum__West_Entrance__Upper_Wall_West__ex__Portal_Exit_1.into_usize(),
+                end: ExitId::Uhrum__West_Entrance__Upper_Wall_West__ex__Upper_Wall_East_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Uhrum__West_Entrance__Upper_Wall_East => Spot {
+            id: SpotId::Uhrum__West_Entrance__Upper_Wall_East,
+            locations: Range {
+                start: LocationId::Uhrum__West_Entrance__Upper_Wall_East__Charge_through_Wall.into_usize(),
+                end: LocationId::Uhrum__West_Entrance__Upper_Wall_East__Spin_through_Wall.into_usize() + 1,
+            },
+            exits: Range {
+                start: ExitId::Uhrum__West_Entrance__Upper_Wall_East__ex__Upper_Wall_West_1.into_usize(),
+                end: ExitId::Uhrum__West_Entrance__Upper_Wall_East__ex__Upper_Wall_West_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Uhrum__West_Entrance__Upper_Fork => Spot {
+            id: SpotId::Uhrum__West_Entrance__Upper_Fork,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Uhrum__West_Entrance__Upper_Fork__ex__Upper_Wall_East_1.into_usize(),
+                end: ExitId::Uhrum__West_Entrance__Upper_Fork__ex__Upper_Wall_East_2.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Uhrum__West_Entrance__East_26 => Spot {
+            id: SpotId::Uhrum__West_Entrance__East_26,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Uhrum__West_Entrance__East_26__ex__Siege_Corridor__West_26_1.into_usize(),
+                end: ExitId::Uhrum__West_Entrance__East_26__ex__Siege_Corridor__West_26_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Uhrum__West_Entrance__Lower_Wall_West => Spot {
+            id: SpotId::Uhrum__West_Entrance__Lower_Wall_West,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Uhrum__Siege_Corridor__West_26 => Spot {
+            id: SpotId::Uhrum__Siege_Corridor__West_26,
             locations: Range {
                 start: 0, end: 0,
             },

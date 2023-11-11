@@ -77,6 +77,28 @@ macro_rules! helper__hover {
     }};
 }
 
+/// $charge (  )
+/// ^mode == 'drone' and Slingshot_Charge
+#[macro_export]
+macro_rules! helper__charge {
+    ($ctx:expr) => {{
+        #[allow(unused_imports)]
+        use $crate::items::Item;
+        ($ctx.mode() == enums::Mode::Drone && $ctx.has(Item::Slingshot_Charge))
+    }};
+}
+
+/// $spin (  )
+/// ^mode == 'drone' and Slingshot_Weapon
+#[macro_export]
+macro_rules! helper__spin {
+    ($ctx:expr) => {{
+        #[allow(unused_imports)]
+        use $crate::items::Item;
+        ($ctx.mode() == enums::Mode::Drone && $ctx.has(Item::Slingshot_Weapon))
+    }};
+}
+
 /// $can_deploy (  )
 /// Remote_Drone and ^mode != 'drone' and not Anuman
 #[macro_export]
@@ -319,28 +341,6 @@ macro_rules! helper__block_clip_escape {
         #[allow(unused_imports)]
         use $crate::items::Item;
         ($ctx.minor_glitches() && helper__hook!($ctx))
-    }};
-}
-
-/// $charge (  )
-/// Slingshot_Charge and ^mode == 'drone'
-#[macro_export]
-macro_rules! helper__charge {
-    ($ctx:expr) => {{
-        #[allow(unused_imports)]
-        use $crate::items::Item;
-        ($ctx.has(Item::Slingshot_Charge) && $ctx.mode() == enums::Mode::Drone)
-    }};
-}
-
-/// $spin (  )
-/// Slingshot_Weapon and ^mode == 'drone'
-#[macro_export]
-macro_rules! helper__spin {
-    ($ctx:expr) => {{
-        #[allow(unused_imports)]
-        use $crate::items::Item;
-        ($ctx.has(Item::Slingshot_Weapon) && $ctx.mode() == enums::Mode::Drone)
     }};
 }
 

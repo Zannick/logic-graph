@@ -3272,3 +3272,9 @@ areas:
 
     - name: Wall Interior
       coord: [16.9, 23.6]
+
+- name: Separator
+  on_entry: $reset_old_area(^newpos)
+  spots:
+    - name: East 25
+      coord: [18.95, 24.75]

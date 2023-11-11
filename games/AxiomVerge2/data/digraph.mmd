@@ -864,6 +864,9 @@ subgraph Giguna
         Giguna__Breachable_Wall__Above_Middle_Catwalk(Above Middle Catwalk);
         Giguna__Breachable_Wall__Wall_Interior(Wall Interior);
     end
+    subgraph Giguna__Separator[Separator]
+        Giguna__Separator__East_25(East 25);
+    end
 end
 subgraph Glacier
     subgraph Glacier__Dock_Elevator[Dock Elevator]
@@ -1217,8 +1220,25 @@ subgraph Uhrum
         Uhrum__West_Entrance__Hidden_Passage_West(Hidden Passage West);
         Uhrum__West_Entrance__Hidden_Passage_Entry(Hidden Passage Entry);
         Uhrum__West_Entrance__West_25(West 25);
+        Uhrum__West_Entrance__Top_West_Ledge(Top West Ledge);
+        Uhrum__West_Entrance__Middle_West_Ledge(Middle West Ledge);
+        Uhrum__West_Entrance__Southeast_Tree(Southeast Tree);
+        Uhrum__West_Entrance__South_Platform(South Platform);
         Uhrum__West_Entrance__Save_Point(Save Point);
         Uhrum__West_Entrance__Portal_Stand(Portal Stand);
+        Uhrum__West_Entrance__Clear_Passage(Clear Passage);
+        Uhrum__West_Entrance__West_of_Gate(West of Gate);
+        Uhrum__West_Entrance__Inner_Dais(Inner Dais);
+        Uhrum__West_Entrance__Portal_Exit(Portal Exit);
+        Uhrum__West_Entrance__Gate_Switch(Gate Switch);
+        Uhrum__West_Entrance__Upper_Wall_West(Upper Wall West);
+        Uhrum__West_Entrance__Upper_Wall_East(Upper Wall East);
+        Uhrum__West_Entrance__Upper_Fork(Upper Fork);
+        Uhrum__West_Entrance__East_26(East 26);
+        Uhrum__West_Entrance__Lower_Wall_West(Lower Wall West);
+    end
+    subgraph Uhrum__Siege_Corridor[Siege Corridor]
+        Uhrum__Siege_Corridor__West_26(West 26);
     end
 end
 Amagi__Cave_Behind_Waterfall__Bottom --> Amagi__Cave_Behind_Waterfall__Middle
@@ -1743,9 +1763,9 @@ Irikar__Hub__Save_Point --> Irikar__Hub__Bowl_Hole
 Irikar__Hub__West_Rim --> Irikar__Hub__East_Rim
 Irikar__Lamassu__Catwalk_Middle --> Irikar__Lamassu__Desk
 Irikar__Lamassu__Catwalk_Middle --> Irikar__Lamassu__Hidden_Passage_West
-Irikar__Lamassu__East_26 --> Uhrum__West_Entrance__West_26
-Irikar__Lamassu__East_27 --> Uhrum__West_Entrance__West_27
-Irikar__Lamassu__Hidden_Passage_East --> Uhrum__West_Entrance__Hidden_Passage_West
+Irikar__Lamassu__East_26 <--> Uhrum__West_Entrance__West_26
+Irikar__Lamassu__East_27 <--> Uhrum__West_Entrance__West_27
+Irikar__Lamassu__Hidden_Passage_East <--> Uhrum__West_Entrance__Hidden_Passage_West
 Irikar__Sight_Room__Above_Room_East --> Irikar__East_Rooftops__Upper_West
 Menu__Upgrade_Menu__Combat <--> Menu__Upgrade_Menu__Drone
 Menu__Upgrade_Menu__Combat <--> Menu__Upgrade_Menu__Infection
@@ -1753,3 +1773,23 @@ Menu__Upgrade_Menu__Combat <--> Menu__Upgrade_Menu__Physiology
 Menu__Upgrade_Menu__Drone <--> Menu__Upgrade_Menu__Infection
 Menu__Upgrade_Menu__Drone <--> Menu__Upgrade_Menu__Physiology
 Menu__Upgrade_Menu__Infection <--> Menu__Upgrade_Menu__Physiology
+Uhrum__West_Entrance__Clear_Passage --> Uhrum__West_Entrance__Portal_Stand
+Uhrum__West_Entrance__East_26 --> Uhrum__Siege_Corridor__West_26
+Uhrum__West_Entrance__Inner_Dais --> Uhrum__West_Entrance__Top_West_Ledge
+Uhrum__West_Entrance__Inner_Dais <--> Uhrum__West_Entrance__West_of_Gate
+Uhrum__West_Entrance__Middle_West_Ledge --> Uhrum__West_Entrance__Portal_Stand
+Uhrum__West_Entrance__Portal_Stand --> Uhrum__West_Entrance__Hidden_Passage_Entry
+Uhrum__West_Entrance__Portal_Stand --> Uhrum__West_Entrance__West_of_Gate
+Uhrum__West_Entrance__Save_Point --> Uhrum__West_Entrance__Lower_Wall_West
+Uhrum__West_Entrance__Save_Point --> Uhrum__West_Entrance__South_Platform
+Uhrum__West_Entrance__South_Platform --> Uhrum__West_Entrance__Middle_West_Ledge
+Uhrum__West_Entrance__South_Platform <--> Uhrum__West_Entrance__West_27
+Uhrum__West_Entrance__Southeast_Tree --> Uhrum__West_Entrance__South_Platform
+Uhrum__West_Entrance__Top_West_Ledge --> Uhrum__West_Entrance__Hidden_Passage_Entry
+Uhrum__West_Entrance__Top_West_Ledge <--> Uhrum__West_Entrance__West_of_Gate
+Uhrum__West_Entrance__Upper_Fork --> Uhrum__West_Entrance__Upper_Wall_East
+Uhrum__West_Entrance__Upper_Wall_East <--> Uhrum__West_Entrance__Upper_Wall_West
+Uhrum__West_Entrance__Upper_Wall_West --> Uhrum__West_Entrance__Portal_Exit
+Uhrum__West_Entrance__West_25 --> Giguna__Separator__East_25
+Uhrum__West_Entrance__West_26 --> Uhrum__West_Entrance__Hidden_Passage_Entry
+Uhrum__West_Entrance__West_26 --> Uhrum__West_Entrance__Portal_Stand

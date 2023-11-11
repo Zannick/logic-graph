@@ -137,6 +137,7 @@ pub enum AreaId {
     Giguna__Ruins_East,
     Giguna__Ruins_Top,
     Giguna__Ruins_West,
+    Giguna__Separator,
     Giguna__Vertical_Interchange,
     Giguna__Wasteland,
     Giguna__West_Caverns,
@@ -196,6 +197,7 @@ pub enum AreaId {
     Irikar_Breach__Uhrum_Connector,
     Irikar_Breach__Worm_Rave,
     Menu__Upgrade_Menu,
+    Uhrum__Siege_Corridor,
     Uhrum__West_Entrance,
 }
 impl fmt::Display for AreaId {
@@ -260,6 +262,7 @@ impl fmt::Display for AreaId {
             AreaId::Giguna__Ruins_East => write!(f, "{}", "Giguna > Ruins East"),
             AreaId::Giguna__Ruins_Top => write!(f, "{}", "Giguna > Ruins Top"),
             AreaId::Giguna__Ruins_West => write!(f, "{}", "Giguna > Ruins West"),
+            AreaId::Giguna__Separator => write!(f, "{}", "Giguna > Separator"),
             AreaId::Giguna__Vertical_Interchange => {
                 write!(f, "{}", "Giguna > Vertical Interchange")
             }
@@ -335,6 +338,7 @@ impl fmt::Display for AreaId {
             }
             AreaId::Irikar_Breach__Worm_Rave => write!(f, "{}", "Irikar Breach > Worm Rave"),
             AreaId::Menu__Upgrade_Menu => write!(f, "{}", "Menu > Upgrade Menu"),
+            AreaId::Uhrum__Siege_Corridor => write!(f, "{}", "Uhrum > Siege Corridor"),
             AreaId::Uhrum__West_Entrance => write!(f, "{}", "Uhrum > West Entrance"),
         }
     }
@@ -398,6 +402,7 @@ impl std::str::FromStr for AreaId {
             "Giguna > Ruins East" => Ok(AreaId::Giguna__Ruins_East),
             "Giguna > Ruins Top" => Ok(AreaId::Giguna__Ruins_Top),
             "Giguna > Ruins West" => Ok(AreaId::Giguna__Ruins_West),
+            "Giguna > Separator" => Ok(AreaId::Giguna__Separator),
             "Giguna > Vertical Interchange" => Ok(AreaId::Giguna__Vertical_Interchange),
             "Giguna > Wasteland" => Ok(AreaId::Giguna__Wasteland),
             "Giguna > West Caverns" => Ok(AreaId::Giguna__West_Caverns),
@@ -457,6 +462,7 @@ impl std::str::FromStr for AreaId {
             "Irikar Breach > Uhrum Connector" => Ok(AreaId::Irikar_Breach__Uhrum_Connector),
             "Irikar Breach > Worm Rave" => Ok(AreaId::Irikar_Breach__Worm_Rave),
             "Menu > Upgrade Menu" => Ok(AreaId::Menu__Upgrade_Menu),
+            "Uhrum > Siege Corridor" => Ok(AreaId::Uhrum__Siege_Corridor),
             "Uhrum > West Entrance" => Ok(AreaId::Uhrum__West_Entrance),
             _ => Err(format!("Could not recognize as a AreaId: {}", s)),
         }
@@ -1050,6 +1056,7 @@ pub enum SpotId {
     Giguna__Ruins_West__Save_Point,
     Giguna__Ruins_West__Upper_Ledge,
     Giguna__Ruins_West__West_7,
+    Giguna__Separator__East_25,
     Giguna__Vertical_Interchange__Dead_end,
     Giguna__Vertical_Interchange__Dead_end_Ledge,
     Giguna__Vertical_Interchange__East_20,
@@ -1448,13 +1455,28 @@ pub enum SpotId {
     Menu__Upgrade_Menu__Drone,
     Menu__Upgrade_Menu__Infection,
     Menu__Upgrade_Menu__Physiology,
+    Uhrum__Siege_Corridor__West_26,
+    Uhrum__West_Entrance__Clear_Passage,
+    Uhrum__West_Entrance__East_26,
+    Uhrum__West_Entrance__Gate_Switch,
     Uhrum__West_Entrance__Hidden_Passage_Entry,
     Uhrum__West_Entrance__Hidden_Passage_West,
+    Uhrum__West_Entrance__Inner_Dais,
+    Uhrum__West_Entrance__Lower_Wall_West,
+    Uhrum__West_Entrance__Middle_West_Ledge,
+    Uhrum__West_Entrance__Portal_Exit,
     Uhrum__West_Entrance__Portal_Stand,
     Uhrum__West_Entrance__Save_Point,
+    Uhrum__West_Entrance__South_Platform,
+    Uhrum__West_Entrance__Southeast_Tree,
+    Uhrum__West_Entrance__Top_West_Ledge,
+    Uhrum__West_Entrance__Upper_Fork,
+    Uhrum__West_Entrance__Upper_Wall_East,
+    Uhrum__West_Entrance__Upper_Wall_West,
     Uhrum__West_Entrance__West_25,
     Uhrum__West_Entrance__West_26,
     Uhrum__West_Entrance__West_27,
+    Uhrum__West_Entrance__West_of_Gate,
 }
 impl fmt::Display for SpotId {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
@@ -2789,6 +2811,7 @@ impl fmt::Display for SpotId {
                 write!(f, "{}", "Giguna > Ruins West > Upper Ledge")
             }
             SpotId::Giguna__Ruins_West__West_7 => write!(f, "{}", "Giguna > Ruins West > West 7"),
+            SpotId::Giguna__Separator__East_25 => write!(f, "{}", "Giguna > Separator > East 25"),
             SpotId::Giguna__Vertical_Interchange__Dead_end => {
                 write!(f, "{}", "Giguna > Vertical Interchange > Dead-end")
             }
@@ -3871,17 +3894,59 @@ impl fmt::Display for SpotId {
             SpotId::Menu__Upgrade_Menu__Physiology => {
                 write!(f, "{}", "Menu > Upgrade Menu > Physiology")
             }
+            SpotId::Uhrum__Siege_Corridor__West_26 => {
+                write!(f, "{}", "Uhrum > Siege Corridor > West 26")
+            }
+            SpotId::Uhrum__West_Entrance__Clear_Passage => {
+                write!(f, "{}", "Uhrum > West Entrance > Clear Passage")
+            }
+            SpotId::Uhrum__West_Entrance__East_26 => {
+                write!(f, "{}", "Uhrum > West Entrance > East 26")
+            }
+            SpotId::Uhrum__West_Entrance__Gate_Switch => {
+                write!(f, "{}", "Uhrum > West Entrance > Gate Switch")
+            }
             SpotId::Uhrum__West_Entrance__Hidden_Passage_Entry => {
                 write!(f, "{}", "Uhrum > West Entrance > Hidden Passage Entry")
             }
             SpotId::Uhrum__West_Entrance__Hidden_Passage_West => {
                 write!(f, "{}", "Uhrum > West Entrance > Hidden Passage West")
             }
+            SpotId::Uhrum__West_Entrance__Inner_Dais => {
+                write!(f, "{}", "Uhrum > West Entrance > Inner Dais")
+            }
+            SpotId::Uhrum__West_Entrance__Lower_Wall_West => {
+                write!(f, "{}", "Uhrum > West Entrance > Lower Wall West")
+            }
+            SpotId::Uhrum__West_Entrance__Middle_West_Ledge => {
+                write!(f, "{}", "Uhrum > West Entrance > Middle West Ledge")
+            }
+            SpotId::Uhrum__West_Entrance__Portal_Exit => {
+                write!(f, "{}", "Uhrum > West Entrance > Portal Exit")
+            }
             SpotId::Uhrum__West_Entrance__Portal_Stand => {
                 write!(f, "{}", "Uhrum > West Entrance > Portal Stand")
             }
             SpotId::Uhrum__West_Entrance__Save_Point => {
                 write!(f, "{}", "Uhrum > West Entrance > Save Point")
+            }
+            SpotId::Uhrum__West_Entrance__South_Platform => {
+                write!(f, "{}", "Uhrum > West Entrance > South Platform")
+            }
+            SpotId::Uhrum__West_Entrance__Southeast_Tree => {
+                write!(f, "{}", "Uhrum > West Entrance > Southeast Tree")
+            }
+            SpotId::Uhrum__West_Entrance__Top_West_Ledge => {
+                write!(f, "{}", "Uhrum > West Entrance > Top West Ledge")
+            }
+            SpotId::Uhrum__West_Entrance__Upper_Fork => {
+                write!(f, "{}", "Uhrum > West Entrance > Upper Fork")
+            }
+            SpotId::Uhrum__West_Entrance__Upper_Wall_East => {
+                write!(f, "{}", "Uhrum > West Entrance > Upper Wall East")
+            }
+            SpotId::Uhrum__West_Entrance__Upper_Wall_West => {
+                write!(f, "{}", "Uhrum > West Entrance > Upper Wall West")
             }
             SpotId::Uhrum__West_Entrance__West_25 => {
                 write!(f, "{}", "Uhrum > West Entrance > West 25")
@@ -3891,6 +3956,9 @@ impl fmt::Display for SpotId {
             }
             SpotId::Uhrum__West_Entrance__West_27 => {
                 write!(f, "{}", "Uhrum > West Entrance > West 27")
+            }
+            SpotId::Uhrum__West_Entrance__West_of_Gate => {
+                write!(f, "{}", "Uhrum > West Entrance > West of Gate")
             }
         }
     }
@@ -4750,6 +4818,7 @@ impl std::str::FromStr for SpotId {
             "Giguna > Ruins West > Save Point" => Ok(SpotId::Giguna__Ruins_West__Save_Point),
             "Giguna > Ruins West > Upper Ledge" => Ok(SpotId::Giguna__Ruins_West__Upper_Ledge),
             "Giguna > Ruins West > West 7" => Ok(SpotId::Giguna__Ruins_West__West_7),
+            "Giguna > Separator > East 25" => Ok(SpotId::Giguna__Separator__East_25),
             "Giguna > Vertical Interchange > Dead-end" => {
                 Ok(SpotId::Giguna__Vertical_Interchange__Dead_end)
             }
@@ -5488,19 +5557,52 @@ impl std::str::FromStr for SpotId {
             "Menu > Upgrade Menu > Drone" => Ok(SpotId::Menu__Upgrade_Menu__Drone),
             "Menu > Upgrade Menu > Infection" => Ok(SpotId::Menu__Upgrade_Menu__Infection),
             "Menu > Upgrade Menu > Physiology" => Ok(SpotId::Menu__Upgrade_Menu__Physiology),
+            "Uhrum > Siege Corridor > West 26" => Ok(SpotId::Uhrum__Siege_Corridor__West_26),
+            "Uhrum > West Entrance > Clear Passage" => {
+                Ok(SpotId::Uhrum__West_Entrance__Clear_Passage)
+            }
+            "Uhrum > West Entrance > East 26" => Ok(SpotId::Uhrum__West_Entrance__East_26),
+            "Uhrum > West Entrance > Gate Switch" => Ok(SpotId::Uhrum__West_Entrance__Gate_Switch),
             "Uhrum > West Entrance > Hidden Passage Entry" => {
                 Ok(SpotId::Uhrum__West_Entrance__Hidden_Passage_Entry)
             }
             "Uhrum > West Entrance > Hidden Passage West" => {
                 Ok(SpotId::Uhrum__West_Entrance__Hidden_Passage_West)
             }
+            "Uhrum > West Entrance > Inner Dais" => Ok(SpotId::Uhrum__West_Entrance__Inner_Dais),
+            "Uhrum > West Entrance > Lower Wall West" => {
+                Ok(SpotId::Uhrum__West_Entrance__Lower_Wall_West)
+            }
+            "Uhrum > West Entrance > Middle West Ledge" => {
+                Ok(SpotId::Uhrum__West_Entrance__Middle_West_Ledge)
+            }
+            "Uhrum > West Entrance > Portal Exit" => Ok(SpotId::Uhrum__West_Entrance__Portal_Exit),
             "Uhrum > West Entrance > Portal Stand" => {
                 Ok(SpotId::Uhrum__West_Entrance__Portal_Stand)
             }
             "Uhrum > West Entrance > Save Point" => Ok(SpotId::Uhrum__West_Entrance__Save_Point),
+            "Uhrum > West Entrance > South Platform" => {
+                Ok(SpotId::Uhrum__West_Entrance__South_Platform)
+            }
+            "Uhrum > West Entrance > Southeast Tree" => {
+                Ok(SpotId::Uhrum__West_Entrance__Southeast_Tree)
+            }
+            "Uhrum > West Entrance > Top West Ledge" => {
+                Ok(SpotId::Uhrum__West_Entrance__Top_West_Ledge)
+            }
+            "Uhrum > West Entrance > Upper Fork" => Ok(SpotId::Uhrum__West_Entrance__Upper_Fork),
+            "Uhrum > West Entrance > Upper Wall East" => {
+                Ok(SpotId::Uhrum__West_Entrance__Upper_Wall_East)
+            }
+            "Uhrum > West Entrance > Upper Wall West" => {
+                Ok(SpotId::Uhrum__West_Entrance__Upper_Wall_West)
+            }
             "Uhrum > West Entrance > West 25" => Ok(SpotId::Uhrum__West_Entrance__West_25),
             "Uhrum > West Entrance > West 26" => Ok(SpotId::Uhrum__West_Entrance__West_26),
             "Uhrum > West Entrance > West 27" => Ok(SpotId::Uhrum__West_Entrance__West_27),
+            "Uhrum > West Entrance > West of Gate" => {
+                Ok(SpotId::Uhrum__West_Entrance__West_of_Gate)
+            }
             _ => Err(format!("Could not recognize as a SpotId: {}", s)),
         }
     }
@@ -5689,6 +5791,12 @@ pub enum LocationId {
     Menu__Upgrade_Menu__Physiology__Health_Upgrade_4,
     Menu__Upgrade_Menu__Physiology__Health_Upgrade_5,
     Menu__Upgrade_Menu__Physiology__Mist_Upgrade,
+    Uhrum__West_Entrance__Gate_Switch__Open_Gate,
+    Uhrum__West_Entrance__Inner_Dais__Item,
+    Uhrum__West_Entrance__Upper_Wall_East__Charge_through_Wall,
+    Uhrum__West_Entrance__Upper_Wall_East__Mist_through_Wall,
+    Uhrum__West_Entrance__Upper_Wall_East__Spin_through_Wall,
+    Uhrum__West_Entrance__Upper_Wall_West__Mist_through_Wall,
 }
 impl fmt::Display for LocationId {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
@@ -6317,6 +6425,32 @@ impl fmt::Display for LocationId {
             LocationId::Menu__Upgrade_Menu__Physiology__Mist_Upgrade => {
                 write!(f, "{}", "Menu > Upgrade Menu > Physiology > Mist Upgrade")
             }
+            LocationId::Uhrum__West_Entrance__Gate_Switch__Open_Gate => {
+                write!(f, "{}", "Uhrum > West Entrance > Gate Switch > Open Gate")
+            }
+            LocationId::Uhrum__West_Entrance__Inner_Dais__Item => {
+                write!(f, "{}", "Uhrum > West Entrance > Inner Dais > Item")
+            }
+            LocationId::Uhrum__West_Entrance__Upper_Wall_East__Charge_through_Wall => write!(
+                f,
+                "{}",
+                "Uhrum > West Entrance > Upper Wall East > Charge through Wall"
+            ),
+            LocationId::Uhrum__West_Entrance__Upper_Wall_East__Mist_through_Wall => write!(
+                f,
+                "{}",
+                "Uhrum > West Entrance > Upper Wall East > Mist through Wall"
+            ),
+            LocationId::Uhrum__West_Entrance__Upper_Wall_East__Spin_through_Wall => write!(
+                f,
+                "{}",
+                "Uhrum > West Entrance > Upper Wall East > Spin through Wall"
+            ),
+            LocationId::Uhrum__West_Entrance__Upper_Wall_West__Mist_through_Wall => write!(
+                f,
+                "{}",
+                "Uhrum > West Entrance > Upper Wall West > Mist through Wall"
+            ),
         }
     }
 }
@@ -6799,6 +6933,24 @@ impl std::str::FromStr for LocationId {
             }
             "Menu > Upgrade Menu > Physiology > Mist Upgrade" => {
                 Ok(LocationId::Menu__Upgrade_Menu__Physiology__Mist_Upgrade)
+            }
+            "Uhrum > West Entrance > Gate Switch > Open Gate" => {
+                Ok(LocationId::Uhrum__West_Entrance__Gate_Switch__Open_Gate)
+            }
+            "Uhrum > West Entrance > Inner Dais > Item" => {
+                Ok(LocationId::Uhrum__West_Entrance__Inner_Dais__Item)
+            }
+            "Uhrum > West Entrance > Upper Wall East > Charge through Wall" => {
+                Ok(LocationId::Uhrum__West_Entrance__Upper_Wall_East__Charge_through_Wall)
+            }
+            "Uhrum > West Entrance > Upper Wall East > Mist through Wall" => {
+                Ok(LocationId::Uhrum__West_Entrance__Upper_Wall_East__Mist_through_Wall)
+            }
+            "Uhrum > West Entrance > Upper Wall East > Spin through Wall" => {
+                Ok(LocationId::Uhrum__West_Entrance__Upper_Wall_East__Spin_through_Wall)
+            }
+            "Uhrum > West Entrance > Upper Wall West > Mist through Wall" => {
+                Ok(LocationId::Uhrum__West_Entrance__Upper_Wall_West__Mist_through_Wall)
             }
             _ => Err(format!("Could not recognize as a LocationId: {}", s)),
         }
@@ -7626,6 +7778,45 @@ pub enum ExitId {
     Menu__Upgrade_Menu__Physiology__ex__Combat_1,
     Menu__Upgrade_Menu__Physiology__ex__Drone_1,
     Menu__Upgrade_Menu__Physiology__ex__Infection_1,
+    Uhrum__West_Entrance__Clear_Passage__ex__Portal_Stand_1,
+    Uhrum__West_Entrance__Clear_Passage__ex__Portal_Stand_2,
+    Uhrum__West_Entrance__East_26__ex__Siege_Corridor__West_26_1,
+    Uhrum__West_Entrance__Hidden_Passage_West__ex__Irikar__Lamassu__Hidden_Passage_East_1,
+    Uhrum__West_Entrance__Inner_Dais__ex__Top_West_Ledge_1,
+    Uhrum__West_Entrance__Inner_Dais__ex__West_of_Gate_1,
+    Uhrum__West_Entrance__Middle_West_Ledge__ex__Portal_Stand_1,
+    Uhrum__West_Entrance__Middle_West_Ledge__ex__Portal_Stand_2,
+    Uhrum__West_Entrance__Portal_Stand__ex__Hidden_Passage_Entry_1,
+    Uhrum__West_Entrance__Portal_Stand__ex__West_of_Gate_1,
+    Uhrum__West_Entrance__Portal_Stand__ex__West_of_Gate_2,
+    Uhrum__West_Entrance__Save_Point__ex__Lower_Wall_West_1,
+    Uhrum__West_Entrance__Save_Point__ex__Lower_Wall_West_2,
+    Uhrum__West_Entrance__Save_Point__ex__South_Platform_1,
+    Uhrum__West_Entrance__South_Platform__ex__Middle_West_Ledge_1,
+    Uhrum__West_Entrance__South_Platform__ex__West_27_1,
+    Uhrum__West_Entrance__Southeast_Tree__ex__South_Platform_1,
+    Uhrum__West_Entrance__Top_West_Ledge__ex__Hidden_Passage_Entry_1,
+    Uhrum__West_Entrance__Top_West_Ledge__ex__West_of_Gate_1,
+    Uhrum__West_Entrance__Upper_Fork__ex__Upper_Wall_East_1,
+    Uhrum__West_Entrance__Upper_Fork__ex__Upper_Wall_East_2,
+    Uhrum__West_Entrance__Upper_Wall_East__Charge_through_Wall,
+    Uhrum__West_Entrance__Upper_Wall_East__ex__Upper_Wall_West_1,
+    Uhrum__West_Entrance__Upper_Wall_East__Mist_through_Wall,
+    Uhrum__West_Entrance__Upper_Wall_East__Spin_through_Wall,
+    Uhrum__West_Entrance__Upper_Wall_West__ex__Portal_Exit_1,
+    Uhrum__West_Entrance__Upper_Wall_West__ex__Portal_Exit_2,
+    Uhrum__West_Entrance__Upper_Wall_West__ex__Upper_Wall_East_1,
+    Uhrum__West_Entrance__Upper_Wall_West__Mist_through_Wall,
+    Uhrum__West_Entrance__West_25__ex__Giguna__Separator__East_25_1,
+    Uhrum__West_Entrance__West_26__ex__Hidden_Passage_Entry_1,
+    Uhrum__West_Entrance__West_26__ex__Irikar__Lamassu__East_26_1,
+    Uhrum__West_Entrance__West_26__ex__Portal_Stand_1,
+    Uhrum__West_Entrance__West_26__ex__Portal_Stand_2,
+    Uhrum__West_Entrance__West_27__ex__Irikar__Lamassu__East_27_1,
+    Uhrum__West_Entrance__West_27__ex__South_Platform_1,
+    Uhrum__West_Entrance__West_of_Gate__ex__Inner_Dais_1,
+    Uhrum__West_Entrance__West_of_Gate__ex__Top_West_Ledge_1,
+    Uhrum__West_Entrance__West_of_Gate__ex__Top_West_Ledge_2,
 }
 impl fmt::Display for ExitId {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
@@ -8436,6 +8627,45 @@ impl fmt::Display for ExitId {
             ExitId::Menu__Upgrade_Menu__Physiology__ex__Combat_1 => write!(f, "{}", "Menu > Upgrade Menu > Physiology ==> Combat (1)"),
             ExitId::Menu__Upgrade_Menu__Physiology__ex__Drone_1 => write!(f, "{}", "Menu > Upgrade Menu > Physiology ==> Drone (1)"),
             ExitId::Menu__Upgrade_Menu__Physiology__ex__Infection_1 => write!(f, "{}", "Menu > Upgrade Menu > Physiology ==> Infection (1)"),
+            ExitId::Uhrum__West_Entrance__Clear_Passage__ex__Portal_Stand_1 => write!(f, "{}", "Uhrum > West Entrance > Clear Passage ==> Portal Stand (1)"),
+            ExitId::Uhrum__West_Entrance__Clear_Passage__ex__Portal_Stand_2 => write!(f, "{}", "Uhrum > West Entrance > Clear Passage ==> Portal Stand (2)"),
+            ExitId::Uhrum__West_Entrance__East_26__ex__Siege_Corridor__West_26_1 => write!(f, "{}", "Uhrum > West Entrance > East 26 ==> Siege Corridor > West 26 (1)"),
+            ExitId::Uhrum__West_Entrance__Hidden_Passage_West__ex__Irikar__Lamassu__Hidden_Passage_East_1 => write!(f, "{}", "Uhrum > West Entrance > Hidden Passage West ==> Irikar > Lamassu > Hidden Passage East (1)"),
+            ExitId::Uhrum__West_Entrance__Inner_Dais__ex__Top_West_Ledge_1 => write!(f, "{}", "Uhrum > West Entrance > Inner Dais ==> Top West Ledge (1)"),
+            ExitId::Uhrum__West_Entrance__Inner_Dais__ex__West_of_Gate_1 => write!(f, "{}", "Uhrum > West Entrance > Inner Dais ==> West of Gate (1)"),
+            ExitId::Uhrum__West_Entrance__Middle_West_Ledge__ex__Portal_Stand_1 => write!(f, "{}", "Uhrum > West Entrance > Middle West Ledge ==> Portal Stand (1)"),
+            ExitId::Uhrum__West_Entrance__Middle_West_Ledge__ex__Portal_Stand_2 => write!(f, "{}", "Uhrum > West Entrance > Middle West Ledge ==> Portal Stand (2)"),
+            ExitId::Uhrum__West_Entrance__Portal_Stand__ex__Hidden_Passage_Entry_1 => write!(f, "{}", "Uhrum > West Entrance > Portal Stand ==> Hidden Passage Entry (1)"),
+            ExitId::Uhrum__West_Entrance__Portal_Stand__ex__West_of_Gate_1 => write!(f, "{}", "Uhrum > West Entrance > Portal Stand ==> West of Gate (1)"),
+            ExitId::Uhrum__West_Entrance__Portal_Stand__ex__West_of_Gate_2 => write!(f, "{}", "Uhrum > West Entrance > Portal Stand ==> West of Gate (2)"),
+            ExitId::Uhrum__West_Entrance__Save_Point__ex__Lower_Wall_West_1 => write!(f, "{}", "Uhrum > West Entrance > Save Point ==> Lower Wall West (1)"),
+            ExitId::Uhrum__West_Entrance__Save_Point__ex__Lower_Wall_West_2 => write!(f, "{}", "Uhrum > West Entrance > Save Point ==> Lower Wall West (2)"),
+            ExitId::Uhrum__West_Entrance__Save_Point__ex__South_Platform_1 => write!(f, "{}", "Uhrum > West Entrance > Save Point ==> South Platform (1)"),
+            ExitId::Uhrum__West_Entrance__South_Platform__ex__Middle_West_Ledge_1 => write!(f, "{}", "Uhrum > West Entrance > South Platform ==> Middle West Ledge (1)"),
+            ExitId::Uhrum__West_Entrance__South_Platform__ex__West_27_1 => write!(f, "{}", "Uhrum > West Entrance > South Platform ==> West 27 (1)"),
+            ExitId::Uhrum__West_Entrance__Southeast_Tree__ex__South_Platform_1 => write!(f, "{}", "Uhrum > West Entrance > Southeast Tree ==> South Platform (1)"),
+            ExitId::Uhrum__West_Entrance__Top_West_Ledge__ex__Hidden_Passage_Entry_1 => write!(f, "{}", "Uhrum > West Entrance > Top West Ledge ==> Hidden Passage Entry (1)"),
+            ExitId::Uhrum__West_Entrance__Top_West_Ledge__ex__West_of_Gate_1 => write!(f, "{}", "Uhrum > West Entrance > Top West Ledge ==> West of Gate (1)"),
+            ExitId::Uhrum__West_Entrance__Upper_Fork__ex__Upper_Wall_East_1 => write!(f, "{}", "Uhrum > West Entrance > Upper Fork ==> Upper Wall East (1)"),
+            ExitId::Uhrum__West_Entrance__Upper_Fork__ex__Upper_Wall_East_2 => write!(f, "{}", "Uhrum > West Entrance > Upper Fork ==> Upper Wall East (2)"),
+            ExitId::Uhrum__West_Entrance__Upper_Wall_East__Charge_through_Wall => write!(f, "{}", "Uhrum > West Entrance > Upper Wall East > Charge through Wall"),
+            ExitId::Uhrum__West_Entrance__Upper_Wall_East__ex__Upper_Wall_West_1 => write!(f, "{}", "Uhrum > West Entrance > Upper Wall East ==> Upper Wall West (1)"),
+            ExitId::Uhrum__West_Entrance__Upper_Wall_East__Mist_through_Wall => write!(f, "{}", "Uhrum > West Entrance > Upper Wall East > Mist through Wall"),
+            ExitId::Uhrum__West_Entrance__Upper_Wall_East__Spin_through_Wall => write!(f, "{}", "Uhrum > West Entrance > Upper Wall East > Spin through Wall"),
+            ExitId::Uhrum__West_Entrance__Upper_Wall_West__ex__Portal_Exit_1 => write!(f, "{}", "Uhrum > West Entrance > Upper Wall West ==> Portal Exit (1)"),
+            ExitId::Uhrum__West_Entrance__Upper_Wall_West__ex__Portal_Exit_2 => write!(f, "{}", "Uhrum > West Entrance > Upper Wall West ==> Portal Exit (2)"),
+            ExitId::Uhrum__West_Entrance__Upper_Wall_West__ex__Upper_Wall_East_1 => write!(f, "{}", "Uhrum > West Entrance > Upper Wall West ==> Upper Wall East (1)"),
+            ExitId::Uhrum__West_Entrance__Upper_Wall_West__Mist_through_Wall => write!(f, "{}", "Uhrum > West Entrance > Upper Wall West > Mist through Wall"),
+            ExitId::Uhrum__West_Entrance__West_25__ex__Giguna__Separator__East_25_1 => write!(f, "{}", "Uhrum > West Entrance > West 25 ==> Giguna > Separator > East 25 (1)"),
+            ExitId::Uhrum__West_Entrance__West_26__ex__Hidden_Passage_Entry_1 => write!(f, "{}", "Uhrum > West Entrance > West 26 ==> Hidden Passage Entry (1)"),
+            ExitId::Uhrum__West_Entrance__West_26__ex__Irikar__Lamassu__East_26_1 => write!(f, "{}", "Uhrum > West Entrance > West 26 ==> Irikar > Lamassu > East 26 (1)"),
+            ExitId::Uhrum__West_Entrance__West_26__ex__Portal_Stand_1 => write!(f, "{}", "Uhrum > West Entrance > West 26 ==> Portal Stand (1)"),
+            ExitId::Uhrum__West_Entrance__West_26__ex__Portal_Stand_2 => write!(f, "{}", "Uhrum > West Entrance > West 26 ==> Portal Stand (2)"),
+            ExitId::Uhrum__West_Entrance__West_27__ex__Irikar__Lamassu__East_27_1 => write!(f, "{}", "Uhrum > West Entrance > West 27 ==> Irikar > Lamassu > East 27 (1)"),
+            ExitId::Uhrum__West_Entrance__West_27__ex__South_Platform_1 => write!(f, "{}", "Uhrum > West Entrance > West 27 ==> South Platform (1)"),
+            ExitId::Uhrum__West_Entrance__West_of_Gate__ex__Inner_Dais_1 => write!(f, "{}", "Uhrum > West Entrance > West of Gate ==> Inner Dais (1)"),
+            ExitId::Uhrum__West_Entrance__West_of_Gate__ex__Top_West_Ledge_1 => write!(f, "{}", "Uhrum > West Entrance > West of Gate ==> Top West Ledge (1)"),
+            ExitId::Uhrum__West_Entrance__West_of_Gate__ex__Top_West_Ledge_2 => write!(f, "{}", "Uhrum > West Entrance > West of Gate ==> Top West Ledge (2)"),
         }
     }
 }
@@ -9251,6 +9481,45 @@ impl std::str::FromStr for ExitId {
             "Menu > Upgrade Menu > Physiology ==> Combat (1)" => Ok(ExitId::Menu__Upgrade_Menu__Physiology__ex__Combat_1),
             "Menu > Upgrade Menu > Physiology ==> Drone (1)" => Ok(ExitId::Menu__Upgrade_Menu__Physiology__ex__Drone_1),
             "Menu > Upgrade Menu > Physiology ==> Infection (1)" => Ok(ExitId::Menu__Upgrade_Menu__Physiology__ex__Infection_1),
+            "Uhrum > West Entrance > Clear Passage ==> Portal Stand (1)" => Ok(ExitId::Uhrum__West_Entrance__Clear_Passage__ex__Portal_Stand_1),
+            "Uhrum > West Entrance > Clear Passage ==> Portal Stand (2)" => Ok(ExitId::Uhrum__West_Entrance__Clear_Passage__ex__Portal_Stand_2),
+            "Uhrum > West Entrance > East 26 ==> Siege Corridor > West 26 (1)" => Ok(ExitId::Uhrum__West_Entrance__East_26__ex__Siege_Corridor__West_26_1),
+            "Uhrum > West Entrance > Hidden Passage West ==> Irikar > Lamassu > Hidden Passage East (1)" => Ok(ExitId::Uhrum__West_Entrance__Hidden_Passage_West__ex__Irikar__Lamassu__Hidden_Passage_East_1),
+            "Uhrum > West Entrance > Inner Dais ==> Top West Ledge (1)" => Ok(ExitId::Uhrum__West_Entrance__Inner_Dais__ex__Top_West_Ledge_1),
+            "Uhrum > West Entrance > Inner Dais ==> West of Gate (1)" => Ok(ExitId::Uhrum__West_Entrance__Inner_Dais__ex__West_of_Gate_1),
+            "Uhrum > West Entrance > Middle West Ledge ==> Portal Stand (1)" => Ok(ExitId::Uhrum__West_Entrance__Middle_West_Ledge__ex__Portal_Stand_1),
+            "Uhrum > West Entrance > Middle West Ledge ==> Portal Stand (2)" => Ok(ExitId::Uhrum__West_Entrance__Middle_West_Ledge__ex__Portal_Stand_2),
+            "Uhrum > West Entrance > Portal Stand ==> Hidden Passage Entry (1)" => Ok(ExitId::Uhrum__West_Entrance__Portal_Stand__ex__Hidden_Passage_Entry_1),
+            "Uhrum > West Entrance > Portal Stand ==> West of Gate (1)" => Ok(ExitId::Uhrum__West_Entrance__Portal_Stand__ex__West_of_Gate_1),
+            "Uhrum > West Entrance > Portal Stand ==> West of Gate (2)" => Ok(ExitId::Uhrum__West_Entrance__Portal_Stand__ex__West_of_Gate_2),
+            "Uhrum > West Entrance > Save Point ==> Lower Wall West (1)" => Ok(ExitId::Uhrum__West_Entrance__Save_Point__ex__Lower_Wall_West_1),
+            "Uhrum > West Entrance > Save Point ==> Lower Wall West (2)" => Ok(ExitId::Uhrum__West_Entrance__Save_Point__ex__Lower_Wall_West_2),
+            "Uhrum > West Entrance > Save Point ==> South Platform (1)" => Ok(ExitId::Uhrum__West_Entrance__Save_Point__ex__South_Platform_1),
+            "Uhrum > West Entrance > South Platform ==> Middle West Ledge (1)" => Ok(ExitId::Uhrum__West_Entrance__South_Platform__ex__Middle_West_Ledge_1),
+            "Uhrum > West Entrance > South Platform ==> West 27 (1)" => Ok(ExitId::Uhrum__West_Entrance__South_Platform__ex__West_27_1),
+            "Uhrum > West Entrance > Southeast Tree ==> South Platform (1)" => Ok(ExitId::Uhrum__West_Entrance__Southeast_Tree__ex__South_Platform_1),
+            "Uhrum > West Entrance > Top West Ledge ==> Hidden Passage Entry (1)" => Ok(ExitId::Uhrum__West_Entrance__Top_West_Ledge__ex__Hidden_Passage_Entry_1),
+            "Uhrum > West Entrance > Top West Ledge ==> West of Gate (1)" => Ok(ExitId::Uhrum__West_Entrance__Top_West_Ledge__ex__West_of_Gate_1),
+            "Uhrum > West Entrance > Upper Fork ==> Upper Wall East (1)" => Ok(ExitId::Uhrum__West_Entrance__Upper_Fork__ex__Upper_Wall_East_1),
+            "Uhrum > West Entrance > Upper Fork ==> Upper Wall East (2)" => Ok(ExitId::Uhrum__West_Entrance__Upper_Fork__ex__Upper_Wall_East_2),
+            "Uhrum > West Entrance > Upper Wall East > Charge through Wall" => Ok(ExitId::Uhrum__West_Entrance__Upper_Wall_East__Charge_through_Wall),
+            "Uhrum > West Entrance > Upper Wall East ==> Upper Wall West (1)" => Ok(ExitId::Uhrum__West_Entrance__Upper_Wall_East__ex__Upper_Wall_West_1),
+            "Uhrum > West Entrance > Upper Wall East > Mist through Wall" => Ok(ExitId::Uhrum__West_Entrance__Upper_Wall_East__Mist_through_Wall),
+            "Uhrum > West Entrance > Upper Wall East > Spin through Wall" => Ok(ExitId::Uhrum__West_Entrance__Upper_Wall_East__Spin_through_Wall),
+            "Uhrum > West Entrance > Upper Wall West ==> Portal Exit (1)" => Ok(ExitId::Uhrum__West_Entrance__Upper_Wall_West__ex__Portal_Exit_1),
+            "Uhrum > West Entrance > Upper Wall West ==> Portal Exit (2)" => Ok(ExitId::Uhrum__West_Entrance__Upper_Wall_West__ex__Portal_Exit_2),
+            "Uhrum > West Entrance > Upper Wall West ==> Upper Wall East (1)" => Ok(ExitId::Uhrum__West_Entrance__Upper_Wall_West__ex__Upper_Wall_East_1),
+            "Uhrum > West Entrance > Upper Wall West > Mist through Wall" => Ok(ExitId::Uhrum__West_Entrance__Upper_Wall_West__Mist_through_Wall),
+            "Uhrum > West Entrance > West 25 ==> Giguna > Separator > East 25 (1)" => Ok(ExitId::Uhrum__West_Entrance__West_25__ex__Giguna__Separator__East_25_1),
+            "Uhrum > West Entrance > West 26 ==> Hidden Passage Entry (1)" => Ok(ExitId::Uhrum__West_Entrance__West_26__ex__Hidden_Passage_Entry_1),
+            "Uhrum > West Entrance > West 26 ==> Irikar > Lamassu > East 26 (1)" => Ok(ExitId::Uhrum__West_Entrance__West_26__ex__Irikar__Lamassu__East_26_1),
+            "Uhrum > West Entrance > West 26 ==> Portal Stand (1)" => Ok(ExitId::Uhrum__West_Entrance__West_26__ex__Portal_Stand_1),
+            "Uhrum > West Entrance > West 26 ==> Portal Stand (2)" => Ok(ExitId::Uhrum__West_Entrance__West_26__ex__Portal_Stand_2),
+            "Uhrum > West Entrance > West 27 ==> Irikar > Lamassu > East 27 (1)" => Ok(ExitId::Uhrum__West_Entrance__West_27__ex__Irikar__Lamassu__East_27_1),
+            "Uhrum > West Entrance > West 27 ==> South Platform (1)" => Ok(ExitId::Uhrum__West_Entrance__West_27__ex__South_Platform_1),
+            "Uhrum > West Entrance > West of Gate ==> Inner Dais (1)" => Ok(ExitId::Uhrum__West_Entrance__West_of_Gate__ex__Inner_Dais_1),
+            "Uhrum > West Entrance > West of Gate ==> Top West Ledge (1)" => Ok(ExitId::Uhrum__West_Entrance__West_of_Gate__ex__Top_West_Ledge_1),
+            "Uhrum > West Entrance > West of Gate ==> Top West Ledge (2)" => Ok(ExitId::Uhrum__West_Entrance__West_of_Gate__ex__Top_West_Ledge_2),
             _ => Err(format!("Could not recognize as a ExitId: {}", s)),
         }
     }
@@ -9355,6 +9624,7 @@ pub enum ActionId {
     Irikar__Hub__Save_Point__Save,
     Irikar__Sight_Room__Portal__Enter_Portal,
     Irikar_Breach__Exit_Corridor__Portal_Stand__Enter_Portal,
+    Uhrum__West_Entrance__Save_Point__Save,
 }
 impl fmt::Display for ActionId {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
@@ -9665,6 +9935,9 @@ impl fmt::Display for ActionId {
                 "{}",
                 "Irikar Breach > Exit Corridor > Portal Stand > Enter Portal"
             ),
+            ActionId::Uhrum__West_Entrance__Save_Point__Save => {
+                write!(f, "{}", "Uhrum > West Entrance > Save Point > Save")
+            }
         }
     }
 }
@@ -9918,6 +10191,9 @@ impl std::str::FromStr for ActionId {
             "Irikar Breach > Exit Corridor > Portal Stand > Enter Portal" => {
                 Ok(ActionId::Irikar_Breach__Exit_Corridor__Portal_Stand__Enter_Portal)
             }
+            "Uhrum > West Entrance > Save Point > Save" => {
+                Ok(ActionId::Uhrum__West_Entrance__Save_Point__Save)
+            }
             _ => Err(format!("Could not recognize as a ActionId: {}", s)),
         }
     }
@@ -9972,6 +10248,7 @@ pub enum CanonId {
     Irikar_Royal_Storage_Wall,
     Irikar_Royal_Storage_Flask,
     Irikar_Gudam,
+    Uhrum_West_Entrance_Upper_Wall,
 }
 impl fmt::Display for CanonId {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
@@ -10010,6 +10287,9 @@ impl fmt::Display for CanonId {
             CanonId::Irikar_Royal_Storage_Wall => write!(f, "{}", "Irikar_Royal_Storage_Wall"),
             CanonId::Irikar_Royal_Storage_Flask => write!(f, "{}", "Irikar_Royal_Storage_Flask"),
             CanonId::Irikar_Gudam => write!(f, "{}", "Irikar_Gudam"),
+            CanonId::Uhrum_West_Entrance_Upper_Wall => {
+                write!(f, "{}", "Uhrum_West_Entrance_Upper_Wall")
+            }
         }
     }
 }
@@ -10050,6 +10330,7 @@ impl std::str::FromStr for CanonId {
             "Irikar_Royal_Storage_Wall" => Ok(CanonId::Irikar_Royal_Storage_Wall),
             "Irikar_Royal_Storage_Flask" => Ok(CanonId::Irikar_Royal_Storage_Flask),
             "Irikar_Gudam" => Ok(CanonId::Irikar_Gudam),
+            "Uhrum_West_Entrance_Upper_Wall" => Ok(CanonId::Uhrum_West_Entrance_Upper_Wall),
             _ => Err(format!("Could not recognize as a CanonId: {}", s)),
         }
     }

@@ -99,6 +99,7 @@ time:
   shockwave: 3.5  # even when shockwaving flasks and urns? at least 1
   hack: 0.5
   susar: 3.0  # caught by susar
+  # need to test slingshot charge time
 
   ## Transitions
   xshift: 1.35  # sometimes 1.2, sometimes 1.5?
@@ -191,6 +192,9 @@ helpers:
   $climb: ^mode != 'drone' and Wall_Climb
   $hook: ^mode == 'drone' and Slingshot_Hook
   $hover: ^mode == 'drone' and Drone_Hover
+  $charge: ^mode == 'drone' and Slingshot_Charge
+  $spin: ^mode == 'drone' and Slingshot_Weapon
+
   $can_deploy: Remote_Drone and ^mode != 'drone' and not Anuman
   $can_recall: not ^breach and NOT WITHIN `Menu` and ^mode == 'drone' and not Anuman
   $shockwave: ^mode != 'drone' and Shockwave
@@ -224,9 +228,6 @@ helpers:
   $block_clip: minor_glitches and ^mode == 'drone'
   $block_clip_escape: minor_glitches and $hook
 
-  $charge: Slingshot_Charge and ^mode == 'drone'
-  $spin: Slingshot_Weapon and ^mode == 'drone'
-
   # TODO: this is a temporary hack around the attract issue #131
   $attract: Breach_Attractor and (Anuman or ^mode != 'drone' or ^indra WITHIN ^position)
 
@@ -244,7 +245,7 @@ helpers:
     [Boomerang, Power_Matrix]
   $all_urns:itemList: >
     [Amashilama, Ledge_Grab, Infect, Remote_Drone, Shockwave, Wall_Climb, Slingshot_Hook, Breach_Sight]
-  # To be added: 5 Flask, 3 Big_Flask, Dangerous_Ideas, Double_Axe, Drone_Hover, Royal_Dagger
+  # To be added: 5 Flask, 3 Big_Flask, Dangerous_Ideas, Double_Axe, Drone_Hover, Royal_Dagger, Udusan
   # 1 Health_Fragment, The_Student, Heretics_Granddaughter, Terminal_Breakthrough_2
 
   $save:action: ^save = ^position; ^energy = $max_energy

@@ -7,17 +7,301 @@ areas:
   spots:
     - name: West 27
       coord: [19.05, 26.8]
+      local:
+        - to: Southeast Tree
+      exits:
+        - to: Irikar > Lamassu > East 27
+          tags: [xshift]
+        - to: South Platform
+          req: $hover
+          movement: base
     - name: West 26
       coord: [19.05, 25.85]
+      local:
+        - to: Middle West Ledge
+      exits:
+        - to: Irikar > Lamassu > East 26
+          tags: [xshift]
+        - to: Hidden Passage Entry
+          req: $hook
+          movement: base
+          jumps: 3
+        - to: Portal Stand
+          req: $grab and $climb
+          movement: base
+          jumps: 3
+        - to: Portal Stand
+          req: $hook
+          jumps: 2
+
     - name: Hidden Passage West
       coord: [19.05, 25.2]
+      local:
+        - to: Hidden Passage Entry
+      exits:
+        - to: Irikar > Lamassu > Hidden Passage East
+          tags: [xshift]
     - name: Hidden Passage Entry
       coord: [19.2, 25.2]
+      local:
+        - to: Hidden Passage West
+        - to: Portal Stand
+        - to: Middle West Ledge
+        - to: West 26
+          thru: [19.225, 25.6]
     - name: West 25
       coord: [19.05, 24.75]
+      local:
+        - to: Top West Ledge
+      exits:
+        - to: Giguna > Separator > East 25
+          tags: [xshift]
+    - name: Top West Ledge
+      coord: [19.2, 24.9]
+      local:
+        - to: Portal Stand
+        - to: Middle West Ledge
+      exits:
+        - to: Hidden Passage Entry
+          req: ^mode == 'drone'
+          movement: base
+        - to: West of Gate
+          req: $hover
+          movement: base
+    - name: Middle West Ledge
+      coord: [19.3, 26.5]
+      local:
+        - to: Southeast Tree
+        - to: South Platform
+        - to: Save Point
+      exits:
+        - to: Portal Stand
+          req: $grab and $climb
+          movement: base
+          jumps: 7
+        - to: Portal Stand
+          req: $hook
+          movement: base
+          jumps: 4
+
+    - name: Southeast Tree
+      coord: [19.2, 27.05]
+      local:
+        - to: Save Point
+        - to: West 27
+          jumps: 2
+      exits:
+        - to: South Platform
+          req: $hook
+          movement: base
+          jumps: 1
+    - name: South Platform
+      coord: [19.45, 26.8]
+      local:
+        - to: Southeast Tree
+        - to: Save Point
+        - to: Lower Wall West
+      exits:
+        - to: Middle West Ledge
+          req: $hook
+          movement: base
+          jumps: 2
+        - to: West 27
+          req: $hover
+          movement: base
 
     - name: Save Point
-      coord: [19.5, 27.45]
+      coord: [19.5, 27.35]
+      local:
+        - to: Southeast Tree
+          jumps: 2
+      exits:
+        - to: South Platform
+          req: $hook
+          movement: base
+          jumps: 2
+        - to: Lower Wall West
+          req: $grab
+          movement: base
+          jumps: 4
+        - to: Lower Wall West
+          req: $hook
+          movement: base
+          jumps: 2
+      actions:
+        - name: Save
+          do: $save
+          tags: [save]
     - name: Portal Stand
       coord: [19.525, 25.5]
+      local:
+        - to: West 26
+        - to: Middle West Ledge
+        - to: Clear Passage
+      exits:
+        - to: Hidden Passage Entry
+          req: $hook
+          movement: base
+          jumps: 1
+        - to: West of Gate
+          req: $grab
+          movement: base
+          jumps: 3
+        - to: West of Gate
+          req: $hook
+          movement: base
+          jumps: 2
+    - name: Clear Passage
+      coord: [19.95, 25.75]
+      local:
+        - to: Upper Fork
+          jumps: 1
+        - to: East 26
+      exits:
+        - to: Portal Stand
+          req: $grab and $climb
+          movement: base
+          jumps: 4
+        - to: Portal Stand
+          req: $hook
+          movement: base
+          jumps: 2
+
+    - name: West of Gate
+      coord: [19.65, 25.1]
+      local:
+        - to: Portal Stand
+      exits:
+        - to: Top West Ledge
+          req: $hover
+          movement: base
+          jumps: 1
+        - to: Top West Ledge
+          req: $hook  # possible?
+          movement: base
+          jumps: 2
+        - to: Inner Dais
+          req: Uhrum_West_Entrance_Gate
+          movement: base
+          jumps: 2
+    - name: Inner Dais
+      coord: [19.95, 24.8]
+      local:
+        - to: Upper Wall West
+        - to: Portal Exit
+          jumps: 3
+      locations:
+        - name: Item
+          item: Udusan
+          tags: [standing]
+      exits:
+        - to: West of Gate
+          req: Uhrum_West_Entrance_Gate
+          movement: base
+        - to: Top West Ledge
+          req: Uhrum_West_Entrance_Gate and $hover
+          movement: base
+    - name: Portal Exit
+      coord: [20.525, 24.6]
+      local:
+        - to: Inner Dais
+        - to: Gate Switch
+        - to: Upper Wall West
+          thru: [20.3, 24.9]
+    - name: Gate Switch
+      coord: [20.6, 24.7]
+      local:
+        - to: Portal Exit
+          jumps: 1
+      locations:
+        - name: Open Gate
+          item: Uhrum_West_Entrance_Gate
+          req: $can_damage
+          time: 0.25  # ?
+
+    - name: Upper Wall West
+      coord: [20.3, 25.2]
+      local:
+        - to: Inner Dais
+          jumps: 2
+      exits:
+        - to: Portal Exit
+          req: $grab
+          movement: base
+          jumps: 2
+        - to: Portal Exit
+          req: $hook
+          movement: base
+          jumps: 1
+        - to: Upper Wall East
+          req: Uhrum_West_Entrance_Upper_Wall
+          movement: base
+      hybrid:
+        - name: Mist through Wall
+          item: Uhrum_West_Entrance_Upper_Wall
+          canon: Uhrum_West_Entrance_Upper_Wall
+          req: $mist2
+          to: Upper Wall East
+          price: 20
+    - name: Upper Wall East
+      coord: [20.45, 25.3]
+      local:
+        - to: Upper Fork
+      exits:
+        - to: Upper Wall West
+          req: Uhrum_West_Entrance_Upper_Wall
+          movement: base
+          jumps: 1
+      hybrid:
+        - name: Charge through Wall
+          item: Uhrum_West_Entrance_Upper_Wall
+          canon: Uhrum_West_Entrance_Upper_Wall
+          req: $charge
+          to: Upper Wall West
+          time: 1  # ?
+        - name: Spin through Wall
+          item: Uhrum_West_Entrance_Upper_Wall
+          canon: Uhrum_West_Entrance_Upper_Wall
+          req: $spin
+          to: Upper Wall West
+          time: 0.3
+        - name: Mist through Wall
+          item: Uhrum_West_Entrance_Upper_Wall
+          canon: Uhrum_West_Entrance_Upper_Wall
+          req: $mist2
+          to: Upper Wall West
+          price: 20
+          movement: mist2
+    - name: Upper Fork
+      coord: [20.55, 25.6]
+      local:
+        - to: Clear Passage
+        - to: East 26
+      exits:
+        - to: Upper Wall East
+          req: $hook
+          movement: base
+          jumps: 1
+        - to: Upper Wall East
+          req: $mist2
+          price: 30
+          movement: mist2
+    - name: East 26
+      coord: [20.95, 25.85]
+      local:
+        - to: Upper Fork
+          jumps: 1
+        - to: Clear Passage
+      exits:
+        - to: Siege Corridor > West 26
+          tags: [xshift]
+
+    - name: Lower Wall West
+      coord: [19.85, 26.9]
+
+- name: Siege Corridor
+  on_entry: $reset_old_area(^newpos)
+  spots:
+    - name: West 26
+      coord: [21.05, 25.85]
 

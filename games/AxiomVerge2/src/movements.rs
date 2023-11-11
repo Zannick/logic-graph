@@ -6112,6 +6112,188 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
         ([false], SpotId::Irikar__Sight_Room__West_24, SpotId::Irikar__Sight_Room__Lower_Ledge) => {
             701
         }
+        (
+            [false],
+            SpotId::Uhrum__West_Entrance__Clear_Passage,
+            SpotId::Uhrum__West_Entrance__East_26,
+        ) => 3508,
+        (
+            [false],
+            SpotId::Uhrum__West_Entrance__Clear_Passage,
+            SpotId::Uhrum__West_Entrance__Upper_Fork,
+        ) => 2105,
+        (
+            [false],
+            SpotId::Uhrum__West_Entrance__East_26,
+            SpotId::Uhrum__West_Entrance__Upper_Fork,
+        ) => 1403,
+        (
+            [false],
+            SpotId::Uhrum__West_Entrance__Gate_Switch,
+            SpotId::Uhrum__West_Entrance__Portal_Exit,
+        ) => 600,
+        (
+            [false],
+            SpotId::Uhrum__West_Entrance__Hidden_Passage_Entry,
+            SpotId::Uhrum__West_Entrance__Hidden_Passage_West,
+        ) => 526,
+        (
+            [false],
+            SpotId::Uhrum__West_Entrance__Hidden_Passage_Entry,
+            SpotId::Uhrum__West_Entrance__Middle_West_Ledge,
+        ) => 1300,
+        (
+            [false],
+            SpotId::Uhrum__West_Entrance__Hidden_Passage_Entry,
+            SpotId::Uhrum__West_Entrance__Portal_Stand,
+        ) => 1140,
+        // [0.4, 0.614035]
+        (
+            [false],
+            SpotId::Uhrum__West_Entrance__Hidden_Passage_Entry,
+            SpotId::Uhrum__West_Entrance__West_26,
+        ) => 1014,
+        (
+            [false],
+            SpotId::Uhrum__West_Entrance__Hidden_Passage_West,
+            SpotId::Uhrum__West_Entrance__Hidden_Passage_Entry,
+        ) => 526,
+        (
+            [false],
+            SpotId::Uhrum__West_Entrance__Inner_Dais,
+            SpotId::Uhrum__West_Entrance__Portal_Exit,
+        ) => 2017,
+        (
+            [false],
+            SpotId::Uhrum__West_Entrance__Inner_Dais,
+            SpotId::Uhrum__West_Entrance__Upper_Wall_West,
+        ) => 1228,
+        (
+            [false],
+            SpotId::Uhrum__West_Entrance__Middle_West_Ledge,
+            SpotId::Uhrum__West_Entrance__Save_Point,
+        ) => 850,
+        (
+            [false],
+            SpotId::Uhrum__West_Entrance__Middle_West_Ledge,
+            SpotId::Uhrum__West_Entrance__South_Platform,
+        ) => 526,
+        (
+            [false],
+            SpotId::Uhrum__West_Entrance__Middle_West_Ledge,
+            SpotId::Uhrum__West_Entrance__Southeast_Tree,
+        ) => 550,
+        (
+            [false],
+            SpotId::Uhrum__West_Entrance__Portal_Exit,
+            SpotId::Uhrum__West_Entrance__Gate_Switch,
+        ) => 263,
+        (
+            [false],
+            SpotId::Uhrum__West_Entrance__Portal_Exit,
+            SpotId::Uhrum__West_Entrance__Inner_Dais,
+        ) => 2017,
+        // [0.789474, 0.3]
+        (
+            [false],
+            SpotId::Uhrum__West_Entrance__Portal_Exit,
+            SpotId::Uhrum__West_Entrance__Upper_Wall_West,
+        ) => 1089,
+        (
+            [false],
+            SpotId::Uhrum__West_Entrance__Portal_Stand,
+            SpotId::Uhrum__West_Entrance__Clear_Passage,
+        ) => 1491,
+        (
+            [false],
+            SpotId::Uhrum__West_Entrance__Portal_Stand,
+            SpotId::Uhrum__West_Entrance__Middle_West_Ledge,
+        ) => 1000,
+        (
+            [false],
+            SpotId::Uhrum__West_Entrance__Portal_Stand,
+            SpotId::Uhrum__West_Entrance__West_26,
+        ) => 1666,
+        (
+            [false],
+            SpotId::Uhrum__West_Entrance__Save_Point,
+            SpotId::Uhrum__West_Entrance__Southeast_Tree,
+        ) => 1200,
+        (
+            [false],
+            SpotId::Uhrum__West_Entrance__South_Platform,
+            SpotId::Uhrum__West_Entrance__Lower_Wall_West,
+        ) => 1403,
+        (
+            [false],
+            SpotId::Uhrum__West_Entrance__South_Platform,
+            SpotId::Uhrum__West_Entrance__Save_Point,
+        ) => 550,
+        (
+            [false],
+            SpotId::Uhrum__West_Entrance__South_Platform,
+            SpotId::Uhrum__West_Entrance__Southeast_Tree,
+        ) => 877,
+        (
+            [false],
+            SpotId::Uhrum__West_Entrance__Southeast_Tree,
+            SpotId::Uhrum__West_Entrance__Save_Point,
+        ) => 1052,
+        (
+            [false],
+            SpotId::Uhrum__West_Entrance__Southeast_Tree,
+            SpotId::Uhrum__West_Entrance__West_27,
+        ) => 1200,
+        (
+            [false],
+            SpotId::Uhrum__West_Entrance__Top_West_Ledge,
+            SpotId::Uhrum__West_Entrance__Middle_West_Ledge,
+        ) => 1600,
+        (
+            [false],
+            SpotId::Uhrum__West_Entrance__Top_West_Ledge,
+            SpotId::Uhrum__West_Entrance__Portal_Stand,
+        ) => 1140,
+        (
+            [false],
+            SpotId::Uhrum__West_Entrance__Upper_Fork,
+            SpotId::Uhrum__West_Entrance__Clear_Passage,
+        ) => 2105,
+        (
+            [false],
+            SpotId::Uhrum__West_Entrance__Upper_Fork,
+            SpotId::Uhrum__West_Entrance__East_26,
+        ) => 1403,
+        (
+            [false],
+            SpotId::Uhrum__West_Entrance__Upper_Wall_East,
+            SpotId::Uhrum__West_Entrance__Upper_Fork,
+        ) => 350,
+        (
+            [false],
+            SpotId::Uhrum__West_Entrance__Upper_Wall_West,
+            SpotId::Uhrum__West_Entrance__Inner_Dais,
+        ) => 1228,
+        (
+            [false],
+            SpotId::Uhrum__West_Entrance__West_25,
+            SpotId::Uhrum__West_Entrance__Top_West_Ledge,
+        ) => 526,
+        (
+            [false],
+            SpotId::Uhrum__West_Entrance__West_26,
+            SpotId::Uhrum__West_Entrance__Middle_West_Ledge,
+        ) => 877,
+        (
+            [false],
+            SpotId::Uhrum__West_Entrance__West_27,
+            SpotId::Uhrum__West_Entrance__Southeast_Tree,
+        ) => 526,
+        (
+            [false],
+            SpotId::Uhrum__West_Entrance__West_of_Gate,
+            SpotId::Uhrum__West_Entrance__Portal_Stand,
+        ) => 438,
         // [0.2, 0.35]
         (
             [true],
@@ -12108,6 +12290,188 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
         ([true], SpotId::Irikar__Sight_Room__West_24, SpotId::Irikar__Sight_Room__Lower_Ledge) => {
             701
         }
+        (
+            [true],
+            SpotId::Uhrum__West_Entrance__Clear_Passage,
+            SpotId::Uhrum__West_Entrance__East_26,
+        ) => 3508,
+        (
+            [true],
+            SpotId::Uhrum__West_Entrance__Clear_Passage,
+            SpotId::Uhrum__West_Entrance__Upper_Fork,
+        ) => 2105,
+        (
+            [true],
+            SpotId::Uhrum__West_Entrance__East_26,
+            SpotId::Uhrum__West_Entrance__Upper_Fork,
+        ) => 1403,
+        (
+            [true],
+            SpotId::Uhrum__West_Entrance__Gate_Switch,
+            SpotId::Uhrum__West_Entrance__Portal_Exit,
+        ) => 600,
+        (
+            [true],
+            SpotId::Uhrum__West_Entrance__Hidden_Passage_Entry,
+            SpotId::Uhrum__West_Entrance__Hidden_Passage_West,
+        ) => 526,
+        (
+            [true],
+            SpotId::Uhrum__West_Entrance__Hidden_Passage_Entry,
+            SpotId::Uhrum__West_Entrance__Middle_West_Ledge,
+        ) => 1300,
+        (
+            [true],
+            SpotId::Uhrum__West_Entrance__Hidden_Passage_Entry,
+            SpotId::Uhrum__West_Entrance__Portal_Stand,
+        ) => 1140,
+        // [0.4, 0.614035]
+        (
+            [true],
+            SpotId::Uhrum__West_Entrance__Hidden_Passage_Entry,
+            SpotId::Uhrum__West_Entrance__West_26,
+        ) => 1014,
+        (
+            [true],
+            SpotId::Uhrum__West_Entrance__Hidden_Passage_West,
+            SpotId::Uhrum__West_Entrance__Hidden_Passage_Entry,
+        ) => 526,
+        (
+            [true],
+            SpotId::Uhrum__West_Entrance__Inner_Dais,
+            SpotId::Uhrum__West_Entrance__Portal_Exit,
+        ) => 2017,
+        (
+            [true],
+            SpotId::Uhrum__West_Entrance__Inner_Dais,
+            SpotId::Uhrum__West_Entrance__Upper_Wall_West,
+        ) => 1228,
+        (
+            [true],
+            SpotId::Uhrum__West_Entrance__Middle_West_Ledge,
+            SpotId::Uhrum__West_Entrance__Save_Point,
+        ) => 850,
+        (
+            [true],
+            SpotId::Uhrum__West_Entrance__Middle_West_Ledge,
+            SpotId::Uhrum__West_Entrance__South_Platform,
+        ) => 526,
+        (
+            [true],
+            SpotId::Uhrum__West_Entrance__Middle_West_Ledge,
+            SpotId::Uhrum__West_Entrance__Southeast_Tree,
+        ) => 550,
+        (
+            [true],
+            SpotId::Uhrum__West_Entrance__Portal_Exit,
+            SpotId::Uhrum__West_Entrance__Gate_Switch,
+        ) => 263,
+        (
+            [true],
+            SpotId::Uhrum__West_Entrance__Portal_Exit,
+            SpotId::Uhrum__West_Entrance__Inner_Dais,
+        ) => 2017,
+        // [0.789474, 0.3]
+        (
+            [true],
+            SpotId::Uhrum__West_Entrance__Portal_Exit,
+            SpotId::Uhrum__West_Entrance__Upper_Wall_West,
+        ) => 1089,
+        (
+            [true],
+            SpotId::Uhrum__West_Entrance__Portal_Stand,
+            SpotId::Uhrum__West_Entrance__Clear_Passage,
+        ) => 1491,
+        (
+            [true],
+            SpotId::Uhrum__West_Entrance__Portal_Stand,
+            SpotId::Uhrum__West_Entrance__Middle_West_Ledge,
+        ) => 1000,
+        (
+            [true],
+            SpotId::Uhrum__West_Entrance__Portal_Stand,
+            SpotId::Uhrum__West_Entrance__West_26,
+        ) => 1666,
+        (
+            [true],
+            SpotId::Uhrum__West_Entrance__Save_Point,
+            SpotId::Uhrum__West_Entrance__Southeast_Tree,
+        ) => 1200,
+        (
+            [true],
+            SpotId::Uhrum__West_Entrance__South_Platform,
+            SpotId::Uhrum__West_Entrance__Lower_Wall_West,
+        ) => 1403,
+        (
+            [true],
+            SpotId::Uhrum__West_Entrance__South_Platform,
+            SpotId::Uhrum__West_Entrance__Save_Point,
+        ) => 550,
+        (
+            [true],
+            SpotId::Uhrum__West_Entrance__South_Platform,
+            SpotId::Uhrum__West_Entrance__Southeast_Tree,
+        ) => 877,
+        (
+            [true],
+            SpotId::Uhrum__West_Entrance__Southeast_Tree,
+            SpotId::Uhrum__West_Entrance__Save_Point,
+        ) => 1052,
+        (
+            [true],
+            SpotId::Uhrum__West_Entrance__Southeast_Tree,
+            SpotId::Uhrum__West_Entrance__West_27,
+        ) => 1200,
+        (
+            [true],
+            SpotId::Uhrum__West_Entrance__Top_West_Ledge,
+            SpotId::Uhrum__West_Entrance__Middle_West_Ledge,
+        ) => 1600,
+        (
+            [true],
+            SpotId::Uhrum__West_Entrance__Top_West_Ledge,
+            SpotId::Uhrum__West_Entrance__Portal_Stand,
+        ) => 1140,
+        (
+            [true],
+            SpotId::Uhrum__West_Entrance__Upper_Fork,
+            SpotId::Uhrum__West_Entrance__Clear_Passage,
+        ) => 2105,
+        (
+            [true],
+            SpotId::Uhrum__West_Entrance__Upper_Fork,
+            SpotId::Uhrum__West_Entrance__East_26,
+        ) => 1403,
+        (
+            [true],
+            SpotId::Uhrum__West_Entrance__Upper_Wall_East,
+            SpotId::Uhrum__West_Entrance__Upper_Fork,
+        ) => 350,
+        (
+            [true],
+            SpotId::Uhrum__West_Entrance__Upper_Wall_West,
+            SpotId::Uhrum__West_Entrance__Inner_Dais,
+        ) => 1228,
+        (
+            [true],
+            SpotId::Uhrum__West_Entrance__West_25,
+            SpotId::Uhrum__West_Entrance__Top_West_Ledge,
+        ) => 526,
+        (
+            [true],
+            SpotId::Uhrum__West_Entrance__West_26,
+            SpotId::Uhrum__West_Entrance__Middle_West_Ledge,
+        ) => 877,
+        (
+            [true],
+            SpotId::Uhrum__West_Entrance__West_27,
+            SpotId::Uhrum__West_Entrance__Southeast_Tree,
+        ) => 526,
+        (
+            [true],
+            SpotId::Uhrum__West_Entrance__West_of_Gate,
+            SpotId::Uhrum__West_Entrance__Portal_Stand,
+        ) => 438,
         _ => u32::MAX,
     }
 }
@@ -15897,6 +16261,134 @@ pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
         (SpotId::Irikar__Lamassu__Catwalk_West, SpotId::Irikar__Lamassu__Bottom_Middle) => true,
         (SpotId::Irikar__Lamassu__Catwalk_Middle, SpotId::Irikar__Lamassu__Catwalk_West) => true,
         (SpotId::Irikar__Lamassu__Catwalk_Middle, SpotId::Irikar__Lamassu__East_27) => true,
+        (SpotId::Uhrum__West_Entrance__West_27, SpotId::Uhrum__West_Entrance__Southeast_Tree) => {
+            true
+        }
+        (
+            SpotId::Uhrum__West_Entrance__West_26,
+            SpotId::Uhrum__West_Entrance__Middle_West_Ledge,
+        ) => true,
+        (
+            SpotId::Uhrum__West_Entrance__Hidden_Passage_West,
+            SpotId::Uhrum__West_Entrance__Hidden_Passage_Entry,
+        ) => true,
+        (
+            SpotId::Uhrum__West_Entrance__Hidden_Passage_Entry,
+            SpotId::Uhrum__West_Entrance__Hidden_Passage_West,
+        ) => true,
+        (
+            SpotId::Uhrum__West_Entrance__Hidden_Passage_Entry,
+            SpotId::Uhrum__West_Entrance__Portal_Stand,
+        ) => true,
+        (
+            SpotId::Uhrum__West_Entrance__Hidden_Passage_Entry,
+            SpotId::Uhrum__West_Entrance__Middle_West_Ledge,
+        ) => true,
+        (
+            SpotId::Uhrum__West_Entrance__Hidden_Passage_Entry,
+            SpotId::Uhrum__West_Entrance__West_26,
+        ) => true,
+        (SpotId::Uhrum__West_Entrance__West_25, SpotId::Uhrum__West_Entrance__Top_West_Ledge) => {
+            true
+        }
+        (
+            SpotId::Uhrum__West_Entrance__Top_West_Ledge,
+            SpotId::Uhrum__West_Entrance__Portal_Stand,
+        ) => true,
+        (
+            SpotId::Uhrum__West_Entrance__Top_West_Ledge,
+            SpotId::Uhrum__West_Entrance__Middle_West_Ledge,
+        ) => true,
+        (
+            SpotId::Uhrum__West_Entrance__Middle_West_Ledge,
+            SpotId::Uhrum__West_Entrance__Southeast_Tree,
+        ) => true,
+        (
+            SpotId::Uhrum__West_Entrance__Middle_West_Ledge,
+            SpotId::Uhrum__West_Entrance__South_Platform,
+        ) => true,
+        (
+            SpotId::Uhrum__West_Entrance__Middle_West_Ledge,
+            SpotId::Uhrum__West_Entrance__Save_Point,
+        ) => true,
+        (
+            SpotId::Uhrum__West_Entrance__Southeast_Tree,
+            SpotId::Uhrum__West_Entrance__Save_Point,
+        ) => true,
+        (SpotId::Uhrum__West_Entrance__Southeast_Tree, SpotId::Uhrum__West_Entrance__West_27) => {
+            true
+        }
+        (
+            SpotId::Uhrum__West_Entrance__South_Platform,
+            SpotId::Uhrum__West_Entrance__Southeast_Tree,
+        ) => true,
+        (
+            SpotId::Uhrum__West_Entrance__South_Platform,
+            SpotId::Uhrum__West_Entrance__Save_Point,
+        ) => true,
+        (
+            SpotId::Uhrum__West_Entrance__South_Platform,
+            SpotId::Uhrum__West_Entrance__Lower_Wall_West,
+        ) => true,
+        (
+            SpotId::Uhrum__West_Entrance__Save_Point,
+            SpotId::Uhrum__West_Entrance__Southeast_Tree,
+        ) => true,
+        (SpotId::Uhrum__West_Entrance__Portal_Stand, SpotId::Uhrum__West_Entrance__West_26) => true,
+        (
+            SpotId::Uhrum__West_Entrance__Portal_Stand,
+            SpotId::Uhrum__West_Entrance__Middle_West_Ledge,
+        ) => true,
+        (
+            SpotId::Uhrum__West_Entrance__Portal_Stand,
+            SpotId::Uhrum__West_Entrance__Clear_Passage,
+        ) => true,
+        (SpotId::Uhrum__West_Entrance__Clear_Passage, SpotId::Uhrum__West_Entrance__Upper_Fork) => {
+            true
+        }
+        (SpotId::Uhrum__West_Entrance__Clear_Passage, SpotId::Uhrum__West_Entrance__East_26) => {
+            true
+        }
+        (
+            SpotId::Uhrum__West_Entrance__West_of_Gate,
+            SpotId::Uhrum__West_Entrance__Portal_Stand,
+        ) => true,
+        (
+            SpotId::Uhrum__West_Entrance__Inner_Dais,
+            SpotId::Uhrum__West_Entrance__Upper_Wall_West,
+        ) => true,
+        (SpotId::Uhrum__West_Entrance__Inner_Dais, SpotId::Uhrum__West_Entrance__Portal_Exit) => {
+            true
+        }
+        (SpotId::Uhrum__West_Entrance__Portal_Exit, SpotId::Uhrum__West_Entrance__Inner_Dais) => {
+            true
+        }
+        (SpotId::Uhrum__West_Entrance__Portal_Exit, SpotId::Uhrum__West_Entrance__Gate_Switch) => {
+            true
+        }
+        (
+            SpotId::Uhrum__West_Entrance__Portal_Exit,
+            SpotId::Uhrum__West_Entrance__Upper_Wall_West,
+        ) => true,
+        (SpotId::Uhrum__West_Entrance__Gate_Switch, SpotId::Uhrum__West_Entrance__Portal_Exit) => {
+            true
+        }
+        (
+            SpotId::Uhrum__West_Entrance__Upper_Wall_West,
+            SpotId::Uhrum__West_Entrance__Inner_Dais,
+        ) => true,
+        (
+            SpotId::Uhrum__West_Entrance__Upper_Wall_East,
+            SpotId::Uhrum__West_Entrance__Upper_Fork,
+        ) => true,
+        (SpotId::Uhrum__West_Entrance__Upper_Fork, SpotId::Uhrum__West_Entrance__Clear_Passage) => {
+            true
+        }
+        (SpotId::Uhrum__West_Entrance__Upper_Fork, SpotId::Uhrum__West_Entrance__East_26) => true,
+        (SpotId::Uhrum__West_Entrance__East_26, SpotId::Uhrum__West_Entrance__Upper_Fork) => true,
+        (SpotId::Uhrum__West_Entrance__East_26, SpotId::Uhrum__West_Entrance__Clear_Passage) => {
+            true
+        }
         _ => false,
     }
 }
@@ -27214,6 +27706,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             1000,
         ),
         (
+            SpotId::Giguna__Separator__East_25,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
             SpotId::Giguna__Vertical_Interchange__Dead_end,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
@@ -32379,9 +32876,84 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             100,
         ),
         (
+            SpotId::Uhrum__Siege_Corridor__West_26,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Uhrum__West_Entrance__Clear_Passage,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Uhrum__West_Entrance__Clear_Passage,
+            SpotId::Uhrum__West_Entrance__East_26,
+            3508,
+        ),
+        (
+            SpotId::Uhrum__West_Entrance__Clear_Passage,
+            SpotId::Uhrum__West_Entrance__Portal_Stand,
+            1491,
+        ),
+        (
+            SpotId::Uhrum__West_Entrance__Clear_Passage,
+            SpotId::Uhrum__West_Entrance__Upper_Fork,
+            2105,
+        ),
+        (
+            SpotId::Uhrum__West_Entrance__East_26,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Uhrum__West_Entrance__East_26,
+            SpotId::Uhrum__Siege_Corridor__West_26,
+            1350,
+        ),
+        (
+            SpotId::Uhrum__West_Entrance__East_26,
+            SpotId::Uhrum__West_Entrance__Upper_Fork,
+            1403,
+        ),
+        (
+            SpotId::Uhrum__West_Entrance__Gate_Switch,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Uhrum__West_Entrance__Gate_Switch,
+            SpotId::Uhrum__West_Entrance__Portal_Exit,
+            600,
+        ),
+        (
             SpotId::Uhrum__West_Entrance__Hidden_Passage_Entry,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
+        ),
+        (
+            SpotId::Uhrum__West_Entrance__Hidden_Passage_Entry,
+            SpotId::Uhrum__West_Entrance__Hidden_Passage_West,
+            526,
+        ),
+        (
+            SpotId::Uhrum__West_Entrance__Hidden_Passage_Entry,
+            SpotId::Uhrum__West_Entrance__Middle_West_Ledge,
+            1300,
+        ),
+        (
+            SpotId::Uhrum__West_Entrance__Hidden_Passage_Entry,
+            SpotId::Uhrum__West_Entrance__Portal_Stand,
+            1140,
+        ),
+        (
+            SpotId::Uhrum__West_Entrance__Hidden_Passage_Entry,
+            SpotId::Uhrum__West_Entrance__West_26,
+            1014,
+        ),
+        (
+            SpotId::Uhrum__West_Entrance__Hidden_Passage_West,
+            SpotId::Irikar__Lamassu__Hidden_Passage_East,
+            1350,
         ),
         (
             SpotId::Uhrum__West_Entrance__Hidden_Passage_West,
@@ -32389,9 +32961,114 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             1000,
         ),
         (
+            SpotId::Uhrum__West_Entrance__Hidden_Passage_West,
+            SpotId::Uhrum__West_Entrance__Hidden_Passage_Entry,
+            526,
+        ),
+        (
+            SpotId::Uhrum__West_Entrance__Inner_Dais,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Uhrum__West_Entrance__Inner_Dais,
+            SpotId::Uhrum__West_Entrance__Portal_Exit,
+            2017,
+        ),
+        (
+            SpotId::Uhrum__West_Entrance__Inner_Dais,
+            SpotId::Uhrum__West_Entrance__Top_West_Ledge,
+            2631,
+        ),
+        (
+            SpotId::Uhrum__West_Entrance__Inner_Dais,
+            SpotId::Uhrum__West_Entrance__Upper_Wall_West,
+            1228,
+        ),
+        (
+            SpotId::Uhrum__West_Entrance__Inner_Dais,
+            SpotId::Uhrum__West_Entrance__West_of_Gate,
+            1052,
+        ),
+        (
+            SpotId::Uhrum__West_Entrance__Lower_Wall_West,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Uhrum__West_Entrance__Middle_West_Ledge,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Uhrum__West_Entrance__Middle_West_Ledge,
+            SpotId::Uhrum__West_Entrance__Portal_Stand,
+            2400,
+        ),
+        (
+            SpotId::Uhrum__West_Entrance__Middle_West_Ledge,
+            SpotId::Uhrum__West_Entrance__Save_Point,
+            850,
+        ),
+        (
+            SpotId::Uhrum__West_Entrance__Middle_West_Ledge,
+            SpotId::Uhrum__West_Entrance__South_Platform,
+            526,
+        ),
+        (
+            SpotId::Uhrum__West_Entrance__Middle_West_Ledge,
+            SpotId::Uhrum__West_Entrance__Southeast_Tree,
+            550,
+        ),
+        (
+            SpotId::Uhrum__West_Entrance__Portal_Exit,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Uhrum__West_Entrance__Portal_Exit,
+            SpotId::Uhrum__West_Entrance__Gate_Switch,
+            263,
+        ),
+        (
+            SpotId::Uhrum__West_Entrance__Portal_Exit,
+            SpotId::Uhrum__West_Entrance__Inner_Dais,
+            2017,
+        ),
+        (
+            SpotId::Uhrum__West_Entrance__Portal_Exit,
+            SpotId::Uhrum__West_Entrance__Upper_Wall_West,
+            1089,
+        ),
+        (
             SpotId::Uhrum__West_Entrance__Portal_Stand,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
+        ),
+        (
+            SpotId::Uhrum__West_Entrance__Portal_Stand,
+            SpotId::Uhrum__West_Entrance__Clear_Passage,
+            1491,
+        ),
+        (
+            SpotId::Uhrum__West_Entrance__Portal_Stand,
+            SpotId::Uhrum__West_Entrance__Hidden_Passage_Entry,
+            1140,
+        ),
+        (
+            SpotId::Uhrum__West_Entrance__Portal_Stand,
+            SpotId::Uhrum__West_Entrance__Middle_West_Ledge,
+            1000,
+        ),
+        (
+            SpotId::Uhrum__West_Entrance__Portal_Stand,
+            SpotId::Uhrum__West_Entrance__West_26,
+            1666,
+        ),
+        (
+            SpotId::Uhrum__West_Entrance__Portal_Stand,
+            SpotId::Uhrum__West_Entrance__West_of_Gate,
+            1200,
         ),
         (
             SpotId::Uhrum__West_Entrance__Save_Point,
@@ -32399,9 +33076,169 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             1000,
         ),
         (
+            SpotId::Uhrum__West_Entrance__Save_Point,
+            SpotId::Uhrum__West_Entrance__Lower_Wall_West,
+            1228,
+        ),
+        (
+            SpotId::Uhrum__West_Entrance__Save_Point,
+            SpotId::Uhrum__West_Entrance__South_Platform,
+            1200,
+        ),
+        (
+            SpotId::Uhrum__West_Entrance__Save_Point,
+            SpotId::Uhrum__West_Entrance__Southeast_Tree,
+            1200,
+        ),
+        (
+            SpotId::Uhrum__West_Entrance__South_Platform,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Uhrum__West_Entrance__South_Platform,
+            SpotId::Uhrum__West_Entrance__Lower_Wall_West,
+            1403,
+        ),
+        (
+            SpotId::Uhrum__West_Entrance__South_Platform,
+            SpotId::Uhrum__West_Entrance__Middle_West_Ledge,
+            1200,
+        ),
+        (
+            SpotId::Uhrum__West_Entrance__South_Platform,
+            SpotId::Uhrum__West_Entrance__Save_Point,
+            550,
+        ),
+        (
+            SpotId::Uhrum__West_Entrance__South_Platform,
+            SpotId::Uhrum__West_Entrance__Southeast_Tree,
+            877,
+        ),
+        (
+            SpotId::Uhrum__West_Entrance__South_Platform,
+            SpotId::Uhrum__West_Entrance__West_27,
+            1403,
+        ),
+        (
+            SpotId::Uhrum__West_Entrance__Southeast_Tree,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Uhrum__West_Entrance__Southeast_Tree,
+            SpotId::Uhrum__West_Entrance__Save_Point,
+            1052,
+        ),
+        (
+            SpotId::Uhrum__West_Entrance__Southeast_Tree,
+            SpotId::Uhrum__West_Entrance__South_Platform,
+            877,
+        ),
+        (
+            SpotId::Uhrum__West_Entrance__Southeast_Tree,
+            SpotId::Uhrum__West_Entrance__West_27,
+            1200,
+        ),
+        (
+            SpotId::Uhrum__West_Entrance__Top_West_Ledge,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Uhrum__West_Entrance__Top_West_Ledge,
+            SpotId::Uhrum__West_Entrance__Hidden_Passage_Entry,
+            300,
+        ),
+        (
+            SpotId::Uhrum__West_Entrance__Top_West_Ledge,
+            SpotId::Uhrum__West_Entrance__Middle_West_Ledge,
+            1600,
+        ),
+        (
+            SpotId::Uhrum__West_Entrance__Top_West_Ledge,
+            SpotId::Uhrum__West_Entrance__Portal_Stand,
+            1140,
+        ),
+        (
+            SpotId::Uhrum__West_Entrance__Top_West_Ledge,
+            SpotId::Uhrum__West_Entrance__West_of_Gate,
+            1578,
+        ),
+        (
+            SpotId::Uhrum__West_Entrance__Upper_Fork,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Uhrum__West_Entrance__Upper_Fork,
+            SpotId::Uhrum__West_Entrance__Clear_Passage,
+            2105,
+        ),
+        (
+            SpotId::Uhrum__West_Entrance__Upper_Fork,
+            SpotId::Uhrum__West_Entrance__East_26,
+            1403,
+        ),
+        (
+            SpotId::Uhrum__West_Entrance__Upper_Fork,
+            SpotId::Uhrum__West_Entrance__Upper_Wall_East,
+            600,
+        ),
+        (
+            SpotId::Uhrum__West_Entrance__Upper_Wall_East,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Uhrum__West_Entrance__Upper_Wall_East,
+            SpotId::Uhrum__West_Entrance__Upper_Fork,
+            350,
+        ),
+        (
+            SpotId::Uhrum__West_Entrance__Upper_Wall_East,
+            SpotId::Uhrum__West_Entrance__Upper_Wall_West,
+            300,
+        ),
+        (
+            SpotId::Uhrum__West_Entrance__Upper_Wall_West,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Uhrum__West_Entrance__Upper_Wall_West,
+            SpotId::Uhrum__West_Entrance__Inner_Dais,
+            1228,
+        ),
+        (
+            SpotId::Uhrum__West_Entrance__Upper_Wall_West,
+            SpotId::Uhrum__West_Entrance__Portal_Exit,
+            789,
+        ),
+        (
+            SpotId::Uhrum__West_Entrance__Upper_Wall_West,
+            SpotId::Uhrum__West_Entrance__Upper_Wall_East,
+            526,
+        ),
+        (
+            SpotId::Uhrum__West_Entrance__West_25,
+            SpotId::Giguna__Separator__East_25,
+            1350,
+        ),
+        (
             SpotId::Uhrum__West_Entrance__West_25,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
+        ),
+        (
+            SpotId::Uhrum__West_Entrance__West_25,
+            SpotId::Uhrum__West_Entrance__Top_West_Ledge,
+            526,
+        ),
+        (
+            SpotId::Uhrum__West_Entrance__West_26,
+            SpotId::Irikar__Lamassu__East_26,
+            1350,
         ),
         (
             SpotId::Uhrum__West_Entrance__West_26,
@@ -32409,9 +33246,59 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             1000,
         ),
         (
+            SpotId::Uhrum__West_Entrance__West_26,
+            SpotId::Uhrum__West_Entrance__Hidden_Passage_Entry,
+            1799,
+        ),
+        (
+            SpotId::Uhrum__West_Entrance__West_26,
+            SpotId::Uhrum__West_Entrance__Middle_West_Ledge,
+            877,
+        ),
+        (
+            SpotId::Uhrum__West_Entrance__West_26,
+            SpotId::Uhrum__West_Entrance__Portal_Stand,
+            1000,
+        ),
+        (
+            SpotId::Uhrum__West_Entrance__West_27,
+            SpotId::Irikar__Lamassu__East_27,
+            1350,
+        ),
+        (
             SpotId::Uhrum__West_Entrance__West_27,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
+        ),
+        (
+            SpotId::Uhrum__West_Entrance__West_27,
+            SpotId::Uhrum__West_Entrance__South_Platform,
+            1403,
+        ),
+        (
+            SpotId::Uhrum__West_Entrance__West_27,
+            SpotId::Uhrum__West_Entrance__Southeast_Tree,
+            526,
+        ),
+        (
+            SpotId::Uhrum__West_Entrance__West_of_Gate,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Uhrum__West_Entrance__West_of_Gate,
+            SpotId::Uhrum__West_Entrance__Inner_Dais,
+            1200,
+        ),
+        (
+            SpotId::Uhrum__West_Entrance__West_of_Gate,
+            SpotId::Uhrum__West_Entrance__Portal_Stand,
+            438,
+        ),
+        (
+            SpotId::Uhrum__West_Entrance__West_of_Gate,
+            SpotId::Uhrum__West_Entrance__Top_West_Ledge,
+            1578,
         ),
     ]
 }
@@ -36628,6 +37515,137 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
             Some(964)
         }
         (SpotId::Irikar__Sight_Room__West_24, SpotId::Irikar__Sight_Room__Lower_Ledge) => Some(701),
+        (SpotId::Uhrum__West_Entrance__Clear_Passage, SpotId::Uhrum__West_Entrance__East_26) => {
+            Some(3508)
+        }
+        (SpotId::Uhrum__West_Entrance__Clear_Passage, SpotId::Uhrum__West_Entrance__Upper_Fork) => {
+            Some(2105)
+        }
+        (SpotId::Uhrum__West_Entrance__East_26, SpotId::Uhrum__West_Entrance__Upper_Fork) => {
+            Some(1403)
+        }
+        (SpotId::Uhrum__West_Entrance__Gate_Switch, SpotId::Uhrum__West_Entrance__Portal_Exit) => {
+            Some(600)
+        }
+        (
+            SpotId::Uhrum__West_Entrance__Hidden_Passage_Entry,
+            SpotId::Uhrum__West_Entrance__Hidden_Passage_West,
+        ) => Some(526),
+        (
+            SpotId::Uhrum__West_Entrance__Hidden_Passage_Entry,
+            SpotId::Uhrum__West_Entrance__Middle_West_Ledge,
+        ) => Some(1300),
+        (
+            SpotId::Uhrum__West_Entrance__Hidden_Passage_Entry,
+            SpotId::Uhrum__West_Entrance__Portal_Stand,
+        ) => Some(1140),
+        (
+            SpotId::Uhrum__West_Entrance__Hidden_Passage_Entry,
+            SpotId::Uhrum__West_Entrance__West_26,
+        ) => Some(1014),
+        (
+            SpotId::Uhrum__West_Entrance__Hidden_Passage_West,
+            SpotId::Uhrum__West_Entrance__Hidden_Passage_Entry,
+        ) => Some(526),
+        (SpotId::Uhrum__West_Entrance__Inner_Dais, SpotId::Uhrum__West_Entrance__Portal_Exit) => {
+            Some(2017)
+        }
+        (
+            SpotId::Uhrum__West_Entrance__Inner_Dais,
+            SpotId::Uhrum__West_Entrance__Upper_Wall_West,
+        ) => Some(1228),
+        (
+            SpotId::Uhrum__West_Entrance__Middle_West_Ledge,
+            SpotId::Uhrum__West_Entrance__Save_Point,
+        ) => Some(850),
+        (
+            SpotId::Uhrum__West_Entrance__Middle_West_Ledge,
+            SpotId::Uhrum__West_Entrance__South_Platform,
+        ) => Some(526),
+        (
+            SpotId::Uhrum__West_Entrance__Middle_West_Ledge,
+            SpotId::Uhrum__West_Entrance__Southeast_Tree,
+        ) => Some(550),
+        (SpotId::Uhrum__West_Entrance__Portal_Exit, SpotId::Uhrum__West_Entrance__Gate_Switch) => {
+            Some(263)
+        }
+        (SpotId::Uhrum__West_Entrance__Portal_Exit, SpotId::Uhrum__West_Entrance__Inner_Dais) => {
+            Some(2017)
+        }
+        (
+            SpotId::Uhrum__West_Entrance__Portal_Exit,
+            SpotId::Uhrum__West_Entrance__Upper_Wall_West,
+        ) => Some(1089),
+        (
+            SpotId::Uhrum__West_Entrance__Portal_Stand,
+            SpotId::Uhrum__West_Entrance__Clear_Passage,
+        ) => Some(1491),
+        (
+            SpotId::Uhrum__West_Entrance__Portal_Stand,
+            SpotId::Uhrum__West_Entrance__Middle_West_Ledge,
+        ) => Some(1000),
+        (SpotId::Uhrum__West_Entrance__Portal_Stand, SpotId::Uhrum__West_Entrance__West_26) => {
+            Some(1666)
+        }
+        (
+            SpotId::Uhrum__West_Entrance__Save_Point,
+            SpotId::Uhrum__West_Entrance__Southeast_Tree,
+        ) => Some(1200),
+        (
+            SpotId::Uhrum__West_Entrance__South_Platform,
+            SpotId::Uhrum__West_Entrance__Lower_Wall_West,
+        ) => Some(1403),
+        (
+            SpotId::Uhrum__West_Entrance__South_Platform,
+            SpotId::Uhrum__West_Entrance__Save_Point,
+        ) => Some(550),
+        (
+            SpotId::Uhrum__West_Entrance__South_Platform,
+            SpotId::Uhrum__West_Entrance__Southeast_Tree,
+        ) => Some(877),
+        (
+            SpotId::Uhrum__West_Entrance__Southeast_Tree,
+            SpotId::Uhrum__West_Entrance__Save_Point,
+        ) => Some(1052),
+        (SpotId::Uhrum__West_Entrance__Southeast_Tree, SpotId::Uhrum__West_Entrance__West_27) => {
+            Some(1200)
+        }
+        (
+            SpotId::Uhrum__West_Entrance__Top_West_Ledge,
+            SpotId::Uhrum__West_Entrance__Middle_West_Ledge,
+        ) => Some(1600),
+        (
+            SpotId::Uhrum__West_Entrance__Top_West_Ledge,
+            SpotId::Uhrum__West_Entrance__Portal_Stand,
+        ) => Some(1140),
+        (SpotId::Uhrum__West_Entrance__Upper_Fork, SpotId::Uhrum__West_Entrance__Clear_Passage) => {
+            Some(2105)
+        }
+        (SpotId::Uhrum__West_Entrance__Upper_Fork, SpotId::Uhrum__West_Entrance__East_26) => {
+            Some(1403)
+        }
+        (
+            SpotId::Uhrum__West_Entrance__Upper_Wall_East,
+            SpotId::Uhrum__West_Entrance__Upper_Fork,
+        ) => Some(350),
+        (
+            SpotId::Uhrum__West_Entrance__Upper_Wall_West,
+            SpotId::Uhrum__West_Entrance__Inner_Dais,
+        ) => Some(1228),
+        (SpotId::Uhrum__West_Entrance__West_25, SpotId::Uhrum__West_Entrance__Top_West_Ledge) => {
+            Some(526)
+        }
+        (
+            SpotId::Uhrum__West_Entrance__West_26,
+            SpotId::Uhrum__West_Entrance__Middle_West_Ledge,
+        ) => Some(877),
+        (SpotId::Uhrum__West_Entrance__West_27, SpotId::Uhrum__West_Entrance__Southeast_Tree) => {
+            Some(526)
+        }
+        (
+            SpotId::Uhrum__West_Entrance__West_of_Gate,
+            SpotId::Uhrum__West_Entrance__Portal_Stand,
+        ) => Some(438),
         _ => None,
     }
 }
@@ -41854,6 +42872,137 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
         (SpotId::Irikar__Sight_Room__West_24, SpotId::Irikar__Sight_Room__Lower_Ledge) => {
             (Some(701), vec![])
         }
+        (SpotId::Uhrum__West_Entrance__Clear_Passage, SpotId::Uhrum__West_Entrance__East_26) => {
+            (Some(3508), vec![])
+        }
+        (SpotId::Uhrum__West_Entrance__Clear_Passage, SpotId::Uhrum__West_Entrance__Upper_Fork) => {
+            (Some(2105), vec![])
+        }
+        (SpotId::Uhrum__West_Entrance__East_26, SpotId::Uhrum__West_Entrance__Upper_Fork) => {
+            (Some(1403), vec![])
+        }
+        (SpotId::Uhrum__West_Entrance__Gate_Switch, SpotId::Uhrum__West_Entrance__Portal_Exit) => {
+            (Some(600), vec![])
+        }
+        (
+            SpotId::Uhrum__West_Entrance__Hidden_Passage_Entry,
+            SpotId::Uhrum__West_Entrance__Hidden_Passage_West,
+        ) => (Some(526), vec![]),
+        (
+            SpotId::Uhrum__West_Entrance__Hidden_Passage_Entry,
+            SpotId::Uhrum__West_Entrance__Middle_West_Ledge,
+        ) => (Some(1300), vec![]),
+        (
+            SpotId::Uhrum__West_Entrance__Hidden_Passage_Entry,
+            SpotId::Uhrum__West_Entrance__Portal_Stand,
+        ) => (Some(1140), vec![]),
+        (
+            SpotId::Uhrum__West_Entrance__Hidden_Passage_Entry,
+            SpotId::Uhrum__West_Entrance__West_26,
+        ) => (Some(1014), vec![]),
+        (
+            SpotId::Uhrum__West_Entrance__Hidden_Passage_West,
+            SpotId::Uhrum__West_Entrance__Hidden_Passage_Entry,
+        ) => (Some(526), vec![]),
+        (SpotId::Uhrum__West_Entrance__Inner_Dais, SpotId::Uhrum__West_Entrance__Portal_Exit) => {
+            (Some(2017), vec![])
+        }
+        (
+            SpotId::Uhrum__West_Entrance__Inner_Dais,
+            SpotId::Uhrum__West_Entrance__Upper_Wall_West,
+        ) => (Some(1228), vec![]),
+        (
+            SpotId::Uhrum__West_Entrance__Middle_West_Ledge,
+            SpotId::Uhrum__West_Entrance__Save_Point,
+        ) => (Some(850), vec![]),
+        (
+            SpotId::Uhrum__West_Entrance__Middle_West_Ledge,
+            SpotId::Uhrum__West_Entrance__South_Platform,
+        ) => (Some(526), vec![]),
+        (
+            SpotId::Uhrum__West_Entrance__Middle_West_Ledge,
+            SpotId::Uhrum__West_Entrance__Southeast_Tree,
+        ) => (Some(550), vec![]),
+        (SpotId::Uhrum__West_Entrance__Portal_Exit, SpotId::Uhrum__West_Entrance__Gate_Switch) => {
+            (Some(263), vec![])
+        }
+        (SpotId::Uhrum__West_Entrance__Portal_Exit, SpotId::Uhrum__West_Entrance__Inner_Dais) => {
+            (Some(2017), vec![])
+        }
+        (
+            SpotId::Uhrum__West_Entrance__Portal_Exit,
+            SpotId::Uhrum__West_Entrance__Upper_Wall_West,
+        ) => (Some(1089), vec![]),
+        (
+            SpotId::Uhrum__West_Entrance__Portal_Stand,
+            SpotId::Uhrum__West_Entrance__Clear_Passage,
+        ) => (Some(1491), vec![]),
+        (
+            SpotId::Uhrum__West_Entrance__Portal_Stand,
+            SpotId::Uhrum__West_Entrance__Middle_West_Ledge,
+        ) => (Some(1000), vec![]),
+        (SpotId::Uhrum__West_Entrance__Portal_Stand, SpotId::Uhrum__West_Entrance__West_26) => {
+            (Some(1666), vec![])
+        }
+        (
+            SpotId::Uhrum__West_Entrance__Save_Point,
+            SpotId::Uhrum__West_Entrance__Southeast_Tree,
+        ) => (Some(1200), vec![]),
+        (
+            SpotId::Uhrum__West_Entrance__South_Platform,
+            SpotId::Uhrum__West_Entrance__Lower_Wall_West,
+        ) => (Some(1403), vec![]),
+        (
+            SpotId::Uhrum__West_Entrance__South_Platform,
+            SpotId::Uhrum__West_Entrance__Save_Point,
+        ) => (Some(550), vec![]),
+        (
+            SpotId::Uhrum__West_Entrance__South_Platform,
+            SpotId::Uhrum__West_Entrance__Southeast_Tree,
+        ) => (Some(877), vec![]),
+        (
+            SpotId::Uhrum__West_Entrance__Southeast_Tree,
+            SpotId::Uhrum__West_Entrance__Save_Point,
+        ) => (Some(1052), vec![]),
+        (SpotId::Uhrum__West_Entrance__Southeast_Tree, SpotId::Uhrum__West_Entrance__West_27) => {
+            (Some(1200), vec![])
+        }
+        (
+            SpotId::Uhrum__West_Entrance__Top_West_Ledge,
+            SpotId::Uhrum__West_Entrance__Middle_West_Ledge,
+        ) => (Some(1600), vec![]),
+        (
+            SpotId::Uhrum__West_Entrance__Top_West_Ledge,
+            SpotId::Uhrum__West_Entrance__Portal_Stand,
+        ) => (Some(1140), vec![]),
+        (SpotId::Uhrum__West_Entrance__Upper_Fork, SpotId::Uhrum__West_Entrance__Clear_Passage) => {
+            (Some(2105), vec![])
+        }
+        (SpotId::Uhrum__West_Entrance__Upper_Fork, SpotId::Uhrum__West_Entrance__East_26) => {
+            (Some(1403), vec![])
+        }
+        (
+            SpotId::Uhrum__West_Entrance__Upper_Wall_East,
+            SpotId::Uhrum__West_Entrance__Upper_Fork,
+        ) => (Some(350), vec![]),
+        (
+            SpotId::Uhrum__West_Entrance__Upper_Wall_West,
+            SpotId::Uhrum__West_Entrance__Inner_Dais,
+        ) => (Some(1228), vec![]),
+        (SpotId::Uhrum__West_Entrance__West_25, SpotId::Uhrum__West_Entrance__Top_West_Ledge) => {
+            (Some(526), vec![])
+        }
+        (
+            SpotId::Uhrum__West_Entrance__West_26,
+            SpotId::Uhrum__West_Entrance__Middle_West_Ledge,
+        ) => (Some(877), vec![]),
+        (SpotId::Uhrum__West_Entrance__West_27, SpotId::Uhrum__West_Entrance__Southeast_Tree) => {
+            (Some(526), vec![])
+        }
+        (
+            SpotId::Uhrum__West_Entrance__West_of_Gate,
+            SpotId::Uhrum__West_Entrance__Portal_Stand,
+        ) => (Some(438), vec![]),
         _ => (None, Vec::new()),
     }
 }

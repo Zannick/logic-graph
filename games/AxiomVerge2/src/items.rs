@@ -113,6 +113,9 @@ pub enum Item {
     Terminal_Breakthrough_1,
     Terminal_Breakthrough_2,
     The_Ideal_Kiengir,
+    Udusan,
+    Uhrum_West_Entrance_Gate,
+    Uhrum_West_Entrance_Upper_Wall,
     Under_Siege,
     Underwater_Movement,
     Wall_Climb,
@@ -216,6 +219,11 @@ impl fmt::Display for Item {
             Item::Terminal_Breakthrough_1 => write!(f, "{}", "Terminal_Breakthrough_1"),
             Item::Terminal_Breakthrough_2 => write!(f, "{}", "Terminal_Breakthrough_2"),
             Item::The_Ideal_Kiengir => write!(f, "{}", "The_Ideal_Kiengir"),
+            Item::Udusan => write!(f, "{}", "Udusan"),
+            Item::Uhrum_West_Entrance_Gate => write!(f, "{}", "Uhrum_West_Entrance_Gate"),
+            Item::Uhrum_West_Entrance_Upper_Wall => {
+                write!(f, "{}", "Uhrum_West_Entrance_Upper_Wall")
+            }
             Item::Under_Siege => write!(f, "{}", "Under_Siege"),
             Item::Underwater_Movement => write!(f, "{}", "Underwater_Movement"),
             Item::Wall_Climb => write!(f, "{}", "Wall_Climb"),
@@ -319,6 +327,9 @@ impl std::str::FromStr for Item {
             "Terminal_Breakthrough_1" => Ok(Item::Terminal_Breakthrough_1),
             "Terminal_Breakthrough_2" => Ok(Item::Terminal_Breakthrough_2),
             "The_Ideal_Kiengir" => Ok(Item::The_Ideal_Kiengir),
+            "Udusan" => Ok(Item::Udusan),
+            "Uhrum_West_Entrance_Gate" => Ok(Item::Uhrum_West_Entrance_Gate),
+            "Uhrum_West_Entrance_Upper_Wall" => Ok(Item::Uhrum_West_Entrance_Upper_Wall),
             "Under_Siege" => Ok(Item::Under_Siege),
             "Underwater_Movement" => Ok(Item::Underwater_Movement),
             "Wall_Climb" => Ok(Item::Wall_Climb),
@@ -344,5 +355,6 @@ pub fn unused_item(id: Item) -> bool {
             | Item::Notes_2053_02_27
             | Item::Royal_Dagger
             | Item::Terminal_Breakthrough_2
+            | Item::Udusan
     )
 }
