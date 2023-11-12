@@ -140,10 +140,6 @@ pub fn access_can_deploy_and_slingshot_hook(ctx: &Context) -> bool {
     // $can_deploy and Slingshot_Hook
     (helper__can_deploy!(ctx) && ctx.has(Item::Slingshot_Hook))
 }
-pub fn access_can_recall(ctx: &Context) -> bool {
-    // $can_recall
-    helper__can_recall!(ctx)
-}
 pub fn access_charge(ctx: &Context) -> bool {
     // $charge
     helper__charge!(ctx)
@@ -168,17 +164,17 @@ pub fn access_drone_melee_damage(ctx: &Context) -> bool {
     // Drone_Melee_Damage
     ctx.has(Item::Drone_Melee_Damage)
 }
-pub fn access_drone_melee_damage__2(ctx: &Context) -> bool {
-    // Drone_Melee_Damage{2}
-    ctx.count(Item::Drone_Melee_Damage) >= 2
+pub fn access_drone_melee_damage_2(ctx: &Context) -> bool {
+    // Drone_Melee_Damage_2
+    ctx.has(Item::Drone_Melee_Damage_2)
 }
 pub fn access_drone_melee_speed(ctx: &Context) -> bool {
     // Drone_Melee_Speed
     ctx.has(Item::Drone_Melee_Speed)
 }
-pub fn access_drone_melee_speed__2(ctx: &Context) -> bool {
-    // Drone_Melee_Speed{2}
-    ctx.count(Item::Drone_Melee_Speed) >= 2
+pub fn access_drone_melee_speed_2(ctx: &Context) -> bool {
+    // Drone_Melee_Speed_2
+    ctx.has(Item::Drone_Melee_Speed_2)
 }
 pub fn access_ebih__base_camp__left_platform__move_left_platform__req(ctx: &Context) -> bool {
     // $activate and not ^_left_platform_moved
@@ -656,8 +652,8 @@ pub fn access_giguna__giguna_northeast__right_column__ex__door_1__req(ctx: &Cont
 pub fn access_giguna__giguna_northeast__right_column__open_door_from_afar__req(
     ctx: &Context,
 ) -> bool {
-    // $unlock3 and Infection_Range{3} and not ^_door_opened
-    ((helper__unlock3!(ctx) && ctx.count(Item::Infection_Range) >= 3)
+    // $unlock3 and Infection_Range_3 and not ^_door_opened
+    ((helper__unlock3!(ctx) && ctx.has(Item::Infection_Range_3))
         && !ctx.giguna__giguna_northeast__ctx__door_opened())
 }
 pub fn access_giguna__giguna_northeast__switch__ex__door_1__req(ctx: &Context) -> bool {
@@ -824,17 +820,17 @@ pub fn access_health_upgrade(ctx: &Context) -> bool {
     // Health_Upgrade
     ctx.has(Item::Health_Upgrade)
 }
-pub fn access_health_upgrade__2(ctx: &Context) -> bool {
-    // Health_Upgrade{2}
-    ctx.count(Item::Health_Upgrade) >= 2
+pub fn access_health_upgrade_2(ctx: &Context) -> bool {
+    // Health_Upgrade_2
+    ctx.has(Item::Health_Upgrade_2)
 }
-pub fn access_health_upgrade__3(ctx: &Context) -> bool {
-    // Health_Upgrade{3}
-    ctx.count(Item::Health_Upgrade) >= 3
+pub fn access_health_upgrade_3(ctx: &Context) -> bool {
+    // Health_Upgrade_3
+    ctx.has(Item::Health_Upgrade_3)
 }
-pub fn access_health_upgrade__4(ctx: &Context) -> bool {
-    // Health_Upgrade{4}
-    ctx.count(Item::Health_Upgrade) >= 4
+pub fn access_health_upgrade_4(ctx: &Context) -> bool {
+    // Health_Upgrade_4
+    ctx.has(Item::Health_Upgrade_4)
 }
 pub fn access_hook(ctx: &Context) -> bool {
     // $hook
@@ -892,21 +888,21 @@ pub fn access_infect(ctx: &Context) -> bool {
     // Infect
     ctx.has(Item::Infect)
 }
-pub fn access_infect__2(ctx: &Context) -> bool {
-    // Infect{2}
-    ctx.count(Item::Infect) >= 2
+pub fn access_infect_l1(ctx: &Context) -> bool {
+    // Infect_L1
+    ctx.has(Item::Infect_L1)
 }
-pub fn access_infect__3(ctx: &Context) -> bool {
-    // Infect{3}
-    ctx.count(Item::Infect) >= 3
+pub fn access_infect_l2(ctx: &Context) -> bool {
+    // Infect_L2
+    ctx.has(Item::Infect_L2)
 }
 pub fn access_infection_range(ctx: &Context) -> bool {
     // Infection_Range
     ctx.has(Item::Infection_Range)
 }
-pub fn access_infection_range__2(ctx: &Context) -> bool {
-    // Infection_Range{2}
-    ctx.count(Item::Infection_Range) >= 2
+pub fn access_infection_range_2(ctx: &Context) -> bool {
+    // Infection_Range_2
+    ctx.has(Item::Infection_Range_2)
 }
 pub fn access_infection_speed(ctx: &Context) -> bool {
     // Infection_Speed
@@ -942,17 +938,17 @@ pub fn access_melee_damage(ctx: &Context) -> bool {
     // Melee_Damage
     ctx.has(Item::Melee_Damage)
 }
-pub fn access_melee_damage__2(ctx: &Context) -> bool {
-    // Melee_Damage{2}
-    ctx.count(Item::Melee_Damage) >= 2
+pub fn access_melee_damage_2(ctx: &Context) -> bool {
+    // Melee_Damage_2
+    ctx.has(Item::Melee_Damage_2)
 }
 pub fn access_melee_speed(ctx: &Context) -> bool {
     // Melee_Speed
     ctx.has(Item::Melee_Speed)
 }
-pub fn access_melee_speed__2(ctx: &Context) -> bool {
-    // Melee_Speed{2}
-    ctx.count(Item::Melee_Speed) >= 2
+pub fn access_melee_speed_2(ctx: &Context) -> bool {
+    // Melee_Speed_2
+    ctx.has(Item::Melee_Speed_2)
 }
 pub fn access_mist2(ctx: &Context) -> bool {
     // $mist2
@@ -1006,9 +1002,9 @@ pub fn access_nano_points(ctx: &Context) -> bool {
     // Nano_Points
     ctx.has(Item::Nano_Points)
 }
-pub fn access_nano_points__2(ctx: &Context) -> bool {
-    // Nano_Points{2}
-    ctx.count(Item::Nano_Points) >= 2
+pub fn access_nano_points_2(ctx: &Context) -> bool {
+    // Nano_Points_2
+    ctx.has(Item::Nano_Points_2)
 }
 pub fn access_not_amashilama(ctx: &Context) -> bool {
     // NOT Amashilama
@@ -1037,6 +1033,14 @@ pub fn access_not_within_menu_and_amashilama_and_mode__drone(ctx: &Context) -> b
         RegionId::Menu => true,
         _ => false,
     }) && ctx.has(Item::Amashilama))
+        && ctx.mode() != enums::Mode::Drone)
+}
+pub fn access_not_within_menu_and_anuman_and_mode__drone(ctx: &Context) -> bool {
+    // NOT WITHIN `Menu` and Anuman and ^mode != 'drone'
+    ((!(match get_region(ctx.position()) {
+        RegionId::Menu => true,
+        _ => false,
+    }) && ctx.has(Item::Anuman))
         && ctx.mode() != enums::Mode::Drone)
 }
 pub fn access_not_within_menu_and_breach(ctx: &Context) -> bool {
@@ -1069,12 +1073,12 @@ pub fn access_not_within_menu_and_not_breach_and_can_recall(ctx: &Context) -> bo
         && helper__can_recall!(ctx))
 }
 pub fn access_not_within_menu_and_not_breach_and_map_17_10_and_fast_travel(ctx: &Context) -> bool {
-    // NOT WITHIN `Menu` and NOT ^breach and Map_17_10 and Fast_Travel
+    // NOT WITHIN `Menu` and NOT ^breach and ^map_17_10 and Fast_Travel
     (((!(match get_region(ctx.position()) {
         RegionId::Menu => true,
         _ => false,
     }) && !data::breach(ctx.position()))
-        && ctx.has(Item::Map_17_10))
+        && ctx.map_17_10())
         && ctx.has(Item::Fast_Travel))
 }
 pub fn access_not_within_menu_and_not_breach_and_mode__drone(ctx: &Context) -> bool {
@@ -1121,17 +1125,17 @@ pub fn access_ranged_damage(ctx: &Context) -> bool {
     // Ranged_Damage
     ctx.has(Item::Ranged_Damage)
 }
-pub fn access_ranged_damage__2(ctx: &Context) -> bool {
-    // Ranged_Damage{2}
-    ctx.count(Item::Ranged_Damage) >= 2
+pub fn access_ranged_damage_2(ctx: &Context) -> bool {
+    // Ranged_Damage_2
+    ctx.has(Item::Ranged_Damage_2)
 }
 pub fn access_ranged_speed(ctx: &Context) -> bool {
     // Ranged_Speed
     ctx.has(Item::Ranged_Speed)
 }
-pub fn access_ranged_speed__2(ctx: &Context) -> bool {
-    // Ranged_Speed{2}
-    ctx.count(Item::Ranged_Speed) >= 2
+pub fn access_ranged_speed_2(ctx: &Context) -> bool {
+    // Ranged_Speed_2
+    ctx.has(Item::Ranged_Speed_2)
 }
 pub fn access_remote_drone(ctx: &Context) -> bool {
     // Remote_Drone
@@ -1487,6 +1491,14 @@ pub fn action_main_portal_save_update(ctx: &mut Context) {
     // $main_portal_save_update
     helper__main_portal_save_update!(ctx);
 }
+pub fn action_map_17_10__true(ctx: &mut Context, newpos: SpotId) {
+    // ^map_17_10 = true
+    ctx.set_map_17_10(true);
+}
+pub fn action_mode__drone(ctx: &mut Context) {
+    // ^mode = 'drone'
+    ctx.set_mode(enums::Mode::Drone);
+}
 pub fn action_mode__drone_indra__position(ctx: &mut Context) {
     // ^mode = 'drone'; ^indra = ^position
     ctx.set_mode(enums::Mode::Drone);
@@ -1511,11 +1523,6 @@ pub fn action_save(ctx: &mut Context) {
 pub fn action_save__glacier__revival__save_point(ctx: &mut Context) {
     // ^save = `Glacier > Revival > Save Point`
     ctx.set_save(SpotId::Glacier__Revival__Save_Point);
-}
-pub fn action_save_mode__indra(ctx: &mut Context) {
-    // $save; ^mode = 'Indra'
-    helper__save!(ctx);
-    ctx.set_mode(enums::Mode::Indra);
 }
 pub fn action_skip__amagi__west_lake__cavern_refill_station__break_wall_add_item__amagi_dragon_eye_passage(
     ctx: &mut Context,

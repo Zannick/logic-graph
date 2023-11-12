@@ -10,23 +10,23 @@ areas:
           price: 1
           costs: flasks
         - name: Health Upgrade 2
-          item: Health_Upgrade
+          item: Health_Upgrade_2
           req: Health_Upgrade
           price: 2
           costs: flasks
         - name: Health Upgrade 3
-          item: Health_Upgrade
-          req: Health_Upgrade{2}
+          item: Health_Upgrade_3
+          req: Health_Upgrade_2
           price: 4
           costs: flasks
         - name: Health Upgrade 4
-          item: Health_Upgrade
-          req: Health_Upgrade{3}
+          item: Health_Upgrade_4
+          req: Health_Upgrade_3
           price: 4
           costs: flasks
         - name: Health Upgrade 5
-          item: Health_Upgrade
-          req: Health_Upgrade{4}
+          item: Health_Upgrade_5
+          req: Health_Upgrade_4
           price: 6
           costs: flasks
 
@@ -51,13 +51,13 @@ areas:
           price: 1
           costs: flasks
         - name: Melee Damage 2
-          item: Melee_Damage
+          item: Melee_Damage_2
           req: Melee_Damage
           price: 4
           costs: flasks
         - name: Melee Damage 3
-          item: Melee_Damage
-          req: Melee_Damage{2}
+          item: Melee_Damage_3
+          req: Melee_Damage_2
           price: 6
           costs: flasks
         - name: Melee Speed 1
@@ -65,13 +65,13 @@ areas:
           price: 1
           costs: flasks
         - name: Melee Speed 2
-          item: Melee_Speed
+          item: Melee_Speed_2
           req: Melee_Speed
           price: 4
           costs: flasks
         - name: Melee Speed 3
-          item: Melee_Speed
-          req: Melee_Speed{2}
+          item: Melee_Speed_3
+          req: Melee_Speed_2
           price: 6
           costs: flasks
         - name: Ranged Damage 1
@@ -79,13 +79,13 @@ areas:
           price: 1
           costs: flasks
         - name: Ranged Damage 2
-          item: Ranged_Damage
+          item: Ranged_Damage_2
           req: Ranged_Damage
           price: 4
           costs: flasks
         - name: Ranged Damage 3
-          item: Ranged_Damage
-          req: Ranged_Damage{2}
+          item: Ranged_Damage_3
+          req: Ranged_Damage_2
           price: 6
           costs: flasks
         - name: Ranged Speed 1
@@ -93,13 +93,13 @@ areas:
           price: 1
           costs: flasks
         - name: Ranged Speed 2
-          item: Ranged_Speed
+          item: Ranged_Speed_2
           req: Ranged_Speed
           price: 3
           costs: flasks
         - name: Ranged Speed 3
-          item: Ranged_Speed
-          req: Ranged_Speed{2}
+          item: Ranged_Speed_3
+          req: Ranged_Speed_2
           price: 5
           costs: flasks
       exits:
@@ -114,17 +114,17 @@ areas:
     - name: Infection
       locations:
         - name: Infection Level 1
-          item: Infect
+          item: Infect_L1
           price: 1
           costs: flasks
         - name: Infection Level 2
-          item: Infect
-          req: Infect{2}
+          item: Infect_L2
+          req: Infect_L1
           price: 3
           costs: flasks
         - name: Infection Level 3
-          item: Infect
-          req: Infect{3}
+          item: Infect_L3
+          req: Infect_L2
           price: 4
           costs: flasks
         - name: Nano Points 1
@@ -132,13 +132,13 @@ areas:
           price: 1
           costs: flasks
         - name: Nano Points 2
-          item: Nano_Points
+          item: Nano_Points_2
           req: Nano_Points
           price: 3
           costs: flasks
         - name: Nano Points 3
-          item: Nano_Points
-          req: Nano_Points{2}
+          item: Nano_Points_3
+          req: Nano_Points_2
           price: 5
           costs: flasks
         - name: Infection Speed 1
@@ -146,7 +146,7 @@ areas:
           price: 2
           costs: flasks
         - name: Infection Speed 2
-          item: Infection_Speed
+          item: Infection_Speed_2
           req: Infection_Speed
           price: 5
           costs: flasks
@@ -155,13 +155,13 @@ areas:
           price: 1
           costs: flasks
         - name: Infection Range 2
-          item: Infection_Range
+          item: Infection_Range_2
           req: Infection_Range
           price: 3
           costs: flasks
         - name: Infection Range 3
-          item: Infection_Range
-          req: Infection_Range{2}
+          item: Infection_Range_3
+          req: Infection_Range_2
           price: 5
           costs: flasks
       exits:
@@ -179,13 +179,13 @@ areas:
           price: 1
           costs: flasks
         - name: Drone Melee Damage 2
-          item: Drone_Melee_Damage
+          item: Drone_Melee_Damage_2
           req: Drone_Melee_Damage
           price: 3
           costs: flasks
         - name: Drone Melee Damage 3
-          item: Drone_Melee_Damage
-          req: Drone_Melee_Damage{2}
+          item: Drone_Melee_Damage_3
+          req: Drone_Melee_Damage_2
           price: 5
           costs: flasks
         - name: Drone Melee Speed 1
@@ -193,13 +193,13 @@ areas:
           price: 1
           costs: flasks
         - name: Drone Melee Speed 2
-          item: Drone_Melee_Speed
+          item: Drone_Melee_Speed_2
           req: Drone_Melee_Speed
           price: 3
           costs: flasks
         - name: Drone Melee Speed 3
-          item: Drone_Melee_Speed
-          req: Drone_Melee_Speed{2}
+          item: Drone_Melee_Speed_3
+          req: Drone_Melee_Speed_2
           price: 5
           costs: flasks
         #- name: Drone Slingshot something

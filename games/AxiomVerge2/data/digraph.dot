@@ -680,6 +680,15 @@ digraph AxiomVerge2 {
         Giguna__Gateway__Button [label = "", pos = "61.65,-31.083333!"];
         Giguna__Gateway__East_19 [label = "", pos = "62.85,-31.333333!"];
         Giguna__Labyrinth_East__East_19 [label = "", pos = "56.85,-31.333333!"];
+        Giguna__Labyrinth_East__Top_Middle [label = "", pos = "55.2,-31.833333!"];
+        Giguna__Labyrinth_East__Top_West [label = "", pos = "54.15,-31.833333!"];
+        Giguna__Labyrinth_East__Middle_West [label = "", pos = "54.15,-32.833333!"];
+        Giguna__Labyrinth_East__Middle_Drop [label = "", pos = "55.5,-32.833333!"];
+        Giguna__Labyrinth_East__Middle_Tree [label = "", pos = "55.8,-32.833333!"];
+        Giguna__Labyrinth_East__East_20 [label = "", pos = "56.85,-33.333333!"];
+        Giguna__Labyrinth_East__Lower_Middle [label = "", pos = "55.2,-33.5!"];
+        Giguna__Labyrinth_East__Lower_West [label = "", pos = "54.15,-33.5!"];
+        Giguna__Labyrinth__Top_East [label = "", pos = "53.85,-31.833333!"];
         Giguna__Vertical_Interchange__West_17 [label = "", pos = "63.15,-27.166667!"];
         Giguna__Vertical_Interchange__West_19 [label = "", pos = "63.15,-31.333333!"];
         Giguna__Vertical_Interchange__North [label = "", pos = "64.5,-27.0!"];

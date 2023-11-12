@@ -697,7 +697,16 @@ pub fn get_area(spot: SpotId) -> AreaId {
         | SpotId::Giguna__Gateway__West_19
         | SpotId::Giguna__Gateway__Button
         | SpotId::Giguna__Gateway__East_19 => AreaId::Giguna__Gateway,
-        SpotId::Giguna__Labyrinth_East__East_19 => AreaId::Giguna__Labyrinth_East,
+        SpotId::Giguna__Labyrinth_East__East_19
+        | SpotId::Giguna__Labyrinth_East__Top_Middle
+        | SpotId::Giguna__Labyrinth_East__Top_West
+        | SpotId::Giguna__Labyrinth_East__Middle_West
+        | SpotId::Giguna__Labyrinth_East__Middle_Drop
+        | SpotId::Giguna__Labyrinth_East__Middle_Tree
+        | SpotId::Giguna__Labyrinth_East__East_20
+        | SpotId::Giguna__Labyrinth_East__Lower_Middle
+        | SpotId::Giguna__Labyrinth_East__Lower_West => AreaId::Giguna__Labyrinth_East,
+        SpotId::Giguna__Labyrinth__Top_East => AreaId::Giguna__Labyrinth,
         SpotId::Giguna__Vertical_Interchange__West_17
         | SpotId::Giguna__Vertical_Interchange__West_19
         | SpotId::Giguna__Vertical_Interchange__North
@@ -1705,7 +1714,16 @@ pub fn get_region(spot: SpotId) -> RegionId {
         | SpotId::Giguna__Gateway__West_19
         | SpotId::Giguna__Gateway__Button
         | SpotId::Giguna__Gateway__East_19 => RegionId::Giguna,
-        SpotId::Giguna__Labyrinth_East__East_19 => RegionId::Giguna,
+        SpotId::Giguna__Labyrinth_East__East_19
+        | SpotId::Giguna__Labyrinth_East__Top_Middle
+        | SpotId::Giguna__Labyrinth_East__Top_West
+        | SpotId::Giguna__Labyrinth_East__Middle_West
+        | SpotId::Giguna__Labyrinth_East__Middle_Drop
+        | SpotId::Giguna__Labyrinth_East__Middle_Tree
+        | SpotId::Giguna__Labyrinth_East__East_20
+        | SpotId::Giguna__Labyrinth_East__Lower_Middle
+        | SpotId::Giguna__Labyrinth_East__Lower_West => RegionId::Giguna,
+        SpotId::Giguna__Labyrinth__Top_East => RegionId::Giguna,
         SpotId::Giguna__Vertical_Interchange__West_17
         | SpotId::Giguna__Vertical_Interchange__West_19
         | SpotId::Giguna__Vertical_Interchange__North
@@ -2187,7 +2205,6 @@ impl world::Accessible for Location {
             LocationId::Giguna__Giguna_Northeast__Gate_Right__Remote_Button => {
                 rules::access_boomerang(&ctx)
             }
-            LocationId::Giguna__Giguna_Northeast__Save_Point__Seen => true,
             LocationId::Giguna__Giguna_Northeast__Vault__Item => true,
             LocationId::Giguna__Gubi_Lair__Center_Platform__Boss_Reward => {
                 rules::access_giguna_gubi(&ctx)
@@ -2283,56 +2300,56 @@ impl world::Accessible for Location {
                 rules::access_melee_damage(&ctx)
             }
             LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_3 => {
-                rules::access_melee_damage__2(&ctx)
+                rules::access_melee_damage_2(&ctx)
             }
             LocationId::Menu__Upgrade_Menu__Combat__Melee_Speed_1 => true,
             LocationId::Menu__Upgrade_Menu__Combat__Melee_Speed_2 => {
                 rules::access_melee_speed(&ctx)
             }
             LocationId::Menu__Upgrade_Menu__Combat__Melee_Speed_3 => {
-                rules::access_melee_speed__2(&ctx)
+                rules::access_melee_speed_2(&ctx)
             }
             LocationId::Menu__Upgrade_Menu__Combat__Ranged_Damage_1 => true,
             LocationId::Menu__Upgrade_Menu__Combat__Ranged_Damage_2 => {
                 rules::access_ranged_damage(&ctx)
             }
             LocationId::Menu__Upgrade_Menu__Combat__Ranged_Damage_3 => {
-                rules::access_ranged_damage__2(&ctx)
+                rules::access_ranged_damage_2(&ctx)
             }
             LocationId::Menu__Upgrade_Menu__Combat__Ranged_Speed_1 => true,
             LocationId::Menu__Upgrade_Menu__Combat__Ranged_Speed_2 => {
                 rules::access_ranged_speed(&ctx)
             }
             LocationId::Menu__Upgrade_Menu__Combat__Ranged_Speed_3 => {
-                rules::access_ranged_speed__2(&ctx)
+                rules::access_ranged_speed_2(&ctx)
             }
             LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_1 => true,
             LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_2 => {
                 rules::access_drone_melee_damage(&ctx)
             }
             LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_3 => {
-                rules::access_drone_melee_damage__2(&ctx)
+                rules::access_drone_melee_damage_2(&ctx)
             }
             LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_1 => true,
             LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_2 => {
                 rules::access_drone_melee_speed(&ctx)
             }
             LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_3 => {
-                rules::access_drone_melee_speed__2(&ctx)
+                rules::access_drone_melee_speed_2(&ctx)
             }
             LocationId::Menu__Upgrade_Menu__Infection__Infection_Level_1 => true,
             LocationId::Menu__Upgrade_Menu__Infection__Infection_Level_2 => {
-                rules::access_infect__2(&ctx)
+                rules::access_infect_l1(&ctx)
             }
             LocationId::Menu__Upgrade_Menu__Infection__Infection_Level_3 => {
-                rules::access_infect__3(&ctx)
+                rules::access_infect_l2(&ctx)
             }
             LocationId::Menu__Upgrade_Menu__Infection__Infection_Range_1 => true,
             LocationId::Menu__Upgrade_Menu__Infection__Infection_Range_2 => {
                 rules::access_infection_range(&ctx)
             }
             LocationId::Menu__Upgrade_Menu__Infection__Infection_Range_3 => {
-                rules::access_infection_range__2(&ctx)
+                rules::access_infection_range_2(&ctx)
             }
             LocationId::Menu__Upgrade_Menu__Infection__Infection_Speed_1 => true,
             LocationId::Menu__Upgrade_Menu__Infection__Infection_Speed_2 => {
@@ -2343,20 +2360,20 @@ impl world::Accessible for Location {
                 rules::access_nano_points(&ctx)
             }
             LocationId::Menu__Upgrade_Menu__Infection__Nano_Points_3 => {
-                rules::access_nano_points__2(&ctx)
+                rules::access_nano_points_2(&ctx)
             }
             LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_1 => true,
             LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_2 => {
                 rules::access_health_upgrade(&ctx)
             }
             LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_3 => {
-                rules::access_health_upgrade__2(&ctx)
+                rules::access_health_upgrade_2(&ctx)
             }
             LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_4 => {
-                rules::access_health_upgrade__3(&ctx)
+                rules::access_health_upgrade_3(&ctx)
             }
             LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_5 => {
-                rules::access_health_upgrade__4(&ctx)
+                rules::access_health_upgrade_4(&ctx)
             }
             LocationId::Menu__Upgrade_Menu__Physiology__Mist_Upgrade => {
                 rules::access_nanite_mist(&ctx)
@@ -3765,9 +3782,6 @@ impl world::Accessible for Action {
                     )
                 }
                 ActionId::Giguna__Giguna_Northeast__Save_Point__Save => true,
-                ActionId::Giguna__Giguna_Northeast__Save_Point__Save_Recall => {
-                    rules::access_can_recall(&ctx)
-                }
                 ActionId::Giguna__Giguna_Northeast__Switch__Open_Door => {
                     rules::access_giguna__giguna_northeast__switch__open_door__req(&ctx)
                 }
@@ -3805,6 +3819,12 @@ impl world::Accessible for Action {
                     rules::access_giguna_breach__sw_save__west_11__open_door__req(&ctx)
                 }
                 ActionId::Glacier__Revival__Save_Point__Save => true,
+                ActionId::Global__Become_Drone => {
+                    rules::access_not_within_menu_and_anuman_and_mode__drone(&ctx)
+                }
+                ActionId::Global__Become_Indra => {
+                    rules::access_not_within_menu_and_not_breach_and_mode__drone(&ctx)
+                }
                 ActionId::Global__Deploy_Drone => {
                     rules::access_not_within_menu_and_can_deploy(&ctx)
                 }
@@ -3848,6 +3868,8 @@ impl world::Action for Action {
         match self.id {
             ActionId::Global__Recall_Drone => rules::action_mode__indra(ctx),
             ActionId::Global__Deploy_Drone => rules::action_mode__drone_indra__position(ctx),
+            ActionId::Global__Become_Drone => rules::action_mode__drone(ctx),
+            ActionId::Global__Become_Indra => rules::action_mode__indra(ctx),
             ActionId::Amagi__Main_Area__Carving__Key_Combo => rules::action_amagi__main_area__carving__key_combo__do(ctx),
             ActionId::Amagi__Main_Area__Save_Point__Save => rules::action_save(ctx),
             ActionId::Amagi__Cave_Behind_Waterfall__Middle__Throw_Drone => rules::action_deploy_drone(ctx),
@@ -3879,7 +3901,6 @@ impl world::Action for Action {
             ActionId::Giguna_Breach__SW_Save__West_11__Open_Door => rules::action_giguna_breach__sw_save__west_11__open_door__do(ctx),
             ActionId::Giguna_Breach__SW_Save__Save_Point__Save => rules::action_save(ctx),
             ActionId::Giguna__Giguna_Northeast__Save_Point__Save => rules::action_save(ctx),
-            ActionId::Giguna__Giguna_Northeast__Save_Point__Save_Recall => rules::action_save_mode__indra(ctx),
             ActionId::Giguna__Giguna_Northeast__Gate_Left__Throw_Drone => rules::action_deploy_drone(ctx),
             ActionId::Giguna__Giguna_Northeast__Right_Column__Open_Door_From_Afar => rules::action_giguna__giguna_northeast__right_column__open_door_from_afar__do(ctx),
             ActionId::Giguna__Giguna_Northeast__Switch__Open_Door => rules::action_giguna__giguna_northeast__switch__open_door__do(ctx),
@@ -3984,7 +4005,6 @@ impl world::Action for Action {
                 SpotId::Ebih__Drone_Room__East_4
             }
             ActionId::Giguna_Breach__Peak__Portal__Portal => SpotId::Giguna__Ruins_Top__Save_Point,
-            ActionId::Giguna__Giguna_Northeast__Save_Point__Save_Recall => ctx.indra(),
             ActionId::Giguna__Giguna_Northeast__Gate_Left__Throw_Drone => {
                 SpotId::Giguna__Giguna_Northeast__Gate_Vent
             }
@@ -4136,7 +4156,7 @@ pub struct Spot {
     pub actions: Range<usize>,
 }
 
-static RAW_SPOTS: [SpotId; 991] = [
+static RAW_SPOTS: [SpotId; 1000] = [
     SpotId::None,
     SpotId::Amagi__Cave_Behind_Waterfall__Bottom,
     SpotId::Amagi__Cave_Behind_Waterfall__Middle,
@@ -4644,7 +4664,16 @@ static RAW_SPOTS: [SpotId; 991] = [
     SpotId::Giguna__Helipad__Tablet_Ledge,
     SpotId::Giguna__Helipad__Wall_Bottom,
     SpotId::Giguna__Helipad__Wall_Top,
+    SpotId::Giguna__Labyrinth__Top_East,
     SpotId::Giguna__Labyrinth_East__East_19,
+    SpotId::Giguna__Labyrinth_East__East_20,
+    SpotId::Giguna__Labyrinth_East__Lower_Middle,
+    SpotId::Giguna__Labyrinth_East__Lower_West,
+    SpotId::Giguna__Labyrinth_East__Middle_Drop,
+    SpotId::Giguna__Labyrinth_East__Middle_Tree,
+    SpotId::Giguna__Labyrinth_East__Middle_West,
+    SpotId::Giguna__Labyrinth_East__Top_Middle,
+    SpotId::Giguna__Labyrinth_East__Top_West,
     SpotId::Giguna__Lamassu__Broken_Pillar,
     SpotId::Giguna__Lamassu__Deposit,
     SpotId::Giguna__Lamassu__East_18,
@@ -5373,9 +5402,13 @@ lazy_static! {
             start: SpotId::Giguna__Helipad__East_15.into_usize(),
             end: SpotId::Giguna__Helipad__Wall_Top.into_usize() + 1,
         },
+        AreaId::Giguna__Labyrinth => Range {
+            start: SpotId::Giguna__Labyrinth__Top_East.into_usize(),
+            end: SpotId::Giguna__Labyrinth__Top_East.into_usize() + 1,
+        },
         AreaId::Giguna__Labyrinth_East => Range {
             start: SpotId::Giguna__Labyrinth_East__East_19.into_usize(),
-            end: SpotId::Giguna__Labyrinth_East__East_19.into_usize() + 1,
+            end: SpotId::Giguna__Labyrinth_East__Top_West.into_usize() + 1,
         },
         AreaId::Giguna__Lamassu => Range {
             start: SpotId::Giguna__Lamassu__Broken_Pillar.into_usize(),
@@ -5622,7 +5655,7 @@ impl world::World for World {
     type Exit = Exit;
     type Action = Action;
     type Warp = Warp;
-    const NUM_LOCATIONS: u32 = 174;
+    const NUM_LOCATIONS: u32 = 173;
 
     fn objective_name(&self) -> String {
         format!("{}", self.objective)
@@ -5906,9 +5939,6 @@ impl world::World for World {
             Item::Infect => vec![
                 LocationId::Ebih__Ebih_East__Lower_Moving_Platform__Remote_Urn,
                 LocationId::Ebih__Ebih_East__Corner__Urn,
-                LocationId::Menu__Upgrade_Menu__Infection__Infection_Level_1,
-                LocationId::Menu__Upgrade_Menu__Infection__Infection_Level_2,
-                LocationId::Menu__Upgrade_Menu__Infection__Infection_Level_3,
             ],
             Item::Under_Siege => vec![LocationId::Ebih__Ebih_East__East_Ledge__Note],
             Item::Ebih_Alu => vec![
@@ -5925,7 +5955,6 @@ impl world::World for World {
                 vec![LocationId::Ebih__Vertical_Interchange__Switch__Activate_Switch]
             }
             Item::Slingshot_Hook => vec![LocationId::Giguna_Breach__Slingshot__Ravine__Urn],
-            Item::Map_17_10 => vec![LocationId::Giguna__Giguna_Northeast__Save_Point__Seen],
             Item::Giguna_Northeast_Gate => vec![
                 LocationId::Giguna__Giguna_Northeast__Gate_Button__Open_Gate,
                 LocationId::Giguna__Giguna_Northeast__Gate_Right__Remote_Button,
@@ -6011,58 +6040,73 @@ impl world::World for World {
                 vec![LocationId::Irikar__East_Rooftops__Top_Rooftop__Tablet]
             }
             Item::Terminal_Breakthrough_2 => vec![LocationId::Irikar__Lamassu__Desk__Item],
-            Item::Health_Upgrade => vec![
-                LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_1,
-                LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_2,
-                LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_3,
-                LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_4,
-                LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_5,
-            ],
+            Item::Health_Upgrade => {
+                vec![LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_1]
+            }
+            Item::Health_Upgrade_2 => {
+                vec![LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_2]
+            }
+            Item::Health_Upgrade_3 => {
+                vec![LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_3]
+            }
+            Item::Health_Upgrade_4 => {
+                vec![LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_4]
+            }
+            Item::Health_Upgrade_5 => {
+                vec![LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_5]
+            }
             Item::Mist_Upgrade => vec![LocationId::Menu__Upgrade_Menu__Physiology__Mist_Upgrade],
-            Item::Melee_Damage => vec![
-                LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_1,
-                LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_2,
-                LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_3,
-            ],
-            Item::Melee_Speed => vec![
-                LocationId::Menu__Upgrade_Menu__Combat__Melee_Speed_1,
-                LocationId::Menu__Upgrade_Menu__Combat__Melee_Speed_2,
-                LocationId::Menu__Upgrade_Menu__Combat__Melee_Speed_3,
-            ],
-            Item::Ranged_Damage => vec![
-                LocationId::Menu__Upgrade_Menu__Combat__Ranged_Damage_1,
-                LocationId::Menu__Upgrade_Menu__Combat__Ranged_Damage_2,
-                LocationId::Menu__Upgrade_Menu__Combat__Ranged_Damage_3,
-            ],
-            Item::Ranged_Speed => vec![
-                LocationId::Menu__Upgrade_Menu__Combat__Ranged_Speed_1,
-                LocationId::Menu__Upgrade_Menu__Combat__Ranged_Speed_2,
-                LocationId::Menu__Upgrade_Menu__Combat__Ranged_Speed_3,
-            ],
-            Item::Nano_Points => vec![
-                LocationId::Menu__Upgrade_Menu__Infection__Nano_Points_1,
-                LocationId::Menu__Upgrade_Menu__Infection__Nano_Points_2,
-                LocationId::Menu__Upgrade_Menu__Infection__Nano_Points_3,
-            ],
-            Item::Infection_Speed => vec![
-                LocationId::Menu__Upgrade_Menu__Infection__Infection_Speed_1,
-                LocationId::Menu__Upgrade_Menu__Infection__Infection_Speed_2,
-            ],
-            Item::Infection_Range => vec![
-                LocationId::Menu__Upgrade_Menu__Infection__Infection_Range_1,
-                LocationId::Menu__Upgrade_Menu__Infection__Infection_Range_2,
-                LocationId::Menu__Upgrade_Menu__Infection__Infection_Range_3,
-            ],
-            Item::Drone_Melee_Damage => vec![
-                LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_1,
-                LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_2,
-                LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_3,
-            ],
-            Item::Drone_Melee_Speed => vec![
-                LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_1,
-                LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_2,
-                LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_3,
-            ],
+            Item::Melee_Damage => vec![LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_1],
+            Item::Melee_Damage_2 => vec![LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_2],
+            Item::Melee_Damage_3 => vec![LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_3],
+            Item::Melee_Speed => vec![LocationId::Menu__Upgrade_Menu__Combat__Melee_Speed_1],
+            Item::Melee_Speed_2 => vec![LocationId::Menu__Upgrade_Menu__Combat__Melee_Speed_2],
+            Item::Melee_Speed_3 => vec![LocationId::Menu__Upgrade_Menu__Combat__Melee_Speed_3],
+            Item::Ranged_Damage => vec![LocationId::Menu__Upgrade_Menu__Combat__Ranged_Damage_1],
+            Item::Ranged_Damage_2 => vec![LocationId::Menu__Upgrade_Menu__Combat__Ranged_Damage_2],
+            Item::Ranged_Damage_3 => vec![LocationId::Menu__Upgrade_Menu__Combat__Ranged_Damage_3],
+            Item::Ranged_Speed => vec![LocationId::Menu__Upgrade_Menu__Combat__Ranged_Speed_1],
+            Item::Ranged_Speed_2 => vec![LocationId::Menu__Upgrade_Menu__Combat__Ranged_Speed_2],
+            Item::Ranged_Speed_3 => vec![LocationId::Menu__Upgrade_Menu__Combat__Ranged_Speed_3],
+            Item::Infect_L1 => vec![LocationId::Menu__Upgrade_Menu__Infection__Infection_Level_1],
+            Item::Infect_L2 => vec![LocationId::Menu__Upgrade_Menu__Infection__Infection_Level_2],
+            Item::Infect_L3 => vec![LocationId::Menu__Upgrade_Menu__Infection__Infection_Level_3],
+            Item::Nano_Points => vec![LocationId::Menu__Upgrade_Menu__Infection__Nano_Points_1],
+            Item::Nano_Points_2 => vec![LocationId::Menu__Upgrade_Menu__Infection__Nano_Points_2],
+            Item::Nano_Points_3 => vec![LocationId::Menu__Upgrade_Menu__Infection__Nano_Points_3],
+            Item::Infection_Speed => {
+                vec![LocationId::Menu__Upgrade_Menu__Infection__Infection_Speed_1]
+            }
+            Item::Infection_Speed_2 => {
+                vec![LocationId::Menu__Upgrade_Menu__Infection__Infection_Speed_2]
+            }
+            Item::Infection_Range => {
+                vec![LocationId::Menu__Upgrade_Menu__Infection__Infection_Range_1]
+            }
+            Item::Infection_Range_2 => {
+                vec![LocationId::Menu__Upgrade_Menu__Infection__Infection_Range_2]
+            }
+            Item::Infection_Range_3 => {
+                vec![LocationId::Menu__Upgrade_Menu__Infection__Infection_Range_3]
+            }
+            Item::Drone_Melee_Damage => {
+                vec![LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_1]
+            }
+            Item::Drone_Melee_Damage_2 => {
+                vec![LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_2]
+            }
+            Item::Drone_Melee_Damage_3 => {
+                vec![LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_3]
+            }
+            Item::Drone_Melee_Speed => {
+                vec![LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_1]
+            }
+            Item::Drone_Melee_Speed_2 => {
+                vec![LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_2]
+            }
+            Item::Drone_Melee_Speed_3 => {
+                vec![LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_3]
+            }
             Item::Udusan => vec![LocationId::Uhrum__West_Entrance__Inner_Dais__Item],
             Item::Uhrum_West_Entrance_Gate => {
                 vec![LocationId::Uhrum__West_Entrance__Gate_Switch__Open_Gate]
@@ -6238,9 +6282,6 @@ impl world::World for World {
             LocationId::Giguna_Breach__Cubby__Rocks__Health => SpotId::Giguna_Breach__Cubby__Rocks,
             LocationId::Giguna_Breach__Slingshot__Ravine__Urn => {
                 SpotId::Giguna_Breach__Slingshot__Ravine
-            }
-            LocationId::Giguna__Giguna_Northeast__Save_Point__Seen => {
-                SpotId::Giguna__Giguna_Northeast__Save_Point
             }
             LocationId::Giguna__Giguna_Northeast__Gate_Button__Open_Gate => {
                 SpotId::Giguna__Giguna_Northeast__Gate_Button
@@ -6539,8 +6580,7 @@ impl world::World for World {
             ActionId::Giguna_Breach__SW_Save__Save_Point__Save => {
                 SpotId::Giguna_Breach__SW_Save__Save_Point
             }
-            ActionId::Giguna__Giguna_Northeast__Save_Point__Save
-            | ActionId::Giguna__Giguna_Northeast__Save_Point__Save_Recall => {
+            ActionId::Giguna__Giguna_Northeast__Save_Point__Save => {
                 SpotId::Giguna__Giguna_Northeast__Save_Point
             }
             ActionId::Giguna__Giguna_Northeast__Gate_Left__Throw_Drone => {
@@ -7348,6 +7388,9 @@ impl world::World for World {
                 if !ctx.has(Item::Heretics_Tablet) {
                     vec.push((Item::Heretics_Tablet, 1));
                 }
+                if !ctx.has(Item::Ice_Axe) {
+                    vec.push((Item::Ice_Axe, 1));
+                }
                 if !ctx.has(Item::Infect) {
                     vec.push((Item::Infect, 1));
                 }
@@ -7408,6 +7451,7 @@ impl world::World for World {
                 (Item::Health_Fragment, 5),
                 (Item::Health_Node, 1),
                 (Item::Heretics_Tablet, 1),
+                (Item::Ice_Axe, 1),
                 (Item::Infect, 1),
                 (Item::Ledge_Grab, 1),
                 (Item::Letter_from_Trace, 1),
@@ -7963,7 +8007,7 @@ impl World {
             warps: build_warps(),
             spots: build_spots(),
             global_actions: Range {
-                start: ActionId::Global__Deploy_Drone.into_usize(),
+                start: ActionId::Global__Become_Drone.into_usize(),
                 end: ActionId::Global__Recall_Drone.into_usize() + 1,
             },
             min_warp_time: 3000,
@@ -7986,14 +8030,24 @@ impl World {
                     | Item::Dangerous_Ideas
                     | Item::Dear_Ernest
                     | Item::Double_Axe
+                    | Item::Drone_Melee_Damage_3
+                    | Item::Drone_Melee_Speed_3
                     | Item::Escape
                     | Item::Health_Fragment
+                    | Item::Health_Upgrade_5
                     | Item::Heretics_Granddaughter
                     | Item::Heretics_Tablet
+                    | Item::Infect_L3
+                    | Item::Infection_Speed_2
                     | Item::Journal_2049_10_29
                     | Item::Letter_from_Trace
                     | Item::Melee_Charge
+                    | Item::Melee_Damage_3
+                    | Item::Melee_Speed_3
+                    | Item::Nano_Points_3
                     | Item::Notes_2053_02_27
+                    | Item::Ranged_Damage_3
+                    | Item::Ranged_Speed_3
                     | Item::Record_Losses
                     | Item::Researchers_Missing
                     | Item::Royal_Dagger
@@ -8011,11 +8065,21 @@ impl World {
                     | Item::Compass
                     | Item::Dangerous_Ideas
                     | Item::Double_Axe
+                    | Item::Drone_Melee_Damage_3
+                    | Item::Drone_Melee_Speed_3
                     | Item::Escape
+                    | Item::Health_Upgrade_5
                     | Item::Heretics_Granddaughter
+                    | Item::Infect_L3
+                    | Item::Infection_Speed_2
                     | Item::Journal_2049_10_29
                     | Item::Melee_Charge
+                    | Item::Melee_Damage_3
+                    | Item::Melee_Speed_3
+                    | Item::Nano_Points_3
                     | Item::Notes_2053_02_27
+                    | Item::Ranged_Damage_3
+                    | Item::Ranged_Speed_3
                     | Item::Royal_Dagger
                     | Item::Terminal_Breakthrough_2
                     | Item::Udusan
@@ -8513,14 +8577,6 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
             item: Item::Slingshot_Hook,
             price: Currency::Free,
             time: 5500,
-            exit_id: None,
-        },
-        LocationId::Giguna__Giguna_Northeast__Save_Point__Seen => Location {
-            id: LocationId::Giguna__Giguna_Northeast__Save_Point__Seen,
-            canonical: CanonId::None,
-            item: Item::Map_17_10,
-            price: Currency::Free,
-            time: 0,
             exit_id: None,
         },
         LocationId::Giguna__Giguna_Northeast__Gate_Button__Open_Gate => Location {
@@ -9102,7 +9158,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_2 => Location {
             id: LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_2,
             canonical: CanonId::None,
-            item: Item::Health_Upgrade,
+            item: Item::Health_Upgrade_2,
             price: Currency::Flasks(2),
             time: 1000,
             exit_id: None,
@@ -9110,7 +9166,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_3 => Location {
             id: LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_3,
             canonical: CanonId::None,
-            item: Item::Health_Upgrade,
+            item: Item::Health_Upgrade_3,
             price: Currency::Flasks(4),
             time: 1000,
             exit_id: None,
@@ -9118,7 +9174,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_4 => Location {
             id: LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_4,
             canonical: CanonId::None,
-            item: Item::Health_Upgrade,
+            item: Item::Health_Upgrade_4,
             price: Currency::Flasks(4),
             time: 1000,
             exit_id: None,
@@ -9126,7 +9182,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_5 => Location {
             id: LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_5,
             canonical: CanonId::None,
-            item: Item::Health_Upgrade,
+            item: Item::Health_Upgrade_5,
             price: Currency::Flasks(6),
             time: 1000,
             exit_id: None,
@@ -9150,7 +9206,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_2 => Location {
             id: LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_2,
             canonical: CanonId::None,
-            item: Item::Melee_Damage,
+            item: Item::Melee_Damage_2,
             price: Currency::Flasks(4),
             time: 1000,
             exit_id: None,
@@ -9158,7 +9214,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_3 => Location {
             id: LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_3,
             canonical: CanonId::None,
-            item: Item::Melee_Damage,
+            item: Item::Melee_Damage_3,
             price: Currency::Flasks(6),
             time: 1000,
             exit_id: None,
@@ -9174,7 +9230,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         LocationId::Menu__Upgrade_Menu__Combat__Melee_Speed_2 => Location {
             id: LocationId::Menu__Upgrade_Menu__Combat__Melee_Speed_2,
             canonical: CanonId::None,
-            item: Item::Melee_Speed,
+            item: Item::Melee_Speed_2,
             price: Currency::Flasks(4),
             time: 1000,
             exit_id: None,
@@ -9182,7 +9238,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         LocationId::Menu__Upgrade_Menu__Combat__Melee_Speed_3 => Location {
             id: LocationId::Menu__Upgrade_Menu__Combat__Melee_Speed_3,
             canonical: CanonId::None,
-            item: Item::Melee_Speed,
+            item: Item::Melee_Speed_3,
             price: Currency::Flasks(6),
             time: 1000,
             exit_id: None,
@@ -9198,7 +9254,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         LocationId::Menu__Upgrade_Menu__Combat__Ranged_Damage_2 => Location {
             id: LocationId::Menu__Upgrade_Menu__Combat__Ranged_Damage_2,
             canonical: CanonId::None,
-            item: Item::Ranged_Damage,
+            item: Item::Ranged_Damage_2,
             price: Currency::Flasks(4),
             time: 1000,
             exit_id: None,
@@ -9206,7 +9262,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         LocationId::Menu__Upgrade_Menu__Combat__Ranged_Damage_3 => Location {
             id: LocationId::Menu__Upgrade_Menu__Combat__Ranged_Damage_3,
             canonical: CanonId::None,
-            item: Item::Ranged_Damage,
+            item: Item::Ranged_Damage_3,
             price: Currency::Flasks(6),
             time: 1000,
             exit_id: None,
@@ -9222,7 +9278,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         LocationId::Menu__Upgrade_Menu__Combat__Ranged_Speed_2 => Location {
             id: LocationId::Menu__Upgrade_Menu__Combat__Ranged_Speed_2,
             canonical: CanonId::None,
-            item: Item::Ranged_Speed,
+            item: Item::Ranged_Speed_2,
             price: Currency::Flasks(3),
             time: 1000,
             exit_id: None,
@@ -9230,7 +9286,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         LocationId::Menu__Upgrade_Menu__Combat__Ranged_Speed_3 => Location {
             id: LocationId::Menu__Upgrade_Menu__Combat__Ranged_Speed_3,
             canonical: CanonId::None,
-            item: Item::Ranged_Speed,
+            item: Item::Ranged_Speed_3,
             price: Currency::Flasks(5),
             time: 1000,
             exit_id: None,
@@ -9238,7 +9294,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         LocationId::Menu__Upgrade_Menu__Infection__Infection_Level_1 => Location {
             id: LocationId::Menu__Upgrade_Menu__Infection__Infection_Level_1,
             canonical: CanonId::None,
-            item: Item::Infect,
+            item: Item::Infect_L1,
             price: Currency::Flasks(1),
             time: 1000,
             exit_id: None,
@@ -9246,7 +9302,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         LocationId::Menu__Upgrade_Menu__Infection__Infection_Level_2 => Location {
             id: LocationId::Menu__Upgrade_Menu__Infection__Infection_Level_2,
             canonical: CanonId::None,
-            item: Item::Infect,
+            item: Item::Infect_L2,
             price: Currency::Flasks(3),
             time: 1000,
             exit_id: None,
@@ -9254,7 +9310,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         LocationId::Menu__Upgrade_Menu__Infection__Infection_Level_3 => Location {
             id: LocationId::Menu__Upgrade_Menu__Infection__Infection_Level_3,
             canonical: CanonId::None,
-            item: Item::Infect,
+            item: Item::Infect_L3,
             price: Currency::Flasks(4),
             time: 1000,
             exit_id: None,
@@ -9270,7 +9326,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         LocationId::Menu__Upgrade_Menu__Infection__Nano_Points_2 => Location {
             id: LocationId::Menu__Upgrade_Menu__Infection__Nano_Points_2,
             canonical: CanonId::None,
-            item: Item::Nano_Points,
+            item: Item::Nano_Points_2,
             price: Currency::Flasks(3),
             time: 1000,
             exit_id: None,
@@ -9278,7 +9334,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         LocationId::Menu__Upgrade_Menu__Infection__Nano_Points_3 => Location {
             id: LocationId::Menu__Upgrade_Menu__Infection__Nano_Points_3,
             canonical: CanonId::None,
-            item: Item::Nano_Points,
+            item: Item::Nano_Points_3,
             price: Currency::Flasks(5),
             time: 1000,
             exit_id: None,
@@ -9294,7 +9350,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         LocationId::Menu__Upgrade_Menu__Infection__Infection_Speed_2 => Location {
             id: LocationId::Menu__Upgrade_Menu__Infection__Infection_Speed_2,
             canonical: CanonId::None,
-            item: Item::Infection_Speed,
+            item: Item::Infection_Speed_2,
             price: Currency::Flasks(5),
             time: 1000,
             exit_id: None,
@@ -9310,7 +9366,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         LocationId::Menu__Upgrade_Menu__Infection__Infection_Range_2 => Location {
             id: LocationId::Menu__Upgrade_Menu__Infection__Infection_Range_2,
             canonical: CanonId::None,
-            item: Item::Infection_Range,
+            item: Item::Infection_Range_2,
             price: Currency::Flasks(3),
             time: 1000,
             exit_id: None,
@@ -9318,7 +9374,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         LocationId::Menu__Upgrade_Menu__Infection__Infection_Range_3 => Location {
             id: LocationId::Menu__Upgrade_Menu__Infection__Infection_Range_3,
             canonical: CanonId::None,
-            item: Item::Infection_Range,
+            item: Item::Infection_Range_3,
             price: Currency::Flasks(5),
             time: 1000,
             exit_id: None,
@@ -9334,7 +9390,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_2 => Location {
             id: LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_2,
             canonical: CanonId::None,
-            item: Item::Drone_Melee_Damage,
+            item: Item::Drone_Melee_Damage_2,
             price: Currency::Flasks(3),
             time: 1000,
             exit_id: None,
@@ -9342,7 +9398,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_3 => Location {
             id: LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_3,
             canonical: CanonId::None,
-            item: Item::Drone_Melee_Damage,
+            item: Item::Drone_Melee_Damage_3,
             price: Currency::Flasks(5),
             time: 1000,
             exit_id: None,
@@ -9358,7 +9414,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_2 => Location {
             id: LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_2,
             canonical: CanonId::None,
-            item: Item::Drone_Melee_Speed,
+            item: Item::Drone_Melee_Speed_2,
             price: Currency::Flasks(3),
             time: 1000,
             exit_id: None,
@@ -9366,7 +9422,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_3 => Location {
             id: LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_3,
             canonical: CanonId::None,
-            item: Item::Drone_Melee_Speed,
+            item: Item::Drone_Melee_Speed_3,
             price: Currency::Flasks(5),
             time: 1000,
             exit_id: None,
@@ -15354,6 +15410,16 @@ pub fn build_actions() -> EnumMap<ActionId, Action> {
             time: 500,
             price: Currency::Free,
         },
+        ActionId::Global__Become_Drone => Action {
+            id: ActionId::Global__Become_Drone,
+            time: 100,
+            price: Currency::Free,
+        },
+        ActionId::Global__Become_Indra => Action {
+            id: ActionId::Global__Become_Indra,
+            time: 100,
+            price: Currency::Free,
+        },
         ActionId::Amagi__Main_Area__Carving__Key_Combo => Action {
             id: ActionId::Amagi__Main_Area__Carving__Key_Combo,
             time: 1750,
@@ -15507,11 +15573,6 @@ pub fn build_actions() -> EnumMap<ActionId, Action> {
         ActionId::Giguna__Giguna_Northeast__Save_Point__Save => Action {
             id: ActionId::Giguna__Giguna_Northeast__Save_Point__Save,
             time: 1300,
-            price: Currency::Free,
-        },
-        ActionId::Giguna__Giguna_Northeast__Save_Point__Save_Recall => Action {
-            id: ActionId::Giguna__Giguna_Northeast__Save_Point__Save_Recall,
-            time: 4300,
             price: Currency::Free,
         },
         ActionId::Giguna__Giguna_Northeast__Gate_Left__Throw_Drone => Action {
@@ -20722,8 +20783,7 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
         SpotId::Giguna__Giguna_Northeast__Save_Point => Spot {
             id: SpotId::Giguna__Giguna_Northeast__Save_Point,
             locations: Range {
-                start: LocationId::Giguna__Giguna_Northeast__Save_Point__Seen.into_usize(),
-                end: LocationId::Giguna__Giguna_Northeast__Save_Point__Seen.into_usize() + 1,
+                start: 0, end: 0,
             },
             exits: Range {
                 start: ExitId::Giguna__Giguna_Northeast__Save_Point__ex__Gate_Vent_1.into_usize(),
@@ -20731,7 +20791,7 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: ActionId::Giguna__Giguna_Northeast__Save_Point__Save.into_usize(),
-                end: ActionId::Giguna__Giguna_Northeast__Save_Point__Save_Recall.into_usize() + 1,
+                end: ActionId::Giguna__Giguna_Northeast__Save_Point__Save.into_usize() + 1,
             },
         },
         SpotId::Giguna__Giguna_Northeast__Step => Spot {
@@ -24358,6 +24418,114 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
         },
         SpotId::Giguna__Labyrinth_East__East_19 => Spot {
             id: SpotId::Giguna__Labyrinth_East__East_19,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Giguna__Labyrinth_East__Top_Middle => Spot {
+            id: SpotId::Giguna__Labyrinth_East__Top_Middle,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Giguna__Labyrinth_East__Top_West => Spot {
+            id: SpotId::Giguna__Labyrinth_East__Top_West,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Giguna__Labyrinth_East__Middle_West => Spot {
+            id: SpotId::Giguna__Labyrinth_East__Middle_West,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Giguna__Labyrinth_East__Middle_Drop => Spot {
+            id: SpotId::Giguna__Labyrinth_East__Middle_Drop,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Giguna__Labyrinth_East__Middle_Tree => Spot {
+            id: SpotId::Giguna__Labyrinth_East__Middle_Tree,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Giguna__Labyrinth_East__East_20 => Spot {
+            id: SpotId::Giguna__Labyrinth_East__East_20,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Giguna__Labyrinth_East__Lower_Middle => Spot {
+            id: SpotId::Giguna__Labyrinth_East__Lower_Middle,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Giguna__Labyrinth_East__Lower_West => Spot {
+            id: SpotId::Giguna__Labyrinth_East__Lower_West,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Giguna__Labyrinth__Top_East => Spot {
+            id: SpotId::Giguna__Labyrinth__Top_East,
             locations: Range {
                 start: 0, end: 0,
             },

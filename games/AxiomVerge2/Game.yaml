@@ -21,6 +21,8 @@ start:
   last: SpotId::None
   # This should be a load effect? prev_area = $get_area(^position) ?
   prev_area: Antarctica > West
+  # Map tiles
+  map_17_10: false
 
 data:
   breach: false
@@ -164,7 +166,7 @@ warps:
   # Fast travel times are slightly different when travelling within an area
   fast_travel_17_10:
     time: 12
-    req: NOT WITHIN `Menu` and NOT ^breach and Map_17_10 and Fast_Travel
+    req: NOT WITHIN `Menu` and NOT ^breach and ^map_17_10 and Fast_Travel
     to: Giguna > Giguna Northeast > Save Point
     after: ^energy = $max_energy
 
@@ -183,6 +185,14 @@ actions:
     req: NOT WITHIN `Menu` and $can_deploy
     do: ^mode = 'drone'; ^indra = ^position
     time: 0.5
+  - name: Become Drone
+    req: NOT WITHIN `Menu` and Anuman and ^mode != 'drone'
+    do: ^mode = 'drone'
+    time: 0.1
+  - name: Become Indra
+    req: NOT WITHIN `Menu` and not ^breach and ^mode == 'drone'
+    do: ^mode = 'Indra'
+    time: 0.1
 
 helpers:
   $melee: Ice_Axe or ^mode == 'drone'
@@ -196,7 +206,7 @@ helpers:
   $spin: ^mode == 'drone' and Slingshot_Weapon
 
   $can_deploy: Remote_Drone and ^mode != 'drone' and not Anuman
-  $can_recall: not ^breach and NOT WITHIN `Menu` and ^mode == 'drone' and not Anuman
+  $can_recall: ^mode == 'drone' and not Anuman
   $shockwave: ^mode != 'drone' and Shockwave
 
   $open: Infect
@@ -204,9 +214,10 @@ helpers:
   $platform: Infect
   $overheat: Infect
   $allegiance1: Infect
-  $allegiance2: Infect{2}
-  $unlock2: Infect{2}
-  $unlock3: Infect{3}
+  $allegiance2: Infect_L1
+  $unlock2: Infect_L1
+  $unlock3: Infect_L2
+  $unlock4: Infect_L3
 
   $mist2: Nanite_Mist and Mist_Upgrade
 
@@ -215,9 +226,9 @@ helpers:
   # infection ranges (approx)
   # .185, .22, .26, .30
   # drone has one "level" less, at 0 it's ~.15?
-  $range1: Infection_Range{2} or (Infection_Range and ^mode != 'drone')
-  $range2: Infection_Range{3} or (Infection_Range{2} and ^mode != 'drone')
-  $range3: Infection_Range{3} and ^mode != 'drone'
+  $range1: Infection_Range_2 or (Infection_Range and ^mode != 'drone')
+  $range2: Infection_Range_3 or (Infection_Range_2 and ^mode != 'drone')
+  $range3: Infection_Range_3 and ^mode != 'drone'
 
   $more_refills: ^refills < $count(Power_Matrix)
 
@@ -240,7 +251,7 @@ helpers:
   $all_health:itemList: >
     [Health_Node, Health_Fragment{5}]
   $all_weapons:itemList: >
-    [Bronze_Axe]
+    [Ice_Axe, Bronze_Axe]
   $other_items:itemList: >
     [Boomerang, Power_Matrix]
   $all_urns:itemList: >

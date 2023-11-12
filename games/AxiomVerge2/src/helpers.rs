@@ -112,19 +112,13 @@ macro_rules! helper__can_deploy {
 }
 
 /// $can_recall (  )
-/// not ^breach and NOT WITHIN `Menu` and ^mode == 'drone' and not Anuman
+/// ^mode == 'drone' and not Anuman
 #[macro_export]
 macro_rules! helper__can_recall {
     ($ctx:expr) => {{
         #[allow(unused_imports)]
         use $crate::items::Item;
-        (((!data::breach($ctx.position())
-            && !(match get_region($ctx.position()) {
-                RegionId::Menu => true,
-                _ => false,
-            }))
-            && $ctx.mode() == enums::Mode::Drone)
-            && !$ctx.has(Item::Anuman))
+        ($ctx.mode() == enums::Mode::Drone && !$ctx.has(Item::Anuman))
     }};
 }
 
@@ -195,35 +189,46 @@ macro_rules! helper__allegiance1 {
 }
 
 /// $allegiance2 (  )
-/// Infect{2}
+/// Infect_L1
 #[macro_export]
 macro_rules! helper__allegiance2 {
     ($ctx:expr) => {{
         #[allow(unused_imports)]
         use $crate::items::Item;
-        $ctx.count(Item::Infect) >= 2
+        $ctx.has(Item::Infect_L1)
     }};
 }
 
 /// $unlock2 (  )
-/// Infect{2}
+/// Infect_L1
 #[macro_export]
 macro_rules! helper__unlock2 {
     ($ctx:expr) => {{
         #[allow(unused_imports)]
         use $crate::items::Item;
-        $ctx.count(Item::Infect) >= 2
+        $ctx.has(Item::Infect_L1)
     }};
 }
 
 /// $unlock3 (  )
-/// Infect{3}
+/// Infect_L2
 #[macro_export]
 macro_rules! helper__unlock3 {
     ($ctx:expr) => {{
         #[allow(unused_imports)]
         use $crate::items::Item;
-        $ctx.count(Item::Infect) >= 3
+        $ctx.has(Item::Infect_L2)
+    }};
+}
+
+/// $unlock4 (  )
+/// Infect_L3
+#[macro_export]
+macro_rules! helper__unlock4 {
+    ($ctx:expr) => {{
+        #[allow(unused_imports)]
+        use $crate::items::Item;
+        $ctx.has(Item::Infect_L3)
     }};
 }
 
@@ -239,37 +244,37 @@ macro_rules! helper__mist2 {
 }
 
 /// $range1 (  )
-/// Infection_Range{2} or (Infection_Range and ^mode != 'drone')
+/// Infection_Range_2 or (Infection_Range and ^mode != 'drone')
 #[macro_export]
 macro_rules! helper__range1 {
     ($ctx:expr) => {{
         #[allow(unused_imports)]
         use $crate::items::Item;
-        ($ctx.count(Item::Infection_Range) >= 2
+        ($ctx.has(Item::Infection_Range_2)
             || ($ctx.has(Item::Infection_Range) && $ctx.mode() != enums::Mode::Drone))
     }};
 }
 
 /// $range2 (  )
-/// Infection_Range{3} or (Infection_Range{2} and ^mode != 'drone')
+/// Infection_Range_3 or (Infection_Range_2 and ^mode != 'drone')
 #[macro_export]
 macro_rules! helper__range2 {
     ($ctx:expr) => {{
         #[allow(unused_imports)]
         use $crate::items::Item;
-        ($ctx.count(Item::Infection_Range) >= 3
-            || ($ctx.count(Item::Infection_Range) >= 2 && $ctx.mode() != enums::Mode::Drone))
+        ($ctx.has(Item::Infection_Range_3)
+            || ($ctx.has(Item::Infection_Range_2) && $ctx.mode() != enums::Mode::Drone))
     }};
 }
 
 /// $range3 (  )
-/// Infection_Range{3} and ^mode != 'drone'
+/// Infection_Range_3 and ^mode != 'drone'
 #[macro_export]
 macro_rules! helper__range3 {
     ($ctx:expr) => {{
         #[allow(unused_imports)]
         use $crate::items::Item;
-        ($ctx.count(Item::Infection_Range) >= 3 && $ctx.mode() != enums::Mode::Drone)
+        ($ctx.has(Item::Infection_Range_3) && $ctx.mode() != enums::Mode::Drone)
     }};
 }
 
@@ -401,13 +406,13 @@ macro_rules! helper__all_health {
 }
 
 /// $all_weapons (  )
-/// [Bronze_Axe]
+/// [Ice_Axe, Bronze_Axe]
 #[macro_export]
 macro_rules! helper__all_weapons {
     ($ctx:expr) => {{
         #[allow(unused_imports)]
         use $crate::items::Item;
-        $ctx.has(Item::Bronze_Axe)
+        $ctx.has(Item::Ice_Axe) && $ctx.has(Item::Bronze_Axe)
     }};
 }
 

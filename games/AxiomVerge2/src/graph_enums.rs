@@ -131,6 +131,7 @@ pub enum AreaId {
     Giguna__Gubi_Lair,
     Giguna__Hard_Rock,
     Giguna__Helipad,
+    Giguna__Labyrinth,
     Giguna__Labyrinth_East,
     Giguna__Lamassu,
     Giguna__Ruins_Center,
@@ -256,6 +257,7 @@ impl fmt::Display for AreaId {
             AreaId::Giguna__Gubi_Lair => write!(f, "{}", "Giguna > Gubi Lair"),
             AreaId::Giguna__Hard_Rock => write!(f, "{}", "Giguna > Hard Rock"),
             AreaId::Giguna__Helipad => write!(f, "{}", "Giguna > Helipad"),
+            AreaId::Giguna__Labyrinth => write!(f, "{}", "Giguna > Labyrinth"),
             AreaId::Giguna__Labyrinth_East => write!(f, "{}", "Giguna > Labyrinth East"),
             AreaId::Giguna__Lamassu => write!(f, "{}", "Giguna > Lamassu"),
             AreaId::Giguna__Ruins_Center => write!(f, "{}", "Giguna > Ruins Center"),
@@ -396,6 +398,7 @@ impl std::str::FromStr for AreaId {
             "Giguna > Gubi Lair" => Ok(AreaId::Giguna__Gubi_Lair),
             "Giguna > Hard Rock" => Ok(AreaId::Giguna__Hard_Rock),
             "Giguna > Helipad" => Ok(AreaId::Giguna__Helipad),
+            "Giguna > Labyrinth" => Ok(AreaId::Giguna__Labyrinth),
             "Giguna > Labyrinth East" => Ok(AreaId::Giguna__Labyrinth_East),
             "Giguna > Lamassu" => Ok(AreaId::Giguna__Lamassu),
             "Giguna > Ruins Center" => Ok(AreaId::Giguna__Ruins_Center),
@@ -993,7 +996,16 @@ pub enum SpotId {
     Giguna__Helipad__Tablet_Ledge,
     Giguna__Helipad__Wall_Bottom,
     Giguna__Helipad__Wall_Top,
+    Giguna__Labyrinth__Top_East,
     Giguna__Labyrinth_East__East_19,
+    Giguna__Labyrinth_East__East_20,
+    Giguna__Labyrinth_East__Lower_Middle,
+    Giguna__Labyrinth_East__Lower_West,
+    Giguna__Labyrinth_East__Middle_Drop,
+    Giguna__Labyrinth_East__Middle_Tree,
+    Giguna__Labyrinth_East__Middle_West,
+    Giguna__Labyrinth_East__Top_Middle,
+    Giguna__Labyrinth_East__Top_West,
     Giguna__Lamassu__Broken_Pillar,
     Giguna__Lamassu__Deposit,
     Giguna__Lamassu__East_18,
@@ -2668,8 +2680,33 @@ impl fmt::Display for SpotId {
                 write!(f, "{}", "Giguna > Helipad > Wall Bottom")
             }
             SpotId::Giguna__Helipad__Wall_Top => write!(f, "{}", "Giguna > Helipad > Wall Top"),
+            SpotId::Giguna__Labyrinth__Top_East => write!(f, "{}", "Giguna > Labyrinth > Top East"),
             SpotId::Giguna__Labyrinth_East__East_19 => {
                 write!(f, "{}", "Giguna > Labyrinth East > East 19")
+            }
+            SpotId::Giguna__Labyrinth_East__East_20 => {
+                write!(f, "{}", "Giguna > Labyrinth East > East 20")
+            }
+            SpotId::Giguna__Labyrinth_East__Lower_Middle => {
+                write!(f, "{}", "Giguna > Labyrinth East > Lower Middle")
+            }
+            SpotId::Giguna__Labyrinth_East__Lower_West => {
+                write!(f, "{}", "Giguna > Labyrinth East > Lower West")
+            }
+            SpotId::Giguna__Labyrinth_East__Middle_Drop => {
+                write!(f, "{}", "Giguna > Labyrinth East > Middle Drop")
+            }
+            SpotId::Giguna__Labyrinth_East__Middle_Tree => {
+                write!(f, "{}", "Giguna > Labyrinth East > Middle Tree")
+            }
+            SpotId::Giguna__Labyrinth_East__Middle_West => {
+                write!(f, "{}", "Giguna > Labyrinth East > Middle West")
+            }
+            SpotId::Giguna__Labyrinth_East__Top_Middle => {
+                write!(f, "{}", "Giguna > Labyrinth East > Top Middle")
+            }
+            SpotId::Giguna__Labyrinth_East__Top_West => {
+                write!(f, "{}", "Giguna > Labyrinth East > Top West")
             }
             SpotId::Giguna__Lamassu__Broken_Pillar => {
                 write!(f, "{}", "Giguna > Lamassu > Broken Pillar")
@@ -4735,7 +4772,28 @@ impl std::str::FromStr for SpotId {
             "Giguna > Helipad > Tablet Ledge" => Ok(SpotId::Giguna__Helipad__Tablet_Ledge),
             "Giguna > Helipad > Wall Bottom" => Ok(SpotId::Giguna__Helipad__Wall_Bottom),
             "Giguna > Helipad > Wall Top" => Ok(SpotId::Giguna__Helipad__Wall_Top),
+            "Giguna > Labyrinth > Top East" => Ok(SpotId::Giguna__Labyrinth__Top_East),
             "Giguna > Labyrinth East > East 19" => Ok(SpotId::Giguna__Labyrinth_East__East_19),
+            "Giguna > Labyrinth East > East 20" => Ok(SpotId::Giguna__Labyrinth_East__East_20),
+            "Giguna > Labyrinth East > Lower Middle" => {
+                Ok(SpotId::Giguna__Labyrinth_East__Lower_Middle)
+            }
+            "Giguna > Labyrinth East > Lower West" => {
+                Ok(SpotId::Giguna__Labyrinth_East__Lower_West)
+            }
+            "Giguna > Labyrinth East > Middle Drop" => {
+                Ok(SpotId::Giguna__Labyrinth_East__Middle_Drop)
+            }
+            "Giguna > Labyrinth East > Middle Tree" => {
+                Ok(SpotId::Giguna__Labyrinth_East__Middle_Tree)
+            }
+            "Giguna > Labyrinth East > Middle West" => {
+                Ok(SpotId::Giguna__Labyrinth_East__Middle_West)
+            }
+            "Giguna > Labyrinth East > Top Middle" => {
+                Ok(SpotId::Giguna__Labyrinth_East__Top_Middle)
+            }
+            "Giguna > Labyrinth East > Top West" => Ok(SpotId::Giguna__Labyrinth_East__Top_West),
             "Giguna > Lamassu > Broken Pillar" => Ok(SpotId::Giguna__Lamassu__Broken_Pillar),
             "Giguna > Lamassu > Deposit" => Ok(SpotId::Giguna__Lamassu__Deposit),
             "Giguna > Lamassu > East 18" => Ok(SpotId::Giguna__Lamassu__East_18),
@@ -5703,7 +5761,6 @@ pub enum LocationId {
     Giguna__Giguna_Northeast__Door__Remote_Flask,
     Giguna__Giguna_Northeast__Gate_Button__Open_Gate,
     Giguna__Giguna_Northeast__Gate_Right__Remote_Button,
-    Giguna__Giguna_Northeast__Save_Point__Seen,
     Giguna__Giguna_Northeast__Vault__Item,
     Giguna__Gubi_Lair__Center_Platform__Boss_Reward,
     Giguna__Gubi_Lair__Center_Platform__Fight_Gubi,
@@ -6093,9 +6150,6 @@ impl fmt::Display for LocationId {
                 "{}",
                 "Giguna > Giguna Northeast > Gate Right > Remote Button"
             ),
-            LocationId::Giguna__Giguna_Northeast__Save_Point__Seen => {
-                write!(f, "{}", "Giguna > Giguna Northeast > Save Point > Seen")
-            }
             LocationId::Giguna__Giguna_Northeast__Vault__Item => {
                 write!(f, "{}", "Giguna > Giguna Northeast > Vault > Item")
             }
@@ -6677,9 +6731,6 @@ impl std::str::FromStr for LocationId {
             }
             "Giguna > Giguna Northeast > Gate Right > Remote Button" => {
                 Ok(LocationId::Giguna__Giguna_Northeast__Gate_Right__Remote_Button)
-            }
-            "Giguna > Giguna Northeast > Save Point > Seen" => {
-                Ok(LocationId::Giguna__Giguna_Northeast__Save_Point__Seen)
             }
             "Giguna > Giguna Northeast > Vault > Item" => {
                 Ok(LocationId::Giguna__Giguna_Northeast__Vault__Item)
@@ -9597,7 +9648,6 @@ pub enum ActionId {
     Giguna__Giguna_Northeast__Gate_Left__Throw_Drone,
     Giguna__Giguna_Northeast__Right_Column__Open_Door_From_Afar,
     Giguna__Giguna_Northeast__Save_Point__Save,
-    Giguna__Giguna_Northeast__Save_Point__Save_Recall,
     Giguna__Giguna_Northeast__Switch__Open_Door,
     Giguna__Ruins_Top__Portal__Enter_Portal,
     Giguna__Ruins_Top__Save_Point__Save,
@@ -9615,6 +9665,8 @@ pub enum ActionId {
     Giguna_Breach__SW_Save__Save_Point__Save,
     Giguna_Breach__SW_Save__West_11__Open_Door,
     Glacier__Revival__Save_Point__Save,
+    Global__Become_Drone,
+    Global__Become_Indra,
     Global__Deploy_Drone,
     Global__Recall_Drone,
     Irikar__Basement_Portal__Moving_Platform_Start__Activate_Platform,
@@ -9842,11 +9894,6 @@ impl fmt::Display for ActionId {
             ActionId::Giguna__Giguna_Northeast__Save_Point__Save => {
                 write!(f, "{}", "Giguna > Giguna Northeast > Save Point > Save")
             }
-            ActionId::Giguna__Giguna_Northeast__Save_Point__Save_Recall => write!(
-                f,
-                "{}",
-                "Giguna > Giguna Northeast > Save Point > Save-Recall"
-            ),
             ActionId::Giguna__Giguna_Northeast__Switch__Open_Door => {
                 write!(f, "{}", "Giguna > Giguna Northeast > Switch > Open Door")
             }
@@ -9904,6 +9951,8 @@ impl fmt::Display for ActionId {
             ActionId::Glacier__Revival__Save_Point__Save => {
                 write!(f, "{}", "Glacier > Revival > Save Point > Save")
             }
+            ActionId::Global__Become_Drone => write!(f, "{}", "Become Drone"),
+            ActionId::Global__Become_Indra => write!(f, "{}", "Become Indra"),
             ActionId::Global__Deploy_Drone => write!(f, "{}", "Deploy Drone"),
             ActionId::Global__Recall_Drone => write!(f, "{}", "Recall Drone"),
             ActionId::Irikar__Basement_Portal__Moving_Platform_Start__Activate_Platform => write!(
@@ -10116,9 +10165,6 @@ impl std::str::FromStr for ActionId {
             "Giguna > Giguna Northeast > Save Point > Save" => {
                 Ok(ActionId::Giguna__Giguna_Northeast__Save_Point__Save)
             }
-            "Giguna > Giguna Northeast > Save Point > Save-Recall" => {
-                Ok(ActionId::Giguna__Giguna_Northeast__Save_Point__Save_Recall)
-            }
             "Giguna > Giguna Northeast > Switch > Open Door" => {
                 Ok(ActionId::Giguna__Giguna_Northeast__Switch__Open_Door)
             }
@@ -10170,6 +10216,8 @@ impl std::str::FromStr for ActionId {
             "Glacier > Revival > Save Point > Save" => {
                 Ok(ActionId::Glacier__Revival__Save_Point__Save)
             }
+            "Become Drone" => Ok(ActionId::Global__Become_Drone),
+            "Become Indra" => Ok(ActionId::Global__Become_Indra),
             "Deploy Drone" => Ok(ActionId::Global__Deploy_Drone),
             "Recall Drone" => Ok(ActionId::Global__Recall_Drone),
             "Irikar > Basement Portal > Moving Platform Start > Activate Platform" => {
