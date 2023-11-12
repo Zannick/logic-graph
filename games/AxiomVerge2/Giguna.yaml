@@ -14,6 +14,8 @@ areas:
           tags: [xshift]
     - name: Inner Wall
       coord: [18.65, 8.95]
+      enter:
+        map_17_10: true
       local:
         - to: East 9
           jumps: 2
@@ -29,7 +31,8 @@ areas:
           req: $hover
     - name: Save Point
       coord: [17.5, 9.5]
-      on_entry: ^map_17_10 = true
+      enter:
+        map_17_10: true
       local:
         - to: Step
           jumps: 1

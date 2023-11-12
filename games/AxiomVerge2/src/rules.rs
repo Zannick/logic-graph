@@ -1491,10 +1491,6 @@ pub fn action_main_portal_save_update(ctx: &mut Context) {
     // $main_portal_save_update
     helper__main_portal_save_update!(ctx);
 }
-pub fn action_map_17_10__true(ctx: &mut Context, newpos: SpotId) {
-    // ^map_17_10 = true
-    ctx.set_map_17_10(true);
-}
 pub fn action_mode__drone(ctx: &mut Context) {
     // ^mode = 'drone'
     ctx.set_mode(enums::Mode::Drone);

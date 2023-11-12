@@ -5379,6 +5379,17 @@ impl context::Ctx for Context {
             }
             _ => (),
         }
+        if self.position != pos {
+            match pos {
+                SpotId::Giguna__Giguna_Northeast__Inner_Wall => {
+                    self.cbits1.insert(flags::ContextBits1::MAP_17_10);
+                }
+                SpotId::Giguna__Giguna_Northeast__Save_Point => {
+                    self.cbits1.insert(flags::ContextBits1::MAP_17_10);
+                }
+                _ => (),
+            }
+        }
         self.position = pos;
     }
 

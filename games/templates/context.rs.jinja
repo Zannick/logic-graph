@@ -324,6 +324,26 @@ impl context::Ctx for Context {
 %% endfor
             _ => (),
         }
+        if self.position != pos {
+            match pos {
+%% for s in context_position_watchers['spot']|sort
+                SpotId::{{ s }} => {
+%% for c, val in context_trigger_rules.enter['spot'].get(s, {}).items()
+%% if c in bfp.varmap
+                    self.cbits{{ bfp.varmap[c] }}.{% if val and val != 'false' %}insert{% else %}remove{% endif %}(flags::ContextBits{{ bfp.varmap[c] }}::{{ c|upper }});
+%% else
+                    self.{{ c }} = {{ val }};
+%% endif
+%% endfor
+%# Reset rules would go here if we want them.
+%% if id_lookup[s].action_id
+                    rules::action_{{ id_lookup[s].action_id }}(self, pos);
+%% endif
+                }
+%% endfor
+                _ => (),
+            }
+        }
 %% endif
 %% endfor
         self.position = pos;

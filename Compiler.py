@@ -280,6 +280,10 @@ class GameLogic(object):
                     spot['all_data'] = dict(area['all_data'])
                     spot['all_data'].update(spot.get('data', {}))
                     spot['base_movement'] = self.spot_base_movement(tuple(spot['all_data'].items()))
+                    if 'on_entry' in spot:
+                        spot['act'] = parseAction(
+                                spot['on_entry'], name=f'{spot["fullname"]}:on_entry')
+                        spot['action_id'] = self.make_funcid(spot, 'act', 'on_entry', ON_ENTRY_ARGS)
                     # hybrid spots are exits but have names
                     for loc in spot.get('locations', []) + spot.get('hybrid', []):
                         loc['spot'] = sname
@@ -1338,20 +1342,23 @@ class GameLogic(object):
 
     @cached_property
     def context_trigger_rules(self):
-        d = {trigger: {'region': defaultdict(dict), 'area': defaultdict(dict)}
+        d = {trigger: {'region': defaultdict(dict), 'area': defaultdict(dict), 'spot': defaultdict(dict)}
              for trigger in TRIGGER_RULES}
+
+        def _add_rules(place, ptype):
+            localctx = self.get_local_ctx(place)
+            for trigger in TRIGGER_RULES:
+                if e := place.get(trigger):
+                    for k, v in e.items():
+                        d[trigger][ptype][place['id']][localctx[k]] = str_to_rusttype(v, self.context_types[localctx[k]])
+
         for r in self.regions:
-            localctx = self.get_local_ctx(r)
-            for trigger in TRIGGER_RULES:
-                if e := r.get(trigger):
-                    for k, v in e.items():
-                        d[trigger]['region'][r['id']][localctx[k]] = str_to_rusttype(v, self.context_types[localctx[k]])
-        for a in self.areas():
-            localctx = self.get_local_ctx(a)
-            for trigger in TRIGGER_RULES:
-                if e := a.get(trigger):
-                    for k, v in e.items():
-                        d[trigger]['area'][a['id']][localctx[k]] = str_to_rusttype(v, self.context_types[localctx[k]])
+            _add_rules(r, 'region')
+            for a in r['areas']:
+                _add_rules(a, 'area')
+                for s in a['spots']:
+                    _add_rules(s, 'spot')
+
         return d
 
 
@@ -1391,13 +1398,15 @@ class GameLogic(object):
 
     @cached_property
     def context_position_watchers(self):
-        d = {'region': set(), 'area': set()}
+        d = {'region': set(), 'area': set(), 'spot': set()}
         d['region'].update(self.context_trigger_rules['enter']['region'].keys())
         d['area'].update(self.context_trigger_rules['enter']['area'].keys())
+        d['spot'].update(self.context_trigger_rules['enter']['spot'].keys())
         d['region'].update(self.context_resetters['region'].keys())
         d['area'].update(self.context_resetters['area'].keys())
         d['region'].update(r['id'] for r in self.regions if 'act' in r)
         d['area'].update(a['id'] for a in self.areas() if 'act' in a)
+        d['spot'].update(s['id'] for s in self.spots() if 'act' in s)
         return d
 
     
