@@ -353,6 +353,40 @@ pub fn access_ebih_west_block(ctx: &Context) -> bool {
     // Ebih_West_Block
     ctx.has(Item::Ebih_West_Block)
 }
+pub fn access_fast_travel_and_not_within_menu_and_not_breach_and_amashilama(ctx: &Context) -> bool {
+    // Fast_Travel and NOT WITHIN `Menu` and NOT ^breach and Amashilama
+    (((ctx.has(Item::Fast_Travel)
+        && !(match get_region(ctx.position()) {
+            RegionId::Menu => true,
+            _ => false,
+        }))
+        && !data::breach(ctx.position()))
+        && ctx.has(Item::Amashilama))
+}
+pub fn access_fast_travel_and_not_within_menu_and_not_breach_and_map_giguna_northeast_save(
+    ctx: &Context,
+) -> bool {
+    // Fast_Travel and NOT WITHIN `Menu` and NOT ^breach and ^map_giguna_northeast_save
+    (((ctx.has(Item::Fast_Travel)
+        && !(match get_region(ctx.position()) {
+            RegionId::Menu => true,
+            _ => false,
+        }))
+        && !data::breach(ctx.position()))
+        && ctx.map_giguna_northeast_save())
+}
+pub fn access_fast_travel_and_not_within_menu_and_not_breach_and_map_uhrum_save_room(
+    ctx: &Context,
+) -> bool {
+    // Fast_Travel and NOT WITHIN `Menu` and NOT ^breach and ^map_uhrum_save_room
+    (((ctx.has(Item::Fast_Travel)
+        && !(match get_region(ctx.position()) {
+            RegionId::Menu => true,
+            _ => false,
+        }))
+        && !data::breach(ctx.position()))
+        && ctx.map_uhrum_save_room())
+}
 pub fn access_giguna__carnelian__door__ex__switch_1__req(ctx: &Context) -> bool {
     // ^_door_opened
     ctx.giguna__carnelian__ctx__door_opened()
@@ -1072,15 +1106,6 @@ pub fn access_not_within_menu_and_not_breach_and_can_recall(ctx: &Context) -> bo
     }) && !data::breach(ctx.position()))
         && helper__can_recall!(ctx))
 }
-pub fn access_not_within_menu_and_not_breach_and_map_17_10_and_fast_travel(ctx: &Context) -> bool {
-    // NOT WITHIN `Menu` and NOT ^breach and ^map_17_10 and Fast_Travel
-    (((!(match get_region(ctx.position()) {
-        RegionId::Menu => true,
-        _ => false,
-    }) && !data::breach(ctx.position()))
-        && ctx.map_17_10())
-        && ctx.has(Item::Fast_Travel))
-}
 pub fn access_not_within_menu_and_not_breach_and_mode__drone(ctx: &Context) -> bool {
     // NOT WITHIN `Menu` and not ^breach and ^mode == 'drone'
     ((!(match get_region(ctx.position()) {
@@ -1172,6 +1197,10 @@ pub fn access_uhrum_west_entrance_gate(ctx: &Context) -> bool {
 pub fn access_uhrum_west_entrance_gate_and_hover(ctx: &Context) -> bool {
     // Uhrum_West_Entrance_Gate and $hover
     (ctx.has(Item::Uhrum_West_Entrance_Gate) && helper__hover!(ctx))
+}
+pub fn access_uhrum_west_entrance_lower_wall(ctx: &Context) -> bool {
+    // Uhrum_West_Entrance_Lower_Wall
+    ctx.has(Item::Uhrum_West_Entrance_Lower_Wall)
 }
 pub fn access_uhrum_west_entrance_upper_wall(ctx: &Context) -> bool {
     // Uhrum_West_Entrance_Upper_Wall

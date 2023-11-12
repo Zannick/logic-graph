@@ -3710,6 +3710,76 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
         ([false], SpotId::Giguna__Helipad__Wall_Top, SpotId::Giguna__Helipad__Wall_Bottom) => 1250,
         (
             [false],
+            SpotId::Giguna__Labyrinth_East__East_19,
+            SpotId::Giguna__Labyrinth_East__Top_Middle,
+        ) => 1929,
+        (
+            [false],
+            SpotId::Giguna__Labyrinth_East__East_20,
+            SpotId::Giguna__Labyrinth_East__Middle_Tree,
+        ) => 1799,
+        (
+            [false],
+            SpotId::Giguna__Labyrinth_East__Lower_Middle,
+            SpotId::Giguna__Labyrinth_East__Lower_West,
+        ) => 1228,
+        (
+            [false],
+            SpotId::Giguna__Labyrinth_East__Lower_West,
+            SpotId::Giguna__Labyrinth_East__Lower_Middle,
+        ) => 1228,
+        (
+            [false],
+            SpotId::Giguna__Labyrinth_East__Middle_Drop,
+            SpotId::Giguna__Labyrinth_East__Lower_Middle,
+        ) => 400,
+        (
+            [false],
+            SpotId::Giguna__Labyrinth_East__Middle_Drop,
+            SpotId::Giguna__Labyrinth_East__Middle_Tree,
+        ) => 350,
+        (
+            [false],
+            SpotId::Giguna__Labyrinth_East__Middle_Drop,
+            SpotId::Giguna__Labyrinth_East__Middle_West,
+        ) => 1578,
+        (
+            [false],
+            SpotId::Giguna__Labyrinth_East__Middle_Tree,
+            SpotId::Giguna__Labyrinth_East__East_20,
+        ) => 1228,
+        (
+            [false],
+            SpotId::Giguna__Labyrinth_East__Middle_Tree,
+            SpotId::Giguna__Labyrinth_East__Lower_Middle,
+        ) => 701,
+        (
+            [false],
+            SpotId::Giguna__Labyrinth_East__Middle_Tree,
+            SpotId::Giguna__Labyrinth_East__Middle_Drop,
+        ) => 350,
+        (
+            [false],
+            SpotId::Giguna__Labyrinth_East__Middle_West,
+            SpotId::Giguna__Labyrinth_East__Middle_Drop,
+        ) => 1578,
+        (
+            [false],
+            SpotId::Giguna__Labyrinth_East__Top_Middle,
+            SpotId::Giguna__Labyrinth_East__East_19,
+        ) => 1929,
+        (
+            [false],
+            SpotId::Giguna__Labyrinth_East__Top_Middle,
+            SpotId::Giguna__Labyrinth_East__Top_West,
+        ) => 1228,
+        (
+            [false],
+            SpotId::Giguna__Labyrinth_East__Top_West,
+            SpotId::Giguna__Labyrinth_East__Top_Middle,
+        ) => 1228,
+        (
+            [false],
             SpotId::Giguna__Lamassu__Broken_Pillar,
             SpotId::Giguna__Lamassu__Upper_Platform_Edge,
         ) => 1228,
@@ -6167,6 +6237,56 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
             [false],
             SpotId::Uhrum__West_Entrance__Inner_Dais,
             SpotId::Uhrum__West_Entrance__Upper_Wall_West,
+        ) => 1228,
+        (
+            [false],
+            SpotId::Uhrum__West_Entrance__Lower_Path_Gap,
+            SpotId::Uhrum__West_Entrance__Sand,
+        ) => 701,
+        (
+            [false],
+            SpotId::Uhrum__West_Entrance__Lower_Path_Rock,
+            SpotId::Uhrum__West_Entrance__Lower_Path_Gap,
+        ) => 400,
+        (
+            [false],
+            SpotId::Uhrum__West_Entrance__Lower_Path_Rock,
+            SpotId::Uhrum__West_Entrance__Lower_Path_Tree_Ledge,
+        ) => 877,
+        (
+            [false],
+            SpotId::Uhrum__West_Entrance__Lower_Path_Rock,
+            SpotId::Uhrum__West_Entrance__Lower_Wall_East,
+        ) => 701,
+        (
+            [false],
+            SpotId::Uhrum__West_Entrance__Lower_Path_Tree_Ledge,
+            SpotId::Uhrum__West_Entrance__East_28,
+        ) => 1403,
+        (
+            [false],
+            SpotId::Uhrum__West_Entrance__Lower_Path_Tree_Ledge,
+            SpotId::Uhrum__West_Entrance__Lower_Path_Rock,
+        ) => 1799,
+        (
+            [false],
+            SpotId::Uhrum__West_Entrance__Lower_Path_Tree_Ledge,
+            SpotId::Uhrum__West_Entrance__Sand,
+        ) => 1929,
+        (
+            [false],
+            SpotId::Uhrum__West_Entrance__Lower_Wall_East,
+            SpotId::Uhrum__West_Entrance__Lower_Path_Gap,
+        ) => 500,
+        (
+            [false],
+            SpotId::Uhrum__West_Entrance__Lower_Wall_East,
+            SpotId::Uhrum__West_Entrance__Lower_Path_Rock,
+        ) => 701,
+        (
+            [false],
+            SpotId::Uhrum__West_Entrance__Lower_Wall_West,
+            SpotId::Uhrum__West_Entrance__Save_Point,
         ) => 1228,
         (
             [false],
@@ -9972,6 +10092,76 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
         ([true], SpotId::Giguna__Helipad__Wall_Top, SpotId::Giguna__Helipad__Wall_Bottom) => 1250,
         (
             [true],
+            SpotId::Giguna__Labyrinth_East__East_19,
+            SpotId::Giguna__Labyrinth_East__Top_Middle,
+        ) => 1929,
+        (
+            [true],
+            SpotId::Giguna__Labyrinth_East__East_20,
+            SpotId::Giguna__Labyrinth_East__Middle_Tree,
+        ) => 1799,
+        (
+            [true],
+            SpotId::Giguna__Labyrinth_East__Lower_Middle,
+            SpotId::Giguna__Labyrinth_East__Lower_West,
+        ) => 1228,
+        (
+            [true],
+            SpotId::Giguna__Labyrinth_East__Lower_West,
+            SpotId::Giguna__Labyrinth_East__Lower_Middle,
+        ) => 1228,
+        (
+            [true],
+            SpotId::Giguna__Labyrinth_East__Middle_Drop,
+            SpotId::Giguna__Labyrinth_East__Lower_Middle,
+        ) => 400,
+        (
+            [true],
+            SpotId::Giguna__Labyrinth_East__Middle_Drop,
+            SpotId::Giguna__Labyrinth_East__Middle_Tree,
+        ) => 350,
+        (
+            [true],
+            SpotId::Giguna__Labyrinth_East__Middle_Drop,
+            SpotId::Giguna__Labyrinth_East__Middle_West,
+        ) => 1578,
+        (
+            [true],
+            SpotId::Giguna__Labyrinth_East__Middle_Tree,
+            SpotId::Giguna__Labyrinth_East__East_20,
+        ) => 1228,
+        (
+            [true],
+            SpotId::Giguna__Labyrinth_East__Middle_Tree,
+            SpotId::Giguna__Labyrinth_East__Lower_Middle,
+        ) => 701,
+        (
+            [true],
+            SpotId::Giguna__Labyrinth_East__Middle_Tree,
+            SpotId::Giguna__Labyrinth_East__Middle_Drop,
+        ) => 350,
+        (
+            [true],
+            SpotId::Giguna__Labyrinth_East__Middle_West,
+            SpotId::Giguna__Labyrinth_East__Middle_Drop,
+        ) => 1578,
+        (
+            [true],
+            SpotId::Giguna__Labyrinth_East__Top_Middle,
+            SpotId::Giguna__Labyrinth_East__East_19,
+        ) => 1929,
+        (
+            [true],
+            SpotId::Giguna__Labyrinth_East__Top_Middle,
+            SpotId::Giguna__Labyrinth_East__Top_West,
+        ) => 1228,
+        (
+            [true],
+            SpotId::Giguna__Labyrinth_East__Top_West,
+            SpotId::Giguna__Labyrinth_East__Top_Middle,
+        ) => 1228,
+        (
+            [true],
             SpotId::Giguna__Lamassu__Broken_Pillar,
             SpotId::Giguna__Lamassu__Upper_Platform_Edge,
         ) => 1228,
@@ -12345,6 +12535,56 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
             [true],
             SpotId::Uhrum__West_Entrance__Inner_Dais,
             SpotId::Uhrum__West_Entrance__Upper_Wall_West,
+        ) => 1228,
+        (
+            [true],
+            SpotId::Uhrum__West_Entrance__Lower_Path_Gap,
+            SpotId::Uhrum__West_Entrance__Sand,
+        ) => 701,
+        (
+            [true],
+            SpotId::Uhrum__West_Entrance__Lower_Path_Rock,
+            SpotId::Uhrum__West_Entrance__Lower_Path_Gap,
+        ) => 400,
+        (
+            [true],
+            SpotId::Uhrum__West_Entrance__Lower_Path_Rock,
+            SpotId::Uhrum__West_Entrance__Lower_Path_Tree_Ledge,
+        ) => 877,
+        (
+            [true],
+            SpotId::Uhrum__West_Entrance__Lower_Path_Rock,
+            SpotId::Uhrum__West_Entrance__Lower_Wall_East,
+        ) => 701,
+        (
+            [true],
+            SpotId::Uhrum__West_Entrance__Lower_Path_Tree_Ledge,
+            SpotId::Uhrum__West_Entrance__East_28,
+        ) => 1403,
+        (
+            [true],
+            SpotId::Uhrum__West_Entrance__Lower_Path_Tree_Ledge,
+            SpotId::Uhrum__West_Entrance__Lower_Path_Rock,
+        ) => 1799,
+        (
+            [true],
+            SpotId::Uhrum__West_Entrance__Lower_Path_Tree_Ledge,
+            SpotId::Uhrum__West_Entrance__Sand,
+        ) => 1929,
+        (
+            [true],
+            SpotId::Uhrum__West_Entrance__Lower_Wall_East,
+            SpotId::Uhrum__West_Entrance__Lower_Path_Gap,
+        ) => 500,
+        (
+            [true],
+            SpotId::Uhrum__West_Entrance__Lower_Wall_East,
+            SpotId::Uhrum__West_Entrance__Lower_Path_Rock,
+        ) => 701,
+        (
+            [true],
+            SpotId::Uhrum__West_Entrance__Lower_Wall_West,
+            SpotId::Uhrum__West_Entrance__Save_Point,
         ) => 1228,
         (
             [true],
@@ -14926,6 +15166,56 @@ pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
         (SpotId::Giguna__Gateway__Block_Lowered, SpotId::Giguna__Gateway__Button) => true,
         (SpotId::Giguna__Gateway__West_19, SpotId::Giguna__Gateway__Block_Lowered) => true,
         (SpotId::Giguna__Gateway__Button, SpotId::Giguna__Gateway__Block_Lowered) => true,
+        (SpotId::Giguna__Labyrinth_East__East_19, SpotId::Giguna__Labyrinth_East__Top_Middle) => {
+            true
+        }
+        (SpotId::Giguna__Labyrinth_East__Top_Middle, SpotId::Giguna__Labyrinth_East__East_19) => {
+            true
+        }
+        (SpotId::Giguna__Labyrinth_East__Top_Middle, SpotId::Giguna__Labyrinth_East__Top_West) => {
+            true
+        }
+        (SpotId::Giguna__Labyrinth_East__Top_West, SpotId::Giguna__Labyrinth_East__Top_Middle) => {
+            true
+        }
+        (
+            SpotId::Giguna__Labyrinth_East__Middle_West,
+            SpotId::Giguna__Labyrinth_East__Middle_Drop,
+        ) => true,
+        (
+            SpotId::Giguna__Labyrinth_East__Middle_Drop,
+            SpotId::Giguna__Labyrinth_East__Middle_West,
+        ) => true,
+        (
+            SpotId::Giguna__Labyrinth_East__Middle_Drop,
+            SpotId::Giguna__Labyrinth_East__Middle_Tree,
+        ) => true,
+        (
+            SpotId::Giguna__Labyrinth_East__Middle_Drop,
+            SpotId::Giguna__Labyrinth_East__Lower_Middle,
+        ) => true,
+        (
+            SpotId::Giguna__Labyrinth_East__Middle_Tree,
+            SpotId::Giguna__Labyrinth_East__Middle_Drop,
+        ) => true,
+        (
+            SpotId::Giguna__Labyrinth_East__Middle_Tree,
+            SpotId::Giguna__Labyrinth_East__Lower_Middle,
+        ) => true,
+        (SpotId::Giguna__Labyrinth_East__Middle_Tree, SpotId::Giguna__Labyrinth_East__East_20) => {
+            true
+        }
+        (SpotId::Giguna__Labyrinth_East__East_20, SpotId::Giguna__Labyrinth_East__Middle_Tree) => {
+            true
+        }
+        (
+            SpotId::Giguna__Labyrinth_East__Lower_Middle,
+            SpotId::Giguna__Labyrinth_East__Lower_West,
+        ) => true,
+        (
+            SpotId::Giguna__Labyrinth_East__Lower_West,
+            SpotId::Giguna__Labyrinth_East__Lower_Middle,
+        ) => true,
         (SpotId::Giguna__Antechamber__East_16, SpotId::Giguna__Antechamber__Statues_Ledge) => true,
         (SpotId::Giguna__Antechamber__Statues_Ledge, SpotId::Giguna__Antechamber__East_16) => true,
         (SpotId::Giguna__Antechamber__Statues_Ledge, SpotId::Giguna__Antechamber__Bottom) => true,
@@ -16389,6 +16679,43 @@ pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
         (SpotId::Uhrum__West_Entrance__East_26, SpotId::Uhrum__West_Entrance__Clear_Passage) => {
             true
         }
+        (
+            SpotId::Uhrum__West_Entrance__Lower_Wall_West,
+            SpotId::Uhrum__West_Entrance__Save_Point,
+        ) => true,
+        (
+            SpotId::Uhrum__West_Entrance__Lower_Wall_East,
+            SpotId::Uhrum__West_Entrance__Lower_Path_Rock,
+        ) => true,
+        (
+            SpotId::Uhrum__West_Entrance__Lower_Wall_East,
+            SpotId::Uhrum__West_Entrance__Lower_Path_Gap,
+        ) => true,
+        (
+            SpotId::Uhrum__West_Entrance__Lower_Path_Rock,
+            SpotId::Uhrum__West_Entrance__Lower_Path_Gap,
+        ) => true,
+        (
+            SpotId::Uhrum__West_Entrance__Lower_Path_Rock,
+            SpotId::Uhrum__West_Entrance__Lower_Path_Tree_Ledge,
+        ) => true,
+        (
+            SpotId::Uhrum__West_Entrance__Lower_Path_Rock,
+            SpotId::Uhrum__West_Entrance__Lower_Wall_East,
+        ) => true,
+        (SpotId::Uhrum__West_Entrance__Lower_Path_Gap, SpotId::Uhrum__West_Entrance__Sand) => true,
+        (
+            SpotId::Uhrum__West_Entrance__Lower_Path_Tree_Ledge,
+            SpotId::Uhrum__West_Entrance__Sand,
+        ) => true,
+        (
+            SpotId::Uhrum__West_Entrance__Lower_Path_Tree_Ledge,
+            SpotId::Uhrum__West_Entrance__Lower_Path_Rock,
+        ) => true,
+        (
+            SpotId::Uhrum__West_Entrance__Lower_Path_Tree_Ledge,
+            SpotId::Uhrum__West_Entrance__East_28,
+        ) => true,
         _ => false,
     }
 }
@@ -26682,8 +27009,28 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Labyrinth_East__East_19,
+            SpotId::Giguna__Gateway__West_19,
+            1350,
+        ),
+        (
+            SpotId::Giguna__Labyrinth_East__East_19,
+            SpotId::Giguna__Labyrinth_East__Top_Middle,
+            1929,
+        ),
+        (
+            SpotId::Giguna__Labyrinth_East__East_19,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
+        ),
+        (
+            SpotId::Giguna__Labyrinth_East__East_20,
+            SpotId::Giguna__Labyrinth_East__Middle_Tree,
+            1799,
+        ),
+        (
+            SpotId::Giguna__Labyrinth_East__East_20,
+            SpotId::Giguna__Mural__West_20,
+            1350,
         ),
         (
             SpotId::Giguna__Labyrinth_East__East_20,
@@ -26692,8 +27039,28 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Labyrinth_East__Lower_Middle,
+            SpotId::Giguna__Labyrinth_East__Lower_West,
+            1228,
+        ),
+        (
+            SpotId::Giguna__Labyrinth_East__Lower_Middle,
+            SpotId::Giguna__Labyrinth_East__Middle_Tree,
+            701,
+        ),
+        (
+            SpotId::Giguna__Labyrinth_East__Lower_Middle,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
+        ),
+        (
+            SpotId::Giguna__Labyrinth_East__Lower_West,
+            SpotId::Giguna__Labyrinth_East__Lower_Middle,
+            1228,
+        ),
+        (
+            SpotId::Giguna__Labyrinth_East__Lower_West,
+            SpotId::Giguna__Labyrinth__Lower_East,
+            1350,
         ),
         (
             SpotId::Giguna__Labyrinth_East__Lower_West,
@@ -26702,8 +27069,38 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Labyrinth_East__Middle_Drop,
+            SpotId::Giguna__Labyrinth_East__Lower_Middle,
+            400,
+        ),
+        (
+            SpotId::Giguna__Labyrinth_East__Middle_Drop,
+            SpotId::Giguna__Labyrinth_East__Middle_Tree,
+            350,
+        ),
+        (
+            SpotId::Giguna__Labyrinth_East__Middle_Drop,
+            SpotId::Giguna__Labyrinth_East__Middle_West,
+            1578,
+        ),
+        (
+            SpotId::Giguna__Labyrinth_East__Middle_Drop,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
+        ),
+        (
+            SpotId::Giguna__Labyrinth_East__Middle_Tree,
+            SpotId::Giguna__Labyrinth_East__East_20,
+            1228,
+        ),
+        (
+            SpotId::Giguna__Labyrinth_East__Middle_Tree,
+            SpotId::Giguna__Labyrinth_East__Lower_Middle,
+            701,
+        ),
+        (
+            SpotId::Giguna__Labyrinth_East__Middle_Tree,
+            SpotId::Giguna__Labyrinth_East__Middle_Drop,
+            350,
         ),
         (
             SpotId::Giguna__Labyrinth_East__Middle_Tree,
@@ -26712,8 +27109,28 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Labyrinth_East__Middle_West,
+            SpotId::Giguna__Labyrinth_East__Middle_Drop,
+            1578,
+        ),
+        (
+            SpotId::Giguna__Labyrinth_East__Middle_West,
+            SpotId::Giguna__Labyrinth__Middle_East,
+            1350,
+        ),
+        (
+            SpotId::Giguna__Labyrinth_East__Middle_West,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
+        ),
+        (
+            SpotId::Giguna__Labyrinth_East__Top_Middle,
+            SpotId::Giguna__Labyrinth_East__East_19,
+            1929,
+        ),
+        (
+            SpotId::Giguna__Labyrinth_East__Top_Middle,
+            SpotId::Giguna__Labyrinth_East__Top_West,
+            1228,
         ),
         (
             SpotId::Giguna__Labyrinth_East__Top_Middle,
@@ -26722,6 +27139,36 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Labyrinth_East__Top_West,
+            SpotId::Giguna__Labyrinth_East__Top_Middle,
+            1228,
+        ),
+        (
+            SpotId::Giguna__Labyrinth_East__Top_West,
+            SpotId::Giguna__Labyrinth__Top_East,
+            1350,
+        ),
+        (
+            SpotId::Giguna__Labyrinth_East__Top_West,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Labyrinth__East_22,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Labyrinth__East_23,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Labyrinth__Lower_East,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Labyrinth__Middle_East,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -26972,6 +27419,16 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Lamassu__Wingtip,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Mural__Northwest_Item,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Mural__West_20,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -27756,6 +28213,26 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             1000,
         ),
         (
+            SpotId::Giguna__Separator__West_23,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Separator__West_24,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Separator__West_25,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Separator__West_Mid_air,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
             SpotId::Giguna__Vertical_Interchange__Dead_end,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
@@ -27802,6 +28279,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Vertical_Interchange__North,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Vertical_Interchange__South,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -32921,7 +33403,137 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             100,
         ),
         (
+            SpotId::Uhrum__Glitchy_Corridor__West_28,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Uhrum__Save_Room__East,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Uhrum__Save_Room__Save_Point,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Uhrum__Save_Room__West,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Uhrum__Siege_Corridor__Center_Box,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Uhrum__Siege_Corridor__Center_East,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Uhrum__Siege_Corridor__Center_Platform_1,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Uhrum__Siege_Corridor__Center_Platform_3,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Uhrum__Siege_Corridor__Center_West,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Uhrum__Siege_Corridor__East_25,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Uhrum__Siege_Corridor__East_Hill,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Uhrum__Siege_Corridor__Mideast_Hill,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Uhrum__Siege_Corridor__Northwest_Door,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Uhrum__Siege_Corridor__Northwest_Platform,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Uhrum__Siege_Corridor__Pond,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Uhrum__Siege_Corridor__Upper_Rock_East,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Uhrum__Siege_Corridor__Upper_Rock_Item,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Uhrum__Siege_Corridor__Upper_Rock_West,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
             SpotId::Uhrum__Siege_Corridor__West_26,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Uhrum__Siege_Corridor__West_Grassy_Ledge,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Uhrum__Siege_Corridor__West_Greenery,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Uhrum__Siege_Corridor__West_Rocky_Ledge,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Uhrum__Siege_Corridor__Western_Cache,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Uhrum__Siege_Corridor__Western_Rock,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__West_24,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__West_25,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__West_27,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -32958,6 +33570,21 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Uhrum__West_Entrance__East_26,
             SpotId::Uhrum__West_Entrance__Upper_Fork,
+            1403,
+        ),
+        (
+            SpotId::Uhrum__West_Entrance__East_28,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Uhrum__West_Entrance__East_28,
+            SpotId::Uhrum__Glitchy_Corridor__West_28,
+            1350,
+        ),
+        (
+            SpotId::Uhrum__West_Entrance__East_28,
+            SpotId::Uhrum__West_Entrance__Lower_Path_Tree_Ledge,
             1403,
         ),
         (
@@ -33036,9 +33663,104 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             1052,
         ),
         (
+            SpotId::Uhrum__West_Entrance__Lower_Path_Gap,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Uhrum__West_Entrance__Lower_Path_Gap,
+            SpotId::Uhrum__West_Entrance__Lower_Path_Tree_Ledge,
+            1228,
+        ),
+        (
+            SpotId::Uhrum__West_Entrance__Lower_Path_Gap,
+            SpotId::Uhrum__West_Entrance__Lower_Wall_West,
+            1228,
+        ),
+        (
+            SpotId::Uhrum__West_Entrance__Lower_Path_Gap,
+            SpotId::Uhrum__West_Entrance__Sand,
+            701,
+        ),
+        (
+            SpotId::Uhrum__West_Entrance__Lower_Path_Rock,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Uhrum__West_Entrance__Lower_Path_Rock,
+            SpotId::Uhrum__West_Entrance__Lower_Path_Gap,
+            400,
+        ),
+        (
+            SpotId::Uhrum__West_Entrance__Lower_Path_Rock,
+            SpotId::Uhrum__West_Entrance__Lower_Path_Tree_Ledge,
+            877,
+        ),
+        (
+            SpotId::Uhrum__West_Entrance__Lower_Path_Rock,
+            SpotId::Uhrum__West_Entrance__Lower_Wall_East,
+            701,
+        ),
+        (
+            SpotId::Uhrum__West_Entrance__Lower_Path_Tree_Ledge,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Uhrum__West_Entrance__Lower_Path_Tree_Ledge,
+            SpotId::Uhrum__West_Entrance__East_28,
+            1403,
+        ),
+        (
+            SpotId::Uhrum__West_Entrance__Lower_Path_Tree_Ledge,
+            SpotId::Uhrum__West_Entrance__Lower_Path_Rock,
+            1799,
+        ),
+        (
+            SpotId::Uhrum__West_Entrance__Lower_Path_Tree_Ledge,
+            SpotId::Uhrum__West_Entrance__Sand,
+            1929,
+        ),
+        (
+            SpotId::Uhrum__West_Entrance__Lower_Wall_East,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Uhrum__West_Entrance__Lower_Wall_East,
+            SpotId::Uhrum__West_Entrance__Lower_Path_Gap,
+            500,
+        ),
+        (
+            SpotId::Uhrum__West_Entrance__Lower_Wall_East,
+            SpotId::Uhrum__West_Entrance__Lower_Path_Rock,
+            701,
+        ),
+        (
+            SpotId::Uhrum__West_Entrance__Lower_Wall_East,
+            SpotId::Uhrum__West_Entrance__Lower_Wall_West,
+            500,
+        ),
+        (
             SpotId::Uhrum__West_Entrance__Lower_Wall_West,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
+        ),
+        (
+            SpotId::Uhrum__West_Entrance__Lower_Wall_West,
+            SpotId::Uhrum__West_Entrance__Lower_Wall_East,
+            500,
+        ),
+        (
+            SpotId::Uhrum__West_Entrance__Lower_Wall_West,
+            SpotId::Uhrum__West_Entrance__Save_Point,
+            1228,
+        ),
+        (
+            SpotId::Uhrum__West_Entrance__Lower_Wall_West,
+            SpotId::Uhrum__West_Entrance__South_Platform,
+            1403,
         ),
         (
             SpotId::Uhrum__West_Entrance__Middle_West_Ledge,
@@ -33114,6 +33836,21 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Uhrum__West_Entrance__Portal_Stand,
             SpotId::Uhrum__West_Entrance__West_of_Gate,
             1200,
+        ),
+        (
+            SpotId::Uhrum__West_Entrance__Sand,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Uhrum__West_Entrance__Sand,
+            SpotId::Uhrum__West_Entrance__Lower_Path_Gap,
+            1200,
+        ),
+        (
+            SpotId::Uhrum__West_Entrance__Sand,
+            SpotId::Uhrum__West_Entrance__Lower_Path_Tree_Ledge,
+            1929,
         ),
         (
             SpotId::Uhrum__West_Entrance__Save_Point,
@@ -35910,6 +36647,56 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
         }
         (SpotId::Giguna__Helipad__Wall_Top, SpotId::Giguna__Helipad__Staircase_Top) => Some(2280),
         (SpotId::Giguna__Helipad__Wall_Top, SpotId::Giguna__Helipad__Wall_Bottom) => Some(1250),
+        (SpotId::Giguna__Labyrinth_East__East_19, SpotId::Giguna__Labyrinth_East__Top_Middle) => {
+            Some(1929)
+        }
+        (SpotId::Giguna__Labyrinth_East__East_20, SpotId::Giguna__Labyrinth_East__Middle_Tree) => {
+            Some(1799)
+        }
+        (
+            SpotId::Giguna__Labyrinth_East__Lower_Middle,
+            SpotId::Giguna__Labyrinth_East__Lower_West,
+        ) => Some(1228),
+        (
+            SpotId::Giguna__Labyrinth_East__Lower_West,
+            SpotId::Giguna__Labyrinth_East__Lower_Middle,
+        ) => Some(1228),
+        (
+            SpotId::Giguna__Labyrinth_East__Middle_Drop,
+            SpotId::Giguna__Labyrinth_East__Lower_Middle,
+        ) => Some(400),
+        (
+            SpotId::Giguna__Labyrinth_East__Middle_Drop,
+            SpotId::Giguna__Labyrinth_East__Middle_Tree,
+        ) => Some(350),
+        (
+            SpotId::Giguna__Labyrinth_East__Middle_Drop,
+            SpotId::Giguna__Labyrinth_East__Middle_West,
+        ) => Some(1578),
+        (SpotId::Giguna__Labyrinth_East__Middle_Tree, SpotId::Giguna__Labyrinth_East__East_20) => {
+            Some(1228)
+        }
+        (
+            SpotId::Giguna__Labyrinth_East__Middle_Tree,
+            SpotId::Giguna__Labyrinth_East__Lower_Middle,
+        ) => Some(701),
+        (
+            SpotId::Giguna__Labyrinth_East__Middle_Tree,
+            SpotId::Giguna__Labyrinth_East__Middle_Drop,
+        ) => Some(350),
+        (
+            SpotId::Giguna__Labyrinth_East__Middle_West,
+            SpotId::Giguna__Labyrinth_East__Middle_Drop,
+        ) => Some(1578),
+        (SpotId::Giguna__Labyrinth_East__Top_Middle, SpotId::Giguna__Labyrinth_East__East_19) => {
+            Some(1929)
+        }
+        (SpotId::Giguna__Labyrinth_East__Top_Middle, SpotId::Giguna__Labyrinth_East__Top_West) => {
+            Some(1228)
+        }
+        (SpotId::Giguna__Labyrinth_East__Top_West, SpotId::Giguna__Labyrinth_East__Top_Middle) => {
+            Some(1228)
+        }
         (SpotId::Giguna__Lamassu__Broken_Pillar, SpotId::Giguna__Lamassu__Upper_Platform_Edge) => {
             Some(1228)
         }
@@ -37598,6 +38385,45 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
         (
             SpotId::Uhrum__West_Entrance__Inner_Dais,
             SpotId::Uhrum__West_Entrance__Upper_Wall_West,
+        ) => Some(1228),
+        (SpotId::Uhrum__West_Entrance__Lower_Path_Gap, SpotId::Uhrum__West_Entrance__Sand) => {
+            Some(701)
+        }
+        (
+            SpotId::Uhrum__West_Entrance__Lower_Path_Rock,
+            SpotId::Uhrum__West_Entrance__Lower_Path_Gap,
+        ) => Some(400),
+        (
+            SpotId::Uhrum__West_Entrance__Lower_Path_Rock,
+            SpotId::Uhrum__West_Entrance__Lower_Path_Tree_Ledge,
+        ) => Some(877),
+        (
+            SpotId::Uhrum__West_Entrance__Lower_Path_Rock,
+            SpotId::Uhrum__West_Entrance__Lower_Wall_East,
+        ) => Some(701),
+        (
+            SpotId::Uhrum__West_Entrance__Lower_Path_Tree_Ledge,
+            SpotId::Uhrum__West_Entrance__East_28,
+        ) => Some(1403),
+        (
+            SpotId::Uhrum__West_Entrance__Lower_Path_Tree_Ledge,
+            SpotId::Uhrum__West_Entrance__Lower_Path_Rock,
+        ) => Some(1799),
+        (
+            SpotId::Uhrum__West_Entrance__Lower_Path_Tree_Ledge,
+            SpotId::Uhrum__West_Entrance__Sand,
+        ) => Some(1929),
+        (
+            SpotId::Uhrum__West_Entrance__Lower_Wall_East,
+            SpotId::Uhrum__West_Entrance__Lower_Path_Gap,
+        ) => Some(500),
+        (
+            SpotId::Uhrum__West_Entrance__Lower_Wall_East,
+            SpotId::Uhrum__West_Entrance__Lower_Path_Rock,
+        ) => Some(701),
+        (
+            SpotId::Uhrum__West_Entrance__Lower_Wall_West,
+            SpotId::Uhrum__West_Entrance__Save_Point,
         ) => Some(1228),
         (
             SpotId::Uhrum__West_Entrance__Middle_West_Ledge,
@@ -40989,6 +41815,56 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
         (SpotId::Giguna__Helipad__Wall_Top, SpotId::Giguna__Helipad__Wall_Bottom) => {
             (Some(1250), vec![])
         }
+        (SpotId::Giguna__Labyrinth_East__East_19, SpotId::Giguna__Labyrinth_East__Top_Middle) => {
+            (Some(1929), vec![])
+        }
+        (SpotId::Giguna__Labyrinth_East__East_20, SpotId::Giguna__Labyrinth_East__Middle_Tree) => {
+            (Some(1799), vec![])
+        }
+        (
+            SpotId::Giguna__Labyrinth_East__Lower_Middle,
+            SpotId::Giguna__Labyrinth_East__Lower_West,
+        ) => (Some(1228), vec![]),
+        (
+            SpotId::Giguna__Labyrinth_East__Lower_West,
+            SpotId::Giguna__Labyrinth_East__Lower_Middle,
+        ) => (Some(1228), vec![]),
+        (
+            SpotId::Giguna__Labyrinth_East__Middle_Drop,
+            SpotId::Giguna__Labyrinth_East__Lower_Middle,
+        ) => (Some(400), vec![]),
+        (
+            SpotId::Giguna__Labyrinth_East__Middle_Drop,
+            SpotId::Giguna__Labyrinth_East__Middle_Tree,
+        ) => (Some(350), vec![]),
+        (
+            SpotId::Giguna__Labyrinth_East__Middle_Drop,
+            SpotId::Giguna__Labyrinth_East__Middle_West,
+        ) => (Some(1578), vec![]),
+        (SpotId::Giguna__Labyrinth_East__Middle_Tree, SpotId::Giguna__Labyrinth_East__East_20) => {
+            (Some(1228), vec![])
+        }
+        (
+            SpotId::Giguna__Labyrinth_East__Middle_Tree,
+            SpotId::Giguna__Labyrinth_East__Lower_Middle,
+        ) => (Some(701), vec![]),
+        (
+            SpotId::Giguna__Labyrinth_East__Middle_Tree,
+            SpotId::Giguna__Labyrinth_East__Middle_Drop,
+        ) => (Some(350), vec![]),
+        (
+            SpotId::Giguna__Labyrinth_East__Middle_West,
+            SpotId::Giguna__Labyrinth_East__Middle_Drop,
+        ) => (Some(1578), vec![]),
+        (SpotId::Giguna__Labyrinth_East__Top_Middle, SpotId::Giguna__Labyrinth_East__East_19) => {
+            (Some(1929), vec![])
+        }
+        (SpotId::Giguna__Labyrinth_East__Top_Middle, SpotId::Giguna__Labyrinth_East__Top_West) => {
+            (Some(1228), vec![])
+        }
+        (SpotId::Giguna__Labyrinth_East__Top_West, SpotId::Giguna__Labyrinth_East__Top_Middle) => {
+            (Some(1228), vec![])
+        }
         (SpotId::Giguna__Lamassu__Broken_Pillar, SpotId::Giguna__Lamassu__Upper_Platform_Edge) => {
             (Some(1228), vec![])
         }
@@ -42955,6 +43831,45 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
         (
             SpotId::Uhrum__West_Entrance__Inner_Dais,
             SpotId::Uhrum__West_Entrance__Upper_Wall_West,
+        ) => (Some(1228), vec![]),
+        (SpotId::Uhrum__West_Entrance__Lower_Path_Gap, SpotId::Uhrum__West_Entrance__Sand) => {
+            (Some(701), vec![])
+        }
+        (
+            SpotId::Uhrum__West_Entrance__Lower_Path_Rock,
+            SpotId::Uhrum__West_Entrance__Lower_Path_Gap,
+        ) => (Some(400), vec![]),
+        (
+            SpotId::Uhrum__West_Entrance__Lower_Path_Rock,
+            SpotId::Uhrum__West_Entrance__Lower_Path_Tree_Ledge,
+        ) => (Some(877), vec![]),
+        (
+            SpotId::Uhrum__West_Entrance__Lower_Path_Rock,
+            SpotId::Uhrum__West_Entrance__Lower_Wall_East,
+        ) => (Some(701), vec![]),
+        (
+            SpotId::Uhrum__West_Entrance__Lower_Path_Tree_Ledge,
+            SpotId::Uhrum__West_Entrance__East_28,
+        ) => (Some(1403), vec![]),
+        (
+            SpotId::Uhrum__West_Entrance__Lower_Path_Tree_Ledge,
+            SpotId::Uhrum__West_Entrance__Lower_Path_Rock,
+        ) => (Some(1799), vec![]),
+        (
+            SpotId::Uhrum__West_Entrance__Lower_Path_Tree_Ledge,
+            SpotId::Uhrum__West_Entrance__Sand,
+        ) => (Some(1929), vec![]),
+        (
+            SpotId::Uhrum__West_Entrance__Lower_Wall_East,
+            SpotId::Uhrum__West_Entrance__Lower_Path_Gap,
+        ) => (Some(500), vec![]),
+        (
+            SpotId::Uhrum__West_Entrance__Lower_Wall_East,
+            SpotId::Uhrum__West_Entrance__Lower_Path_Rock,
+        ) => (Some(701), vec![]),
+        (
+            SpotId::Uhrum__West_Entrance__Lower_Wall_West,
+            SpotId::Uhrum__West_Entrance__Save_Point,
         ) => (Some(1228), vec![]),
         (
             SpotId::Uhrum__West_Entrance__Middle_West_Ledge,

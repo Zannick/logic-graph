@@ -1045,6 +1045,7 @@ class GameLogic(object):
         self.context_values
         self.local_distances
         self.context_resetters
+        self.context_trigger_rules
 
         return self._errors
 
@@ -1350,6 +1351,9 @@ class GameLogic(object):
             for trigger in TRIGGER_RULES:
                 if e := place.get(trigger):
                     for k, v in e.items():
+                        if k not in localctx:
+                            self._errors.append(f'Undefined ctx property ^{k} in {place["name"]}:{trigger}')
+                            continue
                         d[trigger][ptype][place['id']][localctx[k]] = str_to_rusttype(v, self.context_types[localctx[k]])
 
         for r in self.regions:

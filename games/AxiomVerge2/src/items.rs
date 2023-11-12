@@ -123,6 +123,7 @@ pub enum Item {
     Ranged_Speed_2,
     Ranged_Speed_3,
     Record_Losses,
+    Refill,
     Remote_Drone,
     Researchers_Missing,
     Royal_Dagger,
@@ -138,6 +139,7 @@ pub enum Item {
     The_Ideal_Kiengir,
     Udusan,
     Uhrum_West_Entrance_Gate,
+    Uhrum_West_Entrance_Lower_Wall,
     Uhrum_West_Entrance_Upper_Wall,
     Under_Siege,
     Underwater_Movement,
@@ -252,6 +254,7 @@ impl fmt::Display for Item {
             Item::Ranged_Speed_2 => write!(f, "{}", "Ranged_Speed_2"),
             Item::Ranged_Speed_3 => write!(f, "{}", "Ranged_Speed_3"),
             Item::Record_Losses => write!(f, "{}", "Record_Losses"),
+            Item::Refill => write!(f, "{}", "Refill"),
             Item::Remote_Drone => write!(f, "{}", "Remote_Drone"),
             Item::Researchers_Missing => write!(f, "{}", "Researchers_Missing"),
             Item::Royal_Dagger => write!(f, "{}", "Royal_Dagger"),
@@ -267,6 +270,9 @@ impl fmt::Display for Item {
             Item::The_Ideal_Kiengir => write!(f, "{}", "The_Ideal_Kiengir"),
             Item::Udusan => write!(f, "{}", "Udusan"),
             Item::Uhrum_West_Entrance_Gate => write!(f, "{}", "Uhrum_West_Entrance_Gate"),
+            Item::Uhrum_West_Entrance_Lower_Wall => {
+                write!(f, "{}", "Uhrum_West_Entrance_Lower_Wall")
+            }
             Item::Uhrum_West_Entrance_Upper_Wall => {
                 write!(f, "{}", "Uhrum_West_Entrance_Upper_Wall")
             }
@@ -383,6 +389,7 @@ impl std::str::FromStr for Item {
             "Ranged_Speed_2" => Ok(Item::Ranged_Speed_2),
             "Ranged_Speed_3" => Ok(Item::Ranged_Speed_3),
             "Record_Losses" => Ok(Item::Record_Losses),
+            "Refill" => Ok(Item::Refill),
             "Remote_Drone" => Ok(Item::Remote_Drone),
             "Researchers_Missing" => Ok(Item::Researchers_Missing),
             "Royal_Dagger" => Ok(Item::Royal_Dagger),
@@ -398,6 +405,7 @@ impl std::str::FromStr for Item {
             "The_Ideal_Kiengir" => Ok(Item::The_Ideal_Kiengir),
             "Udusan" => Ok(Item::Udusan),
             "Uhrum_West_Entrance_Gate" => Ok(Item::Uhrum_West_Entrance_Gate),
+            "Uhrum_West_Entrance_Lower_Wall" => Ok(Item::Uhrum_West_Entrance_Lower_Wall),
             "Uhrum_West_Entrance_Upper_Wall" => Ok(Item::Uhrum_West_Entrance_Upper_Wall),
             "Under_Siege" => Ok(Item::Under_Siege),
             "Underwater_Movement" => Ok(Item::Underwater_Movement),
@@ -431,6 +439,7 @@ pub fn unused_item(id: Item) -> bool {
             | Item::Notes_2053_02_27
             | Item::Ranged_Damage_3
             | Item::Ranged_Speed_3
+            | Item::Refill
             | Item::Royal_Dagger
             | Item::Terminal_Breakthrough_2
             | Item::Udusan

@@ -27,12 +27,12 @@ fn read_key_value(
             );
         }
         Some("major_glitches") => {
-            ctx.cbits1
-                .set(flags::ContextBits1::MAJOR_GLITCHES, parse_bool(key, val)?);
+            ctx.cbits2
+                .set(flags::ContextBits2::MAJOR_GLITCHES, parse_bool(key, val)?);
         }
         Some("minor_glitches") => {
-            ctx.cbits1
-                .set(flags::ContextBits1::MINOR_GLITCHES, parse_bool(key, val)?);
+            ctx.cbits2
+                .set(flags::ContextBits2::MINOR_GLITCHES, parse_bool(key, val)?);
         }
         _ => {
             return Err(format!("Unrecognized or unparseable key: '{:?}'", key));

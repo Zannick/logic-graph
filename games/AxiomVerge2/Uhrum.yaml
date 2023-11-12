@@ -86,6 +86,8 @@ areas:
 
     - name: Southeast Tree
       coord: [19.2, 27.05]
+      enter:
+        map_uhrum_west_entrance_save: true
       local:
         - to: Save Point
         - to: West 27
@@ -112,6 +114,8 @@ areas:
 
     - name: Save Point
       coord: [19.5, 27.35]
+      enter:
+        map_uhrum_west_entrance_save: true
       local:
         - to: Southeast Tree
           jumps: 2
@@ -287,7 +291,7 @@ areas:
           price: 30
           movement: mist2
     - name: East 26
-      coord: [20.95, 25.85]
+      coord: [20.95, 25.8]
       local:
         - to: Upper Fork
           jumps: 1
@@ -298,10 +302,209 @@ areas:
 
     - name: Lower Wall West
       coord: [19.85, 26.9]
+      enter:
+        # close enough
+        map_uhrum_west_entrance_save: true
+      local:
+        - to: Save Point
+      exits:
+        - to: South Platform
+          req: $hover
+          movement: base
+          jumps: 1
+        - to: South Platform
+          req: $hook
+          movement: base
+          jumps: 1
+        - to: South Platform
+          req: $grab
+          movement: base
+          jumps: 2
+        - to: Lower Wall East
+          req: Uhrum_West_Entrance_Lower_Wall
+          movement: base
+          jumps: 1
+      hybrid:
+        - name: Charge through Wall
+          item: Uhrum_West_Entrance_Lower_Wall
+          canon: Uhrum_West_Entrance_Lower_Wall
+          req: $charge
+          to: Lower Wall East
+          time: 1.2  # ?
+        - name: Spin through Wall
+          item: Uhrum_West_Entrance_Lower_Wall
+          canon: Uhrum_West_Entrance_Lower_Wall
+          req: $spin
+          to: Lower Wall East
+          time: 0.5  # ?
+        - name: Mist through Wall
+          item: Uhrum_West_Entrance_Lower_Wall
+          canon: Uhrum_West_Entrance_Lower_Wall
+          req: $mist2
+          to: Lower Wall East
+          price: 40
+          movement: mist2
+    - name: Lower Wall East
+      coord: [20.1, 26.8]
+      local:
+        - to: Lower Path Rock
+        - to: Lower Path Gap
+      exits:
+        - to: Lower Wall West
+          req: Uhrum_West_Entrance_Lower_Wall
+          movement: base
+      hybrid:
+        - name: Charge through Wall
+          item: Uhrum_West_Entrance_Lower_Wall
+          canon: Uhrum_West_Entrance_Lower_Wall
+          req: $charge
+          to: Lower Wall West
+          time: 1.2  # ?
+        - name: Spin through Wall
+          item: Uhrum_West_Entrance_Lower_Wall
+          canon: Uhrum_West_Entrance_Lower_Wall
+          req: $spin
+          to: Lower Wall West
+          time: 0.5  # ?
+        - name: Mist through Wall
+          item: Uhrum_West_Entrance_Lower_Wall
+          canon: Uhrum_West_Entrance_Lower_Wall
+          req: $mist2
+          to: Lower Wall West
+          price: 40
+          movement: mist2
+    - name: Lower Path Rock
+      coord: [20.3, 26.9]
+      local:
+        - to: Lower Path Gap
+        - to: Lower Path Tree Ledge
+        - to: Lower Wall East
+          jumps: 1
+    - name: Lower Path Gap
+      coord: [20.2, 27.3]
+      local:
+        - to: Sand
+      exits:
+        - to: Lower Wall West
+          req: $hook
+          movement: base
+          jumps: 2
+        - to: Lower Path Tree Ledge
+          req: $hook
+          movement: base
+          jumps: 1
+    - name: Sand
+      coord: [20.0, 27.75]
+      locations:
+        - name: Refill
+          item: Refill
+          req: $more_refills
+          tags: [standing]
+      exits:
+        - to: Lower Path Gap
+          req: $hook
+          movement: base
+          jumps: 2
+        - to: Lower Path Tree Ledge
+          req: $hook
+          movement: base
+          jumps: 2
+        - to: Lower Path Tree Ledge
+          req: $grab and $climb
+          movement: base
+          jumps: 3
+    - name: Lower Path Tree Ledge
+      coord: [20.55, 27.3]
+      local:
+        - to: Sand
+        - to: Lower Path Rock
+          jumps: 3
+        - to: East 28
+    - name: East 28
+      coord: [20.95, 27.7]
+      exits:
+        - to: Lower Path Tree Ledge
+          req: $grab
+          movement: base
+          jumps: 3
+        - to: Lower Path Tree Ledge
+          req: $hook
+          movement: base
+          jumps: 2
+        - to: Glitchy Corridor > West 28
+          tags: [xshift]
 
 - name: Siege Corridor
   on_entry: $reset_old_area(^newpos)
   spots:
     - name: West 26
-      coord: [21.05, 25.85]
+      coord: [21.05, 25.8]
+    - name: Western Cache
+      coord: [21.1, 24.6]
+    - name: Western Rock
+      coord: [21.3, 25.0]
+    - name: Northwest Door
+      coord: [21.5, 24.2]
+    - name: Northwest Platform
+      coord: [21.75, 24.7]
+    - name: West Greenery
+      coord: [22.2, 25.35]
+    - name: West Grassy Ledge
+      coord: [22.3, 24.95]
+    - name: West Rocky Ledge
+      coord: [22.15, 24.75]
+    - name: Center West
+      coord: [23.0, 24.4]
+
+    - name: Center Platform 1
+      coord: [23.9, 24.7]
+    - name: Center Platform 3
+      coord: [24.4, 24.7]
+    - name: Center East
+      coord: [24.2, 24.95]
+    - name: Center Box
+      coord: [23.7, 25.5]
+    - name: Mideast Hill
+      coord: [24.5, 24.9]
+    - name: Upper Rock West
+      coord: [25.0, 24.4]
+    - name: Upper Rock Item
+      coord: [25.4, 24.35]
+    - name: Upper Rock East
+      coord: [25.55, 24.4]
+
+    - name: Pond
+      coord: [25.4, 25.5]
+    - name: East Hill
+      coord: [25.7, 24.7]
+    - name: East 25
+      coord: [25.95, 24.75]
+
+- name: Glitchy Corridor
+  on_entry: $reset_old_area(^newpos)
+  spots:
+    - name: West 28
+      coord: [21.05, 27.7]
+
+- name: Waterfalls
+  on_entry: $reset_old_area(^newpos)
+  spots:
+    - name: West 25
+      coord: [26.05, 24.75]
+    - name: West 24
+      coord: [26.05, 23.75]
+    - name: West 27
+      coord: [26.05, 26.75]
+
+- name: Save Room
+  enter:
+    map_uhrum_save_room: true
+  on_entry: $reset_old_area(^newpos)
+  spots:
+    - name: East
+      coord: [25.95, 26.75]
+    - name: Save Point
+      coord: [25.5, 26.75]
+    - name: West
+      coord: [25.05, 26.75]
 

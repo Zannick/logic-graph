@@ -15,7 +15,7 @@ areas:
     - name: Inner Wall
       coord: [18.65, 8.95]
       enter:
-        map_17_10: true
+        map_giguna_northeast_save: true
       local:
         - to: East 9
           jumps: 2
@@ -23,6 +23,8 @@ areas:
           jumps: 4
     - name: Crow Eating
       coord: [17.85, 8.9]
+      enter:
+        map_giguna_northeast_save: true
       local:
         - to: Save Point
         - to: Gate Left
@@ -32,7 +34,7 @@ areas:
     - name: Save Point
       coord: [17.5, 9.5]
       enter:
-        map_17_10: true
+        map_giguna_northeast_save: true
       local:
         - to: Step
           jumps: 1
@@ -48,6 +50,8 @@ areas:
           time: 2
     - name: Step
       coord: [17.3, 9.4]
+      enter:
+        map_giguna_northeast_save: true
       local:
         - to: West 10
         - to: Save Point
@@ -63,6 +67,8 @@ areas:
           time: 2.3
     - name: West 10
       coord: [17.05, 9.5]
+      enter:
+        map_giguna_northeast_save: true
       local:
         - to: Step
           jumps: 1
@@ -78,6 +84,8 @@ areas:
           tags: [xshift]
     - name: Gate Left
       coord: [17.8, 9.6]
+      enter:
+        map_giguna_northeast_save: true
       local:
         - to: Save Point
           jumps: 1
@@ -894,6 +902,8 @@ areas:
           movement: base
     - name: Building Entry
       coord: [14.1, 15.5]
+      enter:
+        map_giguna_base_save: true
       local:
         - to: Staircase Bottom
         - to: Save Point
@@ -942,6 +952,8 @@ areas:
           tags: [xshift]
     - name: Staircase Bottom
       coord: [13.2, 15.7]
+      enter:
+        map_giguna_base_save: true
       local:
         - to: Staircase Top
           jumps: 5
@@ -952,6 +964,8 @@ areas:
           jumps: 1
     - name: Table
       coord: [13.7, 15.95]
+      enter:
+        map_giguna_base_save: true
       local:
         - to: Kari
           thru: [14, 15.9]
@@ -967,6 +981,8 @@ areas:
           tags: [standing]
     - name: Save Point
       coord: [13.5, 15.8]
+      enter:
+        map_giguna_base_save: true
       local:
         - to: Staircase Bottom
           jumps: 1
@@ -980,6 +996,8 @@ areas:
           time: 1.3
     - name: West 16
       coord: [13.05, 15.85]
+      enter:
+        map_giguna_base_save: true
       local:
         - to: Staircase Bottom
           jumps: 1
@@ -2953,34 +2971,93 @@ areas:
   spots:
     - name: East 19
       coord: [18.95, 18.8]
+      local:
+        - to: Top Middle
+      exits:
+        - to: Gateway > West 19
+          tags: [xshift]
     - name: Top Middle
       coord: [18.4, 19.1]
+      local:
+        - to: East 19
+          jumps: 2
+        - to: Top West
     - name: Top West
       coord: [18.05, 19.1]
+      local:
+        - to: Top Middle
+      exits:
+        - to: Labyrinth > Top East
+          tags: [xshift]
 
     - name: Middle West
       coord: [18.05, 19.7]
+      local:
+        - to: Middle Drop
+      exits:
+        - to: Labyrinth > Middle East
+          tags: [xshift]
     - name: Middle Drop
       coord: [18.5, 19.7]
+      local:
+        - to: Middle West
+        - to: Middle Tree
+        - to: Lower Middle
     - name: Middle Tree
       coord: [18.6, 19.7]
+      local:
+        - to: Middle Drop
+        - to: Lower Middle
+        - to: East 20
     - name: East 20
       coord: [18.95, 20.0]
+      local:
+        - to: Middle Tree
+          jumps: 3
+      exits:
+        - to: Mural > West 20
+          tags: [xshift]
 
     - name: Lower Middle
       coord: [18.4, 20.1]
+      local:
+        - to: Lower West
+      exits:
+        - to: Middle Tree
+          req: $hook
+          movement: base
+          jumps: 1
+        - to: Middle Tree
+          req: $grab
+          movement: base
+          jumps: 3
     - name: Lower West
       coord: [18.05, 20.1]
+      local:
+        - to: Lower Middle
+      exits:
+        - to: Labyrinth > Lower East
+          tags: [xshift]
 
 - name: Labyrinth
   on_entry: $reset_old_area(^newpos)
   spots:
     - name: Top East
       coord: [17.95, 19.1]
+    - name: Middle East
+      coord: [17.95, 19.7]
+    - name: Lower East
+      coord: [17.95, 20.1]
+    
+    - name: East 22
+      coord: [17.95, 21.2]
+    - name: East 23
+      coord: [17.95, 22.8]
 
 - name: Vertical Interchange
   on_entry: $reset_old_area(^newpos)
   spots:
+    #region Upper
     - name: West 17
       coord: [21.05, 16.3]
     - name: West 19
@@ -3001,7 +3078,9 @@ areas:
       coord: [21.65, 18.7]
     - name: East 20
       coord: [21.9, 19.8]
+    #endregion
 
+    #region Middle
     - name: Middle Below Top
       coord: [21.4, 19.1]
     - name: Middle Plateau
@@ -3019,6 +3098,12 @@ areas:
       coord: [21.65, 20.7]
     - name: Switch
       coord: [21.8, 20.8]
+    #endregion
+
+    #region Lower
+    - name: South
+      coord: [21.5, 23.8]
+    #endregion
 
 - name: Antechamber
   on_entry: $reset_old_area(^newpos)
@@ -3269,6 +3354,14 @@ areas:
           item: Double_Axe
           tags: [standing]
 
+- name: Mural
+  on_entry: $reset_old_area(^newpos)
+  spots:
+    - name: West 20
+      coord: [19.05, 20.0]
+    - name: Northwest Item
+      coord: [19.5, 19.7]
+
 - name: Breachable Wall
   on_entry: $reset_old_area(^newpos)
   spots:
@@ -3293,5 +3386,13 @@ areas:
 - name: Separator
   on_entry: $reset_old_area(^newpos)
   spots:
+    - name: West 23
+      coord: [18.05, 22.8]
+    - name: West 24
+      coord: [18.05, 23.55]
+    - name: West Mid-air
+      coord: [18.05, 24.0]
+    - name: West 25
+      coord: [18.05, 24.5]
     - name: East 25
       coord: [18.95, 24.75]

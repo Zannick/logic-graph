@@ -822,6 +822,10 @@ subgraph Giguna
     end
     subgraph Giguna__Labyrinth[Labyrinth]
         Giguna__Labyrinth__Top_East(Top East);
+        Giguna__Labyrinth__Middle_East(Middle East);
+        Giguna__Labyrinth__Lower_East(Lower East);
+        Giguna__Labyrinth__East_22(East 22);
+        Giguna__Labyrinth__East_23(East 23);
     end
     subgraph Giguna__Vertical_Interchange[Vertical Interchange]
         Giguna__Vertical_Interchange__West_17(West 17);
@@ -842,6 +846,7 @@ subgraph Giguna
         Giguna__Vertical_Interchange__Middle_Ledge_Below_Gate(Middle Ledge Below Gate);
         Giguna__Vertical_Interchange__Middle_Hill_By_Switch(Middle Hill By Switch);
         Giguna__Vertical_Interchange__Switch(Switch);
+        Giguna__Vertical_Interchange__South(South);
     end
     subgraph Giguna__Antechamber[Antechamber]
         Giguna__Antechamber__East_16(East 16);
@@ -869,6 +874,10 @@ subgraph Giguna
         Giguna__Gubi_Lair__Shaft_Bottom(Shaft Bottom);
         Giguna__Gubi_Lair__Pedestal(Pedestal);
     end
+    subgraph Giguna__Mural[Mural]
+        Giguna__Mural__West_20(West 20);
+        Giguna__Mural__Northwest_Item(Northwest Item);
+    end
     subgraph Giguna__Breachable_Wall[Breachable Wall]
         Giguna__Breachable_Wall__West_Mid_air(West Mid-air);
         Giguna__Breachable_Wall__Above_West_Catwalk(Above West Catwalk);
@@ -876,6 +885,10 @@ subgraph Giguna
         Giguna__Breachable_Wall__Wall_Interior(Wall Interior);
     end
     subgraph Giguna__Separator[Separator]
+        Giguna__Separator__West_23(West 23);
+        Giguna__Separator__West_24(West 24);
+        Giguna__Separator__West_Mid_air(West Mid-air);
+        Giguna__Separator__West_25(West 25);
         Giguna__Separator__East_25(East 25);
     end
 end
@@ -1247,9 +1260,47 @@ subgraph Uhrum
         Uhrum__West_Entrance__Upper_Fork(Upper Fork);
         Uhrum__West_Entrance__East_26(East 26);
         Uhrum__West_Entrance__Lower_Wall_West(Lower Wall West);
+        Uhrum__West_Entrance__Lower_Wall_East(Lower Wall East);
+        Uhrum__West_Entrance__Lower_Path_Rock(Lower Path Rock);
+        Uhrum__West_Entrance__Lower_Path_Gap(Lower Path Gap);
+        Uhrum__West_Entrance__Sand(Sand);
+        Uhrum__West_Entrance__Lower_Path_Tree_Ledge(Lower Path Tree Ledge);
+        Uhrum__West_Entrance__East_28(East 28);
     end
     subgraph Uhrum__Siege_Corridor[Siege Corridor]
         Uhrum__Siege_Corridor__West_26(West 26);
+        Uhrum__Siege_Corridor__Western_Cache(Western Cache);
+        Uhrum__Siege_Corridor__Western_Rock(Western Rock);
+        Uhrum__Siege_Corridor__Northwest_Door(Northwest Door);
+        Uhrum__Siege_Corridor__Northwest_Platform(Northwest Platform);
+        Uhrum__Siege_Corridor__West_Greenery(West Greenery);
+        Uhrum__Siege_Corridor__West_Grassy_Ledge(West Grassy Ledge);
+        Uhrum__Siege_Corridor__West_Rocky_Ledge(West Rocky Ledge);
+        Uhrum__Siege_Corridor__Center_West(Center West);
+        Uhrum__Siege_Corridor__Center_Platform_1(Center Platform 1);
+        Uhrum__Siege_Corridor__Center_Platform_3(Center Platform 3);
+        Uhrum__Siege_Corridor__Center_East(Center East);
+        Uhrum__Siege_Corridor__Center_Box(Center Box);
+        Uhrum__Siege_Corridor__Mideast_Hill(Mideast Hill);
+        Uhrum__Siege_Corridor__Upper_Rock_West(Upper Rock West);
+        Uhrum__Siege_Corridor__Upper_Rock_Item(Upper Rock Item);
+        Uhrum__Siege_Corridor__Upper_Rock_East(Upper Rock East);
+        Uhrum__Siege_Corridor__Pond(Pond);
+        Uhrum__Siege_Corridor__East_Hill(East Hill);
+        Uhrum__Siege_Corridor__East_25(East 25);
+    end
+    subgraph Uhrum__Glitchy_Corridor[Glitchy Corridor]
+        Uhrum__Glitchy_Corridor__West_28(West 28);
+    end
+    subgraph Uhrum__Waterfalls[Waterfalls]
+        Uhrum__Waterfalls__West_25(West 25);
+        Uhrum__Waterfalls__West_24(West 24);
+        Uhrum__Waterfalls__West_27(West 27);
+    end
+    subgraph Uhrum__Save_Room[Save Room]
+        Uhrum__Save_Room__East(East);
+        Uhrum__Save_Room__Save_Point(Save Point);
+        Uhrum__Save_Room__West(West);
     end
 end
 Amagi__Cave_Behind_Waterfall__Bottom --> Amagi__Cave_Behind_Waterfall__Middle
@@ -1552,7 +1603,7 @@ Giguna__Gateway__Left_Platform --> Giguna__Gateway__Block_Lowered
 Giguna__Gateway__Passage_Entry <--> Giguna__Gateway__Passage_Exit
 Giguna__Gateway__Passage_Exit --> Giguna__Gateway__Left_Platform
 Giguna__Gateway__Refill_Station --> Giguna__Gateway__Far_Ledge
-Giguna__Gateway__West_19 --> Giguna__Labyrinth_East__East_19
+Giguna__Gateway__West_19 <--> Giguna__Labyrinth_East__East_19
 Giguna__Giguna_Base__Below_Gate <--> Giguna__Giguna_Base__Kari
 Giguna__Giguna_Base__Below_Gate <--> Giguna__Giguna_Base__Middle_Platform
 Giguna__Giguna_Base__East_14 <--> Giguna__Wasteland__West_14
@@ -1593,6 +1644,11 @@ Giguna__Helipad__So_Close --> Giguna__Helipad__Tablet_Ledge
 Giguna__Helipad__South_Left --> Giguna__Clouds__North_Left
 Giguna__Helipad__South_Middle --> Giguna__Clouds__North_Middle
 Giguna__Helipad__South_Right --> Giguna__Clouds__North_Right
+Giguna__Labyrinth_East__East_20 --> Giguna__Mural__West_20
+Giguna__Labyrinth_East__Lower_Middle --> Giguna__Labyrinth_East__Middle_Tree
+Giguna__Labyrinth_East__Lower_West --> Giguna__Labyrinth__Lower_East
+Giguna__Labyrinth_East__Middle_West --> Giguna__Labyrinth__Middle_East
+Giguna__Labyrinth_East__Top_West --> Giguna__Labyrinth__Top_East
 Giguna__Lamassu__Broken_Pillar --> Giguna__Lamassu__Staircase_Landing
 Giguna__Lamassu__Lower_Platform_Left --> Giguna__Lamassu__Upper_Platform_Edge
 Giguna__Lamassu__Lower_Platform_Right --> Giguna__Lamassu__Head
@@ -1786,11 +1842,19 @@ Menu__Upgrade_Menu__Drone <--> Menu__Upgrade_Menu__Physiology
 Menu__Upgrade_Menu__Infection <--> Menu__Upgrade_Menu__Physiology
 Uhrum__West_Entrance__Clear_Passage --> Uhrum__West_Entrance__Portal_Stand
 Uhrum__West_Entrance__East_26 --> Uhrum__Siege_Corridor__West_26
+Uhrum__West_Entrance__East_28 --> Uhrum__Glitchy_Corridor__West_28
+Uhrum__West_Entrance__East_28 --> Uhrum__West_Entrance__Lower_Path_Tree_Ledge
 Uhrum__West_Entrance__Inner_Dais --> Uhrum__West_Entrance__Top_West_Ledge
 Uhrum__West_Entrance__Inner_Dais <--> Uhrum__West_Entrance__West_of_Gate
+Uhrum__West_Entrance__Lower_Path_Gap --> Uhrum__West_Entrance__Lower_Path_Tree_Ledge
+Uhrum__West_Entrance__Lower_Path_Gap --> Uhrum__West_Entrance__Lower_Wall_West
+Uhrum__West_Entrance__Lower_Wall_East <--> Uhrum__West_Entrance__Lower_Wall_West
+Uhrum__West_Entrance__Lower_Wall_West --> Uhrum__West_Entrance__South_Platform
 Uhrum__West_Entrance__Middle_West_Ledge --> Uhrum__West_Entrance__Portal_Stand
 Uhrum__West_Entrance__Portal_Stand --> Uhrum__West_Entrance__Hidden_Passage_Entry
 Uhrum__West_Entrance__Portal_Stand --> Uhrum__West_Entrance__West_of_Gate
+Uhrum__West_Entrance__Sand --> Uhrum__West_Entrance__Lower_Path_Gap
+Uhrum__West_Entrance__Sand --> Uhrum__West_Entrance__Lower_Path_Tree_Ledge
 Uhrum__West_Entrance__Save_Point --> Uhrum__West_Entrance__Lower_Wall_West
 Uhrum__West_Entrance__Save_Point --> Uhrum__West_Entrance__South_Platform
 Uhrum__West_Entrance__South_Platform --> Uhrum__West_Entrance__Middle_West_Ledge

@@ -69,6 +69,8 @@ areas:
           time: 1.6
     - name: Bowl Middle Platform Center
       coord: [12.5, 22.0]
+      enter:
+        map_irikar_hub_save: true
       local:
         - to: Save Point
           jumps_down: 1
@@ -78,6 +80,8 @@ areas:
           time: 1  # ?
     - name: Bowl Middle Platform West
       coord: [12.35, 22.0]
+      enter:
+        map_irikar_hub_save: true
       local:
         - to: Bowl Middle Platform Center
         - to: Save Point
@@ -96,6 +100,8 @@ areas:
           time: 1.2
     - name: Save Point
       coord: [12.5, 22.75]
+      enter:
+        map_irikar_hub_save: true
       local:
         - to: Bowl Platform 3
           jumps: 3
@@ -113,6 +119,8 @@ areas:
           tags: [save]
     - name: Bowl Hole
       coord: [12.95, 22.65]
+      enter:
+        map_irikar_hub_save: true
       local:
         - to: Save Point
           jumps: 2
