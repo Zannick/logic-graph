@@ -243,6 +243,38 @@ macro_rules! helper__mist2 {
     }};
 }
 
+/// $ft_main (  )
+/// Fast_Travel and NOT WITHIN `Menu` and NOT ^breach
+#[macro_export]
+macro_rules! helper__ft_main {
+    ($ctx:expr) => {{
+        #[allow(unused_imports)]
+        use $crate::items::Item;
+        (($ctx.has(Item::Fast_Travel)
+            && !(match get_region($ctx.position()) {
+                RegionId::Menu => true,
+                _ => false,
+            }))
+            && !data::breach($ctx.position()))
+    }};
+}
+
+/// $ft_breach (  )
+/// Fast_Travel and NOT WITHIN `Menu` and ^breach
+#[macro_export]
+macro_rules! helper__ft_breach {
+    ($ctx:expr) => {{
+        #[allow(unused_imports)]
+        use $crate::items::Item;
+        (($ctx.has(Item::Fast_Travel)
+            && !(match get_region($ctx.position()) {
+                RegionId::Menu => true,
+                _ => false,
+            }))
+            && data::breach($ctx.position()))
+    }};
+}
+
 /// $range1 (  )
 /// Infection_Range_2 or (Infection_Range and ^mode != 'drone')
 #[macro_export]
@@ -446,13 +478,24 @@ macro_rules! helper__all_urns {
 }
 
 /// $save (  )
-/// ^save = ^position; ^energy = $max_energy
+/// ^save = ^position; $refill_energy
 #[macro_export]
 macro_rules! helper__save {
     ($ctx:expr) => {{
         #[allow(unused_imports)]
         use $crate::items::Item;
         $ctx.set_save($ctx.position());
+        helper__refill_energy!($ctx);
+    }};
+}
+
+/// $refill_energy (  )
+/// ^energy = $max_energy
+#[macro_export]
+macro_rules! helper__refill_energy {
+    ($ctx:expr) => {{
+        #[allow(unused_imports)]
+        use $crate::items::Item;
         $ctx.set_energy(helper__max_energy!($ctx));
     }};
 }

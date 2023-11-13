@@ -128,19 +128,19 @@ warps:
     time: 14.5
     req: NOT WITHIN `Menu` and Amashilama and ^mode != 'drone'
     to: ^save
-    after: ^energy = $max_energy
+    after: $refill_energy
     loads: true
   drone_save:
     time: 12
     req: NOT WITHIN `Menu` and not ^breach and ^mode == 'drone'
     to: ^save
-    after: ^energy = $max_energy
+    after: $refill_energy
     loads: true
   breach_save:
     time: 12
     req: NOT WITHIN `Menu` and ^breach
     to: ^breach_save
-    after: ^energy = $max_energy
+    after: $refill_energy
     loads: true
   menu:
     time: 1
@@ -162,24 +162,74 @@ warps:
     # Instead of making this base movement, anywhere it's strictly required needs a real Exit
     tags: [exit]
   # Fast travel times are slightly different when travelling within an area
+  # Fast travels within main are technically doable from the menu, but not from the menu in the breach.
+  # also not possible in interiors! D: TODO: Move interiors into their own region.
+  fast_travel_amagi_main_area:
+    time: 12
+    req: $ft_main and ^map__amagi__main_area__save
+    to: Amagi > Main Area > Save Point
+    after: $refill_energy
+  fast_travel_giguna_base:
+    time: 12
+    req: $ft_main and ^map__giguna__giguna_base__save
+    to: Giguna > Giguna Base > Save Point
+    after: $refill_energy
   fast_travel_giguna_northeast:
     time: 12
-    # technically doable from the menu, but not from the menu in the breach.
-    # also not possible in interiors! D: TODO: Move interiors into their own region.
-    req: Fast_Travel and NOT WITHIN `Menu` and NOT ^breach and ^map__giguna__giguna_northeast__save
+    req: $ft_main and ^map__giguna__giguna_northeast__save
     to: Giguna > Giguna Northeast > Save Point
-    after: ^energy = $max_energy
-  fast_travel_uhrum_save_room:
+    after: $refill_energy
+  fast_travel_giguna_ruins_west:
     time: 12
-    req: Fast_Travel and NOT WITHIN `Menu` and NOT ^breach and ^map__uhrum__save_room__save
-    to: Uhrum > Save Room > Save Point
-    after: ^energy = $max_energy
+    req: $ft_main and ^map__giguna__ruins_west__save
+    to: Giguna > Ruins West > Save Point
+    after: $refill_energy
   fast_travel_glacier_revival:
     time: 12
     # Amashilama guarantees travel to this point
-    req: Fast_Travel and NOT WITHIN `Menu` and NOT ^breach and Amashilama
+    req: $ft_main and Amashilama
     to: Glacier > Revival > Save Point
-    after: ^energy = $max_energy
+    after: $refill_energy
+  fast_travel_irikar_hub:
+    time: 12
+    req: $ft_main and ^map__irikar__hub__save
+    to: Irikar > Hub > Save Point
+    after: $refill_energy
+  fast_travel_uhrum_save_room:
+    time: 12
+    req: $ft_main and ^map__uhrum__save_room__save
+    to: Uhrum > Save Room > Save Point
+    after: $refill_energy
+  fast_travel_uhrum_west_entrance:
+    time: 12
+    req: $ft_main and ^map__uhrum__west_entrance__save
+    to: Uhrum > West Entrance > Save Point
+    after: $refill_energy
+  fast_travel_giguna_breach_peak:
+    time: 12
+    req: $ft_breach and ^map__giguna_breach__peak__save
+    to: Giguna Breach > Peak > Save Point
+    after: $refill_energy
+  fast_travel_giguna_breach_sw:
+    time: 12
+    req: $ft_breach and ^map__giguna_breach__sw_save__save
+    to: Giguna Breach > SW Save > Save Point
+    after: $refill_energy
+  fast_travel_irikar_breach_save_room:
+    time: 12
+    req: $ft_breach and ^map__irikar_breach__save_room__save
+    to: Irikar Breach > Save Room > Save Point
+    after: $refill_energy
+  fast_travel_irikar_breach_gauntlet:
+    time: 12
+    req: $ft_breach and ^map__irikar_breach__gauntlet__save
+    to: Irikar Breach > Gauntlet > Save Point
+    after: $refill_energy
+  fast_travel_irikar_breach_basement:
+    time: 12
+    req: $ft_breach and ^map__irikar_breach__basement_save__save
+    to: Irikar Breach > Basement Save > Save Point
+    after: $refill_energy
 
 # TODO: under some conditions, fast travel indra can appear standing up
 # 7s. I think it's immediately after savewarping though, so not very useful.
@@ -232,6 +282,9 @@ helpers:
 
   $mist2: Nanite_Mist and Mist_Upgrade
 
+  $ft_main: Fast_Travel and NOT WITHIN `Menu` and NOT ^breach
+  $ft_breach: Fast_Travel and NOT WITHIN `Menu` and ^breach
+
   # shockwave range: ~.2 in width (.35 height)
   # boomerang range: ~.3 in width?
   # infection ranges (approx)
@@ -270,7 +323,8 @@ helpers:
   # To be added: 5 Flask, 3 Big_Flask, Dangerous_Ideas, Double_Axe, Drone_Hover, Royal_Dagger, Udusan
   # 1 Health_Fragment, The_Student, Heretics_Granddaughter, Terminal_Breakthrough_2
 
-  $save:action: ^save = ^position; ^energy = $max_energy
+  $save:action: ^save = ^position; $refill_energy
+  $refill_energy:action: ^energy = $max_energy
   $deploy_drone:action: >
     ^mode = 'drone'; ^indra = ^position;
   $deploy_drone_and_move:action(indrapos:SpotId): >
@@ -303,8 +357,9 @@ collect:
   Amashilama: ^save = `Glacier > Revival > Save Point`
   Flask: ^flasks += 1
   Big_Flask: ^flasks += 2
-  Infect: ^energy = $max_energy
-  Health_Node: ^energy = $max_energy
+  Infect: $refill_energy
+  Health_Fragment: $refill_energy
+  Health_Node: $refill_energy
   Power_Core: ^refills += 1
   Amagi_Stronghold_Wall_And_Boulder_1: >
     $skip(`Amagi > West Lake > Stronghold Ceiling Left > Knock Down Left Boulder`);

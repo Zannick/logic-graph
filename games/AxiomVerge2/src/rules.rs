@@ -353,39 +353,57 @@ pub fn access_ebih_west_block(ctx: &Context) -> bool {
     // Ebih_West_Block
     ctx.has(Item::Ebih_West_Block)
 }
-pub fn access_fast_travel_and_not_within_menu_and_not_breach_and_amashilama(ctx: &Context) -> bool {
-    // Fast_Travel and NOT WITHIN `Menu` and NOT ^breach and Amashilama
-    (((ctx.has(Item::Fast_Travel)
-        && !(match get_region(ctx.position()) {
-            RegionId::Menu => true,
-            _ => false,
-        }))
-        && !data::breach(ctx.position()))
-        && ctx.has(Item::Amashilama))
+pub fn access_ft_breach_and_map__giguna_breach__peak__save(ctx: &Context) -> bool {
+    // $ft_breach and ^map__giguna_breach__peak__save
+    (helper__ft_breach!(ctx) && ctx.map__giguna_breach__peak__save())
 }
-pub fn access_fast_travel_and_not_within_menu_and_not_breach_and_map__giguna__giguna_northeast__save(
-    ctx: &Context,
-) -> bool {
-    // Fast_Travel and NOT WITHIN `Menu` and NOT ^breach and ^map__giguna__giguna_northeast__save
-    (((ctx.has(Item::Fast_Travel)
-        && !(match get_region(ctx.position()) {
-            RegionId::Menu => true,
-            _ => false,
-        }))
-        && !data::breach(ctx.position()))
-        && ctx.map__giguna__giguna_northeast__save())
+pub fn access_ft_breach_and_map__giguna_breach__sw_save__save(ctx: &Context) -> bool {
+    // $ft_breach and ^map__giguna_breach__sw_save__save
+    (helper__ft_breach!(ctx) && ctx.map__giguna_breach__sw_save__save())
 }
-pub fn access_fast_travel_and_not_within_menu_and_not_breach_and_map__uhrum__save_room__save(
-    ctx: &Context,
-) -> bool {
-    // Fast_Travel and NOT WITHIN `Menu` and NOT ^breach and ^map__uhrum__save_room__save
-    (((ctx.has(Item::Fast_Travel)
-        && !(match get_region(ctx.position()) {
-            RegionId::Menu => true,
-            _ => false,
-        }))
-        && !data::breach(ctx.position()))
-        && ctx.map__uhrum__save_room__save())
+pub fn access_ft_breach_and_map__irikar_breach__basement_save__save(ctx: &Context) -> bool {
+    // $ft_breach and ^map__irikar_breach__basement_save__save
+    (helper__ft_breach!(ctx) && ctx.map__irikar_breach__basement_save__save())
+}
+pub fn access_ft_breach_and_map__irikar_breach__gauntlet__save(ctx: &Context) -> bool {
+    // $ft_breach and ^map__irikar_breach__gauntlet__save
+    (helper__ft_breach!(ctx) && ctx.map__irikar_breach__gauntlet__save())
+}
+pub fn access_ft_breach_and_map__irikar_breach__save_room__save(ctx: &Context) -> bool {
+    // $ft_breach and ^map__irikar_breach__save_room__save
+    (helper__ft_breach!(ctx) && ctx.map__irikar_breach__save_room__save())
+}
+pub fn access_ft_main_and_amashilama(ctx: &Context) -> bool {
+    // $ft_main and Amashilama
+    (helper__ft_main!(ctx) && ctx.has(Item::Amashilama))
+}
+pub fn access_ft_main_and_map__amagi__main_area__save(ctx: &Context) -> bool {
+    // $ft_main and ^map__amagi__main_area__save
+    (helper__ft_main!(ctx) && ctx.map__amagi__main_area__save())
+}
+pub fn access_ft_main_and_map__giguna__giguna_base__save(ctx: &Context) -> bool {
+    // $ft_main and ^map__giguna__giguna_base__save
+    (helper__ft_main!(ctx) && ctx.map__giguna__giguna_base__save())
+}
+pub fn access_ft_main_and_map__giguna__giguna_northeast__save(ctx: &Context) -> bool {
+    // $ft_main and ^map__giguna__giguna_northeast__save
+    (helper__ft_main!(ctx) && ctx.map__giguna__giguna_northeast__save())
+}
+pub fn access_ft_main_and_map__giguna__ruins_west__save(ctx: &Context) -> bool {
+    // $ft_main and ^map__giguna__ruins_west__save
+    (helper__ft_main!(ctx) && ctx.map__giguna__ruins_west__save())
+}
+pub fn access_ft_main_and_map__irikar__hub__save(ctx: &Context) -> bool {
+    // $ft_main and ^map__irikar__hub__save
+    (helper__ft_main!(ctx) && ctx.map__irikar__hub__save())
+}
+pub fn access_ft_main_and_map__uhrum__save_room__save(ctx: &Context) -> bool {
+    // $ft_main and ^map__uhrum__save_room__save
+    (helper__ft_main!(ctx) && ctx.map__uhrum__save_room__save())
+}
+pub fn access_ft_main_and_map__uhrum__west_entrance__save(ctx: &Context) -> bool {
+    // $ft_main and ^map__uhrum__west_entrance__save
+    (helper__ft_main!(ctx) && ctx.map__uhrum__west_entrance__save())
 }
 pub fn access_giguna__carnelian__door__ex__switch_1__req(ctx: &Context) -> bool {
     // ^_door_opened
@@ -1346,10 +1364,6 @@ pub fn action_ebih__waterfall__west_8__open_door__do(ctx: &mut Context) {
     // ^_west_door_open = true
     ctx.set_ebih__waterfall__ctx__west_door_open(true);
 }
-pub fn action_energy__max_energy(ctx: &mut Context) {
-    // ^energy = $max_energy
-    ctx.set_energy(helper__max_energy!(ctx));
-}
 pub fn action_flasks__1(ctx: &mut Context) {
     // ^flasks += 1
     ctx.flasks += 1;
@@ -1532,6 +1546,10 @@ pub fn action_mode__drone_indra__position(ctx: &mut Context) {
 pub fn action_mode__indra(ctx: &mut Context) {
     // ^mode = 'Indra'
     ctx.set_mode(enums::Mode::Indra);
+}
+pub fn action_refill_energy(ctx: &mut Context) {
+    // $refill_energy
+    helper__refill_energy!(ctx);
 }
 pub fn action_refills__1(ctx: &mut Context) {
     // ^refills += 1

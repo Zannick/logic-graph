@@ -10789,9 +10789,19 @@ pub enum WarpId {
     EarthSave,
     ExitBreach,
     ExitMenu,
-    FastTravel1710,
+    FastTravelAmagiMainArea,
+    FastTravelGigunaBase,
+    FastTravelGigunaBreachPeak,
+    FastTravelGigunaBreachSw,
+    FastTravelGigunaNortheast,
+    FastTravelGigunaRuinsWest,
     FastTravelGlacierRevival,
+    FastTravelIrikarBreachBasement,
+    FastTravelIrikarBreachGauntlet,
+    FastTravelIrikarBreachSaveRoom,
+    FastTravelIrikarHub,
     FastTravelUhrumSaveRoom,
+    FastTravelUhrumWestEntrance,
     IndraSave,
     Menu,
 }
@@ -10803,9 +10813,25 @@ impl fmt::Display for WarpId {
             WarpId::EarthSave => write!(f, "{}", "EarthSave"),
             WarpId::ExitBreach => write!(f, "{}", "ExitBreach"),
             WarpId::ExitMenu => write!(f, "{}", "ExitMenu"),
-            WarpId::FastTravel1710 => write!(f, "{}", "FastTravel1710"),
+            WarpId::FastTravelAmagiMainArea => write!(f, "{}", "FastTravelAmagiMainArea"),
+            WarpId::FastTravelGigunaBase => write!(f, "{}", "FastTravelGigunaBase"),
+            WarpId::FastTravelGigunaBreachPeak => write!(f, "{}", "FastTravelGigunaBreachPeak"),
+            WarpId::FastTravelGigunaBreachSw => write!(f, "{}", "FastTravelGigunaBreachSw"),
+            WarpId::FastTravelGigunaNortheast => write!(f, "{}", "FastTravelGigunaNortheast"),
+            WarpId::FastTravelGigunaRuinsWest => write!(f, "{}", "FastTravelGigunaRuinsWest"),
             WarpId::FastTravelGlacierRevival => write!(f, "{}", "FastTravelGlacierRevival"),
+            WarpId::FastTravelIrikarBreachBasement => {
+                write!(f, "{}", "FastTravelIrikarBreachBasement")
+            }
+            WarpId::FastTravelIrikarBreachGauntlet => {
+                write!(f, "{}", "FastTravelIrikarBreachGauntlet")
+            }
+            WarpId::FastTravelIrikarBreachSaveRoom => {
+                write!(f, "{}", "FastTravelIrikarBreachSaveRoom")
+            }
+            WarpId::FastTravelIrikarHub => write!(f, "{}", "FastTravelIrikarHub"),
             WarpId::FastTravelUhrumSaveRoom => write!(f, "{}", "FastTravelUhrumSaveRoom"),
+            WarpId::FastTravelUhrumWestEntrance => write!(f, "{}", "FastTravelUhrumWestEntrance"),
             WarpId::IndraSave => write!(f, "{}", "IndraSave"),
             WarpId::Menu => write!(f, "{}", "Menu"),
         }
@@ -10822,9 +10848,19 @@ impl std::str::FromStr for WarpId {
             "EarthSave" => Ok(WarpId::EarthSave),
             "ExitBreach" => Ok(WarpId::ExitBreach),
             "ExitMenu" => Ok(WarpId::ExitMenu),
-            "FastTravel1710" => Ok(WarpId::FastTravel1710),
+            "FastTravelAmagiMainArea" => Ok(WarpId::FastTravelAmagiMainArea),
+            "FastTravelGigunaBase" => Ok(WarpId::FastTravelGigunaBase),
+            "FastTravelGigunaBreachPeak" => Ok(WarpId::FastTravelGigunaBreachPeak),
+            "FastTravelGigunaBreachSw" => Ok(WarpId::FastTravelGigunaBreachSw),
+            "FastTravelGigunaNortheast" => Ok(WarpId::FastTravelGigunaNortheast),
+            "FastTravelGigunaRuinsWest" => Ok(WarpId::FastTravelGigunaRuinsWest),
             "FastTravelGlacierRevival" => Ok(WarpId::FastTravelGlacierRevival),
+            "FastTravelIrikarBreachBasement" => Ok(WarpId::FastTravelIrikarBreachBasement),
+            "FastTravelIrikarBreachGauntlet" => Ok(WarpId::FastTravelIrikarBreachGauntlet),
+            "FastTravelIrikarBreachSaveRoom" => Ok(WarpId::FastTravelIrikarBreachSaveRoom),
+            "FastTravelIrikarHub" => Ok(WarpId::FastTravelIrikarHub),
             "FastTravelUhrumSaveRoom" => Ok(WarpId::FastTravelUhrumSaveRoom),
+            "FastTravelUhrumWestEntrance" => Ok(WarpId::FastTravelUhrumWestEntrance),
             "IndraSave" => Ok(WarpId::IndraSave),
             "Menu" => Ok(WarpId::Menu),
             _ => Err(format!("Could not recognize as a WarpId: {}", s)),

@@ -1873,10 +1873,11 @@ impl context::Ctx for Context {
             },
             Item::Health_Fragment => {
                 self.health_fragment += 1;
+                rules::action_refill_energy(self);
             },
             Item::Health_Node => {
                 self.cbits2.insert(flags::ContextBits2::HEALTH_NODE);
-                rules::action_energy__max_energy(self);
+                rules::action_refill_energy(self);
             },
             Item::Health_Upgrade => {
                 self.cbits2.insert(flags::ContextBits2::HEALTH_UPGRADE);
@@ -1898,7 +1899,7 @@ impl context::Ctx for Context {
             },
             Item::Infect => {
                 self.cbits2.insert(flags::ContextBits2::INFECT);
-                rules::action_energy__max_energy(self);
+                rules::action_refill_energy(self);
             },
             Item::Infect_L1 => {
                 self.cbits2.insert(flags::ContextBits2::INFECT_L1);

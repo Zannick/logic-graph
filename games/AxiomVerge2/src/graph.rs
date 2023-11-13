@@ -4201,18 +4201,59 @@ impl world::Accessible for Warp {
     type Currency = Currency;
 
     fn can_access(&self, ctx: &Context) -> bool {
-        ctx.can_afford(&self.price) && match self.id {
-            WarpId::BreachSave => rules::access_not_within_menu_and_breach(&ctx),
-            WarpId::DroneSave => rules::access_not_within_menu_and_not_breach_and_mode__drone(&ctx),
-            WarpId::EarthSave => rules::access_within_antarctica(&ctx),
-            WarpId::ExitBreach => rules::access_breach_and_exit_breach_and___flipside_not_within_default(&ctx),
-            WarpId::ExitMenu => rules::access_within_menu(&ctx),
-            WarpId::FastTravel1710 => rules::access_fast_travel_and_not_within_menu_and_not_breach_and_map__giguna__giguna_northeast__save(&ctx),
-            WarpId::FastTravelGlacierRevival => rules::access_fast_travel_and_not_within_menu_and_not_breach_and_amashilama(&ctx),
-            WarpId::FastTravelUhrumSaveRoom => rules::access_fast_travel_and_not_within_menu_and_not_breach_and_map__uhrum__save_room__save(&ctx),
-            WarpId::IndraSave => rules::access_not_within_menu_and_amashilama_and_mode__drone(&ctx),
-            WarpId::Menu => rules::access_not_within_menu_and_flasks__0(&ctx),
-        }
+        ctx.can_afford(&self.price)
+            && match self.id {
+                WarpId::BreachSave => rules::access_not_within_menu_and_breach(&ctx),
+                WarpId::DroneSave => {
+                    rules::access_not_within_menu_and_not_breach_and_mode__drone(&ctx)
+                }
+                WarpId::EarthSave => rules::access_within_antarctica(&ctx),
+                WarpId::ExitBreach => {
+                    rules::access_breach_and_exit_breach_and___flipside_not_within_default(&ctx)
+                }
+                WarpId::ExitMenu => rules::access_within_menu(&ctx),
+                WarpId::FastTravelAmagiMainArea => {
+                    rules::access_ft_main_and_map__amagi__main_area__save(&ctx)
+                }
+                WarpId::FastTravelGigunaBase => {
+                    rules::access_ft_main_and_map__giguna__giguna_base__save(&ctx)
+                }
+                WarpId::FastTravelGigunaBreachPeak => {
+                    rules::access_ft_breach_and_map__giguna_breach__peak__save(&ctx)
+                }
+                WarpId::FastTravelGigunaBreachSw => {
+                    rules::access_ft_breach_and_map__giguna_breach__sw_save__save(&ctx)
+                }
+                WarpId::FastTravelGigunaNortheast => {
+                    rules::access_ft_main_and_map__giguna__giguna_northeast__save(&ctx)
+                }
+                WarpId::FastTravelGigunaRuinsWest => {
+                    rules::access_ft_main_and_map__giguna__ruins_west__save(&ctx)
+                }
+                WarpId::FastTravelGlacierRevival => rules::access_ft_main_and_amashilama(&ctx),
+                WarpId::FastTravelIrikarBreachBasement => {
+                    rules::access_ft_breach_and_map__irikar_breach__basement_save__save(&ctx)
+                }
+                WarpId::FastTravelIrikarBreachGauntlet => {
+                    rules::access_ft_breach_and_map__irikar_breach__gauntlet__save(&ctx)
+                }
+                WarpId::FastTravelIrikarBreachSaveRoom => {
+                    rules::access_ft_breach_and_map__irikar_breach__save_room__save(&ctx)
+                }
+                WarpId::FastTravelIrikarHub => {
+                    rules::access_ft_main_and_map__irikar__hub__save(&ctx)
+                }
+                WarpId::FastTravelUhrumSaveRoom => {
+                    rules::access_ft_main_and_map__uhrum__save_room__save(&ctx)
+                }
+                WarpId::FastTravelUhrumWestEntrance => {
+                    rules::access_ft_main_and_map__uhrum__west_entrance__save(&ctx)
+                }
+                WarpId::IndraSave => {
+                    rules::access_not_within_menu_and_amashilama_and_mode__drone(&ctx)
+                }
+                WarpId::Menu => rules::access_not_within_menu_and_flasks__0(&ctx),
+            }
     }
     fn time(&self) -> u32 {
         self.time
@@ -4236,9 +4277,25 @@ impl world::Warp for Warp {
                 WarpId::EarthSave => ctx.save(),
                 WarpId::ExitBreach => data::flipside(ctx.position()),
                 WarpId::ExitMenu => ctx.last(),
-                WarpId::FastTravel1710 => SpotId::Giguna__Giguna_Northeast__Save_Point,
+                WarpId::FastTravelAmagiMainArea => SpotId::Amagi__Main_Area__Save_Point,
+                WarpId::FastTravelGigunaBase => SpotId::Giguna__Giguna_Base__Save_Point,
+                WarpId::FastTravelGigunaBreachPeak => SpotId::Giguna_Breach__Peak__Save_Point,
+                WarpId::FastTravelGigunaBreachSw => SpotId::Giguna_Breach__SW_Save__Save_Point,
+                WarpId::FastTravelGigunaNortheast => SpotId::Giguna__Giguna_Northeast__Save_Point,
+                WarpId::FastTravelGigunaRuinsWest => SpotId::Giguna__Ruins_West__Save_Point,
                 WarpId::FastTravelGlacierRevival => SpotId::Glacier__Revival__Save_Point,
+                WarpId::FastTravelIrikarBreachBasement => {
+                    SpotId::Irikar_Breach__Basement_Save__Save_Point
+                }
+                WarpId::FastTravelIrikarBreachGauntlet => {
+                    SpotId::Irikar_Breach__Gauntlet__Save_Point
+                }
+                WarpId::FastTravelIrikarBreachSaveRoom => {
+                    SpotId::Irikar_Breach__Save_Room__Save_Point
+                }
+                WarpId::FastTravelIrikarHub => SpotId::Irikar__Hub__Save_Point,
                 WarpId::FastTravelUhrumSaveRoom => SpotId::Uhrum__Save_Room__Save_Point,
+                WarpId::FastTravelUhrumWestEntrance => SpotId::Uhrum__West_Entrance__Save_Point,
                 WarpId::IndraSave => ctx.save(),
                 WarpId::Menu => SpotId::Menu__Upgrade_Menu__Physiology,
             }
@@ -4257,14 +4314,24 @@ impl world::Warp for Warp {
     }
     fn postwarp(&self, ctx: &mut Context) {
         match self.id {
-            WarpId::BreachSave => rules::action_energy__max_energy(ctx),
-            WarpId::DroneSave => rules::action_energy__max_energy(ctx),
+            WarpId::BreachSave => rules::action_refill_energy(ctx),
+            WarpId::DroneSave => rules::action_refill_energy(ctx),
             WarpId::ExitBreach => rules::action_clear_breach_save(ctx),
             WarpId::ExitMenu => rules::action_last__default(ctx),
-            WarpId::FastTravel1710 => rules::action_energy__max_energy(ctx),
-            WarpId::FastTravelGlacierRevival => rules::action_energy__max_energy(ctx),
-            WarpId::FastTravelUhrumSaveRoom => rules::action_energy__max_energy(ctx),
-            WarpId::IndraSave => rules::action_energy__max_energy(ctx),
+            WarpId::FastTravelAmagiMainArea => rules::action_refill_energy(ctx),
+            WarpId::FastTravelGigunaBase => rules::action_refill_energy(ctx),
+            WarpId::FastTravelGigunaBreachPeak => rules::action_refill_energy(ctx),
+            WarpId::FastTravelGigunaBreachSw => rules::action_refill_energy(ctx),
+            WarpId::FastTravelGigunaNortheast => rules::action_refill_energy(ctx),
+            WarpId::FastTravelGigunaRuinsWest => rules::action_refill_energy(ctx),
+            WarpId::FastTravelGlacierRevival => rules::action_refill_energy(ctx),
+            WarpId::FastTravelIrikarBreachBasement => rules::action_refill_energy(ctx),
+            WarpId::FastTravelIrikarBreachGauntlet => rules::action_refill_energy(ctx),
+            WarpId::FastTravelIrikarBreachSaveRoom => rules::action_refill_energy(ctx),
+            WarpId::FastTravelIrikarHub => rules::action_refill_energy(ctx),
+            WarpId::FastTravelUhrumSaveRoom => rules::action_refill_energy(ctx),
+            WarpId::FastTravelUhrumWestEntrance => rules::action_refill_energy(ctx),
+            WarpId::IndraSave => rules::action_refill_energy(ctx),
             _ => (),
         }
     }
@@ -4275,9 +4342,19 @@ impl world::Warp for Warp {
             WarpId::EarthSave => true,
             WarpId::ExitBreach => false,
             WarpId::ExitMenu => false,
-            WarpId::FastTravel1710 => false,
+            WarpId::FastTravelAmagiMainArea => false,
+            WarpId::FastTravelGigunaBase => false,
+            WarpId::FastTravelGigunaBreachPeak => false,
+            WarpId::FastTravelGigunaBreachSw => false,
+            WarpId::FastTravelGigunaNortheast => false,
+            WarpId::FastTravelGigunaRuinsWest => false,
             WarpId::FastTravelGlacierRevival => false,
+            WarpId::FastTravelIrikarBreachBasement => false,
+            WarpId::FastTravelIrikarBreachGauntlet => false,
+            WarpId::FastTravelIrikarBreachSaveRoom => false,
+            WarpId::FastTravelIrikarHub => false,
             WarpId::FastTravelUhrumSaveRoom => false,
+            WarpId::FastTravelUhrumWestEntrance => false,
             WarpId::IndraSave => true,
             WarpId::Menu => false,
         }
@@ -8278,7 +8355,6 @@ impl World {
                     | Item::Drone_Melee_Damage_3
                     | Item::Drone_Melee_Speed_3
                     | Item::Escape
-                    | Item::Health_Fragment
                     | Item::Health_Upgrade_5
                     | Item::Heretics_Granddaughter
                     | Item::Heretics_Tablet
@@ -29658,8 +29734,38 @@ pub fn build_warps() -> EnumMap<WarpId, Warp> {
             time: 200,
             price: Currency::Free,
         },
-        WarpId::FastTravel1710 => Warp {
-            id: WarpId::FastTravel1710,
+        WarpId::FastTravelAmagiMainArea => Warp {
+            id: WarpId::FastTravelAmagiMainArea,
+            dest: SpotId::None,
+            time: 12000,
+            price: Currency::Free,
+        },
+        WarpId::FastTravelGigunaBase => Warp {
+            id: WarpId::FastTravelGigunaBase,
+            dest: SpotId::None,
+            time: 12000,
+            price: Currency::Free,
+        },
+        WarpId::FastTravelGigunaBreachPeak => Warp {
+            id: WarpId::FastTravelGigunaBreachPeak,
+            dest: SpotId::None,
+            time: 12000,
+            price: Currency::Free,
+        },
+        WarpId::FastTravelGigunaBreachSw => Warp {
+            id: WarpId::FastTravelGigunaBreachSw,
+            dest: SpotId::None,
+            time: 12000,
+            price: Currency::Free,
+        },
+        WarpId::FastTravelGigunaNortheast => Warp {
+            id: WarpId::FastTravelGigunaNortheast,
+            dest: SpotId::None,
+            time: 12000,
+            price: Currency::Free,
+        },
+        WarpId::FastTravelGigunaRuinsWest => Warp {
+            id: WarpId::FastTravelGigunaRuinsWest,
             dest: SpotId::None,
             time: 12000,
             price: Currency::Free,
@@ -29670,8 +29776,38 @@ pub fn build_warps() -> EnumMap<WarpId, Warp> {
             time: 12000,
             price: Currency::Free,
         },
+        WarpId::FastTravelIrikarBreachBasement => Warp {
+            id: WarpId::FastTravelIrikarBreachBasement,
+            dest: SpotId::None,
+            time: 12000,
+            price: Currency::Free,
+        },
+        WarpId::FastTravelIrikarBreachGauntlet => Warp {
+            id: WarpId::FastTravelIrikarBreachGauntlet,
+            dest: SpotId::None,
+            time: 12000,
+            price: Currency::Free,
+        },
+        WarpId::FastTravelIrikarBreachSaveRoom => Warp {
+            id: WarpId::FastTravelIrikarBreachSaveRoom,
+            dest: SpotId::None,
+            time: 12000,
+            price: Currency::Free,
+        },
+        WarpId::FastTravelIrikarHub => Warp {
+            id: WarpId::FastTravelIrikarHub,
+            dest: SpotId::None,
+            time: 12000,
+            price: Currency::Free,
+        },
         WarpId::FastTravelUhrumSaveRoom => Warp {
             id: WarpId::FastTravelUhrumSaveRoom,
+            dest: SpotId::None,
+            time: 12000,
+            price: Currency::Free,
+        },
+        WarpId::FastTravelUhrumWestEntrance => Warp {
+            id: WarpId::FastTravelUhrumWestEntrance,
             dest: SpotId::None,
             time: 12000,
             price: Currency::Free,
