@@ -363,6 +363,18 @@ pub fn access_fast_travel_and_not_within_menu_and_not_breach_and_amashilama(ctx:
         && !data::breach(ctx.position()))
         && ctx.has(Item::Amashilama))
 }
+pub fn access_fast_travel_and_not_within_menu_and_not_breach_and_map__giguna__giguna_northeast__save(
+    ctx: &Context,
+) -> bool {
+    // Fast_Travel and NOT WITHIN `Menu` and NOT ^breach and ^map__giguna__giguna_northeast__save
+    (((ctx.has(Item::Fast_Travel)
+        && !(match get_region(ctx.position()) {
+            RegionId::Menu => true,
+            _ => false,
+        }))
+        && !data::breach(ctx.position()))
+        && ctx.map__giguna__giguna_northeast__save())
+}
 pub fn access_fast_travel_and_not_within_menu_and_not_breach_and_map__uhrum__save_room__save(
     ctx: &Context,
 ) -> bool {
@@ -374,18 +386,6 @@ pub fn access_fast_travel_and_not_within_menu_and_not_breach_and_map__uhrum__sav
         }))
         && !data::breach(ctx.position()))
         && ctx.map__uhrum__save_room__save())
-}
-pub fn access_fast_travel_and_not_within_menu_and_not_breach_and_map_giguna_northeast_save(
-    ctx: &Context,
-) -> bool {
-    // Fast_Travel and NOT WITHIN `Menu` and NOT ^breach and ^map_giguna_northeast_save
-    (((ctx.has(Item::Fast_Travel)
-        && !(match get_region(ctx.position()) {
-            RegionId::Menu => true,
-            _ => false,
-        }))
-        && !data::breach(ctx.position()))
-        && ctx.map_giguna_northeast_save())
 }
 pub fn access_giguna__carnelian__door__ex__switch_1__req(ctx: &Context) -> bool {
     // ^_door_opened

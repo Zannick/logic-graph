@@ -9,6 +9,8 @@ areas:
   on_entry: $reset_old_area(^newpos)
   load:
     _combo: false
+  map:
+    save: [29, 18, 30, 19]
   spots:
     - name: East 15
       coord: [30.95, 14.85]

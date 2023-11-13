@@ -8,6 +8,8 @@ areas:
   on_entry: $reset_old_area(^newpos)
   data:
     portal_default: Giguna > Ruins Top > Save Point
+  map:
+    save: [15, 6, 16, 7]
   spots:
     - name: Save Point
       coord: [15.475, 6.6]
@@ -206,6 +208,8 @@ areas:
   on_entry: $reset_old_area(^newpos)
   start:
     _door_opened: false
+  map:
+    save: [12, 11, 13, 12]
   spots:
     - name: North
       coord: [12.5, 10.2]

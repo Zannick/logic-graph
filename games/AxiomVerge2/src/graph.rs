@@ -4207,7 +4207,7 @@ impl world::Accessible for Warp {
             WarpId::EarthSave => rules::access_within_antarctica(&ctx),
             WarpId::ExitBreach => rules::access_breach_and_exit_breach_and___flipside_not_within_default(&ctx),
             WarpId::ExitMenu => rules::access_within_menu(&ctx),
-            WarpId::FastTravel1710 => rules::access_fast_travel_and_not_within_menu_and_not_breach_and_map_giguna_northeast_save(&ctx),
+            WarpId::FastTravel1710 => rules::access_fast_travel_and_not_within_menu_and_not_breach_and_map__giguna__giguna_northeast__save(&ctx),
             WarpId::FastTravelGlacierRevival => rules::access_fast_travel_and_not_within_menu_and_not_breach_and_amashilama(&ctx),
             WarpId::FastTravelUhrumSaveRoom => rules::access_fast_travel_and_not_within_menu_and_not_breach_and_map__uhrum__save_room__save(&ctx),
             WarpId::IndraSave => rules::access_not_within_menu_and_amashilama_and_mode__drone(&ctx),

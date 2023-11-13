@@ -21,11 +21,6 @@ start:
   last: SpotId::None
   # This should be a load effect? prev_area = $get_area(^position) ?
   prev_area: Antarctica > West
-  # Map tiles. Named either for the tile coords or for the area (if a single-tile room or save point)
-  map_giguna_northeast_save: false
-  map_giguna_base_save: false
-  map_irikar_hub_save: false
-  map_uhrum_west_entrance_save: false
 
 data:
   breach: false
@@ -167,11 +162,11 @@ warps:
     # Instead of making this base movement, anywhere it's strictly required needs a real Exit
     tags: [exit]
   # Fast travel times are slightly different when travelling within an area
-  fast_travel_17_10:
+  fast_travel_giguna_northeast:
     time: 12
     # technically doable from the menu, but not from the menu in the breach.
     # also not possible in interiors! D: TODO: Move interiors into their own region.
-    req: Fast_Travel and NOT WITHIN `Menu` and NOT ^breach and ^map_giguna_northeast_save
+    req: Fast_Travel and NOT WITHIN `Menu` and NOT ^breach and ^map__giguna__giguna_northeast__save
     to: Giguna > Giguna Northeast > Save Point
     after: ^energy = $max_energy
   fast_travel_uhrum_save_room:

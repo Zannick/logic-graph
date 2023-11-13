@@ -6,6 +6,7 @@ data:
 areas:
 - name: Save Room
   on_entry: $reset_old_area(^newpos)
+  map: save
   spots:
     - name: Save Point
       coord: [14.525, 25.35]
@@ -30,6 +31,8 @@ areas:
 
 - name: Gauntlet
   on_entry: $reset_old_area(^newpos)
+  map:
+    save: [11, 21, 12, 22]
   spots:
     - name: Save Point
       coord: [11.3, 21.7]
@@ -430,6 +433,8 @@ areas:
 
 - name: Basement Save
   on_entry: $reset_old_area(^newpos)
+  map:
+    save: [12, 27, 13, 28]
   spots:
     - name: Save Point
       coord: [12.525, 27.5]

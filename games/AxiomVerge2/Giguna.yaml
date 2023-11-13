@@ -6,6 +6,8 @@ areas:
   on_entry: $reset_old_area(^newpos)
   start:
     _door_opened: false
+  map:
+    save: [17, 9, 18, 10]
   spots:
     - name: East 9
       coord: [18.95, 8.75]
@@ -14,8 +16,6 @@ areas:
           tags: [xshift]
     - name: Inner Wall
       coord: [18.65, 8.95]
-      enter:
-        map_giguna_northeast_save: true
       local:
         - to: East 9
           jumps: 2
@@ -23,8 +23,6 @@ areas:
           jumps: 4
     - name: Crow Eating
       coord: [17.85, 8.9]
-      enter:
-        map_giguna_northeast_save: true
       local:
         - to: Save Point
         - to: Gate Left
@@ -33,8 +31,6 @@ areas:
           req: $hover
     - name: Save Point
       coord: [17.5, 9.5]
-      enter:
-        map_giguna_northeast_save: true
       local:
         - to: Step
           jumps: 1
@@ -50,8 +46,6 @@ areas:
           time: 2
     - name: Step
       coord: [17.3, 9.4]
-      enter:
-        map_giguna_northeast_save: true
       local:
         - to: West 10
         - to: Save Point
@@ -67,8 +61,6 @@ areas:
           time: 2.3
     - name: West 10
       coord: [17.05, 9.5]
-      enter:
-        map_giguna_northeast_save: true
       local:
         - to: Step
           jumps: 1
@@ -84,8 +76,6 @@ areas:
           tags: [xshift]
     - name: Gate Left
       coord: [17.8, 9.6]
-      enter:
-        map_giguna_northeast_save: true
       local:
         - to: Save Point
           jumps: 1
@@ -801,6 +791,8 @@ areas:
   on_entry: $reset_old_area(^newpos)
   start:
     _door_open: false
+  map:
+    save: [13, 15, 14, 16]
   spots:
     - name: East 14
       coord: [14.95, 13.7]
@@ -902,8 +894,6 @@ areas:
           movement: base
     - name: Building Entry
       coord: [14.1, 15.5]
-      enter:
-        map_giguna_base_save: true
       local:
         - to: Staircase Bottom
         - to: Save Point
@@ -952,8 +942,6 @@ areas:
           tags: [xshift]
     - name: Staircase Bottom
       coord: [13.2, 15.7]
-      enter:
-        map_giguna_base_save: true
       local:
         - to: Staircase Top
           jumps: 5
@@ -964,8 +952,6 @@ areas:
           jumps: 1
     - name: Table
       coord: [13.7, 15.95]
-      enter:
-        map_giguna_base_save: true
       local:
         - to: Kari
           thru: [14, 15.9]
@@ -981,8 +967,6 @@ areas:
           tags: [standing]
     - name: Save Point
       coord: [13.5, 15.8]
-      enter:
-        map_giguna_base_save: true
       local:
         - to: Staircase Bottom
           jumps: 1
@@ -996,8 +980,6 @@ areas:
           time: 1.3
     - name: West 16
       coord: [13.05, 15.85]
-      enter:
-        map_giguna_base_save: true
       local:
         - to: Staircase Bottom
           jumps: 1
@@ -1285,6 +1267,8 @@ areas:
   on_entry: $reset_old_area(^newpos)
   reset:
     _kishib_handled: false
+  map:
+    save: [13, 8, 14, 9]
   spots:
     - name: East 9
       coord: [13.95, 8.6]

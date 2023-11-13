@@ -52,5 +52,5 @@
 ! Do Recall Drone
 
 ! Do Ebih > Ebih West > Medium High Platform > Throw Drone Long
-* Collect Map_17_10 from Giguna > Giguna Northeast > Save Point > Seen
-! Do Giguna > Giguna Northeast > Save Point > Save-Recall
+! Do Giguna > Giguna Northeast > Save Point > Save
+! Do Recall Drone

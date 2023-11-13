@@ -6,6 +6,8 @@ areas:
   reset:
     _left_platform_moved: false
   on_entry: $reset_old_area(^newpos)
+  map:
+    save: [29, 12, 30, 13]
   spots:
     - name: East 11
       coord: [30.95, 10.35]
@@ -992,6 +994,10 @@ areas:
   on_entry: $reset_old_area(^newpos)
   start:
     _door_open: false
+  map:
+    mid_save: [20, 9, 21, 10]
+    upper_save: [20, 6, 21, 7]
+    lower_save: [19, 12, 20, 13]
   spots:
     - name: East 10
       coord: [20.95, 9.7]

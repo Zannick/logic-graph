@@ -4,6 +4,8 @@ short: Uhrum
 areas:
 - name: West Entrance
   on_entry: $reset_old_area(^newpos)
+  map:
+    save: [19, 27, 20, 28]
   spots:
     - name: West 27
       coord: [19.05, 26.8]
@@ -86,8 +88,6 @@ areas:
 
     - name: Southeast Tree
       coord: [19.2, 27.05]
-      enter:
-        map_uhrum_west_entrance_save: true
       local:
         - to: Save Point
         - to: West 27
@@ -114,8 +114,6 @@ areas:
 
     - name: Save Point
       coord: [19.5, 27.35]
-      enter:
-        map_uhrum_west_entrance_save: true
       local:
         - to: Southeast Tree
           jumps: 2
@@ -304,7 +302,7 @@ areas:
       coord: [19.85, 26.9]
       enter:
         # close enough
-        map_uhrum_west_entrance_save: true
+        map__uhrum__west_entrance__save: true
       local:
         - to: Save Point
       exits:

@@ -52,7 +52,8 @@
   Move... to Ebih > Ebih West > Medium High Platform
 ! Do Ebih > Ebih West > Medium High Platform > Throw Drone Long
   Move... to Giguna > Giguna Northeast > Save Point
-! Do Giguna > Giguna Northeast > Save Point > Save-Recall
+! Do Giguna > Giguna Northeast > Save Point > Save
+! Do Recall Drone
   Move... to Amagi > Liru Room > Shrine
 * Collect Underwater_Movement from Amagi > Liru Room > Shrine > Item
   Move... to Amagi > Main Area > Carving
