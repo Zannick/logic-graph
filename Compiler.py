@@ -15,7 +15,6 @@ import yaml
 logging.basicConfig(level=logging.INFO, format='{relativeCreated:09.2f} {levelname}: {message}', style='{')
 
 import antlr4
-from defaultlist import defaultlist
 import inflection
 import jinja2
 
