@@ -1377,6 +1377,8 @@ areas:
   on_entry: $reset_old_area(^newpos)
   data:
     portal_default: Giguna Breach > Peak > Save Point
+  map:
+    save: [14, 5, 15, 6]
   start:
     _doors_open: false
   spots:

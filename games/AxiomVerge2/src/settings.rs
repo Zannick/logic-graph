@@ -21,8 +21,8 @@ fn read_key_value(
             world.objective = parse_str_into(key, val)?;
         }
         Some("boomerang_steering") => {
-            ctx.cbits1.set(
-                flags::ContextBits1::BOOMERANG_STEERING,
+            ctx.cbits2.set(
+                flags::ContextBits2::BOOMERANG_STEERING,
                 parse_bool(key, val)?,
             );
         }

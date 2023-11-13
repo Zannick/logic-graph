@@ -4209,7 +4209,7 @@ impl world::Accessible for Warp {
             WarpId::ExitMenu => rules::access_within_menu(&ctx),
             WarpId::FastTravel1710 => rules::access_fast_travel_and_not_within_menu_and_not_breach_and_map_giguna_northeast_save(&ctx),
             WarpId::FastTravelGlacierRevival => rules::access_fast_travel_and_not_within_menu_and_not_breach_and_amashilama(&ctx),
-            WarpId::FastTravelUhrumSaveRoom => rules::access_fast_travel_and_not_within_menu_and_not_breach_and_map_uhrum_save_room(&ctx),
+            WarpId::FastTravelUhrumSaveRoom => rules::access_fast_travel_and_not_within_menu_and_not_breach_and_map__uhrum__save_room__save(&ctx),
             WarpId::IndraSave => rules::access_not_within_menu_and_amashilama_and_mode__drone(&ctx),
             WarpId::Menu => rules::access_not_within_menu_and_flasks__0(&ctx),
         }

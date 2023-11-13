@@ -94,6 +94,10 @@ Each other yaml file in the top-level game directory is considered a dictionary 
 * **name**: The name of the area. Area names must be unique within a Region. **Required**.
 * **data**: A dictionary of values for Place-based data. Format is the same everywhere. These values override the data at higher levels: the containing Region and the defaults defined in `Game.yaml`, and can in turn be overridden by the **data** fields in **Spots**.
 * **here**, **enter**, **load**, **reset**, **on_entry**, **graph_offset**, **graph_attrs**: Same as in **Region** but applying to this **Area** instead.
+* **map**: Map tile definitions for the Area. This is usually a dictionary of a short-form tile name (string) with values that are bounding boxes&mdash;any Spots in the bounding box (including on the edges) mark that tile as seen when reached.
+    * The bounding box is a sequence of 4 numbers (floats allowed). The first two are the corner with the smallest coordinates, and the other two are the opposite corner. For example, the unit circle's bounding box would be `[-1, -1, 1, 1]`.
+    * If all Spots in the Area see all map tiles, then you can provide a string or list of strings instead of a dictionary. For example, `map: save`.
+    * This produces context variables that can be used in requirements. The full internally-generated name is required for now.
 * **spots**: A list of [Spots](#spots).
 
 ### Spots

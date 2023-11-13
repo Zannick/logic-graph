@@ -15,6 +15,7 @@ import yaml
 logging.basicConfig(level=logging.INFO, format='{relativeCreated:09.2f} {levelname}: {message}', style='{')
 
 import antlr4
+from defaultlist import defaultlist
 import inflection
 import jinja2
 
@@ -30,7 +31,7 @@ GAME_FIELDS = {'name', 'objectives', 'base_movements', 'movements', 'exit_moveme
                'warps', 'actions', 'time', 'context', 'start', 'load', 'data',
                'helpers', 'collect', 'settings', 'special', '_filename'}
 REGION_FIELDS = {'name', 'short', 'data', 'here', 'graph_offset'}
-AREA_FIELDS = {'name', 'enter', 'exits', 'spots', 'data', 'here'}
+AREA_FIELDS = {'name', 'enter', 'exits', 'spots', 'data', 'here', 'map'}
 SPOT_FIELDS = {'name', 'coord', 'actions', 'locations', 'exits', 'hybrid', 'local', 'data', 'here'}
 LOCATION_FIELDS = {'name', 'item', 'req', 'canon'}
 TYPEHINT_FIELDS = {'type', 'max', 'opts', 'default'}
@@ -214,9 +215,11 @@ class GameLogic(object):
         self.id_lookup = {}
         self.special = self._info.get('special', {})
         self.data = self._info.get('data', {})
-        self.data_defaults = self._info.get("data", {})
+        self.data_defaults = self._info.get('data', {})
+        self.map_defs = self._info.get('map', {})
         self.process_regions()
         self.process_context()
+        self.process_area_maps()
         self.process_warps()
         self.process_global_actions()
         self._errors.extend(itertools.chain.from_iterable(pr.errors for pr in self.all_parse_results()))
@@ -365,6 +368,7 @@ class GameLogic(object):
             num_locs += len(region['loc_ids'])
         self.num_locations = num_locs
 
+
     def process_exit_movements(self):
         for spot in self.spots():
             for exit in spot.get('exits', []) + spot.get('hybrid', []):
@@ -469,6 +473,38 @@ class GameLogic(object):
                 act['after_id'] = self.make_funcid(act, 'act_post', 'after')
 
 
+    def process_area_maps(self):
+        for area in self.areas():
+            if 'map' not in area:
+                continue
+            map_defs = area['map']
+            if isinstance(map_defs, str):
+                area['tiles'] = [construct_id('map', area['id'].lower(), map_defs)]
+                continue
+            elif isinstance(map_defs, (list, tuple)):
+                area['tiles'] = [construct_id('map', area['id'].lower(), tile) for tile in map_defs]
+                continue
+            elif not isinstance(map_defs, dict):
+                self._errors.append(f'Invalid map entry for {area["fullname"]}: must be dict')
+                continue
+
+            tile_defs = []
+            for tile, box in map_defs.items():
+                if self._validate_box(box, f'{area["fullname"]} map tile "{tile}"'):
+                    tile_defs.append((construct_id('map', area['id'].lower(), tile), box))
+
+            for spot in area['spots']:
+                if 'coord' not in spot:
+                    continue
+                c1, c2 = spot['coord']
+                tiles = []
+                for (tile, box) in tile_defs:
+                    if box[0] <= c1 <= box[2] and box[1] <= c2 <= box[3]:
+                        tiles.append(tile)
+                if tiles:
+                    spot['tiles'] = sorted(tiles)
+
+
     def process_settings(self):
         # Check settings
         def _visit(visitor, reverse=False):
@@ -511,6 +547,7 @@ class GameLogic(object):
             self._validate_scale(sc, 'map_scale')
         if p := self.special.get('map_min'):
             self._validate_pair(p, 'map_min')
+            self._validate_all_numeric(p, 'map_min')
         if t := self.special.get('graph_exclude_tags'):
             self._validate_list(t, 'graph_exclude_tags')
 
@@ -518,27 +555,44 @@ class GameLogic(object):
         if not self._validate_pair(sc, name):
             pass
         elif sc[0] == 0 or sc[1] == 0:
-            self.errors.append(f'Invalid {name}: 0 not allowed: {sc}')
+            self._errors.append(f'Invalid {name}: 0 not allowed: {sc}')
         else:
-            return True
+            return self._validate_all_numeric(sc, name)
         return False
+
+    def _validate_all_numeric(self, p, name):
+        for x in p:
+            if not isinstance(x, (int, float)):
+                self._errors.append(f'Invalid {name}: elements must be numeric: {x}')
+                return False
+        return True
 
     def _validate_pair(self, p, name):
         if isinstance(p, str):
-            self.errors.append(f'Invalid {name}: {p!r} '
-                               f'(did you mean [{p}] ?)')
+            self._errors.append(f'Invalid {name}: {p!r} '
+                                f'(did you mean [{p}] ?)')
         elif not isinstance(p, (list, tuple)) or len(p) != 2:
-            self.errors.append(f'Invalid {name}: {p!r}')
+            self._errors.append(f'Invalid {name}: {p!r}')
         else:
             return True
+        return False
+    
+    def _validate_box(self, box, name):
+        if isinstance(box, str):
+            self._errors.append(f'Invalid {name}: {box!r} '
+                                f'(did you mean [{box}] ?)')
+        elif not isinstance(box, (list, tuple)) or len(box) != 4:
+            self._errors.append(f'Invalid {name}: {box!r}')
+        else:
+            return self._validate_all_numeric(box, name)
         return False
 
     def _validate_list(self, t, name):
         if isinstance(t, str):
-            self.errors.append(f'Invalid {name}: {t!r} '
-                               f'(did you mean [{t}] ?)')
+            self._errors.append(f'Invalid {name}: {t!r} '
+                                f'(did you mean [{t}] ?)')
         elif not isinstance(t, (list, tuple)):
-            self.errors.append(f'Invalid {name}: {t!r}')
+            self._errors.append(f'Invalid {name}: {t!r}')
         else:
             return True
         return False
@@ -1165,6 +1219,19 @@ class GameLogic(object):
             elif hints['type'] == 'bool':
                 gc[ctx] = False
 
+        for area in self.areas():
+            if 'map' not in area:
+                continue
+            map_defs = area['map']
+            if isinstance(map_defs, str):
+                map_defs = [map_defs]
+            for tilename in map_defs:
+                k = construct_id('map', area['id'].lower(), tilename)
+                if k in gc:
+                    self._errors.append(f'Name conflict: cannot define "{k}" and map tile "{tilename}" in {area["fullname"]}')
+                else:
+                    gc[k] = False
+
         def _check_shadow(ctx, category, *names):
             _check_data(ctx, val, category, *names)
             if len(names) == 2:
@@ -1408,9 +1475,9 @@ class GameLogic(object):
         d['spot'].update(self.context_trigger_rules['enter']['spot'].keys())
         d['region'].update(self.context_resetters['region'].keys())
         d['area'].update(self.context_resetters['area'].keys())
-        d['region'].update(r['id'] for r in self.regions if 'act' in r)
-        d['area'].update(a['id'] for a in self.areas() if 'act' in a)
-        d['spot'].update(s['id'] for s in self.spots() if 'act' in s)
+        d['region'].update(r['id'] for r in self.regions if 'act' in r or 'tiles' in r)
+        d['area'].update(a['id'] for a in self.areas() if 'act' in a or 'tiles' in a)
+        d['spot'].update(s['id'] for s in self.spots() if 'act' in s or 'tiles' in s)
         return d
 
     

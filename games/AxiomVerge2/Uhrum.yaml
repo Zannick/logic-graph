@@ -497,9 +497,8 @@ areas:
       coord: [26.05, 26.75]
 
 - name: Save Room
-  enter:
-    map_uhrum_save_room: true
   on_entry: $reset_old_area(^newpos)
+  map: save
   spots:
     - name: East
       coord: [25.95, 26.75]
