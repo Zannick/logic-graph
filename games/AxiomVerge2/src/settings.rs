@@ -21,18 +21,18 @@ fn read_key_value(
             world.objective = parse_str_into(key, val)?;
         }
         Some("boomerang_steering") => {
-            ctx.cbits2.set(
-                flags::ContextBits2::BOOMERANG_STEERING,
+            ctx.cbits1.set(
+                flags::ContextBits1::BOOMERANG_STEERING,
                 parse_bool(key, val)?,
             );
         }
         Some("major_glitches") => {
-            ctx.cbits2
-                .set(flags::ContextBits2::MAJOR_GLITCHES, parse_bool(key, val)?);
+            ctx.cbits1
+                .set(flags::ContextBits1::MAJOR_GLITCHES, parse_bool(key, val)?);
         }
         Some("minor_glitches") => {
-            ctx.cbits2
-                .set(flags::ContextBits2::MINOR_GLITCHES, parse_bool(key, val)?);
+            ctx.cbits1
+                .set(flags::ContextBits1::MINOR_GLITCHES, parse_bool(key, val)?);
         }
         _ => {
             return Err(format!("Unrecognized or unparseable key: '{:?}'", key));

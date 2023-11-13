@@ -5,7 +5,7 @@ from Utils import typenameof
 BitFlagGroup = namedtuple("BitFlagGroup", ['size', 'vars', 'defaults'])
 GroupRange = namedtuple("GroupRange", ['start_group', 'start_index', 'end_group', 'end_index'])
 
-MAX_GROUP_SIZE = 32
+MAX_GROUP_SIZE = 64
 
 class BitFlagProcessor(object):
 
