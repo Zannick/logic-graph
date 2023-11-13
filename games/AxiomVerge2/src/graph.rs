@@ -1064,12 +1064,16 @@ pub fn get_area(spot: SpotId) -> AreaId {
         | SpotId::Uhrum__Siege_Corridor__West_Greenery
         | SpotId::Uhrum__Siege_Corridor__West_Grassy_Ledge
         | SpotId::Uhrum__Siege_Corridor__West_Rocky_Ledge
+        | SpotId::Uhrum__Siege_Corridor__West_Loop
+        | SpotId::Uhrum__Siege_Corridor__West_Middle_Tree
         | SpotId::Uhrum__Siege_Corridor__Center_West
         | SpotId::Uhrum__Siege_Corridor__Center_Platform_1
         | SpotId::Uhrum__Siege_Corridor__Center_Platform_3
         | SpotId::Uhrum__Siege_Corridor__Center_East
         | SpotId::Uhrum__Siege_Corridor__Center_Box
+        | SpotId::Uhrum__Siege_Corridor__Center_Valley
         | SpotId::Uhrum__Siege_Corridor__Mideast_Hill
+        | SpotId::Uhrum__Siege_Corridor__Mideast_Tree
         | SpotId::Uhrum__Siege_Corridor__Upper_Rock_West
         | SpotId::Uhrum__Siege_Corridor__Upper_Rock_Item
         | SpotId::Uhrum__Siege_Corridor__Upper_Rock_East
@@ -2115,12 +2119,16 @@ pub fn get_region(spot: SpotId) -> RegionId {
         | SpotId::Uhrum__Siege_Corridor__West_Greenery
         | SpotId::Uhrum__Siege_Corridor__West_Grassy_Ledge
         | SpotId::Uhrum__Siege_Corridor__West_Rocky_Ledge
+        | SpotId::Uhrum__Siege_Corridor__West_Loop
+        | SpotId::Uhrum__Siege_Corridor__West_Middle_Tree
         | SpotId::Uhrum__Siege_Corridor__Center_West
         | SpotId::Uhrum__Siege_Corridor__Center_Platform_1
         | SpotId::Uhrum__Siege_Corridor__Center_Platform_3
         | SpotId::Uhrum__Siege_Corridor__Center_East
         | SpotId::Uhrum__Siege_Corridor__Center_Box
+        | SpotId::Uhrum__Siege_Corridor__Center_Valley
         | SpotId::Uhrum__Siege_Corridor__Mideast_Hill
+        | SpotId::Uhrum__Siege_Corridor__Mideast_Tree
         | SpotId::Uhrum__Siege_Corridor__Upper_Rock_West
         | SpotId::Uhrum__Siege_Corridor__Upper_Rock_Item
         | SpotId::Uhrum__Siege_Corridor__Upper_Rock_East
@@ -2463,6 +2471,11 @@ impl world::Accessible for Location {
             }
             LocationId::Menu__Upgrade_Menu__Physiology__Mist_Upgrade => {
                 rules::access_nanite_mist(&ctx)
+            }
+            LocationId::Uhrum__Siege_Corridor__Center_Box__Box => rules::access_can_damage(&ctx),
+            LocationId::Uhrum__Siege_Corridor__Upper_Rock_Item__Urn => true,
+            LocationId::Uhrum__Siege_Corridor__Western_Cache__Core => {
+                rules::access_more_refills(&ctx)
             }
             LocationId::Uhrum__West_Entrance__Gate_Switch__Open_Gate => {
                 rules::access_can_damage(&ctx)
@@ -3355,6 +3368,29 @@ impl world::Accessible for Exit {
             ExitId::Menu__Upgrade_Menu__Physiology__ex__Combat_1 => true,
             ExitId::Menu__Upgrade_Menu__Physiology__ex__Drone_1 => rules::access_remote_drone(&ctx),
             ExitId::Menu__Upgrade_Menu__Physiology__ex__Infection_1 => rules::access_infect(&ctx),
+            ExitId::Uhrum__Siege_Corridor__Center_Platform_3__ex__Upper_Rock_West_1 => rules::access_hover(&ctx),
+            ExitId::Uhrum__Siege_Corridor__Center_Valley__ex__Center_East_1 => rules::access_grab(&ctx),
+            ExitId::Uhrum__Siege_Corridor__Center_Valley__ex__Center_East_2 => rules::access_hook(&ctx),
+            ExitId::Uhrum__Siege_Corridor__East_25__ex__Waterfalls__West_25_1 => true,
+            ExitId::Uhrum__Siege_Corridor__East_Hill__ex__Mideast_Tree_1 => rules::access_hover(&ctx),
+            ExitId::Uhrum__Siege_Corridor__East_Hill__ex__Upper_Rock_East_1 => rules::access_hook(&ctx),
+            ExitId::Uhrum__Siege_Corridor__East_Hill__ex__Upper_Rock_East_2 => rules::access_anuman_and_grab(&ctx),
+            ExitId::Uhrum__Siege_Corridor__East_Hill__ex__Upper_Rock_East_3 => rules::access_mist2(&ctx),
+            ExitId::Uhrum__Siege_Corridor__Mideast_Tree__ex__East_Hill_1 => rules::access_hover(&ctx),
+            ExitId::Uhrum__Siege_Corridor__Mideast_Tree__ex__Upper_Rock_West_1 => rules::access_hook(&ctx),
+            ExitId::Uhrum__Siege_Corridor__Northwest_Door__ex__Giguna__Vertical_Interchange__South_1 => rules::access_mist2(&ctx),
+            ExitId::Uhrum__Siege_Corridor__Northwest_Door__ex__Western_Cache_1 => rules::access_hover(&ctx),
+            ExitId::Uhrum__Siege_Corridor__Northwest_Platform__ex__Northwest_Door_1 => rules::access_mist2(&ctx),
+            ExitId::Uhrum__Siege_Corridor__Northwest_Platform__ex__Western_Cache_1 => rules::access_hover(&ctx),
+            ExitId::Uhrum__Siege_Corridor__Pond__ex__East_Hill_1 => rules::access_climb(&ctx),
+            ExitId::Uhrum__Siege_Corridor__Pond__ex__East_Hill_2 => rules::access_hover(&ctx),
+            ExitId::Uhrum__Siege_Corridor__Upper_Rock_Item__ex__Upper_Rock_West_1 => rules::access_mode__drone(&ctx),
+            ExitId::Uhrum__Siege_Corridor__Upper_Rock_West__ex__Upper_Rock_Item_1 => rules::access_mode__drone(&ctx),
+            ExitId::Uhrum__Siege_Corridor__West_26__ex__West_Entrance__East_26_1 => true,
+            ExitId::Uhrum__Siege_Corridor__West_Greenery__ex__West_Grassy_Ledge_1 => rules::access_hook(&ctx),
+            ExitId::Uhrum__Siege_Corridor__Western_Cache__ex__Northwest_Door_1 => rules::access_mist2(&ctx),
+            ExitId::Uhrum__Siege_Corridor__Western_Cache__ex__Northwest_Platform_1 => rules::access_hover(&ctx),
+            ExitId::Uhrum__Siege_Corridor__Western_Rock__ex__Northwest_Platform_1 => rules::access_hover(&ctx),
             ExitId::Uhrum__West_Entrance__Clear_Passage__ex__Portal_Stand_1 => rules::access_grab_and_climb(&ctx),
             ExitId::Uhrum__West_Entrance__Clear_Passage__ex__Portal_Stand_2 => rules::access_hook(&ctx),
             ExitId::Uhrum__West_Entrance__East_26__ex__Siege_Corridor__West_26_1 => true,
@@ -3742,6 +3778,8 @@ impl world::Exit for Exit {
             ExitId::Menu__Upgrade_Menu__Infection__ex__Combat_1 => true,
             ExitId::Menu__Upgrade_Menu__Infection__ex__Physiology_1 => true,
             ExitId::Menu__Upgrade_Menu__Physiology__ex__Combat_1 => true,
+            ExitId::Uhrum__Siege_Corridor__East_25__ex__Waterfalls__West_25_1 => true,
+            ExitId::Uhrum__Siege_Corridor__West_26__ex__West_Entrance__East_26_1 => true,
             ExitId::Uhrum__West_Entrance__East_26__ex__Siege_Corridor__West_26_1 => true,
             ExitId::Uhrum__West_Entrance__East_28__ex__Glitchy_Corridor__West_28_1 => true,
             ExitId::Uhrum__West_Entrance__Hidden_Passage_West__ex__Irikar__Lamassu__Hidden_Passage_East_1 => true,
@@ -4369,7 +4407,7 @@ pub struct Spot {
     pub actions: Range<usize>,
 }
 
-static RAW_SPOTS: [SpotId; 1043] = [
+static RAW_SPOTS: [SpotId; 1047] = [
     SpotId::None,
     SpotId::Amagi__Cave_Behind_Waterfall__Bottom,
     SpotId::Amagi__Cave_Behind_Waterfall__Middle,
@@ -5367,10 +5405,12 @@ static RAW_SPOTS: [SpotId; 1043] = [
     SpotId::Uhrum__Siege_Corridor__Center_East,
     SpotId::Uhrum__Siege_Corridor__Center_Platform_1,
     SpotId::Uhrum__Siege_Corridor__Center_Platform_3,
+    SpotId::Uhrum__Siege_Corridor__Center_Valley,
     SpotId::Uhrum__Siege_Corridor__Center_West,
     SpotId::Uhrum__Siege_Corridor__East_25,
     SpotId::Uhrum__Siege_Corridor__East_Hill,
     SpotId::Uhrum__Siege_Corridor__Mideast_Hill,
+    SpotId::Uhrum__Siege_Corridor__Mideast_Tree,
     SpotId::Uhrum__Siege_Corridor__Northwest_Door,
     SpotId::Uhrum__Siege_Corridor__Northwest_Platform,
     SpotId::Uhrum__Siege_Corridor__Pond,
@@ -5380,6 +5420,8 @@ static RAW_SPOTS: [SpotId; 1043] = [
     SpotId::Uhrum__Siege_Corridor__West_26,
     SpotId::Uhrum__Siege_Corridor__West_Grassy_Ledge,
     SpotId::Uhrum__Siege_Corridor__West_Greenery,
+    SpotId::Uhrum__Siege_Corridor__West_Loop,
+    SpotId::Uhrum__Siege_Corridor__West_Middle_Tree,
     SpotId::Uhrum__Siege_Corridor__West_Rocky_Ledge,
     SpotId::Uhrum__Siege_Corridor__Western_Cache,
     SpotId::Uhrum__Siege_Corridor__Western_Rock,
@@ -5927,7 +5969,7 @@ impl world::World for World {
     type Exit = Exit;
     type Action = Action;
     type Warp = Warp;
-    const NUM_LOCATIONS: u32 = 180;
+    const NUM_LOCATIONS: u32 = 183;
 
     fn objective_name(&self) -> String {
         format!("{}", self.objective)
@@ -6106,6 +6148,7 @@ impl world::World for World {
                 LocationId::Uhrum__West_Entrance__Lower_Wall_East__Spin_through_Wall,
                 LocationId::Uhrum__West_Entrance__Lower_Wall_East__Mist_through_Wall,
             ],
+            CanonId::Fast_Travel => vec![LocationId::Uhrum__Siege_Corridor__Upper_Rock_Item__Urn],
         }
     }
 
@@ -6185,6 +6228,7 @@ impl world::World for World {
                 LocationId::Giguna__Wasteland__Door_Right__Health,
                 LocationId::Giguna__Dual_Path__Wall_Secret__Health,
                 LocationId::Irikar__Boss_Room__Healthy_Rooftop__Health,
+                LocationId::Uhrum__Siege_Corridor__Center_Box__Box,
             ],
             Item::Dear_Ernest => vec![LocationId::Ebih__Bunker_Interior__Desk__Note],
             Item::Melee_Charge => vec![
@@ -6244,6 +6288,7 @@ impl world::World for World {
             Item::Power_Core => vec![
                 LocationId::Giguna__West_Caverns__Bush__Item,
                 LocationId::Irikar__Abandoned_Room__Corner_Core__Core,
+                LocationId::Uhrum__Siege_Corridor__Western_Cache__Core,
             ],
             Item::Ebih_Wasteland_Passage_H => vec![
                 LocationId::Giguna__Wasteland__Passage_East__Clear_Horizontal_Passage_Manually,
@@ -6406,6 +6451,7 @@ impl world::World for World {
                 LocationId::Uhrum__West_Entrance__Lower_Wall_East__Mist_through_Wall,
             ],
             Item::Refill => vec![LocationId::Uhrum__West_Entrance__Sand__Refill],
+            Item::Fast_Travel => vec![LocationId::Uhrum__Siege_Corridor__Upper_Rock_Item__Urn],
             _ => Vec::new(),
         }
     }
@@ -6807,6 +6853,15 @@ impl world::World for World {
                 SpotId::Uhrum__West_Entrance__Lower_Wall_East
             }
             LocationId::Uhrum__West_Entrance__Sand__Refill => SpotId::Uhrum__West_Entrance__Sand,
+            LocationId::Uhrum__Siege_Corridor__Western_Cache__Core => {
+                SpotId::Uhrum__Siege_Corridor__Western_Cache
+            }
+            LocationId::Uhrum__Siege_Corridor__Center_Box__Box => {
+                SpotId::Uhrum__Siege_Corridor__Center_Box
+            }
+            LocationId::Uhrum__Siege_Corridor__Upper_Rock_Item__Urn => {
+                SpotId::Uhrum__Siege_Corridor__Upper_Rock_Item
+            }
         }
     }
 
@@ -7627,6 +7682,20 @@ impl world::World for World {
             ExitId::Uhrum__West_Entrance__Lower_Path_Gap__ex__Lower_Wall_West_1 | ExitId:: Uhrum__West_Entrance__Lower_Path_Gap__ex__Lower_Path_Tree_Ledge_1 => SpotId::Uhrum__West_Entrance__Lower_Path_Gap,
             ExitId::Uhrum__West_Entrance__Sand__ex__Lower_Path_Gap_1 | ExitId:: Uhrum__West_Entrance__Sand__ex__Lower_Path_Tree_Ledge_1 | ExitId:: Uhrum__West_Entrance__Sand__ex__Lower_Path_Tree_Ledge_2 => SpotId::Uhrum__West_Entrance__Sand,
             ExitId::Uhrum__West_Entrance__East_28__ex__Lower_Path_Tree_Ledge_1 | ExitId:: Uhrum__West_Entrance__East_28__ex__Lower_Path_Tree_Ledge_2 | ExitId:: Uhrum__West_Entrance__East_28__ex__Glitchy_Corridor__West_28_1 => SpotId::Uhrum__West_Entrance__East_28,
+            ExitId::Uhrum__Siege_Corridor__West_26__ex__West_Entrance__East_26_1 => SpotId::Uhrum__Siege_Corridor__West_26,
+            ExitId::Uhrum__Siege_Corridor__Western_Cache__ex__Northwest_Platform_1 | ExitId:: Uhrum__Siege_Corridor__Western_Cache__ex__Northwest_Door_1 => SpotId::Uhrum__Siege_Corridor__Western_Cache,
+            ExitId::Uhrum__Siege_Corridor__Western_Rock__ex__Northwest_Platform_1 => SpotId::Uhrum__Siege_Corridor__Western_Rock,
+            ExitId::Uhrum__Siege_Corridor__Northwest_Door__ex__Western_Cache_1 | ExitId:: Uhrum__Siege_Corridor__Northwest_Door__ex__Giguna__Vertical_Interchange__South_1 => SpotId::Uhrum__Siege_Corridor__Northwest_Door,
+            ExitId::Uhrum__Siege_Corridor__Northwest_Platform__ex__Western_Cache_1 | ExitId:: Uhrum__Siege_Corridor__Northwest_Platform__ex__Northwest_Door_1 => SpotId::Uhrum__Siege_Corridor__Northwest_Platform,
+            ExitId::Uhrum__Siege_Corridor__West_Greenery__ex__West_Grassy_Ledge_1 => SpotId::Uhrum__Siege_Corridor__West_Greenery,
+            ExitId::Uhrum__Siege_Corridor__Center_Platform_3__ex__Upper_Rock_West_1 => SpotId::Uhrum__Siege_Corridor__Center_Platform_3,
+            ExitId::Uhrum__Siege_Corridor__Center_Valley__ex__Center_East_1 | ExitId:: Uhrum__Siege_Corridor__Center_Valley__ex__Center_East_2 => SpotId::Uhrum__Siege_Corridor__Center_Valley,
+            ExitId::Uhrum__Siege_Corridor__Mideast_Tree__ex__Upper_Rock_West_1 | ExitId:: Uhrum__Siege_Corridor__Mideast_Tree__ex__East_Hill_1 => SpotId::Uhrum__Siege_Corridor__Mideast_Tree,
+            ExitId::Uhrum__Siege_Corridor__Upper_Rock_West__ex__Upper_Rock_Item_1 => SpotId::Uhrum__Siege_Corridor__Upper_Rock_West,
+            ExitId::Uhrum__Siege_Corridor__Upper_Rock_Item__ex__Upper_Rock_West_1 => SpotId::Uhrum__Siege_Corridor__Upper_Rock_Item,
+            ExitId::Uhrum__Siege_Corridor__Pond__ex__East_Hill_1 | ExitId:: Uhrum__Siege_Corridor__Pond__ex__East_Hill_2 => SpotId::Uhrum__Siege_Corridor__Pond,
+            ExitId::Uhrum__Siege_Corridor__East_Hill__ex__Mideast_Tree_1 | ExitId:: Uhrum__Siege_Corridor__East_Hill__ex__Upper_Rock_East_1 | ExitId:: Uhrum__Siege_Corridor__East_Hill__ex__Upper_Rock_East_2 | ExitId:: Uhrum__Siege_Corridor__East_Hill__ex__Upper_Rock_East_3 => SpotId::Uhrum__Siege_Corridor__East_Hill,
+            ExitId::Uhrum__Siege_Corridor__East_25__ex__Waterfalls__West_25_1 => SpotId::Uhrum__Siege_Corridor__East_25,
             _ => SpotId::None,
         }
     }
@@ -7685,6 +7754,9 @@ impl world::World for World {
                 }
                 if !ctx.has(Item::Companies_Layoff) {
                     vec.push((Item::Companies_Layoff, 1));
+                }
+                if !ctx.has(Item::Compass) {
+                    vec.push((Item::Compass, 1));
                 }
                 if !ctx.has(Item::Dear_Ernest) {
                     vec.push((Item::Dear_Ernest, 1));
@@ -7759,6 +7831,7 @@ impl world::World for World {
                 (Item::Building_of_the_School, 1),
                 (Item::Commemorative_Speech, 1),
                 (Item::Companies_Layoff, 1),
+                (Item::Compass, 1),
                 (Item::Dear_Ernest, 1),
                 (Item::Flask, 11),
                 (Item::Health_Fragment, 5),
@@ -8278,6 +8351,12 @@ impl world::World for World {
             | SpotId::Menu__Upgrade_Menu__Drone
             | SpotId::Menu__Upgrade_Menu__Infection
             | SpotId::Menu__Upgrade_Menu__Physiology
+            | SpotId::Uhrum__Siege_Corridor__Center_Box
+            | SpotId::Uhrum__Siege_Corridor__East_25
+            | SpotId::Uhrum__Siege_Corridor__Northwest_Door
+            | SpotId::Uhrum__Siege_Corridor__Upper_Rock_Item
+            | SpotId::Uhrum__Siege_Corridor__West_26
+            | SpotId::Uhrum__Siege_Corridor__Western_Cache
             | SpotId::Uhrum__West_Entrance__East_26
             | SpotId::Uhrum__West_Entrance__East_28
             | SpotId::Uhrum__West_Entrance__Gate_Switch
@@ -8384,7 +8463,6 @@ impl World {
                 Item::Aansur
                     | Item::Amagi_Stronghold_Left_Wall
                     | Item::Carnelian_Ring
-                    | Item::Compass
                     | Item::Dangerous_Ideas
                     | Item::Double_Axe
                     | Item::Drone_Melee_Damage_3
@@ -9852,6 +9930,30 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
             item: Item::Refill,
             price: Currency::Free,
             time: 0,
+            exit_id: None,
+        },
+        LocationId::Uhrum__Siege_Corridor__Western_Cache__Core => Location {
+            id: LocationId::Uhrum__Siege_Corridor__Western_Cache__Core,
+            canonical: CanonId::None,
+            item: Item::Power_Core,
+            price: Currency::Free,
+            time: 0,
+            exit_id: None,
+        },
+        LocationId::Uhrum__Siege_Corridor__Center_Box__Box => Location {
+            id: LocationId::Uhrum__Siege_Corridor__Center_Box__Box,
+            canonical: CanonId::None,
+            item: Item::Health_Fragment,
+            price: Currency::Free,
+            time: 1500,
+            exit_id: None,
+        },
+        LocationId::Uhrum__Siege_Corridor__Upper_Rock_Item__Urn => Location {
+            id: LocationId::Uhrum__Siege_Corridor__Upper_Rock_Item__Urn,
+            canonical: CanonId::Fast_Travel,
+            item: Item::Fast_Travel,
+            price: Currency::Free,
+            time: 5500,
             exit_id: None,
         },
     }
@@ -15953,6 +16055,167 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
             id: ExitId::Uhrum__West_Entrance__East_28__ex__Glitchy_Corridor__West_28_1,
             time: 1350,
             dest: SpotId::Uhrum__Glitchy_Corridor__West_28,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Uhrum__Siege_Corridor__West_26__ex__West_Entrance__East_26_1 => Exit {
+            id: ExitId::Uhrum__Siege_Corridor__West_26__ex__West_Entrance__East_26_1,
+            time: 1350,
+            dest: SpotId::Uhrum__West_Entrance__East_26,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Uhrum__Siege_Corridor__Western_Cache__ex__Northwest_Platform_1 => Exit {
+            id: ExitId::Uhrum__Siege_Corridor__Western_Cache__ex__Northwest_Platform_1,
+            time: 2280,
+            dest: SpotId::Uhrum__Siege_Corridor__Northwest_Platform,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Uhrum__Siege_Corridor__Western_Cache__ex__Northwest_Door_1 => Exit {
+            id: ExitId::Uhrum__Siege_Corridor__Western_Cache__ex__Northwest_Door_1,
+            time: 1403,
+            dest: SpotId::Uhrum__Siege_Corridor__Northwest_Door,
+            price: Currency::Energy(40),
+            loc_id: None,
+        },
+        ExitId::Uhrum__Siege_Corridor__Western_Rock__ex__Northwest_Platform_1 => Exit {
+            id: ExitId::Uhrum__Siege_Corridor__Western_Rock__ex__Northwest_Platform_1,
+            time: 1578,
+            dest: SpotId::Uhrum__Siege_Corridor__Northwest_Platform,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Uhrum__Siege_Corridor__Northwest_Door__ex__Western_Cache_1 => Exit {
+            id: ExitId::Uhrum__Siege_Corridor__Northwest_Door__ex__Western_Cache_1,
+            time: 1403,
+            dest: SpotId::Uhrum__Siege_Corridor__Western_Cache,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Uhrum__Siege_Corridor__Northwest_Door__ex__Giguna__Vertical_Interchange__South_1 => Exit {
+            id: ExitId::Uhrum__Siege_Corridor__Northwest_Door__ex__Giguna__Vertical_Interchange__South_1,
+            time: 1600,
+            dest: SpotId::Giguna__Vertical_Interchange__South,
+            price: Currency::Energy(60),
+            loc_id: None,
+        },
+        ExitId::Uhrum__Siege_Corridor__Northwest_Platform__ex__Western_Cache_1 => Exit {
+            id: ExitId::Uhrum__Siege_Corridor__Northwest_Platform__ex__Western_Cache_1,
+            time: 2280,
+            dest: SpotId::Uhrum__Siege_Corridor__Western_Cache,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Uhrum__Siege_Corridor__Northwest_Platform__ex__Northwest_Door_1 => Exit {
+            id: ExitId::Uhrum__Siege_Corridor__Northwest_Platform__ex__Northwest_Door_1,
+            time: 1000,
+            dest: SpotId::Uhrum__Siege_Corridor__Northwest_Door,
+            price: Currency::Energy(20),
+            loc_id: None,
+        },
+        ExitId::Uhrum__Siege_Corridor__West_Greenery__ex__West_Grassy_Ledge_1 => Exit {
+            id: ExitId::Uhrum__Siege_Corridor__West_Greenery__ex__West_Grassy_Ledge_1,
+            time: 1200,
+            dest: SpotId::Uhrum__Siege_Corridor__West_Grassy_Ledge,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Uhrum__Siege_Corridor__Center_Platform_3__ex__Upper_Rock_West_1 => Exit {
+            id: ExitId::Uhrum__Siege_Corridor__Center_Platform_3__ex__Upper_Rock_West_1,
+            time: 2105,
+            dest: SpotId::Uhrum__Siege_Corridor__Upper_Rock_West,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Uhrum__Siege_Corridor__Center_Valley__ex__Center_East_1 => Exit {
+            id: ExitId::Uhrum__Siege_Corridor__Center_Valley__ex__Center_East_1,
+            time: 1200,
+            dest: SpotId::Uhrum__Siege_Corridor__Center_East,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Uhrum__Siege_Corridor__Center_Valley__ex__Center_East_2 => Exit {
+            id: ExitId::Uhrum__Siege_Corridor__Center_Valley__ex__Center_East_2,
+            time: 600,
+            dest: SpotId::Uhrum__Siege_Corridor__Center_East,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Uhrum__Siege_Corridor__Mideast_Tree__ex__Upper_Rock_West_1 => Exit {
+            id: ExitId::Uhrum__Siege_Corridor__Mideast_Tree__ex__Upper_Rock_West_1,
+            time: 1200,
+            dest: SpotId::Uhrum__Siege_Corridor__Upper_Rock_West,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Uhrum__Siege_Corridor__Mideast_Tree__ex__East_Hill_1 => Exit {
+            id: ExitId::Uhrum__Siege_Corridor__Mideast_Tree__ex__East_Hill_1,
+            time: 3333,
+            dest: SpotId::Uhrum__Siege_Corridor__East_Hill,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Uhrum__Siege_Corridor__Upper_Rock_West__ex__Upper_Rock_Item_1 => Exit {
+            id: ExitId::Uhrum__Siege_Corridor__Upper_Rock_West__ex__Upper_Rock_Item_1,
+            time: 1403,
+            dest: SpotId::Uhrum__Siege_Corridor__Upper_Rock_Item,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Uhrum__Siege_Corridor__Upper_Rock_Item__ex__Upper_Rock_West_1 => Exit {
+            id: ExitId::Uhrum__Siege_Corridor__Upper_Rock_Item__ex__Upper_Rock_West_1,
+            time: 1403,
+            dest: SpotId::Uhrum__Siege_Corridor__Upper_Rock_West,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Uhrum__Siege_Corridor__Pond__ex__East_Hill_1 => Exit {
+            id: ExitId::Uhrum__Siege_Corridor__Pond__ex__East_Hill_1,
+            time: 3000,
+            dest: SpotId::Uhrum__Siege_Corridor__East_Hill,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Uhrum__Siege_Corridor__Pond__ex__East_Hill_2 => Exit {
+            id: ExitId::Uhrum__Siege_Corridor__Pond__ex__East_Hill_2,
+            time: 2400,
+            dest: SpotId::Uhrum__Siege_Corridor__East_Hill,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Uhrum__Siege_Corridor__East_Hill__ex__Mideast_Tree_1 => Exit {
+            id: ExitId::Uhrum__Siege_Corridor__East_Hill__ex__Mideast_Tree_1,
+            time: 3333,
+            dest: SpotId::Uhrum__Siege_Corridor__Mideast_Tree,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Uhrum__Siege_Corridor__East_Hill__ex__Upper_Rock_East_1 => Exit {
+            id: ExitId::Uhrum__Siege_Corridor__East_Hill__ex__Upper_Rock_East_1,
+            time: 600,
+            dest: SpotId::Uhrum__Siege_Corridor__Upper_Rock_East,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Uhrum__Siege_Corridor__East_Hill__ex__Upper_Rock_East_2 => Exit {
+            id: ExitId::Uhrum__Siege_Corridor__East_Hill__ex__Upper_Rock_East_2,
+            time: 600,
+            dest: SpotId::Uhrum__Siege_Corridor__Upper_Rock_East,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Uhrum__Siege_Corridor__East_Hill__ex__Upper_Rock_East_3 => Exit {
+            id: ExitId::Uhrum__Siege_Corridor__East_Hill__ex__Upper_Rock_East_3,
+            time: 600,
+            dest: SpotId::Uhrum__Siege_Corridor__Upper_Rock_East,
+            price: Currency::Energy(20),
+            loc_id: None,
+        },
+        ExitId::Uhrum__Siege_Corridor__East_25__ex__Waterfalls__West_25_1 => Exit {
+            id: ExitId::Uhrum__Siege_Corridor__East_25__ex__Waterfalls__West_25_1,
+            time: 1350,
+            dest: SpotId::Uhrum__Waterfalls__West_25,
             price: Currency::Free,
             loc_id: None,
         },
@@ -29381,7 +29644,8 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             exits: Range {
-                start: 0, end: 0,
+                start: ExitId::Uhrum__Siege_Corridor__West_26__ex__West_Entrance__East_26_1.into_usize(),
+                end: ExitId::Uhrum__Siege_Corridor__West_26__ex__West_Entrance__East_26_1.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
@@ -29390,10 +29654,12 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
         SpotId::Uhrum__Siege_Corridor__Western_Cache => Spot {
             id: SpotId::Uhrum__Siege_Corridor__Western_Cache,
             locations: Range {
-                start: 0, end: 0,
+                start: LocationId::Uhrum__Siege_Corridor__Western_Cache__Core.into_usize(),
+                end: LocationId::Uhrum__Siege_Corridor__Western_Cache__Core.into_usize() + 1,
             },
             exits: Range {
-                start: 0, end: 0,
+                start: ExitId::Uhrum__Siege_Corridor__Western_Cache__ex__Northwest_Door_1.into_usize(),
+                end: ExitId::Uhrum__Siege_Corridor__Western_Cache__ex__Northwest_Platform_1.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
@@ -29405,7 +29671,8 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             exits: Range {
-                start: 0, end: 0,
+                start: ExitId::Uhrum__Siege_Corridor__Western_Rock__ex__Northwest_Platform_1.into_usize(),
+                end: ExitId::Uhrum__Siege_Corridor__Western_Rock__ex__Northwest_Platform_1.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
@@ -29417,7 +29684,8 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             exits: Range {
-                start: 0, end: 0,
+                start: ExitId::Uhrum__Siege_Corridor__Northwest_Door__ex__Giguna__Vertical_Interchange__South_1.into_usize(),
+                end: ExitId::Uhrum__Siege_Corridor__Northwest_Door__ex__Western_Cache_1.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
@@ -29429,7 +29697,8 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             exits: Range {
-                start: 0, end: 0,
+                start: ExitId::Uhrum__Siege_Corridor__Northwest_Platform__ex__Northwest_Door_1.into_usize(),
+                end: ExitId::Uhrum__Siege_Corridor__Northwest_Platform__ex__Western_Cache_1.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
@@ -29441,7 +29710,8 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             exits: Range {
-                start: 0, end: 0,
+                start: ExitId::Uhrum__Siege_Corridor__West_Greenery__ex__West_Grassy_Ledge_1.into_usize(),
+                end: ExitId::Uhrum__Siege_Corridor__West_Greenery__ex__West_Grassy_Ledge_1.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
@@ -29461,6 +29731,30 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
         },
         SpotId::Uhrum__Siege_Corridor__West_Rocky_Ledge => Spot {
             id: SpotId::Uhrum__Siege_Corridor__West_Rocky_Ledge,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Uhrum__Siege_Corridor__West_Loop => Spot {
+            id: SpotId::Uhrum__Siege_Corridor__West_Loop,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Uhrum__Siege_Corridor__West_Middle_Tree => Spot {
+            id: SpotId::Uhrum__Siege_Corridor__West_Middle_Tree,
             locations: Range {
                 start: 0, end: 0,
             },
@@ -29501,7 +29795,8 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             exits: Range {
-                start: 0, end: 0,
+                start: ExitId::Uhrum__Siege_Corridor__Center_Platform_3__ex__Upper_Rock_West_1.into_usize(),
+                end: ExitId::Uhrum__Siege_Corridor__Center_Platform_3__ex__Upper_Rock_West_1.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
@@ -29522,10 +29817,24 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
         SpotId::Uhrum__Siege_Corridor__Center_Box => Spot {
             id: SpotId::Uhrum__Siege_Corridor__Center_Box,
             locations: Range {
-                start: 0, end: 0,
+                start: LocationId::Uhrum__Siege_Corridor__Center_Box__Box.into_usize(),
+                end: LocationId::Uhrum__Siege_Corridor__Center_Box__Box.into_usize() + 1,
             },
             exits: Range {
                 start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Uhrum__Siege_Corridor__Center_Valley => Spot {
+            id: SpotId::Uhrum__Siege_Corridor__Center_Valley,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Uhrum__Siege_Corridor__Center_Valley__ex__Center_East_1.into_usize(),
+                end: ExitId::Uhrum__Siege_Corridor__Center_Valley__ex__Center_East_2.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
@@ -29543,13 +29852,27 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
         },
+        SpotId::Uhrum__Siege_Corridor__Mideast_Tree => Spot {
+            id: SpotId::Uhrum__Siege_Corridor__Mideast_Tree,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Uhrum__Siege_Corridor__Mideast_Tree__ex__East_Hill_1.into_usize(),
+                end: ExitId::Uhrum__Siege_Corridor__Mideast_Tree__ex__Upper_Rock_West_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
         SpotId::Uhrum__Siege_Corridor__Upper_Rock_West => Spot {
             id: SpotId::Uhrum__Siege_Corridor__Upper_Rock_West,
             locations: Range {
                 start: 0, end: 0,
             },
             exits: Range {
-                start: 0, end: 0,
+                start: ExitId::Uhrum__Siege_Corridor__Upper_Rock_West__ex__Upper_Rock_Item_1.into_usize(),
+                end: ExitId::Uhrum__Siege_Corridor__Upper_Rock_West__ex__Upper_Rock_Item_1.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
@@ -29558,10 +29881,12 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
         SpotId::Uhrum__Siege_Corridor__Upper_Rock_Item => Spot {
             id: SpotId::Uhrum__Siege_Corridor__Upper_Rock_Item,
             locations: Range {
-                start: 0, end: 0,
+                start: LocationId::Uhrum__Siege_Corridor__Upper_Rock_Item__Urn.into_usize(),
+                end: LocationId::Uhrum__Siege_Corridor__Upper_Rock_Item__Urn.into_usize() + 1,
             },
             exits: Range {
-                start: 0, end: 0,
+                start: ExitId::Uhrum__Siege_Corridor__Upper_Rock_Item__ex__Upper_Rock_West_1.into_usize(),
+                end: ExitId::Uhrum__Siege_Corridor__Upper_Rock_Item__ex__Upper_Rock_West_1.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
@@ -29585,7 +29910,8 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             exits: Range {
-                start: 0, end: 0,
+                start: ExitId::Uhrum__Siege_Corridor__Pond__ex__East_Hill_1.into_usize(),
+                end: ExitId::Uhrum__Siege_Corridor__Pond__ex__East_Hill_2.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
@@ -29597,7 +29923,8 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             exits: Range {
-                start: 0, end: 0,
+                start: ExitId::Uhrum__Siege_Corridor__East_Hill__ex__Mideast_Tree_1.into_usize(),
+                end: ExitId::Uhrum__Siege_Corridor__East_Hill__ex__Upper_Rock_East_3.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
@@ -29609,7 +29936,8 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             exits: Range {
-                start: 0, end: 0,
+                start: ExitId::Uhrum__Siege_Corridor__East_25__ex__Waterfalls__West_25_1.into_usize(),
+                end: ExitId::Uhrum__Siege_Corridor__East_25__ex__Waterfalls__West_25_1.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,

@@ -52,6 +52,7 @@ base_movements:
       water: false
     x: .285  # about 3.5s per grid x-unit
     jump: .6  # can vary with jump height, so take a rough estimate of usual
+    # max jump height is around .2, with Anuman it reaches .3... TODO: real measurement
     # other speeds apply
 
 movements:
@@ -317,7 +318,7 @@ helpers:
   $all_weapons:itemList: >
     [Ice_Axe, Bronze_Axe]
   $other_items:itemList: >
-    [Boomerang, Power_Matrix]
+    [Compass, Boomerang, Power_Matrix]
   $all_urns:itemList: >
     [Amashilama, Ledge_Grab, Infect, Remote_Drone, Shockwave, Wall_Climb, Slingshot_Hook, Breach_Sight]
   # To be added: 5 Flask, 3 Big_Flask, Dangerous_Ideas, Double_Axe, Drone_Hover, Royal_Dagger, Udusan

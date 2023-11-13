@@ -83,6 +83,10 @@ pub fn access_amagi_west_lake_surface_wall(ctx: &Context) -> bool {
     // Amagi_West_Lake_Surface_Wall
     ctx.has(Item::Amagi_West_Lake_Surface_Wall)
 }
+pub fn access_anuman_and_grab(ctx: &Context) -> bool {
+    // Anuman and $grab
+    (ctx.has(Item::Anuman) && helper__grab!(ctx))
+}
 pub fn access_apocalypse_bomb(ctx: &Context) -> bool {
     // Apocalypse_Bomb
     ctx.has(Item::Apocalypse_Bomb)

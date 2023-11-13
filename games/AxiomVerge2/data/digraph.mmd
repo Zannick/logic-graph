@@ -1276,12 +1276,16 @@ subgraph Uhrum
         Uhrum__Siege_Corridor__West_Greenery(West Greenery);
         Uhrum__Siege_Corridor__West_Grassy_Ledge(West Grassy Ledge);
         Uhrum__Siege_Corridor__West_Rocky_Ledge(West Rocky Ledge);
+        Uhrum__Siege_Corridor__West_Loop(West Loop);
+        Uhrum__Siege_Corridor__West_Middle_Tree(West Middle Tree);
         Uhrum__Siege_Corridor__Center_West(Center West);
         Uhrum__Siege_Corridor__Center_Platform_1(Center Platform 1);
         Uhrum__Siege_Corridor__Center_Platform_3(Center Platform 3);
         Uhrum__Siege_Corridor__Center_East(Center East);
         Uhrum__Siege_Corridor__Center_Box(Center Box);
+        Uhrum__Siege_Corridor__Center_Valley(Center Valley);
         Uhrum__Siege_Corridor__Mideast_Hill(Mideast Hill);
+        Uhrum__Siege_Corridor__Mideast_Tree(Mideast Tree);
         Uhrum__Siege_Corridor__Upper_Rock_West(Upper Rock West);
         Uhrum__Siege_Corridor__Upper_Rock_Item(Upper Rock Item);
         Uhrum__Siege_Corridor__Upper_Rock_East(Upper Rock East);
@@ -1840,8 +1844,22 @@ Menu__Upgrade_Menu__Combat <--> Menu__Upgrade_Menu__Physiology
 Menu__Upgrade_Menu__Drone <--> Menu__Upgrade_Menu__Infection
 Menu__Upgrade_Menu__Drone <--> Menu__Upgrade_Menu__Physiology
 Menu__Upgrade_Menu__Infection <--> Menu__Upgrade_Menu__Physiology
+Uhrum__Siege_Corridor__Center_Platform_3 --> Uhrum__Siege_Corridor__Upper_Rock_West
+Uhrum__Siege_Corridor__Center_Valley --> Uhrum__Siege_Corridor__Center_East
+Uhrum__Siege_Corridor__East_25 --> Uhrum__Waterfalls__West_25
+Uhrum__Siege_Corridor__East_Hill <--> Uhrum__Siege_Corridor__Mideast_Tree
+Uhrum__Siege_Corridor__East_Hill --> Uhrum__Siege_Corridor__Upper_Rock_East
+Uhrum__Siege_Corridor__Mideast_Tree --> Uhrum__Siege_Corridor__Upper_Rock_West
+Uhrum__Siege_Corridor__Northwest_Door --> Giguna__Vertical_Interchange__South
+Uhrum__Siege_Corridor__Northwest_Door <--> Uhrum__Siege_Corridor__Western_Cache
+Uhrum__Siege_Corridor__Northwest_Platform --> Uhrum__Siege_Corridor__Northwest_Door
+Uhrum__Siege_Corridor__Northwest_Platform <--> Uhrum__Siege_Corridor__Western_Cache
+Uhrum__Siege_Corridor__Pond --> Uhrum__Siege_Corridor__East_Hill
+Uhrum__Siege_Corridor__Upper_Rock_Item <--> Uhrum__Siege_Corridor__Upper_Rock_West
+Uhrum__Siege_Corridor__West_26 <--> Uhrum__West_Entrance__East_26
+Uhrum__Siege_Corridor__West_Greenery --> Uhrum__Siege_Corridor__West_Grassy_Ledge
+Uhrum__Siege_Corridor__Western_Rock --> Uhrum__Siege_Corridor__Northwest_Platform
 Uhrum__West_Entrance__Clear_Passage --> Uhrum__West_Entrance__Portal_Stand
-Uhrum__West_Entrance__East_26 --> Uhrum__Siege_Corridor__West_26
 Uhrum__West_Entrance__East_28 --> Uhrum__Glitchy_Corridor__West_28
 Uhrum__West_Entrance__East_28 --> Uhrum__West_Entrance__Lower_Path_Tree_Ledge
 Uhrum__West_Entrance__Inner_Dais --> Uhrum__West_Entrance__Top_West_Ledge

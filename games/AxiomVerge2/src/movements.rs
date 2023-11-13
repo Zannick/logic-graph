@@ -6184,6 +6184,316 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
         }
         (
             [false],
+            SpotId::Uhrum__Siege_Corridor__Center_Box,
+            SpotId::Uhrum__Siege_Corridor__Center_Valley,
+        ) => 3000,
+        // [0.2, 1.929825]
+        (
+            [false],
+            SpotId::Uhrum__Siege_Corridor__Center_East,
+            SpotId::Uhrum__Siege_Corridor__Center_Box,
+        ) => 2129,
+        (
+            [false],
+            SpotId::Uhrum__Siege_Corridor__Center_East,
+            SpotId::Uhrum__Siege_Corridor__Mideast_Hill,
+        ) => 1052,
+        (
+            [false],
+            SpotId::Uhrum__Siege_Corridor__Center_Platform_1,
+            SpotId::Uhrum__Siege_Corridor__Center_East,
+        ) => 1052,
+        (
+            [false],
+            SpotId::Uhrum__Siege_Corridor__Center_Platform_1,
+            SpotId::Uhrum__Siege_Corridor__Center_Platform_3,
+        ) => 1754,
+        (
+            [false],
+            SpotId::Uhrum__Siege_Corridor__Center_Platform_1,
+            SpotId::Uhrum__Siege_Corridor__Center_West,
+        ) => 3157,
+        (
+            [false],
+            SpotId::Uhrum__Siege_Corridor__Center_Platform_3,
+            SpotId::Uhrum__Siege_Corridor__Center_Platform_1,
+        ) => 1754,
+        (
+            [false],
+            SpotId::Uhrum__Siege_Corridor__Center_Platform_3,
+            SpotId::Uhrum__Siege_Corridor__Mideast_Hill,
+        ) => 350,
+        (
+            [false],
+            SpotId::Uhrum__Siege_Corridor__Center_Platform_3,
+            SpotId::Uhrum__Siege_Corridor__Mideast_Tree,
+        ) => 1228,
+        (
+            [false],
+            SpotId::Uhrum__Siege_Corridor__Center_Valley,
+            SpotId::Uhrum__Siege_Corridor__Mideast_Hill,
+        ) => 1200,
+        (
+            [false],
+            SpotId::Uhrum__Siege_Corridor__Center_West,
+            SpotId::Uhrum__Siege_Corridor__Center_Platform_1,
+        ) => 3157,
+        (
+            [false],
+            SpotId::Uhrum__Siege_Corridor__Center_West,
+            SpotId::Uhrum__Siege_Corridor__West_Grassy_Ledge,
+        ) => 2456,
+        (
+            [false],
+            SpotId::Uhrum__Siege_Corridor__Center_West,
+            SpotId::Uhrum__Siege_Corridor__West_Middle_Tree,
+        ) => 1052,
+        (
+            [false],
+            SpotId::Uhrum__Siege_Corridor__Center_West,
+            SpotId::Uhrum__Siege_Corridor__West_Rocky_Ledge,
+        ) => 2982,
+        (
+            [false],
+            SpotId::Uhrum__Siege_Corridor__East_25,
+            SpotId::Uhrum__Siege_Corridor__Mideast_Hill,
+        ) => 5087,
+        (
+            [false],
+            SpotId::Uhrum__Siege_Corridor__East_Hill,
+            SpotId::Uhrum__Siege_Corridor__East_25,
+        ) => 877,
+        (
+            [false],
+            SpotId::Uhrum__Siege_Corridor__East_Hill,
+            SpotId::Uhrum__Siege_Corridor__Pond,
+        ) => 1052,
+        (
+            [false],
+            SpotId::Uhrum__Siege_Corridor__Mideast_Hill,
+            SpotId::Uhrum__Siege_Corridor__Center_East,
+        ) => 1052,
+        (
+            [false],
+            SpotId::Uhrum__Siege_Corridor__Mideast_Hill,
+            SpotId::Uhrum__Siege_Corridor__Center_Platform_3,
+        ) => 600,
+        (
+            [false],
+            SpotId::Uhrum__Siege_Corridor__Mideast_Hill,
+            SpotId::Uhrum__Siege_Corridor__Center_Valley,
+        ) => 526,
+        (
+            [false],
+            SpotId::Uhrum__Siege_Corridor__Mideast_Tree,
+            SpotId::Uhrum__Siege_Corridor__Center_Platform_3,
+        ) => 1228,
+        (
+            [false],
+            SpotId::Uhrum__Siege_Corridor__Mideast_Tree,
+            SpotId::Uhrum__Siege_Corridor__Mideast_Hill,
+        ) => 877,
+        (
+            [false],
+            SpotId::Uhrum__Siege_Corridor__Mideast_Tree,
+            SpotId::Uhrum__Siege_Corridor__Pond,
+        ) => 2280,
+        (
+            [false],
+            SpotId::Uhrum__Siege_Corridor__Northwest_Door,
+            SpotId::Uhrum__Siege_Corridor__Northwest_Platform,
+        ) => 877,
+        // [1.3, 1.403509]
+        (
+            [false],
+            SpotId::Uhrum__Siege_Corridor__Northwest_Door,
+            SpotId::Uhrum__Siege_Corridor__West_26,
+        ) => 2703,
+        (
+            [false],
+            SpotId::Uhrum__Siege_Corridor__Northwest_Door,
+            SpotId::Uhrum__Siege_Corridor__West_Rocky_Ledge,
+        ) => 2280,
+        (
+            [false],
+            SpotId::Uhrum__Siege_Corridor__Northwest_Door,
+            SpotId::Uhrum__Siege_Corridor__Western_Rock,
+        ) => 800,
+        (
+            [false],
+            SpotId::Uhrum__Siege_Corridor__Northwest_Platform,
+            SpotId::Uhrum__Siege_Corridor__West_26,
+        ) => 2456,
+        (
+            [false],
+            SpotId::Uhrum__Siege_Corridor__Northwest_Platform,
+            SpotId::Uhrum__Siege_Corridor__West_Rocky_Ledge,
+        ) => 1403,
+        (
+            [false],
+            SpotId::Uhrum__Siege_Corridor__Northwest_Platform,
+            SpotId::Uhrum__Siege_Corridor__Western_Rock,
+        ) => 1578,
+        (
+            [false],
+            SpotId::Uhrum__Siege_Corridor__Pond,
+            SpotId::Uhrum__Siege_Corridor__Mideast_Tree,
+        ) => 3000,
+        (
+            [false],
+            SpotId::Uhrum__Siege_Corridor__Upper_Rock_East,
+            SpotId::Uhrum__Siege_Corridor__East_25,
+        ) => 1403,
+        (
+            [false],
+            SpotId::Uhrum__Siege_Corridor__Upper_Rock_East,
+            SpotId::Uhrum__Siege_Corridor__East_Hill,
+        ) => 526,
+        (
+            [false],
+            SpotId::Uhrum__Siege_Corridor__Upper_Rock_East,
+            SpotId::Uhrum__Siege_Corridor__Pond,
+        ) => 1100,
+        (
+            [false],
+            SpotId::Uhrum__Siege_Corridor__Upper_Rock_East,
+            SpotId::Uhrum__Siege_Corridor__Upper_Rock_Item,
+        ) => 600,
+        (
+            [false],
+            SpotId::Uhrum__Siege_Corridor__Upper_Rock_Item,
+            SpotId::Uhrum__Siege_Corridor__Upper_Rock_East,
+        ) => 526,
+        (
+            [false],
+            SpotId::Uhrum__Siege_Corridor__Upper_Rock_West,
+            SpotId::Uhrum__Siege_Corridor__Center_Platform_3,
+        ) => 2105,
+        (
+            [false],
+            SpotId::Uhrum__Siege_Corridor__Upper_Rock_West,
+            SpotId::Uhrum__Siege_Corridor__Mideast_Hill,
+        ) => 1754,
+        (
+            [false],
+            SpotId::Uhrum__Siege_Corridor__Upper_Rock_West,
+            SpotId::Uhrum__Siege_Corridor__Mideast_Tree,
+        ) => 877,
+        (
+            [false],
+            SpotId::Uhrum__Siege_Corridor__Upper_Rock_West,
+            SpotId::Uhrum__Siege_Corridor__Pond,
+        ) => 1403,
+        (
+            [false],
+            SpotId::Uhrum__Siege_Corridor__West_26,
+            SpotId::Uhrum__Siege_Corridor__West_Greenery,
+        ) => 4035,
+        (
+            [false],
+            SpotId::Uhrum__Siege_Corridor__West_Grassy_Ledge,
+            SpotId::Uhrum__Siege_Corridor__Center_West,
+        ) => 2456,
+        (
+            [false],
+            SpotId::Uhrum__Siege_Corridor__West_Grassy_Ledge,
+            SpotId::Uhrum__Siege_Corridor__West_26,
+        ) => 4385,
+        (
+            [false],
+            SpotId::Uhrum__Siege_Corridor__West_Grassy_Ledge,
+            SpotId::Uhrum__Siege_Corridor__West_Middle_Tree,
+        ) => 1403,
+        (
+            [false],
+            SpotId::Uhrum__Siege_Corridor__West_Grassy_Ledge,
+            SpotId::Uhrum__Siege_Corridor__West_Rocky_Ledge,
+        ) => 600,
+        (
+            [false],
+            SpotId::Uhrum__Siege_Corridor__West_Greenery,
+            SpotId::Uhrum__Siege_Corridor__West_26,
+        ) => 4035,
+        (
+            [false],
+            SpotId::Uhrum__Siege_Corridor__West_Greenery,
+            SpotId::Uhrum__Siege_Corridor__West_Loop,
+        ) => 3508,
+        (
+            [false],
+            SpotId::Uhrum__Siege_Corridor__West_Loop,
+            SpotId::Uhrum__Siege_Corridor__West_Greenery,
+        ) => 3508,
+        // [1.2, 2.192982]
+        (
+            [false],
+            SpotId::Uhrum__Siege_Corridor__West_Loop,
+            SpotId::Uhrum__Siege_Corridor__West_Middle_Tree,
+        ) => 3392,
+        // [0.701754, 1.8]
+        (
+            [false],
+            SpotId::Uhrum__Siege_Corridor__West_Middle_Tree,
+            SpotId::Uhrum__Siege_Corridor__Center_West,
+        ) => 2501,
+        (
+            [false],
+            SpotId::Uhrum__Siege_Corridor__West_Middle_Tree,
+            SpotId::Uhrum__Siege_Corridor__West_Grassy_Ledge,
+        ) => 1403,
+        (
+            [false],
+            SpotId::Uhrum__Siege_Corridor__West_Middle_Tree,
+            SpotId::Uhrum__Siege_Corridor__West_Rocky_Ledge,
+        ) => 1929,
+        (
+            [false],
+            SpotId::Uhrum__Siege_Corridor__West_Rocky_Ledge,
+            SpotId::Uhrum__Siege_Corridor__Center_West,
+        ) => 2982,
+        (
+            [false],
+            SpotId::Uhrum__Siege_Corridor__West_Rocky_Ledge,
+            SpotId::Uhrum__Siege_Corridor__Northwest_Platform,
+        ) => 1403,
+        (
+            [false],
+            SpotId::Uhrum__Siege_Corridor__West_Rocky_Ledge,
+            SpotId::Uhrum__Siege_Corridor__West_26,
+        ) => 3859,
+        (
+            [false],
+            SpotId::Uhrum__Siege_Corridor__West_Rocky_Ledge,
+            SpotId::Uhrum__Siege_Corridor__West_Grassy_Ledge,
+        ) => 526,
+        (
+            [false],
+            SpotId::Uhrum__Siege_Corridor__West_Rocky_Ledge,
+            SpotId::Uhrum__Siege_Corridor__West_Middle_Tree,
+        ) => 1929,
+        (
+            [false],
+            SpotId::Uhrum__Siege_Corridor__Western_Cache,
+            SpotId::Uhrum__Siege_Corridor__Western_Rock,
+        ) => 701,
+        // [0.526316, 1.403509]
+        (
+            [false],
+            SpotId::Uhrum__Siege_Corridor__Western_Rock,
+            SpotId::Uhrum__Siege_Corridor__West_26,
+        ) => 1929,
+        (
+            [false],
+            SpotId::Uhrum__Siege_Corridor__Western_Rock,
+            SpotId::Uhrum__Siege_Corridor__West_Greenery,
+        ) => 3157,
+        (
+            [false],
+            SpotId::Uhrum__Siege_Corridor__Western_Rock,
+            SpotId::Uhrum__Siege_Corridor__Western_Cache,
+        ) => 1799,
+        (
+            [false],
             SpotId::Uhrum__West_Entrance__Clear_Passage,
             SpotId::Uhrum__West_Entrance__East_26,
         ) => 3508,
@@ -12482,6 +12792,314 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
         }
         (
             [true],
+            SpotId::Uhrum__Siege_Corridor__Center_Box,
+            SpotId::Uhrum__Siege_Corridor__Center_Valley,
+        ) => 3000,
+        // [0.2, 1.929825]
+        (
+            [true],
+            SpotId::Uhrum__Siege_Corridor__Center_East,
+            SpotId::Uhrum__Siege_Corridor__Center_Box,
+        ) => 2129,
+        (
+            [true],
+            SpotId::Uhrum__Siege_Corridor__Center_East,
+            SpotId::Uhrum__Siege_Corridor__Mideast_Hill,
+        ) => 1052,
+        (
+            [true],
+            SpotId::Uhrum__Siege_Corridor__Center_Platform_1,
+            SpotId::Uhrum__Siege_Corridor__Center_East,
+        ) => 1052,
+        (
+            [true],
+            SpotId::Uhrum__Siege_Corridor__Center_Platform_1,
+            SpotId::Uhrum__Siege_Corridor__Center_Platform_3,
+        ) => 1754,
+        (
+            [true],
+            SpotId::Uhrum__Siege_Corridor__Center_Platform_1,
+            SpotId::Uhrum__Siege_Corridor__Center_West,
+        ) => 3157,
+        (
+            [true],
+            SpotId::Uhrum__Siege_Corridor__Center_Platform_3,
+            SpotId::Uhrum__Siege_Corridor__Center_Platform_1,
+        ) => 1754,
+        (
+            [true],
+            SpotId::Uhrum__Siege_Corridor__Center_Platform_3,
+            SpotId::Uhrum__Siege_Corridor__Mideast_Hill,
+        ) => 350,
+        (
+            [true],
+            SpotId::Uhrum__Siege_Corridor__Center_Platform_3,
+            SpotId::Uhrum__Siege_Corridor__Mideast_Tree,
+        ) => 1228,
+        (
+            [true],
+            SpotId::Uhrum__Siege_Corridor__Center_Valley,
+            SpotId::Uhrum__Siege_Corridor__Mideast_Hill,
+        ) => 1200,
+        (
+            [true],
+            SpotId::Uhrum__Siege_Corridor__Center_West,
+            SpotId::Uhrum__Siege_Corridor__Center_Platform_1,
+        ) => 3157,
+        (
+            [true],
+            SpotId::Uhrum__Siege_Corridor__Center_West,
+            SpotId::Uhrum__Siege_Corridor__West_Grassy_Ledge,
+        ) => 2456,
+        (
+            [true],
+            SpotId::Uhrum__Siege_Corridor__Center_West,
+            SpotId::Uhrum__Siege_Corridor__West_Middle_Tree,
+        ) => 1052,
+        (
+            [true],
+            SpotId::Uhrum__Siege_Corridor__Center_West,
+            SpotId::Uhrum__Siege_Corridor__West_Rocky_Ledge,
+        ) => 2982,
+        (
+            [true],
+            SpotId::Uhrum__Siege_Corridor__East_25,
+            SpotId::Uhrum__Siege_Corridor__Mideast_Hill,
+        ) => 5087,
+        (
+            [true],
+            SpotId::Uhrum__Siege_Corridor__East_Hill,
+            SpotId::Uhrum__Siege_Corridor__East_25,
+        ) => 877,
+        ([true], SpotId::Uhrum__Siege_Corridor__East_Hill, SpotId::Uhrum__Siege_Corridor__Pond) => {
+            1052
+        }
+        (
+            [true],
+            SpotId::Uhrum__Siege_Corridor__Mideast_Hill,
+            SpotId::Uhrum__Siege_Corridor__Center_East,
+        ) => 1052,
+        (
+            [true],
+            SpotId::Uhrum__Siege_Corridor__Mideast_Hill,
+            SpotId::Uhrum__Siege_Corridor__Center_Platform_3,
+        ) => 600,
+        (
+            [true],
+            SpotId::Uhrum__Siege_Corridor__Mideast_Hill,
+            SpotId::Uhrum__Siege_Corridor__Center_Valley,
+        ) => 526,
+        (
+            [true],
+            SpotId::Uhrum__Siege_Corridor__Mideast_Tree,
+            SpotId::Uhrum__Siege_Corridor__Center_Platform_3,
+        ) => 1228,
+        (
+            [true],
+            SpotId::Uhrum__Siege_Corridor__Mideast_Tree,
+            SpotId::Uhrum__Siege_Corridor__Mideast_Hill,
+        ) => 877,
+        (
+            [true],
+            SpotId::Uhrum__Siege_Corridor__Mideast_Tree,
+            SpotId::Uhrum__Siege_Corridor__Pond,
+        ) => 2280,
+        (
+            [true],
+            SpotId::Uhrum__Siege_Corridor__Northwest_Door,
+            SpotId::Uhrum__Siege_Corridor__Northwest_Platform,
+        ) => 877,
+        // [1.3, 1.403509]
+        (
+            [true],
+            SpotId::Uhrum__Siege_Corridor__Northwest_Door,
+            SpotId::Uhrum__Siege_Corridor__West_26,
+        ) => 2703,
+        (
+            [true],
+            SpotId::Uhrum__Siege_Corridor__Northwest_Door,
+            SpotId::Uhrum__Siege_Corridor__West_Rocky_Ledge,
+        ) => 2280,
+        (
+            [true],
+            SpotId::Uhrum__Siege_Corridor__Northwest_Door,
+            SpotId::Uhrum__Siege_Corridor__Western_Rock,
+        ) => 800,
+        (
+            [true],
+            SpotId::Uhrum__Siege_Corridor__Northwest_Platform,
+            SpotId::Uhrum__Siege_Corridor__West_26,
+        ) => 2456,
+        (
+            [true],
+            SpotId::Uhrum__Siege_Corridor__Northwest_Platform,
+            SpotId::Uhrum__Siege_Corridor__West_Rocky_Ledge,
+        ) => 1403,
+        (
+            [true],
+            SpotId::Uhrum__Siege_Corridor__Northwest_Platform,
+            SpotId::Uhrum__Siege_Corridor__Western_Rock,
+        ) => 1578,
+        (
+            [true],
+            SpotId::Uhrum__Siege_Corridor__Pond,
+            SpotId::Uhrum__Siege_Corridor__Mideast_Tree,
+        ) => 3000,
+        (
+            [true],
+            SpotId::Uhrum__Siege_Corridor__Upper_Rock_East,
+            SpotId::Uhrum__Siege_Corridor__East_25,
+        ) => 1403,
+        (
+            [true],
+            SpotId::Uhrum__Siege_Corridor__Upper_Rock_East,
+            SpotId::Uhrum__Siege_Corridor__East_Hill,
+        ) => 526,
+        (
+            [true],
+            SpotId::Uhrum__Siege_Corridor__Upper_Rock_East,
+            SpotId::Uhrum__Siege_Corridor__Pond,
+        ) => 1100,
+        (
+            [true],
+            SpotId::Uhrum__Siege_Corridor__Upper_Rock_East,
+            SpotId::Uhrum__Siege_Corridor__Upper_Rock_Item,
+        ) => 600,
+        (
+            [true],
+            SpotId::Uhrum__Siege_Corridor__Upper_Rock_Item,
+            SpotId::Uhrum__Siege_Corridor__Upper_Rock_East,
+        ) => 526,
+        (
+            [true],
+            SpotId::Uhrum__Siege_Corridor__Upper_Rock_West,
+            SpotId::Uhrum__Siege_Corridor__Center_Platform_3,
+        ) => 2105,
+        (
+            [true],
+            SpotId::Uhrum__Siege_Corridor__Upper_Rock_West,
+            SpotId::Uhrum__Siege_Corridor__Mideast_Hill,
+        ) => 1754,
+        (
+            [true],
+            SpotId::Uhrum__Siege_Corridor__Upper_Rock_West,
+            SpotId::Uhrum__Siege_Corridor__Mideast_Tree,
+        ) => 877,
+        (
+            [true],
+            SpotId::Uhrum__Siege_Corridor__Upper_Rock_West,
+            SpotId::Uhrum__Siege_Corridor__Pond,
+        ) => 1403,
+        (
+            [true],
+            SpotId::Uhrum__Siege_Corridor__West_26,
+            SpotId::Uhrum__Siege_Corridor__West_Greenery,
+        ) => 4035,
+        (
+            [true],
+            SpotId::Uhrum__Siege_Corridor__West_Grassy_Ledge,
+            SpotId::Uhrum__Siege_Corridor__Center_West,
+        ) => 2456,
+        (
+            [true],
+            SpotId::Uhrum__Siege_Corridor__West_Grassy_Ledge,
+            SpotId::Uhrum__Siege_Corridor__West_26,
+        ) => 4385,
+        (
+            [true],
+            SpotId::Uhrum__Siege_Corridor__West_Grassy_Ledge,
+            SpotId::Uhrum__Siege_Corridor__West_Middle_Tree,
+        ) => 1403,
+        (
+            [true],
+            SpotId::Uhrum__Siege_Corridor__West_Grassy_Ledge,
+            SpotId::Uhrum__Siege_Corridor__West_Rocky_Ledge,
+        ) => 600,
+        (
+            [true],
+            SpotId::Uhrum__Siege_Corridor__West_Greenery,
+            SpotId::Uhrum__Siege_Corridor__West_26,
+        ) => 4035,
+        (
+            [true],
+            SpotId::Uhrum__Siege_Corridor__West_Greenery,
+            SpotId::Uhrum__Siege_Corridor__West_Loop,
+        ) => 3508,
+        (
+            [true],
+            SpotId::Uhrum__Siege_Corridor__West_Loop,
+            SpotId::Uhrum__Siege_Corridor__West_Greenery,
+        ) => 3508,
+        // [1.2, 2.192982]
+        (
+            [true],
+            SpotId::Uhrum__Siege_Corridor__West_Loop,
+            SpotId::Uhrum__Siege_Corridor__West_Middle_Tree,
+        ) => 3392,
+        // [0.701754, 1.8]
+        (
+            [true],
+            SpotId::Uhrum__Siege_Corridor__West_Middle_Tree,
+            SpotId::Uhrum__Siege_Corridor__Center_West,
+        ) => 2501,
+        (
+            [true],
+            SpotId::Uhrum__Siege_Corridor__West_Middle_Tree,
+            SpotId::Uhrum__Siege_Corridor__West_Grassy_Ledge,
+        ) => 1403,
+        (
+            [true],
+            SpotId::Uhrum__Siege_Corridor__West_Middle_Tree,
+            SpotId::Uhrum__Siege_Corridor__West_Rocky_Ledge,
+        ) => 1929,
+        (
+            [true],
+            SpotId::Uhrum__Siege_Corridor__West_Rocky_Ledge,
+            SpotId::Uhrum__Siege_Corridor__Center_West,
+        ) => 2982,
+        (
+            [true],
+            SpotId::Uhrum__Siege_Corridor__West_Rocky_Ledge,
+            SpotId::Uhrum__Siege_Corridor__Northwest_Platform,
+        ) => 1403,
+        (
+            [true],
+            SpotId::Uhrum__Siege_Corridor__West_Rocky_Ledge,
+            SpotId::Uhrum__Siege_Corridor__West_26,
+        ) => 3859,
+        (
+            [true],
+            SpotId::Uhrum__Siege_Corridor__West_Rocky_Ledge,
+            SpotId::Uhrum__Siege_Corridor__West_Grassy_Ledge,
+        ) => 526,
+        (
+            [true],
+            SpotId::Uhrum__Siege_Corridor__West_Rocky_Ledge,
+            SpotId::Uhrum__Siege_Corridor__West_Middle_Tree,
+        ) => 1929,
+        (
+            [true],
+            SpotId::Uhrum__Siege_Corridor__Western_Cache,
+            SpotId::Uhrum__Siege_Corridor__Western_Rock,
+        ) => 701,
+        // [0.526316, 1.403509]
+        (
+            [true],
+            SpotId::Uhrum__Siege_Corridor__Western_Rock,
+            SpotId::Uhrum__Siege_Corridor__West_26,
+        ) => 1929,
+        (
+            [true],
+            SpotId::Uhrum__Siege_Corridor__Western_Rock,
+            SpotId::Uhrum__Siege_Corridor__West_Greenery,
+        ) => 3157,
+        (
+            [true],
+            SpotId::Uhrum__Siege_Corridor__Western_Rock,
+            SpotId::Uhrum__Siege_Corridor__Western_Cache,
+        ) => 1799,
+        (
+            [true],
             SpotId::Uhrum__West_Entrance__Clear_Passage,
             SpotId::Uhrum__West_Entrance__East_26,
         ) => 3508,
@@ -16716,6 +17334,234 @@ pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
             SpotId::Uhrum__West_Entrance__Lower_Path_Tree_Ledge,
             SpotId::Uhrum__West_Entrance__East_28,
         ) => true,
+        (SpotId::Uhrum__Siege_Corridor__West_26, SpotId::Uhrum__Siege_Corridor__West_Greenery) => {
+            true
+        }
+        (
+            SpotId::Uhrum__Siege_Corridor__Western_Cache,
+            SpotId::Uhrum__Siege_Corridor__Western_Rock,
+        ) => true,
+        (
+            SpotId::Uhrum__Siege_Corridor__Western_Rock,
+            SpotId::Uhrum__Siege_Corridor__Western_Cache,
+        ) => true,
+        (SpotId::Uhrum__Siege_Corridor__Western_Rock, SpotId::Uhrum__Siege_Corridor__West_26) => {
+            true
+        }
+        (
+            SpotId::Uhrum__Siege_Corridor__Western_Rock,
+            SpotId::Uhrum__Siege_Corridor__West_Greenery,
+        ) => true,
+        (
+            SpotId::Uhrum__Siege_Corridor__Northwest_Door,
+            SpotId::Uhrum__Siege_Corridor__Western_Rock,
+        ) => true,
+        (SpotId::Uhrum__Siege_Corridor__Northwest_Door, SpotId::Uhrum__Siege_Corridor__West_26) => {
+            true
+        }
+        (
+            SpotId::Uhrum__Siege_Corridor__Northwest_Door,
+            SpotId::Uhrum__Siege_Corridor__Northwest_Platform,
+        ) => true,
+        (
+            SpotId::Uhrum__Siege_Corridor__Northwest_Door,
+            SpotId::Uhrum__Siege_Corridor__West_Rocky_Ledge,
+        ) => true,
+        (
+            SpotId::Uhrum__Siege_Corridor__Northwest_Platform,
+            SpotId::Uhrum__Siege_Corridor__Western_Rock,
+        ) => true,
+        (
+            SpotId::Uhrum__Siege_Corridor__Northwest_Platform,
+            SpotId::Uhrum__Siege_Corridor__West_26,
+        ) => true,
+        (
+            SpotId::Uhrum__Siege_Corridor__Northwest_Platform,
+            SpotId::Uhrum__Siege_Corridor__West_Rocky_Ledge,
+        ) => true,
+        (SpotId::Uhrum__Siege_Corridor__West_Greenery, SpotId::Uhrum__Siege_Corridor__West_26) => {
+            true
+        }
+        (
+            SpotId::Uhrum__Siege_Corridor__West_Greenery,
+            SpotId::Uhrum__Siege_Corridor__West_Loop,
+        ) => true,
+        (
+            SpotId::Uhrum__Siege_Corridor__West_Grassy_Ledge,
+            SpotId::Uhrum__Siege_Corridor__West_26,
+        ) => true,
+        (
+            SpotId::Uhrum__Siege_Corridor__West_Grassy_Ledge,
+            SpotId::Uhrum__Siege_Corridor__West_Rocky_Ledge,
+        ) => true,
+        (
+            SpotId::Uhrum__Siege_Corridor__West_Grassy_Ledge,
+            SpotId::Uhrum__Siege_Corridor__Center_West,
+        ) => true,
+        (
+            SpotId::Uhrum__Siege_Corridor__West_Grassy_Ledge,
+            SpotId::Uhrum__Siege_Corridor__West_Middle_Tree,
+        ) => true,
+        (
+            SpotId::Uhrum__Siege_Corridor__West_Rocky_Ledge,
+            SpotId::Uhrum__Siege_Corridor__West_26,
+        ) => true,
+        (
+            SpotId::Uhrum__Siege_Corridor__West_Rocky_Ledge,
+            SpotId::Uhrum__Siege_Corridor__Northwest_Platform,
+        ) => true,
+        (
+            SpotId::Uhrum__Siege_Corridor__West_Rocky_Ledge,
+            SpotId::Uhrum__Siege_Corridor__Center_West,
+        ) => true,
+        (
+            SpotId::Uhrum__Siege_Corridor__West_Rocky_Ledge,
+            SpotId::Uhrum__Siege_Corridor__West_Grassy_Ledge,
+        ) => true,
+        (
+            SpotId::Uhrum__Siege_Corridor__West_Rocky_Ledge,
+            SpotId::Uhrum__Siege_Corridor__West_Middle_Tree,
+        ) => true,
+        (
+            SpotId::Uhrum__Siege_Corridor__West_Loop,
+            SpotId::Uhrum__Siege_Corridor__West_Greenery,
+        ) => true,
+        (
+            SpotId::Uhrum__Siege_Corridor__West_Loop,
+            SpotId::Uhrum__Siege_Corridor__West_Middle_Tree,
+        ) => true,
+        (
+            SpotId::Uhrum__Siege_Corridor__West_Middle_Tree,
+            SpotId::Uhrum__Siege_Corridor__West_Grassy_Ledge,
+        ) => true,
+        (
+            SpotId::Uhrum__Siege_Corridor__West_Middle_Tree,
+            SpotId::Uhrum__Siege_Corridor__West_Rocky_Ledge,
+        ) => true,
+        (
+            SpotId::Uhrum__Siege_Corridor__West_Middle_Tree,
+            SpotId::Uhrum__Siege_Corridor__Center_West,
+        ) => true,
+        (
+            SpotId::Uhrum__Siege_Corridor__Center_West,
+            SpotId::Uhrum__Siege_Corridor__West_Middle_Tree,
+        ) => true,
+        (
+            SpotId::Uhrum__Siege_Corridor__Center_West,
+            SpotId::Uhrum__Siege_Corridor__West_Grassy_Ledge,
+        ) => true,
+        (
+            SpotId::Uhrum__Siege_Corridor__Center_West,
+            SpotId::Uhrum__Siege_Corridor__West_Rocky_Ledge,
+        ) => true,
+        (
+            SpotId::Uhrum__Siege_Corridor__Center_West,
+            SpotId::Uhrum__Siege_Corridor__Center_Platform_1,
+        ) => true,
+        (
+            SpotId::Uhrum__Siege_Corridor__Center_Platform_1,
+            SpotId::Uhrum__Siege_Corridor__Center_West,
+        ) => true,
+        (
+            SpotId::Uhrum__Siege_Corridor__Center_Platform_1,
+            SpotId::Uhrum__Siege_Corridor__Center_Platform_3,
+        ) => true,
+        (
+            SpotId::Uhrum__Siege_Corridor__Center_Platform_1,
+            SpotId::Uhrum__Siege_Corridor__Center_East,
+        ) => true,
+        (
+            SpotId::Uhrum__Siege_Corridor__Center_Platform_3,
+            SpotId::Uhrum__Siege_Corridor__Mideast_Hill,
+        ) => true,
+        (
+            SpotId::Uhrum__Siege_Corridor__Center_Platform_3,
+            SpotId::Uhrum__Siege_Corridor__Mideast_Tree,
+        ) => true,
+        (
+            SpotId::Uhrum__Siege_Corridor__Center_Platform_3,
+            SpotId::Uhrum__Siege_Corridor__Center_Platform_1,
+        ) => true,
+        (
+            SpotId::Uhrum__Siege_Corridor__Center_East,
+            SpotId::Uhrum__Siege_Corridor__Center_Platform_1,
+        ) => true,
+        (SpotId::Uhrum__Siege_Corridor__Center_East, SpotId::Uhrum__Siege_Corridor__Center_Box) => {
+            true
+        }
+        (
+            SpotId::Uhrum__Siege_Corridor__Center_East,
+            SpotId::Uhrum__Siege_Corridor__Mideast_Hill,
+        ) => true,
+        (
+            SpotId::Uhrum__Siege_Corridor__Center_Box,
+            SpotId::Uhrum__Siege_Corridor__Center_Valley,
+        ) => true,
+        (
+            SpotId::Uhrum__Siege_Corridor__Center_Valley,
+            SpotId::Uhrum__Siege_Corridor__Mideast_Hill,
+        ) => true,
+        (
+            SpotId::Uhrum__Siege_Corridor__Mideast_Hill,
+            SpotId::Uhrum__Siege_Corridor__Center_Platform_3,
+        ) => true,
+        (
+            SpotId::Uhrum__Siege_Corridor__Mideast_Hill,
+            SpotId::Uhrum__Siege_Corridor__Center_Valley,
+        ) => true,
+        (
+            SpotId::Uhrum__Siege_Corridor__Mideast_Hill,
+            SpotId::Uhrum__Siege_Corridor__Center_East,
+        ) => true,
+        (
+            SpotId::Uhrum__Siege_Corridor__Mideast_Tree,
+            SpotId::Uhrum__Siege_Corridor__Mideast_Hill,
+        ) => true,
+        (SpotId::Uhrum__Siege_Corridor__Mideast_Tree, SpotId::Uhrum__Siege_Corridor__Pond) => true,
+        (
+            SpotId::Uhrum__Siege_Corridor__Mideast_Tree,
+            SpotId::Uhrum__Siege_Corridor__Center_Platform_3,
+        ) => true,
+        (
+            SpotId::Uhrum__Siege_Corridor__Upper_Rock_West,
+            SpotId::Uhrum__Siege_Corridor__Mideast_Tree,
+        ) => true,
+        (
+            SpotId::Uhrum__Siege_Corridor__Upper_Rock_West,
+            SpotId::Uhrum__Siege_Corridor__Mideast_Hill,
+        ) => true,
+        (
+            SpotId::Uhrum__Siege_Corridor__Upper_Rock_West,
+            SpotId::Uhrum__Siege_Corridor__Center_Platform_3,
+        ) => true,
+        (SpotId::Uhrum__Siege_Corridor__Upper_Rock_West, SpotId::Uhrum__Siege_Corridor__Pond) => {
+            true
+        }
+        (
+            SpotId::Uhrum__Siege_Corridor__Upper_Rock_Item,
+            SpotId::Uhrum__Siege_Corridor__Upper_Rock_East,
+        ) => true,
+        (SpotId::Uhrum__Siege_Corridor__Upper_Rock_East, SpotId::Uhrum__Siege_Corridor__Pond) => {
+            true
+        }
+        (
+            SpotId::Uhrum__Siege_Corridor__Upper_Rock_East,
+            SpotId::Uhrum__Siege_Corridor__East_Hill,
+        ) => true,
+        (
+            SpotId::Uhrum__Siege_Corridor__Upper_Rock_East,
+            SpotId::Uhrum__Siege_Corridor__East_25,
+        ) => true,
+        (
+            SpotId::Uhrum__Siege_Corridor__Upper_Rock_East,
+            SpotId::Uhrum__Siege_Corridor__Upper_Rock_Item,
+        ) => true,
+        (SpotId::Uhrum__Siege_Corridor__Pond, SpotId::Uhrum__Siege_Corridor__Mideast_Tree) => true,
+        (SpotId::Uhrum__Siege_Corridor__East_Hill, SpotId::Uhrum__Siege_Corridor__East_25) => true,
+        (SpotId::Uhrum__Siege_Corridor__East_Hill, SpotId::Uhrum__Siege_Corridor__Pond) => true,
+        (SpotId::Uhrum__Siege_Corridor__East_25, SpotId::Uhrum__Siege_Corridor__Mideast_Hill) => {
+            true
+        }
         _ => false,
     }
 }
@@ -33428,9 +34274,24 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             1000,
         ),
         (
+            SpotId::Uhrum__Siege_Corridor__Center_Box,
+            SpotId::Uhrum__Siege_Corridor__Center_Valley,
+            3000,
+        ),
+        (
             SpotId::Uhrum__Siege_Corridor__Center_East,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
+        ),
+        (
+            SpotId::Uhrum__Siege_Corridor__Center_East,
+            SpotId::Uhrum__Siege_Corridor__Center_Box,
+            2129,
+        ),
+        (
+            SpotId::Uhrum__Siege_Corridor__Center_East,
+            SpotId::Uhrum__Siege_Corridor__Mideast_Hill,
+            1052,
         ),
         (
             SpotId::Uhrum__Siege_Corridor__Center_Platform_1,
@@ -33438,9 +34299,59 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             1000,
         ),
         (
+            SpotId::Uhrum__Siege_Corridor__Center_Platform_1,
+            SpotId::Uhrum__Siege_Corridor__Center_East,
+            1052,
+        ),
+        (
+            SpotId::Uhrum__Siege_Corridor__Center_Platform_1,
+            SpotId::Uhrum__Siege_Corridor__Center_Platform_3,
+            1754,
+        ),
+        (
+            SpotId::Uhrum__Siege_Corridor__Center_Platform_1,
+            SpotId::Uhrum__Siege_Corridor__Center_West,
+            3157,
+        ),
+        (
             SpotId::Uhrum__Siege_Corridor__Center_Platform_3,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
+        ),
+        (
+            SpotId::Uhrum__Siege_Corridor__Center_Platform_3,
+            SpotId::Uhrum__Siege_Corridor__Center_Platform_1,
+            1754,
+        ),
+        (
+            SpotId::Uhrum__Siege_Corridor__Center_Platform_3,
+            SpotId::Uhrum__Siege_Corridor__Mideast_Hill,
+            350,
+        ),
+        (
+            SpotId::Uhrum__Siege_Corridor__Center_Platform_3,
+            SpotId::Uhrum__Siege_Corridor__Mideast_Tree,
+            1228,
+        ),
+        (
+            SpotId::Uhrum__Siege_Corridor__Center_Platform_3,
+            SpotId::Uhrum__Siege_Corridor__Upper_Rock_West,
+            2105,
+        ),
+        (
+            SpotId::Uhrum__Siege_Corridor__Center_Valley,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Uhrum__Siege_Corridor__Center_Valley,
+            SpotId::Uhrum__Siege_Corridor__Center_East,
+            600,
+        ),
+        (
+            SpotId::Uhrum__Siege_Corridor__Center_Valley,
+            SpotId::Uhrum__Siege_Corridor__Mideast_Hill,
+            1200,
         ),
         (
             SpotId::Uhrum__Siege_Corridor__Center_West,
@@ -33448,9 +34359,39 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             1000,
         ),
         (
+            SpotId::Uhrum__Siege_Corridor__Center_West,
+            SpotId::Uhrum__Siege_Corridor__Center_Platform_1,
+            3157,
+        ),
+        (
+            SpotId::Uhrum__Siege_Corridor__Center_West,
+            SpotId::Uhrum__Siege_Corridor__West_Grassy_Ledge,
+            2456,
+        ),
+        (
+            SpotId::Uhrum__Siege_Corridor__Center_West,
+            SpotId::Uhrum__Siege_Corridor__West_Middle_Tree,
+            1052,
+        ),
+        (
+            SpotId::Uhrum__Siege_Corridor__Center_West,
+            SpotId::Uhrum__Siege_Corridor__West_Rocky_Ledge,
+            2982,
+        ),
+        (
             SpotId::Uhrum__Siege_Corridor__East_25,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
+        ),
+        (
+            SpotId::Uhrum__Siege_Corridor__East_25,
+            SpotId::Uhrum__Siege_Corridor__Mideast_Hill,
+            5087,
+        ),
+        (
+            SpotId::Uhrum__Siege_Corridor__East_25,
+            SpotId::Uhrum__Waterfalls__West_25,
+            1350,
         ),
         (
             SpotId::Uhrum__Siege_Corridor__East_Hill,
@@ -33458,9 +34399,79 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             1000,
         ),
         (
+            SpotId::Uhrum__Siege_Corridor__East_Hill,
+            SpotId::Uhrum__Siege_Corridor__East_25,
+            877,
+        ),
+        (
+            SpotId::Uhrum__Siege_Corridor__East_Hill,
+            SpotId::Uhrum__Siege_Corridor__Mideast_Tree,
+            3333,
+        ),
+        (
+            SpotId::Uhrum__Siege_Corridor__East_Hill,
+            SpotId::Uhrum__Siege_Corridor__Pond,
+            1052,
+        ),
+        (
+            SpotId::Uhrum__Siege_Corridor__East_Hill,
+            SpotId::Uhrum__Siege_Corridor__Upper_Rock_East,
+            600,
+        ),
+        (
             SpotId::Uhrum__Siege_Corridor__Mideast_Hill,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
+        ),
+        (
+            SpotId::Uhrum__Siege_Corridor__Mideast_Hill,
+            SpotId::Uhrum__Siege_Corridor__Center_East,
+            1052,
+        ),
+        (
+            SpotId::Uhrum__Siege_Corridor__Mideast_Hill,
+            SpotId::Uhrum__Siege_Corridor__Center_Platform_3,
+            600,
+        ),
+        (
+            SpotId::Uhrum__Siege_Corridor__Mideast_Hill,
+            SpotId::Uhrum__Siege_Corridor__Center_Valley,
+            526,
+        ),
+        (
+            SpotId::Uhrum__Siege_Corridor__Mideast_Tree,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Uhrum__Siege_Corridor__Mideast_Tree,
+            SpotId::Uhrum__Siege_Corridor__Center_Platform_3,
+            1228,
+        ),
+        (
+            SpotId::Uhrum__Siege_Corridor__Mideast_Tree,
+            SpotId::Uhrum__Siege_Corridor__East_Hill,
+            3333,
+        ),
+        (
+            SpotId::Uhrum__Siege_Corridor__Mideast_Tree,
+            SpotId::Uhrum__Siege_Corridor__Mideast_Hill,
+            877,
+        ),
+        (
+            SpotId::Uhrum__Siege_Corridor__Mideast_Tree,
+            SpotId::Uhrum__Siege_Corridor__Pond,
+            2280,
+        ),
+        (
+            SpotId::Uhrum__Siege_Corridor__Mideast_Tree,
+            SpotId::Uhrum__Siege_Corridor__Upper_Rock_West,
+            1200,
+        ),
+        (
+            SpotId::Uhrum__Siege_Corridor__Northwest_Door,
+            SpotId::Giguna__Vertical_Interchange__South,
+            1600,
         ),
         (
             SpotId::Uhrum__Siege_Corridor__Northwest_Door,
@@ -33468,9 +34479,59 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             1000,
         ),
         (
+            SpotId::Uhrum__Siege_Corridor__Northwest_Door,
+            SpotId::Uhrum__Siege_Corridor__Northwest_Platform,
+            877,
+        ),
+        (
+            SpotId::Uhrum__Siege_Corridor__Northwest_Door,
+            SpotId::Uhrum__Siege_Corridor__West_26,
+            2703,
+        ),
+        (
+            SpotId::Uhrum__Siege_Corridor__Northwest_Door,
+            SpotId::Uhrum__Siege_Corridor__West_Rocky_Ledge,
+            2280,
+        ),
+        (
+            SpotId::Uhrum__Siege_Corridor__Northwest_Door,
+            SpotId::Uhrum__Siege_Corridor__Western_Cache,
+            1403,
+        ),
+        (
+            SpotId::Uhrum__Siege_Corridor__Northwest_Door,
+            SpotId::Uhrum__Siege_Corridor__Western_Rock,
+            800,
+        ),
+        (
             SpotId::Uhrum__Siege_Corridor__Northwest_Platform,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
+        ),
+        (
+            SpotId::Uhrum__Siege_Corridor__Northwest_Platform,
+            SpotId::Uhrum__Siege_Corridor__Northwest_Door,
+            1000,
+        ),
+        (
+            SpotId::Uhrum__Siege_Corridor__Northwest_Platform,
+            SpotId::Uhrum__Siege_Corridor__West_26,
+            2456,
+        ),
+        (
+            SpotId::Uhrum__Siege_Corridor__Northwest_Platform,
+            SpotId::Uhrum__Siege_Corridor__West_Rocky_Ledge,
+            1403,
+        ),
+        (
+            SpotId::Uhrum__Siege_Corridor__Northwest_Platform,
+            SpotId::Uhrum__Siege_Corridor__Western_Cache,
+            2280,
+        ),
+        (
+            SpotId::Uhrum__Siege_Corridor__Northwest_Platform,
+            SpotId::Uhrum__Siege_Corridor__Western_Rock,
+            1578,
         ),
         (
             SpotId::Uhrum__Siege_Corridor__Pond,
@@ -33478,9 +34539,39 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             1000,
         ),
         (
+            SpotId::Uhrum__Siege_Corridor__Pond,
+            SpotId::Uhrum__Siege_Corridor__East_Hill,
+            2400,
+        ),
+        (
+            SpotId::Uhrum__Siege_Corridor__Pond,
+            SpotId::Uhrum__Siege_Corridor__Mideast_Tree,
+            3000,
+        ),
+        (
             SpotId::Uhrum__Siege_Corridor__Upper_Rock_East,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
+        ),
+        (
+            SpotId::Uhrum__Siege_Corridor__Upper_Rock_East,
+            SpotId::Uhrum__Siege_Corridor__East_25,
+            1403,
+        ),
+        (
+            SpotId::Uhrum__Siege_Corridor__Upper_Rock_East,
+            SpotId::Uhrum__Siege_Corridor__East_Hill,
+            526,
+        ),
+        (
+            SpotId::Uhrum__Siege_Corridor__Upper_Rock_East,
+            SpotId::Uhrum__Siege_Corridor__Pond,
+            1100,
+        ),
+        (
+            SpotId::Uhrum__Siege_Corridor__Upper_Rock_East,
+            SpotId::Uhrum__Siege_Corridor__Upper_Rock_Item,
+            600,
         ),
         (
             SpotId::Uhrum__Siege_Corridor__Upper_Rock_Item,
@@ -33488,9 +34579,44 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             1000,
         ),
         (
+            SpotId::Uhrum__Siege_Corridor__Upper_Rock_Item,
+            SpotId::Uhrum__Siege_Corridor__Upper_Rock_East,
+            526,
+        ),
+        (
+            SpotId::Uhrum__Siege_Corridor__Upper_Rock_Item,
+            SpotId::Uhrum__Siege_Corridor__Upper_Rock_West,
+            1403,
+        ),
+        (
             SpotId::Uhrum__Siege_Corridor__Upper_Rock_West,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
+        ),
+        (
+            SpotId::Uhrum__Siege_Corridor__Upper_Rock_West,
+            SpotId::Uhrum__Siege_Corridor__Center_Platform_3,
+            2105,
+        ),
+        (
+            SpotId::Uhrum__Siege_Corridor__Upper_Rock_West,
+            SpotId::Uhrum__Siege_Corridor__Mideast_Hill,
+            1754,
+        ),
+        (
+            SpotId::Uhrum__Siege_Corridor__Upper_Rock_West,
+            SpotId::Uhrum__Siege_Corridor__Mideast_Tree,
+            877,
+        ),
+        (
+            SpotId::Uhrum__Siege_Corridor__Upper_Rock_West,
+            SpotId::Uhrum__Siege_Corridor__Pond,
+            1403,
+        ),
+        (
+            SpotId::Uhrum__Siege_Corridor__Upper_Rock_West,
+            SpotId::Uhrum__Siege_Corridor__Upper_Rock_Item,
+            1403,
         ),
         (
             SpotId::Uhrum__Siege_Corridor__West_26,
@@ -33498,9 +34624,39 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             1000,
         ),
         (
+            SpotId::Uhrum__Siege_Corridor__West_26,
+            SpotId::Uhrum__Siege_Corridor__West_Greenery,
+            4035,
+        ),
+        (
+            SpotId::Uhrum__Siege_Corridor__West_26,
+            SpotId::Uhrum__West_Entrance__East_26,
+            1350,
+        ),
+        (
             SpotId::Uhrum__Siege_Corridor__West_Grassy_Ledge,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
+        ),
+        (
+            SpotId::Uhrum__Siege_Corridor__West_Grassy_Ledge,
+            SpotId::Uhrum__Siege_Corridor__Center_West,
+            2456,
+        ),
+        (
+            SpotId::Uhrum__Siege_Corridor__West_Grassy_Ledge,
+            SpotId::Uhrum__Siege_Corridor__West_26,
+            4385,
+        ),
+        (
+            SpotId::Uhrum__Siege_Corridor__West_Grassy_Ledge,
+            SpotId::Uhrum__Siege_Corridor__West_Middle_Tree,
+            1403,
+        ),
+        (
+            SpotId::Uhrum__Siege_Corridor__West_Grassy_Ledge,
+            SpotId::Uhrum__Siege_Corridor__West_Rocky_Ledge,
+            600,
         ),
         (
             SpotId::Uhrum__Siege_Corridor__West_Greenery,
@@ -33508,9 +34664,84 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             1000,
         ),
         (
+            SpotId::Uhrum__Siege_Corridor__West_Greenery,
+            SpotId::Uhrum__Siege_Corridor__West_26,
+            4035,
+        ),
+        (
+            SpotId::Uhrum__Siege_Corridor__West_Greenery,
+            SpotId::Uhrum__Siege_Corridor__West_Grassy_Ledge,
+            1200,
+        ),
+        (
+            SpotId::Uhrum__Siege_Corridor__West_Greenery,
+            SpotId::Uhrum__Siege_Corridor__West_Loop,
+            3508,
+        ),
+        (
+            SpotId::Uhrum__Siege_Corridor__West_Loop,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Uhrum__Siege_Corridor__West_Loop,
+            SpotId::Uhrum__Siege_Corridor__West_Greenery,
+            3508,
+        ),
+        (
+            SpotId::Uhrum__Siege_Corridor__West_Loop,
+            SpotId::Uhrum__Siege_Corridor__West_Middle_Tree,
+            3392,
+        ),
+        (
+            SpotId::Uhrum__Siege_Corridor__West_Middle_Tree,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Uhrum__Siege_Corridor__West_Middle_Tree,
+            SpotId::Uhrum__Siege_Corridor__Center_West,
+            2501,
+        ),
+        (
+            SpotId::Uhrum__Siege_Corridor__West_Middle_Tree,
+            SpotId::Uhrum__Siege_Corridor__West_Grassy_Ledge,
+            1403,
+        ),
+        (
+            SpotId::Uhrum__Siege_Corridor__West_Middle_Tree,
+            SpotId::Uhrum__Siege_Corridor__West_Rocky_Ledge,
+            1929,
+        ),
+        (
             SpotId::Uhrum__Siege_Corridor__West_Rocky_Ledge,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
+        ),
+        (
+            SpotId::Uhrum__Siege_Corridor__West_Rocky_Ledge,
+            SpotId::Uhrum__Siege_Corridor__Center_West,
+            2982,
+        ),
+        (
+            SpotId::Uhrum__Siege_Corridor__West_Rocky_Ledge,
+            SpotId::Uhrum__Siege_Corridor__Northwest_Platform,
+            1403,
+        ),
+        (
+            SpotId::Uhrum__Siege_Corridor__West_Rocky_Ledge,
+            SpotId::Uhrum__Siege_Corridor__West_26,
+            3859,
+        ),
+        (
+            SpotId::Uhrum__Siege_Corridor__West_Rocky_Ledge,
+            SpotId::Uhrum__Siege_Corridor__West_Grassy_Ledge,
+            526,
+        ),
+        (
+            SpotId::Uhrum__Siege_Corridor__West_Rocky_Ledge,
+            SpotId::Uhrum__Siege_Corridor__West_Middle_Tree,
+            1929,
         ),
         (
             SpotId::Uhrum__Siege_Corridor__Western_Cache,
@@ -33518,9 +34749,44 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             1000,
         ),
         (
+            SpotId::Uhrum__Siege_Corridor__Western_Cache,
+            SpotId::Uhrum__Siege_Corridor__Northwest_Door,
+            1403,
+        ),
+        (
+            SpotId::Uhrum__Siege_Corridor__Western_Cache,
+            SpotId::Uhrum__Siege_Corridor__Northwest_Platform,
+            2280,
+        ),
+        (
+            SpotId::Uhrum__Siege_Corridor__Western_Cache,
+            SpotId::Uhrum__Siege_Corridor__Western_Rock,
+            701,
+        ),
+        (
             SpotId::Uhrum__Siege_Corridor__Western_Rock,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
+        ),
+        (
+            SpotId::Uhrum__Siege_Corridor__Western_Rock,
+            SpotId::Uhrum__Siege_Corridor__Northwest_Platform,
+            1578,
+        ),
+        (
+            SpotId::Uhrum__Siege_Corridor__Western_Rock,
+            SpotId::Uhrum__Siege_Corridor__West_26,
+            1929,
+        ),
+        (
+            SpotId::Uhrum__Siege_Corridor__Western_Rock,
+            SpotId::Uhrum__Siege_Corridor__West_Greenery,
+            3157,
+        ),
+        (
+            SpotId::Uhrum__Siege_Corridor__Western_Rock,
+            SpotId::Uhrum__Siege_Corridor__Western_Cache,
+            1799,
         ),
         (
             SpotId::Uhrum__Waterfalls__West_24,
@@ -38347,6 +39613,238 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
             Some(964)
         }
         (SpotId::Irikar__Sight_Room__West_24, SpotId::Irikar__Sight_Room__Lower_Ledge) => Some(701),
+        (
+            SpotId::Uhrum__Siege_Corridor__Center_Box,
+            SpotId::Uhrum__Siege_Corridor__Center_Valley,
+        ) => Some(3000),
+        (SpotId::Uhrum__Siege_Corridor__Center_East, SpotId::Uhrum__Siege_Corridor__Center_Box) => {
+            Some(2129)
+        }
+        (
+            SpotId::Uhrum__Siege_Corridor__Center_East,
+            SpotId::Uhrum__Siege_Corridor__Mideast_Hill,
+        ) => Some(1052),
+        (
+            SpotId::Uhrum__Siege_Corridor__Center_Platform_1,
+            SpotId::Uhrum__Siege_Corridor__Center_East,
+        ) => Some(1052),
+        (
+            SpotId::Uhrum__Siege_Corridor__Center_Platform_1,
+            SpotId::Uhrum__Siege_Corridor__Center_Platform_3,
+        ) => Some(1754),
+        (
+            SpotId::Uhrum__Siege_Corridor__Center_Platform_1,
+            SpotId::Uhrum__Siege_Corridor__Center_West,
+        ) => Some(3157),
+        (
+            SpotId::Uhrum__Siege_Corridor__Center_Platform_3,
+            SpotId::Uhrum__Siege_Corridor__Center_Platform_1,
+        ) => Some(1754),
+        (
+            SpotId::Uhrum__Siege_Corridor__Center_Platform_3,
+            SpotId::Uhrum__Siege_Corridor__Mideast_Hill,
+        ) => Some(350),
+        (
+            SpotId::Uhrum__Siege_Corridor__Center_Platform_3,
+            SpotId::Uhrum__Siege_Corridor__Mideast_Tree,
+        ) => Some(1228),
+        (
+            SpotId::Uhrum__Siege_Corridor__Center_Valley,
+            SpotId::Uhrum__Siege_Corridor__Mideast_Hill,
+        ) => Some(1200),
+        (
+            SpotId::Uhrum__Siege_Corridor__Center_West,
+            SpotId::Uhrum__Siege_Corridor__Center_Platform_1,
+        ) => Some(3157),
+        (
+            SpotId::Uhrum__Siege_Corridor__Center_West,
+            SpotId::Uhrum__Siege_Corridor__West_Grassy_Ledge,
+        ) => Some(2456),
+        (
+            SpotId::Uhrum__Siege_Corridor__Center_West,
+            SpotId::Uhrum__Siege_Corridor__West_Middle_Tree,
+        ) => Some(1052),
+        (
+            SpotId::Uhrum__Siege_Corridor__Center_West,
+            SpotId::Uhrum__Siege_Corridor__West_Rocky_Ledge,
+        ) => Some(2982),
+        (SpotId::Uhrum__Siege_Corridor__East_25, SpotId::Uhrum__Siege_Corridor__Mideast_Hill) => {
+            Some(5087)
+        }
+        (SpotId::Uhrum__Siege_Corridor__East_Hill, SpotId::Uhrum__Siege_Corridor__East_25) => {
+            Some(877)
+        }
+        (SpotId::Uhrum__Siege_Corridor__East_Hill, SpotId::Uhrum__Siege_Corridor__Pond) => {
+            Some(1052)
+        }
+        (
+            SpotId::Uhrum__Siege_Corridor__Mideast_Hill,
+            SpotId::Uhrum__Siege_Corridor__Center_East,
+        ) => Some(1052),
+        (
+            SpotId::Uhrum__Siege_Corridor__Mideast_Hill,
+            SpotId::Uhrum__Siege_Corridor__Center_Platform_3,
+        ) => Some(600),
+        (
+            SpotId::Uhrum__Siege_Corridor__Mideast_Hill,
+            SpotId::Uhrum__Siege_Corridor__Center_Valley,
+        ) => Some(526),
+        (
+            SpotId::Uhrum__Siege_Corridor__Mideast_Tree,
+            SpotId::Uhrum__Siege_Corridor__Center_Platform_3,
+        ) => Some(1228),
+        (
+            SpotId::Uhrum__Siege_Corridor__Mideast_Tree,
+            SpotId::Uhrum__Siege_Corridor__Mideast_Hill,
+        ) => Some(877),
+        (SpotId::Uhrum__Siege_Corridor__Mideast_Tree, SpotId::Uhrum__Siege_Corridor__Pond) => {
+            Some(2280)
+        }
+        (
+            SpotId::Uhrum__Siege_Corridor__Northwest_Door,
+            SpotId::Uhrum__Siege_Corridor__Northwest_Platform,
+        ) => Some(877),
+        (SpotId::Uhrum__Siege_Corridor__Northwest_Door, SpotId::Uhrum__Siege_Corridor__West_26) => {
+            Some(2703)
+        }
+        (
+            SpotId::Uhrum__Siege_Corridor__Northwest_Door,
+            SpotId::Uhrum__Siege_Corridor__West_Rocky_Ledge,
+        ) => Some(2280),
+        (
+            SpotId::Uhrum__Siege_Corridor__Northwest_Door,
+            SpotId::Uhrum__Siege_Corridor__Western_Rock,
+        ) => Some(800),
+        (
+            SpotId::Uhrum__Siege_Corridor__Northwest_Platform,
+            SpotId::Uhrum__Siege_Corridor__West_26,
+        ) => Some(2456),
+        (
+            SpotId::Uhrum__Siege_Corridor__Northwest_Platform,
+            SpotId::Uhrum__Siege_Corridor__West_Rocky_Ledge,
+        ) => Some(1403),
+        (
+            SpotId::Uhrum__Siege_Corridor__Northwest_Platform,
+            SpotId::Uhrum__Siege_Corridor__Western_Rock,
+        ) => Some(1578),
+        (SpotId::Uhrum__Siege_Corridor__Pond, SpotId::Uhrum__Siege_Corridor__Mideast_Tree) => {
+            Some(3000)
+        }
+        (
+            SpotId::Uhrum__Siege_Corridor__Upper_Rock_East,
+            SpotId::Uhrum__Siege_Corridor__East_25,
+        ) => Some(1403),
+        (
+            SpotId::Uhrum__Siege_Corridor__Upper_Rock_East,
+            SpotId::Uhrum__Siege_Corridor__East_Hill,
+        ) => Some(526),
+        (SpotId::Uhrum__Siege_Corridor__Upper_Rock_East, SpotId::Uhrum__Siege_Corridor__Pond) => {
+            Some(1100)
+        }
+        (
+            SpotId::Uhrum__Siege_Corridor__Upper_Rock_East,
+            SpotId::Uhrum__Siege_Corridor__Upper_Rock_Item,
+        ) => Some(600),
+        (
+            SpotId::Uhrum__Siege_Corridor__Upper_Rock_Item,
+            SpotId::Uhrum__Siege_Corridor__Upper_Rock_East,
+        ) => Some(526),
+        (
+            SpotId::Uhrum__Siege_Corridor__Upper_Rock_West,
+            SpotId::Uhrum__Siege_Corridor__Center_Platform_3,
+        ) => Some(2105),
+        (
+            SpotId::Uhrum__Siege_Corridor__Upper_Rock_West,
+            SpotId::Uhrum__Siege_Corridor__Mideast_Hill,
+        ) => Some(1754),
+        (
+            SpotId::Uhrum__Siege_Corridor__Upper_Rock_West,
+            SpotId::Uhrum__Siege_Corridor__Mideast_Tree,
+        ) => Some(877),
+        (SpotId::Uhrum__Siege_Corridor__Upper_Rock_West, SpotId::Uhrum__Siege_Corridor__Pond) => {
+            Some(1403)
+        }
+        (SpotId::Uhrum__Siege_Corridor__West_26, SpotId::Uhrum__Siege_Corridor__West_Greenery) => {
+            Some(4035)
+        }
+        (
+            SpotId::Uhrum__Siege_Corridor__West_Grassy_Ledge,
+            SpotId::Uhrum__Siege_Corridor__Center_West,
+        ) => Some(2456),
+        (
+            SpotId::Uhrum__Siege_Corridor__West_Grassy_Ledge,
+            SpotId::Uhrum__Siege_Corridor__West_26,
+        ) => Some(4385),
+        (
+            SpotId::Uhrum__Siege_Corridor__West_Grassy_Ledge,
+            SpotId::Uhrum__Siege_Corridor__West_Middle_Tree,
+        ) => Some(1403),
+        (
+            SpotId::Uhrum__Siege_Corridor__West_Grassy_Ledge,
+            SpotId::Uhrum__Siege_Corridor__West_Rocky_Ledge,
+        ) => Some(600),
+        (SpotId::Uhrum__Siege_Corridor__West_Greenery, SpotId::Uhrum__Siege_Corridor__West_26) => {
+            Some(4035)
+        }
+        (
+            SpotId::Uhrum__Siege_Corridor__West_Greenery,
+            SpotId::Uhrum__Siege_Corridor__West_Loop,
+        ) => Some(3508),
+        (
+            SpotId::Uhrum__Siege_Corridor__West_Loop,
+            SpotId::Uhrum__Siege_Corridor__West_Greenery,
+        ) => Some(3508),
+        (
+            SpotId::Uhrum__Siege_Corridor__West_Loop,
+            SpotId::Uhrum__Siege_Corridor__West_Middle_Tree,
+        ) => Some(3392),
+        (
+            SpotId::Uhrum__Siege_Corridor__West_Middle_Tree,
+            SpotId::Uhrum__Siege_Corridor__Center_West,
+        ) => Some(2501),
+        (
+            SpotId::Uhrum__Siege_Corridor__West_Middle_Tree,
+            SpotId::Uhrum__Siege_Corridor__West_Grassy_Ledge,
+        ) => Some(1403),
+        (
+            SpotId::Uhrum__Siege_Corridor__West_Middle_Tree,
+            SpotId::Uhrum__Siege_Corridor__West_Rocky_Ledge,
+        ) => Some(1929),
+        (
+            SpotId::Uhrum__Siege_Corridor__West_Rocky_Ledge,
+            SpotId::Uhrum__Siege_Corridor__Center_West,
+        ) => Some(2982),
+        (
+            SpotId::Uhrum__Siege_Corridor__West_Rocky_Ledge,
+            SpotId::Uhrum__Siege_Corridor__Northwest_Platform,
+        ) => Some(1403),
+        (
+            SpotId::Uhrum__Siege_Corridor__West_Rocky_Ledge,
+            SpotId::Uhrum__Siege_Corridor__West_26,
+        ) => Some(3859),
+        (
+            SpotId::Uhrum__Siege_Corridor__West_Rocky_Ledge,
+            SpotId::Uhrum__Siege_Corridor__West_Grassy_Ledge,
+        ) => Some(526),
+        (
+            SpotId::Uhrum__Siege_Corridor__West_Rocky_Ledge,
+            SpotId::Uhrum__Siege_Corridor__West_Middle_Tree,
+        ) => Some(1929),
+        (
+            SpotId::Uhrum__Siege_Corridor__Western_Cache,
+            SpotId::Uhrum__Siege_Corridor__Western_Rock,
+        ) => Some(701),
+        (SpotId::Uhrum__Siege_Corridor__Western_Rock, SpotId::Uhrum__Siege_Corridor__West_26) => {
+            Some(1929)
+        }
+        (
+            SpotId::Uhrum__Siege_Corridor__Western_Rock,
+            SpotId::Uhrum__Siege_Corridor__West_Greenery,
+        ) => Some(3157),
+        (
+            SpotId::Uhrum__Siege_Corridor__Western_Rock,
+            SpotId::Uhrum__Siege_Corridor__Western_Cache,
+        ) => Some(1799),
         (SpotId::Uhrum__West_Entrance__Clear_Passage, SpotId::Uhrum__West_Entrance__East_26) => {
             Some(3508)
         }
@@ -43793,6 +45291,238 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
         (SpotId::Irikar__Sight_Room__West_24, SpotId::Irikar__Sight_Room__Lower_Ledge) => {
             (Some(701), vec![])
         }
+        (
+            SpotId::Uhrum__Siege_Corridor__Center_Box,
+            SpotId::Uhrum__Siege_Corridor__Center_Valley,
+        ) => (Some(3000), vec![]),
+        (SpotId::Uhrum__Siege_Corridor__Center_East, SpotId::Uhrum__Siege_Corridor__Center_Box) => {
+            (Some(2129), vec![])
+        }
+        (
+            SpotId::Uhrum__Siege_Corridor__Center_East,
+            SpotId::Uhrum__Siege_Corridor__Mideast_Hill,
+        ) => (Some(1052), vec![]),
+        (
+            SpotId::Uhrum__Siege_Corridor__Center_Platform_1,
+            SpotId::Uhrum__Siege_Corridor__Center_East,
+        ) => (Some(1052), vec![]),
+        (
+            SpotId::Uhrum__Siege_Corridor__Center_Platform_1,
+            SpotId::Uhrum__Siege_Corridor__Center_Platform_3,
+        ) => (Some(1754), vec![]),
+        (
+            SpotId::Uhrum__Siege_Corridor__Center_Platform_1,
+            SpotId::Uhrum__Siege_Corridor__Center_West,
+        ) => (Some(3157), vec![]),
+        (
+            SpotId::Uhrum__Siege_Corridor__Center_Platform_3,
+            SpotId::Uhrum__Siege_Corridor__Center_Platform_1,
+        ) => (Some(1754), vec![]),
+        (
+            SpotId::Uhrum__Siege_Corridor__Center_Platform_3,
+            SpotId::Uhrum__Siege_Corridor__Mideast_Hill,
+        ) => (Some(350), vec![]),
+        (
+            SpotId::Uhrum__Siege_Corridor__Center_Platform_3,
+            SpotId::Uhrum__Siege_Corridor__Mideast_Tree,
+        ) => (Some(1228), vec![]),
+        (
+            SpotId::Uhrum__Siege_Corridor__Center_Valley,
+            SpotId::Uhrum__Siege_Corridor__Mideast_Hill,
+        ) => (Some(1200), vec![]),
+        (
+            SpotId::Uhrum__Siege_Corridor__Center_West,
+            SpotId::Uhrum__Siege_Corridor__Center_Platform_1,
+        ) => (Some(3157), vec![]),
+        (
+            SpotId::Uhrum__Siege_Corridor__Center_West,
+            SpotId::Uhrum__Siege_Corridor__West_Grassy_Ledge,
+        ) => (Some(2456), vec![]),
+        (
+            SpotId::Uhrum__Siege_Corridor__Center_West,
+            SpotId::Uhrum__Siege_Corridor__West_Middle_Tree,
+        ) => (Some(1052), vec![]),
+        (
+            SpotId::Uhrum__Siege_Corridor__Center_West,
+            SpotId::Uhrum__Siege_Corridor__West_Rocky_Ledge,
+        ) => (Some(2982), vec![]),
+        (SpotId::Uhrum__Siege_Corridor__East_25, SpotId::Uhrum__Siege_Corridor__Mideast_Hill) => {
+            (Some(5087), vec![])
+        }
+        (SpotId::Uhrum__Siege_Corridor__East_Hill, SpotId::Uhrum__Siege_Corridor__East_25) => {
+            (Some(877), vec![])
+        }
+        (SpotId::Uhrum__Siege_Corridor__East_Hill, SpotId::Uhrum__Siege_Corridor__Pond) => {
+            (Some(1052), vec![])
+        }
+        (
+            SpotId::Uhrum__Siege_Corridor__Mideast_Hill,
+            SpotId::Uhrum__Siege_Corridor__Center_East,
+        ) => (Some(1052), vec![]),
+        (
+            SpotId::Uhrum__Siege_Corridor__Mideast_Hill,
+            SpotId::Uhrum__Siege_Corridor__Center_Platform_3,
+        ) => (Some(600), vec![]),
+        (
+            SpotId::Uhrum__Siege_Corridor__Mideast_Hill,
+            SpotId::Uhrum__Siege_Corridor__Center_Valley,
+        ) => (Some(526), vec![]),
+        (
+            SpotId::Uhrum__Siege_Corridor__Mideast_Tree,
+            SpotId::Uhrum__Siege_Corridor__Center_Platform_3,
+        ) => (Some(1228), vec![]),
+        (
+            SpotId::Uhrum__Siege_Corridor__Mideast_Tree,
+            SpotId::Uhrum__Siege_Corridor__Mideast_Hill,
+        ) => (Some(877), vec![]),
+        (SpotId::Uhrum__Siege_Corridor__Mideast_Tree, SpotId::Uhrum__Siege_Corridor__Pond) => {
+            (Some(2280), vec![])
+        }
+        (
+            SpotId::Uhrum__Siege_Corridor__Northwest_Door,
+            SpotId::Uhrum__Siege_Corridor__Northwest_Platform,
+        ) => (Some(877), vec![]),
+        (SpotId::Uhrum__Siege_Corridor__Northwest_Door, SpotId::Uhrum__Siege_Corridor__West_26) => {
+            (Some(2703), vec![])
+        }
+        (
+            SpotId::Uhrum__Siege_Corridor__Northwest_Door,
+            SpotId::Uhrum__Siege_Corridor__West_Rocky_Ledge,
+        ) => (Some(2280), vec![]),
+        (
+            SpotId::Uhrum__Siege_Corridor__Northwest_Door,
+            SpotId::Uhrum__Siege_Corridor__Western_Rock,
+        ) => (Some(800), vec![]),
+        (
+            SpotId::Uhrum__Siege_Corridor__Northwest_Platform,
+            SpotId::Uhrum__Siege_Corridor__West_26,
+        ) => (Some(2456), vec![]),
+        (
+            SpotId::Uhrum__Siege_Corridor__Northwest_Platform,
+            SpotId::Uhrum__Siege_Corridor__West_Rocky_Ledge,
+        ) => (Some(1403), vec![]),
+        (
+            SpotId::Uhrum__Siege_Corridor__Northwest_Platform,
+            SpotId::Uhrum__Siege_Corridor__Western_Rock,
+        ) => (Some(1578), vec![]),
+        (SpotId::Uhrum__Siege_Corridor__Pond, SpotId::Uhrum__Siege_Corridor__Mideast_Tree) => {
+            (Some(3000), vec![])
+        }
+        (
+            SpotId::Uhrum__Siege_Corridor__Upper_Rock_East,
+            SpotId::Uhrum__Siege_Corridor__East_25,
+        ) => (Some(1403), vec![]),
+        (
+            SpotId::Uhrum__Siege_Corridor__Upper_Rock_East,
+            SpotId::Uhrum__Siege_Corridor__East_Hill,
+        ) => (Some(526), vec![]),
+        (SpotId::Uhrum__Siege_Corridor__Upper_Rock_East, SpotId::Uhrum__Siege_Corridor__Pond) => {
+            (Some(1100), vec![])
+        }
+        (
+            SpotId::Uhrum__Siege_Corridor__Upper_Rock_East,
+            SpotId::Uhrum__Siege_Corridor__Upper_Rock_Item,
+        ) => (Some(600), vec![]),
+        (
+            SpotId::Uhrum__Siege_Corridor__Upper_Rock_Item,
+            SpotId::Uhrum__Siege_Corridor__Upper_Rock_East,
+        ) => (Some(526), vec![]),
+        (
+            SpotId::Uhrum__Siege_Corridor__Upper_Rock_West,
+            SpotId::Uhrum__Siege_Corridor__Center_Platform_3,
+        ) => (Some(2105), vec![]),
+        (
+            SpotId::Uhrum__Siege_Corridor__Upper_Rock_West,
+            SpotId::Uhrum__Siege_Corridor__Mideast_Hill,
+        ) => (Some(1754), vec![]),
+        (
+            SpotId::Uhrum__Siege_Corridor__Upper_Rock_West,
+            SpotId::Uhrum__Siege_Corridor__Mideast_Tree,
+        ) => (Some(877), vec![]),
+        (SpotId::Uhrum__Siege_Corridor__Upper_Rock_West, SpotId::Uhrum__Siege_Corridor__Pond) => {
+            (Some(1403), vec![])
+        }
+        (SpotId::Uhrum__Siege_Corridor__West_26, SpotId::Uhrum__Siege_Corridor__West_Greenery) => {
+            (Some(4035), vec![])
+        }
+        (
+            SpotId::Uhrum__Siege_Corridor__West_Grassy_Ledge,
+            SpotId::Uhrum__Siege_Corridor__Center_West,
+        ) => (Some(2456), vec![]),
+        (
+            SpotId::Uhrum__Siege_Corridor__West_Grassy_Ledge,
+            SpotId::Uhrum__Siege_Corridor__West_26,
+        ) => (Some(4385), vec![]),
+        (
+            SpotId::Uhrum__Siege_Corridor__West_Grassy_Ledge,
+            SpotId::Uhrum__Siege_Corridor__West_Middle_Tree,
+        ) => (Some(1403), vec![]),
+        (
+            SpotId::Uhrum__Siege_Corridor__West_Grassy_Ledge,
+            SpotId::Uhrum__Siege_Corridor__West_Rocky_Ledge,
+        ) => (Some(600), vec![]),
+        (SpotId::Uhrum__Siege_Corridor__West_Greenery, SpotId::Uhrum__Siege_Corridor__West_26) => {
+            (Some(4035), vec![])
+        }
+        (
+            SpotId::Uhrum__Siege_Corridor__West_Greenery,
+            SpotId::Uhrum__Siege_Corridor__West_Loop,
+        ) => (Some(3508), vec![]),
+        (
+            SpotId::Uhrum__Siege_Corridor__West_Loop,
+            SpotId::Uhrum__Siege_Corridor__West_Greenery,
+        ) => (Some(3508), vec![]),
+        (
+            SpotId::Uhrum__Siege_Corridor__West_Loop,
+            SpotId::Uhrum__Siege_Corridor__West_Middle_Tree,
+        ) => (Some(3392), vec![]),
+        (
+            SpotId::Uhrum__Siege_Corridor__West_Middle_Tree,
+            SpotId::Uhrum__Siege_Corridor__Center_West,
+        ) => (Some(2501), vec![]),
+        (
+            SpotId::Uhrum__Siege_Corridor__West_Middle_Tree,
+            SpotId::Uhrum__Siege_Corridor__West_Grassy_Ledge,
+        ) => (Some(1403), vec![]),
+        (
+            SpotId::Uhrum__Siege_Corridor__West_Middle_Tree,
+            SpotId::Uhrum__Siege_Corridor__West_Rocky_Ledge,
+        ) => (Some(1929), vec![]),
+        (
+            SpotId::Uhrum__Siege_Corridor__West_Rocky_Ledge,
+            SpotId::Uhrum__Siege_Corridor__Center_West,
+        ) => (Some(2982), vec![]),
+        (
+            SpotId::Uhrum__Siege_Corridor__West_Rocky_Ledge,
+            SpotId::Uhrum__Siege_Corridor__Northwest_Platform,
+        ) => (Some(1403), vec![]),
+        (
+            SpotId::Uhrum__Siege_Corridor__West_Rocky_Ledge,
+            SpotId::Uhrum__Siege_Corridor__West_26,
+        ) => (Some(3859), vec![]),
+        (
+            SpotId::Uhrum__Siege_Corridor__West_Rocky_Ledge,
+            SpotId::Uhrum__Siege_Corridor__West_Grassy_Ledge,
+        ) => (Some(526), vec![]),
+        (
+            SpotId::Uhrum__Siege_Corridor__West_Rocky_Ledge,
+            SpotId::Uhrum__Siege_Corridor__West_Middle_Tree,
+        ) => (Some(1929), vec![]),
+        (
+            SpotId::Uhrum__Siege_Corridor__Western_Cache,
+            SpotId::Uhrum__Siege_Corridor__Western_Rock,
+        ) => (Some(701), vec![]),
+        (SpotId::Uhrum__Siege_Corridor__Western_Rock, SpotId::Uhrum__Siege_Corridor__West_26) => {
+            (Some(1929), vec![])
+        }
+        (
+            SpotId::Uhrum__Siege_Corridor__Western_Rock,
+            SpotId::Uhrum__Siege_Corridor__West_Greenery,
+        ) => (Some(3157), vec![]),
+        (
+            SpotId::Uhrum__Siege_Corridor__Western_Rock,
+            SpotId::Uhrum__Siege_Corridor__Western_Cache,
+        ) => (Some(1799), vec![]),
         (SpotId::Uhrum__West_Entrance__Clear_Passage, SpotId::Uhrum__West_Entrance__East_26) => {
             (Some(3508), vec![])
         }

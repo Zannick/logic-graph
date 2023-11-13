@@ -1498,10 +1498,12 @@ pub enum SpotId {
     Uhrum__Siege_Corridor__Center_East,
     Uhrum__Siege_Corridor__Center_Platform_1,
     Uhrum__Siege_Corridor__Center_Platform_3,
+    Uhrum__Siege_Corridor__Center_Valley,
     Uhrum__Siege_Corridor__Center_West,
     Uhrum__Siege_Corridor__East_25,
     Uhrum__Siege_Corridor__East_Hill,
     Uhrum__Siege_Corridor__Mideast_Hill,
+    Uhrum__Siege_Corridor__Mideast_Tree,
     Uhrum__Siege_Corridor__Northwest_Door,
     Uhrum__Siege_Corridor__Northwest_Platform,
     Uhrum__Siege_Corridor__Pond,
@@ -1511,6 +1513,8 @@ pub enum SpotId {
     Uhrum__Siege_Corridor__West_26,
     Uhrum__Siege_Corridor__West_Grassy_Ledge,
     Uhrum__Siege_Corridor__West_Greenery,
+    Uhrum__Siege_Corridor__West_Loop,
+    Uhrum__Siege_Corridor__West_Middle_Tree,
     Uhrum__Siege_Corridor__West_Rocky_Ledge,
     Uhrum__Siege_Corridor__Western_Cache,
     Uhrum__Siege_Corridor__Western_Rock,
@@ -4027,6 +4031,9 @@ impl fmt::Display for SpotId {
             SpotId::Uhrum__Siege_Corridor__Center_Platform_3 => {
                 write!(f, "{}", "Uhrum > Siege Corridor > Center Platform 3")
             }
+            SpotId::Uhrum__Siege_Corridor__Center_Valley => {
+                write!(f, "{}", "Uhrum > Siege Corridor > Center Valley")
+            }
             SpotId::Uhrum__Siege_Corridor__Center_West => {
                 write!(f, "{}", "Uhrum > Siege Corridor > Center West")
             }
@@ -4038,6 +4045,9 @@ impl fmt::Display for SpotId {
             }
             SpotId::Uhrum__Siege_Corridor__Mideast_Hill => {
                 write!(f, "{}", "Uhrum > Siege Corridor > Mideast Hill")
+            }
+            SpotId::Uhrum__Siege_Corridor__Mideast_Tree => {
+                write!(f, "{}", "Uhrum > Siege Corridor > Mideast Tree")
             }
             SpotId::Uhrum__Siege_Corridor__Northwest_Door => {
                 write!(f, "{}", "Uhrum > Siege Corridor > Northwest Door")
@@ -4063,6 +4073,12 @@ impl fmt::Display for SpotId {
             }
             SpotId::Uhrum__Siege_Corridor__West_Greenery => {
                 write!(f, "{}", "Uhrum > Siege Corridor > West Greenery")
+            }
+            SpotId::Uhrum__Siege_Corridor__West_Loop => {
+                write!(f, "{}", "Uhrum > Siege Corridor > West Loop")
+            }
+            SpotId::Uhrum__Siege_Corridor__West_Middle_Tree => {
+                write!(f, "{}", "Uhrum > Siege Corridor > West Middle Tree")
             }
             SpotId::Uhrum__Siege_Corridor__West_Rocky_Ledge => {
                 write!(f, "{}", "Uhrum > Siege Corridor > West Rocky Ledge")
@@ -5800,6 +5816,9 @@ impl std::str::FromStr for SpotId {
             "Uhrum > Siege Corridor > Center Platform 3" => {
                 Ok(SpotId::Uhrum__Siege_Corridor__Center_Platform_3)
             }
+            "Uhrum > Siege Corridor > Center Valley" => {
+                Ok(SpotId::Uhrum__Siege_Corridor__Center_Valley)
+            }
             "Uhrum > Siege Corridor > Center West" => {
                 Ok(SpotId::Uhrum__Siege_Corridor__Center_West)
             }
@@ -5807,6 +5826,9 @@ impl std::str::FromStr for SpotId {
             "Uhrum > Siege Corridor > East Hill" => Ok(SpotId::Uhrum__Siege_Corridor__East_Hill),
             "Uhrum > Siege Corridor > Mideast Hill" => {
                 Ok(SpotId::Uhrum__Siege_Corridor__Mideast_Hill)
+            }
+            "Uhrum > Siege Corridor > Mideast Tree" => {
+                Ok(SpotId::Uhrum__Siege_Corridor__Mideast_Tree)
             }
             "Uhrum > Siege Corridor > Northwest Door" => {
                 Ok(SpotId::Uhrum__Siege_Corridor__Northwest_Door)
@@ -5830,6 +5852,10 @@ impl std::str::FromStr for SpotId {
             }
             "Uhrum > Siege Corridor > West Greenery" => {
                 Ok(SpotId::Uhrum__Siege_Corridor__West_Greenery)
+            }
+            "Uhrum > Siege Corridor > West Loop" => Ok(SpotId::Uhrum__Siege_Corridor__West_Loop),
+            "Uhrum > Siege Corridor > West Middle Tree" => {
+                Ok(SpotId::Uhrum__Siege_Corridor__West_Middle_Tree)
             }
             "Uhrum > Siege Corridor > West Rocky Ledge" => {
                 Ok(SpotId::Uhrum__Siege_Corridor__West_Rocky_Ledge)
@@ -6089,6 +6115,9 @@ pub enum LocationId {
     Menu__Upgrade_Menu__Physiology__Health_Upgrade_4,
     Menu__Upgrade_Menu__Physiology__Health_Upgrade_5,
     Menu__Upgrade_Menu__Physiology__Mist_Upgrade,
+    Uhrum__Siege_Corridor__Center_Box__Box,
+    Uhrum__Siege_Corridor__Upper_Rock_Item__Urn,
+    Uhrum__Siege_Corridor__Western_Cache__Core,
     Uhrum__West_Entrance__Gate_Switch__Open_Gate,
     Uhrum__West_Entrance__Inner_Dais__Item,
     Uhrum__West_Entrance__Lower_Wall_East__Charge_through_Wall,
@@ -6727,6 +6756,15 @@ impl fmt::Display for LocationId {
             LocationId::Menu__Upgrade_Menu__Physiology__Mist_Upgrade => {
                 write!(f, "{}", "Menu > Upgrade Menu > Physiology > Mist Upgrade")
             }
+            LocationId::Uhrum__Siege_Corridor__Center_Box__Box => {
+                write!(f, "{}", "Uhrum > Siege Corridor > Center Box > Box")
+            }
+            LocationId::Uhrum__Siege_Corridor__Upper_Rock_Item__Urn => {
+                write!(f, "{}", "Uhrum > Siege Corridor > Upper Rock Item > Urn")
+            }
+            LocationId::Uhrum__Siege_Corridor__Western_Cache__Core => {
+                write!(f, "{}", "Uhrum > Siege Corridor > Western Cache > Core")
+            }
             LocationId::Uhrum__West_Entrance__Gate_Switch__Open_Gate => {
                 write!(f, "{}", "Uhrum > West Entrance > Gate Switch > Open Gate")
             }
@@ -7265,6 +7303,15 @@ impl std::str::FromStr for LocationId {
             }
             "Menu > Upgrade Menu > Physiology > Mist Upgrade" => {
                 Ok(LocationId::Menu__Upgrade_Menu__Physiology__Mist_Upgrade)
+            }
+            "Uhrum > Siege Corridor > Center Box > Box" => {
+                Ok(LocationId::Uhrum__Siege_Corridor__Center_Box__Box)
+            }
+            "Uhrum > Siege Corridor > Upper Rock Item > Urn" => {
+                Ok(LocationId::Uhrum__Siege_Corridor__Upper_Rock_Item__Urn)
+            }
+            "Uhrum > Siege Corridor > Western Cache > Core" => {
+                Ok(LocationId::Uhrum__Siege_Corridor__Western_Cache__Core)
             }
             "Uhrum > West Entrance > Gate Switch > Open Gate" => {
                 Ok(LocationId::Uhrum__West_Entrance__Gate_Switch__Open_Gate)
@@ -8138,6 +8185,29 @@ pub enum ExitId {
     Menu__Upgrade_Menu__Physiology__ex__Combat_1,
     Menu__Upgrade_Menu__Physiology__ex__Drone_1,
     Menu__Upgrade_Menu__Physiology__ex__Infection_1,
+    Uhrum__Siege_Corridor__Center_Platform_3__ex__Upper_Rock_West_1,
+    Uhrum__Siege_Corridor__Center_Valley__ex__Center_East_1,
+    Uhrum__Siege_Corridor__Center_Valley__ex__Center_East_2,
+    Uhrum__Siege_Corridor__East_25__ex__Waterfalls__West_25_1,
+    Uhrum__Siege_Corridor__East_Hill__ex__Mideast_Tree_1,
+    Uhrum__Siege_Corridor__East_Hill__ex__Upper_Rock_East_1,
+    Uhrum__Siege_Corridor__East_Hill__ex__Upper_Rock_East_2,
+    Uhrum__Siege_Corridor__East_Hill__ex__Upper_Rock_East_3,
+    Uhrum__Siege_Corridor__Mideast_Tree__ex__East_Hill_1,
+    Uhrum__Siege_Corridor__Mideast_Tree__ex__Upper_Rock_West_1,
+    Uhrum__Siege_Corridor__Northwest_Door__ex__Giguna__Vertical_Interchange__South_1,
+    Uhrum__Siege_Corridor__Northwest_Door__ex__Western_Cache_1,
+    Uhrum__Siege_Corridor__Northwest_Platform__ex__Northwest_Door_1,
+    Uhrum__Siege_Corridor__Northwest_Platform__ex__Western_Cache_1,
+    Uhrum__Siege_Corridor__Pond__ex__East_Hill_1,
+    Uhrum__Siege_Corridor__Pond__ex__East_Hill_2,
+    Uhrum__Siege_Corridor__Upper_Rock_Item__ex__Upper_Rock_West_1,
+    Uhrum__Siege_Corridor__Upper_Rock_West__ex__Upper_Rock_Item_1,
+    Uhrum__Siege_Corridor__West_26__ex__West_Entrance__East_26_1,
+    Uhrum__Siege_Corridor__West_Greenery__ex__West_Grassy_Ledge_1,
+    Uhrum__Siege_Corridor__Western_Cache__ex__Northwest_Door_1,
+    Uhrum__Siege_Corridor__Western_Cache__ex__Northwest_Platform_1,
+    Uhrum__Siege_Corridor__Western_Rock__ex__Northwest_Platform_1,
     Uhrum__West_Entrance__Clear_Passage__ex__Portal_Stand_1,
     Uhrum__West_Entrance__Clear_Passage__ex__Portal_Stand_2,
     Uhrum__West_Entrance__East_26__ex__Siege_Corridor__West_26_1,
@@ -9013,6 +9083,29 @@ impl fmt::Display for ExitId {
             ExitId::Menu__Upgrade_Menu__Physiology__ex__Combat_1 => write!(f, "{}", "Menu > Upgrade Menu > Physiology ==> Combat (1)"),
             ExitId::Menu__Upgrade_Menu__Physiology__ex__Drone_1 => write!(f, "{}", "Menu > Upgrade Menu > Physiology ==> Drone (1)"),
             ExitId::Menu__Upgrade_Menu__Physiology__ex__Infection_1 => write!(f, "{}", "Menu > Upgrade Menu > Physiology ==> Infection (1)"),
+            ExitId::Uhrum__Siege_Corridor__Center_Platform_3__ex__Upper_Rock_West_1 => write!(f, "{}", "Uhrum > Siege Corridor > Center Platform 3 ==> Upper Rock West (1)"),
+            ExitId::Uhrum__Siege_Corridor__Center_Valley__ex__Center_East_1 => write!(f, "{}", "Uhrum > Siege Corridor > Center Valley ==> Center East (1)"),
+            ExitId::Uhrum__Siege_Corridor__Center_Valley__ex__Center_East_2 => write!(f, "{}", "Uhrum > Siege Corridor > Center Valley ==> Center East (2)"),
+            ExitId::Uhrum__Siege_Corridor__East_25__ex__Waterfalls__West_25_1 => write!(f, "{}", "Uhrum > Siege Corridor > East 25 ==> Waterfalls > West 25 (1)"),
+            ExitId::Uhrum__Siege_Corridor__East_Hill__ex__Mideast_Tree_1 => write!(f, "{}", "Uhrum > Siege Corridor > East Hill ==> Mideast Tree (1)"),
+            ExitId::Uhrum__Siege_Corridor__East_Hill__ex__Upper_Rock_East_1 => write!(f, "{}", "Uhrum > Siege Corridor > East Hill ==> Upper Rock East (1)"),
+            ExitId::Uhrum__Siege_Corridor__East_Hill__ex__Upper_Rock_East_2 => write!(f, "{}", "Uhrum > Siege Corridor > East Hill ==> Upper Rock East (2)"),
+            ExitId::Uhrum__Siege_Corridor__East_Hill__ex__Upper_Rock_East_3 => write!(f, "{}", "Uhrum > Siege Corridor > East Hill ==> Upper Rock East (3)"),
+            ExitId::Uhrum__Siege_Corridor__Mideast_Tree__ex__East_Hill_1 => write!(f, "{}", "Uhrum > Siege Corridor > Mideast Tree ==> East Hill (1)"),
+            ExitId::Uhrum__Siege_Corridor__Mideast_Tree__ex__Upper_Rock_West_1 => write!(f, "{}", "Uhrum > Siege Corridor > Mideast Tree ==> Upper Rock West (1)"),
+            ExitId::Uhrum__Siege_Corridor__Northwest_Door__ex__Giguna__Vertical_Interchange__South_1 => write!(f, "{}", "Uhrum > Siege Corridor > Northwest Door ==> Giguna > Vertical Interchange > South (1)"),
+            ExitId::Uhrum__Siege_Corridor__Northwest_Door__ex__Western_Cache_1 => write!(f, "{}", "Uhrum > Siege Corridor > Northwest Door ==> Western Cache (1)"),
+            ExitId::Uhrum__Siege_Corridor__Northwest_Platform__ex__Northwest_Door_1 => write!(f, "{}", "Uhrum > Siege Corridor > Northwest Platform ==> Northwest Door (1)"),
+            ExitId::Uhrum__Siege_Corridor__Northwest_Platform__ex__Western_Cache_1 => write!(f, "{}", "Uhrum > Siege Corridor > Northwest Platform ==> Western Cache (1)"),
+            ExitId::Uhrum__Siege_Corridor__Pond__ex__East_Hill_1 => write!(f, "{}", "Uhrum > Siege Corridor > Pond ==> East Hill (1)"),
+            ExitId::Uhrum__Siege_Corridor__Pond__ex__East_Hill_2 => write!(f, "{}", "Uhrum > Siege Corridor > Pond ==> East Hill (2)"),
+            ExitId::Uhrum__Siege_Corridor__Upper_Rock_Item__ex__Upper_Rock_West_1 => write!(f, "{}", "Uhrum > Siege Corridor > Upper Rock Item ==> Upper Rock West (1)"),
+            ExitId::Uhrum__Siege_Corridor__Upper_Rock_West__ex__Upper_Rock_Item_1 => write!(f, "{}", "Uhrum > Siege Corridor > Upper Rock West ==> Upper Rock Item (1)"),
+            ExitId::Uhrum__Siege_Corridor__West_26__ex__West_Entrance__East_26_1 => write!(f, "{}", "Uhrum > Siege Corridor > West 26 ==> West Entrance > East 26 (1)"),
+            ExitId::Uhrum__Siege_Corridor__West_Greenery__ex__West_Grassy_Ledge_1 => write!(f, "{}", "Uhrum > Siege Corridor > West Greenery ==> West Grassy Ledge (1)"),
+            ExitId::Uhrum__Siege_Corridor__Western_Cache__ex__Northwest_Door_1 => write!(f, "{}", "Uhrum > Siege Corridor > Western Cache ==> Northwest Door (1)"),
+            ExitId::Uhrum__Siege_Corridor__Western_Cache__ex__Northwest_Platform_1 => write!(f, "{}", "Uhrum > Siege Corridor > Western Cache ==> Northwest Platform (1)"),
+            ExitId::Uhrum__Siege_Corridor__Western_Rock__ex__Northwest_Platform_1 => write!(f, "{}", "Uhrum > Siege Corridor > Western Rock ==> Northwest Platform (1)"),
             ExitId::Uhrum__West_Entrance__Clear_Passage__ex__Portal_Stand_1 => write!(f, "{}", "Uhrum > West Entrance > Clear Passage ==> Portal Stand (1)"),
             ExitId::Uhrum__West_Entrance__Clear_Passage__ex__Portal_Stand_2 => write!(f, "{}", "Uhrum > West Entrance > Clear Passage ==> Portal Stand (2)"),
             ExitId::Uhrum__West_Entrance__East_26__ex__Siege_Corridor__West_26_1 => write!(f, "{}", "Uhrum > West Entrance > East 26 ==> Siege Corridor > West 26 (1)"),
@@ -9893,6 +9986,29 @@ impl std::str::FromStr for ExitId {
             "Menu > Upgrade Menu > Physiology ==> Combat (1)" => Ok(ExitId::Menu__Upgrade_Menu__Physiology__ex__Combat_1),
             "Menu > Upgrade Menu > Physiology ==> Drone (1)" => Ok(ExitId::Menu__Upgrade_Menu__Physiology__ex__Drone_1),
             "Menu > Upgrade Menu > Physiology ==> Infection (1)" => Ok(ExitId::Menu__Upgrade_Menu__Physiology__ex__Infection_1),
+            "Uhrum > Siege Corridor > Center Platform 3 ==> Upper Rock West (1)" => Ok(ExitId::Uhrum__Siege_Corridor__Center_Platform_3__ex__Upper_Rock_West_1),
+            "Uhrum > Siege Corridor > Center Valley ==> Center East (1)" => Ok(ExitId::Uhrum__Siege_Corridor__Center_Valley__ex__Center_East_1),
+            "Uhrum > Siege Corridor > Center Valley ==> Center East (2)" => Ok(ExitId::Uhrum__Siege_Corridor__Center_Valley__ex__Center_East_2),
+            "Uhrum > Siege Corridor > East 25 ==> Waterfalls > West 25 (1)" => Ok(ExitId::Uhrum__Siege_Corridor__East_25__ex__Waterfalls__West_25_1),
+            "Uhrum > Siege Corridor > East Hill ==> Mideast Tree (1)" => Ok(ExitId::Uhrum__Siege_Corridor__East_Hill__ex__Mideast_Tree_1),
+            "Uhrum > Siege Corridor > East Hill ==> Upper Rock East (1)" => Ok(ExitId::Uhrum__Siege_Corridor__East_Hill__ex__Upper_Rock_East_1),
+            "Uhrum > Siege Corridor > East Hill ==> Upper Rock East (2)" => Ok(ExitId::Uhrum__Siege_Corridor__East_Hill__ex__Upper_Rock_East_2),
+            "Uhrum > Siege Corridor > East Hill ==> Upper Rock East (3)" => Ok(ExitId::Uhrum__Siege_Corridor__East_Hill__ex__Upper_Rock_East_3),
+            "Uhrum > Siege Corridor > Mideast Tree ==> East Hill (1)" => Ok(ExitId::Uhrum__Siege_Corridor__Mideast_Tree__ex__East_Hill_1),
+            "Uhrum > Siege Corridor > Mideast Tree ==> Upper Rock West (1)" => Ok(ExitId::Uhrum__Siege_Corridor__Mideast_Tree__ex__Upper_Rock_West_1),
+            "Uhrum > Siege Corridor > Northwest Door ==> Giguna > Vertical Interchange > South (1)" => Ok(ExitId::Uhrum__Siege_Corridor__Northwest_Door__ex__Giguna__Vertical_Interchange__South_1),
+            "Uhrum > Siege Corridor > Northwest Door ==> Western Cache (1)" => Ok(ExitId::Uhrum__Siege_Corridor__Northwest_Door__ex__Western_Cache_1),
+            "Uhrum > Siege Corridor > Northwest Platform ==> Northwest Door (1)" => Ok(ExitId::Uhrum__Siege_Corridor__Northwest_Platform__ex__Northwest_Door_1),
+            "Uhrum > Siege Corridor > Northwest Platform ==> Western Cache (1)" => Ok(ExitId::Uhrum__Siege_Corridor__Northwest_Platform__ex__Western_Cache_1),
+            "Uhrum > Siege Corridor > Pond ==> East Hill (1)" => Ok(ExitId::Uhrum__Siege_Corridor__Pond__ex__East_Hill_1),
+            "Uhrum > Siege Corridor > Pond ==> East Hill (2)" => Ok(ExitId::Uhrum__Siege_Corridor__Pond__ex__East_Hill_2),
+            "Uhrum > Siege Corridor > Upper Rock Item ==> Upper Rock West (1)" => Ok(ExitId::Uhrum__Siege_Corridor__Upper_Rock_Item__ex__Upper_Rock_West_1),
+            "Uhrum > Siege Corridor > Upper Rock West ==> Upper Rock Item (1)" => Ok(ExitId::Uhrum__Siege_Corridor__Upper_Rock_West__ex__Upper_Rock_Item_1),
+            "Uhrum > Siege Corridor > West 26 ==> West Entrance > East 26 (1)" => Ok(ExitId::Uhrum__Siege_Corridor__West_26__ex__West_Entrance__East_26_1),
+            "Uhrum > Siege Corridor > West Greenery ==> West Grassy Ledge (1)" => Ok(ExitId::Uhrum__Siege_Corridor__West_Greenery__ex__West_Grassy_Ledge_1),
+            "Uhrum > Siege Corridor > Western Cache ==> Northwest Door (1)" => Ok(ExitId::Uhrum__Siege_Corridor__Western_Cache__ex__Northwest_Door_1),
+            "Uhrum > Siege Corridor > Western Cache ==> Northwest Platform (1)" => Ok(ExitId::Uhrum__Siege_Corridor__Western_Cache__ex__Northwest_Platform_1),
+            "Uhrum > Siege Corridor > Western Rock ==> Northwest Platform (1)" => Ok(ExitId::Uhrum__Siege_Corridor__Western_Rock__ex__Northwest_Platform_1),
             "Uhrum > West Entrance > Clear Passage ==> Portal Stand (1)" => Ok(ExitId::Uhrum__West_Entrance__Clear_Passage__ex__Portal_Stand_1),
             "Uhrum > West Entrance > Clear Passage ==> Portal Stand (2)" => Ok(ExitId::Uhrum__West_Entrance__Clear_Passage__ex__Portal_Stand_2),
             "Uhrum > West Entrance > East 26 ==> Siege Corridor > West 26 (1)" => Ok(ExitId::Uhrum__West_Entrance__East_26__ex__Siege_Corridor__West_26_1),
@@ -10678,6 +10794,7 @@ pub enum CanonId {
     Irikar_Gudam,
     Uhrum_West_Entrance_Upper_Wall,
     Uhrum_West_Entrance_Lower_Wall,
+    Fast_Travel,
 }
 impl fmt::Display for CanonId {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
@@ -10722,6 +10839,7 @@ impl fmt::Display for CanonId {
             CanonId::Uhrum_West_Entrance_Lower_Wall => {
                 write!(f, "{}", "Uhrum_West_Entrance_Lower_Wall")
             }
+            CanonId::Fast_Travel => write!(f, "{}", "Fast_Travel"),
         }
     }
 }
@@ -10764,6 +10882,7 @@ impl std::str::FromStr for CanonId {
             "Irikar_Gudam" => Ok(CanonId::Irikar_Gudam),
             "Uhrum_West_Entrance_Upper_Wall" => Ok(CanonId::Uhrum_West_Entrance_Upper_Wall),
             "Uhrum_West_Entrance_Lower_Wall" => Ok(CanonId::Uhrum_West_Entrance_Lower_Wall),
+            "Fast_Travel" => Ok(CanonId::Fast_Travel),
             _ => Err(format!("Could not recognize as a CanonId: {}", s)),
         }
     }

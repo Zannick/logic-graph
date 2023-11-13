@@ -437,46 +437,282 @@ areas:
   spots:
     - name: West 26
       coord: [21.05, 25.8]
+      local:
+        - to: West Greenery
+          jumps: 4
+      exits:
+        - to: West Entrance > East 26
+          tags: [xshift]
     - name: Western Cache
       coord: [21.1, 24.6]
+      local:
+        - to: Western Rock
+      locations:
+        - name: Core
+          item: Power_Core
+          req: $more_refills
+          tags: [standing]
+      exits:
+        - to: Northwest Platform
+          req: $hover
+          movement: base
+        - to: Northwest Door
+          req: $mist2
+          price: 40
+          movement: mist2
     - name: Western Rock
       coord: [21.3, 25.0]
+      local:
+        - to: Western Cache
+          jumps: 3
+        - to: West 26
+          thru: [21.45, 25.5]
+        - to: West Greenery
+      exits:
+        - to: Northwest Platform
+          req: $hover
+          movement: base
+          jumps: 2
     - name: Northwest Door
       coord: [21.5, 24.2]
+      local:
+        - to: Western Rock
+        - to: West 26
+          thru: [21.45, 25.5]
+        - to: Northwest Platform
+          jumps_down: 1
+        - to: West Rocky Ledge
+      exits:
+        - to: Western Cache
+          req: $hover
+          movement: base
+        - to: Giguna > Vertical Interchange > South
+          req: $mist2
+          price: 60
+          tags: [ydoor]
     - name: Northwest Platform
       coord: [21.75, 24.7]
+      local:
+        - to: Western Rock
+        - to: West 26
+          jumps_down: 1
+        - to: West Rocky Ledge
+      exits:
+        - to: Western Cache
+          req: $hover
+          movement: base
+          jumps: 2
+        - to: Northwest Door
+          req: $mist2
+          price: 20
+          movement: mist2
     - name: West Greenery
       coord: [22.2, 25.35]
+      local:
+        - to: West 26
+        - to: West Loop
+      exits:
+        - to: West Grassy Ledge
+          req: $hook
+          movement: base
+          jumps: 2
     - name: West Grassy Ledge
       coord: [22.3, 24.95]
+      local:
+        - to: West 26
+        - to: West Rocky Ledge
+          jumps: 1
+        - to: Center West
+          jumps: 4
+        - to: West Middle Tree
     - name: West Rocky Ledge
       coord: [22.15, 24.75]
+      local:
+        - to: West 26
+        - to: Northwest Platform
+          jumps: 1
+        - to: Center West
+          jumps: 4
+        - to: West Grassy Ledge
+        - to: West Middle Tree
+    - name: West Loop
+      coord: [23.2, 25.4]
+      local:
+        - to: West Greenery
+          jumps: 3
+        - to: West Middle Tree
+          thru: [23.325, 25.1]
+          jumps: [2, 3]
+    - name: West Middle Tree
+      coord: [22.7, 24.95]
+      local:
+        - to: West Grassy Ledge
+        - to: West Rocky Ledge
+          jumps: 2
+        - to: Center West
+          thru: [22.5, 24.75]
+          jumps: [1, 3]
+
     - name: Center West
       coord: [23.0, 24.4]
+      local:
+        - to: West Middle Tree
+        - to: West Grassy Ledge
+        - to: West Rocky Ledge
+        - to: Center Platform 1
 
     - name: Center Platform 1
       coord: [23.9, 24.7]
+      local:
+        - to: Center West
+          jumps: 4
+        - to: Center Platform 3
+        - to: Center East
     - name: Center Platform 3
       coord: [24.4, 24.7]
+      local:
+        - to: Mideast Hill
+          jumps_down: 1
+        - to: Mideast Tree
+        - to: Center Platform 1
+      exits:
+        - to: Upper Rock West
+          req: $hover
+          movement: base
+          jumps: 1
     - name: Center East
       coord: [24.2, 24.95]
+      local:
+        - to: Center Platform 1
+        - to: Center Box
+          thru: [24.25, 25.15]
+        - to: Mideast Hill
+          jumps: 1
     - name: Center Box
       coord: [23.7, 25.5]
+      local:
+        - to: Center Valley
+          jumps: 5
+      locations:
+        - name: Box
+          item: Health_Fragment
+          req: $can_damage
+          time: 1.5
+          tags: [standing]
+    - name: Center Valley
+      coord: [24.35, 25.2]
+      local:
+        - to: Mideast Hill
+          jumps: 2
+      exits:
+        - to: Center East
+          req: $grab
+          movement: base
+          jumps: 2
+        - to: Center East
+          req: $hook
+          movement: base
+          jumps: 1
     - name: Mideast Hill
       coord: [24.5, 24.9]
+      local:
+        - to: Center Platform 3
+          jumps: 1
+        - to: Center Valley
+        - to: Center East
+    - name: Mideast Tree
+      coord: [24.75, 24.9]
+      local:
+        - to: Mideast Hill
+        - to: Pond
+        - to: Center Platform 3
+          jumps: 1
+      exits:
+        - to: Upper Rock West
+          req: $hook
+          movement: base
+          jumps: 2
+        - to: East Hill
+          req: $hover
+          movement: base
+          jumps: 1
     - name: Upper Rock West
       coord: [25.0, 24.4]
+      local:
+        - to: Mideast Tree
+        - to: Mideast Hill
+        - to: Center Platform 3
+        - to: Pond
+      exits:
+        - to: Upper Rock Item
+          req: ^mode == 'drone'
+          movement: base
+          jumps: 1
     - name: Upper Rock Item
       coord: [25.4, 24.35]
+      local:
+        - to: Upper Rock East
+      locations:
+        - name: Urn
+          item: Fast_Travel
+          canon: Fast_Travel
+          tags: [urn]
+      exits:
+        - to: Upper Rock West
+          req: ^mode == 'drone'
+          movement: base
     - name: Upper Rock East
       coord: [25.55, 24.4]
+      local:
+        - to: Pond
+        - to: East Hill
+        - to: East 25
+        - to: Upper Rock Item
+          jumps: 1
 
     - name: Pond
       coord: [25.4, 25.5]
+      local:
+        - to: Mideast Tree
+          jumps: 5
+      exits:
+        - to: East Hill
+          req: $climb
+          movement: base
+          jumps: 5
+        - to: East Hill
+          req: $hover
+          movement: base
+          jumps: 4
     - name: East Hill
       coord: [25.7, 24.7]
+      local:
+        - to: East 25
+        - to: Pond
+      exits:
+        - to: Mideast Tree
+          req: $hover
+          movement: base
+        - to: Upper Rock East
+          req: $hook
+          movement: base
+          jumps: 1
+        - to: Upper Rock East
+          req: Anuman and $grab
+          movement: base
+          jumps: 1
+        - to: Upper Rock East
+          req: $mist2
+          price: 20
+          movement: mist2
     - name: East 25
       coord: [25.95, 24.75]
+      local:
+        - to: Mideast Hill
+          jumps: 1
+      exits:
+        - to: Waterfalls > West 25
+          tags: [xshift]
 
 - name: Glitchy Corridor
   on_entry: $reset_old_area(^newpos)

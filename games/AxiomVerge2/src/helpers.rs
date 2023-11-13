@@ -449,13 +449,13 @@ macro_rules! helper__all_weapons {
 }
 
 /// $other_items (  )
-/// [Boomerang, Power_Matrix]
+/// [Compass, Boomerang, Power_Matrix]
 #[macro_export]
 macro_rules! helper__other_items {
     ($ctx:expr) => {{
         #[allow(unused_imports)]
         use $crate::items::Item;
-        $ctx.has(Item::Boomerang) && $ctx.has(Item::Power_Matrix)
+        $ctx.has(Item::Compass) && $ctx.has(Item::Boomerang) && $ctx.has(Item::Power_Matrix)
     }};
 }
 

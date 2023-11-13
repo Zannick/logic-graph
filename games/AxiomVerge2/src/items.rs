@@ -422,7 +422,6 @@ pub fn unused_item(id: Item) -> bool {
             | Item::Aansur
             | Item::Amagi_Stronghold_Left_Wall
             | Item::Carnelian_Ring
-            | Item::Compass
             | Item::Dangerous_Ideas
             | Item::Double_Axe
             | Item::Drone_Melee_Damage_3
