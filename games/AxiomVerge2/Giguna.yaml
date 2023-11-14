@@ -583,10 +583,12 @@ areas:
       local:
         - to: Lower Path Right
         - to: West 14
+        - to: Passage Cache
     - name: Lower Cliff
       coord: [15.85, 12.85]
       local:
         - to: Lower Path Left
+        - to: Westward Hill
       exits:
         - to: Middle Cliff
           req: $climb
@@ -703,11 +705,13 @@ areas:
           jumps: 3
         - to: Passage East
         - to: Westward Hill
+          jumps: 2
     - name: Passage East
       coord: [16.6, 13.6]
       local:
         - to: West Plains
         - to: Westward Hill
+          jumps: 2
       exits:
         - to: Passage Cache
           req: ^mode == 'drone' and Ebih_Wasteland_Passage_H
@@ -734,6 +738,14 @@ areas:
         - to: Passage East
           req: ^mode == 'drone' and Ebih_Wasteland_Passage_H
           movement: base
+        - to: Lower Path Left
+          req: $grab
+          movement: base
+          jumps: 2
+        - to: Lower Path Left
+          req: $hook
+          movement: base
+          jumps: 1
       hybrid:
         - name: Clear Horizontal Passage Manually
           to: Passage East
