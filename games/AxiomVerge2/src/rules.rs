@@ -385,6 +385,22 @@ pub fn access_ft_main_and_map__amagi__main_area__save(ctx: &Context) -> bool {
     // $ft_main and ^map__amagi__main_area__save
     (helper__ft_main!(ctx) && ctx.map__amagi__main_area__save())
 }
+pub fn access_ft_main_and_map__ebih__base_camp__save(ctx: &Context) -> bool {
+    // $ft_main and ^map__ebih__base_camp__save
+    (helper__ft_main!(ctx) && ctx.map__ebih__base_camp__save())
+}
+pub fn access_ft_main_and_map__ebih__ebih_west__lower_save(ctx: &Context) -> bool {
+    // $ft_main and ^map__ebih__ebih_west__lower_save
+    (helper__ft_main!(ctx) && ctx.map__ebih__ebih_west__lower_save())
+}
+pub fn access_ft_main_and_map__ebih__ebih_west__mid_save(ctx: &Context) -> bool {
+    // $ft_main and ^map__ebih__ebih_west__mid_save
+    (helper__ft_main!(ctx) && ctx.map__ebih__ebih_west__mid_save())
+}
+pub fn access_ft_main_and_map__ebih__ebih_west__upper_save(ctx: &Context) -> bool {
+    // $ft_main and ^map__ebih__ebih_west__upper_save
+    (helper__ft_main!(ctx) && ctx.map__ebih__ebih_west__upper_save())
+}
 pub fn access_ft_main_and_map__giguna__giguna_base__save(ctx: &Context) -> bool {
     // $ft_main and ^map__giguna__giguna_base__save
     (helper__ft_main!(ctx) && ctx.map__giguna__giguna_base__save())

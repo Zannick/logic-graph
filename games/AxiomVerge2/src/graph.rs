@@ -4256,6 +4256,18 @@ impl world::Accessible for Warp {
                 WarpId::FastTravelAmagiMainArea => {
                     rules::access_ft_main_and_map__amagi__main_area__save(&ctx)
                 }
+                WarpId::FastTravelEbihBaseCamp => {
+                    rules::access_ft_main_and_map__ebih__base_camp__save(&ctx)
+                }
+                WarpId::FastTravelEbihWestLower => {
+                    rules::access_ft_main_and_map__ebih__ebih_west__lower_save(&ctx)
+                }
+                WarpId::FastTravelEbihWestMid => {
+                    rules::access_ft_main_and_map__ebih__ebih_west__mid_save(&ctx)
+                }
+                WarpId::FastTravelEbihWestUpper => {
+                    rules::access_ft_main_and_map__ebih__ebih_west__upper_save(&ctx)
+                }
                 WarpId::FastTravelGigunaBase => {
                     rules::access_ft_main_and_map__giguna__giguna_base__save(&ctx)
                 }
@@ -4319,6 +4331,10 @@ impl world::Warp for Warp {
                 WarpId::ExitBreach => data::flipside(ctx.position()),
                 WarpId::ExitMenu => ctx.last(),
                 WarpId::FastTravelAmagiMainArea => SpotId::Amagi__Main_Area__Save_Point,
+                WarpId::FastTravelEbihBaseCamp => SpotId::Ebih__Base_Camp__Save_Point,
+                WarpId::FastTravelEbihWestLower => SpotId::Ebih__Ebih_West__Lower_Save,
+                WarpId::FastTravelEbihWestMid => SpotId::Ebih__Ebih_West__Mid_Save,
+                WarpId::FastTravelEbihWestUpper => SpotId::Ebih__Ebih_West__Upper_Save,
                 WarpId::FastTravelGigunaBase => SpotId::Giguna__Giguna_Base__Save_Point,
                 WarpId::FastTravelGigunaBreachPeak => SpotId::Giguna_Breach__Peak__Save_Point,
                 WarpId::FastTravelGigunaBreachSw => SpotId::Giguna_Breach__SW_Save__Save_Point,
@@ -4360,6 +4376,10 @@ impl world::Warp for Warp {
             WarpId::ExitBreach => rules::action_clear_breach_save(ctx),
             WarpId::ExitMenu => rules::action_last__default(ctx),
             WarpId::FastTravelAmagiMainArea => rules::action_refill_energy(ctx),
+            WarpId::FastTravelEbihBaseCamp => rules::action_refill_energy(ctx),
+            WarpId::FastTravelEbihWestLower => rules::action_refill_energy(ctx),
+            WarpId::FastTravelEbihWestMid => rules::action_refill_energy(ctx),
+            WarpId::FastTravelEbihWestUpper => rules::action_refill_energy(ctx),
             WarpId::FastTravelGigunaBase => rules::action_refill_energy(ctx),
             WarpId::FastTravelGigunaBreachPeak => rules::action_refill_energy(ctx),
             WarpId::FastTravelGigunaBreachSw => rules::action_refill_energy(ctx),
@@ -4384,6 +4404,10 @@ impl world::Warp for Warp {
             WarpId::ExitBreach => false,
             WarpId::ExitMenu => false,
             WarpId::FastTravelAmagiMainArea => false,
+            WarpId::FastTravelEbihBaseCamp => false,
+            WarpId::FastTravelEbihWestLower => false,
+            WarpId::FastTravelEbihWestMid => false,
+            WarpId::FastTravelEbihWestUpper => false,
             WarpId::FastTravelGigunaBase => false,
             WarpId::FastTravelGigunaBreachPeak => false,
             WarpId::FastTravelGigunaBreachSw => false,
@@ -30116,6 +30140,30 @@ pub fn build_warps() -> EnumMap<WarpId, Warp> {
         },
         WarpId::FastTravelAmagiMainArea => Warp {
             id: WarpId::FastTravelAmagiMainArea,
+            dest: SpotId::None,
+            time: 12000,
+            price: Currency::Free,
+        },
+        WarpId::FastTravelEbihBaseCamp => Warp {
+            id: WarpId::FastTravelEbihBaseCamp,
+            dest: SpotId::None,
+            time: 12000,
+            price: Currency::Free,
+        },
+        WarpId::FastTravelEbihWestLower => Warp {
+            id: WarpId::FastTravelEbihWestLower,
+            dest: SpotId::None,
+            time: 12000,
+            price: Currency::Free,
+        },
+        WarpId::FastTravelEbihWestMid => Warp {
+            id: WarpId::FastTravelEbihWestMid,
+            dest: SpotId::None,
+            time: 12000,
+            price: Currency::Free,
+        },
+        WarpId::FastTravelEbihWestUpper => Warp {
+            id: WarpId::FastTravelEbihWestUpper,
             dest: SpotId::None,
             time: 12000,
             price: Currency::Free,

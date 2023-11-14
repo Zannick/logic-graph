@@ -93,7 +93,14 @@
   Move... to Irikar Breach > Save Room > West
 * Collect Flask from Irikar Breach > Worm Rave > Corner > Item
 ! Do Irikar Breach > Exit Corridor > Portal Stand > Enter Portal
+* Collect Irikar_Gudam from Irikar > Boss Room > Bull's Feet > Defeat Gudam
+* Collect Big_Flask from Irikar > Boss Room > Bull's Feet > Boss Reward
 * Collect Terminal_Breakthrough_2 from Irikar > Lamassu > Desk > Item
 * Collect Health_Fragment from Uhrum > Siege Corridor > Center Box > Box
 * Collect Storm_Bomb from Uhrum > Siege Corridor > Pond > Item
 * Collect Fast_Travel from Uhrum > Siege Corridor > Upper Rock Item > Urn
+* Collect Health_Fragment from Ebih > By Garage > Crawlspace > Fragment
+* Collect Infect_L1 from Menu > Upgrade Menu > Infection > Infection Level 1
+* Collect Infect_L2 from Menu > Upgrade Menu > Infection > Infection Level 2
+! Do Recall Drone
+* Collect Flask from Giguna > Lamassu > Deposit > Flask

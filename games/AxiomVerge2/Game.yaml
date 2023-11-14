@@ -165,6 +165,26 @@ warps:
   # Fast travel times are slightly different when travelling within an area
   # Fast travels within main are technically doable from the menu, but not from the menu in the breach.
   # also not possible in interiors! D: TODO: Move interiors into their own region.
+  fast_travel_ebih_base_camp:
+    time: 12
+    req: $ft_main and ^map__ebih__base_camp__save
+    to: Ebih > Base Camp > Save Point
+    after: $refill_energy
+  fast_travel_ebih_west_upper:
+    time: 12
+    req: $ft_main and ^map__ebih__ebih_west__upper_save
+    to: Ebih > Ebih West > Upper Save
+    after: $refill_energy
+  fast_travel_ebih_west_mid:
+    time: 12
+    req: $ft_main and ^map__ebih__ebih_west__mid_save
+    to: Ebih > Ebih West > Mid Save
+    after: $refill_energy
+  fast_travel_ebih_west_lower:
+    time: 12
+    req: $ft_main and ^map__ebih__ebih_west__lower_save
+    to: Ebih > Ebih West > Lower Save
+    after: $refill_energy
   fast_travel_amagi_main_area:
     time: 12
     req: $ft_main and ^map__amagi__main_area__save
