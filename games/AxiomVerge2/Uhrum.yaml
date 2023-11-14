@@ -675,7 +675,7 @@ areas:
       local:
         - to: Mideast Tree
           jumps: 5
-      location:
+      locations:
         - name: Item
           item: Storm_Bomb
           tags: [standing]

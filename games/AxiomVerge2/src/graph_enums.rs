@@ -6116,6 +6116,7 @@ pub enum LocationId {
     Menu__Upgrade_Menu__Physiology__Health_Upgrade_5,
     Menu__Upgrade_Menu__Physiology__Mist_Upgrade,
     Uhrum__Siege_Corridor__Center_Box__Box,
+    Uhrum__Siege_Corridor__Pond__Item,
     Uhrum__Siege_Corridor__Upper_Rock_Item__Urn,
     Uhrum__Siege_Corridor__Western_Cache__Core,
     Uhrum__West_Entrance__Gate_Switch__Open_Gate,
@@ -6759,6 +6760,9 @@ impl fmt::Display for LocationId {
             LocationId::Uhrum__Siege_Corridor__Center_Box__Box => {
                 write!(f, "{}", "Uhrum > Siege Corridor > Center Box > Box")
             }
+            LocationId::Uhrum__Siege_Corridor__Pond__Item => {
+                write!(f, "{}", "Uhrum > Siege Corridor > Pond > Item")
+            }
             LocationId::Uhrum__Siege_Corridor__Upper_Rock_Item__Urn => {
                 write!(f, "{}", "Uhrum > Siege Corridor > Upper Rock Item > Urn")
             }
@@ -7306,6 +7310,9 @@ impl std::str::FromStr for LocationId {
             }
             "Uhrum > Siege Corridor > Center Box > Box" => {
                 Ok(LocationId::Uhrum__Siege_Corridor__Center_Box__Box)
+            }
+            "Uhrum > Siege Corridor > Pond > Item" => {
+                Ok(LocationId::Uhrum__Siege_Corridor__Pond__Item)
             }
             "Uhrum > Siege Corridor > Upper Rock Item > Urn" => {
                 Ok(LocationId::Uhrum__Siege_Corridor__Upper_Rock_Item__Urn)

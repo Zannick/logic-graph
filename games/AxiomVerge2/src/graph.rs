@@ -2473,6 +2473,7 @@ impl world::Accessible for Location {
                 rules::access_nanite_mist(&ctx)
             }
             LocationId::Uhrum__Siege_Corridor__Center_Box__Box => rules::access_can_damage(&ctx),
+            LocationId::Uhrum__Siege_Corridor__Pond__Item => true,
             LocationId::Uhrum__Siege_Corridor__Upper_Rock_Item__Urn => true,
             LocationId::Uhrum__Siege_Corridor__Western_Cache__Core => {
                 rules::access_more_refills(&ctx)
@@ -5969,7 +5970,7 @@ impl world::World for World {
     type Exit = Exit;
     type Action = Action;
     type Warp = Warp;
-    const NUM_LOCATIONS: u32 = 183;
+    const NUM_LOCATIONS: u32 = 184;
 
     fn objective_name(&self) -> String {
         format!("{}", self.objective)
@@ -6452,6 +6453,7 @@ impl world::World for World {
             ],
             Item::Refill => vec![LocationId::Uhrum__West_Entrance__Sand__Refill],
             Item::Fast_Travel => vec![LocationId::Uhrum__Siege_Corridor__Upper_Rock_Item__Urn],
+            Item::Storm_Bomb => vec![LocationId::Uhrum__Siege_Corridor__Pond__Item],
             _ => Vec::new(),
         }
     }
@@ -6862,6 +6864,7 @@ impl world::World for World {
             LocationId::Uhrum__Siege_Corridor__Upper_Rock_Item__Urn => {
                 SpotId::Uhrum__Siege_Corridor__Upper_Rock_Item
             }
+            LocationId::Uhrum__Siege_Corridor__Pond__Item => SpotId::Uhrum__Siege_Corridor__Pond,
         }
     }
 
@@ -8378,6 +8381,7 @@ impl world::World for World {
             | SpotId::Uhrum__Siege_Corridor__Center_Box
             | SpotId::Uhrum__Siege_Corridor__East_25
             | SpotId::Uhrum__Siege_Corridor__Northwest_Door
+            | SpotId::Uhrum__Siege_Corridor__Pond
             | SpotId::Uhrum__Siege_Corridor__Upper_Rock_Item
             | SpotId::Uhrum__Siege_Corridor__West_26
             | SpotId::Uhrum__Siege_Corridor__Western_Cache
@@ -9977,6 +9981,14 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
             item: Item::Fast_Travel,
             price: Currency::Free,
             time: 5500,
+            exit_id: None,
+        },
+        LocationId::Uhrum__Siege_Corridor__Pond__Item => Location {
+            id: LocationId::Uhrum__Siege_Corridor__Pond__Item,
+            canonical: CanonId::None,
+            item: Item::Storm_Bomb,
+            price: Currency::Free,
+            time: 0,
             exit_id: None,
         },
     }
@@ -29930,7 +29942,8 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
         SpotId::Uhrum__Siege_Corridor__Pond => Spot {
             id: SpotId::Uhrum__Siege_Corridor__Pond,
             locations: Range {
-                start: 0, end: 0,
+                start: LocationId::Uhrum__Siege_Corridor__Pond__Item.into_usize(),
+                end: LocationId::Uhrum__Siege_Corridor__Pond__Item.into_usize() + 1,
             },
             exits: Range {
                 start: ExitId::Uhrum__Siege_Corridor__Pond__ex__East_Hill_1.into_usize(),
