@@ -675,6 +675,10 @@ areas:
       local:
         - to: Mideast Tree
           jumps: 5
+      location:
+        - name: Item
+          item: Storm_Bomb
+          tags: [standing]
       exits:
         - to: East Hill
           req: $climb

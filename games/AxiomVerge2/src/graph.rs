@@ -7737,6 +7737,9 @@ impl world::World for World {
                 if !ctx.has(Item::Amashilama) {
                     vec.push((Item::Amashilama, 1));
                 }
+                if !ctx.has(Item::Big_Flask) {
+                    vec.push((Item::Big_Flask, 1));
+                }
                 if !ctx.has(Item::Boomerang) {
                     vec.push((Item::Boomerang, 1));
                 }
@@ -7758,14 +7761,23 @@ impl world::World for World {
                 if !ctx.has(Item::Compass) {
                     vec.push((Item::Compass, 1));
                 }
+                if !ctx.has(Item::Dangerous_Ideas) {
+                    vec.push((Item::Dangerous_Ideas, 1));
+                }
                 if !ctx.has(Item::Dear_Ernest) {
                     vec.push((Item::Dear_Ernest, 1));
                 }
-                if ctx.count(Item::Flask) < 11 {
-                    vec.push((Item::Flask, 11 - ctx.count(Item::Flask)));
+                if !ctx.has(Item::Drone_Hover) {
+                    vec.push((Item::Drone_Hover, 1));
                 }
-                if ctx.count(Item::Health_Fragment) < 5 {
-                    vec.push((Item::Health_Fragment, 5 - ctx.count(Item::Health_Fragment)));
+                if !ctx.has(Item::Fast_Travel) {
+                    vec.push((Item::Fast_Travel, 1));
+                }
+                if ctx.count(Item::Flask) < 12 {
+                    vec.push((Item::Flask, 12 - ctx.count(Item::Flask)));
+                }
+                if ctx.count(Item::Health_Fragment) < 6 {
+                    vec.push((Item::Health_Fragment, 6 - ctx.count(Item::Health_Fragment)));
                 }
                 if !ctx.has(Item::Health_Node) {
                     vec.push((Item::Health_Node, 1));
@@ -7803,8 +7815,14 @@ impl world::World for World {
                 if !ctx.has(Item::Slingshot_Hook) {
                     vec.push((Item::Slingshot_Hook, 1));
                 }
+                if !ctx.has(Item::Storm_Bomb) {
+                    vec.push((Item::Storm_Bomb, 1));
+                }
                 if !ctx.has(Item::Terminal_Breakthrough_1) {
                     vec.push((Item::Terminal_Breakthrough_1, 1));
+                }
+                if !ctx.has(Item::Terminal_Breakthrough_2) {
+                    vec.push((Item::Terminal_Breakthrough_2, 1));
                 }
                 if !ctx.has(Item::The_Ideal_Kiengir) {
                     vec.push((Item::The_Ideal_Kiengir, 1));
@@ -7825,6 +7843,7 @@ impl world::World for World {
             Objective::Start => vec![(Item::Remote_Drone, 1)],
             Objective::Progress => vec![
                 (Item::Amashilama, 1),
+                (Item::Big_Flask, 1),
                 (Item::Boomerang, 1),
                 (Item::Breach_Sight, 1),
                 (Item::Bronze_Axe, 1),
@@ -7832,9 +7851,12 @@ impl world::World for World {
                 (Item::Commemorative_Speech, 1),
                 (Item::Companies_Layoff, 1),
                 (Item::Compass, 1),
+                (Item::Dangerous_Ideas, 1),
                 (Item::Dear_Ernest, 1),
-                (Item::Flask, 11),
-                (Item::Health_Fragment, 5),
+                (Item::Drone_Hover, 1),
+                (Item::Fast_Travel, 1),
+                (Item::Flask, 12),
+                (Item::Health_Fragment, 6),
                 (Item::Health_Node, 1),
                 (Item::Heretics_Tablet, 1),
                 (Item::Ice_Axe, 1),
@@ -7847,7 +7869,9 @@ impl world::World for World {
                 (Item::Researchers_Missing, 1),
                 (Item::Shockwave, 1),
                 (Item::Slingshot_Hook, 1),
+                (Item::Storm_Bomb, 1),
                 (Item::Terminal_Breakthrough_1, 1),
+                (Item::Terminal_Breakthrough_2, 1),
                 (Item::The_Ideal_Kiengir, 1),
                 (Item::Under_Siege, 1),
                 (Item::Wall_Climb, 1),
@@ -8452,6 +8476,7 @@ impl World {
                     | Item::Refill
                     | Item::Researchers_Missing
                     | Item::Royal_Dagger
+                    | Item::Storm_Bomb
                     | Item::Terminal_Breakthrough_1
                     | Item::Terminal_Breakthrough_2
                     | Item::The_Ideal_Kiengir
@@ -8463,7 +8488,6 @@ impl World {
                 Item::Aansur
                     | Item::Amagi_Stronghold_Left_Wall
                     | Item::Carnelian_Ring
-                    | Item::Dangerous_Ideas
                     | Item::Double_Axe
                     | Item::Drone_Melee_Damage_3
                     | Item::Drone_Melee_Speed_3
@@ -8482,7 +8506,6 @@ impl World {
                     | Item::Ranged_Speed_3
                     | Item::Refill
                     | Item::Royal_Dagger
-                    | Item::Terminal_Breakthrough_2
                     | Item::Udusan
             ),
             _ => false,

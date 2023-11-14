@@ -395,7 +395,7 @@ macro_rules! helper__attract {
 }
 
 /// $all_notes (  )
-/// [Dear_Ernest, Researchers_Missing, Letter_from_Trace,  Heretics_Tablet, Terminal_Breakthrough_1, Companies_Layoff, Record_Losses,  Under_Siege, The_Ideal_Kiengir, Building_of_the_School, Commemorative_Speech]
+/// [Dear_Ernest, Researchers_Missing, Letter_from_Trace,  Heretics_Tablet, Terminal_Breakthrough_1, Companies_Layoff, Record_Losses,  Under_Siege, The_Ideal_Kiengir, Building_of_the_School, Commemorative_Speech,  Terminal_Breakthrough_2, Dangerous_Ideas, Storm_Bomb]
 #[macro_export]
 macro_rules! helper__all_notes {
     ($ctx:expr) => {{
@@ -412,28 +412,31 @@ macro_rules! helper__all_notes {
             && $ctx.has(Item::The_Ideal_Kiengir)
             && $ctx.has(Item::Building_of_the_School)
             && $ctx.has(Item::Commemorative_Speech)
+            && $ctx.has(Item::Terminal_Breakthrough_2)
+            && $ctx.has(Item::Dangerous_Ideas)
+            && $ctx.has(Item::Storm_Bomb)
     }};
 }
 
 /// $all_flasks (  )
-/// [Flask{11}]
+/// [Flask{12}, Big_Flask]
 #[macro_export]
 macro_rules! helper__all_flasks {
     ($ctx:expr) => {{
         #[allow(unused_imports)]
         use $crate::items::Item;
-        $ctx.count(Item::Flask) >= 11
+        $ctx.count(Item::Flask) >= 12 && $ctx.has(Item::Big_Flask)
     }};
 }
 
 /// $all_health (  )
-/// [Health_Node, Health_Fragment{5}]
+/// [Health_Node, Health_Fragment{6}]
 #[macro_export]
 macro_rules! helper__all_health {
     ($ctx:expr) => {{
         #[allow(unused_imports)]
         use $crate::items::Item;
-        $ctx.has(Item::Health_Node) && $ctx.count(Item::Health_Fragment) >= 5
+        $ctx.has(Item::Health_Node) && $ctx.count(Item::Health_Fragment) >= 6
     }};
 }
 
@@ -460,7 +463,7 @@ macro_rules! helper__other_items {
 }
 
 /// $all_urns (  )
-/// [Amashilama, Ledge_Grab, Infect, Remote_Drone, Shockwave, Wall_Climb, Slingshot_Hook, Breach_Sight]
+/// [Amashilama, Ledge_Grab, Infect, Remote_Drone, Shockwave, Wall_Climb, Slingshot_Hook, Breach_Sight,  Drone_Hover, Fast_Travel]
 #[macro_export]
 macro_rules! helper__all_urns {
     ($ctx:expr) => {{
@@ -474,6 +477,8 @@ macro_rules! helper__all_urns {
             && $ctx.has(Item::Wall_Climb)
             && $ctx.has(Item::Slingshot_Hook)
             && $ctx.has(Item::Breach_Sight)
+            && $ctx.has(Item::Drone_Hover)
+            && $ctx.has(Item::Fast_Travel)
     }};
 }
 
