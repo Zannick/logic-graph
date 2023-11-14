@@ -1120,6 +1120,15 @@ pub fn access_not_within_menu_and_flasks__0(ctx: &Context) -> bool {
         _ => false,
     }) && Into::<i32>::into(ctx.flasks()) > 0.into())
 }
+pub fn access_not_within_menu_and_not_breach_and_anuman_and_mode__drone(ctx: &Context) -> bool {
+    // NOT WITHIN `Menu` and not ^breach and Anuman and ^mode == 'drone'
+    (((!(match get_region(ctx.position()) {
+        RegionId::Menu => true,
+        _ => false,
+    }) && !data::breach(ctx.position()))
+        && ctx.has(Item::Anuman))
+        && ctx.mode() == enums::Mode::Drone)
+}
 pub fn access_not_within_menu_and_not_breach_and_can_recall(ctx: &Context) -> bool {
     // NOT WITHIN `Menu` and not ^breach and $can_recall
     ((!(match get_region(ctx.position()) {

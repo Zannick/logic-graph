@@ -252,7 +252,7 @@ actions:
     do: ^mode = 'drone'
     time: 0.1
   - name: Become Indra
-    req: NOT WITHIN `Menu` and not ^breach and ^mode == 'drone'
+    req: NOT WITHIN `Menu` and not ^breach and Anuman and ^mode == 'drone'
     do: ^mode = 'Indra'
     time: 0.1
 

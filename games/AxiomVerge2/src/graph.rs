@@ -3998,7 +3998,7 @@ impl world::Accessible for Action {
                     rules::access_not_within_menu_and_anuman_and_mode__drone(&ctx)
                 }
                 ActionId::Global__Become_Indra => {
-                    rules::access_not_within_menu_and_not_breach_and_mode__drone(&ctx)
+                    rules::access_not_within_menu_and_not_breach_and_anuman_and_mode__drone(&ctx)
                 }
                 ActionId::Global__Deploy_Drone => {
                     rules::access_not_within_menu_and_can_deploy(&ctx)
