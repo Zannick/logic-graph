@@ -205,5 +205,8 @@ where
         ctx = next;
     }
     output.push(format!("Elapsed: {}ms", ctx.elapsed()));
+    if !world.won(ctx.get()) {
+        output.push(format!("Remaining items needed: {:?}", world.items_needed(ctx.get())));
+    }
     Ok(output.join("\n"))
 }

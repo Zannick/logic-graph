@@ -2,6 +2,7 @@
   EarthSavewarp to Antarctica > West > Helipad
 * Collect Station_Power from Antarctica > Power Room > Switch > Flip
   EarthSavewarp to Antarctica > East > Save Point
+* Collect Compass from Glacier > Compass Room > Center > Table
 * Take hybrid exit Glacier > The Big Drop > Water Surface > Drown, collecting Amashilama
 * Collect Boomerang from Glacier > Boomerang Room > Pedestal > Item
 * Collect Switch_36_11 from Glacier > Vertical Room > Under Switch > Switch
@@ -67,7 +68,32 @@
 
   IndraSavewarp to Giguna > Giguna Northeast > Save Point
 ! Do Giguna > Ruins West > Lower Ledge > Hack Kishib
+* Collect Flask from Giguna > Ruins Top > Small Ledge > Shockwave Flask
   Move... to Giguna > Ruins Top > Portal Left
 ! Do Deploy Drone
 ! Do Giguna > Ruins Top > Portal > Enter Portal
+* Collect Health_Fragment from Giguna Breach > Cubby > Rocks > Health
 * Collect Slingshot_Hook from Giguna Breach > Slingshot > Ravine > Urn
+* Collect Flask from Giguna Breach > Chimney > Cache > Flask
+! Do Giguna Breach > Peak > Portal > Portal
+
+! Do Recall Drone
+  IndraSavewarp to Giguna > Ruins Top > Save Point
+! Do Giguna > Ruins Top > Turret Balcony West > Throw Drone onto Tower
+* Collect The_Ideal_Kiengir from Giguna > West Tower > Top > Tablet
+* Collect Flask from Giguna > Far Corner > Grass > Obscured Item
+
+! Do Irikar > Hub > Save Point > Save
+* Collect Commemorative_Speech from Irikar > Hub > Sat Tower Top Ledge > Tablet
+* Collect Breach_Sight from Irikar > Sight Room > Item Pedestal > Urn
+
+  DroneSavewarp to Irikar > Hub > Save Point
+! Do Irikar > Hub > Portal Stand > Enter Portal
+* Collect Drone_Hover from Irikar Breach > Hover Room > Bottom > Item
+  Move... to Irikar Breach > Save Room > West
+* Collect Flask from Irikar Breach > Worm Rave > Corner > Item
+! Do Irikar Breach > Exit Corridor > Portal Stand > Enter Portal
+* Collect Terminal_Breakthrough_2 from Irikar > Lamassu > Desk > Item
+* Collect Health_Fragment from Uhrum > Siege Corridor > Center Box > Box
+* Collect Storm_Bomb from Uhrum > Siege Corridor > Pond > Item
+* Collect Fast_Travel from Uhrum > Siege Corridor > Upper Rock Item > Urn
