@@ -2904,8 +2904,8 @@ impl world::Accessible for Exit {
             ExitId::Giguna__East_Caverns__Middle_Ledge__ex__Upper_Floor_Ledge_2 => rules::access_grab(&ctx),
             ExitId::Giguna__East_Caverns__Middle_Ledge__ex__Upper_Passage_West_1 => rules::access_hook(&ctx),
             ExitId::Giguna__East_Caverns__Middle_Rock__ex__Hidden_Passage_East_1 => rules::access_giguna__east_caverns__middle_rock__ex__hidden_passage_east_1__req(&ctx),
-            ExitId::Giguna__East_Caverns__Midwest_Ledge__ex__Hidden_Passage_East_1 => rules::access_giguna__east_caverns__midwest_ledge__ex__hidden_passage_east_1__req(&ctx),
-            ExitId::Giguna__East_Caverns__Midwest_Ledge__ex__Hidden_Passage_East_2 => rules::access_giguna__east_caverns__midwest_ledge__ex__hidden_passage_east_2__req(&ctx),
+            ExitId::Giguna__East_Caverns__Midwest_Ledge__ex__Hidden_Passage_West_1 => rules::access_giguna__east_caverns__midwest_ledge__ex__hidden_passage_west_1__req(&ctx),
+            ExitId::Giguna__East_Caverns__Midwest_Ledge__ex__Hidden_Passage_West_2 => rules::access_giguna__east_caverns__midwest_ledge__ex__hidden_passage_west_2__req(&ctx),
             ExitId::Giguna__East_Caverns__Midwest_Ledge__ex__Middle_Ledge_1 => rules::access_grab(&ctx),
             ExitId::Giguna__East_Caverns__Statues_Ledge__ex__Hidden_Passage_West_1 => rules::access_giguna__east_caverns__statues_ledge__ex__hidden_passage_west_1__req(&ctx),
             ExitId::Giguna__East_Caverns__Statues_Ledge__ex__Hidden_Passage_West_2 => rules::access_giguna__east_caverns__statues_ledge__ex__hidden_passage_west_2__req(&ctx),
@@ -7477,7 +7477,7 @@ impl world::World for World {
             ExitId::Giguna__East_Caverns__Middle_Rock__ex__Hidden_Passage_East_1 => SpotId::Giguna__East_Caverns__Middle_Rock,
             ExitId::Giguna__East_Caverns__Hidden_Passage_East__ex__Hidden_Passage_Center_1 => SpotId::Giguna__East_Caverns__Hidden_Passage_East,
             ExitId::Giguna__East_Caverns__Hidden_Passage_West__ex__Hidden_Passage_Center_1 | ExitId:: Giguna__East_Caverns__Hidden_Passage_West__ex__Statues_Ledge_1 | ExitId:: Giguna__East_Caverns__Hidden_Passage_West__ex__Statues_Ledge_2 => SpotId::Giguna__East_Caverns__Hidden_Passage_West,
-            ExitId::Giguna__East_Caverns__Midwest_Ledge__ex__Middle_Ledge_1 | ExitId:: Giguna__East_Caverns__Midwest_Ledge__ex__Hidden_Passage_East_1 | ExitId:: Giguna__East_Caverns__Midwest_Ledge__ex__Hidden_Passage_East_2 => SpotId::Giguna__East_Caverns__Midwest_Ledge,
+            ExitId::Giguna__East_Caverns__Midwest_Ledge__ex__Middle_Ledge_1 | ExitId:: Giguna__East_Caverns__Midwest_Ledge__ex__Hidden_Passage_West_1 | ExitId:: Giguna__East_Caverns__Midwest_Ledge__ex__Hidden_Passage_West_2 => SpotId::Giguna__East_Caverns__Midwest_Ledge,
             ExitId::Giguna__East_Caverns__Statues_Ledge__ex__Midwest_Ledge_1 | ExitId:: Giguna__East_Caverns__Statues_Ledge__ex__Midwest_Ledge_2 | ExitId:: Giguna__East_Caverns__Statues_Ledge__ex__Hidden_Passage_West_1 | ExitId:: Giguna__East_Caverns__Statues_Ledge__ex__Hidden_Passage_West_2 => SpotId::Giguna__East_Caverns__Statues_Ledge,
             ExitId::Giguna__East_Caverns__Switch__ex__Door_1 => SpotId::Giguna__East_Caverns__Switch,
             ExitId::Giguna__East_Caverns__West_16__ex__Door_1 | ExitId:: Giguna__East_Caverns__West_16__ex__Antechamber__East_16_1 => SpotId::Giguna__East_Caverns__West_16,
@@ -13739,17 +13739,17 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
             price: Currency::Free,
             loc_id: None,
         },
-        ExitId::Giguna__East_Caverns__Midwest_Ledge__ex__Hidden_Passage_East_1 => Exit {
-            id: ExitId::Giguna__East_Caverns__Midwest_Ledge__ex__Hidden_Passage_East_1,
+        ExitId::Giguna__East_Caverns__Midwest_Ledge__ex__Hidden_Passage_West_1 => Exit {
+            id: ExitId::Giguna__East_Caverns__Midwest_Ledge__ex__Hidden_Passage_West_1,
             time: 1750,
-            dest: SpotId::Giguna__East_Caverns__Hidden_Passage_East,
+            dest: SpotId::Giguna__East_Caverns__Hidden_Passage_West,
             price: Currency::Free,
             loc_id: None,
         },
-        ExitId::Giguna__East_Caverns__Midwest_Ledge__ex__Hidden_Passage_East_2 => Exit {
-            id: ExitId::Giguna__East_Caverns__Midwest_Ledge__ex__Hidden_Passage_East_2,
+        ExitId::Giguna__East_Caverns__Midwest_Ledge__ex__Hidden_Passage_West_2 => Exit {
+            id: ExitId::Giguna__East_Caverns__Midwest_Ledge__ex__Hidden_Passage_West_2,
             time: 1500,
-            dest: SpotId::Giguna__East_Caverns__Hidden_Passage_East,
+            dest: SpotId::Giguna__East_Caverns__Hidden_Passage_West,
             price: Currency::Energy(20),
             loc_id: None,
         },
@@ -24925,7 +24925,7 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             exits: Range {
-                start: ExitId::Giguna__East_Caverns__Midwest_Ledge__ex__Hidden_Passage_East_1.into_usize(),
+                start: ExitId::Giguna__East_Caverns__Midwest_Ledge__ex__Hidden_Passage_West_1.into_usize(),
                 end: ExitId::Giguna__East_Caverns__Midwest_Ledge__ex__Middle_Ledge_1.into_usize() + 1,
             },
             actions: Range {

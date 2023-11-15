@@ -1563,8 +1563,8 @@ digraph AxiomVerge2 {
     Giguna__East_Caverns__Hidden_Passage_West -> Giguna__East_Caverns__Hidden_Passage_Center;
     Giguna__East_Caverns__Hidden_Passage_West -> Giguna__East_Caverns__Statues_Ledge;
     Giguna__East_Caverns__Hidden_Passage_West -> Giguna__East_Caverns__Statues_Ledge;
-    Giguna__East_Caverns__Midwest_Ledge -> Giguna__East_Caverns__Hidden_Passage_East;
-    Giguna__East_Caverns__Midwest_Ledge -> Giguna__East_Caverns__Hidden_Passage_East;
+    Giguna__East_Caverns__Midwest_Ledge -> Giguna__East_Caverns__Hidden_Passage_West;
+    Giguna__East_Caverns__Midwest_Ledge -> Giguna__East_Caverns__Hidden_Passage_West;
     Giguna__East_Caverns__Midwest_Ledge -> Giguna__East_Caverns__Middle_Ledge;
     Giguna__East_Caverns__Statues_Ledge -> Giguna__East_Caverns__Hidden_Passage_West;
     Giguna__East_Caverns__Statues_Ledge -> Giguna__East_Caverns__Hidden_Passage_West;

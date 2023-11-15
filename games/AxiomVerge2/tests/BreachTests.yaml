@@ -6,14 +6,16 @@ all:
     - Boomerang
     - Ledge_Grab
     - Wall_Climb
-    - Infect{2}
+    - Infect
+    - Infect_L1
     - Remote_Drone
     - Shockwave
     - Underwater_Movement
   context:
     energy: 300
-    save: Giguna Breach > Peak > Save Point
+    breach_save: Giguna Breach > Peak > Save Point
     mode: drone
+    indra: Giguna > Ruins Top > Portal
   start: Giguna Breach > Peak > Save Point
 
 tests:

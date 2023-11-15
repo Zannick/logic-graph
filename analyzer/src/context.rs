@@ -463,6 +463,7 @@ impl<T: Ctx> ContextWrapper<T> {
     {
         warp.prewarp(&mut self.ctx);
         let dest = warp.dest(&self.ctx);
+        assert!(dest != <E as Exit>::SpotId::default(), "Warp can't lead to SpotId::None: {}", warp.id());
         self.ctx.set_position(dest);
         self.elapse(warp.time());
         self.ctx.spend(warp.price());

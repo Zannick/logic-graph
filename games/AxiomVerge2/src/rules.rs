@@ -572,13 +572,13 @@ pub fn access_giguna__east_caverns__middle_rock__ex__hidden_passage_east_1__req(
     // ^mode == 'drone' and ^_combo_entered
     (ctx.mode() == enums::Mode::Drone && ctx.giguna__east_caverns__ctx__combo_entered())
 }
-pub fn access_giguna__east_caverns__midwest_ledge__ex__hidden_passage_east_1__req(
+pub fn access_giguna__east_caverns__midwest_ledge__ex__hidden_passage_west_1__req(
     ctx: &Context,
 ) -> bool {
     // $hover and $hook and ^_combo_entered
     ((helper__hover!(ctx) && helper__hook!(ctx)) && ctx.giguna__east_caverns__ctx__combo_entered())
 }
-pub fn access_giguna__east_caverns__midwest_ledge__ex__hidden_passage_east_2__req(
+pub fn access_giguna__east_caverns__midwest_ledge__ex__hidden_passage_west_2__req(
     ctx: &Context,
 ) -> bool {
     // ^mode == 'drone' and Mist_Upgrade and ^_combo_entered

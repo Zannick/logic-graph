@@ -2344,6 +2344,7 @@ areas:
       coord: [19.7, 14.0]
       local:
         - to: Upper Floor
+          jumps: 1
         - to: Upper Platforms Right
           jumps: 1
         - to: Upper Susar
@@ -2584,10 +2585,10 @@ areas:
           req: $grab
           movement: base
           jumps: 6
-        - to: Hidden Passage East
+        - to: Hidden Passage West
           req: $hover and $hook and ^_combo_entered
           time: 1.75  # ?
-        - to: Hidden Passage East
+        - to: Hidden Passage West
           req: ^mode == 'drone' and Mist_Upgrade and ^_combo_entered
           price: 20
           time: 1.5  # ?

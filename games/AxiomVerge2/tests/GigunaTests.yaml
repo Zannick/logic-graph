@@ -5,7 +5,9 @@ all:
     - Amashilama
     - Boomerang
     - Ledge_Grab
-    - Infect{3}
+    - Infect
+    - Infect_L1
+    - Infect_L2
     - Remote_Drone
     - Shockwave
     - Underwater_Movement
@@ -56,3 +58,14 @@ tests:
     with:
       - Slingshot_Hook
     can_access: Giguna > Gateway > Flask Ledge > Item
+
+  - name: Up East Caverns
+    start: Giguna > Antechamber > Statue Head
+    context:
+      giguna__east_caverns__ctx__door_opened: true
+      mode: drone
+      indra: Giguna > Antechamber > Statue Head
+    with:
+      - Slingshot_Hook
+      - Drone_Hover
+    can_reach: Giguna > Wasteland > Door Right

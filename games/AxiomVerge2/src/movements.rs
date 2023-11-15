@@ -3032,6 +3032,11 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
         (
             [false],
             SpotId::Giguna__East_Caverns__Upper_Floor_Ledge,
+            SpotId::Giguna__East_Caverns__Upper_Floor,
+        ) => 600,
+        (
+            [false],
+            SpotId::Giguna__East_Caverns__Upper_Floor_Ledge,
             SpotId::Giguna__East_Caverns__Upper_Platforms_Right,
         ) => 600,
         (
@@ -9769,6 +9774,11 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
             SpotId::Giguna__East_Caverns__Upper_Floor_Ledge,
             SpotId::Giguna__East_Caverns__Midwest_Ledge,
         ) => 900,
+        (
+            [true],
+            SpotId::Giguna__East_Caverns__Upper_Floor_Ledge,
+            SpotId::Giguna__East_Caverns__Upper_Floor,
+        ) => 600,
         (
             [true],
             SpotId::Giguna__East_Caverns__Upper_Floor_Ledge,
@@ -25889,7 +25899,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__East_Caverns__Midwest_Ledge,
-            SpotId::Giguna__East_Caverns__Hidden_Passage_East,
+            SpotId::Giguna__East_Caverns__Hidden_Passage_West,
             1500,
         ),
         (
@@ -26046,6 +26056,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna__East_Caverns__Upper_Floor_Ledge,
             SpotId::Giguna__East_Caverns__Midwest_Ledge,
             900,
+        ),
+        (
+            SpotId::Giguna__East_Caverns__Upper_Floor_Ledge,
+            SpotId::Giguna__East_Caverns__Upper_Floor,
+            600,
         ),
         (
             SpotId::Giguna__East_Caverns__Upper_Floor_Ledge,
@@ -37514,6 +37529,10 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
         ) => Some(900),
         (
             SpotId::Giguna__East_Caverns__Upper_Floor_Ledge,
+            SpotId::Giguna__East_Caverns__Upper_Floor,
+        ) => Some(600),
+        (
+            SpotId::Giguna__East_Caverns__Upper_Floor_Ledge,
             SpotId::Giguna__East_Caverns__Upper_Platforms_Right,
         ) => Some(600),
         (
@@ -42816,6 +42835,10 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
             SpotId::Giguna__East_Caverns__Upper_Floor_Ledge,
             SpotId::Giguna__East_Caverns__Midwest_Ledge,
         ) => (Some(900), vec![]),
+        (
+            SpotId::Giguna__East_Caverns__Upper_Floor_Ledge,
+            SpotId::Giguna__East_Caverns__Upper_Floor,
+        ) => (Some(600), vec![]),
         (
             SpotId::Giguna__East_Caverns__Upper_Floor_Ledge,
             SpotId::Giguna__East_Caverns__Upper_Platforms_Right,

@@ -446,16 +446,6 @@ where
                 vec.push(format!("{}: exit not usable", exit.id()));
             }
         }
-
-        for warp in world.get_warps() {
-            if !spot_map.contains_key(&warp.dest(ctx.get())) {
-                vec.push(format!(
-                    "{}: warp {} not usable",
-                    ctx.get().position(),
-                    warp.id()
-                ));
-            }
-        }
     }
     vec.join("\n")
 }

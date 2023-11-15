@@ -103,4 +103,17 @@
 * Collect Infect_L1 from Menu > Upgrade Menu > Infection > Infection Level 1
 * Collect Infect_L2 from Menu > Upgrade Menu > Infection > Infection Level 2
 ! Do Recall Drone
+  Move... to Giguna > Lamassu > Wingtip
+! Do Deploy Drone
 * Collect Flask from Giguna > Lamassu > Deposit > Flask
+! Do Recall Drone
+* Collect Giguna_Dual_Path_Switch from Giguna > Dual Path > Below Left Switch > Remote Switch
+* Collect Giguna_Boulder from Giguna > Hard Rock > Rock Right > Shockwave Boulder
+* Collect Building_of_the_School from Giguna > Hard Rock > Rock Center > Tablet
+* Collect Giguna_Dual_Path_Wall from Giguna > Dual Path > Base of Wall > Break Wall
+  Move... to Giguna > Dual Path > Below Right Switch
+! Do Deploy Drone
+* Collect Health_Fragment from Giguna > Dual Path > Wall Secret > Health
+! Do Giguna > East Caverns > Switch > Open Door
+* Collect Dangerous_Ideas from Giguna > Antechamber > Statue Head > Tablet
+* Collect Health_Fragment from Giguna > Wasteland > Door Right > Health
