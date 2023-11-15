@@ -100,9 +100,9 @@
 * Collect Storm_Bomb from Uhrum > Siege Corridor > Pond > Item
 * Collect Fast_Travel from Uhrum > Siege Corridor > Upper Rock Item > Urn
 * Collect Health_Fragment from Ebih > By Garage > Crawlspace > Fragment
+! Do Recall Drone
 * Collect Infect_L1 from Menu > Upgrade Menu > Infection > Infection Level 1
 * Collect Infect_L2 from Menu > Upgrade Menu > Infection > Infection Level 2
-! Do Recall Drone
 
   Move... to Giguna > Lamassu > Wingtip
 ! Do Deploy Drone
