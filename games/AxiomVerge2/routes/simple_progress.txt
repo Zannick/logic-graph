@@ -103,6 +103,7 @@
 * Collect Infect_L1 from Menu > Upgrade Menu > Infection > Infection Level 1
 * Collect Infect_L2 from Menu > Upgrade Menu > Infection > Infection Level 2
 ! Do Recall Drone
+
   Move... to Giguna > Lamassu > Wingtip
 ! Do Deploy Drone
 * Collect Flask from Giguna > Lamassu > Deposit > Flask
@@ -117,3 +118,8 @@
 ! Do Giguna > East Caverns > Switch > Open Door
 * Collect Dangerous_Ideas from Giguna > Antechamber > Statue Head > Tablet
 * Collect Health_Fragment from Giguna > Wasteland > Door Right > Health
+! Do Recall Drone
+  Collect Health_Fragment from Ebih > Cave > Entry > Health
+  Collect Ebih_Waterfall_Block_Left from Ebih > Waterfall > Alcove Left > Block Left
+! Do Deploy Drone
+  Collect Bronze_Axe from Ebih > Waterfall > Alcove > Pedestal
