@@ -177,26 +177,26 @@ pub trait SegmentedBucketQueue<'b, B: SegmentBucket<P> + 'b, P: Ord>: Queue<B> {
 
     fn pop_min(&mut self) -> Option<(B::Item, P)> {
         let segment = (self.min_priority()?..=self.max_priority()?)
-            .filter(|&s| !self.bucket_for_peeking(s).unwrap().is_empty_bucket())
+            .filter(|&s| self.bucket_for_peeking(s).is_some_and(|bucket| !bucket.is_empty_bucket()))
             .min_by_key(|&s| self.bucket_for_peeking(s).unwrap().min_priority())?;
         self.bucket_for_removing(segment)?.pop_min()
     }
     fn pop_max(&mut self) -> Option<(B::Item, P)> {
         let segment = (self.min_priority()?..=self.max_priority()?)
-            .filter(|&s| !self.bucket_for_peeking(s).unwrap().is_empty_bucket())
+            .filter(|&s| self.bucket_for_peeking(s).is_some_and(|bucket| !bucket.is_empty_bucket()))
             .max_by_key(|&s| self.bucket_for_peeking(s).unwrap().max_priority())?;
         self.bucket_for_removing(segment)?.pop_max()
     }
 
     fn peek_min(&'b self) -> Option<(&'b B::Item, &'b P)> {
         let segment = (self.min_priority()?..=self.max_priority()?)
-            .filter(|&s| !self.bucket_for_peeking(s).unwrap().is_empty_bucket())
+            .filter(|&s| self.bucket_for_peeking(s).is_some_and(|bucket| !bucket.is_empty_bucket()))
             .min_by_key(|&s| self.bucket_for_peeking(s).unwrap().min_priority())?;
         self.bucket_for_peeking(segment)?.peek_min()
     }
     fn peek_max(&'b self) -> Option<(&'b B::Item, &'b P)> {
         let segment = (self.min_priority()?..=self.max_priority()?)
-            .filter(|&s| !self.bucket_for_peeking(s).unwrap().is_empty_bucket())
+            .filter(|&s| self.bucket_for_peeking(s).is_some_and(|bucket| !bucket.is_empty_bucket()))
             .max_by_key(|&s| self.bucket_for_peeking(s).unwrap().max_priority())?;
         self.bucket_for_peeking(segment)?.peek_max()
     }
@@ -264,6 +264,7 @@ pub trait SegmentedBucketQueue<'b, B: SegmentBucket<P> + 'b, P: Ord>: Queue<B> {
                 if self.bucket_for_peeking(segment).is_none() {
                     continue;
                 }
+                // We have to borrow and drop on each loop, since within the loop we need to borrow mutably
                 while let Some(p) = self.bucket_for_peeking(segment).unwrap().max_priority() {
                     if *p > keep_priority {
                         vec.push(
