@@ -105,6 +105,8 @@ where
         self.count += 1;
         if let Some(vec) = self.map.get_mut(&loc_history) {
             vec.push(Solution { elapsed, history });
+            self.write_previews().unwrap();
+            self.write_best().unwrap();
             None
         } else {
             let mut locs = loc_history.clone();
