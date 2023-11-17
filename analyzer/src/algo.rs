@@ -349,11 +349,11 @@ where
             world,
             &startctx,
             max_time + max_time / 128,
-            1_048_576,
+            2_097_152,
             262_144,
             524_288,
-            4_096,
-            32_768,
+            8_192,
+            65_536,
             solutions.clone(),
         )
         .unwrap();
