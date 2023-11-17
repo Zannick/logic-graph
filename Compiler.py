@@ -530,7 +530,8 @@ class GameLogic(object):
         hv = HelperVisitor(self.helpers, self.context_types, self.data_types, self.settings)
         _visit(hv, True)
 
-        cv = ContextVisitor(self.context_types, self.context_values, self.data_types, self.data_defaults)
+        cv = ContextVisitor(self.context_types, self.context_values,
+                            self.data_types, self.data_values, self.data_defaults)
         _visit(cv)
         self.context_str_values = cv.values
 
@@ -1544,7 +1545,6 @@ class GameLogic(object):
         # Access cached_properties to ensure they're in the template vars
         self.unused_items
         self.context_types
-        self.data_values
         self.default_price_type
         self.price_types
         self.movement_tables

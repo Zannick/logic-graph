@@ -23,7 +23,7 @@ start:
   prev_area: Antarctica > West
 
 data:
-  breach: false
+  realm: main
   water: false
   flipside: SpotId::None
   portal_default: SpotId::None
@@ -127,19 +127,19 @@ warps:
     loads: true
   indra_save:
     time: 14.5
-    req: NOT WITHIN `Menu` and Amashilama and ^mode != 'drone'
+    req: ^realm == 'main' and Amashilama and ^mode != 'drone'
     to: ^save
     after: $refill_energy
     loads: true
   drone_save:
     time: 12
-    req: NOT WITHIN `Menu` and not ^breach and ^mode == 'drone'
+    req: ^realm == 'main' and ^mode == 'drone'
     to: ^save
     after: $refill_energy
     loads: true
   breach_save:
     time: 12
-    req: NOT WITHIN `Menu` and ^breach
+    req: ^realm == 'breach'
     to: ^breach_save
     after: $refill_energy
     loads: true
@@ -157,7 +157,7 @@ warps:
     base_movement: true
   exit_breach:
     time: 3
-    req: ^breach and Exit_Breach and (^flipside NOT WITHIN $default)
+    req: ^realm == 'breach' and Exit_Breach and (^flipside NOT WITHIN $default)
     to: ^flipside
     after: $clear_breach_save
     # Instead of making this base movement, anywhere it's strictly required needs a real Exit
@@ -257,7 +257,7 @@ warps:
 
 actions:
   - name: Recall Drone
-    req: NOT WITHIN `Menu` and not ^breach and $can_recall
+    req: NOT WITHIN `Menu` and ^realm != 'breach' and $can_recall
     do: ^mode = 'Indra'
     to: ^indra
     after: ^indra = $default
@@ -272,7 +272,7 @@ actions:
     do: ^mode = 'drone'
     time: 0.1
   - name: Become Indra
-    req: NOT WITHIN `Menu` and not ^breach and Anuman and ^mode == 'drone'
+    req: NOT WITHIN `Menu` and ^realm != 'breach' and Anuman and ^mode == 'drone'
     do: ^mode = 'Indra'
     time: 0.1
 
@@ -303,8 +303,8 @@ helpers:
 
   $mist2: Nanite_Mist and Mist_Upgrade
 
-  $ft_main: Fast_Travel and NOT WITHIN `Menu` and NOT WITHIN `Interior` and NOT ^breach
-  $ft_breach: Fast_Travel and NOT WITHIN `Menu` and ^breach
+  $ft_main: Fast_Travel and ^realm == 'main'
+  $ft_breach: Fast_Travel and ^realm == 'breach'
 
   # shockwave range: ~.2 in width (.35 height)
   # boomerang range: ~.3 in width?

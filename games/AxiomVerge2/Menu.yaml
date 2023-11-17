@@ -1,4 +1,6 @@
 name: Menu
+data:
+  realm: menu
 
 areas:
 - name: Upgrade Menu

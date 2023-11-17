@@ -1,12 +1,14 @@
 from collections import defaultdict
 from itertools import chain
 import logging
+import re
 
 from grammar import RulesParser, RulesVisitor
 from Utils import construct_id, construct_place_id, construct_spot_id, getPlaceType, place_to_names, BUILTINS
 
 import inflection
 
+REF_GETTER_TYPE = re.compile(r'(?:ctx\.|data::)([^(]*)\(')
 
 class RustVisitor(RulesVisitor):
 
@@ -117,7 +119,7 @@ class RustVisitor(RulesVisitor):
     # otherwise we have to get the appropriate ref/setting enum
     def visitCmpStr(self, ctx):
         getter = self.visit(ctx.value())
-        rtype = inflection.camelize(getter[4:-2])
+        rtype = inflection.camelize(REF_GETTER_TYPE.match(getter).group(1))
         return f'{getter} {ctx.getChild(1)} enums::{rtype}::{inflection.camelize(str(ctx.LIT())[1:-1])}'
 
     def visitFlagMatch(self, ctx):

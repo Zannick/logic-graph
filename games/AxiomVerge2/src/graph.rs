@@ -4062,13 +4062,13 @@ impl world::Accessible for Action {
                     rules::access_not_within_menu_and_anuman_and_mode__drone(&ctx)
                 }
                 ActionId::Global__Become_Indra => {
-                    rules::access_not_within_menu_and_not_breach_and_anuman_and_mode__drone(&ctx)
+                    rules::access_not_within_menu_and_realm__breach_and_anuman_and_mode__drone(&ctx)
                 }
                 ActionId::Global__Deploy_Drone => {
                     rules::access_not_within_menu_and_can_deploy(&ctx)
                 }
                 ActionId::Global__Recall_Drone => {
-                    rules::access_not_within_menu_and_not_breach_and_can_recall(&ctx)
+                    rules::access_not_within_menu_and_realm__breach_and_can_recall(&ctx)
                 }
                 ActionId::Interior__Cave_Behind_Waterfall__Middle__Throw_Drone => {
                     rules::access_can_deploy(&ctx)
@@ -4308,13 +4308,13 @@ impl world::Accessible for Warp {
     fn can_access(&self, ctx: &Context) -> bool {
         ctx.can_afford(&self.price)
             && match self.id {
-                WarpId::BreachSave => rules::access_not_within_menu_and_breach(&ctx),
-                WarpId::DroneSave => {
-                    rules::access_not_within_menu_and_not_breach_and_mode__drone(&ctx)
-                }
+                WarpId::BreachSave => rules::access_realm__breach(&ctx),
+                WarpId::DroneSave => rules::access_realm__main_and_mode__drone(&ctx),
                 WarpId::EarthSave => rules::access_within_antarctica(&ctx),
                 WarpId::ExitBreach => {
-                    rules::access_breach_and_exit_breach_and___flipside_not_within_default(&ctx)
+                    rules::access_realm__breach_and_exit_breach_and___flipside_not_within_default(
+                        &ctx,
+                    )
                 }
                 WarpId::ExitMenu => rules::access_within_menu(&ctx),
                 WarpId::FastTravelAmagiMainArea => {
@@ -4366,9 +4366,7 @@ impl world::Accessible for Warp {
                 WarpId::FastTravelUhrumWestEntrance => {
                     rules::access_ft_main_and_map__uhrum__west_entrance__save(&ctx)
                 }
-                WarpId::IndraSave => {
-                    rules::access_not_within_menu_and_amashilama_and_mode__drone(&ctx)
-                }
+                WarpId::IndraSave => rules::access_realm__main_and_amashilama_and_mode__drone(&ctx),
                 WarpId::Menu => rules::access_not_within_menu_and_flasks__0(&ctx),
             }
     }

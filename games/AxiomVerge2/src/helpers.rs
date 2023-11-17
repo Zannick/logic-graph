@@ -244,38 +244,24 @@ macro_rules! helper__mist2 {
 }
 
 /// $ft_main (  )
-/// Fast_Travel and NOT WITHIN `Menu` and NOT WITHIN `Interior` and NOT ^breach
+/// Fast_Travel and ^realm == 'main'
 #[macro_export]
 macro_rules! helper__ft_main {
     ($ctx:expr) => {{
         #[allow(unused_imports)]
         use $crate::items::Item;
-        ((($ctx.has(Item::Fast_Travel)
-            && !(match get_region($ctx.position()) {
-                RegionId::Menu => true,
-                _ => false,
-            }))
-            && !(match get_region($ctx.position()) {
-                RegionId::Interior => true,
-                _ => false,
-            }))
-            && !data::breach($ctx.position()))
+        ($ctx.has(Item::Fast_Travel) && data::realm($ctx.position()) == enums::Realm::Main)
     }};
 }
 
 /// $ft_breach (  )
-/// Fast_Travel and NOT WITHIN `Menu` and ^breach
+/// Fast_Travel and ^realm == 'breach'
 #[macro_export]
 macro_rules! helper__ft_breach {
     ($ctx:expr) => {{
         #[allow(unused_imports)]
         use $crate::items::Item;
-        (($ctx.has(Item::Fast_Travel)
-            && !(match get_region($ctx.position()) {
-                RegionId::Menu => true,
-                _ => false,
-            }))
-            && data::breach($ctx.position()))
+        ($ctx.has(Item::Fast_Travel) && data::realm($ctx.position()) == enums::Realm::Breach)
     }};
 }
 

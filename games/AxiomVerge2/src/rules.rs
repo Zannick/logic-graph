@@ -123,11 +123,6 @@ pub fn access_boomerang5(ctx: &Context) -> bool {
     // Boomerang
     ctx.has(Item::Boomerang)
 }
-pub fn access_breach_and_exit_breach_and___flipside_not_within_default(ctx: &Context) -> bool {
-    // ^breach and Exit_Breach and (^flipside NOT WITHIN $default)
-    ((data::breach(ctx.position()) && ctx.has(Item::Exit_Breach))
-        && (data::flipside(ctx.position()) != Default::default()))
-}
 pub fn access_bs(ctx: &Context) -> bool {
     // $bs
     helper__bs!(ctx)
@@ -1112,14 +1107,6 @@ pub fn access_not_irikar_royal_storage_wall_and_shockwave(ctx: &Context) -> bool
     // not Irikar_Royal_Storage_Wall and $shockwave
     (!ctx.has(Item::Irikar_Royal_Storage_Wall) && helper__shockwave!(ctx))
 }
-pub fn access_not_within_menu_and_amashilama_and_mode__drone(ctx: &Context) -> bool {
-    // NOT WITHIN `Menu` and Amashilama and ^mode != 'drone'
-    ((!(match get_region(ctx.position()) {
-        RegionId::Menu => true,
-        _ => false,
-    }) && ctx.has(Item::Amashilama))
-        && ctx.mode() != enums::Mode::Drone)
-}
 pub fn access_not_within_menu_and_anuman_and_mode__drone(ctx: &Context) -> bool {
     // NOT WITHIN `Menu` and Anuman and ^mode != 'drone'
     ((!(match get_region(ctx.position()) {
@@ -1127,13 +1114,6 @@ pub fn access_not_within_menu_and_anuman_and_mode__drone(ctx: &Context) -> bool 
         _ => false,
     }) && ctx.has(Item::Anuman))
         && ctx.mode() != enums::Mode::Drone)
-}
-pub fn access_not_within_menu_and_breach(ctx: &Context) -> bool {
-    // NOT WITHIN `Menu` and ^breach
-    (!(match get_region(ctx.position()) {
-        RegionId::Menu => true,
-        _ => false,
-    }) && data::breach(ctx.position()))
 }
 pub fn access_not_within_menu_and_can_deploy(ctx: &Context) -> bool {
     // NOT WITHIN `Menu` and $can_deploy
@@ -1149,30 +1129,22 @@ pub fn access_not_within_menu_and_flasks__0(ctx: &Context) -> bool {
         _ => false,
     }) && Into::<i32>::into(ctx.flasks()) > 0.into())
 }
-pub fn access_not_within_menu_and_not_breach_and_anuman_and_mode__drone(ctx: &Context) -> bool {
-    // NOT WITHIN `Menu` and not ^breach and Anuman and ^mode == 'drone'
+pub fn access_not_within_menu_and_realm__breach_and_anuman_and_mode__drone(ctx: &Context) -> bool {
+    // NOT WITHIN `Menu` and ^realm != 'breach' and Anuman and ^mode == 'drone'
     (((!(match get_region(ctx.position()) {
         RegionId::Menu => true,
         _ => false,
-    }) && !data::breach(ctx.position()))
+    }) && data::realm(ctx.position()) != enums::Realm::Breach)
         && ctx.has(Item::Anuman))
         && ctx.mode() == enums::Mode::Drone)
 }
-pub fn access_not_within_menu_and_not_breach_and_can_recall(ctx: &Context) -> bool {
-    // NOT WITHIN `Menu` and not ^breach and $can_recall
+pub fn access_not_within_menu_and_realm__breach_and_can_recall(ctx: &Context) -> bool {
+    // NOT WITHIN `Menu` and ^realm != 'breach' and $can_recall
     ((!(match get_region(ctx.position()) {
         RegionId::Menu => true,
         _ => false,
-    }) && !data::breach(ctx.position()))
+    }) && data::realm(ctx.position()) != enums::Realm::Breach)
         && helper__can_recall!(ctx))
-}
-pub fn access_not_within_menu_and_not_breach_and_mode__drone(ctx: &Context) -> bool {
-    // NOT WITHIN `Menu` and not ^breach and ^mode == 'drone'
-    ((!(match get_region(ctx.position()) {
-        RegionId::Menu => true,
-        _ => false,
-    }) && !data::breach(ctx.position()))
-        && ctx.mode() == enums::Mode::Drone)
 }
 pub fn access_offset(ctx: &Context) -> bool {
     // $offset
@@ -1221,6 +1193,26 @@ pub fn access_ranged_speed(ctx: &Context) -> bool {
 pub fn access_ranged_speed_2(ctx: &Context) -> bool {
     // Ranged_Speed_2
     ctx.has(Item::Ranged_Speed_2)
+}
+pub fn access_realm__breach(ctx: &Context) -> bool {
+    // ^realm == 'breach'
+    data::realm(ctx.position()) == enums::Realm::Breach
+}
+pub fn access_realm__breach_and_exit_breach_and___flipside_not_within_default(
+    ctx: &Context,
+) -> bool {
+    // ^realm == 'breach' and Exit_Breach and (^flipside NOT WITHIN $default)
+    ((data::realm(ctx.position()) == enums::Realm::Breach && ctx.has(Item::Exit_Breach))
+        && (data::flipside(ctx.position()) != Default::default()))
+}
+pub fn access_realm__main_and_amashilama_and_mode__drone(ctx: &Context) -> bool {
+    // ^realm == 'main' and Amashilama and ^mode != 'drone'
+    ((data::realm(ctx.position()) == enums::Realm::Main && ctx.has(Item::Amashilama))
+        && ctx.mode() != enums::Mode::Drone)
+}
+pub fn access_realm__main_and_mode__drone(ctx: &Context) -> bool {
+    // ^realm == 'main' and ^mode == 'drone'
+    (data::realm(ctx.position()) == enums::Realm::Main && ctx.mode() == enums::Mode::Drone)
 }
 pub fn access_remote_drone(ctx: &Context) -> bool {
     // Remote_Drone

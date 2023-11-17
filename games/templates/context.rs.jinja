@@ -21,7 +21,11 @@ pub mod enums {
 use std::fmt;
 %% from 'enum.rs.jinja' import enum
 %% for etype, evars in context_str_values.items()
+%% if etype in data_values
+{{ enum(etype|camelize, evars|map('camelize')|list|sort, default=True, default_value=data_defaults[etype]|trim_type_prefix|camelize, allow_lower=True) }}
+%% else
 {{ enum(etype|camelize, evars|map('camelize')|list|sort, default=True, default_value=context_values[etype]|trim_type_prefix|camelize, allow_lower=True) }}
+%% endif
 %% endfor
 }
 

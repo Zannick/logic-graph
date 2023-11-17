@@ -6,7 +6,7 @@ from Utils import construct_id, BUILTINS
 
 class ContextVisitor(RulesVisitor):
 
-    def __init__(self, context_types, context_values, data_types, data_defaults):
+    def __init__(self, context_types, context_values, data_types, data_values, data_defaults):
         self.ctxdict = {}
         self.context_types = context_types
         self.data_types = data_types
@@ -17,7 +17,7 @@ class ContextVisitor(RulesVisitor):
             for ctx, t in self.context_types.items()
             if t.startswith('enums::')
         } | {
-            ctx: {data_defaults[ctx]}
+            ctx: {data_defaults[ctx]} | set(data_values[ctx].values())
             for ctx, t in self.data_types.items()
             if t.startswith('enums::')
         }

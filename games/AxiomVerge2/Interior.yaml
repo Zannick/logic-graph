@@ -1,5 +1,7 @@
 name: Interior
 graph_offset: [0, 60]
+data:
+  realm: interior
 
 areas:
 #region Glacier
