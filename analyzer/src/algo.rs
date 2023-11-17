@@ -303,7 +303,7 @@ where
 
         if !wins.is_empty() {
             log::info!(
-                "Provided extra routes: {} winners, {} not\nwinning times: {:?}",
+                "Provided extra routes: {} winners, {} not; winning times: {:?}",
                 wins.len(),
                 others.len(),
                 wins.iter().map(|c| c.elapsed()).collect::<Vec<_>>()
