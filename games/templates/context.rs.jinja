@@ -257,7 +257,7 @@ impl context::Ctx for Context {
         })
     }
 
-    fn assert_expectations(&self, exps: &Vec<Self::Expectation>) -> Result<(), String> {
+    fn assert_expectations(&self, exps: &Vec<Expectation>) -> Result<(), String> {
         let mut errs = Vec::new();
         for exp in exps {
             match exp {
@@ -272,7 +272,7 @@ impl context::Ctx for Context {
 %% for item, ct in gl.item_max_counts.items()|sort
             Expectation::{{ item|camelize }}(e) => {
                 let v = self.{% if ct == 1 %}has{% else %}count{% endif %}(Item::{{ item }});
-                if v != (*e).into() {
+                if v != {% if ct == 1 %}*e{% else %}<{{ ct|get_int_type_for_max }} as Into<i16>>::into(*e){% endif %} {
                     errs.push(format!("Expected {} = {}, got: {}", "{{ item }}", e, v));
                 }
             }

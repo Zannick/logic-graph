@@ -12,13 +12,14 @@ bucket_queue = "*"
 clap = { version = "4.*", features = ["derive"] }
 disjoint-hash-set = "*"
 disjoint-sets = "*"
-enum-map = "*"
-humansize = { version = "2.1", features = ["no_alloc"] }
+enum-map = { version = ">=2.7.2" }
+humansize = { version = ">=2.1", features = ["no_alloc"] }
 lazy_static = "*"
+log = "*"
 lru = "*"
 num_cpus = "*"
 pheap = "*"
-plotlib = "0.5"
+plotlib = ">=0.5"
 priority-queue = "*"
 rayon = "*"
 regex = "*"
@@ -26,7 +27,7 @@ rocksdb = { version = ">=0.21", default-features = false, features = ["snappy", 
 rmp-serde = "*"
 rustc-hash = "*"
 union-find = "*"
-serde = { version = "1.0", features = ["derive", "rc"] }
-sort_by_derive = "0.1.10"
+serde = { version = ">=1.0", features = ["derive", "rc"] }
+sort_by_derive = ">=0.1.10"
 yaml-rust = "*"
 libtest-mimic = "*"

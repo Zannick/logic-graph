@@ -1,0 +1,17 @@
+appenders:
+  stdout:
+    kind: console
+    encoder:
+      pattern: "{h({level:<5})} [{date(%F %T.%6f %Z)}] [{I}] {target}.{line} | {m}{n}"
+
+  infolog:
+    kind: file
+    path: "log/INFO.log"
+    encoder:
+      pattern: "{level:<5} [{date(%F %T.%6f %Z)}] [{I}] {target}.{line} | {m}{n}"
+
+root:
+  level: info
+  appenders:
+    - infolog
+    - stdout

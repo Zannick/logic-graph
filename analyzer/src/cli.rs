@@ -17,6 +17,9 @@ pub struct Cli {
     #[arg(short, long, value_name = "FILE")]
     settings: Option<PathBuf>,
 
+    #[arg(long, value_name = "FILE")]
+    logconfig: Option<PathBuf>,
+
     #[command(subcommand)]
     command: Commands,
 }
@@ -24,6 +27,10 @@ pub struct Cli {
 impl Cli {
     pub fn settings_file(&self) -> Option<&PathBuf> {
         self.settings.as_ref()
+    }
+
+    pub fn logconfig(&self) -> Option<&PathBuf> {
+        self.logconfig.as_ref()
     }
 }
 
@@ -73,6 +80,8 @@ where
     T: Ctx<World = W>,
     L: Location<Context = T>,
 {
+    log::info!("{:?}", std::env::args());
+
     match &args.command {
         Commands::Search { routes, db } => {
             route_ctxs.extend(routes.into_iter().map(|route| {

@@ -835,7 +835,7 @@ where
         let max_time = self.queue.max_time();
         let pending = self.held.load(Ordering::Acquire);
         println!(
-            "--- Round {} (solutions={}, unique={}, dead-ends={}, limit={}ms, greedy={}, org={}) ---\n\
+            "--- Round {} (solutions={}, unique={}, dead-ends={}, limit={}ms, best={}ms, greedy={}, org={}) ---\n\
             Stats: heap={}; pending={}; db={}; total={}; seen={}; proc={};\n\
             estimates={}; cached={}; evictions={}; retrievals={}\n\
             skips: push:{} time, {} dups; pop: {} time, {} dups; bgdel={}\n\
@@ -847,6 +847,7 @@ where
             sols.unique(),
             self.deadends.load(Ordering::Acquire),
             max_time,
+            sols.best(),
             self.greedies.load(Ordering::Acquire),
             self.organic_level.load(Ordering::Acquire),
             self.queue.heap_len(),

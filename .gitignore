@@ -18,6 +18,7 @@ target/
 *.out.*
 # Output
 **/data/*.txt
+log/
 .db/
 .vs/
 .vscode/

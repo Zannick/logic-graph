@@ -4248,7 +4248,7 @@ impl context::Ctx for Context {
         })
     }
 
-    fn assert_expectations(&self, exps: &Vec<Self::Expectation>) -> Result<(), String> {
+    fn assert_expectations(&self, exps: &Vec<Expectation>) -> Result<(), String> {
         let mut errs = Vec::new();
         for exp in exps {
             match exp {
@@ -4701,7 +4701,7 @@ impl context::Ctx for Context {
                 }
                 Expectation::AmagiDragonEyePassage(e) => {
                     let v = self.has(Item::Amagi_Dragon_Eye_Passage);
-                    if v != (*e).into() {
+                    if v != *e {
                         errs.push(format!(
                             "Expected {} = {}, got: {}",
                             "Amagi_Dragon_Eye_Passage", e, v
@@ -4710,7 +4710,7 @@ impl context::Ctx for Context {
                 }
                 Expectation::AmagiStrongholdBoulder1(e) => {
                     let v = self.has(Item::Amagi_Stronghold_Boulder_1);
-                    if v != (*e).into() {
+                    if v != *e {
                         errs.push(format!(
                             "Expected {} = {}, got: {}",
                             "Amagi_Stronghold_Boulder_1", e, v
@@ -4719,7 +4719,7 @@ impl context::Ctx for Context {
                 }
                 Expectation::AmagiStrongholdBoulder2(e) => {
                     let v = self.has(Item::Amagi_Stronghold_Boulder_2);
-                    if v != (*e).into() {
+                    if v != *e {
                         errs.push(format!(
                             "Expected {} = {}, got: {}",
                             "Amagi_Stronghold_Boulder_2", e, v
@@ -4728,7 +4728,7 @@ impl context::Ctx for Context {
                 }
                 Expectation::AmagiStrongholdWall1(e) => {
                     let v = self.has(Item::Amagi_Stronghold_Wall_1);
-                    if v != (*e).into() {
+                    if v != *e {
                         errs.push(format!(
                             "Expected {} = {}, got: {}",
                             "Amagi_Stronghold_Wall_1", e, v
@@ -4737,7 +4737,7 @@ impl context::Ctx for Context {
                 }
                 Expectation::AmagiStrongholdWall2(e) => {
                     let v = self.has(Item::Amagi_Stronghold_Wall_2);
-                    if v != (*e).into() {
+                    if v != *e {
                         errs.push(format!(
                             "Expected {} = {}, got: {}",
                             "Amagi_Stronghold_Wall_2", e, v
@@ -4746,7 +4746,7 @@ impl context::Ctx for Context {
                 }
                 Expectation::AmagiWestLakeSurfaceWall(e) => {
                     let v = self.has(Item::Amagi_West_Lake_Surface_Wall);
-                    if v != (*e).into() {
+                    if v != *e {
                         errs.push(format!(
                             "Expected {} = {}, got: {}",
                             "Amagi_West_Lake_Surface_Wall", e, v
@@ -4755,19 +4755,19 @@ impl context::Ctx for Context {
                 }
                 Expectation::Amashilama(e) => {
                     let v = self.has(Item::Amashilama);
-                    if v != (*e).into() {
+                    if v != *e {
                         errs.push(format!("Expected {} = {}, got: {}", "Amashilama", e, v));
                     }
                 }
                 Expectation::Anuman(e) => {
                     let v = self.has(Item::Anuman);
-                    if v != (*e).into() {
+                    if v != *e {
                         errs.push(format!("Expected {} = {}, got: {}", "Anuman", e, v));
                     }
                 }
                 Expectation::ApocalypseBomb(e) => {
                     let v = self.has(Item::Apocalypse_Bomb);
-                    if v != (*e).into() {
+                    if v != *e {
                         errs.push(format!(
                             "Expected {} = {}, got: {}",
                             "Apocalypse_Bomb", e, v
@@ -4776,19 +4776,19 @@ impl context::Ctx for Context {
                 }
                 Expectation::BigFlask(e) => {
                     let v = self.has(Item::Big_Flask);
-                    if v != (*e).into() {
+                    if v != *e {
                         errs.push(format!("Expected {} = {}, got: {}", "Big_Flask", e, v));
                     }
                 }
                 Expectation::Boomerang(e) => {
                     let v = self.has(Item::Boomerang);
-                    if v != (*e).into() {
+                    if v != *e {
                         errs.push(format!("Expected {} = {}, got: {}", "Boomerang", e, v));
                     }
                 }
                 Expectation::BreachAttractor(e) => {
                     let v = self.has(Item::Breach_Attractor);
-                    if v != (*e).into() {
+                    if v != *e {
                         errs.push(format!(
                             "Expected {} = {}, got: {}",
                             "Breach_Attractor", e, v
@@ -4797,19 +4797,19 @@ impl context::Ctx for Context {
                 }
                 Expectation::BreachSight(e) => {
                     let v = self.has(Item::Breach_Sight);
-                    if v != (*e).into() {
+                    if v != *e {
                         errs.push(format!("Expected {} = {}, got: {}", "Breach_Sight", e, v));
                     }
                 }
                 Expectation::BronzeAxe(e) => {
                     let v = self.has(Item::Bronze_Axe);
-                    if v != (*e).into() {
+                    if v != *e {
                         errs.push(format!("Expected {} = {}, got: {}", "Bronze_Axe", e, v));
                     }
                 }
                 Expectation::BuildingOfTheSchool(e) => {
                     let v = self.has(Item::Building_of_the_School);
-                    if v != (*e).into() {
+                    if v != *e {
                         errs.push(format!(
                             "Expected {} = {}, got: {}",
                             "Building_of_the_School", e, v
@@ -4818,7 +4818,7 @@ impl context::Ctx for Context {
                 }
                 Expectation::CommemorativeSpeech(e) => {
                     let v = self.has(Item::Commemorative_Speech);
-                    if v != (*e).into() {
+                    if v != *e {
                         errs.push(format!(
                             "Expected {} = {}, got: {}",
                             "Commemorative_Speech", e, v
@@ -4827,7 +4827,7 @@ impl context::Ctx for Context {
                 }
                 Expectation::CompaniesLayoff(e) => {
                     let v = self.has(Item::Companies_Layoff);
-                    if v != (*e).into() {
+                    if v != *e {
                         errs.push(format!(
                             "Expected {} = {}, got: {}",
                             "Companies_Layoff", e, v
@@ -4836,13 +4836,13 @@ impl context::Ctx for Context {
                 }
                 Expectation::Compass(e) => {
                     let v = self.has(Item::Compass);
-                    if v != (*e).into() {
+                    if v != *e {
                         errs.push(format!("Expected {} = {}, got: {}", "Compass", e, v));
                     }
                 }
                 Expectation::DangerousIdeas(e) => {
                     let v = self.has(Item::Dangerous_Ideas);
-                    if v != (*e).into() {
+                    if v != *e {
                         errs.push(format!(
                             "Expected {} = {}, got: {}",
                             "Dangerous_Ideas", e, v
@@ -4851,13 +4851,13 @@ impl context::Ctx for Context {
                 }
                 Expectation::DearErnest(e) => {
                     let v = self.has(Item::Dear_Ernest);
-                    if v != (*e).into() {
+                    if v != *e {
                         errs.push(format!("Expected {} = {}, got: {}", "Dear_Ernest", e, v));
                     }
                 }
                 Expectation::DefeatMUSAM20(e) => {
                     let v = self.has(Item::Defeat_MUS_A_M20);
-                    if v != (*e).into() {
+                    if v != *e {
                         errs.push(format!(
                             "Expected {} = {}, got: {}",
                             "Defeat_MUS_A_M20", e, v
@@ -4866,13 +4866,13 @@ impl context::Ctx for Context {
                 }
                 Expectation::DroneHover(e) => {
                     let v = self.has(Item::Drone_Hover);
-                    if v != (*e).into() {
+                    if v != *e {
                         errs.push(format!("Expected {} = {}, got: {}", "Drone_Hover", e, v));
                     }
                 }
                 Expectation::DroneMeleeDamage(e) => {
                     let v = self.has(Item::Drone_Melee_Damage);
-                    if v != (*e).into() {
+                    if v != *e {
                         errs.push(format!(
                             "Expected {} = {}, got: {}",
                             "Drone_Melee_Damage", e, v
@@ -4881,7 +4881,7 @@ impl context::Ctx for Context {
                 }
                 Expectation::DroneMeleeDamage2(e) => {
                     let v = self.has(Item::Drone_Melee_Damage_2);
-                    if v != (*e).into() {
+                    if v != *e {
                         errs.push(format!(
                             "Expected {} = {}, got: {}",
                             "Drone_Melee_Damage_2", e, v
@@ -4890,7 +4890,7 @@ impl context::Ctx for Context {
                 }
                 Expectation::DroneMeleeSpeed(e) => {
                     let v = self.has(Item::Drone_Melee_Speed);
-                    if v != (*e).into() {
+                    if v != *e {
                         errs.push(format!(
                             "Expected {} = {}, got: {}",
                             "Drone_Melee_Speed", e, v
@@ -4899,7 +4899,7 @@ impl context::Ctx for Context {
                 }
                 Expectation::DroneMeleeSpeed2(e) => {
                     let v = self.has(Item::Drone_Melee_Speed_2);
-                    if v != (*e).into() {
+                    if v != *e {
                         errs.push(format!(
                             "Expected {} = {}, got: {}",
                             "Drone_Melee_Speed_2", e, v
@@ -4908,13 +4908,13 @@ impl context::Ctx for Context {
                 }
                 Expectation::EbihAlu(e) => {
                     let v = self.has(Item::Ebih_Alu);
-                    if v != (*e).into() {
+                    if v != *e {
                         errs.push(format!("Expected {} = {}, got: {}", "Ebih_Alu", e, v));
                     }
                 }
                 Expectation::EbihInterchangeBlock(e) => {
                     let v = self.has(Item::Ebih_Interchange_Block);
-                    if v != (*e).into() {
+                    if v != *e {
                         errs.push(format!(
                             "Expected {} = {}, got: {}",
                             "Ebih_Interchange_Block", e, v
@@ -4923,7 +4923,7 @@ impl context::Ctx for Context {
                 }
                 Expectation::EbihInterchangeGate(e) => {
                     let v = self.has(Item::Ebih_Interchange_Gate);
-                    if v != (*e).into() {
+                    if v != *e {
                         errs.push(format!(
                             "Expected {} = {}, got: {}",
                             "Ebih_Interchange_Gate", e, v
@@ -4932,7 +4932,7 @@ impl context::Ctx for Context {
                 }
                 Expectation::EbihWastelandDoor(e) => {
                     let v = self.has(Item::Ebih_Wasteland_Door);
-                    if v != (*e).into() {
+                    if v != *e {
                         errs.push(format!(
                             "Expected {} = {}, got: {}",
                             "Ebih_Wasteland_Door", e, v
@@ -4941,7 +4941,7 @@ impl context::Ctx for Context {
                 }
                 Expectation::EbihWastelandPassageH(e) => {
                     let v = self.has(Item::Ebih_Wasteland_Passage_H);
-                    if v != (*e).into() {
+                    if v != *e {
                         errs.push(format!(
                             "Expected {} = {}, got: {}",
                             "Ebih_Wasteland_Passage_H", e, v
@@ -4950,7 +4950,7 @@ impl context::Ctx for Context {
                 }
                 Expectation::EbihWaterfallBlockLeft(e) => {
                     let v = self.has(Item::Ebih_Waterfall_Block_Left);
-                    if v != (*e).into() {
+                    if v != *e {
                         errs.push(format!(
                             "Expected {} = {}, got: {}",
                             "Ebih_Waterfall_Block_Left", e, v
@@ -4959,7 +4959,7 @@ impl context::Ctx for Context {
                 }
                 Expectation::EbihWaterfallBlockRight(e) => {
                     let v = self.has(Item::Ebih_Waterfall_Block_Right);
-                    if v != (*e).into() {
+                    if v != *e {
                         errs.push(format!(
                             "Expected {} = {}, got: {}",
                             "Ebih_Waterfall_Block_Right", e, v
@@ -4968,7 +4968,7 @@ impl context::Ctx for Context {
                 }
                 Expectation::EbihWaterfallWall(e) => {
                     let v = self.has(Item::Ebih_Waterfall_Wall);
-                    if v != (*e).into() {
+                    if v != *e {
                         errs.push(format!(
                             "Expected {} = {}, got: {}",
                             "Ebih_Waterfall_Wall", e, v
@@ -4977,7 +4977,7 @@ impl context::Ctx for Context {
                 }
                 Expectation::EbihWestBlock(e) => {
                     let v = self.has(Item::Ebih_West_Block);
-                    if v != (*e).into() {
+                    if v != *e {
                         errs.push(format!(
                             "Expected {} = {}, got: {}",
                             "Ebih_West_Block", e, v
@@ -4986,31 +4986,31 @@ impl context::Ctx for Context {
                 }
                 Expectation::ExitBreach(e) => {
                     let v = self.has(Item::Exit_Breach);
-                    if v != (*e).into() {
+                    if v != *e {
                         errs.push(format!("Expected {} = {}, got: {}", "Exit_Breach", e, v));
                     }
                 }
                 Expectation::FastTravel(e) => {
                     let v = self.has(Item::Fast_Travel);
-                    if v != (*e).into() {
+                    if v != *e {
                         errs.push(format!("Expected {} = {}, got: {}", "Fast_Travel", e, v));
                     }
                 }
                 Expectation::Flask(e) => {
                     let v = self.count(Item::Flask);
-                    if v != (*e).into() {
+                    if v != <i8 as Into<i16>>::into(*e) {
                         errs.push(format!("Expected {} = {}, got: {}", "Flask", e, v));
                     }
                 }
                 Expectation::GigunaBoulder(e) => {
                     let v = self.has(Item::Giguna_Boulder);
-                    if v != (*e).into() {
+                    if v != *e {
                         errs.push(format!("Expected {} = {}, got: {}", "Giguna_Boulder", e, v));
                     }
                 }
                 Expectation::GigunaDualPathSwitch(e) => {
                     let v = self.has(Item::Giguna_Dual_Path_Switch);
-                    if v != (*e).into() {
+                    if v != *e {
                         errs.push(format!(
                             "Expected {} = {}, got: {}",
                             "Giguna_Dual_Path_Switch", e, v
@@ -5019,7 +5019,7 @@ impl context::Ctx for Context {
                 }
                 Expectation::GigunaDualPathWall(e) => {
                     let v = self.has(Item::Giguna_Dual_Path_Wall);
-                    if v != (*e).into() {
+                    if v != *e {
                         errs.push(format!(
                             "Expected {} = {}, got: {}",
                             "Giguna_Dual_Path_Wall", e, v
@@ -5028,7 +5028,7 @@ impl context::Ctx for Context {
                 }
                 Expectation::GigunaGatewayBlock(e) => {
                     let v = self.has(Item::Giguna_Gateway_Block);
-                    if v != (*e).into() {
+                    if v != *e {
                         errs.push(format!(
                             "Expected {} = {}, got: {}",
                             "Giguna_Gateway_Block", e, v
@@ -5037,7 +5037,7 @@ impl context::Ctx for Context {
                 }
                 Expectation::GigunaGatewayGate(e) => {
                     let v = self.has(Item::Giguna_Gateway_Gate);
-                    if v != (*e).into() {
+                    if v != *e {
                         errs.push(format!(
                             "Expected {} = {}, got: {}",
                             "Giguna_Gateway_Gate", e, v
@@ -5046,13 +5046,13 @@ impl context::Ctx for Context {
                 }
                 Expectation::GigunaGubi(e) => {
                     let v = self.has(Item::Giguna_Gubi);
-                    if v != (*e).into() {
+                    if v != *e {
                         errs.push(format!("Expected {} = {}, got: {}", "Giguna_Gubi", e, v));
                     }
                 }
                 Expectation::GigunaNortheastGate(e) => {
                     let v = self.has(Item::Giguna_Northeast_Gate);
-                    if v != (*e).into() {
+                    if v != *e {
                         errs.push(format!(
                             "Expected {} = {}, got: {}",
                             "Giguna_Northeast_Gate", e, v
@@ -5061,7 +5061,7 @@ impl context::Ctx for Context {
                 }
                 Expectation::HealthFragment(e) => {
                     let v = self.count(Item::Health_Fragment);
-                    if v != (*e).into() {
+                    if v != <i8 as Into<i16>>::into(*e) {
                         errs.push(format!(
                             "Expected {} = {}, got: {}",
                             "Health_Fragment", e, v
@@ -5070,19 +5070,19 @@ impl context::Ctx for Context {
                 }
                 Expectation::HealthNode(e) => {
                     let v = self.has(Item::Health_Node);
-                    if v != (*e).into() {
+                    if v != *e {
                         errs.push(format!("Expected {} = {}, got: {}", "Health_Node", e, v));
                     }
                 }
                 Expectation::HealthUpgrade(e) => {
                     let v = self.has(Item::Health_Upgrade);
-                    if v != (*e).into() {
+                    if v != *e {
                         errs.push(format!("Expected {} = {}, got: {}", "Health_Upgrade", e, v));
                     }
                 }
                 Expectation::HealthUpgrade2(e) => {
                     let v = self.has(Item::Health_Upgrade_2);
-                    if v != (*e).into() {
+                    if v != *e {
                         errs.push(format!(
                             "Expected {} = {}, got: {}",
                             "Health_Upgrade_2", e, v
@@ -5091,7 +5091,7 @@ impl context::Ctx for Context {
                 }
                 Expectation::HealthUpgrade3(e) => {
                     let v = self.has(Item::Health_Upgrade_3);
-                    if v != (*e).into() {
+                    if v != *e {
                         errs.push(format!(
                             "Expected {} = {}, got: {}",
                             "Health_Upgrade_3", e, v
@@ -5100,7 +5100,7 @@ impl context::Ctx for Context {
                 }
                 Expectation::HealthUpgrade4(e) => {
                     let v = self.has(Item::Health_Upgrade_4);
-                    if v != (*e).into() {
+                    if v != *e {
                         errs.push(format!(
                             "Expected {} = {}, got: {}",
                             "Health_Upgrade_4", e, v
@@ -5109,7 +5109,7 @@ impl context::Ctx for Context {
                 }
                 Expectation::HereticsTablet(e) => {
                     let v = self.has(Item::Heretics_Tablet);
-                    if v != (*e).into() {
+                    if v != *e {
                         errs.push(format!(
                             "Expected {} = {}, got: {}",
                             "Heretics_Tablet", e, v
@@ -5118,37 +5118,37 @@ impl context::Ctx for Context {
                 }
                 Expectation::IceAxe(e) => {
                     let v = self.has(Item::Ice_Axe);
-                    if v != (*e).into() {
+                    if v != *e {
                         errs.push(format!("Expected {} = {}, got: {}", "Ice_Axe", e, v));
                     }
                 }
                 Expectation::Infect(e) => {
                     let v = self.has(Item::Infect);
-                    if v != (*e).into() {
+                    if v != *e {
                         errs.push(format!("Expected {} = {}, got: {}", "Infect", e, v));
                     }
                 }
                 Expectation::InfectL1(e) => {
                     let v = self.has(Item::Infect_L1);
-                    if v != (*e).into() {
+                    if v != *e {
                         errs.push(format!("Expected {} = {}, got: {}", "Infect_L1", e, v));
                     }
                 }
                 Expectation::InfectL2(e) => {
                     let v = self.has(Item::Infect_L2);
-                    if v != (*e).into() {
+                    if v != *e {
                         errs.push(format!("Expected {} = {}, got: {}", "Infect_L2", e, v));
                     }
                 }
                 Expectation::InfectL3(e) => {
                     let v = self.has(Item::Infect_L3);
-                    if v != (*e).into() {
+                    if v != *e {
                         errs.push(format!("Expected {} = {}, got: {}", "Infect_L3", e, v));
                     }
                 }
                 Expectation::InfectionRange(e) => {
                     let v = self.has(Item::Infection_Range);
-                    if v != (*e).into() {
+                    if v != *e {
                         errs.push(format!(
                             "Expected {} = {}, got: {}",
                             "Infection_Range", e, v
@@ -5157,7 +5157,7 @@ impl context::Ctx for Context {
                 }
                 Expectation::InfectionRange2(e) => {
                     let v = self.has(Item::Infection_Range_2);
-                    if v != (*e).into() {
+                    if v != *e {
                         errs.push(format!(
                             "Expected {} = {}, got: {}",
                             "Infection_Range_2", e, v
@@ -5166,7 +5166,7 @@ impl context::Ctx for Context {
                 }
                 Expectation::InfectionRange3(e) => {
                     let v = self.has(Item::Infection_Range_3);
-                    if v != (*e).into() {
+                    if v != *e {
                         errs.push(format!(
                             "Expected {} = {}, got: {}",
                             "Infection_Range_3", e, v
@@ -5175,7 +5175,7 @@ impl context::Ctx for Context {
                 }
                 Expectation::InfectionSpeed(e) => {
                     let v = self.has(Item::Infection_Speed);
-                    if v != (*e).into() {
+                    if v != *e {
                         errs.push(format!(
                             "Expected {} = {}, got: {}",
                             "Infection_Speed", e, v
@@ -5184,13 +5184,13 @@ impl context::Ctx for Context {
                 }
                 Expectation::IrikarGudam(e) => {
                     let v = self.has(Item::Irikar_Gudam);
-                    if v != (*e).into() {
+                    if v != *e {
                         errs.push(format!("Expected {} = {}, got: {}", "Irikar_Gudam", e, v));
                     }
                 }
                 Expectation::IrikarRoyalStorageWall(e) => {
                     let v = self.has(Item::Irikar_Royal_Storage_Wall);
-                    if v != (*e).into() {
+                    if v != *e {
                         errs.push(format!(
                             "Expected {} = {}, got: {}",
                             "Irikar_Royal_Storage_Wall", e, v
@@ -5199,13 +5199,13 @@ impl context::Ctx for Context {
                 }
                 Expectation::LedgeGrab(e) => {
                     let v = self.has(Item::Ledge_Grab);
-                    if v != (*e).into() {
+                    if v != *e {
                         errs.push(format!("Expected {} = {}, got: {}", "Ledge_Grab", e, v));
                     }
                 }
                 Expectation::LetterFromTrace(e) => {
                     let v = self.has(Item::Letter_from_Trace);
-                    if v != (*e).into() {
+                    if v != *e {
                         errs.push(format!(
                             "Expected {} = {}, got: {}",
                             "Letter_from_Trace", e, v
@@ -5214,67 +5214,67 @@ impl context::Ctx for Context {
                 }
                 Expectation::MeleeDamage(e) => {
                     let v = self.has(Item::Melee_Damage);
-                    if v != (*e).into() {
+                    if v != *e {
                         errs.push(format!("Expected {} = {}, got: {}", "Melee_Damage", e, v));
                     }
                 }
                 Expectation::MeleeDamage2(e) => {
                     let v = self.has(Item::Melee_Damage_2);
-                    if v != (*e).into() {
+                    if v != *e {
                         errs.push(format!("Expected {} = {}, got: {}", "Melee_Damage_2", e, v));
                     }
                 }
                 Expectation::MeleeSpeed(e) => {
                     let v = self.has(Item::Melee_Speed);
-                    if v != (*e).into() {
+                    if v != *e {
                         errs.push(format!("Expected {} = {}, got: {}", "Melee_Speed", e, v));
                     }
                 }
                 Expectation::MeleeSpeed2(e) => {
                     let v = self.has(Item::Melee_Speed_2);
-                    if v != (*e).into() {
+                    if v != *e {
                         errs.push(format!("Expected {} = {}, got: {}", "Melee_Speed_2", e, v));
                     }
                 }
                 Expectation::MistUpgrade(e) => {
                     let v = self.has(Item::Mist_Upgrade);
-                    if v != (*e).into() {
+                    if v != *e {
                         errs.push(format!("Expected {} = {}, got: {}", "Mist_Upgrade", e, v));
                     }
                 }
                 Expectation::NaniteMist(e) => {
                     let v = self.has(Item::Nanite_Mist);
-                    if v != (*e).into() {
+                    if v != *e {
                         errs.push(format!("Expected {} = {}, got: {}", "Nanite_Mist", e, v));
                     }
                 }
                 Expectation::NanoPoints(e) => {
                     let v = self.has(Item::Nano_Points);
-                    if v != (*e).into() {
+                    if v != *e {
                         errs.push(format!("Expected {} = {}, got: {}", "Nano_Points", e, v));
                     }
                 }
                 Expectation::NanoPoints2(e) => {
                     let v = self.has(Item::Nano_Points_2);
-                    if v != (*e).into() {
+                    if v != *e {
                         errs.push(format!("Expected {} = {}, got: {}", "Nano_Points_2", e, v));
                     }
                 }
                 Expectation::PowerMatrix(e) => {
                     let v = self.has(Item::Power_Matrix);
-                    if v != (*e).into() {
+                    if v != *e {
                         errs.push(format!("Expected {} = {}, got: {}", "Power_Matrix", e, v));
                     }
                 }
                 Expectation::RangedDamage(e) => {
                     let v = self.has(Item::Ranged_Damage);
-                    if v != (*e).into() {
+                    if v != *e {
                         errs.push(format!("Expected {} = {}, got: {}", "Ranged_Damage", e, v));
                     }
                 }
                 Expectation::RangedDamage2(e) => {
                     let v = self.has(Item::Ranged_Damage_2);
-                    if v != (*e).into() {
+                    if v != *e {
                         errs.push(format!(
                             "Expected {} = {}, got: {}",
                             "Ranged_Damage_2", e, v
@@ -5283,31 +5283,31 @@ impl context::Ctx for Context {
                 }
                 Expectation::RangedSpeed(e) => {
                     let v = self.has(Item::Ranged_Speed);
-                    if v != (*e).into() {
+                    if v != *e {
                         errs.push(format!("Expected {} = {}, got: {}", "Ranged_Speed", e, v));
                     }
                 }
                 Expectation::RangedSpeed2(e) => {
                     let v = self.has(Item::Ranged_Speed_2);
-                    if v != (*e).into() {
+                    if v != *e {
                         errs.push(format!("Expected {} = {}, got: {}", "Ranged_Speed_2", e, v));
                     }
                 }
                 Expectation::RecordLosses(e) => {
                     let v = self.has(Item::Record_Losses);
-                    if v != (*e).into() {
+                    if v != *e {
                         errs.push(format!("Expected {} = {}, got: {}", "Record_Losses", e, v));
                     }
                 }
                 Expectation::RemoteDrone(e) => {
                     let v = self.has(Item::Remote_Drone);
-                    if v != (*e).into() {
+                    if v != *e {
                         errs.push(format!("Expected {} = {}, got: {}", "Remote_Drone", e, v));
                     }
                 }
                 Expectation::ResearchersMissing(e) => {
                     let v = self.has(Item::Researchers_Missing);
-                    if v != (*e).into() {
+                    if v != *e {
                         errs.push(format!(
                             "Expected {} = {}, got: {}",
                             "Researchers_Missing", e, v
@@ -5316,13 +5316,13 @@ impl context::Ctx for Context {
                 }
                 Expectation::Shockwave(e) => {
                     let v = self.has(Item::Shockwave);
-                    if v != (*e).into() {
+                    if v != *e {
                         errs.push(format!("Expected {} = {}, got: {}", "Shockwave", e, v));
                     }
                 }
                 Expectation::SlingshotCharge(e) => {
                     let v = self.has(Item::Slingshot_Charge);
-                    if v != (*e).into() {
+                    if v != *e {
                         errs.push(format!(
                             "Expected {} = {}, got: {}",
                             "Slingshot_Charge", e, v
@@ -5331,13 +5331,13 @@ impl context::Ctx for Context {
                 }
                 Expectation::SlingshotHook(e) => {
                     let v = self.has(Item::Slingshot_Hook);
-                    if v != (*e).into() {
+                    if v != *e {
                         errs.push(format!("Expected {} = {}, got: {}", "Slingshot_Hook", e, v));
                     }
                 }
                 Expectation::SlingshotWeapon(e) => {
                     let v = self.has(Item::Slingshot_Weapon);
-                    if v != (*e).into() {
+                    if v != *e {
                         errs.push(format!(
                             "Expected {} = {}, got: {}",
                             "Slingshot_Weapon", e, v
@@ -5346,31 +5346,31 @@ impl context::Ctx for Context {
                 }
                 Expectation::StationPower(e) => {
                     let v = self.has(Item::Station_Power);
-                    if v != (*e).into() {
+                    if v != *e {
                         errs.push(format!("Expected {} = {}, got: {}", "Station_Power", e, v));
                     }
                 }
                 Expectation::StormBomb(e) => {
                     let v = self.has(Item::Storm_Bomb);
-                    if v != (*e).into() {
+                    if v != *e {
                         errs.push(format!("Expected {} = {}, got: {}", "Storm_Bomb", e, v));
                     }
                 }
                 Expectation::Switch3611(e) => {
                     let v = self.has(Item::Switch_36_11);
-                    if v != (*e).into() {
+                    if v != *e {
                         errs.push(format!("Expected {} = {}, got: {}", "Switch_36_11", e, v));
                     }
                 }
                 Expectation::Switch4012(e) => {
                     let v = self.has(Item::Switch_40_12);
-                    if v != (*e).into() {
+                    if v != *e {
                         errs.push(format!("Expected {} = {}, got: {}", "Switch_40_12", e, v));
                     }
                 }
                 Expectation::TerminalBreakthrough1(e) => {
                     let v = self.has(Item::Terminal_Breakthrough_1);
-                    if v != (*e).into() {
+                    if v != *e {
                         errs.push(format!(
                             "Expected {} = {}, got: {}",
                             "Terminal_Breakthrough_1", e, v
@@ -5379,7 +5379,7 @@ impl context::Ctx for Context {
                 }
                 Expectation::TerminalBreakthrough2(e) => {
                     let v = self.has(Item::Terminal_Breakthrough_2);
-                    if v != (*e).into() {
+                    if v != *e {
                         errs.push(format!(
                             "Expected {} = {}, got: {}",
                             "Terminal_Breakthrough_2", e, v
@@ -5388,7 +5388,7 @@ impl context::Ctx for Context {
                 }
                 Expectation::TheIdealKiengir(e) => {
                     let v = self.has(Item::The_Ideal_Kiengir);
-                    if v != (*e).into() {
+                    if v != *e {
                         errs.push(format!(
                             "Expected {} = {}, got: {}",
                             "The_Ideal_Kiengir", e, v
@@ -5397,7 +5397,7 @@ impl context::Ctx for Context {
                 }
                 Expectation::UhrumWestEntranceGate(e) => {
                     let v = self.has(Item::Uhrum_West_Entrance_Gate);
-                    if v != (*e).into() {
+                    if v != *e {
                         errs.push(format!(
                             "Expected {} = {}, got: {}",
                             "Uhrum_West_Entrance_Gate", e, v
@@ -5406,7 +5406,7 @@ impl context::Ctx for Context {
                 }
                 Expectation::UhrumWestEntranceLowerWall(e) => {
                     let v = self.has(Item::Uhrum_West_Entrance_Lower_Wall);
-                    if v != (*e).into() {
+                    if v != *e {
                         errs.push(format!(
                             "Expected {} = {}, got: {}",
                             "Uhrum_West_Entrance_Lower_Wall", e, v
@@ -5415,7 +5415,7 @@ impl context::Ctx for Context {
                 }
                 Expectation::UhrumWestEntranceUpperWall(e) => {
                     let v = self.has(Item::Uhrum_West_Entrance_Upper_Wall);
-                    if v != (*e).into() {
+                    if v != *e {
                         errs.push(format!(
                             "Expected {} = {}, got: {}",
                             "Uhrum_West_Entrance_Upper_Wall", e, v
@@ -5424,13 +5424,13 @@ impl context::Ctx for Context {
                 }
                 Expectation::UnderSiege(e) => {
                     let v = self.has(Item::Under_Siege);
-                    if v != (*e).into() {
+                    if v != *e {
                         errs.push(format!("Expected {} = {}, got: {}", "Under_Siege", e, v));
                     }
                 }
                 Expectation::UnderwaterMovement(e) => {
                     let v = self.has(Item::Underwater_Movement);
-                    if v != (*e).into() {
+                    if v != *e {
                         errs.push(format!(
                             "Expected {} = {}, got: {}",
                             "Underwater_Movement", e, v
@@ -5439,7 +5439,7 @@ impl context::Ctx for Context {
                 }
                 Expectation::WallClimb(e) => {
                     let v = self.has(Item::Wall_Climb);
-                    if v != (*e).into() {
+                    if v != *e {
                         errs.push(format!("Expected {} = {}, got: {}", "Wall_Climb", e, v));
                     }
                 }
