@@ -50,9 +50,6 @@ pub fn get_area(spot: SpotId) -> AreaId {
         | SpotId::Amagi__Main_Area__West_19
         | SpotId::Amagi__Main_Area__Secret_Waterfall
         | SpotId::Amagi__Main_Area__Way_Off_To_The_Side => AreaId::Amagi__Main_Area,
-        SpotId::Amagi__Cave_Behind_Waterfall__Bottom
-        | SpotId::Amagi__Cave_Behind_Waterfall__Middle
-        | SpotId::Amagi__Cave_Behind_Waterfall__Top => AreaId::Amagi__Cave_Behind_Waterfall,
         SpotId::Amagi__Grid_31_19__West | SpotId::Amagi__Grid_31_19__East => {
             AreaId::Amagi__Grid_31_19
         }
@@ -154,15 +151,6 @@ pub fn get_area(spot: SpotId) -> AreaId {
         | SpotId::Ebih__Base_Camp__Left_Platform
         | SpotId::Ebih__Base_Camp__Left_Platform_Moved
         | SpotId::Ebih__Base_Camp__Top_Platform => AreaId::Ebih__Base_Camp,
-        SpotId::Ebih__Bunker_Interior__Entry | SpotId::Ebih__Bunker_Interior__Desk => {
-            AreaId::Ebih__Bunker_Interior
-        }
-        SpotId::Ebih__Building_Interior__Entry | SpotId::Ebih__Building_Interior__Corner => {
-            AreaId::Ebih__Building_Interior
-        }
-        SpotId::Ebih__Tent_Interior__Entry | SpotId::Ebih__Tent_Interior__Desk => {
-            AreaId::Ebih__Tent_Interior
-        }
         SpotId::Ebih__By_Garage__East_13
         | SpotId::Ebih__By_Garage__East_Platform
         | SpotId::Ebih__By_Garage__Crawlspace_Opening
@@ -177,7 +165,6 @@ pub fn get_area(spot: SpotId) -> AreaId {
         | SpotId::Ebih__By_Garage__Garage_Entry
         | SpotId::Ebih__By_Garage__East_Below_Platforms
         | SpotId::Ebih__By_Garage__East_12 => AreaId::Ebih__By_Garage,
-        SpotId::Ebih__Garage__Entry | SpotId::Ebih__Garage__Boxes => AreaId::Ebih__Garage,
         SpotId::Ebih__Grid_25_10_12__East_12
         | SpotId::Ebih__Grid_25_10_12__Bush
         | SpotId::Ebih__Grid_25_10_12__West_12
@@ -266,7 +253,6 @@ pub fn get_area(spot: SpotId) -> AreaId {
         | SpotId::Ebih__Ebih_West__West_12
         | SpotId::Ebih__Ebih_West__West_13
         | SpotId::Ebih__Ebih_West__East_13 => AreaId::Ebih__Ebih_West,
-        SpotId::Ebih__Cave__Entry => AreaId::Ebih__Cave,
         SpotId::Ebih__Ebih_East__West_8
         | SpotId::Ebih__Ebih_East__Moving_Platform
         | SpotId::Ebih__Ebih_East__Ledge_End
@@ -520,9 +506,6 @@ pub fn get_area(spot: SpotId) -> AreaId {
         | SpotId::Giguna__Giguna_Base__Switch_Distance_2
         | SpotId::Giguna__Giguna_Base__Switch_Distance_3
         | SpotId::Giguna__Giguna_Base__Switch_Distance_4 => AreaId::Giguna__Giguna_Base,
-        SpotId::Giguna__Building_Interior__Entry | SpotId::Giguna__Building_Interior__Bookshelf => {
-            AreaId::Giguna__Building_Interior
-        }
         SpotId::Giguna__Ruins_East__East_9
         | SpotId::Giguna__Ruins_East__Bottom_Rock
         | SpotId::Giguna__Ruins_East__West_9
@@ -764,12 +747,6 @@ pub fn get_area(spot: SpotId) -> AreaId {
         | SpotId::Giguna__Separator__West_Mid_air
         | SpotId::Giguna__Separator__West_25
         | SpotId::Giguna__Separator__East_25 => AreaId::Giguna__Separator,
-        SpotId::Glacier__Dock_Elevator__Elevator | SpotId::Glacier__Dock_Elevator__Connector => {
-            AreaId::Glacier__Dock_Elevator
-        }
-        SpotId::Glacier__Dock_Interior__Connector | SpotId::Glacier__Dock_Interior__Entry => {
-            AreaId::Glacier__Dock_Interior
-        }
         SpotId::Glacier__Dock_Outside__Entry | SpotId::Glacier__Dock_Outside__Do_Not_Enter => {
             AreaId::Glacier__Dock_Outside
         }
@@ -866,6 +843,29 @@ pub fn get_area(spot: SpotId) -> AreaId {
         SpotId::Glacier__Apocalypse_Entry__West | SpotId::Glacier__Apocalypse_Entry__Terminal => {
             AreaId::Glacier__Apocalypse_Entry
         }
+        SpotId::Interior__Dock_Elevator__Elevator | SpotId::Interior__Dock_Elevator__Connector => {
+            AreaId::Interior__Dock_Elevator
+        }
+        SpotId::Interior__Dock_Interior__Connector | SpotId::Interior__Dock_Interior__Entry => {
+            AreaId::Interior__Dock_Interior
+        }
+        SpotId::Interior__Bunker_Interior__Entry | SpotId::Interior__Bunker_Interior__Desk => {
+            AreaId::Interior__Bunker_Interior
+        }
+        SpotId::Interior__Building_Interior__Entry
+        | SpotId::Interior__Building_Interior__Corner => AreaId::Interior__Building_Interior,
+        SpotId::Interior__Tent_Interior__Entry | SpotId::Interior__Tent_Interior__Desk => {
+            AreaId::Interior__Tent_Interior
+        }
+        SpotId::Interior__Garage__Entry | SpotId::Interior__Garage__Boxes => {
+            AreaId::Interior__Garage
+        }
+        SpotId::Interior__Ebih_Cave__Entry => AreaId::Interior__Ebih_Cave,
+        SpotId::Interior__Cave_Behind_Waterfall__Bottom
+        | SpotId::Interior__Cave_Behind_Waterfall__Middle
+        | SpotId::Interior__Cave_Behind_Waterfall__Top => AreaId::Interior__Cave_Behind_Waterfall,
+        SpotId::Interior__Outpost_Interior__Entry
+        | SpotId::Interior__Outpost_Interior__Bookshelf => AreaId::Interior__Outpost_Interior,
         SpotId::Irikar_Breach__Save_Room__Save_Point
         | SpotId::Irikar_Breach__Save_Room__Upper_Area
         | SpotId::Irikar_Breach__Save_Room__West => AreaId::Irikar_Breach__Save_Room,
@@ -1121,9 +1121,6 @@ pub fn get_region(spot: SpotId) -> RegionId {
         | SpotId::Amagi__Main_Area__West_19
         | SpotId::Amagi__Main_Area__Secret_Waterfall
         | SpotId::Amagi__Main_Area__Way_Off_To_The_Side => RegionId::Amagi,
-        SpotId::Amagi__Cave_Behind_Waterfall__Bottom
-        | SpotId::Amagi__Cave_Behind_Waterfall__Middle
-        | SpotId::Amagi__Cave_Behind_Waterfall__Top => RegionId::Amagi,
         SpotId::Amagi__Grid_31_19__West | SpotId::Amagi__Grid_31_19__East => RegionId::Amagi,
         SpotId::Amagi__Liru_Room__West_19
         | SpotId::Amagi__Liru_Room__Hidden_Enemies
@@ -1223,13 +1220,6 @@ pub fn get_region(spot: SpotId) -> RegionId {
         | SpotId::Ebih__Base_Camp__Left_Platform
         | SpotId::Ebih__Base_Camp__Left_Platform_Moved
         | SpotId::Ebih__Base_Camp__Top_Platform => RegionId::Ebih,
-        SpotId::Ebih__Bunker_Interior__Entry | SpotId::Ebih__Bunker_Interior__Desk => {
-            RegionId::Ebih
-        }
-        SpotId::Ebih__Building_Interior__Entry | SpotId::Ebih__Building_Interior__Corner => {
-            RegionId::Ebih
-        }
-        SpotId::Ebih__Tent_Interior__Entry | SpotId::Ebih__Tent_Interior__Desk => RegionId::Ebih,
         SpotId::Ebih__By_Garage__East_13
         | SpotId::Ebih__By_Garage__East_Platform
         | SpotId::Ebih__By_Garage__Crawlspace_Opening
@@ -1244,7 +1234,6 @@ pub fn get_region(spot: SpotId) -> RegionId {
         | SpotId::Ebih__By_Garage__Garage_Entry
         | SpotId::Ebih__By_Garage__East_Below_Platforms
         | SpotId::Ebih__By_Garage__East_12 => RegionId::Ebih,
-        SpotId::Ebih__Garage__Entry | SpotId::Ebih__Garage__Boxes => RegionId::Ebih,
         SpotId::Ebih__Grid_25_10_12__East_12
         | SpotId::Ebih__Grid_25_10_12__Bush
         | SpotId::Ebih__Grid_25_10_12__West_12
@@ -1333,7 +1322,6 @@ pub fn get_region(spot: SpotId) -> RegionId {
         | SpotId::Ebih__Ebih_West__West_12
         | SpotId::Ebih__Ebih_West__West_13
         | SpotId::Ebih__Ebih_West__East_13 => RegionId::Ebih,
-        SpotId::Ebih__Cave__Entry => RegionId::Ebih,
         SpotId::Ebih__Ebih_East__West_8
         | SpotId::Ebih__Ebih_East__Moving_Platform
         | SpotId::Ebih__Ebih_East__Ledge_End
@@ -1585,9 +1573,6 @@ pub fn get_region(spot: SpotId) -> RegionId {
         | SpotId::Giguna__Giguna_Base__Switch_Distance_2
         | SpotId::Giguna__Giguna_Base__Switch_Distance_3
         | SpotId::Giguna__Giguna_Base__Switch_Distance_4 => RegionId::Giguna,
-        SpotId::Giguna__Building_Interior__Entry | SpotId::Giguna__Building_Interior__Bookshelf => {
-            RegionId::Giguna
-        }
         SpotId::Giguna__Ruins_East__East_9
         | SpotId::Giguna__Ruins_East__Bottom_Rock
         | SpotId::Giguna__Ruins_East__West_9
@@ -1827,12 +1812,6 @@ pub fn get_region(spot: SpotId) -> RegionId {
         | SpotId::Giguna__Separator__West_Mid_air
         | SpotId::Giguna__Separator__West_25
         | SpotId::Giguna__Separator__East_25 => RegionId::Giguna,
-        SpotId::Glacier__Dock_Elevator__Elevator | SpotId::Glacier__Dock_Elevator__Connector => {
-            RegionId::Glacier
-        }
-        SpotId::Glacier__Dock_Interior__Connector | SpotId::Glacier__Dock_Interior__Entry => {
-            RegionId::Glacier
-        }
         SpotId::Glacier__Dock_Outside__Entry | SpotId::Glacier__Dock_Outside__Do_Not_Enter => {
             RegionId::Glacier
         }
@@ -1927,6 +1906,27 @@ pub fn get_region(spot: SpotId) -> RegionId {
         SpotId::Glacier__Apocalypse_Entry__West | SpotId::Glacier__Apocalypse_Entry__Terminal => {
             RegionId::Glacier
         }
+        SpotId::Interior__Dock_Elevator__Elevator | SpotId::Interior__Dock_Elevator__Connector => {
+            RegionId::Interior
+        }
+        SpotId::Interior__Dock_Interior__Connector | SpotId::Interior__Dock_Interior__Entry => {
+            RegionId::Interior
+        }
+        SpotId::Interior__Bunker_Interior__Entry | SpotId::Interior__Bunker_Interior__Desk => {
+            RegionId::Interior
+        }
+        SpotId::Interior__Building_Interior__Entry
+        | SpotId::Interior__Building_Interior__Corner => RegionId::Interior,
+        SpotId::Interior__Tent_Interior__Entry | SpotId::Interior__Tent_Interior__Desk => {
+            RegionId::Interior
+        }
+        SpotId::Interior__Garage__Entry | SpotId::Interior__Garage__Boxes => RegionId::Interior,
+        SpotId::Interior__Ebih_Cave__Entry => RegionId::Interior,
+        SpotId::Interior__Cave_Behind_Waterfall__Bottom
+        | SpotId::Interior__Cave_Behind_Waterfall__Middle
+        | SpotId::Interior__Cave_Behind_Waterfall__Top => RegionId::Interior,
+        SpotId::Interior__Outpost_Interior__Entry
+        | SpotId::Interior__Outpost_Interior__Bookshelf => RegionId::Interior,
         SpotId::Irikar_Breach__Save_Room__Save_Point
         | SpotId::Irikar_Breach__Save_Room__Upper_Area
         | SpotId::Irikar_Breach__Save_Room__West => RegionId::Irikar_Breach,
@@ -2218,11 +2218,7 @@ impl world::Accessible for Location {
                 rules::access_overheat_and_can_damage(&ctx)
             }
             LocationId::Ebih__Boss_Room__East_Ledge__Item => true,
-            LocationId::Ebih__Building_Interior__Corner__Urn => true,
-            LocationId::Ebih__Building_Interior__Entry__Remote_Urn => rules::access_boomerang(&ctx),
-            LocationId::Ebih__Bunker_Interior__Desk__Note => true,
             LocationId::Ebih__By_Garage__Crawlspace__Fragment => true,
-            LocationId::Ebih__Cave__Entry__Health => true,
             LocationId::Ebih__Drone_Room__Item__Urn => true,
             LocationId::Ebih__Drone_Room__Middle_Platform__Urn_Quick_Grab => {
                 rules::access_boomerang2(&ctx)
@@ -2236,12 +2232,10 @@ impl world::Accessible for Location {
             LocationId::Ebih__Ebih_West__Alcove__Tablet => true,
             LocationId::Ebih__Ebih_West__Block_Left__Break_Block => rules::access_shockwave(&ctx),
             LocationId::Ebih__Ebih_West__Block_Right__Break_Block => rules::access_shockwave(&ctx),
-            LocationId::Ebih__Garage__Boxes__Under_Boxes => rules::access_can_damage(&ctx),
             LocationId::Ebih__Grid_25_10_12__East_10__Remote_Bush => rules::access_bs(&ctx),
             LocationId::Ebih__Grid_25_10_12__Hidden_Bush__Behind_Bush => true,
             LocationId::Ebih__Grid_25_2_6__Pit__Item => true,
             LocationId::Ebih__Grid_26_10_11__Ledge__Note => true,
-            LocationId::Ebih__Tent_Interior__Desk__Note => true,
             LocationId::Ebih__Vertical_Interchange__Switch__Activate_Switch => {
                 rules::access_can_damage(&ctx)
             }
@@ -2262,7 +2256,6 @@ impl world::Accessible for Location {
                 rules::access_shockwave(&ctx)
             }
             LocationId::Giguna__Antechamber__Statue_Head__Tablet => true,
-            LocationId::Giguna__Building_Interior__Bookshelf__Note => true,
             LocationId::Giguna__Carnelian__Vault__Item => true,
             LocationId::Giguna__Clouds__Cache__Item => true,
             LocationId::Giguna__Dual_Path__Base_of_Wall__Break_Wall => {
@@ -2363,6 +2356,15 @@ impl world::Accessible for Location {
             LocationId::Glacier__Vertical_Room__Under_Switch__Switch => {
                 rules::access_boomerang3(&ctx)
             }
+            LocationId::Interior__Building_Interior__Corner__Urn => true,
+            LocationId::Interior__Building_Interior__Entry__Remote_Urn => {
+                rules::access_boomerang(&ctx)
+            }
+            LocationId::Interior__Bunker_Interior__Desk__Note => true,
+            LocationId::Interior__Ebih_Cave__Entry__Health => true,
+            LocationId::Interior__Garage__Boxes__Under_Boxes => rules::access_can_damage(&ctx),
+            LocationId::Interior__Outpost_Interior__Bookshelf__Note => true,
+            LocationId::Interior__Tent_Interior__Desk__Note => true,
             LocationId::Irikar__Abandoned_Room__Corner_Core__Core => {
                 rules::access_more_refills(&ctx)
             }
@@ -2556,11 +2558,6 @@ impl world::Accessible for Exit {
     type Currency = Currency;
     fn can_access(&self, ctx: &Context) -> bool {
         ctx.can_afford(&self.price) && match self.id {
-            ExitId::Amagi__Cave_Behind_Waterfall__Bottom__ex__Main_Area__Secret_Outcropping_1 => true,
-            ExitId::Amagi__Cave_Behind_Waterfall__Bottom__ex__Middle_1 => rules::access_grab_or_climb(&ctx),
-            ExitId::Amagi__Cave_Behind_Waterfall__Bottom__ex__Top_1 => rules::access_hook(&ctx),
-            ExitId::Amagi__Cave_Behind_Waterfall__Middle__ex__Top_1 => rules::access_grab_or_climb(&ctx),
-            ExitId::Amagi__Cave_Behind_Waterfall__Top__ex__Main_Area__Secret_Waterfall_1 => true,
             ExitId::Amagi__Grid_31_19__East__ex__Liru_Room__West_19_1 => true,
             ExitId::Amagi__Grid_31_19__West__ex__Main_Area__East_19_1 => true,
             ExitId::Amagi__Liru_Room__Platform_4_Left__ex__West_20_1 => rules::access_hook_and_hover_and_underwater_movement(&ctx),
@@ -2576,8 +2573,8 @@ impl world::Accessible for Exit {
             ExitId::Amagi__Main_Area__East_15__ex__Glacier__Lake_Main_Entrance__Lake_Access_1 => true,
             ExitId::Amagi__Main_Area__East_19__ex__Grid_31_19__West_1 => true,
             ExitId::Amagi__Main_Area__Platform_2__ex__West_Shelf_1 => rules::access_grab_or_climb_or_hook(&ctx),
-            ExitId::Amagi__Main_Area__Secret_Outcropping__ex__Cave_Behind_Waterfall__Bottom_1 => true,
-            ExitId::Amagi__Main_Area__Secret_Waterfall__ex__Cave_Behind_Waterfall__Top_1 => true,
+            ExitId::Amagi__Main_Area__Secret_Outcropping__ex__Interior__Cave_Behind_Waterfall__Bottom_1 => true,
+            ExitId::Amagi__Main_Area__Secret_Waterfall__ex__Interior__Cave_Behind_Waterfall__Top_1 => true,
             ExitId::Amagi__Main_Area__Shallow_End__ex__Waters_Edge_1 => rules::access_grab_or_underwater_movement(&ctx),
             ExitId::Amagi__Main_Area__West_15__ex__West_Lake__East_15_1 => true,
             ExitId::Amagi__Main_Area__West_18__ex__West_Lake__East_18_1 => true,
@@ -2621,7 +2618,7 @@ impl world::Accessible for Exit {
             ExitId::Antarctica__East__Building_2_Entry__ex__Building_2_Upper_1 => rules::access_mist_upgrade(&ctx),
             ExitId::Antarctica__East__Building_2_Upper__ex__Building_2__Upper_Door_1 => true,
             ExitId::Antarctica__East__Building_2_Upper__ex__Top__Power_Entry_1 => true,
-            ExitId::Antarctica__Freight_Elevator__Controls__ex__Glacier__Dock_Elevator__Elevator_1 => true,
+            ExitId::Antarctica__Freight_Elevator__Controls__ex__Interior__Dock_Elevator__Elevator_1 => true,
             ExitId::Antarctica__Freight_Elevator__Left__ex__Building_2__Entry_1 => true,
             ExitId::Antarctica__Power_Room__Entry__ex__Top__Power_Entry_1 => true,
             ExitId::Antarctica__Shed__Interior__ex__West__Shed_Entry_1 => true,
@@ -2630,8 +2627,8 @@ impl world::Accessible for Exit {
             ExitId::Antarctica__West__Boxes__ex__Building_1W__West_Entry_1 => rules::access_can_damage(&ctx),
             ExitId::Antarctica__West__Shed_Entry__ex__Helipad_1 => rules::access_can_damage(&ctx),
             ExitId::Antarctica__West__Shed_Entry__ex__Shed__Interior_1 => true,
-            ExitId::Ebih__Base_Camp__Building_Entry__ex__Building_Interior__Entry_1 => true,
-            ExitId::Ebih__Base_Camp__Bunker_Entry__ex__Bunker_Interior__Entry_1 => true,
+            ExitId::Ebih__Base_Camp__Building_Entry__ex__Interior__Building_Interior__Entry_1 => true,
+            ExitId::Ebih__Base_Camp__Bunker_Entry__ex__Interior__Bunker_Interior__Entry_1 => true,
             ExitId::Ebih__Base_Camp__East_11__ex__Glacier__Grid_31_9_12__Midair_1 => true,
             ExitId::Ebih__Base_Camp__East_11__ex__Top_Platform_1 => rules::access_platform_and_hook_and_hover(&ctx),
             ExitId::Ebih__Base_Camp__East_12__ex__Glacier__Grid_31_9_12__West_12_1 => true,
@@ -2640,7 +2637,7 @@ impl world::Accessible for Exit {
             ExitId::Ebih__Base_Camp__Left_Platform_Moved__ex__Top_Platform_1 => rules::access_grab(&ctx),
             ExitId::Ebih__Base_Camp__Left_Platform_Moved__ex__Top_Platform_2 => rules::access_hook(&ctx),
             ExitId::Ebih__Base_Camp__Save_Point__ex__Top_Platform_1 => rules::access_mist2(&ctx),
-            ExitId::Ebih__Base_Camp__Tent_Entry__ex__Tent_Interior__Entry_1 => true,
+            ExitId::Ebih__Base_Camp__Tent_Entry__ex__Interior__Tent_Interior__Entry_1 => true,
             ExitId::Ebih__Base_Camp__Top_Platform__ex__Left_Platform_1 => rules::access_ebih__base_camp__top_platform__ex__left_platform_1__req(&ctx),
             ExitId::Ebih__Base_Camp__Top_Platform__ex__Left_Platform_Moved_1 => rules::access_ebih__base_camp__top_platform__ex__left_platform_moved_1__req(&ctx),
             ExitId::Ebih__Base_Camp__West_11__ex__Left_Platform_1 => rules::access_ebih__base_camp__west_11__ex__left_platform_1__req(&ctx),
@@ -2655,8 +2652,6 @@ impl world::Accessible for Exit {
             ExitId::Ebih__Boss_Room__Lower_Tree__ex__Lower_Ledge_1 => rules::access_grab(&ctx),
             ExitId::Ebih__Boss_Room__Lower_Tree__ex__Lower_Ledge_2 => rules::access_hook(&ctx),
             ExitId::Ebih__Boss_Room__West_6__ex__Grid_21_2_6__East_6_1 => true,
-            ExitId::Ebih__Building_Interior__Entry__ex__Base_Camp__Building_Entry_1 => true,
-            ExitId::Ebih__Bunker_Interior__Entry__ex__Base_Camp__Bunker_Entry_1 => true,
             ExitId::Ebih__By_Garage__Crawlspace__ex__Crawlspace_Opening_1 => rules::access_mode__drone(&ctx),
             ExitId::Ebih__By_Garage__Crawlspace_Opening__ex__Crawlspace_1 => rules::access_mode__drone(&ctx),
             ExitId::Ebih__By_Garage__East_13__ex__Base_Camp__West_13_1 => true,
@@ -2664,13 +2659,12 @@ impl world::Accessible for Exit {
             ExitId::Ebih__By_Garage__East_Platform__ex__Crawlspace_Opening_2 => rules::access_hook(&ctx),
             ExitId::Ebih__By_Garage__East_Platform__ex__Outcropping_1 => rules::access_grab(&ctx),
             ExitId::Ebih__By_Garage__East_Platform__ex__Outcropping_2 => rules::access_hook(&ctx),
-            ExitId::Ebih__By_Garage__Garage_Entry__ex__Garage__Entry_1 => true,
+            ExitId::Ebih__By_Garage__Garage_Entry__ex__Interior__Garage__Entry_1 => true,
             ExitId::Ebih__By_Garage__Lower_Platform__ex__East_Bush_1 => rules::access_grab_or_climb(&ctx),
             ExitId::Ebih__By_Garage__Lower_Platform__ex__East_Bush_2 => rules::access_hook(&ctx),
             ExitId::Ebih__By_Garage__Lower_Platform__ex__West_Bush_1 => rules::access_grab_or_climb(&ctx),
             ExitId::Ebih__By_Garage__Lower_Platform__ex__West_Bush_2 => rules::access_hook(&ctx),
             ExitId::Ebih__By_Garage__West_12__ex__Grid_25_10_12__East_12_1 => true,
-            ExitId::Ebih__Cave__Entry__ex__Waterfall__Cave_Entrance_1 => true,
             ExitId::Ebih__Drone_Room__East_4__ex__Grid_25_2_6__West_4_1 => rules::access_mode__drone(&ctx),
             ExitId::Ebih__Drone_Room__Middle_Platform__ex__Portal_Exit_1 => rules::access_grab(&ctx),
             ExitId::Ebih__Drone_Room__Middle_Platform__Urn_Quick_Grab => rules::access_boomerang2(&ctx),
@@ -2728,7 +2722,6 @@ impl world::Accessible for Exit {
             ExitId::Ebih__Ebih_West__West_13__ex__Giguna__Wasteland__East_13_1 => true,
             ExitId::Ebih__Ebih_West__West_9__ex__Giguna__Giguna_Northeast__East_9_1 => true,
             ExitId::Ebih__Ebih_West__West_9__ex__Giguna_Pillar_1 => rules::access_grab_or_climb(&ctx),
-            ExitId::Ebih__Garage__Entry__ex__By_Garage__Garage_Entry_1 => true,
             ExitId::Ebih__Gem_Room__West_13__ex__Vertical_Interchange__East_13_1 => true,
             ExitId::Ebih__Grid_21_2_6__East_6__ex__Boss_Room__West_6_1 => true,
             ExitId::Ebih__Grid_21_2_6__West_6__ex__Ebih_West__East_6_1 => true,
@@ -2770,7 +2763,6 @@ impl world::Accessible for Exit {
             ExitId::Ebih__Observation_Tower_Room__Tower_Top__ex__West_9_2 => rules::access_hover(&ctx),
             ExitId::Ebih__Observation_Tower_Room__West_10__ex__Grid_26_10_11__East_10_1 => true,
             ExitId::Ebih__Observation_Tower_Room__West_9__ex__Ebih_East__East_9_1 => true,
-            ExitId::Ebih__Tent_Interior__Entry__ex__Base_Camp__Tent_Entry_1 => true,
             ExitId::Ebih__Vertical_Interchange__Below_Door__ex__Blocked_Refill_Station_1 => rules::access_ebih_interchange_gate_and_ebih_interchange_block_and_grab(&ctx),
             ExitId::Ebih__Vertical_Interchange__Below_Door__ex__Blocked_Refill_Station_2 => rules::access_ebih_interchange_gate_and_ebih_interchange_block_and_hook(&ctx),
             ExitId::Ebih__Vertical_Interchange__Below_Door__ex__Refill_Station_1 => rules::access_ebih_interchange_gate_and_not_ebih_interchange_block_and_grab(&ctx),
@@ -2817,7 +2809,7 @@ impl world::Accessible for Exit {
             ExitId::Ebih__Waterfall__Below_Left_Switch__ex__Ledge_Below_Hole_1 => rules::access_mode__drone(&ctx),
             ExitId::Ebih__Waterfall__Below_Tree__ex__Big_Tree_1 => rules::access_grab(&ctx),
             ExitId::Ebih__Waterfall__Below_Tree__ex__Big_Tree_2 => rules::access_hook(&ctx),
-            ExitId::Ebih__Waterfall__Cave_Entrance__ex__Cave__Entry_1 => true,
+            ExitId::Ebih__Waterfall__Cave_Entrance__ex__Interior__Ebih_Cave__Entry_1 => true,
             ExitId::Ebih__Waterfall__East_10__ex__Grid_25_10_12__West_10_1 => true,
             ExitId::Ebih__Waterfall__East_11__ex__Grid_25_10_12__West_11_1 => true,
             ExitId::Ebih__Waterfall__East_7__ex__Ebih_East__West_7_1 => true,
@@ -2865,9 +2857,6 @@ impl world::Accessible for Exit {
             ExitId::Giguna__Antechamber__West_15__ex__Small_Bricks_1 => rules::access_hook(&ctx),
             ExitId::Giguna__Breachable_Wall__Above_West_Catwalk__ex__Irikar__Boss_Room__Above_Catwalk_1 => true,
             ExitId::Giguna__Breachable_Wall__West_Mid_air__ex__Irikar__East_Rooftops__East_Mid_air_1 => true,
-            ExitId::Giguna__Building_Interior__Entry__ex__Bookshelf_1 => rules::access_grab_or_climb(&ctx),
-            ExitId::Giguna__Building_Interior__Entry__ex__Bookshelf_2 => rules::access_hook(&ctx),
-            ExitId::Giguna__Building_Interior__Entry__ex__Giguna_Base__Building_Entry_1 => true,
             ExitId::Giguna__Carnelian__Door__ex__Switch_1 => rules::access_giguna__carnelian__door__ex__switch_1__req(&ctx),
             ExitId::Giguna__Carnelian__Door__ex__Vault_1 => rules::access_giguna__carnelian__door__ex__vault_1__req(&ctx),
             ExitId::Giguna__Carnelian__East_10__ex__Giguna_Northeast__West_10_1 => true,
@@ -2998,7 +2987,7 @@ impl world::Accessible for Exit {
             ExitId::Giguna__Giguna_Base__Below_Gate__ex__Kari_2 => rules::access_giguna__giguna_base__below_gate__ex__kari_2__req(&ctx),
             ExitId::Giguna__Giguna_Base__Below_Gate__ex__Middle_Platform_1 => rules::access_giguna__giguna_base__below_gate__ex__middle_platform_1__req(&ctx),
             ExitId::Giguna__Giguna_Base__Below_Gate__ex__Middle_Platform_2 => rules::access_giguna__giguna_base__below_gate__ex__middle_platform_2__req(&ctx),
-            ExitId::Giguna__Giguna_Base__Building_Entry__ex__Building_Interior__Entry_1 => true,
+            ExitId::Giguna__Giguna_Base__Building_Entry__ex__Interior__Outpost_Interior__Entry_1 => true,
             ExitId::Giguna__Giguna_Base__East_14__ex__Wasteland__West_14_1 => true,
             ExitId::Giguna__Giguna_Base__East_17__ex__Hard_Rock__West_17_1 => true,
             ExitId::Giguna__Giguna_Base__Kari__ex__Below_Gate_1 => rules::access_giguna__giguna_base__kari__ex__below_gate_1__req(&ctx),
@@ -3226,11 +3215,8 @@ impl world::Accessible for Exit {
             ExitId::Glacier__Boomerang_Room__West__ex__Boomerang_Antechamber__East_12_1 => true,
             ExitId::Glacier__Compass_Room__East__ex__Grid_43_10_11__Lower_1 => true,
             ExitId::Glacier__Compass_Room__West__ex__The_Big_Drop__East_1 => true,
-            ExitId::Glacier__Dock_Elevator__Connector__ex__Dock_Interior__Connector_1 => true,
-            ExitId::Glacier__Dock_Interior__Connector__ex__Dock_Elevator__Connector_1 => true,
-            ExitId::Glacier__Dock_Interior__Entry__ex__Dock_Outside__Entry_1 => true,
             ExitId::Glacier__Dock_Outside__Do_Not_Enter__ex__Revival__East_9_1 => true,
-            ExitId::Glacier__Dock_Outside__Entry__ex__Dock_Interior__Entry_1 => true,
+            ExitId::Glacier__Dock_Outside__Entry__ex__Interior__Dock_Interior__Entry_1 => true,
             ExitId::Glacier__Grid_31_9_12__East_10__ex__Grid_32_7_10__West_10_1 => true,
             ExitId::Glacier__Grid_31_9_12__East_9__ex__Grid_32_7_10__West_9_1 => true,
             ExitId::Glacier__Grid_31_9_12__Midair__ex__Ebih__Base_Camp__East_11_1 => true,
@@ -3312,6 +3298,22 @@ impl world::Accessible for Exit {
             ExitId::Glacier__Vertical_Room__Under_Switch__ex__Past_Gate_1 => rules::access_switch_36_11(&ctx),
             ExitId::Glacier__Vertical_Room__West_8__ex__Peak__East_8_1 => true,
             ExitId::Glacier__Vertical_Room__West_9__ex__Ledge_Grab_Room__East_9_1 => true,
+            ExitId::Interior__Building_Interior__Entry__ex__Ebih__Base_Camp__Building_Entry_1 => true,
+            ExitId::Interior__Bunker_Interior__Entry__ex__Ebih__Base_Camp__Bunker_Entry_1 => true,
+            ExitId::Interior__Cave_Behind_Waterfall__Bottom__ex__Amagi__Main_Area__Secret_Outcropping_1 => true,
+            ExitId::Interior__Cave_Behind_Waterfall__Bottom__ex__Middle_1 => rules::access_grab_or_climb(&ctx),
+            ExitId::Interior__Cave_Behind_Waterfall__Bottom__ex__Top_1 => rules::access_hook(&ctx),
+            ExitId::Interior__Cave_Behind_Waterfall__Middle__ex__Top_1 => rules::access_grab_or_climb(&ctx),
+            ExitId::Interior__Cave_Behind_Waterfall__Top__ex__Amagi__Main_Area__Secret_Waterfall_1 => true,
+            ExitId::Interior__Dock_Elevator__Connector__ex__Dock_Interior__Connector_1 => true,
+            ExitId::Interior__Dock_Interior__Connector__ex__Dock_Elevator__Connector_1 => true,
+            ExitId::Interior__Dock_Interior__Entry__ex__Glacier__Dock_Outside__Entry_1 => true,
+            ExitId::Interior__Ebih_Cave__Entry__ex__Ebih__Waterfall__Cave_Entrance_1 => true,
+            ExitId::Interior__Garage__Entry__ex__Ebih__By_Garage__Garage_Entry_1 => true,
+            ExitId::Interior__Outpost_Interior__Entry__ex__Bookshelf_1 => rules::access_grab_or_climb(&ctx),
+            ExitId::Interior__Outpost_Interior__Entry__ex__Bookshelf_2 => rules::access_hook(&ctx),
+            ExitId::Interior__Outpost_Interior__Entry__ex__Giguna__Giguna_Base__Building_Entry_1 => true,
+            ExitId::Interior__Tent_Interior__Entry__ex__Ebih__Base_Camp__Tent_Entry_1 => true,
             ExitId::Irikar__Abandoned_Room__West__ex__Basement_Portal__East_27_1 => true,
             ExitId::Irikar__Airy__Middle_South__ex__Sight_Room__Above_Room_North_1 => true,
             ExitId::Irikar__Basement_Pipes__Bricks_Under_Pipes__ex__Double_Pipe_Right_1 => rules::access_grab(&ctx),
@@ -3545,15 +3547,13 @@ impl world::Exit for Exit {
 
     fn always(id: ExitId) -> bool {
         match id {
-            ExitId::Amagi__Cave_Behind_Waterfall__Bottom__ex__Main_Area__Secret_Outcropping_1 => true,
-            ExitId::Amagi__Cave_Behind_Waterfall__Top__ex__Main_Area__Secret_Waterfall_1 => true,
             ExitId::Amagi__Grid_31_19__East__ex__Liru_Room__West_19_1 => true,
             ExitId::Amagi__Grid_31_19__West__ex__Main_Area__East_19_1 => true,
             ExitId::Amagi__Liru_Room__West_19__ex__Grid_31_19__East_1 => true,
             ExitId::Amagi__Main_Area__East_15__ex__Glacier__Lake_Main_Entrance__Lake_Access_1 => true,
             ExitId::Amagi__Main_Area__East_19__ex__Grid_31_19__West_1 => true,
-            ExitId::Amagi__Main_Area__Secret_Outcropping__ex__Cave_Behind_Waterfall__Bottom_1 => true,
-            ExitId::Amagi__Main_Area__Secret_Waterfall__ex__Cave_Behind_Waterfall__Top_1 => true,
+            ExitId::Amagi__Main_Area__Secret_Outcropping__ex__Interior__Cave_Behind_Waterfall__Bottom_1 => true,
+            ExitId::Amagi__Main_Area__Secret_Waterfall__ex__Interior__Cave_Behind_Waterfall__Top_1 => true,
             ExitId::Amagi__Main_Area__West_15__ex__West_Lake__East_15_1 => true,
             ExitId::Amagi__Main_Area__West_18__ex__West_Lake__East_18_1 => true,
             ExitId::Amagi__Main_Area__West_19__ex__West_Lake__East_19_1 => true,
@@ -3573,31 +3573,28 @@ impl world::Exit for Exit {
             ExitId::Antarctica__East__Building_2_Entry__ex__Building_2__Entry_1 => true,
             ExitId::Antarctica__East__Building_2_Upper__ex__Building_2__Upper_Door_1 => true,
             ExitId::Antarctica__East__Building_2_Upper__ex__Top__Power_Entry_1 => true,
-            ExitId::Antarctica__Freight_Elevator__Controls__ex__Glacier__Dock_Elevator__Elevator_1 => true,
+            ExitId::Antarctica__Freight_Elevator__Controls__ex__Interior__Dock_Elevator__Elevator_1 => true,
             ExitId::Antarctica__Freight_Elevator__Left__ex__Building_2__Entry_1 => true,
             ExitId::Antarctica__Power_Room__Entry__ex__Top__Power_Entry_1 => true,
             ExitId::Antarctica__Shed__Interior__ex__West__Shed_Entry_1 => true,
             ExitId::Antarctica__Top__Power_Entry__ex__East__Building_2_Upper_1 => true,
             ExitId::Antarctica__Top__Power_Entry__ex__Power_Room__Entry_1 => true,
             ExitId::Antarctica__West__Shed_Entry__ex__Shed__Interior_1 => true,
-            ExitId::Ebih__Base_Camp__Building_Entry__ex__Building_Interior__Entry_1 => true,
-            ExitId::Ebih__Base_Camp__Bunker_Entry__ex__Bunker_Interior__Entry_1 => true,
+            ExitId::Ebih__Base_Camp__Building_Entry__ex__Interior__Building_Interior__Entry_1 => true,
+            ExitId::Ebih__Base_Camp__Bunker_Entry__ex__Interior__Bunker_Interior__Entry_1 => true,
             ExitId::Ebih__Base_Camp__East_11__ex__Glacier__Grid_31_9_12__Midair_1 => true,
             ExitId::Ebih__Base_Camp__East_12__ex__Glacier__Grid_31_9_12__West_12_1 => true,
             ExitId::Ebih__Base_Camp__Lake_Access__ex__Glacier__Lake_Main_Entrance__Ebih_Access_1 => true,
-            ExitId::Ebih__Base_Camp__Tent_Entry__ex__Tent_Interior__Entry_1 => true,
+            ExitId::Ebih__Base_Camp__Tent_Entry__ex__Interior__Tent_Interior__Entry_1 => true,
             ExitId::Ebih__Base_Camp__West_11__ex__Observation_Tower_Room__East_11_1 => true,
             ExitId::Ebih__Base_Camp__West_12__ex__By_Garage__East_12_1 => true,
             ExitId::Ebih__Base_Camp__West_13__ex__By_Garage__East_13_1 => true,
             ExitId::Ebih__Boss_Room__East_4__ex__Drone_Room__West_4_1 => true,
             ExitId::Ebih__Boss_Room__East_6__ex__Drone_Room__West_6_1 => true,
             ExitId::Ebih__Boss_Room__West_6__ex__Grid_21_2_6__East_6_1 => true,
-            ExitId::Ebih__Building_Interior__Entry__ex__Base_Camp__Building_Entry_1 => true,
-            ExitId::Ebih__Bunker_Interior__Entry__ex__Base_Camp__Bunker_Entry_1 => true,
             ExitId::Ebih__By_Garage__East_13__ex__Base_Camp__West_13_1 => true,
-            ExitId::Ebih__By_Garage__Garage_Entry__ex__Garage__Entry_1 => true,
+            ExitId::Ebih__By_Garage__Garage_Entry__ex__Interior__Garage__Entry_1 => true,
             ExitId::Ebih__By_Garage__West_12__ex__Grid_25_10_12__East_12_1 => true,
-            ExitId::Ebih__Cave__Entry__ex__Waterfall__Cave_Entrance_1 => true,
             ExitId::Ebih__Drone_Room__West_4__ex__Boss_Room__East_4_1 => true,
             ExitId::Ebih__Drone_Room__West_6__ex__Boss_Room__East_6_1 => true,
             ExitId::Ebih__Ebih_East__East_9__ex__Observation_Tower_Room__West_9_1 => true,
@@ -3615,7 +3612,6 @@ impl world::Exit for Exit {
             ExitId::Ebih__Ebih_West__West_12__ex__Giguna__Wasteland__East_12_1 => true,
             ExitId::Ebih__Ebih_West__West_13__ex__Giguna__Wasteland__East_13_1 => true,
             ExitId::Ebih__Ebih_West__West_9__ex__Giguna__Giguna_Northeast__East_9_1 => true,
-            ExitId::Ebih__Garage__Entry__ex__By_Garage__Garage_Entry_1 => true,
             ExitId::Ebih__Gem_Room__West_13__ex__Vertical_Interchange__East_13_1 => true,
             ExitId::Ebih__Grid_21_2_6__East_6__ex__Boss_Room__West_6_1 => true,
             ExitId::Ebih__Grid_21_2_6__West_6__ex__Ebih_West__East_6_1 => true,
@@ -3630,11 +3626,10 @@ impl world::Exit for Exit {
             ExitId::Ebih__Observation_Tower_Room__East_11__ex__Base_Camp__West_11_1 => true,
             ExitId::Ebih__Observation_Tower_Room__West_10__ex__Grid_26_10_11__East_10_1 => true,
             ExitId::Ebih__Observation_Tower_Room__West_9__ex__Ebih_East__East_9_1 => true,
-            ExitId::Ebih__Tent_Interior__Entry__ex__Base_Camp__Tent_Entry_1 => true,
             ExitId::Ebih__Vertical_Interchange__East_13__ex__Gem_Room__West_13_1 => true,
             ExitId::Ebih__Vertical_Interchange__East_15__ex__Amagi__West_Lake__West_15_1 => true,
             ExitId::Ebih__Vertical_Interchange__West_13__ex__Ebih_West__East_13_1 => true,
-            ExitId::Ebih__Waterfall__Cave_Entrance__ex__Cave__Entry_1 => true,
+            ExitId::Ebih__Waterfall__Cave_Entrance__ex__Interior__Ebih_Cave__Entry_1 => true,
             ExitId::Ebih__Waterfall__East_10__ex__Grid_25_10_12__West_10_1 => true,
             ExitId::Ebih__Waterfall__East_11__ex__Grid_25_10_12__West_11_1 => true,
             ExitId::Ebih__Waterfall__East_7__ex__Ebih_East__West_7_1 => true,
@@ -3648,7 +3643,6 @@ impl world::Exit for Exit {
             ExitId::Giguna__Antechamber__West_15__ex__Gubi_Lair__East_15_1 => true,
             ExitId::Giguna__Breachable_Wall__Above_West_Catwalk__ex__Irikar__Boss_Room__Above_Catwalk_1 => true,
             ExitId::Giguna__Breachable_Wall__West_Mid_air__ex__Irikar__East_Rooftops__East_Mid_air_1 => true,
-            ExitId::Giguna__Building_Interior__Entry__ex__Giguna_Base__Building_Entry_1 => true,
             ExitId::Giguna__Carnelian__East_10__ex__Giguna_Northeast__West_10_1 => true,
             ExitId::Giguna__Carnelian__West_10__ex__West_Caverns__East_10_1 => true,
             ExitId::Giguna__Clouds__Pull_Right__ex__Irikar__Hub__Northwest_Above_Bowl_1 => true,
@@ -3667,7 +3661,7 @@ impl world::Exit for Exit {
             ExitId::Giguna__Gateway__East_19__ex__Vertical_Interchange__West_19_1 => true,
             ExitId::Giguna__Gateway__West_18__ex__Dual_Path__East_18_1 => true,
             ExitId::Giguna__Gateway__West_19__ex__Labyrinth_East__East_19_1 => true,
-            ExitId::Giguna__Giguna_Base__Building_Entry__ex__Building_Interior__Entry_1 => true,
+            ExitId::Giguna__Giguna_Base__Building_Entry__ex__Interior__Outpost_Interior__Entry_1 => true,
             ExitId::Giguna__Giguna_Base__East_14__ex__Wasteland__West_14_1 => true,
             ExitId::Giguna__Giguna_Base__East_17__ex__Hard_Rock__West_17_1 => true,
             ExitId::Giguna__Giguna_Base__West_15__ex__Helipad__East_15_1 => true,
@@ -3756,11 +3750,8 @@ impl world::Exit for Exit {
             ExitId::Glacier__Boomerang_Room__West__ex__Boomerang_Antechamber__East_12_1 => true,
             ExitId::Glacier__Compass_Room__East__ex__Grid_43_10_11__Lower_1 => true,
             ExitId::Glacier__Compass_Room__West__ex__The_Big_Drop__East_1 => true,
-            ExitId::Glacier__Dock_Elevator__Connector__ex__Dock_Interior__Connector_1 => true,
-            ExitId::Glacier__Dock_Interior__Connector__ex__Dock_Elevator__Connector_1 => true,
-            ExitId::Glacier__Dock_Interior__Entry__ex__Dock_Outside__Entry_1 => true,
             ExitId::Glacier__Dock_Outside__Do_Not_Enter__ex__Revival__East_9_1 => true,
-            ExitId::Glacier__Dock_Outside__Entry__ex__Dock_Interior__Entry_1 => true,
+            ExitId::Glacier__Dock_Outside__Entry__ex__Interior__Dock_Interior__Entry_1 => true,
             ExitId::Glacier__Grid_31_9_12__East_10__ex__Grid_32_7_10__West_10_1 => true,
             ExitId::Glacier__Grid_31_9_12__East_9__ex__Grid_32_7_10__West_9_1 => true,
             ExitId::Glacier__Grid_31_9_12__Midair__ex__Ebih__Base_Camp__East_11_1 => true,
@@ -3792,6 +3783,17 @@ impl world::Exit for Exit {
             ExitId::Glacier__Vertical_Room__Past_Gate__ex__Ledge_Grab_Room__East_11_1 => true,
             ExitId::Glacier__Vertical_Room__West_8__ex__Peak__East_8_1 => true,
             ExitId::Glacier__Vertical_Room__West_9__ex__Ledge_Grab_Room__East_9_1 => true,
+            ExitId::Interior__Building_Interior__Entry__ex__Ebih__Base_Camp__Building_Entry_1 => true,
+            ExitId::Interior__Bunker_Interior__Entry__ex__Ebih__Base_Camp__Bunker_Entry_1 => true,
+            ExitId::Interior__Cave_Behind_Waterfall__Bottom__ex__Amagi__Main_Area__Secret_Outcropping_1 => true,
+            ExitId::Interior__Cave_Behind_Waterfall__Top__ex__Amagi__Main_Area__Secret_Waterfall_1 => true,
+            ExitId::Interior__Dock_Elevator__Connector__ex__Dock_Interior__Connector_1 => true,
+            ExitId::Interior__Dock_Interior__Connector__ex__Dock_Elevator__Connector_1 => true,
+            ExitId::Interior__Dock_Interior__Entry__ex__Glacier__Dock_Outside__Entry_1 => true,
+            ExitId::Interior__Ebih_Cave__Entry__ex__Ebih__Waterfall__Cave_Entrance_1 => true,
+            ExitId::Interior__Garage__Entry__ex__Ebih__By_Garage__Garage_Entry_1 => true,
+            ExitId::Interior__Outpost_Interior__Entry__ex__Giguna__Giguna_Base__Building_Entry_1 => true,
+            ExitId::Interior__Tent_Interior__Entry__ex__Ebih__Base_Camp__Tent_Entry_1 => true,
             ExitId::Irikar__Abandoned_Room__West__ex__Basement_Portal__East_27_1 => true,
             ExitId::Irikar__Airy__Middle_South__ex__Sight_Room__Above_Room_North_1 => true,
             ExitId::Irikar__Basement_Pipes__East_28__ex__Basement_Portal__West_28_1 => true,
@@ -3869,9 +3871,6 @@ impl world::Accessible for Action {
     fn can_access(&self, ctx: &Context) -> bool {
         ctx.can_afford(&self.price)
             && match self.id {
-                ActionId::Amagi__Cave_Behind_Waterfall__Middle__Throw_Drone => {
-                    rules::access_can_deploy(&ctx)
-                }
                 ActionId::Amagi__Main_Area__Carving__Key_Combo => {
                     rules::access_amagi__main_area__carving__key_combo__req(&ctx)
                 }
@@ -4071,6 +4070,9 @@ impl world::Accessible for Action {
                 ActionId::Global__Recall_Drone => {
                     rules::access_not_within_menu_and_not_breach_and_can_recall(&ctx)
                 }
+                ActionId::Interior__Cave_Behind_Waterfall__Middle__Throw_Drone => {
+                    rules::access_can_deploy(&ctx)
+                }
                 ActionId::Irikar__Basement_Portal__Moving_Platform_Start__Activate_Platform => {
                     rules::access_activate(&ctx)
                 }
@@ -4112,7 +4114,6 @@ impl world::Action for Action {
             ActionId::Global__Become_Indra => rules::action_mode__indra(ctx),
             ActionId::Amagi__Main_Area__Carving__Key_Combo => rules::action_amagi__main_area__carving__key_combo__do(ctx),
             ActionId::Amagi__Main_Area__Save_Point__Save => rules::action_save(ctx),
-            ActionId::Amagi__Cave_Behind_Waterfall__Middle__Throw_Drone => rules::action_deploy_drone(ctx),
             ActionId::Ebih__Base_Camp__Save_Point__Save => rules::action_save(ctx),
             ActionId::Ebih__Base_Camp__Left_Platform__Move_Left_Platform => rules::action_ebih__base_camp__left_platform__move_left_platform__do(ctx),
             ActionId::Ebih__Base_Camp__Left_Platform_Moved__Reset_Left_Platform => rules::action_ebih__base_camp__left_platform_moved__reset_left_platform__do(ctx),
@@ -4184,6 +4185,7 @@ impl world::Action for Action {
             ActionId::Giguna__Gateway__One_Jump__Open_Door => rules::action_giguna__gateway__one_jump__open_door__do(ctx),
             ActionId::Giguna__Gateway__Flask_Ledge__Open_Door => rules::action_giguna__gateway__flask_ledge__open_door__do(ctx),
             ActionId::Glacier__Revival__Save_Point__Save => rules::action_save(ctx),
+            ActionId::Interior__Cave_Behind_Waterfall__Middle__Throw_Drone => rules::action_deploy_drone(ctx),
             ActionId::Irikar_Breach__Exit_Corridor__Portal_Stand__Enter_Portal => rules::action_main_portal_save_update(ctx),
             ActionId::Irikar__Hub__Save_Point__Save => rules::action_save(ctx),
             ActionId::Irikar__Hub__Portal_Stand__Enter_Portal => rules::action_breach_portal_save_update(ctx),
@@ -4208,9 +4210,6 @@ impl world::Action for Action {
     fn dest(&self, ctx: &Context) -> SpotId {
         match self.id {
             ActionId::Global__Recall_Drone => ctx.indra(),
-            ActionId::Amagi__Cave_Behind_Waterfall__Middle__Throw_Drone => {
-                SpotId::Amagi__Cave_Behind_Waterfall__Top
-            }
             ActionId::Ebih__Base_Camp__Left_Platform__Move_Left_Platform => {
                 SpotId::Ebih__Base_Camp__Left_Platform_Moved
             }
@@ -4271,6 +4270,9 @@ impl world::Action for Action {
             }
             ActionId::Giguna__Clouds__Platform_Start__Hack_and_Get_Off_Early => {
                 SpotId::Giguna__Clouds__Platform_Early
+            }
+            ActionId::Interior__Cave_Behind_Waterfall__Middle__Throw_Drone => {
+                SpotId::Interior__Cave_Behind_Waterfall__Top
             }
             ActionId::Irikar_Breach__Exit_Corridor__Portal_Stand__Enter_Portal => {
                 SpotId::Irikar__Abandoned_Room__Empty_Pedestal
@@ -4498,9 +4500,6 @@ pub struct Spot {
 
 static RAW_SPOTS: [SpotId; 1047] = [
     SpotId::None,
-    SpotId::Amagi__Cave_Behind_Waterfall__Bottom,
-    SpotId::Amagi__Cave_Behind_Waterfall__Middle,
-    SpotId::Amagi__Cave_Behind_Waterfall__Top,
     SpotId::Amagi__Grid_31_19__East,
     SpotId::Amagi__Grid_31_19__West,
     SpotId::Amagi__Liru_Room__Bottom,
@@ -4640,10 +4639,6 @@ static RAW_SPOTS: [SpotId; 1047] = [
     SpotId::Ebih__Boss_Room__Upper_Tree,
     SpotId::Ebih__Boss_Room__West_5,
     SpotId::Ebih__Boss_Room__West_6,
-    SpotId::Ebih__Building_Interior__Corner,
-    SpotId::Ebih__Building_Interior__Entry,
-    SpotId::Ebih__Bunker_Interior__Desk,
-    SpotId::Ebih__Bunker_Interior__Entry,
     SpotId::Ebih__By_Garage__Crawlspace,
     SpotId::Ebih__By_Garage__Crawlspace_Opening,
     SpotId::Ebih__By_Garage__East_12,
@@ -4658,7 +4653,6 @@ static RAW_SPOTS: [SpotId; 1047] = [
     SpotId::Ebih__By_Garage__West_13,
     SpotId::Ebih__By_Garage__West_Below_Platforms,
     SpotId::Ebih__By_Garage__West_Bush,
-    SpotId::Ebih__Cave__Entry,
     SpotId::Ebih__Drone_Room__East_4,
     SpotId::Ebih__Drone_Room__Item,
     SpotId::Ebih__Drone_Room__Left_Platform,
@@ -4719,8 +4713,6 @@ static RAW_SPOTS: [SpotId; 1047] = [
     SpotId::Ebih__Ebih_West__West_9,
     SpotId::Ebih__Ebih_West__West_Fork,
     SpotId::Ebih__Ebih_West__West_High_Cliff,
-    SpotId::Ebih__Garage__Boxes,
-    SpotId::Ebih__Garage__Entry,
     SpotId::Ebih__Gem_Room__West_13,
     SpotId::Ebih__Grid_21_2_6__East_6,
     SpotId::Ebih__Grid_21_2_6__Portal_Stand,
@@ -4755,8 +4747,6 @@ static RAW_SPOTS: [SpotId; 1047] = [
     SpotId::Ebih__Observation_Tower_Room__Tower_Top,
     SpotId::Ebih__Observation_Tower_Room__West_10,
     SpotId::Ebih__Observation_Tower_Room__West_9,
-    SpotId::Ebih__Tent_Interior__Desk,
-    SpotId::Ebih__Tent_Interior__Entry,
     SpotId::Ebih__Vertical_Interchange__Below_Door,
     SpotId::Ebih__Vertical_Interchange__Block_Cubby,
     SpotId::Ebih__Vertical_Interchange__Blocked_Refill_Station,
@@ -4829,8 +4819,6 @@ static RAW_SPOTS: [SpotId; 1047] = [
     SpotId::Giguna__Breachable_Wall__Above_West_Catwalk,
     SpotId::Giguna__Breachable_Wall__Wall_Interior,
     SpotId::Giguna__Breachable_Wall__West_Mid_air,
-    SpotId::Giguna__Building_Interior__Bookshelf,
-    SpotId::Giguna__Building_Interior__Entry,
     SpotId::Giguna__Carnelian__Door,
     SpotId::Giguna__Carnelian__East_10,
     SpotId::Giguna__Carnelian__East_Cliff,
@@ -5249,10 +5237,6 @@ static RAW_SPOTS: [SpotId; 1047] = [
     SpotId::Glacier__Compass_Room__Center,
     SpotId::Glacier__Compass_Room__East,
     SpotId::Glacier__Compass_Room__West,
-    SpotId::Glacier__Dock_Elevator__Connector,
-    SpotId::Glacier__Dock_Elevator__Elevator,
-    SpotId::Glacier__Dock_Interior__Connector,
-    SpotId::Glacier__Dock_Interior__Entry,
     SpotId::Glacier__Dock_Outside__Do_Not_Enter,
     SpotId::Glacier__Dock_Outside__Entry,
     SpotId::Glacier__Grid_31_9_12__East_10,
@@ -5328,6 +5312,24 @@ static RAW_SPOTS: [SpotId; 1047] = [
     SpotId::Glacier__Vertical_Room__Under_Switch,
     SpotId::Glacier__Vertical_Room__West_8,
     SpotId::Glacier__Vertical_Room__West_9,
+    SpotId::Interior__Building_Interior__Corner,
+    SpotId::Interior__Building_Interior__Entry,
+    SpotId::Interior__Bunker_Interior__Desk,
+    SpotId::Interior__Bunker_Interior__Entry,
+    SpotId::Interior__Cave_Behind_Waterfall__Bottom,
+    SpotId::Interior__Cave_Behind_Waterfall__Middle,
+    SpotId::Interior__Cave_Behind_Waterfall__Top,
+    SpotId::Interior__Dock_Elevator__Connector,
+    SpotId::Interior__Dock_Elevator__Elevator,
+    SpotId::Interior__Dock_Interior__Connector,
+    SpotId::Interior__Dock_Interior__Entry,
+    SpotId::Interior__Ebih_Cave__Entry,
+    SpotId::Interior__Garage__Boxes,
+    SpotId::Interior__Garage__Entry,
+    SpotId::Interior__Outpost_Interior__Bookshelf,
+    SpotId::Interior__Outpost_Interior__Entry,
+    SpotId::Interior__Tent_Interior__Desk,
+    SpotId::Interior__Tent_Interior__Entry,
     SpotId::Irikar__Abandoned_Room__Corner_Core,
     SpotId::Irikar__Abandoned_Room__Empty_Pedestal,
     SpotId::Irikar__Abandoned_Room__West,
@@ -5549,10 +5551,6 @@ static RAW_SPOTS: [SpotId; 1047] = [
 lazy_static! {
     // Using get_area, we can get the nearby spots by indexing into the spot lists
     static ref RAW_AREA_SPOT_RANGES: EnumMap<AreaId, Range<usize>> = enum_map! {
-        AreaId::Amagi__Cave_Behind_Waterfall => Range {
-            start: SpotId::Amagi__Cave_Behind_Waterfall__Bottom.into_usize(),
-            end: SpotId::Amagi__Cave_Behind_Waterfall__Top.into_usize() + 1,
-        },
         AreaId::Amagi__Grid_31_19 => Range {
             start: SpotId::Amagi__Grid_31_19__East.into_usize(),
             end: SpotId::Amagi__Grid_31_19__West.into_usize() + 1,
@@ -5613,21 +5611,9 @@ lazy_static! {
             start: SpotId::Ebih__Boss_Room__Boss.into_usize(),
             end: SpotId::Ebih__Boss_Room__West_6.into_usize() + 1,
         },
-        AreaId::Ebih__Building_Interior => Range {
-            start: SpotId::Ebih__Building_Interior__Corner.into_usize(),
-            end: SpotId::Ebih__Building_Interior__Entry.into_usize() + 1,
-        },
-        AreaId::Ebih__Bunker_Interior => Range {
-            start: SpotId::Ebih__Bunker_Interior__Desk.into_usize(),
-            end: SpotId::Ebih__Bunker_Interior__Entry.into_usize() + 1,
-        },
         AreaId::Ebih__By_Garage => Range {
             start: SpotId::Ebih__By_Garage__Crawlspace.into_usize(),
             end: SpotId::Ebih__By_Garage__West_Bush.into_usize() + 1,
-        },
-        AreaId::Ebih__Cave => Range {
-            start: SpotId::Ebih__Cave__Entry.into_usize(),
-            end: SpotId::Ebih__Cave__Entry.into_usize() + 1,
         },
         AreaId::Ebih__Drone_Room => Range {
             start: SpotId::Ebih__Drone_Room__East_4.into_usize(),
@@ -5640,10 +5626,6 @@ lazy_static! {
         AreaId::Ebih__Ebih_West => Range {
             start: SpotId::Ebih__Ebih_West__Above_Alcove.into_usize(),
             end: SpotId::Ebih__Ebih_West__West_High_Cliff.into_usize() + 1,
-        },
-        AreaId::Ebih__Garage => Range {
-            start: SpotId::Ebih__Garage__Boxes.into_usize(),
-            end: SpotId::Ebih__Garage__Entry.into_usize() + 1,
         },
         AreaId::Ebih__Gem_Room => Range {
             start: SpotId::Ebih__Gem_Room__West_13.into_usize(),
@@ -5668,10 +5650,6 @@ lazy_static! {
         AreaId::Ebih__Observation_Tower_Room => Range {
             start: SpotId::Ebih__Observation_Tower_Room__Cliff.into_usize(),
             end: SpotId::Ebih__Observation_Tower_Room__West_9.into_usize() + 1,
-        },
-        AreaId::Ebih__Tent_Interior => Range {
-            start: SpotId::Ebih__Tent_Interior__Desk.into_usize(),
-            end: SpotId::Ebih__Tent_Interior__Entry.into_usize() + 1,
         },
         AreaId::Ebih__Vertical_Interchange => Range {
             start: SpotId::Ebih__Vertical_Interchange__Below_Door.into_usize(),
@@ -5740,10 +5718,6 @@ lazy_static! {
         AreaId::Giguna__Breachable_Wall => Range {
             start: SpotId::Giguna__Breachable_Wall__Above_Middle_Catwalk.into_usize(),
             end: SpotId::Giguna__Breachable_Wall__West_Mid_air.into_usize() + 1,
-        },
-        AreaId::Giguna__Building_Interior => Range {
-            start: SpotId::Giguna__Building_Interior__Bookshelf.into_usize(),
-            end: SpotId::Giguna__Building_Interior__Entry.into_usize() + 1,
         },
         AreaId::Giguna__Carnelian => Range {
             start: SpotId::Giguna__Carnelian__Door.into_usize(),
@@ -5857,14 +5831,6 @@ lazy_static! {
             start: SpotId::Glacier__Compass_Room__Center.into_usize(),
             end: SpotId::Glacier__Compass_Room__West.into_usize() + 1,
         },
-        AreaId::Glacier__Dock_Elevator => Range {
-            start: SpotId::Glacier__Dock_Elevator__Connector.into_usize(),
-            end: SpotId::Glacier__Dock_Elevator__Elevator.into_usize() + 1,
-        },
-        AreaId::Glacier__Dock_Interior => Range {
-            start: SpotId::Glacier__Dock_Interior__Connector.into_usize(),
-            end: SpotId::Glacier__Dock_Interior__Entry.into_usize() + 1,
-        },
         AreaId::Glacier__Dock_Outside => Range {
             start: SpotId::Glacier__Dock_Outside__Do_Not_Enter.into_usize(),
             end: SpotId::Glacier__Dock_Outside__Entry.into_usize() + 1,
@@ -5916,6 +5882,42 @@ lazy_static! {
         AreaId::Glacier__Vertical_Room => Range {
             start: SpotId::Glacier__Vertical_Room__East_12.into_usize(),
             end: SpotId::Glacier__Vertical_Room__West_9.into_usize() + 1,
+        },
+        AreaId::Interior__Building_Interior => Range {
+            start: SpotId::Interior__Building_Interior__Corner.into_usize(),
+            end: SpotId::Interior__Building_Interior__Entry.into_usize() + 1,
+        },
+        AreaId::Interior__Bunker_Interior => Range {
+            start: SpotId::Interior__Bunker_Interior__Desk.into_usize(),
+            end: SpotId::Interior__Bunker_Interior__Entry.into_usize() + 1,
+        },
+        AreaId::Interior__Cave_Behind_Waterfall => Range {
+            start: SpotId::Interior__Cave_Behind_Waterfall__Bottom.into_usize(),
+            end: SpotId::Interior__Cave_Behind_Waterfall__Top.into_usize() + 1,
+        },
+        AreaId::Interior__Dock_Elevator => Range {
+            start: SpotId::Interior__Dock_Elevator__Connector.into_usize(),
+            end: SpotId::Interior__Dock_Elevator__Elevator.into_usize() + 1,
+        },
+        AreaId::Interior__Dock_Interior => Range {
+            start: SpotId::Interior__Dock_Interior__Connector.into_usize(),
+            end: SpotId::Interior__Dock_Interior__Entry.into_usize() + 1,
+        },
+        AreaId::Interior__Ebih_Cave => Range {
+            start: SpotId::Interior__Ebih_Cave__Entry.into_usize(),
+            end: SpotId::Interior__Ebih_Cave__Entry.into_usize() + 1,
+        },
+        AreaId::Interior__Garage => Range {
+            start: SpotId::Interior__Garage__Boxes.into_usize(),
+            end: SpotId::Interior__Garage__Entry.into_usize() + 1,
+        },
+        AreaId::Interior__Outpost_Interior => Range {
+            start: SpotId::Interior__Outpost_Interior__Bookshelf.into_usize(),
+            end: SpotId::Interior__Outpost_Interior__Entry.into_usize() + 1,
+        },
+        AreaId::Interior__Tent_Interior => Range {
+            start: SpotId::Interior__Tent_Interior__Desk.into_usize(),
+            end: SpotId::Interior__Tent_Interior__Entry.into_usize() + 1,
         },
         AreaId::Irikar_Breach__Basement_Save => Range {
             start: SpotId::Irikar_Breach__Basement_Save__Save_Point.into_usize(),
@@ -6129,10 +6131,6 @@ impl world::World for World {
                 LocationId::Ebih__Base_Camp__Left_Platform_Moved__Item_From_The_Side,
                 LocationId::Ebih__Base_Camp__Top_Platform__Item,
             ],
-            CanonId::Melee_Charge => vec![
-                LocationId::Ebih__Building_Interior__Entry__Remote_Urn,
-                LocationId::Ebih__Building_Interior__Corner__Urn,
-            ],
             CanonId::Ebih_Bush_Flask => vec![
                 LocationId::Ebih__Grid_25_10_12__East_10__Remote_Bush,
                 LocationId::Ebih__Grid_25_10_12__Hidden_Bush__Behind_Bush,
@@ -6212,6 +6210,10 @@ impl world::World for World {
             CanonId::Ledge_Grab => vec![
                 LocationId::Glacier__Ledge_Grab_Room__Cliff_Bottom__Quick_Grab,
                 LocationId::Glacier__Ledge_Grab_Room__Pedestal__Item,
+            ],
+            CanonId::Melee_Charge => vec![
+                LocationId::Interior__Building_Interior__Entry__Remote_Urn,
+                LocationId::Interior__Building_Interior__Corner__Urn,
             ],
             CanonId::Irikar_Royal_Storage_Wall => {
                 vec![LocationId::Irikar__Hub__Royal_Storage_By_Wall__Shockwave_Wall]
@@ -6311,21 +6313,14 @@ impl world::World for World {
                 LocationId::Ebih__Base_Camp__Left_Platform_Moved__Item_From_The_Side,
                 LocationId::Ebih__Base_Camp__Top_Platform__Item,
                 LocationId::Ebih__By_Garage__Crawlspace__Fragment,
-                LocationId::Ebih__Cave__Entry__Health,
                 LocationId::Ebih__Ebih_East__Dispenser__Vend,
                 LocationId::Giguna_Breach__Cubby__Rocks__Health,
                 LocationId::Giguna__Wasteland__Door_Right__Health,
                 LocationId::Giguna__Dual_Path__Wall_Secret__Health,
+                LocationId::Interior__Ebih_Cave__Entry__Health,
                 LocationId::Irikar__Boss_Room__Healthy_Rooftop__Health,
                 LocationId::Uhrum__Siege_Corridor__Center_Box__Box,
             ],
-            Item::Dear_Ernest => vec![LocationId::Ebih__Bunker_Interior__Desk__Note],
-            Item::Melee_Charge => vec![
-                LocationId::Ebih__Building_Interior__Entry__Remote_Urn,
-                LocationId::Ebih__Building_Interior__Corner__Urn,
-            ],
-            Item::Companies_Layoff => vec![LocationId::Ebih__Tent_Interior__Desk__Note],
-            Item::Record_Losses => vec![LocationId::Ebih__Garage__Boxes__Under_Boxes],
             Item::Ebih_Waterfall_Block_Right => vec![
                 LocationId::Ebih__Waterfall__Alcove_Right__Block_Right,
                 LocationId::Ebih__Waterfall__Alcove__Block_Right,
@@ -6387,7 +6382,6 @@ impl world::World for World {
             ],
             Item::Wall_Climb => vec![LocationId::Giguna__Giguna_Base__Ruin__Item],
             Item::Researchers_Missing => vec![LocationId::Giguna__Giguna_Base__Table__News],
-            Item::Letter_from_Trace => vec![LocationId::Giguna__Building_Interior__Bookshelf__Note],
             Item::Aansur => vec![LocationId::Giguna__Ruins_Center__Tablet__Item],
             Item::The_Ideal_Kiengir => vec![LocationId::Giguna__West_Tower__Top__Tablet],
             Item::Journal_2049_10_29 => vec![LocationId::Giguna__Helipad__Tablet_Ledge__Tablet],
@@ -6436,6 +6430,16 @@ impl world::World for World {
                 LocationId::Glacier__Ledge_Grab_Room__Pedestal__Item,
             ],
             Item::Escape => vec![LocationId::Glacier__Apocalypse_Entry__Terminal__Escape],
+            Item::Dear_Ernest => vec![LocationId::Interior__Bunker_Interior__Desk__Note],
+            Item::Melee_Charge => vec![
+                LocationId::Interior__Building_Interior__Entry__Remote_Urn,
+                LocationId::Interior__Building_Interior__Corner__Urn,
+            ],
+            Item::Companies_Layoff => vec![LocationId::Interior__Tent_Interior__Desk__Note],
+            Item::Record_Losses => vec![LocationId::Interior__Garage__Boxes__Under_Boxes],
+            Item::Letter_from_Trace => {
+                vec![LocationId::Interior__Outpost_Interior__Bookshelf__Note]
+            }
             Item::Drone_Hover => vec![LocationId::Irikar_Breach__Hover_Room__Bottom__Item],
             Item::Commemorative_Speech => {
                 vec![LocationId::Irikar__Hub__Sat_Tower_Top_Ledge__Tablet]
@@ -6632,18 +6636,9 @@ impl world::World for World {
             LocationId::Ebih__Base_Camp__Top_Platform__Item => {
                 SpotId::Ebih__Base_Camp__Top_Platform
             }
-            LocationId::Ebih__Bunker_Interior__Desk__Note => SpotId::Ebih__Bunker_Interior__Desk,
-            LocationId::Ebih__Building_Interior__Entry__Remote_Urn => {
-                SpotId::Ebih__Building_Interior__Entry
-            }
-            LocationId::Ebih__Building_Interior__Corner__Urn => {
-                SpotId::Ebih__Building_Interior__Corner
-            }
-            LocationId::Ebih__Tent_Interior__Desk__Note => SpotId::Ebih__Tent_Interior__Desk,
             LocationId::Ebih__By_Garage__Crawlspace__Fragment => {
                 SpotId::Ebih__By_Garage__Crawlspace
             }
-            LocationId::Ebih__Garage__Boxes__Under_Boxes => SpotId::Ebih__Garage__Boxes,
             LocationId::Ebih__Grid_25_10_12__East_10__Remote_Bush => {
                 SpotId::Ebih__Grid_25_10_12__East_10
             }
@@ -6681,7 +6676,6 @@ impl world::World for World {
             LocationId::Ebih__Ebih_West__Block_Right__Break_Block => {
                 SpotId::Ebih__Ebih_West__Block_Right
             }
-            LocationId::Ebih__Cave__Entry__Health => SpotId::Ebih__Cave__Entry,
             LocationId::Ebih__Ebih_East__Lower_Moving_Platform__Remote_Urn => {
                 SpotId::Ebih__Ebih_East__Lower_Moving_Platform
             }
@@ -6736,9 +6730,6 @@ impl world::World for World {
             }
             LocationId::Giguna__Giguna_Base__Ruin__Item => SpotId::Giguna__Giguna_Base__Ruin,
             LocationId::Giguna__Giguna_Base__Table__News => SpotId::Giguna__Giguna_Base__Table,
-            LocationId::Giguna__Building_Interior__Bookshelf__Note => {
-                SpotId::Giguna__Building_Interior__Bookshelf
-            }
             LocationId::Giguna__Ruins_East__Way_Up_High__Item => {
                 SpotId::Giguna__Ruins_East__Way_Up_High
             }
@@ -6834,6 +6825,23 @@ impl world::World for World {
             }
             LocationId::Glacier__Apocalypse_Entry__Terminal__Escape => {
                 SpotId::Glacier__Apocalypse_Entry__Terminal
+            }
+            LocationId::Interior__Bunker_Interior__Desk__Note => {
+                SpotId::Interior__Bunker_Interior__Desk
+            }
+            LocationId::Interior__Building_Interior__Entry__Remote_Urn => {
+                SpotId::Interior__Building_Interior__Entry
+            }
+            LocationId::Interior__Building_Interior__Corner__Urn => {
+                SpotId::Interior__Building_Interior__Corner
+            }
+            LocationId::Interior__Tent_Interior__Desk__Note => {
+                SpotId::Interior__Tent_Interior__Desk
+            }
+            LocationId::Interior__Garage__Boxes__Under_Boxes => SpotId::Interior__Garage__Boxes,
+            LocationId::Interior__Ebih_Cave__Entry__Health => SpotId::Interior__Ebih_Cave__Entry,
+            LocationId::Interior__Outpost_Interior__Bookshelf__Note => {
+                SpotId::Interior__Outpost_Interior__Bookshelf
             }
             LocationId::Irikar_Breach__Gauntlet__Hidden_Path_Reward__Item => {
                 SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Reward
@@ -6960,9 +6968,6 @@ impl world::World for World {
         match act_id {
             ActionId::Amagi__Main_Area__Carving__Key_Combo => SpotId::Amagi__Main_Area__Carving,
             ActionId::Amagi__Main_Area__Save_Point__Save => SpotId::Amagi__Main_Area__Save_Point,
-            ActionId::Amagi__Cave_Behind_Waterfall__Middle__Throw_Drone => {
-                SpotId::Amagi__Cave_Behind_Waterfall__Middle
-            }
             ActionId::Ebih__Base_Camp__Save_Point__Save => SpotId::Ebih__Base_Camp__Save_Point,
             ActionId::Ebih__Base_Camp__Left_Platform__Move_Left_Platform => {
                 SpotId::Ebih__Base_Camp__Left_Platform
@@ -7128,6 +7133,9 @@ impl world::World for World {
                 SpotId::Giguna__Gateway__Flask_Ledge
             }
             ActionId::Glacier__Revival__Save_Point__Save => SpotId::Glacier__Revival__Save_Point,
+            ActionId::Interior__Cave_Behind_Waterfall__Middle__Throw_Drone => {
+                SpotId::Interior__Cave_Behind_Waterfall__Middle
+            }
             ActionId::Irikar_Breach__Exit_Corridor__Portal_Stand__Enter_Portal => {
                 SpotId::Irikar_Breach__Exit_Corridor__Portal_Stand
             }
@@ -7160,15 +7168,12 @@ impl world::World for World {
             ExitId::Amagi__Main_Area__Platform_2__ex__West_Shelf_1 => SpotId::Amagi__Main_Area__Platform_2,
             ExitId::Amagi__Main_Area__Carving__ex__Secret_Outcropping_1 | ExitId:: Amagi__Main_Area__Carving__ex__Secret_Outcropping_2 => SpotId::Amagi__Main_Area__Carving,
             ExitId::Amagi__Main_Area__West_15__ex__West_Lake__East_15_1 => SpotId::Amagi__Main_Area__West_15,
-            ExitId::Amagi__Main_Area__Secret_Outcropping__ex__Cave_Behind_Waterfall__Bottom_1 => SpotId::Amagi__Main_Area__Secret_Outcropping,
+            ExitId::Amagi__Main_Area__Secret_Outcropping__ex__Interior__Cave_Behind_Waterfall__Bottom_1 => SpotId::Amagi__Main_Area__Secret_Outcropping,
             ExitId::Amagi__Main_Area__Catwalk_Center__ex__East_Ledge_1 | ExitId:: Amagi__Main_Area__Catwalk_Center__ex__Platform_3_1 => SpotId::Amagi__Main_Area__Catwalk_Center,
             ExitId::Amagi__Main_Area__East_19__ex__Grid_31_19__West_1 => SpotId::Amagi__Main_Area__East_19,
             ExitId::Amagi__Main_Area__West_18__ex__West_Lake__East_18_1 => SpotId::Amagi__Main_Area__West_18,
             ExitId::Amagi__Main_Area__West_19__ex__West_Lake__East_19_1 => SpotId::Amagi__Main_Area__West_19,
-            ExitId::Amagi__Main_Area__Secret_Waterfall__ex__Cave_Behind_Waterfall__Top_1 => SpotId::Amagi__Main_Area__Secret_Waterfall,
-            ExitId::Amagi__Cave_Behind_Waterfall__Bottom__ex__Main_Area__Secret_Outcropping_1 | ExitId:: Amagi__Cave_Behind_Waterfall__Bottom__ex__Middle_1 | ExitId:: Amagi__Cave_Behind_Waterfall__Bottom__ex__Top_1 => SpotId::Amagi__Cave_Behind_Waterfall__Bottom,
-            ExitId::Amagi__Cave_Behind_Waterfall__Middle__ex__Top_1 => SpotId::Amagi__Cave_Behind_Waterfall__Middle,
-            ExitId::Amagi__Cave_Behind_Waterfall__Top__ex__Main_Area__Secret_Waterfall_1 => SpotId::Amagi__Cave_Behind_Waterfall__Top,
+            ExitId::Amagi__Main_Area__Secret_Waterfall__ex__Interior__Cave_Behind_Waterfall__Top_1 => SpotId::Amagi__Main_Area__Secret_Waterfall,
             ExitId::Amagi__Grid_31_19__West__ex__Main_Area__East_19_1 => SpotId::Amagi__Grid_31_19__West,
             ExitId::Amagi__Grid_31_19__East__ex__Liru_Room__West_19_1 => SpotId::Amagi__Grid_31_19__East,
             ExitId::Amagi__Liru_Room__West_19__ex__Grid_31_19__East_1 => SpotId::Amagi__Liru_Room__West_19,
@@ -7209,31 +7214,27 @@ impl world::World for World {
             ExitId::Antarctica__Top__Power_Entry__ex__Power_Room__Entry_1 | ExitId:: Antarctica__Top__Power_Entry__ex__East__Building_2_Upper_1 => SpotId::Antarctica__Top__Power_Entry,
             ExitId::Antarctica__Power_Room__Entry__ex__Top__Power_Entry_1 => SpotId::Antarctica__Power_Room__Entry,
             ExitId::Antarctica__Freight_Elevator__Left__ex__Building_2__Entry_1 => SpotId::Antarctica__Freight_Elevator__Left,
-            ExitId::Antarctica__Freight_Elevator__Controls__ex__Glacier__Dock_Elevator__Elevator_1 => SpotId::Antarctica__Freight_Elevator__Controls,
+            ExitId::Antarctica__Freight_Elevator__Controls__ex__Interior__Dock_Elevator__Elevator_1 => SpotId::Antarctica__Freight_Elevator__Controls,
             ExitId::Ebih__Base_Camp__East_11__ex__Glacier__Grid_31_9_12__Midair_1 | ExitId:: Ebih__Base_Camp__East_11__ex__Top_Platform_1 => SpotId::Ebih__Base_Camp__East_11,
             ExitId::Ebih__Base_Camp__East_12__ex__Glacier__Grid_31_9_12__West_12_1 => SpotId::Ebih__Base_Camp__East_12,
             ExitId::Ebih__Base_Camp__Save_Point__ex__Top_Platform_1 => SpotId::Ebih__Base_Camp__Save_Point,
-            ExitId::Ebih__Base_Camp__Bunker_Entry__ex__Bunker_Interior__Entry_1 => SpotId::Ebih__Base_Camp__Bunker_Entry,
+            ExitId::Ebih__Base_Camp__Bunker_Entry__ex__Interior__Bunker_Interior__Entry_1 => SpotId::Ebih__Base_Camp__Bunker_Entry,
             ExitId::Ebih__Base_Camp__Lake_Access__ex__Glacier__Lake_Main_Entrance__Ebih_Access_1 => SpotId::Ebih__Base_Camp__Lake_Access,
-            ExitId::Ebih__Base_Camp__Building_Entry__ex__Building_Interior__Entry_1 => SpotId::Ebih__Base_Camp__Building_Entry,
-            ExitId::Ebih__Base_Camp__Tent_Entry__ex__Tent_Interior__Entry_1 => SpotId::Ebih__Base_Camp__Tent_Entry,
+            ExitId::Ebih__Base_Camp__Building_Entry__ex__Interior__Building_Interior__Entry_1 => SpotId::Ebih__Base_Camp__Building_Entry,
+            ExitId::Ebih__Base_Camp__Tent_Entry__ex__Interior__Tent_Interior__Entry_1 => SpotId::Ebih__Base_Camp__Tent_Entry,
             ExitId::Ebih__Base_Camp__West_13__ex__By_Garage__East_13_1 => SpotId::Ebih__Base_Camp__West_13,
             ExitId::Ebih__Base_Camp__West_11__ex__Left_Platform_1 | ExitId:: Ebih__Base_Camp__West_11__ex__Left_Platform_2 | ExitId:: Ebih__Base_Camp__West_11__ex__Observation_Tower_Room__East_11_1 => SpotId::Ebih__Base_Camp__West_11,
             ExitId::Ebih__Base_Camp__West_12__ex__By_Garage__East_12_1 => SpotId::Ebih__Base_Camp__West_12,
             ExitId::Ebih__Base_Camp__Left_Platform__ex__Top_Platform_1 => SpotId::Ebih__Base_Camp__Left_Platform,
             ExitId::Ebih__Base_Camp__Left_Platform_Moved__ex__Top_Platform_1 | ExitId:: Ebih__Base_Camp__Left_Platform_Moved__ex__Top_Platform_2 => SpotId::Ebih__Base_Camp__Left_Platform_Moved,
             ExitId::Ebih__Base_Camp__Top_Platform__ex__Left_Platform_1 | ExitId:: Ebih__Base_Camp__Top_Platform__ex__Left_Platform_Moved_1 => SpotId::Ebih__Base_Camp__Top_Platform,
-            ExitId::Ebih__Bunker_Interior__Entry__ex__Base_Camp__Bunker_Entry_1 => SpotId::Ebih__Bunker_Interior__Entry,
-            ExitId::Ebih__Building_Interior__Entry__ex__Base_Camp__Building_Entry_1 => SpotId::Ebih__Building_Interior__Entry,
-            ExitId::Ebih__Tent_Interior__Entry__ex__Base_Camp__Tent_Entry_1 => SpotId::Ebih__Tent_Interior__Entry,
             ExitId::Ebih__By_Garage__East_13__ex__Base_Camp__West_13_1 => SpotId::Ebih__By_Garage__East_13,
             ExitId::Ebih__By_Garage__East_Platform__ex__Crawlspace_Opening_1 | ExitId:: Ebih__By_Garage__East_Platform__ex__Crawlspace_Opening_2 | ExitId:: Ebih__By_Garage__East_Platform__ex__Outcropping_1 | ExitId:: Ebih__By_Garage__East_Platform__ex__Outcropping_2 => SpotId::Ebih__By_Garage__East_Platform,
             ExitId::Ebih__By_Garage__Crawlspace_Opening__ex__Crawlspace_1 => SpotId::Ebih__By_Garage__Crawlspace_Opening,
             ExitId::Ebih__By_Garage__Crawlspace__ex__Crawlspace_Opening_1 => SpotId::Ebih__By_Garage__Crawlspace,
             ExitId::Ebih__By_Garage__Lower_Platform__ex__East_Bush_1 | ExitId:: Ebih__By_Garage__Lower_Platform__ex__East_Bush_2 | ExitId:: Ebih__By_Garage__Lower_Platform__ex__West_Bush_1 | ExitId:: Ebih__By_Garage__Lower_Platform__ex__West_Bush_2 => SpotId::Ebih__By_Garage__Lower_Platform,
             ExitId::Ebih__By_Garage__West_12__ex__Grid_25_10_12__East_12_1 => SpotId::Ebih__By_Garage__West_12,
-            ExitId::Ebih__By_Garage__Garage_Entry__ex__Garage__Entry_1 => SpotId::Ebih__By_Garage__Garage_Entry,
-            ExitId::Ebih__Garage__Entry__ex__By_Garage__Garage_Entry_1 => SpotId::Ebih__Garage__Entry,
+            ExitId::Ebih__By_Garage__Garage_Entry__ex__Interior__Garage__Entry_1 => SpotId::Ebih__By_Garage__Garage_Entry,
             ExitId::Ebih__Grid_25_10_12__East_12__ex__By_Garage__West_12_1 => SpotId::Ebih__Grid_25_10_12__East_12,
             ExitId::Ebih__Grid_25_10_12__Bush__ex__Mid_Ledge_1 => SpotId::Ebih__Grid_25_10_12__Bush,
             ExitId::Ebih__Grid_25_10_12__Below_Bush__ex__Bush_1 => SpotId::Ebih__Grid_25_10_12__Below_Bush,
@@ -7269,7 +7270,7 @@ impl world::World for World {
             ExitId::Ebih__Waterfall__West_Door__ex__West_Door_Left_1 | ExitId:: Ebih__Waterfall__West_Door__ex__West_Door_Right_1 => SpotId::Ebih__Waterfall__West_Door,
             ExitId::Ebih__Waterfall__West_Door_Right__ex__West_Door_1 => SpotId::Ebih__Waterfall__West_Door_Right,
             ExitId::Ebih__Waterfall__Middle_West_Tree__ex__West_Main_Path_1 | ExitId:: Ebih__Waterfall__Middle_West_Tree__ex__West_Main_Path_2 => SpotId::Ebih__Waterfall__Middle_West_Tree,
-            ExitId::Ebih__Waterfall__Cave_Entrance__ex__Cave__Entry_1 => SpotId::Ebih__Waterfall__Cave_Entrance,
+            ExitId::Ebih__Waterfall__Cave_Entrance__ex__Interior__Ebih_Cave__Entry_1 => SpotId::Ebih__Waterfall__Cave_Entrance,
             ExitId::Ebih__Waterfall__Below_Tree__ex__Big_Tree_1 | ExitId:: Ebih__Waterfall__Below_Tree__ex__Big_Tree_2 => SpotId::Ebih__Waterfall__Below_Tree,
             ExitId::Ebih__Waterfall__Platform__ex__Big_Tree_1 => SpotId::Ebih__Waterfall__Platform,
             ExitId::Ebih__Waterfall__East_8__ex__Ebih_East__West_8_1 => SpotId::Ebih__Waterfall__East_8,
@@ -7298,7 +7299,6 @@ impl world::World for World {
             ExitId::Ebih__Ebih_West__West_12__ex__West_Fork_1 | ExitId:: Ebih__Ebih_West__West_12__ex__Giguna__Wasteland__East_12_1 => SpotId::Ebih__Ebih_West__West_12,
             ExitId::Ebih__Ebih_West__West_13__ex__Giguna__Wasteland__East_13_1 => SpotId::Ebih__Ebih_West__West_13,
             ExitId::Ebih__Ebih_West__East_13__ex__Vertical_Interchange__West_13_1 => SpotId::Ebih__Ebih_West__East_13,
-            ExitId::Ebih__Cave__Entry__ex__Waterfall__Cave_Entrance_1 => SpotId::Ebih__Cave__Entry,
             ExitId::Ebih__Ebih_East__West_8__ex__Waterfall__East_8_1 => SpotId::Ebih__Ebih_East__West_8,
             ExitId::Ebih__Ebih_East__Moving_Platform__ex__East_Ledge_1 => SpotId::Ebih__Ebih_East__Moving_Platform,
             ExitId::Ebih__Ebih_East__Ledge_End__ex__East_Ledge_1 => SpotId::Ebih__Ebih_East__Ledge_End,
@@ -7451,7 +7451,7 @@ impl world::World for World {
             ExitId::Giguna__Giguna_Base__Ruin__ex__Right_Pillar_1 | ExitId:: Giguna__Giguna_Base__Ruin__ex__Left_Pillar_1 => SpotId::Giguna__Giguna_Base__Ruin,
             ExitId::Giguna__Giguna_Base__Middle_Platform__ex__Stone_Knob_1 | ExitId:: Giguna__Giguna_Base__Middle_Platform__ex__Stone_Knob_2 | ExitId:: Giguna__Giguna_Base__Middle_Platform__ex__Staircase_Top_1 | ExitId:: Giguna__Giguna_Base__Middle_Platform__ex__Below_Gate_1 => SpotId::Giguna__Giguna_Base__Middle_Platform,
             ExitId::Giguna__Giguna_Base__Kari__ex__Below_Gate_1 => SpotId::Giguna__Giguna_Base__Kari,
-            ExitId::Giguna__Giguna_Base__Building_Entry__ex__Building_Interior__Entry_1 => SpotId::Giguna__Giguna_Base__Building_Entry,
+            ExitId::Giguna__Giguna_Base__Building_Entry__ex__Interior__Outpost_Interior__Entry_1 => SpotId::Giguna__Giguna_Base__Building_Entry,
             ExitId::Giguna__Giguna_Base__Staircase_Top__ex__Left_Pillar_1 | ExitId:: Giguna__Giguna_Base__Staircase_Top__ex__Left_Pillar_2 => SpotId::Giguna__Giguna_Base__Staircase_Top,
             ExitId::Giguna__Giguna_Base__West_Grate__ex__West_15_1 => SpotId::Giguna__Giguna_Base__West_Grate,
             ExitId::Giguna__Giguna_Base__West_15__ex__West_Grate_1 | ExitId:: Giguna__Giguna_Base__West_15__ex__Helipad__East_15_1 => SpotId::Giguna__Giguna_Base__West_15,
@@ -7459,7 +7459,6 @@ impl world::World for World {
             ExitId::Giguna__Giguna_Base__East_17__ex__Hard_Rock__West_17_1 => SpotId::Giguna__Giguna_Base__East_17,
             ExitId::Giguna__Giguna_Base__Lower_Fork__ex__Below_Gate_1 | ExitId:: Giguna__Giguna_Base__Lower_Fork__ex__Below_Gate_2 => SpotId::Giguna__Giguna_Base__Lower_Fork,
             ExitId::Giguna__Giguna_Base__Below_Gate__ex__Kari_1 | ExitId:: Giguna__Giguna_Base__Below_Gate__ex__Kari_2 | ExitId:: Giguna__Giguna_Base__Below_Gate__ex__Middle_Platform_1 | ExitId:: Giguna__Giguna_Base__Below_Gate__ex__Middle_Platform_2 => SpotId::Giguna__Giguna_Base__Below_Gate,
-            ExitId::Giguna__Building_Interior__Entry__ex__Bookshelf_1 | ExitId:: Giguna__Building_Interior__Entry__ex__Bookshelf_2 | ExitId:: Giguna__Building_Interior__Entry__ex__Giguna_Base__Building_Entry_1 => SpotId::Giguna__Building_Interior__Entry,
             ExitId::Giguna__Ruins_East__East_9__ex__Giguna_Northeast__West_9_1 => SpotId::Giguna__Ruins_East__East_9,
             ExitId::Giguna__Ruins_East__Bottom_Rock__ex__Cliff_1 => SpotId::Giguna__Ruins_East__Bottom_Rock,
             ExitId::Giguna__Ruins_East__West_9__ex__Ruins_Center__East_9_1 => SpotId::Giguna__Ruins_East__West_9,
@@ -7599,10 +7598,7 @@ impl world::World for World {
             ExitId::Giguna__Gubi_Lair__Shaft_Bottom__ex__Pedestal_1 | ExitId:: Giguna__Gubi_Lair__Shaft_Bottom__ex__Pedestal_2 | ExitId:: Giguna__Gubi_Lair__Shaft_Bottom__ex__Pedestal_3 => SpotId::Giguna__Gubi_Lair__Shaft_Bottom,
             ExitId::Giguna__Breachable_Wall__West_Mid_air__ex__Irikar__East_Rooftops__East_Mid_air_1 => SpotId::Giguna__Breachable_Wall__West_Mid_air,
             ExitId::Giguna__Breachable_Wall__Above_West_Catwalk__ex__Irikar__Boss_Room__Above_Catwalk_1 => SpotId::Giguna__Breachable_Wall__Above_West_Catwalk,
-            ExitId::Glacier__Dock_Elevator__Connector__ex__Dock_Interior__Connector_1 => SpotId::Glacier__Dock_Elevator__Connector,
-            ExitId::Glacier__Dock_Interior__Connector__ex__Dock_Elevator__Connector_1 => SpotId::Glacier__Dock_Interior__Connector,
-            ExitId::Glacier__Dock_Interior__Entry__ex__Dock_Outside__Entry_1 => SpotId::Glacier__Dock_Interior__Entry,
-            ExitId::Glacier__Dock_Outside__Entry__ex__Dock_Interior__Entry_1 => SpotId::Glacier__Dock_Outside__Entry,
+            ExitId::Glacier__Dock_Outside__Entry__ex__Interior__Dock_Interior__Entry_1 => SpotId::Glacier__Dock_Outside__Entry,
             ExitId::Glacier__Dock_Outside__Do_Not_Enter__ex__Revival__East_9_1 => SpotId::Glacier__Dock_Outside__Do_Not_Enter,
             ExitId::Glacier__Revival__East_9__ex__Dock_Outside__Do_Not_Enter_1 => SpotId::Glacier__Revival__East_9,
             ExitId::Glacier__Revival__Lower_East__ex__Grid_42_10__West_1 => SpotId::Glacier__Revival__Lower_East,
@@ -7675,6 +7671,18 @@ impl world::World for World {
             ExitId::Glacier__Lake_Main_Entrance__Lower_Platform__ex__Ledge_1 | ExitId:: Glacier__Lake_Main_Entrance__Lower_Platform__ex__Ledge_2 => SpotId::Glacier__Lake_Main_Entrance__Lower_Platform,
             ExitId::Glacier__Lake_Main_Entrance__Lake_Access__ex__Amagi__Main_Area__East_15_1 => SpotId::Glacier__Lake_Main_Entrance__Lake_Access,
             ExitId::Glacier__Apocalypse_Entry__West__ex__Grid_43_10_11__East_1 => SpotId::Glacier__Apocalypse_Entry__West,
+            ExitId::Interior__Dock_Elevator__Connector__ex__Dock_Interior__Connector_1 => SpotId::Interior__Dock_Elevator__Connector,
+            ExitId::Interior__Dock_Interior__Connector__ex__Dock_Elevator__Connector_1 => SpotId::Interior__Dock_Interior__Connector,
+            ExitId::Interior__Dock_Interior__Entry__ex__Glacier__Dock_Outside__Entry_1 => SpotId::Interior__Dock_Interior__Entry,
+            ExitId::Interior__Bunker_Interior__Entry__ex__Ebih__Base_Camp__Bunker_Entry_1 => SpotId::Interior__Bunker_Interior__Entry,
+            ExitId::Interior__Building_Interior__Entry__ex__Ebih__Base_Camp__Building_Entry_1 => SpotId::Interior__Building_Interior__Entry,
+            ExitId::Interior__Tent_Interior__Entry__ex__Ebih__Base_Camp__Tent_Entry_1 => SpotId::Interior__Tent_Interior__Entry,
+            ExitId::Interior__Garage__Entry__ex__Ebih__By_Garage__Garage_Entry_1 => SpotId::Interior__Garage__Entry,
+            ExitId::Interior__Ebih_Cave__Entry__ex__Ebih__Waterfall__Cave_Entrance_1 => SpotId::Interior__Ebih_Cave__Entry,
+            ExitId::Interior__Cave_Behind_Waterfall__Bottom__ex__Amagi__Main_Area__Secret_Outcropping_1 | ExitId:: Interior__Cave_Behind_Waterfall__Bottom__ex__Middle_1 | ExitId:: Interior__Cave_Behind_Waterfall__Bottom__ex__Top_1 => SpotId::Interior__Cave_Behind_Waterfall__Bottom,
+            ExitId::Interior__Cave_Behind_Waterfall__Middle__ex__Top_1 => SpotId::Interior__Cave_Behind_Waterfall__Middle,
+            ExitId::Interior__Cave_Behind_Waterfall__Top__ex__Amagi__Main_Area__Secret_Waterfall_1 => SpotId::Interior__Cave_Behind_Waterfall__Top,
+            ExitId::Interior__Outpost_Interior__Entry__ex__Bookshelf_1 | ExitId:: Interior__Outpost_Interior__Entry__ex__Bookshelf_2 | ExitId:: Interior__Outpost_Interior__Entry__ex__Giguna__Giguna_Base__Building_Entry_1 => SpotId::Interior__Outpost_Interior__Entry,
             ExitId::Irikar_Breach__Save_Room__West__ex__Four_way__East_1 => SpotId::Irikar_Breach__Save_Room__West,
             ExitId::Irikar_Breach__Gauntlet__Save_Point__ex__Hidden_Path_Upper_Entry_1 | ExitId:: Irikar_Breach__Gauntlet__Save_Point__ex__Hidden_Path_Upper_Entry_2 => SpotId::Irikar_Breach__Gauntlet__Save_Point,
             ExitId::Irikar_Breach__Gauntlet__East_22__ex__Hover_Room__West_1 => SpotId::Irikar_Breach__Gauntlet__East_22,
@@ -8009,10 +8017,7 @@ impl world::World for World {
 
     fn spot_of_interest(&self, sp: SpotId) -> bool {
         match sp {
-            SpotId::Amagi__Cave_Behind_Waterfall__Bottom
-            | SpotId::Amagi__Cave_Behind_Waterfall__Middle
-            | SpotId::Amagi__Cave_Behind_Waterfall__Top
-            | SpotId::Amagi__Grid_31_19__East
+            SpotId::Amagi__Grid_31_19__East
             | SpotId::Amagi__Grid_31_19__West
             | SpotId::Amagi__Liru_Room__Shrine
             | SpotId::Amagi__Liru_Room__West_19
@@ -8084,15 +8089,10 @@ impl world::World for World {
             | SpotId::Ebih__Boss_Room__East_6
             | SpotId::Ebih__Boss_Room__East_Ledge
             | SpotId::Ebih__Boss_Room__West_6
-            | SpotId::Ebih__Building_Interior__Corner
-            | SpotId::Ebih__Building_Interior__Entry
-            | SpotId::Ebih__Bunker_Interior__Desk
-            | SpotId::Ebih__Bunker_Interior__Entry
             | SpotId::Ebih__By_Garage__Crawlspace
             | SpotId::Ebih__By_Garage__East_13
             | SpotId::Ebih__By_Garage__Garage_Entry
             | SpotId::Ebih__By_Garage__West_12
-            | SpotId::Ebih__Cave__Entry
             | SpotId::Ebih__Drone_Room__East_4
             | SpotId::Ebih__Drone_Room__Item
             | SpotId::Ebih__Drone_Room__Middle_Platform
@@ -8131,8 +8131,6 @@ impl world::World for World {
             | SpotId::Ebih__Ebih_West__West_12
             | SpotId::Ebih__Ebih_West__West_13
             | SpotId::Ebih__Ebih_West__West_9
-            | SpotId::Ebih__Garage__Boxes
-            | SpotId::Ebih__Garage__Entry
             | SpotId::Ebih__Gem_Room__West_13
             | SpotId::Ebih__Grid_21_2_6__East_6
             | SpotId::Ebih__Grid_21_2_6__West_6
@@ -8152,8 +8150,6 @@ impl world::World for World {
             | SpotId::Ebih__Observation_Tower_Room__East_11
             | SpotId::Ebih__Observation_Tower_Room__West_10
             | SpotId::Ebih__Observation_Tower_Room__West_9
-            | SpotId::Ebih__Tent_Interior__Desk
-            | SpotId::Ebih__Tent_Interior__Entry
             | SpotId::Ebih__Vertical_Interchange__East_13
             | SpotId::Ebih__Vertical_Interchange__East_15
             | SpotId::Ebih__Vertical_Interchange__Switch
@@ -8181,8 +8177,6 @@ impl world::World for World {
             | SpotId::Giguna__Antechamber__West_15
             | SpotId::Giguna__Breachable_Wall__Above_West_Catwalk
             | SpotId::Giguna__Breachable_Wall__West_Mid_air
-            | SpotId::Giguna__Building_Interior__Bookshelf
-            | SpotId::Giguna__Building_Interior__Entry
             | SpotId::Giguna__Carnelian__East_10
             | SpotId::Giguna__Carnelian__Lower_Susar
             | SpotId::Giguna__Carnelian__Switch
@@ -8368,9 +8362,6 @@ impl world::World for World {
             | SpotId::Glacier__Compass_Room__Center
             | SpotId::Glacier__Compass_Room__East
             | SpotId::Glacier__Compass_Room__West
-            | SpotId::Glacier__Dock_Elevator__Connector
-            | SpotId::Glacier__Dock_Interior__Connector
-            | SpotId::Glacier__Dock_Interior__Entry
             | SpotId::Glacier__Dock_Outside__Do_Not_Enter
             | SpotId::Glacier__Dock_Outside__Entry
             | SpotId::Glacier__Grid_31_9_12__East_10
@@ -8411,6 +8402,23 @@ impl world::World for World {
             | SpotId::Glacier__Vertical_Room__Under_Switch
             | SpotId::Glacier__Vertical_Room__West_8
             | SpotId::Glacier__Vertical_Room__West_9
+            | SpotId::Interior__Building_Interior__Corner
+            | SpotId::Interior__Building_Interior__Entry
+            | SpotId::Interior__Bunker_Interior__Desk
+            | SpotId::Interior__Bunker_Interior__Entry
+            | SpotId::Interior__Cave_Behind_Waterfall__Bottom
+            | SpotId::Interior__Cave_Behind_Waterfall__Middle
+            | SpotId::Interior__Cave_Behind_Waterfall__Top
+            | SpotId::Interior__Dock_Elevator__Connector
+            | SpotId::Interior__Dock_Interior__Connector
+            | SpotId::Interior__Dock_Interior__Entry
+            | SpotId::Interior__Ebih_Cave__Entry
+            | SpotId::Interior__Garage__Boxes
+            | SpotId::Interior__Garage__Entry
+            | SpotId::Interior__Outpost_Interior__Bookshelf
+            | SpotId::Interior__Outpost_Interior__Entry
+            | SpotId::Interior__Tent_Interior__Desk
+            | SpotId::Interior__Tent_Interior__Entry
             | SpotId::Irikar__Abandoned_Room__Corner_Core
             | SpotId::Irikar__Abandoned_Room__West
             | SpotId::Irikar__Airy__Middle_South
@@ -8805,52 +8813,12 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
             time: 0,
             exit_id: None,
         },
-        LocationId::Ebih__Bunker_Interior__Desk__Note => Location {
-            id: LocationId::Ebih__Bunker_Interior__Desk__Note,
-            canonical: CanonId::None,
-            item: Item::Dear_Ernest,
-            price: Currency::Free,
-            time: 0,
-            exit_id: None,
-        },
-        LocationId::Ebih__Building_Interior__Entry__Remote_Urn => Location {
-            id: LocationId::Ebih__Building_Interior__Entry__Remote_Urn,
-            canonical: CanonId::Melee_Charge,
-            item: Item::Melee_Charge,
-            price: Currency::Free,
-            time: 6500,
-            exit_id: None,
-        },
-        LocationId::Ebih__Building_Interior__Corner__Urn => Location {
-            id: LocationId::Ebih__Building_Interior__Corner__Urn,
-            canonical: CanonId::Melee_Charge,
-            item: Item::Melee_Charge,
-            price: Currency::Free,
-            time: 5500,
-            exit_id: None,
-        },
-        LocationId::Ebih__Tent_Interior__Desk__Note => Location {
-            id: LocationId::Ebih__Tent_Interior__Desk__Note,
-            canonical: CanonId::None,
-            item: Item::Companies_Layoff,
-            price: Currency::Free,
-            time: 0,
-            exit_id: None,
-        },
         LocationId::Ebih__By_Garage__Crawlspace__Fragment => Location {
             id: LocationId::Ebih__By_Garage__Crawlspace__Fragment,
             canonical: CanonId::None,
             item: Item::Health_Fragment,
             price: Currency::Free,
             time: 0,
-            exit_id: None,
-        },
-        LocationId::Ebih__Garage__Boxes__Under_Boxes => Location {
-            id: LocationId::Ebih__Garage__Boxes__Under_Boxes,
-            canonical: CanonId::None,
-            item: Item::Record_Losses,
-            price: Currency::Free,
-            time: 2000,
             exit_id: None,
         },
         LocationId::Ebih__Grid_25_10_12__East_10__Remote_Bush => Location {
@@ -8971,14 +8939,6 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
             item: Item::Ebih_West_Block,
             price: Currency::Free,
             time: 3500,
-            exit_id: None,
-        },
-        LocationId::Ebih__Cave__Entry__Health => Location {
-            id: LocationId::Ebih__Cave__Entry__Health,
-            canonical: CanonId::None,
-            item: Item::Health_Fragment,
-            price: Currency::Free,
-            time: 500,
             exit_id: None,
         },
         LocationId::Ebih__Ebih_East__Lower_Moving_Platform__Remote_Urn => Location {
@@ -9217,14 +9177,6 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
             id: LocationId::Giguna__Giguna_Base__Table__News,
             canonical: CanonId::None,
             item: Item::Researchers_Missing,
-            price: Currency::Free,
-            time: 0,
-            exit_id: None,
-        },
-        LocationId::Giguna__Building_Interior__Bookshelf__Note => Location {
-            id: LocationId::Giguna__Building_Interior__Bookshelf__Note,
-            canonical: CanonId::None,
-            item: Item::Letter_from_Trace,
             price: Currency::Free,
             time: 0,
             exit_id: None,
@@ -9547,6 +9499,62 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
             item: Item::Escape,
             price: Currency::Free,
             time: 1000,
+            exit_id: None,
+        },
+        LocationId::Interior__Bunker_Interior__Desk__Note => Location {
+            id: LocationId::Interior__Bunker_Interior__Desk__Note,
+            canonical: CanonId::None,
+            item: Item::Dear_Ernest,
+            price: Currency::Free,
+            time: 0,
+            exit_id: None,
+        },
+        LocationId::Interior__Building_Interior__Entry__Remote_Urn => Location {
+            id: LocationId::Interior__Building_Interior__Entry__Remote_Urn,
+            canonical: CanonId::Melee_Charge,
+            item: Item::Melee_Charge,
+            price: Currency::Free,
+            time: 6500,
+            exit_id: None,
+        },
+        LocationId::Interior__Building_Interior__Corner__Urn => Location {
+            id: LocationId::Interior__Building_Interior__Corner__Urn,
+            canonical: CanonId::Melee_Charge,
+            item: Item::Melee_Charge,
+            price: Currency::Free,
+            time: 5500,
+            exit_id: None,
+        },
+        LocationId::Interior__Tent_Interior__Desk__Note => Location {
+            id: LocationId::Interior__Tent_Interior__Desk__Note,
+            canonical: CanonId::None,
+            item: Item::Companies_Layoff,
+            price: Currency::Free,
+            time: 0,
+            exit_id: None,
+        },
+        LocationId::Interior__Garage__Boxes__Under_Boxes => Location {
+            id: LocationId::Interior__Garage__Boxes__Under_Boxes,
+            canonical: CanonId::None,
+            item: Item::Record_Losses,
+            price: Currency::Free,
+            time: 2000,
+            exit_id: None,
+        },
+        LocationId::Interior__Ebih_Cave__Entry__Health => Location {
+            id: LocationId::Interior__Ebih_Cave__Entry__Health,
+            canonical: CanonId::None,
+            item: Item::Health_Fragment,
+            price: Currency::Free,
+            time: 500,
+            exit_id: None,
+        },
+        LocationId::Interior__Outpost_Interior__Bookshelf__Note => Location {
+            id: LocationId::Interior__Outpost_Interior__Bookshelf__Note,
+            canonical: CanonId::None,
+            item: Item::Letter_from_Trace,
+            price: Currency::Free,
+            time: 0,
             exit_id: None,
         },
         LocationId::Irikar_Breach__Gauntlet__Hidden_Path_Reward__Item => Location {
@@ -10154,10 +10162,10 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
             price: Currency::Free,
             loc_id: None,
         },
-        ExitId::Amagi__Main_Area__Secret_Outcropping__ex__Cave_Behind_Waterfall__Bottom_1 => Exit {
-            id: ExitId::Amagi__Main_Area__Secret_Outcropping__ex__Cave_Behind_Waterfall__Bottom_1,
+        ExitId::Amagi__Main_Area__Secret_Outcropping__ex__Interior__Cave_Behind_Waterfall__Bottom_1 => Exit {
+            id: ExitId::Amagi__Main_Area__Secret_Outcropping__ex__Interior__Cave_Behind_Waterfall__Bottom_1,
             time: 750,
-            dest: SpotId::Amagi__Cave_Behind_Waterfall__Bottom,
+            dest: SpotId::Interior__Cave_Behind_Waterfall__Bottom,
             price: Currency::Free,
             loc_id: None,
         },
@@ -10196,45 +10204,10 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
             price: Currency::Free,
             loc_id: None,
         },
-        ExitId::Amagi__Main_Area__Secret_Waterfall__ex__Cave_Behind_Waterfall__Top_1 => Exit {
-            id: ExitId::Amagi__Main_Area__Secret_Waterfall__ex__Cave_Behind_Waterfall__Top_1,
+        ExitId::Amagi__Main_Area__Secret_Waterfall__ex__Interior__Cave_Behind_Waterfall__Top_1 => Exit {
+            id: ExitId::Amagi__Main_Area__Secret_Waterfall__ex__Interior__Cave_Behind_Waterfall__Top_1,
             time: 750,
-            dest: SpotId::Amagi__Cave_Behind_Waterfall__Top,
-            price: Currency::Free,
-            loc_id: None,
-        },
-        ExitId::Amagi__Cave_Behind_Waterfall__Bottom__ex__Main_Area__Secret_Outcropping_1 => Exit {
-            id: ExitId::Amagi__Cave_Behind_Waterfall__Bottom__ex__Main_Area__Secret_Outcropping_1,
-            time: 750,
-            dest: SpotId::Amagi__Main_Area__Secret_Outcropping,
-            price: Currency::Free,
-            loc_id: None,
-        },
-        ExitId::Amagi__Cave_Behind_Waterfall__Bottom__ex__Middle_1 => Exit {
-            id: ExitId::Amagi__Cave_Behind_Waterfall__Bottom__ex__Middle_1,
-            time: 2000,
-            dest: SpotId::Amagi__Cave_Behind_Waterfall__Middle,
-            price: Currency::Free,
-            loc_id: None,
-        },
-        ExitId::Amagi__Cave_Behind_Waterfall__Bottom__ex__Top_1 => Exit {
-            id: ExitId::Amagi__Cave_Behind_Waterfall__Bottom__ex__Top_1,
-            time: 1800,
-            dest: SpotId::Amagi__Cave_Behind_Waterfall__Top,
-            price: Currency::Free,
-            loc_id: None,
-        },
-        ExitId::Amagi__Cave_Behind_Waterfall__Middle__ex__Top_1 => Exit {
-            id: ExitId::Amagi__Cave_Behind_Waterfall__Middle__ex__Top_1,
-            time: 1000,
-            dest: SpotId::Amagi__Cave_Behind_Waterfall__Top,
-            price: Currency::Free,
-            loc_id: None,
-        },
-        ExitId::Amagi__Cave_Behind_Waterfall__Top__ex__Main_Area__Secret_Waterfall_1 => Exit {
-            id: ExitId::Amagi__Cave_Behind_Waterfall__Top__ex__Main_Area__Secret_Waterfall_1,
-            time: 750,
-            dest: SpotId::Amagi__Main_Area__Secret_Waterfall,
+            dest: SpotId::Interior__Cave_Behind_Waterfall__Top,
             price: Currency::Free,
             loc_id: None,
         },
@@ -10609,10 +10582,10 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
             price: Currency::Free,
             loc_id: None,
         },
-        ExitId::Antarctica__Freight_Elevator__Controls__ex__Glacier__Dock_Elevator__Elevator_1 => Exit {
-            id: ExitId::Antarctica__Freight_Elevator__Controls__ex__Glacier__Dock_Elevator__Elevator_1,
+        ExitId::Antarctica__Freight_Elevator__Controls__ex__Interior__Dock_Elevator__Elevator_1 => Exit {
+            id: ExitId::Antarctica__Freight_Elevator__Controls__ex__Interior__Dock_Elevator__Elevator_1,
             time: 15000,
-            dest: SpotId::Glacier__Dock_Elevator__Elevator,
+            dest: SpotId::Interior__Dock_Elevator__Elevator,
             price: Currency::Free,
             loc_id: None,
         },
@@ -10644,10 +10617,10 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
             price: Currency::Energy(125),
             loc_id: None,
         },
-        ExitId::Ebih__Base_Camp__Bunker_Entry__ex__Bunker_Interior__Entry_1 => Exit {
-            id: ExitId::Ebih__Base_Camp__Bunker_Entry__ex__Bunker_Interior__Entry_1,
+        ExitId::Ebih__Base_Camp__Bunker_Entry__ex__Interior__Bunker_Interior__Entry_1 => Exit {
+            id: ExitId::Ebih__Base_Camp__Bunker_Entry__ex__Interior__Bunker_Interior__Entry_1,
             time: 750,
-            dest: SpotId::Ebih__Bunker_Interior__Entry,
+            dest: SpotId::Interior__Bunker_Interior__Entry,
             price: Currency::Free,
             loc_id: None,
         },
@@ -10658,17 +10631,17 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
             price: Currency::Free,
             loc_id: None,
         },
-        ExitId::Ebih__Base_Camp__Building_Entry__ex__Building_Interior__Entry_1 => Exit {
-            id: ExitId::Ebih__Base_Camp__Building_Entry__ex__Building_Interior__Entry_1,
+        ExitId::Ebih__Base_Camp__Building_Entry__ex__Interior__Building_Interior__Entry_1 => Exit {
+            id: ExitId::Ebih__Base_Camp__Building_Entry__ex__Interior__Building_Interior__Entry_1,
             time: 750,
-            dest: SpotId::Ebih__Building_Interior__Entry,
+            dest: SpotId::Interior__Building_Interior__Entry,
             price: Currency::Free,
             loc_id: None,
         },
-        ExitId::Ebih__Base_Camp__Tent_Entry__ex__Tent_Interior__Entry_1 => Exit {
-            id: ExitId::Ebih__Base_Camp__Tent_Entry__ex__Tent_Interior__Entry_1,
+        ExitId::Ebih__Base_Camp__Tent_Entry__ex__Interior__Tent_Interior__Entry_1 => Exit {
+            id: ExitId::Ebih__Base_Camp__Tent_Entry__ex__Interior__Tent_Interior__Entry_1,
             time: 500,
-            dest: SpotId::Ebih__Tent_Interior__Entry,
+            dest: SpotId::Interior__Tent_Interior__Entry,
             price: Currency::Free,
             loc_id: None,
         },
@@ -10739,27 +10712,6 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
             id: ExitId::Ebih__Base_Camp__Top_Platform__ex__Left_Platform_Moved_1,
             time: 1000,
             dest: SpotId::Ebih__Base_Camp__Left_Platform_Moved,
-            price: Currency::Free,
-            loc_id: None,
-        },
-        ExitId::Ebih__Bunker_Interior__Entry__ex__Base_Camp__Bunker_Entry_1 => Exit {
-            id: ExitId::Ebih__Bunker_Interior__Entry__ex__Base_Camp__Bunker_Entry_1,
-            time: 750,
-            dest: SpotId::Ebih__Base_Camp__Bunker_Entry,
-            price: Currency::Free,
-            loc_id: None,
-        },
-        ExitId::Ebih__Building_Interior__Entry__ex__Base_Camp__Building_Entry_1 => Exit {
-            id: ExitId::Ebih__Building_Interior__Entry__ex__Base_Camp__Building_Entry_1,
-            time: 750,
-            dest: SpotId::Ebih__Base_Camp__Building_Entry,
-            price: Currency::Free,
-            loc_id: None,
-        },
-        ExitId::Ebih__Tent_Interior__Entry__ex__Base_Camp__Tent_Entry_1 => Exit {
-            id: ExitId::Ebih__Tent_Interior__Entry__ex__Base_Camp__Tent_Entry_1,
-            time: 500,
-            dest: SpotId::Ebih__Base_Camp__Tent_Entry,
             price: Currency::Free,
             loc_id: None,
         },
@@ -10847,17 +10799,10 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
             price: Currency::Free,
             loc_id: None,
         },
-        ExitId::Ebih__By_Garage__Garage_Entry__ex__Garage__Entry_1 => Exit {
-            id: ExitId::Ebih__By_Garage__Garage_Entry__ex__Garage__Entry_1,
+        ExitId::Ebih__By_Garage__Garage_Entry__ex__Interior__Garage__Entry_1 => Exit {
+            id: ExitId::Ebih__By_Garage__Garage_Entry__ex__Interior__Garage__Entry_1,
             time: 750,
-            dest: SpotId::Ebih__Garage__Entry,
-            price: Currency::Free,
-            loc_id: None,
-        },
-        ExitId::Ebih__Garage__Entry__ex__By_Garage__Garage_Entry_1 => Exit {
-            id: ExitId::Ebih__Garage__Entry__ex__By_Garage__Garage_Entry_1,
-            time: 750,
-            dest: SpotId::Ebih__By_Garage__Garage_Entry,
+            dest: SpotId::Interior__Garage__Entry,
             price: Currency::Free,
             loc_id: None,
         },
@@ -11232,10 +11177,10 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
             price: Currency::Free,
             loc_id: None,
         },
-        ExitId::Ebih__Waterfall__Cave_Entrance__ex__Cave__Entry_1 => Exit {
-            id: ExitId::Ebih__Waterfall__Cave_Entrance__ex__Cave__Entry_1,
+        ExitId::Ebih__Waterfall__Cave_Entrance__ex__Interior__Ebih_Cave__Entry_1 => Exit {
+            id: ExitId::Ebih__Waterfall__Cave_Entrance__ex__Interior__Ebih_Cave__Entry_1,
             time: 750,
-            dest: SpotId::Ebih__Cave__Entry,
+            dest: SpotId::Interior__Ebih_Cave__Entry,
             price: Currency::Free,
             loc_id: None,
         },
@@ -11537,13 +11482,6 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
             id: ExitId::Ebih__Ebih_West__East_13__ex__Vertical_Interchange__West_13_1,
             time: 1350,
             dest: SpotId::Ebih__Vertical_Interchange__West_13,
-            price: Currency::Free,
-            loc_id: None,
-        },
-        ExitId::Ebih__Cave__Entry__ex__Waterfall__Cave_Entrance_1 => Exit {
-            id: ExitId::Ebih__Cave__Entry__ex__Waterfall__Cave_Entrance_1,
-            time: 750,
-            dest: SpotId::Ebih__Waterfall__Cave_Entrance,
             price: Currency::Free,
             loc_id: None,
         },
@@ -13080,10 +13018,10 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
             price: Currency::Free,
             loc_id: None,
         },
-        ExitId::Giguna__Giguna_Base__Building_Entry__ex__Building_Interior__Entry_1 => Exit {
-            id: ExitId::Giguna__Giguna_Base__Building_Entry__ex__Building_Interior__Entry_1,
+        ExitId::Giguna__Giguna_Base__Building_Entry__ex__Interior__Outpost_Interior__Entry_1 => Exit {
+            id: ExitId::Giguna__Giguna_Base__Building_Entry__ex__Interior__Outpost_Interior__Entry_1,
             time: 750,
-            dest: SpotId::Giguna__Building_Interior__Entry,
+            dest: SpotId::Interior__Outpost_Interior__Entry,
             price: Currency::Free,
             loc_id: None,
         },
@@ -13175,27 +13113,6 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
             id: ExitId::Giguna__Giguna_Base__Below_Gate__ex__Middle_Platform_2,
             time: 3000,
             dest: SpotId::Giguna__Giguna_Base__Middle_Platform,
-            price: Currency::Free,
-            loc_id: None,
-        },
-        ExitId::Giguna__Building_Interior__Entry__ex__Bookshelf_1 => Exit {
-            id: ExitId::Giguna__Building_Interior__Entry__ex__Bookshelf_1,
-            time: 1350,
-            dest: SpotId::Giguna__Building_Interior__Bookshelf,
-            price: Currency::Free,
-            loc_id: None,
-        },
-        ExitId::Giguna__Building_Interior__Entry__ex__Bookshelf_2 => Exit {
-            id: ExitId::Giguna__Building_Interior__Entry__ex__Bookshelf_2,
-            time: 1000,
-            dest: SpotId::Giguna__Building_Interior__Bookshelf,
-            price: Currency::Free,
-            loc_id: None,
-        },
-        ExitId::Giguna__Building_Interior__Entry__ex__Giguna_Base__Building_Entry_1 => Exit {
-            id: ExitId::Giguna__Building_Interior__Entry__ex__Giguna_Base__Building_Entry_1,
-            time: 750,
-            dest: SpotId::Giguna__Giguna_Base__Building_Entry,
             price: Currency::Free,
             loc_id: None,
         },
@@ -14683,31 +14600,10 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
             price: Currency::Free,
             loc_id: None,
         },
-        ExitId::Glacier__Dock_Elevator__Connector__ex__Dock_Interior__Connector_1 => Exit {
-            id: ExitId::Glacier__Dock_Elevator__Connector__ex__Dock_Interior__Connector_1,
-            time: 1350,
-            dest: SpotId::Glacier__Dock_Interior__Connector,
-            price: Currency::Free,
-            loc_id: None,
-        },
-        ExitId::Glacier__Dock_Interior__Connector__ex__Dock_Elevator__Connector_1 => Exit {
-            id: ExitId::Glacier__Dock_Interior__Connector__ex__Dock_Elevator__Connector_1,
-            time: 1350,
-            dest: SpotId::Glacier__Dock_Elevator__Connector,
-            price: Currency::Free,
-            loc_id: None,
-        },
-        ExitId::Glacier__Dock_Interior__Entry__ex__Dock_Outside__Entry_1 => Exit {
-            id: ExitId::Glacier__Dock_Interior__Entry__ex__Dock_Outside__Entry_1,
+        ExitId::Glacier__Dock_Outside__Entry__ex__Interior__Dock_Interior__Entry_1 => Exit {
+            id: ExitId::Glacier__Dock_Outside__Entry__ex__Interior__Dock_Interior__Entry_1,
             time: 750,
-            dest: SpotId::Glacier__Dock_Outside__Entry,
-            price: Currency::Free,
-            loc_id: None,
-        },
-        ExitId::Glacier__Dock_Outside__Entry__ex__Dock_Interior__Entry_1 => Exit {
-            id: ExitId::Glacier__Dock_Outside__Entry__ex__Dock_Interior__Entry_1,
-            time: 750,
-            dest: SpotId::Glacier__Dock_Interior__Entry,
+            dest: SpotId::Interior__Dock_Interior__Entry,
             price: Currency::Free,
             loc_id: None,
         },
@@ -15387,6 +15283,118 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
             id: ExitId::Glacier__Apocalypse_Entry__West__ex__Grid_43_10_11__East_1,
             time: 1350,
             dest: SpotId::Glacier__Grid_43_10_11__East,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Interior__Dock_Elevator__Connector__ex__Dock_Interior__Connector_1 => Exit {
+            id: ExitId::Interior__Dock_Elevator__Connector__ex__Dock_Interior__Connector_1,
+            time: 1350,
+            dest: SpotId::Interior__Dock_Interior__Connector,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Interior__Dock_Interior__Connector__ex__Dock_Elevator__Connector_1 => Exit {
+            id: ExitId::Interior__Dock_Interior__Connector__ex__Dock_Elevator__Connector_1,
+            time: 1350,
+            dest: SpotId::Interior__Dock_Elevator__Connector,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Interior__Dock_Interior__Entry__ex__Glacier__Dock_Outside__Entry_1 => Exit {
+            id: ExitId::Interior__Dock_Interior__Entry__ex__Glacier__Dock_Outside__Entry_1,
+            time: 750,
+            dest: SpotId::Glacier__Dock_Outside__Entry,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Interior__Bunker_Interior__Entry__ex__Ebih__Base_Camp__Bunker_Entry_1 => Exit {
+            id: ExitId::Interior__Bunker_Interior__Entry__ex__Ebih__Base_Camp__Bunker_Entry_1,
+            time: 750,
+            dest: SpotId::Ebih__Base_Camp__Bunker_Entry,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Interior__Building_Interior__Entry__ex__Ebih__Base_Camp__Building_Entry_1 => Exit {
+            id: ExitId::Interior__Building_Interior__Entry__ex__Ebih__Base_Camp__Building_Entry_1,
+            time: 750,
+            dest: SpotId::Ebih__Base_Camp__Building_Entry,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Interior__Tent_Interior__Entry__ex__Ebih__Base_Camp__Tent_Entry_1 => Exit {
+            id: ExitId::Interior__Tent_Interior__Entry__ex__Ebih__Base_Camp__Tent_Entry_1,
+            time: 500,
+            dest: SpotId::Ebih__Base_Camp__Tent_Entry,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Interior__Garage__Entry__ex__Ebih__By_Garage__Garage_Entry_1 => Exit {
+            id: ExitId::Interior__Garage__Entry__ex__Ebih__By_Garage__Garage_Entry_1,
+            time: 750,
+            dest: SpotId::Ebih__By_Garage__Garage_Entry,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Interior__Ebih_Cave__Entry__ex__Ebih__Waterfall__Cave_Entrance_1 => Exit {
+            id: ExitId::Interior__Ebih_Cave__Entry__ex__Ebih__Waterfall__Cave_Entrance_1,
+            time: 750,
+            dest: SpotId::Ebih__Waterfall__Cave_Entrance,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Interior__Cave_Behind_Waterfall__Bottom__ex__Amagi__Main_Area__Secret_Outcropping_1 => Exit {
+            id: ExitId::Interior__Cave_Behind_Waterfall__Bottom__ex__Amagi__Main_Area__Secret_Outcropping_1,
+            time: 750,
+            dest: SpotId::Amagi__Main_Area__Secret_Outcropping,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Interior__Cave_Behind_Waterfall__Bottom__ex__Middle_1 => Exit {
+            id: ExitId::Interior__Cave_Behind_Waterfall__Bottom__ex__Middle_1,
+            time: 2000,
+            dest: SpotId::Interior__Cave_Behind_Waterfall__Middle,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Interior__Cave_Behind_Waterfall__Bottom__ex__Top_1 => Exit {
+            id: ExitId::Interior__Cave_Behind_Waterfall__Bottom__ex__Top_1,
+            time: 1800,
+            dest: SpotId::Interior__Cave_Behind_Waterfall__Top,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Interior__Cave_Behind_Waterfall__Middle__ex__Top_1 => Exit {
+            id: ExitId::Interior__Cave_Behind_Waterfall__Middle__ex__Top_1,
+            time: 1000,
+            dest: SpotId::Interior__Cave_Behind_Waterfall__Top,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Interior__Cave_Behind_Waterfall__Top__ex__Amagi__Main_Area__Secret_Waterfall_1 => Exit {
+            id: ExitId::Interior__Cave_Behind_Waterfall__Top__ex__Amagi__Main_Area__Secret_Waterfall_1,
+            time: 750,
+            dest: SpotId::Amagi__Main_Area__Secret_Waterfall,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Interior__Outpost_Interior__Entry__ex__Bookshelf_1 => Exit {
+            id: ExitId::Interior__Outpost_Interior__Entry__ex__Bookshelf_1,
+            time: 1350,
+            dest: SpotId::Interior__Outpost_Interior__Bookshelf,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Interior__Outpost_Interior__Entry__ex__Bookshelf_2 => Exit {
+            id: ExitId::Interior__Outpost_Interior__Entry__ex__Bookshelf_2,
+            time: 1000,
+            dest: SpotId::Interior__Outpost_Interior__Bookshelf,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Interior__Outpost_Interior__Entry__ex__Giguna__Giguna_Base__Building_Entry_1 => Exit {
+            id: ExitId::Interior__Outpost_Interior__Entry__ex__Giguna__Giguna_Base__Building_Entry_1,
+            time: 750,
+            dest: SpotId::Giguna__Giguna_Base__Building_Entry,
             price: Currency::Free,
             loc_id: None,
         },
@@ -16846,11 +16854,6 @@ pub fn build_actions() -> EnumMap<ActionId, Action> {
             time: 1200,
             price: Currency::Free,
         },
-        ActionId::Amagi__Cave_Behind_Waterfall__Middle__Throw_Drone => Action {
-            id: ActionId::Amagi__Cave_Behind_Waterfall__Middle__Throw_Drone,
-            time: 1100,
-            price: Currency::Free,
-        },
         ActionId::Ebih__Base_Camp__Save_Point__Save => Action {
             id: ActionId::Ebih__Base_Camp__Save_Point__Save,
             time: 1300,
@@ -17206,6 +17209,11 @@ pub fn build_actions() -> EnumMap<ActionId, Action> {
             time: 1200,
             price: Currency::Free,
         },
+        ActionId::Interior__Cave_Behind_Waterfall__Middle__Throw_Drone => Action {
+            id: ActionId::Interior__Cave_Behind_Waterfall__Middle__Throw_Drone,
+            time: 1100,
+            price: Currency::Free,
+        },
         ActionId::Irikar_Breach__Exit_Corridor__Portal_Stand__Enter_Portal => Action {
             id: ActionId::Irikar_Breach__Exit_Corridor__Portal_Stand__Enter_Portal,
             time: 3600,
@@ -17397,8 +17405,8 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             exits: Range {
-                start: ExitId::Amagi__Main_Area__Secret_Outcropping__ex__Cave_Behind_Waterfall__Bottom_1.into_usize(),
-                end: ExitId::Amagi__Main_Area__Secret_Outcropping__ex__Cave_Behind_Waterfall__Bottom_1.into_usize() + 1,
+                start: ExitId::Amagi__Main_Area__Secret_Outcropping__ex__Interior__Cave_Behind_Waterfall__Bottom_1.into_usize(),
+                end: ExitId::Amagi__Main_Area__Secret_Outcropping__ex__Interior__Cave_Behind_Waterfall__Bottom_1.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
@@ -17595,8 +17603,8 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             exits: Range {
-                start: ExitId::Amagi__Main_Area__Secret_Waterfall__ex__Cave_Behind_Waterfall__Top_1.into_usize(),
-                end: ExitId::Amagi__Main_Area__Secret_Waterfall__ex__Cave_Behind_Waterfall__Top_1.into_usize() + 1,
+                start: ExitId::Amagi__Main_Area__Secret_Waterfall__ex__Interior__Cave_Behind_Waterfall__Top_1.into_usize(),
+                end: ExitId::Amagi__Main_Area__Secret_Waterfall__ex__Interior__Cave_Behind_Waterfall__Top_1.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
@@ -17610,46 +17618,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             exits: Range {
                 start: 0, end: 0,
-            },
-            actions: Range {
-                start: 0, end: 0,
-            },
-        },
-        SpotId::Amagi__Cave_Behind_Waterfall__Bottom => Spot {
-            id: SpotId::Amagi__Cave_Behind_Waterfall__Bottom,
-            locations: Range {
-                start: 0, end: 0,
-            },
-            exits: Range {
-                start: ExitId::Amagi__Cave_Behind_Waterfall__Bottom__ex__Main_Area__Secret_Outcropping_1.into_usize(),
-                end: ExitId::Amagi__Cave_Behind_Waterfall__Bottom__ex__Top_1.into_usize() + 1,
-            },
-            actions: Range {
-                start: 0, end: 0,
-            },
-        },
-        SpotId::Amagi__Cave_Behind_Waterfall__Middle => Spot {
-            id: SpotId::Amagi__Cave_Behind_Waterfall__Middle,
-            locations: Range {
-                start: 0, end: 0,
-            },
-            exits: Range {
-                start: ExitId::Amagi__Cave_Behind_Waterfall__Middle__ex__Top_1.into_usize(),
-                end: ExitId::Amagi__Cave_Behind_Waterfall__Middle__ex__Top_1.into_usize() + 1,
-            },
-            actions: Range {
-                start: ActionId::Amagi__Cave_Behind_Waterfall__Middle__Throw_Drone.into_usize(),
-                end: ActionId::Amagi__Cave_Behind_Waterfall__Middle__Throw_Drone.into_usize() + 1,
-            },
-        },
-        SpotId::Amagi__Cave_Behind_Waterfall__Top => Spot {
-            id: SpotId::Amagi__Cave_Behind_Waterfall__Top,
-            locations: Range {
-                start: 0, end: 0,
-            },
-            exits: Range {
-                start: ExitId::Amagi__Cave_Behind_Waterfall__Top__ex__Main_Area__Secret_Waterfall_1.into_usize(),
-                end: ExitId::Amagi__Cave_Behind_Waterfall__Top__ex__Main_Area__Secret_Waterfall_1.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
@@ -18701,8 +18669,8 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             exits: Range {
-                start: ExitId::Antarctica__Freight_Elevator__Controls__ex__Glacier__Dock_Elevator__Elevator_1.into_usize(),
-                end: ExitId::Antarctica__Freight_Elevator__Controls__ex__Glacier__Dock_Elevator__Elevator_1.into_usize() + 1,
+                start: ExitId::Antarctica__Freight_Elevator__Controls__ex__Interior__Dock_Elevator__Elevator_1.into_usize(),
+                end: ExitId::Antarctica__Freight_Elevator__Controls__ex__Interior__Dock_Elevator__Elevator_1.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
@@ -18766,8 +18734,8 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             exits: Range {
-                start: ExitId::Ebih__Base_Camp__Bunker_Entry__ex__Bunker_Interior__Entry_1.into_usize(),
-                end: ExitId::Ebih__Base_Camp__Bunker_Entry__ex__Bunker_Interior__Entry_1.into_usize() + 1,
+                start: ExitId::Ebih__Base_Camp__Bunker_Entry__ex__Interior__Bunker_Interior__Entry_1.into_usize(),
+                end: ExitId::Ebih__Base_Camp__Bunker_Entry__ex__Interior__Bunker_Interior__Entry_1.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
@@ -18804,8 +18772,8 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             exits: Range {
-                start: ExitId::Ebih__Base_Camp__Building_Entry__ex__Building_Interior__Entry_1.into_usize(),
-                end: ExitId::Ebih__Base_Camp__Building_Entry__ex__Building_Interior__Entry_1.into_usize() + 1,
+                start: ExitId::Ebih__Base_Camp__Building_Entry__ex__Interior__Building_Interior__Entry_1.into_usize(),
+                end: ExitId::Ebih__Base_Camp__Building_Entry__ex__Interior__Building_Interior__Entry_1.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
@@ -18817,8 +18785,8 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             exits: Range {
-                start: ExitId::Ebih__Base_Camp__Tent_Entry__ex__Tent_Interior__Entry_1.into_usize(),
-                end: ExitId::Ebih__Base_Camp__Tent_Entry__ex__Tent_Interior__Entry_1.into_usize() + 1,
+                start: ExitId::Ebih__Base_Camp__Tent_Entry__ex__Interior__Tent_Interior__Entry_1.into_usize(),
+                end: ExitId::Ebih__Base_Camp__Tent_Entry__ex__Interior__Tent_Interior__Entry_1.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
@@ -18913,85 +18881,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             exits: Range {
                 start: ExitId::Ebih__Base_Camp__Top_Platform__ex__Left_Platform_1.into_usize(),
                 end: ExitId::Ebih__Base_Camp__Top_Platform__ex__Left_Platform_Moved_1.into_usize() + 1,
-            },
-            actions: Range {
-                start: 0, end: 0,
-            },
-        },
-        SpotId::Ebih__Bunker_Interior__Entry => Spot {
-            id: SpotId::Ebih__Bunker_Interior__Entry,
-            locations: Range {
-                start: 0, end: 0,
-            },
-            exits: Range {
-                start: ExitId::Ebih__Bunker_Interior__Entry__ex__Base_Camp__Bunker_Entry_1.into_usize(),
-                end: ExitId::Ebih__Bunker_Interior__Entry__ex__Base_Camp__Bunker_Entry_1.into_usize() + 1,
-            },
-            actions: Range {
-                start: 0, end: 0,
-            },
-        },
-        SpotId::Ebih__Bunker_Interior__Desk => Spot {
-            id: SpotId::Ebih__Bunker_Interior__Desk,
-            locations: Range {
-                start: LocationId::Ebih__Bunker_Interior__Desk__Note.into_usize(),
-                end: LocationId::Ebih__Bunker_Interior__Desk__Note.into_usize() + 1,
-            },
-            exits: Range {
-                start: 0, end: 0,
-            },
-            actions: Range {
-                start: 0, end: 0,
-            },
-        },
-        SpotId::Ebih__Building_Interior__Entry => Spot {
-            id: SpotId::Ebih__Building_Interior__Entry,
-            locations: Range {
-                start: LocationId::Ebih__Building_Interior__Entry__Remote_Urn.into_usize(),
-                end: LocationId::Ebih__Building_Interior__Entry__Remote_Urn.into_usize() + 1,
-            },
-            exits: Range {
-                start: ExitId::Ebih__Building_Interior__Entry__ex__Base_Camp__Building_Entry_1.into_usize(),
-                end: ExitId::Ebih__Building_Interior__Entry__ex__Base_Camp__Building_Entry_1.into_usize() + 1,
-            },
-            actions: Range {
-                start: 0, end: 0,
-            },
-        },
-        SpotId::Ebih__Building_Interior__Corner => Spot {
-            id: SpotId::Ebih__Building_Interior__Corner,
-            locations: Range {
-                start: LocationId::Ebih__Building_Interior__Corner__Urn.into_usize(),
-                end: LocationId::Ebih__Building_Interior__Corner__Urn.into_usize() + 1,
-            },
-            exits: Range {
-                start: 0, end: 0,
-            },
-            actions: Range {
-                start: 0, end: 0,
-            },
-        },
-        SpotId::Ebih__Tent_Interior__Entry => Spot {
-            id: SpotId::Ebih__Tent_Interior__Entry,
-            locations: Range {
-                start: 0, end: 0,
-            },
-            exits: Range {
-                start: ExitId::Ebih__Tent_Interior__Entry__ex__Base_Camp__Tent_Entry_1.into_usize(),
-                end: ExitId::Ebih__Tent_Interior__Entry__ex__Base_Camp__Tent_Entry_1.into_usize() + 1,
-            },
-            actions: Range {
-                start: 0, end: 0,
-            },
-        },
-        SpotId::Ebih__Tent_Interior__Desk => Spot {
-            id: SpotId::Ebih__Tent_Interior__Desk,
-            locations: Range {
-                start: LocationId::Ebih__Tent_Interior__Desk__Note.into_usize(),
-                end: LocationId::Ebih__Tent_Interior__Desk__Note.into_usize() + 1,
-            },
-            exits: Range {
-                start: 0, end: 0,
             },
             actions: Range {
                 start: 0, end: 0,
@@ -19142,8 +19031,8 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             exits: Range {
-                start: ExitId::Ebih__By_Garage__Garage_Entry__ex__Garage__Entry_1.into_usize(),
-                end: ExitId::Ebih__By_Garage__Garage_Entry__ex__Garage__Entry_1.into_usize() + 1,
+                start: ExitId::Ebih__By_Garage__Garage_Entry__ex__Interior__Garage__Entry_1.into_usize(),
+                end: ExitId::Ebih__By_Garage__Garage_Entry__ex__Interior__Garage__Entry_1.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
@@ -19165,32 +19054,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             id: SpotId::Ebih__By_Garage__East_12,
             locations: Range {
                 start: 0, end: 0,
-            },
-            exits: Range {
-                start: 0, end: 0,
-            },
-            actions: Range {
-                start: 0, end: 0,
-            },
-        },
-        SpotId::Ebih__Garage__Entry => Spot {
-            id: SpotId::Ebih__Garage__Entry,
-            locations: Range {
-                start: 0, end: 0,
-            },
-            exits: Range {
-                start: ExitId::Ebih__Garage__Entry__ex__By_Garage__Garage_Entry_1.into_usize(),
-                end: ExitId::Ebih__Garage__Entry__ex__By_Garage__Garage_Entry_1.into_usize() + 1,
-            },
-            actions: Range {
-                start: 0, end: 0,
-            },
-        },
-        SpotId::Ebih__Garage__Boxes => Spot {
-            id: SpotId::Ebih__Garage__Boxes,
-            locations: Range {
-                start: LocationId::Ebih__Garage__Boxes__Under_Boxes.into_usize(),
-                end: LocationId::Ebih__Garage__Boxes__Under_Boxes.into_usize() + 1,
             },
             exits: Range {
                 start: 0, end: 0,
@@ -19755,8 +19618,8 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             exits: Range {
-                start: ExitId::Ebih__Waterfall__Cave_Entrance__ex__Cave__Entry_1.into_usize(),
-                end: ExitId::Ebih__Waterfall__Cave_Entrance__ex__Cave__Entry_1.into_usize() + 1,
+                start: ExitId::Ebih__Waterfall__Cave_Entrance__ex__Interior__Ebih_Cave__Entry_1.into_usize(),
+                end: ExitId::Ebih__Waterfall__Cave_Entrance__ex__Interior__Ebih_Cave__Entry_1.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
@@ -20334,20 +20197,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             exits: Range {
                 start: ExitId::Ebih__Ebih_West__East_13__ex__Vertical_Interchange__West_13_1.into_usize(),
                 end: ExitId::Ebih__Ebih_West__East_13__ex__Vertical_Interchange__West_13_1.into_usize() + 1,
-            },
-            actions: Range {
-                start: 0, end: 0,
-            },
-        },
-        SpotId::Ebih__Cave__Entry => Spot {
-            id: SpotId::Ebih__Cave__Entry,
-            locations: Range {
-                start: LocationId::Ebih__Cave__Entry__Health.into_usize(),
-                end: LocationId::Ebih__Cave__Entry__Health.into_usize() + 1,
-            },
-            exits: Range {
-                start: ExitId::Ebih__Cave__Entry__ex__Waterfall__Cave_Entrance_1.into_usize(),
-                end: ExitId::Ebih__Cave__Entry__ex__Waterfall__Cave_Entrance_1.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
@@ -23387,8 +23236,8 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             exits: Range {
-                start: ExitId::Giguna__Giguna_Base__Building_Entry__ex__Building_Interior__Entry_1.into_usize(),
-                end: ExitId::Giguna__Giguna_Base__Building_Entry__ex__Building_Interior__Entry_1.into_usize() + 1,
+                start: ExitId::Giguna__Giguna_Base__Building_Entry__ex__Interior__Outpost_Interior__Entry_1.into_usize(),
+                end: ExitId::Giguna__Giguna_Base__Building_Entry__ex__Interior__Outpost_Interior__Entry_1.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
@@ -23573,32 +23422,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             actions: Range {
                 start: ActionId::Giguna__Giguna_Base__Switch_Distance_4__Open_Door.into_usize(),
                 end: ActionId::Giguna__Giguna_Base__Switch_Distance_4__Open_Door.into_usize() + 1,
-            },
-        },
-        SpotId::Giguna__Building_Interior__Entry => Spot {
-            id: SpotId::Giguna__Building_Interior__Entry,
-            locations: Range {
-                start: 0, end: 0,
-            },
-            exits: Range {
-                start: ExitId::Giguna__Building_Interior__Entry__ex__Bookshelf_1.into_usize(),
-                end: ExitId::Giguna__Building_Interior__Entry__ex__Giguna_Base__Building_Entry_1.into_usize() + 1,
-            },
-            actions: Range {
-                start: 0, end: 0,
-            },
-        },
-        SpotId::Giguna__Building_Interior__Bookshelf => Spot {
-            id: SpotId::Giguna__Building_Interior__Bookshelf,
-            locations: Range {
-                start: LocationId::Giguna__Building_Interior__Bookshelf__Note.into_usize(),
-                end: LocationId::Giguna__Building_Interior__Bookshelf__Note.into_usize() + 1,
-            },
-            exits: Range {
-                start: 0, end: 0,
-            },
-            actions: Range {
-                start: 0, end: 0,
             },
         },
         SpotId::Giguna__Ruins_East__East_9 => Spot {
@@ -26661,65 +26484,14 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
         },
-        SpotId::Glacier__Dock_Elevator__Elevator => Spot {
-            id: SpotId::Glacier__Dock_Elevator__Elevator,
-            locations: Range {
-                start: 0, end: 0,
-            },
-            exits: Range {
-                start: 0, end: 0,
-            },
-            actions: Range {
-                start: 0, end: 0,
-            },
-        },
-        SpotId::Glacier__Dock_Elevator__Connector => Spot {
-            id: SpotId::Glacier__Dock_Elevator__Connector,
-            locations: Range {
-                start: 0, end: 0,
-            },
-            exits: Range {
-                start: ExitId::Glacier__Dock_Elevator__Connector__ex__Dock_Interior__Connector_1.into_usize(),
-                end: ExitId::Glacier__Dock_Elevator__Connector__ex__Dock_Interior__Connector_1.into_usize() + 1,
-            },
-            actions: Range {
-                start: 0, end: 0,
-            },
-        },
-        SpotId::Glacier__Dock_Interior__Connector => Spot {
-            id: SpotId::Glacier__Dock_Interior__Connector,
-            locations: Range {
-                start: 0, end: 0,
-            },
-            exits: Range {
-                start: ExitId::Glacier__Dock_Interior__Connector__ex__Dock_Elevator__Connector_1.into_usize(),
-                end: ExitId::Glacier__Dock_Interior__Connector__ex__Dock_Elevator__Connector_1.into_usize() + 1,
-            },
-            actions: Range {
-                start: 0, end: 0,
-            },
-        },
-        SpotId::Glacier__Dock_Interior__Entry => Spot {
-            id: SpotId::Glacier__Dock_Interior__Entry,
-            locations: Range {
-                start: 0, end: 0,
-            },
-            exits: Range {
-                start: ExitId::Glacier__Dock_Interior__Entry__ex__Dock_Outside__Entry_1.into_usize(),
-                end: ExitId::Glacier__Dock_Interior__Entry__ex__Dock_Outside__Entry_1.into_usize() + 1,
-            },
-            actions: Range {
-                start: 0, end: 0,
-            },
-        },
         SpotId::Glacier__Dock_Outside__Entry => Spot {
             id: SpotId::Glacier__Dock_Outside__Entry,
             locations: Range {
                 start: 0, end: 0,
             },
             exits: Range {
-                start: ExitId::Glacier__Dock_Outside__Entry__ex__Dock_Interior__Entry_1.into_usize(),
-                end: ExitId::Glacier__Dock_Outside__Entry__ex__Dock_Interior__Entry_1.into_usize() + 1,
+                start: ExitId::Glacier__Dock_Outside__Entry__ex__Interior__Dock_Interior__Entry_1.into_usize(),
+                end: ExitId::Glacier__Dock_Outside__Entry__ex__Interior__Dock_Interior__Entry_1.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
@@ -27877,6 +27649,242 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             locations: Range {
                 start: LocationId::Glacier__Apocalypse_Entry__Terminal__Escape.into_usize(),
                 end: LocationId::Glacier__Apocalypse_Entry__Terminal__Escape.into_usize() + 1,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Interior__Dock_Elevator__Elevator => Spot {
+            id: SpotId::Interior__Dock_Elevator__Elevator,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Interior__Dock_Elevator__Connector => Spot {
+            id: SpotId::Interior__Dock_Elevator__Connector,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Interior__Dock_Elevator__Connector__ex__Dock_Interior__Connector_1.into_usize(),
+                end: ExitId::Interior__Dock_Elevator__Connector__ex__Dock_Interior__Connector_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Interior__Dock_Interior__Connector => Spot {
+            id: SpotId::Interior__Dock_Interior__Connector,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Interior__Dock_Interior__Connector__ex__Dock_Elevator__Connector_1.into_usize(),
+                end: ExitId::Interior__Dock_Interior__Connector__ex__Dock_Elevator__Connector_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Interior__Dock_Interior__Entry => Spot {
+            id: SpotId::Interior__Dock_Interior__Entry,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Interior__Dock_Interior__Entry__ex__Glacier__Dock_Outside__Entry_1.into_usize(),
+                end: ExitId::Interior__Dock_Interior__Entry__ex__Glacier__Dock_Outside__Entry_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Interior__Bunker_Interior__Entry => Spot {
+            id: SpotId::Interior__Bunker_Interior__Entry,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Interior__Bunker_Interior__Entry__ex__Ebih__Base_Camp__Bunker_Entry_1.into_usize(),
+                end: ExitId::Interior__Bunker_Interior__Entry__ex__Ebih__Base_Camp__Bunker_Entry_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Interior__Bunker_Interior__Desk => Spot {
+            id: SpotId::Interior__Bunker_Interior__Desk,
+            locations: Range {
+                start: LocationId::Interior__Bunker_Interior__Desk__Note.into_usize(),
+                end: LocationId::Interior__Bunker_Interior__Desk__Note.into_usize() + 1,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Interior__Building_Interior__Entry => Spot {
+            id: SpotId::Interior__Building_Interior__Entry,
+            locations: Range {
+                start: LocationId::Interior__Building_Interior__Entry__Remote_Urn.into_usize(),
+                end: LocationId::Interior__Building_Interior__Entry__Remote_Urn.into_usize() + 1,
+            },
+            exits: Range {
+                start: ExitId::Interior__Building_Interior__Entry__ex__Ebih__Base_Camp__Building_Entry_1.into_usize(),
+                end: ExitId::Interior__Building_Interior__Entry__ex__Ebih__Base_Camp__Building_Entry_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Interior__Building_Interior__Corner => Spot {
+            id: SpotId::Interior__Building_Interior__Corner,
+            locations: Range {
+                start: LocationId::Interior__Building_Interior__Corner__Urn.into_usize(),
+                end: LocationId::Interior__Building_Interior__Corner__Urn.into_usize() + 1,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Interior__Tent_Interior__Entry => Spot {
+            id: SpotId::Interior__Tent_Interior__Entry,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Interior__Tent_Interior__Entry__ex__Ebih__Base_Camp__Tent_Entry_1.into_usize(),
+                end: ExitId::Interior__Tent_Interior__Entry__ex__Ebih__Base_Camp__Tent_Entry_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Interior__Tent_Interior__Desk => Spot {
+            id: SpotId::Interior__Tent_Interior__Desk,
+            locations: Range {
+                start: LocationId::Interior__Tent_Interior__Desk__Note.into_usize(),
+                end: LocationId::Interior__Tent_Interior__Desk__Note.into_usize() + 1,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Interior__Garage__Entry => Spot {
+            id: SpotId::Interior__Garage__Entry,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Interior__Garage__Entry__ex__Ebih__By_Garage__Garage_Entry_1.into_usize(),
+                end: ExitId::Interior__Garage__Entry__ex__Ebih__By_Garage__Garage_Entry_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Interior__Garage__Boxes => Spot {
+            id: SpotId::Interior__Garage__Boxes,
+            locations: Range {
+                start: LocationId::Interior__Garage__Boxes__Under_Boxes.into_usize(),
+                end: LocationId::Interior__Garage__Boxes__Under_Boxes.into_usize() + 1,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Interior__Ebih_Cave__Entry => Spot {
+            id: SpotId::Interior__Ebih_Cave__Entry,
+            locations: Range {
+                start: LocationId::Interior__Ebih_Cave__Entry__Health.into_usize(),
+                end: LocationId::Interior__Ebih_Cave__Entry__Health.into_usize() + 1,
+            },
+            exits: Range {
+                start: ExitId::Interior__Ebih_Cave__Entry__ex__Ebih__Waterfall__Cave_Entrance_1.into_usize(),
+                end: ExitId::Interior__Ebih_Cave__Entry__ex__Ebih__Waterfall__Cave_Entrance_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Interior__Cave_Behind_Waterfall__Bottom => Spot {
+            id: SpotId::Interior__Cave_Behind_Waterfall__Bottom,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Interior__Cave_Behind_Waterfall__Bottom__ex__Amagi__Main_Area__Secret_Outcropping_1.into_usize(),
+                end: ExitId::Interior__Cave_Behind_Waterfall__Bottom__ex__Top_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Interior__Cave_Behind_Waterfall__Middle => Spot {
+            id: SpotId::Interior__Cave_Behind_Waterfall__Middle,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Interior__Cave_Behind_Waterfall__Middle__ex__Top_1.into_usize(),
+                end: ExitId::Interior__Cave_Behind_Waterfall__Middle__ex__Top_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: ActionId::Interior__Cave_Behind_Waterfall__Middle__Throw_Drone.into_usize(),
+                end: ActionId::Interior__Cave_Behind_Waterfall__Middle__Throw_Drone.into_usize() + 1,
+            },
+        },
+        SpotId::Interior__Cave_Behind_Waterfall__Top => Spot {
+            id: SpotId::Interior__Cave_Behind_Waterfall__Top,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Interior__Cave_Behind_Waterfall__Top__ex__Amagi__Main_Area__Secret_Waterfall_1.into_usize(),
+                end: ExitId::Interior__Cave_Behind_Waterfall__Top__ex__Amagi__Main_Area__Secret_Waterfall_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Interior__Outpost_Interior__Entry => Spot {
+            id: SpotId::Interior__Outpost_Interior__Entry,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Interior__Outpost_Interior__Entry__ex__Bookshelf_1.into_usize(),
+                end: ExitId::Interior__Outpost_Interior__Entry__ex__Giguna__Giguna_Base__Building_Entry_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Interior__Outpost_Interior__Bookshelf => Spot {
+            id: SpotId::Interior__Outpost_Interior__Bookshelf,
+            locations: Range {
+                start: LocationId::Interior__Outpost_Interior__Bookshelf__Note.into_usize(),
+                end: LocationId::Interior__Outpost_Interior__Bookshelf__Note.into_usize() + 1,
             },
             exits: Range {
                 start: 0, end: 0,

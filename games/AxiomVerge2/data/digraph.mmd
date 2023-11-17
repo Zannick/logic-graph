@@ -33,11 +33,6 @@ subgraph Amagi
         Amagi__Main_Area__Secret_Waterfall(Secret Waterfall);
         Amagi__Main_Area__Way_Off_To_The_Side(Way Off To The Side);
     end
-    subgraph Amagi__Cave_Behind_Waterfall[Cave Behind Waterfall]
-        Amagi__Cave_Behind_Waterfall__Bottom(Bottom);
-        Amagi__Cave_Behind_Waterfall__Middle(Middle);
-        Amagi__Cave_Behind_Waterfall__Top(Top);
-    end
     subgraph Amagi__Grid_31_19[Grid 31,19]
         Amagi__Grid_31_19__West(West);
         Amagi__Grid_31_19__East(East);
@@ -167,18 +162,6 @@ subgraph Ebih
         Ebih__Base_Camp__Left_Platform_Moved(Left Platform Moved);
         Ebih__Base_Camp__Top_Platform(Top Platform);
     end
-    subgraph Ebih__Bunker_Interior[Bunker Interior]
-        Ebih__Bunker_Interior__Entry(Entry);
-        Ebih__Bunker_Interior__Desk(Desk);
-    end
-    subgraph Ebih__Building_Interior[Building Interior]
-        Ebih__Building_Interior__Entry(Entry);
-        Ebih__Building_Interior__Corner(Corner);
-    end
-    subgraph Ebih__Tent_Interior[Tent Interior]
-        Ebih__Tent_Interior__Entry(Entry);
-        Ebih__Tent_Interior__Desk(Desk);
-    end
     subgraph Ebih__By_Garage[By Garage]
         Ebih__By_Garage__East_13(East 13);
         Ebih__By_Garage__East_Platform(East Platform);
@@ -194,10 +177,6 @@ subgraph Ebih
         Ebih__By_Garage__Garage_Entry(Garage Entry);
         Ebih__By_Garage__East_Below_Platforms(East Below Platforms);
         Ebih__By_Garage__East_12(East 12);
-    end
-    subgraph Ebih__Garage[Garage]
-        Ebih__Garage__Entry(Entry);
-        Ebih__Garage__Boxes(Boxes);
     end
     subgraph Ebih__Grid_25_10_12[Grid 25,10-12]
         Ebih__Grid_25_10_12__East_12(East 12);
@@ -292,9 +271,6 @@ subgraph Ebih
         Ebih__Ebih_West__West_12(West 12);
         Ebih__Ebih_West__West_13(West 13);
         Ebih__Ebih_West__East_13(East 13);
-    end
-    subgraph Ebih__Cave[Cave]
-        Ebih__Cave__Entry(Entry);
     end
     subgraph Ebih__Ebih_East[Ebih East]
         Ebih__Ebih_East__West_8(West 8);
@@ -605,10 +581,6 @@ subgraph Giguna
         Giguna__Giguna_Base__Switch_Distance_3(Switch Distance 3);
         Giguna__Giguna_Base__Switch_Distance_4(Switch Distance 4);
     end
-    subgraph Giguna__Building_Interior[Building Interior]
-        Giguna__Building_Interior__Entry(Entry);
-        Giguna__Building_Interior__Bookshelf(Bookshelf);
-    end
     subgraph Giguna__Ruins_East[Ruins East]
         Giguna__Ruins_East__East_9(East 9);
         Giguna__Ruins_East__Bottom_Rock(Bottom Rock);
@@ -893,14 +865,6 @@ subgraph Giguna
     end
 end
 subgraph Glacier
-    subgraph Glacier__Dock_Elevator[Dock Elevator]
-        Glacier__Dock_Elevator__Elevator(Elevator);
-        Glacier__Dock_Elevator__Connector(Connector);
-    end
-    subgraph Glacier__Dock_Interior[Dock Interior]
-        Glacier__Dock_Interior__Connector(Connector);
-        Glacier__Dock_Interior__Entry(Entry);
-    end
     subgraph Glacier__Dock_Outside[Dock Outside]
         Glacier__Dock_Outside__Entry(Entry);
         Glacier__Dock_Outside__Do_Not_Enter(Do Not Enter);
@@ -1025,6 +989,44 @@ subgraph Glacier
     subgraph Glacier__Apocalypse_Entry[Apocalypse Entry]
         Glacier__Apocalypse_Entry__West(West);
         Glacier__Apocalypse_Entry__Terminal(Terminal);
+    end
+end
+subgraph Interior
+    subgraph Interior__Dock_Elevator[Dock Elevator]
+        Interior__Dock_Elevator__Elevator(Elevator);
+        Interior__Dock_Elevator__Connector(Connector);
+    end
+    subgraph Interior__Dock_Interior[Dock Interior]
+        Interior__Dock_Interior__Connector(Connector);
+        Interior__Dock_Interior__Entry(Entry);
+    end
+    subgraph Interior__Bunker_Interior[Bunker Interior]
+        Interior__Bunker_Interior__Entry(Entry);
+        Interior__Bunker_Interior__Desk(Desk);
+    end
+    subgraph Interior__Building_Interior[Building Interior]
+        Interior__Building_Interior__Entry(Entry);
+        Interior__Building_Interior__Corner(Corner);
+    end
+    subgraph Interior__Tent_Interior[Tent Interior]
+        Interior__Tent_Interior__Entry(Entry);
+        Interior__Tent_Interior__Desk(Desk);
+    end
+    subgraph Interior__Garage[Garage]
+        Interior__Garage__Entry(Entry);
+        Interior__Garage__Boxes(Boxes);
+    end
+    subgraph Interior__Ebih_Cave[Ebih Cave]
+        Interior__Ebih_Cave__Entry(Entry);
+    end
+    subgraph Interior__Cave_Behind_Waterfall[Cave Behind Waterfall]
+        Interior__Cave_Behind_Waterfall__Bottom(Bottom);
+        Interior__Cave_Behind_Waterfall__Middle(Middle);
+        Interior__Cave_Behind_Waterfall__Top(Top);
+    end
+    subgraph Interior__Outpost_Interior[Outpost Interior]
+        Interior__Outpost_Interior__Entry(Entry);
+        Interior__Outpost_Interior__Bookshelf(Bookshelf);
     end
 end
 subgraph Irikar_Breach
@@ -1307,11 +1309,6 @@ subgraph Uhrum
         Uhrum__Save_Room__West(West);
     end
 end
-Amagi__Cave_Behind_Waterfall__Bottom --> Amagi__Cave_Behind_Waterfall__Middle
-Amagi__Cave_Behind_Waterfall__Bottom --> Amagi__Cave_Behind_Waterfall__Top
-Amagi__Cave_Behind_Waterfall__Bottom <--> Amagi__Main_Area__Secret_Outcropping
-Amagi__Cave_Behind_Waterfall__Middle --> Amagi__Cave_Behind_Waterfall__Top
-Amagi__Cave_Behind_Waterfall__Top <--> Amagi__Main_Area__Secret_Waterfall
 Amagi__Grid_31_19__East <--> Amagi__Liru_Room__West_19
 Amagi__Grid_31_19__West <--> Amagi__Main_Area__East_19
 Amagi__Liru_Room__Platform_4_Left <--> Amagi__Liru_Room__West_20
@@ -1323,6 +1320,8 @@ Amagi__Main_Area__Catwalk_Center --> Amagi__Main_Area__East_Ledge
 Amagi__Main_Area__Catwalk_Center --> Amagi__Main_Area__Platform_3
 Amagi__Main_Area__East_15 <--> Glacier__Lake_Main_Entrance__Lake_Access
 Amagi__Main_Area__Platform_2 --> Amagi__Main_Area__West_Shelf
+Amagi__Main_Area__Secret_Outcropping <--> Interior__Cave_Behind_Waterfall__Bottom
+Amagi__Main_Area__Secret_Waterfall <--> Interior__Cave_Behind_Waterfall__Top
 Amagi__Main_Area__Shallow_End --> Amagi__Main_Area__Waters_Edge
 Amagi__Main_Area__West_15 <--> Amagi__West_Lake__East_15
 Amagi__Main_Area__West_18 <--> Amagi__West_Lake__East_18
@@ -1351,12 +1350,12 @@ Antarctica__Building_2__Upper_Door <--> Antarctica__East__Building_2_Upper
 Antarctica__East__Building_1_Entry --> Antarctica__East__Building_2_Upper
 Antarctica__East__Building_2_Entry --> Antarctica__East__Building_2_Upper
 Antarctica__East__Building_2_Upper <--> Antarctica__Top__Power_Entry
-Antarctica__Freight_Elevator__Controls --> Glacier__Dock_Elevator__Elevator
+Antarctica__Freight_Elevator__Controls --> Interior__Dock_Elevator__Elevator
 Antarctica__Power_Room__Entry <--> Antarctica__Top__Power_Entry
 Antarctica__Shed__Interior <--> Antarctica__West__Shed_Entry
 Antarctica__West__Shed_Entry --> Antarctica__West__Helipad
-Ebih__Base_Camp__Building_Entry <--> Ebih__Building_Interior__Entry
-Ebih__Base_Camp__Bunker_Entry <--> Ebih__Bunker_Interior__Entry
+Ebih__Base_Camp__Building_Entry <--> Interior__Building_Interior__Entry
+Ebih__Base_Camp__Bunker_Entry <--> Interior__Bunker_Interior__Entry
 Ebih__Base_Camp__East_11 --> Ebih__Base_Camp__Top_Platform
 Ebih__Base_Camp__East_11 <--> Glacier__Grid_31_9_12__Midair
 Ebih__Base_Camp__East_12 <--> Glacier__Grid_31_9_12__West_12
@@ -1364,7 +1363,7 @@ Ebih__Base_Camp__Lake_Access <--> Glacier__Lake_Main_Entrance__Ebih_Access
 Ebih__Base_Camp__Left_Platform <--> Ebih__Base_Camp__Top_Platform
 Ebih__Base_Camp__Left_Platform_Moved <--> Ebih__Base_Camp__Top_Platform
 Ebih__Base_Camp__Save_Point --> Ebih__Base_Camp__Top_Platform
-Ebih__Base_Camp__Tent_Entry <--> Ebih__Tent_Interior__Entry
+Ebih__Base_Camp__Tent_Entry <--> Interior__Tent_Interior__Entry
 Ebih__Base_Camp__West_11 --> Ebih__Base_Camp__Left_Platform
 Ebih__Base_Camp__West_11 <--> Ebih__Observation_Tower_Room__East_11
 Ebih__Base_Camp__West_12 --> Ebih__By_Garage__East_12
@@ -1378,11 +1377,10 @@ Ebih__Boss_Room__West_6 <--> Ebih__Grid_21_2_6__East_6
 Ebih__By_Garage__Crawlspace <--> Ebih__By_Garage__Crawlspace_Opening
 Ebih__By_Garage__East_Platform --> Ebih__By_Garage__Crawlspace_Opening
 Ebih__By_Garage__East_Platform --> Ebih__By_Garage__Outcropping
-Ebih__By_Garage__Garage_Entry <--> Ebih__Garage__Entry
+Ebih__By_Garage__Garage_Entry <--> Interior__Garage__Entry
 Ebih__By_Garage__Lower_Platform --> Ebih__By_Garage__East_Bush
 Ebih__By_Garage__Lower_Platform --> Ebih__By_Garage__West_Bush
 Ebih__By_Garage__West_12 <--> Ebih__Grid_25_10_12__East_12
-Ebih__Cave__Entry <--> Ebih__Waterfall__Cave_Entrance
 Ebih__Drone_Room__East_4 <--> Ebih__Grid_25_2_6__West_4
 Ebih__Drone_Room__Middle_Platform --> Ebih__Drone_Room__Portal
 Ebih__Drone_Room__Middle_Platform --> Ebih__Drone_Room__Portal_Exit
@@ -1473,6 +1471,7 @@ Ebih__Waterfall__Alcove_Left --> Ebih__Waterfall__Waterfall_Center_Left
 Ebih__Waterfall__Alcove_Right --> Ebih__Waterfall__Waterfall_Center_Right
 Ebih__Waterfall__Below_Left_Switch <--> Ebih__Waterfall__Ledge_Below_Hole
 Ebih__Waterfall__Below_Tree --> Ebih__Waterfall__Big_Tree
+Ebih__Waterfall__Cave_Entrance <--> Interior__Ebih_Cave__Entry
 Ebih__Waterfall__Ledge_Below_Hole --> Ebih__Waterfall__Middle_West_Tree
 Ebih__Waterfall__Ledge_Below_Hole --> Ebih__Waterfall__West_Door_Right
 Ebih__Waterfall__Lower_West_Tree --> Ebih__Waterfall__West_Lower_Path
@@ -1533,8 +1532,6 @@ Giguna__Antechamber__West_15 --> Giguna__Antechamber__Small_Bricks
 Giguna__Antechamber__West_15 <--> Giguna__Gubi_Lair__East_15
 Giguna__Breachable_Wall__Above_West_Catwalk --> Irikar__Boss_Room__Above_Catwalk
 Giguna__Breachable_Wall__West_Mid_air <--> Irikar__East_Rooftops__East_Mid_air
-Giguna__Building_Interior__Entry --> Giguna__Building_Interior__Bookshelf
-Giguna__Building_Interior__Entry <--> Giguna__Giguna_Base__Building_Entry
 Giguna__Carnelian__Door <--> Giguna__Carnelian__Switch
 Giguna__Carnelian__Door <--> Giguna__Carnelian__Vault
 Giguna__Carnelian__East_10 <--> Giguna__Giguna_Northeast__West_10
@@ -1622,6 +1619,7 @@ Giguna__Gateway__Refill_Station --> Giguna__Gateway__Far_Ledge
 Giguna__Gateway__West_19 <--> Giguna__Labyrinth_East__East_19
 Giguna__Giguna_Base__Below_Gate <--> Giguna__Giguna_Base__Kari
 Giguna__Giguna_Base__Below_Gate <--> Giguna__Giguna_Base__Middle_Platform
+Giguna__Giguna_Base__Building_Entry <--> Interior__Outpost_Interior__Entry
 Giguna__Giguna_Base__East_14 <--> Giguna__Wasteland__West_14
 Giguna__Giguna_Base__East_17 <--> Giguna__Hard_Rock__West_17
 Giguna__Giguna_Base__Left_Pillar <--> Giguna__Giguna_Base__Right_Pillar
@@ -1731,9 +1729,8 @@ Glacier__Boomerang_Room__Pedestal --> Glacier__Boomerang_Room__Upper_Gate_East
 Glacier__Boomerang_Room__Platform <--> Glacier__Boomerang_Room__Upper_West
 Glacier__Compass_Room__East <--> Glacier__Grid_43_10_11__Lower
 Glacier__Compass_Room__West <--> Glacier__The_Big_Drop__East
-Glacier__Dock_Elevator__Connector <--> Glacier__Dock_Interior__Connector
-Glacier__Dock_Interior__Entry <--> Glacier__Dock_Outside__Entry
 Glacier__Dock_Outside__Do_Not_Enter <--> Glacier__Revival__East_9
+Glacier__Dock_Outside__Entry <--> Interior__Dock_Interior__Entry
 Glacier__Grid_31_9_12__East_10 --> Glacier__Grid_32_7_10__West_10
 Glacier__Grid_31_9_12__East_9 <--> Glacier__Grid_32_7_10__West_9
 Glacier__Grid_32_7_10__East_8 <--> Glacier__Peak__West_8
@@ -1778,6 +1775,11 @@ Glacier__Vertical_Room__Mid_9 --> Glacier__Vertical_Room__Peak
 Glacier__Vertical_Room__Past_Gate <--> Glacier__Vertical_Room__Under_Switch
 Glacier__Vertical_Room__Peak --> Glacier__Vertical_Room__West_8
 Glacier__Vertical_Room__Under_Switch --> Glacier__Vertical_Room__Mid_9
+Interior__Cave_Behind_Waterfall__Bottom --> Interior__Cave_Behind_Waterfall__Middle
+Interior__Cave_Behind_Waterfall__Bottom --> Interior__Cave_Behind_Waterfall__Top
+Interior__Cave_Behind_Waterfall__Middle --> Interior__Cave_Behind_Waterfall__Top
+Interior__Dock_Elevator__Connector <--> Interior__Dock_Interior__Connector
+Interior__Outpost_Interior__Entry --> Interior__Outpost_Interior__Bookshelf
 Irikar_Breach__Exit_Corridor__East --> Irikar_Breach__Uhrum_Connector__West
 Irikar_Breach__Exit_Corridor__North_12 --> Irikar_Breach__Exit_Corridor__Pillar
 Irikar_Breach__Exit_Corridor__North_12 <--> Irikar_Breach__Worm_Rave__South

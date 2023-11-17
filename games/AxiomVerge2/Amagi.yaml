@@ -139,7 +139,7 @@ areas:
         - to: Upper Platform
         - to: Shallow End
       exits:
-        - to: Cave Behind Waterfall > Bottom
+        - to: Interior > Cave Behind Waterfall > Bottom
           tags: [interior]
 
     - name: Platform 3
@@ -273,7 +273,7 @@ areas:
         - to: Way Off To The Side
           jumps: 1
       exits:
-        - to: Cave Behind Waterfall > Top
+        - to: Interior > Cave Behind Waterfall > Top
           tags: [interior]
     - name: Way Off To The Side
       coord: [30.4, 13.3]
@@ -285,47 +285,6 @@ areas:
         - name: Item
           item: Flask
           tags: [flask]
-
-- name: Cave Behind Waterfall
-  graph_offset: [0, 60]
-  on_entry: $reset_old_area(^newpos)
-  data:
-    water: false
-  spots:
-    - name: Bottom
-      coord: [27.55, 14.15]
-      exits:
-        - to: Main Area > Secret Outcropping
-          tags: [exterior]
-        - to: Middle
-          req: $grab or $climb
-          time: 2
-        - to: Top
-          req: $hook
-          time: 1.8
-    - name: Middle
-      coord: [27.575, 13.6]
-      local:
-        - to: Bottom
-          thru: [27.6, 13.8]
-      exits:
-        - to: Top
-          req: $grab or $climb
-      actions:
-        - name: Throw Drone
-          req: $can_deploy
-          do: $deploy_drone
-          to: Amagi > Cave Behind Waterfall > Top
-          time: 1.1
-    - name: Top
-      coord: [27.4, 13.35]
-      local:
-        - to: Middle
-        - to: Bottom
-          thru: [27.6, 13.8]
-      exits:
-        - to: Main Area > Secret Waterfall
-          tags: [exterior]
 
 - name: Grid 31,19
   on_entry: $reset_old_area(^newpos)

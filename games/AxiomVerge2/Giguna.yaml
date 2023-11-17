@@ -857,7 +857,7 @@ areas:
         - name: Throw Drone
           req: $can_deploy
           do: $deploy_drone_and_move(`Giguna > Giguna Base > Kari`)
-          to: Giguna > Giguna Base > Upper Cliff
+          to: Upper Cliff
     - name: Upper Cliff
       coord: [14.25, 13.55]
       local:
@@ -940,7 +940,7 @@ areas:
           jumps_down: 1
         - to: Kari
       exits:
-        - to: Building Interior > Entry
+        - to: Interior > Outpost Interior > Entry
           tags: [interior]
     - name: Staircase Top
       coord: [13.35, 14.75]
@@ -1108,34 +1108,6 @@ areas:
           req: $open and $range3
           do: ^_door_open = true
           tags: [hack]
-
-- name: Building Interior
-  graph_offset: [0, 60]
-  on_entry: $reset_old_area(^newpos)
-  spots:
-    - name: Entry
-      coord: [14.1, 15.5]
-      local:
-        - to: Bookshelf
-          jumps: 3
-      exits:
-        - to: Bookshelf
-          req: $grab or $climb
-          time: 1.35
-        - to: Bookshelf
-          req: $hook
-          time: 1
-        - to: Giguna Base > Building Entry
-          tags: [exterior]
-    - name: Bookshelf
-      coord: [13.85, 15.0]
-      local:
-        - to: Entry
-          jumps_down: 2
-      locations:
-        - name: Note
-          item: Letter_from_Trace
-          tags: [standing]
 
 - name: Ruins East
   on_entry: $reset_old_area(^newpos)

@@ -303,7 +303,7 @@ helpers:
 
   $mist2: Nanite_Mist and Mist_Upgrade
 
-  $ft_main: Fast_Travel and NOT WITHIN `Menu` and NOT ^breach
+  $ft_main: Fast_Travel and NOT WITHIN `Menu` and NOT WITHIN `Interior` and NOT ^breach
   $ft_breach: Fast_Travel and NOT WITHIN `Menu` and ^breach
 
   # shockwave range: ~.2 in width (.35 height)

@@ -31,23 +31,6 @@ pub fn get_movement_state(ctx: &Context) -> MovementState {
 
 pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotId) -> u32 {
     match (movement_state, src, dest) {
-        // [0.2, 0.35]
-        (
-            [false],
-            SpotId::Amagi__Cave_Behind_Waterfall__Middle,
-            SpotId::Amagi__Cave_Behind_Waterfall__Bottom,
-        ) => 550,
-        // [0.701754, 0.35]
-        (
-            [false],
-            SpotId::Amagi__Cave_Behind_Waterfall__Top,
-            SpotId::Amagi__Cave_Behind_Waterfall__Bottom,
-        ) => 1051,
-        (
-            [false],
-            SpotId::Amagi__Cave_Behind_Waterfall__Top,
-            SpotId::Amagi__Cave_Behind_Waterfall__Middle,
-        ) => 614,
         ([false], SpotId::Amagi__Grid_31_19__East, SpotId::Amagi__Grid_31_19__West) => 4054,
         ([false], SpotId::Amagi__Grid_31_19__West, SpotId::Amagi__Grid_31_19__East) => 4054,
         ([false], SpotId::Amagi__Liru_Room__Bottom, SpotId::Amagi__Liru_Room__Shrine) => 2252,
@@ -924,22 +907,6 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
         ([false], SpotId::Ebih__Boss_Room__West_6, SpotId::Ebih__Boss_Room__Past_Boss) => 3684,
         (
             [false],
-            SpotId::Ebih__Building_Interior__Corner,
-            SpotId::Ebih__Building_Interior__Entry,
-        ) => 1578,
-        (
-            [false],
-            SpotId::Ebih__Building_Interior__Entry,
-            SpotId::Ebih__Building_Interior__Corner,
-        ) => 1578,
-        ([false], SpotId::Ebih__Bunker_Interior__Desk, SpotId::Ebih__Bunker_Interior__Entry) => {
-            1052
-        }
-        ([false], SpotId::Ebih__Bunker_Interior__Entry, SpotId::Ebih__Bunker_Interior__Desk) => {
-            1052
-        }
-        (
-            [false],
             SpotId::Ebih__By_Garage__Crawlspace_Opening,
             SpotId::Ebih__By_Garage__East_13,
         ) => 1929,
@@ -1413,8 +1380,6 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
         ([false], SpotId::Ebih__Ebih_West__West_High_Cliff, SpotId::Ebih__Ebih_West__West_Fork) => {
             877
         }
-        ([false], SpotId::Ebih__Garage__Boxes, SpotId::Ebih__Garage__Entry) => 1228,
-        ([false], SpotId::Ebih__Garage__Entry, SpotId::Ebih__Garage__Boxes) => 1228,
         ([false], SpotId::Ebih__Grid_21_2_6__East_6, SpotId::Ebih__Grid_21_2_6__Portal_Stand) => {
             1578
         }
@@ -1646,8 +1611,6 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
             SpotId::Ebih__Observation_Tower_Room__West_9,
             SpotId::Ebih__Observation_Tower_Room__West_10,
         ) => 2456,
-        ([false], SpotId::Ebih__Tent_Interior__Desk, SpotId::Ebih__Tent_Interior__Entry) => 263,
-        ([false], SpotId::Ebih__Tent_Interior__Entry, SpotId::Ebih__Tent_Interior__Desk) => 263,
         (
             [false],
             SpotId::Ebih__Vertical_Interchange__Below_Door,
@@ -2609,16 +2572,6 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
             SpotId::Giguna__Breachable_Wall__West_Mid_air,
             SpotId::Giguna__Breachable_Wall__Above_West_Catwalk,
         ) => 1754,
-        (
-            [false],
-            SpotId::Giguna__Building_Interior__Bookshelf,
-            SpotId::Giguna__Building_Interior__Entry,
-        ) => 877,
-        (
-            [false],
-            SpotId::Giguna__Building_Interior__Entry,
-            SpotId::Giguna__Building_Interior__Bookshelf,
-        ) => 1799,
         ([false], SpotId::Giguna__Carnelian__East_10, SpotId::Giguna__Carnelian__East_Cliff) => {
             2105
         }
@@ -4660,26 +4613,6 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
         }
         (
             [false],
-            SpotId::Glacier__Dock_Elevator__Connector,
-            SpotId::Glacier__Dock_Elevator__Elevator,
-        ) => 1578,
-        (
-            [false],
-            SpotId::Glacier__Dock_Elevator__Elevator,
-            SpotId::Glacier__Dock_Elevator__Connector,
-        ) => 1578,
-        (
-            [false],
-            SpotId::Glacier__Dock_Interior__Connector,
-            SpotId::Glacier__Dock_Interior__Entry,
-        ) => 1578,
-        (
-            [false],
-            SpotId::Glacier__Dock_Interior__Entry,
-            SpotId::Glacier__Dock_Interior__Connector,
-        ) => 1799,
-        (
-            [false],
             SpotId::Glacier__Dock_Outside__Do_Not_Enter,
             SpotId::Glacier__Dock_Outside__Entry,
         ) => 5000,
@@ -5317,6 +5250,85 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
             SpotId::Glacier__Vertical_Room__West_9,
             SpotId::Glacier__Vertical_Room__Under_Switch,
         ) => 1949,
+        (
+            [false],
+            SpotId::Interior__Building_Interior__Corner,
+            SpotId::Interior__Building_Interior__Entry,
+        ) => 1578,
+        (
+            [false],
+            SpotId::Interior__Building_Interior__Entry,
+            SpotId::Interior__Building_Interior__Corner,
+        ) => 1578,
+        (
+            [false],
+            SpotId::Interior__Bunker_Interior__Desk,
+            SpotId::Interior__Bunker_Interior__Entry,
+        ) => 1052,
+        (
+            [false],
+            SpotId::Interior__Bunker_Interior__Entry,
+            SpotId::Interior__Bunker_Interior__Desk,
+        ) => 1052,
+        // [0.2, 0.35]
+        (
+            [false],
+            SpotId::Interior__Cave_Behind_Waterfall__Middle,
+            SpotId::Interior__Cave_Behind_Waterfall__Bottom,
+        ) => 550,
+        // [0.701754, 0.35]
+        (
+            [false],
+            SpotId::Interior__Cave_Behind_Waterfall__Top,
+            SpotId::Interior__Cave_Behind_Waterfall__Bottom,
+        ) => 1051,
+        (
+            [false],
+            SpotId::Interior__Cave_Behind_Waterfall__Top,
+            SpotId::Interior__Cave_Behind_Waterfall__Middle,
+        ) => 614,
+        (
+            [false],
+            SpotId::Interior__Dock_Elevator__Connector,
+            SpotId::Interior__Dock_Elevator__Elevator,
+        ) => 1578,
+        (
+            [false],
+            SpotId::Interior__Dock_Elevator__Elevator,
+            SpotId::Interior__Dock_Elevator__Connector,
+        ) => 1578,
+        (
+            [false],
+            SpotId::Interior__Dock_Interior__Connector,
+            SpotId::Interior__Dock_Interior__Entry,
+        ) => 1578,
+        (
+            [false],
+            SpotId::Interior__Dock_Interior__Entry,
+            SpotId::Interior__Dock_Interior__Connector,
+        ) => 1799,
+        ([false], SpotId::Interior__Garage__Boxes, SpotId::Interior__Garage__Entry) => 1228,
+        ([false], SpotId::Interior__Garage__Entry, SpotId::Interior__Garage__Boxes) => 1228,
+        (
+            [false],
+            SpotId::Interior__Outpost_Interior__Bookshelf,
+            SpotId::Interior__Outpost_Interior__Entry,
+        ) => 877,
+        (
+            [false],
+            SpotId::Interior__Outpost_Interior__Entry,
+            SpotId::Interior__Outpost_Interior__Bookshelf,
+        ) => 1799,
+        (
+            [false],
+            SpotId::Interior__Tent_Interior__Desk,
+            SpotId::Interior__Tent_Interior__Entry,
+        ) => 263,
+        (
+            [false],
+            SpotId::Interior__Tent_Interior__Entry,
+            SpotId::Interior__Tent_Interior__Desk,
+        ) => 263,
         (
             [false],
             SpotId::Irikar_Breach__Exit_Corridor__East,
@@ -6906,23 +6918,6 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
             SpotId::Uhrum__West_Entrance__West_of_Gate,
             SpotId::Uhrum__West_Entrance__Portal_Stand,
         ) => 438,
-        // [0.2, 0.35]
-        (
-            [true],
-            SpotId::Amagi__Cave_Behind_Waterfall__Middle,
-            SpotId::Amagi__Cave_Behind_Waterfall__Bottom,
-        ) => 550,
-        // [0.701754, 0.35]
-        (
-            [true],
-            SpotId::Amagi__Cave_Behind_Waterfall__Top,
-            SpotId::Amagi__Cave_Behind_Waterfall__Bottom,
-        ) => 1051,
-        (
-            [true],
-            SpotId::Amagi__Cave_Behind_Waterfall__Top,
-            SpotId::Amagi__Cave_Behind_Waterfall__Middle,
-        ) => 614,
         ([true], SpotId::Amagi__Grid_31_19__East, SpotId::Amagi__Grid_31_19__West) => 3157,
         ([true], SpotId::Amagi__Grid_31_19__West, SpotId::Amagi__Grid_31_19__East) => 3157,
         ([true], SpotId::Amagi__Liru_Room__Bottom, SpotId::Amagi__Liru_Room__Platform_4_Right) => {
@@ -7940,18 +7935,6 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
         ([true], SpotId::Ebih__Boss_Room__West_5, SpotId::Ebih__Boss_Room__West_6) => 1500,
         ([true], SpotId::Ebih__Boss_Room__West_6, SpotId::Ebih__Boss_Room__Boss) => 2631,
         ([true], SpotId::Ebih__Boss_Room__West_6, SpotId::Ebih__Boss_Room__Past_Boss) => 3684,
-        (
-            [true],
-            SpotId::Ebih__Building_Interior__Corner,
-            SpotId::Ebih__Building_Interior__Entry,
-        ) => 1578,
-        (
-            [true],
-            SpotId::Ebih__Building_Interior__Entry,
-            SpotId::Ebih__Building_Interior__Corner,
-        ) => 1578,
-        ([true], SpotId::Ebih__Bunker_Interior__Desk, SpotId::Ebih__Bunker_Interior__Entry) => 1052,
-        ([true], SpotId::Ebih__Bunker_Interior__Entry, SpotId::Ebih__Bunker_Interior__Desk) => 1052,
         ([true], SpotId::Ebih__By_Garage__Crawlspace_Opening, SpotId::Ebih__By_Garage__East_13) => {
             1929
         }
@@ -8367,8 +8350,6 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
         ([true], SpotId::Ebih__Ebih_West__West_High_Cliff, SpotId::Ebih__Ebih_West__West_Fork) => {
             877
         }
-        ([true], SpotId::Ebih__Garage__Boxes, SpotId::Ebih__Garage__Entry) => 1228,
-        ([true], SpotId::Ebih__Garage__Entry, SpotId::Ebih__Garage__Boxes) => 1228,
         ([true], SpotId::Ebih__Grid_21_2_6__East_6, SpotId::Ebih__Grid_21_2_6__Portal_Stand) => {
             1578
         }
@@ -8592,8 +8573,6 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
             SpotId::Ebih__Observation_Tower_Room__West_9,
             SpotId::Ebih__Observation_Tower_Room__West_10,
         ) => 2456,
-        ([true], SpotId::Ebih__Tent_Interior__Desk, SpotId::Ebih__Tent_Interior__Entry) => 263,
-        ([true], SpotId::Ebih__Tent_Interior__Entry, SpotId::Ebih__Tent_Interior__Desk) => 263,
         (
             [true],
             SpotId::Ebih__Vertical_Interchange__Below_Door,
@@ -9529,16 +9508,6 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
             SpotId::Giguna__Breachable_Wall__West_Mid_air,
             SpotId::Giguna__Breachable_Wall__Above_West_Catwalk,
         ) => 1754,
-        (
-            [true],
-            SpotId::Giguna__Building_Interior__Bookshelf,
-            SpotId::Giguna__Building_Interior__Entry,
-        ) => 877,
-        (
-            [true],
-            SpotId::Giguna__Building_Interior__Entry,
-            SpotId::Giguna__Building_Interior__Bookshelf,
-        ) => 1799,
         ([true], SpotId::Giguna__Carnelian__East_10, SpotId::Giguna__Carnelian__East_Cliff) => 2105,
         ([true], SpotId::Giguna__Carnelian__East_Cliff, SpotId::Giguna__Carnelian__East_10) => 2105,
         (
@@ -11508,26 +11477,6 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
         }
         (
             [true],
-            SpotId::Glacier__Dock_Elevator__Connector,
-            SpotId::Glacier__Dock_Elevator__Elevator,
-        ) => 1578,
-        (
-            [true],
-            SpotId::Glacier__Dock_Elevator__Elevator,
-            SpotId::Glacier__Dock_Elevator__Connector,
-        ) => 1578,
-        (
-            [true],
-            SpotId::Glacier__Dock_Interior__Connector,
-            SpotId::Glacier__Dock_Interior__Entry,
-        ) => 1578,
-        (
-            [true],
-            SpotId::Glacier__Dock_Interior__Entry,
-            SpotId::Glacier__Dock_Interior__Connector,
-        ) => 1799,
-        (
-            [true],
             SpotId::Glacier__Dock_Outside__Do_Not_Enter,
             SpotId::Glacier__Dock_Outside__Entry,
         ) => 5000,
@@ -12137,6 +12086,81 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
             SpotId::Glacier__Vertical_Room__West_9,
             SpotId::Glacier__Vertical_Room__Under_Switch,
         ) => 1949,
+        (
+            [true],
+            SpotId::Interior__Building_Interior__Corner,
+            SpotId::Interior__Building_Interior__Entry,
+        ) => 1578,
+        (
+            [true],
+            SpotId::Interior__Building_Interior__Entry,
+            SpotId::Interior__Building_Interior__Corner,
+        ) => 1578,
+        (
+            [true],
+            SpotId::Interior__Bunker_Interior__Desk,
+            SpotId::Interior__Bunker_Interior__Entry,
+        ) => 1052,
+        (
+            [true],
+            SpotId::Interior__Bunker_Interior__Entry,
+            SpotId::Interior__Bunker_Interior__Desk,
+        ) => 1052,
+        // [0.2, 0.35]
+        (
+            [true],
+            SpotId::Interior__Cave_Behind_Waterfall__Middle,
+            SpotId::Interior__Cave_Behind_Waterfall__Bottom,
+        ) => 550,
+        // [0.701754, 0.35]
+        (
+            [true],
+            SpotId::Interior__Cave_Behind_Waterfall__Top,
+            SpotId::Interior__Cave_Behind_Waterfall__Bottom,
+        ) => 1051,
+        (
+            [true],
+            SpotId::Interior__Cave_Behind_Waterfall__Top,
+            SpotId::Interior__Cave_Behind_Waterfall__Middle,
+        ) => 614,
+        (
+            [true],
+            SpotId::Interior__Dock_Elevator__Connector,
+            SpotId::Interior__Dock_Elevator__Elevator,
+        ) => 1578,
+        (
+            [true],
+            SpotId::Interior__Dock_Elevator__Elevator,
+            SpotId::Interior__Dock_Elevator__Connector,
+        ) => 1578,
+        (
+            [true],
+            SpotId::Interior__Dock_Interior__Connector,
+            SpotId::Interior__Dock_Interior__Entry,
+        ) => 1578,
+        (
+            [true],
+            SpotId::Interior__Dock_Interior__Entry,
+            SpotId::Interior__Dock_Interior__Connector,
+        ) => 1799,
+        ([true], SpotId::Interior__Garage__Boxes, SpotId::Interior__Garage__Entry) => 1228,
+        ([true], SpotId::Interior__Garage__Entry, SpotId::Interior__Garage__Boxes) => 1228,
+        (
+            [true],
+            SpotId::Interior__Outpost_Interior__Bookshelf,
+            SpotId::Interior__Outpost_Interior__Entry,
+        ) => 877,
+        (
+            [true],
+            SpotId::Interior__Outpost_Interior__Entry,
+            SpotId::Interior__Outpost_Interior__Bookshelf,
+        ) => 1799,
+        ([true], SpotId::Interior__Tent_Interior__Desk, SpotId::Interior__Tent_Interior__Entry) => {
+            263
+        }
+        ([true], SpotId::Interior__Tent_Interior__Entry, SpotId::Interior__Tent_Interior__Desk) => {
+            263
+        }
         (
             [true],
             SpotId::Irikar_Breach__Exit_Corridor__East,
@@ -13789,18 +13813,6 @@ pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
             SpotId::Amagi__Main_Area__Way_Off_To_The_Side,
             SpotId::Amagi__Main_Area__Secret_Waterfall,
         ) => true,
-        (
-            SpotId::Amagi__Cave_Behind_Waterfall__Middle,
-            SpotId::Amagi__Cave_Behind_Waterfall__Bottom,
-        ) => true,
-        (
-            SpotId::Amagi__Cave_Behind_Waterfall__Top,
-            SpotId::Amagi__Cave_Behind_Waterfall__Middle,
-        ) => true,
-        (
-            SpotId::Amagi__Cave_Behind_Waterfall__Top,
-            SpotId::Amagi__Cave_Behind_Waterfall__Bottom,
-        ) => true,
         (SpotId::Amagi__Grid_31_19__West, SpotId::Amagi__Grid_31_19__East) => true,
         (SpotId::Amagi__Grid_31_19__East, SpotId::Amagi__Grid_31_19__West) => true,
         (SpotId::Amagi__Liru_Room__West_19, SpotId::Amagi__Liru_Room__Hidden_Enemies) => true,
@@ -14241,12 +14253,6 @@ pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
         (SpotId::Ebih__Base_Camp__Top_Platform, SpotId::Ebih__Base_Camp__Save_Point) => true,
         (SpotId::Ebih__Base_Camp__Top_Platform, SpotId::Ebih__Base_Camp__Bunker_Entry) => true,
         (SpotId::Ebih__Base_Camp__Top_Platform, SpotId::Ebih__Base_Camp__Staircase) => true,
-        (SpotId::Ebih__Bunker_Interior__Entry, SpotId::Ebih__Bunker_Interior__Desk) => true,
-        (SpotId::Ebih__Bunker_Interior__Desk, SpotId::Ebih__Bunker_Interior__Entry) => true,
-        (SpotId::Ebih__Building_Interior__Entry, SpotId::Ebih__Building_Interior__Corner) => true,
-        (SpotId::Ebih__Building_Interior__Corner, SpotId::Ebih__Building_Interior__Entry) => true,
-        (SpotId::Ebih__Tent_Interior__Entry, SpotId::Ebih__Tent_Interior__Desk) => true,
-        (SpotId::Ebih__Tent_Interior__Desk, SpotId::Ebih__Tent_Interior__Entry) => true,
         (SpotId::Ebih__By_Garage__East_13, SpotId::Ebih__By_Garage__East_Platform) => true,
         (SpotId::Ebih__By_Garage__East_13, SpotId::Ebih__By_Garage__Garage_Entry) => true,
         (SpotId::Ebih__By_Garage__East_Platform, SpotId::Ebih__By_Garage__Garage_Entry) => true,
@@ -14290,8 +14296,6 @@ pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
             true
         }
         (SpotId::Ebih__By_Garage__East_12, SpotId::Ebih__By_Garage__East_Platform) => true,
-        (SpotId::Ebih__Garage__Entry, SpotId::Ebih__Garage__Boxes) => true,
-        (SpotId::Ebih__Garage__Boxes, SpotId::Ebih__Garage__Entry) => true,
         (SpotId::Ebih__Grid_25_10_12__East_12, SpotId::Ebih__Grid_25_10_12__Bush) => true,
         (SpotId::Ebih__Grid_25_10_12__Bush, SpotId::Ebih__Grid_25_10_12__East_12) => true,
         (SpotId::Ebih__Grid_25_10_12__Bush, SpotId::Ebih__Grid_25_10_12__Below_Bush) => true,
@@ -15519,14 +15523,6 @@ pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
             SpotId::Giguna__Giguna_Base__Switch_Distance_4,
             SpotId::Giguna__Giguna_Base__Lower_Fork,
         ) => true,
-        (
-            SpotId::Giguna__Building_Interior__Entry,
-            SpotId::Giguna__Building_Interior__Bookshelf,
-        ) => true,
-        (
-            SpotId::Giguna__Building_Interior__Bookshelf,
-            SpotId::Giguna__Building_Interior__Entry,
-        ) => true,
         (SpotId::Giguna__Ruins_East__East_9, SpotId::Giguna__Ruins_East__Bottom_Rock) => true,
         (SpotId::Giguna__Ruins_East__Bottom_Rock, SpotId::Giguna__Ruins_East__East_9) => true,
         (SpotId::Giguna__Ruins_East__Bottom_Rock, SpotId::Giguna__Ruins_East__West_9) => true,
@@ -16193,14 +16189,6 @@ pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
             SpotId::Giguna__Breachable_Wall__West_Mid_air,
             SpotId::Giguna__Breachable_Wall__Above_West_Catwalk,
         ) => true,
-        (SpotId::Glacier__Dock_Elevator__Elevator, SpotId::Glacier__Dock_Elevator__Connector) => {
-            true
-        }
-        (SpotId::Glacier__Dock_Elevator__Connector, SpotId::Glacier__Dock_Elevator__Elevator) => {
-            true
-        }
-        (SpotId::Glacier__Dock_Interior__Connector, SpotId::Glacier__Dock_Interior__Entry) => true,
-        (SpotId::Glacier__Dock_Interior__Entry, SpotId::Glacier__Dock_Interior__Connector) => true,
         (SpotId::Glacier__Dock_Outside__Entry, SpotId::Glacier__Dock_Outside__Do_Not_Enter) => true,
         (SpotId::Glacier__Dock_Outside__Do_Not_Enter, SpotId::Glacier__Dock_Outside__Entry) => true,
         (SpotId::Glacier__Revival__East_9, SpotId::Glacier__Revival__Overhang) => true,
@@ -16653,6 +16641,52 @@ pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
         (SpotId::Glacier__Apocalypse_Entry__Terminal, SpotId::Glacier__Apocalypse_Entry__West) => {
             true
         }
+        (SpotId::Interior__Dock_Elevator__Elevator, SpotId::Interior__Dock_Elevator__Connector) => {
+            true
+        }
+        (SpotId::Interior__Dock_Elevator__Connector, SpotId::Interior__Dock_Elevator__Elevator) => {
+            true
+        }
+        (SpotId::Interior__Dock_Interior__Connector, SpotId::Interior__Dock_Interior__Entry) => {
+            true
+        }
+        (SpotId::Interior__Dock_Interior__Entry, SpotId::Interior__Dock_Interior__Connector) => {
+            true
+        }
+        (SpotId::Interior__Bunker_Interior__Entry, SpotId::Interior__Bunker_Interior__Desk) => true,
+        (SpotId::Interior__Bunker_Interior__Desk, SpotId::Interior__Bunker_Interior__Entry) => true,
+        (
+            SpotId::Interior__Building_Interior__Entry,
+            SpotId::Interior__Building_Interior__Corner,
+        ) => true,
+        (
+            SpotId::Interior__Building_Interior__Corner,
+            SpotId::Interior__Building_Interior__Entry,
+        ) => true,
+        (SpotId::Interior__Tent_Interior__Entry, SpotId::Interior__Tent_Interior__Desk) => true,
+        (SpotId::Interior__Tent_Interior__Desk, SpotId::Interior__Tent_Interior__Entry) => true,
+        (SpotId::Interior__Garage__Entry, SpotId::Interior__Garage__Boxes) => true,
+        (SpotId::Interior__Garage__Boxes, SpotId::Interior__Garage__Entry) => true,
+        (
+            SpotId::Interior__Cave_Behind_Waterfall__Middle,
+            SpotId::Interior__Cave_Behind_Waterfall__Bottom,
+        ) => true,
+        (
+            SpotId::Interior__Cave_Behind_Waterfall__Top,
+            SpotId::Interior__Cave_Behind_Waterfall__Middle,
+        ) => true,
+        (
+            SpotId::Interior__Cave_Behind_Waterfall__Top,
+            SpotId::Interior__Cave_Behind_Waterfall__Bottom,
+        ) => true,
+        (
+            SpotId::Interior__Outpost_Interior__Entry,
+            SpotId::Interior__Outpost_Interior__Bookshelf,
+        ) => true,
+        (
+            SpotId::Interior__Outpost_Interior__Bookshelf,
+            SpotId::Interior__Outpost_Interior__Entry,
+        ) => true,
         (SpotId::Irikar_Breach__Save_Room__Save_Point, SpotId::Irikar_Breach__Save_Room__West) => {
             true
         }
@@ -17700,61 +17734,6 @@ pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
 pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
     vec![
         (
-            SpotId::Amagi__Cave_Behind_Waterfall__Bottom,
-            SpotId::Amagi__Cave_Behind_Waterfall__Middle,
-            2000,
-        ),
-        (
-            SpotId::Amagi__Cave_Behind_Waterfall__Bottom,
-            SpotId::Amagi__Cave_Behind_Waterfall__Top,
-            1800,
-        ),
-        (
-            SpotId::Amagi__Cave_Behind_Waterfall__Bottom,
-            SpotId::Amagi__Main_Area__Secret_Outcropping,
-            750,
-        ),
-        (
-            SpotId::Amagi__Cave_Behind_Waterfall__Bottom,
-            SpotId::Menu__Upgrade_Menu__Physiology,
-            1000,
-        ),
-        (
-            SpotId::Amagi__Cave_Behind_Waterfall__Middle,
-            SpotId::Amagi__Cave_Behind_Waterfall__Bottom,
-            550,
-        ),
-        (
-            SpotId::Amagi__Cave_Behind_Waterfall__Middle,
-            SpotId::Amagi__Cave_Behind_Waterfall__Top,
-            1000,
-        ),
-        (
-            SpotId::Amagi__Cave_Behind_Waterfall__Middle,
-            SpotId::Menu__Upgrade_Menu__Physiology,
-            1000,
-        ),
-        (
-            SpotId::Amagi__Cave_Behind_Waterfall__Top,
-            SpotId::Amagi__Cave_Behind_Waterfall__Bottom,
-            1051,
-        ),
-        (
-            SpotId::Amagi__Cave_Behind_Waterfall__Top,
-            SpotId::Amagi__Cave_Behind_Waterfall__Middle,
-            614,
-        ),
-        (
-            SpotId::Amagi__Cave_Behind_Waterfall__Top,
-            SpotId::Amagi__Main_Area__Secret_Waterfall,
-            750,
-        ),
-        (
-            SpotId::Amagi__Cave_Behind_Waterfall__Top,
-            SpotId::Menu__Upgrade_Menu__Physiology,
-            1000,
-        ),
-        (
             SpotId::Amagi__Grid_31_19__East,
             SpotId::Amagi__Grid_31_19__West,
             3157,
@@ -18426,11 +18405,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Amagi__Main_Area__Secret_Outcropping,
-            SpotId::Amagi__Cave_Behind_Waterfall__Bottom,
-            750,
-        ),
-        (
-            SpotId::Amagi__Main_Area__Secret_Outcropping,
             SpotId::Amagi__Main_Area__Carving,
             1403,
         ),
@@ -18451,18 +18425,23 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Amagi__Main_Area__Secret_Outcropping,
+            SpotId::Interior__Cave_Behind_Waterfall__Bottom,
+            750,
+        ),
+        (
+            SpotId::Amagi__Main_Area__Secret_Outcropping,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
         (
             SpotId::Amagi__Main_Area__Secret_Waterfall,
-            SpotId::Amagi__Cave_Behind_Waterfall__Top,
-            750,
+            SpotId::Amagi__Main_Area__Way_Off_To_The_Side,
+            10526,
         ),
         (
             SpotId::Amagi__Main_Area__Secret_Waterfall,
-            SpotId::Amagi__Main_Area__Way_Off_To_The_Side,
-            10526,
+            SpotId::Interior__Cave_Behind_Waterfall__Top,
+            750,
         ),
         (
             SpotId::Amagi__Main_Area__Secret_Waterfall,
@@ -19696,7 +19675,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Antarctica__Freight_Elevator__Controls,
-            SpotId::Glacier__Dock_Elevator__Elevator,
+            SpotId::Interior__Dock_Elevator__Elevator,
             15000,
         ),
         (
@@ -19856,7 +19835,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Ebih__Base_Camp__Building_Entry,
-            SpotId::Ebih__Building_Interior__Entry,
+            SpotId::Interior__Building_Interior__Entry,
             750,
         ),
         (
@@ -19881,7 +19860,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Ebih__Base_Camp__Bunker_Entry,
-            SpotId::Ebih__Bunker_Interior__Entry,
+            SpotId::Interior__Bunker_Interior__Entry,
             750,
         ),
         (
@@ -20056,7 +20035,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Ebih__Base_Camp__Tent_Entry,
-            SpotId::Ebih__Tent_Interior__Entry,
+            SpotId::Interior__Tent_Interior__Entry,
             500,
         ),
         (
@@ -20395,56 +20374,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             1000,
         ),
         (
-            SpotId::Ebih__Building_Interior__Corner,
-            SpotId::Ebih__Building_Interior__Entry,
-            1578,
-        ),
-        (
-            SpotId::Ebih__Building_Interior__Corner,
-            SpotId::Menu__Upgrade_Menu__Physiology,
-            1000,
-        ),
-        (
-            SpotId::Ebih__Building_Interior__Entry,
-            SpotId::Ebih__Base_Camp__Building_Entry,
-            750,
-        ),
-        (
-            SpotId::Ebih__Building_Interior__Entry,
-            SpotId::Ebih__Building_Interior__Corner,
-            1578,
-        ),
-        (
-            SpotId::Ebih__Building_Interior__Entry,
-            SpotId::Menu__Upgrade_Menu__Physiology,
-            1000,
-        ),
-        (
-            SpotId::Ebih__Bunker_Interior__Desk,
-            SpotId::Ebih__Bunker_Interior__Entry,
-            1052,
-        ),
-        (
-            SpotId::Ebih__Bunker_Interior__Desk,
-            SpotId::Menu__Upgrade_Menu__Physiology,
-            1000,
-        ),
-        (
-            SpotId::Ebih__Bunker_Interior__Entry,
-            SpotId::Ebih__Base_Camp__Bunker_Entry,
-            750,
-        ),
-        (
-            SpotId::Ebih__Bunker_Interior__Entry,
-            SpotId::Ebih__Bunker_Interior__Desk,
-            1052,
-        ),
-        (
-            SpotId::Ebih__Bunker_Interior__Entry,
-            SpotId::Menu__Upgrade_Menu__Physiology,
-            1000,
-        ),
-        (
             SpotId::Ebih__By_Garage__Crawlspace,
             SpotId::Ebih__By_Garage__Crawlspace_Opening,
             701,
@@ -20581,7 +20510,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Ebih__By_Garage__Garage_Entry,
-            SpotId::Ebih__Garage__Entry,
+            SpotId::Interior__Garage__Entry,
             750,
         ),
         (
@@ -20706,16 +20635,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Ebih__By_Garage__West_Bush,
-            SpotId::Menu__Upgrade_Menu__Physiology,
-            1000,
-        ),
-        (
-            SpotId::Ebih__Cave__Entry,
-            SpotId::Ebih__Waterfall__Cave_Entrance,
-            750,
-        ),
-        (
-            SpotId::Ebih__Cave__Entry,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -21950,31 +21869,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             1000,
         ),
         (
-            SpotId::Ebih__Garage__Boxes,
-            SpotId::Ebih__Garage__Entry,
-            1228,
-        ),
-        (
-            SpotId::Ebih__Garage__Boxes,
-            SpotId::Menu__Upgrade_Menu__Physiology,
-            1000,
-        ),
-        (
-            SpotId::Ebih__Garage__Entry,
-            SpotId::Ebih__By_Garage__Garage_Entry,
-            750,
-        ),
-        (
-            SpotId::Ebih__Garage__Entry,
-            SpotId::Ebih__Garage__Boxes,
-            1228,
-        ),
-        (
-            SpotId::Ebih__Garage__Entry,
-            SpotId::Menu__Upgrade_Menu__Physiology,
-            1000,
-        ),
-        (
             SpotId::Ebih__Gem_Room__West_13,
             SpotId::Ebih__Vertical_Interchange__East_13,
             1350,
@@ -22580,31 +22474,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             1000,
         ),
         (
-            SpotId::Ebih__Tent_Interior__Desk,
-            SpotId::Ebih__Tent_Interior__Entry,
-            263,
-        ),
-        (
-            SpotId::Ebih__Tent_Interior__Desk,
-            SpotId::Menu__Upgrade_Menu__Physiology,
-            1000,
-        ),
-        (
-            SpotId::Ebih__Tent_Interior__Entry,
-            SpotId::Ebih__Base_Camp__Tent_Entry,
-            500,
-        ),
-        (
-            SpotId::Ebih__Tent_Interior__Entry,
-            SpotId::Ebih__Tent_Interior__Desk,
-            263,
-        ),
-        (
-            SpotId::Ebih__Tent_Interior__Entry,
-            SpotId::Menu__Upgrade_Menu__Physiology,
-            1000,
-        ),
-        (
             SpotId::Ebih__Vertical_Interchange__Below_Door,
             SpotId::Ebih__Vertical_Interchange__Blocked_Refill_Station,
             1000,
@@ -23101,11 +22970,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Ebih__Waterfall__Cave_Entrance,
-            SpotId::Ebih__Cave__Entry,
-            750,
-        ),
-        (
-            SpotId::Ebih__Waterfall__Cave_Entrance,
             SpotId::Ebih__Waterfall__Lower_West_Tree,
             2280,
         ),
@@ -23128,6 +22992,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Ebih__Waterfall__Cave_Entrance,
             SpotId::Ebih__Waterfall__West_Lower_Path,
             2982,
+        ),
+        (
+            SpotId::Ebih__Waterfall__Cave_Entrance,
+            SpotId::Interior__Ebih_Cave__Entry,
+            750,
         ),
         (
             SpotId::Ebih__Waterfall__Cave_Entrance,
@@ -25010,31 +24879,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             1000,
         ),
         (
-            SpotId::Giguna__Building_Interior__Bookshelf,
-            SpotId::Giguna__Building_Interior__Entry,
-            877,
-        ),
-        (
-            SpotId::Giguna__Building_Interior__Bookshelf,
-            SpotId::Menu__Upgrade_Menu__Physiology,
-            1000,
-        ),
-        (
-            SpotId::Giguna__Building_Interior__Entry,
-            SpotId::Giguna__Building_Interior__Bookshelf,
-            1000,
-        ),
-        (
-            SpotId::Giguna__Building_Interior__Entry,
-            SpotId::Giguna__Giguna_Base__Building_Entry,
-            750,
-        ),
-        (
-            SpotId::Giguna__Building_Interior__Entry,
-            SpotId::Menu__Upgrade_Menu__Physiology,
-            1000,
-        ),
-        (
             SpotId::Giguna__Carnelian__Door,
             SpotId::Giguna__Carnelian__Switch,
             701,
@@ -26856,11 +26700,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Giguna_Base__Building_Entry,
-            SpotId::Giguna__Building_Interior__Entry,
-            750,
-        ),
-        (
-            SpotId::Giguna__Giguna_Base__Building_Entry,
             SpotId::Giguna__Giguna_Base__Kari,
             1052,
         ),
@@ -26878,6 +26717,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna__Giguna_Base__Building_Entry,
             SpotId::Giguna__Giguna_Base__Table,
             1403,
+        ),
+        (
+            SpotId::Giguna__Giguna_Base__Building_Entry,
+            SpotId::Interior__Outpost_Interior__Entry,
+            750,
         ),
         (
             SpotId::Giguna__Giguna_Base__Building_Entry,
@@ -30650,61 +30494,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             1000,
         ),
         (
-            SpotId::Glacier__Dock_Elevator__Connector,
-            SpotId::Glacier__Dock_Elevator__Elevator,
-            1578,
-        ),
-        (
-            SpotId::Glacier__Dock_Elevator__Connector,
-            SpotId::Glacier__Dock_Interior__Connector,
-            1350,
-        ),
-        (
-            SpotId::Glacier__Dock_Elevator__Connector,
-            SpotId::Menu__Upgrade_Menu__Physiology,
-            1000,
-        ),
-        (
-            SpotId::Glacier__Dock_Elevator__Elevator,
-            SpotId::Glacier__Dock_Elevator__Connector,
-            1578,
-        ),
-        (
-            SpotId::Glacier__Dock_Elevator__Elevator,
-            SpotId::Menu__Upgrade_Menu__Physiology,
-            1000,
-        ),
-        (
-            SpotId::Glacier__Dock_Interior__Connector,
-            SpotId::Glacier__Dock_Elevator__Connector,
-            1350,
-        ),
-        (
-            SpotId::Glacier__Dock_Interior__Connector,
-            SpotId::Glacier__Dock_Interior__Entry,
-            1578,
-        ),
-        (
-            SpotId::Glacier__Dock_Interior__Connector,
-            SpotId::Menu__Upgrade_Menu__Physiology,
-            1000,
-        ),
-        (
-            SpotId::Glacier__Dock_Interior__Entry,
-            SpotId::Glacier__Dock_Interior__Connector,
-            1799,
-        ),
-        (
-            SpotId::Glacier__Dock_Interior__Entry,
-            SpotId::Glacier__Dock_Outside__Entry,
-            750,
-        ),
-        (
-            SpotId::Glacier__Dock_Interior__Entry,
-            SpotId::Menu__Upgrade_Menu__Physiology,
-            1000,
-        ),
-        (
             SpotId::Glacier__Dock_Outside__Do_Not_Enter,
             SpotId::Glacier__Dock_Outside__Entry,
             5000,
@@ -30721,13 +30510,13 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Glacier__Dock_Outside__Entry,
-            SpotId::Glacier__Dock_Interior__Entry,
-            750,
+            SpotId::Glacier__Dock_Outside__Do_Not_Enter,
+            5000,
         ),
         (
             SpotId::Glacier__Dock_Outside__Entry,
-            SpotId::Glacier__Dock_Outside__Do_Not_Enter,
-            5000,
+            SpotId::Interior__Dock_Interior__Entry,
+            750,
         ),
         (
             SpotId::Glacier__Dock_Outside__Entry,
@@ -32141,6 +31930,251 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Glacier__Vertical_Room__West_9,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Interior__Building_Interior__Corner,
+            SpotId::Interior__Building_Interior__Entry,
+            1578,
+        ),
+        (
+            SpotId::Interior__Building_Interior__Corner,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Interior__Building_Interior__Entry,
+            SpotId::Ebih__Base_Camp__Building_Entry,
+            750,
+        ),
+        (
+            SpotId::Interior__Building_Interior__Entry,
+            SpotId::Interior__Building_Interior__Corner,
+            1578,
+        ),
+        (
+            SpotId::Interior__Building_Interior__Entry,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Interior__Bunker_Interior__Desk,
+            SpotId::Interior__Bunker_Interior__Entry,
+            1052,
+        ),
+        (
+            SpotId::Interior__Bunker_Interior__Desk,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Interior__Bunker_Interior__Entry,
+            SpotId::Ebih__Base_Camp__Bunker_Entry,
+            750,
+        ),
+        (
+            SpotId::Interior__Bunker_Interior__Entry,
+            SpotId::Interior__Bunker_Interior__Desk,
+            1052,
+        ),
+        (
+            SpotId::Interior__Bunker_Interior__Entry,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Interior__Cave_Behind_Waterfall__Bottom,
+            SpotId::Amagi__Main_Area__Secret_Outcropping,
+            750,
+        ),
+        (
+            SpotId::Interior__Cave_Behind_Waterfall__Bottom,
+            SpotId::Interior__Cave_Behind_Waterfall__Middle,
+            2000,
+        ),
+        (
+            SpotId::Interior__Cave_Behind_Waterfall__Bottom,
+            SpotId::Interior__Cave_Behind_Waterfall__Top,
+            1800,
+        ),
+        (
+            SpotId::Interior__Cave_Behind_Waterfall__Bottom,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Interior__Cave_Behind_Waterfall__Middle,
+            SpotId::Interior__Cave_Behind_Waterfall__Bottom,
+            550,
+        ),
+        (
+            SpotId::Interior__Cave_Behind_Waterfall__Middle,
+            SpotId::Interior__Cave_Behind_Waterfall__Top,
+            1000,
+        ),
+        (
+            SpotId::Interior__Cave_Behind_Waterfall__Middle,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Interior__Cave_Behind_Waterfall__Top,
+            SpotId::Amagi__Main_Area__Secret_Waterfall,
+            750,
+        ),
+        (
+            SpotId::Interior__Cave_Behind_Waterfall__Top,
+            SpotId::Interior__Cave_Behind_Waterfall__Bottom,
+            1051,
+        ),
+        (
+            SpotId::Interior__Cave_Behind_Waterfall__Top,
+            SpotId::Interior__Cave_Behind_Waterfall__Middle,
+            614,
+        ),
+        (
+            SpotId::Interior__Cave_Behind_Waterfall__Top,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Interior__Dock_Elevator__Connector,
+            SpotId::Interior__Dock_Elevator__Elevator,
+            1578,
+        ),
+        (
+            SpotId::Interior__Dock_Elevator__Connector,
+            SpotId::Interior__Dock_Interior__Connector,
+            1350,
+        ),
+        (
+            SpotId::Interior__Dock_Elevator__Connector,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Interior__Dock_Elevator__Elevator,
+            SpotId::Interior__Dock_Elevator__Connector,
+            1578,
+        ),
+        (
+            SpotId::Interior__Dock_Elevator__Elevator,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Interior__Dock_Interior__Connector,
+            SpotId::Interior__Dock_Elevator__Connector,
+            1350,
+        ),
+        (
+            SpotId::Interior__Dock_Interior__Connector,
+            SpotId::Interior__Dock_Interior__Entry,
+            1578,
+        ),
+        (
+            SpotId::Interior__Dock_Interior__Connector,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Interior__Dock_Interior__Entry,
+            SpotId::Glacier__Dock_Outside__Entry,
+            750,
+        ),
+        (
+            SpotId::Interior__Dock_Interior__Entry,
+            SpotId::Interior__Dock_Interior__Connector,
+            1799,
+        ),
+        (
+            SpotId::Interior__Dock_Interior__Entry,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Interior__Ebih_Cave__Entry,
+            SpotId::Ebih__Waterfall__Cave_Entrance,
+            750,
+        ),
+        (
+            SpotId::Interior__Ebih_Cave__Entry,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Interior__Garage__Boxes,
+            SpotId::Interior__Garage__Entry,
+            1228,
+        ),
+        (
+            SpotId::Interior__Garage__Boxes,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Interior__Garage__Entry,
+            SpotId::Ebih__By_Garage__Garage_Entry,
+            750,
+        ),
+        (
+            SpotId::Interior__Garage__Entry,
+            SpotId::Interior__Garage__Boxes,
+            1228,
+        ),
+        (
+            SpotId::Interior__Garage__Entry,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Interior__Outpost_Interior__Bookshelf,
+            SpotId::Interior__Outpost_Interior__Entry,
+            877,
+        ),
+        (
+            SpotId::Interior__Outpost_Interior__Bookshelf,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Interior__Outpost_Interior__Entry,
+            SpotId::Giguna__Giguna_Base__Building_Entry,
+            750,
+        ),
+        (
+            SpotId::Interior__Outpost_Interior__Entry,
+            SpotId::Interior__Outpost_Interior__Bookshelf,
+            1000,
+        ),
+        (
+            SpotId::Interior__Outpost_Interior__Entry,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Interior__Tent_Interior__Desk,
+            SpotId::Interior__Tent_Interior__Entry,
+            263,
+        ),
+        (
+            SpotId::Interior__Tent_Interior__Desk,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Interior__Tent_Interior__Entry,
+            SpotId::Ebih__Base_Camp__Tent_Entry,
+            500,
+        ),
+        (
+            SpotId::Interior__Tent_Interior__Entry,
+            SpotId::Interior__Tent_Interior__Desk,
+            263,
+        ),
+        (
+            SpotId::Interior__Tent_Interior__Entry,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -35779,18 +35813,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
 
 pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
     match (sp1, sp2) {
-        (
-            SpotId::Amagi__Cave_Behind_Waterfall__Middle,
-            SpotId::Amagi__Cave_Behind_Waterfall__Bottom,
-        ) => Some(550),
-        (
-            SpotId::Amagi__Cave_Behind_Waterfall__Top,
-            SpotId::Amagi__Cave_Behind_Waterfall__Bottom,
-        ) => Some(1051),
-        (
-            SpotId::Amagi__Cave_Behind_Waterfall__Top,
-            SpotId::Amagi__Cave_Behind_Waterfall__Middle,
-        ) => Some(614),
         (SpotId::Amagi__Grid_31_19__East, SpotId::Amagi__Grid_31_19__West) => Some(4054),
         (SpotId::Amagi__Grid_31_19__West, SpotId::Amagi__Grid_31_19__East) => Some(4054),
         (SpotId::Amagi__Liru_Room__Bottom, SpotId::Amagi__Liru_Room__Platform_4_Right) => None,
@@ -36475,14 +36497,6 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
         (SpotId::Ebih__Boss_Room__West_5, SpotId::Ebih__Boss_Room__West_6) => Some(1500),
         (SpotId::Ebih__Boss_Room__West_6, SpotId::Ebih__Boss_Room__Boss) => Some(2631),
         (SpotId::Ebih__Boss_Room__West_6, SpotId::Ebih__Boss_Room__Past_Boss) => Some(3684),
-        (SpotId::Ebih__Building_Interior__Corner, SpotId::Ebih__Building_Interior__Entry) => {
-            Some(1578)
-        }
-        (SpotId::Ebih__Building_Interior__Entry, SpotId::Ebih__Building_Interior__Corner) => {
-            Some(1578)
-        }
-        (SpotId::Ebih__Bunker_Interior__Desk, SpotId::Ebih__Bunker_Interior__Entry) => Some(1052),
-        (SpotId::Ebih__Bunker_Interior__Entry, SpotId::Ebih__Bunker_Interior__Desk) => Some(1052),
         (SpotId::Ebih__By_Garage__Crawlspace_Opening, SpotId::Ebih__By_Garage__East_13) => {
             Some(1929)
         }
@@ -36774,8 +36788,6 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
             Some(1403)
         }
         (SpotId::Ebih__Ebih_West__West_High_Cliff, SpotId::Ebih__Ebih_West__West_Fork) => Some(877),
-        (SpotId::Ebih__Garage__Boxes, SpotId::Ebih__Garage__Entry) => Some(1228),
-        (SpotId::Ebih__Garage__Entry, SpotId::Ebih__Garage__Boxes) => Some(1228),
         (SpotId::Ebih__Grid_21_2_6__East_6, SpotId::Ebih__Grid_21_2_6__Portal_Stand) => Some(1578),
         (SpotId::Ebih__Grid_21_2_6__Portal_Stand, SpotId::Ebih__Grid_21_2_6__East_6) => Some(1578),
         (SpotId::Ebih__Grid_21_2_6__Portal_Stand, SpotId::Ebih__Grid_21_2_6__West_6) => Some(1578),
@@ -36926,8 +36938,6 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
             SpotId::Ebih__Observation_Tower_Room__West_9,
             SpotId::Ebih__Observation_Tower_Room__West_10,
         ) => Some(2456),
-        (SpotId::Ebih__Tent_Interior__Desk, SpotId::Ebih__Tent_Interior__Entry) => Some(263),
-        (SpotId::Ebih__Tent_Interior__Entry, SpotId::Ebih__Tent_Interior__Desk) => Some(263),
         (
             SpotId::Ebih__Vertical_Interchange__Below_Door,
             SpotId::Ebih__Vertical_Interchange__Lower_West_Cliff,
@@ -37595,14 +37605,6 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
             SpotId::Giguna__Breachable_Wall__West_Mid_air,
             SpotId::Giguna__Breachable_Wall__Above_West_Catwalk,
         ) => Some(1754),
-        (
-            SpotId::Giguna__Building_Interior__Bookshelf,
-            SpotId::Giguna__Building_Interior__Entry,
-        ) => Some(877),
-        (
-            SpotId::Giguna__Building_Interior__Entry,
-            SpotId::Giguna__Building_Interior__Bookshelf,
-        ) => Some(1799),
         (SpotId::Giguna__Carnelian__East_10, SpotId::Giguna__Carnelian__East_Cliff) => Some(2105),
         (SpotId::Giguna__Carnelian__East_Cliff, SpotId::Giguna__Carnelian__East_10) => Some(2105),
         (SpotId::Giguna__Carnelian__East_Cliff, SpotId::Giguna__Carnelian__Middle_Platforms) => {
@@ -38975,18 +38977,6 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
         (SpotId::Glacier__Compass_Room__Center, SpotId::Glacier__Compass_Room__West) => Some(1578),
         (SpotId::Glacier__Compass_Room__East, SpotId::Glacier__Compass_Room__Center) => Some(1578),
         (SpotId::Glacier__Compass_Room__West, SpotId::Glacier__Compass_Room__Center) => Some(1578),
-        (SpotId::Glacier__Dock_Elevator__Connector, SpotId::Glacier__Dock_Elevator__Elevator) => {
-            Some(1578)
-        }
-        (SpotId::Glacier__Dock_Elevator__Elevator, SpotId::Glacier__Dock_Elevator__Connector) => {
-            Some(1578)
-        }
-        (SpotId::Glacier__Dock_Interior__Connector, SpotId::Glacier__Dock_Interior__Entry) => {
-            Some(1578)
-        }
-        (SpotId::Glacier__Dock_Interior__Entry, SpotId::Glacier__Dock_Interior__Connector) => {
-            Some(1799)
-        }
         (SpotId::Glacier__Dock_Outside__Do_Not_Enter, SpotId::Glacier__Dock_Outside__Entry) => {
             Some(5000)
         }
@@ -39424,6 +39414,60 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
         }
         (SpotId::Glacier__Vertical_Room__West_9, SpotId::Glacier__Vertical_Room__Under_Switch) => {
             Some(1949)
+        }
+        (
+            SpotId::Interior__Building_Interior__Corner,
+            SpotId::Interior__Building_Interior__Entry,
+        ) => Some(1578),
+        (
+            SpotId::Interior__Building_Interior__Entry,
+            SpotId::Interior__Building_Interior__Corner,
+        ) => Some(1578),
+        (SpotId::Interior__Bunker_Interior__Desk, SpotId::Interior__Bunker_Interior__Entry) => {
+            Some(1052)
+        }
+        (SpotId::Interior__Bunker_Interior__Entry, SpotId::Interior__Bunker_Interior__Desk) => {
+            Some(1052)
+        }
+        (
+            SpotId::Interior__Cave_Behind_Waterfall__Middle,
+            SpotId::Interior__Cave_Behind_Waterfall__Bottom,
+        ) => Some(550),
+        (
+            SpotId::Interior__Cave_Behind_Waterfall__Top,
+            SpotId::Interior__Cave_Behind_Waterfall__Bottom,
+        ) => Some(1051),
+        (
+            SpotId::Interior__Cave_Behind_Waterfall__Top,
+            SpotId::Interior__Cave_Behind_Waterfall__Middle,
+        ) => Some(614),
+        (SpotId::Interior__Dock_Elevator__Connector, SpotId::Interior__Dock_Elevator__Elevator) => {
+            Some(1578)
+        }
+        (SpotId::Interior__Dock_Elevator__Elevator, SpotId::Interior__Dock_Elevator__Connector) => {
+            Some(1578)
+        }
+        (SpotId::Interior__Dock_Interior__Connector, SpotId::Interior__Dock_Interior__Entry) => {
+            Some(1578)
+        }
+        (SpotId::Interior__Dock_Interior__Entry, SpotId::Interior__Dock_Interior__Connector) => {
+            Some(1799)
+        }
+        (SpotId::Interior__Garage__Boxes, SpotId::Interior__Garage__Entry) => Some(1228),
+        (SpotId::Interior__Garage__Entry, SpotId::Interior__Garage__Boxes) => Some(1228),
+        (
+            SpotId::Interior__Outpost_Interior__Bookshelf,
+            SpotId::Interior__Outpost_Interior__Entry,
+        ) => Some(877),
+        (
+            SpotId::Interior__Outpost_Interior__Entry,
+            SpotId::Interior__Outpost_Interior__Bookshelf,
+        ) => Some(1799),
+        (SpotId::Interior__Tent_Interior__Desk, SpotId::Interior__Tent_Interior__Entry) => {
+            Some(263)
+        }
+        (SpotId::Interior__Tent_Interior__Entry, SpotId::Interior__Tent_Interior__Desk) => {
+            Some(263)
         }
         (
             SpotId::Irikar_Breach__Exit_Corridor__East,
@@ -40571,18 +40615,6 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
 
 pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementState, u32)>) {
     match (sp1, sp2) {
-        (
-            SpotId::Amagi__Cave_Behind_Waterfall__Middle,
-            SpotId::Amagi__Cave_Behind_Waterfall__Bottom,
-        ) => (Some(550), vec![]),
-        (
-            SpotId::Amagi__Cave_Behind_Waterfall__Top,
-            SpotId::Amagi__Cave_Behind_Waterfall__Bottom,
-        ) => (Some(1051), vec![]),
-        (
-            SpotId::Amagi__Cave_Behind_Waterfall__Top,
-            SpotId::Amagi__Cave_Behind_Waterfall__Middle,
-        ) => (Some(614), vec![]),
         (SpotId::Amagi__Grid_31_19__East, SpotId::Amagi__Grid_31_19__West) => {
             (Some(4054), vec![([true], 3157)])
         }
@@ -41537,18 +41569,6 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
         (SpotId::Ebih__Boss_Room__West_6, SpotId::Ebih__Boss_Room__Past_Boss) => {
             (Some(3684), vec![])
         }
-        (SpotId::Ebih__Building_Interior__Corner, SpotId::Ebih__Building_Interior__Entry) => {
-            (Some(1578), vec![])
-        }
-        (SpotId::Ebih__Building_Interior__Entry, SpotId::Ebih__Building_Interior__Corner) => {
-            (Some(1578), vec![])
-        }
-        (SpotId::Ebih__Bunker_Interior__Desk, SpotId::Ebih__Bunker_Interior__Entry) => {
-            (Some(1052), vec![])
-        }
-        (SpotId::Ebih__Bunker_Interior__Entry, SpotId::Ebih__Bunker_Interior__Desk) => {
-            (Some(1052), vec![])
-        }
         (SpotId::Ebih__By_Garage__Crawlspace_Opening, SpotId::Ebih__By_Garage__East_13) => {
             (Some(1929), vec![])
         }
@@ -42034,8 +42054,6 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
         (SpotId::Ebih__Ebih_West__West_High_Cliff, SpotId::Ebih__Ebih_West__West_Fork) => {
             (Some(877), vec![])
         }
-        (SpotId::Ebih__Garage__Boxes, SpotId::Ebih__Garage__Entry) => (Some(1228), vec![]),
-        (SpotId::Ebih__Garage__Entry, SpotId::Ebih__Garage__Boxes) => (Some(1228), vec![]),
         (SpotId::Ebih__Grid_21_2_6__East_6, SpotId::Ebih__Grid_21_2_6__Portal_Stand) => {
             (Some(1578), vec![])
         }
@@ -42214,12 +42232,6 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
             SpotId::Ebih__Observation_Tower_Room__West_9,
             SpotId::Ebih__Observation_Tower_Room__West_10,
         ) => (Some(2456), vec![]),
-        (SpotId::Ebih__Tent_Interior__Desk, SpotId::Ebih__Tent_Interior__Entry) => {
-            (Some(263), vec![])
-        }
-        (SpotId::Ebih__Tent_Interior__Entry, SpotId::Ebih__Tent_Interior__Desk) => {
-            (Some(263), vec![])
-        }
         (
             SpotId::Ebih__Vertical_Interchange__Below_Door,
             SpotId::Ebih__Vertical_Interchange__Lower_West_Cliff,
@@ -42965,14 +42977,6 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
             SpotId::Giguna__Breachable_Wall__West_Mid_air,
             SpotId::Giguna__Breachable_Wall__Above_West_Catwalk,
         ) => (Some(1754), vec![]),
-        (
-            SpotId::Giguna__Building_Interior__Bookshelf,
-            SpotId::Giguna__Building_Interior__Entry,
-        ) => (Some(877), vec![]),
-        (
-            SpotId::Giguna__Building_Interior__Entry,
-            SpotId::Giguna__Building_Interior__Bookshelf,
-        ) => (Some(1799), vec![]),
         (SpotId::Giguna__Carnelian__East_10, SpotId::Giguna__Carnelian__East_Cliff) => {
             (Some(2105), vec![])
         }
@@ -44653,18 +44657,6 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
         (SpotId::Glacier__Compass_Room__West, SpotId::Glacier__Compass_Room__Center) => {
             (Some(1578), vec![])
         }
-        (SpotId::Glacier__Dock_Elevator__Connector, SpotId::Glacier__Dock_Elevator__Elevator) => {
-            (Some(1578), vec![])
-        }
-        (SpotId::Glacier__Dock_Elevator__Elevator, SpotId::Glacier__Dock_Elevator__Connector) => {
-            (Some(1578), vec![])
-        }
-        (SpotId::Glacier__Dock_Interior__Connector, SpotId::Glacier__Dock_Interior__Entry) => {
-            (Some(1578), vec![])
-        }
-        (SpotId::Glacier__Dock_Interior__Entry, SpotId::Glacier__Dock_Interior__Connector) => {
-            (Some(1799), vec![])
-        }
         (SpotId::Glacier__Dock_Outside__Do_Not_Enter, SpotId::Glacier__Dock_Outside__Entry) => {
             (Some(5000), vec![])
         }
@@ -45162,6 +45154,60 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
         }
         (SpotId::Glacier__Vertical_Room__West_9, SpotId::Glacier__Vertical_Room__Under_Switch) => {
             (Some(1949), vec![])
+        }
+        (
+            SpotId::Interior__Building_Interior__Corner,
+            SpotId::Interior__Building_Interior__Entry,
+        ) => (Some(1578), vec![]),
+        (
+            SpotId::Interior__Building_Interior__Entry,
+            SpotId::Interior__Building_Interior__Corner,
+        ) => (Some(1578), vec![]),
+        (SpotId::Interior__Bunker_Interior__Desk, SpotId::Interior__Bunker_Interior__Entry) => {
+            (Some(1052), vec![])
+        }
+        (SpotId::Interior__Bunker_Interior__Entry, SpotId::Interior__Bunker_Interior__Desk) => {
+            (Some(1052), vec![])
+        }
+        (
+            SpotId::Interior__Cave_Behind_Waterfall__Middle,
+            SpotId::Interior__Cave_Behind_Waterfall__Bottom,
+        ) => (Some(550), vec![]),
+        (
+            SpotId::Interior__Cave_Behind_Waterfall__Top,
+            SpotId::Interior__Cave_Behind_Waterfall__Bottom,
+        ) => (Some(1051), vec![]),
+        (
+            SpotId::Interior__Cave_Behind_Waterfall__Top,
+            SpotId::Interior__Cave_Behind_Waterfall__Middle,
+        ) => (Some(614), vec![]),
+        (SpotId::Interior__Dock_Elevator__Connector, SpotId::Interior__Dock_Elevator__Elevator) => {
+            (Some(1578), vec![])
+        }
+        (SpotId::Interior__Dock_Elevator__Elevator, SpotId::Interior__Dock_Elevator__Connector) => {
+            (Some(1578), vec![])
+        }
+        (SpotId::Interior__Dock_Interior__Connector, SpotId::Interior__Dock_Interior__Entry) => {
+            (Some(1578), vec![])
+        }
+        (SpotId::Interior__Dock_Interior__Entry, SpotId::Interior__Dock_Interior__Connector) => {
+            (Some(1799), vec![])
+        }
+        (SpotId::Interior__Garage__Boxes, SpotId::Interior__Garage__Entry) => (Some(1228), vec![]),
+        (SpotId::Interior__Garage__Entry, SpotId::Interior__Garage__Boxes) => (Some(1228), vec![]),
+        (
+            SpotId::Interior__Outpost_Interior__Bookshelf,
+            SpotId::Interior__Outpost_Interior__Entry,
+        ) => (Some(877), vec![]),
+        (
+            SpotId::Interior__Outpost_Interior__Entry,
+            SpotId::Interior__Outpost_Interior__Bookshelf,
+        ) => (Some(1799), vec![]),
+        (SpotId::Interior__Tent_Interior__Desk, SpotId::Interior__Tent_Interior__Entry) => {
+            (Some(263), vec![])
+        }
+        (SpotId::Interior__Tent_Interior__Entry, SpotId::Interior__Tent_Interior__Desk) => {
+            (Some(263), vec![])
         }
         (
             SpotId::Irikar_Breach__Exit_Corridor__East,

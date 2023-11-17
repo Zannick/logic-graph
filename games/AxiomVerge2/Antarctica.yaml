@@ -224,5 +224,5 @@ areas:
         - to: Left
           jumps: 1
       exits:
-        - to: Glacier > Dock Elevator > Elevator
+        - to: Interior > Dock Elevator > Elevator
           time: 15

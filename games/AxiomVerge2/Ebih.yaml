@@ -68,7 +68,7 @@ areas:
           jumps: 1
         - to: Lake Access
       exits:
-        - to: Bunker Interior > Entry
+        - to: Interior > Bunker Interior > Entry
           tags: [interior]
     - name: Lake Access
       coord: [30.95, 12.7]
@@ -97,7 +97,7 @@ areas:
         - to: Save Point
         - to: West 13
       exits:
-        - to: Building Interior > Entry
+        - to: Interior > Building Interior > Entry
           tags: [interior]
     - name: Tent Entry
       coord: [28.425, 12.7]
@@ -108,7 +108,7 @@ areas:
         - to: West 13
           jumps: 1
       exits:
-        - to: Tent Interior > Entry
+        - to: Interior > Tent Interior > Entry
           time: 0.5
           tags: [interior, tent]
     - name: West 13
@@ -191,74 +191,6 @@ areas:
           req: $hover and not ^_left_platform_moved
         - to: Left Platform Moved
           req: ^_left_platform_moved
-
-- name: Bunker Interior
-  graph_offset: [0, 60]
-  on_entry: $reset_old_area(^newpos)
-  spots:
-    - name: Entry
-      coord: [30.225, 12.6]
-      local:
-        - to: Desk
-      exits:
-        - to: Base Camp > Bunker Entry
-          tags: [exterior]
-    - name: Desk
-      coord: [30.525, 12.6]
-      local:
-        - to: Entry
-      locations:
-        - name: Note
-          item: Dear_Ernest
-          tags: [standing]
-
-- name: Building Interior
-  graph_offset: [0, 60]
-  on_entry: $reset_old_area(^newpos)
-  spots:
-    - name: Entry
-      coord: [28.95, 12.15]
-      local:
-        - to: Corner
-      locations:
-        - name: Remote Urn
-          item: Melee_Charge
-          canon: Melee_Charge
-          req: $boomerang
-          tags: [remote_urn]
-      exits:
-        - to: Base Camp > Building Entry
-          tags: [exterior]
-    - name: Corner
-      coord: [28.5, 12.15]
-      local:
-        - to: Entry
-      locations:
-        - name: Urn
-          item: Melee_Charge
-          canon: Melee_Charge
-          tags: [urn]
-
-- name: Tent Interior
-  graph_offset: [0, 60]
-  on_entry: $reset_old_area(^newpos)
-  spots:
-    - name: Entry
-      coord: [28.425, 12.7]
-      local:
-        - to: Desk
-      exits:
-        - to: Base Camp > Tent Entry
-          time: 0.5
-          tags: [exterior, tent]
-    - name: Desk
-      coord: [28.5, 12.7]
-      local:
-        - to: Entry
-      locations:
-        - name: Note
-          item: Companies_Layoff
-          tags: [standing]
 
 - name: By Garage
   on_entry: $reset_old_area(^newpos)
@@ -383,7 +315,7 @@ areas:
         - to: East Below Platforms
           jumps: 1
       exits:
-        - to: Garage > Entry
+        - to: Interior > Garage > Entry
           tags: [interior]
     - name: East Below Platforms
       coord: [27.6, 12.675]
@@ -396,28 +328,6 @@ areas:
       coord: [27.95, 11.5]
       local:
         - to: East Platform
-
-- name: Garage
-  graph_offset: [0, 60]
-  on_entry: $reset_old_area(^newpos)
-  spots:
-    - name: Entry
-      coord: [27.15, 12.8]
-      local:
-        - to: Boxes
-      exits:
-        - to: By Garage > Garage Entry
-          tags: [exterior]
-    - name: Boxes
-      coord: [26.8, 12.8]
-      local:
-        - to: Entry
-      locations:
-        - name: Under Boxes
-          item: Record_Losses
-          req: $can_damage
-          time: 2
-          tag: [standing]
 
 - name: Grid 25,10-12
   on_entry: $reset_old_area(^newpos)
@@ -959,7 +869,7 @@ areas:
         - to: Waterfall Right
         - to: Near East Tree
       exits:
-        - to: Cave > Entry
+        - to: Interior > Ebih Cave > Entry
           tags: [interior, cave]
     - name: Center Main Path
       coord: [22.9, 7.75]
@@ -1431,21 +1341,6 @@ areas:
       exits:
         - to: Vertical Interchange > West 13
           tags: [xshift]
-
-- name: Cave
-  graph_offset: [0, 60]
-  on_entry: $reset_old_area(^newpos)
-  spots:
-    - name: Entry
-      coord: [22.55, 8.35]
-      locations:
-        - name: Health
-          item: Health_Fragment
-          time: 0.5
-          tags: [standing]
-      exits:
-        - to: Waterfall > Cave Entrance
-          tags: [exterior, cave]
 
 - name: Ebih East
   on_entry: $reset_old_area(^newpos)

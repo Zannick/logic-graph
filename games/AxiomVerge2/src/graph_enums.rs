@@ -27,6 +27,7 @@ pub enum RegionId {
     Giguna,
     Giguna_Breach,
     Glacier,
+    Interior,
     Irikar,
     Irikar_Breach,
     Menu,
@@ -41,6 +42,7 @@ impl fmt::Display for RegionId {
             RegionId::Giguna => write!(f, "{}", "Giguna Steppes"),
             RegionId::Giguna_Breach => write!(f, "{}", "Giguna Breach"),
             RegionId::Glacier => write!(f, "{}", "Glacier"),
+            RegionId::Interior => write!(f, "{}", "Interior"),
             RegionId::Irikar => write!(f, "{}", "Irikar"),
             RegionId::Irikar_Breach => write!(f, "{}", "Irikar Breach"),
             RegionId::Menu => write!(f, "{}", "Menu"),
@@ -60,6 +62,7 @@ impl std::str::FromStr for RegionId {
             "Giguna Steppes" => Ok(RegionId::Giguna),
             "Giguna Breach" => Ok(RegionId::Giguna_Breach),
             "Glacier" => Ok(RegionId::Glacier),
+            "Interior" => Ok(RegionId::Interior),
             "Irikar" => Ok(RegionId::Irikar),
             "Irikar Breach" => Ok(RegionId::Irikar_Breach),
             "Menu" => Ok(RegionId::Menu),
@@ -84,7 +87,6 @@ impl std::str::FromStr for RegionId {
 )]
 #[repr(u8)]
 pub enum AreaId {
-    Amagi__Cave_Behind_Waterfall,
     Amagi__Grid_31_19,
     Amagi__Liru_Room,
     Amagi__Main_Area,
@@ -100,26 +102,20 @@ pub enum AreaId {
     Antarctica__West,
     Ebih__Base_Camp,
     Ebih__Boss_Room,
-    Ebih__Building_Interior,
-    Ebih__Bunker_Interior,
     Ebih__By_Garage,
-    Ebih__Cave,
     Ebih__Drone_Room,
     Ebih__Ebih_East,
     Ebih__Ebih_West,
-    Ebih__Garage,
     Ebih__Gem_Room,
     Ebih__Grid_21_2_6,
     Ebih__Grid_25_10_12,
     Ebih__Grid_25_2_6,
     Ebih__Grid_26_10_11,
     Ebih__Observation_Tower_Room,
-    Ebih__Tent_Interior,
     Ebih__Vertical_Interchange,
     Ebih__Waterfall,
     Giguna__Antechamber,
     Giguna__Breachable_Wall,
-    Giguna__Building_Interior,
     Giguna__Carnelian,
     Giguna__Clouds,
     Giguna__Dual_Path,
@@ -161,8 +157,6 @@ pub enum AreaId {
     Glacier__Boomerang_Antechamber,
     Glacier__Boomerang_Room,
     Glacier__Compass_Room,
-    Glacier__Dock_Elevator,
-    Glacier__Dock_Interior,
     Glacier__Dock_Outside,
     Glacier__Grid_31_9_12,
     Glacier__Grid_32_7_10,
@@ -176,6 +170,15 @@ pub enum AreaId {
     Glacier__Revival,
     Glacier__The_Big_Drop,
     Glacier__Vertical_Room,
+    Interior__Building_Interior,
+    Interior__Bunker_Interior,
+    Interior__Cave_Behind_Waterfall,
+    Interior__Dock_Elevator,
+    Interior__Dock_Interior,
+    Interior__Ebih_Cave,
+    Interior__Garage,
+    Interior__Outpost_Interior,
+    Interior__Tent_Interior,
     Irikar__Abandoned_Room,
     Irikar__Airy,
     Irikar__Basement_Pipes,
@@ -208,9 +211,6 @@ pub enum AreaId {
 impl fmt::Display for AreaId {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         match self {
-            AreaId::Amagi__Cave_Behind_Waterfall => {
-                write!(f, "{}", "Amagi > Cave Behind Waterfall")
-            }
             AreaId::Amagi__Grid_31_19 => write!(f, "{}", "Amagi > Grid 31,19"),
             AreaId::Amagi__Liru_Room => write!(f, "{}", "Amagi > Liru Room"),
             AreaId::Amagi__Main_Area => write!(f, "{}", "Amagi > Main Area"),
@@ -228,14 +228,10 @@ impl fmt::Display for AreaId {
             AreaId::Antarctica__West => write!(f, "{}", "Antarctica > West"),
             AreaId::Ebih__Base_Camp => write!(f, "{}", "Ebih > Base Camp"),
             AreaId::Ebih__Boss_Room => write!(f, "{}", "Ebih > Boss Room"),
-            AreaId::Ebih__Building_Interior => write!(f, "{}", "Ebih > Building Interior"),
-            AreaId::Ebih__Bunker_Interior => write!(f, "{}", "Ebih > Bunker Interior"),
             AreaId::Ebih__By_Garage => write!(f, "{}", "Ebih > By Garage"),
-            AreaId::Ebih__Cave => write!(f, "{}", "Ebih > Cave"),
             AreaId::Ebih__Drone_Room => write!(f, "{}", "Ebih > Drone Room"),
             AreaId::Ebih__Ebih_East => write!(f, "{}", "Ebih > Ebih East"),
             AreaId::Ebih__Ebih_West => write!(f, "{}", "Ebih > Ebih West"),
-            AreaId::Ebih__Garage => write!(f, "{}", "Ebih > Garage"),
             AreaId::Ebih__Gem_Room => write!(f, "{}", "Ebih > Gem Room"),
             AreaId::Ebih__Grid_21_2_6 => write!(f, "{}", "Ebih > Grid 21,2-6"),
             AreaId::Ebih__Grid_25_10_12 => write!(f, "{}", "Ebih > Grid 25,10-12"),
@@ -244,12 +240,10 @@ impl fmt::Display for AreaId {
             AreaId::Ebih__Observation_Tower_Room => {
                 write!(f, "{}", "Ebih > Observation Tower Room")
             }
-            AreaId::Ebih__Tent_Interior => write!(f, "{}", "Ebih > Tent Interior"),
             AreaId::Ebih__Vertical_Interchange => write!(f, "{}", "Ebih > Vertical Interchange"),
             AreaId::Ebih__Waterfall => write!(f, "{}", "Ebih > Waterfall"),
             AreaId::Giguna__Antechamber => write!(f, "{}", "Giguna > Antechamber"),
             AreaId::Giguna__Breachable_Wall => write!(f, "{}", "Giguna > Breachable Wall"),
-            AreaId::Giguna__Building_Interior => write!(f, "{}", "Giguna > Building Interior"),
             AreaId::Giguna__Carnelian => write!(f, "{}", "Giguna > Carnelian"),
             AreaId::Giguna__Clouds => write!(f, "{}", "Giguna > Clouds"),
             AreaId::Giguna__Dual_Path => write!(f, "{}", "Giguna > Dual Path"),
@@ -299,8 +293,6 @@ impl fmt::Display for AreaId {
             }
             AreaId::Glacier__Boomerang_Room => write!(f, "{}", "Glacier > Boomerang Room"),
             AreaId::Glacier__Compass_Room => write!(f, "{}", "Glacier > Compass Room"),
-            AreaId::Glacier__Dock_Elevator => write!(f, "{}", "Glacier > Dock Elevator"),
-            AreaId::Glacier__Dock_Interior => write!(f, "{}", "Glacier > Dock Interior"),
             AreaId::Glacier__Dock_Outside => write!(f, "{}", "Glacier > Dock Outside"),
             AreaId::Glacier__Grid_31_9_12 => write!(f, "{}", "Glacier > Grid 31,9-12"),
             AreaId::Glacier__Grid_32_7_10 => write!(f, "{}", "Glacier > Grid 32,7-10"),
@@ -314,6 +306,17 @@ impl fmt::Display for AreaId {
             AreaId::Glacier__Revival => write!(f, "{}", "Glacier > Revival"),
             AreaId::Glacier__The_Big_Drop => write!(f, "{}", "Glacier > The Big Drop"),
             AreaId::Glacier__Vertical_Room => write!(f, "{}", "Glacier > Vertical Room"),
+            AreaId::Interior__Building_Interior => write!(f, "{}", "Interior > Building Interior"),
+            AreaId::Interior__Bunker_Interior => write!(f, "{}", "Interior > Bunker Interior"),
+            AreaId::Interior__Cave_Behind_Waterfall => {
+                write!(f, "{}", "Interior > Cave Behind Waterfall")
+            }
+            AreaId::Interior__Dock_Elevator => write!(f, "{}", "Interior > Dock Elevator"),
+            AreaId::Interior__Dock_Interior => write!(f, "{}", "Interior > Dock Interior"),
+            AreaId::Interior__Ebih_Cave => write!(f, "{}", "Interior > Ebih Cave"),
+            AreaId::Interior__Garage => write!(f, "{}", "Interior > Garage"),
+            AreaId::Interior__Outpost_Interior => write!(f, "{}", "Interior > Outpost Interior"),
+            AreaId::Interior__Tent_Interior => write!(f, "{}", "Interior > Tent Interior"),
             AreaId::Irikar__Abandoned_Room => write!(f, "{}", "Irikar > Abandoned Room"),
             AreaId::Irikar__Airy => write!(f, "{}", "Irikar > Airy"),
             AreaId::Irikar__Basement_Pipes => write!(f, "{}", "Irikar > Basement Pipes"),
@@ -359,7 +362,6 @@ impl std::str::FromStr for AreaId {
 
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         match s {
-            "Amagi > Cave Behind Waterfall" => Ok(AreaId::Amagi__Cave_Behind_Waterfall),
             "Amagi > Grid 31,19" => Ok(AreaId::Amagi__Grid_31_19),
             "Amagi > Liru Room" => Ok(AreaId::Amagi__Liru_Room),
             "Amagi > Main Area" => Ok(AreaId::Amagi__Main_Area),
@@ -375,26 +377,20 @@ impl std::str::FromStr for AreaId {
             "Antarctica > West" => Ok(AreaId::Antarctica__West),
             "Ebih > Base Camp" => Ok(AreaId::Ebih__Base_Camp),
             "Ebih > Boss Room" => Ok(AreaId::Ebih__Boss_Room),
-            "Ebih > Building Interior" => Ok(AreaId::Ebih__Building_Interior),
-            "Ebih > Bunker Interior" => Ok(AreaId::Ebih__Bunker_Interior),
             "Ebih > By Garage" => Ok(AreaId::Ebih__By_Garage),
-            "Ebih > Cave" => Ok(AreaId::Ebih__Cave),
             "Ebih > Drone Room" => Ok(AreaId::Ebih__Drone_Room),
             "Ebih > Ebih East" => Ok(AreaId::Ebih__Ebih_East),
             "Ebih > Ebih West" => Ok(AreaId::Ebih__Ebih_West),
-            "Ebih > Garage" => Ok(AreaId::Ebih__Garage),
             "Ebih > Gem Room" => Ok(AreaId::Ebih__Gem_Room),
             "Ebih > Grid 21,2-6" => Ok(AreaId::Ebih__Grid_21_2_6),
             "Ebih > Grid 25,10-12" => Ok(AreaId::Ebih__Grid_25_10_12),
             "Ebih > Grid 25,2-6" => Ok(AreaId::Ebih__Grid_25_2_6),
             "Ebih > Grid 26,10-11" => Ok(AreaId::Ebih__Grid_26_10_11),
             "Ebih > Observation Tower Room" => Ok(AreaId::Ebih__Observation_Tower_Room),
-            "Ebih > Tent Interior" => Ok(AreaId::Ebih__Tent_Interior),
             "Ebih > Vertical Interchange" => Ok(AreaId::Ebih__Vertical_Interchange),
             "Ebih > Waterfall" => Ok(AreaId::Ebih__Waterfall),
             "Giguna > Antechamber" => Ok(AreaId::Giguna__Antechamber),
             "Giguna > Breachable Wall" => Ok(AreaId::Giguna__Breachable_Wall),
-            "Giguna > Building Interior" => Ok(AreaId::Giguna__Building_Interior),
             "Giguna > Carnelian" => Ok(AreaId::Giguna__Carnelian),
             "Giguna > Clouds" => Ok(AreaId::Giguna__Clouds),
             "Giguna > Dual Path" => Ok(AreaId::Giguna__Dual_Path),
@@ -436,8 +432,6 @@ impl std::str::FromStr for AreaId {
             "Glacier > Boomerang Antechamber" => Ok(AreaId::Glacier__Boomerang_Antechamber),
             "Glacier > Boomerang Room" => Ok(AreaId::Glacier__Boomerang_Room),
             "Glacier > Compass Room" => Ok(AreaId::Glacier__Compass_Room),
-            "Glacier > Dock Elevator" => Ok(AreaId::Glacier__Dock_Elevator),
-            "Glacier > Dock Interior" => Ok(AreaId::Glacier__Dock_Interior),
             "Glacier > Dock Outside" => Ok(AreaId::Glacier__Dock_Outside),
             "Glacier > Grid 31,9-12" => Ok(AreaId::Glacier__Grid_31_9_12),
             "Glacier > Grid 32,7-10" => Ok(AreaId::Glacier__Grid_32_7_10),
@@ -451,6 +445,15 @@ impl std::str::FromStr for AreaId {
             "Glacier > Revival" => Ok(AreaId::Glacier__Revival),
             "Glacier > The Big Drop" => Ok(AreaId::Glacier__The_Big_Drop),
             "Glacier > Vertical Room" => Ok(AreaId::Glacier__Vertical_Room),
+            "Interior > Building Interior" => Ok(AreaId::Interior__Building_Interior),
+            "Interior > Bunker Interior" => Ok(AreaId::Interior__Bunker_Interior),
+            "Interior > Cave Behind Waterfall" => Ok(AreaId::Interior__Cave_Behind_Waterfall),
+            "Interior > Dock Elevator" => Ok(AreaId::Interior__Dock_Elevator),
+            "Interior > Dock Interior" => Ok(AreaId::Interior__Dock_Interior),
+            "Interior > Ebih Cave" => Ok(AreaId::Interior__Ebih_Cave),
+            "Interior > Garage" => Ok(AreaId::Interior__Garage),
+            "Interior > Outpost Interior" => Ok(AreaId::Interior__Outpost_Interior),
+            "Interior > Tent Interior" => Ok(AreaId::Interior__Tent_Interior),
             "Irikar > Abandoned Room" => Ok(AreaId::Irikar__Abandoned_Room),
             "Irikar > Airy" => Ok(AreaId::Irikar__Airy),
             "Irikar > Basement Pipes" => Ok(AreaId::Irikar__Basement_Pipes),
@@ -502,9 +505,6 @@ impl std::str::FromStr for AreaId {
 pub enum SpotId {
     #[default]
     None,
-    Amagi__Cave_Behind_Waterfall__Bottom,
-    Amagi__Cave_Behind_Waterfall__Middle,
-    Amagi__Cave_Behind_Waterfall__Top,
     Amagi__Grid_31_19__East,
     Amagi__Grid_31_19__West,
     Amagi__Liru_Room__Bottom,
@@ -644,10 +644,6 @@ pub enum SpotId {
     Ebih__Boss_Room__Upper_Tree,
     Ebih__Boss_Room__West_5,
     Ebih__Boss_Room__West_6,
-    Ebih__Building_Interior__Corner,
-    Ebih__Building_Interior__Entry,
-    Ebih__Bunker_Interior__Desk,
-    Ebih__Bunker_Interior__Entry,
     Ebih__By_Garage__Crawlspace,
     Ebih__By_Garage__Crawlspace_Opening,
     Ebih__By_Garage__East_12,
@@ -662,7 +658,6 @@ pub enum SpotId {
     Ebih__By_Garage__West_13,
     Ebih__By_Garage__West_Below_Platforms,
     Ebih__By_Garage__West_Bush,
-    Ebih__Cave__Entry,
     Ebih__Drone_Room__East_4,
     Ebih__Drone_Room__Item,
     Ebih__Drone_Room__Left_Platform,
@@ -723,8 +718,6 @@ pub enum SpotId {
     Ebih__Ebih_West__West_9,
     Ebih__Ebih_West__West_Fork,
     Ebih__Ebih_West__West_High_Cliff,
-    Ebih__Garage__Boxes,
-    Ebih__Garage__Entry,
     Ebih__Gem_Room__West_13,
     Ebih__Grid_21_2_6__East_6,
     Ebih__Grid_21_2_6__Portal_Stand,
@@ -759,8 +752,6 @@ pub enum SpotId {
     Ebih__Observation_Tower_Room__Tower_Top,
     Ebih__Observation_Tower_Room__West_10,
     Ebih__Observation_Tower_Room__West_9,
-    Ebih__Tent_Interior__Desk,
-    Ebih__Tent_Interior__Entry,
     Ebih__Vertical_Interchange__Below_Door,
     Ebih__Vertical_Interchange__Block_Cubby,
     Ebih__Vertical_Interchange__Blocked_Refill_Station,
@@ -833,8 +824,6 @@ pub enum SpotId {
     Giguna__Breachable_Wall__Above_West_Catwalk,
     Giguna__Breachable_Wall__Wall_Interior,
     Giguna__Breachable_Wall__West_Mid_air,
-    Giguna__Building_Interior__Bookshelf,
-    Giguna__Building_Interior__Entry,
     Giguna__Carnelian__Door,
     Giguna__Carnelian__East_10,
     Giguna__Carnelian__East_Cliff,
@@ -1253,10 +1242,6 @@ pub enum SpotId {
     Glacier__Compass_Room__Center,
     Glacier__Compass_Room__East,
     Glacier__Compass_Room__West,
-    Glacier__Dock_Elevator__Connector,
-    Glacier__Dock_Elevator__Elevator,
-    Glacier__Dock_Interior__Connector,
-    Glacier__Dock_Interior__Entry,
     Glacier__Dock_Outside__Do_Not_Enter,
     Glacier__Dock_Outside__Entry,
     Glacier__Grid_31_9_12__East_10,
@@ -1332,6 +1317,24 @@ pub enum SpotId {
     Glacier__Vertical_Room__Under_Switch,
     Glacier__Vertical_Room__West_8,
     Glacier__Vertical_Room__West_9,
+    Interior__Building_Interior__Corner,
+    Interior__Building_Interior__Entry,
+    Interior__Bunker_Interior__Desk,
+    Interior__Bunker_Interior__Entry,
+    Interior__Cave_Behind_Waterfall__Bottom,
+    Interior__Cave_Behind_Waterfall__Middle,
+    Interior__Cave_Behind_Waterfall__Top,
+    Interior__Dock_Elevator__Connector,
+    Interior__Dock_Elevator__Elevator,
+    Interior__Dock_Interior__Connector,
+    Interior__Dock_Interior__Entry,
+    Interior__Ebih_Cave__Entry,
+    Interior__Garage__Boxes,
+    Interior__Garage__Entry,
+    Interior__Outpost_Interior__Bookshelf,
+    Interior__Outpost_Interior__Entry,
+    Interior__Tent_Interior__Desk,
+    Interior__Tent_Interior__Entry,
     Irikar__Abandoned_Room__Corner_Core,
     Irikar__Abandoned_Room__Empty_Pedestal,
     Irikar__Abandoned_Room__West,
@@ -1553,15 +1556,6 @@ impl fmt::Display for SpotId {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         match self {
             SpotId::None => write!(f, "{}", "None"),
-            SpotId::Amagi__Cave_Behind_Waterfall__Bottom => {
-                write!(f, "{}", "Amagi > Cave Behind Waterfall > Bottom")
-            }
-            SpotId::Amagi__Cave_Behind_Waterfall__Middle => {
-                write!(f, "{}", "Amagi > Cave Behind Waterfall > Middle")
-            }
-            SpotId::Amagi__Cave_Behind_Waterfall__Top => {
-                write!(f, "{}", "Amagi > Cave Behind Waterfall > Top")
-            }
             SpotId::Amagi__Grid_31_19__East => write!(f, "{}", "Amagi > Grid 31,19 > East"),
             SpotId::Amagi__Grid_31_19__West => write!(f, "{}", "Amagi > Grid 31,19 > West"),
             SpotId::Amagi__Liru_Room__Bottom => write!(f, "{}", "Amagi > Liru Room > Bottom"),
@@ -1891,16 +1885,6 @@ impl fmt::Display for SpotId {
             SpotId::Ebih__Boss_Room__Upper_Tree => write!(f, "{}", "Ebih > Boss Room > Upper Tree"),
             SpotId::Ebih__Boss_Room__West_5 => write!(f, "{}", "Ebih > Boss Room > West 5"),
             SpotId::Ebih__Boss_Room__West_6 => write!(f, "{}", "Ebih > Boss Room > West 6"),
-            SpotId::Ebih__Building_Interior__Corner => {
-                write!(f, "{}", "Ebih > Building Interior > Corner")
-            }
-            SpotId::Ebih__Building_Interior__Entry => {
-                write!(f, "{}", "Ebih > Building Interior > Entry")
-            }
-            SpotId::Ebih__Bunker_Interior__Desk => write!(f, "{}", "Ebih > Bunker Interior > Desk"),
-            SpotId::Ebih__Bunker_Interior__Entry => {
-                write!(f, "{}", "Ebih > Bunker Interior > Entry")
-            }
             SpotId::Ebih__By_Garage__Crawlspace => write!(f, "{}", "Ebih > By Garage > Crawlspace"),
             SpotId::Ebih__By_Garage__Crawlspace_Opening => {
                 write!(f, "{}", "Ebih > By Garage > Crawlspace Opening")
@@ -1929,7 +1913,6 @@ impl fmt::Display for SpotId {
                 write!(f, "{}", "Ebih > By Garage > West Below Platforms")
             }
             SpotId::Ebih__By_Garage__West_Bush => write!(f, "{}", "Ebih > By Garage > West Bush"),
-            SpotId::Ebih__Cave__Entry => write!(f, "{}", "Ebih > Cave > Entry"),
             SpotId::Ebih__Drone_Room__East_4 => write!(f, "{}", "Ebih > Drone Room > East 4"),
             SpotId::Ebih__Drone_Room__Item => write!(f, "{}", "Ebih > Drone Room > Item"),
             SpotId::Ebih__Drone_Room__Left_Platform => {
@@ -2036,8 +2019,6 @@ impl fmt::Display for SpotId {
             SpotId::Ebih__Ebih_West__West_High_Cliff => {
                 write!(f, "{}", "Ebih > Ebih West > West High Cliff")
             }
-            SpotId::Ebih__Garage__Boxes => write!(f, "{}", "Ebih > Garage > Boxes"),
-            SpotId::Ebih__Garage__Entry => write!(f, "{}", "Ebih > Garage > Entry"),
             SpotId::Ebih__Gem_Room__West_13 => write!(f, "{}", "Ebih > Gem Room > West 13"),
             SpotId::Ebih__Grid_21_2_6__East_6 => write!(f, "{}", "Ebih > Grid 21,2-6 > East 6"),
             SpotId::Ebih__Grid_21_2_6__Portal_Stand => {
@@ -2122,8 +2103,6 @@ impl fmt::Display for SpotId {
             SpotId::Ebih__Observation_Tower_Room__West_9 => {
                 write!(f, "{}", "Ebih > Observation Tower Room > West 9")
             }
-            SpotId::Ebih__Tent_Interior__Desk => write!(f, "{}", "Ebih > Tent Interior > Desk"),
-            SpotId::Ebih__Tent_Interior__Entry => write!(f, "{}", "Ebih > Tent Interior > Entry"),
             SpotId::Ebih__Vertical_Interchange__Below_Door => {
                 write!(f, "{}", "Ebih > Vertical Interchange > Below Door")
             }
@@ -2303,12 +2282,6 @@ impl fmt::Display for SpotId {
             }
             SpotId::Giguna__Breachable_Wall__West_Mid_air => {
                 write!(f, "{}", "Giguna > Breachable Wall > West Mid-air")
-            }
-            SpotId::Giguna__Building_Interior__Bookshelf => {
-                write!(f, "{}", "Giguna > Building Interior > Bookshelf")
-            }
-            SpotId::Giguna__Building_Interior__Entry => {
-                write!(f, "{}", "Giguna > Building Interior > Entry")
             }
             SpotId::Giguna__Carnelian__Door => write!(f, "{}", "Giguna > Carnelian > Door"),
             SpotId::Giguna__Carnelian__East_10 => write!(f, "{}", "Giguna > Carnelian > East 10"),
@@ -3378,18 +3351,6 @@ impl fmt::Display for SpotId {
             }
             SpotId::Glacier__Compass_Room__East => write!(f, "{}", "Glacier > Compass Room > East"),
             SpotId::Glacier__Compass_Room__West => write!(f, "{}", "Glacier > Compass Room > West"),
-            SpotId::Glacier__Dock_Elevator__Connector => {
-                write!(f, "{}", "Glacier > Dock Elevator > Connector")
-            }
-            SpotId::Glacier__Dock_Elevator__Elevator => {
-                write!(f, "{}", "Glacier > Dock Elevator > Elevator")
-            }
-            SpotId::Glacier__Dock_Interior__Connector => {
-                write!(f, "{}", "Glacier > Dock Interior > Connector")
-            }
-            SpotId::Glacier__Dock_Interior__Entry => {
-                write!(f, "{}", "Glacier > Dock Interior > Entry")
-            }
             SpotId::Glacier__Dock_Outside__Do_Not_Enter => {
                 write!(f, "{}", "Glacier > Dock Outside > Do Not Enter")
             }
@@ -3586,6 +3547,54 @@ impl fmt::Display for SpotId {
             }
             SpotId::Glacier__Vertical_Room__West_9 => {
                 write!(f, "{}", "Glacier > Vertical Room > West 9")
+            }
+            SpotId::Interior__Building_Interior__Corner => {
+                write!(f, "{}", "Interior > Building Interior > Corner")
+            }
+            SpotId::Interior__Building_Interior__Entry => {
+                write!(f, "{}", "Interior > Building Interior > Entry")
+            }
+            SpotId::Interior__Bunker_Interior__Desk => {
+                write!(f, "{}", "Interior > Bunker Interior > Desk")
+            }
+            SpotId::Interior__Bunker_Interior__Entry => {
+                write!(f, "{}", "Interior > Bunker Interior > Entry")
+            }
+            SpotId::Interior__Cave_Behind_Waterfall__Bottom => {
+                write!(f, "{}", "Interior > Cave Behind Waterfall > Bottom")
+            }
+            SpotId::Interior__Cave_Behind_Waterfall__Middle => {
+                write!(f, "{}", "Interior > Cave Behind Waterfall > Middle")
+            }
+            SpotId::Interior__Cave_Behind_Waterfall__Top => {
+                write!(f, "{}", "Interior > Cave Behind Waterfall > Top")
+            }
+            SpotId::Interior__Dock_Elevator__Connector => {
+                write!(f, "{}", "Interior > Dock Elevator > Connector")
+            }
+            SpotId::Interior__Dock_Elevator__Elevator => {
+                write!(f, "{}", "Interior > Dock Elevator > Elevator")
+            }
+            SpotId::Interior__Dock_Interior__Connector => {
+                write!(f, "{}", "Interior > Dock Interior > Connector")
+            }
+            SpotId::Interior__Dock_Interior__Entry => {
+                write!(f, "{}", "Interior > Dock Interior > Entry")
+            }
+            SpotId::Interior__Ebih_Cave__Entry => write!(f, "{}", "Interior > Ebih Cave > Entry"),
+            SpotId::Interior__Garage__Boxes => write!(f, "{}", "Interior > Garage > Boxes"),
+            SpotId::Interior__Garage__Entry => write!(f, "{}", "Interior > Garage > Entry"),
+            SpotId::Interior__Outpost_Interior__Bookshelf => {
+                write!(f, "{}", "Interior > Outpost Interior > Bookshelf")
+            }
+            SpotId::Interior__Outpost_Interior__Entry => {
+                write!(f, "{}", "Interior > Outpost Interior > Entry")
+            }
+            SpotId::Interior__Tent_Interior__Desk => {
+                write!(f, "{}", "Interior > Tent Interior > Desk")
+            }
+            SpotId::Interior__Tent_Interior__Entry => {
+                write!(f, "{}", "Interior > Tent Interior > Entry")
             }
             SpotId::Irikar__Abandoned_Room__Corner_Core => {
                 write!(f, "{}", "Irikar > Abandoned Room > Corner Core")
@@ -4180,13 +4189,6 @@ impl std::str::FromStr for SpotId {
 
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         match s {
-            "Amagi > Cave Behind Waterfall > Bottom" => {
-                Ok(SpotId::Amagi__Cave_Behind_Waterfall__Bottom)
-            }
-            "Amagi > Cave Behind Waterfall > Middle" => {
-                Ok(SpotId::Amagi__Cave_Behind_Waterfall__Middle)
-            }
-            "Amagi > Cave Behind Waterfall > Top" => Ok(SpotId::Amagi__Cave_Behind_Waterfall__Top),
             "Amagi > Grid 31,19 > East" => Ok(SpotId::Amagi__Grid_31_19__East),
             "Amagi > Grid 31,19 > West" => Ok(SpotId::Amagi__Grid_31_19__West),
             "Amagi > Liru Room > Bottom" => Ok(SpotId::Amagi__Liru_Room__Bottom),
@@ -4408,10 +4410,6 @@ impl std::str::FromStr for SpotId {
             "Ebih > Boss Room > Upper Tree" => Ok(SpotId::Ebih__Boss_Room__Upper_Tree),
             "Ebih > Boss Room > West 5" => Ok(SpotId::Ebih__Boss_Room__West_5),
             "Ebih > Boss Room > West 6" => Ok(SpotId::Ebih__Boss_Room__West_6),
-            "Ebih > Building Interior > Corner" => Ok(SpotId::Ebih__Building_Interior__Corner),
-            "Ebih > Building Interior > Entry" => Ok(SpotId::Ebih__Building_Interior__Entry),
-            "Ebih > Bunker Interior > Desk" => Ok(SpotId::Ebih__Bunker_Interior__Desk),
-            "Ebih > Bunker Interior > Entry" => Ok(SpotId::Ebih__Bunker_Interior__Entry),
             "Ebih > By Garage > Crawlspace" => Ok(SpotId::Ebih__By_Garage__Crawlspace),
             "Ebih > By Garage > Crawlspace Opening" => {
                 Ok(SpotId::Ebih__By_Garage__Crawlspace_Opening)
@@ -4432,7 +4430,6 @@ impl std::str::FromStr for SpotId {
                 Ok(SpotId::Ebih__By_Garage__West_Below_Platforms)
             }
             "Ebih > By Garage > West Bush" => Ok(SpotId::Ebih__By_Garage__West_Bush),
-            "Ebih > Cave > Entry" => Ok(SpotId::Ebih__Cave__Entry),
             "Ebih > Drone Room > East 4" => Ok(SpotId::Ebih__Drone_Room__East_4),
             "Ebih > Drone Room > Item" => Ok(SpotId::Ebih__Drone_Room__Item),
             "Ebih > Drone Room > Left Platform" => Ok(SpotId::Ebih__Drone_Room__Left_Platform),
@@ -4497,8 +4494,6 @@ impl std::str::FromStr for SpotId {
             "Ebih > Ebih West > West 9" => Ok(SpotId::Ebih__Ebih_West__West_9),
             "Ebih > Ebih West > West Fork" => Ok(SpotId::Ebih__Ebih_West__West_Fork),
             "Ebih > Ebih West > West High Cliff" => Ok(SpotId::Ebih__Ebih_West__West_High_Cliff),
-            "Ebih > Garage > Boxes" => Ok(SpotId::Ebih__Garage__Boxes),
-            "Ebih > Garage > Entry" => Ok(SpotId::Ebih__Garage__Entry),
             "Ebih > Gem Room > West 13" => Ok(SpotId::Ebih__Gem_Room__West_13),
             "Ebih > Grid 21,2-6 > East 6" => Ok(SpotId::Ebih__Grid_21_2_6__East_6),
             "Ebih > Grid 21,2-6 > Portal Stand" => Ok(SpotId::Ebih__Grid_21_2_6__Portal_Stand),
@@ -4551,8 +4546,6 @@ impl std::str::FromStr for SpotId {
             "Ebih > Observation Tower Room > West 9" => {
                 Ok(SpotId::Ebih__Observation_Tower_Room__West_9)
             }
-            "Ebih > Tent Interior > Desk" => Ok(SpotId::Ebih__Tent_Interior__Desk),
-            "Ebih > Tent Interior > Entry" => Ok(SpotId::Ebih__Tent_Interior__Entry),
             "Ebih > Vertical Interchange > Below Door" => {
                 Ok(SpotId::Ebih__Vertical_Interchange__Below_Door)
             }
@@ -4687,10 +4680,6 @@ impl std::str::FromStr for SpotId {
             "Giguna > Breachable Wall > West Mid-air" => {
                 Ok(SpotId::Giguna__Breachable_Wall__West_Mid_air)
             }
-            "Giguna > Building Interior > Bookshelf" => {
-                Ok(SpotId::Giguna__Building_Interior__Bookshelf)
-            }
-            "Giguna > Building Interior > Entry" => Ok(SpotId::Giguna__Building_Interior__Entry),
             "Giguna > Carnelian > Door" => Ok(SpotId::Giguna__Carnelian__Door),
             "Giguna > Carnelian > East 10" => Ok(SpotId::Giguna__Carnelian__East_10),
             "Giguna > Carnelian > East Cliff" => Ok(SpotId::Giguna__Carnelian__East_Cliff),
@@ -5371,10 +5360,6 @@ impl std::str::FromStr for SpotId {
             "Glacier > Compass Room > Center" => Ok(SpotId::Glacier__Compass_Room__Center),
             "Glacier > Compass Room > East" => Ok(SpotId::Glacier__Compass_Room__East),
             "Glacier > Compass Room > West" => Ok(SpotId::Glacier__Compass_Room__West),
-            "Glacier > Dock Elevator > Connector" => Ok(SpotId::Glacier__Dock_Elevator__Connector),
-            "Glacier > Dock Elevator > Elevator" => Ok(SpotId::Glacier__Dock_Elevator__Elevator),
-            "Glacier > Dock Interior > Connector" => Ok(SpotId::Glacier__Dock_Interior__Connector),
-            "Glacier > Dock Interior > Entry" => Ok(SpotId::Glacier__Dock_Interior__Entry),
             "Glacier > Dock Outside > Do Not Enter" => {
                 Ok(SpotId::Glacier__Dock_Outside__Do_Not_Enter)
             }
@@ -5496,6 +5481,40 @@ impl std::str::FromStr for SpotId {
             }
             "Glacier > Vertical Room > West 8" => Ok(SpotId::Glacier__Vertical_Room__West_8),
             "Glacier > Vertical Room > West 9" => Ok(SpotId::Glacier__Vertical_Room__West_9),
+            "Interior > Building Interior > Corner" => {
+                Ok(SpotId::Interior__Building_Interior__Corner)
+            }
+            "Interior > Building Interior > Entry" => {
+                Ok(SpotId::Interior__Building_Interior__Entry)
+            }
+            "Interior > Bunker Interior > Desk" => Ok(SpotId::Interior__Bunker_Interior__Desk),
+            "Interior > Bunker Interior > Entry" => Ok(SpotId::Interior__Bunker_Interior__Entry),
+            "Interior > Cave Behind Waterfall > Bottom" => {
+                Ok(SpotId::Interior__Cave_Behind_Waterfall__Bottom)
+            }
+            "Interior > Cave Behind Waterfall > Middle" => {
+                Ok(SpotId::Interior__Cave_Behind_Waterfall__Middle)
+            }
+            "Interior > Cave Behind Waterfall > Top" => {
+                Ok(SpotId::Interior__Cave_Behind_Waterfall__Top)
+            }
+            "Interior > Dock Elevator > Connector" => {
+                Ok(SpotId::Interior__Dock_Elevator__Connector)
+            }
+            "Interior > Dock Elevator > Elevator" => Ok(SpotId::Interior__Dock_Elevator__Elevator),
+            "Interior > Dock Interior > Connector" => {
+                Ok(SpotId::Interior__Dock_Interior__Connector)
+            }
+            "Interior > Dock Interior > Entry" => Ok(SpotId::Interior__Dock_Interior__Entry),
+            "Interior > Ebih Cave > Entry" => Ok(SpotId::Interior__Ebih_Cave__Entry),
+            "Interior > Garage > Boxes" => Ok(SpotId::Interior__Garage__Boxes),
+            "Interior > Garage > Entry" => Ok(SpotId::Interior__Garage__Entry),
+            "Interior > Outpost Interior > Bookshelf" => {
+                Ok(SpotId::Interior__Outpost_Interior__Bookshelf)
+            }
+            "Interior > Outpost Interior > Entry" => Ok(SpotId::Interior__Outpost_Interior__Entry),
+            "Interior > Tent Interior > Desk" => Ok(SpotId::Interior__Tent_Interior__Desk),
+            "Interior > Tent Interior > Entry" => Ok(SpotId::Interior__Tent_Interior__Entry),
             "Irikar > Abandoned Room > Corner Core" => {
                 Ok(SpotId::Irikar__Abandoned_Room__Corner_Core)
             }
@@ -5977,11 +5996,7 @@ pub enum LocationId {
     Ebih__Boss_Room__Boss__Fight_Alu,
     Ebih__Boss_Room__Boss__Hack_Alu,
     Ebih__Boss_Room__East_Ledge__Item,
-    Ebih__Building_Interior__Corner__Urn,
-    Ebih__Building_Interior__Entry__Remote_Urn,
-    Ebih__Bunker_Interior__Desk__Note,
     Ebih__By_Garage__Crawlspace__Fragment,
-    Ebih__Cave__Entry__Health,
     Ebih__Drone_Room__Item__Urn,
     Ebih__Drone_Room__Middle_Platform__Urn_Quick_Grab,
     Ebih__Ebih_East__Corner__Urn,
@@ -5991,12 +6006,10 @@ pub enum LocationId {
     Ebih__Ebih_West__Alcove__Tablet,
     Ebih__Ebih_West__Block_Left__Break_Block,
     Ebih__Ebih_West__Block_Right__Break_Block,
-    Ebih__Garage__Boxes__Under_Boxes,
     Ebih__Grid_25_10_12__East_10__Remote_Bush,
     Ebih__Grid_25_10_12__Hidden_Bush__Behind_Bush,
     Ebih__Grid_25_2_6__Pit__Item,
     Ebih__Grid_26_10_11__Ledge__Note,
-    Ebih__Tent_Interior__Desk__Note,
     Ebih__Vertical_Interchange__Switch__Activate_Switch,
     Ebih__Waterfall__Alcove__Block_Left,
     Ebih__Waterfall__Alcove__Block_Right,
@@ -6009,7 +6022,6 @@ pub enum LocationId {
     Ebih__Waterfall__Wall_Right__Break_Wall,
     Ebih__Waterfall__Waterfall_Center_Center__Both_Blocks,
     Giguna__Antechamber__Statue_Head__Tablet,
-    Giguna__Building_Interior__Bookshelf__Note,
     Giguna__Carnelian__Vault__Item,
     Giguna__Clouds__Cache__Item,
     Giguna__Dual_Path__Base_of_Wall__Break_Wall,
@@ -6066,6 +6078,13 @@ pub enum LocationId {
     Glacier__The_Big_Drop__Water_Surface__Drown,
     Glacier__Vertical_Room__Peak__Flask,
     Glacier__Vertical_Room__Under_Switch__Switch,
+    Interior__Building_Interior__Corner__Urn,
+    Interior__Building_Interior__Entry__Remote_Urn,
+    Interior__Bunker_Interior__Desk__Note,
+    Interior__Ebih_Cave__Entry__Health,
+    Interior__Garage__Boxes__Under_Boxes,
+    Interior__Outpost_Interior__Bookshelf__Note,
+    Interior__Tent_Interior__Desk__Note,
     Irikar__Abandoned_Room__Corner_Core__Core,
     Irikar__Boss_Room__Bulls_Feet__Boss_Reward,
     Irikar__Boss_Room__Bulls_Feet__Defeat_Gudam,
@@ -6249,20 +6268,8 @@ impl fmt::Display for LocationId {
             LocationId::Ebih__Boss_Room__East_Ledge__Item => {
                 write!(f, "{}", "Ebih > Boss Room > East Ledge > Item")
             }
-            LocationId::Ebih__Building_Interior__Corner__Urn => {
-                write!(f, "{}", "Ebih > Building Interior > Corner > Urn")
-            }
-            LocationId::Ebih__Building_Interior__Entry__Remote_Urn => {
-                write!(f, "{}", "Ebih > Building Interior > Entry > Remote Urn")
-            }
-            LocationId::Ebih__Bunker_Interior__Desk__Note => {
-                write!(f, "{}", "Ebih > Bunker Interior > Desk > Note")
-            }
             LocationId::Ebih__By_Garage__Crawlspace__Fragment => {
                 write!(f, "{}", "Ebih > By Garage > Crawlspace > Fragment")
-            }
-            LocationId::Ebih__Cave__Entry__Health => {
-                write!(f, "{}", "Ebih > Cave > Entry > Health")
             }
             LocationId::Ebih__Drone_Room__Item__Urn => {
                 write!(f, "{}", "Ebih > Drone Room > Item > Urn")
@@ -6295,9 +6302,6 @@ impl fmt::Display for LocationId {
             LocationId::Ebih__Ebih_West__Block_Right__Break_Block => {
                 write!(f, "{}", "Ebih > Ebih West > Block Right > Break Block")
             }
-            LocationId::Ebih__Garage__Boxes__Under_Boxes => {
-                write!(f, "{}", "Ebih > Garage > Boxes > Under Boxes")
-            }
             LocationId::Ebih__Grid_25_10_12__East_10__Remote_Bush => {
                 write!(f, "{}", "Ebih > Grid 25,10-12 > East 10 > Remote Bush")
             }
@@ -6309,9 +6313,6 @@ impl fmt::Display for LocationId {
             }
             LocationId::Ebih__Grid_26_10_11__Ledge__Note => {
                 write!(f, "{}", "Ebih > Grid 26,10-11 > Ledge > Note")
-            }
-            LocationId::Ebih__Tent_Interior__Desk__Note => {
-                write!(f, "{}", "Ebih > Tent Interior > Desk > Note")
             }
             LocationId::Ebih__Vertical_Interchange__Switch__Activate_Switch => write!(
                 f,
@@ -6354,9 +6355,6 @@ impl fmt::Display for LocationId {
             ),
             LocationId::Giguna__Antechamber__Statue_Head__Tablet => {
                 write!(f, "{}", "Giguna > Antechamber > Statue Head > Tablet")
-            }
-            LocationId::Giguna__Building_Interior__Bookshelf__Note => {
-                write!(f, "{}", "Giguna > Building Interior > Bookshelf > Note")
             }
             LocationId::Giguna__Carnelian__Vault__Item => {
                 write!(f, "{}", "Giguna > Carnelian > Vault > Item")
@@ -6565,6 +6563,27 @@ impl fmt::Display for LocationId {
             }
             LocationId::Glacier__Vertical_Room__Under_Switch__Switch => {
                 write!(f, "{}", "Glacier > Vertical Room > Under Switch > Switch")
+            }
+            LocationId::Interior__Building_Interior__Corner__Urn => {
+                write!(f, "{}", "Interior > Building Interior > Corner > Urn")
+            }
+            LocationId::Interior__Building_Interior__Entry__Remote_Urn => {
+                write!(f, "{}", "Interior > Building Interior > Entry > Remote Urn")
+            }
+            LocationId::Interior__Bunker_Interior__Desk__Note => {
+                write!(f, "{}", "Interior > Bunker Interior > Desk > Note")
+            }
+            LocationId::Interior__Ebih_Cave__Entry__Health => {
+                write!(f, "{}", "Interior > Ebih Cave > Entry > Health")
+            }
+            LocationId::Interior__Garage__Boxes__Under_Boxes => {
+                write!(f, "{}", "Interior > Garage > Boxes > Under Boxes")
+            }
+            LocationId::Interior__Outpost_Interior__Bookshelf__Note => {
+                write!(f, "{}", "Interior > Outpost Interior > Bookshelf > Note")
+            }
+            LocationId::Interior__Tent_Interior__Desk__Note => {
+                write!(f, "{}", "Interior > Tent Interior > Desk > Note")
             }
             LocationId::Irikar__Abandoned_Room__Corner_Core__Core => {
                 write!(f, "{}", "Irikar > Abandoned Room > Corner Core > Core")
@@ -6916,19 +6935,9 @@ impl std::str::FromStr for LocationId {
             "Ebih > Boss Room > East Ledge > Item" => {
                 Ok(LocationId::Ebih__Boss_Room__East_Ledge__Item)
             }
-            "Ebih > Building Interior > Corner > Urn" => {
-                Ok(LocationId::Ebih__Building_Interior__Corner__Urn)
-            }
-            "Ebih > Building Interior > Entry > Remote Urn" => {
-                Ok(LocationId::Ebih__Building_Interior__Entry__Remote_Urn)
-            }
-            "Ebih > Bunker Interior > Desk > Note" => {
-                Ok(LocationId::Ebih__Bunker_Interior__Desk__Note)
-            }
             "Ebih > By Garage > Crawlspace > Fragment" => {
                 Ok(LocationId::Ebih__By_Garage__Crawlspace__Fragment)
             }
-            "Ebih > Cave > Entry > Health" => Ok(LocationId::Ebih__Cave__Entry__Health),
             "Ebih > Drone Room > Item > Urn" => Ok(LocationId::Ebih__Drone_Room__Item__Urn),
             "Ebih > Drone Room > Middle Platform > Urn Quick Grab" => {
                 Ok(LocationId::Ebih__Drone_Room__Middle_Platform__Urn_Quick_Grab)
@@ -6950,9 +6959,6 @@ impl std::str::FromStr for LocationId {
             "Ebih > Ebih West > Block Right > Break Block" => {
                 Ok(LocationId::Ebih__Ebih_West__Block_Right__Break_Block)
             }
-            "Ebih > Garage > Boxes > Under Boxes" => {
-                Ok(LocationId::Ebih__Garage__Boxes__Under_Boxes)
-            }
             "Ebih > Grid 25,10-12 > East 10 > Remote Bush" => {
                 Ok(LocationId::Ebih__Grid_25_10_12__East_10__Remote_Bush)
             }
@@ -6963,7 +6969,6 @@ impl std::str::FromStr for LocationId {
             "Ebih > Grid 26,10-11 > Ledge > Note" => {
                 Ok(LocationId::Ebih__Grid_26_10_11__Ledge__Note)
             }
-            "Ebih > Tent Interior > Desk > Note" => Ok(LocationId::Ebih__Tent_Interior__Desk__Note),
             "Ebih > Vertical Interchange > Switch > Activate Switch" => {
                 Ok(LocationId::Ebih__Vertical_Interchange__Switch__Activate_Switch)
             }
@@ -6999,9 +7004,6 @@ impl std::str::FromStr for LocationId {
             }
             "Giguna > Antechamber > Statue Head > Tablet" => {
                 Ok(LocationId::Giguna__Antechamber__Statue_Head__Tablet)
-            }
-            "Giguna > Building Interior > Bookshelf > Note" => {
-                Ok(LocationId::Giguna__Building_Interior__Bookshelf__Note)
             }
             "Giguna > Carnelian > Vault > Item" => Ok(LocationId::Giguna__Carnelian__Vault__Item),
             "Giguna > Clouds > Cache > Item" => Ok(LocationId::Giguna__Clouds__Cache__Item),
@@ -7158,6 +7160,27 @@ impl std::str::FromStr for LocationId {
             }
             "Glacier > Vertical Room > Under Switch > Switch" => {
                 Ok(LocationId::Glacier__Vertical_Room__Under_Switch__Switch)
+            }
+            "Interior > Building Interior > Corner > Urn" => {
+                Ok(LocationId::Interior__Building_Interior__Corner__Urn)
+            }
+            "Interior > Building Interior > Entry > Remote Urn" => {
+                Ok(LocationId::Interior__Building_Interior__Entry__Remote_Urn)
+            }
+            "Interior > Bunker Interior > Desk > Note" => {
+                Ok(LocationId::Interior__Bunker_Interior__Desk__Note)
+            }
+            "Interior > Ebih Cave > Entry > Health" => {
+                Ok(LocationId::Interior__Ebih_Cave__Entry__Health)
+            }
+            "Interior > Garage > Boxes > Under Boxes" => {
+                Ok(LocationId::Interior__Garage__Boxes__Under_Boxes)
+            }
+            "Interior > Outpost Interior > Bookshelf > Note" => {
+                Ok(LocationId::Interior__Outpost_Interior__Bookshelf__Note)
+            }
+            "Interior > Tent Interior > Desk > Note" => {
+                Ok(LocationId::Interior__Tent_Interior__Desk__Note)
             }
             "Irikar > Abandoned Room > Corner Core > Core" => {
                 Ok(LocationId::Irikar__Abandoned_Room__Corner_Core__Core)
@@ -7381,11 +7404,6 @@ impl std::str::FromStr for LocationId {
 )]
 #[repr(u16)]
 pub enum ExitId {
-    Amagi__Cave_Behind_Waterfall__Bottom__ex__Main_Area__Secret_Outcropping_1,
-    Amagi__Cave_Behind_Waterfall__Bottom__ex__Middle_1,
-    Amagi__Cave_Behind_Waterfall__Bottom__ex__Top_1,
-    Amagi__Cave_Behind_Waterfall__Middle__ex__Top_1,
-    Amagi__Cave_Behind_Waterfall__Top__ex__Main_Area__Secret_Waterfall_1,
     Amagi__Grid_31_19__East__ex__Liru_Room__West_19_1,
     Amagi__Grid_31_19__West__ex__Main_Area__East_19_1,
     Amagi__Liru_Room__Platform_4_Left__ex__West_20_1,
@@ -7401,8 +7419,8 @@ pub enum ExitId {
     Amagi__Main_Area__East_15__ex__Glacier__Lake_Main_Entrance__Lake_Access_1,
     Amagi__Main_Area__East_19__ex__Grid_31_19__West_1,
     Amagi__Main_Area__Platform_2__ex__West_Shelf_1,
-    Amagi__Main_Area__Secret_Outcropping__ex__Cave_Behind_Waterfall__Bottom_1,
-    Amagi__Main_Area__Secret_Waterfall__ex__Cave_Behind_Waterfall__Top_1,
+    Amagi__Main_Area__Secret_Outcropping__ex__Interior__Cave_Behind_Waterfall__Bottom_1,
+    Amagi__Main_Area__Secret_Waterfall__ex__Interior__Cave_Behind_Waterfall__Top_1,
     Amagi__Main_Area__Shallow_End__ex__Waters_Edge_1,
     Amagi__Main_Area__West_15__ex__West_Lake__East_15_1,
     Amagi__Main_Area__West_18__ex__West_Lake__East_18_1,
@@ -7446,7 +7464,7 @@ pub enum ExitId {
     Antarctica__East__Building_2_Entry__ex__Building_2_Upper_1,
     Antarctica__East__Building_2_Upper__ex__Building_2__Upper_Door_1,
     Antarctica__East__Building_2_Upper__ex__Top__Power_Entry_1,
-    Antarctica__Freight_Elevator__Controls__ex__Glacier__Dock_Elevator__Elevator_1,
+    Antarctica__Freight_Elevator__Controls__ex__Interior__Dock_Elevator__Elevator_1,
     Antarctica__Freight_Elevator__Left__ex__Building_2__Entry_1,
     Antarctica__Power_Room__Entry__ex__Top__Power_Entry_1,
     Antarctica__Shed__Interior__ex__West__Shed_Entry_1,
@@ -7455,8 +7473,8 @@ pub enum ExitId {
     Antarctica__West__Boxes__ex__Building_1W__West_Entry_1,
     Antarctica__West__Shed_Entry__ex__Helipad_1,
     Antarctica__West__Shed_Entry__ex__Shed__Interior_1,
-    Ebih__Base_Camp__Building_Entry__ex__Building_Interior__Entry_1,
-    Ebih__Base_Camp__Bunker_Entry__ex__Bunker_Interior__Entry_1,
+    Ebih__Base_Camp__Building_Entry__ex__Interior__Building_Interior__Entry_1,
+    Ebih__Base_Camp__Bunker_Entry__ex__Interior__Bunker_Interior__Entry_1,
     Ebih__Base_Camp__East_11__ex__Glacier__Grid_31_9_12__Midair_1,
     Ebih__Base_Camp__East_11__ex__Top_Platform_1,
     Ebih__Base_Camp__East_12__ex__Glacier__Grid_31_9_12__West_12_1,
@@ -7465,7 +7483,7 @@ pub enum ExitId {
     Ebih__Base_Camp__Left_Platform_Moved__ex__Top_Platform_1,
     Ebih__Base_Camp__Left_Platform_Moved__ex__Top_Platform_2,
     Ebih__Base_Camp__Save_Point__ex__Top_Platform_1,
-    Ebih__Base_Camp__Tent_Entry__ex__Tent_Interior__Entry_1,
+    Ebih__Base_Camp__Tent_Entry__ex__Interior__Tent_Interior__Entry_1,
     Ebih__Base_Camp__Top_Platform__ex__Left_Platform_1,
     Ebih__Base_Camp__Top_Platform__ex__Left_Platform_Moved_1,
     Ebih__Base_Camp__West_11__ex__Left_Platform_1,
@@ -7480,8 +7498,6 @@ pub enum ExitId {
     Ebih__Boss_Room__Lower_Tree__ex__Lower_Ledge_1,
     Ebih__Boss_Room__Lower_Tree__ex__Lower_Ledge_2,
     Ebih__Boss_Room__West_6__ex__Grid_21_2_6__East_6_1,
-    Ebih__Building_Interior__Entry__ex__Base_Camp__Building_Entry_1,
-    Ebih__Bunker_Interior__Entry__ex__Base_Camp__Bunker_Entry_1,
     Ebih__By_Garage__Crawlspace__ex__Crawlspace_Opening_1,
     Ebih__By_Garage__Crawlspace_Opening__ex__Crawlspace_1,
     Ebih__By_Garage__East_13__ex__Base_Camp__West_13_1,
@@ -7489,13 +7505,12 @@ pub enum ExitId {
     Ebih__By_Garage__East_Platform__ex__Crawlspace_Opening_2,
     Ebih__By_Garage__East_Platform__ex__Outcropping_1,
     Ebih__By_Garage__East_Platform__ex__Outcropping_2,
-    Ebih__By_Garage__Garage_Entry__ex__Garage__Entry_1,
+    Ebih__By_Garage__Garage_Entry__ex__Interior__Garage__Entry_1,
     Ebih__By_Garage__Lower_Platform__ex__East_Bush_1,
     Ebih__By_Garage__Lower_Platform__ex__East_Bush_2,
     Ebih__By_Garage__Lower_Platform__ex__West_Bush_1,
     Ebih__By_Garage__Lower_Platform__ex__West_Bush_2,
     Ebih__By_Garage__West_12__ex__Grid_25_10_12__East_12_1,
-    Ebih__Cave__Entry__ex__Waterfall__Cave_Entrance_1,
     Ebih__Drone_Room__East_4__ex__Grid_25_2_6__West_4_1,
     Ebih__Drone_Room__Middle_Platform__ex__Portal_Exit_1,
     Ebih__Drone_Room__Middle_Platform__Urn_Quick_Grab,
@@ -7553,7 +7568,6 @@ pub enum ExitId {
     Ebih__Ebih_West__West_13__ex__Giguna__Wasteland__East_13_1,
     Ebih__Ebih_West__West_9__ex__Giguna__Giguna_Northeast__East_9_1,
     Ebih__Ebih_West__West_9__ex__Giguna_Pillar_1,
-    Ebih__Garage__Entry__ex__By_Garage__Garage_Entry_1,
     Ebih__Gem_Room__West_13__ex__Vertical_Interchange__East_13_1,
     Ebih__Grid_21_2_6__East_6__ex__Boss_Room__West_6_1,
     Ebih__Grid_21_2_6__West_6__ex__Ebih_West__East_6_1,
@@ -7595,7 +7609,6 @@ pub enum ExitId {
     Ebih__Observation_Tower_Room__Tower_Top__ex__West_9_2,
     Ebih__Observation_Tower_Room__West_10__ex__Grid_26_10_11__East_10_1,
     Ebih__Observation_Tower_Room__West_9__ex__Ebih_East__East_9_1,
-    Ebih__Tent_Interior__Entry__ex__Base_Camp__Tent_Entry_1,
     Ebih__Vertical_Interchange__Below_Door__ex__Blocked_Refill_Station_1,
     Ebih__Vertical_Interchange__Below_Door__ex__Blocked_Refill_Station_2,
     Ebih__Vertical_Interchange__Below_Door__ex__Refill_Station_1,
@@ -7642,7 +7655,7 @@ pub enum ExitId {
     Ebih__Waterfall__Below_Left_Switch__ex__Ledge_Below_Hole_1,
     Ebih__Waterfall__Below_Tree__ex__Big_Tree_1,
     Ebih__Waterfall__Below_Tree__ex__Big_Tree_2,
-    Ebih__Waterfall__Cave_Entrance__ex__Cave__Entry_1,
+    Ebih__Waterfall__Cave_Entrance__ex__Interior__Ebih_Cave__Entry_1,
     Ebih__Waterfall__East_10__ex__Grid_25_10_12__West_10_1,
     Ebih__Waterfall__East_11__ex__Grid_25_10_12__West_11_1,
     Ebih__Waterfall__East_7__ex__Ebih_East__West_7_1,
@@ -7690,9 +7703,6 @@ pub enum ExitId {
     Giguna__Antechamber__West_15__ex__Small_Bricks_1,
     Giguna__Breachable_Wall__Above_West_Catwalk__ex__Irikar__Boss_Room__Above_Catwalk_1,
     Giguna__Breachable_Wall__West_Mid_air__ex__Irikar__East_Rooftops__East_Mid_air_1,
-    Giguna__Building_Interior__Entry__ex__Bookshelf_1,
-    Giguna__Building_Interior__Entry__ex__Bookshelf_2,
-    Giguna__Building_Interior__Entry__ex__Giguna_Base__Building_Entry_1,
     Giguna__Carnelian__Door__ex__Switch_1,
     Giguna__Carnelian__Door__ex__Vault_1,
     Giguna__Carnelian__East_10__ex__Giguna_Northeast__West_10_1,
@@ -7823,7 +7833,7 @@ pub enum ExitId {
     Giguna__Giguna_Base__Below_Gate__ex__Kari_2,
     Giguna__Giguna_Base__Below_Gate__ex__Middle_Platform_1,
     Giguna__Giguna_Base__Below_Gate__ex__Middle_Platform_2,
-    Giguna__Giguna_Base__Building_Entry__ex__Building_Interior__Entry_1,
+    Giguna__Giguna_Base__Building_Entry__ex__Interior__Outpost_Interior__Entry_1,
     Giguna__Giguna_Base__East_14__ex__Wasteland__West_14_1,
     Giguna__Giguna_Base__East_17__ex__Hard_Rock__West_17_1,
     Giguna__Giguna_Base__Kari__ex__Below_Gate_1,
@@ -8051,11 +8061,8 @@ pub enum ExitId {
     Glacier__Boomerang_Room__West__ex__Boomerang_Antechamber__East_12_1,
     Glacier__Compass_Room__East__ex__Grid_43_10_11__Lower_1,
     Glacier__Compass_Room__West__ex__The_Big_Drop__East_1,
-    Glacier__Dock_Elevator__Connector__ex__Dock_Interior__Connector_1,
-    Glacier__Dock_Interior__Connector__ex__Dock_Elevator__Connector_1,
-    Glacier__Dock_Interior__Entry__ex__Dock_Outside__Entry_1,
     Glacier__Dock_Outside__Do_Not_Enter__ex__Revival__East_9_1,
-    Glacier__Dock_Outside__Entry__ex__Dock_Interior__Entry_1,
+    Glacier__Dock_Outside__Entry__ex__Interior__Dock_Interior__Entry_1,
     Glacier__Grid_31_9_12__East_10__ex__Grid_32_7_10__West_10_1,
     Glacier__Grid_31_9_12__East_9__ex__Grid_32_7_10__West_9_1,
     Glacier__Grid_31_9_12__Midair__ex__Ebih__Base_Camp__East_11_1,
@@ -8137,6 +8144,22 @@ pub enum ExitId {
     Glacier__Vertical_Room__Under_Switch__ex__Past_Gate_1,
     Glacier__Vertical_Room__West_8__ex__Peak__East_8_1,
     Glacier__Vertical_Room__West_9__ex__Ledge_Grab_Room__East_9_1,
+    Interior__Building_Interior__Entry__ex__Ebih__Base_Camp__Building_Entry_1,
+    Interior__Bunker_Interior__Entry__ex__Ebih__Base_Camp__Bunker_Entry_1,
+    Interior__Cave_Behind_Waterfall__Bottom__ex__Amagi__Main_Area__Secret_Outcropping_1,
+    Interior__Cave_Behind_Waterfall__Bottom__ex__Middle_1,
+    Interior__Cave_Behind_Waterfall__Bottom__ex__Top_1,
+    Interior__Cave_Behind_Waterfall__Middle__ex__Top_1,
+    Interior__Cave_Behind_Waterfall__Top__ex__Amagi__Main_Area__Secret_Waterfall_1,
+    Interior__Dock_Elevator__Connector__ex__Dock_Interior__Connector_1,
+    Interior__Dock_Interior__Connector__ex__Dock_Elevator__Connector_1,
+    Interior__Dock_Interior__Entry__ex__Glacier__Dock_Outside__Entry_1,
+    Interior__Ebih_Cave__Entry__ex__Ebih__Waterfall__Cave_Entrance_1,
+    Interior__Garage__Entry__ex__Ebih__By_Garage__Garage_Entry_1,
+    Interior__Outpost_Interior__Entry__ex__Bookshelf_1,
+    Interior__Outpost_Interior__Entry__ex__Bookshelf_2,
+    Interior__Outpost_Interior__Entry__ex__Giguna__Giguna_Base__Building_Entry_1,
+    Interior__Tent_Interior__Entry__ex__Ebih__Base_Camp__Tent_Entry_1,
     Irikar__Abandoned_Room__West__ex__Basement_Portal__East_27_1,
     Irikar__Airy__Middle_South__ex__Sight_Room__Above_Room_North_1,
     Irikar__Basement_Pipes__Bricks_Under_Pipes__ex__Double_Pipe_Right_1,
@@ -8344,11 +8367,6 @@ pub enum ExitId {
 impl fmt::Display for ExitId {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         match self {
-            ExitId::Amagi__Cave_Behind_Waterfall__Bottom__ex__Main_Area__Secret_Outcropping_1 => write!(f, "{}", "Amagi > Cave Behind Waterfall > Bottom ==> Main Area > Secret Outcropping (1)"),
-            ExitId::Amagi__Cave_Behind_Waterfall__Bottom__ex__Middle_1 => write!(f, "{}", "Amagi > Cave Behind Waterfall > Bottom ==> Middle (1)"),
-            ExitId::Amagi__Cave_Behind_Waterfall__Bottom__ex__Top_1 => write!(f, "{}", "Amagi > Cave Behind Waterfall > Bottom ==> Top (1)"),
-            ExitId::Amagi__Cave_Behind_Waterfall__Middle__ex__Top_1 => write!(f, "{}", "Amagi > Cave Behind Waterfall > Middle ==> Top (1)"),
-            ExitId::Amagi__Cave_Behind_Waterfall__Top__ex__Main_Area__Secret_Waterfall_1 => write!(f, "{}", "Amagi > Cave Behind Waterfall > Top ==> Main Area > Secret Waterfall (1)"),
             ExitId::Amagi__Grid_31_19__East__ex__Liru_Room__West_19_1 => write!(f, "{}", "Amagi > Grid 31,19 > East ==> Liru Room > West 19 (1)"),
             ExitId::Amagi__Grid_31_19__West__ex__Main_Area__East_19_1 => write!(f, "{}", "Amagi > Grid 31,19 > West ==> Main Area > East 19 (1)"),
             ExitId::Amagi__Liru_Room__Platform_4_Left__ex__West_20_1 => write!(f, "{}", "Amagi > Liru Room > Platform 4 Left ==> West 20 (1)"),
@@ -8364,8 +8382,8 @@ impl fmt::Display for ExitId {
             ExitId::Amagi__Main_Area__East_15__ex__Glacier__Lake_Main_Entrance__Lake_Access_1 => write!(f, "{}", "Amagi > Main Area > East 15 ==> Glacier > Lake Main Entrance > Lake Access (1)"),
             ExitId::Amagi__Main_Area__East_19__ex__Grid_31_19__West_1 => write!(f, "{}", "Amagi > Main Area > East 19 ==> Grid 31,19 > West (1)"),
             ExitId::Amagi__Main_Area__Platform_2__ex__West_Shelf_1 => write!(f, "{}", "Amagi > Main Area > Platform 2 ==> West Shelf (1)"),
-            ExitId::Amagi__Main_Area__Secret_Outcropping__ex__Cave_Behind_Waterfall__Bottom_1 => write!(f, "{}", "Amagi > Main Area > Secret Outcropping ==> Cave Behind Waterfall > Bottom (1)"),
-            ExitId::Amagi__Main_Area__Secret_Waterfall__ex__Cave_Behind_Waterfall__Top_1 => write!(f, "{}", "Amagi > Main Area > Secret Waterfall ==> Cave Behind Waterfall > Top (1)"),
+            ExitId::Amagi__Main_Area__Secret_Outcropping__ex__Interior__Cave_Behind_Waterfall__Bottom_1 => write!(f, "{}", "Amagi > Main Area > Secret Outcropping ==> Interior > Cave Behind Waterfall > Bottom (1)"),
+            ExitId::Amagi__Main_Area__Secret_Waterfall__ex__Interior__Cave_Behind_Waterfall__Top_1 => write!(f, "{}", "Amagi > Main Area > Secret Waterfall ==> Interior > Cave Behind Waterfall > Top (1)"),
             ExitId::Amagi__Main_Area__Shallow_End__ex__Waters_Edge_1 => write!(f, "{}", "Amagi > Main Area > Shallow End ==> Water's Edge (1)"),
             ExitId::Amagi__Main_Area__West_15__ex__West_Lake__East_15_1 => write!(f, "{}", "Amagi > Main Area > West 15 ==> West Lake > East 15 (1)"),
             ExitId::Amagi__Main_Area__West_18__ex__West_Lake__East_18_1 => write!(f, "{}", "Amagi > Main Area > West 18 ==> West Lake > East 18 (1)"),
@@ -8409,7 +8427,7 @@ impl fmt::Display for ExitId {
             ExitId::Antarctica__East__Building_2_Entry__ex__Building_2_Upper_1 => write!(f, "{}", "Antarctica > East > Building 2 Entry ==> Building 2 Upper (1)"),
             ExitId::Antarctica__East__Building_2_Upper__ex__Building_2__Upper_Door_1 => write!(f, "{}", "Antarctica > East > Building 2 Upper ==> Building 2 > Upper Door (1)"),
             ExitId::Antarctica__East__Building_2_Upper__ex__Top__Power_Entry_1 => write!(f, "{}", "Antarctica > East > Building 2 Upper ==> Top > Power Entry (1)"),
-            ExitId::Antarctica__Freight_Elevator__Controls__ex__Glacier__Dock_Elevator__Elevator_1 => write!(f, "{}", "Antarctica > Freight Elevator > Controls ==> Glacier > Dock Elevator > Elevator (1)"),
+            ExitId::Antarctica__Freight_Elevator__Controls__ex__Interior__Dock_Elevator__Elevator_1 => write!(f, "{}", "Antarctica > Freight Elevator > Controls ==> Interior > Dock Elevator > Elevator (1)"),
             ExitId::Antarctica__Freight_Elevator__Left__ex__Building_2__Entry_1 => write!(f, "{}", "Antarctica > Freight Elevator > Left ==> Building 2 > Entry (1)"),
             ExitId::Antarctica__Power_Room__Entry__ex__Top__Power_Entry_1 => write!(f, "{}", "Antarctica > Power Room > Entry ==> Top > Power Entry (1)"),
             ExitId::Antarctica__Shed__Interior__ex__West__Shed_Entry_1 => write!(f, "{}", "Antarctica > Shed > Interior ==> West > Shed Entry (1)"),
@@ -8418,8 +8436,8 @@ impl fmt::Display for ExitId {
             ExitId::Antarctica__West__Boxes__ex__Building_1W__West_Entry_1 => write!(f, "{}", "Antarctica > West > Boxes ==> Building 1W > West Entry (1)"),
             ExitId::Antarctica__West__Shed_Entry__ex__Helipad_1 => write!(f, "{}", "Antarctica > West > Shed Entry ==> Helipad (1)"),
             ExitId::Antarctica__West__Shed_Entry__ex__Shed__Interior_1 => write!(f, "{}", "Antarctica > West > Shed Entry ==> Shed > Interior (1)"),
-            ExitId::Ebih__Base_Camp__Building_Entry__ex__Building_Interior__Entry_1 => write!(f, "{}", "Ebih > Base Camp > Building Entry ==> Building Interior > Entry (1)"),
-            ExitId::Ebih__Base_Camp__Bunker_Entry__ex__Bunker_Interior__Entry_1 => write!(f, "{}", "Ebih > Base Camp > Bunker Entry ==> Bunker Interior > Entry (1)"),
+            ExitId::Ebih__Base_Camp__Building_Entry__ex__Interior__Building_Interior__Entry_1 => write!(f, "{}", "Ebih > Base Camp > Building Entry ==> Interior > Building Interior > Entry (1)"),
+            ExitId::Ebih__Base_Camp__Bunker_Entry__ex__Interior__Bunker_Interior__Entry_1 => write!(f, "{}", "Ebih > Base Camp > Bunker Entry ==> Interior > Bunker Interior > Entry (1)"),
             ExitId::Ebih__Base_Camp__East_11__ex__Glacier__Grid_31_9_12__Midair_1 => write!(f, "{}", "Ebih > Base Camp > East 11 ==> Glacier > Grid 31,9-12 > Midair (1)"),
             ExitId::Ebih__Base_Camp__East_11__ex__Top_Platform_1 => write!(f, "{}", "Ebih > Base Camp > East 11 ==> Top Platform (1)"),
             ExitId::Ebih__Base_Camp__East_12__ex__Glacier__Grid_31_9_12__West_12_1 => write!(f, "{}", "Ebih > Base Camp > East 12 ==> Glacier > Grid 31,9-12 > West 12 (1)"),
@@ -8428,7 +8446,7 @@ impl fmt::Display for ExitId {
             ExitId::Ebih__Base_Camp__Left_Platform_Moved__ex__Top_Platform_1 => write!(f, "{}", "Ebih > Base Camp > Left Platform Moved ==> Top Platform (1)"),
             ExitId::Ebih__Base_Camp__Left_Platform_Moved__ex__Top_Platform_2 => write!(f, "{}", "Ebih > Base Camp > Left Platform Moved ==> Top Platform (2)"),
             ExitId::Ebih__Base_Camp__Save_Point__ex__Top_Platform_1 => write!(f, "{}", "Ebih > Base Camp > Save Point ==> Top Platform (1)"),
-            ExitId::Ebih__Base_Camp__Tent_Entry__ex__Tent_Interior__Entry_1 => write!(f, "{}", "Ebih > Base Camp > Tent Entry ==> Tent Interior > Entry (1)"),
+            ExitId::Ebih__Base_Camp__Tent_Entry__ex__Interior__Tent_Interior__Entry_1 => write!(f, "{}", "Ebih > Base Camp > Tent Entry ==> Interior > Tent Interior > Entry (1)"),
             ExitId::Ebih__Base_Camp__Top_Platform__ex__Left_Platform_1 => write!(f, "{}", "Ebih > Base Camp > Top Platform ==> Left Platform (1)"),
             ExitId::Ebih__Base_Camp__Top_Platform__ex__Left_Platform_Moved_1 => write!(f, "{}", "Ebih > Base Camp > Top Platform ==> Left Platform Moved (1)"),
             ExitId::Ebih__Base_Camp__West_11__ex__Left_Platform_1 => write!(f, "{}", "Ebih > Base Camp > West 11 ==> Left Platform (1)"),
@@ -8443,8 +8461,6 @@ impl fmt::Display for ExitId {
             ExitId::Ebih__Boss_Room__Lower_Tree__ex__Lower_Ledge_1 => write!(f, "{}", "Ebih > Boss Room > Lower Tree ==> Lower Ledge (1)"),
             ExitId::Ebih__Boss_Room__Lower_Tree__ex__Lower_Ledge_2 => write!(f, "{}", "Ebih > Boss Room > Lower Tree ==> Lower Ledge (2)"),
             ExitId::Ebih__Boss_Room__West_6__ex__Grid_21_2_6__East_6_1 => write!(f, "{}", "Ebih > Boss Room > West 6 ==> Grid 21,2-6 > East 6 (1)"),
-            ExitId::Ebih__Building_Interior__Entry__ex__Base_Camp__Building_Entry_1 => write!(f, "{}", "Ebih > Building Interior > Entry ==> Base Camp > Building Entry (1)"),
-            ExitId::Ebih__Bunker_Interior__Entry__ex__Base_Camp__Bunker_Entry_1 => write!(f, "{}", "Ebih > Bunker Interior > Entry ==> Base Camp > Bunker Entry (1)"),
             ExitId::Ebih__By_Garage__Crawlspace__ex__Crawlspace_Opening_1 => write!(f, "{}", "Ebih > By Garage > Crawlspace ==> Crawlspace Opening (1)"),
             ExitId::Ebih__By_Garage__Crawlspace_Opening__ex__Crawlspace_1 => write!(f, "{}", "Ebih > By Garage > Crawlspace Opening ==> Crawlspace (1)"),
             ExitId::Ebih__By_Garage__East_13__ex__Base_Camp__West_13_1 => write!(f, "{}", "Ebih > By Garage > East 13 ==> Base Camp > West 13 (1)"),
@@ -8452,13 +8468,12 @@ impl fmt::Display for ExitId {
             ExitId::Ebih__By_Garage__East_Platform__ex__Crawlspace_Opening_2 => write!(f, "{}", "Ebih > By Garage > East Platform ==> Crawlspace Opening (2)"),
             ExitId::Ebih__By_Garage__East_Platform__ex__Outcropping_1 => write!(f, "{}", "Ebih > By Garage > East Platform ==> Outcropping (1)"),
             ExitId::Ebih__By_Garage__East_Platform__ex__Outcropping_2 => write!(f, "{}", "Ebih > By Garage > East Platform ==> Outcropping (2)"),
-            ExitId::Ebih__By_Garage__Garage_Entry__ex__Garage__Entry_1 => write!(f, "{}", "Ebih > By Garage > Garage Entry ==> Garage > Entry (1)"),
+            ExitId::Ebih__By_Garage__Garage_Entry__ex__Interior__Garage__Entry_1 => write!(f, "{}", "Ebih > By Garage > Garage Entry ==> Interior > Garage > Entry (1)"),
             ExitId::Ebih__By_Garage__Lower_Platform__ex__East_Bush_1 => write!(f, "{}", "Ebih > By Garage > Lower Platform ==> East Bush (1)"),
             ExitId::Ebih__By_Garage__Lower_Platform__ex__East_Bush_2 => write!(f, "{}", "Ebih > By Garage > Lower Platform ==> East Bush (2)"),
             ExitId::Ebih__By_Garage__Lower_Platform__ex__West_Bush_1 => write!(f, "{}", "Ebih > By Garage > Lower Platform ==> West Bush (1)"),
             ExitId::Ebih__By_Garage__Lower_Platform__ex__West_Bush_2 => write!(f, "{}", "Ebih > By Garage > Lower Platform ==> West Bush (2)"),
             ExitId::Ebih__By_Garage__West_12__ex__Grid_25_10_12__East_12_1 => write!(f, "{}", "Ebih > By Garage > West 12 ==> Grid 25,10-12 > East 12 (1)"),
-            ExitId::Ebih__Cave__Entry__ex__Waterfall__Cave_Entrance_1 => write!(f, "{}", "Ebih > Cave > Entry ==> Waterfall > Cave Entrance (1)"),
             ExitId::Ebih__Drone_Room__East_4__ex__Grid_25_2_6__West_4_1 => write!(f, "{}", "Ebih > Drone Room > East 4 ==> Grid 25,2-6 > West 4 (1)"),
             ExitId::Ebih__Drone_Room__Middle_Platform__ex__Portal_Exit_1 => write!(f, "{}", "Ebih > Drone Room > Middle Platform ==> Portal Exit (1)"),
             ExitId::Ebih__Drone_Room__Middle_Platform__Urn_Quick_Grab => write!(f, "{}", "Ebih > Drone Room > Middle Platform > Urn Quick Grab"),
@@ -8516,7 +8531,6 @@ impl fmt::Display for ExitId {
             ExitId::Ebih__Ebih_West__West_13__ex__Giguna__Wasteland__East_13_1 => write!(f, "{}", "Ebih > Ebih West > West 13 ==> Giguna > Wasteland > East 13 (1)"),
             ExitId::Ebih__Ebih_West__West_9__ex__Giguna__Giguna_Northeast__East_9_1 => write!(f, "{}", "Ebih > Ebih West > West 9 ==> Giguna > Giguna Northeast > East 9 (1)"),
             ExitId::Ebih__Ebih_West__West_9__ex__Giguna_Pillar_1 => write!(f, "{}", "Ebih > Ebih West > West 9 ==> Giguna Pillar (1)"),
-            ExitId::Ebih__Garage__Entry__ex__By_Garage__Garage_Entry_1 => write!(f, "{}", "Ebih > Garage > Entry ==> By Garage > Garage Entry (1)"),
             ExitId::Ebih__Gem_Room__West_13__ex__Vertical_Interchange__East_13_1 => write!(f, "{}", "Ebih > Gem Room > West 13 ==> Vertical Interchange > East 13 (1)"),
             ExitId::Ebih__Grid_21_2_6__East_6__ex__Boss_Room__West_6_1 => write!(f, "{}", "Ebih > Grid 21,2-6 > East 6 ==> Boss Room > West 6 (1)"),
             ExitId::Ebih__Grid_21_2_6__West_6__ex__Ebih_West__East_6_1 => write!(f, "{}", "Ebih > Grid 21,2-6 > West 6 ==> Ebih West > East 6 (1)"),
@@ -8558,7 +8572,6 @@ impl fmt::Display for ExitId {
             ExitId::Ebih__Observation_Tower_Room__Tower_Top__ex__West_9_2 => write!(f, "{}", "Ebih > Observation Tower Room > Tower Top ==> West 9 (2)"),
             ExitId::Ebih__Observation_Tower_Room__West_10__ex__Grid_26_10_11__East_10_1 => write!(f, "{}", "Ebih > Observation Tower Room > West 10 ==> Grid 26,10-11 > East 10 (1)"),
             ExitId::Ebih__Observation_Tower_Room__West_9__ex__Ebih_East__East_9_1 => write!(f, "{}", "Ebih > Observation Tower Room > West 9 ==> Ebih East > East 9 (1)"),
-            ExitId::Ebih__Tent_Interior__Entry__ex__Base_Camp__Tent_Entry_1 => write!(f, "{}", "Ebih > Tent Interior > Entry ==> Base Camp > Tent Entry (1)"),
             ExitId::Ebih__Vertical_Interchange__Below_Door__ex__Blocked_Refill_Station_1 => write!(f, "{}", "Ebih > Vertical Interchange > Below Door ==> Blocked Refill Station (1)"),
             ExitId::Ebih__Vertical_Interchange__Below_Door__ex__Blocked_Refill_Station_2 => write!(f, "{}", "Ebih > Vertical Interchange > Below Door ==> Blocked Refill Station (2)"),
             ExitId::Ebih__Vertical_Interchange__Below_Door__ex__Refill_Station_1 => write!(f, "{}", "Ebih > Vertical Interchange > Below Door ==> Refill Station (1)"),
@@ -8605,7 +8618,7 @@ impl fmt::Display for ExitId {
             ExitId::Ebih__Waterfall__Below_Left_Switch__ex__Ledge_Below_Hole_1 => write!(f, "{}", "Ebih > Waterfall > Below Left Switch ==> Ledge Below Hole (1)"),
             ExitId::Ebih__Waterfall__Below_Tree__ex__Big_Tree_1 => write!(f, "{}", "Ebih > Waterfall > Below Tree ==> Big Tree (1)"),
             ExitId::Ebih__Waterfall__Below_Tree__ex__Big_Tree_2 => write!(f, "{}", "Ebih > Waterfall > Below Tree ==> Big Tree (2)"),
-            ExitId::Ebih__Waterfall__Cave_Entrance__ex__Cave__Entry_1 => write!(f, "{}", "Ebih > Waterfall > Cave Entrance ==> Cave > Entry (1)"),
+            ExitId::Ebih__Waterfall__Cave_Entrance__ex__Interior__Ebih_Cave__Entry_1 => write!(f, "{}", "Ebih > Waterfall > Cave Entrance ==> Interior > Ebih Cave > Entry (1)"),
             ExitId::Ebih__Waterfall__East_10__ex__Grid_25_10_12__West_10_1 => write!(f, "{}", "Ebih > Waterfall > East 10 ==> Grid 25,10-12 > West 10 (1)"),
             ExitId::Ebih__Waterfall__East_11__ex__Grid_25_10_12__West_11_1 => write!(f, "{}", "Ebih > Waterfall > East 11 ==> Grid 25,10-12 > West 11 (1)"),
             ExitId::Ebih__Waterfall__East_7__ex__Ebih_East__West_7_1 => write!(f, "{}", "Ebih > Waterfall > East 7 ==> Ebih East > West 7 (1)"),
@@ -8653,9 +8666,6 @@ impl fmt::Display for ExitId {
             ExitId::Giguna__Antechamber__West_15__ex__Small_Bricks_1 => write!(f, "{}", "Giguna > Antechamber > West 15 ==> Small Bricks (1)"),
             ExitId::Giguna__Breachable_Wall__Above_West_Catwalk__ex__Irikar__Boss_Room__Above_Catwalk_1 => write!(f, "{}", "Giguna > Breachable Wall > Above West Catwalk ==> Irikar > Boss Room > Above Catwalk (1)"),
             ExitId::Giguna__Breachable_Wall__West_Mid_air__ex__Irikar__East_Rooftops__East_Mid_air_1 => write!(f, "{}", "Giguna > Breachable Wall > West Mid-air ==> Irikar > East Rooftops > East Mid-air (1)"),
-            ExitId::Giguna__Building_Interior__Entry__ex__Bookshelf_1 => write!(f, "{}", "Giguna > Building Interior > Entry ==> Bookshelf (1)"),
-            ExitId::Giguna__Building_Interior__Entry__ex__Bookshelf_2 => write!(f, "{}", "Giguna > Building Interior > Entry ==> Bookshelf (2)"),
-            ExitId::Giguna__Building_Interior__Entry__ex__Giguna_Base__Building_Entry_1 => write!(f, "{}", "Giguna > Building Interior > Entry ==> Giguna Base > Building Entry (1)"),
             ExitId::Giguna__Carnelian__Door__ex__Switch_1 => write!(f, "{}", "Giguna > Carnelian > Door ==> Switch (1)"),
             ExitId::Giguna__Carnelian__Door__ex__Vault_1 => write!(f, "{}", "Giguna > Carnelian > Door ==> Vault (1)"),
             ExitId::Giguna__Carnelian__East_10__ex__Giguna_Northeast__West_10_1 => write!(f, "{}", "Giguna > Carnelian > East 10 ==> Giguna Northeast > West 10 (1)"),
@@ -8786,7 +8796,7 @@ impl fmt::Display for ExitId {
             ExitId::Giguna__Giguna_Base__Below_Gate__ex__Kari_2 => write!(f, "{}", "Giguna > Giguna Base > Below Gate ==> Kari (2)"),
             ExitId::Giguna__Giguna_Base__Below_Gate__ex__Middle_Platform_1 => write!(f, "{}", "Giguna > Giguna Base > Below Gate ==> Middle Platform (1)"),
             ExitId::Giguna__Giguna_Base__Below_Gate__ex__Middle_Platform_2 => write!(f, "{}", "Giguna > Giguna Base > Below Gate ==> Middle Platform (2)"),
-            ExitId::Giguna__Giguna_Base__Building_Entry__ex__Building_Interior__Entry_1 => write!(f, "{}", "Giguna > Giguna Base > Building Entry ==> Building Interior > Entry (1)"),
+            ExitId::Giguna__Giguna_Base__Building_Entry__ex__Interior__Outpost_Interior__Entry_1 => write!(f, "{}", "Giguna > Giguna Base > Building Entry ==> Interior > Outpost Interior > Entry (1)"),
             ExitId::Giguna__Giguna_Base__East_14__ex__Wasteland__West_14_1 => write!(f, "{}", "Giguna > Giguna Base > East 14 ==> Wasteland > West 14 (1)"),
             ExitId::Giguna__Giguna_Base__East_17__ex__Hard_Rock__West_17_1 => write!(f, "{}", "Giguna > Giguna Base > East 17 ==> Hard Rock > West 17 (1)"),
             ExitId::Giguna__Giguna_Base__Kari__ex__Below_Gate_1 => write!(f, "{}", "Giguna > Giguna Base > Kari ==> Below Gate (1)"),
@@ -9014,11 +9024,8 @@ impl fmt::Display for ExitId {
             ExitId::Glacier__Boomerang_Room__West__ex__Boomerang_Antechamber__East_12_1 => write!(f, "{}", "Glacier > Boomerang Room > West ==> Boomerang Antechamber > East 12 (1)"),
             ExitId::Glacier__Compass_Room__East__ex__Grid_43_10_11__Lower_1 => write!(f, "{}", "Glacier > Compass Room > East ==> Grid 43,10-11 > Lower (1)"),
             ExitId::Glacier__Compass_Room__West__ex__The_Big_Drop__East_1 => write!(f, "{}", "Glacier > Compass Room > West ==> The Big Drop > East (1)"),
-            ExitId::Glacier__Dock_Elevator__Connector__ex__Dock_Interior__Connector_1 => write!(f, "{}", "Glacier > Dock Elevator > Connector ==> Dock Interior > Connector (1)"),
-            ExitId::Glacier__Dock_Interior__Connector__ex__Dock_Elevator__Connector_1 => write!(f, "{}", "Glacier > Dock Interior > Connector ==> Dock Elevator > Connector (1)"),
-            ExitId::Glacier__Dock_Interior__Entry__ex__Dock_Outside__Entry_1 => write!(f, "{}", "Glacier > Dock Interior > Entry ==> Dock Outside > Entry (1)"),
             ExitId::Glacier__Dock_Outside__Do_Not_Enter__ex__Revival__East_9_1 => write!(f, "{}", "Glacier > Dock Outside > Do Not Enter ==> Revival > East 9 (1)"),
-            ExitId::Glacier__Dock_Outside__Entry__ex__Dock_Interior__Entry_1 => write!(f, "{}", "Glacier > Dock Outside > Entry ==> Dock Interior > Entry (1)"),
+            ExitId::Glacier__Dock_Outside__Entry__ex__Interior__Dock_Interior__Entry_1 => write!(f, "{}", "Glacier > Dock Outside > Entry ==> Interior > Dock Interior > Entry (1)"),
             ExitId::Glacier__Grid_31_9_12__East_10__ex__Grid_32_7_10__West_10_1 => write!(f, "{}", "Glacier > Grid 31,9-12 > East 10 ==> Grid 32,7-10 > West 10 (1)"),
             ExitId::Glacier__Grid_31_9_12__East_9__ex__Grid_32_7_10__West_9_1 => write!(f, "{}", "Glacier > Grid 31,9-12 > East 9 ==> Grid 32,7-10 > West 9 (1)"),
             ExitId::Glacier__Grid_31_9_12__Midair__ex__Ebih__Base_Camp__East_11_1 => write!(f, "{}", "Glacier > Grid 31,9-12 > Midair ==> Ebih > Base Camp > East 11 (1)"),
@@ -9100,6 +9107,22 @@ impl fmt::Display for ExitId {
             ExitId::Glacier__Vertical_Room__Under_Switch__ex__Past_Gate_1 => write!(f, "{}", "Glacier > Vertical Room > Under Switch ==> Past Gate (1)"),
             ExitId::Glacier__Vertical_Room__West_8__ex__Peak__East_8_1 => write!(f, "{}", "Glacier > Vertical Room > West 8 ==> Peak > East 8 (1)"),
             ExitId::Glacier__Vertical_Room__West_9__ex__Ledge_Grab_Room__East_9_1 => write!(f, "{}", "Glacier > Vertical Room > West 9 ==> Ledge Grab Room > East 9 (1)"),
+            ExitId::Interior__Building_Interior__Entry__ex__Ebih__Base_Camp__Building_Entry_1 => write!(f, "{}", "Interior > Building Interior > Entry ==> Ebih > Base Camp > Building Entry (1)"),
+            ExitId::Interior__Bunker_Interior__Entry__ex__Ebih__Base_Camp__Bunker_Entry_1 => write!(f, "{}", "Interior > Bunker Interior > Entry ==> Ebih > Base Camp > Bunker Entry (1)"),
+            ExitId::Interior__Cave_Behind_Waterfall__Bottom__ex__Amagi__Main_Area__Secret_Outcropping_1 => write!(f, "{}", "Interior > Cave Behind Waterfall > Bottom ==> Amagi > Main Area > Secret Outcropping (1)"),
+            ExitId::Interior__Cave_Behind_Waterfall__Bottom__ex__Middle_1 => write!(f, "{}", "Interior > Cave Behind Waterfall > Bottom ==> Middle (1)"),
+            ExitId::Interior__Cave_Behind_Waterfall__Bottom__ex__Top_1 => write!(f, "{}", "Interior > Cave Behind Waterfall > Bottom ==> Top (1)"),
+            ExitId::Interior__Cave_Behind_Waterfall__Middle__ex__Top_1 => write!(f, "{}", "Interior > Cave Behind Waterfall > Middle ==> Top (1)"),
+            ExitId::Interior__Cave_Behind_Waterfall__Top__ex__Amagi__Main_Area__Secret_Waterfall_1 => write!(f, "{}", "Interior > Cave Behind Waterfall > Top ==> Amagi > Main Area > Secret Waterfall (1)"),
+            ExitId::Interior__Dock_Elevator__Connector__ex__Dock_Interior__Connector_1 => write!(f, "{}", "Interior > Dock Elevator > Connector ==> Dock Interior > Connector (1)"),
+            ExitId::Interior__Dock_Interior__Connector__ex__Dock_Elevator__Connector_1 => write!(f, "{}", "Interior > Dock Interior > Connector ==> Dock Elevator > Connector (1)"),
+            ExitId::Interior__Dock_Interior__Entry__ex__Glacier__Dock_Outside__Entry_1 => write!(f, "{}", "Interior > Dock Interior > Entry ==> Glacier > Dock Outside > Entry (1)"),
+            ExitId::Interior__Ebih_Cave__Entry__ex__Ebih__Waterfall__Cave_Entrance_1 => write!(f, "{}", "Interior > Ebih Cave > Entry ==> Ebih > Waterfall > Cave Entrance (1)"),
+            ExitId::Interior__Garage__Entry__ex__Ebih__By_Garage__Garage_Entry_1 => write!(f, "{}", "Interior > Garage > Entry ==> Ebih > By Garage > Garage Entry (1)"),
+            ExitId::Interior__Outpost_Interior__Entry__ex__Bookshelf_1 => write!(f, "{}", "Interior > Outpost Interior > Entry ==> Bookshelf (1)"),
+            ExitId::Interior__Outpost_Interior__Entry__ex__Bookshelf_2 => write!(f, "{}", "Interior > Outpost Interior > Entry ==> Bookshelf (2)"),
+            ExitId::Interior__Outpost_Interior__Entry__ex__Giguna__Giguna_Base__Building_Entry_1 => write!(f, "{}", "Interior > Outpost Interior > Entry ==> Giguna > Giguna Base > Building Entry (1)"),
+            ExitId::Interior__Tent_Interior__Entry__ex__Ebih__Base_Camp__Tent_Entry_1 => write!(f, "{}", "Interior > Tent Interior > Entry ==> Ebih > Base Camp > Tent Entry (1)"),
             ExitId::Irikar__Abandoned_Room__West__ex__Basement_Portal__East_27_1 => write!(f, "{}", "Irikar > Abandoned Room > West ==> Basement Portal > East 27 (1)"),
             ExitId::Irikar__Airy__Middle_South__ex__Sight_Room__Above_Room_North_1 => write!(f, "{}", "Irikar > Airy > Middle South ==> Sight Room > Above Room North (1)"),
             ExitId::Irikar__Basement_Pipes__Bricks_Under_Pipes__ex__Double_Pipe_Right_1 => write!(f, "{}", "Irikar > Basement Pipes > Bricks Under Pipes ==> Double Pipe Right (1)"),
@@ -9312,11 +9335,6 @@ impl std::str::FromStr for ExitId {
 
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         match s {
-            "Amagi > Cave Behind Waterfall > Bottom ==> Main Area > Secret Outcropping (1)" => Ok(ExitId::Amagi__Cave_Behind_Waterfall__Bottom__ex__Main_Area__Secret_Outcropping_1),
-            "Amagi > Cave Behind Waterfall > Bottom ==> Middle (1)" => Ok(ExitId::Amagi__Cave_Behind_Waterfall__Bottom__ex__Middle_1),
-            "Amagi > Cave Behind Waterfall > Bottom ==> Top (1)" => Ok(ExitId::Amagi__Cave_Behind_Waterfall__Bottom__ex__Top_1),
-            "Amagi > Cave Behind Waterfall > Middle ==> Top (1)" => Ok(ExitId::Amagi__Cave_Behind_Waterfall__Middle__ex__Top_1),
-            "Amagi > Cave Behind Waterfall > Top ==> Main Area > Secret Waterfall (1)" => Ok(ExitId::Amagi__Cave_Behind_Waterfall__Top__ex__Main_Area__Secret_Waterfall_1),
             "Amagi > Grid 31,19 > East ==> Liru Room > West 19 (1)" => Ok(ExitId::Amagi__Grid_31_19__East__ex__Liru_Room__West_19_1),
             "Amagi > Grid 31,19 > West ==> Main Area > East 19 (1)" => Ok(ExitId::Amagi__Grid_31_19__West__ex__Main_Area__East_19_1),
             "Amagi > Liru Room > Platform 4 Left ==> West 20 (1)" => Ok(ExitId::Amagi__Liru_Room__Platform_4_Left__ex__West_20_1),
@@ -9332,8 +9350,8 @@ impl std::str::FromStr for ExitId {
             "Amagi > Main Area > East 15 ==> Glacier > Lake Main Entrance > Lake Access (1)" => Ok(ExitId::Amagi__Main_Area__East_15__ex__Glacier__Lake_Main_Entrance__Lake_Access_1),
             "Amagi > Main Area > East 19 ==> Grid 31,19 > West (1)" => Ok(ExitId::Amagi__Main_Area__East_19__ex__Grid_31_19__West_1),
             "Amagi > Main Area > Platform 2 ==> West Shelf (1)" => Ok(ExitId::Amagi__Main_Area__Platform_2__ex__West_Shelf_1),
-            "Amagi > Main Area > Secret Outcropping ==> Cave Behind Waterfall > Bottom (1)" => Ok(ExitId::Amagi__Main_Area__Secret_Outcropping__ex__Cave_Behind_Waterfall__Bottom_1),
-            "Amagi > Main Area > Secret Waterfall ==> Cave Behind Waterfall > Top (1)" => Ok(ExitId::Amagi__Main_Area__Secret_Waterfall__ex__Cave_Behind_Waterfall__Top_1),
+            "Amagi > Main Area > Secret Outcropping ==> Interior > Cave Behind Waterfall > Bottom (1)" => Ok(ExitId::Amagi__Main_Area__Secret_Outcropping__ex__Interior__Cave_Behind_Waterfall__Bottom_1),
+            "Amagi > Main Area > Secret Waterfall ==> Interior > Cave Behind Waterfall > Top (1)" => Ok(ExitId::Amagi__Main_Area__Secret_Waterfall__ex__Interior__Cave_Behind_Waterfall__Top_1),
             "Amagi > Main Area > Shallow End ==> Water's Edge (1)" => Ok(ExitId::Amagi__Main_Area__Shallow_End__ex__Waters_Edge_1),
             "Amagi > Main Area > West 15 ==> West Lake > East 15 (1)" => Ok(ExitId::Amagi__Main_Area__West_15__ex__West_Lake__East_15_1),
             "Amagi > Main Area > West 18 ==> West Lake > East 18 (1)" => Ok(ExitId::Amagi__Main_Area__West_18__ex__West_Lake__East_18_1),
@@ -9377,7 +9395,7 @@ impl std::str::FromStr for ExitId {
             "Antarctica > East > Building 2 Entry ==> Building 2 Upper (1)" => Ok(ExitId::Antarctica__East__Building_2_Entry__ex__Building_2_Upper_1),
             "Antarctica > East > Building 2 Upper ==> Building 2 > Upper Door (1)" => Ok(ExitId::Antarctica__East__Building_2_Upper__ex__Building_2__Upper_Door_1),
             "Antarctica > East > Building 2 Upper ==> Top > Power Entry (1)" => Ok(ExitId::Antarctica__East__Building_2_Upper__ex__Top__Power_Entry_1),
-            "Antarctica > Freight Elevator > Controls ==> Glacier > Dock Elevator > Elevator (1)" => Ok(ExitId::Antarctica__Freight_Elevator__Controls__ex__Glacier__Dock_Elevator__Elevator_1),
+            "Antarctica > Freight Elevator > Controls ==> Interior > Dock Elevator > Elevator (1)" => Ok(ExitId::Antarctica__Freight_Elevator__Controls__ex__Interior__Dock_Elevator__Elevator_1),
             "Antarctica > Freight Elevator > Left ==> Building 2 > Entry (1)" => Ok(ExitId::Antarctica__Freight_Elevator__Left__ex__Building_2__Entry_1),
             "Antarctica > Power Room > Entry ==> Top > Power Entry (1)" => Ok(ExitId::Antarctica__Power_Room__Entry__ex__Top__Power_Entry_1),
             "Antarctica > Shed > Interior ==> West > Shed Entry (1)" => Ok(ExitId::Antarctica__Shed__Interior__ex__West__Shed_Entry_1),
@@ -9386,8 +9404,8 @@ impl std::str::FromStr for ExitId {
             "Antarctica > West > Boxes ==> Building 1W > West Entry (1)" => Ok(ExitId::Antarctica__West__Boxes__ex__Building_1W__West_Entry_1),
             "Antarctica > West > Shed Entry ==> Helipad (1)" => Ok(ExitId::Antarctica__West__Shed_Entry__ex__Helipad_1),
             "Antarctica > West > Shed Entry ==> Shed > Interior (1)" => Ok(ExitId::Antarctica__West__Shed_Entry__ex__Shed__Interior_1),
-            "Ebih > Base Camp > Building Entry ==> Building Interior > Entry (1)" => Ok(ExitId::Ebih__Base_Camp__Building_Entry__ex__Building_Interior__Entry_1),
-            "Ebih > Base Camp > Bunker Entry ==> Bunker Interior > Entry (1)" => Ok(ExitId::Ebih__Base_Camp__Bunker_Entry__ex__Bunker_Interior__Entry_1),
+            "Ebih > Base Camp > Building Entry ==> Interior > Building Interior > Entry (1)" => Ok(ExitId::Ebih__Base_Camp__Building_Entry__ex__Interior__Building_Interior__Entry_1),
+            "Ebih > Base Camp > Bunker Entry ==> Interior > Bunker Interior > Entry (1)" => Ok(ExitId::Ebih__Base_Camp__Bunker_Entry__ex__Interior__Bunker_Interior__Entry_1),
             "Ebih > Base Camp > East 11 ==> Glacier > Grid 31,9-12 > Midair (1)" => Ok(ExitId::Ebih__Base_Camp__East_11__ex__Glacier__Grid_31_9_12__Midair_1),
             "Ebih > Base Camp > East 11 ==> Top Platform (1)" => Ok(ExitId::Ebih__Base_Camp__East_11__ex__Top_Platform_1),
             "Ebih > Base Camp > East 12 ==> Glacier > Grid 31,9-12 > West 12 (1)" => Ok(ExitId::Ebih__Base_Camp__East_12__ex__Glacier__Grid_31_9_12__West_12_1),
@@ -9396,7 +9414,7 @@ impl std::str::FromStr for ExitId {
             "Ebih > Base Camp > Left Platform Moved ==> Top Platform (1)" => Ok(ExitId::Ebih__Base_Camp__Left_Platform_Moved__ex__Top_Platform_1),
             "Ebih > Base Camp > Left Platform Moved ==> Top Platform (2)" => Ok(ExitId::Ebih__Base_Camp__Left_Platform_Moved__ex__Top_Platform_2),
             "Ebih > Base Camp > Save Point ==> Top Platform (1)" => Ok(ExitId::Ebih__Base_Camp__Save_Point__ex__Top_Platform_1),
-            "Ebih > Base Camp > Tent Entry ==> Tent Interior > Entry (1)" => Ok(ExitId::Ebih__Base_Camp__Tent_Entry__ex__Tent_Interior__Entry_1),
+            "Ebih > Base Camp > Tent Entry ==> Interior > Tent Interior > Entry (1)" => Ok(ExitId::Ebih__Base_Camp__Tent_Entry__ex__Interior__Tent_Interior__Entry_1),
             "Ebih > Base Camp > Top Platform ==> Left Platform (1)" => Ok(ExitId::Ebih__Base_Camp__Top_Platform__ex__Left_Platform_1),
             "Ebih > Base Camp > Top Platform ==> Left Platform Moved (1)" => Ok(ExitId::Ebih__Base_Camp__Top_Platform__ex__Left_Platform_Moved_1),
             "Ebih > Base Camp > West 11 ==> Left Platform (1)" => Ok(ExitId::Ebih__Base_Camp__West_11__ex__Left_Platform_1),
@@ -9411,8 +9429,6 @@ impl std::str::FromStr for ExitId {
             "Ebih > Boss Room > Lower Tree ==> Lower Ledge (1)" => Ok(ExitId::Ebih__Boss_Room__Lower_Tree__ex__Lower_Ledge_1),
             "Ebih > Boss Room > Lower Tree ==> Lower Ledge (2)" => Ok(ExitId::Ebih__Boss_Room__Lower_Tree__ex__Lower_Ledge_2),
             "Ebih > Boss Room > West 6 ==> Grid 21,2-6 > East 6 (1)" => Ok(ExitId::Ebih__Boss_Room__West_6__ex__Grid_21_2_6__East_6_1),
-            "Ebih > Building Interior > Entry ==> Base Camp > Building Entry (1)" => Ok(ExitId::Ebih__Building_Interior__Entry__ex__Base_Camp__Building_Entry_1),
-            "Ebih > Bunker Interior > Entry ==> Base Camp > Bunker Entry (1)" => Ok(ExitId::Ebih__Bunker_Interior__Entry__ex__Base_Camp__Bunker_Entry_1),
             "Ebih > By Garage > Crawlspace ==> Crawlspace Opening (1)" => Ok(ExitId::Ebih__By_Garage__Crawlspace__ex__Crawlspace_Opening_1),
             "Ebih > By Garage > Crawlspace Opening ==> Crawlspace (1)" => Ok(ExitId::Ebih__By_Garage__Crawlspace_Opening__ex__Crawlspace_1),
             "Ebih > By Garage > East 13 ==> Base Camp > West 13 (1)" => Ok(ExitId::Ebih__By_Garage__East_13__ex__Base_Camp__West_13_1),
@@ -9420,13 +9436,12 @@ impl std::str::FromStr for ExitId {
             "Ebih > By Garage > East Platform ==> Crawlspace Opening (2)" => Ok(ExitId::Ebih__By_Garage__East_Platform__ex__Crawlspace_Opening_2),
             "Ebih > By Garage > East Platform ==> Outcropping (1)" => Ok(ExitId::Ebih__By_Garage__East_Platform__ex__Outcropping_1),
             "Ebih > By Garage > East Platform ==> Outcropping (2)" => Ok(ExitId::Ebih__By_Garage__East_Platform__ex__Outcropping_2),
-            "Ebih > By Garage > Garage Entry ==> Garage > Entry (1)" => Ok(ExitId::Ebih__By_Garage__Garage_Entry__ex__Garage__Entry_1),
+            "Ebih > By Garage > Garage Entry ==> Interior > Garage > Entry (1)" => Ok(ExitId::Ebih__By_Garage__Garage_Entry__ex__Interior__Garage__Entry_1),
             "Ebih > By Garage > Lower Platform ==> East Bush (1)" => Ok(ExitId::Ebih__By_Garage__Lower_Platform__ex__East_Bush_1),
             "Ebih > By Garage > Lower Platform ==> East Bush (2)" => Ok(ExitId::Ebih__By_Garage__Lower_Platform__ex__East_Bush_2),
             "Ebih > By Garage > Lower Platform ==> West Bush (1)" => Ok(ExitId::Ebih__By_Garage__Lower_Platform__ex__West_Bush_1),
             "Ebih > By Garage > Lower Platform ==> West Bush (2)" => Ok(ExitId::Ebih__By_Garage__Lower_Platform__ex__West_Bush_2),
             "Ebih > By Garage > West 12 ==> Grid 25,10-12 > East 12 (1)" => Ok(ExitId::Ebih__By_Garage__West_12__ex__Grid_25_10_12__East_12_1),
-            "Ebih > Cave > Entry ==> Waterfall > Cave Entrance (1)" => Ok(ExitId::Ebih__Cave__Entry__ex__Waterfall__Cave_Entrance_1),
             "Ebih > Drone Room > East 4 ==> Grid 25,2-6 > West 4 (1)" => Ok(ExitId::Ebih__Drone_Room__East_4__ex__Grid_25_2_6__West_4_1),
             "Ebih > Drone Room > Middle Platform ==> Portal Exit (1)" => Ok(ExitId::Ebih__Drone_Room__Middle_Platform__ex__Portal_Exit_1),
             "Ebih > Drone Room > Middle Platform > Urn Quick Grab" => Ok(ExitId::Ebih__Drone_Room__Middle_Platform__Urn_Quick_Grab),
@@ -9484,7 +9499,6 @@ impl std::str::FromStr for ExitId {
             "Ebih > Ebih West > West 13 ==> Giguna > Wasteland > East 13 (1)" => Ok(ExitId::Ebih__Ebih_West__West_13__ex__Giguna__Wasteland__East_13_1),
             "Ebih > Ebih West > West 9 ==> Giguna > Giguna Northeast > East 9 (1)" => Ok(ExitId::Ebih__Ebih_West__West_9__ex__Giguna__Giguna_Northeast__East_9_1),
             "Ebih > Ebih West > West 9 ==> Giguna Pillar (1)" => Ok(ExitId::Ebih__Ebih_West__West_9__ex__Giguna_Pillar_1),
-            "Ebih > Garage > Entry ==> By Garage > Garage Entry (1)" => Ok(ExitId::Ebih__Garage__Entry__ex__By_Garage__Garage_Entry_1),
             "Ebih > Gem Room > West 13 ==> Vertical Interchange > East 13 (1)" => Ok(ExitId::Ebih__Gem_Room__West_13__ex__Vertical_Interchange__East_13_1),
             "Ebih > Grid 21,2-6 > East 6 ==> Boss Room > West 6 (1)" => Ok(ExitId::Ebih__Grid_21_2_6__East_6__ex__Boss_Room__West_6_1),
             "Ebih > Grid 21,2-6 > West 6 ==> Ebih West > East 6 (1)" => Ok(ExitId::Ebih__Grid_21_2_6__West_6__ex__Ebih_West__East_6_1),
@@ -9526,7 +9540,6 @@ impl std::str::FromStr for ExitId {
             "Ebih > Observation Tower Room > Tower Top ==> West 9 (2)" => Ok(ExitId::Ebih__Observation_Tower_Room__Tower_Top__ex__West_9_2),
             "Ebih > Observation Tower Room > West 10 ==> Grid 26,10-11 > East 10 (1)" => Ok(ExitId::Ebih__Observation_Tower_Room__West_10__ex__Grid_26_10_11__East_10_1),
             "Ebih > Observation Tower Room > West 9 ==> Ebih East > East 9 (1)" => Ok(ExitId::Ebih__Observation_Tower_Room__West_9__ex__Ebih_East__East_9_1),
-            "Ebih > Tent Interior > Entry ==> Base Camp > Tent Entry (1)" => Ok(ExitId::Ebih__Tent_Interior__Entry__ex__Base_Camp__Tent_Entry_1),
             "Ebih > Vertical Interchange > Below Door ==> Blocked Refill Station (1)" => Ok(ExitId::Ebih__Vertical_Interchange__Below_Door__ex__Blocked_Refill_Station_1),
             "Ebih > Vertical Interchange > Below Door ==> Blocked Refill Station (2)" => Ok(ExitId::Ebih__Vertical_Interchange__Below_Door__ex__Blocked_Refill_Station_2),
             "Ebih > Vertical Interchange > Below Door ==> Refill Station (1)" => Ok(ExitId::Ebih__Vertical_Interchange__Below_Door__ex__Refill_Station_1),
@@ -9573,7 +9586,7 @@ impl std::str::FromStr for ExitId {
             "Ebih > Waterfall > Below Left Switch ==> Ledge Below Hole (1)" => Ok(ExitId::Ebih__Waterfall__Below_Left_Switch__ex__Ledge_Below_Hole_1),
             "Ebih > Waterfall > Below Tree ==> Big Tree (1)" => Ok(ExitId::Ebih__Waterfall__Below_Tree__ex__Big_Tree_1),
             "Ebih > Waterfall > Below Tree ==> Big Tree (2)" => Ok(ExitId::Ebih__Waterfall__Below_Tree__ex__Big_Tree_2),
-            "Ebih > Waterfall > Cave Entrance ==> Cave > Entry (1)" => Ok(ExitId::Ebih__Waterfall__Cave_Entrance__ex__Cave__Entry_1),
+            "Ebih > Waterfall > Cave Entrance ==> Interior > Ebih Cave > Entry (1)" => Ok(ExitId::Ebih__Waterfall__Cave_Entrance__ex__Interior__Ebih_Cave__Entry_1),
             "Ebih > Waterfall > East 10 ==> Grid 25,10-12 > West 10 (1)" => Ok(ExitId::Ebih__Waterfall__East_10__ex__Grid_25_10_12__West_10_1),
             "Ebih > Waterfall > East 11 ==> Grid 25,10-12 > West 11 (1)" => Ok(ExitId::Ebih__Waterfall__East_11__ex__Grid_25_10_12__West_11_1),
             "Ebih > Waterfall > East 7 ==> Ebih East > West 7 (1)" => Ok(ExitId::Ebih__Waterfall__East_7__ex__Ebih_East__West_7_1),
@@ -9621,9 +9634,6 @@ impl std::str::FromStr for ExitId {
             "Giguna > Antechamber > West 15 ==> Small Bricks (1)" => Ok(ExitId::Giguna__Antechamber__West_15__ex__Small_Bricks_1),
             "Giguna > Breachable Wall > Above West Catwalk ==> Irikar > Boss Room > Above Catwalk (1)" => Ok(ExitId::Giguna__Breachable_Wall__Above_West_Catwalk__ex__Irikar__Boss_Room__Above_Catwalk_1),
             "Giguna > Breachable Wall > West Mid-air ==> Irikar > East Rooftops > East Mid-air (1)" => Ok(ExitId::Giguna__Breachable_Wall__West_Mid_air__ex__Irikar__East_Rooftops__East_Mid_air_1),
-            "Giguna > Building Interior > Entry ==> Bookshelf (1)" => Ok(ExitId::Giguna__Building_Interior__Entry__ex__Bookshelf_1),
-            "Giguna > Building Interior > Entry ==> Bookshelf (2)" => Ok(ExitId::Giguna__Building_Interior__Entry__ex__Bookshelf_2),
-            "Giguna > Building Interior > Entry ==> Giguna Base > Building Entry (1)" => Ok(ExitId::Giguna__Building_Interior__Entry__ex__Giguna_Base__Building_Entry_1),
             "Giguna > Carnelian > Door ==> Switch (1)" => Ok(ExitId::Giguna__Carnelian__Door__ex__Switch_1),
             "Giguna > Carnelian > Door ==> Vault (1)" => Ok(ExitId::Giguna__Carnelian__Door__ex__Vault_1),
             "Giguna > Carnelian > East 10 ==> Giguna Northeast > West 10 (1)" => Ok(ExitId::Giguna__Carnelian__East_10__ex__Giguna_Northeast__West_10_1),
@@ -9754,7 +9764,7 @@ impl std::str::FromStr for ExitId {
             "Giguna > Giguna Base > Below Gate ==> Kari (2)" => Ok(ExitId::Giguna__Giguna_Base__Below_Gate__ex__Kari_2),
             "Giguna > Giguna Base > Below Gate ==> Middle Platform (1)" => Ok(ExitId::Giguna__Giguna_Base__Below_Gate__ex__Middle_Platform_1),
             "Giguna > Giguna Base > Below Gate ==> Middle Platform (2)" => Ok(ExitId::Giguna__Giguna_Base__Below_Gate__ex__Middle_Platform_2),
-            "Giguna > Giguna Base > Building Entry ==> Building Interior > Entry (1)" => Ok(ExitId::Giguna__Giguna_Base__Building_Entry__ex__Building_Interior__Entry_1),
+            "Giguna > Giguna Base > Building Entry ==> Interior > Outpost Interior > Entry (1)" => Ok(ExitId::Giguna__Giguna_Base__Building_Entry__ex__Interior__Outpost_Interior__Entry_1),
             "Giguna > Giguna Base > East 14 ==> Wasteland > West 14 (1)" => Ok(ExitId::Giguna__Giguna_Base__East_14__ex__Wasteland__West_14_1),
             "Giguna > Giguna Base > East 17 ==> Hard Rock > West 17 (1)" => Ok(ExitId::Giguna__Giguna_Base__East_17__ex__Hard_Rock__West_17_1),
             "Giguna > Giguna Base > Kari ==> Below Gate (1)" => Ok(ExitId::Giguna__Giguna_Base__Kari__ex__Below_Gate_1),
@@ -9982,11 +9992,8 @@ impl std::str::FromStr for ExitId {
             "Glacier > Boomerang Room > West ==> Boomerang Antechamber > East 12 (1)" => Ok(ExitId::Glacier__Boomerang_Room__West__ex__Boomerang_Antechamber__East_12_1),
             "Glacier > Compass Room > East ==> Grid 43,10-11 > Lower (1)" => Ok(ExitId::Glacier__Compass_Room__East__ex__Grid_43_10_11__Lower_1),
             "Glacier > Compass Room > West ==> The Big Drop > East (1)" => Ok(ExitId::Glacier__Compass_Room__West__ex__The_Big_Drop__East_1),
-            "Glacier > Dock Elevator > Connector ==> Dock Interior > Connector (1)" => Ok(ExitId::Glacier__Dock_Elevator__Connector__ex__Dock_Interior__Connector_1),
-            "Glacier > Dock Interior > Connector ==> Dock Elevator > Connector (1)" => Ok(ExitId::Glacier__Dock_Interior__Connector__ex__Dock_Elevator__Connector_1),
-            "Glacier > Dock Interior > Entry ==> Dock Outside > Entry (1)" => Ok(ExitId::Glacier__Dock_Interior__Entry__ex__Dock_Outside__Entry_1),
             "Glacier > Dock Outside > Do Not Enter ==> Revival > East 9 (1)" => Ok(ExitId::Glacier__Dock_Outside__Do_Not_Enter__ex__Revival__East_9_1),
-            "Glacier > Dock Outside > Entry ==> Dock Interior > Entry (1)" => Ok(ExitId::Glacier__Dock_Outside__Entry__ex__Dock_Interior__Entry_1),
+            "Glacier > Dock Outside > Entry ==> Interior > Dock Interior > Entry (1)" => Ok(ExitId::Glacier__Dock_Outside__Entry__ex__Interior__Dock_Interior__Entry_1),
             "Glacier > Grid 31,9-12 > East 10 ==> Grid 32,7-10 > West 10 (1)" => Ok(ExitId::Glacier__Grid_31_9_12__East_10__ex__Grid_32_7_10__West_10_1),
             "Glacier > Grid 31,9-12 > East 9 ==> Grid 32,7-10 > West 9 (1)" => Ok(ExitId::Glacier__Grid_31_9_12__East_9__ex__Grid_32_7_10__West_9_1),
             "Glacier > Grid 31,9-12 > Midair ==> Ebih > Base Camp > East 11 (1)" => Ok(ExitId::Glacier__Grid_31_9_12__Midair__ex__Ebih__Base_Camp__East_11_1),
@@ -10068,6 +10075,22 @@ impl std::str::FromStr for ExitId {
             "Glacier > Vertical Room > Under Switch ==> Past Gate (1)" => Ok(ExitId::Glacier__Vertical_Room__Under_Switch__ex__Past_Gate_1),
             "Glacier > Vertical Room > West 8 ==> Peak > East 8 (1)" => Ok(ExitId::Glacier__Vertical_Room__West_8__ex__Peak__East_8_1),
             "Glacier > Vertical Room > West 9 ==> Ledge Grab Room > East 9 (1)" => Ok(ExitId::Glacier__Vertical_Room__West_9__ex__Ledge_Grab_Room__East_9_1),
+            "Interior > Building Interior > Entry ==> Ebih > Base Camp > Building Entry (1)" => Ok(ExitId::Interior__Building_Interior__Entry__ex__Ebih__Base_Camp__Building_Entry_1),
+            "Interior > Bunker Interior > Entry ==> Ebih > Base Camp > Bunker Entry (1)" => Ok(ExitId::Interior__Bunker_Interior__Entry__ex__Ebih__Base_Camp__Bunker_Entry_1),
+            "Interior > Cave Behind Waterfall > Bottom ==> Amagi > Main Area > Secret Outcropping (1)" => Ok(ExitId::Interior__Cave_Behind_Waterfall__Bottom__ex__Amagi__Main_Area__Secret_Outcropping_1),
+            "Interior > Cave Behind Waterfall > Bottom ==> Middle (1)" => Ok(ExitId::Interior__Cave_Behind_Waterfall__Bottom__ex__Middle_1),
+            "Interior > Cave Behind Waterfall > Bottom ==> Top (1)" => Ok(ExitId::Interior__Cave_Behind_Waterfall__Bottom__ex__Top_1),
+            "Interior > Cave Behind Waterfall > Middle ==> Top (1)" => Ok(ExitId::Interior__Cave_Behind_Waterfall__Middle__ex__Top_1),
+            "Interior > Cave Behind Waterfall > Top ==> Amagi > Main Area > Secret Waterfall (1)" => Ok(ExitId::Interior__Cave_Behind_Waterfall__Top__ex__Amagi__Main_Area__Secret_Waterfall_1),
+            "Interior > Dock Elevator > Connector ==> Dock Interior > Connector (1)" => Ok(ExitId::Interior__Dock_Elevator__Connector__ex__Dock_Interior__Connector_1),
+            "Interior > Dock Interior > Connector ==> Dock Elevator > Connector (1)" => Ok(ExitId::Interior__Dock_Interior__Connector__ex__Dock_Elevator__Connector_1),
+            "Interior > Dock Interior > Entry ==> Glacier > Dock Outside > Entry (1)" => Ok(ExitId::Interior__Dock_Interior__Entry__ex__Glacier__Dock_Outside__Entry_1),
+            "Interior > Ebih Cave > Entry ==> Ebih > Waterfall > Cave Entrance (1)" => Ok(ExitId::Interior__Ebih_Cave__Entry__ex__Ebih__Waterfall__Cave_Entrance_1),
+            "Interior > Garage > Entry ==> Ebih > By Garage > Garage Entry (1)" => Ok(ExitId::Interior__Garage__Entry__ex__Ebih__By_Garage__Garage_Entry_1),
+            "Interior > Outpost Interior > Entry ==> Bookshelf (1)" => Ok(ExitId::Interior__Outpost_Interior__Entry__ex__Bookshelf_1),
+            "Interior > Outpost Interior > Entry ==> Bookshelf (2)" => Ok(ExitId::Interior__Outpost_Interior__Entry__ex__Bookshelf_2),
+            "Interior > Outpost Interior > Entry ==> Giguna > Giguna Base > Building Entry (1)" => Ok(ExitId::Interior__Outpost_Interior__Entry__ex__Giguna__Giguna_Base__Building_Entry_1),
+            "Interior > Tent Interior > Entry ==> Ebih > Base Camp > Tent Entry (1)" => Ok(ExitId::Interior__Tent_Interior__Entry__ex__Ebih__Base_Camp__Tent_Entry_1),
             "Irikar > Abandoned Room > West ==> Basement Portal > East 27 (1)" => Ok(ExitId::Irikar__Abandoned_Room__West__ex__Basement_Portal__East_27_1),
             "Irikar > Airy > Middle South ==> Sight Room > Above Room North (1)" => Ok(ExitId::Irikar__Airy__Middle_South__ex__Sight_Room__Above_Room_North_1),
             "Irikar > Basement Pipes > Bricks Under Pipes ==> Double Pipe Right (1)" => Ok(ExitId::Irikar__Basement_Pipes__Bricks_Under_Pipes__ex__Double_Pipe_Right_1),
@@ -10291,7 +10314,6 @@ impl std::str::FromStr for ExitId {
 )]
 #[repr(u8)]
 pub enum ActionId {
-    Amagi__Cave_Behind_Waterfall__Middle__Throw_Drone,
     Amagi__Main_Area__Carving__Key_Combo,
     Amagi__Main_Area__Save_Point__Save,
     Ebih__Base_Camp__Left_Platform__Move_Left_Platform,
@@ -10369,6 +10391,7 @@ pub enum ActionId {
     Global__Become_Indra,
     Global__Deploy_Drone,
     Global__Recall_Drone,
+    Interior__Cave_Behind_Waterfall__Middle__Throw_Drone,
     Irikar__Basement_Portal__Moving_Platform_Start__Activate_Platform,
     Irikar__Basement_Portal__Portal_Stand__Enter_Portal,
     Irikar__Hub__Portal_Stand__Enter_Portal,
@@ -10381,11 +10404,6 @@ pub enum ActionId {
 impl fmt::Display for ActionId {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         match self {
-            ActionId::Amagi__Cave_Behind_Waterfall__Middle__Throw_Drone => write!(
-                f,
-                "{}",
-                "Amagi > Cave Behind Waterfall > Middle > Throw Drone"
-            ),
             ActionId::Amagi__Main_Area__Carving__Key_Combo => {
                 write!(f, "{}", "Amagi > Main Area > Carving > Key Combo")
             }
@@ -10655,6 +10673,11 @@ impl fmt::Display for ActionId {
             ActionId::Global__Become_Indra => write!(f, "{}", "Become Indra"),
             ActionId::Global__Deploy_Drone => write!(f, "{}", "Deploy Drone"),
             ActionId::Global__Recall_Drone => write!(f, "{}", "Recall Drone"),
+            ActionId::Interior__Cave_Behind_Waterfall__Middle__Throw_Drone => write!(
+                f,
+                "{}",
+                "Interior > Cave Behind Waterfall > Middle > Throw Drone"
+            ),
             ActionId::Irikar__Basement_Portal__Moving_Platform_Start__Activate_Platform => write!(
                 f,
                 "{}",
@@ -10696,9 +10719,6 @@ impl std::str::FromStr for ActionId {
 
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         match s {
-            "Amagi > Cave Behind Waterfall > Middle > Throw Drone" => {
-                Ok(ActionId::Amagi__Cave_Behind_Waterfall__Middle__Throw_Drone)
-            }
             "Amagi > Main Area > Carving > Key Combo" => {
                 Ok(ActionId::Amagi__Main_Area__Carving__Key_Combo)
             }
@@ -10920,6 +10940,9 @@ impl std::str::FromStr for ActionId {
             "Become Indra" => Ok(ActionId::Global__Become_Indra),
             "Deploy Drone" => Ok(ActionId::Global__Deploy_Drone),
             "Recall Drone" => Ok(ActionId::Global__Recall_Drone),
+            "Interior > Cave Behind Waterfall > Middle > Throw Drone" => {
+                Ok(ActionId::Interior__Cave_Behind_Waterfall__Middle__Throw_Drone)
+            }
             "Irikar > Basement Portal > Moving Platform Start > Activate Platform" => {
                 Ok(ActionId::Irikar__Basement_Portal__Moving_Platform_Start__Activate_Platform)
             }
@@ -10974,7 +10997,6 @@ pub enum CanonId {
     Amagi_West_Lake_Surface_Wall,
     Notes_2053_02_27,
     Ebih_Base_Camp_Fragment,
-    Melee_Charge,
     Ebih_Bush_Flask,
     Ebih_Waterfall_Block_Right,
     Ebih_Waterfall_Block_Left,
@@ -10993,6 +11015,7 @@ pub enum CanonId {
     Giguna_Gateway_Block,
     Giguna_Gubi,
     Ledge_Grab,
+    Melee_Charge,
     Irikar_Royal_Storage_Wall,
     Irikar_Royal_Storage_Flask,
     Irikar_Gudam,
@@ -11015,7 +11038,6 @@ impl fmt::Display for CanonId {
             }
             CanonId::Notes_2053_02_27 => write!(f, "{}", "Notes_2053_02_27"),
             CanonId::Ebih_Base_Camp_Fragment => write!(f, "{}", "Ebih_Base_Camp_Fragment"),
-            CanonId::Melee_Charge => write!(f, "{}", "Melee_Charge"),
             CanonId::Ebih_Bush_Flask => write!(f, "{}", "Ebih Bush Flask"),
             CanonId::Ebih_Waterfall_Block_Right => write!(f, "{}", "Ebih_Waterfall_Block_Right"),
             CanonId::Ebih_Waterfall_Block_Left => write!(f, "{}", "Ebih_Waterfall_Block_Left"),
@@ -11034,6 +11056,7 @@ impl fmt::Display for CanonId {
             CanonId::Giguna_Gateway_Block => write!(f, "{}", "Giguna_Gateway_Block"),
             CanonId::Giguna_Gubi => write!(f, "{}", "Giguna_Gubi"),
             CanonId::Ledge_Grab => write!(f, "{}", "Ledge_Grab"),
+            CanonId::Melee_Charge => write!(f, "{}", "Melee_Charge"),
             CanonId::Irikar_Royal_Storage_Wall => write!(f, "{}", "Irikar_Royal_Storage_Wall"),
             CanonId::Irikar_Royal_Storage_Flask => write!(f, "{}", "Irikar_Royal_Storage_Flask"),
             CanonId::Irikar_Gudam => write!(f, "{}", "Irikar_Gudam"),
@@ -11062,7 +11085,6 @@ impl std::str::FromStr for CanonId {
             "Amagi_West_Lake_Surface_Wall" => Ok(CanonId::Amagi_West_Lake_Surface_Wall),
             "Notes_2053_02_27" => Ok(CanonId::Notes_2053_02_27),
             "Ebih_Base_Camp_Fragment" => Ok(CanonId::Ebih_Base_Camp_Fragment),
-            "Melee_Charge" => Ok(CanonId::Melee_Charge),
             "Ebih Bush Flask" => Ok(CanonId::Ebih_Bush_Flask),
             "Ebih_Waterfall_Block_Right" => Ok(CanonId::Ebih_Waterfall_Block_Right),
             "Ebih_Waterfall_Block_Left" => Ok(CanonId::Ebih_Waterfall_Block_Left),
@@ -11081,6 +11103,7 @@ impl std::str::FromStr for CanonId {
             "Giguna_Gateway_Block" => Ok(CanonId::Giguna_Gateway_Block),
             "Giguna_Gubi" => Ok(CanonId::Giguna_Gubi),
             "Ledge_Grab" => Ok(CanonId::Ledge_Grab),
+            "Melee_Charge" => Ok(CanonId::Melee_Charge),
             "Irikar_Royal_Storage_Wall" => Ok(CanonId::Irikar_Royal_Storage_Wall),
             "Irikar_Royal_Storage_Flask" => Ok(CanonId::Irikar_Royal_Storage_Flask),
             "Irikar_Gudam" => Ok(CanonId::Irikar_Gudam),

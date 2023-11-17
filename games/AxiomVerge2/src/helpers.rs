@@ -244,15 +244,19 @@ macro_rules! helper__mist2 {
 }
 
 /// $ft_main (  )
-/// Fast_Travel and NOT WITHIN `Menu` and NOT ^breach
+/// Fast_Travel and NOT WITHIN `Menu` and NOT WITHIN `Interior` and NOT ^breach
 #[macro_export]
 macro_rules! helper__ft_main {
     ($ctx:expr) => {{
         #[allow(unused_imports)]
         use $crate::items::Item;
-        (($ctx.has(Item::Fast_Travel)
+        ((($ctx.has(Item::Fast_Travel)
             && !(match get_region($ctx.position()) {
                 RegionId::Menu => true,
+                _ => false,
+            }))
+            && !(match get_region($ctx.position()) {
+                RegionId::Interior => true,
                 _ => false,
             }))
             && !data::breach($ctx.position()))

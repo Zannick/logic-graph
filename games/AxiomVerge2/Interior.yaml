@@ -1,0 +1,211 @@
+name: Interior
+graph_offset: [0, 60]
+
+areas:
+#region Glacier
+- name: Dock Elevator
+  spots:
+    - name: Elevator
+      coord: [44.5, 8.5]
+      local:
+        - to: Connector
+          jumps: 1
+    - name: Connector
+      coord: [44.05, 8.35]
+      local:
+        - to: Elevator
+      exits:
+        - to: Dock Interior > Connector
+          tags: [xshift]
+
+- name: Dock Interior
+  spots:
+    - name: Connector
+      coord: [43.95, 8.35]
+      local:
+        - to: Entry
+      exits:
+        - to: Dock Elevator > Connector
+          tags: [xshift]
+    - name: Entry
+      coord: [43.5, 8.5]
+      local:
+        - to: Connector
+          jumps: 3
+      exits:
+        - to: Glacier > Dock Outside > Entry
+          tags: [exterior]
+#endregion
+
+#region Ebih
+- name: Bunker Interior
+  on_entry: $reset_old_area(^newpos)
+  spots:
+    - name: Entry
+      coord: [30.225, 12.6]
+      local:
+        - to: Desk
+      exits:
+        - to: Ebih > Base Camp > Bunker Entry
+          tags: [exterior]
+    - name: Desk
+      coord: [30.525, 12.6]
+      local:
+        - to: Entry
+      locations:
+        - name: Note
+          item: Dear_Ernest
+          tags: [standing]
+
+- name: Building Interior
+  on_entry: $reset_old_area(^newpos)
+  spots:
+    - name: Entry
+      coord: [28.95, 12.15]
+      local:
+        - to: Corner
+      locations:
+        - name: Remote Urn
+          item: Melee_Charge
+          canon: Melee_Charge
+          req: $boomerang
+          tags: [remote_urn]
+      exits:
+        - to: Ebih > Base Camp > Building Entry
+          tags: [exterior]
+    - name: Corner
+      coord: [28.5, 12.15]
+      local:
+        - to: Entry
+      locations:
+        - name: Urn
+          item: Melee_Charge
+          canon: Melee_Charge
+          tags: [urn]
+
+- name: Tent Interior
+  on_entry: $reset_old_area(^newpos)
+  spots:
+    - name: Entry
+      coord: [28.425, 12.7]
+      local:
+        - to: Desk
+      exits:
+        - to: Ebih > Base Camp > Tent Entry
+          time: 0.5
+          tags: [exterior, tent]
+    - name: Desk
+      coord: [28.5, 12.7]
+      local:
+        - to: Entry
+      locations:
+        - name: Note
+          item: Companies_Layoff
+          tags: [standing]
+
+- name: Garage
+  on_entry: $reset_old_area(^newpos)
+  spots:
+    - name: Entry
+      coord: [27.15, 12.8]
+      local:
+        - to: Boxes
+      exits:
+        - to: Ebih > By Garage > Garage Entry
+          tags: [exterior]
+    - name: Boxes
+      coord: [26.8, 12.8]
+      local:
+        - to: Entry
+      locations:
+        - name: Under Boxes
+          item: Record_Losses
+          req: $can_damage
+          time: 2
+          tag: [standing]
+
+- name: Ebih Cave
+  on_entry: $reset_old_area(^newpos)
+  spots:
+    - name: Entry
+      coord: [22.55, 8.35]
+      locations:
+        - name: Health
+          item: Health_Fragment
+          time: 0.5
+          tags: [standing]
+      exits:
+        - to: Ebih > Waterfall > Cave Entrance
+          tags: [exterior, cave]
+#endregion
+
+#region Amagi
+- name: Cave Behind Waterfall
+  on_entry: $reset_old_area(^newpos)
+  data:
+    water: false
+  spots:
+    - name: Bottom
+      coord: [27.55, 14.15]
+      exits:
+        - to: Amagi > Main Area > Secret Outcropping
+          tags: [exterior]
+        - to: Middle
+          req: $grab or $climb
+          time: 2
+        - to: Top
+          req: $hook
+          time: 1.8
+    - name: Middle
+      coord: [27.575, 13.6]
+      local:
+        - to: Bottom
+          thru: [27.6, 13.8]
+      exits:
+        - to: Top
+          req: $grab or $climb
+      actions:
+        - name: Throw Drone
+          req: $can_deploy
+          do: $deploy_drone
+          to: Top
+          time: 1.1
+    - name: Top
+      coord: [27.4, 13.35]
+      local:
+        - to: Middle
+        - to: Bottom
+          thru: [27.6, 13.8]
+      exits:
+        - to: Amagi > Main Area > Secret Waterfall
+          tags: [exterior]
+#endregion
+
+#region Giguna
+- name: Outpost Interior
+  on_entry: $reset_old_area(^newpos)
+  spots:
+    - name: Entry
+      coord: [14.1, 15.5]
+      local:
+        - to: Bookshelf
+          jumps: 3
+      exits:
+        - to: Bookshelf
+          req: $grab or $climb
+          time: 1.35
+        - to: Bookshelf
+          req: $hook
+          time: 1
+        - to: Giguna > Giguna Base > Building Entry
+          tags: [exterior]
+    - name: Bookshelf
+      coord: [13.85, 15.0]
+      local:
+        - to: Entry
+          jumps_down: 2
+      locations:
+        - name: Note
+          item: Letter_from_Trace
+          tags: [standing]
+#endregion

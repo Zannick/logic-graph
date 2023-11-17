@@ -8,9 +8,9 @@
 * Collect Switch_36_11 from Glacier > Vertical Room > Under Switch > Switch
 * Collect Ledge_Grab from Glacier > Ledge Grab Room > Cliff Bottom > Quick Grab
 * Collect Flask from Glacier > Vertical Room > Peak > Flask
-* Collect Dear_Ernest from Ebih > Bunker Interior > Desk > Note
-* Collect Companies_Layoff from Ebih > Tent Interior > Desk > Note
-* Collect Record_Losses from Ebih > Garage > Boxes > Under Boxes
+* Collect Dear_Ernest from Interior > Bunker Interior > Desk > Note
+* Collect Companies_Layoff from Interior > Tent Interior > Desk > Note
+* Collect Record_Losses from Interior > Garage > Boxes > Under Boxes
 * Collect Heretics_Tablet from Ebih > Ebih West > Alcove > Tablet
 * Collect Infect from Ebih > Ebih East > Lower Moving Platform > Remote Urn
 ! Do Ebih > Ebih East > Lower Moving Platform > Activate Lift
@@ -34,7 +34,7 @@
 * Collect Underwater_Movement from Amagi > Liru Room > Shrine > Item
 ! Do Recall Drone
 ! Do Amagi > Main Area > Carving > Key Combo
-! Do Amagi > Cave Behind Waterfall > Middle > Throw Drone
+! Do Interior > Cave Behind Waterfall > Middle > Throw Drone
 * Collect Flask from Amagi > Main Area > Way Off To The Side > Item
 ! Do Recall Drone
 
@@ -63,7 +63,7 @@
 ! Do Giguna > Giguna Base > Stone Knob > Throw Drone
 * Collect Wall_Climb from Giguna > Giguna Base > Ruin > Item
 ! Do Recall Drone
-* Collect Letter_from_Trace from Giguna > Building Interior > Bookshelf > Note
+* Collect Letter_from_Trace from Interior > Outpost Interior > Bookshelf > Note
 * Collect Researchers_Missing from Giguna > Giguna Base > Table > News
 
   IndraSavewarp to Giguna > Giguna Northeast > Save Point
@@ -119,7 +119,7 @@
 * Collect Dangerous_Ideas from Giguna > Antechamber > Statue Head > Tablet
 * Collect Health_Fragment from Giguna > Wasteland > Door Right > Health
 ! Do Recall Drone
-  Collect Health_Fragment from Ebih > Cave > Entry > Health
+  Collect Health_Fragment from Interior > Ebih Cave > Entry > Health
   Collect Ebih_Waterfall_Block_Left from Ebih > Waterfall > Alcove Left > Block Left
 ! Do Deploy Drone
   Collect Bronze_Axe from Ebih > Waterfall > Alcove > Pedestal

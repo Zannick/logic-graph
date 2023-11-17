@@ -1,41 +1,6 @@
 name: Glacier
 
 areas:
-- name: Dock Elevator
-  graph_offset: [0, 60]
-  spots:
-    - name: Elevator
-      coord: [44.5, 8.5]
-      local:
-        - to: Connector
-          jumps: 1
-    - name: Connector
-      coord: [44.05, 8.35]
-      local:
-        - to: Elevator
-      exits:
-        - to: Dock Interior > Connector
-          tags: [xshift]
-
-- name: Dock Interior
-  graph_offset: [0, 60]
-  spots:
-    - name: Connector
-      coord: [43.95, 8.35]
-      local:
-        - to: Entry
-      exits:
-        - to: Dock Elevator > Connector
-          tags: [xshift]
-    - name: Entry
-      coord: [43.5, 8.5]
-      local:
-        - to: Connector
-          jumps: 3
-      exits:
-        - to: Dock Outside > Entry
-          tags: [exterior]
-
 - name: Dock Outside
   on_entry: $reset_old_area(^newpos)
   spots:
@@ -45,7 +10,7 @@ areas:
         - to: Do Not Enter
           jumps: 3
       exits:
-        - to: Dock Interior > Entry
+        - to: Interior > Dock Interior > Entry
           tags: [interior]
     # the first time you reach here, this becomes the save point.
     # however, this doesn't ever seem relevant
