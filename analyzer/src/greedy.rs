@@ -19,9 +19,7 @@ where
     W::Warp: Warp<Context = T, SpotId = E::SpotId, Currency = L::Currency>,
 {
     let spot_map = accessible_spots(world, ctx, max_time);
-    let mut orig_vec: Vec<ContextWrapper<T>> = spot_map
-        .into_values()
-        .collect();
+    let mut orig_vec: Vec<ContextWrapper<T>> = spot_map.into_values().collect();
     orig_vec.sort_unstable_by_key(|ctx| ctx.elapsed());
     if let Some(ctx) = orig_vec
         .iter()
@@ -30,10 +28,16 @@ where
         return Ok(ctx.clone());
     }
     let min_spot = orig_vec.first().expect("couldn't reach any spots!").clone();
+    let max_spot = orig_vec.last().expect("couldn't reach any spots!");
+    // Don't allow going all the way there then all the way back again.
+    let max_time = 2 * max_spot.elapsed()  - min_spot.elapsed();
 
     let mut useful_spots = Vec::new();
     let mut seen = new_hashset();
-    let mut to_process: Vec<_> = orig_vec.iter().map(|c| (c.clone(), HashSet::new())).collect();
+    let mut to_process: Vec<_> = orig_vec
+        .iter()
+        .map(|c| (c.clone(), HashSet::new()))
+        .collect();
     seen.extend(to_process.iter().map(|(ctx, _)| ctx.get().clone()));
 
     // Only allow global actions once each.
@@ -52,9 +56,7 @@ where
             {
                 let mut newctx = spot_ctx.clone();
                 newctx.activate(action);
-                for nextctx in accessible_spots(world, newctx, max_time)
-                    .into_values()
-                {
+                for nextctx in accessible_spots(world, newctx, max_time).into_values() {
                     if spot_has_locations(world, nextctx.get()) {
                         if depth > 0 {
                             return Ok(nextctx);
@@ -76,9 +78,7 @@ where
             {
                 let mut newctx = spot_ctx.clone();
                 newctx.activate(action);
-                for nextctx in accessible_spots(world, newctx, max_time)
-                    .into_values()
-                {
+                for nextctx in accessible_spots(world, newctx, max_time).into_values() {
                     if spot_has_locations(world, nextctx.get()) {
                         return Ok(nextctx);
                     } else if !seen.contains(nextctx.get()) {
