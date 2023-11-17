@@ -823,6 +823,7 @@ class GameLogic(object):
         #  It might be simplest to determine which movements we have available in
         #  the area we're in, and then look up the travel time from that.)
         table = {}
+        impossible = Counter()
         for mset in itertools.chain.from_iterable(
                 itertools.combinations(self.non_default_movements, r)
                 for r in range(0, len(self.non_default_movements) + 1)):
@@ -833,6 +834,12 @@ class GameLogic(object):
                 times = [self.movement_time(mset, base, a, b, j, jd, jmvmt) for a,b, j, jd, jmvmt in dlist]
                 if all(t is not None for t in times):
                     local_time[k] = times
+                else:
+                    impossible[k] += 1
+        for k, val in impossible.items():
+            if val == 2 ** len(self.non_default_movements):
+                logging.warning(f'Base movement is not possible: {self.id_lookup[k[0]]["fullname"]}'
+                                f' --> {self.id_lookup[k[1]]["name"]}')
         return table
 
     def iter_movement_set_keys(self):

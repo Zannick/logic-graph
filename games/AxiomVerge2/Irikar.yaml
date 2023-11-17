@@ -274,6 +274,7 @@ areas:
       coord: [12.2, 25.7]
       local:
         - to: Dagger Altar
+          jumps: 1
       locations:
         # TODO: collect two items with two different canons at the same time?
         - name: Shockwave Wall
@@ -467,6 +468,7 @@ areas:
       coord: [12.3, 26.6]
       local:
         - to: Middle Platform
+          jumps: 1
         - to: West 28
           jumps_down: 1
         - to: Portal Stand
@@ -645,7 +647,7 @@ areas:
       local:
         - to: West 28
         - to: Right Vertical Pipe
-          thru: [10.85, 27.25]
+          thru: [10.85, 27.35]
           jumps: [0, 1]
       location:
         - name: Health Pickup

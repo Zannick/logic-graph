@@ -225,9 +225,22 @@ pub fn access_ebih__drone_room__portal_exit__ex__moving_platform_1__req(ctx: &Co
     // Infect and not ^_platform_moved
     (ctx.has(Item::Infect) && !ctx.ebih__drone_room__ctx__platform_moved())
 }
+pub fn access_ebih__drone_room__portal_exit__ex__moving_platform_2__req(ctx: &Context) -> bool {
+    // $hook and not ^_platform_moved
+    (helper__hook!(ctx) && !ctx.ebih__drone_room__ctx__platform_moved())
+}
 pub fn access_ebih__ebih_east__dispenser__activate_lift__req(ctx: &Context) -> bool {
-    // Infect and ^_platform2_moved
-    (ctx.has(Item::Infect) && ctx.ebih__ebih_east__ctx__platform2_moved())
+    // Infect and ^_platform2_moved and ($grab or $hook)
+    ((ctx.has(Item::Infect) && ctx.ebih__ebih_east__ctx__platform2_moved())
+        && (helper__grab!(ctx) || helper__hook!(ctx)))
+}
+pub fn access_ebih__ebih_east__dispenser__ex__lower_moving_platform_1__req(ctx: &Context) -> bool {
+    // $grab and not ^_platform2_moved
+    (helper__grab!(ctx) && !ctx.ebih__ebih_east__ctx__platform2_moved())
+}
+pub fn access_ebih__ebih_east__dispenser__ex__lower_moving_platform_2__req(ctx: &Context) -> bool {
+    // $hook and not ^_platform2_moved
+    (helper__hook!(ctx) && !ctx.ebih__ebih_east__ctx__platform2_moved())
 }
 pub fn access_ebih__ebih_east__lower_moving_platform__activate_lift__req(ctx: &Context) -> bool {
     // Infect and $grab and not ^_platform2_moved

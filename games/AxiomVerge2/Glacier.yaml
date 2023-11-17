@@ -89,7 +89,6 @@ areas:
       local:
         - to: Ledge
           jumps: 8
-        - to: Overhang  # TODO movement only possible with mist?
       exits:
         - to: Grid 42,10 > West
           tags: [xshift]
@@ -204,8 +203,11 @@ areas:
           tags: [xshift]
     - name: Small Path
       coord: [41.95, 12.8]
-      local:
-        - to: East  # mist movement only
+      exits:
+        - to: East
+          req: $mist2
+          price: 150  # ?
+          movement: mist2
     - name: Water Surface
       coord: [41.05, 12.8]
       # other access is dependent on Amashilama, so leave isolated for now.
@@ -267,13 +269,16 @@ areas:
         - to: Mid 9
         - to: Mid 11
           jumps_down: 1
-        - to: Peak
       exits:
         - to: Grid 37-38,9 > West
           tags: [xshift]
         - to: Peak
           req: $grab
           time: 2.4
+        - to: Peak
+          req: $hook
+          movement: base
+          jumps: 2
     - name: West 9
       coord: [36.05, 8.75]
       local:
@@ -288,14 +293,19 @@ areas:
       coord: [36.5, 8.8]
       local:
         - to: West 9
+          jumps: 1
         - to: East 9
-        - to: Peak
+          jumps: 2
         - to: Mid 11
         - to: Under Switch
       exits:
         - to: Peak
           req: $grab
           time: 2
+        - to: Peak
+          req: $hook
+          movement: base
+          jumps: 2
     - name: Mid 11
       coord: [36.5, 11.3]
       local:
@@ -304,6 +314,7 @@ areas:
         - to: Mid 9
           jumps: 19
         - to: West 9
+          jumps: 19
         - to: Lower West Corner
           jumps_down: 2
         - to: East 13
@@ -344,7 +355,6 @@ areas:
     - name: Peak
       coord: [36.4, 8.2]
       local:
-        - to: West 8
         - to: Mid 9
         - to: East 9
       locations:
@@ -355,6 +365,10 @@ areas:
         - to: West 8
           req: $grab
           time: 2
+        - to: West 8
+          req: $hook
+          movement: base
+          jumps: 2
     - name: West 8
       coord: [36.05, 7.75]
       local:
@@ -370,7 +384,7 @@ areas:
           jumps: 2
         - to: Lower West Corner
         - to: East 13
-          thru: [36.5, 11.2]
+          thru: [36.5, 12.2]
       exits:
         - to: East 12
           req: $grab
@@ -390,15 +404,14 @@ areas:
         - to: Mid 11
           jumps: 8
         - to: East Corner
+          thru: [36.3, 11.7]
+          jumps: [5, 3]
         - to: East 13
     - name: East 13
       coord: [36.95, 12.8]
       local:
         - to: Lower West Corner
           jumps: 3
-        - to: Mid 11
-        - to: East Corner
-          thru: [36.5, 11.3]
       exits:
         - to: Boomerang Antechamber > West 13
           tags: [xshift]
@@ -433,6 +446,7 @@ areas:
       local:
         - to: West 13
         - to: West 12
+          jumps: 2
         - to: East 12
           thru: [38.6, 11.4]
       exits:
@@ -532,14 +546,16 @@ areas:
   spots:
     - name: East 9
       coord: [35.95, 8.75]
-      local:
-        - to: Column
       exits:
         - to: Vertical Room > West 9
           tags: [xshift]
         - to: Column
           req: $grab
           time: 2
+        - to: Column
+          req: $hook
+          movement: base
+          jumps: 1
         - to: Vertical Room > Past Gate
           req: $offset
           time: 20
@@ -556,18 +572,21 @@ areas:
     - name: Gate Ledge
       coord: [35.1, 8.65]
       local:
-        - to: Column  # Requires mist, hover, hook, climb, or grab
         - to: Fork
       exits:
+        # Requires mist, hover, hook, climb, or grab
         - to: Column
-          req: $grab
+          req: $grab or $climb
           time: 2
+        - to: Column
+          req: $hover or $hook
+          movement: base
+          jumps: 1
 
     - name: East 11
       coord: [35.95, 10.7]
       local:
         - to: Mid 35
-        - to: Fork
       exits:
         - to: Vertical Room > Past Gate
           tags: [xshift]
@@ -578,7 +597,6 @@ areas:
           jumps: 1
         - to: Mid 34
           jumps: 3
-        - to: Fork
       exits:
         - to: Fork
           req: $grab
@@ -588,10 +606,13 @@ areas:
       local:
         - to: Mid 35
         - to: Cliff
-        - to: Lower Platform
       exits:
         - to: Lower Platform
           req: $grab
+        - to: Lower Platform
+          req: $hook
+          movement: base
+          jumps: 1
     - name: Cliff
       coord: [34.1, 10.5]
       local:
@@ -608,7 +629,6 @@ areas:
       local:
         - to: Pedestal
           jumps: 1
-        - to: Cliff
       locations:
         - name: Quick Grab
           item: Ledge_Grab
@@ -620,10 +640,13 @@ areas:
           req: $grab
           movement: base
           jumps: 2
+        - to: Cliff
+          req: $hook
+          movement: base
+          jumps: 1
     - name: Pedestal
       coord: [33.5, 10.6]
       local:
-        - to: West
         - to: Gate
         - to: Cliff Bottom
       locations:
@@ -632,7 +655,7 @@ areas:
           canon: Ledge_Grab
           tags: [urn]
       exits:
-        - to: West
+        - to: West End
           req: $grab
           time: 4
     - name: Gate
@@ -640,13 +663,12 @@ areas:
       local:
         - to: Pedestal
           jumps: 1
-        - to: West
       exits:
-        - to: West
+        - to: West End
           req: $grab
           time: 3.1
 
-    - name: West
+    - name: West End
       coord: [33.3, 9.8]
       local:
         - to: Upper Platform
@@ -659,16 +681,22 @@ areas:
       local:
         - to: Mid 34
         - to: Cliff
-        - to: Upper Platform
-        - to: West
       exits:
         - to: Upper Platform
           req: $grab
           time: 2
+        - to: Upper Platform
+          req: $hook
+          movement: base
+          jumps: 3
+        - to: West End
+          req: $climb
+          movement: base
+          jumps: 3
     - name: Upper Platform
       coord: [34.5, 9.55]
       local:
-        - to: West
+        - to: West End
         - to: Lower Platform
         - to: Cliff
         - to: Mid 34
@@ -684,8 +712,6 @@ areas:
           thru: [34.65, 9.3]
         - to: East 11
           thru: [35.4, 9.65]
-        - to: Column
-        - to: Gate Ledge
         - to: Mid 35
           thru: [35.4, 9.65]
       exits:
@@ -693,10 +719,18 @@ areas:
           req: $grab
           movement: base
           jumps: 4
+        - to: Column
+          req: $hook
+          movement: base
+          jumps: 3
         - to: Gate Ledge
           req: $grab
           movement: base
           jumps: 4
+        - to: Gate Ledge
+          req: $hook
+          movement: base
+          jumps: 2
 
 - name: Peak
   on_entry: $reset_old_area(^newpos)
@@ -714,14 +748,22 @@ areas:
       local:
         - to: Top Rock
           jumps: 1
-        - to: Highest Platform
         - to: East 8
+      exits:
+        - to: Highest Platform
+          req: $hover
+          movement: base
+          jumps: 1
     - name: Top Rock
       coord: [34.6, 5.9]
       local:
-        - to: Highest Platform
         - to: West Cliff
         - to: Top Platform East
+      exits:
+        - to: Highest Platform
+          req: $hover
+          movement: base
+          jumps: 2
     - name: Highest Platform
       coord: [34.6, 5.7]
       local:
@@ -732,7 +774,6 @@ areas:
     - name: West Cliff
       coord: [33.65, 6.55]
       local:
-        - to: Highest Platform
         - to: Top Rock
           jumps: 7
         - to: Under West Cliff
@@ -740,18 +781,20 @@ areas:
     - name: Under West Cliff
       coord: [33.6, 7.2]
       local:
-        - to: West Cliff
         - to: West 8
       exits:
         - to: West Cliff
-          req: $grab or $climb
+          req: $grab
           time: 2
+        - to: West Cliff
+          req: $hook
+          movement: base
+          jumps: 3
     - name: West 8
       coord: [33.05, 7.75]
       local:
         - to: Under West Cliff
           jumps: 4
-        - to: West Cliff
       exits:
         - to: Grid 32,7-10 > East 8
           tags: [xshift]
@@ -794,32 +837,33 @@ areas:
         - to: West 9
           jumps: 1
         - to: West 10
-        - to: Center Platform
       exits:
         - to: Column
           req: $grab or $climb
           time: 1.4
+        - to: Column
+          req: $hook
+          movement: base
+          jumps: 1
     - name: West 9
       coord: [32.05, 8.55]
       local:
         - to: West 10
           jumps_down: 1
         - to: Left Rock
-        - to: Center Platform
-        - to: Column
       exits:
         - to: Grid 31,9-12 > East 9
           tags: [xshift]
     - name: West 10
       coord: [32.05, 9.275]
-      local:
-        - to: West 9
-        - to: Left Rock
-        - to: Column
       exits:
         - to: Left Rock
           req: $grab or $climb
           time: 1.6
+        - to: Left Rock
+          req: $hook
+          movement: base
+          jumps: 2
 
 - name: Grid 31,9-12
   on_entry: $reset_old_area(^newpos)
@@ -836,7 +880,6 @@ areas:
     - name: East 10
       coord: [31.95, 9.275]
       local:
-        - to: East 9
         - to: Observation Tower
         - to: Midair
       exits:
@@ -847,7 +890,6 @@ areas:
       local:
         - to: East 10
           jumps: 7
-        - to: East 9
         - to: Midair
         - to: Observation Tower L4
         - to: West 12
@@ -858,6 +900,7 @@ areas:
           jumps: 2
         - to: West 12
         - to: Midair
+          jumps: 2
     - name: West 12
       coord: [31.05, 11.7]
       local:
@@ -871,8 +914,6 @@ areas:
       local:
         - to: Observation Tower
         - to: Observation Tower L4
-        - to: East 9
-        - to: East 10
       exits:
         - to: Ebih > Base Camp > East 11
           tags: [xshift]
@@ -897,7 +938,6 @@ areas:
     - name: Upper Platform
       coord: [31.6, 13.6]
       local:
-        - to: Upper
         - to: Ledge
         - to: Lower Platform
           jumps_down: 1
@@ -910,10 +950,13 @@ areas:
         - to: Upper
           req: $grab
           time: 1.85
+        - to: Upper
+          req: $hook
+          movement: base
+          jumps: 2
     - name: Ledge
       coord: [31.55, 13.7]
       local:
-        - to: Upper
         - to: Upper Platform
           jumps: 1
         - to: Lower Platform
@@ -925,16 +968,23 @@ areas:
         - to: Upper
           req: $climb and $grab
           time: 2
+        - to: Upper
+          req: $hook
+          movement: base
+          jumps: 2
     - name: Lower Platform
       coord: [31.7, 13.95]
       local:
-        - to: Upper Platform
-        - to: Ledge
         - to: Hill
         - to: Side Jump
+          jumps: 1
       exits:
         - to: Ledge
           req: $grab
+        - to: Ledge
+          req: $hook
+          movement: base
+          jumps: 1
     - name: Hill
       coord: [31.85, 14.1]
       local:
@@ -948,28 +998,21 @@ areas:
         - to: Hill
           jumps: 4
         - to: Lake Access
-        - to: Ledge
-        - to: Upper Platform
-        - to: Lower Platform
     - name: Side Jump
       coord: [32.0, 13.9]
       local:
         - to: Side
-        - to: Upper Platform
     - name: Side
       coord: [32.0, 14.1]
       local:
         - to: Side Jump
           jumps: 1
-        - to: Upper Platform
         - to: Lower Platform
           jumps: 1
         - to: Hill
     - name: Lake Access
       coord: [31.05, 14.85]
       local:
-        - to: Ledge
-        - to: Upper Platform
         - to: Bottom
       exits:
         - to: Amagi > Main Area > East 15

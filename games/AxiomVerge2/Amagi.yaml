@@ -65,7 +65,6 @@ areas:
     - name: West Side
       coord: [27.5, 15.75]
       local:
-        - to: Carving
         - to: West Shelf
       exits:
         - to: Carving
@@ -245,7 +244,7 @@ areas:
     - name: West Mini-Hill
       coord: [27.8, 18.5]
       local:
-        - to: West 18
+        - to: West 19
         - to: Flat Ruin
           jumps: 1
         - to: Half Pillar
@@ -261,6 +260,7 @@ areas:
       coord: [27.05, 18.7]
       local:
         - to: West Mini-Hill
+          jumps: 1
       exits:
         - to: West Lake > East 19
           tags: [xshift]
@@ -613,7 +613,6 @@ areas:
         - to: Pillar
           jumps: 2
           jump_movement: water
-        - to: Upper Center Platform
         - to: Some Rock
     - name: West Platform
       coord: [25.05, 17.7]
@@ -654,7 +653,6 @@ areas:
     - name: Cavern Neck
       coord: [23.5, 18.2]
       local:
-        - to: Cavern Jaw
         - to: Cavern Chin
           jumps: 1
           jump_movement: water
@@ -667,7 +665,6 @@ areas:
         - to: Cavern Neck
           jumps: 1
           jump_movement: water
-        - to: West Platform
         - to: Somewhat Central Platform
           jumps: 3
           jump_movement: water
@@ -728,6 +725,7 @@ areas:
       coord: [23.3, 16.2]
       local:
         - to: Cavern Refill Station
+          jumps: 1
         - to: Cavern Middle Pillar
         - to: Cavern Jaw
     - name: Cavern Middle Pillar
@@ -735,7 +733,6 @@ areas:
       local:
         - to: Cavern Lower Trachea
           thru: [22.5, 17.5]
-        - to: Cavern Rear Pillar
         - to: Cavern Front Pillar
           jumps: 1
           jump_movement: water

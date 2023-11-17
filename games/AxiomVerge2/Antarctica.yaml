@@ -94,7 +94,6 @@ areas:
       coord: [41.7, 1.5]
       local:
         - to: Save Point
-        - to: Building 2 Upper
       exits:
         - to: Building 1E > East Entry
           tags: [interior]

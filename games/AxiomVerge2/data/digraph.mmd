@@ -980,7 +980,7 @@ subgraph Glacier
         Glacier__Ledge_Grab_Room__Cliff_Bottom(Cliff Bottom);
         Glacier__Ledge_Grab_Room__Pedestal(Pedestal);
         Glacier__Ledge_Grab_Room__Gate(Gate);
-        Glacier__Ledge_Grab_Room__West(West);
+        Glacier__Ledge_Grab_Room__West_End(West End);
         Glacier__Ledge_Grab_Room__Lower_Platform(Lower Platform);
         Glacier__Ledge_Grab_Room__Upper_Platform(Upper Platform);
         Glacier__Ledge_Grab_Room__Fork(Fork);
@@ -1363,6 +1363,7 @@ Ebih__Base_Camp__East_12 <--> Glacier__Grid_31_9_12__West_12
 Ebih__Base_Camp__Lake_Access <--> Glacier__Lake_Main_Entrance__Ebih_Access
 Ebih__Base_Camp__Left_Platform <--> Ebih__Base_Camp__Top_Platform
 Ebih__Base_Camp__Left_Platform_Moved <--> Ebih__Base_Camp__Top_Platform
+Ebih__Base_Camp__Save_Point --> Ebih__Base_Camp__Top_Platform
 Ebih__Base_Camp__Tent_Entry <--> Ebih__Tent_Interior__Entry
 Ebih__Base_Camp__West_11 --> Ebih__Base_Camp__Left_Platform
 Ebih__Base_Camp__West_11 <--> Ebih__Observation_Tower_Room__East_11
@@ -1370,6 +1371,8 @@ Ebih__Base_Camp__West_12 --> Ebih__By_Garage__East_12
 Ebih__Base_Camp__West_13 <--> Ebih__By_Garage__East_13
 Ebih__Boss_Room__East_4 <--> Ebih__Drone_Room__West_4
 Ebih__Boss_Room__East_6 <--> Ebih__Drone_Room__West_6
+Ebih__Boss_Room__High_Platform --> Ebih__Boss_Room__East_4
+Ebih__Boss_Room__Lower_Ledge --> Ebih__Boss_Room__Upper_Tree
 Ebih__Boss_Room__Lower_Tree --> Ebih__Boss_Room__Lower_Ledge
 Ebih__Boss_Room__West_6 <--> Ebih__Grid_21_2_6__East_6
 Ebih__By_Garage__Crawlspace <--> Ebih__By_Garage__Crawlspace_Opening
@@ -1383,11 +1386,15 @@ Ebih__Cave__Entry <--> Ebih__Waterfall__Cave_Entrance
 Ebih__Drone_Room__East_4 <--> Ebih__Grid_25_2_6__West_4
 Ebih__Drone_Room__Middle_Platform --> Ebih__Drone_Room__Portal
 Ebih__Drone_Room__Middle_Platform --> Ebih__Drone_Room__Portal_Exit
+Ebih__Drone_Room__Pit_Left --> Ebih__Drone_Room__Middle_Platform
 Ebih__Drone_Room__Pit_Left --> Ebih__Drone_Room__West_6
 Ebih__Drone_Room__Portal --> Ebih__Drone_Room__Portal_Exit
 Ebih__Drone_Room__Portal_Exit --> Ebih__Drone_Room__Moving_Platform
+Ebih__Ebih_East__Dispenser --> Ebih__Ebih_East__Lower_Moving_Platform
 Ebih__Ebih_East__East_9 --> Ebih__Ebih_East__East_Hill
 Ebih__Ebih_East__East_9 <--> Ebih__Observation_Tower_Room__West_9
+Ebih__Ebih_East__Ledge_End --> Ebih__Ebih_East__East_Ledge
+Ebih__Ebih_East__Moving_Platform --> Ebih__Ebih_East__East_Ledge
 Ebih__Ebih_East__West_7 <--> Ebih__Waterfall__East_7
 Ebih__Ebih_East__West_8 <--> Ebih__Waterfall__East_8
 Ebih__Ebih_West__Above_Door <--> Ebih__Ebih_West__Below_Door
@@ -1432,6 +1439,7 @@ Ebih__Grid_25_10_12__West_10 <--> Ebih__Waterfall__East_10
 Ebih__Grid_25_10_12__West_11 <--> Ebih__Waterfall__East_11
 Ebih__Grid_25_2_6__West_4 --> Ebih__Grid_25_2_6__Pit
 Ebih__Grid_26_10_11__East_10 <--> Ebih__Observation_Tower_Room__West_10
+Ebih__Grid_26_10_11__Ledge --> Ebih__Grid_26_10_11__Upper_Platform
 Ebih__Grid_26_10_11__Middle_Bottom --> Ebih__Grid_26_10_11__Middle_Platform
 Ebih__Grid_26_10_11__Middle_Platform --> Ebih__Grid_26_10_11__West_10
 Ebih__Grid_26_10_11__Under_Ledge --> Ebih__Grid_26_10_11__Ledge
@@ -1462,11 +1470,14 @@ Ebih__Vertical_Interchange__Switch --> Ebih__Vertical_Interchange__Below_Door
 Ebih__Waterfall__Alcove <--> Ebih__Waterfall__Alcove_Left
 Ebih__Waterfall__Alcove <--> Ebih__Waterfall__Alcove_Right
 Ebih__Waterfall__Alcove_Left --> Ebih__Waterfall__Waterfall_Center_Left
+Ebih__Waterfall__Alcove_Right --> Ebih__Waterfall__Waterfall_Center_Right
 Ebih__Waterfall__Below_Left_Switch <--> Ebih__Waterfall__Ledge_Below_Hole
 Ebih__Waterfall__Below_Tree --> Ebih__Waterfall__Big_Tree
 Ebih__Waterfall__Ledge_Below_Hole --> Ebih__Waterfall__Middle_West_Tree
+Ebih__Waterfall__Ledge_Below_Hole --> Ebih__Waterfall__West_Door_Right
 Ebih__Waterfall__Lower_West_Tree --> Ebih__Waterfall__West_Lower_Path
 Ebih__Waterfall__Middle_West_Tree --> Ebih__Waterfall__West_Main_Path
+Ebih__Waterfall__Near_East_Tree --> Ebih__Waterfall__East_Ledge
 Ebih__Waterfall__Platform --> Ebih__Waterfall__Big_Tree
 Ebih__Waterfall__Under_Waterfall --> Ebih__Waterfall__Waterfall_Left
 Ebih__Waterfall__Wall_Left <--> Ebih__Waterfall__Wall_Right
@@ -1534,6 +1545,7 @@ Giguna__Carnelian__Middle_Platforms <--> Giguna__Carnelian__Upper_Susar
 Giguna__Carnelian__Upper_Susar --> Giguna__Carnelian__East_Cliff
 Giguna__Carnelian__Upper_Susar --> Giguna__Carnelian__Upper_Path
 Giguna__Carnelian__West_10 <--> Giguna__West_Caverns__East_10
+Giguna__Carnelian__West_Ledge --> Giguna__Carnelian__Upper_Path
 Giguna__Carnelian__West_Ledge --> Giguna__Carnelian__West_10
 Giguna__Clouds__Platform_Stop --> Giguna_Breach__Pink_Clouds__Normal_Entry
 Giguna__Clouds__Pull_Right --> Irikar__Hub__Northwest_Above_Bowl
@@ -1632,6 +1644,7 @@ Giguna__Giguna_Northeast__Step --> Giguna__Giguna_Northeast__West_9
 Giguna__Giguna_Northeast__Switch --> Giguna__Giguna_Northeast__Door
 Giguna__Giguna_Northeast__Switch --> Giguna__Giguna_Northeast__Right_Column
 Giguna__Giguna_Northeast__Vault --> Giguna__Giguna_Northeast__Door
+Giguna__Giguna_Northeast__West_9 --> Giguna__Giguna_Northeast__Crow_Eating
 Giguna__Giguna_Northeast__West_9 <--> Giguna__Ruins_East__East_9
 Giguna__Gubi_Lair__East_15 --> Giguna__Gubi_Lair__Center_Platform
 Giguna__Gubi_Lair__East_Tree --> Giguna__Gubi_Lair__Center_Platform
@@ -1666,6 +1679,7 @@ Giguna__Ruins_East__Bottom_Rock --> Giguna__Ruins_East__Cliff
 Giguna__Ruins_East__Cliff --> Giguna__Ruins_East__Ledge
 Giguna__Ruins_East__Ledge --> Giguna__Ruins_East__Pillar
 Giguna__Ruins_East__Ledge <--> Giguna__Ruins_East__Small_Passage
+Giguna__Ruins_East__Pillar --> Giguna__Ruins_East__Way_Up_High
 Giguna__Ruins_East__West_7 --> Giguna__Ruins_East__Pillar
 Giguna__Ruins_East__West_7 <--> Giguna__Ruins_Top__East_7
 Giguna__Ruins_Top__East_7 <--> Giguna__Ruins_Top__East_Door
@@ -1691,6 +1705,7 @@ Giguna__Wasteland__Door_Left <--> Giguna__Wasteland__Door_Right
 Giguna__Wasteland__East_Ledge --> Giguna__Wasteland__East_12
 Giguna__Wasteland__Lower_Cliff --> Giguna__Wasteland__Middle_Cliff
 Giguna__Wasteland__Lower_Path_Right --> Giguna__Wasteland__Lower_Cliff
+Giguna__Wasteland__Middle_Cliff --> Giguna__Wasteland__Upper_Cliff
 Giguna__Wasteland__Passage_Cache --> Giguna__Wasteland__Lower_Path_Left
 Giguna__Wasteland__Passage_Cache <--> Giguna__Wasteland__Passage_East
 Giguna__Wasteland__West_12 <--> Giguna__West_Caverns__East_12
@@ -1699,6 +1714,7 @@ Giguna__West_Caverns__East_10 --> Giguna__West_Caverns__Column_2_Top
 Giguna__West_Caverns__East_Susar --> Giguna__West_Caverns__East_12
 Giguna__West_Caverns__East_Susar --> Giguna__West_Caverns__Tunnel_Fork
 Giguna__West_Caverns__Small_Staircase --> Giguna__West_Caverns__East_10
+Giguna__West_Caverns__Top_Gap_Right --> Giguna__West_Caverns__Column_1_Top_Right
 Giguna__West_Caverns__Tunnel_Bottom --> Giguna__West_Caverns__Tunnel_Entrance
 Giguna__West_Caverns__Tunnel_Fork --> Giguna__West_Caverns__Tunnel_Bottom
 Giguna__West_Caverns__Tunnel_Fork --> Giguna__West_Caverns__Tunnel_Entrance
@@ -1740,16 +1756,20 @@ Glacier__Ledge_Grab_Room__East_9 --> Glacier__Vertical_Room__Past_Gate
 Glacier__Ledge_Grab_Room__East_9 <--> Glacier__Vertical_Room__West_9
 Glacier__Ledge_Grab_Room__Fork --> Glacier__Ledge_Grab_Room__Column
 Glacier__Ledge_Grab_Room__Fork --> Glacier__Ledge_Grab_Room__Gate_Ledge
-Glacier__Ledge_Grab_Room__Gate --> Glacier__Ledge_Grab_Room__West
+Glacier__Ledge_Grab_Room__Gate --> Glacier__Ledge_Grab_Room__West_End
 Glacier__Ledge_Grab_Room__Gate_Ledge --> Glacier__Ledge_Grab_Room__Column
 Glacier__Ledge_Grab_Room__Lower_Platform --> Glacier__Ledge_Grab_Room__Upper_Platform
+Glacier__Ledge_Grab_Room__Lower_Platform --> Glacier__Ledge_Grab_Room__West_End
 Glacier__Ledge_Grab_Room__Mid_34 --> Glacier__Ledge_Grab_Room__Lower_Platform
 Glacier__Ledge_Grab_Room__Mid_35 --> Glacier__Ledge_Grab_Room__Fork
-Glacier__Ledge_Grab_Room__Pedestal --> Glacier__Ledge_Grab_Room__West
+Glacier__Ledge_Grab_Room__Pedestal --> Glacier__Ledge_Grab_Room__West_End
 Glacier__Ledge_Grab_Room__Upper_Platform --> Glacier__Ledge_Grab_Room__Fork
 Glacier__Peak__East_8 --> Glacier__Peak__Top_Platform_East
 Glacier__Peak__East_8 <--> Glacier__Vertical_Room__West_8
+Glacier__Peak__Top_Platform_East --> Glacier__Peak__Highest_Platform
+Glacier__Peak__Top_Rock --> Glacier__Peak__Highest_Platform
 Glacier__Peak__Under_West_Cliff --> Glacier__Peak__West_Cliff
+Glacier__The_Big_Drop__Small_Path --> Glacier__The_Big_Drop__East
 Glacier__The_Big_Drop__Water_Surface --> Glacier__Revival__Save_Point
 Glacier__Vertical_Room__East_9 --> Glacier__Vertical_Room__Peak
 Glacier__Vertical_Room__East_Corner --> Glacier__Vertical_Room__East_12

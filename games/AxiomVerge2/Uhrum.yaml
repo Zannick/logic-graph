@@ -294,6 +294,7 @@ areas:
         - to: Upper Fork
           jumps: 1
         - to: Clear Passage
+          jumps: 1
       exits:
         - to: Siege Corridor > West 26
           tags: [xshift]
@@ -584,6 +585,7 @@ areas:
       coord: [24.2, 24.95]
       local:
         - to: Center Platform 1
+          jumps: 1
         - to: Center Box
           thru: [24.25, 25.15]
         - to: Mideast Hill

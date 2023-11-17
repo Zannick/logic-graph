@@ -332,6 +332,7 @@ areas:
       coord: [12.6, 26.8]
       local:
         - to: West
+          jumps: 1
       exits:
         - to: Pillar
           req: $hook

@@ -35,7 +35,6 @@ areas:
         - to: Step
           jumps: 1
         - to: Gate Left
-        - to: Crow Eating
       actions:
         - name: Save
           do: $save
@@ -72,6 +71,10 @@ areas:
       local:
         - to: Step
       exits:
+        - to: Crow Eating
+          req: $hover
+          movement: base
+          jumps: 1
         - to: Ruins East > East 9
           tags: [xshift]
     - name: Gate Left
@@ -318,11 +321,17 @@ areas:
       coord: [15.3, 10.1]
       local:
         - to: Lower Susar
-        - to: West 10
-        - to: Upper Path
       exits:
         - to: West 10
           req: $grab
+        - to: West 10
+          req: $hook
+          movement: base
+          jumps: 1
+        - to: Upper Path
+          req: $hook
+          movement: base
+          jumps: 2
     - name: West 10
       coord: [15.05, 9.8]
       local:
@@ -381,8 +390,8 @@ areas:
     - name: Small Platform
       coord: [14.2, 10.2]
       local:
-        - to: Higher Ledge
         - to: East Platform
+          jumps: 1
         - to: Small Staircase
         - to: Tunnel Entrance
       actions:
@@ -412,16 +421,26 @@ areas:
       local:
         - to: Higher Ledge
         - to: East Platform
+        - to: Floating Brick
+        - to: Small Platform
+        - to: Small Staircase
         - to: Top Gap Right
     - name: Top Gap Right
       coord: [13.65, 9.5]
       local:
         - to: Column 2 Top
+          jumps: 1
         - to: Top Gap Left
+      exits:
+        - to: Column 1 Top Right
+          req: $hover
+          movement: base
+          jumps: 1
     - name: Top Gap Left
-      coord: [13.4, 9.6]
+      coord: [13.4, 9.55]
       local:
         - to: Top Gap Right
+          jumps: 1
         - to: Column 1 Top Right
           jumps: 1
     - name: Column 1 Top Right
@@ -464,11 +483,14 @@ areas:
       coord: [14.8, 11.45]
       local:
         - to: Tunnel Fork
-        - to: Tunnel Entrance
       exits:
         - to: Tunnel Entrance
           req: $grab
           time: 2.25
+        - to: Tunnel Entrance
+          req: $hook
+          movement: base
+          jumps: 4
     - name: Tunnel Fork
       coord: [14.7, 11.7]
       local:
@@ -560,10 +582,14 @@ areas:
     - name: Middle Cliff
       coord: [15.7, 12.45]
       local:
-        - to: Upper Cliff
         - to: Middle Path
         - to: Lower Cliff
         - to: Lower Path Right
+      exits:
+        - to: Upper Cliff
+          req: $hook
+          movement: base
+          jumps: 2
       actions:
         - name: Throw Drone
           req: $can_deploy and Slingshot_Hook
@@ -996,6 +1022,7 @@ areas:
         - to: Staircase Bottom
           jumps: 1
         - to: Save Point
+          jumps: 1
       exits:
         - to: Helipad > East 16
           tags: [xshift]
@@ -1118,7 +1145,6 @@ areas:
       local:
         - to: Bottom Rock
           jumps: 2
-        - to: Cliff
       exits:
         - to: Giguna Northeast > West 9
           tags: [xshift]
@@ -1184,8 +1210,12 @@ areas:
       coord: [16.25, 6.4]
       local:
         - to: West 7
-        - to: Way Up High
         - to: Ledge
+      exits:
+        - to: Way Up High
+          req: $mist2
+          price: 100  # ?
+          movement: mist2
     - name: West 7
       coord: [16.05, 6.8]
       exits:
@@ -1417,6 +1447,7 @@ areas:
       coord: [15.3, 6.8]
       local:
         - to: Entryway
+          jumps: 1
         - to: Portal
           jumps: 1
       exits:
@@ -2559,7 +2590,7 @@ areas:
     - name: Hidden Passage West
       coord: [19.75, 15.05]
       local:
-        - to: Midwest Ledge
+        - to: Lower Ledge
         - to: Arc Ledge
       exits:
         - to: Hidden Passage Center
@@ -2834,6 +2865,7 @@ areas:
       coord: [19.9, 18.2]
       local:
         - to: Passage Exit
+          jumps: 1
         - to: Block Right
       locations:
         - name: Shockwave
