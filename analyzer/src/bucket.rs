@@ -378,7 +378,7 @@ pub trait SegmentedBucketQueue<'b, B: SegmentBucket<P> + 'b, P: Ord>: Queue<B> {
                     }
                     if blbucket.max_priority().unwrap() < min_prio {
                         let keep_priority = *max_prio;
-                        log::info!(
+                        log::debug!(
                             "Segment {}: {:?}..={:?} vs Segment {}: {:?}..={:?}",
                             below,
                             blbucket.min_priority().unwrap(),
