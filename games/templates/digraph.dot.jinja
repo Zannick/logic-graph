@@ -43,4 +43,12 @@ digraph {{ game }} {
 %% for (k, l) in local_distances
     {{ k }} -> {{ l }};
 %% endfor
+    edge [arrowhead=normal,arrowtail=inv,dir=both,style=bold,color=white];
+%% for s in gl.spots()
+%% for a in s.actions|reject('exclude_edge')|sort(attribute='id')
+%% if a.to and not a.to.startswith('^'):
+    {{ s.id }} -> {{ a|get_exit_target }};
+%% endif
+%% endfor
+%% endfor
 }
