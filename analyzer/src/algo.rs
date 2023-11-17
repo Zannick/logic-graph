@@ -6,6 +6,7 @@ use crate::minimize::pinpoint_minimize;
 use crate::solutions::SolutionCollector;
 use crate::world::*;
 use anyhow::Result;
+use log;
 use rayon::prelude::*;
 use std::fmt::Debug;
 use std::path::Path;
@@ -251,7 +252,7 @@ where
         let start = Instant::now();
         match greedy_search(world, startctx, u32::MAX, 9) {
             Ok(wonctx) => {
-                println!(
+                log::info!(
                     "Finished greedy search in {:?} with a result of {}ms",
                     start.elapsed(),
                     wonctx.elapsed()
@@ -301,19 +302,19 @@ where
         wins.sort_unstable_by_key(|c| !c.elapsed());
 
         if !wins.is_empty() {
-            println!(
+            log::info!(
                 "Provided extra routes: {} winners, {} not\nwinning times: {:?}",
                 wins.len(),
                 others.len(),
                 wins.iter().map(|c| c.elapsed()).collect::<Vec<_>>()
             );
         } else if !others.is_empty() {
-            println!(
+            log::info!(
                 "Provided {} non-winning routes, performing greedy search...",
                 others.len()
             );
         } else {
-            println!("No routes provided, performing greedy search...");
+            log::info!("No routes provided, performing greedy search...");
         }
         let wonctx = wins
             .pop()
@@ -322,8 +323,8 @@ where
         let start = Instant::now();
         let max_time =
             if let Some(m) = minimize_greedy(world, startctx.get(), &wonctx, wonctx.elapsed()) {
-                println!("Minimized in {:?}", start.elapsed());
-                println!(
+                log::info!("Minimized in {:?}", start.elapsed());
+                log::info!(
                     "Initial solution of {}ms was minimized to {}ms",
                     wonctx.elapsed(),
                     m.elapsed()
@@ -332,7 +333,7 @@ where
                 solutions.insert(m.elapsed(), m.recent_history().to_vec());
                 max_time
             } else {
-                println!("Minimized-greedy solution wasn't faster than original");
+                log::info!("Minimized-greedy solution wasn't faster than original");
                 wonctx.elapsed()
             };
 
@@ -357,7 +358,7 @@ where
         )
         .unwrap();
         queue.push(startctx.clone(), &None).unwrap();
-        println!("Max time to consider is now: {}ms", queue.max_time());
+        log::info!("Max time to consider is now: {}ms", queue.max_time());
         let s = Search {
             world,
             startctx,
@@ -380,7 +381,7 @@ where
             s.recreate_store(&s.startctx, o.recent_history(), SearchMode::Start)
                 .unwrap();
         }
-        println!("Queue starts with {} elements", s.queue.len());
+        log::info!("Queue starts with {} elements", s.queue.len());
         Ok(s)
     }
 
@@ -400,7 +401,7 @@ where
 
         let history = self.queue.db().get_history(ctx.get()).unwrap();
         let elapsed = self.queue.db().get_best_elapsed(ctx.get()).unwrap();
-        println!("Recording solution from {:?} mode: {}ms", mode, elapsed);
+        log::info!("Recording solution from {:?} mode: {}ms", mode, elapsed);
 
         let min_ctx = pinpoint_minimize(self.world, self.startctx.get(), &history);
 
@@ -412,7 +413,7 @@ where
         }
 
         if sols.is_empty() || elapsed < sols.best() {
-            println!(
+            log::info!(
                 "{:?} mode found new shortest winning path after {} rounds: estimated {}ms (heap max was: {}ms)",
                 mode,
                 iters,
@@ -420,11 +421,11 @@ where
                 old_time
             );
             old_time = self.queue.max_time();
-            println!("Max time to consider is now: {}ms", old_time);
+            log::info!("Max time to consider is now: {}ms", old_time);
         }
 
         if sols.insert(elapsed, history).is_some() {
-            println!("{:?} mode found new unique solution", mode);
+            log::info!("{:?} mode found new unique solution", mode);
         }
 
         if let Some(ctx) = min_ctx {
@@ -435,18 +436,18 @@ where
             }
 
             if ctx.elapsed() < sols.best() {
-                println!(
+                log::info!(
                     "{:?} minimized a better solution: estimated {}ms (heap max was: {}ms)",
                     mode,
                     ctx.elapsed(),
                     old_time
                 );
-                println!("Max time to consider is now: {}ms", self.queue.max_time());
+                log::info!("Max time to consider is now: {}ms", self.queue.max_time());
             }
 
             let history = ctx.recent_history();
             if sols.insert(ctx.elapsed(), history.to_vec()).is_some() {
-                println!("Minimized found new unique solution");
+                log::info!("Minimized found new unique solution");
             }
 
             drop(sols);
@@ -560,7 +561,7 @@ where
         let num_threads = rayon::current_num_threads();
         let num_workers = (num_cpus::get() * 2 + 1) / 3;
         let res = Mutex::new(Ok(()));
-        println!(
+        log::info!(
             "Starting search with {} workers ({} threads)",
             num_workers, num_threads
         );
@@ -672,7 +673,7 @@ where
                                     if let Err(e) =
                                         self.recreate_store(&ctx, &hist, SearchMode::Greedy)
                                     {
-                                        println!("Thread greedy exiting due to error: {:?}", e);
+                                        log::error!("Thread greedy exiting due to error: {:?}", e);
                                         let mut r = res.lock().unwrap();
                                         if r.is_ok() {
                                             *r = Err(e);
@@ -720,7 +721,7 @@ where
                                 |(prev, nexts)| (self.extract_solutions(nexts, &prev, mode), prev),
                             )) {
                                 let mut r = res.lock().unwrap();
-                                println!("Thread {} exiting due to error: {:?}", i, e);
+                                log::error!("Thread {} exiting due to error: {:?}", i, e);
                                 if r.is_ok() {
                                     *r = Err(e);
                                     finished.store(true, Ordering::Release);
@@ -729,7 +730,7 @@ where
                         }
                     }
                     Err(e) => {
-                        println!("Thread {} exiting due to error: {:?}", i, e);
+                        log::error!("Thread {} exiting due to error: {:?}", i, e);
                         let mut r = res.lock().unwrap();
                         if r.is_ok() {
                             *r = Err(e);
@@ -739,7 +740,7 @@ where
                     }
                 };
             }
-            println!(
+            log::info!(
                 "Thread {} exiting: fin={} done={}",
                 i,
                 finished.load(Ordering::Acquire),
@@ -766,11 +767,11 @@ where
                 }
             });
 
-            println!("Workers all exited, marking finished");
+            log::info!("Workers all exited, marking finished");
             finished.store(true, Ordering::Release);
         });
         let (iskips, pskips, dskips, dpskips) = self.queue.skip_stats();
-        println!(
+        log::info!(
             "Finished after {} rounds ({} dead-ends), skipped {}+{} pushes + {}+{} pops: {}",
             self.iters.load(Ordering::Acquire),
             self.deadends.load(Ordering::Acquire),

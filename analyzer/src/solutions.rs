@@ -1,5 +1,6 @@
 use crate::context::*;
 use crate::{new_hashmap, CommonHasher};
+use log;
 use std::collections::HashMap;
 use std::fs::File;
 use std::io::{self, Write};
@@ -94,8 +95,10 @@ where
             })
             .collect();
         if self.count == 0 || elapsed < self.best {
+            log::info!("Better solution: {} < {}", elapsed, self.best);
             self.best = elapsed;
         } else if elapsed - self.best > self.best / 10 {
+            log::info!("Excluding solution as too slow: {} > 1.1 * {}", elapsed, self.best);
             return None;
         }
 
@@ -233,7 +236,7 @@ where
 
     pub fn export(&mut self) -> io::Result<()> {
         if self.count == 0 {
-            println!("No solutions");
+            log::info!("No solutions");
             return Ok(());
         }
         self.sort_and_clean();
@@ -260,7 +263,7 @@ where
                 Self::write_one(&mut self.file, i, minor, similar, self.best)?;
             }
         }
-        println!(
+        log::info!(
             "Wrote {} solutions ({} types, reduced from {} total/{} types) to {}",
             total,
             types,

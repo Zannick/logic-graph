@@ -385,10 +385,7 @@ where
         };
         let s = Instant::now();
         let c = q.score(startctx);
-        println!("Calculated estimate {} in {:?}", c, s.elapsed());
-        let s = Instant::now();
-        let c = q.score(startctx);
-        println!("Calculated estimate again {} in {:?}", c, s.elapsed());
+        log::info!("Calculated estimate {} in {:?}", c, s.elapsed());
         Ok(q)
     }
 

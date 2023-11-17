@@ -5,6 +5,7 @@
 
 use crate::CommonHasher;
 use bucket_queue::{Bucket, BucketQueue, Queue};
+use log;
 use priority_queue::DoublePriorityQueue;
 use std::hash::Hash;
 
@@ -377,7 +378,7 @@ pub trait SegmentedBucketQueue<'b, B: SegmentBucket<P> + 'b, P: Ord>: Queue<B> {
                     }
                     if blbucket.max_priority().unwrap() < min_prio {
                         let keep_priority = *max_prio;
-                        println!(
+                        log::info!(
                             "Segment {}: {:?}..={:?} vs Segment {}: {:?}..={:?}",
                             below,
                             blbucket.min_priority().unwrap(),

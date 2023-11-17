@@ -1,6 +1,7 @@
 use crate::context::Ctx;
 use crate::world::*;
 use crate::{new_hashmap, CommonHasher};
+use log;
 use pheap::PairingHeap;
 use std::collections::HashMap;
 use std::fmt::Debug;
@@ -278,7 +279,7 @@ where
         }
     }
 
-    println!(
+    log::info!(
         "Condensed into {} total sources, {} total edges, {} interesting spots (from {}), {} interesting edges, in {:?}",
         condensed.len(),
         condensed.values().map(|v| v.len()).sum::<usize>(),
