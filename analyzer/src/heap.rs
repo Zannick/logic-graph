@@ -650,10 +650,11 @@ where
     ) -> Result<MutexGuard<BucketQueue<Segment<T, u32>>>> {
         if !self.retrieving.fetch_or(true, Ordering::AcqRel) {
             let start = Instant::now();
+            let num_buckets = queue.approx_num_buckets();
             // Get a decent amount to refill
             let num_to_restore = std::cmp::max(
                 min_to_restore,
-                std::cmp::min(max_to_restore, (self.capacity - queue.len()) / 2),
+                std::cmp::min(max_to_restore, (self.capacity - queue.len()) / (num_buckets + 1)),
             );
             let len = queue.len();
             if self.capacity - len < num_to_restore {
@@ -891,7 +892,7 @@ where
                             if !did_retrieve
                                 && !self.db.is_empty()
                                 && db_best < u32::MAX
-                                && elapsed + est > db_best + max_time / 100
+                                && elapsed + est > db_best + max_time / 128
                             {
                                 diffs.push((segment, elapsed + est - db_best));
                             }

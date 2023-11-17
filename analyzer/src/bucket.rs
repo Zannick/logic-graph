@@ -433,6 +433,14 @@ pub trait SegmentedBucketQueue<'b, B: SegmentBucket<P> + 'b, P: Ord>: Queue<B> {
         }
     }
 
+    fn approx_num_buckets(&self) -> usize {
+        if let Some(max) = self.max_priority() {
+            max - self.min_priority().unwrap() + 1
+        } else {
+            0
+        }
+    }
+
     fn peek_all_buckets_min(&self) -> Vec<Option<P>>
     where
         P: Copy,
