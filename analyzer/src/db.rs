@@ -262,7 +262,7 @@ where
 
         let s = Instant::now();
         let scorer = ContextScorer::shortest_paths(world, startctx, 32_768);
-        println!("Built scorer in {:?}", s.elapsed());
+        log::info!("Built scorer in {:?}", s.elapsed());
 
         let max_possible_progress = scorer.remaining_visits(startctx);
         let mut min_db_estimates = Vec::new();
@@ -611,7 +611,7 @@ where
                 let max_deleted = self.delete.swap(0, Ordering::Acquire);
                 self.db
                     .compact_range(None::<&[u8]>, Some(&max_deleted.to_be_bytes()));
-                println!("Compacting took {:?}", start.elapsed());
+                log::debug!("Compacting took {:?}", start.elapsed());
             }
 
             let el = Self::deserialize_state(&value)?;
@@ -796,7 +796,7 @@ where
                 }
             }
         }
-        println!(
+        log::debug!(
             "We got {} results in {:?}, having iterated through {} elements",
             res.len(),
             start.elapsed(),
@@ -810,10 +810,10 @@ where
         }
 
         // Ignore/assert errors once we start deleting.
-        println!("Beginning point deletion of iterated elements...");
+        log::debug!("Beginning point deletion of iterated elements...");
         let start = Instant::now();
         self.db.write_opt(batch, &self.write_opts).unwrap();
-        println!("Deletes completed in {:?}", start.elapsed());
+        log::debug!("Deletes completed in {:?}", start.elapsed());
 
         self.size.fetch_sub(pops, Ordering::Release);
         self.pskips.fetch_add(pskips, Ordering::Release);
@@ -1143,7 +1143,7 @@ where
             self.reset_estimates_actual();
             drop(_retrieve_lock);
             if end && count == batch_size {
-                println!(
+                log::debug!(
                     "Bg thread reached end at round start, left in db: {}",
                     self.size.load(Ordering::Acquire)
                 );
@@ -1162,7 +1162,7 @@ where
                 .fetch_add(pskips + dup_pskips, Ordering::Release);
             self.size.fetch_sub(pskips + dup_pskips, Ordering::Release);
             if pskips > 0 || dup_pskips > 0 || rescores > 0 {
-                println!(
+                log::debug!(
                     "Background thread (from prog={}): {} expired, {} duplicate, {} rescored",
                     start_progress, pskips, dup_pskips, rescores
                 );
@@ -1170,7 +1170,7 @@ where
             if compact {
                 let start = Instant::now();
                 self.db.compact_range(None::<&[u8]>, None::<&[u8]>);
-                println!("Bg thread compacting took {:?}", start.elapsed());
+                log::debug!("Bg thread compacting took {:?}", start.elapsed());
             }
         }
         Ok(())

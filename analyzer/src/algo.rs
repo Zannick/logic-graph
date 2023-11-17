@@ -822,7 +822,7 @@ where
         ctx: &ContextWrapper<T>,
     ) {
         let mut s = start.lock().unwrap();
-        println!("{} iters took {:?}", num_rounds, s.elapsed());
+        log::debug!("{} iters took {:?}", num_rounds, s.elapsed());
         *s = Instant::now();
 
         let sols = self.solutions.lock().unwrap();

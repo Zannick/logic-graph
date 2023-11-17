@@ -9,9 +9,12 @@ appenders:
     path: "log/INFO.log"
     encoder:
       pattern: "{level:<5} [{date(%F %T.%6f %Z)}] {target}.{line} | {m}{n}"
+    filters:
+      - kind: threshold
+        level: info
 
 root:
-  level: info
+  level: debug
   appenders:
     - infolog
     - stdout

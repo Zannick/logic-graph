@@ -10,6 +10,7 @@ use crate::world::*;
 use crate::CommonHasher;
 use anyhow::{anyhow, Result};
 use bucket_queue::{Bucket, BucketQueue, Queue};
+use log;
 use lru::LruCache;
 use plotlib::page::Page;
 use plotlib::repr::{Histogram, HistogramBins, Plot};
@@ -528,7 +529,7 @@ where
         }
         // Without the lock (but still blocking the push op in this thread)
         if let Some(ev) = evicted {
-            println!("push+evict took {:?} with the lock", start.elapsed());
+            log::debug!("push+evict took {:?} with the lock", start.elapsed());
             if !ev.is_empty() {
                 self.evict_to_db(ev, "push")?;
             }
@@ -541,8 +542,8 @@ where
         let start = Instant::now();
         self.db.extend_from_queue(ev)?;
         self.evictions.fetch_add(1, Ordering::Release);
-        println!("{}:evict to db took {:?}", category, start.elapsed());
-        println!("{}", self.db.get_memory_usage_stats().unwrap());
+        log::debug!("{}:evict to db took {:?}", category, start.elapsed());
+        log::debug!("{}", self.db.get_memory_usage_stats().unwrap());
         Ok(())
     }
 
@@ -554,7 +555,7 @@ where
     ) -> Vec<(T, u32)> {
         let mut evicted = queue.pop_likely_useless();
         if !evicted.is_empty() {
-            println!("Evicted {} useless states", evicted.len());
+            log::debug!("Evicted {} useless states", evicted.len());
         }
         let more = min_evictions.saturating_sub(evicted.len());
         if more > 0 {
@@ -566,7 +567,7 @@ where
 
     /// Retrieves up to the given number of elements for the given segment from the db.
     fn retrieve(&self, segment: usize, num: usize) -> Result<Vec<(T, usize, u32)>> {
-        println!(
+        log::debug!(
             "Beginning retrieve of {} entries from segment {} and up, we have {} total in the db",
             num,
             segment,
@@ -583,8 +584,8 @@ where
             })
             .collect();
 
-        println!("Retrieve from db took {:?}", start.elapsed());
-        println!("{}", self.db.get_memory_usage_stats().unwrap());
+        log::debug!("Retrieve from db took {:?}", start.elapsed());
+        log::debug!("{}", self.db.get_memory_usage_stats().unwrap());
 
         Ok(res)
     }
@@ -661,7 +662,7 @@ where
                     &mut queue,
                     std::cmp::max(self.min_evictions, 2 * num_to_restore),
                 );
-                println!("reshuffle:evict took {:?}", start.elapsed());
+                log::debug!("reshuffle:evict took {:?}", start.elapsed());
                 drop(queue);
                 self.evict_to_db(evicted, "reshuffle")?;
             } else {
@@ -669,7 +670,7 @@ where
             }
             let res = self.retrieve(progress, num_to_restore)?;
             self.retrievals.fetch_add(1, Ordering::Release);
-            println!("Reshuffle took total {:?}", start.elapsed());
+            log::debug!("Reshuffle took total {:?}", start.elapsed());
             queue = self.queue.lock().unwrap();
             queue.extend(res);
             assert!(!queue.is_empty(), "Queue should have data after retrieve");
@@ -742,7 +743,7 @@ where
         queue = self.queue.lock().unwrap();
         queue.extend(res);
         self.retrievals.fetch_add(1, Ordering::Release);
-        println!("Retrieval took total {:?}", start.elapsed());
+        log::debug!("Retrieval took total {:?}", start.elapsed());
         Ok(queue)
     }
 
@@ -1120,7 +1121,7 @@ where
         // Without the lock (but still blocking the extend op in this thread)
         if let Some(ev) = evicted {
             let len = ev.len();
-            println!(
+            log::debug!(
                 "extend+evict took {:?} with the lock, got {} elements",
                 start.elapsed(),
                 len
