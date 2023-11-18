@@ -178,26 +178,38 @@ pub trait SegmentedBucketQueue<'b, B: SegmentBucket<P> + 'b, P: Ord>: Queue<B> {
 
     fn pop_min(&mut self) -> Option<(B::Item, P)> {
         let segment = (self.min_priority()?..=self.max_priority()?)
-            .filter(|&s| self.bucket_for_peeking(s).is_some_and(|bucket| !bucket.is_empty_bucket()))
+            .filter(|&s| {
+                self.bucket_for_peeking(s)
+                    .is_some_and(|bucket| !bucket.is_empty_bucket())
+            })
             .min_by_key(|&s| self.bucket_for_peeking(s).unwrap().min_priority())?;
         self.bucket_for_removing(segment)?.pop_min()
     }
     fn pop_max(&mut self) -> Option<(B::Item, P)> {
         let segment = (self.min_priority()?..=self.max_priority()?)
-            .filter(|&s| self.bucket_for_peeking(s).is_some_and(|bucket| !bucket.is_empty_bucket()))
+            .filter(|&s| {
+                self.bucket_for_peeking(s)
+                    .is_some_and(|bucket| !bucket.is_empty_bucket())
+            })
             .max_by_key(|&s| self.bucket_for_peeking(s).unwrap().max_priority())?;
         self.bucket_for_removing(segment)?.pop_max()
     }
 
     fn peek_min(&'b self) -> Option<(&'b B::Item, &'b P)> {
         let segment = (self.min_priority()?..=self.max_priority()?)
-            .filter(|&s| self.bucket_for_peeking(s).is_some_and(|bucket| !bucket.is_empty_bucket()))
+            .filter(|&s| {
+                self.bucket_for_peeking(s)
+                    .is_some_and(|bucket| !bucket.is_empty_bucket())
+            })
             .min_by_key(|&s| self.bucket_for_peeking(s).unwrap().min_priority())?;
         self.bucket_for_peeking(segment)?.peek_min()
     }
     fn peek_max(&'b self) -> Option<(&'b B::Item, &'b P)> {
         let segment = (self.min_priority()?..=self.max_priority()?)
-            .filter(|&s| self.bucket_for_peeking(s).is_some_and(|bucket| !bucket.is_empty_bucket()))
+            .filter(|&s| {
+                self.bucket_for_peeking(s)
+                    .is_some_and(|bucket| !bucket.is_empty_bucket())
+            })
             .max_by_key(|&s| self.bucket_for_peeking(s).unwrap().max_priority())?;
         self.bucket_for_peeking(segment)?.peek_max()
     }
@@ -350,7 +362,7 @@ pub trait SegmentedBucketQueue<'b, B: SegmentBucket<P> + 'b, P: Ord>: Queue<B> {
         }
     }
 
-    /// Finds the lowest segment S and the highest corresponding segment S'
+    /// Finds the lowest segment S and the highest corresponding segment S' below S
     /// where S-min > S'-max, and evicts all elements below S' with priority > S-max.
     fn pop_likely_useless(&mut self) -> Vec<(B::Item, P)>
     where
@@ -379,13 +391,16 @@ pub trait SegmentedBucketQueue<'b, B: SegmentBucket<P> + 'b, P: Ord>: Queue<B> {
                     if blbucket.max_priority().unwrap() < min_prio {
                         let keep_priority = *max_prio;
                         log::debug!(
-                            "Segment {}: {:?}..={:?} vs Segment {}: {:?}..={:?}",
+                            "Segment {}: {:?}..={:?} vs Segment {}: {:?}..={:?}, means we can evict \
+                            from segment {} and below where score > {:?}",
                             below,
                             blbucket.min_priority().unwrap(),
                             blbucket.max_priority().unwrap(),
                             segment,
                             min_prio,
-                            max_prio
+                            max_prio,
+                            below,
+                            keep_priority
                         );
                         return self.pop_all_with_priority(keep_priority, below, usize::MAX);
                     }
