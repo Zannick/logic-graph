@@ -566,7 +566,7 @@ where
     }
 
     /// Retrieves up to the given number of elements for the given segment from the db.
-    fn retrieve(&self, segment: usize, num: usize) -> Result<Vec<(T, usize, u32)>> {
+    fn retrieve(&self, segment: usize, num: usize, score_limit: u32) -> Result<Vec<(T, usize, u32)>> {
         log::debug!(
             "Beginning retrieve of {} entries from segment {} and up, we have {} total in the db",
             num,
@@ -576,7 +576,7 @@ where
         let start = Instant::now();
         let res: Vec<_> = self
             .db
-            .retrieve(segment, num)?
+            .retrieve(segment, num, score_limit)?
             .into_iter()
             .map(|(el, elapsed, est)| {
                 let progress = self.db.progress(&el);
@@ -657,6 +657,11 @@ where
                 std::cmp::min(max_to_restore, (self.capacity - queue.len()) / (num_buckets + 1)),
             );
             let len = queue.len();
+            let score_limit = if let Some((lower, upper)) = queue.peek_segment_priority_range(progress) {
+                (*lower + *upper) / 2
+            } else {
+                self.max_time()
+            };
             if self.capacity - len < num_to_restore {
                 // evict at least twice that much.
                 let evicted = Self::evict_internal(
@@ -669,7 +674,7 @@ where
             } else {
                 drop(queue);
             }
-            let res = self.retrieve(progress, num_to_restore)?;
+            let res = self.retrieve(progress, num_to_restore, score_limit)?;
             self.retrievals.fetch_add(1, Ordering::Release);
             log::debug!("Reshuffle took total {:?}", start.elapsed());
             queue = self.queue.lock().unwrap();
@@ -740,7 +745,7 @@ where
             ),
         );
         drop(queue);
-        let res = self.retrieve(segment, num_to_restore)?;
+        let res = self.retrieve(segment, num_to_restore, self.max_time())?;
         queue = self.queue.lock().unwrap();
         queue.extend(res);
         self.retrievals.fetch_add(1, Ordering::Release);

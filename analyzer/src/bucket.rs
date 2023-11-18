@@ -260,6 +260,15 @@ pub trait SegmentedBucketQueue<'b, B: SegmentBucket<P> + 'b, P: Ord>: Queue<B> {
             .map(|(_, p)| p)
     }
 
+    fn peek_segment_priority_range(&'b self, segment: usize) -> Option<(&'b P, &'b P)> {
+        let bucket = self.bucket_for_peeking(segment)?;
+        if let Some((_, p)) = bucket.peek_min() {
+            Some((p, bucket.peek_max().unwrap().1))
+        } else {
+            None
+        }
+    }
+
     /// More efficiently extracts all the items from all buckets with
     /// priorities above `keep_priority`.
     fn pop_all_with_priority(

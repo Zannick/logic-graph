@@ -414,8 +414,12 @@ where
         key
     }
 
+    fn get_score_from_heap_key(key: &[u8]) -> u32 {
+        u32::from_be_bytes(key[4..8].try_into().unwrap())
+    }
+
     fn new_heap_key(&self, old_key: &[u8], old_elapsed: u32, new_elapsed: u32) -> [u8; 16] {
-        let old_score = u32::from_be_bytes(old_key[4..8].try_into().unwrap());
+        let old_score = Self::get_score_from_heap_key(old_key);
         let new_score = old_score - old_elapsed + new_elapsed;
         let mut key: [u8; 16] = [0; 16];
         key[0..4].copy_from_slice(&old_key[0..4]);
@@ -633,7 +637,7 @@ where
                 .unwrap();
             // We use the key's cached version of score since our estimates
             // are based on the keys.
-            let score = u32::from_be_bytes(key[4..8].try_into().unwrap());
+            let score = Self::get_score_from_heap_key(key.as_ref());
 
             self.reset_estimates_in_range(start_progress, to_progress, score);
 
@@ -719,7 +723,7 @@ where
             let mut iter = self.db.iterator_opt(IteratorMode::Start, tail_opts);
             if let Some(item) = iter.next() {
                 let (key, _) = item.unwrap();
-                let score = u32::from_be_bytes(key[4..8].try_into().unwrap());
+                let score = Self::get_score_from_heap_key(key.as_ref());
                 self.min_db_estimates[p].store(score, Ordering::SeqCst);
             } else {
                 self.min_db_estimates[p].store(u32::MAX, Ordering::SeqCst);
@@ -732,6 +736,7 @@ where
         &self,
         start_progress: usize,
         count: usize,
+        score_limit: u32,
     ) -> Result<Vec<(T, u32, u32)>, Error> {
         let _retrieve_lock = self.retrieve_lock.lock().unwrap();
         let mut res = Vec::with_capacity(count);
@@ -754,6 +759,7 @@ where
             None => return Ok(Vec::new()),
             Some(el) => el?,
         };
+        let score = Self::get_score_from_heap_key(key.as_ref());
         batch.delete(key);
 
         let el = Self::deserialize_state(&value)?;
@@ -762,6 +768,9 @@ where
         let max_time = self.max_time();
         if elapsed > max_time || elapsed + est > max_time {
             pskips += 1;
+        } else if score > score_limit {
+            res.push((el, elapsed, est));
+            return Ok(res);
         } else {
             res.push((el, elapsed, est));
         }
@@ -771,6 +780,7 @@ where
             loop {
                 if let Some(item) = iter.next() {
                     let (key, value) = item.unwrap();
+                    let score = Self::get_score_from_heap_key(key.as_ref());
                     batch.delete(key);
                     pops += 1;
 
@@ -789,6 +799,9 @@ where
 
                     res.push((el, elapsed, est));
                     if res.len() == count {
+                        break 'outer;
+                    }
+                    if score > score_limit {
                         break 'outer;
                     }
                 } else {
