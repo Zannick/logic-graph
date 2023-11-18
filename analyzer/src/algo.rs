@@ -27,6 +27,7 @@ enum SearchMode {
     Greedy,
     Start,
     Minimized,
+    Mode(usize),
     Unknown,
 }
 
@@ -36,7 +37,8 @@ fn mode_by_index(index: usize) -> SearchMode {
         6 | 10 | 14 => SearchMode::Dependent,
         5 => SearchMode::MaxProgress(4),
         11 => SearchMode::SomeProgress(3),
-        2 | 3 | 13 | 15 => SearchMode::LocalMinima,
+        2 | 3 | 13 => SearchMode::LocalMinima,
+        15 => SearchMode::Mode(8),
         // 0, 4, 7, 8, 9, 12
         _ => SearchMode::Standard,
     }
@@ -495,6 +497,7 @@ where
             2 => SearchMode::LocalMinima,
             3 => SearchMode::SomeProgress(5),
             4 => SearchMode::HalfProgress,
+            5 => SearchMode::Mode(4),
 
             _ => SearchMode::Standard,
         }
@@ -603,6 +606,7 @@ where
                     SearchMode::Greedy => self
                         .queue
                         .pop_round_robin(self.organic_level.load(Ordering::Acquire) / 2),
+                    SearchMode::Mode(n) => self.queue.pop_mode(n),
                     _ => self.queue.pop_round_robin(0),
                 };
                 match items {

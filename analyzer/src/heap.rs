@@ -571,7 +571,12 @@ where
     }
 
     /// Retrieves up to the given number of elements for the given segment from the db.
-    fn retrieve(&self, segment: usize, num: usize, score_limit: u32) -> Result<Vec<(T, usize, u32)>> {
+    fn retrieve(
+        &self,
+        segment: usize,
+        num: usize,
+        score_limit: u32,
+    ) -> Result<Vec<(T, usize, u32)>> {
         log::debug!(
             "Beginning retrieve of {} entries from segment {} and up, we have {} total in the db",
             num,
@@ -659,14 +664,18 @@ where
             // Get a decent amount to refill
             let num_to_restore = std::cmp::max(
                 min_to_restore,
-                std::cmp::min(max_to_restore, (self.capacity - queue.len()) / (num_buckets + 1)),
+                std::cmp::min(
+                    max_to_restore,
+                    (self.capacity - queue.len()) / (num_buckets + 1),
+                ),
             );
             let len = queue.len();
-            let score_limit = if let Some((lower, upper)) = queue.peek_segment_priority_range(progress) {
-                (*lower + *upper) / 2
-            } else {
-                self.max_time()
-            };
+            let score_limit =
+                if let Some((lower, upper)) = queue.peek_segment_priority_range(progress) {
+                    (*lower + *upper) / 2
+                } else {
+                    self.max_time()
+                };
             if self.capacity - len < num_to_restore {
                 // evict at least twice that much.
                 let evicted = Self::evict_internal(
@@ -700,7 +709,7 @@ where
         };
         // threshold is 1/8 the difference between min score and max score, plus a small buffer for when min gets really close
         let threshold = (self.max_time() - min_score) / 8 + (min_score / 1024);
-        
+
         // We retrieve if the difference between the db best and the min score is more than the threshold.
         // An alternate way to look at this is min_score - threshold = ms * 9/8 - ms / 1024 - max_time
         // or db_best < min_score * 1151 / 1024 - max_time
@@ -803,6 +812,57 @@ where
         Ok(vec)
     }
 
+    fn pop_special_multi<F>(&self, n: usize, pop_func: F) -> Result<Vec<ContextWrapper<T>>>
+    where
+        F: Fn(usize, &mut MutexGuard<BucketQueue<Segment<T, u32>>>) -> Vec<(T, u32)>,
+    {
+        let mut vec = Vec::new();
+        let mut queue = self.queue.lock().unwrap();
+        while vec.len() < n && (!queue.is_empty() || !self.db.is_empty()) {
+            loop {
+                let values = (pop_func)(n - vec.len(), &mut queue);
+                if values.is_empty() {
+                    break;
+                }
+                for (ctx, _) in values.into_iter() {
+                    // Retrieve the best elapsed time.
+                    let elapsed = self.db.get_best_elapsed(&ctx)?;
+                    let est = self.db.estimated_remaining_time(&ctx);
+                    let max_time = self.db.max_time();
+                    if elapsed > max_time || elapsed + est > max_time {
+                        self.pskips.fetch_add(1, Ordering::Release);
+                        continue;
+                    }
+                    if self.db.remember_processed(&ctx)? {
+                        self.db.count_duplicate();
+                        continue;
+                    }
+                    let progress = self.db.progress(&ctx);
+                    self.processed_counts[progress].fetch_add(1, Ordering::Release);
+
+                    vec.push(ContextWrapper::with_elapsed(ctx, elapsed));
+                }
+                if vec.len() >= n {
+                    return Ok(vec);
+                }
+            }
+            // Retrieve some from db
+            if !self.db.is_empty() {
+                if !self.retrieving.fetch_or(true, Ordering::AcqRel) {
+                    queue = self.do_retrieve_and_insert(0, queue)?;
+                    self.retrieving.store(false, Ordering::Release);
+                } else if let Some((ctx, elapsed)) = self.db.pop(0)? {
+                    let progress = self.db.progress(&ctx);
+                    self.processed_counts[progress].fetch_add(1, Ordering::Release);
+                    vec.push(ContextWrapper::with_elapsed(ctx, elapsed));
+                } else {
+                    return Ok(vec);
+                }
+            }
+        }
+        Ok(vec)
+    }
+
     pub fn pop_max_estimate(&self, n: usize) -> Result<Vec<ContextWrapper<T>>> {
         self.pop_special(n, |q| q.pop_max())
     }
@@ -824,6 +884,10 @@ where
             let half = (q.min_priority()? + q.max_priority()?) / 2;
             q.pop_segment_min(half).or_else(|| q.pop_max_segment_min())
         })
+    }
+
+    pub fn pop_mode(&self, n: usize) -> Result<Vec<ContextWrapper<T>>> {
+        self.pop_special_multi(n, |k, q| q.pop_n_from_largest_segment(k))
     }
 
     pub fn pop_local_minima(&self) -> Result<Vec<ContextWrapper<T>>> {

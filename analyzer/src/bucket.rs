@@ -269,6 +269,31 @@ pub trait SegmentedBucketQueue<'b, B: SegmentBucket<P> + 'b, P: Ord>: Queue<B> {
         }
     }
 
+    /// Take n from the segment with the most.
+    fn pop_n_from_largest_segment(&mut self, n: usize) -> Vec<(B::Item, P)> {
+        if let Some(min) = self.min_priority() {
+            let max = self.max_priority().unwrap();
+            let mut vec = Vec::new();
+            let segment = (min..=max)
+                .into_iter()
+                .max_by_key(|s| self.bucket_for_peeking(*s).map_or(0, |b| b.len_bucket()))
+                .unwrap();
+            if let Some(bucket) = self.bucket_for_replacing(segment) {
+                while vec.len() < n {
+                    if !bucket.is_empty_bucket() {
+                        vec.push(bucket.pop_min().unwrap());
+                    } else {
+                        break;
+                    }
+                }
+            }
+            self.items_replaced(segment, vec.len(), 0);
+            vec
+        } else {
+            Vec::new()
+        }
+    }
+
     /// More efficiently extracts all the items from all buckets with
     /// priorities above `keep_priority`.
     fn pop_all_with_priority(
