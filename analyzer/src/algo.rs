@@ -657,8 +657,9 @@ where
                                     .collect();
 
                                 self.greedies.fetch_add(1, Ordering::Release);
+                                let org = self.organic_level.load(Ordering::Acquire);
                                 if !results.is_empty()
-                                    && self.organic_level.load(Ordering::Acquire) == progress
+                                    && (org == progress || Some(org) <= self.queue.min_progress())
                                 {
                                     self.organic_level
                                         .fetch_max(progress + 1, Ordering::Release);

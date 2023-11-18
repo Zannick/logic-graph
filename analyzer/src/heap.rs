@@ -439,6 +439,11 @@ where
         queue.peek_all_buckets_min()
     }
 
+    pub fn min_progress(&self) -> Option<usize> {
+        let queue = self.queue.lock().unwrap();
+        queue.min_priority()
+    }
+
     pub fn score(&self, ctx: &ContextWrapper<T>) -> u32 {
         self.db.score(ctx)
     }
