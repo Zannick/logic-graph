@@ -6414,6 +6414,14 @@ impl context::Ctx for Context {
                     self.cbits1
                         .insert(flags::ContextBits1::MAP__IRIKAR_BREACH__GAUNTLET__SAVE);
                 }
+                SpotId::Uhrum__Annuna_Corridor__Block_East => {
+                    self.cbits1
+                        .insert(flags::ContextBits1::MAP__UHRUM__ANNUNA_CORRIDOR__SAVE);
+                }
+                SpotId::Uhrum__Annuna_Corridor__Save_Point => {
+                    self.cbits1
+                        .insert(flags::ContextBits1::MAP__UHRUM__ANNUNA_CORRIDOR__SAVE);
+                }
                 SpotId::Uhrum__Annuna_Corridor__West_26 => {
                     self.cbits1
                         .insert(flags::ContextBits1::MAP__UHRUM__ANNUNA_CORRIDOR__SAVE);

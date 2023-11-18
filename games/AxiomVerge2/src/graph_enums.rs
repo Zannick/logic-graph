@@ -1505,11 +1505,17 @@ pub enum SpotId {
     Menu__Upgrade_Menu__Drone,
     Menu__Upgrade_Menu__Infection,
     Menu__Upgrade_Menu__Physiology,
+    Uhrum__Annuna_Corridor__Block_East,
+    Uhrum__Annuna_Corridor__Pedestal,
+    Uhrum__Annuna_Corridor__Save_Point,
+    Uhrum__Annuna_Corridor__Upper_Trees,
     Uhrum__Annuna_Corridor__West_25,
     Uhrum__Annuna_Corridor__West_26,
     Uhrum__Artillery_Practice__East_24,
     Uhrum__East_Lake__West_27,
     Uhrum__East_Lake__West_28,
+    Uhrum__Glitchy_Corridor__East_27,
+    Uhrum__Glitchy_Corridor__East_28,
     Uhrum__Glitchy_Corridor__West_28,
     Uhrum__Save_Room__East,
     Uhrum__Save_Room__Save_Point,
@@ -4073,6 +4079,18 @@ impl fmt::Display for SpotId {
             SpotId::Menu__Upgrade_Menu__Physiology => {
                 write!(f, "{}", "Menu > Upgrade Menu > Physiology")
             }
+            SpotId::Uhrum__Annuna_Corridor__Block_East => {
+                write!(f, "{}", "Uhrum > Annuna Corridor > Block East")
+            }
+            SpotId::Uhrum__Annuna_Corridor__Pedestal => {
+                write!(f, "{}", "Uhrum > Annuna Corridor > Pedestal")
+            }
+            SpotId::Uhrum__Annuna_Corridor__Save_Point => {
+                write!(f, "{}", "Uhrum > Annuna Corridor > Save Point")
+            }
+            SpotId::Uhrum__Annuna_Corridor__Upper_Trees => {
+                write!(f, "{}", "Uhrum > Annuna Corridor > Upper Trees")
+            }
             SpotId::Uhrum__Annuna_Corridor__West_25 => {
                 write!(f, "{}", "Uhrum > Annuna Corridor > West 25")
             }
@@ -4084,6 +4102,12 @@ impl fmt::Display for SpotId {
             }
             SpotId::Uhrum__East_Lake__West_27 => write!(f, "{}", "Uhrum > East Lake > West 27"),
             SpotId::Uhrum__East_Lake__West_28 => write!(f, "{}", "Uhrum > East Lake > West 28"),
+            SpotId::Uhrum__Glitchy_Corridor__East_27 => {
+                write!(f, "{}", "Uhrum > Glitchy Corridor > East 27")
+            }
+            SpotId::Uhrum__Glitchy_Corridor__East_28 => {
+                write!(f, "{}", "Uhrum > Glitchy Corridor > East 28")
+            }
             SpotId::Uhrum__Glitchy_Corridor__West_28 => {
                 write!(f, "{}", "Uhrum > Glitchy Corridor > West 28")
             }
@@ -5983,6 +6007,16 @@ impl std::str::FromStr for SpotId {
             "Menu > Upgrade Menu > Drone" => Ok(SpotId::Menu__Upgrade_Menu__Drone),
             "Menu > Upgrade Menu > Infection" => Ok(SpotId::Menu__Upgrade_Menu__Infection),
             "Menu > Upgrade Menu > Physiology" => Ok(SpotId::Menu__Upgrade_Menu__Physiology),
+            "Uhrum > Annuna Corridor > Block East" => {
+                Ok(SpotId::Uhrum__Annuna_Corridor__Block_East)
+            }
+            "Uhrum > Annuna Corridor > Pedestal" => Ok(SpotId::Uhrum__Annuna_Corridor__Pedestal),
+            "Uhrum > Annuna Corridor > Save Point" => {
+                Ok(SpotId::Uhrum__Annuna_Corridor__Save_Point)
+            }
+            "Uhrum > Annuna Corridor > Upper Trees" => {
+                Ok(SpotId::Uhrum__Annuna_Corridor__Upper_Trees)
+            }
             "Uhrum > Annuna Corridor > West 25" => Ok(SpotId::Uhrum__Annuna_Corridor__West_25),
             "Uhrum > Annuna Corridor > West 26" => Ok(SpotId::Uhrum__Annuna_Corridor__West_26),
             "Uhrum > Artillery Practice > East 24" => {
@@ -5990,6 +6024,8 @@ impl std::str::FromStr for SpotId {
             }
             "Uhrum > East Lake > West 27" => Ok(SpotId::Uhrum__East_Lake__West_27),
             "Uhrum > East Lake > West 28" => Ok(SpotId::Uhrum__East_Lake__West_28),
+            "Uhrum > Glitchy Corridor > East 27" => Ok(SpotId::Uhrum__Glitchy_Corridor__East_27),
+            "Uhrum > Glitchy Corridor > East 28" => Ok(SpotId::Uhrum__Glitchy_Corridor__East_28),
             "Uhrum > Glitchy Corridor > West 28" => Ok(SpotId::Uhrum__Glitchy_Corridor__West_28),
             "Uhrum > Save Room > East" => Ok(SpotId::Uhrum__Save_Room__East),
             "Uhrum > Save Room > Save Point" => Ok(SpotId::Uhrum__Save_Room__Save_Point),
@@ -8608,6 +8644,8 @@ pub enum ExitId {
     Menu__Upgrade_Menu__Physiology__ex__Combat_1,
     Menu__Upgrade_Menu__Physiology__ex__Drone_1,
     Menu__Upgrade_Menu__Physiology__ex__Infection_1,
+    Uhrum__Save_Room__East__ex__Waterfalls__West_27_1,
+    Uhrum__Save_Room__West__ex__Glitchy_Corridor__East_27_1,
     Uhrum__Siege_Corridor__Center_Platform_3__ex__Upper_Rock_West_1,
     Uhrum__Siege_Corridor__Center_Valley__ex__Center_East_1,
     Uhrum__Siege_Corridor__Center_Valley__ex__Center_East_2,
@@ -9634,6 +9672,8 @@ impl fmt::Display for ExitId {
             ExitId::Menu__Upgrade_Menu__Physiology__ex__Combat_1 => write!(f, "{}", "Menu > Upgrade Menu > Physiology ==> Combat (1)"),
             ExitId::Menu__Upgrade_Menu__Physiology__ex__Drone_1 => write!(f, "{}", "Menu > Upgrade Menu > Physiology ==> Drone (1)"),
             ExitId::Menu__Upgrade_Menu__Physiology__ex__Infection_1 => write!(f, "{}", "Menu > Upgrade Menu > Physiology ==> Infection (1)"),
+            ExitId::Uhrum__Save_Room__East__ex__Waterfalls__West_27_1 => write!(f, "{}", "Uhrum > Save Room > East ==> Waterfalls > West 27 (1)"),
+            ExitId::Uhrum__Save_Room__West__ex__Glitchy_Corridor__East_27_1 => write!(f, "{}", "Uhrum > Save Room > West ==> Glitchy Corridor > East 27 (1)"),
             ExitId::Uhrum__Siege_Corridor__Center_Platform_3__ex__Upper_Rock_West_1 => write!(f, "{}", "Uhrum > Siege Corridor > Center Platform 3 ==> Upper Rock West (1)"),
             ExitId::Uhrum__Siege_Corridor__Center_Valley__ex__Center_East_1 => write!(f, "{}", "Uhrum > Siege Corridor > Center Valley ==> Center East (1)"),
             ExitId::Uhrum__Siege_Corridor__Center_Valley__ex__Center_East_2 => write!(f, "{}", "Uhrum > Siege Corridor > Center Valley ==> Center East (2)"),
@@ -10665,6 +10705,8 @@ impl std::str::FromStr for ExitId {
             "Menu > Upgrade Menu > Physiology ==> Combat (1)" => Ok(ExitId::Menu__Upgrade_Menu__Physiology__ex__Combat_1),
             "Menu > Upgrade Menu > Physiology ==> Drone (1)" => Ok(ExitId::Menu__Upgrade_Menu__Physiology__ex__Drone_1),
             "Menu > Upgrade Menu > Physiology ==> Infection (1)" => Ok(ExitId::Menu__Upgrade_Menu__Physiology__ex__Infection_1),
+            "Uhrum > Save Room > East ==> Waterfalls > West 27 (1)" => Ok(ExitId::Uhrum__Save_Room__East__ex__Waterfalls__West_27_1),
+            "Uhrum > Save Room > West ==> Glitchy Corridor > East 27 (1)" => Ok(ExitId::Uhrum__Save_Room__West__ex__Glitchy_Corridor__East_27_1),
             "Uhrum > Siege Corridor > Center Platform 3 ==> Upper Rock West (1)" => Ok(ExitId::Uhrum__Siege_Corridor__Center_Platform_3__ex__Upper_Rock_West_1),
             "Uhrum > Siege Corridor > Center Valley ==> Center East (1)" => Ok(ExitId::Uhrum__Siege_Corridor__Center_Valley__ex__Center_East_1),
             "Uhrum > Siege Corridor > Center Valley ==> Center East (2)" => Ok(ExitId::Uhrum__Siege_Corridor__Center_Valley__ex__Center_East_2),
@@ -10914,6 +10956,7 @@ pub enum ActionId {
     Irikar__Hub__Save_Point__Save,
     Irikar__Sight_Room__Portal__Enter_Portal,
     Irikar_Breach__Exit_Corridor__Portal_Stand__Enter_Portal,
+    Uhrum__Save_Room__Save_Point__Save,
     Uhrum__West_Entrance__Save_Point__Save,
 }
 impl fmt::Display for ActionId {
@@ -11222,6 +11265,9 @@ impl fmt::Display for ActionId {
                 "{}",
                 "Irikar Breach > Exit Corridor > Portal Stand > Enter Portal"
             ),
+            ActionId::Uhrum__Save_Room__Save_Point__Save => {
+                write!(f, "{}", "Uhrum > Save Room > Save Point > Save")
+            }
             ActionId::Uhrum__West_Entrance__Save_Point__Save => {
                 write!(f, "{}", "Uhrum > West Entrance > Save Point > Save")
             }
@@ -11477,6 +11523,9 @@ impl std::str::FromStr for ActionId {
             "Irikar Breach > Exit Corridor > Portal Stand > Enter Portal" => {
                 Ok(ActionId::Irikar_Breach__Exit_Corridor__Portal_Stand__Enter_Portal)
             }
+            "Uhrum > Save Room > Save Point > Save" => {
+                Ok(ActionId::Uhrum__Save_Room__Save_Point__Save)
+            }
             "Uhrum > West Entrance > Save Point > Save" => {
                 Ok(ActionId::Uhrum__West_Entrance__Save_Point__Save)
             }
@@ -11671,6 +11720,7 @@ pub enum WarpId {
     FastTravelIrikarBreachGauntlet,
     FastTravelIrikarBreachSaveRoom,
     FastTravelIrikarHub,
+    FastTravelUhrumEast,
     FastTravelUhrumSaveRoom,
     FastTravelUhrumWestEntrance,
     IndraSave,
@@ -11705,6 +11755,7 @@ impl fmt::Display for WarpId {
                 write!(f, "{}", "FastTravelIrikarBreachSaveRoom")
             }
             WarpId::FastTravelIrikarHub => write!(f, "{}", "FastTravelIrikarHub"),
+            WarpId::FastTravelUhrumEast => write!(f, "{}", "FastTravelUhrumEast"),
             WarpId::FastTravelUhrumSaveRoom => write!(f, "{}", "FastTravelUhrumSaveRoom"),
             WarpId::FastTravelUhrumWestEntrance => write!(f, "{}", "FastTravelUhrumWestEntrance"),
             WarpId::IndraSave => write!(f, "{}", "IndraSave"),
@@ -11738,6 +11789,7 @@ impl std::str::FromStr for WarpId {
             "FastTravelIrikarBreachGauntlet" => Ok(WarpId::FastTravelIrikarBreachGauntlet),
             "FastTravelIrikarBreachSaveRoom" => Ok(WarpId::FastTravelIrikarBreachSaveRoom),
             "FastTravelIrikarHub" => Ok(WarpId::FastTravelIrikarHub),
+            "FastTravelUhrumEast" => Ok(WarpId::FastTravelUhrumEast),
             "FastTravelUhrumSaveRoom" => Ok(WarpId::FastTravelUhrumSaveRoom),
             "FastTravelUhrumWestEntrance" => Ok(WarpId::FastTravelUhrumWestEntrance),
             "IndraSave" => Ok(WarpId::IndraSave),

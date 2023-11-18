@@ -425,6 +425,10 @@ pub fn access_ft_main_and_map__irikar__hub__save(ctx: &Context) -> bool {
     // $ft_main and ^map__irikar__hub__save
     (helper__ft_main!(ctx) && ctx.map__irikar__hub__save())
 }
+pub fn access_ft_main_and_map__uhrum__annuna_corridor__save(ctx: &Context) -> bool {
+    // $ft_main and ^map__uhrum__annuna_corridor__save
+    (helper__ft_main!(ctx) && ctx.map__uhrum__annuna_corridor__save())
+}
 pub fn access_ft_main_and_map__uhrum__save_room__save(ctx: &Context) -> bool {
     // $ft_main and ^map__uhrum__save_room__save
     (helper__ft_main!(ctx) && ctx.map__uhrum__save_room__save())

@@ -1080,7 +1080,9 @@ pub fn get_area(spot: SpotId) -> AreaId {
         | SpotId::Uhrum__Siege_Corridor__Pond
         | SpotId::Uhrum__Siege_Corridor__East_Hill
         | SpotId::Uhrum__Siege_Corridor__East_25 => AreaId::Uhrum__Siege_Corridor,
-        SpotId::Uhrum__Glitchy_Corridor__West_28 => AreaId::Uhrum__Glitchy_Corridor,
+        SpotId::Uhrum__Glitchy_Corridor__West_28
+        | SpotId::Uhrum__Glitchy_Corridor__East_27
+        | SpotId::Uhrum__Glitchy_Corridor__East_28 => AreaId::Uhrum__Glitchy_Corridor,
         SpotId::Uhrum__Waterfalls__West_25
         | SpotId::Uhrum__Waterfalls__West_24
         | SpotId::Uhrum__Waterfalls__West_27
@@ -1127,9 +1129,12 @@ pub fn get_area(spot: SpotId) -> AreaId {
         SpotId::Uhrum__Tulip_Tower__West_24 | SpotId::Uhrum__Tulip_Tower__West_24_in_Mid_air => {
             AreaId::Uhrum__Tulip_Tower
         }
-        SpotId::Uhrum__Annuna_Corridor__West_25 | SpotId::Uhrum__Annuna_Corridor__West_26 => {
-            AreaId::Uhrum__Annuna_Corridor
-        }
+        SpotId::Uhrum__Annuna_Corridor__West_25
+        | SpotId::Uhrum__Annuna_Corridor__Upper_Trees
+        | SpotId::Uhrum__Annuna_Corridor__Pedestal
+        | SpotId::Uhrum__Annuna_Corridor__West_26
+        | SpotId::Uhrum__Annuna_Corridor__Save_Point
+        | SpotId::Uhrum__Annuna_Corridor__Block_East => AreaId::Uhrum__Annuna_Corridor,
         SpotId::Uhrum__Artillery_Practice__East_24 => AreaId::Uhrum__Artillery_Practice,
     }
 }
@@ -2179,7 +2184,9 @@ pub fn get_region(spot: SpotId) -> RegionId {
         | SpotId::Uhrum__Siege_Corridor__Pond
         | SpotId::Uhrum__Siege_Corridor__East_Hill
         | SpotId::Uhrum__Siege_Corridor__East_25 => RegionId::Uhrum,
-        SpotId::Uhrum__Glitchy_Corridor__West_28 => RegionId::Uhrum,
+        SpotId::Uhrum__Glitchy_Corridor__West_28
+        | SpotId::Uhrum__Glitchy_Corridor__East_27
+        | SpotId::Uhrum__Glitchy_Corridor__East_28 => RegionId::Uhrum,
         SpotId::Uhrum__Waterfalls__West_25
         | SpotId::Uhrum__Waterfalls__West_24
         | SpotId::Uhrum__Waterfalls__West_27
@@ -2224,9 +2231,12 @@ pub fn get_region(spot: SpotId) -> RegionId {
         SpotId::Uhrum__Tulip_Tower__West_24 | SpotId::Uhrum__Tulip_Tower__West_24_in_Mid_air => {
             RegionId::Uhrum
         }
-        SpotId::Uhrum__Annuna_Corridor__West_25 | SpotId::Uhrum__Annuna_Corridor__West_26 => {
-            RegionId::Uhrum
-        }
+        SpotId::Uhrum__Annuna_Corridor__West_25
+        | SpotId::Uhrum__Annuna_Corridor__Upper_Trees
+        | SpotId::Uhrum__Annuna_Corridor__Pedestal
+        | SpotId::Uhrum__Annuna_Corridor__West_26
+        | SpotId::Uhrum__Annuna_Corridor__Save_Point
+        | SpotId::Uhrum__Annuna_Corridor__Block_East => RegionId::Uhrum,
         SpotId::Uhrum__Artillery_Practice__East_24 => RegionId::Uhrum,
     }
 }
@@ -3547,6 +3557,8 @@ impl world::Accessible for Exit {
             ExitId::Menu__Upgrade_Menu__Physiology__ex__Combat_1 => true,
             ExitId::Menu__Upgrade_Menu__Physiology__ex__Drone_1 => rules::access_remote_drone(&ctx),
             ExitId::Menu__Upgrade_Menu__Physiology__ex__Infection_1 => rules::access_infect(&ctx),
+            ExitId::Uhrum__Save_Room__East__ex__Waterfalls__West_27_1 => true,
+            ExitId::Uhrum__Save_Room__West__ex__Glitchy_Corridor__East_27_1 => true,
             ExitId::Uhrum__Siege_Corridor__Center_Platform_3__ex__Upper_Rock_West_1 => rules::access_hover(&ctx),
             ExitId::Uhrum__Siege_Corridor__Center_Valley__ex__Center_East_1 => rules::access_grab(&ctx),
             ExitId::Uhrum__Siege_Corridor__Center_Valley__ex__Center_East_2 => rules::access_hook(&ctx),
@@ -4019,6 +4031,8 @@ impl world::Exit for Exit {
             ExitId::Menu__Upgrade_Menu__Infection__ex__Combat_1 => true,
             ExitId::Menu__Upgrade_Menu__Infection__ex__Physiology_1 => true,
             ExitId::Menu__Upgrade_Menu__Physiology__ex__Combat_1 => true,
+            ExitId::Uhrum__Save_Room__East__ex__Waterfalls__West_27_1 => true,
+            ExitId::Uhrum__Save_Room__West__ex__Glitchy_Corridor__East_27_1 => true,
             ExitId::Uhrum__Siege_Corridor__East_25__ex__Waterfalls__West_25_1 => true,
             ExitId::Uhrum__Siege_Corridor__West_26__ex__West_Entrance__East_26_1 => true,
             ExitId::Uhrum__Waterfalls__East_24__ex__Tulip_Tower__West_24_1 => true,
@@ -4273,6 +4287,7 @@ impl world::Accessible for Action {
                     rules::access_mode__drone_and_breach_sight(&ctx)
                 }
                 ActionId::Irikar_Breach__Exit_Corridor__Portal_Stand__Enter_Portal => true,
+                ActionId::Uhrum__Save_Room__Save_Point__Save => true,
                 ActionId::Uhrum__West_Entrance__Save_Point__Save => true,
             }
     }
@@ -4377,6 +4392,7 @@ impl world::Action for Action {
             ActionId::Irikar__Basement_Portal__Moving_Platform_Start__Activate_Platform => rules::action_irikar__basement_portal__moving_platform_start__activate_platform__do(ctx),
             ActionId::Irikar__Basement_Portal__Portal_Stand__Enter_Portal => rules::action_breach_portal_save_update(ctx),
             ActionId::Uhrum__West_Entrance__Save_Point__Save => rules::action_save(ctx),
+            ActionId::Uhrum__Save_Room__Save_Point__Save => rules::action_save(ctx),
         };
         let dest = self.dest(ctx);
         if dest != SpotId::None {
@@ -4543,6 +4559,9 @@ impl world::Accessible for Warp {
                 WarpId::FastTravelIrikarHub => {
                     rules::access_ft_main_and_map__irikar__hub__save(&ctx)
                 }
+                WarpId::FastTravelUhrumEast => {
+                    rules::access_ft_main_and_map__uhrum__annuna_corridor__save(&ctx)
+                }
                 WarpId::FastTravelUhrumSaveRoom => {
                     rules::access_ft_main_and_map__uhrum__save_room__save(&ctx)
                 }
@@ -4596,6 +4615,7 @@ impl world::Warp for Warp {
                     SpotId::Irikar_Breach__Save_Room__Save_Point
                 }
                 WarpId::FastTravelIrikarHub => SpotId::Irikar__Hub__Save_Point,
+                WarpId::FastTravelUhrumEast => SpotId::Uhrum__Annuna_Corridor__Save_Point,
                 WarpId::FastTravelUhrumSaveRoom => SpotId::Uhrum__Save_Room__Save_Point,
                 WarpId::FastTravelUhrumWestEntrance => SpotId::Uhrum__West_Entrance__Save_Point,
                 WarpId::IndraSave => ctx.save(),
@@ -4635,6 +4655,7 @@ impl world::Warp for Warp {
             WarpId::FastTravelIrikarBreachGauntlet => rules::action_refill_energy(ctx),
             WarpId::FastTravelIrikarBreachSaveRoom => rules::action_refill_energy(ctx),
             WarpId::FastTravelIrikarHub => rules::action_refill_energy(ctx),
+            WarpId::FastTravelUhrumEast => rules::action_refill_energy(ctx),
             WarpId::FastTravelUhrumSaveRoom => rules::action_refill_energy(ctx),
             WarpId::FastTravelUhrumWestEntrance => rules::action_refill_energy(ctx),
             WarpId::IndraSave => rules::action_refill_energy(ctx),
@@ -4663,6 +4684,7 @@ impl world::Warp for Warp {
             WarpId::FastTravelIrikarBreachGauntlet => false,
             WarpId::FastTravelIrikarBreachSaveRoom => false,
             WarpId::FastTravelIrikarHub => false,
+            WarpId::FastTravelUhrumEast => false,
             WarpId::FastTravelUhrumSaveRoom => false,
             WarpId::FastTravelUhrumWestEntrance => false,
             WarpId::IndraSave => true,
@@ -4679,7 +4701,7 @@ pub struct Spot {
     pub actions: Range<usize>,
 }
 
-static RAW_SPOTS: [SpotId; 1088] = [
+static RAW_SPOTS: [SpotId; 1094] = [
     SpotId::None,
     SpotId::Amagi__Grid_31_19__East,
     SpotId::Amagi__Grid_31_19__West,
@@ -5669,11 +5691,17 @@ static RAW_SPOTS: [SpotId; 1088] = [
     SpotId::Menu__Upgrade_Menu__Drone,
     SpotId::Menu__Upgrade_Menu__Infection,
     SpotId::Menu__Upgrade_Menu__Physiology,
+    SpotId::Uhrum__Annuna_Corridor__Block_East,
+    SpotId::Uhrum__Annuna_Corridor__Pedestal,
+    SpotId::Uhrum__Annuna_Corridor__Save_Point,
+    SpotId::Uhrum__Annuna_Corridor__Upper_Trees,
     SpotId::Uhrum__Annuna_Corridor__West_25,
     SpotId::Uhrum__Annuna_Corridor__West_26,
     SpotId::Uhrum__Artillery_Practice__East_24,
     SpotId::Uhrum__East_Lake__West_27,
     SpotId::Uhrum__East_Lake__West_28,
+    SpotId::Uhrum__Glitchy_Corridor__East_27,
+    SpotId::Uhrum__Glitchy_Corridor__East_28,
     SpotId::Uhrum__Glitchy_Corridor__West_28,
     SpotId::Uhrum__Save_Room__East,
     SpotId::Uhrum__Save_Room__Save_Point,
@@ -6234,7 +6262,7 @@ lazy_static! {
             end: SpotId::Menu__Upgrade_Menu__Physiology.into_usize() + 1,
         },
         AreaId::Uhrum__Annuna_Corridor => Range {
-            start: SpotId::Uhrum__Annuna_Corridor__West_25.into_usize(),
+            start: SpotId::Uhrum__Annuna_Corridor__Block_East.into_usize(),
             end: SpotId::Uhrum__Annuna_Corridor__West_26.into_usize() + 1,
         },
         AreaId::Uhrum__Artillery_Practice => Range {
@@ -6246,7 +6274,7 @@ lazy_static! {
             end: SpotId::Uhrum__East_Lake__West_28.into_usize() + 1,
         },
         AreaId::Uhrum__Glitchy_Corridor => Range {
-            start: SpotId::Uhrum__Glitchy_Corridor__West_28.into_usize(),
+            start: SpotId::Uhrum__Glitchy_Corridor__East_27.into_usize(),
             end: SpotId::Uhrum__Glitchy_Corridor__West_28.into_usize() + 1,
         },
         AreaId::Uhrum__Save_Room => Range {
@@ -7445,6 +7473,7 @@ impl world::World for World {
             ActionId::Uhrum__West_Entrance__Save_Point__Save => {
                 SpotId::Uhrum__West_Entrance__Save_Point
             }
+            ActionId::Uhrum__Save_Room__Save_Point__Save => SpotId::Uhrum__Save_Room__Save_Point,
             _ => SpotId::None,
         }
     }
@@ -8129,6 +8158,8 @@ impl world::World for World {
             ExitId::Uhrum__Waterfalls__Water_Pillar__ex__Center_Island_East_1 | ExitId:: Uhrum__Waterfalls__Water_Pillar__ex__Center_Island_East_2 | ExitId:: Uhrum__Waterfalls__Water_Pillar__ex__East_Waters_Edge_1 => SpotId::Uhrum__Waterfalls__Water_Pillar,
             ExitId::Uhrum__Waterfalls__East_28__ex__East_Lake__West_28_1 => SpotId::Uhrum__Waterfalls__East_28,
             ExitId::Uhrum__Waterfalls__East_27__ex__East_Lake__West_27_1 => SpotId::Uhrum__Waterfalls__East_27,
+            ExitId::Uhrum__Save_Room__East__ex__Waterfalls__West_27_1 => SpotId::Uhrum__Save_Room__East,
+            ExitId::Uhrum__Save_Room__West__ex__Glitchy_Corridor__East_27_1 => SpotId::Uhrum__Save_Room__West,
             _ => SpotId::None,
         }
     }
@@ -8808,6 +8839,9 @@ impl world::World for World {
             | SpotId::Menu__Upgrade_Menu__Drone
             | SpotId::Menu__Upgrade_Menu__Infection
             | SpotId::Menu__Upgrade_Menu__Physiology
+            | SpotId::Uhrum__Save_Room__East
+            | SpotId::Uhrum__Save_Room__Save_Point
+            | SpotId::Uhrum__Save_Room__West
             | SpotId::Uhrum__Siege_Corridor__Center_Box
             | SpotId::Uhrum__Siege_Corridor__East_25
             | SpotId::Uhrum__Siege_Corridor__Northwest_Door
@@ -17685,6 +17719,20 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
             price: Currency::Free,
             loc_id: None,
         },
+        ExitId::Uhrum__Save_Room__East__ex__Waterfalls__West_27_1 => Exit {
+            id: ExitId::Uhrum__Save_Room__East__ex__Waterfalls__West_27_1,
+            time: 1350,
+            dest: SpotId::Uhrum__Waterfalls__West_27,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Uhrum__Save_Room__West__ex__Glitchy_Corridor__East_27_1 => Exit {
+            id: ExitId::Uhrum__Save_Room__West__ex__Glitchy_Corridor__East_27_1,
+            time: 1350,
+            dest: SpotId::Uhrum__Glitchy_Corridor__East_27,
+            price: Currency::Free,
+            loc_id: None,
+        },
     }
 }
 
@@ -18117,6 +18165,11 @@ pub fn build_actions() -> EnumMap<ActionId, Action> {
         },
         ActionId::Uhrum__West_Entrance__Save_Point__Save => Action {
             id: ActionId::Uhrum__West_Entrance__Save_Point__Save,
+            time: 1300,
+            price: Currency::Free,
+        },
+        ActionId::Uhrum__Save_Room__Save_Point__Save => Action {
+            id: ActionId::Uhrum__Save_Room__Save_Point__Save,
             time: 1300,
             price: Currency::Free,
         },
@@ -31436,6 +31489,30 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
         },
+        SpotId::Uhrum__Glitchy_Corridor__East_27 => Spot {
+            id: SpotId::Uhrum__Glitchy_Corridor__East_27,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Uhrum__Glitchy_Corridor__East_28 => Spot {
+            id: SpotId::Uhrum__Glitchy_Corridor__East_28,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
         SpotId::Uhrum__Waterfalls__West_25 => Spot {
             id: SpotId::Uhrum__Waterfalls__West_25,
             locations: Range {
@@ -31922,7 +31999,8 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             exits: Range {
-                start: 0, end: 0,
+                start: ExitId::Uhrum__Save_Room__East__ex__Waterfalls__West_27_1.into_usize(),
+                end: ExitId::Uhrum__Save_Room__East__ex__Waterfalls__West_27_1.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
@@ -31937,7 +32015,8 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             actions: Range {
-                start: 0, end: 0,
+                start: ActionId::Uhrum__Save_Room__Save_Point__Save.into_usize(),
+                end: ActionId::Uhrum__Save_Room__Save_Point__Save.into_usize() + 1,
             },
         },
         SpotId::Uhrum__Save_Room__West => Spot {
@@ -31946,7 +32025,8 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             exits: Range {
-                start: 0, end: 0,
+                start: ExitId::Uhrum__Save_Room__West__ex__Glitchy_Corridor__East_27_1.into_usize(),
+                end: ExitId::Uhrum__Save_Room__West__ex__Glitchy_Corridor__East_27_1.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
@@ -32012,8 +32092,56 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
         },
+        SpotId::Uhrum__Annuna_Corridor__Upper_Trees => Spot {
+            id: SpotId::Uhrum__Annuna_Corridor__Upper_Trees,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Uhrum__Annuna_Corridor__Pedestal => Spot {
+            id: SpotId::Uhrum__Annuna_Corridor__Pedestal,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
         SpotId::Uhrum__Annuna_Corridor__West_26 => Spot {
             id: SpotId::Uhrum__Annuna_Corridor__West_26,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Uhrum__Annuna_Corridor__Save_Point => Spot {
+            id: SpotId::Uhrum__Annuna_Corridor__Save_Point,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Uhrum__Annuna_Corridor__Block_East => Spot {
+            id: SpotId::Uhrum__Annuna_Corridor__Block_East,
             locations: Range {
                 start: 0, end: 0,
             },
@@ -32157,6 +32285,12 @@ pub fn build_warps() -> EnumMap<WarpId, Warp> {
         },
         WarpId::FastTravelIrikarHub => Warp {
             id: WarpId::FastTravelIrikarHub,
+            dest: SpotId::None,
+            time: 12000,
+            price: Currency::Free,
+        },
+        WarpId::FastTravelUhrumEast => Warp {
+            id: WarpId::FastTravelUhrumEast,
             dest: SpotId::None,
             time: 12000,
             price: Currency::Free,

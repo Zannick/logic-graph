@@ -1056,6 +1056,8 @@ digraph AxiomVerge2 {
         Uhrum__Siege_Corridor__East_Hill [label = "", pos = "77.1,-41.166667!"];
         Uhrum__Siege_Corridor__East_25 [label = "", pos = "77.85,-41.25!"];
         Uhrum__Glitchy_Corridor__West_28 [label = "", pos = "63.15,-46.166667!"];
+        Uhrum__Glitchy_Corridor__East_27 [label = "", pos = "74.85,-44.583333!"];
+        Uhrum__Glitchy_Corridor__East_28 [label = "", pos = "74.85,-46.25!"];
         Uhrum__Waterfalls__West_25 [label = "", pos = "78.15,-41.25!"];
         Uhrum__Waterfalls__West_24 [label = "", pos = "78.15,-39.583333!"];
         Uhrum__Waterfalls__West_27 [label = "", pos = "78.15,-44.583333!"];
@@ -1101,7 +1103,11 @@ digraph AxiomVerge2 {
         Uhrum__Tulip_Tower__West_24 [label = "", pos = "84.15,-39.666667!"];
         Uhrum__Tulip_Tower__West_24_in_Mid_air [label = "", pos = "84.15,-39.0!"];
         Uhrum__Annuna_Corridor__West_25 [label = "", pos = "84.15,-41.25!"];
+        Uhrum__Annuna_Corridor__Upper_Trees [label = "", pos = "87.6,-41.25!"];
+        Uhrum__Annuna_Corridor__Pedestal [label = "", pos = "88.5,-40.916667!"];
         Uhrum__Annuna_Corridor__West_26 [label = "", pos = "84.15,-43.0!"];
+        Uhrum__Annuna_Corridor__Save_Point [label = "", pos = "85.5,-42.833333!"];
+        Uhrum__Annuna_Corridor__Block_East [label = "", pos = "86.7,-42.666667!"];
         Uhrum__Artillery_Practice__East_24 [label = "", pos = "77.85,-39.583333!"];
     edge[arrowsize=0.5];
     Amagi__Main_Area__East_15 -> Glacier__Lake_Main_Entrance__Lake_Access;
@@ -2095,6 +2101,8 @@ digraph AxiomVerge2 {
     Uhrum__Waterfalls__Water_Pillar -> Uhrum__Waterfalls__East_Waters_Edge;
     Uhrum__Waterfalls__East_28 -> Uhrum__East_Lake__West_28;
     Uhrum__Waterfalls__East_27 -> Uhrum__East_Lake__West_27;
+    Uhrum__Save_Room__East -> Uhrum__Waterfalls__West_27;
+    Uhrum__Save_Room__West -> Uhrum__Glitchy_Corridor__East_27;
     edge [arrowhead=none,style=dashed];
     Amagi__Main_Area__East_15 -> Amagi__Main_Area__Waters_Edge;
     Amagi__Main_Area__Waters_Edge -> Amagi__Main_Area__East_15;
@@ -3932,6 +3940,10 @@ digraph AxiomVerge2 {
     Uhrum__Waterfalls__East_Waters_Edge -> Uhrum__Waterfalls__East_27;
     Uhrum__Waterfalls__East_27 -> Uhrum__Waterfalls__Lower_East_Platform;
     Uhrum__Waterfalls__East_27 -> Uhrum__Waterfalls__East_Waters_Edge;
+    Uhrum__Save_Room__East -> Uhrum__Save_Room__Save_Point;
+    Uhrum__Save_Room__Save_Point -> Uhrum__Save_Room__East;
+    Uhrum__Save_Room__Save_Point -> Uhrum__Save_Room__West;
+    Uhrum__Save_Room__West -> Uhrum__Save_Room__Save_Point;
     edge [arrowhead=normal,arrowtail=inv,dir=both,style=bold,color=white];
     Ebih__Base_Camp__Left_Platform -> Ebih__Base_Camp__Left_Platform_Moved;
     Ebih__Base_Camp__Left_Platform_Moved -> Ebih__Base_Camp__Left_Platform;

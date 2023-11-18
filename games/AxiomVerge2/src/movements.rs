@@ -6366,6 +6366,10 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
         ([false], SpotId::Irikar__Sight_Room__West_24, SpotId::Irikar__Sight_Room__Lower_Ledge) => {
             701
         }
+        ([false], SpotId::Uhrum__Save_Room__East, SpotId::Uhrum__Save_Room__Save_Point) => 1578,
+        ([false], SpotId::Uhrum__Save_Room__Save_Point, SpotId::Uhrum__Save_Room__East) => 1578,
+        ([false], SpotId::Uhrum__Save_Room__Save_Point, SpotId::Uhrum__Save_Room__West) => 1578,
+        ([false], SpotId::Uhrum__Save_Room__West, SpotId::Uhrum__Save_Room__Save_Point) => 1578,
         (
             [false],
             SpotId::Uhrum__Siege_Corridor__Center_Box,
@@ -13499,6 +13503,10 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
         ([true], SpotId::Irikar__Sight_Room__West_24, SpotId::Irikar__Sight_Room__Lower_Ledge) => {
             701
         }
+        ([true], SpotId::Uhrum__Save_Room__East, SpotId::Uhrum__Save_Room__Save_Point) => 1578,
+        ([true], SpotId::Uhrum__Save_Room__Save_Point, SpotId::Uhrum__Save_Room__East) => 1578,
+        ([true], SpotId::Uhrum__Save_Room__Save_Point, SpotId::Uhrum__Save_Room__West) => 1578,
+        ([true], SpotId::Uhrum__Save_Room__West, SpotId::Uhrum__Save_Room__Save_Point) => 1578,
         (
             [true],
             SpotId::Uhrum__Siege_Corridor__Center_Box,
@@ -18584,6 +18592,10 @@ pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
         (SpotId::Uhrum__Waterfalls__East_27, SpotId::Uhrum__Waterfalls__Lower_East_Platform) => {
             true
         }
+        (SpotId::Uhrum__Save_Room__East, SpotId::Uhrum__Save_Room__Save_Point) => true,
+        (SpotId::Uhrum__Save_Room__Save_Point, SpotId::Uhrum__Save_Room__East) => true,
+        (SpotId::Uhrum__Save_Room__Save_Point, SpotId::Uhrum__Save_Room__West) => true,
+        (SpotId::Uhrum__Save_Room__West, SpotId::Uhrum__Save_Room__Save_Point) => true,
         _ => false,
     }
 }
@@ -35556,6 +35568,26 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             100,
         ),
         (
+            SpotId::Uhrum__Annuna_Corridor__Block_East,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Uhrum__Annuna_Corridor__Pedestal,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Uhrum__Annuna_Corridor__Save_Point,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Uhrum__Annuna_Corridor__Upper_Trees,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
             SpotId::Uhrum__Annuna_Corridor__West_25,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
@@ -35581,6 +35613,16 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             1000,
         ),
         (
+            SpotId::Uhrum__Glitchy_Corridor__East_27,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Uhrum__Glitchy_Corridor__East_28,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
             SpotId::Uhrum__Glitchy_Corridor__West_28,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
@@ -35591,14 +35633,44 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             1000,
         ),
         (
+            SpotId::Uhrum__Save_Room__East,
+            SpotId::Uhrum__Save_Room__Save_Point,
+            1578,
+        ),
+        (
+            SpotId::Uhrum__Save_Room__East,
+            SpotId::Uhrum__Waterfalls__West_27,
+            1350,
+        ),
+        (
             SpotId::Uhrum__Save_Room__Save_Point,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
         (
+            SpotId::Uhrum__Save_Room__Save_Point,
+            SpotId::Uhrum__Save_Room__East,
+            1578,
+        ),
+        (
+            SpotId::Uhrum__Save_Room__Save_Point,
+            SpotId::Uhrum__Save_Room__West,
+            1578,
+        ),
+        (
             SpotId::Uhrum__Save_Room__West,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
+        ),
+        (
+            SpotId::Uhrum__Save_Room__West,
+            SpotId::Uhrum__Glitchy_Corridor__East_27,
+            1350,
+        ),
+        (
+            SpotId::Uhrum__Save_Room__West,
+            SpotId::Uhrum__Save_Room__Save_Point,
+            1578,
         ),
         (
             SpotId::Uhrum__Siege_Corridor__Center_Box,
@@ -41882,6 +41954,10 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
             Some(964)
         }
         (SpotId::Irikar__Sight_Room__West_24, SpotId::Irikar__Sight_Room__Lower_Ledge) => Some(701),
+        (SpotId::Uhrum__Save_Room__East, SpotId::Uhrum__Save_Room__Save_Point) => Some(1578),
+        (SpotId::Uhrum__Save_Room__Save_Point, SpotId::Uhrum__Save_Room__East) => Some(1578),
+        (SpotId::Uhrum__Save_Room__Save_Point, SpotId::Uhrum__Save_Room__West) => Some(1578),
+        (SpotId::Uhrum__Save_Room__West, SpotId::Uhrum__Save_Room__Save_Point) => Some(1578),
         (
             SpotId::Uhrum__Siege_Corridor__Center_Box,
             SpotId::Uhrum__Siege_Corridor__Center_Valley,
@@ -47924,6 +48000,18 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
         }
         (SpotId::Irikar__Sight_Room__West_24, SpotId::Irikar__Sight_Room__Lower_Ledge) => {
             (Some(701), vec![])
+        }
+        (SpotId::Uhrum__Save_Room__East, SpotId::Uhrum__Save_Room__Save_Point) => {
+            (Some(1578), vec![])
+        }
+        (SpotId::Uhrum__Save_Room__Save_Point, SpotId::Uhrum__Save_Room__East) => {
+            (Some(1578), vec![])
+        }
+        (SpotId::Uhrum__Save_Room__Save_Point, SpotId::Uhrum__Save_Room__West) => {
+            (Some(1578), vec![])
+        }
+        (SpotId::Uhrum__Save_Room__West, SpotId::Uhrum__Save_Room__Save_Point) => {
+            (Some(1578), vec![])
         }
         (
             SpotId::Uhrum__Siege_Corridor__Center_Box,

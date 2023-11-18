@@ -1297,6 +1297,8 @@ subgraph Uhrum
     end
     subgraph Uhrum__Glitchy_Corridor[Glitchy Corridor]
         Uhrum__Glitchy_Corridor__West_28(West 28);
+        Uhrum__Glitchy_Corridor__East_27(East 27);
+        Uhrum__Glitchy_Corridor__East_28(East 28);
     end
     subgraph Uhrum__Waterfalls[Waterfalls]
         Uhrum__Waterfalls__West_25(West 25);
@@ -1352,7 +1354,11 @@ subgraph Uhrum
     end
     subgraph Uhrum__Annuna_Corridor[Annuna Corridor]
         Uhrum__Annuna_Corridor__West_25(West 25);
+        Uhrum__Annuna_Corridor__Upper_Trees(Upper Trees);
+        Uhrum__Annuna_Corridor__Pedestal(Pedestal);
         Uhrum__Annuna_Corridor__West_26(West 26);
+        Uhrum__Annuna_Corridor__Save_Point(Save Point);
+        Uhrum__Annuna_Corridor__Block_East(Block East);
     end
     subgraph Uhrum__Artillery_Practice[Artillery Practice]
         Uhrum__Artillery_Practice__East_24(East 24);
@@ -1916,6 +1922,8 @@ Menu__Upgrade_Menu__Combat <--> Menu__Upgrade_Menu__Physiology
 Menu__Upgrade_Menu__Drone <--> Menu__Upgrade_Menu__Infection
 Menu__Upgrade_Menu__Drone <--> Menu__Upgrade_Menu__Physiology
 Menu__Upgrade_Menu__Infection <--> Menu__Upgrade_Menu__Physiology
+Uhrum__Save_Room__East <--> Uhrum__Waterfalls__West_27
+Uhrum__Save_Room__West --> Uhrum__Glitchy_Corridor__East_27
 Uhrum__Siege_Corridor__Center_Platform_3 --> Uhrum__Siege_Corridor__Upper_Rock_West
 Uhrum__Siege_Corridor__Center_Valley --> Uhrum__Siege_Corridor__Center_East
 Uhrum__Siege_Corridor__East_25 <--> Uhrum__Waterfalls__West_25
@@ -1967,7 +1975,6 @@ Uhrum__Waterfalls__Water_Pillar --> Uhrum__Waterfalls__East_Waters_Edge
 Uhrum__Waterfalls__West_24 --> Uhrum__Artillery_Practice__East_24
 Uhrum__Waterfalls__West_24 --> Uhrum__Waterfalls__Below_Block
 Uhrum__Waterfalls__West_25 --> Uhrum__Waterfalls__Below_Block
-Uhrum__Waterfalls__West_27 --> Uhrum__Save_Room__East
 Uhrum__Waterfalls__West_27 --> Uhrum__Waterfalls__Large_Rock
 Uhrum__Waterfalls__West_Platform --> Uhrum__Waterfalls__Green_Middle_Ledge
 Uhrum__Waterfalls__West_Wall --> Uhrum__Waterfalls__West_25
