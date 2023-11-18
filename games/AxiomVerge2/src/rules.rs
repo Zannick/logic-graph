@@ -1242,6 +1242,22 @@ pub fn access_switch_40_12(ctx: &Context) -> bool {
     // Switch_40_12
     ctx.has(Item::Switch_40_12)
 }
+pub fn access_uhrum_waterfall_wall(ctx: &Context) -> bool {
+    // Uhrum_Waterfall_Wall
+    ctx.has(Item::Uhrum_Waterfall_Wall)
+}
+pub fn access_uhrum_waterfalls_block(ctx: &Context) -> bool {
+    // Uhrum_Waterfalls_Block
+    ctx.has(Item::Uhrum_Waterfalls_Block)
+}
+pub fn access_uhrum_waterfalls_block_and_grab(ctx: &Context) -> bool {
+    // Uhrum_Waterfalls_Block and $grab
+    (ctx.has(Item::Uhrum_Waterfalls_Block) && helper__grab!(ctx))
+}
+pub fn access_uhrum_waterfalls_block_and_hook(ctx: &Context) -> bool {
+    // Uhrum_Waterfalls_Block and $hook
+    (ctx.has(Item::Uhrum_Waterfalls_Block) && helper__hook!(ctx))
+}
 pub fn access_uhrum_west_entrance_gate(ctx: &Context) -> bool {
     // Uhrum_West_Entrance_Gate
     ctx.has(Item::Uhrum_West_Entrance_Gate)
@@ -1265,6 +1281,10 @@ pub fn access_underwater_movement(ctx: &Context) -> bool {
 pub fn access_underwater_movement_and___grab_or_climb(ctx: &Context) -> bool {
     // Underwater_Movement and ($grab or $climb)
     (ctx.has(Item::Underwater_Movement) && (helper__grab!(ctx) || helper__climb!(ctx)))
+}
+pub fn access_underwater_movement_and_grab(ctx: &Context) -> bool {
+    // Underwater_Movement and $grab
+    (ctx.has(Item::Underwater_Movement) && helper__grab!(ctx))
 }
 pub fn access_underwater_movement_and_hook(ctx: &Context) -> bool {
     // Underwater_Movement and $hook

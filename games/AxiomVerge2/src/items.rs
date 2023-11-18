@@ -133,12 +133,15 @@ pub enum Item {
     Slingshot_Weapon,
     Station_Power,
     Storm_Bomb,
+    Suspension_Bridge,
     Switch_36_11,
     Switch_40_12,
     Terminal_Breakthrough_1,
     Terminal_Breakthrough_2,
     The_Ideal_Kiengir,
     Udusan,
+    Uhrum_Waterfall_Wall,
+    Uhrum_Waterfalls_Block,
     Uhrum_West_Entrance_Gate,
     Uhrum_West_Entrance_Lower_Wall,
     Uhrum_West_Entrance_Upper_Wall,
@@ -265,12 +268,15 @@ impl fmt::Display for Item {
             Item::Slingshot_Weapon => write!(f, "{}", "Slingshot_Weapon"),
             Item::Station_Power => write!(f, "{}", "Station_Power"),
             Item::Storm_Bomb => write!(f, "{}", "Storm_Bomb"),
+            Item::Suspension_Bridge => write!(f, "{}", "Suspension_Bridge"),
             Item::Switch_36_11 => write!(f, "{}", "Switch_36_11"),
             Item::Switch_40_12 => write!(f, "{}", "Switch_40_12"),
             Item::Terminal_Breakthrough_1 => write!(f, "{}", "Terminal_Breakthrough_1"),
             Item::Terminal_Breakthrough_2 => write!(f, "{}", "Terminal_Breakthrough_2"),
             Item::The_Ideal_Kiengir => write!(f, "{}", "The_Ideal_Kiengir"),
             Item::Udusan => write!(f, "{}", "Udusan"),
+            Item::Uhrum_Waterfall_Wall => write!(f, "{}", "Uhrum_Waterfall_Wall"),
+            Item::Uhrum_Waterfalls_Block => write!(f, "{}", "Uhrum_Waterfalls_Block"),
             Item::Uhrum_West_Entrance_Gate => write!(f, "{}", "Uhrum_West_Entrance_Gate"),
             Item::Uhrum_West_Entrance_Lower_Wall => {
                 write!(f, "{}", "Uhrum_West_Entrance_Lower_Wall")
@@ -401,12 +407,15 @@ impl std::str::FromStr for Item {
             "Slingshot_Weapon" => Ok(Item::Slingshot_Weapon),
             "Station_Power" => Ok(Item::Station_Power),
             "Storm_Bomb" => Ok(Item::Storm_Bomb),
+            "Suspension_Bridge" => Ok(Item::Suspension_Bridge),
             "Switch_36_11" => Ok(Item::Switch_36_11),
             "Switch_40_12" => Ok(Item::Switch_40_12),
             "Terminal_Breakthrough_1" => Ok(Item::Terminal_Breakthrough_1),
             "Terminal_Breakthrough_2" => Ok(Item::Terminal_Breakthrough_2),
             "The_Ideal_Kiengir" => Ok(Item::The_Ideal_Kiengir),
             "Udusan" => Ok(Item::Udusan),
+            "Uhrum_Waterfall_Wall" => Ok(Item::Uhrum_Waterfall_Wall),
+            "Uhrum_Waterfalls_Block" => Ok(Item::Uhrum_Waterfalls_Block),
             "Uhrum_West_Entrance_Gate" => Ok(Item::Uhrum_West_Entrance_Gate),
             "Uhrum_West_Entrance_Lower_Wall" => Ok(Item::Uhrum_West_Entrance_Lower_Wall),
             "Uhrum_West_Entrance_Upper_Wall" => Ok(Item::Uhrum_West_Entrance_Upper_Wall),
@@ -442,6 +451,7 @@ pub fn unused_item(id: Item) -> bool {
             | Item::Ranged_Speed_3
             | Item::Refill
             | Item::Royal_Dagger
+            | Item::Suspension_Bridge
             | Item::Udusan
     )
 }

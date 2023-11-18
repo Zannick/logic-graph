@@ -726,15 +726,551 @@ areas:
     - name: West 28
       coord: [21.05, 27.7]
 
+    - name: East 27
+      coord: [24.95, 26.75]
+    - name: East 28
+      coord: [24.95, 27.75]
+
 - name: Waterfalls
   on_entry: $reset_old_area(^newpos)
   spots:
     - name: West 25
       coord: [26.05, 24.75]
+      local:
+        - to: East Palm Tree
+        - to: Lower East Platform
+        - to: West Platform
+          jumps_down: 2
+        - to: West Wall
+          jumps_down: 2
+      exits:
+        - to: Below Block
+          req: $hover
+          movement: base
+        - to: Siege Corridor > East 25
+          tags: [xshift]
     - name: West 24
       coord: [26.05, 23.75]
+      local:
+        - to: West 25
+          thru: [26.15, 24.0]
+        - to: West Wall
+          jumps_down: 2
+        - to: West Platform
+          jumps_down: 2
+        - to: Lower East Platform
+        - to: East Water Surface
+        - to: High Platform
+      exits:
+        - to: Below Block
+          req: $hover
+          movement: base
+        - to: Artillery Practice > East 24
+          tags: [xshift]
     - name: West 27
       coord: [26.05, 26.75]
+      local:
+        - to: West Water's Edge
+      exits:
+        - to: Large Rock
+          req: $hook
+          movement: base
+          jumps: 1
+        - to: Center Island West
+          req: $hover
+          movement: base
+        - to: Save Room > East
+          tags: [xshift]
+
+    #region Upper Tiers
+    - name: Ledge Above Palm
+      coord: [27.5, 24.15]
+      local:
+        - to: High Platform
+          jumps: 2
+      exits:
+        - to: High Platform
+          req: $hover
+          movement: base
+          jumps: 1
+        - to: Northeast Ledge
+          req: $hook
+          movement: base
+          jumps: 2
+    - name: High Platform
+      coord: [27.1, 23.9]
+      local:
+        - to: West 24
+          jumps: 3
+      exits:
+        - to: Northeast Ledge
+          req: $grab
+          movement: base
+          jumps: 2
+        - to: Northeast Ledge
+          req: $hover or $hook
+          movement: base
+          jumps: 1
+    - name: Ceiling Opening
+      coord: [27.15, 23.25]
+      local:
+        - to: High Platform
+        - to: Northeast Ledge
+        - to: Green Middle Ledge
+      exits:
+        - to: Ceiling Cache
+          req: ^mode == 'drone'
+          movement: base
+          jumps: 1
+        - to: West 24
+          req: $hover
+          movement: base
+        - to: Barrier West
+          req: $hover
+          movement: base
+    - name: Ceiling Cache
+      coord: [26.8, 23.15]
+      locations:
+        - name: Flask
+          item: Flask
+          tags: [flask]
+      exits:
+        - to: Ceiling Opening
+          req: ^mode == 'drone'
+    - name: Northeast Ledge
+      coord: [27.4, 23.7]
+      local:
+        - to: Green Middle Ledge
+        - to: High Platform
+        - to: Barrier West
+          jumps: 2
+      exits:
+        - to: Ceiling Opening
+          req: $hook
+          movement: base
+          jumps: 2
+    - name: Barrier West
+      coord: [27.6, 23.4]
+      local:
+        - to: Northeast Ledge
+      exits:
+        - to: Ceiling Opening
+          req: $hover
+          movement: base
+          jumps: 1
+        - to: Barrier East
+          req: Uhrum_Waterfall_Wall
+          movement: base
+      hybrid:
+        - name: Charge through Wall
+          item: Uhrum_Waterfall_Wall
+          canon: Uhrum_Waterfall_Wall
+          req: $charge
+          to: Barrier East
+          time: 1  # ?
+          item_time: 0
+        - name: Spin through Wall
+          item: Uhrum_Waterfall_Wall
+          canon: Uhrum_Waterfall_Wall
+          req: $spin
+          to: Barrier East
+          time: 1  # ?
+          item_time: 0
+        - name: Mist through Wall
+          item: Uhrum_Waterfall_Wall
+          canon: Uhrum_Waterfall_Wall
+          req: $mist2
+          to: Barrier East
+          time: 1  # ?
+          item_time: 0
+          price: 20
+    - name: Barrier East
+      coord: [27.7, 23.4]
+      local:
+        - to: East 24
+      exits:
+        - to: Barrier West
+          req: Uhrum_Waterfall_Wall
+          movement: base
+        - to: East 24 in Mid-air
+          req: $hover
+          movement: base
+      hybrid:
+        - name: Charge through Wall
+          item: Uhrum_Waterfall_Wall
+          canon: Uhrum_Waterfall_Wall
+          req: $charge
+          to: Barrier West
+          time: 1  # ?
+          item_time: 0
+        - name: Spin through Wall
+          item: Uhrum_Waterfall_Wall
+          canon: Uhrum_Waterfall_Wall
+          req: $spin
+          to: Barrier West
+          time: 1  # ?
+          item_time: 0
+        - name: Mist through Wall
+          item: Uhrum_Waterfall_Wall
+          canon: Uhrum_Waterfall_Wall
+          req: $mist2
+          to: Barrier West
+          time: 1  # ?
+          item_time: 0
+          price: 20
+    - name: East 24
+      coord: [27.95, 23.8]
+      local:
+        - to: Barrier East
+          jumps: 3
+      exits:
+        - to: Tulip Tower > West 24
+          tags: [xshift]
+    - name: East 24 in Mid-air
+      coord: [27.95, 23.4]
+      exits:
+        - to: Barrier East
+          req: $hover
+          movement: base
+        - to: Tulip Tower > West 24 in Mid-air
+          tags: [xshift]
+    #endregion
+
+    #region Middle Tiers
+    - name: West Wall
+      coord: [26.25, 25.9]
+      local:
+        - to: West Platform
+          jumps: 1
+        - to: West 27
+          jumps_down: 1
+        - to: Large Rock
+        - to: Island Water West
+      exits:
+        - to: West 25
+          req: $grab and $climb
+          movement: base
+          jumps: 7
+        - to: West 25
+          req: $hook
+          movement: base
+          jumps: 5
+    - name: West Platform
+      coord: [26.5, 25.8]
+      local:
+        - to: West Wall
+        - to: Large Rock
+        - to: Medium Rock
+        - to: Center Island East
+      exits:
+        - to: Green Middle Ledge
+          req: $grab
+          movement: base
+          jumps: 5
+        - to: Green Middle Ledge
+          req: $hook
+          movement: base
+          jumps: 4
+    - name: Large Rock
+      coord: [26.55, 26.4]
+      local:
+        - to: West 27
+        - to: Island Water West
+        - to: Small Rock
+        - to: Center Island East
+          thru: [26.75, 26.4]
+      exits:
+        - to: Medium Rock
+          req: $grab or $hook
+          movement: base
+          jumps: 2
+        - to: West Wall
+          req: $hover and $hook
+          movement: base
+          jumps: 2
+    - name: Medium Rock
+      coord: [26.7, 26.1]
+      local:
+        - to: Large Rock
+        - to: Small Rock
+          thru: [26.8, 26.1]
+      exits:
+        - to: West Wall
+          req: $hover
+          movement: base
+          jumps: 1
+        - to: West Platform
+          req: $hover
+          movement: base
+          jumps: 2
+        - to: Green Middle Ledge
+          req: $hover and $hook
+          movement: base
+          jumps: 5
+    - name: Small Rock
+      coord: [27.0, 26.5]
+      local:
+        - to: Lower East Platform
+        - to: Large Rock
+          jumps: 1
+    - name: Lower East Platform
+      coord: [27.4, 26.7]
+      local:
+        - to: East 27
+        - to: East Water Surface
+          jumps_down: 1
+        - to: Water Pillar
+          jumps_down: 1
+        - to: Center Island East
+      exits:
+        - to: Small Rock
+          req: $hover
+          movement: base
+          jumps: 1
+        - to: Below Block
+          req: $climb
+          jumps: 3
+    - name: Below Block
+      coord: [27.6, 26.15]
+      local:
+        - to: Lower East Platform
+        - to: Water Pillar
+      locations:
+        - name: Shockwave Block
+          item: Uhrum_Waterfalls_Block
+          canon: Uhrum_Waterfalls_Block
+          req: $shockwave
+          price: 100
+          tags: [shockwave]
+      exits:
+        - to: Small Rock
+          req: $hover
+          movement: base
+        - to: Above Block
+          req: Uhrum_Waterfalls_Block and $grab
+          movement: base
+          jumps: 2
+        - to: East 26
+          req: Uhrum_Waterfalls_Block and $grab
+          movement: base
+          jumps: 2
+        - to: Above Block
+          req: Uhrum_Waterfalls_Block and $hook
+          movement: base
+          jumps: 1
+        - to: East 26
+          req: Uhrum_Waterfalls_Block and $hook
+          movement: base
+          jumps: 1
+    - name: Above Block
+      coord: [27.65, 25.8]
+      local:
+        - to: East 26
+      locations:
+        - name: Block
+          item: Uhrum_Waterfalls_Block
+          canon: Uhrum_Waterfalls_Block
+          req: $shockwave
+          price: 100
+          tags: [shockwave]
+      exits:
+        - to: Below Block
+          req: Uhrum_Waterfalls_Block
+          movement: base
+        - to: East 25
+          req: $hook
+          movement: base
+          jumps: 5
+    - name: East 26
+      coord: [27.95, 25.8]
+      local:
+        - to: Above Block
+      locations:
+        - name: Block
+          item: Uhrum_Waterfalls_Block
+          canon: Uhrum_Waterfalls_Block
+          req: $shockwave
+          price: 100
+          tags: [shockwave]
+      exits:
+        - to: Below Block
+          req: Uhrum_Waterfalls_Block
+          movement: base
+        - to: Annuna Corridor > West 26
+          tags: [xshift]
+    - name: East 25
+      coord: [27.95, 24.75]
+      local:
+        - to: Above Block
+          thru: [27.8, 24.75]
+      exits:
+        - to: Annuna Corridor > West 25
+          tags: [xshift]
+    - name: Green Middle Ledge
+      coord: [27.2, 25.2]
+      local:
+        - to: East Palm Tree
+          jumps: 3
+        - to: Lower East Platform
+        - to: East Water Surface
+      exits:
+        - to: Below Block
+          req: $hover
+          movement: base
+    - name: East Palm Tree
+      coord: [27.45, 24.75]
+      local:
+        - to: West 25
+      exits:
+        - to: Ledge Above Palm
+          req: $grab
+          movement: base
+          jumps: 4
+        - to: Ledge Above Palm
+          req: $hook
+          movement: base
+          jumps: 2
+    #endregion
+
+    #region Water and Surface
+    - name: West Water's Edge
+      coord: [26.3, 26.9]
+      local:
+        - to: West 27
+          jumps: 2
+        - to: West Water Surface
+    - name: West Water Surface
+      coord: [26.35, 27.0]
+      data:
+        water: true
+      local:
+        - to: West Water's Edge
+          jumps: 1
+        - to: West Water Ledge
+    - name: Center Island West
+      coord: [26.7, 26.9]
+      local:
+        - to: Center Island East
+        - to: Island Water West
+      exits:
+        - to: West 27
+          req: $hover
+          movement: base
+          jumps: 1
+    - name: Center Island East
+      coord: [27.0, 26.9]
+      local:
+        - to: Center Island West
+        - to: Water Pillar
+      exits:
+        - to: Lower East Platform
+          req: $hover
+          movement: base
+          jumps: 1
+        - to: East Water's Edge
+          req: $hover
+          movement: base
+    - name: Island Water West
+      coord: [26.65, 27.0]
+      data:
+        water: true
+      local:
+        - to: West Water Ledge
+    - name: West Water Ledge
+      coord: [26.65, 27.4]
+      data:
+        water: true
+      local:
+        - to: West Water's Edge
+          jumps: 3
+        - to: West Water's Edge
+          jumps: 2
+          jump_mvmt: water
+        - to: West Water Nook
+          thru: [26.65, 27.6]
+    - name: West Water Nook
+      coord: [26.15, 27.75]
+      data:
+        water: true
+      local:
+        - to: Water Slope
+          jumps: 1
+      locations:
+        - name: Tablet
+          item: Suspension_Bridge
+          tags: [standing]
+      exits:
+        - to: West Water Ledge
+          req: Underwater_Movement and $grab
+          movement: base
+          jumps: 3
+        - to: West Water Ledge
+          req: Underwater_Movement and $hook
+          movement: base
+          jumps: 2
+    - name: Water Slope
+      coord: [26.9, 27.7]
+      data:
+        water: true
+      local:
+        - to: Water Pillar
+          jumps: 2
+          jump_mvmt: water
+        - to: West Water Ledge
+          jumps: 1
+          jump_mvmt: water
+        - to: West Water Nook
+    - name: Water Pillar
+      coord: [27.1, 27.15]
+      data:
+        water: true
+      local:
+        - to: West Water Nook
+        - to: Water Slope
+        - to: East 28
+      exits:
+        - to: Center Island East
+          req: $grab
+          movement: base
+          jumps: 2
+        - to: Center Island East
+          req: $hook
+          movement: base
+          jumps: 1
+        - to: East Water's Edge
+          req: $hook
+          movement: base
+          jumps: 1
+    - name: East Water Surface
+      coord: [27.4, 27.0]
+      data:
+        water: true
+      local:
+        - to: Water Pillar
+        - to: East 28
+    - name: East 28
+      coord: [27.95, 27.75]
+      data:
+        water: true
+      exits:
+        - to: East Lake > West 28
+          tags: [xshift]
+    - name: East Water's Edge
+      coord: [27.45, 26.9]
+      local:
+        - to: East 27
+        - to: East Water Surface
+        - to: Water Pillar
+    - name: East 27
+      coord: [27.95, 26.9]
+      local:
+        - to: East Water's Edge
+        - to: Lower East Platform
+          jumps: 1
+      exits:
+        - to: East Lake > West 27
+          tags: [xshift]
+    #endregion
 
 - name: Save Room
   on_entry: $reset_old_area(^newpos)
@@ -742,8 +1278,67 @@ areas:
   spots:
     - name: East
       coord: [25.95, 26.75]
+      local:
+        - to: Save Point
+      exits:
+        - to: Waterfalls > West 27
+          tags: [xshift]
     - name: Save Point
       coord: [25.5, 26.75]
+      local:
+        - to: East
+        - to: West
+      actions:
+        - name: Save
+          do: $save
+          tags: [save]
     - name: West
       coord: [25.05, 26.75]
+      local:
+        - to: Save Point
+      exits:
+        - to: Glitchy Corridor > East 27
+          tags: [xshift]
 
+- name: East Lake
+  on_entry: $reset_old_area(^newpos)
+  spots:
+    - name: West 27
+      coord: [28.05, 26.9]
+    - name: West 28
+      coord: [28.05, 27.75]
+      data:
+        water: true
+
+- name: Tulip Tower
+  on_entry: $reset_old_area(^newpos)
+  spots:
+    - name: West 24
+      coord: [28.05, 23.8]
+    - name: West 24 in Mid-air
+      coord: [28.05, 23.4]
+
+- name: Annuna Corridor
+  on_entry: $reset_old_area(^newpos)
+  map:
+    save: [28, 25, 29, 26]
+  spots:
+    - name: West 25
+      coord: [28.05, 24.75]
+    - name: Upper Trees
+      coord: [29.2, 24.75]
+    - name: Pedestal
+      coord: [29.5, 24.55]
+
+    - name: West 26
+      coord: [28.05, 25.8]
+    - name: Save Point
+      coord: [28.5, 25.7]
+    - name: Block East
+      coord: [28.9, 25.6]
+
+- name: Artillery Practice
+  on_entry: $reset_old_area(^newpos)
+  spots:
+    - name: East 24
+      coord: [25.95, 23.75]

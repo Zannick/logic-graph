@@ -372,6 +372,10 @@ class GameLogic(object):
         for spot in self.spots():
             for exit in spot.get('exits', []) + spot.get('hybrid', []):
                 if 'time' not in exit and 'movement' in exit:
+                    target = get_exit_target(exit)
+                    if target not in self.id_lookup:
+                        # check_all will add an error for this
+                        continue
                     dest = self.id_lookup[get_exit_target(exit)]
                     if 'coord' not in spot:
                         self._errors.append(f'Expected coord for spot {spot["fullname"]} used in exit with movement: {exit["fullname"]}')
@@ -1087,11 +1091,11 @@ class GameLogic(object):
             if 'to' not in ex:
                 self._errors.append(f'No destination defined for {ex["fullname"]}')
             elif get_exit_target(ex) not in spot_ids:
-                self._errors.append(f'Unrecognized destination spot in exit {ex["fullname"]}: {ex["to"]}')
+                self._errors.append(f'Unrecognized destination in exit {ex["fullname"]}')
         for spot in self.spots():
             for act in spot.get('actions', []):
                 if 'to' in act and not act['to'].startswith('^') and get_exit_target(act) not in spot_ids:
-                    self._errors.append(f'Unrecognized destination spot in action {act["fullname"]}: {act["to"]}')
+                    self._errors.append(f'Unrecognized destination in action {act["fullname"]}: {act["to"]}')
         for item in self.collect:
             if item != construct_id(item):
                 self._errors.append(f'Invalid item name {item!r} as collect rule; '

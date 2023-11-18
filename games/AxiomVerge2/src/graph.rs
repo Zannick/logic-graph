@@ -1083,10 +1083,54 @@ pub fn get_area(spot: SpotId) -> AreaId {
         SpotId::Uhrum__Glitchy_Corridor__West_28 => AreaId::Uhrum__Glitchy_Corridor,
         SpotId::Uhrum__Waterfalls__West_25
         | SpotId::Uhrum__Waterfalls__West_24
-        | SpotId::Uhrum__Waterfalls__West_27 => AreaId::Uhrum__Waterfalls,
+        | SpotId::Uhrum__Waterfalls__West_27
+        | SpotId::Uhrum__Waterfalls__Ledge_Above_Palm
+        | SpotId::Uhrum__Waterfalls__High_Platform
+        | SpotId::Uhrum__Waterfalls__Ceiling_Opening
+        | SpotId::Uhrum__Waterfalls__Ceiling_Cache
+        | SpotId::Uhrum__Waterfalls__Northeast_Ledge
+        | SpotId::Uhrum__Waterfalls__Barrier_West
+        | SpotId::Uhrum__Waterfalls__Barrier_East
+        | SpotId::Uhrum__Waterfalls__East_24
+        | SpotId::Uhrum__Waterfalls__East_24_in_Mid_air
+        | SpotId::Uhrum__Waterfalls__West_Wall
+        | SpotId::Uhrum__Waterfalls__West_Platform
+        | SpotId::Uhrum__Waterfalls__Large_Rock
+        | SpotId::Uhrum__Waterfalls__Medium_Rock
+        | SpotId::Uhrum__Waterfalls__Small_Rock
+        | SpotId::Uhrum__Waterfalls__Lower_East_Platform
+        | SpotId::Uhrum__Waterfalls__Below_Block
+        | SpotId::Uhrum__Waterfalls__Above_Block
+        | SpotId::Uhrum__Waterfalls__East_26
+        | SpotId::Uhrum__Waterfalls__East_25
+        | SpotId::Uhrum__Waterfalls__Green_Middle_Ledge
+        | SpotId::Uhrum__Waterfalls__East_Palm_Tree
+        | SpotId::Uhrum__Waterfalls__West_Waters_Edge
+        | SpotId::Uhrum__Waterfalls__West_Water_Surface
+        | SpotId::Uhrum__Waterfalls__Center_Island_West
+        | SpotId::Uhrum__Waterfalls__Center_Island_East
+        | SpotId::Uhrum__Waterfalls__Island_Water_West
+        | SpotId::Uhrum__Waterfalls__West_Water_Ledge
+        | SpotId::Uhrum__Waterfalls__West_Water_Nook
+        | SpotId::Uhrum__Waterfalls__Water_Slope
+        | SpotId::Uhrum__Waterfalls__Water_Pillar
+        | SpotId::Uhrum__Waterfalls__East_Water_Surface
+        | SpotId::Uhrum__Waterfalls__East_28
+        | SpotId::Uhrum__Waterfalls__East_Waters_Edge
+        | SpotId::Uhrum__Waterfalls__East_27 => AreaId::Uhrum__Waterfalls,
         SpotId::Uhrum__Save_Room__East
         | SpotId::Uhrum__Save_Room__Save_Point
         | SpotId::Uhrum__Save_Room__West => AreaId::Uhrum__Save_Room,
+        SpotId::Uhrum__East_Lake__West_27 | SpotId::Uhrum__East_Lake__West_28 => {
+            AreaId::Uhrum__East_Lake
+        }
+        SpotId::Uhrum__Tulip_Tower__West_24 | SpotId::Uhrum__Tulip_Tower__West_24_in_Mid_air => {
+            AreaId::Uhrum__Tulip_Tower
+        }
+        SpotId::Uhrum__Annuna_Corridor__West_25 | SpotId::Uhrum__Annuna_Corridor__West_26 => {
+            AreaId::Uhrum__Annuna_Corridor
+        }
+        SpotId::Uhrum__Artillery_Practice__East_24 => AreaId::Uhrum__Artillery_Practice,
     }
 }
 pub fn get_region(spot: SpotId) -> RegionId {
@@ -2138,10 +2182,52 @@ pub fn get_region(spot: SpotId) -> RegionId {
         SpotId::Uhrum__Glitchy_Corridor__West_28 => RegionId::Uhrum,
         SpotId::Uhrum__Waterfalls__West_25
         | SpotId::Uhrum__Waterfalls__West_24
-        | SpotId::Uhrum__Waterfalls__West_27 => RegionId::Uhrum,
+        | SpotId::Uhrum__Waterfalls__West_27
+        | SpotId::Uhrum__Waterfalls__Ledge_Above_Palm
+        | SpotId::Uhrum__Waterfalls__High_Platform
+        | SpotId::Uhrum__Waterfalls__Ceiling_Opening
+        | SpotId::Uhrum__Waterfalls__Ceiling_Cache
+        | SpotId::Uhrum__Waterfalls__Northeast_Ledge
+        | SpotId::Uhrum__Waterfalls__Barrier_West
+        | SpotId::Uhrum__Waterfalls__Barrier_East
+        | SpotId::Uhrum__Waterfalls__East_24
+        | SpotId::Uhrum__Waterfalls__East_24_in_Mid_air
+        | SpotId::Uhrum__Waterfalls__West_Wall
+        | SpotId::Uhrum__Waterfalls__West_Platform
+        | SpotId::Uhrum__Waterfalls__Large_Rock
+        | SpotId::Uhrum__Waterfalls__Medium_Rock
+        | SpotId::Uhrum__Waterfalls__Small_Rock
+        | SpotId::Uhrum__Waterfalls__Lower_East_Platform
+        | SpotId::Uhrum__Waterfalls__Below_Block
+        | SpotId::Uhrum__Waterfalls__Above_Block
+        | SpotId::Uhrum__Waterfalls__East_26
+        | SpotId::Uhrum__Waterfalls__East_25
+        | SpotId::Uhrum__Waterfalls__Green_Middle_Ledge
+        | SpotId::Uhrum__Waterfalls__East_Palm_Tree
+        | SpotId::Uhrum__Waterfalls__West_Waters_Edge
+        | SpotId::Uhrum__Waterfalls__West_Water_Surface
+        | SpotId::Uhrum__Waterfalls__Center_Island_West
+        | SpotId::Uhrum__Waterfalls__Center_Island_East
+        | SpotId::Uhrum__Waterfalls__Island_Water_West
+        | SpotId::Uhrum__Waterfalls__West_Water_Ledge
+        | SpotId::Uhrum__Waterfalls__West_Water_Nook
+        | SpotId::Uhrum__Waterfalls__Water_Slope
+        | SpotId::Uhrum__Waterfalls__Water_Pillar
+        | SpotId::Uhrum__Waterfalls__East_Water_Surface
+        | SpotId::Uhrum__Waterfalls__East_28
+        | SpotId::Uhrum__Waterfalls__East_Waters_Edge
+        | SpotId::Uhrum__Waterfalls__East_27 => RegionId::Uhrum,
         SpotId::Uhrum__Save_Room__East
         | SpotId::Uhrum__Save_Room__Save_Point
         | SpotId::Uhrum__Save_Room__West => RegionId::Uhrum,
+        SpotId::Uhrum__East_Lake__West_27 | SpotId::Uhrum__East_Lake__West_28 => RegionId::Uhrum,
+        SpotId::Uhrum__Tulip_Tower__West_24 | SpotId::Uhrum__Tulip_Tower__West_24_in_Mid_air => {
+            RegionId::Uhrum
+        }
+        SpotId::Uhrum__Annuna_Corridor__West_25 | SpotId::Uhrum__Annuna_Corridor__West_26 => {
+            RegionId::Uhrum
+        }
+        SpotId::Uhrum__Artillery_Practice__East_24 => RegionId::Uhrum,
     }
 }
 
@@ -2480,6 +2566,31 @@ impl world::Accessible for Location {
             LocationId::Uhrum__Siege_Corridor__Western_Cache__Core => {
                 rules::access_more_refills(&ctx)
             }
+            LocationId::Uhrum__Waterfalls__Above_Block__Block => rules::access_shockwave(&ctx),
+            LocationId::Uhrum__Waterfalls__Barrier_East__Charge_through_Wall => {
+                rules::access_charge(&ctx)
+            }
+            LocationId::Uhrum__Waterfalls__Barrier_East__Mist_through_Wall => {
+                rules::access_mist2(&ctx)
+            }
+            LocationId::Uhrum__Waterfalls__Barrier_East__Spin_through_Wall => {
+                rules::access_spin(&ctx)
+            }
+            LocationId::Uhrum__Waterfalls__Barrier_West__Charge_through_Wall => {
+                rules::access_charge(&ctx)
+            }
+            LocationId::Uhrum__Waterfalls__Barrier_West__Mist_through_Wall => {
+                rules::access_mist2(&ctx)
+            }
+            LocationId::Uhrum__Waterfalls__Barrier_West__Spin_through_Wall => {
+                rules::access_spin(&ctx)
+            }
+            LocationId::Uhrum__Waterfalls__Below_Block__Shockwave_Block => {
+                rules::access_shockwave(&ctx)
+            }
+            LocationId::Uhrum__Waterfalls__Ceiling_Cache__Flask => true,
+            LocationId::Uhrum__Waterfalls__East_26__Block => rules::access_shockwave(&ctx),
+            LocationId::Uhrum__Waterfalls__West_Water_Nook__Tablet => true,
             LocationId::Uhrum__West_Entrance__Gate_Switch__Open_Gate => {
                 rules::access_can_damage(&ctx)
             }
@@ -3459,6 +3570,69 @@ impl world::Accessible for Exit {
             ExitId::Uhrum__Siege_Corridor__Western_Cache__ex__Northwest_Door_1 => rules::access_mist2(&ctx),
             ExitId::Uhrum__Siege_Corridor__Western_Cache__ex__Northwest_Platform_1 => rules::access_hover(&ctx),
             ExitId::Uhrum__Siege_Corridor__Western_Rock__ex__Northwest_Platform_1 => rules::access_hover(&ctx),
+            ExitId::Uhrum__Waterfalls__Above_Block__ex__Below_Block_1 => rules::access_uhrum_waterfalls_block(&ctx),
+            ExitId::Uhrum__Waterfalls__Above_Block__ex__East_25_1 => rules::access_hook(&ctx),
+            ExitId::Uhrum__Waterfalls__Barrier_East__Charge_through_Wall => rules::access_charge(&ctx),
+            ExitId::Uhrum__Waterfalls__Barrier_East__ex__Barrier_West_1 => rules::access_uhrum_waterfall_wall(&ctx),
+            ExitId::Uhrum__Waterfalls__Barrier_East__ex__East_24_in_Mid_air_1 => rules::access_hover(&ctx),
+            ExitId::Uhrum__Waterfalls__Barrier_East__Mist_through_Wall => rules::access_mist2(&ctx),
+            ExitId::Uhrum__Waterfalls__Barrier_East__Spin_through_Wall => rules::access_spin(&ctx),
+            ExitId::Uhrum__Waterfalls__Barrier_West__Charge_through_Wall => rules::access_charge(&ctx),
+            ExitId::Uhrum__Waterfalls__Barrier_West__ex__Barrier_East_1 => rules::access_uhrum_waterfall_wall(&ctx),
+            ExitId::Uhrum__Waterfalls__Barrier_West__ex__Ceiling_Opening_1 => rules::access_hover(&ctx),
+            ExitId::Uhrum__Waterfalls__Barrier_West__Mist_through_Wall => rules::access_mist2(&ctx),
+            ExitId::Uhrum__Waterfalls__Barrier_West__Spin_through_Wall => rules::access_spin(&ctx),
+            ExitId::Uhrum__Waterfalls__Below_Block__ex__Above_Block_1 => rules::access_uhrum_waterfalls_block_and_grab(&ctx),
+            ExitId::Uhrum__Waterfalls__Below_Block__ex__Above_Block_2 => rules::access_uhrum_waterfalls_block_and_hook(&ctx),
+            ExitId::Uhrum__Waterfalls__Below_Block__ex__East_26_1 => rules::access_uhrum_waterfalls_block_and_grab(&ctx),
+            ExitId::Uhrum__Waterfalls__Below_Block__ex__East_26_2 => rules::access_uhrum_waterfalls_block_and_hook(&ctx),
+            ExitId::Uhrum__Waterfalls__Below_Block__ex__Small_Rock_1 => rules::access_hover(&ctx),
+            ExitId::Uhrum__Waterfalls__Ceiling_Cache__ex__Ceiling_Opening_1 => rules::access_mode__drone(&ctx),
+            ExitId::Uhrum__Waterfalls__Ceiling_Opening__ex__Barrier_West_1 => rules::access_hover(&ctx),
+            ExitId::Uhrum__Waterfalls__Ceiling_Opening__ex__Ceiling_Cache_1 => rules::access_mode__drone(&ctx),
+            ExitId::Uhrum__Waterfalls__Ceiling_Opening__ex__West_24_1 => rules::access_hover(&ctx),
+            ExitId::Uhrum__Waterfalls__Center_Island_East__ex__East_Waters_Edge_1 => rules::access_hover(&ctx),
+            ExitId::Uhrum__Waterfalls__Center_Island_East__ex__Lower_East_Platform_1 => rules::access_hover(&ctx),
+            ExitId::Uhrum__Waterfalls__Center_Island_West__ex__West_27_1 => rules::access_hover(&ctx),
+            ExitId::Uhrum__Waterfalls__East_24__ex__Tulip_Tower__West_24_1 => true,
+            ExitId::Uhrum__Waterfalls__East_24_in_Mid_air__ex__Barrier_East_1 => rules::access_hover(&ctx),
+            ExitId::Uhrum__Waterfalls__East_24_in_Mid_air__ex__Tulip_Tower__West_24_in_Mid_air_1 => true,
+            ExitId::Uhrum__Waterfalls__East_25__ex__Annuna_Corridor__West_25_1 => true,
+            ExitId::Uhrum__Waterfalls__East_26__ex__Annuna_Corridor__West_26_1 => true,
+            ExitId::Uhrum__Waterfalls__East_26__ex__Below_Block_1 => rules::access_uhrum_waterfalls_block(&ctx),
+            ExitId::Uhrum__Waterfalls__East_27__ex__East_Lake__West_27_1 => true,
+            ExitId::Uhrum__Waterfalls__East_28__ex__East_Lake__West_28_1 => true,
+            ExitId::Uhrum__Waterfalls__East_Palm_Tree__ex__Ledge_Above_Palm_1 => rules::access_grab(&ctx),
+            ExitId::Uhrum__Waterfalls__East_Palm_Tree__ex__Ledge_Above_Palm_2 => rules::access_hook(&ctx),
+            ExitId::Uhrum__Waterfalls__Green_Middle_Ledge__ex__Below_Block_1 => rules::access_hover(&ctx),
+            ExitId::Uhrum__Waterfalls__High_Platform__ex__Northeast_Ledge_1 => rules::access_grab(&ctx),
+            ExitId::Uhrum__Waterfalls__High_Platform__ex__Northeast_Ledge_2 => rules::access_hover_or_hook(&ctx),
+            ExitId::Uhrum__Waterfalls__Large_Rock__ex__Medium_Rock_1 => rules::access_grab_or_hook(&ctx),
+            ExitId::Uhrum__Waterfalls__Large_Rock__ex__West_Wall_1 => rules::access_hover_and_hook(&ctx),
+            ExitId::Uhrum__Waterfalls__Ledge_Above_Palm__ex__High_Platform_1 => rules::access_hover(&ctx),
+            ExitId::Uhrum__Waterfalls__Ledge_Above_Palm__ex__Northeast_Ledge_1 => rules::access_hook(&ctx),
+            ExitId::Uhrum__Waterfalls__Lower_East_Platform__ex__Below_Block_1 => rules::access_climb(&ctx),
+            ExitId::Uhrum__Waterfalls__Lower_East_Platform__ex__Small_Rock_1 => rules::access_hover(&ctx),
+            ExitId::Uhrum__Waterfalls__Medium_Rock__ex__Green_Middle_Ledge_1 => rules::access_hover_and_hook(&ctx),
+            ExitId::Uhrum__Waterfalls__Medium_Rock__ex__West_Platform_1 => rules::access_hover(&ctx),
+            ExitId::Uhrum__Waterfalls__Medium_Rock__ex__West_Wall_1 => rules::access_hover(&ctx),
+            ExitId::Uhrum__Waterfalls__Northeast_Ledge__ex__Ceiling_Opening_1 => rules::access_hook(&ctx),
+            ExitId::Uhrum__Waterfalls__Water_Pillar__ex__Center_Island_East_1 => rules::access_grab(&ctx),
+            ExitId::Uhrum__Waterfalls__Water_Pillar__ex__Center_Island_East_2 => rules::access_hook(&ctx),
+            ExitId::Uhrum__Waterfalls__Water_Pillar__ex__East_Waters_Edge_1 => rules::access_hook(&ctx),
+            ExitId::Uhrum__Waterfalls__West_24__ex__Artillery_Practice__East_24_1 => true,
+            ExitId::Uhrum__Waterfalls__West_24__ex__Below_Block_1 => rules::access_hover(&ctx),
+            ExitId::Uhrum__Waterfalls__West_25__ex__Below_Block_1 => rules::access_hover(&ctx),
+            ExitId::Uhrum__Waterfalls__West_25__ex__Siege_Corridor__East_25_1 => true,
+            ExitId::Uhrum__Waterfalls__West_27__ex__Center_Island_West_1 => rules::access_hover(&ctx),
+            ExitId::Uhrum__Waterfalls__West_27__ex__Large_Rock_1 => rules::access_hook(&ctx),
+            ExitId::Uhrum__Waterfalls__West_27__ex__Save_Room__East_1 => true,
+            ExitId::Uhrum__Waterfalls__West_Platform__ex__Green_Middle_Ledge_1 => rules::access_grab(&ctx),
+            ExitId::Uhrum__Waterfalls__West_Platform__ex__Green_Middle_Ledge_2 => rules::access_hook(&ctx),
+            ExitId::Uhrum__Waterfalls__West_Wall__ex__West_25_1 => rules::access_grab_and_climb(&ctx),
+            ExitId::Uhrum__Waterfalls__West_Wall__ex__West_25_2 => rules::access_hook(&ctx),
+            ExitId::Uhrum__Waterfalls__West_Water_Nook__ex__West_Water_Ledge_1 => rules::access_underwater_movement_and_grab(&ctx),
+            ExitId::Uhrum__Waterfalls__West_Water_Nook__ex__West_Water_Ledge_2 => rules::access_underwater_movement_and_hook(&ctx),
             ExitId::Uhrum__West_Entrance__Clear_Passage__ex__Portal_Stand_1 => rules::access_grab_and_climb(&ctx),
             ExitId::Uhrum__West_Entrance__Clear_Passage__ex__Portal_Stand_2 => rules::access_hook(&ctx),
             ExitId::Uhrum__West_Entrance__East_26__ex__Siege_Corridor__West_26_1 => true,
@@ -3847,6 +4021,15 @@ impl world::Exit for Exit {
             ExitId::Menu__Upgrade_Menu__Physiology__ex__Combat_1 => true,
             ExitId::Uhrum__Siege_Corridor__East_25__ex__Waterfalls__West_25_1 => true,
             ExitId::Uhrum__Siege_Corridor__West_26__ex__West_Entrance__East_26_1 => true,
+            ExitId::Uhrum__Waterfalls__East_24__ex__Tulip_Tower__West_24_1 => true,
+            ExitId::Uhrum__Waterfalls__East_24_in_Mid_air__ex__Tulip_Tower__West_24_in_Mid_air_1 => true,
+            ExitId::Uhrum__Waterfalls__East_25__ex__Annuna_Corridor__West_25_1 => true,
+            ExitId::Uhrum__Waterfalls__East_26__ex__Annuna_Corridor__West_26_1 => true,
+            ExitId::Uhrum__Waterfalls__East_27__ex__East_Lake__West_27_1 => true,
+            ExitId::Uhrum__Waterfalls__East_28__ex__East_Lake__West_28_1 => true,
+            ExitId::Uhrum__Waterfalls__West_24__ex__Artillery_Practice__East_24_1 => true,
+            ExitId::Uhrum__Waterfalls__West_25__ex__Siege_Corridor__East_25_1 => true,
+            ExitId::Uhrum__Waterfalls__West_27__ex__Save_Room__East_1 => true,
             ExitId::Uhrum__West_Entrance__East_26__ex__Siege_Corridor__West_26_1 => true,
             ExitId::Uhrum__West_Entrance__East_28__ex__Glitchy_Corridor__West_28_1 => true,
             ExitId::Uhrum__West_Entrance__Hidden_Passage_West__ex__Irikar__Lamassu__Hidden_Passage_East_1 => true,
@@ -4496,7 +4679,7 @@ pub struct Spot {
     pub actions: Range<usize>,
 }
 
-static RAW_SPOTS: [SpotId; 1047] = [
+static RAW_SPOTS: [SpotId; 1088] = [
     SpotId::None,
     SpotId::Amagi__Grid_31_19__East,
     SpotId::Amagi__Grid_31_19__West,
@@ -5486,6 +5669,11 @@ static RAW_SPOTS: [SpotId; 1047] = [
     SpotId::Menu__Upgrade_Menu__Drone,
     SpotId::Menu__Upgrade_Menu__Infection,
     SpotId::Menu__Upgrade_Menu__Physiology,
+    SpotId::Uhrum__Annuna_Corridor__West_25,
+    SpotId::Uhrum__Annuna_Corridor__West_26,
+    SpotId::Uhrum__Artillery_Practice__East_24,
+    SpotId::Uhrum__East_Lake__West_27,
+    SpotId::Uhrum__East_Lake__West_28,
     SpotId::Uhrum__Glitchy_Corridor__West_28,
     SpotId::Uhrum__Save_Room__East,
     SpotId::Uhrum__Save_Room__Save_Point,
@@ -5514,9 +5702,45 @@ static RAW_SPOTS: [SpotId; 1047] = [
     SpotId::Uhrum__Siege_Corridor__West_Rocky_Ledge,
     SpotId::Uhrum__Siege_Corridor__Western_Cache,
     SpotId::Uhrum__Siege_Corridor__Western_Rock,
+    SpotId::Uhrum__Tulip_Tower__West_24,
+    SpotId::Uhrum__Tulip_Tower__West_24_in_Mid_air,
+    SpotId::Uhrum__Waterfalls__Above_Block,
+    SpotId::Uhrum__Waterfalls__Barrier_East,
+    SpotId::Uhrum__Waterfalls__Barrier_West,
+    SpotId::Uhrum__Waterfalls__Below_Block,
+    SpotId::Uhrum__Waterfalls__Ceiling_Cache,
+    SpotId::Uhrum__Waterfalls__Ceiling_Opening,
+    SpotId::Uhrum__Waterfalls__Center_Island_East,
+    SpotId::Uhrum__Waterfalls__Center_Island_West,
+    SpotId::Uhrum__Waterfalls__East_24,
+    SpotId::Uhrum__Waterfalls__East_24_in_Mid_air,
+    SpotId::Uhrum__Waterfalls__East_25,
+    SpotId::Uhrum__Waterfalls__East_26,
+    SpotId::Uhrum__Waterfalls__East_27,
+    SpotId::Uhrum__Waterfalls__East_28,
+    SpotId::Uhrum__Waterfalls__East_Palm_Tree,
+    SpotId::Uhrum__Waterfalls__East_Water_Surface,
+    SpotId::Uhrum__Waterfalls__East_Waters_Edge,
+    SpotId::Uhrum__Waterfalls__Green_Middle_Ledge,
+    SpotId::Uhrum__Waterfalls__High_Platform,
+    SpotId::Uhrum__Waterfalls__Island_Water_West,
+    SpotId::Uhrum__Waterfalls__Large_Rock,
+    SpotId::Uhrum__Waterfalls__Ledge_Above_Palm,
+    SpotId::Uhrum__Waterfalls__Lower_East_Platform,
+    SpotId::Uhrum__Waterfalls__Medium_Rock,
+    SpotId::Uhrum__Waterfalls__Northeast_Ledge,
+    SpotId::Uhrum__Waterfalls__Small_Rock,
+    SpotId::Uhrum__Waterfalls__Water_Pillar,
+    SpotId::Uhrum__Waterfalls__Water_Slope,
     SpotId::Uhrum__Waterfalls__West_24,
     SpotId::Uhrum__Waterfalls__West_25,
     SpotId::Uhrum__Waterfalls__West_27,
+    SpotId::Uhrum__Waterfalls__West_Platform,
+    SpotId::Uhrum__Waterfalls__West_Wall,
+    SpotId::Uhrum__Waterfalls__West_Water_Ledge,
+    SpotId::Uhrum__Waterfalls__West_Water_Nook,
+    SpotId::Uhrum__Waterfalls__West_Water_Surface,
+    SpotId::Uhrum__Waterfalls__West_Waters_Edge,
     SpotId::Uhrum__West_Entrance__Clear_Passage,
     SpotId::Uhrum__West_Entrance__East_26,
     SpotId::Uhrum__West_Entrance__East_28,
@@ -6009,6 +6233,18 @@ lazy_static! {
             start: SpotId::Menu__Upgrade_Menu__Combat.into_usize(),
             end: SpotId::Menu__Upgrade_Menu__Physiology.into_usize() + 1,
         },
+        AreaId::Uhrum__Annuna_Corridor => Range {
+            start: SpotId::Uhrum__Annuna_Corridor__West_25.into_usize(),
+            end: SpotId::Uhrum__Annuna_Corridor__West_26.into_usize() + 1,
+        },
+        AreaId::Uhrum__Artillery_Practice => Range {
+            start: SpotId::Uhrum__Artillery_Practice__East_24.into_usize(),
+            end: SpotId::Uhrum__Artillery_Practice__East_24.into_usize() + 1,
+        },
+        AreaId::Uhrum__East_Lake => Range {
+            start: SpotId::Uhrum__East_Lake__West_27.into_usize(),
+            end: SpotId::Uhrum__East_Lake__West_28.into_usize() + 1,
+        },
         AreaId::Uhrum__Glitchy_Corridor => Range {
             start: SpotId::Uhrum__Glitchy_Corridor__West_28.into_usize(),
             end: SpotId::Uhrum__Glitchy_Corridor__West_28.into_usize() + 1,
@@ -6021,9 +6257,13 @@ lazy_static! {
             start: SpotId::Uhrum__Siege_Corridor__Center_Box.into_usize(),
             end: SpotId::Uhrum__Siege_Corridor__Western_Rock.into_usize() + 1,
         },
+        AreaId::Uhrum__Tulip_Tower => Range {
+            start: SpotId::Uhrum__Tulip_Tower__West_24.into_usize(),
+            end: SpotId::Uhrum__Tulip_Tower__West_24_in_Mid_air.into_usize() + 1,
+        },
         AreaId::Uhrum__Waterfalls => Range {
-            start: SpotId::Uhrum__Waterfalls__West_24.into_usize(),
-            end: SpotId::Uhrum__Waterfalls__West_27.into_usize() + 1,
+            start: SpotId::Uhrum__Waterfalls__Above_Block.into_usize(),
+            end: SpotId::Uhrum__Waterfalls__West_Waters_Edge.into_usize() + 1,
         },
         AreaId::Uhrum__West_Entrance => Range {
             start: SpotId::Uhrum__West_Entrance__Clear_Passage.into_usize(),
@@ -6058,7 +6298,7 @@ impl world::World for World {
     type Exit = Exit;
     type Action = Action;
     type Warp = Warp;
-    const NUM_LOCATIONS: u32 = 184;
+    const NUM_LOCATIONS: u32 = 195;
 
     fn objective_name(&self) -> String {
         format!("{}", self.objective)
@@ -6238,6 +6478,19 @@ impl world::World for World {
                 LocationId::Uhrum__West_Entrance__Lower_Wall_East__Mist_through_Wall,
             ],
             CanonId::Fast_Travel => vec![LocationId::Uhrum__Siege_Corridor__Upper_Rock_Item__Urn],
+            CanonId::Uhrum_Waterfall_Wall => vec![
+                LocationId::Uhrum__Waterfalls__Barrier_West__Charge_through_Wall,
+                LocationId::Uhrum__Waterfalls__Barrier_West__Spin_through_Wall,
+                LocationId::Uhrum__Waterfalls__Barrier_West__Mist_through_Wall,
+                LocationId::Uhrum__Waterfalls__Barrier_East__Charge_through_Wall,
+                LocationId::Uhrum__Waterfalls__Barrier_East__Spin_through_Wall,
+                LocationId::Uhrum__Waterfalls__Barrier_East__Mist_through_Wall,
+            ],
+            CanonId::Uhrum_Waterfalls_Block => vec![
+                LocationId::Uhrum__Waterfalls__Below_Block__Shockwave_Block,
+                LocationId::Uhrum__Waterfalls__Above_Block__Block,
+                LocationId::Uhrum__Waterfalls__East_26__Block,
+            ],
         }
     }
 
@@ -6267,6 +6520,7 @@ impl world::World for World {
                 LocationId::Irikar_Breach__Gauntlet__Hidden_Path_Reward__Item,
                 LocationId::Irikar_Breach__Worm_Rave__Corner__Item,
                 LocationId::Irikar__Hub__Royal_Storage_in_Wall__Item,
+                LocationId::Uhrum__Waterfalls__Ceiling_Cache__Flask,
             ],
             Item::Underwater_Movement => vec![LocationId::Amagi__Liru_Room__Shrine__Item],
             Item::Amagi_Dragon_Eye_Passage => {
@@ -6544,6 +6798,20 @@ impl world::World for World {
             Item::Refill => vec![LocationId::Uhrum__West_Entrance__Sand__Refill],
             Item::Fast_Travel => vec![LocationId::Uhrum__Siege_Corridor__Upper_Rock_Item__Urn],
             Item::Storm_Bomb => vec![LocationId::Uhrum__Siege_Corridor__Pond__Item],
+            Item::Uhrum_Waterfall_Wall => vec![
+                LocationId::Uhrum__Waterfalls__Barrier_West__Charge_through_Wall,
+                LocationId::Uhrum__Waterfalls__Barrier_West__Spin_through_Wall,
+                LocationId::Uhrum__Waterfalls__Barrier_West__Mist_through_Wall,
+                LocationId::Uhrum__Waterfalls__Barrier_East__Charge_through_Wall,
+                LocationId::Uhrum__Waterfalls__Barrier_East__Spin_through_Wall,
+                LocationId::Uhrum__Waterfalls__Barrier_East__Mist_through_Wall,
+            ],
+            Item::Uhrum_Waterfalls_Block => vec![
+                LocationId::Uhrum__Waterfalls__Below_Block__Shockwave_Block,
+                LocationId::Uhrum__Waterfalls__Above_Block__Block,
+                LocationId::Uhrum__Waterfalls__East_26__Block,
+            ],
+            Item::Suspension_Bridge => vec![LocationId::Uhrum__Waterfalls__West_Water_Nook__Tablet],
             _ => Vec::new(),
         }
     }
@@ -6959,6 +7227,29 @@ impl world::World for World {
                 SpotId::Uhrum__Siege_Corridor__Upper_Rock_Item
             }
             LocationId::Uhrum__Siege_Corridor__Pond__Item => SpotId::Uhrum__Siege_Corridor__Pond,
+            LocationId::Uhrum__Waterfalls__Ceiling_Cache__Flask => {
+                SpotId::Uhrum__Waterfalls__Ceiling_Cache
+            }
+            LocationId::Uhrum__Waterfalls__Barrier_West__Charge_through_Wall
+            | LocationId::Uhrum__Waterfalls__Barrier_West__Mist_through_Wall
+            | LocationId::Uhrum__Waterfalls__Barrier_West__Spin_through_Wall => {
+                SpotId::Uhrum__Waterfalls__Barrier_West
+            }
+            LocationId::Uhrum__Waterfalls__Barrier_East__Charge_through_Wall
+            | LocationId::Uhrum__Waterfalls__Barrier_East__Mist_through_Wall
+            | LocationId::Uhrum__Waterfalls__Barrier_East__Spin_through_Wall => {
+                SpotId::Uhrum__Waterfalls__Barrier_East
+            }
+            LocationId::Uhrum__Waterfalls__Below_Block__Shockwave_Block => {
+                SpotId::Uhrum__Waterfalls__Below_Block
+            }
+            LocationId::Uhrum__Waterfalls__Above_Block__Block => {
+                SpotId::Uhrum__Waterfalls__Above_Block
+            }
+            LocationId::Uhrum__Waterfalls__East_26__Block => SpotId::Uhrum__Waterfalls__East_26,
+            LocationId::Uhrum__Waterfalls__West_Water_Nook__Tablet => {
+                SpotId::Uhrum__Waterfalls__West_Water_Nook
+            }
         }
     }
 
@@ -7807,6 +8098,37 @@ impl world::World for World {
             ExitId::Uhrum__Siege_Corridor__Pond__ex__East_Hill_1 | ExitId:: Uhrum__Siege_Corridor__Pond__ex__East_Hill_2 => SpotId::Uhrum__Siege_Corridor__Pond,
             ExitId::Uhrum__Siege_Corridor__East_Hill__ex__Mideast_Tree_1 | ExitId:: Uhrum__Siege_Corridor__East_Hill__ex__Upper_Rock_East_1 | ExitId:: Uhrum__Siege_Corridor__East_Hill__ex__Upper_Rock_East_2 | ExitId:: Uhrum__Siege_Corridor__East_Hill__ex__Upper_Rock_East_3 => SpotId::Uhrum__Siege_Corridor__East_Hill,
             ExitId::Uhrum__Siege_Corridor__East_25__ex__Waterfalls__West_25_1 => SpotId::Uhrum__Siege_Corridor__East_25,
+            ExitId::Uhrum__Waterfalls__West_25__ex__Below_Block_1 | ExitId:: Uhrum__Waterfalls__West_25__ex__Siege_Corridor__East_25_1 => SpotId::Uhrum__Waterfalls__West_25,
+            ExitId::Uhrum__Waterfalls__West_24__ex__Below_Block_1 | ExitId:: Uhrum__Waterfalls__West_24__ex__Artillery_Practice__East_24_1 => SpotId::Uhrum__Waterfalls__West_24,
+            ExitId::Uhrum__Waterfalls__West_27__ex__Large_Rock_1 | ExitId:: Uhrum__Waterfalls__West_27__ex__Center_Island_West_1 | ExitId:: Uhrum__Waterfalls__West_27__ex__Save_Room__East_1 => SpotId::Uhrum__Waterfalls__West_27,
+            ExitId::Uhrum__Waterfalls__Ledge_Above_Palm__ex__High_Platform_1 | ExitId:: Uhrum__Waterfalls__Ledge_Above_Palm__ex__Northeast_Ledge_1 => SpotId::Uhrum__Waterfalls__Ledge_Above_Palm,
+            ExitId::Uhrum__Waterfalls__High_Platform__ex__Northeast_Ledge_1 | ExitId:: Uhrum__Waterfalls__High_Platform__ex__Northeast_Ledge_2 => SpotId::Uhrum__Waterfalls__High_Platform,
+            ExitId::Uhrum__Waterfalls__Ceiling_Opening__ex__Ceiling_Cache_1 | ExitId:: Uhrum__Waterfalls__Ceiling_Opening__ex__West_24_1 | ExitId:: Uhrum__Waterfalls__Ceiling_Opening__ex__Barrier_West_1 => SpotId::Uhrum__Waterfalls__Ceiling_Opening,
+            ExitId::Uhrum__Waterfalls__Ceiling_Cache__ex__Ceiling_Opening_1 => SpotId::Uhrum__Waterfalls__Ceiling_Cache,
+            ExitId::Uhrum__Waterfalls__Northeast_Ledge__ex__Ceiling_Opening_1 => SpotId::Uhrum__Waterfalls__Northeast_Ledge,
+            ExitId::Uhrum__Waterfalls__Barrier_West__ex__Ceiling_Opening_1 | ExitId:: Uhrum__Waterfalls__Barrier_West__ex__Barrier_East_1 => SpotId::Uhrum__Waterfalls__Barrier_West,
+            ExitId::Uhrum__Waterfalls__Barrier_West__Charge_through_Wall | ExitId::Uhrum__Waterfalls__Barrier_West__Mist_through_Wall | ExitId::Uhrum__Waterfalls__Barrier_West__Spin_through_Wall => SpotId::Uhrum__Waterfalls__Barrier_West,
+            ExitId::Uhrum__Waterfalls__Barrier_East__ex__Barrier_West_1 | ExitId:: Uhrum__Waterfalls__Barrier_East__ex__East_24_in_Mid_air_1 => SpotId::Uhrum__Waterfalls__Barrier_East,
+            ExitId::Uhrum__Waterfalls__Barrier_East__Charge_through_Wall | ExitId::Uhrum__Waterfalls__Barrier_East__Mist_through_Wall | ExitId::Uhrum__Waterfalls__Barrier_East__Spin_through_Wall => SpotId::Uhrum__Waterfalls__Barrier_East,
+            ExitId::Uhrum__Waterfalls__East_24__ex__Tulip_Tower__West_24_1 => SpotId::Uhrum__Waterfalls__East_24,
+            ExitId::Uhrum__Waterfalls__East_24_in_Mid_air__ex__Barrier_East_1 | ExitId:: Uhrum__Waterfalls__East_24_in_Mid_air__ex__Tulip_Tower__West_24_in_Mid_air_1 => SpotId::Uhrum__Waterfalls__East_24_in_Mid_air,
+            ExitId::Uhrum__Waterfalls__West_Wall__ex__West_25_1 | ExitId:: Uhrum__Waterfalls__West_Wall__ex__West_25_2 => SpotId::Uhrum__Waterfalls__West_Wall,
+            ExitId::Uhrum__Waterfalls__West_Platform__ex__Green_Middle_Ledge_1 | ExitId:: Uhrum__Waterfalls__West_Platform__ex__Green_Middle_Ledge_2 => SpotId::Uhrum__Waterfalls__West_Platform,
+            ExitId::Uhrum__Waterfalls__Large_Rock__ex__Medium_Rock_1 | ExitId:: Uhrum__Waterfalls__Large_Rock__ex__West_Wall_1 => SpotId::Uhrum__Waterfalls__Large_Rock,
+            ExitId::Uhrum__Waterfalls__Medium_Rock__ex__West_Wall_1 | ExitId:: Uhrum__Waterfalls__Medium_Rock__ex__West_Platform_1 | ExitId:: Uhrum__Waterfalls__Medium_Rock__ex__Green_Middle_Ledge_1 => SpotId::Uhrum__Waterfalls__Medium_Rock,
+            ExitId::Uhrum__Waterfalls__Lower_East_Platform__ex__Small_Rock_1 | ExitId:: Uhrum__Waterfalls__Lower_East_Platform__ex__Below_Block_1 => SpotId::Uhrum__Waterfalls__Lower_East_Platform,
+            ExitId::Uhrum__Waterfalls__Below_Block__ex__Small_Rock_1 | ExitId:: Uhrum__Waterfalls__Below_Block__ex__Above_Block_1 | ExitId:: Uhrum__Waterfalls__Below_Block__ex__East_26_1 | ExitId:: Uhrum__Waterfalls__Below_Block__ex__Above_Block_2 | ExitId:: Uhrum__Waterfalls__Below_Block__ex__East_26_2 => SpotId::Uhrum__Waterfalls__Below_Block,
+            ExitId::Uhrum__Waterfalls__Above_Block__ex__Below_Block_1 | ExitId:: Uhrum__Waterfalls__Above_Block__ex__East_25_1 => SpotId::Uhrum__Waterfalls__Above_Block,
+            ExitId::Uhrum__Waterfalls__East_26__ex__Below_Block_1 | ExitId:: Uhrum__Waterfalls__East_26__ex__Annuna_Corridor__West_26_1 => SpotId::Uhrum__Waterfalls__East_26,
+            ExitId::Uhrum__Waterfalls__East_25__ex__Annuna_Corridor__West_25_1 => SpotId::Uhrum__Waterfalls__East_25,
+            ExitId::Uhrum__Waterfalls__Green_Middle_Ledge__ex__Below_Block_1 => SpotId::Uhrum__Waterfalls__Green_Middle_Ledge,
+            ExitId::Uhrum__Waterfalls__East_Palm_Tree__ex__Ledge_Above_Palm_1 | ExitId:: Uhrum__Waterfalls__East_Palm_Tree__ex__Ledge_Above_Palm_2 => SpotId::Uhrum__Waterfalls__East_Palm_Tree,
+            ExitId::Uhrum__Waterfalls__Center_Island_West__ex__West_27_1 => SpotId::Uhrum__Waterfalls__Center_Island_West,
+            ExitId::Uhrum__Waterfalls__Center_Island_East__ex__Lower_East_Platform_1 | ExitId:: Uhrum__Waterfalls__Center_Island_East__ex__East_Waters_Edge_1 => SpotId::Uhrum__Waterfalls__Center_Island_East,
+            ExitId::Uhrum__Waterfalls__West_Water_Nook__ex__West_Water_Ledge_1 | ExitId:: Uhrum__Waterfalls__West_Water_Nook__ex__West_Water_Ledge_2 => SpotId::Uhrum__Waterfalls__West_Water_Nook,
+            ExitId::Uhrum__Waterfalls__Water_Pillar__ex__Center_Island_East_1 | ExitId:: Uhrum__Waterfalls__Water_Pillar__ex__Center_Island_East_2 | ExitId:: Uhrum__Waterfalls__Water_Pillar__ex__East_Waters_Edge_1 => SpotId::Uhrum__Waterfalls__Water_Pillar,
+            ExitId::Uhrum__Waterfalls__East_28__ex__East_Lake__West_28_1 => SpotId::Uhrum__Waterfalls__East_28,
+            ExitId::Uhrum__Waterfalls__East_27__ex__East_Lake__West_27_1 => SpotId::Uhrum__Waterfalls__East_27,
             _ => SpotId::None,
         }
     }
@@ -8493,6 +8815,21 @@ impl world::World for World {
             | SpotId::Uhrum__Siege_Corridor__Upper_Rock_Item
             | SpotId::Uhrum__Siege_Corridor__West_26
             | SpotId::Uhrum__Siege_Corridor__Western_Cache
+            | SpotId::Uhrum__Waterfalls__Above_Block
+            | SpotId::Uhrum__Waterfalls__Barrier_East
+            | SpotId::Uhrum__Waterfalls__Barrier_West
+            | SpotId::Uhrum__Waterfalls__Below_Block
+            | SpotId::Uhrum__Waterfalls__Ceiling_Cache
+            | SpotId::Uhrum__Waterfalls__East_24
+            | SpotId::Uhrum__Waterfalls__East_24_in_Mid_air
+            | SpotId::Uhrum__Waterfalls__East_25
+            | SpotId::Uhrum__Waterfalls__East_26
+            | SpotId::Uhrum__Waterfalls__East_27
+            | SpotId::Uhrum__Waterfalls__East_28
+            | SpotId::Uhrum__Waterfalls__West_24
+            | SpotId::Uhrum__Waterfalls__West_25
+            | SpotId::Uhrum__Waterfalls__West_27
+            | SpotId::Uhrum__Waterfalls__West_Water_Nook
             | SpotId::Uhrum__West_Entrance__East_26
             | SpotId::Uhrum__West_Entrance__East_28
             | SpotId::Uhrum__West_Entrance__Gate_Switch
@@ -8589,6 +8926,7 @@ impl World {
                     | Item::Researchers_Missing
                     | Item::Royal_Dagger
                     | Item::Storm_Bomb
+                    | Item::Suspension_Bridge
                     | Item::Terminal_Breakthrough_1
                     | Item::Terminal_Breakthrough_2
                     | Item::The_Ideal_Kiengir
@@ -8618,6 +8956,7 @@ impl World {
                     | Item::Ranged_Speed_3
                     | Item::Refill
                     | Item::Royal_Dagger
+                    | Item::Suspension_Bridge
                     | Item::Udusan
             ),
             _ => false,
@@ -10095,6 +10434,94 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
             id: LocationId::Uhrum__Siege_Corridor__Pond__Item,
             canonical: CanonId::None,
             item: Item::Storm_Bomb,
+            price: Currency::Free,
+            time: 0,
+            exit_id: None,
+        },
+        LocationId::Uhrum__Waterfalls__Ceiling_Cache__Flask => Location {
+            id: LocationId::Uhrum__Waterfalls__Ceiling_Cache__Flask,
+            canonical: CanonId::None,
+            item: Item::Flask,
+            price: Currency::Free,
+            time: 5500,
+            exit_id: None,
+        },
+        LocationId::Uhrum__Waterfalls__Barrier_West__Charge_through_Wall => Location {
+            id: LocationId::Uhrum__Waterfalls__Barrier_West__Charge_through_Wall,
+            canonical: CanonId::Uhrum_Waterfall_Wall,
+            item: Item::Uhrum_Waterfall_Wall,
+            price: Currency::Free,
+            time: 0,
+            exit_id: Some(ExitId::Uhrum__Waterfalls__Barrier_West__Charge_through_Wall),
+        },
+        LocationId::Uhrum__Waterfalls__Barrier_West__Spin_through_Wall => Location {
+            id: LocationId::Uhrum__Waterfalls__Barrier_West__Spin_through_Wall,
+            canonical: CanonId::Uhrum_Waterfall_Wall,
+            item: Item::Uhrum_Waterfall_Wall,
+            price: Currency::Free,
+            time: 0,
+            exit_id: Some(ExitId::Uhrum__Waterfalls__Barrier_West__Spin_through_Wall),
+        },
+        LocationId::Uhrum__Waterfalls__Barrier_West__Mist_through_Wall => Location {
+            id: LocationId::Uhrum__Waterfalls__Barrier_West__Mist_through_Wall,
+            canonical: CanonId::Uhrum_Waterfall_Wall,
+            item: Item::Uhrum_Waterfall_Wall,
+            price: Currency::Energy(20),
+            time: 0,
+            exit_id: Some(ExitId::Uhrum__Waterfalls__Barrier_West__Mist_through_Wall),
+        },
+        LocationId::Uhrum__Waterfalls__Barrier_East__Charge_through_Wall => Location {
+            id: LocationId::Uhrum__Waterfalls__Barrier_East__Charge_through_Wall,
+            canonical: CanonId::Uhrum_Waterfall_Wall,
+            item: Item::Uhrum_Waterfall_Wall,
+            price: Currency::Free,
+            time: 0,
+            exit_id: Some(ExitId::Uhrum__Waterfalls__Barrier_East__Charge_through_Wall),
+        },
+        LocationId::Uhrum__Waterfalls__Barrier_East__Spin_through_Wall => Location {
+            id: LocationId::Uhrum__Waterfalls__Barrier_East__Spin_through_Wall,
+            canonical: CanonId::Uhrum_Waterfall_Wall,
+            item: Item::Uhrum_Waterfall_Wall,
+            price: Currency::Free,
+            time: 0,
+            exit_id: Some(ExitId::Uhrum__Waterfalls__Barrier_East__Spin_through_Wall),
+        },
+        LocationId::Uhrum__Waterfalls__Barrier_East__Mist_through_Wall => Location {
+            id: LocationId::Uhrum__Waterfalls__Barrier_East__Mist_through_Wall,
+            canonical: CanonId::Uhrum_Waterfall_Wall,
+            item: Item::Uhrum_Waterfall_Wall,
+            price: Currency::Energy(20),
+            time: 0,
+            exit_id: Some(ExitId::Uhrum__Waterfalls__Barrier_East__Mist_through_Wall),
+        },
+        LocationId::Uhrum__Waterfalls__Below_Block__Shockwave_Block => Location {
+            id: LocationId::Uhrum__Waterfalls__Below_Block__Shockwave_Block,
+            canonical: CanonId::Uhrum_Waterfalls_Block,
+            item: Item::Uhrum_Waterfalls_Block,
+            price: Currency::Energy(100),
+            time: 3500,
+            exit_id: None,
+        },
+        LocationId::Uhrum__Waterfalls__Above_Block__Block => Location {
+            id: LocationId::Uhrum__Waterfalls__Above_Block__Block,
+            canonical: CanonId::Uhrum_Waterfalls_Block,
+            item: Item::Uhrum_Waterfalls_Block,
+            price: Currency::Energy(100),
+            time: 3500,
+            exit_id: None,
+        },
+        LocationId::Uhrum__Waterfalls__East_26__Block => Location {
+            id: LocationId::Uhrum__Waterfalls__East_26__Block,
+            canonical: CanonId::Uhrum_Waterfalls_Block,
+            item: Item::Uhrum_Waterfalls_Block,
+            price: Currency::Energy(100),
+            time: 3500,
+            exit_id: None,
+        },
+        LocationId::Uhrum__Waterfalls__West_Water_Nook__Tablet => Location {
+            id: LocationId::Uhrum__Waterfalls__West_Water_Nook__Tablet,
+            canonical: CanonId::None,
+            item: Item::Suspension_Bridge,
             price: Currency::Free,
             time: 0,
             exit_id: None,
@@ -16814,6 +17241,447 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
             id: ExitId::Uhrum__Siege_Corridor__East_25__ex__Waterfalls__West_25_1,
             time: 1350,
             dest: SpotId::Uhrum__Waterfalls__West_25,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Uhrum__Waterfalls__West_25__ex__Below_Block_1 => Exit {
+            id: ExitId::Uhrum__Waterfalls__West_25__ex__Below_Block_1,
+            time: 5438,
+            dest: SpotId::Uhrum__Waterfalls__Below_Block,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Uhrum__Waterfalls__West_25__ex__Siege_Corridor__East_25_1 => Exit {
+            id: ExitId::Uhrum__Waterfalls__West_25__ex__Siege_Corridor__East_25_1,
+            time: 1350,
+            dest: SpotId::Uhrum__Siege_Corridor__East_25,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Uhrum__Waterfalls__West_24__ex__Below_Block_1 => Exit {
+            id: ExitId::Uhrum__Waterfalls__West_24__ex__Below_Block_1,
+            time: 5438,
+            dest: SpotId::Uhrum__Waterfalls__Below_Block,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Uhrum__Waterfalls__West_24__ex__Artillery_Practice__East_24_1 => Exit {
+            id: ExitId::Uhrum__Waterfalls__West_24__ex__Artillery_Practice__East_24_1,
+            time: 1350,
+            dest: SpotId::Uhrum__Artillery_Practice__East_24,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Uhrum__Waterfalls__West_27__ex__Large_Rock_1 => Exit {
+            id: ExitId::Uhrum__Waterfalls__West_27__ex__Large_Rock_1,
+            time: 1754,
+            dest: SpotId::Uhrum__Waterfalls__Large_Rock,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Uhrum__Waterfalls__West_27__ex__Center_Island_West_1 => Exit {
+            id: ExitId::Uhrum__Waterfalls__West_27__ex__Center_Island_West_1,
+            time: 2280,
+            dest: SpotId::Uhrum__Waterfalls__Center_Island_West,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Uhrum__Waterfalls__West_27__ex__Save_Room__East_1 => Exit {
+            id: ExitId::Uhrum__Waterfalls__West_27__ex__Save_Room__East_1,
+            time: 1350,
+            dest: SpotId::Uhrum__Save_Room__East,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Uhrum__Waterfalls__Ledge_Above_Palm__ex__High_Platform_1 => Exit {
+            id: ExitId::Uhrum__Waterfalls__Ledge_Above_Palm__ex__High_Platform_1,
+            time: 1403,
+            dest: SpotId::Uhrum__Waterfalls__High_Platform,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Uhrum__Waterfalls__Ledge_Above_Palm__ex__Northeast_Ledge_1 => Exit {
+            id: ExitId::Uhrum__Waterfalls__Ledge_Above_Palm__ex__Northeast_Ledge_1,
+            time: 1200,
+            dest: SpotId::Uhrum__Waterfalls__Northeast_Ledge,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Uhrum__Waterfalls__High_Platform__ex__Northeast_Ledge_1 => Exit {
+            id: ExitId::Uhrum__Waterfalls__High_Platform__ex__Northeast_Ledge_1,
+            time: 1200,
+            dest: SpotId::Uhrum__Waterfalls__Northeast_Ledge,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Uhrum__Waterfalls__High_Platform__ex__Northeast_Ledge_2 => Exit {
+            id: ExitId::Uhrum__Waterfalls__High_Platform__ex__Northeast_Ledge_2,
+            time: 1052,
+            dest: SpotId::Uhrum__Waterfalls__Northeast_Ledge,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Uhrum__Waterfalls__Ceiling_Opening__ex__Ceiling_Cache_1 => Exit {
+            id: ExitId::Uhrum__Waterfalls__Ceiling_Opening__ex__Ceiling_Cache_1,
+            time: 1228,
+            dest: SpotId::Uhrum__Waterfalls__Ceiling_Cache,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Uhrum__Waterfalls__Ceiling_Opening__ex__West_24_1 => Exit {
+            id: ExitId::Uhrum__Waterfalls__Ceiling_Opening__ex__West_24_1,
+            time: 3859,
+            dest: SpotId::Uhrum__Waterfalls__West_24,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Uhrum__Waterfalls__Ceiling_Opening__ex__Barrier_West_1 => Exit {
+            id: ExitId::Uhrum__Waterfalls__Ceiling_Opening__ex__Barrier_West_1,
+            time: 1578,
+            dest: SpotId::Uhrum__Waterfalls__Barrier_West,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Uhrum__Waterfalls__Ceiling_Cache__ex__Ceiling_Opening_1 => Exit {
+            id: ExitId::Uhrum__Waterfalls__Ceiling_Cache__ex__Ceiling_Opening_1,
+            time: 1000,
+            dest: SpotId::Uhrum__Waterfalls__Ceiling_Opening,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Uhrum__Waterfalls__Northeast_Ledge__ex__Ceiling_Opening_1 => Exit {
+            id: ExitId::Uhrum__Waterfalls__Northeast_Ledge__ex__Ceiling_Opening_1,
+            time: 1200,
+            dest: SpotId::Uhrum__Waterfalls__Ceiling_Opening,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Uhrum__Waterfalls__Barrier_West__ex__Ceiling_Opening_1 => Exit {
+            id: ExitId::Uhrum__Waterfalls__Barrier_West__ex__Ceiling_Opening_1,
+            time: 1578,
+            dest: SpotId::Uhrum__Waterfalls__Ceiling_Opening,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Uhrum__Waterfalls__Barrier_West__ex__Barrier_East_1 => Exit {
+            id: ExitId::Uhrum__Waterfalls__Barrier_West__ex__Barrier_East_1,
+            time: 350,
+            dest: SpotId::Uhrum__Waterfalls__Barrier_East,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Uhrum__Waterfalls__Barrier_West__Charge_through_Wall => Exit {
+            id: ExitId::Uhrum__Waterfalls__Barrier_West__Charge_through_Wall,
+            time: 1000,
+            dest: SpotId::Uhrum__Waterfalls__Barrier_East,
+            price: Currency::Free,
+            loc_id: Some(LocationId::Uhrum__Waterfalls__Barrier_West__Charge_through_Wall),
+        },
+        ExitId::Uhrum__Waterfalls__Barrier_West__Spin_through_Wall => Exit {
+            id: ExitId::Uhrum__Waterfalls__Barrier_West__Spin_through_Wall,
+            time: 1000,
+            dest: SpotId::Uhrum__Waterfalls__Barrier_East,
+            price: Currency::Free,
+            loc_id: Some(LocationId::Uhrum__Waterfalls__Barrier_West__Spin_through_Wall),
+        },
+        ExitId::Uhrum__Waterfalls__Barrier_West__Mist_through_Wall => Exit {
+            id: ExitId::Uhrum__Waterfalls__Barrier_West__Mist_through_Wall,
+            time: 1000,
+            dest: SpotId::Uhrum__Waterfalls__Barrier_East,
+            price: Currency::Free,
+            loc_id: Some(LocationId::Uhrum__Waterfalls__Barrier_West__Mist_through_Wall),
+        },
+        ExitId::Uhrum__Waterfalls__Barrier_East__ex__Barrier_West_1 => Exit {
+            id: ExitId::Uhrum__Waterfalls__Barrier_East__ex__Barrier_West_1,
+            time: 350,
+            dest: SpotId::Uhrum__Waterfalls__Barrier_West,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Uhrum__Waterfalls__Barrier_East__ex__East_24_in_Mid_air_1 => Exit {
+            id: ExitId::Uhrum__Waterfalls__Barrier_East__ex__East_24_in_Mid_air_1,
+            time: 877,
+            dest: SpotId::Uhrum__Waterfalls__East_24_in_Mid_air,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Uhrum__Waterfalls__Barrier_East__Charge_through_Wall => Exit {
+            id: ExitId::Uhrum__Waterfalls__Barrier_East__Charge_through_Wall,
+            time: 1000,
+            dest: SpotId::Uhrum__Waterfalls__Barrier_West,
+            price: Currency::Free,
+            loc_id: Some(LocationId::Uhrum__Waterfalls__Barrier_East__Charge_through_Wall),
+        },
+        ExitId::Uhrum__Waterfalls__Barrier_East__Spin_through_Wall => Exit {
+            id: ExitId::Uhrum__Waterfalls__Barrier_East__Spin_through_Wall,
+            time: 1000,
+            dest: SpotId::Uhrum__Waterfalls__Barrier_West,
+            price: Currency::Free,
+            loc_id: Some(LocationId::Uhrum__Waterfalls__Barrier_East__Spin_through_Wall),
+        },
+        ExitId::Uhrum__Waterfalls__Barrier_East__Mist_through_Wall => Exit {
+            id: ExitId::Uhrum__Waterfalls__Barrier_East__Mist_through_Wall,
+            time: 1000,
+            dest: SpotId::Uhrum__Waterfalls__Barrier_West,
+            price: Currency::Free,
+            loc_id: Some(LocationId::Uhrum__Waterfalls__Barrier_East__Mist_through_Wall),
+        },
+        ExitId::Uhrum__Waterfalls__East_24__ex__Tulip_Tower__West_24_1 => Exit {
+            id: ExitId::Uhrum__Waterfalls__East_24__ex__Tulip_Tower__West_24_1,
+            time: 1350,
+            dest: SpotId::Uhrum__Tulip_Tower__West_24,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Uhrum__Waterfalls__East_24_in_Mid_air__ex__Barrier_East_1 => Exit {
+            id: ExitId::Uhrum__Waterfalls__East_24_in_Mid_air__ex__Barrier_East_1,
+            time: 877,
+            dest: SpotId::Uhrum__Waterfalls__Barrier_East,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Uhrum__Waterfalls__East_24_in_Mid_air__ex__Tulip_Tower__West_24_in_Mid_air_1 => Exit {
+            id: ExitId::Uhrum__Waterfalls__East_24_in_Mid_air__ex__Tulip_Tower__West_24_in_Mid_air_1,
+            time: 1350,
+            dest: SpotId::Uhrum__Tulip_Tower__West_24_in_Mid_air,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Uhrum__Waterfalls__West_Wall__ex__West_25_1 => Exit {
+            id: ExitId::Uhrum__Waterfalls__West_Wall__ex__West_25_1,
+            time: 4200,
+            dest: SpotId::Uhrum__Waterfalls__West_25,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Uhrum__Waterfalls__West_Wall__ex__West_25_2 => Exit {
+            id: ExitId::Uhrum__Waterfalls__West_Wall__ex__West_25_2,
+            time: 3000,
+            dest: SpotId::Uhrum__Waterfalls__West_25,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Uhrum__Waterfalls__West_Platform__ex__Green_Middle_Ledge_1 => Exit {
+            id: ExitId::Uhrum__Waterfalls__West_Platform__ex__Green_Middle_Ledge_1,
+            time: 3000,
+            dest: SpotId::Uhrum__Waterfalls__Green_Middle_Ledge,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Uhrum__Waterfalls__West_Platform__ex__Green_Middle_Ledge_2 => Exit {
+            id: ExitId::Uhrum__Waterfalls__West_Platform__ex__Green_Middle_Ledge_2,
+            time: 2456,
+            dest: SpotId::Uhrum__Waterfalls__Green_Middle_Ledge,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Uhrum__Waterfalls__Large_Rock__ex__Medium_Rock_1 => Exit {
+            id: ExitId::Uhrum__Waterfalls__Large_Rock__ex__Medium_Rock_1,
+            time: 1200,
+            dest: SpotId::Uhrum__Waterfalls__Medium_Rock,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Uhrum__Waterfalls__Large_Rock__ex__West_Wall_1 => Exit {
+            id: ExitId::Uhrum__Waterfalls__Large_Rock__ex__West_Wall_1,
+            time: 1200,
+            dest: SpotId::Uhrum__Waterfalls__West_Wall,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Uhrum__Waterfalls__Medium_Rock__ex__West_Wall_1 => Exit {
+            id: ExitId::Uhrum__Waterfalls__Medium_Rock__ex__West_Wall_1,
+            time: 1578,
+            dest: SpotId::Uhrum__Waterfalls__West_Wall,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Uhrum__Waterfalls__Medium_Rock__ex__West_Platform_1 => Exit {
+            id: ExitId::Uhrum__Waterfalls__Medium_Rock__ex__West_Platform_1,
+            time: 1200,
+            dest: SpotId::Uhrum__Waterfalls__West_Platform,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Uhrum__Waterfalls__Medium_Rock__ex__Green_Middle_Ledge_1 => Exit {
+            id: ExitId::Uhrum__Waterfalls__Medium_Rock__ex__Green_Middle_Ledge_1,
+            time: 3000,
+            dest: SpotId::Uhrum__Waterfalls__Green_Middle_Ledge,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Uhrum__Waterfalls__Lower_East_Platform__ex__Small_Rock_1 => Exit {
+            id: ExitId::Uhrum__Waterfalls__Lower_East_Platform__ex__Small_Rock_1,
+            time: 1403,
+            dest: SpotId::Uhrum__Waterfalls__Small_Rock,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Uhrum__Waterfalls__Lower_East_Platform__ex__Below_Block_1 => Exit {
+            id: ExitId::Uhrum__Waterfalls__Lower_East_Platform__ex__Below_Block_1,
+            time: 1000,
+            dest: SpotId::Uhrum__Waterfalls__Below_Block,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Uhrum__Waterfalls__Below_Block__ex__Small_Rock_1 => Exit {
+            id: ExitId::Uhrum__Waterfalls__Below_Block__ex__Small_Rock_1,
+            time: 2105,
+            dest: SpotId::Uhrum__Waterfalls__Small_Rock,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Uhrum__Waterfalls__Below_Block__ex__Above_Block_1 => Exit {
+            id: ExitId::Uhrum__Waterfalls__Below_Block__ex__Above_Block_1,
+            time: 1200,
+            dest: SpotId::Uhrum__Waterfalls__Above_Block,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Uhrum__Waterfalls__Below_Block__ex__East_26_1 => Exit {
+            id: ExitId::Uhrum__Waterfalls__Below_Block__ex__East_26_1,
+            time: 1228,
+            dest: SpotId::Uhrum__Waterfalls__East_26,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Uhrum__Waterfalls__Below_Block__ex__Above_Block_2 => Exit {
+            id: ExitId::Uhrum__Waterfalls__Below_Block__ex__Above_Block_2,
+            time: 600,
+            dest: SpotId::Uhrum__Waterfalls__Above_Block,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Uhrum__Waterfalls__Below_Block__ex__East_26_2 => Exit {
+            id: ExitId::Uhrum__Waterfalls__Below_Block__ex__East_26_2,
+            time: 1228,
+            dest: SpotId::Uhrum__Waterfalls__East_26,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Uhrum__Waterfalls__Above_Block__ex__Below_Block_1 => Exit {
+            id: ExitId::Uhrum__Waterfalls__Above_Block__ex__Below_Block_1,
+            time: 349,
+            dest: SpotId::Uhrum__Waterfalls__Below_Block,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Uhrum__Waterfalls__Above_Block__ex__East_25_1 => Exit {
+            id: ExitId::Uhrum__Waterfalls__Above_Block__ex__East_25_1,
+            time: 3000,
+            dest: SpotId::Uhrum__Waterfalls__East_25,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Uhrum__Waterfalls__East_26__ex__Below_Block_1 => Exit {
+            id: ExitId::Uhrum__Waterfalls__East_26__ex__Below_Block_1,
+            time: 1228,
+            dest: SpotId::Uhrum__Waterfalls__Below_Block,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Uhrum__Waterfalls__East_26__ex__Annuna_Corridor__West_26_1 => Exit {
+            id: ExitId::Uhrum__Waterfalls__East_26__ex__Annuna_Corridor__West_26_1,
+            time: 1350,
+            dest: SpotId::Uhrum__Annuna_Corridor__West_26,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Uhrum__Waterfalls__East_25__ex__Annuna_Corridor__West_25_1 => Exit {
+            id: ExitId::Uhrum__Waterfalls__East_25__ex__Annuna_Corridor__West_25_1,
+            time: 1350,
+            dest: SpotId::Uhrum__Annuna_Corridor__West_25,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Uhrum__Waterfalls__Green_Middle_Ledge__ex__Below_Block_1 => Exit {
+            id: ExitId::Uhrum__Waterfalls__Green_Middle_Ledge__ex__Below_Block_1,
+            time: 1403,
+            dest: SpotId::Uhrum__Waterfalls__Below_Block,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Uhrum__Waterfalls__East_Palm_Tree__ex__Ledge_Above_Palm_1 => Exit {
+            id: ExitId::Uhrum__Waterfalls__East_Palm_Tree__ex__Ledge_Above_Palm_1,
+            time: 2400,
+            dest: SpotId::Uhrum__Waterfalls__Ledge_Above_Palm,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Uhrum__Waterfalls__East_Palm_Tree__ex__Ledge_Above_Palm_2 => Exit {
+            id: ExitId::Uhrum__Waterfalls__East_Palm_Tree__ex__Ledge_Above_Palm_2,
+            time: 1200,
+            dest: SpotId::Uhrum__Waterfalls__Ledge_Above_Palm,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Uhrum__Waterfalls__Center_Island_West__ex__West_27_1 => Exit {
+            id: ExitId::Uhrum__Waterfalls__Center_Island_West__ex__West_27_1,
+            time: 2280,
+            dest: SpotId::Uhrum__Waterfalls__West_27,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Uhrum__Waterfalls__Center_Island_East__ex__Lower_East_Platform_1 => Exit {
+            id: ExitId::Uhrum__Waterfalls__Center_Island_East__ex__Lower_East_Platform_1,
+            time: 1403,
+            dest: SpotId::Uhrum__Waterfalls__Lower_East_Platform,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Uhrum__Waterfalls__Center_Island_East__ex__East_Waters_Edge_1 => Exit {
+            id: ExitId::Uhrum__Waterfalls__Center_Island_East__ex__East_Waters_Edge_1,
+            time: 1578,
+            dest: SpotId::Uhrum__Waterfalls__East_Waters_Edge,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Uhrum__Waterfalls__West_Water_Nook__ex__West_Water_Ledge_1 => Exit {
+            id: ExitId::Uhrum__Waterfalls__West_Water_Nook__ex__West_Water_Ledge_1,
+            time: 3000,
+            dest: SpotId::Uhrum__Waterfalls__West_Water_Ledge,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Uhrum__Waterfalls__West_Water_Nook__ex__West_Water_Ledge_2 => Exit {
+            id: ExitId::Uhrum__Waterfalls__West_Water_Nook__ex__West_Water_Ledge_2,
+            time: 2252,
+            dest: SpotId::Uhrum__Waterfalls__West_Water_Ledge,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Uhrum__Waterfalls__Water_Pillar__ex__Center_Island_East_1 => Exit {
+            id: ExitId::Uhrum__Waterfalls__Water_Pillar__ex__Center_Island_East_1,
+            time: 2000,
+            dest: SpotId::Uhrum__Waterfalls__Center_Island_East,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Uhrum__Waterfalls__Water_Pillar__ex__Center_Island_East_2 => Exit {
+            id: ExitId::Uhrum__Waterfalls__Water_Pillar__ex__Center_Island_East_2,
+            time: 1000,
+            dest: SpotId::Uhrum__Waterfalls__Center_Island_East,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Uhrum__Waterfalls__Water_Pillar__ex__East_Waters_Edge_1 => Exit {
+            id: ExitId::Uhrum__Waterfalls__Water_Pillar__ex__East_Waters_Edge_1,
+            time: 1576,
+            dest: SpotId::Uhrum__Waterfalls__East_Waters_Edge,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Uhrum__Waterfalls__East_28__ex__East_Lake__West_28_1 => Exit {
+            id: ExitId::Uhrum__Waterfalls__East_28__ex__East_Lake__West_28_1,
+            time: 1350,
+            dest: SpotId::Uhrum__East_Lake__West_28,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Uhrum__Waterfalls__East_27__ex__East_Lake__West_27_1 => Exit {
+            id: ExitId::Uhrum__Waterfalls__East_27__ex__East_Lake__West_27_1,
+            time: 1350,
+            dest: SpotId::Uhrum__East_Lake__West_27,
             price: Currency::Free,
             loc_id: None,
         },
@@ -30574,7 +31442,8 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             exits: Range {
-                start: 0, end: 0,
+                start: ExitId::Uhrum__Waterfalls__West_25__ex__Below_Block_1.into_usize(),
+                end: ExitId::Uhrum__Waterfalls__West_25__ex__Siege_Corridor__East_25_1.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
@@ -30586,7 +31455,8 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             exits: Range {
-                start: 0, end: 0,
+                start: ExitId::Uhrum__Waterfalls__West_24__ex__Artillery_Practice__East_24_1.into_usize(),
+                end: ExitId::Uhrum__Waterfalls__West_24__ex__Below_Block_1.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
@@ -30598,7 +31468,449 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             exits: Range {
+                start: ExitId::Uhrum__Waterfalls__West_27__ex__Center_Island_West_1.into_usize(),
+                end: ExitId::Uhrum__Waterfalls__West_27__ex__Save_Room__East_1.into_usize() + 1,
+            },
+            actions: Range {
                 start: 0, end: 0,
+            },
+        },
+        SpotId::Uhrum__Waterfalls__Ledge_Above_Palm => Spot {
+            id: SpotId::Uhrum__Waterfalls__Ledge_Above_Palm,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Uhrum__Waterfalls__Ledge_Above_Palm__ex__High_Platform_1.into_usize(),
+                end: ExitId::Uhrum__Waterfalls__Ledge_Above_Palm__ex__Northeast_Ledge_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Uhrum__Waterfalls__High_Platform => Spot {
+            id: SpotId::Uhrum__Waterfalls__High_Platform,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Uhrum__Waterfalls__High_Platform__ex__Northeast_Ledge_1.into_usize(),
+                end: ExitId::Uhrum__Waterfalls__High_Platform__ex__Northeast_Ledge_2.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Uhrum__Waterfalls__Ceiling_Opening => Spot {
+            id: SpotId::Uhrum__Waterfalls__Ceiling_Opening,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Uhrum__Waterfalls__Ceiling_Opening__ex__Barrier_West_1.into_usize(),
+                end: ExitId::Uhrum__Waterfalls__Ceiling_Opening__ex__West_24_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Uhrum__Waterfalls__Ceiling_Cache => Spot {
+            id: SpotId::Uhrum__Waterfalls__Ceiling_Cache,
+            locations: Range {
+                start: LocationId::Uhrum__Waterfalls__Ceiling_Cache__Flask.into_usize(),
+                end: LocationId::Uhrum__Waterfalls__Ceiling_Cache__Flask.into_usize() + 1,
+            },
+            exits: Range {
+                start: ExitId::Uhrum__Waterfalls__Ceiling_Cache__ex__Ceiling_Opening_1.into_usize(),
+                end: ExitId::Uhrum__Waterfalls__Ceiling_Cache__ex__Ceiling_Opening_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Uhrum__Waterfalls__Northeast_Ledge => Spot {
+            id: SpotId::Uhrum__Waterfalls__Northeast_Ledge,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Uhrum__Waterfalls__Northeast_Ledge__ex__Ceiling_Opening_1.into_usize(),
+                end: ExitId::Uhrum__Waterfalls__Northeast_Ledge__ex__Ceiling_Opening_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Uhrum__Waterfalls__Barrier_West => Spot {
+            id: SpotId::Uhrum__Waterfalls__Barrier_West,
+            locations: Range {
+                start: LocationId::Uhrum__Waterfalls__Barrier_West__Charge_through_Wall.into_usize(),
+                end: LocationId::Uhrum__Waterfalls__Barrier_West__Spin_through_Wall.into_usize() + 1,
+            },
+            exits: Range {
+                start: ExitId::Uhrum__Waterfalls__Barrier_West__ex__Barrier_East_1.into_usize(),
+                end: ExitId::Uhrum__Waterfalls__Barrier_West__ex__Ceiling_Opening_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Uhrum__Waterfalls__Barrier_East => Spot {
+            id: SpotId::Uhrum__Waterfalls__Barrier_East,
+            locations: Range {
+                start: LocationId::Uhrum__Waterfalls__Barrier_East__Charge_through_Wall.into_usize(),
+                end: LocationId::Uhrum__Waterfalls__Barrier_East__Spin_through_Wall.into_usize() + 1,
+            },
+            exits: Range {
+                start: ExitId::Uhrum__Waterfalls__Barrier_East__ex__Barrier_West_1.into_usize(),
+                end: ExitId::Uhrum__Waterfalls__Barrier_East__ex__East_24_in_Mid_air_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Uhrum__Waterfalls__East_24 => Spot {
+            id: SpotId::Uhrum__Waterfalls__East_24,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Uhrum__Waterfalls__East_24__ex__Tulip_Tower__West_24_1.into_usize(),
+                end: ExitId::Uhrum__Waterfalls__East_24__ex__Tulip_Tower__West_24_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Uhrum__Waterfalls__East_24_in_Mid_air => Spot {
+            id: SpotId::Uhrum__Waterfalls__East_24_in_Mid_air,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Uhrum__Waterfalls__East_24_in_Mid_air__ex__Barrier_East_1.into_usize(),
+                end: ExitId::Uhrum__Waterfalls__East_24_in_Mid_air__ex__Tulip_Tower__West_24_in_Mid_air_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Uhrum__Waterfalls__West_Wall => Spot {
+            id: SpotId::Uhrum__Waterfalls__West_Wall,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Uhrum__Waterfalls__West_Wall__ex__West_25_1.into_usize(),
+                end: ExitId::Uhrum__Waterfalls__West_Wall__ex__West_25_2.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Uhrum__Waterfalls__West_Platform => Spot {
+            id: SpotId::Uhrum__Waterfalls__West_Platform,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Uhrum__Waterfalls__West_Platform__ex__Green_Middle_Ledge_1.into_usize(),
+                end: ExitId::Uhrum__Waterfalls__West_Platform__ex__Green_Middle_Ledge_2.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Uhrum__Waterfalls__Large_Rock => Spot {
+            id: SpotId::Uhrum__Waterfalls__Large_Rock,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Uhrum__Waterfalls__Large_Rock__ex__Medium_Rock_1.into_usize(),
+                end: ExitId::Uhrum__Waterfalls__Large_Rock__ex__West_Wall_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Uhrum__Waterfalls__Medium_Rock => Spot {
+            id: SpotId::Uhrum__Waterfalls__Medium_Rock,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Uhrum__Waterfalls__Medium_Rock__ex__Green_Middle_Ledge_1.into_usize(),
+                end: ExitId::Uhrum__Waterfalls__Medium_Rock__ex__West_Wall_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Uhrum__Waterfalls__Small_Rock => Spot {
+            id: SpotId::Uhrum__Waterfalls__Small_Rock,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Uhrum__Waterfalls__Lower_East_Platform => Spot {
+            id: SpotId::Uhrum__Waterfalls__Lower_East_Platform,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Uhrum__Waterfalls__Lower_East_Platform__ex__Below_Block_1.into_usize(),
+                end: ExitId::Uhrum__Waterfalls__Lower_East_Platform__ex__Small_Rock_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Uhrum__Waterfalls__Below_Block => Spot {
+            id: SpotId::Uhrum__Waterfalls__Below_Block,
+            locations: Range {
+                start: LocationId::Uhrum__Waterfalls__Below_Block__Shockwave_Block.into_usize(),
+                end: LocationId::Uhrum__Waterfalls__Below_Block__Shockwave_Block.into_usize() + 1,
+            },
+            exits: Range {
+                start: ExitId::Uhrum__Waterfalls__Below_Block__ex__Above_Block_1.into_usize(),
+                end: ExitId::Uhrum__Waterfalls__Below_Block__ex__Small_Rock_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Uhrum__Waterfalls__Above_Block => Spot {
+            id: SpotId::Uhrum__Waterfalls__Above_Block,
+            locations: Range {
+                start: LocationId::Uhrum__Waterfalls__Above_Block__Block.into_usize(),
+                end: LocationId::Uhrum__Waterfalls__Above_Block__Block.into_usize() + 1,
+            },
+            exits: Range {
+                start: ExitId::Uhrum__Waterfalls__Above_Block__ex__Below_Block_1.into_usize(),
+                end: ExitId::Uhrum__Waterfalls__Above_Block__ex__East_25_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Uhrum__Waterfalls__East_26 => Spot {
+            id: SpotId::Uhrum__Waterfalls__East_26,
+            locations: Range {
+                start: LocationId::Uhrum__Waterfalls__East_26__Block.into_usize(),
+                end: LocationId::Uhrum__Waterfalls__East_26__Block.into_usize() + 1,
+            },
+            exits: Range {
+                start: ExitId::Uhrum__Waterfalls__East_26__ex__Annuna_Corridor__West_26_1.into_usize(),
+                end: ExitId::Uhrum__Waterfalls__East_26__ex__Below_Block_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Uhrum__Waterfalls__East_25 => Spot {
+            id: SpotId::Uhrum__Waterfalls__East_25,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Uhrum__Waterfalls__East_25__ex__Annuna_Corridor__West_25_1.into_usize(),
+                end: ExitId::Uhrum__Waterfalls__East_25__ex__Annuna_Corridor__West_25_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Uhrum__Waterfalls__Green_Middle_Ledge => Spot {
+            id: SpotId::Uhrum__Waterfalls__Green_Middle_Ledge,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Uhrum__Waterfalls__Green_Middle_Ledge__ex__Below_Block_1.into_usize(),
+                end: ExitId::Uhrum__Waterfalls__Green_Middle_Ledge__ex__Below_Block_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Uhrum__Waterfalls__East_Palm_Tree => Spot {
+            id: SpotId::Uhrum__Waterfalls__East_Palm_Tree,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Uhrum__Waterfalls__East_Palm_Tree__ex__Ledge_Above_Palm_1.into_usize(),
+                end: ExitId::Uhrum__Waterfalls__East_Palm_Tree__ex__Ledge_Above_Palm_2.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Uhrum__Waterfalls__West_Waters_Edge => Spot {
+            id: SpotId::Uhrum__Waterfalls__West_Waters_Edge,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Uhrum__Waterfalls__West_Water_Surface => Spot {
+            id: SpotId::Uhrum__Waterfalls__West_Water_Surface,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Uhrum__Waterfalls__Center_Island_West => Spot {
+            id: SpotId::Uhrum__Waterfalls__Center_Island_West,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Uhrum__Waterfalls__Center_Island_West__ex__West_27_1.into_usize(),
+                end: ExitId::Uhrum__Waterfalls__Center_Island_West__ex__West_27_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Uhrum__Waterfalls__Center_Island_East => Spot {
+            id: SpotId::Uhrum__Waterfalls__Center_Island_East,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Uhrum__Waterfalls__Center_Island_East__ex__East_Waters_Edge_1.into_usize(),
+                end: ExitId::Uhrum__Waterfalls__Center_Island_East__ex__Lower_East_Platform_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Uhrum__Waterfalls__Island_Water_West => Spot {
+            id: SpotId::Uhrum__Waterfalls__Island_Water_West,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Uhrum__Waterfalls__West_Water_Ledge => Spot {
+            id: SpotId::Uhrum__Waterfalls__West_Water_Ledge,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Uhrum__Waterfalls__West_Water_Nook => Spot {
+            id: SpotId::Uhrum__Waterfalls__West_Water_Nook,
+            locations: Range {
+                start: LocationId::Uhrum__Waterfalls__West_Water_Nook__Tablet.into_usize(),
+                end: LocationId::Uhrum__Waterfalls__West_Water_Nook__Tablet.into_usize() + 1,
+            },
+            exits: Range {
+                start: ExitId::Uhrum__Waterfalls__West_Water_Nook__ex__West_Water_Ledge_1.into_usize(),
+                end: ExitId::Uhrum__Waterfalls__West_Water_Nook__ex__West_Water_Ledge_2.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Uhrum__Waterfalls__Water_Slope => Spot {
+            id: SpotId::Uhrum__Waterfalls__Water_Slope,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Uhrum__Waterfalls__Water_Pillar => Spot {
+            id: SpotId::Uhrum__Waterfalls__Water_Pillar,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Uhrum__Waterfalls__Water_Pillar__ex__Center_Island_East_1.into_usize(),
+                end: ExitId::Uhrum__Waterfalls__Water_Pillar__ex__East_Waters_Edge_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Uhrum__Waterfalls__East_Water_Surface => Spot {
+            id: SpotId::Uhrum__Waterfalls__East_Water_Surface,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Uhrum__Waterfalls__East_28 => Spot {
+            id: SpotId::Uhrum__Waterfalls__East_28,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Uhrum__Waterfalls__East_28__ex__East_Lake__West_28_1.into_usize(),
+                end: ExitId::Uhrum__Waterfalls__East_28__ex__East_Lake__West_28_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Uhrum__Waterfalls__East_Waters_Edge => Spot {
+            id: SpotId::Uhrum__Waterfalls__East_Waters_Edge,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Uhrum__Waterfalls__East_27 => Spot {
+            id: SpotId::Uhrum__Waterfalls__East_27,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Uhrum__Waterfalls__East_27__ex__East_Lake__West_27_1.into_usize(),
+                end: ExitId::Uhrum__Waterfalls__East_27__ex__East_Lake__West_27_1.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
@@ -30630,6 +31942,90 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
         },
         SpotId::Uhrum__Save_Room__West => Spot {
             id: SpotId::Uhrum__Save_Room__West,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Uhrum__East_Lake__West_27 => Spot {
+            id: SpotId::Uhrum__East_Lake__West_27,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Uhrum__East_Lake__West_28 => Spot {
+            id: SpotId::Uhrum__East_Lake__West_28,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Uhrum__Tulip_Tower__West_24 => Spot {
+            id: SpotId::Uhrum__Tulip_Tower__West_24,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Uhrum__Tulip_Tower__West_24_in_Mid_air => Spot {
+            id: SpotId::Uhrum__Tulip_Tower__West_24_in_Mid_air,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Uhrum__Annuna_Corridor__West_25 => Spot {
+            id: SpotId::Uhrum__Annuna_Corridor__West_25,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Uhrum__Annuna_Corridor__West_26 => Spot {
+            id: SpotId::Uhrum__Annuna_Corridor__West_26,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Uhrum__Artillery_Practice__East_24 => Spot {
+            id: SpotId::Uhrum__Artillery_Practice__East_24,
             locations: Range {
                 start: 0, end: 0,
             },

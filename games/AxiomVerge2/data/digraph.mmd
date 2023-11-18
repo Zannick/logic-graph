@@ -1302,11 +1302,60 @@ subgraph Uhrum
         Uhrum__Waterfalls__West_25(West 25);
         Uhrum__Waterfalls__West_24(West 24);
         Uhrum__Waterfalls__West_27(West 27);
+        Uhrum__Waterfalls__Ledge_Above_Palm(Ledge Above Palm);
+        Uhrum__Waterfalls__High_Platform(High Platform);
+        Uhrum__Waterfalls__Ceiling_Opening(Ceiling Opening);
+        Uhrum__Waterfalls__Ceiling_Cache(Ceiling Cache);
+        Uhrum__Waterfalls__Northeast_Ledge(Northeast Ledge);
+        Uhrum__Waterfalls__Barrier_West(Barrier West);
+        Uhrum__Waterfalls__Barrier_East(Barrier East);
+        Uhrum__Waterfalls__East_24(East 24);
+        Uhrum__Waterfalls__East_24_in_Mid_air(East 24 in Mid-air);
+        Uhrum__Waterfalls__West_Wall(West Wall);
+        Uhrum__Waterfalls__West_Platform(West Platform);
+        Uhrum__Waterfalls__Large_Rock(Large Rock);
+        Uhrum__Waterfalls__Medium_Rock(Medium Rock);
+        Uhrum__Waterfalls__Small_Rock(Small Rock);
+        Uhrum__Waterfalls__Lower_East_Platform(Lower East Platform);
+        Uhrum__Waterfalls__Below_Block(Below Block);
+        Uhrum__Waterfalls__Above_Block(Above Block);
+        Uhrum__Waterfalls__East_26(East 26);
+        Uhrum__Waterfalls__East_25(East 25);
+        Uhrum__Waterfalls__Green_Middle_Ledge(Green Middle Ledge);
+        Uhrum__Waterfalls__East_Palm_Tree(East Palm Tree);
+        Uhrum__Waterfalls__West_Waters_Edge(West Water's Edge);
+        Uhrum__Waterfalls__West_Water_Surface(West Water Surface);
+        Uhrum__Waterfalls__Center_Island_West(Center Island West);
+        Uhrum__Waterfalls__Center_Island_East(Center Island East);
+        Uhrum__Waterfalls__Island_Water_West(Island Water West);
+        Uhrum__Waterfalls__West_Water_Ledge(West Water Ledge);
+        Uhrum__Waterfalls__West_Water_Nook(West Water Nook);
+        Uhrum__Waterfalls__Water_Slope(Water Slope);
+        Uhrum__Waterfalls__Water_Pillar(Water Pillar);
+        Uhrum__Waterfalls__East_Water_Surface(East Water Surface);
+        Uhrum__Waterfalls__East_28(East 28);
+        Uhrum__Waterfalls__East_Waters_Edge(East Water's Edge);
+        Uhrum__Waterfalls__East_27(East 27);
     end
     subgraph Uhrum__Save_Room[Save Room]
         Uhrum__Save_Room__East(East);
         Uhrum__Save_Room__Save_Point(Save Point);
         Uhrum__Save_Room__West(West);
+    end
+    subgraph Uhrum__East_Lake[East Lake]
+        Uhrum__East_Lake__West_27(West 27);
+        Uhrum__East_Lake__West_28(West 28);
+    end
+    subgraph Uhrum__Tulip_Tower[Tulip Tower]
+        Uhrum__Tulip_Tower__West_24(West 24);
+        Uhrum__Tulip_Tower__West_24_in_Mid_air(West 24 in Mid-air);
+    end
+    subgraph Uhrum__Annuna_Corridor[Annuna Corridor]
+        Uhrum__Annuna_Corridor__West_25(West 25);
+        Uhrum__Annuna_Corridor__West_26(West 26);
+    end
+    subgraph Uhrum__Artillery_Practice[Artillery Practice]
+        Uhrum__Artillery_Practice__East_24(East 24);
     end
 end
 Amagi__Grid_31_19__East <--> Amagi__Liru_Room__West_19
@@ -1869,7 +1918,7 @@ Menu__Upgrade_Menu__Drone <--> Menu__Upgrade_Menu__Physiology
 Menu__Upgrade_Menu__Infection <--> Menu__Upgrade_Menu__Physiology
 Uhrum__Siege_Corridor__Center_Platform_3 --> Uhrum__Siege_Corridor__Upper_Rock_West
 Uhrum__Siege_Corridor__Center_Valley --> Uhrum__Siege_Corridor__Center_East
-Uhrum__Siege_Corridor__East_25 --> Uhrum__Waterfalls__West_25
+Uhrum__Siege_Corridor__East_25 <--> Uhrum__Waterfalls__West_25
 Uhrum__Siege_Corridor__East_Hill <--> Uhrum__Siege_Corridor__Mideast_Tree
 Uhrum__Siege_Corridor__East_Hill --> Uhrum__Siege_Corridor__Upper_Rock_East
 Uhrum__Siege_Corridor__Mideast_Tree --> Uhrum__Siege_Corridor__Upper_Rock_West
@@ -1882,6 +1931,47 @@ Uhrum__Siege_Corridor__Upper_Rock_Item <--> Uhrum__Siege_Corridor__Upper_Rock_We
 Uhrum__Siege_Corridor__West_26 <--> Uhrum__West_Entrance__East_26
 Uhrum__Siege_Corridor__West_Greenery --> Uhrum__Siege_Corridor__West_Grassy_Ledge
 Uhrum__Siege_Corridor__Western_Rock --> Uhrum__Siege_Corridor__Northwest_Platform
+Uhrum__Waterfalls__Above_Block <--> Uhrum__Waterfalls__Below_Block
+Uhrum__Waterfalls__Above_Block --> Uhrum__Waterfalls__East_25
+Uhrum__Waterfalls__Barrier_East <--> Uhrum__Waterfalls__Barrier_West
+Uhrum__Waterfalls__Barrier_East <--> Uhrum__Waterfalls__East_24_in_Mid_air
+Uhrum__Waterfalls__Barrier_West <--> Uhrum__Waterfalls__Ceiling_Opening
+Uhrum__Waterfalls__Below_Block <--> Uhrum__Waterfalls__East_26
+Uhrum__Waterfalls__Below_Block --> Uhrum__Waterfalls__Small_Rock
+Uhrum__Waterfalls__Ceiling_Cache <--> Uhrum__Waterfalls__Ceiling_Opening
+Uhrum__Waterfalls__Ceiling_Opening --> Uhrum__Waterfalls__West_24
+Uhrum__Waterfalls__Center_Island_East --> Uhrum__Waterfalls__East_Waters_Edge
+Uhrum__Waterfalls__Center_Island_East --> Uhrum__Waterfalls__Lower_East_Platform
+Uhrum__Waterfalls__Center_Island_West <--> Uhrum__Waterfalls__West_27
+Uhrum__Waterfalls__East_24 --> Uhrum__Tulip_Tower__West_24
+Uhrum__Waterfalls__East_24_in_Mid_air --> Uhrum__Tulip_Tower__West_24_in_Mid_air
+Uhrum__Waterfalls__East_25 --> Uhrum__Annuna_Corridor__West_25
+Uhrum__Waterfalls__East_26 --> Uhrum__Annuna_Corridor__West_26
+Uhrum__Waterfalls__East_27 --> Uhrum__East_Lake__West_27
+Uhrum__Waterfalls__East_28 --> Uhrum__East_Lake__West_28
+Uhrum__Waterfalls__East_Palm_Tree --> Uhrum__Waterfalls__Ledge_Above_Palm
+Uhrum__Waterfalls__Green_Middle_Ledge --> Uhrum__Waterfalls__Below_Block
+Uhrum__Waterfalls__High_Platform --> Uhrum__Waterfalls__Northeast_Ledge
+Uhrum__Waterfalls__Large_Rock --> Uhrum__Waterfalls__Medium_Rock
+Uhrum__Waterfalls__Large_Rock --> Uhrum__Waterfalls__West_Wall
+Uhrum__Waterfalls__Ledge_Above_Palm --> Uhrum__Waterfalls__High_Platform
+Uhrum__Waterfalls__Ledge_Above_Palm --> Uhrum__Waterfalls__Northeast_Ledge
+Uhrum__Waterfalls__Lower_East_Platform --> Uhrum__Waterfalls__Below_Block
+Uhrum__Waterfalls__Lower_East_Platform --> Uhrum__Waterfalls__Small_Rock
+Uhrum__Waterfalls__Medium_Rock --> Uhrum__Waterfalls__Green_Middle_Ledge
+Uhrum__Waterfalls__Medium_Rock --> Uhrum__Waterfalls__West_Platform
+Uhrum__Waterfalls__Medium_Rock --> Uhrum__Waterfalls__West_Wall
+Uhrum__Waterfalls__Northeast_Ledge --> Uhrum__Waterfalls__Ceiling_Opening
+Uhrum__Waterfalls__Water_Pillar --> Uhrum__Waterfalls__Center_Island_East
+Uhrum__Waterfalls__Water_Pillar --> Uhrum__Waterfalls__East_Waters_Edge
+Uhrum__Waterfalls__West_24 --> Uhrum__Artillery_Practice__East_24
+Uhrum__Waterfalls__West_24 --> Uhrum__Waterfalls__Below_Block
+Uhrum__Waterfalls__West_25 --> Uhrum__Waterfalls__Below_Block
+Uhrum__Waterfalls__West_27 --> Uhrum__Save_Room__East
+Uhrum__Waterfalls__West_27 --> Uhrum__Waterfalls__Large_Rock
+Uhrum__Waterfalls__West_Platform --> Uhrum__Waterfalls__Green_Middle_Ledge
+Uhrum__Waterfalls__West_Wall --> Uhrum__Waterfalls__West_25
+Uhrum__Waterfalls__West_Water_Nook --> Uhrum__Waterfalls__West_Water_Ledge
 Uhrum__West_Entrance__Clear_Passage --> Uhrum__West_Entrance__Portal_Stand
 Uhrum__West_Entrance__East_28 --> Uhrum__Glitchy_Corridor__West_28
 Uhrum__West_Entrance__East_28 --> Uhrum__West_Entrance__Lower_Path_Tree_Ledge

@@ -6681,6 +6681,347 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
             SpotId::Uhrum__Siege_Corridor__Western_Rock,
             SpotId::Uhrum__Siege_Corridor__Western_Cache,
         ) => 1799,
+        ([false], SpotId::Uhrum__Waterfalls__Above_Block, SpotId::Uhrum__Waterfalls__East_26) => {
+            1052
+        }
+        ([false], SpotId::Uhrum__Waterfalls__Barrier_East, SpotId::Uhrum__Waterfalls__East_24) => {
+            877
+        }
+        (
+            [false],
+            SpotId::Uhrum__Waterfalls__Barrier_West,
+            SpotId::Uhrum__Waterfalls__Northeast_Ledge,
+        ) => 701,
+        (
+            [false],
+            SpotId::Uhrum__Waterfalls__Below_Block,
+            SpotId::Uhrum__Waterfalls__Lower_East_Platform,
+        ) => 701,
+        (
+            [false],
+            SpotId::Uhrum__Waterfalls__Below_Block,
+            SpotId::Uhrum__Waterfalls__Water_Pillar,
+        ) => 1754,
+        (
+            [false],
+            SpotId::Uhrum__Waterfalls__Ceiling_Opening,
+            SpotId::Uhrum__Waterfalls__Green_Middle_Ledge,
+        ) => 1949,
+        (
+            [false],
+            SpotId::Uhrum__Waterfalls__Ceiling_Opening,
+            SpotId::Uhrum__Waterfalls__High_Platform,
+        ) => 649,
+        (
+            [false],
+            SpotId::Uhrum__Waterfalls__Ceiling_Opening,
+            SpotId::Uhrum__Waterfalls__Northeast_Ledge,
+        ) => 877,
+        (
+            [false],
+            SpotId::Uhrum__Waterfalls__Center_Island_East,
+            SpotId::Uhrum__Waterfalls__Center_Island_West,
+        ) => 1052,
+        (
+            [false],
+            SpotId::Uhrum__Waterfalls__Center_Island_East,
+            SpotId::Uhrum__Waterfalls__Water_Pillar,
+        ) => 350,
+        (
+            [false],
+            SpotId::Uhrum__Waterfalls__Center_Island_West,
+            SpotId::Uhrum__Waterfalls__Center_Island_East,
+        ) => 1052,
+        (
+            [false],
+            SpotId::Uhrum__Waterfalls__Center_Island_West,
+            SpotId::Uhrum__Waterfalls__Island_Water_West,
+        ) => 175,
+        ([false], SpotId::Uhrum__Waterfalls__East_24, SpotId::Uhrum__Waterfalls__Barrier_East) => {
+            1799
+        }
+        // [0.526316, 1.05]
+        ([false], SpotId::Uhrum__Waterfalls__East_25, SpotId::Uhrum__Waterfalls__Above_Block) => {
+            1576
+        }
+        ([false], SpotId::Uhrum__Waterfalls__East_26, SpotId::Uhrum__Waterfalls__Above_Block) => {
+            1052
+        }
+        (
+            [false],
+            SpotId::Uhrum__Waterfalls__East_27,
+            SpotId::Uhrum__Waterfalls__East_Waters_Edge,
+        ) => 1754,
+        (
+            [false],
+            SpotId::Uhrum__Waterfalls__East_27,
+            SpotId::Uhrum__Waterfalls__Lower_East_Platform,
+        ) => 1929,
+        (
+            [false],
+            SpotId::Uhrum__Waterfalls__East_Palm_Tree,
+            SpotId::Uhrum__Waterfalls__West_25,
+        ) => 4912,
+        (
+            [false],
+            SpotId::Uhrum__Waterfalls__East_Water_Surface,
+            SpotId::Uhrum__Waterfalls__East_28,
+        ) => 2477,
+        (
+            [false],
+            SpotId::Uhrum__Waterfalls__East_Water_Surface,
+            SpotId::Uhrum__Waterfalls__Water_Pillar,
+        ) => 1351,
+        (
+            [false],
+            SpotId::Uhrum__Waterfalls__East_Waters_Edge,
+            SpotId::Uhrum__Waterfalls__East_27,
+        ) => 1754,
+        (
+            [false],
+            SpotId::Uhrum__Waterfalls__East_Waters_Edge,
+            SpotId::Uhrum__Waterfalls__East_Water_Surface,
+        ) => 175,
+        (
+            [false],
+            SpotId::Uhrum__Waterfalls__East_Waters_Edge,
+            SpotId::Uhrum__Waterfalls__Water_Pillar,
+        ) => 1228,
+        (
+            [false],
+            SpotId::Uhrum__Waterfalls__Green_Middle_Ledge,
+            SpotId::Uhrum__Waterfalls__East_Palm_Tree,
+        ) => 1799,
+        (
+            [false],
+            SpotId::Uhrum__Waterfalls__Green_Middle_Ledge,
+            SpotId::Uhrum__Waterfalls__East_Water_Surface,
+        ) => 1800,
+        (
+            [false],
+            SpotId::Uhrum__Waterfalls__Green_Middle_Ledge,
+            SpotId::Uhrum__Waterfalls__Lower_East_Platform,
+        ) => 1500,
+        ([false], SpotId::Uhrum__Waterfalls__High_Platform, SpotId::Uhrum__Waterfalls__West_24) => {
+            3684
+        }
+        (
+            [false],
+            SpotId::Uhrum__Waterfalls__Island_Water_West,
+            SpotId::Uhrum__Waterfalls__West_Water_Ledge,
+        ) => 399,
+        // [0.701754, 0.877193]
+        (
+            [false],
+            SpotId::Uhrum__Waterfalls__Large_Rock,
+            SpotId::Uhrum__Waterfalls__Center_Island_East,
+        ) => 1578,
+        (
+            [false],
+            SpotId::Uhrum__Waterfalls__Large_Rock,
+            SpotId::Uhrum__Waterfalls__Island_Water_West,
+        ) => 600,
+        ([false], SpotId::Uhrum__Waterfalls__Large_Rock, SpotId::Uhrum__Waterfalls__Small_Rock) => {
+            1578
+        }
+        ([false], SpotId::Uhrum__Waterfalls__Large_Rock, SpotId::Uhrum__Waterfalls__West_27) => {
+            1754
+        }
+        (
+            [false],
+            SpotId::Uhrum__Waterfalls__Ledge_Above_Palm,
+            SpotId::Uhrum__Waterfalls__High_Platform,
+        ) => 1403,
+        (
+            [false],
+            SpotId::Uhrum__Waterfalls__Lower_East_Platform,
+            SpotId::Uhrum__Waterfalls__Center_Island_East,
+        ) => 1403,
+        (
+            [false],
+            SpotId::Uhrum__Waterfalls__Lower_East_Platform,
+            SpotId::Uhrum__Waterfalls__East_27,
+        ) => 1929,
+        (
+            [false],
+            SpotId::Uhrum__Waterfalls__Lower_East_Platform,
+            SpotId::Uhrum__Waterfalls__East_Water_Surface,
+        ) => 400,
+        (
+            [false],
+            SpotId::Uhrum__Waterfalls__Lower_East_Platform,
+            SpotId::Uhrum__Waterfalls__Water_Pillar,
+        ) => 1052,
+        (
+            [false],
+            SpotId::Uhrum__Waterfalls__Medium_Rock,
+            SpotId::Uhrum__Waterfalls__Large_Rock,
+        ) => 526,
+        // [0.350877, 0.701754]
+        (
+            [false],
+            SpotId::Uhrum__Waterfalls__Medium_Rock,
+            SpotId::Uhrum__Waterfalls__Small_Rock,
+        ) => 1052,
+        (
+            [false],
+            SpotId::Uhrum__Waterfalls__Northeast_Ledge,
+            SpotId::Uhrum__Waterfalls__Barrier_West,
+        ) => 1200,
+        (
+            [false],
+            SpotId::Uhrum__Waterfalls__Northeast_Ledge,
+            SpotId::Uhrum__Waterfalls__Green_Middle_Ledge,
+        ) => 1500,
+        (
+            [false],
+            SpotId::Uhrum__Waterfalls__Northeast_Ledge,
+            SpotId::Uhrum__Waterfalls__High_Platform,
+        ) => 1052,
+        ([false], SpotId::Uhrum__Waterfalls__Small_Rock, SpotId::Uhrum__Waterfalls__Large_Rock) => {
+            1578
+        }
+        (
+            [false],
+            SpotId::Uhrum__Waterfalls__Small_Rock,
+            SpotId::Uhrum__Waterfalls__Lower_East_Platform,
+        ) => 1403,
+        ([false], SpotId::Uhrum__Waterfalls__Water_Pillar, SpotId::Uhrum__Waterfalls__East_28) => {
+            3828
+        }
+        (
+            [false],
+            SpotId::Uhrum__Waterfalls__Water_Pillar,
+            SpotId::Uhrum__Waterfalls__Water_Slope,
+        ) => 900,
+        (
+            [false],
+            SpotId::Uhrum__Waterfalls__Water_Pillar,
+            SpotId::Uhrum__Waterfalls__West_Water_Nook,
+        ) => 4279,
+        (
+            [false],
+            SpotId::Uhrum__Waterfalls__Water_Slope,
+            SpotId::Uhrum__Waterfalls__Water_Pillar,
+        ) => 2000,
+        (
+            [false],
+            SpotId::Uhrum__Waterfalls__Water_Slope,
+            SpotId::Uhrum__Waterfalls__West_Water_Ledge,
+        ) => 1126,
+        (
+            [false],
+            SpotId::Uhrum__Waterfalls__Water_Slope,
+            SpotId::Uhrum__Waterfalls__West_Water_Nook,
+        ) => 3378,
+        (
+            [false],
+            SpotId::Uhrum__Waterfalls__West_24,
+            SpotId::Uhrum__Waterfalls__East_Water_Surface,
+        ) => 4736,
+        ([false], SpotId::Uhrum__Waterfalls__West_24, SpotId::Uhrum__Waterfalls__High_Platform) => {
+            3684
+        }
+        (
+            [false],
+            SpotId::Uhrum__Waterfalls__West_24,
+            SpotId::Uhrum__Waterfalls__Lower_East_Platform,
+        ) => 4736,
+        // [0.350877, 0.75]
+        ([false], SpotId::Uhrum__Waterfalls__West_24, SpotId::Uhrum__Waterfalls__West_25) => 1100,
+        ([false], SpotId::Uhrum__Waterfalls__West_24, SpotId::Uhrum__Waterfalls__West_Platform) => {
+            2250
+        }
+        ([false], SpotId::Uhrum__Waterfalls__West_24, SpotId::Uhrum__Waterfalls__West_Wall) => 2349,
+        (
+            [false],
+            SpotId::Uhrum__Waterfalls__West_25,
+            SpotId::Uhrum__Waterfalls__East_Palm_Tree,
+        ) => 4912,
+        (
+            [false],
+            SpotId::Uhrum__Waterfalls__West_25,
+            SpotId::Uhrum__Waterfalls__Lower_East_Platform,
+        ) => 4736,
+        ([false], SpotId::Uhrum__Waterfalls__West_25, SpotId::Uhrum__Waterfalls__West_Platform) => {
+            1578
+        }
+        ([false], SpotId::Uhrum__Waterfalls__West_25, SpotId::Uhrum__Waterfalls__West_Wall) => 1349,
+        (
+            [false],
+            SpotId::Uhrum__Waterfalls__West_27,
+            SpotId::Uhrum__Waterfalls__West_Waters_Edge,
+        ) => 877,
+        (
+            [false],
+            SpotId::Uhrum__Waterfalls__West_Platform,
+            SpotId::Uhrum__Waterfalls__Center_Island_East,
+        ) => 1754,
+        (
+            [false],
+            SpotId::Uhrum__Waterfalls__West_Platform,
+            SpotId::Uhrum__Waterfalls__Large_Rock,
+        ) => 599,
+        (
+            [false],
+            SpotId::Uhrum__Waterfalls__West_Platform,
+            SpotId::Uhrum__Waterfalls__Medium_Rock,
+        ) => 701,
+        (
+            [false],
+            SpotId::Uhrum__Waterfalls__West_Platform,
+            SpotId::Uhrum__Waterfalls__West_Wall,
+        ) => 877,
+        (
+            [false],
+            SpotId::Uhrum__Waterfalls__West_Wall,
+            SpotId::Uhrum__Waterfalls__Island_Water_West,
+        ) => 1403,
+        ([false], SpotId::Uhrum__Waterfalls__West_Wall, SpotId::Uhrum__Waterfalls__Large_Rock) => {
+            1052
+        }
+        ([false], SpotId::Uhrum__Waterfalls__West_Wall, SpotId::Uhrum__Waterfalls__West_27) => 950,
+        (
+            [false],
+            SpotId::Uhrum__Waterfalls__West_Wall,
+            SpotId::Uhrum__Waterfalls__West_Platform,
+        ) => 877,
+        // [0.2, 2.252252]
+        (
+            [false],
+            SpotId::Uhrum__Waterfalls__West_Water_Ledge,
+            SpotId::Uhrum__Waterfalls__West_Water_Nook,
+        ) => 2452,
+        (
+            [false],
+            SpotId::Uhrum__Waterfalls__West_Water_Ledge,
+            SpotId::Uhrum__Waterfalls__West_Waters_Edge,
+        ) => 3000,
+        (
+            [false],
+            SpotId::Uhrum__Waterfalls__West_Water_Nook,
+            SpotId::Uhrum__Waterfalls__Water_Slope,
+        ) => 3378,
+        (
+            [false],
+            SpotId::Uhrum__Waterfalls__West_Water_Surface,
+            SpotId::Uhrum__Waterfalls__West_Water_Ledge,
+        ) => 1351,
+        (
+            [false],
+            SpotId::Uhrum__Waterfalls__West_Water_Surface,
+            SpotId::Uhrum__Waterfalls__West_Waters_Edge,
+        ) => 1000,
+        (
+            [false],
+            SpotId::Uhrum__Waterfalls__West_Waters_Edge,
+            SpotId::Uhrum__Waterfalls__West_27,
+        ) => 1200,
+        (
+            [false],
+            SpotId::Uhrum__Waterfalls__West_Waters_Edge,
+            SpotId::Uhrum__Waterfalls__West_Water_Surface,
+        ) => 175,
         (
             [false],
             SpotId::Uhrum__West_Entrance__Clear_Passage,
@@ -13471,6 +13812,337 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
             SpotId::Uhrum__Siege_Corridor__Western_Rock,
             SpotId::Uhrum__Siege_Corridor__Western_Cache,
         ) => 1799,
+        ([true], SpotId::Uhrum__Waterfalls__Above_Block, SpotId::Uhrum__Waterfalls__East_26) => {
+            1052
+        }
+        ([true], SpotId::Uhrum__Waterfalls__Barrier_East, SpotId::Uhrum__Waterfalls__East_24) => {
+            877
+        }
+        (
+            [true],
+            SpotId::Uhrum__Waterfalls__Barrier_West,
+            SpotId::Uhrum__Waterfalls__Northeast_Ledge,
+        ) => 701,
+        (
+            [true],
+            SpotId::Uhrum__Waterfalls__Below_Block,
+            SpotId::Uhrum__Waterfalls__Lower_East_Platform,
+        ) => 701,
+        (
+            [true],
+            SpotId::Uhrum__Waterfalls__Below_Block,
+            SpotId::Uhrum__Waterfalls__Water_Pillar,
+        ) => 1754,
+        (
+            [true],
+            SpotId::Uhrum__Waterfalls__Ceiling_Opening,
+            SpotId::Uhrum__Waterfalls__Green_Middle_Ledge,
+        ) => 1949,
+        (
+            [true],
+            SpotId::Uhrum__Waterfalls__Ceiling_Opening,
+            SpotId::Uhrum__Waterfalls__High_Platform,
+        ) => 649,
+        (
+            [true],
+            SpotId::Uhrum__Waterfalls__Ceiling_Opening,
+            SpotId::Uhrum__Waterfalls__Northeast_Ledge,
+        ) => 877,
+        (
+            [true],
+            SpotId::Uhrum__Waterfalls__Center_Island_East,
+            SpotId::Uhrum__Waterfalls__Center_Island_West,
+        ) => 1052,
+        (
+            [true],
+            SpotId::Uhrum__Waterfalls__Center_Island_East,
+            SpotId::Uhrum__Waterfalls__Water_Pillar,
+        ) => 350,
+        (
+            [true],
+            SpotId::Uhrum__Waterfalls__Center_Island_West,
+            SpotId::Uhrum__Waterfalls__Center_Island_East,
+        ) => 1052,
+        (
+            [true],
+            SpotId::Uhrum__Waterfalls__Center_Island_West,
+            SpotId::Uhrum__Waterfalls__Island_Water_West,
+        ) => 175,
+        ([true], SpotId::Uhrum__Waterfalls__East_24, SpotId::Uhrum__Waterfalls__Barrier_East) => {
+            1799
+        }
+        // [0.526316, 1.05]
+        ([true], SpotId::Uhrum__Waterfalls__East_25, SpotId::Uhrum__Waterfalls__Above_Block) => {
+            1576
+        }
+        ([true], SpotId::Uhrum__Waterfalls__East_26, SpotId::Uhrum__Waterfalls__Above_Block) => {
+            1052
+        }
+        (
+            [true],
+            SpotId::Uhrum__Waterfalls__East_27,
+            SpotId::Uhrum__Waterfalls__East_Waters_Edge,
+        ) => 1754,
+        (
+            [true],
+            SpotId::Uhrum__Waterfalls__East_27,
+            SpotId::Uhrum__Waterfalls__Lower_East_Platform,
+        ) => 1929,
+        ([true], SpotId::Uhrum__Waterfalls__East_Palm_Tree, SpotId::Uhrum__Waterfalls__West_25) => {
+            4912
+        }
+        (
+            [true],
+            SpotId::Uhrum__Waterfalls__East_Water_Surface,
+            SpotId::Uhrum__Waterfalls__East_28,
+        ) => 1929,
+        (
+            [true],
+            SpotId::Uhrum__Waterfalls__East_Water_Surface,
+            SpotId::Uhrum__Waterfalls__Water_Pillar,
+        ) => 1052,
+        (
+            [true],
+            SpotId::Uhrum__Waterfalls__East_Waters_Edge,
+            SpotId::Uhrum__Waterfalls__East_27,
+        ) => 1754,
+        (
+            [true],
+            SpotId::Uhrum__Waterfalls__East_Waters_Edge,
+            SpotId::Uhrum__Waterfalls__East_Water_Surface,
+        ) => 175,
+        (
+            [true],
+            SpotId::Uhrum__Waterfalls__East_Waters_Edge,
+            SpotId::Uhrum__Waterfalls__Water_Pillar,
+        ) => 1228,
+        (
+            [true],
+            SpotId::Uhrum__Waterfalls__Green_Middle_Ledge,
+            SpotId::Uhrum__Waterfalls__East_Palm_Tree,
+        ) => 1799,
+        (
+            [true],
+            SpotId::Uhrum__Waterfalls__Green_Middle_Ledge,
+            SpotId::Uhrum__Waterfalls__East_Water_Surface,
+        ) => 1800,
+        (
+            [true],
+            SpotId::Uhrum__Waterfalls__Green_Middle_Ledge,
+            SpotId::Uhrum__Waterfalls__Lower_East_Platform,
+        ) => 1500,
+        ([true], SpotId::Uhrum__Waterfalls__High_Platform, SpotId::Uhrum__Waterfalls__West_24) => {
+            3684
+        }
+        (
+            [true],
+            SpotId::Uhrum__Waterfalls__Island_Water_West,
+            SpotId::Uhrum__Waterfalls__West_Water_Ledge,
+        ) => 399,
+        // [0.701754, 0.877193]
+        (
+            [true],
+            SpotId::Uhrum__Waterfalls__Large_Rock,
+            SpotId::Uhrum__Waterfalls__Center_Island_East,
+        ) => 1578,
+        (
+            [true],
+            SpotId::Uhrum__Waterfalls__Large_Rock,
+            SpotId::Uhrum__Waterfalls__Island_Water_West,
+        ) => 600,
+        ([true], SpotId::Uhrum__Waterfalls__Large_Rock, SpotId::Uhrum__Waterfalls__Small_Rock) => {
+            1578
+        }
+        ([true], SpotId::Uhrum__Waterfalls__Large_Rock, SpotId::Uhrum__Waterfalls__West_27) => 1754,
+        (
+            [true],
+            SpotId::Uhrum__Waterfalls__Ledge_Above_Palm,
+            SpotId::Uhrum__Waterfalls__High_Platform,
+        ) => 1403,
+        (
+            [true],
+            SpotId::Uhrum__Waterfalls__Lower_East_Platform,
+            SpotId::Uhrum__Waterfalls__Center_Island_East,
+        ) => 1403,
+        (
+            [true],
+            SpotId::Uhrum__Waterfalls__Lower_East_Platform,
+            SpotId::Uhrum__Waterfalls__East_27,
+        ) => 1929,
+        (
+            [true],
+            SpotId::Uhrum__Waterfalls__Lower_East_Platform,
+            SpotId::Uhrum__Waterfalls__East_Water_Surface,
+        ) => 400,
+        (
+            [true],
+            SpotId::Uhrum__Waterfalls__Lower_East_Platform,
+            SpotId::Uhrum__Waterfalls__Water_Pillar,
+        ) => 1052,
+        ([true], SpotId::Uhrum__Waterfalls__Medium_Rock, SpotId::Uhrum__Waterfalls__Large_Rock) => {
+            526
+        }
+        // [0.350877, 0.701754]
+        ([true], SpotId::Uhrum__Waterfalls__Medium_Rock, SpotId::Uhrum__Waterfalls__Small_Rock) => {
+            1052
+        }
+        (
+            [true],
+            SpotId::Uhrum__Waterfalls__Northeast_Ledge,
+            SpotId::Uhrum__Waterfalls__Barrier_West,
+        ) => 1200,
+        (
+            [true],
+            SpotId::Uhrum__Waterfalls__Northeast_Ledge,
+            SpotId::Uhrum__Waterfalls__Green_Middle_Ledge,
+        ) => 1500,
+        (
+            [true],
+            SpotId::Uhrum__Waterfalls__Northeast_Ledge,
+            SpotId::Uhrum__Waterfalls__High_Platform,
+        ) => 1052,
+        ([true], SpotId::Uhrum__Waterfalls__Small_Rock, SpotId::Uhrum__Waterfalls__Large_Rock) => {
+            1578
+        }
+        (
+            [true],
+            SpotId::Uhrum__Waterfalls__Small_Rock,
+            SpotId::Uhrum__Waterfalls__Lower_East_Platform,
+        ) => 1403,
+        ([true], SpotId::Uhrum__Waterfalls__Water_Pillar, SpotId::Uhrum__Waterfalls__East_28) => {
+            2982
+        }
+        (
+            [true],
+            SpotId::Uhrum__Waterfalls__Water_Pillar,
+            SpotId::Uhrum__Waterfalls__Water_Slope,
+        ) => 701,
+        (
+            [true],
+            SpotId::Uhrum__Waterfalls__Water_Pillar,
+            SpotId::Uhrum__Waterfalls__West_Water_Nook,
+        ) => 3333,
+        (
+            [true],
+            SpotId::Uhrum__Waterfalls__Water_Slope,
+            SpotId::Uhrum__Waterfalls__Water_Pillar,
+        ) => 2000,
+        (
+            [true],
+            SpotId::Uhrum__Waterfalls__Water_Slope,
+            SpotId::Uhrum__Waterfalls__West_Water_Ledge,
+        ) => 1000,
+        (
+            [true],
+            SpotId::Uhrum__Waterfalls__Water_Slope,
+            SpotId::Uhrum__Waterfalls__West_Water_Nook,
+        ) => 2631,
+        (
+            [true],
+            SpotId::Uhrum__Waterfalls__West_24,
+            SpotId::Uhrum__Waterfalls__East_Water_Surface,
+        ) => 4736,
+        ([true], SpotId::Uhrum__Waterfalls__West_24, SpotId::Uhrum__Waterfalls__High_Platform) => {
+            3684
+        }
+        (
+            [true],
+            SpotId::Uhrum__Waterfalls__West_24,
+            SpotId::Uhrum__Waterfalls__Lower_East_Platform,
+        ) => 4736,
+        // [0.350877, 0.75]
+        ([true], SpotId::Uhrum__Waterfalls__West_24, SpotId::Uhrum__Waterfalls__West_25) => 1100,
+        ([true], SpotId::Uhrum__Waterfalls__West_24, SpotId::Uhrum__Waterfalls__West_Platform) => {
+            2250
+        }
+        ([true], SpotId::Uhrum__Waterfalls__West_24, SpotId::Uhrum__Waterfalls__West_Wall) => 2349,
+        ([true], SpotId::Uhrum__Waterfalls__West_25, SpotId::Uhrum__Waterfalls__East_Palm_Tree) => {
+            4912
+        }
+        (
+            [true],
+            SpotId::Uhrum__Waterfalls__West_25,
+            SpotId::Uhrum__Waterfalls__Lower_East_Platform,
+        ) => 4736,
+        ([true], SpotId::Uhrum__Waterfalls__West_25, SpotId::Uhrum__Waterfalls__West_Platform) => {
+            1578
+        }
+        ([true], SpotId::Uhrum__Waterfalls__West_25, SpotId::Uhrum__Waterfalls__West_Wall) => 1349,
+        (
+            [true],
+            SpotId::Uhrum__Waterfalls__West_27,
+            SpotId::Uhrum__Waterfalls__West_Waters_Edge,
+        ) => 877,
+        (
+            [true],
+            SpotId::Uhrum__Waterfalls__West_Platform,
+            SpotId::Uhrum__Waterfalls__Center_Island_East,
+        ) => 1754,
+        (
+            [true],
+            SpotId::Uhrum__Waterfalls__West_Platform,
+            SpotId::Uhrum__Waterfalls__Large_Rock,
+        ) => 599,
+        (
+            [true],
+            SpotId::Uhrum__Waterfalls__West_Platform,
+            SpotId::Uhrum__Waterfalls__Medium_Rock,
+        ) => 701,
+        (
+            [true],
+            SpotId::Uhrum__Waterfalls__West_Platform,
+            SpotId::Uhrum__Waterfalls__West_Wall,
+        ) => 877,
+        (
+            [true],
+            SpotId::Uhrum__Waterfalls__West_Wall,
+            SpotId::Uhrum__Waterfalls__Island_Water_West,
+        ) => 1403,
+        ([true], SpotId::Uhrum__Waterfalls__West_Wall, SpotId::Uhrum__Waterfalls__Large_Rock) => {
+            1052
+        }
+        ([true], SpotId::Uhrum__Waterfalls__West_Wall, SpotId::Uhrum__Waterfalls__West_27) => 950,
+        (
+            [true],
+            SpotId::Uhrum__Waterfalls__West_Wall,
+            SpotId::Uhrum__Waterfalls__West_Platform,
+        ) => 877,
+        // [0.2, 1.754386]
+        (
+            [true],
+            SpotId::Uhrum__Waterfalls__West_Water_Ledge,
+            SpotId::Uhrum__Waterfalls__West_Water_Nook,
+        ) => 1954,
+        (
+            [true],
+            SpotId::Uhrum__Waterfalls__West_Water_Ledge,
+            SpotId::Uhrum__Waterfalls__West_Waters_Edge,
+        ) => 3000,
+        (
+            [true],
+            SpotId::Uhrum__Waterfalls__West_Water_Nook,
+            SpotId::Uhrum__Waterfalls__Water_Slope,
+        ) => 2631,
+        (
+            [true],
+            SpotId::Uhrum__Waterfalls__West_Water_Surface,
+            SpotId::Uhrum__Waterfalls__West_Water_Ledge,
+        ) => 1052,
+        (
+            [true],
+            SpotId::Uhrum__Waterfalls__West_Water_Surface,
+            SpotId::Uhrum__Waterfalls__West_Waters_Edge,
+        ) => 1000,
+        (
+            [true],
+            SpotId::Uhrum__Waterfalls__West_Waters_Edge,
+            SpotId::Uhrum__Waterfalls__West_27,
+        ) => 1200,
+        (
+            [true],
+            SpotId::Uhrum__Waterfalls__West_Waters_Edge,
+            SpotId::Uhrum__Waterfalls__West_Water_Surface,
+        ) => 175,
         (
             [true],
             SpotId::Uhrum__West_Entrance__Clear_Passage,
@@ -17725,6 +18397,191 @@ pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
         (SpotId::Uhrum__Siege_Corridor__East_Hill, SpotId::Uhrum__Siege_Corridor__East_25) => true,
         (SpotId::Uhrum__Siege_Corridor__East_Hill, SpotId::Uhrum__Siege_Corridor__Pond) => true,
         (SpotId::Uhrum__Siege_Corridor__East_25, SpotId::Uhrum__Siege_Corridor__Mideast_Hill) => {
+            true
+        }
+        (SpotId::Uhrum__Waterfalls__West_25, SpotId::Uhrum__Waterfalls__East_Palm_Tree) => true,
+        (SpotId::Uhrum__Waterfalls__West_25, SpotId::Uhrum__Waterfalls__Lower_East_Platform) => {
+            true
+        }
+        (SpotId::Uhrum__Waterfalls__West_25, SpotId::Uhrum__Waterfalls__West_Platform) => true,
+        (SpotId::Uhrum__Waterfalls__West_25, SpotId::Uhrum__Waterfalls__West_Wall) => true,
+        (SpotId::Uhrum__Waterfalls__West_24, SpotId::Uhrum__Waterfalls__West_25) => true,
+        (SpotId::Uhrum__Waterfalls__West_24, SpotId::Uhrum__Waterfalls__West_Wall) => true,
+        (SpotId::Uhrum__Waterfalls__West_24, SpotId::Uhrum__Waterfalls__West_Platform) => true,
+        (SpotId::Uhrum__Waterfalls__West_24, SpotId::Uhrum__Waterfalls__Lower_East_Platform) => {
+            true
+        }
+        (SpotId::Uhrum__Waterfalls__West_24, SpotId::Uhrum__Waterfalls__East_Water_Surface) => true,
+        (SpotId::Uhrum__Waterfalls__West_24, SpotId::Uhrum__Waterfalls__High_Platform) => true,
+        (SpotId::Uhrum__Waterfalls__West_27, SpotId::Uhrum__Waterfalls__West_Waters_Edge) => true,
+        (SpotId::Uhrum__Waterfalls__Ledge_Above_Palm, SpotId::Uhrum__Waterfalls__High_Platform) => {
+            true
+        }
+        (SpotId::Uhrum__Waterfalls__High_Platform, SpotId::Uhrum__Waterfalls__West_24) => true,
+        (SpotId::Uhrum__Waterfalls__Ceiling_Opening, SpotId::Uhrum__Waterfalls__High_Platform) => {
+            true
+        }
+        (
+            SpotId::Uhrum__Waterfalls__Ceiling_Opening,
+            SpotId::Uhrum__Waterfalls__Northeast_Ledge,
+        ) => true,
+        (
+            SpotId::Uhrum__Waterfalls__Ceiling_Opening,
+            SpotId::Uhrum__Waterfalls__Green_Middle_Ledge,
+        ) => true,
+        (
+            SpotId::Uhrum__Waterfalls__Northeast_Ledge,
+            SpotId::Uhrum__Waterfalls__Green_Middle_Ledge,
+        ) => true,
+        (SpotId::Uhrum__Waterfalls__Northeast_Ledge, SpotId::Uhrum__Waterfalls__High_Platform) => {
+            true
+        }
+        (SpotId::Uhrum__Waterfalls__Northeast_Ledge, SpotId::Uhrum__Waterfalls__Barrier_West) => {
+            true
+        }
+        (SpotId::Uhrum__Waterfalls__Barrier_West, SpotId::Uhrum__Waterfalls__Northeast_Ledge) => {
+            true
+        }
+        (SpotId::Uhrum__Waterfalls__Barrier_East, SpotId::Uhrum__Waterfalls__East_24) => true,
+        (SpotId::Uhrum__Waterfalls__East_24, SpotId::Uhrum__Waterfalls__Barrier_East) => true,
+        (SpotId::Uhrum__Waterfalls__West_Wall, SpotId::Uhrum__Waterfalls__West_Platform) => true,
+        (SpotId::Uhrum__Waterfalls__West_Wall, SpotId::Uhrum__Waterfalls__West_27) => true,
+        (SpotId::Uhrum__Waterfalls__West_Wall, SpotId::Uhrum__Waterfalls__Large_Rock) => true,
+        (SpotId::Uhrum__Waterfalls__West_Wall, SpotId::Uhrum__Waterfalls__Island_Water_West) => {
+            true
+        }
+        (SpotId::Uhrum__Waterfalls__West_Platform, SpotId::Uhrum__Waterfalls__West_Wall) => true,
+        (SpotId::Uhrum__Waterfalls__West_Platform, SpotId::Uhrum__Waterfalls__Large_Rock) => true,
+        (SpotId::Uhrum__Waterfalls__West_Platform, SpotId::Uhrum__Waterfalls__Medium_Rock) => true,
+        (
+            SpotId::Uhrum__Waterfalls__West_Platform,
+            SpotId::Uhrum__Waterfalls__Center_Island_East,
+        ) => true,
+        (SpotId::Uhrum__Waterfalls__Large_Rock, SpotId::Uhrum__Waterfalls__West_27) => true,
+        (SpotId::Uhrum__Waterfalls__Large_Rock, SpotId::Uhrum__Waterfalls__Island_Water_West) => {
+            true
+        }
+        (SpotId::Uhrum__Waterfalls__Large_Rock, SpotId::Uhrum__Waterfalls__Small_Rock) => true,
+        (SpotId::Uhrum__Waterfalls__Large_Rock, SpotId::Uhrum__Waterfalls__Center_Island_East) => {
+            true
+        }
+        (SpotId::Uhrum__Waterfalls__Medium_Rock, SpotId::Uhrum__Waterfalls__Large_Rock) => true,
+        (SpotId::Uhrum__Waterfalls__Medium_Rock, SpotId::Uhrum__Waterfalls__Small_Rock) => true,
+        (SpotId::Uhrum__Waterfalls__Small_Rock, SpotId::Uhrum__Waterfalls__Lower_East_Platform) => {
+            true
+        }
+        (SpotId::Uhrum__Waterfalls__Small_Rock, SpotId::Uhrum__Waterfalls__Large_Rock) => true,
+        (SpotId::Uhrum__Waterfalls__Lower_East_Platform, SpotId::Uhrum__Waterfalls__East_27) => {
+            true
+        }
+        (
+            SpotId::Uhrum__Waterfalls__Lower_East_Platform,
+            SpotId::Uhrum__Waterfalls__East_Water_Surface,
+        ) => true,
+        (
+            SpotId::Uhrum__Waterfalls__Lower_East_Platform,
+            SpotId::Uhrum__Waterfalls__Water_Pillar,
+        ) => true,
+        (
+            SpotId::Uhrum__Waterfalls__Lower_East_Platform,
+            SpotId::Uhrum__Waterfalls__Center_Island_East,
+        ) => true,
+        (
+            SpotId::Uhrum__Waterfalls__Below_Block,
+            SpotId::Uhrum__Waterfalls__Lower_East_Platform,
+        ) => true,
+        (SpotId::Uhrum__Waterfalls__Below_Block, SpotId::Uhrum__Waterfalls__Water_Pillar) => true,
+        (SpotId::Uhrum__Waterfalls__Above_Block, SpotId::Uhrum__Waterfalls__East_26) => true,
+        (SpotId::Uhrum__Waterfalls__East_26, SpotId::Uhrum__Waterfalls__Above_Block) => true,
+        (SpotId::Uhrum__Waterfalls__East_25, SpotId::Uhrum__Waterfalls__Above_Block) => true,
+        (
+            SpotId::Uhrum__Waterfalls__Green_Middle_Ledge,
+            SpotId::Uhrum__Waterfalls__East_Palm_Tree,
+        ) => true,
+        (
+            SpotId::Uhrum__Waterfalls__Green_Middle_Ledge,
+            SpotId::Uhrum__Waterfalls__Lower_East_Platform,
+        ) => true,
+        (
+            SpotId::Uhrum__Waterfalls__Green_Middle_Ledge,
+            SpotId::Uhrum__Waterfalls__East_Water_Surface,
+        ) => true,
+        (SpotId::Uhrum__Waterfalls__East_Palm_Tree, SpotId::Uhrum__Waterfalls__West_25) => true,
+        (SpotId::Uhrum__Waterfalls__West_Waters_Edge, SpotId::Uhrum__Waterfalls__West_27) => true,
+        (
+            SpotId::Uhrum__Waterfalls__West_Waters_Edge,
+            SpotId::Uhrum__Waterfalls__West_Water_Surface,
+        ) => true,
+        (
+            SpotId::Uhrum__Waterfalls__West_Water_Surface,
+            SpotId::Uhrum__Waterfalls__West_Waters_Edge,
+        ) => true,
+        (
+            SpotId::Uhrum__Waterfalls__West_Water_Surface,
+            SpotId::Uhrum__Waterfalls__West_Water_Ledge,
+        ) => true,
+        (
+            SpotId::Uhrum__Waterfalls__Center_Island_West,
+            SpotId::Uhrum__Waterfalls__Center_Island_East,
+        ) => true,
+        (
+            SpotId::Uhrum__Waterfalls__Center_Island_West,
+            SpotId::Uhrum__Waterfalls__Island_Water_West,
+        ) => true,
+        (
+            SpotId::Uhrum__Waterfalls__Center_Island_East,
+            SpotId::Uhrum__Waterfalls__Center_Island_West,
+        ) => true,
+        (
+            SpotId::Uhrum__Waterfalls__Center_Island_East,
+            SpotId::Uhrum__Waterfalls__Water_Pillar,
+        ) => true,
+        (
+            SpotId::Uhrum__Waterfalls__Island_Water_West,
+            SpotId::Uhrum__Waterfalls__West_Water_Ledge,
+        ) => true,
+        (
+            SpotId::Uhrum__Waterfalls__West_Water_Ledge,
+            SpotId::Uhrum__Waterfalls__West_Waters_Edge,
+        ) => true,
+        (
+            SpotId::Uhrum__Waterfalls__West_Water_Ledge,
+            SpotId::Uhrum__Waterfalls__West_Waters_Edge,
+        ) => true,
+        (
+            SpotId::Uhrum__Waterfalls__West_Water_Ledge,
+            SpotId::Uhrum__Waterfalls__West_Water_Nook,
+        ) => true,
+        (SpotId::Uhrum__Waterfalls__West_Water_Nook, SpotId::Uhrum__Waterfalls__Water_Slope) => {
+            true
+        }
+        (SpotId::Uhrum__Waterfalls__Water_Slope, SpotId::Uhrum__Waterfalls__Water_Pillar) => true,
+        (SpotId::Uhrum__Waterfalls__Water_Slope, SpotId::Uhrum__Waterfalls__West_Water_Ledge) => {
+            true
+        }
+        (SpotId::Uhrum__Waterfalls__Water_Slope, SpotId::Uhrum__Waterfalls__West_Water_Nook) => {
+            true
+        }
+        (SpotId::Uhrum__Waterfalls__Water_Pillar, SpotId::Uhrum__Waterfalls__West_Water_Nook) => {
+            true
+        }
+        (SpotId::Uhrum__Waterfalls__Water_Pillar, SpotId::Uhrum__Waterfalls__Water_Slope) => true,
+        (SpotId::Uhrum__Waterfalls__Water_Pillar, SpotId::Uhrum__Waterfalls__East_28) => true,
+        (
+            SpotId::Uhrum__Waterfalls__East_Water_Surface,
+            SpotId::Uhrum__Waterfalls__Water_Pillar,
+        ) => true,
+        (SpotId::Uhrum__Waterfalls__East_Water_Surface, SpotId::Uhrum__Waterfalls__East_28) => true,
+        (SpotId::Uhrum__Waterfalls__East_Waters_Edge, SpotId::Uhrum__Waterfalls__East_27) => true,
+        (
+            SpotId::Uhrum__Waterfalls__East_Waters_Edge,
+            SpotId::Uhrum__Waterfalls__East_Water_Surface,
+        ) => true,
+        (SpotId::Uhrum__Waterfalls__East_Waters_Edge, SpotId::Uhrum__Waterfalls__Water_Pillar) => {
+            true
+        }
+        (SpotId::Uhrum__Waterfalls__East_27, SpotId::Uhrum__Waterfalls__East_Waters_Edge) => true,
+        (SpotId::Uhrum__Waterfalls__East_27, SpotId::Uhrum__Waterfalls__Lower_East_Platform) => {
             true
         }
         _ => false,
@@ -34699,6 +35556,31 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             100,
         ),
         (
+            SpotId::Uhrum__Annuna_Corridor__West_25,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Uhrum__Annuna_Corridor__West_26,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Uhrum__Artillery_Practice__East_24,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Uhrum__East_Lake__West_27,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Uhrum__East_Lake__West_28,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
             SpotId::Uhrum__Glitchy_Corridor__West_28,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
@@ -35244,9 +36126,639 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             1799,
         ),
         (
+            SpotId::Uhrum__Tulip_Tower__West_24,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Uhrum__Tulip_Tower__West_24_in_Mid_air,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__Above_Block,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__Above_Block,
+            SpotId::Uhrum__Waterfalls__Below_Block,
+            349,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__Above_Block,
+            SpotId::Uhrum__Waterfalls__East_25,
+            3000,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__Above_Block,
+            SpotId::Uhrum__Waterfalls__East_26,
+            1052,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__Barrier_East,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__Barrier_East,
+            SpotId::Uhrum__Waterfalls__Barrier_West,
+            350,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__Barrier_East,
+            SpotId::Uhrum__Waterfalls__East_24,
+            877,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__Barrier_East,
+            SpotId::Uhrum__Waterfalls__East_24_in_Mid_air,
+            877,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__Barrier_West,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__Barrier_West,
+            SpotId::Uhrum__Waterfalls__Barrier_East,
+            350,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__Barrier_West,
+            SpotId::Uhrum__Waterfalls__Ceiling_Opening,
+            1578,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__Barrier_West,
+            SpotId::Uhrum__Waterfalls__Northeast_Ledge,
+            701,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__Below_Block,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__Below_Block,
+            SpotId::Uhrum__Waterfalls__Above_Block,
+            600,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__Below_Block,
+            SpotId::Uhrum__Waterfalls__East_26,
+            1228,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__Below_Block,
+            SpotId::Uhrum__Waterfalls__Lower_East_Platform,
+            701,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__Below_Block,
+            SpotId::Uhrum__Waterfalls__Small_Rock,
+            2105,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__Below_Block,
+            SpotId::Uhrum__Waterfalls__Water_Pillar,
+            1754,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__Ceiling_Cache,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__Ceiling_Cache,
+            SpotId::Uhrum__Waterfalls__Ceiling_Opening,
+            1000,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__Ceiling_Opening,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__Ceiling_Opening,
+            SpotId::Uhrum__Waterfalls__Barrier_West,
+            1578,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__Ceiling_Opening,
+            SpotId::Uhrum__Waterfalls__Ceiling_Cache,
+            1228,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__Ceiling_Opening,
+            SpotId::Uhrum__Waterfalls__Green_Middle_Ledge,
+            1949,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__Ceiling_Opening,
+            SpotId::Uhrum__Waterfalls__High_Platform,
+            649,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__Ceiling_Opening,
+            SpotId::Uhrum__Waterfalls__Northeast_Ledge,
+            877,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__Ceiling_Opening,
+            SpotId::Uhrum__Waterfalls__West_24,
+            3859,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__Center_Island_East,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__Center_Island_East,
+            SpotId::Uhrum__Waterfalls__Center_Island_West,
+            1052,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__Center_Island_East,
+            SpotId::Uhrum__Waterfalls__East_Waters_Edge,
+            1578,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__Center_Island_East,
+            SpotId::Uhrum__Waterfalls__Lower_East_Platform,
+            1403,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__Center_Island_East,
+            SpotId::Uhrum__Waterfalls__Water_Pillar,
+            350,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__Center_Island_West,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__Center_Island_West,
+            SpotId::Uhrum__Waterfalls__Center_Island_East,
+            1052,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__Center_Island_West,
+            SpotId::Uhrum__Waterfalls__Island_Water_West,
+            175,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__Center_Island_West,
+            SpotId::Uhrum__Waterfalls__West_27,
+            2280,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__East_24,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__East_24,
+            SpotId::Uhrum__Tulip_Tower__West_24,
+            1350,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__East_24,
+            SpotId::Uhrum__Waterfalls__Barrier_East,
+            1799,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__East_24_in_Mid_air,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__East_24_in_Mid_air,
+            SpotId::Uhrum__Tulip_Tower__West_24_in_Mid_air,
+            1350,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__East_24_in_Mid_air,
+            SpotId::Uhrum__Waterfalls__Barrier_East,
+            877,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__East_25,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__East_25,
+            SpotId::Uhrum__Annuna_Corridor__West_25,
+            1350,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__East_25,
+            SpotId::Uhrum__Waterfalls__Above_Block,
+            1576,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__East_26,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__East_26,
+            SpotId::Uhrum__Annuna_Corridor__West_26,
+            1350,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__East_26,
+            SpotId::Uhrum__Waterfalls__Above_Block,
+            1052,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__East_26,
+            SpotId::Uhrum__Waterfalls__Below_Block,
+            1228,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__East_27,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__East_27,
+            SpotId::Uhrum__East_Lake__West_27,
+            1350,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__East_27,
+            SpotId::Uhrum__Waterfalls__East_Waters_Edge,
+            1754,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__East_27,
+            SpotId::Uhrum__Waterfalls__Lower_East_Platform,
+            1929,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__East_28,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__East_28,
+            SpotId::Uhrum__East_Lake__West_28,
+            1350,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__East_Palm_Tree,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__East_Palm_Tree,
+            SpotId::Uhrum__Waterfalls__Ledge_Above_Palm,
+            1200,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__East_Palm_Tree,
+            SpotId::Uhrum__Waterfalls__West_25,
+            4912,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__East_Water_Surface,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__East_Water_Surface,
+            SpotId::Uhrum__Waterfalls__East_28,
+            1929,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__East_Water_Surface,
+            SpotId::Uhrum__Waterfalls__Water_Pillar,
+            1052,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__East_Waters_Edge,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__East_Waters_Edge,
+            SpotId::Uhrum__Waterfalls__East_27,
+            1754,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__East_Waters_Edge,
+            SpotId::Uhrum__Waterfalls__East_Water_Surface,
+            175,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__East_Waters_Edge,
+            SpotId::Uhrum__Waterfalls__Water_Pillar,
+            1228,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__Green_Middle_Ledge,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__Green_Middle_Ledge,
+            SpotId::Uhrum__Waterfalls__Below_Block,
+            1403,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__Green_Middle_Ledge,
+            SpotId::Uhrum__Waterfalls__East_Palm_Tree,
+            1799,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__Green_Middle_Ledge,
+            SpotId::Uhrum__Waterfalls__East_Water_Surface,
+            1800,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__Green_Middle_Ledge,
+            SpotId::Uhrum__Waterfalls__Lower_East_Platform,
+            1500,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__High_Platform,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__High_Platform,
+            SpotId::Uhrum__Waterfalls__Northeast_Ledge,
+            1052,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__High_Platform,
+            SpotId::Uhrum__Waterfalls__West_24,
+            3684,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__Island_Water_West,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__Island_Water_West,
+            SpotId::Uhrum__Waterfalls__West_Water_Ledge,
+            399,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__Large_Rock,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__Large_Rock,
+            SpotId::Uhrum__Waterfalls__Center_Island_East,
+            1578,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__Large_Rock,
+            SpotId::Uhrum__Waterfalls__Island_Water_West,
+            600,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__Large_Rock,
+            SpotId::Uhrum__Waterfalls__Medium_Rock,
+            1200,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__Large_Rock,
+            SpotId::Uhrum__Waterfalls__Small_Rock,
+            1578,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__Large_Rock,
+            SpotId::Uhrum__Waterfalls__West_27,
+            1754,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__Large_Rock,
+            SpotId::Uhrum__Waterfalls__West_Wall,
+            1200,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__Ledge_Above_Palm,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__Ledge_Above_Palm,
+            SpotId::Uhrum__Waterfalls__High_Platform,
+            1403,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__Ledge_Above_Palm,
+            SpotId::Uhrum__Waterfalls__Northeast_Ledge,
+            1200,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__Lower_East_Platform,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__Lower_East_Platform,
+            SpotId::Uhrum__Waterfalls__Below_Block,
+            1000,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__Lower_East_Platform,
+            SpotId::Uhrum__Waterfalls__Center_Island_East,
+            1403,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__Lower_East_Platform,
+            SpotId::Uhrum__Waterfalls__East_27,
+            1929,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__Lower_East_Platform,
+            SpotId::Uhrum__Waterfalls__East_Water_Surface,
+            400,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__Lower_East_Platform,
+            SpotId::Uhrum__Waterfalls__Small_Rock,
+            1403,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__Lower_East_Platform,
+            SpotId::Uhrum__Waterfalls__Water_Pillar,
+            1052,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__Medium_Rock,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__Medium_Rock,
+            SpotId::Uhrum__Waterfalls__Green_Middle_Ledge,
+            3000,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__Medium_Rock,
+            SpotId::Uhrum__Waterfalls__Large_Rock,
+            526,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__Medium_Rock,
+            SpotId::Uhrum__Waterfalls__Small_Rock,
+            1052,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__Medium_Rock,
+            SpotId::Uhrum__Waterfalls__West_Platform,
+            1200,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__Medium_Rock,
+            SpotId::Uhrum__Waterfalls__West_Wall,
+            1578,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__Northeast_Ledge,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__Northeast_Ledge,
+            SpotId::Uhrum__Waterfalls__Barrier_West,
+            1200,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__Northeast_Ledge,
+            SpotId::Uhrum__Waterfalls__Ceiling_Opening,
+            1200,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__Northeast_Ledge,
+            SpotId::Uhrum__Waterfalls__Green_Middle_Ledge,
+            1500,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__Northeast_Ledge,
+            SpotId::Uhrum__Waterfalls__High_Platform,
+            1052,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__Small_Rock,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__Small_Rock,
+            SpotId::Uhrum__Waterfalls__Large_Rock,
+            1578,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__Small_Rock,
+            SpotId::Uhrum__Waterfalls__Lower_East_Platform,
+            1403,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__Water_Pillar,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__Water_Pillar,
+            SpotId::Uhrum__Waterfalls__Center_Island_East,
+            1000,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__Water_Pillar,
+            SpotId::Uhrum__Waterfalls__East_28,
+            2982,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__Water_Pillar,
+            SpotId::Uhrum__Waterfalls__East_Waters_Edge,
+            1576,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__Water_Pillar,
+            SpotId::Uhrum__Waterfalls__Water_Slope,
+            701,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__Water_Pillar,
+            SpotId::Uhrum__Waterfalls__West_Water_Nook,
+            3333,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__Water_Slope,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__Water_Slope,
+            SpotId::Uhrum__Waterfalls__Water_Pillar,
+            2000,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__Water_Slope,
+            SpotId::Uhrum__Waterfalls__West_Water_Ledge,
+            1000,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__Water_Slope,
+            SpotId::Uhrum__Waterfalls__West_Water_Nook,
+            2631,
+        ),
+        (
             SpotId::Uhrum__Waterfalls__West_24,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__West_24,
+            SpotId::Uhrum__Artillery_Practice__East_24,
+            1350,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__West_24,
+            SpotId::Uhrum__Waterfalls__Below_Block,
+            5438,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__West_24,
+            SpotId::Uhrum__Waterfalls__East_Water_Surface,
+            4736,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__West_24,
+            SpotId::Uhrum__Waterfalls__High_Platform,
+            3684,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__West_24,
+            SpotId::Uhrum__Waterfalls__Lower_East_Platform,
+            4736,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__West_24,
+            SpotId::Uhrum__Waterfalls__West_25,
+            1100,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__West_24,
+            SpotId::Uhrum__Waterfalls__West_Platform,
+            2250,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__West_24,
+            SpotId::Uhrum__Waterfalls__West_Wall,
+            2349,
         ),
         (
             SpotId::Uhrum__Waterfalls__West_25,
@@ -35254,9 +36766,179 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             1000,
         ),
         (
+            SpotId::Uhrum__Waterfalls__West_25,
+            SpotId::Uhrum__Siege_Corridor__East_25,
+            1350,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__West_25,
+            SpotId::Uhrum__Waterfalls__Below_Block,
+            5438,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__West_25,
+            SpotId::Uhrum__Waterfalls__East_Palm_Tree,
+            4912,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__West_25,
+            SpotId::Uhrum__Waterfalls__Lower_East_Platform,
+            4736,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__West_25,
+            SpotId::Uhrum__Waterfalls__West_Platform,
+            1578,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__West_25,
+            SpotId::Uhrum__Waterfalls__West_Wall,
+            1349,
+        ),
+        (
             SpotId::Uhrum__Waterfalls__West_27,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__West_27,
+            SpotId::Uhrum__Save_Room__East,
+            1350,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__West_27,
+            SpotId::Uhrum__Waterfalls__Center_Island_West,
+            2280,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__West_27,
+            SpotId::Uhrum__Waterfalls__Large_Rock,
+            1754,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__West_27,
+            SpotId::Uhrum__Waterfalls__West_Waters_Edge,
+            877,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__West_Platform,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__West_Platform,
+            SpotId::Uhrum__Waterfalls__Center_Island_East,
+            1754,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__West_Platform,
+            SpotId::Uhrum__Waterfalls__Green_Middle_Ledge,
+            2456,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__West_Platform,
+            SpotId::Uhrum__Waterfalls__Large_Rock,
+            599,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__West_Platform,
+            SpotId::Uhrum__Waterfalls__Medium_Rock,
+            701,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__West_Platform,
+            SpotId::Uhrum__Waterfalls__West_Wall,
+            877,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__West_Wall,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__West_Wall,
+            SpotId::Uhrum__Waterfalls__Island_Water_West,
+            1403,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__West_Wall,
+            SpotId::Uhrum__Waterfalls__Large_Rock,
+            1052,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__West_Wall,
+            SpotId::Uhrum__Waterfalls__West_25,
+            3000,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__West_Wall,
+            SpotId::Uhrum__Waterfalls__West_27,
+            950,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__West_Wall,
+            SpotId::Uhrum__Waterfalls__West_Platform,
+            877,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__West_Water_Ledge,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__West_Water_Ledge,
+            SpotId::Uhrum__Waterfalls__West_Water_Nook,
+            1954,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__West_Water_Ledge,
+            SpotId::Uhrum__Waterfalls__West_Waters_Edge,
+            3000,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__West_Water_Nook,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__West_Water_Nook,
+            SpotId::Uhrum__Waterfalls__Water_Slope,
+            2631,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__West_Water_Nook,
+            SpotId::Uhrum__Waterfalls__West_Water_Ledge,
+            2252,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__West_Water_Surface,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__West_Water_Surface,
+            SpotId::Uhrum__Waterfalls__West_Water_Ledge,
+            1052,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__West_Water_Surface,
+            SpotId::Uhrum__Waterfalls__West_Waters_Edge,
+            1000,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__West_Waters_Edge,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__West_Waters_Edge,
+            SpotId::Uhrum__Waterfalls__West_27,
+            1200,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__West_Waters_Edge,
+            SpotId::Uhrum__Waterfalls__West_Water_Surface,
+            175,
         ),
         (
             SpotId::Uhrum__West_Entrance__Clear_Passage,
@@ -40436,6 +42118,233 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
             SpotId::Uhrum__Siege_Corridor__Western_Rock,
             SpotId::Uhrum__Siege_Corridor__Western_Cache,
         ) => Some(1799),
+        (SpotId::Uhrum__Waterfalls__Above_Block, SpotId::Uhrum__Waterfalls__East_26) => Some(1052),
+        (SpotId::Uhrum__Waterfalls__Barrier_East, SpotId::Uhrum__Waterfalls__East_24) => Some(877),
+        (SpotId::Uhrum__Waterfalls__Barrier_West, SpotId::Uhrum__Waterfalls__Northeast_Ledge) => {
+            Some(701)
+        }
+        (
+            SpotId::Uhrum__Waterfalls__Below_Block,
+            SpotId::Uhrum__Waterfalls__Lower_East_Platform,
+        ) => Some(701),
+        (SpotId::Uhrum__Waterfalls__Below_Block, SpotId::Uhrum__Waterfalls__Water_Pillar) => {
+            Some(1754)
+        }
+        (
+            SpotId::Uhrum__Waterfalls__Ceiling_Opening,
+            SpotId::Uhrum__Waterfalls__Green_Middle_Ledge,
+        ) => Some(1949),
+        (SpotId::Uhrum__Waterfalls__Ceiling_Opening, SpotId::Uhrum__Waterfalls__High_Platform) => {
+            Some(649)
+        }
+        (
+            SpotId::Uhrum__Waterfalls__Ceiling_Opening,
+            SpotId::Uhrum__Waterfalls__Northeast_Ledge,
+        ) => Some(877),
+        (
+            SpotId::Uhrum__Waterfalls__Center_Island_East,
+            SpotId::Uhrum__Waterfalls__Center_Island_West,
+        ) => Some(1052),
+        (
+            SpotId::Uhrum__Waterfalls__Center_Island_East,
+            SpotId::Uhrum__Waterfalls__Water_Pillar,
+        ) => Some(350),
+        (
+            SpotId::Uhrum__Waterfalls__Center_Island_West,
+            SpotId::Uhrum__Waterfalls__Center_Island_East,
+        ) => Some(1052),
+        (
+            SpotId::Uhrum__Waterfalls__Center_Island_West,
+            SpotId::Uhrum__Waterfalls__Island_Water_West,
+        ) => Some(175),
+        (SpotId::Uhrum__Waterfalls__East_24, SpotId::Uhrum__Waterfalls__Barrier_East) => Some(1799),
+        (SpotId::Uhrum__Waterfalls__East_25, SpotId::Uhrum__Waterfalls__Above_Block) => Some(1576),
+        (SpotId::Uhrum__Waterfalls__East_26, SpotId::Uhrum__Waterfalls__Above_Block) => Some(1052),
+        (SpotId::Uhrum__Waterfalls__East_27, SpotId::Uhrum__Waterfalls__East_Waters_Edge) => {
+            Some(1754)
+        }
+        (SpotId::Uhrum__Waterfalls__East_27, SpotId::Uhrum__Waterfalls__Lower_East_Platform) => {
+            Some(1929)
+        }
+        (SpotId::Uhrum__Waterfalls__East_Palm_Tree, SpotId::Uhrum__Waterfalls__West_25) => {
+            Some(4912)
+        }
+        (SpotId::Uhrum__Waterfalls__East_Water_Surface, SpotId::Uhrum__Waterfalls__East_28) => {
+            Some(2477)
+        }
+        (
+            SpotId::Uhrum__Waterfalls__East_Water_Surface,
+            SpotId::Uhrum__Waterfalls__Water_Pillar,
+        ) => Some(1351),
+        (SpotId::Uhrum__Waterfalls__East_Waters_Edge, SpotId::Uhrum__Waterfalls__East_27) => {
+            Some(1754)
+        }
+        (
+            SpotId::Uhrum__Waterfalls__East_Waters_Edge,
+            SpotId::Uhrum__Waterfalls__East_Water_Surface,
+        ) => Some(175),
+        (SpotId::Uhrum__Waterfalls__East_Waters_Edge, SpotId::Uhrum__Waterfalls__Water_Pillar) => {
+            Some(1228)
+        }
+        (
+            SpotId::Uhrum__Waterfalls__Green_Middle_Ledge,
+            SpotId::Uhrum__Waterfalls__East_Palm_Tree,
+        ) => Some(1799),
+        (
+            SpotId::Uhrum__Waterfalls__Green_Middle_Ledge,
+            SpotId::Uhrum__Waterfalls__East_Water_Surface,
+        ) => Some(1800),
+        (
+            SpotId::Uhrum__Waterfalls__Green_Middle_Ledge,
+            SpotId::Uhrum__Waterfalls__Lower_East_Platform,
+        ) => Some(1500),
+        (SpotId::Uhrum__Waterfalls__High_Platform, SpotId::Uhrum__Waterfalls__West_24) => {
+            Some(3684)
+        }
+        (
+            SpotId::Uhrum__Waterfalls__Island_Water_West,
+            SpotId::Uhrum__Waterfalls__West_Water_Ledge,
+        ) => Some(399),
+        (SpotId::Uhrum__Waterfalls__Large_Rock, SpotId::Uhrum__Waterfalls__Center_Island_East) => {
+            Some(1578)
+        }
+        (SpotId::Uhrum__Waterfalls__Large_Rock, SpotId::Uhrum__Waterfalls__Island_Water_West) => {
+            Some(600)
+        }
+        (SpotId::Uhrum__Waterfalls__Large_Rock, SpotId::Uhrum__Waterfalls__Small_Rock) => {
+            Some(1578)
+        }
+        (SpotId::Uhrum__Waterfalls__Large_Rock, SpotId::Uhrum__Waterfalls__West_27) => Some(1754),
+        (SpotId::Uhrum__Waterfalls__Ledge_Above_Palm, SpotId::Uhrum__Waterfalls__High_Platform) => {
+            Some(1403)
+        }
+        (
+            SpotId::Uhrum__Waterfalls__Lower_East_Platform,
+            SpotId::Uhrum__Waterfalls__Center_Island_East,
+        ) => Some(1403),
+        (SpotId::Uhrum__Waterfalls__Lower_East_Platform, SpotId::Uhrum__Waterfalls__East_27) => {
+            Some(1929)
+        }
+        (
+            SpotId::Uhrum__Waterfalls__Lower_East_Platform,
+            SpotId::Uhrum__Waterfalls__East_Water_Surface,
+        ) => Some(400),
+        (
+            SpotId::Uhrum__Waterfalls__Lower_East_Platform,
+            SpotId::Uhrum__Waterfalls__Water_Pillar,
+        ) => Some(1052),
+        (SpotId::Uhrum__Waterfalls__Medium_Rock, SpotId::Uhrum__Waterfalls__Large_Rock) => {
+            Some(526)
+        }
+        (SpotId::Uhrum__Waterfalls__Medium_Rock, SpotId::Uhrum__Waterfalls__Small_Rock) => {
+            Some(1052)
+        }
+        (SpotId::Uhrum__Waterfalls__Northeast_Ledge, SpotId::Uhrum__Waterfalls__Barrier_West) => {
+            Some(1200)
+        }
+        (
+            SpotId::Uhrum__Waterfalls__Northeast_Ledge,
+            SpotId::Uhrum__Waterfalls__Green_Middle_Ledge,
+        ) => Some(1500),
+        (SpotId::Uhrum__Waterfalls__Northeast_Ledge, SpotId::Uhrum__Waterfalls__High_Platform) => {
+            Some(1052)
+        }
+        (SpotId::Uhrum__Waterfalls__Small_Rock, SpotId::Uhrum__Waterfalls__Large_Rock) => {
+            Some(1578)
+        }
+        (SpotId::Uhrum__Waterfalls__Small_Rock, SpotId::Uhrum__Waterfalls__Lower_East_Platform) => {
+            Some(1403)
+        }
+        (SpotId::Uhrum__Waterfalls__Water_Pillar, SpotId::Uhrum__Waterfalls__East_28) => Some(3828),
+        (SpotId::Uhrum__Waterfalls__Water_Pillar, SpotId::Uhrum__Waterfalls__Water_Slope) => {
+            Some(900)
+        }
+        (SpotId::Uhrum__Waterfalls__Water_Pillar, SpotId::Uhrum__Waterfalls__West_Water_Nook) => {
+            Some(4279)
+        }
+        (SpotId::Uhrum__Waterfalls__Water_Slope, SpotId::Uhrum__Waterfalls__Water_Pillar) => {
+            Some(2000)
+        }
+        (SpotId::Uhrum__Waterfalls__Water_Slope, SpotId::Uhrum__Waterfalls__West_Water_Ledge) => {
+            Some(1126)
+        }
+        (SpotId::Uhrum__Waterfalls__Water_Slope, SpotId::Uhrum__Waterfalls__West_Water_Nook) => {
+            Some(3378)
+        }
+        (SpotId::Uhrum__Waterfalls__West_24, SpotId::Uhrum__Waterfalls__East_Water_Surface) => {
+            Some(4736)
+        }
+        (SpotId::Uhrum__Waterfalls__West_24, SpotId::Uhrum__Waterfalls__High_Platform) => {
+            Some(3684)
+        }
+        (SpotId::Uhrum__Waterfalls__West_24, SpotId::Uhrum__Waterfalls__Lower_East_Platform) => {
+            Some(4736)
+        }
+        (SpotId::Uhrum__Waterfalls__West_24, SpotId::Uhrum__Waterfalls__West_25) => Some(1100),
+        (SpotId::Uhrum__Waterfalls__West_24, SpotId::Uhrum__Waterfalls__West_Platform) => {
+            Some(2250)
+        }
+        (SpotId::Uhrum__Waterfalls__West_24, SpotId::Uhrum__Waterfalls__West_Wall) => Some(2349),
+        (SpotId::Uhrum__Waterfalls__West_25, SpotId::Uhrum__Waterfalls__East_Palm_Tree) => {
+            Some(4912)
+        }
+        (SpotId::Uhrum__Waterfalls__West_25, SpotId::Uhrum__Waterfalls__Lower_East_Platform) => {
+            Some(4736)
+        }
+        (SpotId::Uhrum__Waterfalls__West_25, SpotId::Uhrum__Waterfalls__West_Platform) => {
+            Some(1578)
+        }
+        (SpotId::Uhrum__Waterfalls__West_25, SpotId::Uhrum__Waterfalls__West_Wall) => Some(1349),
+        (SpotId::Uhrum__Waterfalls__West_27, SpotId::Uhrum__Waterfalls__West_Waters_Edge) => {
+            Some(877)
+        }
+        (
+            SpotId::Uhrum__Waterfalls__West_Platform,
+            SpotId::Uhrum__Waterfalls__Center_Island_East,
+        ) => Some(1754),
+        (SpotId::Uhrum__Waterfalls__West_Platform, SpotId::Uhrum__Waterfalls__Large_Rock) => {
+            Some(599)
+        }
+        (SpotId::Uhrum__Waterfalls__West_Platform, SpotId::Uhrum__Waterfalls__Medium_Rock) => {
+            Some(701)
+        }
+        (SpotId::Uhrum__Waterfalls__West_Platform, SpotId::Uhrum__Waterfalls__West_Wall) => {
+            Some(877)
+        }
+        (SpotId::Uhrum__Waterfalls__West_Wall, SpotId::Uhrum__Waterfalls__Island_Water_West) => {
+            Some(1403)
+        }
+        (SpotId::Uhrum__Waterfalls__West_Wall, SpotId::Uhrum__Waterfalls__Large_Rock) => Some(1052),
+        (SpotId::Uhrum__Waterfalls__West_Wall, SpotId::Uhrum__Waterfalls__West_27) => Some(950),
+        (SpotId::Uhrum__Waterfalls__West_Wall, SpotId::Uhrum__Waterfalls__West_Platform) => {
+            Some(877)
+        }
+        (
+            SpotId::Uhrum__Waterfalls__West_Water_Ledge,
+            SpotId::Uhrum__Waterfalls__West_Water_Nook,
+        ) => Some(2452),
+        (
+            SpotId::Uhrum__Waterfalls__West_Water_Ledge,
+            SpotId::Uhrum__Waterfalls__West_Waters_Edge,
+        ) => Some(3000),
+        (SpotId::Uhrum__Waterfalls__West_Water_Nook, SpotId::Uhrum__Waterfalls__Water_Slope) => {
+            Some(3378)
+        }
+        (
+            SpotId::Uhrum__Waterfalls__West_Water_Surface,
+            SpotId::Uhrum__Waterfalls__West_Water_Ledge,
+        ) => Some(1351),
+        (
+            SpotId::Uhrum__Waterfalls__West_Water_Surface,
+            SpotId::Uhrum__Waterfalls__West_Waters_Edge,
+        ) => Some(1000),
+        (SpotId::Uhrum__Waterfalls__West_Waters_Edge, SpotId::Uhrum__Waterfalls__West_27) => {
+            Some(1200)
+        }
+        (
+            SpotId::Uhrum__Waterfalls__West_Waters_Edge,
+            SpotId::Uhrum__Waterfalls__West_Water_Surface,
+        ) => Some(175),
         (SpotId::Uhrum__West_Entrance__Clear_Passage, SpotId::Uhrum__West_Entrance__East_26) => {
             Some(3508)
         }
@@ -46252,6 +48161,257 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
             SpotId::Uhrum__Siege_Corridor__Western_Rock,
             SpotId::Uhrum__Siege_Corridor__Western_Cache,
         ) => (Some(1799), vec![]),
+        (SpotId::Uhrum__Waterfalls__Above_Block, SpotId::Uhrum__Waterfalls__East_26) => {
+            (Some(1052), vec![])
+        }
+        (SpotId::Uhrum__Waterfalls__Barrier_East, SpotId::Uhrum__Waterfalls__East_24) => {
+            (Some(877), vec![])
+        }
+        (SpotId::Uhrum__Waterfalls__Barrier_West, SpotId::Uhrum__Waterfalls__Northeast_Ledge) => {
+            (Some(701), vec![])
+        }
+        (
+            SpotId::Uhrum__Waterfalls__Below_Block,
+            SpotId::Uhrum__Waterfalls__Lower_East_Platform,
+        ) => (Some(701), vec![]),
+        (SpotId::Uhrum__Waterfalls__Below_Block, SpotId::Uhrum__Waterfalls__Water_Pillar) => {
+            (Some(1754), vec![])
+        }
+        (
+            SpotId::Uhrum__Waterfalls__Ceiling_Opening,
+            SpotId::Uhrum__Waterfalls__Green_Middle_Ledge,
+        ) => (Some(1949), vec![]),
+        (SpotId::Uhrum__Waterfalls__Ceiling_Opening, SpotId::Uhrum__Waterfalls__High_Platform) => {
+            (Some(649), vec![])
+        }
+        (
+            SpotId::Uhrum__Waterfalls__Ceiling_Opening,
+            SpotId::Uhrum__Waterfalls__Northeast_Ledge,
+        ) => (Some(877), vec![]),
+        (
+            SpotId::Uhrum__Waterfalls__Center_Island_East,
+            SpotId::Uhrum__Waterfalls__Center_Island_West,
+        ) => (Some(1052), vec![]),
+        (
+            SpotId::Uhrum__Waterfalls__Center_Island_East,
+            SpotId::Uhrum__Waterfalls__Water_Pillar,
+        ) => (Some(350), vec![]),
+        (
+            SpotId::Uhrum__Waterfalls__Center_Island_West,
+            SpotId::Uhrum__Waterfalls__Center_Island_East,
+        ) => (Some(1052), vec![]),
+        (
+            SpotId::Uhrum__Waterfalls__Center_Island_West,
+            SpotId::Uhrum__Waterfalls__Island_Water_West,
+        ) => (Some(175), vec![]),
+        (SpotId::Uhrum__Waterfalls__East_24, SpotId::Uhrum__Waterfalls__Barrier_East) => {
+            (Some(1799), vec![])
+        }
+        (SpotId::Uhrum__Waterfalls__East_25, SpotId::Uhrum__Waterfalls__Above_Block) => {
+            (Some(1576), vec![])
+        }
+        (SpotId::Uhrum__Waterfalls__East_26, SpotId::Uhrum__Waterfalls__Above_Block) => {
+            (Some(1052), vec![])
+        }
+        (SpotId::Uhrum__Waterfalls__East_27, SpotId::Uhrum__Waterfalls__East_Waters_Edge) => {
+            (Some(1754), vec![])
+        }
+        (SpotId::Uhrum__Waterfalls__East_27, SpotId::Uhrum__Waterfalls__Lower_East_Platform) => {
+            (Some(1929), vec![])
+        }
+        (SpotId::Uhrum__Waterfalls__East_Palm_Tree, SpotId::Uhrum__Waterfalls__West_25) => {
+            (Some(4912), vec![])
+        }
+        (SpotId::Uhrum__Waterfalls__East_Water_Surface, SpotId::Uhrum__Waterfalls__East_28) => {
+            (Some(2477), vec![([true], 1929)])
+        }
+        (
+            SpotId::Uhrum__Waterfalls__East_Water_Surface,
+            SpotId::Uhrum__Waterfalls__Water_Pillar,
+        ) => (Some(1351), vec![([true], 1052)]),
+        (SpotId::Uhrum__Waterfalls__East_Waters_Edge, SpotId::Uhrum__Waterfalls__East_27) => {
+            (Some(1754), vec![])
+        }
+        (
+            SpotId::Uhrum__Waterfalls__East_Waters_Edge,
+            SpotId::Uhrum__Waterfalls__East_Water_Surface,
+        ) => (Some(175), vec![]),
+        (SpotId::Uhrum__Waterfalls__East_Waters_Edge, SpotId::Uhrum__Waterfalls__Water_Pillar) => {
+            (Some(1228), vec![])
+        }
+        (
+            SpotId::Uhrum__Waterfalls__Green_Middle_Ledge,
+            SpotId::Uhrum__Waterfalls__East_Palm_Tree,
+        ) => (Some(1799), vec![]),
+        (
+            SpotId::Uhrum__Waterfalls__Green_Middle_Ledge,
+            SpotId::Uhrum__Waterfalls__East_Water_Surface,
+        ) => (Some(1800), vec![]),
+        (
+            SpotId::Uhrum__Waterfalls__Green_Middle_Ledge,
+            SpotId::Uhrum__Waterfalls__Lower_East_Platform,
+        ) => (Some(1500), vec![]),
+        (SpotId::Uhrum__Waterfalls__High_Platform, SpotId::Uhrum__Waterfalls__West_24) => {
+            (Some(3684), vec![])
+        }
+        (
+            SpotId::Uhrum__Waterfalls__Island_Water_West,
+            SpotId::Uhrum__Waterfalls__West_Water_Ledge,
+        ) => (Some(399), vec![]),
+        (SpotId::Uhrum__Waterfalls__Large_Rock, SpotId::Uhrum__Waterfalls__Center_Island_East) => {
+            (Some(1578), vec![])
+        }
+        (SpotId::Uhrum__Waterfalls__Large_Rock, SpotId::Uhrum__Waterfalls__Island_Water_West) => {
+            (Some(600), vec![])
+        }
+        (SpotId::Uhrum__Waterfalls__Large_Rock, SpotId::Uhrum__Waterfalls__Small_Rock) => {
+            (Some(1578), vec![])
+        }
+        (SpotId::Uhrum__Waterfalls__Large_Rock, SpotId::Uhrum__Waterfalls__West_27) => {
+            (Some(1754), vec![])
+        }
+        (SpotId::Uhrum__Waterfalls__Ledge_Above_Palm, SpotId::Uhrum__Waterfalls__High_Platform) => {
+            (Some(1403), vec![])
+        }
+        (
+            SpotId::Uhrum__Waterfalls__Lower_East_Platform,
+            SpotId::Uhrum__Waterfalls__Center_Island_East,
+        ) => (Some(1403), vec![]),
+        (SpotId::Uhrum__Waterfalls__Lower_East_Platform, SpotId::Uhrum__Waterfalls__East_27) => {
+            (Some(1929), vec![])
+        }
+        (
+            SpotId::Uhrum__Waterfalls__Lower_East_Platform,
+            SpotId::Uhrum__Waterfalls__East_Water_Surface,
+        ) => (Some(400), vec![]),
+        (
+            SpotId::Uhrum__Waterfalls__Lower_East_Platform,
+            SpotId::Uhrum__Waterfalls__Water_Pillar,
+        ) => (Some(1052), vec![]),
+        (SpotId::Uhrum__Waterfalls__Medium_Rock, SpotId::Uhrum__Waterfalls__Large_Rock) => {
+            (Some(526), vec![])
+        }
+        (SpotId::Uhrum__Waterfalls__Medium_Rock, SpotId::Uhrum__Waterfalls__Small_Rock) => {
+            (Some(1052), vec![])
+        }
+        (SpotId::Uhrum__Waterfalls__Northeast_Ledge, SpotId::Uhrum__Waterfalls__Barrier_West) => {
+            (Some(1200), vec![])
+        }
+        (
+            SpotId::Uhrum__Waterfalls__Northeast_Ledge,
+            SpotId::Uhrum__Waterfalls__Green_Middle_Ledge,
+        ) => (Some(1500), vec![]),
+        (SpotId::Uhrum__Waterfalls__Northeast_Ledge, SpotId::Uhrum__Waterfalls__High_Platform) => {
+            (Some(1052), vec![])
+        }
+        (SpotId::Uhrum__Waterfalls__Small_Rock, SpotId::Uhrum__Waterfalls__Large_Rock) => {
+            (Some(1578), vec![])
+        }
+        (SpotId::Uhrum__Waterfalls__Small_Rock, SpotId::Uhrum__Waterfalls__Lower_East_Platform) => {
+            (Some(1403), vec![])
+        }
+        (SpotId::Uhrum__Waterfalls__Water_Pillar, SpotId::Uhrum__Waterfalls__East_28) => {
+            (Some(3828), vec![([true], 2982)])
+        }
+        (SpotId::Uhrum__Waterfalls__Water_Pillar, SpotId::Uhrum__Waterfalls__Water_Slope) => {
+            (Some(900), vec![([true], 701)])
+        }
+        (SpotId::Uhrum__Waterfalls__Water_Pillar, SpotId::Uhrum__Waterfalls__West_Water_Nook) => {
+            (Some(4279), vec![([true], 3333)])
+        }
+        (SpotId::Uhrum__Waterfalls__Water_Slope, SpotId::Uhrum__Waterfalls__Water_Pillar) => {
+            (Some(2000), vec![])
+        }
+        (SpotId::Uhrum__Waterfalls__Water_Slope, SpotId::Uhrum__Waterfalls__West_Water_Ledge) => {
+            (Some(1126), vec![([true], 1000)])
+        }
+        (SpotId::Uhrum__Waterfalls__Water_Slope, SpotId::Uhrum__Waterfalls__West_Water_Nook) => {
+            (Some(3378), vec![([true], 2631)])
+        }
+        (SpotId::Uhrum__Waterfalls__West_24, SpotId::Uhrum__Waterfalls__East_Water_Surface) => {
+            (Some(4736), vec![])
+        }
+        (SpotId::Uhrum__Waterfalls__West_24, SpotId::Uhrum__Waterfalls__High_Platform) => {
+            (Some(3684), vec![])
+        }
+        (SpotId::Uhrum__Waterfalls__West_24, SpotId::Uhrum__Waterfalls__Lower_East_Platform) => {
+            (Some(4736), vec![])
+        }
+        (SpotId::Uhrum__Waterfalls__West_24, SpotId::Uhrum__Waterfalls__West_25) => {
+            (Some(1100), vec![])
+        }
+        (SpotId::Uhrum__Waterfalls__West_24, SpotId::Uhrum__Waterfalls__West_Platform) => {
+            (Some(2250), vec![])
+        }
+        (SpotId::Uhrum__Waterfalls__West_24, SpotId::Uhrum__Waterfalls__West_Wall) => {
+            (Some(2349), vec![])
+        }
+        (SpotId::Uhrum__Waterfalls__West_25, SpotId::Uhrum__Waterfalls__East_Palm_Tree) => {
+            (Some(4912), vec![])
+        }
+        (SpotId::Uhrum__Waterfalls__West_25, SpotId::Uhrum__Waterfalls__Lower_East_Platform) => {
+            (Some(4736), vec![])
+        }
+        (SpotId::Uhrum__Waterfalls__West_25, SpotId::Uhrum__Waterfalls__West_Platform) => {
+            (Some(1578), vec![])
+        }
+        (SpotId::Uhrum__Waterfalls__West_25, SpotId::Uhrum__Waterfalls__West_Wall) => {
+            (Some(1349), vec![])
+        }
+        (SpotId::Uhrum__Waterfalls__West_27, SpotId::Uhrum__Waterfalls__West_Waters_Edge) => {
+            (Some(877), vec![])
+        }
+        (
+            SpotId::Uhrum__Waterfalls__West_Platform,
+            SpotId::Uhrum__Waterfalls__Center_Island_East,
+        ) => (Some(1754), vec![]),
+        (SpotId::Uhrum__Waterfalls__West_Platform, SpotId::Uhrum__Waterfalls__Large_Rock) => {
+            (Some(599), vec![])
+        }
+        (SpotId::Uhrum__Waterfalls__West_Platform, SpotId::Uhrum__Waterfalls__Medium_Rock) => {
+            (Some(701), vec![])
+        }
+        (SpotId::Uhrum__Waterfalls__West_Platform, SpotId::Uhrum__Waterfalls__West_Wall) => {
+            (Some(877), vec![])
+        }
+        (SpotId::Uhrum__Waterfalls__West_Wall, SpotId::Uhrum__Waterfalls__Island_Water_West) => {
+            (Some(1403), vec![])
+        }
+        (SpotId::Uhrum__Waterfalls__West_Wall, SpotId::Uhrum__Waterfalls__Large_Rock) => {
+            (Some(1052), vec![])
+        }
+        (SpotId::Uhrum__Waterfalls__West_Wall, SpotId::Uhrum__Waterfalls__West_27) => {
+            (Some(950), vec![])
+        }
+        (SpotId::Uhrum__Waterfalls__West_Wall, SpotId::Uhrum__Waterfalls__West_Platform) => {
+            (Some(877), vec![])
+        }
+        (
+            SpotId::Uhrum__Waterfalls__West_Water_Ledge,
+            SpotId::Uhrum__Waterfalls__West_Water_Nook,
+        ) => (Some(2452), vec![([true], 1954)]),
+        (
+            SpotId::Uhrum__Waterfalls__West_Water_Ledge,
+            SpotId::Uhrum__Waterfalls__West_Waters_Edge,
+        ) => (Some(3000), vec![]),
+        (SpotId::Uhrum__Waterfalls__West_Water_Nook, SpotId::Uhrum__Waterfalls__Water_Slope) => {
+            (Some(3378), vec![([true], 2631)])
+        }
+        (
+            SpotId::Uhrum__Waterfalls__West_Water_Surface,
+            SpotId::Uhrum__Waterfalls__West_Water_Ledge,
+        ) => (Some(1351), vec![([true], 1052)]),
+        (
+            SpotId::Uhrum__Waterfalls__West_Water_Surface,
+            SpotId::Uhrum__Waterfalls__West_Waters_Edge,
+        ) => (Some(1000), vec![]),
+        (SpotId::Uhrum__Waterfalls__West_Waters_Edge, SpotId::Uhrum__Waterfalls__West_27) => {
+            (Some(1200), vec![])
+        }
+        (
+            SpotId::Uhrum__Waterfalls__West_Waters_Edge,
+            SpotId::Uhrum__Waterfalls__West_Water_Surface,
+        ) => (Some(175), vec![]),
         (SpotId::Uhrum__West_Entrance__Clear_Passage, SpotId::Uhrum__West_Entrance__East_26) => {
             (Some(3508), vec![])
         }

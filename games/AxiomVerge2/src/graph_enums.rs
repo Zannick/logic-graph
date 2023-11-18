@@ -202,9 +202,13 @@ pub enum AreaId {
     Irikar_Breach__Uhrum_Connector,
     Irikar_Breach__Worm_Rave,
     Menu__Upgrade_Menu,
+    Uhrum__Annuna_Corridor,
+    Uhrum__Artillery_Practice,
+    Uhrum__East_Lake,
     Uhrum__Glitchy_Corridor,
     Uhrum__Save_Room,
     Uhrum__Siege_Corridor,
+    Uhrum__Tulip_Tower,
     Uhrum__Waterfalls,
     Uhrum__West_Entrance,
 }
@@ -348,9 +352,13 @@ impl fmt::Display for AreaId {
             }
             AreaId::Irikar_Breach__Worm_Rave => write!(f, "{}", "Irikar Breach > Worm Rave"),
             AreaId::Menu__Upgrade_Menu => write!(f, "{}", "Menu > Upgrade Menu"),
+            AreaId::Uhrum__Annuna_Corridor => write!(f, "{}", "Uhrum > Annuna Corridor"),
+            AreaId::Uhrum__Artillery_Practice => write!(f, "{}", "Uhrum > Artillery Practice"),
+            AreaId::Uhrum__East_Lake => write!(f, "{}", "Uhrum > East Lake"),
             AreaId::Uhrum__Glitchy_Corridor => write!(f, "{}", "Uhrum > Glitchy Corridor"),
             AreaId::Uhrum__Save_Room => write!(f, "{}", "Uhrum > Save Room"),
             AreaId::Uhrum__Siege_Corridor => write!(f, "{}", "Uhrum > Siege Corridor"),
+            AreaId::Uhrum__Tulip_Tower => write!(f, "{}", "Uhrum > Tulip Tower"),
             AreaId::Uhrum__Waterfalls => write!(f, "{}", "Uhrum > Waterfalls"),
             AreaId::Uhrum__West_Entrance => write!(f, "{}", "Uhrum > West Entrance"),
         }
@@ -477,9 +485,13 @@ impl std::str::FromStr for AreaId {
             "Irikar Breach > Uhrum Connector" => Ok(AreaId::Irikar_Breach__Uhrum_Connector),
             "Irikar Breach > Worm Rave" => Ok(AreaId::Irikar_Breach__Worm_Rave),
             "Menu > Upgrade Menu" => Ok(AreaId::Menu__Upgrade_Menu),
+            "Uhrum > Annuna Corridor" => Ok(AreaId::Uhrum__Annuna_Corridor),
+            "Uhrum > Artillery Practice" => Ok(AreaId::Uhrum__Artillery_Practice),
+            "Uhrum > East Lake" => Ok(AreaId::Uhrum__East_Lake),
             "Uhrum > Glitchy Corridor" => Ok(AreaId::Uhrum__Glitchy_Corridor),
             "Uhrum > Save Room" => Ok(AreaId::Uhrum__Save_Room),
             "Uhrum > Siege Corridor" => Ok(AreaId::Uhrum__Siege_Corridor),
+            "Uhrum > Tulip Tower" => Ok(AreaId::Uhrum__Tulip_Tower),
             "Uhrum > Waterfalls" => Ok(AreaId::Uhrum__Waterfalls),
             "Uhrum > West Entrance" => Ok(AreaId::Uhrum__West_Entrance),
             _ => Err(format!("Could not recognize as a AreaId: {}", s)),
@@ -1493,6 +1505,11 @@ pub enum SpotId {
     Menu__Upgrade_Menu__Drone,
     Menu__Upgrade_Menu__Infection,
     Menu__Upgrade_Menu__Physiology,
+    Uhrum__Annuna_Corridor__West_25,
+    Uhrum__Annuna_Corridor__West_26,
+    Uhrum__Artillery_Practice__East_24,
+    Uhrum__East_Lake__West_27,
+    Uhrum__East_Lake__West_28,
     Uhrum__Glitchy_Corridor__West_28,
     Uhrum__Save_Room__East,
     Uhrum__Save_Room__Save_Point,
@@ -1521,9 +1538,45 @@ pub enum SpotId {
     Uhrum__Siege_Corridor__West_Rocky_Ledge,
     Uhrum__Siege_Corridor__Western_Cache,
     Uhrum__Siege_Corridor__Western_Rock,
+    Uhrum__Tulip_Tower__West_24,
+    Uhrum__Tulip_Tower__West_24_in_Mid_air,
+    Uhrum__Waterfalls__Above_Block,
+    Uhrum__Waterfalls__Barrier_East,
+    Uhrum__Waterfalls__Barrier_West,
+    Uhrum__Waterfalls__Below_Block,
+    Uhrum__Waterfalls__Ceiling_Cache,
+    Uhrum__Waterfalls__Ceiling_Opening,
+    Uhrum__Waterfalls__Center_Island_East,
+    Uhrum__Waterfalls__Center_Island_West,
+    Uhrum__Waterfalls__East_24,
+    Uhrum__Waterfalls__East_24_in_Mid_air,
+    Uhrum__Waterfalls__East_25,
+    Uhrum__Waterfalls__East_26,
+    Uhrum__Waterfalls__East_27,
+    Uhrum__Waterfalls__East_28,
+    Uhrum__Waterfalls__East_Palm_Tree,
+    Uhrum__Waterfalls__East_Water_Surface,
+    Uhrum__Waterfalls__East_Waters_Edge,
+    Uhrum__Waterfalls__Green_Middle_Ledge,
+    Uhrum__Waterfalls__High_Platform,
+    Uhrum__Waterfalls__Island_Water_West,
+    Uhrum__Waterfalls__Large_Rock,
+    Uhrum__Waterfalls__Ledge_Above_Palm,
+    Uhrum__Waterfalls__Lower_East_Platform,
+    Uhrum__Waterfalls__Medium_Rock,
+    Uhrum__Waterfalls__Northeast_Ledge,
+    Uhrum__Waterfalls__Small_Rock,
+    Uhrum__Waterfalls__Water_Pillar,
+    Uhrum__Waterfalls__Water_Slope,
     Uhrum__Waterfalls__West_24,
     Uhrum__Waterfalls__West_25,
     Uhrum__Waterfalls__West_27,
+    Uhrum__Waterfalls__West_Platform,
+    Uhrum__Waterfalls__West_Wall,
+    Uhrum__Waterfalls__West_Water_Ledge,
+    Uhrum__Waterfalls__West_Water_Nook,
+    Uhrum__Waterfalls__West_Water_Surface,
+    Uhrum__Waterfalls__West_Waters_Edge,
     Uhrum__West_Entrance__Clear_Passage,
     Uhrum__West_Entrance__East_26,
     Uhrum__West_Entrance__East_28,
@@ -4020,6 +4073,17 @@ impl fmt::Display for SpotId {
             SpotId::Menu__Upgrade_Menu__Physiology => {
                 write!(f, "{}", "Menu > Upgrade Menu > Physiology")
             }
+            SpotId::Uhrum__Annuna_Corridor__West_25 => {
+                write!(f, "{}", "Uhrum > Annuna Corridor > West 25")
+            }
+            SpotId::Uhrum__Annuna_Corridor__West_26 => {
+                write!(f, "{}", "Uhrum > Annuna Corridor > West 26")
+            }
+            SpotId::Uhrum__Artillery_Practice__East_24 => {
+                write!(f, "{}", "Uhrum > Artillery Practice > East 24")
+            }
+            SpotId::Uhrum__East_Lake__West_27 => write!(f, "{}", "Uhrum > East Lake > West 27"),
+            SpotId::Uhrum__East_Lake__West_28 => write!(f, "{}", "Uhrum > East Lake > West 28"),
             SpotId::Uhrum__Glitchy_Corridor__West_28 => {
                 write!(f, "{}", "Uhrum > Glitchy Corridor > West 28")
             }
@@ -4098,9 +4162,105 @@ impl fmt::Display for SpotId {
             SpotId::Uhrum__Siege_Corridor__Western_Rock => {
                 write!(f, "{}", "Uhrum > Siege Corridor > Western Rock")
             }
+            SpotId::Uhrum__Tulip_Tower__West_24 => write!(f, "{}", "Uhrum > Tulip Tower > West 24"),
+            SpotId::Uhrum__Tulip_Tower__West_24_in_Mid_air => {
+                write!(f, "{}", "Uhrum > Tulip Tower > West 24 in Mid-air")
+            }
+            SpotId::Uhrum__Waterfalls__Above_Block => {
+                write!(f, "{}", "Uhrum > Waterfalls > Above Block")
+            }
+            SpotId::Uhrum__Waterfalls__Barrier_East => {
+                write!(f, "{}", "Uhrum > Waterfalls > Barrier East")
+            }
+            SpotId::Uhrum__Waterfalls__Barrier_West => {
+                write!(f, "{}", "Uhrum > Waterfalls > Barrier West")
+            }
+            SpotId::Uhrum__Waterfalls__Below_Block => {
+                write!(f, "{}", "Uhrum > Waterfalls > Below Block")
+            }
+            SpotId::Uhrum__Waterfalls__Ceiling_Cache => {
+                write!(f, "{}", "Uhrum > Waterfalls > Ceiling Cache")
+            }
+            SpotId::Uhrum__Waterfalls__Ceiling_Opening => {
+                write!(f, "{}", "Uhrum > Waterfalls > Ceiling Opening")
+            }
+            SpotId::Uhrum__Waterfalls__Center_Island_East => {
+                write!(f, "{}", "Uhrum > Waterfalls > Center Island East")
+            }
+            SpotId::Uhrum__Waterfalls__Center_Island_West => {
+                write!(f, "{}", "Uhrum > Waterfalls > Center Island West")
+            }
+            SpotId::Uhrum__Waterfalls__East_24 => write!(f, "{}", "Uhrum > Waterfalls > East 24"),
+            SpotId::Uhrum__Waterfalls__East_24_in_Mid_air => {
+                write!(f, "{}", "Uhrum > Waterfalls > East 24 in Mid-air")
+            }
+            SpotId::Uhrum__Waterfalls__East_25 => write!(f, "{}", "Uhrum > Waterfalls > East 25"),
+            SpotId::Uhrum__Waterfalls__East_26 => write!(f, "{}", "Uhrum > Waterfalls > East 26"),
+            SpotId::Uhrum__Waterfalls__East_27 => write!(f, "{}", "Uhrum > Waterfalls > East 27"),
+            SpotId::Uhrum__Waterfalls__East_28 => write!(f, "{}", "Uhrum > Waterfalls > East 28"),
+            SpotId::Uhrum__Waterfalls__East_Palm_Tree => {
+                write!(f, "{}", "Uhrum > Waterfalls > East Palm Tree")
+            }
+            SpotId::Uhrum__Waterfalls__East_Water_Surface => {
+                write!(f, "{}", "Uhrum > Waterfalls > East Water Surface")
+            }
+            SpotId::Uhrum__Waterfalls__East_Waters_Edge => {
+                write!(f, "{}", "Uhrum > Waterfalls > East Water's Edge")
+            }
+            SpotId::Uhrum__Waterfalls__Green_Middle_Ledge => {
+                write!(f, "{}", "Uhrum > Waterfalls > Green Middle Ledge")
+            }
+            SpotId::Uhrum__Waterfalls__High_Platform => {
+                write!(f, "{}", "Uhrum > Waterfalls > High Platform")
+            }
+            SpotId::Uhrum__Waterfalls__Island_Water_West => {
+                write!(f, "{}", "Uhrum > Waterfalls > Island Water West")
+            }
+            SpotId::Uhrum__Waterfalls__Large_Rock => {
+                write!(f, "{}", "Uhrum > Waterfalls > Large Rock")
+            }
+            SpotId::Uhrum__Waterfalls__Ledge_Above_Palm => {
+                write!(f, "{}", "Uhrum > Waterfalls > Ledge Above Palm")
+            }
+            SpotId::Uhrum__Waterfalls__Lower_East_Platform => {
+                write!(f, "{}", "Uhrum > Waterfalls > Lower East Platform")
+            }
+            SpotId::Uhrum__Waterfalls__Medium_Rock => {
+                write!(f, "{}", "Uhrum > Waterfalls > Medium Rock")
+            }
+            SpotId::Uhrum__Waterfalls__Northeast_Ledge => {
+                write!(f, "{}", "Uhrum > Waterfalls > Northeast Ledge")
+            }
+            SpotId::Uhrum__Waterfalls__Small_Rock => {
+                write!(f, "{}", "Uhrum > Waterfalls > Small Rock")
+            }
+            SpotId::Uhrum__Waterfalls__Water_Pillar => {
+                write!(f, "{}", "Uhrum > Waterfalls > Water Pillar")
+            }
+            SpotId::Uhrum__Waterfalls__Water_Slope => {
+                write!(f, "{}", "Uhrum > Waterfalls > Water Slope")
+            }
             SpotId::Uhrum__Waterfalls__West_24 => write!(f, "{}", "Uhrum > Waterfalls > West 24"),
             SpotId::Uhrum__Waterfalls__West_25 => write!(f, "{}", "Uhrum > Waterfalls > West 25"),
             SpotId::Uhrum__Waterfalls__West_27 => write!(f, "{}", "Uhrum > Waterfalls > West 27"),
+            SpotId::Uhrum__Waterfalls__West_Platform => {
+                write!(f, "{}", "Uhrum > Waterfalls > West Platform")
+            }
+            SpotId::Uhrum__Waterfalls__West_Wall => {
+                write!(f, "{}", "Uhrum > Waterfalls > West Wall")
+            }
+            SpotId::Uhrum__Waterfalls__West_Water_Ledge => {
+                write!(f, "{}", "Uhrum > Waterfalls > West Water Ledge")
+            }
+            SpotId::Uhrum__Waterfalls__West_Water_Nook => {
+                write!(f, "{}", "Uhrum > Waterfalls > West Water Nook")
+            }
+            SpotId::Uhrum__Waterfalls__West_Water_Surface => {
+                write!(f, "{}", "Uhrum > Waterfalls > West Water Surface")
+            }
+            SpotId::Uhrum__Waterfalls__West_Waters_Edge => {
+                write!(f, "{}", "Uhrum > Waterfalls > West Water's Edge")
+            }
             SpotId::Uhrum__West_Entrance__Clear_Passage => {
                 write!(f, "{}", "Uhrum > West Entrance > Clear Passage")
             }
@@ -5823,6 +5983,13 @@ impl std::str::FromStr for SpotId {
             "Menu > Upgrade Menu > Drone" => Ok(SpotId::Menu__Upgrade_Menu__Drone),
             "Menu > Upgrade Menu > Infection" => Ok(SpotId::Menu__Upgrade_Menu__Infection),
             "Menu > Upgrade Menu > Physiology" => Ok(SpotId::Menu__Upgrade_Menu__Physiology),
+            "Uhrum > Annuna Corridor > West 25" => Ok(SpotId::Uhrum__Annuna_Corridor__West_25),
+            "Uhrum > Annuna Corridor > West 26" => Ok(SpotId::Uhrum__Annuna_Corridor__West_26),
+            "Uhrum > Artillery Practice > East 24" => {
+                Ok(SpotId::Uhrum__Artillery_Practice__East_24)
+            }
+            "Uhrum > East Lake > West 27" => Ok(SpotId::Uhrum__East_Lake__West_27),
+            "Uhrum > East Lake > West 28" => Ok(SpotId::Uhrum__East_Lake__West_28),
             "Uhrum > Glitchy Corridor > West 28" => Ok(SpotId::Uhrum__Glitchy_Corridor__West_28),
             "Uhrum > Save Room > East" => Ok(SpotId::Uhrum__Save_Room__East),
             "Uhrum > Save Room > Save Point" => Ok(SpotId::Uhrum__Save_Room__Save_Point),
@@ -5887,9 +6054,77 @@ impl std::str::FromStr for SpotId {
             "Uhrum > Siege Corridor > Western Rock" => {
                 Ok(SpotId::Uhrum__Siege_Corridor__Western_Rock)
             }
+            "Uhrum > Tulip Tower > West 24" => Ok(SpotId::Uhrum__Tulip_Tower__West_24),
+            "Uhrum > Tulip Tower > West 24 in Mid-air" => {
+                Ok(SpotId::Uhrum__Tulip_Tower__West_24_in_Mid_air)
+            }
+            "Uhrum > Waterfalls > Above Block" => Ok(SpotId::Uhrum__Waterfalls__Above_Block),
+            "Uhrum > Waterfalls > Barrier East" => Ok(SpotId::Uhrum__Waterfalls__Barrier_East),
+            "Uhrum > Waterfalls > Barrier West" => Ok(SpotId::Uhrum__Waterfalls__Barrier_West),
+            "Uhrum > Waterfalls > Below Block" => Ok(SpotId::Uhrum__Waterfalls__Below_Block),
+            "Uhrum > Waterfalls > Ceiling Cache" => Ok(SpotId::Uhrum__Waterfalls__Ceiling_Cache),
+            "Uhrum > Waterfalls > Ceiling Opening" => {
+                Ok(SpotId::Uhrum__Waterfalls__Ceiling_Opening)
+            }
+            "Uhrum > Waterfalls > Center Island East" => {
+                Ok(SpotId::Uhrum__Waterfalls__Center_Island_East)
+            }
+            "Uhrum > Waterfalls > Center Island West" => {
+                Ok(SpotId::Uhrum__Waterfalls__Center_Island_West)
+            }
+            "Uhrum > Waterfalls > East 24" => Ok(SpotId::Uhrum__Waterfalls__East_24),
+            "Uhrum > Waterfalls > East 24 in Mid-air" => {
+                Ok(SpotId::Uhrum__Waterfalls__East_24_in_Mid_air)
+            }
+            "Uhrum > Waterfalls > East 25" => Ok(SpotId::Uhrum__Waterfalls__East_25),
+            "Uhrum > Waterfalls > East 26" => Ok(SpotId::Uhrum__Waterfalls__East_26),
+            "Uhrum > Waterfalls > East 27" => Ok(SpotId::Uhrum__Waterfalls__East_27),
+            "Uhrum > Waterfalls > East 28" => Ok(SpotId::Uhrum__Waterfalls__East_28),
+            "Uhrum > Waterfalls > East Palm Tree" => Ok(SpotId::Uhrum__Waterfalls__East_Palm_Tree),
+            "Uhrum > Waterfalls > East Water Surface" => {
+                Ok(SpotId::Uhrum__Waterfalls__East_Water_Surface)
+            }
+            "Uhrum > Waterfalls > East Water's Edge" => {
+                Ok(SpotId::Uhrum__Waterfalls__East_Waters_Edge)
+            }
+            "Uhrum > Waterfalls > Green Middle Ledge" => {
+                Ok(SpotId::Uhrum__Waterfalls__Green_Middle_Ledge)
+            }
+            "Uhrum > Waterfalls > High Platform" => Ok(SpotId::Uhrum__Waterfalls__High_Platform),
+            "Uhrum > Waterfalls > Island Water West" => {
+                Ok(SpotId::Uhrum__Waterfalls__Island_Water_West)
+            }
+            "Uhrum > Waterfalls > Large Rock" => Ok(SpotId::Uhrum__Waterfalls__Large_Rock),
+            "Uhrum > Waterfalls > Ledge Above Palm" => {
+                Ok(SpotId::Uhrum__Waterfalls__Ledge_Above_Palm)
+            }
+            "Uhrum > Waterfalls > Lower East Platform" => {
+                Ok(SpotId::Uhrum__Waterfalls__Lower_East_Platform)
+            }
+            "Uhrum > Waterfalls > Medium Rock" => Ok(SpotId::Uhrum__Waterfalls__Medium_Rock),
+            "Uhrum > Waterfalls > Northeast Ledge" => {
+                Ok(SpotId::Uhrum__Waterfalls__Northeast_Ledge)
+            }
+            "Uhrum > Waterfalls > Small Rock" => Ok(SpotId::Uhrum__Waterfalls__Small_Rock),
+            "Uhrum > Waterfalls > Water Pillar" => Ok(SpotId::Uhrum__Waterfalls__Water_Pillar),
+            "Uhrum > Waterfalls > Water Slope" => Ok(SpotId::Uhrum__Waterfalls__Water_Slope),
             "Uhrum > Waterfalls > West 24" => Ok(SpotId::Uhrum__Waterfalls__West_24),
             "Uhrum > Waterfalls > West 25" => Ok(SpotId::Uhrum__Waterfalls__West_25),
             "Uhrum > Waterfalls > West 27" => Ok(SpotId::Uhrum__Waterfalls__West_27),
+            "Uhrum > Waterfalls > West Platform" => Ok(SpotId::Uhrum__Waterfalls__West_Platform),
+            "Uhrum > Waterfalls > West Wall" => Ok(SpotId::Uhrum__Waterfalls__West_Wall),
+            "Uhrum > Waterfalls > West Water Ledge" => {
+                Ok(SpotId::Uhrum__Waterfalls__West_Water_Ledge)
+            }
+            "Uhrum > Waterfalls > West Water Nook" => {
+                Ok(SpotId::Uhrum__Waterfalls__West_Water_Nook)
+            }
+            "Uhrum > Waterfalls > West Water Surface" => {
+                Ok(SpotId::Uhrum__Waterfalls__West_Water_Surface)
+            }
+            "Uhrum > Waterfalls > West Water's Edge" => {
+                Ok(SpotId::Uhrum__Waterfalls__West_Waters_Edge)
+            }
             "Uhrum > West Entrance > Clear Passage" => {
                 Ok(SpotId::Uhrum__West_Entrance__Clear_Passage)
             }
@@ -6140,6 +6375,17 @@ pub enum LocationId {
     Uhrum__Siege_Corridor__Pond__Item,
     Uhrum__Siege_Corridor__Upper_Rock_Item__Urn,
     Uhrum__Siege_Corridor__Western_Cache__Core,
+    Uhrum__Waterfalls__Above_Block__Block,
+    Uhrum__Waterfalls__Barrier_East__Charge_through_Wall,
+    Uhrum__Waterfalls__Barrier_East__Mist_through_Wall,
+    Uhrum__Waterfalls__Barrier_East__Spin_through_Wall,
+    Uhrum__Waterfalls__Barrier_West__Charge_through_Wall,
+    Uhrum__Waterfalls__Barrier_West__Mist_through_Wall,
+    Uhrum__Waterfalls__Barrier_West__Spin_through_Wall,
+    Uhrum__Waterfalls__Below_Block__Shockwave_Block,
+    Uhrum__Waterfalls__Ceiling_Cache__Flask,
+    Uhrum__Waterfalls__East_26__Block,
+    Uhrum__Waterfalls__West_Water_Nook__Tablet,
     Uhrum__West_Entrance__Gate_Switch__Open_Gate,
     Uhrum__West_Entrance__Inner_Dais__Item,
     Uhrum__West_Entrance__Lower_Wall_East__Charge_through_Wall,
@@ -6790,6 +7036,53 @@ impl fmt::Display for LocationId {
             LocationId::Uhrum__Siege_Corridor__Western_Cache__Core => {
                 write!(f, "{}", "Uhrum > Siege Corridor > Western Cache > Core")
             }
+            LocationId::Uhrum__Waterfalls__Above_Block__Block => {
+                write!(f, "{}", "Uhrum > Waterfalls > Above Block > Block")
+            }
+            LocationId::Uhrum__Waterfalls__Barrier_East__Charge_through_Wall => write!(
+                f,
+                "{}",
+                "Uhrum > Waterfalls > Barrier East > Charge through Wall"
+            ),
+            LocationId::Uhrum__Waterfalls__Barrier_East__Mist_through_Wall => write!(
+                f,
+                "{}",
+                "Uhrum > Waterfalls > Barrier East > Mist through Wall"
+            ),
+            LocationId::Uhrum__Waterfalls__Barrier_East__Spin_through_Wall => write!(
+                f,
+                "{}",
+                "Uhrum > Waterfalls > Barrier East > Spin through Wall"
+            ),
+            LocationId::Uhrum__Waterfalls__Barrier_West__Charge_through_Wall => write!(
+                f,
+                "{}",
+                "Uhrum > Waterfalls > Barrier West > Charge through Wall"
+            ),
+            LocationId::Uhrum__Waterfalls__Barrier_West__Mist_through_Wall => write!(
+                f,
+                "{}",
+                "Uhrum > Waterfalls > Barrier West > Mist through Wall"
+            ),
+            LocationId::Uhrum__Waterfalls__Barrier_West__Spin_through_Wall => write!(
+                f,
+                "{}",
+                "Uhrum > Waterfalls > Barrier West > Spin through Wall"
+            ),
+            LocationId::Uhrum__Waterfalls__Below_Block__Shockwave_Block => write!(
+                f,
+                "{}",
+                "Uhrum > Waterfalls > Below Block > Shockwave Block"
+            ),
+            LocationId::Uhrum__Waterfalls__Ceiling_Cache__Flask => {
+                write!(f, "{}", "Uhrum > Waterfalls > Ceiling Cache > Flask")
+            }
+            LocationId::Uhrum__Waterfalls__East_26__Block => {
+                write!(f, "{}", "Uhrum > Waterfalls > East 26 > Block")
+            }
+            LocationId::Uhrum__Waterfalls__West_Water_Nook__Tablet => {
+                write!(f, "{}", "Uhrum > Waterfalls > West Water Nook > Tablet")
+            }
             LocationId::Uhrum__West_Entrance__Gate_Switch__Open_Gate => {
                 write!(f, "{}", "Uhrum > West Entrance > Gate Switch > Open Gate")
             }
@@ -7344,6 +7637,39 @@ impl std::str::FromStr for LocationId {
             }
             "Uhrum > Siege Corridor > Western Cache > Core" => {
                 Ok(LocationId::Uhrum__Siege_Corridor__Western_Cache__Core)
+            }
+            "Uhrum > Waterfalls > Above Block > Block" => {
+                Ok(LocationId::Uhrum__Waterfalls__Above_Block__Block)
+            }
+            "Uhrum > Waterfalls > Barrier East > Charge through Wall" => {
+                Ok(LocationId::Uhrum__Waterfalls__Barrier_East__Charge_through_Wall)
+            }
+            "Uhrum > Waterfalls > Barrier East > Mist through Wall" => {
+                Ok(LocationId::Uhrum__Waterfalls__Barrier_East__Mist_through_Wall)
+            }
+            "Uhrum > Waterfalls > Barrier East > Spin through Wall" => {
+                Ok(LocationId::Uhrum__Waterfalls__Barrier_East__Spin_through_Wall)
+            }
+            "Uhrum > Waterfalls > Barrier West > Charge through Wall" => {
+                Ok(LocationId::Uhrum__Waterfalls__Barrier_West__Charge_through_Wall)
+            }
+            "Uhrum > Waterfalls > Barrier West > Mist through Wall" => {
+                Ok(LocationId::Uhrum__Waterfalls__Barrier_West__Mist_through_Wall)
+            }
+            "Uhrum > Waterfalls > Barrier West > Spin through Wall" => {
+                Ok(LocationId::Uhrum__Waterfalls__Barrier_West__Spin_through_Wall)
+            }
+            "Uhrum > Waterfalls > Below Block > Shockwave Block" => {
+                Ok(LocationId::Uhrum__Waterfalls__Below_Block__Shockwave_Block)
+            }
+            "Uhrum > Waterfalls > Ceiling Cache > Flask" => {
+                Ok(LocationId::Uhrum__Waterfalls__Ceiling_Cache__Flask)
+            }
+            "Uhrum > Waterfalls > East 26 > Block" => {
+                Ok(LocationId::Uhrum__Waterfalls__East_26__Block)
+            }
+            "Uhrum > Waterfalls > West Water Nook > Tablet" => {
+                Ok(LocationId::Uhrum__Waterfalls__West_Water_Nook__Tablet)
             }
             "Uhrum > West Entrance > Gate Switch > Open Gate" => {
                 Ok(LocationId::Uhrum__West_Entrance__Gate_Switch__Open_Gate)
@@ -8305,6 +8631,69 @@ pub enum ExitId {
     Uhrum__Siege_Corridor__Western_Cache__ex__Northwest_Door_1,
     Uhrum__Siege_Corridor__Western_Cache__ex__Northwest_Platform_1,
     Uhrum__Siege_Corridor__Western_Rock__ex__Northwest_Platform_1,
+    Uhrum__Waterfalls__Above_Block__ex__Below_Block_1,
+    Uhrum__Waterfalls__Above_Block__ex__East_25_1,
+    Uhrum__Waterfalls__Barrier_East__Charge_through_Wall,
+    Uhrum__Waterfalls__Barrier_East__ex__Barrier_West_1,
+    Uhrum__Waterfalls__Barrier_East__ex__East_24_in_Mid_air_1,
+    Uhrum__Waterfalls__Barrier_East__Mist_through_Wall,
+    Uhrum__Waterfalls__Barrier_East__Spin_through_Wall,
+    Uhrum__Waterfalls__Barrier_West__Charge_through_Wall,
+    Uhrum__Waterfalls__Barrier_West__ex__Barrier_East_1,
+    Uhrum__Waterfalls__Barrier_West__ex__Ceiling_Opening_1,
+    Uhrum__Waterfalls__Barrier_West__Mist_through_Wall,
+    Uhrum__Waterfalls__Barrier_West__Spin_through_Wall,
+    Uhrum__Waterfalls__Below_Block__ex__Above_Block_1,
+    Uhrum__Waterfalls__Below_Block__ex__Above_Block_2,
+    Uhrum__Waterfalls__Below_Block__ex__East_26_1,
+    Uhrum__Waterfalls__Below_Block__ex__East_26_2,
+    Uhrum__Waterfalls__Below_Block__ex__Small_Rock_1,
+    Uhrum__Waterfalls__Ceiling_Cache__ex__Ceiling_Opening_1,
+    Uhrum__Waterfalls__Ceiling_Opening__ex__Barrier_West_1,
+    Uhrum__Waterfalls__Ceiling_Opening__ex__Ceiling_Cache_1,
+    Uhrum__Waterfalls__Ceiling_Opening__ex__West_24_1,
+    Uhrum__Waterfalls__Center_Island_East__ex__East_Waters_Edge_1,
+    Uhrum__Waterfalls__Center_Island_East__ex__Lower_East_Platform_1,
+    Uhrum__Waterfalls__Center_Island_West__ex__West_27_1,
+    Uhrum__Waterfalls__East_24__ex__Tulip_Tower__West_24_1,
+    Uhrum__Waterfalls__East_24_in_Mid_air__ex__Barrier_East_1,
+    Uhrum__Waterfalls__East_24_in_Mid_air__ex__Tulip_Tower__West_24_in_Mid_air_1,
+    Uhrum__Waterfalls__East_25__ex__Annuna_Corridor__West_25_1,
+    Uhrum__Waterfalls__East_26__ex__Annuna_Corridor__West_26_1,
+    Uhrum__Waterfalls__East_26__ex__Below_Block_1,
+    Uhrum__Waterfalls__East_27__ex__East_Lake__West_27_1,
+    Uhrum__Waterfalls__East_28__ex__East_Lake__West_28_1,
+    Uhrum__Waterfalls__East_Palm_Tree__ex__Ledge_Above_Palm_1,
+    Uhrum__Waterfalls__East_Palm_Tree__ex__Ledge_Above_Palm_2,
+    Uhrum__Waterfalls__Green_Middle_Ledge__ex__Below_Block_1,
+    Uhrum__Waterfalls__High_Platform__ex__Northeast_Ledge_1,
+    Uhrum__Waterfalls__High_Platform__ex__Northeast_Ledge_2,
+    Uhrum__Waterfalls__Large_Rock__ex__Medium_Rock_1,
+    Uhrum__Waterfalls__Large_Rock__ex__West_Wall_1,
+    Uhrum__Waterfalls__Ledge_Above_Palm__ex__High_Platform_1,
+    Uhrum__Waterfalls__Ledge_Above_Palm__ex__Northeast_Ledge_1,
+    Uhrum__Waterfalls__Lower_East_Platform__ex__Below_Block_1,
+    Uhrum__Waterfalls__Lower_East_Platform__ex__Small_Rock_1,
+    Uhrum__Waterfalls__Medium_Rock__ex__Green_Middle_Ledge_1,
+    Uhrum__Waterfalls__Medium_Rock__ex__West_Platform_1,
+    Uhrum__Waterfalls__Medium_Rock__ex__West_Wall_1,
+    Uhrum__Waterfalls__Northeast_Ledge__ex__Ceiling_Opening_1,
+    Uhrum__Waterfalls__Water_Pillar__ex__Center_Island_East_1,
+    Uhrum__Waterfalls__Water_Pillar__ex__Center_Island_East_2,
+    Uhrum__Waterfalls__Water_Pillar__ex__East_Waters_Edge_1,
+    Uhrum__Waterfalls__West_24__ex__Artillery_Practice__East_24_1,
+    Uhrum__Waterfalls__West_24__ex__Below_Block_1,
+    Uhrum__Waterfalls__West_25__ex__Below_Block_1,
+    Uhrum__Waterfalls__West_25__ex__Siege_Corridor__East_25_1,
+    Uhrum__Waterfalls__West_27__ex__Center_Island_West_1,
+    Uhrum__Waterfalls__West_27__ex__Large_Rock_1,
+    Uhrum__Waterfalls__West_27__ex__Save_Room__East_1,
+    Uhrum__Waterfalls__West_Platform__ex__Green_Middle_Ledge_1,
+    Uhrum__Waterfalls__West_Platform__ex__Green_Middle_Ledge_2,
+    Uhrum__Waterfalls__West_Wall__ex__West_25_1,
+    Uhrum__Waterfalls__West_Wall__ex__West_25_2,
+    Uhrum__Waterfalls__West_Water_Nook__ex__West_Water_Ledge_1,
+    Uhrum__Waterfalls__West_Water_Nook__ex__West_Water_Ledge_2,
     Uhrum__West_Entrance__Clear_Passage__ex__Portal_Stand_1,
     Uhrum__West_Entrance__Clear_Passage__ex__Portal_Stand_2,
     Uhrum__West_Entrance__East_26__ex__Siege_Corridor__West_26_1,
@@ -9268,6 +9657,69 @@ impl fmt::Display for ExitId {
             ExitId::Uhrum__Siege_Corridor__Western_Cache__ex__Northwest_Door_1 => write!(f, "{}", "Uhrum > Siege Corridor > Western Cache ==> Northwest Door (1)"),
             ExitId::Uhrum__Siege_Corridor__Western_Cache__ex__Northwest_Platform_1 => write!(f, "{}", "Uhrum > Siege Corridor > Western Cache ==> Northwest Platform (1)"),
             ExitId::Uhrum__Siege_Corridor__Western_Rock__ex__Northwest_Platform_1 => write!(f, "{}", "Uhrum > Siege Corridor > Western Rock ==> Northwest Platform (1)"),
+            ExitId::Uhrum__Waterfalls__Above_Block__ex__Below_Block_1 => write!(f, "{}", "Uhrum > Waterfalls > Above Block ==> Below Block (1)"),
+            ExitId::Uhrum__Waterfalls__Above_Block__ex__East_25_1 => write!(f, "{}", "Uhrum > Waterfalls > Above Block ==> East 25 (1)"),
+            ExitId::Uhrum__Waterfalls__Barrier_East__Charge_through_Wall => write!(f, "{}", "Uhrum > Waterfalls > Barrier East > Charge through Wall"),
+            ExitId::Uhrum__Waterfalls__Barrier_East__ex__Barrier_West_1 => write!(f, "{}", "Uhrum > Waterfalls > Barrier East ==> Barrier West (1)"),
+            ExitId::Uhrum__Waterfalls__Barrier_East__ex__East_24_in_Mid_air_1 => write!(f, "{}", "Uhrum > Waterfalls > Barrier East ==> East 24 in Mid-air (1)"),
+            ExitId::Uhrum__Waterfalls__Barrier_East__Mist_through_Wall => write!(f, "{}", "Uhrum > Waterfalls > Barrier East > Mist through Wall"),
+            ExitId::Uhrum__Waterfalls__Barrier_East__Spin_through_Wall => write!(f, "{}", "Uhrum > Waterfalls > Barrier East > Spin through Wall"),
+            ExitId::Uhrum__Waterfalls__Barrier_West__Charge_through_Wall => write!(f, "{}", "Uhrum > Waterfalls > Barrier West > Charge through Wall"),
+            ExitId::Uhrum__Waterfalls__Barrier_West__ex__Barrier_East_1 => write!(f, "{}", "Uhrum > Waterfalls > Barrier West ==> Barrier East (1)"),
+            ExitId::Uhrum__Waterfalls__Barrier_West__ex__Ceiling_Opening_1 => write!(f, "{}", "Uhrum > Waterfalls > Barrier West ==> Ceiling Opening (1)"),
+            ExitId::Uhrum__Waterfalls__Barrier_West__Mist_through_Wall => write!(f, "{}", "Uhrum > Waterfalls > Barrier West > Mist through Wall"),
+            ExitId::Uhrum__Waterfalls__Barrier_West__Spin_through_Wall => write!(f, "{}", "Uhrum > Waterfalls > Barrier West > Spin through Wall"),
+            ExitId::Uhrum__Waterfalls__Below_Block__ex__Above_Block_1 => write!(f, "{}", "Uhrum > Waterfalls > Below Block ==> Above Block (1)"),
+            ExitId::Uhrum__Waterfalls__Below_Block__ex__Above_Block_2 => write!(f, "{}", "Uhrum > Waterfalls > Below Block ==> Above Block (2)"),
+            ExitId::Uhrum__Waterfalls__Below_Block__ex__East_26_1 => write!(f, "{}", "Uhrum > Waterfalls > Below Block ==> East 26 (1)"),
+            ExitId::Uhrum__Waterfalls__Below_Block__ex__East_26_2 => write!(f, "{}", "Uhrum > Waterfalls > Below Block ==> East 26 (2)"),
+            ExitId::Uhrum__Waterfalls__Below_Block__ex__Small_Rock_1 => write!(f, "{}", "Uhrum > Waterfalls > Below Block ==> Small Rock (1)"),
+            ExitId::Uhrum__Waterfalls__Ceiling_Cache__ex__Ceiling_Opening_1 => write!(f, "{}", "Uhrum > Waterfalls > Ceiling Cache ==> Ceiling Opening (1)"),
+            ExitId::Uhrum__Waterfalls__Ceiling_Opening__ex__Barrier_West_1 => write!(f, "{}", "Uhrum > Waterfalls > Ceiling Opening ==> Barrier West (1)"),
+            ExitId::Uhrum__Waterfalls__Ceiling_Opening__ex__Ceiling_Cache_1 => write!(f, "{}", "Uhrum > Waterfalls > Ceiling Opening ==> Ceiling Cache (1)"),
+            ExitId::Uhrum__Waterfalls__Ceiling_Opening__ex__West_24_1 => write!(f, "{}", "Uhrum > Waterfalls > Ceiling Opening ==> West 24 (1)"),
+            ExitId::Uhrum__Waterfalls__Center_Island_East__ex__East_Waters_Edge_1 => write!(f, "{}", "Uhrum > Waterfalls > Center Island East ==> East Water's Edge (1)"),
+            ExitId::Uhrum__Waterfalls__Center_Island_East__ex__Lower_East_Platform_1 => write!(f, "{}", "Uhrum > Waterfalls > Center Island East ==> Lower East Platform (1)"),
+            ExitId::Uhrum__Waterfalls__Center_Island_West__ex__West_27_1 => write!(f, "{}", "Uhrum > Waterfalls > Center Island West ==> West 27 (1)"),
+            ExitId::Uhrum__Waterfalls__East_24__ex__Tulip_Tower__West_24_1 => write!(f, "{}", "Uhrum > Waterfalls > East 24 ==> Tulip Tower > West 24 (1)"),
+            ExitId::Uhrum__Waterfalls__East_24_in_Mid_air__ex__Barrier_East_1 => write!(f, "{}", "Uhrum > Waterfalls > East 24 in Mid-air ==> Barrier East (1)"),
+            ExitId::Uhrum__Waterfalls__East_24_in_Mid_air__ex__Tulip_Tower__West_24_in_Mid_air_1 => write!(f, "{}", "Uhrum > Waterfalls > East 24 in Mid-air ==> Tulip Tower > West 24 in Mid-air (1)"),
+            ExitId::Uhrum__Waterfalls__East_25__ex__Annuna_Corridor__West_25_1 => write!(f, "{}", "Uhrum > Waterfalls > East 25 ==> Annuna Corridor > West 25 (1)"),
+            ExitId::Uhrum__Waterfalls__East_26__ex__Annuna_Corridor__West_26_1 => write!(f, "{}", "Uhrum > Waterfalls > East 26 ==> Annuna Corridor > West 26 (1)"),
+            ExitId::Uhrum__Waterfalls__East_26__ex__Below_Block_1 => write!(f, "{}", "Uhrum > Waterfalls > East 26 ==> Below Block (1)"),
+            ExitId::Uhrum__Waterfalls__East_27__ex__East_Lake__West_27_1 => write!(f, "{}", "Uhrum > Waterfalls > East 27 ==> East Lake > West 27 (1)"),
+            ExitId::Uhrum__Waterfalls__East_28__ex__East_Lake__West_28_1 => write!(f, "{}", "Uhrum > Waterfalls > East 28 ==> East Lake > West 28 (1)"),
+            ExitId::Uhrum__Waterfalls__East_Palm_Tree__ex__Ledge_Above_Palm_1 => write!(f, "{}", "Uhrum > Waterfalls > East Palm Tree ==> Ledge Above Palm (1)"),
+            ExitId::Uhrum__Waterfalls__East_Palm_Tree__ex__Ledge_Above_Palm_2 => write!(f, "{}", "Uhrum > Waterfalls > East Palm Tree ==> Ledge Above Palm (2)"),
+            ExitId::Uhrum__Waterfalls__Green_Middle_Ledge__ex__Below_Block_1 => write!(f, "{}", "Uhrum > Waterfalls > Green Middle Ledge ==> Below Block (1)"),
+            ExitId::Uhrum__Waterfalls__High_Platform__ex__Northeast_Ledge_1 => write!(f, "{}", "Uhrum > Waterfalls > High Platform ==> Northeast Ledge (1)"),
+            ExitId::Uhrum__Waterfalls__High_Platform__ex__Northeast_Ledge_2 => write!(f, "{}", "Uhrum > Waterfalls > High Platform ==> Northeast Ledge (2)"),
+            ExitId::Uhrum__Waterfalls__Large_Rock__ex__Medium_Rock_1 => write!(f, "{}", "Uhrum > Waterfalls > Large Rock ==> Medium Rock (1)"),
+            ExitId::Uhrum__Waterfalls__Large_Rock__ex__West_Wall_1 => write!(f, "{}", "Uhrum > Waterfalls > Large Rock ==> West Wall (1)"),
+            ExitId::Uhrum__Waterfalls__Ledge_Above_Palm__ex__High_Platform_1 => write!(f, "{}", "Uhrum > Waterfalls > Ledge Above Palm ==> High Platform (1)"),
+            ExitId::Uhrum__Waterfalls__Ledge_Above_Palm__ex__Northeast_Ledge_1 => write!(f, "{}", "Uhrum > Waterfalls > Ledge Above Palm ==> Northeast Ledge (1)"),
+            ExitId::Uhrum__Waterfalls__Lower_East_Platform__ex__Below_Block_1 => write!(f, "{}", "Uhrum > Waterfalls > Lower East Platform ==> Below Block (1)"),
+            ExitId::Uhrum__Waterfalls__Lower_East_Platform__ex__Small_Rock_1 => write!(f, "{}", "Uhrum > Waterfalls > Lower East Platform ==> Small Rock (1)"),
+            ExitId::Uhrum__Waterfalls__Medium_Rock__ex__Green_Middle_Ledge_1 => write!(f, "{}", "Uhrum > Waterfalls > Medium Rock ==> Green Middle Ledge (1)"),
+            ExitId::Uhrum__Waterfalls__Medium_Rock__ex__West_Platform_1 => write!(f, "{}", "Uhrum > Waterfalls > Medium Rock ==> West Platform (1)"),
+            ExitId::Uhrum__Waterfalls__Medium_Rock__ex__West_Wall_1 => write!(f, "{}", "Uhrum > Waterfalls > Medium Rock ==> West Wall (1)"),
+            ExitId::Uhrum__Waterfalls__Northeast_Ledge__ex__Ceiling_Opening_1 => write!(f, "{}", "Uhrum > Waterfalls > Northeast Ledge ==> Ceiling Opening (1)"),
+            ExitId::Uhrum__Waterfalls__Water_Pillar__ex__Center_Island_East_1 => write!(f, "{}", "Uhrum > Waterfalls > Water Pillar ==> Center Island East (1)"),
+            ExitId::Uhrum__Waterfalls__Water_Pillar__ex__Center_Island_East_2 => write!(f, "{}", "Uhrum > Waterfalls > Water Pillar ==> Center Island East (2)"),
+            ExitId::Uhrum__Waterfalls__Water_Pillar__ex__East_Waters_Edge_1 => write!(f, "{}", "Uhrum > Waterfalls > Water Pillar ==> East Water's Edge (1)"),
+            ExitId::Uhrum__Waterfalls__West_24__ex__Artillery_Practice__East_24_1 => write!(f, "{}", "Uhrum > Waterfalls > West 24 ==> Artillery Practice > East 24 (1)"),
+            ExitId::Uhrum__Waterfalls__West_24__ex__Below_Block_1 => write!(f, "{}", "Uhrum > Waterfalls > West 24 ==> Below Block (1)"),
+            ExitId::Uhrum__Waterfalls__West_25__ex__Below_Block_1 => write!(f, "{}", "Uhrum > Waterfalls > West 25 ==> Below Block (1)"),
+            ExitId::Uhrum__Waterfalls__West_25__ex__Siege_Corridor__East_25_1 => write!(f, "{}", "Uhrum > Waterfalls > West 25 ==> Siege Corridor > East 25 (1)"),
+            ExitId::Uhrum__Waterfalls__West_27__ex__Center_Island_West_1 => write!(f, "{}", "Uhrum > Waterfalls > West 27 ==> Center Island West (1)"),
+            ExitId::Uhrum__Waterfalls__West_27__ex__Large_Rock_1 => write!(f, "{}", "Uhrum > Waterfalls > West 27 ==> Large Rock (1)"),
+            ExitId::Uhrum__Waterfalls__West_27__ex__Save_Room__East_1 => write!(f, "{}", "Uhrum > Waterfalls > West 27 ==> Save Room > East (1)"),
+            ExitId::Uhrum__Waterfalls__West_Platform__ex__Green_Middle_Ledge_1 => write!(f, "{}", "Uhrum > Waterfalls > West Platform ==> Green Middle Ledge (1)"),
+            ExitId::Uhrum__Waterfalls__West_Platform__ex__Green_Middle_Ledge_2 => write!(f, "{}", "Uhrum > Waterfalls > West Platform ==> Green Middle Ledge (2)"),
+            ExitId::Uhrum__Waterfalls__West_Wall__ex__West_25_1 => write!(f, "{}", "Uhrum > Waterfalls > West Wall ==> West 25 (1)"),
+            ExitId::Uhrum__Waterfalls__West_Wall__ex__West_25_2 => write!(f, "{}", "Uhrum > Waterfalls > West Wall ==> West 25 (2)"),
+            ExitId::Uhrum__Waterfalls__West_Water_Nook__ex__West_Water_Ledge_1 => write!(f, "{}", "Uhrum > Waterfalls > West Water Nook ==> West Water Ledge (1)"),
+            ExitId::Uhrum__Waterfalls__West_Water_Nook__ex__West_Water_Ledge_2 => write!(f, "{}", "Uhrum > Waterfalls > West Water Nook ==> West Water Ledge (2)"),
             ExitId::Uhrum__West_Entrance__Clear_Passage__ex__Portal_Stand_1 => write!(f, "{}", "Uhrum > West Entrance > Clear Passage ==> Portal Stand (1)"),
             ExitId::Uhrum__West_Entrance__Clear_Passage__ex__Portal_Stand_2 => write!(f, "{}", "Uhrum > West Entrance > Clear Passage ==> Portal Stand (2)"),
             ExitId::Uhrum__West_Entrance__East_26__ex__Siege_Corridor__West_26_1 => write!(f, "{}", "Uhrum > West Entrance > East 26 ==> Siege Corridor > West 26 (1)"),
@@ -10236,6 +10688,69 @@ impl std::str::FromStr for ExitId {
             "Uhrum > Siege Corridor > Western Cache ==> Northwest Door (1)" => Ok(ExitId::Uhrum__Siege_Corridor__Western_Cache__ex__Northwest_Door_1),
             "Uhrum > Siege Corridor > Western Cache ==> Northwest Platform (1)" => Ok(ExitId::Uhrum__Siege_Corridor__Western_Cache__ex__Northwest_Platform_1),
             "Uhrum > Siege Corridor > Western Rock ==> Northwest Platform (1)" => Ok(ExitId::Uhrum__Siege_Corridor__Western_Rock__ex__Northwest_Platform_1),
+            "Uhrum > Waterfalls > Above Block ==> Below Block (1)" => Ok(ExitId::Uhrum__Waterfalls__Above_Block__ex__Below_Block_1),
+            "Uhrum > Waterfalls > Above Block ==> East 25 (1)" => Ok(ExitId::Uhrum__Waterfalls__Above_Block__ex__East_25_1),
+            "Uhrum > Waterfalls > Barrier East > Charge through Wall" => Ok(ExitId::Uhrum__Waterfalls__Barrier_East__Charge_through_Wall),
+            "Uhrum > Waterfalls > Barrier East ==> Barrier West (1)" => Ok(ExitId::Uhrum__Waterfalls__Barrier_East__ex__Barrier_West_1),
+            "Uhrum > Waterfalls > Barrier East ==> East 24 in Mid-air (1)" => Ok(ExitId::Uhrum__Waterfalls__Barrier_East__ex__East_24_in_Mid_air_1),
+            "Uhrum > Waterfalls > Barrier East > Mist through Wall" => Ok(ExitId::Uhrum__Waterfalls__Barrier_East__Mist_through_Wall),
+            "Uhrum > Waterfalls > Barrier East > Spin through Wall" => Ok(ExitId::Uhrum__Waterfalls__Barrier_East__Spin_through_Wall),
+            "Uhrum > Waterfalls > Barrier West > Charge through Wall" => Ok(ExitId::Uhrum__Waterfalls__Barrier_West__Charge_through_Wall),
+            "Uhrum > Waterfalls > Barrier West ==> Barrier East (1)" => Ok(ExitId::Uhrum__Waterfalls__Barrier_West__ex__Barrier_East_1),
+            "Uhrum > Waterfalls > Barrier West ==> Ceiling Opening (1)" => Ok(ExitId::Uhrum__Waterfalls__Barrier_West__ex__Ceiling_Opening_1),
+            "Uhrum > Waterfalls > Barrier West > Mist through Wall" => Ok(ExitId::Uhrum__Waterfalls__Barrier_West__Mist_through_Wall),
+            "Uhrum > Waterfalls > Barrier West > Spin through Wall" => Ok(ExitId::Uhrum__Waterfalls__Barrier_West__Spin_through_Wall),
+            "Uhrum > Waterfalls > Below Block ==> Above Block (1)" => Ok(ExitId::Uhrum__Waterfalls__Below_Block__ex__Above_Block_1),
+            "Uhrum > Waterfalls > Below Block ==> Above Block (2)" => Ok(ExitId::Uhrum__Waterfalls__Below_Block__ex__Above_Block_2),
+            "Uhrum > Waterfalls > Below Block ==> East 26 (1)" => Ok(ExitId::Uhrum__Waterfalls__Below_Block__ex__East_26_1),
+            "Uhrum > Waterfalls > Below Block ==> East 26 (2)" => Ok(ExitId::Uhrum__Waterfalls__Below_Block__ex__East_26_2),
+            "Uhrum > Waterfalls > Below Block ==> Small Rock (1)" => Ok(ExitId::Uhrum__Waterfalls__Below_Block__ex__Small_Rock_1),
+            "Uhrum > Waterfalls > Ceiling Cache ==> Ceiling Opening (1)" => Ok(ExitId::Uhrum__Waterfalls__Ceiling_Cache__ex__Ceiling_Opening_1),
+            "Uhrum > Waterfalls > Ceiling Opening ==> Barrier West (1)" => Ok(ExitId::Uhrum__Waterfalls__Ceiling_Opening__ex__Barrier_West_1),
+            "Uhrum > Waterfalls > Ceiling Opening ==> Ceiling Cache (1)" => Ok(ExitId::Uhrum__Waterfalls__Ceiling_Opening__ex__Ceiling_Cache_1),
+            "Uhrum > Waterfalls > Ceiling Opening ==> West 24 (1)" => Ok(ExitId::Uhrum__Waterfalls__Ceiling_Opening__ex__West_24_1),
+            "Uhrum > Waterfalls > Center Island East ==> East Water's Edge (1)" => Ok(ExitId::Uhrum__Waterfalls__Center_Island_East__ex__East_Waters_Edge_1),
+            "Uhrum > Waterfalls > Center Island East ==> Lower East Platform (1)" => Ok(ExitId::Uhrum__Waterfalls__Center_Island_East__ex__Lower_East_Platform_1),
+            "Uhrum > Waterfalls > Center Island West ==> West 27 (1)" => Ok(ExitId::Uhrum__Waterfalls__Center_Island_West__ex__West_27_1),
+            "Uhrum > Waterfalls > East 24 ==> Tulip Tower > West 24 (1)" => Ok(ExitId::Uhrum__Waterfalls__East_24__ex__Tulip_Tower__West_24_1),
+            "Uhrum > Waterfalls > East 24 in Mid-air ==> Barrier East (1)" => Ok(ExitId::Uhrum__Waterfalls__East_24_in_Mid_air__ex__Barrier_East_1),
+            "Uhrum > Waterfalls > East 24 in Mid-air ==> Tulip Tower > West 24 in Mid-air (1)" => Ok(ExitId::Uhrum__Waterfalls__East_24_in_Mid_air__ex__Tulip_Tower__West_24_in_Mid_air_1),
+            "Uhrum > Waterfalls > East 25 ==> Annuna Corridor > West 25 (1)" => Ok(ExitId::Uhrum__Waterfalls__East_25__ex__Annuna_Corridor__West_25_1),
+            "Uhrum > Waterfalls > East 26 ==> Annuna Corridor > West 26 (1)" => Ok(ExitId::Uhrum__Waterfalls__East_26__ex__Annuna_Corridor__West_26_1),
+            "Uhrum > Waterfalls > East 26 ==> Below Block (1)" => Ok(ExitId::Uhrum__Waterfalls__East_26__ex__Below_Block_1),
+            "Uhrum > Waterfalls > East 27 ==> East Lake > West 27 (1)" => Ok(ExitId::Uhrum__Waterfalls__East_27__ex__East_Lake__West_27_1),
+            "Uhrum > Waterfalls > East 28 ==> East Lake > West 28 (1)" => Ok(ExitId::Uhrum__Waterfalls__East_28__ex__East_Lake__West_28_1),
+            "Uhrum > Waterfalls > East Palm Tree ==> Ledge Above Palm (1)" => Ok(ExitId::Uhrum__Waterfalls__East_Palm_Tree__ex__Ledge_Above_Palm_1),
+            "Uhrum > Waterfalls > East Palm Tree ==> Ledge Above Palm (2)" => Ok(ExitId::Uhrum__Waterfalls__East_Palm_Tree__ex__Ledge_Above_Palm_2),
+            "Uhrum > Waterfalls > Green Middle Ledge ==> Below Block (1)" => Ok(ExitId::Uhrum__Waterfalls__Green_Middle_Ledge__ex__Below_Block_1),
+            "Uhrum > Waterfalls > High Platform ==> Northeast Ledge (1)" => Ok(ExitId::Uhrum__Waterfalls__High_Platform__ex__Northeast_Ledge_1),
+            "Uhrum > Waterfalls > High Platform ==> Northeast Ledge (2)" => Ok(ExitId::Uhrum__Waterfalls__High_Platform__ex__Northeast_Ledge_2),
+            "Uhrum > Waterfalls > Large Rock ==> Medium Rock (1)" => Ok(ExitId::Uhrum__Waterfalls__Large_Rock__ex__Medium_Rock_1),
+            "Uhrum > Waterfalls > Large Rock ==> West Wall (1)" => Ok(ExitId::Uhrum__Waterfalls__Large_Rock__ex__West_Wall_1),
+            "Uhrum > Waterfalls > Ledge Above Palm ==> High Platform (1)" => Ok(ExitId::Uhrum__Waterfalls__Ledge_Above_Palm__ex__High_Platform_1),
+            "Uhrum > Waterfalls > Ledge Above Palm ==> Northeast Ledge (1)" => Ok(ExitId::Uhrum__Waterfalls__Ledge_Above_Palm__ex__Northeast_Ledge_1),
+            "Uhrum > Waterfalls > Lower East Platform ==> Below Block (1)" => Ok(ExitId::Uhrum__Waterfalls__Lower_East_Platform__ex__Below_Block_1),
+            "Uhrum > Waterfalls > Lower East Platform ==> Small Rock (1)" => Ok(ExitId::Uhrum__Waterfalls__Lower_East_Platform__ex__Small_Rock_1),
+            "Uhrum > Waterfalls > Medium Rock ==> Green Middle Ledge (1)" => Ok(ExitId::Uhrum__Waterfalls__Medium_Rock__ex__Green_Middle_Ledge_1),
+            "Uhrum > Waterfalls > Medium Rock ==> West Platform (1)" => Ok(ExitId::Uhrum__Waterfalls__Medium_Rock__ex__West_Platform_1),
+            "Uhrum > Waterfalls > Medium Rock ==> West Wall (1)" => Ok(ExitId::Uhrum__Waterfalls__Medium_Rock__ex__West_Wall_1),
+            "Uhrum > Waterfalls > Northeast Ledge ==> Ceiling Opening (1)" => Ok(ExitId::Uhrum__Waterfalls__Northeast_Ledge__ex__Ceiling_Opening_1),
+            "Uhrum > Waterfalls > Water Pillar ==> Center Island East (1)" => Ok(ExitId::Uhrum__Waterfalls__Water_Pillar__ex__Center_Island_East_1),
+            "Uhrum > Waterfalls > Water Pillar ==> Center Island East (2)" => Ok(ExitId::Uhrum__Waterfalls__Water_Pillar__ex__Center_Island_East_2),
+            "Uhrum > Waterfalls > Water Pillar ==> East Water's Edge (1)" => Ok(ExitId::Uhrum__Waterfalls__Water_Pillar__ex__East_Waters_Edge_1),
+            "Uhrum > Waterfalls > West 24 ==> Artillery Practice > East 24 (1)" => Ok(ExitId::Uhrum__Waterfalls__West_24__ex__Artillery_Practice__East_24_1),
+            "Uhrum > Waterfalls > West 24 ==> Below Block (1)" => Ok(ExitId::Uhrum__Waterfalls__West_24__ex__Below_Block_1),
+            "Uhrum > Waterfalls > West 25 ==> Below Block (1)" => Ok(ExitId::Uhrum__Waterfalls__West_25__ex__Below_Block_1),
+            "Uhrum > Waterfalls > West 25 ==> Siege Corridor > East 25 (1)" => Ok(ExitId::Uhrum__Waterfalls__West_25__ex__Siege_Corridor__East_25_1),
+            "Uhrum > Waterfalls > West 27 ==> Center Island West (1)" => Ok(ExitId::Uhrum__Waterfalls__West_27__ex__Center_Island_West_1),
+            "Uhrum > Waterfalls > West 27 ==> Large Rock (1)" => Ok(ExitId::Uhrum__Waterfalls__West_27__ex__Large_Rock_1),
+            "Uhrum > Waterfalls > West 27 ==> Save Room > East (1)" => Ok(ExitId::Uhrum__Waterfalls__West_27__ex__Save_Room__East_1),
+            "Uhrum > Waterfalls > West Platform ==> Green Middle Ledge (1)" => Ok(ExitId::Uhrum__Waterfalls__West_Platform__ex__Green_Middle_Ledge_1),
+            "Uhrum > Waterfalls > West Platform ==> Green Middle Ledge (2)" => Ok(ExitId::Uhrum__Waterfalls__West_Platform__ex__Green_Middle_Ledge_2),
+            "Uhrum > Waterfalls > West Wall ==> West 25 (1)" => Ok(ExitId::Uhrum__Waterfalls__West_Wall__ex__West_25_1),
+            "Uhrum > Waterfalls > West Wall ==> West 25 (2)" => Ok(ExitId::Uhrum__Waterfalls__West_Wall__ex__West_25_2),
+            "Uhrum > Waterfalls > West Water Nook ==> West Water Ledge (1)" => Ok(ExitId::Uhrum__Waterfalls__West_Water_Nook__ex__West_Water_Ledge_1),
+            "Uhrum > Waterfalls > West Water Nook ==> West Water Ledge (2)" => Ok(ExitId::Uhrum__Waterfalls__West_Water_Nook__ex__West_Water_Ledge_2),
             "Uhrum > West Entrance > Clear Passage ==> Portal Stand (1)" => Ok(ExitId::Uhrum__West_Entrance__Clear_Passage__ex__Portal_Stand_1),
             "Uhrum > West Entrance > Clear Passage ==> Portal Stand (2)" => Ok(ExitId::Uhrum__West_Entrance__Clear_Passage__ex__Portal_Stand_2),
             "Uhrum > West Entrance > East 26 ==> Siege Corridor > West 26 (1)" => Ok(ExitId::Uhrum__West_Entrance__East_26__ex__Siege_Corridor__West_26_1),
@@ -11022,6 +11537,8 @@ pub enum CanonId {
     Uhrum_West_Entrance_Upper_Wall,
     Uhrum_West_Entrance_Lower_Wall,
     Fast_Travel,
+    Uhrum_Waterfall_Wall,
+    Uhrum_Waterfalls_Block,
 }
 impl fmt::Display for CanonId {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
@@ -11067,6 +11584,8 @@ impl fmt::Display for CanonId {
                 write!(f, "{}", "Uhrum_West_Entrance_Lower_Wall")
             }
             CanonId::Fast_Travel => write!(f, "{}", "Fast_Travel"),
+            CanonId::Uhrum_Waterfall_Wall => write!(f, "{}", "Uhrum_Waterfall_Wall"),
+            CanonId::Uhrum_Waterfalls_Block => write!(f, "{}", "Uhrum_Waterfalls_Block"),
         }
     }
 }
@@ -11110,6 +11629,8 @@ impl std::str::FromStr for CanonId {
             "Uhrum_West_Entrance_Upper_Wall" => Ok(CanonId::Uhrum_West_Entrance_Upper_Wall),
             "Uhrum_West_Entrance_Lower_Wall" => Ok(CanonId::Uhrum_West_Entrance_Lower_Wall),
             "Fast_Travel" => Ok(CanonId::Fast_Travel),
+            "Uhrum_Waterfall_Wall" => Ok(CanonId::Uhrum_Waterfall_Wall),
+            "Uhrum_Waterfalls_Block" => Ok(CanonId::Uhrum_Waterfalls_Block),
             _ => Err(format!("Could not recognize as a CanonId: {}", s)),
         }
     }

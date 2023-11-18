@@ -226,6 +226,11 @@ warps:
     req: $ft_main and ^map__uhrum__west_entrance__save
     to: Uhrum > West Entrance > Save Point
     after: $refill_energy
+  fast_travel_uhrum_east:
+    time: 12
+    req: $ft_main and ^map__uhrum__annuna_corridor__save
+    to: Uhrum > Annuna Corridor > Save Point
+    after: $refill_energy
   fast_travel_giguna_breach_peak:
     time: 12
     req: $ft_breach and ^map__giguna_breach__peak__save
@@ -343,8 +348,8 @@ helpers:
   $all_urns:itemList: >
     [Amashilama, Ledge_Grab, Infect, Remote_Drone, Shockwave, Wall_Climb, Slingshot_Hook, Breach_Sight,
      Drone_Hover, Fast_Travel]
-  # To be added: 4 Flask, 2 Big_Flask, Double_Axe, Royal_Dagger, Udusan
-  # 1 Health_Fragment, The_Student, Heretics_Granddaughter, 
+  # To be added: 5 Flask, 2 Big_Flask, Double_Axe, Royal_Dagger, Udusan
+  # 1 Health_Fragment, The_Student, Heretics_Granddaughter, Suspension_Bridge
 
   $save:action: ^save = ^position; $refill_energy
   $refill_energy:action: ^energy = $max_energy
