@@ -1,5 +1,6 @@
 #![allow(unused)]
 
+use log;
 use std::collections::HashMap;
 use std::time::Instant;
 
@@ -236,7 +237,7 @@ where
             });
         }
     }
-    println!(
+    log::info!(
         "Built simple graph of {} nodes and {} edges in {:?}",
         nodes.len(),
         edges.len(),
