@@ -534,7 +534,7 @@ where
         }
         // Without the lock (but still blocking the push op in this thread)
         if let Some(ev) = evicted {
-            log::debug!("push+evict took {:?} with the lock", start.elapsed());
+            log::trace!("push+evict took {:?} with the lock", start.elapsed());
             if !ev.is_empty() {
                 self.evict_to_db(ev, "push")?;
             }
@@ -595,7 +595,7 @@ where
             .collect();
 
         log::debug!("Retrieve from db took {:?}", start.elapsed());
-        log::debug!("{}", self.db.get_memory_usage_stats().unwrap());
+        log::trace!("{}", self.db.get_memory_usage_stats().unwrap());
 
         Ok(res)
     }
@@ -682,7 +682,7 @@ where
                     &mut queue,
                     std::cmp::max(self.min_evictions, 2 * num_to_restore),
                 );
-                log::debug!("reshuffle:evict took {:?}", start.elapsed());
+                log::trace!("reshuffle:evict took {:?}", start.elapsed());
                 drop(queue);
                 self.evict_to_db(evicted, "reshuffle")?;
             } else {
@@ -1196,7 +1196,7 @@ where
         // Without the lock (but still blocking the extend op in this thread)
         if let Some(ev) = evicted {
             let len = ev.len();
-            log::debug!(
+            log::trace!(
                 "extend+evict took {:?} with the lock, got {} elements",
                 start.elapsed(),
                 len

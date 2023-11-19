@@ -94,10 +94,7 @@ where
                 }
             })
             .collect();
-        if self.count == 0 {
-            self.best = elapsed;
-        } else if elapsed < self.best {
-            log::info!("Better solution: {} < {}", elapsed, self.best);
+        if self.count == 0 || elapsed < self.best {
             self.best = elapsed;
         } else if elapsed - self.best > self.best / 10 {
             log::info!("Excluding solution as too slow: {} > 1.1 * {}", elapsed, self.best);

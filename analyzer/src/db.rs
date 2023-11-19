@@ -823,10 +823,10 @@ where
         }
 
         // Ignore/assert errors once we start deleting.
-        log::debug!("Beginning point deletion of iterated elements...");
+        log::trace!("Beginning point deletion of iterated elements...");
         let start = Instant::now();
         self.db.write_opt(batch, &self.write_opts).unwrap();
-        log::debug!("Deletes completed in {:?}", start.elapsed());
+        log::trace!("Deletes completed in {:?}", start.elapsed());
 
         self.size.fetch_sub(pops, Ordering::Release);
         self.pskips.fetch_add(pskips, Ordering::Release);
