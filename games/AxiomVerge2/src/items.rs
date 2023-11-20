@@ -33,6 +33,7 @@ pub enum Item {
     Amagi_Stronghold_Wall_And_Boulder_1,
     Amagi_West_Lake_Surface_Wall,
     Amashilama,
+    Annuna_Mirror_Match_Switch,
     Anuman,
     Apocalypse_Bomb,
     Big_Flask,
@@ -47,6 +48,7 @@ pub enum Item {
     Compass,
     Dangerous_Ideas,
     Dear_Ernest,
+    Defeat_Indra,
     Defeat_MUS_A_M20,
     Double_Axe,
     Drone_Hover,
@@ -114,6 +116,7 @@ pub enum Item {
     Nano_Points_2,
     Nano_Points_3,
     Notes_2053_02_27,
+    Plague_of_Thoughts,
     Power_Core,
     Power_Matrix,
     Ranged_Damage,
@@ -140,6 +143,7 @@ pub enum Item {
     Terminal_Breakthrough_2,
     The_Ideal_Kiengir,
     Udusan,
+    Uhrum_Annuna_Corridor_Block,
     Uhrum_Waterfall_Wall,
     Uhrum_Waterfalls_Block,
     Uhrum_West_Entrance_Gate,
@@ -168,6 +172,7 @@ impl fmt::Display for Item {
             }
             Item::Amagi_West_Lake_Surface_Wall => write!(f, "{}", "Amagi_West_Lake_Surface_Wall"),
             Item::Amashilama => write!(f, "{}", "Amashilama"),
+            Item::Annuna_Mirror_Match_Switch => write!(f, "{}", "Annuna_Mirror_Match_Switch"),
             Item::Anuman => write!(f, "{}", "Anuman"),
             Item::Apocalypse_Bomb => write!(f, "{}", "Apocalypse_Bomb"),
             Item::Big_Flask => write!(f, "{}", "Big_Flask"),
@@ -182,6 +187,7 @@ impl fmt::Display for Item {
             Item::Compass => write!(f, "{}", "Compass"),
             Item::Dangerous_Ideas => write!(f, "{}", "Dangerous_Ideas"),
             Item::Dear_Ernest => write!(f, "{}", "Dear_Ernest"),
+            Item::Defeat_Indra => write!(f, "{}", "Defeat_Indra"),
             Item::Defeat_MUS_A_M20 => write!(f, "{}", "Defeat_MUS_A_M20"),
             Item::Double_Axe => write!(f, "{}", "Double_Axe"),
             Item::Drone_Hover => write!(f, "{}", "Drone_Hover"),
@@ -249,6 +255,7 @@ impl fmt::Display for Item {
             Item::Nano_Points_2 => write!(f, "{}", "Nano_Points_2"),
             Item::Nano_Points_3 => write!(f, "{}", "Nano_Points_3"),
             Item::Notes_2053_02_27 => write!(f, "{}", "Notes_2053_02_27"),
+            Item::Plague_of_Thoughts => write!(f, "{}", "Plague_of_Thoughts"),
             Item::Power_Core => write!(f, "{}", "Power_Core"),
             Item::Power_Matrix => write!(f, "{}", "Power_Matrix"),
             Item::Ranged_Damage => write!(f, "{}", "Ranged_Damage"),
@@ -275,6 +282,7 @@ impl fmt::Display for Item {
             Item::Terminal_Breakthrough_2 => write!(f, "{}", "Terminal_Breakthrough_2"),
             Item::The_Ideal_Kiengir => write!(f, "{}", "The_Ideal_Kiengir"),
             Item::Udusan => write!(f, "{}", "Udusan"),
+            Item::Uhrum_Annuna_Corridor_Block => write!(f, "{}", "Uhrum_Annuna_Corridor_Block"),
             Item::Uhrum_Waterfall_Wall => write!(f, "{}", "Uhrum_Waterfall_Wall"),
             Item::Uhrum_Waterfalls_Block => write!(f, "{}", "Uhrum_Waterfalls_Block"),
             Item::Uhrum_West_Entrance_Gate => write!(f, "{}", "Uhrum_West_Entrance_Gate"),
@@ -307,6 +315,7 @@ impl std::str::FromStr for Item {
             "Amagi_Stronghold_Wall_And_Boulder_1" => Ok(Item::Amagi_Stronghold_Wall_And_Boulder_1),
             "Amagi_West_Lake_Surface_Wall" => Ok(Item::Amagi_West_Lake_Surface_Wall),
             "Amashilama" => Ok(Item::Amashilama),
+            "Annuna_Mirror_Match_Switch" => Ok(Item::Annuna_Mirror_Match_Switch),
             "Anuman" => Ok(Item::Anuman),
             "Apocalypse_Bomb" => Ok(Item::Apocalypse_Bomb),
             "Big_Flask" => Ok(Item::Big_Flask),
@@ -321,6 +330,7 @@ impl std::str::FromStr for Item {
             "Compass" => Ok(Item::Compass),
             "Dangerous_Ideas" => Ok(Item::Dangerous_Ideas),
             "Dear_Ernest" => Ok(Item::Dear_Ernest),
+            "Defeat_Indra" => Ok(Item::Defeat_Indra),
             "Defeat_MUS_A_M20" => Ok(Item::Defeat_MUS_A_M20),
             "Double_Axe" => Ok(Item::Double_Axe),
             "Drone_Hover" => Ok(Item::Drone_Hover),
@@ -388,6 +398,7 @@ impl std::str::FromStr for Item {
             "Nano_Points_2" => Ok(Item::Nano_Points_2),
             "Nano_Points_3" => Ok(Item::Nano_Points_3),
             "Notes_2053_02_27" => Ok(Item::Notes_2053_02_27),
+            "Plague_of_Thoughts" => Ok(Item::Plague_of_Thoughts),
             "Power_Core" => Ok(Item::Power_Core),
             "Power_Matrix" => Ok(Item::Power_Matrix),
             "Ranged_Damage" => Ok(Item::Ranged_Damage),
@@ -414,6 +425,7 @@ impl std::str::FromStr for Item {
             "Terminal_Breakthrough_2" => Ok(Item::Terminal_Breakthrough_2),
             "The_Ideal_Kiengir" => Ok(Item::The_Ideal_Kiengir),
             "Udusan" => Ok(Item::Udusan),
+            "Uhrum_Annuna_Corridor_Block" => Ok(Item::Uhrum_Annuna_Corridor_Block),
             "Uhrum_Waterfall_Wall" => Ok(Item::Uhrum_Waterfall_Wall),
             "Uhrum_Waterfalls_Block" => Ok(Item::Uhrum_Waterfalls_Block),
             "Uhrum_West_Entrance_Gate" => Ok(Item::Uhrum_West_Entrance_Gate),
@@ -447,6 +459,7 @@ pub fn unused_item(id: Item) -> bool {
             | Item::Melee_Speed_3
             | Item::Nano_Points_3
             | Item::Notes_2053_02_27
+            | Item::Plague_of_Thoughts
             | Item::Ranged_Damage_3
             | Item::Ranged_Speed_3
             | Item::Refill

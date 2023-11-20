@@ -102,6 +102,29 @@ subgraph Amagi
         Amagi__West_Lake__West_15(West 15);
     end
 end
+subgraph Annuna
+    subgraph Annuna__Mirror_Match[Mirror Match]
+        Annuna__Mirror_Match__West_25(West 25);
+        Annuna__Mirror_Match__West_Gap(West Gap);
+        Annuna__Mirror_Match__Save_Point(Save Point);
+        Annuna__Mirror_Match__Eastward(Eastward);
+        Annuna__Mirror_Match__Staircase(Staircase);
+        Annuna__Mirror_Match__East_25_Lower(East 25 Lower);
+        Annuna__Mirror_Match__East_25_Upper(East 25 Upper);
+        Annuna__Mirror_Match__Below_Switch(Below Switch);
+        Annuna__Mirror_Match__Central_Pillar(Central Pillar);
+        Annuna__Mirror_Match__Plinth(Plinth);
+        Annuna__Mirror_Match__Waving_Distance(Waving Distance);
+        Annuna__Mirror_Match__East_26_Lower(East 26 Lower);
+        Annuna__Mirror_Match__East_26_Upper(East 26 Upper);
+    end
+    subgraph Annuna__West_Bridge[West Bridge]
+        Annuna__West_Bridge__West_25_Lower(West 25 Lower);
+        Annuna__West_Bridge__West_25_Upper(West 25 Upper);
+        Annuna__West_Bridge__West_26_Lower(West 26 Lower);
+        Annuna__West_Bridge__West_26_Upper(West 26 Upper);
+    end
+end
 subgraph Antarctica
     subgraph Antarctica__West[West]
         Antarctica__West__Helipad(Helipad);
@@ -1358,7 +1381,18 @@ subgraph Uhrum
         Uhrum__Annuna_Corridor__Pedestal(Pedestal);
         Uhrum__Annuna_Corridor__West_26(West 26);
         Uhrum__Annuna_Corridor__Save_Point(Save Point);
+        Uhrum__Annuna_Corridor__Block_West(Block West);
         Uhrum__Annuna_Corridor__Block_East(Block East);
+        Uhrum__Annuna_Corridor__Open_Pillar(Open Pillar);
+        Uhrum__Annuna_Corridor__Between_Two_Flowers(Between Two Flowers);
+        Uhrum__Annuna_Corridor__Lower_Platform(Lower Platform);
+        Uhrum__Annuna_Corridor__Wall_Remnant(Wall Remnant);
+        Uhrum__Annuna_Corridor__Middle_Platform(Middle Platform);
+        Uhrum__Annuna_Corridor__Upper_Platform(Upper Platform);
+        Uhrum__Annuna_Corridor__Upper_Ledge(Upper Ledge);
+        Uhrum__Annuna_Corridor__East_Cubby(East Cubby);
+        Uhrum__Annuna_Corridor__Statue(Statue);
+        Uhrum__Annuna_Corridor__East_25(East 25);
     end
     subgraph Uhrum__Artillery_Practice[Artillery Practice]
         Uhrum__Artillery_Practice__East_24(East 24);
@@ -1393,6 +1427,17 @@ Amagi__West_Lake__Stronghold_Top --> Amagi__West_Lake__Stronghold_Item
 Amagi__West_Lake__Surface_Wall_Left <--> Amagi__West_Lake__Surface_Wall_Right
 Amagi__West_Lake__West_15 <--> Ebih__Vertical_Interchange__East_15
 Amagi__West_Lake__West_Bank --> Amagi__West_Lake__West_Shore
+Annuna__Mirror_Match__Below_Switch <--> Annuna__Mirror_Match__Central_Pillar
+Annuna__Mirror_Match__Central_Pillar --> Annuna__Mirror_Match__Save_Point
+Annuna__Mirror_Match__Central_Pillar --> Annuna__Mirror_Match__West_25
+Annuna__Mirror_Match__East_25_Lower --> Annuna__West_Bridge__West_25_Lower
+Annuna__Mirror_Match__East_25_Upper --> Annuna__West_Bridge__West_25_Upper
+Annuna__Mirror_Match__East_26_Lower --> Annuna__West_Bridge__West_26_Lower
+Annuna__Mirror_Match__East_26_Upper --> Annuna__Mirror_Match__East_26_Lower
+Annuna__Mirror_Match__East_26_Upper --> Annuna__West_Bridge__West_26_Upper
+Annuna__Mirror_Match__Eastward <--> Annuna__Mirror_Match__Staircase
+Annuna__Mirror_Match__Plinth --> Annuna__Mirror_Match__East_26_Upper
+Annuna__Mirror_Match__West_25 <--> Uhrum__Annuna_Corridor__East_25
 Antarctica__Building_1E__Connector --> Antarctica__Building_1E__East_Entry
 Antarctica__Building_1E__Connector <--> Antarctica__Building_1W__Connector
 Antarctica__Building_1E__East_Entry <--> Antarctica__East__Building_1_Entry
@@ -1922,6 +1967,15 @@ Menu__Upgrade_Menu__Combat <--> Menu__Upgrade_Menu__Physiology
 Menu__Upgrade_Menu__Drone <--> Menu__Upgrade_Menu__Infection
 Menu__Upgrade_Menu__Drone <--> Menu__Upgrade_Menu__Physiology
 Menu__Upgrade_Menu__Infection <--> Menu__Upgrade_Menu__Physiology
+Uhrum__Annuna_Corridor__Between_Two_Flowers --> Uhrum__Annuna_Corridor__Lower_Platform
+Uhrum__Annuna_Corridor__Block_East <--> Uhrum__Annuna_Corridor__Block_West
+Uhrum__Annuna_Corridor__Lower_Platform --> Uhrum__Annuna_Corridor__Middle_Platform
+Uhrum__Annuna_Corridor__Middle_Platform --> Uhrum__Annuna_Corridor__Upper_Ledge
+Uhrum__Annuna_Corridor__Middle_Platform --> Uhrum__Annuna_Corridor__Upper_Platform
+Uhrum__Annuna_Corridor__Statue <--> Uhrum__Annuna_Corridor__Upper_Platform
+Uhrum__Annuna_Corridor__Upper_Ledge <--> Uhrum__Annuna_Corridor__Upper_Platform
+Uhrum__Annuna_Corridor__West_25 <--> Uhrum__Waterfalls__East_25
+Uhrum__Annuna_Corridor__West_26 <--> Uhrum__Waterfalls__East_26
 Uhrum__Save_Room__East <--> Uhrum__Waterfalls__West_27
 Uhrum__Save_Room__West --> Uhrum__Glitchy_Corridor__East_27
 Uhrum__Siege_Corridor__Center_Platform_3 --> Uhrum__Siege_Corridor__Upper_Rock_West
@@ -1953,8 +2007,6 @@ Uhrum__Waterfalls__Center_Island_East --> Uhrum__Waterfalls__Lower_East_Platform
 Uhrum__Waterfalls__Center_Island_West <--> Uhrum__Waterfalls__West_27
 Uhrum__Waterfalls__East_24 --> Uhrum__Tulip_Tower__West_24
 Uhrum__Waterfalls__East_24_in_Mid_air --> Uhrum__Tulip_Tower__West_24_in_Mid_air
-Uhrum__Waterfalls__East_25 --> Uhrum__Annuna_Corridor__West_25
-Uhrum__Waterfalls__East_26 --> Uhrum__Annuna_Corridor__West_26
 Uhrum__Waterfalls__East_27 --> Uhrum__East_Lake__West_27
 Uhrum__Waterfalls__East_28 --> Uhrum__East_Lake__West_28
 Uhrum__Waterfalls__East_Palm_Tree --> Uhrum__Waterfalls__Ledge_Above_Palm

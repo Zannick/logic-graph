@@ -83,6 +83,14 @@ pub fn access_amagi_west_lake_surface_wall(ctx: &Context) -> bool {
     // Amagi_West_Lake_Surface_Wall
     ctx.has(Item::Amagi_West_Lake_Surface_Wall)
 }
+pub fn access_annuna_mirror_match_switch(ctx: &Context) -> bool {
+    // Annuna_Mirror_Match_Switch
+    ctx.has(Item::Annuna_Mirror_Match_Switch)
+}
+pub fn access_anuman(ctx: &Context) -> bool {
+    // Anuman
+    ctx.has(Item::Anuman)
+}
 pub fn access_anuman_and_grab(ctx: &Context) -> bool {
     // Anuman and $grab
     (ctx.has(Item::Anuman) && helper__grab!(ctx))
@@ -98,6 +106,10 @@ pub fn access_block_clip_and_not_ebih_waterfall_block_left(ctx: &Context) -> boo
 pub fn access_block_clip_and_not_ebih_waterfall_block_right(ctx: &Context) -> bool {
     // $block_clip and not Ebih_Waterfall_Block_Right
     (helper__block_clip!(ctx) && !ctx.has(Item::Ebih_Waterfall_Block_Right))
+}
+pub fn access_block_clip_escape_and_not_uhrum_annuna_corridor_block(ctx: &Context) -> bool {
+    // $block_clip_escape and not Uhrum_Annuna_Corridor_Block
+    (helper__block_clip_escape!(ctx) && !ctx.has(Item::Uhrum_Annuna_Corridor_Block))
 }
 pub fn access_boomerang(ctx: &Context) -> bool {
     // $boomerang
@@ -134,6 +146,10 @@ pub fn access_can_damage(ctx: &Context) -> bool {
 pub fn access_can_deploy(ctx: &Context) -> bool {
     // $can_deploy
     helper__can_deploy!(ctx)
+}
+pub fn access_can_deploy_and_drone_hover(ctx: &Context) -> bool {
+    // $can_deploy and Drone_Hover
+    (helper__can_deploy!(ctx) && ctx.has(Item::Drone_Hover))
 }
 pub fn access_can_deploy_and_slingshot_hook(ctx: &Context) -> bool {
     // $can_deploy and Slingshot_Hook
@@ -1034,6 +1050,10 @@ pub fn access_melee_speed_2(ctx: &Context) -> bool {
     // Melee_Speed_2
     ctx.has(Item::Melee_Speed_2)
 }
+pub fn access_mirror_match_open(ctx: &Context) -> bool {
+    // ^mirror_match_open
+    ctx.mirror_match_open()
+}
 pub fn access_mist2(ctx: &Context) -> bool {
     // $mist2
     helper__mist2!(ctx)
@@ -1245,6 +1265,10 @@ pub fn access_switch_36_11(ctx: &Context) -> bool {
 pub fn access_switch_40_12(ctx: &Context) -> bool {
     // Switch_40_12
     ctx.has(Item::Switch_40_12)
+}
+pub fn access_uhrum_annuna_corridor_block(ctx: &Context) -> bool {
+    // Uhrum_Annuna_Corridor_Block
+    ctx.has(Item::Uhrum_Annuna_Corridor_Block)
 }
 pub fn access_uhrum_waterfall_wall(ctx: &Context) -> bool {
     // Uhrum_Waterfall_Wall
@@ -1592,6 +1616,10 @@ pub fn action_main_portal_save_update(ctx: &mut Context) {
     // $main_portal_save_update
     helper__main_portal_save_update!(ctx);
 }
+pub fn action_mirror_match_open__true(ctx: &mut Context) {
+    // ^mirror_match_open = true
+    ctx.set_mirror_match_open(true);
+}
 pub fn action_mode__drone(ctx: &mut Context) {
     // ^mode = 'drone'
     ctx.set_mode(enums::Mode::Drone);
@@ -1616,6 +1644,17 @@ pub fn action_refills__1(ctx: &mut Context) {
 pub fn action_reset_old_area__newpos(ctx: &mut Context, newpos: SpotId) {
     // $reset_old_area(^newpos)
     helper__reset_old_area!(ctx, newpos);
+}
+pub fn action_reset_old_area__newpos_if___not_anuman____mirror_match_open__true_skip__annuna__mirror_match__save_point__fight_(
+    ctx: &mut Context,
+    newpos: SpotId,
+) {
+    // $reset_old_area(^newpos); IF (NOT Anuman) { ^mirror_match_open = true; $skip(`Annuna > Mirror Match > Save Point > Fight`) }
+    helper__reset_old_area!(ctx, newpos);
+    if !ctx.has(Item::Anuman) {
+        ctx.set_mirror_match_open(true);
+        ctx.skip(LocationId::Annuna__Mirror_Match__Save_Point__Fight);
+    }
 }
 pub fn action_save(ctx: &mut Context) {
     // $save

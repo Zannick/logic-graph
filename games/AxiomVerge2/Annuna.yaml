@@ -1,0 +1,175 @@
+name: Annuna Gorge
+short: Annuna
+
+areas:
+- name: Mirror Match
+  on_entry: >
+     $reset_old_area(^newpos);
+     IF (NOT Anuman) { ^mirror_match_open = true; $skip(`Annuna > Mirror Match > Save Point > Fight`) }
+  map:
+    save: [32, 25, 33, 26]
+  spots:
+    #region Main area
+    - name: West 25
+      coord: [32.05, 24.8]
+      local:
+        - to: West Gap
+      exits:
+        - to: Uhrum > Annuna Corridor > East 25
+          tags: [xshift]
+    - name: West Gap
+      coord: [32.2, 25.0]
+      local:
+        - to: Save Point
+    - name: Save Point
+      coord: [23.5, 25.4]
+      local:
+        - to: Eastward
+      locations:
+        - name: Fight
+          item: Defeat_Indra
+          time: 30  # ?
+      actions:
+        - name: Save
+          req: ^mirror_match_open
+          do: $save
+    - name: Eastward
+      coord: [32.95, 25.4]
+      local:
+        - to: Save Point
+      exits:
+        - to: Staircase
+          req: ^mirror_match_open
+          movement: base
+    - name: Staircase
+      coord: [33.1, 25.4]
+      local:
+        - to: East 25 Lower
+          jumps: 4
+      exits:
+        - to: Eastward
+          req: ^mirror_match_open
+          movement: base
+    - name: East 25 Lower
+      coord: [33.95, 24.8]
+      local:
+        - to: Staircase
+      exits:
+        - to: West Bridge > West 25 Lower
+          tags: [xshift]
+    #endregion
+
+    #region Upper Area
+    - name: East 25 Upper
+      coord: [33.95, 24.3]
+      local:
+        - to: Below Switch
+      exits:
+        - to: West Bridge > West 25 Upper
+          tags: [xshift]
+    - name: Below Switch
+      coord: [33.6, 24.3]
+      local:
+        - to: Staircase
+        - to: East 25 Upper
+      locations:
+        - name: Hit Switch
+          item: Annuna_Mirror_Match_Switch
+          req: $can_damage
+          time: 0  # simultaneous with movement
+      exits:
+        - to: Central Pillar
+          req: $hover and $hook
+          movement: base
+    # TODO: Wall Climb-based movement?
+    - name: Central Pillar
+      coord: [33.1, 24.3]
+      local:
+        - to: East 25 Lower
+      exits:
+        - to: Save Point
+          req: Annuna_Mirror_Match_Switch
+          movement: base
+        - to: West 25
+          req: Annuna_Mirror_Match_Switch
+          movement: base
+        - to: Below Switch
+          req: $hover and $hook
+    #endregion
+
+    #region Below the Stairs
+    - name: Plinth
+      coord: [33.55, 25.6]
+      local:
+        - to: East 26 Lower
+      locations:
+        - name: Item
+          item: Big_Flask
+          canon: Annuna_Mirror_Match_Flask
+          tags: [flask]
+      exits:
+        - to: East 26 Upper
+          req: $hover
+          movement: base
+          jumps: 1
+    - name: Waving Distance
+      coord: [33.7, 25.6]
+      local:
+        - to: East 26 Lower
+      locations:
+        - name: Shockwave Flask
+          item: Big_Flask
+          canon: Annuna_Mirror_Match_Flask
+          tags: [shockwave]
+    - name: East 26 Lower
+      coord: [33.95, 25.8]
+      local:
+        - to: Plinth
+          jumps: 1
+        - to: Waving Distance
+          jumps: 1
+      locations:
+        - name: Remote Flask
+          item: Big_Flask
+          canon: Annuna_Mirror_Match_Flask
+          req: $boomerang
+          tags: [remote_flask]
+      exits:
+        - to: West Bridge > West 26 Lower
+          tags: [xshift]
+    - name: East 26 Upper
+      coord: [33.95, 25.5]
+      local:
+        - to: Plinth
+        - to: Waving Distance
+      exits:
+        - to: West Bridge > West 26 Upper
+          tags: [xshift]
+      hybrid:
+        - name: Remote Flask
+          item: Big_Flask
+          canon: Annuna_Mirror_Match_Flask
+          req: $boomerang
+          to: East 26 Lower
+          tags: [remote_flask]
+          item_time: 0
+    #endregion
+
+- name: West Bridge
+  on_entry: $reset_old_area(^newpos)
+  map:
+    save: [36, 26, 27, 27]
+  spots:
+    #region Main Corridor
+    - name: West 25 Lower
+      coord: [34.05, 24.8]
+    - name: West 25 Upper
+      coord: [34.05, 24.3]
+    #endregion
+
+    #region Underneath
+    - name: West 26 Lower
+      coord: [34.05, 25.8]
+    - name: West 26 Upper
+      coord: [34.05, 25.5]
+    #endregion

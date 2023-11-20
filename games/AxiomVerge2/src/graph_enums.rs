@@ -22,6 +22,7 @@ use std::fmt;
 #[repr(u8)]
 pub enum RegionId {
     Amagi,
+    Annuna,
     Antarctica,
     Ebih,
     Giguna,
@@ -37,6 +38,7 @@ impl fmt::Display for RegionId {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         match self {
             RegionId::Amagi => write!(f, "{}", "Lake Amagi"),
+            RegionId::Annuna => write!(f, "{}", "Annuna Gorge"),
             RegionId::Antarctica => write!(f, "{}", "Antarctica"),
             RegionId::Ebih => write!(f, "{}", "Mt Ebih"),
             RegionId::Giguna => write!(f, "{}", "Giguna Steppes"),
@@ -57,6 +59,7 @@ impl std::str::FromStr for RegionId {
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         match s {
             "Lake Amagi" => Ok(RegionId::Amagi),
+            "Annuna Gorge" => Ok(RegionId::Annuna),
             "Antarctica" => Ok(RegionId::Antarctica),
             "Mt Ebih" => Ok(RegionId::Ebih),
             "Giguna Steppes" => Ok(RegionId::Giguna),
@@ -91,6 +94,8 @@ pub enum AreaId {
     Amagi__Liru_Room,
     Amagi__Main_Area,
     Amagi__West_Lake,
+    Annuna__Mirror_Match,
+    Annuna__West_Bridge,
     Antarctica__Building_1E,
     Antarctica__Building_1W,
     Antarctica__Building_2,
@@ -219,6 +224,8 @@ impl fmt::Display for AreaId {
             AreaId::Amagi__Liru_Room => write!(f, "{}", "Amagi > Liru Room"),
             AreaId::Amagi__Main_Area => write!(f, "{}", "Amagi > Main Area"),
             AreaId::Amagi__West_Lake => write!(f, "{}", "Amagi > West Lake"),
+            AreaId::Annuna__Mirror_Match => write!(f, "{}", "Annuna > Mirror Match"),
+            AreaId::Annuna__West_Bridge => write!(f, "{}", "Annuna > West Bridge"),
             AreaId::Antarctica__Building_1E => write!(f, "{}", "Antarctica > Building 1E"),
             AreaId::Antarctica__Building_1W => write!(f, "{}", "Antarctica > Building 1W"),
             AreaId::Antarctica__Building_2 => write!(f, "{}", "Antarctica > Building 2"),
@@ -374,6 +381,8 @@ impl std::str::FromStr for AreaId {
             "Amagi > Liru Room" => Ok(AreaId::Amagi__Liru_Room),
             "Amagi > Main Area" => Ok(AreaId::Amagi__Main_Area),
             "Amagi > West Lake" => Ok(AreaId::Amagi__West_Lake),
+            "Annuna > Mirror Match" => Ok(AreaId::Annuna__Mirror_Match),
+            "Annuna > West Bridge" => Ok(AreaId::Annuna__West_Bridge),
             "Antarctica > Building 1E" => Ok(AreaId::Antarctica__Building_1E),
             "Antarctica > Building 1W" => Ok(AreaId::Antarctica__Building_1W),
             "Antarctica > Building 2" => Ok(AreaId::Antarctica__Building_2),
@@ -608,6 +617,23 @@ pub enum SpotId {
     Amagi__West_Lake__West_Cliff,
     Amagi__West_Lake__West_Platform,
     Amagi__West_Lake__West_Shore,
+    Annuna__Mirror_Match__Below_Switch,
+    Annuna__Mirror_Match__Central_Pillar,
+    Annuna__Mirror_Match__East_25_Lower,
+    Annuna__Mirror_Match__East_25_Upper,
+    Annuna__Mirror_Match__East_26_Lower,
+    Annuna__Mirror_Match__East_26_Upper,
+    Annuna__Mirror_Match__Eastward,
+    Annuna__Mirror_Match__Plinth,
+    Annuna__Mirror_Match__Save_Point,
+    Annuna__Mirror_Match__Staircase,
+    Annuna__Mirror_Match__Waving_Distance,
+    Annuna__Mirror_Match__West_25,
+    Annuna__Mirror_Match__West_Gap,
+    Annuna__West_Bridge__West_25_Lower,
+    Annuna__West_Bridge__West_25_Upper,
+    Annuna__West_Bridge__West_26_Lower,
+    Annuna__West_Bridge__West_26_Upper,
     Antarctica__Building_1E__Connector,
     Antarctica__Building_1E__East_Entry,
     Antarctica__Building_1W__Connector,
@@ -1505,10 +1531,21 @@ pub enum SpotId {
     Menu__Upgrade_Menu__Drone,
     Menu__Upgrade_Menu__Infection,
     Menu__Upgrade_Menu__Physiology,
+    Uhrum__Annuna_Corridor__Between_Two_Flowers,
     Uhrum__Annuna_Corridor__Block_East,
+    Uhrum__Annuna_Corridor__Block_West,
+    Uhrum__Annuna_Corridor__East_25,
+    Uhrum__Annuna_Corridor__East_Cubby,
+    Uhrum__Annuna_Corridor__Lower_Platform,
+    Uhrum__Annuna_Corridor__Middle_Platform,
+    Uhrum__Annuna_Corridor__Open_Pillar,
     Uhrum__Annuna_Corridor__Pedestal,
     Uhrum__Annuna_Corridor__Save_Point,
+    Uhrum__Annuna_Corridor__Statue,
+    Uhrum__Annuna_Corridor__Upper_Ledge,
+    Uhrum__Annuna_Corridor__Upper_Platform,
     Uhrum__Annuna_Corridor__Upper_Trees,
+    Uhrum__Annuna_Corridor__Wall_Remnant,
     Uhrum__Annuna_Corridor__West_25,
     Uhrum__Annuna_Corridor__West_26,
     Uhrum__Artillery_Practice__East_24,
@@ -1839,6 +1876,57 @@ impl fmt::Display for SpotId {
             }
             SpotId::Amagi__West_Lake__West_Shore => {
                 write!(f, "{}", "Amagi > West Lake > West Shore")
+            }
+            SpotId::Annuna__Mirror_Match__Below_Switch => {
+                write!(f, "{}", "Annuna > Mirror Match > Below Switch")
+            }
+            SpotId::Annuna__Mirror_Match__Central_Pillar => {
+                write!(f, "{}", "Annuna > Mirror Match > Central Pillar")
+            }
+            SpotId::Annuna__Mirror_Match__East_25_Lower => {
+                write!(f, "{}", "Annuna > Mirror Match > East 25 Lower")
+            }
+            SpotId::Annuna__Mirror_Match__East_25_Upper => {
+                write!(f, "{}", "Annuna > Mirror Match > East 25 Upper")
+            }
+            SpotId::Annuna__Mirror_Match__East_26_Lower => {
+                write!(f, "{}", "Annuna > Mirror Match > East 26 Lower")
+            }
+            SpotId::Annuna__Mirror_Match__East_26_Upper => {
+                write!(f, "{}", "Annuna > Mirror Match > East 26 Upper")
+            }
+            SpotId::Annuna__Mirror_Match__Eastward => {
+                write!(f, "{}", "Annuna > Mirror Match > Eastward")
+            }
+            SpotId::Annuna__Mirror_Match__Plinth => {
+                write!(f, "{}", "Annuna > Mirror Match > Plinth")
+            }
+            SpotId::Annuna__Mirror_Match__Save_Point => {
+                write!(f, "{}", "Annuna > Mirror Match > Save Point")
+            }
+            SpotId::Annuna__Mirror_Match__Staircase => {
+                write!(f, "{}", "Annuna > Mirror Match > Staircase")
+            }
+            SpotId::Annuna__Mirror_Match__Waving_Distance => {
+                write!(f, "{}", "Annuna > Mirror Match > Waving Distance")
+            }
+            SpotId::Annuna__Mirror_Match__West_25 => {
+                write!(f, "{}", "Annuna > Mirror Match > West 25")
+            }
+            SpotId::Annuna__Mirror_Match__West_Gap => {
+                write!(f, "{}", "Annuna > Mirror Match > West Gap")
+            }
+            SpotId::Annuna__West_Bridge__West_25_Lower => {
+                write!(f, "{}", "Annuna > West Bridge > West 25 Lower")
+            }
+            SpotId::Annuna__West_Bridge__West_25_Upper => {
+                write!(f, "{}", "Annuna > West Bridge > West 25 Upper")
+            }
+            SpotId::Annuna__West_Bridge__West_26_Lower => {
+                write!(f, "{}", "Annuna > West Bridge > West 26 Lower")
+            }
+            SpotId::Annuna__West_Bridge__West_26_Upper => {
+                write!(f, "{}", "Annuna > West Bridge > West 26 Upper")
             }
             SpotId::Antarctica__Building_1E__Connector => {
                 write!(f, "{}", "Antarctica > Building 1E > Connector")
@@ -4079,8 +4167,29 @@ impl fmt::Display for SpotId {
             SpotId::Menu__Upgrade_Menu__Physiology => {
                 write!(f, "{}", "Menu > Upgrade Menu > Physiology")
             }
+            SpotId::Uhrum__Annuna_Corridor__Between_Two_Flowers => {
+                write!(f, "{}", "Uhrum > Annuna Corridor > Between Two Flowers")
+            }
             SpotId::Uhrum__Annuna_Corridor__Block_East => {
                 write!(f, "{}", "Uhrum > Annuna Corridor > Block East")
+            }
+            SpotId::Uhrum__Annuna_Corridor__Block_West => {
+                write!(f, "{}", "Uhrum > Annuna Corridor > Block West")
+            }
+            SpotId::Uhrum__Annuna_Corridor__East_25 => {
+                write!(f, "{}", "Uhrum > Annuna Corridor > East 25")
+            }
+            SpotId::Uhrum__Annuna_Corridor__East_Cubby => {
+                write!(f, "{}", "Uhrum > Annuna Corridor > East Cubby")
+            }
+            SpotId::Uhrum__Annuna_Corridor__Lower_Platform => {
+                write!(f, "{}", "Uhrum > Annuna Corridor > Lower Platform")
+            }
+            SpotId::Uhrum__Annuna_Corridor__Middle_Platform => {
+                write!(f, "{}", "Uhrum > Annuna Corridor > Middle Platform")
+            }
+            SpotId::Uhrum__Annuna_Corridor__Open_Pillar => {
+                write!(f, "{}", "Uhrum > Annuna Corridor > Open Pillar")
             }
             SpotId::Uhrum__Annuna_Corridor__Pedestal => {
                 write!(f, "{}", "Uhrum > Annuna Corridor > Pedestal")
@@ -4088,8 +4197,20 @@ impl fmt::Display for SpotId {
             SpotId::Uhrum__Annuna_Corridor__Save_Point => {
                 write!(f, "{}", "Uhrum > Annuna Corridor > Save Point")
             }
+            SpotId::Uhrum__Annuna_Corridor__Statue => {
+                write!(f, "{}", "Uhrum > Annuna Corridor > Statue")
+            }
+            SpotId::Uhrum__Annuna_Corridor__Upper_Ledge => {
+                write!(f, "{}", "Uhrum > Annuna Corridor > Upper Ledge")
+            }
+            SpotId::Uhrum__Annuna_Corridor__Upper_Platform => {
+                write!(f, "{}", "Uhrum > Annuna Corridor > Upper Platform")
+            }
             SpotId::Uhrum__Annuna_Corridor__Upper_Trees => {
                 write!(f, "{}", "Uhrum > Annuna Corridor > Upper Trees")
+            }
+            SpotId::Uhrum__Annuna_Corridor__Wall_Remnant => {
+                write!(f, "{}", "Uhrum > Annuna Corridor > Wall Remnant")
             }
             SpotId::Uhrum__Annuna_Corridor__West_25 => {
                 write!(f, "{}", "Uhrum > Annuna Corridor > West 25")
@@ -4522,6 +4643,45 @@ impl std::str::FromStr for SpotId {
             "Amagi > West Lake > West Cliff" => Ok(SpotId::Amagi__West_Lake__West_Cliff),
             "Amagi > West Lake > West Platform" => Ok(SpotId::Amagi__West_Lake__West_Platform),
             "Amagi > West Lake > West Shore" => Ok(SpotId::Amagi__West_Lake__West_Shore),
+            "Annuna > Mirror Match > Below Switch" => {
+                Ok(SpotId::Annuna__Mirror_Match__Below_Switch)
+            }
+            "Annuna > Mirror Match > Central Pillar" => {
+                Ok(SpotId::Annuna__Mirror_Match__Central_Pillar)
+            }
+            "Annuna > Mirror Match > East 25 Lower" => {
+                Ok(SpotId::Annuna__Mirror_Match__East_25_Lower)
+            }
+            "Annuna > Mirror Match > East 25 Upper" => {
+                Ok(SpotId::Annuna__Mirror_Match__East_25_Upper)
+            }
+            "Annuna > Mirror Match > East 26 Lower" => {
+                Ok(SpotId::Annuna__Mirror_Match__East_26_Lower)
+            }
+            "Annuna > Mirror Match > East 26 Upper" => {
+                Ok(SpotId::Annuna__Mirror_Match__East_26_Upper)
+            }
+            "Annuna > Mirror Match > Eastward" => Ok(SpotId::Annuna__Mirror_Match__Eastward),
+            "Annuna > Mirror Match > Plinth" => Ok(SpotId::Annuna__Mirror_Match__Plinth),
+            "Annuna > Mirror Match > Save Point" => Ok(SpotId::Annuna__Mirror_Match__Save_Point),
+            "Annuna > Mirror Match > Staircase" => Ok(SpotId::Annuna__Mirror_Match__Staircase),
+            "Annuna > Mirror Match > Waving Distance" => {
+                Ok(SpotId::Annuna__Mirror_Match__Waving_Distance)
+            }
+            "Annuna > Mirror Match > West 25" => Ok(SpotId::Annuna__Mirror_Match__West_25),
+            "Annuna > Mirror Match > West Gap" => Ok(SpotId::Annuna__Mirror_Match__West_Gap),
+            "Annuna > West Bridge > West 25 Lower" => {
+                Ok(SpotId::Annuna__West_Bridge__West_25_Lower)
+            }
+            "Annuna > West Bridge > West 25 Upper" => {
+                Ok(SpotId::Annuna__West_Bridge__West_25_Upper)
+            }
+            "Annuna > West Bridge > West 26 Lower" => {
+                Ok(SpotId::Annuna__West_Bridge__West_26_Lower)
+            }
+            "Annuna > West Bridge > West 26 Upper" => {
+                Ok(SpotId::Annuna__West_Bridge__West_26_Upper)
+            }
             "Antarctica > Building 1E > Connector" => {
                 Ok(SpotId::Antarctica__Building_1E__Connector)
             }
@@ -6007,15 +6167,44 @@ impl std::str::FromStr for SpotId {
             "Menu > Upgrade Menu > Drone" => Ok(SpotId::Menu__Upgrade_Menu__Drone),
             "Menu > Upgrade Menu > Infection" => Ok(SpotId::Menu__Upgrade_Menu__Infection),
             "Menu > Upgrade Menu > Physiology" => Ok(SpotId::Menu__Upgrade_Menu__Physiology),
+            "Uhrum > Annuna Corridor > Between Two Flowers" => {
+                Ok(SpotId::Uhrum__Annuna_Corridor__Between_Two_Flowers)
+            }
             "Uhrum > Annuna Corridor > Block East" => {
                 Ok(SpotId::Uhrum__Annuna_Corridor__Block_East)
+            }
+            "Uhrum > Annuna Corridor > Block West" => {
+                Ok(SpotId::Uhrum__Annuna_Corridor__Block_West)
+            }
+            "Uhrum > Annuna Corridor > East 25" => Ok(SpotId::Uhrum__Annuna_Corridor__East_25),
+            "Uhrum > Annuna Corridor > East Cubby" => {
+                Ok(SpotId::Uhrum__Annuna_Corridor__East_Cubby)
+            }
+            "Uhrum > Annuna Corridor > Lower Platform" => {
+                Ok(SpotId::Uhrum__Annuna_Corridor__Lower_Platform)
+            }
+            "Uhrum > Annuna Corridor > Middle Platform" => {
+                Ok(SpotId::Uhrum__Annuna_Corridor__Middle_Platform)
+            }
+            "Uhrum > Annuna Corridor > Open Pillar" => {
+                Ok(SpotId::Uhrum__Annuna_Corridor__Open_Pillar)
             }
             "Uhrum > Annuna Corridor > Pedestal" => Ok(SpotId::Uhrum__Annuna_Corridor__Pedestal),
             "Uhrum > Annuna Corridor > Save Point" => {
                 Ok(SpotId::Uhrum__Annuna_Corridor__Save_Point)
             }
+            "Uhrum > Annuna Corridor > Statue" => Ok(SpotId::Uhrum__Annuna_Corridor__Statue),
+            "Uhrum > Annuna Corridor > Upper Ledge" => {
+                Ok(SpotId::Uhrum__Annuna_Corridor__Upper_Ledge)
+            }
+            "Uhrum > Annuna Corridor > Upper Platform" => {
+                Ok(SpotId::Uhrum__Annuna_Corridor__Upper_Platform)
+            }
             "Uhrum > Annuna Corridor > Upper Trees" => {
                 Ok(SpotId::Uhrum__Annuna_Corridor__Upper_Trees)
+            }
+            "Uhrum > Annuna Corridor > Wall Remnant" => {
+                Ok(SpotId::Uhrum__Annuna_Corridor__Wall_Remnant)
             }
             "Uhrum > Annuna Corridor > West 25" => Ok(SpotId::Uhrum__Annuna_Corridor__West_25),
             "Uhrum > Annuna Corridor > West 26" => Ok(SpotId::Uhrum__Annuna_Corridor__West_26),
@@ -6258,6 +6447,12 @@ pub enum LocationId {
     Amagi__West_Lake__Stronghold_Top__Remote_Urn,
     Amagi__West_Lake__Surface_Wall_Left__Break_Wall,
     Amagi__West_Lake__Surface_Wall_Right__Break_Wall,
+    Annuna__Mirror_Match__Below_Switch__Hit_Switch,
+    Annuna__Mirror_Match__East_26_Lower__Remote_Flask,
+    Annuna__Mirror_Match__East_26_Upper__Remote_Flask,
+    Annuna__Mirror_Match__Plinth__Item,
+    Annuna__Mirror_Match__Save_Point__Fight,
+    Annuna__Mirror_Match__Waving_Distance__Shockwave_Flask,
     Antarctica__Building_2__Behind_Boxes__Note,
     Antarctica__Power_Room__Switch__Flip,
     Antarctica__Shed__Interior__Shelf,
@@ -6407,6 +6602,12 @@ pub enum LocationId {
     Menu__Upgrade_Menu__Physiology__Health_Upgrade_4,
     Menu__Upgrade_Menu__Physiology__Health_Upgrade_5,
     Menu__Upgrade_Menu__Physiology__Mist_Upgrade,
+    Uhrum__Annuna_Corridor__Block_East__Dislodge_Block,
+    Uhrum__Annuna_Corridor__Block_West__Dislodge_Block,
+    Uhrum__Annuna_Corridor__East_Cubby__Tablet,
+    Uhrum__Annuna_Corridor__Pedestal__Urn,
+    Uhrum__Annuna_Corridor__Statue__Item,
+    Uhrum__Annuna_Corridor__Upper_Trees__Remote_Urn,
     Uhrum__Siege_Corridor__Center_Box__Box,
     Uhrum__Siege_Corridor__Pond__Item,
     Uhrum__Siege_Corridor__Upper_Rock_Item__Urn,
@@ -6520,6 +6721,30 @@ impl fmt::Display for LocationId {
                 f,
                 "{}",
                 "Amagi > West Lake > Surface Wall Right > Break Wall"
+            ),
+            LocationId::Annuna__Mirror_Match__Below_Switch__Hit_Switch => {
+                write!(f, "{}", "Annuna > Mirror Match > Below Switch > Hit Switch")
+            }
+            LocationId::Annuna__Mirror_Match__East_26_Lower__Remote_Flask => write!(
+                f,
+                "{}",
+                "Annuna > Mirror Match > East 26 Lower > Remote Flask"
+            ),
+            LocationId::Annuna__Mirror_Match__East_26_Upper__Remote_Flask => write!(
+                f,
+                "{}",
+                "Annuna > Mirror Match > East 26 Upper > Remote Flask"
+            ),
+            LocationId::Annuna__Mirror_Match__Plinth__Item => {
+                write!(f, "{}", "Annuna > Mirror Match > Plinth > Item")
+            }
+            LocationId::Annuna__Mirror_Match__Save_Point__Fight => {
+                write!(f, "{}", "Annuna > Mirror Match > Save Point > Fight")
+            }
+            LocationId::Annuna__Mirror_Match__Waving_Distance__Shockwave_Flask => write!(
+                f,
+                "{}",
+                "Annuna > Mirror Match > Waving Distance > Shockwave Flask"
             ),
             LocationId::Antarctica__Building_2__Behind_Boxes__Note => {
                 write!(f, "{}", "Antarctica > Building 2 > Behind Boxes > Note")
@@ -7060,6 +7285,30 @@ impl fmt::Display for LocationId {
             LocationId::Menu__Upgrade_Menu__Physiology__Mist_Upgrade => {
                 write!(f, "{}", "Menu > Upgrade Menu > Physiology > Mist Upgrade")
             }
+            LocationId::Uhrum__Annuna_Corridor__Block_East__Dislodge_Block => write!(
+                f,
+                "{}",
+                "Uhrum > Annuna Corridor > Block East > Dislodge Block"
+            ),
+            LocationId::Uhrum__Annuna_Corridor__Block_West__Dislodge_Block => write!(
+                f,
+                "{}",
+                "Uhrum > Annuna Corridor > Block West > Dislodge Block"
+            ),
+            LocationId::Uhrum__Annuna_Corridor__East_Cubby__Tablet => {
+                write!(f, "{}", "Uhrum > Annuna Corridor > East Cubby > Tablet")
+            }
+            LocationId::Uhrum__Annuna_Corridor__Pedestal__Urn => {
+                write!(f, "{}", "Uhrum > Annuna Corridor > Pedestal > Urn")
+            }
+            LocationId::Uhrum__Annuna_Corridor__Statue__Item => {
+                write!(f, "{}", "Uhrum > Annuna Corridor > Statue > Item")
+            }
+            LocationId::Uhrum__Annuna_Corridor__Upper_Trees__Remote_Urn => write!(
+                f,
+                "{}",
+                "Uhrum > Annuna Corridor > Upper Trees > Remote Urn"
+            ),
             LocationId::Uhrum__Siege_Corridor__Center_Box__Box => {
                 write!(f, "{}", "Uhrum > Siege Corridor > Center Box > Box")
             }
@@ -7238,6 +7487,24 @@ impl std::str::FromStr for LocationId {
             }
             "Amagi > West Lake > Surface Wall Right > Break Wall" => {
                 Ok(LocationId::Amagi__West_Lake__Surface_Wall_Right__Break_Wall)
+            }
+            "Annuna > Mirror Match > Below Switch > Hit Switch" => {
+                Ok(LocationId::Annuna__Mirror_Match__Below_Switch__Hit_Switch)
+            }
+            "Annuna > Mirror Match > East 26 Lower > Remote Flask" => {
+                Ok(LocationId::Annuna__Mirror_Match__East_26_Lower__Remote_Flask)
+            }
+            "Annuna > Mirror Match > East 26 Upper > Remote Flask" => {
+                Ok(LocationId::Annuna__Mirror_Match__East_26_Upper__Remote_Flask)
+            }
+            "Annuna > Mirror Match > Plinth > Item" => {
+                Ok(LocationId::Annuna__Mirror_Match__Plinth__Item)
+            }
+            "Annuna > Mirror Match > Save Point > Fight" => {
+                Ok(LocationId::Annuna__Mirror_Match__Save_Point__Fight)
+            }
+            "Annuna > Mirror Match > Waving Distance > Shockwave Flask" => {
+                Ok(LocationId::Annuna__Mirror_Match__Waving_Distance__Shockwave_Flask)
             }
             "Antarctica > Building 2 > Behind Boxes > Note" => {
                 Ok(LocationId::Antarctica__Building_2__Behind_Boxes__Note)
@@ -7662,6 +7929,24 @@ impl std::str::FromStr for LocationId {
             "Menu > Upgrade Menu > Physiology > Mist Upgrade" => {
                 Ok(LocationId::Menu__Upgrade_Menu__Physiology__Mist_Upgrade)
             }
+            "Uhrum > Annuna Corridor > Block East > Dislodge Block" => {
+                Ok(LocationId::Uhrum__Annuna_Corridor__Block_East__Dislodge_Block)
+            }
+            "Uhrum > Annuna Corridor > Block West > Dislodge Block" => {
+                Ok(LocationId::Uhrum__Annuna_Corridor__Block_West__Dislodge_Block)
+            }
+            "Uhrum > Annuna Corridor > East Cubby > Tablet" => {
+                Ok(LocationId::Uhrum__Annuna_Corridor__East_Cubby__Tablet)
+            }
+            "Uhrum > Annuna Corridor > Pedestal > Urn" => {
+                Ok(LocationId::Uhrum__Annuna_Corridor__Pedestal__Urn)
+            }
+            "Uhrum > Annuna Corridor > Statue > Item" => {
+                Ok(LocationId::Uhrum__Annuna_Corridor__Statue__Item)
+            }
+            "Uhrum > Annuna Corridor > Upper Trees > Remote Urn" => {
+                Ok(LocationId::Uhrum__Annuna_Corridor__Upper_Trees__Remote_Urn)
+            }
             "Uhrum > Siege Corridor > Center Box > Box" => {
                 Ok(LocationId::Uhrum__Siege_Corridor__Center_Box__Box)
             }
@@ -7809,6 +8094,19 @@ pub enum ExitId {
     Amagi__West_Lake__Surface_Wall_Right__ex__Surface_Wall_Left_1,
     Amagi__West_Lake__West_15__ex__Ebih__Vertical_Interchange__East_15_1,
     Amagi__West_Lake__West_Bank__ex__West_Shore_1,
+    Annuna__Mirror_Match__Below_Switch__ex__Central_Pillar_1,
+    Annuna__Mirror_Match__Central_Pillar__ex__Below_Switch_1,
+    Annuna__Mirror_Match__Central_Pillar__ex__Save_Point_1,
+    Annuna__Mirror_Match__Central_Pillar__ex__West_25_1,
+    Annuna__Mirror_Match__East_25_Lower__ex__West_Bridge__West_25_Lower_1,
+    Annuna__Mirror_Match__East_25_Upper__ex__West_Bridge__West_25_Upper_1,
+    Annuna__Mirror_Match__East_26_Lower__ex__West_Bridge__West_26_Lower_1,
+    Annuna__Mirror_Match__East_26_Upper__ex__West_Bridge__West_26_Upper_1,
+    Annuna__Mirror_Match__East_26_Upper__Remote_Flask,
+    Annuna__Mirror_Match__Eastward__ex__Staircase_1,
+    Annuna__Mirror_Match__Plinth__ex__East_26_Upper_1,
+    Annuna__Mirror_Match__Staircase__ex__Eastward_1,
+    Annuna__Mirror_Match__West_25__ex__Uhrum__Annuna_Corridor__East_25_1,
     Antarctica__Building_1E__Connector__ex__Building_1W__Connector_1,
     Antarctica__Building_1E__Connector__ex__East_Entry_1,
     Antarctica__Building_1E__East_Entry__ex__East__Building_1_Entry_1,
@@ -8644,6 +8942,23 @@ pub enum ExitId {
     Menu__Upgrade_Menu__Physiology__ex__Combat_1,
     Menu__Upgrade_Menu__Physiology__ex__Drone_1,
     Menu__Upgrade_Menu__Physiology__ex__Infection_1,
+    Uhrum__Annuna_Corridor__Between_Two_Flowers__ex__Lower_Platform_1,
+    Uhrum__Annuna_Corridor__Between_Two_Flowers__ex__Lower_Platform_2,
+    Uhrum__Annuna_Corridor__Block_East__ex__Block_West_1,
+    Uhrum__Annuna_Corridor__Block_West__ex__Block_East_1,
+    Uhrum__Annuna_Corridor__Block_West__ex__Block_East_2,
+    Uhrum__Annuna_Corridor__East_25__ex__Annuna__Mirror_Match__West_25_1,
+    Uhrum__Annuna_Corridor__Lower_Platform__ex__Middle_Platform_1,
+    Uhrum__Annuna_Corridor__Lower_Platform__ex__Middle_Platform_2,
+    Uhrum__Annuna_Corridor__Middle_Platform__ex__Upper_Ledge_1,
+    Uhrum__Annuna_Corridor__Middle_Platform__ex__Upper_Platform_1,
+    Uhrum__Annuna_Corridor__Middle_Platform__ex__Upper_Platform_2,
+    Uhrum__Annuna_Corridor__Statue__ex__Upper_Platform_1,
+    Uhrum__Annuna_Corridor__Upper_Ledge__ex__Upper_Platform_1,
+    Uhrum__Annuna_Corridor__Upper_Platform__ex__Statue_1,
+    Uhrum__Annuna_Corridor__Upper_Platform__ex__Upper_Ledge_1,
+    Uhrum__Annuna_Corridor__West_25__ex__Waterfalls__East_25_1,
+    Uhrum__Annuna_Corridor__West_26__ex__Waterfalls__East_26_1,
     Uhrum__Save_Room__East__ex__Waterfalls__West_27_1,
     Uhrum__Save_Room__West__ex__Glitchy_Corridor__East_27_1,
     Uhrum__Siege_Corridor__Center_Platform_3__ex__Upper_Rock_West_1,
@@ -8837,6 +9152,19 @@ impl fmt::Display for ExitId {
             ExitId::Amagi__West_Lake__Surface_Wall_Right__ex__Surface_Wall_Left_1 => write!(f, "{}", "Amagi > West Lake > Surface Wall Right ==> Surface Wall Left (1)"),
             ExitId::Amagi__West_Lake__West_15__ex__Ebih__Vertical_Interchange__East_15_1 => write!(f, "{}", "Amagi > West Lake > West 15 ==> Ebih > Vertical Interchange > East 15 (1)"),
             ExitId::Amagi__West_Lake__West_Bank__ex__West_Shore_1 => write!(f, "{}", "Amagi > West Lake > West Bank ==> West Shore (1)"),
+            ExitId::Annuna__Mirror_Match__Below_Switch__ex__Central_Pillar_1 => write!(f, "{}", "Annuna > Mirror Match > Below Switch ==> Central Pillar (1)"),
+            ExitId::Annuna__Mirror_Match__Central_Pillar__ex__Below_Switch_1 => write!(f, "{}", "Annuna > Mirror Match > Central Pillar ==> Below Switch (1)"),
+            ExitId::Annuna__Mirror_Match__Central_Pillar__ex__Save_Point_1 => write!(f, "{}", "Annuna > Mirror Match > Central Pillar ==> Save Point (1)"),
+            ExitId::Annuna__Mirror_Match__Central_Pillar__ex__West_25_1 => write!(f, "{}", "Annuna > Mirror Match > Central Pillar ==> West 25 (1)"),
+            ExitId::Annuna__Mirror_Match__East_25_Lower__ex__West_Bridge__West_25_Lower_1 => write!(f, "{}", "Annuna > Mirror Match > East 25 Lower ==> West Bridge > West 25 Lower (1)"),
+            ExitId::Annuna__Mirror_Match__East_25_Upper__ex__West_Bridge__West_25_Upper_1 => write!(f, "{}", "Annuna > Mirror Match > East 25 Upper ==> West Bridge > West 25 Upper (1)"),
+            ExitId::Annuna__Mirror_Match__East_26_Lower__ex__West_Bridge__West_26_Lower_1 => write!(f, "{}", "Annuna > Mirror Match > East 26 Lower ==> West Bridge > West 26 Lower (1)"),
+            ExitId::Annuna__Mirror_Match__East_26_Upper__ex__West_Bridge__West_26_Upper_1 => write!(f, "{}", "Annuna > Mirror Match > East 26 Upper ==> West Bridge > West 26 Upper (1)"),
+            ExitId::Annuna__Mirror_Match__East_26_Upper__Remote_Flask => write!(f, "{}", "Annuna > Mirror Match > East 26 Upper > Remote Flask"),
+            ExitId::Annuna__Mirror_Match__Eastward__ex__Staircase_1 => write!(f, "{}", "Annuna > Mirror Match > Eastward ==> Staircase (1)"),
+            ExitId::Annuna__Mirror_Match__Plinth__ex__East_26_Upper_1 => write!(f, "{}", "Annuna > Mirror Match > Plinth ==> East 26 Upper (1)"),
+            ExitId::Annuna__Mirror_Match__Staircase__ex__Eastward_1 => write!(f, "{}", "Annuna > Mirror Match > Staircase ==> Eastward (1)"),
+            ExitId::Annuna__Mirror_Match__West_25__ex__Uhrum__Annuna_Corridor__East_25_1 => write!(f, "{}", "Annuna > Mirror Match > West 25 ==> Uhrum > Annuna Corridor > East 25 (1)"),
             ExitId::Antarctica__Building_1E__Connector__ex__Building_1W__Connector_1 => write!(f, "{}", "Antarctica > Building 1E > Connector ==> Building 1W > Connector (1)"),
             ExitId::Antarctica__Building_1E__Connector__ex__East_Entry_1 => write!(f, "{}", "Antarctica > Building 1E > Connector ==> East Entry (1)"),
             ExitId::Antarctica__Building_1E__East_Entry__ex__East__Building_1_Entry_1 => write!(f, "{}", "Antarctica > Building 1E > East Entry ==> East > Building 1 Entry (1)"),
@@ -9672,6 +10000,23 @@ impl fmt::Display for ExitId {
             ExitId::Menu__Upgrade_Menu__Physiology__ex__Combat_1 => write!(f, "{}", "Menu > Upgrade Menu > Physiology ==> Combat (1)"),
             ExitId::Menu__Upgrade_Menu__Physiology__ex__Drone_1 => write!(f, "{}", "Menu > Upgrade Menu > Physiology ==> Drone (1)"),
             ExitId::Menu__Upgrade_Menu__Physiology__ex__Infection_1 => write!(f, "{}", "Menu > Upgrade Menu > Physiology ==> Infection (1)"),
+            ExitId::Uhrum__Annuna_Corridor__Between_Two_Flowers__ex__Lower_Platform_1 => write!(f, "{}", "Uhrum > Annuna Corridor > Between Two Flowers ==> Lower Platform (1)"),
+            ExitId::Uhrum__Annuna_Corridor__Between_Two_Flowers__ex__Lower_Platform_2 => write!(f, "{}", "Uhrum > Annuna Corridor > Between Two Flowers ==> Lower Platform (2)"),
+            ExitId::Uhrum__Annuna_Corridor__Block_East__ex__Block_West_1 => write!(f, "{}", "Uhrum > Annuna Corridor > Block East ==> Block West (1)"),
+            ExitId::Uhrum__Annuna_Corridor__Block_West__ex__Block_East_1 => write!(f, "{}", "Uhrum > Annuna Corridor > Block West ==> Block East (1)"),
+            ExitId::Uhrum__Annuna_Corridor__Block_West__ex__Block_East_2 => write!(f, "{}", "Uhrum > Annuna Corridor > Block West ==> Block East (2)"),
+            ExitId::Uhrum__Annuna_Corridor__East_25__ex__Annuna__Mirror_Match__West_25_1 => write!(f, "{}", "Uhrum > Annuna Corridor > East 25 ==> Annuna > Mirror Match > West 25 (1)"),
+            ExitId::Uhrum__Annuna_Corridor__Lower_Platform__ex__Middle_Platform_1 => write!(f, "{}", "Uhrum > Annuna Corridor > Lower Platform ==> Middle Platform (1)"),
+            ExitId::Uhrum__Annuna_Corridor__Lower_Platform__ex__Middle_Platform_2 => write!(f, "{}", "Uhrum > Annuna Corridor > Lower Platform ==> Middle Platform (2)"),
+            ExitId::Uhrum__Annuna_Corridor__Middle_Platform__ex__Upper_Ledge_1 => write!(f, "{}", "Uhrum > Annuna Corridor > Middle Platform ==> Upper Ledge (1)"),
+            ExitId::Uhrum__Annuna_Corridor__Middle_Platform__ex__Upper_Platform_1 => write!(f, "{}", "Uhrum > Annuna Corridor > Middle Platform ==> Upper Platform (1)"),
+            ExitId::Uhrum__Annuna_Corridor__Middle_Platform__ex__Upper_Platform_2 => write!(f, "{}", "Uhrum > Annuna Corridor > Middle Platform ==> Upper Platform (2)"),
+            ExitId::Uhrum__Annuna_Corridor__Statue__ex__Upper_Platform_1 => write!(f, "{}", "Uhrum > Annuna Corridor > Statue ==> Upper Platform (1)"),
+            ExitId::Uhrum__Annuna_Corridor__Upper_Ledge__ex__Upper_Platform_1 => write!(f, "{}", "Uhrum > Annuna Corridor > Upper Ledge ==> Upper Platform (1)"),
+            ExitId::Uhrum__Annuna_Corridor__Upper_Platform__ex__Statue_1 => write!(f, "{}", "Uhrum > Annuna Corridor > Upper Platform ==> Statue (1)"),
+            ExitId::Uhrum__Annuna_Corridor__Upper_Platform__ex__Upper_Ledge_1 => write!(f, "{}", "Uhrum > Annuna Corridor > Upper Platform ==> Upper Ledge (1)"),
+            ExitId::Uhrum__Annuna_Corridor__West_25__ex__Waterfalls__East_25_1 => write!(f, "{}", "Uhrum > Annuna Corridor > West 25 ==> Waterfalls > East 25 (1)"),
+            ExitId::Uhrum__Annuna_Corridor__West_26__ex__Waterfalls__East_26_1 => write!(f, "{}", "Uhrum > Annuna Corridor > West 26 ==> Waterfalls > East 26 (1)"),
             ExitId::Uhrum__Save_Room__East__ex__Waterfalls__West_27_1 => write!(f, "{}", "Uhrum > Save Room > East ==> Waterfalls > West 27 (1)"),
             ExitId::Uhrum__Save_Room__West__ex__Glitchy_Corridor__East_27_1 => write!(f, "{}", "Uhrum > Save Room > West ==> Glitchy Corridor > East 27 (1)"),
             ExitId::Uhrum__Siege_Corridor__Center_Platform_3__ex__Upper_Rock_West_1 => write!(f, "{}", "Uhrum > Siege Corridor > Center Platform 3 ==> Upper Rock West (1)"),
@@ -9870,6 +10215,19 @@ impl std::str::FromStr for ExitId {
             "Amagi > West Lake > Surface Wall Right ==> Surface Wall Left (1)" => Ok(ExitId::Amagi__West_Lake__Surface_Wall_Right__ex__Surface_Wall_Left_1),
             "Amagi > West Lake > West 15 ==> Ebih > Vertical Interchange > East 15 (1)" => Ok(ExitId::Amagi__West_Lake__West_15__ex__Ebih__Vertical_Interchange__East_15_1),
             "Amagi > West Lake > West Bank ==> West Shore (1)" => Ok(ExitId::Amagi__West_Lake__West_Bank__ex__West_Shore_1),
+            "Annuna > Mirror Match > Below Switch ==> Central Pillar (1)" => Ok(ExitId::Annuna__Mirror_Match__Below_Switch__ex__Central_Pillar_1),
+            "Annuna > Mirror Match > Central Pillar ==> Below Switch (1)" => Ok(ExitId::Annuna__Mirror_Match__Central_Pillar__ex__Below_Switch_1),
+            "Annuna > Mirror Match > Central Pillar ==> Save Point (1)" => Ok(ExitId::Annuna__Mirror_Match__Central_Pillar__ex__Save_Point_1),
+            "Annuna > Mirror Match > Central Pillar ==> West 25 (1)" => Ok(ExitId::Annuna__Mirror_Match__Central_Pillar__ex__West_25_1),
+            "Annuna > Mirror Match > East 25 Lower ==> West Bridge > West 25 Lower (1)" => Ok(ExitId::Annuna__Mirror_Match__East_25_Lower__ex__West_Bridge__West_25_Lower_1),
+            "Annuna > Mirror Match > East 25 Upper ==> West Bridge > West 25 Upper (1)" => Ok(ExitId::Annuna__Mirror_Match__East_25_Upper__ex__West_Bridge__West_25_Upper_1),
+            "Annuna > Mirror Match > East 26 Lower ==> West Bridge > West 26 Lower (1)" => Ok(ExitId::Annuna__Mirror_Match__East_26_Lower__ex__West_Bridge__West_26_Lower_1),
+            "Annuna > Mirror Match > East 26 Upper ==> West Bridge > West 26 Upper (1)" => Ok(ExitId::Annuna__Mirror_Match__East_26_Upper__ex__West_Bridge__West_26_Upper_1),
+            "Annuna > Mirror Match > East 26 Upper > Remote Flask" => Ok(ExitId::Annuna__Mirror_Match__East_26_Upper__Remote_Flask),
+            "Annuna > Mirror Match > Eastward ==> Staircase (1)" => Ok(ExitId::Annuna__Mirror_Match__Eastward__ex__Staircase_1),
+            "Annuna > Mirror Match > Plinth ==> East 26 Upper (1)" => Ok(ExitId::Annuna__Mirror_Match__Plinth__ex__East_26_Upper_1),
+            "Annuna > Mirror Match > Staircase ==> Eastward (1)" => Ok(ExitId::Annuna__Mirror_Match__Staircase__ex__Eastward_1),
+            "Annuna > Mirror Match > West 25 ==> Uhrum > Annuna Corridor > East 25 (1)" => Ok(ExitId::Annuna__Mirror_Match__West_25__ex__Uhrum__Annuna_Corridor__East_25_1),
             "Antarctica > Building 1E > Connector ==> Building 1W > Connector (1)" => Ok(ExitId::Antarctica__Building_1E__Connector__ex__Building_1W__Connector_1),
             "Antarctica > Building 1E > Connector ==> East Entry (1)" => Ok(ExitId::Antarctica__Building_1E__Connector__ex__East_Entry_1),
             "Antarctica > Building 1E > East Entry ==> East > Building 1 Entry (1)" => Ok(ExitId::Antarctica__Building_1E__East_Entry__ex__East__Building_1_Entry_1),
@@ -10705,6 +11063,23 @@ impl std::str::FromStr for ExitId {
             "Menu > Upgrade Menu > Physiology ==> Combat (1)" => Ok(ExitId::Menu__Upgrade_Menu__Physiology__ex__Combat_1),
             "Menu > Upgrade Menu > Physiology ==> Drone (1)" => Ok(ExitId::Menu__Upgrade_Menu__Physiology__ex__Drone_1),
             "Menu > Upgrade Menu > Physiology ==> Infection (1)" => Ok(ExitId::Menu__Upgrade_Menu__Physiology__ex__Infection_1),
+            "Uhrum > Annuna Corridor > Between Two Flowers ==> Lower Platform (1)" => Ok(ExitId::Uhrum__Annuna_Corridor__Between_Two_Flowers__ex__Lower_Platform_1),
+            "Uhrum > Annuna Corridor > Between Two Flowers ==> Lower Platform (2)" => Ok(ExitId::Uhrum__Annuna_Corridor__Between_Two_Flowers__ex__Lower_Platform_2),
+            "Uhrum > Annuna Corridor > Block East ==> Block West (1)" => Ok(ExitId::Uhrum__Annuna_Corridor__Block_East__ex__Block_West_1),
+            "Uhrum > Annuna Corridor > Block West ==> Block East (1)" => Ok(ExitId::Uhrum__Annuna_Corridor__Block_West__ex__Block_East_1),
+            "Uhrum > Annuna Corridor > Block West ==> Block East (2)" => Ok(ExitId::Uhrum__Annuna_Corridor__Block_West__ex__Block_East_2),
+            "Uhrum > Annuna Corridor > East 25 ==> Annuna > Mirror Match > West 25 (1)" => Ok(ExitId::Uhrum__Annuna_Corridor__East_25__ex__Annuna__Mirror_Match__West_25_1),
+            "Uhrum > Annuna Corridor > Lower Platform ==> Middle Platform (1)" => Ok(ExitId::Uhrum__Annuna_Corridor__Lower_Platform__ex__Middle_Platform_1),
+            "Uhrum > Annuna Corridor > Lower Platform ==> Middle Platform (2)" => Ok(ExitId::Uhrum__Annuna_Corridor__Lower_Platform__ex__Middle_Platform_2),
+            "Uhrum > Annuna Corridor > Middle Platform ==> Upper Ledge (1)" => Ok(ExitId::Uhrum__Annuna_Corridor__Middle_Platform__ex__Upper_Ledge_1),
+            "Uhrum > Annuna Corridor > Middle Platform ==> Upper Platform (1)" => Ok(ExitId::Uhrum__Annuna_Corridor__Middle_Platform__ex__Upper_Platform_1),
+            "Uhrum > Annuna Corridor > Middle Platform ==> Upper Platform (2)" => Ok(ExitId::Uhrum__Annuna_Corridor__Middle_Platform__ex__Upper_Platform_2),
+            "Uhrum > Annuna Corridor > Statue ==> Upper Platform (1)" => Ok(ExitId::Uhrum__Annuna_Corridor__Statue__ex__Upper_Platform_1),
+            "Uhrum > Annuna Corridor > Upper Ledge ==> Upper Platform (1)" => Ok(ExitId::Uhrum__Annuna_Corridor__Upper_Ledge__ex__Upper_Platform_1),
+            "Uhrum > Annuna Corridor > Upper Platform ==> Statue (1)" => Ok(ExitId::Uhrum__Annuna_Corridor__Upper_Platform__ex__Statue_1),
+            "Uhrum > Annuna Corridor > Upper Platform ==> Upper Ledge (1)" => Ok(ExitId::Uhrum__Annuna_Corridor__Upper_Platform__ex__Upper_Ledge_1),
+            "Uhrum > Annuna Corridor > West 25 ==> Waterfalls > East 25 (1)" => Ok(ExitId::Uhrum__Annuna_Corridor__West_25__ex__Waterfalls__East_25_1),
+            "Uhrum > Annuna Corridor > West 26 ==> Waterfalls > East 26 (1)" => Ok(ExitId::Uhrum__Annuna_Corridor__West_26__ex__Waterfalls__East_26_1),
             "Uhrum > Save Room > East ==> Waterfalls > West 27 (1)" => Ok(ExitId::Uhrum__Save_Room__East__ex__Waterfalls__West_27_1),
             "Uhrum > Save Room > West ==> Glitchy Corridor > East 27 (1)" => Ok(ExitId::Uhrum__Save_Room__West__ex__Glitchy_Corridor__East_27_1),
             "Uhrum > Siege Corridor > Center Platform 3 ==> Upper Rock West (1)" => Ok(ExitId::Uhrum__Siege_Corridor__Center_Platform_3__ex__Upper_Rock_West_1),
@@ -10873,6 +11248,7 @@ impl std::str::FromStr for ExitId {
 pub enum ActionId {
     Amagi__Main_Area__Carving__Key_Combo,
     Amagi__Main_Area__Save_Point__Save,
+    Annuna__Mirror_Match__Save_Point__Save,
     Ebih__Base_Camp__Left_Platform__Move_Left_Platform,
     Ebih__Base_Camp__Left_Platform_Moved__Reset_Left_Platform,
     Ebih__Base_Camp__Save_Point__Save,
@@ -10956,6 +11332,9 @@ pub enum ActionId {
     Irikar__Hub__Save_Point__Save,
     Irikar__Sight_Room__Portal__Enter_Portal,
     Irikar_Breach__Exit_Corridor__Portal_Stand__Enter_Portal,
+    Uhrum__Annuna_Corridor__Between_Two_Flowers__Throw_Drone_Not_As_High,
+    Uhrum__Annuna_Corridor__Between_Two_Flowers__Throw_Drone_Up,
+    Uhrum__Annuna_Corridor__Save_Point__Save,
     Uhrum__Save_Room__Save_Point__Save,
     Uhrum__West_Entrance__Save_Point__Save,
 }
@@ -10967,6 +11346,9 @@ impl fmt::Display for ActionId {
             }
             ActionId::Amagi__Main_Area__Save_Point__Save => {
                 write!(f, "{}", "Amagi > Main Area > Save Point > Save")
+            }
+            ActionId::Annuna__Mirror_Match__Save_Point__Save => {
+                write!(f, "{}", "Annuna > Mirror Match > Save Point > Save")
             }
             ActionId::Ebih__Base_Camp__Left_Platform__Move_Left_Platform => write!(
                 f,
@@ -11265,6 +11647,21 @@ impl fmt::Display for ActionId {
                 "{}",
                 "Irikar Breach > Exit Corridor > Portal Stand > Enter Portal"
             ),
+            ActionId::Uhrum__Annuna_Corridor__Between_Two_Flowers__Throw_Drone_Not_As_High => {
+                write!(
+                    f,
+                    "{}",
+                    "Uhrum > Annuna Corridor > Between Two Flowers > Throw Drone Not As High"
+                )
+            }
+            ActionId::Uhrum__Annuna_Corridor__Between_Two_Flowers__Throw_Drone_Up => write!(
+                f,
+                "{}",
+                "Uhrum > Annuna Corridor > Between Two Flowers > Throw Drone Up"
+            ),
+            ActionId::Uhrum__Annuna_Corridor__Save_Point__Save => {
+                write!(f, "{}", "Uhrum > Annuna Corridor > Save Point > Save")
+            }
             ActionId::Uhrum__Save_Room__Save_Point__Save => {
                 write!(f, "{}", "Uhrum > Save Room > Save Point > Save")
             }
@@ -11285,6 +11682,9 @@ impl std::str::FromStr for ActionId {
             }
             "Amagi > Main Area > Save Point > Save" => {
                 Ok(ActionId::Amagi__Main_Area__Save_Point__Save)
+            }
+            "Annuna > Mirror Match > Save Point > Save" => {
+                Ok(ActionId::Annuna__Mirror_Match__Save_Point__Save)
             }
             "Ebih > Base Camp > Left Platform > Move Left Platform" => {
                 Ok(ActionId::Ebih__Base_Camp__Left_Platform__Move_Left_Platform)
@@ -11523,6 +11923,15 @@ impl std::str::FromStr for ActionId {
             "Irikar Breach > Exit Corridor > Portal Stand > Enter Portal" => {
                 Ok(ActionId::Irikar_Breach__Exit_Corridor__Portal_Stand__Enter_Portal)
             }
+            "Uhrum > Annuna Corridor > Between Two Flowers > Throw Drone Not As High" => {
+                Ok(ActionId::Uhrum__Annuna_Corridor__Between_Two_Flowers__Throw_Drone_Not_As_High)
+            }
+            "Uhrum > Annuna Corridor > Between Two Flowers > Throw Drone Up" => {
+                Ok(ActionId::Uhrum__Annuna_Corridor__Between_Two_Flowers__Throw_Drone_Up)
+            }
+            "Uhrum > Annuna Corridor > Save Point > Save" => {
+                Ok(ActionId::Uhrum__Annuna_Corridor__Save_Point__Save)
+            }
             "Uhrum > Save Room > Save Point > Save" => {
                 Ok(ActionId::Uhrum__Save_Room__Save_Point__Save)
             }
@@ -11559,6 +11968,7 @@ pub enum CanonId {
     Amagi_Stronghold_Boulder_2,
     Amagi_Stronghold_Wall_2,
     Amagi_West_Lake_Surface_Wall,
+    Annuna_Mirror_Match_Flask,
     Notes_2053_02_27,
     Ebih_Base_Camp_Fragment,
     Ebih_Bush_Flask,
@@ -11588,6 +11998,8 @@ pub enum CanonId {
     Fast_Travel,
     Uhrum_Waterfall_Wall,
     Uhrum_Waterfalls_Block,
+    Anuman,
+    Uhrum_Annuna_Corridor_Block,
 }
 impl fmt::Display for CanonId {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
@@ -11602,6 +12014,7 @@ impl fmt::Display for CanonId {
             CanonId::Amagi_West_Lake_Surface_Wall => {
                 write!(f, "{}", "Amagi_West_Lake_Surface_Wall")
             }
+            CanonId::Annuna_Mirror_Match_Flask => write!(f, "{}", "Annuna_Mirror_Match_Flask"),
             CanonId::Notes_2053_02_27 => write!(f, "{}", "Notes_2053_02_27"),
             CanonId::Ebih_Base_Camp_Fragment => write!(f, "{}", "Ebih_Base_Camp_Fragment"),
             CanonId::Ebih_Bush_Flask => write!(f, "{}", "Ebih Bush Flask"),
@@ -11635,6 +12048,8 @@ impl fmt::Display for CanonId {
             CanonId::Fast_Travel => write!(f, "{}", "Fast_Travel"),
             CanonId::Uhrum_Waterfall_Wall => write!(f, "{}", "Uhrum_Waterfall_Wall"),
             CanonId::Uhrum_Waterfalls_Block => write!(f, "{}", "Uhrum_Waterfalls_Block"),
+            CanonId::Anuman => write!(f, "{}", "Anuman"),
+            CanonId::Uhrum_Annuna_Corridor_Block => write!(f, "{}", "Uhrum_Annuna_Corridor_Block"),
         }
     }
 }
@@ -11651,6 +12066,7 @@ impl std::str::FromStr for CanonId {
             "Amagi Stronghold Boulder 2" => Ok(CanonId::Amagi_Stronghold_Boulder_2),
             "Amagi Stronghold Wall 2" => Ok(CanonId::Amagi_Stronghold_Wall_2),
             "Amagi_West_Lake_Surface_Wall" => Ok(CanonId::Amagi_West_Lake_Surface_Wall),
+            "Annuna_Mirror_Match_Flask" => Ok(CanonId::Annuna_Mirror_Match_Flask),
             "Notes_2053_02_27" => Ok(CanonId::Notes_2053_02_27),
             "Ebih_Base_Camp_Fragment" => Ok(CanonId::Ebih_Base_Camp_Fragment),
             "Ebih Bush Flask" => Ok(CanonId::Ebih_Bush_Flask),
@@ -11680,6 +12096,8 @@ impl std::str::FromStr for CanonId {
             "Fast_Travel" => Ok(CanonId::Fast_Travel),
             "Uhrum_Waterfall_Wall" => Ok(CanonId::Uhrum_Waterfall_Wall),
             "Uhrum_Waterfalls_Block" => Ok(CanonId::Uhrum_Waterfalls_Block),
+            "Anuman" => Ok(CanonId::Anuman),
+            "Uhrum_Annuna_Corridor_Block" => Ok(CanonId::Uhrum_Annuna_Corridor_Block),
             _ => Err(format!("Could not recognize as a CanonId: {}", s)),
         }
     }
@@ -11720,6 +12138,7 @@ pub enum WarpId {
     FastTravelIrikarBreachGauntlet,
     FastTravelIrikarBreachSaveRoom,
     FastTravelIrikarHub,
+    FastTravelUhrumAnnuna,
     FastTravelUhrumEast,
     FastTravelUhrumSaveRoom,
     FastTravelUhrumWestEntrance,
@@ -11755,6 +12174,7 @@ impl fmt::Display for WarpId {
                 write!(f, "{}", "FastTravelIrikarBreachSaveRoom")
             }
             WarpId::FastTravelIrikarHub => write!(f, "{}", "FastTravelIrikarHub"),
+            WarpId::FastTravelUhrumAnnuna => write!(f, "{}", "FastTravelUhrumAnnuna"),
             WarpId::FastTravelUhrumEast => write!(f, "{}", "FastTravelUhrumEast"),
             WarpId::FastTravelUhrumSaveRoom => write!(f, "{}", "FastTravelUhrumSaveRoom"),
             WarpId::FastTravelUhrumWestEntrance => write!(f, "{}", "FastTravelUhrumWestEntrance"),
@@ -11789,6 +12209,7 @@ impl std::str::FromStr for WarpId {
             "FastTravelIrikarBreachGauntlet" => Ok(WarpId::FastTravelIrikarBreachGauntlet),
             "FastTravelIrikarBreachSaveRoom" => Ok(WarpId::FastTravelIrikarBreachSaveRoom),
             "FastTravelIrikarHub" => Ok(WarpId::FastTravelIrikarHub),
+            "FastTravelUhrumAnnuna" => Ok(WarpId::FastTravelUhrumAnnuna),
             "FastTravelUhrumEast" => Ok(WarpId::FastTravelUhrumEast),
             "FastTravelUhrumSaveRoom" => Ok(WarpId::FastTravelUhrumSaveRoom),
             "FastTravelUhrumWestEntrance" => Ok(WarpId::FastTravelUhrumWestEntrance),

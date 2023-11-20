@@ -113,6 +113,23 @@ pub fn get_area(spot: SpotId) -> AreaId {
         | SpotId::Amagi__West_Lake__Surface_Wall_Right
         | SpotId::Amagi__West_Lake__Surface_Wall_Left
         | SpotId::Amagi__West_Lake__West_15 => AreaId::Amagi__West_Lake,
+        SpotId::Annuna__Mirror_Match__West_25
+        | SpotId::Annuna__Mirror_Match__West_Gap
+        | SpotId::Annuna__Mirror_Match__Save_Point
+        | SpotId::Annuna__Mirror_Match__Eastward
+        | SpotId::Annuna__Mirror_Match__Staircase
+        | SpotId::Annuna__Mirror_Match__East_25_Lower
+        | SpotId::Annuna__Mirror_Match__East_25_Upper
+        | SpotId::Annuna__Mirror_Match__Below_Switch
+        | SpotId::Annuna__Mirror_Match__Central_Pillar
+        | SpotId::Annuna__Mirror_Match__Plinth
+        | SpotId::Annuna__Mirror_Match__Waving_Distance
+        | SpotId::Annuna__Mirror_Match__East_26_Lower
+        | SpotId::Annuna__Mirror_Match__East_26_Upper => AreaId::Annuna__Mirror_Match,
+        SpotId::Annuna__West_Bridge__West_25_Lower
+        | SpotId::Annuna__West_Bridge__West_25_Upper
+        | SpotId::Annuna__West_Bridge__West_26_Lower
+        | SpotId::Annuna__West_Bridge__West_26_Upper => AreaId::Annuna__West_Bridge,
         SpotId::Antarctica__West__Helipad
         | SpotId::Antarctica__West__Shed_Entry
         | SpotId::Antarctica__West__Boxes => AreaId::Antarctica__West,
@@ -1134,7 +1151,18 @@ pub fn get_area(spot: SpotId) -> AreaId {
         | SpotId::Uhrum__Annuna_Corridor__Pedestal
         | SpotId::Uhrum__Annuna_Corridor__West_26
         | SpotId::Uhrum__Annuna_Corridor__Save_Point
-        | SpotId::Uhrum__Annuna_Corridor__Block_East => AreaId::Uhrum__Annuna_Corridor,
+        | SpotId::Uhrum__Annuna_Corridor__Block_West
+        | SpotId::Uhrum__Annuna_Corridor__Block_East
+        | SpotId::Uhrum__Annuna_Corridor__Open_Pillar
+        | SpotId::Uhrum__Annuna_Corridor__Between_Two_Flowers
+        | SpotId::Uhrum__Annuna_Corridor__Lower_Platform
+        | SpotId::Uhrum__Annuna_Corridor__Wall_Remnant
+        | SpotId::Uhrum__Annuna_Corridor__Middle_Platform
+        | SpotId::Uhrum__Annuna_Corridor__Upper_Platform
+        | SpotId::Uhrum__Annuna_Corridor__Upper_Ledge
+        | SpotId::Uhrum__Annuna_Corridor__East_Cubby
+        | SpotId::Uhrum__Annuna_Corridor__Statue
+        | SpotId::Uhrum__Annuna_Corridor__East_25 => AreaId::Uhrum__Annuna_Corridor,
         SpotId::Uhrum__Artillery_Practice__East_24 => AreaId::Uhrum__Artillery_Practice,
     }
 }
@@ -1231,6 +1259,23 @@ pub fn get_region(spot: SpotId) -> RegionId {
         | SpotId::Amagi__West_Lake__Surface_Wall_Right
         | SpotId::Amagi__West_Lake__Surface_Wall_Left
         | SpotId::Amagi__West_Lake__West_15 => RegionId::Amagi,
+        SpotId::Annuna__Mirror_Match__West_25
+        | SpotId::Annuna__Mirror_Match__West_Gap
+        | SpotId::Annuna__Mirror_Match__Save_Point
+        | SpotId::Annuna__Mirror_Match__Eastward
+        | SpotId::Annuna__Mirror_Match__Staircase
+        | SpotId::Annuna__Mirror_Match__East_25_Lower
+        | SpotId::Annuna__Mirror_Match__East_25_Upper
+        | SpotId::Annuna__Mirror_Match__Below_Switch
+        | SpotId::Annuna__Mirror_Match__Central_Pillar
+        | SpotId::Annuna__Mirror_Match__Plinth
+        | SpotId::Annuna__Mirror_Match__Waving_Distance
+        | SpotId::Annuna__Mirror_Match__East_26_Lower
+        | SpotId::Annuna__Mirror_Match__East_26_Upper => RegionId::Annuna,
+        SpotId::Annuna__West_Bridge__West_25_Lower
+        | SpotId::Annuna__West_Bridge__West_25_Upper
+        | SpotId::Annuna__West_Bridge__West_26_Lower
+        | SpotId::Annuna__West_Bridge__West_26_Upper => RegionId::Annuna,
         SpotId::Antarctica__West__Helipad
         | SpotId::Antarctica__West__Shed_Entry
         | SpotId::Antarctica__West__Boxes => RegionId::Antarctica,
@@ -2236,7 +2281,18 @@ pub fn get_region(spot: SpotId) -> RegionId {
         | SpotId::Uhrum__Annuna_Corridor__Pedestal
         | SpotId::Uhrum__Annuna_Corridor__West_26
         | SpotId::Uhrum__Annuna_Corridor__Save_Point
-        | SpotId::Uhrum__Annuna_Corridor__Block_East => RegionId::Uhrum,
+        | SpotId::Uhrum__Annuna_Corridor__Block_West
+        | SpotId::Uhrum__Annuna_Corridor__Block_East
+        | SpotId::Uhrum__Annuna_Corridor__Open_Pillar
+        | SpotId::Uhrum__Annuna_Corridor__Between_Two_Flowers
+        | SpotId::Uhrum__Annuna_Corridor__Lower_Platform
+        | SpotId::Uhrum__Annuna_Corridor__Wall_Remnant
+        | SpotId::Uhrum__Annuna_Corridor__Middle_Platform
+        | SpotId::Uhrum__Annuna_Corridor__Upper_Platform
+        | SpotId::Uhrum__Annuna_Corridor__Upper_Ledge
+        | SpotId::Uhrum__Annuna_Corridor__East_Cubby
+        | SpotId::Uhrum__Annuna_Corridor__Statue
+        | SpotId::Uhrum__Annuna_Corridor__East_25 => RegionId::Uhrum,
         SpotId::Uhrum__Artillery_Practice__East_24 => RegionId::Uhrum,
     }
 }
@@ -2303,6 +2359,18 @@ impl world::Accessible for Location {
             LocationId::Amagi__West_Lake__Surface_Wall_Right__Break_Wall => {
                 rules::access_shockwave(&ctx)
             }
+            LocationId::Annuna__Mirror_Match__Below_Switch__Hit_Switch => {
+                rules::access_can_damage(&ctx)
+            }
+            LocationId::Annuna__Mirror_Match__East_26_Lower__Remote_Flask => {
+                rules::access_boomerang(&ctx)
+            }
+            LocationId::Annuna__Mirror_Match__East_26_Upper__Remote_Flask => {
+                rules::access_boomerang(&ctx)
+            }
+            LocationId::Annuna__Mirror_Match__Plinth__Item => true,
+            LocationId::Annuna__Mirror_Match__Save_Point__Fight => true,
+            LocationId::Annuna__Mirror_Match__Waving_Distance__Shockwave_Flask => true,
             LocationId::Antarctica__Building_2__Behind_Boxes__Note => true,
             LocationId::Antarctica__Power_Room__Switch__Flip => true,
             LocationId::Antarctica__Shed__Interior__Shelf => true,
@@ -2570,6 +2638,18 @@ impl world::Accessible for Location {
             LocationId::Menu__Upgrade_Menu__Physiology__Mist_Upgrade => {
                 rules::access_nanite_mist(&ctx)
             }
+            LocationId::Uhrum__Annuna_Corridor__Block_East__Dislodge_Block => {
+                rules::access_shockwave(&ctx)
+            }
+            LocationId::Uhrum__Annuna_Corridor__Block_West__Dislodge_Block => {
+                rules::access_shockwave(&ctx)
+            }
+            LocationId::Uhrum__Annuna_Corridor__East_Cubby__Tablet => true,
+            LocationId::Uhrum__Annuna_Corridor__Pedestal__Urn => true,
+            LocationId::Uhrum__Annuna_Corridor__Statue__Item => true,
+            LocationId::Uhrum__Annuna_Corridor__Upper_Trees__Remote_Urn => {
+                rules::access_boomerang(&ctx)
+            }
             LocationId::Uhrum__Siege_Corridor__Center_Box__Box => rules::access_can_damage(&ctx),
             LocationId::Uhrum__Siege_Corridor__Pond__Item => true,
             LocationId::Uhrum__Siege_Corridor__Upper_Rock_Item__Urn => true,
@@ -2722,6 +2802,19 @@ impl world::Accessible for Exit {
             ExitId::Amagi__West_Lake__Surface_Wall_Right__ex__Surface_Wall_Left_1 => rules::access_amagi_west_lake_surface_wall(&ctx),
             ExitId::Amagi__West_Lake__West_15__ex__Ebih__Vertical_Interchange__East_15_1 => true,
             ExitId::Amagi__West_Lake__West_Bank__ex__West_Shore_1 => rules::access_grab_or_climb(&ctx),
+            ExitId::Annuna__Mirror_Match__Below_Switch__ex__Central_Pillar_1 => rules::access_hover_and_hook(&ctx),
+            ExitId::Annuna__Mirror_Match__Central_Pillar__ex__Below_Switch_1 => rules::access_hover_and_hook(&ctx),
+            ExitId::Annuna__Mirror_Match__Central_Pillar__ex__Save_Point_1 => rules::access_annuna_mirror_match_switch(&ctx),
+            ExitId::Annuna__Mirror_Match__Central_Pillar__ex__West_25_1 => rules::access_annuna_mirror_match_switch(&ctx),
+            ExitId::Annuna__Mirror_Match__East_25_Lower__ex__West_Bridge__West_25_Lower_1 => true,
+            ExitId::Annuna__Mirror_Match__East_25_Upper__ex__West_Bridge__West_25_Upper_1 => true,
+            ExitId::Annuna__Mirror_Match__East_26_Lower__ex__West_Bridge__West_26_Lower_1 => true,
+            ExitId::Annuna__Mirror_Match__East_26_Upper__ex__West_Bridge__West_26_Upper_1 => true,
+            ExitId::Annuna__Mirror_Match__East_26_Upper__Remote_Flask => rules::access_boomerang(&ctx),
+            ExitId::Annuna__Mirror_Match__Eastward__ex__Staircase_1 => rules::access_mirror_match_open(&ctx),
+            ExitId::Annuna__Mirror_Match__Plinth__ex__East_26_Upper_1 => rules::access_hover(&ctx),
+            ExitId::Annuna__Mirror_Match__Staircase__ex__Eastward_1 => rules::access_mirror_match_open(&ctx),
+            ExitId::Annuna__Mirror_Match__West_25__ex__Uhrum__Annuna_Corridor__East_25_1 => true,
             ExitId::Antarctica__Building_1E__Connector__ex__Building_1W__Connector_1 => true,
             ExitId::Antarctica__Building_1E__Connector__ex__East_Entry_1 => rules::access_can_damage(&ctx),
             ExitId::Antarctica__Building_1E__East_Entry__ex__East__Building_1_Entry_1 => true,
@@ -3557,6 +3650,23 @@ impl world::Accessible for Exit {
             ExitId::Menu__Upgrade_Menu__Physiology__ex__Combat_1 => true,
             ExitId::Menu__Upgrade_Menu__Physiology__ex__Drone_1 => rules::access_remote_drone(&ctx),
             ExitId::Menu__Upgrade_Menu__Physiology__ex__Infection_1 => rules::access_infect(&ctx),
+            ExitId::Uhrum__Annuna_Corridor__Between_Two_Flowers__ex__Lower_Platform_1 => rules::access_anuman(&ctx),
+            ExitId::Uhrum__Annuna_Corridor__Between_Two_Flowers__ex__Lower_Platform_2 => rules::access_hover(&ctx),
+            ExitId::Uhrum__Annuna_Corridor__Block_East__ex__Block_West_1 => rules::access_uhrum_annuna_corridor_block(&ctx),
+            ExitId::Uhrum__Annuna_Corridor__Block_West__ex__Block_East_1 => rules::access_uhrum_annuna_corridor_block(&ctx),
+            ExitId::Uhrum__Annuna_Corridor__Block_West__ex__Block_East_2 => rules::access_block_clip_escape_and_not_uhrum_annuna_corridor_block(&ctx),
+            ExitId::Uhrum__Annuna_Corridor__East_25__ex__Annuna__Mirror_Match__West_25_1 => true,
+            ExitId::Uhrum__Annuna_Corridor__Lower_Platform__ex__Middle_Platform_1 => rules::access_hover(&ctx),
+            ExitId::Uhrum__Annuna_Corridor__Lower_Platform__ex__Middle_Platform_2 => rules::access_anuman(&ctx),
+            ExitId::Uhrum__Annuna_Corridor__Middle_Platform__ex__Upper_Ledge_1 => rules::access_hook(&ctx),
+            ExitId::Uhrum__Annuna_Corridor__Middle_Platform__ex__Upper_Platform_1 => rules::access_anuman(&ctx),
+            ExitId::Uhrum__Annuna_Corridor__Middle_Platform__ex__Upper_Platform_2 => rules::access_hover(&ctx),
+            ExitId::Uhrum__Annuna_Corridor__Statue__ex__Upper_Platform_1 => rules::access_hover(&ctx),
+            ExitId::Uhrum__Annuna_Corridor__Upper_Ledge__ex__Upper_Platform_1 => rules::access_hover(&ctx),
+            ExitId::Uhrum__Annuna_Corridor__Upper_Platform__ex__Statue_1 => rules::access_hover(&ctx),
+            ExitId::Uhrum__Annuna_Corridor__Upper_Platform__ex__Upper_Ledge_1 => rules::access_hover(&ctx),
+            ExitId::Uhrum__Annuna_Corridor__West_25__ex__Waterfalls__East_25_1 => true,
+            ExitId::Uhrum__Annuna_Corridor__West_26__ex__Waterfalls__East_26_1 => true,
             ExitId::Uhrum__Save_Room__East__ex__Waterfalls__West_27_1 => true,
             ExitId::Uhrum__Save_Room__West__ex__Glitchy_Corridor__East_27_1 => true,
             ExitId::Uhrum__Siege_Corridor__Center_Platform_3__ex__Upper_Rock_West_1 => rules::access_hover(&ctx),
@@ -3747,6 +3857,11 @@ impl world::Exit for Exit {
             ExitId::Amagi__West_Lake__East_18__ex__Main_Area__West_18_1 => true,
             ExitId::Amagi__West_Lake__East_19__ex__Main_Area__West_19_1 => true,
             ExitId::Amagi__West_Lake__West_15__ex__Ebih__Vertical_Interchange__East_15_1 => true,
+            ExitId::Annuna__Mirror_Match__East_25_Lower__ex__West_Bridge__West_25_Lower_1 => true,
+            ExitId::Annuna__Mirror_Match__East_25_Upper__ex__West_Bridge__West_25_Upper_1 => true,
+            ExitId::Annuna__Mirror_Match__East_26_Lower__ex__West_Bridge__West_26_Lower_1 => true,
+            ExitId::Annuna__Mirror_Match__East_26_Upper__ex__West_Bridge__West_26_Upper_1 => true,
+            ExitId::Annuna__Mirror_Match__West_25__ex__Uhrum__Annuna_Corridor__East_25_1 => true,
             ExitId::Antarctica__Building_1E__Connector__ex__Building_1W__Connector_1 => true,
             ExitId::Antarctica__Building_1E__East_Entry__ex__East__Building_1_Entry_1 => true,
             ExitId::Antarctica__Building_1W__Connector__ex__Building_1E__Connector_1 => true,
@@ -4031,6 +4146,9 @@ impl world::Exit for Exit {
             ExitId::Menu__Upgrade_Menu__Infection__ex__Combat_1 => true,
             ExitId::Menu__Upgrade_Menu__Infection__ex__Physiology_1 => true,
             ExitId::Menu__Upgrade_Menu__Physiology__ex__Combat_1 => true,
+            ExitId::Uhrum__Annuna_Corridor__East_25__ex__Annuna__Mirror_Match__West_25_1 => true,
+            ExitId::Uhrum__Annuna_Corridor__West_25__ex__Waterfalls__East_25_1 => true,
+            ExitId::Uhrum__Annuna_Corridor__West_26__ex__Waterfalls__East_26_1 => true,
             ExitId::Uhrum__Save_Room__East__ex__Waterfalls__West_27_1 => true,
             ExitId::Uhrum__Save_Room__West__ex__Glitchy_Corridor__East_27_1 => true,
             ExitId::Uhrum__Siege_Corridor__East_25__ex__Waterfalls__West_25_1 => true,
@@ -4072,6 +4190,9 @@ impl world::Accessible for Action {
                     rules::access_amagi__main_area__carving__key_combo__req(&ctx)
                 }
                 ActionId::Amagi__Main_Area__Save_Point__Save => true,
+                ActionId::Annuna__Mirror_Match__Save_Point__Save => {
+                    rules::access_mirror_match_open(&ctx)
+                }
                 ActionId::Ebih__Base_Camp__Left_Platform__Move_Left_Platform => {
                     rules::access_ebih__base_camp__left_platform__move_left_platform__req(&ctx)
                 }
@@ -4287,6 +4408,13 @@ impl world::Accessible for Action {
                     rules::access_mode__drone_and_breach_sight(&ctx)
                 }
                 ActionId::Irikar_Breach__Exit_Corridor__Portal_Stand__Enter_Portal => true,
+                ActionId::Uhrum__Annuna_Corridor__Between_Two_Flowers__Throw_Drone_Not_As_High => {
+                    rules::access_can_deploy(&ctx)
+                }
+                ActionId::Uhrum__Annuna_Corridor__Between_Two_Flowers__Throw_Drone_Up => {
+                    rules::access_can_deploy_and_drone_hover(&ctx)
+                }
+                ActionId::Uhrum__Annuna_Corridor__Save_Point__Save => true,
                 ActionId::Uhrum__Save_Room__Save_Point__Save => true,
                 ActionId::Uhrum__West_Entrance__Save_Point__Save => true,
             }
@@ -4312,6 +4440,7 @@ impl world::Action for Action {
             ActionId::Global__Become_Indra => rules::action_mode__indra(ctx),
             ActionId::Amagi__Main_Area__Carving__Key_Combo => rules::action_amagi__main_area__carving__key_combo__do(ctx),
             ActionId::Amagi__Main_Area__Save_Point__Save => rules::action_save(ctx),
+            ActionId::Annuna__Mirror_Match__Save_Point__Save => rules::action_save(ctx),
             ActionId::Ebih__Base_Camp__Save_Point__Save => rules::action_save(ctx),
             ActionId::Ebih__Base_Camp__Left_Platform__Move_Left_Platform => rules::action_ebih__base_camp__left_platform__move_left_platform__do(ctx),
             ActionId::Ebih__Base_Camp__Left_Platform_Moved__Reset_Left_Platform => rules::action_ebih__base_camp__left_platform_moved__reset_left_platform__do(ctx),
@@ -4393,6 +4522,9 @@ impl world::Action for Action {
             ActionId::Irikar__Basement_Portal__Portal_Stand__Enter_Portal => rules::action_breach_portal_save_update(ctx),
             ActionId::Uhrum__West_Entrance__Save_Point__Save => rules::action_save(ctx),
             ActionId::Uhrum__Save_Room__Save_Point__Save => rules::action_save(ctx),
+            ActionId::Uhrum__Annuna_Corridor__Save_Point__Save => rules::action_save(ctx),
+            ActionId::Uhrum__Annuna_Corridor__Between_Two_Flowers__Throw_Drone_Up => rules::action_deploy_drone(ctx),
+            ActionId::Uhrum__Annuna_Corridor__Between_Two_Flowers__Throw_Drone_Not_As_High => rules::action_deploy_drone(ctx),
         };
         let dest = self.dest(ctx);
         if dest != SpotId::None {
@@ -4488,6 +4620,12 @@ impl world::Action for Action {
             ActionId::Irikar__Basement_Portal__Portal_Stand__Enter_Portal => {
                 SpotId::Irikar_Breach__Basement_Save__Save_Point
             }
+            ActionId::Uhrum__Annuna_Corridor__Between_Two_Flowers__Throw_Drone_Up => {
+                SpotId::Uhrum__Annuna_Corridor__Middle_Platform
+            }
+            ActionId::Uhrum__Annuna_Corridor__Between_Two_Flowers__Throw_Drone_Not_As_High => {
+                SpotId::Uhrum__Annuna_Corridor__Lower_Platform
+            }
             _ => SpotId::None,
         }
     }
@@ -4559,6 +4697,9 @@ impl world::Accessible for Warp {
                 WarpId::FastTravelIrikarHub => {
                     rules::access_ft_main_and_map__irikar__hub__save(&ctx)
                 }
+                WarpId::FastTravelUhrumAnnuna => {
+                    rules::access_ft_main_and_map__uhrum__annuna_corridor__save(&ctx)
+                }
                 WarpId::FastTravelUhrumEast => {
                     rules::access_ft_main_and_map__uhrum__annuna_corridor__save(&ctx)
                 }
@@ -4615,6 +4756,7 @@ impl world::Warp for Warp {
                     SpotId::Irikar_Breach__Save_Room__Save_Point
                 }
                 WarpId::FastTravelIrikarHub => SpotId::Irikar__Hub__Save_Point,
+                WarpId::FastTravelUhrumAnnuna => SpotId::Uhrum__Annuna_Corridor__Save_Point,
                 WarpId::FastTravelUhrumEast => SpotId::Uhrum__Annuna_Corridor__Save_Point,
                 WarpId::FastTravelUhrumSaveRoom => SpotId::Uhrum__Save_Room__Save_Point,
                 WarpId::FastTravelUhrumWestEntrance => SpotId::Uhrum__West_Entrance__Save_Point,
@@ -4655,6 +4797,7 @@ impl world::Warp for Warp {
             WarpId::FastTravelIrikarBreachGauntlet => rules::action_refill_energy(ctx),
             WarpId::FastTravelIrikarBreachSaveRoom => rules::action_refill_energy(ctx),
             WarpId::FastTravelIrikarHub => rules::action_refill_energy(ctx),
+            WarpId::FastTravelUhrumAnnuna => rules::action_refill_energy(ctx),
             WarpId::FastTravelUhrumEast => rules::action_refill_energy(ctx),
             WarpId::FastTravelUhrumSaveRoom => rules::action_refill_energy(ctx),
             WarpId::FastTravelUhrumWestEntrance => rules::action_refill_energy(ctx),
@@ -4684,6 +4827,7 @@ impl world::Warp for Warp {
             WarpId::FastTravelIrikarBreachGauntlet => false,
             WarpId::FastTravelIrikarBreachSaveRoom => false,
             WarpId::FastTravelIrikarHub => false,
+            WarpId::FastTravelUhrumAnnuna => false,
             WarpId::FastTravelUhrumEast => false,
             WarpId::FastTravelUhrumSaveRoom => false,
             WarpId::FastTravelUhrumWestEntrance => false,
@@ -4701,7 +4845,7 @@ pub struct Spot {
     pub actions: Range<usize>,
 }
 
-static RAW_SPOTS: [SpotId; 1094] = [
+static RAW_SPOTS: [SpotId; 1122] = [
     SpotId::None,
     SpotId::Amagi__Grid_31_19__East,
     SpotId::Amagi__Grid_31_19__West,
@@ -4794,6 +4938,23 @@ static RAW_SPOTS: [SpotId; 1094] = [
     SpotId::Amagi__West_Lake__West_Cliff,
     SpotId::Amagi__West_Lake__West_Platform,
     SpotId::Amagi__West_Lake__West_Shore,
+    SpotId::Annuna__Mirror_Match__Below_Switch,
+    SpotId::Annuna__Mirror_Match__Central_Pillar,
+    SpotId::Annuna__Mirror_Match__East_25_Lower,
+    SpotId::Annuna__Mirror_Match__East_25_Upper,
+    SpotId::Annuna__Mirror_Match__East_26_Lower,
+    SpotId::Annuna__Mirror_Match__East_26_Upper,
+    SpotId::Annuna__Mirror_Match__Eastward,
+    SpotId::Annuna__Mirror_Match__Plinth,
+    SpotId::Annuna__Mirror_Match__Save_Point,
+    SpotId::Annuna__Mirror_Match__Staircase,
+    SpotId::Annuna__Mirror_Match__Waving_Distance,
+    SpotId::Annuna__Mirror_Match__West_25,
+    SpotId::Annuna__Mirror_Match__West_Gap,
+    SpotId::Annuna__West_Bridge__West_25_Lower,
+    SpotId::Annuna__West_Bridge__West_25_Upper,
+    SpotId::Annuna__West_Bridge__West_26_Lower,
+    SpotId::Annuna__West_Bridge__West_26_Upper,
     SpotId::Antarctica__Building_1E__Connector,
     SpotId::Antarctica__Building_1E__East_Entry,
     SpotId::Antarctica__Building_1W__Connector,
@@ -5691,10 +5852,21 @@ static RAW_SPOTS: [SpotId; 1094] = [
     SpotId::Menu__Upgrade_Menu__Drone,
     SpotId::Menu__Upgrade_Menu__Infection,
     SpotId::Menu__Upgrade_Menu__Physiology,
+    SpotId::Uhrum__Annuna_Corridor__Between_Two_Flowers,
     SpotId::Uhrum__Annuna_Corridor__Block_East,
+    SpotId::Uhrum__Annuna_Corridor__Block_West,
+    SpotId::Uhrum__Annuna_Corridor__East_25,
+    SpotId::Uhrum__Annuna_Corridor__East_Cubby,
+    SpotId::Uhrum__Annuna_Corridor__Lower_Platform,
+    SpotId::Uhrum__Annuna_Corridor__Middle_Platform,
+    SpotId::Uhrum__Annuna_Corridor__Open_Pillar,
     SpotId::Uhrum__Annuna_Corridor__Pedestal,
     SpotId::Uhrum__Annuna_Corridor__Save_Point,
+    SpotId::Uhrum__Annuna_Corridor__Statue,
+    SpotId::Uhrum__Annuna_Corridor__Upper_Ledge,
+    SpotId::Uhrum__Annuna_Corridor__Upper_Platform,
     SpotId::Uhrum__Annuna_Corridor__Upper_Trees,
+    SpotId::Uhrum__Annuna_Corridor__Wall_Remnant,
     SpotId::Uhrum__Annuna_Corridor__West_25,
     SpotId::Uhrum__Annuna_Corridor__West_26,
     SpotId::Uhrum__Artillery_Practice__East_24,
@@ -5816,6 +5988,14 @@ lazy_static! {
         AreaId::Amagi__West_Lake => Range {
             start: SpotId::Amagi__West_Lake__Cavern_Back_Teeth.into_usize(),
             end: SpotId::Amagi__West_Lake__West_Shore.into_usize() + 1,
+        },
+        AreaId::Annuna__Mirror_Match => Range {
+            start: SpotId::Annuna__Mirror_Match__Below_Switch.into_usize(),
+            end: SpotId::Annuna__Mirror_Match__West_Gap.into_usize() + 1,
+        },
+        AreaId::Annuna__West_Bridge => Range {
+            start: SpotId::Annuna__West_Bridge__West_25_Lower.into_usize(),
+            end: SpotId::Annuna__West_Bridge__West_26_Upper.into_usize() + 1,
         },
         AreaId::Antarctica__Building_1E => Range {
             start: SpotId::Antarctica__Building_1E__Connector.into_usize(),
@@ -6262,7 +6442,7 @@ lazy_static! {
             end: SpotId::Menu__Upgrade_Menu__Physiology.into_usize() + 1,
         },
         AreaId::Uhrum__Annuna_Corridor => Range {
-            start: SpotId::Uhrum__Annuna_Corridor__Block_East.into_usize(),
+            start: SpotId::Uhrum__Annuna_Corridor__Between_Two_Flowers.into_usize(),
             end: SpotId::Uhrum__Annuna_Corridor__West_26.into_usize() + 1,
         },
         AreaId::Uhrum__Artillery_Practice => Range {
@@ -6326,7 +6506,7 @@ impl world::World for World {
     type Exit = Exit;
     type Action = Action;
     type Warp = Warp;
-    const NUM_LOCATIONS: u32 = 195;
+    const NUM_LOCATIONS: u32 = 207;
 
     fn objective_name(&self) -> String {
         format!("{}", self.objective)
@@ -6389,6 +6569,12 @@ impl world::World for World {
             CanonId::Amagi_West_Lake_Surface_Wall => vec![
                 LocationId::Amagi__West_Lake__Surface_Wall_Right__Break_Wall,
                 LocationId::Amagi__West_Lake__Surface_Wall_Left__Break_Wall,
+            ],
+            CanonId::Annuna_Mirror_Match_Flask => vec![
+                LocationId::Annuna__Mirror_Match__Plinth__Item,
+                LocationId::Annuna__Mirror_Match__Waving_Distance__Shockwave_Flask,
+                LocationId::Annuna__Mirror_Match__East_26_Lower__Remote_Flask,
+                LocationId::Annuna__Mirror_Match__East_26_Upper__Remote_Flask,
             ],
             CanonId::Notes_2053_02_27 => {
                 vec![LocationId::Antarctica__Building_2__Behind_Boxes__Note]
@@ -6519,6 +6705,14 @@ impl world::World for World {
                 LocationId::Uhrum__Waterfalls__Above_Block__Block,
                 LocationId::Uhrum__Waterfalls__East_26__Block,
             ],
+            CanonId::Anuman => vec![
+                LocationId::Uhrum__Annuna_Corridor__Upper_Trees__Remote_Urn,
+                LocationId::Uhrum__Annuna_Corridor__Pedestal__Urn,
+            ],
+            CanonId::Uhrum_Annuna_Corridor_Block => vec![
+                LocationId::Uhrum__Annuna_Corridor__Block_West__Dislodge_Block,
+                LocationId::Uhrum__Annuna_Corridor__Block_East__Dislodge_Block,
+            ],
         }
     }
 
@@ -6549,6 +6743,7 @@ impl world::World for World {
                 LocationId::Irikar_Breach__Worm_Rave__Corner__Item,
                 LocationId::Irikar__Hub__Royal_Storage_in_Wall__Item,
                 LocationId::Uhrum__Waterfalls__Ceiling_Cache__Flask,
+                LocationId::Uhrum__Annuna_Corridor__Statue__Item,
             ],
             Item::Underwater_Movement => vec![LocationId::Amagi__Liru_Room__Shrine__Item],
             Item::Amagi_Dragon_Eye_Passage => {
@@ -6585,6 +6780,19 @@ impl world::World for World {
             Item::Amagi_West_Lake_Surface_Wall => vec![
                 LocationId::Amagi__West_Lake__Surface_Wall_Right__Break_Wall,
                 LocationId::Amagi__West_Lake__Surface_Wall_Left__Break_Wall,
+            ],
+            Item::Defeat_Indra => vec![LocationId::Annuna__Mirror_Match__Save_Point__Fight],
+            Item::Annuna_Mirror_Match_Switch => {
+                vec![LocationId::Annuna__Mirror_Match__Below_Switch__Hit_Switch]
+            }
+            Item::Big_Flask => vec![
+                LocationId::Annuna__Mirror_Match__Plinth__Item,
+                LocationId::Annuna__Mirror_Match__Waving_Distance__Shockwave_Flask,
+                LocationId::Annuna__Mirror_Match__East_26_Lower__Remote_Flask,
+                LocationId::Annuna__Mirror_Match__East_26_Upper__Remote_Flask,
+                LocationId::Giguna__Clouds__Cache__Item,
+                LocationId::Giguna__Gubi_Lair__Center_Platform__Boss_Reward,
+                LocationId::Irikar__Boss_Room__Bulls_Feet__Boss_Reward,
             ],
             Item::Ice_Axe => vec![LocationId::Antarctica__Shed__Interior__Shelf],
             Item::Notes_2053_02_27 => vec![LocationId::Antarctica__Building_2__Behind_Boxes__Note],
@@ -6665,11 +6873,6 @@ impl world::World for World {
             Item::Aansur => vec![LocationId::Giguna__Ruins_Center__Tablet__Item],
             Item::The_Ideal_Kiengir => vec![LocationId::Giguna__West_Tower__Top__Tablet],
             Item::Journal_2049_10_29 => vec![LocationId::Giguna__Helipad__Tablet_Ledge__Tablet],
-            Item::Big_Flask => vec![
-                LocationId::Giguna__Clouds__Cache__Item,
-                LocationId::Giguna__Gubi_Lair__Center_Platform__Boss_Reward,
-                LocationId::Irikar__Boss_Room__Bulls_Feet__Boss_Reward,
-            ],
             Item::Giguna_Dual_Path_Switch => vec![
                 LocationId::Giguna__Dual_Path__Below_Left_Switch__Remote_Switch,
                 LocationId::Giguna__Dual_Path__Left_Switch__Hit_Switch,
@@ -6840,6 +7043,17 @@ impl world::World for World {
                 LocationId::Uhrum__Waterfalls__East_26__Block,
             ],
             Item::Suspension_Bridge => vec![LocationId::Uhrum__Waterfalls__West_Water_Nook__Tablet],
+            Item::Anuman => vec![
+                LocationId::Uhrum__Annuna_Corridor__Upper_Trees__Remote_Urn,
+                LocationId::Uhrum__Annuna_Corridor__Pedestal__Urn,
+            ],
+            Item::Uhrum_Annuna_Corridor_Block => vec![
+                LocationId::Uhrum__Annuna_Corridor__Block_West__Dislodge_Block,
+                LocationId::Uhrum__Annuna_Corridor__Block_East__Dislodge_Block,
+            ],
+            Item::Plague_of_Thoughts => {
+                vec![LocationId::Uhrum__Annuna_Corridor__East_Cubby__Tablet]
+            }
             _ => Vec::new(),
         }
     }
@@ -6916,6 +7130,22 @@ impl world::World for World {
             }
             LocationId::Amagi__West_Lake__Surface_Wall_Left__Break_Wall => {
                 SpotId::Amagi__West_Lake__Surface_Wall_Left
+            }
+            LocationId::Annuna__Mirror_Match__Save_Point__Fight => {
+                SpotId::Annuna__Mirror_Match__Save_Point
+            }
+            LocationId::Annuna__Mirror_Match__Below_Switch__Hit_Switch => {
+                SpotId::Annuna__Mirror_Match__Below_Switch
+            }
+            LocationId::Annuna__Mirror_Match__Plinth__Item => SpotId::Annuna__Mirror_Match__Plinth,
+            LocationId::Annuna__Mirror_Match__Waving_Distance__Shockwave_Flask => {
+                SpotId::Annuna__Mirror_Match__Waving_Distance
+            }
+            LocationId::Annuna__Mirror_Match__East_26_Lower__Remote_Flask => {
+                SpotId::Annuna__Mirror_Match__East_26_Lower
+            }
+            LocationId::Annuna__Mirror_Match__East_26_Upper__Remote_Flask => {
+                SpotId::Annuna__Mirror_Match__East_26_Upper
             }
             LocationId::Antarctica__Shed__Interior__Shelf => SpotId::Antarctica__Shed__Interior,
             LocationId::Antarctica__Building_2__Behind_Boxes__Note => {
@@ -7278,6 +7508,24 @@ impl world::World for World {
             LocationId::Uhrum__Waterfalls__West_Water_Nook__Tablet => {
                 SpotId::Uhrum__Waterfalls__West_Water_Nook
             }
+            LocationId::Uhrum__Annuna_Corridor__Upper_Trees__Remote_Urn => {
+                SpotId::Uhrum__Annuna_Corridor__Upper_Trees
+            }
+            LocationId::Uhrum__Annuna_Corridor__Pedestal__Urn => {
+                SpotId::Uhrum__Annuna_Corridor__Pedestal
+            }
+            LocationId::Uhrum__Annuna_Corridor__Block_West__Dislodge_Block => {
+                SpotId::Uhrum__Annuna_Corridor__Block_West
+            }
+            LocationId::Uhrum__Annuna_Corridor__Block_East__Dislodge_Block => {
+                SpotId::Uhrum__Annuna_Corridor__Block_East
+            }
+            LocationId::Uhrum__Annuna_Corridor__East_Cubby__Tablet => {
+                SpotId::Uhrum__Annuna_Corridor__East_Cubby
+            }
+            LocationId::Uhrum__Annuna_Corridor__Statue__Item => {
+                SpotId::Uhrum__Annuna_Corridor__Statue
+            }
         }
     }
 
@@ -7285,6 +7533,9 @@ impl world::World for World {
         match act_id {
             ActionId::Amagi__Main_Area__Carving__Key_Combo => SpotId::Amagi__Main_Area__Carving,
             ActionId::Amagi__Main_Area__Save_Point__Save => SpotId::Amagi__Main_Area__Save_Point,
+            ActionId::Annuna__Mirror_Match__Save_Point__Save => {
+                SpotId::Annuna__Mirror_Match__Save_Point
+            }
             ActionId::Ebih__Base_Camp__Save_Point__Save => SpotId::Ebih__Base_Camp__Save_Point,
             ActionId::Ebih__Base_Camp__Left_Platform__Move_Left_Platform => {
                 SpotId::Ebih__Base_Camp__Left_Platform
@@ -7474,6 +7725,13 @@ impl world::World for World {
                 SpotId::Uhrum__West_Entrance__Save_Point
             }
             ActionId::Uhrum__Save_Room__Save_Point__Save => SpotId::Uhrum__Save_Room__Save_Point,
+            ActionId::Uhrum__Annuna_Corridor__Save_Point__Save => {
+                SpotId::Uhrum__Annuna_Corridor__Save_Point
+            }
+            ActionId::Uhrum__Annuna_Corridor__Between_Two_Flowers__Throw_Drone_Not_As_High
+            | ActionId::Uhrum__Annuna_Corridor__Between_Two_Flowers__Throw_Drone_Up => {
+                SpotId::Uhrum__Annuna_Corridor__Between_Two_Flowers
+            }
             _ => SpotId::None,
         }
     }
@@ -7516,6 +7774,17 @@ impl world::World for World {
             ExitId::Amagi__West_Lake__Surface_Wall_Right__ex__Surface_Wall_Left_1 => SpotId::Amagi__West_Lake__Surface_Wall_Right,
             ExitId::Amagi__West_Lake__Surface_Wall_Left__ex__Surface_Wall_Right_1 => SpotId::Amagi__West_Lake__Surface_Wall_Left,
             ExitId::Amagi__West_Lake__West_15__ex__Ebih__Vertical_Interchange__East_15_1 => SpotId::Amagi__West_Lake__West_15,
+            ExitId::Annuna__Mirror_Match__West_25__ex__Uhrum__Annuna_Corridor__East_25_1 => SpotId::Annuna__Mirror_Match__West_25,
+            ExitId::Annuna__Mirror_Match__Eastward__ex__Staircase_1 => SpotId::Annuna__Mirror_Match__Eastward,
+            ExitId::Annuna__Mirror_Match__Staircase__ex__Eastward_1 => SpotId::Annuna__Mirror_Match__Staircase,
+            ExitId::Annuna__Mirror_Match__East_25_Lower__ex__West_Bridge__West_25_Lower_1 => SpotId::Annuna__Mirror_Match__East_25_Lower,
+            ExitId::Annuna__Mirror_Match__East_25_Upper__ex__West_Bridge__West_25_Upper_1 => SpotId::Annuna__Mirror_Match__East_25_Upper,
+            ExitId::Annuna__Mirror_Match__Below_Switch__ex__Central_Pillar_1 => SpotId::Annuna__Mirror_Match__Below_Switch,
+            ExitId::Annuna__Mirror_Match__Central_Pillar__ex__Save_Point_1 | ExitId:: Annuna__Mirror_Match__Central_Pillar__ex__West_25_1 | ExitId:: Annuna__Mirror_Match__Central_Pillar__ex__Below_Switch_1 => SpotId::Annuna__Mirror_Match__Central_Pillar,
+            ExitId::Annuna__Mirror_Match__Plinth__ex__East_26_Upper_1 => SpotId::Annuna__Mirror_Match__Plinth,
+            ExitId::Annuna__Mirror_Match__East_26_Lower__ex__West_Bridge__West_26_Lower_1 => SpotId::Annuna__Mirror_Match__East_26_Lower,
+            ExitId::Annuna__Mirror_Match__East_26_Upper__ex__West_Bridge__West_26_Upper_1 => SpotId::Annuna__Mirror_Match__East_26_Upper,
+            ExitId::Annuna__Mirror_Match__East_26_Upper__Remote_Flask => SpotId::Annuna__Mirror_Match__East_26_Upper,
             ExitId::Antarctica__West__Shed_Entry__ex__Shed__Interior_1 | ExitId:: Antarctica__West__Shed_Entry__ex__Helipad_1 => SpotId::Antarctica__West__Shed_Entry,
             ExitId::Antarctica__West__Boxes__ex__Building_1W__West_Entry_1 => SpotId::Antarctica__West__Boxes,
             ExitId::Antarctica__Shed__Interior__ex__West__Shed_Entry_1 => SpotId::Antarctica__Shed__Interior,
@@ -8160,6 +8429,17 @@ impl world::World for World {
             ExitId::Uhrum__Waterfalls__East_27__ex__East_Lake__West_27_1 => SpotId::Uhrum__Waterfalls__East_27,
             ExitId::Uhrum__Save_Room__East__ex__Waterfalls__West_27_1 => SpotId::Uhrum__Save_Room__East,
             ExitId::Uhrum__Save_Room__West__ex__Glitchy_Corridor__East_27_1 => SpotId::Uhrum__Save_Room__West,
+            ExitId::Uhrum__Annuna_Corridor__West_25__ex__Waterfalls__East_25_1 => SpotId::Uhrum__Annuna_Corridor__West_25,
+            ExitId::Uhrum__Annuna_Corridor__West_26__ex__Waterfalls__East_26_1 => SpotId::Uhrum__Annuna_Corridor__West_26,
+            ExitId::Uhrum__Annuna_Corridor__Block_West__ex__Block_East_1 | ExitId:: Uhrum__Annuna_Corridor__Block_West__ex__Block_East_2 => SpotId::Uhrum__Annuna_Corridor__Block_West,
+            ExitId::Uhrum__Annuna_Corridor__Block_East__ex__Block_West_1 => SpotId::Uhrum__Annuna_Corridor__Block_East,
+            ExitId::Uhrum__Annuna_Corridor__Between_Two_Flowers__ex__Lower_Platform_1 | ExitId:: Uhrum__Annuna_Corridor__Between_Two_Flowers__ex__Lower_Platform_2 => SpotId::Uhrum__Annuna_Corridor__Between_Two_Flowers,
+            ExitId::Uhrum__Annuna_Corridor__Lower_Platform__ex__Middle_Platform_1 | ExitId:: Uhrum__Annuna_Corridor__Lower_Platform__ex__Middle_Platform_2 => SpotId::Uhrum__Annuna_Corridor__Lower_Platform,
+            ExitId::Uhrum__Annuna_Corridor__Middle_Platform__ex__Upper_Ledge_1 | ExitId:: Uhrum__Annuna_Corridor__Middle_Platform__ex__Upper_Platform_1 | ExitId:: Uhrum__Annuna_Corridor__Middle_Platform__ex__Upper_Platform_2 => SpotId::Uhrum__Annuna_Corridor__Middle_Platform,
+            ExitId::Uhrum__Annuna_Corridor__Upper_Platform__ex__Upper_Ledge_1 | ExitId:: Uhrum__Annuna_Corridor__Upper_Platform__ex__Statue_1 => SpotId::Uhrum__Annuna_Corridor__Upper_Platform,
+            ExitId::Uhrum__Annuna_Corridor__Upper_Ledge__ex__Upper_Platform_1 => SpotId::Uhrum__Annuna_Corridor__Upper_Ledge,
+            ExitId::Uhrum__Annuna_Corridor__Statue__ex__Upper_Platform_1 => SpotId::Uhrum__Annuna_Corridor__Statue,
+            ExitId::Uhrum__Annuna_Corridor__East_25__ex__Annuna__Mirror_Match__West_25_1 => SpotId::Uhrum__Annuna_Corridor__East_25,
             _ => SpotId::None,
         }
     }
@@ -8404,6 +8684,15 @@ impl world::World for World {
             | SpotId::Amagi__West_Lake__Surface_Wall_Left
             | SpotId::Amagi__West_Lake__Surface_Wall_Right
             | SpotId::Amagi__West_Lake__West_15
+            | SpotId::Annuna__Mirror_Match__Below_Switch
+            | SpotId::Annuna__Mirror_Match__East_25_Lower
+            | SpotId::Annuna__Mirror_Match__East_25_Upper
+            | SpotId::Annuna__Mirror_Match__East_26_Lower
+            | SpotId::Annuna__Mirror_Match__East_26_Upper
+            | SpotId::Annuna__Mirror_Match__Plinth
+            | SpotId::Annuna__Mirror_Match__Save_Point
+            | SpotId::Annuna__Mirror_Match__Waving_Distance
+            | SpotId::Annuna__Mirror_Match__West_25
             | SpotId::Antarctica__Building_1E__Connector
             | SpotId::Antarctica__Building_1E__East_Entry
             | SpotId::Antarctica__Building_1W__Connector
@@ -8839,6 +9128,17 @@ impl world::World for World {
             | SpotId::Menu__Upgrade_Menu__Drone
             | SpotId::Menu__Upgrade_Menu__Infection
             | SpotId::Menu__Upgrade_Menu__Physiology
+            | SpotId::Uhrum__Annuna_Corridor__Between_Two_Flowers
+            | SpotId::Uhrum__Annuna_Corridor__Block_East
+            | SpotId::Uhrum__Annuna_Corridor__Block_West
+            | SpotId::Uhrum__Annuna_Corridor__East_25
+            | SpotId::Uhrum__Annuna_Corridor__East_Cubby
+            | SpotId::Uhrum__Annuna_Corridor__Pedestal
+            | SpotId::Uhrum__Annuna_Corridor__Save_Point
+            | SpotId::Uhrum__Annuna_Corridor__Statue
+            | SpotId::Uhrum__Annuna_Corridor__Upper_Trees
+            | SpotId::Uhrum__Annuna_Corridor__West_25
+            | SpotId::Uhrum__Annuna_Corridor__West_26
             | SpotId::Uhrum__Save_Room__East
             | SpotId::Uhrum__Save_Room__Save_Point
             | SpotId::Uhrum__Save_Room__West
@@ -8953,6 +9253,7 @@ impl World {
                     | Item::Melee_Speed_3
                     | Item::Nano_Points_3
                     | Item::Notes_2053_02_27
+                    | Item::Plague_of_Thoughts
                     | Item::Ranged_Damage_3
                     | Item::Ranged_Speed_3
                     | Item::Record_Losses
@@ -8986,6 +9287,7 @@ impl World {
                     | Item::Melee_Speed_3
                     | Item::Nano_Points_3
                     | Item::Notes_2053_02_27
+                    | Item::Plague_of_Thoughts
                     | Item::Ranged_Damage_3
                     | Item::Ranged_Speed_3
                     | Item::Refill
@@ -9143,6 +9445,54 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
             price: Currency::Energy(100),
             time: 3500,
             exit_id: None,
+        },
+        LocationId::Annuna__Mirror_Match__Save_Point__Fight => Location {
+            id: LocationId::Annuna__Mirror_Match__Save_Point__Fight,
+            canonical: CanonId::None,
+            item: Item::Defeat_Indra,
+            price: Currency::Free,
+            time: 30000,
+            exit_id: None,
+        },
+        LocationId::Annuna__Mirror_Match__Below_Switch__Hit_Switch => Location {
+            id: LocationId::Annuna__Mirror_Match__Below_Switch__Hit_Switch,
+            canonical: CanonId::None,
+            item: Item::Annuna_Mirror_Match_Switch,
+            price: Currency::Free,
+            time: 0,
+            exit_id: None,
+        },
+        LocationId::Annuna__Mirror_Match__Plinth__Item => Location {
+            id: LocationId::Annuna__Mirror_Match__Plinth__Item,
+            canonical: CanonId::Annuna_Mirror_Match_Flask,
+            item: Item::Big_Flask,
+            price: Currency::Free,
+            time: 5500,
+            exit_id: None,
+        },
+        LocationId::Annuna__Mirror_Match__Waving_Distance__Shockwave_Flask => Location {
+            id: LocationId::Annuna__Mirror_Match__Waving_Distance__Shockwave_Flask,
+            canonical: CanonId::Annuna_Mirror_Match_Flask,
+            item: Item::Big_Flask,
+            price: Currency::Free,
+            time: 3500,
+            exit_id: None,
+        },
+        LocationId::Annuna__Mirror_Match__East_26_Lower__Remote_Flask => Location {
+            id: LocationId::Annuna__Mirror_Match__East_26_Lower__Remote_Flask,
+            canonical: CanonId::Annuna_Mirror_Match_Flask,
+            item: Item::Big_Flask,
+            price: Currency::Free,
+            time: 6500,
+            exit_id: None,
+        },
+        LocationId::Annuna__Mirror_Match__East_26_Upper__Remote_Flask => Location {
+            id: LocationId::Annuna__Mirror_Match__East_26_Upper__Remote_Flask,
+            canonical: CanonId::Annuna_Mirror_Match_Flask,
+            item: Item::Big_Flask,
+            price: Currency::Free,
+            time: 0,
+            exit_id: Some(ExitId::Annuna__Mirror_Match__East_26_Upper__Remote_Flask),
         },
         LocationId::Antarctica__Shed__Interior__Shelf => Location {
             id: LocationId::Antarctica__Shed__Interior__Shelf,
@@ -10560,6 +10910,54 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
             time: 0,
             exit_id: None,
         },
+        LocationId::Uhrum__Annuna_Corridor__Upper_Trees__Remote_Urn => Location {
+            id: LocationId::Uhrum__Annuna_Corridor__Upper_Trees__Remote_Urn,
+            canonical: CanonId::Anuman,
+            item: Item::Anuman,
+            price: Currency::Free,
+            time: 6500,
+            exit_id: None,
+        },
+        LocationId::Uhrum__Annuna_Corridor__Pedestal__Urn => Location {
+            id: LocationId::Uhrum__Annuna_Corridor__Pedestal__Urn,
+            canonical: CanonId::Anuman,
+            item: Item::Anuman,
+            price: Currency::Free,
+            time: 5500,
+            exit_id: None,
+        },
+        LocationId::Uhrum__Annuna_Corridor__Block_West__Dislodge_Block => Location {
+            id: LocationId::Uhrum__Annuna_Corridor__Block_West__Dislodge_Block,
+            canonical: CanonId::Uhrum_Annuna_Corridor_Block,
+            item: Item::Uhrum_Annuna_Corridor_Block,
+            price: Currency::Energy(100),
+            time: 3500,
+            exit_id: None,
+        },
+        LocationId::Uhrum__Annuna_Corridor__Block_East__Dislodge_Block => Location {
+            id: LocationId::Uhrum__Annuna_Corridor__Block_East__Dislodge_Block,
+            canonical: CanonId::Uhrum_Annuna_Corridor_Block,
+            item: Item::Uhrum_Annuna_Corridor_Block,
+            price: Currency::Energy(100),
+            time: 3500,
+            exit_id: None,
+        },
+        LocationId::Uhrum__Annuna_Corridor__East_Cubby__Tablet => Location {
+            id: LocationId::Uhrum__Annuna_Corridor__East_Cubby__Tablet,
+            canonical: CanonId::None,
+            item: Item::Plague_of_Thoughts,
+            price: Currency::Free,
+            time: 0,
+            exit_id: None,
+        },
+        LocationId::Uhrum__Annuna_Corridor__Statue__Item => Location {
+            id: LocationId::Uhrum__Annuna_Corridor__Statue__Item,
+            canonical: CanonId::None,
+            item: Item::Flask,
+            price: Currency::Free,
+            time: 5500,
+            exit_id: None,
+        },
     }
 }
 
@@ -10865,6 +11263,97 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
             dest: SpotId::Ebih__Vertical_Interchange__East_15,
             price: Currency::Free,
             loc_id: None,
+        },
+        ExitId::Annuna__Mirror_Match__West_25__ex__Uhrum__Annuna_Corridor__East_25_1 => Exit {
+            id: ExitId::Annuna__Mirror_Match__West_25__ex__Uhrum__Annuna_Corridor__East_25_1,
+            time: 1350,
+            dest: SpotId::Uhrum__Annuna_Corridor__East_25,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__Mirror_Match__Eastward__ex__Staircase_1 => Exit {
+            id: ExitId::Annuna__Mirror_Match__Eastward__ex__Staircase_1,
+            time: 526,
+            dest: SpotId::Annuna__Mirror_Match__Staircase,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__Mirror_Match__Staircase__ex__Eastward_1 => Exit {
+            id: ExitId::Annuna__Mirror_Match__Staircase__ex__Eastward_1,
+            time: 526,
+            dest: SpotId::Annuna__Mirror_Match__Eastward,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__Mirror_Match__East_25_Lower__ex__West_Bridge__West_25_Lower_1 => Exit {
+            id: ExitId::Annuna__Mirror_Match__East_25_Lower__ex__West_Bridge__West_25_Lower_1,
+            time: 1350,
+            dest: SpotId::Annuna__West_Bridge__West_25_Lower,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__Mirror_Match__East_25_Upper__ex__West_Bridge__West_25_Upper_1 => Exit {
+            id: ExitId::Annuna__Mirror_Match__East_25_Upper__ex__West_Bridge__West_25_Upper_1,
+            time: 1350,
+            dest: SpotId::Annuna__West_Bridge__West_25_Upper,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__Mirror_Match__Below_Switch__ex__Central_Pillar_1 => Exit {
+            id: ExitId::Annuna__Mirror_Match__Below_Switch__ex__Central_Pillar_1,
+            time: 1754,
+            dest: SpotId::Annuna__Mirror_Match__Central_Pillar,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__Mirror_Match__Central_Pillar__ex__Save_Point_1 => Exit {
+            id: ExitId::Annuna__Mirror_Match__Central_Pillar__ex__Save_Point_1,
+            time: 33684,
+            dest: SpotId::Annuna__Mirror_Match__Save_Point,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__Mirror_Match__Central_Pillar__ex__West_25_1 => Exit {
+            id: ExitId::Annuna__Mirror_Match__Central_Pillar__ex__West_25_1,
+            time: 3684,
+            dest: SpotId::Annuna__Mirror_Match__West_25,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__Mirror_Match__Central_Pillar__ex__Below_Switch_1 => Exit {
+            id: ExitId::Annuna__Mirror_Match__Central_Pillar__ex__Below_Switch_1,
+            time: 1000,
+            dest: SpotId::Annuna__Mirror_Match__Below_Switch,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__Mirror_Match__Plinth__ex__East_26_Upper_1 => Exit {
+            id: ExitId::Annuna__Mirror_Match__Plinth__ex__East_26_Upper_1,
+            time: 1403,
+            dest: SpotId::Annuna__Mirror_Match__East_26_Upper,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__Mirror_Match__East_26_Lower__ex__West_Bridge__West_26_Lower_1 => Exit {
+            id: ExitId::Annuna__Mirror_Match__East_26_Lower__ex__West_Bridge__West_26_Lower_1,
+            time: 1350,
+            dest: SpotId::Annuna__West_Bridge__West_26_Lower,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__Mirror_Match__East_26_Upper__ex__West_Bridge__West_26_Upper_1 => Exit {
+            id: ExitId::Annuna__Mirror_Match__East_26_Upper__ex__West_Bridge__West_26_Upper_1,
+            time: 1350,
+            dest: SpotId::Annuna__West_Bridge__West_26_Upper,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__Mirror_Match__East_26_Upper__Remote_Flask => Exit {
+            id: ExitId::Annuna__Mirror_Match__East_26_Upper__Remote_Flask,
+            time: 6500,
+            dest: SpotId::Annuna__Mirror_Match__East_26_Lower,
+            price: Currency::Free,
+            loc_id: Some(LocationId::Annuna__Mirror_Match__East_26_Upper__Remote_Flask),
         },
         ExitId::Antarctica__West__Shed_Entry__ex__Shed__Interior_1 => Exit {
             id: ExitId::Antarctica__West__Shed_Entry__ex__Shed__Interior_1,
@@ -17733,6 +18222,125 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
             price: Currency::Free,
             loc_id: None,
         },
+        ExitId::Uhrum__Annuna_Corridor__West_25__ex__Waterfalls__East_25_1 => Exit {
+            id: ExitId::Uhrum__Annuna_Corridor__West_25__ex__Waterfalls__East_25_1,
+            time: 1350,
+            dest: SpotId::Uhrum__Waterfalls__East_25,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Uhrum__Annuna_Corridor__West_26__ex__Waterfalls__East_26_1 => Exit {
+            id: ExitId::Uhrum__Annuna_Corridor__West_26__ex__Waterfalls__East_26_1,
+            time: 1350,
+            dest: SpotId::Uhrum__Waterfalls__East_26,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Uhrum__Annuna_Corridor__Block_West__ex__Block_East_1 => Exit {
+            id: ExitId::Uhrum__Annuna_Corridor__Block_West__ex__Block_East_1,
+            time: 701,
+            dest: SpotId::Uhrum__Annuna_Corridor__Block_East,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Uhrum__Annuna_Corridor__Block_West__ex__Block_East_2 => Exit {
+            id: ExitId::Uhrum__Annuna_Corridor__Block_West__ex__Block_East_2,
+            time: 2000,
+            dest: SpotId::Uhrum__Annuna_Corridor__Block_East,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Uhrum__Annuna_Corridor__Block_East__ex__Block_West_1 => Exit {
+            id: ExitId::Uhrum__Annuna_Corridor__Block_East__ex__Block_West_1,
+            time: 701,
+            dest: SpotId::Uhrum__Annuna_Corridor__Block_West,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Uhrum__Annuna_Corridor__Between_Two_Flowers__ex__Lower_Platform_1 => Exit {
+            id: ExitId::Uhrum__Annuna_Corridor__Between_Two_Flowers__ex__Lower_Platform_1,
+            time: 600,
+            dest: SpotId::Uhrum__Annuna_Corridor__Lower_Platform,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Uhrum__Annuna_Corridor__Between_Two_Flowers__ex__Lower_Platform_2 => Exit {
+            id: ExitId::Uhrum__Annuna_Corridor__Between_Two_Flowers__ex__Lower_Platform_2,
+            time: 2000,
+            dest: SpotId::Uhrum__Annuna_Corridor__Lower_Platform,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Uhrum__Annuna_Corridor__Lower_Platform__ex__Middle_Platform_1 => Exit {
+            id: ExitId::Uhrum__Annuna_Corridor__Lower_Platform__ex__Middle_Platform_1,
+            time: 1000,
+            dest: SpotId::Uhrum__Annuna_Corridor__Middle_Platform,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Uhrum__Annuna_Corridor__Lower_Platform__ex__Middle_Platform_2 => Exit {
+            id: ExitId::Uhrum__Annuna_Corridor__Lower_Platform__ex__Middle_Platform_2,
+            time: 600,
+            dest: SpotId::Uhrum__Annuna_Corridor__Middle_Platform,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Uhrum__Annuna_Corridor__Middle_Platform__ex__Upper_Ledge_1 => Exit {
+            id: ExitId::Uhrum__Annuna_Corridor__Middle_Platform__ex__Upper_Ledge_1,
+            time: 1052,
+            dest: SpotId::Uhrum__Annuna_Corridor__Upper_Ledge,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Uhrum__Annuna_Corridor__Middle_Platform__ex__Upper_Platform_1 => Exit {
+            id: ExitId::Uhrum__Annuna_Corridor__Middle_Platform__ex__Upper_Platform_1,
+            time: 600,
+            dest: SpotId::Uhrum__Annuna_Corridor__Upper_Platform,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Uhrum__Annuna_Corridor__Middle_Platform__ex__Upper_Platform_2 => Exit {
+            id: ExitId::Uhrum__Annuna_Corridor__Middle_Platform__ex__Upper_Platform_2,
+            time: 1000,
+            dest: SpotId::Uhrum__Annuna_Corridor__Upper_Platform,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Uhrum__Annuna_Corridor__Upper_Platform__ex__Upper_Ledge_1 => Exit {
+            id: ExitId::Uhrum__Annuna_Corridor__Upper_Platform__ex__Upper_Ledge_1,
+            time: 1403,
+            dest: SpotId::Uhrum__Annuna_Corridor__Upper_Ledge,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Uhrum__Annuna_Corridor__Upper_Platform__ex__Statue_1 => Exit {
+            id: ExitId::Uhrum__Annuna_Corridor__Upper_Platform__ex__Statue_1,
+            time: 2280,
+            dest: SpotId::Uhrum__Annuna_Corridor__Statue,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Uhrum__Annuna_Corridor__Upper_Ledge__ex__Upper_Platform_1 => Exit {
+            id: ExitId::Uhrum__Annuna_Corridor__Upper_Ledge__ex__Upper_Platform_1,
+            time: 1403,
+            dest: SpotId::Uhrum__Annuna_Corridor__Upper_Platform,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Uhrum__Annuna_Corridor__Statue__ex__Upper_Platform_1 => Exit {
+            id: ExitId::Uhrum__Annuna_Corridor__Statue__ex__Upper_Platform_1,
+            time: 2280,
+            dest: SpotId::Uhrum__Annuna_Corridor__Upper_Platform,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Uhrum__Annuna_Corridor__East_25__ex__Annuna__Mirror_Match__West_25_1 => Exit {
+            id: ExitId::Uhrum__Annuna_Corridor__East_25__ex__Annuna__Mirror_Match__West_25_1,
+            time: 1350,
+            dest: SpotId::Annuna__Mirror_Match__West_25,
+            price: Currency::Free,
+            loc_id: None,
+        },
     }
 }
 
@@ -17766,6 +18374,11 @@ pub fn build_actions() -> EnumMap<ActionId, Action> {
         ActionId::Amagi__Main_Area__Save_Point__Save => Action {
             id: ActionId::Amagi__Main_Area__Save_Point__Save,
             time: 1200,
+            price: Currency::Free,
+        },
+        ActionId::Annuna__Mirror_Match__Save_Point__Save => Action {
+            id: ActionId::Annuna__Mirror_Match__Save_Point__Save,
+            time: 1000,
             price: Currency::Free,
         },
         ActionId::Ebih__Base_Camp__Save_Point__Save => Action {
@@ -18171,6 +18784,21 @@ pub fn build_actions() -> EnumMap<ActionId, Action> {
         ActionId::Uhrum__Save_Room__Save_Point__Save => Action {
             id: ActionId::Uhrum__Save_Room__Save_Point__Save,
             time: 1300,
+            price: Currency::Free,
+        },
+        ActionId::Uhrum__Annuna_Corridor__Save_Point__Save => Action {
+            id: ActionId::Uhrum__Annuna_Corridor__Save_Point__Save,
+            time: 1300,
+            price: Currency::Free,
+        },
+        ActionId::Uhrum__Annuna_Corridor__Between_Two_Flowers__Throw_Drone_Up => Action {
+            id: ActionId::Uhrum__Annuna_Corridor__Between_Two_Flowers__Throw_Drone_Up,
+            time: 1750,
+            price: Currency::Free,
+        },
+        ActionId::Uhrum__Annuna_Corridor__Between_Two_Flowers__Throw_Drone_Not_As_High => Action {
+            id: ActionId::Uhrum__Annuna_Corridor__Between_Two_Flowers__Throw_Drone_Not_As_High,
+            time: 1000,
             price: Currency::Free,
         },
     }
@@ -19318,6 +19946,227 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             exits: Range {
                 start: ExitId::Amagi__West_Lake__West_15__ex__Ebih__Vertical_Interchange__East_15_1.into_usize(),
                 end: ExitId::Amagi__West_Lake__West_15__ex__Ebih__Vertical_Interchange__East_15_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__Mirror_Match__West_25 => Spot {
+            id: SpotId::Annuna__Mirror_Match__West_25,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Annuna__Mirror_Match__West_25__ex__Uhrum__Annuna_Corridor__East_25_1.into_usize(),
+                end: ExitId::Annuna__Mirror_Match__West_25__ex__Uhrum__Annuna_Corridor__East_25_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__Mirror_Match__West_Gap => Spot {
+            id: SpotId::Annuna__Mirror_Match__West_Gap,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__Mirror_Match__Save_Point => Spot {
+            id: SpotId::Annuna__Mirror_Match__Save_Point,
+            locations: Range {
+                start: LocationId::Annuna__Mirror_Match__Save_Point__Fight.into_usize(),
+                end: LocationId::Annuna__Mirror_Match__Save_Point__Fight.into_usize() + 1,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: ActionId::Annuna__Mirror_Match__Save_Point__Save.into_usize(),
+                end: ActionId::Annuna__Mirror_Match__Save_Point__Save.into_usize() + 1,
+            },
+        },
+        SpotId::Annuna__Mirror_Match__Eastward => Spot {
+            id: SpotId::Annuna__Mirror_Match__Eastward,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Annuna__Mirror_Match__Eastward__ex__Staircase_1.into_usize(),
+                end: ExitId::Annuna__Mirror_Match__Eastward__ex__Staircase_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__Mirror_Match__Staircase => Spot {
+            id: SpotId::Annuna__Mirror_Match__Staircase,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Annuna__Mirror_Match__Staircase__ex__Eastward_1.into_usize(),
+                end: ExitId::Annuna__Mirror_Match__Staircase__ex__Eastward_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__Mirror_Match__East_25_Lower => Spot {
+            id: SpotId::Annuna__Mirror_Match__East_25_Lower,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Annuna__Mirror_Match__East_25_Lower__ex__West_Bridge__West_25_Lower_1.into_usize(),
+                end: ExitId::Annuna__Mirror_Match__East_25_Lower__ex__West_Bridge__West_25_Lower_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__Mirror_Match__East_25_Upper => Spot {
+            id: SpotId::Annuna__Mirror_Match__East_25_Upper,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Annuna__Mirror_Match__East_25_Upper__ex__West_Bridge__West_25_Upper_1.into_usize(),
+                end: ExitId::Annuna__Mirror_Match__East_25_Upper__ex__West_Bridge__West_25_Upper_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__Mirror_Match__Below_Switch => Spot {
+            id: SpotId::Annuna__Mirror_Match__Below_Switch,
+            locations: Range {
+                start: LocationId::Annuna__Mirror_Match__Below_Switch__Hit_Switch.into_usize(),
+                end: LocationId::Annuna__Mirror_Match__Below_Switch__Hit_Switch.into_usize() + 1,
+            },
+            exits: Range {
+                start: ExitId::Annuna__Mirror_Match__Below_Switch__ex__Central_Pillar_1.into_usize(),
+                end: ExitId::Annuna__Mirror_Match__Below_Switch__ex__Central_Pillar_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__Mirror_Match__Central_Pillar => Spot {
+            id: SpotId::Annuna__Mirror_Match__Central_Pillar,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Annuna__Mirror_Match__Central_Pillar__ex__Below_Switch_1.into_usize(),
+                end: ExitId::Annuna__Mirror_Match__Central_Pillar__ex__West_25_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__Mirror_Match__Plinth => Spot {
+            id: SpotId::Annuna__Mirror_Match__Plinth,
+            locations: Range {
+                start: LocationId::Annuna__Mirror_Match__Plinth__Item.into_usize(),
+                end: LocationId::Annuna__Mirror_Match__Plinth__Item.into_usize() + 1,
+            },
+            exits: Range {
+                start: ExitId::Annuna__Mirror_Match__Plinth__ex__East_26_Upper_1.into_usize(),
+                end: ExitId::Annuna__Mirror_Match__Plinth__ex__East_26_Upper_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__Mirror_Match__Waving_Distance => Spot {
+            id: SpotId::Annuna__Mirror_Match__Waving_Distance,
+            locations: Range {
+                start: LocationId::Annuna__Mirror_Match__Waving_Distance__Shockwave_Flask.into_usize(),
+                end: LocationId::Annuna__Mirror_Match__Waving_Distance__Shockwave_Flask.into_usize() + 1,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__Mirror_Match__East_26_Lower => Spot {
+            id: SpotId::Annuna__Mirror_Match__East_26_Lower,
+            locations: Range {
+                start: LocationId::Annuna__Mirror_Match__East_26_Lower__Remote_Flask.into_usize(),
+                end: LocationId::Annuna__Mirror_Match__East_26_Lower__Remote_Flask.into_usize() + 1,
+            },
+            exits: Range {
+                start: ExitId::Annuna__Mirror_Match__East_26_Lower__ex__West_Bridge__West_26_Lower_1.into_usize(),
+                end: ExitId::Annuna__Mirror_Match__East_26_Lower__ex__West_Bridge__West_26_Lower_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__Mirror_Match__East_26_Upper => Spot {
+            id: SpotId::Annuna__Mirror_Match__East_26_Upper,
+            locations: Range {
+                start: LocationId::Annuna__Mirror_Match__East_26_Upper__Remote_Flask.into_usize(),
+                end: LocationId::Annuna__Mirror_Match__East_26_Upper__Remote_Flask.into_usize() + 1,
+            },
+            exits: Range {
+                start: ExitId::Annuna__Mirror_Match__East_26_Upper__ex__West_Bridge__West_26_Upper_1.into_usize(),
+                end: ExitId::Annuna__Mirror_Match__East_26_Upper__ex__West_Bridge__West_26_Upper_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__West_Bridge__West_25_Lower => Spot {
+            id: SpotId::Annuna__West_Bridge__West_25_Lower,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__West_Bridge__West_25_Upper => Spot {
+            id: SpotId::Annuna__West_Bridge__West_25_Upper,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__West_Bridge__West_26_Lower => Spot {
+            id: SpotId::Annuna__West_Bridge__West_26_Lower,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__West_Bridge__West_26_Upper => Spot {
+            id: SpotId::Annuna__West_Bridge__West_26_Upper,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
             },
             actions: Range {
                 start: 0, end: 0,
@@ -32086,7 +32935,8 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             exits: Range {
-                start: 0, end: 0,
+                start: ExitId::Uhrum__Annuna_Corridor__West_25__ex__Waterfalls__East_25_1.into_usize(),
+                end: ExitId::Uhrum__Annuna_Corridor__West_25__ex__Waterfalls__East_25_1.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
@@ -32095,7 +32945,8 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
         SpotId::Uhrum__Annuna_Corridor__Upper_Trees => Spot {
             id: SpotId::Uhrum__Annuna_Corridor__Upper_Trees,
             locations: Range {
-                start: 0, end: 0,
+                start: LocationId::Uhrum__Annuna_Corridor__Upper_Trees__Remote_Urn.into_usize(),
+                end: LocationId::Uhrum__Annuna_Corridor__Upper_Trees__Remote_Urn.into_usize() + 1,
             },
             exits: Range {
                 start: 0, end: 0,
@@ -32107,7 +32958,8 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
         SpotId::Uhrum__Annuna_Corridor__Pedestal => Spot {
             id: SpotId::Uhrum__Annuna_Corridor__Pedestal,
             locations: Range {
-                start: 0, end: 0,
+                start: LocationId::Uhrum__Annuna_Corridor__Pedestal__Urn.into_usize(),
+                end: LocationId::Uhrum__Annuna_Corridor__Pedestal__Urn.into_usize() + 1,
             },
             exits: Range {
                 start: 0, end: 0,
@@ -32122,7 +32974,8 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             exits: Range {
-                start: 0, end: 0,
+                start: ExitId::Uhrum__Annuna_Corridor__West_26__ex__Waterfalls__East_26_1.into_usize(),
+                end: ExitId::Uhrum__Annuna_Corridor__West_26__ex__Waterfalls__East_26_1.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
@@ -32137,16 +32990,163 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             actions: Range {
+                start: ActionId::Uhrum__Annuna_Corridor__Save_Point__Save.into_usize(),
+                end: ActionId::Uhrum__Annuna_Corridor__Save_Point__Save.into_usize() + 1,
+            },
+        },
+        SpotId::Uhrum__Annuna_Corridor__Block_West => Spot {
+            id: SpotId::Uhrum__Annuna_Corridor__Block_West,
+            locations: Range {
+                start: LocationId::Uhrum__Annuna_Corridor__Block_West__Dislodge_Block.into_usize(),
+                end: LocationId::Uhrum__Annuna_Corridor__Block_West__Dislodge_Block.into_usize() + 1,
+            },
+            exits: Range {
+                start: ExitId::Uhrum__Annuna_Corridor__Block_West__ex__Block_East_1.into_usize(),
+                end: ExitId::Uhrum__Annuna_Corridor__Block_West__ex__Block_East_2.into_usize() + 1,
+            },
+            actions: Range {
                 start: 0, end: 0,
             },
         },
         SpotId::Uhrum__Annuna_Corridor__Block_East => Spot {
             id: SpotId::Uhrum__Annuna_Corridor__Block_East,
             locations: Range {
+                start: LocationId::Uhrum__Annuna_Corridor__Block_East__Dislodge_Block.into_usize(),
+                end: LocationId::Uhrum__Annuna_Corridor__Block_East__Dislodge_Block.into_usize() + 1,
+            },
+            exits: Range {
+                start: ExitId::Uhrum__Annuna_Corridor__Block_East__ex__Block_West_1.into_usize(),
+                end: ExitId::Uhrum__Annuna_Corridor__Block_East__ex__Block_West_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Uhrum__Annuna_Corridor__Open_Pillar => Spot {
+            id: SpotId::Uhrum__Annuna_Corridor__Open_Pillar,
+            locations: Range {
                 start: 0, end: 0,
             },
             exits: Range {
                 start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Uhrum__Annuna_Corridor__Between_Two_Flowers => Spot {
+            id: SpotId::Uhrum__Annuna_Corridor__Between_Two_Flowers,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Uhrum__Annuna_Corridor__Between_Two_Flowers__ex__Lower_Platform_1.into_usize(),
+                end: ExitId::Uhrum__Annuna_Corridor__Between_Two_Flowers__ex__Lower_Platform_2.into_usize() + 1,
+            },
+            actions: Range {
+                start: ActionId::Uhrum__Annuna_Corridor__Between_Two_Flowers__Throw_Drone_Not_As_High.into_usize(),
+                end: ActionId::Uhrum__Annuna_Corridor__Between_Two_Flowers__Throw_Drone_Up.into_usize() + 1,
+            },
+        },
+        SpotId::Uhrum__Annuna_Corridor__Lower_Platform => Spot {
+            id: SpotId::Uhrum__Annuna_Corridor__Lower_Platform,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Uhrum__Annuna_Corridor__Lower_Platform__ex__Middle_Platform_1.into_usize(),
+                end: ExitId::Uhrum__Annuna_Corridor__Lower_Platform__ex__Middle_Platform_2.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Uhrum__Annuna_Corridor__Wall_Remnant => Spot {
+            id: SpotId::Uhrum__Annuna_Corridor__Wall_Remnant,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Uhrum__Annuna_Corridor__Middle_Platform => Spot {
+            id: SpotId::Uhrum__Annuna_Corridor__Middle_Platform,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Uhrum__Annuna_Corridor__Middle_Platform__ex__Upper_Ledge_1.into_usize(),
+                end: ExitId::Uhrum__Annuna_Corridor__Middle_Platform__ex__Upper_Platform_2.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Uhrum__Annuna_Corridor__Upper_Platform => Spot {
+            id: SpotId::Uhrum__Annuna_Corridor__Upper_Platform,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Uhrum__Annuna_Corridor__Upper_Platform__ex__Statue_1.into_usize(),
+                end: ExitId::Uhrum__Annuna_Corridor__Upper_Platform__ex__Upper_Ledge_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Uhrum__Annuna_Corridor__Upper_Ledge => Spot {
+            id: SpotId::Uhrum__Annuna_Corridor__Upper_Ledge,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Uhrum__Annuna_Corridor__Upper_Ledge__ex__Upper_Platform_1.into_usize(),
+                end: ExitId::Uhrum__Annuna_Corridor__Upper_Ledge__ex__Upper_Platform_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Uhrum__Annuna_Corridor__East_Cubby => Spot {
+            id: SpotId::Uhrum__Annuna_Corridor__East_Cubby,
+            locations: Range {
+                start: LocationId::Uhrum__Annuna_Corridor__East_Cubby__Tablet.into_usize(),
+                end: LocationId::Uhrum__Annuna_Corridor__East_Cubby__Tablet.into_usize() + 1,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Uhrum__Annuna_Corridor__Statue => Spot {
+            id: SpotId::Uhrum__Annuna_Corridor__Statue,
+            locations: Range {
+                start: LocationId::Uhrum__Annuna_Corridor__Statue__Item.into_usize(),
+                end: LocationId::Uhrum__Annuna_Corridor__Statue__Item.into_usize() + 1,
+            },
+            exits: Range {
+                start: ExitId::Uhrum__Annuna_Corridor__Statue__ex__Upper_Platform_1.into_usize(),
+                end: ExitId::Uhrum__Annuna_Corridor__Statue__ex__Upper_Platform_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Uhrum__Annuna_Corridor__East_25 => Spot {
+            id: SpotId::Uhrum__Annuna_Corridor__East_25,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Uhrum__Annuna_Corridor__East_25__ex__Annuna__Mirror_Match__West_25_1.into_usize(),
+                end: ExitId::Uhrum__Annuna_Corridor__East_25__ex__Annuna__Mirror_Match__West_25_1.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
@@ -32285,6 +33285,12 @@ pub fn build_warps() -> EnumMap<WarpId, Warp> {
         },
         WarpId::FastTravelIrikarHub => Warp {
             id: WarpId::FastTravelIrikarHub,
+            dest: SpotId::None,
+            time: 12000,
+            price: Currency::Free,
+        },
+        WarpId::FastTravelUhrumAnnuna => Warp {
+            id: WarpId::FastTravelUhrumAnnuna,
             dest: SpotId::None,
             time: 12000,
             price: Currency::Free,

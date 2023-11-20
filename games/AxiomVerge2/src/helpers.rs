@@ -538,17 +538,6 @@ macro_rules! helper__reset_old_area {
     }};
 }
 
-/// $portal ( TypedVar(name='newsave', type='SpotId') )
-/// ^save = ^newsave
-#[macro_export]
-macro_rules! helper__portal {
-    ($ctx:expr, $newsave:expr) => {{
-        #[allow(unused_imports)]
-        use $crate::items::Item;
-        $ctx.set_save($newsave);
-    }};
-}
-
 /// $main_portal_save_update (  )
 /// ^save = ^portal_default
 #[macro_export]

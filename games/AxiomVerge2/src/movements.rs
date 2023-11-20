@@ -688,6 +688,86 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
         }
         (
             [false],
+            SpotId::Annuna__Mirror_Match__Below_Switch,
+            SpotId::Annuna__Mirror_Match__East_25_Upper,
+        ) => 1228,
+        (
+            [false],
+            SpotId::Annuna__Mirror_Match__Below_Switch,
+            SpotId::Annuna__Mirror_Match__Staircase,
+        ) => 1754,
+        (
+            [false],
+            SpotId::Annuna__Mirror_Match__Central_Pillar,
+            SpotId::Annuna__Mirror_Match__East_25_Lower,
+        ) => 2982,
+        (
+            [false],
+            SpotId::Annuna__Mirror_Match__East_25_Lower,
+            SpotId::Annuna__Mirror_Match__Staircase,
+        ) => 2982,
+        (
+            [false],
+            SpotId::Annuna__Mirror_Match__East_25_Upper,
+            SpotId::Annuna__Mirror_Match__Below_Switch,
+        ) => 1228,
+        (
+            [false],
+            SpotId::Annuna__Mirror_Match__East_26_Lower,
+            SpotId::Annuna__Mirror_Match__Plinth,
+        ) => 1403,
+        (
+            [false],
+            SpotId::Annuna__Mirror_Match__East_26_Lower,
+            SpotId::Annuna__Mirror_Match__Waving_Distance,
+        ) => 877,
+        (
+            [false],
+            SpotId::Annuna__Mirror_Match__East_26_Upper,
+            SpotId::Annuna__Mirror_Match__Plinth,
+        ) => 1403,
+        (
+            [false],
+            SpotId::Annuna__Mirror_Match__East_26_Upper,
+            SpotId::Annuna__Mirror_Match__Waving_Distance,
+        ) => 877,
+        (
+            [false],
+            SpotId::Annuna__Mirror_Match__Eastward,
+            SpotId::Annuna__Mirror_Match__Save_Point,
+        ) => 33157,
+        (
+            [false],
+            SpotId::Annuna__Mirror_Match__Plinth,
+            SpotId::Annuna__Mirror_Match__East_26_Lower,
+        ) => 1403,
+        (
+            [false],
+            SpotId::Annuna__Mirror_Match__Save_Point,
+            SpotId::Annuna__Mirror_Match__Eastward,
+        ) => 33157,
+        (
+            [false],
+            SpotId::Annuna__Mirror_Match__Staircase,
+            SpotId::Annuna__Mirror_Match__East_25_Lower,
+        ) => 2982,
+        (
+            [false],
+            SpotId::Annuna__Mirror_Match__Waving_Distance,
+            SpotId::Annuna__Mirror_Match__East_26_Lower,
+        ) => 877,
+        (
+            [false],
+            SpotId::Annuna__Mirror_Match__West_25,
+            SpotId::Annuna__Mirror_Match__West_Gap,
+        ) => 526,
+        (
+            [false],
+            SpotId::Annuna__Mirror_Match__West_Gap,
+            SpotId::Annuna__Mirror_Match__Save_Point,
+        ) => 30526,
+        (
+            [false],
             SpotId::Antarctica__Building_1E__East_Entry,
             SpotId::Antarctica__Building_1E__Connector,
         ) => 2280,
@@ -6366,6 +6446,122 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
         ([false], SpotId::Irikar__Sight_Room__West_24, SpotId::Irikar__Sight_Room__Lower_Ledge) => {
             701
         }
+        (
+            [false],
+            SpotId::Uhrum__Annuna_Corridor__Between_Two_Flowers,
+            SpotId::Uhrum__Annuna_Corridor__Block_East,
+        ) => 6140,
+        (
+            [false],
+            SpotId::Uhrum__Annuna_Corridor__Between_Two_Flowers,
+            SpotId::Uhrum__Annuna_Corridor__Wall_Remnant,
+        ) => 1403,
+        (
+            [false],
+            SpotId::Uhrum__Annuna_Corridor__Block_East,
+            SpotId::Uhrum__Annuna_Corridor__Open_Pillar,
+        ) => 3508,
+        (
+            [false],
+            SpotId::Uhrum__Annuna_Corridor__Block_West,
+            SpotId::Uhrum__Annuna_Corridor__Save_Point,
+        ) => 1403,
+        (
+            [false],
+            SpotId::Uhrum__Annuna_Corridor__East_25,
+            SpotId::Uhrum__Annuna_Corridor__Statue,
+        ) => 1228,
+        (
+            [false],
+            SpotId::Uhrum__Annuna_Corridor__East_Cubby,
+            SpotId::Uhrum__Annuna_Corridor__Upper_Ledge,
+        ) => 1754,
+        (
+            [false],
+            SpotId::Uhrum__Annuna_Corridor__Lower_Platform,
+            SpotId::Uhrum__Annuna_Corridor__Block_East,
+        ) => 6666,
+        (
+            [false],
+            SpotId::Uhrum__Annuna_Corridor__Open_Pillar,
+            SpotId::Uhrum__Annuna_Corridor__Between_Two_Flowers,
+        ) => 2631,
+        (
+            [false],
+            SpotId::Uhrum__Annuna_Corridor__Open_Pillar,
+            SpotId::Uhrum__Annuna_Corridor__Block_East,
+        ) => 3508,
+        (
+            [false],
+            SpotId::Uhrum__Annuna_Corridor__Pedestal,
+            SpotId::Uhrum__Annuna_Corridor__Upper_Trees,
+        ) => 1052,
+        (
+            [false],
+            SpotId::Uhrum__Annuna_Corridor__Save_Point,
+            SpotId::Uhrum__Annuna_Corridor__Block_West,
+        ) => 1403,
+        (
+            [false],
+            SpotId::Uhrum__Annuna_Corridor__Save_Point,
+            SpotId::Uhrum__Annuna_Corridor__West_26,
+        ) => 1578,
+        (
+            [false],
+            SpotId::Uhrum__Annuna_Corridor__Statue,
+            SpotId::Uhrum__Annuna_Corridor__East_25,
+        ) => 1228,
+        (
+            [false],
+            SpotId::Uhrum__Annuna_Corridor__Statue,
+            SpotId::Uhrum__Annuna_Corridor__Lower_Platform,
+        ) => 2105,
+        // [0.2, 5.087719]
+        (
+            [false],
+            SpotId::Uhrum__Annuna_Corridor__Upper_Ledge,
+            SpotId::Uhrum__Annuna_Corridor__Block_East,
+        ) => 5287,
+        (
+            [false],
+            SpotId::Uhrum__Annuna_Corridor__Upper_Ledge,
+            SpotId::Uhrum__Annuna_Corridor__East_Cubby,
+        ) => 1754,
+        (
+            [false],
+            SpotId::Uhrum__Annuna_Corridor__Upper_Ledge,
+            SpotId::Uhrum__Annuna_Corridor__Middle_Platform,
+        ) => 1052,
+        (
+            [false],
+            SpotId::Uhrum__Annuna_Corridor__Upper_Trees,
+            SpotId::Uhrum__Annuna_Corridor__Pedestal,
+        ) => 1052,
+        (
+            [false],
+            SpotId::Uhrum__Annuna_Corridor__Upper_Trees,
+            SpotId::Uhrum__Annuna_Corridor__West_25,
+        ) => 4035,
+        (
+            [false],
+            SpotId::Uhrum__Annuna_Corridor__Wall_Remnant,
+            SpotId::Uhrum__Annuna_Corridor__Between_Two_Flowers,
+        ) => 1403,
+        (
+            [false],
+            SpotId::Uhrum__Annuna_Corridor__Wall_Remnant,
+            SpotId::Uhrum__Annuna_Corridor__Lower_Platform,
+        ) => 877,
+        (
+            [false],
+            SpotId::Uhrum__Annuna_Corridor__West_25,
+            SpotId::Uhrum__Annuna_Corridor__Upper_Trees,
+        ) => 4035,
+        (
+            [false],
+            SpotId::Uhrum__Annuna_Corridor__West_26,
+            SpotId::Uhrum__Annuna_Corridor__Save_Point,
+        ) => 1578,
         ([false], SpotId::Uhrum__Save_Room__East, SpotId::Uhrum__Save_Room__Save_Point) => 1578,
         ([false], SpotId::Uhrum__Save_Room__Save_Point, SpotId::Uhrum__Save_Room__East) => 1578,
         ([false], SpotId::Uhrum__Save_Room__Save_Point, SpotId::Uhrum__Save_Room__West) => 1578,
@@ -8075,6 +8271,84 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
             1754
         }
         ([true], SpotId::Amagi__West_Lake__West_Shore, SpotId::Amagi__West_Lake__West_Bank) => 1754,
+        (
+            [true],
+            SpotId::Annuna__Mirror_Match__Below_Switch,
+            SpotId::Annuna__Mirror_Match__East_25_Upper,
+        ) => 1228,
+        (
+            [true],
+            SpotId::Annuna__Mirror_Match__Below_Switch,
+            SpotId::Annuna__Mirror_Match__Staircase,
+        ) => 1754,
+        (
+            [true],
+            SpotId::Annuna__Mirror_Match__Central_Pillar,
+            SpotId::Annuna__Mirror_Match__East_25_Lower,
+        ) => 2982,
+        (
+            [true],
+            SpotId::Annuna__Mirror_Match__East_25_Lower,
+            SpotId::Annuna__Mirror_Match__Staircase,
+        ) => 2982,
+        (
+            [true],
+            SpotId::Annuna__Mirror_Match__East_25_Upper,
+            SpotId::Annuna__Mirror_Match__Below_Switch,
+        ) => 1228,
+        (
+            [true],
+            SpotId::Annuna__Mirror_Match__East_26_Lower,
+            SpotId::Annuna__Mirror_Match__Plinth,
+        ) => 1403,
+        (
+            [true],
+            SpotId::Annuna__Mirror_Match__East_26_Lower,
+            SpotId::Annuna__Mirror_Match__Waving_Distance,
+        ) => 877,
+        (
+            [true],
+            SpotId::Annuna__Mirror_Match__East_26_Upper,
+            SpotId::Annuna__Mirror_Match__Plinth,
+        ) => 1403,
+        (
+            [true],
+            SpotId::Annuna__Mirror_Match__East_26_Upper,
+            SpotId::Annuna__Mirror_Match__Waving_Distance,
+        ) => 877,
+        (
+            [true],
+            SpotId::Annuna__Mirror_Match__Eastward,
+            SpotId::Annuna__Mirror_Match__Save_Point,
+        ) => 33157,
+        (
+            [true],
+            SpotId::Annuna__Mirror_Match__Plinth,
+            SpotId::Annuna__Mirror_Match__East_26_Lower,
+        ) => 1403,
+        (
+            [true],
+            SpotId::Annuna__Mirror_Match__Save_Point,
+            SpotId::Annuna__Mirror_Match__Eastward,
+        ) => 33157,
+        (
+            [true],
+            SpotId::Annuna__Mirror_Match__Staircase,
+            SpotId::Annuna__Mirror_Match__East_25_Lower,
+        ) => 2982,
+        (
+            [true],
+            SpotId::Annuna__Mirror_Match__Waving_Distance,
+            SpotId::Annuna__Mirror_Match__East_26_Lower,
+        ) => 877,
+        ([true], SpotId::Annuna__Mirror_Match__West_25, SpotId::Annuna__Mirror_Match__West_Gap) => {
+            526
+        }
+        (
+            [true],
+            SpotId::Annuna__Mirror_Match__West_Gap,
+            SpotId::Annuna__Mirror_Match__Save_Point,
+        ) => 30526,
         (
             [true],
             SpotId::Antarctica__Building_1E__East_Entry,
@@ -13503,6 +13777,122 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
         ([true], SpotId::Irikar__Sight_Room__West_24, SpotId::Irikar__Sight_Room__Lower_Ledge) => {
             701
         }
+        (
+            [true],
+            SpotId::Uhrum__Annuna_Corridor__Between_Two_Flowers,
+            SpotId::Uhrum__Annuna_Corridor__Block_East,
+        ) => 6140,
+        (
+            [true],
+            SpotId::Uhrum__Annuna_Corridor__Between_Two_Flowers,
+            SpotId::Uhrum__Annuna_Corridor__Wall_Remnant,
+        ) => 1403,
+        (
+            [true],
+            SpotId::Uhrum__Annuna_Corridor__Block_East,
+            SpotId::Uhrum__Annuna_Corridor__Open_Pillar,
+        ) => 3508,
+        (
+            [true],
+            SpotId::Uhrum__Annuna_Corridor__Block_West,
+            SpotId::Uhrum__Annuna_Corridor__Save_Point,
+        ) => 1403,
+        (
+            [true],
+            SpotId::Uhrum__Annuna_Corridor__East_25,
+            SpotId::Uhrum__Annuna_Corridor__Statue,
+        ) => 1228,
+        (
+            [true],
+            SpotId::Uhrum__Annuna_Corridor__East_Cubby,
+            SpotId::Uhrum__Annuna_Corridor__Upper_Ledge,
+        ) => 1754,
+        (
+            [true],
+            SpotId::Uhrum__Annuna_Corridor__Lower_Platform,
+            SpotId::Uhrum__Annuna_Corridor__Block_East,
+        ) => 6666,
+        (
+            [true],
+            SpotId::Uhrum__Annuna_Corridor__Open_Pillar,
+            SpotId::Uhrum__Annuna_Corridor__Between_Two_Flowers,
+        ) => 2631,
+        (
+            [true],
+            SpotId::Uhrum__Annuna_Corridor__Open_Pillar,
+            SpotId::Uhrum__Annuna_Corridor__Block_East,
+        ) => 3508,
+        (
+            [true],
+            SpotId::Uhrum__Annuna_Corridor__Pedestal,
+            SpotId::Uhrum__Annuna_Corridor__Upper_Trees,
+        ) => 1052,
+        (
+            [true],
+            SpotId::Uhrum__Annuna_Corridor__Save_Point,
+            SpotId::Uhrum__Annuna_Corridor__Block_West,
+        ) => 1403,
+        (
+            [true],
+            SpotId::Uhrum__Annuna_Corridor__Save_Point,
+            SpotId::Uhrum__Annuna_Corridor__West_26,
+        ) => 1578,
+        (
+            [true],
+            SpotId::Uhrum__Annuna_Corridor__Statue,
+            SpotId::Uhrum__Annuna_Corridor__East_25,
+        ) => 1228,
+        (
+            [true],
+            SpotId::Uhrum__Annuna_Corridor__Statue,
+            SpotId::Uhrum__Annuna_Corridor__Lower_Platform,
+        ) => 2105,
+        // [0.2, 5.087719]
+        (
+            [true],
+            SpotId::Uhrum__Annuna_Corridor__Upper_Ledge,
+            SpotId::Uhrum__Annuna_Corridor__Block_East,
+        ) => 5287,
+        (
+            [true],
+            SpotId::Uhrum__Annuna_Corridor__Upper_Ledge,
+            SpotId::Uhrum__Annuna_Corridor__East_Cubby,
+        ) => 1754,
+        (
+            [true],
+            SpotId::Uhrum__Annuna_Corridor__Upper_Ledge,
+            SpotId::Uhrum__Annuna_Corridor__Middle_Platform,
+        ) => 1052,
+        (
+            [true],
+            SpotId::Uhrum__Annuna_Corridor__Upper_Trees,
+            SpotId::Uhrum__Annuna_Corridor__Pedestal,
+        ) => 1052,
+        (
+            [true],
+            SpotId::Uhrum__Annuna_Corridor__Upper_Trees,
+            SpotId::Uhrum__Annuna_Corridor__West_25,
+        ) => 4035,
+        (
+            [true],
+            SpotId::Uhrum__Annuna_Corridor__Wall_Remnant,
+            SpotId::Uhrum__Annuna_Corridor__Between_Two_Flowers,
+        ) => 1403,
+        (
+            [true],
+            SpotId::Uhrum__Annuna_Corridor__Wall_Remnant,
+            SpotId::Uhrum__Annuna_Corridor__Lower_Platform,
+        ) => 877,
+        (
+            [true],
+            SpotId::Uhrum__Annuna_Corridor__West_25,
+            SpotId::Uhrum__Annuna_Corridor__Upper_Trees,
+        ) => 4035,
+        (
+            [true],
+            SpotId::Uhrum__Annuna_Corridor__West_26,
+            SpotId::Uhrum__Annuna_Corridor__Save_Point,
+        ) => 1578,
         ([true], SpotId::Uhrum__Save_Room__East, SpotId::Uhrum__Save_Room__Save_Point) => 1578,
         ([true], SpotId::Uhrum__Save_Room__Save_Point, SpotId::Uhrum__Save_Room__East) => 1578,
         ([true], SpotId::Uhrum__Save_Room__Save_Point, SpotId::Uhrum__Save_Room__West) => 1578,
@@ -14845,6 +15235,46 @@ pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
         }
         (SpotId::Amagi__West_Lake__Surface_Wall_Left, SpotId::Amagi__West_Lake__West_15) => true,
         (SpotId::Amagi__West_Lake__West_15, SpotId::Amagi__West_Lake__Surface_Wall_Left) => true,
+        (SpotId::Annuna__Mirror_Match__West_25, SpotId::Annuna__Mirror_Match__West_Gap) => true,
+        (SpotId::Annuna__Mirror_Match__West_Gap, SpotId::Annuna__Mirror_Match__Save_Point) => true,
+        (SpotId::Annuna__Mirror_Match__Save_Point, SpotId::Annuna__Mirror_Match__Eastward) => true,
+        (SpotId::Annuna__Mirror_Match__Eastward, SpotId::Annuna__Mirror_Match__Save_Point) => true,
+        (SpotId::Annuna__Mirror_Match__Staircase, SpotId::Annuna__Mirror_Match__East_25_Lower) => {
+            true
+        }
+        (SpotId::Annuna__Mirror_Match__East_25_Lower, SpotId::Annuna__Mirror_Match__Staircase) => {
+            true
+        }
+        (
+            SpotId::Annuna__Mirror_Match__East_25_Upper,
+            SpotId::Annuna__Mirror_Match__Below_Switch,
+        ) => true,
+        (SpotId::Annuna__Mirror_Match__Below_Switch, SpotId::Annuna__Mirror_Match__Staircase) => {
+            true
+        }
+        (
+            SpotId::Annuna__Mirror_Match__Below_Switch,
+            SpotId::Annuna__Mirror_Match__East_25_Upper,
+        ) => true,
+        (
+            SpotId::Annuna__Mirror_Match__Central_Pillar,
+            SpotId::Annuna__Mirror_Match__East_25_Lower,
+        ) => true,
+        (SpotId::Annuna__Mirror_Match__Plinth, SpotId::Annuna__Mirror_Match__East_26_Lower) => true,
+        (
+            SpotId::Annuna__Mirror_Match__Waving_Distance,
+            SpotId::Annuna__Mirror_Match__East_26_Lower,
+        ) => true,
+        (SpotId::Annuna__Mirror_Match__East_26_Lower, SpotId::Annuna__Mirror_Match__Plinth) => true,
+        (
+            SpotId::Annuna__Mirror_Match__East_26_Lower,
+            SpotId::Annuna__Mirror_Match__Waving_Distance,
+        ) => true,
+        (SpotId::Annuna__Mirror_Match__East_26_Upper, SpotId::Annuna__Mirror_Match__Plinth) => true,
+        (
+            SpotId::Annuna__Mirror_Match__East_26_Upper,
+            SpotId::Annuna__Mirror_Match__Waving_Distance,
+        ) => true,
         (SpotId::Antarctica__West__Helipad, SpotId::Antarctica__West__Shed_Entry) => true,
         (SpotId::Antarctica__West__Helipad, SpotId::Antarctica__West__Boxes) => true,
         (SpotId::Antarctica__West__Boxes, SpotId::Antarctica__West__Helipad) => true,
@@ -18596,6 +19026,86 @@ pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
         (SpotId::Uhrum__Save_Room__Save_Point, SpotId::Uhrum__Save_Room__East) => true,
         (SpotId::Uhrum__Save_Room__Save_Point, SpotId::Uhrum__Save_Room__West) => true,
         (SpotId::Uhrum__Save_Room__West, SpotId::Uhrum__Save_Room__Save_Point) => true,
+        (SpotId::Uhrum__Annuna_Corridor__West_25, SpotId::Uhrum__Annuna_Corridor__Upper_Trees) => {
+            true
+        }
+        (SpotId::Uhrum__Annuna_Corridor__Upper_Trees, SpotId::Uhrum__Annuna_Corridor__West_25) => {
+            true
+        }
+        (SpotId::Uhrum__Annuna_Corridor__Upper_Trees, SpotId::Uhrum__Annuna_Corridor__Pedestal) => {
+            true
+        }
+        (SpotId::Uhrum__Annuna_Corridor__Pedestal, SpotId::Uhrum__Annuna_Corridor__Upper_Trees) => {
+            true
+        }
+        (SpotId::Uhrum__Annuna_Corridor__West_26, SpotId::Uhrum__Annuna_Corridor__Save_Point) => {
+            true
+        }
+        (SpotId::Uhrum__Annuna_Corridor__Save_Point, SpotId::Uhrum__Annuna_Corridor__West_26) => {
+            true
+        }
+        (
+            SpotId::Uhrum__Annuna_Corridor__Save_Point,
+            SpotId::Uhrum__Annuna_Corridor__Block_West,
+        ) => true,
+        (
+            SpotId::Uhrum__Annuna_Corridor__Block_West,
+            SpotId::Uhrum__Annuna_Corridor__Save_Point,
+        ) => true,
+        (
+            SpotId::Uhrum__Annuna_Corridor__Block_East,
+            SpotId::Uhrum__Annuna_Corridor__Open_Pillar,
+        ) => true,
+        (
+            SpotId::Uhrum__Annuna_Corridor__Open_Pillar,
+            SpotId::Uhrum__Annuna_Corridor__Block_East,
+        ) => true,
+        (
+            SpotId::Uhrum__Annuna_Corridor__Open_Pillar,
+            SpotId::Uhrum__Annuna_Corridor__Between_Two_Flowers,
+        ) => true,
+        (
+            SpotId::Uhrum__Annuna_Corridor__Between_Two_Flowers,
+            SpotId::Uhrum__Annuna_Corridor__Block_East,
+        ) => true,
+        (
+            SpotId::Uhrum__Annuna_Corridor__Between_Two_Flowers,
+            SpotId::Uhrum__Annuna_Corridor__Wall_Remnant,
+        ) => true,
+        (
+            SpotId::Uhrum__Annuna_Corridor__Lower_Platform,
+            SpotId::Uhrum__Annuna_Corridor__Block_East,
+        ) => true,
+        (
+            SpotId::Uhrum__Annuna_Corridor__Wall_Remnant,
+            SpotId::Uhrum__Annuna_Corridor__Between_Two_Flowers,
+        ) => true,
+        (
+            SpotId::Uhrum__Annuna_Corridor__Wall_Remnant,
+            SpotId::Uhrum__Annuna_Corridor__Lower_Platform,
+        ) => true,
+        (
+            SpotId::Uhrum__Annuna_Corridor__Upper_Ledge,
+            SpotId::Uhrum__Annuna_Corridor__East_Cubby,
+        ) => true,
+        (
+            SpotId::Uhrum__Annuna_Corridor__Upper_Ledge,
+            SpotId::Uhrum__Annuna_Corridor__Block_East,
+        ) => true,
+        (
+            SpotId::Uhrum__Annuna_Corridor__Upper_Ledge,
+            SpotId::Uhrum__Annuna_Corridor__Middle_Platform,
+        ) => true,
+        (
+            SpotId::Uhrum__Annuna_Corridor__East_Cubby,
+            SpotId::Uhrum__Annuna_Corridor__Upper_Ledge,
+        ) => true,
+        (
+            SpotId::Uhrum__Annuna_Corridor__Statue,
+            SpotId::Uhrum__Annuna_Corridor__Lower_Platform,
+        ) => true,
+        (SpotId::Uhrum__Annuna_Corridor__Statue, SpotId::Uhrum__Annuna_Corridor__East_25) => true,
+        (SpotId::Uhrum__Annuna_Corridor__East_25, SpotId::Uhrum__Annuna_Corridor__Statue) => true,
         _ => false,
     }
 }
@@ -20319,6 +20829,236 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Amagi__West_Lake__West_Shore,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Mirror_Match__Below_Switch,
+            SpotId::Annuna__Mirror_Match__Central_Pillar,
+            1754,
+        ),
+        (
+            SpotId::Annuna__Mirror_Match__Below_Switch,
+            SpotId::Annuna__Mirror_Match__East_25_Upper,
+            1228,
+        ),
+        (
+            SpotId::Annuna__Mirror_Match__Below_Switch,
+            SpotId::Annuna__Mirror_Match__Staircase,
+            1754,
+        ),
+        (
+            SpotId::Annuna__Mirror_Match__Below_Switch,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Mirror_Match__Central_Pillar,
+            SpotId::Annuna__Mirror_Match__Below_Switch,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Mirror_Match__Central_Pillar,
+            SpotId::Annuna__Mirror_Match__East_25_Lower,
+            2982,
+        ),
+        (
+            SpotId::Annuna__Mirror_Match__Central_Pillar,
+            SpotId::Annuna__Mirror_Match__Save_Point,
+            33684,
+        ),
+        (
+            SpotId::Annuna__Mirror_Match__Central_Pillar,
+            SpotId::Annuna__Mirror_Match__West_25,
+            3684,
+        ),
+        (
+            SpotId::Annuna__Mirror_Match__Central_Pillar,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Mirror_Match__East_25_Lower,
+            SpotId::Annuna__Mirror_Match__Staircase,
+            2982,
+        ),
+        (
+            SpotId::Annuna__Mirror_Match__East_25_Lower,
+            SpotId::Annuna__West_Bridge__West_25_Lower,
+            1350,
+        ),
+        (
+            SpotId::Annuna__Mirror_Match__East_25_Lower,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Mirror_Match__East_25_Upper,
+            SpotId::Annuna__Mirror_Match__Below_Switch,
+            1228,
+        ),
+        (
+            SpotId::Annuna__Mirror_Match__East_25_Upper,
+            SpotId::Annuna__West_Bridge__West_25_Upper,
+            1350,
+        ),
+        (
+            SpotId::Annuna__Mirror_Match__East_25_Upper,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Mirror_Match__East_26_Lower,
+            SpotId::Annuna__Mirror_Match__Plinth,
+            1403,
+        ),
+        (
+            SpotId::Annuna__Mirror_Match__East_26_Lower,
+            SpotId::Annuna__Mirror_Match__Waving_Distance,
+            877,
+        ),
+        (
+            SpotId::Annuna__Mirror_Match__East_26_Lower,
+            SpotId::Annuna__West_Bridge__West_26_Lower,
+            1350,
+        ),
+        (
+            SpotId::Annuna__Mirror_Match__East_26_Lower,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Mirror_Match__East_26_Upper,
+            SpotId::Annuna__Mirror_Match__East_26_Lower,
+            6500,
+        ),
+        (
+            SpotId::Annuna__Mirror_Match__East_26_Upper,
+            SpotId::Annuna__Mirror_Match__Plinth,
+            1403,
+        ),
+        (
+            SpotId::Annuna__Mirror_Match__East_26_Upper,
+            SpotId::Annuna__Mirror_Match__Waving_Distance,
+            877,
+        ),
+        (
+            SpotId::Annuna__Mirror_Match__East_26_Upper,
+            SpotId::Annuna__West_Bridge__West_26_Upper,
+            1350,
+        ),
+        (
+            SpotId::Annuna__Mirror_Match__East_26_Upper,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Mirror_Match__Eastward,
+            SpotId::Annuna__Mirror_Match__Save_Point,
+            33157,
+        ),
+        (
+            SpotId::Annuna__Mirror_Match__Eastward,
+            SpotId::Annuna__Mirror_Match__Staircase,
+            526,
+        ),
+        (
+            SpotId::Annuna__Mirror_Match__Eastward,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Mirror_Match__Plinth,
+            SpotId::Annuna__Mirror_Match__East_26_Lower,
+            1403,
+        ),
+        (
+            SpotId::Annuna__Mirror_Match__Plinth,
+            SpotId::Annuna__Mirror_Match__East_26_Upper,
+            1403,
+        ),
+        (
+            SpotId::Annuna__Mirror_Match__Plinth,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Mirror_Match__Save_Point,
+            SpotId::Annuna__Mirror_Match__Eastward,
+            33157,
+        ),
+        (
+            SpotId::Annuna__Mirror_Match__Save_Point,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Mirror_Match__Staircase,
+            SpotId::Annuna__Mirror_Match__East_25_Lower,
+            2982,
+        ),
+        (
+            SpotId::Annuna__Mirror_Match__Staircase,
+            SpotId::Annuna__Mirror_Match__Eastward,
+            526,
+        ),
+        (
+            SpotId::Annuna__Mirror_Match__Staircase,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Mirror_Match__Waving_Distance,
+            SpotId::Annuna__Mirror_Match__East_26_Lower,
+            877,
+        ),
+        (
+            SpotId::Annuna__Mirror_Match__Waving_Distance,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Mirror_Match__West_25,
+            SpotId::Annuna__Mirror_Match__West_Gap,
+            526,
+        ),
+        (
+            SpotId::Annuna__Mirror_Match__West_25,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Mirror_Match__West_25,
+            SpotId::Uhrum__Annuna_Corridor__East_25,
+            1350,
+        ),
+        (
+            SpotId::Annuna__Mirror_Match__West_Gap,
+            SpotId::Annuna__Mirror_Match__Save_Point,
+            30526,
+        ),
+        (
+            SpotId::Annuna__Mirror_Match__West_Gap,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__West_Bridge__West_25_Lower,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__West_Bridge__West_25_Upper,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__West_Bridge__West_26_Lower,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__West_Bridge__West_26_Upper,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -35568,9 +36308,129 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             100,
         ),
         (
+            SpotId::Uhrum__Annuna_Corridor__Between_Two_Flowers,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Uhrum__Annuna_Corridor__Between_Two_Flowers,
+            SpotId::Uhrum__Annuna_Corridor__Block_East,
+            6140,
+        ),
+        (
+            SpotId::Uhrum__Annuna_Corridor__Between_Two_Flowers,
+            SpotId::Uhrum__Annuna_Corridor__Lower_Platform,
+            600,
+        ),
+        (
+            SpotId::Uhrum__Annuna_Corridor__Between_Two_Flowers,
+            SpotId::Uhrum__Annuna_Corridor__Middle_Platform,
+            1750,
+        ),
+        (
+            SpotId::Uhrum__Annuna_Corridor__Between_Two_Flowers,
+            SpotId::Uhrum__Annuna_Corridor__Wall_Remnant,
+            1403,
+        ),
+        (
             SpotId::Uhrum__Annuna_Corridor__Block_East,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
+        ),
+        (
+            SpotId::Uhrum__Annuna_Corridor__Block_East,
+            SpotId::Uhrum__Annuna_Corridor__Block_West,
+            701,
+        ),
+        (
+            SpotId::Uhrum__Annuna_Corridor__Block_East,
+            SpotId::Uhrum__Annuna_Corridor__Open_Pillar,
+            3508,
+        ),
+        (
+            SpotId::Uhrum__Annuna_Corridor__Block_West,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Uhrum__Annuna_Corridor__Block_West,
+            SpotId::Uhrum__Annuna_Corridor__Block_East,
+            701,
+        ),
+        (
+            SpotId::Uhrum__Annuna_Corridor__Block_West,
+            SpotId::Uhrum__Annuna_Corridor__Save_Point,
+            1403,
+        ),
+        (
+            SpotId::Uhrum__Annuna_Corridor__East_25,
+            SpotId::Annuna__Mirror_Match__West_25,
+            1350,
+        ),
+        (
+            SpotId::Uhrum__Annuna_Corridor__East_25,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Uhrum__Annuna_Corridor__East_25,
+            SpotId::Uhrum__Annuna_Corridor__Statue,
+            1228,
+        ),
+        (
+            SpotId::Uhrum__Annuna_Corridor__East_Cubby,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Uhrum__Annuna_Corridor__East_Cubby,
+            SpotId::Uhrum__Annuna_Corridor__Upper_Ledge,
+            1754,
+        ),
+        (
+            SpotId::Uhrum__Annuna_Corridor__Lower_Platform,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Uhrum__Annuna_Corridor__Lower_Platform,
+            SpotId::Uhrum__Annuna_Corridor__Block_East,
+            6666,
+        ),
+        (
+            SpotId::Uhrum__Annuna_Corridor__Lower_Platform,
+            SpotId::Uhrum__Annuna_Corridor__Middle_Platform,
+            600,
+        ),
+        (
+            SpotId::Uhrum__Annuna_Corridor__Middle_Platform,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Uhrum__Annuna_Corridor__Middle_Platform,
+            SpotId::Uhrum__Annuna_Corridor__Upper_Ledge,
+            1052,
+        ),
+        (
+            SpotId::Uhrum__Annuna_Corridor__Middle_Platform,
+            SpotId::Uhrum__Annuna_Corridor__Upper_Platform,
+            600,
+        ),
+        (
+            SpotId::Uhrum__Annuna_Corridor__Open_Pillar,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Uhrum__Annuna_Corridor__Open_Pillar,
+            SpotId::Uhrum__Annuna_Corridor__Between_Two_Flowers,
+            2631,
+        ),
+        (
+            SpotId::Uhrum__Annuna_Corridor__Open_Pillar,
+            SpotId::Uhrum__Annuna_Corridor__Block_East,
+            3508,
         ),
         (
             SpotId::Uhrum__Annuna_Corridor__Pedestal,
@@ -35578,9 +36438,84 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             1000,
         ),
         (
+            SpotId::Uhrum__Annuna_Corridor__Pedestal,
+            SpotId::Uhrum__Annuna_Corridor__Upper_Trees,
+            1052,
+        ),
+        (
             SpotId::Uhrum__Annuna_Corridor__Save_Point,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
+        ),
+        (
+            SpotId::Uhrum__Annuna_Corridor__Save_Point,
+            SpotId::Uhrum__Annuna_Corridor__Block_West,
+            1403,
+        ),
+        (
+            SpotId::Uhrum__Annuna_Corridor__Save_Point,
+            SpotId::Uhrum__Annuna_Corridor__West_26,
+            1578,
+        ),
+        (
+            SpotId::Uhrum__Annuna_Corridor__Statue,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Uhrum__Annuna_Corridor__Statue,
+            SpotId::Uhrum__Annuna_Corridor__East_25,
+            1228,
+        ),
+        (
+            SpotId::Uhrum__Annuna_Corridor__Statue,
+            SpotId::Uhrum__Annuna_Corridor__Lower_Platform,
+            2105,
+        ),
+        (
+            SpotId::Uhrum__Annuna_Corridor__Statue,
+            SpotId::Uhrum__Annuna_Corridor__Upper_Platform,
+            2280,
+        ),
+        (
+            SpotId::Uhrum__Annuna_Corridor__Upper_Ledge,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Uhrum__Annuna_Corridor__Upper_Ledge,
+            SpotId::Uhrum__Annuna_Corridor__Block_East,
+            5287,
+        ),
+        (
+            SpotId::Uhrum__Annuna_Corridor__Upper_Ledge,
+            SpotId::Uhrum__Annuna_Corridor__East_Cubby,
+            1754,
+        ),
+        (
+            SpotId::Uhrum__Annuna_Corridor__Upper_Ledge,
+            SpotId::Uhrum__Annuna_Corridor__Middle_Platform,
+            1052,
+        ),
+        (
+            SpotId::Uhrum__Annuna_Corridor__Upper_Ledge,
+            SpotId::Uhrum__Annuna_Corridor__Upper_Platform,
+            1403,
+        ),
+        (
+            SpotId::Uhrum__Annuna_Corridor__Upper_Platform,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Uhrum__Annuna_Corridor__Upper_Platform,
+            SpotId::Uhrum__Annuna_Corridor__Statue,
+            2280,
+        ),
+        (
+            SpotId::Uhrum__Annuna_Corridor__Upper_Platform,
+            SpotId::Uhrum__Annuna_Corridor__Upper_Ledge,
+            1403,
         ),
         (
             SpotId::Uhrum__Annuna_Corridor__Upper_Trees,
@@ -35588,14 +36523,59 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             1000,
         ),
         (
+            SpotId::Uhrum__Annuna_Corridor__Upper_Trees,
+            SpotId::Uhrum__Annuna_Corridor__Pedestal,
+            1052,
+        ),
+        (
+            SpotId::Uhrum__Annuna_Corridor__Upper_Trees,
+            SpotId::Uhrum__Annuna_Corridor__West_25,
+            4035,
+        ),
+        (
+            SpotId::Uhrum__Annuna_Corridor__Wall_Remnant,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Uhrum__Annuna_Corridor__Wall_Remnant,
+            SpotId::Uhrum__Annuna_Corridor__Between_Two_Flowers,
+            1403,
+        ),
+        (
+            SpotId::Uhrum__Annuna_Corridor__Wall_Remnant,
+            SpotId::Uhrum__Annuna_Corridor__Lower_Platform,
+            877,
+        ),
+        (
             SpotId::Uhrum__Annuna_Corridor__West_25,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
         (
+            SpotId::Uhrum__Annuna_Corridor__West_25,
+            SpotId::Uhrum__Annuna_Corridor__Upper_Trees,
+            4035,
+        ),
+        (
+            SpotId::Uhrum__Annuna_Corridor__West_25,
+            SpotId::Uhrum__Waterfalls__East_25,
+            1350,
+        ),
+        (
             SpotId::Uhrum__Annuna_Corridor__West_26,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
+        ),
+        (
+            SpotId::Uhrum__Annuna_Corridor__West_26,
+            SpotId::Uhrum__Annuna_Corridor__Save_Point,
+            1578,
+        ),
+        (
+            SpotId::Uhrum__Annuna_Corridor__West_26,
+            SpotId::Uhrum__Waterfalls__East_26,
+            1350,
         ),
         (
             SpotId::Uhrum__Artillery_Practice__East_24,
@@ -38097,6 +39077,60 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
             Some(1754)
         }
         (SpotId::Amagi__West_Lake__West_Shore, SpotId::Amagi__West_Lake__West_Bank) => Some(1754),
+        (
+            SpotId::Annuna__Mirror_Match__Below_Switch,
+            SpotId::Annuna__Mirror_Match__East_25_Upper,
+        ) => Some(1228),
+        (SpotId::Annuna__Mirror_Match__Below_Switch, SpotId::Annuna__Mirror_Match__Staircase) => {
+            Some(1754)
+        }
+        (
+            SpotId::Annuna__Mirror_Match__Central_Pillar,
+            SpotId::Annuna__Mirror_Match__East_25_Lower,
+        ) => Some(2982),
+        (SpotId::Annuna__Mirror_Match__East_25_Lower, SpotId::Annuna__Mirror_Match__Staircase) => {
+            Some(2982)
+        }
+        (
+            SpotId::Annuna__Mirror_Match__East_25_Upper,
+            SpotId::Annuna__Mirror_Match__Below_Switch,
+        ) => Some(1228),
+        (SpotId::Annuna__Mirror_Match__East_26_Lower, SpotId::Annuna__Mirror_Match__Plinth) => {
+            Some(1403)
+        }
+        (
+            SpotId::Annuna__Mirror_Match__East_26_Lower,
+            SpotId::Annuna__Mirror_Match__Waving_Distance,
+        ) => Some(877),
+        (SpotId::Annuna__Mirror_Match__East_26_Upper, SpotId::Annuna__Mirror_Match__Plinth) => {
+            Some(1403)
+        }
+        (
+            SpotId::Annuna__Mirror_Match__East_26_Upper,
+            SpotId::Annuna__Mirror_Match__Waving_Distance,
+        ) => Some(877),
+        (SpotId::Annuna__Mirror_Match__Eastward, SpotId::Annuna__Mirror_Match__Save_Point) => {
+            Some(33157)
+        }
+        (SpotId::Annuna__Mirror_Match__Plinth, SpotId::Annuna__Mirror_Match__East_26_Lower) => {
+            Some(1403)
+        }
+        (SpotId::Annuna__Mirror_Match__Save_Point, SpotId::Annuna__Mirror_Match__Eastward) => {
+            Some(33157)
+        }
+        (SpotId::Annuna__Mirror_Match__Staircase, SpotId::Annuna__Mirror_Match__East_25_Lower) => {
+            Some(2982)
+        }
+        (
+            SpotId::Annuna__Mirror_Match__Waving_Distance,
+            SpotId::Annuna__Mirror_Match__East_26_Lower,
+        ) => Some(877),
+        (SpotId::Annuna__Mirror_Match__West_25, SpotId::Annuna__Mirror_Match__West_Gap) => {
+            Some(526)
+        }
+        (SpotId::Annuna__Mirror_Match__West_Gap, SpotId::Annuna__Mirror_Match__Save_Point) => {
+            Some(30526)
+        }
         (
             SpotId::Antarctica__Building_1E__East_Entry,
             SpotId::Antarctica__Building_1E__Connector,
@@ -41954,6 +42988,90 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
             Some(964)
         }
         (SpotId::Irikar__Sight_Room__West_24, SpotId::Irikar__Sight_Room__Lower_Ledge) => Some(701),
+        (
+            SpotId::Uhrum__Annuna_Corridor__Between_Two_Flowers,
+            SpotId::Uhrum__Annuna_Corridor__Block_East,
+        ) => Some(6140),
+        (
+            SpotId::Uhrum__Annuna_Corridor__Between_Two_Flowers,
+            SpotId::Uhrum__Annuna_Corridor__Wall_Remnant,
+        ) => Some(1403),
+        (
+            SpotId::Uhrum__Annuna_Corridor__Block_East,
+            SpotId::Uhrum__Annuna_Corridor__Open_Pillar,
+        ) => Some(3508),
+        (
+            SpotId::Uhrum__Annuna_Corridor__Block_West,
+            SpotId::Uhrum__Annuna_Corridor__Save_Point,
+        ) => Some(1403),
+        (SpotId::Uhrum__Annuna_Corridor__East_25, SpotId::Uhrum__Annuna_Corridor__Statue) => {
+            Some(1228)
+        }
+        (
+            SpotId::Uhrum__Annuna_Corridor__East_Cubby,
+            SpotId::Uhrum__Annuna_Corridor__Upper_Ledge,
+        ) => Some(1754),
+        (
+            SpotId::Uhrum__Annuna_Corridor__Lower_Platform,
+            SpotId::Uhrum__Annuna_Corridor__Block_East,
+        ) => Some(6666),
+        (
+            SpotId::Uhrum__Annuna_Corridor__Open_Pillar,
+            SpotId::Uhrum__Annuna_Corridor__Between_Two_Flowers,
+        ) => Some(2631),
+        (
+            SpotId::Uhrum__Annuna_Corridor__Open_Pillar,
+            SpotId::Uhrum__Annuna_Corridor__Block_East,
+        ) => Some(3508),
+        (SpotId::Uhrum__Annuna_Corridor__Pedestal, SpotId::Uhrum__Annuna_Corridor__Upper_Trees) => {
+            Some(1052)
+        }
+        (
+            SpotId::Uhrum__Annuna_Corridor__Save_Point,
+            SpotId::Uhrum__Annuna_Corridor__Block_West,
+        ) => Some(1403),
+        (SpotId::Uhrum__Annuna_Corridor__Save_Point, SpotId::Uhrum__Annuna_Corridor__West_26) => {
+            Some(1578)
+        }
+        (SpotId::Uhrum__Annuna_Corridor__Statue, SpotId::Uhrum__Annuna_Corridor__East_25) => {
+            Some(1228)
+        }
+        (
+            SpotId::Uhrum__Annuna_Corridor__Statue,
+            SpotId::Uhrum__Annuna_Corridor__Lower_Platform,
+        ) => Some(2105),
+        (
+            SpotId::Uhrum__Annuna_Corridor__Upper_Ledge,
+            SpotId::Uhrum__Annuna_Corridor__Block_East,
+        ) => Some(5287),
+        (
+            SpotId::Uhrum__Annuna_Corridor__Upper_Ledge,
+            SpotId::Uhrum__Annuna_Corridor__East_Cubby,
+        ) => Some(1754),
+        (
+            SpotId::Uhrum__Annuna_Corridor__Upper_Ledge,
+            SpotId::Uhrum__Annuna_Corridor__Middle_Platform,
+        ) => Some(1052),
+        (SpotId::Uhrum__Annuna_Corridor__Upper_Trees, SpotId::Uhrum__Annuna_Corridor__Pedestal) => {
+            Some(1052)
+        }
+        (SpotId::Uhrum__Annuna_Corridor__Upper_Trees, SpotId::Uhrum__Annuna_Corridor__West_25) => {
+            Some(4035)
+        }
+        (
+            SpotId::Uhrum__Annuna_Corridor__Wall_Remnant,
+            SpotId::Uhrum__Annuna_Corridor__Between_Two_Flowers,
+        ) => Some(1403),
+        (
+            SpotId::Uhrum__Annuna_Corridor__Wall_Remnant,
+            SpotId::Uhrum__Annuna_Corridor__Lower_Platform,
+        ) => Some(877),
+        (SpotId::Uhrum__Annuna_Corridor__West_25, SpotId::Uhrum__Annuna_Corridor__Upper_Trees) => {
+            Some(4035)
+        }
+        (SpotId::Uhrum__Annuna_Corridor__West_26, SpotId::Uhrum__Annuna_Corridor__Save_Point) => {
+            Some(1578)
+        }
         (SpotId::Uhrum__Save_Room__East, SpotId::Uhrum__Save_Room__Save_Point) => Some(1578),
         (SpotId::Uhrum__Save_Room__Save_Point, SpotId::Uhrum__Save_Room__East) => Some(1578),
         (SpotId::Uhrum__Save_Room__Save_Point, SpotId::Uhrum__Save_Room__West) => Some(1578),
@@ -43297,6 +44415,60 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
         }
         (SpotId::Amagi__West_Lake__West_Shore, SpotId::Amagi__West_Lake__West_Bank) => {
             (Some(1754), vec![])
+        }
+        (
+            SpotId::Annuna__Mirror_Match__Below_Switch,
+            SpotId::Annuna__Mirror_Match__East_25_Upper,
+        ) => (Some(1228), vec![]),
+        (SpotId::Annuna__Mirror_Match__Below_Switch, SpotId::Annuna__Mirror_Match__Staircase) => {
+            (Some(1754), vec![])
+        }
+        (
+            SpotId::Annuna__Mirror_Match__Central_Pillar,
+            SpotId::Annuna__Mirror_Match__East_25_Lower,
+        ) => (Some(2982), vec![]),
+        (SpotId::Annuna__Mirror_Match__East_25_Lower, SpotId::Annuna__Mirror_Match__Staircase) => {
+            (Some(2982), vec![])
+        }
+        (
+            SpotId::Annuna__Mirror_Match__East_25_Upper,
+            SpotId::Annuna__Mirror_Match__Below_Switch,
+        ) => (Some(1228), vec![]),
+        (SpotId::Annuna__Mirror_Match__East_26_Lower, SpotId::Annuna__Mirror_Match__Plinth) => {
+            (Some(1403), vec![])
+        }
+        (
+            SpotId::Annuna__Mirror_Match__East_26_Lower,
+            SpotId::Annuna__Mirror_Match__Waving_Distance,
+        ) => (Some(877), vec![]),
+        (SpotId::Annuna__Mirror_Match__East_26_Upper, SpotId::Annuna__Mirror_Match__Plinth) => {
+            (Some(1403), vec![])
+        }
+        (
+            SpotId::Annuna__Mirror_Match__East_26_Upper,
+            SpotId::Annuna__Mirror_Match__Waving_Distance,
+        ) => (Some(877), vec![]),
+        (SpotId::Annuna__Mirror_Match__Eastward, SpotId::Annuna__Mirror_Match__Save_Point) => {
+            (Some(33157), vec![])
+        }
+        (SpotId::Annuna__Mirror_Match__Plinth, SpotId::Annuna__Mirror_Match__East_26_Lower) => {
+            (Some(1403), vec![])
+        }
+        (SpotId::Annuna__Mirror_Match__Save_Point, SpotId::Annuna__Mirror_Match__Eastward) => {
+            (Some(33157), vec![])
+        }
+        (SpotId::Annuna__Mirror_Match__Staircase, SpotId::Annuna__Mirror_Match__East_25_Lower) => {
+            (Some(2982), vec![])
+        }
+        (
+            SpotId::Annuna__Mirror_Match__Waving_Distance,
+            SpotId::Annuna__Mirror_Match__East_26_Lower,
+        ) => (Some(877), vec![]),
+        (SpotId::Annuna__Mirror_Match__West_25, SpotId::Annuna__Mirror_Match__West_Gap) => {
+            (Some(526), vec![])
+        }
+        (SpotId::Annuna__Mirror_Match__West_Gap, SpotId::Annuna__Mirror_Match__Save_Point) => {
+            (Some(30526), vec![])
         }
         (
             SpotId::Antarctica__Building_1E__East_Entry,
@@ -48000,6 +49172,90 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
         }
         (SpotId::Irikar__Sight_Room__West_24, SpotId::Irikar__Sight_Room__Lower_Ledge) => {
             (Some(701), vec![])
+        }
+        (
+            SpotId::Uhrum__Annuna_Corridor__Between_Two_Flowers,
+            SpotId::Uhrum__Annuna_Corridor__Block_East,
+        ) => (Some(6140), vec![]),
+        (
+            SpotId::Uhrum__Annuna_Corridor__Between_Two_Flowers,
+            SpotId::Uhrum__Annuna_Corridor__Wall_Remnant,
+        ) => (Some(1403), vec![]),
+        (
+            SpotId::Uhrum__Annuna_Corridor__Block_East,
+            SpotId::Uhrum__Annuna_Corridor__Open_Pillar,
+        ) => (Some(3508), vec![]),
+        (
+            SpotId::Uhrum__Annuna_Corridor__Block_West,
+            SpotId::Uhrum__Annuna_Corridor__Save_Point,
+        ) => (Some(1403), vec![]),
+        (SpotId::Uhrum__Annuna_Corridor__East_25, SpotId::Uhrum__Annuna_Corridor__Statue) => {
+            (Some(1228), vec![])
+        }
+        (
+            SpotId::Uhrum__Annuna_Corridor__East_Cubby,
+            SpotId::Uhrum__Annuna_Corridor__Upper_Ledge,
+        ) => (Some(1754), vec![]),
+        (
+            SpotId::Uhrum__Annuna_Corridor__Lower_Platform,
+            SpotId::Uhrum__Annuna_Corridor__Block_East,
+        ) => (Some(6666), vec![]),
+        (
+            SpotId::Uhrum__Annuna_Corridor__Open_Pillar,
+            SpotId::Uhrum__Annuna_Corridor__Between_Two_Flowers,
+        ) => (Some(2631), vec![]),
+        (
+            SpotId::Uhrum__Annuna_Corridor__Open_Pillar,
+            SpotId::Uhrum__Annuna_Corridor__Block_East,
+        ) => (Some(3508), vec![]),
+        (SpotId::Uhrum__Annuna_Corridor__Pedestal, SpotId::Uhrum__Annuna_Corridor__Upper_Trees) => {
+            (Some(1052), vec![])
+        }
+        (
+            SpotId::Uhrum__Annuna_Corridor__Save_Point,
+            SpotId::Uhrum__Annuna_Corridor__Block_West,
+        ) => (Some(1403), vec![]),
+        (SpotId::Uhrum__Annuna_Corridor__Save_Point, SpotId::Uhrum__Annuna_Corridor__West_26) => {
+            (Some(1578), vec![])
+        }
+        (SpotId::Uhrum__Annuna_Corridor__Statue, SpotId::Uhrum__Annuna_Corridor__East_25) => {
+            (Some(1228), vec![])
+        }
+        (
+            SpotId::Uhrum__Annuna_Corridor__Statue,
+            SpotId::Uhrum__Annuna_Corridor__Lower_Platform,
+        ) => (Some(2105), vec![]),
+        (
+            SpotId::Uhrum__Annuna_Corridor__Upper_Ledge,
+            SpotId::Uhrum__Annuna_Corridor__Block_East,
+        ) => (Some(5287), vec![]),
+        (
+            SpotId::Uhrum__Annuna_Corridor__Upper_Ledge,
+            SpotId::Uhrum__Annuna_Corridor__East_Cubby,
+        ) => (Some(1754), vec![]),
+        (
+            SpotId::Uhrum__Annuna_Corridor__Upper_Ledge,
+            SpotId::Uhrum__Annuna_Corridor__Middle_Platform,
+        ) => (Some(1052), vec![]),
+        (SpotId::Uhrum__Annuna_Corridor__Upper_Trees, SpotId::Uhrum__Annuna_Corridor__Pedestal) => {
+            (Some(1052), vec![])
+        }
+        (SpotId::Uhrum__Annuna_Corridor__Upper_Trees, SpotId::Uhrum__Annuna_Corridor__West_25) => {
+            (Some(4035), vec![])
+        }
+        (
+            SpotId::Uhrum__Annuna_Corridor__Wall_Remnant,
+            SpotId::Uhrum__Annuna_Corridor__Between_Two_Flowers,
+        ) => (Some(1403), vec![]),
+        (
+            SpotId::Uhrum__Annuna_Corridor__Wall_Remnant,
+            SpotId::Uhrum__Annuna_Corridor__Lower_Platform,
+        ) => (Some(877), vec![]),
+        (SpotId::Uhrum__Annuna_Corridor__West_25, SpotId::Uhrum__Annuna_Corridor__Upper_Trees) => {
+            (Some(4035), vec![])
+        }
+        (SpotId::Uhrum__Annuna_Corridor__West_26, SpotId::Uhrum__Annuna_Corridor__Save_Point) => {
+            (Some(1578), vec![])
         }
         (SpotId::Uhrum__Save_Room__East, SpotId::Uhrum__Save_Room__Save_Point) => {
             (Some(1578), vec![])
