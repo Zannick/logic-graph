@@ -94,6 +94,7 @@ pub enum AreaId {
     Amagi__Liru_Room,
     Amagi__Main_Area,
     Amagi__West_Lake,
+    Annuna__East_Bridge,
     Annuna__Mirror_Match,
     Annuna__West_Bridge,
     Antarctica__Building_1E,
@@ -224,6 +225,7 @@ impl fmt::Display for AreaId {
             AreaId::Amagi__Liru_Room => write!(f, "{}", "Amagi > Liru Room"),
             AreaId::Amagi__Main_Area => write!(f, "{}", "Amagi > Main Area"),
             AreaId::Amagi__West_Lake => write!(f, "{}", "Amagi > West Lake"),
+            AreaId::Annuna__East_Bridge => write!(f, "{}", "Annuna > East Bridge"),
             AreaId::Annuna__Mirror_Match => write!(f, "{}", "Annuna > Mirror Match"),
             AreaId::Annuna__West_Bridge => write!(f, "{}", "Annuna > West Bridge"),
             AreaId::Antarctica__Building_1E => write!(f, "{}", "Antarctica > Building 1E"),
@@ -381,6 +383,7 @@ impl std::str::FromStr for AreaId {
             "Amagi > Liru Room" => Ok(AreaId::Amagi__Liru_Room),
             "Amagi > Main Area" => Ok(AreaId::Amagi__Main_Area),
             "Amagi > West Lake" => Ok(AreaId::Amagi__West_Lake),
+            "Annuna > East Bridge" => Ok(AreaId::Annuna__East_Bridge),
             "Annuna > Mirror Match" => Ok(AreaId::Annuna__Mirror_Match),
             "Annuna > West Bridge" => Ok(AreaId::Annuna__West_Bridge),
             "Antarctica > Building 1E" => Ok(AreaId::Antarctica__Building_1E),
@@ -617,6 +620,24 @@ pub enum SpotId {
     Amagi__West_Lake__West_Cliff,
     Amagi__West_Lake__West_Platform,
     Amagi__West_Lake__West_Shore,
+    Annuna__East_Bridge__Center_Corridor,
+    Annuna__East_Bridge__Center_Drop_off,
+    Annuna__East_Bridge__Center_Gap_East,
+    Annuna__East_Bridge__Center_Gap_West,
+    Annuna__East_Bridge__Gate_Button,
+    Annuna__East_Bridge__Gate_Button_Gap,
+    Annuna__East_Bridge__Upper_Middle_Core,
+    Annuna__East_Bridge__Upper_Middle_Gate,
+    Annuna__East_Bridge__Upper_Middle_Inner_Corner_East,
+    Annuna__East_Bridge__Upper_Middle_Inner_Corner_West,
+    Annuna__East_Bridge__Upper_Middle_Opening,
+    Annuna__East_Bridge__Upper_West_Gap,
+    Annuna__East_Bridge__West_24,
+    Annuna__East_Bridge__West_25_Lower,
+    Annuna__East_Bridge__West_25_Upper,
+    Annuna__East_Bridge__West_Staircase_Lower,
+    Annuna__East_Bridge__West_Staircase_Upper_East,
+    Annuna__East_Bridge__West_Staircase_Upper_West,
     Annuna__Mirror_Match__Below_Switch,
     Annuna__Mirror_Match__Central_Pillar,
     Annuna__Mirror_Match__East_25_Lower,
@@ -630,10 +651,15 @@ pub enum SpotId {
     Annuna__Mirror_Match__Waving_Distance,
     Annuna__Mirror_Match__West_25,
     Annuna__Mirror_Match__West_Gap,
+    Annuna__West_Bridge__East_24,
+    Annuna__West_Bridge__East_25_Lower,
+    Annuna__West_Bridge__East_25_Upper,
+    Annuna__West_Bridge__Plinth,
     Annuna__West_Bridge__West_25_Lower,
     Annuna__West_Bridge__West_25_Upper,
     Annuna__West_Bridge__West_26_Lower,
     Annuna__West_Bridge__West_26_Upper,
+    Annuna__West_Bridge__West_Outcropping,
     Antarctica__Building_1E__Connector,
     Antarctica__Building_1E__East_Entry,
     Antarctica__Building_1W__Connector,
@@ -1877,6 +1903,64 @@ impl fmt::Display for SpotId {
             SpotId::Amagi__West_Lake__West_Shore => {
                 write!(f, "{}", "Amagi > West Lake > West Shore")
             }
+            SpotId::Annuna__East_Bridge__Center_Corridor => {
+                write!(f, "{}", "Annuna > East Bridge > Center Corridor")
+            }
+            SpotId::Annuna__East_Bridge__Center_Drop_off => {
+                write!(f, "{}", "Annuna > East Bridge > Center Drop-off")
+            }
+            SpotId::Annuna__East_Bridge__Center_Gap_East => {
+                write!(f, "{}", "Annuna > East Bridge > Center Gap East")
+            }
+            SpotId::Annuna__East_Bridge__Center_Gap_West => {
+                write!(f, "{}", "Annuna > East Bridge > Center Gap West")
+            }
+            SpotId::Annuna__East_Bridge__Gate_Button => {
+                write!(f, "{}", "Annuna > East Bridge > Gate Button")
+            }
+            SpotId::Annuna__East_Bridge__Gate_Button_Gap => {
+                write!(f, "{}", "Annuna > East Bridge > Gate Button Gap")
+            }
+            SpotId::Annuna__East_Bridge__Upper_Middle_Core => {
+                write!(f, "{}", "Annuna > East Bridge > Upper Middle Core")
+            }
+            SpotId::Annuna__East_Bridge__Upper_Middle_Gate => {
+                write!(f, "{}", "Annuna > East Bridge > Upper Middle Gate")
+            }
+            SpotId::Annuna__East_Bridge__Upper_Middle_Inner_Corner_East => write!(
+                f,
+                "{}",
+                "Annuna > East Bridge > Upper Middle Inner Corner East"
+            ),
+            SpotId::Annuna__East_Bridge__Upper_Middle_Inner_Corner_West => write!(
+                f,
+                "{}",
+                "Annuna > East Bridge > Upper Middle Inner Corner West"
+            ),
+            SpotId::Annuna__East_Bridge__Upper_Middle_Opening => {
+                write!(f, "{}", "Annuna > East Bridge > Upper Middle Opening")
+            }
+            SpotId::Annuna__East_Bridge__Upper_West_Gap => {
+                write!(f, "{}", "Annuna > East Bridge > Upper West Gap")
+            }
+            SpotId::Annuna__East_Bridge__West_24 => {
+                write!(f, "{}", "Annuna > East Bridge > West 24")
+            }
+            SpotId::Annuna__East_Bridge__West_25_Lower => {
+                write!(f, "{}", "Annuna > East Bridge > West 25 Lower")
+            }
+            SpotId::Annuna__East_Bridge__West_25_Upper => {
+                write!(f, "{}", "Annuna > East Bridge > West 25 Upper")
+            }
+            SpotId::Annuna__East_Bridge__West_Staircase_Lower => {
+                write!(f, "{}", "Annuna > East Bridge > West Staircase Lower")
+            }
+            SpotId::Annuna__East_Bridge__West_Staircase_Upper_East => {
+                write!(f, "{}", "Annuna > East Bridge > West Staircase Upper East")
+            }
+            SpotId::Annuna__East_Bridge__West_Staircase_Upper_West => {
+                write!(f, "{}", "Annuna > East Bridge > West Staircase Upper West")
+            }
             SpotId::Annuna__Mirror_Match__Below_Switch => {
                 write!(f, "{}", "Annuna > Mirror Match > Below Switch")
             }
@@ -1916,6 +2000,16 @@ impl fmt::Display for SpotId {
             SpotId::Annuna__Mirror_Match__West_Gap => {
                 write!(f, "{}", "Annuna > Mirror Match > West Gap")
             }
+            SpotId::Annuna__West_Bridge__East_24 => {
+                write!(f, "{}", "Annuna > West Bridge > East 24")
+            }
+            SpotId::Annuna__West_Bridge__East_25_Lower => {
+                write!(f, "{}", "Annuna > West Bridge > East 25 Lower")
+            }
+            SpotId::Annuna__West_Bridge__East_25_Upper => {
+                write!(f, "{}", "Annuna > West Bridge > East 25 Upper")
+            }
+            SpotId::Annuna__West_Bridge__Plinth => write!(f, "{}", "Annuna > West Bridge > Plinth"),
             SpotId::Annuna__West_Bridge__West_25_Lower => {
                 write!(f, "{}", "Annuna > West Bridge > West 25 Lower")
             }
@@ -1927,6 +2021,9 @@ impl fmt::Display for SpotId {
             }
             SpotId::Annuna__West_Bridge__West_26_Upper => {
                 write!(f, "{}", "Annuna > West Bridge > West 26 Upper")
+            }
+            SpotId::Annuna__West_Bridge__West_Outcropping => {
+                write!(f, "{}", "Annuna > West Bridge > West Outcropping")
             }
             SpotId::Antarctica__Building_1E__Connector => {
                 write!(f, "{}", "Antarctica > Building 1E > Connector")
@@ -4643,6 +4740,56 @@ impl std::str::FromStr for SpotId {
             "Amagi > West Lake > West Cliff" => Ok(SpotId::Amagi__West_Lake__West_Cliff),
             "Amagi > West Lake > West Platform" => Ok(SpotId::Amagi__West_Lake__West_Platform),
             "Amagi > West Lake > West Shore" => Ok(SpotId::Amagi__West_Lake__West_Shore),
+            "Annuna > East Bridge > Center Corridor" => {
+                Ok(SpotId::Annuna__East_Bridge__Center_Corridor)
+            }
+            "Annuna > East Bridge > Center Drop-off" => {
+                Ok(SpotId::Annuna__East_Bridge__Center_Drop_off)
+            }
+            "Annuna > East Bridge > Center Gap East" => {
+                Ok(SpotId::Annuna__East_Bridge__Center_Gap_East)
+            }
+            "Annuna > East Bridge > Center Gap West" => {
+                Ok(SpotId::Annuna__East_Bridge__Center_Gap_West)
+            }
+            "Annuna > East Bridge > Gate Button" => Ok(SpotId::Annuna__East_Bridge__Gate_Button),
+            "Annuna > East Bridge > Gate Button Gap" => {
+                Ok(SpotId::Annuna__East_Bridge__Gate_Button_Gap)
+            }
+            "Annuna > East Bridge > Upper Middle Core" => {
+                Ok(SpotId::Annuna__East_Bridge__Upper_Middle_Core)
+            }
+            "Annuna > East Bridge > Upper Middle Gate" => {
+                Ok(SpotId::Annuna__East_Bridge__Upper_Middle_Gate)
+            }
+            "Annuna > East Bridge > Upper Middle Inner Corner East" => {
+                Ok(SpotId::Annuna__East_Bridge__Upper_Middle_Inner_Corner_East)
+            }
+            "Annuna > East Bridge > Upper Middle Inner Corner West" => {
+                Ok(SpotId::Annuna__East_Bridge__Upper_Middle_Inner_Corner_West)
+            }
+            "Annuna > East Bridge > Upper Middle Opening" => {
+                Ok(SpotId::Annuna__East_Bridge__Upper_Middle_Opening)
+            }
+            "Annuna > East Bridge > Upper West Gap" => {
+                Ok(SpotId::Annuna__East_Bridge__Upper_West_Gap)
+            }
+            "Annuna > East Bridge > West 24" => Ok(SpotId::Annuna__East_Bridge__West_24),
+            "Annuna > East Bridge > West 25 Lower" => {
+                Ok(SpotId::Annuna__East_Bridge__West_25_Lower)
+            }
+            "Annuna > East Bridge > West 25 Upper" => {
+                Ok(SpotId::Annuna__East_Bridge__West_25_Upper)
+            }
+            "Annuna > East Bridge > West Staircase Lower" => {
+                Ok(SpotId::Annuna__East_Bridge__West_Staircase_Lower)
+            }
+            "Annuna > East Bridge > West Staircase Upper East" => {
+                Ok(SpotId::Annuna__East_Bridge__West_Staircase_Upper_East)
+            }
+            "Annuna > East Bridge > West Staircase Upper West" => {
+                Ok(SpotId::Annuna__East_Bridge__West_Staircase_Upper_West)
+            }
             "Annuna > Mirror Match > Below Switch" => {
                 Ok(SpotId::Annuna__Mirror_Match__Below_Switch)
             }
@@ -4670,6 +4817,14 @@ impl std::str::FromStr for SpotId {
             }
             "Annuna > Mirror Match > West 25" => Ok(SpotId::Annuna__Mirror_Match__West_25),
             "Annuna > Mirror Match > West Gap" => Ok(SpotId::Annuna__Mirror_Match__West_Gap),
+            "Annuna > West Bridge > East 24" => Ok(SpotId::Annuna__West_Bridge__East_24),
+            "Annuna > West Bridge > East 25 Lower" => {
+                Ok(SpotId::Annuna__West_Bridge__East_25_Lower)
+            }
+            "Annuna > West Bridge > East 25 Upper" => {
+                Ok(SpotId::Annuna__West_Bridge__East_25_Upper)
+            }
+            "Annuna > West Bridge > Plinth" => Ok(SpotId::Annuna__West_Bridge__Plinth),
             "Annuna > West Bridge > West 25 Lower" => {
                 Ok(SpotId::Annuna__West_Bridge__West_25_Lower)
             }
@@ -4681,6 +4836,9 @@ impl std::str::FromStr for SpotId {
             }
             "Annuna > West Bridge > West 26 Upper" => {
                 Ok(SpotId::Annuna__West_Bridge__West_26_Upper)
+            }
+            "Annuna > West Bridge > West Outcropping" => {
+                Ok(SpotId::Annuna__West_Bridge__West_Outcropping)
             }
             "Antarctica > Building 1E > Connector" => {
                 Ok(SpotId::Antarctica__Building_1E__Connector)
@@ -6453,6 +6611,7 @@ pub enum LocationId {
     Annuna__Mirror_Match__Plinth__Item,
     Annuna__Mirror_Match__Save_Point__Fight,
     Annuna__Mirror_Match__Waving_Distance__Shockwave_Flask,
+    Annuna__West_Bridge__Plinth__Item,
     Antarctica__Building_2__Behind_Boxes__Note,
     Antarctica__Power_Room__Switch__Flip,
     Antarctica__Shed__Interior__Shelf,
@@ -6746,6 +6905,9 @@ impl fmt::Display for LocationId {
                 "{}",
                 "Annuna > Mirror Match > Waving Distance > Shockwave Flask"
             ),
+            LocationId::Annuna__West_Bridge__Plinth__Item => {
+                write!(f, "{}", "Annuna > West Bridge > Plinth > Item")
+            }
             LocationId::Antarctica__Building_2__Behind_Boxes__Note => {
                 write!(f, "{}", "Antarctica > Building 2 > Behind Boxes > Note")
             }
@@ -7506,6 +7668,9 @@ impl std::str::FromStr for LocationId {
             "Annuna > Mirror Match > Waving Distance > Shockwave Flask" => {
                 Ok(LocationId::Annuna__Mirror_Match__Waving_Distance__Shockwave_Flask)
             }
+            "Annuna > West Bridge > Plinth > Item" => {
+                Ok(LocationId::Annuna__West_Bridge__Plinth__Item)
+            }
             "Antarctica > Building 2 > Behind Boxes > Note" => {
                 Ok(LocationId::Antarctica__Building_2__Behind_Boxes__Note)
             }
@@ -8109,6 +8274,8 @@ pub enum ExitId {
     Annuna__Mirror_Match__Staircase__ex__Eastward_1,
     Annuna__Mirror_Match__Staircase__ex__Eastward_2,
     Annuna__Mirror_Match__West_25__ex__Uhrum__Annuna_Corridor__East_25_1,
+    Annuna__West_Bridge__East_25_Lower__ex__East_Bridge__West_25_Lower_1,
+    Annuna__West_Bridge__West_25_Lower__ex__Mirror_Match__East_25_Lower_1,
     Antarctica__Building_1E__Connector__ex__Building_1W__Connector_1,
     Antarctica__Building_1E__Connector__ex__East_Entry_1,
     Antarctica__Building_1E__East_Entry__ex__East__Building_1_Entry_1,
@@ -9169,6 +9336,8 @@ impl fmt::Display for ExitId {
             ExitId::Annuna__Mirror_Match__Staircase__ex__Eastward_1 => write!(f, "{}", "Annuna > Mirror Match > Staircase ==> Eastward (1)"),
             ExitId::Annuna__Mirror_Match__Staircase__ex__Eastward_2 => write!(f, "{}", "Annuna > Mirror Match > Staircase ==> Eastward (2)"),
             ExitId::Annuna__Mirror_Match__West_25__ex__Uhrum__Annuna_Corridor__East_25_1 => write!(f, "{}", "Annuna > Mirror Match > West 25 ==> Uhrum > Annuna Corridor > East 25 (1)"),
+            ExitId::Annuna__West_Bridge__East_25_Lower__ex__East_Bridge__West_25_Lower_1 => write!(f, "{}", "Annuna > West Bridge > East 25 Lower ==> East Bridge > West 25 Lower (1)"),
+            ExitId::Annuna__West_Bridge__West_25_Lower__ex__Mirror_Match__East_25_Lower_1 => write!(f, "{}", "Annuna > West Bridge > West 25 Lower ==> Mirror Match > East 25 Lower (1)"),
             ExitId::Antarctica__Building_1E__Connector__ex__Building_1W__Connector_1 => write!(f, "{}", "Antarctica > Building 1E > Connector ==> Building 1W > Connector (1)"),
             ExitId::Antarctica__Building_1E__Connector__ex__East_Entry_1 => write!(f, "{}", "Antarctica > Building 1E > Connector ==> East Entry (1)"),
             ExitId::Antarctica__Building_1E__East_Entry__ex__East__Building_1_Entry_1 => write!(f, "{}", "Antarctica > Building 1E > East Entry ==> East > Building 1 Entry (1)"),
@@ -10234,6 +10403,8 @@ impl std::str::FromStr for ExitId {
             "Annuna > Mirror Match > Staircase ==> Eastward (1)" => Ok(ExitId::Annuna__Mirror_Match__Staircase__ex__Eastward_1),
             "Annuna > Mirror Match > Staircase ==> Eastward (2)" => Ok(ExitId::Annuna__Mirror_Match__Staircase__ex__Eastward_2),
             "Annuna > Mirror Match > West 25 ==> Uhrum > Annuna Corridor > East 25 (1)" => Ok(ExitId::Annuna__Mirror_Match__West_25__ex__Uhrum__Annuna_Corridor__East_25_1),
+            "Annuna > West Bridge > East 25 Lower ==> East Bridge > West 25 Lower (1)" => Ok(ExitId::Annuna__West_Bridge__East_25_Lower__ex__East_Bridge__West_25_Lower_1),
+            "Annuna > West Bridge > West 25 Lower ==> Mirror Match > East 25 Lower (1)" => Ok(ExitId::Annuna__West_Bridge__West_25_Lower__ex__Mirror_Match__East_25_Lower_1),
             "Antarctica > Building 1E > Connector ==> Building 1W > Connector (1)" => Ok(ExitId::Antarctica__Building_1E__Connector__ex__Building_1W__Connector_1),
             "Antarctica > Building 1E > Connector ==> East Entry (1)" => Ok(ExitId::Antarctica__Building_1E__Connector__ex__East_Entry_1),
             "Antarctica > Building 1E > East Entry ==> East > Building 1 Entry (1)" => Ok(ExitId::Antarctica__Building_1E__East_Entry__ex__East__Building_1_Entry_1),

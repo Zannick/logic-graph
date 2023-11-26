@@ -121,8 +121,33 @@ subgraph Annuna
     subgraph Annuna__West_Bridge[West Bridge]
         Annuna__West_Bridge__West_25_Lower(West 25 Lower);
         Annuna__West_Bridge__West_25_Upper(West 25 Upper);
+        Annuna__West_Bridge__West_Outcropping(West Outcropping);
+        Annuna__West_Bridge__Plinth(Plinth);
+        Annuna__West_Bridge__East_25_Lower(East 25 Lower);
+        Annuna__West_Bridge__East_25_Upper(East 25 Upper);
         Annuna__West_Bridge__West_26_Lower(West 26 Lower);
         Annuna__West_Bridge__West_26_Upper(West 26 Upper);
+        Annuna__West_Bridge__East_24(East 24);
+    end
+    subgraph Annuna__East_Bridge[East Bridge]
+        Annuna__East_Bridge__West_25_Lower(West 25 Lower);
+        Annuna__East_Bridge__West_25_Upper(West 25 Upper);
+        Annuna__East_Bridge__West_Staircase_Lower(West Staircase Lower);
+        Annuna__East_Bridge__West_Staircase_Upper_West(West Staircase Upper West);
+        Annuna__East_Bridge__West_Staircase_Upper_East(West Staircase Upper East);
+        Annuna__East_Bridge__Center_Drop_off(Center Drop-off);
+        Annuna__East_Bridge__Center_Corridor(Center Corridor);
+        Annuna__East_Bridge__Center_Gap_West(Center Gap West);
+        Annuna__East_Bridge__Center_Gap_East(Center Gap East);
+        Annuna__East_Bridge__Gate_Button(Gate Button);
+        Annuna__East_Bridge__Upper_Middle_Gate(Upper Middle Gate);
+        Annuna__East_Bridge__Upper_Middle_Core(Upper Middle Core);
+        Annuna__East_Bridge__Upper_Middle_Opening(Upper Middle Opening);
+        Annuna__East_Bridge__Upper_Middle_Inner_Corner_East(Upper Middle Inner Corner East);
+        Annuna__East_Bridge__Upper_Middle_Inner_Corner_West(Upper Middle Inner Corner West);
+        Annuna__East_Bridge__Gate_Button_Gap(Gate Button Gap);
+        Annuna__East_Bridge__Upper_West_Gap(Upper West Gap);
+        Annuna__East_Bridge__West_24(West 24);
     end
 end
 subgraph Antarctica
@@ -1430,7 +1455,7 @@ Amagi__West_Lake__West_Bank --> Amagi__West_Lake__West_Shore
 Annuna__Mirror_Match__Below_Switch <--> Annuna__Mirror_Match__Central_Pillar
 Annuna__Mirror_Match__Central_Pillar --> Annuna__Mirror_Match__Save_Point
 Annuna__Mirror_Match__Central_Pillar --> Annuna__Mirror_Match__West_25
-Annuna__Mirror_Match__East_25_Lower --> Annuna__West_Bridge__West_25_Lower
+Annuna__Mirror_Match__East_25_Lower <--> Annuna__West_Bridge__West_25_Lower
 Annuna__Mirror_Match__East_25_Upper --> Annuna__West_Bridge__West_25_Upper
 Annuna__Mirror_Match__East_26_Lower --> Annuna__West_Bridge__West_26_Lower
 Annuna__Mirror_Match__East_26_Upper --> Annuna__Mirror_Match__East_26_Lower
@@ -1438,6 +1463,7 @@ Annuna__Mirror_Match__East_26_Upper --> Annuna__West_Bridge__West_26_Upper
 Annuna__Mirror_Match__Eastward <--> Annuna__Mirror_Match__Staircase
 Annuna__Mirror_Match__Plinth --> Annuna__Mirror_Match__East_26_Upper
 Annuna__Mirror_Match__West_25 <--> Uhrum__Annuna_Corridor__East_25
+Annuna__West_Bridge__East_25_Lower --> Annuna__East_Bridge__West_25_Lower
 Antarctica__Building_1E__Connector --> Antarctica__Building_1E__East_Entry
 Antarctica__Building_1E__Connector <--> Antarctica__Building_1W__Connector
 Antarctica__Building_1E__East_Entry <--> Antarctica__East__Building_1_Entry

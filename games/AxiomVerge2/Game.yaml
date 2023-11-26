@@ -21,6 +21,7 @@ start:
   last: SpotId::None
   # This should be a load effect? prev_area = $get_area(^position) ?
   prev_area: Antarctica > West
+  # TODO: Destination spot for glitches
 
 data:
   realm: main
@@ -355,6 +356,7 @@ helpers:
      Drone_Hover, Fast_Travel]
   # To be added: 5 Flask, 2 Big_Flask, Double_Axe, Royal_Dagger, Udusan
   # 1 Health_Fragment, The_Student, Heretics_Granddaughter, Suspension_Bridge, Plague_of_Thoughts
+  # Nano_Lattice_2
 
   $save:action: ^save = ^position; $refill_energy
   $refill_energy:action: ^energy = $max_energy

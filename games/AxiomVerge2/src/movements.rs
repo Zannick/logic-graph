@@ -768,6 +768,36 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
         ) => 30526,
         (
             [false],
+            SpotId::Annuna__West_Bridge__East_25_Lower,
+            SpotId::Annuna__West_Bridge__Plinth,
+        ) => 5175,
+        (
+            [false],
+            SpotId::Annuna__West_Bridge__Plinth,
+            SpotId::Annuna__West_Bridge__East_25_Lower,
+        ) => 5175,
+        (
+            [false],
+            SpotId::Annuna__West_Bridge__Plinth,
+            SpotId::Annuna__West_Bridge__West_Outcropping,
+        ) => 3947,
+        (
+            [false],
+            SpotId::Annuna__West_Bridge__West_25_Lower,
+            SpotId::Annuna__West_Bridge__West_Outcropping,
+        ) => 1052,
+        (
+            [false],
+            SpotId::Annuna__West_Bridge__West_Outcropping,
+            SpotId::Annuna__West_Bridge__Plinth,
+        ) => 3947,
+        (
+            [false],
+            SpotId::Annuna__West_Bridge__West_Outcropping,
+            SpotId::Annuna__West_Bridge__West_25_Lower,
+        ) => 1052,
+        (
+            [false],
             SpotId::Antarctica__Building_1E__East_Entry,
             SpotId::Antarctica__Building_1E__Connector,
         ) => 2280,
@@ -8351,6 +8381,36 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
         ) => 30526,
         (
             [true],
+            SpotId::Annuna__West_Bridge__East_25_Lower,
+            SpotId::Annuna__West_Bridge__Plinth,
+        ) => 5175,
+        (
+            [true],
+            SpotId::Annuna__West_Bridge__Plinth,
+            SpotId::Annuna__West_Bridge__East_25_Lower,
+        ) => 5175,
+        (
+            [true],
+            SpotId::Annuna__West_Bridge__Plinth,
+            SpotId::Annuna__West_Bridge__West_Outcropping,
+        ) => 3947,
+        (
+            [true],
+            SpotId::Annuna__West_Bridge__West_25_Lower,
+            SpotId::Annuna__West_Bridge__West_Outcropping,
+        ) => 1052,
+        (
+            [true],
+            SpotId::Annuna__West_Bridge__West_Outcropping,
+            SpotId::Annuna__West_Bridge__Plinth,
+        ) => 3947,
+        (
+            [true],
+            SpotId::Annuna__West_Bridge__West_Outcropping,
+            SpotId::Annuna__West_Bridge__West_25_Lower,
+        ) => 1052,
+        (
+            [true],
             SpotId::Antarctica__Building_1E__East_Entry,
             SpotId::Antarctica__Building_1E__Connector,
         ) => 2280,
@@ -15275,6 +15335,22 @@ pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
             SpotId::Annuna__Mirror_Match__East_26_Upper,
             SpotId::Annuna__Mirror_Match__Waving_Distance,
         ) => true,
+        (
+            SpotId::Annuna__West_Bridge__West_25_Lower,
+            SpotId::Annuna__West_Bridge__West_Outcropping,
+        ) => true,
+        (
+            SpotId::Annuna__West_Bridge__West_Outcropping,
+            SpotId::Annuna__West_Bridge__West_25_Lower,
+        ) => true,
+        (SpotId::Annuna__West_Bridge__West_Outcropping, SpotId::Annuna__West_Bridge__Plinth) => {
+            true
+        }
+        (SpotId::Annuna__West_Bridge__Plinth, SpotId::Annuna__West_Bridge__West_Outcropping) => {
+            true
+        }
+        (SpotId::Annuna__West_Bridge__Plinth, SpotId::Annuna__West_Bridge__East_25_Lower) => true,
+        (SpotId::Annuna__West_Bridge__East_25_Lower, SpotId::Annuna__West_Bridge__Plinth) => true,
         (SpotId::Antarctica__West__Helipad, SpotId::Antarctica__West__Shed_Entry) => true,
         (SpotId::Antarctica__West__Helipad, SpotId::Antarctica__West__Boxes) => true,
         (SpotId::Antarctica__West__Boxes, SpotId::Antarctica__West__Helipad) => true,
@@ -20833,6 +20909,96 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             1000,
         ),
         (
+            SpotId::Annuna__East_Bridge__Center_Corridor,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__East_Bridge__Center_Drop_off,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__East_Bridge__Center_Gap_East,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__East_Bridge__Center_Gap_West,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__East_Bridge__Gate_Button,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__East_Bridge__Gate_Button_Gap,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__East_Bridge__Upper_Middle_Core,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__East_Bridge__Upper_Middle_Gate,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__East_Bridge__Upper_Middle_Inner_Corner_East,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__East_Bridge__Upper_Middle_Inner_Corner_West,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__East_Bridge__Upper_Middle_Opening,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__East_Bridge__Upper_West_Gap,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__East_Bridge__West_24,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__East_Bridge__West_25_Lower,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__East_Bridge__West_25_Upper,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__East_Bridge__West_Staircase_Lower,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__East_Bridge__West_Staircase_Upper_East,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__East_Bridge__West_Staircase_Upper_West,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
             SpotId::Annuna__Mirror_Match__Below_Switch,
             SpotId::Annuna__Mirror_Match__Central_Pillar,
             1754,
@@ -21043,6 +21209,56 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             1000,
         ),
         (
+            SpotId::Annuna__West_Bridge__East_24,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__West_Bridge__East_25_Lower,
+            SpotId::Annuna__East_Bridge__West_25_Lower,
+            1350,
+        ),
+        (
+            SpotId::Annuna__West_Bridge__East_25_Lower,
+            SpotId::Annuna__West_Bridge__Plinth,
+            5175,
+        ),
+        (
+            SpotId::Annuna__West_Bridge__East_25_Lower,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__West_Bridge__East_25_Upper,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__West_Bridge__Plinth,
+            SpotId::Annuna__West_Bridge__East_25_Lower,
+            5175,
+        ),
+        (
+            SpotId::Annuna__West_Bridge__Plinth,
+            SpotId::Annuna__West_Bridge__West_Outcropping,
+            3947,
+        ),
+        (
+            SpotId::Annuna__West_Bridge__Plinth,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__West_Bridge__West_25_Lower,
+            SpotId::Annuna__Mirror_Match__East_25_Lower,
+            1350,
+        ),
+        (
+            SpotId::Annuna__West_Bridge__West_25_Lower,
+            SpotId::Annuna__West_Bridge__West_Outcropping,
+            1052,
+        ),
+        (
             SpotId::Annuna__West_Bridge__West_25_Lower,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
@@ -21059,6 +21275,21 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Annuna__West_Bridge__West_26_Upper,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__West_Bridge__West_Outcropping,
+            SpotId::Annuna__West_Bridge__Plinth,
+            3947,
+        ),
+        (
+            SpotId::Annuna__West_Bridge__West_Outcropping,
+            SpotId::Annuna__West_Bridge__West_25_Lower,
+            1052,
+        ),
+        (
+            SpotId::Annuna__West_Bridge__West_Outcropping,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -39131,6 +39362,26 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
         (SpotId::Annuna__Mirror_Match__West_Gap, SpotId::Annuna__Mirror_Match__Save_Point) => {
             Some(30526)
         }
+        (SpotId::Annuna__West_Bridge__East_25_Lower, SpotId::Annuna__West_Bridge__Plinth) => {
+            Some(5175)
+        }
+        (SpotId::Annuna__West_Bridge__Plinth, SpotId::Annuna__West_Bridge__East_25_Lower) => {
+            Some(5175)
+        }
+        (SpotId::Annuna__West_Bridge__Plinth, SpotId::Annuna__West_Bridge__West_Outcropping) => {
+            Some(3947)
+        }
+        (
+            SpotId::Annuna__West_Bridge__West_25_Lower,
+            SpotId::Annuna__West_Bridge__West_Outcropping,
+        ) => Some(1052),
+        (SpotId::Annuna__West_Bridge__West_Outcropping, SpotId::Annuna__West_Bridge__Plinth) => {
+            Some(3947)
+        }
+        (
+            SpotId::Annuna__West_Bridge__West_Outcropping,
+            SpotId::Annuna__West_Bridge__West_25_Lower,
+        ) => Some(1052),
         (
             SpotId::Antarctica__Building_1E__East_Entry,
             SpotId::Antarctica__Building_1E__Connector,
@@ -44470,6 +44721,26 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
         (SpotId::Annuna__Mirror_Match__West_Gap, SpotId::Annuna__Mirror_Match__Save_Point) => {
             (Some(30526), vec![])
         }
+        (SpotId::Annuna__West_Bridge__East_25_Lower, SpotId::Annuna__West_Bridge__Plinth) => {
+            (Some(5175), vec![])
+        }
+        (SpotId::Annuna__West_Bridge__Plinth, SpotId::Annuna__West_Bridge__East_25_Lower) => {
+            (Some(5175), vec![])
+        }
+        (SpotId::Annuna__West_Bridge__Plinth, SpotId::Annuna__West_Bridge__West_Outcropping) => {
+            (Some(3947), vec![])
+        }
+        (
+            SpotId::Annuna__West_Bridge__West_25_Lower,
+            SpotId::Annuna__West_Bridge__West_Outcropping,
+        ) => (Some(1052), vec![]),
+        (SpotId::Annuna__West_Bridge__West_Outcropping, SpotId::Annuna__West_Bridge__Plinth) => {
+            (Some(3947), vec![])
+        }
+        (
+            SpotId::Annuna__West_Bridge__West_Outcropping,
+            SpotId::Annuna__West_Bridge__West_25_Lower,
+        ) => (Some(1052), vec![]),
         (
             SpotId::Antarctica__Building_1E__East_Entry,
             SpotId::Antarctica__Building_1E__Connector,

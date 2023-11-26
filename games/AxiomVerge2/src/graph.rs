@@ -128,8 +128,31 @@ pub fn get_area(spot: SpotId) -> AreaId {
         | SpotId::Annuna__Mirror_Match__East_26_Upper => AreaId::Annuna__Mirror_Match,
         SpotId::Annuna__West_Bridge__West_25_Lower
         | SpotId::Annuna__West_Bridge__West_25_Upper
+        | SpotId::Annuna__West_Bridge__West_Outcropping
+        | SpotId::Annuna__West_Bridge__Plinth
+        | SpotId::Annuna__West_Bridge__East_25_Lower
+        | SpotId::Annuna__West_Bridge__East_25_Upper
         | SpotId::Annuna__West_Bridge__West_26_Lower
-        | SpotId::Annuna__West_Bridge__West_26_Upper => AreaId::Annuna__West_Bridge,
+        | SpotId::Annuna__West_Bridge__West_26_Upper
+        | SpotId::Annuna__West_Bridge__East_24 => AreaId::Annuna__West_Bridge,
+        SpotId::Annuna__East_Bridge__West_25_Lower
+        | SpotId::Annuna__East_Bridge__West_25_Upper
+        | SpotId::Annuna__East_Bridge__West_Staircase_Lower
+        | SpotId::Annuna__East_Bridge__West_Staircase_Upper_West
+        | SpotId::Annuna__East_Bridge__West_Staircase_Upper_East
+        | SpotId::Annuna__East_Bridge__Center_Drop_off
+        | SpotId::Annuna__East_Bridge__Center_Corridor
+        | SpotId::Annuna__East_Bridge__Center_Gap_West
+        | SpotId::Annuna__East_Bridge__Center_Gap_East
+        | SpotId::Annuna__East_Bridge__Gate_Button
+        | SpotId::Annuna__East_Bridge__Upper_Middle_Gate
+        | SpotId::Annuna__East_Bridge__Upper_Middle_Core
+        | SpotId::Annuna__East_Bridge__Upper_Middle_Opening
+        | SpotId::Annuna__East_Bridge__Upper_Middle_Inner_Corner_East
+        | SpotId::Annuna__East_Bridge__Upper_Middle_Inner_Corner_West
+        | SpotId::Annuna__East_Bridge__Gate_Button_Gap
+        | SpotId::Annuna__East_Bridge__Upper_West_Gap
+        | SpotId::Annuna__East_Bridge__West_24 => AreaId::Annuna__East_Bridge,
         SpotId::Antarctica__West__Helipad
         | SpotId::Antarctica__West__Shed_Entry
         | SpotId::Antarctica__West__Boxes => AreaId::Antarctica__West,
@@ -1274,8 +1297,31 @@ pub fn get_region(spot: SpotId) -> RegionId {
         | SpotId::Annuna__Mirror_Match__East_26_Upper => RegionId::Annuna,
         SpotId::Annuna__West_Bridge__West_25_Lower
         | SpotId::Annuna__West_Bridge__West_25_Upper
+        | SpotId::Annuna__West_Bridge__West_Outcropping
+        | SpotId::Annuna__West_Bridge__Plinth
+        | SpotId::Annuna__West_Bridge__East_25_Lower
+        | SpotId::Annuna__West_Bridge__East_25_Upper
         | SpotId::Annuna__West_Bridge__West_26_Lower
-        | SpotId::Annuna__West_Bridge__West_26_Upper => RegionId::Annuna,
+        | SpotId::Annuna__West_Bridge__West_26_Upper
+        | SpotId::Annuna__West_Bridge__East_24 => RegionId::Annuna,
+        SpotId::Annuna__East_Bridge__West_25_Lower
+        | SpotId::Annuna__East_Bridge__West_25_Upper
+        | SpotId::Annuna__East_Bridge__West_Staircase_Lower
+        | SpotId::Annuna__East_Bridge__West_Staircase_Upper_West
+        | SpotId::Annuna__East_Bridge__West_Staircase_Upper_East
+        | SpotId::Annuna__East_Bridge__Center_Drop_off
+        | SpotId::Annuna__East_Bridge__Center_Corridor
+        | SpotId::Annuna__East_Bridge__Center_Gap_West
+        | SpotId::Annuna__East_Bridge__Center_Gap_East
+        | SpotId::Annuna__East_Bridge__Gate_Button
+        | SpotId::Annuna__East_Bridge__Upper_Middle_Gate
+        | SpotId::Annuna__East_Bridge__Upper_Middle_Core
+        | SpotId::Annuna__East_Bridge__Upper_Middle_Opening
+        | SpotId::Annuna__East_Bridge__Upper_Middle_Inner_Corner_East
+        | SpotId::Annuna__East_Bridge__Upper_Middle_Inner_Corner_West
+        | SpotId::Annuna__East_Bridge__Gate_Button_Gap
+        | SpotId::Annuna__East_Bridge__Upper_West_Gap
+        | SpotId::Annuna__East_Bridge__West_24 => RegionId::Annuna,
         SpotId::Antarctica__West__Helipad
         | SpotId::Antarctica__West__Shed_Entry
         | SpotId::Antarctica__West__Boxes => RegionId::Antarctica,
@@ -2371,6 +2417,7 @@ impl world::Accessible for Location {
             LocationId::Annuna__Mirror_Match__Plinth__Item => true,
             LocationId::Annuna__Mirror_Match__Save_Point__Fight => rules::access_separation(&ctx),
             LocationId::Annuna__Mirror_Match__Waving_Distance__Shockwave_Flask => true,
+            LocationId::Annuna__West_Bridge__Plinth__Item => true,
             LocationId::Antarctica__Building_2__Behind_Boxes__Note => true,
             LocationId::Antarctica__Power_Room__Switch__Flip => true,
             LocationId::Antarctica__Shed__Interior__Shelf => true,
@@ -2817,6 +2864,8 @@ impl world::Accessible for Exit {
             ExitId::Annuna__Mirror_Match__Staircase__ex__Eastward_1 => rules::access_not_separation_or_defeat_indra(&ctx),
             ExitId::Annuna__Mirror_Match__Staircase__ex__Eastward_2 => rules::access_separation_and_not_defeat_indra_and_mist2(&ctx),
             ExitId::Annuna__Mirror_Match__West_25__ex__Uhrum__Annuna_Corridor__East_25_1 => true,
+            ExitId::Annuna__West_Bridge__East_25_Lower__ex__East_Bridge__West_25_Lower_1 => true,
+            ExitId::Annuna__West_Bridge__West_25_Lower__ex__Mirror_Match__East_25_Lower_1 => true,
             ExitId::Antarctica__Building_1E__Connector__ex__Building_1W__Connector_1 => true,
             ExitId::Antarctica__Building_1E__Connector__ex__East_Entry_1 => rules::access_can_damage(&ctx),
             ExitId::Antarctica__Building_1E__East_Entry__ex__East__Building_1_Entry_1 => true,
@@ -3864,6 +3913,8 @@ impl world::Exit for Exit {
             ExitId::Annuna__Mirror_Match__East_26_Lower__ex__West_Bridge__West_26_Lower_1 => true,
             ExitId::Annuna__Mirror_Match__East_26_Upper__ex__West_Bridge__West_26_Upper_1 => true,
             ExitId::Annuna__Mirror_Match__West_25__ex__Uhrum__Annuna_Corridor__East_25_1 => true,
+            ExitId::Annuna__West_Bridge__East_25_Lower__ex__East_Bridge__West_25_Lower_1 => true,
+            ExitId::Annuna__West_Bridge__West_25_Lower__ex__Mirror_Match__East_25_Lower_1 => true,
             ExitId::Antarctica__Building_1E__Connector__ex__Building_1W__Connector_1 => true,
             ExitId::Antarctica__Building_1E__East_Entry__ex__East__Building_1_Entry_1 => true,
             ExitId::Antarctica__Building_1W__Connector__ex__Building_1E__Connector_1 => true,
@@ -4847,7 +4898,7 @@ pub struct Spot {
     pub actions: Range<usize>,
 }
 
-static RAW_SPOTS: [SpotId; 1122] = [
+static RAW_SPOTS: [SpotId; 1145] = [
     SpotId::None,
     SpotId::Amagi__Grid_31_19__East,
     SpotId::Amagi__Grid_31_19__West,
@@ -4940,6 +4991,24 @@ static RAW_SPOTS: [SpotId; 1122] = [
     SpotId::Amagi__West_Lake__West_Cliff,
     SpotId::Amagi__West_Lake__West_Platform,
     SpotId::Amagi__West_Lake__West_Shore,
+    SpotId::Annuna__East_Bridge__Center_Corridor,
+    SpotId::Annuna__East_Bridge__Center_Drop_off,
+    SpotId::Annuna__East_Bridge__Center_Gap_East,
+    SpotId::Annuna__East_Bridge__Center_Gap_West,
+    SpotId::Annuna__East_Bridge__Gate_Button,
+    SpotId::Annuna__East_Bridge__Gate_Button_Gap,
+    SpotId::Annuna__East_Bridge__Upper_Middle_Core,
+    SpotId::Annuna__East_Bridge__Upper_Middle_Gate,
+    SpotId::Annuna__East_Bridge__Upper_Middle_Inner_Corner_East,
+    SpotId::Annuna__East_Bridge__Upper_Middle_Inner_Corner_West,
+    SpotId::Annuna__East_Bridge__Upper_Middle_Opening,
+    SpotId::Annuna__East_Bridge__Upper_West_Gap,
+    SpotId::Annuna__East_Bridge__West_24,
+    SpotId::Annuna__East_Bridge__West_25_Lower,
+    SpotId::Annuna__East_Bridge__West_25_Upper,
+    SpotId::Annuna__East_Bridge__West_Staircase_Lower,
+    SpotId::Annuna__East_Bridge__West_Staircase_Upper_East,
+    SpotId::Annuna__East_Bridge__West_Staircase_Upper_West,
     SpotId::Annuna__Mirror_Match__Below_Switch,
     SpotId::Annuna__Mirror_Match__Central_Pillar,
     SpotId::Annuna__Mirror_Match__East_25_Lower,
@@ -4953,10 +5022,15 @@ static RAW_SPOTS: [SpotId; 1122] = [
     SpotId::Annuna__Mirror_Match__Waving_Distance,
     SpotId::Annuna__Mirror_Match__West_25,
     SpotId::Annuna__Mirror_Match__West_Gap,
+    SpotId::Annuna__West_Bridge__East_24,
+    SpotId::Annuna__West_Bridge__East_25_Lower,
+    SpotId::Annuna__West_Bridge__East_25_Upper,
+    SpotId::Annuna__West_Bridge__Plinth,
     SpotId::Annuna__West_Bridge__West_25_Lower,
     SpotId::Annuna__West_Bridge__West_25_Upper,
     SpotId::Annuna__West_Bridge__West_26_Lower,
     SpotId::Annuna__West_Bridge__West_26_Upper,
+    SpotId::Annuna__West_Bridge__West_Outcropping,
     SpotId::Antarctica__Building_1E__Connector,
     SpotId::Antarctica__Building_1E__East_Entry,
     SpotId::Antarctica__Building_1W__Connector,
@@ -5991,13 +6065,17 @@ lazy_static! {
             start: SpotId::Amagi__West_Lake__Cavern_Back_Teeth.into_usize(),
             end: SpotId::Amagi__West_Lake__West_Shore.into_usize() + 1,
         },
+        AreaId::Annuna__East_Bridge => Range {
+            start: SpotId::Annuna__East_Bridge__Center_Corridor.into_usize(),
+            end: SpotId::Annuna__East_Bridge__West_Staircase_Upper_West.into_usize() + 1,
+        },
         AreaId::Annuna__Mirror_Match => Range {
             start: SpotId::Annuna__Mirror_Match__Below_Switch.into_usize(),
             end: SpotId::Annuna__Mirror_Match__West_Gap.into_usize() + 1,
         },
         AreaId::Annuna__West_Bridge => Range {
-            start: SpotId::Annuna__West_Bridge__West_25_Lower.into_usize(),
-            end: SpotId::Annuna__West_Bridge__West_26_Upper.into_usize() + 1,
+            start: SpotId::Annuna__West_Bridge__East_24.into_usize(),
+            end: SpotId::Annuna__West_Bridge__West_Outcropping.into_usize() + 1,
         },
         AreaId::Antarctica__Building_1E => Range {
             start: SpotId::Antarctica__Building_1E__Connector.into_usize(),
@@ -6508,7 +6586,7 @@ impl world::World for World {
     type Exit = Exit;
     type Action = Action;
     type Warp = Warp;
-    const NUM_LOCATIONS: u32 = 207;
+    const NUM_LOCATIONS: u32 = 208;
 
     fn objective_name(&self) -> String {
         format!("{}", self.objective)
@@ -6796,6 +6874,7 @@ impl world::World for World {
                 LocationId::Giguna__Gubi_Lair__Center_Platform__Boss_Reward,
                 LocationId::Irikar__Boss_Room__Bulls_Feet__Boss_Reward,
             ],
+            Item::Nano_Lattice_2 => vec![LocationId::Annuna__West_Bridge__Plinth__Item],
             Item::Ice_Axe => vec![LocationId::Antarctica__Shed__Interior__Shelf],
             Item::Notes_2053_02_27 => vec![LocationId::Antarctica__Building_2__Behind_Boxes__Note],
             Item::Station_Power => vec![LocationId::Antarctica__Power_Room__Switch__Flip],
@@ -7149,6 +7228,7 @@ impl world::World for World {
             LocationId::Annuna__Mirror_Match__East_26_Upper__Remote_Flask => {
                 SpotId::Annuna__Mirror_Match__East_26_Upper
             }
+            LocationId::Annuna__West_Bridge__Plinth__Item => SpotId::Annuna__West_Bridge__Plinth,
             LocationId::Antarctica__Shed__Interior__Shelf => SpotId::Antarctica__Shed__Interior,
             LocationId::Antarctica__Building_2__Behind_Boxes__Note => {
                 SpotId::Antarctica__Building_2__Behind_Boxes
@@ -7787,6 +7867,8 @@ impl world::World for World {
             ExitId::Annuna__Mirror_Match__East_26_Lower__ex__West_Bridge__West_26_Lower_1 => SpotId::Annuna__Mirror_Match__East_26_Lower,
             ExitId::Annuna__Mirror_Match__East_26_Upper__ex__West_Bridge__West_26_Upper_1 => SpotId::Annuna__Mirror_Match__East_26_Upper,
             ExitId::Annuna__Mirror_Match__East_26_Upper__Remote_Flask => SpotId::Annuna__Mirror_Match__East_26_Upper,
+            ExitId::Annuna__West_Bridge__West_25_Lower__ex__Mirror_Match__East_25_Lower_1 => SpotId::Annuna__West_Bridge__West_25_Lower,
+            ExitId::Annuna__West_Bridge__East_25_Lower__ex__East_Bridge__West_25_Lower_1 => SpotId::Annuna__West_Bridge__East_25_Lower,
             ExitId::Antarctica__West__Shed_Entry__ex__Shed__Interior_1 | ExitId:: Antarctica__West__Shed_Entry__ex__Helipad_1 => SpotId::Antarctica__West__Shed_Entry,
             ExitId::Antarctica__West__Boxes__ex__Building_1W__West_Entry_1 => SpotId::Antarctica__West__Boxes,
             ExitId::Antarctica__Shed__Interior__ex__West__Shed_Entry_1 => SpotId::Antarctica__Shed__Interior,
@@ -8695,6 +8777,9 @@ impl world::World for World {
             | SpotId::Annuna__Mirror_Match__Save_Point
             | SpotId::Annuna__Mirror_Match__Waving_Distance
             | SpotId::Annuna__Mirror_Match__West_25
+            | SpotId::Annuna__West_Bridge__East_25_Lower
+            | SpotId::Annuna__West_Bridge__Plinth
+            | SpotId::Annuna__West_Bridge__West_25_Lower
             | SpotId::Antarctica__Building_1E__Connector
             | SpotId::Antarctica__Building_1E__East_Entry
             | SpotId::Antarctica__Building_1W__Connector
@@ -9253,6 +9338,7 @@ impl World {
                     | Item::Melee_Charge
                     | Item::Melee_Damage_3
                     | Item::Melee_Speed_3
+                    | Item::Nano_Lattice_2
                     | Item::Nano_Points_3
                     | Item::Notes_2053_02_27
                     | Item::Plague_of_Thoughts
@@ -9287,6 +9373,7 @@ impl World {
                     | Item::Melee_Charge
                     | Item::Melee_Damage_3
                     | Item::Melee_Speed_3
+                    | Item::Nano_Lattice_2
                     | Item::Nano_Points_3
                     | Item::Notes_2053_02_27
                     | Item::Plague_of_Thoughts
@@ -9495,6 +9582,14 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
             price: Currency::Free,
             time: 0,
             exit_id: Some(ExitId::Annuna__Mirror_Match__East_26_Upper__Remote_Flask),
+        },
+        LocationId::Annuna__West_Bridge__Plinth__Item => Location {
+            id: LocationId::Annuna__West_Bridge__Plinth__Item,
+            canonical: CanonId::None,
+            item: Item::Nano_Lattice_2,
+            price: Currency::Free,
+            time: 0,
+            exit_id: None,
         },
         LocationId::Antarctica__Shed__Interior__Shelf => Location {
             id: LocationId::Antarctica__Shed__Interior__Shelf,
@@ -11370,6 +11465,20 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
             dest: SpotId::Annuna__Mirror_Match__East_26_Lower,
             price: Currency::Free,
             loc_id: Some(LocationId::Annuna__Mirror_Match__East_26_Upper__Remote_Flask),
+        },
+        ExitId::Annuna__West_Bridge__West_25_Lower__ex__Mirror_Match__East_25_Lower_1 => Exit {
+            id: ExitId::Annuna__West_Bridge__West_25_Lower__ex__Mirror_Match__East_25_Lower_1,
+            time: 1350,
+            dest: SpotId::Annuna__Mirror_Match__East_25_Lower,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__West_Bridge__East_25_Lower__ex__East_Bridge__West_25_Lower_1 => Exit {
+            id: ExitId::Annuna__West_Bridge__East_25_Lower__ex__East_Bridge__West_25_Lower_1,
+            time: 1350,
+            dest: SpotId::Annuna__East_Bridge__West_25_Lower,
+            price: Currency::Free,
+            loc_id: None,
         },
         ExitId::Antarctica__West__Shed_Entry__ex__Shed__Interior_1 => Exit {
             id: ExitId::Antarctica__West__Shed_Entry__ex__Shed__Interior_1,
@@ -20146,7 +20255,8 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             exits: Range {
-                start: 0, end: 0,
+                start: ExitId::Annuna__West_Bridge__West_25_Lower__ex__Mirror_Match__East_25_Lower_1.into_usize(),
+                end: ExitId::Annuna__West_Bridge__West_25_Lower__ex__Mirror_Match__East_25_Lower_1.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
@@ -20154,6 +20264,56 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
         },
         SpotId::Annuna__West_Bridge__West_25_Upper => Spot {
             id: SpotId::Annuna__West_Bridge__West_25_Upper,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__West_Bridge__West_Outcropping => Spot {
+            id: SpotId::Annuna__West_Bridge__West_Outcropping,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__West_Bridge__Plinth => Spot {
+            id: SpotId::Annuna__West_Bridge__Plinth,
+            locations: Range {
+                start: LocationId::Annuna__West_Bridge__Plinth__Item.into_usize(),
+                end: LocationId::Annuna__West_Bridge__Plinth__Item.into_usize() + 1,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__West_Bridge__East_25_Lower => Spot {
+            id: SpotId::Annuna__West_Bridge__East_25_Lower,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Annuna__West_Bridge__East_25_Lower__ex__East_Bridge__West_25_Lower_1.into_usize(),
+                end: ExitId::Annuna__West_Bridge__East_25_Lower__ex__East_Bridge__West_25_Lower_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__West_Bridge__East_25_Upper => Spot {
+            id: SpotId::Annuna__West_Bridge__East_25_Upper,
             locations: Range {
                 start: 0, end: 0,
             },
@@ -20178,6 +20338,234 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
         },
         SpotId::Annuna__West_Bridge__West_26_Upper => Spot {
             id: SpotId::Annuna__West_Bridge__West_26_Upper,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__West_Bridge__East_24 => Spot {
+            id: SpotId::Annuna__West_Bridge__East_24,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__East_Bridge__West_25_Lower => Spot {
+            id: SpotId::Annuna__East_Bridge__West_25_Lower,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__East_Bridge__West_25_Upper => Spot {
+            id: SpotId::Annuna__East_Bridge__West_25_Upper,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__East_Bridge__West_Staircase_Lower => Spot {
+            id: SpotId::Annuna__East_Bridge__West_Staircase_Lower,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__East_Bridge__West_Staircase_Upper_West => Spot {
+            id: SpotId::Annuna__East_Bridge__West_Staircase_Upper_West,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__East_Bridge__West_Staircase_Upper_East => Spot {
+            id: SpotId::Annuna__East_Bridge__West_Staircase_Upper_East,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__East_Bridge__Center_Drop_off => Spot {
+            id: SpotId::Annuna__East_Bridge__Center_Drop_off,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__East_Bridge__Center_Corridor => Spot {
+            id: SpotId::Annuna__East_Bridge__Center_Corridor,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__East_Bridge__Center_Gap_West => Spot {
+            id: SpotId::Annuna__East_Bridge__Center_Gap_West,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__East_Bridge__Center_Gap_East => Spot {
+            id: SpotId::Annuna__East_Bridge__Center_Gap_East,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__East_Bridge__Gate_Button => Spot {
+            id: SpotId::Annuna__East_Bridge__Gate_Button,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__East_Bridge__Upper_Middle_Gate => Spot {
+            id: SpotId::Annuna__East_Bridge__Upper_Middle_Gate,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__East_Bridge__Upper_Middle_Core => Spot {
+            id: SpotId::Annuna__East_Bridge__Upper_Middle_Core,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__East_Bridge__Upper_Middle_Opening => Spot {
+            id: SpotId::Annuna__East_Bridge__Upper_Middle_Opening,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__East_Bridge__Upper_Middle_Inner_Corner_East => Spot {
+            id: SpotId::Annuna__East_Bridge__Upper_Middle_Inner_Corner_East,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__East_Bridge__Upper_Middle_Inner_Corner_West => Spot {
+            id: SpotId::Annuna__East_Bridge__Upper_Middle_Inner_Corner_West,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__East_Bridge__Gate_Button_Gap => Spot {
+            id: SpotId::Annuna__East_Bridge__Gate_Button_Gap,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__East_Bridge__Upper_West_Gap => Spot {
+            id: SpotId::Annuna__East_Bridge__Upper_West_Gap,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__East_Bridge__West_24 => Spot {
+            id: SpotId::Annuna__East_Bridge__West_24,
             locations: Range {
                 start: 0, end: 0,
             },
