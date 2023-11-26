@@ -117,8 +117,6 @@ time:
   # Portals
   portal: 3.6
   exit: 3
-  # spots are technically the same, but in different areas to partition the area map
-  overlap: 0
 
 warps:
   earth_save:
@@ -126,18 +124,15 @@ warps:
     req: WITHIN `Antarctica`
     to: ^save
     loads: true
-  indra_save:
-    time: 14.5
-    req: ^realm == 'main' and Amashilama and ^mode != 'drone'
-    to: ^save
-    after: $refill_energy
-    loads: true
-  drone_save:
+  main_save:
     time: 12
-    req: ^realm == 'main' and ^mode == 'drone'
+    req: ^realm == 'main' and Amashilama
     to: ^save
     after: $refill_energy
     loads: true
+    penalties:
+      - when: ^mode != 'drone'
+        add: 2.5
   breach_save:
     time: 12
     req: ^realm == 'breach'
@@ -187,62 +182,99 @@ warps:
     req: $ft_main and ^map__ebih__ebih_west__mid_save
     to: Ebih > Ebih West > Mid Save
     after: $refill_energy
+    penalties:
+      - when: ^mode != 'drone'
+        add: 2.5
   fast_travel_ebih_west_lower:
     time: 12
     req: $ft_main and ^map__ebih__ebih_west__lower_save
     to: Ebih > Ebih West > Lower Save
     after: $refill_energy
+    penalties:
+      - when: ^mode != 'drone'
+        add: 2.5
   fast_travel_amagi_main_area:
     time: 12
     req: $ft_main and ^map__amagi__main_area__save
     to: Amagi > Main Area > Save Point
     after: $refill_energy
+    penalties:
+      - when: ^mode != 'drone'
+        add: 2.5
   fast_travel_giguna_base:
     time: 12
     req: $ft_main and ^map__giguna__giguna_base__save
     to: Giguna > Giguna Base > Save Point
     after: $refill_energy
+    penalties:
+      - when: ^mode != 'drone'
+        add: 2.5
   fast_travel_giguna_northeast:
     time: 12
     req: $ft_main and ^map__giguna__giguna_northeast__save
     to: Giguna > Giguna Northeast > Save Point
     after: $refill_energy
+    penalties:
+      - when: ^mode != 'drone'
+        add: 2.5
   fast_travel_giguna_ruins_west:
     time: 12
     req: $ft_main and ^map__giguna__ruins_west__save
     to: Giguna > Ruins West > Save Point
     after: $refill_energy
+    penalties:
+      - when: ^mode != 'drone'
+        add: 2.5
   fast_travel_glacier_revival:
     time: 12
     # Amashilama guarantees travel to this point
     req: $ft_main and Amashilama
     to: Glacier > Revival > Save Point
     after: $refill_energy
+    penalties:
+      - when: ^mode != 'drone'
+        add: 2.5
   fast_travel_irikar_hub:
     time: 12
     req: $ft_main and ^map__irikar__hub__save
     to: Irikar > Hub > Save Point
     after: $refill_energy
+    penalties:
+      - when: ^mode != 'drone'
+        add: 2.5
   fast_travel_uhrum_annuna:
     time: 12
     req: $ft_main and ^map__uhrum__annuna_corridor__save
     to: Uhrum > Annuna Corridor > Save Point
     after: $refill_energy
+    penalties:
+      - when: ^mode != 'drone'
+        add: 2.5
   fast_travel_uhrum_save_room:
     time: 12
     req: $ft_main and ^map__uhrum__save_room__save
     to: Uhrum > Save Room > Save Point
     after: $refill_energy
+    penalties:
+      - when: ^mode != 'drone'
+        add: 2.5
   fast_travel_uhrum_west_entrance:
     time: 12
     req: $ft_main and ^map__uhrum__west_entrance__save
     to: Uhrum > West Entrance > Save Point
     after: $refill_energy
+    penalties:
+      - when: ^mode != 'drone'
+        add: 2.5
   fast_travel_uhrum_east:
     time: 12
     req: $ft_main and ^map__uhrum__annuna_corridor__save
     to: Uhrum > Annuna Corridor > Save Point
     after: $refill_energy
+    penalties:
+      - when: ^mode != 'drone'
+        add: 2.5
+  # Fast travel in the breach can't be done as Indra
   fast_travel_giguna_breach_peak:
     time: 12
     req: $ft_breach and ^map__giguna_breach__peak__save

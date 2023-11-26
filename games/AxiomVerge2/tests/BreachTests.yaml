@@ -36,7 +36,7 @@ tests:
     route: |
       ! Do Giguna Breach > Peak > Portal > Portal
       ! Do Recall Drone
-        IndraSaveWarp to Giguna > Ruins Top > Save Point
+        MainSaveWarp to Giguna > Ruins Top > Save Point
       ! Do Giguna > Carnelian > Upper Susar > Caught
       ! Do Giguna > West Caverns > Small Platform > Throw Drone Up
       * Collect Power_Matrix from Giguna > West Caverns > Cache > Item

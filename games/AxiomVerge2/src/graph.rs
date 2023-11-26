@@ -4785,7 +4785,6 @@ impl world::Accessible for Warp {
         ctx.can_afford(&self.price)
             && match self.id {
                 WarpId::BreachSave => rules::access_realm_eq_breach(ctx, world),
-                WarpId::DroneSave => rules::access_realm_eq_main_and_mode_eq_drone(ctx, world),
                 WarpId::EarthSave => rules::access_within_antarctica(ctx, world),
                 WarpId::ExitBreach => {
                     rules::access_realm_eq_breach_and_exit_breach_and___flipside_not_within_default(
@@ -4850,9 +4849,7 @@ impl world::Accessible for Warp {
                 WarpId::FastTravelUhrumWestEntrance => {
                     rules::access_ft_main_and_map__uhrum__west_entrance__save(ctx, world)
                 }
-                WarpId::IndraSave => {
-                    rules::access_realm_eq_main_and_amashilama_and_mode_ne_drone(ctx, world)
-                }
+                WarpId::MainSave => rules::access_realm_eq_main_and_amashilama(ctx, world),
                 WarpId::Menu => rules::access_not_within_menu_and_flasks_gt_0(ctx, world),
             }
     }
@@ -4862,6 +4859,13 @@ impl world::Accessible for Warp {
     fn time(&self, ctx: &Context, world: &World) -> u32 {
         self.time
             + match self.id {
+                WarpId::FastTravelAmagiMainArea => {
+                    if rules::access_mode_ne_drone(ctx, world) {
+                        2500
+                    } else {
+                        0
+                    }
+                }
                 WarpId::FastTravelEbihBaseCamp => {
                     if rules::access_mode_ne_drone(ctx, world) {
                         2500
@@ -4869,7 +4873,91 @@ impl world::Accessible for Warp {
                         0
                     }
                 }
+                WarpId::FastTravelEbihWestLower => {
+                    if rules::access_mode_ne_drone(ctx, world) {
+                        2500
+                    } else {
+                        0
+                    }
+                }
+                WarpId::FastTravelEbihWestMid => {
+                    if rules::access_mode_ne_drone(ctx, world) {
+                        2500
+                    } else {
+                        0
+                    }
+                }
                 WarpId::FastTravelEbihWestUpper => {
+                    if rules::access_mode_ne_drone(ctx, world) {
+                        2500
+                    } else {
+                        0
+                    }
+                }
+                WarpId::FastTravelGigunaBase => {
+                    if rules::access_mode_ne_drone(ctx, world) {
+                        2500
+                    } else {
+                        0
+                    }
+                }
+                WarpId::FastTravelGigunaNortheast => {
+                    if rules::access_mode_ne_drone(ctx, world) {
+                        2500
+                    } else {
+                        0
+                    }
+                }
+                WarpId::FastTravelGigunaRuinsWest => {
+                    if rules::access_mode_ne_drone(ctx, world) {
+                        2500
+                    } else {
+                        0
+                    }
+                }
+                WarpId::FastTravelGlacierRevival => {
+                    if rules::access_mode_ne_drone(ctx, world) {
+                        2500
+                    } else {
+                        0
+                    }
+                }
+                WarpId::FastTravelIrikarHub => {
+                    if rules::access_mode_ne_drone(ctx, world) {
+                        2500
+                    } else {
+                        0
+                    }
+                }
+                WarpId::FastTravelUhrumAnnuna => {
+                    if rules::access_mode_ne_drone(ctx, world) {
+                        2500
+                    } else {
+                        0
+                    }
+                }
+                WarpId::FastTravelUhrumEast => {
+                    if rules::access_mode_ne_drone(ctx, world) {
+                        2500
+                    } else {
+                        0
+                    }
+                }
+                WarpId::FastTravelUhrumSaveRoom => {
+                    if rules::access_mode_ne_drone(ctx, world) {
+                        2500
+                    } else {
+                        0
+                    }
+                }
+                WarpId::FastTravelUhrumWestEntrance => {
+                    if rules::access_mode_ne_drone(ctx, world) {
+                        2500
+                    } else {
+                        0
+                    }
+                }
+                WarpId::MainSave => {
                     if rules::access_mode_ne_drone(ctx, world) {
                         2500
                     } else {
@@ -4894,7 +4982,6 @@ impl world::Warp for Warp {
         if self.dest == SpotId::None {
             match self.id {
                 WarpId::BreachSave => ctx.breach_save(),
-                WarpId::DroneSave => ctx.save(),
                 WarpId::EarthSave => ctx.save(),
                 WarpId::ExitBreach => data::flipside(ctx.position()),
                 WarpId::ExitMenu => ctx.last(),
@@ -4923,7 +5010,7 @@ impl world::Warp for Warp {
                 WarpId::FastTravelUhrumEast => SpotId::Uhrum__Annuna_Corridor__Save_Point,
                 WarpId::FastTravelUhrumSaveRoom => SpotId::Uhrum__Save_Room__Save_Point,
                 WarpId::FastTravelUhrumWestEntrance => SpotId::Uhrum__West_Entrance__Save_Point,
-                WarpId::IndraSave => ctx.save(),
+                WarpId::MainSave => ctx.save(),
                 WarpId::Menu => SpotId::Menu__Upgrade_Menu__Physiology,
             }
         } else {
@@ -4942,7 +5029,6 @@ impl world::Warp for Warp {
     fn postwarp(&self, ctx: &mut Context, world: &World) {
         match self.id {
             WarpId::BreachSave => rules::action_refill_energy(ctx, world),
-            WarpId::DroneSave => rules::action_refill_energy(ctx, world),
             WarpId::ExitBreach => rules::action_clear_breach_save(ctx, world),
             WarpId::ExitMenu => rules::action_last_set_default(ctx, world),
             WarpId::FastTravelAmagiMainArea => rules::action_refill_energy(ctx, world),
@@ -4964,14 +5050,13 @@ impl world::Warp for Warp {
             WarpId::FastTravelUhrumEast => rules::action_refill_energy(ctx, world),
             WarpId::FastTravelUhrumSaveRoom => rules::action_refill_energy(ctx, world),
             WarpId::FastTravelUhrumWestEntrance => rules::action_refill_energy(ctx, world),
-            WarpId::IndraSave => rules::action_refill_energy(ctx, world),
+            WarpId::MainSave => rules::action_refill_energy(ctx, world),
             _ => (),
         }
     }
     fn should_reload(&self) -> bool {
         match self.id {
             WarpId::BreachSave => true,
-            WarpId::DroneSave => true,
             WarpId::EarthSave => true,
             WarpId::ExitBreach => false,
             WarpId::ExitMenu => false,
@@ -4994,7 +5079,7 @@ impl world::Warp for Warp {
             WarpId::FastTravelUhrumEast => false,
             WarpId::FastTravelUhrumSaveRoom => false,
             WarpId::FastTravelUhrumWestEntrance => false,
-            WarpId::IndraSave => true,
+            WarpId::MainSave => true,
             WarpId::Menu => false,
         }
     }
@@ -33790,12 +33875,6 @@ pub fn build_warps() -> EnumMap<WarpId, Warp> {
             time: 12000,
             price: Currency::Free,
         },
-        WarpId::DroneSave => Warp {
-            id: WarpId::DroneSave,
-            dest: SpotId::None,
-            time: 12000,
-            price: Currency::Free,
-        },
         WarpId::EarthSave => Warp {
             id: WarpId::EarthSave,
             dest: SpotId::None,
@@ -33928,10 +34007,10 @@ pub fn build_warps() -> EnumMap<WarpId, Warp> {
             time: 12000,
             price: Currency::Free,
         },
-        WarpId::IndraSave => Warp {
-            id: WarpId::IndraSave,
+        WarpId::MainSave => Warp {
+            id: WarpId::MainSave,
             dest: SpotId::None,
-            time: 14500,
+            time: 12000,
             price: Currency::Free,
         },
         WarpId::Menu => Warp {

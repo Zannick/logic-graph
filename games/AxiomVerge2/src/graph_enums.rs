@@ -12344,7 +12344,6 @@ impl std::str::FromStr for CanonId {
 #[repr(u8)]
 pub enum WarpId {
     BreachSave,
-    DroneSave,
     EarthSave,
     ExitBreach,
     ExitMenu,
@@ -12367,14 +12366,13 @@ pub enum WarpId {
     FastTravelUhrumEast,
     FastTravelUhrumSaveRoom,
     FastTravelUhrumWestEntrance,
-    IndraSave,
+    MainSave,
     Menu,
 }
 impl fmt::Display for WarpId {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         match self {
             WarpId::BreachSave => write!(f, "{}", "BreachSave"),
-            WarpId::DroneSave => write!(f, "{}", "DroneSave"),
             WarpId::EarthSave => write!(f, "{}", "EarthSave"),
             WarpId::ExitBreach => write!(f, "{}", "ExitBreach"),
             WarpId::ExitMenu => write!(f, "{}", "ExitMenu"),
@@ -12403,7 +12401,7 @@ impl fmt::Display for WarpId {
             WarpId::FastTravelUhrumEast => write!(f, "{}", "FastTravelUhrumEast"),
             WarpId::FastTravelUhrumSaveRoom => write!(f, "{}", "FastTravelUhrumSaveRoom"),
             WarpId::FastTravelUhrumWestEntrance => write!(f, "{}", "FastTravelUhrumWestEntrance"),
-            WarpId::IndraSave => write!(f, "{}", "IndraSave"),
+            WarpId::MainSave => write!(f, "{}", "MainSave"),
             WarpId::Menu => write!(f, "{}", "Menu"),
         }
     }
@@ -12415,7 +12413,6 @@ impl std::str::FromStr for WarpId {
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         match s {
             "BreachSave" => Ok(WarpId::BreachSave),
-            "DroneSave" => Ok(WarpId::DroneSave),
             "EarthSave" => Ok(WarpId::EarthSave),
             "ExitBreach" => Ok(WarpId::ExitBreach),
             "ExitMenu" => Ok(WarpId::ExitMenu),
@@ -12438,7 +12435,7 @@ impl std::str::FromStr for WarpId {
             "FastTravelUhrumEast" => Ok(WarpId::FastTravelUhrumEast),
             "FastTravelUhrumSaveRoom" => Ok(WarpId::FastTravelUhrumSaveRoom),
             "FastTravelUhrumWestEntrance" => Ok(WarpId::FastTravelUhrumWestEntrance),
-            "IndraSave" => Ok(WarpId::IndraSave),
+            "MainSave" => Ok(WarpId::MainSave),
             "Menu" => Ok(WarpId::Menu),
             _ => Err(format!("Could not recognize as a WarpId: {}", s)),
         }

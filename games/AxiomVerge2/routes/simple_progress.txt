@@ -46,7 +46,7 @@
 * Collect Flask from Amagi > West Lake > Cavern Rear Pillar > Boss Reward
 * Collect Flask from Amagi > West Lake > Cavern Tear Duct > Remote Flask
 
-  IndraSavewarp to Ebih > Ebih West > Upper Save
+  MainSavewarp to Ebih > Ebih West > Upper Save
 ! Do Ebih > Waterfall > Ledge Below Hole > Throw Drone
 ! Do Ebih > Waterfall > Below Left Switch > Open Door
 ! Do Recall Drone
@@ -54,7 +54,7 @@
 ! Do Ebih > Ebih West > Medium High Platform > Throw Drone Long
 ! Do Giguna > Giguna Northeast > Save Point > Save
 ! Do Recall Drone
-  IndraSavewarp to Giguna > Giguna Northeast > Save Point
+  MainSavewarp to Giguna > Giguna Northeast > Save Point
 ! Do Giguna > Carnelian > Upper Susar > Hack
 ! Do Giguna > West Caverns > Small Platform > Throw Drone Up
 * Collect Power_Matrix from Giguna > West Caverns > Cache > Item
@@ -66,7 +66,7 @@
 * Collect Letter_from_Trace from Interior > Outpost Interior > Bookshelf > Note
 * Collect Researchers_Missing from Giguna > Giguna Base > Table > News
 
-  IndraSavewarp to Giguna > Giguna Northeast > Save Point
+  MainSavewarp to Giguna > Giguna Northeast > Save Point
 ! Do Giguna > Ruins West > Lower Ledge > Hack Kishib
 * Collect Flask from Giguna > Ruins Top > Small Ledge > Shockwave Flask
   Move... to Giguna > Ruins Top > Portal Left
@@ -78,7 +78,7 @@
 ! Do Giguna Breach > Peak > Portal > Portal
 
 ! Do Recall Drone
-  IndraSavewarp to Giguna > Ruins Top > Save Point
+  MainSavewarp to Giguna > Ruins Top > Save Point
 ! Do Giguna > Ruins Top > Turret Balcony West > Throw Drone onto Tower
 * Collect The_Ideal_Kiengir from Giguna > West Tower > Top > Tablet
 * Collect Flask from Giguna > Far Corner > Grass > Obscured Item
@@ -87,7 +87,7 @@
 * Collect Commemorative_Speech from Irikar > Hub > Sat Tower Top Ledge > Tablet
 * Collect Breach_Sight from Irikar > Sight Room > Item Pedestal > Urn
 
-  DroneSavewarp to Irikar > Hub > Save Point
+  MainSavewarp to Irikar > Hub > Save Point
 ! Do Irikar > Hub > Portal Stand > Enter Portal
 * Collect Drone_Hover from Irikar Breach > Hover Room > Bottom > Item
   Move... to Irikar Breach > Save Room > West
