@@ -951,7 +951,7 @@ class GameLogic(object):
                 d[id]['args'] = extra_fields
             return id
 
-        id = construct_id(str(pr.name) if '^_' in str(pr.text) else str(pr.text)).lower()
+        id = construct_id(str(pr.name) if '^_' in str(pr.text) else escape_ops(str(pr.text))).lower()
         if id not in d:
             d[id] = {ruletype: pr}
             if extra_fields:

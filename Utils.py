@@ -27,9 +27,31 @@ BUILTINS = {
     '$collect': 'ctx.collect',
 }
 
+OPS = {
+    '==': 'eq',
+    '!=': 'ne',
+    '>': 'gt',
+    '<': 'lt',
+    '>=': 'ge',
+    '<=': 'lt',
+    '=': 'set',
+    r'\+': 'add',
+    r'\+=': 'incr',
+    '-': 'sub',
+    '-=': 'decr',
+}
+
 disallowed_chars = re.compile(r'[^A-Za-z_0-9]')
 punct = re.compile(r'[,./| -]+')
 nested = re.compile(r'[({\[:]')
+ops = re.compile(r'(?!=)|'.join(OPS.keys()) + r'(?!=)')
+def ops_replace(m):
+    return OPS[re.escape(m.group(0))]
+
+def escape_ops(text: str) -> str:
+    return ops.sub(ops_replace, text)
+
+
 def construct_id(*args: list[str]) -> str:
     return '__'.join(disallowed_chars.sub('', punct.sub('_', s))
                      for a in args

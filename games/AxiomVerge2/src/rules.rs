@@ -1370,41 +1370,37 @@ pub fn access_mist_upgrade(ctx: &Context, world: &World) -> bool {
     // Mist_Upgrade
     ctx.has(Item::Mist_Upgrade)
 }
-pub fn access_mode__drone(ctx: &Context, world: &World) -> bool {
+pub fn access_mode_eq_drone(ctx: &Context, world: &World) -> bool {
     // ^mode == 'drone'
     ctx.mode() == enums::Mode::Drone
 }
-pub fn access_mode__drone7(ctx: &Context, world: &World) -> bool {
-    // ^mode != 'drone'
-    ctx.mode() != enums::Mode::Drone
-}
-pub fn access_mode__drone8(ctx: &Context, world: &World) -> bool {
-    // ^mode != 'drone'
-    ctx.mode() != enums::Mode::Drone
-}
-pub fn access_mode__drone_and_breach_sight(ctx: &Context, world: &World) -> bool {
+pub fn access_mode_eq_drone_and_breach_sight(ctx: &Context, world: &World) -> bool {
     // ^mode == 'drone' and Breach_Sight
     (ctx.mode() == enums::Mode::Drone && ctx.has(Item::Breach_Sight))
 }
-pub fn access_mode__drone_and_ebih_wasteland_passage_h(ctx: &Context, world: &World) -> bool {
+pub fn access_mode_eq_drone_and_ebih_wasteland_passage_h(ctx: &Context, world: &World) -> bool {
     // ^mode == 'drone' and Ebih_Wasteland_Passage_H
     (ctx.mode() == enums::Mode::Drone && ctx.has(Item::Ebih_Wasteland_Passage_H))
 }
-pub fn access_mode__drone_and_ebih_waterfall_block_left(ctx: &Context, world: &World) -> bool {
+pub fn access_mode_eq_drone_and_ebih_waterfall_block_left(ctx: &Context, world: &World) -> bool {
     // ^mode == 'drone' and Ebih_Waterfall_Block_Left
     (ctx.mode() == enums::Mode::Drone && ctx.has(Item::Ebih_Waterfall_Block_Left))
 }
-pub fn access_mode__drone_and_ebih_waterfall_block_right(ctx: &Context, world: &World) -> bool {
+pub fn access_mode_eq_drone_and_ebih_waterfall_block_right(ctx: &Context, world: &World) -> bool {
     // ^mode == 'drone' and Ebih_Waterfall_Block_Right
     (ctx.mode() == enums::Mode::Drone && ctx.has(Item::Ebih_Waterfall_Block_Right))
 }
-pub fn access_mode__drone_and_giguna_dual_path_wall(ctx: &Context, world: &World) -> bool {
+pub fn access_mode_eq_drone_and_giguna_dual_path_wall(ctx: &Context, world: &World) -> bool {
     // ^mode == 'drone' and Giguna_Dual_Path_Wall
     (ctx.mode() == enums::Mode::Drone && ctx.has(Item::Giguna_Dual_Path_Wall))
 }
-pub fn access_mode__drone_and_mist_upgrade(ctx: &Context, world: &World) -> bool {
+pub fn access_mode_eq_drone_and_mist_upgrade(ctx: &Context, world: &World) -> bool {
     // ^mode == 'drone' and Mist_Upgrade
     (ctx.mode() == enums::Mode::Drone && ctx.has(Item::Mist_Upgrade))
+}
+pub fn access_mode_ne_drone(ctx: &Context, world: &World) -> bool {
+    // ^mode != 'drone'
+    ctx.mode() != enums::Mode::Drone
 }
 pub fn access_more_refills(ctx: &Context, world: &World) -> bool {
     // $more_refills
@@ -1454,7 +1450,7 @@ pub fn access_not_separation_or_defeat_indra(ctx: &Context, world: &World) -> bo
     // NOT Separation or Defeat_Indra
     (!ctx.has(Item::Separation) || ctx.has(Item::Defeat_Indra))
 }
-pub fn access_not_within_menu_and_anuman_and_mode__drone(ctx: &Context, world: &World) -> bool {
+pub fn access_not_within_menu_and_anuman_and_mode_ne_drone(ctx: &Context, world: &World) -> bool {
     // NOT WITHIN `Menu` and Anuman and ^mode != 'drone'
     ((!(match get_region(ctx.position()) {
         RegionId::Menu => true,
@@ -1469,14 +1465,14 @@ pub fn access_not_within_menu_and_can_deploy(ctx: &Context, world: &World) -> bo
         _ => false,
     }) && helper__can_deploy!(ctx, world))
 }
-pub fn access_not_within_menu_and_flasks__0(ctx: &Context, world: &World) -> bool {
+pub fn access_not_within_menu_and_flasks_gt_0(ctx: &Context, world: &World) -> bool {
     // NOT WITHIN `Menu` and ^flasks > 0
     (!(match get_region(ctx.position()) {
         RegionId::Menu => true,
         _ => false,
     }) && Into::<i32>::into(ctx.flasks()) > 0.into())
 }
-pub fn access_not_within_menu_and_realm__breach_and_anuman_and_mode__drone(
+pub fn access_not_within_menu_and_realm_ne_breach_and_anuman_and_mode_eq_drone(
     ctx: &Context,
     world: &World,
 ) -> bool {
@@ -1488,7 +1484,7 @@ pub fn access_not_within_menu_and_realm__breach_and_anuman_and_mode__drone(
         && ctx.has(Item::Anuman))
         && ctx.mode() == enums::Mode::Drone)
 }
-pub fn access_not_within_menu_and_realm__breach_and_can_recall(
+pub fn access_not_within_menu_and_realm_ne_breach_and_can_recall(
     ctx: &Context,
     world: &World,
 ) -> bool {
@@ -1547,11 +1543,11 @@ pub fn access_ranged_speed_2(ctx: &Context, world: &World) -> bool {
     // Ranged_Speed_2
     ctx.has(Item::Ranged_Speed_2)
 }
-pub fn access_realm__breach(ctx: &Context, world: &World) -> bool {
+pub fn access_realm_eq_breach(ctx: &Context, world: &World) -> bool {
     // ^realm == 'breach'
     data::realm(ctx.position()) == enums::Realm::Breach
 }
-pub fn access_realm__breach_and_exit_breach_and___flipside_not_within_default(
+pub fn access_realm_eq_breach_and_exit_breach_and___flipside_not_within_default(
     ctx: &Context,
     world: &World,
 ) -> bool {
@@ -1559,12 +1555,12 @@ pub fn access_realm__breach_and_exit_breach_and___flipside_not_within_default(
     ((data::realm(ctx.position()) == enums::Realm::Breach && ctx.has(Item::Exit_Breach))
         && (data::flipside(ctx.position()) != Default::default()))
 }
-pub fn access_realm__main_and_amashilama_and_mode__drone(ctx: &Context, world: &World) -> bool {
+pub fn access_realm_eq_main_and_amashilama_and_mode_ne_drone(ctx: &Context, world: &World) -> bool {
     // ^realm == 'main' and Amashilama and ^mode != 'drone'
     ((data::realm(ctx.position()) == enums::Realm::Main && ctx.has(Item::Amashilama))
         && ctx.mode() != enums::Mode::Drone)
 }
-pub fn access_realm__main_and_mode__drone(ctx: &Context, world: &World) -> bool {
+pub fn access_realm_eq_main_and_mode_eq_drone(ctx: &Context, world: &World) -> bool {
     // ^realm == 'main' and ^mode == 'drone'
     (data::realm(ctx.position()) == enums::Realm::Main && ctx.mode() == enums::Mode::Drone)
 }
@@ -1683,7 +1679,7 @@ pub fn action_clear_breach_save(ctx: &mut Context, world: &World) {
     // $clear_breach_save
     helper__clear_breach_save!(ctx, world);
 }
-pub fn action_collect__irikar_royal_storage_wall_collect__flask_visit__irikar__hub__royal_storage_in_wall__item(
+pub fn action_collect__irikar_royal_storage_wall_collect__flask_visit__irikar_gt_hub_gt_royal_storage_in_wall_gt_item(
     ctx: &mut Context,
     world: &World,
 ) {
@@ -1696,33 +1692,39 @@ pub fn action_deploy_drone(ctx: &mut Context, world: &World) {
     // $deploy_drone
     helper__deploy_drone!(ctx, world);
 }
-pub fn action_deploy_drone_and_move__annuna__east_bridge__center_corridor(
+pub fn action_deploy_drone_and_move__annuna_gt_east_bridge_gt_center_corridor(
     ctx: &mut Context,
     world: &World,
 ) {
     // $deploy_drone_and_move(`Annuna > East Bridge > Center Corridor`)
     helper__deploy_drone_and_move!(ctx, world, SpotId::Annuna__East_Bridge__Center_Corridor);
 }
-pub fn action_deploy_drone_and_move__ebih__drone_room__tree(ctx: &mut Context, world: &World) {
+pub fn action_deploy_drone_and_move__ebih_gt_drone_room_gt_tree(ctx: &mut Context, world: &World) {
     // $deploy_drone_and_move(`Ebih > Drone Room > Tree`)
     helper__deploy_drone_and_move!(ctx, world, SpotId::Ebih__Drone_Room__Tree);
 }
-pub fn action_deploy_drone_and_move__ebih__ebih_west__alcove_entrance(
+pub fn action_deploy_drone_and_move__ebih_gt_ebih_west_gt_alcove_entrance(
     ctx: &mut Context,
     world: &World,
 ) {
     // $deploy_drone_and_move(`Ebih > Ebih West > Alcove Entrance`)
     helper__deploy_drone_and_move!(ctx, world, SpotId::Ebih__Ebih_West__Alcove_Entrance);
 }
-pub fn action_deploy_drone_and_move__giguna__giguna_base__kari(ctx: &mut Context, world: &World) {
+pub fn action_deploy_drone_and_move__giguna_gt_giguna_base_gt_kari(
+    ctx: &mut Context,
+    world: &World,
+) {
     // $deploy_drone_and_move(`Giguna > Giguna Base > Kari`)
     helper__deploy_drone_and_move!(ctx, world, SpotId::Giguna__Giguna_Base__Kari);
 }
-pub fn action_deploy_drone_and_move__giguna__ruins_top__west_7(ctx: &mut Context, world: &World) {
+pub fn action_deploy_drone_and_move__giguna_gt_ruins_top_gt_west_7(
+    ctx: &mut Context,
+    world: &World,
+) {
     // $deploy_drone_and_move(`Giguna > Ruins Top > West 7`)
     helper__deploy_drone_and_move!(ctx, world, SpotId::Giguna__Ruins_Top__West_7);
 }
-pub fn action_deploy_drone_and_move__giguna__wasteland__middle_path(
+pub fn action_deploy_drone_and_move__giguna_gt_wasteland_gt_middle_path(
     ctx: &mut Context,
     world: &World,
 ) {
@@ -1820,11 +1822,11 @@ pub fn action_ebih__waterfall__west_8__open_door__do(ctx: &mut Context, world: &
     // ^_west_door_open = true
     ctx.set_ebih__waterfall__ctx__west_door_open(true);
 }
-pub fn action_flasks__1(ctx: &mut Context, world: &World) {
+pub fn action_flasks_incr_1(ctx: &mut Context, world: &World) {
     // ^flasks += 1
     ctx.flasks += 1;
 }
-pub fn action_flasks__2(ctx: &mut Context, world: &World) {
+pub fn action_flasks_incr_2(ctx: &mut Context, world: &World) {
     // ^flasks += 2
     ctx.flasks += 2;
 }
@@ -2004,7 +2006,7 @@ pub fn action_giguna_breach__sw_save__west_11__open_door__do(ctx: &mut Context, 
     // ^_door_opened = true
     ctx.set_giguna_breach__sw_save__ctx__door_opened(true);
 }
-pub fn action_indra__default(ctx: &mut Context, world: &World) {
+pub fn action_indra_set_default(ctx: &mut Context, world: &World) {
     // ^indra = $default
     ctx.set_indra(Default::default());
 }
@@ -2015,11 +2017,11 @@ pub fn action_irikar__basement_portal__moving_platform_start__activate_platform_
     // ^_platform_moved = true
     ctx.set_irikar__basement_portal__ctx__platform_moved(true);
 }
-pub fn action_last__default(ctx: &mut Context, world: &World) {
+pub fn action_last_set_default(ctx: &mut Context, world: &World) {
     // ^last = $default
     ctx.set_last(Default::default());
 }
-pub fn action_last__position(ctx: &mut Context, world: &World) {
+pub fn action_last_set_position(ctx: &mut Context, world: &World) {
     // ^last = ^position
     ctx.set_last(ctx.position());
 }
@@ -2027,16 +2029,16 @@ pub fn action_main_portal_save_update(ctx: &mut Context, world: &World) {
     // $main_portal_save_update
     helper__main_portal_save_update!(ctx, world);
 }
-pub fn action_mode__drone(ctx: &mut Context, world: &World) {
+pub fn action_mode_set_drone(ctx: &mut Context, world: &World) {
     // ^mode = 'drone'
     ctx.set_mode(enums::Mode::Drone);
 }
-pub fn action_mode__drone_indra__position(ctx: &mut Context, world: &World) {
+pub fn action_mode_set_drone_indra_set_position(ctx: &mut Context, world: &World) {
     // ^mode = 'drone'; ^indra = ^position
     ctx.set_mode(enums::Mode::Drone);
     ctx.set_indra(ctx.position());
 }
-pub fn action_mode__indra(ctx: &mut Context, world: &World) {
+pub fn action_mode_set_indra(ctx: &mut Context, world: &World) {
     // ^mode = 'Indra'
     ctx.set_mode(enums::Mode::Indra);
 }
@@ -2044,7 +2046,7 @@ pub fn action_refill_energy(ctx: &mut Context, world: &World) {
     // $refill_energy
     helper__refill_energy!(ctx, world);
 }
-pub fn action_refills__1(ctx: &mut Context, world: &World) {
+pub fn action_refills_incr_1(ctx: &mut Context, world: &World) {
     // ^refills += 1
     ctx.refills += 1;
 }
@@ -2056,11 +2058,11 @@ pub fn action_save(ctx: &mut Context, world: &World) {
     // $save
     helper__save!(ctx, world);
 }
-pub fn action_save__glacier__revival__save_point(ctx: &mut Context, world: &World) {
+pub fn action_save_set_glacier_gt_revival_gt_save_point(ctx: &mut Context, world: &World) {
     // ^save = `Glacier > Revival > Save Point`
     ctx.set_save(SpotId::Glacier__Revival__Save_Point);
 }
-pub fn action_skip__amagi__west_lake__cavern_refill_station__break_wall_add_item__amagi_dragon_eye_passage(
+pub fn action_skip__amagi_gt_west_lake_gt_cavern_refill_station_gt_break_wall_add_item__amagi_dragon_eye_passage(
     ctx: &mut Context,
     world: &World,
 ) {
@@ -2068,7 +2070,7 @@ pub fn action_skip__amagi__west_lake__cavern_refill_station__break_wall_add_item
     ctx.skip(LocationId::Amagi__West_Lake__Cavern_Refill_Station__Break_Wall);
     ctx.add_item(Item::Amagi_Dragon_Eye_Passage);
 }
-pub fn action_skip__amagi__west_lake__stronghold_ceiling_left__knock_down_left_boulder_add_item__amagi_stronghold_wall_1_add_item__amagi_stronghold_boulder_1(
+pub fn action_skip__amagi_gt_west_lake_gt_stronghold_ceiling_left_gt_knock_down_left_boulder_add_item__amagi_stronghold_wall_1_add_item__amagi_stronghold_boulder_1(
     ctx: &mut Context,
     world: &World,
 ) {
@@ -2077,7 +2079,7 @@ pub fn action_skip__amagi__west_lake__stronghold_ceiling_left__knock_down_left_b
     ctx.add_item(Item::Amagi_Stronghold_Wall_1);
     ctx.add_item(Item::Amagi_Stronghold_Boulder_1);
 }
-pub fn action_skip__amagi__west_lake__stronghold_ceiling_right__knock_down_right_boulder_add_item__amagi_stronghold_wall_2_add_item__amagi_stronghold_boulder_2(
+pub fn action_skip__amagi_gt_west_lake_gt_stronghold_ceiling_right_gt_knock_down_right_boulder_add_item__amagi_stronghold_wall_2_add_item__amagi_stronghold_boulder_2(
     ctx: &mut Context,
     world: &World,
 ) {
@@ -2086,7 +2088,7 @@ pub fn action_skip__amagi__west_lake__stronghold_ceiling_right__knock_down_right
     ctx.add_item(Item::Amagi_Stronghold_Wall_2);
     ctx.add_item(Item::Amagi_Stronghold_Boulder_2);
 }
-pub fn action_skip__ebih__waterfall__alcove__block_left_skip__ebih__waterfall__alcove__block_right_skip__ebih__waterfall__alcove_left__block_left_skip__ebih__waterfall__alcove_right__block_right_add_item__ebih_waterfall_block_right_add_item__ebih_waterfall_block_left(
+pub fn action_skip__ebih_gt_waterfall_gt_alcove_gt_block_left_skip__ebih_gt_waterfall_gt_alcove_gt_block_right_skip__ebih_gt_waterfall_gt_alcove_left_gt_block_left_skip__ebih_gt_waterfall_gt_alcove_right_gt_block_right_add_item__ebih_waterfall_block_right_add_item__ebih_waterfall_block_left(
     ctx: &mut Context,
     world: &World,
 ) {

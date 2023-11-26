@@ -2495,7 +2495,7 @@ impl world::Accessible for Location {
                 rules::access_shockwave(&ctx, world)
             }
             LocationId::Giguna__Dual_Path__Base_of_Wall__Mist_into_Wall => {
-                rules::access_mode__drone_and_mist_upgrade(&ctx, world)
+                rules::access_mode_eq_drone_and_mist_upgrade(&ctx, world)
             }
             LocationId::Giguna__Dual_Path__Below_Left_Switch__Remote_Switch => {
                 rules::access_boomerang(&ctx, world)
@@ -2561,16 +2561,16 @@ impl world::Accessible for Location {
             LocationId::Giguna__Ruins_Top__Small_Ledge__Shockwave_Flask => true,
             LocationId::Giguna__Wasteland__Door_Right__Health => true,
             LocationId::Giguna__Wasteland__Passage_Cache__Clear_Horizontal_Passage_Manually => {
-                rules::access_mode__drone(&ctx, world)
+                rules::access_mode_eq_drone(&ctx, world)
             }
             LocationId::Giguna__Wasteland__Passage_Cache__Mist_through_Horizontal_Passage => {
-                rules::access_mode__drone_and_mist_upgrade(&ctx, world)
+                rules::access_mode_eq_drone_and_mist_upgrade(&ctx, world)
             }
             LocationId::Giguna__Wasteland__Passage_East__Clear_Horizontal_Passage_Manually => {
-                rules::access_mode__drone(&ctx, world)
+                rules::access_mode_eq_drone(&ctx, world)
             }
             LocationId::Giguna__Wasteland__Passage_East__Mist_through_Horizontal_Passage => {
-                rules::access_mode__drone_and_mist_upgrade(&ctx, world)
+                rules::access_mode_eq_drone_and_mist_upgrade(&ctx, world)
             }
             LocationId::Giguna__West_Caverns__Bush__Item => rules::access_more_refills(&ctx, world),
             LocationId::Giguna__West_Caverns__Cache__Item => true,
@@ -2964,8 +2964,8 @@ impl world::Accessible for Exit {
             ExitId::Ebih__Boss_Room__Lower_Tree__ex__Lower_Ledge_1 => rules::access_grab(&ctx, world),
             ExitId::Ebih__Boss_Room__Lower_Tree__ex__Lower_Ledge_2 => rules::access_hook(&ctx, world),
             ExitId::Ebih__Boss_Room__West_6__ex__Grid_21_2_6__East_6_1 => true,
-            ExitId::Ebih__By_Garage__Crawlspace__ex__Crawlspace_Opening_1 => rules::access_mode__drone(&ctx, world),
-            ExitId::Ebih__By_Garage__Crawlspace_Opening__ex__Crawlspace_1 => rules::access_mode__drone(&ctx, world),
+            ExitId::Ebih__By_Garage__Crawlspace__ex__Crawlspace_Opening_1 => rules::access_mode_eq_drone(&ctx, world),
+            ExitId::Ebih__By_Garage__Crawlspace_Opening__ex__Crawlspace_1 => rules::access_mode_eq_drone(&ctx, world),
             ExitId::Ebih__By_Garage__East_13__ex__Base_Camp__West_13_1 => true,
             ExitId::Ebih__By_Garage__East_Platform__ex__Crawlspace_Opening_1 => rules::access_grab(&ctx, world),
             ExitId::Ebih__By_Garage__East_Platform__ex__Crawlspace_Opening_2 => rules::access_hook(&ctx, world),
@@ -2977,14 +2977,14 @@ impl world::Accessible for Exit {
             ExitId::Ebih__By_Garage__Lower_Platform__ex__West_Bush_1 => rules::access_grab_or_climb(&ctx, world),
             ExitId::Ebih__By_Garage__Lower_Platform__ex__West_Bush_2 => rules::access_hook(&ctx, world),
             ExitId::Ebih__By_Garage__West_12__ex__Grid_25_10_12__East_12_1 => true,
-            ExitId::Ebih__Drone_Room__East_4__ex__Grid_25_2_6__West_4_1 => rules::access_mode__drone(&ctx, world),
+            ExitId::Ebih__Drone_Room__East_4__ex__Grid_25_2_6__West_4_1 => rules::access_mode_eq_drone(&ctx, world),
             ExitId::Ebih__Drone_Room__Middle_Platform__ex__Portal_Exit_1 => rules::access_grab(&ctx, world),
             ExitId::Ebih__Drone_Room__Middle_Platform__Urn_Quick_Grab => rules::access_boomerang2(&ctx, world),
             ExitId::Ebih__Drone_Room__Pit_Left__ex__Middle_Platform_1 => rules::access_climb(&ctx, world),
             ExitId::Ebih__Drone_Room__Pit_Left__ex__Middle_Platform_2 => rules::access_hook(&ctx, world),
             ExitId::Ebih__Drone_Room__Pit_Left__ex__West_6_1 => rules::access_climb(&ctx, world),
             ExitId::Ebih__Drone_Room__Pit_Left__ex__West_6_2 => rules::access_hook(&ctx, world),
-            ExitId::Ebih__Drone_Room__Portal__ex__Portal_Exit_1 => rules::access_mode__drone(&ctx, world),
+            ExitId::Ebih__Drone_Room__Portal__ex__Portal_Exit_1 => rules::access_mode_eq_drone(&ctx, world),
             ExitId::Ebih__Drone_Room__Portal_Exit__ex__Moving_Platform_1 => rules::access_ebih__drone_room__portal_exit__ex__moving_platform_1__req(&ctx, world),
             ExitId::Ebih__Drone_Room__Portal_Exit__ex__Moving_Platform_2 => rules::access_ebih__drone_room__portal_exit__ex__moving_platform_2__req(&ctx, world),
             ExitId::Ebih__Drone_Room__West_4__ex__Boss_Room__East_4_1 => true,
@@ -3020,14 +3020,14 @@ impl world::Accessible for Exit {
             ExitId::Ebih__Ebih_West__Giguna_Pillar__ex__Giguna__Giguna_Northeast__Inner_Wall_1 => true,
             ExitId::Ebih__Ebih_West__High_Platform__ex__High_Ledge_1 => rules::access_grab(&ctx, world),
             ExitId::Ebih__Ebih_West__High_Platform__ex__High_Ledge_2 => rules::access_hook(&ctx, world),
-            ExitId::Ebih__Ebih_West__Left_of_Gap__ex__Small_Gap_1 => rules::access_mode__drone(&ctx, world),
+            ExitId::Ebih__Ebih_West__Left_of_Gap__ex__Small_Gap_1 => rules::access_mode_eq_drone(&ctx, world),
             ExitId::Ebih__Ebih_West__Lower_Hill__ex__Left_of_Gap_1 => rules::access_hook(&ctx, world),
             ExitId::Ebih__Ebih_West__Lower_Platform__ex__Lower_Cliff_1 => rules::access_grab(&ctx, world),
             ExitId::Ebih__Ebih_West__Middle_Middle__ex__Above_Chute_1 => rules::access_grab_or_climb(&ctx, world),
             ExitId::Ebih__Ebih_West__Middle_Middle__ex__Above_Chute_2 => rules::access_hook(&ctx, world),
             ExitId::Ebih__Ebih_West__Middle_Middle__ex__East_7_1 => rules::access_grab_or_climb(&ctx, world),
             ExitId::Ebih__Ebih_West__Middle_Middle__ex__East_7_2 => rules::access_hook(&ctx, world),
-            ExitId::Ebih__Ebih_West__Small_Gap__ex__Left_of_Gap_1 => rules::access_mode__drone(&ctx, world),
+            ExitId::Ebih__Ebih_West__Small_Gap__ex__Left_of_Gap_1 => rules::access_mode_eq_drone(&ctx, world),
             ExitId::Ebih__Ebih_West__West_11__ex__Giguna__Giguna_Northeast__East_11_1 => true,
             ExitId::Ebih__Ebih_West__West_12__ex__Giguna__Wasteland__East_12_1 => true,
             ExitId::Ebih__Ebih_West__West_12__ex__West_Fork_1 => rules::access_climb(&ctx, world),
@@ -3053,8 +3053,8 @@ impl world::Accessible for Exit {
             ExitId::Ebih__Grid_25_10_12__Top_Platform__ex__West_10_1 => rules::access_grab(&ctx, world),
             ExitId::Ebih__Grid_25_10_12__West_10__ex__Waterfall__East_10_1 => true,
             ExitId::Ebih__Grid_25_10_12__West_11__ex__Waterfall__East_11_1 => true,
-            ExitId::Ebih__Grid_25_2_6__West_4__ex__Drone_Room__East_4_1 => rules::access_mode__drone(&ctx, world),
-            ExitId::Ebih__Grid_25_2_6__West_4__ex__Pit_1 => rules::access_mode__drone(&ctx, world),
+            ExitId::Ebih__Grid_25_2_6__West_4__ex__Drone_Room__East_4_1 => rules::access_mode_eq_drone(&ctx, world),
+            ExitId::Ebih__Grid_25_2_6__West_4__ex__Pit_1 => rules::access_mode_eq_drone(&ctx, world),
             ExitId::Ebih__Grid_26_10_11__East_10__ex__Observation_Tower_Room__West_10_1 => true,
             ExitId::Ebih__Grid_26_10_11__Ledge__ex__Upper_Platform_1 => rules::access_hover(&ctx, world),
             ExitId::Ebih__Grid_26_10_11__Middle_Bottom__ex__Middle_Platform_1 => rules::access_hover(&ctx, world),
@@ -3099,26 +3099,26 @@ impl world::Accessible for Exit {
             ExitId::Ebih__Vertical_Interchange__Middle_Descent__ex__East_13_1 => rules::access_grab_or_climb(&ctx, world),
             ExitId::Ebih__Vertical_Interchange__Middle_Descent__ex__Passage_East_1 => rules::access_grab_or_climb(&ctx, world),
             ExitId::Ebih__Vertical_Interchange__Passage_East__ex__Door_West_1 => rules::access_climb(&ctx, world),
-            ExitId::Ebih__Vertical_Interchange__Passage_East__ex__Passage_West_1 => rules::access_mode__drone(&ctx, world),
+            ExitId::Ebih__Vertical_Interchange__Passage_East__ex__Passage_West_1 => rules::access_mode_eq_drone(&ctx, world),
             ExitId::Ebih__Vertical_Interchange__Passage_West__ex__Door_West_1 => rules::access_grab_or_climb(&ctx, world),
-            ExitId::Ebih__Vertical_Interchange__Passage_West__ex__Passage_East_1 => rules::access_mode__drone(&ctx, world),
+            ExitId::Ebih__Vertical_Interchange__Passage_West__ex__Passage_East_1 => rules::access_mode_eq_drone(&ctx, world),
             ExitId::Ebih__Vertical_Interchange__Refill_Station__ex__Below_Door_1 => rules::access_ebih_interchange_gate(&ctx, world),
             ExitId::Ebih__Vertical_Interchange__Refill_Station__ex__Cliff_by_Refill_1 => rules::access_climb(&ctx, world),
             ExitId::Ebih__Vertical_Interchange__South__ex__Below_Door_1 => rules::access_hook(&ctx, world),
             ExitId::Ebih__Vertical_Interchange__Switch__ex__Below_Door_1 => rules::access_hook(&ctx, world),
             ExitId::Ebih__Vertical_Interchange__West_13__ex__Ebih_West__East_13_1 => true,
-            ExitId::Ebih__Waterfall__Alcove__ex__Alcove_Left_1 => rules::access_mode__drone_and_ebih_waterfall_block_left(&ctx, world),
+            ExitId::Ebih__Waterfall__Alcove__ex__Alcove_Left_1 => rules::access_mode_eq_drone_and_ebih_waterfall_block_left(&ctx, world),
             ExitId::Ebih__Waterfall__Alcove__ex__Alcove_Left_2 => rules::access_hook_and_not_ebih_waterfall_block_left(&ctx, world),
-            ExitId::Ebih__Waterfall__Alcove__ex__Alcove_Right_1 => rules::access_mode__drone_and_ebih_waterfall_block_right(&ctx, world),
+            ExitId::Ebih__Waterfall__Alcove__ex__Alcove_Right_1 => rules::access_mode_eq_drone_and_ebih_waterfall_block_right(&ctx, world),
             ExitId::Ebih__Waterfall__Alcove__ex__Alcove_Right_2 => rules::access_hook_and_not_ebih_waterfall_block_right(&ctx, world),
-            ExitId::Ebih__Waterfall__Alcove_Left__ex__Alcove_1 => rules::access_mode__drone_and_ebih_waterfall_block_left(&ctx, world),
+            ExitId::Ebih__Waterfall__Alcove_Left__ex__Alcove_1 => rules::access_mode_eq_drone_and_ebih_waterfall_block_left(&ctx, world),
             ExitId::Ebih__Waterfall__Alcove_Left__ex__Alcove_2 => rules::access_block_clip_and_not_ebih_waterfall_block_left(&ctx, world),
             ExitId::Ebih__Waterfall__Alcove_Left__ex__Waterfall_Center_Left_1 => rules::access_grab(&ctx, world),
             ExitId::Ebih__Waterfall__Alcove_Left__ex__Waterfall_Center_Left_2 => rules::access_hook(&ctx, world),
-            ExitId::Ebih__Waterfall__Alcove_Right__ex__Alcove_1 => rules::access_mode__drone_and_ebih_waterfall_block_right(&ctx, world),
+            ExitId::Ebih__Waterfall__Alcove_Right__ex__Alcove_1 => rules::access_mode_eq_drone_and_ebih_waterfall_block_right(&ctx, world),
             ExitId::Ebih__Waterfall__Alcove_Right__ex__Alcove_2 => rules::access_block_clip_and_not_ebih_waterfall_block_right(&ctx, world),
             ExitId::Ebih__Waterfall__Alcove_Right__ex__Waterfall_Center_Right_1 => rules::access_hook(&ctx, world),
-            ExitId::Ebih__Waterfall__Below_Left_Switch__ex__Ledge_Below_Hole_1 => rules::access_mode__drone(&ctx, world),
+            ExitId::Ebih__Waterfall__Below_Left_Switch__ex__Ledge_Below_Hole_1 => rules::access_mode_eq_drone(&ctx, world),
             ExitId::Ebih__Waterfall__Below_Tree__ex__Big_Tree_1 => rules::access_grab(&ctx, world),
             ExitId::Ebih__Waterfall__Below_Tree__ex__Big_Tree_2 => rules::access_hook(&ctx, world),
             ExitId::Ebih__Waterfall__Cave_Entrance__ex__Interior__Ebih_Cave__Entry_1 => true,
@@ -3126,7 +3126,7 @@ impl world::Accessible for Exit {
             ExitId::Ebih__Waterfall__East_11__ex__Grid_25_10_12__West_11_1 => true,
             ExitId::Ebih__Waterfall__East_7__ex__Ebih_East__West_7_1 => true,
             ExitId::Ebih__Waterfall__East_8__ex__Ebih_East__West_8_1 => true,
-            ExitId::Ebih__Waterfall__Ledge_Below_Hole__ex__Below_Left_Switch_1 => rules::access_mode__drone(&ctx, world),
+            ExitId::Ebih__Waterfall__Ledge_Below_Hole__ex__Below_Left_Switch_1 => rules::access_mode_eq_drone(&ctx, world),
             ExitId::Ebih__Waterfall__Ledge_Below_Hole__ex__Middle_West_Tree_1 => rules::access_grab(&ctx, world),
             ExitId::Ebih__Waterfall__Ledge_Below_Hole__ex__Middle_West_Tree_2 => rules::access_hook(&ctx, world),
             ExitId::Ebih__Waterfall__Ledge_Below_Hole__ex__West_Door_Right_1 => rules::access_hook(&ctx, world),
@@ -3191,10 +3191,10 @@ impl world::Accessible for Exit {
             ExitId::Giguna__Clouds__Southeast__ex__Irikar__Hub__Northeast_Above_Bowl_1 => true,
             ExitId::Giguna__Clouds__Southwest__ex__Irikar__Hub__Northwest_1 => true,
             ExitId::Giguna__Clouds__Straight_Down__ex__Irikar__Hub__North_Above_Portal_1 => true,
-            ExitId::Giguna__Dual_Path__Base_of_Wall__ex__Wall_Secret_1 => rules::access_mode__drone_and_giguna_dual_path_wall(&ctx, world),
+            ExitId::Giguna__Dual_Path__Base_of_Wall__ex__Wall_Secret_1 => rules::access_mode_eq_drone_and_giguna_dual_path_wall(&ctx, world),
             ExitId::Giguna__Dual_Path__Base_of_Wall__ex__Wall_Top_1 => rules::access_grab_and_climb(&ctx, world),
             ExitId::Giguna__Dual_Path__Base_of_Wall__ex__Wall_Top_2 => rules::access_hook(&ctx, world),
-            ExitId::Giguna__Dual_Path__Base_of_Wall__Mist_into_Wall => rules::access_mode__drone_and_mist_upgrade(&ctx, world),
+            ExitId::Giguna__Dual_Path__Base_of_Wall__Mist_into_Wall => rules::access_mode_eq_drone_and_mist_upgrade(&ctx, world),
             ExitId::Giguna__Dual_Path__East_17__ex__East_Caverns__West_17_1 => true,
             ExitId::Giguna__Dual_Path__East_18__ex__Gateway__West_18_1 => true,
             ExitId::Giguna__Dual_Path__East_Gate__ex__East_Gate_NW_1 => rules::access_giguna_dual_path_switch_and___grab_or_climb(&ctx, world),
@@ -3205,7 +3205,7 @@ impl world::Accessible for Exit {
             ExitId::Giguna__Dual_Path__In_the_Grass__ex__Wall_Top_2 => rules::access_hook(&ctx, world),
             ExitId::Giguna__Dual_Path__Midway__ex__Midway_Plateau_1 => rules::access_grab_or_climb(&ctx, world),
             ExitId::Giguna__Dual_Path__Midway__ex__Midway_Plateau_2 => rules::access_hook(&ctx, world),
-            ExitId::Giguna__Dual_Path__Wall_Secret__ex__Base_of_Wall_1 => rules::access_mode__drone(&ctx, world),
+            ExitId::Giguna__Dual_Path__Wall_Secret__ex__Base_of_Wall_1 => rules::access_mode_eq_drone(&ctx, world),
             ExitId::Giguna__Dual_Path__West_17__ex__Hard_Rock__East_17_1 => true,
             ExitId::Giguna__Dual_Path__West_18__ex__Lamassu__East_18_1 => true,
             ExitId::Giguna__Dual_Path__West_18__ex__West_Gate_1 => rules::access_grab(&ctx, world),
@@ -3228,8 +3228,8 @@ impl world::Accessible for Exit {
             ExitId::Giguna__East_Caverns__East_Grass__ex__East_17_1 => rules::access_hook(&ctx, world),
             ExitId::Giguna__East_Caverns__East_Side__ex__East_Shaft_1 => rules::access_hook(&ctx, world),
             ExitId::Giguna__East_Caverns__East_Side__ex__Middle_Rock_1 => rules::access_hook(&ctx, world),
-            ExitId::Giguna__East_Caverns__Hidden_Passage_East__ex__Hidden_Passage_Center_1 => rules::access_mode__drone(&ctx, world),
-            ExitId::Giguna__East_Caverns__Hidden_Passage_West__ex__Hidden_Passage_Center_1 => rules::access_mode__drone(&ctx, world),
+            ExitId::Giguna__East_Caverns__Hidden_Passage_East__ex__Hidden_Passage_Center_1 => rules::access_mode_eq_drone(&ctx, world),
+            ExitId::Giguna__East_Caverns__Hidden_Passage_West__ex__Hidden_Passage_Center_1 => rules::access_mode_eq_drone(&ctx, world),
             ExitId::Giguna__East_Caverns__Hidden_Passage_West__ex__Statues_Ledge_1 => rules::access_hover(&ctx, world),
             ExitId::Giguna__East_Caverns__Hidden_Passage_West__ex__Statues_Ledge_2 => rules::access_hook(&ctx, world),
             ExitId::Giguna__East_Caverns__Lower_Ledge__ex__Arc_Ledge_1 => rules::access_grab(&ctx, world),
@@ -3255,8 +3255,8 @@ impl world::Accessible for Exit {
             ExitId::Giguna__East_Caverns__Upper_Floor__ex__West_14_1 => rules::access_grab(&ctx, world),
             ExitId::Giguna__East_Caverns__Upper_Passage_East__ex__Top_Ledge_1 => rules::access_grab_and_climb(&ctx, world),
             ExitId::Giguna__East_Caverns__Upper_Passage_East__ex__Top_Ledge_2 => rules::access_hook(&ctx, world),
-            ExitId::Giguna__East_Caverns__Upper_Passage_East__ex__Upper_Passage_West_1 => rules::access_mode__drone(&ctx, world),
-            ExitId::Giguna__East_Caverns__Upper_Passage_West__ex__Upper_Passage_East_1 => rules::access_mode__drone(&ctx, world),
+            ExitId::Giguna__East_Caverns__Upper_Passage_East__ex__Upper_Passage_West_1 => rules::access_mode_eq_drone(&ctx, world),
+            ExitId::Giguna__East_Caverns__Upper_Passage_West__ex__Upper_Passage_East_1 => rules::access_mode_eq_drone(&ctx, world),
             ExitId::Giguna__East_Caverns__Upper_Platforms_Right__ex__Upper_Passage_West_1 => rules::access_hook_and_hover(&ctx, world),
             ExitId::Giguna__East_Caverns__Upper_Susar__ex__Middle_Ledge_1 => rules::access_giguna__east_caverns__upper_susar__ex__middle_ledge_1__req(&ctx, world),
             ExitId::Giguna__East_Caverns__Upper_Susar__ex__Top_Past_Susar_1 => rules::access_giguna__east_caverns__upper_susar__ex__top_past_susar_1__req(&ctx, world),
@@ -3288,9 +3288,9 @@ impl world::Accessible for Exit {
             ExitId::Giguna__Gateway__Far_Ledge__ex__Right_Platform_1 => rules::access_hook(&ctx, world),
             ExitId::Giguna__Gateway__Left_Platform__ex__Block_Lowered_1 => rules::access_giguna_gateway_block(&ctx, world),
             ExitId::Giguna__Gateway__Passage_Entry__ex__Door_1 => rules::access_giguna__gateway__passage_entry__ex__door_1__req(&ctx, world),
-            ExitId::Giguna__Gateway__Passage_Entry__ex__Passage_Exit_1 => rules::access_mode__drone(&ctx, world),
+            ExitId::Giguna__Gateway__Passage_Entry__ex__Passage_Exit_1 => rules::access_mode_eq_drone(&ctx, world),
             ExitId::Giguna__Gateway__Passage_Exit__ex__Left_Platform_1 => rules::access_hook(&ctx, world),
-            ExitId::Giguna__Gateway__Passage_Exit__ex__Passage_Entry_1 => rules::access_mode__drone(&ctx, world),
+            ExitId::Giguna__Gateway__Passage_Exit__ex__Passage_Entry_1 => rules::access_mode_eq_drone(&ctx, world),
             ExitId::Giguna__Gateway__Refill_Station__ex__Far_Ledge_1 => rules::access_hook(&ctx, world),
             ExitId::Giguna__Gateway__Right_Platform__ex__Far_Ledge_1 => rules::access_hover_or_hook(&ctx, world),
             ExitId::Giguna__Gateway__West_18__ex__Dual_Path__East_18_1 => true,
@@ -3389,9 +3389,9 @@ impl world::Accessible for Exit {
             ExitId::Giguna__Ruins_East__Cliff__ex__Ledge_2 => rules::access_hook(&ctx, world),
             ExitId::Giguna__Ruins_East__East_9__ex__Giguna_Northeast__West_9_1 => true,
             ExitId::Giguna__Ruins_East__Ledge__ex__Pillar_1 => rules::access_grab_and_climb(&ctx, world),
-            ExitId::Giguna__Ruins_East__Ledge__ex__Small_Passage_1 => rules::access_mode__drone(&ctx, world),
+            ExitId::Giguna__Ruins_East__Ledge__ex__Small_Passage_1 => rules::access_mode_eq_drone(&ctx, world),
             ExitId::Giguna__Ruins_East__Pillar__ex__Way_Up_High_1 => rules::access_mist2(&ctx, world),
-            ExitId::Giguna__Ruins_East__Small_Passage__ex__Ledge_1 => rules::access_mode__drone(&ctx, world),
+            ExitId::Giguna__Ruins_East__Small_Passage__ex__Ledge_1 => rules::access_mode_eq_drone(&ctx, world),
             ExitId::Giguna__Ruins_East__West_7__ex__Pillar_1 => rules::access_grab_and_climb(&ctx, world),
             ExitId::Giguna__Ruins_East__West_7__ex__Ruins_Top__East_7_1 => true,
             ExitId::Giguna__Ruins_East__West_8__ex__Ruins_Center__East_8_1 => true,
@@ -3401,7 +3401,7 @@ impl world::Accessible for Exit {
             ExitId::Giguna__Ruins_Top__East_Door__ex__East_7_1 => rules::access_giguna__ruins_top__east_door__ex__east_7_1__req(&ctx, world),
             ExitId::Giguna__Ruins_Top__East_Door__ex__Portal_1 => rules::access_giguna__ruins_top__east_door__ex__portal_1__req(&ctx, world),
             ExitId::Giguna__Ruins_Top__Entryway__ex__West_Door_1 => rules::access_giguna__ruins_top__entryway__ex__west_door_1__req(&ctx, world),
-            ExitId::Giguna__Ruins_Top__Interior_Ledge__ex__Portal_1 => rules::access_mode__drone(&ctx, world),
+            ExitId::Giguna__Ruins_Top__Interior_Ledge__ex__Portal_1 => rules::access_mode_eq_drone(&ctx, world),
             ExitId::Giguna__Ruins_Top__Interior_Ledge__ex__Upper_Tunnel_1 => rules::access_grab_or_hook(&ctx, world),
             ExitId::Giguna__Ruins_Top__Portal__ex__East_Door_1 => rules::access_giguna__ruins_top__portal__ex__east_door_1__req(&ctx, world),
             ExitId::Giguna__Ruins_Top__Portal__ex__Interior_Ledge_1 => rules::access_hook(&ctx, world),
@@ -3436,14 +3436,14 @@ impl world::Accessible for Exit {
             ExitId::Giguna__Wasteland__Lower_Cliff__ex__Middle_Cliff_2 => rules::access_grab(&ctx, world),
             ExitId::Giguna__Wasteland__Lower_Path_Right__ex__Lower_Cliff_1 => rules::access_climb(&ctx, world),
             ExitId::Giguna__Wasteland__Middle_Cliff__ex__Upper_Cliff_1 => rules::access_hook(&ctx, world),
-            ExitId::Giguna__Wasteland__Passage_Cache__Clear_Horizontal_Passage_Manually => rules::access_mode__drone(&ctx, world),
+            ExitId::Giguna__Wasteland__Passage_Cache__Clear_Horizontal_Passage_Manually => rules::access_mode_eq_drone(&ctx, world),
             ExitId::Giguna__Wasteland__Passage_Cache__ex__Lower_Path_Left_1 => rules::access_grab(&ctx, world),
             ExitId::Giguna__Wasteland__Passage_Cache__ex__Lower_Path_Left_2 => rules::access_hook(&ctx, world),
-            ExitId::Giguna__Wasteland__Passage_Cache__ex__Passage_East_1 => rules::access_mode__drone_and_ebih_wasteland_passage_h(&ctx, world),
-            ExitId::Giguna__Wasteland__Passage_Cache__Mist_through_Horizontal_Passage => rules::access_mode__drone_and_mist_upgrade(&ctx, world),
-            ExitId::Giguna__Wasteland__Passage_East__Clear_Horizontal_Passage_Manually => rules::access_mode__drone(&ctx, world),
-            ExitId::Giguna__Wasteland__Passage_East__ex__Passage_Cache_1 => rules::access_mode__drone_and_ebih_wasteland_passage_h(&ctx, world),
-            ExitId::Giguna__Wasteland__Passage_East__Mist_through_Horizontal_Passage => rules::access_mode__drone_and_mist_upgrade(&ctx, world),
+            ExitId::Giguna__Wasteland__Passage_Cache__ex__Passage_East_1 => rules::access_mode_eq_drone_and_ebih_wasteland_passage_h(&ctx, world),
+            ExitId::Giguna__Wasteland__Passage_Cache__Mist_through_Horizontal_Passage => rules::access_mode_eq_drone_and_mist_upgrade(&ctx, world),
+            ExitId::Giguna__Wasteland__Passage_East__Clear_Horizontal_Passage_Manually => rules::access_mode_eq_drone(&ctx, world),
+            ExitId::Giguna__Wasteland__Passage_East__ex__Passage_Cache_1 => rules::access_mode_eq_drone_and_ebih_wasteland_passage_h(&ctx, world),
+            ExitId::Giguna__Wasteland__Passage_East__Mist_through_Horizontal_Passage => rules::access_mode_eq_drone_and_mist_upgrade(&ctx, world),
             ExitId::Giguna__Wasteland__West_12__ex__West_Caverns__East_12_1 => true,
             ExitId::Giguna__Wasteland__West_13__ex__West_Caverns__East_13_1 => true,
             ExitId::Giguna__Wasteland__West_14__ex__Giguna_Base__East_14_1 => true,
@@ -3783,8 +3783,8 @@ impl world::Accessible for Exit {
             ExitId::Uhrum__Siege_Corridor__Northwest_Platform__ex__Western_Cache_1 => rules::access_hover(&ctx, world),
             ExitId::Uhrum__Siege_Corridor__Pond__ex__East_Hill_1 => rules::access_climb(&ctx, world),
             ExitId::Uhrum__Siege_Corridor__Pond__ex__East_Hill_2 => rules::access_hover(&ctx, world),
-            ExitId::Uhrum__Siege_Corridor__Upper_Rock_Item__ex__Upper_Rock_West_1 => rules::access_mode__drone(&ctx, world),
-            ExitId::Uhrum__Siege_Corridor__Upper_Rock_West__ex__Upper_Rock_Item_1 => rules::access_mode__drone(&ctx, world),
+            ExitId::Uhrum__Siege_Corridor__Upper_Rock_Item__ex__Upper_Rock_West_1 => rules::access_mode_eq_drone(&ctx, world),
+            ExitId::Uhrum__Siege_Corridor__Upper_Rock_West__ex__Upper_Rock_Item_1 => rules::access_mode_eq_drone(&ctx, world),
             ExitId::Uhrum__Siege_Corridor__West_26__ex__West_Entrance__East_26_1 => true,
             ExitId::Uhrum__Siege_Corridor__West_Greenery__ex__West_Grassy_Ledge_1 => rules::access_hook(&ctx, world),
             ExitId::Uhrum__Siege_Corridor__Western_Cache__ex__Northwest_Door_1 => rules::access_mist2(&ctx, world),
@@ -3807,9 +3807,9 @@ impl world::Accessible for Exit {
             ExitId::Uhrum__Waterfalls__Below_Block__ex__East_26_1 => rules::access_uhrum_waterfalls_block_and_grab(&ctx, world),
             ExitId::Uhrum__Waterfalls__Below_Block__ex__East_26_2 => rules::access_uhrum_waterfalls_block_and_hook(&ctx, world),
             ExitId::Uhrum__Waterfalls__Below_Block__ex__Small_Rock_1 => rules::access_hover(&ctx, world),
-            ExitId::Uhrum__Waterfalls__Ceiling_Cache__ex__Ceiling_Opening_1 => rules::access_mode__drone(&ctx, world),
+            ExitId::Uhrum__Waterfalls__Ceiling_Cache__ex__Ceiling_Opening_1 => rules::access_mode_eq_drone(&ctx, world),
             ExitId::Uhrum__Waterfalls__Ceiling_Opening__ex__Barrier_West_1 => rules::access_hover(&ctx, world),
-            ExitId::Uhrum__Waterfalls__Ceiling_Opening__ex__Ceiling_Cache_1 => rules::access_mode__drone(&ctx, world),
+            ExitId::Uhrum__Waterfalls__Ceiling_Opening__ex__Ceiling_Cache_1 => rules::access_mode_eq_drone(&ctx, world),
             ExitId::Uhrum__Waterfalls__Ceiling_Opening__ex__West_24_1 => rules::access_hover(&ctx, world),
             ExitId::Uhrum__Waterfalls__Center_Island_East__ex__East_Waters_Edge_1 => rules::access_hover(&ctx, world),
             ExitId::Uhrum__Waterfalls__Center_Island_East__ex__Lower_East_Platform_1 => rules::access_hover(&ctx, world),
@@ -3889,7 +3889,7 @@ impl world::Accessible for Exit {
             ExitId::Uhrum__West_Entrance__South_Platform__ex__Middle_West_Ledge_1 => rules::access_hook(&ctx, world),
             ExitId::Uhrum__West_Entrance__South_Platform__ex__West_27_1 => rules::access_hover(&ctx, world),
             ExitId::Uhrum__West_Entrance__Southeast_Tree__ex__South_Platform_1 => rules::access_hook(&ctx, world),
-            ExitId::Uhrum__West_Entrance__Top_West_Ledge__ex__Hidden_Passage_Entry_1 => rules::access_mode__drone(&ctx, world),
+            ExitId::Uhrum__West_Entrance__Top_West_Ledge__ex__Hidden_Passage_Entry_1 => rules::access_mode_eq_drone(&ctx, world),
             ExitId::Uhrum__West_Entrance__Top_West_Ledge__ex__West_of_Gate_1 => rules::access_hover(&ctx, world),
             ExitId::Uhrum__West_Entrance__Upper_Fork__ex__Upper_Wall_East_1 => rules::access_hook(&ctx, world),
             ExitId::Uhrum__West_Entrance__Upper_Fork__ex__Upper_Wall_East_2 => rules::access_mist2(&ctx, world),
@@ -4473,7 +4473,7 @@ impl world::Accessible for Action {
                     rules::access_giguna__giguna_northeast__switch__open_door__req(&ctx, world)
                 }
                 ActionId::Giguna__Ruins_Top__Portal__Enter_Portal => {
-                    rules::access_mode__drone(&ctx, world)
+                    rules::access_mode_eq_drone(&ctx, world)
                 }
                 ActionId::Giguna__Ruins_Top__Save_Point__Save => true,
                 ActionId::Giguna__Ruins_Top__Switch__Open_Doors => rules::access_open(&ctx, world),
@@ -4507,10 +4507,10 @@ impl world::Accessible for Action {
                 }
                 ActionId::Glacier__Revival__Save_Point__Save => true,
                 ActionId::Global__Become_Drone => {
-                    rules::access_not_within_menu_and_anuman_and_mode__drone(&ctx, world)
+                    rules::access_not_within_menu_and_anuman_and_mode_ne_drone(&ctx, world)
                 }
                 ActionId::Global__Become_Indra => {
-                    rules::access_not_within_menu_and_realm__breach_and_anuman_and_mode__drone(
+                    rules::access_not_within_menu_and_realm_ne_breach_and_anuman_and_mode_eq_drone(
                         &ctx, world,
                     )
                 }
@@ -4518,7 +4518,7 @@ impl world::Accessible for Action {
                     rules::access_not_within_menu_and_can_deploy(&ctx, world)
                 }
                 ActionId::Global__Recall_Drone => {
-                    rules::access_not_within_menu_and_realm__breach_and_can_recall(&ctx, world)
+                    rules::access_not_within_menu_and_realm_ne_breach_and_can_recall(&ctx, world)
                 }
                 ActionId::Interior__Cave_Behind_Waterfall__Middle__Throw_Drone => {
                     rules::access_can_deploy(&ctx, world)
@@ -4527,17 +4527,17 @@ impl world::Accessible for Action {
                     rules::access_activate(&ctx, world)
                 }
                 ActionId::Irikar__Basement_Portal__Portal_Stand__Enter_Portal => {
-                    rules::access_mode__drone_and_breach_sight(&ctx, world)
+                    rules::access_mode_eq_drone_and_breach_sight(&ctx, world)
                 }
                 ActionId::Irikar__Hub__Portal_Stand__Enter_Portal => {
-                    rules::access_mode__drone_and_breach_sight(&ctx, world)
+                    rules::access_mode_eq_drone_and_breach_sight(&ctx, world)
                 }
                 ActionId::Irikar__Hub__Royal_Storage_By_Wall__Shockwave_Wall => {
                     rules::access_not_irikar_royal_storage_wall_and_shockwave(&ctx, world)
                 }
                 ActionId::Irikar__Hub__Save_Point__Save => true,
                 ActionId::Irikar__Sight_Room__Portal__Enter_Portal => {
-                    rules::access_mode__drone_and_breach_sight(&ctx, world)
+                    rules::access_mode_eq_drone_and_breach_sight(&ctx, world)
                 }
                 ActionId::Irikar_Breach__Exit_Corridor__Portal_Stand__Enter_Portal => true,
                 ActionId::Uhrum__Annuna_Corridor__Between_Two_Flowers__Throw_Drone_Not_As_High => {
@@ -4569,14 +4569,14 @@ impl world::Action for Action {
     }
     fn perform(&self, ctx: &mut Context, world: &World) {
         match self.id {
-            ActionId::Global__Recall_Drone => rules::action_mode__indra(ctx, world),
-            ActionId::Global__Deploy_Drone => rules::action_mode__drone_indra__position(ctx, world),
-            ActionId::Global__Become_Drone => rules::action_mode__drone(ctx, world),
-            ActionId::Global__Become_Indra => rules::action_mode__indra(ctx, world),
+            ActionId::Global__Recall_Drone => rules::action_mode_set_indra(ctx, world),
+            ActionId::Global__Deploy_Drone => rules::action_mode_set_drone_indra_set_position(ctx, world),
+            ActionId::Global__Become_Drone => rules::action_mode_set_drone(ctx, world),
+            ActionId::Global__Become_Indra => rules::action_mode_set_indra(ctx, world),
             ActionId::Amagi__Main_Area__Carving__Key_Combo => rules::action_amagi__main_area__carving__key_combo__do(ctx, world),
             ActionId::Amagi__Main_Area__Save_Point__Save => rules::action_save(ctx, world),
             ActionId::Annuna__Mirror_Match__Save_Point__Save => rules::action_save(ctx, world),
-            ActionId::Annuna__East_Bridge__Center_Gap_West__Throw_Drone_into_Tower => rules::action_deploy_drone_and_move__annuna__east_bridge__center_corridor(ctx, world),
+            ActionId::Annuna__East_Bridge__Center_Gap_West__Throw_Drone_into_Tower => rules::action_deploy_drone_and_move__annuna_gt_east_bridge_gt_center_corridor(ctx, world),
             ActionId::Ebih__Base_Camp__Save_Point__Save => rules::action_save(ctx, world),
             ActionId::Ebih__Base_Camp__Left_Platform__Move_Left_Platform => rules::action_ebih__base_camp__left_platform__move_left_platform__do(ctx, world),
             ActionId::Ebih__Base_Camp__Left_Platform_Moved__Reset_Left_Platform => rules::action_ebih__base_camp__left_platform_moved__reset_left_platform__do(ctx, world),
@@ -4587,7 +4587,7 @@ impl world::Action for Action {
             ActionId::Ebih__Waterfall__West_8__Open_Door => rules::action_ebih__waterfall__west_8__open_door__do(ctx, world),
             ActionId::Ebih__Ebih_West__Mid_Save__Save => rules::action_save(ctx, world),
             ActionId::Ebih__Ebih_West__Upper_Save__Save => rules::action_save(ctx, world),
-            ActionId::Ebih__Ebih_West__Medium_High_Platform__Throw_Drone_Long => rules::action_deploy_drone_and_move__ebih__ebih_west__alcove_entrance(ctx, world),
+            ActionId::Ebih__Ebih_West__Medium_High_Platform__Throw_Drone_Long => rules::action_deploy_drone_and_move__ebih_gt_ebih_west_gt_alcove_entrance(ctx, world),
             ActionId::Ebih__Ebih_West__Below_Door__Open_Door => rules::action_ebih__ebih_west__below_door__open_door__do(ctx, world),
             ActionId::Ebih__Ebih_West__Left_of_Switch__Open_Door => rules::action_ebih__ebih_west__left_of_switch__open_door__do(ctx, world),
             ActionId::Ebih__Ebih_West__Lower_Save__Save => rules::action_save(ctx, world),
@@ -4598,7 +4598,7 @@ impl world::Action for Action {
             ActionId::Ebih__Drone_Room__Pit_Left__Activate_Lift => rules::action_ebih__drone_room__pit_left__activate_lift__do(ctx, world),
             ActionId::Ebih__Drone_Room__Pit_Left__Activate_Lift_But_Get_Off_Early => rules::action_ebih__drone_room__pit_left__activate_lift_but_get_off_early__do(ctx, world),
             ActionId::Ebih__Drone_Room__Portal_Exit__Activate_Platform => rules::action_ebih__drone_room__portal_exit__activate_platform__do(ctx, world),
-            ActionId::Ebih__Drone_Room__Moving_Platform__Throw_Drone => rules::action_deploy_drone_and_move__ebih__drone_room__tree(ctx, world),
+            ActionId::Ebih__Drone_Room__Moving_Platform__Throw_Drone => rules::action_deploy_drone_and_move__ebih_gt_drone_room_gt_tree(ctx, world),
             ActionId::Ebih__Vertical_Interchange__West_13__Open_Door => rules::action_ebih__vertical_interchange__west_13__open_door__do(ctx, world),
             ActionId::Giguna_Breach__Peak__Save_Point__Save => rules::action_save(ctx, world),
             ActionId::Giguna_Breach__Peak__Portal__Portal => rules::action_main_portal_save_update(ctx, world),
@@ -4616,8 +4616,8 @@ impl world::Action for Action {
             ActionId::Giguna__West_Caverns__Small_Platform__Throw_Drone_Up => rules::action_deploy_drone(ctx, world),
             ActionId::Giguna__West_Caverns__East_Susar__Caught => rules::action_giguna__west_caverns__east_susar__caught__do(ctx, world),
             ActionId::Giguna__West_Caverns__East_Susar__Hack => rules::action_giguna__west_caverns__east_susar__hack__do(ctx, world),
-            ActionId::Giguna__Wasteland__Middle_Cliff__Throw_Drone => rules::action_deploy_drone_and_move__giguna__wasteland__middle_path(ctx, world),
-            ActionId::Giguna__Giguna_Base__Stone_Knob__Throw_Drone => rules::action_deploy_drone_and_move__giguna__giguna_base__kari(ctx, world),
+            ActionId::Giguna__Wasteland__Middle_Cliff__Throw_Drone => rules::action_deploy_drone_and_move__giguna_gt_wasteland_gt_middle_path(ctx, world),
+            ActionId::Giguna__Giguna_Base__Stone_Knob__Throw_Drone => rules::action_deploy_drone_and_move__giguna_gt_giguna_base_gt_kari(ctx, world),
             ActionId::Giguna__Giguna_Base__Save_Point__Save => rules::action_save(ctx, world),
             ActionId::Giguna__Giguna_Base__Switch_Distance_1__Open_Door => rules::action_giguna__giguna_base__switch_distance_1__open_door__do(ctx, world),
             ActionId::Giguna__Giguna_Base__Switch_Distance_2__Open_Door => rules::action_giguna__giguna_base__switch_distance_2__open_door__do(ctx, world),
@@ -4629,7 +4629,7 @@ impl world::Action for Action {
             ActionId::Giguna__Ruins_Top__Portal__Enter_Portal => rules::action_breach_portal_save_update(ctx, world),
             ActionId::Giguna__Ruins_Top__Save_Point__Save => rules::action_save(ctx, world),
             ActionId::Giguna__Ruins_Top__Switch__Open_Doors => rules::action_giguna__ruins_top__switch__open_doors__do(ctx, world),
-            ActionId::Giguna__Ruins_Top__Turret_Balcony_West__Throw_Drone_onto_Tower => rules::action_deploy_drone_and_move__giguna__ruins_top__west_7(ctx, world),
+            ActionId::Giguna__Ruins_Top__Turret_Balcony_West__Throw_Drone_onto_Tower => rules::action_deploy_drone_and_move__giguna_gt_ruins_top_gt_west_7(ctx, world),
             ActionId::Giguna__Clouds__Platform_Start__Hack_and_Ride_to_Portal => rules::action_giguna__clouds__platform_start__hack_and_ride_to_portal__do(ctx, world),
             ActionId::Giguna__Clouds__Platform_Start__Hack_Deploy_Ride_to_Portal => rules::action_giguna__clouds__platform_start__hack_deploy_ride_to_portal__do(ctx, world),
             ActionId::Giguna__Clouds__Platform_Start__Hack_and_Get_Off_Early => rules::action_giguna__clouds__platform_start__hack_and_get_off_early__do(ctx, world),
@@ -4652,7 +4652,7 @@ impl world::Action for Action {
             ActionId::Irikar_Breach__Exit_Corridor__Portal_Stand__Enter_Portal => rules::action_main_portal_save_update(ctx, world),
             ActionId::Irikar__Hub__Save_Point__Save => rules::action_save(ctx, world),
             ActionId::Irikar__Hub__Portal_Stand__Enter_Portal => rules::action_breach_portal_save_update(ctx, world),
-            ActionId::Irikar__Hub__Royal_Storage_By_Wall__Shockwave_Wall => rules::action_collect__irikar_royal_storage_wall_collect__flask_visit__irikar__hub__royal_storage_in_wall__item(ctx, world),
+            ActionId::Irikar__Hub__Royal_Storage_By_Wall__Shockwave_Wall => rules::action_collect__irikar_royal_storage_wall_collect__flask_visit__irikar_gt_hub_gt_royal_storage_in_wall_gt_item(ctx, world),
             ActionId::Irikar__Sight_Room__Portal__Enter_Portal => rules::action_breach_portal_save_update(ctx, world),
             ActionId::Irikar__Basement_Portal__Moving_Platform_Start__Activate_Platform => rules::action_irikar__basement_portal__moving_platform_start__activate_platform__do(ctx, world),
             ActionId::Irikar__Basement_Portal__Portal_Stand__Enter_Portal => rules::action_breach_portal_save_update(ctx, world),
@@ -4667,7 +4667,7 @@ impl world::Action for Action {
             ctx.set_position(dest, world);
         }
         match self.id {
-            ActionId::Global__Recall_Drone => rules::action_indra__default(ctx, world),
+            ActionId::Global__Recall_Drone => rules::action_indra_set_default(ctx, world),
             ActionId::Irikar_Breach__Exit_Corridor__Portal_Stand__Enter_Portal => {
                 rules::action_clear_breach_save(ctx, world)
             }
@@ -4784,11 +4784,11 @@ impl world::Accessible for Warp {
     fn can_access(&self, ctx: &Context, world: &World) -> bool {
         ctx.can_afford(&self.price)
             && match self.id {
-                WarpId::BreachSave => rules::access_realm__breach(ctx, world),
-                WarpId::DroneSave => rules::access_realm__main_and_mode__drone(ctx, world),
+                WarpId::BreachSave => rules::access_realm_eq_breach(ctx, world),
+                WarpId::DroneSave => rules::access_realm_eq_main_and_mode_eq_drone(ctx, world),
                 WarpId::EarthSave => rules::access_within_antarctica(ctx, world),
                 WarpId::ExitBreach => {
-                    rules::access_realm__breach_and_exit_breach_and___flipside_not_within_default(
+                    rules::access_realm_eq_breach_and_exit_breach_and___flipside_not_within_default(
                         ctx, world,
                     )
                 }
@@ -4851,9 +4851,9 @@ impl world::Accessible for Warp {
                     rules::access_ft_main_and_map__uhrum__west_entrance__save(ctx, world)
                 }
                 WarpId::IndraSave => {
-                    rules::access_realm__main_and_amashilama_and_mode__drone(ctx, world)
+                    rules::access_realm_eq_main_and_amashilama_and_mode_ne_drone(ctx, world)
                 }
-                WarpId::Menu => rules::access_not_within_menu_and_flasks__0(ctx, world),
+                WarpId::Menu => rules::access_not_within_menu_and_flasks_gt_0(ctx, world),
             }
     }
     fn base_time(&self) -> u32 {
@@ -4863,14 +4863,14 @@ impl world::Accessible for Warp {
         self.time
             + match self.id {
                 WarpId::FastTravelEbihBaseCamp => {
-                    if rules::access_mode__drone7(ctx, world) {
+                    if rules::access_mode_ne_drone(ctx, world) {
                         2500
                     } else {
                         0
                     }
                 }
                 WarpId::FastTravelEbihWestUpper => {
-                    if rules::access_mode__drone8(ctx, world) {
+                    if rules::access_mode_ne_drone(ctx, world) {
                         2500
                     } else {
                         0
@@ -4935,7 +4935,7 @@ impl world::Warp for Warp {
     }
     fn prewarp(&self, ctx: &mut Context, world: &World) {
         match self.id {
-            WarpId::Menu => rules::action_last__position(ctx, world),
+            WarpId::Menu => rules::action_last_set_position(ctx, world),
             _ => (),
         }
     }
@@ -4944,7 +4944,7 @@ impl world::Warp for Warp {
             WarpId::BreachSave => rules::action_refill_energy(ctx, world),
             WarpId::DroneSave => rules::action_refill_energy(ctx, world),
             WarpId::ExitBreach => rules::action_clear_breach_save(ctx, world),
-            WarpId::ExitMenu => rules::action_last__default(ctx, world),
+            WarpId::ExitMenu => rules::action_last_set_default(ctx, world),
             WarpId::FastTravelAmagiMainArea => rules::action_refill_energy(ctx, world),
             WarpId::FastTravelEbihBaseCamp => rules::action_refill_energy(ctx, world),
             WarpId::FastTravelEbihWestLower => rules::action_refill_energy(ctx, world),

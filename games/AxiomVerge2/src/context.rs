@@ -1988,21 +1988,21 @@ impl context::Ctx for Context {
             },
             Item::Amashilama => {
                 self.cbits1.insert(flags::ContextBits1::AMASHILAMA);
-                rules::action_save__glacier__revival__save_point(self, world);
+                rules::action_save_set_glacier_gt_revival_gt_save_point(self, world);
             },
             Item::Annuna_Mirror_Match_Switch => {
                 self.cbits1.insert(flags::ContextBits1::ANNUNA_MIRROR_MATCH_SWITCH);
             },
             Item::Anuman => {
                 self.cbits1.insert(flags::ContextBits1::ANUMAN);
-                rules::action_indra__default(self, world);
+                rules::action_indra_set_default(self, world);
             },
             Item::Apocalypse_Bomb => {
                 self.cbits1.insert(flags::ContextBits1::APOCALYPSE_BOMB);
             },
             Item::Big_Flask => {
                 self.cbits1.insert(flags::ContextBits1::BIG_FLASK);
-                rules::action_flasks__2(self, world);
+                rules::action_flasks_incr_2(self, world);
             },
             Item::Boomerang => {
                 self.cbits1.insert(flags::ContextBits1::BOOMERANG);
@@ -2039,7 +2039,7 @@ impl context::Ctx for Context {
             },
             Item::Defeat_MUS_A_M20 => {
                 self.cbits2.insert(flags::ContextBits2::DEFEAT_MUS_A_M20);
-                rules::action_skip__amagi__west_lake__cavern_refill_station__break_wall_add_item__amagi_dragon_eye_passage(self, world);
+                rules::action_skip__amagi_gt_west_lake_gt_cavern_refill_station_gt_break_wall_add_item__amagi_dragon_eye_passage(self, world);
             },
             Item::Drone_Hover => {
                 self.cbits2.insert(flags::ContextBits2::DRONE_HOVER);
@@ -2091,7 +2091,7 @@ impl context::Ctx for Context {
             },
             Item::Flask => {
                 self.flask += 1;
-                rules::action_flasks__1(self, world);
+                rules::action_flasks_incr_1(self, world);
             },
             Item::Giguna_Boulder => {
                 self.cbits2.insert(flags::ContextBits2::GIGUNA_BOULDER);
@@ -2288,10 +2288,10 @@ impl context::Ctx for Context {
             Item::Wall_Climb => {
                 self.cbits3.insert(flags::ContextBits3::WALL_CLIMB);
             },
-            Item::Power_Core => rules::action_refills__1(self, world),
-            Item::Amagi_Stronghold_Wall_And_Boulder_1 => rules::action_skip__amagi__west_lake__stronghold_ceiling_left__knock_down_left_boulder_add_item__amagi_stronghold_wall_1_add_item__amagi_stronghold_boulder_1(self, world),
-            Item::Amagi_Stronghold_Boulder_And_Wall_2 => rules::action_skip__amagi__west_lake__stronghold_ceiling_right__knock_down_right_boulder_add_item__amagi_stronghold_wall_2_add_item__amagi_stronghold_boulder_2(self, world),
-            Item::Ebih_Waterfall_Both_Blocks => rules::action_skip__ebih__waterfall__alcove__block_left_skip__ebih__waterfall__alcove__block_right_skip__ebih__waterfall__alcove_left__block_left_skip__ebih__waterfall__alcove_right__block_right_add_item__ebih_waterfall_block_right_add_item__ebih_waterfall_block_left(self, world),
+            Item::Power_Core => rules::action_refills_incr_1(self, world),
+            Item::Amagi_Stronghold_Wall_And_Boulder_1 => rules::action_skip__amagi_gt_west_lake_gt_stronghold_ceiling_left_gt_knock_down_left_boulder_add_item__amagi_stronghold_wall_1_add_item__amagi_stronghold_boulder_1(self, world),
+            Item::Amagi_Stronghold_Boulder_And_Wall_2 => rules::action_skip__amagi_gt_west_lake_gt_stronghold_ceiling_right_gt_knock_down_right_boulder_add_item__amagi_stronghold_wall_2_add_item__amagi_stronghold_boulder_2(self, world),
+            Item::Ebih_Waterfall_Both_Blocks => rules::action_skip__ebih_gt_waterfall_gt_alcove_gt_block_left_skip__ebih_gt_waterfall_gt_alcove_gt_block_right_skip__ebih_gt_waterfall_gt_alcove_left_gt_block_left_skip__ebih_gt_waterfall_gt_alcove_right_gt_block_right_add_item__ebih_waterfall_block_right_add_item__ebih_waterfall_block_left(self, world),
             _ => (),
         }
     }
