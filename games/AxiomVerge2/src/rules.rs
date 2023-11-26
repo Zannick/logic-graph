@@ -1050,10 +1050,6 @@ pub fn access_melee_speed_2(ctx: &Context) -> bool {
     // Melee_Speed_2
     ctx.has(Item::Melee_Speed_2)
 }
-pub fn access_mirror_match_open(ctx: &Context) -> bool {
-    // ^mirror_match_open
-    ctx.mirror_match_open()
-}
 pub fn access_mist2(ctx: &Context) -> bool {
     // $mist2
     helper__mist2!(ctx)
@@ -1130,6 +1126,10 @@ pub fn access_not_irikar_royal_storage_wall_and_mist_upgrade(ctx: &Context) -> b
 pub fn access_not_irikar_royal_storage_wall_and_shockwave(ctx: &Context) -> bool {
     // not Irikar_Royal_Storage_Wall and $shockwave
     (!ctx.has(Item::Irikar_Royal_Storage_Wall) && helper__shockwave!(ctx))
+}
+pub fn access_not_separation_or_defeat_indra(ctx: &Context) -> bool {
+    // NOT Separation or Defeat_Indra
+    (!ctx.has(Item::Separation) || ctx.has(Item::Defeat_Indra))
 }
 pub fn access_not_within_menu_and_anuman_and_mode__drone(ctx: &Context) -> bool {
     // NOT WITHIN `Menu` and Anuman and ^mode != 'drone'
@@ -1241,6 +1241,14 @@ pub fn access_realm__main_and_mode__drone(ctx: &Context) -> bool {
 pub fn access_remote_drone(ctx: &Context) -> bool {
     // Remote_Drone
     ctx.has(Item::Remote_Drone)
+}
+pub fn access_separation(ctx: &Context) -> bool {
+    // Separation
+    ctx.has(Item::Separation)
+}
+pub fn access_separation_and_not_defeat_indra_and_mist2(ctx: &Context) -> bool {
+    // Separation and NOT Defeat_Indra and $mist2
+    ((ctx.has(Item::Separation) && !ctx.has(Item::Defeat_Indra)) && helper__mist2!(ctx))
 }
 pub fn access_shockwave(ctx: &Context) -> bool {
     // $shockwave
@@ -1616,10 +1624,6 @@ pub fn action_main_portal_save_update(ctx: &mut Context) {
     // $main_portal_save_update
     helper__main_portal_save_update!(ctx);
 }
-pub fn action_mirror_match_open__true(ctx: &mut Context) {
-    // ^mirror_match_open = true
-    ctx.set_mirror_match_open(true);
-}
 pub fn action_mode__drone(ctx: &mut Context) {
     // ^mode = 'drone'
     ctx.set_mode(enums::Mode::Drone);
@@ -1644,17 +1648,6 @@ pub fn action_refills__1(ctx: &mut Context) {
 pub fn action_reset_old_area__newpos(ctx: &mut Context, newpos: SpotId) {
     // $reset_old_area(^newpos)
     helper__reset_old_area!(ctx, newpos);
-}
-pub fn action_reset_old_area__newpos_if___not_anuman____mirror_match_open__true_skip__annuna__mirror_match__save_point__fight_(
-    ctx: &mut Context,
-    newpos: SpotId,
-) {
-    // $reset_old_area(^newpos); IF (NOT Anuman) { ^mirror_match_open = true; $skip(`Annuna > Mirror Match > Save Point > Fight`) }
-    helper__reset_old_area!(ctx, newpos);
-    if !ctx.has(Item::Anuman) {
-        ctx.set_mirror_match_open(true);
-        ctx.skip(LocationId::Annuna__Mirror_Match__Save_Point__Fight);
-    }
 }
 pub fn action_save(ctx: &mut Context) {
     // $save

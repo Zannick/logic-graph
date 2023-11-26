@@ -21,7 +21,6 @@ start:
   last: SpotId::None
   # This should be a load effect? prev_area = $get_area(^position) ?
   prev_area: Antarctica > West
-  mirror_match_open: false
 
 data:
   realm: main
@@ -411,7 +410,6 @@ collect:
   Defeat_MUS_A_M20:
     $skip(`Amagi > West Lake > Cavern Refill Station > Break Wall`);
     $add_item(Amagi_Dragon_Eye_Passage);
-  Defeat_Indra: ^mirror_match_open = true
 
 settings:
   boomerang_steering:

@@ -1182,6 +1182,8 @@ digraph AxiomVerge2 {
     Amagi__West_Lake__West_15 -> Ebih__Vertical_Interchange__East_15;
     Annuna__Mirror_Match__West_25 -> Uhrum__Annuna_Corridor__East_25;
     Annuna__Mirror_Match__Eastward -> Annuna__Mirror_Match__Staircase;
+    Annuna__Mirror_Match__Eastward -> Annuna__Mirror_Match__Staircase;
+    Annuna__Mirror_Match__Staircase -> Annuna__Mirror_Match__Eastward;
     Annuna__Mirror_Match__Staircase -> Annuna__Mirror_Match__Eastward;
     Annuna__Mirror_Match__East_25_Lower -> Annuna__West_Bridge__West_25_Lower;
     Annuna__Mirror_Match__East_25_Upper -> Annuna__West_Bridge__West_25_Upper;

@@ -3,9 +3,7 @@ short: Annuna
 
 areas:
 - name: Mirror Match
-  on_entry: >
-     $reset_old_area(^newpos);
-     IF (NOT Anuman) { ^mirror_match_open = true; $skip(`Annuna > Mirror Match > Save Point > Fight`) }
+  on_entry: $reset_old_area(^newpos)
   map:
     save: [32, 25, 33, 26]
   spots:
@@ -28,10 +26,11 @@ areas:
       locations:
         - name: Fight
           item: Defeat_Indra
+          req: Separation
           time: 30  # ?
       actions:
         - name: Save
-          req: ^mirror_match_open
+          req: NOT Separation or Defeat_Indra
           do: $save
     - name: Eastward
       coord: [32.95, 25.4]
@@ -39,8 +38,12 @@ areas:
         - to: Save Point
       exits:
         - to: Staircase
-          req: ^mirror_match_open
+          req: NOT Separation or Defeat_Indra
           movement: base
+        - to: Staircase
+          req: Separation and NOT Defeat_Indra and $mist2
+          price: 30
+          movement: mist2
     - name: Staircase
       coord: [33.1, 25.4]
       local:
@@ -48,8 +51,12 @@ areas:
           jumps: 4
       exits:
         - to: Eastward
-          req: ^mirror_match_open
+          req: NOT Separation or Defeat_Indra
           movement: base
+        - to: Eastward
+          req: Separation and NOT Defeat_Indra and $mist2
+          price: 30
+          movement: mist2
     - name: East 25 Lower
       coord: [33.95, 24.8]
       local:

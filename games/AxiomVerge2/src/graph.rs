@@ -2369,7 +2369,7 @@ impl world::Accessible for Location {
                 rules::access_boomerang(&ctx)
             }
             LocationId::Annuna__Mirror_Match__Plinth__Item => true,
-            LocationId::Annuna__Mirror_Match__Save_Point__Fight => true,
+            LocationId::Annuna__Mirror_Match__Save_Point__Fight => rules::access_separation(&ctx),
             LocationId::Annuna__Mirror_Match__Waving_Distance__Shockwave_Flask => true,
             LocationId::Antarctica__Building_2__Behind_Boxes__Note => true,
             LocationId::Antarctica__Power_Room__Switch__Flip => true,
@@ -2811,9 +2811,11 @@ impl world::Accessible for Exit {
             ExitId::Annuna__Mirror_Match__East_26_Lower__ex__West_Bridge__West_26_Lower_1 => true,
             ExitId::Annuna__Mirror_Match__East_26_Upper__ex__West_Bridge__West_26_Upper_1 => true,
             ExitId::Annuna__Mirror_Match__East_26_Upper__Remote_Flask => rules::access_boomerang(&ctx),
-            ExitId::Annuna__Mirror_Match__Eastward__ex__Staircase_1 => rules::access_mirror_match_open(&ctx),
+            ExitId::Annuna__Mirror_Match__Eastward__ex__Staircase_1 => rules::access_not_separation_or_defeat_indra(&ctx),
+            ExitId::Annuna__Mirror_Match__Eastward__ex__Staircase_2 => rules::access_separation_and_not_defeat_indra_and_mist2(&ctx),
             ExitId::Annuna__Mirror_Match__Plinth__ex__East_26_Upper_1 => rules::access_hover(&ctx),
-            ExitId::Annuna__Mirror_Match__Staircase__ex__Eastward_1 => rules::access_mirror_match_open(&ctx),
+            ExitId::Annuna__Mirror_Match__Staircase__ex__Eastward_1 => rules::access_not_separation_or_defeat_indra(&ctx),
+            ExitId::Annuna__Mirror_Match__Staircase__ex__Eastward_2 => rules::access_separation_and_not_defeat_indra_and_mist2(&ctx),
             ExitId::Annuna__Mirror_Match__West_25__ex__Uhrum__Annuna_Corridor__East_25_1 => true,
             ExitId::Antarctica__Building_1E__Connector__ex__Building_1W__Connector_1 => true,
             ExitId::Antarctica__Building_1E__Connector__ex__East_Entry_1 => rules::access_can_damage(&ctx),
@@ -4191,7 +4193,7 @@ impl world::Accessible for Action {
                 }
                 ActionId::Amagi__Main_Area__Save_Point__Save => true,
                 ActionId::Annuna__Mirror_Match__Save_Point__Save => {
-                    rules::access_mirror_match_open(&ctx)
+                    rules::access_not_separation_or_defeat_indra(&ctx)
                 }
                 ActionId::Ebih__Base_Camp__Left_Platform__Move_Left_Platform => {
                     rules::access_ebih__base_camp__left_platform__move_left_platform__req(&ctx)
@@ -7775,8 +7777,8 @@ impl world::World for World {
             ExitId::Amagi__West_Lake__Surface_Wall_Left__ex__Surface_Wall_Right_1 => SpotId::Amagi__West_Lake__Surface_Wall_Left,
             ExitId::Amagi__West_Lake__West_15__ex__Ebih__Vertical_Interchange__East_15_1 => SpotId::Amagi__West_Lake__West_15,
             ExitId::Annuna__Mirror_Match__West_25__ex__Uhrum__Annuna_Corridor__East_25_1 => SpotId::Annuna__Mirror_Match__West_25,
-            ExitId::Annuna__Mirror_Match__Eastward__ex__Staircase_1 => SpotId::Annuna__Mirror_Match__Eastward,
-            ExitId::Annuna__Mirror_Match__Staircase__ex__Eastward_1 => SpotId::Annuna__Mirror_Match__Staircase,
+            ExitId::Annuna__Mirror_Match__Eastward__ex__Staircase_1 | ExitId:: Annuna__Mirror_Match__Eastward__ex__Staircase_2 => SpotId::Annuna__Mirror_Match__Eastward,
+            ExitId::Annuna__Mirror_Match__Staircase__ex__Eastward_1 | ExitId:: Annuna__Mirror_Match__Staircase__ex__Eastward_2 => SpotId::Annuna__Mirror_Match__Staircase,
             ExitId::Annuna__Mirror_Match__East_25_Lower__ex__West_Bridge__West_25_Lower_1 => SpotId::Annuna__Mirror_Match__East_25_Lower,
             ExitId::Annuna__Mirror_Match__East_25_Upper__ex__West_Bridge__West_25_Upper_1 => SpotId::Annuna__Mirror_Match__East_25_Upper,
             ExitId::Annuna__Mirror_Match__Below_Switch__ex__Central_Pillar_1 => SpotId::Annuna__Mirror_Match__Below_Switch,
@@ -11278,11 +11280,25 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
             price: Currency::Free,
             loc_id: None,
         },
+        ExitId::Annuna__Mirror_Match__Eastward__ex__Staircase_2 => Exit {
+            id: ExitId::Annuna__Mirror_Match__Eastward__ex__Staircase_2,
+            time: 526,
+            dest: SpotId::Annuna__Mirror_Match__Staircase,
+            price: Currency::Energy(30),
+            loc_id: None,
+        },
         ExitId::Annuna__Mirror_Match__Staircase__ex__Eastward_1 => Exit {
             id: ExitId::Annuna__Mirror_Match__Staircase__ex__Eastward_1,
             time: 526,
             dest: SpotId::Annuna__Mirror_Match__Eastward,
             price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__Mirror_Match__Staircase__ex__Eastward_2 => Exit {
+            id: ExitId::Annuna__Mirror_Match__Staircase__ex__Eastward_2,
+            time: 526,
+            dest: SpotId::Annuna__Mirror_Match__Eastward,
+            price: Currency::Energy(30),
             loc_id: None,
         },
         ExitId::Annuna__Mirror_Match__East_25_Lower__ex__West_Bridge__West_25_Lower_1 => Exit {
@@ -19997,7 +20013,7 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             exits: Range {
                 start: ExitId::Annuna__Mirror_Match__Eastward__ex__Staircase_1.into_usize(),
-                end: ExitId::Annuna__Mirror_Match__Eastward__ex__Staircase_1.into_usize() + 1,
+                end: ExitId::Annuna__Mirror_Match__Eastward__ex__Staircase_2.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
@@ -20010,7 +20026,7 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             exits: Range {
                 start: ExitId::Annuna__Mirror_Match__Staircase__ex__Eastward_1.into_usize(),
-                end: ExitId::Annuna__Mirror_Match__Staircase__ex__Eastward_1.into_usize() + 1,
+                end: ExitId::Annuna__Mirror_Match__Staircase__ex__Eastward_2.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
