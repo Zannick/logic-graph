@@ -132,7 +132,9 @@ subgraph Annuna
     subgraph Annuna__East_Bridge[East Bridge]
         Annuna__East_Bridge__West_25_Lower(West 25 Lower);
         Annuna__East_Bridge__West_25_Upper(West 25 Upper);
-        Annuna__East_Bridge__West_Staircase_Lower(West Staircase Lower);
+        Annuna__East_Bridge__West_Under_Gap(West Under Gap);
+        Annuna__East_Bridge__West_Staircase_Lower_West(West Staircase Lower West);
+        Annuna__East_Bridge__West_Staircase_Lower_East(West Staircase Lower East);
         Annuna__East_Bridge__West_Staircase_Upper_West(West Staircase Upper West);
         Annuna__East_Bridge__West_Staircase_Upper_East(West Staircase Upper East);
         Annuna__East_Bridge__Center_Drop_off(Center Drop-off);
@@ -147,6 +149,7 @@ subgraph Annuna
         Annuna__East_Bridge__Upper_Middle_Inner_Corner_West(Upper Middle Inner Corner West);
         Annuna__East_Bridge__Gate_Button_Gap(Gate Button Gap);
         Annuna__East_Bridge__Upper_West_Gap(Upper West Gap);
+        Annuna__East_Bridge__Upper_West_Gap_East(Upper West Gap East);
         Annuna__East_Bridge__West_24(West 24);
     end
 end
@@ -1452,6 +1455,12 @@ Amagi__West_Lake__Stronghold_Top --> Amagi__West_Lake__Stronghold_Item
 Amagi__West_Lake__Surface_Wall_Left <--> Amagi__West_Lake__Surface_Wall_Right
 Amagi__West_Lake__West_15 <--> Ebih__Vertical_Interchange__East_15
 Amagi__West_Lake__West_Bank --> Amagi__West_Lake__West_Shore
+Annuna__East_Bridge__West_25_Lower --> Annuna__West_Bridge__East_25_Upper
+Annuna__East_Bridge__West_25_Upper --> Annuna__West_Bridge__East_25_Upper
+Annuna__East_Bridge__West_Staircase_Upper_West --> Annuna__East_Bridge__Upper_West_Gap
+Annuna__East_Bridge__West_Staircase_Upper_West --> Annuna__East_Bridge__Upper_West_Gap_East
+Annuna__East_Bridge__West_Under_Gap --> Annuna__East_Bridge__Upper_West_Gap
+Annuna__East_Bridge__West_Under_Gap --> Annuna__East_Bridge__Upper_West_Gap_East
 Annuna__Mirror_Match__Below_Switch <--> Annuna__Mirror_Match__Central_Pillar
 Annuna__Mirror_Match__Central_Pillar --> Annuna__Mirror_Match__Save_Point
 Annuna__Mirror_Match__Central_Pillar --> Annuna__Mirror_Match__West_25

@@ -137,7 +137,9 @@ pub fn get_area(spot: SpotId) -> AreaId {
         | SpotId::Annuna__West_Bridge__East_24 => AreaId::Annuna__West_Bridge,
         SpotId::Annuna__East_Bridge__West_25_Lower
         | SpotId::Annuna__East_Bridge__West_25_Upper
-        | SpotId::Annuna__East_Bridge__West_Staircase_Lower
+        | SpotId::Annuna__East_Bridge__West_Under_Gap
+        | SpotId::Annuna__East_Bridge__West_Staircase_Lower_West
+        | SpotId::Annuna__East_Bridge__West_Staircase_Lower_East
         | SpotId::Annuna__East_Bridge__West_Staircase_Upper_West
         | SpotId::Annuna__East_Bridge__West_Staircase_Upper_East
         | SpotId::Annuna__East_Bridge__Center_Drop_off
@@ -152,6 +154,7 @@ pub fn get_area(spot: SpotId) -> AreaId {
         | SpotId::Annuna__East_Bridge__Upper_Middle_Inner_Corner_West
         | SpotId::Annuna__East_Bridge__Gate_Button_Gap
         | SpotId::Annuna__East_Bridge__Upper_West_Gap
+        | SpotId::Annuna__East_Bridge__Upper_West_Gap_East
         | SpotId::Annuna__East_Bridge__West_24 => AreaId::Annuna__East_Bridge,
         SpotId::Antarctica__West__Helipad
         | SpotId::Antarctica__West__Shed_Entry
@@ -1306,7 +1309,9 @@ pub fn get_region(spot: SpotId) -> RegionId {
         | SpotId::Annuna__West_Bridge__East_24 => RegionId::Annuna,
         SpotId::Annuna__East_Bridge__West_25_Lower
         | SpotId::Annuna__East_Bridge__West_25_Upper
-        | SpotId::Annuna__East_Bridge__West_Staircase_Lower
+        | SpotId::Annuna__East_Bridge__West_Under_Gap
+        | SpotId::Annuna__East_Bridge__West_Staircase_Lower_West
+        | SpotId::Annuna__East_Bridge__West_Staircase_Lower_East
         | SpotId::Annuna__East_Bridge__West_Staircase_Upper_West
         | SpotId::Annuna__East_Bridge__West_Staircase_Upper_East
         | SpotId::Annuna__East_Bridge__Center_Drop_off
@@ -1321,6 +1326,7 @@ pub fn get_region(spot: SpotId) -> RegionId {
         | SpotId::Annuna__East_Bridge__Upper_Middle_Inner_Corner_West
         | SpotId::Annuna__East_Bridge__Gate_Button_Gap
         | SpotId::Annuna__East_Bridge__Upper_West_Gap
+        | SpotId::Annuna__East_Bridge__Upper_West_Gap_East
         | SpotId::Annuna__East_Bridge__West_24 => RegionId::Annuna,
         SpotId::Antarctica__West__Helipad
         | SpotId::Antarctica__West__Shed_Entry
@@ -2849,6 +2855,12 @@ impl world::Accessible for Exit {
             ExitId::Amagi__West_Lake__Surface_Wall_Right__ex__Surface_Wall_Left_1 => rules::access_amagi_west_lake_surface_wall(&ctx),
             ExitId::Amagi__West_Lake__West_15__ex__Ebih__Vertical_Interchange__East_15_1 => true,
             ExitId::Amagi__West_Lake__West_Bank__ex__West_Shore_1 => rules::access_grab_or_climb(&ctx),
+            ExitId::Annuna__East_Bridge__West_25_Lower__ex__West_Bridge__East_25_Upper_1 => true,
+            ExitId::Annuna__East_Bridge__West_25_Upper__ex__West_Bridge__East_25_Upper_1 => true,
+            ExitId::Annuna__East_Bridge__West_Staircase_Upper_West__ex__Upper_West_Gap_1 => rules::access_hook(&ctx),
+            ExitId::Annuna__East_Bridge__West_Staircase_Upper_West__ex__Upper_West_Gap_East_1 => rules::access_hook(&ctx),
+            ExitId::Annuna__East_Bridge__West_Under_Gap__ex__Upper_West_Gap_1 => rules::access_hook(&ctx),
+            ExitId::Annuna__East_Bridge__West_Under_Gap__ex__Upper_West_Gap_East_1 => rules::access_hook(&ctx),
             ExitId::Annuna__Mirror_Match__Below_Switch__ex__Central_Pillar_1 => rules::access_hover_and_hook(&ctx),
             ExitId::Annuna__Mirror_Match__Central_Pillar__ex__Below_Switch_1 => rules::access_hover_and_hook(&ctx),
             ExitId::Annuna__Mirror_Match__Central_Pillar__ex__Save_Point_1 => rules::access_annuna_mirror_match_switch(&ctx),
@@ -3908,6 +3920,8 @@ impl world::Exit for Exit {
             ExitId::Amagi__West_Lake__East_18__ex__Main_Area__West_18_1 => true,
             ExitId::Amagi__West_Lake__East_19__ex__Main_Area__West_19_1 => true,
             ExitId::Amagi__West_Lake__West_15__ex__Ebih__Vertical_Interchange__East_15_1 => true,
+            ExitId::Annuna__East_Bridge__West_25_Lower__ex__West_Bridge__East_25_Upper_1 => true,
+            ExitId::Annuna__East_Bridge__West_25_Upper__ex__West_Bridge__East_25_Upper_1 => true,
             ExitId::Annuna__Mirror_Match__East_25_Lower__ex__West_Bridge__West_25_Lower_1 => true,
             ExitId::Annuna__Mirror_Match__East_25_Upper__ex__West_Bridge__West_25_Upper_1 => true,
             ExitId::Annuna__Mirror_Match__East_26_Lower__ex__West_Bridge__West_26_Lower_1 => true,
@@ -4243,6 +4257,9 @@ impl world::Accessible for Action {
                     rules::access_amagi__main_area__carving__key_combo__req(&ctx)
                 }
                 ActionId::Amagi__Main_Area__Save_Point__Save => true,
+                ActionId::Annuna__East_Bridge__Center_Gap_West__Throw_Drone_into_Tower => {
+                    rules::access_can_deploy_and_slingshot_hook_and_drone_hover(&ctx)
+                }
                 ActionId::Annuna__Mirror_Match__Save_Point__Save => {
                     rules::access_not_separation_or_defeat_indra(&ctx)
                 }
@@ -4494,6 +4511,7 @@ impl world::Action for Action {
             ActionId::Amagi__Main_Area__Carving__Key_Combo => rules::action_amagi__main_area__carving__key_combo__do(ctx),
             ActionId::Amagi__Main_Area__Save_Point__Save => rules::action_save(ctx),
             ActionId::Annuna__Mirror_Match__Save_Point__Save => rules::action_save(ctx),
+            ActionId::Annuna__East_Bridge__Center_Gap_West__Throw_Drone_into_Tower => rules::action_deploy_drone_and_move__annuna__east_bridge__center_corridor(ctx),
             ActionId::Ebih__Base_Camp__Save_Point__Save => rules::action_save(ctx),
             ActionId::Ebih__Base_Camp__Left_Platform__Move_Left_Platform => rules::action_ebih__base_camp__left_platform__move_left_platform__do(ctx),
             ActionId::Ebih__Base_Camp__Left_Platform_Moved__Reset_Left_Platform => rules::action_ebih__base_camp__left_platform_moved__reset_left_platform__do(ctx),
@@ -4594,6 +4612,9 @@ impl world::Action for Action {
     fn dest(&self, ctx: &Context) -> SpotId {
         match self.id {
             ActionId::Global__Recall_Drone => ctx.indra(),
+            ActionId::Annuna__East_Bridge__Center_Gap_West__Throw_Drone_into_Tower => {
+                SpotId::Annuna__East_Bridge__Upper_Middle_Core
+            }
             ActionId::Ebih__Base_Camp__Left_Platform__Move_Left_Platform => {
                 SpotId::Ebih__Base_Camp__Left_Platform_Moved
             }
@@ -4898,7 +4919,7 @@ pub struct Spot {
     pub actions: Range<usize>,
 }
 
-static RAW_SPOTS: [SpotId; 1145] = [
+static RAW_SPOTS: [SpotId; 1148] = [
     SpotId::None,
     SpotId::Amagi__Grid_31_19__East,
     SpotId::Amagi__Grid_31_19__West,
@@ -5003,12 +5024,15 @@ static RAW_SPOTS: [SpotId; 1145] = [
     SpotId::Annuna__East_Bridge__Upper_Middle_Inner_Corner_West,
     SpotId::Annuna__East_Bridge__Upper_Middle_Opening,
     SpotId::Annuna__East_Bridge__Upper_West_Gap,
+    SpotId::Annuna__East_Bridge__Upper_West_Gap_East,
     SpotId::Annuna__East_Bridge__West_24,
     SpotId::Annuna__East_Bridge__West_25_Lower,
     SpotId::Annuna__East_Bridge__West_25_Upper,
-    SpotId::Annuna__East_Bridge__West_Staircase_Lower,
+    SpotId::Annuna__East_Bridge__West_Staircase_Lower_East,
+    SpotId::Annuna__East_Bridge__West_Staircase_Lower_West,
     SpotId::Annuna__East_Bridge__West_Staircase_Upper_East,
     SpotId::Annuna__East_Bridge__West_Staircase_Upper_West,
+    SpotId::Annuna__East_Bridge__West_Under_Gap,
     SpotId::Annuna__Mirror_Match__Below_Switch,
     SpotId::Annuna__Mirror_Match__Central_Pillar,
     SpotId::Annuna__Mirror_Match__East_25_Lower,
@@ -6067,7 +6091,7 @@ lazy_static! {
         },
         AreaId::Annuna__East_Bridge => Range {
             start: SpotId::Annuna__East_Bridge__Center_Corridor.into_usize(),
-            end: SpotId::Annuna__East_Bridge__West_Staircase_Upper_West.into_usize() + 1,
+            end: SpotId::Annuna__East_Bridge__West_Under_Gap.into_usize() + 1,
         },
         AreaId::Annuna__Mirror_Match => Range {
             start: SpotId::Annuna__Mirror_Match__Below_Switch.into_usize(),
@@ -7618,6 +7642,9 @@ impl world::World for World {
             ActionId::Annuna__Mirror_Match__Save_Point__Save => {
                 SpotId::Annuna__Mirror_Match__Save_Point
             }
+            ActionId::Annuna__East_Bridge__Center_Gap_West__Throw_Drone_into_Tower => {
+                SpotId::Annuna__East_Bridge__Center_Gap_West
+            }
             ActionId::Ebih__Base_Camp__Save_Point__Save => SpotId::Ebih__Base_Camp__Save_Point,
             ActionId::Ebih__Base_Camp__Left_Platform__Move_Left_Platform => {
                 SpotId::Ebih__Base_Camp__Left_Platform
@@ -7869,6 +7896,10 @@ impl world::World for World {
             ExitId::Annuna__Mirror_Match__East_26_Upper__Remote_Flask => SpotId::Annuna__Mirror_Match__East_26_Upper,
             ExitId::Annuna__West_Bridge__West_25_Lower__ex__Mirror_Match__East_25_Lower_1 => SpotId::Annuna__West_Bridge__West_25_Lower,
             ExitId::Annuna__West_Bridge__East_25_Lower__ex__East_Bridge__West_25_Lower_1 => SpotId::Annuna__West_Bridge__East_25_Lower,
+            ExitId::Annuna__East_Bridge__West_25_Lower__ex__West_Bridge__East_25_Upper_1 => SpotId::Annuna__East_Bridge__West_25_Lower,
+            ExitId::Annuna__East_Bridge__West_25_Upper__ex__West_Bridge__East_25_Upper_1 => SpotId::Annuna__East_Bridge__West_25_Upper,
+            ExitId::Annuna__East_Bridge__West_Under_Gap__ex__Upper_West_Gap_1 | ExitId:: Annuna__East_Bridge__West_Under_Gap__ex__Upper_West_Gap_East_1 => SpotId::Annuna__East_Bridge__West_Under_Gap,
+            ExitId::Annuna__East_Bridge__West_Staircase_Upper_West__ex__Upper_West_Gap_1 | ExitId:: Annuna__East_Bridge__West_Staircase_Upper_West__ex__Upper_West_Gap_East_1 => SpotId::Annuna__East_Bridge__West_Staircase_Upper_West,
             ExitId::Antarctica__West__Shed_Entry__ex__Shed__Interior_1 | ExitId:: Antarctica__West__Shed_Entry__ex__Helipad_1 => SpotId::Antarctica__West__Shed_Entry,
             ExitId::Antarctica__West__Boxes__ex__Building_1W__West_Entry_1 => SpotId::Antarctica__West__Boxes,
             ExitId::Antarctica__Shed__Interior__ex__West__Shed_Entry_1 => SpotId::Antarctica__Shed__Interior,
@@ -8768,6 +8799,9 @@ impl world::World for World {
             | SpotId::Amagi__West_Lake__Surface_Wall_Left
             | SpotId::Amagi__West_Lake__Surface_Wall_Right
             | SpotId::Amagi__West_Lake__West_15
+            | SpotId::Annuna__East_Bridge__Center_Gap_West
+            | SpotId::Annuna__East_Bridge__West_25_Lower
+            | SpotId::Annuna__East_Bridge__West_25_Upper
             | SpotId::Annuna__Mirror_Match__Below_Switch
             | SpotId::Annuna__Mirror_Match__East_25_Lower
             | SpotId::Annuna__Mirror_Match__East_25_Upper
@@ -11477,6 +11511,48 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
             id: ExitId::Annuna__West_Bridge__East_25_Lower__ex__East_Bridge__West_25_Lower_1,
             time: 1350,
             dest: SpotId::Annuna__East_Bridge__West_25_Lower,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__East_Bridge__West_25_Lower__ex__West_Bridge__East_25_Upper_1 => Exit {
+            id: ExitId::Annuna__East_Bridge__West_25_Lower__ex__West_Bridge__East_25_Upper_1,
+            time: 1350,
+            dest: SpotId::Annuna__West_Bridge__East_25_Upper,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__East_Bridge__West_25_Upper__ex__West_Bridge__East_25_Upper_1 => Exit {
+            id: ExitId::Annuna__East_Bridge__West_25_Upper__ex__West_Bridge__East_25_Upper_1,
+            time: 1350,
+            dest: SpotId::Annuna__West_Bridge__East_25_Upper,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__East_Bridge__West_Under_Gap__ex__Upper_West_Gap_1 => Exit {
+            id: ExitId::Annuna__East_Bridge__West_Under_Gap__ex__Upper_West_Gap_1,
+            time: 1200,
+            dest: SpotId::Annuna__East_Bridge__Upper_West_Gap,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__East_Bridge__West_Under_Gap__ex__Upper_West_Gap_East_1 => Exit {
+            id: ExitId::Annuna__East_Bridge__West_Under_Gap__ex__Upper_West_Gap_East_1,
+            time: 1200,
+            dest: SpotId::Annuna__East_Bridge__Upper_West_Gap_East,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__East_Bridge__West_Staircase_Upper_West__ex__Upper_West_Gap_1 => Exit {
+            id: ExitId::Annuna__East_Bridge__West_Staircase_Upper_West__ex__Upper_West_Gap_1,
+            time: 1200,
+            dest: SpotId::Annuna__East_Bridge__Upper_West_Gap,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__East_Bridge__West_Staircase_Upper_West__ex__Upper_West_Gap_East_1 => Exit {
+            id: ExitId::Annuna__East_Bridge__West_Staircase_Upper_West__ex__Upper_West_Gap_East_1,
+            time: 1200,
+            dest: SpotId::Annuna__East_Bridge__Upper_West_Gap_East,
             price: Currency::Free,
             loc_id: None,
         },
@@ -18506,6 +18582,11 @@ pub fn build_actions() -> EnumMap<ActionId, Action> {
             time: 1000,
             price: Currency::Free,
         },
+        ActionId::Annuna__East_Bridge__Center_Gap_West__Throw_Drone_into_Tower => Action {
+            id: ActionId::Annuna__East_Bridge__Center_Gap_West__Throw_Drone_into_Tower,
+            time: 2500,
+            price: Currency::Free,
+        },
         ActionId::Ebih__Base_Camp__Save_Point__Save => Action {
             id: ActionId::Ebih__Base_Camp__Save_Point__Save,
             time: 1300,
@@ -20366,7 +20447,8 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             exits: Range {
-                start: 0, end: 0,
+                start: ExitId::Annuna__East_Bridge__West_25_Lower__ex__West_Bridge__East_25_Upper_1.into_usize(),
+                end: ExitId::Annuna__East_Bridge__West_25_Lower__ex__West_Bridge__East_25_Upper_1.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
@@ -20378,14 +20460,40 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             exits: Range {
+                start: ExitId::Annuna__East_Bridge__West_25_Upper__ex__West_Bridge__East_25_Upper_1.into_usize(),
+                end: ExitId::Annuna__East_Bridge__West_25_Upper__ex__West_Bridge__East_25_Upper_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__East_Bridge__West_Under_Gap => Spot {
+            id: SpotId::Annuna__East_Bridge__West_Under_Gap,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Annuna__East_Bridge__West_Under_Gap__ex__Upper_West_Gap_1.into_usize(),
+                end: ExitId::Annuna__East_Bridge__West_Under_Gap__ex__Upper_West_Gap_East_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__East_Bridge__West_Staircase_Lower_West => Spot {
+            id: SpotId::Annuna__East_Bridge__West_Staircase_Lower_West,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
                 start: 0, end: 0,
             },
             actions: Range {
                 start: 0, end: 0,
             },
         },
-        SpotId::Annuna__East_Bridge__West_Staircase_Lower => Spot {
-            id: SpotId::Annuna__East_Bridge__West_Staircase_Lower,
+        SpotId::Annuna__East_Bridge__West_Staircase_Lower_East => Spot {
+            id: SpotId::Annuna__East_Bridge__West_Staircase_Lower_East,
             locations: Range {
                 start: 0, end: 0,
             },
@@ -20402,7 +20510,8 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             exits: Range {
-                start: 0, end: 0,
+                start: ExitId::Annuna__East_Bridge__West_Staircase_Upper_West__ex__Upper_West_Gap_1.into_usize(),
+                end: ExitId::Annuna__East_Bridge__West_Staircase_Upper_West__ex__Upper_West_Gap_East_1.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
@@ -20453,7 +20562,8 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             actions: Range {
-                start: 0, end: 0,
+                start: ActionId::Annuna__East_Bridge__Center_Gap_West__Throw_Drone_into_Tower.into_usize(),
+                end: ActionId::Annuna__East_Bridge__Center_Gap_West__Throw_Drone_into_Tower.into_usize() + 1,
             },
         },
         SpotId::Annuna__East_Bridge__Center_Gap_East => Spot {
@@ -20554,6 +20664,18 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
         },
         SpotId::Annuna__East_Bridge__Upper_West_Gap => Spot {
             id: SpotId::Annuna__East_Bridge__Upper_West_Gap,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__East_Bridge__Upper_West_Gap_East => Spot {
+            id: SpotId::Annuna__East_Bridge__Upper_West_Gap_East,
             locations: Range {
                 start: 0, end: 0,
             },

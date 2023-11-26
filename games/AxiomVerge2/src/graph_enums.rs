@@ -632,12 +632,15 @@ pub enum SpotId {
     Annuna__East_Bridge__Upper_Middle_Inner_Corner_West,
     Annuna__East_Bridge__Upper_Middle_Opening,
     Annuna__East_Bridge__Upper_West_Gap,
+    Annuna__East_Bridge__Upper_West_Gap_East,
     Annuna__East_Bridge__West_24,
     Annuna__East_Bridge__West_25_Lower,
     Annuna__East_Bridge__West_25_Upper,
-    Annuna__East_Bridge__West_Staircase_Lower,
+    Annuna__East_Bridge__West_Staircase_Lower_East,
+    Annuna__East_Bridge__West_Staircase_Lower_West,
     Annuna__East_Bridge__West_Staircase_Upper_East,
     Annuna__East_Bridge__West_Staircase_Upper_West,
+    Annuna__East_Bridge__West_Under_Gap,
     Annuna__Mirror_Match__Below_Switch,
     Annuna__Mirror_Match__Central_Pillar,
     Annuna__Mirror_Match__East_25_Lower,
@@ -1943,6 +1946,9 @@ impl fmt::Display for SpotId {
             SpotId::Annuna__East_Bridge__Upper_West_Gap => {
                 write!(f, "{}", "Annuna > East Bridge > Upper West Gap")
             }
+            SpotId::Annuna__East_Bridge__Upper_West_Gap_East => {
+                write!(f, "{}", "Annuna > East Bridge > Upper West Gap East")
+            }
             SpotId::Annuna__East_Bridge__West_24 => {
                 write!(f, "{}", "Annuna > East Bridge > West 24")
             }
@@ -1952,14 +1958,20 @@ impl fmt::Display for SpotId {
             SpotId::Annuna__East_Bridge__West_25_Upper => {
                 write!(f, "{}", "Annuna > East Bridge > West 25 Upper")
             }
-            SpotId::Annuna__East_Bridge__West_Staircase_Lower => {
-                write!(f, "{}", "Annuna > East Bridge > West Staircase Lower")
+            SpotId::Annuna__East_Bridge__West_Staircase_Lower_East => {
+                write!(f, "{}", "Annuna > East Bridge > West Staircase Lower East")
+            }
+            SpotId::Annuna__East_Bridge__West_Staircase_Lower_West => {
+                write!(f, "{}", "Annuna > East Bridge > West Staircase Lower West")
             }
             SpotId::Annuna__East_Bridge__West_Staircase_Upper_East => {
                 write!(f, "{}", "Annuna > East Bridge > West Staircase Upper East")
             }
             SpotId::Annuna__East_Bridge__West_Staircase_Upper_West => {
                 write!(f, "{}", "Annuna > East Bridge > West Staircase Upper West")
+            }
+            SpotId::Annuna__East_Bridge__West_Under_Gap => {
+                write!(f, "{}", "Annuna > East Bridge > West Under Gap")
             }
             SpotId::Annuna__Mirror_Match__Below_Switch => {
                 write!(f, "{}", "Annuna > Mirror Match > Below Switch")
@@ -4774,6 +4786,9 @@ impl std::str::FromStr for SpotId {
             "Annuna > East Bridge > Upper West Gap" => {
                 Ok(SpotId::Annuna__East_Bridge__Upper_West_Gap)
             }
+            "Annuna > East Bridge > Upper West Gap East" => {
+                Ok(SpotId::Annuna__East_Bridge__Upper_West_Gap_East)
+            }
             "Annuna > East Bridge > West 24" => Ok(SpotId::Annuna__East_Bridge__West_24),
             "Annuna > East Bridge > West 25 Lower" => {
                 Ok(SpotId::Annuna__East_Bridge__West_25_Lower)
@@ -4781,14 +4796,20 @@ impl std::str::FromStr for SpotId {
             "Annuna > East Bridge > West 25 Upper" => {
                 Ok(SpotId::Annuna__East_Bridge__West_25_Upper)
             }
-            "Annuna > East Bridge > West Staircase Lower" => {
-                Ok(SpotId::Annuna__East_Bridge__West_Staircase_Lower)
+            "Annuna > East Bridge > West Staircase Lower East" => {
+                Ok(SpotId::Annuna__East_Bridge__West_Staircase_Lower_East)
+            }
+            "Annuna > East Bridge > West Staircase Lower West" => {
+                Ok(SpotId::Annuna__East_Bridge__West_Staircase_Lower_West)
             }
             "Annuna > East Bridge > West Staircase Upper East" => {
                 Ok(SpotId::Annuna__East_Bridge__West_Staircase_Upper_East)
             }
             "Annuna > East Bridge > West Staircase Upper West" => {
                 Ok(SpotId::Annuna__East_Bridge__West_Staircase_Upper_West)
+            }
+            "Annuna > East Bridge > West Under Gap" => {
+                Ok(SpotId::Annuna__East_Bridge__West_Under_Gap)
             }
             "Annuna > Mirror Match > Below Switch" => {
                 Ok(SpotId::Annuna__Mirror_Match__Below_Switch)
@@ -8259,6 +8280,12 @@ pub enum ExitId {
     Amagi__West_Lake__Surface_Wall_Right__ex__Surface_Wall_Left_1,
     Amagi__West_Lake__West_15__ex__Ebih__Vertical_Interchange__East_15_1,
     Amagi__West_Lake__West_Bank__ex__West_Shore_1,
+    Annuna__East_Bridge__West_25_Lower__ex__West_Bridge__East_25_Upper_1,
+    Annuna__East_Bridge__West_25_Upper__ex__West_Bridge__East_25_Upper_1,
+    Annuna__East_Bridge__West_Staircase_Upper_West__ex__Upper_West_Gap_1,
+    Annuna__East_Bridge__West_Staircase_Upper_West__ex__Upper_West_Gap_East_1,
+    Annuna__East_Bridge__West_Under_Gap__ex__Upper_West_Gap_1,
+    Annuna__East_Bridge__West_Under_Gap__ex__Upper_West_Gap_East_1,
     Annuna__Mirror_Match__Below_Switch__ex__Central_Pillar_1,
     Annuna__Mirror_Match__Central_Pillar__ex__Below_Switch_1,
     Annuna__Mirror_Match__Central_Pillar__ex__Save_Point_1,
@@ -9321,6 +9348,12 @@ impl fmt::Display for ExitId {
             ExitId::Amagi__West_Lake__Surface_Wall_Right__ex__Surface_Wall_Left_1 => write!(f, "{}", "Amagi > West Lake > Surface Wall Right ==> Surface Wall Left (1)"),
             ExitId::Amagi__West_Lake__West_15__ex__Ebih__Vertical_Interchange__East_15_1 => write!(f, "{}", "Amagi > West Lake > West 15 ==> Ebih > Vertical Interchange > East 15 (1)"),
             ExitId::Amagi__West_Lake__West_Bank__ex__West_Shore_1 => write!(f, "{}", "Amagi > West Lake > West Bank ==> West Shore (1)"),
+            ExitId::Annuna__East_Bridge__West_25_Lower__ex__West_Bridge__East_25_Upper_1 => write!(f, "{}", "Annuna > East Bridge > West 25 Lower ==> West Bridge > East 25 Upper (1)"),
+            ExitId::Annuna__East_Bridge__West_25_Upper__ex__West_Bridge__East_25_Upper_1 => write!(f, "{}", "Annuna > East Bridge > West 25 Upper ==> West Bridge > East 25 Upper (1)"),
+            ExitId::Annuna__East_Bridge__West_Staircase_Upper_West__ex__Upper_West_Gap_1 => write!(f, "{}", "Annuna > East Bridge > West Staircase Upper West ==> Upper West Gap (1)"),
+            ExitId::Annuna__East_Bridge__West_Staircase_Upper_West__ex__Upper_West_Gap_East_1 => write!(f, "{}", "Annuna > East Bridge > West Staircase Upper West ==> Upper West Gap East (1)"),
+            ExitId::Annuna__East_Bridge__West_Under_Gap__ex__Upper_West_Gap_1 => write!(f, "{}", "Annuna > East Bridge > West Under Gap ==> Upper West Gap (1)"),
+            ExitId::Annuna__East_Bridge__West_Under_Gap__ex__Upper_West_Gap_East_1 => write!(f, "{}", "Annuna > East Bridge > West Under Gap ==> Upper West Gap East (1)"),
             ExitId::Annuna__Mirror_Match__Below_Switch__ex__Central_Pillar_1 => write!(f, "{}", "Annuna > Mirror Match > Below Switch ==> Central Pillar (1)"),
             ExitId::Annuna__Mirror_Match__Central_Pillar__ex__Below_Switch_1 => write!(f, "{}", "Annuna > Mirror Match > Central Pillar ==> Below Switch (1)"),
             ExitId::Annuna__Mirror_Match__Central_Pillar__ex__Save_Point_1 => write!(f, "{}", "Annuna > Mirror Match > Central Pillar ==> Save Point (1)"),
@@ -10388,6 +10421,12 @@ impl std::str::FromStr for ExitId {
             "Amagi > West Lake > Surface Wall Right ==> Surface Wall Left (1)" => Ok(ExitId::Amagi__West_Lake__Surface_Wall_Right__ex__Surface_Wall_Left_1),
             "Amagi > West Lake > West 15 ==> Ebih > Vertical Interchange > East 15 (1)" => Ok(ExitId::Amagi__West_Lake__West_15__ex__Ebih__Vertical_Interchange__East_15_1),
             "Amagi > West Lake > West Bank ==> West Shore (1)" => Ok(ExitId::Amagi__West_Lake__West_Bank__ex__West_Shore_1),
+            "Annuna > East Bridge > West 25 Lower ==> West Bridge > East 25 Upper (1)" => Ok(ExitId::Annuna__East_Bridge__West_25_Lower__ex__West_Bridge__East_25_Upper_1),
+            "Annuna > East Bridge > West 25 Upper ==> West Bridge > East 25 Upper (1)" => Ok(ExitId::Annuna__East_Bridge__West_25_Upper__ex__West_Bridge__East_25_Upper_1),
+            "Annuna > East Bridge > West Staircase Upper West ==> Upper West Gap (1)" => Ok(ExitId::Annuna__East_Bridge__West_Staircase_Upper_West__ex__Upper_West_Gap_1),
+            "Annuna > East Bridge > West Staircase Upper West ==> Upper West Gap East (1)" => Ok(ExitId::Annuna__East_Bridge__West_Staircase_Upper_West__ex__Upper_West_Gap_East_1),
+            "Annuna > East Bridge > West Under Gap ==> Upper West Gap (1)" => Ok(ExitId::Annuna__East_Bridge__West_Under_Gap__ex__Upper_West_Gap_1),
+            "Annuna > East Bridge > West Under Gap ==> Upper West Gap East (1)" => Ok(ExitId::Annuna__East_Bridge__West_Under_Gap__ex__Upper_West_Gap_East_1),
             "Annuna > Mirror Match > Below Switch ==> Central Pillar (1)" => Ok(ExitId::Annuna__Mirror_Match__Below_Switch__ex__Central_Pillar_1),
             "Annuna > Mirror Match > Central Pillar ==> Below Switch (1)" => Ok(ExitId::Annuna__Mirror_Match__Central_Pillar__ex__Below_Switch_1),
             "Annuna > Mirror Match > Central Pillar ==> Save Point (1)" => Ok(ExitId::Annuna__Mirror_Match__Central_Pillar__ex__Save_Point_1),
@@ -11425,6 +11464,7 @@ impl std::str::FromStr for ExitId {
 pub enum ActionId {
     Amagi__Main_Area__Carving__Key_Combo,
     Amagi__Main_Area__Save_Point__Save,
+    Annuna__East_Bridge__Center_Gap_West__Throw_Drone_into_Tower,
     Annuna__Mirror_Match__Save_Point__Save,
     Ebih__Base_Camp__Left_Platform__Move_Left_Platform,
     Ebih__Base_Camp__Left_Platform_Moved__Reset_Left_Platform,
@@ -11524,6 +11564,11 @@ impl fmt::Display for ActionId {
             ActionId::Amagi__Main_Area__Save_Point__Save => {
                 write!(f, "{}", "Amagi > Main Area > Save Point > Save")
             }
+            ActionId::Annuna__East_Bridge__Center_Gap_West__Throw_Drone_into_Tower => write!(
+                f,
+                "{}",
+                "Annuna > East Bridge > Center Gap West > Throw Drone into Tower"
+            ),
             ActionId::Annuna__Mirror_Match__Save_Point__Save => {
                 write!(f, "{}", "Annuna > Mirror Match > Save Point > Save")
             }
@@ -11859,6 +11904,9 @@ impl std::str::FromStr for ActionId {
             }
             "Amagi > Main Area > Save Point > Save" => {
                 Ok(ActionId::Amagi__Main_Area__Save_Point__Save)
+            }
+            "Annuna > East Bridge > Center Gap West > Throw Drone into Tower" => {
+                Ok(ActionId::Annuna__East_Bridge__Center_Gap_West__Throw_Drone_into_Tower)
             }
             "Annuna > Mirror Match > Save Point > Save" => {
                 Ok(ActionId::Annuna__Mirror_Match__Save_Point__Save)

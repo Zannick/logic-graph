@@ -227,21 +227,97 @@ areas:
     #region Main Corridor
     - name: West 25 Lower
       coord: [37.05, 24.8]
+      local:
+        - to: West Staircase Lower West
+          jumps: 1
+      exits:
+        - to: West Bridge > East 25 Upper
+          tags: [xshift]
     - name: West 25 Upper
       coord: [37.05, 24.3]
-    - name: West Staircase Lower
+      local:
+        - to: West Under Gap
+      exits:
+        - to: West Bridge > East 25 Upper
+          tags: [xshift]
+    - name: West Under Gap
+      coord: [37.25, 24.3]
+      local:
+        - to: West 25 Upper
+        - to: West Staircase Upper West
+      exits:
+        - to: Upper West Gap
+          req: $hook
+          movement: base
+          jumps: 2
+        - to: Upper West Gap East
+          req: $hook
+          movement: base
+          jumps: 2
+    - name: West Staircase Lower West
       coord: [37.5, 24.7]
+      local:
+        - to: West 25 Lower
+        - to: West Staircase Upper West
+          jumps: 3
+        - to: West Staircase Upper East
+          jumps: 3
+        - to: West Staircase Lower East
+    - name: West Staircase Lower East
+      coord: [37.7, 24.7]
+      local:
+        - to: West Staircase Lower West
+        - to: West Staircase Upper West
+          jumps: 3
+        - to: West Staircase Upper East
+          jumps: 3
+        - to: Center Drop-off
     - name: West Staircase Upper West
       coord: [37.5, 24.3]
+      local:
+        - to: West Under Gap
+        - to: West Staircase Upper East
+      exits:
+        - to: Upper West Gap
+          req: $hook
+          movement: base
+          jumps: 2
+        - to: Upper West Gap East
+          req: $hook
+          movement: base
+          jumps: 2
     - name: West Staircase Upper East
       coord: [37.75, 24.3]
-
+      local:
+        - to: West Staircase Upper West
+        - to: West Staircase Lower West
+          jumps_down: 2
+        - to: West Staircase Lower East
+          jumps_down: 2
+        - to: Center Gap West
     - name: Center Drop-off
       coord: [38.15, 24.8]
+      local:
+        - to: West Staircase Lower East
+          jumps: 1
+        - to: Center Corridor
     - name: Center Corridor
       coord: [38.45, 24.8]
+      local:
+        - to: Center Drop-off
     - name: Center Gap West
       coord: [38.3, 24.3]
+      local:
+        - to: West Staircase Upper East
+        - to: Center Corridor
+        - to: Center Gap East
+      actions:
+        - name: Throw Drone into Tower
+          req: $can_deploy and Slingshot_Hook and Drone_Hover
+          do: $deploy_drone_and_move(`Annuna > East Bridge > Center Corridor`)
+          to: Upper Middle Core
+          time: 2.5
+        # probably doable with anuman
     - name: Center Gap East
       coord: [38.55, 24.3]
 
@@ -249,7 +325,7 @@ areas:
       coord: [38.9, 24.1]
     #endregion
 
-    #region Upper
+    #region Tower
     - name: Upper Middle Gate
       coord: [38.3, 23.4]
     - name: Upper Middle Core
@@ -262,9 +338,13 @@ areas:
       coord: [38.2, 23.8]
     - name: Gate Button Gap
       coord: [38.9, 23.8]
+    #endregion
 
+    #region Upper West
     - name: Upper West Gap
       coord: [37.25, 23.8]
+    - name: Upper West Gap East
+      coord: [37.5, 23.8]
     - name: West 24
       coord: [37.05, 23.55]
     #endregion

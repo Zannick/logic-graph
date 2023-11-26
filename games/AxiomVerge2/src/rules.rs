@@ -155,6 +155,10 @@ pub fn access_can_deploy_and_slingshot_hook(ctx: &Context) -> bool {
     // $can_deploy and Slingshot_Hook
     (helper__can_deploy!(ctx) && ctx.has(Item::Slingshot_Hook))
 }
+pub fn access_can_deploy_and_slingshot_hook_and_drone_hover(ctx: &Context) -> bool {
+    // $can_deploy and Slingshot_Hook and Drone_Hover
+    ((helper__can_deploy!(ctx) && ctx.has(Item::Slingshot_Hook)) && ctx.has(Item::Drone_Hover))
+}
 pub fn access_charge(ctx: &Context) -> bool {
     // $charge
     helper__charge!(ctx)
@@ -1363,6 +1367,10 @@ pub fn action_collect__irikar_royal_storage_wall_collect__flask_visit__irikar__h
 pub fn action_deploy_drone(ctx: &mut Context) {
     // $deploy_drone
     helper__deploy_drone!(ctx);
+}
+pub fn action_deploy_drone_and_move__annuna__east_bridge__center_corridor(ctx: &mut Context) {
+    // $deploy_drone_and_move(`Annuna > East Bridge > Center Corridor`)
+    helper__deploy_drone_and_move!(ctx, SpotId::Annuna__East_Bridge__Center_Corridor);
 }
 pub fn action_deploy_drone_and_move__ebih__drone_room__tree(ctx: &mut Context) {
     // $deploy_drone_and_move(`Ebih > Drone Room > Tree`)
