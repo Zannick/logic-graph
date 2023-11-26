@@ -401,21 +401,28 @@ class GameLogic(object):
 
 
     def process_times(self):
+        """Adds default times if time is not present, and constant-time penalties."""
         for point in self.all_points():
             if 'time' not in point:
                 point['time'] = max(
-                        (v for k,v in self.time.items() if k in point.get('tags', [])),
+                        (self.time[k] for k in point.get('tags', []) if k in self.time),
                         default=self.time['default'])
             if 'item' in point and 'to' in point and 'item_time' not in point:
                 point['item_time'] = max(
-                        (v for k,v in self.time.items() if k in point.get('tags', [])),
+                        (self.time[k] for k in point.get('tags', []) if k in self.time),
                         default=self.time['default'])
+            if tags := point.get('penalty_tags'):
+                for tag in tags:
+                    point['time'] += self.time.get(tag, 0)
 
         for act in self.global_actions:
             if 'time' not in act:
                 act['time'] = max(
-                        (v for k,v in self.time.items() if k in act.get('tags', [])),
+                        (self.time[k] for k in act.get('tags', []) if k in self.time),
                         default=self.time['default'])
+            if tags := act.get('penalty_tags'):
+                for tag in tags:
+                    act['time'] += self.time.get(tag, 0)
 
 
     def process_warps(self):

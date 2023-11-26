@@ -1082,7 +1082,8 @@ areas:
           req: $can_deploy
           do: $deploy_drone_and_move(`Ebih > Ebih West > Alcove Entrance`)
           to: Giguna > Giguna Northeast > Inner Wall
-          time: 5.3
+          time: 3.95
+          penalty_tags: [xshift]
     - name: High Platform
       coord: [20.4, 5.975]
       local:
