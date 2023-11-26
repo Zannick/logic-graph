@@ -452,7 +452,7 @@ impl context::Ctx for Context {
             _ => 0,
         }
     }
-    fn collect(&mut self, item: Item) {
+    fn collect(&mut self, item: Item, world: &graph::World) {
         match item {
             Item::Biggoron_Sword => {
                 self.cbits1.insert(flags::ContextBits1::BIGGORON_SWORD);
@@ -547,9 +547,9 @@ impl context::Ctx for Context {
             Item::Triforce_Piece => {
                 self.triforce_piece += 1;
             }
-            Item::Rupee_1 => rules::action_rupees__min__rupees__1_wallet_max(self),
-            Item::Rupees_5 => rules::action_rupees__min__rupees__5_wallet_max(self),
-            Item::Rupees_50 => rules::action_rupees__min__rupees__50_wallet_max(self),
+            Item::Rupee_1 => rules::action_rupees__min__rupees__1_wallet_max(self, world),
+            Item::Rupees_5 => rules::action_rupees__min__rupees__5_wallet_max(self, world),
+            Item::Rupees_50 => rules::action_rupees__min__rupees__50_wallet_max(self, world),
             _ => (),
         }
     }
@@ -658,7 +658,7 @@ impl context::Ctx for Context {
     fn parse_set_context(&mut self, ckey: &str, cval: &Yaml) -> Result<(), String> {
         match (ckey, cval) {
             ("position", Yaml::String(s)) => {
-                self.set_position(SpotId::from_str(s).map_err(|e| format!("{}", e))?)
+                self.set_position_raw(SpotId::from_str(s).map_err(|e| format!("{}", e))?)
             }
             ("position", _) => {
                 return Err(format!(
@@ -1314,7 +1314,7 @@ impl context::Ctx for Context {
     fn set_position_raw(&mut self, pos: SpotId) {
         self.position = pos;
     }
-    fn set_position(&mut self, pos: SpotId) {
+    fn set_position(&mut self, pos: SpotId, world: &graph::World) {
         let area = get_area(pos);
         match area {
             AreaId::Deku_Tree__Compass_Room => {
@@ -2909,8 +2909,8 @@ impl context::Ctx for Context {
     fn all_region_checks(&self, id: RegionId) -> bool {
         false
     }
-    fn get_movement_state(&self) -> movements::MovementState {
-        movements::get_movement_state(self)
+    fn get_movement_state(&self, world: &graph::World) -> movements::MovementState {
+        movements::get_movement_state(self, world)
     }
 
     fn local_travel_time(&self, movement_state: movements::MovementState, dest: SpotId) -> u32 {
