@@ -1528,7 +1528,7 @@ class GameLogic(object):
             'construct_id': construct_id,
             'construct_place_id': construct_place_id,
             'construct_test_name': construct_test_name,
-            'escape_ctx': partial(re.compile(r'\bctx\b').sub, '$ctx'),
+            'escape_ctx': partial(re.compile(r'\b(ctx|world)\b').sub, r'$\1'),
             'field_size': field_size,
             'get_exit_target': get_exit_target,
             'get_exit_target_id': get_exit_target_id,

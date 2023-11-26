@@ -122,7 +122,7 @@ pub mod testlib {
                             $ctx.spend(warp.price());
                             warp.postwarp(&mut $ctx, $world);
                             if warp.should_reload() {
-                                $ctx.reload_game();
+                                $ctx.reload_game($world);
                             }
                             continue 'spots;
                         } else {

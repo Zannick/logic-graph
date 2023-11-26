@@ -6739,8 +6739,8 @@ impl context::Ctx for Context {
         self.position = pos;
     }
 
-    fn reload_game(&mut self) {
-        self.reset_all();
+    fn reload_game(&mut self, world: &graph::World) {
+        self.reset_all(world);
         self.cbits1
             .remove(flags::ContextBits1::AMAGI__MAIN_AREA__CTX__COMBO);
         self.cbits1
@@ -6749,7 +6749,7 @@ impl context::Ctx for Context {
             .remove(flags::ContextBits1::GIGUNA__EAST_CAVERNS__CTX__COMBO_ENTERED);
     }
 
-    fn reset_all(&mut self) {
+    fn reset_all(&mut self, world: &graph::World) {
         self.cbits1
             .remove(flags::ContextBits1::EBIH__BASE_CAMP__CTX__LEFT_PLATFORM_MOVED);
         self.cbits1
@@ -6780,8 +6780,8 @@ impl context::Ctx for Context {
             .remove(flags::ContextBits1::IRIKAR__BASEMENT_PORTAL__CTX__PLATFORM_MOVED);
     }
 
-    fn reset_region(&mut self, region_id: RegionId) {}
-    fn reset_area(&mut self, area_id: AreaId) {
+    fn reset_region(&mut self, region_id: RegionId, world: &graph::World) {}
+    fn reset_area(&mut self, area_id: AreaId, world: &graph::World) {
         match area_id {
             AreaId::Ebih__Base_Camp => {
                 self.cbits1

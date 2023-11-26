@@ -95,6 +95,8 @@ class RustVisitor(RulesVisitor):
             args = f'{ctx.LIT() or ctx.INT() or ctx.FLOAT() or ""}'
             if not args:
                 func = func[:-2]
+        if func.startswith('ctx.reset'):
+            args += ', world'
         return f'{"!" if ctx.NOT() else ""}{func}{args})'
 
     def _visitConditional(self, *args, else_case=True):

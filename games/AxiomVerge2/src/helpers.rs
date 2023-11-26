@@ -29,7 +29,7 @@ macro_rules! helper__can_damage {
     ($ctx:expr, $world:expr) => {{
         #[allow(unused_imports)]
         use $crate::items::Item;
-        (helper__melee!($ctx, world) || $ctx.has(Item::Boomerang))
+        (helper__melee!($ctx, $world) || $ctx.has(Item::Boomerang))
     }};
 }
 
@@ -334,7 +334,7 @@ macro_rules! helper__bs {
     ($ctx:expr, $world:expr) => {{
         #[allow(unused_imports)]
         use $crate::items::Item;
-        ($ctx.boomerang_steering() && helper__boomerang!($ctx, world))
+        ($ctx.boomerang_steering() && helper__boomerang!($ctx, $world))
     }};
 }
 
@@ -345,7 +345,7 @@ macro_rules! helper__offset {
     ($ctx:expr, $world:expr) => {{
         #[allow(unused_imports)]
         use $crate::items::Item;
-        ($ctx.major_glitches() && helper__melee!($ctx, world))
+        ($ctx.major_glitches() && helper__melee!($ctx, $world))
     }};
 }
 
@@ -367,7 +367,7 @@ macro_rules! helper__block_clip_escape {
     ($ctx:expr, $world:expr) => {{
         #[allow(unused_imports)]
         use $crate::items::Item;
-        ($ctx.minor_glitches() && helper__hook!($ctx, world))
+        ($ctx.minor_glitches() && helper__hook!($ctx, $world))
     }};
 }
 
@@ -480,7 +480,7 @@ macro_rules! helper__save {
         #[allow(unused_imports)]
         use $crate::items::Item;
         $ctx.set_save($ctx.position());
-        helper__refill_energy!($ctx, world);
+        helper__refill_energy!($ctx, $world);
     }};
 }
 
@@ -491,7 +491,7 @@ macro_rules! helper__refill_energy {
     ($ctx:expr, $world:expr) => {{
         #[allow(unused_imports)]
         use $crate::items::Item;
-        $ctx.set_energy(helper__max_energy!($ctx, world));
+        $ctx.set_energy(helper__max_energy!($ctx, $world));
     }};
 }
 
@@ -531,7 +531,7 @@ macro_rules! helper__reset_old_area {
             && get_area($newpos) != get_area($ctx.position()))
         {
             if get_area($newpos) != $ctx.prev_area() {
-                $ctx.reset_area($ctx.prev_area());
+                $ctx.reset_area($ctx.prev_area(), $world);
             }
             $ctx.set_prev_area(get_area($ctx.position()));
         }

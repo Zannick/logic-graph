@@ -62,10 +62,10 @@ pub trait Ctx:
     // for testing only, skips enter handlers
     fn set_position_raw(&mut self, pos: <<Self::World as World>::Exit as Exit>::SpotId);
 
-    fn reload_game(&mut self);
-    fn reset_all(&mut self);
-    fn reset_region(&mut self, region_id: Self::RegionId);
-    fn reset_area(&mut self, area_id: Self::AreaId);
+    fn reload_game(&mut self, world: &Self::World);
+    fn reset_all(&mut self, world: &Self::World);
+    fn reset_region(&mut self, region_id: Self::RegionId, world: &Self::World);
+    fn reset_area(&mut self, area_id: Self::AreaId, world: &Self::World);
 
     fn can_afford(&self, cost: &<<Self::World as World>::Location as Accessible>::Currency)
         -> bool;
@@ -480,7 +480,7 @@ impl<T: Ctx> ContextWrapper<T> {
         self.ctx.spend(warp.price());
         warp.postwarp(&mut self.ctx, world);
         if warp.should_reload() {
-            self.ctx.reload_game();
+            self.ctx.reload_game(world);
         }
         self.append_history(History::W(warp.id(), dest), warp.time());
     }

@@ -363,8 +363,8 @@ impl context::Ctx for Context {
         self.position = pos;
     }
 
-    fn reload_game(&mut self) {
-        self.reset_all();
+    fn reload_game(&mut self, world: &graph::World) {
+        self.reset_all(world);
 %% for pltype in ['Region', 'Area']
 %% for ctxs in context_trigger_rules.load[pltype|lower].values()
 %% for c, val in ctxs.items()
@@ -378,7 +378,7 @@ impl context::Ctx for Context {
 %% endfor
     }
 
-    fn reset_all(&mut self) {
+    fn reset_all(&mut self, world: &graph::World) {
 %% for pltype in ['Region', 'Area']
 %% for ctxs in context_trigger_rules.reset[pltype|lower].values()
 %% for c, val in ctxs.items()
@@ -393,7 +393,7 @@ impl context::Ctx for Context {
     }
 
 %% for pltype in ['Region', 'Area']
-    fn reset_{{ pltype|lower }}(&mut self, {{ pltype|lower }}_id: {{ pltype }}Id) {
+    fn reset_{{ pltype|lower }}(&mut self, {{ pltype|lower }}_id: {{ pltype }}Id, world: &graph::World) {
 %% if context_trigger_rules.reset[pltype|lower]
         match {{ pltype|lower }}_id {
 %% for r, ctxs in context_trigger_rules.reset[pltype|lower].items()
