@@ -5,7 +5,7 @@
 /// {{ info.pr.text.replace('\n', ' ') }}
 #[macro_export]
 macro_rules! helper__{{ name|construct_id }} {
-    ($ctx:expr{% for a in info.args %}, ${{ a.name }}:expr{% endfor %}) => {{ '{{' }}
+    ($ctx:expr, $world:expr{% for a in info.args %}, ${{ a.name }}:expr{% endfor %}) => {{ '{{' }}
         #[allow(unused_imports)]
         use $crate::items::Item;
         {{ info.pr|prToRust({})|escape_ctx }}

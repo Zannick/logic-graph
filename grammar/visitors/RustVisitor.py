@@ -43,7 +43,7 @@ class RustVisitor(RulesVisitor):
         if func in BUILTINS:
             return BUILTINS[func] + '('
         else:
-            return f'helper__{construct_id(func[1:])}!(ctx, '
+            return f'helper__{construct_id(func[1:])}!(ctx, world, '
 
     def visit(self, tree, rettype=None):
         last_rettype = self.rettype
