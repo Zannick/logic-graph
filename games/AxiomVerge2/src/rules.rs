@@ -1374,6 +1374,14 @@ pub fn access_mode__drone(ctx: &Context, world: &World) -> bool {
     // ^mode == 'drone'
     ctx.mode() == enums::Mode::Drone
 }
+pub fn access_mode__drone7(ctx: &Context, world: &World) -> bool {
+    // ^mode != 'drone'
+    ctx.mode() != enums::Mode::Drone
+}
+pub fn access_mode__drone8(ctx: &Context, world: &World) -> bool {
+    // ^mode != 'drone'
+    ctx.mode() != enums::Mode::Drone
+}
 pub fn access_mode__drone_and_breach_sight(ctx: &Context, world: &World) -> bool {
     // ^mode == 'drone' and Breach_Sight
     (ctx.mode() == enums::Mode::Drone && ctx.has(Item::Breach_Sight))

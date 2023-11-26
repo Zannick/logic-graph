@@ -4784,76 +4784,76 @@ impl world::Accessible for Warp {
     fn can_access(&self, ctx: &Context, world: &World) -> bool {
         ctx.can_afford(&self.price)
             && match self.id {
-                WarpId::BreachSave => rules::access_realm__breach(&ctx, world),
-                WarpId::DroneSave => rules::access_realm__main_and_mode__drone(&ctx, world),
-                WarpId::EarthSave => rules::access_within_antarctica(&ctx, world),
+                WarpId::BreachSave => rules::access_realm__breach(ctx, world),
+                WarpId::DroneSave => rules::access_realm__main_and_mode__drone(ctx, world),
+                WarpId::EarthSave => rules::access_within_antarctica(ctx, world),
                 WarpId::ExitBreach => {
                     rules::access_realm__breach_and_exit_breach_and___flipside_not_within_default(
-                        &ctx, world,
+                        ctx, world,
                     )
                 }
-                WarpId::ExitMenu => rules::access_within_menu(&ctx, world),
+                WarpId::ExitMenu => rules::access_within_menu(ctx, world),
                 WarpId::FastTravelAmagiMainArea => {
-                    rules::access_ft_main_and_map__amagi__main_area__save(&ctx, world)
+                    rules::access_ft_main_and_map__amagi__main_area__save(ctx, world)
                 }
                 WarpId::FastTravelEbihBaseCamp => {
-                    rules::access_ft_main_and_map__ebih__base_camp__save(&ctx, world)
+                    rules::access_ft_main_and_map__ebih__base_camp__save(ctx, world)
                 }
                 WarpId::FastTravelEbihWestLower => {
-                    rules::access_ft_main_and_map__ebih__ebih_west__lower_save(&ctx, world)
+                    rules::access_ft_main_and_map__ebih__ebih_west__lower_save(ctx, world)
                 }
                 WarpId::FastTravelEbihWestMid => {
-                    rules::access_ft_main_and_map__ebih__ebih_west__mid_save(&ctx, world)
+                    rules::access_ft_main_and_map__ebih__ebih_west__mid_save(ctx, world)
                 }
                 WarpId::FastTravelEbihWestUpper => {
-                    rules::access_ft_main_and_map__ebih__ebih_west__upper_save(&ctx, world)
+                    rules::access_ft_main_and_map__ebih__ebih_west__upper_save(ctx, world)
                 }
                 WarpId::FastTravelGigunaBase => {
-                    rules::access_ft_main_and_map__giguna__giguna_base__save(&ctx, world)
+                    rules::access_ft_main_and_map__giguna__giguna_base__save(ctx, world)
                 }
                 WarpId::FastTravelGigunaBreachPeak => {
-                    rules::access_ft_breach_and_map__giguna_breach__peak__save(&ctx, world)
+                    rules::access_ft_breach_and_map__giguna_breach__peak__save(ctx, world)
                 }
                 WarpId::FastTravelGigunaBreachSw => {
-                    rules::access_ft_breach_and_map__giguna_breach__sw_save__save(&ctx, world)
+                    rules::access_ft_breach_and_map__giguna_breach__sw_save__save(ctx, world)
                 }
                 WarpId::FastTravelGigunaNortheast => {
-                    rules::access_ft_main_and_map__giguna__giguna_northeast__save(&ctx, world)
+                    rules::access_ft_main_and_map__giguna__giguna_northeast__save(ctx, world)
                 }
                 WarpId::FastTravelGigunaRuinsWest => {
-                    rules::access_ft_main_and_map__giguna__ruins_west__save(&ctx, world)
+                    rules::access_ft_main_and_map__giguna__ruins_west__save(ctx, world)
                 }
                 WarpId::FastTravelGlacierRevival => {
-                    rules::access_ft_main_and_amashilama(&ctx, world)
+                    rules::access_ft_main_and_amashilama(ctx, world)
                 }
                 WarpId::FastTravelIrikarBreachBasement => {
-                    rules::access_ft_breach_and_map__irikar_breach__basement_save__save(&ctx, world)
+                    rules::access_ft_breach_and_map__irikar_breach__basement_save__save(ctx, world)
                 }
                 WarpId::FastTravelIrikarBreachGauntlet => {
-                    rules::access_ft_breach_and_map__irikar_breach__gauntlet__save(&ctx, world)
+                    rules::access_ft_breach_and_map__irikar_breach__gauntlet__save(ctx, world)
                 }
                 WarpId::FastTravelIrikarBreachSaveRoom => {
-                    rules::access_ft_breach_and_map__irikar_breach__save_room__save(&ctx, world)
+                    rules::access_ft_breach_and_map__irikar_breach__save_room__save(ctx, world)
                 }
                 WarpId::FastTravelIrikarHub => {
-                    rules::access_ft_main_and_map__irikar__hub__save(&ctx, world)
+                    rules::access_ft_main_and_map__irikar__hub__save(ctx, world)
                 }
                 WarpId::FastTravelUhrumAnnuna => {
-                    rules::access_ft_main_and_map__uhrum__annuna_corridor__save(&ctx, world)
+                    rules::access_ft_main_and_map__uhrum__annuna_corridor__save(ctx, world)
                 }
                 WarpId::FastTravelUhrumEast => {
-                    rules::access_ft_main_and_map__uhrum__annuna_corridor__save(&ctx, world)
+                    rules::access_ft_main_and_map__uhrum__annuna_corridor__save(ctx, world)
                 }
                 WarpId::FastTravelUhrumSaveRoom => {
-                    rules::access_ft_main_and_map__uhrum__save_room__save(&ctx, world)
+                    rules::access_ft_main_and_map__uhrum__save_room__save(ctx, world)
                 }
                 WarpId::FastTravelUhrumWestEntrance => {
-                    rules::access_ft_main_and_map__uhrum__west_entrance__save(&ctx, world)
+                    rules::access_ft_main_and_map__uhrum__west_entrance__save(ctx, world)
                 }
                 WarpId::IndraSave => {
-                    rules::access_realm__main_and_amashilama_and_mode__drone(&ctx, world)
+                    rules::access_realm__main_and_amashilama_and_mode__drone(ctx, world)
                 }
-                WarpId::Menu => rules::access_not_within_menu_and_flasks__0(&ctx, world),
+                WarpId::Menu => rules::access_not_within_menu_and_flasks__0(ctx, world),
             }
     }
     fn base_time(&self) -> u32 {
@@ -4861,6 +4861,23 @@ impl world::Accessible for Warp {
     }
     fn time(&self, ctx: &Context, world: &World) -> u32 {
         self.time
+            + match self.id {
+                WarpId::FastTravelEbihBaseCamp => {
+                    if rules::access_mode__drone7(ctx, world) {
+                        2500
+                    } else {
+                        0
+                    }
+                }
+                WarpId::FastTravelEbihWestUpper => {
+                    if rules::access_mode__drone8(ctx, world) {
+                        2500
+                    } else {
+                        0
+                    }
+                }
+                _ => 0,
+            }
     }
     fn price(&self) -> &Currency {
         &self.price

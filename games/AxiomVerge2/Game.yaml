@@ -171,11 +171,17 @@ warps:
     req: $ft_main and ^map__ebih__base_camp__save
     to: Ebih > Base Camp > Save Point
     after: $refill_energy
+    penalties:
+      - when: ^mode != 'drone'
+        add: 2.5
   fast_travel_ebih_west_upper:
     time: 12
     req: $ft_main and ^map__ebih__ebih_west__upper_save
     to: Ebih > Ebih West > Upper Save
     after: $refill_energy
+    penalties:
+      - when: ^mode != 'drone'
+        add: 2.5
   fast_travel_ebih_west_mid:
     time: 12
     req: $ft_main and ^map__ebih__ebih_west__mid_save

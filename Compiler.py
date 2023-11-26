@@ -232,8 +232,9 @@ class GameLogic(object):
 
 
     def process_regions(self):
-        # TODO: move to Game.yaml for customization
+        # TODO: move interesting tags to Game.yaml for customization
         interesting_tags = ['interior', 'exterior']
+
         self.canon_places = defaultdict(list)
         # regions/areas/etc are dicts {name: blah, req: blah} (at whatever level)
         self.regions = self._info['regions']
@@ -307,6 +308,8 @@ class GameLogic(object):
                             loc['pr'] = _parseExpression(
                                     loc['req'], loc['name'], spot['fullname'], ': ')
                             loc['access_id'] = self.make_funcid(loc)
+                        if 'penalties' in loc:
+                            self._handle_penalties(loc, spot['fullname'])
                     # We need a counter for exits in case of alternates
                     ec = Counter()
                     for eh in spot.get('exits', []):
@@ -335,6 +338,8 @@ class GameLogic(object):
                             eh['pr'] = _parseExpression(
                                     eh['req'], eh['to'], spot['fullname'], ' ==> ')
                             eh['access_id'] = self.make_funcid(eh)
+                        if 'penalties' in eh:
+                            self._handle_penalties(eh, spot['fullname'])
                         eh['to'] = dest
                     for act in spot.get('actions', ()):
                         act['spot'] = sname
@@ -348,6 +353,8 @@ class GameLogic(object):
                             act['pr'] = _parseExpression(
                                     act['req'], act['name'] + ' req', spot['fullname'], ': ')
                             act['access_id'] = self.make_funcid(act)
+                        if 'penalties' in act:
+                            self._handle_penalties(act, spot['fullname'])
                         act['act'] = parseAction(
                                 act['do'], name=f'{act["fullname"]}:do')
                         act['action_id'] = self.make_funcid(act, 'act', 'do')
@@ -366,6 +373,15 @@ class GameLogic(object):
 
             num_locs += len(region['loc_ids'])
         self.num_locations = num_locs
+
+
+    def _handle_penalties(self, info, category:str):
+        for i, pen in enumerate(info['penalties']):
+            name = f'penalty{i + 1}'
+            pen['id'] = construct_id(info['id'], name)
+            pen['pr'] = _parseExpression(
+                pen['when'], f'{info['name']} ({name})', category, ': ')
+            pen['access_id'] = self.make_funcid_from(info, pen['pr'])
 
 
     def process_exit_movements(self):
@@ -460,6 +476,8 @@ class GameLogic(object):
                 info['act_post'] = parseAction(
                         info['after'], name=f'{info["name"]}:after')
                 info['after_id'] = self.make_funcid(info, 'act_post', 'after')
+            if 'penalties' in info:
+                self._handle_penalties(info, 'warps')
 
 
     def process_global_actions(self):
@@ -918,12 +936,14 @@ class GameLogic(object):
 
 
     def make_funcid(self, info, prkey:str='pr', field:str='req', extra_fields=None):
-        pr = info[prkey]
+        return self.make_funcid_from(info, info[prkey], field=field, extra_fields=extra_fields)
+
+    def make_funcid_from(self, info, pr, field:str='req', extra_fields=None):
         ruletype = pr.parser.ruleNames[pr.tree.getRuleIndex()]
         d = self.action_funcs if ruletype == 'actions' else self.access_funcs
         if '^_' in str(pr.text):
             id = construct_id(info['id'].lower(), field)
-            assert id not in d, f"trying to generate multiple functions named {id}: {info}"
+            assert id not in d, f'trying to generate multiple functions named {id}: {info}'
             d[id] = {ruletype: pr, 'region': info['region']}
             if 'area' in info:
                 d[id]['area'] = info['area']
