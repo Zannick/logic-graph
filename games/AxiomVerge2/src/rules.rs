@@ -1344,6 +1344,15 @@ pub fn access_within_menu(ctx: &Context) -> bool {
         _ => false,
     })
 }
+pub fn action_add_item__irikar_royal_storage_wall_add_item__flask_flasks__1_visit__irikar__hub__royal_storage_in_wall__item(
+    ctx: &mut Context,
+) {
+    // $add_item(Irikar_Royal_Storage_Wall); $add_item(Flask); ^flasks += 1; $visit(`Irikar > Hub > Royal Storage in Wall > Item`);
+    ctx.add_item(Item::Irikar_Royal_Storage_Wall);
+    ctx.add_item(Item::Flask);
+    ctx.flasks += 1;
+    ctx.visit(LocationId::Irikar__Hub__Royal_Storage_in_Wall__Item);
+}
 pub fn action_amagi__main_area__carving__key_combo__do(ctx: &mut Context) {
     // ^_combo = true
     ctx.set_amagi__main_area__ctx__combo(true);
@@ -1355,14 +1364,6 @@ pub fn action_breach_portal_save_update(ctx: &mut Context) {
 pub fn action_clear_breach_save(ctx: &mut Context) {
     // $clear_breach_save
     helper__clear_breach_save!(ctx);
-}
-pub fn action_collect__irikar_royal_storage_wall_collect__flask_visit__irikar__hub__royal_storage_in_wall__item(
-    ctx: &mut Context,
-) {
-    // $collect(Irikar_Royal_Storage_Wall); $collect(Flask); $visit(`Irikar > Hub > Royal Storage in Wall > Item`);
-    ctx.collect(Item::Irikar_Royal_Storage_Wall);
-    ctx.collect(Item::Flask);
-    ctx.visit(LocationId::Irikar__Hub__Royal_Storage_in_Wall__Item);
 }
 pub fn action_deploy_drone(ctx: &mut Context) {
     // $deploy_drone

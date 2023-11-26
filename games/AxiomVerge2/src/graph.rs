@@ -4587,7 +4587,7 @@ impl world::Action for Action {
             ActionId::Irikar_Breach__Exit_Corridor__Portal_Stand__Enter_Portal => rules::action_main_portal_save_update(ctx),
             ActionId::Irikar__Hub__Save_Point__Save => rules::action_save(ctx),
             ActionId::Irikar__Hub__Portal_Stand__Enter_Portal => rules::action_breach_portal_save_update(ctx),
-            ActionId::Irikar__Hub__Royal_Storage_By_Wall__Shockwave_Wall => rules::action_collect__irikar_royal_storage_wall_collect__flask_visit__irikar__hub__royal_storage_in_wall__item(ctx),
+            ActionId::Irikar__Hub__Royal_Storage_By_Wall__Shockwave_Wall => rules::action_add_item__irikar_royal_storage_wall_add_item__flask_flasks__1_visit__irikar__hub__royal_storage_in_wall__item(ctx),
             ActionId::Irikar__Sight_Room__Portal__Enter_Portal => rules::action_breach_portal_save_update(ctx),
             ActionId::Irikar__Basement_Portal__Moving_Platform_Start__Activate_Platform => rules::action_irikar__basement_portal__moving_platform_start__activate_platform__do(ctx),
             ActionId::Irikar__Basement_Portal__Portal_Stand__Enter_Portal => rules::action_breach_portal_save_update(ctx),
@@ -4599,7 +4599,7 @@ impl world::Action for Action {
         };
         let dest = self.dest(ctx, world);
         if dest != SpotId::None {
-            ctx.set_position(dest);
+            ctx.set_position(dest, world);
         }
         match self.id {
             ActionId::Global__Recall_Drone => rules::action_indra__default(ctx),

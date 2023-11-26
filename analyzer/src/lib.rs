@@ -44,7 +44,7 @@ pub mod testlib {
     #[macro_export]
     macro_rules! expect_no_route {
         ($world:expr, $ctx:expr, $T:ty, $start:expr, $end:expr) => {{
-            $ctx.set_position($start);
+            $ctx.set_position($start, $world);
 
             let spot_map = $crate::access::accessible_spots(
                 $world,
@@ -65,7 +65,7 @@ pub mod testlib {
     #[macro_export]
     macro_rules! expect_any_route {
         ($world:expr, $ctx:expr, $start:expr, $end:expr) => {{
-            $ctx.set_position($start);
+            $ctx.set_position($start, $world);
 
             let spot_map = $crate::access::accessible_spots(
                 $world,
@@ -143,7 +143,7 @@ pub mod testlib {
     #[macro_export]
     macro_rules! expect_obtainable {
         ($world:expr, $ctx:expr, $start:expr, $item:expr) => {{
-            $ctx.set_position($start);
+            $ctx.set_position($start, $world);
 
             let locations: Vec<_> = $world
                 .get_all_locations()
@@ -196,7 +196,7 @@ pub mod testlib {
     #[macro_export]
     macro_rules! expect_not_obtainable {
         ($world:expr, $ctx:expr, $T:ty, $start:expr, $item:expr) => {{
-            $ctx.set_position($start);
+            $ctx.set_position($start, $world);
 
             let locations: Vec<_> = $world
                 .get_all_locations()
@@ -236,7 +236,7 @@ pub mod testlib {
     #[macro_export]
     macro_rules! expect_accessible {
         ($world:expr, $ctx:expr, $start:expr, $loc_id:expr) => {{
-            $ctx.set_position($start);
+            $ctx.set_position($start, $world);
 
             let spot_map = $crate::access::accessible_spots(
                 $world,
@@ -259,7 +259,7 @@ pub mod testlib {
     #[macro_export]
     macro_rules! expect_inaccessible {
         ($world:expr, $ctx:expr, $T:ty, $start:expr, $loc_id:expr) => {{
-            $ctx.set_position($start);
+            $ctx.set_position($start, $world);
 
             let spot_map = $crate::access::accessible_spots(
                 $world,
@@ -281,7 +281,7 @@ pub mod testlib {
     #[macro_export]
     macro_rules! expect_action_accessible {
         ($world:expr, $ctx:expr, $start:expr, $act_id:expr) => {{
-            $ctx.set_position($start);
+            $ctx.set_position($start, $world);
 
             if $world.is_global_action($act_id) {
                 assert!(
@@ -312,7 +312,7 @@ pub mod testlib {
     #[macro_export]
     macro_rules! expect_action_inaccessible {
         ($world:expr, $ctx:expr, $start:expr, $act_id:expr) => {{
-            $ctx.set_position($start);
+            $ctx.set_position($start, $world);
 
             if $world.is_global_action($act_id) {
                 assert!(
@@ -342,7 +342,7 @@ pub mod testlib {
     #[macro_export]
     macro_rules! expect_eventually_gets {
         ($world:expr, $ctx:expr, $start:expr, $item:expr) => {{
-            $ctx.set_position($start);
+            $ctx.set_position($start, $world);
 
             let item_locs: Vec<_> = $world
                 .get_all_locations()
@@ -382,7 +382,7 @@ pub mod testlib {
     #[macro_export]
     macro_rules! expect_eventually_reaches {
         ($world:expr, $ctx:expr, $start:expr, $spot:expr) => {{
-            $ctx.set_position($start);
+            $ctx.set_position($start, $world);
 
             let mut heap = $crate::heap::LimitedHeap::new();
             heap.push($crate::context::ContextWrapper::new($ctx));
@@ -408,7 +408,7 @@ pub mod testlib {
     #[macro_export]
     macro_rules! expect_eventually_accesses {
         ($world:expr, $ctx:expr, $start:expr, $loc_id:expr) => {{
-            $ctx.set_position($start);
+            $ctx.set_position($start, $world);
 
             if !$ctx.visited($loc_id) {
                 assert!(
@@ -444,7 +444,7 @@ pub mod testlib {
     #[macro_export]
     macro_rules! expect_eventually_activates {
         ($world:expr, $ctx:expr, $start:expr, $act_id:expr) => {{
-            $ctx.set_position($start);
+            $ctx.set_position($start, $world);
 
             let mut heap = $crate::heap::LimitedHeap::new();
             heap.push($crate::context::ContextWrapper::new($ctx));
@@ -513,7 +513,7 @@ pub mod testlib {
     #[macro_export]
     macro_rules! expect_eventually_requires_to_obtain {
         ($world:expr, $ctx:expr, $T:ty, $start:expr, $item:expr, $verify_req:expr, $limit:expr) => {{
-            $ctx.set_position($start);
+            $ctx.set_position($start, $world);
 
             let mut heap = $crate::heap::LimitedHeap::new();
             heap.push($crate::context::ContextWrapper::new($ctx));
@@ -553,7 +553,7 @@ pub mod testlib {
     #[macro_export]
     macro_rules! expect_eventually_requires_to_reach {
         ($world:expr, $ctx:expr, $T:ty, $start:expr, $spot:expr, $verify_req:expr, $limit:expr) => {{
-            $ctx.set_position($start);
+            $ctx.set_position($start, $world);
 
             let mut heap = $crate::heap::LimitedHeap::new();
             heap.push($crate::context::ContextWrapper::new($ctx));
@@ -592,7 +592,7 @@ pub mod testlib {
     #[macro_export]
     macro_rules! expect_eventually_requires_to_access {
         ($world:expr, $ctx:expr, $T:ty, $start:expr, $loc_id:expr, $verify_req:expr, $limit:expr) => {{
-            $ctx.set_position($start);
+            $ctx.set_position($start, $world);
 
             let mut heap = $crate::heap::LimitedHeap::new();
             heap.push($crate::context::ContextWrapper::new($ctx));
@@ -633,7 +633,7 @@ pub mod testlib {
     #[macro_export]
     macro_rules! expect_eventually_requires_to_activate {
         ($world:expr, $ctx:expr, $T:ty, $start:expr, $act_id:expr, $verify_req:expr, $limit:expr) => {{
-            $ctx.set_position($start);
+            $ctx.set_position($start, $world);
 
             let mut heap = $crate::heap::LimitedHeap::new();
             heap.push($crate::context::ContextWrapper::new($ctx));

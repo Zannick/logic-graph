@@ -1966,7 +1966,7 @@ impl context::Ctx for Context {
             _ => 0,
         }
     }
-    fn collect(&mut self, item: Item) {
+    fn collect(&mut self, item: Item, world: &graph::World) {
         match item {
             Item::Amagi_Dragon_Eye_Passage => {
                 self.cbits1.insert(flags::ContextBits1::AMAGI_DRAGON_EYE_PASSAGE);
@@ -2647,7 +2647,7 @@ impl context::Ctx for Context {
     fn parse_set_context(&mut self, ckey: &str, cval: &Yaml) -> Result<(), String> {
         match (ckey, cval) {
             ("position", Yaml::String(s)) => {
-                self.set_position(SpotId::from_str(s).map_err(|e| format!("{}", e))?)
+                self.set_position_raw(SpotId::from_str(s).map_err(|e| format!("{}", e))?)
             }
             ("position", _) => {
                 return Err(format!(
@@ -5930,7 +5930,7 @@ impl context::Ctx for Context {
     fn set_position_raw(&mut self, pos: SpotId) {
         self.position = pos;
     }
-    fn set_position(&mut self, pos: SpotId) {
+    fn set_position(&mut self, pos: SpotId, world: &graph::World) {
         let area = get_area(pos);
         match area {
             AreaId::Amagi__Grid_31_19 => {

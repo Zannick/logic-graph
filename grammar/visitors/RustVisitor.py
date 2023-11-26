@@ -82,6 +82,8 @@ class RustVisitor(RulesVisitor):
         func = self._getFuncAndArgs(str(ctx.FUNC()))
         if items:
             args = f'{", ".join("Item::" + str(item) for item in items)}'
+            if func.startswith('ctx.collect'):
+                args += ', world'
         elif ctx.value():
             args = f'{self.visit(ctx.value())}'
         elif ctx.PLACE():

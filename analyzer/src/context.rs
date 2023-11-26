@@ -43,7 +43,7 @@ pub trait Ctx:
 
     fn has(&self, item: Self::ItemId) -> bool;
     fn count(&self, item: Self::ItemId) -> i16;
-    fn collect(&mut self, item: Self::ItemId);
+    fn collect(&mut self, item: Self::ItemId, world: &Self::World);
     // test helper for items
     fn add_item(&mut self, item: Self::ItemId);
     // test helper for context vars
@@ -54,7 +54,11 @@ pub trait Ctx:
     //fn build_verify_func(ckey: &str, cval: &Yaml) -> Result<impl Fn(&Self) -> bool, String>;
 
     fn position(&self) -> <<Self::World as World>::Exit as Exit>::SpotId;
-    fn set_position(&mut self, pos: <<Self::World as World>::Exit as Exit>::SpotId);
+    fn set_position(
+        &mut self,
+        pos: <<Self::World as World>::Exit as Exit>::SpotId,
+        world: &Self::World,
+    );
     // for testing only, skips enter handlers
     fn set_position_raw(&mut self, pos: <<Self::World as World>::Exit as Exit>::SpotId);
 
@@ -407,7 +411,7 @@ impl<T: Ctx> ContextWrapper<T> {
         L: Location<Context = T>,
     {
         self.ctx.visit(loc.id());
-        self.ctx.collect(loc.item());
+        self.ctx.collect(loc.item(), world);
         self.ctx.spend(loc.price());
         for canon_loc_id in world.get_canon_locations(loc.id()) {
             self.ctx.skip(canon_loc_id);
@@ -416,36 +420,39 @@ impl<T: Ctx> ContextWrapper<T> {
         self.append_history(History::G(loc.item(), loc.id()), loc.time());
     }
 
-    pub fn exit<W, E>(&mut self, exit: &E)
+    pub fn exit<W, E>(&mut self, world: &W, exit: &E)
     where
         W: World<Exit = E>,
         T: Ctx<World = W>,
         E: Exit<Context = T, Currency = <W::Location as Accessible>::Currency>,
     {
-        self.ctx.set_position(exit.dest());
+        self.ctx.set_position(exit.dest(), world);
         self.elapse(exit.time());
         self.ctx.spend(exit.price());
         self.append_history(History::E(exit.id()), exit.time());
     }
 
-    pub fn move_local<W, E>(&mut self, spot: E::SpotId, time: u32)
+    pub fn move_local<W, E>(&mut self, world: &W, spot: E::SpotId, time: u32)
     where
         W: World<Exit = E>,
         T: Ctx<World = W>,
         E: Exit<Context = T>,
     {
-        self.ctx.set_position(spot);
+        self.ctx.set_position(spot, world);
         self.elapse(time);
         self.append_history(History::L(spot), time);
     }
 
-    pub fn move_condensed_edge<W, E>(&mut self, edge: &CondensedEdge<T, E::SpotId, E::ExitId>)
-    where
+    pub fn move_condensed_edge<W, E>(
+        &mut self,
+        world: &W,
+        edge: &CondensedEdge<T, E::SpotId, E::ExitId>,
+    ) where
         W: World<Exit = E>,
         T: Ctx<World = W>,
         E: Exit<Context = T>,
     {
-        self.ctx.set_position(edge.dst);
+        self.ctx.set_position(edge.dst, world);
         self.elapse(edge.time);
         self.append_history(History::C(edge.dst), edge.time);
     }
@@ -468,7 +475,7 @@ impl<T: Ctx> ContextWrapper<T> {
             "Warp can't lead to SpotId::None: {}",
             warp.id()
         );
-        self.ctx.set_position(dest);
+        self.ctx.set_position(dest, world);
         self.elapse(warp.time());
         self.ctx.spend(warp.price());
         warp.postwarp(&mut self.ctx, world);
@@ -487,10 +494,10 @@ impl<T: Ctx> ContextWrapper<T> {
     {
         self.ctx.visit(loc.id());
         self.ctx.spend(loc.price());
-        self.ctx.collect(loc.item());
+        self.ctx.collect(loc.item(), world);
         self.elapse(loc.time());
         self.ctx.spend(exit.price());
-        self.ctx.set_position(exit.dest());
+        self.ctx.set_position(exit.dest(), world);
         self.elapse(exit.time());
 
         for canon_loc_id in world.get_canon_locations(loc.id()) {
@@ -601,7 +608,7 @@ impl<T: Ctx> ContextWrapper<T> {
             }
             History::E(exit_id) => {
                 let exit = world.get_exit(exit_id);
-                self.exit(exit);
+                self.exit(world, exit);
             }
             History::H(item, exit_id) => {
                 let exit = world.get_exit(exit_id);
@@ -618,7 +625,7 @@ impl<T: Ctx> ContextWrapper<T> {
                 let movement_state = self.ctx.get_movement_state();
                 let time = self.ctx.local_travel_time(movement_state, spot);
                 assert!(time != u32::MAX, "Invalid replay: move-local {:?}", spot);
-                self.move_local(spot, time);
+                self.move_local(world, spot, time);
             }
             History::A(act_id) => {
                 let action = world.get_action(act_id);
@@ -635,6 +642,7 @@ impl<T: Ctx> ContextWrapper<T> {
                     })
                     .min_by_key(|c| c.time);
                 self.move_condensed_edge(
+                    world,
                     ce.unwrap_or_else(|| panic!("Invalid replay: move-condensed {:?}", spot)),
                 );
             }

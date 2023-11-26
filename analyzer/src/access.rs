@@ -66,7 +66,7 @@ fn expand<W, T, E, Wp>(
         for ce in cedges {
             if !spot_map.contains_key(&ce.dst) && ce.can_access(world, ctx.get(), movement_state) {
                 let mut newctx = ctx.clone();
-                newctx.move_condensed_edge(ce);
+                newctx.move_condensed_edge(world, ce);
                 let elapsed = newctx.elapsed();
                 if elapsed <= max_time {
                     spot_heap.push(Reverse(HeapElement {
@@ -112,7 +112,7 @@ fn expand_exits<W, T, E>(
     for exit in world.get_spot_exits(ctx.get().position()) {
         if !spot_map.contains_key(&exit.dest()) && exit.can_access(ctx.get(), world) {
             let mut newctx = ctx.clone();
-            newctx.exit(exit);
+            newctx.exit(world, exit);
             let elapsed = newctx.elapsed();
             if elapsed <= max_time {
                 spot_heap.push(Reverse(HeapElement {
@@ -143,7 +143,7 @@ fn expand_local<W, T, E, Wp>(
         let ltt = ctx.get().local_travel_time(movement_state, dest);
         if !spot_map.contains_key(&dest) && ltt < u32::MAX {
             let mut newctx = ctx.clone();
-            newctx.move_local(dest, ltt);
+            newctx.move_local(world, dest, ltt);
             let elapsed = newctx.elapsed();
             if elapsed <= max_time {
                 spot_heap.push(Reverse(HeapElement {
@@ -370,7 +370,7 @@ where
     for loc in world.get_all_locations() {
         if ctx.todo(loc.id()) {
             ctx.visit(loc.id());
-            ctx.collect(loc.item());
+            ctx.collect(loc.item(), world);
         }
     }
     if world.won(&ctx) {
@@ -395,7 +395,7 @@ where
         for loc in world.get_all_locations() {
             if ctx.todo(loc.id()) && loc.can_access(&ctx, world) {
                 ctx.visit(loc.id());
-                ctx.collect(loc.item());
+                ctx.collect(loc.item(), world);
                 found = true;
             }
         }

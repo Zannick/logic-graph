@@ -181,14 +181,14 @@ where
     for ce in world.get_condensed_edges_from(ctx.get().position()) {
         if ce.time + ctx.elapsed() <= max_time && ce.can_access(world, ctx.get(), movement_state) {
             let mut newctx = ctx.clone();
-            newctx.move_condensed_edge(ce);
+            newctx.move_condensed_edge(world, ce);
             results.push(newctx);
         }
     }
     for exit in world.get_spot_exits(ctx.get().position()) {
         if exit.time() + ctx.elapsed() <= max_time && exit.can_access(ctx.get(), world) {
             let mut newctx = ctx.clone();
-            newctx.exit(exit);
+            newctx.exit(world, exit);
             results.push(newctx);
         }
     }
@@ -221,7 +221,7 @@ where
         let ltt = ctx.get().local_travel_time(movement_state, dest);
         if ltt < u32::MAX && ltt + ctx.elapsed() <= max_time {
             let mut newctx = ctx.clone();
-            newctx.move_local(dest, ltt);
+            newctx.move_local(world, dest, ltt);
             results.push(newctx);
         }
     }

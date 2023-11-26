@@ -156,7 +156,7 @@ impl world::Action for Action {
         };
         let dest = self.dest(ctx, world);
         if dest != SpotId::None {
-            ctx.set_position(dest);
+            ctx.set_position(dest, world);
         }
         match self.id {
 %% for act in gl.actions()
