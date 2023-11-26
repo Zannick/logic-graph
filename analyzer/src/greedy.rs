@@ -55,7 +55,7 @@ where
                 .filter(|a| !used_globals.contains(&a.id()) && a.can_access(spot_ctx.get(), world))
             {
                 let mut newctx = spot_ctx.clone();
-                newctx.activate(action);
+                newctx.activate(world, action);
                 for nextctx in accessible_spots(world, newctx, max_time).into_values() {
                     if spot_has_locations(world, nextctx.get()) {
                         if depth > 0 {
@@ -77,7 +77,7 @@ where
                 .filter(|a| a.can_access(spot_ctx.get(), world))
             {
                 let mut newctx = spot_ctx.clone();
-                newctx.activate(action);
+                newctx.activate(world, action);
                 for nextctx in accessible_spots(world, newctx, max_time).into_values() {
                     if spot_has_locations(world, nextctx.get()) {
                         return Ok(nextctx);

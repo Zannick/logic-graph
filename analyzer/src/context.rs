@@ -450,7 +450,7 @@ impl<T: Ctx> ContextWrapper<T> {
         self.append_history(History::C(edge.dst), edge.time);
     }
 
-    pub fn warp<W, E, Wp>(&mut self, warp: &Wp)
+    pub fn warp<W, E, Wp>(&mut self, world: &W, warp: &Wp)
     where
         W: World<Exit = E, Warp = Wp>,
         T: Ctx<World = W>,
@@ -461,8 +461,8 @@ impl<T: Ctx> ContextWrapper<T> {
             Currency = <W::Location as Accessible>::Currency,
         >,
     {
-        warp.prewarp(&mut self.ctx);
-        let dest = warp.dest(&self.ctx);
+        warp.prewarp(&mut self.ctx, world);
+        let dest = warp.dest(&self.ctx, world);
         assert!(
             dest != <E as Exit>::SpotId::default(),
             "Warp can't lead to SpotId::None: {}",
@@ -471,7 +471,7 @@ impl<T: Ctx> ContextWrapper<T> {
         self.ctx.set_position(dest);
         self.elapse(warp.time());
         self.ctx.spend(warp.price());
-        warp.postwarp(&mut self.ctx);
+        warp.postwarp(&mut self.ctx, world);
         if warp.should_reload() {
             self.ctx.reload_game();
         }
@@ -499,13 +499,13 @@ impl<T: Ctx> ContextWrapper<T> {
         self.append_history(History::H(loc.item(), exit.id()), loc.time() + exit.time());
     }
 
-    pub fn activate<W, A>(&mut self, action: &A)
+    pub fn activate<W, A>(&mut self, world: &W, action: &A)
     where
         W: World<Action = A>,
         T: Ctx<World = W>,
         A: Action<Context = T, Currency = <W::Location as Accessible>::Currency>,
     {
-        action.perform(&mut self.ctx);
+        action.perform(&mut self.ctx, world);
         self.elapse(action.time());
         self.ctx.spend(action.price());
         self.append_history(History::A(action.id()), action.time());
@@ -522,7 +522,7 @@ impl<T: Ctx> ContextWrapper<T> {
         match step {
             History::W(wp, dest) => {
                 let warp = world.get_warp(wp);
-                warp.dest(&self.ctx) == dest && warp.can_access(&self.ctx, world)
+                warp.dest(&self.ctx, world) == dest && warp.can_access(&self.ctx, world)
             }
             History::G(item, loc_id) => {
                 let spot_id = world.get_location_spot(loc_id);
@@ -587,7 +587,7 @@ impl<T: Ctx> ContextWrapper<T> {
         // Some other times we should still assert some possibility.
         match step {
             History::W(wp, dest) => {
-                self.warp(world.get_warp(wp));
+                self.warp(world, world.get_warp(wp));
                 assert!(
                     self.get().position() == dest,
                     "Invalid replay: warp {:?}",
@@ -622,7 +622,7 @@ impl<T: Ctx> ContextWrapper<T> {
             }
             History::A(act_id) => {
                 let action = world.get_action(act_id);
-                self.activate(action);
+                self.activate(world, action);
             }
             History::C(spot) => {
                 let vce = world.get_condensed_edges_from(self.ctx.position());

@@ -148,13 +148,13 @@ impl world::Action for Action {
     type ActionId = ActionId;
     type SpotId = SpotId;
     fn id(&self) -> ActionId { self.id }
-    fn perform(&self, ctx: &mut Context) {
+    fn perform(&self, ctx: &mut Context, world: &World) {
         match self.id {
 %% for act in gl.actions()
             ActionId::{{ act.id }} => rules::action_{{ act.action_id }}(ctx),
 %% endfor
         };
-        let dest = self.dest(ctx);
+        let dest = self.dest(ctx, world);
         if dest != SpotId::None {
             ctx.set_position(dest);
         }
@@ -167,7 +167,7 @@ impl world::Action for Action {
             _ => (),
         };
     }
-    fn dest(&self, ctx: &Context) -> SpotId {
+    fn dest(&self, ctx: &Context, world: &World) -> SpotId {
         match self.id {
 %% for act in gl.actions()
 %% if act.to
@@ -211,7 +211,7 @@ impl world::Warp for Warp {
     type SpotId = SpotId;
 
     fn id(&self) -> WarpId { self.id }
-    fn dest(&self, ctx: &Context) -> SpotId {
+    fn dest(&self, ctx: &Context, world: &World) -> SpotId {
         if self.dest == SpotId::None {
             match self.id {
 %% for w in warps.values()|sort(attribute='id')
@@ -223,7 +223,7 @@ impl world::Warp for Warp {
         }
     }
     fn connect(&mut self, dest: SpotId) { self.dest = dest; }
-    fn prewarp(&self, ctx: &mut Context) {
+    fn prewarp(&self, ctx: &mut Context, world: &World) {
         match self.id {
 %% for w in warps.values()|sort(attribute='id')
 %% if 'before_id' in w:
@@ -233,7 +233,7 @@ impl world::Warp for Warp {
             _ => (),
         }
     }
-    fn postwarp(&self, ctx: &mut Context) {
+    fn postwarp(&self, ctx: &mut Context, world: &World) {
         match self.id {
 %% for w in warps.values()|sort(attribute='id')
 %% if 'after_id' in w:

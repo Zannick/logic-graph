@@ -4502,7 +4502,7 @@ impl world::Action for Action {
     fn id(&self) -> ActionId {
         self.id
     }
-    fn perform(&self, ctx: &mut Context) {
+    fn perform(&self, ctx: &mut Context, world: &World) {
         match self.id {
             ActionId::Global__Recall_Drone => rules::action_mode__indra(ctx),
             ActionId::Global__Deploy_Drone => rules::action_mode__drone_indra__position(ctx),
@@ -4597,7 +4597,7 @@ impl world::Action for Action {
             ActionId::Uhrum__Annuna_Corridor__Between_Two_Flowers__Throw_Drone_Up => rules::action_deploy_drone(ctx),
             ActionId::Uhrum__Annuna_Corridor__Between_Two_Flowers__Throw_Drone_Not_As_High => rules::action_deploy_drone(ctx),
         };
-        let dest = self.dest(ctx);
+        let dest = self.dest(ctx, world);
         if dest != SpotId::None {
             ctx.set_position(dest);
         }
@@ -4609,7 +4609,7 @@ impl world::Action for Action {
             _ => (),
         };
     }
-    fn dest(&self, ctx: &Context) -> SpotId {
+    fn dest(&self, ctx: &Context, world: &World) -> SpotId {
         match self.id {
             ActionId::Global__Recall_Drone => ctx.indra(),
             ActionId::Annuna__East_Bridge__Center_Gap_West__Throw_Drone_into_Tower => {
@@ -4801,7 +4801,7 @@ impl world::Warp for Warp {
     fn id(&self) -> WarpId {
         self.id
     }
-    fn dest(&self, ctx: &Context) -> SpotId {
+    fn dest(&self, ctx: &Context, world: &World) -> SpotId {
         if self.dest == SpotId::None {
             match self.id {
                 WarpId::BreachSave => ctx.breach_save(),
@@ -4844,13 +4844,13 @@ impl world::Warp for Warp {
     fn connect(&mut self, dest: SpotId) {
         self.dest = dest;
     }
-    fn prewarp(&self, ctx: &mut Context) {
+    fn prewarp(&self, ctx: &mut Context, world: &World) {
         match self.id {
             WarpId::Menu => rules::action_last__position(ctx),
             _ => (),
         }
     }
-    fn postwarp(&self, ctx: &mut Context) {
+    fn postwarp(&self, ctx: &mut Context, world: &World) {
         match self.id {
             WarpId::BreachSave => rules::action_refill_energy(ctx),
             WarpId::DroneSave => rules::action_refill_energy(ctx),

@@ -112,7 +112,7 @@ where
     for act in world.get_global_actions() {
         if act.can_access(ctx.get(), world) {
             let mut c2 = ctx.clone();
-            c2.activate(act);
+            c2.activate(world, act);
             if c2.get() != ctx.get() {
                 result.push(c2);
             }
@@ -121,7 +121,7 @@ where
     for act in world.get_spot_actions(ctx.get().position()) {
         if act.can_access(ctx.get(), world) {
             let mut c2 = ctx.clone();
-            c2.activate(act);
+            c2.activate(world, act);
             if c2.get() != ctx.get() {
                 result.push(c2);
             }
@@ -195,7 +195,7 @@ where
     for warp in world.get_warps() {
         if warp.time() + ctx.elapsed() <= max_time && warp.can_access(ctx.get(), world) {
             let mut newctx = ctx.clone();
-            newctx.warp(warp);
+            newctx.warp(world, warp);
             results.push(newctx);
         }
     }

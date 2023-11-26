@@ -72,8 +72,8 @@ pub trait Action: Accessible {
     type ActionId: Id;
     type SpotId: Id + Default;
     fn id(&self) -> Self::ActionId;
-    fn perform(&self, ctx: &mut Self::Context);
-    fn dest(&self, ctx: &Self::Context) -> Self::SpotId;
+    fn perform(&self, ctx: &mut Self::Context, world: &<Self::Context as Ctx>::World);
+    fn dest(&self, ctx: &Self::Context, world: &<Self::Context as Ctx>::World) -> Self::SpotId;
 }
 
 pub trait Warp: Accessible {
@@ -81,10 +81,10 @@ pub trait Warp: Accessible {
     type SpotId: Id + Default;
 
     fn id(&self) -> Self::WarpId;
-    fn dest(&self, ctx: &Self::Context) -> Self::SpotId;
+    fn dest(&self, ctx: &Self::Context, world: &<Self::Context as Ctx>::World) -> Self::SpotId;
     fn connect(&mut self, dest: Self::SpotId);
-    fn prewarp(&self, ctx: &mut Self::Context);
-    fn postwarp(&self, ctx: &mut Self::Context);
+    fn prewarp(&self, ctx: &mut Self::Context, world: &<Self::Context as Ctx>::World);
+    fn postwarp(&self, ctx: &mut Self::Context, world: &<Self::Context as Ctx>::World);
     fn should_reload(&self) -> bool;
 }
 

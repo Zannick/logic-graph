@@ -166,7 +166,7 @@ where
                     Some(self.algo.graph().new_edge(
                         ExternalEdgeId::Warp(wp.id()),
                         ExternalNodeId::Spot(ctx.position()),
-                        ExternalNodeId::Spot(Warp::dest(wp, ctx)),
+                        ExternalNodeId::Spot(Warp::dest(wp, ctx, self.world)),
                         wp.time().try_into().unwrap(),
                     ))
                 } else {
@@ -174,11 +174,11 @@ where
                 }
             })
             .chain(self.world.get_global_actions().iter().filter_map(|act| {
-                if Action::dest(act, ctx) != Default::default() && act.can_access(ctx, self.world) {
+                if Action::dest(act, ctx, self.world) != Default::default() && act.can_access(ctx, self.world) {
                     Some(self.algo.graph().new_edge(
                         ExternalEdgeId::Action(act.id()),
                         ExternalNodeId::Spot(ctx.position()),
-                        ExternalNodeId::Spot(Action::dest(act, ctx)),
+                        ExternalNodeId::Spot(Action::dest(act, ctx, self.world)),
                         act.time().try_into().unwrap(),
                     ))
                 } else {

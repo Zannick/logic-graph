@@ -83,9 +83,9 @@ fn expand<W, T, E, Wp>(
     expand_exits(world, ctx, spot_map, max_time, spot_heap);
 
     for warp in world.get_warps() {
-        if !spot_map.contains_key(&warp.dest(ctx.get())) && warp.can_access(ctx.get(), world) {
+        if !spot_map.contains_key(&warp.dest(ctx.get(), world)) && warp.can_access(ctx.get(), world) {
             let mut newctx = ctx.clone();
-            newctx.warp(warp);
+            newctx.warp(world, warp);
             let elapsed = newctx.elapsed();
             if elapsed <= max_time {
                 spot_heap.push(Reverse(HeapElement {
