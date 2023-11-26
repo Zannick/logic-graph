@@ -155,7 +155,7 @@ impl world::Accessible for Location {
     type Context = Context;
     type Currency = Currency;
 
-    fn can_access(&self, ctx: &Context) -> bool {
+    fn can_access(&self, ctx: &Context, world: &World) -> bool {
         ctx.can_afford(&self.price) && match self.id {
             LocationId::Deku_Tree__Back_Room__Northwest__Break_Wall => rules::access_deku_back_room_web_and_can_blast_or_smash(&ctx),
             LocationId::Deku_Tree__Back_Room__Northwest__Burn_Web => rules::access_has_fire_source_with_torch_or_can_use__bow(&ctx),
@@ -245,7 +245,7 @@ pub struct Exit {
 impl world::Accessible for Exit {
     type Context = Context;
     type Currency = Currency;
-    fn can_access(&self, ctx: &Context) -> bool {
+    fn can_access(&self, ctx: &Context, world: &World) -> bool {
         ctx.can_afford(&self.price)
             && match self.id {
                 ExitId::Deku_Tree__Back_Room__East__ex__Basement_Ledge__Web_1 => {
@@ -419,7 +419,7 @@ pub struct Action {
 impl world::Accessible for Action {
     type Context = Context;
     type Currency = Currency;
-    fn can_access(&self, ctx: &Context) -> bool {
+    fn can_access(&self, ctx: &Context, world: &World) -> bool {
         ctx.can_afford(&self.price)
             && match self.id {
                 ActionId::Deku_Tree__Compass_Room__Entry__Light_Torch => {
@@ -482,7 +482,7 @@ impl world::Accessible for Warp {
     type Context = Context;
     type Currency = Currency;
 
-    fn can_access(&self, ctx: &Context) -> bool {
+    fn can_access(&self, ctx: &Context, world: &World) -> bool {
         ctx.can_afford(&self.price)
             && match self.id {
                 WarpId::Minuet => rules::access_can_play__minuet_of_forest(&ctx),

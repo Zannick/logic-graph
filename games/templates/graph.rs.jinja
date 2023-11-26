@@ -54,7 +54,7 @@ impl world::Accessible for Location {
     type Context = Context;
     type Currency = Currency;
 
-    fn can_access(&self, ctx: &Context) -> bool {
+    fn can_access(&self, ctx: &Context, world: &World) -> bool {
         ctx.can_afford(&self.price) && match self.id {
 %% for loc in gl.locations()|sort(attribute='id')
             LocationId::{{ loc.id }} => {% if loc.access_id %}rules::access_{{ loc.access_id }}(&ctx)
@@ -89,7 +89,7 @@ pub struct Exit {
 impl world::Accessible for Exit {
     type Context = Context;
     type Currency = Currency;
-    fn can_access(&self, ctx: &Context) -> bool {
+    fn can_access(&self, ctx: &Context, world: &World) -> bool {
         ctx.can_afford(&self.price) && match self.id {
 %% for ex in gl.exits()|sort(attribute='id')
             ExitId::{{ ex.id }} => {% if ex.access_id %}rules::access_{{ ex.access_id }}(&ctx)
@@ -133,7 +133,7 @@ pub struct Action {
 impl world::Accessible for Action {
     type Context = Context;
     type Currency = Currency;
-    fn can_access(&self, ctx: &Context) -> bool {
+    fn can_access(&self, ctx: &Context, world: &World) -> bool {
         ctx.can_afford(&self.price) && match self.id {
 %% for act in gl.actions()|sort(attribute='id')
             ActionId::{{ act.id }} => {% if act.access_id %}rules::access_{{ act.access_id }}(&ctx)
@@ -195,7 +195,7 @@ impl world::Accessible for Warp {
     type Context = Context;
     type Currency = Currency;
 
-    fn can_access(&self, ctx: &Context) -> bool {
+    fn can_access(&self, ctx: &Context, world: &World) -> bool {
         ctx.can_afford(&self.price) && match self.id {
 %% for w in warps.values()|sort(attribute='id')
             WarpId::{{ w.id }} => {% if w.access_id %}rules::access_{{ w.access_id }}(&ctx)

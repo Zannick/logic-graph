@@ -162,7 +162,7 @@ where
             .get_warps()
             .iter()
             .filter_map(|wp| {
-                if wp.can_access(ctx) {
+                if wp.can_access(ctx, self.world) {
                     Some(self.algo.graph().new_edge(
                         ExternalEdgeId::Warp(wp.id()),
                         ExternalNodeId::Spot(ctx.position()),
@@ -174,7 +174,7 @@ where
                 }
             })
             .chain(self.world.get_global_actions().iter().filter_map(|act| {
-                if Action::dest(act, ctx) != Default::default() && act.can_access(ctx) {
+                if Action::dest(act, ctx) != Default::default() && act.can_access(ctx, self.world) {
                     Some(self.algo.graph().new_edge(
                         ExternalEdgeId::Action(act.id()),
                         ExternalNodeId::Spot(ctx.position()),

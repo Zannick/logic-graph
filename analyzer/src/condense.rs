@@ -75,7 +75,7 @@ where
                 return false;
             }
         }
-        self.reqs.iter().all(|&e| world.get_exit(e).can_access(ctx))
+        self.reqs.iter().all(|&e| world.get_exit(e).can_access(ctx, world))
     }
 
     pub fn is_empty(&self) -> bool {

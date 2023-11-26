@@ -19,7 +19,7 @@ where
     world
         .get_spot_locations(ctx.position())
         .iter()
-        .any(|loc| ctx.todo(loc.id()) && loc.can_access(ctx))
+        .any(|loc| ctx.todo(loc.id()) && loc.can_access(ctx, world))
 }
 
 /// Check whether there are available actions at this position, including global actions.
@@ -34,7 +34,7 @@ where
         .get_global_actions()
         .iter()
         .chain(world.get_spot_actions(ctx.position()))
-        .any(|act| act.can_access(ctx))
+        .any(|act| act.can_access(ctx, world))
 }
 
 pub fn spot_has_locations_or_actions<W, T, L, E>(world: &W, ctx: &ContextWrapper<T>) -> bool
@@ -83,7 +83,7 @@ fn expand<W, T, E, Wp>(
     expand_exits(world, ctx, spot_map, max_time, spot_heap);
 
     for warp in world.get_warps() {
-        if !spot_map.contains_key(&warp.dest(ctx.get())) && warp.can_access(ctx.get()) {
+        if !spot_map.contains_key(&warp.dest(ctx.get())) && warp.can_access(ctx.get(), world) {
             let mut newctx = ctx.clone();
             newctx.warp(warp);
             let elapsed = newctx.elapsed();
@@ -110,7 +110,7 @@ fn expand_exits<W, T, E>(
     W::Location: Location<Context = T>,
 {
     for exit in world.get_spot_exits(ctx.get().position()) {
-        if !spot_map.contains_key(&exit.dest()) && exit.can_access(ctx.get()) {
+        if !spot_map.contains_key(&exit.dest()) && exit.can_access(ctx.get(), world) {
             let mut newctx = ctx.clone();
             newctx.exit(exit);
             let elapsed = newctx.elapsed();
@@ -305,7 +305,7 @@ where
         .get_spot_locations(ctx.position())
         .iter()
         .filter_map(|loc| {
-            if ctx.todo(loc.id()) && loc.can_access(ctx) {
+            if ctx.todo(loc.id()) && loc.can_access(ctx, world) {
                 Some(loc.id())
             } else {
                 None
@@ -330,7 +330,7 @@ where
         .get_spot_locations(ctx.position())
         .iter()
         .filter(|loc| {
-            if !ctx.todo(loc.id()) || !loc.can_access(ctx) {
+            if !ctx.todo(loc.id()) || !loc.can_access(ctx, world) {
                 return false;
             } else if let Some(e) = loc.exit_id() {
                 if exit.is_none() {
@@ -393,7 +393,7 @@ where
     while found {
         found = false;
         for loc in world.get_all_locations() {
-            if ctx.todo(loc.id()) && loc.can_access(&ctx) {
+            if ctx.todo(loc.id()) && loc.can_access(&ctx, world) {
                 ctx.visit(loc.id());
                 ctx.collect(loc.item());
                 found = true;

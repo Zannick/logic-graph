@@ -96,14 +96,17 @@ pub mod testlib {
                         $ctx.set_position(next_spot);
                         continue;
                     } else if $ctx.position() == next_spot {
-                        errors.push(format!("attempting to move to current position: {}", next_spot));
+                        errors.push(format!(
+                            "attempting to move to current position: {}",
+                            next_spot
+                        ));
                     } else if $world.are_spots_connected($ctx.position(), next_spot) {
                         errors.push(String::from("local travel not available"));
                     }
                 }
                 for exit in $world.get_spot_exits($ctx.position()) {
                     if exit.dest() == next_spot {
-                        if exit.can_access(&$ctx) {
+                        if exit.can_access(&$ctx, $world) {
                             $ctx.set_position(next_spot);
                             continue 'spots;
                         } else {
@@ -113,7 +116,7 @@ pub mod testlib {
                 }
                 for warp in $world.get_warps() {
                     if warp.dest(&$ctx) == next_spot {
-                        if warp.can_access(&$ctx) {
+                        if warp.can_access(&$ctx, $world) {
                             warp.prewarp(&mut $ctx);
                             $ctx.set_position(warp.dest(&$ctx));
                             $ctx.spend(warp.price());
@@ -168,7 +171,7 @@ pub mod testlib {
             for loc in locations {
                 let spot = $world.get_location_spot(loc);
                 if let Some(ctx) = &spot_map.get(&spot) {
-                    if $world.get_location(loc).can_access(ctx.get()) {
+                    if $world.get_location(loc).can_access(ctx.get(), $world) {
                         done = true;
                         break;
                     }
@@ -220,7 +223,7 @@ pub mod testlib {
                 let spot = $world.get_location_spot(loc);
                 if let Some(ctx) = &spot_map.get(&spot) {
                     assert!(
-                        !$world.get_location(loc).can_access(ctx.get()),
+                        !$world.get_location(loc).can_access(ctx.get(), $world),
                         "Able to access location {}:\n{}\n",
                         loc,
                         $crate::context::history_str::<$T, _>(ctx.recent_history().iter().copied())
@@ -243,7 +246,7 @@ pub mod testlib {
             let spot = $world.get_location_spot($loc_id);
             if let Some(ctx) = &spot_map.get(&spot) {
                 assert!(
-                    $world.get_location($loc_id).can_access(ctx.get()),
+                    $world.get_location($loc_id).can_access(ctx.get(), $world),
                     "Expected location {} to be accessible",
                     $loc_id
                 );
@@ -266,7 +269,7 @@ pub mod testlib {
             let spot = $world.get_location_spot($loc_id);
             if let Some(ctx) = &spot_map.get(&spot) {
                 assert!(
-                    !$world.get_location($loc_id).can_access(ctx.get()),
+                    !$world.get_location($loc_id).can_access(ctx.get(), $world),
                     "Expected location {} to be inaccessible:\n{}",
                     $loc_id,
                     $crate::context::history_str::<$T, _>(ctx.recent_history().iter().copied())
@@ -282,7 +285,7 @@ pub mod testlib {
 
             if $world.is_global_action($act_id) {
                 assert!(
-                    $world.get_action($act_id).can_access(&$ctx),
+                    $world.get_action($act_id).can_access(&$ctx, $world),
                     "Expected global action {} to be accessible",
                     $act_id
                 );
@@ -296,7 +299,7 @@ pub mod testlib {
             let spot = $world.get_action_spot($act_id);
             if let Some(ctx) = &spot_map.get(&spot) {
                 assert!(
-                    $world.get_action($act_id).can_access(ctx.get()),
+                    $world.get_action($act_id).can_access(ctx.get(), $world),
                     "Expected action {} to be accessible",
                     $act_id
                 );
@@ -313,7 +316,7 @@ pub mod testlib {
 
             if $world.is_global_action($act_id) {
                 assert!(
-                    !$world.get_action($act_id).can_access(&$ctx),
+                    !$world.get_action($act_id).can_access(&$ctx, $world),
                     "Expected global action {} to be inaccessible",
                     $act_id
                 );
@@ -327,7 +330,7 @@ pub mod testlib {
             let spot = $world.get_action_spot($act_id);
             if let Some(ctx) = &spot_map.get(&spot) {
                 assert!(
-                    !$world.get_action($act_id).can_access(ctx.get()),
+                    !$world.get_action($act_id).can_access(ctx.get(), $world),
                     "Expected action {} to be inaccessible",
                     $act_id
                 );

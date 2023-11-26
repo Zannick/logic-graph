@@ -209,4 +209,5 @@ digraph sample {
     KF__Outside_Deku_Tree__Mouth -> KF__Outside_Deku_Tree__Entry;
     KF__Outside_Deku_Tree__Mouth -> KF__Outside_Deku_Tree__Left;
     KF__Outside_Deku_Tree__Mouth -> KF__Outside_Deku_Tree__Right;
+    edge [arrowhead=normal,arrowtail=inv,dir=both,style=bold,color=white];
 }

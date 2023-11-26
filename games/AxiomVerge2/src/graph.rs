@@ -2363,7 +2363,7 @@ impl world::Accessible for Location {
     type Context = Context;
     type Currency = Currency;
 
-    fn can_access(&self, ctx: &Context) -> bool {
+    fn can_access(&self, ctx: &Context, world: &World) -> bool {
         ctx.can_afford(&self.price) && match self.id {
             LocationId::Amagi__Liru_Room__Shrine__Item => true,
             LocationId::Amagi__Main_Area__Way_Off_To_The_Side__Item => true,
@@ -2810,7 +2810,7 @@ pub struct Exit {
 impl world::Accessible for Exit {
     type Context = Context;
     type Currency = Currency;
-    fn can_access(&self, ctx: &Context) -> bool {
+    fn can_access(&self, ctx: &Context, world: &World) -> bool {
         ctx.can_afford(&self.price) && match self.id {
             ExitId::Amagi__Grid_31_19__East__ex__Liru_Room__West_19_1 => true,
             ExitId::Amagi__Grid_31_19__West__ex__Main_Area__East_19_1 => true,
@@ -4250,7 +4250,7 @@ pub struct Action {
 impl world::Accessible for Action {
     type Context = Context;
     type Currency = Currency;
-    fn can_access(&self, ctx: &Context) -> bool {
+    fn can_access(&self, ctx: &Context, world: &World) -> bool {
         ctx.can_afford(&self.price)
             && match self.id {
                 ActionId::Amagi__Main_Area__Carving__Key_Combo => {
@@ -4716,7 +4716,7 @@ impl world::Accessible for Warp {
     type Context = Context;
     type Currency = Currency;
 
-    fn can_access(&self, ctx: &Context) -> bool {
+    fn can_access(&self, ctx: &Context, world: &World) -> bool {
         ctx.can_afford(&self.price)
             && match self.id {
                 WarpId::BreachSave => rules::access_realm__breach(&ctx),

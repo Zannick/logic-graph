@@ -52,7 +52,7 @@ where
             for action in world
                 .get_spot_actions(spot_ctx.get().position())
                 .iter()
-                .filter(|a| !used_globals.contains(&a.id()) && a.can_access(spot_ctx.get()))
+                .filter(|a| !used_globals.contains(&a.id()) && a.can_access(spot_ctx.get(), world))
             {
                 let mut newctx = spot_ctx.clone();
                 newctx.activate(action);
@@ -74,7 +74,7 @@ where
             for action in world
                 .get_global_actions()
                 .iter()
-                .filter(|a| a.can_access(spot_ctx.get()))
+                .filter(|a| a.can_access(spot_ctx.get(), world))
             {
                 let mut newctx = spot_ctx.clone();
                 newctx.activate(action);
@@ -113,7 +113,7 @@ where
 {
     let (locs, exit) = visitable_locations(world, ctx.get());
     for loc in locs {
-        if ctx.get().todo(loc.id()) && loc.can_access(ctx.get()) {
+        if ctx.get().todo(loc.id()) && loc.can_access(ctx.get(), world) {
             ctx.visit(world, loc);
         }
     }
@@ -122,7 +122,7 @@ where
         if ctx.get().todo(l) {
             let exit = world.get_exit(e);
             let loc = world.get_location(l);
-            if loc.can_access(ctx.get()) && exit.can_access(ctx.get()) {
+            if loc.can_access(ctx.get(), world) && exit.can_access(ctx.get(), world) {
                 ctx.visit_exit(world, loc, exit);
             }
         }

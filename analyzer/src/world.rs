@@ -18,7 +18,7 @@ use std::option::Option;
 pub trait Accessible: Sync {
     type Context: Ctx;
     type Currency: Id + Default;
-    fn can_access(&self, ctx: &Self::Context) -> bool;
+    fn can_access(&self, ctx: &Self::Context, world: &<Self::Context as Ctx>::World) -> bool;
     fn time(&self) -> u32;
     fn price(&self) -> &Self::Currency;
     fn is_free(&self) -> bool {

@@ -77,7 +77,7 @@ where
     locs.sort_unstable_by_key(|loc| loc.time());
     let mut result = Vec::new();
     for loc in locs {
-        if ctx.get().todo(loc.id()) && loc.can_access(ctx.get()) {
+        if ctx.get().todo(loc.id()) && loc.can_access(ctx.get(), world) {
             // Get the item and mark the location visited.
             let mut newctx = ctx.clone();
             newctx.visit(world, loc);
@@ -88,7 +88,10 @@ where
     if let Some(ExitWithLoc(l, e)) = exit {
         let exit = world.get_exit(e);
         let loc = world.get_location(l);
-        if ctx.get().todo(l) && loc.can_access(ctx.get()) && exit.can_access(ctx.get()) {
+        if ctx.get().todo(l)
+            && loc.can_access(ctx.get(), world)
+            && exit.can_access(ctx.get(), world)
+        {
             // Get the item and move along the exit.
             let mut newctx = ctx.clone();
             newctx.visit_exit(world, loc, exit);
@@ -107,7 +110,7 @@ where
 {
     let mut result = Vec::new();
     for act in world.get_global_actions() {
-        if act.can_access(ctx.get()) {
+        if act.can_access(ctx.get(), world) {
             let mut c2 = ctx.clone();
             c2.activate(act);
             if c2.get() != ctx.get() {
@@ -116,7 +119,7 @@ where
         }
     }
     for act in world.get_spot_actions(ctx.get().position()) {
-        if act.can_access(ctx.get()) {
+        if act.can_access(ctx.get(), world) {
             let mut c2 = ctx.clone();
             c2.activate(act);
             if c2.get() != ctx.get() {
@@ -183,14 +186,14 @@ where
         }
     }
     for exit in world.get_spot_exits(ctx.get().position()) {
-        if exit.time() + ctx.elapsed() <= max_time && exit.can_access(ctx.get()) {
+        if exit.time() + ctx.elapsed() <= max_time && exit.can_access(ctx.get(), world) {
             let mut newctx = ctx.clone();
             newctx.exit(exit);
             results.push(newctx);
         }
     }
     for warp in world.get_warps() {
-        if warp.time() + ctx.elapsed() <= max_time && warp.can_access(ctx.get()) {
+        if warp.time() + ctx.elapsed() <= max_time && warp.can_access(ctx.get(), world) {
             let mut newctx = ctx.clone();
             newctx.warp(warp);
             results.push(newctx);
@@ -566,7 +569,8 @@ where
         let res = Mutex::new(Ok(()));
         log::info!(
             "Starting search with {} workers ({} threads)",
-            num_workers, num_threads
+            num_workers,
+            num_threads
         );
 
         struct AtExit<'a> {

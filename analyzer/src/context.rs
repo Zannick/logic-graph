@@ -463,7 +463,11 @@ impl<T: Ctx> ContextWrapper<T> {
     {
         warp.prewarp(&mut self.ctx);
         let dest = warp.dest(&self.ctx);
-        assert!(dest != <E as Exit>::SpotId::default(), "Warp can't lead to SpotId::None: {}", warp.id());
+        assert!(
+            dest != <E as Exit>::SpotId::default(),
+            "Warp can't lead to SpotId::None: {}",
+            warp.id()
+        );
         self.ctx.set_position(dest);
         self.elapse(warp.time());
         self.ctx.spend(warp.price());
@@ -518,17 +522,19 @@ impl<T: Ctx> ContextWrapper<T> {
         match step {
             History::W(wp, dest) => {
                 let warp = world.get_warp(wp);
-                warp.dest(&self.ctx) == dest && warp.can_access(&self.ctx)
+                warp.dest(&self.ctx) == dest && warp.can_access(&self.ctx, world)
             }
             History::G(item, loc_id) => {
                 let spot_id = world.get_location_spot(loc_id);
                 let loc = world.get_location(loc_id);
-                spot_id == self.ctx.position() && loc.item() == item && loc.can_access(&self.ctx)
+                spot_id == self.ctx.position()
+                    && loc.item() == item
+                    && loc.can_access(&self.ctx, world)
             }
             History::E(exit_id) => {
                 let spot_id = world.get_exit_spot(exit_id);
                 let exit = world.get_exit(exit_id);
-                spot_id == self.ctx.position() && exit.can_access(&self.ctx)
+                spot_id == self.ctx.position() && exit.can_access(&self.ctx, world)
             }
             History::H(item, exit_id) => {
                 let spot_id = world.get_exit_spot(exit_id);
@@ -536,9 +542,9 @@ impl<T: Ctx> ContextWrapper<T> {
                 if let Some(loc_id) = exit.loc_id() {
                     let loc = world.get_location(*loc_id);
                     spot_id == self.ctx.position()
-                        && exit.can_access(&self.ctx)
+                        && exit.can_access(&self.ctx, world)
                         && loc.item() == item
-                        && loc.can_access(&self.ctx)
+                        && loc.can_access(&self.ctx, world)
                 } else {
                     false
                 }
@@ -557,7 +563,7 @@ impl<T: Ctx> ContextWrapper<T> {
                 let spot_id = world.get_action_spot(act_id);
                 let action = world.get_action(act_id);
                 (world.is_global_action(act_id) || self.ctx.position() == spot_id)
-                    && action.can_access(&self.ctx)
+                    && action.can_access(&self.ctx, world)
             }
             History::C(spot_id) => {
                 let movement_state = self.ctx.get_movement_state();
