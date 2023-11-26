@@ -27,7 +27,8 @@ pub fn access___deku_lobby_web_kokiri_emerald(ctx: &Context, world: &World) -> b
 }
 pub fn access___nuts_or_can_use__slingshot_and_can_jumpslash(ctx: &Context, world: &World) -> bool {
     // ($Nuts or $can_use(Slingshot)) and $can_jumpslash
-    ((helper__Nuts!(ctx) || helper__can_use!(ctx, Item::Slingshot)) && helper__can_jumpslash!(ctx))
+    ((helper__Nuts!(ctx, world) || helper__can_use!(ctx, world, Item::Slingshot))
+        && helper__can_jumpslash!(ctx, world))
 }
 pub fn access___triforce_piece__triforce_count(ctx: &Context, world: &World) -> bool {
     // [Triforce_Piece{triforce_count}]
@@ -35,15 +36,15 @@ pub fn access___triforce_piece__triforce_count(ctx: &Context, world: &World) -> 
 }
 pub fn access_can_play__minuet_of_forest(ctx: &Context, world: &World) -> bool {
     // $can_play(Minuet_of_Forest)
-    helper__can_play!(ctx, Item::Minuet_of_Forest)
+    helper__can_play!(ctx, world, Item::Minuet_of_Forest)
 }
 pub fn access_can_use__boomerang_or_can_use__hookshot(ctx: &Context, world: &World) -> bool {
     // $can_use(Boomerang) or $can_use(Hookshot)
-    (helper__can_use!(ctx, Item::Boomerang) || helper__can_use!(ctx, Item::Hookshot))
+    (helper__can_use!(ctx, world, Item::Boomerang) || helper__can_use!(ctx, world, Item::Hookshot))
 }
 pub fn access_can_use__slingshot(ctx: &Context, world: &World) -> bool {
     // $can_use(Slingshot)
-    helper__can_use!(ctx, Item::Slingshot)
+    helper__can_use!(ctx, world, Item::Slingshot)
 }
 pub fn access_defeat_gohma(ctx: &Context, world: &World) -> bool {
     // Defeat_Gohma
@@ -51,7 +52,7 @@ pub fn access_defeat_gohma(ctx: &Context, world: &World) -> bool {
 }
 pub fn access_deku_back_room_web_and_can_blast_or_smash(ctx: &Context, world: &World) -> bool {
     // Deku_Back_Room_Web and $can_blast_or_smash
-    (ctx.has(Item::Deku_Back_Room_Web) && helper__can_blast_or_smash!(ctx))
+    (ctx.has(Item::Deku_Back_Room_Web) && helper__can_blast_or_smash!(ctx, world))
 }
 pub fn access_deku_back_room_web_and_deku_back_room_wall(ctx: &Context, world: &World) -> bool {
     // Deku_Back_Room_Web and Deku_Back_Room_Wall
@@ -59,7 +60,8 @@ pub fn access_deku_back_room_web_and_deku_back_room_wall(ctx: &Context, world: &
 }
 pub fn access_deku_basement_block_and_is_child_and_sticks(ctx: &Context, world: &World) -> bool {
     // Deku_Basement_Block and $is_child and $Sticks
-    ((ctx.has(Item::Deku_Basement_Block) && helper__is_child!(ctx)) && helper__Sticks!(ctx))
+    ((ctx.has(Item::Deku_Basement_Block) && helper__is_child!(ctx, world))
+        && helper__Sticks!(ctx, world))
 }
 pub fn access_deku_basement_scrubs(ctx: &Context, world: &World) -> bool {
     // Deku_Basement_Scrubs
@@ -97,7 +99,8 @@ pub fn access_deku_tree__compass_room__entry__light_torch__req(
     world: &World,
 ) -> bool {
     // $is_child and $Sticks and not ^_torch
-    ((helper__is_child!(ctx) && helper__Sticks!(ctx)) && !ctx.deku_tree__compass_room__ctx__torch())
+    ((helper__is_child!(ctx, world) && helper__Sticks!(ctx, world))
+        && !ctx.deku_tree__compass_room__ctx__torch())
 }
 pub fn access_false(ctx: &Context, world: &World) -> bool {
     // False
@@ -109,72 +112,74 @@ pub fn access_gold_skulltula_token__10(ctx: &Context, world: &World) -> bool {
 }
 pub fn access_has_fire_source(ctx: &Context, world: &World) -> bool {
     // $has_fire_source
-    helper__has_fire_source!(ctx)
+    helper__has_fire_source!(ctx, world)
 }
 pub fn access_has_fire_source_with_torch_or_can_use__bow(ctx: &Context, world: &World) -> bool {
     // $has_fire_source_with_torch or $can_use(Bow)
-    (helper__has_fire_source_with_torch!(ctx) || helper__can_use!(ctx, Item::Bow))
+    (helper__has_fire_source_with_torch!(ctx, world) || helper__can_use!(ctx, world, Item::Bow))
 }
 pub fn access_has_shield(ctx: &Context, world: &World) -> bool {
     // $has_shield
-    helper__has_shield!(ctx)
+    helper__has_shield!(ctx, world)
 }
 pub fn access_is_adult(ctx: &Context, world: &World) -> bool {
     // $is_adult
-    helper__is_adult!(ctx)
+    helper__is_adult!(ctx, world)
 }
 pub fn access_is_adult_or_can_child_attack(ctx: &Context, world: &World) -> bool {
     // $is_adult or $can_child_attack
-    (helper__is_adult!(ctx) || helper__can_child_attack!(ctx))
+    (helper__is_adult!(ctx, world) || helper__can_child_attack!(ctx, world))
 }
 pub fn access_is_adult_or_can_child_attack_or_nuts(ctx: &Context, world: &World) -> bool {
     // $is_adult or $can_child_attack or $Nuts
-    ((helper__is_adult!(ctx) || helper__can_child_attack!(ctx)) || helper__Nuts!(ctx))
+    ((helper__is_adult!(ctx, world) || helper__can_child_attack!(ctx, world))
+        || helper__Nuts!(ctx, world))
 }
 pub fn access_is_adult_or_deku_basement_block(ctx: &Context, world: &World) -> bool {
     // $is_adult or Deku_Basement_Block
-    (helper__is_adult!(ctx) || ctx.has(Item::Deku_Basement_Block))
+    (helper__is_adult!(ctx, world) || ctx.has(Item::Deku_Basement_Block))
 }
 pub fn access_is_adult_or_kokiri_sword_or_boomerang(ctx: &Context, world: &World) -> bool {
     // $is_adult or Kokiri_Sword or Boomerang
-    ((helper__is_adult!(ctx) || ctx.has(Item::Kokiri_Sword)) || ctx.has(Item::Boomerang))
+    ((helper__is_adult!(ctx, world) || ctx.has(Item::Kokiri_Sword)) || ctx.has(Item::Boomerang))
 }
 pub fn access_is_adult_or_showed_mido(ctx: &Context, world: &World) -> bool {
     // $is_adult or Showed_Mido
-    (helper__is_adult!(ctx) || ctx.has(Item::Showed_Mido))
+    (helper__is_adult!(ctx, world) || ctx.has(Item::Showed_Mido))
 }
 pub fn access_is_adult_or_slingshot_or_sticks_or_kokiri_sword(
     ctx: &Context,
     world: &World,
 ) -> bool {
     // $is_adult or Slingshot or $Sticks or Kokiri_Sword
-    (((helper__is_adult!(ctx) || ctx.has(Item::Slingshot)) || helper__Sticks!(ctx))
+    (((helper__is_adult!(ctx, world) || ctx.has(Item::Slingshot)) || helper__Sticks!(ctx, world))
         || ctx.has(Item::Kokiri_Sword))
 }
 pub fn access_is_adult_or_sticks_or_kokiri_sword(ctx: &Context, world: &World) -> bool {
     // $is_adult or $Sticks or Kokiri_Sword
-    ((helper__is_adult!(ctx) || helper__Sticks!(ctx)) || ctx.has(Item::Kokiri_Sword))
+    ((helper__is_adult!(ctx, world) || helper__Sticks!(ctx, world)) || ctx.has(Item::Kokiri_Sword))
 }
 pub fn access_is_child(ctx: &Context, world: &World) -> bool {
     // $is_child
-    helper__is_child!(ctx)
+    helper__is_child!(ctx, world)
 }
 pub fn access_is_child_and_kokiri_sword_and_deku_shield(ctx: &Context, world: &World) -> bool {
     // $is_child and Kokiri_Sword and $Deku_Shield
-    ((helper__is_child!(ctx) && ctx.has(Item::Kokiri_Sword)) && helper__Deku_Shield!(ctx))
+    ((helper__is_child!(ctx, world) && ctx.has(Item::Kokiri_Sword))
+        && helper__Deku_Shield!(ctx, world))
 }
 pub fn access_is_child_and_sticks_and_nuts(ctx: &Context, world: &World) -> bool {
     // $is_child and $Sticks and $Nuts
-    ((helper__is_child!(ctx) && helper__Sticks!(ctx)) && helper__Nuts!(ctx))
+    ((helper__is_child!(ctx, world) && helper__Sticks!(ctx, world)) && helper__Nuts!(ctx, world))
 }
 pub fn access_nuts_and_has_shield_and_if___is_child____sticks__else____biggoron_sword_(
     ctx: &Context,
     world: &World,
 ) -> bool {
     // $Nuts and $has_shield and if ($is_child) { $Sticks } else { Biggoron_Sword }
-    ((helper__Nuts!(ctx) && helper__has_shield!(ctx))
-        && if helper__is_child!(ctx) {
-            helper__Sticks!(ctx)
+    ((helper__Nuts!(ctx, world) && helper__has_shield!(ctx, world))
+        && if helper__is_child!(ctx, world) {
+            helper__Sticks!(ctx, world)
         } else {
             ctx.has(Item::Biggoron_Sword)
         })
@@ -183,27 +188,42 @@ pub fn action_deku_tree__compass_room__entry__light_torch__do(ctx: &mut Context,
     // ^_torch = True
     ctx.set_deku_tree__compass_room__ctx__torch(true);
 }
-pub fn action_rupees__max__rupees__20_wallet_max(ctx: &mut Context, world: &World) {
+pub fn action_rupees_set_max__rupees_add_20_wallet_max(ctx: &mut Context, world: &World) {
     // ^rupees = $max(^rupees + 20, $wallet_max)
-    ctx.set_rupees(std::cmp::max(ctx.rupees() + 20, helper__wallet_max!(ctx)));
+    ctx.set_rupees(std::cmp::max(
+        ctx.rupees() + 20,
+        helper__wallet_max!(ctx, world),
+    ));
 }
-pub fn action_rupees__min__rupees__1_wallet_max(ctx: &mut Context, world: &World) {
+pub fn action_rupees_set_min__rupees_add_1_wallet_max(ctx: &mut Context, world: &World) {
     // ^rupees = $min(^rupees + 1, $wallet_max)
-    ctx.set_rupees(std::cmp::min(ctx.rupees() + 1, helper__wallet_max!(ctx)));
+    ctx.set_rupees(std::cmp::min(
+        ctx.rupees() + 1,
+        helper__wallet_max!(ctx, world),
+    ));
 }
-pub fn action_rupees__min__rupees__50_wallet_max(ctx: &mut Context, world: &World) {
+pub fn action_rupees_set_min__rupees_add_50_wallet_max(ctx: &mut Context, world: &World) {
     // ^rupees = $min(^rupees + 50, $wallet_max)
-    ctx.set_rupees(std::cmp::min(ctx.rupees() + 50, helper__wallet_max!(ctx)));
+    ctx.set_rupees(std::cmp::min(
+        ctx.rupees() + 50,
+        helper__wallet_max!(ctx, world),
+    ));
 }
-pub fn action_rupees__min__rupees__5_wallet_max(ctx: &mut Context, world: &World) {
+pub fn action_rupees_set_min__rupees_add_5_wallet_max(ctx: &mut Context, world: &World) {
     // ^rupees = $min(^rupees + 5, $wallet_max)
-    ctx.set_rupees(std::cmp::min(ctx.rupees() + 5, helper__wallet_max!(ctx)));
+    ctx.set_rupees(std::cmp::min(
+        ctx.rupees() + 5,
+        helper__wallet_max!(ctx, world),
+    ));
 }
-pub fn action_save__position(ctx: &mut Context, world: &World) {
+pub fn action_save_set_position(ctx: &mut Context, world: &World) {
     // ^save = ^position
     ctx.set_save(ctx.position());
 }
-pub fn action_tod__match_tod____day__night_night__day____day_(ctx: &mut Context, world: &World) {
+pub fn action_tod_set_match_tod____day_setgt_night_night_setgt_day___setgt_day_(
+    ctx: &mut Context,
+    world: &World,
+) {
     // ^tod = MATCH ^tod { 'day' => 'night', 'night' => 'day', _ => 'day' }
     ctx.set_tod(match ctx.tod() {
         enums::Tod::Day => enums::Tod::Night,

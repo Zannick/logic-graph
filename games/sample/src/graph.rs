@@ -206,7 +206,10 @@ impl world::Accessible for Location {
             LocationId::KF__Shop__Entry__Item_8 => true,
         }
     }
-    fn time(&self) -> u32 {
+    fn base_time(&self) -> u32 {
+        self.time
+    }
+    fn time(&self, ctx: &Context, world: &World) -> u32 {
         self.time
     }
     fn price(&self) -> &Currency {
@@ -346,7 +349,10 @@ impl world::Accessible for Exit {
                 ExitId::KF__Shop__Entry__ex__Kokiri_Village__Shop_Porch_1 => true,
             }
     }
-    fn time(&self) -> u32 {
+    fn base_time(&self) -> u32 {
+        self.time
+    }
+    fn time(&self, ctx: &Context, world: &World) -> u32 {
         self.time
     }
     fn price(&self) -> &Currency {
@@ -434,7 +440,10 @@ impl world::Accessible for Action {
                 ActionId::KF__Kokiri_Village__Sarias_Porch__Save => true,
             }
     }
-    fn time(&self) -> u32 {
+    fn base_time(&self) -> u32 {
+        self.time
+    }
+    fn time(&self, ctx: &Context, world: &World) -> u32 {
         self.time
     }
     fn price(&self) -> &Currency {
@@ -450,16 +459,18 @@ impl world::Action for Action {
     fn perform(&self, ctx: &mut Context, world: &World) {
         match self.id {
             ActionId::Global__Change_Time => {
-                rules::action_tod__match_tod____day__night_night__day____day_(ctx, world)
+                rules::action_tod_set_match_tod____day_setgt_night_night_setgt_day___setgt_day_(
+                    ctx, world,
+                )
             }
             ActionId::Deku_Tree__Compass_Room__Entry__Light_Torch => {
                 rules::action_deku_tree__compass_room__entry__light_torch__do(ctx, world)
             }
             ActionId::KF__Kokiri_Village__Midos_Porch__Gather_Rupees => {
-                rules::action_rupees__max__rupees__20_wallet_max(ctx, world)
+                rules::action_rupees_set_max__rupees_add_20_wallet_max(ctx, world)
             }
             ActionId::KF__Kokiri_Village__Sarias_Porch__Save => {
-                rules::action_save__position(ctx, world)
+                rules::action_save_set_position(ctx, world)
             }
         };
         let dest = self.dest(ctx, world);
@@ -491,12 +502,18 @@ impl world::Accessible for Warp {
     fn can_access(&self, ctx: &Context, world: &World) -> bool {
         ctx.can_afford(&self.price)
             && match self.id {
-                WarpId::Minuet => rules::access_can_play__minuet_of_forest(&ctx, world),
+                WarpId::Minuet => rules::access_can_play__minuet_of_forest(ctx, world),
                 WarpId::Save => true,
             }
     }
-    fn time(&self) -> u32 {
+    fn base_time(&self) -> u32 {
         self.time
+    }
+    fn time(&self, ctx: &Context, world: &World) -> u32 {
+        self.time
+            + match self.id {
+                _ => 0,
+            }
     }
     fn price(&self) -> &Currency {
         &self.price

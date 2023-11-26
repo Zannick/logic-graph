@@ -547,9 +547,9 @@ impl context::Ctx for Context {
             Item::Triforce_Piece => {
                 self.triforce_piece += 1;
             }
-            Item::Rupee_1 => rules::action_rupees__min__rupees__1_wallet_max(self, world),
-            Item::Rupees_5 => rules::action_rupees__min__rupees__5_wallet_max(self, world),
-            Item::Rupees_50 => rules::action_rupees__min__rupees__50_wallet_max(self, world),
+            Item::Rupee_1 => rules::action_rupees_set_min__rupees_add_1_wallet_max(self, world),
+            Item::Rupees_5 => rules::action_rupees_set_min__rupees_add_5_wallet_max(self, world),
+            Item::Rupees_50 => rules::action_rupees_set_min__rupees_add_50_wallet_max(self, world),
             _ => (),
         }
     }
@@ -1333,14 +1333,14 @@ impl context::Ctx for Context {
         self.position = pos;
     }
 
-    fn reload_game(&mut self) {
-        self.reset_all();
+    fn reload_game(&mut self, world: &graph::World) {
+        self.reset_all(world);
     }
 
-    fn reset_all(&mut self) {}
+    fn reset_all(&mut self, world: &graph::World) {}
 
-    fn reset_region(&mut self, region_id: RegionId) {}
-    fn reset_area(&mut self, area_id: AreaId) {}
+    fn reset_region(&mut self, region_id: RegionId, world: &graph::World) {}
+    fn reset_area(&mut self, area_id: AreaId, world: &graph::World) {}
     fn can_afford(&self, cost: &Currency) -> bool {
         match cost {
             Currency::Free => true,
