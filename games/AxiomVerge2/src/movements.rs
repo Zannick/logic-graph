@@ -20,7 +20,7 @@ enum Movement {
 fn has_movement(ctx: &Context, world: &World, m: Movement) -> bool {
     match m {
         Movement::Default => true,
-        Movement::Water => rules::access_underwater_movement(ctx),
+        Movement::Water => rules::access_underwater_movement(ctx, world),
     }
 }
 

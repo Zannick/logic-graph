@@ -299,9 +299,8 @@ areas:
         - name: Shockwave Wall
           req: not Irikar_Royal_Storage_Wall and $shockwave
           do: >
-            $add_item(Irikar_Royal_Storage_Wall);
-            $add_item(Flask);
-            ^flasks += 1;
+            $collect(Irikar_Royal_Storage_Wall);
+            $collect(Flask);
             $visit(`Irikar > Hub > Royal Storage in Wall > Item`);
           price: 100
           tags: [shockwave]

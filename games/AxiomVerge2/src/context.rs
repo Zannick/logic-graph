@@ -1988,21 +1988,21 @@ impl context::Ctx for Context {
             },
             Item::Amashilama => {
                 self.cbits1.insert(flags::ContextBits1::AMASHILAMA);
-                rules::action_save__glacier__revival__save_point(self);
+                rules::action_save__glacier__revival__save_point(self, world);
             },
             Item::Annuna_Mirror_Match_Switch => {
                 self.cbits1.insert(flags::ContextBits1::ANNUNA_MIRROR_MATCH_SWITCH);
             },
             Item::Anuman => {
                 self.cbits1.insert(flags::ContextBits1::ANUMAN);
-                rules::action_indra__default(self);
+                rules::action_indra__default(self, world);
             },
             Item::Apocalypse_Bomb => {
                 self.cbits1.insert(flags::ContextBits1::APOCALYPSE_BOMB);
             },
             Item::Big_Flask => {
                 self.cbits1.insert(flags::ContextBits1::BIG_FLASK);
-                rules::action_flasks__2(self);
+                rules::action_flasks__2(self, world);
             },
             Item::Boomerang => {
                 self.cbits1.insert(flags::ContextBits1::BOOMERANG);
@@ -2039,7 +2039,7 @@ impl context::Ctx for Context {
             },
             Item::Defeat_MUS_A_M20 => {
                 self.cbits2.insert(flags::ContextBits2::DEFEAT_MUS_A_M20);
-                rules::action_skip__amagi__west_lake__cavern_refill_station__break_wall_add_item__amagi_dragon_eye_passage(self);
+                rules::action_skip__amagi__west_lake__cavern_refill_station__break_wall_add_item__amagi_dragon_eye_passage(self, world);
             },
             Item::Drone_Hover => {
                 self.cbits2.insert(flags::ContextBits2::DRONE_HOVER);
@@ -2091,7 +2091,7 @@ impl context::Ctx for Context {
             },
             Item::Flask => {
                 self.flask += 1;
-                rules::action_flasks__1(self);
+                rules::action_flasks__1(self, world);
             },
             Item::Giguna_Boulder => {
                 self.cbits2.insert(flags::ContextBits2::GIGUNA_BOULDER);
@@ -2116,11 +2116,11 @@ impl context::Ctx for Context {
             },
             Item::Health_Fragment => {
                 self.health_fragment += 1;
-                rules::action_refill_energy(self);
+                rules::action_refill_energy(self, world);
             },
             Item::Health_Node => {
                 self.cbits2.insert(flags::ContextBits2::HEALTH_NODE);
-                rules::action_refill_energy(self);
+                rules::action_refill_energy(self, world);
             },
             Item::Health_Upgrade => {
                 self.cbits2.insert(flags::ContextBits2::HEALTH_UPGRADE);
@@ -2142,7 +2142,7 @@ impl context::Ctx for Context {
             },
             Item::Infect => {
                 self.cbits2.insert(flags::ContextBits2::INFECT);
-                rules::action_refill_energy(self);
+                rules::action_refill_energy(self, world);
             },
             Item::Infect_L1 => {
                 self.cbits2.insert(flags::ContextBits2::INFECT_L1);
@@ -2288,10 +2288,10 @@ impl context::Ctx for Context {
             Item::Wall_Climb => {
                 self.cbits3.insert(flags::ContextBits3::WALL_CLIMB);
             },
-            Item::Power_Core => rules::action_refills__1(self),
-            Item::Amagi_Stronghold_Wall_And_Boulder_1 => rules::action_skip__amagi__west_lake__stronghold_ceiling_left__knock_down_left_boulder_add_item__amagi_stronghold_wall_1_add_item__amagi_stronghold_boulder_1(self),
-            Item::Amagi_Stronghold_Boulder_And_Wall_2 => rules::action_skip__amagi__west_lake__stronghold_ceiling_right__knock_down_right_boulder_add_item__amagi_stronghold_wall_2_add_item__amagi_stronghold_boulder_2(self),
-            Item::Ebih_Waterfall_Both_Blocks => rules::action_skip__ebih__waterfall__alcove__block_left_skip__ebih__waterfall__alcove__block_right_skip__ebih__waterfall__alcove_left__block_left_skip__ebih__waterfall__alcove_right__block_right_add_item__ebih_waterfall_block_right_add_item__ebih_waterfall_block_left(self),
+            Item::Power_Core => rules::action_refills__1(self, world),
+            Item::Amagi_Stronghold_Wall_And_Boulder_1 => rules::action_skip__amagi__west_lake__stronghold_ceiling_left__knock_down_left_boulder_add_item__amagi_stronghold_wall_1_add_item__amagi_stronghold_boulder_1(self, world),
+            Item::Amagi_Stronghold_Boulder_And_Wall_2 => rules::action_skip__amagi__west_lake__stronghold_ceiling_right__knock_down_right_boulder_add_item__amagi_stronghold_wall_2_add_item__amagi_stronghold_boulder_2(self, world),
+            Item::Ebih_Waterfall_Both_Blocks => rules::action_skip__ebih__waterfall__alcove__block_left_skip__ebih__waterfall__alcove__block_right_skip__ebih__waterfall__alcove_left__block_left_skip__ebih__waterfall__alcove_right__block_right_add_item__ebih_waterfall_block_right_add_item__ebih_waterfall_block_left(self, world),
             _ => (),
         }
     }
@@ -5935,37 +5935,37 @@ impl context::Ctx for Context {
         match area {
             AreaId::Amagi__Grid_31_19 => {
                 if get_area(self.position) != area {
-                    rules::action_reset_old_area__newpos(self, pos);
+                    rules::action_reset_old_area__newpos(self, world, pos);
                 }
             }
             AreaId::Amagi__Liru_Room => {
                 if get_area(self.position) != area {
-                    rules::action_reset_old_area__newpos(self, pos);
+                    rules::action_reset_old_area__newpos(self, world, pos);
                 }
             }
             AreaId::Amagi__Main_Area => {
                 if get_area(self.position) != area {
-                    rules::action_reset_old_area__newpos(self, pos);
+                    rules::action_reset_old_area__newpos(self, world, pos);
                 }
             }
             AreaId::Amagi__West_Lake => {
                 if get_area(self.position) != area {
-                    rules::action_reset_old_area__newpos(self, pos);
+                    rules::action_reset_old_area__newpos(self, world, pos);
                 }
             }
             AreaId::Annuna__East_Bridge => {
                 if get_area(self.position) != area {
-                    rules::action_reset_old_area__newpos(self, pos);
+                    rules::action_reset_old_area__newpos(self, world, pos);
                 }
             }
             AreaId::Annuna__Mirror_Match => {
                 if get_area(self.position) != area {
-                    rules::action_reset_old_area__newpos(self, pos);
+                    rules::action_reset_old_area__newpos(self, world, pos);
                 }
             }
             AreaId::Annuna__West_Bridge => {
                 if get_area(self.position) != area {
-                    rules::action_reset_old_area__newpos(self, pos);
+                    rules::action_reset_old_area__newpos(self, world, pos);
                 }
             }
             AreaId::Antarctica__East => {
@@ -5975,546 +5975,546 @@ impl context::Ctx for Context {
             }
             AreaId::Ebih__Base_Camp => {
                 if get_area(self.position) != area {
-                    rules::action_reset_old_area__newpos(self, pos);
+                    rules::action_reset_old_area__newpos(self, world, pos);
                 }
             }
             AreaId::Ebih__Boss_Room => {
                 if get_area(self.position) != area {
-                    rules::action_reset_old_area__newpos(self, pos);
+                    rules::action_reset_old_area__newpos(self, world, pos);
                 }
             }
             AreaId::Ebih__By_Garage => {
                 if get_area(self.position) != area {
-                    rules::action_reset_old_area__newpos(self, pos);
+                    rules::action_reset_old_area__newpos(self, world, pos);
                 }
             }
             AreaId::Ebih__Drone_Room => {
                 if get_area(self.position) != area {
-                    rules::action_reset_old_area__newpos(self, pos);
+                    rules::action_reset_old_area__newpos(self, world, pos);
                 }
             }
             AreaId::Ebih__Ebih_East => {
                 if get_area(self.position) != area {
-                    rules::action_reset_old_area__newpos(self, pos);
+                    rules::action_reset_old_area__newpos(self, world, pos);
                 }
             }
             AreaId::Ebih__Ebih_West => {
                 if get_area(self.position) != area {
-                    rules::action_reset_old_area__newpos(self, pos);
+                    rules::action_reset_old_area__newpos(self, world, pos);
                 }
             }
             AreaId::Ebih__Gem_Room => {
                 if get_area(self.position) != area {
-                    rules::action_reset_old_area__newpos(self, pos);
+                    rules::action_reset_old_area__newpos(self, world, pos);
                 }
             }
             AreaId::Ebih__Grid_21_2_6 => {
                 if get_area(self.position) != area {
-                    rules::action_reset_old_area__newpos(self, pos);
+                    rules::action_reset_old_area__newpos(self, world, pos);
                 }
             }
             AreaId::Ebih__Grid_25_10_12 => {
                 if get_area(self.position) != area {
-                    rules::action_reset_old_area__newpos(self, pos);
+                    rules::action_reset_old_area__newpos(self, world, pos);
                 }
             }
             AreaId::Ebih__Grid_25_2_6 => {
                 if get_area(self.position) != area {
-                    rules::action_reset_old_area__newpos(self, pos);
+                    rules::action_reset_old_area__newpos(self, world, pos);
                 }
             }
             AreaId::Ebih__Grid_26_10_11 => {
                 if get_area(self.position) != area {
-                    rules::action_reset_old_area__newpos(self, pos);
+                    rules::action_reset_old_area__newpos(self, world, pos);
                 }
             }
             AreaId::Ebih__Observation_Tower_Room => {
                 if get_area(self.position) != area {
-                    rules::action_reset_old_area__newpos(self, pos);
+                    rules::action_reset_old_area__newpos(self, world, pos);
                 }
             }
             AreaId::Ebih__Vertical_Interchange => {
                 if get_area(self.position) != area {
-                    rules::action_reset_old_area__newpos(self, pos);
+                    rules::action_reset_old_area__newpos(self, world, pos);
                 }
             }
             AreaId::Ebih__Waterfall => {
                 if get_area(self.position) != area {
-                    rules::action_reset_old_area__newpos(self, pos);
+                    rules::action_reset_old_area__newpos(self, world, pos);
                 }
             }
             AreaId::Giguna__Antechamber => {
                 if get_area(self.position) != area {
-                    rules::action_reset_old_area__newpos(self, pos);
+                    rules::action_reset_old_area__newpos(self, world, pos);
                 }
             }
             AreaId::Giguna__Breachable_Wall => {
                 if get_area(self.position) != area {
-                    rules::action_reset_old_area__newpos(self, pos);
+                    rules::action_reset_old_area__newpos(self, world, pos);
                 }
             }
             AreaId::Giguna__Carnelian => {
                 if get_area(self.position) != area {
-                    rules::action_reset_old_area__newpos(self, pos);
+                    rules::action_reset_old_area__newpos(self, world, pos);
                 }
             }
             AreaId::Giguna__Clouds => {
                 if get_area(self.position) != area {
-                    rules::action_reset_old_area__newpos(self, pos);
+                    rules::action_reset_old_area__newpos(self, world, pos);
                 }
             }
             AreaId::Giguna__Dual_Path => {
                 if get_area(self.position) != area {
-                    rules::action_reset_old_area__newpos(self, pos);
+                    rules::action_reset_old_area__newpos(self, world, pos);
                 }
             }
             AreaId::Giguna__East_Caverns => {
                 if get_area(self.position) != area {
-                    rules::action_reset_old_area__newpos(self, pos);
+                    rules::action_reset_old_area__newpos(self, world, pos);
                 }
             }
             AreaId::Giguna__Far_Corner => {
                 if get_area(self.position) != area {
-                    rules::action_reset_old_area__newpos(self, pos);
+                    rules::action_reset_old_area__newpos(self, world, pos);
                 }
             }
             AreaId::Giguna__Gateway => {
                 if get_area(self.position) != area {
-                    rules::action_reset_old_area__newpos(self, pos);
+                    rules::action_reset_old_area__newpos(self, world, pos);
                 }
             }
             AreaId::Giguna__Giguna_Base => {
                 if get_area(self.position) != area {
-                    rules::action_reset_old_area__newpos(self, pos);
+                    rules::action_reset_old_area__newpos(self, world, pos);
                 }
             }
             AreaId::Giguna__Giguna_Northeast => {
                 if get_area(self.position) != area {
-                    rules::action_reset_old_area__newpos(self, pos);
+                    rules::action_reset_old_area__newpos(self, world, pos);
                 }
             }
             AreaId::Giguna__Gubi_Lair => {
                 if get_area(self.position) != area {
-                    rules::action_reset_old_area__newpos(self, pos);
+                    rules::action_reset_old_area__newpos(self, world, pos);
                 }
             }
             AreaId::Giguna__Hard_Rock => {
                 if get_area(self.position) != area {
-                    rules::action_reset_old_area__newpos(self, pos);
+                    rules::action_reset_old_area__newpos(self, world, pos);
                 }
             }
             AreaId::Giguna__Helipad => {
                 if get_area(self.position) != area {
-                    rules::action_reset_old_area__newpos(self, pos);
+                    rules::action_reset_old_area__newpos(self, world, pos);
                 }
             }
             AreaId::Giguna__Labyrinth => {
                 if get_area(self.position) != area {
-                    rules::action_reset_old_area__newpos(self, pos);
+                    rules::action_reset_old_area__newpos(self, world, pos);
                 }
             }
             AreaId::Giguna__Labyrinth_East => {
                 if get_area(self.position) != area {
-                    rules::action_reset_old_area__newpos(self, pos);
+                    rules::action_reset_old_area__newpos(self, world, pos);
                 }
             }
             AreaId::Giguna__Lamassu => {
                 if get_area(self.position) != area {
-                    rules::action_reset_old_area__newpos(self, pos);
+                    rules::action_reset_old_area__newpos(self, world, pos);
                 }
             }
             AreaId::Giguna__Mural => {
                 if get_area(self.position) != area {
-                    rules::action_reset_old_area__newpos(self, pos);
+                    rules::action_reset_old_area__newpos(self, world, pos);
                 }
             }
             AreaId::Giguna__Ruins_Center => {
                 if get_area(self.position) != area {
-                    rules::action_reset_old_area__newpos(self, pos);
+                    rules::action_reset_old_area__newpos(self, world, pos);
                 }
             }
             AreaId::Giguna__Ruins_East => {
                 if get_area(self.position) != area {
-                    rules::action_reset_old_area__newpos(self, pos);
+                    rules::action_reset_old_area__newpos(self, world, pos);
                 }
             }
             AreaId::Giguna__Ruins_Top => {
                 if get_area(self.position) != area {
-                    rules::action_reset_old_area__newpos(self, pos);
+                    rules::action_reset_old_area__newpos(self, world, pos);
                 }
             }
             AreaId::Giguna__Ruins_West => {
                 if get_area(self.position) != area {
-                    rules::action_reset_old_area__newpos(self, pos);
+                    rules::action_reset_old_area__newpos(self, world, pos);
                 }
             }
             AreaId::Giguna__Separator => {
                 if get_area(self.position) != area {
-                    rules::action_reset_old_area__newpos(self, pos);
+                    rules::action_reset_old_area__newpos(self, world, pos);
                 }
             }
             AreaId::Giguna__Vertical_Interchange => {
                 if get_area(self.position) != area {
-                    rules::action_reset_old_area__newpos(self, pos);
+                    rules::action_reset_old_area__newpos(self, world, pos);
                 }
             }
             AreaId::Giguna__Wasteland => {
                 if get_area(self.position) != area {
-                    rules::action_reset_old_area__newpos(self, pos);
+                    rules::action_reset_old_area__newpos(self, world, pos);
                 }
             }
             AreaId::Giguna__West_Caverns => {
                 if get_area(self.position) != area {
-                    rules::action_reset_old_area__newpos(self, pos);
+                    rules::action_reset_old_area__newpos(self, world, pos);
                 }
             }
             AreaId::Giguna__West_Tower => {
                 if get_area(self.position) != area {
-                    rules::action_reset_old_area__newpos(self, pos);
+                    rules::action_reset_old_area__newpos(self, world, pos);
                 }
             }
             AreaId::Giguna_Breach__Antechamber => {
                 if get_area(self.position) != area {
-                    rules::action_reset_old_area__newpos(self, pos);
+                    rules::action_reset_old_area__newpos(self, world, pos);
                 }
             }
             AreaId::Giguna_Breach__Ascent => {
                 if get_area(self.position) != area {
-                    rules::action_reset_old_area__newpos(self, pos);
+                    rules::action_reset_old_area__newpos(self, world, pos);
                 }
             }
             AreaId::Giguna_Breach__Below_Chimney => {
                 if get_area(self.position) != area {
-                    rules::action_reset_old_area__newpos(self, pos);
+                    rules::action_reset_old_area__newpos(self, world, pos);
                 }
             }
             AreaId::Giguna_Breach__Central => {
                 if get_area(self.position) != area {
-                    rules::action_reset_old_area__newpos(self, pos);
+                    rules::action_reset_old_area__newpos(self, world, pos);
                 }
             }
             AreaId::Giguna_Breach__Chimney => {
                 if get_area(self.position) != area {
-                    rules::action_reset_old_area__newpos(self, pos);
+                    rules::action_reset_old_area__newpos(self, world, pos);
                 }
             }
             AreaId::Giguna_Breach__Cubby => {
                 if get_area(self.position) != area {
-                    rules::action_reset_old_area__newpos(self, pos);
+                    rules::action_reset_old_area__newpos(self, world, pos);
                 }
             }
             AreaId::Giguna_Breach__Fire_Room => {
                 if get_area(self.position) != area {
-                    rules::action_reset_old_area__newpos(self, pos);
+                    rules::action_reset_old_area__newpos(self, world, pos);
                 }
             }
             AreaId::Giguna_Breach__Grid_14_10_11 => {
                 if get_area(self.position) != area {
-                    rules::action_reset_old_area__newpos(self, pos);
+                    rules::action_reset_old_area__newpos(self, world, pos);
                 }
             }
             AreaId::Giguna_Breach__Peak => {
                 if get_area(self.position) != area {
-                    rules::action_reset_old_area__newpos(self, pos);
+                    rules::action_reset_old_area__newpos(self, world, pos);
                 }
             }
             AreaId::Giguna_Breach__Pink_Clouds => {
                 if get_area(self.position) != area {
-                    rules::action_reset_old_area__newpos(self, pos);
+                    rules::action_reset_old_area__newpos(self, world, pos);
                 }
             }
             AreaId::Giguna_Breach__Robopede => {
                 if get_area(self.position) != area {
-                    rules::action_reset_old_area__newpos(self, pos);
+                    rules::action_reset_old_area__newpos(self, world, pos);
                 }
             }
             AreaId::Giguna_Breach__Slingshot => {
                 if get_area(self.position) != area {
-                    rules::action_reset_old_area__newpos(self, pos);
+                    rules::action_reset_old_area__newpos(self, world, pos);
                 }
             }
             AreaId::Giguna_Breach__SW_Save => {
                 if get_area(self.position) != area {
-                    rules::action_reset_old_area__newpos(self, pos);
+                    rules::action_reset_old_area__newpos(self, world, pos);
                 }
             }
             AreaId::Glacier__Apocalypse_Entry => {
                 if get_area(self.position) != area {
-                    rules::action_reset_old_area__newpos(self, pos);
+                    rules::action_reset_old_area__newpos(self, world, pos);
                 }
             }
             AreaId::Glacier__Boomerang_Antechamber => {
                 if get_area(self.position) != area {
-                    rules::action_reset_old_area__newpos(self, pos);
+                    rules::action_reset_old_area__newpos(self, world, pos);
                 }
             }
             AreaId::Glacier__Boomerang_Room => {
                 if get_area(self.position) != area {
-                    rules::action_reset_old_area__newpos(self, pos);
+                    rules::action_reset_old_area__newpos(self, world, pos);
                 }
             }
             AreaId::Glacier__Compass_Room => {
                 if get_area(self.position) != area {
-                    rules::action_reset_old_area__newpos(self, pos);
+                    rules::action_reset_old_area__newpos(self, world, pos);
                 }
             }
             AreaId::Glacier__Dock_Outside => {
                 if get_area(self.position) != area {
-                    rules::action_reset_old_area__newpos(self, pos);
+                    rules::action_reset_old_area__newpos(self, world, pos);
                 }
             }
             AreaId::Glacier__Grid_31_9_12 => {
                 if get_area(self.position) != area {
-                    rules::action_reset_old_area__newpos(self, pos);
+                    rules::action_reset_old_area__newpos(self, world, pos);
                 }
             }
             AreaId::Glacier__Grid_32_7_10 => {
                 if get_area(self.position) != area {
-                    rules::action_reset_old_area__newpos(self, pos);
+                    rules::action_reset_old_area__newpos(self, world, pos);
                 }
             }
             AreaId::Glacier__Grid_37_38_9 => {
                 if get_area(self.position) != area {
-                    rules::action_reset_old_area__newpos(self, pos);
+                    rules::action_reset_old_area__newpos(self, world, pos);
                 }
             }
             AreaId::Glacier__Grid_39_40_7_9 => {
                 if get_area(self.position) != area {
-                    rules::action_reset_old_area__newpos(self, pos);
+                    rules::action_reset_old_area__newpos(self, world, pos);
                 }
             }
             AreaId::Glacier__Grid_42_10 => {
                 if get_area(self.position) != area {
-                    rules::action_reset_old_area__newpos(self, pos);
+                    rules::action_reset_old_area__newpos(self, world, pos);
                 }
             }
             AreaId::Glacier__Grid_43_10_11 => {
                 if get_area(self.position) != area {
-                    rules::action_reset_old_area__newpos(self, pos);
+                    rules::action_reset_old_area__newpos(self, world, pos);
                 }
             }
             AreaId::Glacier__Lake_Main_Entrance => {
                 if get_area(self.position) != area {
-                    rules::action_reset_old_area__newpos(self, pos);
+                    rules::action_reset_old_area__newpos(self, world, pos);
                 }
             }
             AreaId::Glacier__Ledge_Grab_Room => {
                 if get_area(self.position) != area {
-                    rules::action_reset_old_area__newpos(self, pos);
+                    rules::action_reset_old_area__newpos(self, world, pos);
                 }
             }
             AreaId::Glacier__Peak => {
                 if get_area(self.position) != area {
-                    rules::action_reset_old_area__newpos(self, pos);
+                    rules::action_reset_old_area__newpos(self, world, pos);
                 }
             }
             AreaId::Glacier__Revival => {
                 if get_area(self.position) != area {
-                    rules::action_reset_old_area__newpos(self, pos);
+                    rules::action_reset_old_area__newpos(self, world, pos);
                 }
             }
             AreaId::Glacier__The_Big_Drop => {
                 if get_area(self.position) != area {
-                    rules::action_reset_old_area__newpos(self, pos);
+                    rules::action_reset_old_area__newpos(self, world, pos);
                 }
             }
             AreaId::Glacier__Vertical_Room => {
                 if get_area(self.position) != area {
-                    rules::action_reset_old_area__newpos(self, pos);
+                    rules::action_reset_old_area__newpos(self, world, pos);
                 }
             }
             AreaId::Interior__Building_Interior => {
                 if get_area(self.position) != area {
-                    rules::action_reset_old_area__newpos(self, pos);
+                    rules::action_reset_old_area__newpos(self, world, pos);
                 }
             }
             AreaId::Interior__Bunker_Interior => {
                 if get_area(self.position) != area {
-                    rules::action_reset_old_area__newpos(self, pos);
+                    rules::action_reset_old_area__newpos(self, world, pos);
                 }
             }
             AreaId::Interior__Cave_Behind_Waterfall => {
                 if get_area(self.position) != area {
-                    rules::action_reset_old_area__newpos(self, pos);
+                    rules::action_reset_old_area__newpos(self, world, pos);
                 }
             }
             AreaId::Interior__Ebih_Cave => {
                 if get_area(self.position) != area {
-                    rules::action_reset_old_area__newpos(self, pos);
+                    rules::action_reset_old_area__newpos(self, world, pos);
                 }
             }
             AreaId::Interior__Garage => {
                 if get_area(self.position) != area {
-                    rules::action_reset_old_area__newpos(self, pos);
+                    rules::action_reset_old_area__newpos(self, world, pos);
                 }
             }
             AreaId::Interior__Outpost_Interior => {
                 if get_area(self.position) != area {
-                    rules::action_reset_old_area__newpos(self, pos);
+                    rules::action_reset_old_area__newpos(self, world, pos);
                 }
             }
             AreaId::Interior__Tent_Interior => {
                 if get_area(self.position) != area {
-                    rules::action_reset_old_area__newpos(self, pos);
+                    rules::action_reset_old_area__newpos(self, world, pos);
                 }
             }
             AreaId::Irikar__Abandoned_Room => {
                 if get_area(self.position) != area {
-                    rules::action_reset_old_area__newpos(self, pos);
+                    rules::action_reset_old_area__newpos(self, world, pos);
                 }
             }
             AreaId::Irikar__Airy => {
                 if get_area(self.position) != area {
-                    rules::action_reset_old_area__newpos(self, pos);
+                    rules::action_reset_old_area__newpos(self, world, pos);
                 }
             }
             AreaId::Irikar__Basement_Pipes => {
                 if get_area(self.position) != area {
-                    rules::action_reset_old_area__newpos(self, pos);
+                    rules::action_reset_old_area__newpos(self, world, pos);
                 }
             }
             AreaId::Irikar__Basement_Portal => {
                 if get_area(self.position) != area {
-                    rules::action_reset_old_area__newpos(self, pos);
+                    rules::action_reset_old_area__newpos(self, world, pos);
                 }
             }
             AreaId::Irikar__Boss_Room => {
                 if get_area(self.position) != area {
-                    rules::action_reset_old_area__newpos(self, pos);
+                    rules::action_reset_old_area__newpos(self, world, pos);
                 }
             }
             AreaId::Irikar__East_Rooftops => {
                 if get_area(self.position) != area {
-                    rules::action_reset_old_area__newpos(self, pos);
+                    rules::action_reset_old_area__newpos(self, world, pos);
                 }
             }
             AreaId::Irikar__Empty_Foyer => {
                 if get_area(self.position) != area {
-                    rules::action_reset_old_area__newpos(self, pos);
+                    rules::action_reset_old_area__newpos(self, world, pos);
                 }
             }
             AreaId::Irikar__Hub => {
                 if get_area(self.position) != area {
-                    rules::action_reset_old_area__newpos(self, pos);
+                    rules::action_reset_old_area__newpos(self, world, pos);
                 }
             }
             AreaId::Irikar__Lamassu => {
                 if get_area(self.position) != area {
-                    rules::action_reset_old_area__newpos(self, pos);
+                    rules::action_reset_old_area__newpos(self, world, pos);
                 }
             }
             AreaId::Irikar__Midwest => {
                 if get_area(self.position) != area {
-                    rules::action_reset_old_area__newpos(self, pos);
+                    rules::action_reset_old_area__newpos(self, world, pos);
                 }
             }
             AreaId::Irikar__Sight_Room => {
                 if get_area(self.position) != area {
-                    rules::action_reset_old_area__newpos(self, pos);
+                    rules::action_reset_old_area__newpos(self, world, pos);
                 }
             }
             AreaId::Irikar_Breach__Basement_Save => {
                 if get_area(self.position) != area {
-                    rules::action_reset_old_area__newpos(self, pos);
+                    rules::action_reset_old_area__newpos(self, world, pos);
                 }
             }
             AreaId::Irikar_Breach__Exit_Corridor => {
                 if get_area(self.position) != area {
-                    rules::action_reset_old_area__newpos(self, pos);
+                    rules::action_reset_old_area__newpos(self, world, pos);
                 }
             }
             AreaId::Irikar_Breach__Flappy_Drone => {
                 if get_area(self.position) != area {
-                    rules::action_reset_old_area__newpos(self, pos);
+                    rules::action_reset_old_area__newpos(self, world, pos);
                 }
             }
             AreaId::Irikar_Breach__Four_way => {
                 if get_area(self.position) != area {
-                    rules::action_reset_old_area__newpos(self, pos);
+                    rules::action_reset_old_area__newpos(self, world, pos);
                 }
             }
             AreaId::Irikar_Breach__Gauntlet => {
                 if get_area(self.position) != area {
-                    rules::action_reset_old_area__newpos(self, pos);
+                    rules::action_reset_old_area__newpos(self, world, pos);
                 }
             }
             AreaId::Irikar_Breach__Hover_Room => {
                 if get_area(self.position) != area {
-                    rules::action_reset_old_area__newpos(self, pos);
+                    rules::action_reset_old_area__newpos(self, world, pos);
                 }
             }
             AreaId::Irikar_Breach__Neon_Corridor => {
                 if get_area(self.position) != area {
-                    rules::action_reset_old_area__newpos(self, pos);
+                    rules::action_reset_old_area__newpos(self, world, pos);
                 }
             }
             AreaId::Irikar_Breach__Sandy_Lair => {
                 if get_area(self.position) != area {
-                    rules::action_reset_old_area__newpos(self, pos);
+                    rules::action_reset_old_area__newpos(self, world, pos);
                 }
             }
             AreaId::Irikar_Breach__Save_Room => {
                 if get_area(self.position) != area {
-                    rules::action_reset_old_area__newpos(self, pos);
+                    rules::action_reset_old_area__newpos(self, world, pos);
                     self.cbits1
                         .insert(flags::ContextBits1::MAP__IRIKAR_BREACH__SAVE_ROOM__SAVE);
                 }
             }
             AreaId::Irikar_Breach__Uhrum_Connector => {
                 if get_area(self.position) != area {
-                    rules::action_reset_old_area__newpos(self, pos);
+                    rules::action_reset_old_area__newpos(self, world, pos);
                 }
             }
             AreaId::Irikar_Breach__Worm_Rave => {
                 if get_area(self.position) != area {
-                    rules::action_reset_old_area__newpos(self, pos);
+                    rules::action_reset_old_area__newpos(self, world, pos);
                 }
             }
             AreaId::Uhrum__Annuna_Corridor => {
                 if get_area(self.position) != area {
-                    rules::action_reset_old_area__newpos(self, pos);
+                    rules::action_reset_old_area__newpos(self, world, pos);
                 }
             }
             AreaId::Uhrum__Artillery_Practice => {
                 if get_area(self.position) != area {
-                    rules::action_reset_old_area__newpos(self, pos);
+                    rules::action_reset_old_area__newpos(self, world, pos);
                 }
             }
             AreaId::Uhrum__East_Lake => {
                 if get_area(self.position) != area {
-                    rules::action_reset_old_area__newpos(self, pos);
+                    rules::action_reset_old_area__newpos(self, world, pos);
                 }
             }
             AreaId::Uhrum__Glitchy_Corridor => {
                 if get_area(self.position) != area {
-                    rules::action_reset_old_area__newpos(self, pos);
+                    rules::action_reset_old_area__newpos(self, world, pos);
                 }
             }
             AreaId::Uhrum__Save_Room => {
                 if get_area(self.position) != area {
-                    rules::action_reset_old_area__newpos(self, pos);
+                    rules::action_reset_old_area__newpos(self, world, pos);
                     self.cbits1
                         .insert(flags::ContextBits1::MAP__UHRUM__SAVE_ROOM__SAVE);
                 }
             }
             AreaId::Uhrum__Siege_Corridor => {
                 if get_area(self.position) != area {
-                    rules::action_reset_old_area__newpos(self, pos);
+                    rules::action_reset_old_area__newpos(self, world, pos);
                 }
             }
             AreaId::Uhrum__Tulip_Tower => {
                 if get_area(self.position) != area {
-                    rules::action_reset_old_area__newpos(self, pos);
+                    rules::action_reset_old_area__newpos(self, world, pos);
                 }
             }
             AreaId::Uhrum__Waterfalls => {
                 if get_area(self.position) != area {
-                    rules::action_reset_old_area__newpos(self, pos);
+                    rules::action_reset_old_area__newpos(self, world, pos);
                 }
             }
             AreaId::Uhrum__West_Entrance => {
                 if get_area(self.position) != area {
-                    rules::action_reset_old_area__newpos(self, pos);
+                    rules::action_reset_old_area__newpos(self, world, pos);
                 }
             }
             _ => (),

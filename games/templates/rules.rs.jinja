@@ -13,17 +13,17 @@ use crate::*;
 use analyzer::context::Ctx;
 use analyzer::world;
 
-pub fn access_default(_ctx: &Context) -> bool { true }
+pub fn access_default(_ctx: &Context, _world: &World) -> bool { true }
 
 %% for id, info in access_funcs.items()|sort
-pub fn access_{{ id }}(ctx: &Context) -> bool {
+pub fn access_{{ id }}(ctx: &Context, world: &World) -> bool {
     // {{ (info.boolExpr or info.itemList).text|string|trim }}
     {{ (info.boolExpr or info.itemList)|prToRust(info) }}
 }
 %% endfor
 
 %% for id, info in action_funcs.items()|sort
-pub fn action_{{ id }}(ctx: &mut Context{% for k, t in (info.args or {}).items() %}, {{ k }}: {{ t }}{% endfor %}) {
+pub fn action_{{ id }}(ctx: &mut Context, world: &World{% for k, t in (info.args or {}).items() %}, {{ k }}: {{ t }}{% endfor %}) {
     // {{ info.actions.text.strip() }}
     {{ info.actions|prToRust(info, id) }}
 }

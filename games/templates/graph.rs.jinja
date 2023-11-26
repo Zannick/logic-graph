@@ -57,7 +57,7 @@ impl world::Accessible for Location {
     fn can_access(&self, ctx: &Context, world: &World) -> bool {
         ctx.can_afford(&self.price) && match self.id {
 %% for loc in gl.locations()|sort(attribute='id')
-            LocationId::{{ loc.id }} => {% if loc.access_id %}rules::access_{{ loc.access_id }}(&ctx)
+            LocationId::{{ loc.id }} => {% if loc.access_id %}rules::access_{{ loc.access_id }}(&ctx, world)
                 {%- else %}true{% endif %},
 %% endfor
         }
@@ -92,7 +92,7 @@ impl world::Accessible for Exit {
     fn can_access(&self, ctx: &Context, world: &World) -> bool {
         ctx.can_afford(&self.price) && match self.id {
 %% for ex in gl.exits()|sort(attribute='id')
-            ExitId::{{ ex.id }} => {% if ex.access_id %}rules::access_{{ ex.access_id }}(&ctx)
+            ExitId::{{ ex.id }} => {% if ex.access_id %}rules::access_{{ ex.access_id }}(&ctx, world)
                 {%- else %}true{% endif %},
 %% endfor
         }
@@ -136,7 +136,7 @@ impl world::Accessible for Action {
     fn can_access(&self, ctx: &Context, world: &World) -> bool {
         ctx.can_afford(&self.price) && match self.id {
 %% for act in gl.actions()|sort(attribute='id')
-            ActionId::{{ act.id }} => {% if act.access_id %}rules::access_{{ act.access_id }}(&ctx)
+            ActionId::{{ act.id }} => {% if act.access_id %}rules::access_{{ act.access_id }}(&ctx, world)
                 {%- else %}true{% endif %},
 %% endfor
         }
@@ -151,7 +151,7 @@ impl world::Action for Action {
     fn perform(&self, ctx: &mut Context, world: &World) {
         match self.id {
 %% for act in gl.actions()
-            ActionId::{{ act.id }} => rules::action_{{ act.action_id }}(ctx),
+            ActionId::{{ act.id }} => rules::action_{{ act.action_id }}(ctx, world),
 %% endfor
         };
         let dest = self.dest(ctx, world);
@@ -161,7 +161,7 @@ impl world::Action for Action {
         match self.id {
 %% for act in gl.actions()
 %% if act.act_post
-            ActionId::{{ act.id }} => rules::action_{{ act.after_id }}(ctx),
+            ActionId::{{ act.id }} => rules::action_{{ act.after_id }}(ctx, world),
 %% endif
 %% endfor
             _ => (),
@@ -198,7 +198,7 @@ impl world::Accessible for Warp {
     fn can_access(&self, ctx: &Context, world: &World) -> bool {
         ctx.can_afford(&self.price) && match self.id {
 %% for w in warps.values()|sort(attribute='id')
-            WarpId::{{ w.id }} => {% if w.access_id %}rules::access_{{ w.access_id }}(&ctx)
+            WarpId::{{ w.id }} => {% if w.access_id %}rules::access_{{ w.access_id }}(&ctx, world)
                 {%- else %}true{% endif %},
 %% endfor
         }
@@ -227,7 +227,7 @@ impl world::Warp for Warp {
         match self.id {
 %% for w in warps.values()|sort(attribute='id')
 %% if 'before_id' in w:
-            WarpId::{{ w.id }} => rules::action_{{ w.before_id }}(ctx),
+            WarpId::{{ w.id }} => rules::action_{{ w.before_id }}(ctx, world),
 %% endif
 %% endfor
             _ => (),
@@ -237,7 +237,7 @@ impl world::Warp for Warp {
         match self.id {
 %% for w in warps.values()|sort(attribute='id')
 %% if 'after_id' in w:
-            WarpId::{{ w.id }} => rules::action_{{ w.after_id }}(ctx),
+            WarpId::{{ w.id }} => rules::action_{{ w.after_id }}(ctx, world),
 %% endif
 %% endfor
             _ => (),
@@ -419,7 +419,7 @@ impl world::World for World {
     fn won(&self, ctx: &Context) -> bool {
         match self.objective {
 %% for o, info in objectives.items()
-            Objective::{{ o|construct_id }} => rules::access_{{ info.access_id }}(ctx),
+            Objective::{{ o|construct_id }} => rules::access_{{ info.access_id }}(ctx, self),
 %% endfor
         }
     }

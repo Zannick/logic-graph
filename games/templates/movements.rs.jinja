@@ -22,7 +22,7 @@ fn has_movement(ctx: &Context, world: &World, m: Movement) -> bool {
     match m {
         Movement::Default => true,
 %% for m in non_default_movements
-        Movement::{{ m|camelize }} => rules::access_{{ movements[m].access_id }}(ctx),
+        Movement::{{ m|camelize }} => rules::access_{{ movements[m].access_id }}(ctx, world),
 %% endfor
     }
 }
