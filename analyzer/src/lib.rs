@@ -85,7 +85,7 @@ pub mod testlib {
     #[macro_export]
     macro_rules! expect_this_route {
         ($world:expr, $ctx:expr, $start:expr, $spot_vec:expr) => {{
-            $ctx.set_position($start);
+            $ctx.set_position($start, $world);
             let mut errors = Vec::new();
 
             'spots: for next_spot in $spot_vec {
@@ -93,7 +93,7 @@ pub mod testlib {
                 let movement_state = $ctx.get_movement_state($world);
                 if $world.get_area_spots($ctx.position()).contains(&next_spot) {
                     if $ctx.local_travel_time(movement_state, next_spot) > 0 {
-                        $ctx.set_position(next_spot);
+                        $ctx.set_position(next_spot, $world);
                         continue;
                     } else if $ctx.position() == next_spot {
                         errors.push(format!(
@@ -107,7 +107,7 @@ pub mod testlib {
                 for exit in $world.get_spot_exits($ctx.position()) {
                     if exit.dest() == next_spot {
                         if exit.can_access(&$ctx, $world) {
-                            $ctx.set_position(next_spot);
+                            $ctx.set_position(next_spot, $world);
                             continue 'spots;
                         } else {
                             errors.push(format!("cannot use exit {}", exit.id()));
@@ -115,12 +115,12 @@ pub mod testlib {
                     }
                 }
                 for warp in $world.get_warps() {
-                    if warp.dest(&$ctx) == next_spot {
+                    if warp.dest(&$ctx, $world) == next_spot {
                         if warp.can_access(&$ctx, $world) {
-                            warp.prewarp(&mut $ctx);
-                            $ctx.set_position(warp.dest(&$ctx));
+                            warp.prewarp(&mut $ctx, $world);
+                            $ctx.set_position(warp.dest(&$ctx, $world), $world);
                             $ctx.spend(warp.price());
-                            warp.postwarp(&mut $ctx);
+                            warp.postwarp(&mut $ctx, $world);
                             if warp.should_reload() {
                                 $ctx.reload_game();
                             }
@@ -472,7 +472,7 @@ pub mod testlib {
     #[macro_export]
     macro_rules! expect_eventually_requires {
         ($world:expr, $ctx:expr, $T:ty, $start:expr, $test_req:expr, $verify_req:expr, $limit:expr, $desc:expr, $cont:expr) => {{
-            $ctx.set_position($start);
+            $ctx.set_position($start, $world);
 
             let mut heap = $crate::heap::LimitedHeap::new();
             heap.push($crate::context::ContextWrapper::new($ctx));
