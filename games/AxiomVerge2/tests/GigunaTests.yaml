@@ -43,7 +43,7 @@ tests:
     can_access: Giguna > Carnelian > Vault > Item
 
   - start: Giguna > Giguna Base > Save Point
-    can_access: Giguna > Building Interior > Bookshelf > Note
+    can_access: Interior > Outpost Interior > Bookshelf > Note
 
   - name: Dual Path Switch
     start: Giguna > Giguna Base > Save Point
