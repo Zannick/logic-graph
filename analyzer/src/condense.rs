@@ -273,7 +273,7 @@ where
                     p2.push(HeapEdge::Exit(e.id()));
                     let mut r2 = reqs.clone();
                     r2.add_exit(e.id());
-                    heap.insert((Exit::dest(e), p2, r2), t + e.time());
+                    heap.insert((Exit::dest(e), p2, r2), t + e.base_time());
                 }
             }
         }

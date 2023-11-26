@@ -167,7 +167,7 @@ where
                         ExternalEdgeId::Warp(wp.id()),
                         ExternalNodeId::Spot(ctx.position()),
                         ExternalNodeId::Spot(Warp::dest(wp, ctx, self.world)),
-                        wp.time().try_into().unwrap(),
+                        wp.base_time().try_into().unwrap(),
                     ))
                 } else {
                     None
@@ -179,7 +179,7 @@ where
                         ExternalEdgeId::Action(act.id()),
                         ExternalNodeId::Spot(ctx.position()),
                         ExternalNodeId::Spot(Action::dest(act, ctx, self.world)),
-                        act.time().try_into().unwrap(),
+                        act.base_time().try_into().unwrap(),
                     ))
                 } else {
                     None

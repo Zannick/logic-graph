@@ -150,7 +150,7 @@ where
                     ExternalEdgeId::Canon(s, loc.canon_id()),
                 )
             };
-            let wt = loc.time().try_into().unwrap();
+            let wt = loc.base_time().try_into().unwrap();
             nodes[node_index_map[&t]].queue.insert(
                 Edge {
                     id,
@@ -228,7 +228,7 @@ where
                     ExternalEdgeId::Canon(s, loc.canon_id()),
                 )
             };
-            let wt = loc.time().try_into().unwrap();
+            let wt = loc.base_time().try_into().unwrap();
             edges.push(Edge {
                 id,
                 src: node_index_map[&ExternalNodeId::Spot(s)],

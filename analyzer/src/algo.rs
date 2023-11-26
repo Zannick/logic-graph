@@ -74,7 +74,7 @@ where
     if locs.is_empty() && exit.is_none() {
         return Vec::new();
     }
-    locs.sort_unstable_by_key(|loc| loc.time());
+    locs.sort_unstable_by_key(|loc| loc.time(ctx.get(), world));
     let mut result = Vec::new();
     for loc in locs {
         if ctx.get().todo(loc.id()) && loc.can_access(ctx.get(), world) {
@@ -186,14 +186,14 @@ where
         }
     }
     for exit in world.get_spot_exits(ctx.get().position()) {
-        if exit.time() + ctx.elapsed() <= max_time && exit.can_access(ctx.get(), world) {
+        if exit.time(ctx.get(), world) + ctx.elapsed() <= max_time && exit.can_access(ctx.get(), world) {
             let mut newctx = ctx.clone();
             newctx.exit(world, exit);
             results.push(newctx);
         }
     }
     for warp in world.get_warps() {
-        if warp.time() + ctx.elapsed() <= max_time && warp.can_access(ctx.get(), world) {
+        if warp.time(ctx.get(), world) + ctx.elapsed() <= max_time && warp.can_access(ctx.get(), world) {
             let mut newctx = ctx.clone();
             newctx.warp(world, warp);
             results.push(newctx);

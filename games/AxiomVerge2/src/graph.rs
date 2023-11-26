@@ -2803,7 +2803,10 @@ impl world::Accessible for Location {
             }
         }
     }
-    fn time(&self) -> u32 {
+    fn base_time(&self) -> u32 {
+        self.time
+    }
+    fn time(&self, ctx: &Context, world: &World) -> u32 {
         self.time
     }
     fn price(&self) -> &Currency {
@@ -3910,7 +3913,10 @@ impl world::Accessible for Exit {
             ExitId::Uhrum__West_Entrance__West_of_Gate__ex__Top_West_Ledge_2 => rules::access_hook(&ctx, world),
         }
     }
-    fn time(&self) -> u32 {
+    fn base_time(&self) -> u32 {
+        self.time
+    }
+    fn time(&self, ctx: &Context, world: &World) -> u32 {
         self.time
     }
     fn price(&self) -> &Currency {
@@ -4545,7 +4551,10 @@ impl world::Accessible for Action {
                 ActionId::Uhrum__West_Entrance__Save_Point__Save => true,
             }
     }
-    fn time(&self) -> u32 {
+    fn base_time(&self) -> u32 {
+        self.time
+    }
+    fn time(&self, ctx: &Context, world: &World) -> u32 {
         self.time
     }
     fn price(&self) -> &Currency {
@@ -4847,7 +4856,10 @@ impl world::Accessible for Warp {
                 WarpId::Menu => rules::access_not_within_menu_and_flasks__0(&ctx, world),
             }
     }
-    fn time(&self) -> u32 {
+    fn base_time(&self) -> u32 {
+        self.time
+    }
+    fn time(&self, ctx: &Context, world: &World) -> u32 {
         self.time
     }
     fn price(&self) -> &Currency {

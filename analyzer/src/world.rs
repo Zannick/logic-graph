@@ -19,7 +19,10 @@ pub trait Accessible: Sync {
     type Context: Ctx;
     type Currency: Id + Default;
     fn can_access(&self, ctx: &Self::Context, world: &<Self::Context as Ctx>::World) -> bool;
-    fn time(&self) -> u32;
+    /// Base access time, assumed to be a constant.
+    fn base_time(&self) -> u32;
+    /// Actual access time. Must be at least base_time.
+    fn time(&self, ctx: &Self::Context, world: &<Self::Context as Ctx>::World) -> u32;
     fn price(&self) -> &Self::Currency;
     fn is_free(&self) -> bool {
         *self.price() == Self::Currency::default()

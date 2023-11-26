@@ -410,14 +410,15 @@ impl<T: Ctx> ContextWrapper<T> {
         T: Ctx<World = W>,
         L: Location<Context = T>,
     {
+        let dur = loc.time(&self.ctx, world);
         self.ctx.visit(loc.id());
         self.ctx.collect(loc.item(), world);
         self.ctx.spend(loc.price());
         for canon_loc_id in world.get_canon_locations(loc.id()) {
             self.ctx.skip(canon_loc_id);
         }
-        self.elapse(loc.time());
-        self.append_history(History::G(loc.item(), loc.id()), loc.time());
+        self.elapse(dur);
+        self.append_history(History::G(loc.item(), loc.id()), dur);
     }
 
     pub fn exit<W, E>(&mut self, world: &W, exit: &E)
@@ -426,10 +427,11 @@ impl<T: Ctx> ContextWrapper<T> {
         T: Ctx<World = W>,
         E: Exit<Context = T, Currency = <W::Location as Accessible>::Currency>,
     {
+        let dur = exit.time(&self.ctx, world);
         self.ctx.set_position(exit.dest(), world);
-        self.elapse(exit.time());
+        self.elapse(dur);
         self.ctx.spend(exit.price());
-        self.append_history(History::E(exit.id()), exit.time());
+        self.append_history(History::E(exit.id()), dur);
     }
 
     pub fn move_local<W, E>(&mut self, world: &W, spot: E::SpotId, time: u32)
@@ -468,6 +470,7 @@ impl<T: Ctx> ContextWrapper<T> {
             Currency = <W::Location as Accessible>::Currency,
         >,
     {
+        let dur = warp.time(&self.ctx, world);
         warp.prewarp(&mut self.ctx, world);
         let dest = warp.dest(&self.ctx, world);
         assert!(
@@ -476,13 +479,13 @@ impl<T: Ctx> ContextWrapper<T> {
             warp.id()
         );
         self.ctx.set_position(dest, world);
-        self.elapse(warp.time());
+        self.elapse(dur);
         self.ctx.spend(warp.price());
         warp.postwarp(&mut self.ctx, world);
         if warp.should_reload() {
             self.ctx.reload_game(world);
         }
-        self.append_history(History::W(warp.id(), dest), warp.time());
+        self.append_history(History::W(warp.id(), dest), dur);
     }
 
     pub fn visit_exit<W, L, E>(&mut self, world: &W, loc: &L, exit: &E)
@@ -492,18 +495,20 @@ impl<T: Ctx> ContextWrapper<T> {
         L: Location<Context = T>,
         E: Exit<Context = T, Currency = L::Currency>,
     {
+        let loc_dur = loc.time(&self.ctx, world);
+        let exit_dur = exit.time(&self.ctx, world);
         self.ctx.visit(loc.id());
         self.ctx.spend(loc.price());
         self.ctx.collect(loc.item(), world);
-        self.elapse(loc.time());
+        self.elapse(loc_dur);
         self.ctx.spend(exit.price());
         self.ctx.set_position(exit.dest(), world);
-        self.elapse(exit.time());
+        self.elapse(exit_dur);
 
         for canon_loc_id in world.get_canon_locations(loc.id()) {
             self.ctx.skip(canon_loc_id);
         }
-        self.append_history(History::H(loc.item(), exit.id()), loc.time() + exit.time());
+        self.append_history(History::H(loc.item(), exit.id()), loc_dur + exit_dur);
     }
 
     pub fn activate<W, A>(&mut self, world: &W, action: &A)
@@ -512,10 +517,11 @@ impl<T: Ctx> ContextWrapper<T> {
         T: Ctx<World = W>,
         A: Action<Context = T, Currency = <W::Location as Accessible>::Currency>,
     {
+        let dur = action.time(&self.ctx, world);
         action.perform(&mut self.ctx, world);
-        self.elapse(action.time());
+        self.elapse(dur);
         self.ctx.spend(action.price());
-        self.append_history(History::A(action.id()), action.time());
+        self.append_history(History::A(action.id()), dur);
     }
 
     pub fn can_replay<W, L, E, Wp>(&self, world: &W, step: HistoryAlias<T>) -> bool
