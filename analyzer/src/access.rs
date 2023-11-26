@@ -60,7 +60,7 @@ fn expand<W, T, E, Wp>(
     W::Location: Location<Context = T>,
     Wp: Warp<Context = T, SpotId = E::SpotId, Currency = <W::Location as Accessible>::Currency>,
 {
-    let movement_state = ctx.get().get_movement_state();
+    let movement_state = ctx.get().get_movement_state(world);
     let cedges = world.get_condensed_edges_from(ctx.get().position());
     if !cedges.is_empty() {
         for ce in cedges {
@@ -83,7 +83,8 @@ fn expand<W, T, E, Wp>(
     expand_exits(world, ctx, spot_map, max_time, spot_heap);
 
     for warp in world.get_warps() {
-        if !spot_map.contains_key(&warp.dest(ctx.get(), world)) && warp.can_access(ctx.get(), world) {
+        if !spot_map.contains_key(&warp.dest(ctx.get(), world)) && warp.can_access(ctx.get(), world)
+        {
             let mut newctx = ctx.clone();
             newctx.warp(world, warp);
             let elapsed = newctx.elapsed();
@@ -258,7 +259,7 @@ where
             expand_local(
                 world,
                 ctx,
-                ctx.get().get_movement_state(),
+                ctx.get().get_movement_state(world),
                 &spot_enum_map,
                 u32::MAX,
                 &mut spot_heap,
@@ -280,7 +281,7 @@ where
         }
         spot_enum_map.insert(pos, spot_found);
         let ctx = &spot_enum_map[&pos];
-        let movement_state = ctx.get().get_movement_state();
+        let movement_state = ctx.get().get_movement_state(world);
         expand_local(
             world,
             ctx,

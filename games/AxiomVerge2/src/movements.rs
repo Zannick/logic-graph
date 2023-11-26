@@ -5,6 +5,7 @@
 #![allow(unused)]
 
 use crate::context::Context;
+use crate::graph::World;
 use crate::graph_enums::*;
 use crate::rules;
 use analyzer::context::Ctx;
@@ -16,7 +17,7 @@ enum Movement {
     Water,
 }
 
-fn has_movement(ctx: &Context, m: Movement) -> bool {
+fn has_movement(ctx: &Context, world: &World, m: Movement) -> bool {
     match m {
         Movement::Default => true,
         Movement::Water => rules::access_underwater_movement(ctx),
@@ -25,8 +26,8 @@ fn has_movement(ctx: &Context, m: Movement) -> bool {
 
 pub type MovementState = [bool; 1];
 
-pub fn get_movement_state(ctx: &Context) -> MovementState {
-    [has_movement(ctx, Movement::Water)]
+pub fn get_movement_state(ctx: &Context, world: &World) -> MovementState {
+    [has_movement(ctx, world, Movement::Water)]
 }
 
 pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotId) -> u32 {

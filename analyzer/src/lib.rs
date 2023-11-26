@@ -90,7 +90,7 @@ pub mod testlib {
 
             'spots: for next_spot in $spot_vec {
                 errors.clear();
-                let movement_state = $ctx.get_movement_state();
+                let movement_state = $ctx.get_movement_state($world);
                 if $world.get_area_spots($ctx.position()).contains(&next_spot) {
                     if $ctx.local_travel_time(movement_state, next_spot) > 0 {
                         $ctx.set_position(next_spot);

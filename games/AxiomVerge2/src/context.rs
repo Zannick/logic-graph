@@ -11578,8 +11578,8 @@ impl context::Ctx for Context {
     fn all_region_checks(&self, id: RegionId) -> bool {
         false
     }
-    fn get_movement_state(&self) -> movements::MovementState {
-        movements::get_movement_state(self)
+    fn get_movement_state(&self, world: &graph::World) -> movements::MovementState {
+        movements::get_movement_state(self, world)
     }
 
     fn local_travel_time(&self, movement_state: movements::MovementState, dest: SpotId) -> u32 {

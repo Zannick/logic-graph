@@ -176,7 +176,7 @@ where
     L: Location<Context = T>,
 {
     // One movement total
-    let movement_state = ctx.get().get_movement_state();
+    let movement_state = ctx.get().get_movement_state(world);
     let mut results = Vec::new();
     for ce in world.get_condensed_edges_from(ctx.get().position()) {
         if ce.time + ctx.elapsed() <= max_time && ce.can_access(world, ctx.get(), movement_state) {
@@ -215,7 +215,7 @@ where
     T: Ctx<World = W>,
     L: Location<Context = T>,
 {
-    let movement_state = ctx.get().get_movement_state();
+    let movement_state = ctx.get().get_movement_state(world);
     let mut results = Vec::new();
     for &dest in world.get_area_spots(ctx.get().position()) {
         let ltt = ctx.get().local_travel_time(movement_state, dest);

@@ -82,7 +82,7 @@ pub trait Ctx:
     fn all_area_checks(&self, id: Self::AreaId) -> bool;
     fn all_region_checks(&self, id: Self::RegionId) -> bool;
 
-    fn get_movement_state(&self) -> Self::MovementState;
+    fn get_movement_state(&self, world: &Self::World) -> Self::MovementState;
     fn local_travel_time(
         &self,
         movement_state: Self::MovementState,
@@ -557,7 +557,7 @@ impl<T: Ctx> ContextWrapper<T> {
                 }
             }
             History::L(spot_id) => {
-                let movement_state = self.ctx.get_movement_state();
+                let movement_state = self.ctx.get_movement_state(world);
                 let (best_free, best_mvmts) = W::best_movements(self.ctx.position(), spot_id);
                 self.ctx.position() != spot_id
                     && W::same_area(self.ctx.position(), spot_id)
@@ -573,7 +573,7 @@ impl<T: Ctx> ContextWrapper<T> {
                     && action.can_access(&self.ctx, world)
             }
             History::C(spot_id) => {
-                let movement_state = self.ctx.get_movement_state();
+                let movement_state = self.ctx.get_movement_state(world);
                 let edges = world.get_condensed_edges_from(self.ctx.position());
                 edges.iter().any(|edge| {
                     edge.dst == spot_id && edge.can_access(world, &self.ctx, movement_state)
@@ -622,7 +622,7 @@ impl<T: Ctx> ContextWrapper<T> {
                 )
             }
             History::L(spot) => {
-                let movement_state = self.ctx.get_movement_state();
+                let movement_state = self.ctx.get_movement_state(world);
                 let time = self.ctx.local_travel_time(movement_state, spot);
                 assert!(time != u32::MAX, "Invalid replay: move-local {:?}", spot);
                 self.move_local(world, spot, time);
@@ -638,7 +638,7 @@ impl<T: Ctx> ContextWrapper<T> {
                     .iter()
                     .filter(|&c| {
                         c.dst == spot
-                            && c.can_access(world, self.get(), self.ctx.get_movement_state())
+                            && c.can_access(world, self.get(), self.ctx.get_movement_state(world))
                     })
                     .min_by_key(|c| c.time);
                 self.move_condensed_edge(
