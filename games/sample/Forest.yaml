@@ -82,6 +82,11 @@ areas:
         - to: Link's Porch
         - to: Shop Porch
         - to: Saria's Porch
+      locations:
+        - name: Victory
+          req: $objective
+          item: Victory
+          time: 0
       exits:
         - to: Boulder Maze > Entry
           req: $is_child

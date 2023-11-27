@@ -106,8 +106,7 @@ macro_rules! helper__can_deploy {
     ($ctx:expr, $world:expr) => {{
         #[allow(unused_imports)]
         use $crate::items::Item;
-        (($ctx.has(Item::Remote_Drone) && $ctx.mode() != enums::Mode::Drone)
-            && !$ctx.has(Item::Anuman))
+        (($ctx.has(Item::Remote_Drone) && $ctx.mode() != enums::Mode::Drone) && !$ctx.has(Item::Anuman))
     }};
 }
 
@@ -272,8 +271,7 @@ macro_rules! helper__range1 {
     ($ctx:expr, $world:expr) => {{
         #[allow(unused_imports)]
         use $crate::items::Item;
-        ($ctx.has(Item::Infection_Range_2)
-            || ($ctx.has(Item::Infection_Range) && $ctx.mode() != enums::Mode::Drone))
+        ($ctx.has(Item::Infection_Range_2) || (($ctx.has(Item::Infection_Range) && $ctx.mode() != enums::Mode::Drone)))
     }};
 }
 
@@ -284,8 +282,7 @@ macro_rules! helper__range2 {
     ($ctx:expr, $world:expr) => {{
         #[allow(unused_imports)]
         use $crate::items::Item;
-        ($ctx.has(Item::Infection_Range_3)
-            || ($ctx.has(Item::Infection_Range_2) && $ctx.mode() != enums::Mode::Drone))
+        ($ctx.has(Item::Infection_Range_3) || (($ctx.has(Item::Infection_Range_2) && $ctx.mode() != enums::Mode::Drone)))
     }};
 }
 
@@ -318,12 +315,7 @@ macro_rules! helper__max_energy {
     ($ctx:expr, $world:expr) => {{
         #[allow(unused_imports)]
         use $crate::items::Item;
-        match $ctx.count(Item::Nano_Points) {
-            3 => 450,
-            2 => 400,
-            1 => 350,
-            _ => 300,
-        }
+        match $ctx.count(Item::Nano_Points) { 3 => 450, 2 => 400, 1 => 350, _ => 300}
     }};
 }
 
@@ -378,38 +370,23 @@ macro_rules! helper__attract {
     ($ctx:expr, $world:expr) => {{
         #[allow(unused_imports)]
         use $crate::items::Item;
-        ($ctx.has(Item::Breach_Attractor)
-            && (($ctx.has(Item::Anuman) || $ctx.mode() != enums::Mode::Drone)
-                || $ctx.indra() == $ctx.position()))
+        ($ctx.has(Item::Breach_Attractor) && ((($ctx.has(Item::Anuman) || $ctx.mode() != enums::Mode::Drone) || $ctx.indra() == $ctx.position())))
     }};
 }
 
 /// $all_notes (  )
-/// [Dear_Ernest, Researchers_Missing, Letter_from_Trace,  Heretics_Tablet, Terminal_Breakthrough_1, Companies_Layoff, Record_Losses,  Under_Siege, The_Ideal_Kiengir, Building_of_the_School, Commemorative_Speech,  Terminal_Breakthrough_2, Dangerous_Ideas, Storm_Bomb]
+/// [Dear_Ernest, Researchers_Missing, Letter_from_Trace,  Heretics_Tablet, Terminal_Breakthrough_1, Companies_Layoff, Record_Losses,  Under_Siege, The_Ideal_Kiengir, Building_of_the_School, Commemorative_Speech,  Terminal_Breakthrough_2, Dangerous_Ideas, Storm_Bomb] 
 #[macro_export]
 macro_rules! helper__all_notes {
     ($ctx:expr, $world:expr) => {{
         #[allow(unused_imports)]
         use $crate::items::Item;
-        $ctx.has(Item::Dear_Ernest)
-            && $ctx.has(Item::Researchers_Missing)
-            && $ctx.has(Item::Letter_from_Trace)
-            && $ctx.has(Item::Heretics_Tablet)
-            && $ctx.has(Item::Terminal_Breakthrough_1)
-            && $ctx.has(Item::Companies_Layoff)
-            && $ctx.has(Item::Record_Losses)
-            && $ctx.has(Item::Under_Siege)
-            && $ctx.has(Item::The_Ideal_Kiengir)
-            && $ctx.has(Item::Building_of_the_School)
-            && $ctx.has(Item::Commemorative_Speech)
-            && $ctx.has(Item::Terminal_Breakthrough_2)
-            && $ctx.has(Item::Dangerous_Ideas)
-            && $ctx.has(Item::Storm_Bomb)
+        $ctx.has(Item::Dear_Ernest) && $ctx.has(Item::Researchers_Missing) && $ctx.has(Item::Letter_from_Trace) && $ctx.has(Item::Heretics_Tablet) && $ctx.has(Item::Terminal_Breakthrough_1) && $ctx.has(Item::Companies_Layoff) && $ctx.has(Item::Record_Losses) && $ctx.has(Item::Under_Siege) && $ctx.has(Item::The_Ideal_Kiengir) && $ctx.has(Item::Building_of_the_School) && $ctx.has(Item::Commemorative_Speech) && $ctx.has(Item::Terminal_Breakthrough_2) && $ctx.has(Item::Dangerous_Ideas) && $ctx.has(Item::Storm_Bomb)
     }};
 }
 
 /// $all_flasks (  )
-/// [Flask{12}, Big_Flask]
+/// [Flask{12}, Big_Flask] 
 #[macro_export]
 macro_rules! helper__all_flasks {
     ($ctx:expr, $world:expr) => {{
@@ -420,7 +397,7 @@ macro_rules! helper__all_flasks {
 }
 
 /// $all_health (  )
-/// [Health_Node, Health_Fragment{6}]
+/// [Health_Node, Health_Fragment{6}] 
 #[macro_export]
 macro_rules! helper__all_health {
     ($ctx:expr, $world:expr) => {{
@@ -431,7 +408,7 @@ macro_rules! helper__all_health {
 }
 
 /// $all_weapons (  )
-/// [Ice_Axe, Bronze_Axe]
+/// [Ice_Axe, Bronze_Axe] 
 #[macro_export]
 macro_rules! helper__all_weapons {
     ($ctx:expr, $world:expr) => {{
@@ -442,7 +419,7 @@ macro_rules! helper__all_weapons {
 }
 
 /// $other_items (  )
-/// [Compass, Boomerang, Power_Matrix]
+/// [Compass, Boomerang, Power_Matrix] 
 #[macro_export]
 macro_rules! helper__other_items {
     ($ctx:expr, $world:expr) => {{
@@ -453,22 +430,13 @@ macro_rules! helper__other_items {
 }
 
 /// $all_urns (  )
-/// [Amashilama, Ledge_Grab, Infect, Remote_Drone, Shockwave, Wall_Climb, Slingshot_Hook, Breach_Sight,  Drone_Hover, Fast_Travel]
+/// [Amashilama, Ledge_Grab, Infect, Remote_Drone, Shockwave, Wall_Climb, Slingshot_Hook, Breach_Sight,  Drone_Hover, Fast_Travel] 
 #[macro_export]
 macro_rules! helper__all_urns {
     ($ctx:expr, $world:expr) => {{
         #[allow(unused_imports)]
         use $crate::items::Item;
-        $ctx.has(Item::Amashilama)
-            && $ctx.has(Item::Ledge_Grab)
-            && $ctx.has(Item::Infect)
-            && $ctx.has(Item::Remote_Drone)
-            && $ctx.has(Item::Shockwave)
-            && $ctx.has(Item::Wall_Climb)
-            && $ctx.has(Item::Slingshot_Hook)
-            && $ctx.has(Item::Breach_Sight)
-            && $ctx.has(Item::Drone_Hover)
-            && $ctx.has(Item::Fast_Travel)
+        $ctx.has(Item::Amashilama) && $ctx.has(Item::Ledge_Grab) && $ctx.has(Item::Infect) && $ctx.has(Item::Remote_Drone) && $ctx.has(Item::Shockwave) && $ctx.has(Item::Wall_Climb) && $ctx.has(Item::Slingshot_Hook) && $ctx.has(Item::Breach_Sight) && $ctx.has(Item::Drone_Hover) && $ctx.has(Item::Fast_Travel)
     }};
 }
 
@@ -479,8 +447,7 @@ macro_rules! helper__save {
     ($ctx:expr, $world:expr) => {{
         #[allow(unused_imports)]
         use $crate::items::Item;
-        $ctx.set_save($ctx.position());
-        helper__refill_energy!($ctx, $world);
+        $ctx.set_save($ctx.position()); helper__refill_energy!($ctx, $world);
     }};
 }
 
@@ -496,45 +463,35 @@ macro_rules! helper__refill_energy {
 }
 
 /// $deploy_drone (  )
-/// ^mode = 'drone'; ^indra = ^position;
+/// ^mode = 'drone'; ^indra = ^position; 
 #[macro_export]
 macro_rules! helper__deploy_drone {
     ($ctx:expr, $world:expr) => {{
         #[allow(unused_imports)]
         use $crate::items::Item;
-        $ctx.set_mode(enums::Mode::Drone);
-        $ctx.set_indra($ctx.position());
+        $ctx.set_mode(enums::Mode::Drone); $ctx.set_indra($ctx.position());
     }};
 }
 
 /// $deploy_drone_and_move ( TypedVar(name='indrapos', type='SpotId') )
-/// ^mode = 'drone'; ^indra = ^indrapos;
+/// ^mode = 'drone'; ^indra = ^indrapos; 
 #[macro_export]
 macro_rules! helper__deploy_drone_and_move {
     ($ctx:expr, $world:expr, $indrapos:expr) => {{
         #[allow(unused_imports)]
         use $crate::items::Item;
-        $ctx.set_mode(enums::Mode::Drone);
-        $ctx.set_indra($indrapos);
+        $ctx.set_mode(enums::Mode::Drone); $ctx.set_indra($indrapos);
     }};
 }
 
 /// $reset_old_area ( TypedVar(name='newpos', type='SpotId') )
-/// IF (^position NOT WITHIN ^prev_area     AND ^position NOT WITHIN `Menu`     AND ^newpos NOT WITHIN $get_area(^position)) {         IF (^newpos NOT WITHIN ^prev_area) {             $reset_area(^prev_area);         };         ^prev_area = $get_area(^position); }
+/// IF (^position NOT WITHIN ^prev_area     AND ^position NOT WITHIN `Menu`     AND ^newpos NOT WITHIN $get_area(^position)) {         IF (^newpos NOT WITHIN ^prev_area) {             $reset_area(^prev_area);         };         ^prev_area = $get_area(^position); } 
 #[macro_export]
 macro_rules! helper__reset_old_area {
     ($ctx:expr, $world:expr, $newpos:expr) => {{
         #[allow(unused_imports)]
         use $crate::items::Item;
-        if ((get_area($ctx.position()) != $ctx.prev_area()
-            && get_region($ctx.position()) != RegionId::Menu)
-            && get_area($newpos) != get_area($ctx.position()))
-        {
-            if get_area($newpos) != $ctx.prev_area() {
-                $ctx.reset_area($ctx.prev_area(), $world);
-            }
-            $ctx.set_prev_area(get_area($ctx.position()));
-        }
+        if ((get_area($ctx.position()) != $ctx.prev_area() && get_region($ctx.position()) != RegionId::Menu) && get_area($newpos) != get_area($ctx.position())) { if get_area($newpos) != $ctx.prev_area() { $ctx.reset_area($ctx.prev_area(), $world); } $ctx.set_prev_area(get_area($ctx.position())); }
     }};
 }
 
@@ -567,6 +524,7 @@ macro_rules! helper__clear_breach_save {
     ($ctx:expr, $world:expr) => {{
         #[allow(unused_imports)]
         use $crate::items::Item;
-        $ctx.set_breach_save(Default::default());
+        $ctx.set_breach_save(Default::default()());
     }};
 }
+

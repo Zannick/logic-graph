@@ -184,6 +184,10 @@ pub fn access_nuts_and_has_shield_and_if___is_child____sticks__else____biggoron_
             ctx.has(Item::Biggoron_Sword)
         })
 }
+pub fn access_objective(ctx: &Context, world: &World) -> bool {
+    // $objective
+    world.objective_met(ctx)
+}
 pub fn action_deku_tree__compass_room__entry__light_torch__do(ctx: &mut Context, world: &World) {
     // ^_torch = True
     ctx.set_deku_tree__compass_room__ctx__torch(true);

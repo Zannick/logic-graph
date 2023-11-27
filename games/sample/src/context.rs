@@ -176,8 +176,8 @@ pub mod flags {
             const VISITED_KF__BABA_CORRIDOR__DEKU_BABAS__STICKS = 0x800000000000000;
             const VISITED_KF__BOULDER_MAZE__REWARD__CHEST = 0x1000000000000000;
             const VISITED_KF__KOKIRI_VILLAGE__MIDOS_GUARDPOST__SHOW_MIDO = 0x2000000000000000;
-            const VISITED_KF__MIDOS_HOUSE__ENTRY__BOTTOM_LEFT_CHEST = 0x4000000000000000;
-            const VISITED_KF__MIDOS_HOUSE__ENTRY__BOTTOM_RIGHT_CHEST = 0x8000000000000000;
+            const VISITED_KF__KOKIRI_VILLAGE__TRAINING_CENTER__VICTORY = 0x4000000000000000;
+            const VISITED_KF__MIDOS_HOUSE__ENTRY__BOTTOM_LEFT_CHEST = 0x8000000000000000;
             const ALL_VISIT_FLAGS = 0xffffffff80000000;
         }
     }
@@ -189,69 +189,71 @@ pub mod flags {
     bitflags! {
         #[derive(Copy, Clone, Debug, Default, PartialEq, Eq, Hash, Serialize, Deserialize)]
         pub struct ContextBits2 : u64 {
-            const VISITED_KF__MIDOS_HOUSE__ENTRY__TOP_LEFT_CHEST = 0x1;
-            const VISITED_KF__MIDOS_HOUSE__ENTRY__TOP_RIGHT_CHEST = 0x2;
-            const VISITED_KF__OUTSIDE_DEKU_TREE__LEFT__GOSSIP_STONE = 0x4;
-            const VISITED_KF__OUTSIDE_DEKU_TREE__RIGHT__GOSSIP_STONE = 0x8;
-            const VISITED_KF__SHOP__ENTRY__BLUE_RUPEE = 0x10;
-            const VISITED_KF__SHOP__ENTRY__ITEM_1 = 0x20;
-            const VISITED_KF__SHOP__ENTRY__ITEM_2 = 0x40;
-            const VISITED_KF__SHOP__ENTRY__ITEM_3 = 0x80;
-            const VISITED_KF__SHOP__ENTRY__ITEM_4 = 0x100;
-            const VISITED_KF__SHOP__ENTRY__ITEM_5 = 0x200;
-            const VISITED_KF__SHOP__ENTRY__ITEM_6 = 0x400;
-            const VISITED_KF__SHOP__ENTRY__ITEM_7 = 0x800;
-            const VISITED_KF__SHOP__ENTRY__ITEM_8 = 0x1000;
-            const VISITED_KAK__SPIDER_HOUSE__ENTRY__SKULLS_10 = 0x2000;
-            const SKIPPED_DEKU_TREE__BACK_ROOM__NORTHWEST__BREAK_WALL = 0x4000;
-            const SKIPPED_DEKU_TREE__BACK_ROOM__NORTHWEST__BURN_WEB = 0x8000;
-            const SKIPPED_DEKU_TREE__BASEMENT_1__CENTER__VINES_GS = 0x10000;
-            const SKIPPED_DEKU_TREE__BASEMENT_1__CORNER__BURN_BASEMENT_WEB = 0x20000;
-            const SKIPPED_DEKU_TREE__BASEMENT_1__CORNER__CHEST = 0x40000;
-            const SKIPPED_DEKU_TREE__BASEMENT_1__CORNER__GATE_GS = 0x80000;
-            const SKIPPED_DEKU_TREE__BASEMENT_1__CORNER__SWITCH = 0x100000;
-            const SKIPPED_DEKU_TREE__BASEMENT_2__BOSS_DOOR__SCRUBS = 0x200000;
-            const SKIPPED_DEKU_TREE__BASEMENT_LEDGE__BLOCK__PUSH_BLOCK = 0x400000;
-            const SKIPPED_DEKU_TREE__BASEMENT_LEDGE__WEB__BURN_WEB = 0x800000;
-            const SKIPPED_DEKU_TREE__BOSS_ROOM__ARENA__BLUE_WARP = 0x1000000;
-            const SKIPPED_DEKU_TREE__BOSS_ROOM__ARENA__GOHMA = 0x2000000;
-            const SKIPPED_DEKU_TREE__BOSS_ROOM__ARENA__GOHMA_HEART = 0x4000000;
-            const SKIPPED_DEKU_TREE__BOSS_ROOM__ARENA__GOHMA_QUICK_KILL = 0x8000000;
-            const SKIPPED_DEKU_TREE__COMPASS_ROOM__COMPASS__CHEST = 0x10000000;
-            const SKIPPED_DEKU_TREE__COMPASS_ROOM__ENTRY__BURN_WEB = 0x20000000;
-            const SKIPPED_DEKU_TREE__COMPASS_ROOM__LEDGE__CHEST = 0x40000000;
-            const SKIPPED_DEKU_TREE__COMPASS_ROOM__LEDGE__GS = 0x80000000;
-            const SKIPPED_DEKU_TREE__FLOOR_2__VINES__MAP_CHEST = 0x100000000;
-            const SKIPPED_DEKU_TREE__FLOOR_3__DOOR__BREAK_WEB = 0x200000000;
-            const SKIPPED_DEKU_TREE__LOBBY__CENTER__DEKU_BABA_NUTS = 0x400000000;
-            const SKIPPED_DEKU_TREE__LOBBY__CENTER__DEKU_BABA_STICKS = 0x800000000;
-            const SKIPPED_DEKU_TREE__LOBBY__CENTER__WEB = 0x1000000000;
-            const SKIPPED_DEKU_TREE__SCRUB_ROOM__ENTRY__SCRUB = 0x2000000000;
-            const SKIPPED_DEKU_TREE__SKULL_ROOM__ENTRY__GS = 0x4000000000;
-            const SKIPPED_DEKU_TREE__SLINGSHOT_ROOM__SLINGSHOT__CHEST = 0x8000000000;
-            const SKIPPED_DEKU_TREE__SLINGSHOT_UPPER__LEDGE__CHEST = 0x10000000000;
-            const SKIPPED_KF__BABA_CORRIDOR__DEKU_BABAS__NUTS = 0x20000000000;
-            const SKIPPED_KF__BABA_CORRIDOR__DEKU_BABAS__STICKS = 0x40000000000;
-            const SKIPPED_KF__BOULDER_MAZE__REWARD__CHEST = 0x80000000000;
-            const SKIPPED_KF__KOKIRI_VILLAGE__MIDOS_GUARDPOST__SHOW_MIDO = 0x100000000000;
-            const SKIPPED_KF__MIDOS_HOUSE__ENTRY__BOTTOM_LEFT_CHEST = 0x200000000000;
-            const SKIPPED_KF__MIDOS_HOUSE__ENTRY__BOTTOM_RIGHT_CHEST = 0x400000000000;
-            const SKIPPED_KF__MIDOS_HOUSE__ENTRY__TOP_LEFT_CHEST = 0x800000000000;
-            const SKIPPED_KF__MIDOS_HOUSE__ENTRY__TOP_RIGHT_CHEST = 0x1000000000000;
-            const SKIPPED_KF__OUTSIDE_DEKU_TREE__LEFT__GOSSIP_STONE = 0x2000000000000;
-            const SKIPPED_KF__OUTSIDE_DEKU_TREE__RIGHT__GOSSIP_STONE = 0x4000000000000;
-            const SKIPPED_KF__SHOP__ENTRY__BLUE_RUPEE = 0x8000000000000;
-            const SKIPPED_KF__SHOP__ENTRY__ITEM_1 = 0x10000000000000;
-            const SKIPPED_KF__SHOP__ENTRY__ITEM_2 = 0x20000000000000;
-            const SKIPPED_KF__SHOP__ENTRY__ITEM_3 = 0x40000000000000;
-            const SKIPPED_KF__SHOP__ENTRY__ITEM_4 = 0x80000000000000;
-            const SKIPPED_KF__SHOP__ENTRY__ITEM_5 = 0x100000000000000;
-            const SKIPPED_KF__SHOP__ENTRY__ITEM_6 = 0x200000000000000;
-            const SKIPPED_KF__SHOP__ENTRY__ITEM_7 = 0x400000000000000;
-            const SKIPPED_KF__SHOP__ENTRY__ITEM_8 = 0x800000000000000;
-            const SKIPPED_KAK__SPIDER_HOUSE__ENTRY__SKULLS_10 = 0x1000000000000000;
-            const ALL_VISIT_FLAGS = 0x3fff;
-            const ALL_SKIP_FLAGS = 0x1fffffffffffc000;
+            const VISITED_KF__MIDOS_HOUSE__ENTRY__BOTTOM_RIGHT_CHEST = 0x1;
+            const VISITED_KF__MIDOS_HOUSE__ENTRY__TOP_LEFT_CHEST = 0x2;
+            const VISITED_KF__MIDOS_HOUSE__ENTRY__TOP_RIGHT_CHEST = 0x4;
+            const VISITED_KF__OUTSIDE_DEKU_TREE__LEFT__GOSSIP_STONE = 0x8;
+            const VISITED_KF__OUTSIDE_DEKU_TREE__RIGHT__GOSSIP_STONE = 0x10;
+            const VISITED_KF__SHOP__ENTRY__BLUE_RUPEE = 0x20;
+            const VISITED_KF__SHOP__ENTRY__ITEM_1 = 0x40;
+            const VISITED_KF__SHOP__ENTRY__ITEM_2 = 0x80;
+            const VISITED_KF__SHOP__ENTRY__ITEM_3 = 0x100;
+            const VISITED_KF__SHOP__ENTRY__ITEM_4 = 0x200;
+            const VISITED_KF__SHOP__ENTRY__ITEM_5 = 0x400;
+            const VISITED_KF__SHOP__ENTRY__ITEM_6 = 0x800;
+            const VISITED_KF__SHOP__ENTRY__ITEM_7 = 0x1000;
+            const VISITED_KF__SHOP__ENTRY__ITEM_8 = 0x2000;
+            const VISITED_KAK__SPIDER_HOUSE__ENTRY__SKULLS_10 = 0x4000;
+            const SKIPPED_DEKU_TREE__BACK_ROOM__NORTHWEST__BREAK_WALL = 0x8000;
+            const SKIPPED_DEKU_TREE__BACK_ROOM__NORTHWEST__BURN_WEB = 0x10000;
+            const SKIPPED_DEKU_TREE__BASEMENT_1__CENTER__VINES_GS = 0x20000;
+            const SKIPPED_DEKU_TREE__BASEMENT_1__CORNER__BURN_BASEMENT_WEB = 0x40000;
+            const SKIPPED_DEKU_TREE__BASEMENT_1__CORNER__CHEST = 0x80000;
+            const SKIPPED_DEKU_TREE__BASEMENT_1__CORNER__GATE_GS = 0x100000;
+            const SKIPPED_DEKU_TREE__BASEMENT_1__CORNER__SWITCH = 0x200000;
+            const SKIPPED_DEKU_TREE__BASEMENT_2__BOSS_DOOR__SCRUBS = 0x400000;
+            const SKIPPED_DEKU_TREE__BASEMENT_LEDGE__BLOCK__PUSH_BLOCK = 0x800000;
+            const SKIPPED_DEKU_TREE__BASEMENT_LEDGE__WEB__BURN_WEB = 0x1000000;
+            const SKIPPED_DEKU_TREE__BOSS_ROOM__ARENA__BLUE_WARP = 0x2000000;
+            const SKIPPED_DEKU_TREE__BOSS_ROOM__ARENA__GOHMA = 0x4000000;
+            const SKIPPED_DEKU_TREE__BOSS_ROOM__ARENA__GOHMA_HEART = 0x8000000;
+            const SKIPPED_DEKU_TREE__BOSS_ROOM__ARENA__GOHMA_QUICK_KILL = 0x10000000;
+            const SKIPPED_DEKU_TREE__COMPASS_ROOM__COMPASS__CHEST = 0x20000000;
+            const SKIPPED_DEKU_TREE__COMPASS_ROOM__ENTRY__BURN_WEB = 0x40000000;
+            const SKIPPED_DEKU_TREE__COMPASS_ROOM__LEDGE__CHEST = 0x80000000;
+            const SKIPPED_DEKU_TREE__COMPASS_ROOM__LEDGE__GS = 0x100000000;
+            const SKIPPED_DEKU_TREE__FLOOR_2__VINES__MAP_CHEST = 0x200000000;
+            const SKIPPED_DEKU_TREE__FLOOR_3__DOOR__BREAK_WEB = 0x400000000;
+            const SKIPPED_DEKU_TREE__LOBBY__CENTER__DEKU_BABA_NUTS = 0x800000000;
+            const SKIPPED_DEKU_TREE__LOBBY__CENTER__DEKU_BABA_STICKS = 0x1000000000;
+            const SKIPPED_DEKU_TREE__LOBBY__CENTER__WEB = 0x2000000000;
+            const SKIPPED_DEKU_TREE__SCRUB_ROOM__ENTRY__SCRUB = 0x4000000000;
+            const SKIPPED_DEKU_TREE__SKULL_ROOM__ENTRY__GS = 0x8000000000;
+            const SKIPPED_DEKU_TREE__SLINGSHOT_ROOM__SLINGSHOT__CHEST = 0x10000000000;
+            const SKIPPED_DEKU_TREE__SLINGSHOT_UPPER__LEDGE__CHEST = 0x20000000000;
+            const SKIPPED_KF__BABA_CORRIDOR__DEKU_BABAS__NUTS = 0x40000000000;
+            const SKIPPED_KF__BABA_CORRIDOR__DEKU_BABAS__STICKS = 0x80000000000;
+            const SKIPPED_KF__BOULDER_MAZE__REWARD__CHEST = 0x100000000000;
+            const SKIPPED_KF__KOKIRI_VILLAGE__MIDOS_GUARDPOST__SHOW_MIDO = 0x200000000000;
+            const SKIPPED_KF__KOKIRI_VILLAGE__TRAINING_CENTER__VICTORY = 0x400000000000;
+            const SKIPPED_KF__MIDOS_HOUSE__ENTRY__BOTTOM_LEFT_CHEST = 0x800000000000;
+            const SKIPPED_KF__MIDOS_HOUSE__ENTRY__BOTTOM_RIGHT_CHEST = 0x1000000000000;
+            const SKIPPED_KF__MIDOS_HOUSE__ENTRY__TOP_LEFT_CHEST = 0x2000000000000;
+            const SKIPPED_KF__MIDOS_HOUSE__ENTRY__TOP_RIGHT_CHEST = 0x4000000000000;
+            const SKIPPED_KF__OUTSIDE_DEKU_TREE__LEFT__GOSSIP_STONE = 0x8000000000000;
+            const SKIPPED_KF__OUTSIDE_DEKU_TREE__RIGHT__GOSSIP_STONE = 0x10000000000000;
+            const SKIPPED_KF__SHOP__ENTRY__BLUE_RUPEE = 0x20000000000000;
+            const SKIPPED_KF__SHOP__ENTRY__ITEM_1 = 0x40000000000000;
+            const SKIPPED_KF__SHOP__ENTRY__ITEM_2 = 0x80000000000000;
+            const SKIPPED_KF__SHOP__ENTRY__ITEM_3 = 0x100000000000000;
+            const SKIPPED_KF__SHOP__ENTRY__ITEM_4 = 0x200000000000000;
+            const SKIPPED_KF__SHOP__ENTRY__ITEM_5 = 0x400000000000000;
+            const SKIPPED_KF__SHOP__ENTRY__ITEM_6 = 0x800000000000000;
+            const SKIPPED_KF__SHOP__ENTRY__ITEM_7 = 0x1000000000000000;
+            const SKIPPED_KF__SHOP__ENTRY__ITEM_8 = 0x2000000000000000;
+            const SKIPPED_KAK__SPIDER_HOUSE__ENTRY__SKULLS_10 = 0x4000000000000000;
+            const ALL_VISIT_FLAGS = 0x7fff;
+            const ALL_SKIP_FLAGS = 0x7fffffffffff8000;
         }
     }
 }
@@ -1437,6 +1439,9 @@ impl context::Ctx for Context {
             LocationId::Deku_Tree__Boss_Room__Arena__Blue_Warp => self
                 .cbits1
                 .insert(flags::ContextBits1::VISITED_DEKU_TREE__BOSS_ROOM__ARENA__BLUE_WARP),
+            LocationId::KF__Kokiri_Village__Training_Center__Victory => self
+                .cbits1
+                .insert(flags::ContextBits1::VISITED_KF__KOKIRI_VILLAGE__TRAINING_CENTER__VICTORY),
             LocationId::KF__Kokiri_Village__Midos_Guardpost__Show_Mido => self.cbits1.insert(
                 flags::ContextBits1::VISITED_KF__KOKIRI_VILLAGE__MIDOS_GUARDPOST__SHOW_MIDO,
             ),
@@ -1465,8 +1470,8 @@ impl context::Ctx for Context {
                 .cbits1
                 .insert(flags::ContextBits1::VISITED_KF__MIDOS_HOUSE__ENTRY__BOTTOM_LEFT_CHEST),
             LocationId::KF__Midos_House__Entry__Bottom_Right_Chest => self
-                .cbits1
-                .insert(flags::ContextBits1::VISITED_KF__MIDOS_HOUSE__ENTRY__BOTTOM_RIGHT_CHEST),
+                .cbits2
+                .insert(flags::ContextBits2::VISITED_KF__MIDOS_HOUSE__ENTRY__BOTTOM_RIGHT_CHEST),
             LocationId::KF__Shop__Entry__Blue_Rupee => self
                 .cbits2
                 .insert(flags::ContextBits2::VISITED_KF__SHOP__ENTRY__BLUE_RUPEE),
@@ -1752,6 +1757,15 @@ impl context::Ctx for Context {
                     );
                 }
             }
+            LocationId::KF__Kokiri_Village__Training_Center__Victory => {
+                if !self.cbits1.contains(
+                    flags::ContextBits1::VISITED_KF__KOKIRI_VILLAGE__TRAINING_CENTER__VICTORY,
+                ) {
+                    self.cbits2.insert(
+                        flags::ContextBits2::SKIPPED_KF__KOKIRI_VILLAGE__TRAINING_CENTER__VICTORY,
+                    );
+                }
+            }
             LocationId::KF__Kokiri_Village__Midos_Guardpost__Show_Mido => {
                 if !self.cbits1.contains(
                     flags::ContextBits1::VISITED_KF__KOKIRI_VILLAGE__MIDOS_GUARDPOST__SHOW_MIDO,
@@ -1836,8 +1850,8 @@ impl context::Ctx for Context {
                 }
             }
             LocationId::KF__Midos_House__Entry__Bottom_Right_Chest => {
-                if !self.cbits1.contains(
-                    flags::ContextBits1::VISITED_KF__MIDOS_HOUSE__ENTRY__BOTTOM_RIGHT_CHEST,
+                if !self.cbits2.contains(
+                    flags::ContextBits2::VISITED_KF__MIDOS_HOUSE__ENTRY__BOTTOM_RIGHT_CHEST,
                 ) {
                     self.cbits2.insert(
                         flags::ContextBits2::SKIPPED_KF__MIDOS_HOUSE__ENTRY__BOTTOM_RIGHT_CHEST,
@@ -2112,6 +2126,14 @@ impl context::Ctx for Context {
                 self.cbits2
                     .remove(flags::ContextBits2::SKIPPED_DEKU_TREE__BOSS_ROOM__ARENA__BLUE_WARP);
             }
+            LocationId::KF__Kokiri_Village__Training_Center__Victory => {
+                self.cbits1.remove(
+                    flags::ContextBits1::VISITED_KF__KOKIRI_VILLAGE__TRAINING_CENTER__VICTORY,
+                );
+                self.cbits2.remove(
+                    flags::ContextBits2::SKIPPED_KF__KOKIRI_VILLAGE__TRAINING_CENTER__VICTORY,
+                );
+            }
             LocationId::KF__Kokiri_Village__Midos_Guardpost__Show_Mido => {
                 self.cbits1.remove(
                     flags::ContextBits1::VISITED_KF__KOKIRI_VILLAGE__MIDOS_GUARDPOST__SHOW_MIDO,
@@ -2171,8 +2193,8 @@ impl context::Ctx for Context {
                     .remove(flags::ContextBits2::SKIPPED_KF__MIDOS_HOUSE__ENTRY__BOTTOM_LEFT_CHEST);
             }
             LocationId::KF__Midos_House__Entry__Bottom_Right_Chest => {
-                self.cbits1.remove(
-                    flags::ContextBits1::VISITED_KF__MIDOS_HOUSE__ENTRY__BOTTOM_RIGHT_CHEST,
+                self.cbits2.remove(
+                    flags::ContextBits2::VISITED_KF__MIDOS_HOUSE__ENTRY__BOTTOM_RIGHT_CHEST,
                 );
                 self.cbits2.remove(
                     flags::ContextBits2::SKIPPED_KF__MIDOS_HOUSE__ENTRY__BOTTOM_RIGHT_CHEST,
@@ -2452,6 +2474,13 @@ impl context::Ctx for Context {
                         flags::ContextBits2::SKIPPED_DEKU_TREE__BOSS_ROOM__ARENA__BLUE_WARP,
                     )
             }
+            LocationId::KF__Kokiri_Village__Training_Center__Victory => {
+                !self.cbits1.contains(
+                    flags::ContextBits1::VISITED_KF__KOKIRI_VILLAGE__TRAINING_CENTER__VICTORY,
+                ) && !self.cbits2.contains(
+                    flags::ContextBits2::SKIPPED_KF__KOKIRI_VILLAGE__TRAINING_CENTER__VICTORY,
+                )
+            }
             LocationId::KF__Kokiri_Village__Midos_Guardpost__Show_Mido => {
                 !self.cbits1.contains(
                     flags::ContextBits1::VISITED_KF__KOKIRI_VILLAGE__MIDOS_GUARDPOST__SHOW_MIDO,
@@ -2521,8 +2550,8 @@ impl context::Ctx for Context {
                 )
             }
             LocationId::KF__Midos_House__Entry__Bottom_Right_Chest => {
-                !self.cbits1.contains(
-                    flags::ContextBits1::VISITED_KF__MIDOS_HOUSE__ENTRY__BOTTOM_RIGHT_CHEST,
+                !self.cbits2.contains(
+                    flags::ContextBits2::VISITED_KF__MIDOS_HOUSE__ENTRY__BOTTOM_RIGHT_CHEST,
                 ) && !self.cbits2.contains(
                     flags::ContextBits2::SKIPPED_KF__MIDOS_HOUSE__ENTRY__BOTTOM_RIGHT_CHEST,
                 )
@@ -2692,6 +2721,9 @@ impl context::Ctx for Context {
             LocationId::Deku_Tree__Boss_Room__Arena__Blue_Warp => self
                 .cbits1
                 .contains(flags::ContextBits1::VISITED_DEKU_TREE__BOSS_ROOM__ARENA__BLUE_WARP),
+            LocationId::KF__Kokiri_Village__Training_Center__Victory => self.cbits1.contains(
+                flags::ContextBits1::VISITED_KF__KOKIRI_VILLAGE__TRAINING_CENTER__VICTORY,
+            ),
             LocationId::KF__Kokiri_Village__Midos_Guardpost__Show_Mido => self.cbits1.contains(
                 flags::ContextBits1::VISITED_KF__KOKIRI_VILLAGE__MIDOS_GUARDPOST__SHOW_MIDO,
             ),
@@ -2720,8 +2752,8 @@ impl context::Ctx for Context {
                 .cbits1
                 .contains(flags::ContextBits1::VISITED_KF__MIDOS_HOUSE__ENTRY__BOTTOM_LEFT_CHEST),
             LocationId::KF__Midos_House__Entry__Bottom_Right_Chest => self
-                .cbits1
-                .contains(flags::ContextBits1::VISITED_KF__MIDOS_HOUSE__ENTRY__BOTTOM_RIGHT_CHEST),
+                .cbits2
+                .contains(flags::ContextBits2::VISITED_KF__MIDOS_HOUSE__ENTRY__BOTTOM_RIGHT_CHEST),
             LocationId::KF__Shop__Entry__Blue_Rupee => self
                 .cbits2
                 .contains(flags::ContextBits2::VISITED_KF__SHOP__ENTRY__BLUE_RUPEE),
@@ -2837,6 +2869,9 @@ impl context::Ctx for Context {
             LocationId::Deku_Tree__Boss_Room__Arena__Blue_Warp => self
                 .cbits2
                 .contains(flags::ContextBits2::SKIPPED_DEKU_TREE__BOSS_ROOM__ARENA__BLUE_WARP),
+            LocationId::KF__Kokiri_Village__Training_Center__Victory => self.cbits2.contains(
+                flags::ContextBits2::SKIPPED_KF__KOKIRI_VILLAGE__TRAINING_CENTER__VICTORY,
+            ),
             LocationId::KF__Kokiri_Village__Midos_Guardpost__Show_Mido => self.cbits2.contains(
                 flags::ContextBits2::SKIPPED_KF__KOKIRI_VILLAGE__MIDOS_GUARDPOST__SHOW_MIDO,
             ),
@@ -3540,6 +3575,18 @@ impl context::Ctx for Context {
         }
         let n = self
             .cbits1
+            .contains(flags::ContextBits1::VISITED_KF__KOKIRI_VILLAGE__TRAINING_CENTER__VICTORY);
+        let p = old
+            .cbits1
+            .contains(flags::ContextBits1::VISITED_KF__KOKIRI_VILLAGE__TRAINING_CENTER__VICTORY);
+        if n != p {
+            list.push(format!(
+                "{}VISITED_KF__KOKIRI_VILLAGE__TRAINING_CENTER__VICTORY",
+                if n { "+" } else { "-" }
+            ));
+        }
+        let n = self
+            .cbits1
             .contains(flags::ContextBits1::VISITED_KF__MIDOS_HOUSE__ENTRY__BOTTOM_LEFT_CHEST);
         let p = old
             .cbits1
@@ -3551,11 +3598,11 @@ impl context::Ctx for Context {
             ));
         }
         let n = self
-            .cbits1
-            .contains(flags::ContextBits1::VISITED_KF__MIDOS_HOUSE__ENTRY__BOTTOM_RIGHT_CHEST);
+            .cbits2
+            .contains(flags::ContextBits2::VISITED_KF__MIDOS_HOUSE__ENTRY__BOTTOM_RIGHT_CHEST);
         let p = old
-            .cbits1
-            .contains(flags::ContextBits1::VISITED_KF__MIDOS_HOUSE__ENTRY__BOTTOM_RIGHT_CHEST);
+            .cbits2
+            .contains(flags::ContextBits2::VISITED_KF__MIDOS_HOUSE__ENTRY__BOTTOM_RIGHT_CHEST);
         if n != p {
             list.push(format!(
                 "{}VISITED_KF__MIDOS_HOUSE__ENTRY__BOTTOM_RIGHT_CHEST",
@@ -4099,6 +4146,18 @@ impl context::Ctx for Context {
         if n != p {
             list.push(format!(
                 "{}SKIPPED_KF__KOKIRI_VILLAGE__MIDOS_GUARDPOST__SHOW_MIDO",
+                if n { "+" } else { "-" }
+            ));
+        }
+        let n = self
+            .cbits2
+            .contains(flags::ContextBits2::SKIPPED_KF__KOKIRI_VILLAGE__TRAINING_CENTER__VICTORY);
+        let p = old
+            .cbits2
+            .contains(flags::ContextBits2::SKIPPED_KF__KOKIRI_VILLAGE__TRAINING_CENTER__VICTORY);
+        if n != p {
+            list.push(format!(
+                "{}SKIPPED_KF__KOKIRI_VILLAGE__TRAINING_CENTER__VICTORY",
                 if n { "+" } else { "-" }
             ));
         }

@@ -81,6 +81,7 @@ pub enum Item {
     Showed_Mido,
     Slingshot,
     Triforce_Piece,
+    Victory,
     Zora_Tunic,
 }
 impl fmt::Display for Item {
@@ -146,6 +147,7 @@ impl fmt::Display for Item {
             Item::Showed_Mido => write!(f, "{}", "Showed_Mido"),
             Item::Slingshot => write!(f, "{}", "Slingshot"),
             Item::Triforce_Piece => write!(f, "{}", "Triforce_Piece"),
+            Item::Victory => write!(f, "{}", "Victory"),
             Item::Zora_Tunic => write!(f, "{}", "Zora_Tunic"),
         }
     }
@@ -215,6 +217,7 @@ impl std::str::FromStr for Item {
             "Showed_Mido" => Ok(Item::Showed_Mido),
             "Slingshot" => Ok(Item::Slingshot),
             "Triforce_Piece" => Ok(Item::Triforce_Piece),
+            "Victory" => Ok(Item::Victory),
             "Zora_Tunic" => Ok(Item::Zora_Tunic),
             _ => Err(format!("Could not recognize as a Item: {}", s)),
         }
@@ -251,6 +254,7 @@ pub fn unused_item(id: Item) -> bool {
             | Item::Nayrus_Love
             | Item::Progressive_Wallet
             | Item::Recovery_Heart
+            | Item::Victory
             | Item::Zora_Tunic
     )
 }

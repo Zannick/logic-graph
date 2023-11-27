@@ -154,6 +154,7 @@ pub trait World: Sync + Default {
 
     fn skip_unused_items(&self, ctx: &mut <Self::Location as Accessible>::Context);
     fn won(&self, ctx: &<Self::Location as Accessible>::Context) -> bool;
+    fn objective_met(&self, ctx: &<Self::Location as Accessible>::Context) -> bool;
     fn items_needed(
         &self,
         ctx: &<Self::Location as Accessible>::Context,
