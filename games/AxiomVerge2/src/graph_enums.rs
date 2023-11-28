@@ -6,10 +6,34 @@
 
 use std::fmt;
 
-#[derive(Debug, PartialEq, Eq, Copy, Clone, Hash, Ord, PartialOrd, enum_map::Enum, serde_repr::Serialize_repr, serde_repr::Deserialize_repr)]
+#[derive(
+    Debug,
+    PartialEq,
+    Eq,
+    Copy,
+    Clone,
+    Hash,
+    Ord,
+    PartialOrd,
+    enum_map::Enum,
+    serde_repr::Serialize_repr,
+    serde_repr::Deserialize_repr,
+)]
 #[repr(u8)]
 pub enum RegionId {
-    Amagi,    Annuna,    Antarctica,    Ebih,    Giguna,    Giguna_Breach,    Glacier,    Interior,    Irikar,    Irikar_Breach,    Menu,    Uhrum,}
+    Amagi,
+    Annuna,
+    Antarctica,
+    Ebih,
+    Giguna,
+    Giguna_Breach,
+    Glacier,
+    Interior,
+    Irikar,
+    Irikar_Breach,
+    Menu,
+    Uhrum,
+}
 impl fmt::Display for RegionId {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         match self {
@@ -51,10 +75,149 @@ impl std::str::FromStr for RegionId {
     }
 }
 
-#[derive(Debug, PartialEq, Eq, Copy, Clone, Hash, Ord, PartialOrd, enum_map::Enum, serde_repr::Serialize_repr, serde_repr::Deserialize_repr)]
+#[derive(
+    Debug,
+    PartialEq,
+    Eq,
+    Copy,
+    Clone,
+    Hash,
+    Ord,
+    PartialOrd,
+    enum_map::Enum,
+    serde_repr::Serialize_repr,
+    serde_repr::Deserialize_repr,
+)]
 #[repr(u8)]
 pub enum AreaId {
-    Amagi__Grid_31_19,    Amagi__Liru_Room,    Amagi__Main_Area,    Amagi__West_Lake,    Annuna__East_Bridge,    Annuna__Mirror_Match,    Annuna__West_Bridge,    Antarctica__Building_1E,    Antarctica__Building_1W,    Antarctica__Building_2,    Antarctica__East,    Antarctica__Freight_Elevator,    Antarctica__Power_Room,    Antarctica__Shed,    Antarctica__Top,    Antarctica__West,    Ebih__Base_Camp,    Ebih__Boss_Room,    Ebih__By_Garage,    Ebih__Drone_Room,    Ebih__Ebih_East,    Ebih__Ebih_West,    Ebih__Gem_Room,    Ebih__Grid_21_2_6,    Ebih__Grid_25_10_12,    Ebih__Grid_25_2_6,    Ebih__Grid_26_10_11,    Ebih__Observation_Tower_Room,    Ebih__Vertical_Interchange,    Ebih__Waterfall,    Giguna__Antechamber,    Giguna__Breachable_Wall,    Giguna__Carnelian,    Giguna__Clouds,    Giguna__Dual_Path,    Giguna__East_Caverns,    Giguna__Far_Corner,    Giguna__Gateway,    Giguna__Giguna_Base,    Giguna__Giguna_Northeast,    Giguna__Gubi_Lair,    Giguna__Hard_Rock,    Giguna__Helipad,    Giguna__Labyrinth,    Giguna__Labyrinth_East,    Giguna__Lamassu,    Giguna__Mural,    Giguna__Ruins_Center,    Giguna__Ruins_East,    Giguna__Ruins_Top,    Giguna__Ruins_West,    Giguna__Separator,    Giguna__Vertical_Interchange,    Giguna__Wasteland,    Giguna__West_Caverns,    Giguna__West_Tower,    Giguna_Breach__Antechamber,    Giguna_Breach__Ascent,    Giguna_Breach__Below_Chimney,    Giguna_Breach__Central,    Giguna_Breach__Chimney,    Giguna_Breach__Cubby,    Giguna_Breach__Fire_Room,    Giguna_Breach__Grid_14_10_11,    Giguna_Breach__Peak,    Giguna_Breach__Pink_Clouds,    Giguna_Breach__Robopede,    Giguna_Breach__Slingshot,    Giguna_Breach__SW_Save,    Glacier__Apocalypse_Entry,    Glacier__Boomerang_Antechamber,    Glacier__Boomerang_Room,    Glacier__Compass_Room,    Glacier__Dock_Outside,    Glacier__Grid_31_9_12,    Glacier__Grid_32_7_10,    Glacier__Grid_37_38_9,    Glacier__Grid_39_40_7_9,    Glacier__Grid_42_10,    Glacier__Grid_43_10_11,    Glacier__Lake_Main_Entrance,    Glacier__Ledge_Grab_Room,    Glacier__Peak,    Glacier__Revival,    Glacier__The_Big_Drop,    Glacier__Vertical_Room,    Interior__Building_Interior,    Interior__Bunker_Interior,    Interior__Cave_Behind_Waterfall,    Interior__Dock_Elevator,    Interior__Dock_Interior,    Interior__Ebih_Cave,    Interior__Garage,    Interior__Outpost_Interior,    Interior__Tent_Interior,    Irikar__Abandoned_Room,    Irikar__Airy,    Irikar__Basement_Pipes,    Irikar__Basement_Portal,    Irikar__Boss_Room,    Irikar__East_Rooftops,    Irikar__Empty_Foyer,    Irikar__Hub,    Irikar__Lamassu,    Irikar__Midwest,    Irikar__Sight_Room,    Irikar_Breach__Basement_Save,    Irikar_Breach__Exit_Corridor,    Irikar_Breach__Flappy_Drone,    Irikar_Breach__Four_way,    Irikar_Breach__Gauntlet,    Irikar_Breach__Hover_Room,    Irikar_Breach__Neon_Corridor,    Irikar_Breach__Sandy_Lair,    Irikar_Breach__Save_Room,    Irikar_Breach__Uhrum_Connector,    Irikar_Breach__Worm_Rave,    Menu__Upgrade_Menu,    Uhrum__Annuna_Corridor,    Uhrum__Artillery_Practice,    Uhrum__East_Lake,    Uhrum__Glitchy_Corridor,    Uhrum__Save_Room,    Uhrum__Siege_Corridor,    Uhrum__Tulip_Tower,    Uhrum__Waterfalls,    Uhrum__West_Entrance,}
+    Amagi__Grid_31_19,
+    Amagi__Liru_Room,
+    Amagi__Main_Area,
+    Amagi__West_Lake,
+    Annuna__East_Bridge,
+    Annuna__Mirror_Match,
+    Annuna__West_Bridge,
+    Antarctica__Building_1E,
+    Antarctica__Building_1W,
+    Antarctica__Building_2,
+    Antarctica__East,
+    Antarctica__Freight_Elevator,
+    Antarctica__Power_Room,
+    Antarctica__Shed,
+    Antarctica__Top,
+    Antarctica__West,
+    Ebih__Base_Camp,
+    Ebih__Boss_Room,
+    Ebih__By_Garage,
+    Ebih__Drone_Room,
+    Ebih__Ebih_East,
+    Ebih__Ebih_West,
+    Ebih__Gem_Room,
+    Ebih__Grid_21_2_6,
+    Ebih__Grid_25_10_12,
+    Ebih__Grid_25_2_6,
+    Ebih__Grid_26_10_11,
+    Ebih__Observation_Tower_Room,
+    Ebih__Vertical_Interchange,
+    Ebih__Waterfall,
+    Giguna__Antechamber,
+    Giguna__Breachable_Wall,
+    Giguna__Carnelian,
+    Giguna__Clouds,
+    Giguna__Dual_Path,
+    Giguna__East_Caverns,
+    Giguna__Far_Corner,
+    Giguna__Gateway,
+    Giguna__Giguna_Base,
+    Giguna__Giguna_Northeast,
+    Giguna__Gubi_Lair,
+    Giguna__Hard_Rock,
+    Giguna__Helipad,
+    Giguna__Labyrinth,
+    Giguna__Labyrinth_East,
+    Giguna__Lamassu,
+    Giguna__Mural,
+    Giguna__Ruins_Center,
+    Giguna__Ruins_East,
+    Giguna__Ruins_Top,
+    Giguna__Ruins_West,
+    Giguna__Separator,
+    Giguna__Vertical_Interchange,
+    Giguna__Wasteland,
+    Giguna__West_Caverns,
+    Giguna__West_Tower,
+    Giguna_Breach__Antechamber,
+    Giguna_Breach__Ascent,
+    Giguna_Breach__Below_Chimney,
+    Giguna_Breach__Central,
+    Giguna_Breach__Chimney,
+    Giguna_Breach__Cubby,
+    Giguna_Breach__Fire_Room,
+    Giguna_Breach__Grid_14_10_11,
+    Giguna_Breach__Peak,
+    Giguna_Breach__Pink_Clouds,
+    Giguna_Breach__Robopede,
+    Giguna_Breach__Slingshot,
+    Giguna_Breach__SW_Save,
+    Glacier__Apocalypse_Entry,
+    Glacier__Boomerang_Antechamber,
+    Glacier__Boomerang_Room,
+    Glacier__Compass_Room,
+    Glacier__Dock_Outside,
+    Glacier__Grid_31_9_12,
+    Glacier__Grid_32_7_10,
+    Glacier__Grid_37_38_9,
+    Glacier__Grid_39_40_7_9,
+    Glacier__Grid_42_10,
+    Glacier__Grid_43_10_11,
+    Glacier__Lake_Main_Entrance,
+    Glacier__Ledge_Grab_Room,
+    Glacier__Peak,
+    Glacier__Revival,
+    Glacier__The_Big_Drop,
+    Glacier__Vertical_Room,
+    Interior__Building_Interior,
+    Interior__Bunker_Interior,
+    Interior__Cave_Behind_Waterfall,
+    Interior__Dock_Elevator,
+    Interior__Dock_Interior,
+    Interior__Ebih_Cave,
+    Interior__Garage,
+    Interior__Outpost_Interior,
+    Interior__Tent_Interior,
+    Irikar__Abandoned_Room,
+    Irikar__Airy,
+    Irikar__Basement_Pipes,
+    Irikar__Basement_Portal,
+    Irikar__Boss_Room,
+    Irikar__East_Rooftops,
+    Irikar__Empty_Foyer,
+    Irikar__Hub,
+    Irikar__Lamassu,
+    Irikar__Midwest,
+    Irikar__Sight_Room,
+    Irikar_Breach__Basement_Save,
+    Irikar_Breach__Exit_Corridor,
+    Irikar_Breach__Flappy_Drone,
+    Irikar_Breach__Four_way,
+    Irikar_Breach__Gauntlet,
+    Irikar_Breach__Hover_Room,
+    Irikar_Breach__Neon_Corridor,
+    Irikar_Breach__Sandy_Lair,
+    Irikar_Breach__Save_Room,
+    Irikar_Breach__Uhrum_Connector,
+    Irikar_Breach__Worm_Rave,
+    Menu__Upgrade_Menu,
+    Uhrum__Annuna_Corridor,
+    Uhrum__Artillery_Practice,
+    Uhrum__East_Lake,
+    Uhrum__Glitchy_Corridor,
+    Uhrum__Save_Room,
+    Uhrum__Siege_Corridor,
+    Uhrum__Tulip_Tower,
+    Uhrum__Waterfalls,
+    Uhrum__West_Entrance,
+}
 impl fmt::Display for AreaId {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         match self {
@@ -69,7 +232,9 @@ impl fmt::Display for AreaId {
             AreaId::Antarctica__Building_1W => write!(f, "{}", "Antarctica > Building 1W"),
             AreaId::Antarctica__Building_2 => write!(f, "{}", "Antarctica > Building 2"),
             AreaId::Antarctica__East => write!(f, "{}", "Antarctica > East"),
-            AreaId::Antarctica__Freight_Elevator => write!(f, "{}", "Antarctica > Freight Elevator"),
+            AreaId::Antarctica__Freight_Elevator => {
+                write!(f, "{}", "Antarctica > Freight Elevator")
+            }
             AreaId::Antarctica__Power_Room => write!(f, "{}", "Antarctica > Power Room"),
             AreaId::Antarctica__Shed => write!(f, "{}", "Antarctica > Shed"),
             AreaId::Antarctica__Top => write!(f, "{}", "Antarctica > Top"),
@@ -85,7 +250,9 @@ impl fmt::Display for AreaId {
             AreaId::Ebih__Grid_25_10_12 => write!(f, "{}", "Ebih > Grid 25,10-12"),
             AreaId::Ebih__Grid_25_2_6 => write!(f, "{}", "Ebih > Grid 25,2-6"),
             AreaId::Ebih__Grid_26_10_11 => write!(f, "{}", "Ebih > Grid 26,10-11"),
-            AreaId::Ebih__Observation_Tower_Room => write!(f, "{}", "Ebih > Observation Tower Room"),
+            AreaId::Ebih__Observation_Tower_Room => {
+                write!(f, "{}", "Ebih > Observation Tower Room")
+            }
             AreaId::Ebih__Vertical_Interchange => write!(f, "{}", "Ebih > Vertical Interchange"),
             AreaId::Ebih__Waterfall => write!(f, "{}", "Ebih > Waterfall"),
             AreaId::Giguna__Antechamber => write!(f, "{}", "Giguna > Antechamber"),
@@ -110,25 +277,33 @@ impl fmt::Display for AreaId {
             AreaId::Giguna__Ruins_Top => write!(f, "{}", "Giguna > Ruins Top"),
             AreaId::Giguna__Ruins_West => write!(f, "{}", "Giguna > Ruins West"),
             AreaId::Giguna__Separator => write!(f, "{}", "Giguna > Separator"),
-            AreaId::Giguna__Vertical_Interchange => write!(f, "{}", "Giguna > Vertical Interchange"),
+            AreaId::Giguna__Vertical_Interchange => {
+                write!(f, "{}", "Giguna > Vertical Interchange")
+            }
             AreaId::Giguna__Wasteland => write!(f, "{}", "Giguna > Wasteland"),
             AreaId::Giguna__West_Caverns => write!(f, "{}", "Giguna > West Caverns"),
             AreaId::Giguna__West_Tower => write!(f, "{}", "Giguna > West Tower"),
             AreaId::Giguna_Breach__Antechamber => write!(f, "{}", "Giguna Breach > Antechamber"),
             AreaId::Giguna_Breach__Ascent => write!(f, "{}", "Giguna Breach > Ascent"),
-            AreaId::Giguna_Breach__Below_Chimney => write!(f, "{}", "Giguna Breach > Below Chimney"),
+            AreaId::Giguna_Breach__Below_Chimney => {
+                write!(f, "{}", "Giguna Breach > Below Chimney")
+            }
             AreaId::Giguna_Breach__Central => write!(f, "{}", "Giguna Breach > Central"),
             AreaId::Giguna_Breach__Chimney => write!(f, "{}", "Giguna Breach > Chimney"),
             AreaId::Giguna_Breach__Cubby => write!(f, "{}", "Giguna Breach > Cubby"),
             AreaId::Giguna_Breach__Fire_Room => write!(f, "{}", "Giguna Breach > Fire Room"),
-            AreaId::Giguna_Breach__Grid_14_10_11 => write!(f, "{}", "Giguna Breach > Grid 14,10-11"),
+            AreaId::Giguna_Breach__Grid_14_10_11 => {
+                write!(f, "{}", "Giguna Breach > Grid 14,10-11")
+            }
             AreaId::Giguna_Breach__Peak => write!(f, "{}", "Giguna Breach > Peak"),
             AreaId::Giguna_Breach__Pink_Clouds => write!(f, "{}", "Giguna Breach > Pink Clouds"),
             AreaId::Giguna_Breach__Robopede => write!(f, "{}", "Giguna Breach > Robopede"),
             AreaId::Giguna_Breach__Slingshot => write!(f, "{}", "Giguna Breach > Slingshot"),
             AreaId::Giguna_Breach__SW_Save => write!(f, "{}", "Giguna Breach > SW Save"),
             AreaId::Glacier__Apocalypse_Entry => write!(f, "{}", "Glacier > Apocalypse Entry"),
-            AreaId::Glacier__Boomerang_Antechamber => write!(f, "{}", "Glacier > Boomerang Antechamber"),
+            AreaId::Glacier__Boomerang_Antechamber => {
+                write!(f, "{}", "Glacier > Boomerang Antechamber")
+            }
             AreaId::Glacier__Boomerang_Room => write!(f, "{}", "Glacier > Boomerang Room"),
             AreaId::Glacier__Compass_Room => write!(f, "{}", "Glacier > Compass Room"),
             AreaId::Glacier__Dock_Outside => write!(f, "{}", "Glacier > Dock Outside"),
@@ -146,7 +321,9 @@ impl fmt::Display for AreaId {
             AreaId::Glacier__Vertical_Room => write!(f, "{}", "Glacier > Vertical Room"),
             AreaId::Interior__Building_Interior => write!(f, "{}", "Interior > Building Interior"),
             AreaId::Interior__Bunker_Interior => write!(f, "{}", "Interior > Bunker Interior"),
-            AreaId::Interior__Cave_Behind_Waterfall => write!(f, "{}", "Interior > Cave Behind Waterfall"),
+            AreaId::Interior__Cave_Behind_Waterfall => {
+                write!(f, "{}", "Interior > Cave Behind Waterfall")
+            }
             AreaId::Interior__Dock_Elevator => write!(f, "{}", "Interior > Dock Elevator"),
             AreaId::Interior__Dock_Interior => write!(f, "{}", "Interior > Dock Interior"),
             AreaId::Interior__Ebih_Cave => write!(f, "{}", "Interior > Ebih Cave"),
@@ -164,16 +341,24 @@ impl fmt::Display for AreaId {
             AreaId::Irikar__Lamassu => write!(f, "{}", "Irikar > Lamassu"),
             AreaId::Irikar__Midwest => write!(f, "{}", "Irikar > Midwest"),
             AreaId::Irikar__Sight_Room => write!(f, "{}", "Irikar > Sight Room"),
-            AreaId::Irikar_Breach__Basement_Save => write!(f, "{}", "Irikar Breach > Basement Save"),
-            AreaId::Irikar_Breach__Exit_Corridor => write!(f, "{}", "Irikar Breach > Exit Corridor"),
+            AreaId::Irikar_Breach__Basement_Save => {
+                write!(f, "{}", "Irikar Breach > Basement Save")
+            }
+            AreaId::Irikar_Breach__Exit_Corridor => {
+                write!(f, "{}", "Irikar Breach > Exit Corridor")
+            }
             AreaId::Irikar_Breach__Flappy_Drone => write!(f, "{}", "Irikar Breach > Flappy Drone"),
             AreaId::Irikar_Breach__Four_way => write!(f, "{}", "Irikar Breach > Four-way"),
             AreaId::Irikar_Breach__Gauntlet => write!(f, "{}", "Irikar Breach > Gauntlet"),
             AreaId::Irikar_Breach__Hover_Room => write!(f, "{}", "Irikar Breach > Hover Room"),
-            AreaId::Irikar_Breach__Neon_Corridor => write!(f, "{}", "Irikar Breach > Neon Corridor"),
+            AreaId::Irikar_Breach__Neon_Corridor => {
+                write!(f, "{}", "Irikar Breach > Neon Corridor")
+            }
             AreaId::Irikar_Breach__Sandy_Lair => write!(f, "{}", "Irikar Breach > Sandy Lair"),
             AreaId::Irikar_Breach__Save_Room => write!(f, "{}", "Irikar Breach > Save Room"),
-            AreaId::Irikar_Breach__Uhrum_Connector => write!(f, "{}", "Irikar Breach > Uhrum Connector"),
+            AreaId::Irikar_Breach__Uhrum_Connector => {
+                write!(f, "{}", "Irikar Breach > Uhrum Connector")
+            }
             AreaId::Irikar_Breach__Worm_Rave => write!(f, "{}", "Irikar Breach > Worm Rave"),
             AreaId::Menu__Upgrade_Menu => write!(f, "{}", "Menu > Upgrade Menu"),
             AreaId::Uhrum__Annuna_Corridor => write!(f, "{}", "Uhrum > Annuna Corridor"),
@@ -326,11 +511,1172 @@ impl std::str::FromStr for AreaId {
     }
 }
 
-#[derive(Debug, PartialEq, Eq, Copy, Clone, Hash, Ord, PartialOrd, enum_map::Enum, Default, serde_repr::Serialize_repr, serde_repr::Deserialize_repr)]
+#[derive(
+    Debug,
+    PartialEq,
+    Eq,
+    Copy,
+    Clone,
+    Hash,
+    Ord,
+    PartialOrd,
+    enum_map::Enum,
+    Default,
+    serde_repr::Serialize_repr,
+    serde_repr::Deserialize_repr,
+)]
 #[repr(u16)]
 pub enum SpotId {
-    #[default] None,
-    Amagi__Grid_31_19__East,    Amagi__Grid_31_19__West,    Amagi__Liru_Room__Bottom,    Amagi__Liru_Room__East_Passage,    Amagi__Liru_Room__Hidden_Enemies,    Amagi__Liru_Room__Hidden_Exit,    Amagi__Liru_Room__Platform_1_Left,    Amagi__Liru_Room__Platform_1_Right,    Amagi__Liru_Room__Platform_2_Left,    Amagi__Liru_Room__Platform_2_Right,    Amagi__Liru_Room__Platform_3_Left,    Amagi__Liru_Room__Platform_3_Right,    Amagi__Liru_Room__Platform_4_Left,    Amagi__Liru_Room__Platform_4_Right,    Amagi__Liru_Room__Shrine,    Amagi__Liru_Room__West_19,    Amagi__Liru_Room__West_20,    Amagi__Main_Area__Broken_Wall,    Amagi__Main_Area__Carving,    Amagi__Main_Area__Catwalk_Broken_Part,    Amagi__Main_Area__Catwalk_Center,    Amagi__Main_Area__Catwalk_East_Edge,    Amagi__Main_Area__Cliff,    Amagi__Main_Area__East_15,    Amagi__Main_Area__East_19,    Amagi__Main_Area__East_Ledge,    Amagi__Main_Area__Enemy_Side,    Amagi__Main_Area__Flat_Ruin,    Amagi__Main_Area__Half_Pillar,    Amagi__Main_Area__Platform_2,    Amagi__Main_Area__Platform_3,    Amagi__Main_Area__Save_Point,    Amagi__Main_Area__Secret_Outcropping,    Amagi__Main_Area__Secret_Waterfall,    Amagi__Main_Area__Shallow_End,    Amagi__Main_Area__Small_Cliff,    Amagi__Main_Area__Upper_Platform,    Amagi__Main_Area__Wall_Stuck_Spot,    Amagi__Main_Area__Waters_Edge,    Amagi__Main_Area__Way_Off_To_The_Side,    Amagi__Main_Area__West_15,    Amagi__Main_Area__West_18,    Amagi__Main_Area__West_19,    Amagi__Main_Area__West_Mini_Hill,    Amagi__Main_Area__West_Shelf,    Amagi__Main_Area__West_Side,    Amagi__West_Lake__Cavern_Back_Teeth,    Amagi__West_Lake__Cavern_Chin,    Amagi__West_Lake__Cavern_Eye,    Amagi__West_Lake__Cavern_Front_Pillar,    Amagi__West_Lake__Cavern_Front_Teeth,    Amagi__West_Lake__Cavern_Jaw,    Amagi__West_Lake__Cavern_Lower_Trachea,    Amagi__West_Lake__Cavern_Middle_Pillar,    Amagi__West_Lake__Cavern_Neck,    Amagi__West_Lake__Cavern_Rear_Pillar,    Amagi__West_Lake__Cavern_Refill_Station,    Amagi__West_Lake__Cavern_Tear_Duct,    Amagi__West_Lake__East_15,    Amagi__West_Lake__East_18,    Amagi__West_Lake__East_19,    Amagi__West_Lake__East_20,    Amagi__West_Lake__East_Bank,    Amagi__West_Lake__East_Platform,    Amagi__West_Lake__East_Shore,    Amagi__West_Lake__Left_of_Enemy,    Amagi__West_Lake__Northeast_Platform,    Amagi__West_Lake__Northwest_Platform,    Amagi__West_Lake__Pillar,    Amagi__West_Lake__Pillar_Platform,    Amagi__West_Lake__Small_Hill,    Amagi__West_Lake__Some_Rock,    Amagi__West_Lake__Somewhat_Central_Platform,    Amagi__West_Lake__Stronghold_Ceiling_Left,    Amagi__West_Lake__Stronghold_Ceiling_Right,    Amagi__West_Lake__Stronghold_Front_Door,    Amagi__West_Lake__Stronghold_Front_Room,    Amagi__West_Lake__Stronghold_Item,    Amagi__West_Lake__Stronghold_Middle_Column,    Amagi__West_Lake__Stronghold_Rear_Wall,    Amagi__West_Lake__Stronghold_Top,    Amagi__West_Lake__Surface_Wall_Left,    Amagi__West_Lake__Surface_Wall_Right,    Amagi__West_Lake__Tentacle_Gap,    Amagi__West_Lake__Upper_Center_Platform,    Amagi__West_Lake__Water_Surface,    Amagi__West_Lake__West_15,    Amagi__West_Lake__West_Bank,    Amagi__West_Lake__West_Cliff,    Amagi__West_Lake__West_Platform,    Amagi__West_Lake__West_Shore,    Annuna__East_Bridge__Center_Corridor,    Annuna__East_Bridge__Center_Drop_off,    Annuna__East_Bridge__Center_Gap_East,    Annuna__East_Bridge__Center_Gap_West,    Annuna__East_Bridge__Gate_Button,    Annuna__East_Bridge__Gate_Button_Gap,    Annuna__East_Bridge__Upper_Middle_Core,    Annuna__East_Bridge__Upper_Middle_Gate,    Annuna__East_Bridge__Upper_Middle_Inner_Corner_East,    Annuna__East_Bridge__Upper_Middle_Inner_Corner_West,    Annuna__East_Bridge__Upper_Middle_Opening,    Annuna__East_Bridge__Upper_West_Gap,    Annuna__East_Bridge__Upper_West_Gap_East,    Annuna__East_Bridge__West_24,    Annuna__East_Bridge__West_25_Lower,    Annuna__East_Bridge__West_25_Upper,    Annuna__East_Bridge__West_Staircase_Lower_East,    Annuna__East_Bridge__West_Staircase_Lower_West,    Annuna__East_Bridge__West_Staircase_Upper_East,    Annuna__East_Bridge__West_Staircase_Upper_West,    Annuna__East_Bridge__West_Under_Gap,    Annuna__Mirror_Match__Below_Switch,    Annuna__Mirror_Match__Central_Pillar,    Annuna__Mirror_Match__East_25_Lower,    Annuna__Mirror_Match__East_25_Upper,    Annuna__Mirror_Match__East_26_Lower,    Annuna__Mirror_Match__East_26_Upper,    Annuna__Mirror_Match__Eastward,    Annuna__Mirror_Match__Plinth,    Annuna__Mirror_Match__Save_Point,    Annuna__Mirror_Match__Staircase,    Annuna__Mirror_Match__Waving_Distance,    Annuna__Mirror_Match__West_25,    Annuna__Mirror_Match__West_Gap,    Annuna__West_Bridge__East_24,    Annuna__West_Bridge__East_25_Lower,    Annuna__West_Bridge__East_25_Upper,    Annuna__West_Bridge__Plinth,    Annuna__West_Bridge__West_25_Lower,    Annuna__West_Bridge__West_25_Upper,    Annuna__West_Bridge__West_26_Lower,    Annuna__West_Bridge__West_26_Upper,    Annuna__West_Bridge__West_Outcropping,    Antarctica__Building_1E__Connector,    Antarctica__Building_1E__East_Entry,    Antarctica__Building_1W__Connector,    Antarctica__Building_1W__West_Entry,    Antarctica__Building_2__Behind_Boxes,    Antarctica__Building_2__Entry,    Antarctica__Building_2__Stairs,    Antarctica__Building_2__Upper_Door,    Antarctica__East__Building_1_Entry,    Antarctica__East__Building_2_Entry,    Antarctica__East__Building_2_Upper,    Antarctica__East__Save_Point,    Antarctica__Freight_Elevator__Controls,    Antarctica__Freight_Elevator__Left,    Antarctica__Power_Room__Entry,    Antarctica__Power_Room__Switch,    Antarctica__Shed__Interior,    Antarctica__Top__Power_Entry,    Antarctica__West__Boxes,    Antarctica__West__Helipad,    Antarctica__West__Shed_Entry,    Ebih__Base_Camp__Behind_Vehicle,    Ebih__Base_Camp__Building_Entry,    Ebih__Base_Camp__Bunker_Entry,    Ebih__Base_Camp__East_11,    Ebih__Base_Camp__East_12,    Ebih__Base_Camp__Lake_Access,    Ebih__Base_Camp__Left_Platform,    Ebih__Base_Camp__Left_Platform_Moved,    Ebih__Base_Camp__Save_Point,    Ebih__Base_Camp__Staircase,    Ebih__Base_Camp__Tent_Entry,    Ebih__Base_Camp__Top_Platform,    Ebih__Base_Camp__West_11,    Ebih__Base_Camp__West_12,    Ebih__Base_Camp__West_13,    Ebih__Base_Camp__West_Midair,    Ebih__Boss_Room__Boss,    Ebih__Boss_Room__East_4,    Ebih__Boss_Room__East_6,    Ebih__Boss_Room__East_Ledge,    Ebih__Boss_Room__High_Platform,    Ebih__Boss_Room__Lower_Ledge,    Ebih__Boss_Room__Lower_Tree,    Ebih__Boss_Room__Past_Boss,    Ebih__Boss_Room__Upper_Tree,    Ebih__Boss_Room__West_5,    Ebih__Boss_Room__West_6,    Ebih__By_Garage__Crawlspace,    Ebih__By_Garage__Crawlspace_Opening,    Ebih__By_Garage__East_12,    Ebih__By_Garage__East_13,    Ebih__By_Garage__East_Below_Platforms,    Ebih__By_Garage__East_Bush,    Ebih__By_Garage__East_Platform,    Ebih__By_Garage__Garage_Entry,    Ebih__By_Garage__Lower_Platform,    Ebih__By_Garage__Outcropping,    Ebih__By_Garage__West_12,    Ebih__By_Garage__West_13,    Ebih__By_Garage__West_Below_Platforms,    Ebih__By_Garage__West_Bush,    Ebih__Drone_Room__East_4,    Ebih__Drone_Room__Item,    Ebih__Drone_Room__Left_Platform,    Ebih__Drone_Room__Middle_Platform,    Ebih__Drone_Room__Moving_Platform,    Ebih__Drone_Room__Pit_Left,    Ebih__Drone_Room__Portal,    Ebih__Drone_Room__Portal_Exit,    Ebih__Drone_Room__Tree,    Ebih__Drone_Room__West_4,    Ebih__Drone_Room__West_6,    Ebih__Ebih_East__Corner,    Ebih__Ebih_East__Dispenser,    Ebih__Ebih_East__East_9,    Ebih__Ebih_East__East_Hill,    Ebih__Ebih_East__East_Ledge,    Ebih__Ebih_East__Ledge_End,    Ebih__Ebih_East__Lower_Moving_Platform,    Ebih__Ebih_East__Middle_Platform,    Ebih__Ebih_East__Moving_Platform,    Ebih__Ebih_East__Upper_Ledge,    Ebih__Ebih_East__West_7,    Ebih__Ebih_East__West_8,    Ebih__Ebih_West__Above_Alcove,    Ebih__Ebih_West__Above_Chute,    Ebih__Ebih_West__Above_Door,    Ebih__Ebih_West__Alcove,    Ebih__Ebih_West__Alcove_Entrance,    Ebih__Ebih_West__Below_Door,    Ebih__Ebih_West__Block_Left,    Ebih__Ebih_West__Block_Right,    Ebih__Ebih_West__East_10,    Ebih__Ebih_West__East_11,    Ebih__Ebih_West__East_13,    Ebih__Ebih_West__East_6,    Ebih__Ebih_West__East_7,    Ebih__Ebih_West__East_8,    Ebih__Ebih_West__East_9,    Ebih__Ebih_West__Giguna_Pillar,    Ebih__Ebih_West__High_Ledge,    Ebih__Ebih_West__High_Platform,    Ebih__Ebih_West__Left_of_Gap,    Ebih__Ebih_West__Left_of_Switch,    Ebih__Ebih_West__Lower_Cliff,    Ebih__Ebih_West__Lower_Hill,    Ebih__Ebih_West__Lower_Platform,    Ebih__Ebih_West__Lower_Save,    Ebih__Ebih_West__Medium_High_Platform,    Ebih__Ebih_West__Mid_Save,    Ebih__Ebih_West__Middle_Cliff,    Ebih__Ebih_West__Middle_Middle,    Ebih__Ebih_West__Refill_Station,    Ebih__Ebih_West__Small_Gap,    Ebih__Ebih_West__Upper_Save,    Ebih__Ebih_West__West_11,    Ebih__Ebih_West__West_12,    Ebih__Ebih_West__West_13,    Ebih__Ebih_West__West_9,    Ebih__Ebih_West__West_Fork,    Ebih__Ebih_West__West_High_Cliff,    Ebih__Gem_Room__West_13,    Ebih__Grid_21_2_6__East_6,    Ebih__Grid_21_2_6__Portal_Stand,    Ebih__Grid_21_2_6__West_6,    Ebih__Grid_25_10_12__Below_Bush,    Ebih__Grid_25_10_12__Bush,    Ebih__Grid_25_10_12__Door,    Ebih__Grid_25_10_12__Door_Left,    Ebih__Grid_25_10_12__East_10,    Ebih__Grid_25_10_12__East_11,    Ebih__Grid_25_10_12__East_12,    Ebih__Grid_25_10_12__Hidden_Bush,    Ebih__Grid_25_10_12__Mid_Ledge,    Ebih__Grid_25_10_12__Top_Platform,    Ebih__Grid_25_10_12__West_10,    Ebih__Grid_25_10_12__West_11,    Ebih__Grid_25_10_12__West_12,    Ebih__Grid_25_2_6__Pit,    Ebih__Grid_25_2_6__West_4,    Ebih__Grid_26_10_11__Cliff,    Ebih__Grid_26_10_11__East_10,    Ebih__Grid_26_10_11__Ledge,    Ebih__Grid_26_10_11__Middle_Bottom,    Ebih__Grid_26_10_11__Middle_Platform,    Ebih__Grid_26_10_11__Under_Ledge,    Ebih__Grid_26_10_11__Upper_Platform,    Ebih__Grid_26_10_11__West_10,    Ebih__Grid_26_10_11__West_11,    Ebih__Observation_Tower_Room__Cliff,    Ebih__Observation_Tower_Room__East_11,    Ebih__Observation_Tower_Room__Tower_Bottom,    Ebih__Observation_Tower_Room__Tower_Top,    Ebih__Observation_Tower_Room__West_10,    Ebih__Observation_Tower_Room__West_9,    Ebih__Vertical_Interchange__Below_Door,    Ebih__Vertical_Interchange__Block_Cubby,    Ebih__Vertical_Interchange__Blocked_Refill_Station,    Ebih__Vertical_Interchange__Cliff_by_Refill,    Ebih__Vertical_Interchange__Cubby_Exit,    Ebih__Vertical_Interchange__Door,    Ebih__Vertical_Interchange__Door_East,    Ebih__Vertical_Interchange__Door_West,    Ebih__Vertical_Interchange__East_13,    Ebih__Vertical_Interchange__East_15,    Ebih__Vertical_Interchange__East_Tunnel,    Ebih__Vertical_Interchange__Lower_West_Cliff,    Ebih__Vertical_Interchange__Middle_Descent,    Ebih__Vertical_Interchange__Middle_Drop,    Ebih__Vertical_Interchange__Passage_East,    Ebih__Vertical_Interchange__Passage_West,    Ebih__Vertical_Interchange__Refill_Station,    Ebih__Vertical_Interchange__South,    Ebih__Vertical_Interchange__Switch,    Ebih__Vertical_Interchange__West_13,    Ebih__Waterfall__Alcove,    Ebih__Waterfall__Alcove_Left,    Ebih__Waterfall__Alcove_Right,    Ebih__Waterfall__Below_Left_Switch,    Ebih__Waterfall__Below_Tree,    Ebih__Waterfall__Big_Tree,    Ebih__Waterfall__Cave_Entrance,    Ebih__Waterfall__Center_Main_Path,    Ebih__Waterfall__East_10,    Ebih__Waterfall__East_11,    Ebih__Waterfall__East_7,    Ebih__Waterfall__East_8,    Ebih__Waterfall__East_Ledge,    Ebih__Waterfall__Ledge_Below_Hole,    Ebih__Waterfall__Lower_West_Tree,    Ebih__Waterfall__Middle_West_Tree,    Ebih__Waterfall__Near_East_Tree,    Ebih__Waterfall__Platform,    Ebih__Waterfall__Top_Waterfall,    Ebih__Waterfall__Under_Waterfall,    Ebih__Waterfall__Wall_Left,    Ebih__Waterfall__Wall_Right,    Ebih__Waterfall__Waterfall_Center_Center,    Ebih__Waterfall__Waterfall_Center_Left,    Ebih__Waterfall__Waterfall_Center_Right,    Ebih__Waterfall__Waterfall_Left,    Ebih__Waterfall__Waterfall_Right,    Ebih__Waterfall__West_10,    Ebih__Waterfall__West_11,    Ebih__Waterfall__West_7,    Ebih__Waterfall__West_8,    Ebih__Waterfall__West_9,    Ebih__Waterfall__West_Climb,    Ebih__Waterfall__West_Door,    Ebih__Waterfall__West_Door_Left,    Ebih__Waterfall__West_Door_Right,    Ebih__Waterfall__West_Lower_Path,    Ebih__Waterfall__West_Main_Path,    Giguna__Antechamber__Bottom,    Giguna__Antechamber__East_16,    Giguna__Antechamber__Left_Wall_Lower,    Giguna__Antechamber__Left_Wall_Mid,    Giguna__Antechamber__Middle_Bricks_Left,    Giguna__Antechamber__Middle_Bricks_Right,    Giguna__Antechamber__Small_Bricks,    Giguna__Antechamber__Statue_Head,    Giguna__Antechamber__Statues_Ledge,    Giguna__Antechamber__West_15,    Giguna__Breachable_Wall__Above_Middle_Catwalk,    Giguna__Breachable_Wall__Above_West_Catwalk,    Giguna__Breachable_Wall__Wall_Interior,    Giguna__Breachable_Wall__West_Mid_air,    Giguna__Carnelian__Door,    Giguna__Carnelian__East_10,    Giguna__Carnelian__East_Cliff,    Giguna__Carnelian__Lower_Susar,    Giguna__Carnelian__Middle_Platforms,    Giguna__Carnelian__Rock,    Giguna__Carnelian__Switch,    Giguna__Carnelian__Upper_Path,    Giguna__Carnelian__Upper_Susar,    Giguna__Carnelian__Vault,    Giguna__Carnelian__West_10,    Giguna__Carnelian__West_Ledge,    Giguna__Clouds__Cache,    Giguna__Clouds__North_Left,    Giguna__Clouds__North_Middle,    Giguna__Clouds__North_Right,    Giguna__Clouds__North_Under_Ledge,    Giguna__Clouds__Platform_Early,    Giguna__Clouds__Platform_Early_Portal,    Giguna__Clouds__Platform_Start,    Giguna__Clouds__Platform_Stop,    Giguna__Clouds__Pull_Right,    Giguna__Clouds__Southeast,    Giguna__Clouds__Southwest,    Giguna__Clouds__Straight_Down,    Giguna__Dual_Path__Base_of_Wall,    Giguna__Dual_Path__Below_Left_Switch,    Giguna__Dual_Path__Below_Right_Switch,    Giguna__Dual_Path__East_17,    Giguna__Dual_Path__East_18,    Giguna__Dual_Path__East_Gate,    Giguna__Dual_Path__East_Gate_NE,    Giguna__Dual_Path__East_Gate_NW,    Giguna__Dual_Path__In_the_Grass,    Giguna__Dual_Path__Left_Switch,    Giguna__Dual_Path__Midway,    Giguna__Dual_Path__Midway_Plateau,    Giguna__Dual_Path__Right_Switch,    Giguna__Dual_Path__Wall_Secret,    Giguna__Dual_Path__Wall_Top,    Giguna__Dual_Path__West_17,    Giguna__Dual_Path__West_18,    Giguna__Dual_Path__West_Gate,    Giguna__Dual_Path__West_Gate_NE,    Giguna__Dual_Path__West_Gate_NW,    Giguna__Dual_Path__West_Slope,    Giguna__East_Caverns__Arc_Ledge,    Giguna__East_Caverns__Arc_Passage,    Giguna__East_Caverns__Carving,    Giguna__East_Caverns__Door,    Giguna__East_Caverns__East_17,    Giguna__East_Caverns__East_Grass,    Giguna__East_Caverns__East_Shaft,    Giguna__East_Caverns__East_Side,    Giguna__East_Caverns__Hidden_Passage_Center,    Giguna__East_Caverns__Hidden_Passage_East,    Giguna__East_Caverns__Hidden_Passage_West,    Giguna__East_Caverns__Lower_Ledge,    Giguna__East_Caverns__Lower_Susar,    Giguna__East_Caverns__Mid_Susar,    Giguna__East_Caverns__Middle_Ledge,    Giguna__East_Caverns__Middle_Rock,    Giguna__East_Caverns__Midwest_Ledge,    Giguna__East_Caverns__Statues_Ledge,    Giguna__East_Caverns__Switch,    Giguna__East_Caverns__Top_Ledge,    Giguna__East_Caverns__Top_Past_Susar,    Giguna__East_Caverns__Under_Lower_Ledge,    Giguna__East_Caverns__Upper_Floor,    Giguna__East_Caverns__Upper_Floor_Ledge,    Giguna__East_Caverns__Upper_Passage_East,    Giguna__East_Caverns__Upper_Passage_West,    Giguna__East_Caverns__Upper_Platforms_Left,    Giguna__East_Caverns__Upper_Platforms_Right,    Giguna__East_Caverns__Upper_Susar,    Giguna__East_Caverns__Upper_Susar_Jump_from_East,    Giguna__East_Caverns__Upper_Susar_Mid_jump,    Giguna__East_Caverns__West_14,    Giguna__East_Caverns__West_16,    Giguna__East_Caverns__West_17,    Giguna__East_Caverns__West_Grass,    Giguna__Far_Corner__East_13,    Giguna__Far_Corner__Grass,    Giguna__Far_Corner__South,    Giguna__Gateway__Block_Left,    Giguna__Gateway__Block_Lowered,    Giguna__Gateway__Block_Right,    Giguna__Gateway__Button,    Giguna__Gateway__Door,    Giguna__Gateway__East_19,    Giguna__Gateway__Far_Ledge,    Giguna__Gateway__Flask_Ledge,    Giguna__Gateway__Left_Platform,    Giguna__Gateway__One_Jump,    Giguna__Gateway__Passage_Entry,    Giguna__Gateway__Passage_Exit,    Giguna__Gateway__Refill_Station,    Giguna__Gateway__Right_Platform,    Giguna__Gateway__West_18,    Giguna__Gateway__West_19,    Giguna__Giguna_Base__Below_Gate,    Giguna__Giguna_Base__Building_Entry,    Giguna__Giguna_Base__East_14,    Giguna__Giguna_Base__East_17,    Giguna__Giguna_Base__Kari,    Giguna__Giguna_Base__Left_Pillar,    Giguna__Giguna_Base__Lower_Fork,    Giguna__Giguna_Base__Middle_Platform,    Giguna__Giguna_Base__Right_Pillar,    Giguna__Giguna_Base__Ruin,    Giguna__Giguna_Base__Save_Point,    Giguna__Giguna_Base__Staircase_Bottom,    Giguna__Giguna_Base__Staircase_Top,    Giguna__Giguna_Base__Stone_Knob,    Giguna__Giguna_Base__Switch_Distance_1,    Giguna__Giguna_Base__Switch_Distance_2,    Giguna__Giguna_Base__Switch_Distance_3,    Giguna__Giguna_Base__Switch_Distance_4,    Giguna__Giguna_Base__Table,    Giguna__Giguna_Base__Upper_Cliff,    Giguna__Giguna_Base__West_15,    Giguna__Giguna_Base__West_16,    Giguna__Giguna_Base__West_Grate,    Giguna__Giguna_Northeast__Crow_Eating,    Giguna__Giguna_Northeast__Door,    Giguna__Giguna_Northeast__East_11,    Giguna__Giguna_Northeast__East_9,    Giguna__Giguna_Northeast__Gate_Button,    Giguna__Giguna_Northeast__Gate_Left,    Giguna__Giguna_Northeast__Gate_Right,    Giguna__Giguna_Northeast__Gate_Vent,    Giguna__Giguna_Northeast__Inner_Wall,    Giguna__Giguna_Northeast__Right_Column,    Giguna__Giguna_Northeast__Save_Point,    Giguna__Giguna_Northeast__Shaft_Bottom,    Giguna__Giguna_Northeast__Step,    Giguna__Giguna_Northeast__Switch,    Giguna__Giguna_Northeast__Vault,    Giguna__Giguna_Northeast__West_10,    Giguna__Giguna_Northeast__West_9,    Giguna__Gubi_Lair__Center_East_Sapling,    Giguna__Gubi_Lair__Center_Platform,    Giguna__Gubi_Lair__Center_West_Sapling,    Giguna__Gubi_Lair__East_15,    Giguna__Gubi_Lair__East_Tree,    Giguna__Gubi_Lair__Grass_by_Wall,    Giguna__Gubi_Lair__Leftmost_Platform,    Giguna__Gubi_Lair__Lower_Platform,    Giguna__Gubi_Lair__Pedestal,    Giguna__Gubi_Lair__Rightmost_Platform,    Giguna__Gubi_Lair__Shaft_Bottom,    Giguna__Gubi_Lair__West_Brickwork,    Giguna__Hard_Rock__East_17,    Giguna__Hard_Rock__Rock_Center,    Giguna__Hard_Rock__Rock_Left,    Giguna__Hard_Rock__Rock_Right,    Giguna__Hard_Rock__West_17,    Giguna__Helipad__East_15,    Giguna__Helipad__East_16,    Giguna__Helipad__East_18,    Giguna__Helipad__Helicopter,    Giguna__Helipad__Irikar_Drop,    Giguna__Helipad__Lowest_Ledge,    Giguna__Helipad__North,    Giguna__Helipad__Railing,    Giguna__Helipad__So_Close,    Giguna__Helipad__South_Left,    Giguna__Helipad__South_Middle,    Giguna__Helipad__South_Right,    Giguna__Helipad__Staircase_Top,    Giguna__Helipad__Tablet_Ledge,    Giguna__Helipad__Wall_Bottom,    Giguna__Helipad__Wall_Top,    Giguna__Labyrinth__East_22,    Giguna__Labyrinth__East_23,    Giguna__Labyrinth__Lower_East,    Giguna__Labyrinth__Middle_East,    Giguna__Labyrinth__Top_East,    Giguna__Labyrinth_East__East_19,    Giguna__Labyrinth_East__East_20,    Giguna__Labyrinth_East__Lower_Middle,    Giguna__Labyrinth_East__Lower_West,    Giguna__Labyrinth_East__Middle_Drop,    Giguna__Labyrinth_East__Middle_Tree,    Giguna__Labyrinth_East__Middle_West,    Giguna__Labyrinth_East__Top_Middle,    Giguna__Labyrinth_East__Top_West,    Giguna__Lamassu__Broken_Pillar,    Giguna__Lamassu__Deposit,    Giguna__Lamassu__East_18,    Giguna__Lamassu__Head,    Giguna__Lamassu__Lower_Platform_Left,    Giguna__Lamassu__Lower_Platform_Right,    Giguna__Lamassu__Rear_Gap,    Giguna__Lamassu__Rear_Platform,    Giguna__Lamassu__Staircase_Bottom,    Giguna__Lamassu__Staircase_Landing,    Giguna__Lamassu__Staircase_Top,    Giguna__Lamassu__Upper_Platform_Edge,    Giguna__Lamassu__West_18,    Giguna__Lamassu__Wingtip,    Giguna__Mural__Northwest_Item,    Giguna__Mural__West_20,    Giguna__Ruins_Center__Center_Top,    Giguna__Ruins_Center__East_8,    Giguna__Ruins_Center__East_9,    Giguna__Ruins_Center__Tablet,    Giguna__Ruins_Center__Wall_Bottom,    Giguna__Ruins_Center__Wall_Top,    Giguna__Ruins_Center__West_9,    Giguna__Ruins_Center__West_Platform_Left,    Giguna__Ruins_Center__West_Platform_Right,    Giguna__Ruins_East__Bottom_Rock,    Giguna__Ruins_East__Cliff,    Giguna__Ruins_East__East_9,    Giguna__Ruins_East__Ledge,    Giguna__Ruins_East__Pillar,    Giguna__Ruins_East__Small_Passage,    Giguna__Ruins_East__Way_Up_High,    Giguna__Ruins_East__West_7,    Giguna__Ruins_East__West_8,    Giguna__Ruins_East__West_9,    Giguna__Ruins_Top__East_7,    Giguna__Ruins_Top__East_Door,    Giguna__Ruins_Top__Entryway,    Giguna__Ruins_Top__Flask,    Giguna__Ruins_Top__Interior_Ledge,    Giguna__Ruins_Top__Portal,    Giguna__Ruins_Top__Portal_Left,    Giguna__Ruins_Top__Rooftop_East,    Giguna__Ruins_Top__Rooftop_Gutter,    Giguna__Ruins_Top__Rooftop_West,    Giguna__Ruins_Top__Save_Point,    Giguna__Ruins_Top__Small_Ledge,    Giguna__Ruins_Top__Switch,    Giguna__Ruins_Top__Turret_Balcony_East,    Giguna__Ruins_Top__Turret_Balcony_West,    Giguna__Ruins_Top__Upper_Tunnel,    Giguna__Ruins_Top__West_7,    Giguna__Ruins_Top__West_Door,    Giguna__Ruins_Top__West_Pillar,    Giguna__Ruins_West__East_7,    Giguna__Ruins_West__East_9,    Giguna__Ruins_West__Lower_Ledge,    Giguna__Ruins_West__Nook,    Giguna__Ruins_West__Platform,    Giguna__Ruins_West__Rooftop_East_Edge,    Giguna__Ruins_West__Rooftop_West_Edge,    Giguna__Ruins_West__Save_Point,    Giguna__Ruins_West__Upper_Ledge,    Giguna__Ruins_West__West_7,    Giguna__Separator__East_25,    Giguna__Separator__West_23,    Giguna__Separator__West_24,    Giguna__Separator__West_25,    Giguna__Separator__West_Mid_air,    Giguna__Vertical_Interchange__Dead_end,    Giguna__Vertical_Interchange__Dead_end_Ledge,    Giguna__Vertical_Interchange__East_20,    Giguna__Vertical_Interchange__Gate,    Giguna__Vertical_Interchange__Ledge_19,    Giguna__Vertical_Interchange__Middle_Below_Top,    Giguna__Vertical_Interchange__Middle_Hill_By_Switch,    Giguna__Vertical_Interchange__Middle_Ledge_Below_Gate,    Giguna__Vertical_Interchange__Middle_Plateau,    Giguna__Vertical_Interchange__North,    Giguna__Vertical_Interchange__South,    Giguna__Vertical_Interchange__Switch,    Giguna__Vertical_Interchange__Top_Left_Ledge,    Giguna__Vertical_Interchange__Top_Passage_Bottom,    Giguna__Vertical_Interchange__Top_Right_Ledge,    Giguna__Vertical_Interchange__Top_Rocky_Ledge,    Giguna__Vertical_Interchange__Top_Rocky_Outcrop,    Giguna__Vertical_Interchange__West_17,    Giguna__Vertical_Interchange__West_19,    Giguna__Wasteland__Bluff_by_Door,    Giguna__Wasteland__Cache_Ledge,    Giguna__Wasteland__Center_Plains,    Giguna__Wasteland__Center_Platform_East,    Giguna__Wasteland__Center_Platform_West,    Giguna__Wasteland__Door_Left,    Giguna__Wasteland__Door_Right,    Giguna__Wasteland__East_12,    Giguna__Wasteland__East_13,    Giguna__Wasteland__East_14,    Giguna__Wasteland__East_Ledge,    Giguna__Wasteland__Ladder_Ledge,    Giguna__Wasteland__Left_Platform_East,    Giguna__Wasteland__Left_Platform_West,    Giguna__Wasteland__Lower_Cliff,    Giguna__Wasteland__Lower_Path_Left,    Giguna__Wasteland__Lower_Path_Right,    Giguna__Wasteland__Lower_Platform_East,    Giguna__Wasteland__Lower_Platform_West,    Giguna__Wasteland__Middle_Cliff,    Giguna__Wasteland__Middle_Path,    Giguna__Wasteland__Passage_Cache,    Giguna__Wasteland__Passage_East,    Giguna__Wasteland__Right_Platform_East,    Giguna__Wasteland__Right_Platform_West,    Giguna__Wasteland__Steeper_Hill,    Giguna__Wasteland__Switch,    Giguna__Wasteland__Switch_Approach,    Giguna__Wasteland__Switch_Ledge,    Giguna__Wasteland__Tiny_Hill,    Giguna__Wasteland__Upper_Cache,    Giguna__Wasteland__Upper_Cliff,    Giguna__Wasteland__West_12,    Giguna__Wasteland__West_13,    Giguna__Wasteland__West_14,    Giguna__Wasteland__West_Plains,    Giguna__Wasteland__Westward_Hill,    Giguna__West_Caverns__Bush,    Giguna__West_Caverns__Cache,    Giguna__West_Caverns__Column_1_Top_Left,    Giguna__West_Caverns__Column_1_Top_Right,    Giguna__West_Caverns__Column_2_Top,    Giguna__West_Caverns__East_10,    Giguna__West_Caverns__East_12,    Giguna__West_Caverns__East_13,    Giguna__West_Caverns__East_Platform,    Giguna__West_Caverns__East_Susar,    Giguna__West_Caverns__Floating_Brick,    Giguna__West_Caverns__Higher_Ledge,    Giguna__West_Caverns__Northwest,    Giguna__West_Caverns__Small_Platform,    Giguna__West_Caverns__Small_Staircase,    Giguna__West_Caverns__Top_Gap_Left,    Giguna__West_Caverns__Top_Gap_Right,    Giguna__West_Caverns__Tunnel_Bottom,    Giguna__West_Caverns__Tunnel_Entrance,    Giguna__West_Caverns__Tunnel_Fork,    Giguna__West_Caverns__West_13,    Giguna__West_Tower__East_7,    Giguna__West_Tower__Southwest,    Giguna__West_Tower__Top,    Giguna_Breach__Antechamber__North,    Giguna_Breach__Ascent__Bottom,    Giguna_Breach__Ascent__Top,    Giguna_Breach__Ascent__West_6,    Giguna_Breach__Ascent__West_9,    Giguna_Breach__Below_Chimney__Cubby_Entrance,    Giguna_Breach__Below_Chimney__East_Ledge,    Giguna_Breach__Below_Chimney__North,    Giguna_Breach__Below_Chimney__Passage_Lip,    Giguna_Breach__Below_Chimney__Southwest,    Giguna_Breach__Below_Chimney__West_Passage,    Giguna_Breach__Central__East_9,    Giguna_Breach__Central__East_Brick,    Giguna_Breach__Central__Middle_Statue,    Giguna_Breach__Central__South,    Giguna_Breach__Central__Statuette,    Giguna_Breach__Central__Tunnel,    Giguna_Breach__Central__Upper_Floating_Brick,    Giguna_Breach__Central__Wall,    Giguna_Breach__Central__West_8,    Giguna_Breach__Central__West_9,    Giguna_Breach__Central__West_Statue,    Giguna_Breach__Chimney__Cache,    Giguna_Breach__Chimney__East_7,    Giguna_Breach__Chimney__East_8,    Giguna_Breach__Chimney__East_9,    Giguna_Breach__Chimney__Middle_Platform,    Giguna_Breach__Chimney__South,    Giguna_Breach__Chimney__Top,    Giguna_Breach__Cubby__Entrance,    Giguna_Breach__Cubby__Rocks,    Giguna_Breach__Fire_Room__Cuesta,    Giguna_Breach__Fire_Room__East_11,    Giguna_Breach__Fire_Room__First_Fire,    Giguna_Breach__Fire_Room__South,    Giguna_Breach__Fire_Room__West_10,    Giguna_Breach__Fire_Room__West_11,    Giguna_Breach__Fire_Room__West_Plateau,    Giguna_Breach__Grid_14_10_11__East_10,    Giguna_Breach__Grid_14_10_11__East_11,    Giguna_Breach__Grid_14_10_11__High_Ledge,    Giguna_Breach__Grid_14_10_11__North,    Giguna_Breach__Grid_14_10_11__South,    Giguna_Breach__Peak__Column,    Giguna_Breach__Peak__East_6,    Giguna_Breach__Peak__East_Passage,    Giguna_Breach__Peak__Portal,    Giguna_Breach__Peak__Save_Point,    Giguna_Breach__Peak__Upper_East,    Giguna_Breach__Peak__Upper_West,    Giguna_Breach__Peak__West_7,    Giguna_Breach__Pink_Clouds__Corner,    Giguna_Breach__Pink_Clouds__Normal_Entry,    Giguna_Breach__Pink_Clouds__Quick_Entry,    Giguna_Breach__Robopede__Center,    Giguna_Breach__Robopede__North,    Giguna_Breach__Robopede__West,    Giguna_Breach__Slingshot__Column,    Giguna_Breach__Slingshot__Ravine,    Giguna_Breach__Slingshot__West,    Giguna_Breach__SW_Save__East_12,    Giguna_Breach__SW_Save__Lower_Platform,    Giguna_Breach__SW_Save__North,    Giguna_Breach__SW_Save__Save_Point,    Giguna_Breach__SW_Save__Side_Door,    Giguna_Breach__SW_Save__West_11,    Glacier__Apocalypse_Entry__Terminal,    Glacier__Apocalypse_Entry__West,    Glacier__Boomerang_Antechamber__East_12,    Glacier__Boomerang_Antechamber__Upper_East,    Glacier__Boomerang_Antechamber__West_12,    Glacier__Boomerang_Antechamber__West_13,    Glacier__Boomerang_Room__Center_ish,    Glacier__Boomerang_Room__Center_Ledge,    Glacier__Boomerang_Room__Pedestal,    Glacier__Boomerang_Room__Platform,    Glacier__Boomerang_Room__Upper_Gate_East,    Glacier__Boomerang_Room__Upper_West,    Glacier__Boomerang_Room__West,    Glacier__Compass_Room__Center,    Glacier__Compass_Room__East,    Glacier__Compass_Room__West,    Glacier__Dock_Outside__Do_Not_Enter,    Glacier__Dock_Outside__Entry,    Glacier__Grid_31_9_12__East_10,    Glacier__Grid_31_9_12__East_9,    Glacier__Grid_31_9_12__Midair,    Glacier__Grid_31_9_12__Observation_Tower,    Glacier__Grid_31_9_12__Observation_Tower_L4,    Glacier__Grid_31_9_12__West_12,    Glacier__Grid_32_7_10__Center_Platform,    Glacier__Grid_32_7_10__Column,    Glacier__Grid_32_7_10__East_8,    Glacier__Grid_32_7_10__Left_Rock,    Glacier__Grid_32_7_10__West_10,    Glacier__Grid_32_7_10__West_9,    Glacier__Grid_37_38_9__East,    Glacier__Grid_37_38_9__West,    Glacier__Grid_39_40_7_9__Upper_East,    Glacier__Grid_39_40_7_9__West,    Glacier__Grid_42_10__East,    Glacier__Grid_42_10__West,    Glacier__Grid_43_10_11__East,    Glacier__Grid_43_10_11__Lower,    Glacier__Grid_43_10_11__Top,    Glacier__Lake_Main_Entrance__Bottom,    Glacier__Lake_Main_Entrance__Ebih_Access,    Glacier__Lake_Main_Entrance__Hill,    Glacier__Lake_Main_Entrance__Lake_Access,    Glacier__Lake_Main_Entrance__Ledge,    Glacier__Lake_Main_Entrance__Lower_Platform,    Glacier__Lake_Main_Entrance__Side,    Glacier__Lake_Main_Entrance__Side_Jump,    Glacier__Lake_Main_Entrance__Upper,    Glacier__Lake_Main_Entrance__Upper_Platform,    Glacier__Ledge_Grab_Room__Cliff,    Glacier__Ledge_Grab_Room__Cliff_Bottom,    Glacier__Ledge_Grab_Room__Column,    Glacier__Ledge_Grab_Room__East_11,    Glacier__Ledge_Grab_Room__East_9,    Glacier__Ledge_Grab_Room__Fork,    Glacier__Ledge_Grab_Room__Gate,    Glacier__Ledge_Grab_Room__Gate_Ledge,    Glacier__Ledge_Grab_Room__Lower_Platform,    Glacier__Ledge_Grab_Room__Mid_34,    Glacier__Ledge_Grab_Room__Mid_35,    Glacier__Ledge_Grab_Room__Pedestal,    Glacier__Ledge_Grab_Room__Upper_Platform,    Glacier__Ledge_Grab_Room__West_End,    Glacier__Peak__East_8,    Glacier__Peak__Highest_Platform,    Glacier__Peak__Top_Platform_East,    Glacier__Peak__Top_Rock,    Glacier__Peak__Under_West_Cliff,    Glacier__Peak__West_8,    Glacier__Peak__West_Cliff,    Glacier__Revival__East_9,    Glacier__Revival__Ledge,    Glacier__Revival__Lower_East,    Glacier__Revival__Overhang,    Glacier__Revival__Save_Point,    Glacier__Revival__West_8,    Glacier__The_Big_Drop__East,    Glacier__The_Big_Drop__Small_Path,    Glacier__The_Big_Drop__Water_Surface,    Glacier__Vertical_Room__East_12,    Glacier__Vertical_Room__East_13,    Glacier__Vertical_Room__East_9,    Glacier__Vertical_Room__East_Corner,    Glacier__Vertical_Room__Lower_West_Corner,    Glacier__Vertical_Room__Mid_11,    Glacier__Vertical_Room__Mid_9,    Glacier__Vertical_Room__Past_Gate,    Glacier__Vertical_Room__Peak,    Glacier__Vertical_Room__Under_Switch,    Glacier__Vertical_Room__West_8,    Glacier__Vertical_Room__West_9,    Interior__Building_Interior__Corner,    Interior__Building_Interior__Entry,    Interior__Bunker_Interior__Desk,    Interior__Bunker_Interior__Entry,    Interior__Cave_Behind_Waterfall__Bottom,    Interior__Cave_Behind_Waterfall__Middle,    Interior__Cave_Behind_Waterfall__Top,    Interior__Dock_Elevator__Connector,    Interior__Dock_Elevator__Elevator,    Interior__Dock_Interior__Connector,    Interior__Dock_Interior__Entry,    Interior__Ebih_Cave__Entry,    Interior__Garage__Boxes,    Interior__Garage__Entry,    Interior__Outpost_Interior__Bookshelf,    Interior__Outpost_Interior__Entry,    Interior__Tent_Interior__Desk,    Interior__Tent_Interior__Entry,    Irikar__Abandoned_Room__Corner_Core,    Irikar__Abandoned_Room__Empty_Pedestal,    Irikar__Abandoned_Room__West,    Irikar__Airy__Middle_South,    Irikar__Airy__Northwest,    Irikar__Basement_Pipes__Brick_Ledge,    Irikar__Basement_Pipes__Bricks_Under_Pipes,    Irikar__Basement_Pipes__Double_Pipe_Left,    Irikar__Basement_Pipes__Double_Pipe_Right,    Irikar__Basement_Pipes__East_28,    Irikar__Basement_Pipes__High_Pipe,    Irikar__Basement_Pipes__Left_Vertical_Pipe,    Irikar__Basement_Pipes__Lower_Pipe_Right,    Irikar__Basement_Pipes__Lower_Pipe_Under_Ledge,    Irikar__Basement_Pipes__Right_Vertical_Pipe,    Irikar__Basement_Pipes__West_27,    Irikar__Basement_Pipes__West_28,    Irikar__Basement_Portal__Bottom_Middle,    Irikar__Basement_Portal__East_27,    Irikar__Basement_Portal__East_28,    Irikar__Basement_Portal__East_Platform,    Irikar__Basement_Portal__Ledge,    Irikar__Basement_Portal__Middle_Platform,    Irikar__Basement_Portal__Moving_Platform_End,    Irikar__Basement_Portal__Moving_Platform_Start,    Irikar__Basement_Portal__North,    Irikar__Basement_Portal__Portal_Stand,    Irikar__Basement_Portal__West_28,    Irikar__Basement_Portal__Westmost_Platform,    Irikar__Boss_Room__Above_Catwalk,    Irikar__Boss_Room__Bulls_Feet,    Irikar__Boss_Room__Catwalk_East,    Irikar__Boss_Room__Catwalk_West,    Irikar__Boss_Room__East_28,    Irikar__Boss_Room__Healthy_Rooftop,    Irikar__Boss_Room__Northwest,    Irikar__Boss_Room__Sat_Tower_Roof_East,    Irikar__Boss_Room__Sat_Tower_Roof_West,    Irikar__Boss_Room__Upper_Rooftops,    Irikar__Boss_Room__West_28,    Irikar__East_Rooftops__Directly_Down,    Irikar__East_Rooftops__East_Mid_air,    Irikar__East_Rooftops__Off_the_Edge,    Irikar__East_Rooftops__Top_Rooftop,    Irikar__East_Rooftops__Upper_West,    Irikar__Empty_Foyer__East,    Irikar__Empty_Foyer__West,    Irikar__Hub__Bowl_Hole,    Irikar__Hub__Bowl_Middle_Ledge,    Irikar__Hub__Bowl_Middle_Platform_Center,    Irikar__Hub__Bowl_Middle_Platform_West,    Irikar__Hub__Bowl_Platform_3,    Irikar__Hub__Bowl_Top_Platform,    Irikar__Hub__Dagger_Altar,    Irikar__Hub__East_Rim,    Irikar__Hub__North_Above_Portal,    Irikar__Hub__Northeast_Above_Bowl,    Irikar__Hub__Northwest,    Irikar__Hub__Northwest_Above_Bowl,    Irikar__Hub__NW_Bowl_Edifice,    Irikar__Hub__NW_Middle_Building_Corner,    Irikar__Hub__NW_Middle_Building_West_Entry,    Irikar__Hub__NW_Roof,    Irikar__Hub__NW_Staircase_Upper,    Irikar__Hub__Portal_Stand,    Irikar__Hub__Royal_Storage_By_Wall,    Irikar__Hub__Royal_Storage_in_Wall,    Irikar__Hub__Royal_Storage_South,    Irikar__Hub__Sat_Tower_Bottom,    Irikar__Hub__Sat_Tower_East_24,    Irikar__Hub__Sat_Tower_Floating_Platform,    Irikar__Hub__Sat_Tower_Long_Ledge,    Irikar__Hub__Sat_Tower_Lower_Left_Ledge,    Irikar__Hub__Sat_Tower_Lower_Right_Ledge,    Irikar__Hub__Sat_Tower_Middle_Ledge,    Irikar__Hub__Sat_Tower_Northeast,    Irikar__Hub__Sat_Tower_Roof_East,    Irikar__Hub__Sat_Tower_Roof_West,    Irikar__Hub__Sat_Tower_Top_Ledge,    Irikar__Hub__Sat_Tower_West_Valley,    Irikar__Hub__Save_Point,    Irikar__Hub__West_Rim,    Irikar__Lamassu__Bottom_Middle,    Irikar__Lamassu__Catwalk_Middle,    Irikar__Lamassu__Catwalk_West,    Irikar__Lamassu__Desk,    Irikar__Lamassu__East_26,    Irikar__Lamassu__East_27,    Irikar__Lamassu__Hidden_Passage_East,    Irikar__Lamassu__Hidden_Passage_West,    Irikar__Lamassu__Northwest,    Irikar__Lamassu__West_28,    Irikar__Midwest__East_23,    Irikar__Midwest__East_24_on_Building,    Irikar__Midwest__East_24_on_Floor,    Irikar__Midwest__East_25,    Irikar__Midwest__East_26,    Irikar__Midwest__East_27,    Irikar__Midwest__East_28,    Irikar__Sight_Room__Above_Room_East,    Irikar__Sight_Room__Above_Room_North,    Irikar__Sight_Room__Item_Pedestal,    Irikar__Sight_Room__Lower_Ledge,    Irikar__Sight_Room__Portal,    Irikar__Sight_Room__West_24,    Irikar_Breach__Basement_Save__Save_Point,    Irikar_Breach__Exit_Corridor__East,    Irikar_Breach__Exit_Corridor__North_12,    Irikar_Breach__Exit_Corridor__North_13,    Irikar_Breach__Exit_Corridor__Passage,    Irikar_Breach__Exit_Corridor__Pillar,    Irikar_Breach__Exit_Corridor__Portal_Stand,    Irikar_Breach__Exit_Corridor__West,    Irikar_Breach__Exit_Corridor__West_of_Pillar,    Irikar_Breach__Flappy_Drone__Initial_Drop,    Irikar_Breach__Flappy_Drone__Passage_Corner,    Irikar_Breach__Flappy_Drone__Pillar_Underside,    Irikar_Breach__Flappy_Drone__Side,    Irikar_Breach__Flappy_Drone__South,    Irikar_Breach__Flappy_Drone__Top_Pillar,    Irikar_Breach__Flappy_Drone__Upper_Valley_Left,    Irikar_Breach__Flappy_Drone__Upper_Valley_Right,    Irikar_Breach__Flappy_Drone__West_Door,    Irikar_Breach__Flappy_Drone__Zigzag_Bottom,    Irikar_Breach__Four_way__East,    Irikar_Breach__Four_way__Ledge,    Irikar_Breach__Four_way__North,    Irikar_Breach__Four_way__South,    Irikar_Breach__Four_way__West,    Irikar_Breach__Gauntlet__East_22,    Irikar_Breach__Gauntlet__Hidden_Path_Bottom,    Irikar_Breach__Gauntlet__Hidden_Path_Lower_Entry,    Irikar_Breach__Gauntlet__Hidden_Path_Reward,    Irikar_Breach__Gauntlet__Hidden_Path_Top_Ledge,    Irikar_Breach__Gauntlet__Hidden_Path_Upper_Entry,    Irikar_Breach__Gauntlet__Hidden_Path_Upper_Left,    Irikar_Breach__Gauntlet__Hidden_Path_Upper_Right,    Irikar_Breach__Gauntlet__Save_Point,    Irikar_Breach__Hover_Room__Bottom,    Irikar_Breach__Hover_Room__East,    Irikar_Breach__Hover_Room__West,    Irikar_Breach__Neon_Corridor__Center,    Irikar_Breach__Neon_Corridor__East,    Irikar_Breach__Neon_Corridor__West,    Irikar_Breach__Neon_Corridor__West_Basin,    Irikar_Breach__Sandy_Lair__East_27,    Irikar_Breach__Sandy_Lair__East_28,    Irikar_Breach__Save_Room__Save_Point,    Irikar_Breach__Save_Room__Upper_Area,    Irikar_Breach__Save_Room__West,    Irikar_Breach__Uhrum_Connector__West,    Irikar_Breach__Worm_Rave__Corner,    Irikar_Breach__Worm_Rave__East,    Irikar_Breach__Worm_Rave__South,    Menu__Upgrade_Menu__Combat,    Menu__Upgrade_Menu__Drone,    Menu__Upgrade_Menu__Infection,    Menu__Upgrade_Menu__Physiology,    Uhrum__Annuna_Corridor__Between_Two_Flowers,    Uhrum__Annuna_Corridor__Block_East,    Uhrum__Annuna_Corridor__Block_West,    Uhrum__Annuna_Corridor__East_25,    Uhrum__Annuna_Corridor__East_Cubby,    Uhrum__Annuna_Corridor__Lower_Platform,    Uhrum__Annuna_Corridor__Middle_Platform,    Uhrum__Annuna_Corridor__Open_Pillar,    Uhrum__Annuna_Corridor__Pedestal,    Uhrum__Annuna_Corridor__Save_Point,    Uhrum__Annuna_Corridor__Statue,    Uhrum__Annuna_Corridor__Upper_Ledge,    Uhrum__Annuna_Corridor__Upper_Platform,    Uhrum__Annuna_Corridor__Upper_Trees,    Uhrum__Annuna_Corridor__Wall_Remnant,    Uhrum__Annuna_Corridor__West_25,    Uhrum__Annuna_Corridor__West_26,    Uhrum__Artillery_Practice__East_24,    Uhrum__East_Lake__West_27,    Uhrum__East_Lake__West_28,    Uhrum__Glitchy_Corridor__East_27,    Uhrum__Glitchy_Corridor__East_28,    Uhrum__Glitchy_Corridor__West_28,    Uhrum__Save_Room__East,    Uhrum__Save_Room__Save_Point,    Uhrum__Save_Room__West,    Uhrum__Siege_Corridor__Center_Box,    Uhrum__Siege_Corridor__Center_East,    Uhrum__Siege_Corridor__Center_Platform_1,    Uhrum__Siege_Corridor__Center_Platform_3,    Uhrum__Siege_Corridor__Center_Valley,    Uhrum__Siege_Corridor__Center_West,    Uhrum__Siege_Corridor__East_25,    Uhrum__Siege_Corridor__East_Hill,    Uhrum__Siege_Corridor__Mideast_Hill,    Uhrum__Siege_Corridor__Mideast_Tree,    Uhrum__Siege_Corridor__Northwest_Door,    Uhrum__Siege_Corridor__Northwest_Platform,    Uhrum__Siege_Corridor__Pond,    Uhrum__Siege_Corridor__Upper_Rock_East,    Uhrum__Siege_Corridor__Upper_Rock_Item,    Uhrum__Siege_Corridor__Upper_Rock_West,    Uhrum__Siege_Corridor__West_26,    Uhrum__Siege_Corridor__West_Grassy_Ledge,    Uhrum__Siege_Corridor__West_Greenery,    Uhrum__Siege_Corridor__West_Loop,    Uhrum__Siege_Corridor__West_Middle_Tree,    Uhrum__Siege_Corridor__West_Rocky_Ledge,    Uhrum__Siege_Corridor__Western_Cache,    Uhrum__Siege_Corridor__Western_Rock,    Uhrum__Tulip_Tower__West_24,    Uhrum__Tulip_Tower__West_24_in_Mid_air,    Uhrum__Waterfalls__Above_Block,    Uhrum__Waterfalls__Barrier_East,    Uhrum__Waterfalls__Barrier_West,    Uhrum__Waterfalls__Below_Block,    Uhrum__Waterfalls__Ceiling_Cache,    Uhrum__Waterfalls__Ceiling_Opening,    Uhrum__Waterfalls__Center_Island_East,    Uhrum__Waterfalls__Center_Island_West,    Uhrum__Waterfalls__East_24,    Uhrum__Waterfalls__East_24_in_Mid_air,    Uhrum__Waterfalls__East_25,    Uhrum__Waterfalls__East_26,    Uhrum__Waterfalls__East_27,    Uhrum__Waterfalls__East_28,    Uhrum__Waterfalls__East_Palm_Tree,    Uhrum__Waterfalls__East_Water_Surface,    Uhrum__Waterfalls__East_Waters_Edge,    Uhrum__Waterfalls__Green_Middle_Ledge,    Uhrum__Waterfalls__High_Platform,    Uhrum__Waterfalls__Island_Water_West,    Uhrum__Waterfalls__Large_Rock,    Uhrum__Waterfalls__Ledge_Above_Palm,    Uhrum__Waterfalls__Lower_East_Platform,    Uhrum__Waterfalls__Medium_Rock,    Uhrum__Waterfalls__Northeast_Ledge,    Uhrum__Waterfalls__Small_Rock,    Uhrum__Waterfalls__Water_Pillar,    Uhrum__Waterfalls__Water_Slope,    Uhrum__Waterfalls__West_24,    Uhrum__Waterfalls__West_25,    Uhrum__Waterfalls__West_27,    Uhrum__Waterfalls__West_Platform,    Uhrum__Waterfalls__West_Wall,    Uhrum__Waterfalls__West_Water_Ledge,    Uhrum__Waterfalls__West_Water_Nook,    Uhrum__Waterfalls__West_Water_Surface,    Uhrum__Waterfalls__West_Waters_Edge,    Uhrum__West_Entrance__Clear_Passage,    Uhrum__West_Entrance__East_26,    Uhrum__West_Entrance__East_28,    Uhrum__West_Entrance__Gate_Switch,    Uhrum__West_Entrance__Hidden_Passage_Entry,    Uhrum__West_Entrance__Hidden_Passage_West,    Uhrum__West_Entrance__Inner_Dais,    Uhrum__West_Entrance__Lower_Path_Gap,    Uhrum__West_Entrance__Lower_Path_Rock,    Uhrum__West_Entrance__Lower_Path_Tree_Ledge,    Uhrum__West_Entrance__Lower_Wall_East,    Uhrum__West_Entrance__Lower_Wall_West,    Uhrum__West_Entrance__Middle_West_Ledge,    Uhrum__West_Entrance__Portal_Exit,    Uhrum__West_Entrance__Portal_Stand,    Uhrum__West_Entrance__Sand,    Uhrum__West_Entrance__Save_Point,    Uhrum__West_Entrance__South_Platform,    Uhrum__West_Entrance__Southeast_Tree,    Uhrum__West_Entrance__Top_West_Ledge,    Uhrum__West_Entrance__Upper_Fork,    Uhrum__West_Entrance__Upper_Wall_East,    Uhrum__West_Entrance__Upper_Wall_West,    Uhrum__West_Entrance__West_25,    Uhrum__West_Entrance__West_26,    Uhrum__West_Entrance__West_27,    Uhrum__West_Entrance__West_of_Gate,}
+    #[default]
+    None,
+    Amagi__Grid_31_19__East,
+    Amagi__Grid_31_19__West,
+    Amagi__Liru_Room__Bottom,
+    Amagi__Liru_Room__East_Passage,
+    Amagi__Liru_Room__Hidden_Enemies,
+    Amagi__Liru_Room__Hidden_Exit,
+    Amagi__Liru_Room__Platform_1_Left,
+    Amagi__Liru_Room__Platform_1_Right,
+    Amagi__Liru_Room__Platform_2_Left,
+    Amagi__Liru_Room__Platform_2_Right,
+    Amagi__Liru_Room__Platform_3_Left,
+    Amagi__Liru_Room__Platform_3_Right,
+    Amagi__Liru_Room__Platform_4_Left,
+    Amagi__Liru_Room__Platform_4_Right,
+    Amagi__Liru_Room__Shrine,
+    Amagi__Liru_Room__West_19,
+    Amagi__Liru_Room__West_20,
+    Amagi__Main_Area__Broken_Wall,
+    Amagi__Main_Area__Carving,
+    Amagi__Main_Area__Catwalk_Broken_Part,
+    Amagi__Main_Area__Catwalk_Center,
+    Amagi__Main_Area__Catwalk_East_Edge,
+    Amagi__Main_Area__Cliff,
+    Amagi__Main_Area__East_15,
+    Amagi__Main_Area__East_19,
+    Amagi__Main_Area__East_Ledge,
+    Amagi__Main_Area__Enemy_Side,
+    Amagi__Main_Area__Flat_Ruin,
+    Amagi__Main_Area__Half_Pillar,
+    Amagi__Main_Area__Platform_2,
+    Amagi__Main_Area__Platform_3,
+    Amagi__Main_Area__Save_Point,
+    Amagi__Main_Area__Secret_Outcropping,
+    Amagi__Main_Area__Secret_Waterfall,
+    Amagi__Main_Area__Shallow_End,
+    Amagi__Main_Area__Small_Cliff,
+    Amagi__Main_Area__Upper_Platform,
+    Amagi__Main_Area__Wall_Stuck_Spot,
+    Amagi__Main_Area__Waters_Edge,
+    Amagi__Main_Area__Way_Off_To_The_Side,
+    Amagi__Main_Area__West_15,
+    Amagi__Main_Area__West_18,
+    Amagi__Main_Area__West_19,
+    Amagi__Main_Area__West_Mini_Hill,
+    Amagi__Main_Area__West_Shelf,
+    Amagi__Main_Area__West_Side,
+    Amagi__West_Lake__Cavern_Back_Teeth,
+    Amagi__West_Lake__Cavern_Chin,
+    Amagi__West_Lake__Cavern_Eye,
+    Amagi__West_Lake__Cavern_Front_Pillar,
+    Amagi__West_Lake__Cavern_Front_Teeth,
+    Amagi__West_Lake__Cavern_Jaw,
+    Amagi__West_Lake__Cavern_Lower_Trachea,
+    Amagi__West_Lake__Cavern_Middle_Pillar,
+    Amagi__West_Lake__Cavern_Neck,
+    Amagi__West_Lake__Cavern_Rear_Pillar,
+    Amagi__West_Lake__Cavern_Refill_Station,
+    Amagi__West_Lake__Cavern_Tear_Duct,
+    Amagi__West_Lake__East_15,
+    Amagi__West_Lake__East_18,
+    Amagi__West_Lake__East_19,
+    Amagi__West_Lake__East_20,
+    Amagi__West_Lake__East_Bank,
+    Amagi__West_Lake__East_Platform,
+    Amagi__West_Lake__East_Shore,
+    Amagi__West_Lake__Left_of_Enemy,
+    Amagi__West_Lake__Northeast_Platform,
+    Amagi__West_Lake__Northwest_Platform,
+    Amagi__West_Lake__Pillar,
+    Amagi__West_Lake__Pillar_Platform,
+    Amagi__West_Lake__Small_Hill,
+    Amagi__West_Lake__Some_Rock,
+    Amagi__West_Lake__Somewhat_Central_Platform,
+    Amagi__West_Lake__Stronghold_Ceiling_Left,
+    Amagi__West_Lake__Stronghold_Ceiling_Right,
+    Amagi__West_Lake__Stronghold_Front_Door,
+    Amagi__West_Lake__Stronghold_Front_Room,
+    Amagi__West_Lake__Stronghold_Item,
+    Amagi__West_Lake__Stronghold_Middle_Column,
+    Amagi__West_Lake__Stronghold_Rear_Wall,
+    Amagi__West_Lake__Stronghold_Top,
+    Amagi__West_Lake__Surface_Wall_Left,
+    Amagi__West_Lake__Surface_Wall_Right,
+    Amagi__West_Lake__Tentacle_Gap,
+    Amagi__West_Lake__Upper_Center_Platform,
+    Amagi__West_Lake__Water_Surface,
+    Amagi__West_Lake__West_15,
+    Amagi__West_Lake__West_Bank,
+    Amagi__West_Lake__West_Cliff,
+    Amagi__West_Lake__West_Platform,
+    Amagi__West_Lake__West_Shore,
+    Annuna__East_Bridge__Center_Corridor,
+    Annuna__East_Bridge__Center_Drop_off,
+    Annuna__East_Bridge__Center_Gap_East,
+    Annuna__East_Bridge__Center_Gap_West,
+    Annuna__East_Bridge__Gate_Button,
+    Annuna__East_Bridge__Gate_Button_Gap,
+    Annuna__East_Bridge__Upper_Middle_Core,
+    Annuna__East_Bridge__Upper_Middle_Gate,
+    Annuna__East_Bridge__Upper_Middle_Inner_Corner_East,
+    Annuna__East_Bridge__Upper_Middle_Inner_Corner_West,
+    Annuna__East_Bridge__Upper_Middle_Opening,
+    Annuna__East_Bridge__Upper_West_Gap,
+    Annuna__East_Bridge__Upper_West_Gap_East,
+    Annuna__East_Bridge__West_24,
+    Annuna__East_Bridge__West_25_Lower,
+    Annuna__East_Bridge__West_25_Upper,
+    Annuna__East_Bridge__West_Staircase_Lower_East,
+    Annuna__East_Bridge__West_Staircase_Lower_West,
+    Annuna__East_Bridge__West_Staircase_Upper_East,
+    Annuna__East_Bridge__West_Staircase_Upper_West,
+    Annuna__East_Bridge__West_Under_Gap,
+    Annuna__Mirror_Match__Below_Switch,
+    Annuna__Mirror_Match__Central_Pillar,
+    Annuna__Mirror_Match__East_25_Lower,
+    Annuna__Mirror_Match__East_25_Upper,
+    Annuna__Mirror_Match__East_26_Lower,
+    Annuna__Mirror_Match__East_26_Upper,
+    Annuna__Mirror_Match__Eastward,
+    Annuna__Mirror_Match__Plinth,
+    Annuna__Mirror_Match__Save_Point,
+    Annuna__Mirror_Match__Staircase,
+    Annuna__Mirror_Match__Waving_Distance,
+    Annuna__Mirror_Match__West_25,
+    Annuna__Mirror_Match__West_Gap,
+    Annuna__West_Bridge__East_24,
+    Annuna__West_Bridge__East_25_Lower,
+    Annuna__West_Bridge__East_25_Upper,
+    Annuna__West_Bridge__Plinth,
+    Annuna__West_Bridge__West_25_Lower,
+    Annuna__West_Bridge__West_25_Upper,
+    Annuna__West_Bridge__West_26_Lower,
+    Annuna__West_Bridge__West_26_Upper,
+    Annuna__West_Bridge__West_Outcropping,
+    Antarctica__Building_1E__Connector,
+    Antarctica__Building_1E__East_Entry,
+    Antarctica__Building_1W__Connector,
+    Antarctica__Building_1W__West_Entry,
+    Antarctica__Building_2__Behind_Boxes,
+    Antarctica__Building_2__Entry,
+    Antarctica__Building_2__Stairs,
+    Antarctica__Building_2__Upper_Door,
+    Antarctica__East__Building_1_Entry,
+    Antarctica__East__Building_2_Entry,
+    Antarctica__East__Building_2_Upper,
+    Antarctica__East__Save_Point,
+    Antarctica__Freight_Elevator__Controls,
+    Antarctica__Freight_Elevator__Left,
+    Antarctica__Power_Room__Entry,
+    Antarctica__Power_Room__Switch,
+    Antarctica__Shed__Interior,
+    Antarctica__Top__Power_Entry,
+    Antarctica__West__Boxes,
+    Antarctica__West__Helipad,
+    Antarctica__West__Shed_Entry,
+    Ebih__Base_Camp__Behind_Vehicle,
+    Ebih__Base_Camp__Building_Entry,
+    Ebih__Base_Camp__Bunker_Entry,
+    Ebih__Base_Camp__East_11,
+    Ebih__Base_Camp__East_12,
+    Ebih__Base_Camp__Lake_Access,
+    Ebih__Base_Camp__Left_Platform,
+    Ebih__Base_Camp__Left_Platform_Moved,
+    Ebih__Base_Camp__Save_Point,
+    Ebih__Base_Camp__Staircase,
+    Ebih__Base_Camp__Tent_Entry,
+    Ebih__Base_Camp__Top_Platform,
+    Ebih__Base_Camp__West_11,
+    Ebih__Base_Camp__West_12,
+    Ebih__Base_Camp__West_13,
+    Ebih__Base_Camp__West_Midair,
+    Ebih__Boss_Room__Boss,
+    Ebih__Boss_Room__East_4,
+    Ebih__Boss_Room__East_6,
+    Ebih__Boss_Room__East_Ledge,
+    Ebih__Boss_Room__High_Platform,
+    Ebih__Boss_Room__Lower_Ledge,
+    Ebih__Boss_Room__Lower_Tree,
+    Ebih__Boss_Room__Past_Boss,
+    Ebih__Boss_Room__Upper_Tree,
+    Ebih__Boss_Room__West_5,
+    Ebih__Boss_Room__West_6,
+    Ebih__By_Garage__Crawlspace,
+    Ebih__By_Garage__Crawlspace_Opening,
+    Ebih__By_Garage__East_12,
+    Ebih__By_Garage__East_13,
+    Ebih__By_Garage__East_Below_Platforms,
+    Ebih__By_Garage__East_Bush,
+    Ebih__By_Garage__East_Platform,
+    Ebih__By_Garage__Garage_Entry,
+    Ebih__By_Garage__Lower_Platform,
+    Ebih__By_Garage__Outcropping,
+    Ebih__By_Garage__West_12,
+    Ebih__By_Garage__West_13,
+    Ebih__By_Garage__West_Below_Platforms,
+    Ebih__By_Garage__West_Bush,
+    Ebih__Drone_Room__East_4,
+    Ebih__Drone_Room__Item,
+    Ebih__Drone_Room__Left_Platform,
+    Ebih__Drone_Room__Middle_Platform,
+    Ebih__Drone_Room__Moving_Platform,
+    Ebih__Drone_Room__Pit_Left,
+    Ebih__Drone_Room__Portal,
+    Ebih__Drone_Room__Portal_Exit,
+    Ebih__Drone_Room__Tree,
+    Ebih__Drone_Room__West_4,
+    Ebih__Drone_Room__West_6,
+    Ebih__Ebih_East__Corner,
+    Ebih__Ebih_East__Dispenser,
+    Ebih__Ebih_East__East_9,
+    Ebih__Ebih_East__East_Hill,
+    Ebih__Ebih_East__East_Ledge,
+    Ebih__Ebih_East__Ledge_End,
+    Ebih__Ebih_East__Lower_Moving_Platform,
+    Ebih__Ebih_East__Middle_Platform,
+    Ebih__Ebih_East__Moving_Platform,
+    Ebih__Ebih_East__Upper_Ledge,
+    Ebih__Ebih_East__West_7,
+    Ebih__Ebih_East__West_8,
+    Ebih__Ebih_West__Above_Alcove,
+    Ebih__Ebih_West__Above_Chute,
+    Ebih__Ebih_West__Above_Door,
+    Ebih__Ebih_West__Alcove,
+    Ebih__Ebih_West__Alcove_Entrance,
+    Ebih__Ebih_West__Below_Door,
+    Ebih__Ebih_West__Block_Left,
+    Ebih__Ebih_West__Block_Right,
+    Ebih__Ebih_West__East_10,
+    Ebih__Ebih_West__East_11,
+    Ebih__Ebih_West__East_13,
+    Ebih__Ebih_West__East_6,
+    Ebih__Ebih_West__East_7,
+    Ebih__Ebih_West__East_8,
+    Ebih__Ebih_West__East_9,
+    Ebih__Ebih_West__Giguna_Pillar,
+    Ebih__Ebih_West__High_Ledge,
+    Ebih__Ebih_West__High_Platform,
+    Ebih__Ebih_West__Left_of_Gap,
+    Ebih__Ebih_West__Left_of_Switch,
+    Ebih__Ebih_West__Lower_Cliff,
+    Ebih__Ebih_West__Lower_Hill,
+    Ebih__Ebih_West__Lower_Platform,
+    Ebih__Ebih_West__Lower_Save,
+    Ebih__Ebih_West__Medium_High_Platform,
+    Ebih__Ebih_West__Mid_Save,
+    Ebih__Ebih_West__Middle_Cliff,
+    Ebih__Ebih_West__Middle_Middle,
+    Ebih__Ebih_West__Refill_Station,
+    Ebih__Ebih_West__Small_Gap,
+    Ebih__Ebih_West__Upper_Save,
+    Ebih__Ebih_West__West_11,
+    Ebih__Ebih_West__West_12,
+    Ebih__Ebih_West__West_13,
+    Ebih__Ebih_West__West_9,
+    Ebih__Ebih_West__West_Fork,
+    Ebih__Ebih_West__West_High_Cliff,
+    Ebih__Gem_Room__West_13,
+    Ebih__Grid_21_2_6__East_6,
+    Ebih__Grid_21_2_6__Portal_Stand,
+    Ebih__Grid_21_2_6__West_6,
+    Ebih__Grid_25_10_12__Below_Bush,
+    Ebih__Grid_25_10_12__Bush,
+    Ebih__Grid_25_10_12__Door,
+    Ebih__Grid_25_10_12__Door_Left,
+    Ebih__Grid_25_10_12__East_10,
+    Ebih__Grid_25_10_12__East_11,
+    Ebih__Grid_25_10_12__East_12,
+    Ebih__Grid_25_10_12__Hidden_Bush,
+    Ebih__Grid_25_10_12__Mid_Ledge,
+    Ebih__Grid_25_10_12__Top_Platform,
+    Ebih__Grid_25_10_12__West_10,
+    Ebih__Grid_25_10_12__West_11,
+    Ebih__Grid_25_10_12__West_12,
+    Ebih__Grid_25_2_6__Pit,
+    Ebih__Grid_25_2_6__West_4,
+    Ebih__Grid_26_10_11__Cliff,
+    Ebih__Grid_26_10_11__East_10,
+    Ebih__Grid_26_10_11__Ledge,
+    Ebih__Grid_26_10_11__Middle_Bottom,
+    Ebih__Grid_26_10_11__Middle_Platform,
+    Ebih__Grid_26_10_11__Under_Ledge,
+    Ebih__Grid_26_10_11__Upper_Platform,
+    Ebih__Grid_26_10_11__West_10,
+    Ebih__Grid_26_10_11__West_11,
+    Ebih__Observation_Tower_Room__Cliff,
+    Ebih__Observation_Tower_Room__East_11,
+    Ebih__Observation_Tower_Room__Tower_Bottom,
+    Ebih__Observation_Tower_Room__Tower_Top,
+    Ebih__Observation_Tower_Room__West_10,
+    Ebih__Observation_Tower_Room__West_9,
+    Ebih__Vertical_Interchange__Below_Door,
+    Ebih__Vertical_Interchange__Block_Cubby,
+    Ebih__Vertical_Interchange__Blocked_Refill_Station,
+    Ebih__Vertical_Interchange__Cliff_by_Refill,
+    Ebih__Vertical_Interchange__Cubby_Exit,
+    Ebih__Vertical_Interchange__Door,
+    Ebih__Vertical_Interchange__Door_East,
+    Ebih__Vertical_Interchange__Door_West,
+    Ebih__Vertical_Interchange__East_13,
+    Ebih__Vertical_Interchange__East_15,
+    Ebih__Vertical_Interchange__East_Tunnel,
+    Ebih__Vertical_Interchange__Lower_West_Cliff,
+    Ebih__Vertical_Interchange__Middle_Descent,
+    Ebih__Vertical_Interchange__Middle_Drop,
+    Ebih__Vertical_Interchange__Passage_East,
+    Ebih__Vertical_Interchange__Passage_West,
+    Ebih__Vertical_Interchange__Refill_Station,
+    Ebih__Vertical_Interchange__South,
+    Ebih__Vertical_Interchange__Switch,
+    Ebih__Vertical_Interchange__West_13,
+    Ebih__Waterfall__Alcove,
+    Ebih__Waterfall__Alcove_Left,
+    Ebih__Waterfall__Alcove_Right,
+    Ebih__Waterfall__Below_Left_Switch,
+    Ebih__Waterfall__Below_Tree,
+    Ebih__Waterfall__Big_Tree,
+    Ebih__Waterfall__Cave_Entrance,
+    Ebih__Waterfall__Center_Main_Path,
+    Ebih__Waterfall__East_10,
+    Ebih__Waterfall__East_11,
+    Ebih__Waterfall__East_7,
+    Ebih__Waterfall__East_8,
+    Ebih__Waterfall__East_Ledge,
+    Ebih__Waterfall__Ledge_Below_Hole,
+    Ebih__Waterfall__Lower_West_Tree,
+    Ebih__Waterfall__Middle_West_Tree,
+    Ebih__Waterfall__Near_East_Tree,
+    Ebih__Waterfall__Platform,
+    Ebih__Waterfall__Top_Waterfall,
+    Ebih__Waterfall__Under_Waterfall,
+    Ebih__Waterfall__Wall_Left,
+    Ebih__Waterfall__Wall_Right,
+    Ebih__Waterfall__Waterfall_Center_Center,
+    Ebih__Waterfall__Waterfall_Center_Left,
+    Ebih__Waterfall__Waterfall_Center_Right,
+    Ebih__Waterfall__Waterfall_Left,
+    Ebih__Waterfall__Waterfall_Right,
+    Ebih__Waterfall__West_10,
+    Ebih__Waterfall__West_11,
+    Ebih__Waterfall__West_7,
+    Ebih__Waterfall__West_8,
+    Ebih__Waterfall__West_9,
+    Ebih__Waterfall__West_Climb,
+    Ebih__Waterfall__West_Door,
+    Ebih__Waterfall__West_Door_Left,
+    Ebih__Waterfall__West_Door_Right,
+    Ebih__Waterfall__West_Lower_Path,
+    Ebih__Waterfall__West_Main_Path,
+    Giguna__Antechamber__Bottom,
+    Giguna__Antechamber__East_16,
+    Giguna__Antechamber__Left_Wall_Lower,
+    Giguna__Antechamber__Left_Wall_Mid,
+    Giguna__Antechamber__Middle_Bricks_Left,
+    Giguna__Antechamber__Middle_Bricks_Right,
+    Giguna__Antechamber__Small_Bricks,
+    Giguna__Antechamber__Statue_Head,
+    Giguna__Antechamber__Statues_Ledge,
+    Giguna__Antechamber__West_15,
+    Giguna__Breachable_Wall__Above_Middle_Catwalk,
+    Giguna__Breachable_Wall__Above_West_Catwalk,
+    Giguna__Breachable_Wall__Wall_Interior,
+    Giguna__Breachable_Wall__West_Mid_air,
+    Giguna__Carnelian__Door,
+    Giguna__Carnelian__East_10,
+    Giguna__Carnelian__East_Cliff,
+    Giguna__Carnelian__Lower_Susar,
+    Giguna__Carnelian__Middle_Platforms,
+    Giguna__Carnelian__Rock,
+    Giguna__Carnelian__Switch,
+    Giguna__Carnelian__Upper_Path,
+    Giguna__Carnelian__Upper_Susar,
+    Giguna__Carnelian__Vault,
+    Giguna__Carnelian__West_10,
+    Giguna__Carnelian__West_Ledge,
+    Giguna__Clouds__Cache,
+    Giguna__Clouds__North_Left,
+    Giguna__Clouds__North_Middle,
+    Giguna__Clouds__North_Right,
+    Giguna__Clouds__North_Under_Ledge,
+    Giguna__Clouds__Platform_Early,
+    Giguna__Clouds__Platform_Early_Portal,
+    Giguna__Clouds__Platform_Start,
+    Giguna__Clouds__Platform_Stop,
+    Giguna__Clouds__Pull_Right,
+    Giguna__Clouds__Southeast,
+    Giguna__Clouds__Southwest,
+    Giguna__Clouds__Straight_Down,
+    Giguna__Dual_Path__Base_of_Wall,
+    Giguna__Dual_Path__Below_Left_Switch,
+    Giguna__Dual_Path__Below_Right_Switch,
+    Giguna__Dual_Path__East_17,
+    Giguna__Dual_Path__East_18,
+    Giguna__Dual_Path__East_Gate,
+    Giguna__Dual_Path__East_Gate_NE,
+    Giguna__Dual_Path__East_Gate_NW,
+    Giguna__Dual_Path__In_the_Grass,
+    Giguna__Dual_Path__Left_Switch,
+    Giguna__Dual_Path__Midway,
+    Giguna__Dual_Path__Midway_Plateau,
+    Giguna__Dual_Path__Right_Switch,
+    Giguna__Dual_Path__Wall_Secret,
+    Giguna__Dual_Path__Wall_Top,
+    Giguna__Dual_Path__West_17,
+    Giguna__Dual_Path__West_18,
+    Giguna__Dual_Path__West_Gate,
+    Giguna__Dual_Path__West_Gate_NE,
+    Giguna__Dual_Path__West_Gate_NW,
+    Giguna__Dual_Path__West_Slope,
+    Giguna__East_Caverns__Arc_Ledge,
+    Giguna__East_Caverns__Arc_Passage,
+    Giguna__East_Caverns__Carving,
+    Giguna__East_Caverns__Door,
+    Giguna__East_Caverns__East_17,
+    Giguna__East_Caverns__East_Grass,
+    Giguna__East_Caverns__East_Shaft,
+    Giguna__East_Caverns__East_Side,
+    Giguna__East_Caverns__Hidden_Passage_Center,
+    Giguna__East_Caverns__Hidden_Passage_East,
+    Giguna__East_Caverns__Hidden_Passage_West,
+    Giguna__East_Caverns__Lower_Ledge,
+    Giguna__East_Caverns__Lower_Susar,
+    Giguna__East_Caverns__Mid_Susar,
+    Giguna__East_Caverns__Middle_Ledge,
+    Giguna__East_Caverns__Middle_Rock,
+    Giguna__East_Caverns__Midwest_Ledge,
+    Giguna__East_Caverns__Statues_Ledge,
+    Giguna__East_Caverns__Switch,
+    Giguna__East_Caverns__Top_Ledge,
+    Giguna__East_Caverns__Top_Past_Susar,
+    Giguna__East_Caverns__Under_Lower_Ledge,
+    Giguna__East_Caverns__Upper_Floor,
+    Giguna__East_Caverns__Upper_Floor_Ledge,
+    Giguna__East_Caverns__Upper_Passage_East,
+    Giguna__East_Caverns__Upper_Passage_West,
+    Giguna__East_Caverns__Upper_Platforms_Left,
+    Giguna__East_Caverns__Upper_Platforms_Right,
+    Giguna__East_Caverns__Upper_Susar,
+    Giguna__East_Caverns__Upper_Susar_Jump_from_East,
+    Giguna__East_Caverns__Upper_Susar_Mid_jump,
+    Giguna__East_Caverns__West_14,
+    Giguna__East_Caverns__West_16,
+    Giguna__East_Caverns__West_17,
+    Giguna__East_Caverns__West_Grass,
+    Giguna__Far_Corner__East_13,
+    Giguna__Far_Corner__Grass,
+    Giguna__Far_Corner__South,
+    Giguna__Gateway__Block_Left,
+    Giguna__Gateway__Block_Lowered,
+    Giguna__Gateway__Block_Right,
+    Giguna__Gateway__Button,
+    Giguna__Gateway__Door,
+    Giguna__Gateway__East_19,
+    Giguna__Gateway__Far_Ledge,
+    Giguna__Gateway__Flask_Ledge,
+    Giguna__Gateway__Left_Platform,
+    Giguna__Gateway__One_Jump,
+    Giguna__Gateway__Passage_Entry,
+    Giguna__Gateway__Passage_Exit,
+    Giguna__Gateway__Refill_Station,
+    Giguna__Gateway__Right_Platform,
+    Giguna__Gateway__West_18,
+    Giguna__Gateway__West_19,
+    Giguna__Giguna_Base__Below_Gate,
+    Giguna__Giguna_Base__Building_Entry,
+    Giguna__Giguna_Base__East_14,
+    Giguna__Giguna_Base__East_17,
+    Giguna__Giguna_Base__Kari,
+    Giguna__Giguna_Base__Left_Pillar,
+    Giguna__Giguna_Base__Lower_Fork,
+    Giguna__Giguna_Base__Middle_Platform,
+    Giguna__Giguna_Base__Right_Pillar,
+    Giguna__Giguna_Base__Ruin,
+    Giguna__Giguna_Base__Save_Point,
+    Giguna__Giguna_Base__Staircase_Bottom,
+    Giguna__Giguna_Base__Staircase_Top,
+    Giguna__Giguna_Base__Stone_Knob,
+    Giguna__Giguna_Base__Switch_Distance_1,
+    Giguna__Giguna_Base__Switch_Distance_2,
+    Giguna__Giguna_Base__Switch_Distance_3,
+    Giguna__Giguna_Base__Switch_Distance_4,
+    Giguna__Giguna_Base__Table,
+    Giguna__Giguna_Base__Upper_Cliff,
+    Giguna__Giguna_Base__West_15,
+    Giguna__Giguna_Base__West_16,
+    Giguna__Giguna_Base__West_Grate,
+    Giguna__Giguna_Northeast__Crow_Eating,
+    Giguna__Giguna_Northeast__Door,
+    Giguna__Giguna_Northeast__East_11,
+    Giguna__Giguna_Northeast__East_9,
+    Giguna__Giguna_Northeast__Gate_Button,
+    Giguna__Giguna_Northeast__Gate_Left,
+    Giguna__Giguna_Northeast__Gate_Right,
+    Giguna__Giguna_Northeast__Gate_Vent,
+    Giguna__Giguna_Northeast__Inner_Wall,
+    Giguna__Giguna_Northeast__Right_Column,
+    Giguna__Giguna_Northeast__Save_Point,
+    Giguna__Giguna_Northeast__Shaft_Bottom,
+    Giguna__Giguna_Northeast__Step,
+    Giguna__Giguna_Northeast__Switch,
+    Giguna__Giguna_Northeast__Vault,
+    Giguna__Giguna_Northeast__West_10,
+    Giguna__Giguna_Northeast__West_9,
+    Giguna__Gubi_Lair__Center_East_Sapling,
+    Giguna__Gubi_Lair__Center_Platform,
+    Giguna__Gubi_Lair__Center_West_Sapling,
+    Giguna__Gubi_Lair__East_15,
+    Giguna__Gubi_Lair__East_Tree,
+    Giguna__Gubi_Lair__Grass_by_Wall,
+    Giguna__Gubi_Lair__Leftmost_Platform,
+    Giguna__Gubi_Lair__Lower_Platform,
+    Giguna__Gubi_Lair__Pedestal,
+    Giguna__Gubi_Lair__Rightmost_Platform,
+    Giguna__Gubi_Lair__Shaft_Bottom,
+    Giguna__Gubi_Lair__West_Brickwork,
+    Giguna__Hard_Rock__East_17,
+    Giguna__Hard_Rock__Rock_Center,
+    Giguna__Hard_Rock__Rock_Left,
+    Giguna__Hard_Rock__Rock_Right,
+    Giguna__Hard_Rock__West_17,
+    Giguna__Helipad__East_15,
+    Giguna__Helipad__East_16,
+    Giguna__Helipad__East_18,
+    Giguna__Helipad__Helicopter,
+    Giguna__Helipad__Irikar_Drop,
+    Giguna__Helipad__Lowest_Ledge,
+    Giguna__Helipad__North,
+    Giguna__Helipad__Railing,
+    Giguna__Helipad__So_Close,
+    Giguna__Helipad__South_Left,
+    Giguna__Helipad__South_Middle,
+    Giguna__Helipad__South_Right,
+    Giguna__Helipad__Staircase_Top,
+    Giguna__Helipad__Tablet_Ledge,
+    Giguna__Helipad__Wall_Bottom,
+    Giguna__Helipad__Wall_Top,
+    Giguna__Labyrinth__East_22,
+    Giguna__Labyrinth__East_23,
+    Giguna__Labyrinth__Lower_East,
+    Giguna__Labyrinth__Middle_East,
+    Giguna__Labyrinth__Top_East,
+    Giguna__Labyrinth_East__East_19,
+    Giguna__Labyrinth_East__East_20,
+    Giguna__Labyrinth_East__Lower_Middle,
+    Giguna__Labyrinth_East__Lower_West,
+    Giguna__Labyrinth_East__Middle_Drop,
+    Giguna__Labyrinth_East__Middle_Tree,
+    Giguna__Labyrinth_East__Middle_West,
+    Giguna__Labyrinth_East__Top_Middle,
+    Giguna__Labyrinth_East__Top_West,
+    Giguna__Lamassu__Broken_Pillar,
+    Giguna__Lamassu__Deposit,
+    Giguna__Lamassu__East_18,
+    Giguna__Lamassu__Head,
+    Giguna__Lamassu__Lower_Platform_Left,
+    Giguna__Lamassu__Lower_Platform_Right,
+    Giguna__Lamassu__Rear_Gap,
+    Giguna__Lamassu__Rear_Platform,
+    Giguna__Lamassu__Staircase_Bottom,
+    Giguna__Lamassu__Staircase_Landing,
+    Giguna__Lamassu__Staircase_Top,
+    Giguna__Lamassu__Upper_Platform_Edge,
+    Giguna__Lamassu__West_18,
+    Giguna__Lamassu__Wingtip,
+    Giguna__Mural__Northwest_Item,
+    Giguna__Mural__West_20,
+    Giguna__Ruins_Center__Center_Top,
+    Giguna__Ruins_Center__East_8,
+    Giguna__Ruins_Center__East_9,
+    Giguna__Ruins_Center__Tablet,
+    Giguna__Ruins_Center__Wall_Bottom,
+    Giguna__Ruins_Center__Wall_Top,
+    Giguna__Ruins_Center__West_9,
+    Giguna__Ruins_Center__West_Platform_Left,
+    Giguna__Ruins_Center__West_Platform_Right,
+    Giguna__Ruins_East__Bottom_Rock,
+    Giguna__Ruins_East__Cliff,
+    Giguna__Ruins_East__East_9,
+    Giguna__Ruins_East__Ledge,
+    Giguna__Ruins_East__Pillar,
+    Giguna__Ruins_East__Small_Passage,
+    Giguna__Ruins_East__Way_Up_High,
+    Giguna__Ruins_East__West_7,
+    Giguna__Ruins_East__West_8,
+    Giguna__Ruins_East__West_9,
+    Giguna__Ruins_Top__East_7,
+    Giguna__Ruins_Top__East_Door,
+    Giguna__Ruins_Top__Entryway,
+    Giguna__Ruins_Top__Flask,
+    Giguna__Ruins_Top__Interior_Ledge,
+    Giguna__Ruins_Top__Portal,
+    Giguna__Ruins_Top__Portal_Left,
+    Giguna__Ruins_Top__Rooftop_East,
+    Giguna__Ruins_Top__Rooftop_Gutter,
+    Giguna__Ruins_Top__Rooftop_West,
+    Giguna__Ruins_Top__Save_Point,
+    Giguna__Ruins_Top__Small_Ledge,
+    Giguna__Ruins_Top__Switch,
+    Giguna__Ruins_Top__Turret_Balcony_East,
+    Giguna__Ruins_Top__Turret_Balcony_West,
+    Giguna__Ruins_Top__Upper_Tunnel,
+    Giguna__Ruins_Top__West_7,
+    Giguna__Ruins_Top__West_Door,
+    Giguna__Ruins_Top__West_Pillar,
+    Giguna__Ruins_West__East_7,
+    Giguna__Ruins_West__East_9,
+    Giguna__Ruins_West__Lower_Ledge,
+    Giguna__Ruins_West__Nook,
+    Giguna__Ruins_West__Platform,
+    Giguna__Ruins_West__Rooftop_East_Edge,
+    Giguna__Ruins_West__Rooftop_West_Edge,
+    Giguna__Ruins_West__Save_Point,
+    Giguna__Ruins_West__Upper_Ledge,
+    Giguna__Ruins_West__West_7,
+    Giguna__Separator__East_25,
+    Giguna__Separator__West_23,
+    Giguna__Separator__West_24,
+    Giguna__Separator__West_25,
+    Giguna__Separator__West_Mid_air,
+    Giguna__Vertical_Interchange__Dead_end,
+    Giguna__Vertical_Interchange__Dead_end_Ledge,
+    Giguna__Vertical_Interchange__East_20,
+    Giguna__Vertical_Interchange__Gate,
+    Giguna__Vertical_Interchange__Ledge_19,
+    Giguna__Vertical_Interchange__Middle_Below_Top,
+    Giguna__Vertical_Interchange__Middle_Hill_By_Switch,
+    Giguna__Vertical_Interchange__Middle_Ledge_Below_Gate,
+    Giguna__Vertical_Interchange__Middle_Plateau,
+    Giguna__Vertical_Interchange__North,
+    Giguna__Vertical_Interchange__South,
+    Giguna__Vertical_Interchange__Switch,
+    Giguna__Vertical_Interchange__Top_Left_Ledge,
+    Giguna__Vertical_Interchange__Top_Passage_Bottom,
+    Giguna__Vertical_Interchange__Top_Right_Ledge,
+    Giguna__Vertical_Interchange__Top_Rocky_Ledge,
+    Giguna__Vertical_Interchange__Top_Rocky_Outcrop,
+    Giguna__Vertical_Interchange__West_17,
+    Giguna__Vertical_Interchange__West_19,
+    Giguna__Wasteland__Bluff_by_Door,
+    Giguna__Wasteland__Cache_Ledge,
+    Giguna__Wasteland__Center_Plains,
+    Giguna__Wasteland__Center_Platform_East,
+    Giguna__Wasteland__Center_Platform_West,
+    Giguna__Wasteland__Door_Left,
+    Giguna__Wasteland__Door_Right,
+    Giguna__Wasteland__East_12,
+    Giguna__Wasteland__East_13,
+    Giguna__Wasteland__East_14,
+    Giguna__Wasteland__East_Ledge,
+    Giguna__Wasteland__Ladder_Ledge,
+    Giguna__Wasteland__Left_Platform_East,
+    Giguna__Wasteland__Left_Platform_West,
+    Giguna__Wasteland__Lower_Cliff,
+    Giguna__Wasteland__Lower_Path_Left,
+    Giguna__Wasteland__Lower_Path_Right,
+    Giguna__Wasteland__Lower_Platform_East,
+    Giguna__Wasteland__Lower_Platform_West,
+    Giguna__Wasteland__Middle_Cliff,
+    Giguna__Wasteland__Middle_Path,
+    Giguna__Wasteland__Passage_Cache,
+    Giguna__Wasteland__Passage_East,
+    Giguna__Wasteland__Right_Platform_East,
+    Giguna__Wasteland__Right_Platform_West,
+    Giguna__Wasteland__Steeper_Hill,
+    Giguna__Wasteland__Switch,
+    Giguna__Wasteland__Switch_Approach,
+    Giguna__Wasteland__Switch_Ledge,
+    Giguna__Wasteland__Tiny_Hill,
+    Giguna__Wasteland__Upper_Cache,
+    Giguna__Wasteland__Upper_Cliff,
+    Giguna__Wasteland__West_12,
+    Giguna__Wasteland__West_13,
+    Giguna__Wasteland__West_14,
+    Giguna__Wasteland__West_Plains,
+    Giguna__Wasteland__Westward_Hill,
+    Giguna__West_Caverns__Bush,
+    Giguna__West_Caverns__Cache,
+    Giguna__West_Caverns__Column_1_Top_Left,
+    Giguna__West_Caverns__Column_1_Top_Right,
+    Giguna__West_Caverns__Column_2_Top,
+    Giguna__West_Caverns__East_10,
+    Giguna__West_Caverns__East_12,
+    Giguna__West_Caverns__East_13,
+    Giguna__West_Caverns__East_Platform,
+    Giguna__West_Caverns__East_Susar,
+    Giguna__West_Caverns__Floating_Brick,
+    Giguna__West_Caverns__Higher_Ledge,
+    Giguna__West_Caverns__Northwest,
+    Giguna__West_Caverns__Small_Platform,
+    Giguna__West_Caverns__Small_Staircase,
+    Giguna__West_Caverns__Top_Gap_Left,
+    Giguna__West_Caverns__Top_Gap_Right,
+    Giguna__West_Caverns__Tunnel_Bottom,
+    Giguna__West_Caverns__Tunnel_Entrance,
+    Giguna__West_Caverns__Tunnel_Fork,
+    Giguna__West_Caverns__West_13,
+    Giguna__West_Tower__East_7,
+    Giguna__West_Tower__Southwest,
+    Giguna__West_Tower__Top,
+    Giguna_Breach__Antechamber__North,
+    Giguna_Breach__Ascent__Bottom,
+    Giguna_Breach__Ascent__Top,
+    Giguna_Breach__Ascent__West_6,
+    Giguna_Breach__Ascent__West_9,
+    Giguna_Breach__Below_Chimney__Cubby_Entrance,
+    Giguna_Breach__Below_Chimney__East_Ledge,
+    Giguna_Breach__Below_Chimney__North,
+    Giguna_Breach__Below_Chimney__Passage_Lip,
+    Giguna_Breach__Below_Chimney__Southwest,
+    Giguna_Breach__Below_Chimney__West_Passage,
+    Giguna_Breach__Central__East_9,
+    Giguna_Breach__Central__East_Brick,
+    Giguna_Breach__Central__Middle_Statue,
+    Giguna_Breach__Central__South,
+    Giguna_Breach__Central__Statuette,
+    Giguna_Breach__Central__Tunnel,
+    Giguna_Breach__Central__Upper_Floating_Brick,
+    Giguna_Breach__Central__Wall,
+    Giguna_Breach__Central__West_8,
+    Giguna_Breach__Central__West_9,
+    Giguna_Breach__Central__West_Statue,
+    Giguna_Breach__Chimney__Cache,
+    Giguna_Breach__Chimney__East_7,
+    Giguna_Breach__Chimney__East_8,
+    Giguna_Breach__Chimney__East_9,
+    Giguna_Breach__Chimney__Middle_Platform,
+    Giguna_Breach__Chimney__South,
+    Giguna_Breach__Chimney__Top,
+    Giguna_Breach__Cubby__Entrance,
+    Giguna_Breach__Cubby__Rocks,
+    Giguna_Breach__Fire_Room__Cuesta,
+    Giguna_Breach__Fire_Room__East_11,
+    Giguna_Breach__Fire_Room__First_Fire,
+    Giguna_Breach__Fire_Room__South,
+    Giguna_Breach__Fire_Room__West_10,
+    Giguna_Breach__Fire_Room__West_11,
+    Giguna_Breach__Fire_Room__West_Plateau,
+    Giguna_Breach__Grid_14_10_11__East_10,
+    Giguna_Breach__Grid_14_10_11__East_11,
+    Giguna_Breach__Grid_14_10_11__High_Ledge,
+    Giguna_Breach__Grid_14_10_11__North,
+    Giguna_Breach__Grid_14_10_11__South,
+    Giguna_Breach__Peak__Column,
+    Giguna_Breach__Peak__East_6,
+    Giguna_Breach__Peak__East_Passage,
+    Giguna_Breach__Peak__Portal,
+    Giguna_Breach__Peak__Save_Point,
+    Giguna_Breach__Peak__Upper_East,
+    Giguna_Breach__Peak__Upper_West,
+    Giguna_Breach__Peak__West_7,
+    Giguna_Breach__Pink_Clouds__Corner,
+    Giguna_Breach__Pink_Clouds__Normal_Entry,
+    Giguna_Breach__Pink_Clouds__Quick_Entry,
+    Giguna_Breach__Robopede__Center,
+    Giguna_Breach__Robopede__North,
+    Giguna_Breach__Robopede__West,
+    Giguna_Breach__Slingshot__Column,
+    Giguna_Breach__Slingshot__Ravine,
+    Giguna_Breach__Slingshot__West,
+    Giguna_Breach__SW_Save__East_12,
+    Giguna_Breach__SW_Save__Lower_Platform,
+    Giguna_Breach__SW_Save__North,
+    Giguna_Breach__SW_Save__Save_Point,
+    Giguna_Breach__SW_Save__Side_Door,
+    Giguna_Breach__SW_Save__West_11,
+    Glacier__Apocalypse_Entry__Terminal,
+    Glacier__Apocalypse_Entry__West,
+    Glacier__Boomerang_Antechamber__East_12,
+    Glacier__Boomerang_Antechamber__Upper_East,
+    Glacier__Boomerang_Antechamber__West_12,
+    Glacier__Boomerang_Antechamber__West_13,
+    Glacier__Boomerang_Room__Center_ish,
+    Glacier__Boomerang_Room__Center_Ledge,
+    Glacier__Boomerang_Room__Pedestal,
+    Glacier__Boomerang_Room__Platform,
+    Glacier__Boomerang_Room__Upper_Gate_East,
+    Glacier__Boomerang_Room__Upper_West,
+    Glacier__Boomerang_Room__West,
+    Glacier__Compass_Room__Center,
+    Glacier__Compass_Room__East,
+    Glacier__Compass_Room__West,
+    Glacier__Dock_Outside__Do_Not_Enter,
+    Glacier__Dock_Outside__Entry,
+    Glacier__Grid_31_9_12__East_10,
+    Glacier__Grid_31_9_12__East_9,
+    Glacier__Grid_31_9_12__Midair,
+    Glacier__Grid_31_9_12__Observation_Tower,
+    Glacier__Grid_31_9_12__Observation_Tower_L4,
+    Glacier__Grid_31_9_12__West_12,
+    Glacier__Grid_32_7_10__Center_Platform,
+    Glacier__Grid_32_7_10__Column,
+    Glacier__Grid_32_7_10__East_8,
+    Glacier__Grid_32_7_10__Left_Rock,
+    Glacier__Grid_32_7_10__West_10,
+    Glacier__Grid_32_7_10__West_9,
+    Glacier__Grid_37_38_9__East,
+    Glacier__Grid_37_38_9__West,
+    Glacier__Grid_39_40_7_9__Upper_East,
+    Glacier__Grid_39_40_7_9__West,
+    Glacier__Grid_42_10__East,
+    Glacier__Grid_42_10__West,
+    Glacier__Grid_43_10_11__East,
+    Glacier__Grid_43_10_11__Lower,
+    Glacier__Grid_43_10_11__Top,
+    Glacier__Lake_Main_Entrance__Bottom,
+    Glacier__Lake_Main_Entrance__Ebih_Access,
+    Glacier__Lake_Main_Entrance__Hill,
+    Glacier__Lake_Main_Entrance__Lake_Access,
+    Glacier__Lake_Main_Entrance__Ledge,
+    Glacier__Lake_Main_Entrance__Lower_Platform,
+    Glacier__Lake_Main_Entrance__Side,
+    Glacier__Lake_Main_Entrance__Side_Jump,
+    Glacier__Lake_Main_Entrance__Upper,
+    Glacier__Lake_Main_Entrance__Upper_Platform,
+    Glacier__Ledge_Grab_Room__Cliff,
+    Glacier__Ledge_Grab_Room__Cliff_Bottom,
+    Glacier__Ledge_Grab_Room__Column,
+    Glacier__Ledge_Grab_Room__East_11,
+    Glacier__Ledge_Grab_Room__East_9,
+    Glacier__Ledge_Grab_Room__Fork,
+    Glacier__Ledge_Grab_Room__Gate,
+    Glacier__Ledge_Grab_Room__Gate_Ledge,
+    Glacier__Ledge_Grab_Room__Lower_Platform,
+    Glacier__Ledge_Grab_Room__Mid_34,
+    Glacier__Ledge_Grab_Room__Mid_35,
+    Glacier__Ledge_Grab_Room__Pedestal,
+    Glacier__Ledge_Grab_Room__Upper_Platform,
+    Glacier__Ledge_Grab_Room__West_End,
+    Glacier__Peak__East_8,
+    Glacier__Peak__Highest_Platform,
+    Glacier__Peak__Top_Platform_East,
+    Glacier__Peak__Top_Rock,
+    Glacier__Peak__Under_West_Cliff,
+    Glacier__Peak__West_8,
+    Glacier__Peak__West_Cliff,
+    Glacier__Revival__East_9,
+    Glacier__Revival__Ledge,
+    Glacier__Revival__Lower_East,
+    Glacier__Revival__Overhang,
+    Glacier__Revival__Save_Point,
+    Glacier__Revival__West_8,
+    Glacier__The_Big_Drop__East,
+    Glacier__The_Big_Drop__Small_Path,
+    Glacier__The_Big_Drop__Water_Surface,
+    Glacier__Vertical_Room__East_12,
+    Glacier__Vertical_Room__East_13,
+    Glacier__Vertical_Room__East_9,
+    Glacier__Vertical_Room__East_Corner,
+    Glacier__Vertical_Room__Lower_West_Corner,
+    Glacier__Vertical_Room__Mid_11,
+    Glacier__Vertical_Room__Mid_9,
+    Glacier__Vertical_Room__Past_Gate,
+    Glacier__Vertical_Room__Peak,
+    Glacier__Vertical_Room__Under_Switch,
+    Glacier__Vertical_Room__West_8,
+    Glacier__Vertical_Room__West_9,
+    Interior__Building_Interior__Corner,
+    Interior__Building_Interior__Entry,
+    Interior__Bunker_Interior__Desk,
+    Interior__Bunker_Interior__Entry,
+    Interior__Cave_Behind_Waterfall__Bottom,
+    Interior__Cave_Behind_Waterfall__Middle,
+    Interior__Cave_Behind_Waterfall__Top,
+    Interior__Dock_Elevator__Connector,
+    Interior__Dock_Elevator__Elevator,
+    Interior__Dock_Interior__Connector,
+    Interior__Dock_Interior__Entry,
+    Interior__Ebih_Cave__Entry,
+    Interior__Garage__Boxes,
+    Interior__Garage__Entry,
+    Interior__Outpost_Interior__Bookshelf,
+    Interior__Outpost_Interior__Entry,
+    Interior__Tent_Interior__Desk,
+    Interior__Tent_Interior__Entry,
+    Irikar__Abandoned_Room__Corner_Core,
+    Irikar__Abandoned_Room__Empty_Pedestal,
+    Irikar__Abandoned_Room__West,
+    Irikar__Airy__Middle_South,
+    Irikar__Airy__Northwest,
+    Irikar__Basement_Pipes__Brick_Ledge,
+    Irikar__Basement_Pipes__Bricks_Under_Pipes,
+    Irikar__Basement_Pipes__Double_Pipe_Left,
+    Irikar__Basement_Pipes__Double_Pipe_Right,
+    Irikar__Basement_Pipes__East_28,
+    Irikar__Basement_Pipes__High_Pipe,
+    Irikar__Basement_Pipes__Left_Vertical_Pipe,
+    Irikar__Basement_Pipes__Lower_Pipe_Right,
+    Irikar__Basement_Pipes__Lower_Pipe_Under_Ledge,
+    Irikar__Basement_Pipes__Right_Vertical_Pipe,
+    Irikar__Basement_Pipes__West_27,
+    Irikar__Basement_Pipes__West_28,
+    Irikar__Basement_Portal__Bottom_Middle,
+    Irikar__Basement_Portal__East_27,
+    Irikar__Basement_Portal__East_28,
+    Irikar__Basement_Portal__East_Platform,
+    Irikar__Basement_Portal__Ledge,
+    Irikar__Basement_Portal__Middle_Platform,
+    Irikar__Basement_Portal__Moving_Platform_End,
+    Irikar__Basement_Portal__Moving_Platform_Start,
+    Irikar__Basement_Portal__North,
+    Irikar__Basement_Portal__Portal_Stand,
+    Irikar__Basement_Portal__West_28,
+    Irikar__Basement_Portal__Westmost_Platform,
+    Irikar__Boss_Room__Above_Catwalk,
+    Irikar__Boss_Room__Bulls_Feet,
+    Irikar__Boss_Room__Catwalk_East,
+    Irikar__Boss_Room__Catwalk_West,
+    Irikar__Boss_Room__East_28,
+    Irikar__Boss_Room__Healthy_Rooftop,
+    Irikar__Boss_Room__Northwest,
+    Irikar__Boss_Room__Sat_Tower_Roof_East,
+    Irikar__Boss_Room__Sat_Tower_Roof_West,
+    Irikar__Boss_Room__Upper_Rooftops,
+    Irikar__Boss_Room__West_28,
+    Irikar__East_Rooftops__Directly_Down,
+    Irikar__East_Rooftops__East_Mid_air,
+    Irikar__East_Rooftops__Off_the_Edge,
+    Irikar__East_Rooftops__Top_Rooftop,
+    Irikar__East_Rooftops__Upper_West,
+    Irikar__Empty_Foyer__East,
+    Irikar__Empty_Foyer__West,
+    Irikar__Hub__Bowl_Hole,
+    Irikar__Hub__Bowl_Middle_Ledge,
+    Irikar__Hub__Bowl_Middle_Platform_Center,
+    Irikar__Hub__Bowl_Middle_Platform_West,
+    Irikar__Hub__Bowl_Platform_3,
+    Irikar__Hub__Bowl_Top_Platform,
+    Irikar__Hub__Dagger_Altar,
+    Irikar__Hub__East_Rim,
+    Irikar__Hub__North_Above_Portal,
+    Irikar__Hub__Northeast_Above_Bowl,
+    Irikar__Hub__Northwest,
+    Irikar__Hub__Northwest_Above_Bowl,
+    Irikar__Hub__NW_Bowl_Edifice,
+    Irikar__Hub__NW_Middle_Building_Corner,
+    Irikar__Hub__NW_Middle_Building_West_Entry,
+    Irikar__Hub__NW_Roof,
+    Irikar__Hub__NW_Staircase_Upper,
+    Irikar__Hub__Portal_Stand,
+    Irikar__Hub__Royal_Storage_By_Wall,
+    Irikar__Hub__Royal_Storage_in_Wall,
+    Irikar__Hub__Royal_Storage_South,
+    Irikar__Hub__Sat_Tower_Bottom,
+    Irikar__Hub__Sat_Tower_East_24,
+    Irikar__Hub__Sat_Tower_Floating_Platform,
+    Irikar__Hub__Sat_Tower_Long_Ledge,
+    Irikar__Hub__Sat_Tower_Lower_Left_Ledge,
+    Irikar__Hub__Sat_Tower_Lower_Right_Ledge,
+    Irikar__Hub__Sat_Tower_Middle_Ledge,
+    Irikar__Hub__Sat_Tower_Northeast,
+    Irikar__Hub__Sat_Tower_Roof_East,
+    Irikar__Hub__Sat_Tower_Roof_West,
+    Irikar__Hub__Sat_Tower_Top_Ledge,
+    Irikar__Hub__Sat_Tower_West_Valley,
+    Irikar__Hub__Save_Point,
+    Irikar__Hub__West_Rim,
+    Irikar__Lamassu__Bottom_Middle,
+    Irikar__Lamassu__Catwalk_Middle,
+    Irikar__Lamassu__Catwalk_West,
+    Irikar__Lamassu__Desk,
+    Irikar__Lamassu__East_26,
+    Irikar__Lamassu__East_27,
+    Irikar__Lamassu__Hidden_Passage_East,
+    Irikar__Lamassu__Hidden_Passage_West,
+    Irikar__Lamassu__Northwest,
+    Irikar__Lamassu__West_28,
+    Irikar__Midwest__East_23,
+    Irikar__Midwest__East_24_on_Building,
+    Irikar__Midwest__East_24_on_Floor,
+    Irikar__Midwest__East_25,
+    Irikar__Midwest__East_26,
+    Irikar__Midwest__East_27,
+    Irikar__Midwest__East_28,
+    Irikar__Sight_Room__Above_Room_East,
+    Irikar__Sight_Room__Above_Room_North,
+    Irikar__Sight_Room__Item_Pedestal,
+    Irikar__Sight_Room__Lower_Ledge,
+    Irikar__Sight_Room__Portal,
+    Irikar__Sight_Room__West_24,
+    Irikar_Breach__Basement_Save__Save_Point,
+    Irikar_Breach__Exit_Corridor__East,
+    Irikar_Breach__Exit_Corridor__North_12,
+    Irikar_Breach__Exit_Corridor__North_13,
+    Irikar_Breach__Exit_Corridor__Passage,
+    Irikar_Breach__Exit_Corridor__Pillar,
+    Irikar_Breach__Exit_Corridor__Portal_Stand,
+    Irikar_Breach__Exit_Corridor__West,
+    Irikar_Breach__Exit_Corridor__West_of_Pillar,
+    Irikar_Breach__Flappy_Drone__Initial_Drop,
+    Irikar_Breach__Flappy_Drone__Passage_Corner,
+    Irikar_Breach__Flappy_Drone__Pillar_Underside,
+    Irikar_Breach__Flappy_Drone__Side,
+    Irikar_Breach__Flappy_Drone__South,
+    Irikar_Breach__Flappy_Drone__Top_Pillar,
+    Irikar_Breach__Flappy_Drone__Upper_Valley_Left,
+    Irikar_Breach__Flappy_Drone__Upper_Valley_Right,
+    Irikar_Breach__Flappy_Drone__West_Door,
+    Irikar_Breach__Flappy_Drone__Zigzag_Bottom,
+    Irikar_Breach__Four_way__East,
+    Irikar_Breach__Four_way__Ledge,
+    Irikar_Breach__Four_way__North,
+    Irikar_Breach__Four_way__South,
+    Irikar_Breach__Four_way__West,
+    Irikar_Breach__Gauntlet__East_22,
+    Irikar_Breach__Gauntlet__Hidden_Path_Bottom,
+    Irikar_Breach__Gauntlet__Hidden_Path_Lower_Entry,
+    Irikar_Breach__Gauntlet__Hidden_Path_Reward,
+    Irikar_Breach__Gauntlet__Hidden_Path_Top_Ledge,
+    Irikar_Breach__Gauntlet__Hidden_Path_Upper_Entry,
+    Irikar_Breach__Gauntlet__Hidden_Path_Upper_Left,
+    Irikar_Breach__Gauntlet__Hidden_Path_Upper_Right,
+    Irikar_Breach__Gauntlet__Save_Point,
+    Irikar_Breach__Hover_Room__Bottom,
+    Irikar_Breach__Hover_Room__East,
+    Irikar_Breach__Hover_Room__West,
+    Irikar_Breach__Neon_Corridor__Center,
+    Irikar_Breach__Neon_Corridor__East,
+    Irikar_Breach__Neon_Corridor__West,
+    Irikar_Breach__Neon_Corridor__West_Basin,
+    Irikar_Breach__Sandy_Lair__East_27,
+    Irikar_Breach__Sandy_Lair__East_28,
+    Irikar_Breach__Save_Room__Save_Point,
+    Irikar_Breach__Save_Room__Upper_Area,
+    Irikar_Breach__Save_Room__West,
+    Irikar_Breach__Uhrum_Connector__West,
+    Irikar_Breach__Worm_Rave__Corner,
+    Irikar_Breach__Worm_Rave__East,
+    Irikar_Breach__Worm_Rave__South,
+    Menu__Upgrade_Menu__Combat,
+    Menu__Upgrade_Menu__Drone,
+    Menu__Upgrade_Menu__Infection,
+    Menu__Upgrade_Menu__Physiology,
+    Uhrum__Annuna_Corridor__Between_Two_Flowers,
+    Uhrum__Annuna_Corridor__Block_East,
+    Uhrum__Annuna_Corridor__Block_West,
+    Uhrum__Annuna_Corridor__East_25,
+    Uhrum__Annuna_Corridor__East_Cubby,
+    Uhrum__Annuna_Corridor__Lower_Platform,
+    Uhrum__Annuna_Corridor__Middle_Platform,
+    Uhrum__Annuna_Corridor__Open_Pillar,
+    Uhrum__Annuna_Corridor__Pedestal,
+    Uhrum__Annuna_Corridor__Save_Point,
+    Uhrum__Annuna_Corridor__Statue,
+    Uhrum__Annuna_Corridor__Upper_Ledge,
+    Uhrum__Annuna_Corridor__Upper_Platform,
+    Uhrum__Annuna_Corridor__Upper_Trees,
+    Uhrum__Annuna_Corridor__Wall_Remnant,
+    Uhrum__Annuna_Corridor__West_25,
+    Uhrum__Annuna_Corridor__West_26,
+    Uhrum__Artillery_Practice__East_24,
+    Uhrum__East_Lake__West_27,
+    Uhrum__East_Lake__West_28,
+    Uhrum__Glitchy_Corridor__East_27,
+    Uhrum__Glitchy_Corridor__East_28,
+    Uhrum__Glitchy_Corridor__West_28,
+    Uhrum__Save_Room__East,
+    Uhrum__Save_Room__Save_Point,
+    Uhrum__Save_Room__West,
+    Uhrum__Siege_Corridor__Center_Box,
+    Uhrum__Siege_Corridor__Center_East,
+    Uhrum__Siege_Corridor__Center_Platform_1,
+    Uhrum__Siege_Corridor__Center_Platform_3,
+    Uhrum__Siege_Corridor__Center_Valley,
+    Uhrum__Siege_Corridor__Center_West,
+    Uhrum__Siege_Corridor__East_25,
+    Uhrum__Siege_Corridor__East_Hill,
+    Uhrum__Siege_Corridor__Mideast_Hill,
+    Uhrum__Siege_Corridor__Mideast_Tree,
+    Uhrum__Siege_Corridor__Northwest_Door,
+    Uhrum__Siege_Corridor__Northwest_Platform,
+    Uhrum__Siege_Corridor__Pond,
+    Uhrum__Siege_Corridor__Upper_Rock_East,
+    Uhrum__Siege_Corridor__Upper_Rock_Item,
+    Uhrum__Siege_Corridor__Upper_Rock_West,
+    Uhrum__Siege_Corridor__West_26,
+    Uhrum__Siege_Corridor__West_Grassy_Ledge,
+    Uhrum__Siege_Corridor__West_Greenery,
+    Uhrum__Siege_Corridor__West_Loop,
+    Uhrum__Siege_Corridor__West_Middle_Tree,
+    Uhrum__Siege_Corridor__West_Rocky_Ledge,
+    Uhrum__Siege_Corridor__Western_Cache,
+    Uhrum__Siege_Corridor__Western_Rock,
+    Uhrum__Tulip_Tower__West_24,
+    Uhrum__Tulip_Tower__West_24_in_Mid_air,
+    Uhrum__Waterfalls__Above_Block,
+    Uhrum__Waterfalls__Barrier_East,
+    Uhrum__Waterfalls__Barrier_West,
+    Uhrum__Waterfalls__Below_Block,
+    Uhrum__Waterfalls__Ceiling_Cache,
+    Uhrum__Waterfalls__Ceiling_Opening,
+    Uhrum__Waterfalls__Center_Island_East,
+    Uhrum__Waterfalls__Center_Island_West,
+    Uhrum__Waterfalls__East_24,
+    Uhrum__Waterfalls__East_24_in_Mid_air,
+    Uhrum__Waterfalls__East_25,
+    Uhrum__Waterfalls__East_26,
+    Uhrum__Waterfalls__East_27,
+    Uhrum__Waterfalls__East_28,
+    Uhrum__Waterfalls__East_Palm_Tree,
+    Uhrum__Waterfalls__East_Water_Surface,
+    Uhrum__Waterfalls__East_Waters_Edge,
+    Uhrum__Waterfalls__Green_Middle_Ledge,
+    Uhrum__Waterfalls__High_Platform,
+    Uhrum__Waterfalls__Island_Water_West,
+    Uhrum__Waterfalls__Large_Rock,
+    Uhrum__Waterfalls__Ledge_Above_Palm,
+    Uhrum__Waterfalls__Lower_East_Platform,
+    Uhrum__Waterfalls__Medium_Rock,
+    Uhrum__Waterfalls__Northeast_Ledge,
+    Uhrum__Waterfalls__Small_Rock,
+    Uhrum__Waterfalls__Water_Pillar,
+    Uhrum__Waterfalls__Water_Slope,
+    Uhrum__Waterfalls__West_24,
+    Uhrum__Waterfalls__West_25,
+    Uhrum__Waterfalls__West_27,
+    Uhrum__Waterfalls__West_Platform,
+    Uhrum__Waterfalls__West_Wall,
+    Uhrum__Waterfalls__West_Water_Ledge,
+    Uhrum__Waterfalls__West_Water_Nook,
+    Uhrum__Waterfalls__West_Water_Surface,
+    Uhrum__Waterfalls__West_Waters_Edge,
+    Uhrum__West_Entrance__Clear_Passage,
+    Uhrum__West_Entrance__East_26,
+    Uhrum__West_Entrance__East_28,
+    Uhrum__West_Entrance__Gate_Switch,
+    Uhrum__West_Entrance__Hidden_Passage_Entry,
+    Uhrum__West_Entrance__Hidden_Passage_West,
+    Uhrum__West_Entrance__Inner_Dais,
+    Uhrum__West_Entrance__Lower_Path_Gap,
+    Uhrum__West_Entrance__Lower_Path_Rock,
+    Uhrum__West_Entrance__Lower_Path_Tree_Ledge,
+    Uhrum__West_Entrance__Lower_Wall_East,
+    Uhrum__West_Entrance__Lower_Wall_West,
+    Uhrum__West_Entrance__Middle_West_Ledge,
+    Uhrum__West_Entrance__Portal_Exit,
+    Uhrum__West_Entrance__Portal_Stand,
+    Uhrum__West_Entrance__Sand,
+    Uhrum__West_Entrance__Save_Point,
+    Uhrum__West_Entrance__South_Platform,
+    Uhrum__West_Entrance__Southeast_Tree,
+    Uhrum__West_Entrance__Top_West_Ledge,
+    Uhrum__West_Entrance__Upper_Fork,
+    Uhrum__West_Entrance__Upper_Wall_East,
+    Uhrum__West_Entrance__Upper_Wall_West,
+    Uhrum__West_Entrance__West_25,
+    Uhrum__West_Entrance__West_26,
+    Uhrum__West_Entrance__West_27,
+    Uhrum__West_Entrance__West_of_Gate,
+}
 impl fmt::Display for SpotId {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         match self {
@@ -338,207 +1684,507 @@ impl fmt::Display for SpotId {
             SpotId::Amagi__Grid_31_19__East => write!(f, "{}", "Amagi > Grid 31,19 > East"),
             SpotId::Amagi__Grid_31_19__West => write!(f, "{}", "Amagi > Grid 31,19 > West"),
             SpotId::Amagi__Liru_Room__Bottom => write!(f, "{}", "Amagi > Liru Room > Bottom"),
-            SpotId::Amagi__Liru_Room__East_Passage => write!(f, "{}", "Amagi > Liru Room > East Passage"),
-            SpotId::Amagi__Liru_Room__Hidden_Enemies => write!(f, "{}", "Amagi > Liru Room > Hidden Enemies"),
-            SpotId::Amagi__Liru_Room__Hidden_Exit => write!(f, "{}", "Amagi > Liru Room > Hidden Exit"),
-            SpotId::Amagi__Liru_Room__Platform_1_Left => write!(f, "{}", "Amagi > Liru Room > Platform 1 Left"),
-            SpotId::Amagi__Liru_Room__Platform_1_Right => write!(f, "{}", "Amagi > Liru Room > Platform 1 Right"),
-            SpotId::Amagi__Liru_Room__Platform_2_Left => write!(f, "{}", "Amagi > Liru Room > Platform 2 Left"),
-            SpotId::Amagi__Liru_Room__Platform_2_Right => write!(f, "{}", "Amagi > Liru Room > Platform 2 Right"),
-            SpotId::Amagi__Liru_Room__Platform_3_Left => write!(f, "{}", "Amagi > Liru Room > Platform 3 Left"),
-            SpotId::Amagi__Liru_Room__Platform_3_Right => write!(f, "{}", "Amagi > Liru Room > Platform 3 Right"),
-            SpotId::Amagi__Liru_Room__Platform_4_Left => write!(f, "{}", "Amagi > Liru Room > Platform 4 Left"),
-            SpotId::Amagi__Liru_Room__Platform_4_Right => write!(f, "{}", "Amagi > Liru Room > Platform 4 Right"),
+            SpotId::Amagi__Liru_Room__East_Passage => {
+                write!(f, "{}", "Amagi > Liru Room > East Passage")
+            }
+            SpotId::Amagi__Liru_Room__Hidden_Enemies => {
+                write!(f, "{}", "Amagi > Liru Room > Hidden Enemies")
+            }
+            SpotId::Amagi__Liru_Room__Hidden_Exit => {
+                write!(f, "{}", "Amagi > Liru Room > Hidden Exit")
+            }
+            SpotId::Amagi__Liru_Room__Platform_1_Left => {
+                write!(f, "{}", "Amagi > Liru Room > Platform 1 Left")
+            }
+            SpotId::Amagi__Liru_Room__Platform_1_Right => {
+                write!(f, "{}", "Amagi > Liru Room > Platform 1 Right")
+            }
+            SpotId::Amagi__Liru_Room__Platform_2_Left => {
+                write!(f, "{}", "Amagi > Liru Room > Platform 2 Left")
+            }
+            SpotId::Amagi__Liru_Room__Platform_2_Right => {
+                write!(f, "{}", "Amagi > Liru Room > Platform 2 Right")
+            }
+            SpotId::Amagi__Liru_Room__Platform_3_Left => {
+                write!(f, "{}", "Amagi > Liru Room > Platform 3 Left")
+            }
+            SpotId::Amagi__Liru_Room__Platform_3_Right => {
+                write!(f, "{}", "Amagi > Liru Room > Platform 3 Right")
+            }
+            SpotId::Amagi__Liru_Room__Platform_4_Left => {
+                write!(f, "{}", "Amagi > Liru Room > Platform 4 Left")
+            }
+            SpotId::Amagi__Liru_Room__Platform_4_Right => {
+                write!(f, "{}", "Amagi > Liru Room > Platform 4 Right")
+            }
             SpotId::Amagi__Liru_Room__Shrine => write!(f, "{}", "Amagi > Liru Room > Shrine"),
             SpotId::Amagi__Liru_Room__West_19 => write!(f, "{}", "Amagi > Liru Room > West 19"),
             SpotId::Amagi__Liru_Room__West_20 => write!(f, "{}", "Amagi > Liru Room > West 20"),
-            SpotId::Amagi__Main_Area__Broken_Wall => write!(f, "{}", "Amagi > Main Area > Broken Wall"),
+            SpotId::Amagi__Main_Area__Broken_Wall => {
+                write!(f, "{}", "Amagi > Main Area > Broken Wall")
+            }
             SpotId::Amagi__Main_Area__Carving => write!(f, "{}", "Amagi > Main Area > Carving"),
-            SpotId::Amagi__Main_Area__Catwalk_Broken_Part => write!(f, "{}", "Amagi > Main Area > Catwalk Broken Part"),
-            SpotId::Amagi__Main_Area__Catwalk_Center => write!(f, "{}", "Amagi > Main Area > Catwalk Center"),
-            SpotId::Amagi__Main_Area__Catwalk_East_Edge => write!(f, "{}", "Amagi > Main Area > Catwalk East Edge"),
+            SpotId::Amagi__Main_Area__Catwalk_Broken_Part => {
+                write!(f, "{}", "Amagi > Main Area > Catwalk Broken Part")
+            }
+            SpotId::Amagi__Main_Area__Catwalk_Center => {
+                write!(f, "{}", "Amagi > Main Area > Catwalk Center")
+            }
+            SpotId::Amagi__Main_Area__Catwalk_East_Edge => {
+                write!(f, "{}", "Amagi > Main Area > Catwalk East Edge")
+            }
             SpotId::Amagi__Main_Area__Cliff => write!(f, "{}", "Amagi > Main Area > Cliff"),
             SpotId::Amagi__Main_Area__East_15 => write!(f, "{}", "Amagi > Main Area > East 15"),
             SpotId::Amagi__Main_Area__East_19 => write!(f, "{}", "Amagi > Main Area > East 19"),
-            SpotId::Amagi__Main_Area__East_Ledge => write!(f, "{}", "Amagi > Main Area > East Ledge"),
-            SpotId::Amagi__Main_Area__Enemy_Side => write!(f, "{}", "Amagi > Main Area > Enemy Side"),
+            SpotId::Amagi__Main_Area__East_Ledge => {
+                write!(f, "{}", "Amagi > Main Area > East Ledge")
+            }
+            SpotId::Amagi__Main_Area__Enemy_Side => {
+                write!(f, "{}", "Amagi > Main Area > Enemy Side")
+            }
             SpotId::Amagi__Main_Area__Flat_Ruin => write!(f, "{}", "Amagi > Main Area > Flat Ruin"),
-            SpotId::Amagi__Main_Area__Half_Pillar => write!(f, "{}", "Amagi > Main Area > Half Pillar"),
-            SpotId::Amagi__Main_Area__Platform_2 => write!(f, "{}", "Amagi > Main Area > Platform 2"),
-            SpotId::Amagi__Main_Area__Platform_3 => write!(f, "{}", "Amagi > Main Area > Platform 3"),
-            SpotId::Amagi__Main_Area__Save_Point => write!(f, "{}", "Amagi > Main Area > Save Point"),
-            SpotId::Amagi__Main_Area__Secret_Outcropping => write!(f, "{}", "Amagi > Main Area > Secret Outcropping"),
-            SpotId::Amagi__Main_Area__Secret_Waterfall => write!(f, "{}", "Amagi > Main Area > Secret Waterfall"),
-            SpotId::Amagi__Main_Area__Shallow_End => write!(f, "{}", "Amagi > Main Area > Shallow End"),
-            SpotId::Amagi__Main_Area__Small_Cliff => write!(f, "{}", "Amagi > Main Area > Small Cliff"),
-            SpotId::Amagi__Main_Area__Upper_Platform => write!(f, "{}", "Amagi > Main Area > Upper Platform"),
-            SpotId::Amagi__Main_Area__Wall_Stuck_Spot => write!(f, "{}", "Amagi > Main Area > Wall Stuck Spot"),
-            SpotId::Amagi__Main_Area__Waters_Edge => write!(f, "{}", "Amagi > Main Area > Water's Edge"),
-            SpotId::Amagi__Main_Area__Way_Off_To_The_Side => write!(f, "{}", "Amagi > Main Area > Way Off To The Side"),
+            SpotId::Amagi__Main_Area__Half_Pillar => {
+                write!(f, "{}", "Amagi > Main Area > Half Pillar")
+            }
+            SpotId::Amagi__Main_Area__Platform_2 => {
+                write!(f, "{}", "Amagi > Main Area > Platform 2")
+            }
+            SpotId::Amagi__Main_Area__Platform_3 => {
+                write!(f, "{}", "Amagi > Main Area > Platform 3")
+            }
+            SpotId::Amagi__Main_Area__Save_Point => {
+                write!(f, "{}", "Amagi > Main Area > Save Point")
+            }
+            SpotId::Amagi__Main_Area__Secret_Outcropping => {
+                write!(f, "{}", "Amagi > Main Area > Secret Outcropping")
+            }
+            SpotId::Amagi__Main_Area__Secret_Waterfall => {
+                write!(f, "{}", "Amagi > Main Area > Secret Waterfall")
+            }
+            SpotId::Amagi__Main_Area__Shallow_End => {
+                write!(f, "{}", "Amagi > Main Area > Shallow End")
+            }
+            SpotId::Amagi__Main_Area__Small_Cliff => {
+                write!(f, "{}", "Amagi > Main Area > Small Cliff")
+            }
+            SpotId::Amagi__Main_Area__Upper_Platform => {
+                write!(f, "{}", "Amagi > Main Area > Upper Platform")
+            }
+            SpotId::Amagi__Main_Area__Wall_Stuck_Spot => {
+                write!(f, "{}", "Amagi > Main Area > Wall Stuck Spot")
+            }
+            SpotId::Amagi__Main_Area__Waters_Edge => {
+                write!(f, "{}", "Amagi > Main Area > Water's Edge")
+            }
+            SpotId::Amagi__Main_Area__Way_Off_To_The_Side => {
+                write!(f, "{}", "Amagi > Main Area > Way Off To The Side")
+            }
             SpotId::Amagi__Main_Area__West_15 => write!(f, "{}", "Amagi > Main Area > West 15"),
             SpotId::Amagi__Main_Area__West_18 => write!(f, "{}", "Amagi > Main Area > West 18"),
             SpotId::Amagi__Main_Area__West_19 => write!(f, "{}", "Amagi > Main Area > West 19"),
-            SpotId::Amagi__Main_Area__West_Mini_Hill => write!(f, "{}", "Amagi > Main Area > West Mini-Hill"),
-            SpotId::Amagi__Main_Area__West_Shelf => write!(f, "{}", "Amagi > Main Area > West Shelf"),
+            SpotId::Amagi__Main_Area__West_Mini_Hill => {
+                write!(f, "{}", "Amagi > Main Area > West Mini-Hill")
+            }
+            SpotId::Amagi__Main_Area__West_Shelf => {
+                write!(f, "{}", "Amagi > Main Area > West Shelf")
+            }
             SpotId::Amagi__Main_Area__West_Side => write!(f, "{}", "Amagi > Main Area > West Side"),
-            SpotId::Amagi__West_Lake__Cavern_Back_Teeth => write!(f, "{}", "Amagi > West Lake > Cavern Back Teeth"),
-            SpotId::Amagi__West_Lake__Cavern_Chin => write!(f, "{}", "Amagi > West Lake > Cavern Chin"),
-            SpotId::Amagi__West_Lake__Cavern_Eye => write!(f, "{}", "Amagi > West Lake > Cavern Eye"),
-            SpotId::Amagi__West_Lake__Cavern_Front_Pillar => write!(f, "{}", "Amagi > West Lake > Cavern Front Pillar"),
-            SpotId::Amagi__West_Lake__Cavern_Front_Teeth => write!(f, "{}", "Amagi > West Lake > Cavern Front Teeth"),
-            SpotId::Amagi__West_Lake__Cavern_Jaw => write!(f, "{}", "Amagi > West Lake > Cavern Jaw"),
-            SpotId::Amagi__West_Lake__Cavern_Lower_Trachea => write!(f, "{}", "Amagi > West Lake > Cavern Lower Trachea"),
-            SpotId::Amagi__West_Lake__Cavern_Middle_Pillar => write!(f, "{}", "Amagi > West Lake > Cavern Middle Pillar"),
-            SpotId::Amagi__West_Lake__Cavern_Neck => write!(f, "{}", "Amagi > West Lake > Cavern Neck"),
-            SpotId::Amagi__West_Lake__Cavern_Rear_Pillar => write!(f, "{}", "Amagi > West Lake > Cavern Rear Pillar"),
-            SpotId::Amagi__West_Lake__Cavern_Refill_Station => write!(f, "{}", "Amagi > West Lake > Cavern Refill Station"),
-            SpotId::Amagi__West_Lake__Cavern_Tear_Duct => write!(f, "{}", "Amagi > West Lake > Cavern Tear Duct"),
+            SpotId::Amagi__West_Lake__Cavern_Back_Teeth => {
+                write!(f, "{}", "Amagi > West Lake > Cavern Back Teeth")
+            }
+            SpotId::Amagi__West_Lake__Cavern_Chin => {
+                write!(f, "{}", "Amagi > West Lake > Cavern Chin")
+            }
+            SpotId::Amagi__West_Lake__Cavern_Eye => {
+                write!(f, "{}", "Amagi > West Lake > Cavern Eye")
+            }
+            SpotId::Amagi__West_Lake__Cavern_Front_Pillar => {
+                write!(f, "{}", "Amagi > West Lake > Cavern Front Pillar")
+            }
+            SpotId::Amagi__West_Lake__Cavern_Front_Teeth => {
+                write!(f, "{}", "Amagi > West Lake > Cavern Front Teeth")
+            }
+            SpotId::Amagi__West_Lake__Cavern_Jaw => {
+                write!(f, "{}", "Amagi > West Lake > Cavern Jaw")
+            }
+            SpotId::Amagi__West_Lake__Cavern_Lower_Trachea => {
+                write!(f, "{}", "Amagi > West Lake > Cavern Lower Trachea")
+            }
+            SpotId::Amagi__West_Lake__Cavern_Middle_Pillar => {
+                write!(f, "{}", "Amagi > West Lake > Cavern Middle Pillar")
+            }
+            SpotId::Amagi__West_Lake__Cavern_Neck => {
+                write!(f, "{}", "Amagi > West Lake > Cavern Neck")
+            }
+            SpotId::Amagi__West_Lake__Cavern_Rear_Pillar => {
+                write!(f, "{}", "Amagi > West Lake > Cavern Rear Pillar")
+            }
+            SpotId::Amagi__West_Lake__Cavern_Refill_Station => {
+                write!(f, "{}", "Amagi > West Lake > Cavern Refill Station")
+            }
+            SpotId::Amagi__West_Lake__Cavern_Tear_Duct => {
+                write!(f, "{}", "Amagi > West Lake > Cavern Tear Duct")
+            }
             SpotId::Amagi__West_Lake__East_15 => write!(f, "{}", "Amagi > West Lake > East 15"),
             SpotId::Amagi__West_Lake__East_18 => write!(f, "{}", "Amagi > West Lake > East 18"),
             SpotId::Amagi__West_Lake__East_19 => write!(f, "{}", "Amagi > West Lake > East 19"),
             SpotId::Amagi__West_Lake__East_20 => write!(f, "{}", "Amagi > West Lake > East 20"),
             SpotId::Amagi__West_Lake__East_Bank => write!(f, "{}", "Amagi > West Lake > East Bank"),
-            SpotId::Amagi__West_Lake__East_Platform => write!(f, "{}", "Amagi > West Lake > East Platform"),
-            SpotId::Amagi__West_Lake__East_Shore => write!(f, "{}", "Amagi > West Lake > East Shore"),
-            SpotId::Amagi__West_Lake__Left_of_Enemy => write!(f, "{}", "Amagi > West Lake > Left of Enemy"),
-            SpotId::Amagi__West_Lake__Northeast_Platform => write!(f, "{}", "Amagi > West Lake > Northeast Platform"),
-            SpotId::Amagi__West_Lake__Northwest_Platform => write!(f, "{}", "Amagi > West Lake > Northwest Platform"),
+            SpotId::Amagi__West_Lake__East_Platform => {
+                write!(f, "{}", "Amagi > West Lake > East Platform")
+            }
+            SpotId::Amagi__West_Lake__East_Shore => {
+                write!(f, "{}", "Amagi > West Lake > East Shore")
+            }
+            SpotId::Amagi__West_Lake__Left_of_Enemy => {
+                write!(f, "{}", "Amagi > West Lake > Left of Enemy")
+            }
+            SpotId::Amagi__West_Lake__Northeast_Platform => {
+                write!(f, "{}", "Amagi > West Lake > Northeast Platform")
+            }
+            SpotId::Amagi__West_Lake__Northwest_Platform => {
+                write!(f, "{}", "Amagi > West Lake > Northwest Platform")
+            }
             SpotId::Amagi__West_Lake__Pillar => write!(f, "{}", "Amagi > West Lake > Pillar"),
-            SpotId::Amagi__West_Lake__Pillar_Platform => write!(f, "{}", "Amagi > West Lake > Pillar Platform"),
-            SpotId::Amagi__West_Lake__Small_Hill => write!(f, "{}", "Amagi > West Lake > Small Hill"),
+            SpotId::Amagi__West_Lake__Pillar_Platform => {
+                write!(f, "{}", "Amagi > West Lake > Pillar Platform")
+            }
+            SpotId::Amagi__West_Lake__Small_Hill => {
+                write!(f, "{}", "Amagi > West Lake > Small Hill")
+            }
             SpotId::Amagi__West_Lake__Some_Rock => write!(f, "{}", "Amagi > West Lake > Some Rock"),
-            SpotId::Amagi__West_Lake__Somewhat_Central_Platform => write!(f, "{}", "Amagi > West Lake > Somewhat Central Platform"),
-            SpotId::Amagi__West_Lake__Stronghold_Ceiling_Left => write!(f, "{}", "Amagi > West Lake > Stronghold Ceiling Left"),
-            SpotId::Amagi__West_Lake__Stronghold_Ceiling_Right => write!(f, "{}", "Amagi > West Lake > Stronghold Ceiling Right"),
-            SpotId::Amagi__West_Lake__Stronghold_Front_Door => write!(f, "{}", "Amagi > West Lake > Stronghold Front Door"),
-            SpotId::Amagi__West_Lake__Stronghold_Front_Room => write!(f, "{}", "Amagi > West Lake > Stronghold Front Room"),
-            SpotId::Amagi__West_Lake__Stronghold_Item => write!(f, "{}", "Amagi > West Lake > Stronghold Item"),
-            SpotId::Amagi__West_Lake__Stronghold_Middle_Column => write!(f, "{}", "Amagi > West Lake > Stronghold Middle Column"),
-            SpotId::Amagi__West_Lake__Stronghold_Rear_Wall => write!(f, "{}", "Amagi > West Lake > Stronghold Rear Wall"),
-            SpotId::Amagi__West_Lake__Stronghold_Top => write!(f, "{}", "Amagi > West Lake > Stronghold Top"),
-            SpotId::Amagi__West_Lake__Surface_Wall_Left => write!(f, "{}", "Amagi > West Lake > Surface Wall Left"),
-            SpotId::Amagi__West_Lake__Surface_Wall_Right => write!(f, "{}", "Amagi > West Lake > Surface Wall Right"),
-            SpotId::Amagi__West_Lake__Tentacle_Gap => write!(f, "{}", "Amagi > West Lake > Tentacle Gap"),
-            SpotId::Amagi__West_Lake__Upper_Center_Platform => write!(f, "{}", "Amagi > West Lake > Upper Center Platform"),
-            SpotId::Amagi__West_Lake__Water_Surface => write!(f, "{}", "Amagi > West Lake > Water Surface"),
+            SpotId::Amagi__West_Lake__Somewhat_Central_Platform => {
+                write!(f, "{}", "Amagi > West Lake > Somewhat Central Platform")
+            }
+            SpotId::Amagi__West_Lake__Stronghold_Ceiling_Left => {
+                write!(f, "{}", "Amagi > West Lake > Stronghold Ceiling Left")
+            }
+            SpotId::Amagi__West_Lake__Stronghold_Ceiling_Right => {
+                write!(f, "{}", "Amagi > West Lake > Stronghold Ceiling Right")
+            }
+            SpotId::Amagi__West_Lake__Stronghold_Front_Door => {
+                write!(f, "{}", "Amagi > West Lake > Stronghold Front Door")
+            }
+            SpotId::Amagi__West_Lake__Stronghold_Front_Room => {
+                write!(f, "{}", "Amagi > West Lake > Stronghold Front Room")
+            }
+            SpotId::Amagi__West_Lake__Stronghold_Item => {
+                write!(f, "{}", "Amagi > West Lake > Stronghold Item")
+            }
+            SpotId::Amagi__West_Lake__Stronghold_Middle_Column => {
+                write!(f, "{}", "Amagi > West Lake > Stronghold Middle Column")
+            }
+            SpotId::Amagi__West_Lake__Stronghold_Rear_Wall => {
+                write!(f, "{}", "Amagi > West Lake > Stronghold Rear Wall")
+            }
+            SpotId::Amagi__West_Lake__Stronghold_Top => {
+                write!(f, "{}", "Amagi > West Lake > Stronghold Top")
+            }
+            SpotId::Amagi__West_Lake__Surface_Wall_Left => {
+                write!(f, "{}", "Amagi > West Lake > Surface Wall Left")
+            }
+            SpotId::Amagi__West_Lake__Surface_Wall_Right => {
+                write!(f, "{}", "Amagi > West Lake > Surface Wall Right")
+            }
+            SpotId::Amagi__West_Lake__Tentacle_Gap => {
+                write!(f, "{}", "Amagi > West Lake > Tentacle Gap")
+            }
+            SpotId::Amagi__West_Lake__Upper_Center_Platform => {
+                write!(f, "{}", "Amagi > West Lake > Upper Center Platform")
+            }
+            SpotId::Amagi__West_Lake__Water_Surface => {
+                write!(f, "{}", "Amagi > West Lake > Water Surface")
+            }
             SpotId::Amagi__West_Lake__West_15 => write!(f, "{}", "Amagi > West Lake > West 15"),
             SpotId::Amagi__West_Lake__West_Bank => write!(f, "{}", "Amagi > West Lake > West Bank"),
-            SpotId::Amagi__West_Lake__West_Cliff => write!(f, "{}", "Amagi > West Lake > West Cliff"),
-            SpotId::Amagi__West_Lake__West_Platform => write!(f, "{}", "Amagi > West Lake > West Platform"),
-            SpotId::Amagi__West_Lake__West_Shore => write!(f, "{}", "Amagi > West Lake > West Shore"),
-            SpotId::Annuna__East_Bridge__Center_Corridor => write!(f, "{}", "Annuna > East Bridge > Center Corridor"),
-            SpotId::Annuna__East_Bridge__Center_Drop_off => write!(f, "{}", "Annuna > East Bridge > Center Drop-off"),
-            SpotId::Annuna__East_Bridge__Center_Gap_East => write!(f, "{}", "Annuna > East Bridge > Center Gap East"),
-            SpotId::Annuna__East_Bridge__Center_Gap_West => write!(f, "{}", "Annuna > East Bridge > Center Gap West"),
-            SpotId::Annuna__East_Bridge__Gate_Button => write!(f, "{}", "Annuna > East Bridge > Gate Button"),
-            SpotId::Annuna__East_Bridge__Gate_Button_Gap => write!(f, "{}", "Annuna > East Bridge > Gate Button Gap"),
-            SpotId::Annuna__East_Bridge__Upper_Middle_Core => write!(f, "{}", "Annuna > East Bridge > Upper Middle Core"),
-            SpotId::Annuna__East_Bridge__Upper_Middle_Gate => write!(f, "{}", "Annuna > East Bridge > Upper Middle Gate"),
-            SpotId::Annuna__East_Bridge__Upper_Middle_Inner_Corner_East => write!(f, "{}", "Annuna > East Bridge > Upper Middle Inner Corner East"),
-            SpotId::Annuna__East_Bridge__Upper_Middle_Inner_Corner_West => write!(f, "{}", "Annuna > East Bridge > Upper Middle Inner Corner West"),
-            SpotId::Annuna__East_Bridge__Upper_Middle_Opening => write!(f, "{}", "Annuna > East Bridge > Upper Middle Opening"),
-            SpotId::Annuna__East_Bridge__Upper_West_Gap => write!(f, "{}", "Annuna > East Bridge > Upper West Gap"),
-            SpotId::Annuna__East_Bridge__Upper_West_Gap_East => write!(f, "{}", "Annuna > East Bridge > Upper West Gap East"),
-            SpotId::Annuna__East_Bridge__West_24 => write!(f, "{}", "Annuna > East Bridge > West 24"),
-            SpotId::Annuna__East_Bridge__West_25_Lower => write!(f, "{}", "Annuna > East Bridge > West 25 Lower"),
-            SpotId::Annuna__East_Bridge__West_25_Upper => write!(f, "{}", "Annuna > East Bridge > West 25 Upper"),
-            SpotId::Annuna__East_Bridge__West_Staircase_Lower_East => write!(f, "{}", "Annuna > East Bridge > West Staircase Lower East"),
-            SpotId::Annuna__East_Bridge__West_Staircase_Lower_West => write!(f, "{}", "Annuna > East Bridge > West Staircase Lower West"),
-            SpotId::Annuna__East_Bridge__West_Staircase_Upper_East => write!(f, "{}", "Annuna > East Bridge > West Staircase Upper East"),
-            SpotId::Annuna__East_Bridge__West_Staircase_Upper_West => write!(f, "{}", "Annuna > East Bridge > West Staircase Upper West"),
-            SpotId::Annuna__East_Bridge__West_Under_Gap => write!(f, "{}", "Annuna > East Bridge > West Under Gap"),
-            SpotId::Annuna__Mirror_Match__Below_Switch => write!(f, "{}", "Annuna > Mirror Match > Below Switch"),
-            SpotId::Annuna__Mirror_Match__Central_Pillar => write!(f, "{}", "Annuna > Mirror Match > Central Pillar"),
-            SpotId::Annuna__Mirror_Match__East_25_Lower => write!(f, "{}", "Annuna > Mirror Match > East 25 Lower"),
-            SpotId::Annuna__Mirror_Match__East_25_Upper => write!(f, "{}", "Annuna > Mirror Match > East 25 Upper"),
-            SpotId::Annuna__Mirror_Match__East_26_Lower => write!(f, "{}", "Annuna > Mirror Match > East 26 Lower"),
-            SpotId::Annuna__Mirror_Match__East_26_Upper => write!(f, "{}", "Annuna > Mirror Match > East 26 Upper"),
-            SpotId::Annuna__Mirror_Match__Eastward => write!(f, "{}", "Annuna > Mirror Match > Eastward"),
-            SpotId::Annuna__Mirror_Match__Plinth => write!(f, "{}", "Annuna > Mirror Match > Plinth"),
-            SpotId::Annuna__Mirror_Match__Save_Point => write!(f, "{}", "Annuna > Mirror Match > Save Point"),
-            SpotId::Annuna__Mirror_Match__Staircase => write!(f, "{}", "Annuna > Mirror Match > Staircase"),
-            SpotId::Annuna__Mirror_Match__Waving_Distance => write!(f, "{}", "Annuna > Mirror Match > Waving Distance"),
-            SpotId::Annuna__Mirror_Match__West_25 => write!(f, "{}", "Annuna > Mirror Match > West 25"),
-            SpotId::Annuna__Mirror_Match__West_Gap => write!(f, "{}", "Annuna > Mirror Match > West Gap"),
-            SpotId::Annuna__West_Bridge__East_24 => write!(f, "{}", "Annuna > West Bridge > East 24"),
-            SpotId::Annuna__West_Bridge__East_25_Lower => write!(f, "{}", "Annuna > West Bridge > East 25 Lower"),
-            SpotId::Annuna__West_Bridge__East_25_Upper => write!(f, "{}", "Annuna > West Bridge > East 25 Upper"),
+            SpotId::Amagi__West_Lake__West_Cliff => {
+                write!(f, "{}", "Amagi > West Lake > West Cliff")
+            }
+            SpotId::Amagi__West_Lake__West_Platform => {
+                write!(f, "{}", "Amagi > West Lake > West Platform")
+            }
+            SpotId::Amagi__West_Lake__West_Shore => {
+                write!(f, "{}", "Amagi > West Lake > West Shore")
+            }
+            SpotId::Annuna__East_Bridge__Center_Corridor => {
+                write!(f, "{}", "Annuna > East Bridge > Center Corridor")
+            }
+            SpotId::Annuna__East_Bridge__Center_Drop_off => {
+                write!(f, "{}", "Annuna > East Bridge > Center Drop-off")
+            }
+            SpotId::Annuna__East_Bridge__Center_Gap_East => {
+                write!(f, "{}", "Annuna > East Bridge > Center Gap East")
+            }
+            SpotId::Annuna__East_Bridge__Center_Gap_West => {
+                write!(f, "{}", "Annuna > East Bridge > Center Gap West")
+            }
+            SpotId::Annuna__East_Bridge__Gate_Button => {
+                write!(f, "{}", "Annuna > East Bridge > Gate Button")
+            }
+            SpotId::Annuna__East_Bridge__Gate_Button_Gap => {
+                write!(f, "{}", "Annuna > East Bridge > Gate Button Gap")
+            }
+            SpotId::Annuna__East_Bridge__Upper_Middle_Core => {
+                write!(f, "{}", "Annuna > East Bridge > Upper Middle Core")
+            }
+            SpotId::Annuna__East_Bridge__Upper_Middle_Gate => {
+                write!(f, "{}", "Annuna > East Bridge > Upper Middle Gate")
+            }
+            SpotId::Annuna__East_Bridge__Upper_Middle_Inner_Corner_East => write!(
+                f,
+                "{}",
+                "Annuna > East Bridge > Upper Middle Inner Corner East"
+            ),
+            SpotId::Annuna__East_Bridge__Upper_Middle_Inner_Corner_West => write!(
+                f,
+                "{}",
+                "Annuna > East Bridge > Upper Middle Inner Corner West"
+            ),
+            SpotId::Annuna__East_Bridge__Upper_Middle_Opening => {
+                write!(f, "{}", "Annuna > East Bridge > Upper Middle Opening")
+            }
+            SpotId::Annuna__East_Bridge__Upper_West_Gap => {
+                write!(f, "{}", "Annuna > East Bridge > Upper West Gap")
+            }
+            SpotId::Annuna__East_Bridge__Upper_West_Gap_East => {
+                write!(f, "{}", "Annuna > East Bridge > Upper West Gap East")
+            }
+            SpotId::Annuna__East_Bridge__West_24 => {
+                write!(f, "{}", "Annuna > East Bridge > West 24")
+            }
+            SpotId::Annuna__East_Bridge__West_25_Lower => {
+                write!(f, "{}", "Annuna > East Bridge > West 25 Lower")
+            }
+            SpotId::Annuna__East_Bridge__West_25_Upper => {
+                write!(f, "{}", "Annuna > East Bridge > West 25 Upper")
+            }
+            SpotId::Annuna__East_Bridge__West_Staircase_Lower_East => {
+                write!(f, "{}", "Annuna > East Bridge > West Staircase Lower East")
+            }
+            SpotId::Annuna__East_Bridge__West_Staircase_Lower_West => {
+                write!(f, "{}", "Annuna > East Bridge > West Staircase Lower West")
+            }
+            SpotId::Annuna__East_Bridge__West_Staircase_Upper_East => {
+                write!(f, "{}", "Annuna > East Bridge > West Staircase Upper East")
+            }
+            SpotId::Annuna__East_Bridge__West_Staircase_Upper_West => {
+                write!(f, "{}", "Annuna > East Bridge > West Staircase Upper West")
+            }
+            SpotId::Annuna__East_Bridge__West_Under_Gap => {
+                write!(f, "{}", "Annuna > East Bridge > West Under Gap")
+            }
+            SpotId::Annuna__Mirror_Match__Below_Switch => {
+                write!(f, "{}", "Annuna > Mirror Match > Below Switch")
+            }
+            SpotId::Annuna__Mirror_Match__Central_Pillar => {
+                write!(f, "{}", "Annuna > Mirror Match > Central Pillar")
+            }
+            SpotId::Annuna__Mirror_Match__East_25_Lower => {
+                write!(f, "{}", "Annuna > Mirror Match > East 25 Lower")
+            }
+            SpotId::Annuna__Mirror_Match__East_25_Upper => {
+                write!(f, "{}", "Annuna > Mirror Match > East 25 Upper")
+            }
+            SpotId::Annuna__Mirror_Match__East_26_Lower => {
+                write!(f, "{}", "Annuna > Mirror Match > East 26 Lower")
+            }
+            SpotId::Annuna__Mirror_Match__East_26_Upper => {
+                write!(f, "{}", "Annuna > Mirror Match > East 26 Upper")
+            }
+            SpotId::Annuna__Mirror_Match__Eastward => {
+                write!(f, "{}", "Annuna > Mirror Match > Eastward")
+            }
+            SpotId::Annuna__Mirror_Match__Plinth => {
+                write!(f, "{}", "Annuna > Mirror Match > Plinth")
+            }
+            SpotId::Annuna__Mirror_Match__Save_Point => {
+                write!(f, "{}", "Annuna > Mirror Match > Save Point")
+            }
+            SpotId::Annuna__Mirror_Match__Staircase => {
+                write!(f, "{}", "Annuna > Mirror Match > Staircase")
+            }
+            SpotId::Annuna__Mirror_Match__Waving_Distance => {
+                write!(f, "{}", "Annuna > Mirror Match > Waving Distance")
+            }
+            SpotId::Annuna__Mirror_Match__West_25 => {
+                write!(f, "{}", "Annuna > Mirror Match > West 25")
+            }
+            SpotId::Annuna__Mirror_Match__West_Gap => {
+                write!(f, "{}", "Annuna > Mirror Match > West Gap")
+            }
+            SpotId::Annuna__West_Bridge__East_24 => {
+                write!(f, "{}", "Annuna > West Bridge > East 24")
+            }
+            SpotId::Annuna__West_Bridge__East_25_Lower => {
+                write!(f, "{}", "Annuna > West Bridge > East 25 Lower")
+            }
+            SpotId::Annuna__West_Bridge__East_25_Upper => {
+                write!(f, "{}", "Annuna > West Bridge > East 25 Upper")
+            }
             SpotId::Annuna__West_Bridge__Plinth => write!(f, "{}", "Annuna > West Bridge > Plinth"),
-            SpotId::Annuna__West_Bridge__West_25_Lower => write!(f, "{}", "Annuna > West Bridge > West 25 Lower"),
-            SpotId::Annuna__West_Bridge__West_25_Upper => write!(f, "{}", "Annuna > West Bridge > West 25 Upper"),
-            SpotId::Annuna__West_Bridge__West_26_Lower => write!(f, "{}", "Annuna > West Bridge > West 26 Lower"),
-            SpotId::Annuna__West_Bridge__West_26_Upper => write!(f, "{}", "Annuna > West Bridge > West 26 Upper"),
-            SpotId::Annuna__West_Bridge__West_Outcropping => write!(f, "{}", "Annuna > West Bridge > West Outcropping"),
-            SpotId::Antarctica__Building_1E__Connector => write!(f, "{}", "Antarctica > Building 1E > Connector"),
-            SpotId::Antarctica__Building_1E__East_Entry => write!(f, "{}", "Antarctica > Building 1E > East Entry"),
-            SpotId::Antarctica__Building_1W__Connector => write!(f, "{}", "Antarctica > Building 1W > Connector"),
-            SpotId::Antarctica__Building_1W__West_Entry => write!(f, "{}", "Antarctica > Building 1W > West Entry"),
-            SpotId::Antarctica__Building_2__Behind_Boxes => write!(f, "{}", "Antarctica > Building 2 > Behind Boxes"),
-            SpotId::Antarctica__Building_2__Entry => write!(f, "{}", "Antarctica > Building 2 > Entry"),
-            SpotId::Antarctica__Building_2__Stairs => write!(f, "{}", "Antarctica > Building 2 > Stairs"),
-            SpotId::Antarctica__Building_2__Upper_Door => write!(f, "{}", "Antarctica > Building 2 > Upper Door"),
-            SpotId::Antarctica__East__Building_1_Entry => write!(f, "{}", "Antarctica > East > Building 1 Entry"),
-            SpotId::Antarctica__East__Building_2_Entry => write!(f, "{}", "Antarctica > East > Building 2 Entry"),
-            SpotId::Antarctica__East__Building_2_Upper => write!(f, "{}", "Antarctica > East > Building 2 Upper"),
-            SpotId::Antarctica__East__Save_Point => write!(f, "{}", "Antarctica > East > Save Point"),
-            SpotId::Antarctica__Freight_Elevator__Controls => write!(f, "{}", "Antarctica > Freight Elevator > Controls"),
-            SpotId::Antarctica__Freight_Elevator__Left => write!(f, "{}", "Antarctica > Freight Elevator > Left"),
-            SpotId::Antarctica__Power_Room__Entry => write!(f, "{}", "Antarctica > Power Room > Entry"),
-            SpotId::Antarctica__Power_Room__Switch => write!(f, "{}", "Antarctica > Power Room > Switch"),
+            SpotId::Annuna__West_Bridge__West_25_Lower => {
+                write!(f, "{}", "Annuna > West Bridge > West 25 Lower")
+            }
+            SpotId::Annuna__West_Bridge__West_25_Upper => {
+                write!(f, "{}", "Annuna > West Bridge > West 25 Upper")
+            }
+            SpotId::Annuna__West_Bridge__West_26_Lower => {
+                write!(f, "{}", "Annuna > West Bridge > West 26 Lower")
+            }
+            SpotId::Annuna__West_Bridge__West_26_Upper => {
+                write!(f, "{}", "Annuna > West Bridge > West 26 Upper")
+            }
+            SpotId::Annuna__West_Bridge__West_Outcropping => {
+                write!(f, "{}", "Annuna > West Bridge > West Outcropping")
+            }
+            SpotId::Antarctica__Building_1E__Connector => {
+                write!(f, "{}", "Antarctica > Building 1E > Connector")
+            }
+            SpotId::Antarctica__Building_1E__East_Entry => {
+                write!(f, "{}", "Antarctica > Building 1E > East Entry")
+            }
+            SpotId::Antarctica__Building_1W__Connector => {
+                write!(f, "{}", "Antarctica > Building 1W > Connector")
+            }
+            SpotId::Antarctica__Building_1W__West_Entry => {
+                write!(f, "{}", "Antarctica > Building 1W > West Entry")
+            }
+            SpotId::Antarctica__Building_2__Behind_Boxes => {
+                write!(f, "{}", "Antarctica > Building 2 > Behind Boxes")
+            }
+            SpotId::Antarctica__Building_2__Entry => {
+                write!(f, "{}", "Antarctica > Building 2 > Entry")
+            }
+            SpotId::Antarctica__Building_2__Stairs => {
+                write!(f, "{}", "Antarctica > Building 2 > Stairs")
+            }
+            SpotId::Antarctica__Building_2__Upper_Door => {
+                write!(f, "{}", "Antarctica > Building 2 > Upper Door")
+            }
+            SpotId::Antarctica__East__Building_1_Entry => {
+                write!(f, "{}", "Antarctica > East > Building 1 Entry")
+            }
+            SpotId::Antarctica__East__Building_2_Entry => {
+                write!(f, "{}", "Antarctica > East > Building 2 Entry")
+            }
+            SpotId::Antarctica__East__Building_2_Upper => {
+                write!(f, "{}", "Antarctica > East > Building 2 Upper")
+            }
+            SpotId::Antarctica__East__Save_Point => {
+                write!(f, "{}", "Antarctica > East > Save Point")
+            }
+            SpotId::Antarctica__Freight_Elevator__Controls => {
+                write!(f, "{}", "Antarctica > Freight Elevator > Controls")
+            }
+            SpotId::Antarctica__Freight_Elevator__Left => {
+                write!(f, "{}", "Antarctica > Freight Elevator > Left")
+            }
+            SpotId::Antarctica__Power_Room__Entry => {
+                write!(f, "{}", "Antarctica > Power Room > Entry")
+            }
+            SpotId::Antarctica__Power_Room__Switch => {
+                write!(f, "{}", "Antarctica > Power Room > Switch")
+            }
             SpotId::Antarctica__Shed__Interior => write!(f, "{}", "Antarctica > Shed > Interior"),
-            SpotId::Antarctica__Top__Power_Entry => write!(f, "{}", "Antarctica > Top > Power Entry"),
+            SpotId::Antarctica__Top__Power_Entry => {
+                write!(f, "{}", "Antarctica > Top > Power Entry")
+            }
             SpotId::Antarctica__West__Boxes => write!(f, "{}", "Antarctica > West > Boxes"),
             SpotId::Antarctica__West__Helipad => write!(f, "{}", "Antarctica > West > Helipad"),
-            SpotId::Antarctica__West__Shed_Entry => write!(f, "{}", "Antarctica > West > Shed Entry"),
-            SpotId::Ebih__Base_Camp__Behind_Vehicle => write!(f, "{}", "Ebih > Base Camp > Behind Vehicle"),
-            SpotId::Ebih__Base_Camp__Building_Entry => write!(f, "{}", "Ebih > Base Camp > Building Entry"),
-            SpotId::Ebih__Base_Camp__Bunker_Entry => write!(f, "{}", "Ebih > Base Camp > Bunker Entry"),
+            SpotId::Antarctica__West__Shed_Entry => {
+                write!(f, "{}", "Antarctica > West > Shed Entry")
+            }
+            SpotId::Ebih__Base_Camp__Behind_Vehicle => {
+                write!(f, "{}", "Ebih > Base Camp > Behind Vehicle")
+            }
+            SpotId::Ebih__Base_Camp__Building_Entry => {
+                write!(f, "{}", "Ebih > Base Camp > Building Entry")
+            }
+            SpotId::Ebih__Base_Camp__Bunker_Entry => {
+                write!(f, "{}", "Ebih > Base Camp > Bunker Entry")
+            }
             SpotId::Ebih__Base_Camp__East_11 => write!(f, "{}", "Ebih > Base Camp > East 11"),
             SpotId::Ebih__Base_Camp__East_12 => write!(f, "{}", "Ebih > Base Camp > East 12"),
-            SpotId::Ebih__Base_Camp__Lake_Access => write!(f, "{}", "Ebih > Base Camp > Lake Access"),
-            SpotId::Ebih__Base_Camp__Left_Platform => write!(f, "{}", "Ebih > Base Camp > Left Platform"),
-            SpotId::Ebih__Base_Camp__Left_Platform_Moved => write!(f, "{}", "Ebih > Base Camp > Left Platform Moved"),
+            SpotId::Ebih__Base_Camp__Lake_Access => {
+                write!(f, "{}", "Ebih > Base Camp > Lake Access")
+            }
+            SpotId::Ebih__Base_Camp__Left_Platform => {
+                write!(f, "{}", "Ebih > Base Camp > Left Platform")
+            }
+            SpotId::Ebih__Base_Camp__Left_Platform_Moved => {
+                write!(f, "{}", "Ebih > Base Camp > Left Platform Moved")
+            }
             SpotId::Ebih__Base_Camp__Save_Point => write!(f, "{}", "Ebih > Base Camp > Save Point"),
             SpotId::Ebih__Base_Camp__Staircase => write!(f, "{}", "Ebih > Base Camp > Staircase"),
             SpotId::Ebih__Base_Camp__Tent_Entry => write!(f, "{}", "Ebih > Base Camp > Tent Entry"),
-            SpotId::Ebih__Base_Camp__Top_Platform => write!(f, "{}", "Ebih > Base Camp > Top Platform"),
+            SpotId::Ebih__Base_Camp__Top_Platform => {
+                write!(f, "{}", "Ebih > Base Camp > Top Platform")
+            }
             SpotId::Ebih__Base_Camp__West_11 => write!(f, "{}", "Ebih > Base Camp > West 11"),
             SpotId::Ebih__Base_Camp__West_12 => write!(f, "{}", "Ebih > Base Camp > West 12"),
             SpotId::Ebih__Base_Camp__West_13 => write!(f, "{}", "Ebih > Base Camp > West 13"),
-            SpotId::Ebih__Base_Camp__West_Midair => write!(f, "{}", "Ebih > Base Camp > West Midair"),
+            SpotId::Ebih__Base_Camp__West_Midair => {
+                write!(f, "{}", "Ebih > Base Camp > West Midair")
+            }
             SpotId::Ebih__Boss_Room__Boss => write!(f, "{}", "Ebih > Boss Room > Boss"),
             SpotId::Ebih__Boss_Room__East_4 => write!(f, "{}", "Ebih > Boss Room > East 4"),
             SpotId::Ebih__Boss_Room__East_6 => write!(f, "{}", "Ebih > Boss Room > East 6"),
             SpotId::Ebih__Boss_Room__East_Ledge => write!(f, "{}", "Ebih > Boss Room > East Ledge"),
-            SpotId::Ebih__Boss_Room__High_Platform => write!(f, "{}", "Ebih > Boss Room > High Platform"),
-            SpotId::Ebih__Boss_Room__Lower_Ledge => write!(f, "{}", "Ebih > Boss Room > Lower Ledge"),
+            SpotId::Ebih__Boss_Room__High_Platform => {
+                write!(f, "{}", "Ebih > Boss Room > High Platform")
+            }
+            SpotId::Ebih__Boss_Room__Lower_Ledge => {
+                write!(f, "{}", "Ebih > Boss Room > Lower Ledge")
+            }
             SpotId::Ebih__Boss_Room__Lower_Tree => write!(f, "{}", "Ebih > Boss Room > Lower Tree"),
             SpotId::Ebih__Boss_Room__Past_Boss => write!(f, "{}", "Ebih > Boss Room > Past Boss"),
             SpotId::Ebih__Boss_Room__Upper_Tree => write!(f, "{}", "Ebih > Boss Room > Upper Tree"),
             SpotId::Ebih__Boss_Room__West_5 => write!(f, "{}", "Ebih > Boss Room > West 5"),
             SpotId::Ebih__Boss_Room__West_6 => write!(f, "{}", "Ebih > Boss Room > West 6"),
             SpotId::Ebih__By_Garage__Crawlspace => write!(f, "{}", "Ebih > By Garage > Crawlspace"),
-            SpotId::Ebih__By_Garage__Crawlspace_Opening => write!(f, "{}", "Ebih > By Garage > Crawlspace Opening"),
+            SpotId::Ebih__By_Garage__Crawlspace_Opening => {
+                write!(f, "{}", "Ebih > By Garage > Crawlspace Opening")
+            }
             SpotId::Ebih__By_Garage__East_12 => write!(f, "{}", "Ebih > By Garage > East 12"),
             SpotId::Ebih__By_Garage__East_13 => write!(f, "{}", "Ebih > By Garage > East 13"),
-            SpotId::Ebih__By_Garage__East_Below_Platforms => write!(f, "{}", "Ebih > By Garage > East Below Platforms"),
+            SpotId::Ebih__By_Garage__East_Below_Platforms => {
+                write!(f, "{}", "Ebih > By Garage > East Below Platforms")
+            }
             SpotId::Ebih__By_Garage__East_Bush => write!(f, "{}", "Ebih > By Garage > East Bush"),
-            SpotId::Ebih__By_Garage__East_Platform => write!(f, "{}", "Ebih > By Garage > East Platform"),
-            SpotId::Ebih__By_Garage__Garage_Entry => write!(f, "{}", "Ebih > By Garage > Garage Entry"),
-            SpotId::Ebih__By_Garage__Lower_Platform => write!(f, "{}", "Ebih > By Garage > Lower Platform"),
-            SpotId::Ebih__By_Garage__Outcropping => write!(f, "{}", "Ebih > By Garage > Outcropping"),
+            SpotId::Ebih__By_Garage__East_Platform => {
+                write!(f, "{}", "Ebih > By Garage > East Platform")
+            }
+            SpotId::Ebih__By_Garage__Garage_Entry => {
+                write!(f, "{}", "Ebih > By Garage > Garage Entry")
+            }
+            SpotId::Ebih__By_Garage__Lower_Platform => {
+                write!(f, "{}", "Ebih > By Garage > Lower Platform")
+            }
+            SpotId::Ebih__By_Garage__Outcropping => {
+                write!(f, "{}", "Ebih > By Garage > Outcropping")
+            }
             SpotId::Ebih__By_Garage__West_12 => write!(f, "{}", "Ebih > By Garage > West 12"),
             SpotId::Ebih__By_Garage__West_13 => write!(f, "{}", "Ebih > By Garage > West 13"),
-            SpotId::Ebih__By_Garage__West_Below_Platforms => write!(f, "{}", "Ebih > By Garage > West Below Platforms"),
+            SpotId::Ebih__By_Garage__West_Below_Platforms => {
+                write!(f, "{}", "Ebih > By Garage > West Below Platforms")
+            }
             SpotId::Ebih__By_Garage__West_Bush => write!(f, "{}", "Ebih > By Garage > West Bush"),
             SpotId::Ebih__Drone_Room__East_4 => write!(f, "{}", "Ebih > Drone Room > East 4"),
             SpotId::Ebih__Drone_Room__Item => write!(f, "{}", "Ebih > Drone Room > Item"),
-            SpotId::Ebih__Drone_Room__Left_Platform => write!(f, "{}", "Ebih > Drone Room > Left Platform"),
-            SpotId::Ebih__Drone_Room__Middle_Platform => write!(f, "{}", "Ebih > Drone Room > Middle Platform"),
-            SpotId::Ebih__Drone_Room__Moving_Platform => write!(f, "{}", "Ebih > Drone Room > Moving Platform"),
+            SpotId::Ebih__Drone_Room__Left_Platform => {
+                write!(f, "{}", "Ebih > Drone Room > Left Platform")
+            }
+            SpotId::Ebih__Drone_Room__Middle_Platform => {
+                write!(f, "{}", "Ebih > Drone Room > Middle Platform")
+            }
+            SpotId::Ebih__Drone_Room__Moving_Platform => {
+                write!(f, "{}", "Ebih > Drone Room > Moving Platform")
+            }
             SpotId::Ebih__Drone_Room__Pit_Left => write!(f, "{}", "Ebih > Drone Room > Pit Left"),
             SpotId::Ebih__Drone_Room__Portal => write!(f, "{}", "Ebih > Drone Room > Portal"),
-            SpotId::Ebih__Drone_Room__Portal_Exit => write!(f, "{}", "Ebih > Drone Room > Portal Exit"),
+            SpotId::Ebih__Drone_Room__Portal_Exit => {
+                write!(f, "{}", "Ebih > Drone Room > Portal Exit")
+            }
             SpotId::Ebih__Drone_Room__Tree => write!(f, "{}", "Ebih > Drone Room > Tree"),
             SpotId::Ebih__Drone_Room__West_4 => write!(f, "{}", "Ebih > Drone Room > West 4"),
             SpotId::Ebih__Drone_Room__West_6 => write!(f, "{}", "Ebih > Drone Room > West 6"),
@@ -548,20 +2194,36 @@ impl fmt::Display for SpotId {
             SpotId::Ebih__Ebih_East__East_Hill => write!(f, "{}", "Ebih > Ebih East > East Hill"),
             SpotId::Ebih__Ebih_East__East_Ledge => write!(f, "{}", "Ebih > Ebih East > East Ledge"),
             SpotId::Ebih__Ebih_East__Ledge_End => write!(f, "{}", "Ebih > Ebih East > Ledge End"),
-            SpotId::Ebih__Ebih_East__Lower_Moving_Platform => write!(f, "{}", "Ebih > Ebih East > Lower Moving Platform"),
-            SpotId::Ebih__Ebih_East__Middle_Platform => write!(f, "{}", "Ebih > Ebih East > Middle Platform"),
-            SpotId::Ebih__Ebih_East__Moving_Platform => write!(f, "{}", "Ebih > Ebih East > Moving Platform"),
-            SpotId::Ebih__Ebih_East__Upper_Ledge => write!(f, "{}", "Ebih > Ebih East > Upper Ledge"),
+            SpotId::Ebih__Ebih_East__Lower_Moving_Platform => {
+                write!(f, "{}", "Ebih > Ebih East > Lower Moving Platform")
+            }
+            SpotId::Ebih__Ebih_East__Middle_Platform => {
+                write!(f, "{}", "Ebih > Ebih East > Middle Platform")
+            }
+            SpotId::Ebih__Ebih_East__Moving_Platform => {
+                write!(f, "{}", "Ebih > Ebih East > Moving Platform")
+            }
+            SpotId::Ebih__Ebih_East__Upper_Ledge => {
+                write!(f, "{}", "Ebih > Ebih East > Upper Ledge")
+            }
             SpotId::Ebih__Ebih_East__West_7 => write!(f, "{}", "Ebih > Ebih East > West 7"),
             SpotId::Ebih__Ebih_East__West_8 => write!(f, "{}", "Ebih > Ebih East > West 8"),
-            SpotId::Ebih__Ebih_West__Above_Alcove => write!(f, "{}", "Ebih > Ebih West > Above Alcove"),
-            SpotId::Ebih__Ebih_West__Above_Chute => write!(f, "{}", "Ebih > Ebih West > Above Chute"),
+            SpotId::Ebih__Ebih_West__Above_Alcove => {
+                write!(f, "{}", "Ebih > Ebih West > Above Alcove")
+            }
+            SpotId::Ebih__Ebih_West__Above_Chute => {
+                write!(f, "{}", "Ebih > Ebih West > Above Chute")
+            }
             SpotId::Ebih__Ebih_West__Above_Door => write!(f, "{}", "Ebih > Ebih West > Above Door"),
             SpotId::Ebih__Ebih_West__Alcove => write!(f, "{}", "Ebih > Ebih West > Alcove"),
-            SpotId::Ebih__Ebih_West__Alcove_Entrance => write!(f, "{}", "Ebih > Ebih West > Alcove Entrance"),
+            SpotId::Ebih__Ebih_West__Alcove_Entrance => {
+                write!(f, "{}", "Ebih > Ebih West > Alcove Entrance")
+            }
             SpotId::Ebih__Ebih_West__Below_Door => write!(f, "{}", "Ebih > Ebih West > Below Door"),
             SpotId::Ebih__Ebih_West__Block_Left => write!(f, "{}", "Ebih > Ebih West > Block Left"),
-            SpotId::Ebih__Ebih_West__Block_Right => write!(f, "{}", "Ebih > Ebih West > Block Right"),
+            SpotId::Ebih__Ebih_West__Block_Right => {
+                write!(f, "{}", "Ebih > Ebih West > Block Right")
+            }
             SpotId::Ebih__Ebih_West__East_10 => write!(f, "{}", "Ebih > Ebih West > East 10"),
             SpotId::Ebih__Ebih_West__East_11 => write!(f, "{}", "Ebih > Ebih West > East 11"),
             SpotId::Ebih__Ebih_West__East_13 => write!(f, "{}", "Ebih > Ebih West > East 13"),
@@ -569,20 +2231,40 @@ impl fmt::Display for SpotId {
             SpotId::Ebih__Ebih_West__East_7 => write!(f, "{}", "Ebih > Ebih West > East 7"),
             SpotId::Ebih__Ebih_West__East_8 => write!(f, "{}", "Ebih > Ebih West > East 8"),
             SpotId::Ebih__Ebih_West__East_9 => write!(f, "{}", "Ebih > Ebih West > East 9"),
-            SpotId::Ebih__Ebih_West__Giguna_Pillar => write!(f, "{}", "Ebih > Ebih West > Giguna Pillar"),
+            SpotId::Ebih__Ebih_West__Giguna_Pillar => {
+                write!(f, "{}", "Ebih > Ebih West > Giguna Pillar")
+            }
             SpotId::Ebih__Ebih_West__High_Ledge => write!(f, "{}", "Ebih > Ebih West > High Ledge"),
-            SpotId::Ebih__Ebih_West__High_Platform => write!(f, "{}", "Ebih > Ebih West > High Platform"),
-            SpotId::Ebih__Ebih_West__Left_of_Gap => write!(f, "{}", "Ebih > Ebih West > Left of Gap"),
-            SpotId::Ebih__Ebih_West__Left_of_Switch => write!(f, "{}", "Ebih > Ebih West > Left of Switch"),
-            SpotId::Ebih__Ebih_West__Lower_Cliff => write!(f, "{}", "Ebih > Ebih West > Lower Cliff"),
+            SpotId::Ebih__Ebih_West__High_Platform => {
+                write!(f, "{}", "Ebih > Ebih West > High Platform")
+            }
+            SpotId::Ebih__Ebih_West__Left_of_Gap => {
+                write!(f, "{}", "Ebih > Ebih West > Left of Gap")
+            }
+            SpotId::Ebih__Ebih_West__Left_of_Switch => {
+                write!(f, "{}", "Ebih > Ebih West > Left of Switch")
+            }
+            SpotId::Ebih__Ebih_West__Lower_Cliff => {
+                write!(f, "{}", "Ebih > Ebih West > Lower Cliff")
+            }
             SpotId::Ebih__Ebih_West__Lower_Hill => write!(f, "{}", "Ebih > Ebih West > Lower Hill"),
-            SpotId::Ebih__Ebih_West__Lower_Platform => write!(f, "{}", "Ebih > Ebih West > Lower Platform"),
+            SpotId::Ebih__Ebih_West__Lower_Platform => {
+                write!(f, "{}", "Ebih > Ebih West > Lower Platform")
+            }
             SpotId::Ebih__Ebih_West__Lower_Save => write!(f, "{}", "Ebih > Ebih West > Lower Save"),
-            SpotId::Ebih__Ebih_West__Medium_High_Platform => write!(f, "{}", "Ebih > Ebih West > Medium High Platform"),
+            SpotId::Ebih__Ebih_West__Medium_High_Platform => {
+                write!(f, "{}", "Ebih > Ebih West > Medium High Platform")
+            }
             SpotId::Ebih__Ebih_West__Mid_Save => write!(f, "{}", "Ebih > Ebih West > Mid Save"),
-            SpotId::Ebih__Ebih_West__Middle_Cliff => write!(f, "{}", "Ebih > Ebih West > Middle Cliff"),
-            SpotId::Ebih__Ebih_West__Middle_Middle => write!(f, "{}", "Ebih > Ebih West > Middle Middle"),
-            SpotId::Ebih__Ebih_West__Refill_Station => write!(f, "{}", "Ebih > Ebih West > Refill Station"),
+            SpotId::Ebih__Ebih_West__Middle_Cliff => {
+                write!(f, "{}", "Ebih > Ebih West > Middle Cliff")
+            }
+            SpotId::Ebih__Ebih_West__Middle_Middle => {
+                write!(f, "{}", "Ebih > Ebih West > Middle Middle")
+            }
+            SpotId::Ebih__Ebih_West__Refill_Station => {
+                write!(f, "{}", "Ebih > Ebih West > Refill Station")
+            }
             SpotId::Ebih__Ebih_West__Small_Gap => write!(f, "{}", "Ebih > Ebih West > Small Gap"),
             SpotId::Ebih__Ebih_West__Upper_Save => write!(f, "{}", "Ebih > Ebih West > Upper Save"),
             SpotId::Ebih__Ebih_West__West_11 => write!(f, "{}", "Ebih > Ebih West > West 11"),
@@ -590,88 +2272,214 @@ impl fmt::Display for SpotId {
             SpotId::Ebih__Ebih_West__West_13 => write!(f, "{}", "Ebih > Ebih West > West 13"),
             SpotId::Ebih__Ebih_West__West_9 => write!(f, "{}", "Ebih > Ebih West > West 9"),
             SpotId::Ebih__Ebih_West__West_Fork => write!(f, "{}", "Ebih > Ebih West > West Fork"),
-            SpotId::Ebih__Ebih_West__West_High_Cliff => write!(f, "{}", "Ebih > Ebih West > West High Cliff"),
+            SpotId::Ebih__Ebih_West__West_High_Cliff => {
+                write!(f, "{}", "Ebih > Ebih West > West High Cliff")
+            }
             SpotId::Ebih__Gem_Room__West_13 => write!(f, "{}", "Ebih > Gem Room > West 13"),
             SpotId::Ebih__Grid_21_2_6__East_6 => write!(f, "{}", "Ebih > Grid 21,2-6 > East 6"),
-            SpotId::Ebih__Grid_21_2_6__Portal_Stand => write!(f, "{}", "Ebih > Grid 21,2-6 > Portal Stand"),
+            SpotId::Ebih__Grid_21_2_6__Portal_Stand => {
+                write!(f, "{}", "Ebih > Grid 21,2-6 > Portal Stand")
+            }
             SpotId::Ebih__Grid_21_2_6__West_6 => write!(f, "{}", "Ebih > Grid 21,2-6 > West 6"),
-            SpotId::Ebih__Grid_25_10_12__Below_Bush => write!(f, "{}", "Ebih > Grid 25,10-12 > Below Bush"),
+            SpotId::Ebih__Grid_25_10_12__Below_Bush => {
+                write!(f, "{}", "Ebih > Grid 25,10-12 > Below Bush")
+            }
             SpotId::Ebih__Grid_25_10_12__Bush => write!(f, "{}", "Ebih > Grid 25,10-12 > Bush"),
             SpotId::Ebih__Grid_25_10_12__Door => write!(f, "{}", "Ebih > Grid 25,10-12 > Door"),
-            SpotId::Ebih__Grid_25_10_12__Door_Left => write!(f, "{}", "Ebih > Grid 25,10-12 > Door Left"),
-            SpotId::Ebih__Grid_25_10_12__East_10 => write!(f, "{}", "Ebih > Grid 25,10-12 > East 10"),
-            SpotId::Ebih__Grid_25_10_12__East_11 => write!(f, "{}", "Ebih > Grid 25,10-12 > East 11"),
-            SpotId::Ebih__Grid_25_10_12__East_12 => write!(f, "{}", "Ebih > Grid 25,10-12 > East 12"),
-            SpotId::Ebih__Grid_25_10_12__Hidden_Bush => write!(f, "{}", "Ebih > Grid 25,10-12 > Hidden Bush"),
-            SpotId::Ebih__Grid_25_10_12__Mid_Ledge => write!(f, "{}", "Ebih > Grid 25,10-12 > Mid-Ledge"),
-            SpotId::Ebih__Grid_25_10_12__Top_Platform => write!(f, "{}", "Ebih > Grid 25,10-12 > Top Platform"),
-            SpotId::Ebih__Grid_25_10_12__West_10 => write!(f, "{}", "Ebih > Grid 25,10-12 > West 10"),
-            SpotId::Ebih__Grid_25_10_12__West_11 => write!(f, "{}", "Ebih > Grid 25,10-12 > West 11"),
-            SpotId::Ebih__Grid_25_10_12__West_12 => write!(f, "{}", "Ebih > Grid 25,10-12 > West 12"),
+            SpotId::Ebih__Grid_25_10_12__Door_Left => {
+                write!(f, "{}", "Ebih > Grid 25,10-12 > Door Left")
+            }
+            SpotId::Ebih__Grid_25_10_12__East_10 => {
+                write!(f, "{}", "Ebih > Grid 25,10-12 > East 10")
+            }
+            SpotId::Ebih__Grid_25_10_12__East_11 => {
+                write!(f, "{}", "Ebih > Grid 25,10-12 > East 11")
+            }
+            SpotId::Ebih__Grid_25_10_12__East_12 => {
+                write!(f, "{}", "Ebih > Grid 25,10-12 > East 12")
+            }
+            SpotId::Ebih__Grid_25_10_12__Hidden_Bush => {
+                write!(f, "{}", "Ebih > Grid 25,10-12 > Hidden Bush")
+            }
+            SpotId::Ebih__Grid_25_10_12__Mid_Ledge => {
+                write!(f, "{}", "Ebih > Grid 25,10-12 > Mid-Ledge")
+            }
+            SpotId::Ebih__Grid_25_10_12__Top_Platform => {
+                write!(f, "{}", "Ebih > Grid 25,10-12 > Top Platform")
+            }
+            SpotId::Ebih__Grid_25_10_12__West_10 => {
+                write!(f, "{}", "Ebih > Grid 25,10-12 > West 10")
+            }
+            SpotId::Ebih__Grid_25_10_12__West_11 => {
+                write!(f, "{}", "Ebih > Grid 25,10-12 > West 11")
+            }
+            SpotId::Ebih__Grid_25_10_12__West_12 => {
+                write!(f, "{}", "Ebih > Grid 25,10-12 > West 12")
+            }
             SpotId::Ebih__Grid_25_2_6__Pit => write!(f, "{}", "Ebih > Grid 25,2-6 > Pit"),
             SpotId::Ebih__Grid_25_2_6__West_4 => write!(f, "{}", "Ebih > Grid 25,2-6 > West 4"),
             SpotId::Ebih__Grid_26_10_11__Cliff => write!(f, "{}", "Ebih > Grid 26,10-11 > Cliff"),
-            SpotId::Ebih__Grid_26_10_11__East_10 => write!(f, "{}", "Ebih > Grid 26,10-11 > East 10"),
+            SpotId::Ebih__Grid_26_10_11__East_10 => {
+                write!(f, "{}", "Ebih > Grid 26,10-11 > East 10")
+            }
             SpotId::Ebih__Grid_26_10_11__Ledge => write!(f, "{}", "Ebih > Grid 26,10-11 > Ledge"),
-            SpotId::Ebih__Grid_26_10_11__Middle_Bottom => write!(f, "{}", "Ebih > Grid 26,10-11 > Middle Bottom"),
-            SpotId::Ebih__Grid_26_10_11__Middle_Platform => write!(f, "{}", "Ebih > Grid 26,10-11 > Middle Platform"),
-            SpotId::Ebih__Grid_26_10_11__Under_Ledge => write!(f, "{}", "Ebih > Grid 26,10-11 > Under Ledge"),
-            SpotId::Ebih__Grid_26_10_11__Upper_Platform => write!(f, "{}", "Ebih > Grid 26,10-11 > Upper Platform"),
-            SpotId::Ebih__Grid_26_10_11__West_10 => write!(f, "{}", "Ebih > Grid 26,10-11 > West 10"),
-            SpotId::Ebih__Grid_26_10_11__West_11 => write!(f, "{}", "Ebih > Grid 26,10-11 > West 11"),
-            SpotId::Ebih__Observation_Tower_Room__Cliff => write!(f, "{}", "Ebih > Observation Tower Room > Cliff"),
-            SpotId::Ebih__Observation_Tower_Room__East_11 => write!(f, "{}", "Ebih > Observation Tower Room > East 11"),
-            SpotId::Ebih__Observation_Tower_Room__Tower_Bottom => write!(f, "{}", "Ebih > Observation Tower Room > Tower Bottom"),
-            SpotId::Ebih__Observation_Tower_Room__Tower_Top => write!(f, "{}", "Ebih > Observation Tower Room > Tower Top"),
-            SpotId::Ebih__Observation_Tower_Room__West_10 => write!(f, "{}", "Ebih > Observation Tower Room > West 10"),
-            SpotId::Ebih__Observation_Tower_Room__West_9 => write!(f, "{}", "Ebih > Observation Tower Room > West 9"),
-            SpotId::Ebih__Vertical_Interchange__Below_Door => write!(f, "{}", "Ebih > Vertical Interchange > Below Door"),
-            SpotId::Ebih__Vertical_Interchange__Block_Cubby => write!(f, "{}", "Ebih > Vertical Interchange > Block Cubby"),
-            SpotId::Ebih__Vertical_Interchange__Blocked_Refill_Station => write!(f, "{}", "Ebih > Vertical Interchange > Blocked Refill Station"),
-            SpotId::Ebih__Vertical_Interchange__Cliff_by_Refill => write!(f, "{}", "Ebih > Vertical Interchange > Cliff by Refill"),
-            SpotId::Ebih__Vertical_Interchange__Cubby_Exit => write!(f, "{}", "Ebih > Vertical Interchange > Cubby Exit"),
-            SpotId::Ebih__Vertical_Interchange__Door => write!(f, "{}", "Ebih > Vertical Interchange > Door"),
-            SpotId::Ebih__Vertical_Interchange__Door_East => write!(f, "{}", "Ebih > Vertical Interchange > Door East"),
-            SpotId::Ebih__Vertical_Interchange__Door_West => write!(f, "{}", "Ebih > Vertical Interchange > Door West"),
-            SpotId::Ebih__Vertical_Interchange__East_13 => write!(f, "{}", "Ebih > Vertical Interchange > East 13"),
-            SpotId::Ebih__Vertical_Interchange__East_15 => write!(f, "{}", "Ebih > Vertical Interchange > East 15"),
-            SpotId::Ebih__Vertical_Interchange__East_Tunnel => write!(f, "{}", "Ebih > Vertical Interchange > East Tunnel"),
-            SpotId::Ebih__Vertical_Interchange__Lower_West_Cliff => write!(f, "{}", "Ebih > Vertical Interchange > Lower West Cliff"),
-            SpotId::Ebih__Vertical_Interchange__Middle_Descent => write!(f, "{}", "Ebih > Vertical Interchange > Middle Descent"),
-            SpotId::Ebih__Vertical_Interchange__Middle_Drop => write!(f, "{}", "Ebih > Vertical Interchange > Middle Drop"),
-            SpotId::Ebih__Vertical_Interchange__Passage_East => write!(f, "{}", "Ebih > Vertical Interchange > Passage East"),
-            SpotId::Ebih__Vertical_Interchange__Passage_West => write!(f, "{}", "Ebih > Vertical Interchange > Passage West"),
-            SpotId::Ebih__Vertical_Interchange__Refill_Station => write!(f, "{}", "Ebih > Vertical Interchange > Refill Station"),
-            SpotId::Ebih__Vertical_Interchange__South => write!(f, "{}", "Ebih > Vertical Interchange > South"),
-            SpotId::Ebih__Vertical_Interchange__Switch => write!(f, "{}", "Ebih > Vertical Interchange > Switch"),
-            SpotId::Ebih__Vertical_Interchange__West_13 => write!(f, "{}", "Ebih > Vertical Interchange > West 13"),
+            SpotId::Ebih__Grid_26_10_11__Middle_Bottom => {
+                write!(f, "{}", "Ebih > Grid 26,10-11 > Middle Bottom")
+            }
+            SpotId::Ebih__Grid_26_10_11__Middle_Platform => {
+                write!(f, "{}", "Ebih > Grid 26,10-11 > Middle Platform")
+            }
+            SpotId::Ebih__Grid_26_10_11__Under_Ledge => {
+                write!(f, "{}", "Ebih > Grid 26,10-11 > Under Ledge")
+            }
+            SpotId::Ebih__Grid_26_10_11__Upper_Platform => {
+                write!(f, "{}", "Ebih > Grid 26,10-11 > Upper Platform")
+            }
+            SpotId::Ebih__Grid_26_10_11__West_10 => {
+                write!(f, "{}", "Ebih > Grid 26,10-11 > West 10")
+            }
+            SpotId::Ebih__Grid_26_10_11__West_11 => {
+                write!(f, "{}", "Ebih > Grid 26,10-11 > West 11")
+            }
+            SpotId::Ebih__Observation_Tower_Room__Cliff => {
+                write!(f, "{}", "Ebih > Observation Tower Room > Cliff")
+            }
+            SpotId::Ebih__Observation_Tower_Room__East_11 => {
+                write!(f, "{}", "Ebih > Observation Tower Room > East 11")
+            }
+            SpotId::Ebih__Observation_Tower_Room__Tower_Bottom => {
+                write!(f, "{}", "Ebih > Observation Tower Room > Tower Bottom")
+            }
+            SpotId::Ebih__Observation_Tower_Room__Tower_Top => {
+                write!(f, "{}", "Ebih > Observation Tower Room > Tower Top")
+            }
+            SpotId::Ebih__Observation_Tower_Room__West_10 => {
+                write!(f, "{}", "Ebih > Observation Tower Room > West 10")
+            }
+            SpotId::Ebih__Observation_Tower_Room__West_9 => {
+                write!(f, "{}", "Ebih > Observation Tower Room > West 9")
+            }
+            SpotId::Ebih__Vertical_Interchange__Below_Door => {
+                write!(f, "{}", "Ebih > Vertical Interchange > Below Door")
+            }
+            SpotId::Ebih__Vertical_Interchange__Block_Cubby => {
+                write!(f, "{}", "Ebih > Vertical Interchange > Block Cubby")
+            }
+            SpotId::Ebih__Vertical_Interchange__Blocked_Refill_Station => write!(
+                f,
+                "{}",
+                "Ebih > Vertical Interchange > Blocked Refill Station"
+            ),
+            SpotId::Ebih__Vertical_Interchange__Cliff_by_Refill => {
+                write!(f, "{}", "Ebih > Vertical Interchange > Cliff by Refill")
+            }
+            SpotId::Ebih__Vertical_Interchange__Cubby_Exit => {
+                write!(f, "{}", "Ebih > Vertical Interchange > Cubby Exit")
+            }
+            SpotId::Ebih__Vertical_Interchange__Door => {
+                write!(f, "{}", "Ebih > Vertical Interchange > Door")
+            }
+            SpotId::Ebih__Vertical_Interchange__Door_East => {
+                write!(f, "{}", "Ebih > Vertical Interchange > Door East")
+            }
+            SpotId::Ebih__Vertical_Interchange__Door_West => {
+                write!(f, "{}", "Ebih > Vertical Interchange > Door West")
+            }
+            SpotId::Ebih__Vertical_Interchange__East_13 => {
+                write!(f, "{}", "Ebih > Vertical Interchange > East 13")
+            }
+            SpotId::Ebih__Vertical_Interchange__East_15 => {
+                write!(f, "{}", "Ebih > Vertical Interchange > East 15")
+            }
+            SpotId::Ebih__Vertical_Interchange__East_Tunnel => {
+                write!(f, "{}", "Ebih > Vertical Interchange > East Tunnel")
+            }
+            SpotId::Ebih__Vertical_Interchange__Lower_West_Cliff => {
+                write!(f, "{}", "Ebih > Vertical Interchange > Lower West Cliff")
+            }
+            SpotId::Ebih__Vertical_Interchange__Middle_Descent => {
+                write!(f, "{}", "Ebih > Vertical Interchange > Middle Descent")
+            }
+            SpotId::Ebih__Vertical_Interchange__Middle_Drop => {
+                write!(f, "{}", "Ebih > Vertical Interchange > Middle Drop")
+            }
+            SpotId::Ebih__Vertical_Interchange__Passage_East => {
+                write!(f, "{}", "Ebih > Vertical Interchange > Passage East")
+            }
+            SpotId::Ebih__Vertical_Interchange__Passage_West => {
+                write!(f, "{}", "Ebih > Vertical Interchange > Passage West")
+            }
+            SpotId::Ebih__Vertical_Interchange__Refill_Station => {
+                write!(f, "{}", "Ebih > Vertical Interchange > Refill Station")
+            }
+            SpotId::Ebih__Vertical_Interchange__South => {
+                write!(f, "{}", "Ebih > Vertical Interchange > South")
+            }
+            SpotId::Ebih__Vertical_Interchange__Switch => {
+                write!(f, "{}", "Ebih > Vertical Interchange > Switch")
+            }
+            SpotId::Ebih__Vertical_Interchange__West_13 => {
+                write!(f, "{}", "Ebih > Vertical Interchange > West 13")
+            }
             SpotId::Ebih__Waterfall__Alcove => write!(f, "{}", "Ebih > Waterfall > Alcove"),
-            SpotId::Ebih__Waterfall__Alcove_Left => write!(f, "{}", "Ebih > Waterfall > Alcove Left"),
-            SpotId::Ebih__Waterfall__Alcove_Right => write!(f, "{}", "Ebih > Waterfall > Alcove Right"),
-            SpotId::Ebih__Waterfall__Below_Left_Switch => write!(f, "{}", "Ebih > Waterfall > Below Left Switch"),
+            SpotId::Ebih__Waterfall__Alcove_Left => {
+                write!(f, "{}", "Ebih > Waterfall > Alcove Left")
+            }
+            SpotId::Ebih__Waterfall__Alcove_Right => {
+                write!(f, "{}", "Ebih > Waterfall > Alcove Right")
+            }
+            SpotId::Ebih__Waterfall__Below_Left_Switch => {
+                write!(f, "{}", "Ebih > Waterfall > Below Left Switch")
+            }
             SpotId::Ebih__Waterfall__Below_Tree => write!(f, "{}", "Ebih > Waterfall > Below Tree"),
             SpotId::Ebih__Waterfall__Big_Tree => write!(f, "{}", "Ebih > Waterfall > Big Tree"),
-            SpotId::Ebih__Waterfall__Cave_Entrance => write!(f, "{}", "Ebih > Waterfall > Cave Entrance"),
-            SpotId::Ebih__Waterfall__Center_Main_Path => write!(f, "{}", "Ebih > Waterfall > Center Main Path"),
+            SpotId::Ebih__Waterfall__Cave_Entrance => {
+                write!(f, "{}", "Ebih > Waterfall > Cave Entrance")
+            }
+            SpotId::Ebih__Waterfall__Center_Main_Path => {
+                write!(f, "{}", "Ebih > Waterfall > Center Main Path")
+            }
             SpotId::Ebih__Waterfall__East_10 => write!(f, "{}", "Ebih > Waterfall > East 10"),
             SpotId::Ebih__Waterfall__East_11 => write!(f, "{}", "Ebih > Waterfall > East 11"),
             SpotId::Ebih__Waterfall__East_7 => write!(f, "{}", "Ebih > Waterfall > East 7"),
             SpotId::Ebih__Waterfall__East_8 => write!(f, "{}", "Ebih > Waterfall > East 8"),
             SpotId::Ebih__Waterfall__East_Ledge => write!(f, "{}", "Ebih > Waterfall > East Ledge"),
-            SpotId::Ebih__Waterfall__Ledge_Below_Hole => write!(f, "{}", "Ebih > Waterfall > Ledge Below Hole"),
-            SpotId::Ebih__Waterfall__Lower_West_Tree => write!(f, "{}", "Ebih > Waterfall > Lower West Tree"),
-            SpotId::Ebih__Waterfall__Middle_West_Tree => write!(f, "{}", "Ebih > Waterfall > Middle West Tree"),
-            SpotId::Ebih__Waterfall__Near_East_Tree => write!(f, "{}", "Ebih > Waterfall > Near East Tree"),
+            SpotId::Ebih__Waterfall__Ledge_Below_Hole => {
+                write!(f, "{}", "Ebih > Waterfall > Ledge Below Hole")
+            }
+            SpotId::Ebih__Waterfall__Lower_West_Tree => {
+                write!(f, "{}", "Ebih > Waterfall > Lower West Tree")
+            }
+            SpotId::Ebih__Waterfall__Middle_West_Tree => {
+                write!(f, "{}", "Ebih > Waterfall > Middle West Tree")
+            }
+            SpotId::Ebih__Waterfall__Near_East_Tree => {
+                write!(f, "{}", "Ebih > Waterfall > Near East Tree")
+            }
             SpotId::Ebih__Waterfall__Platform => write!(f, "{}", "Ebih > Waterfall > Platform"),
-            SpotId::Ebih__Waterfall__Top_Waterfall => write!(f, "{}", "Ebih > Waterfall > Top Waterfall"),
-            SpotId::Ebih__Waterfall__Under_Waterfall => write!(f, "{}", "Ebih > Waterfall > Under Waterfall"),
+            SpotId::Ebih__Waterfall__Top_Waterfall => {
+                write!(f, "{}", "Ebih > Waterfall > Top Waterfall")
+            }
+            SpotId::Ebih__Waterfall__Under_Waterfall => {
+                write!(f, "{}", "Ebih > Waterfall > Under Waterfall")
+            }
             SpotId::Ebih__Waterfall__Wall_Left => write!(f, "{}", "Ebih > Waterfall > Wall Left"),
             SpotId::Ebih__Waterfall__Wall_Right => write!(f, "{}", "Ebih > Waterfall > Wall Right"),
-            SpotId::Ebih__Waterfall__Waterfall_Center_Center => write!(f, "{}", "Ebih > Waterfall > Waterfall Center Center"),
-            SpotId::Ebih__Waterfall__Waterfall_Center_Left => write!(f, "{}", "Ebih > Waterfall > Waterfall Center Left"),
-            SpotId::Ebih__Waterfall__Waterfall_Center_Right => write!(f, "{}", "Ebih > Waterfall > Waterfall Center Right"),
-            SpotId::Ebih__Waterfall__Waterfall_Left => write!(f, "{}", "Ebih > Waterfall > Waterfall Left"),
-            SpotId::Ebih__Waterfall__Waterfall_Right => write!(f, "{}", "Ebih > Waterfall > Waterfall Right"),
+            SpotId::Ebih__Waterfall__Waterfall_Center_Center => {
+                write!(f, "{}", "Ebih > Waterfall > Waterfall Center Center")
+            }
+            SpotId::Ebih__Waterfall__Waterfall_Center_Left => {
+                write!(f, "{}", "Ebih > Waterfall > Waterfall Center Left")
+            }
+            SpotId::Ebih__Waterfall__Waterfall_Center_Right => {
+                write!(f, "{}", "Ebih > Waterfall > Waterfall Center Right")
+            }
+            SpotId::Ebih__Waterfall__Waterfall_Left => {
+                write!(f, "{}", "Ebih > Waterfall > Waterfall Left")
+            }
+            SpotId::Ebih__Waterfall__Waterfall_Right => {
+                write!(f, "{}", "Ebih > Waterfall > Waterfall Right")
+            }
             SpotId::Ebih__Waterfall__West_10 => write!(f, "{}", "Ebih > Waterfall > West 10"),
             SpotId::Ebih__Waterfall__West_11 => write!(f, "{}", "Ebih > Waterfall > West 11"),
             SpotId::Ebih__Waterfall__West_7 => write!(f, "{}", "Ebih > Waterfall > West 7"),
@@ -679,809 +2487,2113 @@ impl fmt::Display for SpotId {
             SpotId::Ebih__Waterfall__West_9 => write!(f, "{}", "Ebih > Waterfall > West 9"),
             SpotId::Ebih__Waterfall__West_Climb => write!(f, "{}", "Ebih > Waterfall > West Climb"),
             SpotId::Ebih__Waterfall__West_Door => write!(f, "{}", "Ebih > Waterfall > West Door"),
-            SpotId::Ebih__Waterfall__West_Door_Left => write!(f, "{}", "Ebih > Waterfall > West Door Left"),
-            SpotId::Ebih__Waterfall__West_Door_Right => write!(f, "{}", "Ebih > Waterfall > West Door Right"),
-            SpotId::Ebih__Waterfall__West_Lower_Path => write!(f, "{}", "Ebih > Waterfall > West Lower Path"),
-            SpotId::Ebih__Waterfall__West_Main_Path => write!(f, "{}", "Ebih > Waterfall > West Main Path"),
+            SpotId::Ebih__Waterfall__West_Door_Left => {
+                write!(f, "{}", "Ebih > Waterfall > West Door Left")
+            }
+            SpotId::Ebih__Waterfall__West_Door_Right => {
+                write!(f, "{}", "Ebih > Waterfall > West Door Right")
+            }
+            SpotId::Ebih__Waterfall__West_Lower_Path => {
+                write!(f, "{}", "Ebih > Waterfall > West Lower Path")
+            }
+            SpotId::Ebih__Waterfall__West_Main_Path => {
+                write!(f, "{}", "Ebih > Waterfall > West Main Path")
+            }
             SpotId::Giguna__Antechamber__Bottom => write!(f, "{}", "Giguna > Antechamber > Bottom"),
-            SpotId::Giguna__Antechamber__East_16 => write!(f, "{}", "Giguna > Antechamber > East 16"),
-            SpotId::Giguna__Antechamber__Left_Wall_Lower => write!(f, "{}", "Giguna > Antechamber > Left Wall Lower"),
-            SpotId::Giguna__Antechamber__Left_Wall_Mid => write!(f, "{}", "Giguna > Antechamber > Left Wall Mid"),
-            SpotId::Giguna__Antechamber__Middle_Bricks_Left => write!(f, "{}", "Giguna > Antechamber > Middle Bricks Left"),
-            SpotId::Giguna__Antechamber__Middle_Bricks_Right => write!(f, "{}", "Giguna > Antechamber > Middle Bricks Right"),
-            SpotId::Giguna__Antechamber__Small_Bricks => write!(f, "{}", "Giguna > Antechamber > Small Bricks"),
-            SpotId::Giguna__Antechamber__Statue_Head => write!(f, "{}", "Giguna > Antechamber > Statue Head"),
-            SpotId::Giguna__Antechamber__Statues_Ledge => write!(f, "{}", "Giguna > Antechamber > Statues Ledge"),
-            SpotId::Giguna__Antechamber__West_15 => write!(f, "{}", "Giguna > Antechamber > West 15"),
-            SpotId::Giguna__Breachable_Wall__Above_Middle_Catwalk => write!(f, "{}", "Giguna > Breachable Wall > Above Middle Catwalk"),
-            SpotId::Giguna__Breachable_Wall__Above_West_Catwalk => write!(f, "{}", "Giguna > Breachable Wall > Above West Catwalk"),
-            SpotId::Giguna__Breachable_Wall__Wall_Interior => write!(f, "{}", "Giguna > Breachable Wall > Wall Interior"),
-            SpotId::Giguna__Breachable_Wall__West_Mid_air => write!(f, "{}", "Giguna > Breachable Wall > West Mid-air"),
+            SpotId::Giguna__Antechamber__East_16 => {
+                write!(f, "{}", "Giguna > Antechamber > East 16")
+            }
+            SpotId::Giguna__Antechamber__Left_Wall_Lower => {
+                write!(f, "{}", "Giguna > Antechamber > Left Wall Lower")
+            }
+            SpotId::Giguna__Antechamber__Left_Wall_Mid => {
+                write!(f, "{}", "Giguna > Antechamber > Left Wall Mid")
+            }
+            SpotId::Giguna__Antechamber__Middle_Bricks_Left => {
+                write!(f, "{}", "Giguna > Antechamber > Middle Bricks Left")
+            }
+            SpotId::Giguna__Antechamber__Middle_Bricks_Right => {
+                write!(f, "{}", "Giguna > Antechamber > Middle Bricks Right")
+            }
+            SpotId::Giguna__Antechamber__Small_Bricks => {
+                write!(f, "{}", "Giguna > Antechamber > Small Bricks")
+            }
+            SpotId::Giguna__Antechamber__Statue_Head => {
+                write!(f, "{}", "Giguna > Antechamber > Statue Head")
+            }
+            SpotId::Giguna__Antechamber__Statues_Ledge => {
+                write!(f, "{}", "Giguna > Antechamber > Statues Ledge")
+            }
+            SpotId::Giguna__Antechamber__West_15 => {
+                write!(f, "{}", "Giguna > Antechamber > West 15")
+            }
+            SpotId::Giguna__Breachable_Wall__Above_Middle_Catwalk => {
+                write!(f, "{}", "Giguna > Breachable Wall > Above Middle Catwalk")
+            }
+            SpotId::Giguna__Breachable_Wall__Above_West_Catwalk => {
+                write!(f, "{}", "Giguna > Breachable Wall > Above West Catwalk")
+            }
+            SpotId::Giguna__Breachable_Wall__Wall_Interior => {
+                write!(f, "{}", "Giguna > Breachable Wall > Wall Interior")
+            }
+            SpotId::Giguna__Breachable_Wall__West_Mid_air => {
+                write!(f, "{}", "Giguna > Breachable Wall > West Mid-air")
+            }
             SpotId::Giguna__Carnelian__Door => write!(f, "{}", "Giguna > Carnelian > Door"),
             SpotId::Giguna__Carnelian__East_10 => write!(f, "{}", "Giguna > Carnelian > East 10"),
-            SpotId::Giguna__Carnelian__East_Cliff => write!(f, "{}", "Giguna > Carnelian > East Cliff"),
-            SpotId::Giguna__Carnelian__Lower_Susar => write!(f, "{}", "Giguna > Carnelian > Lower Susar"),
-            SpotId::Giguna__Carnelian__Middle_Platforms => write!(f, "{}", "Giguna > Carnelian > Middle Platforms"),
+            SpotId::Giguna__Carnelian__East_Cliff => {
+                write!(f, "{}", "Giguna > Carnelian > East Cliff")
+            }
+            SpotId::Giguna__Carnelian__Lower_Susar => {
+                write!(f, "{}", "Giguna > Carnelian > Lower Susar")
+            }
+            SpotId::Giguna__Carnelian__Middle_Platforms => {
+                write!(f, "{}", "Giguna > Carnelian > Middle Platforms")
+            }
             SpotId::Giguna__Carnelian__Rock => write!(f, "{}", "Giguna > Carnelian > Rock"),
             SpotId::Giguna__Carnelian__Switch => write!(f, "{}", "Giguna > Carnelian > Switch"),
-            SpotId::Giguna__Carnelian__Upper_Path => write!(f, "{}", "Giguna > Carnelian > Upper Path"),
-            SpotId::Giguna__Carnelian__Upper_Susar => write!(f, "{}", "Giguna > Carnelian > Upper Susar"),
+            SpotId::Giguna__Carnelian__Upper_Path => {
+                write!(f, "{}", "Giguna > Carnelian > Upper Path")
+            }
+            SpotId::Giguna__Carnelian__Upper_Susar => {
+                write!(f, "{}", "Giguna > Carnelian > Upper Susar")
+            }
             SpotId::Giguna__Carnelian__Vault => write!(f, "{}", "Giguna > Carnelian > Vault"),
             SpotId::Giguna__Carnelian__West_10 => write!(f, "{}", "Giguna > Carnelian > West 10"),
-            SpotId::Giguna__Carnelian__West_Ledge => write!(f, "{}", "Giguna > Carnelian > West Ledge"),
+            SpotId::Giguna__Carnelian__West_Ledge => {
+                write!(f, "{}", "Giguna > Carnelian > West Ledge")
+            }
             SpotId::Giguna__Clouds__Cache => write!(f, "{}", "Giguna > Clouds > Cache"),
             SpotId::Giguna__Clouds__North_Left => write!(f, "{}", "Giguna > Clouds > North Left"),
-            SpotId::Giguna__Clouds__North_Middle => write!(f, "{}", "Giguna > Clouds > North Middle"),
+            SpotId::Giguna__Clouds__North_Middle => {
+                write!(f, "{}", "Giguna > Clouds > North Middle")
+            }
             SpotId::Giguna__Clouds__North_Right => write!(f, "{}", "Giguna > Clouds > North Right"),
-            SpotId::Giguna__Clouds__North_Under_Ledge => write!(f, "{}", "Giguna > Clouds > North Under Ledge"),
-            SpotId::Giguna__Clouds__Platform_Early => write!(f, "{}", "Giguna > Clouds > Platform Early"),
-            SpotId::Giguna__Clouds__Platform_Early_Portal => write!(f, "{}", "Giguna > Clouds > Platform Early Portal"),
-            SpotId::Giguna__Clouds__Platform_Start => write!(f, "{}", "Giguna > Clouds > Platform Start"),
-            SpotId::Giguna__Clouds__Platform_Stop => write!(f, "{}", "Giguna > Clouds > Platform Stop"),
+            SpotId::Giguna__Clouds__North_Under_Ledge => {
+                write!(f, "{}", "Giguna > Clouds > North Under Ledge")
+            }
+            SpotId::Giguna__Clouds__Platform_Early => {
+                write!(f, "{}", "Giguna > Clouds > Platform Early")
+            }
+            SpotId::Giguna__Clouds__Platform_Early_Portal => {
+                write!(f, "{}", "Giguna > Clouds > Platform Early Portal")
+            }
+            SpotId::Giguna__Clouds__Platform_Start => {
+                write!(f, "{}", "Giguna > Clouds > Platform Start")
+            }
+            SpotId::Giguna__Clouds__Platform_Stop => {
+                write!(f, "{}", "Giguna > Clouds > Platform Stop")
+            }
             SpotId::Giguna__Clouds__Pull_Right => write!(f, "{}", "Giguna > Clouds > Pull Right"),
             SpotId::Giguna__Clouds__Southeast => write!(f, "{}", "Giguna > Clouds > Southeast"),
             SpotId::Giguna__Clouds__Southwest => write!(f, "{}", "Giguna > Clouds > Southwest"),
-            SpotId::Giguna__Clouds__Straight_Down => write!(f, "{}", "Giguna > Clouds > Straight Down"),
-            SpotId::Giguna__Dual_Path__Base_of_Wall => write!(f, "{}", "Giguna > Dual Path > Base of Wall"),
-            SpotId::Giguna__Dual_Path__Below_Left_Switch => write!(f, "{}", "Giguna > Dual Path > Below Left Switch"),
-            SpotId::Giguna__Dual_Path__Below_Right_Switch => write!(f, "{}", "Giguna > Dual Path > Below Right Switch"),
+            SpotId::Giguna__Clouds__Straight_Down => {
+                write!(f, "{}", "Giguna > Clouds > Straight Down")
+            }
+            SpotId::Giguna__Dual_Path__Base_of_Wall => {
+                write!(f, "{}", "Giguna > Dual Path > Base of Wall")
+            }
+            SpotId::Giguna__Dual_Path__Below_Left_Switch => {
+                write!(f, "{}", "Giguna > Dual Path > Below Left Switch")
+            }
+            SpotId::Giguna__Dual_Path__Below_Right_Switch => {
+                write!(f, "{}", "Giguna > Dual Path > Below Right Switch")
+            }
             SpotId::Giguna__Dual_Path__East_17 => write!(f, "{}", "Giguna > Dual Path > East 17"),
             SpotId::Giguna__Dual_Path__East_18 => write!(f, "{}", "Giguna > Dual Path > East 18"),
-            SpotId::Giguna__Dual_Path__East_Gate => write!(f, "{}", "Giguna > Dual Path > East Gate"),
-            SpotId::Giguna__Dual_Path__East_Gate_NE => write!(f, "{}", "Giguna > Dual Path > East Gate NE"),
-            SpotId::Giguna__Dual_Path__East_Gate_NW => write!(f, "{}", "Giguna > Dual Path > East Gate NW"),
-            SpotId::Giguna__Dual_Path__In_the_Grass => write!(f, "{}", "Giguna > Dual Path > In the Grass"),
-            SpotId::Giguna__Dual_Path__Left_Switch => write!(f, "{}", "Giguna > Dual Path > Left Switch"),
+            SpotId::Giguna__Dual_Path__East_Gate => {
+                write!(f, "{}", "Giguna > Dual Path > East Gate")
+            }
+            SpotId::Giguna__Dual_Path__East_Gate_NE => {
+                write!(f, "{}", "Giguna > Dual Path > East Gate NE")
+            }
+            SpotId::Giguna__Dual_Path__East_Gate_NW => {
+                write!(f, "{}", "Giguna > Dual Path > East Gate NW")
+            }
+            SpotId::Giguna__Dual_Path__In_the_Grass => {
+                write!(f, "{}", "Giguna > Dual Path > In the Grass")
+            }
+            SpotId::Giguna__Dual_Path__Left_Switch => {
+                write!(f, "{}", "Giguna > Dual Path > Left Switch")
+            }
             SpotId::Giguna__Dual_Path__Midway => write!(f, "{}", "Giguna > Dual Path > Midway"),
-            SpotId::Giguna__Dual_Path__Midway_Plateau => write!(f, "{}", "Giguna > Dual Path > Midway Plateau"),
-            SpotId::Giguna__Dual_Path__Right_Switch => write!(f, "{}", "Giguna > Dual Path > Right Switch"),
-            SpotId::Giguna__Dual_Path__Wall_Secret => write!(f, "{}", "Giguna > Dual Path > Wall Secret"),
+            SpotId::Giguna__Dual_Path__Midway_Plateau => {
+                write!(f, "{}", "Giguna > Dual Path > Midway Plateau")
+            }
+            SpotId::Giguna__Dual_Path__Right_Switch => {
+                write!(f, "{}", "Giguna > Dual Path > Right Switch")
+            }
+            SpotId::Giguna__Dual_Path__Wall_Secret => {
+                write!(f, "{}", "Giguna > Dual Path > Wall Secret")
+            }
             SpotId::Giguna__Dual_Path__Wall_Top => write!(f, "{}", "Giguna > Dual Path > Wall Top"),
             SpotId::Giguna__Dual_Path__West_17 => write!(f, "{}", "Giguna > Dual Path > West 17"),
             SpotId::Giguna__Dual_Path__West_18 => write!(f, "{}", "Giguna > Dual Path > West 18"),
-            SpotId::Giguna__Dual_Path__West_Gate => write!(f, "{}", "Giguna > Dual Path > West Gate"),
-            SpotId::Giguna__Dual_Path__West_Gate_NE => write!(f, "{}", "Giguna > Dual Path > West Gate NE"),
-            SpotId::Giguna__Dual_Path__West_Gate_NW => write!(f, "{}", "Giguna > Dual Path > West Gate NW"),
-            SpotId::Giguna__Dual_Path__West_Slope => write!(f, "{}", "Giguna > Dual Path > West Slope"),
-            SpotId::Giguna__East_Caverns__Arc_Ledge => write!(f, "{}", "Giguna > East Caverns > Arc Ledge"),
-            SpotId::Giguna__East_Caverns__Arc_Passage => write!(f, "{}", "Giguna > East Caverns > Arc Passage"),
-            SpotId::Giguna__East_Caverns__Carving => write!(f, "{}", "Giguna > East Caverns > Carving"),
+            SpotId::Giguna__Dual_Path__West_Gate => {
+                write!(f, "{}", "Giguna > Dual Path > West Gate")
+            }
+            SpotId::Giguna__Dual_Path__West_Gate_NE => {
+                write!(f, "{}", "Giguna > Dual Path > West Gate NE")
+            }
+            SpotId::Giguna__Dual_Path__West_Gate_NW => {
+                write!(f, "{}", "Giguna > Dual Path > West Gate NW")
+            }
+            SpotId::Giguna__Dual_Path__West_Slope => {
+                write!(f, "{}", "Giguna > Dual Path > West Slope")
+            }
+            SpotId::Giguna__East_Caverns__Arc_Ledge => {
+                write!(f, "{}", "Giguna > East Caverns > Arc Ledge")
+            }
+            SpotId::Giguna__East_Caverns__Arc_Passage => {
+                write!(f, "{}", "Giguna > East Caverns > Arc Passage")
+            }
+            SpotId::Giguna__East_Caverns__Carving => {
+                write!(f, "{}", "Giguna > East Caverns > Carving")
+            }
             SpotId::Giguna__East_Caverns__Door => write!(f, "{}", "Giguna > East Caverns > Door"),
-            SpotId::Giguna__East_Caverns__East_17 => write!(f, "{}", "Giguna > East Caverns > East 17"),
-            SpotId::Giguna__East_Caverns__East_Grass => write!(f, "{}", "Giguna > East Caverns > East Grass"),
-            SpotId::Giguna__East_Caverns__East_Shaft => write!(f, "{}", "Giguna > East Caverns > East Shaft"),
-            SpotId::Giguna__East_Caverns__East_Side => write!(f, "{}", "Giguna > East Caverns > East Side"),
-            SpotId::Giguna__East_Caverns__Hidden_Passage_Center => write!(f, "{}", "Giguna > East Caverns > Hidden Passage Center"),
-            SpotId::Giguna__East_Caverns__Hidden_Passage_East => write!(f, "{}", "Giguna > East Caverns > Hidden Passage East"),
-            SpotId::Giguna__East_Caverns__Hidden_Passage_West => write!(f, "{}", "Giguna > East Caverns > Hidden Passage West"),
-            SpotId::Giguna__East_Caverns__Lower_Ledge => write!(f, "{}", "Giguna > East Caverns > Lower Ledge"),
-            SpotId::Giguna__East_Caverns__Lower_Susar => write!(f, "{}", "Giguna > East Caverns > Lower Susar"),
-            SpotId::Giguna__East_Caverns__Mid_Susar => write!(f, "{}", "Giguna > East Caverns > Mid Susar"),
-            SpotId::Giguna__East_Caverns__Middle_Ledge => write!(f, "{}", "Giguna > East Caverns > Middle Ledge"),
-            SpotId::Giguna__East_Caverns__Middle_Rock => write!(f, "{}", "Giguna > East Caverns > Middle Rock"),
-            SpotId::Giguna__East_Caverns__Midwest_Ledge => write!(f, "{}", "Giguna > East Caverns > Midwest Ledge"),
-            SpotId::Giguna__East_Caverns__Statues_Ledge => write!(f, "{}", "Giguna > East Caverns > Statues Ledge"),
-            SpotId::Giguna__East_Caverns__Switch => write!(f, "{}", "Giguna > East Caverns > Switch"),
-            SpotId::Giguna__East_Caverns__Top_Ledge => write!(f, "{}", "Giguna > East Caverns > Top Ledge"),
-            SpotId::Giguna__East_Caverns__Top_Past_Susar => write!(f, "{}", "Giguna > East Caverns > Top Past Susar"),
-            SpotId::Giguna__East_Caverns__Under_Lower_Ledge => write!(f, "{}", "Giguna > East Caverns > Under Lower Ledge"),
-            SpotId::Giguna__East_Caverns__Upper_Floor => write!(f, "{}", "Giguna > East Caverns > Upper Floor"),
-            SpotId::Giguna__East_Caverns__Upper_Floor_Ledge => write!(f, "{}", "Giguna > East Caverns > Upper Floor Ledge"),
-            SpotId::Giguna__East_Caverns__Upper_Passage_East => write!(f, "{}", "Giguna > East Caverns > Upper Passage East"),
-            SpotId::Giguna__East_Caverns__Upper_Passage_West => write!(f, "{}", "Giguna > East Caverns > Upper Passage West"),
-            SpotId::Giguna__East_Caverns__Upper_Platforms_Left => write!(f, "{}", "Giguna > East Caverns > Upper Platforms Left"),
-            SpotId::Giguna__East_Caverns__Upper_Platforms_Right => write!(f, "{}", "Giguna > East Caverns > Upper Platforms Right"),
-            SpotId::Giguna__East_Caverns__Upper_Susar => write!(f, "{}", "Giguna > East Caverns > Upper Susar"),
-            SpotId::Giguna__East_Caverns__Upper_Susar_Jump_from_East => write!(f, "{}", "Giguna > East Caverns > Upper Susar Jump from East"),
-            SpotId::Giguna__East_Caverns__Upper_Susar_Mid_jump => write!(f, "{}", "Giguna > East Caverns > Upper Susar Mid-jump"),
-            SpotId::Giguna__East_Caverns__West_14 => write!(f, "{}", "Giguna > East Caverns > West 14"),
-            SpotId::Giguna__East_Caverns__West_16 => write!(f, "{}", "Giguna > East Caverns > West 16"),
-            SpotId::Giguna__East_Caverns__West_17 => write!(f, "{}", "Giguna > East Caverns > West 17"),
-            SpotId::Giguna__East_Caverns__West_Grass => write!(f, "{}", "Giguna > East Caverns > West Grass"),
+            SpotId::Giguna__East_Caverns__East_17 => {
+                write!(f, "{}", "Giguna > East Caverns > East 17")
+            }
+            SpotId::Giguna__East_Caverns__East_Grass => {
+                write!(f, "{}", "Giguna > East Caverns > East Grass")
+            }
+            SpotId::Giguna__East_Caverns__East_Shaft => {
+                write!(f, "{}", "Giguna > East Caverns > East Shaft")
+            }
+            SpotId::Giguna__East_Caverns__East_Side => {
+                write!(f, "{}", "Giguna > East Caverns > East Side")
+            }
+            SpotId::Giguna__East_Caverns__Hidden_Passage_Center => {
+                write!(f, "{}", "Giguna > East Caverns > Hidden Passage Center")
+            }
+            SpotId::Giguna__East_Caverns__Hidden_Passage_East => {
+                write!(f, "{}", "Giguna > East Caverns > Hidden Passage East")
+            }
+            SpotId::Giguna__East_Caverns__Hidden_Passage_West => {
+                write!(f, "{}", "Giguna > East Caverns > Hidden Passage West")
+            }
+            SpotId::Giguna__East_Caverns__Lower_Ledge => {
+                write!(f, "{}", "Giguna > East Caverns > Lower Ledge")
+            }
+            SpotId::Giguna__East_Caverns__Lower_Susar => {
+                write!(f, "{}", "Giguna > East Caverns > Lower Susar")
+            }
+            SpotId::Giguna__East_Caverns__Mid_Susar => {
+                write!(f, "{}", "Giguna > East Caverns > Mid Susar")
+            }
+            SpotId::Giguna__East_Caverns__Middle_Ledge => {
+                write!(f, "{}", "Giguna > East Caverns > Middle Ledge")
+            }
+            SpotId::Giguna__East_Caverns__Middle_Rock => {
+                write!(f, "{}", "Giguna > East Caverns > Middle Rock")
+            }
+            SpotId::Giguna__East_Caverns__Midwest_Ledge => {
+                write!(f, "{}", "Giguna > East Caverns > Midwest Ledge")
+            }
+            SpotId::Giguna__East_Caverns__Statues_Ledge => {
+                write!(f, "{}", "Giguna > East Caverns > Statues Ledge")
+            }
+            SpotId::Giguna__East_Caverns__Switch => {
+                write!(f, "{}", "Giguna > East Caverns > Switch")
+            }
+            SpotId::Giguna__East_Caverns__Top_Ledge => {
+                write!(f, "{}", "Giguna > East Caverns > Top Ledge")
+            }
+            SpotId::Giguna__East_Caverns__Top_Past_Susar => {
+                write!(f, "{}", "Giguna > East Caverns > Top Past Susar")
+            }
+            SpotId::Giguna__East_Caverns__Under_Lower_Ledge => {
+                write!(f, "{}", "Giguna > East Caverns > Under Lower Ledge")
+            }
+            SpotId::Giguna__East_Caverns__Upper_Floor => {
+                write!(f, "{}", "Giguna > East Caverns > Upper Floor")
+            }
+            SpotId::Giguna__East_Caverns__Upper_Floor_Ledge => {
+                write!(f, "{}", "Giguna > East Caverns > Upper Floor Ledge")
+            }
+            SpotId::Giguna__East_Caverns__Upper_Passage_East => {
+                write!(f, "{}", "Giguna > East Caverns > Upper Passage East")
+            }
+            SpotId::Giguna__East_Caverns__Upper_Passage_West => {
+                write!(f, "{}", "Giguna > East Caverns > Upper Passage West")
+            }
+            SpotId::Giguna__East_Caverns__Upper_Platforms_Left => {
+                write!(f, "{}", "Giguna > East Caverns > Upper Platforms Left")
+            }
+            SpotId::Giguna__East_Caverns__Upper_Platforms_Right => {
+                write!(f, "{}", "Giguna > East Caverns > Upper Platforms Right")
+            }
+            SpotId::Giguna__East_Caverns__Upper_Susar => {
+                write!(f, "{}", "Giguna > East Caverns > Upper Susar")
+            }
+            SpotId::Giguna__East_Caverns__Upper_Susar_Jump_from_East => write!(
+                f,
+                "{}",
+                "Giguna > East Caverns > Upper Susar Jump from East"
+            ),
+            SpotId::Giguna__East_Caverns__Upper_Susar_Mid_jump => {
+                write!(f, "{}", "Giguna > East Caverns > Upper Susar Mid-jump")
+            }
+            SpotId::Giguna__East_Caverns__West_14 => {
+                write!(f, "{}", "Giguna > East Caverns > West 14")
+            }
+            SpotId::Giguna__East_Caverns__West_16 => {
+                write!(f, "{}", "Giguna > East Caverns > West 16")
+            }
+            SpotId::Giguna__East_Caverns__West_17 => {
+                write!(f, "{}", "Giguna > East Caverns > West 17")
+            }
+            SpotId::Giguna__East_Caverns__West_Grass => {
+                write!(f, "{}", "Giguna > East Caverns > West Grass")
+            }
             SpotId::Giguna__Far_Corner__East_13 => write!(f, "{}", "Giguna > Far Corner > East 13"),
             SpotId::Giguna__Far_Corner__Grass => write!(f, "{}", "Giguna > Far Corner > Grass"),
             SpotId::Giguna__Far_Corner__South => write!(f, "{}", "Giguna > Far Corner > South"),
             SpotId::Giguna__Gateway__Block_Left => write!(f, "{}", "Giguna > Gateway > Block Left"),
-            SpotId::Giguna__Gateway__Block_Lowered => write!(f, "{}", "Giguna > Gateway > Block Lowered"),
-            SpotId::Giguna__Gateway__Block_Right => write!(f, "{}", "Giguna > Gateway > Block Right"),
+            SpotId::Giguna__Gateway__Block_Lowered => {
+                write!(f, "{}", "Giguna > Gateway > Block Lowered")
+            }
+            SpotId::Giguna__Gateway__Block_Right => {
+                write!(f, "{}", "Giguna > Gateway > Block Right")
+            }
             SpotId::Giguna__Gateway__Button => write!(f, "{}", "Giguna > Gateway > Button"),
             SpotId::Giguna__Gateway__Door => write!(f, "{}", "Giguna > Gateway > Door"),
             SpotId::Giguna__Gateway__East_19 => write!(f, "{}", "Giguna > Gateway > East 19"),
             SpotId::Giguna__Gateway__Far_Ledge => write!(f, "{}", "Giguna > Gateway > Far Ledge"),
-            SpotId::Giguna__Gateway__Flask_Ledge => write!(f, "{}", "Giguna > Gateway > Flask Ledge"),
-            SpotId::Giguna__Gateway__Left_Platform => write!(f, "{}", "Giguna > Gateway > Left Platform"),
+            SpotId::Giguna__Gateway__Flask_Ledge => {
+                write!(f, "{}", "Giguna > Gateway > Flask Ledge")
+            }
+            SpotId::Giguna__Gateway__Left_Platform => {
+                write!(f, "{}", "Giguna > Gateway > Left Platform")
+            }
             SpotId::Giguna__Gateway__One_Jump => write!(f, "{}", "Giguna > Gateway > One Jump"),
-            SpotId::Giguna__Gateway__Passage_Entry => write!(f, "{}", "Giguna > Gateway > Passage Entry"),
-            SpotId::Giguna__Gateway__Passage_Exit => write!(f, "{}", "Giguna > Gateway > Passage Exit"),
-            SpotId::Giguna__Gateway__Refill_Station => write!(f, "{}", "Giguna > Gateway > Refill Station"),
-            SpotId::Giguna__Gateway__Right_Platform => write!(f, "{}", "Giguna > Gateway > Right Platform"),
+            SpotId::Giguna__Gateway__Passage_Entry => {
+                write!(f, "{}", "Giguna > Gateway > Passage Entry")
+            }
+            SpotId::Giguna__Gateway__Passage_Exit => {
+                write!(f, "{}", "Giguna > Gateway > Passage Exit")
+            }
+            SpotId::Giguna__Gateway__Refill_Station => {
+                write!(f, "{}", "Giguna > Gateway > Refill Station")
+            }
+            SpotId::Giguna__Gateway__Right_Platform => {
+                write!(f, "{}", "Giguna > Gateway > Right Platform")
+            }
             SpotId::Giguna__Gateway__West_18 => write!(f, "{}", "Giguna > Gateway > West 18"),
             SpotId::Giguna__Gateway__West_19 => write!(f, "{}", "Giguna > Gateway > West 19"),
-            SpotId::Giguna__Giguna_Base__Below_Gate => write!(f, "{}", "Giguna > Giguna Base > Below Gate"),
-            SpotId::Giguna__Giguna_Base__Building_Entry => write!(f, "{}", "Giguna > Giguna Base > Building Entry"),
-            SpotId::Giguna__Giguna_Base__East_14 => write!(f, "{}", "Giguna > Giguna Base > East 14"),
-            SpotId::Giguna__Giguna_Base__East_17 => write!(f, "{}", "Giguna > Giguna Base > East 17"),
+            SpotId::Giguna__Giguna_Base__Below_Gate => {
+                write!(f, "{}", "Giguna > Giguna Base > Below Gate")
+            }
+            SpotId::Giguna__Giguna_Base__Building_Entry => {
+                write!(f, "{}", "Giguna > Giguna Base > Building Entry")
+            }
+            SpotId::Giguna__Giguna_Base__East_14 => {
+                write!(f, "{}", "Giguna > Giguna Base > East 14")
+            }
+            SpotId::Giguna__Giguna_Base__East_17 => {
+                write!(f, "{}", "Giguna > Giguna Base > East 17")
+            }
             SpotId::Giguna__Giguna_Base__Kari => write!(f, "{}", "Giguna > Giguna Base > Kari"),
-            SpotId::Giguna__Giguna_Base__Left_Pillar => write!(f, "{}", "Giguna > Giguna Base > Left Pillar"),
-            SpotId::Giguna__Giguna_Base__Lower_Fork => write!(f, "{}", "Giguna > Giguna Base > Lower Fork"),
-            SpotId::Giguna__Giguna_Base__Middle_Platform => write!(f, "{}", "Giguna > Giguna Base > Middle Platform"),
-            SpotId::Giguna__Giguna_Base__Right_Pillar => write!(f, "{}", "Giguna > Giguna Base > Right Pillar"),
+            SpotId::Giguna__Giguna_Base__Left_Pillar => {
+                write!(f, "{}", "Giguna > Giguna Base > Left Pillar")
+            }
+            SpotId::Giguna__Giguna_Base__Lower_Fork => {
+                write!(f, "{}", "Giguna > Giguna Base > Lower Fork")
+            }
+            SpotId::Giguna__Giguna_Base__Middle_Platform => {
+                write!(f, "{}", "Giguna > Giguna Base > Middle Platform")
+            }
+            SpotId::Giguna__Giguna_Base__Right_Pillar => {
+                write!(f, "{}", "Giguna > Giguna Base > Right Pillar")
+            }
             SpotId::Giguna__Giguna_Base__Ruin => write!(f, "{}", "Giguna > Giguna Base > Ruin"),
-            SpotId::Giguna__Giguna_Base__Save_Point => write!(f, "{}", "Giguna > Giguna Base > Save Point"),
-            SpotId::Giguna__Giguna_Base__Staircase_Bottom => write!(f, "{}", "Giguna > Giguna Base > Staircase Bottom"),
-            SpotId::Giguna__Giguna_Base__Staircase_Top => write!(f, "{}", "Giguna > Giguna Base > Staircase Top"),
-            SpotId::Giguna__Giguna_Base__Stone_Knob => write!(f, "{}", "Giguna > Giguna Base > Stone Knob"),
-            SpotId::Giguna__Giguna_Base__Switch_Distance_1 => write!(f, "{}", "Giguna > Giguna Base > Switch Distance 1"),
-            SpotId::Giguna__Giguna_Base__Switch_Distance_2 => write!(f, "{}", "Giguna > Giguna Base > Switch Distance 2"),
-            SpotId::Giguna__Giguna_Base__Switch_Distance_3 => write!(f, "{}", "Giguna > Giguna Base > Switch Distance 3"),
-            SpotId::Giguna__Giguna_Base__Switch_Distance_4 => write!(f, "{}", "Giguna > Giguna Base > Switch Distance 4"),
+            SpotId::Giguna__Giguna_Base__Save_Point => {
+                write!(f, "{}", "Giguna > Giguna Base > Save Point")
+            }
+            SpotId::Giguna__Giguna_Base__Staircase_Bottom => {
+                write!(f, "{}", "Giguna > Giguna Base > Staircase Bottom")
+            }
+            SpotId::Giguna__Giguna_Base__Staircase_Top => {
+                write!(f, "{}", "Giguna > Giguna Base > Staircase Top")
+            }
+            SpotId::Giguna__Giguna_Base__Stone_Knob => {
+                write!(f, "{}", "Giguna > Giguna Base > Stone Knob")
+            }
+            SpotId::Giguna__Giguna_Base__Switch_Distance_1 => {
+                write!(f, "{}", "Giguna > Giguna Base > Switch Distance 1")
+            }
+            SpotId::Giguna__Giguna_Base__Switch_Distance_2 => {
+                write!(f, "{}", "Giguna > Giguna Base > Switch Distance 2")
+            }
+            SpotId::Giguna__Giguna_Base__Switch_Distance_3 => {
+                write!(f, "{}", "Giguna > Giguna Base > Switch Distance 3")
+            }
+            SpotId::Giguna__Giguna_Base__Switch_Distance_4 => {
+                write!(f, "{}", "Giguna > Giguna Base > Switch Distance 4")
+            }
             SpotId::Giguna__Giguna_Base__Table => write!(f, "{}", "Giguna > Giguna Base > Table"),
-            SpotId::Giguna__Giguna_Base__Upper_Cliff => write!(f, "{}", "Giguna > Giguna Base > Upper Cliff"),
-            SpotId::Giguna__Giguna_Base__West_15 => write!(f, "{}", "Giguna > Giguna Base > West 15"),
-            SpotId::Giguna__Giguna_Base__West_16 => write!(f, "{}", "Giguna > Giguna Base > West 16"),
-            SpotId::Giguna__Giguna_Base__West_Grate => write!(f, "{}", "Giguna > Giguna Base > West Grate"),
-            SpotId::Giguna__Giguna_Northeast__Crow_Eating => write!(f, "{}", "Giguna > Giguna Northeast > Crow Eating"),
-            SpotId::Giguna__Giguna_Northeast__Door => write!(f, "{}", "Giguna > Giguna Northeast > Door"),
-            SpotId::Giguna__Giguna_Northeast__East_11 => write!(f, "{}", "Giguna > Giguna Northeast > East 11"),
-            SpotId::Giguna__Giguna_Northeast__East_9 => write!(f, "{}", "Giguna > Giguna Northeast > East 9"),
-            SpotId::Giguna__Giguna_Northeast__Gate_Button => write!(f, "{}", "Giguna > Giguna Northeast > Gate Button"),
-            SpotId::Giguna__Giguna_Northeast__Gate_Left => write!(f, "{}", "Giguna > Giguna Northeast > Gate Left"),
-            SpotId::Giguna__Giguna_Northeast__Gate_Right => write!(f, "{}", "Giguna > Giguna Northeast > Gate Right"),
-            SpotId::Giguna__Giguna_Northeast__Gate_Vent => write!(f, "{}", "Giguna > Giguna Northeast > Gate Vent"),
-            SpotId::Giguna__Giguna_Northeast__Inner_Wall => write!(f, "{}", "Giguna > Giguna Northeast > Inner Wall"),
-            SpotId::Giguna__Giguna_Northeast__Right_Column => write!(f, "{}", "Giguna > Giguna Northeast > Right Column"),
-            SpotId::Giguna__Giguna_Northeast__Save_Point => write!(f, "{}", "Giguna > Giguna Northeast > Save Point"),
-            SpotId::Giguna__Giguna_Northeast__Shaft_Bottom => write!(f, "{}", "Giguna > Giguna Northeast > Shaft Bottom"),
-            SpotId::Giguna__Giguna_Northeast__Step => write!(f, "{}", "Giguna > Giguna Northeast > Step"),
-            SpotId::Giguna__Giguna_Northeast__Switch => write!(f, "{}", "Giguna > Giguna Northeast > Switch"),
-            SpotId::Giguna__Giguna_Northeast__Vault => write!(f, "{}", "Giguna > Giguna Northeast > Vault"),
-            SpotId::Giguna__Giguna_Northeast__West_10 => write!(f, "{}", "Giguna > Giguna Northeast > West 10"),
-            SpotId::Giguna__Giguna_Northeast__West_9 => write!(f, "{}", "Giguna > Giguna Northeast > West 9"),
-            SpotId::Giguna__Gubi_Lair__Center_East_Sapling => write!(f, "{}", "Giguna > Gubi Lair > Center-East Sapling"),
-            SpotId::Giguna__Gubi_Lair__Center_Platform => write!(f, "{}", "Giguna > Gubi Lair > Center Platform"),
-            SpotId::Giguna__Gubi_Lair__Center_West_Sapling => write!(f, "{}", "Giguna > Gubi Lair > Center-West Sapling"),
+            SpotId::Giguna__Giguna_Base__Upper_Cliff => {
+                write!(f, "{}", "Giguna > Giguna Base > Upper Cliff")
+            }
+            SpotId::Giguna__Giguna_Base__West_15 => {
+                write!(f, "{}", "Giguna > Giguna Base > West 15")
+            }
+            SpotId::Giguna__Giguna_Base__West_16 => {
+                write!(f, "{}", "Giguna > Giguna Base > West 16")
+            }
+            SpotId::Giguna__Giguna_Base__West_Grate => {
+                write!(f, "{}", "Giguna > Giguna Base > West Grate")
+            }
+            SpotId::Giguna__Giguna_Northeast__Crow_Eating => {
+                write!(f, "{}", "Giguna > Giguna Northeast > Crow Eating")
+            }
+            SpotId::Giguna__Giguna_Northeast__Door => {
+                write!(f, "{}", "Giguna > Giguna Northeast > Door")
+            }
+            SpotId::Giguna__Giguna_Northeast__East_11 => {
+                write!(f, "{}", "Giguna > Giguna Northeast > East 11")
+            }
+            SpotId::Giguna__Giguna_Northeast__East_9 => {
+                write!(f, "{}", "Giguna > Giguna Northeast > East 9")
+            }
+            SpotId::Giguna__Giguna_Northeast__Gate_Button => {
+                write!(f, "{}", "Giguna > Giguna Northeast > Gate Button")
+            }
+            SpotId::Giguna__Giguna_Northeast__Gate_Left => {
+                write!(f, "{}", "Giguna > Giguna Northeast > Gate Left")
+            }
+            SpotId::Giguna__Giguna_Northeast__Gate_Right => {
+                write!(f, "{}", "Giguna > Giguna Northeast > Gate Right")
+            }
+            SpotId::Giguna__Giguna_Northeast__Gate_Vent => {
+                write!(f, "{}", "Giguna > Giguna Northeast > Gate Vent")
+            }
+            SpotId::Giguna__Giguna_Northeast__Inner_Wall => {
+                write!(f, "{}", "Giguna > Giguna Northeast > Inner Wall")
+            }
+            SpotId::Giguna__Giguna_Northeast__Right_Column => {
+                write!(f, "{}", "Giguna > Giguna Northeast > Right Column")
+            }
+            SpotId::Giguna__Giguna_Northeast__Save_Point => {
+                write!(f, "{}", "Giguna > Giguna Northeast > Save Point")
+            }
+            SpotId::Giguna__Giguna_Northeast__Shaft_Bottom => {
+                write!(f, "{}", "Giguna > Giguna Northeast > Shaft Bottom")
+            }
+            SpotId::Giguna__Giguna_Northeast__Step => {
+                write!(f, "{}", "Giguna > Giguna Northeast > Step")
+            }
+            SpotId::Giguna__Giguna_Northeast__Switch => {
+                write!(f, "{}", "Giguna > Giguna Northeast > Switch")
+            }
+            SpotId::Giguna__Giguna_Northeast__Vault => {
+                write!(f, "{}", "Giguna > Giguna Northeast > Vault")
+            }
+            SpotId::Giguna__Giguna_Northeast__West_10 => {
+                write!(f, "{}", "Giguna > Giguna Northeast > West 10")
+            }
+            SpotId::Giguna__Giguna_Northeast__West_9 => {
+                write!(f, "{}", "Giguna > Giguna Northeast > West 9")
+            }
+            SpotId::Giguna__Gubi_Lair__Center_East_Sapling => {
+                write!(f, "{}", "Giguna > Gubi Lair > Center-East Sapling")
+            }
+            SpotId::Giguna__Gubi_Lair__Center_Platform => {
+                write!(f, "{}", "Giguna > Gubi Lair > Center Platform")
+            }
+            SpotId::Giguna__Gubi_Lair__Center_West_Sapling => {
+                write!(f, "{}", "Giguna > Gubi Lair > Center-West Sapling")
+            }
             SpotId::Giguna__Gubi_Lair__East_15 => write!(f, "{}", "Giguna > Gubi Lair > East 15"),
-            SpotId::Giguna__Gubi_Lair__East_Tree => write!(f, "{}", "Giguna > Gubi Lair > East Tree"),
-            SpotId::Giguna__Gubi_Lair__Grass_by_Wall => write!(f, "{}", "Giguna > Gubi Lair > Grass by Wall"),
-            SpotId::Giguna__Gubi_Lair__Leftmost_Platform => write!(f, "{}", "Giguna > Gubi Lair > Leftmost Platform"),
-            SpotId::Giguna__Gubi_Lair__Lower_Platform => write!(f, "{}", "Giguna > Gubi Lair > Lower Platform"),
+            SpotId::Giguna__Gubi_Lair__East_Tree => {
+                write!(f, "{}", "Giguna > Gubi Lair > East Tree")
+            }
+            SpotId::Giguna__Gubi_Lair__Grass_by_Wall => {
+                write!(f, "{}", "Giguna > Gubi Lair > Grass by Wall")
+            }
+            SpotId::Giguna__Gubi_Lair__Leftmost_Platform => {
+                write!(f, "{}", "Giguna > Gubi Lair > Leftmost Platform")
+            }
+            SpotId::Giguna__Gubi_Lair__Lower_Platform => {
+                write!(f, "{}", "Giguna > Gubi Lair > Lower Platform")
+            }
             SpotId::Giguna__Gubi_Lair__Pedestal => write!(f, "{}", "Giguna > Gubi Lair > Pedestal"),
-            SpotId::Giguna__Gubi_Lair__Rightmost_Platform => write!(f, "{}", "Giguna > Gubi Lair > Rightmost Platform"),
-            SpotId::Giguna__Gubi_Lair__Shaft_Bottom => write!(f, "{}", "Giguna > Gubi Lair > Shaft Bottom"),
-            SpotId::Giguna__Gubi_Lair__West_Brickwork => write!(f, "{}", "Giguna > Gubi Lair > West Brickwork"),
+            SpotId::Giguna__Gubi_Lair__Rightmost_Platform => {
+                write!(f, "{}", "Giguna > Gubi Lair > Rightmost Platform")
+            }
+            SpotId::Giguna__Gubi_Lair__Shaft_Bottom => {
+                write!(f, "{}", "Giguna > Gubi Lair > Shaft Bottom")
+            }
+            SpotId::Giguna__Gubi_Lair__West_Brickwork => {
+                write!(f, "{}", "Giguna > Gubi Lair > West Brickwork")
+            }
             SpotId::Giguna__Hard_Rock__East_17 => write!(f, "{}", "Giguna > Hard Rock > East 17"),
-            SpotId::Giguna__Hard_Rock__Rock_Center => write!(f, "{}", "Giguna > Hard Rock > Rock Center"),
-            SpotId::Giguna__Hard_Rock__Rock_Left => write!(f, "{}", "Giguna > Hard Rock > Rock Left"),
-            SpotId::Giguna__Hard_Rock__Rock_Right => write!(f, "{}", "Giguna > Hard Rock > Rock Right"),
+            SpotId::Giguna__Hard_Rock__Rock_Center => {
+                write!(f, "{}", "Giguna > Hard Rock > Rock Center")
+            }
+            SpotId::Giguna__Hard_Rock__Rock_Left => {
+                write!(f, "{}", "Giguna > Hard Rock > Rock Left")
+            }
+            SpotId::Giguna__Hard_Rock__Rock_Right => {
+                write!(f, "{}", "Giguna > Hard Rock > Rock Right")
+            }
             SpotId::Giguna__Hard_Rock__West_17 => write!(f, "{}", "Giguna > Hard Rock > West 17"),
             SpotId::Giguna__Helipad__East_15 => write!(f, "{}", "Giguna > Helipad > East 15"),
             SpotId::Giguna__Helipad__East_16 => write!(f, "{}", "Giguna > Helipad > East 16"),
             SpotId::Giguna__Helipad__East_18 => write!(f, "{}", "Giguna > Helipad > East 18"),
             SpotId::Giguna__Helipad__Helicopter => write!(f, "{}", "Giguna > Helipad > Helicopter"),
-            SpotId::Giguna__Helipad__Irikar_Drop => write!(f, "{}", "Giguna > Helipad > Irikar Drop"),
-            SpotId::Giguna__Helipad__Lowest_Ledge => write!(f, "{}", "Giguna > Helipad > Lowest Ledge"),
+            SpotId::Giguna__Helipad__Irikar_Drop => {
+                write!(f, "{}", "Giguna > Helipad > Irikar Drop")
+            }
+            SpotId::Giguna__Helipad__Lowest_Ledge => {
+                write!(f, "{}", "Giguna > Helipad > Lowest Ledge")
+            }
             SpotId::Giguna__Helipad__North => write!(f, "{}", "Giguna > Helipad > North"),
             SpotId::Giguna__Helipad__Railing => write!(f, "{}", "Giguna > Helipad > Railing"),
             SpotId::Giguna__Helipad__So_Close => write!(f, "{}", "Giguna > Helipad > So Close!"),
             SpotId::Giguna__Helipad__South_Left => write!(f, "{}", "Giguna > Helipad > South Left"),
-            SpotId::Giguna__Helipad__South_Middle => write!(f, "{}", "Giguna > Helipad > South Middle"),
-            SpotId::Giguna__Helipad__South_Right => write!(f, "{}", "Giguna > Helipad > South Right"),
-            SpotId::Giguna__Helipad__Staircase_Top => write!(f, "{}", "Giguna > Helipad > Staircase Top"),
-            SpotId::Giguna__Helipad__Tablet_Ledge => write!(f, "{}", "Giguna > Helipad > Tablet Ledge"),
-            SpotId::Giguna__Helipad__Wall_Bottom => write!(f, "{}", "Giguna > Helipad > Wall Bottom"),
+            SpotId::Giguna__Helipad__South_Middle => {
+                write!(f, "{}", "Giguna > Helipad > South Middle")
+            }
+            SpotId::Giguna__Helipad__South_Right => {
+                write!(f, "{}", "Giguna > Helipad > South Right")
+            }
+            SpotId::Giguna__Helipad__Staircase_Top => {
+                write!(f, "{}", "Giguna > Helipad > Staircase Top")
+            }
+            SpotId::Giguna__Helipad__Tablet_Ledge => {
+                write!(f, "{}", "Giguna > Helipad > Tablet Ledge")
+            }
+            SpotId::Giguna__Helipad__Wall_Bottom => {
+                write!(f, "{}", "Giguna > Helipad > Wall Bottom")
+            }
             SpotId::Giguna__Helipad__Wall_Top => write!(f, "{}", "Giguna > Helipad > Wall Top"),
             SpotId::Giguna__Labyrinth__East_22 => write!(f, "{}", "Giguna > Labyrinth > East 22"),
             SpotId::Giguna__Labyrinth__East_23 => write!(f, "{}", "Giguna > Labyrinth > East 23"),
-            SpotId::Giguna__Labyrinth__Lower_East => write!(f, "{}", "Giguna > Labyrinth > Lower East"),
-            SpotId::Giguna__Labyrinth__Middle_East => write!(f, "{}", "Giguna > Labyrinth > Middle East"),
+            SpotId::Giguna__Labyrinth__Lower_East => {
+                write!(f, "{}", "Giguna > Labyrinth > Lower East")
+            }
+            SpotId::Giguna__Labyrinth__Middle_East => {
+                write!(f, "{}", "Giguna > Labyrinth > Middle East")
+            }
             SpotId::Giguna__Labyrinth__Top_East => write!(f, "{}", "Giguna > Labyrinth > Top East"),
-            SpotId::Giguna__Labyrinth_East__East_19 => write!(f, "{}", "Giguna > Labyrinth East > East 19"),
-            SpotId::Giguna__Labyrinth_East__East_20 => write!(f, "{}", "Giguna > Labyrinth East > East 20"),
-            SpotId::Giguna__Labyrinth_East__Lower_Middle => write!(f, "{}", "Giguna > Labyrinth East > Lower Middle"),
-            SpotId::Giguna__Labyrinth_East__Lower_West => write!(f, "{}", "Giguna > Labyrinth East > Lower West"),
-            SpotId::Giguna__Labyrinth_East__Middle_Drop => write!(f, "{}", "Giguna > Labyrinth East > Middle Drop"),
-            SpotId::Giguna__Labyrinth_East__Middle_Tree => write!(f, "{}", "Giguna > Labyrinth East > Middle Tree"),
-            SpotId::Giguna__Labyrinth_East__Middle_West => write!(f, "{}", "Giguna > Labyrinth East > Middle West"),
-            SpotId::Giguna__Labyrinth_East__Top_Middle => write!(f, "{}", "Giguna > Labyrinth East > Top Middle"),
-            SpotId::Giguna__Labyrinth_East__Top_West => write!(f, "{}", "Giguna > Labyrinth East > Top West"),
-            SpotId::Giguna__Lamassu__Broken_Pillar => write!(f, "{}", "Giguna > Lamassu > Broken Pillar"),
+            SpotId::Giguna__Labyrinth_East__East_19 => {
+                write!(f, "{}", "Giguna > Labyrinth East > East 19")
+            }
+            SpotId::Giguna__Labyrinth_East__East_20 => {
+                write!(f, "{}", "Giguna > Labyrinth East > East 20")
+            }
+            SpotId::Giguna__Labyrinth_East__Lower_Middle => {
+                write!(f, "{}", "Giguna > Labyrinth East > Lower Middle")
+            }
+            SpotId::Giguna__Labyrinth_East__Lower_West => {
+                write!(f, "{}", "Giguna > Labyrinth East > Lower West")
+            }
+            SpotId::Giguna__Labyrinth_East__Middle_Drop => {
+                write!(f, "{}", "Giguna > Labyrinth East > Middle Drop")
+            }
+            SpotId::Giguna__Labyrinth_East__Middle_Tree => {
+                write!(f, "{}", "Giguna > Labyrinth East > Middle Tree")
+            }
+            SpotId::Giguna__Labyrinth_East__Middle_West => {
+                write!(f, "{}", "Giguna > Labyrinth East > Middle West")
+            }
+            SpotId::Giguna__Labyrinth_East__Top_Middle => {
+                write!(f, "{}", "Giguna > Labyrinth East > Top Middle")
+            }
+            SpotId::Giguna__Labyrinth_East__Top_West => {
+                write!(f, "{}", "Giguna > Labyrinth East > Top West")
+            }
+            SpotId::Giguna__Lamassu__Broken_Pillar => {
+                write!(f, "{}", "Giguna > Lamassu > Broken Pillar")
+            }
             SpotId::Giguna__Lamassu__Deposit => write!(f, "{}", "Giguna > Lamassu > Deposit"),
             SpotId::Giguna__Lamassu__East_18 => write!(f, "{}", "Giguna > Lamassu > East 18"),
             SpotId::Giguna__Lamassu__Head => write!(f, "{}", "Giguna > Lamassu > Head"),
-            SpotId::Giguna__Lamassu__Lower_Platform_Left => write!(f, "{}", "Giguna > Lamassu > Lower Platform Left"),
-            SpotId::Giguna__Lamassu__Lower_Platform_Right => write!(f, "{}", "Giguna > Lamassu > Lower Platform Right"),
+            SpotId::Giguna__Lamassu__Lower_Platform_Left => {
+                write!(f, "{}", "Giguna > Lamassu > Lower Platform Left")
+            }
+            SpotId::Giguna__Lamassu__Lower_Platform_Right => {
+                write!(f, "{}", "Giguna > Lamassu > Lower Platform Right")
+            }
             SpotId::Giguna__Lamassu__Rear_Gap => write!(f, "{}", "Giguna > Lamassu > Rear Gap"),
-            SpotId::Giguna__Lamassu__Rear_Platform => write!(f, "{}", "Giguna > Lamassu > Rear Platform"),
-            SpotId::Giguna__Lamassu__Staircase_Bottom => write!(f, "{}", "Giguna > Lamassu > Staircase Bottom"),
-            SpotId::Giguna__Lamassu__Staircase_Landing => write!(f, "{}", "Giguna > Lamassu > Staircase Landing"),
-            SpotId::Giguna__Lamassu__Staircase_Top => write!(f, "{}", "Giguna > Lamassu > Staircase Top"),
-            SpotId::Giguna__Lamassu__Upper_Platform_Edge => write!(f, "{}", "Giguna > Lamassu > Upper Platform Edge"),
+            SpotId::Giguna__Lamassu__Rear_Platform => {
+                write!(f, "{}", "Giguna > Lamassu > Rear Platform")
+            }
+            SpotId::Giguna__Lamassu__Staircase_Bottom => {
+                write!(f, "{}", "Giguna > Lamassu > Staircase Bottom")
+            }
+            SpotId::Giguna__Lamassu__Staircase_Landing => {
+                write!(f, "{}", "Giguna > Lamassu > Staircase Landing")
+            }
+            SpotId::Giguna__Lamassu__Staircase_Top => {
+                write!(f, "{}", "Giguna > Lamassu > Staircase Top")
+            }
+            SpotId::Giguna__Lamassu__Upper_Platform_Edge => {
+                write!(f, "{}", "Giguna > Lamassu > Upper Platform Edge")
+            }
             SpotId::Giguna__Lamassu__West_18 => write!(f, "{}", "Giguna > Lamassu > West 18"),
             SpotId::Giguna__Lamassu__Wingtip => write!(f, "{}", "Giguna > Lamassu > Wingtip"),
-            SpotId::Giguna__Mural__Northwest_Item => write!(f, "{}", "Giguna > Mural > Northwest Item"),
+            SpotId::Giguna__Mural__Northwest_Item => {
+                write!(f, "{}", "Giguna > Mural > Northwest Item")
+            }
             SpotId::Giguna__Mural__West_20 => write!(f, "{}", "Giguna > Mural > West 20"),
-            SpotId::Giguna__Ruins_Center__Center_Top => write!(f, "{}", "Giguna > Ruins Center > Center Top"),
-            SpotId::Giguna__Ruins_Center__East_8 => write!(f, "{}", "Giguna > Ruins Center > East 8"),
-            SpotId::Giguna__Ruins_Center__East_9 => write!(f, "{}", "Giguna > Ruins Center > East 9"),
-            SpotId::Giguna__Ruins_Center__Tablet => write!(f, "{}", "Giguna > Ruins Center > Tablet"),
-            SpotId::Giguna__Ruins_Center__Wall_Bottom => write!(f, "{}", "Giguna > Ruins Center > Wall Bottom"),
-            SpotId::Giguna__Ruins_Center__Wall_Top => write!(f, "{}", "Giguna > Ruins Center > Wall Top"),
-            SpotId::Giguna__Ruins_Center__West_9 => write!(f, "{}", "Giguna > Ruins Center > West 9"),
-            SpotId::Giguna__Ruins_Center__West_Platform_Left => write!(f, "{}", "Giguna > Ruins Center > West Platform Left"),
-            SpotId::Giguna__Ruins_Center__West_Platform_Right => write!(f, "{}", "Giguna > Ruins Center > West Platform Right"),
-            SpotId::Giguna__Ruins_East__Bottom_Rock => write!(f, "{}", "Giguna > Ruins East > Bottom Rock"),
+            SpotId::Giguna__Ruins_Center__Center_Top => {
+                write!(f, "{}", "Giguna > Ruins Center > Center Top")
+            }
+            SpotId::Giguna__Ruins_Center__East_8 => {
+                write!(f, "{}", "Giguna > Ruins Center > East 8")
+            }
+            SpotId::Giguna__Ruins_Center__East_9 => {
+                write!(f, "{}", "Giguna > Ruins Center > East 9")
+            }
+            SpotId::Giguna__Ruins_Center__Tablet => {
+                write!(f, "{}", "Giguna > Ruins Center > Tablet")
+            }
+            SpotId::Giguna__Ruins_Center__Wall_Bottom => {
+                write!(f, "{}", "Giguna > Ruins Center > Wall Bottom")
+            }
+            SpotId::Giguna__Ruins_Center__Wall_Top => {
+                write!(f, "{}", "Giguna > Ruins Center > Wall Top")
+            }
+            SpotId::Giguna__Ruins_Center__West_9 => {
+                write!(f, "{}", "Giguna > Ruins Center > West 9")
+            }
+            SpotId::Giguna__Ruins_Center__West_Platform_Left => {
+                write!(f, "{}", "Giguna > Ruins Center > West Platform Left")
+            }
+            SpotId::Giguna__Ruins_Center__West_Platform_Right => {
+                write!(f, "{}", "Giguna > Ruins Center > West Platform Right")
+            }
+            SpotId::Giguna__Ruins_East__Bottom_Rock => {
+                write!(f, "{}", "Giguna > Ruins East > Bottom Rock")
+            }
             SpotId::Giguna__Ruins_East__Cliff => write!(f, "{}", "Giguna > Ruins East > Cliff"),
             SpotId::Giguna__Ruins_East__East_9 => write!(f, "{}", "Giguna > Ruins East > East 9"),
             SpotId::Giguna__Ruins_East__Ledge => write!(f, "{}", "Giguna > Ruins East > Ledge"),
             SpotId::Giguna__Ruins_East__Pillar => write!(f, "{}", "Giguna > Ruins East > Pillar"),
-            SpotId::Giguna__Ruins_East__Small_Passage => write!(f, "{}", "Giguna > Ruins East > Small Passage"),
-            SpotId::Giguna__Ruins_East__Way_Up_High => write!(f, "{}", "Giguna > Ruins East > Way Up High"),
+            SpotId::Giguna__Ruins_East__Small_Passage => {
+                write!(f, "{}", "Giguna > Ruins East > Small Passage")
+            }
+            SpotId::Giguna__Ruins_East__Way_Up_High => {
+                write!(f, "{}", "Giguna > Ruins East > Way Up High")
+            }
             SpotId::Giguna__Ruins_East__West_7 => write!(f, "{}", "Giguna > Ruins East > West 7"),
             SpotId::Giguna__Ruins_East__West_8 => write!(f, "{}", "Giguna > Ruins East > West 8"),
             SpotId::Giguna__Ruins_East__West_9 => write!(f, "{}", "Giguna > Ruins East > West 9"),
             SpotId::Giguna__Ruins_Top__East_7 => write!(f, "{}", "Giguna > Ruins Top > East 7"),
-            SpotId::Giguna__Ruins_Top__East_Door => write!(f, "{}", "Giguna > Ruins Top > East Door"),
+            SpotId::Giguna__Ruins_Top__East_Door => {
+                write!(f, "{}", "Giguna > Ruins Top > East Door")
+            }
             SpotId::Giguna__Ruins_Top__Entryway => write!(f, "{}", "Giguna > Ruins Top > Entryway"),
             SpotId::Giguna__Ruins_Top__Flask => write!(f, "{}", "Giguna > Ruins Top > Flask"),
-            SpotId::Giguna__Ruins_Top__Interior_Ledge => write!(f, "{}", "Giguna > Ruins Top > Interior Ledge"),
+            SpotId::Giguna__Ruins_Top__Interior_Ledge => {
+                write!(f, "{}", "Giguna > Ruins Top > Interior Ledge")
+            }
             SpotId::Giguna__Ruins_Top__Portal => write!(f, "{}", "Giguna > Ruins Top > Portal"),
-            SpotId::Giguna__Ruins_Top__Portal_Left => write!(f, "{}", "Giguna > Ruins Top > Portal Left"),
-            SpotId::Giguna__Ruins_Top__Rooftop_East => write!(f, "{}", "Giguna > Ruins Top > Rooftop East"),
-            SpotId::Giguna__Ruins_Top__Rooftop_Gutter => write!(f, "{}", "Giguna > Ruins Top > Rooftop Gutter"),
-            SpotId::Giguna__Ruins_Top__Rooftop_West => write!(f, "{}", "Giguna > Ruins Top > Rooftop West"),
-            SpotId::Giguna__Ruins_Top__Save_Point => write!(f, "{}", "Giguna > Ruins Top > Save Point"),
-            SpotId::Giguna__Ruins_Top__Small_Ledge => write!(f, "{}", "Giguna > Ruins Top > Small Ledge"),
+            SpotId::Giguna__Ruins_Top__Portal_Left => {
+                write!(f, "{}", "Giguna > Ruins Top > Portal Left")
+            }
+            SpotId::Giguna__Ruins_Top__Rooftop_East => {
+                write!(f, "{}", "Giguna > Ruins Top > Rooftop East")
+            }
+            SpotId::Giguna__Ruins_Top__Rooftop_Gutter => {
+                write!(f, "{}", "Giguna > Ruins Top > Rooftop Gutter")
+            }
+            SpotId::Giguna__Ruins_Top__Rooftop_West => {
+                write!(f, "{}", "Giguna > Ruins Top > Rooftop West")
+            }
+            SpotId::Giguna__Ruins_Top__Save_Point => {
+                write!(f, "{}", "Giguna > Ruins Top > Save Point")
+            }
+            SpotId::Giguna__Ruins_Top__Small_Ledge => {
+                write!(f, "{}", "Giguna > Ruins Top > Small Ledge")
+            }
             SpotId::Giguna__Ruins_Top__Switch => write!(f, "{}", "Giguna > Ruins Top > Switch"),
-            SpotId::Giguna__Ruins_Top__Turret_Balcony_East => write!(f, "{}", "Giguna > Ruins Top > Turret Balcony East"),
-            SpotId::Giguna__Ruins_Top__Turret_Balcony_West => write!(f, "{}", "Giguna > Ruins Top > Turret Balcony West"),
-            SpotId::Giguna__Ruins_Top__Upper_Tunnel => write!(f, "{}", "Giguna > Ruins Top > Upper Tunnel"),
+            SpotId::Giguna__Ruins_Top__Turret_Balcony_East => {
+                write!(f, "{}", "Giguna > Ruins Top > Turret Balcony East")
+            }
+            SpotId::Giguna__Ruins_Top__Turret_Balcony_West => {
+                write!(f, "{}", "Giguna > Ruins Top > Turret Balcony West")
+            }
+            SpotId::Giguna__Ruins_Top__Upper_Tunnel => {
+                write!(f, "{}", "Giguna > Ruins Top > Upper Tunnel")
+            }
             SpotId::Giguna__Ruins_Top__West_7 => write!(f, "{}", "Giguna > Ruins Top > West 7"),
-            SpotId::Giguna__Ruins_Top__West_Door => write!(f, "{}", "Giguna > Ruins Top > West Door"),
-            SpotId::Giguna__Ruins_Top__West_Pillar => write!(f, "{}", "Giguna > Ruins Top > West Pillar"),
+            SpotId::Giguna__Ruins_Top__West_Door => {
+                write!(f, "{}", "Giguna > Ruins Top > West Door")
+            }
+            SpotId::Giguna__Ruins_Top__West_Pillar => {
+                write!(f, "{}", "Giguna > Ruins Top > West Pillar")
+            }
             SpotId::Giguna__Ruins_West__East_7 => write!(f, "{}", "Giguna > Ruins West > East 7"),
             SpotId::Giguna__Ruins_West__East_9 => write!(f, "{}", "Giguna > Ruins West > East 9"),
-            SpotId::Giguna__Ruins_West__Lower_Ledge => write!(f, "{}", "Giguna > Ruins West > Lower Ledge"),
+            SpotId::Giguna__Ruins_West__Lower_Ledge => {
+                write!(f, "{}", "Giguna > Ruins West > Lower Ledge")
+            }
             SpotId::Giguna__Ruins_West__Nook => write!(f, "{}", "Giguna > Ruins West > Nook"),
-            SpotId::Giguna__Ruins_West__Platform => write!(f, "{}", "Giguna > Ruins West > Platform"),
-            SpotId::Giguna__Ruins_West__Rooftop_East_Edge => write!(f, "{}", "Giguna > Ruins West > Rooftop East Edge"),
-            SpotId::Giguna__Ruins_West__Rooftop_West_Edge => write!(f, "{}", "Giguna > Ruins West > Rooftop West Edge"),
-            SpotId::Giguna__Ruins_West__Save_Point => write!(f, "{}", "Giguna > Ruins West > Save Point"),
-            SpotId::Giguna__Ruins_West__Upper_Ledge => write!(f, "{}", "Giguna > Ruins West > Upper Ledge"),
+            SpotId::Giguna__Ruins_West__Platform => {
+                write!(f, "{}", "Giguna > Ruins West > Platform")
+            }
+            SpotId::Giguna__Ruins_West__Rooftop_East_Edge => {
+                write!(f, "{}", "Giguna > Ruins West > Rooftop East Edge")
+            }
+            SpotId::Giguna__Ruins_West__Rooftop_West_Edge => {
+                write!(f, "{}", "Giguna > Ruins West > Rooftop West Edge")
+            }
+            SpotId::Giguna__Ruins_West__Save_Point => {
+                write!(f, "{}", "Giguna > Ruins West > Save Point")
+            }
+            SpotId::Giguna__Ruins_West__Upper_Ledge => {
+                write!(f, "{}", "Giguna > Ruins West > Upper Ledge")
+            }
             SpotId::Giguna__Ruins_West__West_7 => write!(f, "{}", "Giguna > Ruins West > West 7"),
             SpotId::Giguna__Separator__East_25 => write!(f, "{}", "Giguna > Separator > East 25"),
             SpotId::Giguna__Separator__West_23 => write!(f, "{}", "Giguna > Separator > West 23"),
             SpotId::Giguna__Separator__West_24 => write!(f, "{}", "Giguna > Separator > West 24"),
             SpotId::Giguna__Separator__West_25 => write!(f, "{}", "Giguna > Separator > West 25"),
-            SpotId::Giguna__Separator__West_Mid_air => write!(f, "{}", "Giguna > Separator > West Mid-air"),
-            SpotId::Giguna__Vertical_Interchange__Dead_end => write!(f, "{}", "Giguna > Vertical Interchange > Dead-end"),
-            SpotId::Giguna__Vertical_Interchange__Dead_end_Ledge => write!(f, "{}", "Giguna > Vertical Interchange > Dead-end Ledge"),
-            SpotId::Giguna__Vertical_Interchange__East_20 => write!(f, "{}", "Giguna > Vertical Interchange > East 20"),
-            SpotId::Giguna__Vertical_Interchange__Gate => write!(f, "{}", "Giguna > Vertical Interchange > Gate"),
-            SpotId::Giguna__Vertical_Interchange__Ledge_19 => write!(f, "{}", "Giguna > Vertical Interchange > Ledge 19"),
-            SpotId::Giguna__Vertical_Interchange__Middle_Below_Top => write!(f, "{}", "Giguna > Vertical Interchange > Middle Below Top"),
-            SpotId::Giguna__Vertical_Interchange__Middle_Hill_By_Switch => write!(f, "{}", "Giguna > Vertical Interchange > Middle Hill By Switch"),
-            SpotId::Giguna__Vertical_Interchange__Middle_Ledge_Below_Gate => write!(f, "{}", "Giguna > Vertical Interchange > Middle Ledge Below Gate"),
-            SpotId::Giguna__Vertical_Interchange__Middle_Plateau => write!(f, "{}", "Giguna > Vertical Interchange > Middle Plateau"),
-            SpotId::Giguna__Vertical_Interchange__North => write!(f, "{}", "Giguna > Vertical Interchange > North"),
-            SpotId::Giguna__Vertical_Interchange__South => write!(f, "{}", "Giguna > Vertical Interchange > South"),
-            SpotId::Giguna__Vertical_Interchange__Switch => write!(f, "{}", "Giguna > Vertical Interchange > Switch"),
-            SpotId::Giguna__Vertical_Interchange__Top_Left_Ledge => write!(f, "{}", "Giguna > Vertical Interchange > Top Left Ledge"),
-            SpotId::Giguna__Vertical_Interchange__Top_Passage_Bottom => write!(f, "{}", "Giguna > Vertical Interchange > Top Passage Bottom"),
-            SpotId::Giguna__Vertical_Interchange__Top_Right_Ledge => write!(f, "{}", "Giguna > Vertical Interchange > Top Right Ledge"),
-            SpotId::Giguna__Vertical_Interchange__Top_Rocky_Ledge => write!(f, "{}", "Giguna > Vertical Interchange > Top Rocky Ledge"),
-            SpotId::Giguna__Vertical_Interchange__Top_Rocky_Outcrop => write!(f, "{}", "Giguna > Vertical Interchange > Top Rocky Outcrop"),
-            SpotId::Giguna__Vertical_Interchange__West_17 => write!(f, "{}", "Giguna > Vertical Interchange > West 17"),
-            SpotId::Giguna__Vertical_Interchange__West_19 => write!(f, "{}", "Giguna > Vertical Interchange > West 19"),
-            SpotId::Giguna__Wasteland__Bluff_by_Door => write!(f, "{}", "Giguna > Wasteland > Bluff by Door"),
-            SpotId::Giguna__Wasteland__Cache_Ledge => write!(f, "{}", "Giguna > Wasteland > Cache Ledge"),
-            SpotId::Giguna__Wasteland__Center_Plains => write!(f, "{}", "Giguna > Wasteland > Center Plains"),
-            SpotId::Giguna__Wasteland__Center_Platform_East => write!(f, "{}", "Giguna > Wasteland > Center Platform East"),
-            SpotId::Giguna__Wasteland__Center_Platform_West => write!(f, "{}", "Giguna > Wasteland > Center Platform West"),
-            SpotId::Giguna__Wasteland__Door_Left => write!(f, "{}", "Giguna > Wasteland > Door Left"),
-            SpotId::Giguna__Wasteland__Door_Right => write!(f, "{}", "Giguna > Wasteland > Door Right"),
+            SpotId::Giguna__Separator__West_Mid_air => {
+                write!(f, "{}", "Giguna > Separator > West Mid-air")
+            }
+            SpotId::Giguna__Vertical_Interchange__Dead_end => {
+                write!(f, "{}", "Giguna > Vertical Interchange > Dead-end")
+            }
+            SpotId::Giguna__Vertical_Interchange__Dead_end_Ledge => {
+                write!(f, "{}", "Giguna > Vertical Interchange > Dead-end Ledge")
+            }
+            SpotId::Giguna__Vertical_Interchange__East_20 => {
+                write!(f, "{}", "Giguna > Vertical Interchange > East 20")
+            }
+            SpotId::Giguna__Vertical_Interchange__Gate => {
+                write!(f, "{}", "Giguna > Vertical Interchange > Gate")
+            }
+            SpotId::Giguna__Vertical_Interchange__Ledge_19 => {
+                write!(f, "{}", "Giguna > Vertical Interchange > Ledge 19")
+            }
+            SpotId::Giguna__Vertical_Interchange__Middle_Below_Top => {
+                write!(f, "{}", "Giguna > Vertical Interchange > Middle Below Top")
+            }
+            SpotId::Giguna__Vertical_Interchange__Middle_Hill_By_Switch => write!(
+                f,
+                "{}",
+                "Giguna > Vertical Interchange > Middle Hill By Switch"
+            ),
+            SpotId::Giguna__Vertical_Interchange__Middle_Ledge_Below_Gate => write!(
+                f,
+                "{}",
+                "Giguna > Vertical Interchange > Middle Ledge Below Gate"
+            ),
+            SpotId::Giguna__Vertical_Interchange__Middle_Plateau => {
+                write!(f, "{}", "Giguna > Vertical Interchange > Middle Plateau")
+            }
+            SpotId::Giguna__Vertical_Interchange__North => {
+                write!(f, "{}", "Giguna > Vertical Interchange > North")
+            }
+            SpotId::Giguna__Vertical_Interchange__South => {
+                write!(f, "{}", "Giguna > Vertical Interchange > South")
+            }
+            SpotId::Giguna__Vertical_Interchange__Switch => {
+                write!(f, "{}", "Giguna > Vertical Interchange > Switch")
+            }
+            SpotId::Giguna__Vertical_Interchange__Top_Left_Ledge => {
+                write!(f, "{}", "Giguna > Vertical Interchange > Top Left Ledge")
+            }
+            SpotId::Giguna__Vertical_Interchange__Top_Passage_Bottom => write!(
+                f,
+                "{}",
+                "Giguna > Vertical Interchange > Top Passage Bottom"
+            ),
+            SpotId::Giguna__Vertical_Interchange__Top_Right_Ledge => {
+                write!(f, "{}", "Giguna > Vertical Interchange > Top Right Ledge")
+            }
+            SpotId::Giguna__Vertical_Interchange__Top_Rocky_Ledge => {
+                write!(f, "{}", "Giguna > Vertical Interchange > Top Rocky Ledge")
+            }
+            SpotId::Giguna__Vertical_Interchange__Top_Rocky_Outcrop => {
+                write!(f, "{}", "Giguna > Vertical Interchange > Top Rocky Outcrop")
+            }
+            SpotId::Giguna__Vertical_Interchange__West_17 => {
+                write!(f, "{}", "Giguna > Vertical Interchange > West 17")
+            }
+            SpotId::Giguna__Vertical_Interchange__West_19 => {
+                write!(f, "{}", "Giguna > Vertical Interchange > West 19")
+            }
+            SpotId::Giguna__Wasteland__Bluff_by_Door => {
+                write!(f, "{}", "Giguna > Wasteland > Bluff by Door")
+            }
+            SpotId::Giguna__Wasteland__Cache_Ledge => {
+                write!(f, "{}", "Giguna > Wasteland > Cache Ledge")
+            }
+            SpotId::Giguna__Wasteland__Center_Plains => {
+                write!(f, "{}", "Giguna > Wasteland > Center Plains")
+            }
+            SpotId::Giguna__Wasteland__Center_Platform_East => {
+                write!(f, "{}", "Giguna > Wasteland > Center Platform East")
+            }
+            SpotId::Giguna__Wasteland__Center_Platform_West => {
+                write!(f, "{}", "Giguna > Wasteland > Center Platform West")
+            }
+            SpotId::Giguna__Wasteland__Door_Left => {
+                write!(f, "{}", "Giguna > Wasteland > Door Left")
+            }
+            SpotId::Giguna__Wasteland__Door_Right => {
+                write!(f, "{}", "Giguna > Wasteland > Door Right")
+            }
             SpotId::Giguna__Wasteland__East_12 => write!(f, "{}", "Giguna > Wasteland > East 12"),
             SpotId::Giguna__Wasteland__East_13 => write!(f, "{}", "Giguna > Wasteland > East 13"),
             SpotId::Giguna__Wasteland__East_14 => write!(f, "{}", "Giguna > Wasteland > East 14"),
-            SpotId::Giguna__Wasteland__East_Ledge => write!(f, "{}", "Giguna > Wasteland > East Ledge"),
-            SpotId::Giguna__Wasteland__Ladder_Ledge => write!(f, "{}", "Giguna > Wasteland > Ladder Ledge"),
-            SpotId::Giguna__Wasteland__Left_Platform_East => write!(f, "{}", "Giguna > Wasteland > Left Platform East"),
-            SpotId::Giguna__Wasteland__Left_Platform_West => write!(f, "{}", "Giguna > Wasteland > Left Platform West"),
-            SpotId::Giguna__Wasteland__Lower_Cliff => write!(f, "{}", "Giguna > Wasteland > Lower Cliff"),
-            SpotId::Giguna__Wasteland__Lower_Path_Left => write!(f, "{}", "Giguna > Wasteland > Lower Path Left"),
-            SpotId::Giguna__Wasteland__Lower_Path_Right => write!(f, "{}", "Giguna > Wasteland > Lower Path Right"),
-            SpotId::Giguna__Wasteland__Lower_Platform_East => write!(f, "{}", "Giguna > Wasteland > Lower Platform East"),
-            SpotId::Giguna__Wasteland__Lower_Platform_West => write!(f, "{}", "Giguna > Wasteland > Lower Platform West"),
-            SpotId::Giguna__Wasteland__Middle_Cliff => write!(f, "{}", "Giguna > Wasteland > Middle Cliff"),
-            SpotId::Giguna__Wasteland__Middle_Path => write!(f, "{}", "Giguna > Wasteland > Middle Path"),
-            SpotId::Giguna__Wasteland__Passage_Cache => write!(f, "{}", "Giguna > Wasteland > Passage Cache"),
-            SpotId::Giguna__Wasteland__Passage_East => write!(f, "{}", "Giguna > Wasteland > Passage East"),
-            SpotId::Giguna__Wasteland__Right_Platform_East => write!(f, "{}", "Giguna > Wasteland > Right Platform East"),
-            SpotId::Giguna__Wasteland__Right_Platform_West => write!(f, "{}", "Giguna > Wasteland > Right Platform West"),
-            SpotId::Giguna__Wasteland__Steeper_Hill => write!(f, "{}", "Giguna > Wasteland > Steeper Hill"),
+            SpotId::Giguna__Wasteland__East_Ledge => {
+                write!(f, "{}", "Giguna > Wasteland > East Ledge")
+            }
+            SpotId::Giguna__Wasteland__Ladder_Ledge => {
+                write!(f, "{}", "Giguna > Wasteland > Ladder Ledge")
+            }
+            SpotId::Giguna__Wasteland__Left_Platform_East => {
+                write!(f, "{}", "Giguna > Wasteland > Left Platform East")
+            }
+            SpotId::Giguna__Wasteland__Left_Platform_West => {
+                write!(f, "{}", "Giguna > Wasteland > Left Platform West")
+            }
+            SpotId::Giguna__Wasteland__Lower_Cliff => {
+                write!(f, "{}", "Giguna > Wasteland > Lower Cliff")
+            }
+            SpotId::Giguna__Wasteland__Lower_Path_Left => {
+                write!(f, "{}", "Giguna > Wasteland > Lower Path Left")
+            }
+            SpotId::Giguna__Wasteland__Lower_Path_Right => {
+                write!(f, "{}", "Giguna > Wasteland > Lower Path Right")
+            }
+            SpotId::Giguna__Wasteland__Lower_Platform_East => {
+                write!(f, "{}", "Giguna > Wasteland > Lower Platform East")
+            }
+            SpotId::Giguna__Wasteland__Lower_Platform_West => {
+                write!(f, "{}", "Giguna > Wasteland > Lower Platform West")
+            }
+            SpotId::Giguna__Wasteland__Middle_Cliff => {
+                write!(f, "{}", "Giguna > Wasteland > Middle Cliff")
+            }
+            SpotId::Giguna__Wasteland__Middle_Path => {
+                write!(f, "{}", "Giguna > Wasteland > Middle Path")
+            }
+            SpotId::Giguna__Wasteland__Passage_Cache => {
+                write!(f, "{}", "Giguna > Wasteland > Passage Cache")
+            }
+            SpotId::Giguna__Wasteland__Passage_East => {
+                write!(f, "{}", "Giguna > Wasteland > Passage East")
+            }
+            SpotId::Giguna__Wasteland__Right_Platform_East => {
+                write!(f, "{}", "Giguna > Wasteland > Right Platform East")
+            }
+            SpotId::Giguna__Wasteland__Right_Platform_West => {
+                write!(f, "{}", "Giguna > Wasteland > Right Platform West")
+            }
+            SpotId::Giguna__Wasteland__Steeper_Hill => {
+                write!(f, "{}", "Giguna > Wasteland > Steeper Hill")
+            }
             SpotId::Giguna__Wasteland__Switch => write!(f, "{}", "Giguna > Wasteland > Switch"),
-            SpotId::Giguna__Wasteland__Switch_Approach => write!(f, "{}", "Giguna > Wasteland > Switch Approach"),
-            SpotId::Giguna__Wasteland__Switch_Ledge => write!(f, "{}", "Giguna > Wasteland > Switch Ledge"),
-            SpotId::Giguna__Wasteland__Tiny_Hill => write!(f, "{}", "Giguna > Wasteland > Tiny Hill"),
-            SpotId::Giguna__Wasteland__Upper_Cache => write!(f, "{}", "Giguna > Wasteland > Upper Cache"),
-            SpotId::Giguna__Wasteland__Upper_Cliff => write!(f, "{}", "Giguna > Wasteland > Upper Cliff"),
+            SpotId::Giguna__Wasteland__Switch_Approach => {
+                write!(f, "{}", "Giguna > Wasteland > Switch Approach")
+            }
+            SpotId::Giguna__Wasteland__Switch_Ledge => {
+                write!(f, "{}", "Giguna > Wasteland > Switch Ledge")
+            }
+            SpotId::Giguna__Wasteland__Tiny_Hill => {
+                write!(f, "{}", "Giguna > Wasteland > Tiny Hill")
+            }
+            SpotId::Giguna__Wasteland__Upper_Cache => {
+                write!(f, "{}", "Giguna > Wasteland > Upper Cache")
+            }
+            SpotId::Giguna__Wasteland__Upper_Cliff => {
+                write!(f, "{}", "Giguna > Wasteland > Upper Cliff")
+            }
             SpotId::Giguna__Wasteland__West_12 => write!(f, "{}", "Giguna > Wasteland > West 12"),
             SpotId::Giguna__Wasteland__West_13 => write!(f, "{}", "Giguna > Wasteland > West 13"),
             SpotId::Giguna__Wasteland__West_14 => write!(f, "{}", "Giguna > Wasteland > West 14"),
-            SpotId::Giguna__Wasteland__West_Plains => write!(f, "{}", "Giguna > Wasteland > West Plains"),
-            SpotId::Giguna__Wasteland__Westward_Hill => write!(f, "{}", "Giguna > Wasteland > Westward Hill"),
+            SpotId::Giguna__Wasteland__West_Plains => {
+                write!(f, "{}", "Giguna > Wasteland > West Plains")
+            }
+            SpotId::Giguna__Wasteland__Westward_Hill => {
+                write!(f, "{}", "Giguna > Wasteland > Westward Hill")
+            }
             SpotId::Giguna__West_Caverns__Bush => write!(f, "{}", "Giguna > West Caverns > Bush"),
             SpotId::Giguna__West_Caverns__Cache => write!(f, "{}", "Giguna > West Caverns > Cache"),
-            SpotId::Giguna__West_Caverns__Column_1_Top_Left => write!(f, "{}", "Giguna > West Caverns > Column 1 Top Left"),
-            SpotId::Giguna__West_Caverns__Column_1_Top_Right => write!(f, "{}", "Giguna > West Caverns > Column 1 Top Right"),
-            SpotId::Giguna__West_Caverns__Column_2_Top => write!(f, "{}", "Giguna > West Caverns > Column 2 Top"),
-            SpotId::Giguna__West_Caverns__East_10 => write!(f, "{}", "Giguna > West Caverns > East 10"),
-            SpotId::Giguna__West_Caverns__East_12 => write!(f, "{}", "Giguna > West Caverns > East 12"),
-            SpotId::Giguna__West_Caverns__East_13 => write!(f, "{}", "Giguna > West Caverns > East 13"),
-            SpotId::Giguna__West_Caverns__East_Platform => write!(f, "{}", "Giguna > West Caverns > East Platform"),
-            SpotId::Giguna__West_Caverns__East_Susar => write!(f, "{}", "Giguna > West Caverns > East Susar"),
-            SpotId::Giguna__West_Caverns__Floating_Brick => write!(f, "{}", "Giguna > West Caverns > Floating Brick"),
-            SpotId::Giguna__West_Caverns__Higher_Ledge => write!(f, "{}", "Giguna > West Caverns > Higher Ledge"),
-            SpotId::Giguna__West_Caverns__Northwest => write!(f, "{}", "Giguna > West Caverns > Northwest"),
-            SpotId::Giguna__West_Caverns__Small_Platform => write!(f, "{}", "Giguna > West Caverns > Small Platform"),
-            SpotId::Giguna__West_Caverns__Small_Staircase => write!(f, "{}", "Giguna > West Caverns > Small Staircase"),
-            SpotId::Giguna__West_Caverns__Top_Gap_Left => write!(f, "{}", "Giguna > West Caverns > Top Gap Left"),
-            SpotId::Giguna__West_Caverns__Top_Gap_Right => write!(f, "{}", "Giguna > West Caverns > Top Gap Right"),
-            SpotId::Giguna__West_Caverns__Tunnel_Bottom => write!(f, "{}", "Giguna > West Caverns > Tunnel Bottom"),
-            SpotId::Giguna__West_Caverns__Tunnel_Entrance => write!(f, "{}", "Giguna > West Caverns > Tunnel Entrance"),
-            SpotId::Giguna__West_Caverns__Tunnel_Fork => write!(f, "{}", "Giguna > West Caverns > Tunnel Fork"),
-            SpotId::Giguna__West_Caverns__West_13 => write!(f, "{}", "Giguna > West Caverns > West 13"),
+            SpotId::Giguna__West_Caverns__Column_1_Top_Left => {
+                write!(f, "{}", "Giguna > West Caverns > Column 1 Top Left")
+            }
+            SpotId::Giguna__West_Caverns__Column_1_Top_Right => {
+                write!(f, "{}", "Giguna > West Caverns > Column 1 Top Right")
+            }
+            SpotId::Giguna__West_Caverns__Column_2_Top => {
+                write!(f, "{}", "Giguna > West Caverns > Column 2 Top")
+            }
+            SpotId::Giguna__West_Caverns__East_10 => {
+                write!(f, "{}", "Giguna > West Caverns > East 10")
+            }
+            SpotId::Giguna__West_Caverns__East_12 => {
+                write!(f, "{}", "Giguna > West Caverns > East 12")
+            }
+            SpotId::Giguna__West_Caverns__East_13 => {
+                write!(f, "{}", "Giguna > West Caverns > East 13")
+            }
+            SpotId::Giguna__West_Caverns__East_Platform => {
+                write!(f, "{}", "Giguna > West Caverns > East Platform")
+            }
+            SpotId::Giguna__West_Caverns__East_Susar => {
+                write!(f, "{}", "Giguna > West Caverns > East Susar")
+            }
+            SpotId::Giguna__West_Caverns__Floating_Brick => {
+                write!(f, "{}", "Giguna > West Caverns > Floating Brick")
+            }
+            SpotId::Giguna__West_Caverns__Higher_Ledge => {
+                write!(f, "{}", "Giguna > West Caverns > Higher Ledge")
+            }
+            SpotId::Giguna__West_Caverns__Northwest => {
+                write!(f, "{}", "Giguna > West Caverns > Northwest")
+            }
+            SpotId::Giguna__West_Caverns__Small_Platform => {
+                write!(f, "{}", "Giguna > West Caverns > Small Platform")
+            }
+            SpotId::Giguna__West_Caverns__Small_Staircase => {
+                write!(f, "{}", "Giguna > West Caverns > Small Staircase")
+            }
+            SpotId::Giguna__West_Caverns__Top_Gap_Left => {
+                write!(f, "{}", "Giguna > West Caverns > Top Gap Left")
+            }
+            SpotId::Giguna__West_Caverns__Top_Gap_Right => {
+                write!(f, "{}", "Giguna > West Caverns > Top Gap Right")
+            }
+            SpotId::Giguna__West_Caverns__Tunnel_Bottom => {
+                write!(f, "{}", "Giguna > West Caverns > Tunnel Bottom")
+            }
+            SpotId::Giguna__West_Caverns__Tunnel_Entrance => {
+                write!(f, "{}", "Giguna > West Caverns > Tunnel Entrance")
+            }
+            SpotId::Giguna__West_Caverns__Tunnel_Fork => {
+                write!(f, "{}", "Giguna > West Caverns > Tunnel Fork")
+            }
+            SpotId::Giguna__West_Caverns__West_13 => {
+                write!(f, "{}", "Giguna > West Caverns > West 13")
+            }
             SpotId::Giguna__West_Tower__East_7 => write!(f, "{}", "Giguna > West Tower > East 7"),
-            SpotId::Giguna__West_Tower__Southwest => write!(f, "{}", "Giguna > West Tower > Southwest"),
+            SpotId::Giguna__West_Tower__Southwest => {
+                write!(f, "{}", "Giguna > West Tower > Southwest")
+            }
             SpotId::Giguna__West_Tower__Top => write!(f, "{}", "Giguna > West Tower > Top"),
-            SpotId::Giguna_Breach__Antechamber__North => write!(f, "{}", "Giguna Breach > Antechamber > North"),
-            SpotId::Giguna_Breach__Ascent__Bottom => write!(f, "{}", "Giguna Breach > Ascent > Bottom"),
+            SpotId::Giguna_Breach__Antechamber__North => {
+                write!(f, "{}", "Giguna Breach > Antechamber > North")
+            }
+            SpotId::Giguna_Breach__Ascent__Bottom => {
+                write!(f, "{}", "Giguna Breach > Ascent > Bottom")
+            }
             SpotId::Giguna_Breach__Ascent__Top => write!(f, "{}", "Giguna Breach > Ascent > Top"),
-            SpotId::Giguna_Breach__Ascent__West_6 => write!(f, "{}", "Giguna Breach > Ascent > West 6"),
-            SpotId::Giguna_Breach__Ascent__West_9 => write!(f, "{}", "Giguna Breach > Ascent > West 9"),
-            SpotId::Giguna_Breach__Below_Chimney__Cubby_Entrance => write!(f, "{}", "Giguna Breach > Below Chimney > Cubby Entrance"),
-            SpotId::Giguna_Breach__Below_Chimney__East_Ledge => write!(f, "{}", "Giguna Breach > Below Chimney > East Ledge"),
-            SpotId::Giguna_Breach__Below_Chimney__North => write!(f, "{}", "Giguna Breach > Below Chimney > North"),
-            SpotId::Giguna_Breach__Below_Chimney__Passage_Lip => write!(f, "{}", "Giguna Breach > Below Chimney > Passage Lip"),
-            SpotId::Giguna_Breach__Below_Chimney__Southwest => write!(f, "{}", "Giguna Breach > Below Chimney > Southwest"),
-            SpotId::Giguna_Breach__Below_Chimney__West_Passage => write!(f, "{}", "Giguna Breach > Below Chimney > West Passage"),
-            SpotId::Giguna_Breach__Central__East_9 => write!(f, "{}", "Giguna Breach > Central > East 9"),
-            SpotId::Giguna_Breach__Central__East_Brick => write!(f, "{}", "Giguna Breach > Central > East Brick"),
-            SpotId::Giguna_Breach__Central__Middle_Statue => write!(f, "{}", "Giguna Breach > Central > Middle Statue"),
-            SpotId::Giguna_Breach__Central__South => write!(f, "{}", "Giguna Breach > Central > South"),
-            SpotId::Giguna_Breach__Central__Statuette => write!(f, "{}", "Giguna Breach > Central > Statuette"),
-            SpotId::Giguna_Breach__Central__Tunnel => write!(f, "{}", "Giguna Breach > Central > Tunnel"),
-            SpotId::Giguna_Breach__Central__Upper_Floating_Brick => write!(f, "{}", "Giguna Breach > Central > Upper Floating Brick"),
-            SpotId::Giguna_Breach__Central__Wall => write!(f, "{}", "Giguna Breach > Central > Wall"),
-            SpotId::Giguna_Breach__Central__West_8 => write!(f, "{}", "Giguna Breach > Central > West 8"),
-            SpotId::Giguna_Breach__Central__West_9 => write!(f, "{}", "Giguna Breach > Central > West 9"),
-            SpotId::Giguna_Breach__Central__West_Statue => write!(f, "{}", "Giguna Breach > Central > West Statue"),
-            SpotId::Giguna_Breach__Chimney__Cache => write!(f, "{}", "Giguna Breach > Chimney > Cache"),
-            SpotId::Giguna_Breach__Chimney__East_7 => write!(f, "{}", "Giguna Breach > Chimney > East 7"),
-            SpotId::Giguna_Breach__Chimney__East_8 => write!(f, "{}", "Giguna Breach > Chimney > East 8"),
-            SpotId::Giguna_Breach__Chimney__East_9 => write!(f, "{}", "Giguna Breach > Chimney > East 9"),
-            SpotId::Giguna_Breach__Chimney__Middle_Platform => write!(f, "{}", "Giguna Breach > Chimney > Middle Platform"),
-            SpotId::Giguna_Breach__Chimney__South => write!(f, "{}", "Giguna Breach > Chimney > South"),
+            SpotId::Giguna_Breach__Ascent__West_6 => {
+                write!(f, "{}", "Giguna Breach > Ascent > West 6")
+            }
+            SpotId::Giguna_Breach__Ascent__West_9 => {
+                write!(f, "{}", "Giguna Breach > Ascent > West 9")
+            }
+            SpotId::Giguna_Breach__Below_Chimney__Cubby_Entrance => {
+                write!(f, "{}", "Giguna Breach > Below Chimney > Cubby Entrance")
+            }
+            SpotId::Giguna_Breach__Below_Chimney__East_Ledge => {
+                write!(f, "{}", "Giguna Breach > Below Chimney > East Ledge")
+            }
+            SpotId::Giguna_Breach__Below_Chimney__North => {
+                write!(f, "{}", "Giguna Breach > Below Chimney > North")
+            }
+            SpotId::Giguna_Breach__Below_Chimney__Passage_Lip => {
+                write!(f, "{}", "Giguna Breach > Below Chimney > Passage Lip")
+            }
+            SpotId::Giguna_Breach__Below_Chimney__Southwest => {
+                write!(f, "{}", "Giguna Breach > Below Chimney > Southwest")
+            }
+            SpotId::Giguna_Breach__Below_Chimney__West_Passage => {
+                write!(f, "{}", "Giguna Breach > Below Chimney > West Passage")
+            }
+            SpotId::Giguna_Breach__Central__East_9 => {
+                write!(f, "{}", "Giguna Breach > Central > East 9")
+            }
+            SpotId::Giguna_Breach__Central__East_Brick => {
+                write!(f, "{}", "Giguna Breach > Central > East Brick")
+            }
+            SpotId::Giguna_Breach__Central__Middle_Statue => {
+                write!(f, "{}", "Giguna Breach > Central > Middle Statue")
+            }
+            SpotId::Giguna_Breach__Central__South => {
+                write!(f, "{}", "Giguna Breach > Central > South")
+            }
+            SpotId::Giguna_Breach__Central__Statuette => {
+                write!(f, "{}", "Giguna Breach > Central > Statuette")
+            }
+            SpotId::Giguna_Breach__Central__Tunnel => {
+                write!(f, "{}", "Giguna Breach > Central > Tunnel")
+            }
+            SpotId::Giguna_Breach__Central__Upper_Floating_Brick => {
+                write!(f, "{}", "Giguna Breach > Central > Upper Floating Brick")
+            }
+            SpotId::Giguna_Breach__Central__Wall => {
+                write!(f, "{}", "Giguna Breach > Central > Wall")
+            }
+            SpotId::Giguna_Breach__Central__West_8 => {
+                write!(f, "{}", "Giguna Breach > Central > West 8")
+            }
+            SpotId::Giguna_Breach__Central__West_9 => {
+                write!(f, "{}", "Giguna Breach > Central > West 9")
+            }
+            SpotId::Giguna_Breach__Central__West_Statue => {
+                write!(f, "{}", "Giguna Breach > Central > West Statue")
+            }
+            SpotId::Giguna_Breach__Chimney__Cache => {
+                write!(f, "{}", "Giguna Breach > Chimney > Cache")
+            }
+            SpotId::Giguna_Breach__Chimney__East_7 => {
+                write!(f, "{}", "Giguna Breach > Chimney > East 7")
+            }
+            SpotId::Giguna_Breach__Chimney__East_8 => {
+                write!(f, "{}", "Giguna Breach > Chimney > East 8")
+            }
+            SpotId::Giguna_Breach__Chimney__East_9 => {
+                write!(f, "{}", "Giguna Breach > Chimney > East 9")
+            }
+            SpotId::Giguna_Breach__Chimney__Middle_Platform => {
+                write!(f, "{}", "Giguna Breach > Chimney > Middle Platform")
+            }
+            SpotId::Giguna_Breach__Chimney__South => {
+                write!(f, "{}", "Giguna Breach > Chimney > South")
+            }
             SpotId::Giguna_Breach__Chimney__Top => write!(f, "{}", "Giguna Breach > Chimney > Top"),
-            SpotId::Giguna_Breach__Cubby__Entrance => write!(f, "{}", "Giguna Breach > Cubby > Entrance"),
+            SpotId::Giguna_Breach__Cubby__Entrance => {
+                write!(f, "{}", "Giguna Breach > Cubby > Entrance")
+            }
             SpotId::Giguna_Breach__Cubby__Rocks => write!(f, "{}", "Giguna Breach > Cubby > Rocks"),
-            SpotId::Giguna_Breach__Fire_Room__Cuesta => write!(f, "{}", "Giguna Breach > Fire Room > Cuesta"),
-            SpotId::Giguna_Breach__Fire_Room__East_11 => write!(f, "{}", "Giguna Breach > Fire Room > East 11"),
-            SpotId::Giguna_Breach__Fire_Room__First_Fire => write!(f, "{}", "Giguna Breach > Fire Room > First Fire"),
-            SpotId::Giguna_Breach__Fire_Room__South => write!(f, "{}", "Giguna Breach > Fire Room > South"),
-            SpotId::Giguna_Breach__Fire_Room__West_10 => write!(f, "{}", "Giguna Breach > Fire Room > West 10"),
-            SpotId::Giguna_Breach__Fire_Room__West_11 => write!(f, "{}", "Giguna Breach > Fire Room > West 11"),
-            SpotId::Giguna_Breach__Fire_Room__West_Plateau => write!(f, "{}", "Giguna Breach > Fire Room > West Plateau"),
-            SpotId::Giguna_Breach__Grid_14_10_11__East_10 => write!(f, "{}", "Giguna Breach > Grid 14,10-11 > East 10"),
-            SpotId::Giguna_Breach__Grid_14_10_11__East_11 => write!(f, "{}", "Giguna Breach > Grid 14,10-11 > East 11"),
-            SpotId::Giguna_Breach__Grid_14_10_11__High_Ledge => write!(f, "{}", "Giguna Breach > Grid 14,10-11 > High Ledge"),
-            SpotId::Giguna_Breach__Grid_14_10_11__North => write!(f, "{}", "Giguna Breach > Grid 14,10-11 > North"),
-            SpotId::Giguna_Breach__Grid_14_10_11__South => write!(f, "{}", "Giguna Breach > Grid 14,10-11 > South"),
+            SpotId::Giguna_Breach__Fire_Room__Cuesta => {
+                write!(f, "{}", "Giguna Breach > Fire Room > Cuesta")
+            }
+            SpotId::Giguna_Breach__Fire_Room__East_11 => {
+                write!(f, "{}", "Giguna Breach > Fire Room > East 11")
+            }
+            SpotId::Giguna_Breach__Fire_Room__First_Fire => {
+                write!(f, "{}", "Giguna Breach > Fire Room > First Fire")
+            }
+            SpotId::Giguna_Breach__Fire_Room__South => {
+                write!(f, "{}", "Giguna Breach > Fire Room > South")
+            }
+            SpotId::Giguna_Breach__Fire_Room__West_10 => {
+                write!(f, "{}", "Giguna Breach > Fire Room > West 10")
+            }
+            SpotId::Giguna_Breach__Fire_Room__West_11 => {
+                write!(f, "{}", "Giguna Breach > Fire Room > West 11")
+            }
+            SpotId::Giguna_Breach__Fire_Room__West_Plateau => {
+                write!(f, "{}", "Giguna Breach > Fire Room > West Plateau")
+            }
+            SpotId::Giguna_Breach__Grid_14_10_11__East_10 => {
+                write!(f, "{}", "Giguna Breach > Grid 14,10-11 > East 10")
+            }
+            SpotId::Giguna_Breach__Grid_14_10_11__East_11 => {
+                write!(f, "{}", "Giguna Breach > Grid 14,10-11 > East 11")
+            }
+            SpotId::Giguna_Breach__Grid_14_10_11__High_Ledge => {
+                write!(f, "{}", "Giguna Breach > Grid 14,10-11 > High Ledge")
+            }
+            SpotId::Giguna_Breach__Grid_14_10_11__North => {
+                write!(f, "{}", "Giguna Breach > Grid 14,10-11 > North")
+            }
+            SpotId::Giguna_Breach__Grid_14_10_11__South => {
+                write!(f, "{}", "Giguna Breach > Grid 14,10-11 > South")
+            }
             SpotId::Giguna_Breach__Peak__Column => write!(f, "{}", "Giguna Breach > Peak > Column"),
             SpotId::Giguna_Breach__Peak__East_6 => write!(f, "{}", "Giguna Breach > Peak > East 6"),
-            SpotId::Giguna_Breach__Peak__East_Passage => write!(f, "{}", "Giguna Breach > Peak > East Passage"),
+            SpotId::Giguna_Breach__Peak__East_Passage => {
+                write!(f, "{}", "Giguna Breach > Peak > East Passage")
+            }
             SpotId::Giguna_Breach__Peak__Portal => write!(f, "{}", "Giguna Breach > Peak > Portal"),
-            SpotId::Giguna_Breach__Peak__Save_Point => write!(f, "{}", "Giguna Breach > Peak > Save Point"),
-            SpotId::Giguna_Breach__Peak__Upper_East => write!(f, "{}", "Giguna Breach > Peak > Upper East"),
-            SpotId::Giguna_Breach__Peak__Upper_West => write!(f, "{}", "Giguna Breach > Peak > Upper West"),
+            SpotId::Giguna_Breach__Peak__Save_Point => {
+                write!(f, "{}", "Giguna Breach > Peak > Save Point")
+            }
+            SpotId::Giguna_Breach__Peak__Upper_East => {
+                write!(f, "{}", "Giguna Breach > Peak > Upper East")
+            }
+            SpotId::Giguna_Breach__Peak__Upper_West => {
+                write!(f, "{}", "Giguna Breach > Peak > Upper West")
+            }
             SpotId::Giguna_Breach__Peak__West_7 => write!(f, "{}", "Giguna Breach > Peak > West 7"),
-            SpotId::Giguna_Breach__Pink_Clouds__Corner => write!(f, "{}", "Giguna Breach > Pink Clouds > Corner"),
-            SpotId::Giguna_Breach__Pink_Clouds__Normal_Entry => write!(f, "{}", "Giguna Breach > Pink Clouds > Normal Entry"),
-            SpotId::Giguna_Breach__Pink_Clouds__Quick_Entry => write!(f, "{}", "Giguna Breach > Pink Clouds > Quick Entry"),
-            SpotId::Giguna_Breach__Robopede__Center => write!(f, "{}", "Giguna Breach > Robopede > Center"),
-            SpotId::Giguna_Breach__Robopede__North => write!(f, "{}", "Giguna Breach > Robopede > North"),
-            SpotId::Giguna_Breach__Robopede__West => write!(f, "{}", "Giguna Breach > Robopede > West"),
-            SpotId::Giguna_Breach__Slingshot__Column => write!(f, "{}", "Giguna Breach > Slingshot > Column"),
-            SpotId::Giguna_Breach__Slingshot__Ravine => write!(f, "{}", "Giguna Breach > Slingshot > Ravine"),
-            SpotId::Giguna_Breach__Slingshot__West => write!(f, "{}", "Giguna Breach > Slingshot > West"),
-            SpotId::Giguna_Breach__SW_Save__East_12 => write!(f, "{}", "Giguna Breach > SW Save > East 12"),
-            SpotId::Giguna_Breach__SW_Save__Lower_Platform => write!(f, "{}", "Giguna Breach > SW Save > Lower Platform"),
-            SpotId::Giguna_Breach__SW_Save__North => write!(f, "{}", "Giguna Breach > SW Save > North"),
-            SpotId::Giguna_Breach__SW_Save__Save_Point => write!(f, "{}", "Giguna Breach > SW Save > Save Point"),
-            SpotId::Giguna_Breach__SW_Save__Side_Door => write!(f, "{}", "Giguna Breach > SW Save > Side Door"),
-            SpotId::Giguna_Breach__SW_Save__West_11 => write!(f, "{}", "Giguna Breach > SW Save > West 11"),
-            SpotId::Glacier__Apocalypse_Entry__Terminal => write!(f, "{}", "Glacier > Apocalypse Entry > Terminal"),
-            SpotId::Glacier__Apocalypse_Entry__West => write!(f, "{}", "Glacier > Apocalypse Entry > West"),
-            SpotId::Glacier__Boomerang_Antechamber__East_12 => write!(f, "{}", "Glacier > Boomerang Antechamber > East 12"),
-            SpotId::Glacier__Boomerang_Antechamber__Upper_East => write!(f, "{}", "Glacier > Boomerang Antechamber > Upper East"),
-            SpotId::Glacier__Boomerang_Antechamber__West_12 => write!(f, "{}", "Glacier > Boomerang Antechamber > West 12"),
-            SpotId::Glacier__Boomerang_Antechamber__West_13 => write!(f, "{}", "Glacier > Boomerang Antechamber > West 13"),
-            SpotId::Glacier__Boomerang_Room__Center_ish => write!(f, "{}", "Glacier > Boomerang Room > Center-ish"),
-            SpotId::Glacier__Boomerang_Room__Center_Ledge => write!(f, "{}", "Glacier > Boomerang Room > Center Ledge"),
-            SpotId::Glacier__Boomerang_Room__Pedestal => write!(f, "{}", "Glacier > Boomerang Room > Pedestal"),
-            SpotId::Glacier__Boomerang_Room__Platform => write!(f, "{}", "Glacier > Boomerang Room > Platform"),
-            SpotId::Glacier__Boomerang_Room__Upper_Gate_East => write!(f, "{}", "Glacier > Boomerang Room > Upper Gate East"),
-            SpotId::Glacier__Boomerang_Room__Upper_West => write!(f, "{}", "Glacier > Boomerang Room > Upper West"),
-            SpotId::Glacier__Boomerang_Room__West => write!(f, "{}", "Glacier > Boomerang Room > West"),
-            SpotId::Glacier__Compass_Room__Center => write!(f, "{}", "Glacier > Compass Room > Center"),
+            SpotId::Giguna_Breach__Pink_Clouds__Corner => {
+                write!(f, "{}", "Giguna Breach > Pink Clouds > Corner")
+            }
+            SpotId::Giguna_Breach__Pink_Clouds__Normal_Entry => {
+                write!(f, "{}", "Giguna Breach > Pink Clouds > Normal Entry")
+            }
+            SpotId::Giguna_Breach__Pink_Clouds__Quick_Entry => {
+                write!(f, "{}", "Giguna Breach > Pink Clouds > Quick Entry")
+            }
+            SpotId::Giguna_Breach__Robopede__Center => {
+                write!(f, "{}", "Giguna Breach > Robopede > Center")
+            }
+            SpotId::Giguna_Breach__Robopede__North => {
+                write!(f, "{}", "Giguna Breach > Robopede > North")
+            }
+            SpotId::Giguna_Breach__Robopede__West => {
+                write!(f, "{}", "Giguna Breach > Robopede > West")
+            }
+            SpotId::Giguna_Breach__Slingshot__Column => {
+                write!(f, "{}", "Giguna Breach > Slingshot > Column")
+            }
+            SpotId::Giguna_Breach__Slingshot__Ravine => {
+                write!(f, "{}", "Giguna Breach > Slingshot > Ravine")
+            }
+            SpotId::Giguna_Breach__Slingshot__West => {
+                write!(f, "{}", "Giguna Breach > Slingshot > West")
+            }
+            SpotId::Giguna_Breach__SW_Save__East_12 => {
+                write!(f, "{}", "Giguna Breach > SW Save > East 12")
+            }
+            SpotId::Giguna_Breach__SW_Save__Lower_Platform => {
+                write!(f, "{}", "Giguna Breach > SW Save > Lower Platform")
+            }
+            SpotId::Giguna_Breach__SW_Save__North => {
+                write!(f, "{}", "Giguna Breach > SW Save > North")
+            }
+            SpotId::Giguna_Breach__SW_Save__Save_Point => {
+                write!(f, "{}", "Giguna Breach > SW Save > Save Point")
+            }
+            SpotId::Giguna_Breach__SW_Save__Side_Door => {
+                write!(f, "{}", "Giguna Breach > SW Save > Side Door")
+            }
+            SpotId::Giguna_Breach__SW_Save__West_11 => {
+                write!(f, "{}", "Giguna Breach > SW Save > West 11")
+            }
+            SpotId::Glacier__Apocalypse_Entry__Terminal => {
+                write!(f, "{}", "Glacier > Apocalypse Entry > Terminal")
+            }
+            SpotId::Glacier__Apocalypse_Entry__West => {
+                write!(f, "{}", "Glacier > Apocalypse Entry > West")
+            }
+            SpotId::Glacier__Boomerang_Antechamber__East_12 => {
+                write!(f, "{}", "Glacier > Boomerang Antechamber > East 12")
+            }
+            SpotId::Glacier__Boomerang_Antechamber__Upper_East => {
+                write!(f, "{}", "Glacier > Boomerang Antechamber > Upper East")
+            }
+            SpotId::Glacier__Boomerang_Antechamber__West_12 => {
+                write!(f, "{}", "Glacier > Boomerang Antechamber > West 12")
+            }
+            SpotId::Glacier__Boomerang_Antechamber__West_13 => {
+                write!(f, "{}", "Glacier > Boomerang Antechamber > West 13")
+            }
+            SpotId::Glacier__Boomerang_Room__Center_ish => {
+                write!(f, "{}", "Glacier > Boomerang Room > Center-ish")
+            }
+            SpotId::Glacier__Boomerang_Room__Center_Ledge => {
+                write!(f, "{}", "Glacier > Boomerang Room > Center Ledge")
+            }
+            SpotId::Glacier__Boomerang_Room__Pedestal => {
+                write!(f, "{}", "Glacier > Boomerang Room > Pedestal")
+            }
+            SpotId::Glacier__Boomerang_Room__Platform => {
+                write!(f, "{}", "Glacier > Boomerang Room > Platform")
+            }
+            SpotId::Glacier__Boomerang_Room__Upper_Gate_East => {
+                write!(f, "{}", "Glacier > Boomerang Room > Upper Gate East")
+            }
+            SpotId::Glacier__Boomerang_Room__Upper_West => {
+                write!(f, "{}", "Glacier > Boomerang Room > Upper West")
+            }
+            SpotId::Glacier__Boomerang_Room__West => {
+                write!(f, "{}", "Glacier > Boomerang Room > West")
+            }
+            SpotId::Glacier__Compass_Room__Center => {
+                write!(f, "{}", "Glacier > Compass Room > Center")
+            }
             SpotId::Glacier__Compass_Room__East => write!(f, "{}", "Glacier > Compass Room > East"),
             SpotId::Glacier__Compass_Room__West => write!(f, "{}", "Glacier > Compass Room > West"),
-            SpotId::Glacier__Dock_Outside__Do_Not_Enter => write!(f, "{}", "Glacier > Dock Outside > Do Not Enter"),
-            SpotId::Glacier__Dock_Outside__Entry => write!(f, "{}", "Glacier > Dock Outside > Entry"),
-            SpotId::Glacier__Grid_31_9_12__East_10 => write!(f, "{}", "Glacier > Grid 31,9-12 > East 10"),
-            SpotId::Glacier__Grid_31_9_12__East_9 => write!(f, "{}", "Glacier > Grid 31,9-12 > East 9"),
-            SpotId::Glacier__Grid_31_9_12__Midair => write!(f, "{}", "Glacier > Grid 31,9-12 > Midair"),
-            SpotId::Glacier__Grid_31_9_12__Observation_Tower => write!(f, "{}", "Glacier > Grid 31,9-12 > Observation Tower"),
-            SpotId::Glacier__Grid_31_9_12__Observation_Tower_L4 => write!(f, "{}", "Glacier > Grid 31,9-12 > Observation Tower L4"),
-            SpotId::Glacier__Grid_31_9_12__West_12 => write!(f, "{}", "Glacier > Grid 31,9-12 > West 12"),
-            SpotId::Glacier__Grid_32_7_10__Center_Platform => write!(f, "{}", "Glacier > Grid 32,7-10 > Center Platform"),
-            SpotId::Glacier__Grid_32_7_10__Column => write!(f, "{}", "Glacier > Grid 32,7-10 > Column"),
-            SpotId::Glacier__Grid_32_7_10__East_8 => write!(f, "{}", "Glacier > Grid 32,7-10 > East 8"),
-            SpotId::Glacier__Grid_32_7_10__Left_Rock => write!(f, "{}", "Glacier > Grid 32,7-10 > Left Rock"),
-            SpotId::Glacier__Grid_32_7_10__West_10 => write!(f, "{}", "Glacier > Grid 32,7-10 > West 10"),
-            SpotId::Glacier__Grid_32_7_10__West_9 => write!(f, "{}", "Glacier > Grid 32,7-10 > West 9"),
+            SpotId::Glacier__Dock_Outside__Do_Not_Enter => {
+                write!(f, "{}", "Glacier > Dock Outside > Do Not Enter")
+            }
+            SpotId::Glacier__Dock_Outside__Entry => {
+                write!(f, "{}", "Glacier > Dock Outside > Entry")
+            }
+            SpotId::Glacier__Grid_31_9_12__East_10 => {
+                write!(f, "{}", "Glacier > Grid 31,9-12 > East 10")
+            }
+            SpotId::Glacier__Grid_31_9_12__East_9 => {
+                write!(f, "{}", "Glacier > Grid 31,9-12 > East 9")
+            }
+            SpotId::Glacier__Grid_31_9_12__Midair => {
+                write!(f, "{}", "Glacier > Grid 31,9-12 > Midair")
+            }
+            SpotId::Glacier__Grid_31_9_12__Observation_Tower => {
+                write!(f, "{}", "Glacier > Grid 31,9-12 > Observation Tower")
+            }
+            SpotId::Glacier__Grid_31_9_12__Observation_Tower_L4 => {
+                write!(f, "{}", "Glacier > Grid 31,9-12 > Observation Tower L4")
+            }
+            SpotId::Glacier__Grid_31_9_12__West_12 => {
+                write!(f, "{}", "Glacier > Grid 31,9-12 > West 12")
+            }
+            SpotId::Glacier__Grid_32_7_10__Center_Platform => {
+                write!(f, "{}", "Glacier > Grid 32,7-10 > Center Platform")
+            }
+            SpotId::Glacier__Grid_32_7_10__Column => {
+                write!(f, "{}", "Glacier > Grid 32,7-10 > Column")
+            }
+            SpotId::Glacier__Grid_32_7_10__East_8 => {
+                write!(f, "{}", "Glacier > Grid 32,7-10 > East 8")
+            }
+            SpotId::Glacier__Grid_32_7_10__Left_Rock => {
+                write!(f, "{}", "Glacier > Grid 32,7-10 > Left Rock")
+            }
+            SpotId::Glacier__Grid_32_7_10__West_10 => {
+                write!(f, "{}", "Glacier > Grid 32,7-10 > West 10")
+            }
+            SpotId::Glacier__Grid_32_7_10__West_9 => {
+                write!(f, "{}", "Glacier > Grid 32,7-10 > West 9")
+            }
             SpotId::Glacier__Grid_37_38_9__East => write!(f, "{}", "Glacier > Grid 37-38,9 > East"),
             SpotId::Glacier__Grid_37_38_9__West => write!(f, "{}", "Glacier > Grid 37-38,9 > West"),
-            SpotId::Glacier__Grid_39_40_7_9__Upper_East => write!(f, "{}", "Glacier > Grid 39-40,7-9 > Upper East"),
-            SpotId::Glacier__Grid_39_40_7_9__West => write!(f, "{}", "Glacier > Grid 39-40,7-9 > West"),
+            SpotId::Glacier__Grid_39_40_7_9__Upper_East => {
+                write!(f, "{}", "Glacier > Grid 39-40,7-9 > Upper East")
+            }
+            SpotId::Glacier__Grid_39_40_7_9__West => {
+                write!(f, "{}", "Glacier > Grid 39-40,7-9 > West")
+            }
             SpotId::Glacier__Grid_42_10__East => write!(f, "{}", "Glacier > Grid 42,10 > East"),
             SpotId::Glacier__Grid_42_10__West => write!(f, "{}", "Glacier > Grid 42,10 > West"),
-            SpotId::Glacier__Grid_43_10_11__East => write!(f, "{}", "Glacier > Grid 43,10-11 > East"),
-            SpotId::Glacier__Grid_43_10_11__Lower => write!(f, "{}", "Glacier > Grid 43,10-11 > Lower"),
+            SpotId::Glacier__Grid_43_10_11__East => {
+                write!(f, "{}", "Glacier > Grid 43,10-11 > East")
+            }
+            SpotId::Glacier__Grid_43_10_11__Lower => {
+                write!(f, "{}", "Glacier > Grid 43,10-11 > Lower")
+            }
             SpotId::Glacier__Grid_43_10_11__Top => write!(f, "{}", "Glacier > Grid 43,10-11 > Top"),
-            SpotId::Glacier__Lake_Main_Entrance__Bottom => write!(f, "{}", "Glacier > Lake Main Entrance > Bottom"),
-            SpotId::Glacier__Lake_Main_Entrance__Ebih_Access => write!(f, "{}", "Glacier > Lake Main Entrance > Ebih Access"),
-            SpotId::Glacier__Lake_Main_Entrance__Hill => write!(f, "{}", "Glacier > Lake Main Entrance > Hill"),
-            SpotId::Glacier__Lake_Main_Entrance__Lake_Access => write!(f, "{}", "Glacier > Lake Main Entrance > Lake Access"),
-            SpotId::Glacier__Lake_Main_Entrance__Ledge => write!(f, "{}", "Glacier > Lake Main Entrance > Ledge"),
-            SpotId::Glacier__Lake_Main_Entrance__Lower_Platform => write!(f, "{}", "Glacier > Lake Main Entrance > Lower Platform"),
-            SpotId::Glacier__Lake_Main_Entrance__Side => write!(f, "{}", "Glacier > Lake Main Entrance > Side"),
-            SpotId::Glacier__Lake_Main_Entrance__Side_Jump => write!(f, "{}", "Glacier > Lake Main Entrance > Side Jump"),
-            SpotId::Glacier__Lake_Main_Entrance__Upper => write!(f, "{}", "Glacier > Lake Main Entrance > Upper"),
-            SpotId::Glacier__Lake_Main_Entrance__Upper_Platform => write!(f, "{}", "Glacier > Lake Main Entrance > Upper Platform"),
-            SpotId::Glacier__Ledge_Grab_Room__Cliff => write!(f, "{}", "Glacier > Ledge Grab Room > Cliff"),
-            SpotId::Glacier__Ledge_Grab_Room__Cliff_Bottom => write!(f, "{}", "Glacier > Ledge Grab Room > Cliff Bottom"),
-            SpotId::Glacier__Ledge_Grab_Room__Column => write!(f, "{}", "Glacier > Ledge Grab Room > Column"),
-            SpotId::Glacier__Ledge_Grab_Room__East_11 => write!(f, "{}", "Glacier > Ledge Grab Room > East 11"),
-            SpotId::Glacier__Ledge_Grab_Room__East_9 => write!(f, "{}", "Glacier > Ledge Grab Room > East 9"),
-            SpotId::Glacier__Ledge_Grab_Room__Fork => write!(f, "{}", "Glacier > Ledge Grab Room > Fork"),
-            SpotId::Glacier__Ledge_Grab_Room__Gate => write!(f, "{}", "Glacier > Ledge Grab Room > Gate"),
-            SpotId::Glacier__Ledge_Grab_Room__Gate_Ledge => write!(f, "{}", "Glacier > Ledge Grab Room > Gate Ledge"),
-            SpotId::Glacier__Ledge_Grab_Room__Lower_Platform => write!(f, "{}", "Glacier > Ledge Grab Room > Lower Platform"),
-            SpotId::Glacier__Ledge_Grab_Room__Mid_34 => write!(f, "{}", "Glacier > Ledge Grab Room > Mid 34"),
-            SpotId::Glacier__Ledge_Grab_Room__Mid_35 => write!(f, "{}", "Glacier > Ledge Grab Room > Mid 35"),
-            SpotId::Glacier__Ledge_Grab_Room__Pedestal => write!(f, "{}", "Glacier > Ledge Grab Room > Pedestal"),
-            SpotId::Glacier__Ledge_Grab_Room__Upper_Platform => write!(f, "{}", "Glacier > Ledge Grab Room > Upper Platform"),
-            SpotId::Glacier__Ledge_Grab_Room__West_End => write!(f, "{}", "Glacier > Ledge Grab Room > West End"),
+            SpotId::Glacier__Lake_Main_Entrance__Bottom => {
+                write!(f, "{}", "Glacier > Lake Main Entrance > Bottom")
+            }
+            SpotId::Glacier__Lake_Main_Entrance__Ebih_Access => {
+                write!(f, "{}", "Glacier > Lake Main Entrance > Ebih Access")
+            }
+            SpotId::Glacier__Lake_Main_Entrance__Hill => {
+                write!(f, "{}", "Glacier > Lake Main Entrance > Hill")
+            }
+            SpotId::Glacier__Lake_Main_Entrance__Lake_Access => {
+                write!(f, "{}", "Glacier > Lake Main Entrance > Lake Access")
+            }
+            SpotId::Glacier__Lake_Main_Entrance__Ledge => {
+                write!(f, "{}", "Glacier > Lake Main Entrance > Ledge")
+            }
+            SpotId::Glacier__Lake_Main_Entrance__Lower_Platform => {
+                write!(f, "{}", "Glacier > Lake Main Entrance > Lower Platform")
+            }
+            SpotId::Glacier__Lake_Main_Entrance__Side => {
+                write!(f, "{}", "Glacier > Lake Main Entrance > Side")
+            }
+            SpotId::Glacier__Lake_Main_Entrance__Side_Jump => {
+                write!(f, "{}", "Glacier > Lake Main Entrance > Side Jump")
+            }
+            SpotId::Glacier__Lake_Main_Entrance__Upper => {
+                write!(f, "{}", "Glacier > Lake Main Entrance > Upper")
+            }
+            SpotId::Glacier__Lake_Main_Entrance__Upper_Platform => {
+                write!(f, "{}", "Glacier > Lake Main Entrance > Upper Platform")
+            }
+            SpotId::Glacier__Ledge_Grab_Room__Cliff => {
+                write!(f, "{}", "Glacier > Ledge Grab Room > Cliff")
+            }
+            SpotId::Glacier__Ledge_Grab_Room__Cliff_Bottom => {
+                write!(f, "{}", "Glacier > Ledge Grab Room > Cliff Bottom")
+            }
+            SpotId::Glacier__Ledge_Grab_Room__Column => {
+                write!(f, "{}", "Glacier > Ledge Grab Room > Column")
+            }
+            SpotId::Glacier__Ledge_Grab_Room__East_11 => {
+                write!(f, "{}", "Glacier > Ledge Grab Room > East 11")
+            }
+            SpotId::Glacier__Ledge_Grab_Room__East_9 => {
+                write!(f, "{}", "Glacier > Ledge Grab Room > East 9")
+            }
+            SpotId::Glacier__Ledge_Grab_Room__Fork => {
+                write!(f, "{}", "Glacier > Ledge Grab Room > Fork")
+            }
+            SpotId::Glacier__Ledge_Grab_Room__Gate => {
+                write!(f, "{}", "Glacier > Ledge Grab Room > Gate")
+            }
+            SpotId::Glacier__Ledge_Grab_Room__Gate_Ledge => {
+                write!(f, "{}", "Glacier > Ledge Grab Room > Gate Ledge")
+            }
+            SpotId::Glacier__Ledge_Grab_Room__Lower_Platform => {
+                write!(f, "{}", "Glacier > Ledge Grab Room > Lower Platform")
+            }
+            SpotId::Glacier__Ledge_Grab_Room__Mid_34 => {
+                write!(f, "{}", "Glacier > Ledge Grab Room > Mid 34")
+            }
+            SpotId::Glacier__Ledge_Grab_Room__Mid_35 => {
+                write!(f, "{}", "Glacier > Ledge Grab Room > Mid 35")
+            }
+            SpotId::Glacier__Ledge_Grab_Room__Pedestal => {
+                write!(f, "{}", "Glacier > Ledge Grab Room > Pedestal")
+            }
+            SpotId::Glacier__Ledge_Grab_Room__Upper_Platform => {
+                write!(f, "{}", "Glacier > Ledge Grab Room > Upper Platform")
+            }
+            SpotId::Glacier__Ledge_Grab_Room__West_End => {
+                write!(f, "{}", "Glacier > Ledge Grab Room > West End")
+            }
             SpotId::Glacier__Peak__East_8 => write!(f, "{}", "Glacier > Peak > East 8"),
-            SpotId::Glacier__Peak__Highest_Platform => write!(f, "{}", "Glacier > Peak > Highest Platform"),
-            SpotId::Glacier__Peak__Top_Platform_East => write!(f, "{}", "Glacier > Peak > Top Platform East"),
+            SpotId::Glacier__Peak__Highest_Platform => {
+                write!(f, "{}", "Glacier > Peak > Highest Platform")
+            }
+            SpotId::Glacier__Peak__Top_Platform_East => {
+                write!(f, "{}", "Glacier > Peak > Top Platform East")
+            }
             SpotId::Glacier__Peak__Top_Rock => write!(f, "{}", "Glacier > Peak > Top Rock"),
-            SpotId::Glacier__Peak__Under_West_Cliff => write!(f, "{}", "Glacier > Peak > Under West Cliff"),
+            SpotId::Glacier__Peak__Under_West_Cliff => {
+                write!(f, "{}", "Glacier > Peak > Under West Cliff")
+            }
             SpotId::Glacier__Peak__West_8 => write!(f, "{}", "Glacier > Peak > West 8"),
             SpotId::Glacier__Peak__West_Cliff => write!(f, "{}", "Glacier > Peak > West Cliff"),
             SpotId::Glacier__Revival__East_9 => write!(f, "{}", "Glacier > Revival > East 9"),
             SpotId::Glacier__Revival__Ledge => write!(f, "{}", "Glacier > Revival > Ledge"),
-            SpotId::Glacier__Revival__Lower_East => write!(f, "{}", "Glacier > Revival > Lower East"),
+            SpotId::Glacier__Revival__Lower_East => {
+                write!(f, "{}", "Glacier > Revival > Lower East")
+            }
             SpotId::Glacier__Revival__Overhang => write!(f, "{}", "Glacier > Revival > Overhang"),
-            SpotId::Glacier__Revival__Save_Point => write!(f, "{}", "Glacier > Revival > Save Point"),
+            SpotId::Glacier__Revival__Save_Point => {
+                write!(f, "{}", "Glacier > Revival > Save Point")
+            }
             SpotId::Glacier__Revival__West_8 => write!(f, "{}", "Glacier > Revival > West 8"),
             SpotId::Glacier__The_Big_Drop__East => write!(f, "{}", "Glacier > The Big Drop > East"),
-            SpotId::Glacier__The_Big_Drop__Small_Path => write!(f, "{}", "Glacier > The Big Drop > Small Path"),
-            SpotId::Glacier__The_Big_Drop__Water_Surface => write!(f, "{}", "Glacier > The Big Drop > Water Surface"),
-            SpotId::Glacier__Vertical_Room__East_12 => write!(f, "{}", "Glacier > Vertical Room > East 12"),
-            SpotId::Glacier__Vertical_Room__East_13 => write!(f, "{}", "Glacier > Vertical Room > East 13"),
-            SpotId::Glacier__Vertical_Room__East_9 => write!(f, "{}", "Glacier > Vertical Room > East 9"),
-            SpotId::Glacier__Vertical_Room__East_Corner => write!(f, "{}", "Glacier > Vertical Room > East Corner"),
-            SpotId::Glacier__Vertical_Room__Lower_West_Corner => write!(f, "{}", "Glacier > Vertical Room > Lower West Corner"),
-            SpotId::Glacier__Vertical_Room__Mid_11 => write!(f, "{}", "Glacier > Vertical Room > Mid 11"),
-            SpotId::Glacier__Vertical_Room__Mid_9 => write!(f, "{}", "Glacier > Vertical Room > Mid 9"),
-            SpotId::Glacier__Vertical_Room__Past_Gate => write!(f, "{}", "Glacier > Vertical Room > Past Gate"),
-            SpotId::Glacier__Vertical_Room__Peak => write!(f, "{}", "Glacier > Vertical Room > Peak"),
-            SpotId::Glacier__Vertical_Room__Under_Switch => write!(f, "{}", "Glacier > Vertical Room > Under Switch"),
-            SpotId::Glacier__Vertical_Room__West_8 => write!(f, "{}", "Glacier > Vertical Room > West 8"),
-            SpotId::Glacier__Vertical_Room__West_9 => write!(f, "{}", "Glacier > Vertical Room > West 9"),
-            SpotId::Interior__Building_Interior__Corner => write!(f, "{}", "Interior > Building Interior > Corner"),
-            SpotId::Interior__Building_Interior__Entry => write!(f, "{}", "Interior > Building Interior > Entry"),
-            SpotId::Interior__Bunker_Interior__Desk => write!(f, "{}", "Interior > Bunker Interior > Desk"),
-            SpotId::Interior__Bunker_Interior__Entry => write!(f, "{}", "Interior > Bunker Interior > Entry"),
-            SpotId::Interior__Cave_Behind_Waterfall__Bottom => write!(f, "{}", "Interior > Cave Behind Waterfall > Bottom"),
-            SpotId::Interior__Cave_Behind_Waterfall__Middle => write!(f, "{}", "Interior > Cave Behind Waterfall > Middle"),
-            SpotId::Interior__Cave_Behind_Waterfall__Top => write!(f, "{}", "Interior > Cave Behind Waterfall > Top"),
-            SpotId::Interior__Dock_Elevator__Connector => write!(f, "{}", "Interior > Dock Elevator > Connector"),
-            SpotId::Interior__Dock_Elevator__Elevator => write!(f, "{}", "Interior > Dock Elevator > Elevator"),
-            SpotId::Interior__Dock_Interior__Connector => write!(f, "{}", "Interior > Dock Interior > Connector"),
-            SpotId::Interior__Dock_Interior__Entry => write!(f, "{}", "Interior > Dock Interior > Entry"),
+            SpotId::Glacier__The_Big_Drop__Small_Path => {
+                write!(f, "{}", "Glacier > The Big Drop > Small Path")
+            }
+            SpotId::Glacier__The_Big_Drop__Water_Surface => {
+                write!(f, "{}", "Glacier > The Big Drop > Water Surface")
+            }
+            SpotId::Glacier__Vertical_Room__East_12 => {
+                write!(f, "{}", "Glacier > Vertical Room > East 12")
+            }
+            SpotId::Glacier__Vertical_Room__East_13 => {
+                write!(f, "{}", "Glacier > Vertical Room > East 13")
+            }
+            SpotId::Glacier__Vertical_Room__East_9 => {
+                write!(f, "{}", "Glacier > Vertical Room > East 9")
+            }
+            SpotId::Glacier__Vertical_Room__East_Corner => {
+                write!(f, "{}", "Glacier > Vertical Room > East Corner")
+            }
+            SpotId::Glacier__Vertical_Room__Lower_West_Corner => {
+                write!(f, "{}", "Glacier > Vertical Room > Lower West Corner")
+            }
+            SpotId::Glacier__Vertical_Room__Mid_11 => {
+                write!(f, "{}", "Glacier > Vertical Room > Mid 11")
+            }
+            SpotId::Glacier__Vertical_Room__Mid_9 => {
+                write!(f, "{}", "Glacier > Vertical Room > Mid 9")
+            }
+            SpotId::Glacier__Vertical_Room__Past_Gate => {
+                write!(f, "{}", "Glacier > Vertical Room > Past Gate")
+            }
+            SpotId::Glacier__Vertical_Room__Peak => {
+                write!(f, "{}", "Glacier > Vertical Room > Peak")
+            }
+            SpotId::Glacier__Vertical_Room__Under_Switch => {
+                write!(f, "{}", "Glacier > Vertical Room > Under Switch")
+            }
+            SpotId::Glacier__Vertical_Room__West_8 => {
+                write!(f, "{}", "Glacier > Vertical Room > West 8")
+            }
+            SpotId::Glacier__Vertical_Room__West_9 => {
+                write!(f, "{}", "Glacier > Vertical Room > West 9")
+            }
+            SpotId::Interior__Building_Interior__Corner => {
+                write!(f, "{}", "Interior > Building Interior > Corner")
+            }
+            SpotId::Interior__Building_Interior__Entry => {
+                write!(f, "{}", "Interior > Building Interior > Entry")
+            }
+            SpotId::Interior__Bunker_Interior__Desk => {
+                write!(f, "{}", "Interior > Bunker Interior > Desk")
+            }
+            SpotId::Interior__Bunker_Interior__Entry => {
+                write!(f, "{}", "Interior > Bunker Interior > Entry")
+            }
+            SpotId::Interior__Cave_Behind_Waterfall__Bottom => {
+                write!(f, "{}", "Interior > Cave Behind Waterfall > Bottom")
+            }
+            SpotId::Interior__Cave_Behind_Waterfall__Middle => {
+                write!(f, "{}", "Interior > Cave Behind Waterfall > Middle")
+            }
+            SpotId::Interior__Cave_Behind_Waterfall__Top => {
+                write!(f, "{}", "Interior > Cave Behind Waterfall > Top")
+            }
+            SpotId::Interior__Dock_Elevator__Connector => {
+                write!(f, "{}", "Interior > Dock Elevator > Connector")
+            }
+            SpotId::Interior__Dock_Elevator__Elevator => {
+                write!(f, "{}", "Interior > Dock Elevator > Elevator")
+            }
+            SpotId::Interior__Dock_Interior__Connector => {
+                write!(f, "{}", "Interior > Dock Interior > Connector")
+            }
+            SpotId::Interior__Dock_Interior__Entry => {
+                write!(f, "{}", "Interior > Dock Interior > Entry")
+            }
             SpotId::Interior__Ebih_Cave__Entry => write!(f, "{}", "Interior > Ebih Cave > Entry"),
             SpotId::Interior__Garage__Boxes => write!(f, "{}", "Interior > Garage > Boxes"),
             SpotId::Interior__Garage__Entry => write!(f, "{}", "Interior > Garage > Entry"),
-            SpotId::Interior__Outpost_Interior__Bookshelf => write!(f, "{}", "Interior > Outpost Interior > Bookshelf"),
-            SpotId::Interior__Outpost_Interior__Entry => write!(f, "{}", "Interior > Outpost Interior > Entry"),
-            SpotId::Interior__Tent_Interior__Desk => write!(f, "{}", "Interior > Tent Interior > Desk"),
-            SpotId::Interior__Tent_Interior__Entry => write!(f, "{}", "Interior > Tent Interior > Entry"),
-            SpotId::Irikar__Abandoned_Room__Corner_Core => write!(f, "{}", "Irikar > Abandoned Room > Corner Core"),
-            SpotId::Irikar__Abandoned_Room__Empty_Pedestal => write!(f, "{}", "Irikar > Abandoned Room > Empty Pedestal"),
-            SpotId::Irikar__Abandoned_Room__West => write!(f, "{}", "Irikar > Abandoned Room > West"),
+            SpotId::Interior__Outpost_Interior__Bookshelf => {
+                write!(f, "{}", "Interior > Outpost Interior > Bookshelf")
+            }
+            SpotId::Interior__Outpost_Interior__Entry => {
+                write!(f, "{}", "Interior > Outpost Interior > Entry")
+            }
+            SpotId::Interior__Tent_Interior__Desk => {
+                write!(f, "{}", "Interior > Tent Interior > Desk")
+            }
+            SpotId::Interior__Tent_Interior__Entry => {
+                write!(f, "{}", "Interior > Tent Interior > Entry")
+            }
+            SpotId::Irikar__Abandoned_Room__Corner_Core => {
+                write!(f, "{}", "Irikar > Abandoned Room > Corner Core")
+            }
+            SpotId::Irikar__Abandoned_Room__Empty_Pedestal => {
+                write!(f, "{}", "Irikar > Abandoned Room > Empty Pedestal")
+            }
+            SpotId::Irikar__Abandoned_Room__West => {
+                write!(f, "{}", "Irikar > Abandoned Room > West")
+            }
             SpotId::Irikar__Airy__Middle_South => write!(f, "{}", "Irikar > Airy > Middle South"),
             SpotId::Irikar__Airy__Northwest => write!(f, "{}", "Irikar > Airy > Northwest"),
-            SpotId::Irikar__Basement_Pipes__Brick_Ledge => write!(f, "{}", "Irikar > Basement Pipes > Brick Ledge"),
-            SpotId::Irikar__Basement_Pipes__Bricks_Under_Pipes => write!(f, "{}", "Irikar > Basement Pipes > Bricks Under Pipes"),
-            SpotId::Irikar__Basement_Pipes__Double_Pipe_Left => write!(f, "{}", "Irikar > Basement Pipes > Double Pipe Left"),
-            SpotId::Irikar__Basement_Pipes__Double_Pipe_Right => write!(f, "{}", "Irikar > Basement Pipes > Double Pipe Right"),
-            SpotId::Irikar__Basement_Pipes__East_28 => write!(f, "{}", "Irikar > Basement Pipes > East 28"),
-            SpotId::Irikar__Basement_Pipes__High_Pipe => write!(f, "{}", "Irikar > Basement Pipes > High Pipe"),
-            SpotId::Irikar__Basement_Pipes__Left_Vertical_Pipe => write!(f, "{}", "Irikar > Basement Pipes > Left Vertical Pipe"),
-            SpotId::Irikar__Basement_Pipes__Lower_Pipe_Right => write!(f, "{}", "Irikar > Basement Pipes > Lower Pipe Right"),
-            SpotId::Irikar__Basement_Pipes__Lower_Pipe_Under_Ledge => write!(f, "{}", "Irikar > Basement Pipes > Lower Pipe Under Ledge"),
-            SpotId::Irikar__Basement_Pipes__Right_Vertical_Pipe => write!(f, "{}", "Irikar > Basement Pipes > Right Vertical Pipe"),
-            SpotId::Irikar__Basement_Pipes__West_27 => write!(f, "{}", "Irikar > Basement Pipes > West 27"),
-            SpotId::Irikar__Basement_Pipes__West_28 => write!(f, "{}", "Irikar > Basement Pipes > West 28"),
-            SpotId::Irikar__Basement_Portal__Bottom_Middle => write!(f, "{}", "Irikar > Basement Portal > Bottom Middle"),
-            SpotId::Irikar__Basement_Portal__East_27 => write!(f, "{}", "Irikar > Basement Portal > East 27"),
-            SpotId::Irikar__Basement_Portal__East_28 => write!(f, "{}", "Irikar > Basement Portal > East 28"),
-            SpotId::Irikar__Basement_Portal__East_Platform => write!(f, "{}", "Irikar > Basement Portal > East Platform"),
-            SpotId::Irikar__Basement_Portal__Ledge => write!(f, "{}", "Irikar > Basement Portal > Ledge"),
-            SpotId::Irikar__Basement_Portal__Middle_Platform => write!(f, "{}", "Irikar > Basement Portal > Middle Platform"),
-            SpotId::Irikar__Basement_Portal__Moving_Platform_End => write!(f, "{}", "Irikar > Basement Portal > Moving Platform End"),
-            SpotId::Irikar__Basement_Portal__Moving_Platform_Start => write!(f, "{}", "Irikar > Basement Portal > Moving Platform Start"),
-            SpotId::Irikar__Basement_Portal__North => write!(f, "{}", "Irikar > Basement Portal > North"),
-            SpotId::Irikar__Basement_Portal__Portal_Stand => write!(f, "{}", "Irikar > Basement Portal > Portal Stand"),
-            SpotId::Irikar__Basement_Portal__West_28 => write!(f, "{}", "Irikar > Basement Portal > West 28"),
-            SpotId::Irikar__Basement_Portal__Westmost_Platform => write!(f, "{}", "Irikar > Basement Portal > Westmost Platform"),
-            SpotId::Irikar__Boss_Room__Above_Catwalk => write!(f, "{}", "Irikar > Boss Room > Above Catwalk"),
-            SpotId::Irikar__Boss_Room__Bulls_Feet => write!(f, "{}", "Irikar > Boss Room > Bull's Feet"),
-            SpotId::Irikar__Boss_Room__Catwalk_East => write!(f, "{}", "Irikar > Boss Room > Catwalk East"),
-            SpotId::Irikar__Boss_Room__Catwalk_West => write!(f, "{}", "Irikar > Boss Room > Catwalk West"),
+            SpotId::Irikar__Basement_Pipes__Brick_Ledge => {
+                write!(f, "{}", "Irikar > Basement Pipes > Brick Ledge")
+            }
+            SpotId::Irikar__Basement_Pipes__Bricks_Under_Pipes => {
+                write!(f, "{}", "Irikar > Basement Pipes > Bricks Under Pipes")
+            }
+            SpotId::Irikar__Basement_Pipes__Double_Pipe_Left => {
+                write!(f, "{}", "Irikar > Basement Pipes > Double Pipe Left")
+            }
+            SpotId::Irikar__Basement_Pipes__Double_Pipe_Right => {
+                write!(f, "{}", "Irikar > Basement Pipes > Double Pipe Right")
+            }
+            SpotId::Irikar__Basement_Pipes__East_28 => {
+                write!(f, "{}", "Irikar > Basement Pipes > East 28")
+            }
+            SpotId::Irikar__Basement_Pipes__High_Pipe => {
+                write!(f, "{}", "Irikar > Basement Pipes > High Pipe")
+            }
+            SpotId::Irikar__Basement_Pipes__Left_Vertical_Pipe => {
+                write!(f, "{}", "Irikar > Basement Pipes > Left Vertical Pipe")
+            }
+            SpotId::Irikar__Basement_Pipes__Lower_Pipe_Right => {
+                write!(f, "{}", "Irikar > Basement Pipes > Lower Pipe Right")
+            }
+            SpotId::Irikar__Basement_Pipes__Lower_Pipe_Under_Ledge => {
+                write!(f, "{}", "Irikar > Basement Pipes > Lower Pipe Under Ledge")
+            }
+            SpotId::Irikar__Basement_Pipes__Right_Vertical_Pipe => {
+                write!(f, "{}", "Irikar > Basement Pipes > Right Vertical Pipe")
+            }
+            SpotId::Irikar__Basement_Pipes__West_27 => {
+                write!(f, "{}", "Irikar > Basement Pipes > West 27")
+            }
+            SpotId::Irikar__Basement_Pipes__West_28 => {
+                write!(f, "{}", "Irikar > Basement Pipes > West 28")
+            }
+            SpotId::Irikar__Basement_Portal__Bottom_Middle => {
+                write!(f, "{}", "Irikar > Basement Portal > Bottom Middle")
+            }
+            SpotId::Irikar__Basement_Portal__East_27 => {
+                write!(f, "{}", "Irikar > Basement Portal > East 27")
+            }
+            SpotId::Irikar__Basement_Portal__East_28 => {
+                write!(f, "{}", "Irikar > Basement Portal > East 28")
+            }
+            SpotId::Irikar__Basement_Portal__East_Platform => {
+                write!(f, "{}", "Irikar > Basement Portal > East Platform")
+            }
+            SpotId::Irikar__Basement_Portal__Ledge => {
+                write!(f, "{}", "Irikar > Basement Portal > Ledge")
+            }
+            SpotId::Irikar__Basement_Portal__Middle_Platform => {
+                write!(f, "{}", "Irikar > Basement Portal > Middle Platform")
+            }
+            SpotId::Irikar__Basement_Portal__Moving_Platform_End => {
+                write!(f, "{}", "Irikar > Basement Portal > Moving Platform End")
+            }
+            SpotId::Irikar__Basement_Portal__Moving_Platform_Start => {
+                write!(f, "{}", "Irikar > Basement Portal > Moving Platform Start")
+            }
+            SpotId::Irikar__Basement_Portal__North => {
+                write!(f, "{}", "Irikar > Basement Portal > North")
+            }
+            SpotId::Irikar__Basement_Portal__Portal_Stand => {
+                write!(f, "{}", "Irikar > Basement Portal > Portal Stand")
+            }
+            SpotId::Irikar__Basement_Portal__West_28 => {
+                write!(f, "{}", "Irikar > Basement Portal > West 28")
+            }
+            SpotId::Irikar__Basement_Portal__Westmost_Platform => {
+                write!(f, "{}", "Irikar > Basement Portal > Westmost Platform")
+            }
+            SpotId::Irikar__Boss_Room__Above_Catwalk => {
+                write!(f, "{}", "Irikar > Boss Room > Above Catwalk")
+            }
+            SpotId::Irikar__Boss_Room__Bulls_Feet => {
+                write!(f, "{}", "Irikar > Boss Room > Bull's Feet")
+            }
+            SpotId::Irikar__Boss_Room__Catwalk_East => {
+                write!(f, "{}", "Irikar > Boss Room > Catwalk East")
+            }
+            SpotId::Irikar__Boss_Room__Catwalk_West => {
+                write!(f, "{}", "Irikar > Boss Room > Catwalk West")
+            }
             SpotId::Irikar__Boss_Room__East_28 => write!(f, "{}", "Irikar > Boss Room > East 28"),
-            SpotId::Irikar__Boss_Room__Healthy_Rooftop => write!(f, "{}", "Irikar > Boss Room > Healthy Rooftop"),
-            SpotId::Irikar__Boss_Room__Northwest => write!(f, "{}", "Irikar > Boss Room > Northwest"),
-            SpotId::Irikar__Boss_Room__Sat_Tower_Roof_East => write!(f, "{}", "Irikar > Boss Room > Sat Tower Roof East"),
-            SpotId::Irikar__Boss_Room__Sat_Tower_Roof_West => write!(f, "{}", "Irikar > Boss Room > Sat Tower Roof West"),
-            SpotId::Irikar__Boss_Room__Upper_Rooftops => write!(f, "{}", "Irikar > Boss Room > Upper Rooftops"),
+            SpotId::Irikar__Boss_Room__Healthy_Rooftop => {
+                write!(f, "{}", "Irikar > Boss Room > Healthy Rooftop")
+            }
+            SpotId::Irikar__Boss_Room__Northwest => {
+                write!(f, "{}", "Irikar > Boss Room > Northwest")
+            }
+            SpotId::Irikar__Boss_Room__Sat_Tower_Roof_East => {
+                write!(f, "{}", "Irikar > Boss Room > Sat Tower Roof East")
+            }
+            SpotId::Irikar__Boss_Room__Sat_Tower_Roof_West => {
+                write!(f, "{}", "Irikar > Boss Room > Sat Tower Roof West")
+            }
+            SpotId::Irikar__Boss_Room__Upper_Rooftops => {
+                write!(f, "{}", "Irikar > Boss Room > Upper Rooftops")
+            }
             SpotId::Irikar__Boss_Room__West_28 => write!(f, "{}", "Irikar > Boss Room > West 28"),
-            SpotId::Irikar__East_Rooftops__Directly_Down => write!(f, "{}", "Irikar > East Rooftops > Directly Down"),
-            SpotId::Irikar__East_Rooftops__East_Mid_air => write!(f, "{}", "Irikar > East Rooftops > East Mid-air"),
-            SpotId::Irikar__East_Rooftops__Off_the_Edge => write!(f, "{}", "Irikar > East Rooftops > Off the Edge"),
-            SpotId::Irikar__East_Rooftops__Top_Rooftop => write!(f, "{}", "Irikar > East Rooftops > Top Rooftop"),
-            SpotId::Irikar__East_Rooftops__Upper_West => write!(f, "{}", "Irikar > East Rooftops > Upper West"),
+            SpotId::Irikar__East_Rooftops__Directly_Down => {
+                write!(f, "{}", "Irikar > East Rooftops > Directly Down")
+            }
+            SpotId::Irikar__East_Rooftops__East_Mid_air => {
+                write!(f, "{}", "Irikar > East Rooftops > East Mid-air")
+            }
+            SpotId::Irikar__East_Rooftops__Off_the_Edge => {
+                write!(f, "{}", "Irikar > East Rooftops > Off the Edge")
+            }
+            SpotId::Irikar__East_Rooftops__Top_Rooftop => {
+                write!(f, "{}", "Irikar > East Rooftops > Top Rooftop")
+            }
+            SpotId::Irikar__East_Rooftops__Upper_West => {
+                write!(f, "{}", "Irikar > East Rooftops > Upper West")
+            }
             SpotId::Irikar__Empty_Foyer__East => write!(f, "{}", "Irikar > Empty Foyer > East"),
             SpotId::Irikar__Empty_Foyer__West => write!(f, "{}", "Irikar > Empty Foyer > West"),
             SpotId::Irikar__Hub__Bowl_Hole => write!(f, "{}", "Irikar > Hub > Bowl Hole"),
-            SpotId::Irikar__Hub__Bowl_Middle_Ledge => write!(f, "{}", "Irikar > Hub > Bowl Middle Ledge"),
-            SpotId::Irikar__Hub__Bowl_Middle_Platform_Center => write!(f, "{}", "Irikar > Hub > Bowl Middle Platform Center"),
-            SpotId::Irikar__Hub__Bowl_Middle_Platform_West => write!(f, "{}", "Irikar > Hub > Bowl Middle Platform West"),
-            SpotId::Irikar__Hub__Bowl_Platform_3 => write!(f, "{}", "Irikar > Hub > Bowl Platform 3"),
-            SpotId::Irikar__Hub__Bowl_Top_Platform => write!(f, "{}", "Irikar > Hub > Bowl Top Platform"),
+            SpotId::Irikar__Hub__Bowl_Middle_Ledge => {
+                write!(f, "{}", "Irikar > Hub > Bowl Middle Ledge")
+            }
+            SpotId::Irikar__Hub__Bowl_Middle_Platform_Center => {
+                write!(f, "{}", "Irikar > Hub > Bowl Middle Platform Center")
+            }
+            SpotId::Irikar__Hub__Bowl_Middle_Platform_West => {
+                write!(f, "{}", "Irikar > Hub > Bowl Middle Platform West")
+            }
+            SpotId::Irikar__Hub__Bowl_Platform_3 => {
+                write!(f, "{}", "Irikar > Hub > Bowl Platform 3")
+            }
+            SpotId::Irikar__Hub__Bowl_Top_Platform => {
+                write!(f, "{}", "Irikar > Hub > Bowl Top Platform")
+            }
             SpotId::Irikar__Hub__Dagger_Altar => write!(f, "{}", "Irikar > Hub > Dagger Altar"),
             SpotId::Irikar__Hub__East_Rim => write!(f, "{}", "Irikar > Hub > East Rim"),
-            SpotId::Irikar__Hub__North_Above_Portal => write!(f, "{}", "Irikar > Hub > North Above Portal"),
-            SpotId::Irikar__Hub__Northeast_Above_Bowl => write!(f, "{}", "Irikar > Hub > Northeast Above Bowl"),
+            SpotId::Irikar__Hub__North_Above_Portal => {
+                write!(f, "{}", "Irikar > Hub > North Above Portal")
+            }
+            SpotId::Irikar__Hub__Northeast_Above_Bowl => {
+                write!(f, "{}", "Irikar > Hub > Northeast Above Bowl")
+            }
             SpotId::Irikar__Hub__Northwest => write!(f, "{}", "Irikar > Hub > Northwest"),
-            SpotId::Irikar__Hub__Northwest_Above_Bowl => write!(f, "{}", "Irikar > Hub > Northwest Above Bowl"),
-            SpotId::Irikar__Hub__NW_Bowl_Edifice => write!(f, "{}", "Irikar > Hub > NW Bowl Edifice"),
-            SpotId::Irikar__Hub__NW_Middle_Building_Corner => write!(f, "{}", "Irikar > Hub > NW Middle Building Corner"),
-            SpotId::Irikar__Hub__NW_Middle_Building_West_Entry => write!(f, "{}", "Irikar > Hub > NW Middle Building West Entry"),
+            SpotId::Irikar__Hub__Northwest_Above_Bowl => {
+                write!(f, "{}", "Irikar > Hub > Northwest Above Bowl")
+            }
+            SpotId::Irikar__Hub__NW_Bowl_Edifice => {
+                write!(f, "{}", "Irikar > Hub > NW Bowl Edifice")
+            }
+            SpotId::Irikar__Hub__NW_Middle_Building_Corner => {
+                write!(f, "{}", "Irikar > Hub > NW Middle Building Corner")
+            }
+            SpotId::Irikar__Hub__NW_Middle_Building_West_Entry => {
+                write!(f, "{}", "Irikar > Hub > NW Middle Building West Entry")
+            }
             SpotId::Irikar__Hub__NW_Roof => write!(f, "{}", "Irikar > Hub > NW Roof"),
-            SpotId::Irikar__Hub__NW_Staircase_Upper => write!(f, "{}", "Irikar > Hub > NW Staircase Upper"),
+            SpotId::Irikar__Hub__NW_Staircase_Upper => {
+                write!(f, "{}", "Irikar > Hub > NW Staircase Upper")
+            }
             SpotId::Irikar__Hub__Portal_Stand => write!(f, "{}", "Irikar > Hub > Portal Stand"),
-            SpotId::Irikar__Hub__Royal_Storage_By_Wall => write!(f, "{}", "Irikar > Hub > Royal Storage By Wall"),
-            SpotId::Irikar__Hub__Royal_Storage_in_Wall => write!(f, "{}", "Irikar > Hub > Royal Storage in Wall"),
-            SpotId::Irikar__Hub__Royal_Storage_South => write!(f, "{}", "Irikar > Hub > Royal Storage South"),
-            SpotId::Irikar__Hub__Sat_Tower_Bottom => write!(f, "{}", "Irikar > Hub > Sat Tower Bottom"),
-            SpotId::Irikar__Hub__Sat_Tower_East_24 => write!(f, "{}", "Irikar > Hub > Sat Tower East 24"),
-            SpotId::Irikar__Hub__Sat_Tower_Floating_Platform => write!(f, "{}", "Irikar > Hub > Sat Tower Floating Platform"),
-            SpotId::Irikar__Hub__Sat_Tower_Long_Ledge => write!(f, "{}", "Irikar > Hub > Sat Tower Long Ledge"),
-            SpotId::Irikar__Hub__Sat_Tower_Lower_Left_Ledge => write!(f, "{}", "Irikar > Hub > Sat Tower Lower Left Ledge"),
-            SpotId::Irikar__Hub__Sat_Tower_Lower_Right_Ledge => write!(f, "{}", "Irikar > Hub > Sat Tower Lower Right Ledge"),
-            SpotId::Irikar__Hub__Sat_Tower_Middle_Ledge => write!(f, "{}", "Irikar > Hub > Sat Tower Middle Ledge"),
-            SpotId::Irikar__Hub__Sat_Tower_Northeast => write!(f, "{}", "Irikar > Hub > Sat Tower Northeast"),
-            SpotId::Irikar__Hub__Sat_Tower_Roof_East => write!(f, "{}", "Irikar > Hub > Sat Tower Roof East"),
-            SpotId::Irikar__Hub__Sat_Tower_Roof_West => write!(f, "{}", "Irikar > Hub > Sat Tower Roof West"),
-            SpotId::Irikar__Hub__Sat_Tower_Top_Ledge => write!(f, "{}", "Irikar > Hub > Sat Tower Top Ledge"),
-            SpotId::Irikar__Hub__Sat_Tower_West_Valley => write!(f, "{}", "Irikar > Hub > Sat Tower West Valley"),
+            SpotId::Irikar__Hub__Royal_Storage_By_Wall => {
+                write!(f, "{}", "Irikar > Hub > Royal Storage By Wall")
+            }
+            SpotId::Irikar__Hub__Royal_Storage_in_Wall => {
+                write!(f, "{}", "Irikar > Hub > Royal Storage in Wall")
+            }
+            SpotId::Irikar__Hub__Royal_Storage_South => {
+                write!(f, "{}", "Irikar > Hub > Royal Storage South")
+            }
+            SpotId::Irikar__Hub__Sat_Tower_Bottom => {
+                write!(f, "{}", "Irikar > Hub > Sat Tower Bottom")
+            }
+            SpotId::Irikar__Hub__Sat_Tower_East_24 => {
+                write!(f, "{}", "Irikar > Hub > Sat Tower East 24")
+            }
+            SpotId::Irikar__Hub__Sat_Tower_Floating_Platform => {
+                write!(f, "{}", "Irikar > Hub > Sat Tower Floating Platform")
+            }
+            SpotId::Irikar__Hub__Sat_Tower_Long_Ledge => {
+                write!(f, "{}", "Irikar > Hub > Sat Tower Long Ledge")
+            }
+            SpotId::Irikar__Hub__Sat_Tower_Lower_Left_Ledge => {
+                write!(f, "{}", "Irikar > Hub > Sat Tower Lower Left Ledge")
+            }
+            SpotId::Irikar__Hub__Sat_Tower_Lower_Right_Ledge => {
+                write!(f, "{}", "Irikar > Hub > Sat Tower Lower Right Ledge")
+            }
+            SpotId::Irikar__Hub__Sat_Tower_Middle_Ledge => {
+                write!(f, "{}", "Irikar > Hub > Sat Tower Middle Ledge")
+            }
+            SpotId::Irikar__Hub__Sat_Tower_Northeast => {
+                write!(f, "{}", "Irikar > Hub > Sat Tower Northeast")
+            }
+            SpotId::Irikar__Hub__Sat_Tower_Roof_East => {
+                write!(f, "{}", "Irikar > Hub > Sat Tower Roof East")
+            }
+            SpotId::Irikar__Hub__Sat_Tower_Roof_West => {
+                write!(f, "{}", "Irikar > Hub > Sat Tower Roof West")
+            }
+            SpotId::Irikar__Hub__Sat_Tower_Top_Ledge => {
+                write!(f, "{}", "Irikar > Hub > Sat Tower Top Ledge")
+            }
+            SpotId::Irikar__Hub__Sat_Tower_West_Valley => {
+                write!(f, "{}", "Irikar > Hub > Sat Tower West Valley")
+            }
             SpotId::Irikar__Hub__Save_Point => write!(f, "{}", "Irikar > Hub > Save Point"),
             SpotId::Irikar__Hub__West_Rim => write!(f, "{}", "Irikar > Hub > West Rim"),
-            SpotId::Irikar__Lamassu__Bottom_Middle => write!(f, "{}", "Irikar > Lamassu > Bottom Middle"),
-            SpotId::Irikar__Lamassu__Catwalk_Middle => write!(f, "{}", "Irikar > Lamassu > Catwalk Middle"),
-            SpotId::Irikar__Lamassu__Catwalk_West => write!(f, "{}", "Irikar > Lamassu > Catwalk West"),
+            SpotId::Irikar__Lamassu__Bottom_Middle => {
+                write!(f, "{}", "Irikar > Lamassu > Bottom Middle")
+            }
+            SpotId::Irikar__Lamassu__Catwalk_Middle => {
+                write!(f, "{}", "Irikar > Lamassu > Catwalk Middle")
+            }
+            SpotId::Irikar__Lamassu__Catwalk_West => {
+                write!(f, "{}", "Irikar > Lamassu > Catwalk West")
+            }
             SpotId::Irikar__Lamassu__Desk => write!(f, "{}", "Irikar > Lamassu > Desk"),
             SpotId::Irikar__Lamassu__East_26 => write!(f, "{}", "Irikar > Lamassu > East 26"),
             SpotId::Irikar__Lamassu__East_27 => write!(f, "{}", "Irikar > Lamassu > East 27"),
-            SpotId::Irikar__Lamassu__Hidden_Passage_East => write!(f, "{}", "Irikar > Lamassu > Hidden Passage East"),
-            SpotId::Irikar__Lamassu__Hidden_Passage_West => write!(f, "{}", "Irikar > Lamassu > Hidden Passage West"),
+            SpotId::Irikar__Lamassu__Hidden_Passage_East => {
+                write!(f, "{}", "Irikar > Lamassu > Hidden Passage East")
+            }
+            SpotId::Irikar__Lamassu__Hidden_Passage_West => {
+                write!(f, "{}", "Irikar > Lamassu > Hidden Passage West")
+            }
             SpotId::Irikar__Lamassu__Northwest => write!(f, "{}", "Irikar > Lamassu > Northwest"),
             SpotId::Irikar__Lamassu__West_28 => write!(f, "{}", "Irikar > Lamassu > West 28"),
             SpotId::Irikar__Midwest__East_23 => write!(f, "{}", "Irikar > Midwest > East 23"),
-            SpotId::Irikar__Midwest__East_24_on_Building => write!(f, "{}", "Irikar > Midwest > East 24 on Building"),
-            SpotId::Irikar__Midwest__East_24_on_Floor => write!(f, "{}", "Irikar > Midwest > East 24 on Floor"),
+            SpotId::Irikar__Midwest__East_24_on_Building => {
+                write!(f, "{}", "Irikar > Midwest > East 24 on Building")
+            }
+            SpotId::Irikar__Midwest__East_24_on_Floor => {
+                write!(f, "{}", "Irikar > Midwest > East 24 on Floor")
+            }
             SpotId::Irikar__Midwest__East_25 => write!(f, "{}", "Irikar > Midwest > East 25"),
             SpotId::Irikar__Midwest__East_26 => write!(f, "{}", "Irikar > Midwest > East 26"),
             SpotId::Irikar__Midwest__East_27 => write!(f, "{}", "Irikar > Midwest > East 27"),
             SpotId::Irikar__Midwest__East_28 => write!(f, "{}", "Irikar > Midwest > East 28"),
-            SpotId::Irikar__Sight_Room__Above_Room_East => write!(f, "{}", "Irikar > Sight Room > Above Room East"),
-            SpotId::Irikar__Sight_Room__Above_Room_North => write!(f, "{}", "Irikar > Sight Room > Above Room North"),
-            SpotId::Irikar__Sight_Room__Item_Pedestal => write!(f, "{}", "Irikar > Sight Room > Item Pedestal"),
-            SpotId::Irikar__Sight_Room__Lower_Ledge => write!(f, "{}", "Irikar > Sight Room > Lower Ledge"),
+            SpotId::Irikar__Sight_Room__Above_Room_East => {
+                write!(f, "{}", "Irikar > Sight Room > Above Room East")
+            }
+            SpotId::Irikar__Sight_Room__Above_Room_North => {
+                write!(f, "{}", "Irikar > Sight Room > Above Room North")
+            }
+            SpotId::Irikar__Sight_Room__Item_Pedestal => {
+                write!(f, "{}", "Irikar > Sight Room > Item Pedestal")
+            }
+            SpotId::Irikar__Sight_Room__Lower_Ledge => {
+                write!(f, "{}", "Irikar > Sight Room > Lower Ledge")
+            }
             SpotId::Irikar__Sight_Room__Portal => write!(f, "{}", "Irikar > Sight Room > Portal"),
             SpotId::Irikar__Sight_Room__West_24 => write!(f, "{}", "Irikar > Sight Room > West 24"),
-            SpotId::Irikar_Breach__Basement_Save__Save_Point => write!(f, "{}", "Irikar Breach > Basement Save > Save Point"),
-            SpotId::Irikar_Breach__Exit_Corridor__East => write!(f, "{}", "Irikar Breach > Exit Corridor > East"),
-            SpotId::Irikar_Breach__Exit_Corridor__North_12 => write!(f, "{}", "Irikar Breach > Exit Corridor > North 12"),
-            SpotId::Irikar_Breach__Exit_Corridor__North_13 => write!(f, "{}", "Irikar Breach > Exit Corridor > North 13"),
-            SpotId::Irikar_Breach__Exit_Corridor__Passage => write!(f, "{}", "Irikar Breach > Exit Corridor > Passage"),
-            SpotId::Irikar_Breach__Exit_Corridor__Pillar => write!(f, "{}", "Irikar Breach > Exit Corridor > Pillar"),
-            SpotId::Irikar_Breach__Exit_Corridor__Portal_Stand => write!(f, "{}", "Irikar Breach > Exit Corridor > Portal Stand"),
-            SpotId::Irikar_Breach__Exit_Corridor__West => write!(f, "{}", "Irikar Breach > Exit Corridor > West"),
-            SpotId::Irikar_Breach__Exit_Corridor__West_of_Pillar => write!(f, "{}", "Irikar Breach > Exit Corridor > West of Pillar"),
-            SpotId::Irikar_Breach__Flappy_Drone__Initial_Drop => write!(f, "{}", "Irikar Breach > Flappy Drone > Initial Drop"),
-            SpotId::Irikar_Breach__Flappy_Drone__Passage_Corner => write!(f, "{}", "Irikar Breach > Flappy Drone > Passage Corner"),
-            SpotId::Irikar_Breach__Flappy_Drone__Pillar_Underside => write!(f, "{}", "Irikar Breach > Flappy Drone > Pillar Underside"),
-            SpotId::Irikar_Breach__Flappy_Drone__Side => write!(f, "{}", "Irikar Breach > Flappy Drone > Side"),
-            SpotId::Irikar_Breach__Flappy_Drone__South => write!(f, "{}", "Irikar Breach > Flappy Drone > South"),
-            SpotId::Irikar_Breach__Flappy_Drone__Top_Pillar => write!(f, "{}", "Irikar Breach > Flappy Drone > Top Pillar"),
-            SpotId::Irikar_Breach__Flappy_Drone__Upper_Valley_Left => write!(f, "{}", "Irikar Breach > Flappy Drone > Upper Valley Left"),
-            SpotId::Irikar_Breach__Flappy_Drone__Upper_Valley_Right => write!(f, "{}", "Irikar Breach > Flappy Drone > Upper Valley Right"),
-            SpotId::Irikar_Breach__Flappy_Drone__West_Door => write!(f, "{}", "Irikar Breach > Flappy Drone > West Door"),
-            SpotId::Irikar_Breach__Flappy_Drone__Zigzag_Bottom => write!(f, "{}", "Irikar Breach > Flappy Drone > Zigzag Bottom"),
-            SpotId::Irikar_Breach__Four_way__East => write!(f, "{}", "Irikar Breach > Four-way > East"),
-            SpotId::Irikar_Breach__Four_way__Ledge => write!(f, "{}", "Irikar Breach > Four-way > Ledge"),
-            SpotId::Irikar_Breach__Four_way__North => write!(f, "{}", "Irikar Breach > Four-way > North"),
-            SpotId::Irikar_Breach__Four_way__South => write!(f, "{}", "Irikar Breach > Four-way > South"),
-            SpotId::Irikar_Breach__Four_way__West => write!(f, "{}", "Irikar Breach > Four-way > West"),
-            SpotId::Irikar_Breach__Gauntlet__East_22 => write!(f, "{}", "Irikar Breach > Gauntlet > East 22"),
-            SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Bottom => write!(f, "{}", "Irikar Breach > Gauntlet > Hidden Path Bottom"),
-            SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Lower_Entry => write!(f, "{}", "Irikar Breach > Gauntlet > Hidden Path Lower Entry"),
-            SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Reward => write!(f, "{}", "Irikar Breach > Gauntlet > Hidden Path Reward"),
-            SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Top_Ledge => write!(f, "{}", "Irikar Breach > Gauntlet > Hidden Path Top Ledge"),
-            SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Upper_Entry => write!(f, "{}", "Irikar Breach > Gauntlet > Hidden Path Upper Entry"),
-            SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Upper_Left => write!(f, "{}", "Irikar Breach > Gauntlet > Hidden Path Upper Left"),
-            SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Upper_Right => write!(f, "{}", "Irikar Breach > Gauntlet > Hidden Path Upper Right"),
-            SpotId::Irikar_Breach__Gauntlet__Save_Point => write!(f, "{}", "Irikar Breach > Gauntlet > Save Point"),
-            SpotId::Irikar_Breach__Hover_Room__Bottom => write!(f, "{}", "Irikar Breach > Hover Room > Bottom"),
-            SpotId::Irikar_Breach__Hover_Room__East => write!(f, "{}", "Irikar Breach > Hover Room > East"),
-            SpotId::Irikar_Breach__Hover_Room__West => write!(f, "{}", "Irikar Breach > Hover Room > West"),
-            SpotId::Irikar_Breach__Neon_Corridor__Center => write!(f, "{}", "Irikar Breach > Neon Corridor > Center"),
-            SpotId::Irikar_Breach__Neon_Corridor__East => write!(f, "{}", "Irikar Breach > Neon Corridor > East"),
-            SpotId::Irikar_Breach__Neon_Corridor__West => write!(f, "{}", "Irikar Breach > Neon Corridor > West"),
-            SpotId::Irikar_Breach__Neon_Corridor__West_Basin => write!(f, "{}", "Irikar Breach > Neon Corridor > West Basin"),
-            SpotId::Irikar_Breach__Sandy_Lair__East_27 => write!(f, "{}", "Irikar Breach > Sandy Lair > East 27"),
-            SpotId::Irikar_Breach__Sandy_Lair__East_28 => write!(f, "{}", "Irikar Breach > Sandy Lair > East 28"),
-            SpotId::Irikar_Breach__Save_Room__Save_Point => write!(f, "{}", "Irikar Breach > Save Room > Save Point"),
-            SpotId::Irikar_Breach__Save_Room__Upper_Area => write!(f, "{}", "Irikar Breach > Save Room > Upper Area"),
-            SpotId::Irikar_Breach__Save_Room__West => write!(f, "{}", "Irikar Breach > Save Room > West"),
-            SpotId::Irikar_Breach__Uhrum_Connector__West => write!(f, "{}", "Irikar Breach > Uhrum Connector > West"),
-            SpotId::Irikar_Breach__Worm_Rave__Corner => write!(f, "{}", "Irikar Breach > Worm Rave > Corner"),
-            SpotId::Irikar_Breach__Worm_Rave__East => write!(f, "{}", "Irikar Breach > Worm Rave > East"),
-            SpotId::Irikar_Breach__Worm_Rave__South => write!(f, "{}", "Irikar Breach > Worm Rave > South"),
+            SpotId::Irikar_Breach__Basement_Save__Save_Point => {
+                write!(f, "{}", "Irikar Breach > Basement Save > Save Point")
+            }
+            SpotId::Irikar_Breach__Exit_Corridor__East => {
+                write!(f, "{}", "Irikar Breach > Exit Corridor > East")
+            }
+            SpotId::Irikar_Breach__Exit_Corridor__North_12 => {
+                write!(f, "{}", "Irikar Breach > Exit Corridor > North 12")
+            }
+            SpotId::Irikar_Breach__Exit_Corridor__North_13 => {
+                write!(f, "{}", "Irikar Breach > Exit Corridor > North 13")
+            }
+            SpotId::Irikar_Breach__Exit_Corridor__Passage => {
+                write!(f, "{}", "Irikar Breach > Exit Corridor > Passage")
+            }
+            SpotId::Irikar_Breach__Exit_Corridor__Pillar => {
+                write!(f, "{}", "Irikar Breach > Exit Corridor > Pillar")
+            }
+            SpotId::Irikar_Breach__Exit_Corridor__Portal_Stand => {
+                write!(f, "{}", "Irikar Breach > Exit Corridor > Portal Stand")
+            }
+            SpotId::Irikar_Breach__Exit_Corridor__West => {
+                write!(f, "{}", "Irikar Breach > Exit Corridor > West")
+            }
+            SpotId::Irikar_Breach__Exit_Corridor__West_of_Pillar => {
+                write!(f, "{}", "Irikar Breach > Exit Corridor > West of Pillar")
+            }
+            SpotId::Irikar_Breach__Flappy_Drone__Initial_Drop => {
+                write!(f, "{}", "Irikar Breach > Flappy Drone > Initial Drop")
+            }
+            SpotId::Irikar_Breach__Flappy_Drone__Passage_Corner => {
+                write!(f, "{}", "Irikar Breach > Flappy Drone > Passage Corner")
+            }
+            SpotId::Irikar_Breach__Flappy_Drone__Pillar_Underside => {
+                write!(f, "{}", "Irikar Breach > Flappy Drone > Pillar Underside")
+            }
+            SpotId::Irikar_Breach__Flappy_Drone__Side => {
+                write!(f, "{}", "Irikar Breach > Flappy Drone > Side")
+            }
+            SpotId::Irikar_Breach__Flappy_Drone__South => {
+                write!(f, "{}", "Irikar Breach > Flappy Drone > South")
+            }
+            SpotId::Irikar_Breach__Flappy_Drone__Top_Pillar => {
+                write!(f, "{}", "Irikar Breach > Flappy Drone > Top Pillar")
+            }
+            SpotId::Irikar_Breach__Flappy_Drone__Upper_Valley_Left => {
+                write!(f, "{}", "Irikar Breach > Flappy Drone > Upper Valley Left")
+            }
+            SpotId::Irikar_Breach__Flappy_Drone__Upper_Valley_Right => {
+                write!(f, "{}", "Irikar Breach > Flappy Drone > Upper Valley Right")
+            }
+            SpotId::Irikar_Breach__Flappy_Drone__West_Door => {
+                write!(f, "{}", "Irikar Breach > Flappy Drone > West Door")
+            }
+            SpotId::Irikar_Breach__Flappy_Drone__Zigzag_Bottom => {
+                write!(f, "{}", "Irikar Breach > Flappy Drone > Zigzag Bottom")
+            }
+            SpotId::Irikar_Breach__Four_way__East => {
+                write!(f, "{}", "Irikar Breach > Four-way > East")
+            }
+            SpotId::Irikar_Breach__Four_way__Ledge => {
+                write!(f, "{}", "Irikar Breach > Four-way > Ledge")
+            }
+            SpotId::Irikar_Breach__Four_way__North => {
+                write!(f, "{}", "Irikar Breach > Four-way > North")
+            }
+            SpotId::Irikar_Breach__Four_way__South => {
+                write!(f, "{}", "Irikar Breach > Four-way > South")
+            }
+            SpotId::Irikar_Breach__Four_way__West => {
+                write!(f, "{}", "Irikar Breach > Four-way > West")
+            }
+            SpotId::Irikar_Breach__Gauntlet__East_22 => {
+                write!(f, "{}", "Irikar Breach > Gauntlet > East 22")
+            }
+            SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Bottom => {
+                write!(f, "{}", "Irikar Breach > Gauntlet > Hidden Path Bottom")
+            }
+            SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Lower_Entry => write!(
+                f,
+                "{}",
+                "Irikar Breach > Gauntlet > Hidden Path Lower Entry"
+            ),
+            SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Reward => {
+                write!(f, "{}", "Irikar Breach > Gauntlet > Hidden Path Reward")
+            }
+            SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Top_Ledge => {
+                write!(f, "{}", "Irikar Breach > Gauntlet > Hidden Path Top Ledge")
+            }
+            SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Upper_Entry => write!(
+                f,
+                "{}",
+                "Irikar Breach > Gauntlet > Hidden Path Upper Entry"
+            ),
+            SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Upper_Left => {
+                write!(f, "{}", "Irikar Breach > Gauntlet > Hidden Path Upper Left")
+            }
+            SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Upper_Right => write!(
+                f,
+                "{}",
+                "Irikar Breach > Gauntlet > Hidden Path Upper Right"
+            ),
+            SpotId::Irikar_Breach__Gauntlet__Save_Point => {
+                write!(f, "{}", "Irikar Breach > Gauntlet > Save Point")
+            }
+            SpotId::Irikar_Breach__Hover_Room__Bottom => {
+                write!(f, "{}", "Irikar Breach > Hover Room > Bottom")
+            }
+            SpotId::Irikar_Breach__Hover_Room__East => {
+                write!(f, "{}", "Irikar Breach > Hover Room > East")
+            }
+            SpotId::Irikar_Breach__Hover_Room__West => {
+                write!(f, "{}", "Irikar Breach > Hover Room > West")
+            }
+            SpotId::Irikar_Breach__Neon_Corridor__Center => {
+                write!(f, "{}", "Irikar Breach > Neon Corridor > Center")
+            }
+            SpotId::Irikar_Breach__Neon_Corridor__East => {
+                write!(f, "{}", "Irikar Breach > Neon Corridor > East")
+            }
+            SpotId::Irikar_Breach__Neon_Corridor__West => {
+                write!(f, "{}", "Irikar Breach > Neon Corridor > West")
+            }
+            SpotId::Irikar_Breach__Neon_Corridor__West_Basin => {
+                write!(f, "{}", "Irikar Breach > Neon Corridor > West Basin")
+            }
+            SpotId::Irikar_Breach__Sandy_Lair__East_27 => {
+                write!(f, "{}", "Irikar Breach > Sandy Lair > East 27")
+            }
+            SpotId::Irikar_Breach__Sandy_Lair__East_28 => {
+                write!(f, "{}", "Irikar Breach > Sandy Lair > East 28")
+            }
+            SpotId::Irikar_Breach__Save_Room__Save_Point => {
+                write!(f, "{}", "Irikar Breach > Save Room > Save Point")
+            }
+            SpotId::Irikar_Breach__Save_Room__Upper_Area => {
+                write!(f, "{}", "Irikar Breach > Save Room > Upper Area")
+            }
+            SpotId::Irikar_Breach__Save_Room__West => {
+                write!(f, "{}", "Irikar Breach > Save Room > West")
+            }
+            SpotId::Irikar_Breach__Uhrum_Connector__West => {
+                write!(f, "{}", "Irikar Breach > Uhrum Connector > West")
+            }
+            SpotId::Irikar_Breach__Worm_Rave__Corner => {
+                write!(f, "{}", "Irikar Breach > Worm Rave > Corner")
+            }
+            SpotId::Irikar_Breach__Worm_Rave__East => {
+                write!(f, "{}", "Irikar Breach > Worm Rave > East")
+            }
+            SpotId::Irikar_Breach__Worm_Rave__South => {
+                write!(f, "{}", "Irikar Breach > Worm Rave > South")
+            }
             SpotId::Menu__Upgrade_Menu__Combat => write!(f, "{}", "Menu > Upgrade Menu > Combat"),
             SpotId::Menu__Upgrade_Menu__Drone => write!(f, "{}", "Menu > Upgrade Menu > Drone"),
-            SpotId::Menu__Upgrade_Menu__Infection => write!(f, "{}", "Menu > Upgrade Menu > Infection"),
-            SpotId::Menu__Upgrade_Menu__Physiology => write!(f, "{}", "Menu > Upgrade Menu > Physiology"),
-            SpotId::Uhrum__Annuna_Corridor__Between_Two_Flowers => write!(f, "{}", "Uhrum > Annuna Corridor > Between Two Flowers"),
-            SpotId::Uhrum__Annuna_Corridor__Block_East => write!(f, "{}", "Uhrum > Annuna Corridor > Block East"),
-            SpotId::Uhrum__Annuna_Corridor__Block_West => write!(f, "{}", "Uhrum > Annuna Corridor > Block West"),
-            SpotId::Uhrum__Annuna_Corridor__East_25 => write!(f, "{}", "Uhrum > Annuna Corridor > East 25"),
-            SpotId::Uhrum__Annuna_Corridor__East_Cubby => write!(f, "{}", "Uhrum > Annuna Corridor > East Cubby"),
-            SpotId::Uhrum__Annuna_Corridor__Lower_Platform => write!(f, "{}", "Uhrum > Annuna Corridor > Lower Platform"),
-            SpotId::Uhrum__Annuna_Corridor__Middle_Platform => write!(f, "{}", "Uhrum > Annuna Corridor > Middle Platform"),
-            SpotId::Uhrum__Annuna_Corridor__Open_Pillar => write!(f, "{}", "Uhrum > Annuna Corridor > Open Pillar"),
-            SpotId::Uhrum__Annuna_Corridor__Pedestal => write!(f, "{}", "Uhrum > Annuna Corridor > Pedestal"),
-            SpotId::Uhrum__Annuna_Corridor__Save_Point => write!(f, "{}", "Uhrum > Annuna Corridor > Save Point"),
-            SpotId::Uhrum__Annuna_Corridor__Statue => write!(f, "{}", "Uhrum > Annuna Corridor > Statue"),
-            SpotId::Uhrum__Annuna_Corridor__Upper_Ledge => write!(f, "{}", "Uhrum > Annuna Corridor > Upper Ledge"),
-            SpotId::Uhrum__Annuna_Corridor__Upper_Platform => write!(f, "{}", "Uhrum > Annuna Corridor > Upper Platform"),
-            SpotId::Uhrum__Annuna_Corridor__Upper_Trees => write!(f, "{}", "Uhrum > Annuna Corridor > Upper Trees"),
-            SpotId::Uhrum__Annuna_Corridor__Wall_Remnant => write!(f, "{}", "Uhrum > Annuna Corridor > Wall Remnant"),
-            SpotId::Uhrum__Annuna_Corridor__West_25 => write!(f, "{}", "Uhrum > Annuna Corridor > West 25"),
-            SpotId::Uhrum__Annuna_Corridor__West_26 => write!(f, "{}", "Uhrum > Annuna Corridor > West 26"),
-            SpotId::Uhrum__Artillery_Practice__East_24 => write!(f, "{}", "Uhrum > Artillery Practice > East 24"),
+            SpotId::Menu__Upgrade_Menu__Infection => {
+                write!(f, "{}", "Menu > Upgrade Menu > Infection")
+            }
+            SpotId::Menu__Upgrade_Menu__Physiology => {
+                write!(f, "{}", "Menu > Upgrade Menu > Physiology")
+            }
+            SpotId::Uhrum__Annuna_Corridor__Between_Two_Flowers => {
+                write!(f, "{}", "Uhrum > Annuna Corridor > Between Two Flowers")
+            }
+            SpotId::Uhrum__Annuna_Corridor__Block_East => {
+                write!(f, "{}", "Uhrum > Annuna Corridor > Block East")
+            }
+            SpotId::Uhrum__Annuna_Corridor__Block_West => {
+                write!(f, "{}", "Uhrum > Annuna Corridor > Block West")
+            }
+            SpotId::Uhrum__Annuna_Corridor__East_25 => {
+                write!(f, "{}", "Uhrum > Annuna Corridor > East 25")
+            }
+            SpotId::Uhrum__Annuna_Corridor__East_Cubby => {
+                write!(f, "{}", "Uhrum > Annuna Corridor > East Cubby")
+            }
+            SpotId::Uhrum__Annuna_Corridor__Lower_Platform => {
+                write!(f, "{}", "Uhrum > Annuna Corridor > Lower Platform")
+            }
+            SpotId::Uhrum__Annuna_Corridor__Middle_Platform => {
+                write!(f, "{}", "Uhrum > Annuna Corridor > Middle Platform")
+            }
+            SpotId::Uhrum__Annuna_Corridor__Open_Pillar => {
+                write!(f, "{}", "Uhrum > Annuna Corridor > Open Pillar")
+            }
+            SpotId::Uhrum__Annuna_Corridor__Pedestal => {
+                write!(f, "{}", "Uhrum > Annuna Corridor > Pedestal")
+            }
+            SpotId::Uhrum__Annuna_Corridor__Save_Point => {
+                write!(f, "{}", "Uhrum > Annuna Corridor > Save Point")
+            }
+            SpotId::Uhrum__Annuna_Corridor__Statue => {
+                write!(f, "{}", "Uhrum > Annuna Corridor > Statue")
+            }
+            SpotId::Uhrum__Annuna_Corridor__Upper_Ledge => {
+                write!(f, "{}", "Uhrum > Annuna Corridor > Upper Ledge")
+            }
+            SpotId::Uhrum__Annuna_Corridor__Upper_Platform => {
+                write!(f, "{}", "Uhrum > Annuna Corridor > Upper Platform")
+            }
+            SpotId::Uhrum__Annuna_Corridor__Upper_Trees => {
+                write!(f, "{}", "Uhrum > Annuna Corridor > Upper Trees")
+            }
+            SpotId::Uhrum__Annuna_Corridor__Wall_Remnant => {
+                write!(f, "{}", "Uhrum > Annuna Corridor > Wall Remnant")
+            }
+            SpotId::Uhrum__Annuna_Corridor__West_25 => {
+                write!(f, "{}", "Uhrum > Annuna Corridor > West 25")
+            }
+            SpotId::Uhrum__Annuna_Corridor__West_26 => {
+                write!(f, "{}", "Uhrum > Annuna Corridor > West 26")
+            }
+            SpotId::Uhrum__Artillery_Practice__East_24 => {
+                write!(f, "{}", "Uhrum > Artillery Practice > East 24")
+            }
             SpotId::Uhrum__East_Lake__West_27 => write!(f, "{}", "Uhrum > East Lake > West 27"),
             SpotId::Uhrum__East_Lake__West_28 => write!(f, "{}", "Uhrum > East Lake > West 28"),
-            SpotId::Uhrum__Glitchy_Corridor__East_27 => write!(f, "{}", "Uhrum > Glitchy Corridor > East 27"),
-            SpotId::Uhrum__Glitchy_Corridor__East_28 => write!(f, "{}", "Uhrum > Glitchy Corridor > East 28"),
-            SpotId::Uhrum__Glitchy_Corridor__West_28 => write!(f, "{}", "Uhrum > Glitchy Corridor > West 28"),
+            SpotId::Uhrum__Glitchy_Corridor__East_27 => {
+                write!(f, "{}", "Uhrum > Glitchy Corridor > East 27")
+            }
+            SpotId::Uhrum__Glitchy_Corridor__East_28 => {
+                write!(f, "{}", "Uhrum > Glitchy Corridor > East 28")
+            }
+            SpotId::Uhrum__Glitchy_Corridor__West_28 => {
+                write!(f, "{}", "Uhrum > Glitchy Corridor > West 28")
+            }
             SpotId::Uhrum__Save_Room__East => write!(f, "{}", "Uhrum > Save Room > East"),
-            SpotId::Uhrum__Save_Room__Save_Point => write!(f, "{}", "Uhrum > Save Room > Save Point"),
+            SpotId::Uhrum__Save_Room__Save_Point => {
+                write!(f, "{}", "Uhrum > Save Room > Save Point")
+            }
             SpotId::Uhrum__Save_Room__West => write!(f, "{}", "Uhrum > Save Room > West"),
-            SpotId::Uhrum__Siege_Corridor__Center_Box => write!(f, "{}", "Uhrum > Siege Corridor > Center Box"),
-            SpotId::Uhrum__Siege_Corridor__Center_East => write!(f, "{}", "Uhrum > Siege Corridor > Center East"),
-            SpotId::Uhrum__Siege_Corridor__Center_Platform_1 => write!(f, "{}", "Uhrum > Siege Corridor > Center Platform 1"),
-            SpotId::Uhrum__Siege_Corridor__Center_Platform_3 => write!(f, "{}", "Uhrum > Siege Corridor > Center Platform 3"),
-            SpotId::Uhrum__Siege_Corridor__Center_Valley => write!(f, "{}", "Uhrum > Siege Corridor > Center Valley"),
-            SpotId::Uhrum__Siege_Corridor__Center_West => write!(f, "{}", "Uhrum > Siege Corridor > Center West"),
-            SpotId::Uhrum__Siege_Corridor__East_25 => write!(f, "{}", "Uhrum > Siege Corridor > East 25"),
-            SpotId::Uhrum__Siege_Corridor__East_Hill => write!(f, "{}", "Uhrum > Siege Corridor > East Hill"),
-            SpotId::Uhrum__Siege_Corridor__Mideast_Hill => write!(f, "{}", "Uhrum > Siege Corridor > Mideast Hill"),
-            SpotId::Uhrum__Siege_Corridor__Mideast_Tree => write!(f, "{}", "Uhrum > Siege Corridor > Mideast Tree"),
-            SpotId::Uhrum__Siege_Corridor__Northwest_Door => write!(f, "{}", "Uhrum > Siege Corridor > Northwest Door"),
-            SpotId::Uhrum__Siege_Corridor__Northwest_Platform => write!(f, "{}", "Uhrum > Siege Corridor > Northwest Platform"),
+            SpotId::Uhrum__Siege_Corridor__Center_Box => {
+                write!(f, "{}", "Uhrum > Siege Corridor > Center Box")
+            }
+            SpotId::Uhrum__Siege_Corridor__Center_East => {
+                write!(f, "{}", "Uhrum > Siege Corridor > Center East")
+            }
+            SpotId::Uhrum__Siege_Corridor__Center_Platform_1 => {
+                write!(f, "{}", "Uhrum > Siege Corridor > Center Platform 1")
+            }
+            SpotId::Uhrum__Siege_Corridor__Center_Platform_3 => {
+                write!(f, "{}", "Uhrum > Siege Corridor > Center Platform 3")
+            }
+            SpotId::Uhrum__Siege_Corridor__Center_Valley => {
+                write!(f, "{}", "Uhrum > Siege Corridor > Center Valley")
+            }
+            SpotId::Uhrum__Siege_Corridor__Center_West => {
+                write!(f, "{}", "Uhrum > Siege Corridor > Center West")
+            }
+            SpotId::Uhrum__Siege_Corridor__East_25 => {
+                write!(f, "{}", "Uhrum > Siege Corridor > East 25")
+            }
+            SpotId::Uhrum__Siege_Corridor__East_Hill => {
+                write!(f, "{}", "Uhrum > Siege Corridor > East Hill")
+            }
+            SpotId::Uhrum__Siege_Corridor__Mideast_Hill => {
+                write!(f, "{}", "Uhrum > Siege Corridor > Mideast Hill")
+            }
+            SpotId::Uhrum__Siege_Corridor__Mideast_Tree => {
+                write!(f, "{}", "Uhrum > Siege Corridor > Mideast Tree")
+            }
+            SpotId::Uhrum__Siege_Corridor__Northwest_Door => {
+                write!(f, "{}", "Uhrum > Siege Corridor > Northwest Door")
+            }
+            SpotId::Uhrum__Siege_Corridor__Northwest_Platform => {
+                write!(f, "{}", "Uhrum > Siege Corridor > Northwest Platform")
+            }
             SpotId::Uhrum__Siege_Corridor__Pond => write!(f, "{}", "Uhrum > Siege Corridor > Pond"),
-            SpotId::Uhrum__Siege_Corridor__Upper_Rock_East => write!(f, "{}", "Uhrum > Siege Corridor > Upper Rock East"),
-            SpotId::Uhrum__Siege_Corridor__Upper_Rock_Item => write!(f, "{}", "Uhrum > Siege Corridor > Upper Rock Item"),
-            SpotId::Uhrum__Siege_Corridor__Upper_Rock_West => write!(f, "{}", "Uhrum > Siege Corridor > Upper Rock West"),
-            SpotId::Uhrum__Siege_Corridor__West_26 => write!(f, "{}", "Uhrum > Siege Corridor > West 26"),
-            SpotId::Uhrum__Siege_Corridor__West_Grassy_Ledge => write!(f, "{}", "Uhrum > Siege Corridor > West Grassy Ledge"),
-            SpotId::Uhrum__Siege_Corridor__West_Greenery => write!(f, "{}", "Uhrum > Siege Corridor > West Greenery"),
-            SpotId::Uhrum__Siege_Corridor__West_Loop => write!(f, "{}", "Uhrum > Siege Corridor > West Loop"),
-            SpotId::Uhrum__Siege_Corridor__West_Middle_Tree => write!(f, "{}", "Uhrum > Siege Corridor > West Middle Tree"),
-            SpotId::Uhrum__Siege_Corridor__West_Rocky_Ledge => write!(f, "{}", "Uhrum > Siege Corridor > West Rocky Ledge"),
-            SpotId::Uhrum__Siege_Corridor__Western_Cache => write!(f, "{}", "Uhrum > Siege Corridor > Western Cache"),
-            SpotId::Uhrum__Siege_Corridor__Western_Rock => write!(f, "{}", "Uhrum > Siege Corridor > Western Rock"),
+            SpotId::Uhrum__Siege_Corridor__Upper_Rock_East => {
+                write!(f, "{}", "Uhrum > Siege Corridor > Upper Rock East")
+            }
+            SpotId::Uhrum__Siege_Corridor__Upper_Rock_Item => {
+                write!(f, "{}", "Uhrum > Siege Corridor > Upper Rock Item")
+            }
+            SpotId::Uhrum__Siege_Corridor__Upper_Rock_West => {
+                write!(f, "{}", "Uhrum > Siege Corridor > Upper Rock West")
+            }
+            SpotId::Uhrum__Siege_Corridor__West_26 => {
+                write!(f, "{}", "Uhrum > Siege Corridor > West 26")
+            }
+            SpotId::Uhrum__Siege_Corridor__West_Grassy_Ledge => {
+                write!(f, "{}", "Uhrum > Siege Corridor > West Grassy Ledge")
+            }
+            SpotId::Uhrum__Siege_Corridor__West_Greenery => {
+                write!(f, "{}", "Uhrum > Siege Corridor > West Greenery")
+            }
+            SpotId::Uhrum__Siege_Corridor__West_Loop => {
+                write!(f, "{}", "Uhrum > Siege Corridor > West Loop")
+            }
+            SpotId::Uhrum__Siege_Corridor__West_Middle_Tree => {
+                write!(f, "{}", "Uhrum > Siege Corridor > West Middle Tree")
+            }
+            SpotId::Uhrum__Siege_Corridor__West_Rocky_Ledge => {
+                write!(f, "{}", "Uhrum > Siege Corridor > West Rocky Ledge")
+            }
+            SpotId::Uhrum__Siege_Corridor__Western_Cache => {
+                write!(f, "{}", "Uhrum > Siege Corridor > Western Cache")
+            }
+            SpotId::Uhrum__Siege_Corridor__Western_Rock => {
+                write!(f, "{}", "Uhrum > Siege Corridor > Western Rock")
+            }
             SpotId::Uhrum__Tulip_Tower__West_24 => write!(f, "{}", "Uhrum > Tulip Tower > West 24"),
-            SpotId::Uhrum__Tulip_Tower__West_24_in_Mid_air => write!(f, "{}", "Uhrum > Tulip Tower > West 24 in Mid-air"),
-            SpotId::Uhrum__Waterfalls__Above_Block => write!(f, "{}", "Uhrum > Waterfalls > Above Block"),
-            SpotId::Uhrum__Waterfalls__Barrier_East => write!(f, "{}", "Uhrum > Waterfalls > Barrier East"),
-            SpotId::Uhrum__Waterfalls__Barrier_West => write!(f, "{}", "Uhrum > Waterfalls > Barrier West"),
-            SpotId::Uhrum__Waterfalls__Below_Block => write!(f, "{}", "Uhrum > Waterfalls > Below Block"),
-            SpotId::Uhrum__Waterfalls__Ceiling_Cache => write!(f, "{}", "Uhrum > Waterfalls > Ceiling Cache"),
-            SpotId::Uhrum__Waterfalls__Ceiling_Opening => write!(f, "{}", "Uhrum > Waterfalls > Ceiling Opening"),
-            SpotId::Uhrum__Waterfalls__Center_Island_East => write!(f, "{}", "Uhrum > Waterfalls > Center Island East"),
-            SpotId::Uhrum__Waterfalls__Center_Island_West => write!(f, "{}", "Uhrum > Waterfalls > Center Island West"),
+            SpotId::Uhrum__Tulip_Tower__West_24_in_Mid_air => {
+                write!(f, "{}", "Uhrum > Tulip Tower > West 24 in Mid-air")
+            }
+            SpotId::Uhrum__Waterfalls__Above_Block => {
+                write!(f, "{}", "Uhrum > Waterfalls > Above Block")
+            }
+            SpotId::Uhrum__Waterfalls__Barrier_East => {
+                write!(f, "{}", "Uhrum > Waterfalls > Barrier East")
+            }
+            SpotId::Uhrum__Waterfalls__Barrier_West => {
+                write!(f, "{}", "Uhrum > Waterfalls > Barrier West")
+            }
+            SpotId::Uhrum__Waterfalls__Below_Block => {
+                write!(f, "{}", "Uhrum > Waterfalls > Below Block")
+            }
+            SpotId::Uhrum__Waterfalls__Ceiling_Cache => {
+                write!(f, "{}", "Uhrum > Waterfalls > Ceiling Cache")
+            }
+            SpotId::Uhrum__Waterfalls__Ceiling_Opening => {
+                write!(f, "{}", "Uhrum > Waterfalls > Ceiling Opening")
+            }
+            SpotId::Uhrum__Waterfalls__Center_Island_East => {
+                write!(f, "{}", "Uhrum > Waterfalls > Center Island East")
+            }
+            SpotId::Uhrum__Waterfalls__Center_Island_West => {
+                write!(f, "{}", "Uhrum > Waterfalls > Center Island West")
+            }
             SpotId::Uhrum__Waterfalls__East_24 => write!(f, "{}", "Uhrum > Waterfalls > East 24"),
-            SpotId::Uhrum__Waterfalls__East_24_in_Mid_air => write!(f, "{}", "Uhrum > Waterfalls > East 24 in Mid-air"),
+            SpotId::Uhrum__Waterfalls__East_24_in_Mid_air => {
+                write!(f, "{}", "Uhrum > Waterfalls > East 24 in Mid-air")
+            }
             SpotId::Uhrum__Waterfalls__East_25 => write!(f, "{}", "Uhrum > Waterfalls > East 25"),
             SpotId::Uhrum__Waterfalls__East_26 => write!(f, "{}", "Uhrum > Waterfalls > East 26"),
             SpotId::Uhrum__Waterfalls__East_27 => write!(f, "{}", "Uhrum > Waterfalls > East 27"),
             SpotId::Uhrum__Waterfalls__East_28 => write!(f, "{}", "Uhrum > Waterfalls > East 28"),
-            SpotId::Uhrum__Waterfalls__East_Palm_Tree => write!(f, "{}", "Uhrum > Waterfalls > East Palm Tree"),
-            SpotId::Uhrum__Waterfalls__East_Water_Surface => write!(f, "{}", "Uhrum > Waterfalls > East Water Surface"),
-            SpotId::Uhrum__Waterfalls__East_Waters_Edge => write!(f, "{}", "Uhrum > Waterfalls > East Water's Edge"),
-            SpotId::Uhrum__Waterfalls__Green_Middle_Ledge => write!(f, "{}", "Uhrum > Waterfalls > Green Middle Ledge"),
-            SpotId::Uhrum__Waterfalls__High_Platform => write!(f, "{}", "Uhrum > Waterfalls > High Platform"),
-            SpotId::Uhrum__Waterfalls__Island_Water_West => write!(f, "{}", "Uhrum > Waterfalls > Island Water West"),
-            SpotId::Uhrum__Waterfalls__Large_Rock => write!(f, "{}", "Uhrum > Waterfalls > Large Rock"),
-            SpotId::Uhrum__Waterfalls__Ledge_Above_Palm => write!(f, "{}", "Uhrum > Waterfalls > Ledge Above Palm"),
-            SpotId::Uhrum__Waterfalls__Lower_East_Platform => write!(f, "{}", "Uhrum > Waterfalls > Lower East Platform"),
-            SpotId::Uhrum__Waterfalls__Medium_Rock => write!(f, "{}", "Uhrum > Waterfalls > Medium Rock"),
-            SpotId::Uhrum__Waterfalls__Northeast_Ledge => write!(f, "{}", "Uhrum > Waterfalls > Northeast Ledge"),
-            SpotId::Uhrum__Waterfalls__Small_Rock => write!(f, "{}", "Uhrum > Waterfalls > Small Rock"),
-            SpotId::Uhrum__Waterfalls__Water_Pillar => write!(f, "{}", "Uhrum > Waterfalls > Water Pillar"),
-            SpotId::Uhrum__Waterfalls__Water_Slope => write!(f, "{}", "Uhrum > Waterfalls > Water Slope"),
+            SpotId::Uhrum__Waterfalls__East_Palm_Tree => {
+                write!(f, "{}", "Uhrum > Waterfalls > East Palm Tree")
+            }
+            SpotId::Uhrum__Waterfalls__East_Water_Surface => {
+                write!(f, "{}", "Uhrum > Waterfalls > East Water Surface")
+            }
+            SpotId::Uhrum__Waterfalls__East_Waters_Edge => {
+                write!(f, "{}", "Uhrum > Waterfalls > East Water's Edge")
+            }
+            SpotId::Uhrum__Waterfalls__Green_Middle_Ledge => {
+                write!(f, "{}", "Uhrum > Waterfalls > Green Middle Ledge")
+            }
+            SpotId::Uhrum__Waterfalls__High_Platform => {
+                write!(f, "{}", "Uhrum > Waterfalls > High Platform")
+            }
+            SpotId::Uhrum__Waterfalls__Island_Water_West => {
+                write!(f, "{}", "Uhrum > Waterfalls > Island Water West")
+            }
+            SpotId::Uhrum__Waterfalls__Large_Rock => {
+                write!(f, "{}", "Uhrum > Waterfalls > Large Rock")
+            }
+            SpotId::Uhrum__Waterfalls__Ledge_Above_Palm => {
+                write!(f, "{}", "Uhrum > Waterfalls > Ledge Above Palm")
+            }
+            SpotId::Uhrum__Waterfalls__Lower_East_Platform => {
+                write!(f, "{}", "Uhrum > Waterfalls > Lower East Platform")
+            }
+            SpotId::Uhrum__Waterfalls__Medium_Rock => {
+                write!(f, "{}", "Uhrum > Waterfalls > Medium Rock")
+            }
+            SpotId::Uhrum__Waterfalls__Northeast_Ledge => {
+                write!(f, "{}", "Uhrum > Waterfalls > Northeast Ledge")
+            }
+            SpotId::Uhrum__Waterfalls__Small_Rock => {
+                write!(f, "{}", "Uhrum > Waterfalls > Small Rock")
+            }
+            SpotId::Uhrum__Waterfalls__Water_Pillar => {
+                write!(f, "{}", "Uhrum > Waterfalls > Water Pillar")
+            }
+            SpotId::Uhrum__Waterfalls__Water_Slope => {
+                write!(f, "{}", "Uhrum > Waterfalls > Water Slope")
+            }
             SpotId::Uhrum__Waterfalls__West_24 => write!(f, "{}", "Uhrum > Waterfalls > West 24"),
             SpotId::Uhrum__Waterfalls__West_25 => write!(f, "{}", "Uhrum > Waterfalls > West 25"),
             SpotId::Uhrum__Waterfalls__West_27 => write!(f, "{}", "Uhrum > Waterfalls > West 27"),
-            SpotId::Uhrum__Waterfalls__West_Platform => write!(f, "{}", "Uhrum > Waterfalls > West Platform"),
-            SpotId::Uhrum__Waterfalls__West_Wall => write!(f, "{}", "Uhrum > Waterfalls > West Wall"),
-            SpotId::Uhrum__Waterfalls__West_Water_Ledge => write!(f, "{}", "Uhrum > Waterfalls > West Water Ledge"),
-            SpotId::Uhrum__Waterfalls__West_Water_Nook => write!(f, "{}", "Uhrum > Waterfalls > West Water Nook"),
-            SpotId::Uhrum__Waterfalls__West_Water_Surface => write!(f, "{}", "Uhrum > Waterfalls > West Water Surface"),
-            SpotId::Uhrum__Waterfalls__West_Waters_Edge => write!(f, "{}", "Uhrum > Waterfalls > West Water's Edge"),
-            SpotId::Uhrum__West_Entrance__Clear_Passage => write!(f, "{}", "Uhrum > West Entrance > Clear Passage"),
-            SpotId::Uhrum__West_Entrance__East_26 => write!(f, "{}", "Uhrum > West Entrance > East 26"),
-            SpotId::Uhrum__West_Entrance__East_28 => write!(f, "{}", "Uhrum > West Entrance > East 28"),
-            SpotId::Uhrum__West_Entrance__Gate_Switch => write!(f, "{}", "Uhrum > West Entrance > Gate Switch"),
-            SpotId::Uhrum__West_Entrance__Hidden_Passage_Entry => write!(f, "{}", "Uhrum > West Entrance > Hidden Passage Entry"),
-            SpotId::Uhrum__West_Entrance__Hidden_Passage_West => write!(f, "{}", "Uhrum > West Entrance > Hidden Passage West"),
-            SpotId::Uhrum__West_Entrance__Inner_Dais => write!(f, "{}", "Uhrum > West Entrance > Inner Dais"),
-            SpotId::Uhrum__West_Entrance__Lower_Path_Gap => write!(f, "{}", "Uhrum > West Entrance > Lower Path Gap"),
-            SpotId::Uhrum__West_Entrance__Lower_Path_Rock => write!(f, "{}", "Uhrum > West Entrance > Lower Path Rock"),
-            SpotId::Uhrum__West_Entrance__Lower_Path_Tree_Ledge => write!(f, "{}", "Uhrum > West Entrance > Lower Path Tree Ledge"),
-            SpotId::Uhrum__West_Entrance__Lower_Wall_East => write!(f, "{}", "Uhrum > West Entrance > Lower Wall East"),
-            SpotId::Uhrum__West_Entrance__Lower_Wall_West => write!(f, "{}", "Uhrum > West Entrance > Lower Wall West"),
-            SpotId::Uhrum__West_Entrance__Middle_West_Ledge => write!(f, "{}", "Uhrum > West Entrance > Middle West Ledge"),
-            SpotId::Uhrum__West_Entrance__Portal_Exit => write!(f, "{}", "Uhrum > West Entrance > Portal Exit"),
-            SpotId::Uhrum__West_Entrance__Portal_Stand => write!(f, "{}", "Uhrum > West Entrance > Portal Stand"),
+            SpotId::Uhrum__Waterfalls__West_Platform => {
+                write!(f, "{}", "Uhrum > Waterfalls > West Platform")
+            }
+            SpotId::Uhrum__Waterfalls__West_Wall => {
+                write!(f, "{}", "Uhrum > Waterfalls > West Wall")
+            }
+            SpotId::Uhrum__Waterfalls__West_Water_Ledge => {
+                write!(f, "{}", "Uhrum > Waterfalls > West Water Ledge")
+            }
+            SpotId::Uhrum__Waterfalls__West_Water_Nook => {
+                write!(f, "{}", "Uhrum > Waterfalls > West Water Nook")
+            }
+            SpotId::Uhrum__Waterfalls__West_Water_Surface => {
+                write!(f, "{}", "Uhrum > Waterfalls > West Water Surface")
+            }
+            SpotId::Uhrum__Waterfalls__West_Waters_Edge => {
+                write!(f, "{}", "Uhrum > Waterfalls > West Water's Edge")
+            }
+            SpotId::Uhrum__West_Entrance__Clear_Passage => {
+                write!(f, "{}", "Uhrum > West Entrance > Clear Passage")
+            }
+            SpotId::Uhrum__West_Entrance__East_26 => {
+                write!(f, "{}", "Uhrum > West Entrance > East 26")
+            }
+            SpotId::Uhrum__West_Entrance__East_28 => {
+                write!(f, "{}", "Uhrum > West Entrance > East 28")
+            }
+            SpotId::Uhrum__West_Entrance__Gate_Switch => {
+                write!(f, "{}", "Uhrum > West Entrance > Gate Switch")
+            }
+            SpotId::Uhrum__West_Entrance__Hidden_Passage_Entry => {
+                write!(f, "{}", "Uhrum > West Entrance > Hidden Passage Entry")
+            }
+            SpotId::Uhrum__West_Entrance__Hidden_Passage_West => {
+                write!(f, "{}", "Uhrum > West Entrance > Hidden Passage West")
+            }
+            SpotId::Uhrum__West_Entrance__Inner_Dais => {
+                write!(f, "{}", "Uhrum > West Entrance > Inner Dais")
+            }
+            SpotId::Uhrum__West_Entrance__Lower_Path_Gap => {
+                write!(f, "{}", "Uhrum > West Entrance > Lower Path Gap")
+            }
+            SpotId::Uhrum__West_Entrance__Lower_Path_Rock => {
+                write!(f, "{}", "Uhrum > West Entrance > Lower Path Rock")
+            }
+            SpotId::Uhrum__West_Entrance__Lower_Path_Tree_Ledge => {
+                write!(f, "{}", "Uhrum > West Entrance > Lower Path Tree Ledge")
+            }
+            SpotId::Uhrum__West_Entrance__Lower_Wall_East => {
+                write!(f, "{}", "Uhrum > West Entrance > Lower Wall East")
+            }
+            SpotId::Uhrum__West_Entrance__Lower_Wall_West => {
+                write!(f, "{}", "Uhrum > West Entrance > Lower Wall West")
+            }
+            SpotId::Uhrum__West_Entrance__Middle_West_Ledge => {
+                write!(f, "{}", "Uhrum > West Entrance > Middle West Ledge")
+            }
+            SpotId::Uhrum__West_Entrance__Portal_Exit => {
+                write!(f, "{}", "Uhrum > West Entrance > Portal Exit")
+            }
+            SpotId::Uhrum__West_Entrance__Portal_Stand => {
+                write!(f, "{}", "Uhrum > West Entrance > Portal Stand")
+            }
             SpotId::Uhrum__West_Entrance__Sand => write!(f, "{}", "Uhrum > West Entrance > Sand"),
-            SpotId::Uhrum__West_Entrance__Save_Point => write!(f, "{}", "Uhrum > West Entrance > Save Point"),
-            SpotId::Uhrum__West_Entrance__South_Platform => write!(f, "{}", "Uhrum > West Entrance > South Platform"),
-            SpotId::Uhrum__West_Entrance__Southeast_Tree => write!(f, "{}", "Uhrum > West Entrance > Southeast Tree"),
-            SpotId::Uhrum__West_Entrance__Top_West_Ledge => write!(f, "{}", "Uhrum > West Entrance > Top West Ledge"),
-            SpotId::Uhrum__West_Entrance__Upper_Fork => write!(f, "{}", "Uhrum > West Entrance > Upper Fork"),
-            SpotId::Uhrum__West_Entrance__Upper_Wall_East => write!(f, "{}", "Uhrum > West Entrance > Upper Wall East"),
-            SpotId::Uhrum__West_Entrance__Upper_Wall_West => write!(f, "{}", "Uhrum > West Entrance > Upper Wall West"),
-            SpotId::Uhrum__West_Entrance__West_25 => write!(f, "{}", "Uhrum > West Entrance > West 25"),
-            SpotId::Uhrum__West_Entrance__West_26 => write!(f, "{}", "Uhrum > West Entrance > West 26"),
-            SpotId::Uhrum__West_Entrance__West_27 => write!(f, "{}", "Uhrum > West Entrance > West 27"),
-            SpotId::Uhrum__West_Entrance__West_of_Gate => write!(f, "{}", "Uhrum > West Entrance > West of Gate"),
+            SpotId::Uhrum__West_Entrance__Save_Point => {
+                write!(f, "{}", "Uhrum > West Entrance > Save Point")
+            }
+            SpotId::Uhrum__West_Entrance__South_Platform => {
+                write!(f, "{}", "Uhrum > West Entrance > South Platform")
+            }
+            SpotId::Uhrum__West_Entrance__Southeast_Tree => {
+                write!(f, "{}", "Uhrum > West Entrance > Southeast Tree")
+            }
+            SpotId::Uhrum__West_Entrance__Top_West_Ledge => {
+                write!(f, "{}", "Uhrum > West Entrance > Top West Ledge")
+            }
+            SpotId::Uhrum__West_Entrance__Upper_Fork => {
+                write!(f, "{}", "Uhrum > West Entrance > Upper Fork")
+            }
+            SpotId::Uhrum__West_Entrance__Upper_Wall_East => {
+                write!(f, "{}", "Uhrum > West Entrance > Upper Wall East")
+            }
+            SpotId::Uhrum__West_Entrance__Upper_Wall_West => {
+                write!(f, "{}", "Uhrum > West Entrance > Upper Wall West")
+            }
+            SpotId::Uhrum__West_Entrance__West_25 => {
+                write!(f, "{}", "Uhrum > West Entrance > West 25")
+            }
+            SpotId::Uhrum__West_Entrance__West_26 => {
+                write!(f, "{}", "Uhrum > West Entrance > West 26")
+            }
+            SpotId::Uhrum__West_Entrance__West_27 => {
+                write!(f, "{}", "Uhrum > West Entrance > West 27")
+            }
+            SpotId::Uhrum__West_Entrance__West_of_Gate => {
+                write!(f, "{}", "Uhrum > West Entrance > West of Gate")
+            }
         }
     }
 }
@@ -1498,21 +4610,33 @@ impl std::str::FromStr for SpotId {
             "Amagi > Liru Room > Hidden Enemies" => Ok(SpotId::Amagi__Liru_Room__Hidden_Enemies),
             "Amagi > Liru Room > Hidden Exit" => Ok(SpotId::Amagi__Liru_Room__Hidden_Exit),
             "Amagi > Liru Room > Platform 1 Left" => Ok(SpotId::Amagi__Liru_Room__Platform_1_Left),
-            "Amagi > Liru Room > Platform 1 Right" => Ok(SpotId::Amagi__Liru_Room__Platform_1_Right),
+            "Amagi > Liru Room > Platform 1 Right" => {
+                Ok(SpotId::Amagi__Liru_Room__Platform_1_Right)
+            }
             "Amagi > Liru Room > Platform 2 Left" => Ok(SpotId::Amagi__Liru_Room__Platform_2_Left),
-            "Amagi > Liru Room > Platform 2 Right" => Ok(SpotId::Amagi__Liru_Room__Platform_2_Right),
+            "Amagi > Liru Room > Platform 2 Right" => {
+                Ok(SpotId::Amagi__Liru_Room__Platform_2_Right)
+            }
             "Amagi > Liru Room > Platform 3 Left" => Ok(SpotId::Amagi__Liru_Room__Platform_3_Left),
-            "Amagi > Liru Room > Platform 3 Right" => Ok(SpotId::Amagi__Liru_Room__Platform_3_Right),
+            "Amagi > Liru Room > Platform 3 Right" => {
+                Ok(SpotId::Amagi__Liru_Room__Platform_3_Right)
+            }
             "Amagi > Liru Room > Platform 4 Left" => Ok(SpotId::Amagi__Liru_Room__Platform_4_Left),
-            "Amagi > Liru Room > Platform 4 Right" => Ok(SpotId::Amagi__Liru_Room__Platform_4_Right),
+            "Amagi > Liru Room > Platform 4 Right" => {
+                Ok(SpotId::Amagi__Liru_Room__Platform_4_Right)
+            }
             "Amagi > Liru Room > Shrine" => Ok(SpotId::Amagi__Liru_Room__Shrine),
             "Amagi > Liru Room > West 19" => Ok(SpotId::Amagi__Liru_Room__West_19),
             "Amagi > Liru Room > West 20" => Ok(SpotId::Amagi__Liru_Room__West_20),
             "Amagi > Main Area > Broken Wall" => Ok(SpotId::Amagi__Main_Area__Broken_Wall),
             "Amagi > Main Area > Carving" => Ok(SpotId::Amagi__Main_Area__Carving),
-            "Amagi > Main Area > Catwalk Broken Part" => Ok(SpotId::Amagi__Main_Area__Catwalk_Broken_Part),
+            "Amagi > Main Area > Catwalk Broken Part" => {
+                Ok(SpotId::Amagi__Main_Area__Catwalk_Broken_Part)
+            }
             "Amagi > Main Area > Catwalk Center" => Ok(SpotId::Amagi__Main_Area__Catwalk_Center),
-            "Amagi > Main Area > Catwalk East Edge" => Ok(SpotId::Amagi__Main_Area__Catwalk_East_Edge),
+            "Amagi > Main Area > Catwalk East Edge" => {
+                Ok(SpotId::Amagi__Main_Area__Catwalk_East_Edge)
+            }
             "Amagi > Main Area > Cliff" => Ok(SpotId::Amagi__Main_Area__Cliff),
             "Amagi > Main Area > East 15" => Ok(SpotId::Amagi__Main_Area__East_15),
             "Amagi > Main Area > East 19" => Ok(SpotId::Amagi__Main_Area__East_19),
@@ -1523,32 +4647,54 @@ impl std::str::FromStr for SpotId {
             "Amagi > Main Area > Platform 2" => Ok(SpotId::Amagi__Main_Area__Platform_2),
             "Amagi > Main Area > Platform 3" => Ok(SpotId::Amagi__Main_Area__Platform_3),
             "Amagi > Main Area > Save Point" => Ok(SpotId::Amagi__Main_Area__Save_Point),
-            "Amagi > Main Area > Secret Outcropping" => Ok(SpotId::Amagi__Main_Area__Secret_Outcropping),
-            "Amagi > Main Area > Secret Waterfall" => Ok(SpotId::Amagi__Main_Area__Secret_Waterfall),
+            "Amagi > Main Area > Secret Outcropping" => {
+                Ok(SpotId::Amagi__Main_Area__Secret_Outcropping)
+            }
+            "Amagi > Main Area > Secret Waterfall" => {
+                Ok(SpotId::Amagi__Main_Area__Secret_Waterfall)
+            }
             "Amagi > Main Area > Shallow End" => Ok(SpotId::Amagi__Main_Area__Shallow_End),
             "Amagi > Main Area > Small Cliff" => Ok(SpotId::Amagi__Main_Area__Small_Cliff),
             "Amagi > Main Area > Upper Platform" => Ok(SpotId::Amagi__Main_Area__Upper_Platform),
             "Amagi > Main Area > Wall Stuck Spot" => Ok(SpotId::Amagi__Main_Area__Wall_Stuck_Spot),
             "Amagi > Main Area > Water's Edge" => Ok(SpotId::Amagi__Main_Area__Waters_Edge),
-            "Amagi > Main Area > Way Off To The Side" => Ok(SpotId::Amagi__Main_Area__Way_Off_To_The_Side),
+            "Amagi > Main Area > Way Off To The Side" => {
+                Ok(SpotId::Amagi__Main_Area__Way_Off_To_The_Side)
+            }
             "Amagi > Main Area > West 15" => Ok(SpotId::Amagi__Main_Area__West_15),
             "Amagi > Main Area > West 18" => Ok(SpotId::Amagi__Main_Area__West_18),
             "Amagi > Main Area > West 19" => Ok(SpotId::Amagi__Main_Area__West_19),
             "Amagi > Main Area > West Mini-Hill" => Ok(SpotId::Amagi__Main_Area__West_Mini_Hill),
             "Amagi > Main Area > West Shelf" => Ok(SpotId::Amagi__Main_Area__West_Shelf),
             "Amagi > Main Area > West Side" => Ok(SpotId::Amagi__Main_Area__West_Side),
-            "Amagi > West Lake > Cavern Back Teeth" => Ok(SpotId::Amagi__West_Lake__Cavern_Back_Teeth),
+            "Amagi > West Lake > Cavern Back Teeth" => {
+                Ok(SpotId::Amagi__West_Lake__Cavern_Back_Teeth)
+            }
             "Amagi > West Lake > Cavern Chin" => Ok(SpotId::Amagi__West_Lake__Cavern_Chin),
             "Amagi > West Lake > Cavern Eye" => Ok(SpotId::Amagi__West_Lake__Cavern_Eye),
-            "Amagi > West Lake > Cavern Front Pillar" => Ok(SpotId::Amagi__West_Lake__Cavern_Front_Pillar),
-            "Amagi > West Lake > Cavern Front Teeth" => Ok(SpotId::Amagi__West_Lake__Cavern_Front_Teeth),
+            "Amagi > West Lake > Cavern Front Pillar" => {
+                Ok(SpotId::Amagi__West_Lake__Cavern_Front_Pillar)
+            }
+            "Amagi > West Lake > Cavern Front Teeth" => {
+                Ok(SpotId::Amagi__West_Lake__Cavern_Front_Teeth)
+            }
             "Amagi > West Lake > Cavern Jaw" => Ok(SpotId::Amagi__West_Lake__Cavern_Jaw),
-            "Amagi > West Lake > Cavern Lower Trachea" => Ok(SpotId::Amagi__West_Lake__Cavern_Lower_Trachea),
-            "Amagi > West Lake > Cavern Middle Pillar" => Ok(SpotId::Amagi__West_Lake__Cavern_Middle_Pillar),
+            "Amagi > West Lake > Cavern Lower Trachea" => {
+                Ok(SpotId::Amagi__West_Lake__Cavern_Lower_Trachea)
+            }
+            "Amagi > West Lake > Cavern Middle Pillar" => {
+                Ok(SpotId::Amagi__West_Lake__Cavern_Middle_Pillar)
+            }
             "Amagi > West Lake > Cavern Neck" => Ok(SpotId::Amagi__West_Lake__Cavern_Neck),
-            "Amagi > West Lake > Cavern Rear Pillar" => Ok(SpotId::Amagi__West_Lake__Cavern_Rear_Pillar),
-            "Amagi > West Lake > Cavern Refill Station" => Ok(SpotId::Amagi__West_Lake__Cavern_Refill_Station),
-            "Amagi > West Lake > Cavern Tear Duct" => Ok(SpotId::Amagi__West_Lake__Cavern_Tear_Duct),
+            "Amagi > West Lake > Cavern Rear Pillar" => {
+                Ok(SpotId::Amagi__West_Lake__Cavern_Rear_Pillar)
+            }
+            "Amagi > West Lake > Cavern Refill Station" => {
+                Ok(SpotId::Amagi__West_Lake__Cavern_Refill_Station)
+            }
+            "Amagi > West Lake > Cavern Tear Duct" => {
+                Ok(SpotId::Amagi__West_Lake__Cavern_Tear_Duct)
+            }
             "Amagi > West Lake > East 15" => Ok(SpotId::Amagi__West_Lake__East_15),
             "Amagi > West Lake > East 18" => Ok(SpotId::Amagi__West_Lake__East_18),
             "Amagi > West Lake > East 19" => Ok(SpotId::Amagi__West_Lake__East_19),
@@ -1557,88 +4703,200 @@ impl std::str::FromStr for SpotId {
             "Amagi > West Lake > East Platform" => Ok(SpotId::Amagi__West_Lake__East_Platform),
             "Amagi > West Lake > East Shore" => Ok(SpotId::Amagi__West_Lake__East_Shore),
             "Amagi > West Lake > Left of Enemy" => Ok(SpotId::Amagi__West_Lake__Left_of_Enemy),
-            "Amagi > West Lake > Northeast Platform" => Ok(SpotId::Amagi__West_Lake__Northeast_Platform),
-            "Amagi > West Lake > Northwest Platform" => Ok(SpotId::Amagi__West_Lake__Northwest_Platform),
+            "Amagi > West Lake > Northeast Platform" => {
+                Ok(SpotId::Amagi__West_Lake__Northeast_Platform)
+            }
+            "Amagi > West Lake > Northwest Platform" => {
+                Ok(SpotId::Amagi__West_Lake__Northwest_Platform)
+            }
             "Amagi > West Lake > Pillar" => Ok(SpotId::Amagi__West_Lake__Pillar),
             "Amagi > West Lake > Pillar Platform" => Ok(SpotId::Amagi__West_Lake__Pillar_Platform),
             "Amagi > West Lake > Small Hill" => Ok(SpotId::Amagi__West_Lake__Small_Hill),
             "Amagi > West Lake > Some Rock" => Ok(SpotId::Amagi__West_Lake__Some_Rock),
-            "Amagi > West Lake > Somewhat Central Platform" => Ok(SpotId::Amagi__West_Lake__Somewhat_Central_Platform),
-            "Amagi > West Lake > Stronghold Ceiling Left" => Ok(SpotId::Amagi__West_Lake__Stronghold_Ceiling_Left),
-            "Amagi > West Lake > Stronghold Ceiling Right" => Ok(SpotId::Amagi__West_Lake__Stronghold_Ceiling_Right),
-            "Amagi > West Lake > Stronghold Front Door" => Ok(SpotId::Amagi__West_Lake__Stronghold_Front_Door),
-            "Amagi > West Lake > Stronghold Front Room" => Ok(SpotId::Amagi__West_Lake__Stronghold_Front_Room),
+            "Amagi > West Lake > Somewhat Central Platform" => {
+                Ok(SpotId::Amagi__West_Lake__Somewhat_Central_Platform)
+            }
+            "Amagi > West Lake > Stronghold Ceiling Left" => {
+                Ok(SpotId::Amagi__West_Lake__Stronghold_Ceiling_Left)
+            }
+            "Amagi > West Lake > Stronghold Ceiling Right" => {
+                Ok(SpotId::Amagi__West_Lake__Stronghold_Ceiling_Right)
+            }
+            "Amagi > West Lake > Stronghold Front Door" => {
+                Ok(SpotId::Amagi__West_Lake__Stronghold_Front_Door)
+            }
+            "Amagi > West Lake > Stronghold Front Room" => {
+                Ok(SpotId::Amagi__West_Lake__Stronghold_Front_Room)
+            }
             "Amagi > West Lake > Stronghold Item" => Ok(SpotId::Amagi__West_Lake__Stronghold_Item),
-            "Amagi > West Lake > Stronghold Middle Column" => Ok(SpotId::Amagi__West_Lake__Stronghold_Middle_Column),
-            "Amagi > West Lake > Stronghold Rear Wall" => Ok(SpotId::Amagi__West_Lake__Stronghold_Rear_Wall),
+            "Amagi > West Lake > Stronghold Middle Column" => {
+                Ok(SpotId::Amagi__West_Lake__Stronghold_Middle_Column)
+            }
+            "Amagi > West Lake > Stronghold Rear Wall" => {
+                Ok(SpotId::Amagi__West_Lake__Stronghold_Rear_Wall)
+            }
             "Amagi > West Lake > Stronghold Top" => Ok(SpotId::Amagi__West_Lake__Stronghold_Top),
-            "Amagi > West Lake > Surface Wall Left" => Ok(SpotId::Amagi__West_Lake__Surface_Wall_Left),
-            "Amagi > West Lake > Surface Wall Right" => Ok(SpotId::Amagi__West_Lake__Surface_Wall_Right),
+            "Amagi > West Lake > Surface Wall Left" => {
+                Ok(SpotId::Amagi__West_Lake__Surface_Wall_Left)
+            }
+            "Amagi > West Lake > Surface Wall Right" => {
+                Ok(SpotId::Amagi__West_Lake__Surface_Wall_Right)
+            }
             "Amagi > West Lake > Tentacle Gap" => Ok(SpotId::Amagi__West_Lake__Tentacle_Gap),
-            "Amagi > West Lake > Upper Center Platform" => Ok(SpotId::Amagi__West_Lake__Upper_Center_Platform),
+            "Amagi > West Lake > Upper Center Platform" => {
+                Ok(SpotId::Amagi__West_Lake__Upper_Center_Platform)
+            }
             "Amagi > West Lake > Water Surface" => Ok(SpotId::Amagi__West_Lake__Water_Surface),
             "Amagi > West Lake > West 15" => Ok(SpotId::Amagi__West_Lake__West_15),
             "Amagi > West Lake > West Bank" => Ok(SpotId::Amagi__West_Lake__West_Bank),
             "Amagi > West Lake > West Cliff" => Ok(SpotId::Amagi__West_Lake__West_Cliff),
             "Amagi > West Lake > West Platform" => Ok(SpotId::Amagi__West_Lake__West_Platform),
             "Amagi > West Lake > West Shore" => Ok(SpotId::Amagi__West_Lake__West_Shore),
-            "Annuna > East Bridge > Center Corridor" => Ok(SpotId::Annuna__East_Bridge__Center_Corridor),
-            "Annuna > East Bridge > Center Drop-off" => Ok(SpotId::Annuna__East_Bridge__Center_Drop_off),
-            "Annuna > East Bridge > Center Gap East" => Ok(SpotId::Annuna__East_Bridge__Center_Gap_East),
-            "Annuna > East Bridge > Center Gap West" => Ok(SpotId::Annuna__East_Bridge__Center_Gap_West),
+            "Annuna > East Bridge > Center Corridor" => {
+                Ok(SpotId::Annuna__East_Bridge__Center_Corridor)
+            }
+            "Annuna > East Bridge > Center Drop-off" => {
+                Ok(SpotId::Annuna__East_Bridge__Center_Drop_off)
+            }
+            "Annuna > East Bridge > Center Gap East" => {
+                Ok(SpotId::Annuna__East_Bridge__Center_Gap_East)
+            }
+            "Annuna > East Bridge > Center Gap West" => {
+                Ok(SpotId::Annuna__East_Bridge__Center_Gap_West)
+            }
             "Annuna > East Bridge > Gate Button" => Ok(SpotId::Annuna__East_Bridge__Gate_Button),
-            "Annuna > East Bridge > Gate Button Gap" => Ok(SpotId::Annuna__East_Bridge__Gate_Button_Gap),
-            "Annuna > East Bridge > Upper Middle Core" => Ok(SpotId::Annuna__East_Bridge__Upper_Middle_Core),
-            "Annuna > East Bridge > Upper Middle Gate" => Ok(SpotId::Annuna__East_Bridge__Upper_Middle_Gate),
-            "Annuna > East Bridge > Upper Middle Inner Corner East" => Ok(SpotId::Annuna__East_Bridge__Upper_Middle_Inner_Corner_East),
-            "Annuna > East Bridge > Upper Middle Inner Corner West" => Ok(SpotId::Annuna__East_Bridge__Upper_Middle_Inner_Corner_West),
-            "Annuna > East Bridge > Upper Middle Opening" => Ok(SpotId::Annuna__East_Bridge__Upper_Middle_Opening),
-            "Annuna > East Bridge > Upper West Gap" => Ok(SpotId::Annuna__East_Bridge__Upper_West_Gap),
-            "Annuna > East Bridge > Upper West Gap East" => Ok(SpotId::Annuna__East_Bridge__Upper_West_Gap_East),
+            "Annuna > East Bridge > Gate Button Gap" => {
+                Ok(SpotId::Annuna__East_Bridge__Gate_Button_Gap)
+            }
+            "Annuna > East Bridge > Upper Middle Core" => {
+                Ok(SpotId::Annuna__East_Bridge__Upper_Middle_Core)
+            }
+            "Annuna > East Bridge > Upper Middle Gate" => {
+                Ok(SpotId::Annuna__East_Bridge__Upper_Middle_Gate)
+            }
+            "Annuna > East Bridge > Upper Middle Inner Corner East" => {
+                Ok(SpotId::Annuna__East_Bridge__Upper_Middle_Inner_Corner_East)
+            }
+            "Annuna > East Bridge > Upper Middle Inner Corner West" => {
+                Ok(SpotId::Annuna__East_Bridge__Upper_Middle_Inner_Corner_West)
+            }
+            "Annuna > East Bridge > Upper Middle Opening" => {
+                Ok(SpotId::Annuna__East_Bridge__Upper_Middle_Opening)
+            }
+            "Annuna > East Bridge > Upper West Gap" => {
+                Ok(SpotId::Annuna__East_Bridge__Upper_West_Gap)
+            }
+            "Annuna > East Bridge > Upper West Gap East" => {
+                Ok(SpotId::Annuna__East_Bridge__Upper_West_Gap_East)
+            }
             "Annuna > East Bridge > West 24" => Ok(SpotId::Annuna__East_Bridge__West_24),
-            "Annuna > East Bridge > West 25 Lower" => Ok(SpotId::Annuna__East_Bridge__West_25_Lower),
-            "Annuna > East Bridge > West 25 Upper" => Ok(SpotId::Annuna__East_Bridge__West_25_Upper),
-            "Annuna > East Bridge > West Staircase Lower East" => Ok(SpotId::Annuna__East_Bridge__West_Staircase_Lower_East),
-            "Annuna > East Bridge > West Staircase Lower West" => Ok(SpotId::Annuna__East_Bridge__West_Staircase_Lower_West),
-            "Annuna > East Bridge > West Staircase Upper East" => Ok(SpotId::Annuna__East_Bridge__West_Staircase_Upper_East),
-            "Annuna > East Bridge > West Staircase Upper West" => Ok(SpotId::Annuna__East_Bridge__West_Staircase_Upper_West),
-            "Annuna > East Bridge > West Under Gap" => Ok(SpotId::Annuna__East_Bridge__West_Under_Gap),
-            "Annuna > Mirror Match > Below Switch" => Ok(SpotId::Annuna__Mirror_Match__Below_Switch),
-            "Annuna > Mirror Match > Central Pillar" => Ok(SpotId::Annuna__Mirror_Match__Central_Pillar),
-            "Annuna > Mirror Match > East 25 Lower" => Ok(SpotId::Annuna__Mirror_Match__East_25_Lower),
-            "Annuna > Mirror Match > East 25 Upper" => Ok(SpotId::Annuna__Mirror_Match__East_25_Upper),
-            "Annuna > Mirror Match > East 26 Lower" => Ok(SpotId::Annuna__Mirror_Match__East_26_Lower),
-            "Annuna > Mirror Match > East 26 Upper" => Ok(SpotId::Annuna__Mirror_Match__East_26_Upper),
+            "Annuna > East Bridge > West 25 Lower" => {
+                Ok(SpotId::Annuna__East_Bridge__West_25_Lower)
+            }
+            "Annuna > East Bridge > West 25 Upper" => {
+                Ok(SpotId::Annuna__East_Bridge__West_25_Upper)
+            }
+            "Annuna > East Bridge > West Staircase Lower East" => {
+                Ok(SpotId::Annuna__East_Bridge__West_Staircase_Lower_East)
+            }
+            "Annuna > East Bridge > West Staircase Lower West" => {
+                Ok(SpotId::Annuna__East_Bridge__West_Staircase_Lower_West)
+            }
+            "Annuna > East Bridge > West Staircase Upper East" => {
+                Ok(SpotId::Annuna__East_Bridge__West_Staircase_Upper_East)
+            }
+            "Annuna > East Bridge > West Staircase Upper West" => {
+                Ok(SpotId::Annuna__East_Bridge__West_Staircase_Upper_West)
+            }
+            "Annuna > East Bridge > West Under Gap" => {
+                Ok(SpotId::Annuna__East_Bridge__West_Under_Gap)
+            }
+            "Annuna > Mirror Match > Below Switch" => {
+                Ok(SpotId::Annuna__Mirror_Match__Below_Switch)
+            }
+            "Annuna > Mirror Match > Central Pillar" => {
+                Ok(SpotId::Annuna__Mirror_Match__Central_Pillar)
+            }
+            "Annuna > Mirror Match > East 25 Lower" => {
+                Ok(SpotId::Annuna__Mirror_Match__East_25_Lower)
+            }
+            "Annuna > Mirror Match > East 25 Upper" => {
+                Ok(SpotId::Annuna__Mirror_Match__East_25_Upper)
+            }
+            "Annuna > Mirror Match > East 26 Lower" => {
+                Ok(SpotId::Annuna__Mirror_Match__East_26_Lower)
+            }
+            "Annuna > Mirror Match > East 26 Upper" => {
+                Ok(SpotId::Annuna__Mirror_Match__East_26_Upper)
+            }
             "Annuna > Mirror Match > Eastward" => Ok(SpotId::Annuna__Mirror_Match__Eastward),
             "Annuna > Mirror Match > Plinth" => Ok(SpotId::Annuna__Mirror_Match__Plinth),
             "Annuna > Mirror Match > Save Point" => Ok(SpotId::Annuna__Mirror_Match__Save_Point),
             "Annuna > Mirror Match > Staircase" => Ok(SpotId::Annuna__Mirror_Match__Staircase),
-            "Annuna > Mirror Match > Waving Distance" => Ok(SpotId::Annuna__Mirror_Match__Waving_Distance),
+            "Annuna > Mirror Match > Waving Distance" => {
+                Ok(SpotId::Annuna__Mirror_Match__Waving_Distance)
+            }
             "Annuna > Mirror Match > West 25" => Ok(SpotId::Annuna__Mirror_Match__West_25),
             "Annuna > Mirror Match > West Gap" => Ok(SpotId::Annuna__Mirror_Match__West_Gap),
             "Annuna > West Bridge > East 24" => Ok(SpotId::Annuna__West_Bridge__East_24),
-            "Annuna > West Bridge > East 25 Lower" => Ok(SpotId::Annuna__West_Bridge__East_25_Lower),
-            "Annuna > West Bridge > East 25 Upper" => Ok(SpotId::Annuna__West_Bridge__East_25_Upper),
+            "Annuna > West Bridge > East 25 Lower" => {
+                Ok(SpotId::Annuna__West_Bridge__East_25_Lower)
+            }
+            "Annuna > West Bridge > East 25 Upper" => {
+                Ok(SpotId::Annuna__West_Bridge__East_25_Upper)
+            }
             "Annuna > West Bridge > Plinth" => Ok(SpotId::Annuna__West_Bridge__Plinth),
-            "Annuna > West Bridge > West 25 Lower" => Ok(SpotId::Annuna__West_Bridge__West_25_Lower),
-            "Annuna > West Bridge > West 25 Upper" => Ok(SpotId::Annuna__West_Bridge__West_25_Upper),
-            "Annuna > West Bridge > West 26 Lower" => Ok(SpotId::Annuna__West_Bridge__West_26_Lower),
-            "Annuna > West Bridge > West 26 Upper" => Ok(SpotId::Annuna__West_Bridge__West_26_Upper),
-            "Annuna > West Bridge > West Outcropping" => Ok(SpotId::Annuna__West_Bridge__West_Outcropping),
-            "Antarctica > Building 1E > Connector" => Ok(SpotId::Antarctica__Building_1E__Connector),
-            "Antarctica > Building 1E > East Entry" => Ok(SpotId::Antarctica__Building_1E__East_Entry),
-            "Antarctica > Building 1W > Connector" => Ok(SpotId::Antarctica__Building_1W__Connector),
-            "Antarctica > Building 1W > West Entry" => Ok(SpotId::Antarctica__Building_1W__West_Entry),
-            "Antarctica > Building 2 > Behind Boxes" => Ok(SpotId::Antarctica__Building_2__Behind_Boxes),
+            "Annuna > West Bridge > West 25 Lower" => {
+                Ok(SpotId::Annuna__West_Bridge__West_25_Lower)
+            }
+            "Annuna > West Bridge > West 25 Upper" => {
+                Ok(SpotId::Annuna__West_Bridge__West_25_Upper)
+            }
+            "Annuna > West Bridge > West 26 Lower" => {
+                Ok(SpotId::Annuna__West_Bridge__West_26_Lower)
+            }
+            "Annuna > West Bridge > West 26 Upper" => {
+                Ok(SpotId::Annuna__West_Bridge__West_26_Upper)
+            }
+            "Annuna > West Bridge > West Outcropping" => {
+                Ok(SpotId::Annuna__West_Bridge__West_Outcropping)
+            }
+            "Antarctica > Building 1E > Connector" => {
+                Ok(SpotId::Antarctica__Building_1E__Connector)
+            }
+            "Antarctica > Building 1E > East Entry" => {
+                Ok(SpotId::Antarctica__Building_1E__East_Entry)
+            }
+            "Antarctica > Building 1W > Connector" => {
+                Ok(SpotId::Antarctica__Building_1W__Connector)
+            }
+            "Antarctica > Building 1W > West Entry" => {
+                Ok(SpotId::Antarctica__Building_1W__West_Entry)
+            }
+            "Antarctica > Building 2 > Behind Boxes" => {
+                Ok(SpotId::Antarctica__Building_2__Behind_Boxes)
+            }
             "Antarctica > Building 2 > Entry" => Ok(SpotId::Antarctica__Building_2__Entry),
             "Antarctica > Building 2 > Stairs" => Ok(SpotId::Antarctica__Building_2__Stairs),
-            "Antarctica > Building 2 > Upper Door" => Ok(SpotId::Antarctica__Building_2__Upper_Door),
-            "Antarctica > East > Building 1 Entry" => Ok(SpotId::Antarctica__East__Building_1_Entry),
-            "Antarctica > East > Building 2 Entry" => Ok(SpotId::Antarctica__East__Building_2_Entry),
-            "Antarctica > East > Building 2 Upper" => Ok(SpotId::Antarctica__East__Building_2_Upper),
+            "Antarctica > Building 2 > Upper Door" => {
+                Ok(SpotId::Antarctica__Building_2__Upper_Door)
+            }
+            "Antarctica > East > Building 1 Entry" => {
+                Ok(SpotId::Antarctica__East__Building_1_Entry)
+            }
+            "Antarctica > East > Building 2 Entry" => {
+                Ok(SpotId::Antarctica__East__Building_2_Entry)
+            }
+            "Antarctica > East > Building 2 Upper" => {
+                Ok(SpotId::Antarctica__East__Building_2_Upper)
+            }
             "Antarctica > East > Save Point" => Ok(SpotId::Antarctica__East__Save_Point),
-            "Antarctica > Freight Elevator > Controls" => Ok(SpotId::Antarctica__Freight_Elevator__Controls),
-            "Antarctica > Freight Elevator > Left" => Ok(SpotId::Antarctica__Freight_Elevator__Left),
+            "Antarctica > Freight Elevator > Controls" => {
+                Ok(SpotId::Antarctica__Freight_Elevator__Controls)
+            }
+            "Antarctica > Freight Elevator > Left" => {
+                Ok(SpotId::Antarctica__Freight_Elevator__Left)
+            }
             "Antarctica > Power Room > Entry" => Ok(SpotId::Antarctica__Power_Room__Entry),
             "Antarctica > Power Room > Switch" => Ok(SpotId::Antarctica__Power_Room__Switch),
             "Antarctica > Shed > Interior" => Ok(SpotId::Antarctica__Shed__Interior),
@@ -1653,7 +4911,9 @@ impl std::str::FromStr for SpotId {
             "Ebih > Base Camp > East 12" => Ok(SpotId::Ebih__Base_Camp__East_12),
             "Ebih > Base Camp > Lake Access" => Ok(SpotId::Ebih__Base_Camp__Lake_Access),
             "Ebih > Base Camp > Left Platform" => Ok(SpotId::Ebih__Base_Camp__Left_Platform),
-            "Ebih > Base Camp > Left Platform Moved" => Ok(SpotId::Ebih__Base_Camp__Left_Platform_Moved),
+            "Ebih > Base Camp > Left Platform Moved" => {
+                Ok(SpotId::Ebih__Base_Camp__Left_Platform_Moved)
+            }
             "Ebih > Base Camp > Save Point" => Ok(SpotId::Ebih__Base_Camp__Save_Point),
             "Ebih > Base Camp > Staircase" => Ok(SpotId::Ebih__Base_Camp__Staircase),
             "Ebih > Base Camp > Tent Entry" => Ok(SpotId::Ebih__Base_Camp__Tent_Entry),
@@ -1674,10 +4934,14 @@ impl std::str::FromStr for SpotId {
             "Ebih > Boss Room > West 5" => Ok(SpotId::Ebih__Boss_Room__West_5),
             "Ebih > Boss Room > West 6" => Ok(SpotId::Ebih__Boss_Room__West_6),
             "Ebih > By Garage > Crawlspace" => Ok(SpotId::Ebih__By_Garage__Crawlspace),
-            "Ebih > By Garage > Crawlspace Opening" => Ok(SpotId::Ebih__By_Garage__Crawlspace_Opening),
+            "Ebih > By Garage > Crawlspace Opening" => {
+                Ok(SpotId::Ebih__By_Garage__Crawlspace_Opening)
+            }
             "Ebih > By Garage > East 12" => Ok(SpotId::Ebih__By_Garage__East_12),
             "Ebih > By Garage > East 13" => Ok(SpotId::Ebih__By_Garage__East_13),
-            "Ebih > By Garage > East Below Platforms" => Ok(SpotId::Ebih__By_Garage__East_Below_Platforms),
+            "Ebih > By Garage > East Below Platforms" => {
+                Ok(SpotId::Ebih__By_Garage__East_Below_Platforms)
+            }
             "Ebih > By Garage > East Bush" => Ok(SpotId::Ebih__By_Garage__East_Bush),
             "Ebih > By Garage > East Platform" => Ok(SpotId::Ebih__By_Garage__East_Platform),
             "Ebih > By Garage > Garage Entry" => Ok(SpotId::Ebih__By_Garage__Garage_Entry),
@@ -1685,7 +4949,9 @@ impl std::str::FromStr for SpotId {
             "Ebih > By Garage > Outcropping" => Ok(SpotId::Ebih__By_Garage__Outcropping),
             "Ebih > By Garage > West 12" => Ok(SpotId::Ebih__By_Garage__West_12),
             "Ebih > By Garage > West 13" => Ok(SpotId::Ebih__By_Garage__West_13),
-            "Ebih > By Garage > West Below Platforms" => Ok(SpotId::Ebih__By_Garage__West_Below_Platforms),
+            "Ebih > By Garage > West Below Platforms" => {
+                Ok(SpotId::Ebih__By_Garage__West_Below_Platforms)
+            }
             "Ebih > By Garage > West Bush" => Ok(SpotId::Ebih__By_Garage__West_Bush),
             "Ebih > Drone Room > East 4" => Ok(SpotId::Ebih__Drone_Room__East_4),
             "Ebih > Drone Room > Item" => Ok(SpotId::Ebih__Drone_Room__Item),
@@ -1704,7 +4970,9 @@ impl std::str::FromStr for SpotId {
             "Ebih > Ebih East > East Hill" => Ok(SpotId::Ebih__Ebih_East__East_Hill),
             "Ebih > Ebih East > East Ledge" => Ok(SpotId::Ebih__Ebih_East__East_Ledge),
             "Ebih > Ebih East > Ledge End" => Ok(SpotId::Ebih__Ebih_East__Ledge_End),
-            "Ebih > Ebih East > Lower Moving Platform" => Ok(SpotId::Ebih__Ebih_East__Lower_Moving_Platform),
+            "Ebih > Ebih East > Lower Moving Platform" => {
+                Ok(SpotId::Ebih__Ebih_East__Lower_Moving_Platform)
+            }
             "Ebih > Ebih East > Middle Platform" => Ok(SpotId::Ebih__Ebih_East__Middle_Platform),
             "Ebih > Ebih East > Moving Platform" => Ok(SpotId::Ebih__Ebih_East__Moving_Platform),
             "Ebih > Ebih East > Upper Ledge" => Ok(SpotId::Ebih__Ebih_East__Upper_Ledge),
@@ -1734,7 +5002,9 @@ impl std::str::FromStr for SpotId {
             "Ebih > Ebih West > Lower Hill" => Ok(SpotId::Ebih__Ebih_West__Lower_Hill),
             "Ebih > Ebih West > Lower Platform" => Ok(SpotId::Ebih__Ebih_West__Lower_Platform),
             "Ebih > Ebih West > Lower Save" => Ok(SpotId::Ebih__Ebih_West__Lower_Save),
-            "Ebih > Ebih West > Medium High Platform" => Ok(SpotId::Ebih__Ebih_West__Medium_High_Platform),
+            "Ebih > Ebih West > Medium High Platform" => {
+                Ok(SpotId::Ebih__Ebih_West__Medium_High_Platform)
+            }
             "Ebih > Ebih West > Mid Save" => Ok(SpotId::Ebih__Ebih_West__Mid_Save),
             "Ebih > Ebih West > Middle Cliff" => Ok(SpotId::Ebih__Ebih_West__Middle_Cliff),
             "Ebih > Ebih West > Middle Middle" => Ok(SpotId::Ebih__Ebih_West__Middle_Middle),
@@ -1769,42 +5039,98 @@ impl std::str::FromStr for SpotId {
             "Ebih > Grid 26,10-11 > Cliff" => Ok(SpotId::Ebih__Grid_26_10_11__Cliff),
             "Ebih > Grid 26,10-11 > East 10" => Ok(SpotId::Ebih__Grid_26_10_11__East_10),
             "Ebih > Grid 26,10-11 > Ledge" => Ok(SpotId::Ebih__Grid_26_10_11__Ledge),
-            "Ebih > Grid 26,10-11 > Middle Bottom" => Ok(SpotId::Ebih__Grid_26_10_11__Middle_Bottom),
-            "Ebih > Grid 26,10-11 > Middle Platform" => Ok(SpotId::Ebih__Grid_26_10_11__Middle_Platform),
+            "Ebih > Grid 26,10-11 > Middle Bottom" => {
+                Ok(SpotId::Ebih__Grid_26_10_11__Middle_Bottom)
+            }
+            "Ebih > Grid 26,10-11 > Middle Platform" => {
+                Ok(SpotId::Ebih__Grid_26_10_11__Middle_Platform)
+            }
             "Ebih > Grid 26,10-11 > Under Ledge" => Ok(SpotId::Ebih__Grid_26_10_11__Under_Ledge),
-            "Ebih > Grid 26,10-11 > Upper Platform" => Ok(SpotId::Ebih__Grid_26_10_11__Upper_Platform),
+            "Ebih > Grid 26,10-11 > Upper Platform" => {
+                Ok(SpotId::Ebih__Grid_26_10_11__Upper_Platform)
+            }
             "Ebih > Grid 26,10-11 > West 10" => Ok(SpotId::Ebih__Grid_26_10_11__West_10),
             "Ebih > Grid 26,10-11 > West 11" => Ok(SpotId::Ebih__Grid_26_10_11__West_11),
-            "Ebih > Observation Tower Room > Cliff" => Ok(SpotId::Ebih__Observation_Tower_Room__Cliff),
-            "Ebih > Observation Tower Room > East 11" => Ok(SpotId::Ebih__Observation_Tower_Room__East_11),
-            "Ebih > Observation Tower Room > Tower Bottom" => Ok(SpotId::Ebih__Observation_Tower_Room__Tower_Bottom),
-            "Ebih > Observation Tower Room > Tower Top" => Ok(SpotId::Ebih__Observation_Tower_Room__Tower_Top),
-            "Ebih > Observation Tower Room > West 10" => Ok(SpotId::Ebih__Observation_Tower_Room__West_10),
-            "Ebih > Observation Tower Room > West 9" => Ok(SpotId::Ebih__Observation_Tower_Room__West_9),
-            "Ebih > Vertical Interchange > Below Door" => Ok(SpotId::Ebih__Vertical_Interchange__Below_Door),
-            "Ebih > Vertical Interchange > Block Cubby" => Ok(SpotId::Ebih__Vertical_Interchange__Block_Cubby),
-            "Ebih > Vertical Interchange > Blocked Refill Station" => Ok(SpotId::Ebih__Vertical_Interchange__Blocked_Refill_Station),
-            "Ebih > Vertical Interchange > Cliff by Refill" => Ok(SpotId::Ebih__Vertical_Interchange__Cliff_by_Refill),
-            "Ebih > Vertical Interchange > Cubby Exit" => Ok(SpotId::Ebih__Vertical_Interchange__Cubby_Exit),
+            "Ebih > Observation Tower Room > Cliff" => {
+                Ok(SpotId::Ebih__Observation_Tower_Room__Cliff)
+            }
+            "Ebih > Observation Tower Room > East 11" => {
+                Ok(SpotId::Ebih__Observation_Tower_Room__East_11)
+            }
+            "Ebih > Observation Tower Room > Tower Bottom" => {
+                Ok(SpotId::Ebih__Observation_Tower_Room__Tower_Bottom)
+            }
+            "Ebih > Observation Tower Room > Tower Top" => {
+                Ok(SpotId::Ebih__Observation_Tower_Room__Tower_Top)
+            }
+            "Ebih > Observation Tower Room > West 10" => {
+                Ok(SpotId::Ebih__Observation_Tower_Room__West_10)
+            }
+            "Ebih > Observation Tower Room > West 9" => {
+                Ok(SpotId::Ebih__Observation_Tower_Room__West_9)
+            }
+            "Ebih > Vertical Interchange > Below Door" => {
+                Ok(SpotId::Ebih__Vertical_Interchange__Below_Door)
+            }
+            "Ebih > Vertical Interchange > Block Cubby" => {
+                Ok(SpotId::Ebih__Vertical_Interchange__Block_Cubby)
+            }
+            "Ebih > Vertical Interchange > Blocked Refill Station" => {
+                Ok(SpotId::Ebih__Vertical_Interchange__Blocked_Refill_Station)
+            }
+            "Ebih > Vertical Interchange > Cliff by Refill" => {
+                Ok(SpotId::Ebih__Vertical_Interchange__Cliff_by_Refill)
+            }
+            "Ebih > Vertical Interchange > Cubby Exit" => {
+                Ok(SpotId::Ebih__Vertical_Interchange__Cubby_Exit)
+            }
             "Ebih > Vertical Interchange > Door" => Ok(SpotId::Ebih__Vertical_Interchange__Door),
-            "Ebih > Vertical Interchange > Door East" => Ok(SpotId::Ebih__Vertical_Interchange__Door_East),
-            "Ebih > Vertical Interchange > Door West" => Ok(SpotId::Ebih__Vertical_Interchange__Door_West),
-            "Ebih > Vertical Interchange > East 13" => Ok(SpotId::Ebih__Vertical_Interchange__East_13),
-            "Ebih > Vertical Interchange > East 15" => Ok(SpotId::Ebih__Vertical_Interchange__East_15),
-            "Ebih > Vertical Interchange > East Tunnel" => Ok(SpotId::Ebih__Vertical_Interchange__East_Tunnel),
-            "Ebih > Vertical Interchange > Lower West Cliff" => Ok(SpotId::Ebih__Vertical_Interchange__Lower_West_Cliff),
-            "Ebih > Vertical Interchange > Middle Descent" => Ok(SpotId::Ebih__Vertical_Interchange__Middle_Descent),
-            "Ebih > Vertical Interchange > Middle Drop" => Ok(SpotId::Ebih__Vertical_Interchange__Middle_Drop),
-            "Ebih > Vertical Interchange > Passage East" => Ok(SpotId::Ebih__Vertical_Interchange__Passage_East),
-            "Ebih > Vertical Interchange > Passage West" => Ok(SpotId::Ebih__Vertical_Interchange__Passage_West),
-            "Ebih > Vertical Interchange > Refill Station" => Ok(SpotId::Ebih__Vertical_Interchange__Refill_Station),
+            "Ebih > Vertical Interchange > Door East" => {
+                Ok(SpotId::Ebih__Vertical_Interchange__Door_East)
+            }
+            "Ebih > Vertical Interchange > Door West" => {
+                Ok(SpotId::Ebih__Vertical_Interchange__Door_West)
+            }
+            "Ebih > Vertical Interchange > East 13" => {
+                Ok(SpotId::Ebih__Vertical_Interchange__East_13)
+            }
+            "Ebih > Vertical Interchange > East 15" => {
+                Ok(SpotId::Ebih__Vertical_Interchange__East_15)
+            }
+            "Ebih > Vertical Interchange > East Tunnel" => {
+                Ok(SpotId::Ebih__Vertical_Interchange__East_Tunnel)
+            }
+            "Ebih > Vertical Interchange > Lower West Cliff" => {
+                Ok(SpotId::Ebih__Vertical_Interchange__Lower_West_Cliff)
+            }
+            "Ebih > Vertical Interchange > Middle Descent" => {
+                Ok(SpotId::Ebih__Vertical_Interchange__Middle_Descent)
+            }
+            "Ebih > Vertical Interchange > Middle Drop" => {
+                Ok(SpotId::Ebih__Vertical_Interchange__Middle_Drop)
+            }
+            "Ebih > Vertical Interchange > Passage East" => {
+                Ok(SpotId::Ebih__Vertical_Interchange__Passage_East)
+            }
+            "Ebih > Vertical Interchange > Passage West" => {
+                Ok(SpotId::Ebih__Vertical_Interchange__Passage_West)
+            }
+            "Ebih > Vertical Interchange > Refill Station" => {
+                Ok(SpotId::Ebih__Vertical_Interchange__Refill_Station)
+            }
             "Ebih > Vertical Interchange > South" => Ok(SpotId::Ebih__Vertical_Interchange__South),
-            "Ebih > Vertical Interchange > Switch" => Ok(SpotId::Ebih__Vertical_Interchange__Switch),
-            "Ebih > Vertical Interchange > West 13" => Ok(SpotId::Ebih__Vertical_Interchange__West_13),
+            "Ebih > Vertical Interchange > Switch" => {
+                Ok(SpotId::Ebih__Vertical_Interchange__Switch)
+            }
+            "Ebih > Vertical Interchange > West 13" => {
+                Ok(SpotId::Ebih__Vertical_Interchange__West_13)
+            }
             "Ebih > Waterfall > Alcove" => Ok(SpotId::Ebih__Waterfall__Alcove),
             "Ebih > Waterfall > Alcove Left" => Ok(SpotId::Ebih__Waterfall__Alcove_Left),
             "Ebih > Waterfall > Alcove Right" => Ok(SpotId::Ebih__Waterfall__Alcove_Right),
-            "Ebih > Waterfall > Below Left Switch" => Ok(SpotId::Ebih__Waterfall__Below_Left_Switch),
+            "Ebih > Waterfall > Below Left Switch" => {
+                Ok(SpotId::Ebih__Waterfall__Below_Left_Switch)
+            }
             "Ebih > Waterfall > Below Tree" => Ok(SpotId::Ebih__Waterfall__Below_Tree),
             "Ebih > Waterfall > Big Tree" => Ok(SpotId::Ebih__Waterfall__Big_Tree),
             "Ebih > Waterfall > Cave Entrance" => Ok(SpotId::Ebih__Waterfall__Cave_Entrance),
@@ -1823,9 +5149,15 @@ impl std::str::FromStr for SpotId {
             "Ebih > Waterfall > Under Waterfall" => Ok(SpotId::Ebih__Waterfall__Under_Waterfall),
             "Ebih > Waterfall > Wall Left" => Ok(SpotId::Ebih__Waterfall__Wall_Left),
             "Ebih > Waterfall > Wall Right" => Ok(SpotId::Ebih__Waterfall__Wall_Right),
-            "Ebih > Waterfall > Waterfall Center Center" => Ok(SpotId::Ebih__Waterfall__Waterfall_Center_Center),
-            "Ebih > Waterfall > Waterfall Center Left" => Ok(SpotId::Ebih__Waterfall__Waterfall_Center_Left),
-            "Ebih > Waterfall > Waterfall Center Right" => Ok(SpotId::Ebih__Waterfall__Waterfall_Center_Right),
+            "Ebih > Waterfall > Waterfall Center Center" => {
+                Ok(SpotId::Ebih__Waterfall__Waterfall_Center_Center)
+            }
+            "Ebih > Waterfall > Waterfall Center Left" => {
+                Ok(SpotId::Ebih__Waterfall__Waterfall_Center_Left)
+            }
+            "Ebih > Waterfall > Waterfall Center Right" => {
+                Ok(SpotId::Ebih__Waterfall__Waterfall_Center_Right)
+            }
             "Ebih > Waterfall > Waterfall Left" => Ok(SpotId::Ebih__Waterfall__Waterfall_Left),
             "Ebih > Waterfall > Waterfall Right" => Ok(SpotId::Ebih__Waterfall__Waterfall_Right),
             "Ebih > Waterfall > West 10" => Ok(SpotId::Ebih__Waterfall__West_10),
@@ -1841,23 +5173,43 @@ impl std::str::FromStr for SpotId {
             "Ebih > Waterfall > West Main Path" => Ok(SpotId::Ebih__Waterfall__West_Main_Path),
             "Giguna > Antechamber > Bottom" => Ok(SpotId::Giguna__Antechamber__Bottom),
             "Giguna > Antechamber > East 16" => Ok(SpotId::Giguna__Antechamber__East_16),
-            "Giguna > Antechamber > Left Wall Lower" => Ok(SpotId::Giguna__Antechamber__Left_Wall_Lower),
-            "Giguna > Antechamber > Left Wall Mid" => Ok(SpotId::Giguna__Antechamber__Left_Wall_Mid),
-            "Giguna > Antechamber > Middle Bricks Left" => Ok(SpotId::Giguna__Antechamber__Middle_Bricks_Left),
-            "Giguna > Antechamber > Middle Bricks Right" => Ok(SpotId::Giguna__Antechamber__Middle_Bricks_Right),
+            "Giguna > Antechamber > Left Wall Lower" => {
+                Ok(SpotId::Giguna__Antechamber__Left_Wall_Lower)
+            }
+            "Giguna > Antechamber > Left Wall Mid" => {
+                Ok(SpotId::Giguna__Antechamber__Left_Wall_Mid)
+            }
+            "Giguna > Antechamber > Middle Bricks Left" => {
+                Ok(SpotId::Giguna__Antechamber__Middle_Bricks_Left)
+            }
+            "Giguna > Antechamber > Middle Bricks Right" => {
+                Ok(SpotId::Giguna__Antechamber__Middle_Bricks_Right)
+            }
             "Giguna > Antechamber > Small Bricks" => Ok(SpotId::Giguna__Antechamber__Small_Bricks),
             "Giguna > Antechamber > Statue Head" => Ok(SpotId::Giguna__Antechamber__Statue_Head),
-            "Giguna > Antechamber > Statues Ledge" => Ok(SpotId::Giguna__Antechamber__Statues_Ledge),
+            "Giguna > Antechamber > Statues Ledge" => {
+                Ok(SpotId::Giguna__Antechamber__Statues_Ledge)
+            }
             "Giguna > Antechamber > West 15" => Ok(SpotId::Giguna__Antechamber__West_15),
-            "Giguna > Breachable Wall > Above Middle Catwalk" => Ok(SpotId::Giguna__Breachable_Wall__Above_Middle_Catwalk),
-            "Giguna > Breachable Wall > Above West Catwalk" => Ok(SpotId::Giguna__Breachable_Wall__Above_West_Catwalk),
-            "Giguna > Breachable Wall > Wall Interior" => Ok(SpotId::Giguna__Breachable_Wall__Wall_Interior),
-            "Giguna > Breachable Wall > West Mid-air" => Ok(SpotId::Giguna__Breachable_Wall__West_Mid_air),
+            "Giguna > Breachable Wall > Above Middle Catwalk" => {
+                Ok(SpotId::Giguna__Breachable_Wall__Above_Middle_Catwalk)
+            }
+            "Giguna > Breachable Wall > Above West Catwalk" => {
+                Ok(SpotId::Giguna__Breachable_Wall__Above_West_Catwalk)
+            }
+            "Giguna > Breachable Wall > Wall Interior" => {
+                Ok(SpotId::Giguna__Breachable_Wall__Wall_Interior)
+            }
+            "Giguna > Breachable Wall > West Mid-air" => {
+                Ok(SpotId::Giguna__Breachable_Wall__West_Mid_air)
+            }
             "Giguna > Carnelian > Door" => Ok(SpotId::Giguna__Carnelian__Door),
             "Giguna > Carnelian > East 10" => Ok(SpotId::Giguna__Carnelian__East_10),
             "Giguna > Carnelian > East Cliff" => Ok(SpotId::Giguna__Carnelian__East_Cliff),
             "Giguna > Carnelian > Lower Susar" => Ok(SpotId::Giguna__Carnelian__Lower_Susar),
-            "Giguna > Carnelian > Middle Platforms" => Ok(SpotId::Giguna__Carnelian__Middle_Platforms),
+            "Giguna > Carnelian > Middle Platforms" => {
+                Ok(SpotId::Giguna__Carnelian__Middle_Platforms)
+            }
             "Giguna > Carnelian > Rock" => Ok(SpotId::Giguna__Carnelian__Rock),
             "Giguna > Carnelian > Switch" => Ok(SpotId::Giguna__Carnelian__Switch),
             "Giguna > Carnelian > Upper Path" => Ok(SpotId::Giguna__Carnelian__Upper_Path),
@@ -1871,7 +5223,9 @@ impl std::str::FromStr for SpotId {
             "Giguna > Clouds > North Right" => Ok(SpotId::Giguna__Clouds__North_Right),
             "Giguna > Clouds > North Under Ledge" => Ok(SpotId::Giguna__Clouds__North_Under_Ledge),
             "Giguna > Clouds > Platform Early" => Ok(SpotId::Giguna__Clouds__Platform_Early),
-            "Giguna > Clouds > Platform Early Portal" => Ok(SpotId::Giguna__Clouds__Platform_Early_Portal),
+            "Giguna > Clouds > Platform Early Portal" => {
+                Ok(SpotId::Giguna__Clouds__Platform_Early_Portal)
+            }
             "Giguna > Clouds > Platform Start" => Ok(SpotId::Giguna__Clouds__Platform_Start),
             "Giguna > Clouds > Platform Stop" => Ok(SpotId::Giguna__Clouds__Platform_Stop),
             "Giguna > Clouds > Pull Right" => Ok(SpotId::Giguna__Clouds__Pull_Right),
@@ -1879,8 +5233,12 @@ impl std::str::FromStr for SpotId {
             "Giguna > Clouds > Southwest" => Ok(SpotId::Giguna__Clouds__Southwest),
             "Giguna > Clouds > Straight Down" => Ok(SpotId::Giguna__Clouds__Straight_Down),
             "Giguna > Dual Path > Base of Wall" => Ok(SpotId::Giguna__Dual_Path__Base_of_Wall),
-            "Giguna > Dual Path > Below Left Switch" => Ok(SpotId::Giguna__Dual_Path__Below_Left_Switch),
-            "Giguna > Dual Path > Below Right Switch" => Ok(SpotId::Giguna__Dual_Path__Below_Right_Switch),
+            "Giguna > Dual Path > Below Left Switch" => {
+                Ok(SpotId::Giguna__Dual_Path__Below_Left_Switch)
+            }
+            "Giguna > Dual Path > Below Right Switch" => {
+                Ok(SpotId::Giguna__Dual_Path__Below_Right_Switch)
+            }
             "Giguna > Dual Path > East 17" => Ok(SpotId::Giguna__Dual_Path__East_17),
             "Giguna > Dual Path > East 18" => Ok(SpotId::Giguna__Dual_Path__East_18),
             "Giguna > Dual Path > East Gate" => Ok(SpotId::Giguna__Dual_Path__East_Gate),
@@ -1907,29 +5265,59 @@ impl std::str::FromStr for SpotId {
             "Giguna > East Caverns > East Grass" => Ok(SpotId::Giguna__East_Caverns__East_Grass),
             "Giguna > East Caverns > East Shaft" => Ok(SpotId::Giguna__East_Caverns__East_Shaft),
             "Giguna > East Caverns > East Side" => Ok(SpotId::Giguna__East_Caverns__East_Side),
-            "Giguna > East Caverns > Hidden Passage Center" => Ok(SpotId::Giguna__East_Caverns__Hidden_Passage_Center),
-            "Giguna > East Caverns > Hidden Passage East" => Ok(SpotId::Giguna__East_Caverns__Hidden_Passage_East),
-            "Giguna > East Caverns > Hidden Passage West" => Ok(SpotId::Giguna__East_Caverns__Hidden_Passage_West),
+            "Giguna > East Caverns > Hidden Passage Center" => {
+                Ok(SpotId::Giguna__East_Caverns__Hidden_Passage_Center)
+            }
+            "Giguna > East Caverns > Hidden Passage East" => {
+                Ok(SpotId::Giguna__East_Caverns__Hidden_Passage_East)
+            }
+            "Giguna > East Caverns > Hidden Passage West" => {
+                Ok(SpotId::Giguna__East_Caverns__Hidden_Passage_West)
+            }
             "Giguna > East Caverns > Lower Ledge" => Ok(SpotId::Giguna__East_Caverns__Lower_Ledge),
             "Giguna > East Caverns > Lower Susar" => Ok(SpotId::Giguna__East_Caverns__Lower_Susar),
             "Giguna > East Caverns > Mid Susar" => Ok(SpotId::Giguna__East_Caverns__Mid_Susar),
-            "Giguna > East Caverns > Middle Ledge" => Ok(SpotId::Giguna__East_Caverns__Middle_Ledge),
+            "Giguna > East Caverns > Middle Ledge" => {
+                Ok(SpotId::Giguna__East_Caverns__Middle_Ledge)
+            }
             "Giguna > East Caverns > Middle Rock" => Ok(SpotId::Giguna__East_Caverns__Middle_Rock),
-            "Giguna > East Caverns > Midwest Ledge" => Ok(SpotId::Giguna__East_Caverns__Midwest_Ledge),
-            "Giguna > East Caverns > Statues Ledge" => Ok(SpotId::Giguna__East_Caverns__Statues_Ledge),
+            "Giguna > East Caverns > Midwest Ledge" => {
+                Ok(SpotId::Giguna__East_Caverns__Midwest_Ledge)
+            }
+            "Giguna > East Caverns > Statues Ledge" => {
+                Ok(SpotId::Giguna__East_Caverns__Statues_Ledge)
+            }
             "Giguna > East Caverns > Switch" => Ok(SpotId::Giguna__East_Caverns__Switch),
             "Giguna > East Caverns > Top Ledge" => Ok(SpotId::Giguna__East_Caverns__Top_Ledge),
-            "Giguna > East Caverns > Top Past Susar" => Ok(SpotId::Giguna__East_Caverns__Top_Past_Susar),
-            "Giguna > East Caverns > Under Lower Ledge" => Ok(SpotId::Giguna__East_Caverns__Under_Lower_Ledge),
+            "Giguna > East Caverns > Top Past Susar" => {
+                Ok(SpotId::Giguna__East_Caverns__Top_Past_Susar)
+            }
+            "Giguna > East Caverns > Under Lower Ledge" => {
+                Ok(SpotId::Giguna__East_Caverns__Under_Lower_Ledge)
+            }
             "Giguna > East Caverns > Upper Floor" => Ok(SpotId::Giguna__East_Caverns__Upper_Floor),
-            "Giguna > East Caverns > Upper Floor Ledge" => Ok(SpotId::Giguna__East_Caverns__Upper_Floor_Ledge),
-            "Giguna > East Caverns > Upper Passage East" => Ok(SpotId::Giguna__East_Caverns__Upper_Passage_East),
-            "Giguna > East Caverns > Upper Passage West" => Ok(SpotId::Giguna__East_Caverns__Upper_Passage_West),
-            "Giguna > East Caverns > Upper Platforms Left" => Ok(SpotId::Giguna__East_Caverns__Upper_Platforms_Left),
-            "Giguna > East Caverns > Upper Platforms Right" => Ok(SpotId::Giguna__East_Caverns__Upper_Platforms_Right),
+            "Giguna > East Caverns > Upper Floor Ledge" => {
+                Ok(SpotId::Giguna__East_Caverns__Upper_Floor_Ledge)
+            }
+            "Giguna > East Caverns > Upper Passage East" => {
+                Ok(SpotId::Giguna__East_Caverns__Upper_Passage_East)
+            }
+            "Giguna > East Caverns > Upper Passage West" => {
+                Ok(SpotId::Giguna__East_Caverns__Upper_Passage_West)
+            }
+            "Giguna > East Caverns > Upper Platforms Left" => {
+                Ok(SpotId::Giguna__East_Caverns__Upper_Platforms_Left)
+            }
+            "Giguna > East Caverns > Upper Platforms Right" => {
+                Ok(SpotId::Giguna__East_Caverns__Upper_Platforms_Right)
+            }
             "Giguna > East Caverns > Upper Susar" => Ok(SpotId::Giguna__East_Caverns__Upper_Susar),
-            "Giguna > East Caverns > Upper Susar Jump from East" => Ok(SpotId::Giguna__East_Caverns__Upper_Susar_Jump_from_East),
-            "Giguna > East Caverns > Upper Susar Mid-jump" => Ok(SpotId::Giguna__East_Caverns__Upper_Susar_Mid_jump),
+            "Giguna > East Caverns > Upper Susar Jump from East" => {
+                Ok(SpotId::Giguna__East_Caverns__Upper_Susar_Jump_from_East)
+            }
+            "Giguna > East Caverns > Upper Susar Mid-jump" => {
+                Ok(SpotId::Giguna__East_Caverns__Upper_Susar_Mid_jump)
+            }
             "Giguna > East Caverns > West 14" => Ok(SpotId::Giguna__East_Caverns__West_14),
             "Giguna > East Caverns > West 16" => Ok(SpotId::Giguna__East_Caverns__West_16),
             "Giguna > East Caverns > West 17" => Ok(SpotId::Giguna__East_Caverns__West_17),
@@ -1954,55 +5342,99 @@ impl std::str::FromStr for SpotId {
             "Giguna > Gateway > West 18" => Ok(SpotId::Giguna__Gateway__West_18),
             "Giguna > Gateway > West 19" => Ok(SpotId::Giguna__Gateway__West_19),
             "Giguna > Giguna Base > Below Gate" => Ok(SpotId::Giguna__Giguna_Base__Below_Gate),
-            "Giguna > Giguna Base > Building Entry" => Ok(SpotId::Giguna__Giguna_Base__Building_Entry),
+            "Giguna > Giguna Base > Building Entry" => {
+                Ok(SpotId::Giguna__Giguna_Base__Building_Entry)
+            }
             "Giguna > Giguna Base > East 14" => Ok(SpotId::Giguna__Giguna_Base__East_14),
             "Giguna > Giguna Base > East 17" => Ok(SpotId::Giguna__Giguna_Base__East_17),
             "Giguna > Giguna Base > Kari" => Ok(SpotId::Giguna__Giguna_Base__Kari),
             "Giguna > Giguna Base > Left Pillar" => Ok(SpotId::Giguna__Giguna_Base__Left_Pillar),
             "Giguna > Giguna Base > Lower Fork" => Ok(SpotId::Giguna__Giguna_Base__Lower_Fork),
-            "Giguna > Giguna Base > Middle Platform" => Ok(SpotId::Giguna__Giguna_Base__Middle_Platform),
+            "Giguna > Giguna Base > Middle Platform" => {
+                Ok(SpotId::Giguna__Giguna_Base__Middle_Platform)
+            }
             "Giguna > Giguna Base > Right Pillar" => Ok(SpotId::Giguna__Giguna_Base__Right_Pillar),
             "Giguna > Giguna Base > Ruin" => Ok(SpotId::Giguna__Giguna_Base__Ruin),
             "Giguna > Giguna Base > Save Point" => Ok(SpotId::Giguna__Giguna_Base__Save_Point),
-            "Giguna > Giguna Base > Staircase Bottom" => Ok(SpotId::Giguna__Giguna_Base__Staircase_Bottom),
-            "Giguna > Giguna Base > Staircase Top" => Ok(SpotId::Giguna__Giguna_Base__Staircase_Top),
+            "Giguna > Giguna Base > Staircase Bottom" => {
+                Ok(SpotId::Giguna__Giguna_Base__Staircase_Bottom)
+            }
+            "Giguna > Giguna Base > Staircase Top" => {
+                Ok(SpotId::Giguna__Giguna_Base__Staircase_Top)
+            }
             "Giguna > Giguna Base > Stone Knob" => Ok(SpotId::Giguna__Giguna_Base__Stone_Knob),
-            "Giguna > Giguna Base > Switch Distance 1" => Ok(SpotId::Giguna__Giguna_Base__Switch_Distance_1),
-            "Giguna > Giguna Base > Switch Distance 2" => Ok(SpotId::Giguna__Giguna_Base__Switch_Distance_2),
-            "Giguna > Giguna Base > Switch Distance 3" => Ok(SpotId::Giguna__Giguna_Base__Switch_Distance_3),
-            "Giguna > Giguna Base > Switch Distance 4" => Ok(SpotId::Giguna__Giguna_Base__Switch_Distance_4),
+            "Giguna > Giguna Base > Switch Distance 1" => {
+                Ok(SpotId::Giguna__Giguna_Base__Switch_Distance_1)
+            }
+            "Giguna > Giguna Base > Switch Distance 2" => {
+                Ok(SpotId::Giguna__Giguna_Base__Switch_Distance_2)
+            }
+            "Giguna > Giguna Base > Switch Distance 3" => {
+                Ok(SpotId::Giguna__Giguna_Base__Switch_Distance_3)
+            }
+            "Giguna > Giguna Base > Switch Distance 4" => {
+                Ok(SpotId::Giguna__Giguna_Base__Switch_Distance_4)
+            }
             "Giguna > Giguna Base > Table" => Ok(SpotId::Giguna__Giguna_Base__Table),
             "Giguna > Giguna Base > Upper Cliff" => Ok(SpotId::Giguna__Giguna_Base__Upper_Cliff),
             "Giguna > Giguna Base > West 15" => Ok(SpotId::Giguna__Giguna_Base__West_15),
             "Giguna > Giguna Base > West 16" => Ok(SpotId::Giguna__Giguna_Base__West_16),
             "Giguna > Giguna Base > West Grate" => Ok(SpotId::Giguna__Giguna_Base__West_Grate),
-            "Giguna > Giguna Northeast > Crow Eating" => Ok(SpotId::Giguna__Giguna_Northeast__Crow_Eating),
+            "Giguna > Giguna Northeast > Crow Eating" => {
+                Ok(SpotId::Giguna__Giguna_Northeast__Crow_Eating)
+            }
             "Giguna > Giguna Northeast > Door" => Ok(SpotId::Giguna__Giguna_Northeast__Door),
             "Giguna > Giguna Northeast > East 11" => Ok(SpotId::Giguna__Giguna_Northeast__East_11),
             "Giguna > Giguna Northeast > East 9" => Ok(SpotId::Giguna__Giguna_Northeast__East_9),
-            "Giguna > Giguna Northeast > Gate Button" => Ok(SpotId::Giguna__Giguna_Northeast__Gate_Button),
-            "Giguna > Giguna Northeast > Gate Left" => Ok(SpotId::Giguna__Giguna_Northeast__Gate_Left),
-            "Giguna > Giguna Northeast > Gate Right" => Ok(SpotId::Giguna__Giguna_Northeast__Gate_Right),
-            "Giguna > Giguna Northeast > Gate Vent" => Ok(SpotId::Giguna__Giguna_Northeast__Gate_Vent),
-            "Giguna > Giguna Northeast > Inner Wall" => Ok(SpotId::Giguna__Giguna_Northeast__Inner_Wall),
-            "Giguna > Giguna Northeast > Right Column" => Ok(SpotId::Giguna__Giguna_Northeast__Right_Column),
-            "Giguna > Giguna Northeast > Save Point" => Ok(SpotId::Giguna__Giguna_Northeast__Save_Point),
-            "Giguna > Giguna Northeast > Shaft Bottom" => Ok(SpotId::Giguna__Giguna_Northeast__Shaft_Bottom),
+            "Giguna > Giguna Northeast > Gate Button" => {
+                Ok(SpotId::Giguna__Giguna_Northeast__Gate_Button)
+            }
+            "Giguna > Giguna Northeast > Gate Left" => {
+                Ok(SpotId::Giguna__Giguna_Northeast__Gate_Left)
+            }
+            "Giguna > Giguna Northeast > Gate Right" => {
+                Ok(SpotId::Giguna__Giguna_Northeast__Gate_Right)
+            }
+            "Giguna > Giguna Northeast > Gate Vent" => {
+                Ok(SpotId::Giguna__Giguna_Northeast__Gate_Vent)
+            }
+            "Giguna > Giguna Northeast > Inner Wall" => {
+                Ok(SpotId::Giguna__Giguna_Northeast__Inner_Wall)
+            }
+            "Giguna > Giguna Northeast > Right Column" => {
+                Ok(SpotId::Giguna__Giguna_Northeast__Right_Column)
+            }
+            "Giguna > Giguna Northeast > Save Point" => {
+                Ok(SpotId::Giguna__Giguna_Northeast__Save_Point)
+            }
+            "Giguna > Giguna Northeast > Shaft Bottom" => {
+                Ok(SpotId::Giguna__Giguna_Northeast__Shaft_Bottom)
+            }
             "Giguna > Giguna Northeast > Step" => Ok(SpotId::Giguna__Giguna_Northeast__Step),
             "Giguna > Giguna Northeast > Switch" => Ok(SpotId::Giguna__Giguna_Northeast__Switch),
             "Giguna > Giguna Northeast > Vault" => Ok(SpotId::Giguna__Giguna_Northeast__Vault),
             "Giguna > Giguna Northeast > West 10" => Ok(SpotId::Giguna__Giguna_Northeast__West_10),
             "Giguna > Giguna Northeast > West 9" => Ok(SpotId::Giguna__Giguna_Northeast__West_9),
-            "Giguna > Gubi Lair > Center-East Sapling" => Ok(SpotId::Giguna__Gubi_Lair__Center_East_Sapling),
-            "Giguna > Gubi Lair > Center Platform" => Ok(SpotId::Giguna__Gubi_Lair__Center_Platform),
-            "Giguna > Gubi Lair > Center-West Sapling" => Ok(SpotId::Giguna__Gubi_Lair__Center_West_Sapling),
+            "Giguna > Gubi Lair > Center-East Sapling" => {
+                Ok(SpotId::Giguna__Gubi_Lair__Center_East_Sapling)
+            }
+            "Giguna > Gubi Lair > Center Platform" => {
+                Ok(SpotId::Giguna__Gubi_Lair__Center_Platform)
+            }
+            "Giguna > Gubi Lair > Center-West Sapling" => {
+                Ok(SpotId::Giguna__Gubi_Lair__Center_West_Sapling)
+            }
             "Giguna > Gubi Lair > East 15" => Ok(SpotId::Giguna__Gubi_Lair__East_15),
             "Giguna > Gubi Lair > East Tree" => Ok(SpotId::Giguna__Gubi_Lair__East_Tree),
             "Giguna > Gubi Lair > Grass by Wall" => Ok(SpotId::Giguna__Gubi_Lair__Grass_by_Wall),
-            "Giguna > Gubi Lair > Leftmost Platform" => Ok(SpotId::Giguna__Gubi_Lair__Leftmost_Platform),
+            "Giguna > Gubi Lair > Leftmost Platform" => {
+                Ok(SpotId::Giguna__Gubi_Lair__Leftmost_Platform)
+            }
             "Giguna > Gubi Lair > Lower Platform" => Ok(SpotId::Giguna__Gubi_Lair__Lower_Platform),
             "Giguna > Gubi Lair > Pedestal" => Ok(SpotId::Giguna__Gubi_Lair__Pedestal),
-            "Giguna > Gubi Lair > Rightmost Platform" => Ok(SpotId::Giguna__Gubi_Lair__Rightmost_Platform),
+            "Giguna > Gubi Lair > Rightmost Platform" => {
+                Ok(SpotId::Giguna__Gubi_Lair__Rightmost_Platform)
+            }
             "Giguna > Gubi Lair > Shaft Bottom" => Ok(SpotId::Giguna__Gubi_Lair__Shaft_Bottom),
             "Giguna > Gubi Lair > West Brickwork" => Ok(SpotId::Giguna__Gubi_Lair__West_Brickwork),
             "Giguna > Hard Rock > East 17" => Ok(SpotId::Giguna__Hard_Rock__East_17),
@@ -2033,25 +5465,45 @@ impl std::str::FromStr for SpotId {
             "Giguna > Labyrinth > Top East" => Ok(SpotId::Giguna__Labyrinth__Top_East),
             "Giguna > Labyrinth East > East 19" => Ok(SpotId::Giguna__Labyrinth_East__East_19),
             "Giguna > Labyrinth East > East 20" => Ok(SpotId::Giguna__Labyrinth_East__East_20),
-            "Giguna > Labyrinth East > Lower Middle" => Ok(SpotId::Giguna__Labyrinth_East__Lower_Middle),
-            "Giguna > Labyrinth East > Lower West" => Ok(SpotId::Giguna__Labyrinth_East__Lower_West),
-            "Giguna > Labyrinth East > Middle Drop" => Ok(SpotId::Giguna__Labyrinth_East__Middle_Drop),
-            "Giguna > Labyrinth East > Middle Tree" => Ok(SpotId::Giguna__Labyrinth_East__Middle_Tree),
-            "Giguna > Labyrinth East > Middle West" => Ok(SpotId::Giguna__Labyrinth_East__Middle_West),
-            "Giguna > Labyrinth East > Top Middle" => Ok(SpotId::Giguna__Labyrinth_East__Top_Middle),
+            "Giguna > Labyrinth East > Lower Middle" => {
+                Ok(SpotId::Giguna__Labyrinth_East__Lower_Middle)
+            }
+            "Giguna > Labyrinth East > Lower West" => {
+                Ok(SpotId::Giguna__Labyrinth_East__Lower_West)
+            }
+            "Giguna > Labyrinth East > Middle Drop" => {
+                Ok(SpotId::Giguna__Labyrinth_East__Middle_Drop)
+            }
+            "Giguna > Labyrinth East > Middle Tree" => {
+                Ok(SpotId::Giguna__Labyrinth_East__Middle_Tree)
+            }
+            "Giguna > Labyrinth East > Middle West" => {
+                Ok(SpotId::Giguna__Labyrinth_East__Middle_West)
+            }
+            "Giguna > Labyrinth East > Top Middle" => {
+                Ok(SpotId::Giguna__Labyrinth_East__Top_Middle)
+            }
             "Giguna > Labyrinth East > Top West" => Ok(SpotId::Giguna__Labyrinth_East__Top_West),
             "Giguna > Lamassu > Broken Pillar" => Ok(SpotId::Giguna__Lamassu__Broken_Pillar),
             "Giguna > Lamassu > Deposit" => Ok(SpotId::Giguna__Lamassu__Deposit),
             "Giguna > Lamassu > East 18" => Ok(SpotId::Giguna__Lamassu__East_18),
             "Giguna > Lamassu > Head" => Ok(SpotId::Giguna__Lamassu__Head),
-            "Giguna > Lamassu > Lower Platform Left" => Ok(SpotId::Giguna__Lamassu__Lower_Platform_Left),
-            "Giguna > Lamassu > Lower Platform Right" => Ok(SpotId::Giguna__Lamassu__Lower_Platform_Right),
+            "Giguna > Lamassu > Lower Platform Left" => {
+                Ok(SpotId::Giguna__Lamassu__Lower_Platform_Left)
+            }
+            "Giguna > Lamassu > Lower Platform Right" => {
+                Ok(SpotId::Giguna__Lamassu__Lower_Platform_Right)
+            }
             "Giguna > Lamassu > Rear Gap" => Ok(SpotId::Giguna__Lamassu__Rear_Gap),
             "Giguna > Lamassu > Rear Platform" => Ok(SpotId::Giguna__Lamassu__Rear_Platform),
             "Giguna > Lamassu > Staircase Bottom" => Ok(SpotId::Giguna__Lamassu__Staircase_Bottom),
-            "Giguna > Lamassu > Staircase Landing" => Ok(SpotId::Giguna__Lamassu__Staircase_Landing),
+            "Giguna > Lamassu > Staircase Landing" => {
+                Ok(SpotId::Giguna__Lamassu__Staircase_Landing)
+            }
             "Giguna > Lamassu > Staircase Top" => Ok(SpotId::Giguna__Lamassu__Staircase_Top),
-            "Giguna > Lamassu > Upper Platform Edge" => Ok(SpotId::Giguna__Lamassu__Upper_Platform_Edge),
+            "Giguna > Lamassu > Upper Platform Edge" => {
+                Ok(SpotId::Giguna__Lamassu__Upper_Platform_Edge)
+            }
             "Giguna > Lamassu > West 18" => Ok(SpotId::Giguna__Lamassu__West_18),
             "Giguna > Lamassu > Wingtip" => Ok(SpotId::Giguna__Lamassu__Wingtip),
             "Giguna > Mural > Northwest Item" => Ok(SpotId::Giguna__Mural__Northwest_Item),
@@ -2063,8 +5515,12 @@ impl std::str::FromStr for SpotId {
             "Giguna > Ruins Center > Wall Bottom" => Ok(SpotId::Giguna__Ruins_Center__Wall_Bottom),
             "Giguna > Ruins Center > Wall Top" => Ok(SpotId::Giguna__Ruins_Center__Wall_Top),
             "Giguna > Ruins Center > West 9" => Ok(SpotId::Giguna__Ruins_Center__West_9),
-            "Giguna > Ruins Center > West Platform Left" => Ok(SpotId::Giguna__Ruins_Center__West_Platform_Left),
-            "Giguna > Ruins Center > West Platform Right" => Ok(SpotId::Giguna__Ruins_Center__West_Platform_Right),
+            "Giguna > Ruins Center > West Platform Left" => {
+                Ok(SpotId::Giguna__Ruins_Center__West_Platform_Left)
+            }
+            "Giguna > Ruins Center > West Platform Right" => {
+                Ok(SpotId::Giguna__Ruins_Center__West_Platform_Right)
+            }
             "Giguna > Ruins East > Bottom Rock" => Ok(SpotId::Giguna__Ruins_East__Bottom_Rock),
             "Giguna > Ruins East > Cliff" => Ok(SpotId::Giguna__Ruins_East__Cliff),
             "Giguna > Ruins East > East 9" => Ok(SpotId::Giguna__Ruins_East__East_9),
@@ -2088,8 +5544,12 @@ impl std::str::FromStr for SpotId {
             "Giguna > Ruins Top > Save Point" => Ok(SpotId::Giguna__Ruins_Top__Save_Point),
             "Giguna > Ruins Top > Small Ledge" => Ok(SpotId::Giguna__Ruins_Top__Small_Ledge),
             "Giguna > Ruins Top > Switch" => Ok(SpotId::Giguna__Ruins_Top__Switch),
-            "Giguna > Ruins Top > Turret Balcony East" => Ok(SpotId::Giguna__Ruins_Top__Turret_Balcony_East),
-            "Giguna > Ruins Top > Turret Balcony West" => Ok(SpotId::Giguna__Ruins_Top__Turret_Balcony_West),
+            "Giguna > Ruins Top > Turret Balcony East" => {
+                Ok(SpotId::Giguna__Ruins_Top__Turret_Balcony_East)
+            }
+            "Giguna > Ruins Top > Turret Balcony West" => {
+                Ok(SpotId::Giguna__Ruins_Top__Turret_Balcony_West)
+            }
             "Giguna > Ruins Top > Upper Tunnel" => Ok(SpotId::Giguna__Ruins_Top__Upper_Tunnel),
             "Giguna > Ruins Top > West 7" => Ok(SpotId::Giguna__Ruins_Top__West_7),
             "Giguna > Ruins Top > West Door" => Ok(SpotId::Giguna__Ruins_Top__West_Door),
@@ -2099,8 +5559,12 @@ impl std::str::FromStr for SpotId {
             "Giguna > Ruins West > Lower Ledge" => Ok(SpotId::Giguna__Ruins_West__Lower_Ledge),
             "Giguna > Ruins West > Nook" => Ok(SpotId::Giguna__Ruins_West__Nook),
             "Giguna > Ruins West > Platform" => Ok(SpotId::Giguna__Ruins_West__Platform),
-            "Giguna > Ruins West > Rooftop East Edge" => Ok(SpotId::Giguna__Ruins_West__Rooftop_East_Edge),
-            "Giguna > Ruins West > Rooftop West Edge" => Ok(SpotId::Giguna__Ruins_West__Rooftop_West_Edge),
+            "Giguna > Ruins West > Rooftop East Edge" => {
+                Ok(SpotId::Giguna__Ruins_West__Rooftop_East_Edge)
+            }
+            "Giguna > Ruins West > Rooftop West Edge" => {
+                Ok(SpotId::Giguna__Ruins_West__Rooftop_West_Edge)
+            }
             "Giguna > Ruins West > Save Point" => Ok(SpotId::Giguna__Ruins_West__Save_Point),
             "Giguna > Ruins West > Upper Ledge" => Ok(SpotId::Giguna__Ruins_West__Upper_Ledge),
             "Giguna > Ruins West > West 7" => Ok(SpotId::Giguna__Ruins_West__West_7),
@@ -2109,30 +5573,72 @@ impl std::str::FromStr for SpotId {
             "Giguna > Separator > West 24" => Ok(SpotId::Giguna__Separator__West_24),
             "Giguna > Separator > West 25" => Ok(SpotId::Giguna__Separator__West_25),
             "Giguna > Separator > West Mid-air" => Ok(SpotId::Giguna__Separator__West_Mid_air),
-            "Giguna > Vertical Interchange > Dead-end" => Ok(SpotId::Giguna__Vertical_Interchange__Dead_end),
-            "Giguna > Vertical Interchange > Dead-end Ledge" => Ok(SpotId::Giguna__Vertical_Interchange__Dead_end_Ledge),
-            "Giguna > Vertical Interchange > East 20" => Ok(SpotId::Giguna__Vertical_Interchange__East_20),
-            "Giguna > Vertical Interchange > Gate" => Ok(SpotId::Giguna__Vertical_Interchange__Gate),
-            "Giguna > Vertical Interchange > Ledge 19" => Ok(SpotId::Giguna__Vertical_Interchange__Ledge_19),
-            "Giguna > Vertical Interchange > Middle Below Top" => Ok(SpotId::Giguna__Vertical_Interchange__Middle_Below_Top),
-            "Giguna > Vertical Interchange > Middle Hill By Switch" => Ok(SpotId::Giguna__Vertical_Interchange__Middle_Hill_By_Switch),
-            "Giguna > Vertical Interchange > Middle Ledge Below Gate" => Ok(SpotId::Giguna__Vertical_Interchange__Middle_Ledge_Below_Gate),
-            "Giguna > Vertical Interchange > Middle Plateau" => Ok(SpotId::Giguna__Vertical_Interchange__Middle_Plateau),
-            "Giguna > Vertical Interchange > North" => Ok(SpotId::Giguna__Vertical_Interchange__North),
-            "Giguna > Vertical Interchange > South" => Ok(SpotId::Giguna__Vertical_Interchange__South),
-            "Giguna > Vertical Interchange > Switch" => Ok(SpotId::Giguna__Vertical_Interchange__Switch),
-            "Giguna > Vertical Interchange > Top Left Ledge" => Ok(SpotId::Giguna__Vertical_Interchange__Top_Left_Ledge),
-            "Giguna > Vertical Interchange > Top Passage Bottom" => Ok(SpotId::Giguna__Vertical_Interchange__Top_Passage_Bottom),
-            "Giguna > Vertical Interchange > Top Right Ledge" => Ok(SpotId::Giguna__Vertical_Interchange__Top_Right_Ledge),
-            "Giguna > Vertical Interchange > Top Rocky Ledge" => Ok(SpotId::Giguna__Vertical_Interchange__Top_Rocky_Ledge),
-            "Giguna > Vertical Interchange > Top Rocky Outcrop" => Ok(SpotId::Giguna__Vertical_Interchange__Top_Rocky_Outcrop),
-            "Giguna > Vertical Interchange > West 17" => Ok(SpotId::Giguna__Vertical_Interchange__West_17),
-            "Giguna > Vertical Interchange > West 19" => Ok(SpotId::Giguna__Vertical_Interchange__West_19),
+            "Giguna > Vertical Interchange > Dead-end" => {
+                Ok(SpotId::Giguna__Vertical_Interchange__Dead_end)
+            }
+            "Giguna > Vertical Interchange > Dead-end Ledge" => {
+                Ok(SpotId::Giguna__Vertical_Interchange__Dead_end_Ledge)
+            }
+            "Giguna > Vertical Interchange > East 20" => {
+                Ok(SpotId::Giguna__Vertical_Interchange__East_20)
+            }
+            "Giguna > Vertical Interchange > Gate" => {
+                Ok(SpotId::Giguna__Vertical_Interchange__Gate)
+            }
+            "Giguna > Vertical Interchange > Ledge 19" => {
+                Ok(SpotId::Giguna__Vertical_Interchange__Ledge_19)
+            }
+            "Giguna > Vertical Interchange > Middle Below Top" => {
+                Ok(SpotId::Giguna__Vertical_Interchange__Middle_Below_Top)
+            }
+            "Giguna > Vertical Interchange > Middle Hill By Switch" => {
+                Ok(SpotId::Giguna__Vertical_Interchange__Middle_Hill_By_Switch)
+            }
+            "Giguna > Vertical Interchange > Middle Ledge Below Gate" => {
+                Ok(SpotId::Giguna__Vertical_Interchange__Middle_Ledge_Below_Gate)
+            }
+            "Giguna > Vertical Interchange > Middle Plateau" => {
+                Ok(SpotId::Giguna__Vertical_Interchange__Middle_Plateau)
+            }
+            "Giguna > Vertical Interchange > North" => {
+                Ok(SpotId::Giguna__Vertical_Interchange__North)
+            }
+            "Giguna > Vertical Interchange > South" => {
+                Ok(SpotId::Giguna__Vertical_Interchange__South)
+            }
+            "Giguna > Vertical Interchange > Switch" => {
+                Ok(SpotId::Giguna__Vertical_Interchange__Switch)
+            }
+            "Giguna > Vertical Interchange > Top Left Ledge" => {
+                Ok(SpotId::Giguna__Vertical_Interchange__Top_Left_Ledge)
+            }
+            "Giguna > Vertical Interchange > Top Passage Bottom" => {
+                Ok(SpotId::Giguna__Vertical_Interchange__Top_Passage_Bottom)
+            }
+            "Giguna > Vertical Interchange > Top Right Ledge" => {
+                Ok(SpotId::Giguna__Vertical_Interchange__Top_Right_Ledge)
+            }
+            "Giguna > Vertical Interchange > Top Rocky Ledge" => {
+                Ok(SpotId::Giguna__Vertical_Interchange__Top_Rocky_Ledge)
+            }
+            "Giguna > Vertical Interchange > Top Rocky Outcrop" => {
+                Ok(SpotId::Giguna__Vertical_Interchange__Top_Rocky_Outcrop)
+            }
+            "Giguna > Vertical Interchange > West 17" => {
+                Ok(SpotId::Giguna__Vertical_Interchange__West_17)
+            }
+            "Giguna > Vertical Interchange > West 19" => {
+                Ok(SpotId::Giguna__Vertical_Interchange__West_19)
+            }
             "Giguna > Wasteland > Bluff by Door" => Ok(SpotId::Giguna__Wasteland__Bluff_by_Door),
             "Giguna > Wasteland > Cache Ledge" => Ok(SpotId::Giguna__Wasteland__Cache_Ledge),
             "Giguna > Wasteland > Center Plains" => Ok(SpotId::Giguna__Wasteland__Center_Plains),
-            "Giguna > Wasteland > Center Platform East" => Ok(SpotId::Giguna__Wasteland__Center_Platform_East),
-            "Giguna > Wasteland > Center Platform West" => Ok(SpotId::Giguna__Wasteland__Center_Platform_West),
+            "Giguna > Wasteland > Center Platform East" => {
+                Ok(SpotId::Giguna__Wasteland__Center_Platform_East)
+            }
+            "Giguna > Wasteland > Center Platform West" => {
+                Ok(SpotId::Giguna__Wasteland__Center_Platform_West)
+            }
             "Giguna > Wasteland > Door Left" => Ok(SpotId::Giguna__Wasteland__Door_Left),
             "Giguna > Wasteland > Door Right" => Ok(SpotId::Giguna__Wasteland__Door_Right),
             "Giguna > Wasteland > East 12" => Ok(SpotId::Giguna__Wasteland__East_12),
@@ -2140,22 +5646,40 @@ impl std::str::FromStr for SpotId {
             "Giguna > Wasteland > East 14" => Ok(SpotId::Giguna__Wasteland__East_14),
             "Giguna > Wasteland > East Ledge" => Ok(SpotId::Giguna__Wasteland__East_Ledge),
             "Giguna > Wasteland > Ladder Ledge" => Ok(SpotId::Giguna__Wasteland__Ladder_Ledge),
-            "Giguna > Wasteland > Left Platform East" => Ok(SpotId::Giguna__Wasteland__Left_Platform_East),
-            "Giguna > Wasteland > Left Platform West" => Ok(SpotId::Giguna__Wasteland__Left_Platform_West),
+            "Giguna > Wasteland > Left Platform East" => {
+                Ok(SpotId::Giguna__Wasteland__Left_Platform_East)
+            }
+            "Giguna > Wasteland > Left Platform West" => {
+                Ok(SpotId::Giguna__Wasteland__Left_Platform_West)
+            }
             "Giguna > Wasteland > Lower Cliff" => Ok(SpotId::Giguna__Wasteland__Lower_Cliff),
-            "Giguna > Wasteland > Lower Path Left" => Ok(SpotId::Giguna__Wasteland__Lower_Path_Left),
-            "Giguna > Wasteland > Lower Path Right" => Ok(SpotId::Giguna__Wasteland__Lower_Path_Right),
-            "Giguna > Wasteland > Lower Platform East" => Ok(SpotId::Giguna__Wasteland__Lower_Platform_East),
-            "Giguna > Wasteland > Lower Platform West" => Ok(SpotId::Giguna__Wasteland__Lower_Platform_West),
+            "Giguna > Wasteland > Lower Path Left" => {
+                Ok(SpotId::Giguna__Wasteland__Lower_Path_Left)
+            }
+            "Giguna > Wasteland > Lower Path Right" => {
+                Ok(SpotId::Giguna__Wasteland__Lower_Path_Right)
+            }
+            "Giguna > Wasteland > Lower Platform East" => {
+                Ok(SpotId::Giguna__Wasteland__Lower_Platform_East)
+            }
+            "Giguna > Wasteland > Lower Platform West" => {
+                Ok(SpotId::Giguna__Wasteland__Lower_Platform_West)
+            }
             "Giguna > Wasteland > Middle Cliff" => Ok(SpotId::Giguna__Wasteland__Middle_Cliff),
             "Giguna > Wasteland > Middle Path" => Ok(SpotId::Giguna__Wasteland__Middle_Path),
             "Giguna > Wasteland > Passage Cache" => Ok(SpotId::Giguna__Wasteland__Passage_Cache),
             "Giguna > Wasteland > Passage East" => Ok(SpotId::Giguna__Wasteland__Passage_East),
-            "Giguna > Wasteland > Right Platform East" => Ok(SpotId::Giguna__Wasteland__Right_Platform_East),
-            "Giguna > Wasteland > Right Platform West" => Ok(SpotId::Giguna__Wasteland__Right_Platform_West),
+            "Giguna > Wasteland > Right Platform East" => {
+                Ok(SpotId::Giguna__Wasteland__Right_Platform_East)
+            }
+            "Giguna > Wasteland > Right Platform West" => {
+                Ok(SpotId::Giguna__Wasteland__Right_Platform_West)
+            }
             "Giguna > Wasteland > Steeper Hill" => Ok(SpotId::Giguna__Wasteland__Steeper_Hill),
             "Giguna > Wasteland > Switch" => Ok(SpotId::Giguna__Wasteland__Switch),
-            "Giguna > Wasteland > Switch Approach" => Ok(SpotId::Giguna__Wasteland__Switch_Approach),
+            "Giguna > Wasteland > Switch Approach" => {
+                Ok(SpotId::Giguna__Wasteland__Switch_Approach)
+            }
             "Giguna > Wasteland > Switch Ledge" => Ok(SpotId::Giguna__Wasteland__Switch_Ledge),
             "Giguna > Wasteland > Tiny Hill" => Ok(SpotId::Giguna__Wasteland__Tiny_Hill),
             "Giguna > Wasteland > Upper Cache" => Ok(SpotId::Giguna__Wasteland__Upper_Cache),
@@ -2167,23 +5691,47 @@ impl std::str::FromStr for SpotId {
             "Giguna > Wasteland > Westward Hill" => Ok(SpotId::Giguna__Wasteland__Westward_Hill),
             "Giguna > West Caverns > Bush" => Ok(SpotId::Giguna__West_Caverns__Bush),
             "Giguna > West Caverns > Cache" => Ok(SpotId::Giguna__West_Caverns__Cache),
-            "Giguna > West Caverns > Column 1 Top Left" => Ok(SpotId::Giguna__West_Caverns__Column_1_Top_Left),
-            "Giguna > West Caverns > Column 1 Top Right" => Ok(SpotId::Giguna__West_Caverns__Column_1_Top_Right),
-            "Giguna > West Caverns > Column 2 Top" => Ok(SpotId::Giguna__West_Caverns__Column_2_Top),
+            "Giguna > West Caverns > Column 1 Top Left" => {
+                Ok(SpotId::Giguna__West_Caverns__Column_1_Top_Left)
+            }
+            "Giguna > West Caverns > Column 1 Top Right" => {
+                Ok(SpotId::Giguna__West_Caverns__Column_1_Top_Right)
+            }
+            "Giguna > West Caverns > Column 2 Top" => {
+                Ok(SpotId::Giguna__West_Caverns__Column_2_Top)
+            }
             "Giguna > West Caverns > East 10" => Ok(SpotId::Giguna__West_Caverns__East_10),
             "Giguna > West Caverns > East 12" => Ok(SpotId::Giguna__West_Caverns__East_12),
             "Giguna > West Caverns > East 13" => Ok(SpotId::Giguna__West_Caverns__East_13),
-            "Giguna > West Caverns > East Platform" => Ok(SpotId::Giguna__West_Caverns__East_Platform),
+            "Giguna > West Caverns > East Platform" => {
+                Ok(SpotId::Giguna__West_Caverns__East_Platform)
+            }
             "Giguna > West Caverns > East Susar" => Ok(SpotId::Giguna__West_Caverns__East_Susar),
-            "Giguna > West Caverns > Floating Brick" => Ok(SpotId::Giguna__West_Caverns__Floating_Brick),
-            "Giguna > West Caverns > Higher Ledge" => Ok(SpotId::Giguna__West_Caverns__Higher_Ledge),
+            "Giguna > West Caverns > Floating Brick" => {
+                Ok(SpotId::Giguna__West_Caverns__Floating_Brick)
+            }
+            "Giguna > West Caverns > Higher Ledge" => {
+                Ok(SpotId::Giguna__West_Caverns__Higher_Ledge)
+            }
             "Giguna > West Caverns > Northwest" => Ok(SpotId::Giguna__West_Caverns__Northwest),
-            "Giguna > West Caverns > Small Platform" => Ok(SpotId::Giguna__West_Caverns__Small_Platform),
-            "Giguna > West Caverns > Small Staircase" => Ok(SpotId::Giguna__West_Caverns__Small_Staircase),
-            "Giguna > West Caverns > Top Gap Left" => Ok(SpotId::Giguna__West_Caverns__Top_Gap_Left),
-            "Giguna > West Caverns > Top Gap Right" => Ok(SpotId::Giguna__West_Caverns__Top_Gap_Right),
-            "Giguna > West Caverns > Tunnel Bottom" => Ok(SpotId::Giguna__West_Caverns__Tunnel_Bottom),
-            "Giguna > West Caverns > Tunnel Entrance" => Ok(SpotId::Giguna__West_Caverns__Tunnel_Entrance),
+            "Giguna > West Caverns > Small Platform" => {
+                Ok(SpotId::Giguna__West_Caverns__Small_Platform)
+            }
+            "Giguna > West Caverns > Small Staircase" => {
+                Ok(SpotId::Giguna__West_Caverns__Small_Staircase)
+            }
+            "Giguna > West Caverns > Top Gap Left" => {
+                Ok(SpotId::Giguna__West_Caverns__Top_Gap_Left)
+            }
+            "Giguna > West Caverns > Top Gap Right" => {
+                Ok(SpotId::Giguna__West_Caverns__Top_Gap_Right)
+            }
+            "Giguna > West Caverns > Tunnel Bottom" => {
+                Ok(SpotId::Giguna__West_Caverns__Tunnel_Bottom)
+            }
+            "Giguna > West Caverns > Tunnel Entrance" => {
+                Ok(SpotId::Giguna__West_Caverns__Tunnel_Entrance)
+            }
             "Giguna > West Caverns > Tunnel Fork" => Ok(SpotId::Giguna__West_Caverns__Tunnel_Fork),
             "Giguna > West Caverns > West 13" => Ok(SpotId::Giguna__West_Caverns__West_13),
             "Giguna > West Tower > East 7" => Ok(SpotId::Giguna__West_Tower__East_7),
@@ -2194,44 +5742,80 @@ impl std::str::FromStr for SpotId {
             "Giguna Breach > Ascent > Top" => Ok(SpotId::Giguna_Breach__Ascent__Top),
             "Giguna Breach > Ascent > West 6" => Ok(SpotId::Giguna_Breach__Ascent__West_6),
             "Giguna Breach > Ascent > West 9" => Ok(SpotId::Giguna_Breach__Ascent__West_9),
-            "Giguna Breach > Below Chimney > Cubby Entrance" => Ok(SpotId::Giguna_Breach__Below_Chimney__Cubby_Entrance),
-            "Giguna Breach > Below Chimney > East Ledge" => Ok(SpotId::Giguna_Breach__Below_Chimney__East_Ledge),
-            "Giguna Breach > Below Chimney > North" => Ok(SpotId::Giguna_Breach__Below_Chimney__North),
-            "Giguna Breach > Below Chimney > Passage Lip" => Ok(SpotId::Giguna_Breach__Below_Chimney__Passage_Lip),
-            "Giguna Breach > Below Chimney > Southwest" => Ok(SpotId::Giguna_Breach__Below_Chimney__Southwest),
-            "Giguna Breach > Below Chimney > West Passage" => Ok(SpotId::Giguna_Breach__Below_Chimney__West_Passage),
+            "Giguna Breach > Below Chimney > Cubby Entrance" => {
+                Ok(SpotId::Giguna_Breach__Below_Chimney__Cubby_Entrance)
+            }
+            "Giguna Breach > Below Chimney > East Ledge" => {
+                Ok(SpotId::Giguna_Breach__Below_Chimney__East_Ledge)
+            }
+            "Giguna Breach > Below Chimney > North" => {
+                Ok(SpotId::Giguna_Breach__Below_Chimney__North)
+            }
+            "Giguna Breach > Below Chimney > Passage Lip" => {
+                Ok(SpotId::Giguna_Breach__Below_Chimney__Passage_Lip)
+            }
+            "Giguna Breach > Below Chimney > Southwest" => {
+                Ok(SpotId::Giguna_Breach__Below_Chimney__Southwest)
+            }
+            "Giguna Breach > Below Chimney > West Passage" => {
+                Ok(SpotId::Giguna_Breach__Below_Chimney__West_Passage)
+            }
             "Giguna Breach > Central > East 9" => Ok(SpotId::Giguna_Breach__Central__East_9),
-            "Giguna Breach > Central > East Brick" => Ok(SpotId::Giguna_Breach__Central__East_Brick),
-            "Giguna Breach > Central > Middle Statue" => Ok(SpotId::Giguna_Breach__Central__Middle_Statue),
+            "Giguna Breach > Central > East Brick" => {
+                Ok(SpotId::Giguna_Breach__Central__East_Brick)
+            }
+            "Giguna Breach > Central > Middle Statue" => {
+                Ok(SpotId::Giguna_Breach__Central__Middle_Statue)
+            }
             "Giguna Breach > Central > South" => Ok(SpotId::Giguna_Breach__Central__South),
             "Giguna Breach > Central > Statuette" => Ok(SpotId::Giguna_Breach__Central__Statuette),
             "Giguna Breach > Central > Tunnel" => Ok(SpotId::Giguna_Breach__Central__Tunnel),
-            "Giguna Breach > Central > Upper Floating Brick" => Ok(SpotId::Giguna_Breach__Central__Upper_Floating_Brick),
+            "Giguna Breach > Central > Upper Floating Brick" => {
+                Ok(SpotId::Giguna_Breach__Central__Upper_Floating_Brick)
+            }
             "Giguna Breach > Central > Wall" => Ok(SpotId::Giguna_Breach__Central__Wall),
             "Giguna Breach > Central > West 8" => Ok(SpotId::Giguna_Breach__Central__West_8),
             "Giguna Breach > Central > West 9" => Ok(SpotId::Giguna_Breach__Central__West_9),
-            "Giguna Breach > Central > West Statue" => Ok(SpotId::Giguna_Breach__Central__West_Statue),
+            "Giguna Breach > Central > West Statue" => {
+                Ok(SpotId::Giguna_Breach__Central__West_Statue)
+            }
             "Giguna Breach > Chimney > Cache" => Ok(SpotId::Giguna_Breach__Chimney__Cache),
             "Giguna Breach > Chimney > East 7" => Ok(SpotId::Giguna_Breach__Chimney__East_7),
             "Giguna Breach > Chimney > East 8" => Ok(SpotId::Giguna_Breach__Chimney__East_8),
             "Giguna Breach > Chimney > East 9" => Ok(SpotId::Giguna_Breach__Chimney__East_9),
-            "Giguna Breach > Chimney > Middle Platform" => Ok(SpotId::Giguna_Breach__Chimney__Middle_Platform),
+            "Giguna Breach > Chimney > Middle Platform" => {
+                Ok(SpotId::Giguna_Breach__Chimney__Middle_Platform)
+            }
             "Giguna Breach > Chimney > South" => Ok(SpotId::Giguna_Breach__Chimney__South),
             "Giguna Breach > Chimney > Top" => Ok(SpotId::Giguna_Breach__Chimney__Top),
             "Giguna Breach > Cubby > Entrance" => Ok(SpotId::Giguna_Breach__Cubby__Entrance),
             "Giguna Breach > Cubby > Rocks" => Ok(SpotId::Giguna_Breach__Cubby__Rocks),
             "Giguna Breach > Fire Room > Cuesta" => Ok(SpotId::Giguna_Breach__Fire_Room__Cuesta),
             "Giguna Breach > Fire Room > East 11" => Ok(SpotId::Giguna_Breach__Fire_Room__East_11),
-            "Giguna Breach > Fire Room > First Fire" => Ok(SpotId::Giguna_Breach__Fire_Room__First_Fire),
+            "Giguna Breach > Fire Room > First Fire" => {
+                Ok(SpotId::Giguna_Breach__Fire_Room__First_Fire)
+            }
             "Giguna Breach > Fire Room > South" => Ok(SpotId::Giguna_Breach__Fire_Room__South),
             "Giguna Breach > Fire Room > West 10" => Ok(SpotId::Giguna_Breach__Fire_Room__West_10),
             "Giguna Breach > Fire Room > West 11" => Ok(SpotId::Giguna_Breach__Fire_Room__West_11),
-            "Giguna Breach > Fire Room > West Plateau" => Ok(SpotId::Giguna_Breach__Fire_Room__West_Plateau),
-            "Giguna Breach > Grid 14,10-11 > East 10" => Ok(SpotId::Giguna_Breach__Grid_14_10_11__East_10),
-            "Giguna Breach > Grid 14,10-11 > East 11" => Ok(SpotId::Giguna_Breach__Grid_14_10_11__East_11),
-            "Giguna Breach > Grid 14,10-11 > High Ledge" => Ok(SpotId::Giguna_Breach__Grid_14_10_11__High_Ledge),
-            "Giguna Breach > Grid 14,10-11 > North" => Ok(SpotId::Giguna_Breach__Grid_14_10_11__North),
-            "Giguna Breach > Grid 14,10-11 > South" => Ok(SpotId::Giguna_Breach__Grid_14_10_11__South),
+            "Giguna Breach > Fire Room > West Plateau" => {
+                Ok(SpotId::Giguna_Breach__Fire_Room__West_Plateau)
+            }
+            "Giguna Breach > Grid 14,10-11 > East 10" => {
+                Ok(SpotId::Giguna_Breach__Grid_14_10_11__East_10)
+            }
+            "Giguna Breach > Grid 14,10-11 > East 11" => {
+                Ok(SpotId::Giguna_Breach__Grid_14_10_11__East_11)
+            }
+            "Giguna Breach > Grid 14,10-11 > High Ledge" => {
+                Ok(SpotId::Giguna_Breach__Grid_14_10_11__High_Ledge)
+            }
+            "Giguna Breach > Grid 14,10-11 > North" => {
+                Ok(SpotId::Giguna_Breach__Grid_14_10_11__North)
+            }
+            "Giguna Breach > Grid 14,10-11 > South" => {
+                Ok(SpotId::Giguna_Breach__Grid_14_10_11__South)
+            }
             "Giguna Breach > Peak > Column" => Ok(SpotId::Giguna_Breach__Peak__Column),
             "Giguna Breach > Peak > East 6" => Ok(SpotId::Giguna_Breach__Peak__East_6),
             "Giguna Breach > Peak > East Passage" => Ok(SpotId::Giguna_Breach__Peak__East_Passage),
@@ -2240,9 +5824,15 @@ impl std::str::FromStr for SpotId {
             "Giguna Breach > Peak > Upper East" => Ok(SpotId::Giguna_Breach__Peak__Upper_East),
             "Giguna Breach > Peak > Upper West" => Ok(SpotId::Giguna_Breach__Peak__Upper_West),
             "Giguna Breach > Peak > West 7" => Ok(SpotId::Giguna_Breach__Peak__West_7),
-            "Giguna Breach > Pink Clouds > Corner" => Ok(SpotId::Giguna_Breach__Pink_Clouds__Corner),
-            "Giguna Breach > Pink Clouds > Normal Entry" => Ok(SpotId::Giguna_Breach__Pink_Clouds__Normal_Entry),
-            "Giguna Breach > Pink Clouds > Quick Entry" => Ok(SpotId::Giguna_Breach__Pink_Clouds__Quick_Entry),
+            "Giguna Breach > Pink Clouds > Corner" => {
+                Ok(SpotId::Giguna_Breach__Pink_Clouds__Corner)
+            }
+            "Giguna Breach > Pink Clouds > Normal Entry" => {
+                Ok(SpotId::Giguna_Breach__Pink_Clouds__Normal_Entry)
+            }
+            "Giguna Breach > Pink Clouds > Quick Entry" => {
+                Ok(SpotId::Giguna_Breach__Pink_Clouds__Quick_Entry)
+            }
             "Giguna Breach > Robopede > Center" => Ok(SpotId::Giguna_Breach__Robopede__Center),
             "Giguna Breach > Robopede > North" => Ok(SpotId::Giguna_Breach__Robopede__North),
             "Giguna Breach > Robopede > West" => Ok(SpotId::Giguna_Breach__Robopede__West),
@@ -2250,36 +5840,66 @@ impl std::str::FromStr for SpotId {
             "Giguna Breach > Slingshot > Ravine" => Ok(SpotId::Giguna_Breach__Slingshot__Ravine),
             "Giguna Breach > Slingshot > West" => Ok(SpotId::Giguna_Breach__Slingshot__West),
             "Giguna Breach > SW Save > East 12" => Ok(SpotId::Giguna_Breach__SW_Save__East_12),
-            "Giguna Breach > SW Save > Lower Platform" => Ok(SpotId::Giguna_Breach__SW_Save__Lower_Platform),
+            "Giguna Breach > SW Save > Lower Platform" => {
+                Ok(SpotId::Giguna_Breach__SW_Save__Lower_Platform)
+            }
             "Giguna Breach > SW Save > North" => Ok(SpotId::Giguna_Breach__SW_Save__North),
-            "Giguna Breach > SW Save > Save Point" => Ok(SpotId::Giguna_Breach__SW_Save__Save_Point),
+            "Giguna Breach > SW Save > Save Point" => {
+                Ok(SpotId::Giguna_Breach__SW_Save__Save_Point)
+            }
             "Giguna Breach > SW Save > Side Door" => Ok(SpotId::Giguna_Breach__SW_Save__Side_Door),
             "Giguna Breach > SW Save > West 11" => Ok(SpotId::Giguna_Breach__SW_Save__West_11),
-            "Glacier > Apocalypse Entry > Terminal" => Ok(SpotId::Glacier__Apocalypse_Entry__Terminal),
+            "Glacier > Apocalypse Entry > Terminal" => {
+                Ok(SpotId::Glacier__Apocalypse_Entry__Terminal)
+            }
             "Glacier > Apocalypse Entry > West" => Ok(SpotId::Glacier__Apocalypse_Entry__West),
-            "Glacier > Boomerang Antechamber > East 12" => Ok(SpotId::Glacier__Boomerang_Antechamber__East_12),
-            "Glacier > Boomerang Antechamber > Upper East" => Ok(SpotId::Glacier__Boomerang_Antechamber__Upper_East),
-            "Glacier > Boomerang Antechamber > West 12" => Ok(SpotId::Glacier__Boomerang_Antechamber__West_12),
-            "Glacier > Boomerang Antechamber > West 13" => Ok(SpotId::Glacier__Boomerang_Antechamber__West_13),
-            "Glacier > Boomerang Room > Center-ish" => Ok(SpotId::Glacier__Boomerang_Room__Center_ish),
-            "Glacier > Boomerang Room > Center Ledge" => Ok(SpotId::Glacier__Boomerang_Room__Center_Ledge),
+            "Glacier > Boomerang Antechamber > East 12" => {
+                Ok(SpotId::Glacier__Boomerang_Antechamber__East_12)
+            }
+            "Glacier > Boomerang Antechamber > Upper East" => {
+                Ok(SpotId::Glacier__Boomerang_Antechamber__Upper_East)
+            }
+            "Glacier > Boomerang Antechamber > West 12" => {
+                Ok(SpotId::Glacier__Boomerang_Antechamber__West_12)
+            }
+            "Glacier > Boomerang Antechamber > West 13" => {
+                Ok(SpotId::Glacier__Boomerang_Antechamber__West_13)
+            }
+            "Glacier > Boomerang Room > Center-ish" => {
+                Ok(SpotId::Glacier__Boomerang_Room__Center_ish)
+            }
+            "Glacier > Boomerang Room > Center Ledge" => {
+                Ok(SpotId::Glacier__Boomerang_Room__Center_Ledge)
+            }
             "Glacier > Boomerang Room > Pedestal" => Ok(SpotId::Glacier__Boomerang_Room__Pedestal),
             "Glacier > Boomerang Room > Platform" => Ok(SpotId::Glacier__Boomerang_Room__Platform),
-            "Glacier > Boomerang Room > Upper Gate East" => Ok(SpotId::Glacier__Boomerang_Room__Upper_Gate_East),
-            "Glacier > Boomerang Room > Upper West" => Ok(SpotId::Glacier__Boomerang_Room__Upper_West),
+            "Glacier > Boomerang Room > Upper Gate East" => {
+                Ok(SpotId::Glacier__Boomerang_Room__Upper_Gate_East)
+            }
+            "Glacier > Boomerang Room > Upper West" => {
+                Ok(SpotId::Glacier__Boomerang_Room__Upper_West)
+            }
             "Glacier > Boomerang Room > West" => Ok(SpotId::Glacier__Boomerang_Room__West),
             "Glacier > Compass Room > Center" => Ok(SpotId::Glacier__Compass_Room__Center),
             "Glacier > Compass Room > East" => Ok(SpotId::Glacier__Compass_Room__East),
             "Glacier > Compass Room > West" => Ok(SpotId::Glacier__Compass_Room__West),
-            "Glacier > Dock Outside > Do Not Enter" => Ok(SpotId::Glacier__Dock_Outside__Do_Not_Enter),
+            "Glacier > Dock Outside > Do Not Enter" => {
+                Ok(SpotId::Glacier__Dock_Outside__Do_Not_Enter)
+            }
             "Glacier > Dock Outside > Entry" => Ok(SpotId::Glacier__Dock_Outside__Entry),
             "Glacier > Grid 31,9-12 > East 10" => Ok(SpotId::Glacier__Grid_31_9_12__East_10),
             "Glacier > Grid 31,9-12 > East 9" => Ok(SpotId::Glacier__Grid_31_9_12__East_9),
             "Glacier > Grid 31,9-12 > Midair" => Ok(SpotId::Glacier__Grid_31_9_12__Midair),
-            "Glacier > Grid 31,9-12 > Observation Tower" => Ok(SpotId::Glacier__Grid_31_9_12__Observation_Tower),
-            "Glacier > Grid 31,9-12 > Observation Tower L4" => Ok(SpotId::Glacier__Grid_31_9_12__Observation_Tower_L4),
+            "Glacier > Grid 31,9-12 > Observation Tower" => {
+                Ok(SpotId::Glacier__Grid_31_9_12__Observation_Tower)
+            }
+            "Glacier > Grid 31,9-12 > Observation Tower L4" => {
+                Ok(SpotId::Glacier__Grid_31_9_12__Observation_Tower_L4)
+            }
             "Glacier > Grid 31,9-12 > West 12" => Ok(SpotId::Glacier__Grid_31_9_12__West_12),
-            "Glacier > Grid 32,7-10 > Center Platform" => Ok(SpotId::Glacier__Grid_32_7_10__Center_Platform),
+            "Glacier > Grid 32,7-10 > Center Platform" => {
+                Ok(SpotId::Glacier__Grid_32_7_10__Center_Platform)
+            }
             "Glacier > Grid 32,7-10 > Column" => Ok(SpotId::Glacier__Grid_32_7_10__Column),
             "Glacier > Grid 32,7-10 > East 8" => Ok(SpotId::Glacier__Grid_32_7_10__East_8),
             "Glacier > Grid 32,7-10 > Left Rock" => Ok(SpotId::Glacier__Grid_32_7_10__Left_Rock),
@@ -2287,37 +5907,67 @@ impl std::str::FromStr for SpotId {
             "Glacier > Grid 32,7-10 > West 9" => Ok(SpotId::Glacier__Grid_32_7_10__West_9),
             "Glacier > Grid 37-38,9 > East" => Ok(SpotId::Glacier__Grid_37_38_9__East),
             "Glacier > Grid 37-38,9 > West" => Ok(SpotId::Glacier__Grid_37_38_9__West),
-            "Glacier > Grid 39-40,7-9 > Upper East" => Ok(SpotId::Glacier__Grid_39_40_7_9__Upper_East),
+            "Glacier > Grid 39-40,7-9 > Upper East" => {
+                Ok(SpotId::Glacier__Grid_39_40_7_9__Upper_East)
+            }
             "Glacier > Grid 39-40,7-9 > West" => Ok(SpotId::Glacier__Grid_39_40_7_9__West),
             "Glacier > Grid 42,10 > East" => Ok(SpotId::Glacier__Grid_42_10__East),
             "Glacier > Grid 42,10 > West" => Ok(SpotId::Glacier__Grid_42_10__West),
             "Glacier > Grid 43,10-11 > East" => Ok(SpotId::Glacier__Grid_43_10_11__East),
             "Glacier > Grid 43,10-11 > Lower" => Ok(SpotId::Glacier__Grid_43_10_11__Lower),
             "Glacier > Grid 43,10-11 > Top" => Ok(SpotId::Glacier__Grid_43_10_11__Top),
-            "Glacier > Lake Main Entrance > Bottom" => Ok(SpotId::Glacier__Lake_Main_Entrance__Bottom),
-            "Glacier > Lake Main Entrance > Ebih Access" => Ok(SpotId::Glacier__Lake_Main_Entrance__Ebih_Access),
+            "Glacier > Lake Main Entrance > Bottom" => {
+                Ok(SpotId::Glacier__Lake_Main_Entrance__Bottom)
+            }
+            "Glacier > Lake Main Entrance > Ebih Access" => {
+                Ok(SpotId::Glacier__Lake_Main_Entrance__Ebih_Access)
+            }
             "Glacier > Lake Main Entrance > Hill" => Ok(SpotId::Glacier__Lake_Main_Entrance__Hill),
-            "Glacier > Lake Main Entrance > Lake Access" => Ok(SpotId::Glacier__Lake_Main_Entrance__Lake_Access),
-            "Glacier > Lake Main Entrance > Ledge" => Ok(SpotId::Glacier__Lake_Main_Entrance__Ledge),
-            "Glacier > Lake Main Entrance > Lower Platform" => Ok(SpotId::Glacier__Lake_Main_Entrance__Lower_Platform),
+            "Glacier > Lake Main Entrance > Lake Access" => {
+                Ok(SpotId::Glacier__Lake_Main_Entrance__Lake_Access)
+            }
+            "Glacier > Lake Main Entrance > Ledge" => {
+                Ok(SpotId::Glacier__Lake_Main_Entrance__Ledge)
+            }
+            "Glacier > Lake Main Entrance > Lower Platform" => {
+                Ok(SpotId::Glacier__Lake_Main_Entrance__Lower_Platform)
+            }
             "Glacier > Lake Main Entrance > Side" => Ok(SpotId::Glacier__Lake_Main_Entrance__Side),
-            "Glacier > Lake Main Entrance > Side Jump" => Ok(SpotId::Glacier__Lake_Main_Entrance__Side_Jump),
-            "Glacier > Lake Main Entrance > Upper" => Ok(SpotId::Glacier__Lake_Main_Entrance__Upper),
-            "Glacier > Lake Main Entrance > Upper Platform" => Ok(SpotId::Glacier__Lake_Main_Entrance__Upper_Platform),
+            "Glacier > Lake Main Entrance > Side Jump" => {
+                Ok(SpotId::Glacier__Lake_Main_Entrance__Side_Jump)
+            }
+            "Glacier > Lake Main Entrance > Upper" => {
+                Ok(SpotId::Glacier__Lake_Main_Entrance__Upper)
+            }
+            "Glacier > Lake Main Entrance > Upper Platform" => {
+                Ok(SpotId::Glacier__Lake_Main_Entrance__Upper_Platform)
+            }
             "Glacier > Ledge Grab Room > Cliff" => Ok(SpotId::Glacier__Ledge_Grab_Room__Cliff),
-            "Glacier > Ledge Grab Room > Cliff Bottom" => Ok(SpotId::Glacier__Ledge_Grab_Room__Cliff_Bottom),
+            "Glacier > Ledge Grab Room > Cliff Bottom" => {
+                Ok(SpotId::Glacier__Ledge_Grab_Room__Cliff_Bottom)
+            }
             "Glacier > Ledge Grab Room > Column" => Ok(SpotId::Glacier__Ledge_Grab_Room__Column),
             "Glacier > Ledge Grab Room > East 11" => Ok(SpotId::Glacier__Ledge_Grab_Room__East_11),
             "Glacier > Ledge Grab Room > East 9" => Ok(SpotId::Glacier__Ledge_Grab_Room__East_9),
             "Glacier > Ledge Grab Room > Fork" => Ok(SpotId::Glacier__Ledge_Grab_Room__Fork),
             "Glacier > Ledge Grab Room > Gate" => Ok(SpotId::Glacier__Ledge_Grab_Room__Gate),
-            "Glacier > Ledge Grab Room > Gate Ledge" => Ok(SpotId::Glacier__Ledge_Grab_Room__Gate_Ledge),
-            "Glacier > Ledge Grab Room > Lower Platform" => Ok(SpotId::Glacier__Ledge_Grab_Room__Lower_Platform),
+            "Glacier > Ledge Grab Room > Gate Ledge" => {
+                Ok(SpotId::Glacier__Ledge_Grab_Room__Gate_Ledge)
+            }
+            "Glacier > Ledge Grab Room > Lower Platform" => {
+                Ok(SpotId::Glacier__Ledge_Grab_Room__Lower_Platform)
+            }
             "Glacier > Ledge Grab Room > Mid 34" => Ok(SpotId::Glacier__Ledge_Grab_Room__Mid_34),
             "Glacier > Ledge Grab Room > Mid 35" => Ok(SpotId::Glacier__Ledge_Grab_Room__Mid_35),
-            "Glacier > Ledge Grab Room > Pedestal" => Ok(SpotId::Glacier__Ledge_Grab_Room__Pedestal),
-            "Glacier > Ledge Grab Room > Upper Platform" => Ok(SpotId::Glacier__Ledge_Grab_Room__Upper_Platform),
-            "Glacier > Ledge Grab Room > West End" => Ok(SpotId::Glacier__Ledge_Grab_Room__West_End),
+            "Glacier > Ledge Grab Room > Pedestal" => {
+                Ok(SpotId::Glacier__Ledge_Grab_Room__Pedestal)
+            }
+            "Glacier > Ledge Grab Room > Upper Platform" => {
+                Ok(SpotId::Glacier__Ledge_Grab_Room__Upper_Platform)
+            }
+            "Glacier > Ledge Grab Room > West End" => {
+                Ok(SpotId::Glacier__Ledge_Grab_Room__West_End)
+            }
             "Glacier > Peak > East 8" => Ok(SpotId::Glacier__Peak__East_8),
             "Glacier > Peak > Highest Platform" => Ok(SpotId::Glacier__Peak__Highest_Platform),
             "Glacier > Peak > Top Platform East" => Ok(SpotId::Glacier__Peak__Top_Platform_East),
@@ -2333,88 +5983,164 @@ impl std::str::FromStr for SpotId {
             "Glacier > Revival > West 8" => Ok(SpotId::Glacier__Revival__West_8),
             "Glacier > The Big Drop > East" => Ok(SpotId::Glacier__The_Big_Drop__East),
             "Glacier > The Big Drop > Small Path" => Ok(SpotId::Glacier__The_Big_Drop__Small_Path),
-            "Glacier > The Big Drop > Water Surface" => Ok(SpotId::Glacier__The_Big_Drop__Water_Surface),
+            "Glacier > The Big Drop > Water Surface" => {
+                Ok(SpotId::Glacier__The_Big_Drop__Water_Surface)
+            }
             "Glacier > Vertical Room > East 12" => Ok(SpotId::Glacier__Vertical_Room__East_12),
             "Glacier > Vertical Room > East 13" => Ok(SpotId::Glacier__Vertical_Room__East_13),
             "Glacier > Vertical Room > East 9" => Ok(SpotId::Glacier__Vertical_Room__East_9),
-            "Glacier > Vertical Room > East Corner" => Ok(SpotId::Glacier__Vertical_Room__East_Corner),
-            "Glacier > Vertical Room > Lower West Corner" => Ok(SpotId::Glacier__Vertical_Room__Lower_West_Corner),
+            "Glacier > Vertical Room > East Corner" => {
+                Ok(SpotId::Glacier__Vertical_Room__East_Corner)
+            }
+            "Glacier > Vertical Room > Lower West Corner" => {
+                Ok(SpotId::Glacier__Vertical_Room__Lower_West_Corner)
+            }
             "Glacier > Vertical Room > Mid 11" => Ok(SpotId::Glacier__Vertical_Room__Mid_11),
             "Glacier > Vertical Room > Mid 9" => Ok(SpotId::Glacier__Vertical_Room__Mid_9),
             "Glacier > Vertical Room > Past Gate" => Ok(SpotId::Glacier__Vertical_Room__Past_Gate),
             "Glacier > Vertical Room > Peak" => Ok(SpotId::Glacier__Vertical_Room__Peak),
-            "Glacier > Vertical Room > Under Switch" => Ok(SpotId::Glacier__Vertical_Room__Under_Switch),
+            "Glacier > Vertical Room > Under Switch" => {
+                Ok(SpotId::Glacier__Vertical_Room__Under_Switch)
+            }
             "Glacier > Vertical Room > West 8" => Ok(SpotId::Glacier__Vertical_Room__West_8),
             "Glacier > Vertical Room > West 9" => Ok(SpotId::Glacier__Vertical_Room__West_9),
-            "Interior > Building Interior > Corner" => Ok(SpotId::Interior__Building_Interior__Corner),
-            "Interior > Building Interior > Entry" => Ok(SpotId::Interior__Building_Interior__Entry),
+            "Interior > Building Interior > Corner" => {
+                Ok(SpotId::Interior__Building_Interior__Corner)
+            }
+            "Interior > Building Interior > Entry" => {
+                Ok(SpotId::Interior__Building_Interior__Entry)
+            }
             "Interior > Bunker Interior > Desk" => Ok(SpotId::Interior__Bunker_Interior__Desk),
             "Interior > Bunker Interior > Entry" => Ok(SpotId::Interior__Bunker_Interior__Entry),
-            "Interior > Cave Behind Waterfall > Bottom" => Ok(SpotId::Interior__Cave_Behind_Waterfall__Bottom),
-            "Interior > Cave Behind Waterfall > Middle" => Ok(SpotId::Interior__Cave_Behind_Waterfall__Middle),
-            "Interior > Cave Behind Waterfall > Top" => Ok(SpotId::Interior__Cave_Behind_Waterfall__Top),
-            "Interior > Dock Elevator > Connector" => Ok(SpotId::Interior__Dock_Elevator__Connector),
+            "Interior > Cave Behind Waterfall > Bottom" => {
+                Ok(SpotId::Interior__Cave_Behind_Waterfall__Bottom)
+            }
+            "Interior > Cave Behind Waterfall > Middle" => {
+                Ok(SpotId::Interior__Cave_Behind_Waterfall__Middle)
+            }
+            "Interior > Cave Behind Waterfall > Top" => {
+                Ok(SpotId::Interior__Cave_Behind_Waterfall__Top)
+            }
+            "Interior > Dock Elevator > Connector" => {
+                Ok(SpotId::Interior__Dock_Elevator__Connector)
+            }
             "Interior > Dock Elevator > Elevator" => Ok(SpotId::Interior__Dock_Elevator__Elevator),
-            "Interior > Dock Interior > Connector" => Ok(SpotId::Interior__Dock_Interior__Connector),
+            "Interior > Dock Interior > Connector" => {
+                Ok(SpotId::Interior__Dock_Interior__Connector)
+            }
             "Interior > Dock Interior > Entry" => Ok(SpotId::Interior__Dock_Interior__Entry),
             "Interior > Ebih Cave > Entry" => Ok(SpotId::Interior__Ebih_Cave__Entry),
             "Interior > Garage > Boxes" => Ok(SpotId::Interior__Garage__Boxes),
             "Interior > Garage > Entry" => Ok(SpotId::Interior__Garage__Entry),
-            "Interior > Outpost Interior > Bookshelf" => Ok(SpotId::Interior__Outpost_Interior__Bookshelf),
+            "Interior > Outpost Interior > Bookshelf" => {
+                Ok(SpotId::Interior__Outpost_Interior__Bookshelf)
+            }
             "Interior > Outpost Interior > Entry" => Ok(SpotId::Interior__Outpost_Interior__Entry),
             "Interior > Tent Interior > Desk" => Ok(SpotId::Interior__Tent_Interior__Desk),
             "Interior > Tent Interior > Entry" => Ok(SpotId::Interior__Tent_Interior__Entry),
-            "Irikar > Abandoned Room > Corner Core" => Ok(SpotId::Irikar__Abandoned_Room__Corner_Core),
-            "Irikar > Abandoned Room > Empty Pedestal" => Ok(SpotId::Irikar__Abandoned_Room__Empty_Pedestal),
+            "Irikar > Abandoned Room > Corner Core" => {
+                Ok(SpotId::Irikar__Abandoned_Room__Corner_Core)
+            }
+            "Irikar > Abandoned Room > Empty Pedestal" => {
+                Ok(SpotId::Irikar__Abandoned_Room__Empty_Pedestal)
+            }
             "Irikar > Abandoned Room > West" => Ok(SpotId::Irikar__Abandoned_Room__West),
             "Irikar > Airy > Middle South" => Ok(SpotId::Irikar__Airy__Middle_South),
             "Irikar > Airy > Northwest" => Ok(SpotId::Irikar__Airy__Northwest),
-            "Irikar > Basement Pipes > Brick Ledge" => Ok(SpotId::Irikar__Basement_Pipes__Brick_Ledge),
-            "Irikar > Basement Pipes > Bricks Under Pipes" => Ok(SpotId::Irikar__Basement_Pipes__Bricks_Under_Pipes),
-            "Irikar > Basement Pipes > Double Pipe Left" => Ok(SpotId::Irikar__Basement_Pipes__Double_Pipe_Left),
-            "Irikar > Basement Pipes > Double Pipe Right" => Ok(SpotId::Irikar__Basement_Pipes__Double_Pipe_Right),
+            "Irikar > Basement Pipes > Brick Ledge" => {
+                Ok(SpotId::Irikar__Basement_Pipes__Brick_Ledge)
+            }
+            "Irikar > Basement Pipes > Bricks Under Pipes" => {
+                Ok(SpotId::Irikar__Basement_Pipes__Bricks_Under_Pipes)
+            }
+            "Irikar > Basement Pipes > Double Pipe Left" => {
+                Ok(SpotId::Irikar__Basement_Pipes__Double_Pipe_Left)
+            }
+            "Irikar > Basement Pipes > Double Pipe Right" => {
+                Ok(SpotId::Irikar__Basement_Pipes__Double_Pipe_Right)
+            }
             "Irikar > Basement Pipes > East 28" => Ok(SpotId::Irikar__Basement_Pipes__East_28),
             "Irikar > Basement Pipes > High Pipe" => Ok(SpotId::Irikar__Basement_Pipes__High_Pipe),
-            "Irikar > Basement Pipes > Left Vertical Pipe" => Ok(SpotId::Irikar__Basement_Pipes__Left_Vertical_Pipe),
-            "Irikar > Basement Pipes > Lower Pipe Right" => Ok(SpotId::Irikar__Basement_Pipes__Lower_Pipe_Right),
-            "Irikar > Basement Pipes > Lower Pipe Under Ledge" => Ok(SpotId::Irikar__Basement_Pipes__Lower_Pipe_Under_Ledge),
-            "Irikar > Basement Pipes > Right Vertical Pipe" => Ok(SpotId::Irikar__Basement_Pipes__Right_Vertical_Pipe),
+            "Irikar > Basement Pipes > Left Vertical Pipe" => {
+                Ok(SpotId::Irikar__Basement_Pipes__Left_Vertical_Pipe)
+            }
+            "Irikar > Basement Pipes > Lower Pipe Right" => {
+                Ok(SpotId::Irikar__Basement_Pipes__Lower_Pipe_Right)
+            }
+            "Irikar > Basement Pipes > Lower Pipe Under Ledge" => {
+                Ok(SpotId::Irikar__Basement_Pipes__Lower_Pipe_Under_Ledge)
+            }
+            "Irikar > Basement Pipes > Right Vertical Pipe" => {
+                Ok(SpotId::Irikar__Basement_Pipes__Right_Vertical_Pipe)
+            }
             "Irikar > Basement Pipes > West 27" => Ok(SpotId::Irikar__Basement_Pipes__West_27),
             "Irikar > Basement Pipes > West 28" => Ok(SpotId::Irikar__Basement_Pipes__West_28),
-            "Irikar > Basement Portal > Bottom Middle" => Ok(SpotId::Irikar__Basement_Portal__Bottom_Middle),
+            "Irikar > Basement Portal > Bottom Middle" => {
+                Ok(SpotId::Irikar__Basement_Portal__Bottom_Middle)
+            }
             "Irikar > Basement Portal > East 27" => Ok(SpotId::Irikar__Basement_Portal__East_27),
             "Irikar > Basement Portal > East 28" => Ok(SpotId::Irikar__Basement_Portal__East_28),
-            "Irikar > Basement Portal > East Platform" => Ok(SpotId::Irikar__Basement_Portal__East_Platform),
+            "Irikar > Basement Portal > East Platform" => {
+                Ok(SpotId::Irikar__Basement_Portal__East_Platform)
+            }
             "Irikar > Basement Portal > Ledge" => Ok(SpotId::Irikar__Basement_Portal__Ledge),
-            "Irikar > Basement Portal > Middle Platform" => Ok(SpotId::Irikar__Basement_Portal__Middle_Platform),
-            "Irikar > Basement Portal > Moving Platform End" => Ok(SpotId::Irikar__Basement_Portal__Moving_Platform_End),
-            "Irikar > Basement Portal > Moving Platform Start" => Ok(SpotId::Irikar__Basement_Portal__Moving_Platform_Start),
+            "Irikar > Basement Portal > Middle Platform" => {
+                Ok(SpotId::Irikar__Basement_Portal__Middle_Platform)
+            }
+            "Irikar > Basement Portal > Moving Platform End" => {
+                Ok(SpotId::Irikar__Basement_Portal__Moving_Platform_End)
+            }
+            "Irikar > Basement Portal > Moving Platform Start" => {
+                Ok(SpotId::Irikar__Basement_Portal__Moving_Platform_Start)
+            }
             "Irikar > Basement Portal > North" => Ok(SpotId::Irikar__Basement_Portal__North),
-            "Irikar > Basement Portal > Portal Stand" => Ok(SpotId::Irikar__Basement_Portal__Portal_Stand),
+            "Irikar > Basement Portal > Portal Stand" => {
+                Ok(SpotId::Irikar__Basement_Portal__Portal_Stand)
+            }
             "Irikar > Basement Portal > West 28" => Ok(SpotId::Irikar__Basement_Portal__West_28),
-            "Irikar > Basement Portal > Westmost Platform" => Ok(SpotId::Irikar__Basement_Portal__Westmost_Platform),
+            "Irikar > Basement Portal > Westmost Platform" => {
+                Ok(SpotId::Irikar__Basement_Portal__Westmost_Platform)
+            }
             "Irikar > Boss Room > Above Catwalk" => Ok(SpotId::Irikar__Boss_Room__Above_Catwalk),
             "Irikar > Boss Room > Bull's Feet" => Ok(SpotId::Irikar__Boss_Room__Bulls_Feet),
             "Irikar > Boss Room > Catwalk East" => Ok(SpotId::Irikar__Boss_Room__Catwalk_East),
             "Irikar > Boss Room > Catwalk West" => Ok(SpotId::Irikar__Boss_Room__Catwalk_West),
             "Irikar > Boss Room > East 28" => Ok(SpotId::Irikar__Boss_Room__East_28),
-            "Irikar > Boss Room > Healthy Rooftop" => Ok(SpotId::Irikar__Boss_Room__Healthy_Rooftop),
+            "Irikar > Boss Room > Healthy Rooftop" => {
+                Ok(SpotId::Irikar__Boss_Room__Healthy_Rooftop)
+            }
             "Irikar > Boss Room > Northwest" => Ok(SpotId::Irikar__Boss_Room__Northwest),
-            "Irikar > Boss Room > Sat Tower Roof East" => Ok(SpotId::Irikar__Boss_Room__Sat_Tower_Roof_East),
-            "Irikar > Boss Room > Sat Tower Roof West" => Ok(SpotId::Irikar__Boss_Room__Sat_Tower_Roof_West),
+            "Irikar > Boss Room > Sat Tower Roof East" => {
+                Ok(SpotId::Irikar__Boss_Room__Sat_Tower_Roof_East)
+            }
+            "Irikar > Boss Room > Sat Tower Roof West" => {
+                Ok(SpotId::Irikar__Boss_Room__Sat_Tower_Roof_West)
+            }
             "Irikar > Boss Room > Upper Rooftops" => Ok(SpotId::Irikar__Boss_Room__Upper_Rooftops),
             "Irikar > Boss Room > West 28" => Ok(SpotId::Irikar__Boss_Room__West_28),
-            "Irikar > East Rooftops > Directly Down" => Ok(SpotId::Irikar__East_Rooftops__Directly_Down),
-            "Irikar > East Rooftops > East Mid-air" => Ok(SpotId::Irikar__East_Rooftops__East_Mid_air),
-            "Irikar > East Rooftops > Off the Edge" => Ok(SpotId::Irikar__East_Rooftops__Off_the_Edge),
-            "Irikar > East Rooftops > Top Rooftop" => Ok(SpotId::Irikar__East_Rooftops__Top_Rooftop),
+            "Irikar > East Rooftops > Directly Down" => {
+                Ok(SpotId::Irikar__East_Rooftops__Directly_Down)
+            }
+            "Irikar > East Rooftops > East Mid-air" => {
+                Ok(SpotId::Irikar__East_Rooftops__East_Mid_air)
+            }
+            "Irikar > East Rooftops > Off the Edge" => {
+                Ok(SpotId::Irikar__East_Rooftops__Off_the_Edge)
+            }
+            "Irikar > East Rooftops > Top Rooftop" => {
+                Ok(SpotId::Irikar__East_Rooftops__Top_Rooftop)
+            }
             "Irikar > East Rooftops > Upper West" => Ok(SpotId::Irikar__East_Rooftops__Upper_West),
             "Irikar > Empty Foyer > East" => Ok(SpotId::Irikar__Empty_Foyer__East),
             "Irikar > Empty Foyer > West" => Ok(SpotId::Irikar__Empty_Foyer__West),
             "Irikar > Hub > Bowl Hole" => Ok(SpotId::Irikar__Hub__Bowl_Hole),
             "Irikar > Hub > Bowl Middle Ledge" => Ok(SpotId::Irikar__Hub__Bowl_Middle_Ledge),
-            "Irikar > Hub > Bowl Middle Platform Center" => Ok(SpotId::Irikar__Hub__Bowl_Middle_Platform_Center),
-            "Irikar > Hub > Bowl Middle Platform West" => Ok(SpotId::Irikar__Hub__Bowl_Middle_Platform_West),
+            "Irikar > Hub > Bowl Middle Platform Center" => {
+                Ok(SpotId::Irikar__Hub__Bowl_Middle_Platform_Center)
+            }
+            "Irikar > Hub > Bowl Middle Platform West" => {
+                Ok(SpotId::Irikar__Hub__Bowl_Middle_Platform_West)
+            }
             "Irikar > Hub > Bowl Platform 3" => Ok(SpotId::Irikar__Hub__Bowl_Platform_3),
             "Irikar > Hub > Bowl Top Platform" => Ok(SpotId::Irikar__Hub__Bowl_Top_Platform),
             "Irikar > Hub > Dagger Altar" => Ok(SpotId::Irikar__Hub__Dagger_Altar),
@@ -2424,26 +6150,44 @@ impl std::str::FromStr for SpotId {
             "Irikar > Hub > Northwest" => Ok(SpotId::Irikar__Hub__Northwest),
             "Irikar > Hub > Northwest Above Bowl" => Ok(SpotId::Irikar__Hub__Northwest_Above_Bowl),
             "Irikar > Hub > NW Bowl Edifice" => Ok(SpotId::Irikar__Hub__NW_Bowl_Edifice),
-            "Irikar > Hub > NW Middle Building Corner" => Ok(SpotId::Irikar__Hub__NW_Middle_Building_Corner),
-            "Irikar > Hub > NW Middle Building West Entry" => Ok(SpotId::Irikar__Hub__NW_Middle_Building_West_Entry),
+            "Irikar > Hub > NW Middle Building Corner" => {
+                Ok(SpotId::Irikar__Hub__NW_Middle_Building_Corner)
+            }
+            "Irikar > Hub > NW Middle Building West Entry" => {
+                Ok(SpotId::Irikar__Hub__NW_Middle_Building_West_Entry)
+            }
             "Irikar > Hub > NW Roof" => Ok(SpotId::Irikar__Hub__NW_Roof),
             "Irikar > Hub > NW Staircase Upper" => Ok(SpotId::Irikar__Hub__NW_Staircase_Upper),
             "Irikar > Hub > Portal Stand" => Ok(SpotId::Irikar__Hub__Portal_Stand),
-            "Irikar > Hub > Royal Storage By Wall" => Ok(SpotId::Irikar__Hub__Royal_Storage_By_Wall),
-            "Irikar > Hub > Royal Storage in Wall" => Ok(SpotId::Irikar__Hub__Royal_Storage_in_Wall),
+            "Irikar > Hub > Royal Storage By Wall" => {
+                Ok(SpotId::Irikar__Hub__Royal_Storage_By_Wall)
+            }
+            "Irikar > Hub > Royal Storage in Wall" => {
+                Ok(SpotId::Irikar__Hub__Royal_Storage_in_Wall)
+            }
             "Irikar > Hub > Royal Storage South" => Ok(SpotId::Irikar__Hub__Royal_Storage_South),
             "Irikar > Hub > Sat Tower Bottom" => Ok(SpotId::Irikar__Hub__Sat_Tower_Bottom),
             "Irikar > Hub > Sat Tower East 24" => Ok(SpotId::Irikar__Hub__Sat_Tower_East_24),
-            "Irikar > Hub > Sat Tower Floating Platform" => Ok(SpotId::Irikar__Hub__Sat_Tower_Floating_Platform),
+            "Irikar > Hub > Sat Tower Floating Platform" => {
+                Ok(SpotId::Irikar__Hub__Sat_Tower_Floating_Platform)
+            }
             "Irikar > Hub > Sat Tower Long Ledge" => Ok(SpotId::Irikar__Hub__Sat_Tower_Long_Ledge),
-            "Irikar > Hub > Sat Tower Lower Left Ledge" => Ok(SpotId::Irikar__Hub__Sat_Tower_Lower_Left_Ledge),
-            "Irikar > Hub > Sat Tower Lower Right Ledge" => Ok(SpotId::Irikar__Hub__Sat_Tower_Lower_Right_Ledge),
-            "Irikar > Hub > Sat Tower Middle Ledge" => Ok(SpotId::Irikar__Hub__Sat_Tower_Middle_Ledge),
+            "Irikar > Hub > Sat Tower Lower Left Ledge" => {
+                Ok(SpotId::Irikar__Hub__Sat_Tower_Lower_Left_Ledge)
+            }
+            "Irikar > Hub > Sat Tower Lower Right Ledge" => {
+                Ok(SpotId::Irikar__Hub__Sat_Tower_Lower_Right_Ledge)
+            }
+            "Irikar > Hub > Sat Tower Middle Ledge" => {
+                Ok(SpotId::Irikar__Hub__Sat_Tower_Middle_Ledge)
+            }
             "Irikar > Hub > Sat Tower Northeast" => Ok(SpotId::Irikar__Hub__Sat_Tower_Northeast),
             "Irikar > Hub > Sat Tower Roof East" => Ok(SpotId::Irikar__Hub__Sat_Tower_Roof_East),
             "Irikar > Hub > Sat Tower Roof West" => Ok(SpotId::Irikar__Hub__Sat_Tower_Roof_West),
             "Irikar > Hub > Sat Tower Top Ledge" => Ok(SpotId::Irikar__Hub__Sat_Tower_Top_Ledge),
-            "Irikar > Hub > Sat Tower West Valley" => Ok(SpotId::Irikar__Hub__Sat_Tower_West_Valley),
+            "Irikar > Hub > Sat Tower West Valley" => {
+                Ok(SpotId::Irikar__Hub__Sat_Tower_West_Valley)
+            }
             "Irikar > Hub > Save Point" => Ok(SpotId::Irikar__Hub__Save_Point),
             "Irikar > Hub > West Rim" => Ok(SpotId::Irikar__Hub__West_Rim),
             "Irikar > Lamassu > Bottom Middle" => Ok(SpotId::Irikar__Lamassu__Bottom_Middle),
@@ -2452,69 +6196,149 @@ impl std::str::FromStr for SpotId {
             "Irikar > Lamassu > Desk" => Ok(SpotId::Irikar__Lamassu__Desk),
             "Irikar > Lamassu > East 26" => Ok(SpotId::Irikar__Lamassu__East_26),
             "Irikar > Lamassu > East 27" => Ok(SpotId::Irikar__Lamassu__East_27),
-            "Irikar > Lamassu > Hidden Passage East" => Ok(SpotId::Irikar__Lamassu__Hidden_Passage_East),
-            "Irikar > Lamassu > Hidden Passage West" => Ok(SpotId::Irikar__Lamassu__Hidden_Passage_West),
+            "Irikar > Lamassu > Hidden Passage East" => {
+                Ok(SpotId::Irikar__Lamassu__Hidden_Passage_East)
+            }
+            "Irikar > Lamassu > Hidden Passage West" => {
+                Ok(SpotId::Irikar__Lamassu__Hidden_Passage_West)
+            }
             "Irikar > Lamassu > Northwest" => Ok(SpotId::Irikar__Lamassu__Northwest),
             "Irikar > Lamassu > West 28" => Ok(SpotId::Irikar__Lamassu__West_28),
             "Irikar > Midwest > East 23" => Ok(SpotId::Irikar__Midwest__East_23),
-            "Irikar > Midwest > East 24 on Building" => Ok(SpotId::Irikar__Midwest__East_24_on_Building),
+            "Irikar > Midwest > East 24 on Building" => {
+                Ok(SpotId::Irikar__Midwest__East_24_on_Building)
+            }
             "Irikar > Midwest > East 24 on Floor" => Ok(SpotId::Irikar__Midwest__East_24_on_Floor),
             "Irikar > Midwest > East 25" => Ok(SpotId::Irikar__Midwest__East_25),
             "Irikar > Midwest > East 26" => Ok(SpotId::Irikar__Midwest__East_26),
             "Irikar > Midwest > East 27" => Ok(SpotId::Irikar__Midwest__East_27),
             "Irikar > Midwest > East 28" => Ok(SpotId::Irikar__Midwest__East_28),
-            "Irikar > Sight Room > Above Room East" => Ok(SpotId::Irikar__Sight_Room__Above_Room_East),
-            "Irikar > Sight Room > Above Room North" => Ok(SpotId::Irikar__Sight_Room__Above_Room_North),
+            "Irikar > Sight Room > Above Room East" => {
+                Ok(SpotId::Irikar__Sight_Room__Above_Room_East)
+            }
+            "Irikar > Sight Room > Above Room North" => {
+                Ok(SpotId::Irikar__Sight_Room__Above_Room_North)
+            }
             "Irikar > Sight Room > Item Pedestal" => Ok(SpotId::Irikar__Sight_Room__Item_Pedestal),
             "Irikar > Sight Room > Lower Ledge" => Ok(SpotId::Irikar__Sight_Room__Lower_Ledge),
             "Irikar > Sight Room > Portal" => Ok(SpotId::Irikar__Sight_Room__Portal),
             "Irikar > Sight Room > West 24" => Ok(SpotId::Irikar__Sight_Room__West_24),
-            "Irikar Breach > Basement Save > Save Point" => Ok(SpotId::Irikar_Breach__Basement_Save__Save_Point),
-            "Irikar Breach > Exit Corridor > East" => Ok(SpotId::Irikar_Breach__Exit_Corridor__East),
-            "Irikar Breach > Exit Corridor > North 12" => Ok(SpotId::Irikar_Breach__Exit_Corridor__North_12),
-            "Irikar Breach > Exit Corridor > North 13" => Ok(SpotId::Irikar_Breach__Exit_Corridor__North_13),
-            "Irikar Breach > Exit Corridor > Passage" => Ok(SpotId::Irikar_Breach__Exit_Corridor__Passage),
-            "Irikar Breach > Exit Corridor > Pillar" => Ok(SpotId::Irikar_Breach__Exit_Corridor__Pillar),
-            "Irikar Breach > Exit Corridor > Portal Stand" => Ok(SpotId::Irikar_Breach__Exit_Corridor__Portal_Stand),
-            "Irikar Breach > Exit Corridor > West" => Ok(SpotId::Irikar_Breach__Exit_Corridor__West),
-            "Irikar Breach > Exit Corridor > West of Pillar" => Ok(SpotId::Irikar_Breach__Exit_Corridor__West_of_Pillar),
-            "Irikar Breach > Flappy Drone > Initial Drop" => Ok(SpotId::Irikar_Breach__Flappy_Drone__Initial_Drop),
-            "Irikar Breach > Flappy Drone > Passage Corner" => Ok(SpotId::Irikar_Breach__Flappy_Drone__Passage_Corner),
-            "Irikar Breach > Flappy Drone > Pillar Underside" => Ok(SpotId::Irikar_Breach__Flappy_Drone__Pillar_Underside),
+            "Irikar Breach > Basement Save > Save Point" => {
+                Ok(SpotId::Irikar_Breach__Basement_Save__Save_Point)
+            }
+            "Irikar Breach > Exit Corridor > East" => {
+                Ok(SpotId::Irikar_Breach__Exit_Corridor__East)
+            }
+            "Irikar Breach > Exit Corridor > North 12" => {
+                Ok(SpotId::Irikar_Breach__Exit_Corridor__North_12)
+            }
+            "Irikar Breach > Exit Corridor > North 13" => {
+                Ok(SpotId::Irikar_Breach__Exit_Corridor__North_13)
+            }
+            "Irikar Breach > Exit Corridor > Passage" => {
+                Ok(SpotId::Irikar_Breach__Exit_Corridor__Passage)
+            }
+            "Irikar Breach > Exit Corridor > Pillar" => {
+                Ok(SpotId::Irikar_Breach__Exit_Corridor__Pillar)
+            }
+            "Irikar Breach > Exit Corridor > Portal Stand" => {
+                Ok(SpotId::Irikar_Breach__Exit_Corridor__Portal_Stand)
+            }
+            "Irikar Breach > Exit Corridor > West" => {
+                Ok(SpotId::Irikar_Breach__Exit_Corridor__West)
+            }
+            "Irikar Breach > Exit Corridor > West of Pillar" => {
+                Ok(SpotId::Irikar_Breach__Exit_Corridor__West_of_Pillar)
+            }
+            "Irikar Breach > Flappy Drone > Initial Drop" => {
+                Ok(SpotId::Irikar_Breach__Flappy_Drone__Initial_Drop)
+            }
+            "Irikar Breach > Flappy Drone > Passage Corner" => {
+                Ok(SpotId::Irikar_Breach__Flappy_Drone__Passage_Corner)
+            }
+            "Irikar Breach > Flappy Drone > Pillar Underside" => {
+                Ok(SpotId::Irikar_Breach__Flappy_Drone__Pillar_Underside)
+            }
             "Irikar Breach > Flappy Drone > Side" => Ok(SpotId::Irikar_Breach__Flappy_Drone__Side),
-            "Irikar Breach > Flappy Drone > South" => Ok(SpotId::Irikar_Breach__Flappy_Drone__South),
-            "Irikar Breach > Flappy Drone > Top Pillar" => Ok(SpotId::Irikar_Breach__Flappy_Drone__Top_Pillar),
-            "Irikar Breach > Flappy Drone > Upper Valley Left" => Ok(SpotId::Irikar_Breach__Flappy_Drone__Upper_Valley_Left),
-            "Irikar Breach > Flappy Drone > Upper Valley Right" => Ok(SpotId::Irikar_Breach__Flappy_Drone__Upper_Valley_Right),
-            "Irikar Breach > Flappy Drone > West Door" => Ok(SpotId::Irikar_Breach__Flappy_Drone__West_Door),
-            "Irikar Breach > Flappy Drone > Zigzag Bottom" => Ok(SpotId::Irikar_Breach__Flappy_Drone__Zigzag_Bottom),
+            "Irikar Breach > Flappy Drone > South" => {
+                Ok(SpotId::Irikar_Breach__Flappy_Drone__South)
+            }
+            "Irikar Breach > Flappy Drone > Top Pillar" => {
+                Ok(SpotId::Irikar_Breach__Flappy_Drone__Top_Pillar)
+            }
+            "Irikar Breach > Flappy Drone > Upper Valley Left" => {
+                Ok(SpotId::Irikar_Breach__Flappy_Drone__Upper_Valley_Left)
+            }
+            "Irikar Breach > Flappy Drone > Upper Valley Right" => {
+                Ok(SpotId::Irikar_Breach__Flappy_Drone__Upper_Valley_Right)
+            }
+            "Irikar Breach > Flappy Drone > West Door" => {
+                Ok(SpotId::Irikar_Breach__Flappy_Drone__West_Door)
+            }
+            "Irikar Breach > Flappy Drone > Zigzag Bottom" => {
+                Ok(SpotId::Irikar_Breach__Flappy_Drone__Zigzag_Bottom)
+            }
             "Irikar Breach > Four-way > East" => Ok(SpotId::Irikar_Breach__Four_way__East),
             "Irikar Breach > Four-way > Ledge" => Ok(SpotId::Irikar_Breach__Four_way__Ledge),
             "Irikar Breach > Four-way > North" => Ok(SpotId::Irikar_Breach__Four_way__North),
             "Irikar Breach > Four-way > South" => Ok(SpotId::Irikar_Breach__Four_way__South),
             "Irikar Breach > Four-way > West" => Ok(SpotId::Irikar_Breach__Four_way__West),
             "Irikar Breach > Gauntlet > East 22" => Ok(SpotId::Irikar_Breach__Gauntlet__East_22),
-            "Irikar Breach > Gauntlet > Hidden Path Bottom" => Ok(SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Bottom),
-            "Irikar Breach > Gauntlet > Hidden Path Lower Entry" => Ok(SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Lower_Entry),
-            "Irikar Breach > Gauntlet > Hidden Path Reward" => Ok(SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Reward),
-            "Irikar Breach > Gauntlet > Hidden Path Top Ledge" => Ok(SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Top_Ledge),
-            "Irikar Breach > Gauntlet > Hidden Path Upper Entry" => Ok(SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Upper_Entry),
-            "Irikar Breach > Gauntlet > Hidden Path Upper Left" => Ok(SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Upper_Left),
-            "Irikar Breach > Gauntlet > Hidden Path Upper Right" => Ok(SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Upper_Right),
-            "Irikar Breach > Gauntlet > Save Point" => Ok(SpotId::Irikar_Breach__Gauntlet__Save_Point),
+            "Irikar Breach > Gauntlet > Hidden Path Bottom" => {
+                Ok(SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Bottom)
+            }
+            "Irikar Breach > Gauntlet > Hidden Path Lower Entry" => {
+                Ok(SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Lower_Entry)
+            }
+            "Irikar Breach > Gauntlet > Hidden Path Reward" => {
+                Ok(SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Reward)
+            }
+            "Irikar Breach > Gauntlet > Hidden Path Top Ledge" => {
+                Ok(SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Top_Ledge)
+            }
+            "Irikar Breach > Gauntlet > Hidden Path Upper Entry" => {
+                Ok(SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Upper_Entry)
+            }
+            "Irikar Breach > Gauntlet > Hidden Path Upper Left" => {
+                Ok(SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Upper_Left)
+            }
+            "Irikar Breach > Gauntlet > Hidden Path Upper Right" => {
+                Ok(SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Upper_Right)
+            }
+            "Irikar Breach > Gauntlet > Save Point" => {
+                Ok(SpotId::Irikar_Breach__Gauntlet__Save_Point)
+            }
             "Irikar Breach > Hover Room > Bottom" => Ok(SpotId::Irikar_Breach__Hover_Room__Bottom),
             "Irikar Breach > Hover Room > East" => Ok(SpotId::Irikar_Breach__Hover_Room__East),
             "Irikar Breach > Hover Room > West" => Ok(SpotId::Irikar_Breach__Hover_Room__West),
-            "Irikar Breach > Neon Corridor > Center" => Ok(SpotId::Irikar_Breach__Neon_Corridor__Center),
-            "Irikar Breach > Neon Corridor > East" => Ok(SpotId::Irikar_Breach__Neon_Corridor__East),
-            "Irikar Breach > Neon Corridor > West" => Ok(SpotId::Irikar_Breach__Neon_Corridor__West),
-            "Irikar Breach > Neon Corridor > West Basin" => Ok(SpotId::Irikar_Breach__Neon_Corridor__West_Basin),
-            "Irikar Breach > Sandy Lair > East 27" => Ok(SpotId::Irikar_Breach__Sandy_Lair__East_27),
-            "Irikar Breach > Sandy Lair > East 28" => Ok(SpotId::Irikar_Breach__Sandy_Lair__East_28),
-            "Irikar Breach > Save Room > Save Point" => Ok(SpotId::Irikar_Breach__Save_Room__Save_Point),
-            "Irikar Breach > Save Room > Upper Area" => Ok(SpotId::Irikar_Breach__Save_Room__Upper_Area),
+            "Irikar Breach > Neon Corridor > Center" => {
+                Ok(SpotId::Irikar_Breach__Neon_Corridor__Center)
+            }
+            "Irikar Breach > Neon Corridor > East" => {
+                Ok(SpotId::Irikar_Breach__Neon_Corridor__East)
+            }
+            "Irikar Breach > Neon Corridor > West" => {
+                Ok(SpotId::Irikar_Breach__Neon_Corridor__West)
+            }
+            "Irikar Breach > Neon Corridor > West Basin" => {
+                Ok(SpotId::Irikar_Breach__Neon_Corridor__West_Basin)
+            }
+            "Irikar Breach > Sandy Lair > East 27" => {
+                Ok(SpotId::Irikar_Breach__Sandy_Lair__East_27)
+            }
+            "Irikar Breach > Sandy Lair > East 28" => {
+                Ok(SpotId::Irikar_Breach__Sandy_Lair__East_28)
+            }
+            "Irikar Breach > Save Room > Save Point" => {
+                Ok(SpotId::Irikar_Breach__Save_Room__Save_Point)
+            }
+            "Irikar Breach > Save Room > Upper Area" => {
+                Ok(SpotId::Irikar_Breach__Save_Room__Upper_Area)
+            }
             "Irikar Breach > Save Room > West" => Ok(SpotId::Irikar_Breach__Save_Room__West),
-            "Irikar Breach > Uhrum Connector > West" => Ok(SpotId::Irikar_Breach__Uhrum_Connector__West),
+            "Irikar Breach > Uhrum Connector > West" => {
+                Ok(SpotId::Irikar_Breach__Uhrum_Connector__West)
+            }
             "Irikar Breach > Worm Rave > Corner" => Ok(SpotId::Irikar_Breach__Worm_Rave__Corner),
             "Irikar Breach > Worm Rave > East" => Ok(SpotId::Irikar_Breach__Worm_Rave__East),
             "Irikar Breach > Worm Rave > South" => Ok(SpotId::Irikar_Breach__Worm_Rave__South),
@@ -2522,24 +6346,50 @@ impl std::str::FromStr for SpotId {
             "Menu > Upgrade Menu > Drone" => Ok(SpotId::Menu__Upgrade_Menu__Drone),
             "Menu > Upgrade Menu > Infection" => Ok(SpotId::Menu__Upgrade_Menu__Infection),
             "Menu > Upgrade Menu > Physiology" => Ok(SpotId::Menu__Upgrade_Menu__Physiology),
-            "Uhrum > Annuna Corridor > Between Two Flowers" => Ok(SpotId::Uhrum__Annuna_Corridor__Between_Two_Flowers),
-            "Uhrum > Annuna Corridor > Block East" => Ok(SpotId::Uhrum__Annuna_Corridor__Block_East),
-            "Uhrum > Annuna Corridor > Block West" => Ok(SpotId::Uhrum__Annuna_Corridor__Block_West),
+            "Uhrum > Annuna Corridor > Between Two Flowers" => {
+                Ok(SpotId::Uhrum__Annuna_Corridor__Between_Two_Flowers)
+            }
+            "Uhrum > Annuna Corridor > Block East" => {
+                Ok(SpotId::Uhrum__Annuna_Corridor__Block_East)
+            }
+            "Uhrum > Annuna Corridor > Block West" => {
+                Ok(SpotId::Uhrum__Annuna_Corridor__Block_West)
+            }
             "Uhrum > Annuna Corridor > East 25" => Ok(SpotId::Uhrum__Annuna_Corridor__East_25),
-            "Uhrum > Annuna Corridor > East Cubby" => Ok(SpotId::Uhrum__Annuna_Corridor__East_Cubby),
-            "Uhrum > Annuna Corridor > Lower Platform" => Ok(SpotId::Uhrum__Annuna_Corridor__Lower_Platform),
-            "Uhrum > Annuna Corridor > Middle Platform" => Ok(SpotId::Uhrum__Annuna_Corridor__Middle_Platform),
-            "Uhrum > Annuna Corridor > Open Pillar" => Ok(SpotId::Uhrum__Annuna_Corridor__Open_Pillar),
+            "Uhrum > Annuna Corridor > East Cubby" => {
+                Ok(SpotId::Uhrum__Annuna_Corridor__East_Cubby)
+            }
+            "Uhrum > Annuna Corridor > Lower Platform" => {
+                Ok(SpotId::Uhrum__Annuna_Corridor__Lower_Platform)
+            }
+            "Uhrum > Annuna Corridor > Middle Platform" => {
+                Ok(SpotId::Uhrum__Annuna_Corridor__Middle_Platform)
+            }
+            "Uhrum > Annuna Corridor > Open Pillar" => {
+                Ok(SpotId::Uhrum__Annuna_Corridor__Open_Pillar)
+            }
             "Uhrum > Annuna Corridor > Pedestal" => Ok(SpotId::Uhrum__Annuna_Corridor__Pedestal),
-            "Uhrum > Annuna Corridor > Save Point" => Ok(SpotId::Uhrum__Annuna_Corridor__Save_Point),
+            "Uhrum > Annuna Corridor > Save Point" => {
+                Ok(SpotId::Uhrum__Annuna_Corridor__Save_Point)
+            }
             "Uhrum > Annuna Corridor > Statue" => Ok(SpotId::Uhrum__Annuna_Corridor__Statue),
-            "Uhrum > Annuna Corridor > Upper Ledge" => Ok(SpotId::Uhrum__Annuna_Corridor__Upper_Ledge),
-            "Uhrum > Annuna Corridor > Upper Platform" => Ok(SpotId::Uhrum__Annuna_Corridor__Upper_Platform),
-            "Uhrum > Annuna Corridor > Upper Trees" => Ok(SpotId::Uhrum__Annuna_Corridor__Upper_Trees),
-            "Uhrum > Annuna Corridor > Wall Remnant" => Ok(SpotId::Uhrum__Annuna_Corridor__Wall_Remnant),
+            "Uhrum > Annuna Corridor > Upper Ledge" => {
+                Ok(SpotId::Uhrum__Annuna_Corridor__Upper_Ledge)
+            }
+            "Uhrum > Annuna Corridor > Upper Platform" => {
+                Ok(SpotId::Uhrum__Annuna_Corridor__Upper_Platform)
+            }
+            "Uhrum > Annuna Corridor > Upper Trees" => {
+                Ok(SpotId::Uhrum__Annuna_Corridor__Upper_Trees)
+            }
+            "Uhrum > Annuna Corridor > Wall Remnant" => {
+                Ok(SpotId::Uhrum__Annuna_Corridor__Wall_Remnant)
+            }
             "Uhrum > Annuna Corridor > West 25" => Ok(SpotId::Uhrum__Annuna_Corridor__West_25),
             "Uhrum > Annuna Corridor > West 26" => Ok(SpotId::Uhrum__Annuna_Corridor__West_26),
-            "Uhrum > Artillery Practice > East 24" => Ok(SpotId::Uhrum__Artillery_Practice__East_24),
+            "Uhrum > Artillery Practice > East 24" => {
+                Ok(SpotId::Uhrum__Artillery_Practice__East_24)
+            }
             "Uhrum > East Lake > West 27" => Ok(SpotId::Uhrum__East_Lake__West_27),
             "Uhrum > East Lake > West 28" => Ok(SpotId::Uhrum__East_Lake__West_28),
             "Uhrum > Glitchy Corridor > East 27" => Ok(SpotId::Uhrum__Glitchy_Corridor__East_27),
@@ -2549,56 +6399,116 @@ impl std::str::FromStr for SpotId {
             "Uhrum > Save Room > Save Point" => Ok(SpotId::Uhrum__Save_Room__Save_Point),
             "Uhrum > Save Room > West" => Ok(SpotId::Uhrum__Save_Room__West),
             "Uhrum > Siege Corridor > Center Box" => Ok(SpotId::Uhrum__Siege_Corridor__Center_Box),
-            "Uhrum > Siege Corridor > Center East" => Ok(SpotId::Uhrum__Siege_Corridor__Center_East),
-            "Uhrum > Siege Corridor > Center Platform 1" => Ok(SpotId::Uhrum__Siege_Corridor__Center_Platform_1),
-            "Uhrum > Siege Corridor > Center Platform 3" => Ok(SpotId::Uhrum__Siege_Corridor__Center_Platform_3),
-            "Uhrum > Siege Corridor > Center Valley" => Ok(SpotId::Uhrum__Siege_Corridor__Center_Valley),
-            "Uhrum > Siege Corridor > Center West" => Ok(SpotId::Uhrum__Siege_Corridor__Center_West),
+            "Uhrum > Siege Corridor > Center East" => {
+                Ok(SpotId::Uhrum__Siege_Corridor__Center_East)
+            }
+            "Uhrum > Siege Corridor > Center Platform 1" => {
+                Ok(SpotId::Uhrum__Siege_Corridor__Center_Platform_1)
+            }
+            "Uhrum > Siege Corridor > Center Platform 3" => {
+                Ok(SpotId::Uhrum__Siege_Corridor__Center_Platform_3)
+            }
+            "Uhrum > Siege Corridor > Center Valley" => {
+                Ok(SpotId::Uhrum__Siege_Corridor__Center_Valley)
+            }
+            "Uhrum > Siege Corridor > Center West" => {
+                Ok(SpotId::Uhrum__Siege_Corridor__Center_West)
+            }
             "Uhrum > Siege Corridor > East 25" => Ok(SpotId::Uhrum__Siege_Corridor__East_25),
             "Uhrum > Siege Corridor > East Hill" => Ok(SpotId::Uhrum__Siege_Corridor__East_Hill),
-            "Uhrum > Siege Corridor > Mideast Hill" => Ok(SpotId::Uhrum__Siege_Corridor__Mideast_Hill),
-            "Uhrum > Siege Corridor > Mideast Tree" => Ok(SpotId::Uhrum__Siege_Corridor__Mideast_Tree),
-            "Uhrum > Siege Corridor > Northwest Door" => Ok(SpotId::Uhrum__Siege_Corridor__Northwest_Door),
-            "Uhrum > Siege Corridor > Northwest Platform" => Ok(SpotId::Uhrum__Siege_Corridor__Northwest_Platform),
+            "Uhrum > Siege Corridor > Mideast Hill" => {
+                Ok(SpotId::Uhrum__Siege_Corridor__Mideast_Hill)
+            }
+            "Uhrum > Siege Corridor > Mideast Tree" => {
+                Ok(SpotId::Uhrum__Siege_Corridor__Mideast_Tree)
+            }
+            "Uhrum > Siege Corridor > Northwest Door" => {
+                Ok(SpotId::Uhrum__Siege_Corridor__Northwest_Door)
+            }
+            "Uhrum > Siege Corridor > Northwest Platform" => {
+                Ok(SpotId::Uhrum__Siege_Corridor__Northwest_Platform)
+            }
             "Uhrum > Siege Corridor > Pond" => Ok(SpotId::Uhrum__Siege_Corridor__Pond),
-            "Uhrum > Siege Corridor > Upper Rock East" => Ok(SpotId::Uhrum__Siege_Corridor__Upper_Rock_East),
-            "Uhrum > Siege Corridor > Upper Rock Item" => Ok(SpotId::Uhrum__Siege_Corridor__Upper_Rock_Item),
-            "Uhrum > Siege Corridor > Upper Rock West" => Ok(SpotId::Uhrum__Siege_Corridor__Upper_Rock_West),
+            "Uhrum > Siege Corridor > Upper Rock East" => {
+                Ok(SpotId::Uhrum__Siege_Corridor__Upper_Rock_East)
+            }
+            "Uhrum > Siege Corridor > Upper Rock Item" => {
+                Ok(SpotId::Uhrum__Siege_Corridor__Upper_Rock_Item)
+            }
+            "Uhrum > Siege Corridor > Upper Rock West" => {
+                Ok(SpotId::Uhrum__Siege_Corridor__Upper_Rock_West)
+            }
             "Uhrum > Siege Corridor > West 26" => Ok(SpotId::Uhrum__Siege_Corridor__West_26),
-            "Uhrum > Siege Corridor > West Grassy Ledge" => Ok(SpotId::Uhrum__Siege_Corridor__West_Grassy_Ledge),
-            "Uhrum > Siege Corridor > West Greenery" => Ok(SpotId::Uhrum__Siege_Corridor__West_Greenery),
+            "Uhrum > Siege Corridor > West Grassy Ledge" => {
+                Ok(SpotId::Uhrum__Siege_Corridor__West_Grassy_Ledge)
+            }
+            "Uhrum > Siege Corridor > West Greenery" => {
+                Ok(SpotId::Uhrum__Siege_Corridor__West_Greenery)
+            }
             "Uhrum > Siege Corridor > West Loop" => Ok(SpotId::Uhrum__Siege_Corridor__West_Loop),
-            "Uhrum > Siege Corridor > West Middle Tree" => Ok(SpotId::Uhrum__Siege_Corridor__West_Middle_Tree),
-            "Uhrum > Siege Corridor > West Rocky Ledge" => Ok(SpotId::Uhrum__Siege_Corridor__West_Rocky_Ledge),
-            "Uhrum > Siege Corridor > Western Cache" => Ok(SpotId::Uhrum__Siege_Corridor__Western_Cache),
-            "Uhrum > Siege Corridor > Western Rock" => Ok(SpotId::Uhrum__Siege_Corridor__Western_Rock),
+            "Uhrum > Siege Corridor > West Middle Tree" => {
+                Ok(SpotId::Uhrum__Siege_Corridor__West_Middle_Tree)
+            }
+            "Uhrum > Siege Corridor > West Rocky Ledge" => {
+                Ok(SpotId::Uhrum__Siege_Corridor__West_Rocky_Ledge)
+            }
+            "Uhrum > Siege Corridor > Western Cache" => {
+                Ok(SpotId::Uhrum__Siege_Corridor__Western_Cache)
+            }
+            "Uhrum > Siege Corridor > Western Rock" => {
+                Ok(SpotId::Uhrum__Siege_Corridor__Western_Rock)
+            }
             "Uhrum > Tulip Tower > West 24" => Ok(SpotId::Uhrum__Tulip_Tower__West_24),
-            "Uhrum > Tulip Tower > West 24 in Mid-air" => Ok(SpotId::Uhrum__Tulip_Tower__West_24_in_Mid_air),
+            "Uhrum > Tulip Tower > West 24 in Mid-air" => {
+                Ok(SpotId::Uhrum__Tulip_Tower__West_24_in_Mid_air)
+            }
             "Uhrum > Waterfalls > Above Block" => Ok(SpotId::Uhrum__Waterfalls__Above_Block),
             "Uhrum > Waterfalls > Barrier East" => Ok(SpotId::Uhrum__Waterfalls__Barrier_East),
             "Uhrum > Waterfalls > Barrier West" => Ok(SpotId::Uhrum__Waterfalls__Barrier_West),
             "Uhrum > Waterfalls > Below Block" => Ok(SpotId::Uhrum__Waterfalls__Below_Block),
             "Uhrum > Waterfalls > Ceiling Cache" => Ok(SpotId::Uhrum__Waterfalls__Ceiling_Cache),
-            "Uhrum > Waterfalls > Ceiling Opening" => Ok(SpotId::Uhrum__Waterfalls__Ceiling_Opening),
-            "Uhrum > Waterfalls > Center Island East" => Ok(SpotId::Uhrum__Waterfalls__Center_Island_East),
-            "Uhrum > Waterfalls > Center Island West" => Ok(SpotId::Uhrum__Waterfalls__Center_Island_West),
+            "Uhrum > Waterfalls > Ceiling Opening" => {
+                Ok(SpotId::Uhrum__Waterfalls__Ceiling_Opening)
+            }
+            "Uhrum > Waterfalls > Center Island East" => {
+                Ok(SpotId::Uhrum__Waterfalls__Center_Island_East)
+            }
+            "Uhrum > Waterfalls > Center Island West" => {
+                Ok(SpotId::Uhrum__Waterfalls__Center_Island_West)
+            }
             "Uhrum > Waterfalls > East 24" => Ok(SpotId::Uhrum__Waterfalls__East_24),
-            "Uhrum > Waterfalls > East 24 in Mid-air" => Ok(SpotId::Uhrum__Waterfalls__East_24_in_Mid_air),
+            "Uhrum > Waterfalls > East 24 in Mid-air" => {
+                Ok(SpotId::Uhrum__Waterfalls__East_24_in_Mid_air)
+            }
             "Uhrum > Waterfalls > East 25" => Ok(SpotId::Uhrum__Waterfalls__East_25),
             "Uhrum > Waterfalls > East 26" => Ok(SpotId::Uhrum__Waterfalls__East_26),
             "Uhrum > Waterfalls > East 27" => Ok(SpotId::Uhrum__Waterfalls__East_27),
             "Uhrum > Waterfalls > East 28" => Ok(SpotId::Uhrum__Waterfalls__East_28),
             "Uhrum > Waterfalls > East Palm Tree" => Ok(SpotId::Uhrum__Waterfalls__East_Palm_Tree),
-            "Uhrum > Waterfalls > East Water Surface" => Ok(SpotId::Uhrum__Waterfalls__East_Water_Surface),
-            "Uhrum > Waterfalls > East Water's Edge" => Ok(SpotId::Uhrum__Waterfalls__East_Waters_Edge),
-            "Uhrum > Waterfalls > Green Middle Ledge" => Ok(SpotId::Uhrum__Waterfalls__Green_Middle_Ledge),
+            "Uhrum > Waterfalls > East Water Surface" => {
+                Ok(SpotId::Uhrum__Waterfalls__East_Water_Surface)
+            }
+            "Uhrum > Waterfalls > East Water's Edge" => {
+                Ok(SpotId::Uhrum__Waterfalls__East_Waters_Edge)
+            }
+            "Uhrum > Waterfalls > Green Middle Ledge" => {
+                Ok(SpotId::Uhrum__Waterfalls__Green_Middle_Ledge)
+            }
             "Uhrum > Waterfalls > High Platform" => Ok(SpotId::Uhrum__Waterfalls__High_Platform),
-            "Uhrum > Waterfalls > Island Water West" => Ok(SpotId::Uhrum__Waterfalls__Island_Water_West),
+            "Uhrum > Waterfalls > Island Water West" => {
+                Ok(SpotId::Uhrum__Waterfalls__Island_Water_West)
+            }
             "Uhrum > Waterfalls > Large Rock" => Ok(SpotId::Uhrum__Waterfalls__Large_Rock),
-            "Uhrum > Waterfalls > Ledge Above Palm" => Ok(SpotId::Uhrum__Waterfalls__Ledge_Above_Palm),
-            "Uhrum > Waterfalls > Lower East Platform" => Ok(SpotId::Uhrum__Waterfalls__Lower_East_Platform),
+            "Uhrum > Waterfalls > Ledge Above Palm" => {
+                Ok(SpotId::Uhrum__Waterfalls__Ledge_Above_Palm)
+            }
+            "Uhrum > Waterfalls > Lower East Platform" => {
+                Ok(SpotId::Uhrum__Waterfalls__Lower_East_Platform)
+            }
             "Uhrum > Waterfalls > Medium Rock" => Ok(SpotId::Uhrum__Waterfalls__Medium_Rock),
-            "Uhrum > Waterfalls > Northeast Ledge" => Ok(SpotId::Uhrum__Waterfalls__Northeast_Ledge),
+            "Uhrum > Waterfalls > Northeast Ledge" => {
+                Ok(SpotId::Uhrum__Waterfalls__Northeast_Ledge)
+            }
             "Uhrum > Waterfalls > Small Rock" => Ok(SpotId::Uhrum__Waterfalls__Small_Rock),
             "Uhrum > Waterfalls > Water Pillar" => Ok(SpotId::Uhrum__Waterfalls__Water_Pillar),
             "Uhrum > Waterfalls > Water Slope" => Ok(SpotId::Uhrum__Waterfalls__Water_Slope),
@@ -2607,257 +6517,1099 @@ impl std::str::FromStr for SpotId {
             "Uhrum > Waterfalls > West 27" => Ok(SpotId::Uhrum__Waterfalls__West_27),
             "Uhrum > Waterfalls > West Platform" => Ok(SpotId::Uhrum__Waterfalls__West_Platform),
             "Uhrum > Waterfalls > West Wall" => Ok(SpotId::Uhrum__Waterfalls__West_Wall),
-            "Uhrum > Waterfalls > West Water Ledge" => Ok(SpotId::Uhrum__Waterfalls__West_Water_Ledge),
-            "Uhrum > Waterfalls > West Water Nook" => Ok(SpotId::Uhrum__Waterfalls__West_Water_Nook),
-            "Uhrum > Waterfalls > West Water Surface" => Ok(SpotId::Uhrum__Waterfalls__West_Water_Surface),
-            "Uhrum > Waterfalls > West Water's Edge" => Ok(SpotId::Uhrum__Waterfalls__West_Waters_Edge),
-            "Uhrum > West Entrance > Clear Passage" => Ok(SpotId::Uhrum__West_Entrance__Clear_Passage),
+            "Uhrum > Waterfalls > West Water Ledge" => {
+                Ok(SpotId::Uhrum__Waterfalls__West_Water_Ledge)
+            }
+            "Uhrum > Waterfalls > West Water Nook" => {
+                Ok(SpotId::Uhrum__Waterfalls__West_Water_Nook)
+            }
+            "Uhrum > Waterfalls > West Water Surface" => {
+                Ok(SpotId::Uhrum__Waterfalls__West_Water_Surface)
+            }
+            "Uhrum > Waterfalls > West Water's Edge" => {
+                Ok(SpotId::Uhrum__Waterfalls__West_Waters_Edge)
+            }
+            "Uhrum > West Entrance > Clear Passage" => {
+                Ok(SpotId::Uhrum__West_Entrance__Clear_Passage)
+            }
             "Uhrum > West Entrance > East 26" => Ok(SpotId::Uhrum__West_Entrance__East_26),
             "Uhrum > West Entrance > East 28" => Ok(SpotId::Uhrum__West_Entrance__East_28),
             "Uhrum > West Entrance > Gate Switch" => Ok(SpotId::Uhrum__West_Entrance__Gate_Switch),
-            "Uhrum > West Entrance > Hidden Passage Entry" => Ok(SpotId::Uhrum__West_Entrance__Hidden_Passage_Entry),
-            "Uhrum > West Entrance > Hidden Passage West" => Ok(SpotId::Uhrum__West_Entrance__Hidden_Passage_West),
+            "Uhrum > West Entrance > Hidden Passage Entry" => {
+                Ok(SpotId::Uhrum__West_Entrance__Hidden_Passage_Entry)
+            }
+            "Uhrum > West Entrance > Hidden Passage West" => {
+                Ok(SpotId::Uhrum__West_Entrance__Hidden_Passage_West)
+            }
             "Uhrum > West Entrance > Inner Dais" => Ok(SpotId::Uhrum__West_Entrance__Inner_Dais),
-            "Uhrum > West Entrance > Lower Path Gap" => Ok(SpotId::Uhrum__West_Entrance__Lower_Path_Gap),
-            "Uhrum > West Entrance > Lower Path Rock" => Ok(SpotId::Uhrum__West_Entrance__Lower_Path_Rock),
-            "Uhrum > West Entrance > Lower Path Tree Ledge" => Ok(SpotId::Uhrum__West_Entrance__Lower_Path_Tree_Ledge),
-            "Uhrum > West Entrance > Lower Wall East" => Ok(SpotId::Uhrum__West_Entrance__Lower_Wall_East),
-            "Uhrum > West Entrance > Lower Wall West" => Ok(SpotId::Uhrum__West_Entrance__Lower_Wall_West),
-            "Uhrum > West Entrance > Middle West Ledge" => Ok(SpotId::Uhrum__West_Entrance__Middle_West_Ledge),
+            "Uhrum > West Entrance > Lower Path Gap" => {
+                Ok(SpotId::Uhrum__West_Entrance__Lower_Path_Gap)
+            }
+            "Uhrum > West Entrance > Lower Path Rock" => {
+                Ok(SpotId::Uhrum__West_Entrance__Lower_Path_Rock)
+            }
+            "Uhrum > West Entrance > Lower Path Tree Ledge" => {
+                Ok(SpotId::Uhrum__West_Entrance__Lower_Path_Tree_Ledge)
+            }
+            "Uhrum > West Entrance > Lower Wall East" => {
+                Ok(SpotId::Uhrum__West_Entrance__Lower_Wall_East)
+            }
+            "Uhrum > West Entrance > Lower Wall West" => {
+                Ok(SpotId::Uhrum__West_Entrance__Lower_Wall_West)
+            }
+            "Uhrum > West Entrance > Middle West Ledge" => {
+                Ok(SpotId::Uhrum__West_Entrance__Middle_West_Ledge)
+            }
             "Uhrum > West Entrance > Portal Exit" => Ok(SpotId::Uhrum__West_Entrance__Portal_Exit),
-            "Uhrum > West Entrance > Portal Stand" => Ok(SpotId::Uhrum__West_Entrance__Portal_Stand),
+            "Uhrum > West Entrance > Portal Stand" => {
+                Ok(SpotId::Uhrum__West_Entrance__Portal_Stand)
+            }
             "Uhrum > West Entrance > Sand" => Ok(SpotId::Uhrum__West_Entrance__Sand),
             "Uhrum > West Entrance > Save Point" => Ok(SpotId::Uhrum__West_Entrance__Save_Point),
-            "Uhrum > West Entrance > South Platform" => Ok(SpotId::Uhrum__West_Entrance__South_Platform),
-            "Uhrum > West Entrance > Southeast Tree" => Ok(SpotId::Uhrum__West_Entrance__Southeast_Tree),
-            "Uhrum > West Entrance > Top West Ledge" => Ok(SpotId::Uhrum__West_Entrance__Top_West_Ledge),
+            "Uhrum > West Entrance > South Platform" => {
+                Ok(SpotId::Uhrum__West_Entrance__South_Platform)
+            }
+            "Uhrum > West Entrance > Southeast Tree" => {
+                Ok(SpotId::Uhrum__West_Entrance__Southeast_Tree)
+            }
+            "Uhrum > West Entrance > Top West Ledge" => {
+                Ok(SpotId::Uhrum__West_Entrance__Top_West_Ledge)
+            }
             "Uhrum > West Entrance > Upper Fork" => Ok(SpotId::Uhrum__West_Entrance__Upper_Fork),
-            "Uhrum > West Entrance > Upper Wall East" => Ok(SpotId::Uhrum__West_Entrance__Upper_Wall_East),
-            "Uhrum > West Entrance > Upper Wall West" => Ok(SpotId::Uhrum__West_Entrance__Upper_Wall_West),
+            "Uhrum > West Entrance > Upper Wall East" => {
+                Ok(SpotId::Uhrum__West_Entrance__Upper_Wall_East)
+            }
+            "Uhrum > West Entrance > Upper Wall West" => {
+                Ok(SpotId::Uhrum__West_Entrance__Upper_Wall_West)
+            }
             "Uhrum > West Entrance > West 25" => Ok(SpotId::Uhrum__West_Entrance__West_25),
             "Uhrum > West Entrance > West 26" => Ok(SpotId::Uhrum__West_Entrance__West_26),
             "Uhrum > West Entrance > West 27" => Ok(SpotId::Uhrum__West_Entrance__West_27),
-            "Uhrum > West Entrance > West of Gate" => Ok(SpotId::Uhrum__West_Entrance__West_of_Gate),
+            "Uhrum > West Entrance > West of Gate" => {
+                Ok(SpotId::Uhrum__West_Entrance__West_of_Gate)
+            }
             _ => Err(format!("Could not recognize as a SpotId: {}", s)),
         }
     }
 }
 
-#[derive(Debug, PartialEq, Eq, Copy, Clone, Hash, Ord, PartialOrd, enum_map::Enum, serde_repr::Serialize_repr, serde_repr::Deserialize_repr)]
+#[derive(
+    Debug,
+    PartialEq,
+    Eq,
+    Copy,
+    Clone,
+    Hash,
+    Ord,
+    PartialOrd,
+    enum_map::Enum,
+    serde_repr::Serialize_repr,
+    serde_repr::Deserialize_repr,
+)]
 #[repr(u8)]
 pub enum LocationId {
-    Amagi__Liru_Room__Shrine__Item,    Amagi__Main_Area__Way_Off_To_The_Side__Item,    Amagi__West_Lake__Cavern_Eye__Item,    Amagi__West_Lake__Cavern_Rear_Pillar__Boss_Reward,    Amagi__West_Lake__Cavern_Refill_Station__Break_Wall,    Amagi__West_Lake__Cavern_Refill_Station__Defeat_MUS_A_M20,    Amagi__West_Lake__Cavern_Tear_Duct__Remote_Flask,    Amagi__West_Lake__Stronghold_Ceiling_Left__Knock_Down_Left_Boulder,    Amagi__West_Lake__Stronghold_Ceiling_Right__Knock_Down_Right_Boulder,    Amagi__West_Lake__Stronghold_Front_Door__Break_Wall,    Amagi__West_Lake__Stronghold_Front_Room__Break_Wall,    Amagi__West_Lake__Stronghold_Item__Break_Wall,    Amagi__West_Lake__Stronghold_Item__Item,    Amagi__West_Lake__Stronghold_Middle_Column__Break_Wall,    Amagi__West_Lake__Stronghold_Rear_Wall__Break_Left_Wall,    Amagi__West_Lake__Stronghold_Top__Remote_Urn,    Amagi__West_Lake__Surface_Wall_Left__Break_Wall,    Amagi__West_Lake__Surface_Wall_Right__Break_Wall,    Annuna__Mirror_Match__Below_Switch__Hit_Switch,    Annuna__Mirror_Match__East_26_Lower__Remote_Flask,    Annuna__Mirror_Match__East_26_Upper__Remote_Flask,    Annuna__Mirror_Match__Plinth__Item,    Annuna__Mirror_Match__Save_Point__Fight,    Annuna__Mirror_Match__Waving_Distance__Shockwave_Flask,    Annuna__West_Bridge__Plinth__Item,    Antarctica__Building_2__Behind_Boxes__Note,    Antarctica__Power_Room__Switch__Flip,    Antarctica__Shed__Interior__Shelf,    Ebih__Base_Camp__Left_Platform_Moved__Item_From_The_Side,    Ebih__Base_Camp__Top_Platform__Item,    Ebih__Boss_Room__Boss__Boss_Reward,    Ebih__Boss_Room__Boss__Fight_Alu,    Ebih__Boss_Room__Boss__Hack_Alu,    Ebih__Boss_Room__East_Ledge__Item,    Ebih__By_Garage__Crawlspace__Fragment,    Ebih__Drone_Room__Item__Urn,    Ebih__Drone_Room__Middle_Platform__Urn_Quick_Grab,    Ebih__Ebih_East__Corner__Urn,    Ebih__Ebih_East__Dispenser__Vend,    Ebih__Ebih_East__East_Ledge__Note,    Ebih__Ebih_East__Lower_Moving_Platform__Remote_Urn,    Ebih__Ebih_West__Alcove__Tablet,    Ebih__Ebih_West__Block_Left__Break_Block,    Ebih__Ebih_West__Block_Right__Break_Block,    Ebih__Grid_25_10_12__East_10__Remote_Bush,    Ebih__Grid_25_10_12__Hidden_Bush__Behind_Bush,    Ebih__Grid_25_2_6__Pit__Item,    Ebih__Grid_26_10_11__Ledge__Note,    Ebih__Vertical_Interchange__Switch__Activate_Switch,    Ebih__Waterfall__Alcove__Block_Left,    Ebih__Waterfall__Alcove__Block_Right,    Ebih__Waterfall__Alcove__Pedestal,    Ebih__Waterfall__Alcove_Left__Block_Left,    Ebih__Waterfall__Alcove_Right__Block_Right,    Ebih__Waterfall__Wall_Left__Break_Through_Wall,    Ebih__Waterfall__Wall_Left__Break_Wall,    Ebih__Waterfall__Wall_Right__Break_Through_Wall,    Ebih__Waterfall__Wall_Right__Break_Wall,    Ebih__Waterfall__Waterfall_Center_Center__Both_Blocks,    Giguna__Antechamber__Statue_Head__Tablet,    Giguna__Carnelian__Vault__Item,    Giguna__Clouds__Cache__Item,    Giguna__Dual_Path__Base_of_Wall__Break_Wall,    Giguna__Dual_Path__Base_of_Wall__Mist_into_Wall,    Giguna__Dual_Path__Below_Left_Switch__Remote_Switch,    Giguna__Dual_Path__Below_Right_Switch__Remote_Switch,    Giguna__Dual_Path__Left_Switch__Hit_Switch,    Giguna__Dual_Path__Right_Switch__Hit_Switch,    Giguna__Dual_Path__Wall_Secret__Health,    Giguna__East_Caverns__Hidden_Passage_Center__Hidden_Flask,    Giguna__Far_Corner__Grass__Obscured_Item,    Giguna__Gateway__Block_Left__Shockwave,    Giguna__Gateway__Block_Right__Shockwave,    Giguna__Gateway__Button__Hit_Switch,    Giguna__Gateway__Flask_Ledge__Item,    Giguna__Giguna_Base__Ruin__Item,    Giguna__Giguna_Base__Table__News,    Giguna__Giguna_Northeast__Door__Remote_Flask,    Giguna__Giguna_Northeast__Gate_Button__Open_Gate,    Giguna__Giguna_Northeast__Gate_Right__Remote_Button,    Giguna__Giguna_Northeast__Vault__Item,    Giguna__Gubi_Lair__Center_Platform__Boss_Reward,    Giguna__Gubi_Lair__Center_Platform__Fight_Gubi,    Giguna__Gubi_Lair__Center_Platform__Hack_Gubi,    Giguna__Gubi_Lair__Pedestal__Axe,    Giguna__Hard_Rock__Rock_Center__Tablet,    Giguna__Hard_Rock__Rock_Left__Enter_Rock_as_Mist,    Giguna__Hard_Rock__Rock_Left__Shockwave_Boulder,    Giguna__Hard_Rock__Rock_Right__Enter_Rock_as_Mist,    Giguna__Hard_Rock__Rock_Right__Shockwave_Boulder,    Giguna__Helipad__Tablet_Ledge__Tablet,    Giguna__Lamassu__Deposit__Flask,    Giguna__Ruins_Center__Tablet__Item,    Giguna__Ruins_East__Way_Up_High__Item,    Giguna__Ruins_Top__Flask__Flask,    Giguna__Ruins_Top__Small_Ledge__Shockwave_Flask,    Giguna__Wasteland__Door_Right__Health,    Giguna__Wasteland__Passage_Cache__Clear_Horizontal_Passage_Manually,    Giguna__Wasteland__Passage_Cache__Mist_through_Horizontal_Passage,    Giguna__Wasteland__Passage_East__Clear_Horizontal_Passage_Manually,    Giguna__Wasteland__Passage_East__Mist_through_Horizontal_Passage,    Giguna__West_Caverns__Bush__Item,    Giguna__West_Caverns__Cache__Item,    Giguna__West_Tower__Top__Tablet,    Giguna_Breach__Chimney__Cache__Flask,    Giguna_Breach__Cubby__Rocks__Health,    Giguna_Breach__Slingshot__Ravine__Urn,    Glacier__Apocalypse_Entry__Terminal__Escape,    Glacier__Boomerang_Room__Pedestal__Item,    Glacier__Boomerang_Room__Pedestal__Switch,    Glacier__Compass_Room__Center__Table,    Glacier__Ledge_Grab_Room__Cliff_Bottom__Quick_Grab,    Glacier__Ledge_Grab_Room__Pedestal__Item,    Glacier__The_Big_Drop__Water_Surface__Drown,    Glacier__Vertical_Room__Peak__Flask,    Glacier__Vertical_Room__Under_Switch__Switch,    Interior__Building_Interior__Corner__Urn,    Interior__Building_Interior__Entry__Remote_Urn,    Interior__Bunker_Interior__Desk__Note,    Interior__Ebih_Cave__Entry__Health,    Interior__Garage__Boxes__Under_Boxes,    Interior__Outpost_Interior__Bookshelf__Note,    Interior__Tent_Interior__Desk__Note,    Irikar__Abandoned_Room__Corner_Core__Core,    Irikar__Boss_Room__Bulls_Feet__Boss_Reward,    Irikar__Boss_Room__Bulls_Feet__Defeat_Gudam,    Irikar__Boss_Room__Bulls_Feet__Shockwave_Gudam,    Irikar__Boss_Room__Healthy_Rooftop__Health,    Irikar__East_Rooftops__Top_Rooftop__Tablet,    Irikar__Hub__Dagger_Altar__Weapon,    Irikar__Hub__Royal_Storage_By_Wall__Mist_into_Wall,    Irikar__Hub__Royal_Storage_By_Wall__Shockwave_Wall,    Irikar__Hub__Royal_Storage_in_Wall__Item,    Irikar__Hub__Sat_Tower_Top_Ledge__Tablet,    Irikar__Lamassu__Desk__Item,    Irikar__Sight_Room__Item_Pedestal__Urn,    Irikar_Breach__Gauntlet__Hidden_Path_Reward__Item,    Irikar_Breach__Hover_Room__Bottom__Item,    Irikar_Breach__Worm_Rave__Corner__Item,    Menu__Upgrade_Menu__Combat__Melee_Damage_1,    Menu__Upgrade_Menu__Combat__Melee_Damage_2,    Menu__Upgrade_Menu__Combat__Melee_Damage_3,    Menu__Upgrade_Menu__Combat__Melee_Speed_1,    Menu__Upgrade_Menu__Combat__Melee_Speed_2,    Menu__Upgrade_Menu__Combat__Melee_Speed_3,    Menu__Upgrade_Menu__Combat__Ranged_Damage_1,    Menu__Upgrade_Menu__Combat__Ranged_Damage_2,    Menu__Upgrade_Menu__Combat__Ranged_Damage_3,    Menu__Upgrade_Menu__Combat__Ranged_Speed_1,    Menu__Upgrade_Menu__Combat__Ranged_Speed_2,    Menu__Upgrade_Menu__Combat__Ranged_Speed_3,    Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_1,    Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_2,    Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_3,    Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_1,    Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_2,    Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_3,    Menu__Upgrade_Menu__Infection__Infection_Level_1,    Menu__Upgrade_Menu__Infection__Infection_Level_2,    Menu__Upgrade_Menu__Infection__Infection_Level_3,    Menu__Upgrade_Menu__Infection__Infection_Range_1,    Menu__Upgrade_Menu__Infection__Infection_Range_2,    Menu__Upgrade_Menu__Infection__Infection_Range_3,    Menu__Upgrade_Menu__Infection__Infection_Speed_1,    Menu__Upgrade_Menu__Infection__Infection_Speed_2,    Menu__Upgrade_Menu__Infection__Nano_Points_1,    Menu__Upgrade_Menu__Infection__Nano_Points_2,    Menu__Upgrade_Menu__Infection__Nano_Points_3,    Menu__Upgrade_Menu__Physiology__Health_Upgrade_1,    Menu__Upgrade_Menu__Physiology__Health_Upgrade_2,    Menu__Upgrade_Menu__Physiology__Health_Upgrade_3,    Menu__Upgrade_Menu__Physiology__Health_Upgrade_4,    Menu__Upgrade_Menu__Physiology__Health_Upgrade_5,    Menu__Upgrade_Menu__Physiology__Mist_Upgrade,    Uhrum__Annuna_Corridor__Block_East__Dislodge_Block,    Uhrum__Annuna_Corridor__Block_West__Dislodge_Block,    Uhrum__Annuna_Corridor__East_Cubby__Tablet,    Uhrum__Annuna_Corridor__Pedestal__Urn,    Uhrum__Annuna_Corridor__Statue__Item,    Uhrum__Annuna_Corridor__Upper_Trees__Remote_Urn,    Uhrum__Siege_Corridor__Center_Box__Box,    Uhrum__Siege_Corridor__Pond__Item,    Uhrum__Siege_Corridor__Upper_Rock_Item__Urn,    Uhrum__Siege_Corridor__Western_Cache__Core,    Uhrum__Waterfalls__Above_Block__Block,    Uhrum__Waterfalls__Barrier_East__Charge_through_Wall,    Uhrum__Waterfalls__Barrier_East__Mist_through_Wall,    Uhrum__Waterfalls__Barrier_East__Spin_through_Wall,    Uhrum__Waterfalls__Barrier_West__Charge_through_Wall,    Uhrum__Waterfalls__Barrier_West__Mist_through_Wall,    Uhrum__Waterfalls__Barrier_West__Spin_through_Wall,    Uhrum__Waterfalls__Below_Block__Shockwave_Block,    Uhrum__Waterfalls__Ceiling_Cache__Flask,    Uhrum__Waterfalls__East_26__Block,    Uhrum__Waterfalls__West_Water_Nook__Tablet,    Uhrum__West_Entrance__Gate_Switch__Open_Gate,    Uhrum__West_Entrance__Inner_Dais__Item,    Uhrum__West_Entrance__Lower_Wall_East__Charge_through_Wall,    Uhrum__West_Entrance__Lower_Wall_East__Mist_through_Wall,    Uhrum__West_Entrance__Lower_Wall_East__Spin_through_Wall,    Uhrum__West_Entrance__Lower_Wall_West__Charge_through_Wall,    Uhrum__West_Entrance__Lower_Wall_West__Mist_through_Wall,    Uhrum__West_Entrance__Lower_Wall_West__Spin_through_Wall,    Uhrum__West_Entrance__Sand__Refill,    Uhrum__West_Entrance__Upper_Wall_East__Charge_through_Wall,    Uhrum__West_Entrance__Upper_Wall_East__Mist_through_Wall,    Uhrum__West_Entrance__Upper_Wall_East__Spin_through_Wall,    Uhrum__West_Entrance__Upper_Wall_West__Mist_through_Wall,}
+    Amagi__Liru_Room__Shrine__Item,
+    Amagi__Main_Area__Way_Off_To_The_Side__Item,
+    Amagi__West_Lake__Cavern_Eye__Item,
+    Amagi__West_Lake__Cavern_Rear_Pillar__Boss_Reward,
+    Amagi__West_Lake__Cavern_Refill_Station__Break_Wall,
+    Amagi__West_Lake__Cavern_Refill_Station__Defeat_MUS_A_M20,
+    Amagi__West_Lake__Cavern_Tear_Duct__Remote_Flask,
+    Amagi__West_Lake__Stronghold_Ceiling_Left__Knock_Down_Left_Boulder,
+    Amagi__West_Lake__Stronghold_Ceiling_Right__Knock_Down_Right_Boulder,
+    Amagi__West_Lake__Stronghold_Front_Door__Break_Wall,
+    Amagi__West_Lake__Stronghold_Front_Room__Break_Wall,
+    Amagi__West_Lake__Stronghold_Item__Break_Wall,
+    Amagi__West_Lake__Stronghold_Item__Item,
+    Amagi__West_Lake__Stronghold_Middle_Column__Break_Wall,
+    Amagi__West_Lake__Stronghold_Rear_Wall__Break_Left_Wall,
+    Amagi__West_Lake__Stronghold_Top__Remote_Urn,
+    Amagi__West_Lake__Surface_Wall_Left__Break_Wall,
+    Amagi__West_Lake__Surface_Wall_Right__Break_Wall,
+    Annuna__Mirror_Match__Below_Switch__Hit_Switch,
+    Annuna__Mirror_Match__East_26_Lower__Remote_Flask,
+    Annuna__Mirror_Match__East_26_Upper__Remote_Flask,
+    Annuna__Mirror_Match__Plinth__Item,
+    Annuna__Mirror_Match__Save_Point__Fight,
+    Annuna__Mirror_Match__Waving_Distance__Shockwave_Flask,
+    Annuna__West_Bridge__Plinth__Item,
+    Antarctica__Building_2__Behind_Boxes__Note,
+    Antarctica__Power_Room__Switch__Flip,
+    Antarctica__Shed__Interior__Shelf,
+    Ebih__Base_Camp__Left_Platform_Moved__Item_From_The_Side,
+    Ebih__Base_Camp__Top_Platform__Item,
+    Ebih__Boss_Room__Boss__Boss_Reward,
+    Ebih__Boss_Room__Boss__Fight_Alu,
+    Ebih__Boss_Room__Boss__Hack_Alu,
+    Ebih__Boss_Room__East_Ledge__Item,
+    Ebih__By_Garage__Crawlspace__Fragment,
+    Ebih__Drone_Room__Item__Urn,
+    Ebih__Drone_Room__Middle_Platform__Urn_Quick_Grab,
+    Ebih__Ebih_East__Corner__Urn,
+    Ebih__Ebih_East__Dispenser__Vend,
+    Ebih__Ebih_East__East_Ledge__Note,
+    Ebih__Ebih_East__Lower_Moving_Platform__Remote_Urn,
+    Ebih__Ebih_West__Alcove__Tablet,
+    Ebih__Ebih_West__Block_Left__Break_Block,
+    Ebih__Ebih_West__Block_Right__Break_Block,
+    Ebih__Grid_25_10_12__East_10__Remote_Bush,
+    Ebih__Grid_25_10_12__Hidden_Bush__Behind_Bush,
+    Ebih__Grid_25_2_6__Pit__Item,
+    Ebih__Grid_26_10_11__Ledge__Note,
+    Ebih__Vertical_Interchange__Switch__Activate_Switch,
+    Ebih__Waterfall__Alcove__Block_Left,
+    Ebih__Waterfall__Alcove__Block_Right,
+    Ebih__Waterfall__Alcove__Pedestal,
+    Ebih__Waterfall__Alcove_Left__Block_Left,
+    Ebih__Waterfall__Alcove_Right__Block_Right,
+    Ebih__Waterfall__Wall_Left__Break_Through_Wall,
+    Ebih__Waterfall__Wall_Left__Break_Wall,
+    Ebih__Waterfall__Wall_Right__Break_Through_Wall,
+    Ebih__Waterfall__Wall_Right__Break_Wall,
+    Ebih__Waterfall__Waterfall_Center_Center__Both_Blocks,
+    Giguna__Antechamber__Statue_Head__Tablet,
+    Giguna__Carnelian__Vault__Item,
+    Giguna__Clouds__Cache__Item,
+    Giguna__Dual_Path__Base_of_Wall__Break_Wall,
+    Giguna__Dual_Path__Base_of_Wall__Mist_into_Wall,
+    Giguna__Dual_Path__Below_Left_Switch__Remote_Switch,
+    Giguna__Dual_Path__Below_Right_Switch__Remote_Switch,
+    Giguna__Dual_Path__Left_Switch__Hit_Switch,
+    Giguna__Dual_Path__Right_Switch__Hit_Switch,
+    Giguna__Dual_Path__Wall_Secret__Health,
+    Giguna__East_Caverns__Hidden_Passage_Center__Hidden_Flask,
+    Giguna__Far_Corner__Grass__Obscured_Item,
+    Giguna__Gateway__Block_Left__Shockwave,
+    Giguna__Gateway__Block_Right__Shockwave,
+    Giguna__Gateway__Button__Hit_Switch,
+    Giguna__Gateway__Flask_Ledge__Item,
+    Giguna__Giguna_Base__Ruin__Item,
+    Giguna__Giguna_Base__Table__News,
+    Giguna__Giguna_Northeast__Door__Remote_Flask,
+    Giguna__Giguna_Northeast__Gate_Button__Open_Gate,
+    Giguna__Giguna_Northeast__Gate_Right__Remote_Button,
+    Giguna__Giguna_Northeast__Vault__Item,
+    Giguna__Gubi_Lair__Center_Platform__Boss_Reward,
+    Giguna__Gubi_Lair__Center_Platform__Fight_Gubi,
+    Giguna__Gubi_Lair__Center_Platform__Hack_Gubi,
+    Giguna__Gubi_Lair__Pedestal__Axe,
+    Giguna__Hard_Rock__Rock_Center__Tablet,
+    Giguna__Hard_Rock__Rock_Left__Enter_Rock_as_Mist,
+    Giguna__Hard_Rock__Rock_Left__Shockwave_Boulder,
+    Giguna__Hard_Rock__Rock_Right__Enter_Rock_as_Mist,
+    Giguna__Hard_Rock__Rock_Right__Shockwave_Boulder,
+    Giguna__Helipad__Tablet_Ledge__Tablet,
+    Giguna__Lamassu__Deposit__Flask,
+    Giguna__Ruins_Center__Tablet__Item,
+    Giguna__Ruins_East__Way_Up_High__Item,
+    Giguna__Ruins_Top__Flask__Flask,
+    Giguna__Ruins_Top__Small_Ledge__Shockwave_Flask,
+    Giguna__Wasteland__Door_Right__Health,
+    Giguna__Wasteland__Passage_Cache__Clear_Horizontal_Passage_Manually,
+    Giguna__Wasteland__Passage_Cache__Mist_through_Horizontal_Passage,
+    Giguna__Wasteland__Passage_East__Clear_Horizontal_Passage_Manually,
+    Giguna__Wasteland__Passage_East__Mist_through_Horizontal_Passage,
+    Giguna__West_Caverns__Bush__Item,
+    Giguna__West_Caverns__Cache__Item,
+    Giguna__West_Tower__Top__Tablet,
+    Giguna_Breach__Chimney__Cache__Flask,
+    Giguna_Breach__Cubby__Rocks__Health,
+    Giguna_Breach__Slingshot__Ravine__Urn,
+    Glacier__Apocalypse_Entry__Terminal__Escape,
+    Glacier__Boomerang_Room__Pedestal__Item,
+    Glacier__Boomerang_Room__Pedestal__Switch,
+    Glacier__Compass_Room__Center__Table,
+    Glacier__Ledge_Grab_Room__Cliff_Bottom__Quick_Grab,
+    Glacier__Ledge_Grab_Room__Pedestal__Item,
+    Glacier__The_Big_Drop__Water_Surface__Drown,
+    Glacier__Vertical_Room__Peak__Flask,
+    Glacier__Vertical_Room__Under_Switch__Switch,
+    Interior__Building_Interior__Corner__Urn,
+    Interior__Building_Interior__Entry__Remote_Urn,
+    Interior__Bunker_Interior__Desk__Note,
+    Interior__Ebih_Cave__Entry__Health,
+    Interior__Garage__Boxes__Under_Boxes,
+    Interior__Outpost_Interior__Bookshelf__Note,
+    Interior__Tent_Interior__Desk__Note,
+    Irikar__Abandoned_Room__Corner_Core__Core,
+    Irikar__Boss_Room__Bulls_Feet__Boss_Reward,
+    Irikar__Boss_Room__Bulls_Feet__Defeat_Gudam,
+    Irikar__Boss_Room__Bulls_Feet__Shockwave_Gudam,
+    Irikar__Boss_Room__Healthy_Rooftop__Health,
+    Irikar__East_Rooftops__Top_Rooftop__Tablet,
+    Irikar__Hub__Dagger_Altar__Weapon,
+    Irikar__Hub__Royal_Storage_By_Wall__Mist_into_Wall,
+    Irikar__Hub__Royal_Storage_By_Wall__Shockwave_Wall,
+    Irikar__Hub__Royal_Storage_in_Wall__Item,
+    Irikar__Hub__Sat_Tower_Top_Ledge__Tablet,
+    Irikar__Lamassu__Desk__Item,
+    Irikar__Sight_Room__Item_Pedestal__Urn,
+    Irikar_Breach__Gauntlet__Hidden_Path_Reward__Item,
+    Irikar_Breach__Hover_Room__Bottom__Item,
+    Irikar_Breach__Worm_Rave__Corner__Item,
+    Menu__Upgrade_Menu__Combat__Melee_Damage_1,
+    Menu__Upgrade_Menu__Combat__Melee_Damage_2,
+    Menu__Upgrade_Menu__Combat__Melee_Damage_3,
+    Menu__Upgrade_Menu__Combat__Melee_Speed_1,
+    Menu__Upgrade_Menu__Combat__Melee_Speed_2,
+    Menu__Upgrade_Menu__Combat__Melee_Speed_3,
+    Menu__Upgrade_Menu__Combat__Ranged_Damage_1,
+    Menu__Upgrade_Menu__Combat__Ranged_Damage_2,
+    Menu__Upgrade_Menu__Combat__Ranged_Damage_3,
+    Menu__Upgrade_Menu__Combat__Ranged_Speed_1,
+    Menu__Upgrade_Menu__Combat__Ranged_Speed_2,
+    Menu__Upgrade_Menu__Combat__Ranged_Speed_3,
+    Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_1,
+    Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_2,
+    Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_3,
+    Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_1,
+    Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_2,
+    Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_3,
+    Menu__Upgrade_Menu__Infection__Infection_Level_1,
+    Menu__Upgrade_Menu__Infection__Infection_Level_2,
+    Menu__Upgrade_Menu__Infection__Infection_Level_3,
+    Menu__Upgrade_Menu__Infection__Infection_Range_1,
+    Menu__Upgrade_Menu__Infection__Infection_Range_2,
+    Menu__Upgrade_Menu__Infection__Infection_Range_3,
+    Menu__Upgrade_Menu__Infection__Infection_Speed_1,
+    Menu__Upgrade_Menu__Infection__Infection_Speed_2,
+    Menu__Upgrade_Menu__Infection__Nano_Points_1,
+    Menu__Upgrade_Menu__Infection__Nano_Points_2,
+    Menu__Upgrade_Menu__Infection__Nano_Points_3,
+    Menu__Upgrade_Menu__Physiology__Health_Upgrade_1,
+    Menu__Upgrade_Menu__Physiology__Health_Upgrade_2,
+    Menu__Upgrade_Menu__Physiology__Health_Upgrade_3,
+    Menu__Upgrade_Menu__Physiology__Health_Upgrade_4,
+    Menu__Upgrade_Menu__Physiology__Health_Upgrade_5,
+    Menu__Upgrade_Menu__Physiology__Mist_Upgrade,
+    Uhrum__Annuna_Corridor__Block_East__Dislodge_Block,
+    Uhrum__Annuna_Corridor__Block_West__Dislodge_Block,
+    Uhrum__Annuna_Corridor__East_Cubby__Tablet,
+    Uhrum__Annuna_Corridor__Pedestal__Urn,
+    Uhrum__Annuna_Corridor__Statue__Item,
+    Uhrum__Annuna_Corridor__Upper_Trees__Remote_Urn,
+    Uhrum__Siege_Corridor__Center_Box__Box,
+    Uhrum__Siege_Corridor__Pond__Item,
+    Uhrum__Siege_Corridor__Upper_Rock_Item__Urn,
+    Uhrum__Siege_Corridor__Western_Cache__Core,
+    Uhrum__Waterfalls__Above_Block__Block,
+    Uhrum__Waterfalls__Barrier_East__Charge_through_Wall,
+    Uhrum__Waterfalls__Barrier_East__Mist_through_Wall,
+    Uhrum__Waterfalls__Barrier_East__Spin_through_Wall,
+    Uhrum__Waterfalls__Barrier_West__Charge_through_Wall,
+    Uhrum__Waterfalls__Barrier_West__Mist_through_Wall,
+    Uhrum__Waterfalls__Barrier_West__Spin_through_Wall,
+    Uhrum__Waterfalls__Below_Block__Shockwave_Block,
+    Uhrum__Waterfalls__Ceiling_Cache__Flask,
+    Uhrum__Waterfalls__East_26__Block,
+    Uhrum__Waterfalls__West_Water_Nook__Tablet,
+    Uhrum__West_Entrance__Gate_Switch__Open_Gate,
+    Uhrum__West_Entrance__Inner_Dais__Item,
+    Uhrum__West_Entrance__Lower_Wall_East__Charge_through_Wall,
+    Uhrum__West_Entrance__Lower_Wall_East__Mist_through_Wall,
+    Uhrum__West_Entrance__Lower_Wall_East__Spin_through_Wall,
+    Uhrum__West_Entrance__Lower_Wall_West__Charge_through_Wall,
+    Uhrum__West_Entrance__Lower_Wall_West__Mist_through_Wall,
+    Uhrum__West_Entrance__Lower_Wall_West__Spin_through_Wall,
+    Uhrum__West_Entrance__Sand__Refill,
+    Uhrum__West_Entrance__Upper_Wall_East__Charge_through_Wall,
+    Uhrum__West_Entrance__Upper_Wall_East__Mist_through_Wall,
+    Uhrum__West_Entrance__Upper_Wall_East__Spin_through_Wall,
+    Uhrum__West_Entrance__Upper_Wall_West__Mist_through_Wall,
+}
 impl fmt::Display for LocationId {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         match self {
-            LocationId::Amagi__Liru_Room__Shrine__Item => write!(f, "{}", "Amagi > Liru Room > Shrine > Item"),
-            LocationId::Amagi__Main_Area__Way_Off_To_The_Side__Item => write!(f, "{}", "Amagi > Main Area > Way Off To The Side > Item"),
-            LocationId::Amagi__West_Lake__Cavern_Eye__Item => write!(f, "{}", "Amagi > West Lake > Cavern Eye > Item"),
-            LocationId::Amagi__West_Lake__Cavern_Rear_Pillar__Boss_Reward => write!(f, "{}", "Amagi > West Lake > Cavern Rear Pillar > Boss Reward"),
-            LocationId::Amagi__West_Lake__Cavern_Refill_Station__Break_Wall => write!(f, "{}", "Amagi > West Lake > Cavern Refill Station > Break Wall"),
-            LocationId::Amagi__West_Lake__Cavern_Refill_Station__Defeat_MUS_A_M20 => write!(f, "{}", "Amagi > West Lake > Cavern Refill Station > Defeat MUS A M20"),
-            LocationId::Amagi__West_Lake__Cavern_Tear_Duct__Remote_Flask => write!(f, "{}", "Amagi > West Lake > Cavern Tear Duct > Remote Flask"),
-            LocationId::Amagi__West_Lake__Stronghold_Ceiling_Left__Knock_Down_Left_Boulder => write!(f, "{}", "Amagi > West Lake > Stronghold Ceiling Left > Knock Down Left Boulder"),
-            LocationId::Amagi__West_Lake__Stronghold_Ceiling_Right__Knock_Down_Right_Boulder => write!(f, "{}", "Amagi > West Lake > Stronghold Ceiling Right > Knock Down Right Boulder"),
-            LocationId::Amagi__West_Lake__Stronghold_Front_Door__Break_Wall => write!(f, "{}", "Amagi > West Lake > Stronghold Front Door > Break Wall"),
-            LocationId::Amagi__West_Lake__Stronghold_Front_Room__Break_Wall => write!(f, "{}", "Amagi > West Lake > Stronghold Front Room > Break Wall"),
-            LocationId::Amagi__West_Lake__Stronghold_Item__Break_Wall => write!(f, "{}", "Amagi > West Lake > Stronghold Item > Break Wall"),
-            LocationId::Amagi__West_Lake__Stronghold_Item__Item => write!(f, "{}", "Amagi > West Lake > Stronghold Item > Item"),
-            LocationId::Amagi__West_Lake__Stronghold_Middle_Column__Break_Wall => write!(f, "{}", "Amagi > West Lake > Stronghold Middle Column > Break Wall"),
-            LocationId::Amagi__West_Lake__Stronghold_Rear_Wall__Break_Left_Wall => write!(f, "{}", "Amagi > West Lake > Stronghold Rear Wall > Break Left Wall"),
-            LocationId::Amagi__West_Lake__Stronghold_Top__Remote_Urn => write!(f, "{}", "Amagi > West Lake > Stronghold Top > Remote Urn"),
-            LocationId::Amagi__West_Lake__Surface_Wall_Left__Break_Wall => write!(f, "{}", "Amagi > West Lake > Surface Wall Left > Break Wall"),
-            LocationId::Amagi__West_Lake__Surface_Wall_Right__Break_Wall => write!(f, "{}", "Amagi > West Lake > Surface Wall Right > Break Wall"),
-            LocationId::Annuna__Mirror_Match__Below_Switch__Hit_Switch => write!(f, "{}", "Annuna > Mirror Match > Below Switch > Hit Switch"),
-            LocationId::Annuna__Mirror_Match__East_26_Lower__Remote_Flask => write!(f, "{}", "Annuna > Mirror Match > East 26 Lower > Remote Flask"),
-            LocationId::Annuna__Mirror_Match__East_26_Upper__Remote_Flask => write!(f, "{}", "Annuna > Mirror Match > East 26 Upper > Remote Flask"),
-            LocationId::Annuna__Mirror_Match__Plinth__Item => write!(f, "{}", "Annuna > Mirror Match > Plinth > Item"),
-            LocationId::Annuna__Mirror_Match__Save_Point__Fight => write!(f, "{}", "Annuna > Mirror Match > Save Point > Fight"),
-            LocationId::Annuna__Mirror_Match__Waving_Distance__Shockwave_Flask => write!(f, "{}", "Annuna > Mirror Match > Waving Distance > Shockwave Flask"),
-            LocationId::Annuna__West_Bridge__Plinth__Item => write!(f, "{}", "Annuna > West Bridge > Plinth > Item"),
-            LocationId::Antarctica__Building_2__Behind_Boxes__Note => write!(f, "{}", "Antarctica > Building 2 > Behind Boxes > Note"),
-            LocationId::Antarctica__Power_Room__Switch__Flip => write!(f, "{}", "Antarctica > Power Room > Switch > Flip"),
-            LocationId::Antarctica__Shed__Interior__Shelf => write!(f, "{}", "Antarctica > Shed > Interior > Shelf"),
-            LocationId::Ebih__Base_Camp__Left_Platform_Moved__Item_From_The_Side => write!(f, "{}", "Ebih > Base Camp > Left Platform Moved > Item From The Side"),
-            LocationId::Ebih__Base_Camp__Top_Platform__Item => write!(f, "{}", "Ebih > Base Camp > Top Platform > Item"),
-            LocationId::Ebih__Boss_Room__Boss__Boss_Reward => write!(f, "{}", "Ebih > Boss Room > Boss > Boss Reward"),
-            LocationId::Ebih__Boss_Room__Boss__Fight_Alu => write!(f, "{}", "Ebih > Boss Room > Boss > Fight Alu"),
-            LocationId::Ebih__Boss_Room__Boss__Hack_Alu => write!(f, "{}", "Ebih > Boss Room > Boss > Hack Alu"),
-            LocationId::Ebih__Boss_Room__East_Ledge__Item => write!(f, "{}", "Ebih > Boss Room > East Ledge > Item"),
-            LocationId::Ebih__By_Garage__Crawlspace__Fragment => write!(f, "{}", "Ebih > By Garage > Crawlspace > Fragment"),
-            LocationId::Ebih__Drone_Room__Item__Urn => write!(f, "{}", "Ebih > Drone Room > Item > Urn"),
-            LocationId::Ebih__Drone_Room__Middle_Platform__Urn_Quick_Grab => write!(f, "{}", "Ebih > Drone Room > Middle Platform > Urn Quick Grab"),
-            LocationId::Ebih__Ebih_East__Corner__Urn => write!(f, "{}", "Ebih > Ebih East > Corner > Urn"),
-            LocationId::Ebih__Ebih_East__Dispenser__Vend => write!(f, "{}", "Ebih > Ebih East > Dispenser > Vend"),
-            LocationId::Ebih__Ebih_East__East_Ledge__Note => write!(f, "{}", "Ebih > Ebih East > East Ledge > Note"),
-            LocationId::Ebih__Ebih_East__Lower_Moving_Platform__Remote_Urn => write!(f, "{}", "Ebih > Ebih East > Lower Moving Platform > Remote Urn"),
-            LocationId::Ebih__Ebih_West__Alcove__Tablet => write!(f, "{}", "Ebih > Ebih West > Alcove > Tablet"),
-            LocationId::Ebih__Ebih_West__Block_Left__Break_Block => write!(f, "{}", "Ebih > Ebih West > Block Left > Break Block"),
-            LocationId::Ebih__Ebih_West__Block_Right__Break_Block => write!(f, "{}", "Ebih > Ebih West > Block Right > Break Block"),
-            LocationId::Ebih__Grid_25_10_12__East_10__Remote_Bush => write!(f, "{}", "Ebih > Grid 25,10-12 > East 10 > Remote Bush"),
-            LocationId::Ebih__Grid_25_10_12__Hidden_Bush__Behind_Bush => write!(f, "{}", "Ebih > Grid 25,10-12 > Hidden Bush > Behind Bush"),
-            LocationId::Ebih__Grid_25_2_6__Pit__Item => write!(f, "{}", "Ebih > Grid 25,2-6 > Pit > Item"),
-            LocationId::Ebih__Grid_26_10_11__Ledge__Note => write!(f, "{}", "Ebih > Grid 26,10-11 > Ledge > Note"),
-            LocationId::Ebih__Vertical_Interchange__Switch__Activate_Switch => write!(f, "{}", "Ebih > Vertical Interchange > Switch > Activate Switch"),
-            LocationId::Ebih__Waterfall__Alcove__Block_Left => write!(f, "{}", "Ebih > Waterfall > Alcove > Block Left"),
-            LocationId::Ebih__Waterfall__Alcove__Block_Right => write!(f, "{}", "Ebih > Waterfall > Alcove > Block Right"),
-            LocationId::Ebih__Waterfall__Alcove__Pedestal => write!(f, "{}", "Ebih > Waterfall > Alcove > Pedestal"),
-            LocationId::Ebih__Waterfall__Alcove_Left__Block_Left => write!(f, "{}", "Ebih > Waterfall > Alcove Left > Block Left"),
-            LocationId::Ebih__Waterfall__Alcove_Right__Block_Right => write!(f, "{}", "Ebih > Waterfall > Alcove Right > Block Right"),
-            LocationId::Ebih__Waterfall__Wall_Left__Break_Through_Wall => write!(f, "{}", "Ebih > Waterfall > Wall Left > Break Through Wall"),
-            LocationId::Ebih__Waterfall__Wall_Left__Break_Wall => write!(f, "{}", "Ebih > Waterfall > Wall Left > Break Wall"),
-            LocationId::Ebih__Waterfall__Wall_Right__Break_Through_Wall => write!(f, "{}", "Ebih > Waterfall > Wall Right > Break Through Wall"),
-            LocationId::Ebih__Waterfall__Wall_Right__Break_Wall => write!(f, "{}", "Ebih > Waterfall > Wall Right > Break Wall"),
-            LocationId::Ebih__Waterfall__Waterfall_Center_Center__Both_Blocks => write!(f, "{}", "Ebih > Waterfall > Waterfall Center Center > Both Blocks"),
-            LocationId::Giguna__Antechamber__Statue_Head__Tablet => write!(f, "{}", "Giguna > Antechamber > Statue Head > Tablet"),
-            LocationId::Giguna__Carnelian__Vault__Item => write!(f, "{}", "Giguna > Carnelian > Vault > Item"),
-            LocationId::Giguna__Clouds__Cache__Item => write!(f, "{}", "Giguna > Clouds > Cache > Item"),
-            LocationId::Giguna__Dual_Path__Base_of_Wall__Break_Wall => write!(f, "{}", "Giguna > Dual Path > Base of Wall > Break Wall"),
-            LocationId::Giguna__Dual_Path__Base_of_Wall__Mist_into_Wall => write!(f, "{}", "Giguna > Dual Path > Base of Wall > Mist into Wall"),
-            LocationId::Giguna__Dual_Path__Below_Left_Switch__Remote_Switch => write!(f, "{}", "Giguna > Dual Path > Below Left Switch > Remote Switch"),
-            LocationId::Giguna__Dual_Path__Below_Right_Switch__Remote_Switch => write!(f, "{}", "Giguna > Dual Path > Below Right Switch > Remote Switch"),
-            LocationId::Giguna__Dual_Path__Left_Switch__Hit_Switch => write!(f, "{}", "Giguna > Dual Path > Left Switch > Hit Switch"),
-            LocationId::Giguna__Dual_Path__Right_Switch__Hit_Switch => write!(f, "{}", "Giguna > Dual Path > Right Switch > Hit Switch"),
-            LocationId::Giguna__Dual_Path__Wall_Secret__Health => write!(f, "{}", "Giguna > Dual Path > Wall Secret > Health"),
-            LocationId::Giguna__East_Caverns__Hidden_Passage_Center__Hidden_Flask => write!(f, "{}", "Giguna > East Caverns > Hidden Passage Center > Hidden Flask"),
-            LocationId::Giguna__Far_Corner__Grass__Obscured_Item => write!(f, "{}", "Giguna > Far Corner > Grass > Obscured Item"),
-            LocationId::Giguna__Gateway__Block_Left__Shockwave => write!(f, "{}", "Giguna > Gateway > Block Left > Shockwave"),
-            LocationId::Giguna__Gateway__Block_Right__Shockwave => write!(f, "{}", "Giguna > Gateway > Block Right > Shockwave"),
-            LocationId::Giguna__Gateway__Button__Hit_Switch => write!(f, "{}", "Giguna > Gateway > Button > Hit Switch"),
-            LocationId::Giguna__Gateway__Flask_Ledge__Item => write!(f, "{}", "Giguna > Gateway > Flask Ledge > Item"),
-            LocationId::Giguna__Giguna_Base__Ruin__Item => write!(f, "{}", "Giguna > Giguna Base > Ruin > Item"),
-            LocationId::Giguna__Giguna_Base__Table__News => write!(f, "{}", "Giguna > Giguna Base > Table > News"),
-            LocationId::Giguna__Giguna_Northeast__Door__Remote_Flask => write!(f, "{}", "Giguna > Giguna Northeast > Door > Remote Flask"),
-            LocationId::Giguna__Giguna_Northeast__Gate_Button__Open_Gate => write!(f, "{}", "Giguna > Giguna Northeast > Gate Button > Open Gate"),
-            LocationId::Giguna__Giguna_Northeast__Gate_Right__Remote_Button => write!(f, "{}", "Giguna > Giguna Northeast > Gate Right > Remote Button"),
-            LocationId::Giguna__Giguna_Northeast__Vault__Item => write!(f, "{}", "Giguna > Giguna Northeast > Vault > Item"),
-            LocationId::Giguna__Gubi_Lair__Center_Platform__Boss_Reward => write!(f, "{}", "Giguna > Gubi Lair > Center Platform > Boss Reward"),
-            LocationId::Giguna__Gubi_Lair__Center_Platform__Fight_Gubi => write!(f, "{}", "Giguna > Gubi Lair > Center Platform > Fight Gubi"),
-            LocationId::Giguna__Gubi_Lair__Center_Platform__Hack_Gubi => write!(f, "{}", "Giguna > Gubi Lair > Center Platform > Hack Gubi"),
-            LocationId::Giguna__Gubi_Lair__Pedestal__Axe => write!(f, "{}", "Giguna > Gubi Lair > Pedestal > Axe"),
-            LocationId::Giguna__Hard_Rock__Rock_Center__Tablet => write!(f, "{}", "Giguna > Hard Rock > Rock Center > Tablet"),
-            LocationId::Giguna__Hard_Rock__Rock_Left__Enter_Rock_as_Mist => write!(f, "{}", "Giguna > Hard Rock > Rock Left > Enter Rock as Mist"),
-            LocationId::Giguna__Hard_Rock__Rock_Left__Shockwave_Boulder => write!(f, "{}", "Giguna > Hard Rock > Rock Left > Shockwave Boulder"),
-            LocationId::Giguna__Hard_Rock__Rock_Right__Enter_Rock_as_Mist => write!(f, "{}", "Giguna > Hard Rock > Rock Right > Enter Rock as Mist"),
-            LocationId::Giguna__Hard_Rock__Rock_Right__Shockwave_Boulder => write!(f, "{}", "Giguna > Hard Rock > Rock Right > Shockwave Boulder"),
-            LocationId::Giguna__Helipad__Tablet_Ledge__Tablet => write!(f, "{}", "Giguna > Helipad > Tablet Ledge > Tablet"),
-            LocationId::Giguna__Lamassu__Deposit__Flask => write!(f, "{}", "Giguna > Lamassu > Deposit > Flask"),
-            LocationId::Giguna__Ruins_Center__Tablet__Item => write!(f, "{}", "Giguna > Ruins Center > Tablet > Item"),
-            LocationId::Giguna__Ruins_East__Way_Up_High__Item => write!(f, "{}", "Giguna > Ruins East > Way Up High > Item"),
-            LocationId::Giguna__Ruins_Top__Flask__Flask => write!(f, "{}", "Giguna > Ruins Top > Flask > Flask"),
-            LocationId::Giguna__Ruins_Top__Small_Ledge__Shockwave_Flask => write!(f, "{}", "Giguna > Ruins Top > Small Ledge > Shockwave Flask"),
-            LocationId::Giguna__Wasteland__Door_Right__Health => write!(f, "{}", "Giguna > Wasteland > Door Right > Health"),
-            LocationId::Giguna__Wasteland__Passage_Cache__Clear_Horizontal_Passage_Manually => write!(f, "{}", "Giguna > Wasteland > Passage Cache > Clear Horizontal Passage Manually"),
-            LocationId::Giguna__Wasteland__Passage_Cache__Mist_through_Horizontal_Passage => write!(f, "{}", "Giguna > Wasteland > Passage Cache > Mist through Horizontal Passage"),
-            LocationId::Giguna__Wasteland__Passage_East__Clear_Horizontal_Passage_Manually => write!(f, "{}", "Giguna > Wasteland > Passage East > Clear Horizontal Passage Manually"),
-            LocationId::Giguna__Wasteland__Passage_East__Mist_through_Horizontal_Passage => write!(f, "{}", "Giguna > Wasteland > Passage East > Mist through Horizontal Passage"),
-            LocationId::Giguna__West_Caverns__Bush__Item => write!(f, "{}", "Giguna > West Caverns > Bush > Item"),
-            LocationId::Giguna__West_Caverns__Cache__Item => write!(f, "{}", "Giguna > West Caverns > Cache > Item"),
-            LocationId::Giguna__West_Tower__Top__Tablet => write!(f, "{}", "Giguna > West Tower > Top > Tablet"),
-            LocationId::Giguna_Breach__Chimney__Cache__Flask => write!(f, "{}", "Giguna Breach > Chimney > Cache > Flask"),
-            LocationId::Giguna_Breach__Cubby__Rocks__Health => write!(f, "{}", "Giguna Breach > Cubby > Rocks > Health"),
-            LocationId::Giguna_Breach__Slingshot__Ravine__Urn => write!(f, "{}", "Giguna Breach > Slingshot > Ravine > Urn"),
-            LocationId::Glacier__Apocalypse_Entry__Terminal__Escape => write!(f, "{}", "Glacier > Apocalypse Entry > Terminal > Escape"),
-            LocationId::Glacier__Boomerang_Room__Pedestal__Item => write!(f, "{}", "Glacier > Boomerang Room > Pedestal > Item"),
-            LocationId::Glacier__Boomerang_Room__Pedestal__Switch => write!(f, "{}", "Glacier > Boomerang Room > Pedestal > Switch"),
-            LocationId::Glacier__Compass_Room__Center__Table => write!(f, "{}", "Glacier > Compass Room > Center > Table"),
-            LocationId::Glacier__Ledge_Grab_Room__Cliff_Bottom__Quick_Grab => write!(f, "{}", "Glacier > Ledge Grab Room > Cliff Bottom > Quick Grab"),
-            LocationId::Glacier__Ledge_Grab_Room__Pedestal__Item => write!(f, "{}", "Glacier > Ledge Grab Room > Pedestal > Item"),
-            LocationId::Glacier__The_Big_Drop__Water_Surface__Drown => write!(f, "{}", "Glacier > The Big Drop > Water Surface > Drown"),
-            LocationId::Glacier__Vertical_Room__Peak__Flask => write!(f, "{}", "Glacier > Vertical Room > Peak > Flask"),
-            LocationId::Glacier__Vertical_Room__Under_Switch__Switch => write!(f, "{}", "Glacier > Vertical Room > Under Switch > Switch"),
-            LocationId::Interior__Building_Interior__Corner__Urn => write!(f, "{}", "Interior > Building Interior > Corner > Urn"),
-            LocationId::Interior__Building_Interior__Entry__Remote_Urn => write!(f, "{}", "Interior > Building Interior > Entry > Remote Urn"),
-            LocationId::Interior__Bunker_Interior__Desk__Note => write!(f, "{}", "Interior > Bunker Interior > Desk > Note"),
-            LocationId::Interior__Ebih_Cave__Entry__Health => write!(f, "{}", "Interior > Ebih Cave > Entry > Health"),
-            LocationId::Interior__Garage__Boxes__Under_Boxes => write!(f, "{}", "Interior > Garage > Boxes > Under Boxes"),
-            LocationId::Interior__Outpost_Interior__Bookshelf__Note => write!(f, "{}", "Interior > Outpost Interior > Bookshelf > Note"),
-            LocationId::Interior__Tent_Interior__Desk__Note => write!(f, "{}", "Interior > Tent Interior > Desk > Note"),
-            LocationId::Irikar__Abandoned_Room__Corner_Core__Core => write!(f, "{}", "Irikar > Abandoned Room > Corner Core > Core"),
-            LocationId::Irikar__Boss_Room__Bulls_Feet__Boss_Reward => write!(f, "{}", "Irikar > Boss Room > Bull's Feet > Boss Reward"),
-            LocationId::Irikar__Boss_Room__Bulls_Feet__Defeat_Gudam => write!(f, "{}", "Irikar > Boss Room > Bull's Feet > Defeat Gudam"),
-            LocationId::Irikar__Boss_Room__Bulls_Feet__Shockwave_Gudam => write!(f, "{}", "Irikar > Boss Room > Bull's Feet > Shockwave Gudam"),
-            LocationId::Irikar__Boss_Room__Healthy_Rooftop__Health => write!(f, "{}", "Irikar > Boss Room > Healthy Rooftop > Health"),
-            LocationId::Irikar__East_Rooftops__Top_Rooftop__Tablet => write!(f, "{}", "Irikar > East Rooftops > Top Rooftop > Tablet"),
-            LocationId::Irikar__Hub__Dagger_Altar__Weapon => write!(f, "{}", "Irikar > Hub > Dagger Altar > Weapon"),
-            LocationId::Irikar__Hub__Royal_Storage_By_Wall__Mist_into_Wall => write!(f, "{}", "Irikar > Hub > Royal Storage By Wall > Mist into Wall"),
-            LocationId::Irikar__Hub__Royal_Storage_By_Wall__Shockwave_Wall => write!(f, "{}", "Irikar > Hub > Royal Storage By Wall > Shockwave Wall"),
-            LocationId::Irikar__Hub__Royal_Storage_in_Wall__Item => write!(f, "{}", "Irikar > Hub > Royal Storage in Wall > Item"),
-            LocationId::Irikar__Hub__Sat_Tower_Top_Ledge__Tablet => write!(f, "{}", "Irikar > Hub > Sat Tower Top Ledge > Tablet"),
-            LocationId::Irikar__Lamassu__Desk__Item => write!(f, "{}", "Irikar > Lamassu > Desk > Item"),
-            LocationId::Irikar__Sight_Room__Item_Pedestal__Urn => write!(f, "{}", "Irikar > Sight Room > Item Pedestal > Urn"),
-            LocationId::Irikar_Breach__Gauntlet__Hidden_Path_Reward__Item => write!(f, "{}", "Irikar Breach > Gauntlet > Hidden Path Reward > Item"),
-            LocationId::Irikar_Breach__Hover_Room__Bottom__Item => write!(f, "{}", "Irikar Breach > Hover Room > Bottom > Item"),
-            LocationId::Irikar_Breach__Worm_Rave__Corner__Item => write!(f, "{}", "Irikar Breach > Worm Rave > Corner > Item"),
-            LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_1 => write!(f, "{}", "Menu > Upgrade Menu > Combat > Melee Damage 1"),
-            LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_2 => write!(f, "{}", "Menu > Upgrade Menu > Combat > Melee Damage 2"),
-            LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_3 => write!(f, "{}", "Menu > Upgrade Menu > Combat > Melee Damage 3"),
-            LocationId::Menu__Upgrade_Menu__Combat__Melee_Speed_1 => write!(f, "{}", "Menu > Upgrade Menu > Combat > Melee Speed 1"),
-            LocationId::Menu__Upgrade_Menu__Combat__Melee_Speed_2 => write!(f, "{}", "Menu > Upgrade Menu > Combat > Melee Speed 2"),
-            LocationId::Menu__Upgrade_Menu__Combat__Melee_Speed_3 => write!(f, "{}", "Menu > Upgrade Menu > Combat > Melee Speed 3"),
-            LocationId::Menu__Upgrade_Menu__Combat__Ranged_Damage_1 => write!(f, "{}", "Menu > Upgrade Menu > Combat > Ranged Damage 1"),
-            LocationId::Menu__Upgrade_Menu__Combat__Ranged_Damage_2 => write!(f, "{}", "Menu > Upgrade Menu > Combat > Ranged Damage 2"),
-            LocationId::Menu__Upgrade_Menu__Combat__Ranged_Damage_3 => write!(f, "{}", "Menu > Upgrade Menu > Combat > Ranged Damage 3"),
-            LocationId::Menu__Upgrade_Menu__Combat__Ranged_Speed_1 => write!(f, "{}", "Menu > Upgrade Menu > Combat > Ranged Speed 1"),
-            LocationId::Menu__Upgrade_Menu__Combat__Ranged_Speed_2 => write!(f, "{}", "Menu > Upgrade Menu > Combat > Ranged Speed 2"),
-            LocationId::Menu__Upgrade_Menu__Combat__Ranged_Speed_3 => write!(f, "{}", "Menu > Upgrade Menu > Combat > Ranged Speed 3"),
-            LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_1 => write!(f, "{}", "Menu > Upgrade Menu > Drone > Drone Melee Damage 1"),
-            LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_2 => write!(f, "{}", "Menu > Upgrade Menu > Drone > Drone Melee Damage 2"),
-            LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_3 => write!(f, "{}", "Menu > Upgrade Menu > Drone > Drone Melee Damage 3"),
-            LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_1 => write!(f, "{}", "Menu > Upgrade Menu > Drone > Drone Melee Speed 1"),
-            LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_2 => write!(f, "{}", "Menu > Upgrade Menu > Drone > Drone Melee Speed 2"),
-            LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_3 => write!(f, "{}", "Menu > Upgrade Menu > Drone > Drone Melee Speed 3"),
-            LocationId::Menu__Upgrade_Menu__Infection__Infection_Level_1 => write!(f, "{}", "Menu > Upgrade Menu > Infection > Infection Level 1"),
-            LocationId::Menu__Upgrade_Menu__Infection__Infection_Level_2 => write!(f, "{}", "Menu > Upgrade Menu > Infection > Infection Level 2"),
-            LocationId::Menu__Upgrade_Menu__Infection__Infection_Level_3 => write!(f, "{}", "Menu > Upgrade Menu > Infection > Infection Level 3"),
-            LocationId::Menu__Upgrade_Menu__Infection__Infection_Range_1 => write!(f, "{}", "Menu > Upgrade Menu > Infection > Infection Range 1"),
-            LocationId::Menu__Upgrade_Menu__Infection__Infection_Range_2 => write!(f, "{}", "Menu > Upgrade Menu > Infection > Infection Range 2"),
-            LocationId::Menu__Upgrade_Menu__Infection__Infection_Range_3 => write!(f, "{}", "Menu > Upgrade Menu > Infection > Infection Range 3"),
-            LocationId::Menu__Upgrade_Menu__Infection__Infection_Speed_1 => write!(f, "{}", "Menu > Upgrade Menu > Infection > Infection Speed 1"),
-            LocationId::Menu__Upgrade_Menu__Infection__Infection_Speed_2 => write!(f, "{}", "Menu > Upgrade Menu > Infection > Infection Speed 2"),
-            LocationId::Menu__Upgrade_Menu__Infection__Nano_Points_1 => write!(f, "{}", "Menu > Upgrade Menu > Infection > Nano Points 1"),
-            LocationId::Menu__Upgrade_Menu__Infection__Nano_Points_2 => write!(f, "{}", "Menu > Upgrade Menu > Infection > Nano Points 2"),
-            LocationId::Menu__Upgrade_Menu__Infection__Nano_Points_3 => write!(f, "{}", "Menu > Upgrade Menu > Infection > Nano Points 3"),
-            LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_1 => write!(f, "{}", "Menu > Upgrade Menu > Physiology > Health Upgrade 1"),
-            LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_2 => write!(f, "{}", "Menu > Upgrade Menu > Physiology > Health Upgrade 2"),
-            LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_3 => write!(f, "{}", "Menu > Upgrade Menu > Physiology > Health Upgrade 3"),
-            LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_4 => write!(f, "{}", "Menu > Upgrade Menu > Physiology > Health Upgrade 4"),
-            LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_5 => write!(f, "{}", "Menu > Upgrade Menu > Physiology > Health Upgrade 5"),
-            LocationId::Menu__Upgrade_Menu__Physiology__Mist_Upgrade => write!(f, "{}", "Menu > Upgrade Menu > Physiology > Mist Upgrade"),
-            LocationId::Uhrum__Annuna_Corridor__Block_East__Dislodge_Block => write!(f, "{}", "Uhrum > Annuna Corridor > Block East > Dislodge Block"),
-            LocationId::Uhrum__Annuna_Corridor__Block_West__Dislodge_Block => write!(f, "{}", "Uhrum > Annuna Corridor > Block West > Dislodge Block"),
-            LocationId::Uhrum__Annuna_Corridor__East_Cubby__Tablet => write!(f, "{}", "Uhrum > Annuna Corridor > East Cubby > Tablet"),
-            LocationId::Uhrum__Annuna_Corridor__Pedestal__Urn => write!(f, "{}", "Uhrum > Annuna Corridor > Pedestal > Urn"),
-            LocationId::Uhrum__Annuna_Corridor__Statue__Item => write!(f, "{}", "Uhrum > Annuna Corridor > Statue > Item"),
-            LocationId::Uhrum__Annuna_Corridor__Upper_Trees__Remote_Urn => write!(f, "{}", "Uhrum > Annuna Corridor > Upper Trees > Remote Urn"),
-            LocationId::Uhrum__Siege_Corridor__Center_Box__Box => write!(f, "{}", "Uhrum > Siege Corridor > Center Box > Box"),
-            LocationId::Uhrum__Siege_Corridor__Pond__Item => write!(f, "{}", "Uhrum > Siege Corridor > Pond > Item"),
-            LocationId::Uhrum__Siege_Corridor__Upper_Rock_Item__Urn => write!(f, "{}", "Uhrum > Siege Corridor > Upper Rock Item > Urn"),
-            LocationId::Uhrum__Siege_Corridor__Western_Cache__Core => write!(f, "{}", "Uhrum > Siege Corridor > Western Cache > Core"),
-            LocationId::Uhrum__Waterfalls__Above_Block__Block => write!(f, "{}", "Uhrum > Waterfalls > Above Block > Block"),
-            LocationId::Uhrum__Waterfalls__Barrier_East__Charge_through_Wall => write!(f, "{}", "Uhrum > Waterfalls > Barrier East > Charge through Wall"),
-            LocationId::Uhrum__Waterfalls__Barrier_East__Mist_through_Wall => write!(f, "{}", "Uhrum > Waterfalls > Barrier East > Mist through Wall"),
-            LocationId::Uhrum__Waterfalls__Barrier_East__Spin_through_Wall => write!(f, "{}", "Uhrum > Waterfalls > Barrier East > Spin through Wall"),
-            LocationId::Uhrum__Waterfalls__Barrier_West__Charge_through_Wall => write!(f, "{}", "Uhrum > Waterfalls > Barrier West > Charge through Wall"),
-            LocationId::Uhrum__Waterfalls__Barrier_West__Mist_through_Wall => write!(f, "{}", "Uhrum > Waterfalls > Barrier West > Mist through Wall"),
-            LocationId::Uhrum__Waterfalls__Barrier_West__Spin_through_Wall => write!(f, "{}", "Uhrum > Waterfalls > Barrier West > Spin through Wall"),
-            LocationId::Uhrum__Waterfalls__Below_Block__Shockwave_Block => write!(f, "{}", "Uhrum > Waterfalls > Below Block > Shockwave Block"),
-            LocationId::Uhrum__Waterfalls__Ceiling_Cache__Flask => write!(f, "{}", "Uhrum > Waterfalls > Ceiling Cache > Flask"),
-            LocationId::Uhrum__Waterfalls__East_26__Block => write!(f, "{}", "Uhrum > Waterfalls > East 26 > Block"),
-            LocationId::Uhrum__Waterfalls__West_Water_Nook__Tablet => write!(f, "{}", "Uhrum > Waterfalls > West Water Nook > Tablet"),
-            LocationId::Uhrum__West_Entrance__Gate_Switch__Open_Gate => write!(f, "{}", "Uhrum > West Entrance > Gate Switch > Open Gate"),
-            LocationId::Uhrum__West_Entrance__Inner_Dais__Item => write!(f, "{}", "Uhrum > West Entrance > Inner Dais > Item"),
-            LocationId::Uhrum__West_Entrance__Lower_Wall_East__Charge_through_Wall => write!(f, "{}", "Uhrum > West Entrance > Lower Wall East > Charge through Wall"),
-            LocationId::Uhrum__West_Entrance__Lower_Wall_East__Mist_through_Wall => write!(f, "{}", "Uhrum > West Entrance > Lower Wall East > Mist through Wall"),
-            LocationId::Uhrum__West_Entrance__Lower_Wall_East__Spin_through_Wall => write!(f, "{}", "Uhrum > West Entrance > Lower Wall East > Spin through Wall"),
-            LocationId::Uhrum__West_Entrance__Lower_Wall_West__Charge_through_Wall => write!(f, "{}", "Uhrum > West Entrance > Lower Wall West > Charge through Wall"),
-            LocationId::Uhrum__West_Entrance__Lower_Wall_West__Mist_through_Wall => write!(f, "{}", "Uhrum > West Entrance > Lower Wall West > Mist through Wall"),
-            LocationId::Uhrum__West_Entrance__Lower_Wall_West__Spin_through_Wall => write!(f, "{}", "Uhrum > West Entrance > Lower Wall West > Spin through Wall"),
-            LocationId::Uhrum__West_Entrance__Sand__Refill => write!(f, "{}", "Uhrum > West Entrance > Sand > Refill"),
-            LocationId::Uhrum__West_Entrance__Upper_Wall_East__Charge_through_Wall => write!(f, "{}", "Uhrum > West Entrance > Upper Wall East > Charge through Wall"),
-            LocationId::Uhrum__West_Entrance__Upper_Wall_East__Mist_through_Wall => write!(f, "{}", "Uhrum > West Entrance > Upper Wall East > Mist through Wall"),
-            LocationId::Uhrum__West_Entrance__Upper_Wall_East__Spin_through_Wall => write!(f, "{}", "Uhrum > West Entrance > Upper Wall East > Spin through Wall"),
-            LocationId::Uhrum__West_Entrance__Upper_Wall_West__Mist_through_Wall => write!(f, "{}", "Uhrum > West Entrance > Upper Wall West > Mist through Wall"),
+            LocationId::Amagi__Liru_Room__Shrine__Item => {
+                write!(f, "{}", "Amagi > Liru Room > Shrine > Item")
+            }
+            LocationId::Amagi__Main_Area__Way_Off_To_The_Side__Item => {
+                write!(f, "{}", "Amagi > Main Area > Way Off To The Side > Item")
+            }
+            LocationId::Amagi__West_Lake__Cavern_Eye__Item => {
+                write!(f, "{}", "Amagi > West Lake > Cavern Eye > Item")
+            }
+            LocationId::Amagi__West_Lake__Cavern_Rear_Pillar__Boss_Reward => write!(
+                f,
+                "{}",
+                "Amagi > West Lake > Cavern Rear Pillar > Boss Reward"
+            ),
+            LocationId::Amagi__West_Lake__Cavern_Refill_Station__Break_Wall => write!(
+                f,
+                "{}",
+                "Amagi > West Lake > Cavern Refill Station > Break Wall"
+            ),
+            LocationId::Amagi__West_Lake__Cavern_Refill_Station__Defeat_MUS_A_M20 => write!(
+                f,
+                "{}",
+                "Amagi > West Lake > Cavern Refill Station > Defeat MUS A M20"
+            ),
+            LocationId::Amagi__West_Lake__Cavern_Tear_Duct__Remote_Flask => write!(
+                f,
+                "{}",
+                "Amagi > West Lake > Cavern Tear Duct > Remote Flask"
+            ),
+            LocationId::Amagi__West_Lake__Stronghold_Ceiling_Left__Knock_Down_Left_Boulder => {
+                write!(
+                    f,
+                    "{}",
+                    "Amagi > West Lake > Stronghold Ceiling Left > Knock Down Left Boulder"
+                )
+            }
+            LocationId::Amagi__West_Lake__Stronghold_Ceiling_Right__Knock_Down_Right_Boulder => {
+                write!(
+                    f,
+                    "{}",
+                    "Amagi > West Lake > Stronghold Ceiling Right > Knock Down Right Boulder"
+                )
+            }
+            LocationId::Amagi__West_Lake__Stronghold_Front_Door__Break_Wall => write!(
+                f,
+                "{}",
+                "Amagi > West Lake > Stronghold Front Door > Break Wall"
+            ),
+            LocationId::Amagi__West_Lake__Stronghold_Front_Room__Break_Wall => write!(
+                f,
+                "{}",
+                "Amagi > West Lake > Stronghold Front Room > Break Wall"
+            ),
+            LocationId::Amagi__West_Lake__Stronghold_Item__Break_Wall => {
+                write!(f, "{}", "Amagi > West Lake > Stronghold Item > Break Wall")
+            }
+            LocationId::Amagi__West_Lake__Stronghold_Item__Item => {
+                write!(f, "{}", "Amagi > West Lake > Stronghold Item > Item")
+            }
+            LocationId::Amagi__West_Lake__Stronghold_Middle_Column__Break_Wall => write!(
+                f,
+                "{}",
+                "Amagi > West Lake > Stronghold Middle Column > Break Wall"
+            ),
+            LocationId::Amagi__West_Lake__Stronghold_Rear_Wall__Break_Left_Wall => write!(
+                f,
+                "{}",
+                "Amagi > West Lake > Stronghold Rear Wall > Break Left Wall"
+            ),
+            LocationId::Amagi__West_Lake__Stronghold_Top__Remote_Urn => {
+                write!(f, "{}", "Amagi > West Lake > Stronghold Top > Remote Urn")
+            }
+            LocationId::Amagi__West_Lake__Surface_Wall_Left__Break_Wall => write!(
+                f,
+                "{}",
+                "Amagi > West Lake > Surface Wall Left > Break Wall"
+            ),
+            LocationId::Amagi__West_Lake__Surface_Wall_Right__Break_Wall => write!(
+                f,
+                "{}",
+                "Amagi > West Lake > Surface Wall Right > Break Wall"
+            ),
+            LocationId::Annuna__Mirror_Match__Below_Switch__Hit_Switch => {
+                write!(f, "{}", "Annuna > Mirror Match > Below Switch > Hit Switch")
+            }
+            LocationId::Annuna__Mirror_Match__East_26_Lower__Remote_Flask => write!(
+                f,
+                "{}",
+                "Annuna > Mirror Match > East 26 Lower > Remote Flask"
+            ),
+            LocationId::Annuna__Mirror_Match__East_26_Upper__Remote_Flask => write!(
+                f,
+                "{}",
+                "Annuna > Mirror Match > East 26 Upper > Remote Flask"
+            ),
+            LocationId::Annuna__Mirror_Match__Plinth__Item => {
+                write!(f, "{}", "Annuna > Mirror Match > Plinth > Item")
+            }
+            LocationId::Annuna__Mirror_Match__Save_Point__Fight => {
+                write!(f, "{}", "Annuna > Mirror Match > Save Point > Fight")
+            }
+            LocationId::Annuna__Mirror_Match__Waving_Distance__Shockwave_Flask => write!(
+                f,
+                "{}",
+                "Annuna > Mirror Match > Waving Distance > Shockwave Flask"
+            ),
+            LocationId::Annuna__West_Bridge__Plinth__Item => {
+                write!(f, "{}", "Annuna > West Bridge > Plinth > Item")
+            }
+            LocationId::Antarctica__Building_2__Behind_Boxes__Note => {
+                write!(f, "{}", "Antarctica > Building 2 > Behind Boxes > Note")
+            }
+            LocationId::Antarctica__Power_Room__Switch__Flip => {
+                write!(f, "{}", "Antarctica > Power Room > Switch > Flip")
+            }
+            LocationId::Antarctica__Shed__Interior__Shelf => {
+                write!(f, "{}", "Antarctica > Shed > Interior > Shelf")
+            }
+            LocationId::Ebih__Base_Camp__Left_Platform_Moved__Item_From_The_Side => write!(
+                f,
+                "{}",
+                "Ebih > Base Camp > Left Platform Moved > Item From The Side"
+            ),
+            LocationId::Ebih__Base_Camp__Top_Platform__Item => {
+                write!(f, "{}", "Ebih > Base Camp > Top Platform > Item")
+            }
+            LocationId::Ebih__Boss_Room__Boss__Boss_Reward => {
+                write!(f, "{}", "Ebih > Boss Room > Boss > Boss Reward")
+            }
+            LocationId::Ebih__Boss_Room__Boss__Fight_Alu => {
+                write!(f, "{}", "Ebih > Boss Room > Boss > Fight Alu")
+            }
+            LocationId::Ebih__Boss_Room__Boss__Hack_Alu => {
+                write!(f, "{}", "Ebih > Boss Room > Boss > Hack Alu")
+            }
+            LocationId::Ebih__Boss_Room__East_Ledge__Item => {
+                write!(f, "{}", "Ebih > Boss Room > East Ledge > Item")
+            }
+            LocationId::Ebih__By_Garage__Crawlspace__Fragment => {
+                write!(f, "{}", "Ebih > By Garage > Crawlspace > Fragment")
+            }
+            LocationId::Ebih__Drone_Room__Item__Urn => {
+                write!(f, "{}", "Ebih > Drone Room > Item > Urn")
+            }
+            LocationId::Ebih__Drone_Room__Middle_Platform__Urn_Quick_Grab => write!(
+                f,
+                "{}",
+                "Ebih > Drone Room > Middle Platform > Urn Quick Grab"
+            ),
+            LocationId::Ebih__Ebih_East__Corner__Urn => {
+                write!(f, "{}", "Ebih > Ebih East > Corner > Urn")
+            }
+            LocationId::Ebih__Ebih_East__Dispenser__Vend => {
+                write!(f, "{}", "Ebih > Ebih East > Dispenser > Vend")
+            }
+            LocationId::Ebih__Ebih_East__East_Ledge__Note => {
+                write!(f, "{}", "Ebih > Ebih East > East Ledge > Note")
+            }
+            LocationId::Ebih__Ebih_East__Lower_Moving_Platform__Remote_Urn => write!(
+                f,
+                "{}",
+                "Ebih > Ebih East > Lower Moving Platform > Remote Urn"
+            ),
+            LocationId::Ebih__Ebih_West__Alcove__Tablet => {
+                write!(f, "{}", "Ebih > Ebih West > Alcove > Tablet")
+            }
+            LocationId::Ebih__Ebih_West__Block_Left__Break_Block => {
+                write!(f, "{}", "Ebih > Ebih West > Block Left > Break Block")
+            }
+            LocationId::Ebih__Ebih_West__Block_Right__Break_Block => {
+                write!(f, "{}", "Ebih > Ebih West > Block Right > Break Block")
+            }
+            LocationId::Ebih__Grid_25_10_12__East_10__Remote_Bush => {
+                write!(f, "{}", "Ebih > Grid 25,10-12 > East 10 > Remote Bush")
+            }
+            LocationId::Ebih__Grid_25_10_12__Hidden_Bush__Behind_Bush => {
+                write!(f, "{}", "Ebih > Grid 25,10-12 > Hidden Bush > Behind Bush")
+            }
+            LocationId::Ebih__Grid_25_2_6__Pit__Item => {
+                write!(f, "{}", "Ebih > Grid 25,2-6 > Pit > Item")
+            }
+            LocationId::Ebih__Grid_26_10_11__Ledge__Note => {
+                write!(f, "{}", "Ebih > Grid 26,10-11 > Ledge > Note")
+            }
+            LocationId::Ebih__Vertical_Interchange__Switch__Activate_Switch => write!(
+                f,
+                "{}",
+                "Ebih > Vertical Interchange > Switch > Activate Switch"
+            ),
+            LocationId::Ebih__Waterfall__Alcove__Block_Left => {
+                write!(f, "{}", "Ebih > Waterfall > Alcove > Block Left")
+            }
+            LocationId::Ebih__Waterfall__Alcove__Block_Right => {
+                write!(f, "{}", "Ebih > Waterfall > Alcove > Block Right")
+            }
+            LocationId::Ebih__Waterfall__Alcove__Pedestal => {
+                write!(f, "{}", "Ebih > Waterfall > Alcove > Pedestal")
+            }
+            LocationId::Ebih__Waterfall__Alcove_Left__Block_Left => {
+                write!(f, "{}", "Ebih > Waterfall > Alcove Left > Block Left")
+            }
+            LocationId::Ebih__Waterfall__Alcove_Right__Block_Right => {
+                write!(f, "{}", "Ebih > Waterfall > Alcove Right > Block Right")
+            }
+            LocationId::Ebih__Waterfall__Wall_Left__Break_Through_Wall => {
+                write!(f, "{}", "Ebih > Waterfall > Wall Left > Break Through Wall")
+            }
+            LocationId::Ebih__Waterfall__Wall_Left__Break_Wall => {
+                write!(f, "{}", "Ebih > Waterfall > Wall Left > Break Wall")
+            }
+            LocationId::Ebih__Waterfall__Wall_Right__Break_Through_Wall => write!(
+                f,
+                "{}",
+                "Ebih > Waterfall > Wall Right > Break Through Wall"
+            ),
+            LocationId::Ebih__Waterfall__Wall_Right__Break_Wall => {
+                write!(f, "{}", "Ebih > Waterfall > Wall Right > Break Wall")
+            }
+            LocationId::Ebih__Waterfall__Waterfall_Center_Center__Both_Blocks => write!(
+                f,
+                "{}",
+                "Ebih > Waterfall > Waterfall Center Center > Both Blocks"
+            ),
+            LocationId::Giguna__Antechamber__Statue_Head__Tablet => {
+                write!(f, "{}", "Giguna > Antechamber > Statue Head > Tablet")
+            }
+            LocationId::Giguna__Carnelian__Vault__Item => {
+                write!(f, "{}", "Giguna > Carnelian > Vault > Item")
+            }
+            LocationId::Giguna__Clouds__Cache__Item => {
+                write!(f, "{}", "Giguna > Clouds > Cache > Item")
+            }
+            LocationId::Giguna__Dual_Path__Base_of_Wall__Break_Wall => {
+                write!(f, "{}", "Giguna > Dual Path > Base of Wall > Break Wall")
+            }
+            LocationId::Giguna__Dual_Path__Base_of_Wall__Mist_into_Wall => write!(
+                f,
+                "{}",
+                "Giguna > Dual Path > Base of Wall > Mist into Wall"
+            ),
+            LocationId::Giguna__Dual_Path__Below_Left_Switch__Remote_Switch => write!(
+                f,
+                "{}",
+                "Giguna > Dual Path > Below Left Switch > Remote Switch"
+            ),
+            LocationId::Giguna__Dual_Path__Below_Right_Switch__Remote_Switch => write!(
+                f,
+                "{}",
+                "Giguna > Dual Path > Below Right Switch > Remote Switch"
+            ),
+            LocationId::Giguna__Dual_Path__Left_Switch__Hit_Switch => {
+                write!(f, "{}", "Giguna > Dual Path > Left Switch > Hit Switch")
+            }
+            LocationId::Giguna__Dual_Path__Right_Switch__Hit_Switch => {
+                write!(f, "{}", "Giguna > Dual Path > Right Switch > Hit Switch")
+            }
+            LocationId::Giguna__Dual_Path__Wall_Secret__Health => {
+                write!(f, "{}", "Giguna > Dual Path > Wall Secret > Health")
+            }
+            LocationId::Giguna__East_Caverns__Hidden_Passage_Center__Hidden_Flask => write!(
+                f,
+                "{}",
+                "Giguna > East Caverns > Hidden Passage Center > Hidden Flask"
+            ),
+            LocationId::Giguna__Far_Corner__Grass__Obscured_Item => {
+                write!(f, "{}", "Giguna > Far Corner > Grass > Obscured Item")
+            }
+            LocationId::Giguna__Gateway__Block_Left__Shockwave => {
+                write!(f, "{}", "Giguna > Gateway > Block Left > Shockwave")
+            }
+            LocationId::Giguna__Gateway__Block_Right__Shockwave => {
+                write!(f, "{}", "Giguna > Gateway > Block Right > Shockwave")
+            }
+            LocationId::Giguna__Gateway__Button__Hit_Switch => {
+                write!(f, "{}", "Giguna > Gateway > Button > Hit Switch")
+            }
+            LocationId::Giguna__Gateway__Flask_Ledge__Item => {
+                write!(f, "{}", "Giguna > Gateway > Flask Ledge > Item")
+            }
+            LocationId::Giguna__Giguna_Base__Ruin__Item => {
+                write!(f, "{}", "Giguna > Giguna Base > Ruin > Item")
+            }
+            LocationId::Giguna__Giguna_Base__Table__News => {
+                write!(f, "{}", "Giguna > Giguna Base > Table > News")
+            }
+            LocationId::Giguna__Giguna_Northeast__Door__Remote_Flask => {
+                write!(f, "{}", "Giguna > Giguna Northeast > Door > Remote Flask")
+            }
+            LocationId::Giguna__Giguna_Northeast__Gate_Button__Open_Gate => write!(
+                f,
+                "{}",
+                "Giguna > Giguna Northeast > Gate Button > Open Gate"
+            ),
+            LocationId::Giguna__Giguna_Northeast__Gate_Right__Remote_Button => write!(
+                f,
+                "{}",
+                "Giguna > Giguna Northeast > Gate Right > Remote Button"
+            ),
+            LocationId::Giguna__Giguna_Northeast__Vault__Item => {
+                write!(f, "{}", "Giguna > Giguna Northeast > Vault > Item")
+            }
+            LocationId::Giguna__Gubi_Lair__Center_Platform__Boss_Reward => write!(
+                f,
+                "{}",
+                "Giguna > Gubi Lair > Center Platform > Boss Reward"
+            ),
+            LocationId::Giguna__Gubi_Lair__Center_Platform__Fight_Gubi => {
+                write!(f, "{}", "Giguna > Gubi Lair > Center Platform > Fight Gubi")
+            }
+            LocationId::Giguna__Gubi_Lair__Center_Platform__Hack_Gubi => {
+                write!(f, "{}", "Giguna > Gubi Lair > Center Platform > Hack Gubi")
+            }
+            LocationId::Giguna__Gubi_Lair__Pedestal__Axe => {
+                write!(f, "{}", "Giguna > Gubi Lair > Pedestal > Axe")
+            }
+            LocationId::Giguna__Hard_Rock__Rock_Center__Tablet => {
+                write!(f, "{}", "Giguna > Hard Rock > Rock Center > Tablet")
+            }
+            LocationId::Giguna__Hard_Rock__Rock_Left__Enter_Rock_as_Mist => write!(
+                f,
+                "{}",
+                "Giguna > Hard Rock > Rock Left > Enter Rock as Mist"
+            ),
+            LocationId::Giguna__Hard_Rock__Rock_Left__Shockwave_Boulder => write!(
+                f,
+                "{}",
+                "Giguna > Hard Rock > Rock Left > Shockwave Boulder"
+            ),
+            LocationId::Giguna__Hard_Rock__Rock_Right__Enter_Rock_as_Mist => write!(
+                f,
+                "{}",
+                "Giguna > Hard Rock > Rock Right > Enter Rock as Mist"
+            ),
+            LocationId::Giguna__Hard_Rock__Rock_Right__Shockwave_Boulder => write!(
+                f,
+                "{}",
+                "Giguna > Hard Rock > Rock Right > Shockwave Boulder"
+            ),
+            LocationId::Giguna__Helipad__Tablet_Ledge__Tablet => {
+                write!(f, "{}", "Giguna > Helipad > Tablet Ledge > Tablet")
+            }
+            LocationId::Giguna__Lamassu__Deposit__Flask => {
+                write!(f, "{}", "Giguna > Lamassu > Deposit > Flask")
+            }
+            LocationId::Giguna__Ruins_Center__Tablet__Item => {
+                write!(f, "{}", "Giguna > Ruins Center > Tablet > Item")
+            }
+            LocationId::Giguna__Ruins_East__Way_Up_High__Item => {
+                write!(f, "{}", "Giguna > Ruins East > Way Up High > Item")
+            }
+            LocationId::Giguna__Ruins_Top__Flask__Flask => {
+                write!(f, "{}", "Giguna > Ruins Top > Flask > Flask")
+            }
+            LocationId::Giguna__Ruins_Top__Small_Ledge__Shockwave_Flask => write!(
+                f,
+                "{}",
+                "Giguna > Ruins Top > Small Ledge > Shockwave Flask"
+            ),
+            LocationId::Giguna__Wasteland__Door_Right__Health => {
+                write!(f, "{}", "Giguna > Wasteland > Door Right > Health")
+            }
+            LocationId::Giguna__Wasteland__Passage_Cache__Clear_Horizontal_Passage_Manually => {
+                write!(
+                    f,
+                    "{}",
+                    "Giguna > Wasteland > Passage Cache > Clear Horizontal Passage Manually"
+                )
+            }
+            LocationId::Giguna__Wasteland__Passage_Cache__Mist_through_Horizontal_Passage => {
+                write!(
+                    f,
+                    "{}",
+                    "Giguna > Wasteland > Passage Cache > Mist through Horizontal Passage"
+                )
+            }
+            LocationId::Giguna__Wasteland__Passage_East__Clear_Horizontal_Passage_Manually => {
+                write!(
+                    f,
+                    "{}",
+                    "Giguna > Wasteland > Passage East > Clear Horizontal Passage Manually"
+                )
+            }
+            LocationId::Giguna__Wasteland__Passage_East__Mist_through_Horizontal_Passage => write!(
+                f,
+                "{}",
+                "Giguna > Wasteland > Passage East > Mist through Horizontal Passage"
+            ),
+            LocationId::Giguna__West_Caverns__Bush__Item => {
+                write!(f, "{}", "Giguna > West Caverns > Bush > Item")
+            }
+            LocationId::Giguna__West_Caverns__Cache__Item => {
+                write!(f, "{}", "Giguna > West Caverns > Cache > Item")
+            }
+            LocationId::Giguna__West_Tower__Top__Tablet => {
+                write!(f, "{}", "Giguna > West Tower > Top > Tablet")
+            }
+            LocationId::Giguna_Breach__Chimney__Cache__Flask => {
+                write!(f, "{}", "Giguna Breach > Chimney > Cache > Flask")
+            }
+            LocationId::Giguna_Breach__Cubby__Rocks__Health => {
+                write!(f, "{}", "Giguna Breach > Cubby > Rocks > Health")
+            }
+            LocationId::Giguna_Breach__Slingshot__Ravine__Urn => {
+                write!(f, "{}", "Giguna Breach > Slingshot > Ravine > Urn")
+            }
+            LocationId::Glacier__Apocalypse_Entry__Terminal__Escape => {
+                write!(f, "{}", "Glacier > Apocalypse Entry > Terminal > Escape")
+            }
+            LocationId::Glacier__Boomerang_Room__Pedestal__Item => {
+                write!(f, "{}", "Glacier > Boomerang Room > Pedestal > Item")
+            }
+            LocationId::Glacier__Boomerang_Room__Pedestal__Switch => {
+                write!(f, "{}", "Glacier > Boomerang Room > Pedestal > Switch")
+            }
+            LocationId::Glacier__Compass_Room__Center__Table => {
+                write!(f, "{}", "Glacier > Compass Room > Center > Table")
+            }
+            LocationId::Glacier__Ledge_Grab_Room__Cliff_Bottom__Quick_Grab => write!(
+                f,
+                "{}",
+                "Glacier > Ledge Grab Room > Cliff Bottom > Quick Grab"
+            ),
+            LocationId::Glacier__Ledge_Grab_Room__Pedestal__Item => {
+                write!(f, "{}", "Glacier > Ledge Grab Room > Pedestal > Item")
+            }
+            LocationId::Glacier__The_Big_Drop__Water_Surface__Drown => {
+                write!(f, "{}", "Glacier > The Big Drop > Water Surface > Drown")
+            }
+            LocationId::Glacier__Vertical_Room__Peak__Flask => {
+                write!(f, "{}", "Glacier > Vertical Room > Peak > Flask")
+            }
+            LocationId::Glacier__Vertical_Room__Under_Switch__Switch => {
+                write!(f, "{}", "Glacier > Vertical Room > Under Switch > Switch")
+            }
+            LocationId::Interior__Building_Interior__Corner__Urn => {
+                write!(f, "{}", "Interior > Building Interior > Corner > Urn")
+            }
+            LocationId::Interior__Building_Interior__Entry__Remote_Urn => {
+                write!(f, "{}", "Interior > Building Interior > Entry > Remote Urn")
+            }
+            LocationId::Interior__Bunker_Interior__Desk__Note => {
+                write!(f, "{}", "Interior > Bunker Interior > Desk > Note")
+            }
+            LocationId::Interior__Ebih_Cave__Entry__Health => {
+                write!(f, "{}", "Interior > Ebih Cave > Entry > Health")
+            }
+            LocationId::Interior__Garage__Boxes__Under_Boxes => {
+                write!(f, "{}", "Interior > Garage > Boxes > Under Boxes")
+            }
+            LocationId::Interior__Outpost_Interior__Bookshelf__Note => {
+                write!(f, "{}", "Interior > Outpost Interior > Bookshelf > Note")
+            }
+            LocationId::Interior__Tent_Interior__Desk__Note => {
+                write!(f, "{}", "Interior > Tent Interior > Desk > Note")
+            }
+            LocationId::Irikar__Abandoned_Room__Corner_Core__Core => {
+                write!(f, "{}", "Irikar > Abandoned Room > Corner Core > Core")
+            }
+            LocationId::Irikar__Boss_Room__Bulls_Feet__Boss_Reward => {
+                write!(f, "{}", "Irikar > Boss Room > Bull's Feet > Boss Reward")
+            }
+            LocationId::Irikar__Boss_Room__Bulls_Feet__Defeat_Gudam => {
+                write!(f, "{}", "Irikar > Boss Room > Bull's Feet > Defeat Gudam")
+            }
+            LocationId::Irikar__Boss_Room__Bulls_Feet__Shockwave_Gudam => write!(
+                f,
+                "{}",
+                "Irikar > Boss Room > Bull's Feet > Shockwave Gudam"
+            ),
+            LocationId::Irikar__Boss_Room__Healthy_Rooftop__Health => {
+                write!(f, "{}", "Irikar > Boss Room > Healthy Rooftop > Health")
+            }
+            LocationId::Irikar__East_Rooftops__Top_Rooftop__Tablet => {
+                write!(f, "{}", "Irikar > East Rooftops > Top Rooftop > Tablet")
+            }
+            LocationId::Irikar__Hub__Dagger_Altar__Weapon => {
+                write!(f, "{}", "Irikar > Hub > Dagger Altar > Weapon")
+            }
+            LocationId::Irikar__Hub__Royal_Storage_By_Wall__Mist_into_Wall => write!(
+                f,
+                "{}",
+                "Irikar > Hub > Royal Storage By Wall > Mist into Wall"
+            ),
+            LocationId::Irikar__Hub__Royal_Storage_By_Wall__Shockwave_Wall => write!(
+                f,
+                "{}",
+                "Irikar > Hub > Royal Storage By Wall > Shockwave Wall"
+            ),
+            LocationId::Irikar__Hub__Royal_Storage_in_Wall__Item => {
+                write!(f, "{}", "Irikar > Hub > Royal Storage in Wall > Item")
+            }
+            LocationId::Irikar__Hub__Sat_Tower_Top_Ledge__Tablet => {
+                write!(f, "{}", "Irikar > Hub > Sat Tower Top Ledge > Tablet")
+            }
+            LocationId::Irikar__Lamassu__Desk__Item => {
+                write!(f, "{}", "Irikar > Lamassu > Desk > Item")
+            }
+            LocationId::Irikar__Sight_Room__Item_Pedestal__Urn => {
+                write!(f, "{}", "Irikar > Sight Room > Item Pedestal > Urn")
+            }
+            LocationId::Irikar_Breach__Gauntlet__Hidden_Path_Reward__Item => write!(
+                f,
+                "{}",
+                "Irikar Breach > Gauntlet > Hidden Path Reward > Item"
+            ),
+            LocationId::Irikar_Breach__Hover_Room__Bottom__Item => {
+                write!(f, "{}", "Irikar Breach > Hover Room > Bottom > Item")
+            }
+            LocationId::Irikar_Breach__Worm_Rave__Corner__Item => {
+                write!(f, "{}", "Irikar Breach > Worm Rave > Corner > Item")
+            }
+            LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_1 => {
+                write!(f, "{}", "Menu > Upgrade Menu > Combat > Melee Damage 1")
+            }
+            LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_2 => {
+                write!(f, "{}", "Menu > Upgrade Menu > Combat > Melee Damage 2")
+            }
+            LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_3 => {
+                write!(f, "{}", "Menu > Upgrade Menu > Combat > Melee Damage 3")
+            }
+            LocationId::Menu__Upgrade_Menu__Combat__Melee_Speed_1 => {
+                write!(f, "{}", "Menu > Upgrade Menu > Combat > Melee Speed 1")
+            }
+            LocationId::Menu__Upgrade_Menu__Combat__Melee_Speed_2 => {
+                write!(f, "{}", "Menu > Upgrade Menu > Combat > Melee Speed 2")
+            }
+            LocationId::Menu__Upgrade_Menu__Combat__Melee_Speed_3 => {
+                write!(f, "{}", "Menu > Upgrade Menu > Combat > Melee Speed 3")
+            }
+            LocationId::Menu__Upgrade_Menu__Combat__Ranged_Damage_1 => {
+                write!(f, "{}", "Menu > Upgrade Menu > Combat > Ranged Damage 1")
+            }
+            LocationId::Menu__Upgrade_Menu__Combat__Ranged_Damage_2 => {
+                write!(f, "{}", "Menu > Upgrade Menu > Combat > Ranged Damage 2")
+            }
+            LocationId::Menu__Upgrade_Menu__Combat__Ranged_Damage_3 => {
+                write!(f, "{}", "Menu > Upgrade Menu > Combat > Ranged Damage 3")
+            }
+            LocationId::Menu__Upgrade_Menu__Combat__Ranged_Speed_1 => {
+                write!(f, "{}", "Menu > Upgrade Menu > Combat > Ranged Speed 1")
+            }
+            LocationId::Menu__Upgrade_Menu__Combat__Ranged_Speed_2 => {
+                write!(f, "{}", "Menu > Upgrade Menu > Combat > Ranged Speed 2")
+            }
+            LocationId::Menu__Upgrade_Menu__Combat__Ranged_Speed_3 => {
+                write!(f, "{}", "Menu > Upgrade Menu > Combat > Ranged Speed 3")
+            }
+            LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_1 => write!(
+                f,
+                "{}",
+                "Menu > Upgrade Menu > Drone > Drone Melee Damage 1"
+            ),
+            LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_2 => write!(
+                f,
+                "{}",
+                "Menu > Upgrade Menu > Drone > Drone Melee Damage 2"
+            ),
+            LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_3 => write!(
+                f,
+                "{}",
+                "Menu > Upgrade Menu > Drone > Drone Melee Damage 3"
+            ),
+            LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_1 => {
+                write!(f, "{}", "Menu > Upgrade Menu > Drone > Drone Melee Speed 1")
+            }
+            LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_2 => {
+                write!(f, "{}", "Menu > Upgrade Menu > Drone > Drone Melee Speed 2")
+            }
+            LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_3 => {
+                write!(f, "{}", "Menu > Upgrade Menu > Drone > Drone Melee Speed 3")
+            }
+            LocationId::Menu__Upgrade_Menu__Infection__Infection_Level_1 => write!(
+                f,
+                "{}",
+                "Menu > Upgrade Menu > Infection > Infection Level 1"
+            ),
+            LocationId::Menu__Upgrade_Menu__Infection__Infection_Level_2 => write!(
+                f,
+                "{}",
+                "Menu > Upgrade Menu > Infection > Infection Level 2"
+            ),
+            LocationId::Menu__Upgrade_Menu__Infection__Infection_Level_3 => write!(
+                f,
+                "{}",
+                "Menu > Upgrade Menu > Infection > Infection Level 3"
+            ),
+            LocationId::Menu__Upgrade_Menu__Infection__Infection_Range_1 => write!(
+                f,
+                "{}",
+                "Menu > Upgrade Menu > Infection > Infection Range 1"
+            ),
+            LocationId::Menu__Upgrade_Menu__Infection__Infection_Range_2 => write!(
+                f,
+                "{}",
+                "Menu > Upgrade Menu > Infection > Infection Range 2"
+            ),
+            LocationId::Menu__Upgrade_Menu__Infection__Infection_Range_3 => write!(
+                f,
+                "{}",
+                "Menu > Upgrade Menu > Infection > Infection Range 3"
+            ),
+            LocationId::Menu__Upgrade_Menu__Infection__Infection_Speed_1 => write!(
+                f,
+                "{}",
+                "Menu > Upgrade Menu > Infection > Infection Speed 1"
+            ),
+            LocationId::Menu__Upgrade_Menu__Infection__Infection_Speed_2 => write!(
+                f,
+                "{}",
+                "Menu > Upgrade Menu > Infection > Infection Speed 2"
+            ),
+            LocationId::Menu__Upgrade_Menu__Infection__Nano_Points_1 => {
+                write!(f, "{}", "Menu > Upgrade Menu > Infection > Nano Points 1")
+            }
+            LocationId::Menu__Upgrade_Menu__Infection__Nano_Points_2 => {
+                write!(f, "{}", "Menu > Upgrade Menu > Infection > Nano Points 2")
+            }
+            LocationId::Menu__Upgrade_Menu__Infection__Nano_Points_3 => {
+                write!(f, "{}", "Menu > Upgrade Menu > Infection > Nano Points 3")
+            }
+            LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_1 => write!(
+                f,
+                "{}",
+                "Menu > Upgrade Menu > Physiology > Health Upgrade 1"
+            ),
+            LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_2 => write!(
+                f,
+                "{}",
+                "Menu > Upgrade Menu > Physiology > Health Upgrade 2"
+            ),
+            LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_3 => write!(
+                f,
+                "{}",
+                "Menu > Upgrade Menu > Physiology > Health Upgrade 3"
+            ),
+            LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_4 => write!(
+                f,
+                "{}",
+                "Menu > Upgrade Menu > Physiology > Health Upgrade 4"
+            ),
+            LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_5 => write!(
+                f,
+                "{}",
+                "Menu > Upgrade Menu > Physiology > Health Upgrade 5"
+            ),
+            LocationId::Menu__Upgrade_Menu__Physiology__Mist_Upgrade => {
+                write!(f, "{}", "Menu > Upgrade Menu > Physiology > Mist Upgrade")
+            }
+            LocationId::Uhrum__Annuna_Corridor__Block_East__Dislodge_Block => write!(
+                f,
+                "{}",
+                "Uhrum > Annuna Corridor > Block East > Dislodge Block"
+            ),
+            LocationId::Uhrum__Annuna_Corridor__Block_West__Dislodge_Block => write!(
+                f,
+                "{}",
+                "Uhrum > Annuna Corridor > Block West > Dislodge Block"
+            ),
+            LocationId::Uhrum__Annuna_Corridor__East_Cubby__Tablet => {
+                write!(f, "{}", "Uhrum > Annuna Corridor > East Cubby > Tablet")
+            }
+            LocationId::Uhrum__Annuna_Corridor__Pedestal__Urn => {
+                write!(f, "{}", "Uhrum > Annuna Corridor > Pedestal > Urn")
+            }
+            LocationId::Uhrum__Annuna_Corridor__Statue__Item => {
+                write!(f, "{}", "Uhrum > Annuna Corridor > Statue > Item")
+            }
+            LocationId::Uhrum__Annuna_Corridor__Upper_Trees__Remote_Urn => write!(
+                f,
+                "{}",
+                "Uhrum > Annuna Corridor > Upper Trees > Remote Urn"
+            ),
+            LocationId::Uhrum__Siege_Corridor__Center_Box__Box => {
+                write!(f, "{}", "Uhrum > Siege Corridor > Center Box > Box")
+            }
+            LocationId::Uhrum__Siege_Corridor__Pond__Item => {
+                write!(f, "{}", "Uhrum > Siege Corridor > Pond > Item")
+            }
+            LocationId::Uhrum__Siege_Corridor__Upper_Rock_Item__Urn => {
+                write!(f, "{}", "Uhrum > Siege Corridor > Upper Rock Item > Urn")
+            }
+            LocationId::Uhrum__Siege_Corridor__Western_Cache__Core => {
+                write!(f, "{}", "Uhrum > Siege Corridor > Western Cache > Core")
+            }
+            LocationId::Uhrum__Waterfalls__Above_Block__Block => {
+                write!(f, "{}", "Uhrum > Waterfalls > Above Block > Block")
+            }
+            LocationId::Uhrum__Waterfalls__Barrier_East__Charge_through_Wall => write!(
+                f,
+                "{}",
+                "Uhrum > Waterfalls > Barrier East > Charge through Wall"
+            ),
+            LocationId::Uhrum__Waterfalls__Barrier_East__Mist_through_Wall => write!(
+                f,
+                "{}",
+                "Uhrum > Waterfalls > Barrier East > Mist through Wall"
+            ),
+            LocationId::Uhrum__Waterfalls__Barrier_East__Spin_through_Wall => write!(
+                f,
+                "{}",
+                "Uhrum > Waterfalls > Barrier East > Spin through Wall"
+            ),
+            LocationId::Uhrum__Waterfalls__Barrier_West__Charge_through_Wall => write!(
+                f,
+                "{}",
+                "Uhrum > Waterfalls > Barrier West > Charge through Wall"
+            ),
+            LocationId::Uhrum__Waterfalls__Barrier_West__Mist_through_Wall => write!(
+                f,
+                "{}",
+                "Uhrum > Waterfalls > Barrier West > Mist through Wall"
+            ),
+            LocationId::Uhrum__Waterfalls__Barrier_West__Spin_through_Wall => write!(
+                f,
+                "{}",
+                "Uhrum > Waterfalls > Barrier West > Spin through Wall"
+            ),
+            LocationId::Uhrum__Waterfalls__Below_Block__Shockwave_Block => write!(
+                f,
+                "{}",
+                "Uhrum > Waterfalls > Below Block > Shockwave Block"
+            ),
+            LocationId::Uhrum__Waterfalls__Ceiling_Cache__Flask => {
+                write!(f, "{}", "Uhrum > Waterfalls > Ceiling Cache > Flask")
+            }
+            LocationId::Uhrum__Waterfalls__East_26__Block => {
+                write!(f, "{}", "Uhrum > Waterfalls > East 26 > Block")
+            }
+            LocationId::Uhrum__Waterfalls__West_Water_Nook__Tablet => {
+                write!(f, "{}", "Uhrum > Waterfalls > West Water Nook > Tablet")
+            }
+            LocationId::Uhrum__West_Entrance__Gate_Switch__Open_Gate => {
+                write!(f, "{}", "Uhrum > West Entrance > Gate Switch > Open Gate")
+            }
+            LocationId::Uhrum__West_Entrance__Inner_Dais__Item => {
+                write!(f, "{}", "Uhrum > West Entrance > Inner Dais > Item")
+            }
+            LocationId::Uhrum__West_Entrance__Lower_Wall_East__Charge_through_Wall => write!(
+                f,
+                "{}",
+                "Uhrum > West Entrance > Lower Wall East > Charge through Wall"
+            ),
+            LocationId::Uhrum__West_Entrance__Lower_Wall_East__Mist_through_Wall => write!(
+                f,
+                "{}",
+                "Uhrum > West Entrance > Lower Wall East > Mist through Wall"
+            ),
+            LocationId::Uhrum__West_Entrance__Lower_Wall_East__Spin_through_Wall => write!(
+                f,
+                "{}",
+                "Uhrum > West Entrance > Lower Wall East > Spin through Wall"
+            ),
+            LocationId::Uhrum__West_Entrance__Lower_Wall_West__Charge_through_Wall => write!(
+                f,
+                "{}",
+                "Uhrum > West Entrance > Lower Wall West > Charge through Wall"
+            ),
+            LocationId::Uhrum__West_Entrance__Lower_Wall_West__Mist_through_Wall => write!(
+                f,
+                "{}",
+                "Uhrum > West Entrance > Lower Wall West > Mist through Wall"
+            ),
+            LocationId::Uhrum__West_Entrance__Lower_Wall_West__Spin_through_Wall => write!(
+                f,
+                "{}",
+                "Uhrum > West Entrance > Lower Wall West > Spin through Wall"
+            ),
+            LocationId::Uhrum__West_Entrance__Sand__Refill => {
+                write!(f, "{}", "Uhrum > West Entrance > Sand > Refill")
+            }
+            LocationId::Uhrum__West_Entrance__Upper_Wall_East__Charge_through_Wall => write!(
+                f,
+                "{}",
+                "Uhrum > West Entrance > Upper Wall East > Charge through Wall"
+            ),
+            LocationId::Uhrum__West_Entrance__Upper_Wall_East__Mist_through_Wall => write!(
+                f,
+                "{}",
+                "Uhrum > West Entrance > Upper Wall East > Mist through Wall"
+            ),
+            LocationId::Uhrum__West_Entrance__Upper_Wall_East__Spin_through_Wall => write!(
+                f,
+                "{}",
+                "Uhrum > West Entrance > Upper Wall East > Spin through Wall"
+            ),
+            LocationId::Uhrum__West_Entrance__Upper_Wall_West__Mist_through_Wall => write!(
+                f,
+                "{}",
+                "Uhrum > West Entrance > Upper Wall West > Mist through Wall"
+            ),
         }
     }
 }
@@ -2868,222 +7620,1688 @@ impl std::str::FromStr for LocationId {
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         match s {
             "Amagi > Liru Room > Shrine > Item" => Ok(LocationId::Amagi__Liru_Room__Shrine__Item),
-            "Amagi > Main Area > Way Off To The Side > Item" => Ok(LocationId::Amagi__Main_Area__Way_Off_To_The_Side__Item),
-            "Amagi > West Lake > Cavern Eye > Item" => Ok(LocationId::Amagi__West_Lake__Cavern_Eye__Item),
-            "Amagi > West Lake > Cavern Rear Pillar > Boss Reward" => Ok(LocationId::Amagi__West_Lake__Cavern_Rear_Pillar__Boss_Reward),
-            "Amagi > West Lake > Cavern Refill Station > Break Wall" => Ok(LocationId::Amagi__West_Lake__Cavern_Refill_Station__Break_Wall),
-            "Amagi > West Lake > Cavern Refill Station > Defeat MUS A M20" => Ok(LocationId::Amagi__West_Lake__Cavern_Refill_Station__Defeat_MUS_A_M20),
-            "Amagi > West Lake > Cavern Tear Duct > Remote Flask" => Ok(LocationId::Amagi__West_Lake__Cavern_Tear_Duct__Remote_Flask),
-            "Amagi > West Lake > Stronghold Ceiling Left > Knock Down Left Boulder" => Ok(LocationId::Amagi__West_Lake__Stronghold_Ceiling_Left__Knock_Down_Left_Boulder),
-            "Amagi > West Lake > Stronghold Ceiling Right > Knock Down Right Boulder" => Ok(LocationId::Amagi__West_Lake__Stronghold_Ceiling_Right__Knock_Down_Right_Boulder),
-            "Amagi > West Lake > Stronghold Front Door > Break Wall" => Ok(LocationId::Amagi__West_Lake__Stronghold_Front_Door__Break_Wall),
-            "Amagi > West Lake > Stronghold Front Room > Break Wall" => Ok(LocationId::Amagi__West_Lake__Stronghold_Front_Room__Break_Wall),
-            "Amagi > West Lake > Stronghold Item > Break Wall" => Ok(LocationId::Amagi__West_Lake__Stronghold_Item__Break_Wall),
-            "Amagi > West Lake > Stronghold Item > Item" => Ok(LocationId::Amagi__West_Lake__Stronghold_Item__Item),
-            "Amagi > West Lake > Stronghold Middle Column > Break Wall" => Ok(LocationId::Amagi__West_Lake__Stronghold_Middle_Column__Break_Wall),
-            "Amagi > West Lake > Stronghold Rear Wall > Break Left Wall" => Ok(LocationId::Amagi__West_Lake__Stronghold_Rear_Wall__Break_Left_Wall),
-            "Amagi > West Lake > Stronghold Top > Remote Urn" => Ok(LocationId::Amagi__West_Lake__Stronghold_Top__Remote_Urn),
-            "Amagi > West Lake > Surface Wall Left > Break Wall" => Ok(LocationId::Amagi__West_Lake__Surface_Wall_Left__Break_Wall),
-            "Amagi > West Lake > Surface Wall Right > Break Wall" => Ok(LocationId::Amagi__West_Lake__Surface_Wall_Right__Break_Wall),
-            "Annuna > Mirror Match > Below Switch > Hit Switch" => Ok(LocationId::Annuna__Mirror_Match__Below_Switch__Hit_Switch),
-            "Annuna > Mirror Match > East 26 Lower > Remote Flask" => Ok(LocationId::Annuna__Mirror_Match__East_26_Lower__Remote_Flask),
-            "Annuna > Mirror Match > East 26 Upper > Remote Flask" => Ok(LocationId::Annuna__Mirror_Match__East_26_Upper__Remote_Flask),
-            "Annuna > Mirror Match > Plinth > Item" => Ok(LocationId::Annuna__Mirror_Match__Plinth__Item),
-            "Annuna > Mirror Match > Save Point > Fight" => Ok(LocationId::Annuna__Mirror_Match__Save_Point__Fight),
-            "Annuna > Mirror Match > Waving Distance > Shockwave Flask" => Ok(LocationId::Annuna__Mirror_Match__Waving_Distance__Shockwave_Flask),
-            "Annuna > West Bridge > Plinth > Item" => Ok(LocationId::Annuna__West_Bridge__Plinth__Item),
-            "Antarctica > Building 2 > Behind Boxes > Note" => Ok(LocationId::Antarctica__Building_2__Behind_Boxes__Note),
-            "Antarctica > Power Room > Switch > Flip" => Ok(LocationId::Antarctica__Power_Room__Switch__Flip),
-            "Antarctica > Shed > Interior > Shelf" => Ok(LocationId::Antarctica__Shed__Interior__Shelf),
-            "Ebih > Base Camp > Left Platform Moved > Item From The Side" => Ok(LocationId::Ebih__Base_Camp__Left_Platform_Moved__Item_From_The_Side),
-            "Ebih > Base Camp > Top Platform > Item" => Ok(LocationId::Ebih__Base_Camp__Top_Platform__Item),
-            "Ebih > Boss Room > Boss > Boss Reward" => Ok(LocationId::Ebih__Boss_Room__Boss__Boss_Reward),
-            "Ebih > Boss Room > Boss > Fight Alu" => Ok(LocationId::Ebih__Boss_Room__Boss__Fight_Alu),
+            "Amagi > Main Area > Way Off To The Side > Item" => {
+                Ok(LocationId::Amagi__Main_Area__Way_Off_To_The_Side__Item)
+            }
+            "Amagi > West Lake > Cavern Eye > Item" => {
+                Ok(LocationId::Amagi__West_Lake__Cavern_Eye__Item)
+            }
+            "Amagi > West Lake > Cavern Rear Pillar > Boss Reward" => {
+                Ok(LocationId::Amagi__West_Lake__Cavern_Rear_Pillar__Boss_Reward)
+            }
+            "Amagi > West Lake > Cavern Refill Station > Break Wall" => {
+                Ok(LocationId::Amagi__West_Lake__Cavern_Refill_Station__Break_Wall)
+            }
+            "Amagi > West Lake > Cavern Refill Station > Defeat MUS A M20" => {
+                Ok(LocationId::Amagi__West_Lake__Cavern_Refill_Station__Defeat_MUS_A_M20)
+            }
+            "Amagi > West Lake > Cavern Tear Duct > Remote Flask" => {
+                Ok(LocationId::Amagi__West_Lake__Cavern_Tear_Duct__Remote_Flask)
+            }
+            "Amagi > West Lake > Stronghold Ceiling Left > Knock Down Left Boulder" => {
+                Ok(LocationId::Amagi__West_Lake__Stronghold_Ceiling_Left__Knock_Down_Left_Boulder)
+            }
+            "Amagi > West Lake > Stronghold Ceiling Right > Knock Down Right Boulder" => Ok(
+                LocationId::Amagi__West_Lake__Stronghold_Ceiling_Right__Knock_Down_Right_Boulder,
+            ),
+            "Amagi > West Lake > Stronghold Front Door > Break Wall" => {
+                Ok(LocationId::Amagi__West_Lake__Stronghold_Front_Door__Break_Wall)
+            }
+            "Amagi > West Lake > Stronghold Front Room > Break Wall" => {
+                Ok(LocationId::Amagi__West_Lake__Stronghold_Front_Room__Break_Wall)
+            }
+            "Amagi > West Lake > Stronghold Item > Break Wall" => {
+                Ok(LocationId::Amagi__West_Lake__Stronghold_Item__Break_Wall)
+            }
+            "Amagi > West Lake > Stronghold Item > Item" => {
+                Ok(LocationId::Amagi__West_Lake__Stronghold_Item__Item)
+            }
+            "Amagi > West Lake > Stronghold Middle Column > Break Wall" => {
+                Ok(LocationId::Amagi__West_Lake__Stronghold_Middle_Column__Break_Wall)
+            }
+            "Amagi > West Lake > Stronghold Rear Wall > Break Left Wall" => {
+                Ok(LocationId::Amagi__West_Lake__Stronghold_Rear_Wall__Break_Left_Wall)
+            }
+            "Amagi > West Lake > Stronghold Top > Remote Urn" => {
+                Ok(LocationId::Amagi__West_Lake__Stronghold_Top__Remote_Urn)
+            }
+            "Amagi > West Lake > Surface Wall Left > Break Wall" => {
+                Ok(LocationId::Amagi__West_Lake__Surface_Wall_Left__Break_Wall)
+            }
+            "Amagi > West Lake > Surface Wall Right > Break Wall" => {
+                Ok(LocationId::Amagi__West_Lake__Surface_Wall_Right__Break_Wall)
+            }
+            "Annuna > Mirror Match > Below Switch > Hit Switch" => {
+                Ok(LocationId::Annuna__Mirror_Match__Below_Switch__Hit_Switch)
+            }
+            "Annuna > Mirror Match > East 26 Lower > Remote Flask" => {
+                Ok(LocationId::Annuna__Mirror_Match__East_26_Lower__Remote_Flask)
+            }
+            "Annuna > Mirror Match > East 26 Upper > Remote Flask" => {
+                Ok(LocationId::Annuna__Mirror_Match__East_26_Upper__Remote_Flask)
+            }
+            "Annuna > Mirror Match > Plinth > Item" => {
+                Ok(LocationId::Annuna__Mirror_Match__Plinth__Item)
+            }
+            "Annuna > Mirror Match > Save Point > Fight" => {
+                Ok(LocationId::Annuna__Mirror_Match__Save_Point__Fight)
+            }
+            "Annuna > Mirror Match > Waving Distance > Shockwave Flask" => {
+                Ok(LocationId::Annuna__Mirror_Match__Waving_Distance__Shockwave_Flask)
+            }
+            "Annuna > West Bridge > Plinth > Item" => {
+                Ok(LocationId::Annuna__West_Bridge__Plinth__Item)
+            }
+            "Antarctica > Building 2 > Behind Boxes > Note" => {
+                Ok(LocationId::Antarctica__Building_2__Behind_Boxes__Note)
+            }
+            "Antarctica > Power Room > Switch > Flip" => {
+                Ok(LocationId::Antarctica__Power_Room__Switch__Flip)
+            }
+            "Antarctica > Shed > Interior > Shelf" => {
+                Ok(LocationId::Antarctica__Shed__Interior__Shelf)
+            }
+            "Ebih > Base Camp > Left Platform Moved > Item From The Side" => {
+                Ok(LocationId::Ebih__Base_Camp__Left_Platform_Moved__Item_From_The_Side)
+            }
+            "Ebih > Base Camp > Top Platform > Item" => {
+                Ok(LocationId::Ebih__Base_Camp__Top_Platform__Item)
+            }
+            "Ebih > Boss Room > Boss > Boss Reward" => {
+                Ok(LocationId::Ebih__Boss_Room__Boss__Boss_Reward)
+            }
+            "Ebih > Boss Room > Boss > Fight Alu" => {
+                Ok(LocationId::Ebih__Boss_Room__Boss__Fight_Alu)
+            }
             "Ebih > Boss Room > Boss > Hack Alu" => Ok(LocationId::Ebih__Boss_Room__Boss__Hack_Alu),
-            "Ebih > Boss Room > East Ledge > Item" => Ok(LocationId::Ebih__Boss_Room__East_Ledge__Item),
-            "Ebih > By Garage > Crawlspace > Fragment" => Ok(LocationId::Ebih__By_Garage__Crawlspace__Fragment),
+            "Ebih > Boss Room > East Ledge > Item" => {
+                Ok(LocationId::Ebih__Boss_Room__East_Ledge__Item)
+            }
+            "Ebih > By Garage > Crawlspace > Fragment" => {
+                Ok(LocationId::Ebih__By_Garage__Crawlspace__Fragment)
+            }
             "Ebih > Drone Room > Item > Urn" => Ok(LocationId::Ebih__Drone_Room__Item__Urn),
-            "Ebih > Drone Room > Middle Platform > Urn Quick Grab" => Ok(LocationId::Ebih__Drone_Room__Middle_Platform__Urn_Quick_Grab),
+            "Ebih > Drone Room > Middle Platform > Urn Quick Grab" => {
+                Ok(LocationId::Ebih__Drone_Room__Middle_Platform__Urn_Quick_Grab)
+            }
             "Ebih > Ebih East > Corner > Urn" => Ok(LocationId::Ebih__Ebih_East__Corner__Urn),
-            "Ebih > Ebih East > Dispenser > Vend" => Ok(LocationId::Ebih__Ebih_East__Dispenser__Vend),
-            "Ebih > Ebih East > East Ledge > Note" => Ok(LocationId::Ebih__Ebih_East__East_Ledge__Note),
-            "Ebih > Ebih East > Lower Moving Platform > Remote Urn" => Ok(LocationId::Ebih__Ebih_East__Lower_Moving_Platform__Remote_Urn),
+            "Ebih > Ebih East > Dispenser > Vend" => {
+                Ok(LocationId::Ebih__Ebih_East__Dispenser__Vend)
+            }
+            "Ebih > Ebih East > East Ledge > Note" => {
+                Ok(LocationId::Ebih__Ebih_East__East_Ledge__Note)
+            }
+            "Ebih > Ebih East > Lower Moving Platform > Remote Urn" => {
+                Ok(LocationId::Ebih__Ebih_East__Lower_Moving_Platform__Remote_Urn)
+            }
             "Ebih > Ebih West > Alcove > Tablet" => Ok(LocationId::Ebih__Ebih_West__Alcove__Tablet),
-            "Ebih > Ebih West > Block Left > Break Block" => Ok(LocationId::Ebih__Ebih_West__Block_Left__Break_Block),
-            "Ebih > Ebih West > Block Right > Break Block" => Ok(LocationId::Ebih__Ebih_West__Block_Right__Break_Block),
-            "Ebih > Grid 25,10-12 > East 10 > Remote Bush" => Ok(LocationId::Ebih__Grid_25_10_12__East_10__Remote_Bush),
-            "Ebih > Grid 25,10-12 > Hidden Bush > Behind Bush" => Ok(LocationId::Ebih__Grid_25_10_12__Hidden_Bush__Behind_Bush),
+            "Ebih > Ebih West > Block Left > Break Block" => {
+                Ok(LocationId::Ebih__Ebih_West__Block_Left__Break_Block)
+            }
+            "Ebih > Ebih West > Block Right > Break Block" => {
+                Ok(LocationId::Ebih__Ebih_West__Block_Right__Break_Block)
+            }
+            "Ebih > Grid 25,10-12 > East 10 > Remote Bush" => {
+                Ok(LocationId::Ebih__Grid_25_10_12__East_10__Remote_Bush)
+            }
+            "Ebih > Grid 25,10-12 > Hidden Bush > Behind Bush" => {
+                Ok(LocationId::Ebih__Grid_25_10_12__Hidden_Bush__Behind_Bush)
+            }
             "Ebih > Grid 25,2-6 > Pit > Item" => Ok(LocationId::Ebih__Grid_25_2_6__Pit__Item),
-            "Ebih > Grid 26,10-11 > Ledge > Note" => Ok(LocationId::Ebih__Grid_26_10_11__Ledge__Note),
-            "Ebih > Vertical Interchange > Switch > Activate Switch" => Ok(LocationId::Ebih__Vertical_Interchange__Switch__Activate_Switch),
-            "Ebih > Waterfall > Alcove > Block Left" => Ok(LocationId::Ebih__Waterfall__Alcove__Block_Left),
-            "Ebih > Waterfall > Alcove > Block Right" => Ok(LocationId::Ebih__Waterfall__Alcove__Block_Right),
-            "Ebih > Waterfall > Alcove > Pedestal" => Ok(LocationId::Ebih__Waterfall__Alcove__Pedestal),
-            "Ebih > Waterfall > Alcove Left > Block Left" => Ok(LocationId::Ebih__Waterfall__Alcove_Left__Block_Left),
-            "Ebih > Waterfall > Alcove Right > Block Right" => Ok(LocationId::Ebih__Waterfall__Alcove_Right__Block_Right),
-            "Ebih > Waterfall > Wall Left > Break Through Wall" => Ok(LocationId::Ebih__Waterfall__Wall_Left__Break_Through_Wall),
-            "Ebih > Waterfall > Wall Left > Break Wall" => Ok(LocationId::Ebih__Waterfall__Wall_Left__Break_Wall),
-            "Ebih > Waterfall > Wall Right > Break Through Wall" => Ok(LocationId::Ebih__Waterfall__Wall_Right__Break_Through_Wall),
-            "Ebih > Waterfall > Wall Right > Break Wall" => Ok(LocationId::Ebih__Waterfall__Wall_Right__Break_Wall),
-            "Ebih > Waterfall > Waterfall Center Center > Both Blocks" => Ok(LocationId::Ebih__Waterfall__Waterfall_Center_Center__Both_Blocks),
-            "Giguna > Antechamber > Statue Head > Tablet" => Ok(LocationId::Giguna__Antechamber__Statue_Head__Tablet),
+            "Ebih > Grid 26,10-11 > Ledge > Note" => {
+                Ok(LocationId::Ebih__Grid_26_10_11__Ledge__Note)
+            }
+            "Ebih > Vertical Interchange > Switch > Activate Switch" => {
+                Ok(LocationId::Ebih__Vertical_Interchange__Switch__Activate_Switch)
+            }
+            "Ebih > Waterfall > Alcove > Block Left" => {
+                Ok(LocationId::Ebih__Waterfall__Alcove__Block_Left)
+            }
+            "Ebih > Waterfall > Alcove > Block Right" => {
+                Ok(LocationId::Ebih__Waterfall__Alcove__Block_Right)
+            }
+            "Ebih > Waterfall > Alcove > Pedestal" => {
+                Ok(LocationId::Ebih__Waterfall__Alcove__Pedestal)
+            }
+            "Ebih > Waterfall > Alcove Left > Block Left" => {
+                Ok(LocationId::Ebih__Waterfall__Alcove_Left__Block_Left)
+            }
+            "Ebih > Waterfall > Alcove Right > Block Right" => {
+                Ok(LocationId::Ebih__Waterfall__Alcove_Right__Block_Right)
+            }
+            "Ebih > Waterfall > Wall Left > Break Through Wall" => {
+                Ok(LocationId::Ebih__Waterfall__Wall_Left__Break_Through_Wall)
+            }
+            "Ebih > Waterfall > Wall Left > Break Wall" => {
+                Ok(LocationId::Ebih__Waterfall__Wall_Left__Break_Wall)
+            }
+            "Ebih > Waterfall > Wall Right > Break Through Wall" => {
+                Ok(LocationId::Ebih__Waterfall__Wall_Right__Break_Through_Wall)
+            }
+            "Ebih > Waterfall > Wall Right > Break Wall" => {
+                Ok(LocationId::Ebih__Waterfall__Wall_Right__Break_Wall)
+            }
+            "Ebih > Waterfall > Waterfall Center Center > Both Blocks" => {
+                Ok(LocationId::Ebih__Waterfall__Waterfall_Center_Center__Both_Blocks)
+            }
+            "Giguna > Antechamber > Statue Head > Tablet" => {
+                Ok(LocationId::Giguna__Antechamber__Statue_Head__Tablet)
+            }
             "Giguna > Carnelian > Vault > Item" => Ok(LocationId::Giguna__Carnelian__Vault__Item),
             "Giguna > Clouds > Cache > Item" => Ok(LocationId::Giguna__Clouds__Cache__Item),
-            "Giguna > Dual Path > Base of Wall > Break Wall" => Ok(LocationId::Giguna__Dual_Path__Base_of_Wall__Break_Wall),
-            "Giguna > Dual Path > Base of Wall > Mist into Wall" => Ok(LocationId::Giguna__Dual_Path__Base_of_Wall__Mist_into_Wall),
-            "Giguna > Dual Path > Below Left Switch > Remote Switch" => Ok(LocationId::Giguna__Dual_Path__Below_Left_Switch__Remote_Switch),
-            "Giguna > Dual Path > Below Right Switch > Remote Switch" => Ok(LocationId::Giguna__Dual_Path__Below_Right_Switch__Remote_Switch),
-            "Giguna > Dual Path > Left Switch > Hit Switch" => Ok(LocationId::Giguna__Dual_Path__Left_Switch__Hit_Switch),
-            "Giguna > Dual Path > Right Switch > Hit Switch" => Ok(LocationId::Giguna__Dual_Path__Right_Switch__Hit_Switch),
-            "Giguna > Dual Path > Wall Secret > Health" => Ok(LocationId::Giguna__Dual_Path__Wall_Secret__Health),
-            "Giguna > East Caverns > Hidden Passage Center > Hidden Flask" => Ok(LocationId::Giguna__East_Caverns__Hidden_Passage_Center__Hidden_Flask),
-            "Giguna > Far Corner > Grass > Obscured Item" => Ok(LocationId::Giguna__Far_Corner__Grass__Obscured_Item),
-            "Giguna > Gateway > Block Left > Shockwave" => Ok(LocationId::Giguna__Gateway__Block_Left__Shockwave),
-            "Giguna > Gateway > Block Right > Shockwave" => Ok(LocationId::Giguna__Gateway__Block_Right__Shockwave),
-            "Giguna > Gateway > Button > Hit Switch" => Ok(LocationId::Giguna__Gateway__Button__Hit_Switch),
-            "Giguna > Gateway > Flask Ledge > Item" => Ok(LocationId::Giguna__Gateway__Flask_Ledge__Item),
+            "Giguna > Dual Path > Base of Wall > Break Wall" => {
+                Ok(LocationId::Giguna__Dual_Path__Base_of_Wall__Break_Wall)
+            }
+            "Giguna > Dual Path > Base of Wall > Mist into Wall" => {
+                Ok(LocationId::Giguna__Dual_Path__Base_of_Wall__Mist_into_Wall)
+            }
+            "Giguna > Dual Path > Below Left Switch > Remote Switch" => {
+                Ok(LocationId::Giguna__Dual_Path__Below_Left_Switch__Remote_Switch)
+            }
+            "Giguna > Dual Path > Below Right Switch > Remote Switch" => {
+                Ok(LocationId::Giguna__Dual_Path__Below_Right_Switch__Remote_Switch)
+            }
+            "Giguna > Dual Path > Left Switch > Hit Switch" => {
+                Ok(LocationId::Giguna__Dual_Path__Left_Switch__Hit_Switch)
+            }
+            "Giguna > Dual Path > Right Switch > Hit Switch" => {
+                Ok(LocationId::Giguna__Dual_Path__Right_Switch__Hit_Switch)
+            }
+            "Giguna > Dual Path > Wall Secret > Health" => {
+                Ok(LocationId::Giguna__Dual_Path__Wall_Secret__Health)
+            }
+            "Giguna > East Caverns > Hidden Passage Center > Hidden Flask" => {
+                Ok(LocationId::Giguna__East_Caverns__Hidden_Passage_Center__Hidden_Flask)
+            }
+            "Giguna > Far Corner > Grass > Obscured Item" => {
+                Ok(LocationId::Giguna__Far_Corner__Grass__Obscured_Item)
+            }
+            "Giguna > Gateway > Block Left > Shockwave" => {
+                Ok(LocationId::Giguna__Gateway__Block_Left__Shockwave)
+            }
+            "Giguna > Gateway > Block Right > Shockwave" => {
+                Ok(LocationId::Giguna__Gateway__Block_Right__Shockwave)
+            }
+            "Giguna > Gateway > Button > Hit Switch" => {
+                Ok(LocationId::Giguna__Gateway__Button__Hit_Switch)
+            }
+            "Giguna > Gateway > Flask Ledge > Item" => {
+                Ok(LocationId::Giguna__Gateway__Flask_Ledge__Item)
+            }
             "Giguna > Giguna Base > Ruin > Item" => Ok(LocationId::Giguna__Giguna_Base__Ruin__Item),
-            "Giguna > Giguna Base > Table > News" => Ok(LocationId::Giguna__Giguna_Base__Table__News),
-            "Giguna > Giguna Northeast > Door > Remote Flask" => Ok(LocationId::Giguna__Giguna_Northeast__Door__Remote_Flask),
-            "Giguna > Giguna Northeast > Gate Button > Open Gate" => Ok(LocationId::Giguna__Giguna_Northeast__Gate_Button__Open_Gate),
-            "Giguna > Giguna Northeast > Gate Right > Remote Button" => Ok(LocationId::Giguna__Giguna_Northeast__Gate_Right__Remote_Button),
-            "Giguna > Giguna Northeast > Vault > Item" => Ok(LocationId::Giguna__Giguna_Northeast__Vault__Item),
-            "Giguna > Gubi Lair > Center Platform > Boss Reward" => Ok(LocationId::Giguna__Gubi_Lair__Center_Platform__Boss_Reward),
-            "Giguna > Gubi Lair > Center Platform > Fight Gubi" => Ok(LocationId::Giguna__Gubi_Lair__Center_Platform__Fight_Gubi),
-            "Giguna > Gubi Lair > Center Platform > Hack Gubi" => Ok(LocationId::Giguna__Gubi_Lair__Center_Platform__Hack_Gubi),
-            "Giguna > Gubi Lair > Pedestal > Axe" => Ok(LocationId::Giguna__Gubi_Lair__Pedestal__Axe),
-            "Giguna > Hard Rock > Rock Center > Tablet" => Ok(LocationId::Giguna__Hard_Rock__Rock_Center__Tablet),
-            "Giguna > Hard Rock > Rock Left > Enter Rock as Mist" => Ok(LocationId::Giguna__Hard_Rock__Rock_Left__Enter_Rock_as_Mist),
-            "Giguna > Hard Rock > Rock Left > Shockwave Boulder" => Ok(LocationId::Giguna__Hard_Rock__Rock_Left__Shockwave_Boulder),
-            "Giguna > Hard Rock > Rock Right > Enter Rock as Mist" => Ok(LocationId::Giguna__Hard_Rock__Rock_Right__Enter_Rock_as_Mist),
-            "Giguna > Hard Rock > Rock Right > Shockwave Boulder" => Ok(LocationId::Giguna__Hard_Rock__Rock_Right__Shockwave_Boulder),
-            "Giguna > Helipad > Tablet Ledge > Tablet" => Ok(LocationId::Giguna__Helipad__Tablet_Ledge__Tablet),
+            "Giguna > Giguna Base > Table > News" => {
+                Ok(LocationId::Giguna__Giguna_Base__Table__News)
+            }
+            "Giguna > Giguna Northeast > Door > Remote Flask" => {
+                Ok(LocationId::Giguna__Giguna_Northeast__Door__Remote_Flask)
+            }
+            "Giguna > Giguna Northeast > Gate Button > Open Gate" => {
+                Ok(LocationId::Giguna__Giguna_Northeast__Gate_Button__Open_Gate)
+            }
+            "Giguna > Giguna Northeast > Gate Right > Remote Button" => {
+                Ok(LocationId::Giguna__Giguna_Northeast__Gate_Right__Remote_Button)
+            }
+            "Giguna > Giguna Northeast > Vault > Item" => {
+                Ok(LocationId::Giguna__Giguna_Northeast__Vault__Item)
+            }
+            "Giguna > Gubi Lair > Center Platform > Boss Reward" => {
+                Ok(LocationId::Giguna__Gubi_Lair__Center_Platform__Boss_Reward)
+            }
+            "Giguna > Gubi Lair > Center Platform > Fight Gubi" => {
+                Ok(LocationId::Giguna__Gubi_Lair__Center_Platform__Fight_Gubi)
+            }
+            "Giguna > Gubi Lair > Center Platform > Hack Gubi" => {
+                Ok(LocationId::Giguna__Gubi_Lair__Center_Platform__Hack_Gubi)
+            }
+            "Giguna > Gubi Lair > Pedestal > Axe" => {
+                Ok(LocationId::Giguna__Gubi_Lair__Pedestal__Axe)
+            }
+            "Giguna > Hard Rock > Rock Center > Tablet" => {
+                Ok(LocationId::Giguna__Hard_Rock__Rock_Center__Tablet)
+            }
+            "Giguna > Hard Rock > Rock Left > Enter Rock as Mist" => {
+                Ok(LocationId::Giguna__Hard_Rock__Rock_Left__Enter_Rock_as_Mist)
+            }
+            "Giguna > Hard Rock > Rock Left > Shockwave Boulder" => {
+                Ok(LocationId::Giguna__Hard_Rock__Rock_Left__Shockwave_Boulder)
+            }
+            "Giguna > Hard Rock > Rock Right > Enter Rock as Mist" => {
+                Ok(LocationId::Giguna__Hard_Rock__Rock_Right__Enter_Rock_as_Mist)
+            }
+            "Giguna > Hard Rock > Rock Right > Shockwave Boulder" => {
+                Ok(LocationId::Giguna__Hard_Rock__Rock_Right__Shockwave_Boulder)
+            }
+            "Giguna > Helipad > Tablet Ledge > Tablet" => {
+                Ok(LocationId::Giguna__Helipad__Tablet_Ledge__Tablet)
+            }
             "Giguna > Lamassu > Deposit > Flask" => Ok(LocationId::Giguna__Lamassu__Deposit__Flask),
-            "Giguna > Ruins Center > Tablet > Item" => Ok(LocationId::Giguna__Ruins_Center__Tablet__Item),
-            "Giguna > Ruins East > Way Up High > Item" => Ok(LocationId::Giguna__Ruins_East__Way_Up_High__Item),
+            "Giguna > Ruins Center > Tablet > Item" => {
+                Ok(LocationId::Giguna__Ruins_Center__Tablet__Item)
+            }
+            "Giguna > Ruins East > Way Up High > Item" => {
+                Ok(LocationId::Giguna__Ruins_East__Way_Up_High__Item)
+            }
             "Giguna > Ruins Top > Flask > Flask" => Ok(LocationId::Giguna__Ruins_Top__Flask__Flask),
-            "Giguna > Ruins Top > Small Ledge > Shockwave Flask" => Ok(LocationId::Giguna__Ruins_Top__Small_Ledge__Shockwave_Flask),
-            "Giguna > Wasteland > Door Right > Health" => Ok(LocationId::Giguna__Wasteland__Door_Right__Health),
-            "Giguna > Wasteland > Passage Cache > Clear Horizontal Passage Manually" => Ok(LocationId::Giguna__Wasteland__Passage_Cache__Clear_Horizontal_Passage_Manually),
-            "Giguna > Wasteland > Passage Cache > Mist through Horizontal Passage" => Ok(LocationId::Giguna__Wasteland__Passage_Cache__Mist_through_Horizontal_Passage),
-            "Giguna > Wasteland > Passage East > Clear Horizontal Passage Manually" => Ok(LocationId::Giguna__Wasteland__Passage_East__Clear_Horizontal_Passage_Manually),
-            "Giguna > Wasteland > Passage East > Mist through Horizontal Passage" => Ok(LocationId::Giguna__Wasteland__Passage_East__Mist_through_Horizontal_Passage),
-            "Giguna > West Caverns > Bush > Item" => Ok(LocationId::Giguna__West_Caverns__Bush__Item),
-            "Giguna > West Caverns > Cache > Item" => Ok(LocationId::Giguna__West_Caverns__Cache__Item),
+            "Giguna > Ruins Top > Small Ledge > Shockwave Flask" => {
+                Ok(LocationId::Giguna__Ruins_Top__Small_Ledge__Shockwave_Flask)
+            }
+            "Giguna > Wasteland > Door Right > Health" => {
+                Ok(LocationId::Giguna__Wasteland__Door_Right__Health)
+            }
+            "Giguna > Wasteland > Passage Cache > Clear Horizontal Passage Manually" => {
+                Ok(LocationId::Giguna__Wasteland__Passage_Cache__Clear_Horizontal_Passage_Manually)
+            }
+            "Giguna > Wasteland > Passage Cache > Mist through Horizontal Passage" => {
+                Ok(LocationId::Giguna__Wasteland__Passage_Cache__Mist_through_Horizontal_Passage)
+            }
+            "Giguna > Wasteland > Passage East > Clear Horizontal Passage Manually" => {
+                Ok(LocationId::Giguna__Wasteland__Passage_East__Clear_Horizontal_Passage_Manually)
+            }
+            "Giguna > Wasteland > Passage East > Mist through Horizontal Passage" => {
+                Ok(LocationId::Giguna__Wasteland__Passage_East__Mist_through_Horizontal_Passage)
+            }
+            "Giguna > West Caverns > Bush > Item" => {
+                Ok(LocationId::Giguna__West_Caverns__Bush__Item)
+            }
+            "Giguna > West Caverns > Cache > Item" => {
+                Ok(LocationId::Giguna__West_Caverns__Cache__Item)
+            }
             "Giguna > West Tower > Top > Tablet" => Ok(LocationId::Giguna__West_Tower__Top__Tablet),
-            "Giguna Breach > Chimney > Cache > Flask" => Ok(LocationId::Giguna_Breach__Chimney__Cache__Flask),
-            "Giguna Breach > Cubby > Rocks > Health" => Ok(LocationId::Giguna_Breach__Cubby__Rocks__Health),
-            "Giguna Breach > Slingshot > Ravine > Urn" => Ok(LocationId::Giguna_Breach__Slingshot__Ravine__Urn),
-            "Glacier > Apocalypse Entry > Terminal > Escape" => Ok(LocationId::Glacier__Apocalypse_Entry__Terminal__Escape),
-            "Glacier > Boomerang Room > Pedestal > Item" => Ok(LocationId::Glacier__Boomerang_Room__Pedestal__Item),
-            "Glacier > Boomerang Room > Pedestal > Switch" => Ok(LocationId::Glacier__Boomerang_Room__Pedestal__Switch),
-            "Glacier > Compass Room > Center > Table" => Ok(LocationId::Glacier__Compass_Room__Center__Table),
-            "Glacier > Ledge Grab Room > Cliff Bottom > Quick Grab" => Ok(LocationId::Glacier__Ledge_Grab_Room__Cliff_Bottom__Quick_Grab),
-            "Glacier > Ledge Grab Room > Pedestal > Item" => Ok(LocationId::Glacier__Ledge_Grab_Room__Pedestal__Item),
-            "Glacier > The Big Drop > Water Surface > Drown" => Ok(LocationId::Glacier__The_Big_Drop__Water_Surface__Drown),
-            "Glacier > Vertical Room > Peak > Flask" => Ok(LocationId::Glacier__Vertical_Room__Peak__Flask),
-            "Glacier > Vertical Room > Under Switch > Switch" => Ok(LocationId::Glacier__Vertical_Room__Under_Switch__Switch),
-            "Interior > Building Interior > Corner > Urn" => Ok(LocationId::Interior__Building_Interior__Corner__Urn),
-            "Interior > Building Interior > Entry > Remote Urn" => Ok(LocationId::Interior__Building_Interior__Entry__Remote_Urn),
-            "Interior > Bunker Interior > Desk > Note" => Ok(LocationId::Interior__Bunker_Interior__Desk__Note),
-            "Interior > Ebih Cave > Entry > Health" => Ok(LocationId::Interior__Ebih_Cave__Entry__Health),
-            "Interior > Garage > Boxes > Under Boxes" => Ok(LocationId::Interior__Garage__Boxes__Under_Boxes),
-            "Interior > Outpost Interior > Bookshelf > Note" => Ok(LocationId::Interior__Outpost_Interior__Bookshelf__Note),
-            "Interior > Tent Interior > Desk > Note" => Ok(LocationId::Interior__Tent_Interior__Desk__Note),
-            "Irikar > Abandoned Room > Corner Core > Core" => Ok(LocationId::Irikar__Abandoned_Room__Corner_Core__Core),
-            "Irikar > Boss Room > Bull's Feet > Boss Reward" => Ok(LocationId::Irikar__Boss_Room__Bulls_Feet__Boss_Reward),
-            "Irikar > Boss Room > Bull's Feet > Defeat Gudam" => Ok(LocationId::Irikar__Boss_Room__Bulls_Feet__Defeat_Gudam),
-            "Irikar > Boss Room > Bull's Feet > Shockwave Gudam" => Ok(LocationId::Irikar__Boss_Room__Bulls_Feet__Shockwave_Gudam),
-            "Irikar > Boss Room > Healthy Rooftop > Health" => Ok(LocationId::Irikar__Boss_Room__Healthy_Rooftop__Health),
-            "Irikar > East Rooftops > Top Rooftop > Tablet" => Ok(LocationId::Irikar__East_Rooftops__Top_Rooftop__Tablet),
-            "Irikar > Hub > Dagger Altar > Weapon" => Ok(LocationId::Irikar__Hub__Dagger_Altar__Weapon),
-            "Irikar > Hub > Royal Storage By Wall > Mist into Wall" => Ok(LocationId::Irikar__Hub__Royal_Storage_By_Wall__Mist_into_Wall),
-            "Irikar > Hub > Royal Storage By Wall > Shockwave Wall" => Ok(LocationId::Irikar__Hub__Royal_Storage_By_Wall__Shockwave_Wall),
-            "Irikar > Hub > Royal Storage in Wall > Item" => Ok(LocationId::Irikar__Hub__Royal_Storage_in_Wall__Item),
-            "Irikar > Hub > Sat Tower Top Ledge > Tablet" => Ok(LocationId::Irikar__Hub__Sat_Tower_Top_Ledge__Tablet),
+            "Giguna Breach > Chimney > Cache > Flask" => {
+                Ok(LocationId::Giguna_Breach__Chimney__Cache__Flask)
+            }
+            "Giguna Breach > Cubby > Rocks > Health" => {
+                Ok(LocationId::Giguna_Breach__Cubby__Rocks__Health)
+            }
+            "Giguna Breach > Slingshot > Ravine > Urn" => {
+                Ok(LocationId::Giguna_Breach__Slingshot__Ravine__Urn)
+            }
+            "Glacier > Apocalypse Entry > Terminal > Escape" => {
+                Ok(LocationId::Glacier__Apocalypse_Entry__Terminal__Escape)
+            }
+            "Glacier > Boomerang Room > Pedestal > Item" => {
+                Ok(LocationId::Glacier__Boomerang_Room__Pedestal__Item)
+            }
+            "Glacier > Boomerang Room > Pedestal > Switch" => {
+                Ok(LocationId::Glacier__Boomerang_Room__Pedestal__Switch)
+            }
+            "Glacier > Compass Room > Center > Table" => {
+                Ok(LocationId::Glacier__Compass_Room__Center__Table)
+            }
+            "Glacier > Ledge Grab Room > Cliff Bottom > Quick Grab" => {
+                Ok(LocationId::Glacier__Ledge_Grab_Room__Cliff_Bottom__Quick_Grab)
+            }
+            "Glacier > Ledge Grab Room > Pedestal > Item" => {
+                Ok(LocationId::Glacier__Ledge_Grab_Room__Pedestal__Item)
+            }
+            "Glacier > The Big Drop > Water Surface > Drown" => {
+                Ok(LocationId::Glacier__The_Big_Drop__Water_Surface__Drown)
+            }
+            "Glacier > Vertical Room > Peak > Flask" => {
+                Ok(LocationId::Glacier__Vertical_Room__Peak__Flask)
+            }
+            "Glacier > Vertical Room > Under Switch > Switch" => {
+                Ok(LocationId::Glacier__Vertical_Room__Under_Switch__Switch)
+            }
+            "Interior > Building Interior > Corner > Urn" => {
+                Ok(LocationId::Interior__Building_Interior__Corner__Urn)
+            }
+            "Interior > Building Interior > Entry > Remote Urn" => {
+                Ok(LocationId::Interior__Building_Interior__Entry__Remote_Urn)
+            }
+            "Interior > Bunker Interior > Desk > Note" => {
+                Ok(LocationId::Interior__Bunker_Interior__Desk__Note)
+            }
+            "Interior > Ebih Cave > Entry > Health" => {
+                Ok(LocationId::Interior__Ebih_Cave__Entry__Health)
+            }
+            "Interior > Garage > Boxes > Under Boxes" => {
+                Ok(LocationId::Interior__Garage__Boxes__Under_Boxes)
+            }
+            "Interior > Outpost Interior > Bookshelf > Note" => {
+                Ok(LocationId::Interior__Outpost_Interior__Bookshelf__Note)
+            }
+            "Interior > Tent Interior > Desk > Note" => {
+                Ok(LocationId::Interior__Tent_Interior__Desk__Note)
+            }
+            "Irikar > Abandoned Room > Corner Core > Core" => {
+                Ok(LocationId::Irikar__Abandoned_Room__Corner_Core__Core)
+            }
+            "Irikar > Boss Room > Bull's Feet > Boss Reward" => {
+                Ok(LocationId::Irikar__Boss_Room__Bulls_Feet__Boss_Reward)
+            }
+            "Irikar > Boss Room > Bull's Feet > Defeat Gudam" => {
+                Ok(LocationId::Irikar__Boss_Room__Bulls_Feet__Defeat_Gudam)
+            }
+            "Irikar > Boss Room > Bull's Feet > Shockwave Gudam" => {
+                Ok(LocationId::Irikar__Boss_Room__Bulls_Feet__Shockwave_Gudam)
+            }
+            "Irikar > Boss Room > Healthy Rooftop > Health" => {
+                Ok(LocationId::Irikar__Boss_Room__Healthy_Rooftop__Health)
+            }
+            "Irikar > East Rooftops > Top Rooftop > Tablet" => {
+                Ok(LocationId::Irikar__East_Rooftops__Top_Rooftop__Tablet)
+            }
+            "Irikar > Hub > Dagger Altar > Weapon" => {
+                Ok(LocationId::Irikar__Hub__Dagger_Altar__Weapon)
+            }
+            "Irikar > Hub > Royal Storage By Wall > Mist into Wall" => {
+                Ok(LocationId::Irikar__Hub__Royal_Storage_By_Wall__Mist_into_Wall)
+            }
+            "Irikar > Hub > Royal Storage By Wall > Shockwave Wall" => {
+                Ok(LocationId::Irikar__Hub__Royal_Storage_By_Wall__Shockwave_Wall)
+            }
+            "Irikar > Hub > Royal Storage in Wall > Item" => {
+                Ok(LocationId::Irikar__Hub__Royal_Storage_in_Wall__Item)
+            }
+            "Irikar > Hub > Sat Tower Top Ledge > Tablet" => {
+                Ok(LocationId::Irikar__Hub__Sat_Tower_Top_Ledge__Tablet)
+            }
             "Irikar > Lamassu > Desk > Item" => Ok(LocationId::Irikar__Lamassu__Desk__Item),
-            "Irikar > Sight Room > Item Pedestal > Urn" => Ok(LocationId::Irikar__Sight_Room__Item_Pedestal__Urn),
-            "Irikar Breach > Gauntlet > Hidden Path Reward > Item" => Ok(LocationId::Irikar_Breach__Gauntlet__Hidden_Path_Reward__Item),
-            "Irikar Breach > Hover Room > Bottom > Item" => Ok(LocationId::Irikar_Breach__Hover_Room__Bottom__Item),
-            "Irikar Breach > Worm Rave > Corner > Item" => Ok(LocationId::Irikar_Breach__Worm_Rave__Corner__Item),
-            "Menu > Upgrade Menu > Combat > Melee Damage 1" => Ok(LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_1),
-            "Menu > Upgrade Menu > Combat > Melee Damage 2" => Ok(LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_2),
-            "Menu > Upgrade Menu > Combat > Melee Damage 3" => Ok(LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_3),
-            "Menu > Upgrade Menu > Combat > Melee Speed 1" => Ok(LocationId::Menu__Upgrade_Menu__Combat__Melee_Speed_1),
-            "Menu > Upgrade Menu > Combat > Melee Speed 2" => Ok(LocationId::Menu__Upgrade_Menu__Combat__Melee_Speed_2),
-            "Menu > Upgrade Menu > Combat > Melee Speed 3" => Ok(LocationId::Menu__Upgrade_Menu__Combat__Melee_Speed_3),
-            "Menu > Upgrade Menu > Combat > Ranged Damage 1" => Ok(LocationId::Menu__Upgrade_Menu__Combat__Ranged_Damage_1),
-            "Menu > Upgrade Menu > Combat > Ranged Damage 2" => Ok(LocationId::Menu__Upgrade_Menu__Combat__Ranged_Damage_2),
-            "Menu > Upgrade Menu > Combat > Ranged Damage 3" => Ok(LocationId::Menu__Upgrade_Menu__Combat__Ranged_Damage_3),
-            "Menu > Upgrade Menu > Combat > Ranged Speed 1" => Ok(LocationId::Menu__Upgrade_Menu__Combat__Ranged_Speed_1),
-            "Menu > Upgrade Menu > Combat > Ranged Speed 2" => Ok(LocationId::Menu__Upgrade_Menu__Combat__Ranged_Speed_2),
-            "Menu > Upgrade Menu > Combat > Ranged Speed 3" => Ok(LocationId::Menu__Upgrade_Menu__Combat__Ranged_Speed_3),
-            "Menu > Upgrade Menu > Drone > Drone Melee Damage 1" => Ok(LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_1),
-            "Menu > Upgrade Menu > Drone > Drone Melee Damage 2" => Ok(LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_2),
-            "Menu > Upgrade Menu > Drone > Drone Melee Damage 3" => Ok(LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_3),
-            "Menu > Upgrade Menu > Drone > Drone Melee Speed 1" => Ok(LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_1),
-            "Menu > Upgrade Menu > Drone > Drone Melee Speed 2" => Ok(LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_2),
-            "Menu > Upgrade Menu > Drone > Drone Melee Speed 3" => Ok(LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_3),
-            "Menu > Upgrade Menu > Infection > Infection Level 1" => Ok(LocationId::Menu__Upgrade_Menu__Infection__Infection_Level_1),
-            "Menu > Upgrade Menu > Infection > Infection Level 2" => Ok(LocationId::Menu__Upgrade_Menu__Infection__Infection_Level_2),
-            "Menu > Upgrade Menu > Infection > Infection Level 3" => Ok(LocationId::Menu__Upgrade_Menu__Infection__Infection_Level_3),
-            "Menu > Upgrade Menu > Infection > Infection Range 1" => Ok(LocationId::Menu__Upgrade_Menu__Infection__Infection_Range_1),
-            "Menu > Upgrade Menu > Infection > Infection Range 2" => Ok(LocationId::Menu__Upgrade_Menu__Infection__Infection_Range_2),
-            "Menu > Upgrade Menu > Infection > Infection Range 3" => Ok(LocationId::Menu__Upgrade_Menu__Infection__Infection_Range_3),
-            "Menu > Upgrade Menu > Infection > Infection Speed 1" => Ok(LocationId::Menu__Upgrade_Menu__Infection__Infection_Speed_1),
-            "Menu > Upgrade Menu > Infection > Infection Speed 2" => Ok(LocationId::Menu__Upgrade_Menu__Infection__Infection_Speed_2),
-            "Menu > Upgrade Menu > Infection > Nano Points 1" => Ok(LocationId::Menu__Upgrade_Menu__Infection__Nano_Points_1),
-            "Menu > Upgrade Menu > Infection > Nano Points 2" => Ok(LocationId::Menu__Upgrade_Menu__Infection__Nano_Points_2),
-            "Menu > Upgrade Menu > Infection > Nano Points 3" => Ok(LocationId::Menu__Upgrade_Menu__Infection__Nano_Points_3),
-            "Menu > Upgrade Menu > Physiology > Health Upgrade 1" => Ok(LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_1),
-            "Menu > Upgrade Menu > Physiology > Health Upgrade 2" => Ok(LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_2),
-            "Menu > Upgrade Menu > Physiology > Health Upgrade 3" => Ok(LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_3),
-            "Menu > Upgrade Menu > Physiology > Health Upgrade 4" => Ok(LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_4),
-            "Menu > Upgrade Menu > Physiology > Health Upgrade 5" => Ok(LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_5),
-            "Menu > Upgrade Menu > Physiology > Mist Upgrade" => Ok(LocationId::Menu__Upgrade_Menu__Physiology__Mist_Upgrade),
-            "Uhrum > Annuna Corridor > Block East > Dislodge Block" => Ok(LocationId::Uhrum__Annuna_Corridor__Block_East__Dislodge_Block),
-            "Uhrum > Annuna Corridor > Block West > Dislodge Block" => Ok(LocationId::Uhrum__Annuna_Corridor__Block_West__Dislodge_Block),
-            "Uhrum > Annuna Corridor > East Cubby > Tablet" => Ok(LocationId::Uhrum__Annuna_Corridor__East_Cubby__Tablet),
-            "Uhrum > Annuna Corridor > Pedestal > Urn" => Ok(LocationId::Uhrum__Annuna_Corridor__Pedestal__Urn),
-            "Uhrum > Annuna Corridor > Statue > Item" => Ok(LocationId::Uhrum__Annuna_Corridor__Statue__Item),
-            "Uhrum > Annuna Corridor > Upper Trees > Remote Urn" => Ok(LocationId::Uhrum__Annuna_Corridor__Upper_Trees__Remote_Urn),
-            "Uhrum > Siege Corridor > Center Box > Box" => Ok(LocationId::Uhrum__Siege_Corridor__Center_Box__Box),
-            "Uhrum > Siege Corridor > Pond > Item" => Ok(LocationId::Uhrum__Siege_Corridor__Pond__Item),
-            "Uhrum > Siege Corridor > Upper Rock Item > Urn" => Ok(LocationId::Uhrum__Siege_Corridor__Upper_Rock_Item__Urn),
-            "Uhrum > Siege Corridor > Western Cache > Core" => Ok(LocationId::Uhrum__Siege_Corridor__Western_Cache__Core),
-            "Uhrum > Waterfalls > Above Block > Block" => Ok(LocationId::Uhrum__Waterfalls__Above_Block__Block),
-            "Uhrum > Waterfalls > Barrier East > Charge through Wall" => Ok(LocationId::Uhrum__Waterfalls__Barrier_East__Charge_through_Wall),
-            "Uhrum > Waterfalls > Barrier East > Mist through Wall" => Ok(LocationId::Uhrum__Waterfalls__Barrier_East__Mist_through_Wall),
-            "Uhrum > Waterfalls > Barrier East > Spin through Wall" => Ok(LocationId::Uhrum__Waterfalls__Barrier_East__Spin_through_Wall),
-            "Uhrum > Waterfalls > Barrier West > Charge through Wall" => Ok(LocationId::Uhrum__Waterfalls__Barrier_West__Charge_through_Wall),
-            "Uhrum > Waterfalls > Barrier West > Mist through Wall" => Ok(LocationId::Uhrum__Waterfalls__Barrier_West__Mist_through_Wall),
-            "Uhrum > Waterfalls > Barrier West > Spin through Wall" => Ok(LocationId::Uhrum__Waterfalls__Barrier_West__Spin_through_Wall),
-            "Uhrum > Waterfalls > Below Block > Shockwave Block" => Ok(LocationId::Uhrum__Waterfalls__Below_Block__Shockwave_Block),
-            "Uhrum > Waterfalls > Ceiling Cache > Flask" => Ok(LocationId::Uhrum__Waterfalls__Ceiling_Cache__Flask),
-            "Uhrum > Waterfalls > East 26 > Block" => Ok(LocationId::Uhrum__Waterfalls__East_26__Block),
-            "Uhrum > Waterfalls > West Water Nook > Tablet" => Ok(LocationId::Uhrum__Waterfalls__West_Water_Nook__Tablet),
-            "Uhrum > West Entrance > Gate Switch > Open Gate" => Ok(LocationId::Uhrum__West_Entrance__Gate_Switch__Open_Gate),
-            "Uhrum > West Entrance > Inner Dais > Item" => Ok(LocationId::Uhrum__West_Entrance__Inner_Dais__Item),
-            "Uhrum > West Entrance > Lower Wall East > Charge through Wall" => Ok(LocationId::Uhrum__West_Entrance__Lower_Wall_East__Charge_through_Wall),
-            "Uhrum > West Entrance > Lower Wall East > Mist through Wall" => Ok(LocationId::Uhrum__West_Entrance__Lower_Wall_East__Mist_through_Wall),
-            "Uhrum > West Entrance > Lower Wall East > Spin through Wall" => Ok(LocationId::Uhrum__West_Entrance__Lower_Wall_East__Spin_through_Wall),
-            "Uhrum > West Entrance > Lower Wall West > Charge through Wall" => Ok(LocationId::Uhrum__West_Entrance__Lower_Wall_West__Charge_through_Wall),
-            "Uhrum > West Entrance > Lower Wall West > Mist through Wall" => Ok(LocationId::Uhrum__West_Entrance__Lower_Wall_West__Mist_through_Wall),
-            "Uhrum > West Entrance > Lower Wall West > Spin through Wall" => Ok(LocationId::Uhrum__West_Entrance__Lower_Wall_West__Spin_through_Wall),
-            "Uhrum > West Entrance > Sand > Refill" => Ok(LocationId::Uhrum__West_Entrance__Sand__Refill),
-            "Uhrum > West Entrance > Upper Wall East > Charge through Wall" => Ok(LocationId::Uhrum__West_Entrance__Upper_Wall_East__Charge_through_Wall),
-            "Uhrum > West Entrance > Upper Wall East > Mist through Wall" => Ok(LocationId::Uhrum__West_Entrance__Upper_Wall_East__Mist_through_Wall),
-            "Uhrum > West Entrance > Upper Wall East > Spin through Wall" => Ok(LocationId::Uhrum__West_Entrance__Upper_Wall_East__Spin_through_Wall),
-            "Uhrum > West Entrance > Upper Wall West > Mist through Wall" => Ok(LocationId::Uhrum__West_Entrance__Upper_Wall_West__Mist_through_Wall),
+            "Irikar > Sight Room > Item Pedestal > Urn" => {
+                Ok(LocationId::Irikar__Sight_Room__Item_Pedestal__Urn)
+            }
+            "Irikar Breach > Gauntlet > Hidden Path Reward > Item" => {
+                Ok(LocationId::Irikar_Breach__Gauntlet__Hidden_Path_Reward__Item)
+            }
+            "Irikar Breach > Hover Room > Bottom > Item" => {
+                Ok(LocationId::Irikar_Breach__Hover_Room__Bottom__Item)
+            }
+            "Irikar Breach > Worm Rave > Corner > Item" => {
+                Ok(LocationId::Irikar_Breach__Worm_Rave__Corner__Item)
+            }
+            "Menu > Upgrade Menu > Combat > Melee Damage 1" => {
+                Ok(LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_1)
+            }
+            "Menu > Upgrade Menu > Combat > Melee Damage 2" => {
+                Ok(LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_2)
+            }
+            "Menu > Upgrade Menu > Combat > Melee Damage 3" => {
+                Ok(LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_3)
+            }
+            "Menu > Upgrade Menu > Combat > Melee Speed 1" => {
+                Ok(LocationId::Menu__Upgrade_Menu__Combat__Melee_Speed_1)
+            }
+            "Menu > Upgrade Menu > Combat > Melee Speed 2" => {
+                Ok(LocationId::Menu__Upgrade_Menu__Combat__Melee_Speed_2)
+            }
+            "Menu > Upgrade Menu > Combat > Melee Speed 3" => {
+                Ok(LocationId::Menu__Upgrade_Menu__Combat__Melee_Speed_3)
+            }
+            "Menu > Upgrade Menu > Combat > Ranged Damage 1" => {
+                Ok(LocationId::Menu__Upgrade_Menu__Combat__Ranged_Damage_1)
+            }
+            "Menu > Upgrade Menu > Combat > Ranged Damage 2" => {
+                Ok(LocationId::Menu__Upgrade_Menu__Combat__Ranged_Damage_2)
+            }
+            "Menu > Upgrade Menu > Combat > Ranged Damage 3" => {
+                Ok(LocationId::Menu__Upgrade_Menu__Combat__Ranged_Damage_3)
+            }
+            "Menu > Upgrade Menu > Combat > Ranged Speed 1" => {
+                Ok(LocationId::Menu__Upgrade_Menu__Combat__Ranged_Speed_1)
+            }
+            "Menu > Upgrade Menu > Combat > Ranged Speed 2" => {
+                Ok(LocationId::Menu__Upgrade_Menu__Combat__Ranged_Speed_2)
+            }
+            "Menu > Upgrade Menu > Combat > Ranged Speed 3" => {
+                Ok(LocationId::Menu__Upgrade_Menu__Combat__Ranged_Speed_3)
+            }
+            "Menu > Upgrade Menu > Drone > Drone Melee Damage 1" => {
+                Ok(LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_1)
+            }
+            "Menu > Upgrade Menu > Drone > Drone Melee Damage 2" => {
+                Ok(LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_2)
+            }
+            "Menu > Upgrade Menu > Drone > Drone Melee Damage 3" => {
+                Ok(LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_3)
+            }
+            "Menu > Upgrade Menu > Drone > Drone Melee Speed 1" => {
+                Ok(LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_1)
+            }
+            "Menu > Upgrade Menu > Drone > Drone Melee Speed 2" => {
+                Ok(LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_2)
+            }
+            "Menu > Upgrade Menu > Drone > Drone Melee Speed 3" => {
+                Ok(LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_3)
+            }
+            "Menu > Upgrade Menu > Infection > Infection Level 1" => {
+                Ok(LocationId::Menu__Upgrade_Menu__Infection__Infection_Level_1)
+            }
+            "Menu > Upgrade Menu > Infection > Infection Level 2" => {
+                Ok(LocationId::Menu__Upgrade_Menu__Infection__Infection_Level_2)
+            }
+            "Menu > Upgrade Menu > Infection > Infection Level 3" => {
+                Ok(LocationId::Menu__Upgrade_Menu__Infection__Infection_Level_3)
+            }
+            "Menu > Upgrade Menu > Infection > Infection Range 1" => {
+                Ok(LocationId::Menu__Upgrade_Menu__Infection__Infection_Range_1)
+            }
+            "Menu > Upgrade Menu > Infection > Infection Range 2" => {
+                Ok(LocationId::Menu__Upgrade_Menu__Infection__Infection_Range_2)
+            }
+            "Menu > Upgrade Menu > Infection > Infection Range 3" => {
+                Ok(LocationId::Menu__Upgrade_Menu__Infection__Infection_Range_3)
+            }
+            "Menu > Upgrade Menu > Infection > Infection Speed 1" => {
+                Ok(LocationId::Menu__Upgrade_Menu__Infection__Infection_Speed_1)
+            }
+            "Menu > Upgrade Menu > Infection > Infection Speed 2" => {
+                Ok(LocationId::Menu__Upgrade_Menu__Infection__Infection_Speed_2)
+            }
+            "Menu > Upgrade Menu > Infection > Nano Points 1" => {
+                Ok(LocationId::Menu__Upgrade_Menu__Infection__Nano_Points_1)
+            }
+            "Menu > Upgrade Menu > Infection > Nano Points 2" => {
+                Ok(LocationId::Menu__Upgrade_Menu__Infection__Nano_Points_2)
+            }
+            "Menu > Upgrade Menu > Infection > Nano Points 3" => {
+                Ok(LocationId::Menu__Upgrade_Menu__Infection__Nano_Points_3)
+            }
+            "Menu > Upgrade Menu > Physiology > Health Upgrade 1" => {
+                Ok(LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_1)
+            }
+            "Menu > Upgrade Menu > Physiology > Health Upgrade 2" => {
+                Ok(LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_2)
+            }
+            "Menu > Upgrade Menu > Physiology > Health Upgrade 3" => {
+                Ok(LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_3)
+            }
+            "Menu > Upgrade Menu > Physiology > Health Upgrade 4" => {
+                Ok(LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_4)
+            }
+            "Menu > Upgrade Menu > Physiology > Health Upgrade 5" => {
+                Ok(LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_5)
+            }
+            "Menu > Upgrade Menu > Physiology > Mist Upgrade" => {
+                Ok(LocationId::Menu__Upgrade_Menu__Physiology__Mist_Upgrade)
+            }
+            "Uhrum > Annuna Corridor > Block East > Dislodge Block" => {
+                Ok(LocationId::Uhrum__Annuna_Corridor__Block_East__Dislodge_Block)
+            }
+            "Uhrum > Annuna Corridor > Block West > Dislodge Block" => {
+                Ok(LocationId::Uhrum__Annuna_Corridor__Block_West__Dislodge_Block)
+            }
+            "Uhrum > Annuna Corridor > East Cubby > Tablet" => {
+                Ok(LocationId::Uhrum__Annuna_Corridor__East_Cubby__Tablet)
+            }
+            "Uhrum > Annuna Corridor > Pedestal > Urn" => {
+                Ok(LocationId::Uhrum__Annuna_Corridor__Pedestal__Urn)
+            }
+            "Uhrum > Annuna Corridor > Statue > Item" => {
+                Ok(LocationId::Uhrum__Annuna_Corridor__Statue__Item)
+            }
+            "Uhrum > Annuna Corridor > Upper Trees > Remote Urn" => {
+                Ok(LocationId::Uhrum__Annuna_Corridor__Upper_Trees__Remote_Urn)
+            }
+            "Uhrum > Siege Corridor > Center Box > Box" => {
+                Ok(LocationId::Uhrum__Siege_Corridor__Center_Box__Box)
+            }
+            "Uhrum > Siege Corridor > Pond > Item" => {
+                Ok(LocationId::Uhrum__Siege_Corridor__Pond__Item)
+            }
+            "Uhrum > Siege Corridor > Upper Rock Item > Urn" => {
+                Ok(LocationId::Uhrum__Siege_Corridor__Upper_Rock_Item__Urn)
+            }
+            "Uhrum > Siege Corridor > Western Cache > Core" => {
+                Ok(LocationId::Uhrum__Siege_Corridor__Western_Cache__Core)
+            }
+            "Uhrum > Waterfalls > Above Block > Block" => {
+                Ok(LocationId::Uhrum__Waterfalls__Above_Block__Block)
+            }
+            "Uhrum > Waterfalls > Barrier East > Charge through Wall" => {
+                Ok(LocationId::Uhrum__Waterfalls__Barrier_East__Charge_through_Wall)
+            }
+            "Uhrum > Waterfalls > Barrier East > Mist through Wall" => {
+                Ok(LocationId::Uhrum__Waterfalls__Barrier_East__Mist_through_Wall)
+            }
+            "Uhrum > Waterfalls > Barrier East > Spin through Wall" => {
+                Ok(LocationId::Uhrum__Waterfalls__Barrier_East__Spin_through_Wall)
+            }
+            "Uhrum > Waterfalls > Barrier West > Charge through Wall" => {
+                Ok(LocationId::Uhrum__Waterfalls__Barrier_West__Charge_through_Wall)
+            }
+            "Uhrum > Waterfalls > Barrier West > Mist through Wall" => {
+                Ok(LocationId::Uhrum__Waterfalls__Barrier_West__Mist_through_Wall)
+            }
+            "Uhrum > Waterfalls > Barrier West > Spin through Wall" => {
+                Ok(LocationId::Uhrum__Waterfalls__Barrier_West__Spin_through_Wall)
+            }
+            "Uhrum > Waterfalls > Below Block > Shockwave Block" => {
+                Ok(LocationId::Uhrum__Waterfalls__Below_Block__Shockwave_Block)
+            }
+            "Uhrum > Waterfalls > Ceiling Cache > Flask" => {
+                Ok(LocationId::Uhrum__Waterfalls__Ceiling_Cache__Flask)
+            }
+            "Uhrum > Waterfalls > East 26 > Block" => {
+                Ok(LocationId::Uhrum__Waterfalls__East_26__Block)
+            }
+            "Uhrum > Waterfalls > West Water Nook > Tablet" => {
+                Ok(LocationId::Uhrum__Waterfalls__West_Water_Nook__Tablet)
+            }
+            "Uhrum > West Entrance > Gate Switch > Open Gate" => {
+                Ok(LocationId::Uhrum__West_Entrance__Gate_Switch__Open_Gate)
+            }
+            "Uhrum > West Entrance > Inner Dais > Item" => {
+                Ok(LocationId::Uhrum__West_Entrance__Inner_Dais__Item)
+            }
+            "Uhrum > West Entrance > Lower Wall East > Charge through Wall" => {
+                Ok(LocationId::Uhrum__West_Entrance__Lower_Wall_East__Charge_through_Wall)
+            }
+            "Uhrum > West Entrance > Lower Wall East > Mist through Wall" => {
+                Ok(LocationId::Uhrum__West_Entrance__Lower_Wall_East__Mist_through_Wall)
+            }
+            "Uhrum > West Entrance > Lower Wall East > Spin through Wall" => {
+                Ok(LocationId::Uhrum__West_Entrance__Lower_Wall_East__Spin_through_Wall)
+            }
+            "Uhrum > West Entrance > Lower Wall West > Charge through Wall" => {
+                Ok(LocationId::Uhrum__West_Entrance__Lower_Wall_West__Charge_through_Wall)
+            }
+            "Uhrum > West Entrance > Lower Wall West > Mist through Wall" => {
+                Ok(LocationId::Uhrum__West_Entrance__Lower_Wall_West__Mist_through_Wall)
+            }
+            "Uhrum > West Entrance > Lower Wall West > Spin through Wall" => {
+                Ok(LocationId::Uhrum__West_Entrance__Lower_Wall_West__Spin_through_Wall)
+            }
+            "Uhrum > West Entrance > Sand > Refill" => {
+                Ok(LocationId::Uhrum__West_Entrance__Sand__Refill)
+            }
+            "Uhrum > West Entrance > Upper Wall East > Charge through Wall" => {
+                Ok(LocationId::Uhrum__West_Entrance__Upper_Wall_East__Charge_through_Wall)
+            }
+            "Uhrum > West Entrance > Upper Wall East > Mist through Wall" => {
+                Ok(LocationId::Uhrum__West_Entrance__Upper_Wall_East__Mist_through_Wall)
+            }
+            "Uhrum > West Entrance > Upper Wall East > Spin through Wall" => {
+                Ok(LocationId::Uhrum__West_Entrance__Upper_Wall_East__Spin_through_Wall)
+            }
+            "Uhrum > West Entrance > Upper Wall West > Mist through Wall" => {
+                Ok(LocationId::Uhrum__West_Entrance__Upper_Wall_West__Mist_through_Wall)
+            }
             _ => Err(format!("Could not recognize as a LocationId: {}", s)),
         }
     }
 }
 
-#[derive(Debug, PartialEq, Eq, Copy, Clone, Hash, Ord, PartialOrd, enum_map::Enum, serde_repr::Serialize_repr, serde_repr::Deserialize_repr)]
+#[derive(
+    Debug,
+    PartialEq,
+    Eq,
+    Copy,
+    Clone,
+    Hash,
+    Ord,
+    PartialOrd,
+    enum_map::Enum,
+    serde_repr::Serialize_repr,
+    serde_repr::Deserialize_repr,
+)]
 #[repr(u16)]
 pub enum ExitId {
-    Amagi__Grid_31_19__East__ex__Liru_Room__West_19_1,    Amagi__Grid_31_19__West__ex__Main_Area__East_19_1,    Amagi__Liru_Room__Platform_4_Left__ex__West_20_1,    Amagi__Liru_Room__Platform_4_Right__ex__East_Passage_1,    Amagi__Liru_Room__West_19__ex__Grid_31_19__East_1,    Amagi__Liru_Room__West_20__ex__Platform_4_Left_1,    Amagi__Liru_Room__West_20__ex__Platform_4_Right_1,    Amagi__Liru_Room__West_20__ex__Shrine_1,    Amagi__Main_Area__Carving__ex__Secret_Outcropping_1,    Amagi__Main_Area__Carving__ex__Secret_Outcropping_2,    Amagi__Main_Area__Catwalk_Center__ex__East_Ledge_1,    Amagi__Main_Area__Catwalk_Center__ex__Platform_3_1,    Amagi__Main_Area__East_15__ex__Glacier__Lake_Main_Entrance__Lake_Access_1,    Amagi__Main_Area__East_19__ex__Grid_31_19__West_1,    Amagi__Main_Area__Platform_2__ex__West_Shelf_1,    Amagi__Main_Area__Secret_Outcropping__ex__Interior__Cave_Behind_Waterfall__Bottom_1,    Amagi__Main_Area__Secret_Waterfall__ex__Interior__Cave_Behind_Waterfall__Top_1,    Amagi__Main_Area__Shallow_End__ex__Waters_Edge_1,    Amagi__Main_Area__West_15__ex__West_Lake__East_15_1,    Amagi__Main_Area__West_18__ex__West_Lake__East_18_1,    Amagi__Main_Area__West_19__ex__West_Lake__East_19_1,    Amagi__Main_Area__West_Side__ex__Carving_1,    Amagi__Main_Area__West_Side__ex__Carving_2,    Amagi__West_Lake__Cavern_Refill_Station__Defeat_MUS_A_M20,    Amagi__West_Lake__Cavern_Refill_Station__ex__Cavern_Tear_Duct_1,    Amagi__West_Lake__Cavern_Tear_Duct__ex__Cavern_Refill_Station_1,    Amagi__West_Lake__East_15__ex__Main_Area__West_15_1,    Amagi__West_Lake__East_18__ex__Main_Area__West_18_1,    Amagi__West_Lake__East_19__ex__Main_Area__West_19_1,    Amagi__West_Lake__Northwest_Platform__ex__West_Cliff_1,    Amagi__West_Lake__Stronghold_Ceiling_Left__ex__Stronghold_Middle_Column_1,    Amagi__West_Lake__Stronghold_Ceiling_Right__ex__Stronghold_Front_Room_1,    Amagi__West_Lake__Stronghold_Front_Door__ex__Stronghold_Front_Room_1,    Amagi__West_Lake__Stronghold_Front_Room__ex__Stronghold_Ceiling_Right_1,    Amagi__West_Lake__Stronghold_Front_Room__ex__Stronghold_Front_Door_1,    Amagi__West_Lake__Stronghold_Item__ex__Stronghold_Middle_Column_1,    Amagi__West_Lake__Stronghold_Middle_Column__ex__Stronghold_Ceiling_Left_1,    Amagi__West_Lake__Stronghold_Middle_Column__ex__Stronghold_Item_1,    Amagi__West_Lake__Stronghold_Top__Remote_Urn,    Amagi__West_Lake__Surface_Wall_Left__ex__Surface_Wall_Right_1,    Amagi__West_Lake__Surface_Wall_Right__ex__Surface_Wall_Left_1,    Amagi__West_Lake__West_15__ex__Ebih__Vertical_Interchange__East_15_1,    Amagi__West_Lake__West_Bank__ex__West_Shore_1,    Annuna__East_Bridge__West_25_Lower__ex__West_Bridge__East_25_Upper_1,    Annuna__East_Bridge__West_25_Upper__ex__West_Bridge__East_25_Upper_1,    Annuna__East_Bridge__West_Staircase_Upper_West__ex__Upper_West_Gap_1,    Annuna__East_Bridge__West_Staircase_Upper_West__ex__Upper_West_Gap_East_1,    Annuna__East_Bridge__West_Under_Gap__ex__Upper_West_Gap_1,    Annuna__East_Bridge__West_Under_Gap__ex__Upper_West_Gap_East_1,    Annuna__Mirror_Match__Below_Switch__ex__Central_Pillar_1,    Annuna__Mirror_Match__Central_Pillar__ex__Below_Switch_1,    Annuna__Mirror_Match__Central_Pillar__ex__Save_Point_1,    Annuna__Mirror_Match__Central_Pillar__ex__West_25_1,    Annuna__Mirror_Match__East_25_Lower__ex__West_Bridge__West_25_Lower_1,    Annuna__Mirror_Match__East_25_Upper__ex__West_Bridge__West_25_Upper_1,    Annuna__Mirror_Match__East_26_Lower__ex__West_Bridge__West_26_Lower_1,    Annuna__Mirror_Match__East_26_Upper__ex__West_Bridge__West_26_Upper_1,    Annuna__Mirror_Match__East_26_Upper__Remote_Flask,    Annuna__Mirror_Match__Eastward__ex__Staircase_1,    Annuna__Mirror_Match__Eastward__ex__Staircase_2,    Annuna__Mirror_Match__Plinth__ex__East_26_Upper_1,    Annuna__Mirror_Match__Staircase__ex__Eastward_1,    Annuna__Mirror_Match__Staircase__ex__Eastward_2,    Annuna__Mirror_Match__West_25__ex__Uhrum__Annuna_Corridor__East_25_1,    Annuna__West_Bridge__East_25_Lower__ex__East_Bridge__West_25_Lower_1,    Annuna__West_Bridge__West_25_Lower__ex__Mirror_Match__East_25_Lower_1,    Antarctica__Building_1E__Connector__ex__Building_1W__Connector_1,    Antarctica__Building_1E__Connector__ex__East_Entry_1,    Antarctica__Building_1E__East_Entry__ex__East__Building_1_Entry_1,    Antarctica__Building_1W__Connector__ex__Building_1E__Connector_1,    Antarctica__Building_1W__West_Entry__ex__West__Boxes_1,    Antarctica__Building_2__Entry__ex__East__Building_2_Entry_1,    Antarctica__Building_2__Entry__ex__Freight_Elevator__Left_1,    Antarctica__Building_2__Entry__ex__Stairs_1,    Antarctica__Building_2__Stairs__ex__Behind_Boxes_1,    Antarctica__Building_2__Stairs__ex__Entry_1,    Antarctica__Building_2__Upper_Door__ex__East__Building_2_Upper_1,    Antarctica__East__Building_1_Entry__ex__Building_1E__East_Entry_1,    Antarctica__East__Building_1_Entry__ex__Building_2_Upper_1,    Antarctica__East__Building_2_Entry__ex__Building_2__Entry_1,    Antarctica__East__Building_2_Entry__ex__Building_2_Upper_1,    Antarctica__East__Building_2_Upper__ex__Building_2__Upper_Door_1,    Antarctica__East__Building_2_Upper__ex__Top__Power_Entry_1,    Antarctica__Freight_Elevator__Controls__ex__Interior__Dock_Elevator__Elevator_1,    Antarctica__Freight_Elevator__Left__ex__Building_2__Entry_1,    Antarctica__Power_Room__Entry__ex__Top__Power_Entry_1,    Antarctica__Shed__Interior__ex__West__Shed_Entry_1,    Antarctica__Top__Power_Entry__ex__East__Building_2_Upper_1,    Antarctica__Top__Power_Entry__ex__Power_Room__Entry_1,    Antarctica__West__Boxes__ex__Building_1W__West_Entry_1,    Antarctica__West__Shed_Entry__ex__Helipad_1,    Antarctica__West__Shed_Entry__ex__Shed__Interior_1,    Ebih__Base_Camp__Building_Entry__ex__Interior__Building_Interior__Entry_1,    Ebih__Base_Camp__Bunker_Entry__ex__Interior__Bunker_Interior__Entry_1,    Ebih__Base_Camp__East_11__ex__Glacier__Grid_31_9_12__Midair_1,    Ebih__Base_Camp__East_11__ex__Top_Platform_1,    Ebih__Base_Camp__East_12__ex__Glacier__Grid_31_9_12__West_12_1,    Ebih__Base_Camp__Lake_Access__ex__Glacier__Lake_Main_Entrance__Ebih_Access_1,    Ebih__Base_Camp__Left_Platform__ex__Top_Platform_1,    Ebih__Base_Camp__Left_Platform_Moved__ex__Top_Platform_1,    Ebih__Base_Camp__Left_Platform_Moved__ex__Top_Platform_2,    Ebih__Base_Camp__Save_Point__ex__Top_Platform_1,    Ebih__Base_Camp__Tent_Entry__ex__Interior__Tent_Interior__Entry_1,    Ebih__Base_Camp__Top_Platform__ex__Left_Platform_1,    Ebih__Base_Camp__Top_Platform__ex__Left_Platform_Moved_1,    Ebih__Base_Camp__West_11__ex__Left_Platform_1,    Ebih__Base_Camp__West_11__ex__Left_Platform_2,    Ebih__Base_Camp__West_11__ex__Observation_Tower_Room__East_11_1,    Ebih__Base_Camp__West_12__ex__By_Garage__East_12_1,    Ebih__Base_Camp__West_13__ex__By_Garage__East_13_1,    Ebih__Boss_Room__East_4__ex__Drone_Room__West_4_1,    Ebih__Boss_Room__East_6__ex__Drone_Room__West_6_1,    Ebih__Boss_Room__High_Platform__ex__East_4_1,    Ebih__Boss_Room__Lower_Ledge__ex__Upper_Tree_1,    Ebih__Boss_Room__Lower_Tree__ex__Lower_Ledge_1,    Ebih__Boss_Room__Lower_Tree__ex__Lower_Ledge_2,    Ebih__Boss_Room__West_6__ex__Grid_21_2_6__East_6_1,    Ebih__By_Garage__Crawlspace__ex__Crawlspace_Opening_1,    Ebih__By_Garage__Crawlspace_Opening__ex__Crawlspace_1,    Ebih__By_Garage__East_13__ex__Base_Camp__West_13_1,    Ebih__By_Garage__East_Platform__ex__Crawlspace_Opening_1,    Ebih__By_Garage__East_Platform__ex__Crawlspace_Opening_2,    Ebih__By_Garage__East_Platform__ex__Outcropping_1,    Ebih__By_Garage__East_Platform__ex__Outcropping_2,    Ebih__By_Garage__Garage_Entry__ex__Interior__Garage__Entry_1,    Ebih__By_Garage__Lower_Platform__ex__East_Bush_1,    Ebih__By_Garage__Lower_Platform__ex__East_Bush_2,    Ebih__By_Garage__Lower_Platform__ex__West_Bush_1,    Ebih__By_Garage__Lower_Platform__ex__West_Bush_2,    Ebih__By_Garage__West_12__ex__Grid_25_10_12__East_12_1,    Ebih__Drone_Room__East_4__ex__Grid_25_2_6__West_4_1,    Ebih__Drone_Room__Middle_Platform__ex__Portal_Exit_1,    Ebih__Drone_Room__Middle_Platform__Urn_Quick_Grab,    Ebih__Drone_Room__Pit_Left__ex__Middle_Platform_1,    Ebih__Drone_Room__Pit_Left__ex__Middle_Platform_2,    Ebih__Drone_Room__Pit_Left__ex__West_6_1,    Ebih__Drone_Room__Pit_Left__ex__West_6_2,    Ebih__Drone_Room__Portal__ex__Portal_Exit_1,    Ebih__Drone_Room__Portal_Exit__ex__Moving_Platform_1,    Ebih__Drone_Room__Portal_Exit__ex__Moving_Platform_2,    Ebih__Drone_Room__West_4__ex__Boss_Room__East_4_1,    Ebih__Drone_Room__West_6__ex__Boss_Room__East_6_1,    Ebih__Ebih_East__Dispenser__ex__Lower_Moving_Platform_1,    Ebih__Ebih_East__Dispenser__ex__Lower_Moving_Platform_2,    Ebih__Ebih_East__East_9__ex__East_Hill_1,    Ebih__Ebih_East__East_9__ex__Observation_Tower_Room__West_9_1,    Ebih__Ebih_East__Ledge_End__ex__East_Ledge_1,    Ebih__Ebih_East__Moving_Platform__ex__East_Ledge_1,    Ebih__Ebih_East__West_7__ex__Waterfall__East_7_1,    Ebih__Ebih_East__West_8__ex__Waterfall__East_8_1,    Ebih__Ebih_West__Above_Door__ex__Below_Door_1,    Ebih__Ebih_West__Above_Door__ex__Refill_Station_1,    Ebih__Ebih_West__Above_Door__ex__Small_Gap_1,    Ebih__Ebih_West__Alcove_Entrance__ex__Above_Alcove_1,    Ebih__Ebih_West__Alcove_Entrance__ex__Above_Alcove_2,    Ebih__Ebih_West__Below_Door__ex__Above_Door_1,    Ebih__Ebih_West__Below_Door__ex__Refill_Station_1,    Ebih__Ebih_West__Block_Left__ex__Alcove_Entrance_1,    Ebih__Ebih_West__Block_Left__ex__Alcove_Entrance_2,    Ebih__Ebih_West__Block_Left__ex__Block_Right_1,    Ebih__Ebih_West__Block_Left__ex__Mid_Save_1,    Ebih__Ebih_West__Block_Left__ex__Mid_Save_2,    Ebih__Ebih_West__Block_Right__ex__Block_Left_1,    Ebih__Ebih_West__East_10__ex__Waterfall__West_10_1,    Ebih__Ebih_West__East_11__ex__Waterfall__West_11_1,    Ebih__Ebih_West__East_13__ex__Vertical_Interchange__West_13_1,    Ebih__Ebih_West__East_6__ex__Grid_21_2_6__West_6_1,    Ebih__Ebih_West__East_7__ex__Waterfall__West_7_1,    Ebih__Ebih_West__East_8__ex__Waterfall__West_8_1,    Ebih__Ebih_West__East_9__ex__Waterfall__West_9_1,    Ebih__Ebih_West__Giguna_Pillar__ex__Giguna__Giguna_Northeast__Inner_Wall_1,    Ebih__Ebih_West__High_Platform__ex__High_Ledge_1,    Ebih__Ebih_West__High_Platform__ex__High_Ledge_2,    Ebih__Ebih_West__Left_of_Gap__ex__Small_Gap_1,    Ebih__Ebih_West__Lower_Hill__ex__Left_of_Gap_1,    Ebih__Ebih_West__Lower_Platform__ex__Lower_Cliff_1,    Ebih__Ebih_West__Middle_Middle__ex__Above_Chute_1,    Ebih__Ebih_West__Middle_Middle__ex__Above_Chute_2,    Ebih__Ebih_West__Middle_Middle__ex__East_7_1,    Ebih__Ebih_West__Middle_Middle__ex__East_7_2,    Ebih__Ebih_West__Small_Gap__ex__Left_of_Gap_1,    Ebih__Ebih_West__West_11__ex__Giguna__Giguna_Northeast__East_11_1,    Ebih__Ebih_West__West_12__ex__Giguna__Wasteland__East_12_1,    Ebih__Ebih_West__West_12__ex__West_Fork_1,    Ebih__Ebih_West__West_13__ex__Giguna__Wasteland__East_13_1,    Ebih__Ebih_West__West_9__ex__Giguna__Giguna_Northeast__East_9_1,    Ebih__Ebih_West__West_9__ex__Giguna_Pillar_1,    Ebih__Gem_Room__West_13__ex__Vertical_Interchange__East_13_1,    Ebih__Grid_21_2_6__East_6__ex__Boss_Room__West_6_1,    Ebih__Grid_21_2_6__West_6__ex__Ebih_West__East_6_1,    Ebih__Grid_25_10_12__Below_Bush__ex__Bush_1,    Ebih__Grid_25_10_12__Bush__ex__Mid_Ledge_1,    Ebih__Grid_25_10_12__Door__ex__Door_Left_1,    Ebih__Grid_25_10_12__Door__ex__East_11_1,    Ebih__Grid_25_10_12__Door_Left__ex__Door_1,    Ebih__Grid_25_10_12__East_10__ex__Grid_26_10_11__West_10_1,    Ebih__Grid_25_10_12__East_11__ex__Door_1,    Ebih__Grid_25_10_12__East_11__ex__Grid_26_10_11__West_11_1,    Ebih__Grid_25_10_12__East_12__ex__By_Garage__West_12_1,    Ebih__Grid_25_10_12__Hidden_Bush__ex__East_10_1,    Ebih__Grid_25_10_12__Hidden_Bush__ex__East_10_2,    Ebih__Grid_25_10_12__Mid_Ledge__ex__West_11_1,    Ebih__Grid_25_10_12__Mid_Ledge__ex__West_11_2,    Ebih__Grid_25_10_12__Top_Platform__ex__West_10_1,    Ebih__Grid_25_10_12__West_10__ex__Waterfall__East_10_1,    Ebih__Grid_25_10_12__West_11__ex__Waterfall__East_11_1,    Ebih__Grid_25_2_6__West_4__ex__Drone_Room__East_4_1,    Ebih__Grid_25_2_6__West_4__ex__Pit_1,    Ebih__Grid_26_10_11__East_10__ex__Observation_Tower_Room__West_10_1,    Ebih__Grid_26_10_11__Ledge__ex__Upper_Platform_1,    Ebih__Grid_26_10_11__Middle_Bottom__ex__Middle_Platform_1,    Ebih__Grid_26_10_11__Middle_Platform__ex__West_10_1,    Ebih__Grid_26_10_11__Middle_Platform__ex__West_10_2,    Ebih__Grid_26_10_11__Under_Ledge__ex__Ledge_1,    Ebih__Grid_26_10_11__Under_Ledge__ex__Ledge_2,    Ebih__Grid_26_10_11__Upper_Platform__ex__Cliff_1,    Ebih__Grid_26_10_11__Upper_Platform__ex__Cliff_2,    Ebih__Grid_26_10_11__Upper_Platform__ex__West_10_1,    Ebih__Grid_26_10_11__Upper_Platform__ex__West_10_2,    Ebih__Grid_26_10_11__West_10__ex__Grid_25_10_12__East_10_1,    Ebih__Grid_26_10_11__West_11__ex__Grid_25_10_12__East_11_1,    Ebih__Observation_Tower_Room__East_11__ex__Base_Camp__West_11_1,    Ebih__Observation_Tower_Room__East_11__ex__Cliff_1,    Ebih__Observation_Tower_Room__East_11__ex__Cliff_2,    Ebih__Observation_Tower_Room__Tower_Top__ex__West_9_1,    Ebih__Observation_Tower_Room__Tower_Top__ex__West_9_2,    Ebih__Observation_Tower_Room__West_10__ex__Grid_26_10_11__East_10_1,    Ebih__Observation_Tower_Room__West_9__ex__Ebih_East__East_9_1,    Ebih__Vertical_Interchange__Below_Door__ex__Blocked_Refill_Station_1,    Ebih__Vertical_Interchange__Below_Door__ex__Blocked_Refill_Station_2,    Ebih__Vertical_Interchange__Below_Door__ex__Refill_Station_1,    Ebih__Vertical_Interchange__Below_Door__ex__Refill_Station_2,    Ebih__Vertical_Interchange__Blocked_Refill_Station__ex__Below_Door_1,    Ebih__Vertical_Interchange__Blocked_Refill_Station__ex__Cliff_by_Refill_1,    Ebih__Vertical_Interchange__Cliff_by_Refill__ex__Blocked_Refill_Station_1,    Ebih__Vertical_Interchange__Cliff_by_Refill__ex__Middle_Drop_1,    Ebih__Vertical_Interchange__Cliff_by_Refill__ex__Refill_Station_1,    Ebih__Vertical_Interchange__Cubby_Exit__ex__Below_Door_1,    Ebih__Vertical_Interchange__Cubby_Exit__ex__Blocked_Refill_Station_1,    Ebih__Vertical_Interchange__Door__ex__Door_East_1,    Ebih__Vertical_Interchange__Door__ex__Door_West_1,    Ebih__Vertical_Interchange__Door_East__ex__Door_1,    Ebih__Vertical_Interchange__Door_West__ex__Door_1,    Ebih__Vertical_Interchange__East_13__ex__Gem_Room__West_13_1,    Ebih__Vertical_Interchange__East_15__ex__Amagi__West_Lake__West_15_1,    Ebih__Vertical_Interchange__East_Tunnel__ex__Below_Door_1,    Ebih__Vertical_Interchange__East_Tunnel__ex__Block_Cubby_1,    Ebih__Vertical_Interchange__East_Tunnel__ex__Blocked_Refill_Station_1,    Ebih__Vertical_Interchange__East_Tunnel__ex__Refill_Station_1,    Ebih__Vertical_Interchange__Middle_Descent__ex__East_13_1,    Ebih__Vertical_Interchange__Middle_Descent__ex__Passage_East_1,    Ebih__Vertical_Interchange__Passage_East__ex__Door_West_1,    Ebih__Vertical_Interchange__Passage_East__ex__Passage_West_1,    Ebih__Vertical_Interchange__Passage_West__ex__Door_West_1,    Ebih__Vertical_Interchange__Passage_West__ex__Passage_East_1,    Ebih__Vertical_Interchange__Refill_Station__ex__Below_Door_1,    Ebih__Vertical_Interchange__Refill_Station__ex__Cliff_by_Refill_1,    Ebih__Vertical_Interchange__South__ex__Below_Door_1,    Ebih__Vertical_Interchange__Switch__ex__Below_Door_1,    Ebih__Vertical_Interchange__West_13__ex__Ebih_West__East_13_1,    Ebih__Waterfall__Alcove__ex__Alcove_Left_1,    Ebih__Waterfall__Alcove__ex__Alcove_Left_2,    Ebih__Waterfall__Alcove__ex__Alcove_Right_1,    Ebih__Waterfall__Alcove__ex__Alcove_Right_2,    Ebih__Waterfall__Alcove_Left__ex__Alcove_1,    Ebih__Waterfall__Alcove_Left__ex__Alcove_2,    Ebih__Waterfall__Alcove_Left__ex__Waterfall_Center_Left_1,    Ebih__Waterfall__Alcove_Left__ex__Waterfall_Center_Left_2,    Ebih__Waterfall__Alcove_Right__ex__Alcove_1,    Ebih__Waterfall__Alcove_Right__ex__Alcove_2,    Ebih__Waterfall__Alcove_Right__ex__Waterfall_Center_Right_1,    Ebih__Waterfall__Below_Left_Switch__ex__Ledge_Below_Hole_1,    Ebih__Waterfall__Below_Tree__ex__Big_Tree_1,    Ebih__Waterfall__Below_Tree__ex__Big_Tree_2,    Ebih__Waterfall__Cave_Entrance__ex__Interior__Ebih_Cave__Entry_1,    Ebih__Waterfall__East_10__ex__Grid_25_10_12__West_10_1,    Ebih__Waterfall__East_11__ex__Grid_25_10_12__West_11_1,    Ebih__Waterfall__East_7__ex__Ebih_East__West_7_1,    Ebih__Waterfall__East_8__ex__Ebih_East__West_8_1,    Ebih__Waterfall__Ledge_Below_Hole__ex__Below_Left_Switch_1,    Ebih__Waterfall__Ledge_Below_Hole__ex__Middle_West_Tree_1,    Ebih__Waterfall__Ledge_Below_Hole__ex__Middle_West_Tree_2,    Ebih__Waterfall__Ledge_Below_Hole__ex__West_Door_Right_1,    Ebih__Waterfall__Lower_West_Tree__ex__West_Lower_Path_1,    Ebih__Waterfall__Middle_West_Tree__ex__West_Main_Path_1,    Ebih__Waterfall__Middle_West_Tree__ex__West_Main_Path_2,    Ebih__Waterfall__Near_East_Tree__ex__East_Ledge_1,    Ebih__Waterfall__Platform__ex__Big_Tree_1,    Ebih__Waterfall__Under_Waterfall__ex__Waterfall_Left_1,    Ebih__Waterfall__Wall_Left__Break_Through_Wall,    Ebih__Waterfall__Wall_Left__ex__Wall_Right_1,    Ebih__Waterfall__Wall_Right__Break_Through_Wall,    Ebih__Waterfall__Wall_Right__ex__Lower_West_Tree_1,    Ebih__Waterfall__Wall_Right__ex__Wall_Left_1,    Ebih__Waterfall__West_10__ex__Ebih_West__East_10_1,    Ebih__Waterfall__West_11__ex__Ebih_West__East_11_1,    Ebih__Waterfall__West_7__ex__Ebih_West__East_7_1,    Ebih__Waterfall__West_8__ex__Ebih_West__East_8_1,    Ebih__Waterfall__West_9__ex__Ebih_West__East_9_1,    Ebih__Waterfall__West_Climb__ex__Ledge_Below_Hole_1,    Ebih__Waterfall__West_Door__ex__West_Door_Left_1,    Ebih__Waterfall__West_Door__ex__West_Door_Right_1,    Ebih__Waterfall__West_Door_Left__ex__West_Door_1,    Ebih__Waterfall__West_Door_Right__ex__West_Door_1,    Giguna__Antechamber__Bottom__ex__Left_Wall_Lower_1,    Giguna__Antechamber__East_16__ex__East_Caverns__West_16_1,    Giguna__Antechamber__Left_Wall_Lower__ex__Left_Wall_Mid_1,    Giguna__Antechamber__Left_Wall_Lower__ex__Left_Wall_Mid_2,    Giguna__Antechamber__Left_Wall_Mid__ex__West_15_1,    Giguna__Antechamber__Left_Wall_Mid__ex__West_15_2,    Giguna__Antechamber__Middle_Bricks_Left__ex__West_15_1,    Giguna__Antechamber__Middle_Bricks_Right__ex__Statue_Head_1,    Giguna__Antechamber__Middle_Bricks_Right__ex__Statue_Head_2,    Giguna__Antechamber__Small_Bricks__ex__Middle_Bricks_Right_1,    Giguna__Antechamber__Small_Bricks__ex__Statue_Head_1,    Giguna__Antechamber__Statue_Head__ex__Middle_Bricks_Right_1,    Giguna__Antechamber__Statue_Head__ex__Middle_Bricks_Right_2,    Giguna__Antechamber__Statues_Ledge__ex__Small_Bricks_1,    Giguna__Antechamber__West_15__ex__Gubi_Lair__East_15_1,    Giguna__Antechamber__West_15__ex__Small_Bricks_1,    Giguna__Breachable_Wall__Above_West_Catwalk__ex__Irikar__Boss_Room__Above_Catwalk_1,    Giguna__Breachable_Wall__West_Mid_air__ex__Irikar__East_Rooftops__East_Mid_air_1,    Giguna__Carnelian__Door__ex__Switch_1,    Giguna__Carnelian__Door__ex__Vault_1,    Giguna__Carnelian__East_10__ex__Giguna_Northeast__West_10_1,    Giguna__Carnelian__Lower_Susar__ex__Rock_1,    Giguna__Carnelian__Lower_Susar__ex__West_Ledge_1,    Giguna__Carnelian__Lower_Susar__ex__West_Ledge_2,    Giguna__Carnelian__Middle_Platforms__ex__East_Cliff_1,    Giguna__Carnelian__Middle_Platforms__ex__Upper_Susar_1,    Giguna__Carnelian__Switch__ex__Door_1,    Giguna__Carnelian__Upper_Susar__ex__East_Cliff_1,    Giguna__Carnelian__Upper_Susar__ex__Middle_Platforms_1,    Giguna__Carnelian__Upper_Susar__ex__Upper_Path_1,    Giguna__Carnelian__Vault__ex__Door_1,    Giguna__Carnelian__West_10__ex__West_Caverns__East_10_1,    Giguna__Carnelian__West_Ledge__ex__Upper_Path_1,    Giguna__Carnelian__West_Ledge__ex__West_10_1,    Giguna__Carnelian__West_Ledge__ex__West_10_2,    Giguna__Clouds__Platform_Stop__ex__flipside_1,    Giguna__Clouds__Pull_Right__ex__Irikar__Hub__Northwest_Above_Bowl_1,    Giguna__Clouds__Southeast__ex__Irikar__Hub__Northeast_Above_Bowl_1,    Giguna__Clouds__Southwest__ex__Irikar__Hub__Northwest_1,    Giguna__Clouds__Straight_Down__ex__Irikar__Hub__North_Above_Portal_1,    Giguna__Dual_Path__Base_of_Wall__ex__Wall_Secret_1,    Giguna__Dual_Path__Base_of_Wall__ex__Wall_Top_1,    Giguna__Dual_Path__Base_of_Wall__ex__Wall_Top_2,    Giguna__Dual_Path__Base_of_Wall__Mist_into_Wall,    Giguna__Dual_Path__East_17__ex__East_Caverns__West_17_1,    Giguna__Dual_Path__East_18__ex__Gateway__West_18_1,    Giguna__Dual_Path__East_Gate__ex__East_Gate_NW_1,    Giguna__Dual_Path__East_Gate__ex__East_Gate_NW_2,    Giguna__Dual_Path__East_Gate_NE__ex__East_Gate_1,    Giguna__Dual_Path__East_Gate_NW__ex__East_Gate_NE_1,    Giguna__Dual_Path__In_the_Grass__ex__Wall_Top_1,    Giguna__Dual_Path__In_the_Grass__ex__Wall_Top_2,    Giguna__Dual_Path__Midway__ex__Midway_Plateau_1,    Giguna__Dual_Path__Midway__ex__Midway_Plateau_2,    Giguna__Dual_Path__Wall_Secret__ex__Base_of_Wall_1,    Giguna__Dual_Path__West_17__ex__Hard_Rock__East_17_1,    Giguna__Dual_Path__West_18__ex__Lamassu__East_18_1,    Giguna__Dual_Path__West_18__ex__West_Gate_1,    Giguna__Dual_Path__West_18__ex__West_Gate_2,    Giguna__Dual_Path__West_Gate__ex__West_Gate_NE_1,    Giguna__Dual_Path__West_Gate__ex__West_Gate_NE_2,    Giguna__Dual_Path__West_Gate__ex__West_Gate_NW_1,    Giguna__Dual_Path__West_Gate__ex__West_Gate_NW_2,    Giguna__Dual_Path__West_Gate_NE__ex__West_Gate_1,    Giguna__Dual_Path__West_Gate_NW__ex__West_Gate_1,    Giguna__East_Caverns__Arc_Ledge__ex__Hidden_Passage_West_1,    Giguna__East_Caverns__Arc_Ledge__ex__Statues_Ledge_1,    Giguna__East_Caverns__Arc_Passage__ex__Hidden_Passage_West_1,    Giguna__East_Caverns__Arc_Passage__ex__Hidden_Passage_West_2,    Giguna__East_Caverns__Carving__ex__East_Side_1,    Giguna__East_Caverns__Carving__ex__East_Side_2,    Giguna__East_Caverns__Carving__ex__Middle_Rock_1,    Giguna__East_Caverns__Carving__ex__Middle_Rock_2,    Giguna__East_Caverns__East_17__ex__Vertical_Interchange__West_17_1,    Giguna__East_Caverns__East_Grass__ex__East_17_1,    Giguna__East_Caverns__East_Side__ex__East_Shaft_1,    Giguna__East_Caverns__East_Side__ex__Middle_Rock_1,    Giguna__East_Caverns__Hidden_Passage_East__ex__Hidden_Passage_Center_1,    Giguna__East_Caverns__Hidden_Passage_West__ex__Hidden_Passage_Center_1,    Giguna__East_Caverns__Hidden_Passage_West__ex__Statues_Ledge_1,    Giguna__East_Caverns__Hidden_Passage_West__ex__Statues_Ledge_2,    Giguna__East_Caverns__Lower_Ledge__ex__Arc_Ledge_1,    Giguna__East_Caverns__Lower_Ledge__ex__Arc_Ledge_2,    Giguna__East_Caverns__Lower_Susar__ex__East_Grass_1,    Giguna__East_Caverns__Lower_Susar__ex__Under_Lower_Ledge_1,    Giguna__East_Caverns__Mid_Susar__ex__Middle_Ledge_1,    Giguna__East_Caverns__Mid_Susar__ex__Middle_Ledge_2,    Giguna__East_Caverns__Mid_Susar__ex__Middle_Rock_1,    Giguna__East_Caverns__Middle_Ledge__ex__Upper_Floor_Ledge_1,    Giguna__East_Caverns__Middle_Ledge__ex__Upper_Floor_Ledge_2,    Giguna__East_Caverns__Middle_Ledge__ex__Upper_Passage_West_1,    Giguna__East_Caverns__Middle_Rock__ex__Hidden_Passage_East_1,    Giguna__East_Caverns__Midwest_Ledge__ex__Hidden_Passage_West_1,    Giguna__East_Caverns__Midwest_Ledge__ex__Hidden_Passage_West_2,    Giguna__East_Caverns__Midwest_Ledge__ex__Middle_Ledge_1,    Giguna__East_Caverns__Statues_Ledge__ex__Hidden_Passage_West_1,    Giguna__East_Caverns__Statues_Ledge__ex__Hidden_Passage_West_2,    Giguna__East_Caverns__Statues_Ledge__ex__Midwest_Ledge_1,    Giguna__East_Caverns__Statues_Ledge__ex__Midwest_Ledge_2,    Giguna__East_Caverns__Switch__ex__Door_1,    Giguna__East_Caverns__Upper_Floor__ex__Upper_Passage_West_1,    Giguna__East_Caverns__Upper_Floor__ex__West_14_1,    Giguna__East_Caverns__Upper_Passage_East__ex__Top_Ledge_1,    Giguna__East_Caverns__Upper_Passage_East__ex__Top_Ledge_2,    Giguna__East_Caverns__Upper_Passage_East__ex__Upper_Passage_West_1,    Giguna__East_Caverns__Upper_Passage_West__ex__Upper_Passage_East_1,    Giguna__East_Caverns__Upper_Platforms_Right__ex__Upper_Passage_West_1,    Giguna__East_Caverns__Upper_Susar__ex__Middle_Ledge_1,    Giguna__East_Caverns__Upper_Susar__ex__Top_Past_Susar_1,    Giguna__East_Caverns__Upper_Susar__ex__Upper_Floor_Ledge_1,    Giguna__East_Caverns__Upper_Susar__ex__Upper_Platforms_Right_1,    Giguna__East_Caverns__Upper_Susar_Jump_from_East__ex__Middle_Ledge_1,    Giguna__East_Caverns__Upper_Susar_Jump_from_East__ex__Midwest_Ledge_1,    Giguna__East_Caverns__Upper_Susar_Mid_jump__ex__Top_Past_Susar_1,    Giguna__East_Caverns__West_14__ex__Wasteland__East_14_1,    Giguna__East_Caverns__West_16__ex__Antechamber__East_16_1,    Giguna__East_Caverns__West_16__ex__Door_1,    Giguna__East_Caverns__West_17__ex__Dual_Path__East_17_1,    Giguna__East_Caverns__West_Grass__ex__Lower_Ledge_1,    Giguna__Far_Corner__South__ex__Helipad__North_1,    Giguna__Gateway__Block_Left__ex__Block_Lowered_1,    Giguna__Gateway__Block_Lowered__ex__Block_Left_1,    Giguna__Gateway__Block_Lowered__ex__Block_Left_2,    Giguna__Gateway__Block_Lowered__ex__Block_Right_1,    Giguna__Gateway__Block_Lowered__ex__Block_Right_2,    Giguna__Gateway__Block_Right__ex__Block_Lowered_1,    Giguna__Gateway__Button__ex__East_19_1,    Giguna__Gateway__Door__ex__Block_Left_1,    Giguna__Gateway__Door__ex__Left_Platform_1,    Giguna__Gateway__Door__ex__Passage_Entry_1,    Giguna__Gateway__East_19__ex__Button_1,    Giguna__Gateway__East_19__ex__Vertical_Interchange__West_19_1,    Giguna__Gateway__Far_Ledge__ex__Flask_Ledge_1,    Giguna__Gateway__Far_Ledge__ex__Flask_Ledge_2,    Giguna__Gateway__Far_Ledge__ex__Right_Platform_1,    Giguna__Gateway__Left_Platform__ex__Block_Lowered_1,    Giguna__Gateway__Passage_Entry__ex__Door_1,    Giguna__Gateway__Passage_Entry__ex__Passage_Exit_1,    Giguna__Gateway__Passage_Exit__ex__Left_Platform_1,    Giguna__Gateway__Passage_Exit__ex__Passage_Entry_1,    Giguna__Gateway__Refill_Station__ex__Far_Ledge_1,    Giguna__Gateway__Right_Platform__ex__Far_Ledge_1,    Giguna__Gateway__West_18__ex__Dual_Path__East_18_1,    Giguna__Gateway__West_19__ex__Labyrinth_East__East_19_1,    Giguna__Giguna_Base__Below_Gate__ex__Kari_1,    Giguna__Giguna_Base__Below_Gate__ex__Kari_2,    Giguna__Giguna_Base__Below_Gate__ex__Middle_Platform_1,    Giguna__Giguna_Base__Below_Gate__ex__Middle_Platform_2,    Giguna__Giguna_Base__Building_Entry__ex__Interior__Outpost_Interior__Entry_1,    Giguna__Giguna_Base__East_14__ex__Wasteland__West_14_1,    Giguna__Giguna_Base__East_17__ex__Hard_Rock__West_17_1,    Giguna__Giguna_Base__Kari__ex__Below_Gate_1,    Giguna__Giguna_Base__Left_Pillar__ex__Right_Pillar_1,    Giguna__Giguna_Base__Lower_Fork__ex__Below_Gate_1,    Giguna__Giguna_Base__Lower_Fork__ex__Below_Gate_2,    Giguna__Giguna_Base__Middle_Platform__ex__Below_Gate_1,    Giguna__Giguna_Base__Middle_Platform__ex__Staircase_Top_1,    Giguna__Giguna_Base__Middle_Platform__ex__Stone_Knob_1,    Giguna__Giguna_Base__Middle_Platform__ex__Stone_Knob_2,    Giguna__Giguna_Base__Right_Pillar__ex__Left_Pillar_1,    Giguna__Giguna_Base__Ruin__ex__Left_Pillar_1,    Giguna__Giguna_Base__Ruin__ex__Right_Pillar_1,    Giguna__Giguna_Base__Staircase_Top__ex__Left_Pillar_1,    Giguna__Giguna_Base__Staircase_Top__ex__Left_Pillar_2,    Giguna__Giguna_Base__Stone_Knob__ex__Upper_Cliff_1,    Giguna__Giguna_Base__Stone_Knob__ex__Upper_Cliff_2,    Giguna__Giguna_Base__West_15__ex__Helipad__East_15_1,    Giguna__Giguna_Base__West_15__ex__West_Grate_1,    Giguna__Giguna_Base__West_16__ex__Helipad__East_16_1,    Giguna__Giguna_Base__West_Grate__ex__West_15_1,    Giguna__Giguna_Northeast__Crow_Eating__ex__Gate_Vent_1,    Giguna__Giguna_Northeast__East_11__ex__Ebih__Ebih_West__West_11_1,    Giguna__Giguna_Northeast__East_9__ex__Ebih__Ebih_West__West_9_1,    Giguna__Giguna_Northeast__Gate_Button__ex__Gate_Left_1,    Giguna__Giguna_Northeast__Gate_Left__ex__Gate_Button_1,    Giguna__Giguna_Northeast__Right_Column__ex__Door_1,    Giguna__Giguna_Northeast__Save_Point__ex__Gate_Vent_1,    Giguna__Giguna_Northeast__Step__ex__Gate_Vent_1,    Giguna__Giguna_Northeast__Step__ex__West_9_1,    Giguna__Giguna_Northeast__Step__ex__West_9_2,    Giguna__Giguna_Northeast__Switch__ex__Door_1,    Giguna__Giguna_Northeast__Switch__ex__Right_Column_1,    Giguna__Giguna_Northeast__Vault__ex__Door_1,    Giguna__Giguna_Northeast__Vault__ex__Door_2,    Giguna__Giguna_Northeast__West_10__ex__Carnelian__East_10_1,    Giguna__Giguna_Northeast__West_9__ex__Crow_Eating_1,    Giguna__Giguna_Northeast__West_9__ex__Ruins_East__East_9_1,    Giguna__Gubi_Lair__East_15__ex__Antechamber__West_15_1,    Giguna__Gubi_Lair__East_15__ex__Center_Platform_1,    Giguna__Gubi_Lair__East_Tree__ex__Center_Platform_1,    Giguna__Gubi_Lair__East_Tree__ex__East_15_1,    Giguna__Gubi_Lair__East_Tree__ex__East_15_2,    Giguna__Gubi_Lair__Grass_by_Wall__ex__Center_West_Sapling_1,    Giguna__Gubi_Lair__Grass_by_Wall__ex__Center_West_Sapling_2,    Giguna__Gubi_Lair__Rightmost_Platform__ex__Center_Platform_1,    Giguna__Gubi_Lair__Shaft_Bottom__ex__Pedestal_1,    Giguna__Gubi_Lair__Shaft_Bottom__ex__Pedestal_2,    Giguna__Gubi_Lair__Shaft_Bottom__ex__Pedestal_3,    Giguna__Hard_Rock__East_17__ex__Dual_Path__West_17_1,    Giguna__Hard_Rock__Rock_Left__Enter_Rock_as_Mist,    Giguna__Hard_Rock__Rock_Left__ex__Rock_Center_1,    Giguna__Hard_Rock__Rock_Right__Enter_Rock_as_Mist,    Giguna__Hard_Rock__Rock_Right__ex__Rock_Center_1,    Giguna__Hard_Rock__West_17__ex__Giguna_Base__East_17_1,    Giguna__Helipad__East_15__ex__Giguna_Base__West_15_1,    Giguna__Helipad__East_16__ex__Giguna_Base__West_16_1,    Giguna__Helipad__East_18__ex__Lamassu__West_18_1,    Giguna__Helipad__Lowest_Ledge__ex__Clouds__North_Under_Ledge_1,    Giguna__Helipad__Railing__ex__Wall_Top_1,    Giguna__Helipad__So_Close__ex__Tablet_Ledge_1,    Giguna__Helipad__So_Close__ex__Tablet_Ledge_2,    Giguna__Helipad__South_Left__ex__Clouds__North_Left_1,    Giguna__Helipad__South_Middle__ex__Clouds__North_Middle_1,    Giguna__Helipad__South_Right__ex__Clouds__North_Right_1,    Giguna__Helipad__Wall_Top__ex__Railing_1,    Giguna__Labyrinth_East__East_19__ex__Gateway__West_19_1,    Giguna__Labyrinth_East__East_20__ex__Mural__West_20_1,    Giguna__Labyrinth_East__Lower_Middle__ex__Middle_Tree_1,    Giguna__Labyrinth_East__Lower_Middle__ex__Middle_Tree_2,    Giguna__Labyrinth_East__Lower_West__ex__Labyrinth__Lower_East_1,    Giguna__Labyrinth_East__Middle_West__ex__Labyrinth__Middle_East_1,    Giguna__Labyrinth_East__Top_West__ex__Labyrinth__Top_East_1,    Giguna__Lamassu__Broken_Pillar__ex__Staircase_Landing_1,    Giguna__Lamassu__East_18__ex__Dual_Path__West_18_1,    Giguna__Lamassu__Lower_Platform_Left__ex__Upper_Platform_Edge_1,    Giguna__Lamassu__Lower_Platform_Right__ex__Head_1,    Giguna__Lamassu__Rear_Gap__ex__East_18_1,    Giguna__Lamassu__West_18__ex__Helipad__East_18_1,    Giguna__Ruins_Center__East_8__ex__Ruins_East__West_8_1,    Giguna__Ruins_Center__East_9__ex__Ruins_East__West_9_1,    Giguna__Ruins_Center__Wall_Bottom__ex__Wall_Top_1,    Giguna__Ruins_Center__Wall_Top__ex__Center_Top_1,    Giguna__Ruins_Center__West_9__ex__Ruins_West__East_9_1,    Giguna__Ruins_East__Bottom_Rock__ex__Cliff_1,    Giguna__Ruins_East__Cliff__ex__Ledge_1,    Giguna__Ruins_East__Cliff__ex__Ledge_2,    Giguna__Ruins_East__East_9__ex__Giguna_Northeast__West_9_1,    Giguna__Ruins_East__Ledge__ex__Pillar_1,    Giguna__Ruins_East__Ledge__ex__Small_Passage_1,    Giguna__Ruins_East__Pillar__ex__Way_Up_High_1,    Giguna__Ruins_East__Small_Passage__ex__Ledge_1,    Giguna__Ruins_East__West_7__ex__Pillar_1,    Giguna__Ruins_East__West_7__ex__Ruins_Top__East_7_1,    Giguna__Ruins_East__West_8__ex__Ruins_Center__East_8_1,    Giguna__Ruins_East__West_9__ex__Ruins_Center__East_9_1,    Giguna__Ruins_Top__East_7__ex__East_Door_1,    Giguna__Ruins_Top__East_7__ex__Ruins_East__West_7_1,    Giguna__Ruins_Top__East_Door__ex__East_7_1,    Giguna__Ruins_Top__East_Door__ex__Portal_1,    Giguna__Ruins_Top__Entryway__ex__West_Door_1,    Giguna__Ruins_Top__Interior_Ledge__ex__Portal_1,    Giguna__Ruins_Top__Interior_Ledge__ex__Upper_Tunnel_1,    Giguna__Ruins_Top__Portal__ex__East_Door_1,    Giguna__Ruins_Top__Portal__ex__Interior_Ledge_1,    Giguna__Ruins_Top__Portal_Left__ex__Small_Ledge_1,    Giguna__Ruins_Top__Rooftop_West__ex__Turret_Balcony_East_1,    Giguna__Ruins_Top__Small_Ledge__ex__Interior_Ledge_1,    Giguna__Ruins_Top__Switch__ex__Rooftop_West_1,    Giguna__Ruins_Top__Switch__ex__Turret_Balcony_East_1,    Giguna__Ruins_Top__Turret_Balcony_East__ex__Rooftop_West_1,    Giguna__Ruins_Top__West_7__ex__Ruins_West__East_7_1,    Giguna__Ruins_Top__West_7__ex__West_Door_1,    Giguna__Ruins_Top__West_7__ex__West_Pillar_1,    Giguna__Ruins_Top__West_Door__ex__Entryway_1,    Giguna__Ruins_Top__West_Door__ex__West_7_1,    Giguna__Ruins_West__East_7__ex__Ruins_Top__West_7_1,    Giguna__Ruins_West__East_7__ex__Upper_Ledge_1,    Giguna__Ruins_West__East_9__ex__Ruins_Center__West_9_1,    Giguna__Ruins_West__Lower_Ledge__ex__Upper_Ledge_1,    Giguna__Ruins_West__Nook__ex__Lower_Ledge_1,    Giguna__Ruins_West__West_7__ex__West_Tower__East_7_1,    Giguna__Wasteland__Bluff_by_Door__ex__Door_Left_1,    Giguna__Wasteland__Bluff_by_Door__ex__Door_Left_2,    Giguna__Wasteland__Center_Plains__ex__Steeper_Hill_1,    Giguna__Wasteland__Door_Left__ex__Door_Right_1,    Giguna__Wasteland__Door_Right__ex__Door_Left_1,    Giguna__Wasteland__East_12__ex__Ebih__Ebih_West__West_12_1,    Giguna__Wasteland__East_13__ex__Ebih__Ebih_West__West_13_1,    Giguna__Wasteland__East_14__ex__East_Caverns__West_14_1,    Giguna__Wasteland__East_Ledge__ex__East_12_1,    Giguna__Wasteland__East_Ledge__ex__East_12_2,    Giguna__Wasteland__Lower_Cliff__ex__Middle_Cliff_1,    Giguna__Wasteland__Lower_Cliff__ex__Middle_Cliff_2,    Giguna__Wasteland__Lower_Path_Right__ex__Lower_Cliff_1,    Giguna__Wasteland__Middle_Cliff__ex__Upper_Cliff_1,    Giguna__Wasteland__Passage_Cache__Clear_Horizontal_Passage_Manually,    Giguna__Wasteland__Passage_Cache__ex__Lower_Path_Left_1,    Giguna__Wasteland__Passage_Cache__ex__Lower_Path_Left_2,    Giguna__Wasteland__Passage_Cache__ex__Passage_East_1,    Giguna__Wasteland__Passage_Cache__Mist_through_Horizontal_Passage,    Giguna__Wasteland__Passage_East__Clear_Horizontal_Passage_Manually,    Giguna__Wasteland__Passage_East__ex__Passage_Cache_1,    Giguna__Wasteland__Passage_East__Mist_through_Horizontal_Passage,    Giguna__Wasteland__West_12__ex__West_Caverns__East_12_1,    Giguna__Wasteland__West_13__ex__West_Caverns__East_13_1,    Giguna__Wasteland__West_14__ex__Giguna_Base__East_14_1,    Giguna__West_Caverns__East_10__ex__Carnelian__West_10_1,    Giguna__West_Caverns__East_10__ex__Column_2_Top_1,    Giguna__West_Caverns__East_12__ex__Wasteland__West_12_1,    Giguna__West_Caverns__East_13__ex__Wasteland__West_13_1,    Giguna__West_Caverns__East_Susar__ex__East_12_1,    Giguna__West_Caverns__East_Susar__ex__Tunnel_Fork_1,    Giguna__West_Caverns__Small_Staircase__ex__East_10_1,    Giguna__West_Caverns__Top_Gap_Right__ex__Column_1_Top_Right_1,    Giguna__West_Caverns__Tunnel_Bottom__ex__Tunnel_Entrance_1,    Giguna__West_Caverns__Tunnel_Bottom__ex__Tunnel_Entrance_2,    Giguna__West_Caverns__Tunnel_Fork__ex__Tunnel_Bottom_1,    Giguna__West_Caverns__Tunnel_Fork__ex__Tunnel_Entrance_1,    Giguna__West_Caverns__West_13__ex__Far_Corner__East_13_1,    Giguna__West_Tower__Southwest__ex__West_Caverns__Northwest_1,    Giguna_Breach__Antechamber__North__ex__Fire_Room__South_1,    Giguna_Breach__Ascent__Bottom__ex__Top_1,    Giguna_Breach__Ascent__West_6__ex__Peak__East_6_1,    Giguna_Breach__Ascent__West_9__ex__Central__East_9_1,    Giguna_Breach__Below_Chimney__Cubby_Entrance__ex__Cubby__Entrance_1,    Giguna_Breach__Below_Chimney__North__ex__Chimney__South_1,    Giguna_Breach__Below_Chimney__Southwest__ex__SW_Save__North_1,    Giguna_Breach__Central__East_9__ex__Ascent__West_9_1,    Giguna_Breach__Central__East_9__ex__East_Brick_1,    Giguna_Breach__Central__East_Brick__ex__Middle_Statue_1,    Giguna_Breach__Central__South__ex__Grid_14_10_11__North_1,    Giguna_Breach__Central__South__ex__Upper_Floating_Brick_1,    Giguna_Breach__Central__Statuette__ex__Tunnel_1,    Giguna_Breach__Central__Upper_Floating_Brick__ex__West_Statue_1,    Giguna_Breach__Central__Wall__ex__Upper_Floating_Brick_1,    Giguna_Breach__Central__West_8__ex__Chimney__East_8_1,    Giguna_Breach__Central__West_9__ex__Chimney__East_9_1,    Giguna_Breach__Central__West_9__ex__Wall_1,    Giguna_Breach__Chimney__East_7__ex__Peak__West_7_1,    Giguna_Breach__Chimney__East_8__ex__Central__West_8_1,    Giguna_Breach__Chimney__East_9__ex__Central__West_9_1,    Giguna_Breach__Chimney__South__ex__Below_Chimney__North_1,    Giguna_Breach__Cubby__Entrance__ex__Below_Chimney__Cubby_Entrance_1,    Giguna_Breach__Fire_Room__East_11__ex__Slingshot__West_1,    Giguna_Breach__Fire_Room__First_Fire__ex__West_Plateau_1,    Giguna_Breach__Fire_Room__South__ex__Antechamber__North_1,    Giguna_Breach__Fire_Room__South__ex__Cuesta_1,    Giguna_Breach__Fire_Room__West_10__ex__Grid_14_10_11__East_10_1,    Giguna_Breach__Fire_Room__West_11__ex__Grid_14_10_11__East_11_1,    Giguna_Breach__Fire_Room__West_Plateau__ex__West_10_1,    Giguna_Breach__Grid_14_10_11__East_10__ex__Fire_Room__West_10_1,    Giguna_Breach__Grid_14_10_11__East_10__ex__High_Ledge_1,    Giguna_Breach__Grid_14_10_11__East_11__ex__Fire_Room__West_11_1,    Giguna_Breach__Grid_14_10_11__North__ex__Central__South_1,    Giguna_Breach__Grid_14_10_11__South__ex__Robopede__North_1,    Giguna_Breach__Peak__East_6__ex__Ascent__West_6_1,    Giguna_Breach__Peak__East_6__ex__Upper_East_1,    Giguna_Breach__Peak__Portal__ex__Upper_West_1,    Giguna_Breach__Peak__West_7__ex__Chimney__East_7_1,    Giguna_Breach__Pink_Clouds__Normal_Entry__ex__Corner_1,    Giguna_Breach__Robopede__North__ex__Grid_14_10_11__South_1,    Giguna_Breach__Robopede__West__ex__SW_Save__East_12_1,    Giguna_Breach__Slingshot__Ravine__ex__Column_1,    Giguna_Breach__Slingshot__West__ex__Fire_Room__East_11_1,    Giguna_Breach__SW_Save__East_12__ex__Lower_Platform_1,    Giguna_Breach__SW_Save__East_12__ex__Robopede__West_1,    Giguna_Breach__SW_Save__Lower_Platform__ex__Side_Door_1,    Giguna_Breach__SW_Save__North__ex__Below_Chimney__Southwest_1,    Giguna_Breach__SW_Save__Save_Point__ex__Lower_Platform_1,    Giguna_Breach__SW_Save__Side_Door__ex__West_11_1,    Giguna_Breach__SW_Save__West_11__ex__Side_Door_1,    Glacier__Apocalypse_Entry__West__ex__Grid_43_10_11__East_1,    Glacier__Boomerang_Antechamber__East_12__ex__Boomerang_Room__West_1,    Glacier__Boomerang_Antechamber__Upper_East__ex__Boomerang_Room__Upper_West_1,    Glacier__Boomerang_Antechamber__West_12__ex__Vertical_Room__East_12_1,    Glacier__Boomerang_Antechamber__West_13__ex__Vertical_Room__East_13_1,    Glacier__Boomerang_Room__Center_ish__ex__Center_Ledge_1,    Glacier__Boomerang_Room__Center_Ledge__ex__Upper_Gate_East_1,    Glacier__Boomerang_Room__Pedestal__ex__Upper_Gate_East_1,    Glacier__Boomerang_Room__Platform__ex__Upper_West_1,    Glacier__Boomerang_Room__Upper_Gate_East__ex__Center_Ledge_1,    Glacier__Boomerang_Room__Upper_West__ex__Boomerang_Antechamber__Upper_East_1,    Glacier__Boomerang_Room__Upper_West__ex__Platform_1,    Glacier__Boomerang_Room__West__ex__Boomerang_Antechamber__East_12_1,    Glacier__Compass_Room__East__ex__Grid_43_10_11__Lower_1,    Glacier__Compass_Room__West__ex__The_Big_Drop__East_1,    Glacier__Dock_Outside__Do_Not_Enter__ex__Revival__East_9_1,    Glacier__Dock_Outside__Entry__ex__Interior__Dock_Interior__Entry_1,    Glacier__Grid_31_9_12__East_10__ex__Grid_32_7_10__West_10_1,    Glacier__Grid_31_9_12__East_9__ex__Grid_32_7_10__West_9_1,    Glacier__Grid_31_9_12__Midair__ex__Ebih__Base_Camp__East_11_1,    Glacier__Grid_31_9_12__West_12__ex__Ebih__Base_Camp__East_12_1,    Glacier__Grid_32_7_10__East_8__ex__Peak__West_8_1,    Glacier__Grid_32_7_10__Left_Rock__ex__Column_1,    Glacier__Grid_32_7_10__Left_Rock__ex__Column_2,    Glacier__Grid_32_7_10__West_10__ex__Left_Rock_1,    Glacier__Grid_32_7_10__West_10__ex__Left_Rock_2,    Glacier__Grid_32_7_10__West_9__ex__Grid_31_9_12__East_9_1,    Glacier__Grid_37_38_9__East__ex__Grid_39_40_7_9__West_1,    Glacier__Grid_37_38_9__West__ex__Vertical_Room__East_9_1,    Glacier__Grid_39_40_7_9__Upper_East__ex__Revival__West_8_1,    Glacier__Grid_39_40_7_9__West__ex__Grid_37_38_9__East_1,    Glacier__Grid_42_10__East__ex__Grid_43_10_11__Top_1,    Glacier__Grid_42_10__West__ex__Revival__Lower_East_1,    Glacier__Grid_43_10_11__East__ex__Apocalypse_Entry__West_1,    Glacier__Grid_43_10_11__Lower__ex__Compass_Room__East_1,    Glacier__Grid_43_10_11__Top__ex__Grid_42_10__East_1,    Glacier__Lake_Main_Entrance__Ebih_Access__ex__Ebih__Base_Camp__Lake_Access_1,    Glacier__Lake_Main_Entrance__Lake_Access__ex__Amagi__Main_Area__East_15_1,    Glacier__Lake_Main_Entrance__Ledge__ex__Upper_1,    Glacier__Lake_Main_Entrance__Ledge__ex__Upper_2,    Glacier__Lake_Main_Entrance__Lower_Platform__ex__Ledge_1,    Glacier__Lake_Main_Entrance__Lower_Platform__ex__Ledge_2,    Glacier__Lake_Main_Entrance__Upper_Platform__ex__Upper_1,    Glacier__Lake_Main_Entrance__Upper_Platform__ex__Upper_2,    Glacier__Ledge_Grab_Room__Cliff__ex__Lower_Platform_1,    Glacier__Ledge_Grab_Room__Cliff_Bottom__ex__Cliff_1,    Glacier__Ledge_Grab_Room__Cliff_Bottom__ex__Cliff_2,    Glacier__Ledge_Grab_Room__Column__ex__Ledge_Grab_Room__Mid_35_1,    Glacier__Ledge_Grab_Room__East_11__ex__Vertical_Room__Past_Gate_1,    Glacier__Ledge_Grab_Room__East_9__ex__Column_1,    Glacier__Ledge_Grab_Room__East_9__ex__Column_2,    Glacier__Ledge_Grab_Room__East_9__ex__Vertical_Room__Past_Gate_1,    Glacier__Ledge_Grab_Room__East_9__ex__Vertical_Room__West_9_1,    Glacier__Ledge_Grab_Room__Fork__ex__Column_1,    Glacier__Ledge_Grab_Room__Fork__ex__Column_2,    Glacier__Ledge_Grab_Room__Fork__ex__Gate_Ledge_1,    Glacier__Ledge_Grab_Room__Fork__ex__Gate_Ledge_2,    Glacier__Ledge_Grab_Room__Gate__ex__West_End_1,    Glacier__Ledge_Grab_Room__Gate_Ledge__ex__Column_1,    Glacier__Ledge_Grab_Room__Gate_Ledge__ex__Column_2,    Glacier__Ledge_Grab_Room__Lower_Platform__ex__Upper_Platform_1,    Glacier__Ledge_Grab_Room__Lower_Platform__ex__Upper_Platform_2,    Glacier__Ledge_Grab_Room__Lower_Platform__ex__West_End_1,    Glacier__Ledge_Grab_Room__Mid_34__ex__Lower_Platform_1,    Glacier__Ledge_Grab_Room__Mid_34__ex__Lower_Platform_2,    Glacier__Ledge_Grab_Room__Mid_35__ex__Fork_1,    Glacier__Ledge_Grab_Room__Pedestal__ex__West_End_1,    Glacier__Ledge_Grab_Room__Upper_Platform__ex__Fork_1,    Glacier__Peak__East_8__ex__Top_Platform_East_1,    Glacier__Peak__East_8__ex__Vertical_Room__West_8_1,    Glacier__Peak__Top_Platform_East__ex__Highest_Platform_1,    Glacier__Peak__Top_Rock__ex__Highest_Platform_1,    Glacier__Peak__Under_West_Cliff__ex__West_Cliff_1,    Glacier__Peak__Under_West_Cliff__ex__West_Cliff_2,    Glacier__Peak__West_8__ex__Grid_32_7_10__East_8_1,    Glacier__Revival__East_9__ex__Dock_Outside__Do_Not_Enter_1,    Glacier__Revival__Lower_East__ex__Grid_42_10__West_1,    Glacier__Revival__West_8__ex__Grid_39_40_7_9__Upper_East_1,    Glacier__The_Big_Drop__East__ex__Compass_Room__West_1,    Glacier__The_Big_Drop__Small_Path__ex__East_1,    Glacier__The_Big_Drop__Water_Surface__Drown,    Glacier__Vertical_Room__East_12__ex__Boomerang_Antechamber__West_12_1,    Glacier__Vertical_Room__East_13__ex__Boomerang_Antechamber__West_13_1,    Glacier__Vertical_Room__East_9__ex__Grid_37_38_9__West_1,    Glacier__Vertical_Room__East_9__ex__Peak_1,    Glacier__Vertical_Room__East_9__ex__Peak_2,    Glacier__Vertical_Room__East_Corner__ex__East_12_1,    Glacier__Vertical_Room__Mid_11__ex__Mid_9_1,    Glacier__Vertical_Room__Mid_9__ex__Peak_1,    Glacier__Vertical_Room__Mid_9__ex__Peak_2,    Glacier__Vertical_Room__Past_Gate__ex__Ledge_Grab_Room__East_11_1,    Glacier__Vertical_Room__Past_Gate__ex__Under_Switch_1,    Glacier__Vertical_Room__Peak__ex__West_8_1,    Glacier__Vertical_Room__Peak__ex__West_8_2,    Glacier__Vertical_Room__Under_Switch__ex__Mid_9_1,    Glacier__Vertical_Room__Under_Switch__ex__Past_Gate_1,    Glacier__Vertical_Room__West_8__ex__Peak__East_8_1,    Glacier__Vertical_Room__West_9__ex__Ledge_Grab_Room__East_9_1,    Interior__Building_Interior__Entry__ex__Ebih__Base_Camp__Building_Entry_1,    Interior__Bunker_Interior__Entry__ex__Ebih__Base_Camp__Bunker_Entry_1,    Interior__Cave_Behind_Waterfall__Bottom__ex__Amagi__Main_Area__Secret_Outcropping_1,    Interior__Cave_Behind_Waterfall__Bottom__ex__Middle_1,    Interior__Cave_Behind_Waterfall__Bottom__ex__Top_1,    Interior__Cave_Behind_Waterfall__Middle__ex__Top_1,    Interior__Cave_Behind_Waterfall__Top__ex__Amagi__Main_Area__Secret_Waterfall_1,    Interior__Dock_Elevator__Connector__ex__Dock_Interior__Connector_1,    Interior__Dock_Interior__Connector__ex__Dock_Elevator__Connector_1,    Interior__Dock_Interior__Entry__ex__Glacier__Dock_Outside__Entry_1,    Interior__Ebih_Cave__Entry__ex__Ebih__Waterfall__Cave_Entrance_1,    Interior__Garage__Entry__ex__Ebih__By_Garage__Garage_Entry_1,    Interior__Outpost_Interior__Entry__ex__Bookshelf_1,    Interior__Outpost_Interior__Entry__ex__Bookshelf_2,    Interior__Outpost_Interior__Entry__ex__Giguna__Giguna_Base__Building_Entry_1,    Interior__Tent_Interior__Entry__ex__Ebih__Base_Camp__Tent_Entry_1,    Irikar__Abandoned_Room__West__ex__Basement_Portal__East_27_1,    Irikar__Airy__Middle_South__ex__Sight_Room__Above_Room_North_1,    Irikar__Basement_Pipes__Bricks_Under_Pipes__ex__Double_Pipe_Right_1,    Irikar__Basement_Pipes__Bricks_Under_Pipes__ex__Double_Pipe_Right_2,    Irikar__Basement_Pipes__Double_Pipe_Left__ex__High_Pipe_1,    Irikar__Basement_Pipes__East_28__ex__Basement_Portal__West_28_1,    Irikar__Basement_Pipes__Lower_Pipe_Under_Ledge__ex__Brick_Ledge_1,    Irikar__Basement_Pipes__Lower_Pipe_Under_Ledge__ex__Brick_Ledge_2,    Irikar__Basement_Pipes__Right_Vertical_Pipe__ex__Double_Pipe_Left_1,    Irikar__Basement_Pipes__Right_Vertical_Pipe__ex__Double_Pipe_Left_2,    Irikar__Basement_Pipes__Right_Vertical_Pipe__ex__Double_Pipe_Left_3,    Irikar__Basement_Pipes__West_27__ex__Midwest__East_27_1,    Irikar__Basement_Pipes__West_28__ex__Midwest__East_28_1,    Irikar__Basement_Portal__Bottom_Middle__ex__Ledge_1,    Irikar__Basement_Portal__East_27__ex__Abandoned_Room__West_1,    Irikar__Basement_Portal__East_28__ex__Empty_Foyer__West_1,    Irikar__Basement_Portal__East_28__ex__Ledge_1,    Irikar__Basement_Portal__Ledge__ex__East_Platform_1,    Irikar__Basement_Portal__Ledge__ex__Moving_Platform_Start_1,    Irikar__Basement_Portal__Ledge__ex__Westmost_Platform_1,    Irikar__Basement_Portal__Middle_Platform__ex__East_Platform_1,    Irikar__Basement_Portal__Middle_Platform__ex__Moving_Platform_End_1,    Irikar__Basement_Portal__Moving_Platform_End__ex__East_Platform_1,    Irikar__Basement_Portal__Moving_Platform_Start__ex__Ledge_1,    Irikar__Basement_Portal__North__ex__Hub__Royal_Storage_South_1,    Irikar__Basement_Portal__Portal_Stand__ex__Ledge_1,    Irikar__Basement_Portal__Portal_Stand__ex__Moving_Platform_Start_1,    Irikar__Basement_Portal__West_28__ex__Basement_Pipes__East_28_1,    Irikar__Basement_Portal__West_28__ex__Moving_Platform_Start_1,    Irikar__Boss_Room__Catwalk_East__ex__Lamassu__Catwalk_West_1,    Irikar__Boss_Room__Catwalk_West__ex__Upper_Rooftops_1,    Irikar__Boss_Room__East_28__ex__Lamassu__West_28_1,    Irikar__Boss_Room__Upper_Rooftops__ex__East_Rooftops__Off_the_Edge_1,    Irikar__Boss_Room__West_28__ex__Empty_Foyer__East_1,    Irikar__East_Rooftops__Directly_Down__ex__Boss_Room__Northwest_1,    Irikar__East_Rooftops__East_Mid_air__ex__Giguna__Breachable_Wall__West_Mid_air_1,    Irikar__East_Rooftops__East_Mid_air__ex__Top_Rooftop_1,    Irikar__East_Rooftops__Off_the_Edge__ex__Boss_Room__Upper_Rooftops_1,    Irikar__East_Rooftops__Off_the_Edge__ex__Top_Rooftop_1,    Irikar__East_Rooftops__Off_the_Edge__ex__Top_Rooftop_2,    Irikar__East_Rooftops__Upper_West__ex__East_Mid_air_1,    Irikar__Empty_Foyer__East__ex__Boss_Room__West_28_1,    Irikar__Empty_Foyer__West__ex__Basement_Portal__East_28_1,    Irikar__Hub__Bowl_Middle_Ledge__ex__Bowl_Top_Platform_1,    Irikar__Hub__Bowl_Middle_Platform_Center__ex__Bowl_Middle_Ledge_1,    Irikar__Hub__Bowl_Middle_Platform_West__ex__Bowl_Middle_Ledge_1,    Irikar__Hub__Bowl_Platform_3__ex__Bowl_Middle_Platform_Center_1,    Irikar__Hub__Bowl_Top_Platform__ex__West_Rim_1,    Irikar__Hub__East_Rim__ex__Sat_Tower_Roof_West_1,    Irikar__Hub__NW_Staircase_Upper__ex__NW_Bowl_Edifice_1,    Irikar__Hub__NW_Staircase_Upper__ex__NW_Bowl_Edifice_2,    Irikar__Hub__Royal_Storage_By_Wall__ex__Royal_Storage_in_Wall_1,    Irikar__Hub__Royal_Storage_By_Wall__Mist_into_Wall,    Irikar__Hub__Royal_Storage_South__ex__Basement_Portal__North_1,    Irikar__Hub__Sat_Tower_East_24__ex__Sight_Room__West_24_1,    Irikar__Hub__Sat_Tower_Floating_Platform__ex__Sat_Tower_Top_Ledge_1,    Irikar__Hub__Sat_Tower_Middle_Ledge__ex__Sat_Tower_Floating_Platform_1,    Irikar__Hub__Sat_Tower_Northeast__ex__Airy__Northwest_1,    Irikar__Hub__Save_Point__ex__Bowl_Hole_1,    Irikar__Hub__West_Rim__ex__East_Rim_1,    Irikar__Lamassu__Catwalk_Middle__ex__Desk_1,    Irikar__Lamassu__Catwalk_Middle__ex__Hidden_Passage_West_1,    Irikar__Lamassu__Catwalk_West__ex__Boss_Room__Catwalk_East_1,    Irikar__Lamassu__East_26__ex__Uhrum__West_Entrance__West_26_1,    Irikar__Lamassu__East_27__ex__Uhrum__West_Entrance__West_27_1,    Irikar__Lamassu__Hidden_Passage_East__ex__Uhrum__West_Entrance__Hidden_Passage_West_1,    Irikar__Lamassu__West_28__ex__Boss_Room__East_28_1,    Irikar__Sight_Room__Above_Room_East__ex__East_Rooftops__Upper_West_1,    Irikar__Sight_Room__West_24__ex__Hub__Sat_Tower_East_24_1,    Irikar_Breach__Exit_Corridor__East__ex__Uhrum_Connector__West_1,    Irikar_Breach__Exit_Corridor__North_12__ex__Pillar_1,    Irikar_Breach__Exit_Corridor__North_12__ex__Worm_Rave__South_1,    Irikar_Breach__Exit_Corridor__North_13__ex__Four_way__South_1,    Irikar_Breach__Exit_Corridor__North_13__ex__Pillar_1,    Irikar_Breach__Exit_Corridor__West__ex__Neon_Corridor__East_1,    Irikar_Breach__Exit_Corridor__West_of_Pillar__ex__Pillar_1,    Irikar_Breach__Flappy_Drone__Initial_Drop__ex__Pillar_Underside_1,    Irikar_Breach__Flappy_Drone__Pillar_Underside__ex__Top_Pillar_1,    Irikar_Breach__Flappy_Drone__South__ex__Four_way__North_1,    Irikar_Breach__Flappy_Drone__Top_Pillar__ex__Pillar_Underside_1,    Irikar_Breach__Flappy_Drone__Upper_Valley_Right__ex__Top_Pillar_1,    Irikar_Breach__Flappy_Drone__West_Door__ex__Hover_Room__East_1,    Irikar_Breach__Four_way__East__ex__Ledge_1,    Irikar_Breach__Four_way__East__ex__Save_Room__West_1,    Irikar_Breach__Four_way__Ledge__ex__North_1,    Irikar_Breach__Four_way__Ledge__ex__West_1,    Irikar_Breach__Four_way__North__ex__Flappy_Drone__South_1,    Irikar_Breach__Four_way__North__ex__West_1,    Irikar_Breach__Four_way__South__ex__Exit_Corridor__North_13_1,    Irikar_Breach__Four_way__South__ex__Ledge_1,    Irikar_Breach__Four_way__West__ex__Worm_Rave__East_1,    Irikar_Breach__Gauntlet__East_22__ex__Hover_Room__West_1,    Irikar_Breach__Gauntlet__Hidden_Path_Reward__ex__Hidden_Path_Top_Ledge_1,    Irikar_Breach__Gauntlet__Save_Point__ex__Hidden_Path_Upper_Entry_1,    Irikar_Breach__Gauntlet__Save_Point__ex__Hidden_Path_Upper_Entry_2,    Irikar_Breach__Hover_Room__Bottom__ex__East_1,    Irikar_Breach__Hover_Room__Bottom__ex__West_1,    Irikar_Breach__Hover_Room__East__ex__Flappy_Drone__West_Door_1,    Irikar_Breach__Hover_Room__East__ex__West_1,    Irikar_Breach__Hover_Room__West__ex__East_1,    Irikar_Breach__Hover_Room__West__ex__Gauntlet__East_22_1,    Irikar_Breach__Neon_Corridor__East__ex__Exit_Corridor__West_1,    Irikar_Breach__Neon_Corridor__West__ex__Sandy_Lair__East_27_1,    Irikar_Breach__Neon_Corridor__West_Basin__ex__Center_1,    Irikar_Breach__Neon_Corridor__West_Basin__ex__West_1,    Irikar_Breach__Save_Room__West__ex__Four_way__East_1,    Irikar_Breach__Worm_Rave__East__ex__Four_way__West_1,    Irikar_Breach__Worm_Rave__South__ex__Corner_1,    Irikar_Breach__Worm_Rave__South__ex__East_1,    Irikar_Breach__Worm_Rave__South__ex__Exit_Corridor__North_12_1,    Menu__Upgrade_Menu__Combat__ex__Drone_1,    Menu__Upgrade_Menu__Combat__ex__Infection_1,    Menu__Upgrade_Menu__Combat__ex__Physiology_1,    Menu__Upgrade_Menu__Drone__ex__Combat_1,    Menu__Upgrade_Menu__Drone__ex__Infection_1,    Menu__Upgrade_Menu__Drone__ex__Physiology_1,    Menu__Upgrade_Menu__Infection__ex__Combat_1,    Menu__Upgrade_Menu__Infection__ex__Drone_1,    Menu__Upgrade_Menu__Infection__ex__Physiology_1,    Menu__Upgrade_Menu__Physiology__ex__Combat_1,    Menu__Upgrade_Menu__Physiology__ex__Drone_1,    Menu__Upgrade_Menu__Physiology__ex__Infection_1,    Uhrum__Annuna_Corridor__Between_Two_Flowers__ex__Lower_Platform_1,    Uhrum__Annuna_Corridor__Between_Two_Flowers__ex__Lower_Platform_2,    Uhrum__Annuna_Corridor__Block_East__ex__Block_West_1,    Uhrum__Annuna_Corridor__Block_West__ex__Block_East_1,    Uhrum__Annuna_Corridor__Block_West__ex__Block_East_2,    Uhrum__Annuna_Corridor__East_25__ex__Annuna__Mirror_Match__West_25_1,    Uhrum__Annuna_Corridor__Lower_Platform__ex__Middle_Platform_1,    Uhrum__Annuna_Corridor__Lower_Platform__ex__Middle_Platform_2,    Uhrum__Annuna_Corridor__Middle_Platform__ex__Upper_Ledge_1,    Uhrum__Annuna_Corridor__Middle_Platform__ex__Upper_Platform_1,    Uhrum__Annuna_Corridor__Middle_Platform__ex__Upper_Platform_2,    Uhrum__Annuna_Corridor__Statue__ex__Upper_Platform_1,    Uhrum__Annuna_Corridor__Upper_Ledge__ex__Upper_Platform_1,    Uhrum__Annuna_Corridor__Upper_Platform__ex__Statue_1,    Uhrum__Annuna_Corridor__Upper_Platform__ex__Upper_Ledge_1,    Uhrum__Annuna_Corridor__West_25__ex__Waterfalls__East_25_1,    Uhrum__Annuna_Corridor__West_26__ex__Waterfalls__East_26_1,    Uhrum__Save_Room__East__ex__Waterfalls__West_27_1,    Uhrum__Save_Room__West__ex__Glitchy_Corridor__East_27_1,    Uhrum__Siege_Corridor__Center_Platform_3__ex__Upper_Rock_West_1,    Uhrum__Siege_Corridor__Center_Valley__ex__Center_East_1,    Uhrum__Siege_Corridor__Center_Valley__ex__Center_East_2,    Uhrum__Siege_Corridor__East_25__ex__Waterfalls__West_25_1,    Uhrum__Siege_Corridor__East_Hill__ex__Mideast_Tree_1,    Uhrum__Siege_Corridor__East_Hill__ex__Upper_Rock_East_1,    Uhrum__Siege_Corridor__East_Hill__ex__Upper_Rock_East_2,    Uhrum__Siege_Corridor__East_Hill__ex__Upper_Rock_East_3,    Uhrum__Siege_Corridor__Mideast_Tree__ex__East_Hill_1,    Uhrum__Siege_Corridor__Mideast_Tree__ex__Upper_Rock_West_1,    Uhrum__Siege_Corridor__Northwest_Door__ex__Giguna__Vertical_Interchange__South_1,    Uhrum__Siege_Corridor__Northwest_Door__ex__Western_Cache_1,    Uhrum__Siege_Corridor__Northwest_Platform__ex__Northwest_Door_1,    Uhrum__Siege_Corridor__Northwest_Platform__ex__Western_Cache_1,    Uhrum__Siege_Corridor__Pond__ex__East_Hill_1,    Uhrum__Siege_Corridor__Pond__ex__East_Hill_2,    Uhrum__Siege_Corridor__Upper_Rock_Item__ex__Upper_Rock_West_1,    Uhrum__Siege_Corridor__Upper_Rock_West__ex__Upper_Rock_Item_1,    Uhrum__Siege_Corridor__West_26__ex__West_Entrance__East_26_1,    Uhrum__Siege_Corridor__West_Greenery__ex__West_Grassy_Ledge_1,    Uhrum__Siege_Corridor__Western_Cache__ex__Northwest_Door_1,    Uhrum__Siege_Corridor__Western_Cache__ex__Northwest_Platform_1,    Uhrum__Siege_Corridor__Western_Rock__ex__Northwest_Platform_1,    Uhrum__Waterfalls__Above_Block__ex__Below_Block_1,    Uhrum__Waterfalls__Above_Block__ex__East_25_1,    Uhrum__Waterfalls__Barrier_East__Charge_through_Wall,    Uhrum__Waterfalls__Barrier_East__ex__Barrier_West_1,    Uhrum__Waterfalls__Barrier_East__ex__East_24_in_Mid_air_1,    Uhrum__Waterfalls__Barrier_East__Mist_through_Wall,    Uhrum__Waterfalls__Barrier_East__Spin_through_Wall,    Uhrum__Waterfalls__Barrier_West__Charge_through_Wall,    Uhrum__Waterfalls__Barrier_West__ex__Barrier_East_1,    Uhrum__Waterfalls__Barrier_West__ex__Ceiling_Opening_1,    Uhrum__Waterfalls__Barrier_West__Mist_through_Wall,    Uhrum__Waterfalls__Barrier_West__Spin_through_Wall,    Uhrum__Waterfalls__Below_Block__ex__Above_Block_1,    Uhrum__Waterfalls__Below_Block__ex__Above_Block_2,    Uhrum__Waterfalls__Below_Block__ex__East_26_1,    Uhrum__Waterfalls__Below_Block__ex__East_26_2,    Uhrum__Waterfalls__Below_Block__ex__Small_Rock_1,    Uhrum__Waterfalls__Ceiling_Cache__ex__Ceiling_Opening_1,    Uhrum__Waterfalls__Ceiling_Opening__ex__Barrier_West_1,    Uhrum__Waterfalls__Ceiling_Opening__ex__Ceiling_Cache_1,    Uhrum__Waterfalls__Ceiling_Opening__ex__West_24_1,    Uhrum__Waterfalls__Center_Island_East__ex__East_Waters_Edge_1,    Uhrum__Waterfalls__Center_Island_East__ex__Lower_East_Platform_1,    Uhrum__Waterfalls__Center_Island_West__ex__West_27_1,    Uhrum__Waterfalls__East_24__ex__Tulip_Tower__West_24_1,    Uhrum__Waterfalls__East_24_in_Mid_air__ex__Barrier_East_1,    Uhrum__Waterfalls__East_24_in_Mid_air__ex__Tulip_Tower__West_24_in_Mid_air_1,    Uhrum__Waterfalls__East_25__ex__Annuna_Corridor__West_25_1,    Uhrum__Waterfalls__East_26__ex__Annuna_Corridor__West_26_1,    Uhrum__Waterfalls__East_26__ex__Below_Block_1,    Uhrum__Waterfalls__East_27__ex__East_Lake__West_27_1,    Uhrum__Waterfalls__East_28__ex__East_Lake__West_28_1,    Uhrum__Waterfalls__East_Palm_Tree__ex__Ledge_Above_Palm_1,    Uhrum__Waterfalls__East_Palm_Tree__ex__Ledge_Above_Palm_2,    Uhrum__Waterfalls__Green_Middle_Ledge__ex__Below_Block_1,    Uhrum__Waterfalls__High_Platform__ex__Northeast_Ledge_1,    Uhrum__Waterfalls__High_Platform__ex__Northeast_Ledge_2,    Uhrum__Waterfalls__Large_Rock__ex__Medium_Rock_1,    Uhrum__Waterfalls__Large_Rock__ex__West_Wall_1,    Uhrum__Waterfalls__Ledge_Above_Palm__ex__High_Platform_1,    Uhrum__Waterfalls__Ledge_Above_Palm__ex__Northeast_Ledge_1,    Uhrum__Waterfalls__Lower_East_Platform__ex__Below_Block_1,    Uhrum__Waterfalls__Lower_East_Platform__ex__Small_Rock_1,    Uhrum__Waterfalls__Medium_Rock__ex__Green_Middle_Ledge_1,    Uhrum__Waterfalls__Medium_Rock__ex__West_Platform_1,    Uhrum__Waterfalls__Medium_Rock__ex__West_Wall_1,    Uhrum__Waterfalls__Northeast_Ledge__ex__Ceiling_Opening_1,    Uhrum__Waterfalls__Water_Pillar__ex__Center_Island_East_1,    Uhrum__Waterfalls__Water_Pillar__ex__Center_Island_East_2,    Uhrum__Waterfalls__Water_Pillar__ex__East_Waters_Edge_1,    Uhrum__Waterfalls__West_24__ex__Artillery_Practice__East_24_1,    Uhrum__Waterfalls__West_24__ex__Below_Block_1,    Uhrum__Waterfalls__West_25__ex__Below_Block_1,    Uhrum__Waterfalls__West_25__ex__Siege_Corridor__East_25_1,    Uhrum__Waterfalls__West_27__ex__Center_Island_West_1,    Uhrum__Waterfalls__West_27__ex__Large_Rock_1,    Uhrum__Waterfalls__West_27__ex__Save_Room__East_1,    Uhrum__Waterfalls__West_Platform__ex__Green_Middle_Ledge_1,    Uhrum__Waterfalls__West_Platform__ex__Green_Middle_Ledge_2,    Uhrum__Waterfalls__West_Wall__ex__West_25_1,    Uhrum__Waterfalls__West_Wall__ex__West_25_2,    Uhrum__Waterfalls__West_Water_Nook__ex__West_Water_Ledge_1,    Uhrum__Waterfalls__West_Water_Nook__ex__West_Water_Ledge_2,    Uhrum__West_Entrance__Clear_Passage__ex__Portal_Stand_1,    Uhrum__West_Entrance__Clear_Passage__ex__Portal_Stand_2,    Uhrum__West_Entrance__East_26__ex__Siege_Corridor__West_26_1,    Uhrum__West_Entrance__East_28__ex__Glitchy_Corridor__West_28_1,    Uhrum__West_Entrance__East_28__ex__Lower_Path_Tree_Ledge_1,    Uhrum__West_Entrance__East_28__ex__Lower_Path_Tree_Ledge_2,    Uhrum__West_Entrance__Hidden_Passage_West__ex__Irikar__Lamassu__Hidden_Passage_East_1,    Uhrum__West_Entrance__Inner_Dais__ex__Top_West_Ledge_1,    Uhrum__West_Entrance__Inner_Dais__ex__West_of_Gate_1,    Uhrum__West_Entrance__Lower_Path_Gap__ex__Lower_Path_Tree_Ledge_1,    Uhrum__West_Entrance__Lower_Path_Gap__ex__Lower_Wall_West_1,    Uhrum__West_Entrance__Lower_Wall_East__Charge_through_Wall,    Uhrum__West_Entrance__Lower_Wall_East__ex__Lower_Wall_West_1,    Uhrum__West_Entrance__Lower_Wall_East__Mist_through_Wall,    Uhrum__West_Entrance__Lower_Wall_East__Spin_through_Wall,    Uhrum__West_Entrance__Lower_Wall_West__Charge_through_Wall,    Uhrum__West_Entrance__Lower_Wall_West__ex__Lower_Wall_East_1,    Uhrum__West_Entrance__Lower_Wall_West__ex__South_Platform_1,    Uhrum__West_Entrance__Lower_Wall_West__ex__South_Platform_2,    Uhrum__West_Entrance__Lower_Wall_West__ex__South_Platform_3,    Uhrum__West_Entrance__Lower_Wall_West__Mist_through_Wall,    Uhrum__West_Entrance__Lower_Wall_West__Spin_through_Wall,    Uhrum__West_Entrance__Middle_West_Ledge__ex__Portal_Stand_1,    Uhrum__West_Entrance__Middle_West_Ledge__ex__Portal_Stand_2,    Uhrum__West_Entrance__Portal_Stand__ex__Hidden_Passage_Entry_1,    Uhrum__West_Entrance__Portal_Stand__ex__West_of_Gate_1,    Uhrum__West_Entrance__Portal_Stand__ex__West_of_Gate_2,    Uhrum__West_Entrance__Sand__ex__Lower_Path_Gap_1,    Uhrum__West_Entrance__Sand__ex__Lower_Path_Tree_Ledge_1,    Uhrum__West_Entrance__Sand__ex__Lower_Path_Tree_Ledge_2,    Uhrum__West_Entrance__Save_Point__ex__Lower_Wall_West_1,    Uhrum__West_Entrance__Save_Point__ex__Lower_Wall_West_2,    Uhrum__West_Entrance__Save_Point__ex__South_Platform_1,    Uhrum__West_Entrance__South_Platform__ex__Middle_West_Ledge_1,    Uhrum__West_Entrance__South_Platform__ex__West_27_1,    Uhrum__West_Entrance__Southeast_Tree__ex__South_Platform_1,    Uhrum__West_Entrance__Top_West_Ledge__ex__Hidden_Passage_Entry_1,    Uhrum__West_Entrance__Top_West_Ledge__ex__West_of_Gate_1,    Uhrum__West_Entrance__Upper_Fork__ex__Upper_Wall_East_1,    Uhrum__West_Entrance__Upper_Fork__ex__Upper_Wall_East_2,    Uhrum__West_Entrance__Upper_Wall_East__Charge_through_Wall,    Uhrum__West_Entrance__Upper_Wall_East__ex__Upper_Wall_West_1,    Uhrum__West_Entrance__Upper_Wall_East__Mist_through_Wall,    Uhrum__West_Entrance__Upper_Wall_East__Spin_through_Wall,    Uhrum__West_Entrance__Upper_Wall_West__ex__Portal_Exit_1,    Uhrum__West_Entrance__Upper_Wall_West__ex__Portal_Exit_2,    Uhrum__West_Entrance__Upper_Wall_West__ex__Upper_Wall_East_1,    Uhrum__West_Entrance__Upper_Wall_West__Mist_through_Wall,    Uhrum__West_Entrance__West_25__ex__Giguna__Separator__East_25_1,    Uhrum__West_Entrance__West_26__ex__Hidden_Passage_Entry_1,    Uhrum__West_Entrance__West_26__ex__Irikar__Lamassu__East_26_1,    Uhrum__West_Entrance__West_26__ex__Portal_Stand_1,    Uhrum__West_Entrance__West_26__ex__Portal_Stand_2,    Uhrum__West_Entrance__West_27__ex__Irikar__Lamassu__East_27_1,    Uhrum__West_Entrance__West_27__ex__South_Platform_1,    Uhrum__West_Entrance__West_of_Gate__ex__Inner_Dais_1,    Uhrum__West_Entrance__West_of_Gate__ex__Top_West_Ledge_1,    Uhrum__West_Entrance__West_of_Gate__ex__Top_West_Ledge_2,}
+    Amagi__Grid_31_19__East__ex__Liru_Room__West_19_1,
+    Amagi__Grid_31_19__West__ex__Main_Area__East_19_1,
+    Amagi__Liru_Room__Platform_4_Left__ex__West_20_1,
+    Amagi__Liru_Room__Platform_4_Right__ex__East_Passage_1,
+    Amagi__Liru_Room__West_19__ex__Grid_31_19__East_1,
+    Amagi__Liru_Room__West_20__ex__Platform_4_Left_1,
+    Amagi__Liru_Room__West_20__ex__Platform_4_Right_1,
+    Amagi__Liru_Room__West_20__ex__Shrine_1,
+    Amagi__Main_Area__Carving__ex__Secret_Outcropping_1,
+    Amagi__Main_Area__Carving__ex__Secret_Outcropping_2,
+    Amagi__Main_Area__Catwalk_Center__ex__East_Ledge_1,
+    Amagi__Main_Area__Catwalk_Center__ex__Platform_3_1,
+    Amagi__Main_Area__East_15__ex__Glacier__Lake_Main_Entrance__Lake_Access_1,
+    Amagi__Main_Area__East_19__ex__Grid_31_19__West_1,
+    Amagi__Main_Area__Platform_2__ex__West_Shelf_1,
+    Amagi__Main_Area__Secret_Outcropping__ex__Interior__Cave_Behind_Waterfall__Bottom_1,
+    Amagi__Main_Area__Secret_Waterfall__ex__Interior__Cave_Behind_Waterfall__Top_1,
+    Amagi__Main_Area__Shallow_End__ex__Waters_Edge_1,
+    Amagi__Main_Area__West_15__ex__West_Lake__East_15_1,
+    Amagi__Main_Area__West_18__ex__West_Lake__East_18_1,
+    Amagi__Main_Area__West_19__ex__West_Lake__East_19_1,
+    Amagi__Main_Area__West_Side__ex__Carving_1,
+    Amagi__Main_Area__West_Side__ex__Carving_2,
+    Amagi__West_Lake__Cavern_Refill_Station__Defeat_MUS_A_M20,
+    Amagi__West_Lake__Cavern_Refill_Station__ex__Cavern_Tear_Duct_1,
+    Amagi__West_Lake__Cavern_Tear_Duct__ex__Cavern_Refill_Station_1,
+    Amagi__West_Lake__East_15__ex__Main_Area__West_15_1,
+    Amagi__West_Lake__East_18__ex__Main_Area__West_18_1,
+    Amagi__West_Lake__East_19__ex__Main_Area__West_19_1,
+    Amagi__West_Lake__Northwest_Platform__ex__West_Cliff_1,
+    Amagi__West_Lake__Stronghold_Ceiling_Left__ex__Stronghold_Middle_Column_1,
+    Amagi__West_Lake__Stronghold_Ceiling_Right__ex__Stronghold_Front_Room_1,
+    Amagi__West_Lake__Stronghold_Front_Door__ex__Stronghold_Front_Room_1,
+    Amagi__West_Lake__Stronghold_Front_Room__ex__Stronghold_Ceiling_Right_1,
+    Amagi__West_Lake__Stronghold_Front_Room__ex__Stronghold_Front_Door_1,
+    Amagi__West_Lake__Stronghold_Item__ex__Stronghold_Middle_Column_1,
+    Amagi__West_Lake__Stronghold_Middle_Column__ex__Stronghold_Ceiling_Left_1,
+    Amagi__West_Lake__Stronghold_Middle_Column__ex__Stronghold_Item_1,
+    Amagi__West_Lake__Stronghold_Top__Remote_Urn,
+    Amagi__West_Lake__Surface_Wall_Left__ex__Surface_Wall_Right_1,
+    Amagi__West_Lake__Surface_Wall_Right__ex__Surface_Wall_Left_1,
+    Amagi__West_Lake__West_15__ex__Ebih__Vertical_Interchange__East_15_1,
+    Amagi__West_Lake__West_Bank__ex__West_Shore_1,
+    Annuna__East_Bridge__West_25_Lower__ex__West_Bridge__East_25_Upper_1,
+    Annuna__East_Bridge__West_25_Upper__ex__West_Bridge__East_25_Upper_1,
+    Annuna__East_Bridge__West_Staircase_Upper_West__ex__Upper_West_Gap_1,
+    Annuna__East_Bridge__West_Staircase_Upper_West__ex__Upper_West_Gap_East_1,
+    Annuna__East_Bridge__West_Under_Gap__ex__Upper_West_Gap_1,
+    Annuna__East_Bridge__West_Under_Gap__ex__Upper_West_Gap_East_1,
+    Annuna__Mirror_Match__Below_Switch__ex__Central_Pillar_1,
+    Annuna__Mirror_Match__Central_Pillar__ex__Below_Switch_1,
+    Annuna__Mirror_Match__Central_Pillar__ex__Save_Point_1,
+    Annuna__Mirror_Match__Central_Pillar__ex__West_25_1,
+    Annuna__Mirror_Match__East_25_Lower__ex__West_Bridge__West_25_Lower_1,
+    Annuna__Mirror_Match__East_25_Upper__ex__West_Bridge__West_25_Upper_1,
+    Annuna__Mirror_Match__East_26_Lower__ex__West_Bridge__West_26_Lower_1,
+    Annuna__Mirror_Match__East_26_Upper__ex__West_Bridge__West_26_Upper_1,
+    Annuna__Mirror_Match__East_26_Upper__Remote_Flask,
+    Annuna__Mirror_Match__Eastward__ex__Staircase_1,
+    Annuna__Mirror_Match__Eastward__ex__Staircase_2,
+    Annuna__Mirror_Match__Plinth__ex__East_26_Upper_1,
+    Annuna__Mirror_Match__Staircase__ex__Eastward_1,
+    Annuna__Mirror_Match__Staircase__ex__Eastward_2,
+    Annuna__Mirror_Match__West_25__ex__Uhrum__Annuna_Corridor__East_25_1,
+    Annuna__West_Bridge__East_25_Lower__ex__East_Bridge__West_25_Lower_1,
+    Annuna__West_Bridge__West_25_Lower__ex__Mirror_Match__East_25_Lower_1,
+    Antarctica__Building_1E__Connector__ex__Building_1W__Connector_1,
+    Antarctica__Building_1E__Connector__ex__East_Entry_1,
+    Antarctica__Building_1E__East_Entry__ex__East__Building_1_Entry_1,
+    Antarctica__Building_1W__Connector__ex__Building_1E__Connector_1,
+    Antarctica__Building_1W__West_Entry__ex__West__Boxes_1,
+    Antarctica__Building_2__Entry__ex__East__Building_2_Entry_1,
+    Antarctica__Building_2__Entry__ex__Freight_Elevator__Left_1,
+    Antarctica__Building_2__Entry__ex__Stairs_1,
+    Antarctica__Building_2__Stairs__ex__Behind_Boxes_1,
+    Antarctica__Building_2__Stairs__ex__Entry_1,
+    Antarctica__Building_2__Upper_Door__ex__East__Building_2_Upper_1,
+    Antarctica__East__Building_1_Entry__ex__Building_1E__East_Entry_1,
+    Antarctica__East__Building_1_Entry__ex__Building_2_Upper_1,
+    Antarctica__East__Building_2_Entry__ex__Building_2__Entry_1,
+    Antarctica__East__Building_2_Entry__ex__Building_2_Upper_1,
+    Antarctica__East__Building_2_Upper__ex__Building_2__Upper_Door_1,
+    Antarctica__East__Building_2_Upper__ex__Top__Power_Entry_1,
+    Antarctica__Freight_Elevator__Controls__ex__Interior__Dock_Elevator__Elevator_1,
+    Antarctica__Freight_Elevator__Left__ex__Building_2__Entry_1,
+    Antarctica__Power_Room__Entry__ex__Top__Power_Entry_1,
+    Antarctica__Shed__Interior__ex__West__Shed_Entry_1,
+    Antarctica__Top__Power_Entry__ex__East__Building_2_Upper_1,
+    Antarctica__Top__Power_Entry__ex__Power_Room__Entry_1,
+    Antarctica__West__Boxes__ex__Building_1W__West_Entry_1,
+    Antarctica__West__Shed_Entry__ex__Helipad_1,
+    Antarctica__West__Shed_Entry__ex__Shed__Interior_1,
+    Ebih__Base_Camp__Building_Entry__ex__Interior__Building_Interior__Entry_1,
+    Ebih__Base_Camp__Bunker_Entry__ex__Interior__Bunker_Interior__Entry_1,
+    Ebih__Base_Camp__East_11__ex__Glacier__Grid_31_9_12__Midair_1,
+    Ebih__Base_Camp__East_11__ex__Top_Platform_1,
+    Ebih__Base_Camp__East_12__ex__Glacier__Grid_31_9_12__West_12_1,
+    Ebih__Base_Camp__Lake_Access__ex__Glacier__Lake_Main_Entrance__Ebih_Access_1,
+    Ebih__Base_Camp__Left_Platform__ex__Top_Platform_1,
+    Ebih__Base_Camp__Left_Platform_Moved__ex__Top_Platform_1,
+    Ebih__Base_Camp__Left_Platform_Moved__ex__Top_Platform_2,
+    Ebih__Base_Camp__Save_Point__ex__Top_Platform_1,
+    Ebih__Base_Camp__Tent_Entry__ex__Interior__Tent_Interior__Entry_1,
+    Ebih__Base_Camp__Top_Platform__ex__Left_Platform_1,
+    Ebih__Base_Camp__Top_Platform__ex__Left_Platform_Moved_1,
+    Ebih__Base_Camp__West_11__ex__Left_Platform_1,
+    Ebih__Base_Camp__West_11__ex__Left_Platform_2,
+    Ebih__Base_Camp__West_11__ex__Observation_Tower_Room__East_11_1,
+    Ebih__Base_Camp__West_12__ex__By_Garage__East_12_1,
+    Ebih__Base_Camp__West_13__ex__By_Garage__East_13_1,
+    Ebih__Boss_Room__East_4__ex__Drone_Room__West_4_1,
+    Ebih__Boss_Room__East_6__ex__Drone_Room__West_6_1,
+    Ebih__Boss_Room__High_Platform__ex__East_4_1,
+    Ebih__Boss_Room__Lower_Ledge__ex__Upper_Tree_1,
+    Ebih__Boss_Room__Lower_Tree__ex__Lower_Ledge_1,
+    Ebih__Boss_Room__Lower_Tree__ex__Lower_Ledge_2,
+    Ebih__Boss_Room__West_6__ex__Grid_21_2_6__East_6_1,
+    Ebih__By_Garage__Crawlspace__ex__Crawlspace_Opening_1,
+    Ebih__By_Garage__Crawlspace_Opening__ex__Crawlspace_1,
+    Ebih__By_Garage__East_13__ex__Base_Camp__West_13_1,
+    Ebih__By_Garage__East_Platform__ex__Crawlspace_Opening_1,
+    Ebih__By_Garage__East_Platform__ex__Crawlspace_Opening_2,
+    Ebih__By_Garage__East_Platform__ex__Outcropping_1,
+    Ebih__By_Garage__East_Platform__ex__Outcropping_2,
+    Ebih__By_Garage__Garage_Entry__ex__Interior__Garage__Entry_1,
+    Ebih__By_Garage__Lower_Platform__ex__East_Bush_1,
+    Ebih__By_Garage__Lower_Platform__ex__East_Bush_2,
+    Ebih__By_Garage__Lower_Platform__ex__West_Bush_1,
+    Ebih__By_Garage__Lower_Platform__ex__West_Bush_2,
+    Ebih__By_Garage__West_12__ex__Grid_25_10_12__East_12_1,
+    Ebih__Drone_Room__East_4__ex__Grid_25_2_6__West_4_1,
+    Ebih__Drone_Room__Middle_Platform__ex__Portal_Exit_1,
+    Ebih__Drone_Room__Middle_Platform__Urn_Quick_Grab,
+    Ebih__Drone_Room__Pit_Left__ex__Middle_Platform_1,
+    Ebih__Drone_Room__Pit_Left__ex__Middle_Platform_2,
+    Ebih__Drone_Room__Pit_Left__ex__West_6_1,
+    Ebih__Drone_Room__Pit_Left__ex__West_6_2,
+    Ebih__Drone_Room__Portal__ex__Portal_Exit_1,
+    Ebih__Drone_Room__Portal_Exit__ex__Moving_Platform_1,
+    Ebih__Drone_Room__Portal_Exit__ex__Moving_Platform_2,
+    Ebih__Drone_Room__West_4__ex__Boss_Room__East_4_1,
+    Ebih__Drone_Room__West_6__ex__Boss_Room__East_6_1,
+    Ebih__Ebih_East__Dispenser__ex__Lower_Moving_Platform_1,
+    Ebih__Ebih_East__Dispenser__ex__Lower_Moving_Platform_2,
+    Ebih__Ebih_East__East_9__ex__East_Hill_1,
+    Ebih__Ebih_East__East_9__ex__Observation_Tower_Room__West_9_1,
+    Ebih__Ebih_East__Ledge_End__ex__East_Ledge_1,
+    Ebih__Ebih_East__Moving_Platform__ex__East_Ledge_1,
+    Ebih__Ebih_East__West_7__ex__Waterfall__East_7_1,
+    Ebih__Ebih_East__West_8__ex__Waterfall__East_8_1,
+    Ebih__Ebih_West__Above_Door__ex__Below_Door_1,
+    Ebih__Ebih_West__Above_Door__ex__Refill_Station_1,
+    Ebih__Ebih_West__Above_Door__ex__Small_Gap_1,
+    Ebih__Ebih_West__Alcove_Entrance__ex__Above_Alcove_1,
+    Ebih__Ebih_West__Alcove_Entrance__ex__Above_Alcove_2,
+    Ebih__Ebih_West__Below_Door__ex__Above_Door_1,
+    Ebih__Ebih_West__Below_Door__ex__Refill_Station_1,
+    Ebih__Ebih_West__Block_Left__ex__Alcove_Entrance_1,
+    Ebih__Ebih_West__Block_Left__ex__Alcove_Entrance_2,
+    Ebih__Ebih_West__Block_Left__ex__Block_Right_1,
+    Ebih__Ebih_West__Block_Left__ex__Mid_Save_1,
+    Ebih__Ebih_West__Block_Left__ex__Mid_Save_2,
+    Ebih__Ebih_West__Block_Right__ex__Block_Left_1,
+    Ebih__Ebih_West__East_10__ex__Waterfall__West_10_1,
+    Ebih__Ebih_West__East_11__ex__Waterfall__West_11_1,
+    Ebih__Ebih_West__East_13__ex__Vertical_Interchange__West_13_1,
+    Ebih__Ebih_West__East_6__ex__Grid_21_2_6__West_6_1,
+    Ebih__Ebih_West__East_7__ex__Waterfall__West_7_1,
+    Ebih__Ebih_West__East_8__ex__Waterfall__West_8_1,
+    Ebih__Ebih_West__East_9__ex__Waterfall__West_9_1,
+    Ebih__Ebih_West__Giguna_Pillar__ex__Giguna__Giguna_Northeast__Inner_Wall_1,
+    Ebih__Ebih_West__High_Platform__ex__High_Ledge_1,
+    Ebih__Ebih_West__High_Platform__ex__High_Ledge_2,
+    Ebih__Ebih_West__Left_of_Gap__ex__Small_Gap_1,
+    Ebih__Ebih_West__Lower_Hill__ex__Left_of_Gap_1,
+    Ebih__Ebih_West__Lower_Platform__ex__Lower_Cliff_1,
+    Ebih__Ebih_West__Middle_Middle__ex__Above_Chute_1,
+    Ebih__Ebih_West__Middle_Middle__ex__Above_Chute_2,
+    Ebih__Ebih_West__Middle_Middle__ex__East_7_1,
+    Ebih__Ebih_West__Middle_Middle__ex__East_7_2,
+    Ebih__Ebih_West__Small_Gap__ex__Left_of_Gap_1,
+    Ebih__Ebih_West__West_11__ex__Giguna__Giguna_Northeast__East_11_1,
+    Ebih__Ebih_West__West_12__ex__Giguna__Wasteland__East_12_1,
+    Ebih__Ebih_West__West_12__ex__West_Fork_1,
+    Ebih__Ebih_West__West_13__ex__Giguna__Wasteland__East_13_1,
+    Ebih__Ebih_West__West_9__ex__Giguna__Giguna_Northeast__East_9_1,
+    Ebih__Ebih_West__West_9__ex__Giguna_Pillar_1,
+    Ebih__Gem_Room__West_13__ex__Vertical_Interchange__East_13_1,
+    Ebih__Grid_21_2_6__East_6__ex__Boss_Room__West_6_1,
+    Ebih__Grid_21_2_6__West_6__ex__Ebih_West__East_6_1,
+    Ebih__Grid_25_10_12__Below_Bush__ex__Bush_1,
+    Ebih__Grid_25_10_12__Bush__ex__Mid_Ledge_1,
+    Ebih__Grid_25_10_12__Door__ex__Door_Left_1,
+    Ebih__Grid_25_10_12__Door__ex__East_11_1,
+    Ebih__Grid_25_10_12__Door_Left__ex__Door_1,
+    Ebih__Grid_25_10_12__East_10__ex__Grid_26_10_11__West_10_1,
+    Ebih__Grid_25_10_12__East_11__ex__Door_1,
+    Ebih__Grid_25_10_12__East_11__ex__Grid_26_10_11__West_11_1,
+    Ebih__Grid_25_10_12__East_12__ex__By_Garage__West_12_1,
+    Ebih__Grid_25_10_12__Hidden_Bush__ex__East_10_1,
+    Ebih__Grid_25_10_12__Hidden_Bush__ex__East_10_2,
+    Ebih__Grid_25_10_12__Mid_Ledge__ex__West_11_1,
+    Ebih__Grid_25_10_12__Mid_Ledge__ex__West_11_2,
+    Ebih__Grid_25_10_12__Top_Platform__ex__West_10_1,
+    Ebih__Grid_25_10_12__West_10__ex__Waterfall__East_10_1,
+    Ebih__Grid_25_10_12__West_11__ex__Waterfall__East_11_1,
+    Ebih__Grid_25_2_6__West_4__ex__Drone_Room__East_4_1,
+    Ebih__Grid_25_2_6__West_4__ex__Pit_1,
+    Ebih__Grid_26_10_11__East_10__ex__Observation_Tower_Room__West_10_1,
+    Ebih__Grid_26_10_11__Ledge__ex__Upper_Platform_1,
+    Ebih__Grid_26_10_11__Middle_Bottom__ex__Middle_Platform_1,
+    Ebih__Grid_26_10_11__Middle_Platform__ex__West_10_1,
+    Ebih__Grid_26_10_11__Middle_Platform__ex__West_10_2,
+    Ebih__Grid_26_10_11__Under_Ledge__ex__Ledge_1,
+    Ebih__Grid_26_10_11__Under_Ledge__ex__Ledge_2,
+    Ebih__Grid_26_10_11__Upper_Platform__ex__Cliff_1,
+    Ebih__Grid_26_10_11__Upper_Platform__ex__Cliff_2,
+    Ebih__Grid_26_10_11__Upper_Platform__ex__West_10_1,
+    Ebih__Grid_26_10_11__Upper_Platform__ex__West_10_2,
+    Ebih__Grid_26_10_11__West_10__ex__Grid_25_10_12__East_10_1,
+    Ebih__Grid_26_10_11__West_11__ex__Grid_25_10_12__East_11_1,
+    Ebih__Observation_Tower_Room__East_11__ex__Base_Camp__West_11_1,
+    Ebih__Observation_Tower_Room__East_11__ex__Cliff_1,
+    Ebih__Observation_Tower_Room__East_11__ex__Cliff_2,
+    Ebih__Observation_Tower_Room__Tower_Top__ex__West_9_1,
+    Ebih__Observation_Tower_Room__Tower_Top__ex__West_9_2,
+    Ebih__Observation_Tower_Room__West_10__ex__Grid_26_10_11__East_10_1,
+    Ebih__Observation_Tower_Room__West_9__ex__Ebih_East__East_9_1,
+    Ebih__Vertical_Interchange__Below_Door__ex__Blocked_Refill_Station_1,
+    Ebih__Vertical_Interchange__Below_Door__ex__Blocked_Refill_Station_2,
+    Ebih__Vertical_Interchange__Below_Door__ex__Refill_Station_1,
+    Ebih__Vertical_Interchange__Below_Door__ex__Refill_Station_2,
+    Ebih__Vertical_Interchange__Blocked_Refill_Station__ex__Below_Door_1,
+    Ebih__Vertical_Interchange__Blocked_Refill_Station__ex__Cliff_by_Refill_1,
+    Ebih__Vertical_Interchange__Cliff_by_Refill__ex__Blocked_Refill_Station_1,
+    Ebih__Vertical_Interchange__Cliff_by_Refill__ex__Middle_Drop_1,
+    Ebih__Vertical_Interchange__Cliff_by_Refill__ex__Refill_Station_1,
+    Ebih__Vertical_Interchange__Cubby_Exit__ex__Below_Door_1,
+    Ebih__Vertical_Interchange__Cubby_Exit__ex__Blocked_Refill_Station_1,
+    Ebih__Vertical_Interchange__Door__ex__Door_East_1,
+    Ebih__Vertical_Interchange__Door__ex__Door_West_1,
+    Ebih__Vertical_Interchange__Door_East__ex__Door_1,
+    Ebih__Vertical_Interchange__Door_West__ex__Door_1,
+    Ebih__Vertical_Interchange__East_13__ex__Gem_Room__West_13_1,
+    Ebih__Vertical_Interchange__East_15__ex__Amagi__West_Lake__West_15_1,
+    Ebih__Vertical_Interchange__East_Tunnel__ex__Below_Door_1,
+    Ebih__Vertical_Interchange__East_Tunnel__ex__Block_Cubby_1,
+    Ebih__Vertical_Interchange__East_Tunnel__ex__Blocked_Refill_Station_1,
+    Ebih__Vertical_Interchange__East_Tunnel__ex__Refill_Station_1,
+    Ebih__Vertical_Interchange__Middle_Descent__ex__East_13_1,
+    Ebih__Vertical_Interchange__Middle_Descent__ex__Passage_East_1,
+    Ebih__Vertical_Interchange__Passage_East__ex__Door_West_1,
+    Ebih__Vertical_Interchange__Passage_East__ex__Passage_West_1,
+    Ebih__Vertical_Interchange__Passage_West__ex__Door_West_1,
+    Ebih__Vertical_Interchange__Passage_West__ex__Passage_East_1,
+    Ebih__Vertical_Interchange__Refill_Station__ex__Below_Door_1,
+    Ebih__Vertical_Interchange__Refill_Station__ex__Cliff_by_Refill_1,
+    Ebih__Vertical_Interchange__South__ex__Below_Door_1,
+    Ebih__Vertical_Interchange__Switch__ex__Below_Door_1,
+    Ebih__Vertical_Interchange__West_13__ex__Ebih_West__East_13_1,
+    Ebih__Waterfall__Alcove__ex__Alcove_Left_1,
+    Ebih__Waterfall__Alcove__ex__Alcove_Left_2,
+    Ebih__Waterfall__Alcove__ex__Alcove_Right_1,
+    Ebih__Waterfall__Alcove__ex__Alcove_Right_2,
+    Ebih__Waterfall__Alcove_Left__ex__Alcove_1,
+    Ebih__Waterfall__Alcove_Left__ex__Alcove_2,
+    Ebih__Waterfall__Alcove_Left__ex__Waterfall_Center_Left_1,
+    Ebih__Waterfall__Alcove_Left__ex__Waterfall_Center_Left_2,
+    Ebih__Waterfall__Alcove_Right__ex__Alcove_1,
+    Ebih__Waterfall__Alcove_Right__ex__Alcove_2,
+    Ebih__Waterfall__Alcove_Right__ex__Waterfall_Center_Right_1,
+    Ebih__Waterfall__Below_Left_Switch__ex__Ledge_Below_Hole_1,
+    Ebih__Waterfall__Below_Tree__ex__Big_Tree_1,
+    Ebih__Waterfall__Below_Tree__ex__Big_Tree_2,
+    Ebih__Waterfall__Cave_Entrance__ex__Interior__Ebih_Cave__Entry_1,
+    Ebih__Waterfall__East_10__ex__Grid_25_10_12__West_10_1,
+    Ebih__Waterfall__East_11__ex__Grid_25_10_12__West_11_1,
+    Ebih__Waterfall__East_7__ex__Ebih_East__West_7_1,
+    Ebih__Waterfall__East_8__ex__Ebih_East__West_8_1,
+    Ebih__Waterfall__Ledge_Below_Hole__ex__Below_Left_Switch_1,
+    Ebih__Waterfall__Ledge_Below_Hole__ex__Middle_West_Tree_1,
+    Ebih__Waterfall__Ledge_Below_Hole__ex__Middle_West_Tree_2,
+    Ebih__Waterfall__Ledge_Below_Hole__ex__West_Door_Right_1,
+    Ebih__Waterfall__Lower_West_Tree__ex__West_Lower_Path_1,
+    Ebih__Waterfall__Middle_West_Tree__ex__West_Main_Path_1,
+    Ebih__Waterfall__Middle_West_Tree__ex__West_Main_Path_2,
+    Ebih__Waterfall__Near_East_Tree__ex__East_Ledge_1,
+    Ebih__Waterfall__Platform__ex__Big_Tree_1,
+    Ebih__Waterfall__Under_Waterfall__ex__Waterfall_Left_1,
+    Ebih__Waterfall__Wall_Left__Break_Through_Wall,
+    Ebih__Waterfall__Wall_Left__ex__Wall_Right_1,
+    Ebih__Waterfall__Wall_Right__Break_Through_Wall,
+    Ebih__Waterfall__Wall_Right__ex__Lower_West_Tree_1,
+    Ebih__Waterfall__Wall_Right__ex__Wall_Left_1,
+    Ebih__Waterfall__West_10__ex__Ebih_West__East_10_1,
+    Ebih__Waterfall__West_11__ex__Ebih_West__East_11_1,
+    Ebih__Waterfall__West_7__ex__Ebih_West__East_7_1,
+    Ebih__Waterfall__West_8__ex__Ebih_West__East_8_1,
+    Ebih__Waterfall__West_9__ex__Ebih_West__East_9_1,
+    Ebih__Waterfall__West_Climb__ex__Ledge_Below_Hole_1,
+    Ebih__Waterfall__West_Door__ex__West_Door_Left_1,
+    Ebih__Waterfall__West_Door__ex__West_Door_Right_1,
+    Ebih__Waterfall__West_Door_Left__ex__West_Door_1,
+    Ebih__Waterfall__West_Door_Right__ex__West_Door_1,
+    Giguna__Antechamber__Bottom__ex__Left_Wall_Lower_1,
+    Giguna__Antechamber__East_16__ex__East_Caverns__West_16_1,
+    Giguna__Antechamber__Left_Wall_Lower__ex__Left_Wall_Mid_1,
+    Giguna__Antechamber__Left_Wall_Lower__ex__Left_Wall_Mid_2,
+    Giguna__Antechamber__Left_Wall_Mid__ex__West_15_1,
+    Giguna__Antechamber__Left_Wall_Mid__ex__West_15_2,
+    Giguna__Antechamber__Middle_Bricks_Left__ex__West_15_1,
+    Giguna__Antechamber__Middle_Bricks_Right__ex__Statue_Head_1,
+    Giguna__Antechamber__Middle_Bricks_Right__ex__Statue_Head_2,
+    Giguna__Antechamber__Small_Bricks__ex__Middle_Bricks_Right_1,
+    Giguna__Antechamber__Small_Bricks__ex__Statue_Head_1,
+    Giguna__Antechamber__Statue_Head__ex__Middle_Bricks_Right_1,
+    Giguna__Antechamber__Statue_Head__ex__Middle_Bricks_Right_2,
+    Giguna__Antechamber__Statues_Ledge__ex__Small_Bricks_1,
+    Giguna__Antechamber__West_15__ex__Gubi_Lair__East_15_1,
+    Giguna__Antechamber__West_15__ex__Small_Bricks_1,
+    Giguna__Breachable_Wall__Above_West_Catwalk__ex__Irikar__Boss_Room__Above_Catwalk_1,
+    Giguna__Breachable_Wall__West_Mid_air__ex__Irikar__East_Rooftops__East_Mid_air_1,
+    Giguna__Carnelian__Door__ex__Switch_1,
+    Giguna__Carnelian__Door__ex__Vault_1,
+    Giguna__Carnelian__East_10__ex__Giguna_Northeast__West_10_1,
+    Giguna__Carnelian__Lower_Susar__ex__Rock_1,
+    Giguna__Carnelian__Lower_Susar__ex__West_Ledge_1,
+    Giguna__Carnelian__Lower_Susar__ex__West_Ledge_2,
+    Giguna__Carnelian__Middle_Platforms__ex__East_Cliff_1,
+    Giguna__Carnelian__Middle_Platforms__ex__Upper_Susar_1,
+    Giguna__Carnelian__Switch__ex__Door_1,
+    Giguna__Carnelian__Upper_Susar__ex__East_Cliff_1,
+    Giguna__Carnelian__Upper_Susar__ex__Middle_Platforms_1,
+    Giguna__Carnelian__Upper_Susar__ex__Upper_Path_1,
+    Giguna__Carnelian__Vault__ex__Door_1,
+    Giguna__Carnelian__West_10__ex__West_Caverns__East_10_1,
+    Giguna__Carnelian__West_Ledge__ex__Upper_Path_1,
+    Giguna__Carnelian__West_Ledge__ex__West_10_1,
+    Giguna__Carnelian__West_Ledge__ex__West_10_2,
+    Giguna__Clouds__Platform_Stop__ex__flipside_1,
+    Giguna__Clouds__Pull_Right__ex__Irikar__Hub__Northwest_Above_Bowl_1,
+    Giguna__Clouds__Southeast__ex__Irikar__Hub__Northeast_Above_Bowl_1,
+    Giguna__Clouds__Southwest__ex__Irikar__Hub__Northwest_1,
+    Giguna__Clouds__Straight_Down__ex__Irikar__Hub__North_Above_Portal_1,
+    Giguna__Dual_Path__Base_of_Wall__ex__Wall_Secret_1,
+    Giguna__Dual_Path__Base_of_Wall__ex__Wall_Top_1,
+    Giguna__Dual_Path__Base_of_Wall__ex__Wall_Top_2,
+    Giguna__Dual_Path__Base_of_Wall__Mist_into_Wall,
+    Giguna__Dual_Path__East_17__ex__East_Caverns__West_17_1,
+    Giguna__Dual_Path__East_18__ex__Gateway__West_18_1,
+    Giguna__Dual_Path__East_Gate__ex__East_Gate_NW_1,
+    Giguna__Dual_Path__East_Gate__ex__East_Gate_NW_2,
+    Giguna__Dual_Path__East_Gate_NE__ex__East_Gate_1,
+    Giguna__Dual_Path__East_Gate_NW__ex__East_Gate_NE_1,
+    Giguna__Dual_Path__In_the_Grass__ex__Wall_Top_1,
+    Giguna__Dual_Path__In_the_Grass__ex__Wall_Top_2,
+    Giguna__Dual_Path__Midway__ex__Midway_Plateau_1,
+    Giguna__Dual_Path__Midway__ex__Midway_Plateau_2,
+    Giguna__Dual_Path__Wall_Secret__ex__Base_of_Wall_1,
+    Giguna__Dual_Path__West_17__ex__Hard_Rock__East_17_1,
+    Giguna__Dual_Path__West_18__ex__Lamassu__East_18_1,
+    Giguna__Dual_Path__West_18__ex__West_Gate_1,
+    Giguna__Dual_Path__West_18__ex__West_Gate_2,
+    Giguna__Dual_Path__West_Gate__ex__West_Gate_NE_1,
+    Giguna__Dual_Path__West_Gate__ex__West_Gate_NE_2,
+    Giguna__Dual_Path__West_Gate__ex__West_Gate_NW_1,
+    Giguna__Dual_Path__West_Gate__ex__West_Gate_NW_2,
+    Giguna__Dual_Path__West_Gate_NE__ex__West_Gate_1,
+    Giguna__Dual_Path__West_Gate_NW__ex__West_Gate_1,
+    Giguna__East_Caverns__Arc_Ledge__ex__Hidden_Passage_West_1,
+    Giguna__East_Caverns__Arc_Ledge__ex__Statues_Ledge_1,
+    Giguna__East_Caverns__Arc_Passage__ex__Hidden_Passage_West_1,
+    Giguna__East_Caverns__Arc_Passage__ex__Hidden_Passage_West_2,
+    Giguna__East_Caverns__Carving__ex__East_Side_1,
+    Giguna__East_Caverns__Carving__ex__East_Side_2,
+    Giguna__East_Caverns__Carving__ex__Middle_Rock_1,
+    Giguna__East_Caverns__Carving__ex__Middle_Rock_2,
+    Giguna__East_Caverns__East_17__ex__Vertical_Interchange__West_17_1,
+    Giguna__East_Caverns__East_Grass__ex__East_17_1,
+    Giguna__East_Caverns__East_Side__ex__East_Shaft_1,
+    Giguna__East_Caverns__East_Side__ex__Middle_Rock_1,
+    Giguna__East_Caverns__Hidden_Passage_East__ex__Hidden_Passage_Center_1,
+    Giguna__East_Caverns__Hidden_Passage_West__ex__Hidden_Passage_Center_1,
+    Giguna__East_Caverns__Hidden_Passage_West__ex__Statues_Ledge_1,
+    Giguna__East_Caverns__Hidden_Passage_West__ex__Statues_Ledge_2,
+    Giguna__East_Caverns__Lower_Ledge__ex__Arc_Ledge_1,
+    Giguna__East_Caverns__Lower_Ledge__ex__Arc_Ledge_2,
+    Giguna__East_Caverns__Lower_Susar__ex__East_Grass_1,
+    Giguna__East_Caverns__Lower_Susar__ex__Under_Lower_Ledge_1,
+    Giguna__East_Caverns__Mid_Susar__ex__Middle_Ledge_1,
+    Giguna__East_Caverns__Mid_Susar__ex__Middle_Ledge_2,
+    Giguna__East_Caverns__Mid_Susar__ex__Middle_Rock_1,
+    Giguna__East_Caverns__Middle_Ledge__ex__Upper_Floor_Ledge_1,
+    Giguna__East_Caverns__Middle_Ledge__ex__Upper_Floor_Ledge_2,
+    Giguna__East_Caverns__Middle_Ledge__ex__Upper_Passage_West_1,
+    Giguna__East_Caverns__Middle_Rock__ex__Hidden_Passage_East_1,
+    Giguna__East_Caverns__Midwest_Ledge__ex__Hidden_Passage_West_1,
+    Giguna__East_Caverns__Midwest_Ledge__ex__Hidden_Passage_West_2,
+    Giguna__East_Caverns__Midwest_Ledge__ex__Middle_Ledge_1,
+    Giguna__East_Caverns__Statues_Ledge__ex__Hidden_Passage_West_1,
+    Giguna__East_Caverns__Statues_Ledge__ex__Hidden_Passage_West_2,
+    Giguna__East_Caverns__Statues_Ledge__ex__Midwest_Ledge_1,
+    Giguna__East_Caverns__Statues_Ledge__ex__Midwest_Ledge_2,
+    Giguna__East_Caverns__Switch__ex__Door_1,
+    Giguna__East_Caverns__Upper_Floor__ex__Upper_Passage_West_1,
+    Giguna__East_Caverns__Upper_Floor__ex__West_14_1,
+    Giguna__East_Caverns__Upper_Passage_East__ex__Top_Ledge_1,
+    Giguna__East_Caverns__Upper_Passage_East__ex__Top_Ledge_2,
+    Giguna__East_Caverns__Upper_Passage_East__ex__Upper_Passage_West_1,
+    Giguna__East_Caverns__Upper_Passage_West__ex__Upper_Passage_East_1,
+    Giguna__East_Caverns__Upper_Platforms_Right__ex__Upper_Passage_West_1,
+    Giguna__East_Caverns__Upper_Susar__ex__Middle_Ledge_1,
+    Giguna__East_Caverns__Upper_Susar__ex__Top_Past_Susar_1,
+    Giguna__East_Caverns__Upper_Susar__ex__Upper_Floor_Ledge_1,
+    Giguna__East_Caverns__Upper_Susar__ex__Upper_Platforms_Right_1,
+    Giguna__East_Caverns__Upper_Susar_Jump_from_East__ex__Middle_Ledge_1,
+    Giguna__East_Caverns__Upper_Susar_Jump_from_East__ex__Midwest_Ledge_1,
+    Giguna__East_Caverns__Upper_Susar_Mid_jump__ex__Top_Past_Susar_1,
+    Giguna__East_Caverns__West_14__ex__Wasteland__East_14_1,
+    Giguna__East_Caverns__West_16__ex__Antechamber__East_16_1,
+    Giguna__East_Caverns__West_16__ex__Door_1,
+    Giguna__East_Caverns__West_17__ex__Dual_Path__East_17_1,
+    Giguna__East_Caverns__West_Grass__ex__Lower_Ledge_1,
+    Giguna__Far_Corner__South__ex__Helipad__North_1,
+    Giguna__Gateway__Block_Left__ex__Block_Lowered_1,
+    Giguna__Gateway__Block_Lowered__ex__Block_Left_1,
+    Giguna__Gateway__Block_Lowered__ex__Block_Left_2,
+    Giguna__Gateway__Block_Lowered__ex__Block_Right_1,
+    Giguna__Gateway__Block_Lowered__ex__Block_Right_2,
+    Giguna__Gateway__Block_Right__ex__Block_Lowered_1,
+    Giguna__Gateway__Button__ex__East_19_1,
+    Giguna__Gateway__Door__ex__Block_Left_1,
+    Giguna__Gateway__Door__ex__Left_Platform_1,
+    Giguna__Gateway__Door__ex__Passage_Entry_1,
+    Giguna__Gateway__East_19__ex__Button_1,
+    Giguna__Gateway__East_19__ex__Vertical_Interchange__West_19_1,
+    Giguna__Gateway__Far_Ledge__ex__Flask_Ledge_1,
+    Giguna__Gateway__Far_Ledge__ex__Flask_Ledge_2,
+    Giguna__Gateway__Far_Ledge__ex__Right_Platform_1,
+    Giguna__Gateway__Left_Platform__ex__Block_Lowered_1,
+    Giguna__Gateway__Passage_Entry__ex__Door_1,
+    Giguna__Gateway__Passage_Entry__ex__Passage_Exit_1,
+    Giguna__Gateway__Passage_Exit__ex__Left_Platform_1,
+    Giguna__Gateway__Passage_Exit__ex__Passage_Entry_1,
+    Giguna__Gateway__Refill_Station__ex__Far_Ledge_1,
+    Giguna__Gateway__Right_Platform__ex__Far_Ledge_1,
+    Giguna__Gateway__West_18__ex__Dual_Path__East_18_1,
+    Giguna__Gateway__West_19__ex__Labyrinth_East__East_19_1,
+    Giguna__Giguna_Base__Below_Gate__ex__Kari_1,
+    Giguna__Giguna_Base__Below_Gate__ex__Kari_2,
+    Giguna__Giguna_Base__Below_Gate__ex__Middle_Platform_1,
+    Giguna__Giguna_Base__Below_Gate__ex__Middle_Platform_2,
+    Giguna__Giguna_Base__Building_Entry__ex__Interior__Outpost_Interior__Entry_1,
+    Giguna__Giguna_Base__East_14__ex__Wasteland__West_14_1,
+    Giguna__Giguna_Base__East_17__ex__Hard_Rock__West_17_1,
+    Giguna__Giguna_Base__Kari__ex__Below_Gate_1,
+    Giguna__Giguna_Base__Left_Pillar__ex__Right_Pillar_1,
+    Giguna__Giguna_Base__Lower_Fork__ex__Below_Gate_1,
+    Giguna__Giguna_Base__Lower_Fork__ex__Below_Gate_2,
+    Giguna__Giguna_Base__Middle_Platform__ex__Below_Gate_1,
+    Giguna__Giguna_Base__Middle_Platform__ex__Staircase_Top_1,
+    Giguna__Giguna_Base__Middle_Platform__ex__Stone_Knob_1,
+    Giguna__Giguna_Base__Middle_Platform__ex__Stone_Knob_2,
+    Giguna__Giguna_Base__Right_Pillar__ex__Left_Pillar_1,
+    Giguna__Giguna_Base__Ruin__ex__Left_Pillar_1,
+    Giguna__Giguna_Base__Ruin__ex__Right_Pillar_1,
+    Giguna__Giguna_Base__Staircase_Top__ex__Left_Pillar_1,
+    Giguna__Giguna_Base__Staircase_Top__ex__Left_Pillar_2,
+    Giguna__Giguna_Base__Stone_Knob__ex__Upper_Cliff_1,
+    Giguna__Giguna_Base__Stone_Knob__ex__Upper_Cliff_2,
+    Giguna__Giguna_Base__West_15__ex__Helipad__East_15_1,
+    Giguna__Giguna_Base__West_15__ex__West_Grate_1,
+    Giguna__Giguna_Base__West_16__ex__Helipad__East_16_1,
+    Giguna__Giguna_Base__West_Grate__ex__West_15_1,
+    Giguna__Giguna_Northeast__Crow_Eating__ex__Gate_Vent_1,
+    Giguna__Giguna_Northeast__East_11__ex__Ebih__Ebih_West__West_11_1,
+    Giguna__Giguna_Northeast__East_9__ex__Ebih__Ebih_West__West_9_1,
+    Giguna__Giguna_Northeast__Gate_Button__ex__Gate_Left_1,
+    Giguna__Giguna_Northeast__Gate_Left__ex__Gate_Button_1,
+    Giguna__Giguna_Northeast__Right_Column__ex__Door_1,
+    Giguna__Giguna_Northeast__Save_Point__ex__Gate_Vent_1,
+    Giguna__Giguna_Northeast__Step__ex__Gate_Vent_1,
+    Giguna__Giguna_Northeast__Step__ex__West_9_1,
+    Giguna__Giguna_Northeast__Step__ex__West_9_2,
+    Giguna__Giguna_Northeast__Switch__ex__Door_1,
+    Giguna__Giguna_Northeast__Switch__ex__Right_Column_1,
+    Giguna__Giguna_Northeast__Vault__ex__Door_1,
+    Giguna__Giguna_Northeast__Vault__ex__Door_2,
+    Giguna__Giguna_Northeast__West_10__ex__Carnelian__East_10_1,
+    Giguna__Giguna_Northeast__West_9__ex__Crow_Eating_1,
+    Giguna__Giguna_Northeast__West_9__ex__Ruins_East__East_9_1,
+    Giguna__Gubi_Lair__East_15__ex__Antechamber__West_15_1,
+    Giguna__Gubi_Lair__East_15__ex__Center_Platform_1,
+    Giguna__Gubi_Lair__East_Tree__ex__Center_Platform_1,
+    Giguna__Gubi_Lair__East_Tree__ex__East_15_1,
+    Giguna__Gubi_Lair__East_Tree__ex__East_15_2,
+    Giguna__Gubi_Lair__Grass_by_Wall__ex__Center_West_Sapling_1,
+    Giguna__Gubi_Lair__Grass_by_Wall__ex__Center_West_Sapling_2,
+    Giguna__Gubi_Lair__Rightmost_Platform__ex__Center_Platform_1,
+    Giguna__Gubi_Lair__Shaft_Bottom__ex__Pedestal_1,
+    Giguna__Gubi_Lair__Shaft_Bottom__ex__Pedestal_2,
+    Giguna__Gubi_Lair__Shaft_Bottom__ex__Pedestal_3,
+    Giguna__Hard_Rock__East_17__ex__Dual_Path__West_17_1,
+    Giguna__Hard_Rock__Rock_Left__Enter_Rock_as_Mist,
+    Giguna__Hard_Rock__Rock_Left__ex__Rock_Center_1,
+    Giguna__Hard_Rock__Rock_Right__Enter_Rock_as_Mist,
+    Giguna__Hard_Rock__Rock_Right__ex__Rock_Center_1,
+    Giguna__Hard_Rock__West_17__ex__Giguna_Base__East_17_1,
+    Giguna__Helipad__East_15__ex__Giguna_Base__West_15_1,
+    Giguna__Helipad__East_16__ex__Giguna_Base__West_16_1,
+    Giguna__Helipad__East_18__ex__Lamassu__West_18_1,
+    Giguna__Helipad__Lowest_Ledge__ex__Clouds__North_Under_Ledge_1,
+    Giguna__Helipad__Railing__ex__Wall_Top_1,
+    Giguna__Helipad__So_Close__ex__Tablet_Ledge_1,
+    Giguna__Helipad__So_Close__ex__Tablet_Ledge_2,
+    Giguna__Helipad__South_Left__ex__Clouds__North_Left_1,
+    Giguna__Helipad__South_Middle__ex__Clouds__North_Middle_1,
+    Giguna__Helipad__South_Right__ex__Clouds__North_Right_1,
+    Giguna__Helipad__Wall_Top__ex__Railing_1,
+    Giguna__Labyrinth_East__East_19__ex__Gateway__West_19_1,
+    Giguna__Labyrinth_East__East_20__ex__Mural__West_20_1,
+    Giguna__Labyrinth_East__Lower_Middle__ex__Middle_Tree_1,
+    Giguna__Labyrinth_East__Lower_Middle__ex__Middle_Tree_2,
+    Giguna__Labyrinth_East__Lower_West__ex__Labyrinth__Lower_East_1,
+    Giguna__Labyrinth_East__Middle_West__ex__Labyrinth__Middle_East_1,
+    Giguna__Labyrinth_East__Top_West__ex__Labyrinth__Top_East_1,
+    Giguna__Lamassu__Broken_Pillar__ex__Staircase_Landing_1,
+    Giguna__Lamassu__East_18__ex__Dual_Path__West_18_1,
+    Giguna__Lamassu__Lower_Platform_Left__ex__Upper_Platform_Edge_1,
+    Giguna__Lamassu__Lower_Platform_Right__ex__Head_1,
+    Giguna__Lamassu__Rear_Gap__ex__East_18_1,
+    Giguna__Lamassu__West_18__ex__Helipad__East_18_1,
+    Giguna__Ruins_Center__East_8__ex__Ruins_East__West_8_1,
+    Giguna__Ruins_Center__East_9__ex__Ruins_East__West_9_1,
+    Giguna__Ruins_Center__Wall_Bottom__ex__Wall_Top_1,
+    Giguna__Ruins_Center__Wall_Top__ex__Center_Top_1,
+    Giguna__Ruins_Center__West_9__ex__Ruins_West__East_9_1,
+    Giguna__Ruins_East__Bottom_Rock__ex__Cliff_1,
+    Giguna__Ruins_East__Cliff__ex__Ledge_1,
+    Giguna__Ruins_East__Cliff__ex__Ledge_2,
+    Giguna__Ruins_East__East_9__ex__Giguna_Northeast__West_9_1,
+    Giguna__Ruins_East__Ledge__ex__Pillar_1,
+    Giguna__Ruins_East__Ledge__ex__Small_Passage_1,
+    Giguna__Ruins_East__Pillar__ex__Way_Up_High_1,
+    Giguna__Ruins_East__Small_Passage__ex__Ledge_1,
+    Giguna__Ruins_East__West_7__ex__Pillar_1,
+    Giguna__Ruins_East__West_7__ex__Ruins_Top__East_7_1,
+    Giguna__Ruins_East__West_8__ex__Ruins_Center__East_8_1,
+    Giguna__Ruins_East__West_9__ex__Ruins_Center__East_9_1,
+    Giguna__Ruins_Top__East_7__ex__East_Door_1,
+    Giguna__Ruins_Top__East_7__ex__Ruins_East__West_7_1,
+    Giguna__Ruins_Top__East_Door__ex__East_7_1,
+    Giguna__Ruins_Top__East_Door__ex__Portal_1,
+    Giguna__Ruins_Top__Entryway__ex__West_Door_1,
+    Giguna__Ruins_Top__Interior_Ledge__ex__Portal_1,
+    Giguna__Ruins_Top__Interior_Ledge__ex__Upper_Tunnel_1,
+    Giguna__Ruins_Top__Portal__ex__East_Door_1,
+    Giguna__Ruins_Top__Portal__ex__Interior_Ledge_1,
+    Giguna__Ruins_Top__Portal_Left__ex__Small_Ledge_1,
+    Giguna__Ruins_Top__Rooftop_West__ex__Turret_Balcony_East_1,
+    Giguna__Ruins_Top__Small_Ledge__ex__Interior_Ledge_1,
+    Giguna__Ruins_Top__Switch__ex__Rooftop_West_1,
+    Giguna__Ruins_Top__Switch__ex__Turret_Balcony_East_1,
+    Giguna__Ruins_Top__Turret_Balcony_East__ex__Rooftop_West_1,
+    Giguna__Ruins_Top__West_7__ex__Ruins_West__East_7_1,
+    Giguna__Ruins_Top__West_7__ex__West_Door_1,
+    Giguna__Ruins_Top__West_7__ex__West_Pillar_1,
+    Giguna__Ruins_Top__West_Door__ex__Entryway_1,
+    Giguna__Ruins_Top__West_Door__ex__West_7_1,
+    Giguna__Ruins_West__East_7__ex__Ruins_Top__West_7_1,
+    Giguna__Ruins_West__East_7__ex__Upper_Ledge_1,
+    Giguna__Ruins_West__East_9__ex__Ruins_Center__West_9_1,
+    Giguna__Ruins_West__Lower_Ledge__ex__Upper_Ledge_1,
+    Giguna__Ruins_West__Nook__ex__Lower_Ledge_1,
+    Giguna__Ruins_West__West_7__ex__West_Tower__East_7_1,
+    Giguna__Wasteland__Bluff_by_Door__ex__Door_Left_1,
+    Giguna__Wasteland__Bluff_by_Door__ex__Door_Left_2,
+    Giguna__Wasteland__Center_Plains__ex__Steeper_Hill_1,
+    Giguna__Wasteland__Door_Left__ex__Door_Right_1,
+    Giguna__Wasteland__Door_Right__ex__Door_Left_1,
+    Giguna__Wasteland__East_12__ex__Ebih__Ebih_West__West_12_1,
+    Giguna__Wasteland__East_13__ex__Ebih__Ebih_West__West_13_1,
+    Giguna__Wasteland__East_14__ex__East_Caverns__West_14_1,
+    Giguna__Wasteland__East_Ledge__ex__East_12_1,
+    Giguna__Wasteland__East_Ledge__ex__East_12_2,
+    Giguna__Wasteland__Lower_Cliff__ex__Middle_Cliff_1,
+    Giguna__Wasteland__Lower_Cliff__ex__Middle_Cliff_2,
+    Giguna__Wasteland__Lower_Path_Right__ex__Lower_Cliff_1,
+    Giguna__Wasteland__Middle_Cliff__ex__Upper_Cliff_1,
+    Giguna__Wasteland__Passage_Cache__Clear_Horizontal_Passage_Manually,
+    Giguna__Wasteland__Passage_Cache__ex__Lower_Path_Left_1,
+    Giguna__Wasteland__Passage_Cache__ex__Lower_Path_Left_2,
+    Giguna__Wasteland__Passage_Cache__ex__Passage_East_1,
+    Giguna__Wasteland__Passage_Cache__Mist_through_Horizontal_Passage,
+    Giguna__Wasteland__Passage_East__Clear_Horizontal_Passage_Manually,
+    Giguna__Wasteland__Passage_East__ex__Passage_Cache_1,
+    Giguna__Wasteland__Passage_East__Mist_through_Horizontal_Passage,
+    Giguna__Wasteland__West_12__ex__West_Caverns__East_12_1,
+    Giguna__Wasteland__West_13__ex__West_Caverns__East_13_1,
+    Giguna__Wasteland__West_14__ex__Giguna_Base__East_14_1,
+    Giguna__West_Caverns__East_10__ex__Carnelian__West_10_1,
+    Giguna__West_Caverns__East_10__ex__Column_2_Top_1,
+    Giguna__West_Caverns__East_12__ex__Wasteland__West_12_1,
+    Giguna__West_Caverns__East_13__ex__Wasteland__West_13_1,
+    Giguna__West_Caverns__East_Susar__ex__East_12_1,
+    Giguna__West_Caverns__East_Susar__ex__Tunnel_Fork_1,
+    Giguna__West_Caverns__Small_Staircase__ex__East_10_1,
+    Giguna__West_Caverns__Top_Gap_Right__ex__Column_1_Top_Right_1,
+    Giguna__West_Caverns__Tunnel_Bottom__ex__Tunnel_Entrance_1,
+    Giguna__West_Caverns__Tunnel_Bottom__ex__Tunnel_Entrance_2,
+    Giguna__West_Caverns__Tunnel_Fork__ex__Tunnel_Bottom_1,
+    Giguna__West_Caverns__Tunnel_Fork__ex__Tunnel_Entrance_1,
+    Giguna__West_Caverns__West_13__ex__Far_Corner__East_13_1,
+    Giguna__West_Tower__Southwest__ex__West_Caverns__Northwest_1,
+    Giguna_Breach__Antechamber__North__ex__Fire_Room__South_1,
+    Giguna_Breach__Ascent__Bottom__ex__Top_1,
+    Giguna_Breach__Ascent__West_6__ex__Peak__East_6_1,
+    Giguna_Breach__Ascent__West_9__ex__Central__East_9_1,
+    Giguna_Breach__Below_Chimney__Cubby_Entrance__ex__Cubby__Entrance_1,
+    Giguna_Breach__Below_Chimney__North__ex__Chimney__South_1,
+    Giguna_Breach__Below_Chimney__Southwest__ex__SW_Save__North_1,
+    Giguna_Breach__Central__East_9__ex__Ascent__West_9_1,
+    Giguna_Breach__Central__East_9__ex__East_Brick_1,
+    Giguna_Breach__Central__East_Brick__ex__Middle_Statue_1,
+    Giguna_Breach__Central__South__ex__Grid_14_10_11__North_1,
+    Giguna_Breach__Central__South__ex__Upper_Floating_Brick_1,
+    Giguna_Breach__Central__Statuette__ex__Tunnel_1,
+    Giguna_Breach__Central__Upper_Floating_Brick__ex__West_Statue_1,
+    Giguna_Breach__Central__Wall__ex__Upper_Floating_Brick_1,
+    Giguna_Breach__Central__West_8__ex__Chimney__East_8_1,
+    Giguna_Breach__Central__West_9__ex__Chimney__East_9_1,
+    Giguna_Breach__Central__West_9__ex__Wall_1,
+    Giguna_Breach__Chimney__East_7__ex__Peak__West_7_1,
+    Giguna_Breach__Chimney__East_8__ex__Central__West_8_1,
+    Giguna_Breach__Chimney__East_9__ex__Central__West_9_1,
+    Giguna_Breach__Chimney__South__ex__Below_Chimney__North_1,
+    Giguna_Breach__Cubby__Entrance__ex__Below_Chimney__Cubby_Entrance_1,
+    Giguna_Breach__Fire_Room__East_11__ex__Slingshot__West_1,
+    Giguna_Breach__Fire_Room__First_Fire__ex__West_Plateau_1,
+    Giguna_Breach__Fire_Room__South__ex__Antechamber__North_1,
+    Giguna_Breach__Fire_Room__South__ex__Cuesta_1,
+    Giguna_Breach__Fire_Room__West_10__ex__Grid_14_10_11__East_10_1,
+    Giguna_Breach__Fire_Room__West_11__ex__Grid_14_10_11__East_11_1,
+    Giguna_Breach__Fire_Room__West_Plateau__ex__West_10_1,
+    Giguna_Breach__Grid_14_10_11__East_10__ex__Fire_Room__West_10_1,
+    Giguna_Breach__Grid_14_10_11__East_10__ex__High_Ledge_1,
+    Giguna_Breach__Grid_14_10_11__East_11__ex__Fire_Room__West_11_1,
+    Giguna_Breach__Grid_14_10_11__North__ex__Central__South_1,
+    Giguna_Breach__Grid_14_10_11__South__ex__Robopede__North_1,
+    Giguna_Breach__Peak__East_6__ex__Ascent__West_6_1,
+    Giguna_Breach__Peak__East_6__ex__Upper_East_1,
+    Giguna_Breach__Peak__Portal__ex__Upper_West_1,
+    Giguna_Breach__Peak__West_7__ex__Chimney__East_7_1,
+    Giguna_Breach__Pink_Clouds__Normal_Entry__ex__Corner_1,
+    Giguna_Breach__Robopede__North__ex__Grid_14_10_11__South_1,
+    Giguna_Breach__Robopede__West__ex__SW_Save__East_12_1,
+    Giguna_Breach__Slingshot__Ravine__ex__Column_1,
+    Giguna_Breach__Slingshot__West__ex__Fire_Room__East_11_1,
+    Giguna_Breach__SW_Save__East_12__ex__Lower_Platform_1,
+    Giguna_Breach__SW_Save__East_12__ex__Robopede__West_1,
+    Giguna_Breach__SW_Save__Lower_Platform__ex__Side_Door_1,
+    Giguna_Breach__SW_Save__North__ex__Below_Chimney__Southwest_1,
+    Giguna_Breach__SW_Save__Save_Point__ex__Lower_Platform_1,
+    Giguna_Breach__SW_Save__Side_Door__ex__West_11_1,
+    Giguna_Breach__SW_Save__West_11__ex__Side_Door_1,
+    Glacier__Apocalypse_Entry__West__ex__Grid_43_10_11__East_1,
+    Glacier__Boomerang_Antechamber__East_12__ex__Boomerang_Room__West_1,
+    Glacier__Boomerang_Antechamber__Upper_East__ex__Boomerang_Room__Upper_West_1,
+    Glacier__Boomerang_Antechamber__West_12__ex__Vertical_Room__East_12_1,
+    Glacier__Boomerang_Antechamber__West_13__ex__Vertical_Room__East_13_1,
+    Glacier__Boomerang_Room__Center_ish__ex__Center_Ledge_1,
+    Glacier__Boomerang_Room__Center_Ledge__ex__Upper_Gate_East_1,
+    Glacier__Boomerang_Room__Pedestal__ex__Upper_Gate_East_1,
+    Glacier__Boomerang_Room__Platform__ex__Upper_West_1,
+    Glacier__Boomerang_Room__Upper_Gate_East__ex__Center_Ledge_1,
+    Glacier__Boomerang_Room__Upper_West__ex__Boomerang_Antechamber__Upper_East_1,
+    Glacier__Boomerang_Room__Upper_West__ex__Platform_1,
+    Glacier__Boomerang_Room__West__ex__Boomerang_Antechamber__East_12_1,
+    Glacier__Compass_Room__East__ex__Grid_43_10_11__Lower_1,
+    Glacier__Compass_Room__West__ex__The_Big_Drop__East_1,
+    Glacier__Dock_Outside__Do_Not_Enter__ex__Revival__East_9_1,
+    Glacier__Dock_Outside__Entry__ex__Interior__Dock_Interior__Entry_1,
+    Glacier__Grid_31_9_12__East_10__ex__Grid_32_7_10__West_10_1,
+    Glacier__Grid_31_9_12__East_9__ex__Grid_32_7_10__West_9_1,
+    Glacier__Grid_31_9_12__Midair__ex__Ebih__Base_Camp__East_11_1,
+    Glacier__Grid_31_9_12__West_12__ex__Ebih__Base_Camp__East_12_1,
+    Glacier__Grid_32_7_10__East_8__ex__Peak__West_8_1,
+    Glacier__Grid_32_7_10__Left_Rock__ex__Column_1,
+    Glacier__Grid_32_7_10__Left_Rock__ex__Column_2,
+    Glacier__Grid_32_7_10__West_10__ex__Left_Rock_1,
+    Glacier__Grid_32_7_10__West_10__ex__Left_Rock_2,
+    Glacier__Grid_32_7_10__West_9__ex__Grid_31_9_12__East_9_1,
+    Glacier__Grid_37_38_9__East__ex__Grid_39_40_7_9__West_1,
+    Glacier__Grid_37_38_9__West__ex__Vertical_Room__East_9_1,
+    Glacier__Grid_39_40_7_9__Upper_East__ex__Revival__West_8_1,
+    Glacier__Grid_39_40_7_9__West__ex__Grid_37_38_9__East_1,
+    Glacier__Grid_42_10__East__ex__Grid_43_10_11__Top_1,
+    Glacier__Grid_42_10__West__ex__Revival__Lower_East_1,
+    Glacier__Grid_43_10_11__East__ex__Apocalypse_Entry__West_1,
+    Glacier__Grid_43_10_11__Lower__ex__Compass_Room__East_1,
+    Glacier__Grid_43_10_11__Top__ex__Grid_42_10__East_1,
+    Glacier__Lake_Main_Entrance__Ebih_Access__ex__Ebih__Base_Camp__Lake_Access_1,
+    Glacier__Lake_Main_Entrance__Lake_Access__ex__Amagi__Main_Area__East_15_1,
+    Glacier__Lake_Main_Entrance__Ledge__ex__Upper_1,
+    Glacier__Lake_Main_Entrance__Ledge__ex__Upper_2,
+    Glacier__Lake_Main_Entrance__Lower_Platform__ex__Ledge_1,
+    Glacier__Lake_Main_Entrance__Lower_Platform__ex__Ledge_2,
+    Glacier__Lake_Main_Entrance__Upper_Platform__ex__Upper_1,
+    Glacier__Lake_Main_Entrance__Upper_Platform__ex__Upper_2,
+    Glacier__Ledge_Grab_Room__Cliff__ex__Lower_Platform_1,
+    Glacier__Ledge_Grab_Room__Cliff_Bottom__ex__Cliff_1,
+    Glacier__Ledge_Grab_Room__Cliff_Bottom__ex__Cliff_2,
+    Glacier__Ledge_Grab_Room__Column__ex__Ledge_Grab_Room__Mid_35_1,
+    Glacier__Ledge_Grab_Room__East_11__ex__Vertical_Room__Past_Gate_1,
+    Glacier__Ledge_Grab_Room__East_9__ex__Column_1,
+    Glacier__Ledge_Grab_Room__East_9__ex__Column_2,
+    Glacier__Ledge_Grab_Room__East_9__ex__Vertical_Room__Past_Gate_1,
+    Glacier__Ledge_Grab_Room__East_9__ex__Vertical_Room__West_9_1,
+    Glacier__Ledge_Grab_Room__Fork__ex__Column_1,
+    Glacier__Ledge_Grab_Room__Fork__ex__Column_2,
+    Glacier__Ledge_Grab_Room__Fork__ex__Gate_Ledge_1,
+    Glacier__Ledge_Grab_Room__Fork__ex__Gate_Ledge_2,
+    Glacier__Ledge_Grab_Room__Gate__ex__West_End_1,
+    Glacier__Ledge_Grab_Room__Gate_Ledge__ex__Column_1,
+    Glacier__Ledge_Grab_Room__Gate_Ledge__ex__Column_2,
+    Glacier__Ledge_Grab_Room__Lower_Platform__ex__Upper_Platform_1,
+    Glacier__Ledge_Grab_Room__Lower_Platform__ex__Upper_Platform_2,
+    Glacier__Ledge_Grab_Room__Lower_Platform__ex__West_End_1,
+    Glacier__Ledge_Grab_Room__Mid_34__ex__Lower_Platform_1,
+    Glacier__Ledge_Grab_Room__Mid_34__ex__Lower_Platform_2,
+    Glacier__Ledge_Grab_Room__Mid_35__ex__Fork_1,
+    Glacier__Ledge_Grab_Room__Pedestal__ex__West_End_1,
+    Glacier__Ledge_Grab_Room__Upper_Platform__ex__Fork_1,
+    Glacier__Peak__East_8__ex__Top_Platform_East_1,
+    Glacier__Peak__East_8__ex__Vertical_Room__West_8_1,
+    Glacier__Peak__Top_Platform_East__ex__Highest_Platform_1,
+    Glacier__Peak__Top_Rock__ex__Highest_Platform_1,
+    Glacier__Peak__Under_West_Cliff__ex__West_Cliff_1,
+    Glacier__Peak__Under_West_Cliff__ex__West_Cliff_2,
+    Glacier__Peak__West_8__ex__Grid_32_7_10__East_8_1,
+    Glacier__Revival__East_9__ex__Dock_Outside__Do_Not_Enter_1,
+    Glacier__Revival__Lower_East__ex__Grid_42_10__West_1,
+    Glacier__Revival__West_8__ex__Grid_39_40_7_9__Upper_East_1,
+    Glacier__The_Big_Drop__East__ex__Compass_Room__West_1,
+    Glacier__The_Big_Drop__Small_Path__ex__East_1,
+    Glacier__The_Big_Drop__Water_Surface__Drown,
+    Glacier__Vertical_Room__East_12__ex__Boomerang_Antechamber__West_12_1,
+    Glacier__Vertical_Room__East_13__ex__Boomerang_Antechamber__West_13_1,
+    Glacier__Vertical_Room__East_9__ex__Grid_37_38_9__West_1,
+    Glacier__Vertical_Room__East_9__ex__Peak_1,
+    Glacier__Vertical_Room__East_9__ex__Peak_2,
+    Glacier__Vertical_Room__East_Corner__ex__East_12_1,
+    Glacier__Vertical_Room__Mid_11__ex__Mid_9_1,
+    Glacier__Vertical_Room__Mid_9__ex__Peak_1,
+    Glacier__Vertical_Room__Mid_9__ex__Peak_2,
+    Glacier__Vertical_Room__Past_Gate__ex__Ledge_Grab_Room__East_11_1,
+    Glacier__Vertical_Room__Past_Gate__ex__Under_Switch_1,
+    Glacier__Vertical_Room__Peak__ex__West_8_1,
+    Glacier__Vertical_Room__Peak__ex__West_8_2,
+    Glacier__Vertical_Room__Under_Switch__ex__Mid_9_1,
+    Glacier__Vertical_Room__Under_Switch__ex__Past_Gate_1,
+    Glacier__Vertical_Room__West_8__ex__Peak__East_8_1,
+    Glacier__Vertical_Room__West_9__ex__Ledge_Grab_Room__East_9_1,
+    Interior__Building_Interior__Entry__ex__Ebih__Base_Camp__Building_Entry_1,
+    Interior__Bunker_Interior__Entry__ex__Ebih__Base_Camp__Bunker_Entry_1,
+    Interior__Cave_Behind_Waterfall__Bottom__ex__Amagi__Main_Area__Secret_Outcropping_1,
+    Interior__Cave_Behind_Waterfall__Bottom__ex__Middle_1,
+    Interior__Cave_Behind_Waterfall__Bottom__ex__Top_1,
+    Interior__Cave_Behind_Waterfall__Middle__ex__Top_1,
+    Interior__Cave_Behind_Waterfall__Top__ex__Amagi__Main_Area__Secret_Waterfall_1,
+    Interior__Dock_Elevator__Connector__ex__Dock_Interior__Connector_1,
+    Interior__Dock_Interior__Connector__ex__Dock_Elevator__Connector_1,
+    Interior__Dock_Interior__Entry__ex__Glacier__Dock_Outside__Entry_1,
+    Interior__Ebih_Cave__Entry__ex__Ebih__Waterfall__Cave_Entrance_1,
+    Interior__Garage__Entry__ex__Ebih__By_Garage__Garage_Entry_1,
+    Interior__Outpost_Interior__Entry__ex__Bookshelf_1,
+    Interior__Outpost_Interior__Entry__ex__Bookshelf_2,
+    Interior__Outpost_Interior__Entry__ex__Giguna__Giguna_Base__Building_Entry_1,
+    Interior__Tent_Interior__Entry__ex__Ebih__Base_Camp__Tent_Entry_1,
+    Irikar__Abandoned_Room__West__ex__Basement_Portal__East_27_1,
+    Irikar__Airy__Middle_South__ex__Sight_Room__Above_Room_North_1,
+    Irikar__Basement_Pipes__Bricks_Under_Pipes__ex__Double_Pipe_Right_1,
+    Irikar__Basement_Pipes__Bricks_Under_Pipes__ex__Double_Pipe_Right_2,
+    Irikar__Basement_Pipes__Double_Pipe_Left__ex__High_Pipe_1,
+    Irikar__Basement_Pipes__East_28__ex__Basement_Portal__West_28_1,
+    Irikar__Basement_Pipes__Lower_Pipe_Under_Ledge__ex__Brick_Ledge_1,
+    Irikar__Basement_Pipes__Lower_Pipe_Under_Ledge__ex__Brick_Ledge_2,
+    Irikar__Basement_Pipes__Right_Vertical_Pipe__ex__Double_Pipe_Left_1,
+    Irikar__Basement_Pipes__Right_Vertical_Pipe__ex__Double_Pipe_Left_2,
+    Irikar__Basement_Pipes__Right_Vertical_Pipe__ex__Double_Pipe_Left_3,
+    Irikar__Basement_Pipes__West_27__ex__Midwest__East_27_1,
+    Irikar__Basement_Pipes__West_28__ex__Midwest__East_28_1,
+    Irikar__Basement_Portal__Bottom_Middle__ex__Ledge_1,
+    Irikar__Basement_Portal__East_27__ex__Abandoned_Room__West_1,
+    Irikar__Basement_Portal__East_28__ex__Empty_Foyer__West_1,
+    Irikar__Basement_Portal__East_28__ex__Ledge_1,
+    Irikar__Basement_Portal__Ledge__ex__East_Platform_1,
+    Irikar__Basement_Portal__Ledge__ex__Moving_Platform_Start_1,
+    Irikar__Basement_Portal__Ledge__ex__Westmost_Platform_1,
+    Irikar__Basement_Portal__Middle_Platform__ex__East_Platform_1,
+    Irikar__Basement_Portal__Middle_Platform__ex__Moving_Platform_End_1,
+    Irikar__Basement_Portal__Moving_Platform_End__ex__East_Platform_1,
+    Irikar__Basement_Portal__Moving_Platform_Start__ex__Ledge_1,
+    Irikar__Basement_Portal__North__ex__Hub__Royal_Storage_South_1,
+    Irikar__Basement_Portal__Portal_Stand__ex__Ledge_1,
+    Irikar__Basement_Portal__Portal_Stand__ex__Moving_Platform_Start_1,
+    Irikar__Basement_Portal__West_28__ex__Basement_Pipes__East_28_1,
+    Irikar__Basement_Portal__West_28__ex__Moving_Platform_Start_1,
+    Irikar__Boss_Room__Catwalk_East__ex__Lamassu__Catwalk_West_1,
+    Irikar__Boss_Room__Catwalk_West__ex__Upper_Rooftops_1,
+    Irikar__Boss_Room__East_28__ex__Lamassu__West_28_1,
+    Irikar__Boss_Room__Upper_Rooftops__ex__East_Rooftops__Off_the_Edge_1,
+    Irikar__Boss_Room__West_28__ex__Empty_Foyer__East_1,
+    Irikar__East_Rooftops__Directly_Down__ex__Boss_Room__Northwest_1,
+    Irikar__East_Rooftops__East_Mid_air__ex__Giguna__Breachable_Wall__West_Mid_air_1,
+    Irikar__East_Rooftops__East_Mid_air__ex__Top_Rooftop_1,
+    Irikar__East_Rooftops__Off_the_Edge__ex__Boss_Room__Upper_Rooftops_1,
+    Irikar__East_Rooftops__Off_the_Edge__ex__Top_Rooftop_1,
+    Irikar__East_Rooftops__Off_the_Edge__ex__Top_Rooftop_2,
+    Irikar__East_Rooftops__Upper_West__ex__East_Mid_air_1,
+    Irikar__Empty_Foyer__East__ex__Boss_Room__West_28_1,
+    Irikar__Empty_Foyer__West__ex__Basement_Portal__East_28_1,
+    Irikar__Hub__Bowl_Middle_Ledge__ex__Bowl_Top_Platform_1,
+    Irikar__Hub__Bowl_Middle_Platform_Center__ex__Bowl_Middle_Ledge_1,
+    Irikar__Hub__Bowl_Middle_Platform_West__ex__Bowl_Middle_Ledge_1,
+    Irikar__Hub__Bowl_Platform_3__ex__Bowl_Middle_Platform_Center_1,
+    Irikar__Hub__Bowl_Top_Platform__ex__West_Rim_1,
+    Irikar__Hub__East_Rim__ex__Sat_Tower_Roof_West_1,
+    Irikar__Hub__NW_Staircase_Upper__ex__NW_Bowl_Edifice_1,
+    Irikar__Hub__NW_Staircase_Upper__ex__NW_Bowl_Edifice_2,
+    Irikar__Hub__Royal_Storage_By_Wall__ex__Royal_Storage_in_Wall_1,
+    Irikar__Hub__Royal_Storage_By_Wall__Mist_into_Wall,
+    Irikar__Hub__Royal_Storage_South__ex__Basement_Portal__North_1,
+    Irikar__Hub__Sat_Tower_East_24__ex__Sight_Room__West_24_1,
+    Irikar__Hub__Sat_Tower_Floating_Platform__ex__Sat_Tower_Top_Ledge_1,
+    Irikar__Hub__Sat_Tower_Middle_Ledge__ex__Sat_Tower_Floating_Platform_1,
+    Irikar__Hub__Sat_Tower_Northeast__ex__Airy__Northwest_1,
+    Irikar__Hub__Save_Point__ex__Bowl_Hole_1,
+    Irikar__Hub__West_Rim__ex__East_Rim_1,
+    Irikar__Lamassu__Catwalk_Middle__ex__Desk_1,
+    Irikar__Lamassu__Catwalk_Middle__ex__Hidden_Passage_West_1,
+    Irikar__Lamassu__Catwalk_West__ex__Boss_Room__Catwalk_East_1,
+    Irikar__Lamassu__East_26__ex__Uhrum__West_Entrance__West_26_1,
+    Irikar__Lamassu__East_27__ex__Uhrum__West_Entrance__West_27_1,
+    Irikar__Lamassu__Hidden_Passage_East__ex__Uhrum__West_Entrance__Hidden_Passage_West_1,
+    Irikar__Lamassu__West_28__ex__Boss_Room__East_28_1,
+    Irikar__Sight_Room__Above_Room_East__ex__East_Rooftops__Upper_West_1,
+    Irikar__Sight_Room__West_24__ex__Hub__Sat_Tower_East_24_1,
+    Irikar_Breach__Exit_Corridor__East__ex__Uhrum_Connector__West_1,
+    Irikar_Breach__Exit_Corridor__North_12__ex__Pillar_1,
+    Irikar_Breach__Exit_Corridor__North_12__ex__Worm_Rave__South_1,
+    Irikar_Breach__Exit_Corridor__North_13__ex__Four_way__South_1,
+    Irikar_Breach__Exit_Corridor__North_13__ex__Pillar_1,
+    Irikar_Breach__Exit_Corridor__West__ex__Neon_Corridor__East_1,
+    Irikar_Breach__Exit_Corridor__West_of_Pillar__ex__Pillar_1,
+    Irikar_Breach__Flappy_Drone__Initial_Drop__ex__Pillar_Underside_1,
+    Irikar_Breach__Flappy_Drone__Pillar_Underside__ex__Top_Pillar_1,
+    Irikar_Breach__Flappy_Drone__South__ex__Four_way__North_1,
+    Irikar_Breach__Flappy_Drone__Top_Pillar__ex__Pillar_Underside_1,
+    Irikar_Breach__Flappy_Drone__Upper_Valley_Right__ex__Top_Pillar_1,
+    Irikar_Breach__Flappy_Drone__West_Door__ex__Hover_Room__East_1,
+    Irikar_Breach__Four_way__East__ex__Ledge_1,
+    Irikar_Breach__Four_way__East__ex__Save_Room__West_1,
+    Irikar_Breach__Four_way__Ledge__ex__North_1,
+    Irikar_Breach__Four_way__Ledge__ex__West_1,
+    Irikar_Breach__Four_way__North__ex__Flappy_Drone__South_1,
+    Irikar_Breach__Four_way__North__ex__West_1,
+    Irikar_Breach__Four_way__South__ex__Exit_Corridor__North_13_1,
+    Irikar_Breach__Four_way__South__ex__Ledge_1,
+    Irikar_Breach__Four_way__West__ex__Worm_Rave__East_1,
+    Irikar_Breach__Gauntlet__East_22__ex__Hover_Room__West_1,
+    Irikar_Breach__Gauntlet__Hidden_Path_Reward__ex__Hidden_Path_Top_Ledge_1,
+    Irikar_Breach__Gauntlet__Save_Point__ex__Hidden_Path_Upper_Entry_1,
+    Irikar_Breach__Gauntlet__Save_Point__ex__Hidden_Path_Upper_Entry_2,
+    Irikar_Breach__Hover_Room__Bottom__ex__East_1,
+    Irikar_Breach__Hover_Room__Bottom__ex__West_1,
+    Irikar_Breach__Hover_Room__East__ex__Flappy_Drone__West_Door_1,
+    Irikar_Breach__Hover_Room__East__ex__West_1,
+    Irikar_Breach__Hover_Room__West__ex__East_1,
+    Irikar_Breach__Hover_Room__West__ex__Gauntlet__East_22_1,
+    Irikar_Breach__Neon_Corridor__East__ex__Exit_Corridor__West_1,
+    Irikar_Breach__Neon_Corridor__West__ex__Sandy_Lair__East_27_1,
+    Irikar_Breach__Neon_Corridor__West_Basin__ex__Center_1,
+    Irikar_Breach__Neon_Corridor__West_Basin__ex__West_1,
+    Irikar_Breach__Save_Room__West__ex__Four_way__East_1,
+    Irikar_Breach__Worm_Rave__East__ex__Four_way__West_1,
+    Irikar_Breach__Worm_Rave__South__ex__Corner_1,
+    Irikar_Breach__Worm_Rave__South__ex__East_1,
+    Irikar_Breach__Worm_Rave__South__ex__Exit_Corridor__North_12_1,
+    Menu__Upgrade_Menu__Combat__ex__Drone_1,
+    Menu__Upgrade_Menu__Combat__ex__Infection_1,
+    Menu__Upgrade_Menu__Combat__ex__Physiology_1,
+    Menu__Upgrade_Menu__Drone__ex__Combat_1,
+    Menu__Upgrade_Menu__Drone__ex__Infection_1,
+    Menu__Upgrade_Menu__Drone__ex__Physiology_1,
+    Menu__Upgrade_Menu__Infection__ex__Combat_1,
+    Menu__Upgrade_Menu__Infection__ex__Drone_1,
+    Menu__Upgrade_Menu__Infection__ex__Physiology_1,
+    Menu__Upgrade_Menu__Physiology__ex__Combat_1,
+    Menu__Upgrade_Menu__Physiology__ex__Drone_1,
+    Menu__Upgrade_Menu__Physiology__ex__Infection_1,
+    Uhrum__Annuna_Corridor__Between_Two_Flowers__ex__Lower_Platform_1,
+    Uhrum__Annuna_Corridor__Between_Two_Flowers__ex__Lower_Platform_2,
+    Uhrum__Annuna_Corridor__Block_East__ex__Block_West_1,
+    Uhrum__Annuna_Corridor__Block_West__ex__Block_East_1,
+    Uhrum__Annuna_Corridor__Block_West__ex__Block_East_2,
+    Uhrum__Annuna_Corridor__East_25__ex__Annuna__Mirror_Match__West_25_1,
+    Uhrum__Annuna_Corridor__Lower_Platform__ex__Middle_Platform_1,
+    Uhrum__Annuna_Corridor__Lower_Platform__ex__Middle_Platform_2,
+    Uhrum__Annuna_Corridor__Middle_Platform__ex__Upper_Ledge_1,
+    Uhrum__Annuna_Corridor__Middle_Platform__ex__Upper_Platform_1,
+    Uhrum__Annuna_Corridor__Middle_Platform__ex__Upper_Platform_2,
+    Uhrum__Annuna_Corridor__Statue__ex__Upper_Platform_1,
+    Uhrum__Annuna_Corridor__Upper_Ledge__ex__Upper_Platform_1,
+    Uhrum__Annuna_Corridor__Upper_Platform__ex__Statue_1,
+    Uhrum__Annuna_Corridor__Upper_Platform__ex__Upper_Ledge_1,
+    Uhrum__Annuna_Corridor__West_25__ex__Waterfalls__East_25_1,
+    Uhrum__Annuna_Corridor__West_26__ex__Waterfalls__East_26_1,
+    Uhrum__Save_Room__East__ex__Waterfalls__West_27_1,
+    Uhrum__Save_Room__West__ex__Glitchy_Corridor__East_27_1,
+    Uhrum__Siege_Corridor__Center_Platform_3__ex__Upper_Rock_West_1,
+    Uhrum__Siege_Corridor__Center_Valley__ex__Center_East_1,
+    Uhrum__Siege_Corridor__Center_Valley__ex__Center_East_2,
+    Uhrum__Siege_Corridor__East_25__ex__Waterfalls__West_25_1,
+    Uhrum__Siege_Corridor__East_Hill__ex__Mideast_Tree_1,
+    Uhrum__Siege_Corridor__East_Hill__ex__Upper_Rock_East_1,
+    Uhrum__Siege_Corridor__East_Hill__ex__Upper_Rock_East_2,
+    Uhrum__Siege_Corridor__East_Hill__ex__Upper_Rock_East_3,
+    Uhrum__Siege_Corridor__Mideast_Tree__ex__East_Hill_1,
+    Uhrum__Siege_Corridor__Mideast_Tree__ex__Upper_Rock_West_1,
+    Uhrum__Siege_Corridor__Northwest_Door__ex__Giguna__Vertical_Interchange__South_1,
+    Uhrum__Siege_Corridor__Northwest_Door__ex__Western_Cache_1,
+    Uhrum__Siege_Corridor__Northwest_Platform__ex__Northwest_Door_1,
+    Uhrum__Siege_Corridor__Northwest_Platform__ex__Western_Cache_1,
+    Uhrum__Siege_Corridor__Pond__ex__East_Hill_1,
+    Uhrum__Siege_Corridor__Pond__ex__East_Hill_2,
+    Uhrum__Siege_Corridor__Upper_Rock_Item__ex__Upper_Rock_West_1,
+    Uhrum__Siege_Corridor__Upper_Rock_West__ex__Upper_Rock_Item_1,
+    Uhrum__Siege_Corridor__West_26__ex__West_Entrance__East_26_1,
+    Uhrum__Siege_Corridor__West_Greenery__ex__West_Grassy_Ledge_1,
+    Uhrum__Siege_Corridor__Western_Cache__ex__Northwest_Door_1,
+    Uhrum__Siege_Corridor__Western_Cache__ex__Northwest_Platform_1,
+    Uhrum__Siege_Corridor__Western_Rock__ex__Northwest_Platform_1,
+    Uhrum__Waterfalls__Above_Block__ex__Below_Block_1,
+    Uhrum__Waterfalls__Above_Block__ex__East_25_1,
+    Uhrum__Waterfalls__Barrier_East__Charge_through_Wall,
+    Uhrum__Waterfalls__Barrier_East__ex__Barrier_West_1,
+    Uhrum__Waterfalls__Barrier_East__ex__East_24_in_Mid_air_1,
+    Uhrum__Waterfalls__Barrier_East__Mist_through_Wall,
+    Uhrum__Waterfalls__Barrier_East__Spin_through_Wall,
+    Uhrum__Waterfalls__Barrier_West__Charge_through_Wall,
+    Uhrum__Waterfalls__Barrier_West__ex__Barrier_East_1,
+    Uhrum__Waterfalls__Barrier_West__ex__Ceiling_Opening_1,
+    Uhrum__Waterfalls__Barrier_West__Mist_through_Wall,
+    Uhrum__Waterfalls__Barrier_West__Spin_through_Wall,
+    Uhrum__Waterfalls__Below_Block__ex__Above_Block_1,
+    Uhrum__Waterfalls__Below_Block__ex__Above_Block_2,
+    Uhrum__Waterfalls__Below_Block__ex__East_26_1,
+    Uhrum__Waterfalls__Below_Block__ex__East_26_2,
+    Uhrum__Waterfalls__Below_Block__ex__Small_Rock_1,
+    Uhrum__Waterfalls__Ceiling_Cache__ex__Ceiling_Opening_1,
+    Uhrum__Waterfalls__Ceiling_Opening__ex__Barrier_West_1,
+    Uhrum__Waterfalls__Ceiling_Opening__ex__Ceiling_Cache_1,
+    Uhrum__Waterfalls__Ceiling_Opening__ex__West_24_1,
+    Uhrum__Waterfalls__Center_Island_East__ex__East_Waters_Edge_1,
+    Uhrum__Waterfalls__Center_Island_East__ex__Lower_East_Platform_1,
+    Uhrum__Waterfalls__Center_Island_West__ex__West_27_1,
+    Uhrum__Waterfalls__East_24__ex__Tulip_Tower__West_24_1,
+    Uhrum__Waterfalls__East_24_in_Mid_air__ex__Barrier_East_1,
+    Uhrum__Waterfalls__East_24_in_Mid_air__ex__Tulip_Tower__West_24_in_Mid_air_1,
+    Uhrum__Waterfalls__East_25__ex__Annuna_Corridor__West_25_1,
+    Uhrum__Waterfalls__East_26__ex__Annuna_Corridor__West_26_1,
+    Uhrum__Waterfalls__East_26__ex__Below_Block_1,
+    Uhrum__Waterfalls__East_27__ex__East_Lake__West_27_1,
+    Uhrum__Waterfalls__East_28__ex__East_Lake__West_28_1,
+    Uhrum__Waterfalls__East_Palm_Tree__ex__Ledge_Above_Palm_1,
+    Uhrum__Waterfalls__East_Palm_Tree__ex__Ledge_Above_Palm_2,
+    Uhrum__Waterfalls__Green_Middle_Ledge__ex__Below_Block_1,
+    Uhrum__Waterfalls__High_Platform__ex__Northeast_Ledge_1,
+    Uhrum__Waterfalls__High_Platform__ex__Northeast_Ledge_2,
+    Uhrum__Waterfalls__Large_Rock__ex__Medium_Rock_1,
+    Uhrum__Waterfalls__Large_Rock__ex__West_Wall_1,
+    Uhrum__Waterfalls__Ledge_Above_Palm__ex__High_Platform_1,
+    Uhrum__Waterfalls__Ledge_Above_Palm__ex__Northeast_Ledge_1,
+    Uhrum__Waterfalls__Lower_East_Platform__ex__Below_Block_1,
+    Uhrum__Waterfalls__Lower_East_Platform__ex__Small_Rock_1,
+    Uhrum__Waterfalls__Medium_Rock__ex__Green_Middle_Ledge_1,
+    Uhrum__Waterfalls__Medium_Rock__ex__West_Platform_1,
+    Uhrum__Waterfalls__Medium_Rock__ex__West_Wall_1,
+    Uhrum__Waterfalls__Northeast_Ledge__ex__Ceiling_Opening_1,
+    Uhrum__Waterfalls__Water_Pillar__ex__Center_Island_East_1,
+    Uhrum__Waterfalls__Water_Pillar__ex__Center_Island_East_2,
+    Uhrum__Waterfalls__Water_Pillar__ex__East_Waters_Edge_1,
+    Uhrum__Waterfalls__West_24__ex__Artillery_Practice__East_24_1,
+    Uhrum__Waterfalls__West_24__ex__Below_Block_1,
+    Uhrum__Waterfalls__West_25__ex__Below_Block_1,
+    Uhrum__Waterfalls__West_25__ex__Siege_Corridor__East_25_1,
+    Uhrum__Waterfalls__West_27__ex__Center_Island_West_1,
+    Uhrum__Waterfalls__West_27__ex__Large_Rock_1,
+    Uhrum__Waterfalls__West_27__ex__Save_Room__East_1,
+    Uhrum__Waterfalls__West_Platform__ex__Green_Middle_Ledge_1,
+    Uhrum__Waterfalls__West_Platform__ex__Green_Middle_Ledge_2,
+    Uhrum__Waterfalls__West_Wall__ex__West_25_1,
+    Uhrum__Waterfalls__West_Wall__ex__West_25_2,
+    Uhrum__Waterfalls__West_Water_Nook__ex__West_Water_Ledge_1,
+    Uhrum__Waterfalls__West_Water_Nook__ex__West_Water_Ledge_2,
+    Uhrum__West_Entrance__Clear_Passage__ex__Portal_Stand_1,
+    Uhrum__West_Entrance__Clear_Passage__ex__Portal_Stand_2,
+    Uhrum__West_Entrance__East_26__ex__Siege_Corridor__West_26_1,
+    Uhrum__West_Entrance__East_28__ex__Glitchy_Corridor__West_28_1,
+    Uhrum__West_Entrance__East_28__ex__Lower_Path_Tree_Ledge_1,
+    Uhrum__West_Entrance__East_28__ex__Lower_Path_Tree_Ledge_2,
+    Uhrum__West_Entrance__Hidden_Passage_West__ex__Irikar__Lamassu__Hidden_Passage_East_1,
+    Uhrum__West_Entrance__Inner_Dais__ex__Top_West_Ledge_1,
+    Uhrum__West_Entrance__Inner_Dais__ex__West_of_Gate_1,
+    Uhrum__West_Entrance__Lower_Path_Gap__ex__Lower_Path_Tree_Ledge_1,
+    Uhrum__West_Entrance__Lower_Path_Gap__ex__Lower_Wall_West_1,
+    Uhrum__West_Entrance__Lower_Wall_East__Charge_through_Wall,
+    Uhrum__West_Entrance__Lower_Wall_East__ex__Lower_Wall_West_1,
+    Uhrum__West_Entrance__Lower_Wall_East__Mist_through_Wall,
+    Uhrum__West_Entrance__Lower_Wall_East__Spin_through_Wall,
+    Uhrum__West_Entrance__Lower_Wall_West__Charge_through_Wall,
+    Uhrum__West_Entrance__Lower_Wall_West__ex__Lower_Wall_East_1,
+    Uhrum__West_Entrance__Lower_Wall_West__ex__South_Platform_1,
+    Uhrum__West_Entrance__Lower_Wall_West__ex__South_Platform_2,
+    Uhrum__West_Entrance__Lower_Wall_West__ex__South_Platform_3,
+    Uhrum__West_Entrance__Lower_Wall_West__Mist_through_Wall,
+    Uhrum__West_Entrance__Lower_Wall_West__Spin_through_Wall,
+    Uhrum__West_Entrance__Middle_West_Ledge__ex__Portal_Stand_1,
+    Uhrum__West_Entrance__Middle_West_Ledge__ex__Portal_Stand_2,
+    Uhrum__West_Entrance__Portal_Stand__ex__Hidden_Passage_Entry_1,
+    Uhrum__West_Entrance__Portal_Stand__ex__West_of_Gate_1,
+    Uhrum__West_Entrance__Portal_Stand__ex__West_of_Gate_2,
+    Uhrum__West_Entrance__Sand__ex__Lower_Path_Gap_1,
+    Uhrum__West_Entrance__Sand__ex__Lower_Path_Tree_Ledge_1,
+    Uhrum__West_Entrance__Sand__ex__Lower_Path_Tree_Ledge_2,
+    Uhrum__West_Entrance__Save_Point__ex__Lower_Wall_West_1,
+    Uhrum__West_Entrance__Save_Point__ex__Lower_Wall_West_2,
+    Uhrum__West_Entrance__Save_Point__ex__South_Platform_1,
+    Uhrum__West_Entrance__South_Platform__ex__Middle_West_Ledge_1,
+    Uhrum__West_Entrance__South_Platform__ex__West_27_1,
+    Uhrum__West_Entrance__Southeast_Tree__ex__South_Platform_1,
+    Uhrum__West_Entrance__Top_West_Ledge__ex__Hidden_Passage_Entry_1,
+    Uhrum__West_Entrance__Top_West_Ledge__ex__West_of_Gate_1,
+    Uhrum__West_Entrance__Upper_Fork__ex__Upper_Wall_East_1,
+    Uhrum__West_Entrance__Upper_Fork__ex__Upper_Wall_East_2,
+    Uhrum__West_Entrance__Upper_Wall_East__Charge_through_Wall,
+    Uhrum__West_Entrance__Upper_Wall_East__ex__Upper_Wall_West_1,
+    Uhrum__West_Entrance__Upper_Wall_East__Mist_through_Wall,
+    Uhrum__West_Entrance__Upper_Wall_East__Spin_through_Wall,
+    Uhrum__West_Entrance__Upper_Wall_West__ex__Portal_Exit_1,
+    Uhrum__West_Entrance__Upper_Wall_West__ex__Portal_Exit_2,
+    Uhrum__West_Entrance__Upper_Wall_West__ex__Upper_Wall_East_1,
+    Uhrum__West_Entrance__Upper_Wall_West__Mist_through_Wall,
+    Uhrum__West_Entrance__West_25__ex__Giguna__Separator__East_25_1,
+    Uhrum__West_Entrance__West_26__ex__Hidden_Passage_Entry_1,
+    Uhrum__West_Entrance__West_26__ex__Irikar__Lamassu__East_26_1,
+    Uhrum__West_Entrance__West_26__ex__Portal_Stand_1,
+    Uhrum__West_Entrance__West_26__ex__Portal_Stand_2,
+    Uhrum__West_Entrance__West_27__ex__Irikar__Lamassu__East_27_1,
+    Uhrum__West_Entrance__West_27__ex__South_Platform_1,
+    Uhrum__West_Entrance__West_of_Gate__ex__Inner_Dais_1,
+    Uhrum__West_Entrance__West_of_Gate__ex__Top_West_Ledge_1,
+    Uhrum__West_Entrance__West_of_Gate__ex__Top_West_Ledge_2,
+}
 impl fmt::Display for ExitId {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         match self {
@@ -5229,105 +11447,449 @@ impl std::str::FromStr for ExitId {
     }
 }
 
-#[derive(Debug, PartialEq, Eq, Copy, Clone, Hash, Ord, PartialOrd, enum_map::Enum, serde_repr::Serialize_repr, serde_repr::Deserialize_repr)]
+#[derive(
+    Debug,
+    PartialEq,
+    Eq,
+    Copy,
+    Clone,
+    Hash,
+    Ord,
+    PartialOrd,
+    enum_map::Enum,
+    serde_repr::Serialize_repr,
+    serde_repr::Deserialize_repr,
+)]
 #[repr(u8)]
 pub enum ActionId {
-    Amagi__Main_Area__Carving__Key_Combo,    Amagi__Main_Area__Save_Point__Save,    Annuna__East_Bridge__Center_Gap_West__Throw_Drone_into_Tower,    Annuna__Mirror_Match__Save_Point__Save,    Ebih__Base_Camp__Left_Platform__Move_Left_Platform,    Ebih__Base_Camp__Left_Platform_Moved__Reset_Left_Platform,    Ebih__Base_Camp__Save_Point__Save,    Ebih__Drone_Room__Moving_Platform__Throw_Drone,    Ebih__Drone_Room__Pit_Left__Activate_Lift,    Ebih__Drone_Room__Pit_Left__Activate_Lift_But_Get_Off_Early,    Ebih__Drone_Room__Portal_Exit__Activate_Platform,    Ebih__Ebih_East__Dispenser__Activate_Lift,    Ebih__Ebih_East__Lower_Moving_Platform__Activate_Lift,    Ebih__Ebih_East__Lower_Moving_Platform__Activate_Ride,    Ebih__Ebih_East__Moving_Platform__Activate_Ride,    Ebih__Ebih_West__Below_Door__Open_Door,    Ebih__Ebih_West__Left_of_Switch__Open_Door,    Ebih__Ebih_West__Lower_Save__Save,    Ebih__Ebih_West__Medium_High_Platform__Throw_Drone_Long,    Ebih__Ebih_West__Mid_Save__Save,    Ebih__Ebih_West__Upper_Save__Save,    Ebih__Grid_25_10_12__Door_Left__Open_Door,    Ebih__Grid_25_10_12__East_11__Open_Door,    Ebih__Vertical_Interchange__West_13__Open_Door,    Ebih__Waterfall__Below_Left_Switch__Open_Door,    Ebih__Waterfall__Ledge_Below_Hole__Throw_Drone,    Ebih__Waterfall__West_8__Open_Door,    Giguna__Carnelian__Lower_Susar__Caught,    Giguna__Carnelian__Lower_Susar__Hack,    Giguna__Carnelian__Switch__Open_Door,    Giguna__Carnelian__Upper_Susar__Caught,    Giguna__Carnelian__Upper_Susar__Hack,    Giguna__Clouds__Platform_Start__Hack_and_Get_Off_Early,    Giguna__Clouds__Platform_Start__Hack_and_Ride_to_Portal,    Giguna__Clouds__Platform_Start__Hack_Deploy_Ride_to_Portal,    Giguna__East_Caverns__Lower_Susar__Caught,    Giguna__East_Caverns__Lower_Susar__Hack,    Giguna__East_Caverns__Mid_Susar__Caught,    Giguna__East_Caverns__Mid_Susar__Hack,    Giguna__East_Caverns__Statues_Ledge__Open_Door,    Giguna__East_Caverns__Switch__Open_Door,    Giguna__East_Caverns__Upper_Susar__Caught,    Giguna__East_Caverns__Upper_Susar_Jump_from_East__Caught,    Giguna__East_Caverns__Upper_Susar_Jump_from_East__Hack,    Giguna__East_Caverns__Upper_Susar_Mid_jump__Hack,    Giguna__East_Caverns__West_14__Enter_Combo,    Giguna__East_Caverns__West_16__Open_Door,    Giguna__Gateway__Flask_Ledge__Open_Door,    Giguna__Gateway__One_Jump__Open_Door,    Giguna__Giguna_Base__Save_Point__Save,    Giguna__Giguna_Base__Stone_Knob__Throw_Drone,    Giguna__Giguna_Base__Switch_Distance_1__Open_Door,    Giguna__Giguna_Base__Switch_Distance_2__Open_Door,    Giguna__Giguna_Base__Switch_Distance_3__Open_Door,    Giguna__Giguna_Base__Switch_Distance_4__Open_Door,    Giguna__Giguna_Northeast__Gate_Left__Throw_Drone,    Giguna__Giguna_Northeast__Right_Column__Open_Door_From_Afar,    Giguna__Giguna_Northeast__Save_Point__Save,    Giguna__Giguna_Northeast__Switch__Open_Door,    Giguna__Ruins_Top__Portal__Enter_Portal,    Giguna__Ruins_Top__Save_Point__Save,    Giguna__Ruins_Top__Switch__Open_Doors,    Giguna__Ruins_Top__Turret_Balcony_West__Throw_Drone_onto_Tower,    Giguna__Ruins_West__Lower_Ledge__Destroy_Kishib,    Giguna__Ruins_West__Lower_Ledge__Hack_Kishib,    Giguna__Ruins_West__Save_Point__Save,    Giguna__Wasteland__Middle_Cliff__Throw_Drone,    Giguna__West_Caverns__East_Susar__Caught,    Giguna__West_Caverns__East_Susar__Hack,    Giguna__West_Caverns__Small_Platform__Throw_Drone_Up,    Giguna_Breach__Peak__Portal__Portal,    Giguna_Breach__Peak__Save_Point__Save,    Giguna_Breach__SW_Save__Save_Point__Save,    Giguna_Breach__SW_Save__West_11__Open_Door,    Glacier__Revival__Save_Point__Save,    Global__Become_Drone,    Global__Become_Indra,    Global__Deploy_Drone,    Global__Recall_Drone,    Interior__Cave_Behind_Waterfall__Middle__Throw_Drone,    Irikar__Basement_Portal__Moving_Platform_Start__Activate_Platform,    Irikar__Basement_Portal__Portal_Stand__Enter_Portal,    Irikar__Hub__Portal_Stand__Enter_Portal,    Irikar__Hub__Royal_Storage_By_Wall__Shockwave_Wall,    Irikar__Hub__Save_Point__Save,    Irikar__Sight_Room__Portal__Enter_Portal,    Irikar_Breach__Exit_Corridor__Portal_Stand__Enter_Portal,    Uhrum__Annuna_Corridor__Between_Two_Flowers__Throw_Drone_Not_As_High,    Uhrum__Annuna_Corridor__Between_Two_Flowers__Throw_Drone_Up,    Uhrum__Annuna_Corridor__Save_Point__Save,    Uhrum__Save_Room__Save_Point__Save,    Uhrum__West_Entrance__Save_Point__Save,}
+    Amagi__Main_Area__Carving__Key_Combo,
+    Amagi__Main_Area__Save_Point__Save,
+    Annuna__East_Bridge__Center_Gap_West__Throw_Drone_into_Tower,
+    Annuna__Mirror_Match__Save_Point__Save,
+    Ebih__Base_Camp__Left_Platform__Move_Left_Platform,
+    Ebih__Base_Camp__Left_Platform_Moved__Reset_Left_Platform,
+    Ebih__Base_Camp__Save_Point__Save,
+    Ebih__Drone_Room__Moving_Platform__Throw_Drone,
+    Ebih__Drone_Room__Pit_Left__Activate_Lift,
+    Ebih__Drone_Room__Pit_Left__Activate_Lift_But_Get_Off_Early,
+    Ebih__Drone_Room__Portal_Exit__Activate_Platform,
+    Ebih__Ebih_East__Dispenser__Activate_Lift,
+    Ebih__Ebih_East__Lower_Moving_Platform__Activate_Lift,
+    Ebih__Ebih_East__Lower_Moving_Platform__Activate_Ride,
+    Ebih__Ebih_East__Moving_Platform__Activate_Ride,
+    Ebih__Ebih_West__Below_Door__Open_Door,
+    Ebih__Ebih_West__Left_of_Switch__Open_Door,
+    Ebih__Ebih_West__Lower_Save__Save,
+    Ebih__Ebih_West__Medium_High_Platform__Throw_Drone_Long,
+    Ebih__Ebih_West__Mid_Save__Save,
+    Ebih__Ebih_West__Upper_Save__Save,
+    Ebih__Grid_25_10_12__Door_Left__Open_Door,
+    Ebih__Grid_25_10_12__East_11__Open_Door,
+    Ebih__Vertical_Interchange__West_13__Open_Door,
+    Ebih__Waterfall__Below_Left_Switch__Open_Door,
+    Ebih__Waterfall__Ledge_Below_Hole__Throw_Drone,
+    Ebih__Waterfall__West_8__Open_Door,
+    Giguna__Carnelian__Lower_Susar__Caught,
+    Giguna__Carnelian__Lower_Susar__Hack,
+    Giguna__Carnelian__Switch__Open_Door,
+    Giguna__Carnelian__Upper_Susar__Caught,
+    Giguna__Carnelian__Upper_Susar__Hack,
+    Giguna__Clouds__Platform_Start__Hack_and_Get_Off_Early,
+    Giguna__Clouds__Platform_Start__Hack_and_Ride_to_Portal,
+    Giguna__Clouds__Platform_Start__Hack_Deploy_Ride_to_Portal,
+    Giguna__East_Caverns__Lower_Susar__Caught,
+    Giguna__East_Caverns__Lower_Susar__Hack,
+    Giguna__East_Caverns__Mid_Susar__Caught,
+    Giguna__East_Caverns__Mid_Susar__Hack,
+    Giguna__East_Caverns__Statues_Ledge__Open_Door,
+    Giguna__East_Caverns__Switch__Open_Door,
+    Giguna__East_Caverns__Upper_Susar__Caught,
+    Giguna__East_Caverns__Upper_Susar_Jump_from_East__Caught,
+    Giguna__East_Caverns__Upper_Susar_Jump_from_East__Hack,
+    Giguna__East_Caverns__Upper_Susar_Mid_jump__Hack,
+    Giguna__East_Caverns__West_14__Enter_Combo,
+    Giguna__East_Caverns__West_16__Open_Door,
+    Giguna__Gateway__Flask_Ledge__Open_Door,
+    Giguna__Gateway__One_Jump__Open_Door,
+    Giguna__Giguna_Base__Save_Point__Save,
+    Giguna__Giguna_Base__Stone_Knob__Throw_Drone,
+    Giguna__Giguna_Base__Switch_Distance_1__Open_Door,
+    Giguna__Giguna_Base__Switch_Distance_2__Open_Door,
+    Giguna__Giguna_Base__Switch_Distance_3__Open_Door,
+    Giguna__Giguna_Base__Switch_Distance_4__Open_Door,
+    Giguna__Giguna_Northeast__Gate_Left__Throw_Drone,
+    Giguna__Giguna_Northeast__Right_Column__Open_Door_From_Afar,
+    Giguna__Giguna_Northeast__Save_Point__Save,
+    Giguna__Giguna_Northeast__Switch__Open_Door,
+    Giguna__Ruins_Top__Portal__Enter_Portal,
+    Giguna__Ruins_Top__Save_Point__Save,
+    Giguna__Ruins_Top__Switch__Open_Doors,
+    Giguna__Ruins_Top__Turret_Balcony_West__Throw_Drone_onto_Tower,
+    Giguna__Ruins_West__Lower_Ledge__Destroy_Kishib,
+    Giguna__Ruins_West__Lower_Ledge__Hack_Kishib,
+    Giguna__Ruins_West__Save_Point__Save,
+    Giguna__Wasteland__Middle_Cliff__Throw_Drone,
+    Giguna__West_Caverns__East_Susar__Caught,
+    Giguna__West_Caverns__East_Susar__Hack,
+    Giguna__West_Caverns__Small_Platform__Throw_Drone_Up,
+    Giguna_Breach__Peak__Portal__Portal,
+    Giguna_Breach__Peak__Save_Point__Save,
+    Giguna_Breach__SW_Save__Save_Point__Save,
+    Giguna_Breach__SW_Save__West_11__Open_Door,
+    Glacier__Revival__Save_Point__Save,
+    Global__Become_Drone,
+    Global__Become_Indra,
+    Global__Deploy_Drone,
+    Global__Recall_Drone,
+    Interior__Cave_Behind_Waterfall__Middle__Throw_Drone,
+    Irikar__Basement_Portal__Moving_Platform_Start__Activate_Platform,
+    Irikar__Basement_Portal__Portal_Stand__Enter_Portal,
+    Irikar__Hub__Portal_Stand__Enter_Portal,
+    Irikar__Hub__Royal_Storage_By_Wall__Shockwave_Wall,
+    Irikar__Hub__Save_Point__Save,
+    Irikar__Sight_Room__Portal__Enter_Portal,
+    Irikar_Breach__Exit_Corridor__Portal_Stand__Enter_Portal,
+    Uhrum__Annuna_Corridor__Between_Two_Flowers__Throw_Drone_Not_As_High,
+    Uhrum__Annuna_Corridor__Between_Two_Flowers__Throw_Drone_Up,
+    Uhrum__Annuna_Corridor__Save_Point__Save,
+    Uhrum__Save_Room__Save_Point__Save,
+    Uhrum__West_Entrance__Save_Point__Save,
+}
 impl fmt::Display for ActionId {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         match self {
-            ActionId::Amagi__Main_Area__Carving__Key_Combo => write!(f, "{}", "Amagi > Main Area > Carving > Key Combo"),
-            ActionId::Amagi__Main_Area__Save_Point__Save => write!(f, "{}", "Amagi > Main Area > Save Point > Save"),
-            ActionId::Annuna__East_Bridge__Center_Gap_West__Throw_Drone_into_Tower => write!(f, "{}", "Annuna > East Bridge > Center Gap West > Throw Drone into Tower"),
-            ActionId::Annuna__Mirror_Match__Save_Point__Save => write!(f, "{}", "Annuna > Mirror Match > Save Point > Save"),
-            ActionId::Ebih__Base_Camp__Left_Platform__Move_Left_Platform => write!(f, "{}", "Ebih > Base Camp > Left Platform > Move Left Platform"),
-            ActionId::Ebih__Base_Camp__Left_Platform_Moved__Reset_Left_Platform => write!(f, "{}", "Ebih > Base Camp > Left Platform Moved > Reset Left Platform"),
-            ActionId::Ebih__Base_Camp__Save_Point__Save => write!(f, "{}", "Ebih > Base Camp > Save Point > Save"),
-            ActionId::Ebih__Drone_Room__Moving_Platform__Throw_Drone => write!(f, "{}", "Ebih > Drone Room > Moving Platform > Throw Drone"),
-            ActionId::Ebih__Drone_Room__Pit_Left__Activate_Lift => write!(f, "{}", "Ebih > Drone Room > Pit Left > Activate Lift"),
-            ActionId::Ebih__Drone_Room__Pit_Left__Activate_Lift_But_Get_Off_Early => write!(f, "{}", "Ebih > Drone Room > Pit Left > Activate Lift But Get Off Early"),
-            ActionId::Ebih__Drone_Room__Portal_Exit__Activate_Platform => write!(f, "{}", "Ebih > Drone Room > Portal Exit > Activate Platform"),
-            ActionId::Ebih__Ebih_East__Dispenser__Activate_Lift => write!(f, "{}", "Ebih > Ebih East > Dispenser > Activate Lift"),
-            ActionId::Ebih__Ebih_East__Lower_Moving_Platform__Activate_Lift => write!(f, "{}", "Ebih > Ebih East > Lower Moving Platform > Activate Lift"),
-            ActionId::Ebih__Ebih_East__Lower_Moving_Platform__Activate_Ride => write!(f, "{}", "Ebih > Ebih East > Lower Moving Platform > Activate Ride"),
-            ActionId::Ebih__Ebih_East__Moving_Platform__Activate_Ride => write!(f, "{}", "Ebih > Ebih East > Moving Platform > Activate Ride"),
-            ActionId::Ebih__Ebih_West__Below_Door__Open_Door => write!(f, "{}", "Ebih > Ebih West > Below Door > Open Door"),
-            ActionId::Ebih__Ebih_West__Left_of_Switch__Open_Door => write!(f, "{}", "Ebih > Ebih West > Left of Switch > Open Door"),
-            ActionId::Ebih__Ebih_West__Lower_Save__Save => write!(f, "{}", "Ebih > Ebih West > Lower Save > Save"),
-            ActionId::Ebih__Ebih_West__Medium_High_Platform__Throw_Drone_Long => write!(f, "{}", "Ebih > Ebih West > Medium High Platform > Throw Drone Long"),
-            ActionId::Ebih__Ebih_West__Mid_Save__Save => write!(f, "{}", "Ebih > Ebih West > Mid Save > Save"),
-            ActionId::Ebih__Ebih_West__Upper_Save__Save => write!(f, "{}", "Ebih > Ebih West > Upper Save > Save"),
-            ActionId::Ebih__Grid_25_10_12__Door_Left__Open_Door => write!(f, "{}", "Ebih > Grid 25,10-12 > Door Left > Open Door"),
-            ActionId::Ebih__Grid_25_10_12__East_11__Open_Door => write!(f, "{}", "Ebih > Grid 25,10-12 > East 11 > Open Door"),
-            ActionId::Ebih__Vertical_Interchange__West_13__Open_Door => write!(f, "{}", "Ebih > Vertical Interchange > West 13 > Open Door"),
-            ActionId::Ebih__Waterfall__Below_Left_Switch__Open_Door => write!(f, "{}", "Ebih > Waterfall > Below Left Switch > Open Door"),
-            ActionId::Ebih__Waterfall__Ledge_Below_Hole__Throw_Drone => write!(f, "{}", "Ebih > Waterfall > Ledge Below Hole > Throw Drone"),
-            ActionId::Ebih__Waterfall__West_8__Open_Door => write!(f, "{}", "Ebih > Waterfall > West 8 > Open Door"),
-            ActionId::Giguna__Carnelian__Lower_Susar__Caught => write!(f, "{}", "Giguna > Carnelian > Lower Susar > Caught"),
-            ActionId::Giguna__Carnelian__Lower_Susar__Hack => write!(f, "{}", "Giguna > Carnelian > Lower Susar > Hack"),
-            ActionId::Giguna__Carnelian__Switch__Open_Door => write!(f, "{}", "Giguna > Carnelian > Switch > Open Door"),
-            ActionId::Giguna__Carnelian__Upper_Susar__Caught => write!(f, "{}", "Giguna > Carnelian > Upper Susar > Caught"),
-            ActionId::Giguna__Carnelian__Upper_Susar__Hack => write!(f, "{}", "Giguna > Carnelian > Upper Susar > Hack"),
-            ActionId::Giguna__Clouds__Platform_Start__Hack_and_Get_Off_Early => write!(f, "{}", "Giguna > Clouds > Platform Start > Hack and Get Off Early"),
-            ActionId::Giguna__Clouds__Platform_Start__Hack_and_Ride_to_Portal => write!(f, "{}", "Giguna > Clouds > Platform Start > Hack and Ride to Portal"),
-            ActionId::Giguna__Clouds__Platform_Start__Hack_Deploy_Ride_to_Portal => write!(f, "{}", "Giguna > Clouds > Platform Start > Hack, Deploy, Ride to Portal"),
-            ActionId::Giguna__East_Caverns__Lower_Susar__Caught => write!(f, "{}", "Giguna > East Caverns > Lower Susar > Caught"),
-            ActionId::Giguna__East_Caverns__Lower_Susar__Hack => write!(f, "{}", "Giguna > East Caverns > Lower Susar > Hack"),
-            ActionId::Giguna__East_Caverns__Mid_Susar__Caught => write!(f, "{}", "Giguna > East Caverns > Mid Susar > Caught"),
-            ActionId::Giguna__East_Caverns__Mid_Susar__Hack => write!(f, "{}", "Giguna > East Caverns > Mid Susar > Hack"),
-            ActionId::Giguna__East_Caverns__Statues_Ledge__Open_Door => write!(f, "{}", "Giguna > East Caverns > Statues Ledge > Open Door"),
-            ActionId::Giguna__East_Caverns__Switch__Open_Door => write!(f, "{}", "Giguna > East Caverns > Switch > Open Door"),
-            ActionId::Giguna__East_Caverns__Upper_Susar__Caught => write!(f, "{}", "Giguna > East Caverns > Upper Susar > Caught"),
-            ActionId::Giguna__East_Caverns__Upper_Susar_Jump_from_East__Caught => write!(f, "{}", "Giguna > East Caverns > Upper Susar Jump from East > Caught"),
-            ActionId::Giguna__East_Caverns__Upper_Susar_Jump_from_East__Hack => write!(f, "{}", "Giguna > East Caverns > Upper Susar Jump from East > Hack"),
-            ActionId::Giguna__East_Caverns__Upper_Susar_Mid_jump__Hack => write!(f, "{}", "Giguna > East Caverns > Upper Susar Mid-jump > Hack"),
-            ActionId::Giguna__East_Caverns__West_14__Enter_Combo => write!(f, "{}", "Giguna > East Caverns > West 14 > Enter Combo"),
-            ActionId::Giguna__East_Caverns__West_16__Open_Door => write!(f, "{}", "Giguna > East Caverns > West 16 > Open Door"),
-            ActionId::Giguna__Gateway__Flask_Ledge__Open_Door => write!(f, "{}", "Giguna > Gateway > Flask Ledge > Open Door"),
-            ActionId::Giguna__Gateway__One_Jump__Open_Door => write!(f, "{}", "Giguna > Gateway > One Jump > Open Door"),
-            ActionId::Giguna__Giguna_Base__Save_Point__Save => write!(f, "{}", "Giguna > Giguna Base > Save Point > Save"),
-            ActionId::Giguna__Giguna_Base__Stone_Knob__Throw_Drone => write!(f, "{}", "Giguna > Giguna Base > Stone Knob > Throw Drone"),
-            ActionId::Giguna__Giguna_Base__Switch_Distance_1__Open_Door => write!(f, "{}", "Giguna > Giguna Base > Switch Distance 1 > Open Door"),
-            ActionId::Giguna__Giguna_Base__Switch_Distance_2__Open_Door => write!(f, "{}", "Giguna > Giguna Base > Switch Distance 2 > Open Door"),
-            ActionId::Giguna__Giguna_Base__Switch_Distance_3__Open_Door => write!(f, "{}", "Giguna > Giguna Base > Switch Distance 3 > Open Door"),
-            ActionId::Giguna__Giguna_Base__Switch_Distance_4__Open_Door => write!(f, "{}", "Giguna > Giguna Base > Switch Distance 4 > Open Door"),
-            ActionId::Giguna__Giguna_Northeast__Gate_Left__Throw_Drone => write!(f, "{}", "Giguna > Giguna Northeast > Gate Left > Throw Drone"),
-            ActionId::Giguna__Giguna_Northeast__Right_Column__Open_Door_From_Afar => write!(f, "{}", "Giguna > Giguna Northeast > Right Column > Open Door From Afar"),
-            ActionId::Giguna__Giguna_Northeast__Save_Point__Save => write!(f, "{}", "Giguna > Giguna Northeast > Save Point > Save"),
-            ActionId::Giguna__Giguna_Northeast__Switch__Open_Door => write!(f, "{}", "Giguna > Giguna Northeast > Switch > Open Door"),
-            ActionId::Giguna__Ruins_Top__Portal__Enter_Portal => write!(f, "{}", "Giguna > Ruins Top > Portal > Enter Portal"),
-            ActionId::Giguna__Ruins_Top__Save_Point__Save => write!(f, "{}", "Giguna > Ruins Top > Save Point > Save"),
-            ActionId::Giguna__Ruins_Top__Switch__Open_Doors => write!(f, "{}", "Giguna > Ruins Top > Switch > Open Doors"),
-            ActionId::Giguna__Ruins_Top__Turret_Balcony_West__Throw_Drone_onto_Tower => write!(f, "{}", "Giguna > Ruins Top > Turret Balcony West > Throw Drone onto Tower"),
-            ActionId::Giguna__Ruins_West__Lower_Ledge__Destroy_Kishib => write!(f, "{}", "Giguna > Ruins West > Lower Ledge > Destroy Kishib"),
-            ActionId::Giguna__Ruins_West__Lower_Ledge__Hack_Kishib => write!(f, "{}", "Giguna > Ruins West > Lower Ledge > Hack Kishib"),
-            ActionId::Giguna__Ruins_West__Save_Point__Save => write!(f, "{}", "Giguna > Ruins West > Save Point > Save"),
-            ActionId::Giguna__Wasteland__Middle_Cliff__Throw_Drone => write!(f, "{}", "Giguna > Wasteland > Middle Cliff > Throw Drone"),
-            ActionId::Giguna__West_Caverns__East_Susar__Caught => write!(f, "{}", "Giguna > West Caverns > East Susar > Caught"),
-            ActionId::Giguna__West_Caverns__East_Susar__Hack => write!(f, "{}", "Giguna > West Caverns > East Susar > Hack"),
-            ActionId::Giguna__West_Caverns__Small_Platform__Throw_Drone_Up => write!(f, "{}", "Giguna > West Caverns > Small Platform > Throw Drone Up"),
-            ActionId::Giguna_Breach__Peak__Portal__Portal => write!(f, "{}", "Giguna Breach > Peak > Portal > Portal"),
-            ActionId::Giguna_Breach__Peak__Save_Point__Save => write!(f, "{}", "Giguna Breach > Peak > Save Point > Save"),
-            ActionId::Giguna_Breach__SW_Save__Save_Point__Save => write!(f, "{}", "Giguna Breach > SW Save > Save Point > Save"),
-            ActionId::Giguna_Breach__SW_Save__West_11__Open_Door => write!(f, "{}", "Giguna Breach > SW Save > West 11 > Open Door"),
-            ActionId::Glacier__Revival__Save_Point__Save => write!(f, "{}", "Glacier > Revival > Save Point > Save"),
+            ActionId::Amagi__Main_Area__Carving__Key_Combo => {
+                write!(f, "{}", "Amagi > Main Area > Carving > Key Combo")
+            }
+            ActionId::Amagi__Main_Area__Save_Point__Save => {
+                write!(f, "{}", "Amagi > Main Area > Save Point > Save")
+            }
+            ActionId::Annuna__East_Bridge__Center_Gap_West__Throw_Drone_into_Tower => write!(
+                f,
+                "{}",
+                "Annuna > East Bridge > Center Gap West > Throw Drone into Tower"
+            ),
+            ActionId::Annuna__Mirror_Match__Save_Point__Save => {
+                write!(f, "{}", "Annuna > Mirror Match > Save Point > Save")
+            }
+            ActionId::Ebih__Base_Camp__Left_Platform__Move_Left_Platform => write!(
+                f,
+                "{}",
+                "Ebih > Base Camp > Left Platform > Move Left Platform"
+            ),
+            ActionId::Ebih__Base_Camp__Left_Platform_Moved__Reset_Left_Platform => write!(
+                f,
+                "{}",
+                "Ebih > Base Camp > Left Platform Moved > Reset Left Platform"
+            ),
+            ActionId::Ebih__Base_Camp__Save_Point__Save => {
+                write!(f, "{}", "Ebih > Base Camp > Save Point > Save")
+            }
+            ActionId::Ebih__Drone_Room__Moving_Platform__Throw_Drone => {
+                write!(f, "{}", "Ebih > Drone Room > Moving Platform > Throw Drone")
+            }
+            ActionId::Ebih__Drone_Room__Pit_Left__Activate_Lift => {
+                write!(f, "{}", "Ebih > Drone Room > Pit Left > Activate Lift")
+            }
+            ActionId::Ebih__Drone_Room__Pit_Left__Activate_Lift_But_Get_Off_Early => write!(
+                f,
+                "{}",
+                "Ebih > Drone Room > Pit Left > Activate Lift But Get Off Early"
+            ),
+            ActionId::Ebih__Drone_Room__Portal_Exit__Activate_Platform => write!(
+                f,
+                "{}",
+                "Ebih > Drone Room > Portal Exit > Activate Platform"
+            ),
+            ActionId::Ebih__Ebih_East__Dispenser__Activate_Lift => {
+                write!(f, "{}", "Ebih > Ebih East > Dispenser > Activate Lift")
+            }
+            ActionId::Ebih__Ebih_East__Lower_Moving_Platform__Activate_Lift => write!(
+                f,
+                "{}",
+                "Ebih > Ebih East > Lower Moving Platform > Activate Lift"
+            ),
+            ActionId::Ebih__Ebih_East__Lower_Moving_Platform__Activate_Ride => write!(
+                f,
+                "{}",
+                "Ebih > Ebih East > Lower Moving Platform > Activate Ride"
+            ),
+            ActionId::Ebih__Ebih_East__Moving_Platform__Activate_Ride => write!(
+                f,
+                "{}",
+                "Ebih > Ebih East > Moving Platform > Activate Ride"
+            ),
+            ActionId::Ebih__Ebih_West__Below_Door__Open_Door => {
+                write!(f, "{}", "Ebih > Ebih West > Below Door > Open Door")
+            }
+            ActionId::Ebih__Ebih_West__Left_of_Switch__Open_Door => {
+                write!(f, "{}", "Ebih > Ebih West > Left of Switch > Open Door")
+            }
+            ActionId::Ebih__Ebih_West__Lower_Save__Save => {
+                write!(f, "{}", "Ebih > Ebih West > Lower Save > Save")
+            }
+            ActionId::Ebih__Ebih_West__Medium_High_Platform__Throw_Drone_Long => write!(
+                f,
+                "{}",
+                "Ebih > Ebih West > Medium High Platform > Throw Drone Long"
+            ),
+            ActionId::Ebih__Ebih_West__Mid_Save__Save => {
+                write!(f, "{}", "Ebih > Ebih West > Mid Save > Save")
+            }
+            ActionId::Ebih__Ebih_West__Upper_Save__Save => {
+                write!(f, "{}", "Ebih > Ebih West > Upper Save > Save")
+            }
+            ActionId::Ebih__Grid_25_10_12__Door_Left__Open_Door => {
+                write!(f, "{}", "Ebih > Grid 25,10-12 > Door Left > Open Door")
+            }
+            ActionId::Ebih__Grid_25_10_12__East_11__Open_Door => {
+                write!(f, "{}", "Ebih > Grid 25,10-12 > East 11 > Open Door")
+            }
+            ActionId::Ebih__Vertical_Interchange__West_13__Open_Door => {
+                write!(f, "{}", "Ebih > Vertical Interchange > West 13 > Open Door")
+            }
+            ActionId::Ebih__Waterfall__Below_Left_Switch__Open_Door => {
+                write!(f, "{}", "Ebih > Waterfall > Below Left Switch > Open Door")
+            }
+            ActionId::Ebih__Waterfall__Ledge_Below_Hole__Throw_Drone => {
+                write!(f, "{}", "Ebih > Waterfall > Ledge Below Hole > Throw Drone")
+            }
+            ActionId::Ebih__Waterfall__West_8__Open_Door => {
+                write!(f, "{}", "Ebih > Waterfall > West 8 > Open Door")
+            }
+            ActionId::Giguna__Carnelian__Lower_Susar__Caught => {
+                write!(f, "{}", "Giguna > Carnelian > Lower Susar > Caught")
+            }
+            ActionId::Giguna__Carnelian__Lower_Susar__Hack => {
+                write!(f, "{}", "Giguna > Carnelian > Lower Susar > Hack")
+            }
+            ActionId::Giguna__Carnelian__Switch__Open_Door => {
+                write!(f, "{}", "Giguna > Carnelian > Switch > Open Door")
+            }
+            ActionId::Giguna__Carnelian__Upper_Susar__Caught => {
+                write!(f, "{}", "Giguna > Carnelian > Upper Susar > Caught")
+            }
+            ActionId::Giguna__Carnelian__Upper_Susar__Hack => {
+                write!(f, "{}", "Giguna > Carnelian > Upper Susar > Hack")
+            }
+            ActionId::Giguna__Clouds__Platform_Start__Hack_and_Get_Off_Early => write!(
+                f,
+                "{}",
+                "Giguna > Clouds > Platform Start > Hack and Get Off Early"
+            ),
+            ActionId::Giguna__Clouds__Platform_Start__Hack_and_Ride_to_Portal => write!(
+                f,
+                "{}",
+                "Giguna > Clouds > Platform Start > Hack and Ride to Portal"
+            ),
+            ActionId::Giguna__Clouds__Platform_Start__Hack_Deploy_Ride_to_Portal => write!(
+                f,
+                "{}",
+                "Giguna > Clouds > Platform Start > Hack, Deploy, Ride to Portal"
+            ),
+            ActionId::Giguna__East_Caverns__Lower_Susar__Caught => {
+                write!(f, "{}", "Giguna > East Caverns > Lower Susar > Caught")
+            }
+            ActionId::Giguna__East_Caverns__Lower_Susar__Hack => {
+                write!(f, "{}", "Giguna > East Caverns > Lower Susar > Hack")
+            }
+            ActionId::Giguna__East_Caverns__Mid_Susar__Caught => {
+                write!(f, "{}", "Giguna > East Caverns > Mid Susar > Caught")
+            }
+            ActionId::Giguna__East_Caverns__Mid_Susar__Hack => {
+                write!(f, "{}", "Giguna > East Caverns > Mid Susar > Hack")
+            }
+            ActionId::Giguna__East_Caverns__Statues_Ledge__Open_Door => {
+                write!(f, "{}", "Giguna > East Caverns > Statues Ledge > Open Door")
+            }
+            ActionId::Giguna__East_Caverns__Switch__Open_Door => {
+                write!(f, "{}", "Giguna > East Caverns > Switch > Open Door")
+            }
+            ActionId::Giguna__East_Caverns__Upper_Susar__Caught => {
+                write!(f, "{}", "Giguna > East Caverns > Upper Susar > Caught")
+            }
+            ActionId::Giguna__East_Caverns__Upper_Susar_Jump_from_East__Caught => write!(
+                f,
+                "{}",
+                "Giguna > East Caverns > Upper Susar Jump from East > Caught"
+            ),
+            ActionId::Giguna__East_Caverns__Upper_Susar_Jump_from_East__Hack => write!(
+                f,
+                "{}",
+                "Giguna > East Caverns > Upper Susar Jump from East > Hack"
+            ),
+            ActionId::Giguna__East_Caverns__Upper_Susar_Mid_jump__Hack => write!(
+                f,
+                "{}",
+                "Giguna > East Caverns > Upper Susar Mid-jump > Hack"
+            ),
+            ActionId::Giguna__East_Caverns__West_14__Enter_Combo => {
+                write!(f, "{}", "Giguna > East Caverns > West 14 > Enter Combo")
+            }
+            ActionId::Giguna__East_Caverns__West_16__Open_Door => {
+                write!(f, "{}", "Giguna > East Caverns > West 16 > Open Door")
+            }
+            ActionId::Giguna__Gateway__Flask_Ledge__Open_Door => {
+                write!(f, "{}", "Giguna > Gateway > Flask Ledge > Open Door")
+            }
+            ActionId::Giguna__Gateway__One_Jump__Open_Door => {
+                write!(f, "{}", "Giguna > Gateway > One Jump > Open Door")
+            }
+            ActionId::Giguna__Giguna_Base__Save_Point__Save => {
+                write!(f, "{}", "Giguna > Giguna Base > Save Point > Save")
+            }
+            ActionId::Giguna__Giguna_Base__Stone_Knob__Throw_Drone => {
+                write!(f, "{}", "Giguna > Giguna Base > Stone Knob > Throw Drone")
+            }
+            ActionId::Giguna__Giguna_Base__Switch_Distance_1__Open_Door => write!(
+                f,
+                "{}",
+                "Giguna > Giguna Base > Switch Distance 1 > Open Door"
+            ),
+            ActionId::Giguna__Giguna_Base__Switch_Distance_2__Open_Door => write!(
+                f,
+                "{}",
+                "Giguna > Giguna Base > Switch Distance 2 > Open Door"
+            ),
+            ActionId::Giguna__Giguna_Base__Switch_Distance_3__Open_Door => write!(
+                f,
+                "{}",
+                "Giguna > Giguna Base > Switch Distance 3 > Open Door"
+            ),
+            ActionId::Giguna__Giguna_Base__Switch_Distance_4__Open_Door => write!(
+                f,
+                "{}",
+                "Giguna > Giguna Base > Switch Distance 4 > Open Door"
+            ),
+            ActionId::Giguna__Giguna_Northeast__Gate_Left__Throw_Drone => write!(
+                f,
+                "{}",
+                "Giguna > Giguna Northeast > Gate Left > Throw Drone"
+            ),
+            ActionId::Giguna__Giguna_Northeast__Right_Column__Open_Door_From_Afar => write!(
+                f,
+                "{}",
+                "Giguna > Giguna Northeast > Right Column > Open Door From Afar"
+            ),
+            ActionId::Giguna__Giguna_Northeast__Save_Point__Save => {
+                write!(f, "{}", "Giguna > Giguna Northeast > Save Point > Save")
+            }
+            ActionId::Giguna__Giguna_Northeast__Switch__Open_Door => {
+                write!(f, "{}", "Giguna > Giguna Northeast > Switch > Open Door")
+            }
+            ActionId::Giguna__Ruins_Top__Portal__Enter_Portal => {
+                write!(f, "{}", "Giguna > Ruins Top > Portal > Enter Portal")
+            }
+            ActionId::Giguna__Ruins_Top__Save_Point__Save => {
+                write!(f, "{}", "Giguna > Ruins Top > Save Point > Save")
+            }
+            ActionId::Giguna__Ruins_Top__Switch__Open_Doors => {
+                write!(f, "{}", "Giguna > Ruins Top > Switch > Open Doors")
+            }
+            ActionId::Giguna__Ruins_Top__Turret_Balcony_West__Throw_Drone_onto_Tower => write!(
+                f,
+                "{}",
+                "Giguna > Ruins Top > Turret Balcony West > Throw Drone onto Tower"
+            ),
+            ActionId::Giguna__Ruins_West__Lower_Ledge__Destroy_Kishib => write!(
+                f,
+                "{}",
+                "Giguna > Ruins West > Lower Ledge > Destroy Kishib"
+            ),
+            ActionId::Giguna__Ruins_West__Lower_Ledge__Hack_Kishib => {
+                write!(f, "{}", "Giguna > Ruins West > Lower Ledge > Hack Kishib")
+            }
+            ActionId::Giguna__Ruins_West__Save_Point__Save => {
+                write!(f, "{}", "Giguna > Ruins West > Save Point > Save")
+            }
+            ActionId::Giguna__Wasteland__Middle_Cliff__Throw_Drone => {
+                write!(f, "{}", "Giguna > Wasteland > Middle Cliff > Throw Drone")
+            }
+            ActionId::Giguna__West_Caverns__East_Susar__Caught => {
+                write!(f, "{}", "Giguna > West Caverns > East Susar > Caught")
+            }
+            ActionId::Giguna__West_Caverns__East_Susar__Hack => {
+                write!(f, "{}", "Giguna > West Caverns > East Susar > Hack")
+            }
+            ActionId::Giguna__West_Caverns__Small_Platform__Throw_Drone_Up => write!(
+                f,
+                "{}",
+                "Giguna > West Caverns > Small Platform > Throw Drone Up"
+            ),
+            ActionId::Giguna_Breach__Peak__Portal__Portal => {
+                write!(f, "{}", "Giguna Breach > Peak > Portal > Portal")
+            }
+            ActionId::Giguna_Breach__Peak__Save_Point__Save => {
+                write!(f, "{}", "Giguna Breach > Peak > Save Point > Save")
+            }
+            ActionId::Giguna_Breach__SW_Save__Save_Point__Save => {
+                write!(f, "{}", "Giguna Breach > SW Save > Save Point > Save")
+            }
+            ActionId::Giguna_Breach__SW_Save__West_11__Open_Door => {
+                write!(f, "{}", "Giguna Breach > SW Save > West 11 > Open Door")
+            }
+            ActionId::Glacier__Revival__Save_Point__Save => {
+                write!(f, "{}", "Glacier > Revival > Save Point > Save")
+            }
             ActionId::Global__Become_Drone => write!(f, "{}", "Become Drone"),
             ActionId::Global__Become_Indra => write!(f, "{}", "Become Indra"),
             ActionId::Global__Deploy_Drone => write!(f, "{}", "Deploy Drone"),
             ActionId::Global__Recall_Drone => write!(f, "{}", "Recall Drone"),
-            ActionId::Interior__Cave_Behind_Waterfall__Middle__Throw_Drone => write!(f, "{}", "Interior > Cave Behind Waterfall > Middle > Throw Drone"),
-            ActionId::Irikar__Basement_Portal__Moving_Platform_Start__Activate_Platform => write!(f, "{}", "Irikar > Basement Portal > Moving Platform Start > Activate Platform"),
-            ActionId::Irikar__Basement_Portal__Portal_Stand__Enter_Portal => write!(f, "{}", "Irikar > Basement Portal > Portal Stand > Enter Portal"),
-            ActionId::Irikar__Hub__Portal_Stand__Enter_Portal => write!(f, "{}", "Irikar > Hub > Portal Stand > Enter Portal"),
-            ActionId::Irikar__Hub__Royal_Storage_By_Wall__Shockwave_Wall => write!(f, "{}", "Irikar > Hub > Royal Storage By Wall > Shockwave Wall"),
-            ActionId::Irikar__Hub__Save_Point__Save => write!(f, "{}", "Irikar > Hub > Save Point > Save"),
-            ActionId::Irikar__Sight_Room__Portal__Enter_Portal => write!(f, "{}", "Irikar > Sight Room > Portal > Enter Portal"),
-            ActionId::Irikar_Breach__Exit_Corridor__Portal_Stand__Enter_Portal => write!(f, "{}", "Irikar Breach > Exit Corridor > Portal Stand > Enter Portal"),
-            ActionId::Uhrum__Annuna_Corridor__Between_Two_Flowers__Throw_Drone_Not_As_High => write!(f, "{}", "Uhrum > Annuna Corridor > Between Two Flowers > Throw Drone Not As High"),
-            ActionId::Uhrum__Annuna_Corridor__Between_Two_Flowers__Throw_Drone_Up => write!(f, "{}", "Uhrum > Annuna Corridor > Between Two Flowers > Throw Drone Up"),
-            ActionId::Uhrum__Annuna_Corridor__Save_Point__Save => write!(f, "{}", "Uhrum > Annuna Corridor > Save Point > Save"),
-            ActionId::Uhrum__Save_Room__Save_Point__Save => write!(f, "{}", "Uhrum > Save Room > Save Point > Save"),
-            ActionId::Uhrum__West_Entrance__Save_Point__Save => write!(f, "{}", "Uhrum > West Entrance > Save Point > Save"),
+            ActionId::Interior__Cave_Behind_Waterfall__Middle__Throw_Drone => write!(
+                f,
+                "{}",
+                "Interior > Cave Behind Waterfall > Middle > Throw Drone"
+            ),
+            ActionId::Irikar__Basement_Portal__Moving_Platform_Start__Activate_Platform => write!(
+                f,
+                "{}",
+                "Irikar > Basement Portal > Moving Platform Start > Activate Platform"
+            ),
+            ActionId::Irikar__Basement_Portal__Portal_Stand__Enter_Portal => write!(
+                f,
+                "{}",
+                "Irikar > Basement Portal > Portal Stand > Enter Portal"
+            ),
+            ActionId::Irikar__Hub__Portal_Stand__Enter_Portal => {
+                write!(f, "{}", "Irikar > Hub > Portal Stand > Enter Portal")
+            }
+            ActionId::Irikar__Hub__Royal_Storage_By_Wall__Shockwave_Wall => write!(
+                f,
+                "{}",
+                "Irikar > Hub > Royal Storage By Wall > Shockwave Wall"
+            ),
+            ActionId::Irikar__Hub__Save_Point__Save => {
+                write!(f, "{}", "Irikar > Hub > Save Point > Save")
+            }
+            ActionId::Irikar__Sight_Room__Portal__Enter_Portal => {
+                write!(f, "{}", "Irikar > Sight Room > Portal > Enter Portal")
+            }
+            ActionId::Irikar_Breach__Exit_Corridor__Portal_Stand__Enter_Portal => write!(
+                f,
+                "{}",
+                "Irikar Breach > Exit Corridor > Portal Stand > Enter Portal"
+            ),
+            ActionId::Uhrum__Annuna_Corridor__Between_Two_Flowers__Throw_Drone_Not_As_High => {
+                write!(
+                    f,
+                    "{}",
+                    "Uhrum > Annuna Corridor > Between Two Flowers > Throw Drone Not As High"
+                )
+            }
+            ActionId::Uhrum__Annuna_Corridor__Between_Two_Flowers__Throw_Drone_Up => write!(
+                f,
+                "{}",
+                "Uhrum > Annuna Corridor > Between Two Flowers > Throw Drone Up"
+            ),
+            ActionId::Uhrum__Annuna_Corridor__Save_Point__Save => {
+                write!(f, "{}", "Uhrum > Annuna Corridor > Save Point > Save")
+            }
+            ActionId::Uhrum__Save_Room__Save_Point__Save => {
+                write!(f, "{}", "Uhrum > Save Room > Save Point > Save")
+            }
+            ActionId::Uhrum__West_Entrance__Save_Point__Save => {
+                write!(f, "{}", "Uhrum > West Entrance > Save Point > Save")
+            }
         }
     }
 }
@@ -5337,108 +11899,333 @@ impl std::str::FromStr for ActionId {
 
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         match s {
-            "Amagi > Main Area > Carving > Key Combo" => Ok(ActionId::Amagi__Main_Area__Carving__Key_Combo),
-            "Amagi > Main Area > Save Point > Save" => Ok(ActionId::Amagi__Main_Area__Save_Point__Save),
-            "Annuna > East Bridge > Center Gap West > Throw Drone into Tower" => Ok(ActionId::Annuna__East_Bridge__Center_Gap_West__Throw_Drone_into_Tower),
-            "Annuna > Mirror Match > Save Point > Save" => Ok(ActionId::Annuna__Mirror_Match__Save_Point__Save),
-            "Ebih > Base Camp > Left Platform > Move Left Platform" => Ok(ActionId::Ebih__Base_Camp__Left_Platform__Move_Left_Platform),
-            "Ebih > Base Camp > Left Platform Moved > Reset Left Platform" => Ok(ActionId::Ebih__Base_Camp__Left_Platform_Moved__Reset_Left_Platform),
-            "Ebih > Base Camp > Save Point > Save" => Ok(ActionId::Ebih__Base_Camp__Save_Point__Save),
-            "Ebih > Drone Room > Moving Platform > Throw Drone" => Ok(ActionId::Ebih__Drone_Room__Moving_Platform__Throw_Drone),
-            "Ebih > Drone Room > Pit Left > Activate Lift" => Ok(ActionId::Ebih__Drone_Room__Pit_Left__Activate_Lift),
-            "Ebih > Drone Room > Pit Left > Activate Lift But Get Off Early" => Ok(ActionId::Ebih__Drone_Room__Pit_Left__Activate_Lift_But_Get_Off_Early),
-            "Ebih > Drone Room > Portal Exit > Activate Platform" => Ok(ActionId::Ebih__Drone_Room__Portal_Exit__Activate_Platform),
-            "Ebih > Ebih East > Dispenser > Activate Lift" => Ok(ActionId::Ebih__Ebih_East__Dispenser__Activate_Lift),
-            "Ebih > Ebih East > Lower Moving Platform > Activate Lift" => Ok(ActionId::Ebih__Ebih_East__Lower_Moving_Platform__Activate_Lift),
-            "Ebih > Ebih East > Lower Moving Platform > Activate Ride" => Ok(ActionId::Ebih__Ebih_East__Lower_Moving_Platform__Activate_Ride),
-            "Ebih > Ebih East > Moving Platform > Activate Ride" => Ok(ActionId::Ebih__Ebih_East__Moving_Platform__Activate_Ride),
-            "Ebih > Ebih West > Below Door > Open Door" => Ok(ActionId::Ebih__Ebih_West__Below_Door__Open_Door),
-            "Ebih > Ebih West > Left of Switch > Open Door" => Ok(ActionId::Ebih__Ebih_West__Left_of_Switch__Open_Door),
-            "Ebih > Ebih West > Lower Save > Save" => Ok(ActionId::Ebih__Ebih_West__Lower_Save__Save),
-            "Ebih > Ebih West > Medium High Platform > Throw Drone Long" => Ok(ActionId::Ebih__Ebih_West__Medium_High_Platform__Throw_Drone_Long),
+            "Amagi > Main Area > Carving > Key Combo" => {
+                Ok(ActionId::Amagi__Main_Area__Carving__Key_Combo)
+            }
+            "Amagi > Main Area > Save Point > Save" => {
+                Ok(ActionId::Amagi__Main_Area__Save_Point__Save)
+            }
+            "Annuna > East Bridge > Center Gap West > Throw Drone into Tower" => {
+                Ok(ActionId::Annuna__East_Bridge__Center_Gap_West__Throw_Drone_into_Tower)
+            }
+            "Annuna > Mirror Match > Save Point > Save" => {
+                Ok(ActionId::Annuna__Mirror_Match__Save_Point__Save)
+            }
+            "Ebih > Base Camp > Left Platform > Move Left Platform" => {
+                Ok(ActionId::Ebih__Base_Camp__Left_Platform__Move_Left_Platform)
+            }
+            "Ebih > Base Camp > Left Platform Moved > Reset Left Platform" => {
+                Ok(ActionId::Ebih__Base_Camp__Left_Platform_Moved__Reset_Left_Platform)
+            }
+            "Ebih > Base Camp > Save Point > Save" => {
+                Ok(ActionId::Ebih__Base_Camp__Save_Point__Save)
+            }
+            "Ebih > Drone Room > Moving Platform > Throw Drone" => {
+                Ok(ActionId::Ebih__Drone_Room__Moving_Platform__Throw_Drone)
+            }
+            "Ebih > Drone Room > Pit Left > Activate Lift" => {
+                Ok(ActionId::Ebih__Drone_Room__Pit_Left__Activate_Lift)
+            }
+            "Ebih > Drone Room > Pit Left > Activate Lift But Get Off Early" => {
+                Ok(ActionId::Ebih__Drone_Room__Pit_Left__Activate_Lift_But_Get_Off_Early)
+            }
+            "Ebih > Drone Room > Portal Exit > Activate Platform" => {
+                Ok(ActionId::Ebih__Drone_Room__Portal_Exit__Activate_Platform)
+            }
+            "Ebih > Ebih East > Dispenser > Activate Lift" => {
+                Ok(ActionId::Ebih__Ebih_East__Dispenser__Activate_Lift)
+            }
+            "Ebih > Ebih East > Lower Moving Platform > Activate Lift" => {
+                Ok(ActionId::Ebih__Ebih_East__Lower_Moving_Platform__Activate_Lift)
+            }
+            "Ebih > Ebih East > Lower Moving Platform > Activate Ride" => {
+                Ok(ActionId::Ebih__Ebih_East__Lower_Moving_Platform__Activate_Ride)
+            }
+            "Ebih > Ebih East > Moving Platform > Activate Ride" => {
+                Ok(ActionId::Ebih__Ebih_East__Moving_Platform__Activate_Ride)
+            }
+            "Ebih > Ebih West > Below Door > Open Door" => {
+                Ok(ActionId::Ebih__Ebih_West__Below_Door__Open_Door)
+            }
+            "Ebih > Ebih West > Left of Switch > Open Door" => {
+                Ok(ActionId::Ebih__Ebih_West__Left_of_Switch__Open_Door)
+            }
+            "Ebih > Ebih West > Lower Save > Save" => {
+                Ok(ActionId::Ebih__Ebih_West__Lower_Save__Save)
+            }
+            "Ebih > Ebih West > Medium High Platform > Throw Drone Long" => {
+                Ok(ActionId::Ebih__Ebih_West__Medium_High_Platform__Throw_Drone_Long)
+            }
             "Ebih > Ebih West > Mid Save > Save" => Ok(ActionId::Ebih__Ebih_West__Mid_Save__Save),
-            "Ebih > Ebih West > Upper Save > Save" => Ok(ActionId::Ebih__Ebih_West__Upper_Save__Save),
-            "Ebih > Grid 25,10-12 > Door Left > Open Door" => Ok(ActionId::Ebih__Grid_25_10_12__Door_Left__Open_Door),
-            "Ebih > Grid 25,10-12 > East 11 > Open Door" => Ok(ActionId::Ebih__Grid_25_10_12__East_11__Open_Door),
-            "Ebih > Vertical Interchange > West 13 > Open Door" => Ok(ActionId::Ebih__Vertical_Interchange__West_13__Open_Door),
-            "Ebih > Waterfall > Below Left Switch > Open Door" => Ok(ActionId::Ebih__Waterfall__Below_Left_Switch__Open_Door),
-            "Ebih > Waterfall > Ledge Below Hole > Throw Drone" => Ok(ActionId::Ebih__Waterfall__Ledge_Below_Hole__Throw_Drone),
-            "Ebih > Waterfall > West 8 > Open Door" => Ok(ActionId::Ebih__Waterfall__West_8__Open_Door),
-            "Giguna > Carnelian > Lower Susar > Caught" => Ok(ActionId::Giguna__Carnelian__Lower_Susar__Caught),
-            "Giguna > Carnelian > Lower Susar > Hack" => Ok(ActionId::Giguna__Carnelian__Lower_Susar__Hack),
-            "Giguna > Carnelian > Switch > Open Door" => Ok(ActionId::Giguna__Carnelian__Switch__Open_Door),
-            "Giguna > Carnelian > Upper Susar > Caught" => Ok(ActionId::Giguna__Carnelian__Upper_Susar__Caught),
-            "Giguna > Carnelian > Upper Susar > Hack" => Ok(ActionId::Giguna__Carnelian__Upper_Susar__Hack),
-            "Giguna > Clouds > Platform Start > Hack and Get Off Early" => Ok(ActionId::Giguna__Clouds__Platform_Start__Hack_and_Get_Off_Early),
-            "Giguna > Clouds > Platform Start > Hack and Ride to Portal" => Ok(ActionId::Giguna__Clouds__Platform_Start__Hack_and_Ride_to_Portal),
-            "Giguna > Clouds > Platform Start > Hack, Deploy, Ride to Portal" => Ok(ActionId::Giguna__Clouds__Platform_Start__Hack_Deploy_Ride_to_Portal),
-            "Giguna > East Caverns > Lower Susar > Caught" => Ok(ActionId::Giguna__East_Caverns__Lower_Susar__Caught),
-            "Giguna > East Caverns > Lower Susar > Hack" => Ok(ActionId::Giguna__East_Caverns__Lower_Susar__Hack),
-            "Giguna > East Caverns > Mid Susar > Caught" => Ok(ActionId::Giguna__East_Caverns__Mid_Susar__Caught),
-            "Giguna > East Caverns > Mid Susar > Hack" => Ok(ActionId::Giguna__East_Caverns__Mid_Susar__Hack),
-            "Giguna > East Caverns > Statues Ledge > Open Door" => Ok(ActionId::Giguna__East_Caverns__Statues_Ledge__Open_Door),
-            "Giguna > East Caverns > Switch > Open Door" => Ok(ActionId::Giguna__East_Caverns__Switch__Open_Door),
-            "Giguna > East Caverns > Upper Susar > Caught" => Ok(ActionId::Giguna__East_Caverns__Upper_Susar__Caught),
-            "Giguna > East Caverns > Upper Susar Jump from East > Caught" => Ok(ActionId::Giguna__East_Caverns__Upper_Susar_Jump_from_East__Caught),
-            "Giguna > East Caverns > Upper Susar Jump from East > Hack" => Ok(ActionId::Giguna__East_Caverns__Upper_Susar_Jump_from_East__Hack),
-            "Giguna > East Caverns > Upper Susar Mid-jump > Hack" => Ok(ActionId::Giguna__East_Caverns__Upper_Susar_Mid_jump__Hack),
-            "Giguna > East Caverns > West 14 > Enter Combo" => Ok(ActionId::Giguna__East_Caverns__West_14__Enter_Combo),
-            "Giguna > East Caverns > West 16 > Open Door" => Ok(ActionId::Giguna__East_Caverns__West_16__Open_Door),
-            "Giguna > Gateway > Flask Ledge > Open Door" => Ok(ActionId::Giguna__Gateway__Flask_Ledge__Open_Door),
-            "Giguna > Gateway > One Jump > Open Door" => Ok(ActionId::Giguna__Gateway__One_Jump__Open_Door),
-            "Giguna > Giguna Base > Save Point > Save" => Ok(ActionId::Giguna__Giguna_Base__Save_Point__Save),
-            "Giguna > Giguna Base > Stone Knob > Throw Drone" => Ok(ActionId::Giguna__Giguna_Base__Stone_Knob__Throw_Drone),
-            "Giguna > Giguna Base > Switch Distance 1 > Open Door" => Ok(ActionId::Giguna__Giguna_Base__Switch_Distance_1__Open_Door),
-            "Giguna > Giguna Base > Switch Distance 2 > Open Door" => Ok(ActionId::Giguna__Giguna_Base__Switch_Distance_2__Open_Door),
-            "Giguna > Giguna Base > Switch Distance 3 > Open Door" => Ok(ActionId::Giguna__Giguna_Base__Switch_Distance_3__Open_Door),
-            "Giguna > Giguna Base > Switch Distance 4 > Open Door" => Ok(ActionId::Giguna__Giguna_Base__Switch_Distance_4__Open_Door),
-            "Giguna > Giguna Northeast > Gate Left > Throw Drone" => Ok(ActionId::Giguna__Giguna_Northeast__Gate_Left__Throw_Drone),
-            "Giguna > Giguna Northeast > Right Column > Open Door From Afar" => Ok(ActionId::Giguna__Giguna_Northeast__Right_Column__Open_Door_From_Afar),
-            "Giguna > Giguna Northeast > Save Point > Save" => Ok(ActionId::Giguna__Giguna_Northeast__Save_Point__Save),
-            "Giguna > Giguna Northeast > Switch > Open Door" => Ok(ActionId::Giguna__Giguna_Northeast__Switch__Open_Door),
-            "Giguna > Ruins Top > Portal > Enter Portal" => Ok(ActionId::Giguna__Ruins_Top__Portal__Enter_Portal),
-            "Giguna > Ruins Top > Save Point > Save" => Ok(ActionId::Giguna__Ruins_Top__Save_Point__Save),
-            "Giguna > Ruins Top > Switch > Open Doors" => Ok(ActionId::Giguna__Ruins_Top__Switch__Open_Doors),
-            "Giguna > Ruins Top > Turret Balcony West > Throw Drone onto Tower" => Ok(ActionId::Giguna__Ruins_Top__Turret_Balcony_West__Throw_Drone_onto_Tower),
-            "Giguna > Ruins West > Lower Ledge > Destroy Kishib" => Ok(ActionId::Giguna__Ruins_West__Lower_Ledge__Destroy_Kishib),
-            "Giguna > Ruins West > Lower Ledge > Hack Kishib" => Ok(ActionId::Giguna__Ruins_West__Lower_Ledge__Hack_Kishib),
-            "Giguna > Ruins West > Save Point > Save" => Ok(ActionId::Giguna__Ruins_West__Save_Point__Save),
-            "Giguna > Wasteland > Middle Cliff > Throw Drone" => Ok(ActionId::Giguna__Wasteland__Middle_Cliff__Throw_Drone),
-            "Giguna > West Caverns > East Susar > Caught" => Ok(ActionId::Giguna__West_Caverns__East_Susar__Caught),
-            "Giguna > West Caverns > East Susar > Hack" => Ok(ActionId::Giguna__West_Caverns__East_Susar__Hack),
-            "Giguna > West Caverns > Small Platform > Throw Drone Up" => Ok(ActionId::Giguna__West_Caverns__Small_Platform__Throw_Drone_Up),
-            "Giguna Breach > Peak > Portal > Portal" => Ok(ActionId::Giguna_Breach__Peak__Portal__Portal),
-            "Giguna Breach > Peak > Save Point > Save" => Ok(ActionId::Giguna_Breach__Peak__Save_Point__Save),
-            "Giguna Breach > SW Save > Save Point > Save" => Ok(ActionId::Giguna_Breach__SW_Save__Save_Point__Save),
-            "Giguna Breach > SW Save > West 11 > Open Door" => Ok(ActionId::Giguna_Breach__SW_Save__West_11__Open_Door),
-            "Glacier > Revival > Save Point > Save" => Ok(ActionId::Glacier__Revival__Save_Point__Save),
+            "Ebih > Ebih West > Upper Save > Save" => {
+                Ok(ActionId::Ebih__Ebih_West__Upper_Save__Save)
+            }
+            "Ebih > Grid 25,10-12 > Door Left > Open Door" => {
+                Ok(ActionId::Ebih__Grid_25_10_12__Door_Left__Open_Door)
+            }
+            "Ebih > Grid 25,10-12 > East 11 > Open Door" => {
+                Ok(ActionId::Ebih__Grid_25_10_12__East_11__Open_Door)
+            }
+            "Ebih > Vertical Interchange > West 13 > Open Door" => {
+                Ok(ActionId::Ebih__Vertical_Interchange__West_13__Open_Door)
+            }
+            "Ebih > Waterfall > Below Left Switch > Open Door" => {
+                Ok(ActionId::Ebih__Waterfall__Below_Left_Switch__Open_Door)
+            }
+            "Ebih > Waterfall > Ledge Below Hole > Throw Drone" => {
+                Ok(ActionId::Ebih__Waterfall__Ledge_Below_Hole__Throw_Drone)
+            }
+            "Ebih > Waterfall > West 8 > Open Door" => {
+                Ok(ActionId::Ebih__Waterfall__West_8__Open_Door)
+            }
+            "Giguna > Carnelian > Lower Susar > Caught" => {
+                Ok(ActionId::Giguna__Carnelian__Lower_Susar__Caught)
+            }
+            "Giguna > Carnelian > Lower Susar > Hack" => {
+                Ok(ActionId::Giguna__Carnelian__Lower_Susar__Hack)
+            }
+            "Giguna > Carnelian > Switch > Open Door" => {
+                Ok(ActionId::Giguna__Carnelian__Switch__Open_Door)
+            }
+            "Giguna > Carnelian > Upper Susar > Caught" => {
+                Ok(ActionId::Giguna__Carnelian__Upper_Susar__Caught)
+            }
+            "Giguna > Carnelian > Upper Susar > Hack" => {
+                Ok(ActionId::Giguna__Carnelian__Upper_Susar__Hack)
+            }
+            "Giguna > Clouds > Platform Start > Hack and Get Off Early" => {
+                Ok(ActionId::Giguna__Clouds__Platform_Start__Hack_and_Get_Off_Early)
+            }
+            "Giguna > Clouds > Platform Start > Hack and Ride to Portal" => {
+                Ok(ActionId::Giguna__Clouds__Platform_Start__Hack_and_Ride_to_Portal)
+            }
+            "Giguna > Clouds > Platform Start > Hack, Deploy, Ride to Portal" => {
+                Ok(ActionId::Giguna__Clouds__Platform_Start__Hack_Deploy_Ride_to_Portal)
+            }
+            "Giguna > East Caverns > Lower Susar > Caught" => {
+                Ok(ActionId::Giguna__East_Caverns__Lower_Susar__Caught)
+            }
+            "Giguna > East Caverns > Lower Susar > Hack" => {
+                Ok(ActionId::Giguna__East_Caverns__Lower_Susar__Hack)
+            }
+            "Giguna > East Caverns > Mid Susar > Caught" => {
+                Ok(ActionId::Giguna__East_Caverns__Mid_Susar__Caught)
+            }
+            "Giguna > East Caverns > Mid Susar > Hack" => {
+                Ok(ActionId::Giguna__East_Caverns__Mid_Susar__Hack)
+            }
+            "Giguna > East Caverns > Statues Ledge > Open Door" => {
+                Ok(ActionId::Giguna__East_Caverns__Statues_Ledge__Open_Door)
+            }
+            "Giguna > East Caverns > Switch > Open Door" => {
+                Ok(ActionId::Giguna__East_Caverns__Switch__Open_Door)
+            }
+            "Giguna > East Caverns > Upper Susar > Caught" => {
+                Ok(ActionId::Giguna__East_Caverns__Upper_Susar__Caught)
+            }
+            "Giguna > East Caverns > Upper Susar Jump from East > Caught" => {
+                Ok(ActionId::Giguna__East_Caverns__Upper_Susar_Jump_from_East__Caught)
+            }
+            "Giguna > East Caverns > Upper Susar Jump from East > Hack" => {
+                Ok(ActionId::Giguna__East_Caverns__Upper_Susar_Jump_from_East__Hack)
+            }
+            "Giguna > East Caverns > Upper Susar Mid-jump > Hack" => {
+                Ok(ActionId::Giguna__East_Caverns__Upper_Susar_Mid_jump__Hack)
+            }
+            "Giguna > East Caverns > West 14 > Enter Combo" => {
+                Ok(ActionId::Giguna__East_Caverns__West_14__Enter_Combo)
+            }
+            "Giguna > East Caverns > West 16 > Open Door" => {
+                Ok(ActionId::Giguna__East_Caverns__West_16__Open_Door)
+            }
+            "Giguna > Gateway > Flask Ledge > Open Door" => {
+                Ok(ActionId::Giguna__Gateway__Flask_Ledge__Open_Door)
+            }
+            "Giguna > Gateway > One Jump > Open Door" => {
+                Ok(ActionId::Giguna__Gateway__One_Jump__Open_Door)
+            }
+            "Giguna > Giguna Base > Save Point > Save" => {
+                Ok(ActionId::Giguna__Giguna_Base__Save_Point__Save)
+            }
+            "Giguna > Giguna Base > Stone Knob > Throw Drone" => {
+                Ok(ActionId::Giguna__Giguna_Base__Stone_Knob__Throw_Drone)
+            }
+            "Giguna > Giguna Base > Switch Distance 1 > Open Door" => {
+                Ok(ActionId::Giguna__Giguna_Base__Switch_Distance_1__Open_Door)
+            }
+            "Giguna > Giguna Base > Switch Distance 2 > Open Door" => {
+                Ok(ActionId::Giguna__Giguna_Base__Switch_Distance_2__Open_Door)
+            }
+            "Giguna > Giguna Base > Switch Distance 3 > Open Door" => {
+                Ok(ActionId::Giguna__Giguna_Base__Switch_Distance_3__Open_Door)
+            }
+            "Giguna > Giguna Base > Switch Distance 4 > Open Door" => {
+                Ok(ActionId::Giguna__Giguna_Base__Switch_Distance_4__Open_Door)
+            }
+            "Giguna > Giguna Northeast > Gate Left > Throw Drone" => {
+                Ok(ActionId::Giguna__Giguna_Northeast__Gate_Left__Throw_Drone)
+            }
+            "Giguna > Giguna Northeast > Right Column > Open Door From Afar" => {
+                Ok(ActionId::Giguna__Giguna_Northeast__Right_Column__Open_Door_From_Afar)
+            }
+            "Giguna > Giguna Northeast > Save Point > Save" => {
+                Ok(ActionId::Giguna__Giguna_Northeast__Save_Point__Save)
+            }
+            "Giguna > Giguna Northeast > Switch > Open Door" => {
+                Ok(ActionId::Giguna__Giguna_Northeast__Switch__Open_Door)
+            }
+            "Giguna > Ruins Top > Portal > Enter Portal" => {
+                Ok(ActionId::Giguna__Ruins_Top__Portal__Enter_Portal)
+            }
+            "Giguna > Ruins Top > Save Point > Save" => {
+                Ok(ActionId::Giguna__Ruins_Top__Save_Point__Save)
+            }
+            "Giguna > Ruins Top > Switch > Open Doors" => {
+                Ok(ActionId::Giguna__Ruins_Top__Switch__Open_Doors)
+            }
+            "Giguna > Ruins Top > Turret Balcony West > Throw Drone onto Tower" => {
+                Ok(ActionId::Giguna__Ruins_Top__Turret_Balcony_West__Throw_Drone_onto_Tower)
+            }
+            "Giguna > Ruins West > Lower Ledge > Destroy Kishib" => {
+                Ok(ActionId::Giguna__Ruins_West__Lower_Ledge__Destroy_Kishib)
+            }
+            "Giguna > Ruins West > Lower Ledge > Hack Kishib" => {
+                Ok(ActionId::Giguna__Ruins_West__Lower_Ledge__Hack_Kishib)
+            }
+            "Giguna > Ruins West > Save Point > Save" => {
+                Ok(ActionId::Giguna__Ruins_West__Save_Point__Save)
+            }
+            "Giguna > Wasteland > Middle Cliff > Throw Drone" => {
+                Ok(ActionId::Giguna__Wasteland__Middle_Cliff__Throw_Drone)
+            }
+            "Giguna > West Caverns > East Susar > Caught" => {
+                Ok(ActionId::Giguna__West_Caverns__East_Susar__Caught)
+            }
+            "Giguna > West Caverns > East Susar > Hack" => {
+                Ok(ActionId::Giguna__West_Caverns__East_Susar__Hack)
+            }
+            "Giguna > West Caverns > Small Platform > Throw Drone Up" => {
+                Ok(ActionId::Giguna__West_Caverns__Small_Platform__Throw_Drone_Up)
+            }
+            "Giguna Breach > Peak > Portal > Portal" => {
+                Ok(ActionId::Giguna_Breach__Peak__Portal__Portal)
+            }
+            "Giguna Breach > Peak > Save Point > Save" => {
+                Ok(ActionId::Giguna_Breach__Peak__Save_Point__Save)
+            }
+            "Giguna Breach > SW Save > Save Point > Save" => {
+                Ok(ActionId::Giguna_Breach__SW_Save__Save_Point__Save)
+            }
+            "Giguna Breach > SW Save > West 11 > Open Door" => {
+                Ok(ActionId::Giguna_Breach__SW_Save__West_11__Open_Door)
+            }
+            "Glacier > Revival > Save Point > Save" => {
+                Ok(ActionId::Glacier__Revival__Save_Point__Save)
+            }
             "Become Drone" => Ok(ActionId::Global__Become_Drone),
             "Become Indra" => Ok(ActionId::Global__Become_Indra),
             "Deploy Drone" => Ok(ActionId::Global__Deploy_Drone),
             "Recall Drone" => Ok(ActionId::Global__Recall_Drone),
-            "Interior > Cave Behind Waterfall > Middle > Throw Drone" => Ok(ActionId::Interior__Cave_Behind_Waterfall__Middle__Throw_Drone),
-            "Irikar > Basement Portal > Moving Platform Start > Activate Platform" => Ok(ActionId::Irikar__Basement_Portal__Moving_Platform_Start__Activate_Platform),
-            "Irikar > Basement Portal > Portal Stand > Enter Portal" => Ok(ActionId::Irikar__Basement_Portal__Portal_Stand__Enter_Portal),
-            "Irikar > Hub > Portal Stand > Enter Portal" => Ok(ActionId::Irikar__Hub__Portal_Stand__Enter_Portal),
-            "Irikar > Hub > Royal Storage By Wall > Shockwave Wall" => Ok(ActionId::Irikar__Hub__Royal_Storage_By_Wall__Shockwave_Wall),
+            "Interior > Cave Behind Waterfall > Middle > Throw Drone" => {
+                Ok(ActionId::Interior__Cave_Behind_Waterfall__Middle__Throw_Drone)
+            }
+            "Irikar > Basement Portal > Moving Platform Start > Activate Platform" => {
+                Ok(ActionId::Irikar__Basement_Portal__Moving_Platform_Start__Activate_Platform)
+            }
+            "Irikar > Basement Portal > Portal Stand > Enter Portal" => {
+                Ok(ActionId::Irikar__Basement_Portal__Portal_Stand__Enter_Portal)
+            }
+            "Irikar > Hub > Portal Stand > Enter Portal" => {
+                Ok(ActionId::Irikar__Hub__Portal_Stand__Enter_Portal)
+            }
+            "Irikar > Hub > Royal Storage By Wall > Shockwave Wall" => {
+                Ok(ActionId::Irikar__Hub__Royal_Storage_By_Wall__Shockwave_Wall)
+            }
             "Irikar > Hub > Save Point > Save" => Ok(ActionId::Irikar__Hub__Save_Point__Save),
-            "Irikar > Sight Room > Portal > Enter Portal" => Ok(ActionId::Irikar__Sight_Room__Portal__Enter_Portal),
-            "Irikar Breach > Exit Corridor > Portal Stand > Enter Portal" => Ok(ActionId::Irikar_Breach__Exit_Corridor__Portal_Stand__Enter_Portal),
-            "Uhrum > Annuna Corridor > Between Two Flowers > Throw Drone Not As High" => Ok(ActionId::Uhrum__Annuna_Corridor__Between_Two_Flowers__Throw_Drone_Not_As_High),
-            "Uhrum > Annuna Corridor > Between Two Flowers > Throw Drone Up" => Ok(ActionId::Uhrum__Annuna_Corridor__Between_Two_Flowers__Throw_Drone_Up),
-            "Uhrum > Annuna Corridor > Save Point > Save" => Ok(ActionId::Uhrum__Annuna_Corridor__Save_Point__Save),
-            "Uhrum > Save Room > Save Point > Save" => Ok(ActionId::Uhrum__Save_Room__Save_Point__Save),
-            "Uhrum > West Entrance > Save Point > Save" => Ok(ActionId::Uhrum__West_Entrance__Save_Point__Save),
+            "Irikar > Sight Room > Portal > Enter Portal" => {
+                Ok(ActionId::Irikar__Sight_Room__Portal__Enter_Portal)
+            }
+            "Irikar Breach > Exit Corridor > Portal Stand > Enter Portal" => {
+                Ok(ActionId::Irikar_Breach__Exit_Corridor__Portal_Stand__Enter_Portal)
+            }
+            "Uhrum > Annuna Corridor > Between Two Flowers > Throw Drone Not As High" => {
+                Ok(ActionId::Uhrum__Annuna_Corridor__Between_Two_Flowers__Throw_Drone_Not_As_High)
+            }
+            "Uhrum > Annuna Corridor > Between Two Flowers > Throw Drone Up" => {
+                Ok(ActionId::Uhrum__Annuna_Corridor__Between_Two_Flowers__Throw_Drone_Up)
+            }
+            "Uhrum > Annuna Corridor > Save Point > Save" => {
+                Ok(ActionId::Uhrum__Annuna_Corridor__Save_Point__Save)
+            }
+            "Uhrum > Save Room > Save Point > Save" => {
+                Ok(ActionId::Uhrum__Save_Room__Save_Point__Save)
+            }
+            "Uhrum > West Entrance > Save Point > Save" => {
+                Ok(ActionId::Uhrum__West_Entrance__Save_Point__Save)
+            }
             _ => Err(format!("Could not recognize as a ActionId: {}", s)),
         }
     }
 }
 
-#[derive(Debug, PartialEq, Eq, Copy, Clone, Hash, Ord, PartialOrd, enum_map::Enum, Default, serde_repr::Serialize_repr, serde_repr::Deserialize_repr)]
+#[derive(
+    Debug,
+    PartialEq,
+    Eq,
+    Copy,
+    Clone,
+    Hash,
+    Ord,
+    PartialOrd,
+    enum_map::Enum,
+    Default,
+    serde_repr::Serialize_repr,
+    serde_repr::Deserialize_repr,
+)]
 #[repr(u8)]
 pub enum CanonId {
-    #[default] None,
-    Amagi_Dragon_Eye_Flask,    Shockwave,    Amagi_Stronghold_Wall_1,    Amagi_Stronghold_Left_Wall,    Amagi_Stronghold_Boulder_2,    Amagi_Stronghold_Wall_2,    Amagi_West_Lake_Surface_Wall,    Annuna_Mirror_Match_Flask,    Notes_2053_02_27,    Ebih_Base_Camp_Fragment,    Ebih_Bush_Flask,    Ebih_Waterfall_Block_Right,    Ebih_Waterfall_Block_Left,    Ebih_Waterfall_Wall,    Ebih_West_Block,    Infect,    Ebih_Alu,    Remote_Drone,    Giguna_Northeast_Gate,    Giguna_Northeast_Flask,    Ebih_Wasteland_Passage_H,    Giguna_Top_Flask,    Giguna_Dual_Path_Switch,    Giguna_Dual_Path_Wall,    Giguna_Boulder,    Giguna_Gateway_Block,    Giguna_Gubi,    Ledge_Grab,    Melee_Charge,    Irikar_Royal_Storage_Wall,    Irikar_Royal_Storage_Flask,    Irikar_Gudam,    Uhrum_West_Entrance_Upper_Wall,    Uhrum_West_Entrance_Lower_Wall,    Fast_Travel,    Uhrum_Waterfall_Wall,    Uhrum_Waterfalls_Block,    Anuman,    Uhrum_Annuna_Corridor_Block,}
+    #[default]
+    None,
+    Amagi_Dragon_Eye_Flask,
+    Shockwave,
+    Amagi_Stronghold_Wall_1,
+    Amagi_Stronghold_Left_Wall,
+    Amagi_Stronghold_Boulder_2,
+    Amagi_Stronghold_Wall_2,
+    Amagi_West_Lake_Surface_Wall,
+    Annuna_Mirror_Match_Flask,
+    Notes_2053_02_27,
+    Ebih_Base_Camp_Fragment,
+    Ebih_Bush_Flask,
+    Ebih_Waterfall_Block_Right,
+    Ebih_Waterfall_Block_Left,
+    Ebih_Waterfall_Wall,
+    Ebih_West_Block,
+    Infect,
+    Ebih_Alu,
+    Remote_Drone,
+    Giguna_Northeast_Gate,
+    Giguna_Northeast_Flask,
+    Ebih_Wasteland_Passage_H,
+    Giguna_Top_Flask,
+    Giguna_Dual_Path_Switch,
+    Giguna_Dual_Path_Wall,
+    Giguna_Boulder,
+    Giguna_Gateway_Block,
+    Giguna_Gubi,
+    Ledge_Grab,
+    Melee_Charge,
+    Irikar_Royal_Storage_Wall,
+    Irikar_Royal_Storage_Flask,
+    Irikar_Gudam,
+    Uhrum_West_Entrance_Upper_Wall,
+    Uhrum_West_Entrance_Lower_Wall,
+    Fast_Travel,
+    Uhrum_Waterfall_Wall,
+    Uhrum_Waterfalls_Block,
+    Anuman,
+    Uhrum_Annuna_Corridor_Block,
+}
 impl fmt::Display for CanonId {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         match self {
@@ -5449,7 +12236,9 @@ impl fmt::Display for CanonId {
             CanonId::Amagi_Stronghold_Left_Wall => write!(f, "{}", "Amagi Stronghold Left Wall"),
             CanonId::Amagi_Stronghold_Boulder_2 => write!(f, "{}", "Amagi Stronghold Boulder 2"),
             CanonId::Amagi_Stronghold_Wall_2 => write!(f, "{}", "Amagi Stronghold Wall 2"),
-            CanonId::Amagi_West_Lake_Surface_Wall => write!(f, "{}", "Amagi_West_Lake_Surface_Wall"),
+            CanonId::Amagi_West_Lake_Surface_Wall => {
+                write!(f, "{}", "Amagi_West_Lake_Surface_Wall")
+            }
             CanonId::Annuna_Mirror_Match_Flask => write!(f, "{}", "Annuna_Mirror_Match_Flask"),
             CanonId::Notes_2053_02_27 => write!(f, "{}", "Notes_2053_02_27"),
             CanonId::Ebih_Base_Camp_Fragment => write!(f, "{}", "Ebih_Base_Camp_Fragment"),
@@ -5475,8 +12264,12 @@ impl fmt::Display for CanonId {
             CanonId::Irikar_Royal_Storage_Wall => write!(f, "{}", "Irikar_Royal_Storage_Wall"),
             CanonId::Irikar_Royal_Storage_Flask => write!(f, "{}", "Irikar_Royal_Storage_Flask"),
             CanonId::Irikar_Gudam => write!(f, "{}", "Irikar_Gudam"),
-            CanonId::Uhrum_West_Entrance_Upper_Wall => write!(f, "{}", "Uhrum_West_Entrance_Upper_Wall"),
-            CanonId::Uhrum_West_Entrance_Lower_Wall => write!(f, "{}", "Uhrum_West_Entrance_Lower_Wall"),
+            CanonId::Uhrum_West_Entrance_Upper_Wall => {
+                write!(f, "{}", "Uhrum_West_Entrance_Upper_Wall")
+            }
+            CanonId::Uhrum_West_Entrance_Lower_Wall => {
+                write!(f, "{}", "Uhrum_West_Entrance_Lower_Wall")
+            }
             CanonId::Fast_Travel => write!(f, "{}", "Fast_Travel"),
             CanonId::Uhrum_Waterfall_Wall => write!(f, "{}", "Uhrum_Waterfall_Wall"),
             CanonId::Uhrum_Waterfalls_Block => write!(f, "{}", "Uhrum_Waterfalls_Block"),
@@ -5535,10 +12328,47 @@ impl std::str::FromStr for CanonId {
     }
 }
 
-#[derive(Debug, PartialEq, Eq, Copy, Clone, Hash, Ord, PartialOrd, enum_map::Enum, serde_repr::Serialize_repr, serde_repr::Deserialize_repr)]
+#[derive(
+    Debug,
+    PartialEq,
+    Eq,
+    Copy,
+    Clone,
+    Hash,
+    Ord,
+    PartialOrd,
+    enum_map::Enum,
+    serde_repr::Serialize_repr,
+    serde_repr::Deserialize_repr,
+)]
 #[repr(u8)]
 pub enum WarpId {
-    BreachSave,    EarthSave,    ExitBreach,    ExitMenu,    FastTravelAmagiMainArea,    FastTravelEbihBaseCamp,    FastTravelEbihWestLower,    FastTravelEbihWestMid,    FastTravelEbihWestUpper,    FastTravelGigunaBase,    FastTravelGigunaBreachPeak,    FastTravelGigunaBreachSw,    FastTravelGigunaNortheast,    FastTravelGigunaRuinsWest,    FastTravelGlacierRevival,    FastTravelIrikarBreachBasement,    FastTravelIrikarBreachGauntlet,    FastTravelIrikarBreachSaveRoom,    FastTravelIrikarHub,    FastTravelUhrumAnnuna,    FastTravelUhrumEast,    FastTravelUhrumSaveRoom,    FastTravelUhrumWestEntrance,    MainSave,    Menu,}
+    BreachSave,
+    EarthSave,
+    ExitBreach,
+    ExitMenu,
+    FastTravelAmagiMainArea,
+    FastTravelEbihBaseCamp,
+    FastTravelEbihWestLower,
+    FastTravelEbihWestMid,
+    FastTravelEbihWestUpper,
+    FastTravelGigunaBase,
+    FastTravelGigunaBreachPeak,
+    FastTravelGigunaBreachSw,
+    FastTravelGigunaNortheast,
+    FastTravelGigunaRuinsWest,
+    FastTravelGlacierRevival,
+    FastTravelIrikarBreachBasement,
+    FastTravelIrikarBreachGauntlet,
+    FastTravelIrikarBreachSaveRoom,
+    FastTravelIrikarHub,
+    FastTravelUhrumAnnuna,
+    FastTravelUhrumEast,
+    FastTravelUhrumSaveRoom,
+    FastTravelUhrumWestEntrance,
+    MainSave,
+    Menu,
+}
 impl fmt::Display for WarpId {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         match self {
@@ -5557,9 +12387,15 @@ impl fmt::Display for WarpId {
             WarpId::FastTravelGigunaNortheast => write!(f, "{}", "FastTravelGigunaNortheast"),
             WarpId::FastTravelGigunaRuinsWest => write!(f, "{}", "FastTravelGigunaRuinsWest"),
             WarpId::FastTravelGlacierRevival => write!(f, "{}", "FastTravelGlacierRevival"),
-            WarpId::FastTravelIrikarBreachBasement => write!(f, "{}", "FastTravelIrikarBreachBasement"),
-            WarpId::FastTravelIrikarBreachGauntlet => write!(f, "{}", "FastTravelIrikarBreachGauntlet"),
-            WarpId::FastTravelIrikarBreachSaveRoom => write!(f, "{}", "FastTravelIrikarBreachSaveRoom"),
+            WarpId::FastTravelIrikarBreachBasement => {
+                write!(f, "{}", "FastTravelIrikarBreachBasement")
+            }
+            WarpId::FastTravelIrikarBreachGauntlet => {
+                write!(f, "{}", "FastTravelIrikarBreachGauntlet")
+            }
+            WarpId::FastTravelIrikarBreachSaveRoom => {
+                write!(f, "{}", "FastTravelIrikarBreachSaveRoom")
+            }
             WarpId::FastTravelIrikarHub => write!(f, "{}", "FastTravelIrikarHub"),
             WarpId::FastTravelUhrumAnnuna => write!(f, "{}", "FastTravelUhrumAnnuna"),
             WarpId::FastTravelUhrumEast => write!(f, "{}", "FastTravelUhrumEast"),
@@ -5606,16 +12442,30 @@ impl std::str::FromStr for WarpId {
     }
 }
 
-#[derive(Debug, PartialEq, Eq, Copy, Clone, Hash, Ord, PartialOrd, Default, serde_repr::Serialize_repr, serde_repr::Deserialize_repr)]
+#[derive(
+    Debug,
+    PartialEq,
+    Eq,
+    Copy,
+    Clone,
+    Hash,
+    Ord,
+    PartialOrd,
+    Default,
+    serde_repr::Serialize_repr,
+    serde_repr::Deserialize_repr,
+)]
 #[repr(u8)]
 pub enum Objective {
-    #[default] Start,
-        Progress,}
+    #[default]
+    Start,
+    Progress,
+}
 impl fmt::Display for Objective {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         match self {
             Objective::Start => write!(f, "{}", "Start"),
-            
+
             Objective::Progress => write!(f, "{}", "Progress%"),
         }
     }

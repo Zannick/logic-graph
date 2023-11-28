@@ -4,11 +4,158 @@
 
 use std::fmt;
 
-#[derive(Debug, PartialEq, Eq, Copy, Clone, Hash, Ord, PartialOrd, enum_map::Enum, Default, serde_repr::Serialize_repr, serde_repr::Deserialize_repr)]
+#[derive(
+    Debug,
+    PartialEq,
+    Eq,
+    Copy,
+    Clone,
+    Hash,
+    Ord,
+    PartialOrd,
+    enum_map::Enum,
+    Default,
+    serde_repr::Serialize_repr,
+    serde_repr::Deserialize_repr,
+)]
 #[repr(u8)]
 pub enum Item {
-    #[default] None,
-    Aansur,    Amagi_Dragon_Eye_Passage,    Amagi_Stronghold_Boulder_1,    Amagi_Stronghold_Boulder_2,    Amagi_Stronghold_Boulder_And_Wall_2,    Amagi_Stronghold_Left_Wall,    Amagi_Stronghold_Wall_1,    Amagi_Stronghold_Wall_2,    Amagi_Stronghold_Wall_And_Boulder_1,    Amagi_West_Lake_Surface_Wall,    Amashilama,    Annuna_Mirror_Match_Switch,    Anuman,    Apocalypse_Bomb,    Big_Flask,    Boomerang,    Breach_Attractor,    Breach_Sight,    Bronze_Axe,    Building_of_the_School,    Carnelian_Ring,    Commemorative_Speech,    Companies_Layoff,    Compass,    Dangerous_Ideas,    Dear_Ernest,    Defeat_Indra,    Defeat_MUS_A_M20,    Double_Axe,    Drone_Hover,    Drone_Melee_Damage,    Drone_Melee_Damage_2,    Drone_Melee_Damage_3,    Drone_Melee_Speed,    Drone_Melee_Speed_2,    Drone_Melee_Speed_3,    Ebih_Alu,    Ebih_Interchange_Block,    Ebih_Interchange_Gate,    Ebih_Wasteland_Door,    Ebih_Wasteland_Passage_H,    Ebih_Waterfall_Block_Left,    Ebih_Waterfall_Block_Right,    Ebih_Waterfall_Both_Blocks,    Ebih_Waterfall_Wall,    Ebih_West_Block,    Escape,    Exit_Breach,    Fast_Travel,    Flask,    Giguna_Boulder,    Giguna_Dual_Path_Switch,    Giguna_Dual_Path_Wall,    Giguna_Gateway_Block,    Giguna_Gateway_Gate,    Giguna_Gubi,    Giguna_Northeast_Gate,    Health_Fragment,    Health_Node,    Health_Upgrade,    Health_Upgrade_2,    Health_Upgrade_3,    Health_Upgrade_4,    Health_Upgrade_5,    Heretics_Granddaughter,    Heretics_Tablet,    Ice_Axe,    Infect,    Infect_L1,    Infect_L2,    Infect_L3,    Infection_Range,    Infection_Range_2,    Infection_Range_3,    Infection_Speed,    Infection_Speed_2,    Irikar_Gudam,    Irikar_Royal_Storage_Wall,    Journal_2049_10_29,    Ledge_Grab,    Letter_from_Trace,    Melee_Charge,    Melee_Damage,    Melee_Damage_2,    Melee_Damage_3,    Melee_Speed,    Melee_Speed_2,    Melee_Speed_3,    Mist_Upgrade,    Nanite_Mist,    Nano_Lattice_2,    Nano_Points,    Nano_Points_2,    Nano_Points_3,    Notes_2053_02_27,    Plague_of_Thoughts,    Power_Core,    Power_Matrix,    Ranged_Damage,    Ranged_Damage_2,    Ranged_Damage_3,    Ranged_Speed,    Ranged_Speed_2,    Ranged_Speed_3,    Record_Losses,    Refill,    Remote_Drone,    Researchers_Missing,    Royal_Dagger,    Separation,    Shockwave,    Slingshot_Charge,    Slingshot_Hook,    Slingshot_Weapon,    Station_Power,    Storm_Bomb,    Suspension_Bridge,    Switch_36_11,    Switch_40_12,    Terminal_Breakthrough_1,    Terminal_Breakthrough_2,    The_Ideal_Kiengir,    Udusan,    Uhrum_Annuna_Corridor_Block,    Uhrum_Waterfall_Wall,    Uhrum_Waterfalls_Block,    Uhrum_West_Entrance_Gate,    Uhrum_West_Entrance_Lower_Wall,    Uhrum_West_Entrance_Upper_Wall,    Under_Siege,    Underwater_Movement,    Victory,    Wall_Climb,}
+    #[default]
+    None,
+    Aansur,
+    Amagi_Dragon_Eye_Passage,
+    Amagi_Stronghold_Boulder_1,
+    Amagi_Stronghold_Boulder_2,
+    Amagi_Stronghold_Boulder_And_Wall_2,
+    Amagi_Stronghold_Left_Wall,
+    Amagi_Stronghold_Wall_1,
+    Amagi_Stronghold_Wall_2,
+    Amagi_Stronghold_Wall_And_Boulder_1,
+    Amagi_West_Lake_Surface_Wall,
+    Amashilama,
+    Annuna_Mirror_Match_Switch,
+    Anuman,
+    Apocalypse_Bomb,
+    Big_Flask,
+    Boomerang,
+    Breach_Attractor,
+    Breach_Sight,
+    Bronze_Axe,
+    Building_of_the_School,
+    Carnelian_Ring,
+    Commemorative_Speech,
+    Companies_Layoff,
+    Compass,
+    Dangerous_Ideas,
+    Dear_Ernest,
+    Defeat_Indra,
+    Defeat_MUS_A_M20,
+    Double_Axe,
+    Drone_Hover,
+    Drone_Melee_Damage,
+    Drone_Melee_Damage_2,
+    Drone_Melee_Damage_3,
+    Drone_Melee_Speed,
+    Drone_Melee_Speed_2,
+    Drone_Melee_Speed_3,
+    Ebih_Alu,
+    Ebih_Interchange_Block,
+    Ebih_Interchange_Gate,
+    Ebih_Wasteland_Door,
+    Ebih_Wasteland_Passage_H,
+    Ebih_Waterfall_Block_Left,
+    Ebih_Waterfall_Block_Right,
+    Ebih_Waterfall_Both_Blocks,
+    Ebih_Waterfall_Wall,
+    Ebih_West_Block,
+    Escape,
+    Exit_Breach,
+    Fast_Travel,
+    Flask,
+    Giguna_Boulder,
+    Giguna_Dual_Path_Switch,
+    Giguna_Dual_Path_Wall,
+    Giguna_Gateway_Block,
+    Giguna_Gateway_Gate,
+    Giguna_Gubi,
+    Giguna_Northeast_Gate,
+    Health_Fragment,
+    Health_Node,
+    Health_Upgrade,
+    Health_Upgrade_2,
+    Health_Upgrade_3,
+    Health_Upgrade_4,
+    Health_Upgrade_5,
+    Heretics_Granddaughter,
+    Heretics_Tablet,
+    Ice_Axe,
+    Infect,
+    Infect_L1,
+    Infect_L2,
+    Infect_L3,
+    Infection_Range,
+    Infection_Range_2,
+    Infection_Range_3,
+    Infection_Speed,
+    Infection_Speed_2,
+    Irikar_Gudam,
+    Irikar_Royal_Storage_Wall,
+    Journal_2049_10_29,
+    Ledge_Grab,
+    Letter_from_Trace,
+    Melee_Charge,
+    Melee_Damage,
+    Melee_Damage_2,
+    Melee_Damage_3,
+    Melee_Speed,
+    Melee_Speed_2,
+    Melee_Speed_3,
+    Mist_Upgrade,
+    Nanite_Mist,
+    Nano_Lattice_2,
+    Nano_Points,
+    Nano_Points_2,
+    Nano_Points_3,
+    Notes_2053_02_27,
+    Plague_of_Thoughts,
+    Power_Core,
+    Power_Matrix,
+    Ranged_Damage,
+    Ranged_Damage_2,
+    Ranged_Damage_3,
+    Ranged_Speed,
+    Ranged_Speed_2,
+    Ranged_Speed_3,
+    Record_Losses,
+    Refill,
+    Remote_Drone,
+    Researchers_Missing,
+    Royal_Dagger,
+    Separation,
+    Shockwave,
+    Slingshot_Charge,
+    Slingshot_Hook,
+    Slingshot_Weapon,
+    Station_Power,
+    Storm_Bomb,
+    Suspension_Bridge,
+    Switch_36_11,
+    Switch_40_12,
+    Terminal_Breakthrough_1,
+    Terminal_Breakthrough_2,
+    The_Ideal_Kiengir,
+    Udusan,
+    Uhrum_Annuna_Corridor_Block,
+    Uhrum_Waterfall_Wall,
+    Uhrum_Waterfalls_Block,
+    Uhrum_West_Entrance_Gate,
+    Uhrum_West_Entrance_Lower_Wall,
+    Uhrum_West_Entrance_Upper_Wall,
+    Under_Siege,
+    Underwater_Movement,
+    Victory,
+    Wall_Climb,
+}
 impl fmt::Display for Item {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         match self {
@@ -17,11 +164,15 @@ impl fmt::Display for Item {
             Item::Amagi_Dragon_Eye_Passage => write!(f, "{}", "Amagi_Dragon_Eye_Passage"),
             Item::Amagi_Stronghold_Boulder_1 => write!(f, "{}", "Amagi_Stronghold_Boulder_1"),
             Item::Amagi_Stronghold_Boulder_2 => write!(f, "{}", "Amagi_Stronghold_Boulder_2"),
-            Item::Amagi_Stronghold_Boulder_And_Wall_2 => write!(f, "{}", "Amagi_Stronghold_Boulder_And_Wall_2"),
+            Item::Amagi_Stronghold_Boulder_And_Wall_2 => {
+                write!(f, "{}", "Amagi_Stronghold_Boulder_And_Wall_2")
+            }
             Item::Amagi_Stronghold_Left_Wall => write!(f, "{}", "Amagi_Stronghold_Left_Wall"),
             Item::Amagi_Stronghold_Wall_1 => write!(f, "{}", "Amagi_Stronghold_Wall_1"),
             Item::Amagi_Stronghold_Wall_2 => write!(f, "{}", "Amagi_Stronghold_Wall_2"),
-            Item::Amagi_Stronghold_Wall_And_Boulder_1 => write!(f, "{}", "Amagi_Stronghold_Wall_And_Boulder_1"),
+            Item::Amagi_Stronghold_Wall_And_Boulder_1 => {
+                write!(f, "{}", "Amagi_Stronghold_Wall_And_Boulder_1")
+            }
             Item::Amagi_West_Lake_Surface_Wall => write!(f, "{}", "Amagi_West_Lake_Surface_Wall"),
             Item::Amashilama => write!(f, "{}", "Amashilama"),
             Item::Annuna_Mirror_Match_Switch => write!(f, "{}", "Annuna_Mirror_Match_Switch"),
@@ -140,8 +291,12 @@ impl fmt::Display for Item {
             Item::Uhrum_Waterfall_Wall => write!(f, "{}", "Uhrum_Waterfall_Wall"),
             Item::Uhrum_Waterfalls_Block => write!(f, "{}", "Uhrum_Waterfalls_Block"),
             Item::Uhrum_West_Entrance_Gate => write!(f, "{}", "Uhrum_West_Entrance_Gate"),
-            Item::Uhrum_West_Entrance_Lower_Wall => write!(f, "{}", "Uhrum_West_Entrance_Lower_Wall"),
-            Item::Uhrum_West_Entrance_Upper_Wall => write!(f, "{}", "Uhrum_West_Entrance_Upper_Wall"),
+            Item::Uhrum_West_Entrance_Lower_Wall => {
+                write!(f, "{}", "Uhrum_West_Entrance_Lower_Wall")
+            }
+            Item::Uhrum_West_Entrance_Upper_Wall => {
+                write!(f, "{}", "Uhrum_West_Entrance_Upper_Wall")
+            }
             Item::Under_Siege => write!(f, "{}", "Under_Siege"),
             Item::Underwater_Movement => write!(f, "{}", "Underwater_Movement"),
             Item::Victory => write!(f, "{}", "Victory"),
@@ -293,7 +448,34 @@ impl std::str::FromStr for Item {
     }
 }
 
-
 pub fn unused_item(id: Item) -> bool {
-    matches!(id, Item::None | Item::Aansur | Item::Amagi_Stronghold_Left_Wall | Item::Carnelian_Ring | Item::Double_Axe | Item::Drone_Melee_Damage_3 | Item::Drone_Melee_Speed_3 | Item::Escape | Item::Health_Upgrade_5 | Item::Heretics_Granddaughter | Item::Infection_Speed_2 | Item::Journal_2049_10_29 | Item::Melee_Charge | Item::Melee_Damage_3 | Item::Melee_Speed_3 | Item::Nano_Lattice_2 | Item::Nano_Points_3 | Item::Notes_2053_02_27 | Item::Plague_of_Thoughts | Item::Ranged_Damage_3 | Item::Ranged_Speed_3 | Item::Refill | Item::Royal_Dagger | Item::Suspension_Bridge | Item::Udusan | Item::Victory)
+    matches!(
+        id,
+        Item::None
+            | Item::Aansur
+            | Item::Amagi_Stronghold_Left_Wall
+            | Item::Carnelian_Ring
+            | Item::Double_Axe
+            | Item::Drone_Melee_Damage_3
+            | Item::Drone_Melee_Speed_3
+            | Item::Escape
+            | Item::Health_Upgrade_5
+            | Item::Heretics_Granddaughter
+            | Item::Infection_Speed_2
+            | Item::Journal_2049_10_29
+            | Item::Melee_Charge
+            | Item::Melee_Damage_3
+            | Item::Melee_Speed_3
+            | Item::Nano_Lattice_2
+            | Item::Nano_Points_3
+            | Item::Notes_2053_02_27
+            | Item::Plague_of_Thoughts
+            | Item::Ranged_Damage_3
+            | Item::Ranged_Speed_3
+            | Item::Refill
+            | Item::Royal_Dagger
+            | Item::Suspension_Bridge
+            | Item::Udusan
+            | Item::Victory
+    )
 }

@@ -2,12 +2,15 @@
 
 #![allow(non_camel_case_types)]
 
+use serde::{Deserialize, Serialize};
 use std::fmt;
-use serde::{Serialize, Deserialize};
 
-#[derive(Debug, PartialEq, Eq, Copy, Clone, Default, Hash, Ord, PartialOrd, Serialize, Deserialize)]
+#[derive(
+    Debug, PartialEq, Eq, Copy, Clone, Default, Hash, Ord, PartialOrd, Serialize, Deserialize,
+)]
 pub enum Currency {
-    #[default] Free,
+    #[default]
+    Free,
     Energy(i16),
     Flasks(i8),
     Refills(i8),
@@ -35,12 +38,21 @@ impl std::str::FromStr for Currency {
         } else if let Some(t) = s.strip_suffix(")") {
             if let Some((price, val)) = t.split_once("(") {
                 match price {
-                    "Energy" => return Ok(Currency::Energy(
-                        i16::from_str(val).map_err(|e| format!("{}", e))?)),
-                    "Flasks" => return Ok(Currency::Flasks(
-                        i8::from_str(val).map_err(|e| format!("{}", e))?)),
-                    "Refills" => return Ok(Currency::Refills(
-                        i8::from_str(val).map_err(|e| format!("{}", e))?)),
+                    "Energy" => {
+                        return Ok(Currency::Energy(
+                            i16::from_str(val).map_err(|e| format!("{}", e))?,
+                        ))
+                    }
+                    "Flasks" => {
+                        return Ok(Currency::Flasks(
+                            i8::from_str(val).map_err(|e| format!("{}", e))?,
+                        ))
+                    }
+                    "Refills" => {
+                        return Ok(Currency::Refills(
+                            i8::from_str(val).map_err(|e| format!("{}", e))?,
+                        ))
+                    }
                     _ => (),
                 }
             }
