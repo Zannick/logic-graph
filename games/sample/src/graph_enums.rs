@@ -1398,7 +1398,6 @@ impl fmt::Display for Objective {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         match self {
             Objective::Gohma => write!(f, "{}", "Gohma"),
-
             Objective::Ganon => write!(f, "{}", "Ganon"),
             Objective::Triforce_Hunt => write!(f, "{}", "Triforce Hunt"),
         }

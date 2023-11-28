@@ -42,7 +42,6 @@ pub mod enums {
         fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
             match self {
                 Tod::Day => write!(f, "{}", "Day"),
-
                 Tod::Night => write!(f, "{}", "Night"),
             }
         }

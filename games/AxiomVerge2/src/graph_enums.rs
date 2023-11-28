@@ -12465,7 +12465,6 @@ impl fmt::Display for Objective {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         match self {
             Objective::Start => write!(f, "{}", "Start"),
-
             Objective::Progress => write!(f, "{}", "Progress%"),
         }
     }

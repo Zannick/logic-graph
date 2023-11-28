@@ -85,7 +85,6 @@ pub mod enums {
                 Realm::Main => write!(f, "{}", "Main"),
                 Realm::Breach => write!(f, "{}", "Breach"),
                 Realm::Interior => write!(f, "{}", "Interior"),
-
                 Realm::Menu => write!(f, "{}", "Menu"),
             }
         }
