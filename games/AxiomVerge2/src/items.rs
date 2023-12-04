@@ -33,6 +33,7 @@ pub enum Item {
     Amagi_Stronghold_Wall_And_Boulder_1,
     Amagi_West_Lake_Surface_Wall,
     Amashilama,
+    Annuna_East_Bridge_Gate,
     Annuna_Mirror_Match_Switch,
     Anuman,
     Apocalypse_Bomb,
@@ -88,6 +89,7 @@ pub enum Item {
     Health_Upgrade_5,
     Heretics_Granddaughter,
     Heretics_Tablet,
+    Hover,
     Ice_Axe,
     Infect,
     Infect_L1,
@@ -101,6 +103,7 @@ pub enum Item {
     Irikar_Gudam,
     Irikar_Royal_Storage_Wall,
     Journal_2049_10_29,
+    Lament_for_Fools,
     Ledge_Grab,
     Letter_from_Trace,
     Melee_Charge,
@@ -131,6 +134,7 @@ pub enum Item {
     Remote_Drone,
     Researchers_Missing,
     Royal_Dagger,
+    Royal_Ring,
     Separation,
     Shockwave,
     Slingshot_Charge,
@@ -174,6 +178,7 @@ impl fmt::Display for Item {
             }
             Item::Amagi_West_Lake_Surface_Wall => write!(f, "{}", "Amagi_West_Lake_Surface_Wall"),
             Item::Amashilama => write!(f, "{}", "Amashilama"),
+            Item::Annuna_East_Bridge_Gate => write!(f, "{}", "Annuna_East_Bridge_Gate"),
             Item::Annuna_Mirror_Match_Switch => write!(f, "{}", "Annuna_Mirror_Match_Switch"),
             Item::Anuman => write!(f, "{}", "Anuman"),
             Item::Apocalypse_Bomb => write!(f, "{}", "Apocalypse_Bomb"),
@@ -229,6 +234,7 @@ impl fmt::Display for Item {
             Item::Health_Upgrade_5 => write!(f, "{}", "Health_Upgrade_5"),
             Item::Heretics_Granddaughter => write!(f, "{}", "Heretics_Granddaughter"),
             Item::Heretics_Tablet => write!(f, "{}", "Heretics_Tablet"),
+            Item::Hover => write!(f, "{}", "Hover"),
             Item::Ice_Axe => write!(f, "{}", "Ice_Axe"),
             Item::Infect => write!(f, "{}", "Infect"),
             Item::Infect_L1 => write!(f, "{}", "Infect_L1"),
@@ -242,6 +248,7 @@ impl fmt::Display for Item {
             Item::Irikar_Gudam => write!(f, "{}", "Irikar_Gudam"),
             Item::Irikar_Royal_Storage_Wall => write!(f, "{}", "Irikar_Royal_Storage_Wall"),
             Item::Journal_2049_10_29 => write!(f, "{}", "Journal_2049_10_29"),
+            Item::Lament_for_Fools => write!(f, "{}", "Lament_for_Fools"),
             Item::Ledge_Grab => write!(f, "{}", "Ledge_Grab"),
             Item::Letter_from_Trace => write!(f, "{}", "Letter_from_Trace"),
             Item::Melee_Charge => write!(f, "{}", "Melee_Charge"),
@@ -272,6 +279,7 @@ impl fmt::Display for Item {
             Item::Remote_Drone => write!(f, "{}", "Remote_Drone"),
             Item::Researchers_Missing => write!(f, "{}", "Researchers_Missing"),
             Item::Royal_Dagger => write!(f, "{}", "Royal_Dagger"),
+            Item::Royal_Ring => write!(f, "{}", "Royal_Ring"),
             Item::Separation => write!(f, "{}", "Separation"),
             Item::Shockwave => write!(f, "{}", "Shockwave"),
             Item::Slingshot_Charge => write!(f, "{}", "Slingshot_Charge"),
@@ -319,6 +327,7 @@ impl std::str::FromStr for Item {
             "Amagi_Stronghold_Wall_And_Boulder_1" => Ok(Item::Amagi_Stronghold_Wall_And_Boulder_1),
             "Amagi_West_Lake_Surface_Wall" => Ok(Item::Amagi_West_Lake_Surface_Wall),
             "Amashilama" => Ok(Item::Amashilama),
+            "Annuna_East_Bridge_Gate" => Ok(Item::Annuna_East_Bridge_Gate),
             "Annuna_Mirror_Match_Switch" => Ok(Item::Annuna_Mirror_Match_Switch),
             "Anuman" => Ok(Item::Anuman),
             "Apocalypse_Bomb" => Ok(Item::Apocalypse_Bomb),
@@ -374,6 +383,7 @@ impl std::str::FromStr for Item {
             "Health_Upgrade_5" => Ok(Item::Health_Upgrade_5),
             "Heretics_Granddaughter" => Ok(Item::Heretics_Granddaughter),
             "Heretics_Tablet" => Ok(Item::Heretics_Tablet),
+            "Hover" => Ok(Item::Hover),
             "Ice_Axe" => Ok(Item::Ice_Axe),
             "Infect" => Ok(Item::Infect),
             "Infect_L1" => Ok(Item::Infect_L1),
@@ -387,6 +397,7 @@ impl std::str::FromStr for Item {
             "Irikar_Gudam" => Ok(Item::Irikar_Gudam),
             "Irikar_Royal_Storage_Wall" => Ok(Item::Irikar_Royal_Storage_Wall),
             "Journal_2049_10_29" => Ok(Item::Journal_2049_10_29),
+            "Lament_for_Fools" => Ok(Item::Lament_for_Fools),
             "Ledge_Grab" => Ok(Item::Ledge_Grab),
             "Letter_from_Trace" => Ok(Item::Letter_from_Trace),
             "Melee_Charge" => Ok(Item::Melee_Charge),
@@ -417,6 +428,7 @@ impl std::str::FromStr for Item {
             "Remote_Drone" => Ok(Item::Remote_Drone),
             "Researchers_Missing" => Ok(Item::Researchers_Missing),
             "Royal_Dagger" => Ok(Item::Royal_Dagger),
+            "Royal_Ring" => Ok(Item::Royal_Ring),
             "Separation" => Ok(Item::Separation),
             "Shockwave" => Ok(Item::Shockwave),
             "Slingshot_Charge" => Ok(Item::Slingshot_Charge),
@@ -460,6 +472,7 @@ pub fn unused_item(id: Item) -> bool {
             | Item::Heretics_Granddaughter
             | Item::Infection_Speed_2
             | Item::Journal_2049_10_29
+            | Item::Lament_for_Fools
             | Item::Melee_Charge
             | Item::Melee_Damage_3
             | Item::Melee_Speed_3
@@ -471,6 +484,7 @@ pub fn unused_item(id: Item) -> bool {
             | Item::Ranged_Speed_3
             | Item::Refill
             | Item::Royal_Dagger
+            | Item::Royal_Ring
             | Item::Suspension_Bridge
             | Item::Udusan
     )

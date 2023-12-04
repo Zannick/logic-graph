@@ -92,6 +92,59 @@ pub fn access_amagi_west_lake_surface_wall(ctx: &Context, world: &World) -> bool
     // Amagi_West_Lake_Surface_Wall
     ctx.has(Item::Amagi_West_Lake_Surface_Wall)
 }
+pub fn access_annuna__east_bridge__tower_east_ledge__enter_combo__req(
+    ctx: &Context,
+    world: &World,
+) -> bool {
+    // not ^_combo
+    !ctx.annuna__east_bridge__ctx__combo()
+}
+pub fn access_annuna__east_bridge__tower_east_ledge__ex__tower_secret_1__req(
+    ctx: &Context,
+    world: &World,
+) -> bool {
+    // ^_combo
+    ctx.annuna__east_bridge__ctx__combo()
+}
+pub fn access_annuna__east_bridge__tower_secret__enter_combo__req(
+    ctx: &Context,
+    world: &World,
+) -> bool {
+    // not ^_combo
+    !ctx.annuna__east_bridge__ctx__combo()
+}
+pub fn access_annuna__east_bridge__tower_secret__ex__tower_east_ledge_1__req(
+    ctx: &Context,
+    world: &World,
+) -> bool {
+    // ^_combo
+    ctx.annuna__east_bridge__ctx__combo()
+}
+pub fn access_annuna__east_bridge__tower_secret__ex__tower_west_ledge_1__req(
+    ctx: &Context,
+    world: &World,
+) -> bool {
+    // ^_combo
+    ctx.annuna__east_bridge__ctx__combo()
+}
+pub fn access_annuna__east_bridge__tower_west_ledge__enter_combo__req(
+    ctx: &Context,
+    world: &World,
+) -> bool {
+    // not ^_combo
+    !ctx.annuna__east_bridge__ctx__combo()
+}
+pub fn access_annuna__east_bridge__tower_west_ledge__ex__tower_secret_1__req(
+    ctx: &Context,
+    world: &World,
+) -> bool {
+    // ^_combo
+    ctx.annuna__east_bridge__ctx__combo()
+}
+pub fn access_annuna_east_bridge_gate(ctx: &Context, world: &World) -> bool {
+    // Annuna_East_Bridge_Gate
+    ctx.has(Item::Annuna_East_Bridge_Gate)
+}
 pub fn access_annuna_mirror_match_switch(ctx: &Context, world: &World) -> bool {
     // Annuna_Mirror_Match_Switch
     ctx.has(Item::Annuna_Mirror_Match_Switch)
@@ -179,6 +232,18 @@ pub fn access_charge(ctx: &Context, world: &World) -> bool {
 pub fn access_climb(ctx: &Context, world: &World) -> bool {
     // $climb
     helper__climb!(ctx, world)
+}
+pub fn access_climb_and_annuna_east_bridge_gate(ctx: &Context, world: &World) -> bool {
+    // $climb and Annuna_East_Bridge_Gate
+    (helper__climb!(ctx, world) && ctx.has(Item::Annuna_East_Bridge_Gate))
+}
+pub fn access_climb_and_can_deploy_and_hover_and_slingshot_hook(
+    ctx: &Context,
+    world: &World,
+) -> bool {
+    // $climb and $can_deploy and Hover and Slingshot_Hook
+    (((helper__climb!(ctx, world) && helper__can_deploy!(ctx, world)) && ctx.has(Item::Hover))
+        && ctx.has(Item::Slingshot_Hook))
 }
 pub fn access_climb_and_grab(ctx: &Context, world: &World) -> bool {
     // $climb and $grab
@@ -1666,6 +1731,24 @@ pub fn action_amagi__main_area__carving__key_combo__do(ctx: &mut Context, world:
     // ^_combo = true
     ctx.set_amagi__main_area__ctx__combo(true);
 }
+pub fn action_annuna__east_bridge__tower_east_ledge__enter_combo__do(
+    ctx: &mut Context,
+    world: &World,
+) {
+    // ^_combo = true
+    ctx.set_annuna__east_bridge__ctx__combo(true);
+}
+pub fn action_annuna__east_bridge__tower_secret__enter_combo__do(ctx: &mut Context, world: &World) {
+    // ^_combo = true
+    ctx.set_annuna__east_bridge__ctx__combo(true);
+}
+pub fn action_annuna__east_bridge__tower_west_ledge__enter_combo__do(
+    ctx: &mut Context,
+    world: &World,
+) {
+    // ^_combo = true
+    ctx.set_annuna__east_bridge__ctx__combo(true);
+}
 pub fn action_breach_portal_save_update(ctx: &mut Context, world: &World) {
     // $breach_portal_save_update
     helper__breach_portal_save_update!(ctx, world);
@@ -1693,6 +1776,13 @@ pub fn action_deploy_drone_and_move__annuna_gt_east_bridge_gt_center_corridor(
 ) {
     // $deploy_drone_and_move(`Annuna > East Bridge > Center Corridor`)
     helper__deploy_drone_and_move!(ctx, world, SpotId::Annuna__East_Bridge__Center_Corridor);
+}
+pub fn action_deploy_drone_and_move__annuna_gt_east_tower_gt_tower_base_east(
+    ctx: &mut Context,
+    world: &World,
+) {
+    // $deploy_drone_and_move(`Annuna > East Tower > Tower Base East`)
+    helper__deploy_drone_and_move!(ctx, world, SpotId::Annuna__East_Tower__Tower_Base_East);
 }
 pub fn action_deploy_drone_and_move__ebih_gt_drone_room_gt_tree(ctx: &mut Context, world: &World) {
     // $deploy_drone_and_move(`Ebih > Drone Room > Tree`)

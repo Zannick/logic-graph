@@ -142,15 +142,40 @@ subgraph Annuna
         Annuna__East_Bridge__Center_Gap_West(Center Gap West);
         Annuna__East_Bridge__Center_Gap_East(Center Gap East);
         Annuna__East_Bridge__Gate_Button(Gate Button);
-        Annuna__East_Bridge__Upper_Middle_Gate(Upper Middle Gate);
-        Annuna__East_Bridge__Upper_Middle_Core(Upper Middle Core);
-        Annuna__East_Bridge__Upper_Middle_Opening(Upper Middle Opening);
-        Annuna__East_Bridge__Upper_Middle_Inner_Corner_East(Upper Middle Inner Corner East);
-        Annuna__East_Bridge__Upper_Middle_Inner_Corner_West(Upper Middle Inner Corner West);
+        Annuna__East_Bridge__Below_Gate_Button(Below Gate Button);
+        Annuna__East_Bridge__East_Gap_West(East Gap West);
+        Annuna__East_Bridge__East_Gap_East(East Gap East);
+        Annuna__East_Bridge__East_25_Upper(East 25 Upper);
+        Annuna__East_Bridge__East_25_Lower(East 25 Lower);
+        Annuna__East_Bridge__Tower_Gate(Tower Gate);
+        Annuna__East_Bridge__Tower_Core(Tower Core);
+        Annuna__East_Bridge__Tower_Opening(Tower Opening);
+        Annuna__East_Bridge__Tower_Base_East(Tower Base East);
+        Annuna__East_Bridge__Tower_Base_West(Tower Base West);
         Annuna__East_Bridge__Gate_Button_Gap(Gate Button Gap);
+        Annuna__East_Bridge__Bridge_Top_East(Bridge Top East);
+        Annuna__East_Bridge__Tower_West_Ledge(Tower West Ledge);
+        Annuna__East_Bridge__Tower_East_Ledge(Tower East Ledge);
+        Annuna__East_Bridge__Tower_Secret(Tower Secret);
+        Annuna__East_Bridge__Tower_Peak(Tower Peak);
+        Annuna__East_Bridge__Tower_Mid_air_West(Tower Mid-air West);
+        Annuna__East_Bridge__Tower_Mid_air_East(Tower Mid-air East);
         Annuna__East_Bridge__Upper_West_Gap(Upper West Gap);
         Annuna__East_Bridge__Upper_West_Gap_East(Upper West Gap East);
         Annuna__East_Bridge__West_24(West 24);
+        Annuna__East_Bridge__Cavern_Foyer(Cavern Foyer);
+        Annuna__East_Bridge__Cavern_Right(Cavern Right);
+        Annuna__East_Bridge__Cavern_Cache(Cavern Cache);
+        Annuna__East_Bridge__Upper_East_Ledge(Upper East Ledge);
+        Annuna__East_Bridge__East_22(East 22);
+        Annuna__East_Bridge__East_23(East 23);
+        Annuna__East_Bridge__East_24(East 24);
+    end
+    subgraph Annuna__Sniper_Valley[Sniper Valley]
+        Annuna__Sniper_Valley__West_25_Upper(West 25 Upper);
+        Annuna__Sniper_Valley__West_25_Lower(West 25 Lower);
+        Annuna__Sniper_Valley__West_24(West 24);
+        Annuna__Sniper_Valley__West_23(West 23);
     end
 end
 subgraph Antarctica
@@ -1455,6 +1480,20 @@ Amagi__West_Lake__Stronghold_Top --> Amagi__West_Lake__Stronghold_Item
 Amagi__West_Lake__Surface_Wall_Left <--> Amagi__West_Lake__Surface_Wall_Right
 Amagi__West_Lake__West_15 <--> Ebih__Vertical_Interchange__East_15
 Amagi__West_Lake__West_Bank --> Amagi__West_Lake__West_Shore
+Annuna__East_Bridge__Below_Gate_Button <--> Annuna__East_Bridge__Center_Gap_East
+Annuna__East_Bridge__Bridge_Top_East --> Annuna__East_Bridge__East_24
+Annuna__East_Bridge__East_25_Lower --> Annuna__East_Bridge__Center_Corridor
+Annuna__East_Bridge__East_25_Lower --> Annuna__Sniper_Valley__West_25_Lower
+Annuna__East_Bridge__East_25_Upper --> Annuna__Sniper_Valley__West_25_Upper
+Annuna__East_Bridge__East_Gap_East --> Annuna__East_Bridge__Center_Corridor
+Annuna__East_Bridge__Gate_Button --> Annuna__East_Bridge__Gate_Button_Gap
+Annuna__East_Bridge__Tower_Base_East --> Annuna__East_Bridge__Tower_Opening
+Annuna__East_Bridge__Tower_Base_West --> Annuna__East_Bridge__Tower_Gate
+Annuna__East_Bridge__Tower_East_Ledge --> Annuna__East_Bridge__East_24
+Annuna__East_Bridge__Tower_East_Ledge <--> Annuna__East_Bridge__Tower_Secret
+Annuna__East_Bridge__Tower_Gate --> Annuna__East_Bridge__Upper_West_Gap_East
+Annuna__East_Bridge__Tower_Secret <--> Annuna__East_Bridge__Tower_West_Ledge
+Annuna__East_Bridge__Tower_West_Ledge --> Annuna__East_Bridge__West_24
 Annuna__East_Bridge__West_25_Lower --> Annuna__West_Bridge__East_25_Upper
 Annuna__East_Bridge__West_25_Upper --> Annuna__West_Bridge__East_25_Upper
 Annuna__East_Bridge__West_Staircase_Upper_West --> Annuna__East_Bridge__Upper_West_Gap

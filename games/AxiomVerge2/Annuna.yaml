@@ -315,29 +315,224 @@ areas:
         - name: Throw Drone into Tower
           req: $can_deploy and Slingshot_Hook and Drone_Hover
           do: $deploy_drone_and_move(`Annuna > East Bridge > Center Corridor`)
-          to: Upper Middle Core
+          to: Tower Core
           time: 2.5
-        # probably doable with anuman
+        # TODO: probably doable with anuman
     - name: Center Gap East
       coord: [38.55, 24.3]
-
+      local:
+        - to: Center Gap West
+        - to: Center Corridor
+      exits:
+        - to: Below Gate Button
+          req: Annuna_East_Bridge_Gate
+          movement: base
+      actions:
+        - name: Throw Drone into Tower
+          req: $can_deploy and Slingshot_Hook and Drone_Hover
+          do: $deploy_drone
+          to: Tower Core
+          time: 3
     - name: Gate Button
       coord: [38.9, 24.1]
+      local:
+        - to: Below Gate Button
+        - to: East Gap West
+      locations:
+        - name: Switch
+          item: Annuna_East_Bridge_Gate
+          canon: Annuna_East_Bridge_Gate
+          req: $can_damage
+          time: 0
+      exits:
+        - to: Gate Button Gap
+          req: $climb and $grab
+          movement: base
+          jumps: 2
+    - name: Below Gate Button
+      coord: [38.85, 24.3]
+      local:
+        - to: Gate Button
+          jumps: 1
+        - to: East Gap West
+      locations:
+        - name: Switch from Below
+          item: Annuna_East_Bridge_Gate
+          req: $boomerang
+          time: 0.25  # ?
+      exits:
+        - to: Center Gap East
+          req: Annuna_East_Bridge_Gate
+          movement: base
+    - name: East Gap West
+      coord: [39.55, 24.3]
+      local:
+        - to: Gate Button
+          jumps: 1
+        - to: Below Gate Button
+        - to: East 25 Lower
+        - to: East Gap East
+    - name: East Gap East
+      coord: [39.85, 24.3]
+      local:
+        - to: East 25 Upper
+        - to: East 25 Lower
+          thru: [39.8, 24.6]
+        - to: East Gap West
+      exits:
+        - to: Center Corridor
+          req: Annuna_East_Bridge_Gate
+          movement: base
+        
+    - name: East 25 Upper
+      coord: [39.95, 24.3]
+      local:
+        - to: East Gap East
+      exits:
+        - to: Sniper Valley > West 25 Upper
+          tags: [xshift]
+    - name: East 25 Lower
+      coord: [39.95, 24.8]
+      exits:
+        - to: Sniper Valley > West 25 Lower
+          tags: [xshift]
+        - to: Center Corridor
+          req: Annuna_East_Bridge_Gate
+          movement: base
     #endregion
 
     #region Tower
-    - name: Upper Middle Gate
+    - name: Tower Gate
       coord: [38.3, 23.4]
-    - name: Upper Middle Core
+      local:
+        - to: Tower Core
+        - to: Center Gap East
+      locations:
+        - name: Tablet
+          item: Lament_for_Fools
+          tags: [standing]
+      exits:
+        - to: Upper West Gap East
+          req: Annuna_East_Bridge_Gate
+          movement: base
+        # TODO: jump to Tower top with Anuman+hover?
+    - name: Tower Core
       coord: [38.5, 23.5]
-    - name: Upper Middle Opening
+      local:
+        - to: Center Corridor
+        - to: Tower Gate
+          jumps: 1
+        - to: Tower Opening
+        # We could climb and throw drone to the east instead...
+    - name: Tower Opening
       coord: [38.65, 23.5]
-    - name: Upper Middle Inner Corner East
+      local:
+        - to: Tower Core
+        - to: Gate Button Gap
+      actions:
+        - name: Climb and Throw Drone
+          req: $climb and $can_deploy and Hover and Slingshot_Hook
+          do: $deploy_drone_and_move(`Annuna > East Tower > Tower Base East`)
+          to: Tower East Ledge
+          time: 4
+    - name: Tower Base East
       coord: [38.7, 23.8]
-    - name: Upper Middle Inner Corner West
+      local:
+        - to: Gate Button Gap
+      exits:
+        - to: Tower Opening
+          req: $grab or $hook
+          movement: base
+          jumps: 2
+    - name: Tower Base West
       coord: [38.2, 23.8]
+      local:
+        - to: Upper West Gap East
+      exits:
+        - to: Tower Gate
+          req: $climb and Annuna_East_Bridge_Gate
+          movement: base
+          jumps: 2
     - name: Gate Button Gap
       coord: [38.9, 23.8]
+      local:
+        - to: Gate Button
+        - to: Tower Base East
+        - to: Bridge Top East
+    - name: Bridge Top East
+      coord: [39.6, 23.8]
+      local:
+        - to: Gate Button Gap
+      exits:
+        - to: East 24
+          req: $grab
+          movement: base
+          jumps: 2
+        - to: East 24
+          req: $hook
+          movement: base
+          jumps: 1
+
+    - name: Tower West Ledge
+      coord: [38.25, 22.2]
+      local:
+        - to: Upper West Gap East
+        - to: Upper West Gap
+      exits:
+        - to: West 24
+          req: $hover
+          movement: base
+        - to: Tower Secret
+          req: ^_combo
+          movement: base
+          jumps: 1
+      actions:
+        - name: Enter Combo
+          req: not ^_combo
+          do: ^_combo = true
+          time: 2  # ?
+    - name: Tower East Ledge
+      coord: [38.65, 22.2]
+      local:
+        - to: Gate Button Gap
+        - to: Bridge Top East
+      exits:
+        - to: East 24
+          req: $hover
+          movement: base
+        - to: Tower Secret
+          req: ^_combo
+          movement: base
+          jumps: 1
+      actions:
+        - name: Enter Combo
+          req: not ^_combo
+          do: ^_combo = true
+          time: 2  # ?
+    - name: Tower Secret
+      coord: [38.45, 22.15]
+      locations:
+        - name: Item
+          item: Royal_Ring
+          tags: [standing]
+      exits:
+        - to: Tower West Ledge
+          req: ^_combo
+          movement: base
+        - to: Tower East Ledge
+          req: ^_combo
+          movement: base
+      actions:
+        - name: Enter Combo
+          req: not ^_combo
+          do: ^_combo = true
+          time: 2  # ?
+    - name: Tower Peak
+      coord: [38.45, 21.7]
+    - name: Tower Mid-air West
+      coord: [38.3, 21.8]
+    - name: Tower Mid-air East
+      coord: [38.6, 21.8]
     #endregion
 
     #region Upper West
@@ -347,4 +542,39 @@ areas:
       coord: [37.5, 23.8]
     - name: West 24
       coord: [37.05, 23.55]
+
+    - name: Cavern Foyer
+      coord: [37.45, 21.4]
+    - name: Cavern Right
+      coord: [37.85, 21.5]
+    - name: Cavern Cache
+      coord: [37.75, 21.3]
+    #endregion
+
+    #region Upper East
+    - name: Upper East Ledge
+      coord: [39.7, 21.85]
+    - name: East 22
+      coord: [39.9, 21.75]
+    - name: East 23
+      coord: [39.95, 22.35]
+    - name: East 24
+      coord: [39.95, 23.55]
+    #endregion
+
+- name: Sniper Valley
+  on_entry: $reset_old_area(^newpos)
+  spots:
+    #region Lower
+    - name: West 25 Upper
+      coord: [40.05, 24.3]
+    - name: West 25 Lower
+      coord: [40.05, 24.8]
+    #endregion
+
+    #region Upper
+    - name: West 24
+      coord: [40.05, 23.55]
+    - name: West 23
+      coord: [40.05, 22.35]
     #endregion

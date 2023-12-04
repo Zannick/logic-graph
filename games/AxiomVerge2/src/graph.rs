@@ -147,15 +147,38 @@ pub fn get_area(spot: SpotId) -> AreaId {
         | SpotId::Annuna__East_Bridge__Center_Gap_West
         | SpotId::Annuna__East_Bridge__Center_Gap_East
         | SpotId::Annuna__East_Bridge__Gate_Button
-        | SpotId::Annuna__East_Bridge__Upper_Middle_Gate
-        | SpotId::Annuna__East_Bridge__Upper_Middle_Core
-        | SpotId::Annuna__East_Bridge__Upper_Middle_Opening
-        | SpotId::Annuna__East_Bridge__Upper_Middle_Inner_Corner_East
-        | SpotId::Annuna__East_Bridge__Upper_Middle_Inner_Corner_West
+        | SpotId::Annuna__East_Bridge__Below_Gate_Button
+        | SpotId::Annuna__East_Bridge__East_Gap_West
+        | SpotId::Annuna__East_Bridge__East_Gap_East
+        | SpotId::Annuna__East_Bridge__East_25_Upper
+        | SpotId::Annuna__East_Bridge__East_25_Lower
+        | SpotId::Annuna__East_Bridge__Tower_Gate
+        | SpotId::Annuna__East_Bridge__Tower_Core
+        | SpotId::Annuna__East_Bridge__Tower_Opening
+        | SpotId::Annuna__East_Bridge__Tower_Base_East
+        | SpotId::Annuna__East_Bridge__Tower_Base_West
         | SpotId::Annuna__East_Bridge__Gate_Button_Gap
+        | SpotId::Annuna__East_Bridge__Bridge_Top_East
+        | SpotId::Annuna__East_Bridge__Tower_West_Ledge
+        | SpotId::Annuna__East_Bridge__Tower_East_Ledge
+        | SpotId::Annuna__East_Bridge__Tower_Secret
+        | SpotId::Annuna__East_Bridge__Tower_Peak
+        | SpotId::Annuna__East_Bridge__Tower_Mid_air_West
+        | SpotId::Annuna__East_Bridge__Tower_Mid_air_East
         | SpotId::Annuna__East_Bridge__Upper_West_Gap
         | SpotId::Annuna__East_Bridge__Upper_West_Gap_East
-        | SpotId::Annuna__East_Bridge__West_24 => AreaId::Annuna__East_Bridge,
+        | SpotId::Annuna__East_Bridge__West_24
+        | SpotId::Annuna__East_Bridge__Cavern_Foyer
+        | SpotId::Annuna__East_Bridge__Cavern_Right
+        | SpotId::Annuna__East_Bridge__Cavern_Cache
+        | SpotId::Annuna__East_Bridge__Upper_East_Ledge
+        | SpotId::Annuna__East_Bridge__East_22
+        | SpotId::Annuna__East_Bridge__East_23
+        | SpotId::Annuna__East_Bridge__East_24 => AreaId::Annuna__East_Bridge,
+        SpotId::Annuna__Sniper_Valley__West_25_Upper
+        | SpotId::Annuna__Sniper_Valley__West_25_Lower
+        | SpotId::Annuna__Sniper_Valley__West_24
+        | SpotId::Annuna__Sniper_Valley__West_23 => AreaId::Annuna__Sniper_Valley,
         SpotId::Antarctica__West__Helipad
         | SpotId::Antarctica__West__Shed_Entry
         | SpotId::Antarctica__West__Boxes => AreaId::Antarctica__West,
@@ -1319,15 +1342,38 @@ pub fn get_region(spot: SpotId) -> RegionId {
         | SpotId::Annuna__East_Bridge__Center_Gap_West
         | SpotId::Annuna__East_Bridge__Center_Gap_East
         | SpotId::Annuna__East_Bridge__Gate_Button
-        | SpotId::Annuna__East_Bridge__Upper_Middle_Gate
-        | SpotId::Annuna__East_Bridge__Upper_Middle_Core
-        | SpotId::Annuna__East_Bridge__Upper_Middle_Opening
-        | SpotId::Annuna__East_Bridge__Upper_Middle_Inner_Corner_East
-        | SpotId::Annuna__East_Bridge__Upper_Middle_Inner_Corner_West
+        | SpotId::Annuna__East_Bridge__Below_Gate_Button
+        | SpotId::Annuna__East_Bridge__East_Gap_West
+        | SpotId::Annuna__East_Bridge__East_Gap_East
+        | SpotId::Annuna__East_Bridge__East_25_Upper
+        | SpotId::Annuna__East_Bridge__East_25_Lower
+        | SpotId::Annuna__East_Bridge__Tower_Gate
+        | SpotId::Annuna__East_Bridge__Tower_Core
+        | SpotId::Annuna__East_Bridge__Tower_Opening
+        | SpotId::Annuna__East_Bridge__Tower_Base_East
+        | SpotId::Annuna__East_Bridge__Tower_Base_West
         | SpotId::Annuna__East_Bridge__Gate_Button_Gap
+        | SpotId::Annuna__East_Bridge__Bridge_Top_East
+        | SpotId::Annuna__East_Bridge__Tower_West_Ledge
+        | SpotId::Annuna__East_Bridge__Tower_East_Ledge
+        | SpotId::Annuna__East_Bridge__Tower_Secret
+        | SpotId::Annuna__East_Bridge__Tower_Peak
+        | SpotId::Annuna__East_Bridge__Tower_Mid_air_West
+        | SpotId::Annuna__East_Bridge__Tower_Mid_air_East
         | SpotId::Annuna__East_Bridge__Upper_West_Gap
         | SpotId::Annuna__East_Bridge__Upper_West_Gap_East
-        | SpotId::Annuna__East_Bridge__West_24 => RegionId::Annuna,
+        | SpotId::Annuna__East_Bridge__West_24
+        | SpotId::Annuna__East_Bridge__Cavern_Foyer
+        | SpotId::Annuna__East_Bridge__Cavern_Right
+        | SpotId::Annuna__East_Bridge__Cavern_Cache
+        | SpotId::Annuna__East_Bridge__Upper_East_Ledge
+        | SpotId::Annuna__East_Bridge__East_22
+        | SpotId::Annuna__East_Bridge__East_23
+        | SpotId::Annuna__East_Bridge__East_24 => RegionId::Annuna,
+        SpotId::Annuna__Sniper_Valley__West_25_Upper
+        | SpotId::Annuna__Sniper_Valley__West_25_Lower
+        | SpotId::Annuna__Sniper_Valley__West_24
+        | SpotId::Annuna__Sniper_Valley__West_23 => RegionId::Annuna,
         SpotId::Antarctica__West__Helipad
         | SpotId::Antarctica__West__Shed_Entry
         | SpotId::Antarctica__West__Boxes => RegionId::Antarctica,
@@ -2411,6 +2457,14 @@ impl world::Accessible for Location {
             LocationId::Amagi__West_Lake__Surface_Wall_Right__Break_Wall => {
                 rules::access_shockwave(&ctx, world)
             }
+            LocationId::Annuna__East_Bridge__Below_Gate_Button__Switch_from_Below => {
+                rules::access_boomerang(&ctx, world)
+            }
+            LocationId::Annuna__East_Bridge__Gate_Button__Switch => {
+                rules::access_can_damage(&ctx, world)
+            }
+            LocationId::Annuna__East_Bridge__Tower_Gate__Tablet => true,
+            LocationId::Annuna__East_Bridge__Tower_Secret__Item => true,
             LocationId::Annuna__Mirror_Match__Below_Switch__Hit_Switch => {
                 rules::access_can_damage(&ctx, world)
             }
@@ -2890,6 +2944,24 @@ impl world::Accessible for Exit {
             ExitId::Amagi__West_Lake__Surface_Wall_Right__ex__Surface_Wall_Left_1 => rules::access_amagi_west_lake_surface_wall(&ctx, world),
             ExitId::Amagi__West_Lake__West_15__ex__Ebih__Vertical_Interchange__East_15_1 => true,
             ExitId::Amagi__West_Lake__West_Bank__ex__West_Shore_1 => rules::access_grab_or_climb(&ctx, world),
+            ExitId::Annuna__East_Bridge__Below_Gate_Button__ex__Center_Gap_East_1 => rules::access_annuna_east_bridge_gate(&ctx, world),
+            ExitId::Annuna__East_Bridge__Bridge_Top_East__ex__East_24_1 => rules::access_grab(&ctx, world),
+            ExitId::Annuna__East_Bridge__Bridge_Top_East__ex__East_24_2 => rules::access_hook(&ctx, world),
+            ExitId::Annuna__East_Bridge__Center_Gap_East__ex__Below_Gate_Button_1 => rules::access_annuna_east_bridge_gate(&ctx, world),
+            ExitId::Annuna__East_Bridge__East_25_Lower__ex__Center_Corridor_1 => rules::access_annuna_east_bridge_gate(&ctx, world),
+            ExitId::Annuna__East_Bridge__East_25_Lower__ex__Sniper_Valley__West_25_Lower_1 => true,
+            ExitId::Annuna__East_Bridge__East_25_Upper__ex__Sniper_Valley__West_25_Upper_1 => true,
+            ExitId::Annuna__East_Bridge__East_Gap_East__ex__Center_Corridor_1 => rules::access_annuna_east_bridge_gate(&ctx, world),
+            ExitId::Annuna__East_Bridge__Gate_Button__ex__Gate_Button_Gap_1 => rules::access_climb_and_grab(&ctx, world),
+            ExitId::Annuna__East_Bridge__Tower_Base_East__ex__Tower_Opening_1 => rules::access_grab_or_hook(&ctx, world),
+            ExitId::Annuna__East_Bridge__Tower_Base_West__ex__Tower_Gate_1 => rules::access_climb_and_annuna_east_bridge_gate(&ctx, world),
+            ExitId::Annuna__East_Bridge__Tower_East_Ledge__ex__East_24_1 => rules::access_hover(&ctx, world),
+            ExitId::Annuna__East_Bridge__Tower_East_Ledge__ex__Tower_Secret_1 => rules::access_annuna__east_bridge__tower_east_ledge__ex__tower_secret_1__req(&ctx, world),
+            ExitId::Annuna__East_Bridge__Tower_Gate__ex__Upper_West_Gap_East_1 => rules::access_annuna_east_bridge_gate(&ctx, world),
+            ExitId::Annuna__East_Bridge__Tower_Secret__ex__Tower_East_Ledge_1 => rules::access_annuna__east_bridge__tower_secret__ex__tower_east_ledge_1__req(&ctx, world),
+            ExitId::Annuna__East_Bridge__Tower_Secret__ex__Tower_West_Ledge_1 => rules::access_annuna__east_bridge__tower_secret__ex__tower_west_ledge_1__req(&ctx, world),
+            ExitId::Annuna__East_Bridge__Tower_West_Ledge__ex__Tower_Secret_1 => rules::access_annuna__east_bridge__tower_west_ledge__ex__tower_secret_1__req(&ctx, world),
+            ExitId::Annuna__East_Bridge__Tower_West_Ledge__ex__West_24_1 => rules::access_hover(&ctx, world),
             ExitId::Annuna__East_Bridge__West_25_Lower__ex__West_Bridge__East_25_Upper_1 => true,
             ExitId::Annuna__East_Bridge__West_25_Upper__ex__West_Bridge__East_25_Upper_1 => true,
             ExitId::Annuna__East_Bridge__West_Staircase_Upper_West__ex__Upper_West_Gap_1 => rules::access_hook(&ctx, world),
@@ -3958,6 +4030,8 @@ impl world::Exit for Exit {
             ExitId::Amagi__West_Lake__East_18__ex__Main_Area__West_18_1 => true,
             ExitId::Amagi__West_Lake__East_19__ex__Main_Area__West_19_1 => true,
             ExitId::Amagi__West_Lake__West_15__ex__Ebih__Vertical_Interchange__East_15_1 => true,
+            ExitId::Annuna__East_Bridge__East_25_Lower__ex__Sniper_Valley__West_25_Lower_1 => true,
+            ExitId::Annuna__East_Bridge__East_25_Upper__ex__Sniper_Valley__West_25_Upper_1 => true,
             ExitId::Annuna__East_Bridge__West_25_Lower__ex__West_Bridge__East_25_Upper_1 => true,
             ExitId::Annuna__East_Bridge__West_25_Upper__ex__West_Bridge__East_25_Upper_1 => true,
             ExitId::Annuna__Mirror_Match__East_25_Lower__ex__West_Bridge__West_25_Lower_1 => true,
@@ -4295,8 +4369,27 @@ impl world::Accessible for Action {
                     rules::access_amagi__main_area__carving__key_combo__req(&ctx, world)
                 }
                 ActionId::Amagi__Main_Area__Save_Point__Save => true,
+                ActionId::Annuna__East_Bridge__Center_Gap_East__Throw_Drone_into_Tower => {
+                    rules::access_can_deploy_and_slingshot_hook_and_drone_hover(&ctx, world)
+                }
                 ActionId::Annuna__East_Bridge__Center_Gap_West__Throw_Drone_into_Tower => {
                     rules::access_can_deploy_and_slingshot_hook_and_drone_hover(&ctx, world)
+                }
+                ActionId::Annuna__East_Bridge__Tower_East_Ledge__Enter_Combo => {
+                    rules::access_annuna__east_bridge__tower_east_ledge__enter_combo__req(
+                        &ctx, world,
+                    )
+                }
+                ActionId::Annuna__East_Bridge__Tower_Opening__Climb_and_Throw_Drone => {
+                    rules::access_climb_and_can_deploy_and_hover_and_slingshot_hook(&ctx, world)
+                }
+                ActionId::Annuna__East_Bridge__Tower_Secret__Enter_Combo => {
+                    rules::access_annuna__east_bridge__tower_secret__enter_combo__req(&ctx, world)
+                }
+                ActionId::Annuna__East_Bridge__Tower_West_Ledge__Enter_Combo => {
+                    rules::access_annuna__east_bridge__tower_west_ledge__enter_combo__req(
+                        &ctx, world,
+                    )
                 }
                 ActionId::Annuna__Mirror_Match__Save_Point__Save => {
                     rules::access_not_separation_or_defeat_indra(&ctx, world)
@@ -4577,6 +4670,11 @@ impl world::Action for Action {
             ActionId::Amagi__Main_Area__Save_Point__Save => rules::action_save(ctx, world),
             ActionId::Annuna__Mirror_Match__Save_Point__Save => rules::action_save(ctx, world),
             ActionId::Annuna__East_Bridge__Center_Gap_West__Throw_Drone_into_Tower => rules::action_deploy_drone_and_move__annuna_gt_east_bridge_gt_center_corridor(ctx, world),
+            ActionId::Annuna__East_Bridge__Center_Gap_East__Throw_Drone_into_Tower => rules::action_deploy_drone(ctx, world),
+            ActionId::Annuna__East_Bridge__Tower_Opening__Climb_and_Throw_Drone => rules::action_deploy_drone_and_move__annuna_gt_east_tower_gt_tower_base_east(ctx, world),
+            ActionId::Annuna__East_Bridge__Tower_West_Ledge__Enter_Combo => rules::action_annuna__east_bridge__tower_west_ledge__enter_combo__do(ctx, world),
+            ActionId::Annuna__East_Bridge__Tower_East_Ledge__Enter_Combo => rules::action_annuna__east_bridge__tower_east_ledge__enter_combo__do(ctx, world),
+            ActionId::Annuna__East_Bridge__Tower_Secret__Enter_Combo => rules::action_annuna__east_bridge__tower_secret__enter_combo__do(ctx, world),
             ActionId::Ebih__Base_Camp__Save_Point__Save => rules::action_save(ctx, world),
             ActionId::Ebih__Base_Camp__Left_Platform__Move_Left_Platform => rules::action_ebih__base_camp__left_platform__move_left_platform__do(ctx, world),
             ActionId::Ebih__Base_Camp__Left_Platform_Moved__Reset_Left_Platform => rules::action_ebih__base_camp__left_platform_moved__reset_left_platform__do(ctx, world),
@@ -4678,7 +4776,13 @@ impl world::Action for Action {
         match self.id {
             ActionId::Global__Recall_Drone => ctx.indra(),
             ActionId::Annuna__East_Bridge__Center_Gap_West__Throw_Drone_into_Tower => {
-                SpotId::Annuna__East_Bridge__Upper_Middle_Core
+                SpotId::Annuna__East_Bridge__Tower_Core
+            }
+            ActionId::Annuna__East_Bridge__Center_Gap_East__Throw_Drone_into_Tower => {
+                SpotId::Annuna__East_Bridge__Tower_Core
+            }
+            ActionId::Annuna__East_Bridge__Tower_Opening__Climb_and_Throw_Drone => {
+                SpotId::Annuna__East_Bridge__Tower_East_Ledge
             }
             ActionId::Ebih__Base_Camp__Left_Platform__Move_Left_Platform => {
                 SpotId::Ebih__Base_Camp__Left_Platform_Moved
@@ -5093,7 +5197,7 @@ pub struct Spot {
     pub actions: Range<usize>,
 }
 
-static RAW_SPOTS: [SpotId; 1148] = [
+static RAW_SPOTS: [SpotId; 1171] = [
     SpotId::None,
     SpotId::Amagi__Grid_31_19__East,
     SpotId::Amagi__Grid_31_19__West,
@@ -5186,17 +5290,36 @@ static RAW_SPOTS: [SpotId; 1148] = [
     SpotId::Amagi__West_Lake__West_Cliff,
     SpotId::Amagi__West_Lake__West_Platform,
     SpotId::Amagi__West_Lake__West_Shore,
+    SpotId::Annuna__East_Bridge__Below_Gate_Button,
+    SpotId::Annuna__East_Bridge__Bridge_Top_East,
+    SpotId::Annuna__East_Bridge__Cavern_Cache,
+    SpotId::Annuna__East_Bridge__Cavern_Foyer,
+    SpotId::Annuna__East_Bridge__Cavern_Right,
     SpotId::Annuna__East_Bridge__Center_Corridor,
     SpotId::Annuna__East_Bridge__Center_Drop_off,
     SpotId::Annuna__East_Bridge__Center_Gap_East,
     SpotId::Annuna__East_Bridge__Center_Gap_West,
+    SpotId::Annuna__East_Bridge__East_22,
+    SpotId::Annuna__East_Bridge__East_23,
+    SpotId::Annuna__East_Bridge__East_24,
+    SpotId::Annuna__East_Bridge__East_25_Lower,
+    SpotId::Annuna__East_Bridge__East_25_Upper,
+    SpotId::Annuna__East_Bridge__East_Gap_East,
+    SpotId::Annuna__East_Bridge__East_Gap_West,
     SpotId::Annuna__East_Bridge__Gate_Button,
     SpotId::Annuna__East_Bridge__Gate_Button_Gap,
-    SpotId::Annuna__East_Bridge__Upper_Middle_Core,
-    SpotId::Annuna__East_Bridge__Upper_Middle_Gate,
-    SpotId::Annuna__East_Bridge__Upper_Middle_Inner_Corner_East,
-    SpotId::Annuna__East_Bridge__Upper_Middle_Inner_Corner_West,
-    SpotId::Annuna__East_Bridge__Upper_Middle_Opening,
+    SpotId::Annuna__East_Bridge__Tower_Base_East,
+    SpotId::Annuna__East_Bridge__Tower_Base_West,
+    SpotId::Annuna__East_Bridge__Tower_Core,
+    SpotId::Annuna__East_Bridge__Tower_East_Ledge,
+    SpotId::Annuna__East_Bridge__Tower_Gate,
+    SpotId::Annuna__East_Bridge__Tower_Mid_air_East,
+    SpotId::Annuna__East_Bridge__Tower_Mid_air_West,
+    SpotId::Annuna__East_Bridge__Tower_Opening,
+    SpotId::Annuna__East_Bridge__Tower_Peak,
+    SpotId::Annuna__East_Bridge__Tower_Secret,
+    SpotId::Annuna__East_Bridge__Tower_West_Ledge,
+    SpotId::Annuna__East_Bridge__Upper_East_Ledge,
     SpotId::Annuna__East_Bridge__Upper_West_Gap,
     SpotId::Annuna__East_Bridge__Upper_West_Gap_East,
     SpotId::Annuna__East_Bridge__West_24,
@@ -5220,6 +5343,10 @@ static RAW_SPOTS: [SpotId; 1148] = [
     SpotId::Annuna__Mirror_Match__Waving_Distance,
     SpotId::Annuna__Mirror_Match__West_25,
     SpotId::Annuna__Mirror_Match__West_Gap,
+    SpotId::Annuna__Sniper_Valley__West_23,
+    SpotId::Annuna__Sniper_Valley__West_24,
+    SpotId::Annuna__Sniper_Valley__West_25_Lower,
+    SpotId::Annuna__Sniper_Valley__West_25_Upper,
     SpotId::Annuna__West_Bridge__East_24,
     SpotId::Annuna__West_Bridge__East_25_Lower,
     SpotId::Annuna__West_Bridge__East_25_Upper,
@@ -6264,12 +6391,16 @@ lazy_static! {
             end: SpotId::Amagi__West_Lake__West_Shore.into_usize() + 1,
         },
         AreaId::Annuna__East_Bridge => Range {
-            start: SpotId::Annuna__East_Bridge__Center_Corridor.into_usize(),
+            start: SpotId::Annuna__East_Bridge__Below_Gate_Button.into_usize(),
             end: SpotId::Annuna__East_Bridge__West_Under_Gap.into_usize() + 1,
         },
         AreaId::Annuna__Mirror_Match => Range {
             start: SpotId::Annuna__Mirror_Match__Below_Switch.into_usize(),
             end: SpotId::Annuna__Mirror_Match__West_Gap.into_usize() + 1,
+        },
+        AreaId::Annuna__Sniper_Valley => Range {
+            start: SpotId::Annuna__Sniper_Valley__West_23.into_usize(),
+            end: SpotId::Annuna__Sniper_Valley__West_25_Upper.into_usize() + 1,
         },
         AreaId::Annuna__West_Bridge => Range {
             start: SpotId::Annuna__West_Bridge__East_24.into_usize(),
@@ -6784,7 +6915,7 @@ impl world::World for World {
     type Exit = Exit;
     type Action = Action;
     type Warp = Warp;
-    const NUM_LOCATIONS: u32 = 208;
+    const NUM_LOCATIONS: u32 = 212;
 
     fn objective_name(&self) -> String {
         format!("{}", self.objective)
@@ -6854,6 +6985,9 @@ impl world::World for World {
                 LocationId::Annuna__Mirror_Match__East_26_Lower__Remote_Flask,
                 LocationId::Annuna__Mirror_Match__East_26_Upper__Remote_Flask,
             ],
+            CanonId::Annuna_East_Bridge_Gate => {
+                vec![LocationId::Annuna__East_Bridge__Gate_Button__Switch]
+            }
             CanonId::Notes_2053_02_27 => {
                 vec![LocationId::Antarctica__Building_2__Behind_Boxes__Note]
             }
@@ -7073,6 +7207,12 @@ impl world::World for World {
                 LocationId::Irikar__Boss_Room__Bulls_Feet__Boss_Reward,
             ],
             Item::Nano_Lattice_2 => vec![LocationId::Annuna__West_Bridge__Plinth__Item],
+            Item::Annuna_East_Bridge_Gate => vec![
+                LocationId::Annuna__East_Bridge__Gate_Button__Switch,
+                LocationId::Annuna__East_Bridge__Below_Gate_Button__Switch_from_Below,
+            ],
+            Item::Lament_for_Fools => vec![LocationId::Annuna__East_Bridge__Tower_Gate__Tablet],
+            Item::Royal_Ring => vec![LocationId::Annuna__East_Bridge__Tower_Secret__Item],
             Item::Ice_Axe => vec![LocationId::Antarctica__Shed__Interior__Shelf],
             Item::Notes_2053_02_27 => vec![LocationId::Antarctica__Building_2__Behind_Boxes__Note],
             Item::Station_Power => vec![LocationId::Antarctica__Power_Room__Switch__Flip],
@@ -7427,6 +7567,18 @@ impl world::World for World {
                 SpotId::Annuna__Mirror_Match__East_26_Upper
             }
             LocationId::Annuna__West_Bridge__Plinth__Item => SpotId::Annuna__West_Bridge__Plinth,
+            LocationId::Annuna__East_Bridge__Gate_Button__Switch => {
+                SpotId::Annuna__East_Bridge__Gate_Button
+            }
+            LocationId::Annuna__East_Bridge__Below_Gate_Button__Switch_from_Below => {
+                SpotId::Annuna__East_Bridge__Below_Gate_Button
+            }
+            LocationId::Annuna__East_Bridge__Tower_Gate__Tablet => {
+                SpotId::Annuna__East_Bridge__Tower_Gate
+            }
+            LocationId::Annuna__East_Bridge__Tower_Secret__Item => {
+                SpotId::Annuna__East_Bridge__Tower_Secret
+            }
             LocationId::Antarctica__Shed__Interior__Shelf => SpotId::Antarctica__Shed__Interior,
             LocationId::Antarctica__Building_2__Behind_Boxes__Note => {
                 SpotId::Antarctica__Building_2__Behind_Boxes
@@ -7819,6 +7971,21 @@ impl world::World for World {
             ActionId::Annuna__East_Bridge__Center_Gap_West__Throw_Drone_into_Tower => {
                 SpotId::Annuna__East_Bridge__Center_Gap_West
             }
+            ActionId::Annuna__East_Bridge__Center_Gap_East__Throw_Drone_into_Tower => {
+                SpotId::Annuna__East_Bridge__Center_Gap_East
+            }
+            ActionId::Annuna__East_Bridge__Tower_Opening__Climb_and_Throw_Drone => {
+                SpotId::Annuna__East_Bridge__Tower_Opening
+            }
+            ActionId::Annuna__East_Bridge__Tower_West_Ledge__Enter_Combo => {
+                SpotId::Annuna__East_Bridge__Tower_West_Ledge
+            }
+            ActionId::Annuna__East_Bridge__Tower_East_Ledge__Enter_Combo => {
+                SpotId::Annuna__East_Bridge__Tower_East_Ledge
+            }
+            ActionId::Annuna__East_Bridge__Tower_Secret__Enter_Combo => {
+                SpotId::Annuna__East_Bridge__Tower_Secret
+            }
             ActionId::Ebih__Base_Camp__Save_Point__Save => SpotId::Ebih__Base_Camp__Save_Point,
             ActionId::Ebih__Base_Camp__Left_Platform__Move_Left_Platform => {
                 SpotId::Ebih__Base_Camp__Left_Platform
@@ -8074,6 +8241,19 @@ impl world::World for World {
             ExitId::Annuna__East_Bridge__West_25_Upper__ex__West_Bridge__East_25_Upper_1 => SpotId::Annuna__East_Bridge__West_25_Upper,
             ExitId::Annuna__East_Bridge__West_Under_Gap__ex__Upper_West_Gap_1 | ExitId:: Annuna__East_Bridge__West_Under_Gap__ex__Upper_West_Gap_East_1 => SpotId::Annuna__East_Bridge__West_Under_Gap,
             ExitId::Annuna__East_Bridge__West_Staircase_Upper_West__ex__Upper_West_Gap_1 | ExitId:: Annuna__East_Bridge__West_Staircase_Upper_West__ex__Upper_West_Gap_East_1 => SpotId::Annuna__East_Bridge__West_Staircase_Upper_West,
+            ExitId::Annuna__East_Bridge__Center_Gap_East__ex__Below_Gate_Button_1 => SpotId::Annuna__East_Bridge__Center_Gap_East,
+            ExitId::Annuna__East_Bridge__Gate_Button__ex__Gate_Button_Gap_1 => SpotId::Annuna__East_Bridge__Gate_Button,
+            ExitId::Annuna__East_Bridge__Below_Gate_Button__ex__Center_Gap_East_1 => SpotId::Annuna__East_Bridge__Below_Gate_Button,
+            ExitId::Annuna__East_Bridge__East_Gap_East__ex__Center_Corridor_1 => SpotId::Annuna__East_Bridge__East_Gap_East,
+            ExitId::Annuna__East_Bridge__East_25_Upper__ex__Sniper_Valley__West_25_Upper_1 => SpotId::Annuna__East_Bridge__East_25_Upper,
+            ExitId::Annuna__East_Bridge__East_25_Lower__ex__Sniper_Valley__West_25_Lower_1 | ExitId:: Annuna__East_Bridge__East_25_Lower__ex__Center_Corridor_1 => SpotId::Annuna__East_Bridge__East_25_Lower,
+            ExitId::Annuna__East_Bridge__Tower_Gate__ex__Upper_West_Gap_East_1 => SpotId::Annuna__East_Bridge__Tower_Gate,
+            ExitId::Annuna__East_Bridge__Tower_Base_East__ex__Tower_Opening_1 => SpotId::Annuna__East_Bridge__Tower_Base_East,
+            ExitId::Annuna__East_Bridge__Tower_Base_West__ex__Tower_Gate_1 => SpotId::Annuna__East_Bridge__Tower_Base_West,
+            ExitId::Annuna__East_Bridge__Bridge_Top_East__ex__East_24_1 | ExitId:: Annuna__East_Bridge__Bridge_Top_East__ex__East_24_2 => SpotId::Annuna__East_Bridge__Bridge_Top_East,
+            ExitId::Annuna__East_Bridge__Tower_West_Ledge__ex__West_24_1 | ExitId:: Annuna__East_Bridge__Tower_West_Ledge__ex__Tower_Secret_1 => SpotId::Annuna__East_Bridge__Tower_West_Ledge,
+            ExitId::Annuna__East_Bridge__Tower_East_Ledge__ex__East_24_1 | ExitId:: Annuna__East_Bridge__Tower_East_Ledge__ex__Tower_Secret_1 => SpotId::Annuna__East_Bridge__Tower_East_Ledge,
+            ExitId::Annuna__East_Bridge__Tower_Secret__ex__Tower_West_Ledge_1 | ExitId:: Annuna__East_Bridge__Tower_Secret__ex__Tower_East_Ledge_1 => SpotId::Annuna__East_Bridge__Tower_Secret,
             ExitId::Antarctica__West__Shed_Entry__ex__Shed__Interior_1 | ExitId:: Antarctica__West__Shed_Entry__ex__Helipad_1 => SpotId::Antarctica__West__Shed_Entry,
             ExitId::Antarctica__West__Boxes__ex__Building_1W__West_Entry_1 => SpotId::Antarctica__West__Boxes,
             ExitId::Antarctica__Shed__Interior__ex__West__Shed_Entry_1 => SpotId::Antarctica__Shed__Interior,
@@ -8973,7 +9153,17 @@ impl world::World for World {
             | SpotId::Amagi__West_Lake__Surface_Wall_Left
             | SpotId::Amagi__West_Lake__Surface_Wall_Right
             | SpotId::Amagi__West_Lake__West_15
+            | SpotId::Annuna__East_Bridge__Below_Gate_Button
+            | SpotId::Annuna__East_Bridge__Center_Gap_East
             | SpotId::Annuna__East_Bridge__Center_Gap_West
+            | SpotId::Annuna__East_Bridge__East_25_Lower
+            | SpotId::Annuna__East_Bridge__East_25_Upper
+            | SpotId::Annuna__East_Bridge__Gate_Button
+            | SpotId::Annuna__East_Bridge__Tower_East_Ledge
+            | SpotId::Annuna__East_Bridge__Tower_Gate
+            | SpotId::Annuna__East_Bridge__Tower_Opening
+            | SpotId::Annuna__East_Bridge__Tower_Secret
+            | SpotId::Annuna__East_Bridge__Tower_West_Ledge
             | SpotId::Annuna__East_Bridge__West_25_Lower
             | SpotId::Annuna__East_Bridge__West_25_Upper
             | SpotId::Annuna__Mirror_Match__Below_Switch
@@ -9542,6 +9732,7 @@ impl World {
                     | Item::Infect_L3
                     | Item::Infection_Speed_2
                     | Item::Journal_2049_10_29
+                    | Item::Lament_for_Fools
                     | Item::Letter_from_Trace
                     | Item::Melee_Charge
                     | Item::Melee_Damage_3
@@ -9556,6 +9747,7 @@ impl World {
                     | Item::Refill
                     | Item::Researchers_Missing
                     | Item::Royal_Dagger
+                    | Item::Royal_Ring
                     | Item::Storm_Bomb
                     | Item::Suspension_Bridge
                     | Item::Terminal_Breakthrough_1
@@ -9578,6 +9770,7 @@ impl World {
                     | Item::Infect_L3
                     | Item::Infection_Speed_2
                     | Item::Journal_2049_10_29
+                    | Item::Lament_for_Fools
                     | Item::Melee_Charge
                     | Item::Melee_Damage_3
                     | Item::Melee_Speed_3
@@ -9589,6 +9782,7 @@ impl World {
                     | Item::Ranged_Speed_3
                     | Item::Refill
                     | Item::Royal_Dagger
+                    | Item::Royal_Ring
                     | Item::Suspension_Bridge
                     | Item::Udusan
             ),
@@ -9795,6 +9989,38 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
             id: LocationId::Annuna__West_Bridge__Plinth__Item,
             canonical: CanonId::None,
             item: Item::Nano_Lattice_2,
+            price: Currency::Free,
+            time: 0,
+            exit_id: None,
+        },
+        LocationId::Annuna__East_Bridge__Gate_Button__Switch => Location {
+            id: LocationId::Annuna__East_Bridge__Gate_Button__Switch,
+            canonical: CanonId::Annuna_East_Bridge_Gate,
+            item: Item::Annuna_East_Bridge_Gate,
+            price: Currency::Free,
+            time: 0,
+            exit_id: None,
+        },
+        LocationId::Annuna__East_Bridge__Below_Gate_Button__Switch_from_Below => Location {
+            id: LocationId::Annuna__East_Bridge__Below_Gate_Button__Switch_from_Below,
+            canonical: CanonId::None,
+            item: Item::Annuna_East_Bridge_Gate,
+            price: Currency::Free,
+            time: 250,
+            exit_id: None,
+        },
+        LocationId::Annuna__East_Bridge__Tower_Gate__Tablet => Location {
+            id: LocationId::Annuna__East_Bridge__Tower_Gate__Tablet,
+            canonical: CanonId::None,
+            item: Item::Lament_for_Fools,
+            price: Currency::Free,
+            time: 0,
+            exit_id: None,
+        },
+        LocationId::Annuna__East_Bridge__Tower_Secret__Item => Location {
+            id: LocationId::Annuna__East_Bridge__Tower_Secret__Item,
+            canonical: CanonId::None,
+            item: Item::Royal_Ring,
             price: Currency::Free,
             time: 0,
             exit_id: None,
@@ -11727,6 +11953,132 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
             id: ExitId::Annuna__East_Bridge__West_Staircase_Upper_West__ex__Upper_West_Gap_East_1,
             time: 1200,
             dest: SpotId::Annuna__East_Bridge__Upper_West_Gap_East,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__East_Bridge__Center_Gap_East__ex__Below_Gate_Button_1 => Exit {
+            id: ExitId::Annuna__East_Bridge__Center_Gap_East__ex__Below_Gate_Button_1,
+            time: 1052,
+            dest: SpotId::Annuna__East_Bridge__Below_Gate_Button,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__East_Bridge__Gate_Button__ex__Gate_Button_Gap_1 => Exit {
+            id: ExitId::Annuna__East_Bridge__Gate_Button__ex__Gate_Button_Gap_1,
+            time: 1200,
+            dest: SpotId::Annuna__East_Bridge__Gate_Button_Gap,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__East_Bridge__Below_Gate_Button__ex__Center_Gap_East_1 => Exit {
+            id: ExitId::Annuna__East_Bridge__Below_Gate_Button__ex__Center_Gap_East_1,
+            time: 1052,
+            dest: SpotId::Annuna__East_Bridge__Center_Gap_East,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__East_Bridge__East_Gap_East__ex__Center_Corridor_1 => Exit {
+            id: ExitId::Annuna__East_Bridge__East_Gap_East__ex__Center_Corridor_1,
+            time: 4912,
+            dest: SpotId::Annuna__East_Bridge__Center_Corridor,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__East_Bridge__East_25_Upper__ex__Sniper_Valley__West_25_Upper_1 => Exit {
+            id: ExitId::Annuna__East_Bridge__East_25_Upper__ex__Sniper_Valley__West_25_Upper_1,
+            time: 1350,
+            dest: SpotId::Annuna__Sniper_Valley__West_25_Upper,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__East_Bridge__East_25_Lower__ex__Sniper_Valley__West_25_Lower_1 => Exit {
+            id: ExitId::Annuna__East_Bridge__East_25_Lower__ex__Sniper_Valley__West_25_Lower_1,
+            time: 1350,
+            dest: SpotId::Annuna__Sniper_Valley__West_25_Lower,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__East_Bridge__East_25_Lower__ex__Center_Corridor_1 => Exit {
+            id: ExitId::Annuna__East_Bridge__East_25_Lower__ex__Center_Corridor_1,
+            time: 5263,
+            dest: SpotId::Annuna__East_Bridge__Center_Corridor,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__East_Bridge__Tower_Gate__ex__Upper_West_Gap_East_1 => Exit {
+            id: ExitId::Annuna__East_Bridge__Tower_Gate__ex__Upper_West_Gap_East_1,
+            time: 2807,
+            dest: SpotId::Annuna__East_Bridge__Upper_West_Gap_East,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__East_Bridge__Tower_Base_East__ex__Tower_Opening_1 => Exit {
+            id: ExitId::Annuna__East_Bridge__Tower_Base_East__ex__Tower_Opening_1,
+            time: 1200,
+            dest: SpotId::Annuna__East_Bridge__Tower_Opening,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__East_Bridge__Tower_Base_West__ex__Tower_Gate_1 => Exit {
+            id: ExitId::Annuna__East_Bridge__Tower_Base_West__ex__Tower_Gate_1,
+            time: 1200,
+            dest: SpotId::Annuna__East_Bridge__Tower_Gate,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__East_Bridge__Bridge_Top_East__ex__East_24_1 => Exit {
+            id: ExitId::Annuna__East_Bridge__Bridge_Top_East__ex__East_24_1,
+            time: 1228,
+            dest: SpotId::Annuna__East_Bridge__East_24,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__East_Bridge__Bridge_Top_East__ex__East_24_2 => Exit {
+            id: ExitId::Annuna__East_Bridge__Bridge_Top_East__ex__East_24_2,
+            time: 1228,
+            dest: SpotId::Annuna__East_Bridge__East_24,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__East_Bridge__Tower_West_Ledge__ex__West_24_1 => Exit {
+            id: ExitId::Annuna__East_Bridge__Tower_West_Ledge__ex__West_24_1,
+            time: 4210,
+            dest: SpotId::Annuna__East_Bridge__West_24,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__East_Bridge__Tower_West_Ledge__ex__Tower_Secret_1 => Exit {
+            id: ExitId::Annuna__East_Bridge__Tower_West_Ledge__ex__Tower_Secret_1,
+            time: 701,
+            dest: SpotId::Annuna__East_Bridge__Tower_Secret,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__East_Bridge__Tower_East_Ledge__ex__East_24_1 => Exit {
+            id: ExitId::Annuna__East_Bridge__Tower_East_Ledge__ex__East_24_1,
+            time: 4561,
+            dest: SpotId::Annuna__East_Bridge__East_24,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__East_Bridge__Tower_East_Ledge__ex__Tower_Secret_1 => Exit {
+            id: ExitId::Annuna__East_Bridge__Tower_East_Ledge__ex__Tower_Secret_1,
+            time: 701,
+            dest: SpotId::Annuna__East_Bridge__Tower_Secret,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__East_Bridge__Tower_Secret__ex__Tower_West_Ledge_1 => Exit {
+            id: ExitId::Annuna__East_Bridge__Tower_Secret__ex__Tower_West_Ledge_1,
+            time: 701,
+            dest: SpotId::Annuna__East_Bridge__Tower_West_Ledge,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__East_Bridge__Tower_Secret__ex__Tower_East_Ledge_1 => Exit {
+            id: ExitId::Annuna__East_Bridge__Tower_Secret__ex__Tower_East_Ledge_1,
+            time: 701,
+            dest: SpotId::Annuna__East_Bridge__Tower_East_Ledge,
             price: Currency::Free,
             loc_id: None,
         },
@@ -18761,6 +19113,31 @@ pub fn build_actions() -> EnumMap<ActionId, Action> {
             time: 2500,
             price: Currency::Free,
         },
+        ActionId::Annuna__East_Bridge__Center_Gap_East__Throw_Drone_into_Tower => Action {
+            id: ActionId::Annuna__East_Bridge__Center_Gap_East__Throw_Drone_into_Tower,
+            time: 3000,
+            price: Currency::Free,
+        },
+        ActionId::Annuna__East_Bridge__Tower_Opening__Climb_and_Throw_Drone => Action {
+            id: ActionId::Annuna__East_Bridge__Tower_Opening__Climb_and_Throw_Drone,
+            time: 4000,
+            price: Currency::Free,
+        },
+        ActionId::Annuna__East_Bridge__Tower_West_Ledge__Enter_Combo => Action {
+            id: ActionId::Annuna__East_Bridge__Tower_West_Ledge__Enter_Combo,
+            time: 2000,
+            price: Currency::Free,
+        },
+        ActionId::Annuna__East_Bridge__Tower_East_Ledge__Enter_Combo => Action {
+            id: ActionId::Annuna__East_Bridge__Tower_East_Ledge__Enter_Combo,
+            time: 2000,
+            price: Currency::Free,
+        },
+        ActionId::Annuna__East_Bridge__Tower_Secret__Enter_Combo => Action {
+            id: ActionId::Annuna__East_Bridge__Tower_Secret__Enter_Combo,
+            time: 2000,
+            price: Currency::Free,
+        },
         ActionId::Ebih__Base_Camp__Save_Point__Save => Action {
             id: ActionId::Ebih__Base_Camp__Save_Point__Save,
             time: 1300,
@@ -20746,26 +21123,44 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             exits: Range {
-                start: 0, end: 0,
+                start: ExitId::Annuna__East_Bridge__Center_Gap_East__ex__Below_Gate_Button_1.into_usize(),
+                end: ExitId::Annuna__East_Bridge__Center_Gap_East__ex__Below_Gate_Button_1.into_usize() + 1,
             },
             actions: Range {
-                start: 0, end: 0,
+                start: ActionId::Annuna__East_Bridge__Center_Gap_East__Throw_Drone_into_Tower.into_usize(),
+                end: ActionId::Annuna__East_Bridge__Center_Gap_East__Throw_Drone_into_Tower.into_usize() + 1,
             },
         },
         SpotId::Annuna__East_Bridge__Gate_Button => Spot {
             id: SpotId::Annuna__East_Bridge__Gate_Button,
             locations: Range {
-                start: 0, end: 0,
+                start: LocationId::Annuna__East_Bridge__Gate_Button__Switch.into_usize(),
+                end: LocationId::Annuna__East_Bridge__Gate_Button__Switch.into_usize() + 1,
             },
             exits: Range {
-                start: 0, end: 0,
+                start: ExitId::Annuna__East_Bridge__Gate_Button__ex__Gate_Button_Gap_1.into_usize(),
+                end: ExitId::Annuna__East_Bridge__Gate_Button__ex__Gate_Button_Gap_1.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
             },
         },
-        SpotId::Annuna__East_Bridge__Upper_Middle_Gate => Spot {
-            id: SpotId::Annuna__East_Bridge__Upper_Middle_Gate,
+        SpotId::Annuna__East_Bridge__Below_Gate_Button => Spot {
+            id: SpotId::Annuna__East_Bridge__Below_Gate_Button,
+            locations: Range {
+                start: LocationId::Annuna__East_Bridge__Below_Gate_Button__Switch_from_Below.into_usize(),
+                end: LocationId::Annuna__East_Bridge__Below_Gate_Button__Switch_from_Below.into_usize() + 1,
+            },
+            exits: Range {
+                start: ExitId::Annuna__East_Bridge__Below_Gate_Button__ex__Center_Gap_East_1.into_usize(),
+                end: ExitId::Annuna__East_Bridge__Below_Gate_Button__ex__Center_Gap_East_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__East_Bridge__East_Gap_West => Spot {
+            id: SpotId::Annuna__East_Bridge__East_Gap_West,
             locations: Range {
                 start: 0, end: 0,
             },
@@ -20776,8 +21171,61 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
         },
-        SpotId::Annuna__East_Bridge__Upper_Middle_Core => Spot {
-            id: SpotId::Annuna__East_Bridge__Upper_Middle_Core,
+        SpotId::Annuna__East_Bridge__East_Gap_East => Spot {
+            id: SpotId::Annuna__East_Bridge__East_Gap_East,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Annuna__East_Bridge__East_Gap_East__ex__Center_Corridor_1.into_usize(),
+                end: ExitId::Annuna__East_Bridge__East_Gap_East__ex__Center_Corridor_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__East_Bridge__East_25_Upper => Spot {
+            id: SpotId::Annuna__East_Bridge__East_25_Upper,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Annuna__East_Bridge__East_25_Upper__ex__Sniper_Valley__West_25_Upper_1.into_usize(),
+                end: ExitId::Annuna__East_Bridge__East_25_Upper__ex__Sniper_Valley__West_25_Upper_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__East_Bridge__East_25_Lower => Spot {
+            id: SpotId::Annuna__East_Bridge__East_25_Lower,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Annuna__East_Bridge__East_25_Lower__ex__Center_Corridor_1.into_usize(),
+                end: ExitId::Annuna__East_Bridge__East_25_Lower__ex__Sniper_Valley__West_25_Lower_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__East_Bridge__Tower_Gate => Spot {
+            id: SpotId::Annuna__East_Bridge__Tower_Gate,
+            locations: Range {
+                start: LocationId::Annuna__East_Bridge__Tower_Gate__Tablet.into_usize(),
+                end: LocationId::Annuna__East_Bridge__Tower_Gate__Tablet.into_usize() + 1,
+            },
+            exits: Range {
+                start: ExitId::Annuna__East_Bridge__Tower_Gate__ex__Upper_West_Gap_East_1.into_usize(),
+                end: ExitId::Annuna__East_Bridge__Tower_Gate__ex__Upper_West_Gap_East_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__East_Bridge__Tower_Core => Spot {
+            id: SpotId::Annuna__East_Bridge__Tower_Core,
             locations: Range {
                 start: 0, end: 0,
             },
@@ -20788,8 +21236,8 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
         },
-        SpotId::Annuna__East_Bridge__Upper_Middle_Opening => Spot {
-            id: SpotId::Annuna__East_Bridge__Upper_Middle_Opening,
+        SpotId::Annuna__East_Bridge__Tower_Opening => Spot {
+            id: SpotId::Annuna__East_Bridge__Tower_Opening,
             locations: Range {
                 start: 0, end: 0,
             },
@@ -20797,28 +21245,31 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             actions: Range {
-                start: 0, end: 0,
+                start: ActionId::Annuna__East_Bridge__Tower_Opening__Climb_and_Throw_Drone.into_usize(),
+                end: ActionId::Annuna__East_Bridge__Tower_Opening__Climb_and_Throw_Drone.into_usize() + 1,
             },
         },
-        SpotId::Annuna__East_Bridge__Upper_Middle_Inner_Corner_East => Spot {
-            id: SpotId::Annuna__East_Bridge__Upper_Middle_Inner_Corner_East,
+        SpotId::Annuna__East_Bridge__Tower_Base_East => Spot {
+            id: SpotId::Annuna__East_Bridge__Tower_Base_East,
             locations: Range {
                 start: 0, end: 0,
             },
             exits: Range {
-                start: 0, end: 0,
+                start: ExitId::Annuna__East_Bridge__Tower_Base_East__ex__Tower_Opening_1.into_usize(),
+                end: ExitId::Annuna__East_Bridge__Tower_Base_East__ex__Tower_Opening_1.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
             },
         },
-        SpotId::Annuna__East_Bridge__Upper_Middle_Inner_Corner_West => Spot {
-            id: SpotId::Annuna__East_Bridge__Upper_Middle_Inner_Corner_West,
+        SpotId::Annuna__East_Bridge__Tower_Base_West => Spot {
+            id: SpotId::Annuna__East_Bridge__Tower_Base_West,
             locations: Range {
                 start: 0, end: 0,
             },
             exits: Range {
-                start: 0, end: 0,
+                start: ExitId::Annuna__East_Bridge__Tower_Base_West__ex__Tower_Gate_1.into_usize(),
+                end: ExitId::Annuna__East_Bridge__Tower_Base_West__ex__Tower_Gate_1.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
@@ -20826,6 +21277,98 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
         },
         SpotId::Annuna__East_Bridge__Gate_Button_Gap => Spot {
             id: SpotId::Annuna__East_Bridge__Gate_Button_Gap,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__East_Bridge__Bridge_Top_East => Spot {
+            id: SpotId::Annuna__East_Bridge__Bridge_Top_East,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Annuna__East_Bridge__Bridge_Top_East__ex__East_24_1.into_usize(),
+                end: ExitId::Annuna__East_Bridge__Bridge_Top_East__ex__East_24_2.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__East_Bridge__Tower_West_Ledge => Spot {
+            id: SpotId::Annuna__East_Bridge__Tower_West_Ledge,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Annuna__East_Bridge__Tower_West_Ledge__ex__Tower_Secret_1.into_usize(),
+                end: ExitId::Annuna__East_Bridge__Tower_West_Ledge__ex__West_24_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: ActionId::Annuna__East_Bridge__Tower_West_Ledge__Enter_Combo.into_usize(),
+                end: ActionId::Annuna__East_Bridge__Tower_West_Ledge__Enter_Combo.into_usize() + 1,
+            },
+        },
+        SpotId::Annuna__East_Bridge__Tower_East_Ledge => Spot {
+            id: SpotId::Annuna__East_Bridge__Tower_East_Ledge,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Annuna__East_Bridge__Tower_East_Ledge__ex__East_24_1.into_usize(),
+                end: ExitId::Annuna__East_Bridge__Tower_East_Ledge__ex__Tower_Secret_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: ActionId::Annuna__East_Bridge__Tower_East_Ledge__Enter_Combo.into_usize(),
+                end: ActionId::Annuna__East_Bridge__Tower_East_Ledge__Enter_Combo.into_usize() + 1,
+            },
+        },
+        SpotId::Annuna__East_Bridge__Tower_Secret => Spot {
+            id: SpotId::Annuna__East_Bridge__Tower_Secret,
+            locations: Range {
+                start: LocationId::Annuna__East_Bridge__Tower_Secret__Item.into_usize(),
+                end: LocationId::Annuna__East_Bridge__Tower_Secret__Item.into_usize() + 1,
+            },
+            exits: Range {
+                start: ExitId::Annuna__East_Bridge__Tower_Secret__ex__Tower_East_Ledge_1.into_usize(),
+                end: ExitId::Annuna__East_Bridge__Tower_Secret__ex__Tower_West_Ledge_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: ActionId::Annuna__East_Bridge__Tower_Secret__Enter_Combo.into_usize(),
+                end: ActionId::Annuna__East_Bridge__Tower_Secret__Enter_Combo.into_usize() + 1,
+            },
+        },
+        SpotId::Annuna__East_Bridge__Tower_Peak => Spot {
+            id: SpotId::Annuna__East_Bridge__Tower_Peak,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__East_Bridge__Tower_Mid_air_West => Spot {
+            id: SpotId::Annuna__East_Bridge__Tower_Mid_air_West,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__East_Bridge__Tower_Mid_air_East => Spot {
+            id: SpotId::Annuna__East_Bridge__Tower_Mid_air_East,
             locations: Range {
                 start: 0, end: 0,
             },
@@ -20862,6 +21405,138 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
         },
         SpotId::Annuna__East_Bridge__West_24 => Spot {
             id: SpotId::Annuna__East_Bridge__West_24,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__East_Bridge__Cavern_Foyer => Spot {
+            id: SpotId::Annuna__East_Bridge__Cavern_Foyer,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__East_Bridge__Cavern_Right => Spot {
+            id: SpotId::Annuna__East_Bridge__Cavern_Right,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__East_Bridge__Cavern_Cache => Spot {
+            id: SpotId::Annuna__East_Bridge__Cavern_Cache,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__East_Bridge__Upper_East_Ledge => Spot {
+            id: SpotId::Annuna__East_Bridge__Upper_East_Ledge,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__East_Bridge__East_22 => Spot {
+            id: SpotId::Annuna__East_Bridge__East_22,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__East_Bridge__East_23 => Spot {
+            id: SpotId::Annuna__East_Bridge__East_23,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__East_Bridge__East_24 => Spot {
+            id: SpotId::Annuna__East_Bridge__East_24,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__Sniper_Valley__West_25_Upper => Spot {
+            id: SpotId::Annuna__Sniper_Valley__West_25_Upper,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__Sniper_Valley__West_25_Lower => Spot {
+            id: SpotId::Annuna__Sniper_Valley__West_25_Lower,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__Sniper_Valley__West_24 => Spot {
+            id: SpotId::Annuna__Sniper_Valley__West_24,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__Sniper_Valley__West_23 => Spot {
+            id: SpotId::Annuna__Sniper_Valley__West_23,
             locations: Range {
                 start: 0, end: 0,
             },
