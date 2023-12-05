@@ -603,10 +603,38 @@ areas:
     #region Upper West
     - name: Upper West Gap
       coord: [37.25, 23.8]
+      local:
+        - to: Upper West Gap East
+        - to: West Under Gap
+        - to: West Staircase Upper West
+      exits:
+        - to: West 24
+          req: $hook
+          movement: base
+          jumps: 1
+        - to: West 24
+          req: $grab
+          movement: base
+          jumps: 2
     - name: Upper West Gap East
       coord: [37.5, 23.8]
+      local:
+        - to: Upper West Gap
+        - to: West Under Gap
+        - to: West Staircase Upper West
+        - to: Tower Base West
+      exits:
+        - to: Tower Gate
+          req: $hook and Annuna_East_Bridge_Gate
+          movement: base
+          jumps: 1
     - name: West 24
       coord: [37.05, 23.55]
+      local:
+        - to: Upper West Gap
+      exits:
+        - to: West Bridge > East 24
+          tags: [xshift]
 
     - name: Cavern Foyer
       coord: [37.45, 21.4]
@@ -623,12 +651,46 @@ areas:
     #region Upper East
     - name: Upper East Ledge
       coord: [39.7, 21.85]
+      local:
+        - to: Gate Button Gap
+        - to: East 24
+        - to: East 22
+          jumps: 1
+      exits:
+        - to: East 23
+          req: $hover
+          movement: base
+        - to: Tower Opening
+          req: $hover
+          movement: base
+        - to: Tower East Ledge
+          req: $hover
+          movement: base
+        - to: Tower Mid-air East
+          req: $hover
+          movement: base
+          jumps: 1
     - name: East 22
       coord: [39.9, 21.75]
+      local:
+        - to: Upper East Ledge
+      exits:
+        - to: Vertical Room > West 22
+          tags: [xdoor]
     - name: East 23
       coord: [39.95, 22.35]
+      local:
+        - to: Gate Button Gap
+      exits:
+        - to: Sniper Valley > West 23
+          tags: [xshift]
     - name: East 24
       coord: [39.95, 23.55]
+      local:
+        - to: Bridge Top East
+      exits:
+        - to: Sniper Valley > West 24
+          tags: [xshift]
     #endregion
 
 - name: Sniper Valley
@@ -649,3 +711,9 @@ areas:
     - name: High Ledge
       coord: [40.125, 22.35]
     #endregion
+
+- name: Vertical Room
+  on_entry: $reset_old_area(^newpos)
+  spots:
+    - name: West 22
+      coord: [40.05, 21.75]

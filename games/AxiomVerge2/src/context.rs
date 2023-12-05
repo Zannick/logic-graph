@@ -6042,6 +6042,11 @@ impl context::Ctx for Context {
                     rules::action_reset_old_area__newpos(self, world, pos);
                 }
             }
+            AreaId::Annuna__Vertical_Room => {
+                if get_area(self.position) != area {
+                    rules::action_reset_old_area__newpos(self, world, pos);
+                }
+            }
             AreaId::Annuna__West_Bridge => {
                 if get_area(self.position) != area {
                     rules::action_reset_old_area__newpos(self, world, pos);

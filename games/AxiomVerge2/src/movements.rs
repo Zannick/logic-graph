@@ -744,6 +744,21 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
         ) => 1929,
         (
             [false],
+            SpotId::Annuna__East_Bridge__East_22,
+            SpotId::Annuna__East_Bridge__Upper_East_Ledge,
+        ) => 701,
+        (
+            [false],
+            SpotId::Annuna__East_Bridge__East_23,
+            SpotId::Annuna__East_Bridge__Gate_Button_Gap,
+        ) => 3684,
+        (
+            [false],
+            SpotId::Annuna__East_Bridge__East_24,
+            SpotId::Annuna__East_Bridge__Bridge_Top_East,
+        ) => 1228,
+        (
+            [false],
             SpotId::Annuna__East_Bridge__East_25_Upper,
             SpotId::Annuna__East_Bridge__East_Gap_East,
         ) => 350,
@@ -913,6 +928,61 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
             SpotId::Annuna__East_Bridge__Tower_West_Ledge,
             SpotId::Annuna__East_Bridge__Upper_West_Gap_East,
         ) => 2631,
+        (
+            [false],
+            SpotId::Annuna__East_Bridge__Upper_East_Ledge,
+            SpotId::Annuna__East_Bridge__East_22,
+        ) => 701,
+        (
+            [false],
+            SpotId::Annuna__East_Bridge__Upper_East_Ledge,
+            SpotId::Annuna__East_Bridge__East_24,
+        ) => 1699,
+        (
+            [false],
+            SpotId::Annuna__East_Bridge__Upper_East_Ledge,
+            SpotId::Annuna__East_Bridge__Gate_Button_Gap,
+        ) => 2807,
+        (
+            [false],
+            SpotId::Annuna__East_Bridge__Upper_West_Gap,
+            SpotId::Annuna__East_Bridge__Upper_West_Gap_East,
+        ) => 877,
+        (
+            [false],
+            SpotId::Annuna__East_Bridge__Upper_West_Gap,
+            SpotId::Annuna__East_Bridge__West_Staircase_Upper_West,
+        ) => 877,
+        (
+            [false],
+            SpotId::Annuna__East_Bridge__Upper_West_Gap,
+            SpotId::Annuna__East_Bridge__West_Under_Gap,
+        ) => 500,
+        (
+            [false],
+            SpotId::Annuna__East_Bridge__Upper_West_Gap_East,
+            SpotId::Annuna__East_Bridge__Tower_Base_West,
+        ) => 2456,
+        (
+            [false],
+            SpotId::Annuna__East_Bridge__Upper_West_Gap_East,
+            SpotId::Annuna__East_Bridge__Upper_West_Gap,
+        ) => 877,
+        (
+            [false],
+            SpotId::Annuna__East_Bridge__Upper_West_Gap_East,
+            SpotId::Annuna__East_Bridge__West_Staircase_Upper_West,
+        ) => 500,
+        (
+            [false],
+            SpotId::Annuna__East_Bridge__Upper_West_Gap_East,
+            SpotId::Annuna__East_Bridge__West_Under_Gap,
+        ) => 877,
+        (
+            [false],
+            SpotId::Annuna__East_Bridge__West_24,
+            SpotId::Annuna__East_Bridge__Upper_West_Gap,
+        ) => 701,
         (
             [false],
             SpotId::Annuna__East_Bridge__West_25_Lower,
@@ -8675,6 +8745,21 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
         ) => 1929,
         (
             [true],
+            SpotId::Annuna__East_Bridge__East_22,
+            SpotId::Annuna__East_Bridge__Upper_East_Ledge,
+        ) => 701,
+        (
+            [true],
+            SpotId::Annuna__East_Bridge__East_23,
+            SpotId::Annuna__East_Bridge__Gate_Button_Gap,
+        ) => 3684,
+        (
+            [true],
+            SpotId::Annuna__East_Bridge__East_24,
+            SpotId::Annuna__East_Bridge__Bridge_Top_East,
+        ) => 1228,
+        (
+            [true],
             SpotId::Annuna__East_Bridge__East_25_Upper,
             SpotId::Annuna__East_Bridge__East_Gap_East,
         ) => 350,
@@ -8844,6 +8929,61 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
             SpotId::Annuna__East_Bridge__Tower_West_Ledge,
             SpotId::Annuna__East_Bridge__Upper_West_Gap_East,
         ) => 2631,
+        (
+            [true],
+            SpotId::Annuna__East_Bridge__Upper_East_Ledge,
+            SpotId::Annuna__East_Bridge__East_22,
+        ) => 701,
+        (
+            [true],
+            SpotId::Annuna__East_Bridge__Upper_East_Ledge,
+            SpotId::Annuna__East_Bridge__East_24,
+        ) => 1699,
+        (
+            [true],
+            SpotId::Annuna__East_Bridge__Upper_East_Ledge,
+            SpotId::Annuna__East_Bridge__Gate_Button_Gap,
+        ) => 2807,
+        (
+            [true],
+            SpotId::Annuna__East_Bridge__Upper_West_Gap,
+            SpotId::Annuna__East_Bridge__Upper_West_Gap_East,
+        ) => 877,
+        (
+            [true],
+            SpotId::Annuna__East_Bridge__Upper_West_Gap,
+            SpotId::Annuna__East_Bridge__West_Staircase_Upper_West,
+        ) => 877,
+        (
+            [true],
+            SpotId::Annuna__East_Bridge__Upper_West_Gap,
+            SpotId::Annuna__East_Bridge__West_Under_Gap,
+        ) => 500,
+        (
+            [true],
+            SpotId::Annuna__East_Bridge__Upper_West_Gap_East,
+            SpotId::Annuna__East_Bridge__Tower_Base_West,
+        ) => 2456,
+        (
+            [true],
+            SpotId::Annuna__East_Bridge__Upper_West_Gap_East,
+            SpotId::Annuna__East_Bridge__Upper_West_Gap,
+        ) => 877,
+        (
+            [true],
+            SpotId::Annuna__East_Bridge__Upper_West_Gap_East,
+            SpotId::Annuna__East_Bridge__West_Staircase_Upper_West,
+        ) => 500,
+        (
+            [true],
+            SpotId::Annuna__East_Bridge__Upper_West_Gap_East,
+            SpotId::Annuna__East_Bridge__West_Under_Gap,
+        ) => 877,
+        (
+            [true],
+            SpotId::Annuna__East_Bridge__West_24,
+            SpotId::Annuna__East_Bridge__Upper_West_Gap,
+        ) => 701,
         (
             [true],
             SpotId::Annuna__East_Bridge__West_25_Lower,
@@ -16224,6 +16364,54 @@ pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
             SpotId::Annuna__East_Bridge__Tower_Mid_air_East,
             SpotId::Annuna__East_Bridge__Tower_East_Ledge,
         ) => true,
+        (
+            SpotId::Annuna__East_Bridge__Upper_West_Gap,
+            SpotId::Annuna__East_Bridge__Upper_West_Gap_East,
+        ) => true,
+        (
+            SpotId::Annuna__East_Bridge__Upper_West_Gap,
+            SpotId::Annuna__East_Bridge__West_Under_Gap,
+        ) => true,
+        (
+            SpotId::Annuna__East_Bridge__Upper_West_Gap,
+            SpotId::Annuna__East_Bridge__West_Staircase_Upper_West,
+        ) => true,
+        (
+            SpotId::Annuna__East_Bridge__Upper_West_Gap_East,
+            SpotId::Annuna__East_Bridge__Upper_West_Gap,
+        ) => true,
+        (
+            SpotId::Annuna__East_Bridge__Upper_West_Gap_East,
+            SpotId::Annuna__East_Bridge__West_Under_Gap,
+        ) => true,
+        (
+            SpotId::Annuna__East_Bridge__Upper_West_Gap_East,
+            SpotId::Annuna__East_Bridge__West_Staircase_Upper_West,
+        ) => true,
+        (
+            SpotId::Annuna__East_Bridge__Upper_West_Gap_East,
+            SpotId::Annuna__East_Bridge__Tower_Base_West,
+        ) => true,
+        (SpotId::Annuna__East_Bridge__West_24, SpotId::Annuna__East_Bridge__Upper_West_Gap) => true,
+        (
+            SpotId::Annuna__East_Bridge__Upper_East_Ledge,
+            SpotId::Annuna__East_Bridge__Gate_Button_Gap,
+        ) => true,
+        (SpotId::Annuna__East_Bridge__Upper_East_Ledge, SpotId::Annuna__East_Bridge__East_24) => {
+            true
+        }
+        (SpotId::Annuna__East_Bridge__Upper_East_Ledge, SpotId::Annuna__East_Bridge__East_22) => {
+            true
+        }
+        (SpotId::Annuna__East_Bridge__East_22, SpotId::Annuna__East_Bridge__Upper_East_Ledge) => {
+            true
+        }
+        (SpotId::Annuna__East_Bridge__East_23, SpotId::Annuna__East_Bridge__Gate_Button_Gap) => {
+            true
+        }
+        (SpotId::Annuna__East_Bridge__East_24, SpotId::Annuna__East_Bridge__Bridge_Top_East) => {
+            true
+        }
         (SpotId::Antarctica__West__Helipad, SpotId::Antarctica__West__Shed_Entry) => true,
         (SpotId::Antarctica__West__Helipad, SpotId::Antarctica__West__Boxes) => true,
         (SpotId::Antarctica__West__Boxes, SpotId::Antarctica__West__Helipad) => true,
@@ -21913,13 +22101,43 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Annuna__East_Bridge__East_22,
+            SpotId::Annuna__East_Bridge__Upper_East_Ledge,
+            701,
+        ),
+        (
+            SpotId::Annuna__East_Bridge__East_22,
+            SpotId::Annuna__Vertical_Room__West_22,
+            1600,
+        ),
+        (
+            SpotId::Annuna__East_Bridge__East_22,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
         (
             SpotId::Annuna__East_Bridge__East_23,
+            SpotId::Annuna__East_Bridge__Gate_Button_Gap,
+            3684,
+        ),
+        (
+            SpotId::Annuna__East_Bridge__East_23,
+            SpotId::Annuna__Sniper_Valley__West_23,
+            1350,
+        ),
+        (
+            SpotId::Annuna__East_Bridge__East_23,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
+        ),
+        (
+            SpotId::Annuna__East_Bridge__East_24,
+            SpotId::Annuna__East_Bridge__Bridge_Top_East,
+            1228,
+        ),
+        (
+            SpotId::Annuna__East_Bridge__East_24,
+            SpotId::Annuna__Sniper_Valley__West_24,
+            1350,
         ),
         (
             SpotId::Annuna__East_Bridge__East_24,
@@ -22308,13 +22526,93 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Annuna__East_Bridge__Upper_East_Ledge,
+            SpotId::Annuna__East_Bridge__East_22,
+            701,
+        ),
+        (
+            SpotId::Annuna__East_Bridge__Upper_East_Ledge,
+            SpotId::Annuna__East_Bridge__East_23,
+            877,
+        ),
+        (
+            SpotId::Annuna__East_Bridge__Upper_East_Ledge,
+            SpotId::Annuna__East_Bridge__East_24,
+            1699,
+        ),
+        (
+            SpotId::Annuna__East_Bridge__Upper_East_Ledge,
+            SpotId::Annuna__East_Bridge__Gate_Button_Gap,
+            2807,
+        ),
+        (
+            SpotId::Annuna__East_Bridge__Upper_East_Ledge,
+            SpotId::Annuna__East_Bridge__Tower_East_Ledge,
+            3684,
+        ),
+        (
+            SpotId::Annuna__East_Bridge__Upper_East_Ledge,
+            SpotId::Annuna__East_Bridge__Tower_Mid_air_East,
+            3859,
+        ),
+        (
+            SpotId::Annuna__East_Bridge__Upper_East_Ledge,
+            SpotId::Annuna__East_Bridge__Tower_Opening,
+            3684,
+        ),
+        (
+            SpotId::Annuna__East_Bridge__Upper_East_Ledge,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
         (
             SpotId::Annuna__East_Bridge__Upper_West_Gap,
+            SpotId::Annuna__East_Bridge__Upper_West_Gap_East,
+            877,
+        ),
+        (
+            SpotId::Annuna__East_Bridge__Upper_West_Gap,
+            SpotId::Annuna__East_Bridge__West_24,
+            701,
+        ),
+        (
+            SpotId::Annuna__East_Bridge__Upper_West_Gap,
+            SpotId::Annuna__East_Bridge__West_Staircase_Upper_West,
+            877,
+        ),
+        (
+            SpotId::Annuna__East_Bridge__Upper_West_Gap,
+            SpotId::Annuna__East_Bridge__West_Under_Gap,
+            500,
+        ),
+        (
+            SpotId::Annuna__East_Bridge__Upper_West_Gap,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
+        ),
+        (
+            SpotId::Annuna__East_Bridge__Upper_West_Gap_East,
+            SpotId::Annuna__East_Bridge__Tower_Base_West,
+            2456,
+        ),
+        (
+            SpotId::Annuna__East_Bridge__Upper_West_Gap_East,
+            SpotId::Annuna__East_Bridge__Tower_Gate,
+            2807,
+        ),
+        (
+            SpotId::Annuna__East_Bridge__Upper_West_Gap_East,
+            SpotId::Annuna__East_Bridge__Upper_West_Gap,
+            877,
+        ),
+        (
+            SpotId::Annuna__East_Bridge__Upper_West_Gap_East,
+            SpotId::Annuna__East_Bridge__West_Staircase_Upper_West,
+            500,
+        ),
+        (
+            SpotId::Annuna__East_Bridge__Upper_West_Gap_East,
+            SpotId::Annuna__East_Bridge__West_Under_Gap,
+            877,
         ),
         (
             SpotId::Annuna__East_Bridge__Upper_West_Gap_East,
@@ -22325,6 +22623,16 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Annuna__East_Bridge__West_22,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
+        ),
+        (
+            SpotId::Annuna__East_Bridge__West_24,
+            SpotId::Annuna__East_Bridge__Upper_West_Gap,
+            701,
+        ),
+        (
+            SpotId::Annuna__East_Bridge__West_24,
+            SpotId::Annuna__West_Bridge__East_24,
+            1350,
         ),
         (
             SpotId::Annuna__East_Bridge__West_24,
@@ -22718,6 +23026,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Annuna__Sniper_Valley__West_25_Upper,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Vertical_Room__West_22,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -40875,6 +41188,15 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
             SpotId::Annuna__East_Bridge__Center_Gap_West,
             SpotId::Annuna__East_Bridge__West_Staircase_Upper_East,
         ) => Some(1929),
+        (SpotId::Annuna__East_Bridge__East_22, SpotId::Annuna__East_Bridge__Upper_East_Ledge) => {
+            Some(701)
+        }
+        (SpotId::Annuna__East_Bridge__East_23, SpotId::Annuna__East_Bridge__Gate_Button_Gap) => {
+            Some(3684)
+        }
+        (SpotId::Annuna__East_Bridge__East_24, SpotId::Annuna__East_Bridge__Bridge_Top_East) => {
+            Some(1228)
+        }
         (
             SpotId::Annuna__East_Bridge__East_25_Upper,
             SpotId::Annuna__East_Bridge__East_Gap_East,
@@ -41003,6 +41325,47 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
             SpotId::Annuna__East_Bridge__Tower_West_Ledge,
             SpotId::Annuna__East_Bridge__Upper_West_Gap_East,
         ) => Some(2631),
+        (SpotId::Annuna__East_Bridge__Upper_East_Ledge, SpotId::Annuna__East_Bridge__East_22) => {
+            Some(701)
+        }
+        (SpotId::Annuna__East_Bridge__Upper_East_Ledge, SpotId::Annuna__East_Bridge__East_24) => {
+            Some(1699)
+        }
+        (
+            SpotId::Annuna__East_Bridge__Upper_East_Ledge,
+            SpotId::Annuna__East_Bridge__Gate_Button_Gap,
+        ) => Some(2807),
+        (
+            SpotId::Annuna__East_Bridge__Upper_West_Gap,
+            SpotId::Annuna__East_Bridge__Upper_West_Gap_East,
+        ) => Some(877),
+        (
+            SpotId::Annuna__East_Bridge__Upper_West_Gap,
+            SpotId::Annuna__East_Bridge__West_Staircase_Upper_West,
+        ) => Some(877),
+        (
+            SpotId::Annuna__East_Bridge__Upper_West_Gap,
+            SpotId::Annuna__East_Bridge__West_Under_Gap,
+        ) => Some(500),
+        (
+            SpotId::Annuna__East_Bridge__Upper_West_Gap_East,
+            SpotId::Annuna__East_Bridge__Tower_Base_West,
+        ) => Some(2456),
+        (
+            SpotId::Annuna__East_Bridge__Upper_West_Gap_East,
+            SpotId::Annuna__East_Bridge__Upper_West_Gap,
+        ) => Some(877),
+        (
+            SpotId::Annuna__East_Bridge__Upper_West_Gap_East,
+            SpotId::Annuna__East_Bridge__West_Staircase_Upper_West,
+        ) => Some(500),
+        (
+            SpotId::Annuna__East_Bridge__Upper_West_Gap_East,
+            SpotId::Annuna__East_Bridge__West_Under_Gap,
+        ) => Some(877),
+        (SpotId::Annuna__East_Bridge__West_24, SpotId::Annuna__East_Bridge__Upper_West_Gap) => {
+            Some(701)
+        }
         (
             SpotId::Annuna__East_Bridge__West_25_Lower,
             SpotId::Annuna__East_Bridge__West_Staircase_Lower_West,
@@ -46478,6 +46841,15 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
             SpotId::Annuna__East_Bridge__Center_Gap_West,
             SpotId::Annuna__East_Bridge__West_Staircase_Upper_East,
         ) => (Some(1929), vec![]),
+        (SpotId::Annuna__East_Bridge__East_22, SpotId::Annuna__East_Bridge__Upper_East_Ledge) => {
+            (Some(701), vec![])
+        }
+        (SpotId::Annuna__East_Bridge__East_23, SpotId::Annuna__East_Bridge__Gate_Button_Gap) => {
+            (Some(3684), vec![])
+        }
+        (SpotId::Annuna__East_Bridge__East_24, SpotId::Annuna__East_Bridge__Bridge_Top_East) => {
+            (Some(1228), vec![])
+        }
         (
             SpotId::Annuna__East_Bridge__East_25_Upper,
             SpotId::Annuna__East_Bridge__East_Gap_East,
@@ -46606,6 +46978,47 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
             SpotId::Annuna__East_Bridge__Tower_West_Ledge,
             SpotId::Annuna__East_Bridge__Upper_West_Gap_East,
         ) => (Some(2631), vec![]),
+        (SpotId::Annuna__East_Bridge__Upper_East_Ledge, SpotId::Annuna__East_Bridge__East_22) => {
+            (Some(701), vec![])
+        }
+        (SpotId::Annuna__East_Bridge__Upper_East_Ledge, SpotId::Annuna__East_Bridge__East_24) => {
+            (Some(1699), vec![])
+        }
+        (
+            SpotId::Annuna__East_Bridge__Upper_East_Ledge,
+            SpotId::Annuna__East_Bridge__Gate_Button_Gap,
+        ) => (Some(2807), vec![]),
+        (
+            SpotId::Annuna__East_Bridge__Upper_West_Gap,
+            SpotId::Annuna__East_Bridge__Upper_West_Gap_East,
+        ) => (Some(877), vec![]),
+        (
+            SpotId::Annuna__East_Bridge__Upper_West_Gap,
+            SpotId::Annuna__East_Bridge__West_Staircase_Upper_West,
+        ) => (Some(877), vec![]),
+        (
+            SpotId::Annuna__East_Bridge__Upper_West_Gap,
+            SpotId::Annuna__East_Bridge__West_Under_Gap,
+        ) => (Some(500), vec![]),
+        (
+            SpotId::Annuna__East_Bridge__Upper_West_Gap_East,
+            SpotId::Annuna__East_Bridge__Tower_Base_West,
+        ) => (Some(2456), vec![]),
+        (
+            SpotId::Annuna__East_Bridge__Upper_West_Gap_East,
+            SpotId::Annuna__East_Bridge__Upper_West_Gap,
+        ) => (Some(877), vec![]),
+        (
+            SpotId::Annuna__East_Bridge__Upper_West_Gap_East,
+            SpotId::Annuna__East_Bridge__West_Staircase_Upper_West,
+        ) => (Some(500), vec![]),
+        (
+            SpotId::Annuna__East_Bridge__Upper_West_Gap_East,
+            SpotId::Annuna__East_Bridge__West_Under_Gap,
+        ) => (Some(877), vec![]),
+        (SpotId::Annuna__East_Bridge__West_24, SpotId::Annuna__East_Bridge__Upper_West_Gap) => {
+            (Some(701), vec![])
+        }
         (
             SpotId::Annuna__East_Bridge__West_25_Lower,
             SpotId::Annuna__East_Bridge__West_Staircase_Lower_West,

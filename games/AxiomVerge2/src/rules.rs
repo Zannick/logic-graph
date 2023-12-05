@@ -1344,6 +1344,10 @@ pub fn access_hook(ctx: &Context, world: &World) -> bool {
     // $hook
     helper__hook!(ctx, world)
 }
+pub fn access_hook_and_annuna_east_bridge_gate(ctx: &Context, world: &World) -> bool {
+    // $hook and Annuna_East_Bridge_Gate
+    (helper__hook!(ctx, world) && ctx.has(Item::Annuna_East_Bridge_Gate))
+}
 pub fn access_hook_and_giguna_gateway_block(ctx: &Context, world: &World) -> bool {
     // $hook and Giguna_Gateway_Block
     (helper__hook!(ctx, world) && ctx.has(Item::Giguna_Gateway_Block))
