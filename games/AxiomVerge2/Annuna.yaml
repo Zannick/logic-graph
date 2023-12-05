@@ -581,7 +581,7 @@ areas:
         - to: Sniper Valley > High Ledge
           req: $hook and $hover
           movement: fast_hover
-          penalty_tags: [xshift_fast_hover]
+          penalty_tags: [xshift, -fast_hover.1]
     - name: Tower Mid-air East
       coord: [38.6, 21.8]
       local:
@@ -597,7 +597,7 @@ areas:
         - to: West Bridge > Below Tunnel
           req: $hook and $hover
           movement: fast_hover
-          penalty_tags: [xshift_fast_hover]
+          penalty_tags: [xshift, -fast_hover.1]
     #endregion
 
     #region Upper West

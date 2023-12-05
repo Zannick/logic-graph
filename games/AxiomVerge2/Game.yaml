@@ -124,8 +124,8 @@ time:
   # (measured as .1 for open-air, and .2 for doors and vertical open-air, and .4 for vertical doors).
   # The movement time to subtract is dependent on the exit.
   # e.g. a movement speed of .4 means that .1 distance is traversed in 0.25 seconds
-  xshift_fast_hover: 1.1
   fast_hover.1: 0.25
+  fast_hover.2: 0.50
 
 warps:
   earth_save:

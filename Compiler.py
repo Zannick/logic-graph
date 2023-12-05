@@ -428,8 +428,21 @@ class GameLogic(object):
                         (self.time[k] for k in point.get('tags', []) if k in self.time),
                         default=self.time['default'])
             if tags := point.get('penalty_tags'):
+                penalty = 0
                 for tag in tags:
-                    point['time'] += self.time.get(tag, 0)
+                    if tag[0] == '-':
+                        if tag[1:] not in self.time:
+                            logging.warning(f'Unrecognized tag {tag[1:]!r} in {point["fullname"]}')
+                        else:
+                            penalty -= self.time[tag[1:]]
+                    elif tag not in self.time:
+                        logging.warning(f'Unrecognized tag {tag!r} in {point["fullname"]}')
+                    else:
+                        penalty += self.time[tag]
+                if penalty < 0:
+                    self._errors.append(f'Total penalties must be positive: {point["fullname"]} penalty tags: {tags} total {penalty}')
+                else:
+                    point['time'] += penalty
 
         for act in self.global_actions:
             if 'time' not in act:
