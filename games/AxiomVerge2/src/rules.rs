@@ -106,6 +106,13 @@ pub fn access_annuna__east_bridge__tower_east_ledge__ex__tower_secret_1__req(
     // ^_combo
     ctx.annuna__east_bridge__ctx__combo()
 }
+pub fn access_annuna__east_bridge__tower_mid_air_west__ex__tower_secret_1__req(
+    ctx: &Context,
+    world: &World,
+) -> bool {
+    // ^_combo
+    ctx.annuna__east_bridge__ctx__combo()
+}
 pub fn access_annuna__east_bridge__tower_secret__enter_combo__req(
     ctx: &Context,
     world: &World,
@@ -119,6 +126,34 @@ pub fn access_annuna__east_bridge__tower_secret__ex__tower_east_ledge_1__req(
 ) -> bool {
     // ^_combo
     ctx.annuna__east_bridge__ctx__combo()
+}
+pub fn access_annuna__east_bridge__tower_secret__ex__tower_mid_air_east_1__req(
+    ctx: &Context,
+    world: &World,
+) -> bool {
+    // ^_combo
+    ctx.annuna__east_bridge__ctx__combo()
+}
+pub fn access_annuna__east_bridge__tower_secret__ex__tower_mid_air_west_1__req(
+    ctx: &Context,
+    world: &World,
+) -> bool {
+    // ^_combo
+    ctx.annuna__east_bridge__ctx__combo()
+}
+pub fn access_annuna__east_bridge__tower_secret__ex__tower_peak_1__req(
+    ctx: &Context,
+    world: &World,
+) -> bool {
+    // ^_combo and $grab
+    (ctx.annuna__east_bridge__ctx__combo() && helper__grab!(ctx, world))
+}
+pub fn access_annuna__east_bridge__tower_secret__ex__tower_peak_2__req(
+    ctx: &Context,
+    world: &World,
+) -> bool {
+    // ^_combo and $hook
+    (ctx.annuna__east_bridge__ctx__combo() && helper__hook!(ctx, world))
 }
 pub fn access_annuna__east_bridge__tower_secret__ex__tower_west_ledge_1__req(
     ctx: &Context,

@@ -128,6 +128,8 @@ subgraph Annuna
         Annuna__West_Bridge__West_26_Lower(West 26 Lower);
         Annuna__West_Bridge__West_26_Upper(West 26 Upper);
         Annuna__West_Bridge__East_24(East 24);
+        Annuna__West_Bridge__East_22(East 22);
+        Annuna__West_Bridge__Below_Tunnel(Below Tunnel);
     end
     subgraph Annuna__East_Bridge[East Bridge]
         Annuna__East_Bridge__West_25_Lower(West 25 Lower);
@@ -166,6 +168,8 @@ subgraph Annuna
         Annuna__East_Bridge__Cavern_Foyer(Cavern Foyer);
         Annuna__East_Bridge__Cavern_Right(Cavern Right);
         Annuna__East_Bridge__Cavern_Cache(Cavern Cache);
+        Annuna__East_Bridge__Below_Cavern(Below Cavern);
+        Annuna__East_Bridge__West_22(West 22);
         Annuna__East_Bridge__Upper_East_Ledge(Upper East Ledge);
         Annuna__East_Bridge__East_22(East 22);
         Annuna__East_Bridge__East_23(East 23);
@@ -176,6 +180,7 @@ subgraph Annuna
         Annuna__Sniper_Valley__West_25_Lower(West 25 Lower);
         Annuna__Sniper_Valley__West_24(West 24);
         Annuna__Sniper_Valley__West_23(West 23);
+        Annuna__Sniper_Valley__High_Ledge(High Ledge);
     end
 end
 subgraph Antarctica
@@ -1492,6 +1497,15 @@ Annuna__East_Bridge__Tower_Base_West --> Annuna__East_Bridge__Tower_Gate
 Annuna__East_Bridge__Tower_East_Ledge --> Annuna__East_Bridge__East_24
 Annuna__East_Bridge__Tower_East_Ledge <--> Annuna__East_Bridge__Tower_Secret
 Annuna__East_Bridge__Tower_Gate --> Annuna__East_Bridge__Upper_West_Gap_East
+Annuna__East_Bridge__Tower_Mid_air_East --> Annuna__East_Bridge__Below_Cavern
+Annuna__East_Bridge__Tower_Mid_air_East --> Annuna__East_Bridge__Tower_Peak
+Annuna__East_Bridge__Tower_Mid_air_East --> Annuna__West_Bridge__Below_Tunnel
+Annuna__East_Bridge__Tower_Mid_air_West --> Annuna__East_Bridge__East_22
+Annuna__East_Bridge__Tower_Mid_air_West --> Annuna__East_Bridge__Tower_Peak
+Annuna__East_Bridge__Tower_Mid_air_West <--> Annuna__East_Bridge__Tower_Secret
+Annuna__East_Bridge__Tower_Mid_air_West --> Annuna__Sniper_Valley__High_Ledge
+Annuna__East_Bridge__Tower_Secret --> Annuna__East_Bridge__Tower_Mid_air_East
+Annuna__East_Bridge__Tower_Secret --> Annuna__East_Bridge__Tower_Peak
 Annuna__East_Bridge__Tower_Secret <--> Annuna__East_Bridge__Tower_West_Ledge
 Annuna__East_Bridge__Tower_West_Ledge --> Annuna__East_Bridge__West_24
 Annuna__East_Bridge__West_25_Lower --> Annuna__West_Bridge__East_25_Upper

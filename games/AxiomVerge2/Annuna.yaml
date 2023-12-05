@@ -214,9 +214,17 @@ areas:
       coord: [34.05, 25.5]
     #endregion
 
-    #region Upper
+    #region Tower
+    #endregion
+
+    #region Upper Right
     - name: East 24
       coord: [36.95, 23.55]
+
+    - name: East 22
+      coord: [36.95, 21.9]
+    - name: Below Tunnel
+      coord: [36.75, 21.9]
     #endregion
 
 - name: East Bridge
@@ -478,6 +486,8 @@ areas:
       local:
         - to: Upper West Gap East
         - to: Upper West Gap
+        - to: Tower Mid-air West
+          jumps: 2
       exits:
         - to: West 24
           req: $hover
@@ -496,6 +506,8 @@ areas:
       local:
         - to: Gate Button Gap
         - to: Bridge Top East
+        - to: Tower Mid-air East
+          jumps: 2
       exits:
         - to: East 24
           req: $hover
@@ -522,6 +534,22 @@ areas:
         - to: Tower East Ledge
           req: ^_combo
           movement: base
+        - to: Tower Mid-air West
+          req: ^_combo
+          movement: base
+          jumps: 2
+        - to: Tower Mid-air East
+          req: ^_combo
+          movement: base
+          jumps: 2
+        - to: Tower Peak
+          req: ^_combo and $grab
+          movement: base
+          jumps: 4
+        - to: Tower Peak
+          req: ^_combo and $hook
+          movement: base
+          jumps: 2
       actions:
         - name: Enter Combo
           req: not ^_combo
@@ -529,10 +557,47 @@ areas:
           time: 2  # ?
     - name: Tower Peak
       coord: [38.45, 21.7]
+      local:
+        - to: Tower Mid-air West
+        - to: Tower Mid-air East
+        - to: Tower West Ledge
+        - to: Tower East Ledge
     - name: Tower Mid-air West
       coord: [38.3, 21.8]
+      local:
+        - to: Tower West Ledge
+      exits:
+        - to: Tower Secret
+          req: ^_combo
+          movement: base
+        - to: Tower Peak
+          req: $hook
+          movement: base
+          jumps: 1
+        - to: East 22
+          req: $hook and $hover
+          movement: fast_hover
+          jumps: 1
+        - to: Sniper Valley > High Ledge
+          req: $hook and $hover
+          movement: fast_hover
+          penalty_tags: [xshift_fast_hover]
     - name: Tower Mid-air East
       coord: [38.6, 21.8]
+      local:
+        - to: Tower East Ledge
+      exits:
+        - to: Tower Peak
+          req: $hook
+          movement: base
+          jumps: 1
+        - to: Below Cavern
+          req: $hook and $hover
+          movement: fast_hover
+        - to: West Bridge > Below Tunnel
+          req: $hook and $hover
+          movement: fast_hover
+          penalty_tags: [xshift_fast_hover]
     #endregion
 
     #region Upper West
@@ -549,6 +614,10 @@ areas:
       coord: [37.85, 21.5]
     - name: Cavern Cache
       coord: [37.75, 21.3]
+    - name: Below Cavern
+      coord: [37.45, 21.9]
+    - name: West 22
+      coord: [37.05, 21.9]
     #endregion
 
     #region Upper East
@@ -577,4 +646,6 @@ areas:
       coord: [40.05, 23.55]
     - name: West 23
       coord: [40.05, 22.35]
+    - name: High Ledge
+      coord: [40.125, 22.35]
     #endregion
