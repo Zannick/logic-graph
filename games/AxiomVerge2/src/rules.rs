@@ -1373,6 +1373,10 @@ pub fn access_hook_and_underwater_movement(ctx: &Context, world: &World) -> bool
     // $hook and Underwater_Movement
     (helper__hook!(ctx, world) && ctx.has(Item::Underwater_Movement))
 }
+pub fn access_hook_or_hover(ctx: &Context, world: &World) -> bool {
+    // $hook or $hover
+    (helper__hook!(ctx, world) || helper__hover!(ctx, world))
+}
 pub fn access_hover(ctx: &Context, world: &World) -> bool {
     // $hover
     helper__hover!(ctx, world)
@@ -1498,9 +1502,17 @@ pub fn access_mode_eq_drone_and_giguna_dual_path_wall(ctx: &Context, world: &Wor
     // ^mode == 'drone' and Giguna_Dual_Path_Wall
     (ctx.mode() == enums::Mode::Drone && ctx.has(Item::Giguna_Dual_Path_Wall))
 }
+pub fn access_mode_eq_drone_and_mist2(ctx: &Context, world: &World) -> bool {
+    // ^mode == 'drone' and $mist2
+    (ctx.mode() == enums::Mode::Drone && helper__mist2!(ctx, world))
+}
 pub fn access_mode_eq_drone_and_mist_upgrade(ctx: &Context, world: &World) -> bool {
     // ^mode == 'drone' and Mist_Upgrade
     (ctx.mode() == enums::Mode::Drone && ctx.has(Item::Mist_Upgrade))
+}
+pub fn access_mode_eq_drone_and_sniper_valley_rock_2(ctx: &Context, world: &World) -> bool {
+    // ^mode == 'drone' and Sniper_Valley_Rock_2
+    (ctx.mode() == enums::Mode::Drone && ctx.has(Item::Sniper_Valley_Rock_2))
 }
 pub fn access_mode_ne_drone(ctx: &Context, world: &World) -> bool {
     // ^mode != 'drone'
@@ -1553,6 +1565,10 @@ pub fn access_not_irikar_royal_storage_wall_and_shockwave(ctx: &Context, world: 
 pub fn access_not_separation_or_defeat_indra(ctx: &Context, world: &World) -> bool {
     // NOT Separation or Defeat_Indra
     (!ctx.has(Item::Separation) || ctx.has(Item::Defeat_Indra))
+}
+pub fn access_not_slingshot_hook(ctx: &Context, world: &World) -> bool {
+    // not Slingshot_Hook
+    !ctx.has(Item::Slingshot_Hook)
 }
 pub fn access_not_within_menu_and_anuman_and_mode_ne_drone(ctx: &Context, world: &World) -> bool {
     // NOT WITHIN `Menu` and Anuman and ^mode != 'drone'
@@ -1682,6 +1698,10 @@ pub fn access_shockwave(ctx: &Context, world: &World) -> bool {
 pub fn access_shockwave_and_not_defeat_mus_a_m20(ctx: &Context, world: &World) -> bool {
     // $shockwave and not Defeat_MUS_A_M20
     (helper__shockwave!(ctx, world) && !ctx.has(Item::Defeat_MUS_A_M20))
+}
+pub fn access_sniper_valley_rock_1(ctx: &Context, world: &World) -> bool {
+    // Sniper_Valley_Rock_1
+    ctx.has(Item::Sniper_Valley_Rock_1)
 }
 pub fn access_spin(ctx: &Context, world: &World) -> bool {
     // $spin

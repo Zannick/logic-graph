@@ -178,12 +178,29 @@ subgraph Annuna
     subgraph Annuna__Sniper_Valley[Sniper Valley]
         Annuna__Sniper_Valley__West_25_Upper(West 25 Upper);
         Annuna__Sniper_Valley__West_25_Lower(West 25 Lower);
-        Annuna__Sniper_Valley__West_24(West 24);
+        Annuna__Sniper_Valley__Bridge_Lower_Ledge(Bridge Lower Ledge);
+        Annuna__Sniper_Valley__Bridge_End(Bridge End);
+        Annuna__Sniper_Valley__Table(Table);
+        Annuna__Sniper_Valley__East(East);
         Annuna__Sniper_Valley__West_23(West 23);
         Annuna__Sniper_Valley__High_Ledge(High Ledge);
+        Annuna__Sniper_Valley__West_24(West 24);
+        Annuna__Sniper_Valley__Bridge_Upper_Middle(Bridge Upper Middle);
+        Annuna__Sniper_Valley__Bridge_Upper_Ledge(Bridge Upper Ledge);
+        Annuna__Sniper_Valley__Cavern_Outer_Rock_West(Cavern Outer Rock West);
+        Annuna__Sniper_Valley__Cavern_Outer_Rock_East(Cavern Outer Rock East);
+        Annuna__Sniper_Valley__Cavern_Inner_Rock_West(Cavern Inner Rock West);
+        Annuna__Sniper_Valley__Cavern_Inner_Rock_East(Cavern Inner Rock East);
+        Annuna__Sniper_Valley__Cavern_Tight_Corner(Cavern Tight Corner);
+        Annuna__Sniper_Valley__Cavern_Cache(Cavern Cache);
     end
     subgraph Annuna__Vertical_Room[Vertical Room]
         Annuna__Vertical_Room__West_22(West 22);
+    end
+    subgraph Annuna__Factory_Entrance[Factory Entrance]
+        Annuna__Factory_Entrance__West(West);
+        Annuna__Factory_Entrance__Save_Point(Save Point);
+        Annuna__Factory_Entrance__East(East);
     end
 end
 subgraph Antarctica
@@ -1492,10 +1509,10 @@ Annuna__East_Bridge__Below_Gate_Button <--> Annuna__East_Bridge__Center_Gap_East
 Annuna__East_Bridge__Bridge_Top_East --> Annuna__East_Bridge__East_24
 Annuna__East_Bridge__East_22 --> Annuna__Vertical_Room__West_22
 Annuna__East_Bridge__East_23 --> Annuna__Sniper_Valley__West_23
-Annuna__East_Bridge__East_24 --> Annuna__Sniper_Valley__West_24
+Annuna__East_Bridge__East_24 <--> Annuna__Sniper_Valley__West_24
 Annuna__East_Bridge__East_25_Lower --> Annuna__East_Bridge__Center_Corridor
-Annuna__East_Bridge__East_25_Lower --> Annuna__Sniper_Valley__West_25_Lower
-Annuna__East_Bridge__East_25_Upper --> Annuna__Sniper_Valley__West_25_Upper
+Annuna__East_Bridge__East_25_Lower <--> Annuna__Sniper_Valley__West_25_Lower
+Annuna__East_Bridge__East_25_Upper <--> Annuna__Sniper_Valley__West_25_Upper
 Annuna__East_Bridge__East_Gap_East --> Annuna__East_Bridge__Center_Corridor
 Annuna__East_Bridge__Gate_Button --> Annuna__East_Bridge__Gate_Button_Gap
 Annuna__East_Bridge__Tower_Base_East --> Annuna__East_Bridge__Tower_Opening
@@ -1537,6 +1554,16 @@ Annuna__Mirror_Match__East_26_Upper --> Annuna__West_Bridge__West_26_Upper
 Annuna__Mirror_Match__Eastward <--> Annuna__Mirror_Match__Staircase
 Annuna__Mirror_Match__Plinth --> Annuna__Mirror_Match__East_26_Upper
 Annuna__Mirror_Match__West_25 <--> Uhrum__Annuna_Corridor__East_25
+Annuna__Sniper_Valley__Bridge_End --> Annuna__Sniper_Valley__Bridge_Lower_Ledge
+Annuna__Sniper_Valley__Bridge_Upper_Middle --> Annuna__Sniper_Valley__West_24
+Annuna__Sniper_Valley__Cavern_Cache <--> Annuna__Sniper_Valley__Cavern_Tight_Corner
+Annuna__Sniper_Valley__Cavern_Inner_Rock_East <--> Annuna__Sniper_Valley__Cavern_Inner_Rock_West
+Annuna__Sniper_Valley__Cavern_Outer_Rock_East --> Annuna__Sniper_Valley__Cavern_Inner_Rock_West
+Annuna__Sniper_Valley__Cavern_Outer_Rock_East <--> Annuna__Sniper_Valley__Cavern_Outer_Rock_West
+Annuna__Sniper_Valley__East --> Annuna__Factory_Entrance__West
+Annuna__Sniper_Valley__West_23 --> Annuna__East_Bridge__East_24
+Annuna__Sniper_Valley__West_23 --> Annuna__Sniper_Valley__Cavern_Outer_Rock_West
+Annuna__Sniper_Valley__West_23 --> Annuna__Sniper_Valley__High_Ledge
 Annuna__West_Bridge__East_25_Lower --> Annuna__East_Bridge__West_25_Lower
 Antarctica__Building_1E__Connector --> Antarctica__Building_1E__East_Entry
 Antarctica__Building_1E__Connector <--> Antarctica__Building_1W__Connector

@@ -181,10 +181,25 @@ pub fn get_area(spot: SpotId) -> AreaId {
         | SpotId::Annuna__East_Bridge__East_24 => AreaId::Annuna__East_Bridge,
         SpotId::Annuna__Sniper_Valley__West_25_Upper
         | SpotId::Annuna__Sniper_Valley__West_25_Lower
-        | SpotId::Annuna__Sniper_Valley__West_24
+        | SpotId::Annuna__Sniper_Valley__Bridge_Lower_Ledge
+        | SpotId::Annuna__Sniper_Valley__Bridge_End
+        | SpotId::Annuna__Sniper_Valley__Table
+        | SpotId::Annuna__Sniper_Valley__East
         | SpotId::Annuna__Sniper_Valley__West_23
-        | SpotId::Annuna__Sniper_Valley__High_Ledge => AreaId::Annuna__Sniper_Valley,
+        | SpotId::Annuna__Sniper_Valley__High_Ledge
+        | SpotId::Annuna__Sniper_Valley__West_24
+        | SpotId::Annuna__Sniper_Valley__Bridge_Upper_Middle
+        | SpotId::Annuna__Sniper_Valley__Bridge_Upper_Ledge
+        | SpotId::Annuna__Sniper_Valley__Cavern_Outer_Rock_West
+        | SpotId::Annuna__Sniper_Valley__Cavern_Outer_Rock_East
+        | SpotId::Annuna__Sniper_Valley__Cavern_Inner_Rock_West
+        | SpotId::Annuna__Sniper_Valley__Cavern_Inner_Rock_East
+        | SpotId::Annuna__Sniper_Valley__Cavern_Tight_Corner
+        | SpotId::Annuna__Sniper_Valley__Cavern_Cache => AreaId::Annuna__Sniper_Valley,
         SpotId::Annuna__Vertical_Room__West_22 => AreaId::Annuna__Vertical_Room,
+        SpotId::Annuna__Factory_Entrance__West
+        | SpotId::Annuna__Factory_Entrance__Save_Point
+        | SpotId::Annuna__Factory_Entrance__East => AreaId::Annuna__Factory_Entrance,
         SpotId::Antarctica__West__Helipad
         | SpotId::Antarctica__West__Shed_Entry
         | SpotId::Antarctica__West__Boxes => AreaId::Antarctica__West,
@@ -1382,10 +1397,25 @@ pub fn get_region(spot: SpotId) -> RegionId {
         | SpotId::Annuna__East_Bridge__East_24 => RegionId::Annuna,
         SpotId::Annuna__Sniper_Valley__West_25_Upper
         | SpotId::Annuna__Sniper_Valley__West_25_Lower
-        | SpotId::Annuna__Sniper_Valley__West_24
+        | SpotId::Annuna__Sniper_Valley__Bridge_Lower_Ledge
+        | SpotId::Annuna__Sniper_Valley__Bridge_End
+        | SpotId::Annuna__Sniper_Valley__Table
+        | SpotId::Annuna__Sniper_Valley__East
         | SpotId::Annuna__Sniper_Valley__West_23
-        | SpotId::Annuna__Sniper_Valley__High_Ledge => RegionId::Annuna,
+        | SpotId::Annuna__Sniper_Valley__High_Ledge
+        | SpotId::Annuna__Sniper_Valley__West_24
+        | SpotId::Annuna__Sniper_Valley__Bridge_Upper_Middle
+        | SpotId::Annuna__Sniper_Valley__Bridge_Upper_Ledge
+        | SpotId::Annuna__Sniper_Valley__Cavern_Outer_Rock_West
+        | SpotId::Annuna__Sniper_Valley__Cavern_Outer_Rock_East
+        | SpotId::Annuna__Sniper_Valley__Cavern_Inner_Rock_West
+        | SpotId::Annuna__Sniper_Valley__Cavern_Inner_Rock_East
+        | SpotId::Annuna__Sniper_Valley__Cavern_Tight_Corner
+        | SpotId::Annuna__Sniper_Valley__Cavern_Cache => RegionId::Annuna,
         SpotId::Annuna__Vertical_Room__West_22 => RegionId::Annuna,
+        SpotId::Annuna__Factory_Entrance__West
+        | SpotId::Annuna__Factory_Entrance__Save_Point
+        | SpotId::Annuna__Factory_Entrance__East => RegionId::Annuna,
         SpotId::Antarctica__West__Helipad
         | SpotId::Antarctica__West__Shed_Entry
         | SpotId::Antarctica__West__Boxes => RegionId::Antarctica,
@@ -2491,6 +2521,23 @@ impl world::Accessible for Location {
                 rules::access_separation(&ctx, world)
             }
             LocationId::Annuna__Mirror_Match__Waving_Distance__Shockwave_Flask => true,
+            LocationId::Annuna__Sniper_Valley__Bridge_End__Health_Pickup => {
+                rules::access_more_refills(&ctx, world)
+            }
+            LocationId::Annuna__Sniper_Valley__Cavern_Cache__Item => true,
+            LocationId::Annuna__Sniper_Valley__Cavern_Inner_Rock_East__Break_Inner_Wall => {
+                rules::access_mode_eq_drone_and_mist2(&ctx, world)
+            }
+            LocationId::Annuna__Sniper_Valley__Cavern_Inner_Rock_West__Break_Inner_Wall => {
+                rules::access_mode_eq_drone_and_mist2(&ctx, world)
+            }
+            LocationId::Annuna__Sniper_Valley__Cavern_Outer_Rock_East__Break_Outer_Wall => {
+                rules::access_mist2(&ctx, world)
+            }
+            LocationId::Annuna__Sniper_Valley__Cavern_Outer_Rock_West__Break_Outer_Wall => {
+                rules::access_mist2(&ctx, world)
+            }
+            LocationId::Annuna__Sniper_Valley__Table__Item => true,
             LocationId::Annuna__West_Bridge__Plinth__Item => true,
             LocationId::Antarctica__Building_2__Behind_Boxes__Note => true,
             LocationId::Antarctica__Power_Room__Switch__Flip => true,
@@ -2675,6 +2722,9 @@ impl world::Accessible for Location {
             LocationId::Interior__Outpost_Interior__Bookshelf__Note => true,
             LocationId::Interior__Tent_Interior__Desk__Note => true,
             LocationId::Irikar__Abandoned_Room__Corner_Core__Core => {
+                rules::access_more_refills(&ctx, world)
+            }
+            LocationId::Irikar__Basement_Pipes__Left_Vertical_Pipe__Health_Pickup => {
                 rules::access_more_refills(&ctx, world)
             }
             LocationId::Irikar__Boss_Room__Bulls_Feet__Boss_Reward => {
@@ -3017,6 +3067,27 @@ impl world::Accessible for Exit {
             ExitId::Annuna__Mirror_Match__Staircase__ex__Eastward_1 => rules::access_not_separation_or_defeat_indra(&ctx, world),
             ExitId::Annuna__Mirror_Match__Staircase__ex__Eastward_2 => rules::access_separation_and_not_defeat_indra_and_mist2(&ctx, world),
             ExitId::Annuna__Mirror_Match__West_25__ex__Uhrum__Annuna_Corridor__East_25_1 => true,
+            ExitId::Annuna__Sniper_Valley__Bridge_End__ex__Bridge_Lower_Ledge_1 => rules::access_hook(&ctx, world),
+            ExitId::Annuna__Sniper_Valley__Bridge_Upper_Middle__ex__West_24_1 => rules::access_grab(&ctx, world),
+            ExitId::Annuna__Sniper_Valley__Bridge_Upper_Middle__ex__West_24_2 => rules::access_hook(&ctx, world),
+            ExitId::Annuna__Sniper_Valley__Cavern_Cache__ex__Cavern_Tight_Corner_1 => rules::access_mode_eq_drone(&ctx, world),
+            ExitId::Annuna__Sniper_Valley__Cavern_Inner_Rock_East__Break_Inner_Wall => rules::access_mode_eq_drone_and_mist2(&ctx, world),
+            ExitId::Annuna__Sniper_Valley__Cavern_Inner_Rock_East__ex__Cavern_Inner_Rock_West_1 => rules::access_mode_eq_drone_and_sniper_valley_rock_2(&ctx, world),
+            ExitId::Annuna__Sniper_Valley__Cavern_Inner_Rock_West__Break_Inner_Wall => rules::access_mode_eq_drone_and_mist2(&ctx, world),
+            ExitId::Annuna__Sniper_Valley__Cavern_Inner_Rock_West__ex__Cavern_Inner_Rock_East_1 => rules::access_mode_eq_drone_and_sniper_valley_rock_2(&ctx, world),
+            ExitId::Annuna__Sniper_Valley__Cavern_Outer_Rock_East__Break_Outer_Wall => rules::access_mist2(&ctx, world),
+            ExitId::Annuna__Sniper_Valley__Cavern_Outer_Rock_East__ex__Cavern_Inner_Rock_West_1 => rules::access_mode_eq_drone(&ctx, world),
+            ExitId::Annuna__Sniper_Valley__Cavern_Outer_Rock_East__ex__Cavern_Outer_Rock_West_1 => rules::access_sniper_valley_rock_1(&ctx, world),
+            ExitId::Annuna__Sniper_Valley__Cavern_Outer_Rock_West__Break_Outer_Wall => rules::access_mist2(&ctx, world),
+            ExitId::Annuna__Sniper_Valley__Cavern_Outer_Rock_West__ex__Cavern_Outer_Rock_East_1 => rules::access_sniper_valley_rock_1(&ctx, world),
+            ExitId::Annuna__Sniper_Valley__Cavern_Tight_Corner__ex__Cavern_Cache_1 => rules::access_mode_eq_drone(&ctx, world),
+            ExitId::Annuna__Sniper_Valley__East__ex__Factory_Entrance__West_1 => true,
+            ExitId::Annuna__Sniper_Valley__West_23__ex__Cavern_Outer_Rock_West_1 => rules::access_mist2(&ctx, world),
+            ExitId::Annuna__Sniper_Valley__West_23__ex__East_Bridge__East_24_1 => true,
+            ExitId::Annuna__Sniper_Valley__West_23__ex__High_Ledge_1 => rules::access_hook_or_hover(&ctx, world),
+            ExitId::Annuna__Sniper_Valley__West_24__ex__East_Bridge__East_24_1 => true,
+            ExitId::Annuna__Sniper_Valley__West_25_Lower__ex__East_Bridge__East_25_Lower_1 => true,
+            ExitId::Annuna__Sniper_Valley__West_25_Upper__ex__East_Bridge__East_25_Upper_1 => true,
             ExitId::Annuna__West_Bridge__East_25_Lower__ex__East_Bridge__West_25_Lower_1 => true,
             ExitId::Annuna__West_Bridge__West_25_Lower__ex__Mirror_Match__East_25_Lower_1 => true,
             ExitId::Antarctica__Building_1E__Connector__ex__Building_1W__Connector_1 => true,
@@ -4077,6 +4148,11 @@ impl world::Exit for Exit {
             ExitId::Annuna__Mirror_Match__East_26_Lower__ex__West_Bridge__West_26_Lower_1 => true,
             ExitId::Annuna__Mirror_Match__East_26_Upper__ex__West_Bridge__West_26_Upper_1 => true,
             ExitId::Annuna__Mirror_Match__West_25__ex__Uhrum__Annuna_Corridor__East_25_1 => true,
+            ExitId::Annuna__Sniper_Valley__East__ex__Factory_Entrance__West_1 => true,
+            ExitId::Annuna__Sniper_Valley__West_23__ex__East_Bridge__East_24_1 => true,
+            ExitId::Annuna__Sniper_Valley__West_24__ex__East_Bridge__East_24_1 => true,
+            ExitId::Annuna__Sniper_Valley__West_25_Lower__ex__East_Bridge__East_25_Lower_1 => true,
+            ExitId::Annuna__Sniper_Valley__West_25_Upper__ex__East_Bridge__East_25_Upper_1 => true,
             ExitId::Annuna__West_Bridge__East_25_Lower__ex__East_Bridge__West_25_Lower_1 => true,
             ExitId::Annuna__West_Bridge__West_25_Lower__ex__Mirror_Match__East_25_Lower_1 => true,
             ExitId::Antarctica__Building_1E__Connector__ex__Building_1W__Connector_1 => true,
@@ -5235,7 +5311,7 @@ pub struct Spot {
     pub actions: Range<usize>,
 }
 
-static RAW_SPOTS: [SpotId; 1177] = [
+static RAW_SPOTS: [SpotId; 1192] = [
     SpotId::None,
     SpotId::Amagi__Grid_31_19__East,
     SpotId::Amagi__Grid_31_19__West,
@@ -5370,6 +5446,9 @@ static RAW_SPOTS: [SpotId; 1177] = [
     SpotId::Annuna__East_Bridge__West_Staircase_Upper_East,
     SpotId::Annuna__East_Bridge__West_Staircase_Upper_West,
     SpotId::Annuna__East_Bridge__West_Under_Gap,
+    SpotId::Annuna__Factory_Entrance__East,
+    SpotId::Annuna__Factory_Entrance__Save_Point,
+    SpotId::Annuna__Factory_Entrance__West,
     SpotId::Annuna__Mirror_Match__Below_Switch,
     SpotId::Annuna__Mirror_Match__Central_Pillar,
     SpotId::Annuna__Mirror_Match__East_25_Lower,
@@ -5383,7 +5462,19 @@ static RAW_SPOTS: [SpotId; 1177] = [
     SpotId::Annuna__Mirror_Match__Waving_Distance,
     SpotId::Annuna__Mirror_Match__West_25,
     SpotId::Annuna__Mirror_Match__West_Gap,
+    SpotId::Annuna__Sniper_Valley__Bridge_End,
+    SpotId::Annuna__Sniper_Valley__Bridge_Lower_Ledge,
+    SpotId::Annuna__Sniper_Valley__Bridge_Upper_Ledge,
+    SpotId::Annuna__Sniper_Valley__Bridge_Upper_Middle,
+    SpotId::Annuna__Sniper_Valley__Cavern_Cache,
+    SpotId::Annuna__Sniper_Valley__Cavern_Inner_Rock_East,
+    SpotId::Annuna__Sniper_Valley__Cavern_Inner_Rock_West,
+    SpotId::Annuna__Sniper_Valley__Cavern_Outer_Rock_East,
+    SpotId::Annuna__Sniper_Valley__Cavern_Outer_Rock_West,
+    SpotId::Annuna__Sniper_Valley__Cavern_Tight_Corner,
+    SpotId::Annuna__Sniper_Valley__East,
     SpotId::Annuna__Sniper_Valley__High_Ledge,
+    SpotId::Annuna__Sniper_Valley__Table,
     SpotId::Annuna__Sniper_Valley__West_23,
     SpotId::Annuna__Sniper_Valley__West_24,
     SpotId::Annuna__Sniper_Valley__West_25_Lower,
@@ -6438,12 +6529,16 @@ lazy_static! {
             start: SpotId::Annuna__East_Bridge__Below_Cavern.into_usize(),
             end: SpotId::Annuna__East_Bridge__West_Under_Gap.into_usize() + 1,
         },
+        AreaId::Annuna__Factory_Entrance => Range {
+            start: SpotId::Annuna__Factory_Entrance__East.into_usize(),
+            end: SpotId::Annuna__Factory_Entrance__West.into_usize() + 1,
+        },
         AreaId::Annuna__Mirror_Match => Range {
             start: SpotId::Annuna__Mirror_Match__Below_Switch.into_usize(),
             end: SpotId::Annuna__Mirror_Match__West_Gap.into_usize() + 1,
         },
         AreaId::Annuna__Sniper_Valley => Range {
-            start: SpotId::Annuna__Sniper_Valley__High_Ledge.into_usize(),
+            start: SpotId::Annuna__Sniper_Valley__Bridge_End.into_usize(),
             end: SpotId::Annuna__Sniper_Valley__West_25_Upper.into_usize() + 1,
         },
         AreaId::Annuna__Vertical_Room => Range {
@@ -6963,7 +7058,7 @@ impl world::World for World {
     type Exit = Exit;
     type Action = Action;
     type Warp = Warp;
-    const NUM_LOCATIONS: u32 = 212;
+    const NUM_LOCATIONS: u32 = 220;
 
     fn objective_name(&self) -> String {
         format!("{}", self.objective)
@@ -7036,6 +7131,14 @@ impl world::World for World {
             CanonId::Annuna_East_Bridge_Gate => {
                 vec![LocationId::Annuna__East_Bridge__Gate_Button__Switch]
             }
+            CanonId::Sniper_Valley_Rock_1 => vec![
+                LocationId::Annuna__Sniper_Valley__Cavern_Outer_Rock_West__Break_Outer_Wall,
+                LocationId::Annuna__Sniper_Valley__Cavern_Outer_Rock_East__Break_Outer_Wall,
+            ],
+            CanonId::Sniper_Valley_Rock_2 => vec![
+                LocationId::Annuna__Sniper_Valley__Cavern_Inner_Rock_West__Break_Inner_Wall,
+                LocationId::Annuna__Sniper_Valley__Cavern_Inner_Rock_East__Break_Inner_Wall,
+            ],
             CanonId::Notes_2053_02_27 => {
                 vec![LocationId::Antarctica__Building_2__Behind_Boxes__Note]
             }
@@ -7250,6 +7353,7 @@ impl world::World for World {
                 LocationId::Annuna__Mirror_Match__Waving_Distance__Shockwave_Flask,
                 LocationId::Annuna__Mirror_Match__East_26_Lower__Remote_Flask,
                 LocationId::Annuna__Mirror_Match__East_26_Upper__Remote_Flask,
+                LocationId::Annuna__Sniper_Valley__Cavern_Cache__Item,
                 LocationId::Giguna__Clouds__Cache__Item,
                 LocationId::Giguna__Gubi_Lair__Center_Platform__Boss_Reward,
                 LocationId::Irikar__Boss_Room__Bulls_Feet__Boss_Reward,
@@ -7261,6 +7365,22 @@ impl world::World for World {
             ],
             Item::Lament_for_Fools => vec![LocationId::Annuna__East_Bridge__Tower_Gate__Tablet],
             Item::Royal_Ring => vec![LocationId::Annuna__East_Bridge__Tower_Secret__Item],
+            Item::Power_Core => vec![
+                LocationId::Annuna__Sniper_Valley__Bridge_End__Health_Pickup,
+                LocationId::Giguna__West_Caverns__Bush__Item,
+                LocationId::Irikar__Abandoned_Room__Corner_Core__Core,
+                LocationId::Irikar__Basement_Pipes__Left_Vertical_Pipe__Health_Pickup,
+                LocationId::Uhrum__Siege_Corridor__Western_Cache__Core,
+            ],
+            Item::Family_Tragedy => vec![LocationId::Annuna__Sniper_Valley__Table__Item],
+            Item::Sniper_Valley_Rock_1 => vec![
+                LocationId::Annuna__Sniper_Valley__Cavern_Outer_Rock_West__Break_Outer_Wall,
+                LocationId::Annuna__Sniper_Valley__Cavern_Outer_Rock_East__Break_Outer_Wall,
+            ],
+            Item::Sniper_Valley_Rock_2 => vec![
+                LocationId::Annuna__Sniper_Valley__Cavern_Inner_Rock_West__Break_Inner_Wall,
+                LocationId::Annuna__Sniper_Valley__Cavern_Inner_Rock_East__Break_Inner_Wall,
+            ],
             Item::Ice_Axe => vec![LocationId::Antarctica__Shed__Interior__Shelf],
             Item::Notes_2053_02_27 => vec![LocationId::Antarctica__Building_2__Behind_Boxes__Note],
             Item::Station_Power => vec![LocationId::Antarctica__Power_Room__Switch__Flip],
@@ -7324,11 +7444,6 @@ impl world::World for World {
             ],
             Item::Carnelian_Ring => vec![LocationId::Giguna__Carnelian__Vault__Item],
             Item::Power_Matrix => vec![LocationId::Giguna__West_Caverns__Cache__Item],
-            Item::Power_Core => vec![
-                LocationId::Giguna__West_Caverns__Bush__Item,
-                LocationId::Irikar__Abandoned_Room__Corner_Core__Core,
-                LocationId::Uhrum__Siege_Corridor__Western_Cache__Core,
-            ],
             Item::Ebih_Wasteland_Passage_H => vec![
                 LocationId::Giguna__Wasteland__Passage_East__Clear_Horizontal_Passage_Manually,
                 LocationId::Giguna__Wasteland__Passage_East__Mist_through_Horizontal_Passage,
@@ -7627,6 +7742,25 @@ impl world::World for World {
             LocationId::Annuna__East_Bridge__Tower_Secret__Item => {
                 SpotId::Annuna__East_Bridge__Tower_Secret
             }
+            LocationId::Annuna__Sniper_Valley__Bridge_End__Health_Pickup => {
+                SpotId::Annuna__Sniper_Valley__Bridge_End
+            }
+            LocationId::Annuna__Sniper_Valley__Table__Item => SpotId::Annuna__Sniper_Valley__Table,
+            LocationId::Annuna__Sniper_Valley__Cavern_Outer_Rock_West__Break_Outer_Wall => {
+                SpotId::Annuna__Sniper_Valley__Cavern_Outer_Rock_West
+            }
+            LocationId::Annuna__Sniper_Valley__Cavern_Outer_Rock_East__Break_Outer_Wall => {
+                SpotId::Annuna__Sniper_Valley__Cavern_Outer_Rock_East
+            }
+            LocationId::Annuna__Sniper_Valley__Cavern_Inner_Rock_West__Break_Inner_Wall => {
+                SpotId::Annuna__Sniper_Valley__Cavern_Inner_Rock_West
+            }
+            LocationId::Annuna__Sniper_Valley__Cavern_Inner_Rock_East__Break_Inner_Wall => {
+                SpotId::Annuna__Sniper_Valley__Cavern_Inner_Rock_East
+            }
+            LocationId::Annuna__Sniper_Valley__Cavern_Cache__Item => {
+                SpotId::Annuna__Sniper_Valley__Cavern_Cache
+            }
             LocationId::Antarctica__Shed__Interior__Shelf => SpotId::Antarctica__Shed__Interior,
             LocationId::Antarctica__Building_2__Behind_Boxes__Note => {
                 SpotId::Antarctica__Building_2__Behind_Boxes
@@ -7874,6 +8008,9 @@ impl world::World for World {
             }
             LocationId::Irikar__Abandoned_Room__Corner_Core__Core => {
                 SpotId::Irikar__Abandoned_Room__Corner_Core
+            }
+            LocationId::Irikar__Basement_Pipes__Left_Vertical_Pipe__Health_Pickup => {
+                SpotId::Irikar__Basement_Pipes__Left_Vertical_Pipe
             }
             LocationId::Irikar__Boss_Room__Bulls_Feet__Boss_Reward
             | LocationId::Irikar__Boss_Room__Bulls_Feet__Defeat_Gudam
@@ -8311,6 +8448,23 @@ impl world::World for World {
             ExitId::Annuna__East_Bridge__East_22__ex__Vertical_Room__West_22_1 => SpotId::Annuna__East_Bridge__East_22,
             ExitId::Annuna__East_Bridge__East_23__ex__Sniper_Valley__West_23_1 => SpotId::Annuna__East_Bridge__East_23,
             ExitId::Annuna__East_Bridge__East_24__ex__Sniper_Valley__West_24_1 => SpotId::Annuna__East_Bridge__East_24,
+            ExitId::Annuna__Sniper_Valley__West_25_Upper__ex__East_Bridge__East_25_Upper_1 => SpotId::Annuna__Sniper_Valley__West_25_Upper,
+            ExitId::Annuna__Sniper_Valley__West_25_Lower__ex__East_Bridge__East_25_Lower_1 => SpotId::Annuna__Sniper_Valley__West_25_Lower,
+            ExitId::Annuna__Sniper_Valley__Bridge_End__ex__Bridge_Lower_Ledge_1 => SpotId::Annuna__Sniper_Valley__Bridge_End,
+            ExitId::Annuna__Sniper_Valley__East__ex__Factory_Entrance__West_1 => SpotId::Annuna__Sniper_Valley__East,
+            ExitId::Annuna__Sniper_Valley__West_23__ex__East_Bridge__East_24_1 | ExitId:: Annuna__Sniper_Valley__West_23__ex__High_Ledge_1 | ExitId:: Annuna__Sniper_Valley__West_23__ex__Cavern_Outer_Rock_West_1 => SpotId::Annuna__Sniper_Valley__West_23,
+            ExitId::Annuna__Sniper_Valley__West_24__ex__East_Bridge__East_24_1 => SpotId::Annuna__Sniper_Valley__West_24,
+            ExitId::Annuna__Sniper_Valley__Bridge_Upper_Middle__ex__West_24_1 | ExitId:: Annuna__Sniper_Valley__Bridge_Upper_Middle__ex__West_24_2 => SpotId::Annuna__Sniper_Valley__Bridge_Upper_Middle,
+            ExitId::Annuna__Sniper_Valley__Cavern_Outer_Rock_West__ex__Cavern_Outer_Rock_East_1 => SpotId::Annuna__Sniper_Valley__Cavern_Outer_Rock_West,
+            ExitId::Annuna__Sniper_Valley__Cavern_Outer_Rock_West__Break_Outer_Wall => SpotId::Annuna__Sniper_Valley__Cavern_Outer_Rock_West,
+            ExitId::Annuna__Sniper_Valley__Cavern_Outer_Rock_East__ex__Cavern_Inner_Rock_West_1 | ExitId:: Annuna__Sniper_Valley__Cavern_Outer_Rock_East__ex__Cavern_Outer_Rock_West_1 => SpotId::Annuna__Sniper_Valley__Cavern_Outer_Rock_East,
+            ExitId::Annuna__Sniper_Valley__Cavern_Outer_Rock_East__Break_Outer_Wall => SpotId::Annuna__Sniper_Valley__Cavern_Outer_Rock_East,
+            ExitId::Annuna__Sniper_Valley__Cavern_Inner_Rock_West__ex__Cavern_Inner_Rock_East_1 => SpotId::Annuna__Sniper_Valley__Cavern_Inner_Rock_West,
+            ExitId::Annuna__Sniper_Valley__Cavern_Inner_Rock_West__Break_Inner_Wall => SpotId::Annuna__Sniper_Valley__Cavern_Inner_Rock_West,
+            ExitId::Annuna__Sniper_Valley__Cavern_Inner_Rock_East__ex__Cavern_Inner_Rock_West_1 => SpotId::Annuna__Sniper_Valley__Cavern_Inner_Rock_East,
+            ExitId::Annuna__Sniper_Valley__Cavern_Inner_Rock_East__Break_Inner_Wall => SpotId::Annuna__Sniper_Valley__Cavern_Inner_Rock_East,
+            ExitId::Annuna__Sniper_Valley__Cavern_Tight_Corner__ex__Cavern_Cache_1 => SpotId::Annuna__Sniper_Valley__Cavern_Tight_Corner,
+            ExitId::Annuna__Sniper_Valley__Cavern_Cache__ex__Cavern_Tight_Corner_1 => SpotId::Annuna__Sniper_Valley__Cavern_Cache,
             ExitId::Antarctica__West__Shed_Entry__ex__Shed__Interior_1 | ExitId:: Antarctica__West__Shed_Entry__ex__Helipad_1 => SpotId::Antarctica__West__Shed_Entry,
             ExitId::Antarctica__West__Boxes__ex__Building_1W__West_Entry_1 => SpotId::Antarctica__West__Boxes,
             ExitId::Antarctica__Shed__Interior__ex__West__Shed_Entry_1 => SpotId::Antarctica__Shed__Interior,
@@ -9238,6 +9392,18 @@ impl world::World for World {
             | SpotId::Annuna__Mirror_Match__Save_Point
             | SpotId::Annuna__Mirror_Match__Waving_Distance
             | SpotId::Annuna__Mirror_Match__West_25
+            | SpotId::Annuna__Sniper_Valley__Bridge_End
+            | SpotId::Annuna__Sniper_Valley__Cavern_Cache
+            | SpotId::Annuna__Sniper_Valley__Cavern_Inner_Rock_East
+            | SpotId::Annuna__Sniper_Valley__Cavern_Inner_Rock_West
+            | SpotId::Annuna__Sniper_Valley__Cavern_Outer_Rock_East
+            | SpotId::Annuna__Sniper_Valley__Cavern_Outer_Rock_West
+            | SpotId::Annuna__Sniper_Valley__East
+            | SpotId::Annuna__Sniper_Valley__Table
+            | SpotId::Annuna__Sniper_Valley__West_23
+            | SpotId::Annuna__Sniper_Valley__West_24
+            | SpotId::Annuna__Sniper_Valley__West_25_Lower
+            | SpotId::Annuna__Sniper_Valley__West_25_Upper
             | SpotId::Annuna__West_Bridge__East_25_Lower
             | SpotId::Annuna__West_Bridge__Plinth
             | SpotId::Annuna__West_Bridge__West_25_Lower
@@ -9611,6 +9777,7 @@ impl world::World for World {
             | SpotId::Irikar__Abandoned_Room__West
             | SpotId::Irikar__Airy__Middle_South
             | SpotId::Irikar__Basement_Pipes__East_28
+            | SpotId::Irikar__Basement_Pipes__Left_Vertical_Pipe
             | SpotId::Irikar__Basement_Pipes__West_27
             | SpotId::Irikar__Basement_Pipes__West_28
             | SpotId::Irikar__Basement_Portal__East_27
@@ -9789,6 +9956,7 @@ impl World {
                     | Item::Drone_Melee_Damage_3
                     | Item::Drone_Melee_Speed_3
                     | Item::Escape
+                    | Item::Family_Tragedy
                     | Item::Health_Upgrade_5
                     | Item::Heretics_Granddaughter
                     | Item::Heretics_Tablet
@@ -9828,6 +9996,7 @@ impl World {
                     | Item::Drone_Melee_Damage_3
                     | Item::Drone_Melee_Speed_3
                     | Item::Escape
+                    | Item::Family_Tragedy
                     | Item::Health_Upgrade_5
                     | Item::Heretics_Granddaughter
                     | Item::Infect_L3
@@ -10086,6 +10255,62 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
             item: Item::Royal_Ring,
             price: Currency::Free,
             time: 0,
+            exit_id: None,
+        },
+        LocationId::Annuna__Sniper_Valley__Bridge_End__Health_Pickup => Location {
+            id: LocationId::Annuna__Sniper_Valley__Bridge_End__Health_Pickup,
+            canonical: CanonId::None,
+            item: Item::Power_Core,
+            price: Currency::Free,
+            time: 0,
+            exit_id: None,
+        },
+        LocationId::Annuna__Sniper_Valley__Table__Item => Location {
+            id: LocationId::Annuna__Sniper_Valley__Table__Item,
+            canonical: CanonId::None,
+            item: Item::Family_Tragedy,
+            price: Currency::Free,
+            time: 0,
+            exit_id: None,
+        },
+        LocationId::Annuna__Sniper_Valley__Cavern_Outer_Rock_West__Break_Outer_Wall => Location {
+            id: LocationId::Annuna__Sniper_Valley__Cavern_Outer_Rock_West__Break_Outer_Wall,
+            canonical: CanonId::Sniper_Valley_Rock_1,
+            item: Item::Sniper_Valley_Rock_1,
+            price: Currency::Energy(130),
+            time: 0,
+            exit_id: Some(ExitId::Annuna__Sniper_Valley__Cavern_Outer_Rock_West__Break_Outer_Wall),
+        },
+        LocationId::Annuna__Sniper_Valley__Cavern_Outer_Rock_East__Break_Outer_Wall => Location {
+            id: LocationId::Annuna__Sniper_Valley__Cavern_Outer_Rock_East__Break_Outer_Wall,
+            canonical: CanonId::Sniper_Valley_Rock_1,
+            item: Item::Sniper_Valley_Rock_1,
+            price: Currency::Energy(130),
+            time: 0,
+            exit_id: Some(ExitId::Annuna__Sniper_Valley__Cavern_Outer_Rock_East__Break_Outer_Wall),
+        },
+        LocationId::Annuna__Sniper_Valley__Cavern_Inner_Rock_West__Break_Inner_Wall => Location {
+            id: LocationId::Annuna__Sniper_Valley__Cavern_Inner_Rock_West__Break_Inner_Wall,
+            canonical: CanonId::Sniper_Valley_Rock_2,
+            item: Item::Sniper_Valley_Rock_2,
+            price: Currency::Energy(30),
+            time: 0,
+            exit_id: Some(ExitId::Annuna__Sniper_Valley__Cavern_Inner_Rock_West__Break_Inner_Wall),
+        },
+        LocationId::Annuna__Sniper_Valley__Cavern_Inner_Rock_East__Break_Inner_Wall => Location {
+            id: LocationId::Annuna__Sniper_Valley__Cavern_Inner_Rock_East__Break_Inner_Wall,
+            canonical: CanonId::Sniper_Valley_Rock_2,
+            item: Item::Sniper_Valley_Rock_2,
+            price: Currency::Energy(30),
+            time: 0,
+            exit_id: Some(ExitId::Annuna__Sniper_Valley__Cavern_Inner_Rock_East__Break_Inner_Wall),
+        },
+        LocationId::Annuna__Sniper_Valley__Cavern_Cache__Item => Location {
+            id: LocationId::Annuna__Sniper_Valley__Cavern_Cache__Item,
+            canonical: CanonId::None,
+            item: Item::Big_Flask,
+            price: Currency::Free,
+            time: 5500,
             exit_id: None,
         },
         LocationId::Antarctica__Shed__Interior__Shelf => Location {
@@ -10946,6 +11171,14 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         },
         LocationId::Irikar__Abandoned_Room__Corner_Core__Core => Location {
             id: LocationId::Irikar__Abandoned_Room__Corner_Core__Core,
+            canonical: CanonId::None,
+            item: Item::Power_Core,
+            price: Currency::Free,
+            time: 0,
+            exit_id: None,
+        },
+        LocationId::Irikar__Basement_Pipes__Left_Vertical_Pipe__Health_Pickup => Location {
+            id: LocationId::Irikar__Basement_Pipes__Left_Vertical_Pipe__Health_Pickup,
             canonical: CanonId::None,
             item: Item::Power_Core,
             price: Currency::Free,
@@ -12296,6 +12529,153 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
             id: ExitId::Annuna__East_Bridge__East_24__ex__Sniper_Valley__West_24_1,
             time: 1350,
             dest: SpotId::Annuna__Sniper_Valley__West_24,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__Sniper_Valley__West_25_Upper__ex__East_Bridge__East_25_Upper_1 => Exit {
+            id: ExitId::Annuna__Sniper_Valley__West_25_Upper__ex__East_Bridge__East_25_Upper_1,
+            time: 1350,
+            dest: SpotId::Annuna__East_Bridge__East_25_Upper,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__Sniper_Valley__West_25_Lower__ex__East_Bridge__East_25_Lower_1 => Exit {
+            id: ExitId::Annuna__Sniper_Valley__West_25_Lower__ex__East_Bridge__East_25_Lower_1,
+            time: 1350,
+            dest: SpotId::Annuna__East_Bridge__East_25_Lower,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__Sniper_Valley__Bridge_End__ex__Bridge_Lower_Ledge_1 => Exit {
+            id: ExitId::Annuna__Sniper_Valley__Bridge_End__ex__Bridge_Lower_Ledge_1,
+            time: 1754,
+            dest: SpotId::Annuna__Sniper_Valley__Bridge_Lower_Ledge,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__Sniper_Valley__East__ex__Factory_Entrance__West_1 => Exit {
+            id: ExitId::Annuna__Sniper_Valley__East__ex__Factory_Entrance__West_1,
+            time: 1350,
+            dest: SpotId::Annuna__Factory_Entrance__West,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__Sniper_Valley__West_23__ex__East_Bridge__East_24_1 => Exit {
+            id: ExitId::Annuna__Sniper_Valley__West_23__ex__East_Bridge__East_24_1,
+            time: 1350,
+            dest: SpotId::Annuna__East_Bridge__East_24,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__Sniper_Valley__West_23__ex__High_Ledge_1 => Exit {
+            id: ExitId::Annuna__Sniper_Valley__West_23__ex__High_Ledge_1,
+            time: 263,
+            dest: SpotId::Annuna__Sniper_Valley__High_Ledge,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__Sniper_Valley__West_23__ex__Cavern_Outer_Rock_West_1 => Exit {
+            id: ExitId::Annuna__Sniper_Valley__West_23__ex__Cavern_Outer_Rock_West_1,
+            time: 701,
+            dest: SpotId::Annuna__Sniper_Valley__Cavern_Outer_Rock_West,
+            price: Currency::Energy(10),
+            loc_id: None,
+        },
+        ExitId::Annuna__Sniper_Valley__West_24__ex__East_Bridge__East_24_1 => Exit {
+            id: ExitId::Annuna__Sniper_Valley__West_24__ex__East_Bridge__East_24_1,
+            time: 1350,
+            dest: SpotId::Annuna__East_Bridge__East_24,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__Sniper_Valley__Bridge_Upper_Middle__ex__West_24_1 => Exit {
+            id: ExitId::Annuna__Sniper_Valley__Bridge_Upper_Middle__ex__West_24_1,
+            time: 1228,
+            dest: SpotId::Annuna__Sniper_Valley__West_24,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__Sniper_Valley__Bridge_Upper_Middle__ex__West_24_2 => Exit {
+            id: ExitId::Annuna__Sniper_Valley__Bridge_Upper_Middle__ex__West_24_2,
+            time: 1228,
+            dest: SpotId::Annuna__Sniper_Valley__West_24,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__Sniper_Valley__Cavern_Outer_Rock_West__ex__Cavern_Outer_Rock_East_1 => Exit {
+            id: ExitId::Annuna__Sniper_Valley__Cavern_Outer_Rock_West__ex__Cavern_Outer_Rock_East_1,
+            time: 3684,
+            dest: SpotId::Annuna__Sniper_Valley__Cavern_Outer_Rock_East,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__Sniper_Valley__Cavern_Outer_Rock_West__Break_Outer_Wall => Exit {
+            id: ExitId::Annuna__Sniper_Valley__Cavern_Outer_Rock_West__Break_Outer_Wall,
+            time: 3684,
+            dest: SpotId::Annuna__Sniper_Valley__Cavern_Outer_Rock_East,
+            price: Currency::Free,
+            loc_id: Some(LocationId::Annuna__Sniper_Valley__Cavern_Outer_Rock_West__Break_Outer_Wall),
+        },
+        ExitId::Annuna__Sniper_Valley__Cavern_Outer_Rock_East__ex__Cavern_Inner_Rock_West_1 => Exit {
+            id: ExitId::Annuna__Sniper_Valley__Cavern_Outer_Rock_East__ex__Cavern_Inner_Rock_West_1,
+            time: 1228,
+            dest: SpotId::Annuna__Sniper_Valley__Cavern_Inner_Rock_West,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__Sniper_Valley__Cavern_Outer_Rock_East__ex__Cavern_Outer_Rock_West_1 => Exit {
+            id: ExitId::Annuna__Sniper_Valley__Cavern_Outer_Rock_East__ex__Cavern_Outer_Rock_West_1,
+            time: 3684,
+            dest: SpotId::Annuna__Sniper_Valley__Cavern_Outer_Rock_West,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__Sniper_Valley__Cavern_Outer_Rock_East__Break_Outer_Wall => Exit {
+            id: ExitId::Annuna__Sniper_Valley__Cavern_Outer_Rock_East__Break_Outer_Wall,
+            time: 3684,
+            dest: SpotId::Annuna__Sniper_Valley__Cavern_Outer_Rock_West,
+            price: Currency::Free,
+            loc_id: Some(LocationId::Annuna__Sniper_Valley__Cavern_Outer_Rock_East__Break_Outer_Wall),
+        },
+        ExitId::Annuna__Sniper_Valley__Cavern_Inner_Rock_West__ex__Cavern_Inner_Rock_East_1 => Exit {
+            id: ExitId::Annuna__Sniper_Valley__Cavern_Inner_Rock_West__ex__Cavern_Inner_Rock_East_1,
+            time: 1052,
+            dest: SpotId::Annuna__Sniper_Valley__Cavern_Inner_Rock_East,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__Sniper_Valley__Cavern_Inner_Rock_West__Break_Inner_Wall => Exit {
+            id: ExitId::Annuna__Sniper_Valley__Cavern_Inner_Rock_West__Break_Inner_Wall,
+            time: 1052,
+            dest: SpotId::Annuna__Sniper_Valley__Cavern_Inner_Rock_East,
+            price: Currency::Free,
+            loc_id: Some(LocationId::Annuna__Sniper_Valley__Cavern_Inner_Rock_West__Break_Inner_Wall),
+        },
+        ExitId::Annuna__Sniper_Valley__Cavern_Inner_Rock_East__ex__Cavern_Inner_Rock_West_1 => Exit {
+            id: ExitId::Annuna__Sniper_Valley__Cavern_Inner_Rock_East__ex__Cavern_Inner_Rock_West_1,
+            time: 1052,
+            dest: SpotId::Annuna__Sniper_Valley__Cavern_Inner_Rock_West,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__Sniper_Valley__Cavern_Inner_Rock_East__Break_Inner_Wall => Exit {
+            id: ExitId::Annuna__Sniper_Valley__Cavern_Inner_Rock_East__Break_Inner_Wall,
+            time: 1052,
+            dest: SpotId::Annuna__Sniper_Valley__Cavern_Inner_Rock_West,
+            price: Currency::Free,
+            loc_id: Some(LocationId::Annuna__Sniper_Valley__Cavern_Inner_Rock_East__Break_Inner_Wall),
+        },
+        ExitId::Annuna__Sniper_Valley__Cavern_Tight_Corner__ex__Cavern_Cache_1 => Exit {
+            id: ExitId::Annuna__Sniper_Valley__Cavern_Tight_Corner__ex__Cavern_Cache_1,
+            time: 789,
+            dest: SpotId::Annuna__Sniper_Valley__Cavern_Cache,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__Sniper_Valley__Cavern_Cache__ex__Cavern_Tight_Corner_1 => Exit {
+            id: ExitId::Annuna__Sniper_Valley__Cavern_Cache__ex__Cavern_Tight_Corner_1,
+            time: 1200,
+            dest: SpotId::Annuna__Sniper_Valley__Cavern_Tight_Corner,
             price: Currency::Free,
             loc_id: None,
         },
@@ -21779,7 +22159,8 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             exits: Range {
-                start: 0, end: 0,
+                start: ExitId::Annuna__Sniper_Valley__West_25_Upper__ex__East_Bridge__East_25_Upper_1.into_usize(),
+                end: ExitId::Annuna__Sniper_Valley__West_25_Upper__ex__East_Bridge__East_25_Upper_1.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
@@ -21791,19 +22172,60 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             exits: Range {
+                start: ExitId::Annuna__Sniper_Valley__West_25_Lower__ex__East_Bridge__East_25_Lower_1.into_usize(),
+                end: ExitId::Annuna__Sniper_Valley__West_25_Lower__ex__East_Bridge__East_25_Lower_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__Sniper_Valley__Bridge_Lower_Ledge => Spot {
+            id: SpotId::Annuna__Sniper_Valley__Bridge_Lower_Ledge,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
                 start: 0, end: 0,
             },
             actions: Range {
                 start: 0, end: 0,
             },
         },
-        SpotId::Annuna__Sniper_Valley__West_24 => Spot {
-            id: SpotId::Annuna__Sniper_Valley__West_24,
+        SpotId::Annuna__Sniper_Valley__Bridge_End => Spot {
+            id: SpotId::Annuna__Sniper_Valley__Bridge_End,
+            locations: Range {
+                start: LocationId::Annuna__Sniper_Valley__Bridge_End__Health_Pickup.into_usize(),
+                end: LocationId::Annuna__Sniper_Valley__Bridge_End__Health_Pickup.into_usize() + 1,
+            },
+            exits: Range {
+                start: ExitId::Annuna__Sniper_Valley__Bridge_End__ex__Bridge_Lower_Ledge_1.into_usize(),
+                end: ExitId::Annuna__Sniper_Valley__Bridge_End__ex__Bridge_Lower_Ledge_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__Sniper_Valley__Table => Spot {
+            id: SpotId::Annuna__Sniper_Valley__Table,
+            locations: Range {
+                start: LocationId::Annuna__Sniper_Valley__Table__Item.into_usize(),
+                end: LocationId::Annuna__Sniper_Valley__Table__Item.into_usize() + 1,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__Sniper_Valley__East => Spot {
+            id: SpotId::Annuna__Sniper_Valley__East,
             locations: Range {
                 start: 0, end: 0,
             },
             exits: Range {
-                start: 0, end: 0,
+                start: ExitId::Annuna__Sniper_Valley__East__ex__Factory_Entrance__West_1.into_usize(),
+                end: ExitId::Annuna__Sniper_Valley__East__ex__Factory_Entrance__West_1.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
@@ -21815,7 +22237,8 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             exits: Range {
-                start: 0, end: 0,
+                start: ExitId::Annuna__Sniper_Valley__West_23__ex__Cavern_Outer_Rock_West_1.into_usize(),
+                end: ExitId::Annuna__Sniper_Valley__West_23__ex__High_Ledge_1.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
@@ -21833,8 +22256,165 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
         },
+        SpotId::Annuna__Sniper_Valley__West_24 => Spot {
+            id: SpotId::Annuna__Sniper_Valley__West_24,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Annuna__Sniper_Valley__West_24__ex__East_Bridge__East_24_1.into_usize(),
+                end: ExitId::Annuna__Sniper_Valley__West_24__ex__East_Bridge__East_24_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__Sniper_Valley__Bridge_Upper_Middle => Spot {
+            id: SpotId::Annuna__Sniper_Valley__Bridge_Upper_Middle,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Annuna__Sniper_Valley__Bridge_Upper_Middle__ex__West_24_1.into_usize(),
+                end: ExitId::Annuna__Sniper_Valley__Bridge_Upper_Middle__ex__West_24_2.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__Sniper_Valley__Bridge_Upper_Ledge => Spot {
+            id: SpotId::Annuna__Sniper_Valley__Bridge_Upper_Ledge,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__Sniper_Valley__Cavern_Outer_Rock_West => Spot {
+            id: SpotId::Annuna__Sniper_Valley__Cavern_Outer_Rock_West,
+            locations: Range {
+                start: LocationId::Annuna__Sniper_Valley__Cavern_Outer_Rock_West__Break_Outer_Wall.into_usize(),
+                end: LocationId::Annuna__Sniper_Valley__Cavern_Outer_Rock_West__Break_Outer_Wall.into_usize() + 1,
+            },
+            exits: Range {
+                start: ExitId::Annuna__Sniper_Valley__Cavern_Outer_Rock_West__ex__Cavern_Outer_Rock_East_1.into_usize(),
+                end: ExitId::Annuna__Sniper_Valley__Cavern_Outer_Rock_West__ex__Cavern_Outer_Rock_East_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__Sniper_Valley__Cavern_Outer_Rock_East => Spot {
+            id: SpotId::Annuna__Sniper_Valley__Cavern_Outer_Rock_East,
+            locations: Range {
+                start: LocationId::Annuna__Sniper_Valley__Cavern_Outer_Rock_East__Break_Outer_Wall.into_usize(),
+                end: LocationId::Annuna__Sniper_Valley__Cavern_Outer_Rock_East__Break_Outer_Wall.into_usize() + 1,
+            },
+            exits: Range {
+                start: ExitId::Annuna__Sniper_Valley__Cavern_Outer_Rock_East__ex__Cavern_Inner_Rock_West_1.into_usize(),
+                end: ExitId::Annuna__Sniper_Valley__Cavern_Outer_Rock_East__ex__Cavern_Outer_Rock_West_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__Sniper_Valley__Cavern_Inner_Rock_West => Spot {
+            id: SpotId::Annuna__Sniper_Valley__Cavern_Inner_Rock_West,
+            locations: Range {
+                start: LocationId::Annuna__Sniper_Valley__Cavern_Inner_Rock_West__Break_Inner_Wall.into_usize(),
+                end: LocationId::Annuna__Sniper_Valley__Cavern_Inner_Rock_West__Break_Inner_Wall.into_usize() + 1,
+            },
+            exits: Range {
+                start: ExitId::Annuna__Sniper_Valley__Cavern_Inner_Rock_West__ex__Cavern_Inner_Rock_East_1.into_usize(),
+                end: ExitId::Annuna__Sniper_Valley__Cavern_Inner_Rock_West__ex__Cavern_Inner_Rock_East_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__Sniper_Valley__Cavern_Inner_Rock_East => Spot {
+            id: SpotId::Annuna__Sniper_Valley__Cavern_Inner_Rock_East,
+            locations: Range {
+                start: LocationId::Annuna__Sniper_Valley__Cavern_Inner_Rock_East__Break_Inner_Wall.into_usize(),
+                end: LocationId::Annuna__Sniper_Valley__Cavern_Inner_Rock_East__Break_Inner_Wall.into_usize() + 1,
+            },
+            exits: Range {
+                start: ExitId::Annuna__Sniper_Valley__Cavern_Inner_Rock_East__ex__Cavern_Inner_Rock_West_1.into_usize(),
+                end: ExitId::Annuna__Sniper_Valley__Cavern_Inner_Rock_East__ex__Cavern_Inner_Rock_West_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__Sniper_Valley__Cavern_Tight_Corner => Spot {
+            id: SpotId::Annuna__Sniper_Valley__Cavern_Tight_Corner,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Annuna__Sniper_Valley__Cavern_Tight_Corner__ex__Cavern_Cache_1.into_usize(),
+                end: ExitId::Annuna__Sniper_Valley__Cavern_Tight_Corner__ex__Cavern_Cache_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__Sniper_Valley__Cavern_Cache => Spot {
+            id: SpotId::Annuna__Sniper_Valley__Cavern_Cache,
+            locations: Range {
+                start: LocationId::Annuna__Sniper_Valley__Cavern_Cache__Item.into_usize(),
+                end: LocationId::Annuna__Sniper_Valley__Cavern_Cache__Item.into_usize() + 1,
+            },
+            exits: Range {
+                start: ExitId::Annuna__Sniper_Valley__Cavern_Cache__ex__Cavern_Tight_Corner_1.into_usize(),
+                end: ExitId::Annuna__Sniper_Valley__Cavern_Cache__ex__Cavern_Tight_Corner_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
         SpotId::Annuna__Vertical_Room__West_22 => Spot {
             id: SpotId::Annuna__Vertical_Room__West_22,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__Factory_Entrance__West => Spot {
+            id: SpotId::Annuna__Factory_Entrance__West,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__Factory_Entrance__Save_Point => Spot {
+            id: SpotId::Annuna__Factory_Entrance__Save_Point,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__Factory_Entrance__East => Spot {
+            id: SpotId::Annuna__Factory_Entrance__East,
             locations: Range {
                 start: 0, end: 0,
             },
@@ -32795,7 +33375,8 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
         SpotId::Irikar__Basement_Pipes__Left_Vertical_Pipe => Spot {
             id: SpotId::Irikar__Basement_Pipes__Left_Vertical_Pipe,
             locations: Range {
-                start: 0, end: 0,
+                start: LocationId::Irikar__Basement_Pipes__Left_Vertical_Pipe__Health_Pickup.into_usize(),
+                end: LocationId::Irikar__Basement_Pipes__Left_Vertical_Pipe__Health_Pickup.into_usize() + 1,
             },
             exits: Range {
                 start: 0, end: 0,

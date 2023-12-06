@@ -699,21 +699,224 @@ areas:
     #region Lower
     - name: West 25 Upper
       coord: [40.05, 24.3]
+      local:
+        - to: Bridge Lower Ledge
+      exits:
+        - to: East Bridge > East 25 Upper
+          tags: [xshift]
     - name: West 25 Lower
       coord: [40.05, 24.8]
+      local:
+        - to: Bridge End
+          jumps: 2
+      exits:
+        - to: East Bridge > East 25 Lower
+          tags: [xshift]
+    - name: Bridge Lower Ledge
+      coord: [40.9, 24.3]
+      local:
+        - to: West 25 Upper
+        - to: Bridge End
+    - name: Bridge End
+      coord: [41.4, 24.7]
+      local:
+        - to: West 25 Lower
+        - to: Table
+          jumps: 2
+      locations:
+        - name: Health Pickup
+          item: Power_Core
+          req: $more_refills
+          tags: [standing]
+      exits:
+        - to: Bridge Lower Ledge
+          req: $hook
+          movement: base
+          jumps: 2
+        # Doable with Anuman and grab?
+    - name: Table
+      coord: [42.0, 24.4]
+      local:
+        - to: Bridge End
+        - to: East
+      locations:
+        - name: Item
+          item: Family_Tragedy
+          tags: [standing]
+    - name: East
+      coord: [42.95, 24.6]
+      local:
+        - to: Table
+          jumps: 3
+      exits:
+        - to: Factory Entrance > West
+          tags: [xshift]
     #endregion
 
     #region Upper
-    - name: West 24
-      coord: [40.05, 23.55]
     - name: West 23
       coord: [40.05, 22.35]
+      local:
+        - to: Bridge Upper Ledge
+      exits:
+        - to: East Bridge > East 24
+          tags: [xshift]
+        - to: High Ledge
+          req: $hook or $hover
+          movement: base
+        - to: Cavern Outer Rock West
+          req: $mist2
+          movement: mist2
+          price: 10
     - name: High Ledge
       coord: [40.125, 22.35]
+      local:
+        - to: West 23
+        - to: Bridge Upper Middle
+        - to: Cavern Outer Rock West
+          jumps: 1
+      
+    - name: West 24
+      coord: [40.05, 23.55]
+      local:
+        - to: Bridge Upper Middle
+      exits:
+        - to: East Bridge > East 24
+          tags: [xshift]
+    - name: Bridge Upper Middle
+      coord: [40.4, 23.8]
+      local:
+        - to: Bridge Upper Ledge
+      exits:
+        - to: West 24
+          req: $grab
+          movement: base
+          jumps: 2
+        - to: West 24
+          req: $hook
+          movement: base
+          jumps: 1
+    - name: Bridge Upper Ledge
+      coord: [40.9, 23.8]
+      local:
+        - to: Bridge Upper Middle
+        - to: Bridge Lower Ledge
+        - to: West 25 Lower
+          thru: [40.9, 24.6]
+        - to: Bridge End
+      # TODO: mist travel up to the cavern?
+    #endregion
+
+    #region Cavern
+    - name: Cavern Outer Rock West
+      coord: [40.25, 22.25]
+      local:
+        - to: High Ledge
+      exits:
+        - to: Cavern Outer Rock East
+          req: Sniper_Valley_Rock_1
+          movement: base
+      hybrid:
+        - name: Break Outer Wall
+          to: Cavern Outer Rock East
+          item: Sniper_Valley_Rock_1
+          canon: Sniper_Valley_Rock_1
+          req: $mist2
+          movement: mist2
+          price: 130
+          item_time: 0
+    - name: Cavern Outer Rock East
+      coord: [41.3, 22.25]
+      exits:
+        - to: Cavern Inner Rock West
+          req: ^mode == 'drone'
+          movement: base
+          jumps: 1
+          penalties:
+            - when: not Slingshot_Hook
+              add: 0.1
+        - to: Cavern Outer Rock West
+          req: Sniper_Valley_Rock_1
+          movement: base
+      hybrid:
+        - name: Break Outer Wall
+          to: Cavern Outer Rock West
+          item: Sniper_Valley_Rock_1
+          canon: Sniper_Valley_Rock_1
+          req: $mist2
+          movement: mist2
+          price: 130
+          item_time: 0
+    - name: Cavern Inner Rock West
+      coord: [41.65, 22.225]
+      exits:
+        - to: Cavern Inner Rock East
+          req: ^mode == 'drone' and Sniper_Valley_Rock_2
+          movement: base
+      hybrid:
+        - name: Break Inner Wall
+          to: Cavern Inner Rock East
+          item: Sniper_Valley_Rock_2
+          canon: Sniper_Valley_Rock_2
+          req: ^mode == 'drone' and $mist2
+          movement: mist2
+          price: 30
+          item_time: 0
+    - name: Cavern Inner Rock East
+      coord: [41.95, 22.225]
+      local:
+        - to: Cavern Tight Corner
+          thru: [42.175, 22.4]
+      exits:
+        - to: Cavern Inner Rock West
+          req: ^mode == 'drone' and Sniper_Valley_Rock_2
+          movement: base
+      hybrid:
+        - name: Break Inner Wall
+          to: Cavern Inner Rock West
+          item: Sniper_Valley_Rock_2
+          canon: Sniper_Valley_Rock_2
+          req: ^mode == 'drone' and $mist2
+          movement: mist2
+          price: 30
+          item_time: 0
+    - name: Cavern Tight Corner
+      coord: [42.175, 22.55]
+      local:
+        - to: Cavern Inner Rock East
+          thru: [42.175, 22.4]
+          jumps: [1, 1]
+      exits:
+        - to: Cavern Cache
+          req: ^mode == 'drone'
+          movement: base
+    - name: Cavern Cache
+      coord: [42.4, 22.7]
+      locations:
+        - name: Item
+          item: Big_Flask
+          tags: [flask]
+      exits:
+        - to: Cavern Tight Corner
+          req: ^mode == 'drone'
+          movement: base
+          jumps: 2
     #endregion
 
 - name: Vertical Room
   on_entry: $reset_old_area(^newpos)
   spots:
     - name: West 22
-      coord: [40.05, 21.75]
+      coord: [40.1, 21.75]
+
+- name: Factory Entrance
+  on_entry: $reset_old_area(^newpos)
+  map: save
+  spots:
+    - name: West
+      coord: [43.05, 24.6]
+    - name: Save Point
+      coord: [43.5, 24.7]
+    - name: East
+      coord: [43.9, 24.75]
+

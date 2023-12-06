@@ -71,6 +71,7 @@ pub enum Item {
     Ebih_West_Block,
     Escape,
     Exit_Breach,
+    Family_Tragedy,
     Fast_Travel,
     Flask,
     Giguna_Boulder,
@@ -140,6 +141,8 @@ pub enum Item {
     Slingshot_Charge,
     Slingshot_Hook,
     Slingshot_Weapon,
+    Sniper_Valley_Rock_1,
+    Sniper_Valley_Rock_2,
     Station_Power,
     Storm_Bomb,
     Suspension_Bridge,
@@ -216,6 +219,7 @@ impl fmt::Display for Item {
             Item::Ebih_West_Block => write!(f, "{}", "Ebih_West_Block"),
             Item::Escape => write!(f, "{}", "Escape"),
             Item::Exit_Breach => write!(f, "{}", "Exit_Breach"),
+            Item::Family_Tragedy => write!(f, "{}", "Family_Tragedy"),
             Item::Fast_Travel => write!(f, "{}", "Fast_Travel"),
             Item::Flask => write!(f, "{}", "Flask"),
             Item::Giguna_Boulder => write!(f, "{}", "Giguna_Boulder"),
@@ -285,6 +289,8 @@ impl fmt::Display for Item {
             Item::Slingshot_Charge => write!(f, "{}", "Slingshot_Charge"),
             Item::Slingshot_Hook => write!(f, "{}", "Slingshot_Hook"),
             Item::Slingshot_Weapon => write!(f, "{}", "Slingshot_Weapon"),
+            Item::Sniper_Valley_Rock_1 => write!(f, "{}", "Sniper_Valley_Rock_1"),
+            Item::Sniper_Valley_Rock_2 => write!(f, "{}", "Sniper_Valley_Rock_2"),
             Item::Station_Power => write!(f, "{}", "Station_Power"),
             Item::Storm_Bomb => write!(f, "{}", "Storm_Bomb"),
             Item::Suspension_Bridge => write!(f, "{}", "Suspension_Bridge"),
@@ -365,6 +371,7 @@ impl std::str::FromStr for Item {
             "Ebih_West_Block" => Ok(Item::Ebih_West_Block),
             "Escape" => Ok(Item::Escape),
             "Exit_Breach" => Ok(Item::Exit_Breach),
+            "Family_Tragedy" => Ok(Item::Family_Tragedy),
             "Fast_Travel" => Ok(Item::Fast_Travel),
             "Flask" => Ok(Item::Flask),
             "Giguna_Boulder" => Ok(Item::Giguna_Boulder),
@@ -434,6 +441,8 @@ impl std::str::FromStr for Item {
             "Slingshot_Charge" => Ok(Item::Slingshot_Charge),
             "Slingshot_Hook" => Ok(Item::Slingshot_Hook),
             "Slingshot_Weapon" => Ok(Item::Slingshot_Weapon),
+            "Sniper_Valley_Rock_1" => Ok(Item::Sniper_Valley_Rock_1),
+            "Sniper_Valley_Rock_2" => Ok(Item::Sniper_Valley_Rock_2),
             "Station_Power" => Ok(Item::Station_Power),
             "Storm_Bomb" => Ok(Item::Storm_Bomb),
             "Suspension_Bridge" => Ok(Item::Suspension_Bridge),
@@ -468,6 +477,7 @@ pub fn unused_item(id: Item) -> bool {
             | Item::Drone_Melee_Damage_3
             | Item::Drone_Melee_Speed_3
             | Item::Escape
+            | Item::Family_Tragedy
             | Item::Health_Upgrade_5
             | Item::Heretics_Granddaughter
             | Item::Infection_Speed_2

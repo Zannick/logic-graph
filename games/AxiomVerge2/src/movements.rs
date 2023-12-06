@@ -1155,6 +1155,115 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
         ) => 30526,
         (
             [false],
+            SpotId::Annuna__Sniper_Valley__Bridge_End,
+            SpotId::Annuna__Sniper_Valley__Table,
+        ) => 2105,
+        (
+            [false],
+            SpotId::Annuna__Sniper_Valley__Bridge_End,
+            SpotId::Annuna__Sniper_Valley__West_25_Lower,
+        ) => 4736,
+        (
+            [false],
+            SpotId::Annuna__Sniper_Valley__Bridge_Lower_Ledge,
+            SpotId::Annuna__Sniper_Valley__Bridge_End,
+        ) => 1754,
+        (
+            [false],
+            SpotId::Annuna__Sniper_Valley__Bridge_Lower_Ledge,
+            SpotId::Annuna__Sniper_Valley__West_25_Upper,
+        ) => 2982,
+        (
+            [false],
+            SpotId::Annuna__Sniper_Valley__Bridge_Upper_Ledge,
+            SpotId::Annuna__Sniper_Valley__Bridge_End,
+        ) => 1754,
+        (
+            [false],
+            SpotId::Annuna__Sniper_Valley__Bridge_Upper_Ledge,
+            SpotId::Annuna__Sniper_Valley__Bridge_Lower_Ledge,
+        ) => 500,
+        (
+            [false],
+            SpotId::Annuna__Sniper_Valley__Bridge_Upper_Ledge,
+            SpotId::Annuna__Sniper_Valley__Bridge_Upper_Middle,
+        ) => 1754,
+        // [0.8, 2.982456]
+        (
+            [false],
+            SpotId::Annuna__Sniper_Valley__Bridge_Upper_Ledge,
+            SpotId::Annuna__Sniper_Valley__West_25_Lower,
+        ) => 3782,
+        (
+            [false],
+            SpotId::Annuna__Sniper_Valley__Bridge_Upper_Middle,
+            SpotId::Annuna__Sniper_Valley__Bridge_Upper_Ledge,
+        ) => 1754,
+        // [0.789474, 0.15]
+        (
+            [false],
+            SpotId::Annuna__Sniper_Valley__Cavern_Inner_Rock_East,
+            SpotId::Annuna__Sniper_Valley__Cavern_Tight_Corner,
+        ) => 939,
+        (
+            [false],
+            SpotId::Annuna__Sniper_Valley__Cavern_Outer_Rock_West,
+            SpotId::Annuna__Sniper_Valley__High_Ledge,
+        ) => 438,
+        // [0.6, 0.789474]
+        (
+            [false],
+            SpotId::Annuna__Sniper_Valley__Cavern_Tight_Corner,
+            SpotId::Annuna__Sniper_Valley__Cavern_Inner_Rock_East,
+        ) => 1389,
+        ([false], SpotId::Annuna__Sniper_Valley__East, SpotId::Annuna__Sniper_Valley__Table) => {
+            3333
+        }
+        (
+            [false],
+            SpotId::Annuna__Sniper_Valley__High_Ledge,
+            SpotId::Annuna__Sniper_Valley__Bridge_Upper_Middle,
+        ) => 1449,
+        (
+            [false],
+            SpotId::Annuna__Sniper_Valley__High_Ledge,
+            SpotId::Annuna__Sniper_Valley__Cavern_Outer_Rock_West,
+        ) => 600,
+        (
+            [false],
+            SpotId::Annuna__Sniper_Valley__High_Ledge,
+            SpotId::Annuna__Sniper_Valley__West_23,
+        ) => 263,
+        (
+            [false],
+            SpotId::Annuna__Sniper_Valley__Table,
+            SpotId::Annuna__Sniper_Valley__Bridge_End,
+        ) => 2105,
+        ([false], SpotId::Annuna__Sniper_Valley__Table, SpotId::Annuna__Sniper_Valley__East) => {
+            3333
+        }
+        (
+            [false],
+            SpotId::Annuna__Sniper_Valley__West_23,
+            SpotId::Annuna__Sniper_Valley__Bridge_Upper_Ledge,
+        ) => 2982,
+        (
+            [false],
+            SpotId::Annuna__Sniper_Valley__West_24,
+            SpotId::Annuna__Sniper_Valley__Bridge_Upper_Middle,
+        ) => 1228,
+        (
+            [false],
+            SpotId::Annuna__Sniper_Valley__West_25_Lower,
+            SpotId::Annuna__Sniper_Valley__Bridge_End,
+        ) => 4736,
+        (
+            [false],
+            SpotId::Annuna__Sniper_Valley__West_25_Upper,
+            SpotId::Annuna__Sniper_Valley__Bridge_Lower_Ledge,
+        ) => 2982,
+        (
+            [false],
             SpotId::Annuna__West_Bridge__East_25_Lower,
             SpotId::Annuna__West_Bridge__Plinth,
         ) => 5175,
@@ -9154,6 +9263,111 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
         ) => 30526,
         (
             [true],
+            SpotId::Annuna__Sniper_Valley__Bridge_End,
+            SpotId::Annuna__Sniper_Valley__Table,
+        ) => 2105,
+        (
+            [true],
+            SpotId::Annuna__Sniper_Valley__Bridge_End,
+            SpotId::Annuna__Sniper_Valley__West_25_Lower,
+        ) => 4736,
+        (
+            [true],
+            SpotId::Annuna__Sniper_Valley__Bridge_Lower_Ledge,
+            SpotId::Annuna__Sniper_Valley__Bridge_End,
+        ) => 1754,
+        (
+            [true],
+            SpotId::Annuna__Sniper_Valley__Bridge_Lower_Ledge,
+            SpotId::Annuna__Sniper_Valley__West_25_Upper,
+        ) => 2982,
+        (
+            [true],
+            SpotId::Annuna__Sniper_Valley__Bridge_Upper_Ledge,
+            SpotId::Annuna__Sniper_Valley__Bridge_End,
+        ) => 1754,
+        (
+            [true],
+            SpotId::Annuna__Sniper_Valley__Bridge_Upper_Ledge,
+            SpotId::Annuna__Sniper_Valley__Bridge_Lower_Ledge,
+        ) => 500,
+        (
+            [true],
+            SpotId::Annuna__Sniper_Valley__Bridge_Upper_Ledge,
+            SpotId::Annuna__Sniper_Valley__Bridge_Upper_Middle,
+        ) => 1754,
+        // [0.8, 2.982456]
+        (
+            [true],
+            SpotId::Annuna__Sniper_Valley__Bridge_Upper_Ledge,
+            SpotId::Annuna__Sniper_Valley__West_25_Lower,
+        ) => 3782,
+        (
+            [true],
+            SpotId::Annuna__Sniper_Valley__Bridge_Upper_Middle,
+            SpotId::Annuna__Sniper_Valley__Bridge_Upper_Ledge,
+        ) => 1754,
+        // [0.789474, 0.15]
+        (
+            [true],
+            SpotId::Annuna__Sniper_Valley__Cavern_Inner_Rock_East,
+            SpotId::Annuna__Sniper_Valley__Cavern_Tight_Corner,
+        ) => 939,
+        (
+            [true],
+            SpotId::Annuna__Sniper_Valley__Cavern_Outer_Rock_West,
+            SpotId::Annuna__Sniper_Valley__High_Ledge,
+        ) => 438,
+        // [0.6, 0.789474]
+        (
+            [true],
+            SpotId::Annuna__Sniper_Valley__Cavern_Tight_Corner,
+            SpotId::Annuna__Sniper_Valley__Cavern_Inner_Rock_East,
+        ) => 1389,
+        ([true], SpotId::Annuna__Sniper_Valley__East, SpotId::Annuna__Sniper_Valley__Table) => 3333,
+        (
+            [true],
+            SpotId::Annuna__Sniper_Valley__High_Ledge,
+            SpotId::Annuna__Sniper_Valley__Bridge_Upper_Middle,
+        ) => 1449,
+        (
+            [true],
+            SpotId::Annuna__Sniper_Valley__High_Ledge,
+            SpotId::Annuna__Sniper_Valley__Cavern_Outer_Rock_West,
+        ) => 600,
+        (
+            [true],
+            SpotId::Annuna__Sniper_Valley__High_Ledge,
+            SpotId::Annuna__Sniper_Valley__West_23,
+        ) => 263,
+        (
+            [true],
+            SpotId::Annuna__Sniper_Valley__Table,
+            SpotId::Annuna__Sniper_Valley__Bridge_End,
+        ) => 2105,
+        ([true], SpotId::Annuna__Sniper_Valley__Table, SpotId::Annuna__Sniper_Valley__East) => 3333,
+        (
+            [true],
+            SpotId::Annuna__Sniper_Valley__West_23,
+            SpotId::Annuna__Sniper_Valley__Bridge_Upper_Ledge,
+        ) => 2982,
+        (
+            [true],
+            SpotId::Annuna__Sniper_Valley__West_24,
+            SpotId::Annuna__Sniper_Valley__Bridge_Upper_Middle,
+        ) => 1228,
+        (
+            [true],
+            SpotId::Annuna__Sniper_Valley__West_25_Lower,
+            SpotId::Annuna__Sniper_Valley__Bridge_End,
+        ) => 4736,
+        (
+            [true],
+            SpotId::Annuna__Sniper_Valley__West_25_Upper,
+            SpotId::Annuna__Sniper_Valley__Bridge_Lower_Ledge,
+        ) => 2982,
+        (
+            [true],
             SpotId::Annuna__West_Bridge__East_25_Lower,
             SpotId::Annuna__West_Bridge__Plinth,
         ) => 5175,
@@ -16412,6 +16626,79 @@ pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
         (SpotId::Annuna__East_Bridge__East_24, SpotId::Annuna__East_Bridge__Bridge_Top_East) => {
             true
         }
+        (
+            SpotId::Annuna__Sniper_Valley__West_25_Upper,
+            SpotId::Annuna__Sniper_Valley__Bridge_Lower_Ledge,
+        ) => true,
+        (
+            SpotId::Annuna__Sniper_Valley__West_25_Lower,
+            SpotId::Annuna__Sniper_Valley__Bridge_End,
+        ) => true,
+        (
+            SpotId::Annuna__Sniper_Valley__Bridge_Lower_Ledge,
+            SpotId::Annuna__Sniper_Valley__West_25_Upper,
+        ) => true,
+        (
+            SpotId::Annuna__Sniper_Valley__Bridge_Lower_Ledge,
+            SpotId::Annuna__Sniper_Valley__Bridge_End,
+        ) => true,
+        (
+            SpotId::Annuna__Sniper_Valley__Bridge_End,
+            SpotId::Annuna__Sniper_Valley__West_25_Lower,
+        ) => true,
+        (SpotId::Annuna__Sniper_Valley__Bridge_End, SpotId::Annuna__Sniper_Valley__Table) => true,
+        (SpotId::Annuna__Sniper_Valley__Table, SpotId::Annuna__Sniper_Valley__Bridge_End) => true,
+        (SpotId::Annuna__Sniper_Valley__Table, SpotId::Annuna__Sniper_Valley__East) => true,
+        (SpotId::Annuna__Sniper_Valley__East, SpotId::Annuna__Sniper_Valley__Table) => true,
+        (
+            SpotId::Annuna__Sniper_Valley__West_23,
+            SpotId::Annuna__Sniper_Valley__Bridge_Upper_Ledge,
+        ) => true,
+        (SpotId::Annuna__Sniper_Valley__High_Ledge, SpotId::Annuna__Sniper_Valley__West_23) => true,
+        (
+            SpotId::Annuna__Sniper_Valley__High_Ledge,
+            SpotId::Annuna__Sniper_Valley__Bridge_Upper_Middle,
+        ) => true,
+        (
+            SpotId::Annuna__Sniper_Valley__High_Ledge,
+            SpotId::Annuna__Sniper_Valley__Cavern_Outer_Rock_West,
+        ) => true,
+        (
+            SpotId::Annuna__Sniper_Valley__West_24,
+            SpotId::Annuna__Sniper_Valley__Bridge_Upper_Middle,
+        ) => true,
+        (
+            SpotId::Annuna__Sniper_Valley__Bridge_Upper_Middle,
+            SpotId::Annuna__Sniper_Valley__Bridge_Upper_Ledge,
+        ) => true,
+        (
+            SpotId::Annuna__Sniper_Valley__Bridge_Upper_Ledge,
+            SpotId::Annuna__Sniper_Valley__Bridge_Upper_Middle,
+        ) => true,
+        (
+            SpotId::Annuna__Sniper_Valley__Bridge_Upper_Ledge,
+            SpotId::Annuna__Sniper_Valley__Bridge_Lower_Ledge,
+        ) => true,
+        (
+            SpotId::Annuna__Sniper_Valley__Bridge_Upper_Ledge,
+            SpotId::Annuna__Sniper_Valley__West_25_Lower,
+        ) => true,
+        (
+            SpotId::Annuna__Sniper_Valley__Bridge_Upper_Ledge,
+            SpotId::Annuna__Sniper_Valley__Bridge_End,
+        ) => true,
+        (
+            SpotId::Annuna__Sniper_Valley__Cavern_Outer_Rock_West,
+            SpotId::Annuna__Sniper_Valley__High_Ledge,
+        ) => true,
+        (
+            SpotId::Annuna__Sniper_Valley__Cavern_Inner_Rock_East,
+            SpotId::Annuna__Sniper_Valley__Cavern_Tight_Corner,
+        ) => true,
+        (
+            SpotId::Annuna__Sniper_Valley__Cavern_Tight_Corner,
+            SpotId::Annuna__Sniper_Valley__Cavern_Inner_Rock_East,
+        ) => true,
         (SpotId::Antarctica__West__Helipad, SpotId::Antarctica__West__Shed_Entry) => true,
         (SpotId::Antarctica__West__Helipad, SpotId::Antarctica__West__Boxes) => true,
         (SpotId::Antarctica__West__Boxes, SpotId::Antarctica__West__Helipad) => true,
@@ -22795,6 +23082,21 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             1000,
         ),
         (
+            SpotId::Annuna__Factory_Entrance__East,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Factory_Entrance__Save_Point,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Factory_Entrance__West,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
             SpotId::Annuna__Mirror_Match__Below_Switch,
             SpotId::Annuna__Mirror_Match__Central_Pillar,
             1754,
@@ -23005,9 +23307,229 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             1000,
         ),
         (
+            SpotId::Annuna__Sniper_Valley__Bridge_End,
+            SpotId::Annuna__Sniper_Valley__Bridge_Lower_Ledge,
+            1754,
+        ),
+        (
+            SpotId::Annuna__Sniper_Valley__Bridge_End,
+            SpotId::Annuna__Sniper_Valley__Table,
+            2105,
+        ),
+        (
+            SpotId::Annuna__Sniper_Valley__Bridge_End,
+            SpotId::Annuna__Sniper_Valley__West_25_Lower,
+            4736,
+        ),
+        (
+            SpotId::Annuna__Sniper_Valley__Bridge_End,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Sniper_Valley__Bridge_Lower_Ledge,
+            SpotId::Annuna__Sniper_Valley__Bridge_End,
+            1754,
+        ),
+        (
+            SpotId::Annuna__Sniper_Valley__Bridge_Lower_Ledge,
+            SpotId::Annuna__Sniper_Valley__West_25_Upper,
+            2982,
+        ),
+        (
+            SpotId::Annuna__Sniper_Valley__Bridge_Lower_Ledge,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Sniper_Valley__Bridge_Upper_Ledge,
+            SpotId::Annuna__Sniper_Valley__Bridge_End,
+            1754,
+        ),
+        (
+            SpotId::Annuna__Sniper_Valley__Bridge_Upper_Ledge,
+            SpotId::Annuna__Sniper_Valley__Bridge_Lower_Ledge,
+            500,
+        ),
+        (
+            SpotId::Annuna__Sniper_Valley__Bridge_Upper_Ledge,
+            SpotId::Annuna__Sniper_Valley__Bridge_Upper_Middle,
+            1754,
+        ),
+        (
+            SpotId::Annuna__Sniper_Valley__Bridge_Upper_Ledge,
+            SpotId::Annuna__Sniper_Valley__West_25_Lower,
+            3782,
+        ),
+        (
+            SpotId::Annuna__Sniper_Valley__Bridge_Upper_Ledge,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Sniper_Valley__Bridge_Upper_Middle,
+            SpotId::Annuna__Sniper_Valley__Bridge_Upper_Ledge,
+            1754,
+        ),
+        (
+            SpotId::Annuna__Sniper_Valley__Bridge_Upper_Middle,
+            SpotId::Annuna__Sniper_Valley__West_24,
+            1228,
+        ),
+        (
+            SpotId::Annuna__Sniper_Valley__Bridge_Upper_Middle,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Sniper_Valley__Cavern_Cache,
+            SpotId::Annuna__Sniper_Valley__Cavern_Tight_Corner,
+            1200,
+        ),
+        (
+            SpotId::Annuna__Sniper_Valley__Cavern_Cache,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Sniper_Valley__Cavern_Inner_Rock_East,
+            SpotId::Annuna__Sniper_Valley__Cavern_Inner_Rock_West,
+            1052,
+        ),
+        (
+            SpotId::Annuna__Sniper_Valley__Cavern_Inner_Rock_East,
+            SpotId::Annuna__Sniper_Valley__Cavern_Tight_Corner,
+            939,
+        ),
+        (
+            SpotId::Annuna__Sniper_Valley__Cavern_Inner_Rock_East,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Sniper_Valley__Cavern_Inner_Rock_West,
+            SpotId::Annuna__Sniper_Valley__Cavern_Inner_Rock_East,
+            1052,
+        ),
+        (
+            SpotId::Annuna__Sniper_Valley__Cavern_Inner_Rock_West,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Sniper_Valley__Cavern_Outer_Rock_East,
+            SpotId::Annuna__Sniper_Valley__Cavern_Inner_Rock_West,
+            1228,
+        ),
+        (
+            SpotId::Annuna__Sniper_Valley__Cavern_Outer_Rock_East,
+            SpotId::Annuna__Sniper_Valley__Cavern_Outer_Rock_West,
+            3684,
+        ),
+        (
+            SpotId::Annuna__Sniper_Valley__Cavern_Outer_Rock_East,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Sniper_Valley__Cavern_Outer_Rock_West,
+            SpotId::Annuna__Sniper_Valley__Cavern_Outer_Rock_East,
+            3684,
+        ),
+        (
+            SpotId::Annuna__Sniper_Valley__Cavern_Outer_Rock_West,
+            SpotId::Annuna__Sniper_Valley__High_Ledge,
+            438,
+        ),
+        (
+            SpotId::Annuna__Sniper_Valley__Cavern_Outer_Rock_West,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Sniper_Valley__Cavern_Tight_Corner,
+            SpotId::Annuna__Sniper_Valley__Cavern_Cache,
+            789,
+        ),
+        (
+            SpotId::Annuna__Sniper_Valley__Cavern_Tight_Corner,
+            SpotId::Annuna__Sniper_Valley__Cavern_Inner_Rock_East,
+            1389,
+        ),
+        (
+            SpotId::Annuna__Sniper_Valley__Cavern_Tight_Corner,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Sniper_Valley__East,
+            SpotId::Annuna__Factory_Entrance__West,
+            1350,
+        ),
+        (
+            SpotId::Annuna__Sniper_Valley__East,
+            SpotId::Annuna__Sniper_Valley__Table,
+            3333,
+        ),
+        (
+            SpotId::Annuna__Sniper_Valley__East,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Sniper_Valley__High_Ledge,
+            SpotId::Annuna__Sniper_Valley__Bridge_Upper_Middle,
+            1449,
+        ),
+        (
+            SpotId::Annuna__Sniper_Valley__High_Ledge,
+            SpotId::Annuna__Sniper_Valley__Cavern_Outer_Rock_West,
+            600,
+        ),
+        (
+            SpotId::Annuna__Sniper_Valley__High_Ledge,
+            SpotId::Annuna__Sniper_Valley__West_23,
+            263,
+        ),
+        (
             SpotId::Annuna__Sniper_Valley__High_Ledge,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
+        ),
+        (
+            SpotId::Annuna__Sniper_Valley__Table,
+            SpotId::Annuna__Sniper_Valley__Bridge_End,
+            2105,
+        ),
+        (
+            SpotId::Annuna__Sniper_Valley__Table,
+            SpotId::Annuna__Sniper_Valley__East,
+            3333,
+        ),
+        (
+            SpotId::Annuna__Sniper_Valley__Table,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Sniper_Valley__West_23,
+            SpotId::Annuna__East_Bridge__East_24,
+            1350,
+        ),
+        (
+            SpotId::Annuna__Sniper_Valley__West_23,
+            SpotId::Annuna__Sniper_Valley__Bridge_Upper_Ledge,
+            2982,
+        ),
+        (
+            SpotId::Annuna__Sniper_Valley__West_23,
+            SpotId::Annuna__Sniper_Valley__Cavern_Outer_Rock_West,
+            701,
+        ),
+        (
+            SpotId::Annuna__Sniper_Valley__West_23,
+            SpotId::Annuna__Sniper_Valley__High_Ledge,
+            263,
         ),
         (
             SpotId::Annuna__Sniper_Valley__West_23,
@@ -23016,13 +23538,43 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Annuna__Sniper_Valley__West_24,
+            SpotId::Annuna__East_Bridge__East_24,
+            1350,
+        ),
+        (
+            SpotId::Annuna__Sniper_Valley__West_24,
+            SpotId::Annuna__Sniper_Valley__Bridge_Upper_Middle,
+            1228,
+        ),
+        (
+            SpotId::Annuna__Sniper_Valley__West_24,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
         (
             SpotId::Annuna__Sniper_Valley__West_25_Lower,
+            SpotId::Annuna__East_Bridge__East_25_Lower,
+            1350,
+        ),
+        (
+            SpotId::Annuna__Sniper_Valley__West_25_Lower,
+            SpotId::Annuna__Sniper_Valley__Bridge_End,
+            4736,
+        ),
+        (
+            SpotId::Annuna__Sniper_Valley__West_25_Lower,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
+        ),
+        (
+            SpotId::Annuna__Sniper_Valley__West_25_Upper,
+            SpotId::Annuna__East_Bridge__East_25_Upper,
+            1350,
+        ),
+        (
+            SpotId::Annuna__Sniper_Valley__West_25_Upper,
+            SpotId::Annuna__Sniper_Valley__Bridge_Lower_Ledge,
+            2982,
         ),
         (
             SpotId::Annuna__Sniper_Valley__West_25_Upper,
@@ -41492,6 +42044,85 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
         (SpotId::Annuna__Mirror_Match__West_Gap, SpotId::Annuna__Mirror_Match__Save_Point) => {
             Some(30526)
         }
+        (SpotId::Annuna__Sniper_Valley__Bridge_End, SpotId::Annuna__Sniper_Valley__Table) => {
+            Some(2105)
+        }
+        (
+            SpotId::Annuna__Sniper_Valley__Bridge_End,
+            SpotId::Annuna__Sniper_Valley__West_25_Lower,
+        ) => Some(4736),
+        (
+            SpotId::Annuna__Sniper_Valley__Bridge_Lower_Ledge,
+            SpotId::Annuna__Sniper_Valley__Bridge_End,
+        ) => Some(1754),
+        (
+            SpotId::Annuna__Sniper_Valley__Bridge_Lower_Ledge,
+            SpotId::Annuna__Sniper_Valley__West_25_Upper,
+        ) => Some(2982),
+        (
+            SpotId::Annuna__Sniper_Valley__Bridge_Upper_Ledge,
+            SpotId::Annuna__Sniper_Valley__Bridge_End,
+        ) => Some(1754),
+        (
+            SpotId::Annuna__Sniper_Valley__Bridge_Upper_Ledge,
+            SpotId::Annuna__Sniper_Valley__Bridge_Lower_Ledge,
+        ) => Some(500),
+        (
+            SpotId::Annuna__Sniper_Valley__Bridge_Upper_Ledge,
+            SpotId::Annuna__Sniper_Valley__Bridge_Upper_Middle,
+        ) => Some(1754),
+        (
+            SpotId::Annuna__Sniper_Valley__Bridge_Upper_Ledge,
+            SpotId::Annuna__Sniper_Valley__West_25_Lower,
+        ) => Some(3782),
+        (
+            SpotId::Annuna__Sniper_Valley__Bridge_Upper_Middle,
+            SpotId::Annuna__Sniper_Valley__Bridge_Upper_Ledge,
+        ) => Some(1754),
+        (
+            SpotId::Annuna__Sniper_Valley__Cavern_Inner_Rock_East,
+            SpotId::Annuna__Sniper_Valley__Cavern_Tight_Corner,
+        ) => Some(939),
+        (
+            SpotId::Annuna__Sniper_Valley__Cavern_Outer_Rock_West,
+            SpotId::Annuna__Sniper_Valley__High_Ledge,
+        ) => Some(438),
+        (
+            SpotId::Annuna__Sniper_Valley__Cavern_Tight_Corner,
+            SpotId::Annuna__Sniper_Valley__Cavern_Inner_Rock_East,
+        ) => Some(1389),
+        (SpotId::Annuna__Sniper_Valley__East, SpotId::Annuna__Sniper_Valley__Table) => Some(3333),
+        (
+            SpotId::Annuna__Sniper_Valley__High_Ledge,
+            SpotId::Annuna__Sniper_Valley__Bridge_Upper_Middle,
+        ) => Some(1449),
+        (
+            SpotId::Annuna__Sniper_Valley__High_Ledge,
+            SpotId::Annuna__Sniper_Valley__Cavern_Outer_Rock_West,
+        ) => Some(600),
+        (SpotId::Annuna__Sniper_Valley__High_Ledge, SpotId::Annuna__Sniper_Valley__West_23) => {
+            Some(263)
+        }
+        (SpotId::Annuna__Sniper_Valley__Table, SpotId::Annuna__Sniper_Valley__Bridge_End) => {
+            Some(2105)
+        }
+        (SpotId::Annuna__Sniper_Valley__Table, SpotId::Annuna__Sniper_Valley__East) => Some(3333),
+        (
+            SpotId::Annuna__Sniper_Valley__West_23,
+            SpotId::Annuna__Sniper_Valley__Bridge_Upper_Ledge,
+        ) => Some(2982),
+        (
+            SpotId::Annuna__Sniper_Valley__West_24,
+            SpotId::Annuna__Sniper_Valley__Bridge_Upper_Middle,
+        ) => Some(1228),
+        (
+            SpotId::Annuna__Sniper_Valley__West_25_Lower,
+            SpotId::Annuna__Sniper_Valley__Bridge_End,
+        ) => Some(4736),
+        (
+            SpotId::Annuna__Sniper_Valley__West_25_Upper,
+            SpotId::Annuna__Sniper_Valley__Bridge_Lower_Ledge,
+        ) => Some(2982),
         (SpotId::Annuna__West_Bridge__East_25_Lower, SpotId::Annuna__West_Bridge__Plinth) => {
             Some(5175)
         }
@@ -47145,6 +47776,89 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
         (SpotId::Annuna__Mirror_Match__West_Gap, SpotId::Annuna__Mirror_Match__Save_Point) => {
             (Some(30526), vec![])
         }
+        (SpotId::Annuna__Sniper_Valley__Bridge_End, SpotId::Annuna__Sniper_Valley__Table) => {
+            (Some(2105), vec![])
+        }
+        (
+            SpotId::Annuna__Sniper_Valley__Bridge_End,
+            SpotId::Annuna__Sniper_Valley__West_25_Lower,
+        ) => (Some(4736), vec![]),
+        (
+            SpotId::Annuna__Sniper_Valley__Bridge_Lower_Ledge,
+            SpotId::Annuna__Sniper_Valley__Bridge_End,
+        ) => (Some(1754), vec![]),
+        (
+            SpotId::Annuna__Sniper_Valley__Bridge_Lower_Ledge,
+            SpotId::Annuna__Sniper_Valley__West_25_Upper,
+        ) => (Some(2982), vec![]),
+        (
+            SpotId::Annuna__Sniper_Valley__Bridge_Upper_Ledge,
+            SpotId::Annuna__Sniper_Valley__Bridge_End,
+        ) => (Some(1754), vec![]),
+        (
+            SpotId::Annuna__Sniper_Valley__Bridge_Upper_Ledge,
+            SpotId::Annuna__Sniper_Valley__Bridge_Lower_Ledge,
+        ) => (Some(500), vec![]),
+        (
+            SpotId::Annuna__Sniper_Valley__Bridge_Upper_Ledge,
+            SpotId::Annuna__Sniper_Valley__Bridge_Upper_Middle,
+        ) => (Some(1754), vec![]),
+        (
+            SpotId::Annuna__Sniper_Valley__Bridge_Upper_Ledge,
+            SpotId::Annuna__Sniper_Valley__West_25_Lower,
+        ) => (Some(3782), vec![]),
+        (
+            SpotId::Annuna__Sniper_Valley__Bridge_Upper_Middle,
+            SpotId::Annuna__Sniper_Valley__Bridge_Upper_Ledge,
+        ) => (Some(1754), vec![]),
+        (
+            SpotId::Annuna__Sniper_Valley__Cavern_Inner_Rock_East,
+            SpotId::Annuna__Sniper_Valley__Cavern_Tight_Corner,
+        ) => (Some(939), vec![]),
+        (
+            SpotId::Annuna__Sniper_Valley__Cavern_Outer_Rock_West,
+            SpotId::Annuna__Sniper_Valley__High_Ledge,
+        ) => (Some(438), vec![]),
+        (
+            SpotId::Annuna__Sniper_Valley__Cavern_Tight_Corner,
+            SpotId::Annuna__Sniper_Valley__Cavern_Inner_Rock_East,
+        ) => (Some(1389), vec![]),
+        (SpotId::Annuna__Sniper_Valley__East, SpotId::Annuna__Sniper_Valley__Table) => {
+            (Some(3333), vec![])
+        }
+        (
+            SpotId::Annuna__Sniper_Valley__High_Ledge,
+            SpotId::Annuna__Sniper_Valley__Bridge_Upper_Middle,
+        ) => (Some(1449), vec![]),
+        (
+            SpotId::Annuna__Sniper_Valley__High_Ledge,
+            SpotId::Annuna__Sniper_Valley__Cavern_Outer_Rock_West,
+        ) => (Some(600), vec![]),
+        (SpotId::Annuna__Sniper_Valley__High_Ledge, SpotId::Annuna__Sniper_Valley__West_23) => {
+            (Some(263), vec![])
+        }
+        (SpotId::Annuna__Sniper_Valley__Table, SpotId::Annuna__Sniper_Valley__Bridge_End) => {
+            (Some(2105), vec![])
+        }
+        (SpotId::Annuna__Sniper_Valley__Table, SpotId::Annuna__Sniper_Valley__East) => {
+            (Some(3333), vec![])
+        }
+        (
+            SpotId::Annuna__Sniper_Valley__West_23,
+            SpotId::Annuna__Sniper_Valley__Bridge_Upper_Ledge,
+        ) => (Some(2982), vec![]),
+        (
+            SpotId::Annuna__Sniper_Valley__West_24,
+            SpotId::Annuna__Sniper_Valley__Bridge_Upper_Middle,
+        ) => (Some(1228), vec![]),
+        (
+            SpotId::Annuna__Sniper_Valley__West_25_Lower,
+            SpotId::Annuna__Sniper_Valley__Bridge_End,
+        ) => (Some(4736), vec![]),
+        (
+            SpotId::Annuna__Sniper_Valley__West_25_Upper,
+            SpotId::Annuna__Sniper_Valley__Bridge_Lower_Ledge,
+        ) => (Some(2982), vec![]),
         (SpotId::Annuna__West_Bridge__East_25_Lower, SpotId::Annuna__West_Bridge__Plinth) => {
             (Some(5175), vec![])
         }

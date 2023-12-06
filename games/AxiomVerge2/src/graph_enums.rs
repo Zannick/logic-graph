@@ -95,6 +95,7 @@ pub enum AreaId {
     Amagi__Main_Area,
     Amagi__West_Lake,
     Annuna__East_Bridge,
+    Annuna__Factory_Entrance,
     Annuna__Mirror_Match,
     Annuna__Sniper_Valley,
     Annuna__Vertical_Room,
@@ -228,6 +229,7 @@ impl fmt::Display for AreaId {
             AreaId::Amagi__Main_Area => write!(f, "{}", "Amagi > Main Area"),
             AreaId::Amagi__West_Lake => write!(f, "{}", "Amagi > West Lake"),
             AreaId::Annuna__East_Bridge => write!(f, "{}", "Annuna > East Bridge"),
+            AreaId::Annuna__Factory_Entrance => write!(f, "{}", "Annuna > Factory Entrance"),
             AreaId::Annuna__Mirror_Match => write!(f, "{}", "Annuna > Mirror Match"),
             AreaId::Annuna__Sniper_Valley => write!(f, "{}", "Annuna > Sniper Valley"),
             AreaId::Annuna__Vertical_Room => write!(f, "{}", "Annuna > Vertical Room"),
@@ -388,6 +390,7 @@ impl std::str::FromStr for AreaId {
             "Amagi > Main Area" => Ok(AreaId::Amagi__Main_Area),
             "Amagi > West Lake" => Ok(AreaId::Amagi__West_Lake),
             "Annuna > East Bridge" => Ok(AreaId::Annuna__East_Bridge),
+            "Annuna > Factory Entrance" => Ok(AreaId::Annuna__Factory_Entrance),
             "Annuna > Mirror Match" => Ok(AreaId::Annuna__Mirror_Match),
             "Annuna > Sniper Valley" => Ok(AreaId::Annuna__Sniper_Valley),
             "Annuna > Vertical Room" => Ok(AreaId::Annuna__Vertical_Room),
@@ -668,6 +671,9 @@ pub enum SpotId {
     Annuna__East_Bridge__West_Staircase_Upper_East,
     Annuna__East_Bridge__West_Staircase_Upper_West,
     Annuna__East_Bridge__West_Under_Gap,
+    Annuna__Factory_Entrance__East,
+    Annuna__Factory_Entrance__Save_Point,
+    Annuna__Factory_Entrance__West,
     Annuna__Mirror_Match__Below_Switch,
     Annuna__Mirror_Match__Central_Pillar,
     Annuna__Mirror_Match__East_25_Lower,
@@ -681,7 +687,19 @@ pub enum SpotId {
     Annuna__Mirror_Match__Waving_Distance,
     Annuna__Mirror_Match__West_25,
     Annuna__Mirror_Match__West_Gap,
+    Annuna__Sniper_Valley__Bridge_End,
+    Annuna__Sniper_Valley__Bridge_Lower_Ledge,
+    Annuna__Sniper_Valley__Bridge_Upper_Ledge,
+    Annuna__Sniper_Valley__Bridge_Upper_Middle,
+    Annuna__Sniper_Valley__Cavern_Cache,
+    Annuna__Sniper_Valley__Cavern_Inner_Rock_East,
+    Annuna__Sniper_Valley__Cavern_Inner_Rock_West,
+    Annuna__Sniper_Valley__Cavern_Outer_Rock_East,
+    Annuna__Sniper_Valley__Cavern_Outer_Rock_West,
+    Annuna__Sniper_Valley__Cavern_Tight_Corner,
+    Annuna__Sniper_Valley__East,
     Annuna__Sniper_Valley__High_Ledge,
+    Annuna__Sniper_Valley__Table,
     Annuna__Sniper_Valley__West_23,
     Annuna__Sniper_Valley__West_24,
     Annuna__Sniper_Valley__West_25_Lower,
@@ -2067,6 +2085,15 @@ impl fmt::Display for SpotId {
             SpotId::Annuna__East_Bridge__West_Under_Gap => {
                 write!(f, "{}", "Annuna > East Bridge > West Under Gap")
             }
+            SpotId::Annuna__Factory_Entrance__East => {
+                write!(f, "{}", "Annuna > Factory Entrance > East")
+            }
+            SpotId::Annuna__Factory_Entrance__Save_Point => {
+                write!(f, "{}", "Annuna > Factory Entrance > Save Point")
+            }
+            SpotId::Annuna__Factory_Entrance__West => {
+                write!(f, "{}", "Annuna > Factory Entrance > West")
+            }
             SpotId::Annuna__Mirror_Match__Below_Switch => {
                 write!(f, "{}", "Annuna > Mirror Match > Below Switch")
             }
@@ -2106,8 +2133,42 @@ impl fmt::Display for SpotId {
             SpotId::Annuna__Mirror_Match__West_Gap => {
                 write!(f, "{}", "Annuna > Mirror Match > West Gap")
             }
+            SpotId::Annuna__Sniper_Valley__Bridge_End => {
+                write!(f, "{}", "Annuna > Sniper Valley > Bridge End")
+            }
+            SpotId::Annuna__Sniper_Valley__Bridge_Lower_Ledge => {
+                write!(f, "{}", "Annuna > Sniper Valley > Bridge Lower Ledge")
+            }
+            SpotId::Annuna__Sniper_Valley__Bridge_Upper_Ledge => {
+                write!(f, "{}", "Annuna > Sniper Valley > Bridge Upper Ledge")
+            }
+            SpotId::Annuna__Sniper_Valley__Bridge_Upper_Middle => {
+                write!(f, "{}", "Annuna > Sniper Valley > Bridge Upper Middle")
+            }
+            SpotId::Annuna__Sniper_Valley__Cavern_Cache => {
+                write!(f, "{}", "Annuna > Sniper Valley > Cavern Cache")
+            }
+            SpotId::Annuna__Sniper_Valley__Cavern_Inner_Rock_East => {
+                write!(f, "{}", "Annuna > Sniper Valley > Cavern Inner Rock East")
+            }
+            SpotId::Annuna__Sniper_Valley__Cavern_Inner_Rock_West => {
+                write!(f, "{}", "Annuna > Sniper Valley > Cavern Inner Rock West")
+            }
+            SpotId::Annuna__Sniper_Valley__Cavern_Outer_Rock_East => {
+                write!(f, "{}", "Annuna > Sniper Valley > Cavern Outer Rock East")
+            }
+            SpotId::Annuna__Sniper_Valley__Cavern_Outer_Rock_West => {
+                write!(f, "{}", "Annuna > Sniper Valley > Cavern Outer Rock West")
+            }
+            SpotId::Annuna__Sniper_Valley__Cavern_Tight_Corner => {
+                write!(f, "{}", "Annuna > Sniper Valley > Cavern Tight Corner")
+            }
+            SpotId::Annuna__Sniper_Valley__East => write!(f, "{}", "Annuna > Sniper Valley > East"),
             SpotId::Annuna__Sniper_Valley__High_Ledge => {
                 write!(f, "{}", "Annuna > Sniper Valley > High Ledge")
+            }
+            SpotId::Annuna__Sniper_Valley__Table => {
+                write!(f, "{}", "Annuna > Sniper Valley > Table")
             }
             SpotId::Annuna__Sniper_Valley__West_23 => {
                 write!(f, "{}", "Annuna > Sniper Valley > West 23")
@@ -4968,6 +5029,11 @@ impl std::str::FromStr for SpotId {
             "Annuna > East Bridge > West Under Gap" => {
                 Ok(SpotId::Annuna__East_Bridge__West_Under_Gap)
             }
+            "Annuna > Factory Entrance > East" => Ok(SpotId::Annuna__Factory_Entrance__East),
+            "Annuna > Factory Entrance > Save Point" => {
+                Ok(SpotId::Annuna__Factory_Entrance__Save_Point)
+            }
+            "Annuna > Factory Entrance > West" => Ok(SpotId::Annuna__Factory_Entrance__West),
             "Annuna > Mirror Match > Below Switch" => {
                 Ok(SpotId::Annuna__Mirror_Match__Below_Switch)
             }
@@ -4995,7 +5061,37 @@ impl std::str::FromStr for SpotId {
             }
             "Annuna > Mirror Match > West 25" => Ok(SpotId::Annuna__Mirror_Match__West_25),
             "Annuna > Mirror Match > West Gap" => Ok(SpotId::Annuna__Mirror_Match__West_Gap),
+            "Annuna > Sniper Valley > Bridge End" => Ok(SpotId::Annuna__Sniper_Valley__Bridge_End),
+            "Annuna > Sniper Valley > Bridge Lower Ledge" => {
+                Ok(SpotId::Annuna__Sniper_Valley__Bridge_Lower_Ledge)
+            }
+            "Annuna > Sniper Valley > Bridge Upper Ledge" => {
+                Ok(SpotId::Annuna__Sniper_Valley__Bridge_Upper_Ledge)
+            }
+            "Annuna > Sniper Valley > Bridge Upper Middle" => {
+                Ok(SpotId::Annuna__Sniper_Valley__Bridge_Upper_Middle)
+            }
+            "Annuna > Sniper Valley > Cavern Cache" => {
+                Ok(SpotId::Annuna__Sniper_Valley__Cavern_Cache)
+            }
+            "Annuna > Sniper Valley > Cavern Inner Rock East" => {
+                Ok(SpotId::Annuna__Sniper_Valley__Cavern_Inner_Rock_East)
+            }
+            "Annuna > Sniper Valley > Cavern Inner Rock West" => {
+                Ok(SpotId::Annuna__Sniper_Valley__Cavern_Inner_Rock_West)
+            }
+            "Annuna > Sniper Valley > Cavern Outer Rock East" => {
+                Ok(SpotId::Annuna__Sniper_Valley__Cavern_Outer_Rock_East)
+            }
+            "Annuna > Sniper Valley > Cavern Outer Rock West" => {
+                Ok(SpotId::Annuna__Sniper_Valley__Cavern_Outer_Rock_West)
+            }
+            "Annuna > Sniper Valley > Cavern Tight Corner" => {
+                Ok(SpotId::Annuna__Sniper_Valley__Cavern_Tight_Corner)
+            }
+            "Annuna > Sniper Valley > East" => Ok(SpotId::Annuna__Sniper_Valley__East),
             "Annuna > Sniper Valley > High Ledge" => Ok(SpotId::Annuna__Sniper_Valley__High_Ledge),
+            "Annuna > Sniper Valley > Table" => Ok(SpotId::Annuna__Sniper_Valley__Table),
             "Annuna > Sniper Valley > West 23" => Ok(SpotId::Annuna__Sniper_Valley__West_23),
             "Annuna > Sniper Valley > West 24" => Ok(SpotId::Annuna__Sniper_Valley__West_24),
             "Annuna > Sniper Valley > West 25 Lower" => {
@@ -6805,6 +6901,13 @@ pub enum LocationId {
     Annuna__Mirror_Match__Plinth__Item,
     Annuna__Mirror_Match__Save_Point__Fight,
     Annuna__Mirror_Match__Waving_Distance__Shockwave_Flask,
+    Annuna__Sniper_Valley__Bridge_End__Health_Pickup,
+    Annuna__Sniper_Valley__Cavern_Cache__Item,
+    Annuna__Sniper_Valley__Cavern_Inner_Rock_East__Break_Inner_Wall,
+    Annuna__Sniper_Valley__Cavern_Inner_Rock_West__Break_Inner_Wall,
+    Annuna__Sniper_Valley__Cavern_Outer_Rock_East__Break_Outer_Wall,
+    Annuna__Sniper_Valley__Cavern_Outer_Rock_West__Break_Outer_Wall,
+    Annuna__Sniper_Valley__Table__Item,
     Annuna__West_Bridge__Plinth__Item,
     Antarctica__Building_2__Behind_Boxes__Note,
     Antarctica__Power_Room__Switch__Flip,
@@ -6905,6 +7008,7 @@ pub enum LocationId {
     Interior__Outpost_Interior__Bookshelf__Note,
     Interior__Tent_Interior__Desk__Note,
     Irikar__Abandoned_Room__Corner_Core__Core,
+    Irikar__Basement_Pipes__Left_Vertical_Pipe__Health_Pickup,
     Irikar__Boss_Room__Bulls_Feet__Boss_Reward,
     Irikar__Boss_Room__Bulls_Feet__Defeat_Gudam,
     Irikar__Boss_Room__Bulls_Feet__Shockwave_Gudam,
@@ -7113,6 +7217,37 @@ impl fmt::Display for LocationId {
                 "{}",
                 "Annuna > Mirror Match > Waving Distance > Shockwave Flask"
             ),
+            LocationId::Annuna__Sniper_Valley__Bridge_End__Health_Pickup => write!(
+                f,
+                "{}",
+                "Annuna > Sniper Valley > Bridge End > Health Pickup"
+            ),
+            LocationId::Annuna__Sniper_Valley__Cavern_Cache__Item => {
+                write!(f, "{}", "Annuna > Sniper Valley > Cavern Cache > Item")
+            }
+            LocationId::Annuna__Sniper_Valley__Cavern_Inner_Rock_East__Break_Inner_Wall => write!(
+                f,
+                "{}",
+                "Annuna > Sniper Valley > Cavern Inner Rock East > Break Inner Wall"
+            ),
+            LocationId::Annuna__Sniper_Valley__Cavern_Inner_Rock_West__Break_Inner_Wall => write!(
+                f,
+                "{}",
+                "Annuna > Sniper Valley > Cavern Inner Rock West > Break Inner Wall"
+            ),
+            LocationId::Annuna__Sniper_Valley__Cavern_Outer_Rock_East__Break_Outer_Wall => write!(
+                f,
+                "{}",
+                "Annuna > Sniper Valley > Cavern Outer Rock East > Break Outer Wall"
+            ),
+            LocationId::Annuna__Sniper_Valley__Cavern_Outer_Rock_West__Break_Outer_Wall => write!(
+                f,
+                "{}",
+                "Annuna > Sniper Valley > Cavern Outer Rock West > Break Outer Wall"
+            ),
+            LocationId::Annuna__Sniper_Valley__Table__Item => {
+                write!(f, "{}", "Annuna > Sniper Valley > Table > Item")
+            }
             LocationId::Annuna__West_Bridge__Plinth__Item => {
                 write!(f, "{}", "Annuna > West Bridge > Plinth > Item")
             }
@@ -7465,6 +7600,11 @@ impl fmt::Display for LocationId {
             LocationId::Irikar__Abandoned_Room__Corner_Core__Core => {
                 write!(f, "{}", "Irikar > Abandoned Room > Corner Core > Core")
             }
+            LocationId::Irikar__Basement_Pipes__Left_Vertical_Pipe__Health_Pickup => write!(
+                f,
+                "{}",
+                "Irikar > Basement Pipes > Left Vertical Pipe > Health Pickup"
+            ),
             LocationId::Irikar__Boss_Room__Bulls_Feet__Boss_Reward => {
                 write!(f, "{}", "Irikar > Boss Room > Bull's Feet > Boss Reward")
             }
@@ -7888,6 +8028,27 @@ impl std::str::FromStr for LocationId {
             "Annuna > Mirror Match > Waving Distance > Shockwave Flask" => {
                 Ok(LocationId::Annuna__Mirror_Match__Waving_Distance__Shockwave_Flask)
             }
+            "Annuna > Sniper Valley > Bridge End > Health Pickup" => {
+                Ok(LocationId::Annuna__Sniper_Valley__Bridge_End__Health_Pickup)
+            }
+            "Annuna > Sniper Valley > Cavern Cache > Item" => {
+                Ok(LocationId::Annuna__Sniper_Valley__Cavern_Cache__Item)
+            }
+            "Annuna > Sniper Valley > Cavern Inner Rock East > Break Inner Wall" => {
+                Ok(LocationId::Annuna__Sniper_Valley__Cavern_Inner_Rock_East__Break_Inner_Wall)
+            }
+            "Annuna > Sniper Valley > Cavern Inner Rock West > Break Inner Wall" => {
+                Ok(LocationId::Annuna__Sniper_Valley__Cavern_Inner_Rock_West__Break_Inner_Wall)
+            }
+            "Annuna > Sniper Valley > Cavern Outer Rock East > Break Outer Wall" => {
+                Ok(LocationId::Annuna__Sniper_Valley__Cavern_Outer_Rock_East__Break_Outer_Wall)
+            }
+            "Annuna > Sniper Valley > Cavern Outer Rock West > Break Outer Wall" => {
+                Ok(LocationId::Annuna__Sniper_Valley__Cavern_Outer_Rock_West__Break_Outer_Wall)
+            }
+            "Annuna > Sniper Valley > Table > Item" => {
+                Ok(LocationId::Annuna__Sniper_Valley__Table__Item)
+            }
             "Annuna > West Bridge > Plinth > Item" => {
                 Ok(LocationId::Annuna__West_Bridge__Plinth__Item)
             }
@@ -8165,6 +8326,9 @@ impl std::str::FromStr for LocationId {
             }
             "Irikar > Abandoned Room > Corner Core > Core" => {
                 Ok(LocationId::Irikar__Abandoned_Room__Corner_Core__Core)
+            }
+            "Irikar > Basement Pipes > Left Vertical Pipe > Health Pickup" => {
+                Ok(LocationId::Irikar__Basement_Pipes__Left_Vertical_Pipe__Health_Pickup)
             }
             "Irikar > Boss Room > Bull's Feet > Boss Reward" => {
                 Ok(LocationId::Irikar__Boss_Room__Bulls_Feet__Boss_Reward)
@@ -8540,6 +8704,27 @@ pub enum ExitId {
     Annuna__Mirror_Match__Staircase__ex__Eastward_1,
     Annuna__Mirror_Match__Staircase__ex__Eastward_2,
     Annuna__Mirror_Match__West_25__ex__Uhrum__Annuna_Corridor__East_25_1,
+    Annuna__Sniper_Valley__Bridge_End__ex__Bridge_Lower_Ledge_1,
+    Annuna__Sniper_Valley__Bridge_Upper_Middle__ex__West_24_1,
+    Annuna__Sniper_Valley__Bridge_Upper_Middle__ex__West_24_2,
+    Annuna__Sniper_Valley__Cavern_Cache__ex__Cavern_Tight_Corner_1,
+    Annuna__Sniper_Valley__Cavern_Inner_Rock_East__Break_Inner_Wall,
+    Annuna__Sniper_Valley__Cavern_Inner_Rock_East__ex__Cavern_Inner_Rock_West_1,
+    Annuna__Sniper_Valley__Cavern_Inner_Rock_West__Break_Inner_Wall,
+    Annuna__Sniper_Valley__Cavern_Inner_Rock_West__ex__Cavern_Inner_Rock_East_1,
+    Annuna__Sniper_Valley__Cavern_Outer_Rock_East__Break_Outer_Wall,
+    Annuna__Sniper_Valley__Cavern_Outer_Rock_East__ex__Cavern_Inner_Rock_West_1,
+    Annuna__Sniper_Valley__Cavern_Outer_Rock_East__ex__Cavern_Outer_Rock_West_1,
+    Annuna__Sniper_Valley__Cavern_Outer_Rock_West__Break_Outer_Wall,
+    Annuna__Sniper_Valley__Cavern_Outer_Rock_West__ex__Cavern_Outer_Rock_East_1,
+    Annuna__Sniper_Valley__Cavern_Tight_Corner__ex__Cavern_Cache_1,
+    Annuna__Sniper_Valley__East__ex__Factory_Entrance__West_1,
+    Annuna__Sniper_Valley__West_23__ex__Cavern_Outer_Rock_West_1,
+    Annuna__Sniper_Valley__West_23__ex__East_Bridge__East_24_1,
+    Annuna__Sniper_Valley__West_23__ex__High_Ledge_1,
+    Annuna__Sniper_Valley__West_24__ex__East_Bridge__East_24_1,
+    Annuna__Sniper_Valley__West_25_Lower__ex__East_Bridge__East_25_Lower_1,
+    Annuna__Sniper_Valley__West_25_Upper__ex__East_Bridge__East_25_Upper_1,
     Annuna__West_Bridge__East_25_Lower__ex__East_Bridge__West_25_Lower_1,
     Annuna__West_Bridge__West_25_Lower__ex__Mirror_Match__East_25_Lower_1,
     Antarctica__Building_1E__Connector__ex__Building_1W__Connector_1,
@@ -9648,6 +9833,27 @@ impl fmt::Display for ExitId {
             ExitId::Annuna__Mirror_Match__Staircase__ex__Eastward_1 => write!(f, "{}", "Annuna > Mirror Match > Staircase ==> Eastward (1)"),
             ExitId::Annuna__Mirror_Match__Staircase__ex__Eastward_2 => write!(f, "{}", "Annuna > Mirror Match > Staircase ==> Eastward (2)"),
             ExitId::Annuna__Mirror_Match__West_25__ex__Uhrum__Annuna_Corridor__East_25_1 => write!(f, "{}", "Annuna > Mirror Match > West 25 ==> Uhrum > Annuna Corridor > East 25 (1)"),
+            ExitId::Annuna__Sniper_Valley__Bridge_End__ex__Bridge_Lower_Ledge_1 => write!(f, "{}", "Annuna > Sniper Valley > Bridge End ==> Bridge Lower Ledge (1)"),
+            ExitId::Annuna__Sniper_Valley__Bridge_Upper_Middle__ex__West_24_1 => write!(f, "{}", "Annuna > Sniper Valley > Bridge Upper Middle ==> West 24 (1)"),
+            ExitId::Annuna__Sniper_Valley__Bridge_Upper_Middle__ex__West_24_2 => write!(f, "{}", "Annuna > Sniper Valley > Bridge Upper Middle ==> West 24 (2)"),
+            ExitId::Annuna__Sniper_Valley__Cavern_Cache__ex__Cavern_Tight_Corner_1 => write!(f, "{}", "Annuna > Sniper Valley > Cavern Cache ==> Cavern Tight Corner (1)"),
+            ExitId::Annuna__Sniper_Valley__Cavern_Inner_Rock_East__Break_Inner_Wall => write!(f, "{}", "Annuna > Sniper Valley > Cavern Inner Rock East > Break Inner Wall"),
+            ExitId::Annuna__Sniper_Valley__Cavern_Inner_Rock_East__ex__Cavern_Inner_Rock_West_1 => write!(f, "{}", "Annuna > Sniper Valley > Cavern Inner Rock East ==> Cavern Inner Rock West (1)"),
+            ExitId::Annuna__Sniper_Valley__Cavern_Inner_Rock_West__Break_Inner_Wall => write!(f, "{}", "Annuna > Sniper Valley > Cavern Inner Rock West > Break Inner Wall"),
+            ExitId::Annuna__Sniper_Valley__Cavern_Inner_Rock_West__ex__Cavern_Inner_Rock_East_1 => write!(f, "{}", "Annuna > Sniper Valley > Cavern Inner Rock West ==> Cavern Inner Rock East (1)"),
+            ExitId::Annuna__Sniper_Valley__Cavern_Outer_Rock_East__Break_Outer_Wall => write!(f, "{}", "Annuna > Sniper Valley > Cavern Outer Rock East > Break Outer Wall"),
+            ExitId::Annuna__Sniper_Valley__Cavern_Outer_Rock_East__ex__Cavern_Inner_Rock_West_1 => write!(f, "{}", "Annuna > Sniper Valley > Cavern Outer Rock East ==> Cavern Inner Rock West (1)"),
+            ExitId::Annuna__Sniper_Valley__Cavern_Outer_Rock_East__ex__Cavern_Outer_Rock_West_1 => write!(f, "{}", "Annuna > Sniper Valley > Cavern Outer Rock East ==> Cavern Outer Rock West (1)"),
+            ExitId::Annuna__Sniper_Valley__Cavern_Outer_Rock_West__Break_Outer_Wall => write!(f, "{}", "Annuna > Sniper Valley > Cavern Outer Rock West > Break Outer Wall"),
+            ExitId::Annuna__Sniper_Valley__Cavern_Outer_Rock_West__ex__Cavern_Outer_Rock_East_1 => write!(f, "{}", "Annuna > Sniper Valley > Cavern Outer Rock West ==> Cavern Outer Rock East (1)"),
+            ExitId::Annuna__Sniper_Valley__Cavern_Tight_Corner__ex__Cavern_Cache_1 => write!(f, "{}", "Annuna > Sniper Valley > Cavern Tight Corner ==> Cavern Cache (1)"),
+            ExitId::Annuna__Sniper_Valley__East__ex__Factory_Entrance__West_1 => write!(f, "{}", "Annuna > Sniper Valley > East ==> Factory Entrance > West (1)"),
+            ExitId::Annuna__Sniper_Valley__West_23__ex__Cavern_Outer_Rock_West_1 => write!(f, "{}", "Annuna > Sniper Valley > West 23 ==> Cavern Outer Rock West (1)"),
+            ExitId::Annuna__Sniper_Valley__West_23__ex__East_Bridge__East_24_1 => write!(f, "{}", "Annuna > Sniper Valley > West 23 ==> East Bridge > East 24 (1)"),
+            ExitId::Annuna__Sniper_Valley__West_23__ex__High_Ledge_1 => write!(f, "{}", "Annuna > Sniper Valley > West 23 ==> High Ledge (1)"),
+            ExitId::Annuna__Sniper_Valley__West_24__ex__East_Bridge__East_24_1 => write!(f, "{}", "Annuna > Sniper Valley > West 24 ==> East Bridge > East 24 (1)"),
+            ExitId::Annuna__Sniper_Valley__West_25_Lower__ex__East_Bridge__East_25_Lower_1 => write!(f, "{}", "Annuna > Sniper Valley > West 25 Lower ==> East Bridge > East 25 Lower (1)"),
+            ExitId::Annuna__Sniper_Valley__West_25_Upper__ex__East_Bridge__East_25_Upper_1 => write!(f, "{}", "Annuna > Sniper Valley > West 25 Upper ==> East Bridge > East 25 Upper (1)"),
             ExitId::Annuna__West_Bridge__East_25_Lower__ex__East_Bridge__West_25_Lower_1 => write!(f, "{}", "Annuna > West Bridge > East 25 Lower ==> East Bridge > West 25 Lower (1)"),
             ExitId::Annuna__West_Bridge__West_25_Lower__ex__Mirror_Match__East_25_Lower_1 => write!(f, "{}", "Annuna > West Bridge > West 25 Lower ==> Mirror Match > East 25 Lower (1)"),
             ExitId::Antarctica__Building_1E__Connector__ex__Building_1W__Connector_1 => write!(f, "{}", "Antarctica > Building 1E > Connector ==> Building 1W > Connector (1)"),
@@ -10761,6 +10967,27 @@ impl std::str::FromStr for ExitId {
             "Annuna > Mirror Match > Staircase ==> Eastward (1)" => Ok(ExitId::Annuna__Mirror_Match__Staircase__ex__Eastward_1),
             "Annuna > Mirror Match > Staircase ==> Eastward (2)" => Ok(ExitId::Annuna__Mirror_Match__Staircase__ex__Eastward_2),
             "Annuna > Mirror Match > West 25 ==> Uhrum > Annuna Corridor > East 25 (1)" => Ok(ExitId::Annuna__Mirror_Match__West_25__ex__Uhrum__Annuna_Corridor__East_25_1),
+            "Annuna > Sniper Valley > Bridge End ==> Bridge Lower Ledge (1)" => Ok(ExitId::Annuna__Sniper_Valley__Bridge_End__ex__Bridge_Lower_Ledge_1),
+            "Annuna > Sniper Valley > Bridge Upper Middle ==> West 24 (1)" => Ok(ExitId::Annuna__Sniper_Valley__Bridge_Upper_Middle__ex__West_24_1),
+            "Annuna > Sniper Valley > Bridge Upper Middle ==> West 24 (2)" => Ok(ExitId::Annuna__Sniper_Valley__Bridge_Upper_Middle__ex__West_24_2),
+            "Annuna > Sniper Valley > Cavern Cache ==> Cavern Tight Corner (1)" => Ok(ExitId::Annuna__Sniper_Valley__Cavern_Cache__ex__Cavern_Tight_Corner_1),
+            "Annuna > Sniper Valley > Cavern Inner Rock East > Break Inner Wall" => Ok(ExitId::Annuna__Sniper_Valley__Cavern_Inner_Rock_East__Break_Inner_Wall),
+            "Annuna > Sniper Valley > Cavern Inner Rock East ==> Cavern Inner Rock West (1)" => Ok(ExitId::Annuna__Sniper_Valley__Cavern_Inner_Rock_East__ex__Cavern_Inner_Rock_West_1),
+            "Annuna > Sniper Valley > Cavern Inner Rock West > Break Inner Wall" => Ok(ExitId::Annuna__Sniper_Valley__Cavern_Inner_Rock_West__Break_Inner_Wall),
+            "Annuna > Sniper Valley > Cavern Inner Rock West ==> Cavern Inner Rock East (1)" => Ok(ExitId::Annuna__Sniper_Valley__Cavern_Inner_Rock_West__ex__Cavern_Inner_Rock_East_1),
+            "Annuna > Sniper Valley > Cavern Outer Rock East > Break Outer Wall" => Ok(ExitId::Annuna__Sniper_Valley__Cavern_Outer_Rock_East__Break_Outer_Wall),
+            "Annuna > Sniper Valley > Cavern Outer Rock East ==> Cavern Inner Rock West (1)" => Ok(ExitId::Annuna__Sniper_Valley__Cavern_Outer_Rock_East__ex__Cavern_Inner_Rock_West_1),
+            "Annuna > Sniper Valley > Cavern Outer Rock East ==> Cavern Outer Rock West (1)" => Ok(ExitId::Annuna__Sniper_Valley__Cavern_Outer_Rock_East__ex__Cavern_Outer_Rock_West_1),
+            "Annuna > Sniper Valley > Cavern Outer Rock West > Break Outer Wall" => Ok(ExitId::Annuna__Sniper_Valley__Cavern_Outer_Rock_West__Break_Outer_Wall),
+            "Annuna > Sniper Valley > Cavern Outer Rock West ==> Cavern Outer Rock East (1)" => Ok(ExitId::Annuna__Sniper_Valley__Cavern_Outer_Rock_West__ex__Cavern_Outer_Rock_East_1),
+            "Annuna > Sniper Valley > Cavern Tight Corner ==> Cavern Cache (1)" => Ok(ExitId::Annuna__Sniper_Valley__Cavern_Tight_Corner__ex__Cavern_Cache_1),
+            "Annuna > Sniper Valley > East ==> Factory Entrance > West (1)" => Ok(ExitId::Annuna__Sniper_Valley__East__ex__Factory_Entrance__West_1),
+            "Annuna > Sniper Valley > West 23 ==> Cavern Outer Rock West (1)" => Ok(ExitId::Annuna__Sniper_Valley__West_23__ex__Cavern_Outer_Rock_West_1),
+            "Annuna > Sniper Valley > West 23 ==> East Bridge > East 24 (1)" => Ok(ExitId::Annuna__Sniper_Valley__West_23__ex__East_Bridge__East_24_1),
+            "Annuna > Sniper Valley > West 23 ==> High Ledge (1)" => Ok(ExitId::Annuna__Sniper_Valley__West_23__ex__High_Ledge_1),
+            "Annuna > Sniper Valley > West 24 ==> East Bridge > East 24 (1)" => Ok(ExitId::Annuna__Sniper_Valley__West_24__ex__East_Bridge__East_24_1),
+            "Annuna > Sniper Valley > West 25 Lower ==> East Bridge > East 25 Lower (1)" => Ok(ExitId::Annuna__Sniper_Valley__West_25_Lower__ex__East_Bridge__East_25_Lower_1),
+            "Annuna > Sniper Valley > West 25 Upper ==> East Bridge > East 25 Upper (1)" => Ok(ExitId::Annuna__Sniper_Valley__West_25_Upper__ex__East_Bridge__East_25_Upper_1),
             "Annuna > West Bridge > East 25 Lower ==> East Bridge > West 25 Lower (1)" => Ok(ExitId::Annuna__West_Bridge__East_25_Lower__ex__East_Bridge__West_25_Lower_1),
             "Annuna > West Bridge > West 25 Lower ==> Mirror Match > East 25 Lower (1)" => Ok(ExitId::Annuna__West_Bridge__West_25_Lower__ex__Mirror_Match__East_25_Lower_1),
             "Antarctica > Building 1E > Connector ==> Building 1W > Connector (1)" => Ok(ExitId::Antarctica__Building_1E__Connector__ex__Building_1W__Connector_1),
@@ -12557,6 +12784,8 @@ pub enum CanonId {
     Amagi_West_Lake_Surface_Wall,
     Annuna_Mirror_Match_Flask,
     Annuna_East_Bridge_Gate,
+    Sniper_Valley_Rock_1,
+    Sniper_Valley_Rock_2,
     Notes_2053_02_27,
     Ebih_Base_Camp_Fragment,
     Ebih_Bush_Flask,
@@ -12604,6 +12833,8 @@ impl fmt::Display for CanonId {
             }
             CanonId::Annuna_Mirror_Match_Flask => write!(f, "{}", "Annuna_Mirror_Match_Flask"),
             CanonId::Annuna_East_Bridge_Gate => write!(f, "{}", "Annuna_East_Bridge_Gate"),
+            CanonId::Sniper_Valley_Rock_1 => write!(f, "{}", "Sniper_Valley_Rock_1"),
+            CanonId::Sniper_Valley_Rock_2 => write!(f, "{}", "Sniper_Valley_Rock_2"),
             CanonId::Notes_2053_02_27 => write!(f, "{}", "Notes_2053_02_27"),
             CanonId::Ebih_Base_Camp_Fragment => write!(f, "{}", "Ebih_Base_Camp_Fragment"),
             CanonId::Ebih_Bush_Flask => write!(f, "{}", "Ebih Bush Flask"),
@@ -12657,6 +12888,8 @@ impl std::str::FromStr for CanonId {
             "Amagi_West_Lake_Surface_Wall" => Ok(CanonId::Amagi_West_Lake_Surface_Wall),
             "Annuna_Mirror_Match_Flask" => Ok(CanonId::Annuna_Mirror_Match_Flask),
             "Annuna_East_Bridge_Gate" => Ok(CanonId::Annuna_East_Bridge_Gate),
+            "Sniper_Valley_Rock_1" => Ok(CanonId::Sniper_Valley_Rock_1),
+            "Sniper_Valley_Rock_2" => Ok(CanonId::Sniper_Valley_Rock_2),
             "Notes_2053_02_27" => Ok(CanonId::Notes_2053_02_27),
             "Ebih_Base_Camp_Fragment" => Ok(CanonId::Ebih_Base_Camp_Fragment),
             "Ebih Bush Flask" => Ok(CanonId::Ebih_Bush_Flask),

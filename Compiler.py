@@ -391,10 +391,11 @@ class GameLogic(object):
 
     def _handle_penalties(self, info, category:str):
         for i, pen in enumerate(info['penalties']):
-            name = f'penalty{i + 1}'
-            pen['id'] = construct_id(info['id'], name)
+            penaltyname = f'penalty{i + 1}'
+            infoname = info['fullname'] if 'fullname' in info else info['name']
+            pen['id'] = construct_id(info['id'], penaltyname)
             pen['pr'] = _parseExpression(
-                pen['when'], f'{info['name']} ({name})', category, ': ')
+                pen['when'], f'{infoname} ({penaltyname})', category, ': ')
             pen['access_id'] = self.make_funcid_from(info, pen['pr'])
 
 

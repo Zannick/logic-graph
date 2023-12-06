@@ -649,7 +649,7 @@ areas:
         - to: Right Vertical Pipe
           thru: [10.85, 27.35]
           jumps: [0, 1]
-      location:
+      locations:
         - name: Health Pickup
           item: Power_Core
           req: $more_refills
