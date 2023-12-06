@@ -30,14 +30,20 @@ GAME_FIELDS = {'name', 'objectives', 'base_movements', 'movements', 'exit_moveme
                'warps', 'actions', 'time', 'context', 'start', 'load', 'data',
                'helpers', 'collect', 'settings', 'special', '_filename'}
 REGION_FIELDS = {'name', 'short', 'data', 'here', 'graph_offset'}
-AREA_FIELDS = {'name', 'enter', 'exits', 'spots', 'data', 'here', 'map'}
-SPOT_FIELDS = {'name', 'coord', 'actions', 'locations', 'exits', 'hybrid', 'local', 'data', 'here'}
+AREA_FIELDS = {'name', 'enter', 'spots', 'data', 'here', 'map'}
+SPOT_FIELDS = {'name', 'coord', 'actions', 'locations', 'exits', 'hybrid', 'local', 'data', 'here',
+               'keep', 'enter'}
 LOCATION_FIELDS = {'name', 'item', 'req', 'canon'}
 TYPEHINT_FIELDS = {'type', 'max', 'opts', 'default'}
 MOVEMENT_DIMS = {'free', 'xy', 'x', 'y'}
 TRIGGER_RULES = ['enter', 'load', 'reset']
 
 ON_ENTRY_ARGS = {'newpos': 'SpotId'}
+
+SPOT_NON_FIELDS = {
+    inflection.pluralize(n) if n != inflection.pluralize(n) else inflection.singularize(n): n
+    for n in SPOT_FIELDS
+}
 
 typed_name = re.compile(r'(?P<name>\$?[^:()]+)(?::(?P<type>\w+))?')
 TypedVar = namedtuple('TypedVar', ['name', 'type'])
@@ -271,11 +277,19 @@ class GameLogic(object):
 
                 for spot in area['spots']:
                     sname = spot['name']
+                    fullname = f'{rname} > {aname} > {sname}'
+                    unexp = spot.keys() - SPOT_FIELDS
+                    for uk in unexp:
+                        if uk in SPOT_NON_FIELDS:
+                            logging.warning(f'Unknown field {uk!r} in {fullname} (did you mean {SPOT_NON_FIELDS[uk]!r}?)')
+                        else:
+                            logging.warning(f'Unknown field {uk!r} in {fullname}')
+
                     spot['area'] = aname
                     spot['region'] = rname
                     spot['id'] = construct_id(rname, aname, sname)
                     self.id_lookup[spot['id']] = spot
-                    spot['fullname'] = f'{rname} > {aname} > {sname}'
+                    spot['fullname'] = fullname
                     area['spot_ids'].append(spot['id'])
                     spot['loc_ids'] = []
                     spot['exit_ids'] = []
@@ -388,6 +402,9 @@ class GameLogic(object):
         for spot in self.spots():
             for exit in spot.get('exits', []) + spot.get('hybrid', []):
                 if 'time' not in exit and 'movement' in exit:
+                    if 'to' not in exit:
+                        # check_all will add an error for this
+                        continue
                     target = get_exit_target(exit)
                     if target not in self.id_lookup:
                         # check_all will add an error for this
