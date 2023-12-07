@@ -200,6 +200,7 @@ pub fn get_area(spot: SpotId) -> AreaId {
         SpotId::Annuna__Factory_Entrance__West
         | SpotId::Annuna__Factory_Entrance__Save_Point
         | SpotId::Annuna__Factory_Entrance__East => AreaId::Annuna__Factory_Entrance,
+        SpotId::Annuna__East_Climb__West_25 => AreaId::Annuna__East_Climb,
         SpotId::Antarctica__West__Helipad
         | SpotId::Antarctica__West__Shed_Entry
         | SpotId::Antarctica__West__Boxes => AreaId::Antarctica__West,
@@ -1416,6 +1417,7 @@ pub fn get_region(spot: SpotId) -> RegionId {
         SpotId::Annuna__Factory_Entrance__West
         | SpotId::Annuna__Factory_Entrance__Save_Point
         | SpotId::Annuna__Factory_Entrance__East => RegionId::Annuna,
+        SpotId::Annuna__East_Climb__West_25 => RegionId::Annuna,
         SpotId::Antarctica__West__Helipad
         | SpotId::Antarctica__West__Shed_Entry
         | SpotId::Antarctica__West__Boxes => RegionId::Antarctica,
@@ -3052,6 +3054,8 @@ impl world::Accessible for Exit {
             ExitId::Annuna__East_Bridge__West_Staircase_Upper_West__ex__Upper_West_Gap_East_1 => rules::access_hook(&ctx, world),
             ExitId::Annuna__East_Bridge__West_Under_Gap__ex__Upper_West_Gap_1 => rules::access_hook(&ctx, world),
             ExitId::Annuna__East_Bridge__West_Under_Gap__ex__Upper_West_Gap_East_1 => rules::access_hook(&ctx, world),
+            ExitId::Annuna__Factory_Entrance__East__ex__East_Climb__West_25_1 => true,
+            ExitId::Annuna__Factory_Entrance__West__ex__Sniper_Valley__East_1 => true,
             ExitId::Annuna__Mirror_Match__Below_Switch__ex__Central_Pillar_1 => rules::access_hover_and_hook(&ctx, world),
             ExitId::Annuna__Mirror_Match__Central_Pillar__ex__Below_Switch_1 => rules::access_hover_and_hook(&ctx, world),
             ExitId::Annuna__Mirror_Match__Central_Pillar__ex__Save_Point_1 => rules::access_annuna_mirror_match_switch(&ctx, world),
@@ -4143,6 +4147,8 @@ impl world::Exit for Exit {
             ExitId::Annuna__East_Bridge__West_24__ex__West_Bridge__East_24_1 => true,
             ExitId::Annuna__East_Bridge__West_25_Lower__ex__West_Bridge__East_25_Upper_1 => true,
             ExitId::Annuna__East_Bridge__West_25_Upper__ex__West_Bridge__East_25_Upper_1 => true,
+            ExitId::Annuna__Factory_Entrance__East__ex__East_Climb__West_25_1 => true,
+            ExitId::Annuna__Factory_Entrance__West__ex__Sniper_Valley__East_1 => true,
             ExitId::Annuna__Mirror_Match__East_25_Lower__ex__West_Bridge__West_25_Lower_1 => true,
             ExitId::Annuna__Mirror_Match__East_25_Upper__ex__West_Bridge__West_25_Upper_1 => true,
             ExitId::Annuna__Mirror_Match__East_26_Lower__ex__West_Bridge__West_26_Lower_1 => true,
@@ -4505,6 +4511,7 @@ impl world::Accessible for Action {
                         &ctx, world,
                     )
                 }
+                ActionId::Annuna__Factory_Entrance__Save_Point__Save => true,
                 ActionId::Annuna__Mirror_Match__Save_Point__Save => {
                     rules::access_not_separation_or_defeat_indra(&ctx, world)
                 }
@@ -4789,6 +4796,7 @@ impl world::Action for Action {
             ActionId::Annuna__East_Bridge__Tower_West_Ledge__Enter_Combo => rules::action_annuna__east_bridge__tower_west_ledge__enter_combo__do(ctx, world),
             ActionId::Annuna__East_Bridge__Tower_East_Ledge__Enter_Combo => rules::action_annuna__east_bridge__tower_east_ledge__enter_combo__do(ctx, world),
             ActionId::Annuna__East_Bridge__Tower_Secret__Enter_Combo => rules::action_annuna__east_bridge__tower_secret__enter_combo__do(ctx, world),
+            ActionId::Annuna__Factory_Entrance__Save_Point__Save => rules::action_save(ctx, world),
             ActionId::Ebih__Base_Camp__Save_Point__Save => rules::action_save(ctx, world),
             ActionId::Ebih__Base_Camp__Left_Platform__Move_Left_Platform => rules::action_ebih__base_camp__left_platform__move_left_platform__do(ctx, world),
             ActionId::Ebih__Base_Camp__Left_Platform_Moved__Reset_Left_Platform => rules::action_ebih__base_camp__left_platform_moved__reset_left_platform__do(ctx, world),
@@ -5311,7 +5319,7 @@ pub struct Spot {
     pub actions: Range<usize>,
 }
 
-static RAW_SPOTS: [SpotId; 1192] = [
+static RAW_SPOTS: [SpotId; 1193] = [
     SpotId::None,
     SpotId::Amagi__Grid_31_19__East,
     SpotId::Amagi__Grid_31_19__West,
@@ -5446,6 +5454,7 @@ static RAW_SPOTS: [SpotId; 1192] = [
     SpotId::Annuna__East_Bridge__West_Staircase_Upper_East,
     SpotId::Annuna__East_Bridge__West_Staircase_Upper_West,
     SpotId::Annuna__East_Bridge__West_Under_Gap,
+    SpotId::Annuna__East_Climb__West_25,
     SpotId::Annuna__Factory_Entrance__East,
     SpotId::Annuna__Factory_Entrance__Save_Point,
     SpotId::Annuna__Factory_Entrance__West,
@@ -6528,6 +6537,10 @@ lazy_static! {
         AreaId::Annuna__East_Bridge => Range {
             start: SpotId::Annuna__East_Bridge__Below_Cavern.into_usize(),
             end: SpotId::Annuna__East_Bridge__West_Under_Gap.into_usize() + 1,
+        },
+        AreaId::Annuna__East_Climb => Range {
+            start: SpotId::Annuna__East_Climb__West_25.into_usize(),
+            end: SpotId::Annuna__East_Climb__West_25.into_usize() + 1,
         },
         AreaId::Annuna__Factory_Entrance => Range {
             start: SpotId::Annuna__Factory_Entrance__East.into_usize(),
@@ -8171,6 +8184,9 @@ impl world::World for World {
             ActionId::Annuna__East_Bridge__Tower_Secret__Enter_Combo => {
                 SpotId::Annuna__East_Bridge__Tower_Secret
             }
+            ActionId::Annuna__Factory_Entrance__Save_Point__Save => {
+                SpotId::Annuna__Factory_Entrance__Save_Point
+            }
             ActionId::Ebih__Base_Camp__Save_Point__Save => SpotId::Ebih__Base_Camp__Save_Point,
             ActionId::Ebih__Base_Camp__Left_Platform__Move_Left_Platform => {
                 SpotId::Ebih__Base_Camp__Left_Platform
@@ -8465,6 +8481,8 @@ impl world::World for World {
             ExitId::Annuna__Sniper_Valley__Cavern_Inner_Rock_East__Break_Inner_Wall => SpotId::Annuna__Sniper_Valley__Cavern_Inner_Rock_East,
             ExitId::Annuna__Sniper_Valley__Cavern_Tight_Corner__ex__Cavern_Cache_1 => SpotId::Annuna__Sniper_Valley__Cavern_Tight_Corner,
             ExitId::Annuna__Sniper_Valley__Cavern_Cache__ex__Cavern_Tight_Corner_1 => SpotId::Annuna__Sniper_Valley__Cavern_Cache,
+            ExitId::Annuna__Factory_Entrance__West__ex__Sniper_Valley__East_1 => SpotId::Annuna__Factory_Entrance__West,
+            ExitId::Annuna__Factory_Entrance__East__ex__East_Climb__West_25_1 => SpotId::Annuna__Factory_Entrance__East,
             ExitId::Antarctica__West__Shed_Entry__ex__Shed__Interior_1 | ExitId:: Antarctica__West__Shed_Entry__ex__Helipad_1 => SpotId::Antarctica__West__Shed_Entry,
             ExitId::Antarctica__West__Boxes__ex__Building_1W__West_Entry_1 => SpotId::Antarctica__West__Boxes,
             ExitId::Antarctica__Shed__Interior__ex__West__Shed_Entry_1 => SpotId::Antarctica__Shed__Interior,
@@ -9383,6 +9401,9 @@ impl world::World for World {
             | SpotId::Annuna__East_Bridge__West_24
             | SpotId::Annuna__East_Bridge__West_25_Lower
             | SpotId::Annuna__East_Bridge__West_25_Upper
+            | SpotId::Annuna__Factory_Entrance__East
+            | SpotId::Annuna__Factory_Entrance__Save_Point
+            | SpotId::Annuna__Factory_Entrance__West
             | SpotId::Annuna__Mirror_Match__Below_Switch
             | SpotId::Annuna__Mirror_Match__East_25_Lower
             | SpotId::Annuna__Mirror_Match__East_25_Upper
@@ -12676,6 +12697,20 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
             id: ExitId::Annuna__Sniper_Valley__Cavern_Cache__ex__Cavern_Tight_Corner_1,
             time: 1200,
             dest: SpotId::Annuna__Sniper_Valley__Cavern_Tight_Corner,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__Factory_Entrance__West__ex__Sniper_Valley__East_1 => Exit {
+            id: ExitId::Annuna__Factory_Entrance__West__ex__Sniper_Valley__East_1,
+            time: 1350,
+            dest: SpotId::Annuna__Sniper_Valley__East,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__Factory_Entrance__East__ex__East_Climb__West_25_1 => Exit {
+            id: ExitId::Annuna__Factory_Entrance__East__ex__East_Climb__West_25_1,
+            time: 1600,
+            dest: SpotId::Annuna__East_Climb__West_25,
             price: Currency::Free,
             loc_id: None,
         },
@@ -19735,6 +19770,11 @@ pub fn build_actions() -> EnumMap<ActionId, Action> {
             time: 2000,
             price: Currency::Free,
         },
+        ActionId::Annuna__Factory_Entrance__Save_Point__Save => Action {
+            id: ActionId::Annuna__Factory_Entrance__Save_Point__Save,
+            time: 1300,
+            price: Currency::Free,
+        },
         ActionId::Ebih__Base_Camp__Save_Point__Save => Action {
             id: ActionId::Ebih__Base_Camp__Save_Point__Save,
             time: 1300,
@@ -22395,7 +22435,8 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             exits: Range {
-                start: 0, end: 0,
+                start: ExitId::Annuna__Factory_Entrance__West__ex__Sniper_Valley__East_1.into_usize(),
+                end: ExitId::Annuna__Factory_Entrance__West__ex__Sniper_Valley__East_1.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
@@ -22410,11 +22451,25 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             actions: Range {
-                start: 0, end: 0,
+                start: ActionId::Annuna__Factory_Entrance__Save_Point__Save.into_usize(),
+                end: ActionId::Annuna__Factory_Entrance__Save_Point__Save.into_usize() + 1,
             },
         },
         SpotId::Annuna__Factory_Entrance__East => Spot {
             id: SpotId::Annuna__Factory_Entrance__East,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Annuna__Factory_Entrance__East__ex__East_Climb__West_25_1.into_usize(),
+                end: ExitId::Annuna__Factory_Entrance__East__ex__East_Climb__West_25_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__East_Climb__West_25 => Spot {
+            id: SpotId::Annuna__East_Climb__West_25,
             locations: Range {
                 start: 0, end: 0,
             },

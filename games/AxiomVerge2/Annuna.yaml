@@ -162,6 +162,9 @@ areas:
           item_time: 0
     #endregion
 
+    #region Lamassu
+    #endregion
+
 - name: West Bridge
   on_entry: $reset_old_area(^newpos)
   start:
@@ -905,9 +908,53 @@ areas:
 
 - name: Vertical Room
   on_entry: $reset_old_area(^newpos)
+  map:
+    save: [40, 19, 41, 20]
   spots:
+    #region Lower
     - name: West 22
       coord: [40.1, 21.75]
+    - name: Lower Mid
+      coord: [40.55, 21.8]
+    - name: East 22
+      coord: [40.95, 21.8]
+    #endregion
+
+    #region Mid
+    #endregion
+
+    #region Upper
+    #endregion
+
+- name: Lower Hallway
+  on_entry: $reset_old_area(^newpos)
+  spots:
+    - name: West
+      coord: [41.05, 21.8]
+      local:
+        - to: Dais Left
+          jumps: 2
+      exits:
+        - to: Vertical Room > East 22
+          tags: [xshift]
+    - name: Dais Left
+      coord: [41.85, 21.55]
+      local:
+        - to: West
+        - to: Dais Right
+    - name: Dais Right
+      coord: [42.15, 21.55]
+      local:
+        - to: Dais Left
+        - to: East
+    - name: East
+      coord: [42.95, 21.75]
+      local:
+        - to: Dais Right
+          jumps: 2
+      exits:
+        - to: Factory Access > West 22
+          tags: [xshift]
 
 - name: Factory Entrance
   on_entry: $reset_old_area(^newpos)
@@ -915,8 +962,39 @@ areas:
   spots:
     - name: West
       coord: [43.05, 24.6]
+      local:
+        - to: Save Point
+      exits:
+        - to: Sniper Valley > East
+          tags: [xshift]
     - name: Save Point
       coord: [43.5, 24.7]
+      local:
+        - to: West
+          jumps: 3
+        - to: East
+          jumps: 2
+      actions:
+        - name: Save
+          do: $save
+          tags: [save]
     - name: East
       coord: [43.9, 24.75]
+      local:
+        - to: Save Point
+          jumps: 2
+      exits:
+        - to: East Climb > West 25
+          tags: [xdoor]
 
+- name: East Climb
+  on_entry: $reset_old_area(^newpos)
+  spots:
+    - name: West 25
+      coord: [44.1, 24.75]
+
+- name: Factory Access
+  on_entry: $reset_old_area(^newpos)
+  spots:
+    - name: West 22
+      coord: [43.05, 21.75]

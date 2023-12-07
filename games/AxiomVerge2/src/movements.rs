@@ -1075,6 +1075,26 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
         ) => 877,
         (
             [false],
+            SpotId::Annuna__Factory_Entrance__East,
+            SpotId::Annuna__Factory_Entrance__Save_Point,
+        ) => 1403,
+        (
+            [false],
+            SpotId::Annuna__Factory_Entrance__Save_Point,
+            SpotId::Annuna__Factory_Entrance__East,
+        ) => 1403,
+        (
+            [false],
+            SpotId::Annuna__Factory_Entrance__Save_Point,
+            SpotId::Annuna__Factory_Entrance__West,
+        ) => 1799,
+        (
+            [false],
+            SpotId::Annuna__Factory_Entrance__West,
+            SpotId::Annuna__Factory_Entrance__Save_Point,
+        ) => 1578,
+        (
+            [false],
             SpotId::Annuna__Mirror_Match__Below_Switch,
             SpotId::Annuna__Mirror_Match__East_25_Upper,
         ) => 1228,
@@ -9185,6 +9205,26 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
         ) => 877,
         (
             [true],
+            SpotId::Annuna__Factory_Entrance__East,
+            SpotId::Annuna__Factory_Entrance__Save_Point,
+        ) => 1403,
+        (
+            [true],
+            SpotId::Annuna__Factory_Entrance__Save_Point,
+            SpotId::Annuna__Factory_Entrance__East,
+        ) => 1403,
+        (
+            [true],
+            SpotId::Annuna__Factory_Entrance__Save_Point,
+            SpotId::Annuna__Factory_Entrance__West,
+        ) => 1799,
+        (
+            [true],
+            SpotId::Annuna__Factory_Entrance__West,
+            SpotId::Annuna__Factory_Entrance__Save_Point,
+        ) => 1578,
+        (
+            [true],
             SpotId::Annuna__Mirror_Match__Below_Switch,
             SpotId::Annuna__Mirror_Match__East_25_Upper,
         ) => 1228,
@@ -16699,6 +16739,18 @@ pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
             SpotId::Annuna__Sniper_Valley__Cavern_Tight_Corner,
             SpotId::Annuna__Sniper_Valley__Cavern_Inner_Rock_East,
         ) => true,
+        (SpotId::Annuna__Factory_Entrance__West, SpotId::Annuna__Factory_Entrance__Save_Point) => {
+            true
+        }
+        (SpotId::Annuna__Factory_Entrance__Save_Point, SpotId::Annuna__Factory_Entrance__West) => {
+            true
+        }
+        (SpotId::Annuna__Factory_Entrance__Save_Point, SpotId::Annuna__Factory_Entrance__East) => {
+            true
+        }
+        (SpotId::Annuna__Factory_Entrance__East, SpotId::Annuna__Factory_Entrance__Save_Point) => {
+            true
+        }
         (SpotId::Antarctica__West__Helipad, SpotId::Antarctica__West__Shed_Entry) => true,
         (SpotId::Antarctica__West__Helipad, SpotId::Antarctica__West__Boxes) => true,
         (SpotId::Antarctica__West__Boxes, SpotId::Antarctica__West__Helipad) => true,
@@ -23082,14 +23134,49 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             1000,
         ),
         (
+            SpotId::Annuna__East_Climb__West_25,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Factory_Entrance__East,
+            SpotId::Annuna__East_Climb__West_25,
+            1600,
+        ),
+        (
+            SpotId::Annuna__Factory_Entrance__East,
+            SpotId::Annuna__Factory_Entrance__Save_Point,
+            1403,
+        ),
+        (
             SpotId::Annuna__Factory_Entrance__East,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
         (
             SpotId::Annuna__Factory_Entrance__Save_Point,
+            SpotId::Annuna__Factory_Entrance__East,
+            1403,
+        ),
+        (
+            SpotId::Annuna__Factory_Entrance__Save_Point,
+            SpotId::Annuna__Factory_Entrance__West,
+            1799,
+        ),
+        (
+            SpotId::Annuna__Factory_Entrance__Save_Point,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
+        ),
+        (
+            SpotId::Annuna__Factory_Entrance__West,
+            SpotId::Annuna__Factory_Entrance__Save_Point,
+            1578,
+        ),
+        (
+            SpotId::Annuna__Factory_Entrance__West,
+            SpotId::Annuna__Sniper_Valley__East,
+            1350,
         ),
         (
             SpotId::Annuna__Factory_Entrance__West,
@@ -41990,6 +42077,18 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
             SpotId::Annuna__East_Bridge__West_Under_Gap,
             SpotId::Annuna__East_Bridge__West_Staircase_Upper_West,
         ) => Some(877),
+        (SpotId::Annuna__Factory_Entrance__East, SpotId::Annuna__Factory_Entrance__Save_Point) => {
+            Some(1403)
+        }
+        (SpotId::Annuna__Factory_Entrance__Save_Point, SpotId::Annuna__Factory_Entrance__East) => {
+            Some(1403)
+        }
+        (SpotId::Annuna__Factory_Entrance__Save_Point, SpotId::Annuna__Factory_Entrance__West) => {
+            Some(1799)
+        }
+        (SpotId::Annuna__Factory_Entrance__West, SpotId::Annuna__Factory_Entrance__Save_Point) => {
+            Some(1578)
+        }
         (
             SpotId::Annuna__Mirror_Match__Below_Switch,
             SpotId::Annuna__Mirror_Match__East_25_Upper,
@@ -47722,6 +47821,18 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
             SpotId::Annuna__East_Bridge__West_Under_Gap,
             SpotId::Annuna__East_Bridge__West_Staircase_Upper_West,
         ) => (Some(877), vec![]),
+        (SpotId::Annuna__Factory_Entrance__East, SpotId::Annuna__Factory_Entrance__Save_Point) => {
+            (Some(1403), vec![])
+        }
+        (SpotId::Annuna__Factory_Entrance__Save_Point, SpotId::Annuna__Factory_Entrance__East) => {
+            (Some(1403), vec![])
+        }
+        (SpotId::Annuna__Factory_Entrance__Save_Point, SpotId::Annuna__Factory_Entrance__West) => {
+            (Some(1799), vec![])
+        }
+        (SpotId::Annuna__Factory_Entrance__West, SpotId::Annuna__Factory_Entrance__Save_Point) => {
+            (Some(1578), vec![])
+        }
         (
             SpotId::Annuna__Mirror_Match__Below_Switch,
             SpotId::Annuna__Mirror_Match__East_25_Upper,

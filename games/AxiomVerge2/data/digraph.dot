@@ -185,6 +185,7 @@ digraph AxiomVerge2 {
         Annuna__Factory_Entrance__West [label = "", pos = "129.15,-41.0!"];
         Annuna__Factory_Entrance__Save_Point [label = "", pos = "130.5,-41.166667!"];
         Annuna__Factory_Entrance__East [label = "", pos = "131.7,-41.25!"];
+        Annuna__East_Climb__West_25 [label = "", pos = "132.3,-41.25!"];
         node[fillcolor="3"];
         Antarctica__West__Helipad [label = "", pos = "115.5,-2.666667!"];
         Antarctica__West__Shed_Entry [label = "", pos = "112.05,-3.0!"];
@@ -1334,6 +1335,8 @@ digraph AxiomVerge2 {
     Annuna__Sniper_Valley__Cavern_Inner_Rock_East -> Annuna__Sniper_Valley__Cavern_Inner_Rock_West;
     Annuna__Sniper_Valley__Cavern_Tight_Corner -> Annuna__Sniper_Valley__Cavern_Cache;
     Annuna__Sniper_Valley__Cavern_Cache -> Annuna__Sniper_Valley__Cavern_Tight_Corner;
+    Annuna__Factory_Entrance__West -> Annuna__Sniper_Valley__East;
+    Annuna__Factory_Entrance__East -> Annuna__East_Climb__West_25;
     Antarctica__West__Shed_Entry -> Antarctica__West__Helipad;
     Antarctica__Building_1W__Connector -> Antarctica__Building_1E__Connector;
     Antarctica__Building_1E__Connector -> Antarctica__Building_1W__Connector;
@@ -2643,6 +2646,10 @@ digraph AxiomVerge2 {
     Annuna__Sniper_Valley__Cavern_Outer_Rock_West -> Annuna__Sniper_Valley__High_Ledge;
     Annuna__Sniper_Valley__Cavern_Inner_Rock_East -> Annuna__Sniper_Valley__Cavern_Tight_Corner;
     Annuna__Sniper_Valley__Cavern_Tight_Corner -> Annuna__Sniper_Valley__Cavern_Inner_Rock_East;
+    Annuna__Factory_Entrance__West -> Annuna__Factory_Entrance__Save_Point;
+    Annuna__Factory_Entrance__Save_Point -> Annuna__Factory_Entrance__West;
+    Annuna__Factory_Entrance__Save_Point -> Annuna__Factory_Entrance__East;
+    Annuna__Factory_Entrance__East -> Annuna__Factory_Entrance__Save_Point;
     Antarctica__West__Helipad -> Antarctica__West__Shed_Entry;
     Antarctica__West__Helipad -> Antarctica__West__Boxes;
     Antarctica__West__Boxes -> Antarctica__West__Helipad;
