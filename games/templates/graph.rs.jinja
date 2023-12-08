@@ -439,7 +439,11 @@ impl world::World for World {
     }
 
     fn won(&self, ctx: &Context) -> bool {
+%% if 'Victory' in all_items
         ctx.has(Item::Victory)
+%% else
+        self.objective_met(ctx)
+%% endif
     }
 
     fn objective_met(&self, ctx: &Context) -> bool {

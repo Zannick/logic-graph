@@ -8748,7 +8748,7 @@ impl world::World for World {
     }
 
     fn won(&self, ctx: &Context) -> bool {
-        ctx.has(Item::Victory)
+        self.objective_met(ctx)
     }
 
     fn objective_met(&self, ctx: &Context) -> bool {
@@ -9567,7 +9567,6 @@ impl World {
                     | Item::The_Ideal_Kiengir
                     | Item::Udusan
                     | Item::Under_Siege
-                    | Item::Victory
             ),
             Objective::Progress => matches!(
                 item,
@@ -9596,7 +9595,6 @@ impl World {
                     | Item::Royal_Dagger
                     | Item::Suspension_Bridge
                     | Item::Udusan
-                    | Item::Victory
             ),
             _ => false,
         }

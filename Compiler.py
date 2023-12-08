@@ -1158,7 +1158,7 @@ class GameLogic(object):
 
     @cached_property
     def all_items(self):
-        return sorted(self.vanilla_items | self.rule_items | {'Victory'})
+        return sorted(self.vanilla_items | self.rule_items)
 
 
     def process_items(self):
