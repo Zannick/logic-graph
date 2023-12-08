@@ -20,6 +20,20 @@ fn read_key_value(
         Some("objective") => {
             world.objective = parse_str_into(key, val)?;
         }
+        Some("rules") => {
+            for (rkey, rval) in val.as_hash().expect("rules YAML should be a key-value map") {
+                match rkey.as_str() {
+                    Some("victory") => world.rule_victory = parse_str_into(rkey, rval)?,
+                    Some("objective") => world.rule_objective = parse_str_into(rkey, rval)?,
+                    _ => {
+                        return Err(format!(
+                            "Unrecognized or unparseable rule key: '{:?}'",
+                            rkey
+                        ))
+                    }
+                }
+            }
+        }
         Some("boomerang_steering") => {
             ctx.cbits1.set(
                 flags::ContextBits1::BOOMERANG_STEERING,

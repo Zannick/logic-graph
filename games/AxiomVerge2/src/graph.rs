@@ -7081,6 +7081,8 @@ lazy_static! {
 #[derive(Clone, Debug)]
 pub struct World {
     pub objective: Objective,
+    pub rule_victory: RuleVictory,
+    pub rule_objective: RuleObjective,
     // These are arrays that group the items together by their parent.
     // Using EnumMap for this ONLY WORKS if the keys are properly ordered to group
     // nearby things together.
@@ -9986,6 +9988,8 @@ impl World {
     pub fn new() -> World {
         World {
             objective: Objective::default(),
+            rule_victory: RuleVictory::default(),
+            rule_objective: RuleObjective::default(),
             locations: build_locations(),
             exits: build_exits(),
             actions: build_actions(),

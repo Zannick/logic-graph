@@ -306,6 +306,9 @@ lazy_static! {
 #[derive(Clone, Debug)]
 pub struct World {
     pub objective: Objective,
+%% for rule in rules
+    pub rule_{{ rule|construct_id }}: Rule{{ rule|camelize }},
+%% endfor
     // These are arrays that group the items together by their parent.
     // Using EnumMap for this ONLY WORKS if the keys are properly ordered to group
     // nearby things together.
@@ -540,6 +543,9 @@ impl World {
     pub fn new() -> World {
         World {
             objective: Objective::default(),
+%% for rule in rules
+            rule_{{ rule|construct_id }}: Rule{{ rule|camelize }}::default(),
+%% endfor
             locations: build_locations(),
             exits: build_exits(),
             actions: build_actions(),

@@ -1,4 +1,4 @@
-%% include 'header.rs.jinja'
+    %% include 'header.rs.jinja'
 
 use crate::context::{flags, Context};
 use crate::graph::World;
@@ -19,6 +19,16 @@ fn read_key_value(
     match key.as_str() {
         Some("objective") => {
             world.objective = parse_str_into(key, val)?;
+        }
+        Some("rules") => {
+            for (rkey, rval) in val.as_hash().expect("rules YAML should be a key-value map") {
+                match rkey.as_str() {
+%% for rule in rules
+                    Some("{{ rule }}") => world.rule_{{ rule|construct_id }} = parse_str_into(rkey, rval)?,
+%% endfor
+                    _ => return Err(format!("Unrecognized or unparseable rule key: '{:?}'", rkey)),
+                }
+            }
         }
 %% for s, info in settings.items()
         Some("{{ s }}") => {
