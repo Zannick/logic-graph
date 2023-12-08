@@ -6177,11 +6177,21 @@ impl context::Ctx for Context {
                     rules::action_reset_old_area__newpos(self, world, pos);
                 }
             }
+            AreaId::Annuna__Factory_Access => {
+                if get_area(self.position) != area {
+                    rules::action_reset_old_area__newpos(self, world, pos);
+                }
+            }
             AreaId::Annuna__Factory_Entrance => {
                 if get_area(self.position) != area {
                     rules::action_reset_old_area__newpos(self, world, pos);
                     self.cbits1
                         .insert(flags::ContextBits1::MAP__ANNUNA__FACTORY_ENTRANCE__SAVE);
+                }
+            }
+            AreaId::Annuna__Lower_Hallway => {
+                if get_area(self.position) != area {
+                    rules::action_reset_old_area__newpos(self, world, pos);
                 }
             }
             AreaId::Annuna__Mirror_Match => {

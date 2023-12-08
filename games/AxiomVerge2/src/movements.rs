@@ -1095,6 +1095,36 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
         ) => 1578,
         (
             [false],
+            SpotId::Annuna__Lower_Hallway__Dais_Left,
+            SpotId::Annuna__Lower_Hallway__Dais_Right,
+        ) => 1052,
+        (
+            [false],
+            SpotId::Annuna__Lower_Hallway__Dais_Left,
+            SpotId::Annuna__Lower_Hallway__West,
+        ) => 2807,
+        (
+            [false],
+            SpotId::Annuna__Lower_Hallway__Dais_Right,
+            SpotId::Annuna__Lower_Hallway__Dais_Left,
+        ) => 1052,
+        (
+            [false],
+            SpotId::Annuna__Lower_Hallway__Dais_Right,
+            SpotId::Annuna__Lower_Hallway__East,
+        ) => 2807,
+        (
+            [false],
+            SpotId::Annuna__Lower_Hallway__East,
+            SpotId::Annuna__Lower_Hallway__Dais_Right,
+        ) => 2807,
+        (
+            [false],
+            SpotId::Annuna__Lower_Hallway__West,
+            SpotId::Annuna__Lower_Hallway__Dais_Left,
+        ) => 2807,
+        (
+            [false],
             SpotId::Annuna__Mirror_Match__Below_Switch,
             SpotId::Annuna__Mirror_Match__East_25_Upper,
         ) => 1228,
@@ -9225,6 +9255,32 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
         ) => 1578,
         (
             [true],
+            SpotId::Annuna__Lower_Hallway__Dais_Left,
+            SpotId::Annuna__Lower_Hallway__Dais_Right,
+        ) => 1052,
+        ([true], SpotId::Annuna__Lower_Hallway__Dais_Left, SpotId::Annuna__Lower_Hallway__West) => {
+            2807
+        }
+        (
+            [true],
+            SpotId::Annuna__Lower_Hallway__Dais_Right,
+            SpotId::Annuna__Lower_Hallway__Dais_Left,
+        ) => 1052,
+        (
+            [true],
+            SpotId::Annuna__Lower_Hallway__Dais_Right,
+            SpotId::Annuna__Lower_Hallway__East,
+        ) => 2807,
+        (
+            [true],
+            SpotId::Annuna__Lower_Hallway__East,
+            SpotId::Annuna__Lower_Hallway__Dais_Right,
+        ) => 2807,
+        ([true], SpotId::Annuna__Lower_Hallway__West, SpotId::Annuna__Lower_Hallway__Dais_Left) => {
+            2807
+        }
+        (
+            [true],
             SpotId::Annuna__Mirror_Match__Below_Switch,
             SpotId::Annuna__Mirror_Match__East_25_Upper,
         ) => 1228,
@@ -16739,6 +16795,16 @@ pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
             SpotId::Annuna__Sniper_Valley__Cavern_Tight_Corner,
             SpotId::Annuna__Sniper_Valley__Cavern_Inner_Rock_East,
         ) => true,
+        (SpotId::Annuna__Lower_Hallway__West, SpotId::Annuna__Lower_Hallway__Dais_Left) => true,
+        (SpotId::Annuna__Lower_Hallway__Dais_Left, SpotId::Annuna__Lower_Hallway__West) => true,
+        (SpotId::Annuna__Lower_Hallway__Dais_Left, SpotId::Annuna__Lower_Hallway__Dais_Right) => {
+            true
+        }
+        (SpotId::Annuna__Lower_Hallway__Dais_Right, SpotId::Annuna__Lower_Hallway__Dais_Left) => {
+            true
+        }
+        (SpotId::Annuna__Lower_Hallway__Dais_Right, SpotId::Annuna__Lower_Hallway__East) => true,
+        (SpotId::Annuna__Lower_Hallway__East, SpotId::Annuna__Lower_Hallway__Dais_Right) => true,
         (SpotId::Annuna__Factory_Entrance__West, SpotId::Annuna__Factory_Entrance__Save_Point) => {
             true
         }
@@ -23139,6 +23205,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             1000,
         ),
         (
+            SpotId::Annuna__Factory_Access__West_22,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
             SpotId::Annuna__Factory_Entrance__East,
             SpotId::Annuna__East_Climb__West_25,
             1600,
@@ -23180,6 +23251,66 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Annuna__Factory_Entrance__West,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Lower_Hallway__Dais_Left,
+            SpotId::Annuna__Lower_Hallway__Dais_Right,
+            1052,
+        ),
+        (
+            SpotId::Annuna__Lower_Hallway__Dais_Left,
+            SpotId::Annuna__Lower_Hallway__West,
+            2807,
+        ),
+        (
+            SpotId::Annuna__Lower_Hallway__Dais_Left,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Lower_Hallway__Dais_Right,
+            SpotId::Annuna__Lower_Hallway__Dais_Left,
+            1052,
+        ),
+        (
+            SpotId::Annuna__Lower_Hallway__Dais_Right,
+            SpotId::Annuna__Lower_Hallway__East,
+            2807,
+        ),
+        (
+            SpotId::Annuna__Lower_Hallway__Dais_Right,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Lower_Hallway__East,
+            SpotId::Annuna__Factory_Access__West_22,
+            1350,
+        ),
+        (
+            SpotId::Annuna__Lower_Hallway__East,
+            SpotId::Annuna__Lower_Hallway__Dais_Right,
+            2807,
+        ),
+        (
+            SpotId::Annuna__Lower_Hallway__East,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Lower_Hallway__West,
+            SpotId::Annuna__Lower_Hallway__Dais_Left,
+            2807,
+        ),
+        (
+            SpotId::Annuna__Lower_Hallway__West,
+            SpotId::Annuna__Vertical_Room__East_22,
+            1350,
+        ),
+        (
+            SpotId::Annuna__Lower_Hallway__West,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -23665,6 +23796,16 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Annuna__Sniper_Valley__West_25_Upper,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Vertical_Room__East_22,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Vertical_Room__Lower_Mid,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -42089,6 +42230,24 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
         (SpotId::Annuna__Factory_Entrance__West, SpotId::Annuna__Factory_Entrance__Save_Point) => {
             Some(1578)
         }
+        (SpotId::Annuna__Lower_Hallway__Dais_Left, SpotId::Annuna__Lower_Hallway__Dais_Right) => {
+            Some(1052)
+        }
+        (SpotId::Annuna__Lower_Hallway__Dais_Left, SpotId::Annuna__Lower_Hallway__West) => {
+            Some(2807)
+        }
+        (SpotId::Annuna__Lower_Hallway__Dais_Right, SpotId::Annuna__Lower_Hallway__Dais_Left) => {
+            Some(1052)
+        }
+        (SpotId::Annuna__Lower_Hallway__Dais_Right, SpotId::Annuna__Lower_Hallway__East) => {
+            Some(2807)
+        }
+        (SpotId::Annuna__Lower_Hallway__East, SpotId::Annuna__Lower_Hallway__Dais_Right) => {
+            Some(2807)
+        }
+        (SpotId::Annuna__Lower_Hallway__West, SpotId::Annuna__Lower_Hallway__Dais_Left) => {
+            Some(2807)
+        }
         (
             SpotId::Annuna__Mirror_Match__Below_Switch,
             SpotId::Annuna__Mirror_Match__East_25_Upper,
@@ -47832,6 +47991,24 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
         }
         (SpotId::Annuna__Factory_Entrance__West, SpotId::Annuna__Factory_Entrance__Save_Point) => {
             (Some(1578), vec![])
+        }
+        (SpotId::Annuna__Lower_Hallway__Dais_Left, SpotId::Annuna__Lower_Hallway__Dais_Right) => {
+            (Some(1052), vec![])
+        }
+        (SpotId::Annuna__Lower_Hallway__Dais_Left, SpotId::Annuna__Lower_Hallway__West) => {
+            (Some(2807), vec![])
+        }
+        (SpotId::Annuna__Lower_Hallway__Dais_Right, SpotId::Annuna__Lower_Hallway__Dais_Left) => {
+            (Some(1052), vec![])
+        }
+        (SpotId::Annuna__Lower_Hallway__Dais_Right, SpotId::Annuna__Lower_Hallway__East) => {
+            (Some(2807), vec![])
+        }
+        (SpotId::Annuna__Lower_Hallway__East, SpotId::Annuna__Lower_Hallway__Dais_Right) => {
+            (Some(2807), vec![])
+        }
+        (SpotId::Annuna__Lower_Hallway__West, SpotId::Annuna__Lower_Hallway__Dais_Left) => {
+            (Some(2807), vec![])
         }
         (
             SpotId::Annuna__Mirror_Match__Below_Switch,

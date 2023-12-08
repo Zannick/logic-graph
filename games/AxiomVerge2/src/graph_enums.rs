@@ -96,7 +96,9 @@ pub enum AreaId {
     Amagi__West_Lake,
     Annuna__East_Bridge,
     Annuna__East_Climb,
+    Annuna__Factory_Access,
     Annuna__Factory_Entrance,
+    Annuna__Lower_Hallway,
     Annuna__Mirror_Match,
     Annuna__Sniper_Valley,
     Annuna__Vertical_Room,
@@ -231,7 +233,9 @@ impl fmt::Display for AreaId {
             AreaId::Amagi__West_Lake => write!(f, "{}", "Amagi > West Lake"),
             AreaId::Annuna__East_Bridge => write!(f, "{}", "Annuna > East Bridge"),
             AreaId::Annuna__East_Climb => write!(f, "{}", "Annuna > East Climb"),
+            AreaId::Annuna__Factory_Access => write!(f, "{}", "Annuna > Factory Access"),
             AreaId::Annuna__Factory_Entrance => write!(f, "{}", "Annuna > Factory Entrance"),
+            AreaId::Annuna__Lower_Hallway => write!(f, "{}", "Annuna > Lower Hallway"),
             AreaId::Annuna__Mirror_Match => write!(f, "{}", "Annuna > Mirror Match"),
             AreaId::Annuna__Sniper_Valley => write!(f, "{}", "Annuna > Sniper Valley"),
             AreaId::Annuna__Vertical_Room => write!(f, "{}", "Annuna > Vertical Room"),
@@ -393,7 +397,9 @@ impl std::str::FromStr for AreaId {
             "Amagi > West Lake" => Ok(AreaId::Amagi__West_Lake),
             "Annuna > East Bridge" => Ok(AreaId::Annuna__East_Bridge),
             "Annuna > East Climb" => Ok(AreaId::Annuna__East_Climb),
+            "Annuna > Factory Access" => Ok(AreaId::Annuna__Factory_Access),
             "Annuna > Factory Entrance" => Ok(AreaId::Annuna__Factory_Entrance),
+            "Annuna > Lower Hallway" => Ok(AreaId::Annuna__Lower_Hallway),
             "Annuna > Mirror Match" => Ok(AreaId::Annuna__Mirror_Match),
             "Annuna > Sniper Valley" => Ok(AreaId::Annuna__Sniper_Valley),
             "Annuna > Vertical Room" => Ok(AreaId::Annuna__Vertical_Room),
@@ -675,9 +681,14 @@ pub enum SpotId {
     Annuna__East_Bridge__West_Staircase_Upper_West,
     Annuna__East_Bridge__West_Under_Gap,
     Annuna__East_Climb__West_25,
+    Annuna__Factory_Access__West_22,
     Annuna__Factory_Entrance__East,
     Annuna__Factory_Entrance__Save_Point,
     Annuna__Factory_Entrance__West,
+    Annuna__Lower_Hallway__Dais_Left,
+    Annuna__Lower_Hallway__Dais_Right,
+    Annuna__Lower_Hallway__East,
+    Annuna__Lower_Hallway__West,
     Annuna__Mirror_Match__Below_Switch,
     Annuna__Mirror_Match__Central_Pillar,
     Annuna__Mirror_Match__East_25_Lower,
@@ -708,6 +719,8 @@ pub enum SpotId {
     Annuna__Sniper_Valley__West_24,
     Annuna__Sniper_Valley__West_25_Lower,
     Annuna__Sniper_Valley__West_25_Upper,
+    Annuna__Vertical_Room__East_22,
+    Annuna__Vertical_Room__Lower_Mid,
     Annuna__Vertical_Room__West_22,
     Annuna__West_Bridge__Below_Tunnel,
     Annuna__West_Bridge__East_22,
@@ -2090,6 +2103,9 @@ impl fmt::Display for SpotId {
                 write!(f, "{}", "Annuna > East Bridge > West Under Gap")
             }
             SpotId::Annuna__East_Climb__West_25 => write!(f, "{}", "Annuna > East Climb > West 25"),
+            SpotId::Annuna__Factory_Access__West_22 => {
+                write!(f, "{}", "Annuna > Factory Access > West 22")
+            }
             SpotId::Annuna__Factory_Entrance__East => {
                 write!(f, "{}", "Annuna > Factory Entrance > East")
             }
@@ -2099,6 +2115,14 @@ impl fmt::Display for SpotId {
             SpotId::Annuna__Factory_Entrance__West => {
                 write!(f, "{}", "Annuna > Factory Entrance > West")
             }
+            SpotId::Annuna__Lower_Hallway__Dais_Left => {
+                write!(f, "{}", "Annuna > Lower Hallway > Dais Left")
+            }
+            SpotId::Annuna__Lower_Hallway__Dais_Right => {
+                write!(f, "{}", "Annuna > Lower Hallway > Dais Right")
+            }
+            SpotId::Annuna__Lower_Hallway__East => write!(f, "{}", "Annuna > Lower Hallway > East"),
+            SpotId::Annuna__Lower_Hallway__West => write!(f, "{}", "Annuna > Lower Hallway > West"),
             SpotId::Annuna__Mirror_Match__Below_Switch => {
                 write!(f, "{}", "Annuna > Mirror Match > Below Switch")
             }
@@ -2186,6 +2210,12 @@ impl fmt::Display for SpotId {
             }
             SpotId::Annuna__Sniper_Valley__West_25_Upper => {
                 write!(f, "{}", "Annuna > Sniper Valley > West 25 Upper")
+            }
+            SpotId::Annuna__Vertical_Room__East_22 => {
+                write!(f, "{}", "Annuna > Vertical Room > East 22")
+            }
+            SpotId::Annuna__Vertical_Room__Lower_Mid => {
+                write!(f, "{}", "Annuna > Vertical Room > Lower Mid")
             }
             SpotId::Annuna__Vertical_Room__West_22 => {
                 write!(f, "{}", "Annuna > Vertical Room > West 22")
@@ -5035,11 +5065,16 @@ impl std::str::FromStr for SpotId {
                 Ok(SpotId::Annuna__East_Bridge__West_Under_Gap)
             }
             "Annuna > East Climb > West 25" => Ok(SpotId::Annuna__East_Climb__West_25),
+            "Annuna > Factory Access > West 22" => Ok(SpotId::Annuna__Factory_Access__West_22),
             "Annuna > Factory Entrance > East" => Ok(SpotId::Annuna__Factory_Entrance__East),
             "Annuna > Factory Entrance > Save Point" => {
                 Ok(SpotId::Annuna__Factory_Entrance__Save_Point)
             }
             "Annuna > Factory Entrance > West" => Ok(SpotId::Annuna__Factory_Entrance__West),
+            "Annuna > Lower Hallway > Dais Left" => Ok(SpotId::Annuna__Lower_Hallway__Dais_Left),
+            "Annuna > Lower Hallway > Dais Right" => Ok(SpotId::Annuna__Lower_Hallway__Dais_Right),
+            "Annuna > Lower Hallway > East" => Ok(SpotId::Annuna__Lower_Hallway__East),
+            "Annuna > Lower Hallway > West" => Ok(SpotId::Annuna__Lower_Hallway__West),
             "Annuna > Mirror Match > Below Switch" => {
                 Ok(SpotId::Annuna__Mirror_Match__Below_Switch)
             }
@@ -5106,6 +5141,8 @@ impl std::str::FromStr for SpotId {
             "Annuna > Sniper Valley > West 25 Upper" => {
                 Ok(SpotId::Annuna__Sniper_Valley__West_25_Upper)
             }
+            "Annuna > Vertical Room > East 22" => Ok(SpotId::Annuna__Vertical_Room__East_22),
+            "Annuna > Vertical Room > Lower Mid" => Ok(SpotId::Annuna__Vertical_Room__Lower_Mid),
             "Annuna > Vertical Room > West 22" => Ok(SpotId::Annuna__Vertical_Room__West_22),
             "Annuna > West Bridge > Below Tunnel" => Ok(SpotId::Annuna__West_Bridge__Below_Tunnel),
             "Annuna > West Bridge > East 22" => Ok(SpotId::Annuna__West_Bridge__East_22),
@@ -8697,6 +8734,8 @@ pub enum ExitId {
     Annuna__East_Bridge__West_Under_Gap__ex__Upper_West_Gap_East_1,
     Annuna__Factory_Entrance__East__ex__East_Climb__West_25_1,
     Annuna__Factory_Entrance__West__ex__Sniper_Valley__East_1,
+    Annuna__Lower_Hallway__East__ex__Factory_Access__West_22_1,
+    Annuna__Lower_Hallway__West__ex__Vertical_Room__East_22_1,
     Annuna__Mirror_Match__Below_Switch__ex__Central_Pillar_1,
     Annuna__Mirror_Match__Central_Pillar__ex__Below_Switch_1,
     Annuna__Mirror_Match__Central_Pillar__ex__Save_Point_1,
@@ -9828,6 +9867,8 @@ impl fmt::Display for ExitId {
             ExitId::Annuna__East_Bridge__West_Under_Gap__ex__Upper_West_Gap_East_1 => write!(f, "{}", "Annuna > East Bridge > West Under Gap ==> Upper West Gap East (1)"),
             ExitId::Annuna__Factory_Entrance__East__ex__East_Climb__West_25_1 => write!(f, "{}", "Annuna > Factory Entrance > East ==> East Climb > West 25 (1)"),
             ExitId::Annuna__Factory_Entrance__West__ex__Sniper_Valley__East_1 => write!(f, "{}", "Annuna > Factory Entrance > West ==> Sniper Valley > East (1)"),
+            ExitId::Annuna__Lower_Hallway__East__ex__Factory_Access__West_22_1 => write!(f, "{}", "Annuna > Lower Hallway > East ==> Factory Access > West 22 (1)"),
+            ExitId::Annuna__Lower_Hallway__West__ex__Vertical_Room__East_22_1 => write!(f, "{}", "Annuna > Lower Hallway > West ==> Vertical Room > East 22 (1)"),
             ExitId::Annuna__Mirror_Match__Below_Switch__ex__Central_Pillar_1 => write!(f, "{}", "Annuna > Mirror Match > Below Switch ==> Central Pillar (1)"),
             ExitId::Annuna__Mirror_Match__Central_Pillar__ex__Below_Switch_1 => write!(f, "{}", "Annuna > Mirror Match > Central Pillar ==> Below Switch (1)"),
             ExitId::Annuna__Mirror_Match__Central_Pillar__ex__Save_Point_1 => write!(f, "{}", "Annuna > Mirror Match > Central Pillar ==> Save Point (1)"),
@@ -10964,6 +11005,8 @@ impl std::str::FromStr for ExitId {
             "Annuna > East Bridge > West Under Gap ==> Upper West Gap East (1)" => Ok(ExitId::Annuna__East_Bridge__West_Under_Gap__ex__Upper_West_Gap_East_1),
             "Annuna > Factory Entrance > East ==> East Climb > West 25 (1)" => Ok(ExitId::Annuna__Factory_Entrance__East__ex__East_Climb__West_25_1),
             "Annuna > Factory Entrance > West ==> Sniper Valley > East (1)" => Ok(ExitId::Annuna__Factory_Entrance__West__ex__Sniper_Valley__East_1),
+            "Annuna > Lower Hallway > East ==> Factory Access > West 22 (1)" => Ok(ExitId::Annuna__Lower_Hallway__East__ex__Factory_Access__West_22_1),
+            "Annuna > Lower Hallway > West ==> Vertical Room > East 22 (1)" => Ok(ExitId::Annuna__Lower_Hallway__West__ex__Vertical_Room__East_22_1),
             "Annuna > Mirror Match > Below Switch ==> Central Pillar (1)" => Ok(ExitId::Annuna__Mirror_Match__Below_Switch__ex__Central_Pillar_1),
             "Annuna > Mirror Match > Central Pillar ==> Below Switch (1)" => Ok(ExitId::Annuna__Mirror_Match__Central_Pillar__ex__Below_Switch_1),
             "Annuna > Mirror Match > Central Pillar ==> Save Point (1)" => Ok(ExitId::Annuna__Mirror_Match__Central_Pillar__ex__Save_Point_1),

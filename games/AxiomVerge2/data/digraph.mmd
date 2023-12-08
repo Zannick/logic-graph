@@ -196,6 +196,14 @@ subgraph Annuna
     end
     subgraph Annuna__Vertical_Room[Vertical Room]
         Annuna__Vertical_Room__West_22(West 22);
+        Annuna__Vertical_Room__Lower_Mid(Lower Mid);
+        Annuna__Vertical_Room__East_22(East 22);
+    end
+    subgraph Annuna__Lower_Hallway[Lower Hallway]
+        Annuna__Lower_Hallway__West(West);
+        Annuna__Lower_Hallway__Dais_Left(Dais Left);
+        Annuna__Lower_Hallway__Dais_Right(Dais Right);
+        Annuna__Lower_Hallway__East(East);
     end
     subgraph Annuna__Factory_Entrance[Factory Entrance]
         Annuna__Factory_Entrance__West(West);
@@ -204,6 +212,9 @@ subgraph Annuna
     end
     subgraph Annuna__East_Climb[East Climb]
         Annuna__East_Climb__West_25(West 25);
+    end
+    subgraph Annuna__Factory_Access[Factory Access]
+        Annuna__Factory_Access__West_22(West 22);
     end
 end
 subgraph Antarctica
@@ -1548,6 +1559,8 @@ Annuna__East_Bridge__West_Under_Gap --> Annuna__East_Bridge__Upper_West_Gap
 Annuna__East_Bridge__West_Under_Gap --> Annuna__East_Bridge__Upper_West_Gap_East
 Annuna__Factory_Entrance__East --> Annuna__East_Climb__West_25
 Annuna__Factory_Entrance__West <--> Annuna__Sniper_Valley__East
+Annuna__Lower_Hallway__East --> Annuna__Factory_Access__West_22
+Annuna__Lower_Hallway__West --> Annuna__Vertical_Room__East_22
 Annuna__Mirror_Match__Below_Switch <--> Annuna__Mirror_Match__Central_Pillar
 Annuna__Mirror_Match__Central_Pillar --> Annuna__Mirror_Match__Save_Point
 Annuna__Mirror_Match__Central_Pillar --> Annuna__Mirror_Match__West_25
