@@ -1,8 +1,5 @@
-from itertools import chain
-
 from grammar import RulesParser, RulesVisitor
 
-from Utils import construct_id, BUILTINS
 
 class ContextVisitor(RulesVisitor):
 

@@ -13,3 +13,22 @@ macro_rules! helper__{{ name|construct_id }} {
 }
 
 %% endfor
+
+%% for name, rule in rules.items()
+/// Rule {{ name }}
+#[macro_export]
+macro_rules! rule__{{ name|construct_id }} {
+    ($ctx:expr, $world:expr) => {{ '{{' }}
+        use $crate::graph_enums::*;
+        use $crate::rules;
+        match $world.rule_{{ name|construct_id }} {
+%% for v, info in rule.variants.items()
+            Rule{{ name[1:]|camelize }}::{{ v|construct_id|camelize }} => {
+                rules::{% if rule.rule == 'actions' %}action_{% else %}access_{% endif %}{{ info.func_id }}($ctx, $world)
+            }
+%% endfor
+        }
+    {{ '}}' }};
+}
+
+%% endfor

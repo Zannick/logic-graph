@@ -7,8 +7,9 @@ from grammar import RulesParser, RulesVisitor
 
 class HelperVisitor(RulesVisitor):
 
-    def __init__(self, helpers, context_types, data_types, settings):
+    def __init__(self, helpers, rules, context_types, data_types, settings):
         self.helpers = helpers
+        self.rules = rules
         self.context_types = context_types
         self.data_types = data_types
         self.settings = settings
@@ -53,7 +54,7 @@ class HelperVisitor(RulesVisitor):
 
     def visitInvoke(self, ctx):
         func = str(ctx.FUNC())
-        if func in BUILTINS:
+        if func in BUILTINS or func[1:] in self.rules:
             return self.visitChildren(ctx)
         if func not in self.helpers:
             self.errors.append(f'Unrecognized function {func} in rule {self.name}')
@@ -107,8 +108,12 @@ class HelperVisitor(RulesVisitor):
             func = str(func)
             if func in BUILTINS:
                 self.errors.append(f'Rule {self.name}: builtin {func!r} not supported in itemList')
+            elif rule := self.rules.get(func):
+                if rule.rule != 'itemList':
+                    self.errors.append(f'Rule {self.name}: itemList only supports itemList helpers, '
+                                    f'but rule {func!r} is of type {rule.rule!r}')
             elif func not in self.helpers:
                 self.errors.append(f'Unrecognized function {func} in rule {self.name}')
             elif self.helpers[func]['rule'] != 'itemList':
                 self.errors.append(f'Rule {self.name}: itemList only supports itemList helpers, '
-                                   f'but {func!r} is of type {self.helpers[func]["rule"]!r}')
+                                   f'but helper {func!r} is of type {self.helpers[func]["rule"]!r}')

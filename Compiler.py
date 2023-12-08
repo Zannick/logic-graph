@@ -47,12 +47,13 @@ SPOT_NON_FIELDS = {
 
 RULES_EXAMPLE = """
 rules:
-  victory:
+  $victory:
     default: Victory
 """
 
 typed_name = re.compile(r'(?P<name>\$?[^:()]+)(?::(?P<type>\w+))?')
 TypedVar = namedtuple('TypedVar', ['name', 'type'])
+TypedRule = namedtuple('TypedRule', ['rule', 'args', 'variants'])
 
 
 def load_data_from_file(file: str):
@@ -78,8 +79,8 @@ def load_game_yaml(game_dir: str):
     unexp = game.keys() - GAME_FIELDS
     if unexp:
         raise Exception(f'Unexpected top-level fields in {game_file}: {", ".join(sorted(unexp))}')
-    if 'rules' not in game or not any(r for r in game['rules'] if r.startswith('victory')):
-        raise Exception(f'Must define top-level field "rules" with "victory" entry in {game_file}, e.g.\n{RULES_EXAMPLE}')
+    if 'rules' not in game or not any(r for r in game['rules'] if r.startswith('$victory')):
+        raise Exception(f'Must define top-level field "rules" with "$victory" entry in {game_file}, e.g.\n{RULES_EXAMPLE}')
     game['regions'] = list(itertools.chain.from_iterable(
         load_data_from_file(os.path.join(game_dir, file))
         for file in sorted(yfiles)))
@@ -191,19 +192,13 @@ class GameLogic(object):
         self.rules = {}
         for key, variants in self._info['rules'].items():
             name = get_func_name(key)
-            args = get_func_args(key)
             rule = get_func_rule(key)
-            self.rules[name] = {
+            self.rules[name] = TypedRule(rule, (), {
                 variant: {
-                    'args': args,
                     'pr': _parseExpression(logic, f'{name}_{variant}', 'rules', rule=rule),
-                    'rule': rule,
                 }
                 for variant, logic in variants.items()
-            }
-
-        if shadow := self.helpers.keys() & self.rules.keys() & BUILTINS.keys():
-            raise Exception(f'helpers and/or rules shadowed by rules and/or BUILTINS: {sorted(shadow)}')
+            })
 
         self.allowed_funcs = self.helpers.keys() | self.rules.keys() | BUILTINS.keys()
         self.access_funcs = {}
@@ -214,9 +209,9 @@ class GameLogic(object):
             self.objectives[name] = {'pr': pr}
             self.objectives[name]['access_id'] = self.make_funcid(self.objectives[name])
         self.default_objective = list(self._info['objectives'].keys())[0]
-        for variants in self.rules.values():
-            for details in variants.values():
-                details['access_id'] = self.make_funcid(details)
+        for typed_rule in self.rules.values():
+            for details in typed_rule.variants.values():
+                details['func_id'] = self.make_funcid(details)
 
         self.collect = {}
         for name, logic in self._info.get('collect', {}).items():
@@ -614,7 +609,7 @@ class GameLogic(object):
         for s in self.settings.keys() - self.used_settings.keys():
             logging.warning(f'Did not find usage of setting {s}')
 
-        hv = HelperVisitor(self.helpers, self.context_types, self.data_types, self.settings)
+        hv = HelperVisitor(self.helpers, self.rules, self.context_types, self.data_types, self.settings)
         _visit(hv, True)
 
         cv = ContextVisitor(self.context_types, self.context_values,
@@ -1073,7 +1068,7 @@ class GameLogic(object):
     def nonpoint_parse_results(self):
         yield from (info['pr'] for info in self.helpers.values())
         yield from (info['pr'] for info in self.objectives.values())
-        yield from (info['pr'] for variant in self.rules.values() for info in variant.values())
+        yield from (info['pr'] for rule in self.rules.values() for info in rule.variants.values())
         yield from (info['act'] for info in self.collect.values())
         yield from (info['pr'] for info in self.movements.values() if 'pr' in info)
         yield from (info['pr'] for info in self.warps.values() if 'pr' in info)
@@ -1170,6 +1165,8 @@ class GameLogic(object):
         # Check used functions
         for func in BUILTINS.keys() & self.helpers.keys():
             self._errors.append(f'Cannot use reserved name {func!r} as helper')
+        for func in BUILTINS.keys() & self.rules.keys():
+            self._errors.append(f'Cannot use reserved name {func!r} as rule name')
         for pr in self.all_parse_results():
             for t in pr.parser.getTokenStream().tokens:
                 if pr.parser.symbolicNames[t.type] == 'FUNC' and t.text not in self.allowed_funcs:
@@ -1232,11 +1229,11 @@ class GameLogic(object):
         self.item_max_counts = visitor.item_max_counts
         self.items_by_source = visitor.items_by_source
         self.rule_items = {
-            rule: {
-                variant: dict(self.items_by_source[f'rules:{rule}_{variant}'])
-                for variant in variants
+            name: {
+                variant: dict(self.items_by_source[f'rules:{name}_{variant}'])
+                for variant in rule.variants
             }
-            for rule, variants in self.rules.items()
+            for name, rule in self.rules.items()
         }
         self.objective_items = {
             objective: dict(self.items_by_source['objectives:' + objective])
@@ -1620,7 +1617,8 @@ class GameLogic(object):
 
 
     def prToRust(self, pr, info, id=None):
-        return RustVisitor(self.context_types,
+        return RustVisitor(self.rules,
+                           self.context_types,
                            self.action_funcs,
                            self.get_local_ctx(info),
                            self.data_defaults.keys(),

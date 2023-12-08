@@ -24,7 +24,9 @@ fn read_key_value(
             for (rkey, rval) in val.as_hash().expect("rules YAML should be a key-value map") {
                 match rkey.as_str() {
 %% for rule in rules
-                    Some("{{ rule }}") => world.rule_{{ rule|construct_id }} = parse_str_into(rkey, rval)?,
+                    Some("{{ rule }}" | "{{ rule[1:] }}") => {
+                        world.rule_{{ rule|construct_id }} = parse_str_into(rkey, rval)?
+                    }
 %% endfor
                     _ => return Err(format!("Unrecognized or unparseable rule key: '{:?}'", rkey)),
                 }

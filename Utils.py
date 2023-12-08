@@ -25,7 +25,6 @@ BUILTINS = {
     '$default': 'Default::default',
     # warning: be careful not to introduce infinite loops in collect rules!
     '$collect': 'ctx.collect',
-    '$objective': ('world.objective_met', 'ctx'),
 }
 
 OPS = {

@@ -29,9 +29,17 @@ pub fn access___all_urns_all_weapons_other_items_all_notes_all_health_all_flasks
         && helper__all_health!(ctx, world)
         && helper__all_flasks!(ctx, world)
 }
+pub fn access___objective(ctx: &Context, world: &graph::World) -> bool {
+    // [$objective]
+    rule__objective!(ctx, world)
+}
 pub fn access___remote_drone(ctx: &Context, world: &graph::World) -> bool {
     // [Remote_Drone]
     ctx.has(Item::Remote_Drone)
+}
+pub fn access___victory(ctx: &Context, world: &graph::World) -> bool {
+    // [Victory]
+    ctx.has(Item::Victory)
 }
 pub fn access_activate(ctx: &Context, world: &graph::World) -> bool {
     // $activate
@@ -1747,10 +1755,6 @@ pub fn access_not_within_menu_and_realm_ne_breach_and_can_recall(
     }) && data::realm(ctx.position()) != enums::Realm::Breach)
         && helper__can_recall!(ctx, world))
 }
-pub fn access_objective(ctx: &Context, world: &graph::World) -> bool {
-    // $objective
-    world.objective_met(ctx)
-}
 pub fn access_offset(ctx: &Context, world: &graph::World) -> bool {
     // $offset
     helper__offset!(ctx, world)
@@ -1910,10 +1914,6 @@ pub fn access_underwater_movement_and_grab(ctx: &Context, world: &graph::World) 
 pub fn access_underwater_movement_and_hook(ctx: &Context, world: &graph::World) -> bool {
     // Underwater_Movement and $hook
     (ctx.has(Item::Underwater_Movement) && helper__hook!(ctx, world))
-}
-pub fn access_victory(ctx: &Context, world: &graph::World) -> bool {
-    // Victory
-    ctx.has(Item::Victory)
 }
 pub fn access_within_antarctica(ctx: &Context, world: &graph::World) -> bool {
     // WITHIN `Antarctica`

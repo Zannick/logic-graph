@@ -23,8 +23,12 @@ fn read_key_value(
         Some("rules") => {
             for (rkey, rval) in val.as_hash().expect("rules YAML should be a key-value map") {
                 match rkey.as_str() {
-                    Some("victory") => world.rule_victory = parse_str_into(rkey, rval)?,
-                    Some("objective") => world.rule_objective = parse_str_into(rkey, rval)?,
+                    Some("$victory" | "victory") => {
+                        world.rule_victory = parse_str_into(rkey, rval)?
+                    }
+                    Some("$objective" | "objective") => {
+                        world.rule_objective = parse_str_into(rkey, rval)?
+                    }
                     _ => {
                         return Err(format!(
                             "Unrecognized or unparseable rule key: '{:?}'",

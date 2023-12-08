@@ -12,7 +12,8 @@ REF_GETTER_TYPE = re.compile(r'(?:ctx\.|data::)([^(]*)\(')
 
 class RustVisitor(RulesVisitor):
 
-    def __init__(self, context_types, action_funcs, ctxdict, data_keys, name):
+    def __init__(self, rules, context_types, action_funcs, ctxdict, data_keys, name):
+        self.rules = rules
         self.context_types = context_types
         self.action_funcs = action_funcs
         self.ctxdict = ctxdict
@@ -45,6 +46,8 @@ class RustVisitor(RulesVisitor):
                 return (BUILTINS[func], [])
             else:
                 return (BUILTINS[func][0], list(BUILTINS[func][1:]))
+        elif func in self.rules:
+            return (f'rule__{construct_id(func[1:])}!', ['ctx', 'world'])
         else:
             return (f'helper__{construct_id(func[1:])}!', ['ctx', 'world'])
 

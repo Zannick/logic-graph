@@ -570,3 +570,33 @@ macro_rules! helper__clear_breach_save {
         $ctx.set_breach_save(Default::default());
     }};
 }
+
+/// Rule $victory
+#[macro_export]
+macro_rules! rule__victory {
+    ($ctx:expr, $world:expr) => {{
+        use $crate::graph_enums::*;
+        use $crate::rules;
+        match $world.rule_victory {
+            RuleVictory::Default => rules::access___victory($ctx, $world),
+            RuleVictory::JustObjective => rules::access___objective($ctx, $world),
+        }
+    }};
+}
+
+/// Rule $objective
+#[macro_export]
+macro_rules! rule__objective {
+    ($ctx:expr, $world:expr) => {{
+        use $crate::graph_enums::*;
+        use $crate::rules;
+        match $world.rule_objective {
+            RuleObjective::Start => rules::access___remote_drone($ctx, $world),
+            RuleObjective::AllItems => {
+                rules::access___all_urns_all_weapons_other_items_all_notes_all_health_all_flasks(
+                    $ctx, $world,
+                )
+            }
+        }
+    }};
+}
