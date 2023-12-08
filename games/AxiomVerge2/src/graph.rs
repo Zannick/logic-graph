@@ -9157,6 +9157,10 @@ impl world::World for World {
     }
 
     fn won(&self, ctx: &Context) -> bool {
+        self.objective_met(ctx)
+    }
+
+    fn objective_met(&self, ctx: &Context) -> bool {
         match self.objective {
             Objective::Start => rules::access___remote_drone(ctx, self),
             Objective::Progress => {

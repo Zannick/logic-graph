@@ -1673,7 +1673,7 @@ pub fn access_realm_eq_breach_and_exit_breach_and___flipside_not_within_default(
 ) -> bool {
     // ^realm == 'breach' and Exit_Breach and (^flipside NOT WITHIN $default)
     ((data::realm(ctx.position()) == enums::Realm::Breach && ctx.has(Item::Exit_Breach))
-        && (data::flipside(ctx.position()) != Default::default()))
+        && (data::flipside(ctx.position()) != Default::default()()))
 }
 pub fn access_realm_eq_main_and_amashilama(ctx: &Context, world: &World) -> bool {
     // ^realm == 'main' and Amashilama
@@ -2152,7 +2152,7 @@ pub fn action_giguna_breach__sw_save__west_11__open_door__do(ctx: &mut Context, 
 }
 pub fn action_indra_set_default(ctx: &mut Context, world: &World) {
     // ^indra = $default
-    ctx.set_indra(Default::default());
+    ctx.set_indra(Default::default()());
 }
 pub fn action_irikar__basement_portal__moving_platform_start__activate_platform__do(
     ctx: &mut Context,
@@ -2163,7 +2163,7 @@ pub fn action_irikar__basement_portal__moving_platform_start__activate_platform_
 }
 pub fn action_last_set_default(ctx: &mut Context, world: &World) {
     // ^last = $default
-    ctx.set_last(Default::default());
+    ctx.set_last(Default::default()());
 }
 pub fn action_last_set_position(ctx: &mut Context, world: &World) {
     // ^last = ^position

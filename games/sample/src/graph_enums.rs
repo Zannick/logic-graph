@@ -456,6 +456,7 @@ pub enum LocationId {
     KF__Baba_Corridor__Deku_Babas__Sticks,
     KF__Boulder_Maze__Reward__Chest,
     KF__Kokiri_Village__Midos_Guardpost__Show_Mido,
+    KF__Kokiri_Village__Training_Center__Victory,
     KF__Midos_House__Entry__Bottom_Left_Chest,
     KF__Midos_House__Entry__Bottom_Right_Chest,
     KF__Midos_House__Entry__Top_Left_Chest,
@@ -575,6 +576,9 @@ impl fmt::Display for LocationId {
                 "{}",
                 "KF > Kokiri Village > Mido's Guardpost > Show Mido"
             ),
+            LocationId::KF__Kokiri_Village__Training_Center__Victory => {
+                write!(f, "{}", "KF > Kokiri Village > Training Center > Victory")
+            }
             LocationId::KF__Midos_House__Entry__Bottom_Left_Chest => {
                 write!(f, "{}", "KF > Mido's House > Entry > Bottom Left Chest")
             }
@@ -704,6 +708,9 @@ impl std::str::FromStr for LocationId {
             "KF > Boulder Maze > Reward > Chest" => Ok(LocationId::KF__Boulder_Maze__Reward__Chest),
             "KF > Kokiri Village > Mido's Guardpost > Show Mido" => {
                 Ok(LocationId::KF__Kokiri_Village__Midos_Guardpost__Show_Mido)
+            }
+            "KF > Kokiri Village > Training Center > Victory" => {
+                Ok(LocationId::KF__Kokiri_Village__Training_Center__Victory)
             }
             "KF > Mido's House > Entry > Bottom Left Chest" => {
                 Ok(LocationId::KF__Midos_House__Entry__Bottom_Left_Chest)

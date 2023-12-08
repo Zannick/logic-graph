@@ -189,6 +189,7 @@ impl world::Accessible for Location {
             LocationId::KF__Baba_Corridor__Deku_Babas__Sticks => rules::access_is_adult_or_kokiri_sword_or_boomerang(&ctx, world),
             LocationId::KF__Boulder_Maze__Reward__Chest => true,
             LocationId::KF__Kokiri_Village__Midos_Guardpost__Show_Mido => rules::access_is_child_and_kokiri_sword_and_deku_shield(&ctx, world),
+            LocationId::KF__Kokiri_Village__Training_Center__Victory => rules::access_objective(&ctx, world),
             LocationId::KF__Midos_House__Entry__Bottom_Left_Chest => true,
             LocationId::KF__Midos_House__Entry__Bottom_Right_Chest => true,
             LocationId::KF__Midos_House__Entry__Top_Left_Chest => true,
@@ -740,7 +741,7 @@ impl world::World for World {
     type Exit = Exit;
     type Action = Action;
     type Warp = Warp;
-    const NUM_LOCATIONS: u32 = 47;
+    const NUM_LOCATIONS: u32 = 48;
 
     fn objective_name(&self) -> String {
         format!("{}", self.objective)
@@ -847,6 +848,7 @@ impl world::World for World {
             ],
             Item::Heart_Container => vec![LocationId::Deku_Tree__Boss_Room__Arena__Gohma_Heart],
             Item::Kokiri_Emerald => vec![LocationId::Deku_Tree__Boss_Room__Arena__Blue_Warp],
+            Item::Victory => vec![LocationId::KF__Kokiri_Village__Training_Center__Victory],
             Item::Showed_Mido => vec![LocationId::KF__Kokiri_Village__Midos_Guardpost__Show_Mido],
             Item::Kokiri_Sword => vec![LocationId::KF__Boulder_Maze__Reward__Chest],
             Item::Gossip_Stone_Deku_Left => {
@@ -953,6 +955,9 @@ impl world::World for World {
             }
             LocationId::Deku_Tree__Boss_Room__Arena__Blue_Warp => {
                 SpotId::Deku_Tree__Boss_Room__Arena
+            }
+            LocationId::KF__Kokiri_Village__Training_Center__Victory => {
+                SpotId::KF__Kokiri_Village__Training_Center
             }
             LocationId::KF__Kokiri_Village__Midos_Guardpost__Show_Mido => {
                 SpotId::KF__Kokiri_Village__Midos_Guardpost
@@ -1153,6 +1158,10 @@ impl world::World for World {
     }
 
     fn won(&self, ctx: &Context) -> bool {
+        ctx.has(Item::Victory)
+    }
+
+    fn objective_met(&self, ctx: &Context) -> bool {
         match self.objective {
             Objective::Gohma => rules::access___deku_lobby_web_kokiri_emerald(ctx, self),
             Objective::Ganon => rules::access___defeat_ganon(ctx, self),
@@ -1341,6 +1350,7 @@ impl World {
                     | Item::Progressive_Wallet
                     | Item::Recovery_Heart
                     | Item::Triforce_Piece
+                    | Item::Victory
                     | Item::Zora_Tunic
             ),
             Objective::Ganon => matches!(
@@ -1373,6 +1383,7 @@ impl World {
                     | Item::Progressive_Wallet
                     | Item::Recovery_Heart
                     | Item::Triforce_Piece
+                    | Item::Victory
                     | Item::Zora_Tunic
             ),
             Objective::Triforce_Hunt => matches!(
@@ -1405,6 +1416,7 @@ impl World {
                     | Item::Nayrus_Love
                     | Item::Progressive_Wallet
                     | Item::Recovery_Heart
+                    | Item::Victory
                     | Item::Zora_Tunic
             ),
             _ => false,
@@ -1629,6 +1641,14 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
             price: Currency::Free,
             time: 6000,
             exit_id: Some(ExitId::Deku_Tree__Boss_Room__Arena__Blue_Warp),
+        },
+        LocationId::KF__Kokiri_Village__Training_Center__Victory => Location {
+            id: LocationId::KF__Kokiri_Village__Training_Center__Victory,
+            canonical: CanonId::None,
+            item: Item::Victory,
+            price: Currency::Free,
+            time: 1000,
+            exit_id: None,
         },
         LocationId::KF__Kokiri_Village__Midos_Guardpost__Show_Mido => Location {
             id: LocationId::KF__Kokiri_Village__Midos_Guardpost__Show_Mido,
@@ -2646,7 +2666,8 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
         SpotId::KF__Kokiri_Village__Training_Center => Spot {
             id: SpotId::KF__Kokiri_Village__Training_Center,
             locations: Range {
-                start: 0, end: 0,
+                start: LocationId::KF__Kokiri_Village__Training_Center__Victory.into_usize(),
+                end: LocationId::KF__Kokiri_Village__Training_Center__Victory.into_usize() + 1,
             },
             exits: Range {
                 start: ExitId::KF__Kokiri_Village__Training_Center__ex__Boulder_Maze__Entry_1.into_usize(),

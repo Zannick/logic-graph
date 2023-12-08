@@ -41,9 +41,12 @@ class RustVisitor(RulesVisitor):
 
     def _getFuncAndArgs(self, func):
         if func in BUILTINS:
-            return BUILTINS[func] + '('
+            if isinstance(BUILTINS[func], str):
+                return (BUILTINS[func], [])
+            else:
+                return (BUILTINS[func][0], list(BUILTINS[func][1:]))
         else:
-            return f'helper__{construct_id(func[1:])}!(ctx, world, '
+            return (f'helper__{construct_id(func[1:])}!', ['ctx', 'world'])
 
     def visit(self, tree, rettype=None):
         last_rettype = self.rettype
@@ -79,25 +82,25 @@ class RustVisitor(RulesVisitor):
 
     def visitInvoke(self, ctx):
         items = ctx.ITEM()
-        func = self._getFuncAndArgs(str(ctx.FUNC()))
+        func, args = self._getFuncAndArgs(str(ctx.FUNC()))
         if items:
-            args = f'{", ".join("Item::" + str(item) for item in items)}'
+            args.extend(f'Item::{item}' for item in items)
             if func.startswith('ctx.collect'):
-                args += ', world'
+                args.append('world')
         elif ctx.value():
-            args = f'{self.visit(ctx.value())}'
+            args.append(str(self.visit(ctx.value())))
         elif ctx.PLACE():
             places = [str(p)[1:-1] for p in ctx.PLACE()]
-            args = ', '.join(construct_place_id(pl) for pl in places)
+            args.extend(construct_place_id(pl) for pl in places)
         elif ctx.REF():
-            args = self._getRefGetter(str(ctx.REF())[1:])
+            args.append(self._getRefGetter(str(ctx.REF())[1:]))
         else:
-            args = f'{ctx.LIT() or ctx.INT() or ctx.FLOAT() or ""}'
-            if not args:
-                func = func[:-2]
+            arg = f'{ctx.LIT() or ctx.INT() or ctx.FLOAT() or ""}'
+            if arg:
+                args.append(arg)
         if func.startswith('ctx.reset'):
-            args += ', world'
-        return f'{"!" if ctx.NOT() else ""}{func}{args})'
+            args.append('world')
+        return f'{"!" if ctx.NOT() else ""}{func}({", ".join(args)})'
 
     def _visitConditional(self, *args, else_case=True):
         ret = []
@@ -159,9 +162,10 @@ class RustVisitor(RulesVisitor):
             return ref
         return f'ctx.has({ref})'
     
-    # There's no need to optimize for bitflags here, as the compiler can handle that!
+    # There's no need to optimize for bitflags here, as the compiler can handle that! Hopefully.
     def visitItemList(self, ctx):
-        helpers = [self._getFuncAndArgs(helper)[:-2] + ')' for helper in map(str, ctx.FUNC())]
+        helper_args = [self._getFuncAndArgs(helper) for helper in map(str, ctx.FUNC())]
+        helpers = [f'{helper}({", ".join(args)})' for helper, args in helper_args]
         items = [self.visit(item) for item in ctx.item()]
         return f'{" && ".join(helpers + items)}'
 
@@ -244,13 +248,12 @@ class RustVisitor(RulesVisitor):
         return f'{self._getRefRaw(str(ctx.REF())[1:])} {ctx.BINOP()}= {self.visit(ctx.num())};'
 
     def visitFuncNum(self, ctx):
-        func = self._getFuncAndArgs(str(ctx.FUNC()))
+        func, args = self._getFuncAndArgs(str(ctx.FUNC()))
         if ctx.ITEM():
-            return f'{func}Item::{ctx.ITEM()})'
+            args.append(f'Item::{ctx.ITEM()}')
         elif ctx.num():
-            return f'{func}{", ".join(self.visit(n) for n in ctx.num())})'
-        else:
-            return func[:-2] + ')'
+            args.extend(str(self.visit(n)) for n in ctx.num())
+        return f'{func}({", ".join(args)})'
         
     def visitActionHelper(self, ctx):
         return self.visit(ctx.invoke()) + ';'

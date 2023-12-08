@@ -567,6 +567,6 @@ macro_rules! helper__clear_breach_save {
     ($ctx:expr, $world:expr) => {{
         #[allow(unused_imports)]
         use $crate::items::Item;
-        $ctx.set_breach_save(Default::default());
+        $ctx.set_breach_save(Default::default()());
     }};
 }
