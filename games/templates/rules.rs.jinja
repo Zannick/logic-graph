@@ -5,25 +5,25 @@
 #![allow(unused)]
 
 use crate::context::*;
-use crate::graph::*;
+use crate::graph::{self, *};
 use crate::graph_enums::*;
 use crate::items::Item;
 use crate::prices::Currency;
 use crate::*;
 use analyzer::context::Ctx;
-use analyzer::world;
+use analyzer::world::{self, World};
 
-pub fn access_default(_ctx: &Context, _world: &World) -> bool { true }
+pub fn access_default(_ctx: &Context, _world: &graph::World) -> bool { true }
 
 %% for id, info in access_funcs.items()|sort
-pub fn access_{{ id }}(ctx: &Context, world: &World) -> bool {
+pub fn access_{{ id }}(ctx: &Context, world: &graph::World) -> bool {
     // {{ (info.boolExpr or info.itemList).text|string|trim }}
     {{ (info.boolExpr or info.itemList)|prToRust(info) }}
 }
 %% endfor
 
 %% for id, info in action_funcs.items()|sort
-pub fn action_{{ id }}(ctx: &mut Context, world: &World{% for k, t in (info.args or {}).items() %}, {{ k }}: {{ t }}{% endfor %}) {
+pub fn action_{{ id }}(ctx: &mut Context, world: &graph::World{% for k, t in (info.args or {}).items() %}, {{ k }}: {{ t }}{% endfor %}) {
     // {{ info.actions.text.strip() }}
     {{ info.actions|prToRust(info, id) }}
 }

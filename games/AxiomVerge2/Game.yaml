@@ -42,6 +42,18 @@ objectives:
   Progress%: >
     [$all_urns, $all_weapons, $other_items, $all_notes, $all_health, $all_flasks]
 
+rules:
+  victory:
+    default: Victory
+    just_objective: $objective
+  objective:itemList:
+    Start: "[Remote_Drone]"
+    # Greedy search will have a problem with purchases if there are insufficient funds;
+    # it will never consider skipping what's available and may be unable to buy something
+    # necessary.
+    All Items: >
+      [$all_urns, $all_weapons, $other_items, $all_notes, $all_health, $all_flasks]
+
 base_movements:
   - # the slowest movement is in water
     # a grid line = 1 unit. each minimap pixel is about .1 unit

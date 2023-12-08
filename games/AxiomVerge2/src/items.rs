@@ -160,6 +160,7 @@ pub enum Item {
     Uhrum_West_Entrance_Upper_Wall,
     Under_Siege,
     Underwater_Movement,
+    Victory,
     Wall_Climb,
 }
 impl fmt::Display for Item {
@@ -312,6 +313,7 @@ impl fmt::Display for Item {
             }
             Item::Under_Siege => write!(f, "{}", "Under_Siege"),
             Item::Underwater_Movement => write!(f, "{}", "Underwater_Movement"),
+            Item::Victory => write!(f, "{}", "Victory"),
             Item::Wall_Climb => write!(f, "{}", "Wall_Climb"),
         }
     }
@@ -460,6 +462,7 @@ impl std::str::FromStr for Item {
             "Uhrum_West_Entrance_Upper_Wall" => Ok(Item::Uhrum_West_Entrance_Upper_Wall),
             "Under_Siege" => Ok(Item::Under_Siege),
             "Underwater_Movement" => Ok(Item::Underwater_Movement),
+            "Victory" => Ok(Item::Victory),
             "Wall_Climb" => Ok(Item::Wall_Climb),
             _ => Err(format!("Could not recognize as a Item: {}", s)),
         }

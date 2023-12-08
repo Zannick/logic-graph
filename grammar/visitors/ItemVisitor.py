@@ -27,7 +27,7 @@ class ItemVisitor(RulesVisitor):
             self.name = ''
 
     def _source(self):
-        if not self.name.startswith('objectives') and not self.name.startswith('helpers'):
+        if not self.name.startswith('objectives') and not self.name.startswith('helpers') and not self.name.startswith('rules'):
             return 'general'
         return self.name
 

@@ -443,7 +443,7 @@ areas:
       actions:
         - name: Climb and Throw Drone
           req: $climb and $can_deploy and Hover and Slingshot_Hook
-          do: $deploy_drone_and_move(`Annuna > East Tower > Tower Base East`)
+          do: $deploy_drone_and_move(`Annuna > East Bridge > Tower Base East`)
           to: Tower East Ledge
           time: 4
     - name: Tower Base East

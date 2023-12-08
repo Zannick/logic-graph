@@ -1,14 +1,14 @@
-%% macro enum(name, values, default=False, id=False, default_value=None, allow_lower=false)
+%% macro enum(name, values, default=False, id=False, default_value=None, allow_lower=false, camelize=false)
 #[derive(Debug, PartialEq, Eq, Copy, Clone, Hash, Ord, PartialOrd{% if id %}, enum_map::Enum{% endif %}{% if default or default_value %}, Default{% endif %}, serde_repr::Serialize_repr, serde_repr::Deserialize_repr)]
 #[repr(u{{ (((values|count) + (1 if default or default_value else 0)).bit_length() / 8)|round(0, 'ceil')|int * 8 }})]
 pub enum {{ name }} {
 %% if default or default_value
     #[default]
-    {{ default_value }},
+    {{ default_value|construct_id|camelize if camelize else default_value }},
 %% endif
 %% for v in values|sort(attribute='id')
 %% if (v.id or v|construct_id) != default_value
-    {{ v.id or v|construct_id }},
+    {{ v.id or (v|construct_id if not camelize else v|construct_id|camelize) }},
 %% endif
 %% endfor
 }
@@ -16,11 +16,11 @@ impl fmt::Display for {{ name }} {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         match self {
 %% if default or default_value
-            {{ name }}::{{ default_value }} => write!(f, "{}", "{{ default_value }}"),
+            {{ name }}::{{ default_value|construct_id|camelize if camelize else default_value }} => write!(f, "{}", "{{ default_value }}"),
 %% endif
 %% for v in values|sort(attribute='id')
 %% if (v.id or v|construct_id) != default_value
-            {{ name }}::{{ v.id or v|construct_id }} => write!(f, "{}", "{{ v.fullname or v.name or v }}"),
+            {{ name }}::{{ v.id or (v|construct_id if not camelize else v|construct_id|camelize) }} => write!(f, "{}", "{{ v.fullname or v.name or v }}"),
 %% endif
 %% endfor
         }
@@ -35,7 +35,7 @@ impl std::str::FromStr for {{ name }} {
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         match s {
 %% for v in values|sort(attribute='id')
-            "{{ v.fullname or v.name or v }}"{% if allow_lower %} | "{{ (v.fullname or v.name or v)|lower }}"{% endif %} => Ok({{ name }}::{{ v.id or v|construct_id }}),
+            "{{ v.fullname or v.name or v }}"{% if allow_lower %} | "{{ (v.fullname or v.name or v)|lower }}"{% endif %} => Ok({{ name }}::{{ v.id or (v|construct_id if not camelize else v|construct_id|camelize) }}),
 %% endfor
             _ => Err(format!("Could not recognize as a {{ name }}: {}", s)),
         }

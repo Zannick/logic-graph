@@ -16,3 +16,6 @@ use std::fmt;
 {{ enum('CanonId', canon_places, True, id=True) }}
 {{ enum('WarpId', warps.values()|list, id=True) }}
 {{ enum('Objective', objectives, default_value=default_objective) }}
+%% for rule, variants in rules.items()
+{{ enum('Rule' + (rule|camelize), variants, default_value=((variants.keys())|first), camelize=True)}}
+%% endfor

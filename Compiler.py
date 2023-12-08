@@ -28,7 +28,7 @@ templates_dir = os.path.join(base_dir, 'games', 'templates')
 MAIN_FILENAME = 'Game.yaml'
 GAME_FIELDS = {'name', 'objectives', 'base_movements', 'movements', 'exit_movements',
                'warps', 'actions', 'time', 'context', 'start', 'load', 'data',
-               'helpers', 'collect', 'settings', 'special', '_filename'}
+               'rules', 'helpers', 'collect', 'settings', 'special', '_filename'}
 REGION_FIELDS = {'name', 'short', 'data', 'here', 'graph_offset'}
 AREA_FIELDS = {'name', 'enter', 'spots', 'data', 'here', 'map'}
 SPOT_FIELDS = {'name', 'coord', 'actions', 'locations', 'exits', 'hybrid', 'local', 'data', 'here',
@@ -44,6 +44,12 @@ SPOT_NON_FIELDS = {
     inflection.pluralize(n) if n != inflection.pluralize(n) else inflection.singularize(n): n
     for n in SPOT_FIELDS
 }
+
+RULES_EXAMPLE = """
+rules:
+  victory:
+    default: Victory
+"""
 
 typed_name = re.compile(r'(?P<name>\$?[^:()]+)(?::(?P<type>\w+))?')
 TypedVar = namedtuple('TypedVar', ['name', 'type'])
@@ -72,6 +78,8 @@ def load_game_yaml(game_dir: str):
     unexp = game.keys() - GAME_FIELDS
     if unexp:
         raise Exception(f'Unexpected top-level fields in {game_file}: {", ".join(sorted(unexp))}')
+    if 'rules' not in game or not any(r for r in game['rules'] if r.startswith('victory')):
+        raise Exception(f'Must define top-level field "rules" with "victory" entry in {game_file}, e.g.\n{RULES_EXAMPLE}')
     game['regions'] = list(itertools.chain.from_iterable(
         load_data_from_file(os.path.join(game_dir, file))
         for file in sorted(yfiles)))
@@ -178,10 +186,26 @@ class GameLogic(object):
                 'pr': _parseExpression(logic, name, 'helpers'),
                 'rule': get_func_rule(name),
             }
-            for name, logic in self._info['helpers'].items()
+            for name, logic in self._info.get('helpers', {}).items()
         }
+        self.rules = {}
+        for key, variants in self._info['rules'].items():
+            name = get_func_name(key)
+            args = get_func_args(key)
+            rule = get_func_rule(key)
+            self.rules[name] = {
+                variant: {
+                    'args': args,
+                    'pr': _parseExpression(logic, f'{name}_{variant}', 'rules', rule=rule),
+                    'rule': rule,
+                }
+                for variant, logic in variants.items()
+            }
 
-        self.allowed_funcs = self.helpers.keys() | BUILTINS.keys()
+        if shadow := self.helpers.keys() & self.rules.keys() & BUILTINS.keys():
+            raise Exception(f'helpers and/or rules shadowed by rules and/or BUILTINS: {sorted(shadow)}')
+
+        self.allowed_funcs = self.helpers.keys() | self.rules.keys() | BUILTINS.keys()
         self.access_funcs = {}
         self.action_funcs = {}
         self.objectives = {}
@@ -190,6 +214,9 @@ class GameLogic(object):
             self.objectives[name] = {'pr': pr}
             self.objectives[name]['access_id'] = self.make_funcid(self.objectives[name])
         self.default_objective = list(self._info['objectives'].keys())[0]
+        for variants in self.rules.values():
+            for details in variants.values():
+                details['access_id'] = self.make_funcid(details)
 
         self.collect = {}
         for name, logic in self._info.get('collect', {}).items():
@@ -989,6 +1016,9 @@ class GameLogic(object):
                 d[id]['args'] = extra_fields
             return id
 
+        if ruletype not in d[id]:
+            raise Exception(f'func {id} missing {ruletype}: Is it redefined from {d[id].keys()}?')
+
         if d[id][ruletype].text != pr.text:
             id = id + str(sum(1 for k in d if k.startswith(id)))
             assert id not in d
@@ -1043,6 +1073,7 @@ class GameLogic(object):
     def nonpoint_parse_results(self):
         yield from (info['pr'] for info in self.helpers.values())
         yield from (info['pr'] for info in self.objectives.values())
+        yield from (info['pr'] for variant in self.rules.values() for info in variant.values())
         yield from (info['act'] for info in self.collect.values())
         yield from (info['pr'] for info in self.movements.values() if 'pr' in info)
         yield from (info['pr'] for info in self.warps.values() if 'pr' in info)
@@ -1180,7 +1211,7 @@ class GameLogic(object):
 
 
     @cached_property
-    def rule_items(self):
+    def items_used_in_rules(self):
         return {t.text
                 for pr in self.all_parse_results()
                 for t in pr.parser.getTokenStream().tokens
@@ -1189,7 +1220,7 @@ class GameLogic(object):
 
     @cached_property
     def all_items(self):
-        return sorted(self.vanilla_items | self.rule_items)
+        return sorted(self.vanilla_items | self.items_used_in_rules)
 
 
     def process_items(self):
@@ -1200,6 +1231,13 @@ class GameLogic(object):
         self.item_uses = visitor.item_uses
         self.item_max_counts = visitor.item_max_counts
         self.items_by_source = visitor.items_by_source
+        self.rule_items = {
+            rule: {
+                variant: dict(self.items_by_source[f'rules:{rule}_{variant}'])
+                for variant in variants
+            }
+            for rule, variants in self.rules.items()
+        }
         self.objective_items = {
             objective: dict(self.items_by_source['objectives:' + objective])
             for objective in self.objectives
@@ -1222,18 +1260,30 @@ class GameLogic(object):
         for objective in self.objectives:
             for ref in _get_all_refs('objectives:' + objective):
                 for item, ct in self.items_by_source[ref].items():
-                    if item in self.objective_items:
+                    if item in self.objective_items[objective]:
                         self.objective_items[objective][item] = max(self.objective_items[objective][item], ct)
                     else:
                         self.objective_items[objective][item] = ct
+        for rule, variants in self.rule_items.items():
+            for variant, item_maxes in variants.items():
+                for ref in _get_all_refs(f'rules:{rule}_{variant}'):
+                    for item, ct in self.items_by_source[ref].items():
+                        if item in item_maxes:
+                            item_maxes[item] = max(item_maxes[item], ct)
+                        else:
+                            item_maxes[item] = ct
         
+        general_unused = set(self.all_items) - general_items - self.collect.keys() - self.items_by_source['general'].keys()
         self.unused_by_objective = {
-            objective: set(self.all_items)
-                        - general_items
-                        - self.collect.keys()
-                        - self.items_by_source['general'].keys()
-                        - self.objective_items[objective].keys()
-            for objective in self.objectives
+            objective: general_unused - obj_items.keys()
+            for objective, obj_items in self.objectives.items()
+        }
+        self.unused_by_rule = {
+            rule: {
+                variant: general_unused - variant_items.keys()
+                for variant, variant_items in variants.items()
+            }
+            for rule, variants in self.rule_items.items()
         }
         self.item_locations = defaultdict(list)
         for loc in self.locations():

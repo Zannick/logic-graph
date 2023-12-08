@@ -22,7 +22,7 @@ BUILTINS = {
     '$visit': 'ctx.visit',
     '$count': 'ctx.count',
     '$add_item': 'ctx.add_item',
-    '$default': 'Default::default()',
+    '$default': 'Default::default',
     # warning: be careful not to introduce infinite loops in collect rules!
     '$collect': 'ctx.collect',
     '$objective': ('world.objective_met', 'ctx'),

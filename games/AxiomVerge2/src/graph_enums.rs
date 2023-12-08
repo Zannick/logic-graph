@@ -13140,3 +13140,81 @@ impl std::str::FromStr for Objective {
         }
     }
 }
+
+#[derive(
+    Debug,
+    PartialEq,
+    Eq,
+    Copy,
+    Clone,
+    Hash,
+    Ord,
+    PartialOrd,
+    Default,
+    serde_repr::Serialize_repr,
+    serde_repr::Deserialize_repr,
+)]
+#[repr(u8)]
+pub enum RuleVictory {
+    #[default]
+    Default,
+    JustObjective,
+}
+impl fmt::Display for RuleVictory {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        match self {
+            RuleVictory::Default => write!(f, "{}", "default"),
+            RuleVictory::JustObjective => write!(f, "{}", "just_objective"),
+        }
+    }
+}
+impl std::str::FromStr for RuleVictory {
+    type Err = String;
+
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        match s {
+            "default" => Ok(RuleVictory::Default),
+            "just_objective" => Ok(RuleVictory::JustObjective),
+            _ => Err(format!("Could not recognize as a RuleVictory: {}", s)),
+        }
+    }
+}
+
+#[derive(
+    Debug,
+    PartialEq,
+    Eq,
+    Copy,
+    Clone,
+    Hash,
+    Ord,
+    PartialOrd,
+    Default,
+    serde_repr::Serialize_repr,
+    serde_repr::Deserialize_repr,
+)]
+#[repr(u8)]
+pub enum RuleObjective {
+    #[default]
+    Start,
+    AllItems,
+}
+impl fmt::Display for RuleObjective {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        match self {
+            RuleObjective::Start => write!(f, "{}", "Start"),
+            RuleObjective::AllItems => write!(f, "{}", "All Items"),
+        }
+    }
+}
+impl std::str::FromStr for RuleObjective {
+    type Err = String;
+
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        match s {
+            "Start" => Ok(RuleObjective::Start),
+            "All Items" => Ok(RuleObjective::AllItems),
+            _ => Err(format!("Could not recognize as a RuleObjective: {}", s)),
+        }
+    }
+}
