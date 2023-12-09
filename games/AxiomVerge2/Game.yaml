@@ -44,7 +44,7 @@ objectives:
 
 rules:
   $victory:itemList:
-    default: "[Victory]"
+    default: "[Victory, $objective]"
     just_objective: "[$objective]"
   $objective:itemList:
     Start: "[Remote_Drone]"

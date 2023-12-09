@@ -9,7 +9,8 @@ from grammar import RulesParser, RulesVisitor
 
 class ItemVisitor(RulesVisitor):
 
-    def __init__(self, settings, vanilla_items):
+    def __init__(self, rules, settings, vanilla_items):
+        self.rules = rules
         self.item_uses = Counter()
         self.item_max_counts = defaultdict(int)
         self.items_by_source = defaultdict(lambda: defaultdict(int))
@@ -32,7 +33,7 @@ class ItemVisitor(RulesVisitor):
         return self.name
 
     def _count_items(self, ctx):
-        if self.name.startswith('objectives'):
+        if self.name.startswith('objectives') or self.name.startswith('rules'):
             for item in ctx.ITEM():
                 it = str(item)
                 if it not in self.vanilla_items:
@@ -116,5 +117,8 @@ class ItemVisitor(RulesVisitor):
 
     def visitItemList(self, ctx):
         for func in ctx.FUNC():
-            self.source_refs[self._source()].add(f'helpers:{func}')
+            cat = 'helpers'
+            if func in self.rules:
+                cat = 'rules'
+            self.source_refs[self._source()].add(f'rules:{func}')
         return self.visitChildren(ctx)

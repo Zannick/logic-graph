@@ -37,9 +37,9 @@ pub fn access___remote_drone(ctx: &Context, world: &graph::World) -> bool {
     // [Remote_Drone]
     ctx.has(Item::Remote_Drone)
 }
-pub fn access___victory(ctx: &Context, world: &graph::World) -> bool {
-    // [Victory]
-    ctx.has(Item::Victory)
+pub fn access___victory_objective(ctx: &Context, world: &graph::World) -> bool {
+    // [Victory, $objective]
+    rule__objective!(ctx, world) && ctx.has(Item::Victory)
 }
 pub fn access_activate(ctx: &Context, world: &graph::World) -> bool {
     // $activate

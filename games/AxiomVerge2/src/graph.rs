@@ -9216,107 +9216,7 @@ impl world::World for World {
                     vec.push((Item::Remote_Drone, 1));
                 }
             }
-            Objective::Progress => {
-                if !ctx.has(Item::Amashilama) {
-                    vec.push((Item::Amashilama, 1));
-                }
-                if !ctx.has(Item::Big_Flask) {
-                    vec.push((Item::Big_Flask, 1));
-                }
-                if !ctx.has(Item::Boomerang) {
-                    vec.push((Item::Boomerang, 1));
-                }
-                if !ctx.has(Item::Breach_Sight) {
-                    vec.push((Item::Breach_Sight, 1));
-                }
-                if !ctx.has(Item::Bronze_Axe) {
-                    vec.push((Item::Bronze_Axe, 1));
-                }
-                if !ctx.has(Item::Building_of_the_School) {
-                    vec.push((Item::Building_of_the_School, 1));
-                }
-                if !ctx.has(Item::Commemorative_Speech) {
-                    vec.push((Item::Commemorative_Speech, 1));
-                }
-                if !ctx.has(Item::Companies_Layoff) {
-                    vec.push((Item::Companies_Layoff, 1));
-                }
-                if !ctx.has(Item::Compass) {
-                    vec.push((Item::Compass, 1));
-                }
-                if !ctx.has(Item::Dangerous_Ideas) {
-                    vec.push((Item::Dangerous_Ideas, 1));
-                }
-                if !ctx.has(Item::Dear_Ernest) {
-                    vec.push((Item::Dear_Ernest, 1));
-                }
-                if !ctx.has(Item::Drone_Hover) {
-                    vec.push((Item::Drone_Hover, 1));
-                }
-                if !ctx.has(Item::Fast_Travel) {
-                    vec.push((Item::Fast_Travel, 1));
-                }
-                if ctx.count(Item::Flask) < 12 {
-                    vec.push((Item::Flask, 12 - ctx.count(Item::Flask)));
-                }
-                if ctx.count(Item::Health_Fragment) < 6 {
-                    vec.push((Item::Health_Fragment, 6 - ctx.count(Item::Health_Fragment)));
-                }
-                if !ctx.has(Item::Health_Node) {
-                    vec.push((Item::Health_Node, 1));
-                }
-                if !ctx.has(Item::Heretics_Tablet) {
-                    vec.push((Item::Heretics_Tablet, 1));
-                }
-                if !ctx.has(Item::Ice_Axe) {
-                    vec.push((Item::Ice_Axe, 1));
-                }
-                if !ctx.has(Item::Infect) {
-                    vec.push((Item::Infect, 1));
-                }
-                if !ctx.has(Item::Ledge_Grab) {
-                    vec.push((Item::Ledge_Grab, 1));
-                }
-                if !ctx.has(Item::Letter_from_Trace) {
-                    vec.push((Item::Letter_from_Trace, 1));
-                }
-                if !ctx.has(Item::Power_Matrix) {
-                    vec.push((Item::Power_Matrix, 1));
-                }
-                if !ctx.has(Item::Record_Losses) {
-                    vec.push((Item::Record_Losses, 1));
-                }
-                if !ctx.has(Item::Remote_Drone) {
-                    vec.push((Item::Remote_Drone, 1));
-                }
-                if !ctx.has(Item::Researchers_Missing) {
-                    vec.push((Item::Researchers_Missing, 1));
-                }
-                if !ctx.has(Item::Shockwave) {
-                    vec.push((Item::Shockwave, 1));
-                }
-                if !ctx.has(Item::Slingshot_Hook) {
-                    vec.push((Item::Slingshot_Hook, 1));
-                }
-                if !ctx.has(Item::Storm_Bomb) {
-                    vec.push((Item::Storm_Bomb, 1));
-                }
-                if !ctx.has(Item::Terminal_Breakthrough_1) {
-                    vec.push((Item::Terminal_Breakthrough_1, 1));
-                }
-                if !ctx.has(Item::Terminal_Breakthrough_2) {
-                    vec.push((Item::Terminal_Breakthrough_2, 1));
-                }
-                if !ctx.has(Item::The_Ideal_Kiengir) {
-                    vec.push((Item::The_Ideal_Kiengir, 1));
-                }
-                if !ctx.has(Item::Under_Siege) {
-                    vec.push((Item::Under_Siege, 1));
-                }
-                if !ctx.has(Item::Wall_Climb) {
-                    vec.push((Item::Wall_Climb, 1));
-                }
-            }
+            Objective::Progress => {}
         };
         vec
     }
@@ -9324,41 +9224,7 @@ impl world::World for World {
     fn objective_items(&self) -> Vec<(Item, i16)> {
         match self.objective {
             Objective::Start => vec![(Item::Remote_Drone, 1)],
-            Objective::Progress => vec![
-                (Item::Amashilama, 1),
-                (Item::Big_Flask, 1),
-                (Item::Boomerang, 1),
-                (Item::Breach_Sight, 1),
-                (Item::Bronze_Axe, 1),
-                (Item::Building_of_the_School, 1),
-                (Item::Commemorative_Speech, 1),
-                (Item::Companies_Layoff, 1),
-                (Item::Compass, 1),
-                (Item::Dangerous_Ideas, 1),
-                (Item::Dear_Ernest, 1),
-                (Item::Drone_Hover, 1),
-                (Item::Fast_Travel, 1),
-                (Item::Flask, 12),
-                (Item::Health_Fragment, 6),
-                (Item::Health_Node, 1),
-                (Item::Heretics_Tablet, 1),
-                (Item::Ice_Axe, 1),
-                (Item::Infect, 1),
-                (Item::Ledge_Grab, 1),
-                (Item::Letter_from_Trace, 1),
-                (Item::Power_Matrix, 1),
-                (Item::Record_Losses, 1),
-                (Item::Remote_Drone, 1),
-                (Item::Researchers_Missing, 1),
-                (Item::Shockwave, 1),
-                (Item::Slingshot_Hook, 1),
-                (Item::Storm_Bomb, 1),
-                (Item::Terminal_Breakthrough_1, 1),
-                (Item::Terminal_Breakthrough_2, 1),
-                (Item::The_Ideal_Kiengir, 1),
-                (Item::Under_Siege, 1),
-                (Item::Wall_Climb, 1),
-            ],
+            Objective::Progress => vec![],
         }
     }
 

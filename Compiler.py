@@ -1221,7 +1221,7 @@ class GameLogic(object):
 
 
     def process_items(self):
-        visitor = ItemVisitor(self.settings, self.vanilla_items)
+        visitor = ItemVisitor(self.rules, self.settings, self.vanilla_items)
         for pr in self.all_parse_results():
             visitor.visit(pr.tree, name=pr.name)
         self._errors.extend(visitor.errors)
@@ -1281,6 +1281,10 @@ class GameLogic(object):
                 for variant, variant_items in variants.items()
             }
             for rule, variants in self.rule_items.items()
+        }
+        self.victory_rule_refs = {
+            variant: [ref[7:] for ref in _get_all_refs(f'rules:$victory_{variant}') if ref.startswith('rules:')]
+            for variant in self.rules['$victory'].variants
         }
         self.item_locations = defaultdict(list)
         for loc in self.locations():
