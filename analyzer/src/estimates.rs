@@ -39,7 +39,7 @@ where
         T: Ctx<World = W>,
     {
         let required_locations: Vec<_> = world
-            .objective_items()
+            .required_items()
             .into_iter()
             .flat_map(|(item, _)| world.get_item_locations(item))
             .collect();

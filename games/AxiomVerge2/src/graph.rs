@@ -9194,7 +9194,7 @@ impl world::World for World {
     }
 
     fn won(&self, ctx: &Context) -> bool {
-        ctx.has(Item::Victory)
+        crate::rule__victory!(ctx, self)
     }
 
     fn objective_met(&self, ctx: &Context) -> bool {
@@ -9209,23 +9209,616 @@ impl world::World for World {
     }
 
     fn items_needed(&self, ctx: &Context) -> Vec<(Item, i16)> {
-        let mut vec = Vec::new();
-        match self.objective {
-            Objective::Start => {
-                if !ctx.has(Item::Remote_Drone) {
-                    vec.push((Item::Remote_Drone, 1));
+        let mut map = analyzer::new_hashmap();
+
+        match self.rule_victory {
+            RuleVictory::Default => {
+                if !ctx.has(Item::Victory) {
+                    map.insert(Item::Victory, 1);
+                }
+                match self.rule_objective {
+                    RuleObjective::Start => {
+                        if !ctx.has(Item::Remote_Drone) {
+                            if !map.contains_key(&Item::Remote_Drone) {
+                                map.insert(Item::Remote_Drone, 1);
+                            }
+                        }
+                    }
+                    RuleObjective::AllItems => {
+                        if !ctx.has(Item::Amashilama) {
+                            if !map.contains_key(&Item::Amashilama) {
+                                map.insert(Item::Amashilama, 1);
+                            }
+                        }
+                        if !ctx.has(Item::Big_Flask) {
+                            if !map.contains_key(&Item::Big_Flask) {
+                                map.insert(Item::Big_Flask, 1);
+                            }
+                        }
+                        if !ctx.has(Item::Boomerang) {
+                            if !map.contains_key(&Item::Boomerang) {
+                                map.insert(Item::Boomerang, 1);
+                            }
+                        }
+                        if !ctx.has(Item::Breach_Sight) {
+                            if !map.contains_key(&Item::Breach_Sight) {
+                                map.insert(Item::Breach_Sight, 1);
+                            }
+                        }
+                        if !ctx.has(Item::Bronze_Axe) {
+                            if !map.contains_key(&Item::Bronze_Axe) {
+                                map.insert(Item::Bronze_Axe, 1);
+                            }
+                        }
+                        if !ctx.has(Item::Building_of_the_School) {
+                            if !map.contains_key(&Item::Building_of_the_School) {
+                                map.insert(Item::Building_of_the_School, 1);
+                            }
+                        }
+                        if !ctx.has(Item::Commemorative_Speech) {
+                            if !map.contains_key(&Item::Commemorative_Speech) {
+                                map.insert(Item::Commemorative_Speech, 1);
+                            }
+                        }
+                        if !ctx.has(Item::Companies_Layoff) {
+                            if !map.contains_key(&Item::Companies_Layoff) {
+                                map.insert(Item::Companies_Layoff, 1);
+                            }
+                        }
+                        if !ctx.has(Item::Compass) {
+                            if !map.contains_key(&Item::Compass) {
+                                map.insert(Item::Compass, 1);
+                            }
+                        }
+                        if !ctx.has(Item::Dangerous_Ideas) {
+                            if !map.contains_key(&Item::Dangerous_Ideas) {
+                                map.insert(Item::Dangerous_Ideas, 1);
+                            }
+                        }
+                        if !ctx.has(Item::Dear_Ernest) {
+                            if !map.contains_key(&Item::Dear_Ernest) {
+                                map.insert(Item::Dear_Ernest, 1);
+                            }
+                        }
+                        if !ctx.has(Item::Drone_Hover) {
+                            if !map.contains_key(&Item::Drone_Hover) {
+                                map.insert(Item::Drone_Hover, 1);
+                            }
+                        }
+                        if !ctx.has(Item::Fast_Travel) {
+                            if !map.contains_key(&Item::Fast_Travel) {
+                                map.insert(Item::Fast_Travel, 1);
+                            }
+                        }
+                        if ctx.count(Item::Flask) < 12 {
+                            if let Some(val) = map.get_mut(&Item::Flask) {
+                                *val = std::cmp::max(*val, 12 - ctx.count(Item::Flask));
+                            } else {
+                                map.insert(Item::Flask, 12 - ctx.count(Item::Flask));
+                            }
+                        }
+                        if ctx.count(Item::Health_Fragment) < 6 {
+                            if let Some(val) = map.get_mut(&Item::Health_Fragment) {
+                                *val = std::cmp::max(*val, 6 - ctx.count(Item::Health_Fragment));
+                            } else {
+                                map.insert(
+                                    Item::Health_Fragment,
+                                    6 - ctx.count(Item::Health_Fragment),
+                                );
+                            }
+                        }
+                        if !ctx.has(Item::Health_Node) {
+                            if !map.contains_key(&Item::Health_Node) {
+                                map.insert(Item::Health_Node, 1);
+                            }
+                        }
+                        if !ctx.has(Item::Heretics_Tablet) {
+                            if !map.contains_key(&Item::Heretics_Tablet) {
+                                map.insert(Item::Heretics_Tablet, 1);
+                            }
+                        }
+                        if !ctx.has(Item::Ice_Axe) {
+                            if !map.contains_key(&Item::Ice_Axe) {
+                                map.insert(Item::Ice_Axe, 1);
+                            }
+                        }
+                        if !ctx.has(Item::Infect) {
+                            if !map.contains_key(&Item::Infect) {
+                                map.insert(Item::Infect, 1);
+                            }
+                        }
+                        if !ctx.has(Item::Ledge_Grab) {
+                            if !map.contains_key(&Item::Ledge_Grab) {
+                                map.insert(Item::Ledge_Grab, 1);
+                            }
+                        }
+                        if !ctx.has(Item::Letter_from_Trace) {
+                            if !map.contains_key(&Item::Letter_from_Trace) {
+                                map.insert(Item::Letter_from_Trace, 1);
+                            }
+                        }
+                        if !ctx.has(Item::Power_Matrix) {
+                            if !map.contains_key(&Item::Power_Matrix) {
+                                map.insert(Item::Power_Matrix, 1);
+                            }
+                        }
+                        if !ctx.has(Item::Record_Losses) {
+                            if !map.contains_key(&Item::Record_Losses) {
+                                map.insert(Item::Record_Losses, 1);
+                            }
+                        }
+                        if !ctx.has(Item::Remote_Drone) {
+                            if !map.contains_key(&Item::Remote_Drone) {
+                                map.insert(Item::Remote_Drone, 1);
+                            }
+                        }
+                        if !ctx.has(Item::Researchers_Missing) {
+                            if !map.contains_key(&Item::Researchers_Missing) {
+                                map.insert(Item::Researchers_Missing, 1);
+                            }
+                        }
+                        if !ctx.has(Item::Shockwave) {
+                            if !map.contains_key(&Item::Shockwave) {
+                                map.insert(Item::Shockwave, 1);
+                            }
+                        }
+                        if !ctx.has(Item::Slingshot_Hook) {
+                            if !map.contains_key(&Item::Slingshot_Hook) {
+                                map.insert(Item::Slingshot_Hook, 1);
+                            }
+                        }
+                        if !ctx.has(Item::Storm_Bomb) {
+                            if !map.contains_key(&Item::Storm_Bomb) {
+                                map.insert(Item::Storm_Bomb, 1);
+                            }
+                        }
+                        if !ctx.has(Item::Terminal_Breakthrough_1) {
+                            if !map.contains_key(&Item::Terminal_Breakthrough_1) {
+                                map.insert(Item::Terminal_Breakthrough_1, 1);
+                            }
+                        }
+                        if !ctx.has(Item::Terminal_Breakthrough_2) {
+                            if !map.contains_key(&Item::Terminal_Breakthrough_2) {
+                                map.insert(Item::Terminal_Breakthrough_2, 1);
+                            }
+                        }
+                        if !ctx.has(Item::The_Ideal_Kiengir) {
+                            if !map.contains_key(&Item::The_Ideal_Kiengir) {
+                                map.insert(Item::The_Ideal_Kiengir, 1);
+                            }
+                        }
+                        if !ctx.has(Item::Under_Siege) {
+                            if !map.contains_key(&Item::Under_Siege) {
+                                map.insert(Item::Under_Siege, 1);
+                            }
+                        }
+                        if !ctx.has(Item::Wall_Climb) {
+                            if !map.contains_key(&Item::Wall_Climb) {
+                                map.insert(Item::Wall_Climb, 1);
+                            }
+                        }
+                    }
                 }
             }
-            Objective::Progress => {}
-        };
-        vec
+            RuleVictory::JustObjective => match self.rule_objective {
+                RuleObjective::Start => {
+                    if !ctx.has(Item::Remote_Drone) {
+                        if !map.contains_key(&Item::Remote_Drone) {
+                            map.insert(Item::Remote_Drone, 1);
+                        }
+                    }
+                }
+                RuleObjective::AllItems => {
+                    if !ctx.has(Item::Amashilama) {
+                        if !map.contains_key(&Item::Amashilama) {
+                            map.insert(Item::Amashilama, 1);
+                        }
+                    }
+                    if !ctx.has(Item::Big_Flask) {
+                        if !map.contains_key(&Item::Big_Flask) {
+                            map.insert(Item::Big_Flask, 1);
+                        }
+                    }
+                    if !ctx.has(Item::Boomerang) {
+                        if !map.contains_key(&Item::Boomerang) {
+                            map.insert(Item::Boomerang, 1);
+                        }
+                    }
+                    if !ctx.has(Item::Breach_Sight) {
+                        if !map.contains_key(&Item::Breach_Sight) {
+                            map.insert(Item::Breach_Sight, 1);
+                        }
+                    }
+                    if !ctx.has(Item::Bronze_Axe) {
+                        if !map.contains_key(&Item::Bronze_Axe) {
+                            map.insert(Item::Bronze_Axe, 1);
+                        }
+                    }
+                    if !ctx.has(Item::Building_of_the_School) {
+                        if !map.contains_key(&Item::Building_of_the_School) {
+                            map.insert(Item::Building_of_the_School, 1);
+                        }
+                    }
+                    if !ctx.has(Item::Commemorative_Speech) {
+                        if !map.contains_key(&Item::Commemorative_Speech) {
+                            map.insert(Item::Commemorative_Speech, 1);
+                        }
+                    }
+                    if !ctx.has(Item::Companies_Layoff) {
+                        if !map.contains_key(&Item::Companies_Layoff) {
+                            map.insert(Item::Companies_Layoff, 1);
+                        }
+                    }
+                    if !ctx.has(Item::Compass) {
+                        if !map.contains_key(&Item::Compass) {
+                            map.insert(Item::Compass, 1);
+                        }
+                    }
+                    if !ctx.has(Item::Dangerous_Ideas) {
+                        if !map.contains_key(&Item::Dangerous_Ideas) {
+                            map.insert(Item::Dangerous_Ideas, 1);
+                        }
+                    }
+                    if !ctx.has(Item::Dear_Ernest) {
+                        if !map.contains_key(&Item::Dear_Ernest) {
+                            map.insert(Item::Dear_Ernest, 1);
+                        }
+                    }
+                    if !ctx.has(Item::Drone_Hover) {
+                        if !map.contains_key(&Item::Drone_Hover) {
+                            map.insert(Item::Drone_Hover, 1);
+                        }
+                    }
+                    if !ctx.has(Item::Fast_Travel) {
+                        if !map.contains_key(&Item::Fast_Travel) {
+                            map.insert(Item::Fast_Travel, 1);
+                        }
+                    }
+                    if ctx.count(Item::Flask) < 12 {
+                        if let Some(val) = map.get_mut(&Item::Flask) {
+                            *val = std::cmp::max(*val, 12 - ctx.count(Item::Flask));
+                        } else {
+                            map.insert(Item::Flask, 12 - ctx.count(Item::Flask));
+                        }
+                    }
+                    if ctx.count(Item::Health_Fragment) < 6 {
+                        if let Some(val) = map.get_mut(&Item::Health_Fragment) {
+                            *val = std::cmp::max(*val, 6 - ctx.count(Item::Health_Fragment));
+                        } else {
+                            map.insert(Item::Health_Fragment, 6 - ctx.count(Item::Health_Fragment));
+                        }
+                    }
+                    if !ctx.has(Item::Health_Node) {
+                        if !map.contains_key(&Item::Health_Node) {
+                            map.insert(Item::Health_Node, 1);
+                        }
+                    }
+                    if !ctx.has(Item::Heretics_Tablet) {
+                        if !map.contains_key(&Item::Heretics_Tablet) {
+                            map.insert(Item::Heretics_Tablet, 1);
+                        }
+                    }
+                    if !ctx.has(Item::Ice_Axe) {
+                        if !map.contains_key(&Item::Ice_Axe) {
+                            map.insert(Item::Ice_Axe, 1);
+                        }
+                    }
+                    if !ctx.has(Item::Infect) {
+                        if !map.contains_key(&Item::Infect) {
+                            map.insert(Item::Infect, 1);
+                        }
+                    }
+                    if !ctx.has(Item::Ledge_Grab) {
+                        if !map.contains_key(&Item::Ledge_Grab) {
+                            map.insert(Item::Ledge_Grab, 1);
+                        }
+                    }
+                    if !ctx.has(Item::Letter_from_Trace) {
+                        if !map.contains_key(&Item::Letter_from_Trace) {
+                            map.insert(Item::Letter_from_Trace, 1);
+                        }
+                    }
+                    if !ctx.has(Item::Power_Matrix) {
+                        if !map.contains_key(&Item::Power_Matrix) {
+                            map.insert(Item::Power_Matrix, 1);
+                        }
+                    }
+                    if !ctx.has(Item::Record_Losses) {
+                        if !map.contains_key(&Item::Record_Losses) {
+                            map.insert(Item::Record_Losses, 1);
+                        }
+                    }
+                    if !ctx.has(Item::Remote_Drone) {
+                        if !map.contains_key(&Item::Remote_Drone) {
+                            map.insert(Item::Remote_Drone, 1);
+                        }
+                    }
+                    if !ctx.has(Item::Researchers_Missing) {
+                        if !map.contains_key(&Item::Researchers_Missing) {
+                            map.insert(Item::Researchers_Missing, 1);
+                        }
+                    }
+                    if !ctx.has(Item::Shockwave) {
+                        if !map.contains_key(&Item::Shockwave) {
+                            map.insert(Item::Shockwave, 1);
+                        }
+                    }
+                    if !ctx.has(Item::Slingshot_Hook) {
+                        if !map.contains_key(&Item::Slingshot_Hook) {
+                            map.insert(Item::Slingshot_Hook, 1);
+                        }
+                    }
+                    if !ctx.has(Item::Storm_Bomb) {
+                        if !map.contains_key(&Item::Storm_Bomb) {
+                            map.insert(Item::Storm_Bomb, 1);
+                        }
+                    }
+                    if !ctx.has(Item::Terminal_Breakthrough_1) {
+                        if !map.contains_key(&Item::Terminal_Breakthrough_1) {
+                            map.insert(Item::Terminal_Breakthrough_1, 1);
+                        }
+                    }
+                    if !ctx.has(Item::Terminal_Breakthrough_2) {
+                        if !map.contains_key(&Item::Terminal_Breakthrough_2) {
+                            map.insert(Item::Terminal_Breakthrough_2, 1);
+                        }
+                    }
+                    if !ctx.has(Item::The_Ideal_Kiengir) {
+                        if !map.contains_key(&Item::The_Ideal_Kiengir) {
+                            map.insert(Item::The_Ideal_Kiengir, 1);
+                        }
+                    }
+                    if !ctx.has(Item::Under_Siege) {
+                        if !map.contains_key(&Item::Under_Siege) {
+                            map.insert(Item::Under_Siege, 1);
+                        }
+                    }
+                    if !ctx.has(Item::Wall_Climb) {
+                        if !map.contains_key(&Item::Wall_Climb) {
+                            map.insert(Item::Wall_Climb, 1);
+                        }
+                    }
+                }
+            },
+        }
+
+        map.drain().collect()
     }
 
-    fn objective_items(&self) -> Vec<(Item, i16)> {
-        match self.objective {
-            Objective::Start => vec![(Item::Remote_Drone, 1)],
-            Objective::Progress => vec![],
+    fn required_items(&self) -> Vec<(Item, i16)> {
+        let mut map = analyzer::new_hashmap();
+
+        match self.rule_victory {
+            RuleVictory::Default => {
+                map.insert(Item::Victory, 1);
+                match self.rule_objective {
+                    RuleObjective::Start => {
+                        if !map.contains_key(&Item::Remote_Drone) {
+                            map.insert(Item::Remote_Drone, 1);
+                        }
+                    }
+                    RuleObjective::AllItems => {
+                        if !map.contains_key(&Item::Amashilama) {
+                            map.insert(Item::Amashilama, 1);
+                        }
+                        if !map.contains_key(&Item::Big_Flask) {
+                            map.insert(Item::Big_Flask, 1);
+                        }
+                        if !map.contains_key(&Item::Boomerang) {
+                            map.insert(Item::Boomerang, 1);
+                        }
+                        if !map.contains_key(&Item::Breach_Sight) {
+                            map.insert(Item::Breach_Sight, 1);
+                        }
+                        if !map.contains_key(&Item::Bronze_Axe) {
+                            map.insert(Item::Bronze_Axe, 1);
+                        }
+                        if !map.contains_key(&Item::Building_of_the_School) {
+                            map.insert(Item::Building_of_the_School, 1);
+                        }
+                        if !map.contains_key(&Item::Commemorative_Speech) {
+                            map.insert(Item::Commemorative_Speech, 1);
+                        }
+                        if !map.contains_key(&Item::Companies_Layoff) {
+                            map.insert(Item::Companies_Layoff, 1);
+                        }
+                        if !map.contains_key(&Item::Compass) {
+                            map.insert(Item::Compass, 1);
+                        }
+                        if !map.contains_key(&Item::Dangerous_Ideas) {
+                            map.insert(Item::Dangerous_Ideas, 1);
+                        }
+                        if !map.contains_key(&Item::Dear_Ernest) {
+                            map.insert(Item::Dear_Ernest, 1);
+                        }
+                        if !map.contains_key(&Item::Drone_Hover) {
+                            map.insert(Item::Drone_Hover, 1);
+                        }
+                        if !map.contains_key(&Item::Fast_Travel) {
+                            map.insert(Item::Fast_Travel, 1);
+                        }
+                        if let Some(val) = map.get_mut(&Item::Flask) {
+                            *val = std::cmp::max(*val, 12);
+                        } else {
+                            map.insert(Item::Flask, 12);
+                        }
+                        if let Some(val) = map.get_mut(&Item::Health_Fragment) {
+                            *val = std::cmp::max(*val, 6);
+                        } else {
+                            map.insert(Item::Health_Fragment, 6);
+                        }
+                        if !map.contains_key(&Item::Health_Node) {
+                            map.insert(Item::Health_Node, 1);
+                        }
+                        if !map.contains_key(&Item::Heretics_Tablet) {
+                            map.insert(Item::Heretics_Tablet, 1);
+                        }
+                        if !map.contains_key(&Item::Ice_Axe) {
+                            map.insert(Item::Ice_Axe, 1);
+                        }
+                        if !map.contains_key(&Item::Infect) {
+                            map.insert(Item::Infect, 1);
+                        }
+                        if !map.contains_key(&Item::Ledge_Grab) {
+                            map.insert(Item::Ledge_Grab, 1);
+                        }
+                        if !map.contains_key(&Item::Letter_from_Trace) {
+                            map.insert(Item::Letter_from_Trace, 1);
+                        }
+                        if !map.contains_key(&Item::Power_Matrix) {
+                            map.insert(Item::Power_Matrix, 1);
+                        }
+                        if !map.contains_key(&Item::Record_Losses) {
+                            map.insert(Item::Record_Losses, 1);
+                        }
+                        if !map.contains_key(&Item::Remote_Drone) {
+                            map.insert(Item::Remote_Drone, 1);
+                        }
+                        if !map.contains_key(&Item::Researchers_Missing) {
+                            map.insert(Item::Researchers_Missing, 1);
+                        }
+                        if !map.contains_key(&Item::Shockwave) {
+                            map.insert(Item::Shockwave, 1);
+                        }
+                        if !map.contains_key(&Item::Slingshot_Hook) {
+                            map.insert(Item::Slingshot_Hook, 1);
+                        }
+                        if !map.contains_key(&Item::Storm_Bomb) {
+                            map.insert(Item::Storm_Bomb, 1);
+                        }
+                        if !map.contains_key(&Item::Terminal_Breakthrough_1) {
+                            map.insert(Item::Terminal_Breakthrough_1, 1);
+                        }
+                        if !map.contains_key(&Item::Terminal_Breakthrough_2) {
+                            map.insert(Item::Terminal_Breakthrough_2, 1);
+                        }
+                        if !map.contains_key(&Item::The_Ideal_Kiengir) {
+                            map.insert(Item::The_Ideal_Kiengir, 1);
+                        }
+                        if !map.contains_key(&Item::Under_Siege) {
+                            map.insert(Item::Under_Siege, 1);
+                        }
+                        if !map.contains_key(&Item::Wall_Climb) {
+                            map.insert(Item::Wall_Climb, 1);
+                        }
+                    }
+                }
+            }
+            RuleVictory::JustObjective => match self.rule_objective {
+                RuleObjective::Start => {
+                    if !map.contains_key(&Item::Remote_Drone) {
+                        map.insert(Item::Remote_Drone, 1);
+                    }
+                }
+                RuleObjective::AllItems => {
+                    if !map.contains_key(&Item::Amashilama) {
+                        map.insert(Item::Amashilama, 1);
+                    }
+                    if !map.contains_key(&Item::Big_Flask) {
+                        map.insert(Item::Big_Flask, 1);
+                    }
+                    if !map.contains_key(&Item::Boomerang) {
+                        map.insert(Item::Boomerang, 1);
+                    }
+                    if !map.contains_key(&Item::Breach_Sight) {
+                        map.insert(Item::Breach_Sight, 1);
+                    }
+                    if !map.contains_key(&Item::Bronze_Axe) {
+                        map.insert(Item::Bronze_Axe, 1);
+                    }
+                    if !map.contains_key(&Item::Building_of_the_School) {
+                        map.insert(Item::Building_of_the_School, 1);
+                    }
+                    if !map.contains_key(&Item::Commemorative_Speech) {
+                        map.insert(Item::Commemorative_Speech, 1);
+                    }
+                    if !map.contains_key(&Item::Companies_Layoff) {
+                        map.insert(Item::Companies_Layoff, 1);
+                    }
+                    if !map.contains_key(&Item::Compass) {
+                        map.insert(Item::Compass, 1);
+                    }
+                    if !map.contains_key(&Item::Dangerous_Ideas) {
+                        map.insert(Item::Dangerous_Ideas, 1);
+                    }
+                    if !map.contains_key(&Item::Dear_Ernest) {
+                        map.insert(Item::Dear_Ernest, 1);
+                    }
+                    if !map.contains_key(&Item::Drone_Hover) {
+                        map.insert(Item::Drone_Hover, 1);
+                    }
+                    if !map.contains_key(&Item::Fast_Travel) {
+                        map.insert(Item::Fast_Travel, 1);
+                    }
+                    if let Some(val) = map.get_mut(&Item::Flask) {
+                        *val = std::cmp::max(*val, 12);
+                    } else {
+                        map.insert(Item::Flask, 12);
+                    }
+                    if let Some(val) = map.get_mut(&Item::Health_Fragment) {
+                        *val = std::cmp::max(*val, 6);
+                    } else {
+                        map.insert(Item::Health_Fragment, 6);
+                    }
+                    if !map.contains_key(&Item::Health_Node) {
+                        map.insert(Item::Health_Node, 1);
+                    }
+                    if !map.contains_key(&Item::Heretics_Tablet) {
+                        map.insert(Item::Heretics_Tablet, 1);
+                    }
+                    if !map.contains_key(&Item::Ice_Axe) {
+                        map.insert(Item::Ice_Axe, 1);
+                    }
+                    if !map.contains_key(&Item::Infect) {
+                        map.insert(Item::Infect, 1);
+                    }
+                    if !map.contains_key(&Item::Ledge_Grab) {
+                        map.insert(Item::Ledge_Grab, 1);
+                    }
+                    if !map.contains_key(&Item::Letter_from_Trace) {
+                        map.insert(Item::Letter_from_Trace, 1);
+                    }
+                    if !map.contains_key(&Item::Power_Matrix) {
+                        map.insert(Item::Power_Matrix, 1);
+                    }
+                    if !map.contains_key(&Item::Record_Losses) {
+                        map.insert(Item::Record_Losses, 1);
+                    }
+                    if !map.contains_key(&Item::Remote_Drone) {
+                        map.insert(Item::Remote_Drone, 1);
+                    }
+                    if !map.contains_key(&Item::Researchers_Missing) {
+                        map.insert(Item::Researchers_Missing, 1);
+                    }
+                    if !map.contains_key(&Item::Shockwave) {
+                        map.insert(Item::Shockwave, 1);
+                    }
+                    if !map.contains_key(&Item::Slingshot_Hook) {
+                        map.insert(Item::Slingshot_Hook, 1);
+                    }
+                    if !map.contains_key(&Item::Storm_Bomb) {
+                        map.insert(Item::Storm_Bomb, 1);
+                    }
+                    if !map.contains_key(&Item::Terminal_Breakthrough_1) {
+                        map.insert(Item::Terminal_Breakthrough_1, 1);
+                    }
+                    if !map.contains_key(&Item::Terminal_Breakthrough_2) {
+                        map.insert(Item::Terminal_Breakthrough_2, 1);
+                    }
+                    if !map.contains_key(&Item::The_Ideal_Kiengir) {
+                        map.insert(Item::The_Ideal_Kiengir, 1);
+                    }
+                    if !map.contains_key(&Item::Under_Siege) {
+                        map.insert(Item::Under_Siege, 1);
+                    }
+                    if !map.contains_key(&Item::Wall_Climb) {
+                        map.insert(Item::Wall_Climb, 1);
+                    }
+                }
+            },
         }
+
+        map.drain().collect()
     }
 
     fn base_edges(&self) -> Vec<(SpotId, SpotId, u32)> {

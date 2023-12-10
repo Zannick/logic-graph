@@ -1235,16 +1235,13 @@ class GameLogic(object):
             }
             for name, rule in self.rules.items()
         }
-        self.objective_items = {
-            objective: dict(self.items_by_source['objectives:' + objective])
-            for objective in self.objectives
-        }
+        self._source_refs = visitor.source_refs
 
         def _get_all_refs(sourcename):
             refs = visitor.source_refs[sourcename]
             checked = set()
-            while refs - checked:
-                next = (refs - checked).pop()
+            while diff := refs - checked:
+                next = diff.pop()
                 checked.add(next)
                 if next in visitor.source_refs:
                     refs |= visitor.source_refs[next]
@@ -1254,13 +1251,6 @@ class GameLogic(object):
         for ref in _get_all_refs('general'):
             general_items |= self.items_by_source[ref].keys()
 
-        for objective in self.objectives:
-            for ref in _get_all_refs('objectives:' + objective):
-                for item, ct in self.items_by_source[ref].items():
-                    if item in self.objective_items[objective]:
-                        self.objective_items[objective][item] = max(self.objective_items[objective][item], ct)
-                    else:
-                        self.objective_items[objective][item] = ct
         for rule, variants in self.rule_items.items():
             for variant, item_maxes in variants.items():
                 for ref in _get_all_refs(f'rules:{rule}_{variant}'):
@@ -1283,7 +1273,7 @@ class GameLogic(object):
             for rule, variants in self.rule_items.items()
         }
         self.victory_rule_refs = {
-            variant: [ref[7:] for ref in _get_all_refs(f'rules:$victory_{variant}') if ref.startswith('rules:')]
+            variant: [ref[6:] for ref in _get_all_refs(f'rules:$victory_{variant}') if ref.startswith('rules:')]
             for variant in self.rules['$victory'].variants
         }
         self.item_locations = defaultdict(list)

@@ -442,11 +442,7 @@ impl world::World for World {
     }
 
     fn won(&self, ctx: &Context) -> bool {
-%% if 'Victory' in all_items
-        ctx.has(Item::Victory)
-%% else
-        self.objective_met(ctx)
-%% endif
+        crate::rule__victory!(ctx, self)
     }
 
     fn objective_met(&self, ctx: &Context) -> bool {
@@ -458,41 +454,93 @@ impl world::World for World {
     }
 
     fn items_needed(&self, ctx: &Context) -> Vec<(Item, i16)> {
-        let mut vec = Vec::new();
-        match self.objective {
-%% for o, items in objective_items.items()
-            Objective::{{ o|construct_id }} => {
-%% for item, ct in items.items()|sort
+        let mut map = analyzer::new_hashmap();
+
+        match self.rule_victory {
+%% for v, refs in victory_rule_refs.items()
+            RuleVictory::{{ v|construct_id|camelize }} => {
+%% for item, ct in rule_items['$victory'][v].items()|sort
 %% if ct == 1
                 if !ctx.has(Item::{{ item }}) {
-                    vec.push((Item::{{ item }}, 1));
+                    map.insert(Item::{{ item }}, 1);
                 }
 %% else
                 if ctx.count(Item::{{ item }}) < {{ ct }} {
-                    vec.push((Item::{{ item }}, {{ ct }} - ctx.count(Item::{{ item }})));
+                    map.insert(Item::{{ item }}, {{ ct }} - ctx.count(Item::{{ item }}));
                 }
 %% endif
 %% endfor
-            },
-%% endfor
-        };
-        vec
-    }
-
-    fn objective_items(&self) -> Vec<(Item, i16)> {
-        match self.objective {
-%% for o, items in objective_items.items()
-            Objective::{{ o|construct_id }} => vec![
+%% for ref in refs
+                match self.rule_{{ ref|construct_id }} {
+%% for vref, items in rule_items[ref].items()
+                    Rule{{ ref[1:]|camelize }}::{{ vref|construct_id|camelize }} => {
 %% for item, ct in items.items()|sort
 %% if ct == 1
-                    (Item::{{ item }}, 1),
+                        if !ctx.has(Item::{{ item }}) {
+                            if !map.contains_key(&Item::{{ item }}) {
+                                map.insert(Item::{{ item }}, 1);
+                            }
+                        }
 %% else
-                    (Item::{{ item }}, {{ ct }}),
+                        if ctx.count(Item::{{ item }}) < {{ ct }} {
+                            if let Some(val) = map.get_mut(&Item::{{ item }}) {
+                                *val = std::cmp::max(*val, {{ ct }} - ctx.count(Item::{{ item }}));
+                            } else {
+                                map.insert(Item::{{ item }}, {{ ct }} - ctx.count(Item::{{ item }}));
+                            }
+                        }
 %% endif
 %% endfor
-            ],
+                    }
+%% endfor
+                }
+%% endfor
+            }
 %% endfor
         }
+
+        map.drain().collect()
+    }
+
+    fn required_items(&self) -> Vec<(Item, i16)> {
+        let mut map = analyzer::new_hashmap();
+
+        match self.rule_victory {
+%% for v, refs in victory_rule_refs.items()
+            RuleVictory::{{ v|construct_id|camelize }} => {
+%% for item, ct in rule_items['$victory'][v].items()|sort
+%% if ct == 1
+                map.insert(Item::{{ item }}, 1);
+%% else
+                map.insert(Item::{{ item }}, {{ ct }});
+%% endif
+%% endfor
+%% for ref in refs
+                match self.rule_{{ ref|construct_id }} {
+%% for vref, items in rule_items[ref].items()
+                    Rule{{ ref[1:]|camelize }}::{{ vref|construct_id|camelize }} => {
+%% for item, ct in items.items()|sort
+%% if ct == 1
+                        if !map.contains_key(&Item::{{ item }}) {
+                            map.insert(Item::{{ item }}, 1);
+                        }
+%% else
+                        if let Some(val) = map.get_mut(&Item::{{ item }}) {
+                            *val = std::cmp::max(*val, {{ ct }});
+                        } else {
+                            map.insert(Item::{{ item }}, {{ ct }});
+                        }
+%% endif
+%% endfor
+                    }
+%% endfor
+                }
+%% endfor
+            }
+%% endfor
+        }
+
+        map.drain().collect()
     }
 
     fn base_edges(&self) -> Vec<(SpotId, SpotId, u32)> {

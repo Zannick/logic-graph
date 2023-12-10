@@ -254,7 +254,6 @@ pub fn unused_item(id: Item) -> bool {
             | Item::Nayrus_Love
             | Item::Progressive_Wallet
             | Item::Recovery_Heart
-            | Item::Victory
             | Item::Zora_Tunic
     )
 }

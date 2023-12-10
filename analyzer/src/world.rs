@@ -162,7 +162,7 @@ pub trait World: Sync + Default {
         <<Self::Location as Accessible>::Context as Ctx>::ItemId,
         i16,
     )>;
-    fn objective_items(
+    fn required_items(
         &self,
     ) -> Vec<(
         <<Self::Location as Accessible>::Context as Ctx>::ItemId,

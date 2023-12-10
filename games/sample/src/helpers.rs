@@ -252,3 +252,31 @@ macro_rules! helper__has_fire_source_with_torch {
             || (helper__is_child!($ctx, $world) && helper__Sticks!($ctx, $world)))
     }};
 }
+
+/// Rule $victory
+#[macro_export]
+macro_rules! rule__victory {
+    ($ctx:expr, $world:expr) => {{
+        use $crate::graph_enums::*;
+        use $crate::rules;
+        match $world.rule_victory {
+            RuleVictory::Default => rules::access___victory_objective($ctx, $world),
+        }
+    }};
+}
+
+/// Rule $objective
+#[macro_export]
+macro_rules! rule__objective {
+    ($ctx:expr, $world:expr) => {{
+        use $crate::graph_enums::*;
+        use $crate::rules;
+        match $world.rule_objective {
+            RuleObjective::Gohma => rules::access___deku_lobby_web_kokiri_emerald($ctx, $world),
+            RuleObjective::Ganon => rules::access___defeat_ganon($ctx, $world),
+            RuleObjective::TriforceHunt => {
+                rules::access___triforce_piece__triforce_count($ctx, $world)
+            }
+        }
+    }};
+}

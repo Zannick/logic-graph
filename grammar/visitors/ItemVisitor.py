@@ -118,7 +118,7 @@ class ItemVisitor(RulesVisitor):
     def visitItemList(self, ctx):
         for func in ctx.FUNC():
             cat = 'helpers'
-            if func in self.rules:
+            if str(func) in self.rules:
                 cat = 'rules'
-            self.source_refs[self._source()].add(f'rules:{func}')
+            self.source_refs[self._source()].add(f'{cat}:{func}')
         return self.visitChildren(ctx)

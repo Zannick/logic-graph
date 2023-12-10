@@ -11,6 +11,15 @@ start:  # default initial context, global context values
   tod: day  # affected by realtime will be tough to handle
   rupees: 0  # the first numerical context item is the default currency
 
+rules:
+  $victory:itemList:
+    default: "[Victory, $objective]"
+  $objective:itemList:
+    Gohma: "[Deku_Lobby_Web, Kokiri_Emerald]"
+    Ganon: "[Defeat_Ganon]"
+    Triforce Hunt: "[Triforce_Piece{triforce_count}]"
+    #Deku Full Clear: $all_region_checks(`Deku Tree`)
+
 objectives:  # win conditions
   Gohma: "[Deku_Lobby_Web, Kokiri_Emerald]"
   Ganon: "[Defeat_Ganon]"

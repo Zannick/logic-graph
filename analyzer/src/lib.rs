@@ -32,8 +32,8 @@ pub mod world;
 // test-only
 pub mod unittest;
 
-pub(crate) type CommonHasher = std::hash::BuildHasherDefault<rustc_hash::FxHasher>;
-pub(crate) fn new_hashmap<T, U>() -> std::collections::HashMap<T, U, CommonHasher> {
+pub type CommonHasher = std::hash::BuildHasherDefault<rustc_hash::FxHasher>;
+pub fn new_hashmap<T, U>() -> std::collections::HashMap<T, U, CommonHasher> {
     rustc_hash::FxHashMap::default()
 }
 pub(crate) fn new_hashset<T>() -> std::collections::HashSet<T, CommonHasher> {

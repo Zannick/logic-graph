@@ -54,7 +54,7 @@ class HelperVisitor(RulesVisitor):
 
     def visitInvoke(self, ctx):
         func = str(ctx.FUNC())
-        if func in BUILTINS or func[1:] in self.rules:
+        if func in BUILTINS or func in self.rules:
             return self.visitChildren(ctx)
         if func not in self.helpers:
             self.errors.append(f'Unrecognized function {func} in rule {self.name}')

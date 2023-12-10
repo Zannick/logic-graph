@@ -1422,3 +1422,81 @@ impl std::str::FromStr for Objective {
         }
     }
 }
+
+#[derive(
+    Debug,
+    PartialEq,
+    Eq,
+    Copy,
+    Clone,
+    Hash,
+    Ord,
+    PartialOrd,
+    Default,
+    serde_repr::Serialize_repr,
+    serde_repr::Deserialize_repr,
+)]
+#[repr(u8)]
+pub enum RuleVictory {
+    #[default]
+    Default,
+}
+impl fmt::Display for RuleVictory {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        match self {
+            RuleVictory::Default => write!(f, "{}", "default"),
+        }
+    }
+}
+impl std::str::FromStr for RuleVictory {
+    type Err = String;
+
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        match s {
+            "default" => Ok(RuleVictory::Default),
+            _ => Err(format!("Could not recognize as a RuleVictory: {}", s)),
+        }
+    }
+}
+
+#[derive(
+    Debug,
+    PartialEq,
+    Eq,
+    Copy,
+    Clone,
+    Hash,
+    Ord,
+    PartialOrd,
+    Default,
+    serde_repr::Serialize_repr,
+    serde_repr::Deserialize_repr,
+)]
+#[repr(u8)]
+pub enum RuleObjective {
+    #[default]
+    Gohma,
+    Ganon,
+    TriforceHunt,
+}
+impl fmt::Display for RuleObjective {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        match self {
+            RuleObjective::Gohma => write!(f, "{}", "Gohma"),
+            RuleObjective::Ganon => write!(f, "{}", "Ganon"),
+            RuleObjective::TriforceHunt => write!(f, "{}", "Triforce Hunt"),
+        }
+    }
+}
+impl std::str::FromStr for RuleObjective {
+    type Err = String;
+
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        match s {
+            "Gohma" => Ok(RuleObjective::Gohma),
+            "Ganon" => Ok(RuleObjective::Ganon),
+            "Triforce Hunt" => Ok(RuleObjective::TriforceHunt),
+            _ => Err(format!("Could not recognize as a RuleObjective: {}", s)),
+        }
+    }
+}

@@ -718,6 +718,8 @@ lazy_static! {
 #[derive(Clone, Debug)]
 pub struct World {
     pub objective: Objective,
+    pub rule_victory: RuleVictory,
+    pub rule_objective: RuleObjective,
     // These are arrays that group the items together by their parent.
     // Using EnumMap for this ONLY WORKS if the keys are properly ordered to group
     // nearby things together.
@@ -1158,7 +1160,7 @@ impl world::World for World {
     }
 
     fn won(&self, ctx: &Context) -> bool {
-        ctx.has(Item::Victory)
+        crate::rule__victory!(ctx, self)
     }
 
     fn objective_met(&self, ctx: &Context) -> bool {
@@ -1170,36 +1172,84 @@ impl world::World for World {
     }
 
     fn items_needed(&self, ctx: &Context) -> Vec<(Item, i16)> {
-        let mut vec = Vec::new();
-        match self.objective {
-            Objective::Gohma => {
-                if !ctx.has(Item::Deku_Lobby_Web) {
-                    vec.push((Item::Deku_Lobby_Web, 1));
+        let mut map = analyzer::new_hashmap();
+
+        match self.rule_victory {
+            RuleVictory::Default => {
+                if !ctx.has(Item::Victory) {
+                    map.insert(Item::Victory, 1);
                 }
-                if !ctx.has(Item::Kokiri_Emerald) {
-                    vec.push((Item::Kokiri_Emerald, 1));
+                match self.rule_objective {
+                    RuleObjective::Gohma => {
+                        if !ctx.has(Item::Deku_Lobby_Web) {
+                            if !map.contains_key(&Item::Deku_Lobby_Web) {
+                                map.insert(Item::Deku_Lobby_Web, 1);
+                            }
+                        }
+                        if !ctx.has(Item::Kokiri_Emerald) {
+                            if !map.contains_key(&Item::Kokiri_Emerald) {
+                                map.insert(Item::Kokiri_Emerald, 1);
+                            }
+                        }
+                    }
+                    RuleObjective::Ganon => {
+                        if !ctx.has(Item::Defeat_Ganon) {
+                            if !map.contains_key(&Item::Defeat_Ganon) {
+                                map.insert(Item::Defeat_Ganon, 1);
+                            }
+                        }
+                    }
+                    RuleObjective::TriforceHunt => {
+                        if ctx.count(Item::Triforce_Piece) < 1024 {
+                            if let Some(val) = map.get_mut(&Item::Triforce_Piece) {
+                                *val = std::cmp::max(*val, 1024 - ctx.count(Item::Triforce_Piece));
+                            } else {
+                                map.insert(
+                                    Item::Triforce_Piece,
+                                    1024 - ctx.count(Item::Triforce_Piece),
+                                );
+                            }
+                        }
+                    }
                 }
             }
-            Objective::Ganon => {
-                if !ctx.has(Item::Defeat_Ganon) {
-                    vec.push((Item::Defeat_Ganon, 1));
-                }
-            }
-            Objective::Triforce_Hunt => {
-                if ctx.count(Item::Triforce_Piece) < 1024 {
-                    vec.push((Item::Triforce_Piece, 1024 - ctx.count(Item::Triforce_Piece)));
-                }
-            }
-        };
-        vec
+        }
+
+        map.drain().collect()
     }
 
-    fn objective_items(&self) -> Vec<(Item, i16)> {
-        match self.objective {
-            Objective::Gohma => vec![(Item::Deku_Lobby_Web, 1), (Item::Kokiri_Emerald, 1)],
-            Objective::Ganon => vec![(Item::Defeat_Ganon, 1)],
-            Objective::Triforce_Hunt => vec![(Item::Triforce_Piece, 1024)],
+    fn required_items(&self) -> Vec<(Item, i16)> {
+        let mut map = analyzer::new_hashmap();
+
+        match self.rule_victory {
+            RuleVictory::Default => {
+                map.insert(Item::Victory, 1);
+                match self.rule_objective {
+                    RuleObjective::Gohma => {
+                        if !map.contains_key(&Item::Deku_Lobby_Web) {
+                            map.insert(Item::Deku_Lobby_Web, 1);
+                        }
+                        if !map.contains_key(&Item::Kokiri_Emerald) {
+                            map.insert(Item::Kokiri_Emerald, 1);
+                        }
+                    }
+                    RuleObjective::Ganon => {
+                        if !map.contains_key(&Item::Defeat_Ganon) {
+                            map.insert(Item::Defeat_Ganon, 1);
+                        }
+                    }
+                    RuleObjective::TriforceHunt => {
+                        if let Some(val) = map.get_mut(&Item::Triforce_Piece) {
+                            *val = std::cmp::max(*val, 1024);
+                        } else {
+                            map.insert(Item::Triforce_Piece, 1024);
+                        }
+                    }
+                }
+            }
         }
+
+        map.drain().collect()
     }
 
     fn base_edges(&self) -> Vec<(SpotId, SpotId, u32)> {
@@ -1304,6 +1354,8 @@ impl World {
     pub fn new() -> World {
         World {
             objective: Objective::default(),
+            rule_victory: RuleVictory::default(),
+            rule_objective: RuleObjective::default(),
             locations: build_locations(),
             exits: build_exits(),
             actions: build_actions(),
@@ -1340,6 +1392,7 @@ impl World {
                     | Item::Hookshot
                     | Item::Hover_Boots
                     | Item::Iron_Boots
+                    | Item::Kokiri_Emerald
                     | Item::Lens_of_Truth
                     | Item::Light_Arrows
                     | Item::Map_Deku_Tree
@@ -1362,6 +1415,7 @@ impl World {
                     | Item::Buy_Deku_Seeds_30
                     | Item::Buy_Heart
                     | Item::Compass_Deku_Tree
+                    | Item::Defeat_Ganon
                     | Item::Dins_Fire
                     | Item::Farores_Wind
                     | Item::Fire_Arrows
@@ -1416,6 +1470,7 @@ impl World {
                     | Item::Nayrus_Love
                     | Item::Progressive_Wallet
                     | Item::Recovery_Heart
+                    | Item::Triforce_Piece
                     | Item::Victory
                     | Item::Zora_Tunic
             ),
@@ -1647,7 +1702,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
             canonical: CanonId::None,
             item: Item::Victory,
             price: Currency::Free,
-            time: 1000,
+            time: 0,
             exit_id: None,
         },
         LocationId::KF__Kokiri_Village__Midos_Guardpost__Show_Mido => Location {
