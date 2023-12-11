@@ -94,10 +94,10 @@ def _parseExpression(logic: str, name: str, category: str, sep:str=':', rule:str
     return parseRule(rule, logic, name=f'{category}{sep}{name}')
 
 
-def get_func_rule(helper_key:str) -> str:
+def get_func_rule(helper_key:str, default='boolExpr') -> str:
     if m := typed_name.match(helper_key):
-        return m.group('type') or 'boolExpr'
-    return 'boolExpr'
+        return m.group('type') or default
+    return default
 
 
 def get_func_name(helper_key: str) -> str:
@@ -192,7 +192,7 @@ class GameLogic(object):
         self.rules = {}
         for key, variants in self._info['rules'].items():
             name = get_func_name(key)
-            rule = get_func_rule(key)
+            rule = get_func_rule(key, 'itemList')
             self.rules[name] = TypedRule(rule, (), {
                 variant: {
                     'pr': _parseExpression(logic, f'{name}_{variant}', 'rules', rule=rule),

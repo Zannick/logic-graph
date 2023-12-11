@@ -12,9 +12,9 @@ start:  # default initial context, global context values
   rupees: 0  # the first numerical context item is the default currency
 
 rules:
-  $victory:itemList:  # win conditions
+  $victory:  # win conditions
     default: "[Victory, $objective]"
-  $objective:itemList:
+  $objective:
     Gohma: "[Deku_Lobby_Web, Kokiri_Emerald]"
     Ganon: "[Defeat_Ganon]"
     Triforce Hunt: "[Triforce_Piece{triforce_count}]"
