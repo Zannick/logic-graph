@@ -435,7 +435,7 @@ impl world::World for World {
 
     fn skip_unused_items(&self, ctx: &mut Context) {
         for (id, loc) in &self.locations {
-            if unused_item(world::Location::item(loc)) || self.unused_by_objective(world::Location::item(loc)) {
+            if unused_item(world::Location::item(loc)) || self.unused_by_rules(world::Location::item(loc)) {
                 ctx.skip(id);
             }
         }
@@ -619,14 +619,21 @@ impl World {
         }
     }
 
-    fn unused_by_objective(&self, item: Item) -> bool {
-        match self.objective {
-%% for o, items in unused_by_objective.items()
-%% if items
-            Objective::{{ o|construct_id }} => matches!(item, Item::{{ items|sort|join(' | Item::') }}),
-%% endif
+    fn unused_by_rules(&self, item: Item) -> bool {
+        match self.rule_victory {
+%% for v, refs in victory_rule_refs.items()
+            RuleVictory::{{ v|construct_id|camelize }} => {
+%% for ref in refs
+                {% if not loop.first %}&& {% endif %}match self.rule_{{ ref|construct_id }} {
+%% for vref, items in unused_by_rule[ref].items()
+                    Rule{{ ref[1:]|camelize }}::{{ vref|construct_id|camelize }} => {
+                        matches!(item, Item::{{ (items.intersection(unused_by_rule['$victory'][v]))|sort|join(' | Item::') }})
+                    }
 %% endfor
-            _ => false,
+                }
+%% endfor
+            }
+%% endfor
         }
     }
 }

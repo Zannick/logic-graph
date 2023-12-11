@@ -1152,7 +1152,7 @@ impl world::World for World {
     fn skip_unused_items(&self, ctx: &mut Context) {
         for (id, loc) in &self.locations {
             if unused_item(world::Location::item(loc))
-                || self.unused_by_objective(world::Location::item(loc))
+                || self.unused_by_rules(world::Location::item(loc))
             {
                 ctx.skip(id);
             }
@@ -1370,111 +1370,112 @@ impl World {
         }
     }
 
-    fn unused_by_objective(&self, item: Item) -> bool {
-        match self.objective {
-            Objective::Gohma => matches!(
-                item,
-                Item::Arrows_10
-                    | Item::Blue_Fire_Arrows
-                    | Item::Buy_Arrows_10
-                    | Item::Buy_Arrows_30
-                    | Item::Buy_Deku_Seeds_30
-                    | Item::Buy_Heart
-                    | Item::Compass_Deku_Tree
-                    | Item::Defeat_Ganon
-                    | Item::Dins_Fire
-                    | Item::Farores_Wind
-                    | Item::Fire_Arrows
-                    | Item::Goron_Tunic
-                    | Item::Gossip_Stone_Deku_Left
-                    | Item::Gossip_Stone_Deku_Right
-                    | Item::Heart_Container
-                    | Item::Hookshot
-                    | Item::Hover_Boots
-                    | Item::Iron_Boots
-                    | Item::Kokiri_Emerald
-                    | Item::Lens_of_Truth
-                    | Item::Light_Arrows
-                    | Item::Map_Deku_Tree
-                    | Item::Megaton_Hammer
-                    | Item::Minuet_of_Forest
-                    | Item::Mirror_Shield
-                    | Item::Nayrus_Love
-                    | Item::Progressive_Wallet
-                    | Item::Recovery_Heart
-                    | Item::Triforce_Piece
-                    | Item::Victory
-                    | Item::Zora_Tunic
-            ),
-            Objective::Ganon => matches!(
-                item,
-                Item::Arrows_10
-                    | Item::Blue_Fire_Arrows
-                    | Item::Buy_Arrows_10
-                    | Item::Buy_Arrows_30
-                    | Item::Buy_Deku_Seeds_30
-                    | Item::Buy_Heart
-                    | Item::Compass_Deku_Tree
-                    | Item::Defeat_Ganon
-                    | Item::Dins_Fire
-                    | Item::Farores_Wind
-                    | Item::Fire_Arrows
-                    | Item::Goron_Tunic
-                    | Item::Gossip_Stone_Deku_Left
-                    | Item::Gossip_Stone_Deku_Right
-                    | Item::Heart_Container
-                    | Item::Hookshot
-                    | Item::Hover_Boots
-                    | Item::Iron_Boots
-                    | Item::Kokiri_Emerald
-                    | Item::Lens_of_Truth
-                    | Item::Light_Arrows
-                    | Item::Map_Deku_Tree
-                    | Item::Megaton_Hammer
-                    | Item::Minuet_of_Forest
-                    | Item::Mirror_Shield
-                    | Item::Nayrus_Love
-                    | Item::Progressive_Wallet
-                    | Item::Recovery_Heart
-                    | Item::Triforce_Piece
-                    | Item::Victory
-                    | Item::Zora_Tunic
-            ),
-            Objective::Triforce_Hunt => matches!(
-                item,
-                Item::Arrows_10
-                    | Item::Blue_Fire_Arrows
-                    | Item::Buy_Arrows_10
-                    | Item::Buy_Arrows_30
-                    | Item::Buy_Deku_Seeds_30
-                    | Item::Buy_Heart
-                    | Item::Compass_Deku_Tree
-                    | Item::Defeat_Ganon
-                    | Item::Dins_Fire
-                    | Item::Farores_Wind
-                    | Item::Fire_Arrows
-                    | Item::Goron_Tunic
-                    | Item::Gossip_Stone_Deku_Left
-                    | Item::Gossip_Stone_Deku_Right
-                    | Item::Heart_Container
-                    | Item::Hookshot
-                    | Item::Hover_Boots
-                    | Item::Iron_Boots
-                    | Item::Kokiri_Emerald
-                    | Item::Lens_of_Truth
-                    | Item::Light_Arrows
-                    | Item::Map_Deku_Tree
-                    | Item::Megaton_Hammer
-                    | Item::Minuet_of_Forest
-                    | Item::Mirror_Shield
-                    | Item::Nayrus_Love
-                    | Item::Progressive_Wallet
-                    | Item::Recovery_Heart
-                    | Item::Triforce_Piece
-                    | Item::Victory
-                    | Item::Zora_Tunic
-            ),
-            _ => false,
+    fn unused_by_rules(&self, item: Item) -> bool {
+        match self.rule_victory {
+            RuleVictory::Default => match self.rule_objective {
+                RuleObjective::Gohma => {
+                    matches!(
+                        item,
+                        Item::Arrows_10
+                            | Item::Blue_Fire_Arrows
+                            | Item::Buy_Arrows_10
+                            | Item::Buy_Arrows_30
+                            | Item::Buy_Deku_Seeds_30
+                            | Item::Buy_Heart
+                            | Item::Compass_Deku_Tree
+                            | Item::Defeat_Ganon
+                            | Item::Dins_Fire
+                            | Item::Farores_Wind
+                            | Item::Fire_Arrows
+                            | Item::Goron_Tunic
+                            | Item::Gossip_Stone_Deku_Left
+                            | Item::Gossip_Stone_Deku_Right
+                            | Item::Heart_Container
+                            | Item::Hookshot
+                            | Item::Hover_Boots
+                            | Item::Iron_Boots
+                            | Item::Lens_of_Truth
+                            | Item::Light_Arrows
+                            | Item::Map_Deku_Tree
+                            | Item::Megaton_Hammer
+                            | Item::Minuet_of_Forest
+                            | Item::Mirror_Shield
+                            | Item::Nayrus_Love
+                            | Item::Progressive_Wallet
+                            | Item::Recovery_Heart
+                            | Item::Triforce_Piece
+                            | Item::Zora_Tunic
+                    )
+                }
+                RuleObjective::Ganon => {
+                    matches!(
+                        item,
+                        Item::Arrows_10
+                            | Item::Blue_Fire_Arrows
+                            | Item::Buy_Arrows_10
+                            | Item::Buy_Arrows_30
+                            | Item::Buy_Deku_Seeds_30
+                            | Item::Buy_Heart
+                            | Item::Compass_Deku_Tree
+                            | Item::Dins_Fire
+                            | Item::Farores_Wind
+                            | Item::Fire_Arrows
+                            | Item::Goron_Tunic
+                            | Item::Gossip_Stone_Deku_Left
+                            | Item::Gossip_Stone_Deku_Right
+                            | Item::Heart_Container
+                            | Item::Hookshot
+                            | Item::Hover_Boots
+                            | Item::Iron_Boots
+                            | Item::Kokiri_Emerald
+                            | Item::Lens_of_Truth
+                            | Item::Light_Arrows
+                            | Item::Map_Deku_Tree
+                            | Item::Megaton_Hammer
+                            | Item::Minuet_of_Forest
+                            | Item::Mirror_Shield
+                            | Item::Nayrus_Love
+                            | Item::Progressive_Wallet
+                            | Item::Recovery_Heart
+                            | Item::Triforce_Piece
+                            | Item::Zora_Tunic
+                    )
+                }
+                RuleObjective::TriforceHunt => {
+                    matches!(
+                        item,
+                        Item::Arrows_10
+                            | Item::Blue_Fire_Arrows
+                            | Item::Buy_Arrows_10
+                            | Item::Buy_Arrows_30
+                            | Item::Buy_Deku_Seeds_30
+                            | Item::Buy_Heart
+                            | Item::Compass_Deku_Tree
+                            | Item::Defeat_Ganon
+                            | Item::Dins_Fire
+                            | Item::Farores_Wind
+                            | Item::Fire_Arrows
+                            | Item::Goron_Tunic
+                            | Item::Gossip_Stone_Deku_Left
+                            | Item::Gossip_Stone_Deku_Right
+                            | Item::Heart_Container
+                            | Item::Hookshot
+                            | Item::Hover_Boots
+                            | Item::Iron_Boots
+                            | Item::Kokiri_Emerald
+                            | Item::Lens_of_Truth
+                            | Item::Light_Arrows
+                            | Item::Map_Deku_Tree
+                            | Item::Megaton_Hammer
+                            | Item::Minuet_of_Forest
+                            | Item::Mirror_Shield
+                            | Item::Nayrus_Love
+                            | Item::Progressive_Wallet
+                            | Item::Recovery_Heart
+                            | Item::Zora_Tunic
+                    )
+                }
+            },
         }
     }
 }

@@ -1261,10 +1261,6 @@ class GameLogic(object):
                             item_maxes[item] = ct
         
         general_unused = set(self.all_items) - general_items - self.collect.keys() - self.items_by_source['general'].keys()
-        self.unused_by_objective = {
-            objective: general_unused - obj_items.keys()
-            for objective, obj_items in self.objectives.items()
-        }
         self.unused_by_rule = {
             rule: {
                 variant: general_unused - variant_items.keys()

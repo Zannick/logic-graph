@@ -9186,7 +9186,7 @@ impl world::World for World {
     fn skip_unused_items(&self, ctx: &mut Context) {
         for (id, loc) in &self.locations {
             if unused_item(world::Location::item(loc))
-                || self.unused_by_objective(world::Location::item(loc))
+                || self.unused_by_rules(world::Location::item(loc))
             {
                 ctx.skip(id);
             }
@@ -10463,105 +10463,178 @@ impl World {
         }
     }
 
-    fn unused_by_objective(&self, item: Item) -> bool {
-        match self.objective {
-            Objective::Start => matches!(
-                item,
-                Item::Aansur
-                    | Item::Amagi_Stronghold_Left_Wall
-                    | Item::Bronze_Axe
-                    | Item::Building_of_the_School
-                    | Item::Carnelian_Ring
-                    | Item::Commemorative_Speech
-                    | Item::Companies_Layoff
-                    | Item::Compass
-                    | Item::Dangerous_Ideas
-                    | Item::Dear_Ernest
-                    | Item::Double_Axe
-                    | Item::Drone_Melee_Damage_3
-                    | Item::Drone_Melee_Speed_3
-                    | Item::Escape
-                    | Item::Family_Tragedy
-                    | Item::Health_Upgrade_5
-                    | Item::Heretics_Granddaughter
-                    | Item::Heretics_Tablet
-                    | Item::Infect_L3
-                    | Item::Infection_Speed_2
-                    | Item::Journal_2049_10_29
-                    | Item::Lament_for_Fools
-                    | Item::Letter_from_Trace
-                    | Item::Melee_Charge
-                    | Item::Melee_Damage_3
-                    | Item::Melee_Speed_3
-                    | Item::Nano_Lattice_2
-                    | Item::Nano_Points_3
-                    | Item::Notes_2053_02_27
-                    | Item::Plague_of_Thoughts
-                    | Item::Ranged_Damage_3
-                    | Item::Ranged_Speed_3
-                    | Item::Record_Losses
-                    | Item::Refill
-                    | Item::Researchers_Missing
-                    | Item::Royal_Dagger
-                    | Item::Royal_Ring
-                    | Item::Storm_Bomb
-                    | Item::Suspension_Bridge
-                    | Item::Terminal_Breakthrough_1
-                    | Item::Terminal_Breakthrough_2
-                    | Item::The_Ideal_Kiengir
-                    | Item::Udusan
-                    | Item::Under_Siege
-                    | Item::Victory
-            ),
-            Objective::Progress => matches!(
-                item,
-                Item::Aansur
-                    | Item::Amagi_Stronghold_Left_Wall
-                    | Item::Bronze_Axe
-                    | Item::Building_of_the_School
-                    | Item::Carnelian_Ring
-                    | Item::Commemorative_Speech
-                    | Item::Companies_Layoff
-                    | Item::Compass
-                    | Item::Dangerous_Ideas
-                    | Item::Dear_Ernest
-                    | Item::Double_Axe
-                    | Item::Drone_Melee_Damage_3
-                    | Item::Drone_Melee_Speed_3
-                    | Item::Escape
-                    | Item::Family_Tragedy
-                    | Item::Health_Upgrade_5
-                    | Item::Heretics_Granddaughter
-                    | Item::Heretics_Tablet
-                    | Item::Infect_L3
-                    | Item::Infection_Speed_2
-                    | Item::Journal_2049_10_29
-                    | Item::Lament_for_Fools
-                    | Item::Letter_from_Trace
-                    | Item::Melee_Charge
-                    | Item::Melee_Damage_3
-                    | Item::Melee_Speed_3
-                    | Item::Nano_Lattice_2
-                    | Item::Nano_Points_3
-                    | Item::Notes_2053_02_27
-                    | Item::Plague_of_Thoughts
-                    | Item::Ranged_Damage_3
-                    | Item::Ranged_Speed_3
-                    | Item::Record_Losses
-                    | Item::Refill
-                    | Item::Researchers_Missing
-                    | Item::Royal_Dagger
-                    | Item::Royal_Ring
-                    | Item::Storm_Bomb
-                    | Item::Suspension_Bridge
-                    | Item::Terminal_Breakthrough_1
-                    | Item::Terminal_Breakthrough_2
-                    | Item::The_Ideal_Kiengir
-                    | Item::Udusan
-                    | Item::Under_Siege
-                    | Item::Victory
-            ),
-            _ => false,
+    fn unused_by_rules(&self, item: Item) -> bool {
+        match self.rule_victory {
+            RuleVictory::Default => match self.rule_objective {
+                RuleObjective::Start => {
+                    matches!(
+                        item,
+                        Item::Aansur
+                            | Item::Amagi_Stronghold_Left_Wall
+                            | Item::Bronze_Axe
+                            | Item::Building_of_the_School
+                            | Item::Carnelian_Ring
+                            | Item::Commemorative_Speech
+                            | Item::Companies_Layoff
+                            | Item::Compass
+                            | Item::Dangerous_Ideas
+                            | Item::Dear_Ernest
+                            | Item::Double_Axe
+                            | Item::Drone_Melee_Damage_3
+                            | Item::Drone_Melee_Speed_3
+                            | Item::Escape
+                            | Item::Family_Tragedy
+                            | Item::Health_Upgrade_5
+                            | Item::Heretics_Granddaughter
+                            | Item::Heretics_Tablet
+                            | Item::Infect_L3
+                            | Item::Infection_Speed_2
+                            | Item::Journal_2049_10_29
+                            | Item::Lament_for_Fools
+                            | Item::Letter_from_Trace
+                            | Item::Melee_Charge
+                            | Item::Melee_Damage_3
+                            | Item::Melee_Speed_3
+                            | Item::Nano_Lattice_2
+                            | Item::Nano_Points_3
+                            | Item::Notes_2053_02_27
+                            | Item::Plague_of_Thoughts
+                            | Item::Ranged_Damage_3
+                            | Item::Ranged_Speed_3
+                            | Item::Record_Losses
+                            | Item::Refill
+                            | Item::Researchers_Missing
+                            | Item::Royal_Dagger
+                            | Item::Royal_Ring
+                            | Item::Storm_Bomb
+                            | Item::Suspension_Bridge
+                            | Item::Terminal_Breakthrough_1
+                            | Item::Terminal_Breakthrough_2
+                            | Item::The_Ideal_Kiengir
+                            | Item::Udusan
+                            | Item::Under_Siege
+                    )
+                }
+                RuleObjective::AllItems => {
+                    matches!(
+                        item,
+                        Item::Aansur
+                            | Item::Amagi_Stronghold_Left_Wall
+                            | Item::Carnelian_Ring
+                            | Item::Double_Axe
+                            | Item::Drone_Melee_Damage_3
+                            | Item::Drone_Melee_Speed_3
+                            | Item::Escape
+                            | Item::Family_Tragedy
+                            | Item::Health_Upgrade_5
+                            | Item::Heretics_Granddaughter
+                            | Item::Infect_L3
+                            | Item::Infection_Speed_2
+                            | Item::Journal_2049_10_29
+                            | Item::Lament_for_Fools
+                            | Item::Melee_Charge
+                            | Item::Melee_Damage_3
+                            | Item::Melee_Speed_3
+                            | Item::Nano_Lattice_2
+                            | Item::Nano_Points_3
+                            | Item::Notes_2053_02_27
+                            | Item::Plague_of_Thoughts
+                            | Item::Ranged_Damage_3
+                            | Item::Ranged_Speed_3
+                            | Item::Refill
+                            | Item::Royal_Dagger
+                            | Item::Royal_Ring
+                            | Item::Suspension_Bridge
+                            | Item::Udusan
+                    )
+                }
+            },
+            RuleVictory::JustObjective => match self.rule_objective {
+                RuleObjective::Start => {
+                    matches!(
+                        item,
+                        Item::Aansur
+                            | Item::Amagi_Stronghold_Left_Wall
+                            | Item::Bronze_Axe
+                            | Item::Building_of_the_School
+                            | Item::Carnelian_Ring
+                            | Item::Commemorative_Speech
+                            | Item::Companies_Layoff
+                            | Item::Compass
+                            | Item::Dangerous_Ideas
+                            | Item::Dear_Ernest
+                            | Item::Double_Axe
+                            | Item::Drone_Melee_Damage_3
+                            | Item::Drone_Melee_Speed_3
+                            | Item::Escape
+                            | Item::Family_Tragedy
+                            | Item::Health_Upgrade_5
+                            | Item::Heretics_Granddaughter
+                            | Item::Heretics_Tablet
+                            | Item::Infect_L3
+                            | Item::Infection_Speed_2
+                            | Item::Journal_2049_10_29
+                            | Item::Lament_for_Fools
+                            | Item::Letter_from_Trace
+                            | Item::Melee_Charge
+                            | Item::Melee_Damage_3
+                            | Item::Melee_Speed_3
+                            | Item::Nano_Lattice_2
+                            | Item::Nano_Points_3
+                            | Item::Notes_2053_02_27
+                            | Item::Plague_of_Thoughts
+                            | Item::Ranged_Damage_3
+                            | Item::Ranged_Speed_3
+                            | Item::Record_Losses
+                            | Item::Refill
+                            | Item::Researchers_Missing
+                            | Item::Royal_Dagger
+                            | Item::Royal_Ring
+                            | Item::Storm_Bomb
+                            | Item::Suspension_Bridge
+                            | Item::Terminal_Breakthrough_1
+                            | Item::Terminal_Breakthrough_2
+                            | Item::The_Ideal_Kiengir
+                            | Item::Udusan
+                            | Item::Under_Siege
+                            | Item::Victory
+                    )
+                }
+                RuleObjective::AllItems => {
+                    matches!(
+                        item,
+                        Item::Aansur
+                            | Item::Amagi_Stronghold_Left_Wall
+                            | Item::Carnelian_Ring
+                            | Item::Double_Axe
+                            | Item::Drone_Melee_Damage_3
+                            | Item::Drone_Melee_Speed_3
+                            | Item::Escape
+                            | Item::Family_Tragedy
+                            | Item::Health_Upgrade_5
+                            | Item::Heretics_Granddaughter
+                            | Item::Infect_L3
+                            | Item::Infection_Speed_2
+                            | Item::Journal_2049_10_29
+                            | Item::Lament_for_Fools
+                            | Item::Melee_Charge
+                            | Item::Melee_Damage_3
+                            | Item::Melee_Speed_3
+                            | Item::Nano_Lattice_2
+                            | Item::Nano_Points_3
+                            | Item::Notes_2053_02_27
+                            | Item::Plague_of_Thoughts
+                            | Item::Ranged_Damage_3
+                            | Item::Ranged_Speed_3
+                            | Item::Refill
+                            | Item::Royal_Dagger
+                            | Item::Royal_Ring
+                            | Item::Suspension_Bridge
+                            | Item::Udusan
+                            | Item::Victory
+                    )
+                }
+            },
         }
     }
 }
