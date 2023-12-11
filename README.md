@@ -37,7 +37,7 @@ This project aims to eventually accomplish the following:
 
 ## Game graph definition concepts and terms
 
-For full details of how to make a game graph, see games/README.md.
+For full details of how to make a game graph, see [games/README.md](games/README.md).
 
 The player's state at a given point has two major components: **items**, which are usually powerups but really can be any permanent item or accomplishment; and **context**, which contains everything that could be reversed or changed later.
 
