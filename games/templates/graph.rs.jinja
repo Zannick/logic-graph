@@ -305,7 +305,6 @@ lazy_static! {
 
 #[derive(Clone, Debug)]
 pub struct World {
-    pub objective: Objective,
 %% for rule in rules
     pub rule_{{ rule|construct_id }}: Rule{{ rule[1:]|camelize }},
 %% endfor
@@ -336,7 +335,7 @@ impl world::World for World {
 
     fn ruleset(&self) -> String {
         format!(
-            "{% for rule in rules %}{% if not loop.first %}\n{% endif %}{{ rule }}: {}{% endfor %}",
+            "[{% for rule in rules %}{% if not loop.first %}, {% endif %}{{ rule }}: {}{% endfor %}]",
 %% for rule in rules
             self.rule_{{ rule|construct_id }},
 %% endfor
@@ -448,14 +447,6 @@ impl world::World for World {
 
     fn won(&self, ctx: &Context) -> bool {
         crate::rule__victory!(ctx, self)
-    }
-
-    fn objective_met(&self, ctx: &Context) -> bool {
-        match self.objective {
-%% for o, info in objectives.items()
-            Objective::{{ o|construct_id }} => rules::access_{{ info.access_id }}(ctx, self),
-%% endfor
-        }
     }
 
     fn items_needed(&self, ctx: &Context) -> Vec<(Item, i16)> {
@@ -595,7 +586,6 @@ impl Default for World {
 impl World {
     pub fn new() -> World {
         World {
-            objective: Objective::default(),
 %% for rule in rules
             rule_{{ rule|construct_id }}: Rule{{ rule[1:]|camelize }}::default(),
 %% endfor

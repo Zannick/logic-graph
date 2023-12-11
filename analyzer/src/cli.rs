@@ -108,7 +108,7 @@ where
         }
         Commands::Info => {
             println!(
-                "data sizes: Context={} ContextWrapper={} serialized={} World={}\nstart overrides: {}\nobjective: {}",
+                "data sizes: Context={} ContextWrapper={} serialized={} World={}\nstart overrides: {}\nruleset: {}",
                 size_of::<T>(),
                 size_of::<ContextWrapper<T>>(),
                 HeapDB::<W, T>::serialize_state(&startctx).len(),

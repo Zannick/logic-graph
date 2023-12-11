@@ -17,9 +17,6 @@ fn read_key_value(
     val: &Yaml,
 ) -> Result<(), String> {
     match key.as_str() {
-        Some("objective") => {
-            world.objective = parse_str_into(key, val)?;
-        }
         Some("rules") => {
             for (rkey, rval) in val.as_hash().expect("rules YAML should be a key-value map") {
                 match rkey.as_str() {

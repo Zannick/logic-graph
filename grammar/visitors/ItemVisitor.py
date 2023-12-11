@@ -28,12 +28,12 @@ class ItemVisitor(RulesVisitor):
             self.name = ''
 
     def _source(self):
-        if not self.name.startswith('objectives') and not self.name.startswith('helpers') and not self.name.startswith('rules'):
+        if not self.name.startswith('helpers') and not self.name.startswith('rules'):
             return 'general'
         return self.name
 
     def _count_items(self, ctx):
-        if self.name.startswith('objectives') or self.name.startswith('rules'):
+        if self.name.startswith('rules'):
             for item in ctx.ITEM():
                 it = str(item)
                 if it not in self.vanilla_items:

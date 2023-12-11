@@ -13116,45 +13116,6 @@ impl std::str::FromStr for WarpId {
     serde_repr::Deserialize_repr,
 )]
 #[repr(u8)]
-pub enum Objective {
-    #[default]
-    Start,
-    Progress,
-}
-impl fmt::Display for Objective {
-    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        match self {
-            Objective::Start => write!(f, "{}", "Start"),
-            Objective::Progress => write!(f, "{}", "Progress%"),
-        }
-    }
-}
-impl std::str::FromStr for Objective {
-    type Err = String;
-
-    fn from_str(s: &str) -> Result<Self, Self::Err> {
-        match s {
-            "Start" => Ok(Objective::Start),
-            "Progress%" => Ok(Objective::Progress),
-            _ => Err(format!("Could not recognize as a Objective: {}", s)),
-        }
-    }
-}
-
-#[derive(
-    Debug,
-    PartialEq,
-    Eq,
-    Copy,
-    Clone,
-    Hash,
-    Ord,
-    PartialOrd,
-    Default,
-    serde_repr::Serialize_repr,
-    serde_repr::Deserialize_repr,
-)]
-#[repr(u8)]
 pub enum RuleVictory {
     #[default]
     Default,

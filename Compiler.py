@@ -203,12 +203,6 @@ class GameLogic(object):
         self.allowed_funcs = self.helpers.keys() | self.rules.keys() | BUILTINS.keys()
         self.access_funcs = {}
         self.action_funcs = {}
-        self.objectives = {}
-        for name, logic in self._info['objectives'].items():
-            pr = _parseExpression(logic, name, 'objectives', rule='itemList')
-            self.objectives[name] = {'pr': pr}
-            self.objectives[name]['access_id'] = self.make_funcid(self.objectives[name])
-        self.default_objective = list(self._info['objectives'].keys())[0]
         for typed_rule in self.rules.values():
             for details in typed_rule.variants.values():
                 details['func_id'] = self.make_funcid(details)
@@ -1067,7 +1061,6 @@ class GameLogic(object):
 
     def nonpoint_parse_results(self):
         yield from (info['pr'] for info in self.helpers.values())
-        yield from (info['pr'] for info in self.objectives.values())
         yield from (info['pr'] for rule in self.rules.values() for info in rule.variants.values())
         yield from (info['act'] for info in self.collect.values())
         yield from (info['pr'] for info in self.movements.values() if 'pr' in info)
@@ -1694,6 +1687,6 @@ if __name__ == '__main__':
                  f'{sum(len(r["loc_ids"]) for r in gl.regions)} locations, '
                  f'{len(list(gl.actions()))} actions, {len(gl.all_items)} items, '
                  f'{len(gl.helpers)} helpers, {len(gl.context_types)} context properties, '
-                 f'{len(gl.warps)} warps, {len(gl.objectives)} objectives')
+                 f'{len(gl.warps)} warps, {sum(len(rule.variants) for rule in gl.rules.values())} rule variants')
     gl.render()
     logging.info(f'Render complete.')

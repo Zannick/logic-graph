@@ -7080,7 +7080,6 @@ lazy_static! {
 
 #[derive(Clone, Debug)]
 pub struct World {
-    pub objective: Objective,
     pub rule_victory: RuleVictory,
     pub rule_objective: RuleObjective,
     // These are arrays that group the items together by their parent.
@@ -7110,7 +7109,7 @@ impl world::World for World {
 
     fn ruleset(&self) -> String {
         format!(
-            "$victory: {}\n$objective: {}",
+            "[$victory: {}, $objective: {}]",
             self.rule_victory, self.rule_objective,
         )
     }
@@ -9200,17 +9199,6 @@ impl world::World for World {
         crate::rule__victory!(ctx, self)
     }
 
-    fn objective_met(&self, ctx: &Context) -> bool {
-        match self.objective {
-            Objective::Start => rules::access___remote_drone(ctx, self),
-            Objective::Progress => {
-                rules::access___all_urns_all_weapons_other_items_all_notes_all_health_all_flasks(
-                    ctx, self,
-                )
-            }
-        }
-    }
-
     fn items_needed(&self, ctx: &Context) -> Vec<(Item, i16)> {
         let mut map = analyzer::new_hashmap();
 
@@ -10449,7 +10437,6 @@ impl Default for World {
 impl World {
     pub fn new() -> World {
         World {
-            objective: Objective::default(),
             rule_victory: RuleVictory::default(),
             rule_objective: RuleObjective::default(),
             locations: build_locations(),

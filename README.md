@@ -51,7 +51,7 @@ The actual time taken to move between Spots in an Area is calculated based on gl
 Areas are further grouped into **Regions**, which have no default special behavior tying Areas together.
 
 The top-level game definition also includes:
-* **objectives**, which describe the win conditions available (a search will choose one)
+* **rules**, which describe the rulesets available, particularly the victory conditions (a search will choose one of each)
 * **settings**, which can modify traversals by allowing new tricks or options, and their defaults or ranges
 * initial context values
 * default times for different kinds of Locations
