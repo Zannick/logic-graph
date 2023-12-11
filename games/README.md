@@ -58,7 +58,12 @@ The file is considered a dictionary, where these are the allowed keys:
 * **start**: A dictionary of initial values of context variables where the type is inferrable from the value (or the variable is defined in **context**). The key **position** is required, and must be set to a **Spot**.
 * **load**: A dictionary of values for context variables that will be set whenever the game is *loaded* (by using a warp that loads the game).
 * **data**: A dictionary of defaults for Place-based data. Entries are just `key: value`, and the type of the data is inferred from the value, e.g. `0` or `false`. **Spots** can have a value of None, but you have to write `SpotId::None`.
-* **objectives**: A dictionary of rules defining what constitutes a "win". **Required**. Each value is a logic rule of type `itemList`. (Due to YAML rules about `[]`s in strings, these rules must be wrapped in `""`.) See the [Logic grammar reference](#logic-grammar-reference) below.
+* **rules**: A nested dictionary of rules defining requirements that could change based on the mode being played. **Required**.
+    * The names of keys must start with `$`, which denotes that it is a callable function elsewhere in logic.
+    * All variants must evaluate to the same type. The default type (and the recommendation) is `itemList`. If using anything else, the rule's type must be specified in the name by adding a `:` followed by the Logic rule name, e.g. `$do_thing:actions`.
+    * Each value is a dictionary describing the variants of that rule. Each variant has a key name (a string) and a string value that is how the rule will be evaluated when that variant is selected. (Due to YAML rules about `[]`s in strings, `itemList` rules must be wrapped in `""`.) See the [Logic grammar reference](#logic-grammar-reference) below.
+    * The first variant listed in each rule is the default.
+    * The rule `$victory` is **required**. It must have at least one variant, of any name.
 * **movements**: A dictionary of [Movements](#movements). **Required** to have a **default** entry if you want to use movement calculations.
 * **time**: A dictionary of tags with default time measurements (as a float in seconds). These tags can be attached to most anything that would have a time value (**Locations**, **Exits**, **Actions**, and **Hybrids**) and if it has no time value, the value defined here is used. The tag **default** represents the fallback if there is no tag and no time.
 * **warps**: A dictionary of [Warps](#warps).
@@ -211,7 +216,7 @@ The logic rules are intended to read like a subset or variant of Python. Each fi
 
 * **boolExpr**: The type expected in **req** fields. You may wrap a boolExpr in parentheses (`( )`), and you may combine them with boolean logic operators `and` or `or`.
 * **actions**: The type expected in **do**, **before**, and **after** fields. These fields expect one or more statements of type **action**, separated by `;` (a semicolon after the last statement is optional).
-* **itemList**: The type expected for **objectives**. This is also a boolean expression that can be used in **req** fields. See [Testing Item Possession](#testing-item-possession).
+* **itemList**: The default type expected for **rules**. This is also a boolean expression that can be used in **req** fields. See [Testing Item Possession](#testing-item-possession).
 
 ### Primitives
 
@@ -233,7 +238,7 @@ Anywhere that expects a **boolExpr** can check whether an item has been collecte
 * the Item id followed by a number in braces, e.g. `Infect{2}` to check that at least that number copies of that item have been collected. The number must either be a integer literal or a **setting** name.
 * 'NOT' followed by the Item id, to check that the item has not ever been collected.
 * a **context variable** or helper **argument** of type Item, to check for at least one of that referenced item.
-* **itemList**, which checks that all of the possessions in the list are true. Viable options for entries in the list include: any of the above 4 options, or a **helper** function of type **itemList** that takes no arguments.
+* **itemList**, which checks that all of the possessions in the list are true. Viable options for entries in the list include: any of the above 4 options, a **helper** function of type **itemList** that takes no arguments, or a **rule** of type **itemList**.
 
 #### value
 
@@ -304,7 +309,7 @@ These could be changed in the future to make settings and variables work the sam
 
 #### Function invocations
 
-Function invocations are written `$func(arg1, arg2, ...)`. Function invocations with no arguments provided can be written as just `$func`. Available functions include **helpers** defined in `Game.yaml`, and the following built-in functions:
+Function invocations are written `$func(arg1, arg2, ...)`. Function invocations with no arguments provided can be written as just `$func`. Available functions include **helpers** and **rules** defined in `Game.yaml`, and the following built-in functions:
 * **max** and **min**: Type **num**. Returns the **max**imum or **min**imum of the two provided numerical arguments.
 * **count**: Type **num**. Accepts one **Item** argument and returns how many of that **Item** have been collected. Note that this may be capped based on the maximum value needed in any rule (if we never check for multiples, this may return 1 even if the item is collected multiple times; if we never check for the Item at all, this always returns 0).
 * **default**: Any type that has a Rust default (numbers, Spots, and enums). Returns the default value of that type. Useful mainly for setting a context variable to `SpotId::None` which is not otherwise recognized in this grammar.
@@ -312,6 +317,7 @@ Function invocations are written `$func(arg1, arg2, ...)`. Function invocations 
 * **get_area**, **get_region**: Type **Place**. Accepts one **Spot** argument and returns the **Area** or **Region**, respectively, that contains the Spot.
 * **reset_area**, **reset_region**: Type **action**. Accepts one **Place** argument that must be an **Area** or **Region** respectively, and resets the given **Area** or **Region**. Note that resetting a Region does not reset all the Areas in that Region.
 * **skip**: Type **action**. Accepts one **Location** argument and skips it.
+* **visit**: Type **action**. Accepts one **Location** argument and visits it.
 * **add_item**: Type **action**. Adds one of the given **Item** to the context without triggering **collect** rules.
 * **collect**: Type **action**. Adds one of the given **Item** to the context *and* triggers **collect** rules for that item. *Be careful not to create an infinite loop!*
 
@@ -341,5 +347,6 @@ You can check whether a certain **Place** variable is inside of another **Place*
 * `p1` must be a **context variable** or **function argument**, or it may be omitted, in which case the current position is used.
 * If `p1` is omitted, `p2` may be either a **Place** literal in backticks, or a tuple (surrounded with `()`) of **Place** literals separated by commas.
 * If `p1` is a variable or argument, `p2` may be a **Place** literal, another variable or argument, or a **function invocation** of type **Place**.
+* Checking whether a **Spot** is the same as another is done with `spot1 WITHIN spot2` due to current limitations.
 
-These cases could be changed in the future to supply the same behavior if needs arise.
+These cases could be changed in the future if needs arise.
