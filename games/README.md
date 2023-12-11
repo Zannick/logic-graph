@@ -64,7 +64,9 @@ The file is considered a dictionary, where these are the allowed keys:
     * Each value is a dictionary describing the variants of that rule. Each variant has a key name (a string) and a string value that is how the rule will be evaluated when that variant is selected. (Due to YAML rules about `[]`s in strings, `itemList` rules must be wrapped in `""`.) See the [Logic grammar reference](#logic-grammar-reference) below.
     * The first variant listed in each rule is the default.
     * The rule `$victory` is **required**. It must have at least one variant, of any name.
-* **movements**: A dictionary of [Movements](#movements). **Required** to have a **default** entry if you want to use movement calculations.
+* **base_movements**: A list of [Movements](#movements). **Required** to have if you want to use movement calculations. Base movements beyond the first may have `data` restrictions based on Place features.
+* **movements**: A dictionary of named [Movements](#movements) that may have requirements. These may be used in movement calculations.
+* **exit_movements**: A dictionary of named [Movements](#movements). These are used in **Exits** to automatically calculate the time traversing the Exit would take, and not in local movement calculations.
 * **time**: A dictionary of tags with default time measurements (as a float in seconds). These tags can be attached to most anything that would have a time value (**Locations**, **Exits**, **Actions**, and **Hybrids**) and if it has no time value, the value defined here is used. The tag **default** represents the fallback if there is no tag and no time.
 * **warps**: A dictionary of [Warps](#warps).
 * **actions**: A list of the global [Actions](#actions).
@@ -122,7 +124,7 @@ Spots are only defined within **Areas**. They may have the following fields:
 
 Currently, the compiler only understands up to 2-dimensions (and 1-dimension can be represented as 2 trivially). There are three main types of movements: **free**, where the player has a full circle of motion on a plane and can move  (e.g. Ocarina of Time); **xy**, where the player can only move orthogonally in a top-down environment and moving in any dimension is effectively the same speed; and **x** / **y**, where the player has independent speeds for each dimension, e.g. a walking speed and a fall speed.
 
-Movements must define exactly one of those types as a key, and the value is the coordinate-system distance the player can traverse in 1 second. Movements other than **default** must also define **req**: the **requirements** to be able to use the movement, as a logic rule of type `boolExpr`. See the [Logic grammar reference](#logic-grammar-reference) below.
+Movements must define exactly one of those types as a key, and the value is the coordinate-system distance the player can traverse in 1 second. Non-base movements must also define **req**: the **requirements** to be able to use the movement, as a logic rule of type `boolExpr`. See the [Logic grammar reference](#logic-grammar-reference) below.
 
 If **x** or **y** is the type of a movement, any of the following fields may also be included:
 * **y** or **x**: the other dimension. Keep in mind, though, that this would mean the player can fly indefinitely where the movement is available.
@@ -130,9 +132,11 @@ If **x** or **y** is the type of a movement, any of the following fields may als
 * **jump**: the time it takes the player to jump and land before jumping again. Local connections that go "up" in **y** value will only be usable with a movement if **y** is defined for the movement, or if **jump** is defined for the movement, and **jumps** is defined for the local connection.
 * **jump_down**: the time it takes the player to "jump down". This is just added to the time of any local connections per its total **jumps_down**.
 
-Any field defined in **default** is implicitly available for other movements. Note that you can override the values of any field, but as the **default** movement is considered always available, overriding with a smaller value will not result in limiting movement speed; instead you should make the slower movement the default and invert your rule to have faster movement elsewhere.
+*Base movements* may only depend on **data** fields, which allows timings based on them to be pre-calculated. The first such defined movement is considered the **default**.
 
-Movements that only depend on **data** fields are considered *base movements* because timings based on them can be pre-calculated. The availability of non-base movements must be evaluated during the search, and thus having a large number of them can negatively affect analyzer performance.
+Any field defined in that default movement is implicitly available for other movements. Note that you can override the values of any field, but as the default movement is considered always available, overriding with a smaller value will not result in limiting movement speed; instead you should make the slower movement the default and invert your rule to have faster movement elsewhere.
+
+The availability of non-base movements must be evaluated during the search, and thus having a large number of them can negatively affect analyzer performance.
 
 ### Warps
 
