@@ -745,8 +745,11 @@ impl world::World for World {
     type Warp = Warp;
     const NUM_LOCATIONS: u32 = 48;
 
-    fn objective_name(&self) -> String {
-        format!("{}", self.objective)
+    fn ruleset(&self) -> String {
+        format!(
+            "$victory: {}\n$objective: {}",
+            self.rule_victory, self.rule_objective,
+        )
     }
 
     fn get_location(&self, id: LocationId) -> &Location {

@@ -334,8 +334,13 @@ impl world::World for World {
     type Warp = Warp;
     const NUM_LOCATIONS: u32 = {{ gl.num_locations }};
 
-    fn objective_name(&self) -> String {
-        format!("{}", self.objective)
+    fn ruleset(&self) -> String {
+        format!(
+            "{% for rule in rules %}{% if not loop.first %}\n{% endif %}{{ rule }}: {}{% endfor %}",
+%% for rule in rules
+            self.rule_{{ rule|construct_id }},
+%% endfor
+        )
     }
 
 %% for point in ['Location', 'Exit', 'Action']

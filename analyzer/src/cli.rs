@@ -114,7 +114,7 @@ where
                 HeapDB::<W, T>::serialize_state(&startctx).len(),
                 size_of::<W>(),
                 startctx.diff(&T::default()),
-                world.objective_name()
+                world.ruleset()
             );
             Ok(())
         }

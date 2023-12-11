@@ -111,7 +111,7 @@ pub trait World: Sync + Default {
     >;
     const NUM_LOCATIONS: u32;
 
-    fn objective_name(&self) -> String;
+    fn ruleset(&self) -> String;
     fn get_location(&self, loc_id: <Self::Location as Location>::LocId) -> &Self::Location;
     fn get_exit(&self, ex_id: <Self::Exit as Exit>::ExitId) -> &Self::Exit;
     fn get_action(&self, act_id: <Self::Action as Action>::ActionId) -> &Self::Action;
