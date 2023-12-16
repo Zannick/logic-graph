@@ -205,6 +205,7 @@ pub enum Expectation {
     EbihWaterfallBlockRight(bool),
     EbihWaterfallWall(bool),
     EbihWestBlock(bool),
+    Escape(bool),
     ExitBreach(bool),
     FastTravel(bool),
     Flask(i8),
@@ -274,7 +275,6 @@ pub enum Expectation {
     UhrumWestEntranceUpperWall(bool),
     UnderSiege(bool),
     UnderwaterMovement(bool),
-    Victory(bool),
     WallClimb(bool),
 }
 
@@ -835,79 +835,79 @@ pub mod flags {
             const EBIH_WATERFALL_BLOCK_RIGHT = 0x1000000;
             const EBIH_WATERFALL_WALL = 0x2000000;
             const EBIH_WEST_BLOCK = 0x4000000;
-            const EXIT_BREACH = 0x8000000;
-            const FAST_TRAVEL = 0x10000000;
-            const GIGUNA_BOULDER = 0x20000000;
-            const GIGUNA_DUAL_PATH_SWITCH = 0x40000000;
-            const GIGUNA_DUAL_PATH_WALL = 0x80000000;
-            const GIGUNA_GATEWAY_BLOCK = 0x100000000;
-            const GIGUNA_GATEWAY_GATE = 0x200000000;
-            const GIGUNA_GUBI = 0x400000000;
-            const GIGUNA_NORTHEAST_GATE = 0x800000000;
-            const HEALTH_NODE = 0x1000000000;
-            const HEALTH_UPGRADE = 0x2000000000;
-            const HEALTH_UPGRADE_2 = 0x4000000000;
-            const HEALTH_UPGRADE_3 = 0x8000000000;
-            const HEALTH_UPGRADE_4 = 0x10000000000;
-            const HERETICS_TABLET = 0x20000000000;
-            const HOVER = 0x40000000000;
-            const ICE_AXE = 0x80000000000;
-            const INFECT = 0x100000000000;
-            const INFECT_L1 = 0x200000000000;
-            const INFECT_L2 = 0x400000000000;
-            const INFECT_L3 = 0x800000000000;
-            const INFECTION_RANGE = 0x1000000000000;
-            const INFECTION_RANGE_2 = 0x2000000000000;
-            const INFECTION_RANGE_3 = 0x4000000000000;
-            const INFECTION_SPEED = 0x8000000000000;
-            const IRIKAR_GUDAM = 0x10000000000000;
-            const IRIKAR_ROYAL_STORAGE_WALL = 0x20000000000000;
-            const LEDGE_GRAB = 0x40000000000000;
-            const LETTER_FROM_TRACE = 0x80000000000000;
-            const MELEE_DAMAGE = 0x100000000000000;
-            const MELEE_DAMAGE_2 = 0x200000000000000;
-            const MELEE_SPEED = 0x400000000000000;
-            const MELEE_SPEED_2 = 0x800000000000000;
-            const MIST_UPGRADE = 0x1000000000000000;
-            const NANITE_MIST = 0x2000000000000000;
-            const NANO_POINTS = 0x4000000000000000;
-            const NANO_POINTS_2 = 0x8000000000000000;
+            const ESCAPE = 0x8000000;
+            const EXIT_BREACH = 0x10000000;
+            const FAST_TRAVEL = 0x20000000;
+            const GIGUNA_BOULDER = 0x40000000;
+            const GIGUNA_DUAL_PATH_SWITCH = 0x80000000;
+            const GIGUNA_DUAL_PATH_WALL = 0x100000000;
+            const GIGUNA_GATEWAY_BLOCK = 0x200000000;
+            const GIGUNA_GATEWAY_GATE = 0x400000000;
+            const GIGUNA_GUBI = 0x800000000;
+            const GIGUNA_NORTHEAST_GATE = 0x1000000000;
+            const HEALTH_NODE = 0x2000000000;
+            const HEALTH_UPGRADE = 0x4000000000;
+            const HEALTH_UPGRADE_2 = 0x8000000000;
+            const HEALTH_UPGRADE_3 = 0x10000000000;
+            const HEALTH_UPGRADE_4 = 0x20000000000;
+            const HERETICS_TABLET = 0x40000000000;
+            const HOVER = 0x80000000000;
+            const ICE_AXE = 0x100000000000;
+            const INFECT = 0x200000000000;
+            const INFECT_L1 = 0x400000000000;
+            const INFECT_L2 = 0x800000000000;
+            const INFECT_L3 = 0x1000000000000;
+            const INFECTION_RANGE = 0x2000000000000;
+            const INFECTION_RANGE_2 = 0x4000000000000;
+            const INFECTION_RANGE_3 = 0x8000000000000;
+            const INFECTION_SPEED = 0x10000000000000;
+            const IRIKAR_GUDAM = 0x20000000000000;
+            const IRIKAR_ROYAL_STORAGE_WALL = 0x40000000000000;
+            const LEDGE_GRAB = 0x80000000000000;
+            const LETTER_FROM_TRACE = 0x100000000000000;
+            const MELEE_DAMAGE = 0x200000000000000;
+            const MELEE_DAMAGE_2 = 0x400000000000000;
+            const MELEE_SPEED = 0x800000000000000;
+            const MELEE_SPEED_2 = 0x1000000000000000;
+            const MIST_UPGRADE = 0x2000000000000000;
+            const NANITE_MIST = 0x4000000000000000;
+            const NANO_POINTS = 0x8000000000000000;
         }
     }
     bitflags! {
         #[derive(Copy, Clone, Debug, Default, PartialEq, Eq, Hash, Serialize, Deserialize)]
         pub struct ContextBits3 : u64 {
-            const POWER_MATRIX = 0x1;
-            const RANGED_DAMAGE = 0x2;
-            const RANGED_DAMAGE_2 = 0x4;
-            const RANGED_SPEED = 0x8;
-            const RANGED_SPEED_2 = 0x10;
-            const RECORD_LOSSES = 0x20;
-            const REMOTE_DRONE = 0x40;
-            const RESEARCHERS_MISSING = 0x80;
-            const SEPARATION = 0x100;
-            const SHOCKWAVE = 0x200;
-            const SLINGSHOT_CHARGE = 0x400;
-            const SLINGSHOT_HOOK = 0x800;
-            const SLINGSHOT_WEAPON = 0x1000;
-            const SNIPER_VALLEY_ROCK_1 = 0x2000;
-            const SNIPER_VALLEY_ROCK_2 = 0x4000;
-            const STATION_POWER = 0x8000;
-            const STORM_BOMB = 0x10000;
-            const SWITCH_36_11 = 0x20000;
-            const SWITCH_40_12 = 0x40000;
-            const TERMINAL_BREAKTHROUGH_1 = 0x80000;
-            const TERMINAL_BREAKTHROUGH_2 = 0x100000;
-            const THE_IDEAL_KIENGIR = 0x200000;
-            const UHRUM_ANNUNA_CORRIDOR_BLOCK = 0x400000;
-            const UHRUM_WATERFALL_WALL = 0x800000;
-            const UHRUM_WATERFALLS_BLOCK = 0x1000000;
-            const UHRUM_WEST_ENTRANCE_GATE = 0x2000000;
-            const UHRUM_WEST_ENTRANCE_LOWER_WALL = 0x4000000;
-            const UHRUM_WEST_ENTRANCE_UPPER_WALL = 0x8000000;
-            const UNDER_SIEGE = 0x10000000;
-            const UNDERWATER_MOVEMENT = 0x20000000;
-            const VICTORY = 0x40000000;
+            const NANO_POINTS_2 = 0x1;
+            const POWER_MATRIX = 0x2;
+            const RANGED_DAMAGE = 0x4;
+            const RANGED_DAMAGE_2 = 0x8;
+            const RANGED_SPEED = 0x10;
+            const RANGED_SPEED_2 = 0x20;
+            const RECORD_LOSSES = 0x40;
+            const REMOTE_DRONE = 0x80;
+            const RESEARCHERS_MISSING = 0x100;
+            const SEPARATION = 0x200;
+            const SHOCKWAVE = 0x400;
+            const SLINGSHOT_CHARGE = 0x800;
+            const SLINGSHOT_HOOK = 0x1000;
+            const SLINGSHOT_WEAPON = 0x2000;
+            const SNIPER_VALLEY_ROCK_1 = 0x4000;
+            const SNIPER_VALLEY_ROCK_2 = 0x8000;
+            const STATION_POWER = 0x10000;
+            const STORM_BOMB = 0x20000;
+            const SWITCH_36_11 = 0x40000;
+            const SWITCH_40_12 = 0x80000;
+            const TERMINAL_BREAKTHROUGH_1 = 0x100000;
+            const TERMINAL_BREAKTHROUGH_2 = 0x200000;
+            const THE_IDEAL_KIENGIR = 0x400000;
+            const UHRUM_ANNUNA_CORRIDOR_BLOCK = 0x800000;
+            const UHRUM_WATERFALL_WALL = 0x1000000;
+            const UHRUM_WATERFALLS_BLOCK = 0x2000000;
+            const UHRUM_WEST_ENTRANCE_GATE = 0x4000000;
+            const UHRUM_WEST_ENTRANCE_LOWER_WALL = 0x8000000;
+            const UHRUM_WEST_ENTRANCE_UPPER_WALL = 0x10000000;
+            const UNDER_SIEGE = 0x20000000;
+            const UNDERWATER_MOVEMENT = 0x40000000;
             const WALL_CLIMB = 0x80000000;
             const VISITED_AMAGI__LIRU_ROOM__SHRINE__ITEM = 0x100000000;
             const VISITED_AMAGI__MAIN_AREA__WAY_OFF_TO_THE_SIDE__ITEM = 0x200000000;
@@ -1548,6 +1548,7 @@ impl context::Ctx for Context {
                 .cbits2
                 .contains(flags::ContextBits2::EBIH_WATERFALL_WALL),
             Item::Ebih_West_Block => self.cbits2.contains(flags::ContextBits2::EBIH_WEST_BLOCK),
+            Item::Escape => self.cbits2.contains(flags::ContextBits2::ESCAPE),
             Item::Exit_Breach => self.cbits2.contains(flags::ContextBits2::EXIT_BREACH),
             Item::Fast_Travel => self.cbits2.contains(flags::ContextBits2::FAST_TRAVEL),
             Item::Flask => self.flask >= 1,
@@ -1598,7 +1599,7 @@ impl context::Ctx for Context {
             Item::Mist_Upgrade => self.cbits2.contains(flags::ContextBits2::MIST_UPGRADE),
             Item::Nanite_Mist => self.cbits2.contains(flags::ContextBits2::NANITE_MIST),
             Item::Nano_Points => self.cbits2.contains(flags::ContextBits2::NANO_POINTS),
-            Item::Nano_Points_2 => self.cbits2.contains(flags::ContextBits2::NANO_POINTS_2),
+            Item::Nano_Points_2 => self.cbits3.contains(flags::ContextBits3::NANO_POINTS_2),
             Item::Power_Matrix => self.cbits3.contains(flags::ContextBits3::POWER_MATRIX),
             Item::Ranged_Damage => self.cbits3.contains(flags::ContextBits3::RANGED_DAMAGE),
             Item::Ranged_Damage_2 => self.cbits3.contains(flags::ContextBits3::RANGED_DAMAGE_2),
@@ -1653,7 +1654,6 @@ impl context::Ctx for Context {
             Item::Underwater_Movement => self
                 .cbits3
                 .contains(flags::ContextBits3::UNDERWATER_MOVEMENT),
-            Item::Victory => self.cbits3.contains(flags::ContextBits3::VICTORY),
             Item::Wall_Climb => self.cbits3.contains(flags::ContextBits3::WALL_CLIMB),
             _ => false,
         }
@@ -1791,6 +1791,7 @@ impl context::Ctx for Context {
                 .cbits2
                 .contains(flags::ContextBits2::EBIH_WEST_BLOCK)
                 .into(),
+            Item::Escape => self.cbits2.contains(flags::ContextBits2::ESCAPE).into(),
             Item::Exit_Breach => self
                 .cbits2
                 .contains(flags::ContextBits2::EXIT_BREACH)
@@ -1917,8 +1918,8 @@ impl context::Ctx for Context {
                 .contains(flags::ContextBits2::NANO_POINTS)
                 .into(),
             Item::Nano_Points_2 => self
-                .cbits2
-                .contains(flags::ContextBits2::NANO_POINTS_2)
+                .cbits3
+                .contains(flags::ContextBits3::NANO_POINTS_2)
                 .into(),
             Item::Power_Matrix => self
                 .cbits3
@@ -2031,7 +2032,6 @@ impl context::Ctx for Context {
                 .cbits3
                 .contains(flags::ContextBits3::UNDERWATER_MOVEMENT)
                 .into(),
-            Item::Victory => self.cbits3.contains(flags::ContextBits3::VICTORY).into(),
             Item::Wall_Climb => self.cbits3.contains(flags::ContextBits3::WALL_CLIMB).into(),
             _ => 0,
         }
@@ -2156,6 +2156,9 @@ impl context::Ctx for Context {
             Item::Ebih_West_Block => {
                 self.cbits2.insert(flags::ContextBits2::EBIH_WEST_BLOCK);
             },
+            Item::Escape => {
+                self.cbits2.insert(flags::ContextBits2::ESCAPE);
+            },
             Item::Exit_Breach => {
                 self.cbits2.insert(flags::ContextBits2::EXIT_BREACH);
             },
@@ -2275,7 +2278,7 @@ impl context::Ctx for Context {
                 self.cbits2.insert(flags::ContextBits2::NANO_POINTS);
             },
             Item::Nano_Points_2 => {
-                self.cbits2.insert(flags::ContextBits2::NANO_POINTS_2);
+                self.cbits3.insert(flags::ContextBits3::NANO_POINTS_2);
             },
             Item::Power_Matrix => {
                 self.cbits3.insert(flags::ContextBits3::POWER_MATRIX);
@@ -2366,9 +2369,6 @@ impl context::Ctx for Context {
             },
             Item::Underwater_Movement => {
                 self.cbits3.insert(flags::ContextBits3::UNDERWATER_MOVEMENT);
-            },
-            Item::Victory => {
-                self.cbits3.insert(flags::ContextBits3::VICTORY);
             },
             Item::Wall_Climb => {
                 self.cbits3.insert(flags::ContextBits3::WALL_CLIMB);
@@ -2514,6 +2514,9 @@ impl context::Ctx for Context {
             Item::Ebih_West_Block => {
                 self.cbits2.insert(flags::ContextBits2::EBIH_WEST_BLOCK);
             }
+            Item::Escape => {
+                self.cbits2.insert(flags::ContextBits2::ESCAPE);
+            }
             Item::Exit_Breach => {
                 self.cbits2.insert(flags::ContextBits2::EXIT_BREACH);
             }
@@ -2634,7 +2637,7 @@ impl context::Ctx for Context {
                 self.cbits2.insert(flags::ContextBits2::NANO_POINTS);
             }
             Item::Nano_Points_2 => {
-                self.cbits2.insert(flags::ContextBits2::NANO_POINTS_2);
+                self.cbits3.insert(flags::ContextBits3::NANO_POINTS_2);
             }
             Item::Power_Matrix => {
                 self.cbits3.insert(flags::ContextBits3::POWER_MATRIX);
@@ -2735,9 +2738,6 @@ impl context::Ctx for Context {
             }
             Item::Underwater_Movement => {
                 self.cbits3.insert(flags::ContextBits3::UNDERWATER_MOVEMENT);
-            }
-            Item::Victory => {
-                self.cbits3.insert(flags::ContextBits3::VICTORY);
             }
             Item::Wall_Climb => {
                 self.cbits3.insert(flags::ContextBits3::WALL_CLIMB);
@@ -4201,6 +4201,14 @@ impl context::Ctx for Context {
                     ckey, cval
                 ));
             }
+            ("Escape", Yaml::Boolean(b)) => Expectation::Escape(*b),
+            ("Escape", Yaml::Integer(i)) => Expectation::Escape(*i > 0),
+            ("Escape", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
             ("Exit_Breach", Yaml::Boolean(b)) => Expectation::ExitBreach(*b),
             ("Exit_Breach", Yaml::Integer(i)) => Expectation::ExitBreach(*i > 0),
             ("Exit_Breach", _) => {
@@ -4778,14 +4786,6 @@ impl context::Ctx for Context {
             ("Underwater_Movement", Yaml::Boolean(b)) => Expectation::UnderwaterMovement(*b),
             ("Underwater_Movement", Yaml::Integer(i)) => Expectation::UnderwaterMovement(*i > 0),
             ("Underwater_Movement", _) => {
-                return Err(format!(
-                    "Key {:?} has value of disallowed type: {:?}",
-                    ckey, cval
-                ));
-            }
-            ("Victory", Yaml::Boolean(b)) => Expectation::Victory(*b),
-            ("Victory", Yaml::Integer(i)) => Expectation::Victory(*i > 0),
-            ("Victory", _) => {
                 return Err(format!(
                     "Key {:?} has value of disallowed type: {:?}",
                     ckey, cval
@@ -5631,6 +5631,12 @@ impl context::Ctx for Context {
                         ));
                     }
                 }
+                Expectation::Escape(e) => {
+                    let v = self.has(Item::Escape);
+                    if v != *e {
+                        errs.push(format!("Expected {} = {}, got: {}", "Escape", e, v));
+                    }
+                }
                 Expectation::ExitBreach(e) => {
                     let v = self.has(Item::Exit_Breach);
                     if v != *e {
@@ -6139,12 +6145,6 @@ impl context::Ctx for Context {
                             "Expected {} = {}, got: {}",
                             "Underwater_Movement", e, v
                         ));
-                    }
-                }
-                Expectation::Victory(e) => {
-                    let v = self.has(Item::Victory);
-                    if v != *e {
-                        errs.push(format!("Expected {} = {}, got: {}", "Victory", e, v));
                     }
                 }
                 Expectation::WallClimb(e) => {
@@ -13137,6 +13137,11 @@ impl context::Ctx for Context {
         if n != p {
             list.push(format!("{}EBIH_WEST_BLOCK", if n { "+" } else { "-" }));
         }
+        let n = self.cbits2.contains(flags::ContextBits2::ESCAPE);
+        let p = old.cbits2.contains(flags::ContextBits2::ESCAPE);
+        if n != p {
+            list.push(format!("{}ESCAPE", if n { "+" } else { "-" }));
+        }
         let n = self.cbits2.contains(flags::ContextBits2::EXIT_BREACH);
         let p = old.cbits2.contains(flags::ContextBits2::EXIT_BREACH);
         if n != p {
@@ -13353,8 +13358,8 @@ impl context::Ctx for Context {
         if n != p {
             list.push(format!("{}NANO_POINTS", if n { "+" } else { "-" }));
         }
-        let n = self.cbits2.contains(flags::ContextBits2::NANO_POINTS_2);
-        let p = old.cbits2.contains(flags::ContextBits2::NANO_POINTS_2);
+        let n = self.cbits3.contains(flags::ContextBits3::NANO_POINTS_2);
+        let p = old.cbits3.contains(flags::ContextBits3::NANO_POINTS_2);
         if n != p {
             list.push(format!("{}NANO_POINTS_2", if n { "+" } else { "-" }));
         }
@@ -13576,11 +13581,6 @@ impl context::Ctx for Context {
             .contains(flags::ContextBits3::UNDERWATER_MOVEMENT);
         if n != p {
             list.push(format!("{}UNDERWATER_MOVEMENT", if n { "+" } else { "-" }));
-        }
-        let n = self.cbits3.contains(flags::ContextBits3::VICTORY);
-        let p = old.cbits3.contains(flags::ContextBits3::VICTORY);
-        if n != p {
-            list.push(format!("{}VICTORY", if n { "+" } else { "-" }));
         }
         let n = self.cbits3.contains(flags::ContextBits3::WALL_CLIMB);
         let p = old.cbits3.contains(flags::ContextBits3::WALL_CLIMB);

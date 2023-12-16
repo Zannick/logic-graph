@@ -9204,8 +9204,8 @@ impl world::World for World {
 
         match self.rule_victory {
             RuleVictory::Default => {
-                if !ctx.has(Item::Victory) {
-                    map.insert(Item::Victory, 1);
+                if !ctx.has(Item::Escape) {
+                    map.insert(Item::Escape, 1);
                 }
                 match self.rule_objective {
                     RuleObjective::Start => {
@@ -9581,7 +9581,7 @@ impl world::World for World {
 
         match self.rule_victory {
             RuleVictory::Default => {
-                map.insert(Item::Victory, 1);
+                map.insert(Item::Escape, 1);
                 match self.rule_objective {
                     RuleObjective::Start => {
                         if !map.contains_key(&Item::Remote_Drone) {
@@ -10472,7 +10472,6 @@ impl World {
                             | Item::Double_Axe
                             | Item::Drone_Melee_Damage_3
                             | Item::Drone_Melee_Speed_3
-                            | Item::Escape
                             | Item::Family_Tragedy
                             | Item::Health_Upgrade_5
                             | Item::Heretics_Granddaughter
@@ -10514,7 +10513,6 @@ impl World {
                             | Item::Double_Axe
                             | Item::Drone_Melee_Damage_3
                             | Item::Drone_Melee_Speed_3
-                            | Item::Escape
                             | Item::Family_Tragedy
                             | Item::Health_Upgrade_5
                             | Item::Heretics_Granddaughter
@@ -10587,7 +10585,6 @@ impl World {
                             | Item::The_Ideal_Kiengir
                             | Item::Udusan
                             | Item::Under_Siege
-                            | Item::Victory
                     )
                 }
                 RuleObjective::AllItems => {
@@ -10621,7 +10618,6 @@ impl World {
                             | Item::Royal_Ring
                             | Item::Suspension_Bridge
                             | Item::Udusan
-                            | Item::Victory
                     )
                 }
             },
@@ -36166,7 +36162,7 @@ pub fn build_warps() -> EnumMap<WarpId, Warp> {
         WarpId::BreachSave => Warp {
             id: WarpId::BreachSave,
             dest: SpotId::None,
-            time: 12000,
+            time: 10500,
             price: Currency::Free,
         },
         WarpId::EarthSave => Warp {
@@ -36304,7 +36300,7 @@ pub fn build_warps() -> EnumMap<WarpId, Warp> {
         WarpId::MainSave => Warp {
             id: WarpId::MainSave,
             dest: SpotId::None,
-            time: 12000,
+            time: 10500,
             price: Currency::Free,
         },
         WarpId::Menu => Warp {

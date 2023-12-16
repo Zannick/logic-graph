@@ -69,6 +69,8 @@ movements:
 exit_movements:
   fast_hover:
     x: .4
+  charge_flight:
+    x: .75
   mist2:
     x: .285
     y: .5
@@ -118,6 +120,8 @@ time:
   portal: 3.6
   exit: 3
 
+  charge_time: 1
+
   ## Penalties
   # When movements are calculated ignoring transitions, we have to add the transition time
   # without double-counting the movement between transition points
@@ -134,7 +138,7 @@ warps:
     to: ^save
     loads: true
   main_save:
-    time: 12
+    time: 10.5  # IGT goes backward due to the fadeout not counting
     req: ^realm == 'main' and Amashilama
     to: ^save
     after: $refill_energy
@@ -143,7 +147,7 @@ warps:
       - when: ^mode != 'drone'
         add: 2.5
   breach_save:
-    time: 12
+    time: 10.5
     req: ^realm == 'breach'
     to: ^breach_save
     after: $refill_energy

@@ -578,7 +578,7 @@ macro_rules! rule__victory {
         use $crate::graph_enums::*;
         use $crate::rules;
         match $world.rule_victory {
-            RuleVictory::Default => rules::access___victory_objective($ctx, $world),
+            RuleVictory::Default => rules::access___escape_objective($ctx, $world),
             RuleVictory::JustObjective => rules::access___objective($ctx, $world),
         }
     }};

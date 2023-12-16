@@ -29,6 +29,10 @@ pub fn access___all_urns_all_weapons_other_items_all_notes_all_health_all_flasks
         && helper__all_health!(ctx, world)
         && helper__all_flasks!(ctx, world)
 }
+pub fn access___escape_objective(ctx: &Context, world: &graph::World) -> bool {
+    // [Escape, $objective]
+    rule__objective!(ctx, world) && ctx.has(Item::Escape)
+}
 pub fn access___objective(ctx: &Context, world: &graph::World) -> bool {
     // [$objective]
     rule__objective!(ctx, world)
@@ -36,10 +40,6 @@ pub fn access___objective(ctx: &Context, world: &graph::World) -> bool {
 pub fn access___remote_drone(ctx: &Context, world: &graph::World) -> bool {
     // [Remote_Drone]
     ctx.has(Item::Remote_Drone)
-}
-pub fn access___victory_objective(ctx: &Context, world: &graph::World) -> bool {
-    // [Victory, $objective]
-    rule__objective!(ctx, world) && ctx.has(Item::Victory)
 }
 pub fn access_activate(ctx: &Context, world: &graph::World) -> bool {
     // $activate
