@@ -1152,7 +1152,7 @@ areas:
     - name: East
       coord: [42.95, 16.75]
       local:
-        - to: Save
+        - to: Save Point
           jumps: 2
       exits:
         - to: Apocalypse > West

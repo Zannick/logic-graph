@@ -3920,6 +3920,7 @@ digraph AxiomVerge2 {
     Glacier__Final_Save__Pillar -> Glacier__Final_Save__Lower_West;
     Glacier__Final_Save__Pillar -> Glacier__Final_Save__Save_Point;
     Glacier__Final_Save__Save_Point -> Glacier__Final_Save__East;
+    Glacier__Final_Save__East -> Glacier__Final_Save__Save_Point;
     Glacier__Apocalypse__West -> Glacier__Apocalypse__Southwest_Switch;
     Glacier__Apocalypse__West -> Glacier__Apocalypse__Southwest_Capsule;
     Glacier__Apocalypse__Northwest_Scaffold_2_West -> Glacier__Apocalypse__Northwest_Switch;

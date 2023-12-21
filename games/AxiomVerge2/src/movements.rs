@@ -5363,6 +5363,9 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
             SpotId::Glacier__Dock_Outside__Entry,
             SpotId::Glacier__Dock_Outside__Do_Not_Enter,
         ) => 5000,
+        ([false], SpotId::Glacier__Final_Save__East, SpotId::Glacier__Final_Save__Save_Point) => {
+            1578
+        }
         ([false], SpotId::Glacier__Final_Save__Pillar, SpotId::Glacier__Final_Save__Lower_West) => {
             1052
         }
@@ -13428,6 +13431,9 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
             SpotId::Glacier__Dock_Outside__Entry,
             SpotId::Glacier__Dock_Outside__Do_Not_Enter,
         ) => 5000,
+        ([true], SpotId::Glacier__Final_Save__East, SpotId::Glacier__Final_Save__Save_Point) => {
+            1578
+        }
         ([true], SpotId::Glacier__Final_Save__Pillar, SpotId::Glacier__Final_Save__Lower_West) => {
             1052
         }
@@ -19524,7 +19530,7 @@ pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
         (SpotId::Glacier__Final_Save__Pillar, SpotId::Glacier__Final_Save__Save_Point) => true,
         (SpotId::Glacier__Final_Save__Pillar, SpotId::Glacier__Final_Save__Lower_West) => true,
         (SpotId::Glacier__Final_Save__Save_Point, SpotId::Glacier__Final_Save__East) => true,
-        (SpotId::Glacier__Final_Save__East, SpotId::Glacier__Final_Save__Save) => true,
+        (SpotId::Glacier__Final_Save__East, SpotId::Glacier__Final_Save__Save_Point) => true,
         (SpotId::Glacier__Apocalypse__West, SpotId::Glacier__Apocalypse__Southwest_Switch) => true,
         (SpotId::Glacier__Apocalypse__West, SpotId::Glacier__Apocalypse__Southwest_Capsule) => true,
         (
@@ -35500,6 +35506,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Glacier__Final_Save__East,
+            SpotId::Glacier__Final_Save__Save_Point,
+            1578,
+        ),
+        (
+            SpotId::Glacier__Final_Save__East,
             SpotId::Glacier__Final_Save__Upper_West,
             2250,
         ),
@@ -45754,6 +45765,7 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
         (SpotId::Glacier__Dock_Outside__Entry, SpotId::Glacier__Dock_Outside__Do_Not_Enter) => {
             Some(5000)
         }
+        (SpotId::Glacier__Final_Save__East, SpotId::Glacier__Final_Save__Save_Point) => Some(1578),
         (SpotId::Glacier__Final_Save__Pillar, SpotId::Glacier__Final_Save__Lower_West) => {
             Some(1052)
         }
@@ -52305,6 +52317,9 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
         }
         (SpotId::Glacier__Dock_Outside__Entry, SpotId::Glacier__Dock_Outside__Do_Not_Enter) => {
             (Some(5000), vec![])
+        }
+        (SpotId::Glacier__Final_Save__East, SpotId::Glacier__Final_Save__Save_Point) => {
+            (Some(1578), vec![])
         }
         (SpotId::Glacier__Final_Save__Pillar, SpotId::Glacier__Final_Save__Lower_West) => {
             (Some(1052), vec![])
