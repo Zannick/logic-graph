@@ -1,4 +1,6 @@
-objective: Progress%
+rules:
+  victory: just_objective
+  objective: All Items
 major_glitches: true
 minor_glitches: true
 boomerang_steering: true
