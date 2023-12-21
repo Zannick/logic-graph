@@ -71,6 +71,9 @@ exit_movements:
     x: .4
   charge_flight:
     x: .75
+  mist1:
+    x: .1425  # ?
+    y: .25
   mist2:
     x: .285
     y: .5
@@ -130,6 +133,7 @@ time:
   # e.g. a movement speed of .4 means that .1 distance is traversed in 0.25 seconds
   fast_hover.1: 0.25
   fast_hover.2: 0.50
+  base.1: 0.35
 
 warps:
   earth_save:
@@ -369,7 +373,8 @@ helpers:
   $ft_breach: Fast_Travel and ^realm == 'breach'
 
   # shockwave range: ~.2 in width (.35 height)
-  # boomerang range: ~.3 in width?
+  # boomerang range: ~.325 in width? .25 in .5s, .325 in ~.8s
+  # upgraded boomerang: ~.39, pretty much .4; .3 in .5s, ~.4 in ~.75s
   # infection ranges (approx)
   # .185, .22, .26, .30
   # drone has one "level" less, at 0 it's ~.15?

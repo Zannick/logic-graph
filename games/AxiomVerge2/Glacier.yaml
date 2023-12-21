@@ -113,7 +113,7 @@ areas:
           jumps: 3
         - to: Lower
       exits:
-        - to: Apocalypse Entry > West
+        - to: Apocalypse Entry > West 10
           tags: [xshift]
     - name: Lower
       coord: [43.05, 10.8]
@@ -986,7 +986,7 @@ areas:
 - name: Apocalypse Entry
   on_entry: $reset_old_area(^newpos)
   spots:
-    - name: West
+    - name: West 10
       coord: [44.05, 10.0]
       local:
         - to: Terminal
@@ -996,9 +996,254 @@ areas:
     - name: Terminal
       coord: [44.6, 10.0]
       local:
-        - to: West
-      locations:
+        - to: West 10
+        - to: Grate Ledge
+        - to: Above Grate
+    - name: Grate Ledge
+      coord: [44.65, 10.2]
+      local:
+        - to: Above Grate
+      hybrid:
         - name: Escape
           item: Escape
           req: Apocalypse_Bomb
-    # TODO: the path to Apocalypse... whether in this area or another
+          to: Terminal
+          movement: base
+          jumps: 1
+    - name: Above Grate
+      coord: [44.55, 10.2]
+      exits:
+        - to: Below Grate
+          req: $mist2
+          movement: mist2
+    - name: Below Grate
+      coord: [44.55, 10.5]
+      local:
+        - to: Shaft Bottom
+      exits:
+        - to: Grate Ledge
+          req: Apocalypse_Bomb
+          movement: base  # TODO: slingshot movements etc
+          jumps: 2
+    - name: Shaft Bottom
+      coord: [44.45, 14.4]
+      local:
+        - to: Lowest Stair
+    - name: Lowest Stair
+      coord: [44.2, 14.7]
+      local:
+        - to: West 15 Lower
+        - to: West 15 Upper
+          jumps: 1
+    - name: West 15 Lower
+      coord: [44.05, 14.75]
+      local:
+        - to: Lowest Stair
+          jumps: 1
+      exits:
+        - to: Apocalypse Hallway > Lower East
+          tags: [xshift]
+        - to: Lowest Stair
+          req: $hook
+          movement: fast_hover  # ?
+          jumps: 1
+    - name: West 15 Upper
+      coord: [44.05, 14.6]
+      local:
+        - to: Lowest Stair
+      exits:
+        - to: Apocalypse Hallway > Upper East
+          tags: [xshift]
+
+- name: Apocalypse Hallway
+  on_entry: $reset_old_area(^newpos)
+  spots:
+    - name: Lower East
+      coord: [43.95, 14.75]
+    - name: Upper East
+      coord: [43.95, 14.6]
+    - name: East Pillar
+      coord: [43.85, 14.55]
+    - name: Center Pillar
+      coord: [43.0, 14.4]
+    - name: West
+      coord: [42.05, 14.55]
+
+- name: Seals
+  on_entry: $reset_old_area(^newpos)
+  spots:
+    - name: East 15
+      coord: [41.95, 14.55]
+    - name: Upper Ledge
+      coord: [41.6, 15.0]
+    - name: Upper Seal
+      coord: [41.5, 15.2]
+    - name: Middle Ledge
+      coord: [41.6, 15.6]
+    - name: Breakable Rock
+      coord: [41.8, 15.6]
+    - name: Lower Seal
+      coord: [41.5, 15.9]
+    - name: Lower Ledge
+      coord: [41.5, 16.1]
+    - name: East 17 Upper
+      coord: [41.95, 16.4]
+    - name: East 17 Lower
+      coord: [41.95, 16.75]
+
+- name: Final Save
+  on_entry: $reset_old_area(^newpos)
+  map: save
+  spots:
+    - name: Upper West
+      coord: [42.05, 16.4]
+      exits:
+        - to: Seals > East 17 Upper
+          tags: [xshift]
+        - to: Apocalypse > Northwest Mid-air
+          req: $hook and $hover
+          movement: fast_hover
+          jumps: 1
+          penalty_tags: [xshift, -fast_hover.1]
+    - name: Lower West
+      coord: [42.05, 16.75]
+      exits:
+        - to: Seals > East 17 Lower
+          tags: [xshift]
+        - to: Pillar
+          req: $grab
+          movement: base
+          jumps: 3
+        - to: Pillar
+          req: $hook
+          movement: base
+          jumps: 1
+    - name: Pillar
+      coord: [42.35, 16.35]
+      local:
+        - to: Save Point
+        - to: Lower West
+      exits:
+        - to: Upper West
+          req: $hover
+          movement: base
+    - name: Save Point
+      coord: [42.5, 16.55]
+      local:
+        - to: East
+      exits:
+        - to: Pillar
+          req: $grab
+          movement: base
+          jumps: 2
+        - to: Pillar
+          req: $hook
+          movement: base
+          jumps: 1
+        - to: Apocalypse > Northwest Mid-air
+          req: $hover
+          movement: base
+          jumps: 1
+          penalty_tags: [xshift, -base.1]
+      actions:
+        - name: Save
+          do: $save
+          tags: [save]
+    - name: East
+      coord: [42.95, 16.75]
+      local:
+        - to: Save
+          jumps: 2
+      exits:
+        - to: Apocalypse > West
+          tags: [xshift]
+        - to: Upper West
+          req: $hook and $hover
+          movement: fast_hover
+          jumps: 2
+
+- name: Apocalypse
+  on_entry: $reset_old_area(^newpos)
+  spots:
+    - name: West
+      coord: [43.05, 16.75]
+      local:
+        - to: Southwest Switch
+        - to: Southwest Capsule
+      exits:
+        - to: Final Save > East
+          tags: [xshift]
+
+    - name: Northwest Mid-air
+      coord: [43.35, 16.25]
+      exits:
+        - to: Northwest Scaffold 2 West
+          req: Nanite_Mist
+          price: 40
+          movement: mist1
+        - to: Northwest Scaffold 2 West
+          req: $mist2
+          price: 40
+          movement: mist2
+
+    - name: Northwest Scaffold 2 West
+      coord: [43.45, 16.2]
+      local:
+        - to: Northwest Switch
+          jumps: 1
+        - to: Center Scaffold West
+    - name: Northwest Switch
+      coord: [43.7, 15.95]
+      local:
+        - to: Center Scaffold West
+    - name: Center Scaffold West
+      coord: [43.85, 16.2]
+      hybrid:
+        - name: Boss Fight
+          item: Apocalypse_Bomb  # TODO: other finales
+          canon: Apocalypse_Bomb
+          to: Bomb Northwest
+          req: Infect and Anuman
+          time: 28
+          item_time: 0
+        - name: Fill It Up
+          item: Apocalypse_Bomb
+          canon: Apocalypse_Bomb
+          to: Bomb East
+          req: Infect and not Anuman
+          time: 15
+          item_time: 0
+    
+    - name: Southwest Switch
+      coord: [43.2, 17.35]
+      local:
+        - to: Southwest Capsule
+    - name: Southwest Capsule
+      coord: [43.3, 17.35]
+      exits:
+        - to: West
+          req: $grab
+          movement: base
+          jumps: 4
+        - to: West
+          req: $hook
+          movement: base
+          jumps: 2
+
+    - name: Southwest Corner
+      coord: [43.125, 17.8]
+
+    - name: Bomb Northwest
+      coord: [43.85, 17.35]
+      local:
+        - to: Southwest Capsule
+    - name: Bomb East
+      coord: [43.65, 17.6]
+      local:
+        - to: Southwest Capsule
+          jumps: 2
+    - name: Bomb
+      coord: [43.9, 17.75]
+      local:
+        - to: Bomb East
+          jumps: 1

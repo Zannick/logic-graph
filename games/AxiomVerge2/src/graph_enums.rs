@@ -165,11 +165,14 @@ pub enum AreaId {
     Giguna_Breach__Robopede,
     Giguna_Breach__Slingshot,
     Giguna_Breach__SW_Save,
+    Glacier__Apocalypse,
     Glacier__Apocalypse_Entry,
+    Glacier__Apocalypse_Hallway,
     Glacier__Boomerang_Antechamber,
     Glacier__Boomerang_Room,
     Glacier__Compass_Room,
     Glacier__Dock_Outside,
+    Glacier__Final_Save,
     Glacier__Grid_31_9_12,
     Glacier__Grid_32_7_10,
     Glacier__Grid_37_38_9,
@@ -180,6 +183,7 @@ pub enum AreaId {
     Glacier__Ledge_Grab_Room,
     Glacier__Peak,
     Glacier__Revival,
+    Glacier__Seals,
     Glacier__The_Big_Drop,
     Glacier__Vertical_Room,
     Interior__Building_Interior,
@@ -312,13 +316,16 @@ impl fmt::Display for AreaId {
             AreaId::Giguna_Breach__Robopede => write!(f, "{}", "Giguna Breach > Robopede"),
             AreaId::Giguna_Breach__Slingshot => write!(f, "{}", "Giguna Breach > Slingshot"),
             AreaId::Giguna_Breach__SW_Save => write!(f, "{}", "Giguna Breach > SW Save"),
+            AreaId::Glacier__Apocalypse => write!(f, "{}", "Glacier > Apocalypse"),
             AreaId::Glacier__Apocalypse_Entry => write!(f, "{}", "Glacier > Apocalypse Entry"),
+            AreaId::Glacier__Apocalypse_Hallway => write!(f, "{}", "Glacier > Apocalypse Hallway"),
             AreaId::Glacier__Boomerang_Antechamber => {
                 write!(f, "{}", "Glacier > Boomerang Antechamber")
             }
             AreaId::Glacier__Boomerang_Room => write!(f, "{}", "Glacier > Boomerang Room"),
             AreaId::Glacier__Compass_Room => write!(f, "{}", "Glacier > Compass Room"),
             AreaId::Glacier__Dock_Outside => write!(f, "{}", "Glacier > Dock Outside"),
+            AreaId::Glacier__Final_Save => write!(f, "{}", "Glacier > Final Save"),
             AreaId::Glacier__Grid_31_9_12 => write!(f, "{}", "Glacier > Grid 31,9-12"),
             AreaId::Glacier__Grid_32_7_10 => write!(f, "{}", "Glacier > Grid 32,7-10"),
             AreaId::Glacier__Grid_37_38_9 => write!(f, "{}", "Glacier > Grid 37-38,9"),
@@ -329,6 +336,7 @@ impl fmt::Display for AreaId {
             AreaId::Glacier__Ledge_Grab_Room => write!(f, "{}", "Glacier > Ledge Grab Room"),
             AreaId::Glacier__Peak => write!(f, "{}", "Glacier > Peak"),
             AreaId::Glacier__Revival => write!(f, "{}", "Glacier > Revival"),
+            AreaId::Glacier__Seals => write!(f, "{}", "Glacier > Seals"),
             AreaId::Glacier__The_Big_Drop => write!(f, "{}", "Glacier > The Big Drop"),
             AreaId::Glacier__Vertical_Room => write!(f, "{}", "Glacier > Vertical Room"),
             AreaId::Interior__Building_Interior => write!(f, "{}", "Interior > Building Interior"),
@@ -466,11 +474,14 @@ impl std::str::FromStr for AreaId {
             "Giguna Breach > Robopede" => Ok(AreaId::Giguna_Breach__Robopede),
             "Giguna Breach > Slingshot" => Ok(AreaId::Giguna_Breach__Slingshot),
             "Giguna Breach > SW Save" => Ok(AreaId::Giguna_Breach__SW_Save),
+            "Glacier > Apocalypse" => Ok(AreaId::Glacier__Apocalypse),
             "Glacier > Apocalypse Entry" => Ok(AreaId::Glacier__Apocalypse_Entry),
+            "Glacier > Apocalypse Hallway" => Ok(AreaId::Glacier__Apocalypse_Hallway),
             "Glacier > Boomerang Antechamber" => Ok(AreaId::Glacier__Boomerang_Antechamber),
             "Glacier > Boomerang Room" => Ok(AreaId::Glacier__Boomerang_Room),
             "Glacier > Compass Room" => Ok(AreaId::Glacier__Compass_Room),
             "Glacier > Dock Outside" => Ok(AreaId::Glacier__Dock_Outside),
+            "Glacier > Final Save" => Ok(AreaId::Glacier__Final_Save),
             "Glacier > Grid 31,9-12" => Ok(AreaId::Glacier__Grid_31_9_12),
             "Glacier > Grid 32,7-10" => Ok(AreaId::Glacier__Grid_32_7_10),
             "Glacier > Grid 37-38,9" => Ok(AreaId::Glacier__Grid_37_38_9),
@@ -481,6 +492,7 @@ impl std::str::FromStr for AreaId {
             "Glacier > Ledge Grab Room" => Ok(AreaId::Glacier__Ledge_Grab_Room),
             "Glacier > Peak" => Ok(AreaId::Glacier__Peak),
             "Glacier > Revival" => Ok(AreaId::Glacier__Revival),
+            "Glacier > Seals" => Ok(AreaId::Glacier__Seals),
             "Glacier > The Big Drop" => Ok(AreaId::Glacier__The_Big_Drop),
             "Glacier > Vertical Room" => Ok(AreaId::Glacier__Vertical_Room),
             "Interior > Building Interior" => Ok(AreaId::Interior__Building_Interior),
@@ -1363,8 +1375,31 @@ pub enum SpotId {
     Giguna_Breach__SW_Save__Save_Point,
     Giguna_Breach__SW_Save__Side_Door,
     Giguna_Breach__SW_Save__West_11,
+    Glacier__Apocalypse__Bomb,
+    Glacier__Apocalypse__Bomb_East,
+    Glacier__Apocalypse__Bomb_Northwest,
+    Glacier__Apocalypse__Center_Scaffold_West,
+    Glacier__Apocalypse__Northwest_Mid_air,
+    Glacier__Apocalypse__Northwest_Scaffold_2_West,
+    Glacier__Apocalypse__Northwest_Switch,
+    Glacier__Apocalypse__Southwest_Capsule,
+    Glacier__Apocalypse__Southwest_Corner,
+    Glacier__Apocalypse__Southwest_Switch,
+    Glacier__Apocalypse__West,
+    Glacier__Apocalypse_Entry__Above_Grate,
+    Glacier__Apocalypse_Entry__Below_Grate,
+    Glacier__Apocalypse_Entry__Grate_Ledge,
+    Glacier__Apocalypse_Entry__Lowest_Stair,
+    Glacier__Apocalypse_Entry__Shaft_Bottom,
     Glacier__Apocalypse_Entry__Terminal,
-    Glacier__Apocalypse_Entry__West,
+    Glacier__Apocalypse_Entry__West_10,
+    Glacier__Apocalypse_Entry__West_15_Lower,
+    Glacier__Apocalypse_Entry__West_15_Upper,
+    Glacier__Apocalypse_Hallway__Center_Pillar,
+    Glacier__Apocalypse_Hallway__East_Pillar,
+    Glacier__Apocalypse_Hallway__Lower_East,
+    Glacier__Apocalypse_Hallway__Upper_East,
+    Glacier__Apocalypse_Hallway__West,
     Glacier__Boomerang_Antechamber__East_12,
     Glacier__Boomerang_Antechamber__Upper_East,
     Glacier__Boomerang_Antechamber__West_12,
@@ -1381,6 +1416,11 @@ pub enum SpotId {
     Glacier__Compass_Room__West,
     Glacier__Dock_Outside__Do_Not_Enter,
     Glacier__Dock_Outside__Entry,
+    Glacier__Final_Save__East,
+    Glacier__Final_Save__Lower_West,
+    Glacier__Final_Save__Pillar,
+    Glacier__Final_Save__Save_Point,
+    Glacier__Final_Save__Upper_West,
     Glacier__Grid_31_9_12__East_10,
     Glacier__Grid_31_9_12__East_9,
     Glacier__Grid_31_9_12__Midair,
@@ -1439,6 +1479,15 @@ pub enum SpotId {
     Glacier__Revival__Overhang,
     Glacier__Revival__Save_Point,
     Glacier__Revival__West_8,
+    Glacier__Seals__Breakable_Rock,
+    Glacier__Seals__East_15,
+    Glacier__Seals__East_17_Lower,
+    Glacier__Seals__East_17_Upper,
+    Glacier__Seals__Lower_Ledge,
+    Glacier__Seals__Lower_Seal,
+    Glacier__Seals__Middle_Ledge,
+    Glacier__Seals__Upper_Ledge,
+    Glacier__Seals__Upper_Seal,
     Glacier__The_Big_Drop__East,
     Glacier__The_Big_Drop__Small_Path,
     Glacier__The_Big_Drop__Water_Surface,
@@ -3777,11 +3826,76 @@ impl fmt::Display for SpotId {
             SpotId::Giguna_Breach__SW_Save__West_11 => {
                 write!(f, "{}", "Giguna Breach > SW Save > West 11")
             }
+            SpotId::Glacier__Apocalypse__Bomb => write!(f, "{}", "Glacier > Apocalypse > Bomb"),
+            SpotId::Glacier__Apocalypse__Bomb_East => {
+                write!(f, "{}", "Glacier > Apocalypse > Bomb East")
+            }
+            SpotId::Glacier__Apocalypse__Bomb_Northwest => {
+                write!(f, "{}", "Glacier > Apocalypse > Bomb Northwest")
+            }
+            SpotId::Glacier__Apocalypse__Center_Scaffold_West => {
+                write!(f, "{}", "Glacier > Apocalypse > Center Scaffold West")
+            }
+            SpotId::Glacier__Apocalypse__Northwest_Mid_air => {
+                write!(f, "{}", "Glacier > Apocalypse > Northwest Mid-air")
+            }
+            SpotId::Glacier__Apocalypse__Northwest_Scaffold_2_West => {
+                write!(f, "{}", "Glacier > Apocalypse > Northwest Scaffold 2 West")
+            }
+            SpotId::Glacier__Apocalypse__Northwest_Switch => {
+                write!(f, "{}", "Glacier > Apocalypse > Northwest Switch")
+            }
+            SpotId::Glacier__Apocalypse__Southwest_Capsule => {
+                write!(f, "{}", "Glacier > Apocalypse > Southwest Capsule")
+            }
+            SpotId::Glacier__Apocalypse__Southwest_Corner => {
+                write!(f, "{}", "Glacier > Apocalypse > Southwest Corner")
+            }
+            SpotId::Glacier__Apocalypse__Southwest_Switch => {
+                write!(f, "{}", "Glacier > Apocalypse > Southwest Switch")
+            }
+            SpotId::Glacier__Apocalypse__West => write!(f, "{}", "Glacier > Apocalypse > West"),
+            SpotId::Glacier__Apocalypse_Entry__Above_Grate => {
+                write!(f, "{}", "Glacier > Apocalypse Entry > Above Grate")
+            }
+            SpotId::Glacier__Apocalypse_Entry__Below_Grate => {
+                write!(f, "{}", "Glacier > Apocalypse Entry > Below Grate")
+            }
+            SpotId::Glacier__Apocalypse_Entry__Grate_Ledge => {
+                write!(f, "{}", "Glacier > Apocalypse Entry > Grate Ledge")
+            }
+            SpotId::Glacier__Apocalypse_Entry__Lowest_Stair => {
+                write!(f, "{}", "Glacier > Apocalypse Entry > Lowest Stair")
+            }
+            SpotId::Glacier__Apocalypse_Entry__Shaft_Bottom => {
+                write!(f, "{}", "Glacier > Apocalypse Entry > Shaft Bottom")
+            }
             SpotId::Glacier__Apocalypse_Entry__Terminal => {
                 write!(f, "{}", "Glacier > Apocalypse Entry > Terminal")
             }
-            SpotId::Glacier__Apocalypse_Entry__West => {
-                write!(f, "{}", "Glacier > Apocalypse Entry > West")
+            SpotId::Glacier__Apocalypse_Entry__West_10 => {
+                write!(f, "{}", "Glacier > Apocalypse Entry > West 10")
+            }
+            SpotId::Glacier__Apocalypse_Entry__West_15_Lower => {
+                write!(f, "{}", "Glacier > Apocalypse Entry > West 15 Lower")
+            }
+            SpotId::Glacier__Apocalypse_Entry__West_15_Upper => {
+                write!(f, "{}", "Glacier > Apocalypse Entry > West 15 Upper")
+            }
+            SpotId::Glacier__Apocalypse_Hallway__Center_Pillar => {
+                write!(f, "{}", "Glacier > Apocalypse Hallway > Center Pillar")
+            }
+            SpotId::Glacier__Apocalypse_Hallway__East_Pillar => {
+                write!(f, "{}", "Glacier > Apocalypse Hallway > East Pillar")
+            }
+            SpotId::Glacier__Apocalypse_Hallway__Lower_East => {
+                write!(f, "{}", "Glacier > Apocalypse Hallway > Lower East")
+            }
+            SpotId::Glacier__Apocalypse_Hallway__Upper_East => {
+                write!(f, "{}", "Glacier > Apocalypse Hallway > Upper East")
+            }
+            SpotId::Glacier__Apocalypse_Hallway__West => {
+                write!(f, "{}", "Glacier > Apocalypse Hallway > West")
             }
             SpotId::Glacier__Boomerang_Antechamber__East_12 => {
                 write!(f, "{}", "Glacier > Boomerang Antechamber > East 12")
@@ -3826,6 +3940,17 @@ impl fmt::Display for SpotId {
             }
             SpotId::Glacier__Dock_Outside__Entry => {
                 write!(f, "{}", "Glacier > Dock Outside > Entry")
+            }
+            SpotId::Glacier__Final_Save__East => write!(f, "{}", "Glacier > Final Save > East"),
+            SpotId::Glacier__Final_Save__Lower_West => {
+                write!(f, "{}", "Glacier > Final Save > Lower West")
+            }
+            SpotId::Glacier__Final_Save__Pillar => write!(f, "{}", "Glacier > Final Save > Pillar"),
+            SpotId::Glacier__Final_Save__Save_Point => {
+                write!(f, "{}", "Glacier > Final Save > Save Point")
+            }
+            SpotId::Glacier__Final_Save__Upper_West => {
+                write!(f, "{}", "Glacier > Final Save > Upper West")
             }
             SpotId::Glacier__Grid_31_9_12__East_10 => {
                 write!(f, "{}", "Glacier > Grid 31,9-12 > East 10")
@@ -3975,6 +4100,23 @@ impl fmt::Display for SpotId {
                 write!(f, "{}", "Glacier > Revival > Save Point")
             }
             SpotId::Glacier__Revival__West_8 => write!(f, "{}", "Glacier > Revival > West 8"),
+            SpotId::Glacier__Seals__Breakable_Rock => {
+                write!(f, "{}", "Glacier > Seals > Breakable Rock")
+            }
+            SpotId::Glacier__Seals__East_15 => write!(f, "{}", "Glacier > Seals > East 15"),
+            SpotId::Glacier__Seals__East_17_Lower => {
+                write!(f, "{}", "Glacier > Seals > East 17 Lower")
+            }
+            SpotId::Glacier__Seals__East_17_Upper => {
+                write!(f, "{}", "Glacier > Seals > East 17 Upper")
+            }
+            SpotId::Glacier__Seals__Lower_Ledge => write!(f, "{}", "Glacier > Seals > Lower Ledge"),
+            SpotId::Glacier__Seals__Lower_Seal => write!(f, "{}", "Glacier > Seals > Lower Seal"),
+            SpotId::Glacier__Seals__Middle_Ledge => {
+                write!(f, "{}", "Glacier > Seals > Middle Ledge")
+            }
+            SpotId::Glacier__Seals__Upper_Ledge => write!(f, "{}", "Glacier > Seals > Upper Ledge"),
+            SpotId::Glacier__Seals__Upper_Seal => write!(f, "{}", "Glacier > Seals > Upper Seal"),
             SpotId::Glacier__The_Big_Drop__East => write!(f, "{}", "Glacier > The Big Drop > East"),
             SpotId::Glacier__The_Big_Drop__Small_Path => {
                 write!(f, "{}", "Glacier > The Big Drop > Small Path")
@@ -6157,10 +6299,73 @@ impl std::str::FromStr for SpotId {
             }
             "Giguna Breach > SW Save > Side Door" => Ok(SpotId::Giguna_Breach__SW_Save__Side_Door),
             "Giguna Breach > SW Save > West 11" => Ok(SpotId::Giguna_Breach__SW_Save__West_11),
+            "Glacier > Apocalypse > Bomb" => Ok(SpotId::Glacier__Apocalypse__Bomb),
+            "Glacier > Apocalypse > Bomb East" => Ok(SpotId::Glacier__Apocalypse__Bomb_East),
+            "Glacier > Apocalypse > Bomb Northwest" => {
+                Ok(SpotId::Glacier__Apocalypse__Bomb_Northwest)
+            }
+            "Glacier > Apocalypse > Center Scaffold West" => {
+                Ok(SpotId::Glacier__Apocalypse__Center_Scaffold_West)
+            }
+            "Glacier > Apocalypse > Northwest Mid-air" => {
+                Ok(SpotId::Glacier__Apocalypse__Northwest_Mid_air)
+            }
+            "Glacier > Apocalypse > Northwest Scaffold 2 West" => {
+                Ok(SpotId::Glacier__Apocalypse__Northwest_Scaffold_2_West)
+            }
+            "Glacier > Apocalypse > Northwest Switch" => {
+                Ok(SpotId::Glacier__Apocalypse__Northwest_Switch)
+            }
+            "Glacier > Apocalypse > Southwest Capsule" => {
+                Ok(SpotId::Glacier__Apocalypse__Southwest_Capsule)
+            }
+            "Glacier > Apocalypse > Southwest Corner" => {
+                Ok(SpotId::Glacier__Apocalypse__Southwest_Corner)
+            }
+            "Glacier > Apocalypse > Southwest Switch" => {
+                Ok(SpotId::Glacier__Apocalypse__Southwest_Switch)
+            }
+            "Glacier > Apocalypse > West" => Ok(SpotId::Glacier__Apocalypse__West),
+            "Glacier > Apocalypse Entry > Above Grate" => {
+                Ok(SpotId::Glacier__Apocalypse_Entry__Above_Grate)
+            }
+            "Glacier > Apocalypse Entry > Below Grate" => {
+                Ok(SpotId::Glacier__Apocalypse_Entry__Below_Grate)
+            }
+            "Glacier > Apocalypse Entry > Grate Ledge" => {
+                Ok(SpotId::Glacier__Apocalypse_Entry__Grate_Ledge)
+            }
+            "Glacier > Apocalypse Entry > Lowest Stair" => {
+                Ok(SpotId::Glacier__Apocalypse_Entry__Lowest_Stair)
+            }
+            "Glacier > Apocalypse Entry > Shaft Bottom" => {
+                Ok(SpotId::Glacier__Apocalypse_Entry__Shaft_Bottom)
+            }
             "Glacier > Apocalypse Entry > Terminal" => {
                 Ok(SpotId::Glacier__Apocalypse_Entry__Terminal)
             }
-            "Glacier > Apocalypse Entry > West" => Ok(SpotId::Glacier__Apocalypse_Entry__West),
+            "Glacier > Apocalypse Entry > West 10" => {
+                Ok(SpotId::Glacier__Apocalypse_Entry__West_10)
+            }
+            "Glacier > Apocalypse Entry > West 15 Lower" => {
+                Ok(SpotId::Glacier__Apocalypse_Entry__West_15_Lower)
+            }
+            "Glacier > Apocalypse Entry > West 15 Upper" => {
+                Ok(SpotId::Glacier__Apocalypse_Entry__West_15_Upper)
+            }
+            "Glacier > Apocalypse Hallway > Center Pillar" => {
+                Ok(SpotId::Glacier__Apocalypse_Hallway__Center_Pillar)
+            }
+            "Glacier > Apocalypse Hallway > East Pillar" => {
+                Ok(SpotId::Glacier__Apocalypse_Hallway__East_Pillar)
+            }
+            "Glacier > Apocalypse Hallway > Lower East" => {
+                Ok(SpotId::Glacier__Apocalypse_Hallway__Lower_East)
+            }
+            "Glacier > Apocalypse Hallway > Upper East" => {
+                Ok(SpotId::Glacier__Apocalypse_Hallway__Upper_East)
+            }
+            "Glacier > Apocalypse Hallway > West" => Ok(SpotId::Glacier__Apocalypse_Hallway__West),
             "Glacier > Boomerang Antechamber > East 12" => {
                 Ok(SpotId::Glacier__Boomerang_Antechamber__East_12)
             }
@@ -6195,6 +6400,11 @@ impl std::str::FromStr for SpotId {
                 Ok(SpotId::Glacier__Dock_Outside__Do_Not_Enter)
             }
             "Glacier > Dock Outside > Entry" => Ok(SpotId::Glacier__Dock_Outside__Entry),
+            "Glacier > Final Save > East" => Ok(SpotId::Glacier__Final_Save__East),
+            "Glacier > Final Save > Lower West" => Ok(SpotId::Glacier__Final_Save__Lower_West),
+            "Glacier > Final Save > Pillar" => Ok(SpotId::Glacier__Final_Save__Pillar),
+            "Glacier > Final Save > Save Point" => Ok(SpotId::Glacier__Final_Save__Save_Point),
+            "Glacier > Final Save > Upper West" => Ok(SpotId::Glacier__Final_Save__Upper_West),
             "Glacier > Grid 31,9-12 > East 10" => Ok(SpotId::Glacier__Grid_31_9_12__East_10),
             "Glacier > Grid 31,9-12 > East 9" => Ok(SpotId::Glacier__Grid_31_9_12__East_9),
             "Glacier > Grid 31,9-12 > Midair" => Ok(SpotId::Glacier__Grid_31_9_12__Midair),
@@ -6289,6 +6499,15 @@ impl std::str::FromStr for SpotId {
             "Glacier > Revival > Overhang" => Ok(SpotId::Glacier__Revival__Overhang),
             "Glacier > Revival > Save Point" => Ok(SpotId::Glacier__Revival__Save_Point),
             "Glacier > Revival > West 8" => Ok(SpotId::Glacier__Revival__West_8),
+            "Glacier > Seals > Breakable Rock" => Ok(SpotId::Glacier__Seals__Breakable_Rock),
+            "Glacier > Seals > East 15" => Ok(SpotId::Glacier__Seals__East_15),
+            "Glacier > Seals > East 17 Lower" => Ok(SpotId::Glacier__Seals__East_17_Lower),
+            "Glacier > Seals > East 17 Upper" => Ok(SpotId::Glacier__Seals__East_17_Upper),
+            "Glacier > Seals > Lower Ledge" => Ok(SpotId::Glacier__Seals__Lower_Ledge),
+            "Glacier > Seals > Lower Seal" => Ok(SpotId::Glacier__Seals__Lower_Seal),
+            "Glacier > Seals > Middle Ledge" => Ok(SpotId::Glacier__Seals__Middle_Ledge),
+            "Glacier > Seals > Upper Ledge" => Ok(SpotId::Glacier__Seals__Upper_Ledge),
+            "Glacier > Seals > Upper Seal" => Ok(SpotId::Glacier__Seals__Upper_Seal),
             "Glacier > The Big Drop > East" => Ok(SpotId::Glacier__The_Big_Drop__East),
             "Glacier > The Big Drop > Small Path" => Ok(SpotId::Glacier__The_Big_Drop__Small_Path),
             "Glacier > The Big Drop > Water Surface" => {
@@ -7034,7 +7253,9 @@ pub enum LocationId {
     Giguna_Breach__Chimney__Cache__Flask,
     Giguna_Breach__Cubby__Rocks__Health,
     Giguna_Breach__Slingshot__Ravine__Urn,
-    Glacier__Apocalypse_Entry__Terminal__Escape,
+    Glacier__Apocalypse__Center_Scaffold_West__Boss_Fight,
+    Glacier__Apocalypse__Center_Scaffold_West__Fill_It_Up,
+    Glacier__Apocalypse_Entry__Grate_Ledge__Escape,
     Glacier__Boomerang_Room__Pedestal__Item,
     Glacier__Boomerang_Room__Pedestal__Switch,
     Glacier__Compass_Room__Center__Table,
@@ -7590,8 +7811,18 @@ impl fmt::Display for LocationId {
             LocationId::Giguna_Breach__Slingshot__Ravine__Urn => {
                 write!(f, "{}", "Giguna Breach > Slingshot > Ravine > Urn")
             }
-            LocationId::Glacier__Apocalypse_Entry__Terminal__Escape => {
-                write!(f, "{}", "Glacier > Apocalypse Entry > Terminal > Escape")
+            LocationId::Glacier__Apocalypse__Center_Scaffold_West__Boss_Fight => write!(
+                f,
+                "{}",
+                "Glacier > Apocalypse > Center Scaffold West > Boss Fight"
+            ),
+            LocationId::Glacier__Apocalypse__Center_Scaffold_West__Fill_It_Up => write!(
+                f,
+                "{}",
+                "Glacier > Apocalypse > Center Scaffold West > Fill It Up"
+            ),
+            LocationId::Glacier__Apocalypse_Entry__Grate_Ledge__Escape => {
+                write!(f, "{}", "Glacier > Apocalypse Entry > Grate Ledge > Escape")
             }
             LocationId::Glacier__Boomerang_Room__Pedestal__Item => {
                 write!(f, "{}", "Glacier > Boomerang Room > Pedestal > Item")
@@ -8319,8 +8550,14 @@ impl std::str::FromStr for LocationId {
             "Giguna Breach > Slingshot > Ravine > Urn" => {
                 Ok(LocationId::Giguna_Breach__Slingshot__Ravine__Urn)
             }
-            "Glacier > Apocalypse Entry > Terminal > Escape" => {
-                Ok(LocationId::Glacier__Apocalypse_Entry__Terminal__Escape)
+            "Glacier > Apocalypse > Center Scaffold West > Boss Fight" => {
+                Ok(LocationId::Glacier__Apocalypse__Center_Scaffold_West__Boss_Fight)
+            }
+            "Glacier > Apocalypse > Center Scaffold West > Fill It Up" => {
+                Ok(LocationId::Glacier__Apocalypse__Center_Scaffold_West__Fill_It_Up)
+            }
+            "Glacier > Apocalypse Entry > Grate Ledge > Escape" => {
+                Ok(LocationId::Glacier__Apocalypse_Entry__Grate_Ledge__Escape)
             }
             "Glacier > Boomerang Room > Pedestal > Item" => {
                 Ok(LocationId::Glacier__Boomerang_Room__Pedestal__Item)
@@ -9373,7 +9610,20 @@ pub enum ExitId {
     Giguna_Breach__SW_Save__Save_Point__ex__Lower_Platform_1,
     Giguna_Breach__SW_Save__Side_Door__ex__West_11_1,
     Giguna_Breach__SW_Save__West_11__ex__Side_Door_1,
-    Glacier__Apocalypse_Entry__West__ex__Grid_43_10_11__East_1,
+    Glacier__Apocalypse__Center_Scaffold_West__Boss_Fight,
+    Glacier__Apocalypse__Center_Scaffold_West__Fill_It_Up,
+    Glacier__Apocalypse__Northwest_Mid_air__ex__Northwest_Scaffold_2_West_1,
+    Glacier__Apocalypse__Northwest_Mid_air__ex__Northwest_Scaffold_2_West_2,
+    Glacier__Apocalypse__Southwest_Capsule__ex__West_1,
+    Glacier__Apocalypse__Southwest_Capsule__ex__West_2,
+    Glacier__Apocalypse__West__ex__Final_Save__East_1,
+    Glacier__Apocalypse_Entry__Above_Grate__ex__Below_Grate_1,
+    Glacier__Apocalypse_Entry__Below_Grate__ex__Grate_Ledge_1,
+    Glacier__Apocalypse_Entry__Grate_Ledge__Escape,
+    Glacier__Apocalypse_Entry__West_10__ex__Grid_43_10_11__East_1,
+    Glacier__Apocalypse_Entry__West_15_Lower__ex__Apocalypse_Hallway__Lower_East_1,
+    Glacier__Apocalypse_Entry__West_15_Lower__ex__Lowest_Stair_1,
+    Glacier__Apocalypse_Entry__West_15_Upper__ex__Apocalypse_Hallway__Upper_East_1,
     Glacier__Boomerang_Antechamber__East_12__ex__Boomerang_Room__West_1,
     Glacier__Boomerang_Antechamber__Upper_East__ex__Boomerang_Room__Upper_West_1,
     Glacier__Boomerang_Antechamber__West_12__ex__Vertical_Room__East_12_1,
@@ -9390,6 +9640,17 @@ pub enum ExitId {
     Glacier__Compass_Room__West__ex__The_Big_Drop__East_1,
     Glacier__Dock_Outside__Do_Not_Enter__ex__Revival__East_9_1,
     Glacier__Dock_Outside__Entry__ex__Interior__Dock_Interior__Entry_1,
+    Glacier__Final_Save__East__ex__Apocalypse__West_1,
+    Glacier__Final_Save__East__ex__Upper_West_1,
+    Glacier__Final_Save__Lower_West__ex__Pillar_1,
+    Glacier__Final_Save__Lower_West__ex__Pillar_2,
+    Glacier__Final_Save__Lower_West__ex__Seals__East_17_Lower_1,
+    Glacier__Final_Save__Pillar__ex__Upper_West_1,
+    Glacier__Final_Save__Save_Point__ex__Apocalypse__Northwest_Mid_air_1,
+    Glacier__Final_Save__Save_Point__ex__Pillar_1,
+    Glacier__Final_Save__Save_Point__ex__Pillar_2,
+    Glacier__Final_Save__Upper_West__ex__Apocalypse__Northwest_Mid_air_1,
+    Glacier__Final_Save__Upper_West__ex__Seals__East_17_Upper_1,
     Glacier__Grid_31_9_12__East_10__ex__Grid_32_7_10__West_10_1,
     Glacier__Grid_31_9_12__East_9__ex__Grid_32_7_10__West_9_1,
     Glacier__Grid_31_9_12__Midair__ex__Ebih__Base_Camp__East_11_1,
@@ -9406,7 +9667,7 @@ pub enum ExitId {
     Glacier__Grid_39_40_7_9__West__ex__Grid_37_38_9__East_1,
     Glacier__Grid_42_10__East__ex__Grid_43_10_11__Top_1,
     Glacier__Grid_42_10__West__ex__Revival__Lower_East_1,
-    Glacier__Grid_43_10_11__East__ex__Apocalypse_Entry__West_1,
+    Glacier__Grid_43_10_11__East__ex__Apocalypse_Entry__West_10_1,
     Glacier__Grid_43_10_11__Lower__ex__Compass_Room__East_1,
     Glacier__Grid_43_10_11__Top__ex__Grid_42_10__East_1,
     Glacier__Lake_Main_Entrance__Ebih_Access__ex__Ebih__Base_Camp__Lake_Access_1,
@@ -10506,7 +10767,20 @@ impl fmt::Display for ExitId {
             ExitId::Giguna_Breach__SW_Save__Save_Point__ex__Lower_Platform_1 => write!(f, "{}", "Giguna Breach > SW Save > Save Point ==> Lower Platform (1)"),
             ExitId::Giguna_Breach__SW_Save__Side_Door__ex__West_11_1 => write!(f, "{}", "Giguna Breach > SW Save > Side Door ==> West 11 (1)"),
             ExitId::Giguna_Breach__SW_Save__West_11__ex__Side_Door_1 => write!(f, "{}", "Giguna Breach > SW Save > West 11 ==> Side Door (1)"),
-            ExitId::Glacier__Apocalypse_Entry__West__ex__Grid_43_10_11__East_1 => write!(f, "{}", "Glacier > Apocalypse Entry > West ==> Grid 43,10-11 > East (1)"),
+            ExitId::Glacier__Apocalypse__Center_Scaffold_West__Boss_Fight => write!(f, "{}", "Glacier > Apocalypse > Center Scaffold West > Boss Fight"),
+            ExitId::Glacier__Apocalypse__Center_Scaffold_West__Fill_It_Up => write!(f, "{}", "Glacier > Apocalypse > Center Scaffold West > Fill It Up"),
+            ExitId::Glacier__Apocalypse__Northwest_Mid_air__ex__Northwest_Scaffold_2_West_1 => write!(f, "{}", "Glacier > Apocalypse > Northwest Mid-air ==> Northwest Scaffold 2 West (1)"),
+            ExitId::Glacier__Apocalypse__Northwest_Mid_air__ex__Northwest_Scaffold_2_West_2 => write!(f, "{}", "Glacier > Apocalypse > Northwest Mid-air ==> Northwest Scaffold 2 West (2)"),
+            ExitId::Glacier__Apocalypse__Southwest_Capsule__ex__West_1 => write!(f, "{}", "Glacier > Apocalypse > Southwest Capsule ==> West (1)"),
+            ExitId::Glacier__Apocalypse__Southwest_Capsule__ex__West_2 => write!(f, "{}", "Glacier > Apocalypse > Southwest Capsule ==> West (2)"),
+            ExitId::Glacier__Apocalypse__West__ex__Final_Save__East_1 => write!(f, "{}", "Glacier > Apocalypse > West ==> Final Save > East (1)"),
+            ExitId::Glacier__Apocalypse_Entry__Above_Grate__ex__Below_Grate_1 => write!(f, "{}", "Glacier > Apocalypse Entry > Above Grate ==> Below Grate (1)"),
+            ExitId::Glacier__Apocalypse_Entry__Below_Grate__ex__Grate_Ledge_1 => write!(f, "{}", "Glacier > Apocalypse Entry > Below Grate ==> Grate Ledge (1)"),
+            ExitId::Glacier__Apocalypse_Entry__Grate_Ledge__Escape => write!(f, "{}", "Glacier > Apocalypse Entry > Grate Ledge > Escape"),
+            ExitId::Glacier__Apocalypse_Entry__West_10__ex__Grid_43_10_11__East_1 => write!(f, "{}", "Glacier > Apocalypse Entry > West 10 ==> Grid 43,10-11 > East (1)"),
+            ExitId::Glacier__Apocalypse_Entry__West_15_Lower__ex__Apocalypse_Hallway__Lower_East_1 => write!(f, "{}", "Glacier > Apocalypse Entry > West 15 Lower ==> Apocalypse Hallway > Lower East (1)"),
+            ExitId::Glacier__Apocalypse_Entry__West_15_Lower__ex__Lowest_Stair_1 => write!(f, "{}", "Glacier > Apocalypse Entry > West 15 Lower ==> Lowest Stair (1)"),
+            ExitId::Glacier__Apocalypse_Entry__West_15_Upper__ex__Apocalypse_Hallway__Upper_East_1 => write!(f, "{}", "Glacier > Apocalypse Entry > West 15 Upper ==> Apocalypse Hallway > Upper East (1)"),
             ExitId::Glacier__Boomerang_Antechamber__East_12__ex__Boomerang_Room__West_1 => write!(f, "{}", "Glacier > Boomerang Antechamber > East 12 ==> Boomerang Room > West (1)"),
             ExitId::Glacier__Boomerang_Antechamber__Upper_East__ex__Boomerang_Room__Upper_West_1 => write!(f, "{}", "Glacier > Boomerang Antechamber > Upper East ==> Boomerang Room > Upper West (1)"),
             ExitId::Glacier__Boomerang_Antechamber__West_12__ex__Vertical_Room__East_12_1 => write!(f, "{}", "Glacier > Boomerang Antechamber > West 12 ==> Vertical Room > East 12 (1)"),
@@ -10523,6 +10797,17 @@ impl fmt::Display for ExitId {
             ExitId::Glacier__Compass_Room__West__ex__The_Big_Drop__East_1 => write!(f, "{}", "Glacier > Compass Room > West ==> The Big Drop > East (1)"),
             ExitId::Glacier__Dock_Outside__Do_Not_Enter__ex__Revival__East_9_1 => write!(f, "{}", "Glacier > Dock Outside > Do Not Enter ==> Revival > East 9 (1)"),
             ExitId::Glacier__Dock_Outside__Entry__ex__Interior__Dock_Interior__Entry_1 => write!(f, "{}", "Glacier > Dock Outside > Entry ==> Interior > Dock Interior > Entry (1)"),
+            ExitId::Glacier__Final_Save__East__ex__Apocalypse__West_1 => write!(f, "{}", "Glacier > Final Save > East ==> Apocalypse > West (1)"),
+            ExitId::Glacier__Final_Save__East__ex__Upper_West_1 => write!(f, "{}", "Glacier > Final Save > East ==> Upper West (1)"),
+            ExitId::Glacier__Final_Save__Lower_West__ex__Pillar_1 => write!(f, "{}", "Glacier > Final Save > Lower West ==> Pillar (1)"),
+            ExitId::Glacier__Final_Save__Lower_West__ex__Pillar_2 => write!(f, "{}", "Glacier > Final Save > Lower West ==> Pillar (2)"),
+            ExitId::Glacier__Final_Save__Lower_West__ex__Seals__East_17_Lower_1 => write!(f, "{}", "Glacier > Final Save > Lower West ==> Seals > East 17 Lower (1)"),
+            ExitId::Glacier__Final_Save__Pillar__ex__Upper_West_1 => write!(f, "{}", "Glacier > Final Save > Pillar ==> Upper West (1)"),
+            ExitId::Glacier__Final_Save__Save_Point__ex__Apocalypse__Northwest_Mid_air_1 => write!(f, "{}", "Glacier > Final Save > Save Point ==> Apocalypse > Northwest Mid-air (1)"),
+            ExitId::Glacier__Final_Save__Save_Point__ex__Pillar_1 => write!(f, "{}", "Glacier > Final Save > Save Point ==> Pillar (1)"),
+            ExitId::Glacier__Final_Save__Save_Point__ex__Pillar_2 => write!(f, "{}", "Glacier > Final Save > Save Point ==> Pillar (2)"),
+            ExitId::Glacier__Final_Save__Upper_West__ex__Apocalypse__Northwest_Mid_air_1 => write!(f, "{}", "Glacier > Final Save > Upper West ==> Apocalypse > Northwest Mid-air (1)"),
+            ExitId::Glacier__Final_Save__Upper_West__ex__Seals__East_17_Upper_1 => write!(f, "{}", "Glacier > Final Save > Upper West ==> Seals > East 17 Upper (1)"),
             ExitId::Glacier__Grid_31_9_12__East_10__ex__Grid_32_7_10__West_10_1 => write!(f, "{}", "Glacier > Grid 31,9-12 > East 10 ==> Grid 32,7-10 > West 10 (1)"),
             ExitId::Glacier__Grid_31_9_12__East_9__ex__Grid_32_7_10__West_9_1 => write!(f, "{}", "Glacier > Grid 31,9-12 > East 9 ==> Grid 32,7-10 > West 9 (1)"),
             ExitId::Glacier__Grid_31_9_12__Midair__ex__Ebih__Base_Camp__East_11_1 => write!(f, "{}", "Glacier > Grid 31,9-12 > Midair ==> Ebih > Base Camp > East 11 (1)"),
@@ -10539,7 +10824,7 @@ impl fmt::Display for ExitId {
             ExitId::Glacier__Grid_39_40_7_9__West__ex__Grid_37_38_9__East_1 => write!(f, "{}", "Glacier > Grid 39-40,7-9 > West ==> Grid 37-38,9 > East (1)"),
             ExitId::Glacier__Grid_42_10__East__ex__Grid_43_10_11__Top_1 => write!(f, "{}", "Glacier > Grid 42,10 > East ==> Grid 43,10-11 > Top (1)"),
             ExitId::Glacier__Grid_42_10__West__ex__Revival__Lower_East_1 => write!(f, "{}", "Glacier > Grid 42,10 > West ==> Revival > Lower East (1)"),
-            ExitId::Glacier__Grid_43_10_11__East__ex__Apocalypse_Entry__West_1 => write!(f, "{}", "Glacier > Grid 43,10-11 > East ==> Apocalypse Entry > West (1)"),
+            ExitId::Glacier__Grid_43_10_11__East__ex__Apocalypse_Entry__West_10_1 => write!(f, "{}", "Glacier > Grid 43,10-11 > East ==> Apocalypse Entry > West 10 (1)"),
             ExitId::Glacier__Grid_43_10_11__Lower__ex__Compass_Room__East_1 => write!(f, "{}", "Glacier > Grid 43,10-11 > Lower ==> Compass Room > East (1)"),
             ExitId::Glacier__Grid_43_10_11__Top__ex__Grid_42_10__East_1 => write!(f, "{}", "Glacier > Grid 43,10-11 > Top ==> Grid 42,10 > East (1)"),
             ExitId::Glacier__Lake_Main_Entrance__Ebih_Access__ex__Ebih__Base_Camp__Lake_Access_1 => write!(f, "{}", "Glacier > Lake Main Entrance > Ebih Access ==> Ebih > Base Camp > Lake Access (1)"),
@@ -11644,7 +11929,20 @@ impl std::str::FromStr for ExitId {
             "Giguna Breach > SW Save > Save Point ==> Lower Platform (1)" => Ok(ExitId::Giguna_Breach__SW_Save__Save_Point__ex__Lower_Platform_1),
             "Giguna Breach > SW Save > Side Door ==> West 11 (1)" => Ok(ExitId::Giguna_Breach__SW_Save__Side_Door__ex__West_11_1),
             "Giguna Breach > SW Save > West 11 ==> Side Door (1)" => Ok(ExitId::Giguna_Breach__SW_Save__West_11__ex__Side_Door_1),
-            "Glacier > Apocalypse Entry > West ==> Grid 43,10-11 > East (1)" => Ok(ExitId::Glacier__Apocalypse_Entry__West__ex__Grid_43_10_11__East_1),
+            "Glacier > Apocalypse > Center Scaffold West > Boss Fight" => Ok(ExitId::Glacier__Apocalypse__Center_Scaffold_West__Boss_Fight),
+            "Glacier > Apocalypse > Center Scaffold West > Fill It Up" => Ok(ExitId::Glacier__Apocalypse__Center_Scaffold_West__Fill_It_Up),
+            "Glacier > Apocalypse > Northwest Mid-air ==> Northwest Scaffold 2 West (1)" => Ok(ExitId::Glacier__Apocalypse__Northwest_Mid_air__ex__Northwest_Scaffold_2_West_1),
+            "Glacier > Apocalypse > Northwest Mid-air ==> Northwest Scaffold 2 West (2)" => Ok(ExitId::Glacier__Apocalypse__Northwest_Mid_air__ex__Northwest_Scaffold_2_West_2),
+            "Glacier > Apocalypse > Southwest Capsule ==> West (1)" => Ok(ExitId::Glacier__Apocalypse__Southwest_Capsule__ex__West_1),
+            "Glacier > Apocalypse > Southwest Capsule ==> West (2)" => Ok(ExitId::Glacier__Apocalypse__Southwest_Capsule__ex__West_2),
+            "Glacier > Apocalypse > West ==> Final Save > East (1)" => Ok(ExitId::Glacier__Apocalypse__West__ex__Final_Save__East_1),
+            "Glacier > Apocalypse Entry > Above Grate ==> Below Grate (1)" => Ok(ExitId::Glacier__Apocalypse_Entry__Above_Grate__ex__Below_Grate_1),
+            "Glacier > Apocalypse Entry > Below Grate ==> Grate Ledge (1)" => Ok(ExitId::Glacier__Apocalypse_Entry__Below_Grate__ex__Grate_Ledge_1),
+            "Glacier > Apocalypse Entry > Grate Ledge > Escape" => Ok(ExitId::Glacier__Apocalypse_Entry__Grate_Ledge__Escape),
+            "Glacier > Apocalypse Entry > West 10 ==> Grid 43,10-11 > East (1)" => Ok(ExitId::Glacier__Apocalypse_Entry__West_10__ex__Grid_43_10_11__East_1),
+            "Glacier > Apocalypse Entry > West 15 Lower ==> Apocalypse Hallway > Lower East (1)" => Ok(ExitId::Glacier__Apocalypse_Entry__West_15_Lower__ex__Apocalypse_Hallway__Lower_East_1),
+            "Glacier > Apocalypse Entry > West 15 Lower ==> Lowest Stair (1)" => Ok(ExitId::Glacier__Apocalypse_Entry__West_15_Lower__ex__Lowest_Stair_1),
+            "Glacier > Apocalypse Entry > West 15 Upper ==> Apocalypse Hallway > Upper East (1)" => Ok(ExitId::Glacier__Apocalypse_Entry__West_15_Upper__ex__Apocalypse_Hallway__Upper_East_1),
             "Glacier > Boomerang Antechamber > East 12 ==> Boomerang Room > West (1)" => Ok(ExitId::Glacier__Boomerang_Antechamber__East_12__ex__Boomerang_Room__West_1),
             "Glacier > Boomerang Antechamber > Upper East ==> Boomerang Room > Upper West (1)" => Ok(ExitId::Glacier__Boomerang_Antechamber__Upper_East__ex__Boomerang_Room__Upper_West_1),
             "Glacier > Boomerang Antechamber > West 12 ==> Vertical Room > East 12 (1)" => Ok(ExitId::Glacier__Boomerang_Antechamber__West_12__ex__Vertical_Room__East_12_1),
@@ -11661,6 +11959,17 @@ impl std::str::FromStr for ExitId {
             "Glacier > Compass Room > West ==> The Big Drop > East (1)" => Ok(ExitId::Glacier__Compass_Room__West__ex__The_Big_Drop__East_1),
             "Glacier > Dock Outside > Do Not Enter ==> Revival > East 9 (1)" => Ok(ExitId::Glacier__Dock_Outside__Do_Not_Enter__ex__Revival__East_9_1),
             "Glacier > Dock Outside > Entry ==> Interior > Dock Interior > Entry (1)" => Ok(ExitId::Glacier__Dock_Outside__Entry__ex__Interior__Dock_Interior__Entry_1),
+            "Glacier > Final Save > East ==> Apocalypse > West (1)" => Ok(ExitId::Glacier__Final_Save__East__ex__Apocalypse__West_1),
+            "Glacier > Final Save > East ==> Upper West (1)" => Ok(ExitId::Glacier__Final_Save__East__ex__Upper_West_1),
+            "Glacier > Final Save > Lower West ==> Pillar (1)" => Ok(ExitId::Glacier__Final_Save__Lower_West__ex__Pillar_1),
+            "Glacier > Final Save > Lower West ==> Pillar (2)" => Ok(ExitId::Glacier__Final_Save__Lower_West__ex__Pillar_2),
+            "Glacier > Final Save > Lower West ==> Seals > East 17 Lower (1)" => Ok(ExitId::Glacier__Final_Save__Lower_West__ex__Seals__East_17_Lower_1),
+            "Glacier > Final Save > Pillar ==> Upper West (1)" => Ok(ExitId::Glacier__Final_Save__Pillar__ex__Upper_West_1),
+            "Glacier > Final Save > Save Point ==> Apocalypse > Northwest Mid-air (1)" => Ok(ExitId::Glacier__Final_Save__Save_Point__ex__Apocalypse__Northwest_Mid_air_1),
+            "Glacier > Final Save > Save Point ==> Pillar (1)" => Ok(ExitId::Glacier__Final_Save__Save_Point__ex__Pillar_1),
+            "Glacier > Final Save > Save Point ==> Pillar (2)" => Ok(ExitId::Glacier__Final_Save__Save_Point__ex__Pillar_2),
+            "Glacier > Final Save > Upper West ==> Apocalypse > Northwest Mid-air (1)" => Ok(ExitId::Glacier__Final_Save__Upper_West__ex__Apocalypse__Northwest_Mid_air_1),
+            "Glacier > Final Save > Upper West ==> Seals > East 17 Upper (1)" => Ok(ExitId::Glacier__Final_Save__Upper_West__ex__Seals__East_17_Upper_1),
             "Glacier > Grid 31,9-12 > East 10 ==> Grid 32,7-10 > West 10 (1)" => Ok(ExitId::Glacier__Grid_31_9_12__East_10__ex__Grid_32_7_10__West_10_1),
             "Glacier > Grid 31,9-12 > East 9 ==> Grid 32,7-10 > West 9 (1)" => Ok(ExitId::Glacier__Grid_31_9_12__East_9__ex__Grid_32_7_10__West_9_1),
             "Glacier > Grid 31,9-12 > Midair ==> Ebih > Base Camp > East 11 (1)" => Ok(ExitId::Glacier__Grid_31_9_12__Midair__ex__Ebih__Base_Camp__East_11_1),
@@ -11677,7 +11986,7 @@ impl std::str::FromStr for ExitId {
             "Glacier > Grid 39-40,7-9 > West ==> Grid 37-38,9 > East (1)" => Ok(ExitId::Glacier__Grid_39_40_7_9__West__ex__Grid_37_38_9__East_1),
             "Glacier > Grid 42,10 > East ==> Grid 43,10-11 > Top (1)" => Ok(ExitId::Glacier__Grid_42_10__East__ex__Grid_43_10_11__Top_1),
             "Glacier > Grid 42,10 > West ==> Revival > Lower East (1)" => Ok(ExitId::Glacier__Grid_42_10__West__ex__Revival__Lower_East_1),
-            "Glacier > Grid 43,10-11 > East ==> Apocalypse Entry > West (1)" => Ok(ExitId::Glacier__Grid_43_10_11__East__ex__Apocalypse_Entry__West_1),
+            "Glacier > Grid 43,10-11 > East ==> Apocalypse Entry > West 10 (1)" => Ok(ExitId::Glacier__Grid_43_10_11__East__ex__Apocalypse_Entry__West_10_1),
             "Glacier > Grid 43,10-11 > Lower ==> Compass Room > East (1)" => Ok(ExitId::Glacier__Grid_43_10_11__Lower__ex__Compass_Room__East_1),
             "Glacier > Grid 43,10-11 > Top ==> Grid 42,10 > East (1)" => Ok(ExitId::Glacier__Grid_43_10_11__Top__ex__Grid_42_10__East_1),
             "Glacier > Lake Main Entrance > Ebih Access ==> Ebih > Base Camp > Lake Access (1)" => Ok(ExitId::Glacier__Lake_Main_Entrance__Ebih_Access__ex__Ebih__Base_Camp__Lake_Access_1),
@@ -12143,6 +12452,7 @@ pub enum ActionId {
     Giguna_Breach__Peak__Save_Point__Save,
     Giguna_Breach__SW_Save__Save_Point__Save,
     Giguna_Breach__SW_Save__West_11__Open_Door,
+    Glacier__Final_Save__Save_Point__Save,
     Glacier__Revival__Save_Point__Save,
     Global__Become_Drone,
     Global__Become_Indra,
@@ -12461,6 +12771,9 @@ impl fmt::Display for ActionId {
             ActionId::Giguna_Breach__SW_Save__West_11__Open_Door => {
                 write!(f, "{}", "Giguna Breach > SW Save > West 11 > Open Door")
             }
+            ActionId::Glacier__Final_Save__Save_Point__Save => {
+                write!(f, "{}", "Glacier > Final Save > Save Point > Save")
+            }
             ActionId::Glacier__Revival__Save_Point__Save => {
                 write!(f, "{}", "Glacier > Revival > Save Point > Save")
             }
@@ -12770,6 +13083,9 @@ impl std::str::FromStr for ActionId {
             "Giguna Breach > SW Save > West 11 > Open Door" => {
                 Ok(ActionId::Giguna_Breach__SW_Save__West_11__Open_Door)
             }
+            "Glacier > Final Save > Save Point > Save" => {
+                Ok(ActionId::Glacier__Final_Save__Save_Point__Save)
+            }
             "Glacier > Revival > Save Point > Save" => {
                 Ok(ActionId::Glacier__Revival__Save_Point__Save)
             }
@@ -12868,6 +13184,7 @@ pub enum CanonId {
     Giguna_Gateway_Block,
     Giguna_Gubi,
     Ledge_Grab,
+    Apocalypse_Bomb,
     Melee_Charge,
     Irikar_Royal_Storage_Wall,
     Irikar_Royal_Storage_Flask,
@@ -12917,6 +13234,7 @@ impl fmt::Display for CanonId {
             CanonId::Giguna_Gateway_Block => write!(f, "{}", "Giguna_Gateway_Block"),
             CanonId::Giguna_Gubi => write!(f, "{}", "Giguna_Gubi"),
             CanonId::Ledge_Grab => write!(f, "{}", "Ledge_Grab"),
+            CanonId::Apocalypse_Bomb => write!(f, "{}", "Apocalypse_Bomb"),
             CanonId::Melee_Charge => write!(f, "{}", "Melee_Charge"),
             CanonId::Irikar_Royal_Storage_Wall => write!(f, "{}", "Irikar_Royal_Storage_Wall"),
             CanonId::Irikar_Royal_Storage_Flask => write!(f, "{}", "Irikar_Royal_Storage_Flask"),
@@ -12972,6 +13290,7 @@ impl std::str::FromStr for CanonId {
             "Giguna_Gateway_Block" => Ok(CanonId::Giguna_Gateway_Block),
             "Giguna_Gubi" => Ok(CanonId::Giguna_Gubi),
             "Ledge_Grab" => Ok(CanonId::Ledge_Grab),
+            "Apocalypse_Bomb" => Ok(CanonId::Apocalypse_Bomb),
             "Melee_Charge" => Ok(CanonId::Melee_Charge),
             "Irikar_Royal_Storage_Wall" => Ok(CanonId::Irikar_Royal_Storage_Wall),
             "Irikar_Royal_Storage_Flask" => Ok(CanonId::Irikar_Royal_Storage_Flask),

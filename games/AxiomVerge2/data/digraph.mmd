@@ -1102,8 +1102,53 @@ subgraph Glacier
         Glacier__Lake_Main_Entrance__Lake_Access(Lake Access);
     end
     subgraph Glacier__Apocalypse_Entry[Apocalypse Entry]
-        Glacier__Apocalypse_Entry__West(West);
+        Glacier__Apocalypse_Entry__West_10(West 10);
         Glacier__Apocalypse_Entry__Terminal(Terminal);
+        Glacier__Apocalypse_Entry__Grate_Ledge(Grate Ledge);
+        Glacier__Apocalypse_Entry__Above_Grate(Above Grate);
+        Glacier__Apocalypse_Entry__Below_Grate(Below Grate);
+        Glacier__Apocalypse_Entry__Shaft_Bottom(Shaft Bottom);
+        Glacier__Apocalypse_Entry__Lowest_Stair(Lowest Stair);
+        Glacier__Apocalypse_Entry__West_15_Lower(West 15 Lower);
+        Glacier__Apocalypse_Entry__West_15_Upper(West 15 Upper);
+    end
+    subgraph Glacier__Apocalypse_Hallway[Apocalypse Hallway]
+        Glacier__Apocalypse_Hallway__Lower_East(Lower East);
+        Glacier__Apocalypse_Hallway__Upper_East(Upper East);
+        Glacier__Apocalypse_Hallway__East_Pillar(East Pillar);
+        Glacier__Apocalypse_Hallway__Center_Pillar(Center Pillar);
+        Glacier__Apocalypse_Hallway__West(West);
+    end
+    subgraph Glacier__Seals[Seals]
+        Glacier__Seals__East_15(East 15);
+        Glacier__Seals__Upper_Ledge(Upper Ledge);
+        Glacier__Seals__Upper_Seal(Upper Seal);
+        Glacier__Seals__Middle_Ledge(Middle Ledge);
+        Glacier__Seals__Breakable_Rock(Breakable Rock);
+        Glacier__Seals__Lower_Seal(Lower Seal);
+        Glacier__Seals__Lower_Ledge(Lower Ledge);
+        Glacier__Seals__East_17_Upper(East 17 Upper);
+        Glacier__Seals__East_17_Lower(East 17 Lower);
+    end
+    subgraph Glacier__Final_Save[Final Save]
+        Glacier__Final_Save__Upper_West(Upper West);
+        Glacier__Final_Save__Lower_West(Lower West);
+        Glacier__Final_Save__Pillar(Pillar);
+        Glacier__Final_Save__Save_Point(Save Point);
+        Glacier__Final_Save__East(East);
+    end
+    subgraph Glacier__Apocalypse[Apocalypse]
+        Glacier__Apocalypse__West(West);
+        Glacier__Apocalypse__Northwest_Mid_air(Northwest Mid-air);
+        Glacier__Apocalypse__Northwest_Scaffold_2_West(Northwest Scaffold 2 West);
+        Glacier__Apocalypse__Northwest_Switch(Northwest Switch);
+        Glacier__Apocalypse__Center_Scaffold_West(Center Scaffold West);
+        Glacier__Apocalypse__Southwest_Switch(Southwest Switch);
+        Glacier__Apocalypse__Southwest_Capsule(Southwest Capsule);
+        Glacier__Apocalypse__Southwest_Corner(Southwest Corner);
+        Glacier__Apocalypse__Bomb_Northwest(Bomb Northwest);
+        Glacier__Apocalypse__Bomb_East(Bomb East);
+        Glacier__Apocalypse__Bomb(Bomb);
     end
 end
 subgraph Interior
@@ -1962,7 +2007,18 @@ Giguna__West_Caverns__Tunnel_Fork --> Giguna__West_Caverns__Tunnel_Bottom
 Giguna__West_Caverns__Tunnel_Fork --> Giguna__West_Caverns__Tunnel_Entrance
 Giguna__West_Caverns__West_13 --> Giguna__Far_Corner__East_13
 Giguna__West_Tower__Southwest --> Giguna__West_Caverns__Northwest
-Glacier__Apocalypse_Entry__West <--> Glacier__Grid_43_10_11__East
+Glacier__Apocalypse_Entry__Above_Grate --> Glacier__Apocalypse_Entry__Below_Grate
+Glacier__Apocalypse_Entry__Below_Grate --> Glacier__Apocalypse_Entry__Grate_Ledge
+Glacier__Apocalypse_Entry__Grate_Ledge --> Glacier__Apocalypse_Entry__Terminal
+Glacier__Apocalypse_Entry__West_10 <--> Glacier__Grid_43_10_11__East
+Glacier__Apocalypse_Entry__West_15_Lower --> Glacier__Apocalypse_Entry__Lowest_Stair
+Glacier__Apocalypse_Entry__West_15_Lower --> Glacier__Apocalypse_Hallway__Lower_East
+Glacier__Apocalypse_Entry__West_15_Upper --> Glacier__Apocalypse_Hallway__Upper_East
+Glacier__Apocalypse__Center_Scaffold_West --> Glacier__Apocalypse__Bomb_East
+Glacier__Apocalypse__Center_Scaffold_West --> Glacier__Apocalypse__Bomb_Northwest
+Glacier__Apocalypse__Northwest_Mid_air --> Glacier__Apocalypse__Northwest_Scaffold_2_West
+Glacier__Apocalypse__Southwest_Capsule --> Glacier__Apocalypse__West
+Glacier__Apocalypse__West <--> Glacier__Final_Save__East
 Glacier__Boomerang_Antechamber__East_12 <--> Glacier__Boomerang_Room__West
 Glacier__Boomerang_Antechamber__Upper_East <--> Glacier__Boomerang_Room__Upper_West
 Glacier__Boomerang_Antechamber__West_12 <--> Glacier__Vertical_Room__East_12
@@ -1975,6 +2031,14 @@ Glacier__Compass_Room__East <--> Glacier__Grid_43_10_11__Lower
 Glacier__Compass_Room__West <--> Glacier__The_Big_Drop__East
 Glacier__Dock_Outside__Do_Not_Enter <--> Glacier__Revival__East_9
 Glacier__Dock_Outside__Entry <--> Interior__Dock_Interior__Entry
+Glacier__Final_Save__East --> Glacier__Final_Save__Upper_West
+Glacier__Final_Save__Lower_West --> Glacier__Final_Save__Pillar
+Glacier__Final_Save__Lower_West --> Glacier__Seals__East_17_Lower
+Glacier__Final_Save__Pillar --> Glacier__Final_Save__Upper_West
+Glacier__Final_Save__Save_Point --> Glacier__Apocalypse__Northwest_Mid_air
+Glacier__Final_Save__Save_Point --> Glacier__Final_Save__Pillar
+Glacier__Final_Save__Upper_West --> Glacier__Apocalypse__Northwest_Mid_air
+Glacier__Final_Save__Upper_West --> Glacier__Seals__East_17_Upper
 Glacier__Grid_31_9_12__East_10 --> Glacier__Grid_32_7_10__West_10
 Glacier__Grid_31_9_12__East_9 <--> Glacier__Grid_32_7_10__West_9
 Glacier__Grid_32_7_10__East_8 <--> Glacier__Peak__West_8

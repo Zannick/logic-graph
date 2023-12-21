@@ -1527,6 +1527,14 @@ pub fn access_infect(ctx: &Context, world: &graph::World) -> bool {
     // Infect
     ctx.has(Item::Infect)
 }
+pub fn access_infect_and_anuman(ctx: &Context, world: &graph::World) -> bool {
+    // Infect and Anuman
+    (ctx.has(Item::Infect) && ctx.has(Item::Anuman))
+}
+pub fn access_infect_and_not_anuman(ctx: &Context, world: &graph::World) -> bool {
+    // Infect and not Anuman
+    (ctx.has(Item::Infect) && !ctx.has(Item::Anuman))
+}
 pub fn access_infect_l1(ctx: &Context, world: &graph::World) -> bool {
     // Infect_L1
     ctx.has(Item::Infect_L1)
