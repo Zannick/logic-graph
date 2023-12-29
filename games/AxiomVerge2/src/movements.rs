@@ -1172,7 +1172,7 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
             [false],
             SpotId::Annuna__Mirror_Match__Eastward,
             SpotId::Annuna__Mirror_Match__Save_Point,
-        ) => 33157,
+        ) => 1578,
         (
             [false],
             SpotId::Annuna__Mirror_Match__Plinth,
@@ -1182,7 +1182,7 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
             [false],
             SpotId::Annuna__Mirror_Match__Save_Point,
             SpotId::Annuna__Mirror_Match__Eastward,
-        ) => 33157,
+        ) => 1578,
         (
             [false],
             SpotId::Annuna__Mirror_Match__Staircase,
@@ -1202,7 +1202,7 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
             [false],
             SpotId::Annuna__Mirror_Match__West_Gap,
             SpotId::Annuna__Mirror_Match__Save_Point,
-        ) => 30526,
+        ) => 1052,
         (
             [false],
             SpotId::Annuna__Sniper_Valley__Bridge_End,
@@ -9426,7 +9426,7 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
             [true],
             SpotId::Annuna__Mirror_Match__Eastward,
             SpotId::Annuna__Mirror_Match__Save_Point,
-        ) => 33157,
+        ) => 1578,
         (
             [true],
             SpotId::Annuna__Mirror_Match__Plinth,
@@ -9436,7 +9436,7 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
             [true],
             SpotId::Annuna__Mirror_Match__Save_Point,
             SpotId::Annuna__Mirror_Match__Eastward,
-        ) => 33157,
+        ) => 1578,
         (
             [true],
             SpotId::Annuna__Mirror_Match__Staircase,
@@ -9454,7 +9454,7 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
             [true],
             SpotId::Annuna__Mirror_Match__West_Gap,
             SpotId::Annuna__Mirror_Match__Save_Point,
-        ) => 30526,
+        ) => 1052,
         (
             [true],
             SpotId::Annuna__Sniper_Valley__Bridge_End,
@@ -23612,7 +23612,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Annuna__Mirror_Match__Central_Pillar,
             SpotId::Annuna__Mirror_Match__Save_Point,
-            33684,
+            2105,
         ),
         (
             SpotId::Annuna__Mirror_Match__Central_Pillar,
@@ -23702,7 +23702,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Annuna__Mirror_Match__Eastward,
             SpotId::Annuna__Mirror_Match__Save_Point,
-            33157,
+            1578,
         ),
         (
             SpotId::Annuna__Mirror_Match__Eastward,
@@ -23732,7 +23732,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Annuna__Mirror_Match__Save_Point,
             SpotId::Annuna__Mirror_Match__Eastward,
-            33157,
+            1578,
         ),
         (
             SpotId::Annuna__Mirror_Match__Save_Point,
@@ -23782,7 +23782,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Annuna__Mirror_Match__West_Gap,
             SpotId::Annuna__Mirror_Match__Save_Point,
-            30526,
+            1052,
         ),
         (
             SpotId::Annuna__Mirror_Match__West_Gap,
@@ -42936,13 +42936,13 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
             SpotId::Annuna__Mirror_Match__Waving_Distance,
         ) => Some(877),
         (SpotId::Annuna__Mirror_Match__Eastward, SpotId::Annuna__Mirror_Match__Save_Point) => {
-            Some(33157)
+            Some(1578)
         }
         (SpotId::Annuna__Mirror_Match__Plinth, SpotId::Annuna__Mirror_Match__East_26_Lower) => {
             Some(1403)
         }
         (SpotId::Annuna__Mirror_Match__Save_Point, SpotId::Annuna__Mirror_Match__Eastward) => {
-            Some(33157)
+            Some(1578)
         }
         (SpotId::Annuna__Mirror_Match__Staircase, SpotId::Annuna__Mirror_Match__East_25_Lower) => {
             Some(2982)
@@ -42955,7 +42955,7 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
             Some(526)
         }
         (SpotId::Annuna__Mirror_Match__West_Gap, SpotId::Annuna__Mirror_Match__Save_Point) => {
-            Some(30526)
+            Some(1052)
         }
         (SpotId::Annuna__Sniper_Valley__Bridge_End, SpotId::Annuna__Sniper_Valley__Table) => {
             Some(2105)
@@ -48773,13 +48773,13 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
             SpotId::Annuna__Mirror_Match__Waving_Distance,
         ) => (Some(877), vec![]),
         (SpotId::Annuna__Mirror_Match__Eastward, SpotId::Annuna__Mirror_Match__Save_Point) => {
-            (Some(33157), vec![])
+            (Some(1578), vec![])
         }
         (SpotId::Annuna__Mirror_Match__Plinth, SpotId::Annuna__Mirror_Match__East_26_Lower) => {
             (Some(1403), vec![])
         }
         (SpotId::Annuna__Mirror_Match__Save_Point, SpotId::Annuna__Mirror_Match__Eastward) => {
-            (Some(33157), vec![])
+            (Some(1578), vec![])
         }
         (SpotId::Annuna__Mirror_Match__Staircase, SpotId::Annuna__Mirror_Match__East_25_Lower) => {
             (Some(2982), vec![])
@@ -48792,7 +48792,7 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
             (Some(526), vec![])
         }
         (SpotId::Annuna__Mirror_Match__West_Gap, SpotId::Annuna__Mirror_Match__Save_Point) => {
-            (Some(30526), vec![])
+            (Some(1052), vec![])
         }
         (SpotId::Annuna__Sniper_Valley__Bridge_End, SpotId::Annuna__Sniper_Valley__Table) => {
             (Some(2105), vec![])

@@ -12967,7 +12967,7 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
         },
         ExitId::Annuna__Mirror_Match__Central_Pillar__ex__Save_Point_1 => Exit {
             id: ExitId::Annuna__Mirror_Match__Central_Pillar__ex__Save_Point_1,
-            time: 33684,
+            time: 2105,
             dest: SpotId::Annuna__Mirror_Match__Save_Point,
             price: Currency::Free,
             loc_id: None,

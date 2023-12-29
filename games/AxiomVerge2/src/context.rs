@@ -6858,6 +6858,10 @@ impl context::Ctx for Context {
                     self.cbits1
                         .insert(flags::ContextBits1::MAP__ANNUNA__MIRROR_MATCH__SAVE);
                 }
+                SpotId::Annuna__Mirror_Match__Save_Point => {
+                    self.cbits1
+                        .insert(flags::ContextBits1::MAP__ANNUNA__MIRROR_MATCH__SAVE);
+                }
                 SpotId::Annuna__Mirror_Match__West_Gap => {
                     self.cbits1
                         .insert(flags::ContextBits1::MAP__ANNUNA__MIRROR_MATCH__SAVE);

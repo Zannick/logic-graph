@@ -100,7 +100,7 @@ digraph AxiomVerge2 {
         node[fillcolor="2"];
         Annuna__Mirror_Match__West_25 [label = "", pos = "96.15,-41.333333!"];
         Annuna__Mirror_Match__West_Gap [label = "", pos = "96.6,-41.666667!"];
-        Annuna__Mirror_Match__Save_Point [label = "", pos = "70.5,-42.333333!"];
+        Annuna__Mirror_Match__Save_Point [label = "", pos = "97.5,-42.333333!"];
         Annuna__Mirror_Match__Eastward [label = "", pos = "98.85,-42.333333!"];
         Annuna__Mirror_Match__Staircase [label = "", pos = "99.3,-42.333333!"];
         Annuna__Mirror_Match__East_25_Lower [label = "", pos = "101.85,-41.333333!"];
