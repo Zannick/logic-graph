@@ -203,6 +203,10 @@ pub fn access_anuman_and_grab(ctx: &Context, world: &graph::World) -> bool {
     // Anuman and $grab
     (ctx.has(Item::Anuman) && helper__grab!(ctx, world))
 }
+pub fn access_anunna_vertical_room_gate(ctx: &Context, world: &graph::World) -> bool {
+    // Anunna_Vertical_Room_Gate
+    ctx.has(Item::Anunna_Vertical_Room_Gate)
+}
 pub fn access_apocalypse_bomb(ctx: &Context, world: &graph::World) -> bool {
     // Apocalypse_Bomb
     ctx.has(Item::Apocalypse_Bomb)
@@ -1421,6 +1425,10 @@ pub fn access_grab(ctx: &Context, world: &graph::World) -> bool {
 pub fn access_grab_and_annuna_east_bridge_gate(ctx: &Context, world: &graph::World) -> bool {
     // $grab and Annuna_East_Bridge_Gate
     (helper__grab!(ctx, world) && ctx.has(Item::Annuna_East_Bridge_Gate))
+}
+pub fn access_grab_and_anuman(ctx: &Context, world: &graph::World) -> bool {
+    // $grab and Anuman
+    (helper__grab!(ctx, world) && ctx.has(Item::Anuman))
 }
 pub fn access_grab_and_can_deploy(ctx: &Context, world: &graph::World) -> bool {
     // $grab and $can_deploy

@@ -94,6 +94,7 @@ pub enum AreaId {
     Amagi__Liru_Room,
     Amagi__Main_Area,
     Amagi__West_Lake,
+    Annuna__Center_Save,
     Annuna__East_Bridge,
     Annuna__East_Climb,
     Annuna__East_Hideout,
@@ -102,6 +103,7 @@ pub enum AreaId {
     Annuna__Lower_Hallway,
     Annuna__Mirror_Match,
     Annuna__Sniper_Valley,
+    Annuna__Twisty_Passages,
     Annuna__Udug_Gate,
     Annuna__Vertical_Room,
     Annuna__West_Bridge,
@@ -237,6 +239,7 @@ impl fmt::Display for AreaId {
             AreaId::Amagi__Liru_Room => write!(f, "{}", "Amagi > Liru Room"),
             AreaId::Amagi__Main_Area => write!(f, "{}", "Amagi > Main Area"),
             AreaId::Amagi__West_Lake => write!(f, "{}", "Amagi > West Lake"),
+            AreaId::Annuna__Center_Save => write!(f, "{}", "Annuna > Center Save"),
             AreaId::Annuna__East_Bridge => write!(f, "{}", "Annuna > East Bridge"),
             AreaId::Annuna__East_Climb => write!(f, "{}", "Annuna > East Climb"),
             AreaId::Annuna__East_Hideout => write!(f, "{}", "Annuna > East Hideout"),
@@ -245,6 +248,7 @@ impl fmt::Display for AreaId {
             AreaId::Annuna__Lower_Hallway => write!(f, "{}", "Annuna > Lower Hallway"),
             AreaId::Annuna__Mirror_Match => write!(f, "{}", "Annuna > Mirror Match"),
             AreaId::Annuna__Sniper_Valley => write!(f, "{}", "Annuna > Sniper Valley"),
+            AreaId::Annuna__Twisty_Passages => write!(f, "{}", "Annuna > Twisty Passages"),
             AreaId::Annuna__Udug_Gate => write!(f, "{}", "Annuna > Udug Gate"),
             AreaId::Annuna__Vertical_Room => write!(f, "{}", "Annuna > Vertical Room"),
             AreaId::Annuna__West_Bridge => write!(f, "{}", "Annuna > West Bridge"),
@@ -407,6 +411,7 @@ impl std::str::FromStr for AreaId {
             "Amagi > Liru Room" => Ok(AreaId::Amagi__Liru_Room),
             "Amagi > Main Area" => Ok(AreaId::Amagi__Main_Area),
             "Amagi > West Lake" => Ok(AreaId::Amagi__West_Lake),
+            "Annuna > Center Save" => Ok(AreaId::Annuna__Center_Save),
             "Annuna > East Bridge" => Ok(AreaId::Annuna__East_Bridge),
             "Annuna > East Climb" => Ok(AreaId::Annuna__East_Climb),
             "Annuna > East Hideout" => Ok(AreaId::Annuna__East_Hideout),
@@ -415,6 +420,7 @@ impl std::str::FromStr for AreaId {
             "Annuna > Lower Hallway" => Ok(AreaId::Annuna__Lower_Hallway),
             "Annuna > Mirror Match" => Ok(AreaId::Annuna__Mirror_Match),
             "Annuna > Sniper Valley" => Ok(AreaId::Annuna__Sniper_Valley),
+            "Annuna > Twisty Passages" => Ok(AreaId::Annuna__Twisty_Passages),
             "Annuna > Udug Gate" => Ok(AreaId::Annuna__Udug_Gate),
             "Annuna > Vertical Room" => Ok(AreaId::Annuna__Vertical_Room),
             "Annuna > West Bridge" => Ok(AreaId::Annuna__West_Bridge),
@@ -656,6 +662,10 @@ pub enum SpotId {
     Amagi__West_Lake__West_Cliff,
     Amagi__West_Lake__West_Platform,
     Amagi__West_Lake__West_Shore,
+    Annuna__Center_Save__East,
+    Annuna__Center_Save__Save_Point,
+    Annuna__Center_Save__West_Catwalk,
+    Annuna__Center_Save__West_Floor,
     Annuna__East_Bridge__Below_Cavern,
     Annuna__East_Bridge__Below_Gate_Button,
     Annuna__East_Bridge__Bridge_Top_East,
@@ -755,9 +765,23 @@ pub enum SpotId {
     Annuna__Sniper_Valley__West_24,
     Annuna__Sniper_Valley__West_25_Lower,
     Annuna__Sniper_Valley__West_25_Upper,
+    Annuna__Twisty_Passages__East_Catwalk,
+    Annuna__Twisty_Passages__East_Floor,
     Annuna__Udug_Gate__East,
+    Annuna__Vertical_Room__East_21,
     Annuna__Vertical_Room__East_22,
+    Annuna__Vertical_Room__Gate_Button,
+    Annuna__Vertical_Room__Gate_Ledge,
+    Annuna__Vertical_Room__Lower_Ledge,
     Annuna__Vertical_Room__Lower_Mid,
+    Annuna__Vertical_Room__Lower_Ministair,
+    Annuna__Vertical_Room__Lower_Platform_1_Left,
+    Annuna__Vertical_Room__Lower_Platform_1_Right,
+    Annuna__Vertical_Room__Lower_Platform_2_Left,
+    Annuna__Vertical_Room__Lower_Platform_2_Right,
+    Annuna__Vertical_Room__Middle_Overhang,
+    Annuna__Vertical_Room__Plinth,
+    Annuna__Vertical_Room__West_21,
     Annuna__Vertical_Room__West_22,
     Annuna__West_Bridge__Below_Tunnel,
     Annuna__West_Bridge__East_22,
@@ -2051,6 +2075,16 @@ impl fmt::Display for SpotId {
             SpotId::Amagi__West_Lake__West_Shore => {
                 write!(f, "{}", "Amagi > West Lake > West Shore")
             }
+            SpotId::Annuna__Center_Save__East => write!(f, "{}", "Annuna > Center Save > East"),
+            SpotId::Annuna__Center_Save__Save_Point => {
+                write!(f, "{}", "Annuna > Center Save > Save Point")
+            }
+            SpotId::Annuna__Center_Save__West_Catwalk => {
+                write!(f, "{}", "Annuna > Center Save > West Catwalk")
+            }
+            SpotId::Annuna__Center_Save__West_Floor => {
+                write!(f, "{}", "Annuna > Center Save > West Floor")
+            }
             SpotId::Annuna__East_Bridge__Below_Cavern => {
                 write!(f, "{}", "Annuna > East Bridge > Below Cavern")
             }
@@ -2334,12 +2368,54 @@ impl fmt::Display for SpotId {
             SpotId::Annuna__Sniper_Valley__West_25_Upper => {
                 write!(f, "{}", "Annuna > Sniper Valley > West 25 Upper")
             }
+            SpotId::Annuna__Twisty_Passages__East_Catwalk => {
+                write!(f, "{}", "Annuna > Twisty Passages > East Catwalk")
+            }
+            SpotId::Annuna__Twisty_Passages__East_Floor => {
+                write!(f, "{}", "Annuna > Twisty Passages > East Floor")
+            }
             SpotId::Annuna__Udug_Gate__East => write!(f, "{}", "Annuna > Udug Gate > East"),
+            SpotId::Annuna__Vertical_Room__East_21 => {
+                write!(f, "{}", "Annuna > Vertical Room > East 21")
+            }
             SpotId::Annuna__Vertical_Room__East_22 => {
                 write!(f, "{}", "Annuna > Vertical Room > East 22")
             }
+            SpotId::Annuna__Vertical_Room__Gate_Button => {
+                write!(f, "{}", "Annuna > Vertical Room > Gate Button")
+            }
+            SpotId::Annuna__Vertical_Room__Gate_Ledge => {
+                write!(f, "{}", "Annuna > Vertical Room > Gate Ledge")
+            }
+            SpotId::Annuna__Vertical_Room__Lower_Ledge => {
+                write!(f, "{}", "Annuna > Vertical Room > Lower Ledge")
+            }
             SpotId::Annuna__Vertical_Room__Lower_Mid => {
                 write!(f, "{}", "Annuna > Vertical Room > Lower Mid")
+            }
+            SpotId::Annuna__Vertical_Room__Lower_Ministair => {
+                write!(f, "{}", "Annuna > Vertical Room > Lower Ministair")
+            }
+            SpotId::Annuna__Vertical_Room__Lower_Platform_1_Left => {
+                write!(f, "{}", "Annuna > Vertical Room > Lower Platform 1 Left")
+            }
+            SpotId::Annuna__Vertical_Room__Lower_Platform_1_Right => {
+                write!(f, "{}", "Annuna > Vertical Room > Lower Platform 1 Right")
+            }
+            SpotId::Annuna__Vertical_Room__Lower_Platform_2_Left => {
+                write!(f, "{}", "Annuna > Vertical Room > Lower Platform 2 Left")
+            }
+            SpotId::Annuna__Vertical_Room__Lower_Platform_2_Right => {
+                write!(f, "{}", "Annuna > Vertical Room > Lower Platform 2 Right")
+            }
+            SpotId::Annuna__Vertical_Room__Middle_Overhang => {
+                write!(f, "{}", "Annuna > Vertical Room > Middle Overhang")
+            }
+            SpotId::Annuna__Vertical_Room__Plinth => {
+                write!(f, "{}", "Annuna > Vertical Room > Plinth")
+            }
+            SpotId::Annuna__Vertical_Room__West_21 => {
+                write!(f, "{}", "Annuna > Vertical Room > West 21")
             }
             SpotId::Annuna__Vertical_Room__West_22 => {
                 write!(f, "{}", "Annuna > Vertical Room > West 22")
@@ -5186,6 +5262,10 @@ impl std::str::FromStr for SpotId {
             "Amagi > West Lake > West Cliff" => Ok(SpotId::Amagi__West_Lake__West_Cliff),
             "Amagi > West Lake > West Platform" => Ok(SpotId::Amagi__West_Lake__West_Platform),
             "Amagi > West Lake > West Shore" => Ok(SpotId::Amagi__West_Lake__West_Shore),
+            "Annuna > Center Save > East" => Ok(SpotId::Annuna__Center_Save__East),
+            "Annuna > Center Save > Save Point" => Ok(SpotId::Annuna__Center_Save__Save_Point),
+            "Annuna > Center Save > West Catwalk" => Ok(SpotId::Annuna__Center_Save__West_Catwalk),
+            "Annuna > Center Save > West Floor" => Ok(SpotId::Annuna__Center_Save__West_Floor),
             "Annuna > East Bridge > Below Cavern" => Ok(SpotId::Annuna__East_Bridge__Below_Cavern),
             "Annuna > East Bridge > Below Gate Button" => {
                 Ok(SpotId::Annuna__East_Bridge__Below_Gate_Button)
@@ -5399,9 +5479,43 @@ impl std::str::FromStr for SpotId {
             "Annuna > Sniper Valley > West 25 Upper" => {
                 Ok(SpotId::Annuna__Sniper_Valley__West_25_Upper)
             }
+            "Annuna > Twisty Passages > East Catwalk" => {
+                Ok(SpotId::Annuna__Twisty_Passages__East_Catwalk)
+            }
+            "Annuna > Twisty Passages > East Floor" => {
+                Ok(SpotId::Annuna__Twisty_Passages__East_Floor)
+            }
             "Annuna > Udug Gate > East" => Ok(SpotId::Annuna__Udug_Gate__East),
+            "Annuna > Vertical Room > East 21" => Ok(SpotId::Annuna__Vertical_Room__East_21),
             "Annuna > Vertical Room > East 22" => Ok(SpotId::Annuna__Vertical_Room__East_22),
+            "Annuna > Vertical Room > Gate Button" => {
+                Ok(SpotId::Annuna__Vertical_Room__Gate_Button)
+            }
+            "Annuna > Vertical Room > Gate Ledge" => Ok(SpotId::Annuna__Vertical_Room__Gate_Ledge),
+            "Annuna > Vertical Room > Lower Ledge" => {
+                Ok(SpotId::Annuna__Vertical_Room__Lower_Ledge)
+            }
             "Annuna > Vertical Room > Lower Mid" => Ok(SpotId::Annuna__Vertical_Room__Lower_Mid),
+            "Annuna > Vertical Room > Lower Ministair" => {
+                Ok(SpotId::Annuna__Vertical_Room__Lower_Ministair)
+            }
+            "Annuna > Vertical Room > Lower Platform 1 Left" => {
+                Ok(SpotId::Annuna__Vertical_Room__Lower_Platform_1_Left)
+            }
+            "Annuna > Vertical Room > Lower Platform 1 Right" => {
+                Ok(SpotId::Annuna__Vertical_Room__Lower_Platform_1_Right)
+            }
+            "Annuna > Vertical Room > Lower Platform 2 Left" => {
+                Ok(SpotId::Annuna__Vertical_Room__Lower_Platform_2_Left)
+            }
+            "Annuna > Vertical Room > Lower Platform 2 Right" => {
+                Ok(SpotId::Annuna__Vertical_Room__Lower_Platform_2_Right)
+            }
+            "Annuna > Vertical Room > Middle Overhang" => {
+                Ok(SpotId::Annuna__Vertical_Room__Middle_Overhang)
+            }
+            "Annuna > Vertical Room > Plinth" => Ok(SpotId::Annuna__Vertical_Room__Plinth),
+            "Annuna > Vertical Room > West 21" => Ok(SpotId::Annuna__Vertical_Room__West_21),
             "Annuna > Vertical Room > West 22" => Ok(SpotId::Annuna__Vertical_Room__West_22),
             "Annuna > West Bridge > Below Tunnel" => Ok(SpotId::Annuna__West_Bridge__Below_Tunnel),
             "Annuna > West Bridge > East 22" => Ok(SpotId::Annuna__West_Bridge__East_22),
@@ -9041,6 +9155,10 @@ pub enum ExitId {
     Amagi__West_Lake__Surface_Wall_Right__ex__Surface_Wall_Left_1,
     Amagi__West_Lake__West_15__ex__Ebih__Vertical_Interchange__East_15_1,
     Amagi__West_Lake__West_Bank__ex__West_Shore_1,
+    Annuna__Center_Save__East__ex__Vertical_Room__West_21_1,
+    Annuna__Center_Save__Save_Point__ex__West_Catwalk_1,
+    Annuna__Center_Save__West_Catwalk__ex__Twisty_Passages__East_Catwalk_1,
+    Annuna__Center_Save__West_Floor__ex__Twisty_Passages__East_Floor_1,
     Annuna__East_Bridge__Below_Gate_Button__ex__Center_Gap_East_1,
     Annuna__East_Bridge__Bridge_Top_East__ex__East_24_1,
     Annuna__East_Bridge__Bridge_Top_East__ex__East_24_2,
@@ -9166,6 +9284,23 @@ pub enum ExitId {
     Annuna__Sniper_Valley__West_24__ex__East_Bridge__East_24_1,
     Annuna__Sniper_Valley__West_25_Lower__ex__East_Bridge__East_25_Lower_1,
     Annuna__Sniper_Valley__West_25_Upper__ex__East_Bridge__East_25_Upper_1,
+    Annuna__Vertical_Room__East_22__ex__Lower_Hallway__West_1,
+    Annuna__Vertical_Room__Gate_Ledge__ex__Plinth_1,
+    Annuna__Vertical_Room__Lower_Mid__ex__Lower_Platform_1_Right_1,
+    Annuna__Vertical_Room__Lower_Mid__ex__Lower_Platform_2_Right_1,
+    Annuna__Vertical_Room__Lower_Platform_1_Right__ex__Lower_Platform_2_Right_1,
+    Annuna__Vertical_Room__Lower_Platform_1_Right__ex__Lower_Platform_2_Right_2,
+    Annuna__Vertical_Room__Lower_Platform_2_Left__ex__Gate_Ledge_1,
+    Annuna__Vertical_Room__Lower_Platform_2_Left__ex__Gate_Ledge_2,
+    Annuna__Vertical_Room__Lower_Platform_2_Left__ex__Lower_Ministair_1,
+    Annuna__Vertical_Room__Lower_Platform_2_Right__ex__Gate_Ledge_1,
+    Annuna__Vertical_Room__Lower_Platform_2_Right__ex__Gate_Ledge_2,
+    Annuna__Vertical_Room__Lower_Platform_2_Right__ex__Lower_Ministair_1,
+    Annuna__Vertical_Room__West_21__ex__Center_Save__East_1,
+    Annuna__Vertical_Room__West_22__ex__East_Bridge__East_22_1,
+    Annuna__Vertical_Room__West_22__ex__Lower_Ledge_1,
+    Annuna__Vertical_Room__West_22__ex__Lower_Ledge_2,
+    Annuna__Vertical_Room__West_22__ex__Lower_Platform_1_Left_1,
     Annuna__West_Bridge__East_25_Lower__ex__East_Bridge__West_25_Lower_1,
     Annuna__West_Bridge__West_25_Lower__ex__Mirror_Match__East_25_Lower_1,
     Antarctica__Building_1E__Connector__ex__Building_1W__Connector_1,
@@ -10237,6 +10372,10 @@ impl fmt::Display for ExitId {
             ExitId::Amagi__West_Lake__Surface_Wall_Right__ex__Surface_Wall_Left_1 => write!(f, "{}", "Amagi > West Lake > Surface Wall Right ==> Surface Wall Left (1)"),
             ExitId::Amagi__West_Lake__West_15__ex__Ebih__Vertical_Interchange__East_15_1 => write!(f, "{}", "Amagi > West Lake > West 15 ==> Ebih > Vertical Interchange > East 15 (1)"),
             ExitId::Amagi__West_Lake__West_Bank__ex__West_Shore_1 => write!(f, "{}", "Amagi > West Lake > West Bank ==> West Shore (1)"),
+            ExitId::Annuna__Center_Save__East__ex__Vertical_Room__West_21_1 => write!(f, "{}", "Annuna > Center Save > East ==> Vertical Room > West 21 (1)"),
+            ExitId::Annuna__Center_Save__Save_Point__ex__West_Catwalk_1 => write!(f, "{}", "Annuna > Center Save > Save Point ==> West Catwalk (1)"),
+            ExitId::Annuna__Center_Save__West_Catwalk__ex__Twisty_Passages__East_Catwalk_1 => write!(f, "{}", "Annuna > Center Save > West Catwalk ==> Twisty Passages > East Catwalk (1)"),
+            ExitId::Annuna__Center_Save__West_Floor__ex__Twisty_Passages__East_Floor_1 => write!(f, "{}", "Annuna > Center Save > West Floor ==> Twisty Passages > East Floor (1)"),
             ExitId::Annuna__East_Bridge__Below_Gate_Button__ex__Center_Gap_East_1 => write!(f, "{}", "Annuna > East Bridge > Below Gate Button ==> Center Gap East (1)"),
             ExitId::Annuna__East_Bridge__Bridge_Top_East__ex__East_24_1 => write!(f, "{}", "Annuna > East Bridge > Bridge Top East ==> East 24 (1)"),
             ExitId::Annuna__East_Bridge__Bridge_Top_East__ex__East_24_2 => write!(f, "{}", "Annuna > East Bridge > Bridge Top East ==> East 24 (2)"),
@@ -10362,6 +10501,23 @@ impl fmt::Display for ExitId {
             ExitId::Annuna__Sniper_Valley__West_24__ex__East_Bridge__East_24_1 => write!(f, "{}", "Annuna > Sniper Valley > West 24 ==> East Bridge > East 24 (1)"),
             ExitId::Annuna__Sniper_Valley__West_25_Lower__ex__East_Bridge__East_25_Lower_1 => write!(f, "{}", "Annuna > Sniper Valley > West 25 Lower ==> East Bridge > East 25 Lower (1)"),
             ExitId::Annuna__Sniper_Valley__West_25_Upper__ex__East_Bridge__East_25_Upper_1 => write!(f, "{}", "Annuna > Sniper Valley > West 25 Upper ==> East Bridge > East 25 Upper (1)"),
+            ExitId::Annuna__Vertical_Room__East_22__ex__Lower_Hallway__West_1 => write!(f, "{}", "Annuna > Vertical Room > East 22 ==> Lower Hallway > West (1)"),
+            ExitId::Annuna__Vertical_Room__Gate_Ledge__ex__Plinth_1 => write!(f, "{}", "Annuna > Vertical Room > Gate Ledge ==> Plinth (1)"),
+            ExitId::Annuna__Vertical_Room__Lower_Mid__ex__Lower_Platform_1_Right_1 => write!(f, "{}", "Annuna > Vertical Room > Lower Mid ==> Lower Platform 1 Right (1)"),
+            ExitId::Annuna__Vertical_Room__Lower_Mid__ex__Lower_Platform_2_Right_1 => write!(f, "{}", "Annuna > Vertical Room > Lower Mid ==> Lower Platform 2 Right (1)"),
+            ExitId::Annuna__Vertical_Room__Lower_Platform_1_Right__ex__Lower_Platform_2_Right_1 => write!(f, "{}", "Annuna > Vertical Room > Lower Platform 1 Right ==> Lower Platform 2 Right (1)"),
+            ExitId::Annuna__Vertical_Room__Lower_Platform_1_Right__ex__Lower_Platform_2_Right_2 => write!(f, "{}", "Annuna > Vertical Room > Lower Platform 1 Right ==> Lower Platform 2 Right (2)"),
+            ExitId::Annuna__Vertical_Room__Lower_Platform_2_Left__ex__Gate_Ledge_1 => write!(f, "{}", "Annuna > Vertical Room > Lower Platform 2 Left ==> Gate Ledge (1)"),
+            ExitId::Annuna__Vertical_Room__Lower_Platform_2_Left__ex__Gate_Ledge_2 => write!(f, "{}", "Annuna > Vertical Room > Lower Platform 2 Left ==> Gate Ledge (2)"),
+            ExitId::Annuna__Vertical_Room__Lower_Platform_2_Left__ex__Lower_Ministair_1 => write!(f, "{}", "Annuna > Vertical Room > Lower Platform 2 Left ==> Lower Ministair (1)"),
+            ExitId::Annuna__Vertical_Room__Lower_Platform_2_Right__ex__Gate_Ledge_1 => write!(f, "{}", "Annuna > Vertical Room > Lower Platform 2 Right ==> Gate Ledge (1)"),
+            ExitId::Annuna__Vertical_Room__Lower_Platform_2_Right__ex__Gate_Ledge_2 => write!(f, "{}", "Annuna > Vertical Room > Lower Platform 2 Right ==> Gate Ledge (2)"),
+            ExitId::Annuna__Vertical_Room__Lower_Platform_2_Right__ex__Lower_Ministair_1 => write!(f, "{}", "Annuna > Vertical Room > Lower Platform 2 Right ==> Lower Ministair (1)"),
+            ExitId::Annuna__Vertical_Room__West_21__ex__Center_Save__East_1 => write!(f, "{}", "Annuna > Vertical Room > West 21 ==> Center Save > East (1)"),
+            ExitId::Annuna__Vertical_Room__West_22__ex__East_Bridge__East_22_1 => write!(f, "{}", "Annuna > Vertical Room > West 22 ==> East Bridge > East 22 (1)"),
+            ExitId::Annuna__Vertical_Room__West_22__ex__Lower_Ledge_1 => write!(f, "{}", "Annuna > Vertical Room > West 22 ==> Lower Ledge (1)"),
+            ExitId::Annuna__Vertical_Room__West_22__ex__Lower_Ledge_2 => write!(f, "{}", "Annuna > Vertical Room > West 22 ==> Lower Ledge (2)"),
+            ExitId::Annuna__Vertical_Room__West_22__ex__Lower_Platform_1_Left_1 => write!(f, "{}", "Annuna > Vertical Room > West 22 ==> Lower Platform 1 Left (1)"),
             ExitId::Annuna__West_Bridge__East_25_Lower__ex__East_Bridge__West_25_Lower_1 => write!(f, "{}", "Annuna > West Bridge > East 25 Lower ==> East Bridge > West 25 Lower (1)"),
             ExitId::Annuna__West_Bridge__West_25_Lower__ex__Mirror_Match__East_25_Lower_1 => write!(f, "{}", "Annuna > West Bridge > West 25 Lower ==> Mirror Match > East 25 Lower (1)"),
             ExitId::Antarctica__Building_1E__Connector__ex__Building_1W__Connector_1 => write!(f, "{}", "Antarctica > Building 1E > Connector ==> Building 1W > Connector (1)"),
@@ -11438,6 +11594,10 @@ impl std::str::FromStr for ExitId {
             "Amagi > West Lake > Surface Wall Right ==> Surface Wall Left (1)" => Ok(ExitId::Amagi__West_Lake__Surface_Wall_Right__ex__Surface_Wall_Left_1),
             "Amagi > West Lake > West 15 ==> Ebih > Vertical Interchange > East 15 (1)" => Ok(ExitId::Amagi__West_Lake__West_15__ex__Ebih__Vertical_Interchange__East_15_1),
             "Amagi > West Lake > West Bank ==> West Shore (1)" => Ok(ExitId::Amagi__West_Lake__West_Bank__ex__West_Shore_1),
+            "Annuna > Center Save > East ==> Vertical Room > West 21 (1)" => Ok(ExitId::Annuna__Center_Save__East__ex__Vertical_Room__West_21_1),
+            "Annuna > Center Save > Save Point ==> West Catwalk (1)" => Ok(ExitId::Annuna__Center_Save__Save_Point__ex__West_Catwalk_1),
+            "Annuna > Center Save > West Catwalk ==> Twisty Passages > East Catwalk (1)" => Ok(ExitId::Annuna__Center_Save__West_Catwalk__ex__Twisty_Passages__East_Catwalk_1),
+            "Annuna > Center Save > West Floor ==> Twisty Passages > East Floor (1)" => Ok(ExitId::Annuna__Center_Save__West_Floor__ex__Twisty_Passages__East_Floor_1),
             "Annuna > East Bridge > Below Gate Button ==> Center Gap East (1)" => Ok(ExitId::Annuna__East_Bridge__Below_Gate_Button__ex__Center_Gap_East_1),
             "Annuna > East Bridge > Bridge Top East ==> East 24 (1)" => Ok(ExitId::Annuna__East_Bridge__Bridge_Top_East__ex__East_24_1),
             "Annuna > East Bridge > Bridge Top East ==> East 24 (2)" => Ok(ExitId::Annuna__East_Bridge__Bridge_Top_East__ex__East_24_2),
@@ -11563,6 +11723,23 @@ impl std::str::FromStr for ExitId {
             "Annuna > Sniper Valley > West 24 ==> East Bridge > East 24 (1)" => Ok(ExitId::Annuna__Sniper_Valley__West_24__ex__East_Bridge__East_24_1),
             "Annuna > Sniper Valley > West 25 Lower ==> East Bridge > East 25 Lower (1)" => Ok(ExitId::Annuna__Sniper_Valley__West_25_Lower__ex__East_Bridge__East_25_Lower_1),
             "Annuna > Sniper Valley > West 25 Upper ==> East Bridge > East 25 Upper (1)" => Ok(ExitId::Annuna__Sniper_Valley__West_25_Upper__ex__East_Bridge__East_25_Upper_1),
+            "Annuna > Vertical Room > East 22 ==> Lower Hallway > West (1)" => Ok(ExitId::Annuna__Vertical_Room__East_22__ex__Lower_Hallway__West_1),
+            "Annuna > Vertical Room > Gate Ledge ==> Plinth (1)" => Ok(ExitId::Annuna__Vertical_Room__Gate_Ledge__ex__Plinth_1),
+            "Annuna > Vertical Room > Lower Mid ==> Lower Platform 1 Right (1)" => Ok(ExitId::Annuna__Vertical_Room__Lower_Mid__ex__Lower_Platform_1_Right_1),
+            "Annuna > Vertical Room > Lower Mid ==> Lower Platform 2 Right (1)" => Ok(ExitId::Annuna__Vertical_Room__Lower_Mid__ex__Lower_Platform_2_Right_1),
+            "Annuna > Vertical Room > Lower Platform 1 Right ==> Lower Platform 2 Right (1)" => Ok(ExitId::Annuna__Vertical_Room__Lower_Platform_1_Right__ex__Lower_Platform_2_Right_1),
+            "Annuna > Vertical Room > Lower Platform 1 Right ==> Lower Platform 2 Right (2)" => Ok(ExitId::Annuna__Vertical_Room__Lower_Platform_1_Right__ex__Lower_Platform_2_Right_2),
+            "Annuna > Vertical Room > Lower Platform 2 Left ==> Gate Ledge (1)" => Ok(ExitId::Annuna__Vertical_Room__Lower_Platform_2_Left__ex__Gate_Ledge_1),
+            "Annuna > Vertical Room > Lower Platform 2 Left ==> Gate Ledge (2)" => Ok(ExitId::Annuna__Vertical_Room__Lower_Platform_2_Left__ex__Gate_Ledge_2),
+            "Annuna > Vertical Room > Lower Platform 2 Left ==> Lower Ministair (1)" => Ok(ExitId::Annuna__Vertical_Room__Lower_Platform_2_Left__ex__Lower_Ministair_1),
+            "Annuna > Vertical Room > Lower Platform 2 Right ==> Gate Ledge (1)" => Ok(ExitId::Annuna__Vertical_Room__Lower_Platform_2_Right__ex__Gate_Ledge_1),
+            "Annuna > Vertical Room > Lower Platform 2 Right ==> Gate Ledge (2)" => Ok(ExitId::Annuna__Vertical_Room__Lower_Platform_2_Right__ex__Gate_Ledge_2),
+            "Annuna > Vertical Room > Lower Platform 2 Right ==> Lower Ministair (1)" => Ok(ExitId::Annuna__Vertical_Room__Lower_Platform_2_Right__ex__Lower_Ministair_1),
+            "Annuna > Vertical Room > West 21 ==> Center Save > East (1)" => Ok(ExitId::Annuna__Vertical_Room__West_21__ex__Center_Save__East_1),
+            "Annuna > Vertical Room > West 22 ==> East Bridge > East 22 (1)" => Ok(ExitId::Annuna__Vertical_Room__West_22__ex__East_Bridge__East_22_1),
+            "Annuna > Vertical Room > West 22 ==> Lower Ledge (1)" => Ok(ExitId::Annuna__Vertical_Room__West_22__ex__Lower_Ledge_1),
+            "Annuna > Vertical Room > West 22 ==> Lower Ledge (2)" => Ok(ExitId::Annuna__Vertical_Room__West_22__ex__Lower_Ledge_2),
+            "Annuna > Vertical Room > West 22 ==> Lower Platform 1 Left (1)" => Ok(ExitId::Annuna__Vertical_Room__West_22__ex__Lower_Platform_1_Left_1),
             "Annuna > West Bridge > East 25 Lower ==> East Bridge > West 25 Lower (1)" => Ok(ExitId::Annuna__West_Bridge__East_25_Lower__ex__East_Bridge__West_25_Lower_1),
             "Annuna > West Bridge > West 25 Lower ==> Mirror Match > East 25 Lower (1)" => Ok(ExitId::Annuna__West_Bridge__West_25_Lower__ex__Mirror_Match__East_25_Lower_1),
             "Antarctica > Building 1E > Connector ==> Building 1W > Connector (1)" => Ok(ExitId::Antarctica__Building_1E__Connector__ex__Building_1W__Connector_1),
@@ -12609,6 +12786,7 @@ impl std::str::FromStr for ExitId {
 pub enum ActionId {
     Amagi__Main_Area__Carving__Key_Combo,
     Amagi__Main_Area__Save_Point__Save,
+    Annuna__Center_Save__Save_Point__Save,
     Annuna__East_Bridge__Center_Gap_East__Throw_Drone_into_Tower,
     Annuna__East_Bridge__Center_Gap_West__Throw_Drone_into_Tower,
     Annuna__East_Bridge__Tower_East_Ledge__Enter_Combo,
@@ -12715,6 +12893,9 @@ impl fmt::Display for ActionId {
             }
             ActionId::Amagi__Main_Area__Save_Point__Save => {
                 write!(f, "{}", "Amagi > Main Area > Save Point > Save")
+            }
+            ActionId::Annuna__Center_Save__Save_Point__Save => {
+                write!(f, "{}", "Annuna > Center Save > Save Point > Save")
             }
             ActionId::Annuna__East_Bridge__Center_Gap_East__Throw_Drone_into_Tower => write!(
                 f,
@@ -13085,6 +13266,9 @@ impl std::str::FromStr for ActionId {
             }
             "Amagi > Main Area > Save Point > Save" => {
                 Ok(ActionId::Amagi__Main_Area__Save_Point__Save)
+            }
+            "Annuna > Center Save > Save Point > Save" => {
+                Ok(ActionId::Annuna__Center_Save__Save_Point__Save)
             }
             "Annuna > East Bridge > Center Gap East > Throw Drone into Tower" => {
                 Ok(ActionId::Annuna__East_Bridge__Center_Gap_East__Throw_Drone_into_Tower)

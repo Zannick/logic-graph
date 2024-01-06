@@ -201,6 +201,18 @@ subgraph Annuna
         Annuna__Vertical_Room__West_22(West 22);
         Annuna__Vertical_Room__Lower_Mid(Lower Mid);
         Annuna__Vertical_Room__East_22(East 22);
+        Annuna__Vertical_Room__Lower_Platform_1_Left(Lower Platform 1 Left);
+        Annuna__Vertical_Room__Lower_Platform_1_Right(Lower Platform 1 Right);
+        Annuna__Vertical_Room__Lower_Ledge(Lower Ledge);
+        Annuna__Vertical_Room__Lower_Platform_2_Left(Lower Platform 2 Left);
+        Annuna__Vertical_Room__Lower_Platform_2_Right(Lower Platform 2 Right);
+        Annuna__Vertical_Room__Gate_Ledge(Gate Ledge);
+        Annuna__Vertical_Room__Lower_Ministair(Lower Ministair);
+        Annuna__Vertical_Room__West_21(West 21);
+        Annuna__Vertical_Room__Plinth(Plinth);
+        Annuna__Vertical_Room__Gate_Button(Gate Button);
+        Annuna__Vertical_Room__Middle_Overhang(Middle Overhang);
+        Annuna__Vertical_Room__East_21(East 21);
     end
     subgraph Annuna__Lower_Hallway[Lower Hallway]
         Annuna__Lower_Hallway__West(West);
@@ -239,6 +251,16 @@ subgraph Annuna
     end
     subgraph Annuna__East_Hideout[East Hideout]
         Annuna__East_Hideout__West(West);
+    end
+    subgraph Annuna__Center_Save[Center Save]
+        Annuna__Center_Save__East(East);
+        Annuna__Center_Save__Save_Point(Save Point);
+        Annuna__Center_Save__West_Floor(West Floor);
+        Annuna__Center_Save__West_Catwalk(West Catwalk);
+    end
+    subgraph Annuna__Twisty_Passages[Twisty Passages]
+        Annuna__Twisty_Passages__East_Floor(East Floor);
+        Annuna__Twisty_Passages__East_Catwalk(East Catwalk);
     end
 end
 subgraph Antarctica
@@ -1588,9 +1610,13 @@ Amagi__West_Lake__Stronghold_Top --> Amagi__West_Lake__Stronghold_Item
 Amagi__West_Lake__Surface_Wall_Left <--> Amagi__West_Lake__Surface_Wall_Right
 Amagi__West_Lake__West_15 <--> Ebih__Vertical_Interchange__East_15
 Amagi__West_Lake__West_Bank --> Amagi__West_Lake__West_Shore
+Annuna__Center_Save__East <--> Annuna__Vertical_Room__West_21
+Annuna__Center_Save__Save_Point --> Annuna__Center_Save__West_Catwalk
+Annuna__Center_Save__West_Catwalk --> Annuna__Twisty_Passages__East_Catwalk
+Annuna__Center_Save__West_Floor --> Annuna__Twisty_Passages__East_Floor
 Annuna__East_Bridge__Below_Gate_Button <--> Annuna__East_Bridge__Center_Gap_East
 Annuna__East_Bridge__Bridge_Top_East --> Annuna__East_Bridge__East_24
-Annuna__East_Bridge__East_22 --> Annuna__Vertical_Room__West_22
+Annuna__East_Bridge__East_22 <--> Annuna__Vertical_Room__West_22
 Annuna__East_Bridge__East_23 --> Annuna__Sniper_Valley__West_23
 Annuna__East_Bridge__East_24 <--> Annuna__Sniper_Valley__West_24
 Annuna__East_Bridge__East_25_Lower --> Annuna__East_Bridge__Center_Corridor
@@ -1655,7 +1681,7 @@ Annuna__Factory_Access__Upper_Platform --> Annuna__Factory_Access__Upper_Ledge
 Annuna__Factory_Access__Upper_Platform --> Annuna__Factory_Access__West_22
 Annuna__Factory_Access__West_22 <--> Annuna__Lower_Hallway__East
 Annuna__Factory_Entrance__West <--> Annuna__Sniper_Valley__East
-Annuna__Lower_Hallway__West --> Annuna__Vertical_Room__East_22
+Annuna__Lower_Hallway__West <--> Annuna__Vertical_Room__East_22
 Annuna__Mirror_Match__Below_Switch <--> Annuna__Mirror_Match__Central_Pillar
 Annuna__Mirror_Match__Central_Pillar --> Annuna__Mirror_Match__Save_Point
 Annuna__Mirror_Match__Central_Pillar --> Annuna__Mirror_Match__West_25
@@ -1676,6 +1702,16 @@ Annuna__Sniper_Valley__Cavern_Outer_Rock_East <--> Annuna__Sniper_Valley__Cavern
 Annuna__Sniper_Valley__West_23 --> Annuna__East_Bridge__East_24
 Annuna__Sniper_Valley__West_23 --> Annuna__Sniper_Valley__Cavern_Outer_Rock_West
 Annuna__Sniper_Valley__West_23 --> Annuna__Sniper_Valley__High_Ledge
+Annuna__Vertical_Room__Gate_Ledge --> Annuna__Vertical_Room__Plinth
+Annuna__Vertical_Room__Lower_Mid --> Annuna__Vertical_Room__Lower_Platform_1_Right
+Annuna__Vertical_Room__Lower_Mid --> Annuna__Vertical_Room__Lower_Platform_2_Right
+Annuna__Vertical_Room__Lower_Platform_1_Right --> Annuna__Vertical_Room__Lower_Platform_2_Right
+Annuna__Vertical_Room__Lower_Platform_2_Left --> Annuna__Vertical_Room__Gate_Ledge
+Annuna__Vertical_Room__Lower_Platform_2_Left --> Annuna__Vertical_Room__Lower_Ministair
+Annuna__Vertical_Room__Lower_Platform_2_Right --> Annuna__Vertical_Room__Gate_Ledge
+Annuna__Vertical_Room__Lower_Platform_2_Right --> Annuna__Vertical_Room__Lower_Ministair
+Annuna__Vertical_Room__West_22 --> Annuna__Vertical_Room__Lower_Ledge
+Annuna__Vertical_Room__West_22 --> Annuna__Vertical_Room__Lower_Platform_1_Left
 Annuna__West_Bridge__East_25_Lower --> Annuna__East_Bridge__West_25_Lower
 Antarctica__Building_1E__Connector --> Antarctica__Building_1E__East_Entry
 Antarctica__Building_1E__Connector <--> Antarctica__Building_1W__Connector

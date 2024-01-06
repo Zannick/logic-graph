@@ -974,13 +974,153 @@ areas:
     #region Lower
     - name: West 22
       coord: [40.1, 21.75]
+      local:
+        - to: Lower Mid
+      exits:
+        - to: East Bridge > East 22
+          tags: [xdoor]
+        - to: Lower Platform 1 Left
+          req: $grab
+          movement: base
+          jumps: 2
+        - to: Lower Ledge
+          req: $hook
+          movement: base
+          jumps: 2
+        - to: Lower Ledge
+          req: $grab and Anuman
+          movement: base
+          jumps: 2
     - name: Lower Mid
       coord: [40.55, 21.8]
+      local:
+        - to: West 22
+          jumps: 1
+        - to: East 22
+      exits:
+        - to: Lower Platform 1 Right
+          req: $grab
+          movement: base
+          jumps: 2
+        - to: Lower Platform 2 Right
+          req: $hook
+          movement: base
+          jumps: 3
     - name: East 22
       coord: [40.95, 21.8]
+      local:
+        - to: Lower Mid
+      exits:
+        - to: Lower Hallway > West
+          tags: [xshift]
+
+    - name: Lower Platform 1 Left
+      coord: [40.3, 21.5]
+      local:
+        - to: West 22
+        - to: Lower Platform 1 Right
+        - to: Lower Ledge
+          jumps: 1
+    - name: Lower Platform 1 Right
+      coord: [40.4, 21.5]
+      local:
+        - to: Lower Platform 1 Left
+        - to: Lower Mid
+        - to: Lower Platform 2 Right
+          thru: [40.55, 21.35]
+          jumps: [1, 1]
+      exits:
+        - to: Lower Platform 2 Right
+          req: $grab
+          movement: base
+          jumps: 2
+        - to: Lower Platform 2 Right
+          req: $hook
+          movement: base
+          jumps: 1
+    - name: Lower Ledge
+      coord: [40.15, 21.35]
+      local:
+        - to: West 22
+        - to: Lower Platform 1 Left
+        - to: Lower Platform 2 Left
+          jumps: 1
+    - name: Lower Platform 2 Left
+      coord: [40.2, 21.15]
+      local:
+        - to: Lower Ledge
+        - to: Lower Platform 2 Right
+      exits:
+        - to: Gate Ledge
+          req: $hook
+          movement: base
+          jumps: 1
+        - to: Gate Ledge
+          req: $grab and Anuman
+          movement: base
+          jumps: 2
+        - to: Lower Ministair
+          req: $climb
+          movement: base
+          jumps: 3
+    - name: Lower Platform 2 Right
+      coord: [40.4, 21.15]
+      local:
+        - to: Lower Platform 2 Left
+        - to: Lower Platform 1 Right
+        - to: Lower Mid
+      exits:
+        - to: Gate Ledge
+          req: $hook
+          movement: base
+          jumps: 1
+        - to: Gate Ledge
+          req: $grab and Anuman
+          movement: base
+          jumps: 2
+        - to: Lower Ministair
+          req: $climb
+          movement: base
+          jumps: 3
+    - name: Gate Ledge
+      coord: [40.35, 20.75]
+      local:
+        - to: Lower Ministair
+          jumps: 1
+        - to: Lower Platform 2 Left
+        - to: Lower Platform 2 Right
+          thru: [40.3, 20.9]
+      exits:
+        - to: Plinth
+          req: Anunna_Vertical_Room_Gate
+          movement: base
+          jumps: 1
+    - name: Lower Ministair
+      coord: [40.2, 20.65]
+      local:
+        - to: West 21
+          jumps: 1
+        - to: Gate Ledge
+        - to: Lower Platform 2 Left
+        - to: Lower Platform 2 Right
+    - name: West 21
+      coord: [40.05, 20.6]
+      local:
+        - to: Lower Ministair
+      exits:
+        - to: Center Save > East
+          tags: [xshift]
     #endregion
 
     #region Mid
+    - name: Plinth
+      coord: [40.675, 20.6]
+    - name: Gate Button
+      coord: [40.8, 20.7]
+    - name: Middle Overhang
+      coord: [40.9, 20.6]
+    - name: East 21
+      coord: [40.95, 20.75]
     #endregion
 
     #region Upper
@@ -1245,3 +1385,53 @@ areas:
   spots:
     - name: West
       coord: [44.05, 21.75]
+
+- name: Center Save
+  on_entry: $reset_old_area(^newpos)
+  map: save
+  spots:
+    - name: East
+      coord: [39.95, 20.6]
+      local:
+        - to: Save Point
+      exits:
+        - to: Vertical Room > West 21
+          tags: [xshift]
+    - name: Save Point
+      coord: [39.5, 20.7]
+      local:
+        - to: West Floor
+        - to: East
+          jumps: 2
+      actions:
+        - name: Save
+          do: $save
+          tags: [save]
+      exits:
+        - to: West Catwalk
+          req: $hover
+          movement: base
+          jumps: 1
+    - name: West Floor
+      coord: [39.05, 20.75]
+      local:
+        - to: Save Point
+          jumps: 2
+      exits:
+        - to: Twisty Passages > East Floor
+          tags: [xshift]
+    - name: West Catwalk
+      coord: [39.05, 20.5]
+      local:
+        - to: Save Point
+      exits:
+        - to: Twisty Passages > East Catwalk
+          tags: [xshift]
+
+- name: Twisty Passages
+  on_entry: $reset_old_area(^newpos)
+  spots:
+    - name: East Floor
+      coord: [38.95, 20.75]
+    - name: East Catwalk
+      coord: [38.95, 20.5]
