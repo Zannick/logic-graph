@@ -130,6 +130,7 @@ subgraph Annuna
         Annuna__West_Bridge__East_24(East 24);
         Annuna__West_Bridge__East_22(East 22);
         Annuna__West_Bridge__Below_Tunnel(Below Tunnel);
+        Annuna__West_Bridge__Tunnel_Wall(Tunnel Wall);
     end
     subgraph Annuna__East_Bridge[East Bridge]
         Annuna__East_Bridge__West_25_Lower(West 25 Lower);
@@ -164,12 +165,14 @@ subgraph Annuna
         Annuna__East_Bridge__Tower_Mid_air_East(Tower Mid-air East);
         Annuna__East_Bridge__Upper_West_Gap(Upper West Gap);
         Annuna__East_Bridge__Upper_West_Gap_East(Upper West Gap East);
+        Annuna__East_Bridge__Upper_West_Partway_East(Upper West Partway East);
         Annuna__East_Bridge__West_24(West 24);
+        Annuna__East_Bridge__Flung_West(Flung West);
+        Annuna__East_Bridge__West_22(West 22);
         Annuna__East_Bridge__Cavern_Foyer(Cavern Foyer);
         Annuna__East_Bridge__Cavern_Right(Cavern Right);
         Annuna__East_Bridge__Cavern_Cache(Cavern Cache);
         Annuna__East_Bridge__Below_Cavern(Below Cavern);
-        Annuna__East_Bridge__West_22(West 22);
         Annuna__East_Bridge__Upper_East_Ledge(Upper East Ledge);
         Annuna__East_Bridge__East_22(East 22);
         Annuna__East_Bridge__East_23(East 23);
@@ -212,9 +215,30 @@ subgraph Annuna
     end
     subgraph Annuna__East_Climb[East Climb]
         Annuna__East_Climb__West_25(West 25);
+        Annuna__East_Climb__West_26(West 26);
+        Annuna__East_Climb__West_24(West 24);
+        Annuna__East_Climb__Platform_1_Left(Platform 1 Left);
+        Annuna__East_Climb__Platform_2_Left(Platform 2 Left);
+        Annuna__East_Climb__Platform_3_Left(Platform 3 Left);
+        Annuna__East_Climb__Platform_3_Right(Platform 3 Right);
+        Annuna__East_Climb__Platform_4_Left(Platform 4 Left);
+        Annuna__East_Climb__Upper_Ledge(Upper Ledge);
     end
     subgraph Annuna__Factory_Access[Factory Access]
         Annuna__Factory_Access__West_22(West 22);
+        Annuna__Factory_Access__East_22(East 22);
+        Annuna__Factory_Access__East_24(East 24);
+        Annuna__Factory_Access__Bottom(Bottom);
+        Annuna__Factory_Access__Upper_Platform(Upper Platform);
+        Annuna__Factory_Access__Upper_Ledge(Upper Ledge);
+        Annuna__Factory_Access__Staircase_Top(Staircase Top);
+        Annuna__Factory_Access__Grate_Left(Grate Left);
+    end
+    subgraph Annuna__Udug_Gate[Udug Gate]
+        Annuna__Udug_Gate__East(East);
+    end
+    subgraph Annuna__East_Hideout[East Hideout]
+        Annuna__East_Hideout__West(West);
     end
 end
 subgraph Antarctica
@@ -1573,13 +1597,22 @@ Annuna__East_Bridge__East_25_Lower --> Annuna__East_Bridge__Center_Corridor
 Annuna__East_Bridge__East_25_Lower <--> Annuna__Sniper_Valley__West_25_Lower
 Annuna__East_Bridge__East_25_Upper <--> Annuna__Sniper_Valley__West_25_Upper
 Annuna__East_Bridge__East_Gap_East --> Annuna__East_Bridge__Center_Corridor
+Annuna__East_Bridge__Flung_West --> Annuna__East_Bridge__Below_Cavern
+Annuna__East_Bridge__Flung_West --> Annuna__East_Bridge__Upper_West_Gap
+Annuna__East_Bridge__Flung_West --> Annuna__East_Bridge__West_24
+Annuna__East_Bridge__Flung_West --> Annuna__East_Bridge__West_Staircase_Upper_West
+Annuna__East_Bridge__Flung_West --> Annuna__East_Bridge__West_Under_Gap
+Annuna__East_Bridge__Flung_West --> Annuna__West_Bridge__Below_Tunnel
+Annuna__East_Bridge__Flung_West --> Annuna__West_Bridge__Tunnel_Wall
 Annuna__East_Bridge__Gate_Button --> Annuna__East_Bridge__Gate_Button_Gap
 Annuna__East_Bridge__Tower_Base_East --> Annuna__East_Bridge__Tower_Opening
 Annuna__East_Bridge__Tower_Base_West --> Annuna__East_Bridge__Tower_Gate
 Annuna__East_Bridge__Tower_East_Ledge --> Annuna__East_Bridge__East_24
 Annuna__East_Bridge__Tower_East_Ledge <--> Annuna__East_Bridge__Tower_Secret
+Annuna__East_Bridge__Tower_Gate <--> Annuna__East_Bridge__Tower_West_Ledge
 Annuna__East_Bridge__Tower_Gate <--> Annuna__East_Bridge__Upper_West_Gap_East
 Annuna__East_Bridge__Tower_Mid_air_East --> Annuna__East_Bridge__Below_Cavern
+Annuna__East_Bridge__Tower_Mid_air_East --> Annuna__East_Bridge__Flung_West
 Annuna__East_Bridge__Tower_Mid_air_East --> Annuna__East_Bridge__Tower_Peak
 Annuna__East_Bridge__Tower_Mid_air_East --> Annuna__West_Bridge__Below_Tunnel
 Annuna__East_Bridge__Tower_Mid_air_West --> Annuna__East_Bridge__East_22
@@ -1595,6 +1628,8 @@ Annuna__East_Bridge__Upper_East_Ledge --> Annuna__East_Bridge__Tower_East_Ledge
 Annuna__East_Bridge__Upper_East_Ledge --> Annuna__East_Bridge__Tower_Mid_air_East
 Annuna__East_Bridge__Upper_East_Ledge --> Annuna__East_Bridge__Tower_Opening
 Annuna__East_Bridge__Upper_West_Gap --> Annuna__East_Bridge__West_24
+Annuna__East_Bridge__Upper_West_Partway_East --> Annuna__East_Bridge__Tower_Gate
+Annuna__East_Bridge__Upper_West_Partway_East --> Annuna__East_Bridge__Tower_West_Ledge
 Annuna__East_Bridge__West_24 --> Annuna__West_Bridge__East_24
 Annuna__East_Bridge__West_25_Lower --> Annuna__West_Bridge__East_25_Upper
 Annuna__East_Bridge__West_25_Upper --> Annuna__West_Bridge__East_25_Upper
@@ -1602,9 +1637,24 @@ Annuna__East_Bridge__West_Staircase_Upper_West --> Annuna__East_Bridge__Upper_We
 Annuna__East_Bridge__West_Staircase_Upper_West --> Annuna__East_Bridge__Upper_West_Gap_East
 Annuna__East_Bridge__West_Under_Gap --> Annuna__East_Bridge__Upper_West_Gap
 Annuna__East_Bridge__West_Under_Gap --> Annuna__East_Bridge__Upper_West_Gap_East
-Annuna__Factory_Entrance__East --> Annuna__East_Climb__West_25
+Annuna__East_Climb__Platform_1_Left --> Annuna__East_Climb__West_25
+Annuna__East_Climb__Platform_2_Left --> Annuna__East_Climb__Platform_3_Right
+Annuna__East_Climb__Platform_3_Left --> Annuna__East_Climb__Platform_4_Left
+Annuna__East_Climb__Platform_3_Right --> Annuna__East_Climb__Platform_4_Left
+Annuna__East_Climb__Platform_4_Left --> Annuna__East_Climb__Upper_Ledge
+Annuna__East_Climb__West_24 <--> Annuna__Factory_Access__East_24
+Annuna__East_Climb__West_25 <--> Annuna__Factory_Entrance__East
+Annuna__East_Climb__West_26 --> Annuna__East_Climb__Platform_1_Left
+Annuna__East_Climb__West_26 --> Annuna__Udug_Gate__East
+Annuna__Factory_Access__Bottom --> Annuna__Factory_Access__Upper_Platform
+Annuna__Factory_Access__East_22 --> Annuna__East_Hideout__West
+Annuna__Factory_Access__East_22 <--> Annuna__Factory_Access__Grate_Left
+Annuna__Factory_Access__Staircase_Top --> Annuna__Factory_Access__West_22
+Annuna__Factory_Access__Upper_Ledge --> Annuna__Factory_Access__West_22
+Annuna__Factory_Access__Upper_Platform --> Annuna__Factory_Access__Upper_Ledge
+Annuna__Factory_Access__Upper_Platform --> Annuna__Factory_Access__West_22
+Annuna__Factory_Access__West_22 <--> Annuna__Lower_Hallway__East
 Annuna__Factory_Entrance__West <--> Annuna__Sniper_Valley__East
-Annuna__Lower_Hallway__East --> Annuna__Factory_Access__West_22
 Annuna__Lower_Hallway__West --> Annuna__Vertical_Room__East_22
 Annuna__Mirror_Match__Below_Switch <--> Annuna__Mirror_Match__Central_Pillar
 Annuna__Mirror_Match__Central_Pillar --> Annuna__Mirror_Match__Save_Point

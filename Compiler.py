@@ -457,6 +457,8 @@ class GameLogic(object):
                 point['time'] = max(
                         (self.time[k] for k in point.get('tags', []) if k in self.time),
                         default=self.time['default'])
+            if point['time'] is None:
+                continue
             if 'item' in point and 'to' in point and 'item_time' not in point:
                 point['item_time'] = max(
                         (self.time[k] for k in point.get('tags', []) if k in self.time),

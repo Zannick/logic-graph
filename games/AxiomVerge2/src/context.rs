@@ -6234,6 +6234,11 @@ impl context::Ctx for Context {
                     rules::action_reset_old_area__newpos(self, world, pos);
                 }
             }
+            AreaId::Annuna__East_Hideout => {
+                if get_area(self.position) != area {
+                    rules::action_reset_old_area__newpos(self, world, pos);
+                }
+            }
             AreaId::Annuna__Factory_Access => {
                 if get_area(self.position) != area {
                     rules::action_reset_old_area__newpos(self, world, pos);
@@ -6257,6 +6262,11 @@ impl context::Ctx for Context {
                 }
             }
             AreaId::Annuna__Sniper_Valley => {
+                if get_area(self.position) != area {
+                    rules::action_reset_old_area__newpos(self, world, pos);
+                }
+            }
+            AreaId::Annuna__Udug_Gate => {
                 if get_area(self.position) != area {
                     rules::action_reset_old_area__newpos(self, world, pos);
                 }

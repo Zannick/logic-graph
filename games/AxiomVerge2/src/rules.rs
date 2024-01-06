@@ -304,6 +304,10 @@ pub fn access_climb_and_grab(ctx: &Context, world: &graph::World) -> bool {
     // $climb and $grab
     (helper__climb!(ctx, world) && helper__grab!(ctx, world))
 }
+pub fn access_climb_and_grab_and_anuman(ctx: &Context, world: &graph::World) -> bool {
+    // $climb and $grab and Anuman
+    ((helper__climb!(ctx, world) && helper__grab!(ctx, world)) && ctx.has(Item::Anuman))
+}
 pub fn access_climb_or_hook(ctx: &Context, world: &graph::World) -> bool {
     // $climb or $hook
     (helper__climb!(ctx, world) || helper__hook!(ctx, world))
@@ -1414,6 +1418,10 @@ pub fn access_grab(ctx: &Context, world: &graph::World) -> bool {
     // $grab
     helper__grab!(ctx, world)
 }
+pub fn access_grab_and_annuna_east_bridge_gate(ctx: &Context, world: &graph::World) -> bool {
+    // $grab and Annuna_East_Bridge_Gate
+    (helper__grab!(ctx, world) && ctx.has(Item::Annuna_East_Bridge_Gate))
+}
 pub fn access_grab_and_can_deploy(ctx: &Context, world: &graph::World) -> bool {
     // $grab and $can_deploy
     (helper__grab!(ctx, world) && helper__can_deploy!(ctx, world))
@@ -1503,6 +1511,10 @@ pub fn access_hover(ctx: &Context, world: &graph::World) -> bool {
     // $hover
     helper__hover!(ctx, world)
 }
+pub fn access_hover_and_anuman(ctx: &Context, world: &graph::World) -> bool {
+    // $hover and Anuman
+    (helper__hover!(ctx, world) && ctx.has(Item::Anuman))
+}
 pub fn access_hover_and_hook(ctx: &Context, world: &graph::World) -> bool {
     // $hover and $hook
     (helper__hover!(ctx, world) && helper__hook!(ctx, world))
@@ -1554,6 +1566,32 @@ pub fn access_infection_range_2(ctx: &Context, world: &graph::World) -> bool {
 pub fn access_infection_speed(ctx: &Context, world: &graph::World) -> bool {
     // Infection_Speed
     ctx.has(Item::Infection_Speed)
+}
+pub fn access_infinite_climb_and_annuna_east_bridge_gate(
+    ctx: &Context,
+    world: &graph::World,
+) -> bool {
+    // $infinite_climb and Annuna_East_Bridge_Gate
+    (helper__infinite_climb!(ctx, world) && ctx.has(Item::Annuna_East_Bridge_Gate))
+}
+pub fn access_infinite_climb_and_not_annuna_east_bridge_gate(
+    ctx: &Context,
+    world: &graph::World,
+) -> bool {
+    // $infinite_climb and not Annuna_East_Bridge_Gate
+    (helper__infinite_climb!(ctx, world) && !ctx.has(Item::Annuna_East_Bridge_Gate))
+}
+pub fn access_infinite_climb_and_slingshot_hook(ctx: &Context, world: &graph::World) -> bool {
+    // $infinite_climb and Slingshot_Hook
+    (helper__infinite_climb!(ctx, world) && ctx.has(Item::Slingshot_Hook))
+}
+pub fn access_infinite_climb_and_slingshot_hook_and_not_annuna_east_bridge_gate(
+    ctx: &Context,
+    world: &graph::World,
+) -> bool {
+    // $infinite_climb and Slingshot_Hook and not Annuna_East_Bridge_Gate
+    ((helper__infinite_climb!(ctx, world) && ctx.has(Item::Slingshot_Hook))
+        && !ctx.has(Item::Annuna_East_Bridge_Gate))
 }
 pub fn access_irikar__basement_portal__ledge__ex__moving_platform_start_1__req(
     ctx: &Context,

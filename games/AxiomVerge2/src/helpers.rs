@@ -371,6 +371,17 @@ macro_rules! helper__block_clip_escape {
     }};
 }
 
+/// $infinite_climb (  )
+/// Anuman and Wall_Climb and Drone_Hover
+#[macro_export]
+macro_rules! helper__infinite_climb {
+    ($ctx:expr, $world:expr) => {{
+        #[allow(unused_imports)]
+        use $crate::items::Item;
+        (($ctx.has(Item::Anuman) && $ctx.has(Item::Wall_Climb)) && $ctx.has(Item::Drone_Hover))
+    }};
+}
+
 /// $attract (  )
 /// Breach_Attractor and (Anuman or ^mode != 'drone' or ^indra WITHIN ^position)
 #[macro_export]

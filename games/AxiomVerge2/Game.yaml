@@ -69,7 +69,7 @@ movements:
 exit_movements:
   fast_hover:
     x: .4
-  charge_flight:
+  fling:
     x: .75
   mist1:
     x: .1425  # ?
@@ -390,6 +390,8 @@ helpers:
   $offset: major_glitches and $melee
   $block_clip: minor_glitches and ^mode == 'drone'
   $block_clip_escape: minor_glitches and $hook
+
+  $infinite_climb: Anuman and Wall_Climb and Drone_Hover
 
   # TODO: this is a temporary hack around the attract issue #131
   $attract: Breach_Attractor and (Anuman or ^mode != 'drone' or ^indra WITHIN ^position)

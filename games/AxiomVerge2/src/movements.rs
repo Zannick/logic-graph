@@ -961,13 +961,13 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
         (
             [false],
             SpotId::Annuna__East_Bridge__Upper_West_Gap_East,
-            SpotId::Annuna__East_Bridge__Tower_Base_West,
-        ) => 2456,
+            SpotId::Annuna__East_Bridge__Upper_West_Gap,
+        ) => 877,
         (
             [false],
             SpotId::Annuna__East_Bridge__Upper_West_Gap_East,
-            SpotId::Annuna__East_Bridge__Upper_West_Gap,
-        ) => 877,
+            SpotId::Annuna__East_Bridge__Upper_West_Partway_East,
+        ) => 1929,
         (
             [false],
             SpotId::Annuna__East_Bridge__Upper_West_Gap_East,
@@ -978,6 +978,16 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
             SpotId::Annuna__East_Bridge__Upper_West_Gap_East,
             SpotId::Annuna__East_Bridge__West_Under_Gap,
         ) => 877,
+        (
+            [false],
+            SpotId::Annuna__East_Bridge__Upper_West_Partway_East,
+            SpotId::Annuna__East_Bridge__Tower_Base_West,
+        ) => 526,
+        (
+            [false],
+            SpotId::Annuna__East_Bridge__Upper_West_Partway_East,
+            SpotId::Annuna__East_Bridge__Upper_West_Gap_East,
+        ) => 1929,
         (
             [false],
             SpotId::Annuna__East_Bridge__West_24,
@@ -1073,6 +1083,121 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
             SpotId::Annuna__East_Bridge__West_Under_Gap,
             SpotId::Annuna__East_Bridge__West_Staircase_Upper_West,
         ) => 877,
+        (
+            [false],
+            SpotId::Annuna__East_Climb__Platform_1_Left,
+            SpotId::Annuna__East_Climb__West_26,
+        ) => 701,
+        (
+            [false],
+            SpotId::Annuna__East_Climb__Platform_2_Left,
+            SpotId::Annuna__East_Climb__Platform_1_Left,
+        ) => 877,
+        (
+            [false],
+            SpotId::Annuna__East_Climb__Platform_3_Left,
+            SpotId::Annuna__East_Climb__Platform_3_Right,
+        ) => 350,
+        (
+            [false],
+            SpotId::Annuna__East_Climb__Platform_3_Left,
+            SpotId::Annuna__East_Climb__West_25,
+        ) => 877,
+        (
+            [false],
+            SpotId::Annuna__East_Climb__Platform_3_Left,
+            SpotId::Annuna__East_Climb__West_26,
+        ) => 1099,
+        (
+            [false],
+            SpotId::Annuna__East_Climb__Platform_3_Right,
+            SpotId::Annuna__East_Climb__Platform_3_Left,
+        ) => 350,
+        (
+            [false],
+            SpotId::Annuna__East_Climb__Platform_4_Left,
+            SpotId::Annuna__East_Climb__Platform_3_Left,
+        ) => 701,
+        (
+            [false],
+            SpotId::Annuna__East_Climb__Platform_4_Left,
+            SpotId::Annuna__East_Climb__Platform_3_Right,
+        ) => 400,
+        (
+            [false],
+            SpotId::Annuna__East_Climb__Upper_Ledge,
+            SpotId::Annuna__East_Climb__Platform_3_Left,
+        ) => 850,
+        ([false], SpotId::Annuna__East_Climb__Upper_Ledge, SpotId::Annuna__East_Climb__West_24) => {
+            1403
+        }
+        ([false], SpotId::Annuna__East_Climb__West_24, SpotId::Annuna__East_Climb__Upper_Ledge) => {
+            1403
+        }
+        (
+            [false],
+            SpotId::Annuna__East_Climb__West_25,
+            SpotId::Annuna__East_Climb__Platform_3_Left,
+        ) => 877,
+        // [0.350877, 0.85]
+        ([false], SpotId::Annuna__East_Climb__West_25, SpotId::Annuna__East_Climb__West_26) => 1200,
+        (
+            [false],
+            SpotId::Annuna__Factory_Access__Bottom,
+            SpotId::Annuna__Factory_Access__East_24,
+        ) => 1052,
+        (
+            [false],
+            SpotId::Annuna__Factory_Access__East_24,
+            SpotId::Annuna__Factory_Access__Bottom,
+        ) => 1052,
+        (
+            [false],
+            SpotId::Annuna__Factory_Access__Grate_Left,
+            SpotId::Annuna__Factory_Access__Staircase_Top,
+        ) => 701,
+        (
+            [false],
+            SpotId::Annuna__Factory_Access__Staircase_Top,
+            SpotId::Annuna__Factory_Access__Grate_Left,
+        ) => 701,
+        (
+            [false],
+            SpotId::Annuna__Factory_Access__Staircase_Top,
+            SpotId::Annuna__Factory_Access__Upper_Ledge,
+        ) => 701,
+        // [0.2, 1.1, 1.22807]
+        (
+            [false],
+            SpotId::Annuna__Factory_Access__Upper_Ledge,
+            SpotId::Annuna__Factory_Access__East_24,
+        ) => 2528,
+        (
+            [false],
+            SpotId::Annuna__Factory_Access__Upper_Ledge,
+            SpotId::Annuna__Factory_Access__Staircase_Top,
+        ) => 1200,
+        (
+            [false],
+            SpotId::Annuna__Factory_Access__Upper_Platform,
+            SpotId::Annuna__Factory_Access__Bottom,
+        ) => 1399,
+        // [0.95, 1.22807]
+        (
+            [false],
+            SpotId::Annuna__Factory_Access__Upper_Platform,
+            SpotId::Annuna__Factory_Access__East_24,
+        ) => 2178,
+        (
+            [false],
+            SpotId::Annuna__Factory_Access__West_22,
+            SpotId::Annuna__Factory_Access__Staircase_Top,
+        ) => 2105,
+        (
+            [false],
+            SpotId::Annuna__Factory_Access__West_22,
+            SpotId::Annuna__Factory_Access__Upper_Platform,
+        ) => 1228,
         (
             [false],
             SpotId::Annuna__Factory_Entrance__East,
@@ -9219,13 +9344,13 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
         (
             [true],
             SpotId::Annuna__East_Bridge__Upper_West_Gap_East,
-            SpotId::Annuna__East_Bridge__Tower_Base_West,
-        ) => 2456,
+            SpotId::Annuna__East_Bridge__Upper_West_Gap,
+        ) => 877,
         (
             [true],
             SpotId::Annuna__East_Bridge__Upper_West_Gap_East,
-            SpotId::Annuna__East_Bridge__Upper_West_Gap,
-        ) => 877,
+            SpotId::Annuna__East_Bridge__Upper_West_Partway_East,
+        ) => 1929,
         (
             [true],
             SpotId::Annuna__East_Bridge__Upper_West_Gap_East,
@@ -9236,6 +9361,16 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
             SpotId::Annuna__East_Bridge__Upper_West_Gap_East,
             SpotId::Annuna__East_Bridge__West_Under_Gap,
         ) => 877,
+        (
+            [true],
+            SpotId::Annuna__East_Bridge__Upper_West_Partway_East,
+            SpotId::Annuna__East_Bridge__Tower_Base_West,
+        ) => 526,
+        (
+            [true],
+            SpotId::Annuna__East_Bridge__Upper_West_Partway_East,
+            SpotId::Annuna__East_Bridge__Upper_West_Gap_East,
+        ) => 1929,
         (
             [true],
             SpotId::Annuna__East_Bridge__West_24,
@@ -9331,6 +9466,121 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
             SpotId::Annuna__East_Bridge__West_Under_Gap,
             SpotId::Annuna__East_Bridge__West_Staircase_Upper_West,
         ) => 877,
+        (
+            [true],
+            SpotId::Annuna__East_Climb__Platform_1_Left,
+            SpotId::Annuna__East_Climb__West_26,
+        ) => 701,
+        (
+            [true],
+            SpotId::Annuna__East_Climb__Platform_2_Left,
+            SpotId::Annuna__East_Climb__Platform_1_Left,
+        ) => 877,
+        (
+            [true],
+            SpotId::Annuna__East_Climb__Platform_3_Left,
+            SpotId::Annuna__East_Climb__Platform_3_Right,
+        ) => 350,
+        (
+            [true],
+            SpotId::Annuna__East_Climb__Platform_3_Left,
+            SpotId::Annuna__East_Climb__West_25,
+        ) => 877,
+        (
+            [true],
+            SpotId::Annuna__East_Climb__Platform_3_Left,
+            SpotId::Annuna__East_Climb__West_26,
+        ) => 1099,
+        (
+            [true],
+            SpotId::Annuna__East_Climb__Platform_3_Right,
+            SpotId::Annuna__East_Climb__Platform_3_Left,
+        ) => 350,
+        (
+            [true],
+            SpotId::Annuna__East_Climb__Platform_4_Left,
+            SpotId::Annuna__East_Climb__Platform_3_Left,
+        ) => 701,
+        (
+            [true],
+            SpotId::Annuna__East_Climb__Platform_4_Left,
+            SpotId::Annuna__East_Climb__Platform_3_Right,
+        ) => 400,
+        (
+            [true],
+            SpotId::Annuna__East_Climb__Upper_Ledge,
+            SpotId::Annuna__East_Climb__Platform_3_Left,
+        ) => 850,
+        ([true], SpotId::Annuna__East_Climb__Upper_Ledge, SpotId::Annuna__East_Climb__West_24) => {
+            1403
+        }
+        ([true], SpotId::Annuna__East_Climb__West_24, SpotId::Annuna__East_Climb__Upper_Ledge) => {
+            1403
+        }
+        (
+            [true],
+            SpotId::Annuna__East_Climb__West_25,
+            SpotId::Annuna__East_Climb__Platform_3_Left,
+        ) => 877,
+        // [0.350877, 0.85]
+        ([true], SpotId::Annuna__East_Climb__West_25, SpotId::Annuna__East_Climb__West_26) => 1200,
+        (
+            [true],
+            SpotId::Annuna__Factory_Access__Bottom,
+            SpotId::Annuna__Factory_Access__East_24,
+        ) => 1052,
+        (
+            [true],
+            SpotId::Annuna__Factory_Access__East_24,
+            SpotId::Annuna__Factory_Access__Bottom,
+        ) => 1052,
+        (
+            [true],
+            SpotId::Annuna__Factory_Access__Grate_Left,
+            SpotId::Annuna__Factory_Access__Staircase_Top,
+        ) => 701,
+        (
+            [true],
+            SpotId::Annuna__Factory_Access__Staircase_Top,
+            SpotId::Annuna__Factory_Access__Grate_Left,
+        ) => 701,
+        (
+            [true],
+            SpotId::Annuna__Factory_Access__Staircase_Top,
+            SpotId::Annuna__Factory_Access__Upper_Ledge,
+        ) => 701,
+        // [0.2, 1.1, 1.22807]
+        (
+            [true],
+            SpotId::Annuna__Factory_Access__Upper_Ledge,
+            SpotId::Annuna__Factory_Access__East_24,
+        ) => 2528,
+        (
+            [true],
+            SpotId::Annuna__Factory_Access__Upper_Ledge,
+            SpotId::Annuna__Factory_Access__Staircase_Top,
+        ) => 1200,
+        (
+            [true],
+            SpotId::Annuna__Factory_Access__Upper_Platform,
+            SpotId::Annuna__Factory_Access__Bottom,
+        ) => 1399,
+        // [0.95, 1.22807]
+        (
+            [true],
+            SpotId::Annuna__Factory_Access__Upper_Platform,
+            SpotId::Annuna__Factory_Access__East_24,
+        ) => 2178,
+        (
+            [true],
+            SpotId::Annuna__Factory_Access__West_22,
+            SpotId::Annuna__Factory_Access__Staircase_Top,
+        ) => 2105,
+        (
+            [true],
+            SpotId::Annuna__Factory_Access__West_22,
+            SpotId::Annuna__Factory_Access__Upper_Platform,
+        ) => 1228,
         (
             [true],
             SpotId::Annuna__Factory_Entrance__East,
@@ -16896,6 +17146,14 @@ pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
         ) => true,
         (
             SpotId::Annuna__East_Bridge__Upper_West_Gap_East,
+            SpotId::Annuna__East_Bridge__Upper_West_Partway_East,
+        ) => true,
+        (
+            SpotId::Annuna__East_Bridge__Upper_West_Partway_East,
+            SpotId::Annuna__East_Bridge__Upper_West_Gap_East,
+        ) => true,
+        (
+            SpotId::Annuna__East_Bridge__Upper_West_Partway_East,
             SpotId::Annuna__East_Bridge__Tower_Base_West,
         ) => true,
         (SpotId::Annuna__East_Bridge__West_24, SpotId::Annuna__East_Bridge__Upper_West_Gap) => true,
@@ -17013,6 +17271,73 @@ pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
         (SpotId::Annuna__Factory_Entrance__East, SpotId::Annuna__Factory_Entrance__Save_Point) => {
             true
         }
+        (SpotId::Annuna__East_Climb__West_25, SpotId::Annuna__East_Climb__West_26) => true,
+        (SpotId::Annuna__East_Climb__West_25, SpotId::Annuna__East_Climb__Platform_3_Left) => true,
+        (SpotId::Annuna__East_Climb__West_24, SpotId::Annuna__East_Climb__Upper_Ledge) => true,
+        (SpotId::Annuna__East_Climb__Platform_1_Left, SpotId::Annuna__East_Climb__West_26) => true,
+        (
+            SpotId::Annuna__East_Climb__Platform_2_Left,
+            SpotId::Annuna__East_Climb__Platform_1_Left,
+        ) => true,
+        (SpotId::Annuna__East_Climb__Platform_3_Left, SpotId::Annuna__East_Climb__West_25) => true,
+        (SpotId::Annuna__East_Climb__Platform_3_Left, SpotId::Annuna__East_Climb__West_26) => true,
+        (
+            SpotId::Annuna__East_Climb__Platform_3_Left,
+            SpotId::Annuna__East_Climb__Platform_3_Right,
+        ) => true,
+        (
+            SpotId::Annuna__East_Climb__Platform_3_Right,
+            SpotId::Annuna__East_Climb__Platform_3_Left,
+        ) => true,
+        (
+            SpotId::Annuna__East_Climb__Platform_4_Left,
+            SpotId::Annuna__East_Climb__Platform_3_Left,
+        ) => true,
+        (
+            SpotId::Annuna__East_Climb__Platform_4_Left,
+            SpotId::Annuna__East_Climb__Platform_3_Right,
+        ) => true,
+        (SpotId::Annuna__East_Climb__Upper_Ledge, SpotId::Annuna__East_Climb__West_24) => true,
+        (SpotId::Annuna__East_Climb__Upper_Ledge, SpotId::Annuna__East_Climb__Platform_3_Left) => {
+            true
+        }
+        (
+            SpotId::Annuna__Factory_Access__West_22,
+            SpotId::Annuna__Factory_Access__Staircase_Top,
+        ) => true,
+        (
+            SpotId::Annuna__Factory_Access__West_22,
+            SpotId::Annuna__Factory_Access__Upper_Platform,
+        ) => true,
+        (SpotId::Annuna__Factory_Access__East_24, SpotId::Annuna__Factory_Access__Bottom) => true,
+        (SpotId::Annuna__Factory_Access__Bottom, SpotId::Annuna__Factory_Access__East_24) => true,
+        (
+            SpotId::Annuna__Factory_Access__Upper_Platform,
+            SpotId::Annuna__Factory_Access__Bottom,
+        ) => true,
+        (
+            SpotId::Annuna__Factory_Access__Upper_Platform,
+            SpotId::Annuna__Factory_Access__East_24,
+        ) => true,
+        (
+            SpotId::Annuna__Factory_Access__Upper_Ledge,
+            SpotId::Annuna__Factory_Access__Staircase_Top,
+        ) => true,
+        (SpotId::Annuna__Factory_Access__Upper_Ledge, SpotId::Annuna__Factory_Access__East_24) => {
+            true
+        }
+        (
+            SpotId::Annuna__Factory_Access__Staircase_Top,
+            SpotId::Annuna__Factory_Access__Upper_Ledge,
+        ) => true,
+        (
+            SpotId::Annuna__Factory_Access__Staircase_Top,
+            SpotId::Annuna__Factory_Access__Grate_Left,
+        ) => true,
+        (
+            SpotId::Annuna__Factory_Access__Grate_Left,
+            SpotId::Annuna__Factory_Access__Staircase_Top,
+        ) => true,
         (SpotId::Antarctica__West__Helipad, SpotId::Antarctica__West__Shed_Entry) => true,
         (SpotId::Antarctica__West__Helipad, SpotId::Antarctica__West__Boxes) => true,
         (SpotId::Antarctica__West__Boxes, SpotId::Antarctica__West__Helipad) => true,
@@ -22895,6 +23220,46 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             1000,
         ),
         (
+            SpotId::Annuna__East_Bridge__Flung_West,
+            SpotId::Annuna__East_Bridge__Below_Cavern,
+            1124,
+        ),
+        (
+            SpotId::Annuna__East_Bridge__Flung_West,
+            SpotId::Annuna__East_Bridge__Upper_West_Gap,
+            1949,
+        ),
+        (
+            SpotId::Annuna__East_Bridge__Flung_West,
+            SpotId::Annuna__East_Bridge__West_24,
+            1699,
+        ),
+        (
+            SpotId::Annuna__East_Bridge__Flung_West,
+            SpotId::Annuna__East_Bridge__West_Staircase_Upper_West,
+            2449,
+        ),
+        (
+            SpotId::Annuna__East_Bridge__Flung_West,
+            SpotId::Annuna__East_Bridge__West_Under_Gap,
+            2449,
+        ),
+        (
+            SpotId::Annuna__East_Bridge__Flung_West,
+            SpotId::Annuna__West_Bridge__Below_Tunnel,
+            3974,
+        ),
+        (
+            SpotId::Annuna__East_Bridge__Flung_West,
+            SpotId::Annuna__West_Bridge__Tunnel_Wall,
+            4475,
+        ),
+        (
+            SpotId::Annuna__East_Bridge__Flung_West,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
             SpotId::Annuna__East_Bridge__Gate_Button,
             SpotId::Annuna__East_Bridge__Below_Gate_Button,
             199,
@@ -23026,6 +23391,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Annuna__East_Bridge__Tower_Gate,
+            SpotId::Annuna__East_Bridge__Tower_West_Ledge,
+            5000,
+        ),
+        (
+            SpotId::Annuna__East_Bridge__Tower_Gate,
             SpotId::Annuna__East_Bridge__Upper_West_Gap_East,
             2807,
         ),
@@ -23038,6 +23408,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Annuna__East_Bridge__Tower_Mid_air_East,
             SpotId::Annuna__East_Bridge__Below_Cavern,
             2874,
+        ),
+        (
+            SpotId::Annuna__East_Bridge__Tower_Mid_air_East,
+            SpotId::Annuna__East_Bridge__Flung_West,
+            933,
         ),
         (
             SpotId::Annuna__East_Bridge__Tower_Mid_air_East,
@@ -23166,6 +23541,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Annuna__East_Bridge__Tower_West_Ledge,
+            SpotId::Annuna__East_Bridge__Tower_Gate,
+            1199,
+        ),
+        (
+            SpotId::Annuna__East_Bridge__Tower_West_Ledge,
             SpotId::Annuna__East_Bridge__Tower_Mid_air_West,
             1200,
         ),
@@ -23261,11 +23641,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Annuna__East_Bridge__Upper_West_Gap_East,
-            SpotId::Annuna__East_Bridge__Tower_Base_West,
-            2456,
-        ),
-        (
-            SpotId::Annuna__East_Bridge__Upper_West_Gap_East,
             SpotId::Annuna__East_Bridge__Tower_Gate,
             2807,
         ),
@@ -23273,6 +23648,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Annuna__East_Bridge__Upper_West_Gap_East,
             SpotId::Annuna__East_Bridge__Upper_West_Gap,
             877,
+        ),
+        (
+            SpotId::Annuna__East_Bridge__Upper_West_Gap_East,
+            SpotId::Annuna__East_Bridge__Upper_West_Partway_East,
+            1929,
         ),
         (
             SpotId::Annuna__East_Bridge__Upper_West_Gap_East,
@@ -23286,6 +23666,31 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Annuna__East_Bridge__Upper_West_Gap_East,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__East_Bridge__Upper_West_Partway_East,
+            SpotId::Annuna__East_Bridge__Tower_Base_West,
+            526,
+        ),
+        (
+            SpotId::Annuna__East_Bridge__Upper_West_Partway_East,
+            SpotId::Annuna__East_Bridge__Tower_Gate,
+            877,
+        ),
+        (
+            SpotId::Annuna__East_Bridge__Upper_West_Partway_East,
+            SpotId::Annuna__East_Bridge__Tower_West_Ledge,
+            6000,
+        ),
+        (
+            SpotId::Annuna__East_Bridge__Upper_West_Partway_East,
+            SpotId::Annuna__East_Bridge__Upper_West_Gap_East,
+            1929,
+        ),
+        (
+            SpotId::Annuna__East_Bridge__Upper_West_Partway_East,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -23465,9 +23870,304 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             1000,
         ),
         (
+            SpotId::Annuna__East_Climb__Platform_1_Left,
+            SpotId::Annuna__East_Climb__West_25,
+            1200,
+        ),
+        (
+            SpotId::Annuna__East_Climb__Platform_1_Left,
+            SpotId::Annuna__East_Climb__West_26,
+            701,
+        ),
+        (
+            SpotId::Annuna__East_Climb__Platform_1_Left,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__East_Climb__Platform_2_Left,
+            SpotId::Annuna__East_Climb__Platform_1_Left,
+            877,
+        ),
+        (
+            SpotId::Annuna__East_Climb__Platform_2_Left,
+            SpotId::Annuna__East_Climb__Platform_3_Right,
+            1200,
+        ),
+        (
+            SpotId::Annuna__East_Climb__Platform_2_Left,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__East_Climb__Platform_3_Left,
+            SpotId::Annuna__East_Climb__Platform_3_Right,
+            350,
+        ),
+        (
+            SpotId::Annuna__East_Climb__Platform_3_Left,
+            SpotId::Annuna__East_Climb__Platform_4_Left,
+            1200,
+        ),
+        (
+            SpotId::Annuna__East_Climb__Platform_3_Left,
+            SpotId::Annuna__East_Climb__West_25,
+            877,
+        ),
+        (
+            SpotId::Annuna__East_Climb__Platform_3_Left,
+            SpotId::Annuna__East_Climb__West_26,
+            1099,
+        ),
+        (
+            SpotId::Annuna__East_Climb__Platform_3_Left,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__East_Climb__Platform_3_Right,
+            SpotId::Annuna__East_Climb__Platform_3_Left,
+            350,
+        ),
+        (
+            SpotId::Annuna__East_Climb__Platform_3_Right,
+            SpotId::Annuna__East_Climb__Platform_4_Left,
+            1200,
+        ),
+        (
+            SpotId::Annuna__East_Climb__Platform_3_Right,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__East_Climb__Platform_4_Left,
+            SpotId::Annuna__East_Climb__Platform_3_Left,
+            701,
+        ),
+        (
+            SpotId::Annuna__East_Climb__Platform_4_Left,
+            SpotId::Annuna__East_Climb__Platform_3_Right,
+            400,
+        ),
+        (
+            SpotId::Annuna__East_Climb__Platform_4_Left,
+            SpotId::Annuna__East_Climb__Upper_Ledge,
+            1200,
+        ),
+        (
+            SpotId::Annuna__East_Climb__Platform_4_Left,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__East_Climb__Upper_Ledge,
+            SpotId::Annuna__East_Climb__Platform_3_Left,
+            850,
+        ),
+        (
+            SpotId::Annuna__East_Climb__Upper_Ledge,
+            SpotId::Annuna__East_Climb__West_24,
+            1403,
+        ),
+        (
+            SpotId::Annuna__East_Climb__Upper_Ledge,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__East_Climb__West_24,
+            SpotId::Annuna__East_Climb__Upper_Ledge,
+            1403,
+        ),
+        (
+            SpotId::Annuna__East_Climb__West_24,
+            SpotId::Annuna__Factory_Access__East_24,
+            1350,
+        ),
+        (
+            SpotId::Annuna__East_Climb__West_24,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__East_Climb__West_25,
+            SpotId::Annuna__East_Climb__Platform_3_Left,
+            877,
+        ),
+        (
+            SpotId::Annuna__East_Climb__West_25,
+            SpotId::Annuna__East_Climb__West_26,
+            1200,
+        ),
+        (
+            SpotId::Annuna__East_Climb__West_25,
+            SpotId::Annuna__Factory_Entrance__East,
+            1600,
+        ),
+        (
             SpotId::Annuna__East_Climb__West_25,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
+        ),
+        (
+            SpotId::Annuna__East_Climb__West_26,
+            SpotId::Annuna__East_Climb__Platform_1_Left,
+            701,
+        ),
+        (
+            SpotId::Annuna__East_Climb__West_26,
+            SpotId::Annuna__Udug_Gate__East,
+            1600,
+        ),
+        (
+            SpotId::Annuna__East_Climb__West_26,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__East_Hideout__West,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Factory_Access__Bottom,
+            SpotId::Annuna__Factory_Access__East_24,
+            1052,
+        ),
+        (
+            SpotId::Annuna__Factory_Access__Bottom,
+            SpotId::Annuna__Factory_Access__Upper_Platform,
+            3000,
+        ),
+        (
+            SpotId::Annuna__Factory_Access__Bottom,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Factory_Access__East_22,
+            SpotId::Annuna__East_Hideout__West,
+            1350,
+        ),
+        (
+            SpotId::Annuna__Factory_Access__East_22,
+            SpotId::Annuna__Factory_Access__Grate_Left,
+            350,
+        ),
+        (
+            SpotId::Annuna__Factory_Access__East_22,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Factory_Access__East_24,
+            SpotId::Annuna__East_Climb__West_24,
+            1350,
+        ),
+        (
+            SpotId::Annuna__Factory_Access__East_24,
+            SpotId::Annuna__Factory_Access__Bottom,
+            1052,
+        ),
+        (
+            SpotId::Annuna__Factory_Access__East_24,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Factory_Access__Grate_Left,
+            SpotId::Annuna__Factory_Access__East_22,
+            350,
+        ),
+        (
+            SpotId::Annuna__Factory_Access__Grate_Left,
+            SpotId::Annuna__Factory_Access__Staircase_Top,
+            701,
+        ),
+        (
+            SpotId::Annuna__Factory_Access__Grate_Left,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Factory_Access__Staircase_Top,
+            SpotId::Annuna__Factory_Access__Grate_Left,
+            701,
+        ),
+        (
+            SpotId::Annuna__Factory_Access__Staircase_Top,
+            SpotId::Annuna__Factory_Access__Upper_Ledge,
+            701,
+        ),
+        (
+            SpotId::Annuna__Factory_Access__Staircase_Top,
+            SpotId::Annuna__Factory_Access__West_22,
+            2105,
+        ),
+        (
+            SpotId::Annuna__Factory_Access__Staircase_Top,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Factory_Access__Upper_Ledge,
+            SpotId::Annuna__Factory_Access__East_24,
+            2528,
+        ),
+        (
+            SpotId::Annuna__Factory_Access__Upper_Ledge,
+            SpotId::Annuna__Factory_Access__Staircase_Top,
+            1200,
+        ),
+        (
+            SpotId::Annuna__Factory_Access__Upper_Ledge,
+            SpotId::Annuna__Factory_Access__West_22,
+            1403,
+        ),
+        (
+            SpotId::Annuna__Factory_Access__Upper_Ledge,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Factory_Access__Upper_Platform,
+            SpotId::Annuna__Factory_Access__Bottom,
+            1399,
+        ),
+        (
+            SpotId::Annuna__Factory_Access__Upper_Platform,
+            SpotId::Annuna__Factory_Access__East_24,
+            2178,
+        ),
+        (
+            SpotId::Annuna__Factory_Access__Upper_Platform,
+            SpotId::Annuna__Factory_Access__Upper_Ledge,
+            600,
+        ),
+        (
+            SpotId::Annuna__Factory_Access__Upper_Platform,
+            SpotId::Annuna__Factory_Access__West_22,
+            1228,
+        ),
+        (
+            SpotId::Annuna__Factory_Access__Upper_Platform,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Factory_Access__West_22,
+            SpotId::Annuna__Factory_Access__Staircase_Top,
+            2105,
+        ),
+        (
+            SpotId::Annuna__Factory_Access__West_22,
+            SpotId::Annuna__Factory_Access__Upper_Platform,
+            1228,
+        ),
+        (
+            SpotId::Annuna__Factory_Access__West_22,
+            SpotId::Annuna__Lower_Hallway__East,
+            1350,
         ),
         (
             SpotId::Annuna__Factory_Access__West_22,
@@ -24065,6 +24765,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             1000,
         ),
         (
+            SpotId::Annuna__Udug_Gate__East,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
             SpotId::Annuna__Vertical_Room__East_22,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
@@ -24126,6 +24831,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Annuna__West_Bridge__Plinth,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__West_Bridge__Tunnel_Wall,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -42784,12 +43494,12 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
         ) => Some(500),
         (
             SpotId::Annuna__East_Bridge__Upper_West_Gap_East,
-            SpotId::Annuna__East_Bridge__Tower_Base_West,
-        ) => Some(2456),
-        (
-            SpotId::Annuna__East_Bridge__Upper_West_Gap_East,
             SpotId::Annuna__East_Bridge__Upper_West_Gap,
         ) => Some(877),
+        (
+            SpotId::Annuna__East_Bridge__Upper_West_Gap_East,
+            SpotId::Annuna__East_Bridge__Upper_West_Partway_East,
+        ) => Some(1929),
         (
             SpotId::Annuna__East_Bridge__Upper_West_Gap_East,
             SpotId::Annuna__East_Bridge__West_Staircase_Upper_West,
@@ -42798,6 +43508,14 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
             SpotId::Annuna__East_Bridge__Upper_West_Gap_East,
             SpotId::Annuna__East_Bridge__West_Under_Gap,
         ) => Some(877),
+        (
+            SpotId::Annuna__East_Bridge__Upper_West_Partway_East,
+            SpotId::Annuna__East_Bridge__Tower_Base_West,
+        ) => Some(526),
+        (
+            SpotId::Annuna__East_Bridge__Upper_West_Partway_East,
+            SpotId::Annuna__East_Bridge__Upper_West_Gap_East,
+        ) => Some(1929),
         (SpotId::Annuna__East_Bridge__West_24, SpotId::Annuna__East_Bridge__Upper_West_Gap) => {
             Some(701)
         }
@@ -42873,6 +43591,89 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
             SpotId::Annuna__East_Bridge__West_Under_Gap,
             SpotId::Annuna__East_Bridge__West_Staircase_Upper_West,
         ) => Some(877),
+        (SpotId::Annuna__East_Climb__Platform_1_Left, SpotId::Annuna__East_Climb__West_26) => {
+            Some(701)
+        }
+        (
+            SpotId::Annuna__East_Climb__Platform_2_Left,
+            SpotId::Annuna__East_Climb__Platform_1_Left,
+        ) => Some(877),
+        (
+            SpotId::Annuna__East_Climb__Platform_3_Left,
+            SpotId::Annuna__East_Climb__Platform_3_Right,
+        ) => Some(350),
+        (SpotId::Annuna__East_Climb__Platform_3_Left, SpotId::Annuna__East_Climb__West_25) => {
+            Some(877)
+        }
+        (SpotId::Annuna__East_Climb__Platform_3_Left, SpotId::Annuna__East_Climb__West_26) => {
+            Some(1099)
+        }
+        (
+            SpotId::Annuna__East_Climb__Platform_3_Right,
+            SpotId::Annuna__East_Climb__Platform_3_Left,
+        ) => Some(350),
+        (
+            SpotId::Annuna__East_Climb__Platform_4_Left,
+            SpotId::Annuna__East_Climb__Platform_3_Left,
+        ) => Some(701),
+        (
+            SpotId::Annuna__East_Climb__Platform_4_Left,
+            SpotId::Annuna__East_Climb__Platform_3_Right,
+        ) => Some(400),
+        (SpotId::Annuna__East_Climb__Upper_Ledge, SpotId::Annuna__East_Climb__Platform_3_Left) => {
+            Some(850)
+        }
+        (SpotId::Annuna__East_Climb__Upper_Ledge, SpotId::Annuna__East_Climb__West_24) => {
+            Some(1403)
+        }
+        (SpotId::Annuna__East_Climb__West_24, SpotId::Annuna__East_Climb__Upper_Ledge) => {
+            Some(1403)
+        }
+        (SpotId::Annuna__East_Climb__West_25, SpotId::Annuna__East_Climb__Platform_3_Left) => {
+            Some(877)
+        }
+        (SpotId::Annuna__East_Climb__West_25, SpotId::Annuna__East_Climb__West_26) => Some(1200),
+        (SpotId::Annuna__Factory_Access__Bottom, SpotId::Annuna__Factory_Access__East_24) => {
+            Some(1052)
+        }
+        (SpotId::Annuna__Factory_Access__East_24, SpotId::Annuna__Factory_Access__Bottom) => {
+            Some(1052)
+        }
+        (
+            SpotId::Annuna__Factory_Access__Grate_Left,
+            SpotId::Annuna__Factory_Access__Staircase_Top,
+        ) => Some(701),
+        (
+            SpotId::Annuna__Factory_Access__Staircase_Top,
+            SpotId::Annuna__Factory_Access__Grate_Left,
+        ) => Some(701),
+        (
+            SpotId::Annuna__Factory_Access__Staircase_Top,
+            SpotId::Annuna__Factory_Access__Upper_Ledge,
+        ) => Some(701),
+        (SpotId::Annuna__Factory_Access__Upper_Ledge, SpotId::Annuna__Factory_Access__East_24) => {
+            Some(2528)
+        }
+        (
+            SpotId::Annuna__Factory_Access__Upper_Ledge,
+            SpotId::Annuna__Factory_Access__Staircase_Top,
+        ) => Some(1200),
+        (
+            SpotId::Annuna__Factory_Access__Upper_Platform,
+            SpotId::Annuna__Factory_Access__Bottom,
+        ) => Some(1399),
+        (
+            SpotId::Annuna__Factory_Access__Upper_Platform,
+            SpotId::Annuna__Factory_Access__East_24,
+        ) => Some(2178),
+        (
+            SpotId::Annuna__Factory_Access__West_22,
+            SpotId::Annuna__Factory_Access__Staircase_Top,
+        ) => Some(2105),
+        (
+            SpotId::Annuna__Factory_Access__West_22,
+            SpotId::Annuna__Factory_Access__Upper_Platform,
+        ) => Some(1228),
         (SpotId::Annuna__Factory_Entrance__East, SpotId::Annuna__Factory_Entrance__Save_Point) => {
             Some(1403)
         }
@@ -48621,12 +49422,12 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
         ) => (Some(500), vec![]),
         (
             SpotId::Annuna__East_Bridge__Upper_West_Gap_East,
-            SpotId::Annuna__East_Bridge__Tower_Base_West,
-        ) => (Some(2456), vec![]),
-        (
-            SpotId::Annuna__East_Bridge__Upper_West_Gap_East,
             SpotId::Annuna__East_Bridge__Upper_West_Gap,
         ) => (Some(877), vec![]),
+        (
+            SpotId::Annuna__East_Bridge__Upper_West_Gap_East,
+            SpotId::Annuna__East_Bridge__Upper_West_Partway_East,
+        ) => (Some(1929), vec![]),
         (
             SpotId::Annuna__East_Bridge__Upper_West_Gap_East,
             SpotId::Annuna__East_Bridge__West_Staircase_Upper_West,
@@ -48635,6 +49436,14 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
             SpotId::Annuna__East_Bridge__Upper_West_Gap_East,
             SpotId::Annuna__East_Bridge__West_Under_Gap,
         ) => (Some(877), vec![]),
+        (
+            SpotId::Annuna__East_Bridge__Upper_West_Partway_East,
+            SpotId::Annuna__East_Bridge__Tower_Base_West,
+        ) => (Some(526), vec![]),
+        (
+            SpotId::Annuna__East_Bridge__Upper_West_Partway_East,
+            SpotId::Annuna__East_Bridge__Upper_West_Gap_East,
+        ) => (Some(1929), vec![]),
         (SpotId::Annuna__East_Bridge__West_24, SpotId::Annuna__East_Bridge__Upper_West_Gap) => {
             (Some(701), vec![])
         }
@@ -48710,6 +49519,91 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
             SpotId::Annuna__East_Bridge__West_Under_Gap,
             SpotId::Annuna__East_Bridge__West_Staircase_Upper_West,
         ) => (Some(877), vec![]),
+        (SpotId::Annuna__East_Climb__Platform_1_Left, SpotId::Annuna__East_Climb__West_26) => {
+            (Some(701), vec![])
+        }
+        (
+            SpotId::Annuna__East_Climb__Platform_2_Left,
+            SpotId::Annuna__East_Climb__Platform_1_Left,
+        ) => (Some(877), vec![]),
+        (
+            SpotId::Annuna__East_Climb__Platform_3_Left,
+            SpotId::Annuna__East_Climb__Platform_3_Right,
+        ) => (Some(350), vec![]),
+        (SpotId::Annuna__East_Climb__Platform_3_Left, SpotId::Annuna__East_Climb__West_25) => {
+            (Some(877), vec![])
+        }
+        (SpotId::Annuna__East_Climb__Platform_3_Left, SpotId::Annuna__East_Climb__West_26) => {
+            (Some(1099), vec![])
+        }
+        (
+            SpotId::Annuna__East_Climb__Platform_3_Right,
+            SpotId::Annuna__East_Climb__Platform_3_Left,
+        ) => (Some(350), vec![]),
+        (
+            SpotId::Annuna__East_Climb__Platform_4_Left,
+            SpotId::Annuna__East_Climb__Platform_3_Left,
+        ) => (Some(701), vec![]),
+        (
+            SpotId::Annuna__East_Climb__Platform_4_Left,
+            SpotId::Annuna__East_Climb__Platform_3_Right,
+        ) => (Some(400), vec![]),
+        (SpotId::Annuna__East_Climb__Upper_Ledge, SpotId::Annuna__East_Climb__Platform_3_Left) => {
+            (Some(850), vec![])
+        }
+        (SpotId::Annuna__East_Climb__Upper_Ledge, SpotId::Annuna__East_Climb__West_24) => {
+            (Some(1403), vec![])
+        }
+        (SpotId::Annuna__East_Climb__West_24, SpotId::Annuna__East_Climb__Upper_Ledge) => {
+            (Some(1403), vec![])
+        }
+        (SpotId::Annuna__East_Climb__West_25, SpotId::Annuna__East_Climb__Platform_3_Left) => {
+            (Some(877), vec![])
+        }
+        (SpotId::Annuna__East_Climb__West_25, SpotId::Annuna__East_Climb__West_26) => {
+            (Some(1200), vec![])
+        }
+        (SpotId::Annuna__Factory_Access__Bottom, SpotId::Annuna__Factory_Access__East_24) => {
+            (Some(1052), vec![])
+        }
+        (SpotId::Annuna__Factory_Access__East_24, SpotId::Annuna__Factory_Access__Bottom) => {
+            (Some(1052), vec![])
+        }
+        (
+            SpotId::Annuna__Factory_Access__Grate_Left,
+            SpotId::Annuna__Factory_Access__Staircase_Top,
+        ) => (Some(701), vec![]),
+        (
+            SpotId::Annuna__Factory_Access__Staircase_Top,
+            SpotId::Annuna__Factory_Access__Grate_Left,
+        ) => (Some(701), vec![]),
+        (
+            SpotId::Annuna__Factory_Access__Staircase_Top,
+            SpotId::Annuna__Factory_Access__Upper_Ledge,
+        ) => (Some(701), vec![]),
+        (SpotId::Annuna__Factory_Access__Upper_Ledge, SpotId::Annuna__Factory_Access__East_24) => {
+            (Some(2528), vec![])
+        }
+        (
+            SpotId::Annuna__Factory_Access__Upper_Ledge,
+            SpotId::Annuna__Factory_Access__Staircase_Top,
+        ) => (Some(1200), vec![]),
+        (
+            SpotId::Annuna__Factory_Access__Upper_Platform,
+            SpotId::Annuna__Factory_Access__Bottom,
+        ) => (Some(1399), vec![]),
+        (
+            SpotId::Annuna__Factory_Access__Upper_Platform,
+            SpotId::Annuna__Factory_Access__East_24,
+        ) => (Some(2178), vec![]),
+        (
+            SpotId::Annuna__Factory_Access__West_22,
+            SpotId::Annuna__Factory_Access__Staircase_Top,
+        ) => (Some(2105), vec![]),
+        (
+            SpotId::Annuna__Factory_Access__West_22,
+            SpotId::Annuna__Factory_Access__Upper_Platform,
+        ) => (Some(1228), vec![]),
         (SpotId::Annuna__Factory_Entrance__East, SpotId::Annuna__Factory_Entrance__Save_Point) => {
             (Some(1403), vec![])
         }

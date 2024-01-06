@@ -228,6 +228,8 @@ areas:
       coord: [36.95, 21.9]
     - name: Below Tunnel
       coord: [36.75, 21.9]
+    - name: Tunnel Wall
+      coord: [36.55, 21.8]
     #endregion
 
 - name: East Bridge
@@ -427,6 +429,12 @@ areas:
           req: Annuna_East_Bridge_Gate
           movement: base
         # TODO: jump to Tower top with Anuman+hover?
+        - to: Tower West Ledge
+          req: $infinite_climb and Annuna_East_Bridge_Gate
+          time: 7  # 1s faster than starting from the west?
+        - to: Tower West Ledge
+          req: $infinite_climb and Annuna_East_Bridge_Gate
+          time: 5  # 1s faster than starting from the west?
     - name: Tower Core
       coord: [38.5, 23.5]
       local:
@@ -499,6 +507,9 @@ areas:
           req: ^_combo
           movement: base
           jumps: 1
+        - to: Tower Gate
+          req: Annuna_East_Bridge_Gate
+          movement: base
       actions:
         - name: Enter Combo
           req: not ^_combo
@@ -601,6 +612,9 @@ areas:
           req: $hook and $hover
           movement: fast_hover
           penalty_tags: [xshift, -fast_hover.1]
+        - to: Flung West
+          req: $charge
+          movement: fling
     #endregion
 
     #region Upper West
@@ -625,12 +639,32 @@ areas:
         - to: Upper West Gap
         - to: West Under Gap
         - to: West Staircase Upper West
+        - to: Upper West Partway East
+      exits:
+        - to: Tower Gate
+          req: $hook and Annuna_East_Bridge_Gate
+          movement: base
+          jumps: 1
+    - name: Upper West Partway East
+      coord: [38.05, 23.8]
+      local:
+        - to: Upper West Gap East
         - to: Tower Base West
       exits:
         - to: Tower Gate
           req: $hook and Annuna_East_Bridge_Gate
           movement: base
           jumps: 1
+        - to: Tower Gate
+          req: $grab and Annuna_East_Bridge_Gate
+          movement: base
+          jumps: 2
+        - to: Tower West Ledge
+          req: $infinite_climb and not Annuna_East_Bridge_Gate
+          time: 8
+        - to: Tower West Ledge
+          req: $infinite_climb and Slingshot_Hook and not Annuna_East_Bridge_Gate
+          time: 6
     - name: West 24
       coord: [37.05, 23.55]
       local:
@@ -639,6 +673,34 @@ areas:
         - to: West Bridge > East 24
           tags: [xshift]
 
+    - name: Flung West
+      coord: [37.9, 21.85]
+      exits:
+        - to: Below Cavern
+          req: $hover
+          movement: fast_hover
+        - to: West Bridge > Below Tunnel
+          req: $hover
+          movement: fast_hover
+          penalty_tags: [xshift, -fast_hover.1]
+        - to: West Bridge > Tunnel Wall
+          req: $hover and Anuman
+          movement: fast_hover
+          jumps: 1
+          penalty_tags: [xshift, -fast_hover.1]
+        - to: West 24
+          movement: fling
+        - to: Upper West Gap
+          movement: fling
+        - to: West Under Gap
+          movement: fling
+        - to: West Staircase Upper West
+          movement: fling
+    - name: West 22
+      coord: [37.05, 21.9]
+    #endregion
+
+    #region North Cavern
     - name: Cavern Foyer
       coord: [37.45, 21.4]
     - name: Cavern Right
@@ -647,8 +709,6 @@ areas:
       coord: [37.75, 21.3]
     - name: Below Cavern
       coord: [37.45, 21.9]
-    - name: West 22
-      coord: [37.05, 21.9]
     #endregion
 
     #region Upper East
@@ -992,9 +1052,196 @@ areas:
   spots:
     - name: West 25
       coord: [44.1, 24.75]
+      local:
+        - to: West 26
+          thru: [44.2, 24.8]
+        - to: Platform 3 Left
+          jumps: 1
+      exits:
+        - to: Factory Entrance > East
+          tags: [xdoor]
+    - name: West 26
+      coord: [44.1, 25.65]
+      exits:
+        - to: Udug Gate > East
+          tags: [xdoor]
+        - to: Platform 1 Left
+          req: $hook
+          movement: base
+          jumps: 1
+    - name: West 24
+      coord: [44.05, 23.75]
+      local:
+        - to: Upper Ledge
+          jumps: 1
+      exits:
+        - to: Factory Access > East 24
+          tags: [xshift]
+
+    - name: Platform 1 Left
+      coord: [44.3, 25.4]
+      local:
+        - to: West 26
+      exits:
+        - to: West 25
+          req: $climb and $grab and Anuman
+          movement: base
+          jumps: 3
+        - to: West 25
+          req: $infinite_climb and Slingshot_Hook
+          movement: base
+          jumps: 2
+    - name: Platform 2 Left
+      coord: [44.55, 25.0]
+      local:
+        - to: Platform 1 Left
+      exits:
+        - to: Platform 3 Right
+          req: $hook
+          movement: base
+          jumps: 2
+    - name: Platform 3 Left
+      coord: [44.35, 24.55]
+      local:
+        - to: West 25
+        - to: West 26
+        - to: Platform 3 Right
+      exits:
+        - to: Platform 4 Left
+          req: $hook
+          movement: base
+          jumps: 2
+    - name: Platform 3 Right
+      coord: [44.45, 24.55]
+      local:
+        - to: Platform 3 Left
+      exits:
+        - to: Platform 4 Left
+          req: $hook
+          movement: base
+          jumps: 2
+    - name: Platform 4 Left
+      coord: [44.55, 24.15]
+      local:
+        - to: Platform 3 Left
+        - to: Platform 3 Right
+      exits:
+        - to: Upper Ledge
+          req: $hook and $hover
+          movement: base
+          jumps: 2
+    - name: Upper Ledge
+      coord: [44.45, 23.7]
+      local:
+        - to: West 24
+        - to: Platform 3 Left
 
 - name: Factory Access
   on_entry: $reset_old_area(^newpos)
   spots:
     - name: West 22
       coord: [43.05, 21.75]
+      local:
+        - to: Staircase Top
+        - to: Upper Platform
+      exits:
+        - to: Lower Hallway > East
+          tags: [xshift]
+    - name: East 22
+      coord: [43.95, 21.75]
+      exits:
+        - to: East Hideout > West
+          tags: [xshift]
+        - to: Grate Left
+          req: Nanite_Mist
+          price: 20
+          movement: mist1
+        - to: Grate Left
+          req: $mist2
+          price: 20
+          movement: mist2
+
+    - name: East 24
+      coord: [43.95, 23.75]
+      local:
+        - to: Bottom
+      exits:
+        - to: East Climb > West 24
+          tags: [xshift]
+    - name: Bottom
+      coord: [43.65, 23.75]
+      local:
+        - to: East 24
+      exits:
+        - to: Upper Platform
+          req: $hook and $hover
+          time: 3  # possibly faster if optimized
+    - name: Upper Platform
+      coord: [43.4, 22.35]
+      local:
+        - to: Bottom
+        - to: East 24
+          thru: [43.6, 23.3]
+      exits:
+        - to: Upper Ledge
+          req: $hook
+          movement: base
+          jumps: 1
+        - to: Upper Ledge
+          req: $grab
+          movement: base
+          jumps: 1
+        - to: West 22
+          req: $hook and $hover
+          movement: base
+          jumps: 2
+    - name: Upper Ledge
+      coord: [43.45, 22.0]
+      local:
+        - to: Staircase Top
+          jumps: 2
+        - to: East 24
+          thru: [[43.425, 22.2], [43.6, 23.3]]
+      exits:
+        - to: West 22
+          req: $hook
+          movement: base  # TODO: this is faster than just hover
+          jumps: 1
+        - to: West 22
+          req: $hover
+          movement: base
+          jumps: 1
+    - name: Staircase Top
+      coord: [43.65, 21.75]
+      local:
+        - to: Upper Ledge
+        - to: Grate Left
+      exits:
+        - to: West 22
+          req: $hover
+          movement: base
+    - name: Grate Left
+      coord: [43.85, 21.75]
+      local:
+        - to: Staircase Top
+      exits:
+        - to: East 22
+          req: Nanite_Mist
+          price: 20
+          movement: mist1
+        - to: East 22
+          req: $mist2
+          price: 20
+          movement: mist2
+
+- name: Udug Gate
+  on_entry: $reset_old_area(^newpos)
+  spots:
+    - name: East
+      coord: [43.95, 25.65]
+
+- name: East Hideout
+  on_entry: $reset_old_area(^newpos)
+  spots:
+    - name: West
+      coord: [44.05, 21.75]
