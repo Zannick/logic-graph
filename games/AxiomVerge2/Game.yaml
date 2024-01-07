@@ -176,8 +176,43 @@ warps:
     # Instead of making this base movement, anywhere it's strictly required needs a real Exit
     tags: [exit]
   # Fast travel times are slightly different when travelling within an area
-  # Fast travels within main are technically doable from the menu, but not from the menu in the breach.
-  # also not possible in interiors! D: TODO: Move interiors into their own region.
+  # TODO: Distance-based penalties (map scroll)
+  # Fast travels are technically doable from the menu, but it costs time to switch tabs, so just model that
+  # as exit menu time.
+  # Fast travel isn't possible across realms: main/kiengir, breach, emergence, filter, interior(!)
+  # TODO: fast travel collection skip... should these only be possible from a Menu > Map area?
+  fast_travel_amagi_main_area:
+    time: 12
+    req: $ft_main and ^map__amagi__main_area__save
+    to: Amagi > Main Area > Save Point
+    after: $refill_energy
+    penalties:
+      - when: ^mode != 'drone'
+        add: 2.5
+  fast_travel_annuna_center:
+    time: 12
+    req: $ft_main and ^map__annuna__center_save__save
+    to: Annuna > Center Save > Save Point
+    after: $refill_energy
+    penalties:
+      - when: ^mode != 'drone'
+        add: 2.5
+  fast_travel_annuna_factory_entrance:
+    time: 12
+    req: $ft_main and ^map__annuna__factory_entrance__save
+    to: Annuna > Factory Entrance > Save Point
+    after: $refill_energy
+    penalties:
+      - when: ^mode != 'drone'
+        add: 2.5
+  fast_travel_annuna_mirror_match:
+    time: 12
+    req: $ft_main and ^map__annuna__mirror_match__save
+    to: Annuna > Mirror Match > Save Point
+    after: $refill_energy
+    penalties:
+      - when: ^mode != 'drone'
+        add: 2.5
   fast_travel_ebih_base_camp:
     time: 12
     req: $ft_main and ^map__ebih__base_camp__save
@@ -206,14 +241,6 @@ warps:
     time: 12
     req: $ft_main and ^map__ebih__ebih_west__lower_save
     to: Ebih > Ebih West > Lower Save
-    after: $refill_energy
-    penalties:
-      - when: ^mode != 'drone'
-        add: 2.5
-  fast_travel_amagi_main_area:
-    time: 12
-    req: $ft_main and ^map__amagi__main_area__save
-    to: Amagi > Main Area > Save Point
     after: $refill_energy
     penalties:
       - when: ^mode != 'drone'
@@ -414,7 +441,7 @@ helpers:
      Drone_Hover, Fast_Travel]
   # To be added: 5 Flask, 3 Big_Flask, Double_Axe, Royal_Dagger, Udusan
   # 1 Health_Fragment, The_Student, Heretics_Granddaughter, Suspension_Bridge, Plague_of_Thoughts
-  # Nano_Lattice_2, Lament_for_Fools, Family_Tragedy
+  # Nano_Lattice_2, Lament_for_Fools, Family_Tragedy, Destruction_Pogrom
 
   $save:action: ^save = ^position; $refill_energy
   $refill_energy:action: ^energy = $max_energy

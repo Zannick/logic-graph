@@ -245,7 +245,23 @@ pub fn get_area(spot: SpotId) -> AreaId {
         | SpotId::Annuna__Center_Save__West_Floor
         | SpotId::Annuna__Center_Save__West_Catwalk => AreaId::Annuna__Center_Save,
         SpotId::Annuna__Twisty_Passages__East_Floor
-        | SpotId::Annuna__Twisty_Passages__East_Catwalk => AreaId::Annuna__Twisty_Passages,
+        | SpotId::Annuna__Twisty_Passages__East_Catwalk
+        | SpotId::Annuna__Twisty_Passages__East_Shaft
+        | SpotId::Annuna__Twisty_Passages__East_Fork
+        | SpotId::Annuna__Twisty_Passages__Bottom_Middle
+        | SpotId::Annuna__Twisty_Passages__Bottom_West
+        | SpotId::Annuna__Twisty_Passages__Center
+        | SpotId::Annuna__Twisty_Passages__Northeast_C
+        | SpotId::Annuna__Twisty_Passages__Northeast_D
+        | SpotId::Annuna__Twisty_Passages__Top
+        | SpotId::Annuna__Twisty_Passages__Southwest_C
+        | SpotId::Annuna__Twisty_Passages__West_Hill_Right
+        | SpotId::Annuna__Twisty_Passages__West_Hill_Left
+        | SpotId::Annuna__Twisty_Passages__West_Dip
+        | SpotId::Annuna__Twisty_Passages__West_Ledge
+        | SpotId::Annuna__Twisty_Passages__West
+        | SpotId::Annuna__Twisty_Passages__Northwest_Alcove => AreaId::Annuna__Twisty_Passages,
+        SpotId::Annuna__West_Climb__East_20 => AreaId::Annuna__West_Climb,
         SpotId::Antarctica__West__Helipad
         | SpotId::Antarctica__West__Shed_Entry
         | SpotId::Antarctica__West__Boxes => AreaId::Antarctica__West,
@@ -1543,7 +1559,23 @@ pub fn get_region(spot: SpotId) -> RegionId {
         | SpotId::Annuna__Center_Save__West_Floor
         | SpotId::Annuna__Center_Save__West_Catwalk => RegionId::Annuna,
         SpotId::Annuna__Twisty_Passages__East_Floor
-        | SpotId::Annuna__Twisty_Passages__East_Catwalk => RegionId::Annuna,
+        | SpotId::Annuna__Twisty_Passages__East_Catwalk
+        | SpotId::Annuna__Twisty_Passages__East_Shaft
+        | SpotId::Annuna__Twisty_Passages__East_Fork
+        | SpotId::Annuna__Twisty_Passages__Bottom_Middle
+        | SpotId::Annuna__Twisty_Passages__Bottom_West
+        | SpotId::Annuna__Twisty_Passages__Center
+        | SpotId::Annuna__Twisty_Passages__Northeast_C
+        | SpotId::Annuna__Twisty_Passages__Northeast_D
+        | SpotId::Annuna__Twisty_Passages__Top
+        | SpotId::Annuna__Twisty_Passages__Southwest_C
+        | SpotId::Annuna__Twisty_Passages__West_Hill_Right
+        | SpotId::Annuna__Twisty_Passages__West_Hill_Left
+        | SpotId::Annuna__Twisty_Passages__West_Dip
+        | SpotId::Annuna__Twisty_Passages__West_Ledge
+        | SpotId::Annuna__Twisty_Passages__West
+        | SpotId::Annuna__Twisty_Passages__Northwest_Alcove => RegionId::Annuna,
+        SpotId::Annuna__West_Climb__East_20 => RegionId::Annuna,
         SpotId::Antarctica__West__Helipad
         | SpotId::Antarctica__West__Shed_Entry
         | SpotId::Antarctica__West__Boxes => RegionId::Antarctica,
@@ -2702,6 +2734,10 @@ impl world::Accessible for Location {
                 rules::access_mist2(&ctx, world)
             }
             LocationId::Annuna__Sniper_Valley__Table__Item => true,
+            LocationId::Annuna__Twisty_Passages__Northwest_Alcove__Refill => {
+                rules::access_more_refills(&ctx, world)
+            }
+            LocationId::Annuna__Twisty_Passages__Top__Tablet => true,
             LocationId::Annuna__West_Bridge__Plinth__Item => true,
             LocationId::Antarctica__Building_2__Behind_Boxes__Note => true,
             LocationId::Antarctica__Power_Room__Switch__Flip => true,
@@ -2882,6 +2918,9 @@ impl world::Accessible for Location {
             }
             LocationId::Interior__Building_Interior__Corner__Urn => true,
             LocationId::Interior__Building_Interior__Entry__Remote_Urn => {
+                rules::access_boomerang(&ctx, world)
+            }
+            LocationId::Interior__Building_Interior__Entry__Urn_Collection_Skip => {
                 rules::access_boomerang(&ctx, world)
             }
             LocationId::Interior__Bunker_Interior__Desk__Note => true,
@@ -3305,6 +3344,21 @@ impl world::Accessible for Exit {
             ExitId::Annuna__Sniper_Valley__West_24__ex__East_Bridge__East_24_1 => true,
             ExitId::Annuna__Sniper_Valley__West_25_Lower__ex__East_Bridge__East_25_Lower_1 => true,
             ExitId::Annuna__Sniper_Valley__West_25_Upper__ex__East_Bridge__East_25_Upper_1 => true,
+            ExitId::Annuna__Twisty_Passages__Bottom_Middle__ex__Center_1 => rules::access_hook(&ctx, world),
+            ExitId::Annuna__Twisty_Passages__Bottom_Middle__ex__East_Fork_1 => rules::access_hook(&ctx, world),
+            ExitId::Annuna__Twisty_Passages__Bottom_West__ex__Southwest_C_1 => rules::access_hook(&ctx, world),
+            ExitId::Annuna__Twisty_Passages__East_Catwalk__ex__Center_Save__West_Catwalk_1 => true,
+            ExitId::Annuna__Twisty_Passages__East_Floor__ex__Center_Save__West_Floor_1 => true,
+            ExitId::Annuna__Twisty_Passages__East_Fork__ex__Northeast_C_1 => rules::access_hook(&ctx, world),
+            ExitId::Annuna__Twisty_Passages__East_Fork__ex__Northeast_C_2 => rules::access_grab(&ctx, world),
+            ExitId::Annuna__Twisty_Passages__Northeast_C__ex__Northeast_D_1 => rules::access_hook(&ctx, world),
+            ExitId::Annuna__Twisty_Passages__Northeast_C__ex__Southwest_C_1 => rules::access_hook_and_hover(&ctx, world),
+            ExitId::Annuna__Twisty_Passages__Northeast_C__ex__West_Hill_Right_1 => rules::access_hook_and_hover(&ctx, world),
+            ExitId::Annuna__Twisty_Passages__Northeast_D__ex__Top_1 => rules::access_hook(&ctx, world),
+            ExitId::Annuna__Twisty_Passages__Southwest_C__ex__West_Dip_1 => rules::access_hook(&ctx, world),
+            ExitId::Annuna__Twisty_Passages__Southwest_C__ex__West_Ledge_1 => rules::access_hook(&ctx, world),
+            ExitId::Annuna__Twisty_Passages__West__ex__West_Climb__East_20_1 => true,
+            ExitId::Annuna__Twisty_Passages__West_Hill_Left__ex__Northwest_Alcove_1 => rules::access_hook(&ctx, world),
             ExitId::Annuna__Vertical_Room__East_22__ex__Lower_Hallway__West_1 => true,
             ExitId::Annuna__Vertical_Room__Gate_Ledge__ex__Plinth_1 => rules::access_anunna_vertical_room_gate(&ctx, world),
             ExitId::Annuna__Vertical_Room__Lower_Mid__ex__Lower_Platform_1_Right_1 => rules::access_grab(&ctx, world),
@@ -4046,6 +4100,7 @@ impl world::Accessible for Exit {
             ExitId::Glacier__Vertical_Room__West_8__ex__Peak__East_8_1 => true,
             ExitId::Glacier__Vertical_Room__West_9__ex__Ledge_Grab_Room__East_9_1 => true,
             ExitId::Interior__Building_Interior__Entry__ex__Ebih__Base_Camp__Building_Entry_1 => true,
+            ExitId::Interior__Building_Interior__Entry__Urn_Collection_Skip => rules::access_boomerang(&ctx, world),
             ExitId::Interior__Bunker_Interior__Entry__ex__Ebih__Base_Camp__Bunker_Entry_1 => true,
             ExitId::Interior__Cave_Behind_Waterfall__Bottom__ex__Amagi__Main_Area__Secret_Outcropping_1 => true,
             ExitId::Interior__Cave_Behind_Waterfall__Bottom__ex__Middle_1 => rules::access_grab_or_climb(&ctx, world),
@@ -4428,6 +4483,9 @@ impl world::Exit for Exit {
             ExitId::Annuna__Sniper_Valley__West_24__ex__East_Bridge__East_24_1 => true,
             ExitId::Annuna__Sniper_Valley__West_25_Lower__ex__East_Bridge__East_25_Lower_1 => true,
             ExitId::Annuna__Sniper_Valley__West_25_Upper__ex__East_Bridge__East_25_Upper_1 => true,
+            ExitId::Annuna__Twisty_Passages__East_Catwalk__ex__Center_Save__West_Catwalk_1 => true,
+            ExitId::Annuna__Twisty_Passages__East_Floor__ex__Center_Save__West_Floor_1 => true,
+            ExitId::Annuna__Twisty_Passages__West__ex__West_Climb__East_20_1 => true,
             ExitId::Annuna__Vertical_Room__East_22__ex__Lower_Hallway__West_1 => true,
             ExitId::Annuna__Vertical_Room__West_21__ex__Center_Save__East_1 => true,
             ExitId::Annuna__Vertical_Room__West_22__ex__East_Bridge__East_22_1 => true,
@@ -5303,6 +5361,9 @@ impl world::Accessible for Warp {
                 WarpId::FastTravelAmagiMainArea => {
                     rules::access_ft_main_and_map__amagi__main_area__save(ctx, world)
                 }
+                WarpId::FastTravelAnnunaCenter => {
+                    rules::access_ft_main_and_map__annuna__center_save__save(ctx, world)
+                }
                 WarpId::FastTravelEbihBaseCamp => {
                     rules::access_ft_main_and_map__ebih__base_camp__save(ctx, world)
                 }
@@ -5368,6 +5429,13 @@ impl world::Accessible for Warp {
         self.time
             + match self.id {
                 WarpId::FastTravelAmagiMainArea => {
+                    if rules::access_mode_ne_drone(ctx, world) {
+                        2500
+                    } else {
+                        0
+                    }
+                }
+                WarpId::FastTravelAnnunaCenter => {
                     if rules::access_mode_ne_drone(ctx, world) {
                         2500
                     } else {
@@ -5494,6 +5562,7 @@ impl world::Warp for Warp {
                 WarpId::ExitBreach => data::flipside(ctx.position()),
                 WarpId::ExitMenu => ctx.last(),
                 WarpId::FastTravelAmagiMainArea => SpotId::Amagi__Main_Area__Save_Point,
+                WarpId::FastTravelAnnunaCenter => SpotId::Annuna__Center_Save__Save_Point,
                 WarpId::FastTravelEbihBaseCamp => SpotId::Ebih__Base_Camp__Save_Point,
                 WarpId::FastTravelEbihWestLower => SpotId::Ebih__Ebih_West__Lower_Save,
                 WarpId::FastTravelEbihWestMid => SpotId::Ebih__Ebih_West__Mid_Save,
@@ -5540,6 +5609,7 @@ impl world::Warp for Warp {
             WarpId::ExitBreach => rules::action_clear_breach_save(ctx, world),
             WarpId::ExitMenu => rules::action_last_set_default(ctx, world),
             WarpId::FastTravelAmagiMainArea => rules::action_refill_energy(ctx, world),
+            WarpId::FastTravelAnnunaCenter => rules::action_refill_energy(ctx, world),
             WarpId::FastTravelEbihBaseCamp => rules::action_refill_energy(ctx, world),
             WarpId::FastTravelEbihWestLower => rules::action_refill_energy(ctx, world),
             WarpId::FastTravelEbihWestMid => rules::action_refill_energy(ctx, world),
@@ -5569,6 +5639,7 @@ impl world::Warp for Warp {
             WarpId::ExitBreach => false,
             WarpId::ExitMenu => false,
             WarpId::FastTravelAmagiMainArea => false,
+            WarpId::FastTravelAnnunaCenter => false,
             WarpId::FastTravelEbihBaseCamp => false,
             WarpId::FastTravelEbihWestLower => false,
             WarpId::FastTravelEbihWestMid => false,
@@ -5601,7 +5672,7 @@ pub struct Spot {
     pub actions: Range<usize>,
 }
 
-static RAW_SPOTS: [SpotId; 1275] = [
+static RAW_SPOTS: [SpotId; 1291] = [
     SpotId::None,
     SpotId::Amagi__Grid_31_19__East,
     SpotId::Amagi__Grid_31_19__West,
@@ -5797,8 +5868,23 @@ static RAW_SPOTS: [SpotId; 1275] = [
     SpotId::Annuna__Sniper_Valley__West_24,
     SpotId::Annuna__Sniper_Valley__West_25_Lower,
     SpotId::Annuna__Sniper_Valley__West_25_Upper,
+    SpotId::Annuna__Twisty_Passages__Bottom_Middle,
+    SpotId::Annuna__Twisty_Passages__Bottom_West,
+    SpotId::Annuna__Twisty_Passages__Center,
     SpotId::Annuna__Twisty_Passages__East_Catwalk,
     SpotId::Annuna__Twisty_Passages__East_Floor,
+    SpotId::Annuna__Twisty_Passages__East_Fork,
+    SpotId::Annuna__Twisty_Passages__East_Shaft,
+    SpotId::Annuna__Twisty_Passages__Northeast_C,
+    SpotId::Annuna__Twisty_Passages__Northeast_D,
+    SpotId::Annuna__Twisty_Passages__Northwest_Alcove,
+    SpotId::Annuna__Twisty_Passages__Southwest_C,
+    SpotId::Annuna__Twisty_Passages__Top,
+    SpotId::Annuna__Twisty_Passages__West,
+    SpotId::Annuna__Twisty_Passages__West_Dip,
+    SpotId::Annuna__Twisty_Passages__West_Hill_Left,
+    SpotId::Annuna__Twisty_Passages__West_Hill_Right,
+    SpotId::Annuna__Twisty_Passages__West_Ledge,
     SpotId::Annuna__Udug_Gate__East,
     SpotId::Annuna__Vertical_Room__East_21,
     SpotId::Annuna__Vertical_Room__East_22,
@@ -5827,6 +5913,7 @@ static RAW_SPOTS: [SpotId; 1275] = [
     SpotId::Annuna__West_Bridge__West_26_Lower,
     SpotId::Annuna__West_Bridge__West_26_Upper,
     SpotId::Annuna__West_Bridge__West_Outcropping,
+    SpotId::Annuna__West_Climb__East_20,
     SpotId::Antarctica__Building_1E__Connector,
     SpotId::Antarctica__Building_1E__East_Entry,
     SpotId::Antarctica__Building_1W__Connector,
@@ -6935,8 +7022,8 @@ lazy_static! {
             end: SpotId::Annuna__Sniper_Valley__West_25_Upper.into_usize() + 1,
         },
         AreaId::Annuna__Twisty_Passages => Range {
-            start: SpotId::Annuna__Twisty_Passages__East_Catwalk.into_usize(),
-            end: SpotId::Annuna__Twisty_Passages__East_Floor.into_usize() + 1,
+            start: SpotId::Annuna__Twisty_Passages__Bottom_Middle.into_usize(),
+            end: SpotId::Annuna__Twisty_Passages__West_Ledge.into_usize() + 1,
         },
         AreaId::Annuna__Udug_Gate => Range {
             start: SpotId::Annuna__Udug_Gate__East.into_usize(),
@@ -6949,6 +7036,10 @@ lazy_static! {
         AreaId::Annuna__West_Bridge => Range {
             start: SpotId::Annuna__West_Bridge__Below_Tunnel.into_usize(),
             end: SpotId::Annuna__West_Bridge__West_Outcropping.into_usize() + 1,
+        },
+        AreaId::Annuna__West_Climb => Range {
+            start: SpotId::Annuna__West_Climb__East_20.into_usize(),
+            end: SpotId::Annuna__West_Climb__East_20.into_usize() + 1,
         },
         AreaId::Antarctica__Building_1E => Range {
             start: SpotId::Antarctica__Building_1E__Connector.into_usize(),
@@ -7476,7 +7567,7 @@ impl world::World for World {
     type Exit = Exit;
     type Action = Action;
     type Warp = Warp;
-    const NUM_LOCATIONS: u32 = 222;
+    const NUM_LOCATIONS: u32 = 225;
 
     fn ruleset(&self) -> String {
         format!(
@@ -7653,6 +7744,7 @@ impl world::World for World {
             ],
             CanonId::Melee_Charge => vec![
                 LocationId::Interior__Building_Interior__Entry__Remote_Urn,
+                LocationId::Interior__Building_Interior__Entry__Urn_Collection_Skip,
                 LocationId::Interior__Building_Interior__Corner__Urn,
             ],
             CanonId::Irikar_Royal_Storage_Wall => {
@@ -7792,6 +7884,7 @@ impl world::World for World {
             Item::Royal_Ring => vec![LocationId::Annuna__East_Bridge__Tower_Secret__Item],
             Item::Power_Core => vec![
                 LocationId::Annuna__Sniper_Valley__Bridge_End__Health_Pickup,
+                LocationId::Annuna__Twisty_Passages__Northwest_Alcove__Refill,
                 LocationId::Giguna__West_Caverns__Bush__Item,
                 LocationId::Irikar__Abandoned_Room__Corner_Core__Core,
                 LocationId::Irikar__Basement_Pipes__Left_Vertical_Pipe__Health_Pickup,
@@ -7806,6 +7899,7 @@ impl world::World for World {
                 LocationId::Annuna__Sniper_Valley__Cavern_Inner_Rock_West__Break_Inner_Wall,
                 LocationId::Annuna__Sniper_Valley__Cavern_Inner_Rock_East__Break_Inner_Wall,
             ],
+            Item::Destruction_Pogrom => vec![LocationId::Annuna__Twisty_Passages__Top__Tablet],
             Item::Ice_Axe => vec![LocationId::Antarctica__Shed__Interior__Shelf],
             Item::Notes_2053_02_27 => vec![LocationId::Antarctica__Building_2__Behind_Boxes__Note],
             Item::Station_Power => vec![LocationId::Antarctica__Power_Room__Switch__Flip],
@@ -7927,6 +8021,7 @@ impl world::World for World {
             Item::Dear_Ernest => vec![LocationId::Interior__Bunker_Interior__Desk__Note],
             Item::Melee_Charge => vec![
                 LocationId::Interior__Building_Interior__Entry__Remote_Urn,
+                LocationId::Interior__Building_Interior__Entry__Urn_Collection_Skip,
                 LocationId::Interior__Building_Interior__Corner__Urn,
             ],
             Item::Companies_Layoff => vec![LocationId::Interior__Tent_Interior__Desk__Note],
@@ -8190,6 +8285,12 @@ impl world::World for World {
             LocationId::Annuna__Sniper_Valley__Cavern_Cache__Item => {
                 SpotId::Annuna__Sniper_Valley__Cavern_Cache
             }
+            LocationId::Annuna__Twisty_Passages__Top__Tablet => {
+                SpotId::Annuna__Twisty_Passages__Top
+            }
+            LocationId::Annuna__Twisty_Passages__Northwest_Alcove__Refill => {
+                SpotId::Annuna__Twisty_Passages__Northwest_Alcove
+            }
             LocationId::Antarctica__Shed__Interior__Shelf => SpotId::Antarctica__Shed__Interior,
             LocationId::Antarctica__Building_2__Behind_Boxes__Note => {
                 SpotId::Antarctica__Building_2__Behind_Boxes
@@ -8401,6 +8502,9 @@ impl world::World for World {
                 SpotId::Interior__Bunker_Interior__Desk
             }
             LocationId::Interior__Building_Interior__Entry__Remote_Urn => {
+                SpotId::Interior__Building_Interior__Entry
+            }
+            LocationId::Interior__Building_Interior__Entry__Urn_Collection_Skip => {
                 SpotId::Interior__Building_Interior__Entry
             }
             LocationId::Interior__Building_Interior__Corner__Urn => {
@@ -8941,6 +9045,16 @@ impl world::World for World {
             ExitId::Annuna__Center_Save__Save_Point__ex__West_Catwalk_1 => SpotId::Annuna__Center_Save__Save_Point,
             ExitId::Annuna__Center_Save__West_Floor__ex__Twisty_Passages__East_Floor_1 => SpotId::Annuna__Center_Save__West_Floor,
             ExitId::Annuna__Center_Save__West_Catwalk__ex__Twisty_Passages__East_Catwalk_1 => SpotId::Annuna__Center_Save__West_Catwalk,
+            ExitId::Annuna__Twisty_Passages__East_Floor__ex__Center_Save__West_Floor_1 => SpotId::Annuna__Twisty_Passages__East_Floor,
+            ExitId::Annuna__Twisty_Passages__East_Catwalk__ex__Center_Save__West_Catwalk_1 => SpotId::Annuna__Twisty_Passages__East_Catwalk,
+            ExitId::Annuna__Twisty_Passages__East_Fork__ex__Northeast_C_1 | ExitId:: Annuna__Twisty_Passages__East_Fork__ex__Northeast_C_2 => SpotId::Annuna__Twisty_Passages__East_Fork,
+            ExitId::Annuna__Twisty_Passages__Bottom_Middle__ex__Center_1 | ExitId:: Annuna__Twisty_Passages__Bottom_Middle__ex__East_Fork_1 => SpotId::Annuna__Twisty_Passages__Bottom_Middle,
+            ExitId::Annuna__Twisty_Passages__Bottom_West__ex__Southwest_C_1 => SpotId::Annuna__Twisty_Passages__Bottom_West,
+            ExitId::Annuna__Twisty_Passages__Northeast_C__ex__West_Hill_Right_1 | ExitId:: Annuna__Twisty_Passages__Northeast_C__ex__Southwest_C_1 | ExitId:: Annuna__Twisty_Passages__Northeast_C__ex__Northeast_D_1 => SpotId::Annuna__Twisty_Passages__Northeast_C,
+            ExitId::Annuna__Twisty_Passages__Northeast_D__ex__Top_1 => SpotId::Annuna__Twisty_Passages__Northeast_D,
+            ExitId::Annuna__Twisty_Passages__Southwest_C__ex__West_Dip_1 | ExitId:: Annuna__Twisty_Passages__Southwest_C__ex__West_Ledge_1 => SpotId::Annuna__Twisty_Passages__Southwest_C,
+            ExitId::Annuna__Twisty_Passages__West_Hill_Left__ex__Northwest_Alcove_1 => SpotId::Annuna__Twisty_Passages__West_Hill_Left,
+            ExitId::Annuna__Twisty_Passages__West__ex__West_Climb__East_20_1 => SpotId::Annuna__Twisty_Passages__West,
             ExitId::Antarctica__West__Shed_Entry__ex__Shed__Interior_1 | ExitId:: Antarctica__West__Shed_Entry__ex__Helipad_1 => SpotId::Antarctica__West__Shed_Entry,
             ExitId::Antarctica__West__Boxes__ex__Building_1W__West_Entry_1 => SpotId::Antarctica__West__Boxes,
             ExitId::Antarctica__Shed__Interior__ex__West__Shed_Entry_1 => SpotId::Antarctica__Shed__Interior,
@@ -9433,6 +9547,7 @@ impl world::World for World {
             ExitId::Interior__Dock_Interior__Entry__ex__Glacier__Dock_Outside__Entry_1 => SpotId::Interior__Dock_Interior__Entry,
             ExitId::Interior__Bunker_Interior__Entry__ex__Ebih__Base_Camp__Bunker_Entry_1 => SpotId::Interior__Bunker_Interior__Entry,
             ExitId::Interior__Building_Interior__Entry__ex__Ebih__Base_Camp__Building_Entry_1 => SpotId::Interior__Building_Interior__Entry,
+            ExitId::Interior__Building_Interior__Entry__Urn_Collection_Skip => SpotId::Interior__Building_Interior__Entry,
             ExitId::Interior__Tent_Interior__Entry__ex__Ebih__Base_Camp__Tent_Entry_1 => SpotId::Interior__Tent_Interior__Entry,
             ExitId::Interior__Garage__Entry__ex__Ebih__By_Garage__Garage_Entry_1 => SpotId::Interior__Garage__Entry,
             ExitId::Interior__Ebih_Cave__Entry__ex__Ebih__Waterfall__Cave_Entrance_1 => SpotId::Interior__Ebih_Cave__Entry,
@@ -10362,6 +10477,11 @@ impl world::World for World {
             | SpotId::Annuna__Sniper_Valley__West_24
             | SpotId::Annuna__Sniper_Valley__West_25_Lower
             | SpotId::Annuna__Sniper_Valley__West_25_Upper
+            | SpotId::Annuna__Twisty_Passages__East_Catwalk
+            | SpotId::Annuna__Twisty_Passages__East_Floor
+            | SpotId::Annuna__Twisty_Passages__Northwest_Alcove
+            | SpotId::Annuna__Twisty_Passages__Top
+            | SpotId::Annuna__Twisty_Passages__West
             | SpotId::Annuna__Vertical_Room__East_22
             | SpotId::Annuna__Vertical_Room__West_21
             | SpotId::Annuna__Vertical_Room__West_22
@@ -10924,6 +11044,7 @@ impl World {
                             | Item::Compass
                             | Item::Dangerous_Ideas
                             | Item::Dear_Ernest
+                            | Item::Destruction_Pogrom
                             | Item::Double_Axe
                             | Item::Drone_Melee_Damage_3
                             | Item::Drone_Melee_Speed_3
@@ -10965,6 +11086,7 @@ impl World {
                         Item::Aansur
                             | Item::Amagi_Stronghold_Left_Wall
                             | Item::Carnelian_Ring
+                            | Item::Destruction_Pogrom
                             | Item::Double_Axe
                             | Item::Drone_Melee_Damage_3
                             | Item::Drone_Melee_Speed_3
@@ -11006,6 +11128,7 @@ impl World {
                             | Item::Compass
                             | Item::Dangerous_Ideas
                             | Item::Dear_Ernest
+                            | Item::Destruction_Pogrom
                             | Item::Double_Axe
                             | Item::Drone_Melee_Damage_3
                             | Item::Drone_Melee_Speed_3
@@ -11048,6 +11171,7 @@ impl World {
                         Item::Aansur
                             | Item::Amagi_Stronghold_Left_Wall
                             | Item::Carnelian_Ring
+                            | Item::Destruction_Pogrom
                             | Item::Double_Axe
                             | Item::Drone_Melee_Damage_3
                             | Item::Drone_Melee_Speed_3
@@ -11368,6 +11492,22 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
             item: Item::Big_Flask,
             price: Currency::Free,
             time: 5500,
+            exit_id: None,
+        },
+        LocationId::Annuna__Twisty_Passages__Top__Tablet => Location {
+            id: LocationId::Annuna__Twisty_Passages__Top__Tablet,
+            canonical: CanonId::None,
+            item: Item::Destruction_Pogrom,
+            price: Currency::Free,
+            time: 1000,
+            exit_id: None,
+        },
+        LocationId::Annuna__Twisty_Passages__Northwest_Alcove__Refill => Location {
+            id: LocationId::Annuna__Twisty_Passages__Northwest_Alcove__Refill,
+            canonical: CanonId::None,
+            item: Item::Power_Core,
+            price: Currency::Free,
+            time: 0,
             exit_id: None,
         },
         LocationId::Antarctica__Shed__Interior__Shelf => Location {
@@ -12129,6 +12269,14 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
             price: Currency::Free,
             time: 6500,
             exit_id: None,
+        },
+        LocationId::Interior__Building_Interior__Entry__Urn_Collection_Skip => Location {
+            id: LocationId::Interior__Building_Interior__Entry__Urn_Collection_Skip,
+            canonical: CanonId::Melee_Charge,
+            item: Item::Melee_Charge,
+            price: Currency::Free,
+            time: 0,
+            exit_id: Some(ExitId::Interior__Building_Interior__Entry__Urn_Collection_Skip),
         },
         LocationId::Interior__Building_Interior__Corner__Urn => Location {
             id: LocationId::Interior__Building_Interior__Corner__Urn,
@@ -14197,6 +14345,111 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
             id: ExitId::Annuna__Center_Save__West_Catwalk__ex__Twisty_Passages__East_Catwalk_1,
             time: 1350,
             dest: SpotId::Annuna__Twisty_Passages__East_Catwalk,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__Twisty_Passages__East_Floor__ex__Center_Save__West_Floor_1 => Exit {
+            id: ExitId::Annuna__Twisty_Passages__East_Floor__ex__Center_Save__West_Floor_1,
+            time: 1350,
+            dest: SpotId::Annuna__Center_Save__West_Floor,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__Twisty_Passages__East_Catwalk__ex__Center_Save__West_Catwalk_1 => Exit {
+            id: ExitId::Annuna__Twisty_Passages__East_Catwalk__ex__Center_Save__West_Catwalk_1,
+            time: 1350,
+            dest: SpotId::Annuna__Center_Save__West_Catwalk,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__Twisty_Passages__East_Fork__ex__Northeast_C_1 => Exit {
+            id: ExitId::Annuna__Twisty_Passages__East_Fork__ex__Northeast_C_1,
+            time: 1200,
+            dest: SpotId::Annuna__Twisty_Passages__Northeast_C,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__Twisty_Passages__East_Fork__ex__Northeast_C_2 => Exit {
+            id: ExitId::Annuna__Twisty_Passages__East_Fork__ex__Northeast_C_2,
+            time: 1500,
+            dest: SpotId::Annuna__Twisty_Passages__Northeast_C,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__Twisty_Passages__Bottom_Middle__ex__Center_1 => Exit {
+            id: ExitId::Annuna__Twisty_Passages__Bottom_Middle__ex__Center_1,
+            time: 1200,
+            dest: SpotId::Annuna__Twisty_Passages__Center,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__Twisty_Passages__Bottom_Middle__ex__East_Fork_1 => Exit {
+            id: ExitId::Annuna__Twisty_Passages__Bottom_Middle__ex__East_Fork_1,
+            time: 701,
+            dest: SpotId::Annuna__Twisty_Passages__East_Fork,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__Twisty_Passages__Bottom_West__ex__Southwest_C_1 => Exit {
+            id: ExitId::Annuna__Twisty_Passages__Bottom_West__ex__Southwest_C_1,
+            time: 1200,
+            dest: SpotId::Annuna__Twisty_Passages__Southwest_C,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__Twisty_Passages__Northeast_C__ex__West_Hill_Right_1 => Exit {
+            id: ExitId::Annuna__Twisty_Passages__Northeast_C__ex__West_Hill_Right_1,
+            time: 1374,
+            dest: SpotId::Annuna__Twisty_Passages__West_Hill_Right,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__Twisty_Passages__Northeast_C__ex__Southwest_C_1 => Exit {
+            id: ExitId::Annuna__Twisty_Passages__Northeast_C__ex__Southwest_C_1,
+            time: 1999,
+            dest: SpotId::Annuna__Twisty_Passages__Southwest_C,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__Twisty_Passages__Northeast_C__ex__Northeast_D_1 => Exit {
+            id: ExitId::Annuna__Twisty_Passages__Northeast_C__ex__Northeast_D_1,
+            time: 350,
+            dest: SpotId::Annuna__Twisty_Passages__Northeast_D,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__Twisty_Passages__Northeast_D__ex__Top_1 => Exit {
+            id: ExitId::Annuna__Twisty_Passages__Northeast_D__ex__Top_1,
+            time: 1403,
+            dest: SpotId::Annuna__Twisty_Passages__Top,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__Twisty_Passages__Southwest_C__ex__West_Dip_1 => Exit {
+            id: ExitId::Annuna__Twisty_Passages__Southwest_C__ex__West_Dip_1,
+            time: 1200,
+            dest: SpotId::Annuna__Twisty_Passages__West_Dip,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__Twisty_Passages__Southwest_C__ex__West_Ledge_1 => Exit {
+            id: ExitId::Annuna__Twisty_Passages__Southwest_C__ex__West_Ledge_1,
+            time: 1200,
+            dest: SpotId::Annuna__Twisty_Passages__West_Ledge,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__Twisty_Passages__West_Hill_Left__ex__Northwest_Alcove_1 => Exit {
+            id: ExitId::Annuna__Twisty_Passages__West_Hill_Left__ex__Northwest_Alcove_1,
+            time: 4035,
+            dest: SpotId::Annuna__Twisty_Passages__Northwest_Alcove,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__Twisty_Passages__West__ex__West_Climb__East_20_1 => Exit {
+            id: ExitId::Annuna__Twisty_Passages__West__ex__West_Climb__East_20_1,
+            time: 1350,
+            dest: SpotId::Annuna__West_Climb__East_20,
             price: Currency::Free,
             loc_id: None,
         },
@@ -19281,6 +19534,13 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
             dest: SpotId::Ebih__Base_Camp__Building_Entry,
             price: Currency::Free,
             loc_id: None,
+        },
+        ExitId::Interior__Building_Interior__Entry__Urn_Collection_Skip => Exit {
+            id: ExitId::Interior__Building_Interior__Entry__Urn_Collection_Skip,
+            time: 2000,
+            dest: SpotId::Ebih__Base_Camp__Building_Entry,
+            price: Currency::Free,
+            loc_id: Some(LocationId::Interior__Building_Interior__Entry__Urn_Collection_Skip),
         },
         ExitId::Interior__Tent_Interior__Entry__ex__Ebih__Base_Camp__Tent_Entry_1 => Exit {
             id: ExitId::Interior__Tent_Interior__Entry__ex__Ebih__Base_Camp__Tent_Entry_1,
@@ -24699,7 +24959,8 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             exits: Range {
-                start: 0, end: 0,
+                start: ExitId::Annuna__Twisty_Passages__East_Floor__ex__Center_Save__West_Floor_1.into_usize(),
+                end: ExitId::Annuna__Twisty_Passages__East_Floor__ex__Center_Save__West_Floor_1.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
@@ -24707,6 +24968,209 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
         },
         SpotId::Annuna__Twisty_Passages__East_Catwalk => Spot {
             id: SpotId::Annuna__Twisty_Passages__East_Catwalk,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Annuna__Twisty_Passages__East_Catwalk__ex__Center_Save__West_Catwalk_1.into_usize(),
+                end: ExitId::Annuna__Twisty_Passages__East_Catwalk__ex__Center_Save__West_Catwalk_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__Twisty_Passages__East_Shaft => Spot {
+            id: SpotId::Annuna__Twisty_Passages__East_Shaft,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__Twisty_Passages__East_Fork => Spot {
+            id: SpotId::Annuna__Twisty_Passages__East_Fork,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Annuna__Twisty_Passages__East_Fork__ex__Northeast_C_1.into_usize(),
+                end: ExitId::Annuna__Twisty_Passages__East_Fork__ex__Northeast_C_2.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__Twisty_Passages__Bottom_Middle => Spot {
+            id: SpotId::Annuna__Twisty_Passages__Bottom_Middle,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Annuna__Twisty_Passages__Bottom_Middle__ex__Center_1.into_usize(),
+                end: ExitId::Annuna__Twisty_Passages__Bottom_Middle__ex__East_Fork_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__Twisty_Passages__Bottom_West => Spot {
+            id: SpotId::Annuna__Twisty_Passages__Bottom_West,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Annuna__Twisty_Passages__Bottom_West__ex__Southwest_C_1.into_usize(),
+                end: ExitId::Annuna__Twisty_Passages__Bottom_West__ex__Southwest_C_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__Twisty_Passages__Center => Spot {
+            id: SpotId::Annuna__Twisty_Passages__Center,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__Twisty_Passages__Northeast_C => Spot {
+            id: SpotId::Annuna__Twisty_Passages__Northeast_C,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Annuna__Twisty_Passages__Northeast_C__ex__Northeast_D_1.into_usize(),
+                end: ExitId::Annuna__Twisty_Passages__Northeast_C__ex__West_Hill_Right_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__Twisty_Passages__Northeast_D => Spot {
+            id: SpotId::Annuna__Twisty_Passages__Northeast_D,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Annuna__Twisty_Passages__Northeast_D__ex__Top_1.into_usize(),
+                end: ExitId::Annuna__Twisty_Passages__Northeast_D__ex__Top_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__Twisty_Passages__Top => Spot {
+            id: SpotId::Annuna__Twisty_Passages__Top,
+            locations: Range {
+                start: LocationId::Annuna__Twisty_Passages__Top__Tablet.into_usize(),
+                end: LocationId::Annuna__Twisty_Passages__Top__Tablet.into_usize() + 1,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__Twisty_Passages__Southwest_C => Spot {
+            id: SpotId::Annuna__Twisty_Passages__Southwest_C,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Annuna__Twisty_Passages__Southwest_C__ex__West_Dip_1.into_usize(),
+                end: ExitId::Annuna__Twisty_Passages__Southwest_C__ex__West_Ledge_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__Twisty_Passages__West_Hill_Right => Spot {
+            id: SpotId::Annuna__Twisty_Passages__West_Hill_Right,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__Twisty_Passages__West_Hill_Left => Spot {
+            id: SpotId::Annuna__Twisty_Passages__West_Hill_Left,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Annuna__Twisty_Passages__West_Hill_Left__ex__Northwest_Alcove_1.into_usize(),
+                end: ExitId::Annuna__Twisty_Passages__West_Hill_Left__ex__Northwest_Alcove_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__Twisty_Passages__West_Dip => Spot {
+            id: SpotId::Annuna__Twisty_Passages__West_Dip,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__Twisty_Passages__West_Ledge => Spot {
+            id: SpotId::Annuna__Twisty_Passages__West_Ledge,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__Twisty_Passages__West => Spot {
+            id: SpotId::Annuna__Twisty_Passages__West,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Annuna__Twisty_Passages__West__ex__West_Climb__East_20_1.into_usize(),
+                end: ExitId::Annuna__Twisty_Passages__West__ex__West_Climb__East_20_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__Twisty_Passages__Northwest_Alcove => Spot {
+            id: SpotId::Annuna__Twisty_Passages__Northwest_Alcove,
+            locations: Range {
+                start: LocationId::Annuna__Twisty_Passages__Northwest_Alcove__Refill.into_usize(),
+                end: LocationId::Annuna__Twisty_Passages__Northwest_Alcove__Refill.into_usize() + 1,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__West_Climb__East_20 => Spot {
+            id: SpotId::Annuna__West_Climb__East_20,
             locations: Range {
                 start: 0, end: 0,
             },
@@ -34509,7 +34973,7 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             id: SpotId::Interior__Building_Interior__Entry,
             locations: Range {
                 start: LocationId::Interior__Building_Interior__Entry__Remote_Urn.into_usize(),
-                end: LocationId::Interior__Building_Interior__Entry__Remote_Urn.into_usize() + 1,
+                end: LocationId::Interior__Building_Interior__Entry__Urn_Collection_Skip.into_usize() + 1,
             },
             exits: Range {
                 start: ExitId::Interior__Building_Interior__Entry__ex__Ebih__Base_Camp__Building_Entry_1.into_usize(),
@@ -38199,6 +38663,12 @@ pub fn build_warps() -> EnumMap<WarpId, Warp> {
         },
         WarpId::FastTravelAmagiMainArea => Warp {
             id: WarpId::FastTravelAmagiMainArea,
+            dest: SpotId::None,
+            time: 12000,
+            price: Currency::Free,
+        },
+        WarpId::FastTravelAnnunaCenter => Warp {
+            id: WarpId::FastTravelAnnunaCenter,
             dest: SpotId::None,
             time: 12000,
             price: Currency::Free,

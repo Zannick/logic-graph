@@ -1,0 +1,23 @@
+name: AnnunaTests
+all:
+  start: Annuna > Mirror Match > Save Point
+  with:
+    - Amashilama
+    - Ledge_Grab
+    - Boomerang
+    - Remote_Drone
+    - Infect
+    - Wall_Climb
+    - Slingshot_Hook
+    - Drone_Hover
+  context:
+    mode: Indra
+    save: Annuna > Mirror Match > Save Point
+
+tests:
+  - eventually_obtains: Annuna_East_Bridge_Gate
+  - with:
+      - Anuman
+    can_obtain: Destruction_Pogrom
+    context:
+      mode: drone

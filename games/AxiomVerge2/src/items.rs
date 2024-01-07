@@ -52,6 +52,7 @@ pub enum Item {
     Dear_Ernest,
     Defeat_Indra,
     Defeat_MUS_A_M20,
+    Destruction_Pogrom,
     Double_Axe,
     Drone_Hover,
     Drone_Melee_Damage,
@@ -201,6 +202,7 @@ impl fmt::Display for Item {
             Item::Dear_Ernest => write!(f, "{}", "Dear_Ernest"),
             Item::Defeat_Indra => write!(f, "{}", "Defeat_Indra"),
             Item::Defeat_MUS_A_M20 => write!(f, "{}", "Defeat_MUS_A_M20"),
+            Item::Destruction_Pogrom => write!(f, "{}", "Destruction_Pogrom"),
             Item::Double_Axe => write!(f, "{}", "Double_Axe"),
             Item::Drone_Hover => write!(f, "{}", "Drone_Hover"),
             Item::Drone_Melee_Damage => write!(f, "{}", "Drone_Melee_Damage"),
@@ -354,6 +356,7 @@ impl std::str::FromStr for Item {
             "Dear_Ernest" => Ok(Item::Dear_Ernest),
             "Defeat_Indra" => Ok(Item::Defeat_Indra),
             "Defeat_MUS_A_M20" => Ok(Item::Defeat_MUS_A_M20),
+            "Destruction_Pogrom" => Ok(Item::Destruction_Pogrom),
             "Double_Axe" => Ok(Item::Double_Axe),
             "Drone_Hover" => Ok(Item::Drone_Hover),
             "Drone_Melee_Damage" => Ok(Item::Drone_Melee_Damage),
@@ -476,6 +479,7 @@ pub fn unused_item(id: Item) -> bool {
             | Item::Aansur
             | Item::Amagi_Stronghold_Left_Wall
             | Item::Carnelian_Ring
+            | Item::Destruction_Pogrom
             | Item::Double_Axe
             | Item::Drone_Melee_Damage_3
             | Item::Drone_Melee_Speed_3

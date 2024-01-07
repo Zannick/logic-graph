@@ -75,6 +75,16 @@ areas:
       exits:
         - to: Ebih > Base Camp > Building Entry
           tags: [exterior]
+      hybrid:
+        - name: Urn Collection Skip
+          item: Melee_Charge
+          canon: Melee_Charge
+          req: $boomerang
+          to: Ebih > Base Camp > Building Entry
+          time: 2
+          item_time: 0
+          tags: [cskip]
+
     - name: Corner
       coord: [28.5, 12.15]
       local:

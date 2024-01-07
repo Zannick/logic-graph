@@ -261,6 +261,24 @@ subgraph Annuna
     subgraph Annuna__Twisty_Passages[Twisty Passages]
         Annuna__Twisty_Passages__East_Floor(East Floor);
         Annuna__Twisty_Passages__East_Catwalk(East Catwalk);
+        Annuna__Twisty_Passages__East_Shaft(East Shaft);
+        Annuna__Twisty_Passages__East_Fork(East Fork);
+        Annuna__Twisty_Passages__Bottom_Middle(Bottom Middle);
+        Annuna__Twisty_Passages__Bottom_West(Bottom West);
+        Annuna__Twisty_Passages__Center(Center);
+        Annuna__Twisty_Passages__Northeast_C(Northeast C);
+        Annuna__Twisty_Passages__Northeast_D(Northeast D);
+        Annuna__Twisty_Passages__Top(Top);
+        Annuna__Twisty_Passages__Southwest_C(Southwest C);
+        Annuna__Twisty_Passages__West_Hill_Right(West Hill Right);
+        Annuna__Twisty_Passages__West_Hill_Left(West Hill Left);
+        Annuna__Twisty_Passages__West_Dip(West Dip);
+        Annuna__Twisty_Passages__West_Ledge(West Ledge);
+        Annuna__Twisty_Passages__West(West);
+        Annuna__Twisty_Passages__Northwest_Alcove(Northwest Alcove);
+    end
+    subgraph Annuna__West_Climb[West Climb]
+        Annuna__West_Climb__East_20(East 20);
     end
 end
 subgraph Antarctica
@@ -1612,8 +1630,8 @@ Amagi__West_Lake__West_15 <--> Ebih__Vertical_Interchange__East_15
 Amagi__West_Lake__West_Bank --> Amagi__West_Lake__West_Shore
 Annuna__Center_Save__East <--> Annuna__Vertical_Room__West_21
 Annuna__Center_Save__Save_Point --> Annuna__Center_Save__West_Catwalk
-Annuna__Center_Save__West_Catwalk --> Annuna__Twisty_Passages__East_Catwalk
-Annuna__Center_Save__West_Floor --> Annuna__Twisty_Passages__East_Floor
+Annuna__Center_Save__West_Catwalk <--> Annuna__Twisty_Passages__East_Catwalk
+Annuna__Center_Save__West_Floor <--> Annuna__Twisty_Passages__East_Floor
 Annuna__East_Bridge__Below_Gate_Button <--> Annuna__East_Bridge__Center_Gap_East
 Annuna__East_Bridge__Bridge_Top_East --> Annuna__East_Bridge__East_24
 Annuna__East_Bridge__East_22 <--> Annuna__Vertical_Room__West_22
@@ -1702,6 +1720,18 @@ Annuna__Sniper_Valley__Cavern_Outer_Rock_East <--> Annuna__Sniper_Valley__Cavern
 Annuna__Sniper_Valley__West_23 --> Annuna__East_Bridge__East_24
 Annuna__Sniper_Valley__West_23 --> Annuna__Sniper_Valley__Cavern_Outer_Rock_West
 Annuna__Sniper_Valley__West_23 --> Annuna__Sniper_Valley__High_Ledge
+Annuna__Twisty_Passages__Bottom_Middle --> Annuna__Twisty_Passages__Center
+Annuna__Twisty_Passages__Bottom_Middle --> Annuna__Twisty_Passages__East_Fork
+Annuna__Twisty_Passages__Bottom_West --> Annuna__Twisty_Passages__Southwest_C
+Annuna__Twisty_Passages__East_Fork --> Annuna__Twisty_Passages__Northeast_C
+Annuna__Twisty_Passages__Northeast_C --> Annuna__Twisty_Passages__Northeast_D
+Annuna__Twisty_Passages__Northeast_C --> Annuna__Twisty_Passages__Southwest_C
+Annuna__Twisty_Passages__Northeast_C --> Annuna__Twisty_Passages__West_Hill_Right
+Annuna__Twisty_Passages__Northeast_D --> Annuna__Twisty_Passages__Top
+Annuna__Twisty_Passages__Southwest_C --> Annuna__Twisty_Passages__West_Dip
+Annuna__Twisty_Passages__Southwest_C --> Annuna__Twisty_Passages__West_Ledge
+Annuna__Twisty_Passages__West --> Annuna__West_Climb__East_20
+Annuna__Twisty_Passages__West_Hill_Left --> Annuna__Twisty_Passages__Northwest_Alcove
 Annuna__Vertical_Room__Gate_Ledge --> Annuna__Vertical_Room__Plinth
 Annuna__Vertical_Room__Lower_Mid --> Annuna__Vertical_Room__Lower_Platform_1_Right
 Annuna__Vertical_Room__Lower_Mid --> Annuna__Vertical_Room__Lower_Platform_2_Right

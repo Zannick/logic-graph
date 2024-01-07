@@ -1433,5 +1433,215 @@ areas:
   spots:
     - name: East Floor
       coord: [38.95, 20.75]
+      local:
+        - to: Bottom Middle
+          jumps: 1
+      exits:
+        - to: Center Save > West Floor
+          tags: [xshift]
     - name: East Catwalk
       coord: [38.95, 20.5]
+      local:
+        - to: East Shaft
+          jumps: 1
+      exits:
+        - to: Center Save > West Catwalk
+          tags: [xshift]
+    - name: East Shaft
+      coord: [38.75, 20.35]
+      local:
+        - to: East Floor
+        - to: East Fork
+          jumps: 1
+    - name: East Fork
+      coord: [38.4, 20.3]
+      local:
+        - to: Bottom Middle
+          jumps_down: 1
+        - to: East Shaft
+        - to: Northeast C
+          jumps: 3
+      exits:
+        - to: Northeast C
+          req: $hook
+          movement: base
+          jumps: 2
+        - to: Northeast C
+          req: $grab
+          movement: base
+          jumps: 2.5
+    - name: Bottom Middle
+      coord: [38.2, 20.6]
+      local:
+        - to: Bottom West
+        - to: East Floor
+      exits:
+        - to: Center
+          req: $hook
+          movement: base
+          jumps: 2
+        - to: East Fork
+          req: $hook
+          movement: base
+          jumps: 1
+    - name: Bottom West
+      coord: [37.7, 20.65]
+      local:
+        - to: Bottom Middle
+          jumps: 1
+      exits:
+        - to: Southwest C
+          req: $hook
+          movement: base
+          jumps: 2
+
+    - name: Center
+      coord: [38.0, 20.15]
+      local:
+        - to: Southwest C
+        - to: Bottom Middle
+        - to: Northeast C
+          jumps: 2
+        - to: West Hill Right
+          jumps: 3
+    - name: Northeast C
+      coord: [38.3, 19.75]
+      local:
+        - to: East Fork
+          jumps_down: 2
+        - to: West Hill Right
+          jumps: 2
+        - to: Northeast D
+          jumps: 2
+      exits:
+        - to: West Hill Right
+          req: $hook and $hover
+          movement: fast_hover
+          jumps: 1
+        - to: Southwest C
+          req: $hook and $hover
+          movement: fast_hover
+        - to: Northeast D
+          req: $hook
+          movement: base
+          jumps: 0.5
+    - name: Northeast D
+      coord: [38.4, 19.5]
+      local:
+        - to: Northeast C
+          jumps_down: 1
+        - to: East Shaft
+          thru: [38.6, 19.6]
+        - to: Top
+          thru: [38.1, 19.3]
+          jumps: [2, 0]
+      exits:
+        - to: Top
+          req: $hook
+          movement: base
+          jumps: 1
+    - name: Top
+      coord: [38.0, 19.4]
+      local:
+        - to: Northeast D
+          thru: [38.1, 19.3]
+          jumps: [1, 0]
+          jumps_down: [0, 1]
+        - to: West Hill Right
+          thru: [37.9, 19.3]
+          jumps: [1, 0]
+          jumps_down: [0, 2]
+        - to: West Hill Left
+          thru: [37.9, 19.3]
+          jumps: [1, 0]
+          jumps_down: [0, 1]
+      locations:
+        - name: Tablet
+          item: Destruction_Pogrom
+    - name: Southwest C
+      coord: [37.5, 20.15]
+      local:
+        - to: Center
+        - to: Bottom West
+          jumps_down: 1
+        - to: Northeast C
+          jumps: 3
+      exits:
+        - to: West Dip
+          req: $hook
+          movement: base
+          jumps: 2
+        - to: West Ledge
+          req: $hook
+          movement: base
+          jumps: 2
+    - name: West Hill Right
+      coord: [37.75, 19.6]
+      local:
+        - to: West Hill Left
+        - to: Top
+          thru: [37.9, 19.3]
+          jumps: [2, 0]
+        - to: Center
+          jumps_down: 1
+        - to: Northeast C
+        - to: Northeast D
+          jumps: 3
+    - name: West Hill Left
+      coord: [38.5, 19.6]
+      local:
+        - to: West Dip
+        - to: West Ledge
+        - to: West Hill Right
+        - to: Top
+          thru: [37.9, 19.3]
+          jumps: [2, 0]
+      exits:
+        - to: Northwest Alcove
+          req: $hook
+          movement: base
+          jumps: 2
+    - name: West Dip
+      coord: [37.425, 19.85]
+      local:
+        - to: West Ledge
+          jumps: 1
+        - to: West Hill Left
+          jumps: 2
+        - to: Southwest C
+          jumps_down: 1
+    - name: West Ledge
+      coord: [37.35, 19.8]
+      local:
+        - to: West
+        - to: West Dip
+        - to: West Hill Right
+          jumps: 2
+        - to: Southwest C
+          jumps_down: 1
+    - name: West
+      coord: [37.05, 19.9]
+      local:
+        - to: West Ledge
+          jumps: 1
+      exits:
+        - to: West Climb > East 20
+          tags: [xshift]
+    - name: Northwest Alcove
+      coord: [37.35, 19.2]
+      local:
+        - to: West Ledge
+          thru: [37.4, 19.3]
+        - to: West Dip
+        - to: West Hill Left
+      locations:
+        - name: Refill
+          item: Power_Core
+          req: $more_refills
+          tags: [standing]
+
+- name: West Climb
+  on_entry: $reset_old_area(^newpos)
+  spots:
+    - name: East 20
+      coord: [36.95, 19.9]

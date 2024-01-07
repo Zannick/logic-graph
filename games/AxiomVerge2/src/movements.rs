@@ -1460,6 +1460,244 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
         ) => 2982,
         (
             [false],
+            SpotId::Annuna__Twisty_Passages__Bottom_Middle,
+            SpotId::Annuna__Twisty_Passages__Bottom_West,
+        ) => 1754,
+        (
+            [false],
+            SpotId::Annuna__Twisty_Passages__Bottom_Middle,
+            SpotId::Annuna__Twisty_Passages__East_Floor,
+        ) => 2631,
+        (
+            [false],
+            SpotId::Annuna__Twisty_Passages__Bottom_West,
+            SpotId::Annuna__Twisty_Passages__Bottom_Middle,
+        ) => 1754,
+        (
+            [false],
+            SpotId::Annuna__Twisty_Passages__Center,
+            SpotId::Annuna__Twisty_Passages__Bottom_Middle,
+        ) => 701,
+        (
+            [false],
+            SpotId::Annuna__Twisty_Passages__Center,
+            SpotId::Annuna__Twisty_Passages__Northeast_C,
+        ) => 1200,
+        (
+            [false],
+            SpotId::Annuna__Twisty_Passages__Center,
+            SpotId::Annuna__Twisty_Passages__Southwest_C,
+        ) => 1754,
+        (
+            [false],
+            SpotId::Annuna__Twisty_Passages__Center,
+            SpotId::Annuna__Twisty_Passages__West_Hill_Right,
+        ) => 1799,
+        (
+            [false],
+            SpotId::Annuna__Twisty_Passages__East_Catwalk,
+            SpotId::Annuna__Twisty_Passages__East_Shaft,
+        ) => 701,
+        (
+            [false],
+            SpotId::Annuna__Twisty_Passages__East_Floor,
+            SpotId::Annuna__Twisty_Passages__Bottom_Middle,
+        ) => 2631,
+        (
+            [false],
+            SpotId::Annuna__Twisty_Passages__East_Fork,
+            SpotId::Annuna__Twisty_Passages__Bottom_Middle,
+        ) => 701,
+        (
+            [false],
+            SpotId::Annuna__Twisty_Passages__East_Fork,
+            SpotId::Annuna__Twisty_Passages__East_Shaft,
+        ) => 1228,
+        (
+            [false],
+            SpotId::Annuna__Twisty_Passages__East_Fork,
+            SpotId::Annuna__Twisty_Passages__Northeast_C,
+        ) => 1799,
+        (
+            [false],
+            SpotId::Annuna__Twisty_Passages__East_Shaft,
+            SpotId::Annuna__Twisty_Passages__East_Floor,
+        ) => 701,
+        (
+            [false],
+            SpotId::Annuna__Twisty_Passages__East_Shaft,
+            SpotId::Annuna__Twisty_Passages__East_Fork,
+        ) => 1228,
+        (
+            [false],
+            SpotId::Annuna__Twisty_Passages__Northeast_C,
+            SpotId::Annuna__Twisty_Passages__East_Fork,
+        ) => 750,
+        (
+            [false],
+            SpotId::Annuna__Twisty_Passages__Northeast_C,
+            SpotId::Annuna__Twisty_Passages__Northeast_D,
+        ) => 1200,
+        (
+            [false],
+            SpotId::Annuna__Twisty_Passages__Northeast_C,
+            SpotId::Annuna__Twisty_Passages__West_Hill_Right,
+        ) => 1929,
+        // [0.701754, 0.75]
+        (
+            [false],
+            SpotId::Annuna__Twisty_Passages__Northeast_D,
+            SpotId::Annuna__Twisty_Passages__East_Shaft,
+        ) => 1451,
+        (
+            [false],
+            SpotId::Annuna__Twisty_Passages__Northeast_D,
+            SpotId::Annuna__Twisty_Passages__Northeast_C,
+        ) => 350,
+        // [1.2, 0.350877]
+        (
+            [false],
+            SpotId::Annuna__Twisty_Passages__Northeast_D,
+            SpotId::Annuna__Twisty_Passages__Top,
+        ) => 1550,
+        (
+            [false],
+            SpotId::Annuna__Twisty_Passages__Northwest_Alcove,
+            SpotId::Annuna__Twisty_Passages__West_Dip,
+        ) => 650,
+        (
+            [false],
+            SpotId::Annuna__Twisty_Passages__Northwest_Alcove,
+            SpotId::Annuna__Twisty_Passages__West_Hill_Left,
+        ) => 4035,
+        // [0.175439, 0.5]
+        (
+            [false],
+            SpotId::Annuna__Twisty_Passages__Northwest_Alcove,
+            SpotId::Annuna__Twisty_Passages__West_Ledge,
+        ) => 675,
+        (
+            [false],
+            SpotId::Annuna__Twisty_Passages__Southwest_C,
+            SpotId::Annuna__Twisty_Passages__Bottom_West,
+        ) => 701,
+        (
+            [false],
+            SpotId::Annuna__Twisty_Passages__Southwest_C,
+            SpotId::Annuna__Twisty_Passages__Center,
+        ) => 1754,
+        (
+            [false],
+            SpotId::Annuna__Twisty_Passages__Southwest_C,
+            SpotId::Annuna__Twisty_Passages__Northeast_C,
+        ) => 2807,
+        // [0.6, 1.052632]
+        (
+            [false],
+            SpotId::Annuna__Twisty_Passages__Top,
+            SpotId::Annuna__Twisty_Passages__Northeast_D,
+        ) => 1652,
+        // [0.6, 2.105263]
+        (
+            [false],
+            SpotId::Annuna__Twisty_Passages__Top,
+            SpotId::Annuna__Twisty_Passages__West_Hill_Left,
+        ) => 2705,
+        // [0.6, 0.526316]
+        (
+            [false],
+            SpotId::Annuna__Twisty_Passages__Top,
+            SpotId::Annuna__Twisty_Passages__West_Hill_Right,
+        ) => 1126,
+        (
+            [false],
+            SpotId::Annuna__Twisty_Passages__West,
+            SpotId::Annuna__Twisty_Passages__West_Ledge,
+        ) => 1052,
+        (
+            [false],
+            SpotId::Annuna__Twisty_Passages__West_Dip,
+            SpotId::Annuna__Twisty_Passages__Southwest_C,
+        ) => 399,
+        (
+            [false],
+            SpotId::Annuna__Twisty_Passages__West_Dip,
+            SpotId::Annuna__Twisty_Passages__West_Hill_Left,
+        ) => 3771,
+        (
+            [false],
+            SpotId::Annuna__Twisty_Passages__West_Dip,
+            SpotId::Annuna__Twisty_Passages__West_Ledge,
+        ) => 600,
+        // [2.105263, 0.350877]
+        (
+            [false],
+            SpotId::Annuna__Twisty_Passages__West_Hill_Left,
+            SpotId::Annuna__Twisty_Passages__Top,
+        ) => 2456,
+        (
+            [false],
+            SpotId::Annuna__Twisty_Passages__West_Hill_Left,
+            SpotId::Annuna__Twisty_Passages__West_Dip,
+        ) => 3771,
+        (
+            [false],
+            SpotId::Annuna__Twisty_Passages__West_Hill_Left,
+            SpotId::Annuna__Twisty_Passages__West_Hill_Right,
+        ) => 2631,
+        (
+            [false],
+            SpotId::Annuna__Twisty_Passages__West_Hill_Left,
+            SpotId::Annuna__Twisty_Passages__West_Ledge,
+        ) => 4035,
+        (
+            [false],
+            SpotId::Annuna__Twisty_Passages__West_Hill_Right,
+            SpotId::Annuna__Twisty_Passages__Center,
+        ) => 877,
+        (
+            [false],
+            SpotId::Annuna__Twisty_Passages__West_Hill_Right,
+            SpotId::Annuna__Twisty_Passages__Northeast_C,
+        ) => 1929,
+        (
+            [false],
+            SpotId::Annuna__Twisty_Passages__West_Hill_Right,
+            SpotId::Annuna__Twisty_Passages__Northeast_D,
+        ) => 2280,
+        // [1.2, 0.350877]
+        (
+            [false],
+            SpotId::Annuna__Twisty_Passages__West_Hill_Right,
+            SpotId::Annuna__Twisty_Passages__Top,
+        ) => 1550,
+        (
+            [false],
+            SpotId::Annuna__Twisty_Passages__West_Hill_Right,
+            SpotId::Annuna__Twisty_Passages__West_Hill_Left,
+        ) => 2631,
+        (
+            [false],
+            SpotId::Annuna__Twisty_Passages__West_Ledge,
+            SpotId::Annuna__Twisty_Passages__Southwest_C,
+        ) => 526,
+        (
+            [false],
+            SpotId::Annuna__Twisty_Passages__West_Ledge,
+            SpotId::Annuna__Twisty_Passages__West,
+        ) => 1052,
+        (
+            [false],
+            SpotId::Annuna__Twisty_Passages__West_Ledge,
+            SpotId::Annuna__Twisty_Passages__West_Dip,
+        ) => 263,
+        (
+            [false],
+            SpotId::Annuna__Twisty_Passages__West_Ledge,
+            SpotId::Annuna__Twisty_Passages__West_Hill_Right,
+        ) => 1403,
+        (
+            [false],
             SpotId::Annuna__Vertical_Room__East_22,
             SpotId::Annuna__Vertical_Room__Lower_Mid,
         ) => 1403,
@@ -9986,6 +10224,244 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
         ) => 2982,
         (
             [true],
+            SpotId::Annuna__Twisty_Passages__Bottom_Middle,
+            SpotId::Annuna__Twisty_Passages__Bottom_West,
+        ) => 1754,
+        (
+            [true],
+            SpotId::Annuna__Twisty_Passages__Bottom_Middle,
+            SpotId::Annuna__Twisty_Passages__East_Floor,
+        ) => 2631,
+        (
+            [true],
+            SpotId::Annuna__Twisty_Passages__Bottom_West,
+            SpotId::Annuna__Twisty_Passages__Bottom_Middle,
+        ) => 1754,
+        (
+            [true],
+            SpotId::Annuna__Twisty_Passages__Center,
+            SpotId::Annuna__Twisty_Passages__Bottom_Middle,
+        ) => 701,
+        (
+            [true],
+            SpotId::Annuna__Twisty_Passages__Center,
+            SpotId::Annuna__Twisty_Passages__Northeast_C,
+        ) => 1200,
+        (
+            [true],
+            SpotId::Annuna__Twisty_Passages__Center,
+            SpotId::Annuna__Twisty_Passages__Southwest_C,
+        ) => 1754,
+        (
+            [true],
+            SpotId::Annuna__Twisty_Passages__Center,
+            SpotId::Annuna__Twisty_Passages__West_Hill_Right,
+        ) => 1799,
+        (
+            [true],
+            SpotId::Annuna__Twisty_Passages__East_Catwalk,
+            SpotId::Annuna__Twisty_Passages__East_Shaft,
+        ) => 701,
+        (
+            [true],
+            SpotId::Annuna__Twisty_Passages__East_Floor,
+            SpotId::Annuna__Twisty_Passages__Bottom_Middle,
+        ) => 2631,
+        (
+            [true],
+            SpotId::Annuna__Twisty_Passages__East_Fork,
+            SpotId::Annuna__Twisty_Passages__Bottom_Middle,
+        ) => 701,
+        (
+            [true],
+            SpotId::Annuna__Twisty_Passages__East_Fork,
+            SpotId::Annuna__Twisty_Passages__East_Shaft,
+        ) => 1228,
+        (
+            [true],
+            SpotId::Annuna__Twisty_Passages__East_Fork,
+            SpotId::Annuna__Twisty_Passages__Northeast_C,
+        ) => 1799,
+        (
+            [true],
+            SpotId::Annuna__Twisty_Passages__East_Shaft,
+            SpotId::Annuna__Twisty_Passages__East_Floor,
+        ) => 701,
+        (
+            [true],
+            SpotId::Annuna__Twisty_Passages__East_Shaft,
+            SpotId::Annuna__Twisty_Passages__East_Fork,
+        ) => 1228,
+        (
+            [true],
+            SpotId::Annuna__Twisty_Passages__Northeast_C,
+            SpotId::Annuna__Twisty_Passages__East_Fork,
+        ) => 750,
+        (
+            [true],
+            SpotId::Annuna__Twisty_Passages__Northeast_C,
+            SpotId::Annuna__Twisty_Passages__Northeast_D,
+        ) => 1200,
+        (
+            [true],
+            SpotId::Annuna__Twisty_Passages__Northeast_C,
+            SpotId::Annuna__Twisty_Passages__West_Hill_Right,
+        ) => 1929,
+        // [0.701754, 0.75]
+        (
+            [true],
+            SpotId::Annuna__Twisty_Passages__Northeast_D,
+            SpotId::Annuna__Twisty_Passages__East_Shaft,
+        ) => 1451,
+        (
+            [true],
+            SpotId::Annuna__Twisty_Passages__Northeast_D,
+            SpotId::Annuna__Twisty_Passages__Northeast_C,
+        ) => 350,
+        // [1.2, 0.350877]
+        (
+            [true],
+            SpotId::Annuna__Twisty_Passages__Northeast_D,
+            SpotId::Annuna__Twisty_Passages__Top,
+        ) => 1550,
+        (
+            [true],
+            SpotId::Annuna__Twisty_Passages__Northwest_Alcove,
+            SpotId::Annuna__Twisty_Passages__West_Dip,
+        ) => 650,
+        (
+            [true],
+            SpotId::Annuna__Twisty_Passages__Northwest_Alcove,
+            SpotId::Annuna__Twisty_Passages__West_Hill_Left,
+        ) => 4035,
+        // [0.175439, 0.5]
+        (
+            [true],
+            SpotId::Annuna__Twisty_Passages__Northwest_Alcove,
+            SpotId::Annuna__Twisty_Passages__West_Ledge,
+        ) => 675,
+        (
+            [true],
+            SpotId::Annuna__Twisty_Passages__Southwest_C,
+            SpotId::Annuna__Twisty_Passages__Bottom_West,
+        ) => 701,
+        (
+            [true],
+            SpotId::Annuna__Twisty_Passages__Southwest_C,
+            SpotId::Annuna__Twisty_Passages__Center,
+        ) => 1754,
+        (
+            [true],
+            SpotId::Annuna__Twisty_Passages__Southwest_C,
+            SpotId::Annuna__Twisty_Passages__Northeast_C,
+        ) => 2807,
+        // [0.6, 1.052632]
+        (
+            [true],
+            SpotId::Annuna__Twisty_Passages__Top,
+            SpotId::Annuna__Twisty_Passages__Northeast_D,
+        ) => 1652,
+        // [0.6, 2.105263]
+        (
+            [true],
+            SpotId::Annuna__Twisty_Passages__Top,
+            SpotId::Annuna__Twisty_Passages__West_Hill_Left,
+        ) => 2705,
+        // [0.6, 0.526316]
+        (
+            [true],
+            SpotId::Annuna__Twisty_Passages__Top,
+            SpotId::Annuna__Twisty_Passages__West_Hill_Right,
+        ) => 1126,
+        (
+            [true],
+            SpotId::Annuna__Twisty_Passages__West,
+            SpotId::Annuna__Twisty_Passages__West_Ledge,
+        ) => 1052,
+        (
+            [true],
+            SpotId::Annuna__Twisty_Passages__West_Dip,
+            SpotId::Annuna__Twisty_Passages__Southwest_C,
+        ) => 399,
+        (
+            [true],
+            SpotId::Annuna__Twisty_Passages__West_Dip,
+            SpotId::Annuna__Twisty_Passages__West_Hill_Left,
+        ) => 3771,
+        (
+            [true],
+            SpotId::Annuna__Twisty_Passages__West_Dip,
+            SpotId::Annuna__Twisty_Passages__West_Ledge,
+        ) => 600,
+        // [2.105263, 0.350877]
+        (
+            [true],
+            SpotId::Annuna__Twisty_Passages__West_Hill_Left,
+            SpotId::Annuna__Twisty_Passages__Top,
+        ) => 2456,
+        (
+            [true],
+            SpotId::Annuna__Twisty_Passages__West_Hill_Left,
+            SpotId::Annuna__Twisty_Passages__West_Dip,
+        ) => 3771,
+        (
+            [true],
+            SpotId::Annuna__Twisty_Passages__West_Hill_Left,
+            SpotId::Annuna__Twisty_Passages__West_Hill_Right,
+        ) => 2631,
+        (
+            [true],
+            SpotId::Annuna__Twisty_Passages__West_Hill_Left,
+            SpotId::Annuna__Twisty_Passages__West_Ledge,
+        ) => 4035,
+        (
+            [true],
+            SpotId::Annuna__Twisty_Passages__West_Hill_Right,
+            SpotId::Annuna__Twisty_Passages__Center,
+        ) => 877,
+        (
+            [true],
+            SpotId::Annuna__Twisty_Passages__West_Hill_Right,
+            SpotId::Annuna__Twisty_Passages__Northeast_C,
+        ) => 1929,
+        (
+            [true],
+            SpotId::Annuna__Twisty_Passages__West_Hill_Right,
+            SpotId::Annuna__Twisty_Passages__Northeast_D,
+        ) => 2280,
+        // [1.2, 0.350877]
+        (
+            [true],
+            SpotId::Annuna__Twisty_Passages__West_Hill_Right,
+            SpotId::Annuna__Twisty_Passages__Top,
+        ) => 1550,
+        (
+            [true],
+            SpotId::Annuna__Twisty_Passages__West_Hill_Right,
+            SpotId::Annuna__Twisty_Passages__West_Hill_Left,
+        ) => 2631,
+        (
+            [true],
+            SpotId::Annuna__Twisty_Passages__West_Ledge,
+            SpotId::Annuna__Twisty_Passages__Southwest_C,
+        ) => 526,
+        (
+            [true],
+            SpotId::Annuna__Twisty_Passages__West_Ledge,
+            SpotId::Annuna__Twisty_Passages__West,
+        ) => 1052,
+        (
+            [true],
+            SpotId::Annuna__Twisty_Passages__West_Ledge,
+            SpotId::Annuna__Twisty_Passages__West_Dip,
+        ) => 263,
+        (
+            [true],
+            SpotId::Annuna__Twisty_Passages__West_Ledge,
+            SpotId::Annuna__Twisty_Passages__West_Hill_Right,
+        ) => 1403,
+        (
+            [true],
             SpotId::Annuna__Vertical_Room__East_22,
             SpotId::Annuna__Vertical_Room__Lower_Mid,
         ) => 1403,
@@ -17742,6 +18218,181 @@ pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
         (SpotId::Annuna__Center_Save__West_Catwalk, SpotId::Annuna__Center_Save__Save_Point) => {
             true
         }
+        (
+            SpotId::Annuna__Twisty_Passages__East_Floor,
+            SpotId::Annuna__Twisty_Passages__Bottom_Middle,
+        ) => true,
+        (
+            SpotId::Annuna__Twisty_Passages__East_Catwalk,
+            SpotId::Annuna__Twisty_Passages__East_Shaft,
+        ) => true,
+        (
+            SpotId::Annuna__Twisty_Passages__East_Shaft,
+            SpotId::Annuna__Twisty_Passages__East_Floor,
+        ) => true,
+        (
+            SpotId::Annuna__Twisty_Passages__East_Shaft,
+            SpotId::Annuna__Twisty_Passages__East_Fork,
+        ) => true,
+        (
+            SpotId::Annuna__Twisty_Passages__East_Fork,
+            SpotId::Annuna__Twisty_Passages__Bottom_Middle,
+        ) => true,
+        (
+            SpotId::Annuna__Twisty_Passages__East_Fork,
+            SpotId::Annuna__Twisty_Passages__East_Shaft,
+        ) => true,
+        (
+            SpotId::Annuna__Twisty_Passages__East_Fork,
+            SpotId::Annuna__Twisty_Passages__Northeast_C,
+        ) => true,
+        (
+            SpotId::Annuna__Twisty_Passages__Bottom_Middle,
+            SpotId::Annuna__Twisty_Passages__Bottom_West,
+        ) => true,
+        (
+            SpotId::Annuna__Twisty_Passages__Bottom_Middle,
+            SpotId::Annuna__Twisty_Passages__East_Floor,
+        ) => true,
+        (
+            SpotId::Annuna__Twisty_Passages__Bottom_West,
+            SpotId::Annuna__Twisty_Passages__Bottom_Middle,
+        ) => true,
+        (SpotId::Annuna__Twisty_Passages__Center, SpotId::Annuna__Twisty_Passages__Southwest_C) => {
+            true
+        }
+        (
+            SpotId::Annuna__Twisty_Passages__Center,
+            SpotId::Annuna__Twisty_Passages__Bottom_Middle,
+        ) => true,
+        (SpotId::Annuna__Twisty_Passages__Center, SpotId::Annuna__Twisty_Passages__Northeast_C) => {
+            true
+        }
+        (
+            SpotId::Annuna__Twisty_Passages__Center,
+            SpotId::Annuna__Twisty_Passages__West_Hill_Right,
+        ) => true,
+        (
+            SpotId::Annuna__Twisty_Passages__Northeast_C,
+            SpotId::Annuna__Twisty_Passages__East_Fork,
+        ) => true,
+        (
+            SpotId::Annuna__Twisty_Passages__Northeast_C,
+            SpotId::Annuna__Twisty_Passages__West_Hill_Right,
+        ) => true,
+        (
+            SpotId::Annuna__Twisty_Passages__Northeast_C,
+            SpotId::Annuna__Twisty_Passages__Northeast_D,
+        ) => true,
+        (
+            SpotId::Annuna__Twisty_Passages__Northeast_D,
+            SpotId::Annuna__Twisty_Passages__Northeast_C,
+        ) => true,
+        (
+            SpotId::Annuna__Twisty_Passages__Northeast_D,
+            SpotId::Annuna__Twisty_Passages__East_Shaft,
+        ) => true,
+        (SpotId::Annuna__Twisty_Passages__Northeast_D, SpotId::Annuna__Twisty_Passages__Top) => {
+            true
+        }
+        (SpotId::Annuna__Twisty_Passages__Top, SpotId::Annuna__Twisty_Passages__Northeast_D) => {
+            true
+        }
+        (
+            SpotId::Annuna__Twisty_Passages__Top,
+            SpotId::Annuna__Twisty_Passages__West_Hill_Right,
+        ) => true,
+        (SpotId::Annuna__Twisty_Passages__Top, SpotId::Annuna__Twisty_Passages__West_Hill_Left) => {
+            true
+        }
+        (SpotId::Annuna__Twisty_Passages__Southwest_C, SpotId::Annuna__Twisty_Passages__Center) => {
+            true
+        }
+        (
+            SpotId::Annuna__Twisty_Passages__Southwest_C,
+            SpotId::Annuna__Twisty_Passages__Bottom_West,
+        ) => true,
+        (
+            SpotId::Annuna__Twisty_Passages__Southwest_C,
+            SpotId::Annuna__Twisty_Passages__Northeast_C,
+        ) => true,
+        (
+            SpotId::Annuna__Twisty_Passages__West_Hill_Right,
+            SpotId::Annuna__Twisty_Passages__West_Hill_Left,
+        ) => true,
+        (
+            SpotId::Annuna__Twisty_Passages__West_Hill_Right,
+            SpotId::Annuna__Twisty_Passages__Top,
+        ) => true,
+        (
+            SpotId::Annuna__Twisty_Passages__West_Hill_Right,
+            SpotId::Annuna__Twisty_Passages__Center,
+        ) => true,
+        (
+            SpotId::Annuna__Twisty_Passages__West_Hill_Right,
+            SpotId::Annuna__Twisty_Passages__Northeast_C,
+        ) => true,
+        (
+            SpotId::Annuna__Twisty_Passages__West_Hill_Right,
+            SpotId::Annuna__Twisty_Passages__Northeast_D,
+        ) => true,
+        (
+            SpotId::Annuna__Twisty_Passages__West_Hill_Left,
+            SpotId::Annuna__Twisty_Passages__West_Dip,
+        ) => true,
+        (
+            SpotId::Annuna__Twisty_Passages__West_Hill_Left,
+            SpotId::Annuna__Twisty_Passages__West_Ledge,
+        ) => true,
+        (
+            SpotId::Annuna__Twisty_Passages__West_Hill_Left,
+            SpotId::Annuna__Twisty_Passages__West_Hill_Right,
+        ) => true,
+        (SpotId::Annuna__Twisty_Passages__West_Hill_Left, SpotId::Annuna__Twisty_Passages__Top) => {
+            true
+        }
+        (
+            SpotId::Annuna__Twisty_Passages__West_Dip,
+            SpotId::Annuna__Twisty_Passages__West_Ledge,
+        ) => true,
+        (
+            SpotId::Annuna__Twisty_Passages__West_Dip,
+            SpotId::Annuna__Twisty_Passages__West_Hill_Left,
+        ) => true,
+        (
+            SpotId::Annuna__Twisty_Passages__West_Dip,
+            SpotId::Annuna__Twisty_Passages__Southwest_C,
+        ) => true,
+        (SpotId::Annuna__Twisty_Passages__West_Ledge, SpotId::Annuna__Twisty_Passages__West) => {
+            true
+        }
+        (
+            SpotId::Annuna__Twisty_Passages__West_Ledge,
+            SpotId::Annuna__Twisty_Passages__West_Dip,
+        ) => true,
+        (
+            SpotId::Annuna__Twisty_Passages__West_Ledge,
+            SpotId::Annuna__Twisty_Passages__West_Hill_Right,
+        ) => true,
+        (
+            SpotId::Annuna__Twisty_Passages__West_Ledge,
+            SpotId::Annuna__Twisty_Passages__Southwest_C,
+        ) => true,
+        (SpotId::Annuna__Twisty_Passages__West, SpotId::Annuna__Twisty_Passages__West_Ledge) => {
+            true
+        }
+        (
+            SpotId::Annuna__Twisty_Passages__Northwest_Alcove,
+            SpotId::Annuna__Twisty_Passages__West_Ledge,
+        ) => true,
+        (
+            SpotId::Annuna__Twisty_Passages__Northwest_Alcove,
+            SpotId::Annuna__Twisty_Passages__West_Dip,
+        ) => true,
+        (
+            SpotId::Annuna__Twisty_Passages__Northwest_Alcove,
+            SpotId::Annuna__Twisty_Passages__West_Hill_Left,
+        ) => true,
         (SpotId::Antarctica__West__Helipad, SpotId::Antarctica__West__Shed_Entry) => true,
         (SpotId::Antarctica__West__Helipad, SpotId::Antarctica__West__Boxes) => true,
         (SpotId::Antarctica__West__Boxes, SpotId::Antarctica__West__Helipad) => true,
@@ -25234,12 +25885,367 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             1000,
         ),
         (
+            SpotId::Annuna__Twisty_Passages__Bottom_Middle,
+            SpotId::Annuna__Twisty_Passages__Bottom_West,
+            1754,
+        ),
+        (
+            SpotId::Annuna__Twisty_Passages__Bottom_Middle,
+            SpotId::Annuna__Twisty_Passages__Center,
+            1200,
+        ),
+        (
+            SpotId::Annuna__Twisty_Passages__Bottom_Middle,
+            SpotId::Annuna__Twisty_Passages__East_Floor,
+            2631,
+        ),
+        (
+            SpotId::Annuna__Twisty_Passages__Bottom_Middle,
+            SpotId::Annuna__Twisty_Passages__East_Fork,
+            701,
+        ),
+        (
+            SpotId::Annuna__Twisty_Passages__Bottom_Middle,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Twisty_Passages__Bottom_West,
+            SpotId::Annuna__Twisty_Passages__Bottom_Middle,
+            1754,
+        ),
+        (
+            SpotId::Annuna__Twisty_Passages__Bottom_West,
+            SpotId::Annuna__Twisty_Passages__Southwest_C,
+            1200,
+        ),
+        (
+            SpotId::Annuna__Twisty_Passages__Bottom_West,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Twisty_Passages__Center,
+            SpotId::Annuna__Twisty_Passages__Bottom_Middle,
+            701,
+        ),
+        (
+            SpotId::Annuna__Twisty_Passages__Center,
+            SpotId::Annuna__Twisty_Passages__Northeast_C,
+            1200,
+        ),
+        (
+            SpotId::Annuna__Twisty_Passages__Center,
+            SpotId::Annuna__Twisty_Passages__Southwest_C,
+            1754,
+        ),
+        (
+            SpotId::Annuna__Twisty_Passages__Center,
+            SpotId::Annuna__Twisty_Passages__West_Hill_Right,
+            1799,
+        ),
+        (
+            SpotId::Annuna__Twisty_Passages__Center,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Twisty_Passages__East_Catwalk,
+            SpotId::Annuna__Center_Save__West_Catwalk,
+            1350,
+        ),
+        (
+            SpotId::Annuna__Twisty_Passages__East_Catwalk,
+            SpotId::Annuna__Twisty_Passages__East_Shaft,
+            701,
+        ),
+        (
             SpotId::Annuna__Twisty_Passages__East_Catwalk,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
         (
             SpotId::Annuna__Twisty_Passages__East_Floor,
+            SpotId::Annuna__Center_Save__West_Floor,
+            1350,
+        ),
+        (
+            SpotId::Annuna__Twisty_Passages__East_Floor,
+            SpotId::Annuna__Twisty_Passages__Bottom_Middle,
+            2631,
+        ),
+        (
+            SpotId::Annuna__Twisty_Passages__East_Floor,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Twisty_Passages__East_Fork,
+            SpotId::Annuna__Twisty_Passages__Bottom_Middle,
+            701,
+        ),
+        (
+            SpotId::Annuna__Twisty_Passages__East_Fork,
+            SpotId::Annuna__Twisty_Passages__East_Shaft,
+            1228,
+        ),
+        (
+            SpotId::Annuna__Twisty_Passages__East_Fork,
+            SpotId::Annuna__Twisty_Passages__Northeast_C,
+            1200,
+        ),
+        (
+            SpotId::Annuna__Twisty_Passages__East_Fork,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Twisty_Passages__East_Shaft,
+            SpotId::Annuna__Twisty_Passages__East_Floor,
+            701,
+        ),
+        (
+            SpotId::Annuna__Twisty_Passages__East_Shaft,
+            SpotId::Annuna__Twisty_Passages__East_Fork,
+            1228,
+        ),
+        (
+            SpotId::Annuna__Twisty_Passages__East_Shaft,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Twisty_Passages__Northeast_C,
+            SpotId::Annuna__Twisty_Passages__East_Fork,
+            750,
+        ),
+        (
+            SpotId::Annuna__Twisty_Passages__Northeast_C,
+            SpotId::Annuna__Twisty_Passages__Northeast_D,
+            350,
+        ),
+        (
+            SpotId::Annuna__Twisty_Passages__Northeast_C,
+            SpotId::Annuna__Twisty_Passages__Southwest_C,
+            1999,
+        ),
+        (
+            SpotId::Annuna__Twisty_Passages__Northeast_C,
+            SpotId::Annuna__Twisty_Passages__West_Hill_Right,
+            1374,
+        ),
+        (
+            SpotId::Annuna__Twisty_Passages__Northeast_C,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Twisty_Passages__Northeast_D,
+            SpotId::Annuna__Twisty_Passages__East_Shaft,
+            1451,
+        ),
+        (
+            SpotId::Annuna__Twisty_Passages__Northeast_D,
+            SpotId::Annuna__Twisty_Passages__Northeast_C,
+            350,
+        ),
+        (
+            SpotId::Annuna__Twisty_Passages__Northeast_D,
+            SpotId::Annuna__Twisty_Passages__Top,
+            1403,
+        ),
+        (
+            SpotId::Annuna__Twisty_Passages__Northeast_D,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Twisty_Passages__Northwest_Alcove,
+            SpotId::Annuna__Twisty_Passages__West_Dip,
+            650,
+        ),
+        (
+            SpotId::Annuna__Twisty_Passages__Northwest_Alcove,
+            SpotId::Annuna__Twisty_Passages__West_Hill_Left,
+            4035,
+        ),
+        (
+            SpotId::Annuna__Twisty_Passages__Northwest_Alcove,
+            SpotId::Annuna__Twisty_Passages__West_Ledge,
+            675,
+        ),
+        (
+            SpotId::Annuna__Twisty_Passages__Northwest_Alcove,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Twisty_Passages__Southwest_C,
+            SpotId::Annuna__Twisty_Passages__Bottom_West,
+            701,
+        ),
+        (
+            SpotId::Annuna__Twisty_Passages__Southwest_C,
+            SpotId::Annuna__Twisty_Passages__Center,
+            1754,
+        ),
+        (
+            SpotId::Annuna__Twisty_Passages__Southwest_C,
+            SpotId::Annuna__Twisty_Passages__Northeast_C,
+            2807,
+        ),
+        (
+            SpotId::Annuna__Twisty_Passages__Southwest_C,
+            SpotId::Annuna__Twisty_Passages__West_Dip,
+            1200,
+        ),
+        (
+            SpotId::Annuna__Twisty_Passages__Southwest_C,
+            SpotId::Annuna__Twisty_Passages__West_Ledge,
+            1200,
+        ),
+        (
+            SpotId::Annuna__Twisty_Passages__Southwest_C,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Twisty_Passages__Top,
+            SpotId::Annuna__Twisty_Passages__Northeast_D,
+            1652,
+        ),
+        (
+            SpotId::Annuna__Twisty_Passages__Top,
+            SpotId::Annuna__Twisty_Passages__West_Hill_Left,
+            2705,
+        ),
+        (
+            SpotId::Annuna__Twisty_Passages__Top,
+            SpotId::Annuna__Twisty_Passages__West_Hill_Right,
+            1126,
+        ),
+        (
+            SpotId::Annuna__Twisty_Passages__Top,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Twisty_Passages__West,
+            SpotId::Annuna__Twisty_Passages__West_Ledge,
+            1052,
+        ),
+        (
+            SpotId::Annuna__Twisty_Passages__West,
+            SpotId::Annuna__West_Climb__East_20,
+            1350,
+        ),
+        (
+            SpotId::Annuna__Twisty_Passages__West,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Twisty_Passages__West_Dip,
+            SpotId::Annuna__Twisty_Passages__Southwest_C,
+            399,
+        ),
+        (
+            SpotId::Annuna__Twisty_Passages__West_Dip,
+            SpotId::Annuna__Twisty_Passages__West_Hill_Left,
+            3771,
+        ),
+        (
+            SpotId::Annuna__Twisty_Passages__West_Dip,
+            SpotId::Annuna__Twisty_Passages__West_Ledge,
+            600,
+        ),
+        (
+            SpotId::Annuna__Twisty_Passages__West_Dip,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Twisty_Passages__West_Hill_Left,
+            SpotId::Annuna__Twisty_Passages__Northwest_Alcove,
+            4035,
+        ),
+        (
+            SpotId::Annuna__Twisty_Passages__West_Hill_Left,
+            SpotId::Annuna__Twisty_Passages__Top,
+            2456,
+        ),
+        (
+            SpotId::Annuna__Twisty_Passages__West_Hill_Left,
+            SpotId::Annuna__Twisty_Passages__West_Dip,
+            3771,
+        ),
+        (
+            SpotId::Annuna__Twisty_Passages__West_Hill_Left,
+            SpotId::Annuna__Twisty_Passages__West_Hill_Right,
+            2631,
+        ),
+        (
+            SpotId::Annuna__Twisty_Passages__West_Hill_Left,
+            SpotId::Annuna__Twisty_Passages__West_Ledge,
+            4035,
+        ),
+        (
+            SpotId::Annuna__Twisty_Passages__West_Hill_Left,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Twisty_Passages__West_Hill_Right,
+            SpotId::Annuna__Twisty_Passages__Center,
+            877,
+        ),
+        (
+            SpotId::Annuna__Twisty_Passages__West_Hill_Right,
+            SpotId::Annuna__Twisty_Passages__Northeast_C,
+            1929,
+        ),
+        (
+            SpotId::Annuna__Twisty_Passages__West_Hill_Right,
+            SpotId::Annuna__Twisty_Passages__Northeast_D,
+            2280,
+        ),
+        (
+            SpotId::Annuna__Twisty_Passages__West_Hill_Right,
+            SpotId::Annuna__Twisty_Passages__Top,
+            1550,
+        ),
+        (
+            SpotId::Annuna__Twisty_Passages__West_Hill_Right,
+            SpotId::Annuna__Twisty_Passages__West_Hill_Left,
+            2631,
+        ),
+        (
+            SpotId::Annuna__Twisty_Passages__West_Hill_Right,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Twisty_Passages__West_Ledge,
+            SpotId::Annuna__Twisty_Passages__Southwest_C,
+            526,
+        ),
+        (
+            SpotId::Annuna__Twisty_Passages__West_Ledge,
+            SpotId::Annuna__Twisty_Passages__West,
+            1052,
+        ),
+        (
+            SpotId::Annuna__Twisty_Passages__West_Ledge,
+            SpotId::Annuna__Twisty_Passages__West_Dip,
+            263,
+        ),
+        (
+            SpotId::Annuna__Twisty_Passages__West_Ledge,
+            SpotId::Annuna__Twisty_Passages__West_Hill_Right,
+            1403,
+        ),
+        (
+            SpotId::Annuna__Twisty_Passages__West_Ledge,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -25610,6 +26616,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Annuna__West_Bridge__West_Outcropping,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__West_Climb__East_20,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -44577,6 +45588,181 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
             SpotId::Annuna__Sniper_Valley__West_25_Upper,
             SpotId::Annuna__Sniper_Valley__Bridge_Lower_Ledge,
         ) => Some(2982),
+        (
+            SpotId::Annuna__Twisty_Passages__Bottom_Middle,
+            SpotId::Annuna__Twisty_Passages__Bottom_West,
+        ) => Some(1754),
+        (
+            SpotId::Annuna__Twisty_Passages__Bottom_Middle,
+            SpotId::Annuna__Twisty_Passages__East_Floor,
+        ) => Some(2631),
+        (
+            SpotId::Annuna__Twisty_Passages__Bottom_West,
+            SpotId::Annuna__Twisty_Passages__Bottom_Middle,
+        ) => Some(1754),
+        (
+            SpotId::Annuna__Twisty_Passages__Center,
+            SpotId::Annuna__Twisty_Passages__Bottom_Middle,
+        ) => Some(701),
+        (SpotId::Annuna__Twisty_Passages__Center, SpotId::Annuna__Twisty_Passages__Northeast_C) => {
+            Some(1200)
+        }
+        (SpotId::Annuna__Twisty_Passages__Center, SpotId::Annuna__Twisty_Passages__Southwest_C) => {
+            Some(1754)
+        }
+        (
+            SpotId::Annuna__Twisty_Passages__Center,
+            SpotId::Annuna__Twisty_Passages__West_Hill_Right,
+        ) => Some(1799),
+        (
+            SpotId::Annuna__Twisty_Passages__East_Catwalk,
+            SpotId::Annuna__Twisty_Passages__East_Shaft,
+        ) => Some(701),
+        (
+            SpotId::Annuna__Twisty_Passages__East_Floor,
+            SpotId::Annuna__Twisty_Passages__Bottom_Middle,
+        ) => Some(2631),
+        (
+            SpotId::Annuna__Twisty_Passages__East_Fork,
+            SpotId::Annuna__Twisty_Passages__Bottom_Middle,
+        ) => Some(701),
+        (
+            SpotId::Annuna__Twisty_Passages__East_Fork,
+            SpotId::Annuna__Twisty_Passages__East_Shaft,
+        ) => Some(1228),
+        (
+            SpotId::Annuna__Twisty_Passages__East_Fork,
+            SpotId::Annuna__Twisty_Passages__Northeast_C,
+        ) => Some(1799),
+        (
+            SpotId::Annuna__Twisty_Passages__East_Shaft,
+            SpotId::Annuna__Twisty_Passages__East_Floor,
+        ) => Some(701),
+        (
+            SpotId::Annuna__Twisty_Passages__East_Shaft,
+            SpotId::Annuna__Twisty_Passages__East_Fork,
+        ) => Some(1228),
+        (
+            SpotId::Annuna__Twisty_Passages__Northeast_C,
+            SpotId::Annuna__Twisty_Passages__East_Fork,
+        ) => Some(750),
+        (
+            SpotId::Annuna__Twisty_Passages__Northeast_C,
+            SpotId::Annuna__Twisty_Passages__Northeast_D,
+        ) => Some(1200),
+        (
+            SpotId::Annuna__Twisty_Passages__Northeast_C,
+            SpotId::Annuna__Twisty_Passages__West_Hill_Right,
+        ) => Some(1929),
+        (
+            SpotId::Annuna__Twisty_Passages__Northeast_D,
+            SpotId::Annuna__Twisty_Passages__East_Shaft,
+        ) => Some(1451),
+        (
+            SpotId::Annuna__Twisty_Passages__Northeast_D,
+            SpotId::Annuna__Twisty_Passages__Northeast_C,
+        ) => Some(350),
+        (SpotId::Annuna__Twisty_Passages__Northeast_D, SpotId::Annuna__Twisty_Passages__Top) => {
+            Some(1550)
+        }
+        (
+            SpotId::Annuna__Twisty_Passages__Northwest_Alcove,
+            SpotId::Annuna__Twisty_Passages__West_Dip,
+        ) => Some(650),
+        (
+            SpotId::Annuna__Twisty_Passages__Northwest_Alcove,
+            SpotId::Annuna__Twisty_Passages__West_Hill_Left,
+        ) => Some(4035),
+        (
+            SpotId::Annuna__Twisty_Passages__Northwest_Alcove,
+            SpotId::Annuna__Twisty_Passages__West_Ledge,
+        ) => Some(675),
+        (
+            SpotId::Annuna__Twisty_Passages__Southwest_C,
+            SpotId::Annuna__Twisty_Passages__Bottom_West,
+        ) => Some(701),
+        (SpotId::Annuna__Twisty_Passages__Southwest_C, SpotId::Annuna__Twisty_Passages__Center) => {
+            Some(1754)
+        }
+        (
+            SpotId::Annuna__Twisty_Passages__Southwest_C,
+            SpotId::Annuna__Twisty_Passages__Northeast_C,
+        ) => Some(2807),
+        (SpotId::Annuna__Twisty_Passages__Top, SpotId::Annuna__Twisty_Passages__Northeast_D) => {
+            Some(1652)
+        }
+        (SpotId::Annuna__Twisty_Passages__Top, SpotId::Annuna__Twisty_Passages__West_Hill_Left) => {
+            Some(2705)
+        }
+        (
+            SpotId::Annuna__Twisty_Passages__Top,
+            SpotId::Annuna__Twisty_Passages__West_Hill_Right,
+        ) => Some(1126),
+        (SpotId::Annuna__Twisty_Passages__West, SpotId::Annuna__Twisty_Passages__West_Ledge) => {
+            Some(1052)
+        }
+        (
+            SpotId::Annuna__Twisty_Passages__West_Dip,
+            SpotId::Annuna__Twisty_Passages__Southwest_C,
+        ) => Some(399),
+        (
+            SpotId::Annuna__Twisty_Passages__West_Dip,
+            SpotId::Annuna__Twisty_Passages__West_Hill_Left,
+        ) => Some(3771),
+        (
+            SpotId::Annuna__Twisty_Passages__West_Dip,
+            SpotId::Annuna__Twisty_Passages__West_Ledge,
+        ) => Some(600),
+        (SpotId::Annuna__Twisty_Passages__West_Hill_Left, SpotId::Annuna__Twisty_Passages__Top) => {
+            Some(2456)
+        }
+        (
+            SpotId::Annuna__Twisty_Passages__West_Hill_Left,
+            SpotId::Annuna__Twisty_Passages__West_Dip,
+        ) => Some(3771),
+        (
+            SpotId::Annuna__Twisty_Passages__West_Hill_Left,
+            SpotId::Annuna__Twisty_Passages__West_Hill_Right,
+        ) => Some(2631),
+        (
+            SpotId::Annuna__Twisty_Passages__West_Hill_Left,
+            SpotId::Annuna__Twisty_Passages__West_Ledge,
+        ) => Some(4035),
+        (
+            SpotId::Annuna__Twisty_Passages__West_Hill_Right,
+            SpotId::Annuna__Twisty_Passages__Center,
+        ) => Some(877),
+        (
+            SpotId::Annuna__Twisty_Passages__West_Hill_Right,
+            SpotId::Annuna__Twisty_Passages__Northeast_C,
+        ) => Some(1929),
+        (
+            SpotId::Annuna__Twisty_Passages__West_Hill_Right,
+            SpotId::Annuna__Twisty_Passages__Northeast_D,
+        ) => Some(2280),
+        (
+            SpotId::Annuna__Twisty_Passages__West_Hill_Right,
+            SpotId::Annuna__Twisty_Passages__Top,
+        ) => Some(1550),
+        (
+            SpotId::Annuna__Twisty_Passages__West_Hill_Right,
+            SpotId::Annuna__Twisty_Passages__West_Hill_Left,
+        ) => Some(2631),
+        (
+            SpotId::Annuna__Twisty_Passages__West_Ledge,
+            SpotId::Annuna__Twisty_Passages__Southwest_C,
+        ) => Some(526),
+        (SpotId::Annuna__Twisty_Passages__West_Ledge, SpotId::Annuna__Twisty_Passages__West) => {
+            Some(1052)
+        }
+        (
+            SpotId::Annuna__Twisty_Passages__West_Ledge,
+            SpotId::Annuna__Twisty_Passages__West_Dip,
+        ) => Some(263),
+        (
+            SpotId::Annuna__Twisty_Passages__West_Ledge,
+            SpotId::Annuna__Twisty_Passages__West_Hill_Right,
+        ) => Some(1403),
         (SpotId::Annuna__Vertical_Room__East_22, SpotId::Annuna__Vertical_Room__Lower_Mid) => {
             Some(1403)
         }
@@ -50625,6 +51811,181 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
             SpotId::Annuna__Sniper_Valley__West_25_Upper,
             SpotId::Annuna__Sniper_Valley__Bridge_Lower_Ledge,
         ) => (Some(2982), vec![]),
+        (
+            SpotId::Annuna__Twisty_Passages__Bottom_Middle,
+            SpotId::Annuna__Twisty_Passages__Bottom_West,
+        ) => (Some(1754), vec![]),
+        (
+            SpotId::Annuna__Twisty_Passages__Bottom_Middle,
+            SpotId::Annuna__Twisty_Passages__East_Floor,
+        ) => (Some(2631), vec![]),
+        (
+            SpotId::Annuna__Twisty_Passages__Bottom_West,
+            SpotId::Annuna__Twisty_Passages__Bottom_Middle,
+        ) => (Some(1754), vec![]),
+        (
+            SpotId::Annuna__Twisty_Passages__Center,
+            SpotId::Annuna__Twisty_Passages__Bottom_Middle,
+        ) => (Some(701), vec![]),
+        (SpotId::Annuna__Twisty_Passages__Center, SpotId::Annuna__Twisty_Passages__Northeast_C) => {
+            (Some(1200), vec![])
+        }
+        (SpotId::Annuna__Twisty_Passages__Center, SpotId::Annuna__Twisty_Passages__Southwest_C) => {
+            (Some(1754), vec![])
+        }
+        (
+            SpotId::Annuna__Twisty_Passages__Center,
+            SpotId::Annuna__Twisty_Passages__West_Hill_Right,
+        ) => (Some(1799), vec![]),
+        (
+            SpotId::Annuna__Twisty_Passages__East_Catwalk,
+            SpotId::Annuna__Twisty_Passages__East_Shaft,
+        ) => (Some(701), vec![]),
+        (
+            SpotId::Annuna__Twisty_Passages__East_Floor,
+            SpotId::Annuna__Twisty_Passages__Bottom_Middle,
+        ) => (Some(2631), vec![]),
+        (
+            SpotId::Annuna__Twisty_Passages__East_Fork,
+            SpotId::Annuna__Twisty_Passages__Bottom_Middle,
+        ) => (Some(701), vec![]),
+        (
+            SpotId::Annuna__Twisty_Passages__East_Fork,
+            SpotId::Annuna__Twisty_Passages__East_Shaft,
+        ) => (Some(1228), vec![]),
+        (
+            SpotId::Annuna__Twisty_Passages__East_Fork,
+            SpotId::Annuna__Twisty_Passages__Northeast_C,
+        ) => (Some(1799), vec![]),
+        (
+            SpotId::Annuna__Twisty_Passages__East_Shaft,
+            SpotId::Annuna__Twisty_Passages__East_Floor,
+        ) => (Some(701), vec![]),
+        (
+            SpotId::Annuna__Twisty_Passages__East_Shaft,
+            SpotId::Annuna__Twisty_Passages__East_Fork,
+        ) => (Some(1228), vec![]),
+        (
+            SpotId::Annuna__Twisty_Passages__Northeast_C,
+            SpotId::Annuna__Twisty_Passages__East_Fork,
+        ) => (Some(750), vec![]),
+        (
+            SpotId::Annuna__Twisty_Passages__Northeast_C,
+            SpotId::Annuna__Twisty_Passages__Northeast_D,
+        ) => (Some(1200), vec![]),
+        (
+            SpotId::Annuna__Twisty_Passages__Northeast_C,
+            SpotId::Annuna__Twisty_Passages__West_Hill_Right,
+        ) => (Some(1929), vec![]),
+        (
+            SpotId::Annuna__Twisty_Passages__Northeast_D,
+            SpotId::Annuna__Twisty_Passages__East_Shaft,
+        ) => (Some(1451), vec![]),
+        (
+            SpotId::Annuna__Twisty_Passages__Northeast_D,
+            SpotId::Annuna__Twisty_Passages__Northeast_C,
+        ) => (Some(350), vec![]),
+        (SpotId::Annuna__Twisty_Passages__Northeast_D, SpotId::Annuna__Twisty_Passages__Top) => {
+            (Some(1550), vec![])
+        }
+        (
+            SpotId::Annuna__Twisty_Passages__Northwest_Alcove,
+            SpotId::Annuna__Twisty_Passages__West_Dip,
+        ) => (Some(650), vec![]),
+        (
+            SpotId::Annuna__Twisty_Passages__Northwest_Alcove,
+            SpotId::Annuna__Twisty_Passages__West_Hill_Left,
+        ) => (Some(4035), vec![]),
+        (
+            SpotId::Annuna__Twisty_Passages__Northwest_Alcove,
+            SpotId::Annuna__Twisty_Passages__West_Ledge,
+        ) => (Some(675), vec![]),
+        (
+            SpotId::Annuna__Twisty_Passages__Southwest_C,
+            SpotId::Annuna__Twisty_Passages__Bottom_West,
+        ) => (Some(701), vec![]),
+        (SpotId::Annuna__Twisty_Passages__Southwest_C, SpotId::Annuna__Twisty_Passages__Center) => {
+            (Some(1754), vec![])
+        }
+        (
+            SpotId::Annuna__Twisty_Passages__Southwest_C,
+            SpotId::Annuna__Twisty_Passages__Northeast_C,
+        ) => (Some(2807), vec![]),
+        (SpotId::Annuna__Twisty_Passages__Top, SpotId::Annuna__Twisty_Passages__Northeast_D) => {
+            (Some(1652), vec![])
+        }
+        (SpotId::Annuna__Twisty_Passages__Top, SpotId::Annuna__Twisty_Passages__West_Hill_Left) => {
+            (Some(2705), vec![])
+        }
+        (
+            SpotId::Annuna__Twisty_Passages__Top,
+            SpotId::Annuna__Twisty_Passages__West_Hill_Right,
+        ) => (Some(1126), vec![]),
+        (SpotId::Annuna__Twisty_Passages__West, SpotId::Annuna__Twisty_Passages__West_Ledge) => {
+            (Some(1052), vec![])
+        }
+        (
+            SpotId::Annuna__Twisty_Passages__West_Dip,
+            SpotId::Annuna__Twisty_Passages__Southwest_C,
+        ) => (Some(399), vec![]),
+        (
+            SpotId::Annuna__Twisty_Passages__West_Dip,
+            SpotId::Annuna__Twisty_Passages__West_Hill_Left,
+        ) => (Some(3771), vec![]),
+        (
+            SpotId::Annuna__Twisty_Passages__West_Dip,
+            SpotId::Annuna__Twisty_Passages__West_Ledge,
+        ) => (Some(600), vec![]),
+        (SpotId::Annuna__Twisty_Passages__West_Hill_Left, SpotId::Annuna__Twisty_Passages__Top) => {
+            (Some(2456), vec![])
+        }
+        (
+            SpotId::Annuna__Twisty_Passages__West_Hill_Left,
+            SpotId::Annuna__Twisty_Passages__West_Dip,
+        ) => (Some(3771), vec![]),
+        (
+            SpotId::Annuna__Twisty_Passages__West_Hill_Left,
+            SpotId::Annuna__Twisty_Passages__West_Hill_Right,
+        ) => (Some(2631), vec![]),
+        (
+            SpotId::Annuna__Twisty_Passages__West_Hill_Left,
+            SpotId::Annuna__Twisty_Passages__West_Ledge,
+        ) => (Some(4035), vec![]),
+        (
+            SpotId::Annuna__Twisty_Passages__West_Hill_Right,
+            SpotId::Annuna__Twisty_Passages__Center,
+        ) => (Some(877), vec![]),
+        (
+            SpotId::Annuna__Twisty_Passages__West_Hill_Right,
+            SpotId::Annuna__Twisty_Passages__Northeast_C,
+        ) => (Some(1929), vec![]),
+        (
+            SpotId::Annuna__Twisty_Passages__West_Hill_Right,
+            SpotId::Annuna__Twisty_Passages__Northeast_D,
+        ) => (Some(2280), vec![]),
+        (
+            SpotId::Annuna__Twisty_Passages__West_Hill_Right,
+            SpotId::Annuna__Twisty_Passages__Top,
+        ) => (Some(1550), vec![]),
+        (
+            SpotId::Annuna__Twisty_Passages__West_Hill_Right,
+            SpotId::Annuna__Twisty_Passages__West_Hill_Left,
+        ) => (Some(2631), vec![]),
+        (
+            SpotId::Annuna__Twisty_Passages__West_Ledge,
+            SpotId::Annuna__Twisty_Passages__Southwest_C,
+        ) => (Some(526), vec![]),
+        (SpotId::Annuna__Twisty_Passages__West_Ledge, SpotId::Annuna__Twisty_Passages__West) => {
+            (Some(1052), vec![])
+        }
+        (
+            SpotId::Annuna__Twisty_Passages__West_Ledge,
+            SpotId::Annuna__Twisty_Passages__West_Dip,
+        ) => (Some(263), vec![]),
+        (
+            SpotId::Annuna__Twisty_Passages__West_Ledge,
+            SpotId::Annuna__Twisty_Passages__West_Hill_Right,
+        ) => (Some(1403), vec![]),
         (SpotId::Annuna__Vertical_Room__East_22, SpotId::Annuna__Vertical_Room__Lower_Mid) => {
             (Some(1403), vec![])
         }
