@@ -152,6 +152,15 @@ class RulesListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by RulesParser#RefStrInList.
+    def enterRefStrInList(self, ctx:RulesParser.RefStrInListContext):
+        pass
+
+    # Exit a parse tree produced by RulesParser#RefStrInList.
+    def exitRefStrInList(self, ctx:RulesParser.RefStrInListContext):
+        pass
+
+
     # Enter a parse tree produced by RulesParser#PerItemInt.
     def enterPerItemInt(self, ctx:RulesParser.PerItemIntContext):
         pass

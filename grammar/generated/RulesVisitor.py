@@ -89,6 +89,11 @@ class RulesVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by RulesParser#RefStrInList.
+    def visitRefStrInList(self, ctx:RulesParser.RefStrInListContext):
+        return self.visitChildren(ctx)
+
+
     # Visit a parse tree produced by RulesParser#PerItemInt.
     def visitPerItemInt(self, ctx:RulesParser.PerItemIntContext):
         return self.visitChildren(ctx)
