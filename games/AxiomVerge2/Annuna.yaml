@@ -1378,7 +1378,7 @@ areas:
   on_entry: $reset_old_area(^newpos)
   spots:
     - name: East
-      coord: [43.95, 25.65]
+      coord: [43.9, 25.65]
 
 - name: East Hideout
   on_entry: $reset_old_area(^newpos)

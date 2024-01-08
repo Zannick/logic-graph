@@ -691,6 +691,20 @@ pub fn access_ft_main_and_map__annuna__center_save__save(
     // $ft_main and ^map__annuna__center_save__save
     (helper__ft_main!(ctx, world) && ctx.map__annuna__center_save__save())
 }
+pub fn access_ft_main_and_map__annuna__factory_entrance__save(
+    ctx: &Context,
+    world: &graph::World,
+) -> bool {
+    // $ft_main and ^map__annuna__factory_entrance__save
+    (helper__ft_main!(ctx, world) && ctx.map__annuna__factory_entrance__save())
+}
+pub fn access_ft_main_and_map__annuna__mirror_match__save(
+    ctx: &Context,
+    world: &graph::World,
+) -> bool {
+    // $ft_main and ^map__annuna__mirror_match__save
+    (helper__ft_main!(ctx, world) && ctx.map__annuna__mirror_match__save())
+}
 pub fn access_ft_main_and_map__ebih__base_camp__save(ctx: &Context, world: &graph::World) -> bool {
     // $ft_main and ^map__ebih__base_camp__save
     (helper__ft_main!(ctx, world) && ctx.map__ebih__base_camp__save())

@@ -82,8 +82,7 @@ areas:
           req: $boomerang
           to: Ebih > Base Camp > Building Entry
           time: 2
-          item_time: 0
-          tags: [cskip]
+          tags: [cskip, exterior]
 
     - name: Corner
       coord: [28.5, 12.15]

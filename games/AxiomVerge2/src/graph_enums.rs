@@ -13923,6 +13923,8 @@ pub enum WarpId {
     ExitMenu,
     FastTravelAmagiMainArea,
     FastTravelAnnunaCenter,
+    FastTravelAnnunaFactoryEntrance,
+    FastTravelAnnunaMirrorMatch,
     FastTravelEbihBaseCamp,
     FastTravelEbihWestLower,
     FastTravelEbihWestMid,
@@ -13953,6 +13955,10 @@ impl fmt::Display for WarpId {
             WarpId::ExitMenu => write!(f, "{}", "ExitMenu"),
             WarpId::FastTravelAmagiMainArea => write!(f, "{}", "FastTravelAmagiMainArea"),
             WarpId::FastTravelAnnunaCenter => write!(f, "{}", "FastTravelAnnunaCenter"),
+            WarpId::FastTravelAnnunaFactoryEntrance => {
+                write!(f, "{}", "FastTravelAnnunaFactoryEntrance")
+            }
+            WarpId::FastTravelAnnunaMirrorMatch => write!(f, "{}", "FastTravelAnnunaMirrorMatch"),
             WarpId::FastTravelEbihBaseCamp => write!(f, "{}", "FastTravelEbihBaseCamp"),
             WarpId::FastTravelEbihWestLower => write!(f, "{}", "FastTravelEbihWestLower"),
             WarpId::FastTravelEbihWestMid => write!(f, "{}", "FastTravelEbihWestMid"),
@@ -13994,6 +14000,8 @@ impl std::str::FromStr for WarpId {
             "ExitMenu" => Ok(WarpId::ExitMenu),
             "FastTravelAmagiMainArea" => Ok(WarpId::FastTravelAmagiMainArea),
             "FastTravelAnnunaCenter" => Ok(WarpId::FastTravelAnnunaCenter),
+            "FastTravelAnnunaFactoryEntrance" => Ok(WarpId::FastTravelAnnunaFactoryEntrance),
+            "FastTravelAnnunaMirrorMatch" => Ok(WarpId::FastTravelAnnunaMirrorMatch),
             "FastTravelEbihBaseCamp" => Ok(WarpId::FastTravelEbihBaseCamp),
             "FastTravelEbihWestLower" => Ok(WarpId::FastTravelEbihWestLower),
             "FastTravelEbihWestMid" => Ok(WarpId::FastTravelEbihWestMid),

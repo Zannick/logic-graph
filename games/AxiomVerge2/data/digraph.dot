@@ -223,7 +223,7 @@ digraph AxiomVerge2 {
         Annuna__Factory_Access__Upper_Ledge [label = "", pos = "130.35,-36.666667!"];
         Annuna__Factory_Access__Staircase_Top [label = "", pos = "130.95,-36.25!"];
         Annuna__Factory_Access__Grate_Left [label = "", pos = "131.55,-36.25!"];
-        Annuna__Udug_Gate__East [label = "", pos = "131.85,-42.75!"];
+        Annuna__Udug_Gate__East [label = "", pos = "131.7,-42.75!"];
         Annuna__East_Hideout__West [label = "", pos = "132.15,-36.25!"];
         Annuna__Center_Save__East [label = "", pos = "119.85,-34.333333!"];
         Annuna__Center_Save__Save_Point [label = "", pos = "118.5,-34.5!"];
@@ -2215,7 +2215,6 @@ digraph AxiomVerge2 {
     Glacier__Apocalypse__Southwest_Capsule -> Glacier__Apocalypse__West;
     Interior__Dock_Elevator__Connector -> Interior__Dock_Interior__Connector;
     Interior__Dock_Interior__Connector -> Interior__Dock_Elevator__Connector;
-    Interior__Building_Interior__Entry -> Ebih__Base_Camp__Building_Entry;
     Interior__Cave_Behind_Waterfall__Bottom -> Interior__Cave_Behind_Waterfall__Middle;
     Interior__Cave_Behind_Waterfall__Bottom -> Interior__Cave_Behind_Waterfall__Top;
     Interior__Cave_Behind_Waterfall__Middle -> Interior__Cave_Behind_Waterfall__Top;

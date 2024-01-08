@@ -5364,6 +5364,12 @@ impl world::Accessible for Warp {
                 WarpId::FastTravelAnnunaCenter => {
                     rules::access_ft_main_and_map__annuna__center_save__save(ctx, world)
                 }
+                WarpId::FastTravelAnnunaFactoryEntrance => {
+                    rules::access_ft_main_and_map__annuna__factory_entrance__save(ctx, world)
+                }
+                WarpId::FastTravelAnnunaMirrorMatch => {
+                    rules::access_ft_main_and_map__annuna__mirror_match__save(ctx, world)
+                }
                 WarpId::FastTravelEbihBaseCamp => {
                     rules::access_ft_main_and_map__ebih__base_camp__save(ctx, world)
                 }
@@ -5436,6 +5442,20 @@ impl world::Accessible for Warp {
                     }
                 }
                 WarpId::FastTravelAnnunaCenter => {
+                    if rules::access_mode_ne_drone(ctx, world) {
+                        2500
+                    } else {
+                        0
+                    }
+                }
+                WarpId::FastTravelAnnunaFactoryEntrance => {
+                    if rules::access_mode_ne_drone(ctx, world) {
+                        2500
+                    } else {
+                        0
+                    }
+                }
+                WarpId::FastTravelAnnunaMirrorMatch => {
                     if rules::access_mode_ne_drone(ctx, world) {
                         2500
                     } else {
@@ -5563,6 +5583,10 @@ impl world::Warp for Warp {
                 WarpId::ExitMenu => ctx.last(),
                 WarpId::FastTravelAmagiMainArea => SpotId::Amagi__Main_Area__Save_Point,
                 WarpId::FastTravelAnnunaCenter => SpotId::Annuna__Center_Save__Save_Point,
+                WarpId::FastTravelAnnunaFactoryEntrance => {
+                    SpotId::Annuna__Factory_Entrance__Save_Point
+                }
+                WarpId::FastTravelAnnunaMirrorMatch => SpotId::Annuna__Mirror_Match__Save_Point,
                 WarpId::FastTravelEbihBaseCamp => SpotId::Ebih__Base_Camp__Save_Point,
                 WarpId::FastTravelEbihWestLower => SpotId::Ebih__Ebih_West__Lower_Save,
                 WarpId::FastTravelEbihWestMid => SpotId::Ebih__Ebih_West__Mid_Save,
@@ -5610,6 +5634,8 @@ impl world::Warp for Warp {
             WarpId::ExitMenu => rules::action_last_set_default(ctx, world),
             WarpId::FastTravelAmagiMainArea => rules::action_refill_energy(ctx, world),
             WarpId::FastTravelAnnunaCenter => rules::action_refill_energy(ctx, world),
+            WarpId::FastTravelAnnunaFactoryEntrance => rules::action_refill_energy(ctx, world),
+            WarpId::FastTravelAnnunaMirrorMatch => rules::action_refill_energy(ctx, world),
             WarpId::FastTravelEbihBaseCamp => rules::action_refill_energy(ctx, world),
             WarpId::FastTravelEbihWestLower => rules::action_refill_energy(ctx, world),
             WarpId::FastTravelEbihWestMid => rules::action_refill_energy(ctx, world),
@@ -5640,6 +5666,8 @@ impl world::Warp for Warp {
             WarpId::ExitMenu => false,
             WarpId::FastTravelAmagiMainArea => false,
             WarpId::FastTravelAnnunaCenter => false,
+            WarpId::FastTravelAnnunaFactoryEntrance => false,
+            WarpId::FastTravelAnnunaMirrorMatch => false,
             WarpId::FastTravelEbihBaseCamp => false,
             WarpId::FastTravelEbihWestLower => false,
             WarpId::FastTravelEbihWestMid => false,
@@ -12275,7 +12303,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
             canonical: CanonId::Melee_Charge,
             item: Item::Melee_Charge,
             price: Currency::Free,
-            time: 0,
+            time: 750,
             exit_id: Some(ExitId::Interior__Building_Interior__Entry__Urn_Collection_Skip),
         },
         LocationId::Interior__Building_Interior__Corner__Urn => Location {
@@ -38669,6 +38697,18 @@ pub fn build_warps() -> EnumMap<WarpId, Warp> {
         },
         WarpId::FastTravelAnnunaCenter => Warp {
             id: WarpId::FastTravelAnnunaCenter,
+            dest: SpotId::None,
+            time: 12000,
+            price: Currency::Free,
+        },
+        WarpId::FastTravelAnnunaFactoryEntrance => Warp {
+            id: WarpId::FastTravelAnnunaFactoryEntrance,
+            dest: SpotId::None,
+            time: 12000,
+            price: Currency::Free,
+        },
+        WarpId::FastTravelAnnunaMirrorMatch => Warp {
+            id: WarpId::FastTravelAnnunaMirrorMatch,
             dest: SpotId::None,
             time: 12000,
             price: Currency::Free,
