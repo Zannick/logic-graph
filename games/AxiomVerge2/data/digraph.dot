@@ -1203,6 +1203,7 @@ digraph AxiomVerge2 {
         Menu__Upgrade_Menu__Combat [label = "", fillcolor = "8"];
         Menu__Upgrade_Menu__Infection [label = "", fillcolor = "8"];
         Menu__Upgrade_Menu__Drone [label = "", fillcolor = "8"];
+        Menu__Warp_Only__Kiengir [label = "", fillcolor = "8"];
         node[fillcolor="5"];
         Uhrum__West_Entrance__West_27 [label = "", pos = "57.15,-44.666667!"];
         Uhrum__West_Entrance__West_26 [label = "", pos = "57.15,-43.083333!"];

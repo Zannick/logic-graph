@@ -224,6 +224,7 @@ pub enum AreaId {
     Irikar_Breach__Uhrum_Connector,
     Irikar_Breach__Worm_Rave,
     Menu__Upgrade_Menu,
+    Menu__Warp_Only,
     Uhrum__Annuna_Corridor,
     Uhrum__Artillery_Practice,
     Uhrum__East_Lake,
@@ -393,6 +394,7 @@ impl fmt::Display for AreaId {
             }
             AreaId::Irikar_Breach__Worm_Rave => write!(f, "{}", "Irikar Breach > Worm Rave"),
             AreaId::Menu__Upgrade_Menu => write!(f, "{}", "Menu > Upgrade Menu"),
+            AreaId::Menu__Warp_Only => write!(f, "{}", "Menu > Warp Only"),
             AreaId::Uhrum__Annuna_Corridor => write!(f, "{}", "Uhrum > Annuna Corridor"),
             AreaId::Uhrum__Artillery_Practice => write!(f, "{}", "Uhrum > Artillery Practice"),
             AreaId::Uhrum__East_Lake => write!(f, "{}", "Uhrum > East Lake"),
@@ -545,6 +547,7 @@ impl std::str::FromStr for AreaId {
             "Irikar Breach > Uhrum Connector" => Ok(AreaId::Irikar_Breach__Uhrum_Connector),
             "Irikar Breach > Worm Rave" => Ok(AreaId::Irikar_Breach__Worm_Rave),
             "Menu > Upgrade Menu" => Ok(AreaId::Menu__Upgrade_Menu),
+            "Menu > Warp Only" => Ok(AreaId::Menu__Warp_Only),
             "Uhrum > Annuna Corridor" => Ok(AreaId::Uhrum__Annuna_Corridor),
             "Uhrum > Artillery Practice" => Ok(AreaId::Uhrum__Artillery_Practice),
             "Uhrum > East Lake" => Ok(AreaId::Uhrum__East_Lake),
@@ -1764,6 +1767,7 @@ pub enum SpotId {
     Menu__Upgrade_Menu__Drone,
     Menu__Upgrade_Menu__Infection,
     Menu__Upgrade_Menu__Physiology,
+    Menu__Warp_Only__Kiengir,
     Uhrum__Annuna_Corridor__Between_Two_Flowers,
     Uhrum__Annuna_Corridor__Block_East,
     Uhrum__Annuna_Corridor__Block_West,
@@ -4894,6 +4898,7 @@ impl fmt::Display for SpotId {
             SpotId::Menu__Upgrade_Menu__Physiology => {
                 write!(f, "{}", "Menu > Upgrade Menu > Physiology")
             }
+            SpotId::Menu__Warp_Only__Kiengir => write!(f, "{}", "Menu > Warp Only > Kiengir"),
             SpotId::Uhrum__Annuna_Corridor__Between_Two_Flowers => {
                 write!(f, "{}", "Uhrum > Annuna Corridor > Between Two Flowers")
             }
@@ -7264,6 +7269,7 @@ impl std::str::FromStr for SpotId {
             "Menu > Upgrade Menu > Drone" => Ok(SpotId::Menu__Upgrade_Menu__Drone),
             "Menu > Upgrade Menu > Infection" => Ok(SpotId::Menu__Upgrade_Menu__Infection),
             "Menu > Upgrade Menu > Physiology" => Ok(SpotId::Menu__Upgrade_Menu__Physiology),
+            "Menu > Warp Only > Kiengir" => Ok(SpotId::Menu__Warp_Only__Kiengir),
             "Uhrum > Annuna Corridor > Between Two Flowers" => {
                 Ok(SpotId::Uhrum__Annuna_Corridor__Between_Two_Flowers)
             }
@@ -7576,6 +7582,7 @@ pub enum LocationId {
     Ebih__Boss_Room__East_Ledge__Item,
     Ebih__By_Garage__Crawlspace__Fragment,
     Ebih__Drone_Room__Item__Urn,
+    Ebih__Drone_Room__Item__Urn_Collection_Skip,
     Ebih__Drone_Room__Middle_Platform__Urn_Quick_Grab,
     Ebih__Ebih_East__Corner__Urn,
     Ebih__Ebih_East__Dispenser__Vend,
@@ -7955,6 +7962,9 @@ impl fmt::Display for LocationId {
             }
             LocationId::Ebih__Drone_Room__Item__Urn => {
                 write!(f, "{}", "Ebih > Drone Room > Item > Urn")
+            }
+            LocationId::Ebih__Drone_Room__Item__Urn_Collection_Skip => {
+                write!(f, "{}", "Ebih > Drone Room > Item > Urn Collection Skip")
             }
             LocationId::Ebih__Drone_Room__Middle_Platform__Urn_Quick_Grab => write!(
                 f,
@@ -8773,6 +8783,9 @@ impl std::str::FromStr for LocationId {
                 Ok(LocationId::Ebih__By_Garage__Crawlspace__Fragment)
             }
             "Ebih > Drone Room > Item > Urn" => Ok(LocationId::Ebih__Drone_Room__Item__Urn),
+            "Ebih > Drone Room > Item > Urn Collection Skip" => {
+                Ok(LocationId::Ebih__Drone_Room__Item__Urn_Collection_Skip)
+            }
             "Ebih > Drone Room > Middle Platform > Urn Quick Grab" => {
                 Ok(LocationId::Ebih__Drone_Room__Middle_Platform__Urn_Quick_Grab)
             }
@@ -9592,6 +9605,7 @@ pub enum ExitId {
     Ebih__By_Garage__Lower_Platform__ex__West_Bush_2,
     Ebih__By_Garage__West_12__ex__Grid_25_10_12__East_12_1,
     Ebih__Drone_Room__East_4__ex__Grid_25_2_6__West_4_1,
+    Ebih__Drone_Room__Item__Urn_Collection_Skip,
     Ebih__Drone_Room__Middle_Platform__ex__Portal_Exit_1,
     Ebih__Drone_Room__Middle_Platform__Urn_Quick_Grab,
     Ebih__Drone_Room__Pit_Left__ex__Middle_Platform_1,
@@ -10845,6 +10859,7 @@ impl fmt::Display for ExitId {
             ExitId::Ebih__By_Garage__Lower_Platform__ex__West_Bush_2 => write!(f, "{}", "Ebih > By Garage > Lower Platform ==> West Bush (2)"),
             ExitId::Ebih__By_Garage__West_12__ex__Grid_25_10_12__East_12_1 => write!(f, "{}", "Ebih > By Garage > West 12 ==> Grid 25,10-12 > East 12 (1)"),
             ExitId::Ebih__Drone_Room__East_4__ex__Grid_25_2_6__West_4_1 => write!(f, "{}", "Ebih > Drone Room > East 4 ==> Grid 25,2-6 > West 4 (1)"),
+            ExitId::Ebih__Drone_Room__Item__Urn_Collection_Skip => write!(f, "{}", "Ebih > Drone Room > Item > Urn Collection Skip"),
             ExitId::Ebih__Drone_Room__Middle_Platform__ex__Portal_Exit_1 => write!(f, "{}", "Ebih > Drone Room > Middle Platform ==> Portal Exit (1)"),
             ExitId::Ebih__Drone_Room__Middle_Platform__Urn_Quick_Grab => write!(f, "{}", "Ebih > Drone Room > Middle Platform > Urn Quick Grab"),
             ExitId::Ebih__Drone_Room__Pit_Left__ex__Middle_Platform_1 => write!(f, "{}", "Ebih > Drone Room > Pit Left ==> Middle Platform (1)"),
@@ -12103,6 +12118,7 @@ impl std::str::FromStr for ExitId {
             "Ebih > By Garage > Lower Platform ==> West Bush (2)" => Ok(ExitId::Ebih__By_Garage__Lower_Platform__ex__West_Bush_2),
             "Ebih > By Garage > West 12 ==> Grid 25,10-12 > East 12 (1)" => Ok(ExitId::Ebih__By_Garage__West_12__ex__Grid_25_10_12__East_12_1),
             "Ebih > Drone Room > East 4 ==> Grid 25,2-6 > West 4 (1)" => Ok(ExitId::Ebih__Drone_Room__East_4__ex__Grid_25_2_6__West_4_1),
+            "Ebih > Drone Room > Item > Urn Collection Skip" => Ok(ExitId::Ebih__Drone_Room__Item__Urn_Collection_Skip),
             "Ebih > Drone Room > Middle Platform ==> Portal Exit (1)" => Ok(ExitId::Ebih__Drone_Room__Middle_Platform__ex__Portal_Exit_1),
             "Ebih > Drone Room > Middle Platform > Urn Quick Grab" => Ok(ExitId::Ebih__Drone_Room__Middle_Platform__Urn_Quick_Grab),
             "Ebih > Drone Room > Pit Left ==> Middle Platform (1)" => Ok(ExitId::Ebih__Drone_Room__Pit_Left__ex__Middle_Platform_1),

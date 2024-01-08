@@ -159,3 +159,11 @@ tests:
     expect:
       prev_area: Glacier > Grid 31,9-12
       last: SpotId::None
+
+  - name: collection_skip
+    start: Ebih > Drone Room > Item
+    context:
+      save: Ebih > Ebih West > Upper Save
+    route: |
+      * Take hybrid exit Ebih > Drone Room > Item > Urn Collection Skip, collecting Remote_Drone
+        MainSavewarp to Ebih > Ebih West > Upper Save

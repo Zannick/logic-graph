@@ -165,7 +165,7 @@ warps:
     base_movement: true
   exit_menu:
     time: 0.2
-    req: WITHIN `Menu`
+    req: WITHIN `Menu > Upgrade Menu`
     to: ^last
     after: ^last = $default
     base_movement: true
@@ -452,15 +452,30 @@ helpers:
     ^mode = 'drone'; ^indra = ^indrapos;
 
   # entry rules
+  $save_last:action: ^last = ^position
   # ^position is the old value
+  # testing to see if area(newpos) != area(position) != prev_area
+  # and we aren't coming from the menu. If so, then we check if we're returning to prev_area.
+  # If we are, we just make the current area the prev_area (i.e. swap).
+  # But if not, then we reset that area and same the area we are leaving.
+  # Case 2. The "Warp Only" area allows warps but does not count toward prev_area.
+  # Instead, we save the actual player position at ^last and use that.
   $reset_old_area:action(newpos:SpotId): >
-    IF (^position NOT WITHIN ^prev_area
-        AND ^position NOT WITHIN `Menu`
+    IF (^position NOT WITHIN `Menu`
+        AND ^position NOT WITHIN ^prev_area
         AND ^newpos NOT WITHIN $get_area(^position)) {
             IF (^newpos NOT WITHIN ^prev_area) {
                 $reset_area(^prev_area);
             };
             ^prev_area = $get_area(^position);
+    } ELSE IF (^position WITHIN `Menu > Warp Only`
+               AND ^last NOT WITHIN ^prev_area
+               AND ^newpos NOT WITHIN $get_area(^last)) {
+                   IF (^newpos NOT WITHIN ^prev_area) {
+                       $reset_area(^prev_area);
+                   };
+                   ^prev_area = $get_area(^last);
+                   ^last = $default;
     }
   # Breach portals are tied to particular save points in the breach
   # The area with the portal should define the data portal_default to be that point,

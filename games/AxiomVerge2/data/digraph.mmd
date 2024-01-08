@@ -1477,6 +1477,9 @@ subgraph Menu
         Menu__Upgrade_Menu__Infection(Infection);
         Menu__Upgrade_Menu__Drone(Drone);
     end
+    subgraph Menu__Warp_Only[Warp Only]
+        Menu__Warp_Only__Kiengir(Kiengir);
+    end
 end
 subgraph Uhrum
     subgraph Uhrum__West_Entrance[West Entrance]
@@ -1817,6 +1820,7 @@ Ebih__By_Garage__Lower_Platform --> Ebih__By_Garage__East_Bush
 Ebih__By_Garage__Lower_Platform --> Ebih__By_Garage__West_Bush
 Ebih__By_Garage__West_12 <--> Ebih__Grid_25_10_12__East_12
 Ebih__Drone_Room__East_4 <--> Ebih__Grid_25_2_6__West_4
+Ebih__Drone_Room__Item --> Menu__Warp_Only__Kiengir
 Ebih__Drone_Room__Middle_Platform --> Ebih__Drone_Room__Portal
 Ebih__Drone_Room__Middle_Platform --> Ebih__Drone_Room__Portal_Exit
 Ebih__Drone_Room__Pit_Left --> Ebih__Drone_Room__Middle_Platform

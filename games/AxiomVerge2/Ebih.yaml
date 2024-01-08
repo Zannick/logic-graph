@@ -1723,6 +1723,12 @@ areas:
           item: Remote_Drone
           canon: Remote_Drone
           tags: [urn]
+      hybrid:
+        - name: Urn Collection Skip
+          item: Remote_Drone
+          canon: Remote_Drone
+          to: Menu > Warp Only > Kiengir
+          tags: [cskip]
     - name: Middle Platform
       coord: [24.4, 5.1]
       local:

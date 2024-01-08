@@ -2028,10 +2028,10 @@ pub fn access_within_antarctica(ctx: &Context, world: &graph::World) -> bool {
         _ => false,
     })
 }
-pub fn access_within_menu(ctx: &Context, world: &graph::World) -> bool {
-    // WITHIN `Menu`
-    (match get_region(ctx.position()) {
-        RegionId::Menu => true,
+pub fn access_within_menu_gt_upgrade_menu(ctx: &Context, world: &graph::World) -> bool {
+    // WITHIN `Menu > Upgrade Menu`
+    (match get_area(ctx.position()) {
+        AreaId::Menu__Upgrade_Menu => true,
         _ => false,
     })
 }
@@ -2508,6 +2508,10 @@ pub fn action_reset_old_area__newpos(ctx: &mut Context, world: &graph::World, ne
 pub fn action_save(ctx: &mut Context, world: &graph::World) {
     // $save
     helper__save!(ctx, world);
+}
+pub fn action_save_last(ctx: &mut Context, world: &graph::World, newpos: SpotId) {
+    // $save_last
+    helper__save_last!(ctx, world);
 }
 pub fn action_save_set_glacier_gt_revival_gt_save_point(ctx: &mut Context, world: &graph::World) {
     // ^save = `Glacier > Revival > Save Point`

@@ -530,21 +530,41 @@ macro_rules! helper__deploy_drone_and_move {
     }};
 }
 
+/// $save_last (  )
+/// ^last = ^position
+#[macro_export]
+macro_rules! helper__save_last {
+    ($ctx:expr, $world:expr) => {{
+        #[allow(unused_imports)]
+        use $crate::items::Item;
+        $ctx.set_last($ctx.position());
+    }};
+}
+
 /// $reset_old_area ( TypedVar(name='newpos', type='SpotId') )
-/// IF (^position NOT WITHIN ^prev_area     AND ^position NOT WITHIN `Menu`     AND ^newpos NOT WITHIN $get_area(^position)) {         IF (^newpos NOT WITHIN ^prev_area) {             $reset_area(^prev_area);         };         ^prev_area = $get_area(^position); }
+/// IF (^position NOT WITHIN `Menu`     AND ^position NOT WITHIN ^prev_area     AND ^newpos NOT WITHIN $get_area(^position)) {         IF (^newpos NOT WITHIN ^prev_area) {             $reset_area(^prev_area);         };         ^prev_area = $get_area(^position); } ELSE IF (^position WITHIN `Menu > Warp Only`            AND ^last NOT WITHIN ^prev_area            AND ^newpos NOT WITHIN $get_area(^last)) {                IF (^newpos NOT WITHIN ^prev_area) {                    $reset_area(^prev_area);                };                ^prev_area = $get_area(^last);                ^last = $default; }
 #[macro_export]
 macro_rules! helper__reset_old_area {
     ($ctx:expr, $world:expr, $newpos:expr) => {{
         #[allow(unused_imports)]
         use $crate::items::Item;
-        if ((get_area($ctx.position()) != $ctx.prev_area()
-            && get_region($ctx.position()) != RegionId::Menu)
+        if ((get_region($ctx.position()) != RegionId::Menu
+            && get_area($ctx.position()) != $ctx.prev_area())
             && get_area($newpos) != get_area($ctx.position()))
         {
             if get_area($newpos) != $ctx.prev_area() {
                 $ctx.reset_area($ctx.prev_area(), $world);
             }
             $ctx.set_prev_area(get_area($ctx.position()));
+        } else if ((get_area($ctx.position()) == AreaId::Menu__Warp_Only
+            && get_area($ctx.last()) != $ctx.prev_area())
+            && get_area($newpos) != get_area($ctx.last()))
+        {
+            if get_area($newpos) != $ctx.prev_area() {
+                $ctx.reset_area($ctx.prev_area(), $world);
+            }
+            $ctx.set_prev_area(get_area($ctx.last()));
+            $ctx.set_last(Default::default());
         }
     }};
 }

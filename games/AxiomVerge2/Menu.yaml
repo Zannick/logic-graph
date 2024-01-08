@@ -213,3 +213,11 @@ areas:
         - to: Infection
           req: Infect
           time: 0.1
+
+- name: Warp Only
+  on_entry: $save_last
+  # These spots allow savewarp and fast travel by tagging the appropriate realm.
+  spots:
+    - name: Kiengir
+      data:
+        realm: main

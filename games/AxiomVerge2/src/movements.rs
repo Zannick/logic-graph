@@ -28209,6 +28209,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             1000,
         ),
         (
+            SpotId::Ebih__Drone_Room__Item,
+            SpotId::Menu__Warp_Only__Kiengir,
+            0,
+        ),
+        (
             SpotId::Ebih__Drone_Room__Left_Platform,
             SpotId::Ebih__Drone_Room__Middle_Platform,
             1326,
@@ -42627,6 +42632,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Menu__Upgrade_Menu__Physiology,
             SpotId::Menu__Upgrade_Menu__Infection,
             100,
+        ),
+        (
+            SpotId::Menu__Warp_Only__Kiengir,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
         ),
         (
             SpotId::Uhrum__Annuna_Corridor__Between_Two_Flowers,

@@ -1227,6 +1227,7 @@ pub fn get_area(spot: SpotId) -> AreaId {
         | SpotId::Menu__Upgrade_Menu__Combat
         | SpotId::Menu__Upgrade_Menu__Infection
         | SpotId::Menu__Upgrade_Menu__Drone => AreaId::Menu__Upgrade_Menu,
+        SpotId::Menu__Warp_Only__Kiengir => AreaId::Menu__Warp_Only,
         SpotId::Uhrum__West_Entrance__West_27
         | SpotId::Uhrum__West_Entrance__West_26
         | SpotId::Uhrum__West_Entrance__Hidden_Passage_West
@@ -2540,6 +2541,7 @@ pub fn get_region(spot: SpotId) -> RegionId {
         | SpotId::Menu__Upgrade_Menu__Combat
         | SpotId::Menu__Upgrade_Menu__Infection
         | SpotId::Menu__Upgrade_Menu__Drone => RegionId::Menu,
+        SpotId::Menu__Warp_Only__Kiengir => RegionId::Menu,
         SpotId::Uhrum__West_Entrance__West_27
         | SpotId::Uhrum__West_Entrance__West_26
         | SpotId::Uhrum__West_Entrance__Hidden_Passage_West
@@ -2779,6 +2781,7 @@ impl world::Accessible for Location {
             LocationId::Ebih__Boss_Room__East_Ledge__Item => true,
             LocationId::Ebih__By_Garage__Crawlspace__Fragment => true,
             LocationId::Ebih__Drone_Room__Item__Urn => true,
+            LocationId::Ebih__Drone_Room__Item__Urn_Collection_Skip => true,
             LocationId::Ebih__Drone_Room__Middle_Platform__Urn_Quick_Grab => {
                 rules::access_boomerang2(&ctx, world)
             }
@@ -3490,6 +3493,7 @@ impl world::Accessible for Exit {
             ExitId::Ebih__By_Garage__Lower_Platform__ex__West_Bush_2 => rules::access_hook(&ctx, world),
             ExitId::Ebih__By_Garage__West_12__ex__Grid_25_10_12__East_12_1 => true,
             ExitId::Ebih__Drone_Room__East_4__ex__Grid_25_2_6__West_4_1 => rules::access_mode_eq_drone(&ctx, world),
+            ExitId::Ebih__Drone_Room__Item__Urn_Collection_Skip => true,
             ExitId::Ebih__Drone_Room__Middle_Platform__ex__Portal_Exit_1 => rules::access_grab(&ctx, world),
             ExitId::Ebih__Drone_Room__Middle_Platform__Urn_Quick_Grab => rules::access_boomerang2(&ctx, world),
             ExitId::Ebih__Drone_Room__Pit_Left__ex__Middle_Platform_1 => rules::access_climb(&ctx, world),
@@ -4577,6 +4581,7 @@ impl world::Exit for Exit {
             ExitId::Ebih__By_Garage__East_13__ex__Base_Camp__West_13_1 => true,
             ExitId::Ebih__By_Garage__Garage_Entry__ex__Interior__Garage__Entry_1 => true,
             ExitId::Ebih__By_Garage__West_12__ex__Grid_25_10_12__East_12_1 => true,
+            ExitId::Ebih__Drone_Room__Item__Urn_Collection_Skip => true,
             ExitId::Ebih__Drone_Room__West_4__ex__Boss_Room__East_4_1 => true,
             ExitId::Ebih__Drone_Room__West_6__ex__Boss_Room__East_6_1 => true,
             ExitId::Ebih__Ebih_East__East_9__ex__Observation_Tower_Room__West_9_1 => true,
@@ -5413,7 +5418,7 @@ impl world::Accessible for Warp {
                         ctx, world,
                     )
                 }
-                WarpId::ExitMenu => rules::access_within_menu(ctx, world),
+                WarpId::ExitMenu => rules::access_within_menu_gt_upgrade_menu(ctx, world),
                 WarpId::FastTravelAmagiMainArea => {
                     rules::access_ft_main_and_map__amagi__main_area__save(ctx, world)
                 }
@@ -5758,7 +5763,7 @@ pub struct Spot {
     pub actions: Range<usize>,
 }
 
-static RAW_SPOTS: [SpotId; 1304] = [
+static RAW_SPOTS: [SpotId; 1305] = [
     SpotId::None,
     SpotId::Amagi__Grid_31_19__East,
     SpotId::Amagi__Grid_31_19__West,
@@ -6947,6 +6952,7 @@ static RAW_SPOTS: [SpotId; 1304] = [
     SpotId::Menu__Upgrade_Menu__Drone,
     SpotId::Menu__Upgrade_Menu__Infection,
     SpotId::Menu__Upgrade_Menu__Physiology,
+    SpotId::Menu__Warp_Only__Kiengir,
     SpotId::Uhrum__Annuna_Corridor__Between_Two_Flowers,
     SpotId::Uhrum__Annuna_Corridor__Block_East,
     SpotId::Uhrum__Annuna_Corridor__Block_West,
@@ -7604,6 +7610,10 @@ lazy_static! {
             start: SpotId::Menu__Upgrade_Menu__Combat.into_usize(),
             end: SpotId::Menu__Upgrade_Menu__Physiology.into_usize() + 1,
         },
+        AreaId::Menu__Warp_Only => Range {
+            start: SpotId::Menu__Warp_Only__Kiengir.into_usize(),
+            end: SpotId::Menu__Warp_Only__Kiengir.into_usize() + 1,
+        },
         AreaId::Uhrum__Annuna_Corridor => Range {
             start: SpotId::Uhrum__Annuna_Corridor__Between_Two_Flowers.into_usize(),
             end: SpotId::Uhrum__Annuna_Corridor__West_26.into_usize() + 1,
@@ -7670,7 +7680,7 @@ impl world::World for World {
     type Exit = Exit;
     type Action = Action;
     type Warp = Warp;
-    const NUM_LOCATIONS: u32 = 226;
+    const NUM_LOCATIONS: u32 = 227;
 
     fn ruleset(&self) -> String {
         format!(
@@ -7793,6 +7803,7 @@ impl world::World for World {
             ],
             CanonId::Remote_Drone => vec![
                 LocationId::Ebih__Drone_Room__Item__Urn,
+                LocationId::Ebih__Drone_Room__Item__Urn_Collection_Skip,
                 LocationId::Ebih__Drone_Room__Middle_Platform__Urn_Quick_Grab,
             ],
             CanonId::Giguna_Northeast_Gate => vec![
@@ -8054,6 +8065,7 @@ impl world::World for World {
             Item::Health_Node => vec![LocationId::Ebih__Boss_Room__East_Ledge__Item],
             Item::Remote_Drone => vec![
                 LocationId::Ebih__Drone_Room__Item__Urn,
+                LocationId::Ebih__Drone_Room__Item__Urn_Collection_Skip,
                 LocationId::Ebih__Drone_Room__Middle_Platform__Urn_Quick_Grab,
             ],
             Item::Terminal_Breakthrough_1 => vec![LocationId::Ebih__Grid_26_10_11__Ledge__Note],
@@ -8460,6 +8472,9 @@ impl world::World for World {
             | LocationId::Ebih__Boss_Room__Boss__Hack_Alu => SpotId::Ebih__Boss_Room__Boss,
             LocationId::Ebih__Boss_Room__East_Ledge__Item => SpotId::Ebih__Boss_Room__East_Ledge,
             LocationId::Ebih__Drone_Room__Item__Urn => SpotId::Ebih__Drone_Room__Item,
+            LocationId::Ebih__Drone_Room__Item__Urn_Collection_Skip => {
+                SpotId::Ebih__Drone_Room__Item
+            }
             LocationId::Ebih__Drone_Room__Middle_Platform__Urn_Quick_Grab => {
                 SpotId::Ebih__Drone_Room__Middle_Platform
             }
@@ -9294,6 +9309,7 @@ impl world::World for World {
             ExitId::Ebih__Drone_Room__West_4__ex__Boss_Room__East_4_1 => SpotId::Ebih__Drone_Room__West_4,
             ExitId::Ebih__Drone_Room__Pit_Left__ex__West_6_1 | ExitId:: Ebih__Drone_Room__Pit_Left__ex__West_6_2 | ExitId:: Ebih__Drone_Room__Pit_Left__ex__Middle_Platform_1 | ExitId:: Ebih__Drone_Room__Pit_Left__ex__Middle_Platform_2 => SpotId::Ebih__Drone_Room__Pit_Left,
             ExitId::Ebih__Drone_Room__Portal__ex__Portal_Exit_1 => SpotId::Ebih__Drone_Room__Portal,
+            ExitId::Ebih__Drone_Room__Item__Urn_Collection_Skip => SpotId::Ebih__Drone_Room__Item,
             ExitId::Ebih__Drone_Room__Middle_Platform__ex__Portal_Exit_1 => SpotId::Ebih__Drone_Room__Middle_Platform,
             ExitId::Ebih__Drone_Room__Middle_Platform__Urn_Quick_Grab => SpotId::Ebih__Drone_Room__Middle_Platform,
             ExitId::Ebih__Drone_Room__Portal_Exit__ex__Moving_Platform_1 | ExitId:: Ebih__Drone_Room__Portal_Exit__ex__Moving_Platform_2 => SpotId::Ebih__Drone_Room__Portal_Exit,
@@ -11884,6 +11900,14 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
             price: Currency::Free,
             time: 5500,
             exit_id: None,
+        },
+        LocationId::Ebih__Drone_Room__Item__Urn_Collection_Skip => Location {
+            id: LocationId::Ebih__Drone_Room__Item__Urn_Collection_Skip,
+            canonical: CanonId::Remote_Drone,
+            item: Item::Remote_Drone,
+            price: Currency::Free,
+            time: 0,
+            exit_id: Some(ExitId::Ebih__Drone_Room__Item__Urn_Collection_Skip),
         },
         LocationId::Ebih__Drone_Room__Middle_Platform__Urn_Quick_Grab => Location {
             id: LocationId::Ebih__Drone_Room__Middle_Platform__Urn_Quick_Grab,
@@ -15973,6 +15997,13 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
             dest: SpotId::Ebih__Drone_Room__Portal_Exit,
             price: Currency::Free,
             loc_id: None,
+        },
+        ExitId::Ebih__Drone_Room__Item__Urn_Collection_Skip => Exit {
+            id: ExitId::Ebih__Drone_Room__Item__Urn_Collection_Skip,
+            time: 0,
+            dest: SpotId::Menu__Warp_Only__Kiengir,
+            price: Currency::Free,
+            loc_id: Some(LocationId::Ebih__Drone_Room__Item__Urn_Collection_Skip),
         },
         ExitId::Ebih__Drone_Room__Middle_Platform__ex__Portal_Exit_1 => Exit {
             id: ExitId::Ebih__Drone_Room__Middle_Platform__ex__Portal_Exit_1,
@@ -27809,7 +27840,7 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             id: SpotId::Ebih__Drone_Room__Item,
             locations: Range {
                 start: LocationId::Ebih__Drone_Room__Item__Urn.into_usize(),
-                end: LocationId::Ebih__Drone_Room__Item__Urn.into_usize() + 1,
+                end: LocationId::Ebih__Drone_Room__Item__Urn_Collection_Skip.into_usize() + 1,
             },
             exits: Range {
                 start: 0, end: 0,
@@ -37579,6 +37610,18 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             exits: Range {
                 start: ExitId::Menu__Upgrade_Menu__Drone__ex__Combat_1.into_usize(),
                 end: ExitId::Menu__Upgrade_Menu__Drone__ex__Physiology_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Menu__Warp_Only__Kiengir => Spot {
+            id: SpotId::Menu__Warp_Only__Kiengir,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
             },
             actions: Range {
                 start: 0, end: 0,
