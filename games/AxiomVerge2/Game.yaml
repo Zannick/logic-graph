@@ -144,7 +144,7 @@ warps:
     loads: true
   main_save:
     time: 10.5  # IGT goes backward due to the fadeout not counting
-    req: ^realm == 'main' and Amashilama
+    req: ^realm IN ['main', 'interior', 'emergence'] and Amashilama
     to: ^save
     after: $refill_energy
     loads: true

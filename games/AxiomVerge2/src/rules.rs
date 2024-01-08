@@ -1890,9 +1890,15 @@ pub fn access_realm_eq_breach_and_exit_breach_and___flipside_not_within_default(
     ((data::realm(ctx.position()) == enums::Realm::Breach && ctx.has(Item::Exit_Breach))
         && (data::flipside(ctx.position()) != Default::default()))
 }
-pub fn access_realm_eq_main_and_amashilama(ctx: &Context, world: &graph::World) -> bool {
-    // ^realm == 'main' and Amashilama
-    (data::realm(ctx.position()) == enums::Realm::Main && ctx.has(Item::Amashilama))
+pub fn access_realm_in___main_interior_emergence_and_amashilama(
+    ctx: &Context,
+    world: &graph::World,
+) -> bool {
+    // ^realm IN ['main', 'interior', 'emergence'] and Amashilama
+    (matches!(
+        data::realm(ctx.position()),
+        enums::Realm::Main | enums::Realm::Interior | enums::Realm::Emergence
+    ) && ctx.has(Item::Amashilama))
 }
 pub fn access_remote_drone(ctx: &Context, world: &graph::World) -> bool {
     // Remote_Drone

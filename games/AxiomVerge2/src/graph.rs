@@ -5424,7 +5424,9 @@ impl world::Accessible for Warp {
                 WarpId::FastTravelUhrumWestEntrance => {
                     rules::access_ft_main_and_map__uhrum__west_entrance__save(ctx, world)
                 }
-                WarpId::MainSave => rules::access_realm_eq_main_and_amashilama(ctx, world),
+                WarpId::MainSave => {
+                    rules::access_realm_in___main_interior_emergence_and_amashilama(ctx, world)
+                }
                 WarpId::Menu => rules::access_not_within_menu_and_flasks_gt_0(ctx, world),
             }
     }

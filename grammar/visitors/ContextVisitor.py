@@ -66,6 +66,12 @@ class ContextVisitor(RulesVisitor):
         for el in ctx.str_():
             s.update(self.visit(el))
         return s
+    
+    def _getAllLitReturns(self, ctx):
+        s = set()
+        for el in ctx.LIT():
+            s.add(str(el)[1:-1])
+        return s
 
     def visitCondStr(self, ctx: RulesParser.CondStrContext):
         for el in ctx.boolExpr():
@@ -84,6 +90,11 @@ class ContextVisitor(RulesVisitor):
 
     def visitPerSettingStr(self, ctx: RulesParser.PerSettingStrContext):
         return self._getAllStrReturns(ctx)
+    
+    def visitRefStrInList(self, ctx: RulesParser.RefStrInListContext):
+        ref = str(ctx.REF())[1:]
+        self._checkRef(ref)
+        self.values[ref].update(self._getAllLitReturns(ctx))
 
     def visitSet(self, ctx):
         ref = str(ctx.REF(0))[1:]

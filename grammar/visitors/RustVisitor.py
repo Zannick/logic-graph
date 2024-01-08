@@ -193,9 +193,15 @@ class RustVisitor(RulesVisitor):
                 + '}')
 
     def visitRefInList(self, ctx):
-        return (f'match {self._getRefGetter(str(ctx.REF())[1:])} {{ '
-                + '|'.join(f'Item::{i}' for i in ctx.ITEM())
-                + ' => true, _ => false, }')
+        getter = self._getRefGetter(str(ctx.REF())[1:])
+        values = [f'Item::{i}' for i in ctx.ITEM()]
+        return f'matches!({getter}, {' | '.join(values)})'
+    
+    def visitRefStrInList(self, ctx):
+        getter = self._getRefGetter(str(ctx.REF())[1:])
+        rtype = inflection.camelize(REF_GETTER_TYPE.match(getter).group(1))
+        values = [f'enums::{rtype}::{inflection.camelize(str(lit)[1:-1])}' for lit in ctx.LIT()]
+        return f'matches!({getter}, {' | '.join(values)})'
     
     # TODO: other REF/SETTING rules
 

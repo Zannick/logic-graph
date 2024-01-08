@@ -76,6 +76,7 @@ pub mod enums {
         #[default]
         Main,
         Breach,
+        Emergence,
         Interior,
         Menu,
     }
@@ -84,6 +85,7 @@ pub mod enums {
             match self {
                 Realm::Main => write!(f, "{}", "Main"),
                 Realm::Breach => write!(f, "{}", "Breach"),
+                Realm::Emergence => write!(f, "{}", "Emergence"),
                 Realm::Interior => write!(f, "{}", "Interior"),
                 Realm::Menu => write!(f, "{}", "Menu"),
             }
@@ -95,6 +97,7 @@ pub mod enums {
         fn from_str(s: &str) -> Result<Self, Self::Err> {
             match s {
                 "Breach" | "breach" => Ok(Realm::Breach),
+                "Emergence" | "emergence" => Ok(Realm::Emergence),
                 "Interior" | "interior" => Ok(Realm::Interior),
                 "Main" | "main" => Ok(Realm::Main),
                 "Menu" | "menu" => Ok(Realm::Menu),

@@ -306,10 +306,14 @@ Switch statements (despite the name) all begin with either `MATCH` or `PER`; it 
 
 * If `thing` is an **Item** name, the cases must all be integer literals; the case that will be chosen is the number of that Item that have been collected so far. These numbers will influence the upper bound on the number of this Item tracked, even if impossible to collect that many. The return type may be any of **boolExpr**, **num**, or **str**.
 * If `thing` is a **setting** name, the cases must all be either integer literals or string literals; the case that will be chosen is the one that matches the value of the setting. The return type may be any of **boolExpr**, **num**, or **str**.
-* If `thing` is a **context variable** or **helper argument**, *and* the return type is **boolExpr**, the cases must all be **Item**s, though each case may have multiple Items separated by `|` to indicate that any such Item matches that case.
+* If `thing` is a **context variable** or **helper argument**, *and* the return type is **boolExpr**, the cases must all be **Item**s, though each case may have multiple Items separated by `|` to indicate that any such Item matches that case. You can also write this in an `IN` shorthand&mdash;see below.
 * If `thing` is a **context variable** or **helper argument**, and the return type is either **num** or **str**, the cases must all be either integer literals or string literals; the case that will be chosen is the one that matches the value of the variable or argument.
 
 These could be changed in the future to make settings and variables work the same way.
+
+##### In
+
+If you simply want to check whether a **context variable** or **helper argument** is one of several options, and that `thing` is an Item or string (i.e. enumeration type), then you can write `thing IN [case1, case2]`. The cases must all be Item names (if the variable is an Item) or string literals (corresponding to options of the same enum type as the variable), and there must be at least two.
 
 #### Function invocations
 
