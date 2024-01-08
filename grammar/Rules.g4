@@ -77,7 +77,7 @@ switchBool
                         '_' '=>' boolExpr ','? '}'      # MatchRefBool
         // simpler match expression where all results are true/false
         | REF IN '[' ITEM ( ',' ITEM )+ ']'             # RefInList
-        | REF IN '[' str ( ',' str )+ ']'               # RefStrInList
+        | REF IN '[' LIT ( ',' LIT )+ ']'               # RefStrInList
         ;
 switchNum   : PER ITEM '{' ( INT '=>' num ',' )+ '_' '=>' num ','? '}'  # PerItemInt
             | PER REF '{'
