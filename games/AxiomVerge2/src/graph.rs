@@ -274,6 +274,36 @@ pub fn get_area(spot: SpotId) -> AreaId {
         | SpotId::Annuna__West_Climb__North
         | SpotId::Annuna__West_Climb__East_19 => AreaId::Annuna__West_Climb,
         SpotId::Annuna__Egg_Room__West => AreaId::Annuna__Egg_Room,
+        SpotId::Annuna__Apocalypse_Hallway__Lower_East
+        | SpotId::Annuna__Apocalypse_Hallway__Upper_East
+        | SpotId::Annuna__Apocalypse_Hallway__East_Pillar
+        | SpotId::Annuna__Apocalypse_Hallway__Center_Pillar
+        | SpotId::Annuna__Apocalypse_Hallway__West => AreaId::Annuna__Apocalypse_Hallway,
+        SpotId::Annuna__Seals__East_15
+        | SpotId::Annuna__Seals__Upper_Ledge
+        | SpotId::Annuna__Seals__Upper_Seal
+        | SpotId::Annuna__Seals__Middle_Ledge
+        | SpotId::Annuna__Seals__Breakable_Rock
+        | SpotId::Annuna__Seals__Lower_Seal
+        | SpotId::Annuna__Seals__Lower_Ledge
+        | SpotId::Annuna__Seals__East_17_Upper
+        | SpotId::Annuna__Seals__East_17_Lower => AreaId::Annuna__Seals,
+        SpotId::Annuna__Final_Save__Upper_West
+        | SpotId::Annuna__Final_Save__Lower_West
+        | SpotId::Annuna__Final_Save__Pillar
+        | SpotId::Annuna__Final_Save__Save_Point
+        | SpotId::Annuna__Final_Save__East => AreaId::Annuna__Final_Save,
+        SpotId::Annuna__Apocalypse__West
+        | SpotId::Annuna__Apocalypse__Northwest_Mid_air
+        | SpotId::Annuna__Apocalypse__Northwest_Scaffold_2_West
+        | SpotId::Annuna__Apocalypse__Northwest_Switch
+        | SpotId::Annuna__Apocalypse__Center_Scaffold_West
+        | SpotId::Annuna__Apocalypse__Southwest_Switch
+        | SpotId::Annuna__Apocalypse__Southwest_Capsule
+        | SpotId::Annuna__Apocalypse__Southwest_Corner
+        | SpotId::Annuna__Apocalypse__Bomb_Northwest
+        | SpotId::Annuna__Apocalypse__Bomb_East
+        | SpotId::Annuna__Apocalypse__Bomb => AreaId::Annuna__Apocalypse,
         SpotId::Antarctica__West__Helipad
         | SpotId::Antarctica__West__Shed_Entry
         | SpotId::Antarctica__West__Boxes => AreaId::Antarctica__West,
@@ -1011,36 +1041,6 @@ pub fn get_area(spot: SpotId) -> AreaId {
         | SpotId::Glacier__Apocalypse_Entry__Lowest_Stair
         | SpotId::Glacier__Apocalypse_Entry__West_15_Lower
         | SpotId::Glacier__Apocalypse_Entry__West_15_Upper => AreaId::Glacier__Apocalypse_Entry,
-        SpotId::Glacier__Apocalypse_Hallway__Lower_East
-        | SpotId::Glacier__Apocalypse_Hallway__Upper_East
-        | SpotId::Glacier__Apocalypse_Hallway__East_Pillar
-        | SpotId::Glacier__Apocalypse_Hallway__Center_Pillar
-        | SpotId::Glacier__Apocalypse_Hallway__West => AreaId::Glacier__Apocalypse_Hallway,
-        SpotId::Glacier__Seals__East_15
-        | SpotId::Glacier__Seals__Upper_Ledge
-        | SpotId::Glacier__Seals__Upper_Seal
-        | SpotId::Glacier__Seals__Middle_Ledge
-        | SpotId::Glacier__Seals__Breakable_Rock
-        | SpotId::Glacier__Seals__Lower_Seal
-        | SpotId::Glacier__Seals__Lower_Ledge
-        | SpotId::Glacier__Seals__East_17_Upper
-        | SpotId::Glacier__Seals__East_17_Lower => AreaId::Glacier__Seals,
-        SpotId::Glacier__Final_Save__Upper_West
-        | SpotId::Glacier__Final_Save__Lower_West
-        | SpotId::Glacier__Final_Save__Pillar
-        | SpotId::Glacier__Final_Save__Save_Point
-        | SpotId::Glacier__Final_Save__East => AreaId::Glacier__Final_Save,
-        SpotId::Glacier__Apocalypse__West
-        | SpotId::Glacier__Apocalypse__Northwest_Mid_air
-        | SpotId::Glacier__Apocalypse__Northwest_Scaffold_2_West
-        | SpotId::Glacier__Apocalypse__Northwest_Switch
-        | SpotId::Glacier__Apocalypse__Center_Scaffold_West
-        | SpotId::Glacier__Apocalypse__Southwest_Switch
-        | SpotId::Glacier__Apocalypse__Southwest_Capsule
-        | SpotId::Glacier__Apocalypse__Southwest_Corner
-        | SpotId::Glacier__Apocalypse__Bomb_Northwest
-        | SpotId::Glacier__Apocalypse__Bomb_East
-        | SpotId::Glacier__Apocalypse__Bomb => AreaId::Glacier__Apocalypse,
         SpotId::Interior__Dock_Elevator__Elevator | SpotId::Interior__Dock_Elevator__Connector => {
             AreaId::Interior__Dock_Elevator
         }
@@ -1631,6 +1631,36 @@ pub fn get_region(spot: SpotId) -> RegionId {
         | SpotId::Annuna__West_Climb__North
         | SpotId::Annuna__West_Climb__East_19 => RegionId::Annuna,
         SpotId::Annuna__Egg_Room__West => RegionId::Annuna,
+        SpotId::Annuna__Apocalypse_Hallway__Lower_East
+        | SpotId::Annuna__Apocalypse_Hallway__Upper_East
+        | SpotId::Annuna__Apocalypse_Hallway__East_Pillar
+        | SpotId::Annuna__Apocalypse_Hallway__Center_Pillar
+        | SpotId::Annuna__Apocalypse_Hallway__West => RegionId::Annuna,
+        SpotId::Annuna__Seals__East_15
+        | SpotId::Annuna__Seals__Upper_Ledge
+        | SpotId::Annuna__Seals__Upper_Seal
+        | SpotId::Annuna__Seals__Middle_Ledge
+        | SpotId::Annuna__Seals__Breakable_Rock
+        | SpotId::Annuna__Seals__Lower_Seal
+        | SpotId::Annuna__Seals__Lower_Ledge
+        | SpotId::Annuna__Seals__East_17_Upper
+        | SpotId::Annuna__Seals__East_17_Lower => RegionId::Annuna,
+        SpotId::Annuna__Final_Save__Upper_West
+        | SpotId::Annuna__Final_Save__Lower_West
+        | SpotId::Annuna__Final_Save__Pillar
+        | SpotId::Annuna__Final_Save__Save_Point
+        | SpotId::Annuna__Final_Save__East => RegionId::Annuna,
+        SpotId::Annuna__Apocalypse__West
+        | SpotId::Annuna__Apocalypse__Northwest_Mid_air
+        | SpotId::Annuna__Apocalypse__Northwest_Scaffold_2_West
+        | SpotId::Annuna__Apocalypse__Northwest_Switch
+        | SpotId::Annuna__Apocalypse__Center_Scaffold_West
+        | SpotId::Annuna__Apocalypse__Southwest_Switch
+        | SpotId::Annuna__Apocalypse__Southwest_Capsule
+        | SpotId::Annuna__Apocalypse__Southwest_Corner
+        | SpotId::Annuna__Apocalypse__Bomb_Northwest
+        | SpotId::Annuna__Apocalypse__Bomb_East
+        | SpotId::Annuna__Apocalypse__Bomb => RegionId::Annuna,
         SpotId::Antarctica__West__Helipad
         | SpotId::Antarctica__West__Shed_Entry
         | SpotId::Antarctica__West__Boxes => RegionId::Antarctica,
@@ -2362,36 +2392,6 @@ pub fn get_region(spot: SpotId) -> RegionId {
         | SpotId::Glacier__Apocalypse_Entry__Lowest_Stair
         | SpotId::Glacier__Apocalypse_Entry__West_15_Lower
         | SpotId::Glacier__Apocalypse_Entry__West_15_Upper => RegionId::Glacier,
-        SpotId::Glacier__Apocalypse_Hallway__Lower_East
-        | SpotId::Glacier__Apocalypse_Hallway__Upper_East
-        | SpotId::Glacier__Apocalypse_Hallway__East_Pillar
-        | SpotId::Glacier__Apocalypse_Hallway__Center_Pillar
-        | SpotId::Glacier__Apocalypse_Hallway__West => RegionId::Glacier,
-        SpotId::Glacier__Seals__East_15
-        | SpotId::Glacier__Seals__Upper_Ledge
-        | SpotId::Glacier__Seals__Upper_Seal
-        | SpotId::Glacier__Seals__Middle_Ledge
-        | SpotId::Glacier__Seals__Breakable_Rock
-        | SpotId::Glacier__Seals__Lower_Seal
-        | SpotId::Glacier__Seals__Lower_Ledge
-        | SpotId::Glacier__Seals__East_17_Upper
-        | SpotId::Glacier__Seals__East_17_Lower => RegionId::Glacier,
-        SpotId::Glacier__Final_Save__Upper_West
-        | SpotId::Glacier__Final_Save__Lower_West
-        | SpotId::Glacier__Final_Save__Pillar
-        | SpotId::Glacier__Final_Save__Save_Point
-        | SpotId::Glacier__Final_Save__East => RegionId::Glacier,
-        SpotId::Glacier__Apocalypse__West
-        | SpotId::Glacier__Apocalypse__Northwest_Mid_air
-        | SpotId::Glacier__Apocalypse__Northwest_Scaffold_2_West
-        | SpotId::Glacier__Apocalypse__Northwest_Switch
-        | SpotId::Glacier__Apocalypse__Center_Scaffold_West
-        | SpotId::Glacier__Apocalypse__Southwest_Switch
-        | SpotId::Glacier__Apocalypse__Southwest_Capsule
-        | SpotId::Glacier__Apocalypse__Southwest_Corner
-        | SpotId::Glacier__Apocalypse__Bomb_Northwest
-        | SpotId::Glacier__Apocalypse__Bomb_East
-        | SpotId::Glacier__Apocalypse__Bomb => RegionId::Glacier,
         SpotId::Interior__Dock_Elevator__Elevator | SpotId::Interior__Dock_Elevator__Connector => {
             RegionId::Interior
         }
@@ -2781,6 +2781,12 @@ impl world::Accessible for Location {
             LocationId::Amagi__West_Lake__Surface_Wall_Right__Break_Wall => {
                 rules::access_shockwave(&ctx, world)
             }
+            LocationId::Annuna__Apocalypse__Center_Scaffold_West__Boss_Fight => {
+                rules::access_infect_and_anuman(&ctx, world)
+            }
+            LocationId::Annuna__Apocalypse__Center_Scaffold_West__Fill_It_Up => {
+                rules::access_infect_and_not_anuman(&ctx, world)
+            }
             LocationId::Annuna__East_Bridge__Below_Gate_Button__Switch_from_Below => {
                 rules::access_boomerang(&ctx, world)
             }
@@ -2979,12 +2985,6 @@ impl world::Accessible for Location {
             LocationId::Giguna_Breach__Chimney__Cache__Flask => true,
             LocationId::Giguna_Breach__Cubby__Rocks__Health => true,
             LocationId::Giguna_Breach__Slingshot__Ravine__Urn => true,
-            LocationId::Glacier__Apocalypse__Center_Scaffold_West__Boss_Fight => {
-                rules::access_infect_and_anuman(&ctx, world)
-            }
-            LocationId::Glacier__Apocalypse__Center_Scaffold_West__Fill_It_Up => {
-                rules::access_infect_and_not_anuman(&ctx, world)
-            }
             LocationId::Glacier__Apocalypse_Entry__Grate_Ledge__Escape => {
                 rules::access_apocalypse_bomb(&ctx, world)
             }
@@ -3306,6 +3306,13 @@ impl world::Accessible for Exit {
             ExitId::Amagi__West_Lake__Surface_Wall_Right__ex__Surface_Wall_Left_1 => rules::access_amagi_west_lake_surface_wall(&ctx, world),
             ExitId::Amagi__West_Lake__West_15__ex__Ebih__Vertical_Interchange__East_15_1 => true,
             ExitId::Amagi__West_Lake__West_Bank__ex__West_Shore_1 => rules::access_grab_or_climb(&ctx, world),
+            ExitId::Annuna__Apocalypse__Center_Scaffold_West__Boss_Fight => rules::access_infect_and_anuman(&ctx, world),
+            ExitId::Annuna__Apocalypse__Center_Scaffold_West__Fill_It_Up => rules::access_infect_and_not_anuman(&ctx, world),
+            ExitId::Annuna__Apocalypse__Northwest_Mid_air__ex__Northwest_Scaffold_2_West_1 => rules::access_nanite_mist(&ctx, world),
+            ExitId::Annuna__Apocalypse__Northwest_Mid_air__ex__Northwest_Scaffold_2_West_2 => rules::access_mist2(&ctx, world),
+            ExitId::Annuna__Apocalypse__Southwest_Capsule__ex__West_1 => rules::access_grab(&ctx, world),
+            ExitId::Annuna__Apocalypse__Southwest_Capsule__ex__West_2 => rules::access_hook(&ctx, world),
+            ExitId::Annuna__Apocalypse__West__ex__Final_Save__East_1 => true,
             ExitId::Annuna__Center_Save__East__ex__Vertical_Room__West_21_1 => true,
             ExitId::Annuna__Center_Save__Save_Point__ex__West_Catwalk_1 => rules::access_hover(&ctx, world),
             ExitId::Annuna__Center_Save__West_Catwalk__ex__Twisty_Passages__East_Catwalk_1 => true,
@@ -3397,6 +3404,17 @@ impl world::Accessible for Exit {
             ExitId::Annuna__Factory_Access__West_22__ex__Lower_Hallway__East_1 => true,
             ExitId::Annuna__Factory_Entrance__East__ex__East_Climb__West_25_1 => true,
             ExitId::Annuna__Factory_Entrance__West__ex__Sniper_Valley__East_1 => true,
+            ExitId::Annuna__Final_Save__East__ex__Apocalypse__West_1 => true,
+            ExitId::Annuna__Final_Save__East__ex__Upper_West_1 => rules::access_hook_and_hover(&ctx, world),
+            ExitId::Annuna__Final_Save__Lower_West__ex__Pillar_1 => rules::access_grab(&ctx, world),
+            ExitId::Annuna__Final_Save__Lower_West__ex__Pillar_2 => rules::access_hook(&ctx, world),
+            ExitId::Annuna__Final_Save__Lower_West__ex__Seals__East_17_Lower_1 => true,
+            ExitId::Annuna__Final_Save__Pillar__ex__Upper_West_1 => rules::access_hover(&ctx, world),
+            ExitId::Annuna__Final_Save__Save_Point__ex__Apocalypse__Northwest_Mid_air_1 => rules::access_hover(&ctx, world),
+            ExitId::Annuna__Final_Save__Save_Point__ex__Pillar_1 => rules::access_grab(&ctx, world),
+            ExitId::Annuna__Final_Save__Save_Point__ex__Pillar_2 => rules::access_hook(&ctx, world),
+            ExitId::Annuna__Final_Save__Upper_West__ex__Apocalypse__Northwest_Mid_air_1 => rules::access_hook_and_hover(&ctx, world),
+            ExitId::Annuna__Final_Save__Upper_West__ex__Seals__East_17_Upper_1 => true,
             ExitId::Annuna__Lower_Hallway__East__ex__Factory_Access__West_22_1 => true,
             ExitId::Annuna__Lower_Hallway__West__ex__Vertical_Room__East_22_1 => true,
             ExitId::Annuna__Mirror_Match__Below_Switch__ex__Central_Pillar_1 => rules::access_hover_and_hook(&ctx, world),
@@ -4089,20 +4107,13 @@ impl world::Accessible for Exit {
             ExitId::Giguna_Breach__SW_Save__Save_Point__ex__Lower_Platform_1 => rules::access_hook(&ctx, world),
             ExitId::Giguna_Breach__SW_Save__Side_Door__ex__West_11_1 => rules::access_giguna_breach__sw_save__side_door__ex__west_11_1__req(&ctx, world),
             ExitId::Giguna_Breach__SW_Save__West_11__ex__Side_Door_1 => rules::access_giguna_breach__sw_save__west_11__ex__side_door_1__req(&ctx, world),
-            ExitId::Glacier__Apocalypse__Center_Scaffold_West__Boss_Fight => rules::access_infect_and_anuman(&ctx, world),
-            ExitId::Glacier__Apocalypse__Center_Scaffold_West__Fill_It_Up => rules::access_infect_and_not_anuman(&ctx, world),
-            ExitId::Glacier__Apocalypse__Northwest_Mid_air__ex__Northwest_Scaffold_2_West_1 => rules::access_nanite_mist(&ctx, world),
-            ExitId::Glacier__Apocalypse__Northwest_Mid_air__ex__Northwest_Scaffold_2_West_2 => rules::access_mist2(&ctx, world),
-            ExitId::Glacier__Apocalypse__Southwest_Capsule__ex__West_1 => rules::access_grab(&ctx, world),
-            ExitId::Glacier__Apocalypse__Southwest_Capsule__ex__West_2 => rules::access_hook(&ctx, world),
-            ExitId::Glacier__Apocalypse__West__ex__Final_Save__East_1 => true,
             ExitId::Glacier__Apocalypse_Entry__Above_Grate__ex__Below_Grate_1 => rules::access_mist2(&ctx, world),
             ExitId::Glacier__Apocalypse_Entry__Below_Grate__ex__Grate_Ledge_1 => rules::access_apocalypse_bomb(&ctx, world),
             ExitId::Glacier__Apocalypse_Entry__Grate_Ledge__Escape => rules::access_apocalypse_bomb(&ctx, world),
             ExitId::Glacier__Apocalypse_Entry__West_10__ex__Grid_43_10_11__East_1 => true,
-            ExitId::Glacier__Apocalypse_Entry__West_15_Lower__ex__Apocalypse_Hallway__Lower_East_1 => true,
+            ExitId::Glacier__Apocalypse_Entry__West_15_Lower__ex__Annuna__Apocalypse_Hallway__Lower_East_1 => true,
             ExitId::Glacier__Apocalypse_Entry__West_15_Lower__ex__Lowest_Stair_1 => rules::access_hook(&ctx, world),
-            ExitId::Glacier__Apocalypse_Entry__West_15_Upper__ex__Apocalypse_Hallway__Upper_East_1 => true,
+            ExitId::Glacier__Apocalypse_Entry__West_15_Upper__ex__Annuna__Apocalypse_Hallway__Upper_East_1 => true,
             ExitId::Glacier__Boomerang_Antechamber__East_12__ex__Boomerang_Room__West_1 => true,
             ExitId::Glacier__Boomerang_Antechamber__Upper_East__ex__Boomerang_Room__Upper_West_1 => rules::access_switch_40_12(&ctx, world),
             ExitId::Glacier__Boomerang_Antechamber__West_12__ex__Vertical_Room__East_12_1 => true,
@@ -4119,17 +4130,6 @@ impl world::Accessible for Exit {
             ExitId::Glacier__Compass_Room__West__ex__The_Big_Drop__East_1 => true,
             ExitId::Glacier__Dock_Outside__Do_Not_Enter__ex__Revival__East_9_1 => true,
             ExitId::Glacier__Dock_Outside__Entry__ex__Interior__Dock_Interior__Entry_1 => true,
-            ExitId::Glacier__Final_Save__East__ex__Apocalypse__West_1 => true,
-            ExitId::Glacier__Final_Save__East__ex__Upper_West_1 => rules::access_hook_and_hover(&ctx, world),
-            ExitId::Glacier__Final_Save__Lower_West__ex__Pillar_1 => rules::access_grab(&ctx, world),
-            ExitId::Glacier__Final_Save__Lower_West__ex__Pillar_2 => rules::access_hook(&ctx, world),
-            ExitId::Glacier__Final_Save__Lower_West__ex__Seals__East_17_Lower_1 => true,
-            ExitId::Glacier__Final_Save__Pillar__ex__Upper_West_1 => rules::access_hover(&ctx, world),
-            ExitId::Glacier__Final_Save__Save_Point__ex__Apocalypse__Northwest_Mid_air_1 => rules::access_hover(&ctx, world),
-            ExitId::Glacier__Final_Save__Save_Point__ex__Pillar_1 => rules::access_grab(&ctx, world),
-            ExitId::Glacier__Final_Save__Save_Point__ex__Pillar_2 => rules::access_hook(&ctx, world),
-            ExitId::Glacier__Final_Save__Upper_West__ex__Apocalypse__Northwest_Mid_air_1 => rules::access_hook_and_hover(&ctx, world),
-            ExitId::Glacier__Final_Save__Upper_West__ex__Seals__East_17_Upper_1 => true,
             ExitId::Glacier__Grid_31_9_12__East_10__ex__Grid_32_7_10__West_10_1 => true,
             ExitId::Glacier__Grid_31_9_12__East_9__ex__Grid_32_7_10__West_9_1 => true,
             ExitId::Glacier__Grid_31_9_12__Midair__ex__Ebih__Base_Camp__East_11_1 => true,
@@ -4706,6 +4706,7 @@ impl world::Exit for Exit {
             ExitId::Amagi__West_Lake__East_18__ex__Main_Area__West_18_1 => true,
             ExitId::Amagi__West_Lake__East_19__ex__Main_Area__West_19_1 => true,
             ExitId::Amagi__West_Lake__West_15__ex__Ebih__Vertical_Interchange__East_15_1 => true,
+            ExitId::Annuna__Apocalypse__West__ex__Final_Save__East_1 => true,
             ExitId::Annuna__Center_Save__East__ex__Vertical_Room__West_21_1 => true,
             ExitId::Annuna__Center_Save__West_Catwalk__ex__Twisty_Passages__East_Catwalk_1 => true,
             ExitId::Annuna__Center_Save__West_Floor__ex__Twisty_Passages__East_Floor_1 => true,
@@ -4729,6 +4730,9 @@ impl world::Exit for Exit {
             ExitId::Annuna__Factory_Access__West_22__ex__Lower_Hallway__East_1 => true,
             ExitId::Annuna__Factory_Entrance__East__ex__East_Climb__West_25_1 => true,
             ExitId::Annuna__Factory_Entrance__West__ex__Sniper_Valley__East_1 => true,
+            ExitId::Annuna__Final_Save__East__ex__Apocalypse__West_1 => true,
+            ExitId::Annuna__Final_Save__Lower_West__ex__Seals__East_17_Lower_1 => true,
+            ExitId::Annuna__Final_Save__Upper_West__ex__Seals__East_17_Upper_1 => true,
             ExitId::Annuna__Lower_Hallway__East__ex__Factory_Access__West_22_1 => true,
             ExitId::Annuna__Lower_Hallway__West__ex__Vertical_Room__East_22_1 => true,
             ExitId::Annuna__Mirror_Match__East_25_Lower__ex__West_Bridge__West_25_Lower_1 => true,
@@ -4936,10 +4940,9 @@ impl world::Exit for Exit {
             ExitId::Giguna_Breach__Slingshot__West__ex__Fire_Room__East_11_1 => true,
             ExitId::Giguna_Breach__SW_Save__East_12__ex__Robopede__West_1 => true,
             ExitId::Giguna_Breach__SW_Save__North__ex__Below_Chimney__Southwest_1 => true,
-            ExitId::Glacier__Apocalypse__West__ex__Final_Save__East_1 => true,
             ExitId::Glacier__Apocalypse_Entry__West_10__ex__Grid_43_10_11__East_1 => true,
-            ExitId::Glacier__Apocalypse_Entry__West_15_Lower__ex__Apocalypse_Hallway__Lower_East_1 => true,
-            ExitId::Glacier__Apocalypse_Entry__West_15_Upper__ex__Apocalypse_Hallway__Upper_East_1 => true,
+            ExitId::Glacier__Apocalypse_Entry__West_15_Lower__ex__Annuna__Apocalypse_Hallway__Lower_East_1 => true,
+            ExitId::Glacier__Apocalypse_Entry__West_15_Upper__ex__Annuna__Apocalypse_Hallway__Upper_East_1 => true,
             ExitId::Glacier__Boomerang_Antechamber__East_12__ex__Boomerang_Room__West_1 => true,
             ExitId::Glacier__Boomerang_Antechamber__West_12__ex__Vertical_Room__East_12_1 => true,
             ExitId::Glacier__Boomerang_Antechamber__West_13__ex__Vertical_Room__East_13_1 => true,
@@ -4949,9 +4952,6 @@ impl world::Exit for Exit {
             ExitId::Glacier__Compass_Room__West__ex__The_Big_Drop__East_1 => true,
             ExitId::Glacier__Dock_Outside__Do_Not_Enter__ex__Revival__East_9_1 => true,
             ExitId::Glacier__Dock_Outside__Entry__ex__Interior__Dock_Interior__Entry_1 => true,
-            ExitId::Glacier__Final_Save__East__ex__Apocalypse__West_1 => true,
-            ExitId::Glacier__Final_Save__Lower_West__ex__Seals__East_17_Lower_1 => true,
-            ExitId::Glacier__Final_Save__Upper_West__ex__Seals__East_17_Upper_1 => true,
             ExitId::Glacier__Grid_31_9_12__East_10__ex__Grid_32_7_10__West_10_1 => true,
             ExitId::Glacier__Grid_31_9_12__East_9__ex__Grid_32_7_10__West_9_1 => true,
             ExitId::Glacier__Grid_31_9_12__Midair__ex__Ebih__Base_Camp__East_11_1 => true,
@@ -5113,6 +5113,7 @@ impl world::Accessible for Action {
                     )
                 }
                 ActionId::Annuna__Factory_Entrance__Save_Point__Save => true,
+                ActionId::Annuna__Final_Save__Save_Point__Save => true,
                 ActionId::Annuna__Mirror_Match__Save_Point__Save => {
                     rules::access_not_separation_or_defeat_indra(&ctx, world)
                 }
@@ -5323,7 +5324,6 @@ impl world::Accessible for Action {
                 ActionId::Giguna_Breach__SW_Save__West_11__Open_Door => {
                     rules::access_giguna_breach__sw_save__west_11__open_door__req(&ctx, world)
                 }
-                ActionId::Glacier__Final_Save__Save_Point__Save => true,
                 ActionId::Glacier__Revival__Save_Point__Save => true,
                 ActionId::Global__Become_Drone => {
                     rules::access_not_within_menu_and_anuman_and_mode_ne_drone(&ctx, world)
@@ -5407,6 +5407,7 @@ impl world::Action for Action {
             ActionId::Annuna__Factory_Entrance__Save_Point__Save => rules::action_save(ctx, world),
             ActionId::Annuna__Center_Save__Save_Point__Save => rules::action_save(ctx, world),
             ActionId::Annuna__West_Climb__Switch_Ledge__Open_Door => rules::action_annuna__west_climb__switch_ledge__open_door__do(ctx, world),
+            ActionId::Annuna__Final_Save__Save_Point__Save => rules::action_save(ctx, world),
             ActionId::Ebih__Base_Camp__Save_Point__Save => rules::action_save(ctx, world),
             ActionId::Ebih__Base_Camp__Left_Platform__Move_Left_Platform => rules::action_ebih__base_camp__left_platform__move_left_platform__do(ctx, world),
             ActionId::Ebih__Base_Camp__Left_Platform_Moved__Reset_Left_Platform => rules::action_ebih__base_camp__left_platform_moved__reset_left_platform__do(ctx, world),
@@ -5478,7 +5479,6 @@ impl world::Action for Action {
             ActionId::Giguna__Gateway__One_Jump__Open_Door => rules::action_giguna__gateway__one_jump__open_door__do(ctx, world),
             ActionId::Giguna__Gateway__Flask_Ledge__Open_Door => rules::action_giguna__gateway__flask_ledge__open_door__do(ctx, world),
             ActionId::Glacier__Revival__Save_Point__Save => rules::action_save(ctx, world),
-            ActionId::Glacier__Final_Save__Save_Point__Save => rules::action_save(ctx, world),
             ActionId::Interior__Cave_Behind_Waterfall__Middle__Throw_Drone => rules::action_deploy_drone(ctx, world),
             ActionId::Irikar_Breach__Exit_Corridor__Portal_Stand__Enter_Portal => rules::action_main_portal_save_update(ctx, world),
             ActionId::Irikar__Hub__Save_Point__Save => rules::action_save(ctx, world),
@@ -5813,6 +5813,22 @@ static RAW_SPOTS: [SpotId; 1334] = [
     SpotId::Amagi__West_Lake__West_Cliff,
     SpotId::Amagi__West_Lake__West_Platform,
     SpotId::Amagi__West_Lake__West_Shore,
+    SpotId::Annuna__Apocalypse__Bomb,
+    SpotId::Annuna__Apocalypse__Bomb_East,
+    SpotId::Annuna__Apocalypse__Bomb_Northwest,
+    SpotId::Annuna__Apocalypse__Center_Scaffold_West,
+    SpotId::Annuna__Apocalypse__Northwest_Mid_air,
+    SpotId::Annuna__Apocalypse__Northwest_Scaffold_2_West,
+    SpotId::Annuna__Apocalypse__Northwest_Switch,
+    SpotId::Annuna__Apocalypse__Southwest_Capsule,
+    SpotId::Annuna__Apocalypse__Southwest_Corner,
+    SpotId::Annuna__Apocalypse__Southwest_Switch,
+    SpotId::Annuna__Apocalypse__West,
+    SpotId::Annuna__Apocalypse_Hallway__Center_Pillar,
+    SpotId::Annuna__Apocalypse_Hallway__East_Pillar,
+    SpotId::Annuna__Apocalypse_Hallway__Lower_East,
+    SpotId::Annuna__Apocalypse_Hallway__Upper_East,
+    SpotId::Annuna__Apocalypse_Hallway__West,
     SpotId::Annuna__Center_Save__East,
     SpotId::Annuna__Center_Save__Save_Point,
     SpotId::Annuna__Center_Save__West_Catwalk,
@@ -5883,6 +5899,11 @@ static RAW_SPOTS: [SpotId; 1334] = [
     SpotId::Annuna__Factory_Entrance__East,
     SpotId::Annuna__Factory_Entrance__Save_Point,
     SpotId::Annuna__Factory_Entrance__West,
+    SpotId::Annuna__Final_Save__East,
+    SpotId::Annuna__Final_Save__Lower_West,
+    SpotId::Annuna__Final_Save__Pillar,
+    SpotId::Annuna__Final_Save__Save_Point,
+    SpotId::Annuna__Final_Save__Upper_West,
     SpotId::Annuna__Lower_Hallway__Dais_Left,
     SpotId::Annuna__Lower_Hallway__Dais_Right,
     SpotId::Annuna__Lower_Hallway__East,
@@ -5900,6 +5921,15 @@ static RAW_SPOTS: [SpotId; 1334] = [
     SpotId::Annuna__Mirror_Match__Waving_Distance,
     SpotId::Annuna__Mirror_Match__West_25,
     SpotId::Annuna__Mirror_Match__West_Gap,
+    SpotId::Annuna__Seals__Breakable_Rock,
+    SpotId::Annuna__Seals__East_15,
+    SpotId::Annuna__Seals__East_17_Lower,
+    SpotId::Annuna__Seals__East_17_Upper,
+    SpotId::Annuna__Seals__Lower_Ledge,
+    SpotId::Annuna__Seals__Lower_Seal,
+    SpotId::Annuna__Seals__Middle_Ledge,
+    SpotId::Annuna__Seals__Upper_Ledge,
+    SpotId::Annuna__Seals__Upper_Seal,
     SpotId::Annuna__Sniper_Valley__Bridge_End,
     SpotId::Annuna__Sniper_Valley__Bridge_Lower_Ledge,
     SpotId::Annuna__Sniper_Valley__Bridge_Upper_Ledge,
@@ -6604,17 +6634,6 @@ static RAW_SPOTS: [SpotId; 1334] = [
     SpotId::Giguna_Breach__SW_Save__Save_Point,
     SpotId::Giguna_Breach__SW_Save__Side_Door,
     SpotId::Giguna_Breach__SW_Save__West_11,
-    SpotId::Glacier__Apocalypse__Bomb,
-    SpotId::Glacier__Apocalypse__Bomb_East,
-    SpotId::Glacier__Apocalypse__Bomb_Northwest,
-    SpotId::Glacier__Apocalypse__Center_Scaffold_West,
-    SpotId::Glacier__Apocalypse__Northwest_Mid_air,
-    SpotId::Glacier__Apocalypse__Northwest_Scaffold_2_West,
-    SpotId::Glacier__Apocalypse__Northwest_Switch,
-    SpotId::Glacier__Apocalypse__Southwest_Capsule,
-    SpotId::Glacier__Apocalypse__Southwest_Corner,
-    SpotId::Glacier__Apocalypse__Southwest_Switch,
-    SpotId::Glacier__Apocalypse__West,
     SpotId::Glacier__Apocalypse_Entry__Above_Grate,
     SpotId::Glacier__Apocalypse_Entry__Below_Grate,
     SpotId::Glacier__Apocalypse_Entry__Grate_Ledge,
@@ -6624,11 +6643,6 @@ static RAW_SPOTS: [SpotId; 1334] = [
     SpotId::Glacier__Apocalypse_Entry__West_10,
     SpotId::Glacier__Apocalypse_Entry__West_15_Lower,
     SpotId::Glacier__Apocalypse_Entry__West_15_Upper,
-    SpotId::Glacier__Apocalypse_Hallway__Center_Pillar,
-    SpotId::Glacier__Apocalypse_Hallway__East_Pillar,
-    SpotId::Glacier__Apocalypse_Hallway__Lower_East,
-    SpotId::Glacier__Apocalypse_Hallway__Upper_East,
-    SpotId::Glacier__Apocalypse_Hallway__West,
     SpotId::Glacier__Boomerang_Antechamber__East_12,
     SpotId::Glacier__Boomerang_Antechamber__Upper_East,
     SpotId::Glacier__Boomerang_Antechamber__West_12,
@@ -6645,11 +6659,6 @@ static RAW_SPOTS: [SpotId; 1334] = [
     SpotId::Glacier__Compass_Room__West,
     SpotId::Glacier__Dock_Outside__Do_Not_Enter,
     SpotId::Glacier__Dock_Outside__Entry,
-    SpotId::Glacier__Final_Save__East,
-    SpotId::Glacier__Final_Save__Lower_West,
-    SpotId::Glacier__Final_Save__Pillar,
-    SpotId::Glacier__Final_Save__Save_Point,
-    SpotId::Glacier__Final_Save__Upper_West,
     SpotId::Glacier__Grid_31_9_12__East_10,
     SpotId::Glacier__Grid_31_9_12__East_9,
     SpotId::Glacier__Grid_31_9_12__Midair,
@@ -6708,15 +6717,6 @@ static RAW_SPOTS: [SpotId; 1334] = [
     SpotId::Glacier__Revival__Overhang,
     SpotId::Glacier__Revival__Save_Point,
     SpotId::Glacier__Revival__West_8,
-    SpotId::Glacier__Seals__Breakable_Rock,
-    SpotId::Glacier__Seals__East_15,
-    SpotId::Glacier__Seals__East_17_Lower,
-    SpotId::Glacier__Seals__East_17_Upper,
-    SpotId::Glacier__Seals__Lower_Ledge,
-    SpotId::Glacier__Seals__Lower_Seal,
-    SpotId::Glacier__Seals__Middle_Ledge,
-    SpotId::Glacier__Seals__Upper_Ledge,
-    SpotId::Glacier__Seals__Upper_Seal,
     SpotId::Glacier__The_Big_Drop__East,
     SpotId::Glacier__The_Big_Drop__Small_Path,
     SpotId::Glacier__The_Big_Drop__Water_Surface,
@@ -7076,6 +7076,14 @@ lazy_static! {
             start: SpotId::Amagi__West_Lake__Cavern_Back_Teeth.into_usize(),
             end: SpotId::Amagi__West_Lake__West_Shore.into_usize() + 1,
         },
+        AreaId::Annuna__Apocalypse => Range {
+            start: SpotId::Annuna__Apocalypse__Bomb.into_usize(),
+            end: SpotId::Annuna__Apocalypse__West.into_usize() + 1,
+        },
+        AreaId::Annuna__Apocalypse_Hallway => Range {
+            start: SpotId::Annuna__Apocalypse_Hallway__Center_Pillar.into_usize(),
+            end: SpotId::Annuna__Apocalypse_Hallway__West.into_usize() + 1,
+        },
         AreaId::Annuna__Center_Save => Range {
             start: SpotId::Annuna__Center_Save__East.into_usize(),
             end: SpotId::Annuna__Center_Save__West_Floor.into_usize() + 1,
@@ -7104,6 +7112,10 @@ lazy_static! {
             start: SpotId::Annuna__Factory_Entrance__East.into_usize(),
             end: SpotId::Annuna__Factory_Entrance__West.into_usize() + 1,
         },
+        AreaId::Annuna__Final_Save => Range {
+            start: SpotId::Annuna__Final_Save__East.into_usize(),
+            end: SpotId::Annuna__Final_Save__Upper_West.into_usize() + 1,
+        },
         AreaId::Annuna__Lower_Hallway => Range {
             start: SpotId::Annuna__Lower_Hallway__Dais_Left.into_usize(),
             end: SpotId::Annuna__Lower_Hallway__West.into_usize() + 1,
@@ -7111,6 +7123,10 @@ lazy_static! {
         AreaId::Annuna__Mirror_Match => Range {
             start: SpotId::Annuna__Mirror_Match__Below_Switch.into_usize(),
             end: SpotId::Annuna__Mirror_Match__West_Gap.into_usize() + 1,
+        },
+        AreaId::Annuna__Seals => Range {
+            start: SpotId::Annuna__Seals__Breakable_Rock.into_usize(),
+            end: SpotId::Annuna__Seals__Upper_Seal.into_usize() + 1,
         },
         AreaId::Annuna__Sniper_Valley => Range {
             start: SpotId::Annuna__Sniper_Valley__Bridge_End.into_usize(),
@@ -7384,17 +7400,9 @@ lazy_static! {
             start: SpotId::Giguna__West_Tower__East_7.into_usize(),
             end: SpotId::Giguna__West_Tower__Top.into_usize() + 1,
         },
-        AreaId::Glacier__Apocalypse => Range {
-            start: SpotId::Glacier__Apocalypse__Bomb.into_usize(),
-            end: SpotId::Glacier__Apocalypse__West.into_usize() + 1,
-        },
         AreaId::Glacier__Apocalypse_Entry => Range {
             start: SpotId::Glacier__Apocalypse_Entry__Above_Grate.into_usize(),
             end: SpotId::Glacier__Apocalypse_Entry__West_15_Upper.into_usize() + 1,
-        },
-        AreaId::Glacier__Apocalypse_Hallway => Range {
-            start: SpotId::Glacier__Apocalypse_Hallway__Center_Pillar.into_usize(),
-            end: SpotId::Glacier__Apocalypse_Hallway__West.into_usize() + 1,
         },
         AreaId::Glacier__Boomerang_Antechamber => Range {
             start: SpotId::Glacier__Boomerang_Antechamber__East_12.into_usize(),
@@ -7411,10 +7419,6 @@ lazy_static! {
         AreaId::Glacier__Dock_Outside => Range {
             start: SpotId::Glacier__Dock_Outside__Do_Not_Enter.into_usize(),
             end: SpotId::Glacier__Dock_Outside__Entry.into_usize() + 1,
-        },
-        AreaId::Glacier__Final_Save => Range {
-            start: SpotId::Glacier__Final_Save__East.into_usize(),
-            end: SpotId::Glacier__Final_Save__Upper_West.into_usize() + 1,
         },
         AreaId::Glacier__Grid_31_9_12 => Range {
             start: SpotId::Glacier__Grid_31_9_12__East_10.into_usize(),
@@ -7455,10 +7459,6 @@ lazy_static! {
         AreaId::Glacier__Revival => Range {
             start: SpotId::Glacier__Revival__East_9.into_usize(),
             end: SpotId::Glacier__Revival__West_8.into_usize() + 1,
-        },
-        AreaId::Glacier__Seals => Range {
-            start: SpotId::Glacier__Seals__Breakable_Rock.into_usize(),
-            end: SpotId::Glacier__Seals__Upper_Seal.into_usize() + 1,
         },
         AreaId::Glacier__The_Big_Drop => Range {
             start: SpotId::Glacier__The_Big_Drop__East.into_usize(),
@@ -7754,6 +7754,10 @@ impl world::World for World {
                 LocationId::Annuna__Sniper_Valley__Cavern_Inner_Rock_West__Break_Inner_Wall,
                 LocationId::Annuna__Sniper_Valley__Cavern_Inner_Rock_East__Break_Inner_Wall,
             ],
+            CanonId::Apocalypse_Bomb => vec![
+                LocationId::Annuna__Apocalypse__Center_Scaffold_West__Boss_Fight,
+                LocationId::Annuna__Apocalypse__Center_Scaffold_West__Fill_It_Up,
+            ],
             CanonId::Notes_2053_02_27 => {
                 vec![LocationId::Antarctica__Building_2__Behind_Boxes__Note]
             }
@@ -7841,10 +7845,6 @@ impl world::World for World {
             CanonId::Ledge_Grab => vec![
                 LocationId::Glacier__Ledge_Grab_Room__Cliff_Bottom__Quick_Grab,
                 LocationId::Glacier__Ledge_Grab_Room__Pedestal__Item,
-            ],
-            CanonId::Apocalypse_Bomb => vec![
-                LocationId::Glacier__Apocalypse__Center_Scaffold_West__Boss_Fight,
-                LocationId::Glacier__Apocalypse__Center_Scaffold_West__Fill_It_Up,
             ],
             CanonId::Melee_Charge => vec![
                 LocationId::Interior__Building_Interior__Entry__Remote_Urn,
@@ -8005,6 +8005,10 @@ impl world::World for World {
             ],
             Item::Destruction_Pogrom => vec![LocationId::Annuna__Twisty_Passages__Top__Tablet],
             Item::Eye_Ring => vec![LocationId::Annuna__West_Climb__Cache__Item],
+            Item::Apocalypse_Bomb => vec![
+                LocationId::Annuna__Apocalypse__Center_Scaffold_West__Boss_Fight,
+                LocationId::Annuna__Apocalypse__Center_Scaffold_West__Fill_It_Up,
+            ],
             Item::Ice_Axe => vec![LocationId::Antarctica__Shed__Interior__Shelf],
             Item::Notes_2053_02_27 => vec![LocationId::Antarctica__Building_2__Behind_Boxes__Note],
             Item::Station_Power => vec![LocationId::Antarctica__Power_Room__Switch__Flip],
@@ -8120,10 +8124,6 @@ impl world::World for World {
                 LocationId::Glacier__Ledge_Grab_Room__Pedestal__Item,
             ],
             Item::Escape => vec![LocationId::Glacier__Apocalypse_Entry__Grate_Ledge__Escape],
-            Item::Apocalypse_Bomb => vec![
-                LocationId::Glacier__Apocalypse__Center_Scaffold_West__Boss_Fight,
-                LocationId::Glacier__Apocalypse__Center_Scaffold_West__Fill_It_Up,
-            ],
             Item::Dear_Ernest => vec![LocationId::Interior__Bunker_Interior__Desk__Note],
             Item::Melee_Charge => vec![
                 LocationId::Interior__Building_Interior__Entry__Remote_Urn,
@@ -8398,6 +8398,10 @@ impl world::World for World {
                 SpotId::Annuna__Twisty_Passages__Northwest_Alcove
             }
             LocationId::Annuna__West_Climb__Cache__Item => SpotId::Annuna__West_Climb__Cache,
+            LocationId::Annuna__Apocalypse__Center_Scaffold_West__Boss_Fight
+            | LocationId::Annuna__Apocalypse__Center_Scaffold_West__Fill_It_Up => {
+                SpotId::Annuna__Apocalypse__Center_Scaffold_West
+            }
             LocationId::Antarctica__Shed__Interior__Shelf => SpotId::Antarctica__Shed__Interior,
             LocationId::Antarctica__Building_2__Behind_Boxes__Note => {
                 SpotId::Antarctica__Building_2__Behind_Boxes
@@ -8603,10 +8607,6 @@ impl world::World for World {
             }
             LocationId::Glacier__Apocalypse_Entry__Grate_Ledge__Escape => {
                 SpotId::Glacier__Apocalypse_Entry__Grate_Ledge
-            }
-            LocationId::Glacier__Apocalypse__Center_Scaffold_West__Boss_Fight
-            | LocationId::Glacier__Apocalypse__Center_Scaffold_West__Fill_It_Up => {
-                SpotId::Glacier__Apocalypse__Center_Scaffold_West
             }
             LocationId::Interior__Bunker_Interior__Desk__Note => {
                 SpotId::Interior__Bunker_Interior__Desk
@@ -8827,6 +8827,9 @@ impl world::World for World {
             ActionId::Annuna__West_Climb__Switch_Ledge__Open_Door => {
                 SpotId::Annuna__West_Climb__Switch_Ledge
             }
+            ActionId::Annuna__Final_Save__Save_Point__Save => {
+                SpotId::Annuna__Final_Save__Save_Point
+            }
             ActionId::Ebih__Base_Camp__Save_Point__Save => SpotId::Ebih__Base_Camp__Save_Point,
             ActionId::Ebih__Base_Camp__Left_Platform__Move_Left_Platform => {
                 SpotId::Ebih__Base_Camp__Left_Platform
@@ -8992,9 +8995,6 @@ impl world::World for World {
                 SpotId::Giguna__Gateway__Flask_Ledge
             }
             ActionId::Glacier__Revival__Save_Point__Save => SpotId::Glacier__Revival__Save_Point,
-            ActionId::Glacier__Final_Save__Save_Point__Save => {
-                SpotId::Glacier__Final_Save__Save_Point
-            }
             ActionId::Interior__Cave_Behind_Waterfall__Middle__Throw_Drone => {
                 SpotId::Interior__Cave_Behind_Waterfall__Middle
             }
@@ -9180,6 +9180,15 @@ impl world::World for World {
             ExitId::Annuna__West_Climb__Platform_2__ex__East_19_1 => SpotId::Annuna__West_Climb__Platform_2,
             ExitId::Annuna__West_Climb__North__ex__East_19_1 | ExitId:: Annuna__West_Climb__North__ex__Glacier__Vertical_Room__South_1 => SpotId::Annuna__West_Climb__North,
             ExitId::Annuna__West_Climb__East_19__ex__Egg_Room__West_1 | ExitId:: Annuna__West_Climb__East_19__ex__Platform_3_1 => SpotId::Annuna__West_Climb__East_19,
+            ExitId::Annuna__Final_Save__Upper_West__ex__Seals__East_17_Upper_1 | ExitId:: Annuna__Final_Save__Upper_West__ex__Apocalypse__Northwest_Mid_air_1 => SpotId::Annuna__Final_Save__Upper_West,
+            ExitId::Annuna__Final_Save__Lower_West__ex__Seals__East_17_Lower_1 | ExitId:: Annuna__Final_Save__Lower_West__ex__Pillar_1 | ExitId:: Annuna__Final_Save__Lower_West__ex__Pillar_2 => SpotId::Annuna__Final_Save__Lower_West,
+            ExitId::Annuna__Final_Save__Pillar__ex__Upper_West_1 => SpotId::Annuna__Final_Save__Pillar,
+            ExitId::Annuna__Final_Save__Save_Point__ex__Pillar_1 | ExitId:: Annuna__Final_Save__Save_Point__ex__Pillar_2 | ExitId:: Annuna__Final_Save__Save_Point__ex__Apocalypse__Northwest_Mid_air_1 => SpotId::Annuna__Final_Save__Save_Point,
+            ExitId::Annuna__Final_Save__East__ex__Apocalypse__West_1 | ExitId:: Annuna__Final_Save__East__ex__Upper_West_1 => SpotId::Annuna__Final_Save__East,
+            ExitId::Annuna__Apocalypse__West__ex__Final_Save__East_1 => SpotId::Annuna__Apocalypse__West,
+            ExitId::Annuna__Apocalypse__Northwest_Mid_air__ex__Northwest_Scaffold_2_West_1 | ExitId:: Annuna__Apocalypse__Northwest_Mid_air__ex__Northwest_Scaffold_2_West_2 => SpotId::Annuna__Apocalypse__Northwest_Mid_air,
+            ExitId::Annuna__Apocalypse__Center_Scaffold_West__Boss_Fight | ExitId::Annuna__Apocalypse__Center_Scaffold_West__Fill_It_Up => SpotId::Annuna__Apocalypse__Center_Scaffold_West,
+            ExitId::Annuna__Apocalypse__Southwest_Capsule__ex__West_1 | ExitId:: Annuna__Apocalypse__Southwest_Capsule__ex__West_2 => SpotId::Annuna__Apocalypse__Southwest_Capsule,
             ExitId::Antarctica__West__Shed_Entry__ex__Shed__Interior_1 | ExitId:: Antarctica__West__Shed_Entry__ex__Helipad_1 => SpotId::Antarctica__West__Shed_Entry,
             ExitId::Antarctica__West__Boxes__ex__Building_1W__West_Entry_1 => SpotId::Antarctica__West__Boxes,
             ExitId::Antarctica__Shed__Interior__ex__West__Shed_Entry_1 => SpotId::Antarctica__Shed__Interior,
@@ -9657,17 +9666,8 @@ impl world::World for World {
             ExitId::Glacier__Apocalypse_Entry__Grate_Ledge__Escape => SpotId::Glacier__Apocalypse_Entry__Grate_Ledge,
             ExitId::Glacier__Apocalypse_Entry__Above_Grate__ex__Below_Grate_1 => SpotId::Glacier__Apocalypse_Entry__Above_Grate,
             ExitId::Glacier__Apocalypse_Entry__Below_Grate__ex__Grate_Ledge_1 => SpotId::Glacier__Apocalypse_Entry__Below_Grate,
-            ExitId::Glacier__Apocalypse_Entry__West_15_Lower__ex__Apocalypse_Hallway__Lower_East_1 | ExitId:: Glacier__Apocalypse_Entry__West_15_Lower__ex__Lowest_Stair_1 => SpotId::Glacier__Apocalypse_Entry__West_15_Lower,
-            ExitId::Glacier__Apocalypse_Entry__West_15_Upper__ex__Apocalypse_Hallway__Upper_East_1 => SpotId::Glacier__Apocalypse_Entry__West_15_Upper,
-            ExitId::Glacier__Final_Save__Upper_West__ex__Seals__East_17_Upper_1 | ExitId:: Glacier__Final_Save__Upper_West__ex__Apocalypse__Northwest_Mid_air_1 => SpotId::Glacier__Final_Save__Upper_West,
-            ExitId::Glacier__Final_Save__Lower_West__ex__Seals__East_17_Lower_1 | ExitId:: Glacier__Final_Save__Lower_West__ex__Pillar_1 | ExitId:: Glacier__Final_Save__Lower_West__ex__Pillar_2 => SpotId::Glacier__Final_Save__Lower_West,
-            ExitId::Glacier__Final_Save__Pillar__ex__Upper_West_1 => SpotId::Glacier__Final_Save__Pillar,
-            ExitId::Glacier__Final_Save__Save_Point__ex__Pillar_1 | ExitId:: Glacier__Final_Save__Save_Point__ex__Pillar_2 | ExitId:: Glacier__Final_Save__Save_Point__ex__Apocalypse__Northwest_Mid_air_1 => SpotId::Glacier__Final_Save__Save_Point,
-            ExitId::Glacier__Final_Save__East__ex__Apocalypse__West_1 | ExitId:: Glacier__Final_Save__East__ex__Upper_West_1 => SpotId::Glacier__Final_Save__East,
-            ExitId::Glacier__Apocalypse__West__ex__Final_Save__East_1 => SpotId::Glacier__Apocalypse__West,
-            ExitId::Glacier__Apocalypse__Northwest_Mid_air__ex__Northwest_Scaffold_2_West_1 | ExitId:: Glacier__Apocalypse__Northwest_Mid_air__ex__Northwest_Scaffold_2_West_2 => SpotId::Glacier__Apocalypse__Northwest_Mid_air,
-            ExitId::Glacier__Apocalypse__Center_Scaffold_West__Boss_Fight | ExitId::Glacier__Apocalypse__Center_Scaffold_West__Fill_It_Up => SpotId::Glacier__Apocalypse__Center_Scaffold_West,
-            ExitId::Glacier__Apocalypse__Southwest_Capsule__ex__West_1 | ExitId:: Glacier__Apocalypse__Southwest_Capsule__ex__West_2 => SpotId::Glacier__Apocalypse__Southwest_Capsule,
+            ExitId::Glacier__Apocalypse_Entry__West_15_Lower__ex__Annuna__Apocalypse_Hallway__Lower_East_1 | ExitId:: Glacier__Apocalypse_Entry__West_15_Lower__ex__Lowest_Stair_1 => SpotId::Glacier__Apocalypse_Entry__West_15_Lower,
+            ExitId::Glacier__Apocalypse_Entry__West_15_Upper__ex__Annuna__Apocalypse_Hallway__Upper_East_1 => SpotId::Glacier__Apocalypse_Entry__West_15_Upper,
             ExitId::Interior__Dock_Elevator__Connector__ex__Dock_Interior__Connector_1 => SpotId::Interior__Dock_Elevator__Connector,
             ExitId::Interior__Dock_Interior__Connector__ex__Dock_Elevator__Connector_1 => SpotId::Interior__Dock_Interior__Connector,
             ExitId::Interior__Dock_Interior__Entry__ex__Glacier__Dock_Outside__Entry_1 => SpotId::Interior__Dock_Interior__Entry,
@@ -10564,6 +10564,8 @@ impl world::World for World {
             | SpotId::Amagi__West_Lake__Surface_Wall_Left
             | SpotId::Amagi__West_Lake__Surface_Wall_Right
             | SpotId::Amagi__West_Lake__West_15
+            | SpotId::Annuna__Apocalypse__Center_Scaffold_West
+            | SpotId::Annuna__Apocalypse__West
             | SpotId::Annuna__Center_Save__East
             | SpotId::Annuna__Center_Save__Save_Point
             | SpotId::Annuna__Center_Save__West_Catwalk
@@ -10597,6 +10599,10 @@ impl world::World for World {
             | SpotId::Annuna__Factory_Entrance__East
             | SpotId::Annuna__Factory_Entrance__Save_Point
             | SpotId::Annuna__Factory_Entrance__West
+            | SpotId::Annuna__Final_Save__East
+            | SpotId::Annuna__Final_Save__Lower_West
+            | SpotId::Annuna__Final_Save__Save_Point
+            | SpotId::Annuna__Final_Save__Upper_West
             | SpotId::Annuna__Lower_Hallway__East
             | SpotId::Annuna__Lower_Hallway__West
             | SpotId::Annuna__Mirror_Match__Below_Switch
@@ -10935,8 +10941,6 @@ impl world::World for World {
             | SpotId::Giguna_Breach__SW_Save__North
             | SpotId::Giguna_Breach__SW_Save__Save_Point
             | SpotId::Giguna_Breach__SW_Save__West_11
-            | SpotId::Glacier__Apocalypse__Center_Scaffold_West
-            | SpotId::Glacier__Apocalypse__West
             | SpotId::Glacier__Apocalypse_Entry__Grate_Ledge
             | SpotId::Glacier__Apocalypse_Entry__West_10
             | SpotId::Glacier__Apocalypse_Entry__West_15_Lower
@@ -10953,10 +10957,6 @@ impl world::World for World {
             | SpotId::Glacier__Compass_Room__West
             | SpotId::Glacier__Dock_Outside__Do_Not_Enter
             | SpotId::Glacier__Dock_Outside__Entry
-            | SpotId::Glacier__Final_Save__East
-            | SpotId::Glacier__Final_Save__Lower_West
-            | SpotId::Glacier__Final_Save__Save_Point
-            | SpotId::Glacier__Final_Save__Upper_West
             | SpotId::Glacier__Grid_31_9_12__East_10
             | SpotId::Glacier__Grid_31_9_12__East_9
             | SpotId::Glacier__Grid_31_9_12__Midair
@@ -11684,6 +11684,22 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
             price: Currency::Free,
             time: 0,
             exit_id: None,
+        },
+        LocationId::Annuna__Apocalypse__Center_Scaffold_West__Boss_Fight => Location {
+            id: LocationId::Annuna__Apocalypse__Center_Scaffold_West__Boss_Fight,
+            canonical: CanonId::Apocalypse_Bomb,
+            item: Item::Apocalypse_Bomb,
+            price: Currency::Free,
+            time: 0,
+            exit_id: Some(ExitId::Annuna__Apocalypse__Center_Scaffold_West__Boss_Fight),
+        },
+        LocationId::Annuna__Apocalypse__Center_Scaffold_West__Fill_It_Up => Location {
+            id: LocationId::Annuna__Apocalypse__Center_Scaffold_West__Fill_It_Up,
+            canonical: CanonId::Apocalypse_Bomb,
+            item: Item::Apocalypse_Bomb,
+            price: Currency::Free,
+            time: 0,
+            exit_id: Some(ExitId::Annuna__Apocalypse__Center_Scaffold_West__Fill_It_Up),
         },
         LocationId::Antarctica__Shed__Interior__Shelf => Location {
             id: LocationId::Antarctica__Shed__Interior__Shelf,
@@ -12420,22 +12436,6 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
             price: Currency::Free,
             time: 1000,
             exit_id: Some(ExitId::Glacier__Apocalypse_Entry__Grate_Ledge__Escape),
-        },
-        LocationId::Glacier__Apocalypse__Center_Scaffold_West__Boss_Fight => Location {
-            id: LocationId::Glacier__Apocalypse__Center_Scaffold_West__Boss_Fight,
-            canonical: CanonId::Apocalypse_Bomb,
-            item: Item::Apocalypse_Bomb,
-            price: Currency::Free,
-            time: 0,
-            exit_id: Some(ExitId::Glacier__Apocalypse__Center_Scaffold_West__Boss_Fight),
-        },
-        LocationId::Glacier__Apocalypse__Center_Scaffold_West__Fill_It_Up => Location {
-            id: LocationId::Glacier__Apocalypse__Center_Scaffold_West__Fill_It_Up,
-            canonical: CanonId::Apocalypse_Bomb,
-            item: Item::Apocalypse_Bomb,
-            price: Currency::Free,
-            time: 0,
-            exit_id: Some(ExitId::Glacier__Apocalypse__Center_Scaffold_West__Fill_It_Up),
         },
         LocationId::Interior__Bunker_Interior__Desk__Note => Location {
             id: LocationId::Interior__Bunker_Interior__Desk__Note,
@@ -14773,6 +14773,132 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
             id: ExitId::Annuna__West_Climb__East_19__ex__Platform_3_1,
             time: 1578,
             dest: SpotId::Annuna__West_Climb__Platform_3,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__Final_Save__Upper_West__ex__Seals__East_17_Upper_1 => Exit {
+            id: ExitId::Annuna__Final_Save__Upper_West__ex__Seals__East_17_Upper_1,
+            time: 1350,
+            dest: SpotId::Annuna__Seals__East_17_Upper,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__Final_Save__Upper_West__ex__Apocalypse__Northwest_Mid_air_1 => Exit {
+            id: ExitId::Annuna__Final_Save__Upper_West__ex__Apocalypse__Northwest_Mid_air_1,
+            time: 4350,
+            dest: SpotId::Annuna__Apocalypse__Northwest_Mid_air,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__Final_Save__Lower_West__ex__Seals__East_17_Lower_1 => Exit {
+            id: ExitId::Annuna__Final_Save__Lower_West__ex__Seals__East_17_Lower_1,
+            time: 1350,
+            dest: SpotId::Annuna__Seals__East_17_Lower,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__Final_Save__Lower_West__ex__Pillar_1 => Exit {
+            id: ExitId::Annuna__Final_Save__Lower_West__ex__Pillar_1,
+            time: 1799,
+            dest: SpotId::Annuna__Final_Save__Pillar,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__Final_Save__Lower_West__ex__Pillar_2 => Exit {
+            id: ExitId::Annuna__Final_Save__Lower_West__ex__Pillar_2,
+            time: 1052,
+            dest: SpotId::Annuna__Final_Save__Pillar,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__Final_Save__Pillar__ex__Upper_West_1 => Exit {
+            id: ExitId::Annuna__Final_Save__Pillar__ex__Upper_West_1,
+            time: 1052,
+            dest: SpotId::Annuna__Final_Save__Upper_West,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__Final_Save__Save_Point__ex__Pillar_1 => Exit {
+            id: ExitId::Annuna__Final_Save__Save_Point__ex__Pillar_1,
+            time: 1200,
+            dest: SpotId::Annuna__Final_Save__Pillar,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__Final_Save__Save_Point__ex__Pillar_2 => Exit {
+            id: ExitId::Annuna__Final_Save__Save_Point__ex__Pillar_2,
+            time: 600,
+            dest: SpotId::Annuna__Final_Save__Pillar,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__Final_Save__Save_Point__ex__Apocalypse__Northwest_Mid_air_1 => Exit {
+            id: ExitId::Annuna__Final_Save__Save_Point__ex__Apocalypse__Northwest_Mid_air_1,
+            time: 3982,
+            dest: SpotId::Annuna__Apocalypse__Northwest_Mid_air,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__Final_Save__East__ex__Apocalypse__West_1 => Exit {
+            id: ExitId::Annuna__Final_Save__East__ex__Apocalypse__West_1,
+            time: 1350,
+            dest: SpotId::Annuna__Apocalypse__West,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__Final_Save__East__ex__Upper_West_1 => Exit {
+            id: ExitId::Annuna__Final_Save__East__ex__Upper_West_1,
+            time: 2250,
+            dest: SpotId::Annuna__Final_Save__Upper_West,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__Apocalypse__West__ex__Final_Save__East_1 => Exit {
+            id: ExitId::Annuna__Apocalypse__West__ex__Final_Save__East_1,
+            time: 1350,
+            dest: SpotId::Annuna__Final_Save__East,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__Apocalypse__Northwest_Mid_air__ex__Northwest_Scaffold_2_West_1 => Exit {
+            id: ExitId::Annuna__Apocalypse__Northwest_Mid_air__ex__Northwest_Scaffold_2_West_1,
+            time: 350,
+            dest: SpotId::Annuna__Apocalypse__Northwest_Scaffold_2_West,
+            price: Currency::Energy(40),
+            loc_id: None,
+        },
+        ExitId::Annuna__Apocalypse__Northwest_Mid_air__ex__Northwest_Scaffold_2_West_2 => Exit {
+            id: ExitId::Annuna__Apocalypse__Northwest_Mid_air__ex__Northwest_Scaffold_2_West_2,
+            time: 350,
+            dest: SpotId::Annuna__Apocalypse__Northwest_Scaffold_2_West,
+            price: Currency::Energy(40),
+            loc_id: None,
+        },
+        ExitId::Annuna__Apocalypse__Center_Scaffold_West__Boss_Fight => Exit {
+            id: ExitId::Annuna__Apocalypse__Center_Scaffold_West__Boss_Fight,
+            time: 28000,
+            dest: SpotId::Annuna__Apocalypse__Bomb_Northwest,
+            price: Currency::Free,
+            loc_id: Some(LocationId::Annuna__Apocalypse__Center_Scaffold_West__Boss_Fight),
+        },
+        ExitId::Annuna__Apocalypse__Center_Scaffold_West__Fill_It_Up => Exit {
+            id: ExitId::Annuna__Apocalypse__Center_Scaffold_West__Fill_It_Up,
+            time: 15000,
+            dest: SpotId::Annuna__Apocalypse__Bomb_East,
+            price: Currency::Free,
+            loc_id: Some(LocationId::Annuna__Apocalypse__Center_Scaffold_West__Fill_It_Up),
+        },
+        ExitId::Annuna__Apocalypse__Southwest_Capsule__ex__West_1 => Exit {
+            id: ExitId::Annuna__Apocalypse__Southwest_Capsule__ex__West_1,
+            time: 2400,
+            dest: SpotId::Annuna__Apocalypse__West,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__Apocalypse__Southwest_Capsule__ex__West_2 => Exit {
+            id: ExitId::Annuna__Apocalypse__Southwest_Capsule__ex__West_2,
+            time: 1200,
+            dest: SpotId::Annuna__Apocalypse__West,
             price: Currency::Free,
             loc_id: None,
         },
@@ -19683,10 +19809,10 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
             price: Currency::Free,
             loc_id: None,
         },
-        ExitId::Glacier__Apocalypse_Entry__West_15_Lower__ex__Apocalypse_Hallway__Lower_East_1 => Exit {
-            id: ExitId::Glacier__Apocalypse_Entry__West_15_Lower__ex__Apocalypse_Hallway__Lower_East_1,
+        ExitId::Glacier__Apocalypse_Entry__West_15_Lower__ex__Annuna__Apocalypse_Hallway__Lower_East_1 => Exit {
+            id: ExitId::Glacier__Apocalypse_Entry__West_15_Lower__ex__Annuna__Apocalypse_Hallway__Lower_East_1,
             time: 1350,
-            dest: SpotId::Glacier__Apocalypse_Hallway__Lower_East,
+            dest: SpotId::Annuna__Apocalypse_Hallway__Lower_East,
             price: Currency::Free,
             loc_id: None,
         },
@@ -19697,136 +19823,10 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
             price: Currency::Free,
             loc_id: None,
         },
-        ExitId::Glacier__Apocalypse_Entry__West_15_Upper__ex__Apocalypse_Hallway__Upper_East_1 => Exit {
-            id: ExitId::Glacier__Apocalypse_Entry__West_15_Upper__ex__Apocalypse_Hallway__Upper_East_1,
+        ExitId::Glacier__Apocalypse_Entry__West_15_Upper__ex__Annuna__Apocalypse_Hallway__Upper_East_1 => Exit {
+            id: ExitId::Glacier__Apocalypse_Entry__West_15_Upper__ex__Annuna__Apocalypse_Hallway__Upper_East_1,
             time: 1350,
-            dest: SpotId::Glacier__Apocalypse_Hallway__Upper_East,
-            price: Currency::Free,
-            loc_id: None,
-        },
-        ExitId::Glacier__Final_Save__Upper_West__ex__Seals__East_17_Upper_1 => Exit {
-            id: ExitId::Glacier__Final_Save__Upper_West__ex__Seals__East_17_Upper_1,
-            time: 1350,
-            dest: SpotId::Glacier__Seals__East_17_Upper,
-            price: Currency::Free,
-            loc_id: None,
-        },
-        ExitId::Glacier__Final_Save__Upper_West__ex__Apocalypse__Northwest_Mid_air_1 => Exit {
-            id: ExitId::Glacier__Final_Save__Upper_West__ex__Apocalypse__Northwest_Mid_air_1,
-            time: 4350,
-            dest: SpotId::Glacier__Apocalypse__Northwest_Mid_air,
-            price: Currency::Free,
-            loc_id: None,
-        },
-        ExitId::Glacier__Final_Save__Lower_West__ex__Seals__East_17_Lower_1 => Exit {
-            id: ExitId::Glacier__Final_Save__Lower_West__ex__Seals__East_17_Lower_1,
-            time: 1350,
-            dest: SpotId::Glacier__Seals__East_17_Lower,
-            price: Currency::Free,
-            loc_id: None,
-        },
-        ExitId::Glacier__Final_Save__Lower_West__ex__Pillar_1 => Exit {
-            id: ExitId::Glacier__Final_Save__Lower_West__ex__Pillar_1,
-            time: 1799,
-            dest: SpotId::Glacier__Final_Save__Pillar,
-            price: Currency::Free,
-            loc_id: None,
-        },
-        ExitId::Glacier__Final_Save__Lower_West__ex__Pillar_2 => Exit {
-            id: ExitId::Glacier__Final_Save__Lower_West__ex__Pillar_2,
-            time: 1052,
-            dest: SpotId::Glacier__Final_Save__Pillar,
-            price: Currency::Free,
-            loc_id: None,
-        },
-        ExitId::Glacier__Final_Save__Pillar__ex__Upper_West_1 => Exit {
-            id: ExitId::Glacier__Final_Save__Pillar__ex__Upper_West_1,
-            time: 1052,
-            dest: SpotId::Glacier__Final_Save__Upper_West,
-            price: Currency::Free,
-            loc_id: None,
-        },
-        ExitId::Glacier__Final_Save__Save_Point__ex__Pillar_1 => Exit {
-            id: ExitId::Glacier__Final_Save__Save_Point__ex__Pillar_1,
-            time: 1200,
-            dest: SpotId::Glacier__Final_Save__Pillar,
-            price: Currency::Free,
-            loc_id: None,
-        },
-        ExitId::Glacier__Final_Save__Save_Point__ex__Pillar_2 => Exit {
-            id: ExitId::Glacier__Final_Save__Save_Point__ex__Pillar_2,
-            time: 600,
-            dest: SpotId::Glacier__Final_Save__Pillar,
-            price: Currency::Free,
-            loc_id: None,
-        },
-        ExitId::Glacier__Final_Save__Save_Point__ex__Apocalypse__Northwest_Mid_air_1 => Exit {
-            id: ExitId::Glacier__Final_Save__Save_Point__ex__Apocalypse__Northwest_Mid_air_1,
-            time: 3982,
-            dest: SpotId::Glacier__Apocalypse__Northwest_Mid_air,
-            price: Currency::Free,
-            loc_id: None,
-        },
-        ExitId::Glacier__Final_Save__East__ex__Apocalypse__West_1 => Exit {
-            id: ExitId::Glacier__Final_Save__East__ex__Apocalypse__West_1,
-            time: 1350,
-            dest: SpotId::Glacier__Apocalypse__West,
-            price: Currency::Free,
-            loc_id: None,
-        },
-        ExitId::Glacier__Final_Save__East__ex__Upper_West_1 => Exit {
-            id: ExitId::Glacier__Final_Save__East__ex__Upper_West_1,
-            time: 2250,
-            dest: SpotId::Glacier__Final_Save__Upper_West,
-            price: Currency::Free,
-            loc_id: None,
-        },
-        ExitId::Glacier__Apocalypse__West__ex__Final_Save__East_1 => Exit {
-            id: ExitId::Glacier__Apocalypse__West__ex__Final_Save__East_1,
-            time: 1350,
-            dest: SpotId::Glacier__Final_Save__East,
-            price: Currency::Free,
-            loc_id: None,
-        },
-        ExitId::Glacier__Apocalypse__Northwest_Mid_air__ex__Northwest_Scaffold_2_West_1 => Exit {
-            id: ExitId::Glacier__Apocalypse__Northwest_Mid_air__ex__Northwest_Scaffold_2_West_1,
-            time: 350,
-            dest: SpotId::Glacier__Apocalypse__Northwest_Scaffold_2_West,
-            price: Currency::Energy(40),
-            loc_id: None,
-        },
-        ExitId::Glacier__Apocalypse__Northwest_Mid_air__ex__Northwest_Scaffold_2_West_2 => Exit {
-            id: ExitId::Glacier__Apocalypse__Northwest_Mid_air__ex__Northwest_Scaffold_2_West_2,
-            time: 350,
-            dest: SpotId::Glacier__Apocalypse__Northwest_Scaffold_2_West,
-            price: Currency::Energy(40),
-            loc_id: None,
-        },
-        ExitId::Glacier__Apocalypse__Center_Scaffold_West__Boss_Fight => Exit {
-            id: ExitId::Glacier__Apocalypse__Center_Scaffold_West__Boss_Fight,
-            time: 28000,
-            dest: SpotId::Glacier__Apocalypse__Bomb_Northwest,
-            price: Currency::Free,
-            loc_id: Some(LocationId::Glacier__Apocalypse__Center_Scaffold_West__Boss_Fight),
-        },
-        ExitId::Glacier__Apocalypse__Center_Scaffold_West__Fill_It_Up => Exit {
-            id: ExitId::Glacier__Apocalypse__Center_Scaffold_West__Fill_It_Up,
-            time: 15000,
-            dest: SpotId::Glacier__Apocalypse__Bomb_East,
-            price: Currency::Free,
-            loc_id: Some(LocationId::Glacier__Apocalypse__Center_Scaffold_West__Fill_It_Up),
-        },
-        ExitId::Glacier__Apocalypse__Southwest_Capsule__ex__West_1 => Exit {
-            id: ExitId::Glacier__Apocalypse__Southwest_Capsule__ex__West_1,
-            time: 2400,
-            dest: SpotId::Glacier__Apocalypse__West,
-            price: Currency::Free,
-            loc_id: None,
-        },
-        ExitId::Glacier__Apocalypse__Southwest_Capsule__ex__West_2 => Exit {
-            id: ExitId::Glacier__Apocalypse__Southwest_Capsule__ex__West_2,
-            time: 1200,
-            dest: SpotId::Glacier__Apocalypse__West,
+            dest: SpotId::Annuna__Apocalypse_Hallway__Upper_East,
             price: Currency::Free,
             loc_id: None,
         },
@@ -22148,6 +22148,11 @@ pub fn build_actions() -> EnumMap<ActionId, Action> {
             time: 500,
             price: Currency::Free,
         },
+        ActionId::Annuna__Final_Save__Save_Point__Save => Action {
+            id: ActionId::Annuna__Final_Save__Save_Point__Save,
+            time: 1300,
+            price: Currency::Free,
+        },
         ActionId::Ebih__Base_Camp__Save_Point__Save => Action {
             id: ActionId::Ebih__Base_Camp__Save_Point__Save,
             time: 1300,
@@ -22501,11 +22506,6 @@ pub fn build_actions() -> EnumMap<ActionId, Action> {
         ActionId::Glacier__Revival__Save_Point__Save => Action {
             id: ActionId::Glacier__Revival__Save_Point__Save,
             time: 1200,
-            price: Currency::Free,
-        },
-        ActionId::Glacier__Final_Save__Save_Point__Save => Action {
-            id: ActionId::Glacier__Final_Save__Save_Point__Save,
-            time: 1300,
             price: Currency::Free,
         },
         ActionId::Interior__Cave_Behind_Waterfall__Middle__Throw_Drone => Action {
@@ -25783,6 +25783,376 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
         },
         SpotId::Annuna__Egg_Room__West => Spot {
             id: SpotId::Annuna__Egg_Room__West,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__Apocalypse_Hallway__Lower_East => Spot {
+            id: SpotId::Annuna__Apocalypse_Hallway__Lower_East,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__Apocalypse_Hallway__Upper_East => Spot {
+            id: SpotId::Annuna__Apocalypse_Hallway__Upper_East,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__Apocalypse_Hallway__East_Pillar => Spot {
+            id: SpotId::Annuna__Apocalypse_Hallway__East_Pillar,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__Apocalypse_Hallway__Center_Pillar => Spot {
+            id: SpotId::Annuna__Apocalypse_Hallway__Center_Pillar,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__Apocalypse_Hallway__West => Spot {
+            id: SpotId::Annuna__Apocalypse_Hallway__West,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__Seals__East_15 => Spot {
+            id: SpotId::Annuna__Seals__East_15,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__Seals__Upper_Ledge => Spot {
+            id: SpotId::Annuna__Seals__Upper_Ledge,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__Seals__Upper_Seal => Spot {
+            id: SpotId::Annuna__Seals__Upper_Seal,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__Seals__Middle_Ledge => Spot {
+            id: SpotId::Annuna__Seals__Middle_Ledge,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__Seals__Breakable_Rock => Spot {
+            id: SpotId::Annuna__Seals__Breakable_Rock,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__Seals__Lower_Seal => Spot {
+            id: SpotId::Annuna__Seals__Lower_Seal,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__Seals__Lower_Ledge => Spot {
+            id: SpotId::Annuna__Seals__Lower_Ledge,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__Seals__East_17_Upper => Spot {
+            id: SpotId::Annuna__Seals__East_17_Upper,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__Seals__East_17_Lower => Spot {
+            id: SpotId::Annuna__Seals__East_17_Lower,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__Final_Save__Upper_West => Spot {
+            id: SpotId::Annuna__Final_Save__Upper_West,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Annuna__Final_Save__Upper_West__ex__Apocalypse__Northwest_Mid_air_1.into_usize(),
+                end: ExitId::Annuna__Final_Save__Upper_West__ex__Seals__East_17_Upper_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__Final_Save__Lower_West => Spot {
+            id: SpotId::Annuna__Final_Save__Lower_West,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Annuna__Final_Save__Lower_West__ex__Pillar_1.into_usize(),
+                end: ExitId::Annuna__Final_Save__Lower_West__ex__Seals__East_17_Lower_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__Final_Save__Pillar => Spot {
+            id: SpotId::Annuna__Final_Save__Pillar,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Annuna__Final_Save__Pillar__ex__Upper_West_1.into_usize(),
+                end: ExitId::Annuna__Final_Save__Pillar__ex__Upper_West_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__Final_Save__Save_Point => Spot {
+            id: SpotId::Annuna__Final_Save__Save_Point,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Annuna__Final_Save__Save_Point__ex__Apocalypse__Northwest_Mid_air_1.into_usize(),
+                end: ExitId::Annuna__Final_Save__Save_Point__ex__Pillar_2.into_usize() + 1,
+            },
+            actions: Range {
+                start: ActionId::Annuna__Final_Save__Save_Point__Save.into_usize(),
+                end: ActionId::Annuna__Final_Save__Save_Point__Save.into_usize() + 1,
+            },
+        },
+        SpotId::Annuna__Final_Save__East => Spot {
+            id: SpotId::Annuna__Final_Save__East,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Annuna__Final_Save__East__ex__Apocalypse__West_1.into_usize(),
+                end: ExitId::Annuna__Final_Save__East__ex__Upper_West_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__Apocalypse__West => Spot {
+            id: SpotId::Annuna__Apocalypse__West,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Annuna__Apocalypse__West__ex__Final_Save__East_1.into_usize(),
+                end: ExitId::Annuna__Apocalypse__West__ex__Final_Save__East_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__Apocalypse__Northwest_Mid_air => Spot {
+            id: SpotId::Annuna__Apocalypse__Northwest_Mid_air,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Annuna__Apocalypse__Northwest_Mid_air__ex__Northwest_Scaffold_2_West_1.into_usize(),
+                end: ExitId::Annuna__Apocalypse__Northwest_Mid_air__ex__Northwest_Scaffold_2_West_2.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__Apocalypse__Northwest_Scaffold_2_West => Spot {
+            id: SpotId::Annuna__Apocalypse__Northwest_Scaffold_2_West,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__Apocalypse__Northwest_Switch => Spot {
+            id: SpotId::Annuna__Apocalypse__Northwest_Switch,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__Apocalypse__Center_Scaffold_West => Spot {
+            id: SpotId::Annuna__Apocalypse__Center_Scaffold_West,
+            locations: Range {
+                start: LocationId::Annuna__Apocalypse__Center_Scaffold_West__Boss_Fight.into_usize(),
+                end: LocationId::Annuna__Apocalypse__Center_Scaffold_West__Fill_It_Up.into_usize() + 1,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__Apocalypse__Southwest_Switch => Spot {
+            id: SpotId::Annuna__Apocalypse__Southwest_Switch,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__Apocalypse__Southwest_Capsule => Spot {
+            id: SpotId::Annuna__Apocalypse__Southwest_Capsule,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Annuna__Apocalypse__Southwest_Capsule__ex__West_1.into_usize(),
+                end: ExitId::Annuna__Apocalypse__Southwest_Capsule__ex__West_2.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__Apocalypse__Southwest_Corner => Spot {
+            id: SpotId::Annuna__Apocalypse__Southwest_Corner,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__Apocalypse__Bomb_Northwest => Spot {
+            id: SpotId::Annuna__Apocalypse__Bomb_Northwest,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__Apocalypse__Bomb_East => Spot {
+            id: SpotId::Annuna__Apocalypse__Bomb_East,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__Apocalypse__Bomb => Spot {
+            id: SpotId::Annuna__Apocalypse__Bomb,
             locations: Range {
                 start: 0, end: 0,
             },
@@ -35126,7 +35496,7 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             exits: Range {
-                start: ExitId::Glacier__Apocalypse_Entry__West_15_Lower__ex__Apocalypse_Hallway__Lower_East_1.into_usize(),
+                start: ExitId::Glacier__Apocalypse_Entry__West_15_Lower__ex__Annuna__Apocalypse_Hallway__Lower_East_1.into_usize(),
                 end: ExitId::Glacier__Apocalypse_Entry__West_15_Lower__ex__Lowest_Stair_1.into_usize() + 1,
             },
             actions: Range {
@@ -35139,378 +35509,8 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             exits: Range {
-                start: ExitId::Glacier__Apocalypse_Entry__West_15_Upper__ex__Apocalypse_Hallway__Upper_East_1.into_usize(),
-                end: ExitId::Glacier__Apocalypse_Entry__West_15_Upper__ex__Apocalypse_Hallway__Upper_East_1.into_usize() + 1,
-            },
-            actions: Range {
-                start: 0, end: 0,
-            },
-        },
-        SpotId::Glacier__Apocalypse_Hallway__Lower_East => Spot {
-            id: SpotId::Glacier__Apocalypse_Hallway__Lower_East,
-            locations: Range {
-                start: 0, end: 0,
-            },
-            exits: Range {
-                start: 0, end: 0,
-            },
-            actions: Range {
-                start: 0, end: 0,
-            },
-        },
-        SpotId::Glacier__Apocalypse_Hallway__Upper_East => Spot {
-            id: SpotId::Glacier__Apocalypse_Hallway__Upper_East,
-            locations: Range {
-                start: 0, end: 0,
-            },
-            exits: Range {
-                start: 0, end: 0,
-            },
-            actions: Range {
-                start: 0, end: 0,
-            },
-        },
-        SpotId::Glacier__Apocalypse_Hallway__East_Pillar => Spot {
-            id: SpotId::Glacier__Apocalypse_Hallway__East_Pillar,
-            locations: Range {
-                start: 0, end: 0,
-            },
-            exits: Range {
-                start: 0, end: 0,
-            },
-            actions: Range {
-                start: 0, end: 0,
-            },
-        },
-        SpotId::Glacier__Apocalypse_Hallway__Center_Pillar => Spot {
-            id: SpotId::Glacier__Apocalypse_Hallway__Center_Pillar,
-            locations: Range {
-                start: 0, end: 0,
-            },
-            exits: Range {
-                start: 0, end: 0,
-            },
-            actions: Range {
-                start: 0, end: 0,
-            },
-        },
-        SpotId::Glacier__Apocalypse_Hallway__West => Spot {
-            id: SpotId::Glacier__Apocalypse_Hallway__West,
-            locations: Range {
-                start: 0, end: 0,
-            },
-            exits: Range {
-                start: 0, end: 0,
-            },
-            actions: Range {
-                start: 0, end: 0,
-            },
-        },
-        SpotId::Glacier__Seals__East_15 => Spot {
-            id: SpotId::Glacier__Seals__East_15,
-            locations: Range {
-                start: 0, end: 0,
-            },
-            exits: Range {
-                start: 0, end: 0,
-            },
-            actions: Range {
-                start: 0, end: 0,
-            },
-        },
-        SpotId::Glacier__Seals__Upper_Ledge => Spot {
-            id: SpotId::Glacier__Seals__Upper_Ledge,
-            locations: Range {
-                start: 0, end: 0,
-            },
-            exits: Range {
-                start: 0, end: 0,
-            },
-            actions: Range {
-                start: 0, end: 0,
-            },
-        },
-        SpotId::Glacier__Seals__Upper_Seal => Spot {
-            id: SpotId::Glacier__Seals__Upper_Seal,
-            locations: Range {
-                start: 0, end: 0,
-            },
-            exits: Range {
-                start: 0, end: 0,
-            },
-            actions: Range {
-                start: 0, end: 0,
-            },
-        },
-        SpotId::Glacier__Seals__Middle_Ledge => Spot {
-            id: SpotId::Glacier__Seals__Middle_Ledge,
-            locations: Range {
-                start: 0, end: 0,
-            },
-            exits: Range {
-                start: 0, end: 0,
-            },
-            actions: Range {
-                start: 0, end: 0,
-            },
-        },
-        SpotId::Glacier__Seals__Breakable_Rock => Spot {
-            id: SpotId::Glacier__Seals__Breakable_Rock,
-            locations: Range {
-                start: 0, end: 0,
-            },
-            exits: Range {
-                start: 0, end: 0,
-            },
-            actions: Range {
-                start: 0, end: 0,
-            },
-        },
-        SpotId::Glacier__Seals__Lower_Seal => Spot {
-            id: SpotId::Glacier__Seals__Lower_Seal,
-            locations: Range {
-                start: 0, end: 0,
-            },
-            exits: Range {
-                start: 0, end: 0,
-            },
-            actions: Range {
-                start: 0, end: 0,
-            },
-        },
-        SpotId::Glacier__Seals__Lower_Ledge => Spot {
-            id: SpotId::Glacier__Seals__Lower_Ledge,
-            locations: Range {
-                start: 0, end: 0,
-            },
-            exits: Range {
-                start: 0, end: 0,
-            },
-            actions: Range {
-                start: 0, end: 0,
-            },
-        },
-        SpotId::Glacier__Seals__East_17_Upper => Spot {
-            id: SpotId::Glacier__Seals__East_17_Upper,
-            locations: Range {
-                start: 0, end: 0,
-            },
-            exits: Range {
-                start: 0, end: 0,
-            },
-            actions: Range {
-                start: 0, end: 0,
-            },
-        },
-        SpotId::Glacier__Seals__East_17_Lower => Spot {
-            id: SpotId::Glacier__Seals__East_17_Lower,
-            locations: Range {
-                start: 0, end: 0,
-            },
-            exits: Range {
-                start: 0, end: 0,
-            },
-            actions: Range {
-                start: 0, end: 0,
-            },
-        },
-        SpotId::Glacier__Final_Save__Upper_West => Spot {
-            id: SpotId::Glacier__Final_Save__Upper_West,
-            locations: Range {
-                start: 0, end: 0,
-            },
-            exits: Range {
-                start: ExitId::Glacier__Final_Save__Upper_West__ex__Apocalypse__Northwest_Mid_air_1.into_usize(),
-                end: ExitId::Glacier__Final_Save__Upper_West__ex__Seals__East_17_Upper_1.into_usize() + 1,
-            },
-            actions: Range {
-                start: 0, end: 0,
-            },
-        },
-        SpotId::Glacier__Final_Save__Lower_West => Spot {
-            id: SpotId::Glacier__Final_Save__Lower_West,
-            locations: Range {
-                start: 0, end: 0,
-            },
-            exits: Range {
-                start: ExitId::Glacier__Final_Save__Lower_West__ex__Pillar_1.into_usize(),
-                end: ExitId::Glacier__Final_Save__Lower_West__ex__Seals__East_17_Lower_1.into_usize() + 1,
-            },
-            actions: Range {
-                start: 0, end: 0,
-            },
-        },
-        SpotId::Glacier__Final_Save__Pillar => Spot {
-            id: SpotId::Glacier__Final_Save__Pillar,
-            locations: Range {
-                start: 0, end: 0,
-            },
-            exits: Range {
-                start: ExitId::Glacier__Final_Save__Pillar__ex__Upper_West_1.into_usize(),
-                end: ExitId::Glacier__Final_Save__Pillar__ex__Upper_West_1.into_usize() + 1,
-            },
-            actions: Range {
-                start: 0, end: 0,
-            },
-        },
-        SpotId::Glacier__Final_Save__Save_Point => Spot {
-            id: SpotId::Glacier__Final_Save__Save_Point,
-            locations: Range {
-                start: 0, end: 0,
-            },
-            exits: Range {
-                start: ExitId::Glacier__Final_Save__Save_Point__ex__Apocalypse__Northwest_Mid_air_1.into_usize(),
-                end: ExitId::Glacier__Final_Save__Save_Point__ex__Pillar_2.into_usize() + 1,
-            },
-            actions: Range {
-                start: ActionId::Glacier__Final_Save__Save_Point__Save.into_usize(),
-                end: ActionId::Glacier__Final_Save__Save_Point__Save.into_usize() + 1,
-            },
-        },
-        SpotId::Glacier__Final_Save__East => Spot {
-            id: SpotId::Glacier__Final_Save__East,
-            locations: Range {
-                start: 0, end: 0,
-            },
-            exits: Range {
-                start: ExitId::Glacier__Final_Save__East__ex__Apocalypse__West_1.into_usize(),
-                end: ExitId::Glacier__Final_Save__East__ex__Upper_West_1.into_usize() + 1,
-            },
-            actions: Range {
-                start: 0, end: 0,
-            },
-        },
-        SpotId::Glacier__Apocalypse__West => Spot {
-            id: SpotId::Glacier__Apocalypse__West,
-            locations: Range {
-                start: 0, end: 0,
-            },
-            exits: Range {
-                start: ExitId::Glacier__Apocalypse__West__ex__Final_Save__East_1.into_usize(),
-                end: ExitId::Glacier__Apocalypse__West__ex__Final_Save__East_1.into_usize() + 1,
-            },
-            actions: Range {
-                start: 0, end: 0,
-            },
-        },
-        SpotId::Glacier__Apocalypse__Northwest_Mid_air => Spot {
-            id: SpotId::Glacier__Apocalypse__Northwest_Mid_air,
-            locations: Range {
-                start: 0, end: 0,
-            },
-            exits: Range {
-                start: ExitId::Glacier__Apocalypse__Northwest_Mid_air__ex__Northwest_Scaffold_2_West_1.into_usize(),
-                end: ExitId::Glacier__Apocalypse__Northwest_Mid_air__ex__Northwest_Scaffold_2_West_2.into_usize() + 1,
-            },
-            actions: Range {
-                start: 0, end: 0,
-            },
-        },
-        SpotId::Glacier__Apocalypse__Northwest_Scaffold_2_West => Spot {
-            id: SpotId::Glacier__Apocalypse__Northwest_Scaffold_2_West,
-            locations: Range {
-                start: 0, end: 0,
-            },
-            exits: Range {
-                start: 0, end: 0,
-            },
-            actions: Range {
-                start: 0, end: 0,
-            },
-        },
-        SpotId::Glacier__Apocalypse__Northwest_Switch => Spot {
-            id: SpotId::Glacier__Apocalypse__Northwest_Switch,
-            locations: Range {
-                start: 0, end: 0,
-            },
-            exits: Range {
-                start: 0, end: 0,
-            },
-            actions: Range {
-                start: 0, end: 0,
-            },
-        },
-        SpotId::Glacier__Apocalypse__Center_Scaffold_West => Spot {
-            id: SpotId::Glacier__Apocalypse__Center_Scaffold_West,
-            locations: Range {
-                start: LocationId::Glacier__Apocalypse__Center_Scaffold_West__Boss_Fight.into_usize(),
-                end: LocationId::Glacier__Apocalypse__Center_Scaffold_West__Fill_It_Up.into_usize() + 1,
-            },
-            exits: Range {
-                start: 0, end: 0,
-            },
-            actions: Range {
-                start: 0, end: 0,
-            },
-        },
-        SpotId::Glacier__Apocalypse__Southwest_Switch => Spot {
-            id: SpotId::Glacier__Apocalypse__Southwest_Switch,
-            locations: Range {
-                start: 0, end: 0,
-            },
-            exits: Range {
-                start: 0, end: 0,
-            },
-            actions: Range {
-                start: 0, end: 0,
-            },
-        },
-        SpotId::Glacier__Apocalypse__Southwest_Capsule => Spot {
-            id: SpotId::Glacier__Apocalypse__Southwest_Capsule,
-            locations: Range {
-                start: 0, end: 0,
-            },
-            exits: Range {
-                start: ExitId::Glacier__Apocalypse__Southwest_Capsule__ex__West_1.into_usize(),
-                end: ExitId::Glacier__Apocalypse__Southwest_Capsule__ex__West_2.into_usize() + 1,
-            },
-            actions: Range {
-                start: 0, end: 0,
-            },
-        },
-        SpotId::Glacier__Apocalypse__Southwest_Corner => Spot {
-            id: SpotId::Glacier__Apocalypse__Southwest_Corner,
-            locations: Range {
-                start: 0, end: 0,
-            },
-            exits: Range {
-                start: 0, end: 0,
-            },
-            actions: Range {
-                start: 0, end: 0,
-            },
-        },
-        SpotId::Glacier__Apocalypse__Bomb_Northwest => Spot {
-            id: SpotId::Glacier__Apocalypse__Bomb_Northwest,
-            locations: Range {
-                start: 0, end: 0,
-            },
-            exits: Range {
-                start: 0, end: 0,
-            },
-            actions: Range {
-                start: 0, end: 0,
-            },
-        },
-        SpotId::Glacier__Apocalypse__Bomb_East => Spot {
-            id: SpotId::Glacier__Apocalypse__Bomb_East,
-            locations: Range {
-                start: 0, end: 0,
-            },
-            exits: Range {
-                start: 0, end: 0,
-            },
-            actions: Range {
-                start: 0, end: 0,
-            },
-        },
-        SpotId::Glacier__Apocalypse__Bomb => Spot {
-            id: SpotId::Glacier__Apocalypse__Bomb,
-            locations: Range {
-                start: 0, end: 0,
-            },
-            exits: Range {
-                start: 0, end: 0,
+                start: ExitId::Glacier__Apocalypse_Entry__West_15_Upper__ex__Annuna__Apocalypse_Hallway__Upper_East_1.into_usize(),
+                end: ExitId::Glacier__Apocalypse_Entry__West_15_Upper__ex__Annuna__Apocalypse_Hallway__Upper_East_1.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,

@@ -687,6 +687,47 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
         ([false], SpotId::Amagi__West_Lake__West_Shore, SpotId::Amagi__West_Lake__West_Bank) => {
             1754
         }
+        ([false], SpotId::Annuna__Apocalypse__Bomb, SpotId::Annuna__Apocalypse__Bomb_East) => 877,
+        (
+            [false],
+            SpotId::Annuna__Apocalypse__Bomb_East,
+            SpotId::Annuna__Apocalypse__Southwest_Capsule,
+        ) => 1228,
+        (
+            [false],
+            SpotId::Annuna__Apocalypse__Bomb_Northwest,
+            SpotId::Annuna__Apocalypse__Southwest_Capsule,
+        ) => 1929,
+        (
+            [false],
+            SpotId::Annuna__Apocalypse__Northwest_Scaffold_2_West,
+            SpotId::Annuna__Apocalypse__Center_Scaffold_West,
+        ) => 1403,
+        (
+            [false],
+            SpotId::Annuna__Apocalypse__Northwest_Scaffold_2_West,
+            SpotId::Annuna__Apocalypse__Northwest_Switch,
+        ) => 877,
+        (
+            [false],
+            SpotId::Annuna__Apocalypse__Northwest_Switch,
+            SpotId::Annuna__Apocalypse__Center_Scaffold_West,
+        ) => 526,
+        (
+            [false],
+            SpotId::Annuna__Apocalypse__Southwest_Switch,
+            SpotId::Annuna__Apocalypse__Southwest_Capsule,
+        ) => 350,
+        (
+            [false],
+            SpotId::Annuna__Apocalypse__West,
+            SpotId::Annuna__Apocalypse__Southwest_Capsule,
+        ) => 877,
+        (
+            [false],
+            SpotId::Annuna__Apocalypse__West,
+            SpotId::Annuna__Apocalypse__Southwest_Switch,
+        ) => 600,
         ([false], SpotId::Annuna__Center_Save__East, SpotId::Annuna__Center_Save__Save_Point) => {
             1578
         }
@@ -1239,6 +1280,14 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
             SpotId::Annuna__Factory_Entrance__West,
             SpotId::Annuna__Factory_Entrance__Save_Point,
         ) => 1578,
+        ([false], SpotId::Annuna__Final_Save__East, SpotId::Annuna__Final_Save__Save_Point) => 1578,
+        ([false], SpotId::Annuna__Final_Save__Pillar, SpotId::Annuna__Final_Save__Lower_West) => {
+            1052
+        }
+        ([false], SpotId::Annuna__Final_Save__Pillar, SpotId::Annuna__Final_Save__Save_Point) => {
+            526
+        }
+        ([false], SpotId::Annuna__Final_Save__Save_Point, SpotId::Annuna__Final_Save__East) => 1578,
         (
             [false],
             SpotId::Annuna__Lower_Hallway__Dais_Left,
@@ -5773,47 +5822,6 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
             SpotId::Glacier__Apocalypse_Entry__West_15_Upper,
             SpotId::Glacier__Apocalypse_Entry__Lowest_Stair,
         ) => 526,
-        ([false], SpotId::Glacier__Apocalypse__Bomb, SpotId::Glacier__Apocalypse__Bomb_East) => 877,
-        (
-            [false],
-            SpotId::Glacier__Apocalypse__Bomb_East,
-            SpotId::Glacier__Apocalypse__Southwest_Capsule,
-        ) => 1228,
-        (
-            [false],
-            SpotId::Glacier__Apocalypse__Bomb_Northwest,
-            SpotId::Glacier__Apocalypse__Southwest_Capsule,
-        ) => 1929,
-        (
-            [false],
-            SpotId::Glacier__Apocalypse__Northwest_Scaffold_2_West,
-            SpotId::Glacier__Apocalypse__Center_Scaffold_West,
-        ) => 1403,
-        (
-            [false],
-            SpotId::Glacier__Apocalypse__Northwest_Scaffold_2_West,
-            SpotId::Glacier__Apocalypse__Northwest_Switch,
-        ) => 877,
-        (
-            [false],
-            SpotId::Glacier__Apocalypse__Northwest_Switch,
-            SpotId::Glacier__Apocalypse__Center_Scaffold_West,
-        ) => 526,
-        (
-            [false],
-            SpotId::Glacier__Apocalypse__Southwest_Switch,
-            SpotId::Glacier__Apocalypse__Southwest_Capsule,
-        ) => 350,
-        (
-            [false],
-            SpotId::Glacier__Apocalypse__West,
-            SpotId::Glacier__Apocalypse__Southwest_Capsule,
-        ) => 877,
-        (
-            [false],
-            SpotId::Glacier__Apocalypse__West,
-            SpotId::Glacier__Apocalypse__Southwest_Switch,
-        ) => 600,
         // [2.105263, 2.105263]
         (
             [false],
@@ -5934,18 +5942,6 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
             SpotId::Glacier__Dock_Outside__Entry,
             SpotId::Glacier__Dock_Outside__Do_Not_Enter,
         ) => 5000,
-        ([false], SpotId::Glacier__Final_Save__East, SpotId::Glacier__Final_Save__Save_Point) => {
-            1578
-        }
-        ([false], SpotId::Glacier__Final_Save__Pillar, SpotId::Glacier__Final_Save__Lower_West) => {
-            1052
-        }
-        ([false], SpotId::Glacier__Final_Save__Pillar, SpotId::Glacier__Final_Save__Save_Point) => {
-            526
-        }
-        ([false], SpotId::Glacier__Final_Save__Save_Point, SpotId::Glacier__Final_Save__East) => {
-            1578
-        }
         (
             [false],
             SpotId::Glacier__Grid_31_9_12__East_10,
@@ -13552,6 +13548,47 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
             1754
         }
         ([true], SpotId::Amagi__West_Lake__West_Shore, SpotId::Amagi__West_Lake__West_Bank) => 1754,
+        ([true], SpotId::Annuna__Apocalypse__Bomb, SpotId::Annuna__Apocalypse__Bomb_East) => 877,
+        (
+            [true],
+            SpotId::Annuna__Apocalypse__Bomb_East,
+            SpotId::Annuna__Apocalypse__Southwest_Capsule,
+        ) => 1228,
+        (
+            [true],
+            SpotId::Annuna__Apocalypse__Bomb_Northwest,
+            SpotId::Annuna__Apocalypse__Southwest_Capsule,
+        ) => 1929,
+        (
+            [true],
+            SpotId::Annuna__Apocalypse__Northwest_Scaffold_2_West,
+            SpotId::Annuna__Apocalypse__Center_Scaffold_West,
+        ) => 1403,
+        (
+            [true],
+            SpotId::Annuna__Apocalypse__Northwest_Scaffold_2_West,
+            SpotId::Annuna__Apocalypse__Northwest_Switch,
+        ) => 877,
+        (
+            [true],
+            SpotId::Annuna__Apocalypse__Northwest_Switch,
+            SpotId::Annuna__Apocalypse__Center_Scaffold_West,
+        ) => 526,
+        (
+            [true],
+            SpotId::Annuna__Apocalypse__Southwest_Switch,
+            SpotId::Annuna__Apocalypse__Southwest_Capsule,
+        ) => 350,
+        (
+            [true],
+            SpotId::Annuna__Apocalypse__West,
+            SpotId::Annuna__Apocalypse__Southwest_Capsule,
+        ) => 877,
+        (
+            [true],
+            SpotId::Annuna__Apocalypse__West,
+            SpotId::Annuna__Apocalypse__Southwest_Switch,
+        ) => 600,
         ([true], SpotId::Annuna__Center_Save__East, SpotId::Annuna__Center_Save__Save_Point) => {
             1578
         }
@@ -14104,6 +14141,12 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
             SpotId::Annuna__Factory_Entrance__West,
             SpotId::Annuna__Factory_Entrance__Save_Point,
         ) => 1578,
+        ([true], SpotId::Annuna__Final_Save__East, SpotId::Annuna__Final_Save__Save_Point) => 1578,
+        ([true], SpotId::Annuna__Final_Save__Pillar, SpotId::Annuna__Final_Save__Lower_West) => {
+            1052
+        }
+        ([true], SpotId::Annuna__Final_Save__Pillar, SpotId::Annuna__Final_Save__Save_Point) => 526,
+        ([true], SpotId::Annuna__Final_Save__Save_Point, SpotId::Annuna__Final_Save__East) => 1578,
         (
             [true],
             SpotId::Annuna__Lower_Hallway__Dais_Left,
@@ -18444,47 +18487,6 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
             SpotId::Glacier__Apocalypse_Entry__West_15_Upper,
             SpotId::Glacier__Apocalypse_Entry__Lowest_Stair,
         ) => 526,
-        ([true], SpotId::Glacier__Apocalypse__Bomb, SpotId::Glacier__Apocalypse__Bomb_East) => 877,
-        (
-            [true],
-            SpotId::Glacier__Apocalypse__Bomb_East,
-            SpotId::Glacier__Apocalypse__Southwest_Capsule,
-        ) => 1228,
-        (
-            [true],
-            SpotId::Glacier__Apocalypse__Bomb_Northwest,
-            SpotId::Glacier__Apocalypse__Southwest_Capsule,
-        ) => 1929,
-        (
-            [true],
-            SpotId::Glacier__Apocalypse__Northwest_Scaffold_2_West,
-            SpotId::Glacier__Apocalypse__Center_Scaffold_West,
-        ) => 1403,
-        (
-            [true],
-            SpotId::Glacier__Apocalypse__Northwest_Scaffold_2_West,
-            SpotId::Glacier__Apocalypse__Northwest_Switch,
-        ) => 877,
-        (
-            [true],
-            SpotId::Glacier__Apocalypse__Northwest_Switch,
-            SpotId::Glacier__Apocalypse__Center_Scaffold_West,
-        ) => 526,
-        (
-            [true],
-            SpotId::Glacier__Apocalypse__Southwest_Switch,
-            SpotId::Glacier__Apocalypse__Southwest_Capsule,
-        ) => 350,
-        (
-            [true],
-            SpotId::Glacier__Apocalypse__West,
-            SpotId::Glacier__Apocalypse__Southwest_Capsule,
-        ) => 877,
-        (
-            [true],
-            SpotId::Glacier__Apocalypse__West,
-            SpotId::Glacier__Apocalypse__Southwest_Switch,
-        ) => 600,
         // [2.105263, 2.105263]
         (
             [true],
@@ -18605,18 +18607,6 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
             SpotId::Glacier__Dock_Outside__Entry,
             SpotId::Glacier__Dock_Outside__Do_Not_Enter,
         ) => 5000,
-        ([true], SpotId::Glacier__Final_Save__East, SpotId::Glacier__Final_Save__Save_Point) => {
-            1578
-        }
-        ([true], SpotId::Glacier__Final_Save__Pillar, SpotId::Glacier__Final_Save__Lower_West) => {
-            1052
-        }
-        ([true], SpotId::Glacier__Final_Save__Pillar, SpotId::Glacier__Final_Save__Save_Point) => {
-            526
-        }
-        ([true], SpotId::Glacier__Final_Save__Save_Point, SpotId::Glacier__Final_Save__East) => {
-            1578
-        }
         ([true], SpotId::Glacier__Grid_31_9_12__East_10, SpotId::Glacier__Grid_31_9_12__Midair) => {
             3157
         }
@@ -26573,6 +26563,36 @@ pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
         (SpotId::Annuna__West_Climb__East_19, SpotId::Annuna__West_Climb__Platform_2) => true,
         (SpotId::Annuna__West_Climb__East_19, SpotId::Annuna__West_Climb__East_20) => true,
         (SpotId::Annuna__West_Climb__East_19, SpotId::Annuna__West_Climb__Platform_1) => true,
+        (SpotId::Annuna__Final_Save__Pillar, SpotId::Annuna__Final_Save__Save_Point) => true,
+        (SpotId::Annuna__Final_Save__Pillar, SpotId::Annuna__Final_Save__Lower_West) => true,
+        (SpotId::Annuna__Final_Save__Save_Point, SpotId::Annuna__Final_Save__East) => true,
+        (SpotId::Annuna__Final_Save__East, SpotId::Annuna__Final_Save__Save_Point) => true,
+        (SpotId::Annuna__Apocalypse__West, SpotId::Annuna__Apocalypse__Southwest_Switch) => true,
+        (SpotId::Annuna__Apocalypse__West, SpotId::Annuna__Apocalypse__Southwest_Capsule) => true,
+        (
+            SpotId::Annuna__Apocalypse__Northwest_Scaffold_2_West,
+            SpotId::Annuna__Apocalypse__Northwest_Switch,
+        ) => true,
+        (
+            SpotId::Annuna__Apocalypse__Northwest_Scaffold_2_West,
+            SpotId::Annuna__Apocalypse__Center_Scaffold_West,
+        ) => true,
+        (
+            SpotId::Annuna__Apocalypse__Northwest_Switch,
+            SpotId::Annuna__Apocalypse__Center_Scaffold_West,
+        ) => true,
+        (
+            SpotId::Annuna__Apocalypse__Southwest_Switch,
+            SpotId::Annuna__Apocalypse__Southwest_Capsule,
+        ) => true,
+        (
+            SpotId::Annuna__Apocalypse__Bomb_Northwest,
+            SpotId::Annuna__Apocalypse__Southwest_Capsule,
+        ) => true,
+        (SpotId::Annuna__Apocalypse__Bomb_East, SpotId::Annuna__Apocalypse__Southwest_Capsule) => {
+            true
+        }
+        (SpotId::Annuna__Apocalypse__Bomb, SpotId::Annuna__Apocalypse__Bomb_East) => true,
         (SpotId::Antarctica__West__Helipad, SpotId::Antarctica__West__Shed_Entry) => true,
         (SpotId::Antarctica__West__Helipad, SpotId::Antarctica__West__Boxes) => true,
         (SpotId::Antarctica__West__Boxes, SpotId::Antarctica__West__Helipad) => true,
@@ -29087,37 +29107,6 @@ pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
             SpotId::Glacier__Apocalypse_Entry__West_15_Upper,
             SpotId::Glacier__Apocalypse_Entry__Lowest_Stair,
         ) => true,
-        (SpotId::Glacier__Final_Save__Pillar, SpotId::Glacier__Final_Save__Save_Point) => true,
-        (SpotId::Glacier__Final_Save__Pillar, SpotId::Glacier__Final_Save__Lower_West) => true,
-        (SpotId::Glacier__Final_Save__Save_Point, SpotId::Glacier__Final_Save__East) => true,
-        (SpotId::Glacier__Final_Save__East, SpotId::Glacier__Final_Save__Save_Point) => true,
-        (SpotId::Glacier__Apocalypse__West, SpotId::Glacier__Apocalypse__Southwest_Switch) => true,
-        (SpotId::Glacier__Apocalypse__West, SpotId::Glacier__Apocalypse__Southwest_Capsule) => true,
-        (
-            SpotId::Glacier__Apocalypse__Northwest_Scaffold_2_West,
-            SpotId::Glacier__Apocalypse__Northwest_Switch,
-        ) => true,
-        (
-            SpotId::Glacier__Apocalypse__Northwest_Scaffold_2_West,
-            SpotId::Glacier__Apocalypse__Center_Scaffold_West,
-        ) => true,
-        (
-            SpotId::Glacier__Apocalypse__Northwest_Switch,
-            SpotId::Glacier__Apocalypse__Center_Scaffold_West,
-        ) => true,
-        (
-            SpotId::Glacier__Apocalypse__Southwest_Switch,
-            SpotId::Glacier__Apocalypse__Southwest_Capsule,
-        ) => true,
-        (
-            SpotId::Glacier__Apocalypse__Bomb_Northwest,
-            SpotId::Glacier__Apocalypse__Southwest_Capsule,
-        ) => true,
-        (
-            SpotId::Glacier__Apocalypse__Bomb_East,
-            SpotId::Glacier__Apocalypse__Southwest_Capsule,
-        ) => true,
-        (SpotId::Glacier__Apocalypse__Bomb, SpotId::Glacier__Apocalypse__Bomb_East) => true,
         (SpotId::Interior__Dock_Elevator__Elevator, SpotId::Interior__Dock_Elevator__Connector) => {
             true
         }
@@ -34910,6 +34899,156 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             1000,
         ),
         (
+            SpotId::Annuna__Apocalypse_Hallway__Center_Pillar,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Apocalypse_Hallway__East_Pillar,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Apocalypse_Hallway__Lower_East,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Apocalypse_Hallway__Upper_East,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Apocalypse_Hallway__West,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Apocalypse__Bomb,
+            SpotId::Annuna__Apocalypse__Bomb_East,
+            877,
+        ),
+        (
+            SpotId::Annuna__Apocalypse__Bomb,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Apocalypse__Bomb_East,
+            SpotId::Annuna__Apocalypse__Southwest_Capsule,
+            1228,
+        ),
+        (
+            SpotId::Annuna__Apocalypse__Bomb_East,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Apocalypse__Bomb_Northwest,
+            SpotId::Annuna__Apocalypse__Southwest_Capsule,
+            1929,
+        ),
+        (
+            SpotId::Annuna__Apocalypse__Bomb_Northwest,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Apocalypse__Center_Scaffold_West,
+            SpotId::Annuna__Apocalypse__Bomb_East,
+            15000,
+        ),
+        (
+            SpotId::Annuna__Apocalypse__Center_Scaffold_West,
+            SpotId::Annuna__Apocalypse__Bomb_Northwest,
+            28000,
+        ),
+        (
+            SpotId::Annuna__Apocalypse__Center_Scaffold_West,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Apocalypse__Northwest_Mid_air,
+            SpotId::Annuna__Apocalypse__Northwest_Scaffold_2_West,
+            350,
+        ),
+        (
+            SpotId::Annuna__Apocalypse__Northwest_Mid_air,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Apocalypse__Northwest_Scaffold_2_West,
+            SpotId::Annuna__Apocalypse__Center_Scaffold_West,
+            1403,
+        ),
+        (
+            SpotId::Annuna__Apocalypse__Northwest_Scaffold_2_West,
+            SpotId::Annuna__Apocalypse__Northwest_Switch,
+            877,
+        ),
+        (
+            SpotId::Annuna__Apocalypse__Northwest_Scaffold_2_West,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Apocalypse__Northwest_Switch,
+            SpotId::Annuna__Apocalypse__Center_Scaffold_West,
+            526,
+        ),
+        (
+            SpotId::Annuna__Apocalypse__Northwest_Switch,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Apocalypse__Southwest_Capsule,
+            SpotId::Annuna__Apocalypse__West,
+            1200,
+        ),
+        (
+            SpotId::Annuna__Apocalypse__Southwest_Capsule,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Apocalypse__Southwest_Corner,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Apocalypse__Southwest_Switch,
+            SpotId::Annuna__Apocalypse__Southwest_Capsule,
+            350,
+        ),
+        (
+            SpotId::Annuna__Apocalypse__Southwest_Switch,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Apocalypse__West,
+            SpotId::Annuna__Apocalypse__Southwest_Capsule,
+            877,
+        ),
+        (
+            SpotId::Annuna__Apocalypse__West,
+            SpotId::Annuna__Apocalypse__Southwest_Switch,
+            600,
+        ),
+        (
+            SpotId::Annuna__Apocalypse__West,
+            SpotId::Annuna__Final_Save__East,
+            1350,
+        ),
+        (
+            SpotId::Annuna__Apocalypse__West,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
             SpotId::Annuna__Center_Save__East,
             SpotId::Annuna__Center_Save__Save_Point,
             1578,
@@ -36235,6 +36374,96 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             1000,
         ),
         (
+            SpotId::Annuna__Final_Save__East,
+            SpotId::Annuna__Apocalypse__West,
+            1350,
+        ),
+        (
+            SpotId::Annuna__Final_Save__East,
+            SpotId::Annuna__Final_Save__Save_Point,
+            1578,
+        ),
+        (
+            SpotId::Annuna__Final_Save__East,
+            SpotId::Annuna__Final_Save__Upper_West,
+            2250,
+        ),
+        (
+            SpotId::Annuna__Final_Save__East,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Final_Save__Lower_West,
+            SpotId::Annuna__Final_Save__Pillar,
+            1052,
+        ),
+        (
+            SpotId::Annuna__Final_Save__Lower_West,
+            SpotId::Annuna__Seals__East_17_Lower,
+            1350,
+        ),
+        (
+            SpotId::Annuna__Final_Save__Lower_West,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Final_Save__Pillar,
+            SpotId::Annuna__Final_Save__Lower_West,
+            1052,
+        ),
+        (
+            SpotId::Annuna__Final_Save__Pillar,
+            SpotId::Annuna__Final_Save__Save_Point,
+            526,
+        ),
+        (
+            SpotId::Annuna__Final_Save__Pillar,
+            SpotId::Annuna__Final_Save__Upper_West,
+            1052,
+        ),
+        (
+            SpotId::Annuna__Final_Save__Pillar,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Final_Save__Save_Point,
+            SpotId::Annuna__Apocalypse__Northwest_Mid_air,
+            3982,
+        ),
+        (
+            SpotId::Annuna__Final_Save__Save_Point,
+            SpotId::Annuna__Final_Save__East,
+            1578,
+        ),
+        (
+            SpotId::Annuna__Final_Save__Save_Point,
+            SpotId::Annuna__Final_Save__Pillar,
+            600,
+        ),
+        (
+            SpotId::Annuna__Final_Save__Save_Point,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Final_Save__Upper_West,
+            SpotId::Annuna__Apocalypse__Northwest_Mid_air,
+            4350,
+        ),
+        (
+            SpotId::Annuna__Final_Save__Upper_West,
+            SpotId::Annuna__Seals__East_17_Upper,
+            1350,
+        ),
+        (
+            SpotId::Annuna__Final_Save__Upper_West,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
             SpotId::Annuna__Lower_Hallway__Dais_Left,
             SpotId::Annuna__Lower_Hallway__Dais_Right,
             1052,
@@ -36501,6 +36730,51 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Annuna__Mirror_Match__West_Gap,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Seals__Breakable_Rock,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Seals__East_15,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Seals__East_17_Lower,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Seals__East_17_Upper,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Seals__Lower_Ledge,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Seals__Lower_Seal,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Seals__Middle_Ledge,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Seals__Upper_Ledge,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Seals__Upper_Seal,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -48621,18 +48895,23 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Glacier__Apocalypse_Entry__West_15_Lower,
+            SpotId::Annuna__Apocalypse_Hallway__Lower_East,
+            1350,
+        ),
+        (
+            SpotId::Glacier__Apocalypse_Entry__West_15_Lower,
             SpotId::Glacier__Apocalypse_Entry__Lowest_Stair,
             600,
         ),
         (
             SpotId::Glacier__Apocalypse_Entry__West_15_Lower,
-            SpotId::Glacier__Apocalypse_Hallway__Lower_East,
-            1350,
-        ),
-        (
-            SpotId::Glacier__Apocalypse_Entry__West_15_Lower,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
+        ),
+        (
+            SpotId::Glacier__Apocalypse_Entry__West_15_Upper,
+            SpotId::Annuna__Apocalypse_Hallway__Upper_East,
+            1350,
         ),
         (
             SpotId::Glacier__Apocalypse_Entry__West_15_Upper,
@@ -48641,161 +48920,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Glacier__Apocalypse_Entry__West_15_Upper,
-            SpotId::Glacier__Apocalypse_Hallway__Upper_East,
-            1350,
-        ),
-        (
-            SpotId::Glacier__Apocalypse_Entry__West_15_Upper,
-            SpotId::Menu__Upgrade_Menu__Physiology,
-            1000,
-        ),
-        (
-            SpotId::Glacier__Apocalypse_Hallway__Center_Pillar,
-            SpotId::Menu__Upgrade_Menu__Physiology,
-            1000,
-        ),
-        (
-            SpotId::Glacier__Apocalypse_Hallway__East_Pillar,
-            SpotId::Menu__Upgrade_Menu__Physiology,
-            1000,
-        ),
-        (
-            SpotId::Glacier__Apocalypse_Hallway__Lower_East,
-            SpotId::Menu__Upgrade_Menu__Physiology,
-            1000,
-        ),
-        (
-            SpotId::Glacier__Apocalypse_Hallway__Upper_East,
-            SpotId::Menu__Upgrade_Menu__Physiology,
-            1000,
-        ),
-        (
-            SpotId::Glacier__Apocalypse_Hallway__West,
-            SpotId::Menu__Upgrade_Menu__Physiology,
-            1000,
-        ),
-        (
-            SpotId::Glacier__Apocalypse__Bomb,
-            SpotId::Glacier__Apocalypse__Bomb_East,
-            877,
-        ),
-        (
-            SpotId::Glacier__Apocalypse__Bomb,
-            SpotId::Menu__Upgrade_Menu__Physiology,
-            1000,
-        ),
-        (
-            SpotId::Glacier__Apocalypse__Bomb_East,
-            SpotId::Glacier__Apocalypse__Southwest_Capsule,
-            1228,
-        ),
-        (
-            SpotId::Glacier__Apocalypse__Bomb_East,
-            SpotId::Menu__Upgrade_Menu__Physiology,
-            1000,
-        ),
-        (
-            SpotId::Glacier__Apocalypse__Bomb_Northwest,
-            SpotId::Glacier__Apocalypse__Southwest_Capsule,
-            1929,
-        ),
-        (
-            SpotId::Glacier__Apocalypse__Bomb_Northwest,
-            SpotId::Menu__Upgrade_Menu__Physiology,
-            1000,
-        ),
-        (
-            SpotId::Glacier__Apocalypse__Center_Scaffold_West,
-            SpotId::Glacier__Apocalypse__Bomb_East,
-            15000,
-        ),
-        (
-            SpotId::Glacier__Apocalypse__Center_Scaffold_West,
-            SpotId::Glacier__Apocalypse__Bomb_Northwest,
-            28000,
-        ),
-        (
-            SpotId::Glacier__Apocalypse__Center_Scaffold_West,
-            SpotId::Menu__Upgrade_Menu__Physiology,
-            1000,
-        ),
-        (
-            SpotId::Glacier__Apocalypse__Northwest_Mid_air,
-            SpotId::Glacier__Apocalypse__Northwest_Scaffold_2_West,
-            350,
-        ),
-        (
-            SpotId::Glacier__Apocalypse__Northwest_Mid_air,
-            SpotId::Menu__Upgrade_Menu__Physiology,
-            1000,
-        ),
-        (
-            SpotId::Glacier__Apocalypse__Northwest_Scaffold_2_West,
-            SpotId::Glacier__Apocalypse__Center_Scaffold_West,
-            1403,
-        ),
-        (
-            SpotId::Glacier__Apocalypse__Northwest_Scaffold_2_West,
-            SpotId::Glacier__Apocalypse__Northwest_Switch,
-            877,
-        ),
-        (
-            SpotId::Glacier__Apocalypse__Northwest_Scaffold_2_West,
-            SpotId::Menu__Upgrade_Menu__Physiology,
-            1000,
-        ),
-        (
-            SpotId::Glacier__Apocalypse__Northwest_Switch,
-            SpotId::Glacier__Apocalypse__Center_Scaffold_West,
-            526,
-        ),
-        (
-            SpotId::Glacier__Apocalypse__Northwest_Switch,
-            SpotId::Menu__Upgrade_Menu__Physiology,
-            1000,
-        ),
-        (
-            SpotId::Glacier__Apocalypse__Southwest_Capsule,
-            SpotId::Glacier__Apocalypse__West,
-            1200,
-        ),
-        (
-            SpotId::Glacier__Apocalypse__Southwest_Capsule,
-            SpotId::Menu__Upgrade_Menu__Physiology,
-            1000,
-        ),
-        (
-            SpotId::Glacier__Apocalypse__Southwest_Corner,
-            SpotId::Menu__Upgrade_Menu__Physiology,
-            1000,
-        ),
-        (
-            SpotId::Glacier__Apocalypse__Southwest_Switch,
-            SpotId::Glacier__Apocalypse__Southwest_Capsule,
-            350,
-        ),
-        (
-            SpotId::Glacier__Apocalypse__Southwest_Switch,
-            SpotId::Menu__Upgrade_Menu__Physiology,
-            1000,
-        ),
-        (
-            SpotId::Glacier__Apocalypse__West,
-            SpotId::Glacier__Apocalypse__Southwest_Capsule,
-            877,
-        ),
-        (
-            SpotId::Glacier__Apocalypse__West,
-            SpotId::Glacier__Apocalypse__Southwest_Switch,
-            600,
-        ),
-        (
-            SpotId::Glacier__Apocalypse__West,
-            SpotId::Glacier__Final_Save__East,
-            1350,
-        ),
-        (
-            SpotId::Glacier__Apocalypse__West,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -49081,96 +49205,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Glacier__Dock_Outside__Entry,
-            SpotId::Menu__Upgrade_Menu__Physiology,
-            1000,
-        ),
-        (
-            SpotId::Glacier__Final_Save__East,
-            SpotId::Glacier__Apocalypse__West,
-            1350,
-        ),
-        (
-            SpotId::Glacier__Final_Save__East,
-            SpotId::Glacier__Final_Save__Save_Point,
-            1578,
-        ),
-        (
-            SpotId::Glacier__Final_Save__East,
-            SpotId::Glacier__Final_Save__Upper_West,
-            2250,
-        ),
-        (
-            SpotId::Glacier__Final_Save__East,
-            SpotId::Menu__Upgrade_Menu__Physiology,
-            1000,
-        ),
-        (
-            SpotId::Glacier__Final_Save__Lower_West,
-            SpotId::Glacier__Final_Save__Pillar,
-            1052,
-        ),
-        (
-            SpotId::Glacier__Final_Save__Lower_West,
-            SpotId::Glacier__Seals__East_17_Lower,
-            1350,
-        ),
-        (
-            SpotId::Glacier__Final_Save__Lower_West,
-            SpotId::Menu__Upgrade_Menu__Physiology,
-            1000,
-        ),
-        (
-            SpotId::Glacier__Final_Save__Pillar,
-            SpotId::Glacier__Final_Save__Lower_West,
-            1052,
-        ),
-        (
-            SpotId::Glacier__Final_Save__Pillar,
-            SpotId::Glacier__Final_Save__Save_Point,
-            526,
-        ),
-        (
-            SpotId::Glacier__Final_Save__Pillar,
-            SpotId::Glacier__Final_Save__Upper_West,
-            1052,
-        ),
-        (
-            SpotId::Glacier__Final_Save__Pillar,
-            SpotId::Menu__Upgrade_Menu__Physiology,
-            1000,
-        ),
-        (
-            SpotId::Glacier__Final_Save__Save_Point,
-            SpotId::Glacier__Apocalypse__Northwest_Mid_air,
-            3982,
-        ),
-        (
-            SpotId::Glacier__Final_Save__Save_Point,
-            SpotId::Glacier__Final_Save__East,
-            1578,
-        ),
-        (
-            SpotId::Glacier__Final_Save__Save_Point,
-            SpotId::Glacier__Final_Save__Pillar,
-            600,
-        ),
-        (
-            SpotId::Glacier__Final_Save__Save_Point,
-            SpotId::Menu__Upgrade_Menu__Physiology,
-            1000,
-        ),
-        (
-            SpotId::Glacier__Final_Save__Upper_West,
-            SpotId::Glacier__Apocalypse__Northwest_Mid_air,
-            4350,
-        ),
-        (
-            SpotId::Glacier__Final_Save__Upper_West,
-            SpotId::Glacier__Seals__East_17_Upper,
-            1350,
-        ),
-        (
-            SpotId::Glacier__Final_Save__Upper_West,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -50271,51 +50305,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Glacier__Revival__West_8,
-            SpotId::Menu__Upgrade_Menu__Physiology,
-            1000,
-        ),
-        (
-            SpotId::Glacier__Seals__Breakable_Rock,
-            SpotId::Menu__Upgrade_Menu__Physiology,
-            1000,
-        ),
-        (
-            SpotId::Glacier__Seals__East_15,
-            SpotId::Menu__Upgrade_Menu__Physiology,
-            1000,
-        ),
-        (
-            SpotId::Glacier__Seals__East_17_Lower,
-            SpotId::Menu__Upgrade_Menu__Physiology,
-            1000,
-        ),
-        (
-            SpotId::Glacier__Seals__East_17_Upper,
-            SpotId::Menu__Upgrade_Menu__Physiology,
-            1000,
-        ),
-        (
-            SpotId::Glacier__Seals__Lower_Ledge,
-            SpotId::Menu__Upgrade_Menu__Physiology,
-            1000,
-        ),
-        (
-            SpotId::Glacier__Seals__Lower_Seal,
-            SpotId::Menu__Upgrade_Menu__Physiology,
-            1000,
-        ),
-        (
-            SpotId::Glacier__Seals__Middle_Ledge,
-            SpotId::Menu__Upgrade_Menu__Physiology,
-            1000,
-        ),
-        (
-            SpotId::Glacier__Seals__Upper_Ledge,
-            SpotId::Menu__Upgrade_Menu__Physiology,
-            1000,
-        ),
-        (
-            SpotId::Glacier__Seals__Upper_Seal,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -60464,6 +60453,36 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
             Some(1754)
         }
         (SpotId::Amagi__West_Lake__West_Shore, SpotId::Amagi__West_Lake__West_Bank) => Some(1754),
+        (SpotId::Annuna__Apocalypse__Bomb, SpotId::Annuna__Apocalypse__Bomb_East) => Some(877),
+        (SpotId::Annuna__Apocalypse__Bomb_East, SpotId::Annuna__Apocalypse__Southwest_Capsule) => {
+            Some(1228)
+        }
+        (
+            SpotId::Annuna__Apocalypse__Bomb_Northwest,
+            SpotId::Annuna__Apocalypse__Southwest_Capsule,
+        ) => Some(1929),
+        (
+            SpotId::Annuna__Apocalypse__Northwest_Scaffold_2_West,
+            SpotId::Annuna__Apocalypse__Center_Scaffold_West,
+        ) => Some(1403),
+        (
+            SpotId::Annuna__Apocalypse__Northwest_Scaffold_2_West,
+            SpotId::Annuna__Apocalypse__Northwest_Switch,
+        ) => Some(877),
+        (
+            SpotId::Annuna__Apocalypse__Northwest_Switch,
+            SpotId::Annuna__Apocalypse__Center_Scaffold_West,
+        ) => Some(526),
+        (
+            SpotId::Annuna__Apocalypse__Southwest_Switch,
+            SpotId::Annuna__Apocalypse__Southwest_Capsule,
+        ) => Some(350),
+        (SpotId::Annuna__Apocalypse__West, SpotId::Annuna__Apocalypse__Southwest_Capsule) => {
+            Some(877)
+        }
+        (SpotId::Annuna__Apocalypse__West, SpotId::Annuna__Apocalypse__Southwest_Switch) => {
+            Some(600)
+        }
         (SpotId::Annuna__Center_Save__East, SpotId::Annuna__Center_Save__Save_Point) => Some(1578),
         (SpotId::Annuna__Center_Save__Save_Point, SpotId::Annuna__Center_Save__East) => Some(1578),
         (SpotId::Annuna__Center_Save__Save_Point, SpotId::Annuna__Center_Save__West_Floor) => {
@@ -60872,6 +60891,10 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
         (SpotId::Annuna__Factory_Entrance__West, SpotId::Annuna__Factory_Entrance__Save_Point) => {
             Some(1578)
         }
+        (SpotId::Annuna__Final_Save__East, SpotId::Annuna__Final_Save__Save_Point) => Some(1578),
+        (SpotId::Annuna__Final_Save__Pillar, SpotId::Annuna__Final_Save__Lower_West) => Some(1052),
+        (SpotId::Annuna__Final_Save__Pillar, SpotId::Annuna__Final_Save__Save_Point) => Some(526),
+        (SpotId::Annuna__Final_Save__Save_Point, SpotId::Annuna__Final_Save__East) => Some(1578),
         (SpotId::Annuna__Lower_Hallway__Dais_Left, SpotId::Annuna__Lower_Hallway__Dais_Right) => {
             Some(1052)
         }
@@ -63937,37 +63960,6 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
             SpotId::Glacier__Apocalypse_Entry__West_15_Upper,
             SpotId::Glacier__Apocalypse_Entry__Lowest_Stair,
         ) => Some(526),
-        (SpotId::Glacier__Apocalypse__Bomb, SpotId::Glacier__Apocalypse__Bomb_East) => Some(877),
-        (
-            SpotId::Glacier__Apocalypse__Bomb_East,
-            SpotId::Glacier__Apocalypse__Southwest_Capsule,
-        ) => Some(1228),
-        (
-            SpotId::Glacier__Apocalypse__Bomb_Northwest,
-            SpotId::Glacier__Apocalypse__Southwest_Capsule,
-        ) => Some(1929),
-        (
-            SpotId::Glacier__Apocalypse__Northwest_Scaffold_2_West,
-            SpotId::Glacier__Apocalypse__Center_Scaffold_West,
-        ) => Some(1403),
-        (
-            SpotId::Glacier__Apocalypse__Northwest_Scaffold_2_West,
-            SpotId::Glacier__Apocalypse__Northwest_Switch,
-        ) => Some(877),
-        (
-            SpotId::Glacier__Apocalypse__Northwest_Switch,
-            SpotId::Glacier__Apocalypse__Center_Scaffold_West,
-        ) => Some(526),
-        (
-            SpotId::Glacier__Apocalypse__Southwest_Switch,
-            SpotId::Glacier__Apocalypse__Southwest_Capsule,
-        ) => Some(350),
-        (SpotId::Glacier__Apocalypse__West, SpotId::Glacier__Apocalypse__Southwest_Capsule) => {
-            Some(877)
-        }
-        (SpotId::Glacier__Apocalypse__West, SpotId::Glacier__Apocalypse__Southwest_Switch) => {
-            Some(600)
-        }
         (
             SpotId::Glacier__Boomerang_Antechamber__East_12,
             SpotId::Glacier__Boomerang_Antechamber__Upper_East,
@@ -64052,12 +64044,6 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
         (SpotId::Glacier__Dock_Outside__Entry, SpotId::Glacier__Dock_Outside__Do_Not_Enter) => {
             Some(5000)
         }
-        (SpotId::Glacier__Final_Save__East, SpotId::Glacier__Final_Save__Save_Point) => Some(1578),
-        (SpotId::Glacier__Final_Save__Pillar, SpotId::Glacier__Final_Save__Lower_West) => {
-            Some(1052)
-        }
-        (SpotId::Glacier__Final_Save__Pillar, SpotId::Glacier__Final_Save__Save_Point) => Some(526),
-        (SpotId::Glacier__Final_Save__Save_Point, SpotId::Glacier__Final_Save__East) => Some(1578),
         (SpotId::Glacier__Grid_31_9_12__East_10, SpotId::Glacier__Grid_31_9_12__Midair) => {
             Some(3157)
         }
@@ -69573,6 +69559,38 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
         (SpotId::Amagi__West_Lake__West_Shore, SpotId::Amagi__West_Lake__West_Bank) => {
             (Some(1754), vec![])
         }
+        (SpotId::Annuna__Apocalypse__Bomb, SpotId::Annuna__Apocalypse__Bomb_East) => {
+            (Some(877), vec![])
+        }
+        (SpotId::Annuna__Apocalypse__Bomb_East, SpotId::Annuna__Apocalypse__Southwest_Capsule) => {
+            (Some(1228), vec![])
+        }
+        (
+            SpotId::Annuna__Apocalypse__Bomb_Northwest,
+            SpotId::Annuna__Apocalypse__Southwest_Capsule,
+        ) => (Some(1929), vec![]),
+        (
+            SpotId::Annuna__Apocalypse__Northwest_Scaffold_2_West,
+            SpotId::Annuna__Apocalypse__Center_Scaffold_West,
+        ) => (Some(1403), vec![]),
+        (
+            SpotId::Annuna__Apocalypse__Northwest_Scaffold_2_West,
+            SpotId::Annuna__Apocalypse__Northwest_Switch,
+        ) => (Some(877), vec![]),
+        (
+            SpotId::Annuna__Apocalypse__Northwest_Switch,
+            SpotId::Annuna__Apocalypse__Center_Scaffold_West,
+        ) => (Some(526), vec![]),
+        (
+            SpotId::Annuna__Apocalypse__Southwest_Switch,
+            SpotId::Annuna__Apocalypse__Southwest_Capsule,
+        ) => (Some(350), vec![]),
+        (SpotId::Annuna__Apocalypse__West, SpotId::Annuna__Apocalypse__Southwest_Capsule) => {
+            (Some(877), vec![])
+        }
+        (SpotId::Annuna__Apocalypse__West, SpotId::Annuna__Apocalypse__Southwest_Switch) => {
+            (Some(600), vec![])
+        }
         (SpotId::Annuna__Center_Save__East, SpotId::Annuna__Center_Save__Save_Point) => {
             (Some(1578), vec![])
         }
@@ -69985,6 +70003,18 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
             (Some(1799), vec![])
         }
         (SpotId::Annuna__Factory_Entrance__West, SpotId::Annuna__Factory_Entrance__Save_Point) => {
+            (Some(1578), vec![])
+        }
+        (SpotId::Annuna__Final_Save__East, SpotId::Annuna__Final_Save__Save_Point) => {
+            (Some(1578), vec![])
+        }
+        (SpotId::Annuna__Final_Save__Pillar, SpotId::Annuna__Final_Save__Lower_West) => {
+            (Some(1052), vec![])
+        }
+        (SpotId::Annuna__Final_Save__Pillar, SpotId::Annuna__Final_Save__Save_Point) => {
+            (Some(526), vec![])
+        }
+        (SpotId::Annuna__Final_Save__Save_Point, SpotId::Annuna__Final_Save__East) => {
             (Some(1578), vec![])
         }
         (SpotId::Annuna__Lower_Hallway__Dais_Left, SpotId::Annuna__Lower_Hallway__Dais_Right) => {
@@ -73786,39 +73816,6 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
             SpotId::Glacier__Apocalypse_Entry__West_15_Upper,
             SpotId::Glacier__Apocalypse_Entry__Lowest_Stair,
         ) => (Some(526), vec![]),
-        (SpotId::Glacier__Apocalypse__Bomb, SpotId::Glacier__Apocalypse__Bomb_East) => {
-            (Some(877), vec![])
-        }
-        (
-            SpotId::Glacier__Apocalypse__Bomb_East,
-            SpotId::Glacier__Apocalypse__Southwest_Capsule,
-        ) => (Some(1228), vec![]),
-        (
-            SpotId::Glacier__Apocalypse__Bomb_Northwest,
-            SpotId::Glacier__Apocalypse__Southwest_Capsule,
-        ) => (Some(1929), vec![]),
-        (
-            SpotId::Glacier__Apocalypse__Northwest_Scaffold_2_West,
-            SpotId::Glacier__Apocalypse__Center_Scaffold_West,
-        ) => (Some(1403), vec![]),
-        (
-            SpotId::Glacier__Apocalypse__Northwest_Scaffold_2_West,
-            SpotId::Glacier__Apocalypse__Northwest_Switch,
-        ) => (Some(877), vec![]),
-        (
-            SpotId::Glacier__Apocalypse__Northwest_Switch,
-            SpotId::Glacier__Apocalypse__Center_Scaffold_West,
-        ) => (Some(526), vec![]),
-        (
-            SpotId::Glacier__Apocalypse__Southwest_Switch,
-            SpotId::Glacier__Apocalypse__Southwest_Capsule,
-        ) => (Some(350), vec![]),
-        (SpotId::Glacier__Apocalypse__West, SpotId::Glacier__Apocalypse__Southwest_Capsule) => {
-            (Some(877), vec![])
-        }
-        (SpotId::Glacier__Apocalypse__West, SpotId::Glacier__Apocalypse__Southwest_Switch) => {
-            (Some(600), vec![])
-        }
         (
             SpotId::Glacier__Boomerang_Antechamber__East_12,
             SpotId::Glacier__Boomerang_Antechamber__Upper_East,
@@ -73910,18 +73907,6 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
         }
         (SpotId::Glacier__Dock_Outside__Entry, SpotId::Glacier__Dock_Outside__Do_Not_Enter) => {
             (Some(5000), vec![])
-        }
-        (SpotId::Glacier__Final_Save__East, SpotId::Glacier__Final_Save__Save_Point) => {
-            (Some(1578), vec![])
-        }
-        (SpotId::Glacier__Final_Save__Pillar, SpotId::Glacier__Final_Save__Lower_West) => {
-            (Some(1052), vec![])
-        }
-        (SpotId::Glacier__Final_Save__Pillar, SpotId::Glacier__Final_Save__Save_Point) => {
-            (Some(526), vec![])
-        }
-        (SpotId::Glacier__Final_Save__Save_Point, SpotId::Glacier__Final_Save__East) => {
-            (Some(1578), vec![])
         }
         (SpotId::Glacier__Grid_31_9_12__East_10, SpotId::Glacier__Grid_31_9_12__Midair) => {
             (Some(3157), vec![])

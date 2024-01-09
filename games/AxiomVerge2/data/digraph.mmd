@@ -294,6 +294,44 @@ subgraph Annuna
     subgraph Annuna__Egg_Room[Egg Room]
         Annuna__Egg_Room__West(West);
     end
+    subgraph Annuna__Apocalypse_Hallway[Apocalypse Hallway]
+        Annuna__Apocalypse_Hallway__Lower_East(Lower East);
+        Annuna__Apocalypse_Hallway__Upper_East(Upper East);
+        Annuna__Apocalypse_Hallway__East_Pillar(East Pillar);
+        Annuna__Apocalypse_Hallway__Center_Pillar(Center Pillar);
+        Annuna__Apocalypse_Hallway__West(West);
+    end
+    subgraph Annuna__Seals[Seals]
+        Annuna__Seals__East_15(East 15);
+        Annuna__Seals__Upper_Ledge(Upper Ledge);
+        Annuna__Seals__Upper_Seal(Upper Seal);
+        Annuna__Seals__Middle_Ledge(Middle Ledge);
+        Annuna__Seals__Breakable_Rock(Breakable Rock);
+        Annuna__Seals__Lower_Seal(Lower Seal);
+        Annuna__Seals__Lower_Ledge(Lower Ledge);
+        Annuna__Seals__East_17_Upper(East 17 Upper);
+        Annuna__Seals__East_17_Lower(East 17 Lower);
+    end
+    subgraph Annuna__Final_Save[Final Save]
+        Annuna__Final_Save__Upper_West(Upper West);
+        Annuna__Final_Save__Lower_West(Lower West);
+        Annuna__Final_Save__Pillar(Pillar);
+        Annuna__Final_Save__Save_Point(Save Point);
+        Annuna__Final_Save__East(East);
+    end
+    subgraph Annuna__Apocalypse[Apocalypse]
+        Annuna__Apocalypse__West(West);
+        Annuna__Apocalypse__Northwest_Mid_air(Northwest Mid-air);
+        Annuna__Apocalypse__Northwest_Scaffold_2_West(Northwest Scaffold 2 West);
+        Annuna__Apocalypse__Northwest_Switch(Northwest Switch);
+        Annuna__Apocalypse__Center_Scaffold_West(Center Scaffold West);
+        Annuna__Apocalypse__Southwest_Switch(Southwest Switch);
+        Annuna__Apocalypse__Southwest_Capsule(Southwest Capsule);
+        Annuna__Apocalypse__Southwest_Corner(Southwest Corner);
+        Annuna__Apocalypse__Bomb_Northwest(Bomb Northwest);
+        Annuna__Apocalypse__Bomb_East(Bomb East);
+        Annuna__Apocalypse__Bomb(Bomb);
+    end
 end
 subgraph Antarctica
     subgraph Antarctica__West[West]
@@ -1191,44 +1229,6 @@ subgraph Glacier
         Glacier__Apocalypse_Entry__West_15_Lower(West 15 Lower);
         Glacier__Apocalypse_Entry__West_15_Upper(West 15 Upper);
     end
-    subgraph Glacier__Apocalypse_Hallway[Apocalypse Hallway]
-        Glacier__Apocalypse_Hallway__Lower_East(Lower East);
-        Glacier__Apocalypse_Hallway__Upper_East(Upper East);
-        Glacier__Apocalypse_Hallway__East_Pillar(East Pillar);
-        Glacier__Apocalypse_Hallway__Center_Pillar(Center Pillar);
-        Glacier__Apocalypse_Hallway__West(West);
-    end
-    subgraph Glacier__Seals[Seals]
-        Glacier__Seals__East_15(East 15);
-        Glacier__Seals__Upper_Ledge(Upper Ledge);
-        Glacier__Seals__Upper_Seal(Upper Seal);
-        Glacier__Seals__Middle_Ledge(Middle Ledge);
-        Glacier__Seals__Breakable_Rock(Breakable Rock);
-        Glacier__Seals__Lower_Seal(Lower Seal);
-        Glacier__Seals__Lower_Ledge(Lower Ledge);
-        Glacier__Seals__East_17_Upper(East 17 Upper);
-        Glacier__Seals__East_17_Lower(East 17 Lower);
-    end
-    subgraph Glacier__Final_Save[Final Save]
-        Glacier__Final_Save__Upper_West(Upper West);
-        Glacier__Final_Save__Lower_West(Lower West);
-        Glacier__Final_Save__Pillar(Pillar);
-        Glacier__Final_Save__Save_Point(Save Point);
-        Glacier__Final_Save__East(East);
-    end
-    subgraph Glacier__Apocalypse[Apocalypse]
-        Glacier__Apocalypse__West(West);
-        Glacier__Apocalypse__Northwest_Mid_air(Northwest Mid-air);
-        Glacier__Apocalypse__Northwest_Scaffold_2_West(Northwest Scaffold 2 West);
-        Glacier__Apocalypse__Northwest_Switch(Northwest Switch);
-        Glacier__Apocalypse__Center_Scaffold_West(Center Scaffold West);
-        Glacier__Apocalypse__Southwest_Switch(Southwest Switch);
-        Glacier__Apocalypse__Southwest_Capsule(Southwest Capsule);
-        Glacier__Apocalypse__Southwest_Corner(Southwest Corner);
-        Glacier__Apocalypse__Bomb_Northwest(Bomb Northwest);
-        Glacier__Apocalypse__Bomb_East(Bomb East);
-        Glacier__Apocalypse__Bomb(Bomb);
-    end
 end
 subgraph Interior
     subgraph Interior__Dock_Elevator[Dock Elevator]
@@ -1677,6 +1677,11 @@ Amagi__West_Lake__Stronghold_Top --> Amagi__West_Lake__Stronghold_Item
 Amagi__West_Lake__Surface_Wall_Left <--> Amagi__West_Lake__Surface_Wall_Right
 Amagi__West_Lake__West_15 <--> Ebih__Vertical_Interchange__East_15
 Amagi__West_Lake__West_Bank --> Amagi__West_Lake__West_Shore
+Annuna__Apocalypse__Center_Scaffold_West --> Annuna__Apocalypse__Bomb_East
+Annuna__Apocalypse__Center_Scaffold_West --> Annuna__Apocalypse__Bomb_Northwest
+Annuna__Apocalypse__Northwest_Mid_air --> Annuna__Apocalypse__Northwest_Scaffold_2_West
+Annuna__Apocalypse__Southwest_Capsule --> Annuna__Apocalypse__West
+Annuna__Apocalypse__West <--> Annuna__Final_Save__East
 Annuna__Center_Save__East <--> Annuna__Vertical_Room__West_21
 Annuna__Center_Save__Save_Point --> Annuna__Center_Save__West_Catwalk
 Annuna__Center_Save__West_Catwalk <--> Annuna__Twisty_Passages__East_Catwalk
@@ -1748,6 +1753,14 @@ Annuna__Factory_Access__Upper_Platform --> Annuna__Factory_Access__Upper_Ledge
 Annuna__Factory_Access__Upper_Platform --> Annuna__Factory_Access__West_22
 Annuna__Factory_Access__West_22 <--> Annuna__Lower_Hallway__East
 Annuna__Factory_Entrance__West <--> Annuna__Sniper_Valley__East
+Annuna__Final_Save__East --> Annuna__Final_Save__Upper_West
+Annuna__Final_Save__Lower_West --> Annuna__Final_Save__Pillar
+Annuna__Final_Save__Lower_West --> Annuna__Seals__East_17_Lower
+Annuna__Final_Save__Pillar --> Annuna__Final_Save__Upper_West
+Annuna__Final_Save__Save_Point --> Annuna__Apocalypse__Northwest_Mid_air
+Annuna__Final_Save__Save_Point --> Annuna__Final_Save__Pillar
+Annuna__Final_Save__Upper_West --> Annuna__Apocalypse__Northwest_Mid_air
+Annuna__Final_Save__Upper_West --> Annuna__Seals__East_17_Upper
 Annuna__Lower_Hallway__West <--> Annuna__Vertical_Room__East_22
 Annuna__Mirror_Match__Below_Switch <--> Annuna__Mirror_Match__Central_Pillar
 Annuna__Mirror_Match__Central_Pillar --> Annuna__Mirror_Match__Save_Point
@@ -2192,14 +2205,9 @@ Glacier__Apocalypse_Entry__Above_Grate --> Glacier__Apocalypse_Entry__Below_Grat
 Glacier__Apocalypse_Entry__Below_Grate --> Glacier__Apocalypse_Entry__Grate_Ledge
 Glacier__Apocalypse_Entry__Grate_Ledge --> Glacier__Apocalypse_Entry__Terminal
 Glacier__Apocalypse_Entry__West_10 <--> Glacier__Grid_43_10_11__East
+Glacier__Apocalypse_Entry__West_15_Lower --> Annuna__Apocalypse_Hallway__Lower_East
 Glacier__Apocalypse_Entry__West_15_Lower --> Glacier__Apocalypse_Entry__Lowest_Stair
-Glacier__Apocalypse_Entry__West_15_Lower --> Glacier__Apocalypse_Hallway__Lower_East
-Glacier__Apocalypse_Entry__West_15_Upper --> Glacier__Apocalypse_Hallway__Upper_East
-Glacier__Apocalypse__Center_Scaffold_West --> Glacier__Apocalypse__Bomb_East
-Glacier__Apocalypse__Center_Scaffold_West --> Glacier__Apocalypse__Bomb_Northwest
-Glacier__Apocalypse__Northwest_Mid_air --> Glacier__Apocalypse__Northwest_Scaffold_2_West
-Glacier__Apocalypse__Southwest_Capsule --> Glacier__Apocalypse__West
-Glacier__Apocalypse__West <--> Glacier__Final_Save__East
+Glacier__Apocalypse_Entry__West_15_Upper --> Annuna__Apocalypse_Hallway__Upper_East
 Glacier__Boomerang_Antechamber__East_12 <--> Glacier__Boomerang_Room__West
 Glacier__Boomerang_Antechamber__Upper_East <--> Glacier__Boomerang_Room__Upper_West
 Glacier__Boomerang_Antechamber__West_12 <--> Glacier__Vertical_Room__East_12
@@ -2212,14 +2220,6 @@ Glacier__Compass_Room__East <--> Glacier__Grid_43_10_11__Lower
 Glacier__Compass_Room__West <--> Glacier__The_Big_Drop__East
 Glacier__Dock_Outside__Do_Not_Enter <--> Glacier__Revival__East_9
 Glacier__Dock_Outside__Entry <--> Interior__Dock_Interior__Entry
-Glacier__Final_Save__East --> Glacier__Final_Save__Upper_West
-Glacier__Final_Save__Lower_West --> Glacier__Final_Save__Pillar
-Glacier__Final_Save__Lower_West --> Glacier__Seals__East_17_Lower
-Glacier__Final_Save__Pillar --> Glacier__Final_Save__Upper_West
-Glacier__Final_Save__Save_Point --> Glacier__Apocalypse__Northwest_Mid_air
-Glacier__Final_Save__Save_Point --> Glacier__Final_Save__Pillar
-Glacier__Final_Save__Upper_West --> Glacier__Apocalypse__Northwest_Mid_air
-Glacier__Final_Save__Upper_West --> Glacier__Seals__East_17_Upper
 Glacier__Grid_31_9_12__East_10 --> Glacier__Grid_32_7_10__West_10
 Glacier__Grid_31_9_12__East_9 <--> Glacier__Grid_32_7_10__West_9
 Glacier__Grid_32_7_10__East_8 <--> Glacier__Peak__West_8
