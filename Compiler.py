@@ -568,18 +568,21 @@ class GameLogic(object):
             tile_defs = []
             for tile, box in map_defs.items():
                 if self._validate_box(box, f'{area["fullname"]} map tile "{tile}"'):
-                    tile_defs.append((construct_id('map', area['id'].lower(), tile), box))
+                    tile_defs.append((construct_id('map', area['id'].lower(), tile), tile, box))
 
             for spot in area['spots']:
                 if 'coord' not in spot:
                     continue
                 c1, c2 = spot['coord']
                 tiles = []
-                for (tile, box) in tile_defs:
+                short_names = []
+                for (tile, tsname, box) in tile_defs:
                     if box[0] <= c1 <= box[2] and box[1] <= c2 <= box[3]:
                         tiles.append(tile)
+                        short_names.append(tsname)
                 if tiles:
                     spot['tiles'] = sorted(tiles)
+                    spot['tilenames'] = sorted(short_names)
 
 
     def process_settings(self):
@@ -1504,13 +1507,24 @@ class GameLogic(object):
     @cached_property
     def data_values(self):
         d = {c: {} for c in self.data_defaults}
+        def get_first(datamap, tilenames):
+            for tile in tilenames:
+                if tile in datamap:
+                    return datamap[tile]
+            
         for r in self.regions:
             for a in r['areas']:
                 for s in a['spots']:
                     for c, cdict in d.items():
                         if c in s.get('data', {}):
                             cdict[s['id']] = s['data'][c]
-                        elif c in a.get('data', {}):
+                            continue
+                        elif c in a.get('datamap', {}) and 'tilenames' in s:
+                            val = get_first(a['datamap'][c], s['tilenames'])
+                            if val is not None:
+                                cdict[s['id']] = val
+                                continue
+                        if c in a.get('data', {}):
                             cdict[s['id']] = a['data'][c]
                         elif c in r.get('data', {}):
                             cdict[s['id']] = r['data'][c]
