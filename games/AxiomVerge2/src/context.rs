@@ -78,6 +78,7 @@ pub mod enums {
         Breach,
         Emergence,
         Interior,
+        Map,
         Menu,
     }
     impl fmt::Display for Realm {
@@ -87,6 +88,7 @@ pub mod enums {
                 Realm::Breach => write!(f, "{}", "Breach"),
                 Realm::Emergence => write!(f, "{}", "Emergence"),
                 Realm::Interior => write!(f, "{}", "Interior"),
+                Realm::Map => write!(f, "{}", "Map"),
                 Realm::Menu => write!(f, "{}", "Menu"),
             }
         }
@@ -100,6 +102,7 @@ pub mod enums {
                 "Emergence" | "emergence" => Ok(Realm::Emergence),
                 "Interior" | "interior" => Ok(Realm::Interior),
                 "Main" | "main" => Ok(Realm::Main),
+                "Map" | "map" => Ok(Realm::Map),
                 "Menu" | "menu" => Ok(Realm::Menu),
                 _ => Err(format!("Could not recognize as a Realm: {}", s)),
             }
@@ -424,6 +427,8 @@ pub mod data {
             SpotId::Irikar_Breach__Worm_Rave__Corner => enums::Realm::Breach,
             SpotId::Irikar_Breach__Worm_Rave__East => enums::Realm::Breach,
             SpotId::Irikar_Breach__Worm_Rave__South => enums::Realm::Breach,
+            SpotId::Menu__Kiengir_Map__Giguna_Base => enums::Realm::Map,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival => enums::Realm::Map,
             SpotId::Menu__Upgrade_Menu__Combat => enums::Realm::Menu,
             SpotId::Menu__Upgrade_Menu__Drone => enums::Realm::Menu,
             SpotId::Menu__Upgrade_Menu__Infection => enums::Realm::Menu,
@@ -735,6 +740,15 @@ pub mod data {
             SpotId::Irikar__Sight_Room__Lower_Ledge => SpotId::Irikar_Breach__Save_Room__Save_Point,
             SpotId::Irikar__Sight_Room__Portal => SpotId::Irikar_Breach__Save_Room__Save_Point,
             SpotId::Irikar__Sight_Room__West_24 => SpotId::Irikar_Breach__Save_Room__Save_Point,
+            _ => SpotId::None,
+        }
+    }
+    pub fn map_spot(spot_id: SpotId) -> SpotId {
+        match spot_id {
+            SpotId::Giguna__Giguna_Base__Save_Point => SpotId::Menu__Kiengir_Map__Giguna_Base,
+            SpotId::Giguna__Giguna_Base__Staircase_Bottom => SpotId::Menu__Kiengir_Map__Giguna_Base,
+            SpotId::Giguna__Giguna_Base__Table => SpotId::Menu__Kiengir_Map__Giguna_Base,
+            SpotId::Giguna__Giguna_Base__West_16 => SpotId::Menu__Kiengir_Map__Giguna_Base,
             _ => SpotId::None,
         }
     }
@@ -6934,6 +6948,11 @@ impl context::Ctx for Context {
             AreaId::Irikar_Breach__Worm_Rave => {
                 if get_area(self.position) != area {
                     rules::action_reset_old_area__newpos(self, world, pos);
+                }
+            }
+            AreaId::Menu__Kiengir_Map => {
+                if get_area(self.position) != area {
+                    rules::action_save_last_refill_energy(self, world, pos);
                 }
             }
             AreaId::Menu__Warp_Only => {

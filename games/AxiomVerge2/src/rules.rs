@@ -103,6 +103,10 @@ pub fn access_amagi_west_lake_surface_wall(ctx: &Context, world: &graph::World) 
     // Amagi_West_Lake_Surface_Wall
     ctx.has(Item::Amagi_West_Lake_Surface_Wall)
 }
+pub fn access_amashilama(ctx: &Context, world: &graph::World) -> bool {
+    // Amashilama
+    ctx.has(Item::Amashilama)
+}
 pub fn access_annuna__east_bridge__tower_east_ledge__enter_combo__req(
     ctx: &Context,
     world: &graph::World,
@@ -1676,6 +1680,10 @@ pub fn access_irikar_royal_storage_wall(ctx: &Context, world: &graph::World) -> 
     // Irikar_Royal_Storage_Wall
     ctx.has(Item::Irikar_Royal_Storage_Wall)
 }
+pub fn access_map__giguna__giguna_base__save(ctx: &Context, world: &graph::World) -> bool {
+    // ^map__giguna__giguna_base__save
+    ctx.map__giguna__giguna_base__save()
+}
 pub fn access_melee_damage(ctx: &Context, world: &graph::World) -> bool {
     // Melee_Damage
     ctx.has(Item::Melee_Damage)
@@ -2512,6 +2520,11 @@ pub fn action_save(ctx: &mut Context, world: &graph::World) {
 pub fn action_save_last(ctx: &mut Context, world: &graph::World, newpos: SpotId) {
     // $save_last
     helper__save_last!(ctx, world);
+}
+pub fn action_save_last_refill_energy(ctx: &mut Context, world: &graph::World, newpos: SpotId) {
+    // $save_last; $refill_energy
+    helper__save_last!(ctx, world);
+    helper__refill_energy!(ctx, world);
 }
 pub fn action_save_set_glacier_gt_revival_gt_save_point(ctx: &mut Context, world: &graph::World) {
     // ^save = `Glacier > Revival > Save Point`

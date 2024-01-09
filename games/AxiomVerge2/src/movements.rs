@@ -7693,6 +7693,16 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
         }
         (
             [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+        ) => 1866,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+        ) => 1866,
+        (
+            [false],
             SpotId::Uhrum__Annuna_Corridor__Between_Two_Flowers,
             SpotId::Uhrum__Annuna_Corridor__Block_East,
         ) => 6140,
@@ -16256,6 +16266,16 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
         }
         (
             [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+        ) => 1866,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+        ) => 1866,
+        (
+            [true],
             SpotId::Uhrum__Annuna_Corridor__Between_Two_Flowers,
             SpotId::Uhrum__Annuna_Corridor__Block_East,
         ) => 6140,
@@ -21755,6 +21775,12 @@ pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
         (SpotId::Irikar__Lamassu__Catwalk_West, SpotId::Irikar__Lamassu__Bottom_Middle) => true,
         (SpotId::Irikar__Lamassu__Catwalk_Middle, SpotId::Irikar__Lamassu__Catwalk_West) => true,
         (SpotId::Irikar__Lamassu__Catwalk_Middle, SpotId::Irikar__Lamassu__East_27) => true,
+        (SpotId::Menu__Kiengir_Map__Giguna_Base, SpotId::Menu__Kiengir_Map__Glacier_Revival) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Glacier_Revival, SpotId::Menu__Kiengir_Map__Giguna_Base) => {
+            true
+        }
         (SpotId::Uhrum__West_Entrance__West_27, SpotId::Uhrum__West_Entrance__Southeast_Tree) => {
             true
         }
@@ -42574,6 +42600,36 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             1000,
         ),
         (
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+            SpotId::Giguna__Giguna_Base__Save_Point,
+            10000,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            1866,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            SpotId::Glacier__Revival__Save_Point,
+            10000,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+            1866,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
             SpotId::Menu__Upgrade_Menu__Combat,
             SpotId::Menu__Upgrade_Menu__Drone,
             100,
@@ -50219,6 +50275,12 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
             Some(964)
         }
         (SpotId::Irikar__Sight_Room__West_24, SpotId::Irikar__Sight_Room__Lower_Ledge) => Some(701),
+        (SpotId::Menu__Kiengir_Map__Giguna_Base, SpotId::Menu__Kiengir_Map__Glacier_Revival) => {
+            Some(1866)
+        }
+        (SpotId::Menu__Kiengir_Map__Glacier_Revival, SpotId::Menu__Kiengir_Map__Giguna_Base) => {
+            Some(1866)
+        }
         (
             SpotId::Uhrum__Annuna_Corridor__Between_Two_Flowers,
             SpotId::Uhrum__Annuna_Corridor__Block_East,
@@ -57349,6 +57411,12 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
         }
         (SpotId::Irikar__Sight_Room__West_24, SpotId::Irikar__Sight_Room__Lower_Ledge) => {
             (Some(701), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Giguna_Base, SpotId::Menu__Kiengir_Map__Glacier_Revival) => {
+            (Some(1866), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Glacier_Revival, SpotId::Menu__Kiengir_Map__Giguna_Base) => {
+            (Some(1866), vec![])
         }
         (
             SpotId::Uhrum__Annuna_Corridor__Between_Two_Flowers,

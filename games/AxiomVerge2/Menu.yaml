@@ -216,8 +216,38 @@ areas:
 
 - name: Warp Only
   on_entry: $save_last
-  # These spots allow savewarp and fast travel by tagging the appropriate realm.
+  # These spots allow savewarp only by tagging the appropriate realm.
   spots:
     - name: Kiengir
       data:
         realm: main
+
+- name: Kiengir Map
+  on_entry: $save_last; $refill_energy
+  data:
+    realm: map
+  tags: [map]
+  spots:
+    - name: Giguna Base
+      coord: [13, 16]
+      local:
+        # These are going to be all the fast travel locations
+        - to: Glacier Revival
+      exits:
+        - to: Giguna > Giguna Base > Save Point
+          req: ^map__giguna__giguna_base__save
+          time: 10
+          penalties:
+            - when: ^mode != 'drone'
+              add: 2.5
+    - name: Glacier Revival
+      coord: [41, 8]
+      local:
+        - to: Giguna Base
+      exits:
+        - to: Glacier > Revival > Save Point
+          req: Amashilama
+          time: 10
+          penalties:
+            - when: ^mode == 'drone'
+              add: 2.5

@@ -831,6 +831,9 @@ areas:
     _door_open: false
   map:
     save: [13, 15, 14, 16]
+  datamap:
+    map_spot:
+      save: Menu > Kiengir Map > Giguna Base
   spots:
     - name: East 14
       coord: [14.95, 13.7]

@@ -1480,6 +1480,10 @@ subgraph Menu
     subgraph Menu__Warp_Only[Warp Only]
         Menu__Warp_Only__Kiengir(Kiengir);
     end
+    subgraph Menu__Kiengir_Map[Kiengir Map]
+        Menu__Kiengir_Map__Giguna_Base(Giguna Base);
+        Menu__Kiengir_Map__Glacier_Revival(Glacier Revival);
+    end
 end
 subgraph Uhrum
     subgraph Uhrum__West_Entrance[West Entrance]
@@ -2319,6 +2323,8 @@ Irikar__Lamassu__East_26 <--> Uhrum__West_Entrance__West_26
 Irikar__Lamassu__East_27 <--> Uhrum__West_Entrance__West_27
 Irikar__Lamassu__Hidden_Passage_East <--> Uhrum__West_Entrance__Hidden_Passage_West
 Irikar__Sight_Room__Above_Room_East --> Irikar__East_Rooftops__Upper_West
+Menu__Kiengir_Map__Giguna_Base --> Giguna__Giguna_Base__Save_Point
+Menu__Kiengir_Map__Glacier_Revival --> Glacier__Revival__Save_Point
 Menu__Upgrade_Menu__Combat <--> Menu__Upgrade_Menu__Drone
 Menu__Upgrade_Menu__Combat <--> Menu__Upgrade_Menu__Infection
 Menu__Upgrade_Menu__Combat <--> Menu__Upgrade_Menu__Physiology

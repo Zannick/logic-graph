@@ -28,6 +28,7 @@ data:
   water: false
   flipside: SpotId::None
   portal_default: SpotId::None
+  map_spot: SpotId::None
   # fallthrough: SpotId::None  # Where Indra will fall to if the room is reset
 
 rules:
@@ -55,6 +56,11 @@ base_movements:
     jump: .6  # can vary with jump height, so take a rough estimate of usual
     # max jump height is around .2, with Anuman it reaches .3... TODO: real measurement
     # other speeds apply
+  - data:
+      realm: map
+    # approximate speeds using the right stick zoomed-out; it can be faster using both but tricky
+    x: 15
+    y: 10
 
 movements:
   water:
@@ -527,7 +533,7 @@ special:
   # a tile is 432x240, and split into 27x15 16x16 squares
   # scaled to 50%, it's 216x120. scaled to 10/24, it's 180x100
   graph_scale: [216, -120]
-  graph_exclude_tags: [interior, exterior, portal, cskip]
+  graph_exclude_tags: [interior, exterior, portal, cskip, map]
   map_ppi: 72
   map_file: AV2-World-50%.png  # contact me
   map_min_coord: [0, -1]

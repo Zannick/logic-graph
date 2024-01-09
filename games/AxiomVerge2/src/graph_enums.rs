@@ -223,6 +223,7 @@ pub enum AreaId {
     Irikar_Breach__Save_Room,
     Irikar_Breach__Uhrum_Connector,
     Irikar_Breach__Worm_Rave,
+    Menu__Kiengir_Map,
     Menu__Upgrade_Menu,
     Menu__Warp_Only,
     Uhrum__Annuna_Corridor,
@@ -393,6 +394,7 @@ impl fmt::Display for AreaId {
                 write!(f, "{}", "Irikar Breach > Uhrum Connector")
             }
             AreaId::Irikar_Breach__Worm_Rave => write!(f, "{}", "Irikar Breach > Worm Rave"),
+            AreaId::Menu__Kiengir_Map => write!(f, "{}", "Menu > Kiengir Map"),
             AreaId::Menu__Upgrade_Menu => write!(f, "{}", "Menu > Upgrade Menu"),
             AreaId::Menu__Warp_Only => write!(f, "{}", "Menu > Warp Only"),
             AreaId::Uhrum__Annuna_Corridor => write!(f, "{}", "Uhrum > Annuna Corridor"),
@@ -546,6 +548,7 @@ impl std::str::FromStr for AreaId {
             "Irikar Breach > Save Room" => Ok(AreaId::Irikar_Breach__Save_Room),
             "Irikar Breach > Uhrum Connector" => Ok(AreaId::Irikar_Breach__Uhrum_Connector),
             "Irikar Breach > Worm Rave" => Ok(AreaId::Irikar_Breach__Worm_Rave),
+            "Menu > Kiengir Map" => Ok(AreaId::Menu__Kiengir_Map),
             "Menu > Upgrade Menu" => Ok(AreaId::Menu__Upgrade_Menu),
             "Menu > Warp Only" => Ok(AreaId::Menu__Warp_Only),
             "Uhrum > Annuna Corridor" => Ok(AreaId::Uhrum__Annuna_Corridor),
@@ -1763,6 +1766,8 @@ pub enum SpotId {
     Irikar_Breach__Worm_Rave__Corner,
     Irikar_Breach__Worm_Rave__East,
     Irikar_Breach__Worm_Rave__South,
+    Menu__Kiengir_Map__Giguna_Base,
+    Menu__Kiengir_Map__Glacier_Revival,
     Menu__Upgrade_Menu__Combat,
     Menu__Upgrade_Menu__Drone,
     Menu__Upgrade_Menu__Infection,
@@ -4890,6 +4895,12 @@ impl fmt::Display for SpotId {
             SpotId::Irikar_Breach__Worm_Rave__South => {
                 write!(f, "{}", "Irikar Breach > Worm Rave > South")
             }
+            SpotId::Menu__Kiengir_Map__Giguna_Base => {
+                write!(f, "{}", "Menu > Kiengir Map > Giguna Base")
+            }
+            SpotId::Menu__Kiengir_Map__Glacier_Revival => {
+                write!(f, "{}", "Menu > Kiengir Map > Glacier Revival")
+            }
             SpotId::Menu__Upgrade_Menu__Combat => write!(f, "{}", "Menu > Upgrade Menu > Combat"),
             SpotId::Menu__Upgrade_Menu__Drone => write!(f, "{}", "Menu > Upgrade Menu > Drone"),
             SpotId::Menu__Upgrade_Menu__Infection => {
@@ -7265,6 +7276,10 @@ impl std::str::FromStr for SpotId {
             "Irikar Breach > Worm Rave > Corner" => Ok(SpotId::Irikar_Breach__Worm_Rave__Corner),
             "Irikar Breach > Worm Rave > East" => Ok(SpotId::Irikar_Breach__Worm_Rave__East),
             "Irikar Breach > Worm Rave > South" => Ok(SpotId::Irikar_Breach__Worm_Rave__South),
+            "Menu > Kiengir Map > Giguna Base" => Ok(SpotId::Menu__Kiengir_Map__Giguna_Base),
+            "Menu > Kiengir Map > Glacier Revival" => {
+                Ok(SpotId::Menu__Kiengir_Map__Glacier_Revival)
+            }
             "Menu > Upgrade Menu > Combat" => Ok(SpotId::Menu__Upgrade_Menu__Combat),
             "Menu > Upgrade Menu > Drone" => Ok(SpotId::Menu__Upgrade_Menu__Drone),
             "Menu > Upgrade Menu > Infection" => Ok(SpotId::Menu__Upgrade_Menu__Infection),
@@ -10389,6 +10404,8 @@ pub enum ExitId {
     Irikar_Breach__Worm_Rave__South__ex__Corner_1,
     Irikar_Breach__Worm_Rave__South__ex__East_1,
     Irikar_Breach__Worm_Rave__South__ex__Exit_Corridor__North_12_1,
+    Menu__Kiengir_Map__Giguna_Base__ex__Giguna__Giguna_Base__Save_Point_1,
+    Menu__Kiengir_Map__Glacier_Revival__ex__Glacier__Revival__Save_Point_1,
     Menu__Upgrade_Menu__Combat__ex__Drone_1,
     Menu__Upgrade_Menu__Combat__ex__Infection_1,
     Menu__Upgrade_Menu__Combat__ex__Physiology_1,
@@ -11643,6 +11660,8 @@ impl fmt::Display for ExitId {
             ExitId::Irikar_Breach__Worm_Rave__South__ex__Corner_1 => write!(f, "{}", "Irikar Breach > Worm Rave > South ==> Corner (1)"),
             ExitId::Irikar_Breach__Worm_Rave__South__ex__East_1 => write!(f, "{}", "Irikar Breach > Worm Rave > South ==> East (1)"),
             ExitId::Irikar_Breach__Worm_Rave__South__ex__Exit_Corridor__North_12_1 => write!(f, "{}", "Irikar Breach > Worm Rave > South ==> Exit Corridor > North 12 (1)"),
+            ExitId::Menu__Kiengir_Map__Giguna_Base__ex__Giguna__Giguna_Base__Save_Point_1 => write!(f, "{}", "Menu > Kiengir Map > Giguna Base ==> Giguna > Giguna Base > Save Point (1)"),
+            ExitId::Menu__Kiengir_Map__Glacier_Revival__ex__Glacier__Revival__Save_Point_1 => write!(f, "{}", "Menu > Kiengir Map > Glacier Revival ==> Glacier > Revival > Save Point (1)"),
             ExitId::Menu__Upgrade_Menu__Combat__ex__Drone_1 => write!(f, "{}", "Menu > Upgrade Menu > Combat ==> Drone (1)"),
             ExitId::Menu__Upgrade_Menu__Combat__ex__Infection_1 => write!(f, "{}", "Menu > Upgrade Menu > Combat ==> Infection (1)"),
             ExitId::Menu__Upgrade_Menu__Combat__ex__Physiology_1 => write!(f, "{}", "Menu > Upgrade Menu > Combat ==> Physiology (1)"),
@@ -12902,6 +12921,8 @@ impl std::str::FromStr for ExitId {
             "Irikar Breach > Worm Rave > South ==> Corner (1)" => Ok(ExitId::Irikar_Breach__Worm_Rave__South__ex__Corner_1),
             "Irikar Breach > Worm Rave > South ==> East (1)" => Ok(ExitId::Irikar_Breach__Worm_Rave__South__ex__East_1),
             "Irikar Breach > Worm Rave > South ==> Exit Corridor > North 12 (1)" => Ok(ExitId::Irikar_Breach__Worm_Rave__South__ex__Exit_Corridor__North_12_1),
+            "Menu > Kiengir Map > Giguna Base ==> Giguna > Giguna Base > Save Point (1)" => Ok(ExitId::Menu__Kiengir_Map__Giguna_Base__ex__Giguna__Giguna_Base__Save_Point_1),
+            "Menu > Kiengir Map > Glacier Revival ==> Glacier > Revival > Save Point (1)" => Ok(ExitId::Menu__Kiengir_Map__Glacier_Revival__ex__Glacier__Revival__Save_Point_1),
             "Menu > Upgrade Menu > Combat ==> Drone (1)" => Ok(ExitId::Menu__Upgrade_Menu__Combat__ex__Drone_1),
             "Menu > Upgrade Menu > Combat ==> Infection (1)" => Ok(ExitId::Menu__Upgrade_Menu__Combat__ex__Infection_1),
             "Menu > Upgrade Menu > Combat ==> Physiology (1)" => Ok(ExitId::Menu__Upgrade_Menu__Combat__ex__Physiology_1),

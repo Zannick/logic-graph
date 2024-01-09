@@ -1228,6 +1228,9 @@ pub fn get_area(spot: SpotId) -> AreaId {
         | SpotId::Menu__Upgrade_Menu__Infection
         | SpotId::Menu__Upgrade_Menu__Drone => AreaId::Menu__Upgrade_Menu,
         SpotId::Menu__Warp_Only__Kiengir => AreaId::Menu__Warp_Only,
+        SpotId::Menu__Kiengir_Map__Giguna_Base | SpotId::Menu__Kiengir_Map__Glacier_Revival => {
+            AreaId::Menu__Kiengir_Map
+        }
         SpotId::Uhrum__West_Entrance__West_27
         | SpotId::Uhrum__West_Entrance__West_26
         | SpotId::Uhrum__West_Entrance__Hidden_Passage_West
@@ -2542,6 +2545,9 @@ pub fn get_region(spot: SpotId) -> RegionId {
         | SpotId::Menu__Upgrade_Menu__Infection
         | SpotId::Menu__Upgrade_Menu__Drone => RegionId::Menu,
         SpotId::Menu__Warp_Only__Kiengir => RegionId::Menu,
+        SpotId::Menu__Kiengir_Map__Giguna_Base | SpotId::Menu__Kiengir_Map__Glacier_Revival => {
+            RegionId::Menu
+        }
         SpotId::Uhrum__West_Entrance__West_27
         | SpotId::Uhrum__West_Entrance__West_26
         | SpotId::Uhrum__West_Entrance__Hidden_Passage_West
@@ -3163,6 +3169,9 @@ impl world::Accessible for Location {
     }
     fn time(&self, ctx: &Context, world: &World) -> u32 {
         self.time
+            + match self.id {
+                _ => 0,
+            }
     }
     fn price(&self) -> &Currency {
         &self.price
@@ -4277,6 +4286,8 @@ impl world::Accessible for Exit {
             ExitId::Irikar_Breach__Worm_Rave__South__ex__Corner_1 => rules::access_hook(&ctx, world),
             ExitId::Irikar_Breach__Worm_Rave__South__ex__East_1 => rules::access_hook(&ctx, world),
             ExitId::Irikar_Breach__Worm_Rave__South__ex__Exit_Corridor__North_12_1 => true,
+            ExitId::Menu__Kiengir_Map__Giguna_Base__ex__Giguna__Giguna_Base__Save_Point_1 => rules::access_map__giguna__giguna_base__save(&ctx, world),
+            ExitId::Menu__Kiengir_Map__Glacier_Revival__ex__Glacier__Revival__Save_Point_1 => rules::access_amashilama(&ctx, world),
             ExitId::Menu__Upgrade_Menu__Combat__ex__Drone_1 => rules::access_remote_drone(&ctx, world),
             ExitId::Menu__Upgrade_Menu__Combat__ex__Infection_1 => rules::access_infect(&ctx, world),
             ExitId::Menu__Upgrade_Menu__Combat__ex__Physiology_1 => true,
@@ -4458,7 +4469,30 @@ impl world::Accessible for Exit {
         self.time
     }
     fn time(&self, ctx: &Context, world: &World) -> u32 {
-        self.time
+        self.time + match self.id {
+            ExitId::Annuna__Sniper_Valley__Cavern_Outer_Rock_East__ex__Cavern_Inner_Rock_West_1 => {
+                if rules::access_not_slingshot_hook(ctx, world) {
+                    100
+                } else {
+                    0
+                }
+            }
+            ExitId::Menu__Kiengir_Map__Giguna_Base__ex__Giguna__Giguna_Base__Save_Point_1 => {
+                if rules::access_mode_ne_drone(ctx, world) {
+                    2500
+                } else {
+                    0
+                }
+            }
+            ExitId::Menu__Kiengir_Map__Glacier_Revival__ex__Glacier__Revival__Save_Point_1 => {
+                if rules::access_mode_eq_drone(ctx, world) {
+                    2500
+                } else {
+                    0
+                }
+            }
+            _ => 0,
+        }
     }
     fn price(&self) -> &Currency {
         &self.price
@@ -5168,6 +5202,9 @@ impl world::Accessible for Action {
     }
     fn time(&self, ctx: &Context, world: &World) -> u32 {
         self.time
+            + match self.id {
+                _ => 0,
+            }
     }
     fn price(&self) -> &Currency {
         &self.price
@@ -5763,7 +5800,7 @@ pub struct Spot {
     pub actions: Range<usize>,
 }
 
-static RAW_SPOTS: [SpotId; 1305] = [
+static RAW_SPOTS: [SpotId; 1307] = [
     SpotId::None,
     SpotId::Amagi__Grid_31_19__East,
     SpotId::Amagi__Grid_31_19__West,
@@ -6948,6 +6985,8 @@ static RAW_SPOTS: [SpotId; 1305] = [
     SpotId::Irikar_Breach__Worm_Rave__Corner,
     SpotId::Irikar_Breach__Worm_Rave__East,
     SpotId::Irikar_Breach__Worm_Rave__South,
+    SpotId::Menu__Kiengir_Map__Giguna_Base,
+    SpotId::Menu__Kiengir_Map__Glacier_Revival,
     SpotId::Menu__Upgrade_Menu__Combat,
     SpotId::Menu__Upgrade_Menu__Drone,
     SpotId::Menu__Upgrade_Menu__Infection,
@@ -7605,6 +7644,10 @@ lazy_static! {
         AreaId::Irikar__Sight_Room => Range {
             start: SpotId::Irikar__Sight_Room__Above_Room_East.into_usize(),
             end: SpotId::Irikar__Sight_Room__West_24.into_usize() + 1,
+        },
+        AreaId::Menu__Kiengir_Map => Range {
+            start: SpotId::Menu__Kiengir_Map__Giguna_Base.into_usize(),
+            end: SpotId::Menu__Kiengir_Map__Glacier_Revival.into_usize() + 1,
         },
         AreaId::Menu__Upgrade_Menu => Range {
             start: SpotId::Menu__Upgrade_Menu__Combat.into_usize(),
@@ -9777,6 +9820,8 @@ impl world::World for World {
             ExitId::Menu__Upgrade_Menu__Combat__ex__Physiology_1 | ExitId:: Menu__Upgrade_Menu__Combat__ex__Infection_1 | ExitId:: Menu__Upgrade_Menu__Combat__ex__Drone_1 => SpotId::Menu__Upgrade_Menu__Combat,
             ExitId::Menu__Upgrade_Menu__Infection__ex__Physiology_1 | ExitId:: Menu__Upgrade_Menu__Infection__ex__Combat_1 | ExitId:: Menu__Upgrade_Menu__Infection__ex__Drone_1 => SpotId::Menu__Upgrade_Menu__Infection,
             ExitId::Menu__Upgrade_Menu__Drone__ex__Physiology_1 | ExitId:: Menu__Upgrade_Menu__Drone__ex__Combat_1 | ExitId:: Menu__Upgrade_Menu__Drone__ex__Infection_1 => SpotId::Menu__Upgrade_Menu__Drone,
+            ExitId::Menu__Kiengir_Map__Giguna_Base__ex__Giguna__Giguna_Base__Save_Point_1 => SpotId::Menu__Kiengir_Map__Giguna_Base,
+            ExitId::Menu__Kiengir_Map__Glacier_Revival__ex__Glacier__Revival__Save_Point_1 => SpotId::Menu__Kiengir_Map__Glacier_Revival,
             ExitId::Uhrum__West_Entrance__West_27__ex__Irikar__Lamassu__East_27_1 | ExitId:: Uhrum__West_Entrance__West_27__ex__South_Platform_1 => SpotId::Uhrum__West_Entrance__West_27,
             ExitId::Uhrum__West_Entrance__West_26__ex__Irikar__Lamassu__East_26_1 | ExitId:: Uhrum__West_Entrance__West_26__ex__Hidden_Passage_Entry_1 | ExitId:: Uhrum__West_Entrance__West_26__ex__Portal_Stand_1 | ExitId:: Uhrum__West_Entrance__West_26__ex__Portal_Stand_2 => SpotId::Uhrum__West_Entrance__West_26,
             ExitId::Uhrum__West_Entrance__Hidden_Passage_West__ex__Irikar__Lamassu__Hidden_Passage_East_1 => SpotId::Uhrum__West_Entrance__Hidden_Passage_West,
@@ -11071,6 +11116,8 @@ impl world::World for World {
             | SpotId::Irikar_Breach__Worm_Rave__Corner
             | SpotId::Irikar_Breach__Worm_Rave__East
             | SpotId::Irikar_Breach__Worm_Rave__South
+            | SpotId::Menu__Kiengir_Map__Giguna_Base
+            | SpotId::Menu__Kiengir_Map__Glacier_Revival
             | SpotId::Menu__Upgrade_Menu__Combat
             | SpotId::Menu__Upgrade_Menu__Drone
             | SpotId::Menu__Upgrade_Menu__Infection
@@ -20776,6 +20823,20 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
             id: ExitId::Menu__Upgrade_Menu__Drone__ex__Infection_1,
             time: 100,
             dest: SpotId::Menu__Upgrade_Menu__Infection,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Menu__Kiengir_Map__Giguna_Base__ex__Giguna__Giguna_Base__Save_Point_1 => Exit {
+            id: ExitId::Menu__Kiengir_Map__Giguna_Base__ex__Giguna__Giguna_Base__Save_Point_1,
+            time: 10000,
+            dest: SpotId::Giguna__Giguna_Base__Save_Point,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Menu__Kiengir_Map__Glacier_Revival__ex__Glacier__Revival__Save_Point_1 => Exit {
+            id: ExitId::Menu__Kiengir_Map__Glacier_Revival__ex__Glacier__Revival__Save_Point_1,
+            time: 10000,
+            dest: SpotId::Glacier__Revival__Save_Point,
             price: Currency::Free,
             loc_id: None,
         },
@@ -37622,6 +37683,32 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             exits: Range {
                 start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Menu__Kiengir_Map__Giguna_Base => Spot {
+            id: SpotId::Menu__Kiengir_Map__Giguna_Base,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Menu__Kiengir_Map__Giguna_Base__ex__Giguna__Giguna_Base__Save_Point_1.into_usize(),
+                end: ExitId::Menu__Kiengir_Map__Giguna_Base__ex__Giguna__Giguna_Base__Save_Point_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Menu__Kiengir_Map__Glacier_Revival => Spot {
+            id: SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Menu__Kiengir_Map__Glacier_Revival__ex__Glacier__Revival__Save_Point_1.into_usize(),
+                end: ExitId::Menu__Kiengir_Map__Glacier_Revival__ex__Glacier__Revival__Save_Point_1.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
