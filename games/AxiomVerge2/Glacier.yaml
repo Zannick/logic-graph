@@ -227,6 +227,7 @@ areas:
 - name: Vertical Room
   on_entry: $reset_old_area(^newpos)
   spots:
+    #region Upper
     - name: East 9
       coord: [36.95, 8.75]
       local:
@@ -341,7 +342,9 @@ areas:
       exits:
         - to: Peak > East 8
           tags: [xshift]
-    # Upper Mid
+    #endregion
+
+    #region Upper Mid
     - name: East Corner
       coord: [36.85, 11.55]
       local:
@@ -380,7 +383,13 @@ areas:
       exits:
         - to: Boomerang Antechamber > West 13
           tags: [xshift]
+    #endregion
     # TODO: bottom spot and exit
+
+    #region Lower
+    - name: South
+      coord: [36.5, 17.8]
+    #endregion
 
 - name: Boomerang Antechamber
   on_entry: $reset_old_area(^newpos)

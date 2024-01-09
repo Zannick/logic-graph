@@ -230,6 +230,28 @@ areas:
       coord: [36.75, 21.9]
     - name: Tunnel Wall
       coord: [36.55, 21.8]
+      exits:
+        - to: Mid Tunnel
+          req: $climb
+          movement: base
+          jumps: 1
+    - name: Mid Tunnel
+      coord: [36.55, 21.5]
+      local:
+        - to: East 24
+        - to: North
+          jumps: 1.5
+      exits:
+        - to: East 22
+          req: $hover
+          movement: base
+    - name: North
+      coord: [36.5, 21.2]
+      local:
+        - to: Mid Tunnel
+      exits:
+        - to: West Climb > South
+          tags: [ydoor]
     #endregion
 
 - name: East Bridge
@@ -1642,6 +1664,134 @@ areas:
 
 - name: West Climb
   on_entry: $reset_old_area(^newpos)
+  start:
+    _door_opened: false
   spots:
     - name: East 20
       coord: [36.95, 19.9]
+      local:
+        - to: Platform 1
+      exits:
+        - to: Twisty Passages > West
+          tags: [xshift]
+    - name: South
+      coord: [36.5, 20.8]
+      exits:
+        - to: West Bridge > North
+          tags: [ydoor]
+        - to: Platform 1
+          req: $hook and $hover
+          movement: base
+          jumps: 3
+        - to: West Ledge
+          req: $grab or Anuman
+          movement: base
+          jumps: 2
+    - name: West Ledge
+      coord: [36.1, 20.4]
+      local:
+        - to: South
+      exits:
+        - to: Platform 1
+          req: $hover
+          movement: base
+          jumps: 1
+    - name: Platform 1
+      coord: [36.6, 20.15]
+      local:
+        - to: South
+        - to: East 20
+          jumps: 2
+      exits:
+        - to: Switch Ledge
+          req: $hook
+          movement: base
+          jumps: 1
+        - to: Switch Ledge
+          req: $climb
+          movement: base
+          jumps: 3
+        - to: Switch Ledge
+          req: $grab and Anuman
+          movement: base
+          jumps: 2
+    - name: Switch Ledge
+      coord: [36.45, 19.75]
+      local:
+        - to: South
+        - to: Platform 1
+      actions:
+        - name: Open Door
+          req: $unlock4 and not ^_door_opened
+          do: ^_door_opened = true
+          tags: [hack]
+      exits:
+        - to: East 20
+          req: $hover
+          movement: base
+        - to: Cache
+          req: ^_door_opened
+          movement: base
+        - to: Platform 2
+          req: $hook and $hover
+          movement: base
+          jumps: 2
+    - name: Cache
+      coord: [36.2, 19.75]
+      locations:
+        - name: Item
+          item: Eye_Ring
+          tags: [standing]
+      exits:
+        - to: Switch Ledge
+          req: ^_door_opened
+          movement: base
+    - name: Platform 2
+      coord: [36.5, 19.15]
+      local:
+        - to: Switch Ledge
+      exits:
+        - to: East 19
+          req: $hook
+          movement: base
+          jumps: 1
+    - name: Platform 3
+      coord: [36.5, 18.4]
+      local:
+        - to: Platform 2
+        - to: East 19
+        - to: North
+          jumps: 1
+    - name: North
+      coord: [36.5, 18.2]
+      local:
+        - to: Platform 3
+        - to: East 20
+          thru: [36.775, 19.6]
+      exits:
+        - to: East 19
+          req: $hook or $hover
+          movement: base
+        - to: Glacier > Vertical Room > South
+          tags: [ydoor]
+    - name: East 19
+      coord: [36.95, 18.75]
+      local:
+        - to: Platform 2
+        - to: East 20
+          thru: [[36.775, 18.8], [36.775, 19.6]]
+        - to: Platform 1
+          thru: [36.775, 18.8]
+      exits:
+        - to: Egg Room > West
+          tags: [xshift]
+        - to: Platform 3
+          req: $hook
+          movement: base
+          jumps: 1
+
+- name: Egg Room
+  on_entry: $reset_old_area(^newpos)
+  spots:
+    - name: West
+      coord: [37.05, 18.75]

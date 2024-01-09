@@ -1835,6 +1835,17 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
         ) => 5175,
         (
             [false],
+            SpotId::Annuna__West_Bridge__Mid_Tunnel,
+            SpotId::Annuna__West_Bridge__East_24,
+        ) => 2050,
+        ([false], SpotId::Annuna__West_Bridge__Mid_Tunnel, SpotId::Annuna__West_Bridge__North) => {
+            899
+        }
+        ([false], SpotId::Annuna__West_Bridge__North, SpotId::Annuna__West_Bridge__Mid_Tunnel) => {
+            300
+        }
+        (
+            [false],
             SpotId::Annuna__West_Bridge__Plinth,
             SpotId::Annuna__West_Bridge__East_25_Lower,
         ) => 5175,
@@ -1858,6 +1869,50 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
             SpotId::Annuna__West_Bridge__West_Outcropping,
             SpotId::Annuna__West_Bridge__West_25_Lower,
         ) => 1052,
+        // [0.614035, 0.8, 0.614035]
+        ([false], SpotId::Annuna__West_Climb__East_19, SpotId::Annuna__West_Climb__East_20) => 2028,
+        // [0.614035, 1.35]
+        ([false], SpotId::Annuna__West_Climb__East_19, SpotId::Annuna__West_Climb__Platform_1) => {
+            1964
+        }
+        ([false], SpotId::Annuna__West_Climb__East_19, SpotId::Annuna__West_Climb__Platform_2) => {
+            1578
+        }
+        ([false], SpotId::Annuna__West_Climb__East_20, SpotId::Annuna__West_Climb__Platform_1) => {
+            1228
+        }
+        // [1.4, 0.614035]
+        ([false], SpotId::Annuna__West_Climb__North, SpotId::Annuna__West_Climb__East_20) => 2014,
+        ([false], SpotId::Annuna__West_Climb__North, SpotId::Annuna__West_Climb__Platform_3) => 199,
+        ([false], SpotId::Annuna__West_Climb__Platform_1, SpotId::Annuna__West_Climb__East_20) => {
+            1228
+        }
+        ([false], SpotId::Annuna__West_Climb__Platform_1, SpotId::Annuna__West_Climb__South) => 650,
+        (
+            [false],
+            SpotId::Annuna__West_Climb__Platform_2,
+            SpotId::Annuna__West_Climb__Switch_Ledge,
+        ) => 600,
+        ([false], SpotId::Annuna__West_Climb__Platform_3, SpotId::Annuna__West_Climb__East_19) => {
+            1578
+        }
+        ([false], SpotId::Annuna__West_Climb__Platform_3, SpotId::Annuna__West_Climb__North) => 600,
+        (
+            [false],
+            SpotId::Annuna__West_Climb__Platform_3,
+            SpotId::Annuna__West_Climb__Platform_2,
+        ) => 750,
+        (
+            [false],
+            SpotId::Annuna__West_Climb__Switch_Ledge,
+            SpotId::Annuna__West_Climb__Platform_1,
+        ) => 526,
+        ([false], SpotId::Annuna__West_Climb__Switch_Ledge, SpotId::Annuna__West_Climb__South) => {
+            1050
+        }
+        ([false], SpotId::Annuna__West_Climb__West_Ledge, SpotId::Annuna__West_Climb__South) => {
+            1403
+        }
         (
             [false],
             SpotId::Antarctica__Building_1E__East_Entry,
@@ -10597,6 +10652,15 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
             SpotId::Annuna__West_Bridge__East_25_Lower,
             SpotId::Annuna__West_Bridge__Plinth,
         ) => 5175,
+        ([true], SpotId::Annuna__West_Bridge__Mid_Tunnel, SpotId::Annuna__West_Bridge__East_24) => {
+            2050
+        }
+        ([true], SpotId::Annuna__West_Bridge__Mid_Tunnel, SpotId::Annuna__West_Bridge__North) => {
+            899
+        }
+        ([true], SpotId::Annuna__West_Bridge__North, SpotId::Annuna__West_Bridge__Mid_Tunnel) => {
+            300
+        }
         (
             [true],
             SpotId::Annuna__West_Bridge__Plinth,
@@ -10622,6 +10686,48 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
             SpotId::Annuna__West_Bridge__West_Outcropping,
             SpotId::Annuna__West_Bridge__West_25_Lower,
         ) => 1052,
+        // [0.614035, 0.8, 0.614035]
+        ([true], SpotId::Annuna__West_Climb__East_19, SpotId::Annuna__West_Climb__East_20) => 2028,
+        // [0.614035, 1.35]
+        ([true], SpotId::Annuna__West_Climb__East_19, SpotId::Annuna__West_Climb__Platform_1) => {
+            1964
+        }
+        ([true], SpotId::Annuna__West_Climb__East_19, SpotId::Annuna__West_Climb__Platform_2) => {
+            1578
+        }
+        ([true], SpotId::Annuna__West_Climb__East_20, SpotId::Annuna__West_Climb__Platform_1) => {
+            1228
+        }
+        // [1.4, 0.614035]
+        ([true], SpotId::Annuna__West_Climb__North, SpotId::Annuna__West_Climb__East_20) => 2014,
+        ([true], SpotId::Annuna__West_Climb__North, SpotId::Annuna__West_Climb__Platform_3) => 199,
+        ([true], SpotId::Annuna__West_Climb__Platform_1, SpotId::Annuna__West_Climb__East_20) => {
+            1228
+        }
+        ([true], SpotId::Annuna__West_Climb__Platform_1, SpotId::Annuna__West_Climb__South) => 650,
+        (
+            [true],
+            SpotId::Annuna__West_Climb__Platform_2,
+            SpotId::Annuna__West_Climb__Switch_Ledge,
+        ) => 600,
+        ([true], SpotId::Annuna__West_Climb__Platform_3, SpotId::Annuna__West_Climb__East_19) => {
+            1578
+        }
+        ([true], SpotId::Annuna__West_Climb__Platform_3, SpotId::Annuna__West_Climb__North) => 600,
+        (
+            [true],
+            SpotId::Annuna__West_Climb__Platform_3,
+            SpotId::Annuna__West_Climb__Platform_2,
+        ) => 750,
+        (
+            [true],
+            SpotId::Annuna__West_Climb__Switch_Ledge,
+            SpotId::Annuna__West_Climb__Platform_1,
+        ) => 526,
+        ([true], SpotId::Annuna__West_Climb__Switch_Ledge, SpotId::Annuna__West_Climb__South) => {
+            1050
+        }
+        ([true], SpotId::Annuna__West_Climb__West_Ledge, SpotId::Annuna__West_Climb__South) => 1403,
         (
             [true],
             SpotId::Antarctica__Building_1E__East_Entry,
@@ -17662,6 +17768,9 @@ pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
         }
         (SpotId::Annuna__West_Bridge__Plinth, SpotId::Annuna__West_Bridge__East_25_Lower) => true,
         (SpotId::Annuna__West_Bridge__East_25_Lower, SpotId::Annuna__West_Bridge__Plinth) => true,
+        (SpotId::Annuna__West_Bridge__Mid_Tunnel, SpotId::Annuna__West_Bridge__East_24) => true,
+        (SpotId::Annuna__West_Bridge__Mid_Tunnel, SpotId::Annuna__West_Bridge__North) => true,
+        (SpotId::Annuna__West_Bridge__North, SpotId::Annuna__West_Bridge__Mid_Tunnel) => true,
         (
             SpotId::Annuna__East_Bridge__West_25_Lower,
             SpotId::Annuna__East_Bridge__West_Staircase_Lower_West,
@@ -18393,6 +18502,21 @@ pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
             SpotId::Annuna__Twisty_Passages__Northwest_Alcove,
             SpotId::Annuna__Twisty_Passages__West_Hill_Left,
         ) => true,
+        (SpotId::Annuna__West_Climb__East_20, SpotId::Annuna__West_Climb__Platform_1) => true,
+        (SpotId::Annuna__West_Climb__West_Ledge, SpotId::Annuna__West_Climb__South) => true,
+        (SpotId::Annuna__West_Climb__Platform_1, SpotId::Annuna__West_Climb__South) => true,
+        (SpotId::Annuna__West_Climb__Platform_1, SpotId::Annuna__West_Climb__East_20) => true,
+        (SpotId::Annuna__West_Climb__Switch_Ledge, SpotId::Annuna__West_Climb__South) => true,
+        (SpotId::Annuna__West_Climb__Switch_Ledge, SpotId::Annuna__West_Climb__Platform_1) => true,
+        (SpotId::Annuna__West_Climb__Platform_2, SpotId::Annuna__West_Climb__Switch_Ledge) => true,
+        (SpotId::Annuna__West_Climb__Platform_3, SpotId::Annuna__West_Climb__Platform_2) => true,
+        (SpotId::Annuna__West_Climb__Platform_3, SpotId::Annuna__West_Climb__East_19) => true,
+        (SpotId::Annuna__West_Climb__Platform_3, SpotId::Annuna__West_Climb__North) => true,
+        (SpotId::Annuna__West_Climb__North, SpotId::Annuna__West_Climb__Platform_3) => true,
+        (SpotId::Annuna__West_Climb__North, SpotId::Annuna__West_Climb__East_20) => true,
+        (SpotId::Annuna__West_Climb__East_19, SpotId::Annuna__West_Climb__Platform_2) => true,
+        (SpotId::Annuna__West_Climb__East_19, SpotId::Annuna__West_Climb__East_20) => true,
+        (SpotId::Annuna__West_Climb__East_19, SpotId::Annuna__West_Climb__Platform_1) => true,
         (SpotId::Antarctica__West__Helipad, SpotId::Antarctica__West__Shed_Entry) => true,
         (SpotId::Antarctica__West__Helipad, SpotId::Antarctica__West__Boxes) => true,
         (SpotId::Antarctica__West__Boxes, SpotId::Antarctica__West__Helipad) => true,
@@ -25150,6 +25274,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             1000,
         ),
         (
+            SpotId::Annuna__Egg_Room__West,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
             SpotId::Annuna__Factory_Access__Bottom,
             SpotId::Annuna__Factory_Access__East_24,
             1052,
@@ -26555,6 +26684,41 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             1000,
         ),
         (
+            SpotId::Annuna__West_Bridge__Mid_Tunnel,
+            SpotId::Annuna__West_Bridge__East_22,
+            1403,
+        ),
+        (
+            SpotId::Annuna__West_Bridge__Mid_Tunnel,
+            SpotId::Annuna__West_Bridge__East_24,
+            2050,
+        ),
+        (
+            SpotId::Annuna__West_Bridge__Mid_Tunnel,
+            SpotId::Annuna__West_Bridge__North,
+            899,
+        ),
+        (
+            SpotId::Annuna__West_Bridge__Mid_Tunnel,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__West_Bridge__North,
+            SpotId::Annuna__West_Bridge__Mid_Tunnel,
+            300,
+        ),
+        (
+            SpotId::Annuna__West_Bridge__North,
+            SpotId::Annuna__West_Climb__South,
+            1600,
+        ),
+        (
+            SpotId::Annuna__West_Bridge__North,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
             SpotId::Annuna__West_Bridge__Plinth,
             SpotId::Annuna__West_Bridge__East_25_Lower,
             5175,
@@ -26568,6 +26732,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Annuna__West_Bridge__Plinth,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
+        ),
+        (
+            SpotId::Annuna__West_Bridge__Tunnel_Wall,
+            SpotId::Annuna__West_Bridge__Mid_Tunnel,
+            600,
         ),
         (
             SpotId::Annuna__West_Bridge__Tunnel_Wall,
@@ -26620,7 +26789,202 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             1000,
         ),
         (
+            SpotId::Annuna__West_Climb__Cache,
+            SpotId::Annuna__West_Climb__Switch_Ledge,
+            877,
+        ),
+        (
+            SpotId::Annuna__West_Climb__Cache,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__West_Climb__East_19,
+            SpotId::Annuna__Egg_Room__West,
+            1350,
+        ),
+        (
+            SpotId::Annuna__West_Climb__East_19,
             SpotId::Annuna__West_Climb__East_20,
+            2028,
+        ),
+        (
+            SpotId::Annuna__West_Climb__East_19,
+            SpotId::Annuna__West_Climb__Platform_1,
+            1964,
+        ),
+        (
+            SpotId::Annuna__West_Climb__East_19,
+            SpotId::Annuna__West_Climb__Platform_2,
+            1578,
+        ),
+        (
+            SpotId::Annuna__West_Climb__East_19,
+            SpotId::Annuna__West_Climb__Platform_3,
+            1578,
+        ),
+        (
+            SpotId::Annuna__West_Climb__East_19,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__West_Climb__East_20,
+            SpotId::Annuna__Twisty_Passages__West,
+            1350,
+        ),
+        (
+            SpotId::Annuna__West_Climb__East_20,
+            SpotId::Annuna__West_Climb__Platform_1,
+            1228,
+        ),
+        (
+            SpotId::Annuna__West_Climb__East_20,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__West_Climb__North,
+            SpotId::Annuna__West_Climb__East_19,
+            1578,
+        ),
+        (
+            SpotId::Annuna__West_Climb__North,
+            SpotId::Annuna__West_Climb__East_20,
+            2014,
+        ),
+        (
+            SpotId::Annuna__West_Climb__North,
+            SpotId::Annuna__West_Climb__Platform_3,
+            199,
+        ),
+        (
+            SpotId::Annuna__West_Climb__North,
+            SpotId::Glacier__Vertical_Room__South,
+            1600,
+        ),
+        (
+            SpotId::Annuna__West_Climb__North,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__West_Climb__Platform_1,
+            SpotId::Annuna__West_Climb__East_20,
+            1228,
+        ),
+        (
+            SpotId::Annuna__West_Climb__Platform_1,
+            SpotId::Annuna__West_Climb__South,
+            650,
+        ),
+        (
+            SpotId::Annuna__West_Climb__Platform_1,
+            SpotId::Annuna__West_Climb__Switch_Ledge,
+            600,
+        ),
+        (
+            SpotId::Annuna__West_Climb__Platform_1,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__West_Climb__Platform_2,
+            SpotId::Annuna__West_Climb__East_19,
+            1578,
+        ),
+        (
+            SpotId::Annuna__West_Climb__Platform_2,
+            SpotId::Annuna__West_Climb__Switch_Ledge,
+            600,
+        ),
+        (
+            SpotId::Annuna__West_Climb__Platform_2,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__West_Climb__Platform_3,
+            SpotId::Annuna__West_Climb__East_19,
+            1578,
+        ),
+        (
+            SpotId::Annuna__West_Climb__Platform_3,
+            SpotId::Annuna__West_Climb__North,
+            600,
+        ),
+        (
+            SpotId::Annuna__West_Climb__Platform_3,
+            SpotId::Annuna__West_Climb__Platform_2,
+            750,
+        ),
+        (
+            SpotId::Annuna__West_Climb__Platform_3,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__West_Climb__South,
+            SpotId::Annuna__West_Bridge__North,
+            1600,
+        ),
+        (
+            SpotId::Annuna__West_Climb__South,
+            SpotId::Annuna__West_Climb__Platform_1,
+            1799,
+        ),
+        (
+            SpotId::Annuna__West_Climb__South,
+            SpotId::Annuna__West_Climb__West_Ledge,
+            1403,
+        ),
+        (
+            SpotId::Annuna__West_Climb__South,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__West_Climb__Switch_Ledge,
+            SpotId::Annuna__West_Climb__Cache,
+            877,
+        ),
+        (
+            SpotId::Annuna__West_Climb__Switch_Ledge,
+            SpotId::Annuna__West_Climb__East_20,
+            1754,
+        ),
+        (
+            SpotId::Annuna__West_Climb__Switch_Ledge,
+            SpotId::Annuna__West_Climb__Platform_1,
+            526,
+        ),
+        (
+            SpotId::Annuna__West_Climb__Switch_Ledge,
+            SpotId::Annuna__West_Climb__Platform_2,
+            1200,
+        ),
+        (
+            SpotId::Annuna__West_Climb__Switch_Ledge,
+            SpotId::Annuna__West_Climb__South,
+            1050,
+        ),
+        (
+            SpotId::Annuna__West_Climb__Switch_Ledge,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__West_Climb__West_Ledge,
+            SpotId::Annuna__West_Climb__Platform_1,
+            1754,
+        ),
+        (
+            SpotId::Annuna__West_Climb__West_Ledge,
+            SpotId::Annuna__West_Climb__South,
+            1403,
+        ),
+        (
+            SpotId::Annuna__West_Climb__West_Ledge,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -39430,6 +39794,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             1000,
         ),
         (
+            SpotId::Glacier__Vertical_Room__South,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
             SpotId::Glacier__Vertical_Room__Under_Switch,
             SpotId::Glacier__Vertical_Room__Mid_11,
             1228,
@@ -45865,6 +46234,11 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
         (SpotId::Annuna__West_Bridge__East_25_Lower, SpotId::Annuna__West_Bridge__Plinth) => {
             Some(5175)
         }
+        (SpotId::Annuna__West_Bridge__Mid_Tunnel, SpotId::Annuna__West_Bridge__East_24) => {
+            Some(2050)
+        }
+        (SpotId::Annuna__West_Bridge__Mid_Tunnel, SpotId::Annuna__West_Bridge__North) => Some(899),
+        (SpotId::Annuna__West_Bridge__North, SpotId::Annuna__West_Bridge__Mid_Tunnel) => Some(300),
         (SpotId::Annuna__West_Bridge__Plinth, SpotId::Annuna__West_Bridge__East_25_Lower) => {
             Some(5175)
         }
@@ -45882,6 +46256,27 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
             SpotId::Annuna__West_Bridge__West_Outcropping,
             SpotId::Annuna__West_Bridge__West_25_Lower,
         ) => Some(1052),
+        (SpotId::Annuna__West_Climb__East_19, SpotId::Annuna__West_Climb__East_20) => Some(2028),
+        (SpotId::Annuna__West_Climb__East_19, SpotId::Annuna__West_Climb__Platform_1) => Some(1964),
+        (SpotId::Annuna__West_Climb__East_19, SpotId::Annuna__West_Climb__Platform_2) => Some(1578),
+        (SpotId::Annuna__West_Climb__East_20, SpotId::Annuna__West_Climb__Platform_1) => Some(1228),
+        (SpotId::Annuna__West_Climb__North, SpotId::Annuna__West_Climb__East_20) => Some(2014),
+        (SpotId::Annuna__West_Climb__North, SpotId::Annuna__West_Climb__Platform_3) => Some(199),
+        (SpotId::Annuna__West_Climb__Platform_1, SpotId::Annuna__West_Climb__East_20) => Some(1228),
+        (SpotId::Annuna__West_Climb__Platform_1, SpotId::Annuna__West_Climb__South) => Some(650),
+        (SpotId::Annuna__West_Climb__Platform_2, SpotId::Annuna__West_Climb__Switch_Ledge) => {
+            Some(600)
+        }
+        (SpotId::Annuna__West_Climb__Platform_3, SpotId::Annuna__West_Climb__East_19) => Some(1578),
+        (SpotId::Annuna__West_Climb__Platform_3, SpotId::Annuna__West_Climb__North) => Some(600),
+        (SpotId::Annuna__West_Climb__Platform_3, SpotId::Annuna__West_Climb__Platform_2) => {
+            Some(750)
+        }
+        (SpotId::Annuna__West_Climb__Switch_Ledge, SpotId::Annuna__West_Climb__Platform_1) => {
+            Some(526)
+        }
+        (SpotId::Annuna__West_Climb__Switch_Ledge, SpotId::Annuna__West_Climb__South) => Some(1050),
+        (SpotId::Annuna__West_Climb__West_Ledge, SpotId::Annuna__West_Climb__South) => Some(1403),
         (
             SpotId::Antarctica__Building_1E__East_Entry,
             SpotId::Antarctica__Building_1E__Connector,
@@ -52088,6 +52483,15 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
         (SpotId::Annuna__West_Bridge__East_25_Lower, SpotId::Annuna__West_Bridge__Plinth) => {
             (Some(5175), vec![])
         }
+        (SpotId::Annuna__West_Bridge__Mid_Tunnel, SpotId::Annuna__West_Bridge__East_24) => {
+            (Some(2050), vec![])
+        }
+        (SpotId::Annuna__West_Bridge__Mid_Tunnel, SpotId::Annuna__West_Bridge__North) => {
+            (Some(899), vec![])
+        }
+        (SpotId::Annuna__West_Bridge__North, SpotId::Annuna__West_Bridge__Mid_Tunnel) => {
+            (Some(300), vec![])
+        }
         (SpotId::Annuna__West_Bridge__Plinth, SpotId::Annuna__West_Bridge__East_25_Lower) => {
             (Some(5175), vec![])
         }
@@ -52105,6 +52509,51 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
             SpotId::Annuna__West_Bridge__West_Outcropping,
             SpotId::Annuna__West_Bridge__West_25_Lower,
         ) => (Some(1052), vec![]),
+        (SpotId::Annuna__West_Climb__East_19, SpotId::Annuna__West_Climb__East_20) => {
+            (Some(2028), vec![])
+        }
+        (SpotId::Annuna__West_Climb__East_19, SpotId::Annuna__West_Climb__Platform_1) => {
+            (Some(1964), vec![])
+        }
+        (SpotId::Annuna__West_Climb__East_19, SpotId::Annuna__West_Climb__Platform_2) => {
+            (Some(1578), vec![])
+        }
+        (SpotId::Annuna__West_Climb__East_20, SpotId::Annuna__West_Climb__Platform_1) => {
+            (Some(1228), vec![])
+        }
+        (SpotId::Annuna__West_Climb__North, SpotId::Annuna__West_Climb__East_20) => {
+            (Some(2014), vec![])
+        }
+        (SpotId::Annuna__West_Climb__North, SpotId::Annuna__West_Climb__Platform_3) => {
+            (Some(199), vec![])
+        }
+        (SpotId::Annuna__West_Climb__Platform_1, SpotId::Annuna__West_Climb__East_20) => {
+            (Some(1228), vec![])
+        }
+        (SpotId::Annuna__West_Climb__Platform_1, SpotId::Annuna__West_Climb__South) => {
+            (Some(650), vec![])
+        }
+        (SpotId::Annuna__West_Climb__Platform_2, SpotId::Annuna__West_Climb__Switch_Ledge) => {
+            (Some(600), vec![])
+        }
+        (SpotId::Annuna__West_Climb__Platform_3, SpotId::Annuna__West_Climb__East_19) => {
+            (Some(1578), vec![])
+        }
+        (SpotId::Annuna__West_Climb__Platform_3, SpotId::Annuna__West_Climb__North) => {
+            (Some(600), vec![])
+        }
+        (SpotId::Annuna__West_Climb__Platform_3, SpotId::Annuna__West_Climb__Platform_2) => {
+            (Some(750), vec![])
+        }
+        (SpotId::Annuna__West_Climb__Switch_Ledge, SpotId::Annuna__West_Climb__Platform_1) => {
+            (Some(526), vec![])
+        }
+        (SpotId::Annuna__West_Climb__Switch_Ledge, SpotId::Annuna__West_Climb__South) => {
+            (Some(1050), vec![])
+        }
+        (SpotId::Annuna__West_Climb__West_Ledge, SpotId::Annuna__West_Climb__South) => {
+            (Some(1403), vec![])
+        }
         (
             SpotId::Antarctica__Building_1E__East_Entry,
             SpotId::Antarctica__Building_1E__Connector,

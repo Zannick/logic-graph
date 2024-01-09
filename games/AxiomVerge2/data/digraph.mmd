@@ -131,6 +131,8 @@ subgraph Annuna
         Annuna__West_Bridge__East_22(East 22);
         Annuna__West_Bridge__Below_Tunnel(Below Tunnel);
         Annuna__West_Bridge__Tunnel_Wall(Tunnel Wall);
+        Annuna__West_Bridge__Mid_Tunnel(Mid Tunnel);
+        Annuna__West_Bridge__North(North);
     end
     subgraph Annuna__East_Bridge[East Bridge]
         Annuna__East_Bridge__West_25_Lower(West 25 Lower);
@@ -279,6 +281,18 @@ subgraph Annuna
     end
     subgraph Annuna__West_Climb[West Climb]
         Annuna__West_Climb__East_20(East 20);
+        Annuna__West_Climb__South(South);
+        Annuna__West_Climb__West_Ledge(West Ledge);
+        Annuna__West_Climb__Platform_1(Platform 1);
+        Annuna__West_Climb__Switch_Ledge(Switch Ledge);
+        Annuna__West_Climb__Cache(Cache);
+        Annuna__West_Climb__Platform_2(Platform 2);
+        Annuna__West_Climb__Platform_3(Platform 3);
+        Annuna__West_Climb__North(North);
+        Annuna__West_Climb__East_19(East 19);
+    end
+    subgraph Annuna__Egg_Room[Egg Room]
+        Annuna__Egg_Room__West(West);
     end
 end
 subgraph Antarctica
@@ -1096,6 +1110,7 @@ subgraph Glacier
         Glacier__Vertical_Room__East_12(East 12);
         Glacier__Vertical_Room__Lower_West_Corner(Lower West Corner);
         Glacier__Vertical_Room__East_13(East 13);
+        Glacier__Vertical_Room__South(South);
     end
     subgraph Glacier__Boomerang_Antechamber[Boomerang Antechamber]
         Glacier__Boomerang_Antechamber__West_13(West 13);
@@ -1730,7 +1745,7 @@ Annuna__Twisty_Passages__Northeast_C --> Annuna__Twisty_Passages__West_Hill_Righ
 Annuna__Twisty_Passages__Northeast_D --> Annuna__Twisty_Passages__Top
 Annuna__Twisty_Passages__Southwest_C --> Annuna__Twisty_Passages__West_Dip
 Annuna__Twisty_Passages__Southwest_C --> Annuna__Twisty_Passages__West_Ledge
-Annuna__Twisty_Passages__West --> Annuna__West_Climb__East_20
+Annuna__Twisty_Passages__West <--> Annuna__West_Climb__East_20
 Annuna__Twisty_Passages__West_Hill_Left --> Annuna__Twisty_Passages__Northwest_Alcove
 Annuna__Vertical_Room__Gate_Ledge --> Annuna__Vertical_Room__Plinth
 Annuna__Vertical_Room__Lower_Mid --> Annuna__Vertical_Room__Lower_Platform_1_Right
@@ -1743,6 +1758,21 @@ Annuna__Vertical_Room__Lower_Platform_2_Right --> Annuna__Vertical_Room__Lower_M
 Annuna__Vertical_Room__West_22 --> Annuna__Vertical_Room__Lower_Ledge
 Annuna__Vertical_Room__West_22 --> Annuna__Vertical_Room__Lower_Platform_1_Left
 Annuna__West_Bridge__East_25_Lower --> Annuna__East_Bridge__West_25_Lower
+Annuna__West_Bridge__Mid_Tunnel --> Annuna__West_Bridge__East_22
+Annuna__West_Bridge__North <--> Annuna__West_Climb__South
+Annuna__West_Bridge__Tunnel_Wall --> Annuna__West_Bridge__Mid_Tunnel
+Annuna__West_Climb__Cache <--> Annuna__West_Climb__Switch_Ledge
+Annuna__West_Climb__East_19 --> Annuna__Egg_Room__West
+Annuna__West_Climb__East_19 --> Annuna__West_Climb__Platform_3
+Annuna__West_Climb__North --> Annuna__West_Climb__East_19
+Annuna__West_Climb__North --> Glacier__Vertical_Room__South
+Annuna__West_Climb__Platform_1 --> Annuna__West_Climb__Switch_Ledge
+Annuna__West_Climb__Platform_2 --> Annuna__West_Climb__East_19
+Annuna__West_Climb__South --> Annuna__West_Climb__Platform_1
+Annuna__West_Climb__South --> Annuna__West_Climb__West_Ledge
+Annuna__West_Climb__Switch_Ledge --> Annuna__West_Climb__East_20
+Annuna__West_Climb__Switch_Ledge --> Annuna__West_Climb__Platform_2
+Annuna__West_Climb__West_Ledge --> Annuna__West_Climb__Platform_1
 Antarctica__Building_1E__Connector --> Antarctica__Building_1E__East_Entry
 Antarctica__Building_1E__Connector <--> Antarctica__Building_1W__Connector
 Antarctica__Building_1E__East_Entry <--> Antarctica__East__Building_1_Entry

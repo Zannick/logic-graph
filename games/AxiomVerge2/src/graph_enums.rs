@@ -98,6 +98,7 @@ pub enum AreaId {
     Annuna__East_Bridge,
     Annuna__East_Climb,
     Annuna__East_Hideout,
+    Annuna__Egg_Room,
     Annuna__Factory_Access,
     Annuna__Factory_Entrance,
     Annuna__Lower_Hallway,
@@ -244,6 +245,7 @@ impl fmt::Display for AreaId {
             AreaId::Annuna__East_Bridge => write!(f, "{}", "Annuna > East Bridge"),
             AreaId::Annuna__East_Climb => write!(f, "{}", "Annuna > East Climb"),
             AreaId::Annuna__East_Hideout => write!(f, "{}", "Annuna > East Hideout"),
+            AreaId::Annuna__Egg_Room => write!(f, "{}", "Annuna > Egg Room"),
             AreaId::Annuna__Factory_Access => write!(f, "{}", "Annuna > Factory Access"),
             AreaId::Annuna__Factory_Entrance => write!(f, "{}", "Annuna > Factory Entrance"),
             AreaId::Annuna__Lower_Hallway => write!(f, "{}", "Annuna > Lower Hallway"),
@@ -417,6 +419,7 @@ impl std::str::FromStr for AreaId {
             "Annuna > East Bridge" => Ok(AreaId::Annuna__East_Bridge),
             "Annuna > East Climb" => Ok(AreaId::Annuna__East_Climb),
             "Annuna > East Hideout" => Ok(AreaId::Annuna__East_Hideout),
+            "Annuna > Egg Room" => Ok(AreaId::Annuna__Egg_Room),
             "Annuna > Factory Access" => Ok(AreaId::Annuna__Factory_Access),
             "Annuna > Factory Entrance" => Ok(AreaId::Annuna__Factory_Entrance),
             "Annuna > Lower Hallway" => Ok(AreaId::Annuna__Lower_Hallway),
@@ -723,6 +726,7 @@ pub enum SpotId {
     Annuna__East_Climb__West_25,
     Annuna__East_Climb__West_26,
     Annuna__East_Hideout__West,
+    Annuna__Egg_Room__West,
     Annuna__Factory_Access__Bottom,
     Annuna__Factory_Access__East_22,
     Annuna__Factory_Access__East_24,
@@ -806,6 +810,8 @@ pub enum SpotId {
     Annuna__West_Bridge__East_24,
     Annuna__West_Bridge__East_25_Lower,
     Annuna__West_Bridge__East_25_Upper,
+    Annuna__West_Bridge__Mid_Tunnel,
+    Annuna__West_Bridge__North,
     Annuna__West_Bridge__Plinth,
     Annuna__West_Bridge__Tunnel_Wall,
     Annuna__West_Bridge__West_25_Lower,
@@ -813,7 +819,16 @@ pub enum SpotId {
     Annuna__West_Bridge__West_26_Lower,
     Annuna__West_Bridge__West_26_Upper,
     Annuna__West_Bridge__West_Outcropping,
+    Annuna__West_Climb__Cache,
+    Annuna__West_Climb__East_19,
     Annuna__West_Climb__East_20,
+    Annuna__West_Climb__North,
+    Annuna__West_Climb__Platform_1,
+    Annuna__West_Climb__Platform_2,
+    Annuna__West_Climb__Platform_3,
+    Annuna__West_Climb__South,
+    Annuna__West_Climb__Switch_Ledge,
+    Annuna__West_Climb__West_Ledge,
     Antarctica__Building_1E__Connector,
     Antarctica__Building_1E__East_Entry,
     Antarctica__Building_1W__Connector,
@@ -1569,6 +1584,7 @@ pub enum SpotId {
     Glacier__Vertical_Room__Mid_9,
     Glacier__Vertical_Room__Past_Gate,
     Glacier__Vertical_Room__Peak,
+    Glacier__Vertical_Room__South,
     Glacier__Vertical_Room__Under_Switch,
     Glacier__Vertical_Room__West_8,
     Glacier__Vertical_Room__West_9,
@@ -2258,6 +2274,7 @@ impl fmt::Display for SpotId {
             SpotId::Annuna__East_Climb__West_25 => write!(f, "{}", "Annuna > East Climb > West 25"),
             SpotId::Annuna__East_Climb__West_26 => write!(f, "{}", "Annuna > East Climb > West 26"),
             SpotId::Annuna__East_Hideout__West => write!(f, "{}", "Annuna > East Hideout > West"),
+            SpotId::Annuna__Egg_Room__West => write!(f, "{}", "Annuna > Egg Room > West"),
             SpotId::Annuna__Factory_Access__Bottom => {
                 write!(f, "{}", "Annuna > Factory Access > Bottom")
             }
@@ -2499,6 +2516,10 @@ impl fmt::Display for SpotId {
             SpotId::Annuna__West_Bridge__East_25_Upper => {
                 write!(f, "{}", "Annuna > West Bridge > East 25 Upper")
             }
+            SpotId::Annuna__West_Bridge__Mid_Tunnel => {
+                write!(f, "{}", "Annuna > West Bridge > Mid Tunnel")
+            }
+            SpotId::Annuna__West_Bridge__North => write!(f, "{}", "Annuna > West Bridge > North"),
             SpotId::Annuna__West_Bridge__Plinth => write!(f, "{}", "Annuna > West Bridge > Plinth"),
             SpotId::Annuna__West_Bridge__Tunnel_Wall => {
                 write!(f, "{}", "Annuna > West Bridge > Tunnel Wall")
@@ -2518,7 +2539,26 @@ impl fmt::Display for SpotId {
             SpotId::Annuna__West_Bridge__West_Outcropping => {
                 write!(f, "{}", "Annuna > West Bridge > West Outcropping")
             }
+            SpotId::Annuna__West_Climb__Cache => write!(f, "{}", "Annuna > West Climb > Cache"),
+            SpotId::Annuna__West_Climb__East_19 => write!(f, "{}", "Annuna > West Climb > East 19"),
             SpotId::Annuna__West_Climb__East_20 => write!(f, "{}", "Annuna > West Climb > East 20"),
+            SpotId::Annuna__West_Climb__North => write!(f, "{}", "Annuna > West Climb > North"),
+            SpotId::Annuna__West_Climb__Platform_1 => {
+                write!(f, "{}", "Annuna > West Climb > Platform 1")
+            }
+            SpotId::Annuna__West_Climb__Platform_2 => {
+                write!(f, "{}", "Annuna > West Climb > Platform 2")
+            }
+            SpotId::Annuna__West_Climb__Platform_3 => {
+                write!(f, "{}", "Annuna > West Climb > Platform 3")
+            }
+            SpotId::Annuna__West_Climb__South => write!(f, "{}", "Annuna > West Climb > South"),
+            SpotId::Annuna__West_Climb__Switch_Ledge => {
+                write!(f, "{}", "Annuna > West Climb > Switch Ledge")
+            }
+            SpotId::Annuna__West_Climb__West_Ledge => {
+                write!(f, "{}", "Annuna > West Climb > West Ledge")
+            }
             SpotId::Antarctica__Building_1E__Connector => {
                 write!(f, "{}", "Antarctica > Building 1E > Connector")
             }
@@ -4370,6 +4410,9 @@ impl fmt::Display for SpotId {
             SpotId::Glacier__Vertical_Room__Peak => {
                 write!(f, "{}", "Glacier > Vertical Room > Peak")
             }
+            SpotId::Glacier__Vertical_Room__South => {
+                write!(f, "{}", "Glacier > Vertical Room > South")
+            }
             SpotId::Glacier__Vertical_Room__Under_Switch => {
                 write!(f, "{}", "Glacier > Vertical Room > Under Switch")
             }
@@ -5453,6 +5496,7 @@ impl std::str::FromStr for SpotId {
             "Annuna > East Climb > West 25" => Ok(SpotId::Annuna__East_Climb__West_25),
             "Annuna > East Climb > West 26" => Ok(SpotId::Annuna__East_Climb__West_26),
             "Annuna > East Hideout > West" => Ok(SpotId::Annuna__East_Hideout__West),
+            "Annuna > Egg Room > West" => Ok(SpotId::Annuna__Egg_Room__West),
             "Annuna > Factory Access > Bottom" => Ok(SpotId::Annuna__Factory_Access__Bottom),
             "Annuna > Factory Access > East 22" => Ok(SpotId::Annuna__Factory_Access__East_22),
             "Annuna > Factory Access > East 24" => Ok(SpotId::Annuna__Factory_Access__East_24),
@@ -5628,6 +5672,8 @@ impl std::str::FromStr for SpotId {
             "Annuna > West Bridge > East 25 Upper" => {
                 Ok(SpotId::Annuna__West_Bridge__East_25_Upper)
             }
+            "Annuna > West Bridge > Mid Tunnel" => Ok(SpotId::Annuna__West_Bridge__Mid_Tunnel),
+            "Annuna > West Bridge > North" => Ok(SpotId::Annuna__West_Bridge__North),
             "Annuna > West Bridge > Plinth" => Ok(SpotId::Annuna__West_Bridge__Plinth),
             "Annuna > West Bridge > Tunnel Wall" => Ok(SpotId::Annuna__West_Bridge__Tunnel_Wall),
             "Annuna > West Bridge > West 25 Lower" => {
@@ -5645,7 +5691,16 @@ impl std::str::FromStr for SpotId {
             "Annuna > West Bridge > West Outcropping" => {
                 Ok(SpotId::Annuna__West_Bridge__West_Outcropping)
             }
+            "Annuna > West Climb > Cache" => Ok(SpotId::Annuna__West_Climb__Cache),
+            "Annuna > West Climb > East 19" => Ok(SpotId::Annuna__West_Climb__East_19),
             "Annuna > West Climb > East 20" => Ok(SpotId::Annuna__West_Climb__East_20),
+            "Annuna > West Climb > North" => Ok(SpotId::Annuna__West_Climb__North),
+            "Annuna > West Climb > Platform 1" => Ok(SpotId::Annuna__West_Climb__Platform_1),
+            "Annuna > West Climb > Platform 2" => Ok(SpotId::Annuna__West_Climb__Platform_2),
+            "Annuna > West Climb > Platform 3" => Ok(SpotId::Annuna__West_Climb__Platform_3),
+            "Annuna > West Climb > South" => Ok(SpotId::Annuna__West_Climb__South),
+            "Annuna > West Climb > Switch Ledge" => Ok(SpotId::Annuna__West_Climb__Switch_Ledge),
+            "Annuna > West Climb > West Ledge" => Ok(SpotId::Annuna__West_Climb__West_Ledge),
             "Antarctica > Building 1E > Connector" => {
                 Ok(SpotId::Antarctica__Building_1E__Connector)
             }
@@ -6861,6 +6916,7 @@ impl std::str::FromStr for SpotId {
             "Glacier > Vertical Room > Mid 9" => Ok(SpotId::Glacier__Vertical_Room__Mid_9),
             "Glacier > Vertical Room > Past Gate" => Ok(SpotId::Glacier__Vertical_Room__Past_Gate),
             "Glacier > Vertical Room > Peak" => Ok(SpotId::Glacier__Vertical_Room__Peak),
+            "Glacier > Vertical Room > South" => Ok(SpotId::Glacier__Vertical_Room__South),
             "Glacier > Vertical Room > Under Switch" => {
                 Ok(SpotId::Glacier__Vertical_Room__Under_Switch)
             }
@@ -7508,6 +7564,7 @@ pub enum LocationId {
     Annuna__Twisty_Passages__Northwest_Alcove__Refill,
     Annuna__Twisty_Passages__Top__Tablet,
     Annuna__West_Bridge__Plinth__Item,
+    Annuna__West_Climb__Cache__Item,
     Antarctica__Building_2__Behind_Boxes__Note,
     Antarctica__Power_Room__Switch__Flip,
     Antarctica__Shed__Interior__Shelf,
@@ -7860,6 +7917,9 @@ impl fmt::Display for LocationId {
             }
             LocationId::Annuna__West_Bridge__Plinth__Item => {
                 write!(f, "{}", "Annuna > West Bridge > Plinth > Item")
+            }
+            LocationId::Annuna__West_Climb__Cache__Item => {
+                write!(f, "{}", "Annuna > West Climb > Cache > Item")
             }
             LocationId::Antarctica__Building_2__Behind_Boxes__Note => {
                 write!(f, "{}", "Antarctica > Building 2 > Behind Boxes > Note")
@@ -8683,6 +8743,7 @@ impl std::str::FromStr for LocationId {
             "Annuna > West Bridge > Plinth > Item" => {
                 Ok(LocationId::Annuna__West_Bridge__Plinth__Item)
             }
+            "Annuna > West Climb > Cache > Item" => Ok(LocationId::Annuna__West_Climb__Cache__Item),
             "Antarctica > Building 2 > Behind Boxes > Note" => {
                 Ok(LocationId::Antarctica__Building_2__Behind_Boxes__Note)
             }
@@ -9445,7 +9506,27 @@ pub enum ExitId {
     Annuna__Vertical_Room__West_22__ex__Lower_Ledge_2,
     Annuna__Vertical_Room__West_22__ex__Lower_Platform_1_Left_1,
     Annuna__West_Bridge__East_25_Lower__ex__East_Bridge__West_25_Lower_1,
+    Annuna__West_Bridge__Mid_Tunnel__ex__East_22_1,
+    Annuna__West_Bridge__North__ex__West_Climb__South_1,
+    Annuna__West_Bridge__Tunnel_Wall__ex__Mid_Tunnel_1,
     Annuna__West_Bridge__West_25_Lower__ex__Mirror_Match__East_25_Lower_1,
+    Annuna__West_Climb__Cache__ex__Switch_Ledge_1,
+    Annuna__West_Climb__East_19__ex__Egg_Room__West_1,
+    Annuna__West_Climb__East_19__ex__Platform_3_1,
+    Annuna__West_Climb__East_20__ex__Twisty_Passages__West_1,
+    Annuna__West_Climb__North__ex__East_19_1,
+    Annuna__West_Climb__North__ex__Glacier__Vertical_Room__South_1,
+    Annuna__West_Climb__Platform_1__ex__Switch_Ledge_1,
+    Annuna__West_Climb__Platform_1__ex__Switch_Ledge_2,
+    Annuna__West_Climb__Platform_1__ex__Switch_Ledge_3,
+    Annuna__West_Climb__Platform_2__ex__East_19_1,
+    Annuna__West_Climb__South__ex__Platform_1_1,
+    Annuna__West_Climb__South__ex__West_Bridge__North_1,
+    Annuna__West_Climb__South__ex__West_Ledge_1,
+    Annuna__West_Climb__Switch_Ledge__ex__Cache_1,
+    Annuna__West_Climb__Switch_Ledge__ex__East_20_1,
+    Annuna__West_Climb__Switch_Ledge__ex__Platform_2_1,
+    Annuna__West_Climb__West_Ledge__ex__Platform_1_1,
     Antarctica__Building_1E__Connector__ex__Building_1W__Connector_1,
     Antarctica__Building_1E__Connector__ex__East_Entry_1,
     Antarctica__Building_1E__East_Entry__ex__East__Building_1_Entry_1,
@@ -10678,7 +10759,27 @@ impl fmt::Display for ExitId {
             ExitId::Annuna__Vertical_Room__West_22__ex__Lower_Ledge_2 => write!(f, "{}", "Annuna > Vertical Room > West 22 ==> Lower Ledge (2)"),
             ExitId::Annuna__Vertical_Room__West_22__ex__Lower_Platform_1_Left_1 => write!(f, "{}", "Annuna > Vertical Room > West 22 ==> Lower Platform 1 Left (1)"),
             ExitId::Annuna__West_Bridge__East_25_Lower__ex__East_Bridge__West_25_Lower_1 => write!(f, "{}", "Annuna > West Bridge > East 25 Lower ==> East Bridge > West 25 Lower (1)"),
+            ExitId::Annuna__West_Bridge__Mid_Tunnel__ex__East_22_1 => write!(f, "{}", "Annuna > West Bridge > Mid Tunnel ==> East 22 (1)"),
+            ExitId::Annuna__West_Bridge__North__ex__West_Climb__South_1 => write!(f, "{}", "Annuna > West Bridge > North ==> West Climb > South (1)"),
+            ExitId::Annuna__West_Bridge__Tunnel_Wall__ex__Mid_Tunnel_1 => write!(f, "{}", "Annuna > West Bridge > Tunnel Wall ==> Mid Tunnel (1)"),
             ExitId::Annuna__West_Bridge__West_25_Lower__ex__Mirror_Match__East_25_Lower_1 => write!(f, "{}", "Annuna > West Bridge > West 25 Lower ==> Mirror Match > East 25 Lower (1)"),
+            ExitId::Annuna__West_Climb__Cache__ex__Switch_Ledge_1 => write!(f, "{}", "Annuna > West Climb > Cache ==> Switch Ledge (1)"),
+            ExitId::Annuna__West_Climb__East_19__ex__Egg_Room__West_1 => write!(f, "{}", "Annuna > West Climb > East 19 ==> Egg Room > West (1)"),
+            ExitId::Annuna__West_Climb__East_19__ex__Platform_3_1 => write!(f, "{}", "Annuna > West Climb > East 19 ==> Platform 3 (1)"),
+            ExitId::Annuna__West_Climb__East_20__ex__Twisty_Passages__West_1 => write!(f, "{}", "Annuna > West Climb > East 20 ==> Twisty Passages > West (1)"),
+            ExitId::Annuna__West_Climb__North__ex__East_19_1 => write!(f, "{}", "Annuna > West Climb > North ==> East 19 (1)"),
+            ExitId::Annuna__West_Climb__North__ex__Glacier__Vertical_Room__South_1 => write!(f, "{}", "Annuna > West Climb > North ==> Glacier > Vertical Room > South (1)"),
+            ExitId::Annuna__West_Climb__Platform_1__ex__Switch_Ledge_1 => write!(f, "{}", "Annuna > West Climb > Platform 1 ==> Switch Ledge (1)"),
+            ExitId::Annuna__West_Climb__Platform_1__ex__Switch_Ledge_2 => write!(f, "{}", "Annuna > West Climb > Platform 1 ==> Switch Ledge (2)"),
+            ExitId::Annuna__West_Climb__Platform_1__ex__Switch_Ledge_3 => write!(f, "{}", "Annuna > West Climb > Platform 1 ==> Switch Ledge (3)"),
+            ExitId::Annuna__West_Climb__Platform_2__ex__East_19_1 => write!(f, "{}", "Annuna > West Climb > Platform 2 ==> East 19 (1)"),
+            ExitId::Annuna__West_Climb__South__ex__Platform_1_1 => write!(f, "{}", "Annuna > West Climb > South ==> Platform 1 (1)"),
+            ExitId::Annuna__West_Climb__South__ex__West_Bridge__North_1 => write!(f, "{}", "Annuna > West Climb > South ==> West Bridge > North (1)"),
+            ExitId::Annuna__West_Climb__South__ex__West_Ledge_1 => write!(f, "{}", "Annuna > West Climb > South ==> West Ledge (1)"),
+            ExitId::Annuna__West_Climb__Switch_Ledge__ex__Cache_1 => write!(f, "{}", "Annuna > West Climb > Switch Ledge ==> Cache (1)"),
+            ExitId::Annuna__West_Climb__Switch_Ledge__ex__East_20_1 => write!(f, "{}", "Annuna > West Climb > Switch Ledge ==> East 20 (1)"),
+            ExitId::Annuna__West_Climb__Switch_Ledge__ex__Platform_2_1 => write!(f, "{}", "Annuna > West Climb > Switch Ledge ==> Platform 2 (1)"),
+            ExitId::Annuna__West_Climb__West_Ledge__ex__Platform_1_1 => write!(f, "{}", "Annuna > West Climb > West Ledge ==> Platform 1 (1)"),
             ExitId::Antarctica__Building_1E__Connector__ex__Building_1W__Connector_1 => write!(f, "{}", "Antarctica > Building 1E > Connector ==> Building 1W > Connector (1)"),
             ExitId::Antarctica__Building_1E__Connector__ex__East_Entry_1 => write!(f, "{}", "Antarctica > Building 1E > Connector ==> East Entry (1)"),
             ExitId::Antarctica__Building_1E__East_Entry__ex__East__Building_1_Entry_1 => write!(f, "{}", "Antarctica > Building 1E > East Entry ==> East > Building 1 Entry (1)"),
@@ -11916,7 +12017,27 @@ impl std::str::FromStr for ExitId {
             "Annuna > Vertical Room > West 22 ==> Lower Ledge (2)" => Ok(ExitId::Annuna__Vertical_Room__West_22__ex__Lower_Ledge_2),
             "Annuna > Vertical Room > West 22 ==> Lower Platform 1 Left (1)" => Ok(ExitId::Annuna__Vertical_Room__West_22__ex__Lower_Platform_1_Left_1),
             "Annuna > West Bridge > East 25 Lower ==> East Bridge > West 25 Lower (1)" => Ok(ExitId::Annuna__West_Bridge__East_25_Lower__ex__East_Bridge__West_25_Lower_1),
+            "Annuna > West Bridge > Mid Tunnel ==> East 22 (1)" => Ok(ExitId::Annuna__West_Bridge__Mid_Tunnel__ex__East_22_1),
+            "Annuna > West Bridge > North ==> West Climb > South (1)" => Ok(ExitId::Annuna__West_Bridge__North__ex__West_Climb__South_1),
+            "Annuna > West Bridge > Tunnel Wall ==> Mid Tunnel (1)" => Ok(ExitId::Annuna__West_Bridge__Tunnel_Wall__ex__Mid_Tunnel_1),
             "Annuna > West Bridge > West 25 Lower ==> Mirror Match > East 25 Lower (1)" => Ok(ExitId::Annuna__West_Bridge__West_25_Lower__ex__Mirror_Match__East_25_Lower_1),
+            "Annuna > West Climb > Cache ==> Switch Ledge (1)" => Ok(ExitId::Annuna__West_Climb__Cache__ex__Switch_Ledge_1),
+            "Annuna > West Climb > East 19 ==> Egg Room > West (1)" => Ok(ExitId::Annuna__West_Climb__East_19__ex__Egg_Room__West_1),
+            "Annuna > West Climb > East 19 ==> Platform 3 (1)" => Ok(ExitId::Annuna__West_Climb__East_19__ex__Platform_3_1),
+            "Annuna > West Climb > East 20 ==> Twisty Passages > West (1)" => Ok(ExitId::Annuna__West_Climb__East_20__ex__Twisty_Passages__West_1),
+            "Annuna > West Climb > North ==> East 19 (1)" => Ok(ExitId::Annuna__West_Climb__North__ex__East_19_1),
+            "Annuna > West Climb > North ==> Glacier > Vertical Room > South (1)" => Ok(ExitId::Annuna__West_Climb__North__ex__Glacier__Vertical_Room__South_1),
+            "Annuna > West Climb > Platform 1 ==> Switch Ledge (1)" => Ok(ExitId::Annuna__West_Climb__Platform_1__ex__Switch_Ledge_1),
+            "Annuna > West Climb > Platform 1 ==> Switch Ledge (2)" => Ok(ExitId::Annuna__West_Climb__Platform_1__ex__Switch_Ledge_2),
+            "Annuna > West Climb > Platform 1 ==> Switch Ledge (3)" => Ok(ExitId::Annuna__West_Climb__Platform_1__ex__Switch_Ledge_3),
+            "Annuna > West Climb > Platform 2 ==> East 19 (1)" => Ok(ExitId::Annuna__West_Climb__Platform_2__ex__East_19_1),
+            "Annuna > West Climb > South ==> Platform 1 (1)" => Ok(ExitId::Annuna__West_Climb__South__ex__Platform_1_1),
+            "Annuna > West Climb > South ==> West Bridge > North (1)" => Ok(ExitId::Annuna__West_Climb__South__ex__West_Bridge__North_1),
+            "Annuna > West Climb > South ==> West Ledge (1)" => Ok(ExitId::Annuna__West_Climb__South__ex__West_Ledge_1),
+            "Annuna > West Climb > Switch Ledge ==> Cache (1)" => Ok(ExitId::Annuna__West_Climb__Switch_Ledge__ex__Cache_1),
+            "Annuna > West Climb > Switch Ledge ==> East 20 (1)" => Ok(ExitId::Annuna__West_Climb__Switch_Ledge__ex__East_20_1),
+            "Annuna > West Climb > Switch Ledge ==> Platform 2 (1)" => Ok(ExitId::Annuna__West_Climb__Switch_Ledge__ex__Platform_2_1),
+            "Annuna > West Climb > West Ledge ==> Platform 1 (1)" => Ok(ExitId::Annuna__West_Climb__West_Ledge__ex__Platform_1_1),
             "Antarctica > Building 1E > Connector ==> Building 1W > Connector (1)" => Ok(ExitId::Antarctica__Building_1E__Connector__ex__Building_1W__Connector_1),
             "Antarctica > Building 1E > Connector ==> East Entry (1)" => Ok(ExitId::Antarctica__Building_1E__Connector__ex__East_Entry_1),
             "Antarctica > Building 1E > East Entry ==> East > Building 1 Entry (1)" => Ok(ExitId::Antarctica__Building_1E__East_Entry__ex__East__Building_1_Entry_1),
@@ -12971,6 +13092,7 @@ pub enum ActionId {
     Annuna__East_Bridge__Tower_West_Ledge__Enter_Combo,
     Annuna__Factory_Entrance__Save_Point__Save,
     Annuna__Mirror_Match__Save_Point__Save,
+    Annuna__West_Climb__Switch_Ledge__Open_Door,
     Ebih__Base_Camp__Left_Platform__Move_Left_Platform,
     Ebih__Base_Camp__Left_Platform_Moved__Reset_Left_Platform,
     Ebih__Base_Camp__Save_Point__Save,
@@ -13106,6 +13228,9 @@ impl fmt::Display for ActionId {
             }
             ActionId::Annuna__Mirror_Match__Save_Point__Save => {
                 write!(f, "{}", "Annuna > Mirror Match > Save Point > Save")
+            }
+            ActionId::Annuna__West_Climb__Switch_Ledge__Open_Door => {
+                write!(f, "{}", "Annuna > West Climb > Switch Ledge > Open Door")
             }
             ActionId::Ebih__Base_Camp__Left_Platform__Move_Left_Platform => write!(
                 f,
@@ -13469,6 +13594,9 @@ impl std::str::FromStr for ActionId {
             }
             "Annuna > Mirror Match > Save Point > Save" => {
                 Ok(ActionId::Annuna__Mirror_Match__Save_Point__Save)
+            }
+            "Annuna > West Climb > Switch Ledge > Open Door" => {
+                Ok(ActionId::Annuna__West_Climb__Switch_Ledge__Open_Door)
             }
             "Ebih > Base Camp > Left Platform > Move Left Platform" => {
                 Ok(ActionId::Ebih__Base_Camp__Left_Platform__Move_Left_Platform)

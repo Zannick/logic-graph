@@ -442,7 +442,7 @@ helpers:
      Drone_Hover, Fast_Travel]
   # To be added: 5 Flask, 3 Big_Flask, Double_Axe, Royal_Dagger, Udusan
   # 1 Health_Fragment, The_Student, Heretics_Granddaughter, Suspension_Bridge, Plague_of_Thoughts
-  # Nano_Lattice_2, Lament_for_Fools, Family_Tragedy, Destruction_Pogrom
+  # Nano_Lattice_2, Lament_for_Fools, Family_Tragedy, Destruction_Pogrom, Eye_Ring
 
   $save:action: ^save = ^position; $refill_energy
   $refill_energy:action: ^energy = $max_energy

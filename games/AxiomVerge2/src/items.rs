@@ -73,6 +73,7 @@ pub enum Item {
     Ebih_West_Block,
     Escape,
     Exit_Breach,
+    Eye_Ring,
     Family_Tragedy,
     Fast_Travel,
     Flask,
@@ -223,6 +224,7 @@ impl fmt::Display for Item {
             Item::Ebih_West_Block => write!(f, "{}", "Ebih_West_Block"),
             Item::Escape => write!(f, "{}", "Escape"),
             Item::Exit_Breach => write!(f, "{}", "Exit_Breach"),
+            Item::Eye_Ring => write!(f, "{}", "Eye_Ring"),
             Item::Family_Tragedy => write!(f, "{}", "Family_Tragedy"),
             Item::Fast_Travel => write!(f, "{}", "Fast_Travel"),
             Item::Flask => write!(f, "{}", "Flask"),
@@ -377,6 +379,7 @@ impl std::str::FromStr for Item {
             "Ebih_West_Block" => Ok(Item::Ebih_West_Block),
             "Escape" => Ok(Item::Escape),
             "Exit_Breach" => Ok(Item::Exit_Breach),
+            "Eye_Ring" => Ok(Item::Eye_Ring),
             "Family_Tragedy" => Ok(Item::Family_Tragedy),
             "Fast_Travel" => Ok(Item::Fast_Travel),
             "Flask" => Ok(Item::Flask),
@@ -483,6 +486,7 @@ pub fn unused_item(id: Item) -> bool {
             | Item::Double_Axe
             | Item::Drone_Melee_Damage_3
             | Item::Drone_Melee_Speed_3
+            | Item::Eye_Ring
             | Item::Family_Tragedy
             | Item::Health_Upgrade_5
             | Item::Heretics_Granddaughter

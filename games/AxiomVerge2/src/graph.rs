@@ -137,7 +137,9 @@ pub fn get_area(spot: SpotId) -> AreaId {
         | SpotId::Annuna__West_Bridge__East_24
         | SpotId::Annuna__West_Bridge__East_22
         | SpotId::Annuna__West_Bridge__Below_Tunnel
-        | SpotId::Annuna__West_Bridge__Tunnel_Wall => AreaId::Annuna__West_Bridge,
+        | SpotId::Annuna__West_Bridge__Tunnel_Wall
+        | SpotId::Annuna__West_Bridge__Mid_Tunnel
+        | SpotId::Annuna__West_Bridge__North => AreaId::Annuna__West_Bridge,
         SpotId::Annuna__East_Bridge__West_25_Lower
         | SpotId::Annuna__East_Bridge__West_25_Upper
         | SpotId::Annuna__East_Bridge__West_Under_Gap
@@ -261,7 +263,17 @@ pub fn get_area(spot: SpotId) -> AreaId {
         | SpotId::Annuna__Twisty_Passages__West_Ledge
         | SpotId::Annuna__Twisty_Passages__West
         | SpotId::Annuna__Twisty_Passages__Northwest_Alcove => AreaId::Annuna__Twisty_Passages,
-        SpotId::Annuna__West_Climb__East_20 => AreaId::Annuna__West_Climb,
+        SpotId::Annuna__West_Climb__East_20
+        | SpotId::Annuna__West_Climb__South
+        | SpotId::Annuna__West_Climb__West_Ledge
+        | SpotId::Annuna__West_Climb__Platform_1
+        | SpotId::Annuna__West_Climb__Switch_Ledge
+        | SpotId::Annuna__West_Climb__Cache
+        | SpotId::Annuna__West_Climb__Platform_2
+        | SpotId::Annuna__West_Climb__Platform_3
+        | SpotId::Annuna__West_Climb__North
+        | SpotId::Annuna__West_Climb__East_19 => AreaId::Annuna__West_Climb,
+        SpotId::Annuna__Egg_Room__West => AreaId::Annuna__Egg_Room,
         SpotId::Antarctica__West__Helipad
         | SpotId::Antarctica__West__Shed_Entry
         | SpotId::Antarctica__West__Boxes => AreaId::Antarctica__West,
@@ -934,7 +946,8 @@ pub fn get_area(spot: SpotId) -> AreaId {
         | SpotId::Glacier__Vertical_Room__East_Corner
         | SpotId::Glacier__Vertical_Room__East_12
         | SpotId::Glacier__Vertical_Room__Lower_West_Corner
-        | SpotId::Glacier__Vertical_Room__East_13 => AreaId::Glacier__Vertical_Room,
+        | SpotId::Glacier__Vertical_Room__East_13
+        | SpotId::Glacier__Vertical_Room__South => AreaId::Glacier__Vertical_Room,
         SpotId::Glacier__Boomerang_Antechamber__West_13
         | SpotId::Glacier__Boomerang_Antechamber__East_12
         | SpotId::Glacier__Boomerang_Antechamber__Upper_East
@@ -1451,7 +1464,9 @@ pub fn get_region(spot: SpotId) -> RegionId {
         | SpotId::Annuna__West_Bridge__East_24
         | SpotId::Annuna__West_Bridge__East_22
         | SpotId::Annuna__West_Bridge__Below_Tunnel
-        | SpotId::Annuna__West_Bridge__Tunnel_Wall => RegionId::Annuna,
+        | SpotId::Annuna__West_Bridge__Tunnel_Wall
+        | SpotId::Annuna__West_Bridge__Mid_Tunnel
+        | SpotId::Annuna__West_Bridge__North => RegionId::Annuna,
         SpotId::Annuna__East_Bridge__West_25_Lower
         | SpotId::Annuna__East_Bridge__West_25_Upper
         | SpotId::Annuna__East_Bridge__West_Under_Gap
@@ -1575,7 +1590,17 @@ pub fn get_region(spot: SpotId) -> RegionId {
         | SpotId::Annuna__Twisty_Passages__West_Ledge
         | SpotId::Annuna__Twisty_Passages__West
         | SpotId::Annuna__Twisty_Passages__Northwest_Alcove => RegionId::Annuna,
-        SpotId::Annuna__West_Climb__East_20 => RegionId::Annuna,
+        SpotId::Annuna__West_Climb__East_20
+        | SpotId::Annuna__West_Climb__South
+        | SpotId::Annuna__West_Climb__West_Ledge
+        | SpotId::Annuna__West_Climb__Platform_1
+        | SpotId::Annuna__West_Climb__Switch_Ledge
+        | SpotId::Annuna__West_Climb__Cache
+        | SpotId::Annuna__West_Climb__Platform_2
+        | SpotId::Annuna__West_Climb__Platform_3
+        | SpotId::Annuna__West_Climb__North
+        | SpotId::Annuna__West_Climb__East_19 => RegionId::Annuna,
+        SpotId::Annuna__Egg_Room__West => RegionId::Annuna,
         SpotId::Antarctica__West__Helipad
         | SpotId::Antarctica__West__Shed_Entry
         | SpotId::Antarctica__West__Boxes => RegionId::Antarctica,
@@ -2242,7 +2267,8 @@ pub fn get_region(spot: SpotId) -> RegionId {
         | SpotId::Glacier__Vertical_Room__East_Corner
         | SpotId::Glacier__Vertical_Room__East_12
         | SpotId::Glacier__Vertical_Room__Lower_West_Corner
-        | SpotId::Glacier__Vertical_Room__East_13 => RegionId::Glacier,
+        | SpotId::Glacier__Vertical_Room__East_13
+        | SpotId::Glacier__Vertical_Room__South => RegionId::Glacier,
         SpotId::Glacier__Boomerang_Antechamber__West_13
         | SpotId::Glacier__Boomerang_Antechamber__East_12
         | SpotId::Glacier__Boomerang_Antechamber__Upper_East
@@ -2739,6 +2765,7 @@ impl world::Accessible for Location {
             }
             LocationId::Annuna__Twisty_Passages__Top__Tablet => true,
             LocationId::Annuna__West_Bridge__Plinth__Item => true,
+            LocationId::Annuna__West_Climb__Cache__Item => true,
             LocationId::Antarctica__Building_2__Behind_Boxes__Note => true,
             LocationId::Antarctica__Power_Room__Switch__Flip => true,
             LocationId::Antarctica__Shed__Interior__Shelf => true,
@@ -3377,7 +3404,27 @@ impl world::Accessible for Exit {
             ExitId::Annuna__Vertical_Room__West_22__ex__Lower_Ledge_2 => rules::access_grab_and_anuman(&ctx, world),
             ExitId::Annuna__Vertical_Room__West_22__ex__Lower_Platform_1_Left_1 => rules::access_grab(&ctx, world),
             ExitId::Annuna__West_Bridge__East_25_Lower__ex__East_Bridge__West_25_Lower_1 => true,
+            ExitId::Annuna__West_Bridge__Mid_Tunnel__ex__East_22_1 => rules::access_hover(&ctx, world),
+            ExitId::Annuna__West_Bridge__North__ex__West_Climb__South_1 => true,
+            ExitId::Annuna__West_Bridge__Tunnel_Wall__ex__Mid_Tunnel_1 => rules::access_climb(&ctx, world),
             ExitId::Annuna__West_Bridge__West_25_Lower__ex__Mirror_Match__East_25_Lower_1 => true,
+            ExitId::Annuna__West_Climb__Cache__ex__Switch_Ledge_1 => rules::access_annuna__west_climb__cache__ex__switch_ledge_1__req(&ctx, world),
+            ExitId::Annuna__West_Climb__East_19__ex__Egg_Room__West_1 => true,
+            ExitId::Annuna__West_Climb__East_19__ex__Platform_3_1 => rules::access_hook(&ctx, world),
+            ExitId::Annuna__West_Climb__East_20__ex__Twisty_Passages__West_1 => true,
+            ExitId::Annuna__West_Climb__North__ex__East_19_1 => rules::access_hook_or_hover(&ctx, world),
+            ExitId::Annuna__West_Climb__North__ex__Glacier__Vertical_Room__South_1 => true,
+            ExitId::Annuna__West_Climb__Platform_1__ex__Switch_Ledge_1 => rules::access_hook(&ctx, world),
+            ExitId::Annuna__West_Climb__Platform_1__ex__Switch_Ledge_2 => rules::access_climb(&ctx, world),
+            ExitId::Annuna__West_Climb__Platform_1__ex__Switch_Ledge_3 => rules::access_grab_and_anuman(&ctx, world),
+            ExitId::Annuna__West_Climb__Platform_2__ex__East_19_1 => rules::access_hook(&ctx, world),
+            ExitId::Annuna__West_Climb__South__ex__Platform_1_1 => rules::access_hook_and_hover(&ctx, world),
+            ExitId::Annuna__West_Climb__South__ex__West_Bridge__North_1 => true,
+            ExitId::Annuna__West_Climb__South__ex__West_Ledge_1 => rules::access_grab_or_anuman(&ctx, world),
+            ExitId::Annuna__West_Climb__Switch_Ledge__ex__Cache_1 => rules::access_annuna__west_climb__switch_ledge__ex__cache_1__req(&ctx, world),
+            ExitId::Annuna__West_Climb__Switch_Ledge__ex__East_20_1 => rules::access_hover(&ctx, world),
+            ExitId::Annuna__West_Climb__Switch_Ledge__ex__Platform_2_1 => rules::access_hook_and_hover(&ctx, world),
+            ExitId::Annuna__West_Climb__West_Ledge__ex__Platform_1_1 => rules::access_hover(&ctx, world),
             ExitId::Antarctica__Building_1E__Connector__ex__Building_1W__Connector_1 => true,
             ExitId::Antarctica__Building_1E__Connector__ex__East_Entry_1 => rules::access_can_damage(&ctx, world),
             ExitId::Antarctica__Building_1E__East_Entry__ex__East__Building_1_Entry_1 => true,
@@ -4490,7 +4537,12 @@ impl world::Exit for Exit {
             ExitId::Annuna__Vertical_Room__West_21__ex__Center_Save__East_1 => true,
             ExitId::Annuna__Vertical_Room__West_22__ex__East_Bridge__East_22_1 => true,
             ExitId::Annuna__West_Bridge__East_25_Lower__ex__East_Bridge__West_25_Lower_1 => true,
+            ExitId::Annuna__West_Bridge__North__ex__West_Climb__South_1 => true,
             ExitId::Annuna__West_Bridge__West_25_Lower__ex__Mirror_Match__East_25_Lower_1 => true,
+            ExitId::Annuna__West_Climb__East_19__ex__Egg_Room__West_1 => true,
+            ExitId::Annuna__West_Climb__East_20__ex__Twisty_Passages__West_1 => true,
+            ExitId::Annuna__West_Climb__North__ex__Glacier__Vertical_Room__South_1 => true,
+            ExitId::Annuna__West_Climb__South__ex__West_Bridge__North_1 => true,
             ExitId::Antarctica__Building_1E__Connector__ex__Building_1W__Connector_1 => true,
             ExitId::Antarctica__Building_1E__East_Entry__ex__East__Building_1_Entry_1 => true,
             ExitId::Antarctica__Building_1W__Connector__ex__Building_1E__Connector_1 => true,
@@ -4852,6 +4904,9 @@ impl world::Accessible for Action {
                 ActionId::Annuna__Mirror_Match__Save_Point__Save => {
                     rules::access_not_separation_or_defeat_indra(&ctx, world)
                 }
+                ActionId::Annuna__West_Climb__Switch_Ledge__Open_Door => {
+                    rules::access_annuna__west_climb__switch_ledge__open_door__req(&ctx, world)
+                }
                 ActionId::Ebih__Base_Camp__Left_Platform__Move_Left_Platform => {
                     rules::access_ebih__base_camp__left_platform__move_left_platform__req(
                         &ctx, world,
@@ -5136,6 +5191,7 @@ impl world::Action for Action {
             ActionId::Annuna__East_Bridge__Tower_Secret__Enter_Combo => rules::action_annuna__east_bridge__tower_secret__enter_combo__do(ctx, world),
             ActionId::Annuna__Factory_Entrance__Save_Point__Save => rules::action_save(ctx, world),
             ActionId::Annuna__Center_Save__Save_Point__Save => rules::action_save(ctx, world),
+            ActionId::Annuna__West_Climb__Switch_Ledge__Open_Door => rules::action_annuna__west_climb__switch_ledge__open_door__do(ctx, world),
             ActionId::Ebih__Base_Camp__Save_Point__Save => rules::action_save(ctx, world),
             ActionId::Ebih__Base_Camp__Left_Platform__Move_Left_Platform => rules::action_ebih__base_camp__left_platform__move_left_platform__do(ctx, world),
             ActionId::Ebih__Base_Camp__Left_Platform_Moved__Reset_Left_Platform => rules::action_ebih__base_camp__left_platform_moved__reset_left_platform__do(ctx, world),
@@ -5702,7 +5758,7 @@ pub struct Spot {
     pub actions: Range<usize>,
 }
 
-static RAW_SPOTS: [SpotId; 1291] = [
+static RAW_SPOTS: [SpotId; 1304] = [
     SpotId::None,
     SpotId::Amagi__Grid_31_19__East,
     SpotId::Amagi__Grid_31_19__West,
@@ -5853,6 +5909,7 @@ static RAW_SPOTS: [SpotId; 1291] = [
     SpotId::Annuna__East_Climb__West_25,
     SpotId::Annuna__East_Climb__West_26,
     SpotId::Annuna__East_Hideout__West,
+    SpotId::Annuna__Egg_Room__West,
     SpotId::Annuna__Factory_Access__Bottom,
     SpotId::Annuna__Factory_Access__East_22,
     SpotId::Annuna__Factory_Access__East_24,
@@ -5936,6 +5993,8 @@ static RAW_SPOTS: [SpotId; 1291] = [
     SpotId::Annuna__West_Bridge__East_24,
     SpotId::Annuna__West_Bridge__East_25_Lower,
     SpotId::Annuna__West_Bridge__East_25_Upper,
+    SpotId::Annuna__West_Bridge__Mid_Tunnel,
+    SpotId::Annuna__West_Bridge__North,
     SpotId::Annuna__West_Bridge__Plinth,
     SpotId::Annuna__West_Bridge__Tunnel_Wall,
     SpotId::Annuna__West_Bridge__West_25_Lower,
@@ -5943,7 +6002,16 @@ static RAW_SPOTS: [SpotId; 1291] = [
     SpotId::Annuna__West_Bridge__West_26_Lower,
     SpotId::Annuna__West_Bridge__West_26_Upper,
     SpotId::Annuna__West_Bridge__West_Outcropping,
+    SpotId::Annuna__West_Climb__Cache,
+    SpotId::Annuna__West_Climb__East_19,
     SpotId::Annuna__West_Climb__East_20,
+    SpotId::Annuna__West_Climb__North,
+    SpotId::Annuna__West_Climb__Platform_1,
+    SpotId::Annuna__West_Climb__Platform_2,
+    SpotId::Annuna__West_Climb__Platform_3,
+    SpotId::Annuna__West_Climb__South,
+    SpotId::Annuna__West_Climb__Switch_Ledge,
+    SpotId::Annuna__West_Climb__West_Ledge,
     SpotId::Antarctica__Building_1E__Connector,
     SpotId::Antarctica__Building_1E__East_Entry,
     SpotId::Antarctica__Building_1W__Connector,
@@ -6699,6 +6767,7 @@ static RAW_SPOTS: [SpotId; 1291] = [
     SpotId::Glacier__Vertical_Room__Mid_9,
     SpotId::Glacier__Vertical_Room__Past_Gate,
     SpotId::Glacier__Vertical_Room__Peak,
+    SpotId::Glacier__Vertical_Room__South,
     SpotId::Glacier__Vertical_Room__Under_Switch,
     SpotId::Glacier__Vertical_Room__West_8,
     SpotId::Glacier__Vertical_Room__West_9,
@@ -7031,6 +7100,10 @@ lazy_static! {
             start: SpotId::Annuna__East_Hideout__West.into_usize(),
             end: SpotId::Annuna__East_Hideout__West.into_usize() + 1,
         },
+        AreaId::Annuna__Egg_Room => Range {
+            start: SpotId::Annuna__Egg_Room__West.into_usize(),
+            end: SpotId::Annuna__Egg_Room__West.into_usize() + 1,
+        },
         AreaId::Annuna__Factory_Access => Range {
             start: SpotId::Annuna__Factory_Access__Bottom.into_usize(),
             end: SpotId::Annuna__Factory_Access__West_22.into_usize() + 1,
@@ -7068,8 +7141,8 @@ lazy_static! {
             end: SpotId::Annuna__West_Bridge__West_Outcropping.into_usize() + 1,
         },
         AreaId::Annuna__West_Climb => Range {
-            start: SpotId::Annuna__West_Climb__East_20.into_usize(),
-            end: SpotId::Annuna__West_Climb__East_20.into_usize() + 1,
+            start: SpotId::Annuna__West_Climb__Cache.into_usize(),
+            end: SpotId::Annuna__West_Climb__West_Ledge.into_usize() + 1,
         },
         AreaId::Antarctica__Building_1E => Range {
             start: SpotId::Antarctica__Building_1E__Connector.into_usize(),
@@ -7597,7 +7670,7 @@ impl world::World for World {
     type Exit = Exit;
     type Action = Action;
     type Warp = Warp;
-    const NUM_LOCATIONS: u32 = 225;
+    const NUM_LOCATIONS: u32 = 226;
 
     fn ruleset(&self) -> String {
         format!(
@@ -7930,6 +8003,7 @@ impl world::World for World {
                 LocationId::Annuna__Sniper_Valley__Cavern_Inner_Rock_East__Break_Inner_Wall,
             ],
             Item::Destruction_Pogrom => vec![LocationId::Annuna__Twisty_Passages__Top__Tablet],
+            Item::Eye_Ring => vec![LocationId::Annuna__West_Climb__Cache__Item],
             Item::Ice_Axe => vec![LocationId::Antarctica__Shed__Interior__Shelf],
             Item::Notes_2053_02_27 => vec![LocationId::Antarctica__Building_2__Behind_Boxes__Note],
             Item::Station_Power => vec![LocationId::Antarctica__Power_Room__Switch__Flip],
@@ -8321,6 +8395,7 @@ impl world::World for World {
             LocationId::Annuna__Twisty_Passages__Northwest_Alcove__Refill => {
                 SpotId::Annuna__Twisty_Passages__Northwest_Alcove
             }
+            LocationId::Annuna__West_Climb__Cache__Item => SpotId::Annuna__West_Climb__Cache,
             LocationId::Antarctica__Shed__Interior__Shelf => SpotId::Antarctica__Shed__Interior,
             LocationId::Antarctica__Building_2__Behind_Boxes__Note => {
                 SpotId::Antarctica__Building_2__Behind_Boxes
@@ -8744,6 +8819,9 @@ impl world::World for World {
             ActionId::Annuna__Center_Save__Save_Point__Save => {
                 SpotId::Annuna__Center_Save__Save_Point
             }
+            ActionId::Annuna__West_Climb__Switch_Ledge__Open_Door => {
+                SpotId::Annuna__West_Climb__Switch_Ledge
+            }
             ActionId::Ebih__Base_Camp__Save_Point__Save => SpotId::Ebih__Base_Camp__Save_Point,
             ActionId::Ebih__Base_Camp__Left_Platform__Move_Left_Platform => {
                 SpotId::Ebih__Base_Camp__Left_Platform
@@ -8998,6 +9076,9 @@ impl world::World for World {
             ExitId::Annuna__Mirror_Match__East_26_Upper__Remote_Flask => SpotId::Annuna__Mirror_Match__East_26_Upper,
             ExitId::Annuna__West_Bridge__West_25_Lower__ex__Mirror_Match__East_25_Lower_1 => SpotId::Annuna__West_Bridge__West_25_Lower,
             ExitId::Annuna__West_Bridge__East_25_Lower__ex__East_Bridge__West_25_Lower_1 => SpotId::Annuna__West_Bridge__East_25_Lower,
+            ExitId::Annuna__West_Bridge__Tunnel_Wall__ex__Mid_Tunnel_1 => SpotId::Annuna__West_Bridge__Tunnel_Wall,
+            ExitId::Annuna__West_Bridge__Mid_Tunnel__ex__East_22_1 => SpotId::Annuna__West_Bridge__Mid_Tunnel,
+            ExitId::Annuna__West_Bridge__North__ex__West_Climb__South_1 => SpotId::Annuna__West_Bridge__North,
             ExitId::Annuna__East_Bridge__West_25_Lower__ex__West_Bridge__East_25_Upper_1 => SpotId::Annuna__East_Bridge__West_25_Lower,
             ExitId::Annuna__East_Bridge__West_25_Upper__ex__West_Bridge__East_25_Upper_1 => SpotId::Annuna__East_Bridge__West_25_Upper,
             ExitId::Annuna__East_Bridge__West_Under_Gap__ex__Upper_West_Gap_1 | ExitId:: Annuna__East_Bridge__West_Under_Gap__ex__Upper_West_Gap_East_1 => SpotId::Annuna__East_Bridge__West_Under_Gap,
@@ -9085,6 +9166,15 @@ impl world::World for World {
             ExitId::Annuna__Twisty_Passages__Southwest_C__ex__West_Dip_1 | ExitId:: Annuna__Twisty_Passages__Southwest_C__ex__West_Ledge_1 => SpotId::Annuna__Twisty_Passages__Southwest_C,
             ExitId::Annuna__Twisty_Passages__West_Hill_Left__ex__Northwest_Alcove_1 => SpotId::Annuna__Twisty_Passages__West_Hill_Left,
             ExitId::Annuna__Twisty_Passages__West__ex__West_Climb__East_20_1 => SpotId::Annuna__Twisty_Passages__West,
+            ExitId::Annuna__West_Climb__East_20__ex__Twisty_Passages__West_1 => SpotId::Annuna__West_Climb__East_20,
+            ExitId::Annuna__West_Climb__South__ex__West_Bridge__North_1 | ExitId:: Annuna__West_Climb__South__ex__Platform_1_1 | ExitId:: Annuna__West_Climb__South__ex__West_Ledge_1 => SpotId::Annuna__West_Climb__South,
+            ExitId::Annuna__West_Climb__West_Ledge__ex__Platform_1_1 => SpotId::Annuna__West_Climb__West_Ledge,
+            ExitId::Annuna__West_Climb__Platform_1__ex__Switch_Ledge_1 | ExitId:: Annuna__West_Climb__Platform_1__ex__Switch_Ledge_2 | ExitId:: Annuna__West_Climb__Platform_1__ex__Switch_Ledge_3 => SpotId::Annuna__West_Climb__Platform_1,
+            ExitId::Annuna__West_Climb__Switch_Ledge__ex__East_20_1 | ExitId:: Annuna__West_Climb__Switch_Ledge__ex__Cache_1 | ExitId:: Annuna__West_Climb__Switch_Ledge__ex__Platform_2_1 => SpotId::Annuna__West_Climb__Switch_Ledge,
+            ExitId::Annuna__West_Climb__Cache__ex__Switch_Ledge_1 => SpotId::Annuna__West_Climb__Cache,
+            ExitId::Annuna__West_Climb__Platform_2__ex__East_19_1 => SpotId::Annuna__West_Climb__Platform_2,
+            ExitId::Annuna__West_Climb__North__ex__East_19_1 | ExitId:: Annuna__West_Climb__North__ex__Glacier__Vertical_Room__South_1 => SpotId::Annuna__West_Climb__North,
+            ExitId::Annuna__West_Climb__East_19__ex__Egg_Room__West_1 | ExitId:: Annuna__West_Climb__East_19__ex__Platform_3_1 => SpotId::Annuna__West_Climb__East_19,
             ExitId::Antarctica__West__Shed_Entry__ex__Shed__Interior_1 | ExitId:: Antarctica__West__Shed_Entry__ex__Helipad_1 => SpotId::Antarctica__West__Shed_Entry,
             ExitId::Antarctica__West__Boxes__ex__Building_1W__West_Entry_1 => SpotId::Antarctica__West__Boxes,
             ExitId::Antarctica__Shed__Interior__ex__West__Shed_Entry_1 => SpotId::Antarctica__Shed__Interior,
@@ -10516,8 +10606,15 @@ impl world::World for World {
             | SpotId::Annuna__Vertical_Room__West_21
             | SpotId::Annuna__Vertical_Room__West_22
             | SpotId::Annuna__West_Bridge__East_25_Lower
+            | SpotId::Annuna__West_Bridge__North
             | SpotId::Annuna__West_Bridge__Plinth
             | SpotId::Annuna__West_Bridge__West_25_Lower
+            | SpotId::Annuna__West_Climb__Cache
+            | SpotId::Annuna__West_Climb__East_19
+            | SpotId::Annuna__West_Climb__East_20
+            | SpotId::Annuna__West_Climb__North
+            | SpotId::Annuna__West_Climb__South
+            | SpotId::Annuna__West_Climb__Switch_Ledge
             | SpotId::Antarctica__Building_1E__Connector
             | SpotId::Antarctica__Building_1E__East_Entry
             | SpotId::Antarctica__Building_1W__Connector
@@ -11078,11 +11175,11 @@ impl World {
                             | Item::Double_Axe
                             | Item::Drone_Melee_Damage_3
                             | Item::Drone_Melee_Speed_3
+                            | Item::Eye_Ring
                             | Item::Family_Tragedy
                             | Item::Health_Upgrade_5
                             | Item::Heretics_Granddaughter
                             | Item::Heretics_Tablet
-                            | Item::Infect_L3
                             | Item::Infection_Speed_2
                             | Item::Journal_2049_10_29
                             | Item::Lament_for_Fools
@@ -11120,10 +11217,10 @@ impl World {
                             | Item::Double_Axe
                             | Item::Drone_Melee_Damage_3
                             | Item::Drone_Melee_Speed_3
+                            | Item::Eye_Ring
                             | Item::Family_Tragedy
                             | Item::Health_Upgrade_5
                             | Item::Heretics_Granddaughter
-                            | Item::Infect_L3
                             | Item::Infection_Speed_2
                             | Item::Journal_2049_10_29
                             | Item::Lament_for_Fools
@@ -11163,11 +11260,11 @@ impl World {
                             | Item::Drone_Melee_Damage_3
                             | Item::Drone_Melee_Speed_3
                             | Item::Escape
+                            | Item::Eye_Ring
                             | Item::Family_Tragedy
                             | Item::Health_Upgrade_5
                             | Item::Heretics_Granddaughter
                             | Item::Heretics_Tablet
-                            | Item::Infect_L3
                             | Item::Infection_Speed_2
                             | Item::Journal_2049_10_29
                             | Item::Lament_for_Fools
@@ -11206,10 +11303,10 @@ impl World {
                             | Item::Drone_Melee_Damage_3
                             | Item::Drone_Melee_Speed_3
                             | Item::Escape
+                            | Item::Eye_Ring
                             | Item::Family_Tragedy
                             | Item::Health_Upgrade_5
                             | Item::Heretics_Granddaughter
-                            | Item::Infect_L3
                             | Item::Infection_Speed_2
                             | Item::Journal_2049_10_29
                             | Item::Lament_for_Fools
@@ -11536,6 +11633,14 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
             id: LocationId::Annuna__Twisty_Passages__Northwest_Alcove__Refill,
             canonical: CanonId::None,
             item: Item::Power_Core,
+            price: Currency::Free,
+            time: 0,
+            exit_id: None,
+        },
+        LocationId::Annuna__West_Climb__Cache__Item => Location {
+            id: LocationId::Annuna__West_Climb__Cache__Item,
+            canonical: CanonId::None,
+            item: Item::Eye_Ring,
             price: Currency::Free,
             time: 0,
             exit_id: None,
@@ -13461,6 +13566,27 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
             price: Currency::Free,
             loc_id: None,
         },
+        ExitId::Annuna__West_Bridge__Tunnel_Wall__ex__Mid_Tunnel_1 => Exit {
+            id: ExitId::Annuna__West_Bridge__Tunnel_Wall__ex__Mid_Tunnel_1,
+            time: 600,
+            dest: SpotId::Annuna__West_Bridge__Mid_Tunnel,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__West_Bridge__Mid_Tunnel__ex__East_22_1 => Exit {
+            id: ExitId::Annuna__West_Bridge__Mid_Tunnel__ex__East_22_1,
+            time: 1403,
+            dest: SpotId::Annuna__West_Bridge__East_22,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__West_Bridge__North__ex__West_Climb__South_1 => Exit {
+            id: ExitId::Annuna__West_Bridge__North__ex__West_Climb__South_1,
+            time: 1600,
+            dest: SpotId::Annuna__West_Climb__South,
+            price: Currency::Free,
+            loc_id: None,
+        },
         ExitId::Annuna__East_Bridge__West_25_Lower__ex__West_Bridge__East_25_Upper_1 => Exit {
             id: ExitId::Annuna__East_Bridge__West_25_Lower__ex__West_Bridge__East_25_Upper_1,
             time: 1350,
@@ -14480,6 +14606,125 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
             id: ExitId::Annuna__Twisty_Passages__West__ex__West_Climb__East_20_1,
             time: 1350,
             dest: SpotId::Annuna__West_Climb__East_20,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__West_Climb__East_20__ex__Twisty_Passages__West_1 => Exit {
+            id: ExitId::Annuna__West_Climb__East_20__ex__Twisty_Passages__West_1,
+            time: 1350,
+            dest: SpotId::Annuna__Twisty_Passages__West,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__West_Climb__South__ex__West_Bridge__North_1 => Exit {
+            id: ExitId::Annuna__West_Climb__South__ex__West_Bridge__North_1,
+            time: 1600,
+            dest: SpotId::Annuna__West_Bridge__North,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__West_Climb__South__ex__Platform_1_1 => Exit {
+            id: ExitId::Annuna__West_Climb__South__ex__Platform_1_1,
+            time: 1799,
+            dest: SpotId::Annuna__West_Climb__Platform_1,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__West_Climb__South__ex__West_Ledge_1 => Exit {
+            id: ExitId::Annuna__West_Climb__South__ex__West_Ledge_1,
+            time: 1403,
+            dest: SpotId::Annuna__West_Climb__West_Ledge,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__West_Climb__West_Ledge__ex__Platform_1_1 => Exit {
+            id: ExitId::Annuna__West_Climb__West_Ledge__ex__Platform_1_1,
+            time: 1754,
+            dest: SpotId::Annuna__West_Climb__Platform_1,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__West_Climb__Platform_1__ex__Switch_Ledge_1 => Exit {
+            id: ExitId::Annuna__West_Climb__Platform_1__ex__Switch_Ledge_1,
+            time: 600,
+            dest: SpotId::Annuna__West_Climb__Switch_Ledge,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__West_Climb__Platform_1__ex__Switch_Ledge_2 => Exit {
+            id: ExitId::Annuna__West_Climb__Platform_1__ex__Switch_Ledge_2,
+            time: 1799,
+            dest: SpotId::Annuna__West_Climb__Switch_Ledge,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__West_Climb__Platform_1__ex__Switch_Ledge_3 => Exit {
+            id: ExitId::Annuna__West_Climb__Platform_1__ex__Switch_Ledge_3,
+            time: 1200,
+            dest: SpotId::Annuna__West_Climb__Switch_Ledge,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__West_Climb__Switch_Ledge__ex__East_20_1 => Exit {
+            id: ExitId::Annuna__West_Climb__Switch_Ledge__ex__East_20_1,
+            time: 1754,
+            dest: SpotId::Annuna__West_Climb__East_20,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__West_Climb__Switch_Ledge__ex__Cache_1 => Exit {
+            id: ExitId::Annuna__West_Climb__Switch_Ledge__ex__Cache_1,
+            time: 877,
+            dest: SpotId::Annuna__West_Climb__Cache,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__West_Climb__Switch_Ledge__ex__Platform_2_1 => Exit {
+            id: ExitId::Annuna__West_Climb__Switch_Ledge__ex__Platform_2_1,
+            time: 1200,
+            dest: SpotId::Annuna__West_Climb__Platform_2,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__West_Climb__Cache__ex__Switch_Ledge_1 => Exit {
+            id: ExitId::Annuna__West_Climb__Cache__ex__Switch_Ledge_1,
+            time: 877,
+            dest: SpotId::Annuna__West_Climb__Switch_Ledge,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__West_Climb__Platform_2__ex__East_19_1 => Exit {
+            id: ExitId::Annuna__West_Climb__Platform_2__ex__East_19_1,
+            time: 1578,
+            dest: SpotId::Annuna__West_Climb__East_19,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__West_Climb__North__ex__East_19_1 => Exit {
+            id: ExitId::Annuna__West_Climb__North__ex__East_19_1,
+            time: 1578,
+            dest: SpotId::Annuna__West_Climb__East_19,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__West_Climb__North__ex__Glacier__Vertical_Room__South_1 => Exit {
+            id: ExitId::Annuna__West_Climb__North__ex__Glacier__Vertical_Room__South_1,
+            time: 1600,
+            dest: SpotId::Glacier__Vertical_Room__South,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__West_Climb__East_19__ex__Egg_Room__West_1 => Exit {
+            id: ExitId::Annuna__West_Climb__East_19__ex__Egg_Room__West_1,
+            time: 1350,
+            dest: SpotId::Annuna__Egg_Room__West,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__West_Climb__East_19__ex__Platform_3_1 => Exit {
+            id: ExitId::Annuna__West_Climb__East_19__ex__Platform_3_1,
+            time: 1578,
+            dest: SpotId::Annuna__West_Climb__Platform_3,
             price: Currency::Free,
             loc_id: None,
         },
@@ -21724,6 +21969,11 @@ pub fn build_actions() -> EnumMap<ActionId, Action> {
             time: 1300,
             price: Currency::Free,
         },
+        ActionId::Annuna__West_Climb__Switch_Ledge__Open_Door => Action {
+            id: ActionId::Annuna__West_Climb__Switch_Ledge__Open_Door,
+            time: 500,
+            price: Currency::Free,
+        },
         ActionId::Ebih__Base_Camp__Save_Point__Save => Action {
             id: ActionId::Ebih__Base_Camp__Save_Point__Save,
             time: 1300,
@@ -23613,7 +23863,34 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             exits: Range {
+                start: ExitId::Annuna__West_Bridge__Tunnel_Wall__ex__Mid_Tunnel_1.into_usize(),
+                end: ExitId::Annuna__West_Bridge__Tunnel_Wall__ex__Mid_Tunnel_1.into_usize() + 1,
+            },
+            actions: Range {
                 start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__West_Bridge__Mid_Tunnel => Spot {
+            id: SpotId::Annuna__West_Bridge__Mid_Tunnel,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Annuna__West_Bridge__Mid_Tunnel__ex__East_22_1.into_usize(),
+                end: ExitId::Annuna__West_Bridge__Mid_Tunnel__ex__East_22_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__West_Bridge__North => Spot {
+            id: SpotId::Annuna__West_Bridge__North,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Annuna__West_Bridge__North__ex__West_Climb__South_1.into_usize(),
+                end: ExitId::Annuna__West_Bridge__North__ex__West_Climb__South_1.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
@@ -25201,6 +25478,137 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
         },
         SpotId::Annuna__West_Climb__East_20 => Spot {
             id: SpotId::Annuna__West_Climb__East_20,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Annuna__West_Climb__East_20__ex__Twisty_Passages__West_1.into_usize(),
+                end: ExitId::Annuna__West_Climb__East_20__ex__Twisty_Passages__West_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__West_Climb__South => Spot {
+            id: SpotId::Annuna__West_Climb__South,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Annuna__West_Climb__South__ex__Platform_1_1.into_usize(),
+                end: ExitId::Annuna__West_Climb__South__ex__West_Ledge_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__West_Climb__West_Ledge => Spot {
+            id: SpotId::Annuna__West_Climb__West_Ledge,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Annuna__West_Climb__West_Ledge__ex__Platform_1_1.into_usize(),
+                end: ExitId::Annuna__West_Climb__West_Ledge__ex__Platform_1_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__West_Climb__Platform_1 => Spot {
+            id: SpotId::Annuna__West_Climb__Platform_1,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Annuna__West_Climb__Platform_1__ex__Switch_Ledge_1.into_usize(),
+                end: ExitId::Annuna__West_Climb__Platform_1__ex__Switch_Ledge_3.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__West_Climb__Switch_Ledge => Spot {
+            id: SpotId::Annuna__West_Climb__Switch_Ledge,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Annuna__West_Climb__Switch_Ledge__ex__Cache_1.into_usize(),
+                end: ExitId::Annuna__West_Climb__Switch_Ledge__ex__Platform_2_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: ActionId::Annuna__West_Climb__Switch_Ledge__Open_Door.into_usize(),
+                end: ActionId::Annuna__West_Climb__Switch_Ledge__Open_Door.into_usize() + 1,
+            },
+        },
+        SpotId::Annuna__West_Climb__Cache => Spot {
+            id: SpotId::Annuna__West_Climb__Cache,
+            locations: Range {
+                start: LocationId::Annuna__West_Climb__Cache__Item.into_usize(),
+                end: LocationId::Annuna__West_Climb__Cache__Item.into_usize() + 1,
+            },
+            exits: Range {
+                start: ExitId::Annuna__West_Climb__Cache__ex__Switch_Ledge_1.into_usize(),
+                end: ExitId::Annuna__West_Climb__Cache__ex__Switch_Ledge_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__West_Climb__Platform_2 => Spot {
+            id: SpotId::Annuna__West_Climb__Platform_2,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Annuna__West_Climb__Platform_2__ex__East_19_1.into_usize(),
+                end: ExitId::Annuna__West_Climb__Platform_2__ex__East_19_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__West_Climb__Platform_3 => Spot {
+            id: SpotId::Annuna__West_Climb__Platform_3,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__West_Climb__North => Spot {
+            id: SpotId::Annuna__West_Climb__North,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Annuna__West_Climb__North__ex__East_19_1.into_usize(),
+                end: ExitId::Annuna__West_Climb__North__ex__Glacier__Vertical_Room__South_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__West_Climb__East_19 => Spot {
+            id: SpotId::Annuna__West_Climb__East_19,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Annuna__West_Climb__East_19__ex__Egg_Room__West_1.into_usize(),
+                end: ExitId::Annuna__West_Climb__East_19__ex__Platform_3_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__Egg_Room__West => Spot {
+            id: SpotId::Annuna__Egg_Room__West,
             locations: Range {
                 start: 0, end: 0,
             },
@@ -33740,6 +34148,18 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             exits: Range {
                 start: ExitId::Glacier__Vertical_Room__East_13__ex__Boomerang_Antechamber__West_13_1.into_usize(),
                 end: ExitId::Glacier__Vertical_Room__East_13__ex__Boomerang_Antechamber__West_13_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Glacier__Vertical_Room__South => Spot {
+            id: SpotId::Glacier__Vertical_Room__South,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
             },
             actions: Range {
                 start: 0, end: 0,

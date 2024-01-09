@@ -187,6 +187,27 @@ pub fn access_annuna__east_bridge__tower_west_ledge__ex__tower_secret_1__req(
     // ^_combo
     ctx.annuna__east_bridge__ctx__combo()
 }
+pub fn access_annuna__west_climb__cache__ex__switch_ledge_1__req(
+    ctx: &Context,
+    world: &graph::World,
+) -> bool {
+    // ^_door_opened
+    ctx.annuna__west_climb__ctx__door_opened()
+}
+pub fn access_annuna__west_climb__switch_ledge__ex__cache_1__req(
+    ctx: &Context,
+    world: &graph::World,
+) -> bool {
+    // ^_door_opened
+    ctx.annuna__west_climb__ctx__door_opened()
+}
+pub fn access_annuna__west_climb__switch_ledge__open_door__req(
+    ctx: &Context,
+    world: &graph::World,
+) -> bool {
+    // $unlock4 and not ^_door_opened
+    (helper__unlock4!(ctx, world) && !ctx.annuna__west_climb__ctx__door_opened())
+}
 pub fn access_annuna_east_bridge_gate(ctx: &Context, world: &graph::World) -> bool {
     // Annuna_East_Bridge_Gate
     ctx.has(Item::Annuna_East_Bridge_Gate)
@@ -1467,6 +1488,10 @@ pub fn access_grab_and_switch_40_12(ctx: &Context, world: &graph::World) -> bool
     // $grab and Switch_40_12
     (helper__grab!(ctx, world) && ctx.has(Item::Switch_40_12))
 }
+pub fn access_grab_or_anuman(ctx: &Context, world: &graph::World) -> bool {
+    // $grab or Anuman
+    (helper__grab!(ctx, world) || ctx.has(Item::Anuman))
+}
 pub fn access_grab_or_climb(ctx: &Context, world: &graph::World) -> bool {
     // $grab or $climb
     (helper__grab!(ctx, world) || helper__climb!(ctx, world))
@@ -2034,6 +2059,13 @@ pub fn action_annuna__east_bridge__tower_west_ledge__enter_combo__do(
 ) {
     // ^_combo = true
     ctx.set_annuna__east_bridge__ctx__combo(true);
+}
+pub fn action_annuna__west_climb__switch_ledge__open_door__do(
+    ctx: &mut Context,
+    world: &graph::World,
+) {
+    // ^_door_opened = true
+    ctx.set_annuna__west_climb__ctx__door_opened(true);
 }
 pub fn action_breach_portal_save_update(ctx: &mut Context, world: &graph::World) {
     // $breach_portal_save_update
