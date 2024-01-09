@@ -223,6 +223,7 @@ pub enum AreaId {
     Irikar_Breach__Save_Room,
     Irikar_Breach__Uhrum_Connector,
     Irikar_Breach__Worm_Rave,
+    Menu__Breach_Map,
     Menu__Kiengir_Map,
     Menu__Upgrade_Menu,
     Menu__Warp_Only,
@@ -394,6 +395,7 @@ impl fmt::Display for AreaId {
                 write!(f, "{}", "Irikar Breach > Uhrum Connector")
             }
             AreaId::Irikar_Breach__Worm_Rave => write!(f, "{}", "Irikar Breach > Worm Rave"),
+            AreaId::Menu__Breach_Map => write!(f, "{}", "Menu > Breach Map"),
             AreaId::Menu__Kiengir_Map => write!(f, "{}", "Menu > Kiengir Map"),
             AreaId::Menu__Upgrade_Menu => write!(f, "{}", "Menu > Upgrade Menu"),
             AreaId::Menu__Warp_Only => write!(f, "{}", "Menu > Warp Only"),
@@ -548,6 +550,7 @@ impl std::str::FromStr for AreaId {
             "Irikar Breach > Save Room" => Ok(AreaId::Irikar_Breach__Save_Room),
             "Irikar Breach > Uhrum Connector" => Ok(AreaId::Irikar_Breach__Uhrum_Connector),
             "Irikar Breach > Worm Rave" => Ok(AreaId::Irikar_Breach__Worm_Rave),
+            "Menu > Breach Map" => Ok(AreaId::Menu__Breach_Map),
             "Menu > Kiengir Map" => Ok(AreaId::Menu__Kiengir_Map),
             "Menu > Upgrade Menu" => Ok(AreaId::Menu__Upgrade_Menu),
             "Menu > Warp Only" => Ok(AreaId::Menu__Warp_Only),
@@ -1766,6 +1769,11 @@ pub enum SpotId {
     Irikar_Breach__Worm_Rave__Corner,
     Irikar_Breach__Worm_Rave__East,
     Irikar_Breach__Worm_Rave__South,
+    Menu__Breach_Map__GB_Peak,
+    Menu__Breach_Map__GB_SW_Save,
+    Menu__Breach_Map__IB_Basement,
+    Menu__Breach_Map__IB_Gauntlet,
+    Menu__Breach_Map__IB_Save_Room,
     Menu__Kiengir_Map__Amagi_East_Lake,
     Menu__Kiengir_Map__Amagi_Isolation,
     Menu__Kiengir_Map__Amagi_Main_Area,
@@ -4920,6 +4928,19 @@ impl fmt::Display for SpotId {
             SpotId::Irikar_Breach__Worm_Rave__South => {
                 write!(f, "{}", "Irikar Breach > Worm Rave > South")
             }
+            SpotId::Menu__Breach_Map__GB_Peak => write!(f, "{}", "Menu > Breach Map > GB Peak"),
+            SpotId::Menu__Breach_Map__GB_SW_Save => {
+                write!(f, "{}", "Menu > Breach Map > GB SW Save")
+            }
+            SpotId::Menu__Breach_Map__IB_Basement => {
+                write!(f, "{}", "Menu > Breach Map > IB Basement")
+            }
+            SpotId::Menu__Breach_Map__IB_Gauntlet => {
+                write!(f, "{}", "Menu > Breach Map > IB Gauntlet")
+            }
+            SpotId::Menu__Breach_Map__IB_Save_Room => {
+                write!(f, "{}", "Menu > Breach Map > IB Save Room")
+            }
             SpotId::Menu__Kiengir_Map__Amagi_East_Lake => {
                 write!(f, "{}", "Menu > Kiengir Map > Amagi East Lake")
             }
@@ -7382,6 +7403,11 @@ impl std::str::FromStr for SpotId {
             "Irikar Breach > Worm Rave > Corner" => Ok(SpotId::Irikar_Breach__Worm_Rave__Corner),
             "Irikar Breach > Worm Rave > East" => Ok(SpotId::Irikar_Breach__Worm_Rave__East),
             "Irikar Breach > Worm Rave > South" => Ok(SpotId::Irikar_Breach__Worm_Rave__South),
+            "Menu > Breach Map > GB Peak" => Ok(SpotId::Menu__Breach_Map__GB_Peak),
+            "Menu > Breach Map > GB SW Save" => Ok(SpotId::Menu__Breach_Map__GB_SW_Save),
+            "Menu > Breach Map > IB Basement" => Ok(SpotId::Menu__Breach_Map__IB_Basement),
+            "Menu > Breach Map > IB Gauntlet" => Ok(SpotId::Menu__Breach_Map__IB_Gauntlet),
+            "Menu > Breach Map > IB Save Room" => Ok(SpotId::Menu__Breach_Map__IB_Save_Room),
             "Menu > Kiengir Map > Amagi East Lake" => {
                 Ok(SpotId::Menu__Kiengir_Map__Amagi_East_Lake)
             }
@@ -10573,6 +10599,10 @@ pub enum ExitId {
     Irikar_Breach__Worm_Rave__South__ex__Corner_1,
     Irikar_Breach__Worm_Rave__South__ex__East_1,
     Irikar_Breach__Worm_Rave__South__ex__Exit_Corridor__North_12_1,
+    Menu__Breach_Map__GB_Peak__ex__Giguna_Breach__Peak__Save_Point_1,
+    Menu__Breach_Map__GB_SW_Save__ex__Giguna_Breach__SW_Save__Save_Point_1,
+    Menu__Breach_Map__IB_Gauntlet__ex__Irikar_Breach__Gauntlet__Save_Point_1,
+    Menu__Breach_Map__IB_Save_Room__ex__Irikar_Breach__Save_Room__Save_Point_1,
     Menu__Kiengir_Map__Amagi_Main_Area__ex__Amagi__Main_Area__Save_Point_1,
     Menu__Kiengir_Map__Annuna_Center_Save__ex__Annuna__Center_Save__Save_Point_1,
     Menu__Kiengir_Map__Annuna_Factory_Entrance__ex__Annuna__Factory_Entrance__Save_Point_1,
@@ -11844,6 +11874,10 @@ impl fmt::Display for ExitId {
             ExitId::Irikar_Breach__Worm_Rave__South__ex__Corner_1 => write!(f, "{}", "Irikar Breach > Worm Rave > South ==> Corner (1)"),
             ExitId::Irikar_Breach__Worm_Rave__South__ex__East_1 => write!(f, "{}", "Irikar Breach > Worm Rave > South ==> East (1)"),
             ExitId::Irikar_Breach__Worm_Rave__South__ex__Exit_Corridor__North_12_1 => write!(f, "{}", "Irikar Breach > Worm Rave > South ==> Exit Corridor > North 12 (1)"),
+            ExitId::Menu__Breach_Map__GB_Peak__ex__Giguna_Breach__Peak__Save_Point_1 => write!(f, "{}", "Menu > Breach Map > GB Peak ==> Giguna Breach > Peak > Save Point (1)"),
+            ExitId::Menu__Breach_Map__GB_SW_Save__ex__Giguna_Breach__SW_Save__Save_Point_1 => write!(f, "{}", "Menu > Breach Map > GB SW Save ==> Giguna Breach > SW Save > Save Point (1)"),
+            ExitId::Menu__Breach_Map__IB_Gauntlet__ex__Irikar_Breach__Gauntlet__Save_Point_1 => write!(f, "{}", "Menu > Breach Map > IB Gauntlet ==> Irikar Breach > Gauntlet > Save Point (1)"),
+            ExitId::Menu__Breach_Map__IB_Save_Room__ex__Irikar_Breach__Save_Room__Save_Point_1 => write!(f, "{}", "Menu > Breach Map > IB Save Room ==> Irikar Breach > Save Room > Save Point (1)"),
             ExitId::Menu__Kiengir_Map__Amagi_Main_Area__ex__Amagi__Main_Area__Save_Point_1 => write!(f, "{}", "Menu > Kiengir Map > Amagi Main Area ==> Amagi > Main Area > Save Point (1)"),
             ExitId::Menu__Kiengir_Map__Annuna_Center_Save__ex__Annuna__Center_Save__Save_Point_1 => write!(f, "{}", "Menu > Kiengir Map > Annuna Center Save ==> Annuna > Center Save > Save Point (1)"),
             ExitId::Menu__Kiengir_Map__Annuna_Factory_Entrance__ex__Annuna__Factory_Entrance__Save_Point_1 => write!(f, "{}", "Menu > Kiengir Map > Annuna Factory Entrance ==> Annuna > Factory Entrance > Save Point (1)"),
@@ -13120,6 +13154,10 @@ impl std::str::FromStr for ExitId {
             "Irikar Breach > Worm Rave > South ==> Corner (1)" => Ok(ExitId::Irikar_Breach__Worm_Rave__South__ex__Corner_1),
             "Irikar Breach > Worm Rave > South ==> East (1)" => Ok(ExitId::Irikar_Breach__Worm_Rave__South__ex__East_1),
             "Irikar Breach > Worm Rave > South ==> Exit Corridor > North 12 (1)" => Ok(ExitId::Irikar_Breach__Worm_Rave__South__ex__Exit_Corridor__North_12_1),
+            "Menu > Breach Map > GB Peak ==> Giguna Breach > Peak > Save Point (1)" => Ok(ExitId::Menu__Breach_Map__GB_Peak__ex__Giguna_Breach__Peak__Save_Point_1),
+            "Menu > Breach Map > GB SW Save ==> Giguna Breach > SW Save > Save Point (1)" => Ok(ExitId::Menu__Breach_Map__GB_SW_Save__ex__Giguna_Breach__SW_Save__Save_Point_1),
+            "Menu > Breach Map > IB Gauntlet ==> Irikar Breach > Gauntlet > Save Point (1)" => Ok(ExitId::Menu__Breach_Map__IB_Gauntlet__ex__Irikar_Breach__Gauntlet__Save_Point_1),
+            "Menu > Breach Map > IB Save Room ==> Irikar Breach > Save Room > Save Point (1)" => Ok(ExitId::Menu__Breach_Map__IB_Save_Room__ex__Irikar_Breach__Save_Room__Save_Point_1),
             "Menu > Kiengir Map > Amagi Main Area ==> Amagi > Main Area > Save Point (1)" => Ok(ExitId::Menu__Kiengir_Map__Amagi_Main_Area__ex__Amagi__Main_Area__Save_Point_1),
             "Menu > Kiengir Map > Annuna Center Save ==> Annuna > Center Save > Save Point (1)" => Ok(ExitId::Menu__Kiengir_Map__Annuna_Center_Save__ex__Annuna__Center_Save__Save_Point_1),
             "Menu > Kiengir Map > Annuna Factory Entrance ==> Annuna > Factory Entrance > Save Point (1)" => Ok(ExitId::Menu__Kiengir_Map__Annuna_Factory_Entrance__ex__Annuna__Factory_Entrance__Save_Point_1),

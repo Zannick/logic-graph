@@ -10,6 +10,9 @@ areas:
     portal_default: Giguna > Ruins Top > Save Point
   map:
     save: [15, 6, 16, 7]
+  datamap:
+    map_spot:
+      save: Menu > Breach Map > GB Peak
   spots:
     - name: Save Point
       coord: [15.475, 6.6]
@@ -210,6 +213,9 @@ areas:
     _door_opened: false
   map:
     save: [12, 11, 13, 12]
+  datamap:
+    map_spot:
+      save: Menu > Breach Map > GB SW Save
   spots:
     - name: North
       coord: [12.5, 10.2]

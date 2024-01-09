@@ -6,7 +6,11 @@ data:
 areas:
 - name: Save Room
   on_entry: $reset_old_area(^newpos)
-  map: save
+  map:
+    save: [14, 25, 15, 26]
+  datamap:
+    map_spot:
+      save: Menu > Breach Map > IB Save Room
   spots:
     - name: Save Point
       coord: [14.525, 25.35]
@@ -33,6 +37,9 @@ areas:
   on_entry: $reset_old_area(^newpos)
   map:
     save: [11, 21, 12, 22]
+  datamap:
+    map_spot:
+      save: Menu > Breach Map > IB Gauntlet
   spots:
     - name: Save Point
       coord: [11.3, 21.7]

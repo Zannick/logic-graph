@@ -446,3 +446,39 @@ areas:
           penalties:
             - when: ^mode != 'drone'
               add: 2.5
+
+- name: Breach Map
+  on_entry: $save_last
+  data:
+    realm: map
+  tags: [map]
+  all:
+    local:
+      - to: GB Peak
+  spots:
+    - name: GB Peak
+      coord: [15, 7]
+      exits:
+        - to: Giguna Breach > Peak > Save Point
+          req: ^map__giguna_breach__peak__save
+          time: 12
+    - name: GB SW Save
+      coord: [12, 12]
+      exits:
+        - to: Giguna Breach > SW Save > Save Point
+          req: ^map__giguna_breach__sw_save__save
+          time: 12
+    - name: IB Basement
+      coord: [12, 28]
+    - name: IB Gauntlet
+      coord: [11, 22]
+      exits:
+        - to: Irikar Breach > Gauntlet > Save Point
+          req: ^map__irikar_breach__gauntlet__save
+          time: 12
+    - name: IB Save Room
+      coord: [14, 26]
+      exits:
+        - to: Irikar Breach > Save Room > Save Point
+          req: ^map__irikar_breach__save_room__save
+          time: 12

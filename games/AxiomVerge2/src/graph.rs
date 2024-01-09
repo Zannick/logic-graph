@@ -1257,6 +1257,11 @@ pub fn get_area(spot: SpotId) -> AreaId {
         | SpotId::Menu__Kiengir_Map__Uhrum_East
         | SpotId::Menu__Kiengir_Map__Uhrum_Emergence
         | SpotId::Menu__Kiengir_Map__Uhrum_West => AreaId::Menu__Kiengir_Map,
+        SpotId::Menu__Breach_Map__GB_Peak
+        | SpotId::Menu__Breach_Map__GB_SW_Save
+        | SpotId::Menu__Breach_Map__IB_Basement
+        | SpotId::Menu__Breach_Map__IB_Gauntlet
+        | SpotId::Menu__Breach_Map__IB_Save_Room => AreaId::Menu__Breach_Map,
         SpotId::Uhrum__West_Entrance__West_27
         | SpotId::Uhrum__West_Entrance__West_26
         | SpotId::Uhrum__West_Entrance__Hidden_Passage_West
@@ -2600,6 +2605,11 @@ pub fn get_region(spot: SpotId) -> RegionId {
         | SpotId::Menu__Kiengir_Map__Uhrum_East
         | SpotId::Menu__Kiengir_Map__Uhrum_Emergence
         | SpotId::Menu__Kiengir_Map__Uhrum_West => RegionId::Menu,
+        SpotId::Menu__Breach_Map__GB_Peak
+        | SpotId::Menu__Breach_Map__GB_SW_Save
+        | SpotId::Menu__Breach_Map__IB_Basement
+        | SpotId::Menu__Breach_Map__IB_Gauntlet
+        | SpotId::Menu__Breach_Map__IB_Save_Room => RegionId::Menu,
         SpotId::Uhrum__West_Entrance__West_27
         | SpotId::Uhrum__West_Entrance__West_26
         | SpotId::Uhrum__West_Entrance__Hidden_Passage_West
@@ -4338,6 +4348,10 @@ impl world::Accessible for Exit {
             ExitId::Irikar_Breach__Worm_Rave__South__ex__Corner_1 => rules::access_hook(&ctx, world),
             ExitId::Irikar_Breach__Worm_Rave__South__ex__East_1 => rules::access_hook(&ctx, world),
             ExitId::Irikar_Breach__Worm_Rave__South__ex__Exit_Corridor__North_12_1 => true,
+            ExitId::Menu__Breach_Map__GB_Peak__ex__Giguna_Breach__Peak__Save_Point_1 => rules::access_map__giguna_breach__peak__save(&ctx, world),
+            ExitId::Menu__Breach_Map__GB_SW_Save__ex__Giguna_Breach__SW_Save__Save_Point_1 => rules::access_map__giguna_breach__sw_save__save(&ctx, world),
+            ExitId::Menu__Breach_Map__IB_Gauntlet__ex__Irikar_Breach__Gauntlet__Save_Point_1 => rules::access_map__irikar_breach__gauntlet__save(&ctx, world),
+            ExitId::Menu__Breach_Map__IB_Save_Room__ex__Irikar_Breach__Save_Room__Save_Point_1 => rules::access_map__irikar_breach__save_room__save(&ctx, world),
             ExitId::Menu__Kiengir_Map__Amagi_Main_Area__ex__Amagi__Main_Area__Save_Point_1 => rules::access_map__amagi__main_area__save(&ctx, world),
             ExitId::Menu__Kiengir_Map__Annuna_Center_Save__ex__Annuna__Center_Save__Save_Point_1 => rules::access_map__annuna__center_save__save(&ctx, world),
             ExitId::Menu__Kiengir_Map__Annuna_Factory_Entrance__ex__Annuna__Factory_Entrance__Save_Point_1 => rules::access_map__annuna__factory_entrance__save(&ctx, world),
@@ -5720,7 +5734,7 @@ pub struct Spot {
     pub actions: Range<usize>,
 }
 
-static RAW_SPOTS: [SpotId; 1334] = [
+static RAW_SPOTS: [SpotId; 1339] = [
     SpotId::None,
     SpotId::Amagi__Grid_31_19__East,
     SpotId::Amagi__Grid_31_19__West,
@@ -6905,6 +6919,11 @@ static RAW_SPOTS: [SpotId; 1334] = [
     SpotId::Irikar_Breach__Worm_Rave__Corner,
     SpotId::Irikar_Breach__Worm_Rave__East,
     SpotId::Irikar_Breach__Worm_Rave__South,
+    SpotId::Menu__Breach_Map__GB_Peak,
+    SpotId::Menu__Breach_Map__GB_SW_Save,
+    SpotId::Menu__Breach_Map__IB_Basement,
+    SpotId::Menu__Breach_Map__IB_Gauntlet,
+    SpotId::Menu__Breach_Map__IB_Save_Room,
     SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
     SpotId::Menu__Kiengir_Map__Amagi_Isolation,
     SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
@@ -7591,6 +7610,10 @@ lazy_static! {
         AreaId::Irikar__Sight_Room => Range {
             start: SpotId::Irikar__Sight_Room__Above_Room_East.into_usize(),
             end: SpotId::Irikar__Sight_Room__West_24.into_usize() + 1,
+        },
+        AreaId::Menu__Breach_Map => Range {
+            start: SpotId::Menu__Breach_Map__GB_Peak.into_usize(),
+            end: SpotId::Menu__Breach_Map__IB_Save_Room.into_usize() + 1,
         },
         AreaId::Menu__Kiengir_Map => Range {
             start: SpotId::Menu__Kiengir_Map__Amagi_East_Lake.into_usize(),
@@ -9784,6 +9807,10 @@ impl world::World for World {
             ExitId::Menu__Kiengir_Map__Uhrum_Center__ex__Uhrum__Save_Room__Save_Point_1 => SpotId::Menu__Kiengir_Map__Uhrum_Center,
             ExitId::Menu__Kiengir_Map__Uhrum_East__ex__Uhrum__Annuna_Corridor__Save_Point_1 => SpotId::Menu__Kiengir_Map__Uhrum_East,
             ExitId::Menu__Kiengir_Map__Uhrum_West__ex__Uhrum__West_Entrance__Save_Point_1 => SpotId::Menu__Kiengir_Map__Uhrum_West,
+            ExitId::Menu__Breach_Map__GB_Peak__ex__Giguna_Breach__Peak__Save_Point_1 => SpotId::Menu__Breach_Map__GB_Peak,
+            ExitId::Menu__Breach_Map__GB_SW_Save__ex__Giguna_Breach__SW_Save__Save_Point_1 => SpotId::Menu__Breach_Map__GB_SW_Save,
+            ExitId::Menu__Breach_Map__IB_Gauntlet__ex__Irikar_Breach__Gauntlet__Save_Point_1 => SpotId::Menu__Breach_Map__IB_Gauntlet,
+            ExitId::Menu__Breach_Map__IB_Save_Room__ex__Irikar_Breach__Save_Room__Save_Point_1 => SpotId::Menu__Breach_Map__IB_Save_Room,
             ExitId::Uhrum__West_Entrance__West_27__ex__Irikar__Lamassu__East_27_1 | ExitId:: Uhrum__West_Entrance__West_27__ex__South_Platform_1 => SpotId::Uhrum__West_Entrance__West_27,
             ExitId::Uhrum__West_Entrance__West_26__ex__Irikar__Lamassu__East_26_1 | ExitId:: Uhrum__West_Entrance__West_26__ex__Hidden_Passage_Entry_1 | ExitId:: Uhrum__West_Entrance__West_26__ex__Portal_Stand_1 | ExitId:: Uhrum__West_Entrance__West_26__ex__Portal_Stand_2 => SpotId::Uhrum__West_Entrance__West_26,
             ExitId::Uhrum__West_Entrance__Hidden_Passage_West__ex__Irikar__Lamassu__Hidden_Passage_East_1 => SpotId::Uhrum__West_Entrance__Hidden_Passage_West,
@@ -11078,6 +11105,10 @@ impl world::World for World {
             | SpotId::Irikar_Breach__Worm_Rave__Corner
             | SpotId::Irikar_Breach__Worm_Rave__East
             | SpotId::Irikar_Breach__Worm_Rave__South
+            | SpotId::Menu__Breach_Map__GB_Peak
+            | SpotId::Menu__Breach_Map__GB_SW_Save
+            | SpotId::Menu__Breach_Map__IB_Gauntlet
+            | SpotId::Menu__Breach_Map__IB_Save_Room
             | SpotId::Menu__Kiengir_Map__Amagi_Main_Area
             | SpotId::Menu__Kiengir_Map__Annuna_Center_Save
             | SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance
@@ -20919,6 +20950,34 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
             id: ExitId::Menu__Kiengir_Map__Uhrum_West__ex__Uhrum__West_Entrance__Save_Point_1,
             time: 12000,
             dest: SpotId::Uhrum__West_Entrance__Save_Point,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Menu__Breach_Map__GB_Peak__ex__Giguna_Breach__Peak__Save_Point_1 => Exit {
+            id: ExitId::Menu__Breach_Map__GB_Peak__ex__Giguna_Breach__Peak__Save_Point_1,
+            time: 12000,
+            dest: SpotId::Giguna_Breach__Peak__Save_Point,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Menu__Breach_Map__GB_SW_Save__ex__Giguna_Breach__SW_Save__Save_Point_1 => Exit {
+            id: ExitId::Menu__Breach_Map__GB_SW_Save__ex__Giguna_Breach__SW_Save__Save_Point_1,
+            time: 12000,
+            dest: SpotId::Giguna_Breach__SW_Save__Save_Point,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Menu__Breach_Map__IB_Gauntlet__ex__Irikar_Breach__Gauntlet__Save_Point_1 => Exit {
+            id: ExitId::Menu__Breach_Map__IB_Gauntlet__ex__Irikar_Breach__Gauntlet__Save_Point_1,
+            time: 12000,
+            dest: SpotId::Irikar_Breach__Gauntlet__Save_Point,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Menu__Breach_Map__IB_Save_Room__ex__Irikar_Breach__Save_Room__Save_Point_1 => Exit {
+            id: ExitId::Menu__Breach_Map__IB_Save_Room__ex__Irikar_Breach__Save_Room__Save_Point_1,
+            time: 12000,
+            dest: SpotId::Irikar_Breach__Save_Room__Save_Point,
             price: Currency::Free,
             loc_id: None,
         },
@@ -38130,6 +38189,70 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             exits: Range {
                 start: ExitId::Menu__Kiengir_Map__Uhrum_West__ex__Uhrum__West_Entrance__Save_Point_1.into_usize(),
                 end: ExitId::Menu__Kiengir_Map__Uhrum_West__ex__Uhrum__West_Entrance__Save_Point_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Menu__Breach_Map__GB_Peak => Spot {
+            id: SpotId::Menu__Breach_Map__GB_Peak,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Menu__Breach_Map__GB_Peak__ex__Giguna_Breach__Peak__Save_Point_1.into_usize(),
+                end: ExitId::Menu__Breach_Map__GB_Peak__ex__Giguna_Breach__Peak__Save_Point_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Menu__Breach_Map__GB_SW_Save => Spot {
+            id: SpotId::Menu__Breach_Map__GB_SW_Save,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Menu__Breach_Map__GB_SW_Save__ex__Giguna_Breach__SW_Save__Save_Point_1.into_usize(),
+                end: ExitId::Menu__Breach_Map__GB_SW_Save__ex__Giguna_Breach__SW_Save__Save_Point_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Menu__Breach_Map__IB_Basement => Spot {
+            id: SpotId::Menu__Breach_Map__IB_Basement,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Menu__Breach_Map__IB_Gauntlet => Spot {
+            id: SpotId::Menu__Breach_Map__IB_Gauntlet,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Menu__Breach_Map__IB_Gauntlet__ex__Irikar_Breach__Gauntlet__Save_Point_1.into_usize(),
+                end: ExitId::Menu__Breach_Map__IB_Gauntlet__ex__Irikar_Breach__Gauntlet__Save_Point_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Menu__Breach_Map__IB_Save_Room => Spot {
+            id: SpotId::Menu__Breach_Map__IB_Save_Room,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Menu__Breach_Map__IB_Save_Room__ex__Irikar_Breach__Save_Room__Save_Point_1.into_usize(),
+                end: ExitId::Menu__Breach_Map__IB_Save_Room__ex__Irikar_Breach__Save_Room__Save_Point_1.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,

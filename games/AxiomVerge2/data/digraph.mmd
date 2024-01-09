@@ -1511,6 +1511,13 @@ subgraph Menu
         Menu__Kiengir_Map__Uhrum_Emergence(Uhrum Emergence);
         Menu__Kiengir_Map__Uhrum_West(Uhrum West);
     end
+    subgraph Menu__Breach_Map[Breach Map]
+        Menu__Breach_Map__GB_Peak(GB Peak);
+        Menu__Breach_Map__GB_SW_Save(GB SW Save);
+        Menu__Breach_Map__IB_Basement(IB Basement);
+        Menu__Breach_Map__IB_Gauntlet(IB Gauntlet);
+        Menu__Breach_Map__IB_Save_Room(IB Save Room);
+    end
 end
 subgraph Uhrum
     subgraph Uhrum__West_Entrance[West Entrance]
@@ -2350,6 +2357,10 @@ Irikar__Lamassu__East_26 <--> Uhrum__West_Entrance__West_26
 Irikar__Lamassu__East_27 <--> Uhrum__West_Entrance__West_27
 Irikar__Lamassu__Hidden_Passage_East <--> Uhrum__West_Entrance__Hidden_Passage_West
 Irikar__Sight_Room__Above_Room_East --> Irikar__East_Rooftops__Upper_West
+Menu__Breach_Map__GB_Peak --> Giguna_Breach__Peak__Save_Point
+Menu__Breach_Map__GB_SW_Save --> Giguna_Breach__SW_Save__Save_Point
+Menu__Breach_Map__IB_Gauntlet --> Irikar_Breach__Gauntlet__Save_Point
+Menu__Breach_Map__IB_Save_Room --> Irikar_Breach__Save_Room__Save_Point
 Menu__Kiengir_Map__Amagi_Main_Area --> Amagi__Main_Area__Save_Point
 Menu__Kiengir_Map__Annuna_Center_Save --> Annuna__Center_Save__Save_Point
 Menu__Kiengir_Map__Annuna_Factory_Entrance --> Annuna__Factory_Entrance__Save_Point

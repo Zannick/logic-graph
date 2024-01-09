@@ -428,6 +428,11 @@ pub mod data {
             SpotId::Irikar_Breach__Worm_Rave__Corner => enums::Realm::Breach,
             SpotId::Irikar_Breach__Worm_Rave__East => enums::Realm::Breach,
             SpotId::Irikar_Breach__Worm_Rave__South => enums::Realm::Breach,
+            SpotId::Menu__Breach_Map__GB_Peak => enums::Realm::Map,
+            SpotId::Menu__Breach_Map__GB_SW_Save => enums::Realm::Map,
+            SpotId::Menu__Breach_Map__IB_Basement => enums::Realm::Map,
+            SpotId::Menu__Breach_Map__IB_Gauntlet => enums::Realm::Map,
+            SpotId::Menu__Breach_Map__IB_Save_Room => enums::Realm::Map,
             SpotId::Menu__Kiengir_Map__Amagi_East_Lake => enums::Realm::Map,
             SpotId::Menu__Kiengir_Map__Amagi_Isolation => enums::Realm::Map,
             SpotId::Menu__Kiengir_Map__Amagi_Main_Area => enums::Realm::Map,
@@ -811,6 +816,10 @@ pub mod data {
             SpotId::Ebih__Ebih_West__Mid_Save => SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
             SpotId::Ebih__Ebih_West__Upper_Save => SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
             SpotId::Ebih__Ebih_West__West_13 => SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            SpotId::Giguna_Breach__Peak__Save_Point => SpotId::Menu__Breach_Map__GB_Peak,
+            SpotId::Giguna_Breach__SW_Save__East_12 => SpotId::Menu__Breach_Map__GB_SW_Save,
+            SpotId::Giguna_Breach__SW_Save__Lower_Platform => SpotId::Menu__Breach_Map__GB_SW_Save,
+            SpotId::Giguna_Breach__SW_Save__Save_Point => SpotId::Menu__Breach_Map__GB_SW_Save,
             SpotId::Giguna__Giguna_Base__Save_Point => SpotId::Menu__Kiengir_Map__Giguna_Base,
             SpotId::Giguna__Giguna_Base__Staircase_Bottom => SpotId::Menu__Kiengir_Map__Giguna_Base,
             SpotId::Giguna__Giguna_Base__Table => SpotId::Menu__Kiengir_Map__Giguna_Base,
@@ -843,6 +852,17 @@ pub mod data {
             SpotId::Giguna__Ruins_West__Save_Point => SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
             SpotId::Glacier__Revival__Save_Point => SpotId::Menu__Kiengir_Map__Glacier_Revival,
             SpotId::Glacier__Revival__West_8 => SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            SpotId::Irikar_Breach__Gauntlet__East_22 => SpotId::Menu__Breach_Map__IB_Gauntlet,
+            SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Upper_Entry => {
+                SpotId::Menu__Breach_Map__IB_Gauntlet
+            }
+            SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Upper_Right => {
+                SpotId::Menu__Breach_Map__IB_Gauntlet
+            }
+            SpotId::Irikar_Breach__Gauntlet__Save_Point => SpotId::Menu__Breach_Map__IB_Gauntlet,
+            SpotId::Irikar_Breach__Save_Room__Save_Point => SpotId::Menu__Breach_Map__IB_Save_Room,
+            SpotId::Irikar_Breach__Save_Room__Upper_Area => SpotId::Menu__Breach_Map__IB_Save_Room,
+            SpotId::Irikar_Breach__Save_Room__West => SpotId::Menu__Breach_Map__IB_Save_Room,
             SpotId::Irikar__Hub__Bowl_Hole => SpotId::Menu__Kiengir_Map__Irikar_Hub,
             SpotId::Irikar__Hub__Bowl_Middle_Platform_Center => {
                 SpotId::Menu__Kiengir_Map__Irikar_Hub
@@ -7074,8 +7094,6 @@ impl context::Ctx for Context {
             AreaId::Irikar_Breach__Save_Room => {
                 if get_area(self.position) != area {
                     rules::action_reset_old_area__newpos(self, world, pos);
-                    self.cbits1
-                        .insert(flags::ContextBits1::MAP__IRIKAR_BREACH__SAVE_ROOM__SAVE);
                 }
             }
             AreaId::Irikar_Breach__Uhrum_Connector => {
@@ -7086,6 +7104,11 @@ impl context::Ctx for Context {
             AreaId::Irikar_Breach__Worm_Rave => {
                 if get_area(self.position) != area {
                     rules::action_reset_old_area__newpos(self, world, pos);
+                }
+            }
+            AreaId::Menu__Breach_Map => {
+                if get_area(self.position) != area {
+                    rules::action_save_last(self, world, pos);
                 }
             }
             AreaId::Menu__Kiengir_Map => {
@@ -7344,6 +7367,18 @@ impl context::Ctx for Context {
                 SpotId::Irikar_Breach__Gauntlet__Save_Point => {
                     self.cbits1
                         .insert(flags::ContextBits1::MAP__IRIKAR_BREACH__GAUNTLET__SAVE);
+                }
+                SpotId::Irikar_Breach__Save_Room__Save_Point => {
+                    self.cbits1
+                        .insert(flags::ContextBits1::MAP__IRIKAR_BREACH__SAVE_ROOM__SAVE);
+                }
+                SpotId::Irikar_Breach__Save_Room__Upper_Area => {
+                    self.cbits1
+                        .insert(flags::ContextBits1::MAP__IRIKAR_BREACH__SAVE_ROOM__SAVE);
+                }
+                SpotId::Irikar_Breach__Save_Room__West => {
+                    self.cbits1
+                        .insert(flags::ContextBits1::MAP__IRIKAR_BREACH__SAVE_ROOM__SAVE);
                 }
                 SpotId::Uhrum__Annuna_Corridor__Block_West => {
                     self.cbits1

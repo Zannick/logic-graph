@@ -1600,6 +1600,14 @@ pub fn access_map__giguna__ruins_west__save(ctx: &Context, world: &graph::World)
     // ^map__giguna__ruins_west__save
     ctx.map__giguna__ruins_west__save()
 }
+pub fn access_map__giguna_breach__peak__save(ctx: &Context, world: &graph::World) -> bool {
+    // ^map__giguna_breach__peak__save
+    ctx.map__giguna_breach__peak__save()
+}
+pub fn access_map__giguna_breach__sw_save__save(ctx: &Context, world: &graph::World) -> bool {
+    // ^map__giguna_breach__sw_save__save
+    ctx.map__giguna_breach__sw_save__save()
+}
 pub fn access_map__glacier__revival__save(ctx: &Context, world: &graph::World) -> bool {
     // ^map__glacier__revival__save
     ctx.map__glacier__revival__save()
@@ -1607,6 +1615,14 @@ pub fn access_map__glacier__revival__save(ctx: &Context, world: &graph::World) -
 pub fn access_map__irikar__hub__save(ctx: &Context, world: &graph::World) -> bool {
     // ^map__irikar__hub__save
     ctx.map__irikar__hub__save()
+}
+pub fn access_map__irikar_breach__gauntlet__save(ctx: &Context, world: &graph::World) -> bool {
+    // ^map__irikar_breach__gauntlet__save
+    ctx.map__irikar_breach__gauntlet__save()
+}
+pub fn access_map__irikar_breach__save_room__save(ctx: &Context, world: &graph::World) -> bool {
+    // ^map__irikar_breach__save_room__save
+    ctx.map__irikar_breach__save_room__save()
 }
 pub fn access_map__uhrum__annuna_corridor__save(ctx: &Context, world: &graph::World) -> bool {
     // ^map__uhrum__annuna_corridor__save

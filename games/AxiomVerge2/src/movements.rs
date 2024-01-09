@@ -7687,6 +7687,12 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
         ([false], SpotId::Irikar__Sight_Room__West_24, SpotId::Irikar__Sight_Room__Lower_Ledge) => {
             701
         }
+        ([false], SpotId::Menu__Breach_Map__GB_SW_Save, SpotId::Menu__Breach_Map__GB_Peak) => 500,
+        ([false], SpotId::Menu__Breach_Map__IB_Basement, SpotId::Menu__Breach_Map__GB_Peak) => 2100,
+        ([false], SpotId::Menu__Breach_Map__IB_Gauntlet, SpotId::Menu__Breach_Map__GB_Peak) => 1500,
+        ([false], SpotId::Menu__Breach_Map__IB_Save_Room, SpotId::Menu__Breach_Map__GB_Peak) => {
+            1900
+        }
         (
             [false],
             SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
@@ -20280,6 +20286,10 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
         ([true], SpotId::Irikar__Sight_Room__West_24, SpotId::Irikar__Sight_Room__Lower_Ledge) => {
             701
         }
+        ([true], SpotId::Menu__Breach_Map__GB_SW_Save, SpotId::Menu__Breach_Map__GB_Peak) => 500,
+        ([true], SpotId::Menu__Breach_Map__IB_Basement, SpotId::Menu__Breach_Map__GB_Peak) => 2100,
+        ([true], SpotId::Menu__Breach_Map__IB_Gauntlet, SpotId::Menu__Breach_Map__GB_Peak) => 1500,
+        ([true], SpotId::Menu__Breach_Map__IB_Save_Room, SpotId::Menu__Breach_Map__GB_Peak) => 1900,
         (
             [true],
             SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
@@ -32510,6 +32520,11 @@ pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
         (SpotId::Menu__Kiengir_Map__Uhrum_West, SpotId::Menu__Kiengir_Map__Uhrum_East) => true,
         (SpotId::Menu__Kiengir_Map__Uhrum_West, SpotId::Menu__Kiengir_Map__Uhrum_Emergence) => true,
         (SpotId::Menu__Kiengir_Map__Uhrum_West, SpotId::Menu__Kiengir_Map__Uhrum_West) => true,
+        (SpotId::Menu__Breach_Map__GB_Peak, SpotId::Menu__Breach_Map__GB_Peak) => true,
+        (SpotId::Menu__Breach_Map__GB_SW_Save, SpotId::Menu__Breach_Map__GB_Peak) => true,
+        (SpotId::Menu__Breach_Map__IB_Basement, SpotId::Menu__Breach_Map__GB_Peak) => true,
+        (SpotId::Menu__Breach_Map__IB_Gauntlet, SpotId::Menu__Breach_Map__GB_Peak) => true,
+        (SpotId::Menu__Breach_Map__IB_Save_Room, SpotId::Menu__Breach_Map__GB_Peak) => true,
         (SpotId::Uhrum__West_Entrance__West_27, SpotId::Uhrum__West_Entrance__Southeast_Tree) => {
             true
         }
@@ -53329,6 +53344,71 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             1000,
         ),
         (
+            SpotId::Menu__Breach_Map__GB_Peak,
+            SpotId::Giguna_Breach__Peak__Save_Point,
+            12000,
+        ),
+        (
+            SpotId::Menu__Breach_Map__GB_Peak,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Menu__Breach_Map__GB_SW_Save,
+            SpotId::Giguna_Breach__SW_Save__Save_Point,
+            12000,
+        ),
+        (
+            SpotId::Menu__Breach_Map__GB_SW_Save,
+            SpotId::Menu__Breach_Map__GB_Peak,
+            500,
+        ),
+        (
+            SpotId::Menu__Breach_Map__GB_SW_Save,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Menu__Breach_Map__IB_Basement,
+            SpotId::Menu__Breach_Map__GB_Peak,
+            2100,
+        ),
+        (
+            SpotId::Menu__Breach_Map__IB_Basement,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Menu__Breach_Map__IB_Gauntlet,
+            SpotId::Irikar_Breach__Gauntlet__Save_Point,
+            12000,
+        ),
+        (
+            SpotId::Menu__Breach_Map__IB_Gauntlet,
+            SpotId::Menu__Breach_Map__GB_Peak,
+            1500,
+        ),
+        (
+            SpotId::Menu__Breach_Map__IB_Gauntlet,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Menu__Breach_Map__IB_Save_Room,
+            SpotId::Irikar_Breach__Save_Room__Save_Point,
+            12000,
+        ),
+        (
+            SpotId::Menu__Breach_Map__IB_Save_Room,
+            SpotId::Menu__Breach_Map__GB_Peak,
+            1900,
+        ),
+        (
+            SpotId::Menu__Breach_Map__IB_Save_Room,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
             SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
             SpotId::Menu__Kiengir_Map__Amagi_Isolation,
             300,
@@ -65261,6 +65341,10 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
             Some(964)
         }
         (SpotId::Irikar__Sight_Room__West_24, SpotId::Irikar__Sight_Room__Lower_Ledge) => Some(701),
+        (SpotId::Menu__Breach_Map__GB_SW_Save, SpotId::Menu__Breach_Map__GB_Peak) => Some(500),
+        (SpotId::Menu__Breach_Map__IB_Basement, SpotId::Menu__Breach_Map__GB_Peak) => Some(2100),
+        (SpotId::Menu__Breach_Map__IB_Gauntlet, SpotId::Menu__Breach_Map__GB_Peak) => Some(1500),
+        (SpotId::Menu__Breach_Map__IB_Save_Room, SpotId::Menu__Breach_Map__GB_Peak) => Some(1900),
         (
             SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
             SpotId::Menu__Kiengir_Map__Amagi_Isolation,
@@ -75260,6 +75344,18 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
         }
         (SpotId::Irikar__Sight_Room__West_24, SpotId::Irikar__Sight_Room__Lower_Ledge) => {
             (Some(701), vec![])
+        }
+        (SpotId::Menu__Breach_Map__GB_SW_Save, SpotId::Menu__Breach_Map__GB_Peak) => {
+            (Some(500), vec![])
+        }
+        (SpotId::Menu__Breach_Map__IB_Basement, SpotId::Menu__Breach_Map__GB_Peak) => {
+            (Some(2100), vec![])
+        }
+        (SpotId::Menu__Breach_Map__IB_Gauntlet, SpotId::Menu__Breach_Map__GB_Peak) => {
+            (Some(1500), vec![])
+        }
+        (SpotId::Menu__Breach_Map__IB_Save_Room, SpotId::Menu__Breach_Map__GB_Peak) => {
+            (Some(1900), vec![])
         }
         (
             SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
