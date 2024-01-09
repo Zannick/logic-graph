@@ -678,9 +678,9 @@ class GameLogic(object):
             return True
         return False
     
-    def exclude_edge(self, edge):
+    def exclude_by_tag(self, info):
         if exc := self.special.get('graph_exclude_tags'):
-            if tags := edge.get('tags'):
+            if tags := info.get('tags'):
                 return any(x in exc for x in tags)
         return False
 
@@ -1069,6 +1069,10 @@ class GameLogic(object):
                     yield from spot.get('exits', ())
                     yield from spot.get('hybrid', ())
                     yield from spot.get('actions', ())
+
+    def get_area(self, spot_id):
+        spot = self.id_lookup[spot_id]
+        return self.id_lookup[construct_id(spot['region'], spot['area'])]
 
 
     def nonpoint_parse_results(self):
@@ -1642,6 +1646,7 @@ class GameLogic(object):
             'construct_test_name': construct_test_name,
             'escape_ctx': partial(re.compile(r'\b(ctx|world)\b').sub, r'$\1'),
             'field_size': field_size,
+            'get_area': self.get_area,
             'get_exit_target': get_exit_target,
             'get_exit_target_id': get_exit_target_id,
             'get_int_type_for_max': get_int_type_for_max,
@@ -1656,7 +1661,7 @@ class GameLogic(object):
             'trim_type_prefix': trim_type_prefix,
         })
         env.tests.update({
-            'exclude_edge': self.exclude_edge,
+            'exclude_by_tag': self.exclude_by_tag,
         })
         # Access cached_properties to ensure they're in the template vars
         self.unused_items

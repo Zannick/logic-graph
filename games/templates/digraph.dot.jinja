@@ -15,7 +15,7 @@ digraph {{ game }} {
         node[fillcolor="{{ (loop.index % 7) or 7 }}"];
 %% set r_offx, r_offy = r.graph_offset or (0, 0)
 %% set r_attr = r.graph_attrs or ""
-%% for a in r.areas
+%% for a in r.areas|reject('exclude_by_tag')|sort(attribute='id')
 %% set a_offx, a_offy = a.graph_offset or (0, 0)
 %% set a_attr = a.graph_attrs or ""
 %% for s in a.spots
@@ -31,24 +31,30 @@ digraph {{ game }} {
 %% endfor
 %% endfor
     edge[arrowsize=0.5];
-%% for s in gl.spots()
-%% for e in s.exits|reject('exclude_edge')|sort(attribute='id')
+%% for a in gl.areas()|reject('exclude_by_tag')|sort(attribute='id')
+%% for s in a.spots
+%% for e in s.exits|reject('exclude_by_tag')|sort(attribute='id')
     {{ s.id }} -> {{ e|get_exit_target }};
 %% endfor
-%% for h in s.hybrid|reject('exclude_edge')|sort(attribute='id')
+%% for h in s.hybrid|reject('exclude_by_tag')|sort(attribute='id')
     {{ s.id }} -> {{ h|get_exit_target }};
+%% endfor
 %% endfor
 %% endfor
     edge [arrowhead=none,style=dashed];
 %% for (k, l) in local_distances
+%% if k|get_area is not exclude_by_tag and l|get_area is not exclude_by_tag:
     {{ k }} -> {{ l }};
+%% endif
 %% endfor
     edge [arrowhead=normal,arrowtail=inv,dir=both,style=bold,color=white];
-%% for s in gl.spots()
-%% for a in s.actions|reject('exclude_edge')|sort(attribute='id')
+%% for a in gl.areas()|reject('exclude_by_tag')|sort(attribute='id')
+%% for s in a.spots
+%% for a in s.actions|reject('exclude_by_tag')|sort(attribute='id')
 %% if a.to and not a.to.startswith('^'):
     {{ s.id }} -> {{ a|get_exit_target }};
 %% endif
+%% endfor
 %% endfor
 %% endfor
 }
