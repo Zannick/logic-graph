@@ -317,6 +317,12 @@ class GameLogic(object):
                         spot['act'] = parseAction(
                                 spot['on_entry'], name=f'{spot["fullname"]}:on_entry')
                         spot['action_id'] = self.make_funcid(spot, 'act', 'on_entry', ON_ENTRY_ARGS)
+                    if all_to_update := area.get('all'):
+                        if lcl := all_to_update.get('local'):
+                            if 'local' in spot:
+                                spot['local'].extend(lcl)
+                            else:
+                                spot['local'] = list(lcl)
                     # hybrid spots are exits but have names
                     for loc in spot.get('locations', []) + spot.get('hybrid', []):
                         loc['spot'] = sname

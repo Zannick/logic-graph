@@ -1766,8 +1766,35 @@ pub enum SpotId {
     Irikar_Breach__Worm_Rave__Corner,
     Irikar_Breach__Worm_Rave__East,
     Irikar_Breach__Worm_Rave__South,
+    Menu__Kiengir_Map__Amagi_East_Lake,
+    Menu__Kiengir_Map__Amagi_Isolation,
+    Menu__Kiengir_Map__Amagi_Main_Area,
+    Menu__Kiengir_Map__Annuna_Center_Save,
+    Menu__Kiengir_Map__Annuna_Factory_Entrance,
+    Menu__Kiengir_Map__Annuna_Mirror_Match,
+    Menu__Kiengir_Map__Annuna_Upper,
+    Menu__Kiengir_Map__Annuna_Vertical_Room,
+    Menu__Kiengir_Map__Annuna_West_Bridge,
+    Menu__Kiengir_Map__Apocalypse,
+    Menu__Kiengir_Map__Ebih_Base_Camp,
+    Menu__Kiengir_Map__Ebih_Observatory,
+    Menu__Kiengir_Map__Ebih_West_Lower,
+    Menu__Kiengir_Map__Ebih_West_Mid,
+    Menu__Kiengir_Map__Ebih_West_Upper,
     Menu__Kiengir_Map__Giguna_Base,
+    Menu__Kiengir_Map__Giguna_Labyrinth,
+    Menu__Kiengir_Map__Giguna_Northeast,
+    Menu__Kiengir_Map__Giguna_Ruins_Top,
+    Menu__Kiengir_Map__Giguna_Ruins_West,
+    Menu__Kiengir_Map__Giguna_Separator,
     Menu__Kiengir_Map__Glacier_Revival,
+    Menu__Kiengir_Map__Irikar_Beach_Save,
+    Menu__Kiengir_Map__Irikar_Hub,
+    Menu__Kiengir_Map__Irikar_Midwest,
+    Menu__Kiengir_Map__Uhrum_Center,
+    Menu__Kiengir_Map__Uhrum_East,
+    Menu__Kiengir_Map__Uhrum_Emergence,
+    Menu__Kiengir_Map__Uhrum_West,
     Menu__Upgrade_Menu__Combat,
     Menu__Upgrade_Menu__Drone,
     Menu__Upgrade_Menu__Infection,
@@ -4895,11 +4922,92 @@ impl fmt::Display for SpotId {
             SpotId::Irikar_Breach__Worm_Rave__South => {
                 write!(f, "{}", "Irikar Breach > Worm Rave > South")
             }
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake => {
+                write!(f, "{}", "Menu > Kiengir Map > Amagi East Lake")
+            }
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation => {
+                write!(f, "{}", "Menu > Kiengir Map > Amagi Isolation")
+            }
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area => {
+                write!(f, "{}", "Menu > Kiengir Map > Amagi Main Area")
+            }
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save => {
+                write!(f, "{}", "Menu > Kiengir Map > Annuna Center Save")
+            }
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance => {
+                write!(f, "{}", "Menu > Kiengir Map > Annuna Factory Entrance")
+            }
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match => {
+                write!(f, "{}", "Menu > Kiengir Map > Annuna Mirror Match")
+            }
+            SpotId::Menu__Kiengir_Map__Annuna_Upper => {
+                write!(f, "{}", "Menu > Kiengir Map > Annuna Upper")
+            }
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room => {
+                write!(f, "{}", "Menu > Kiengir Map > Annuna Vertical Room")
+            }
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge => {
+                write!(f, "{}", "Menu > Kiengir Map > Annuna West Bridge")
+            }
+            SpotId::Menu__Kiengir_Map__Apocalypse => {
+                write!(f, "{}", "Menu > Kiengir Map > Apocalypse")
+            }
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp => {
+                write!(f, "{}", "Menu > Kiengir Map > Ebih Base Camp")
+            }
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory => {
+                write!(f, "{}", "Menu > Kiengir Map > Ebih Observatory")
+            }
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower => {
+                write!(f, "{}", "Menu > Kiengir Map > Ebih West Lower")
+            }
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid => {
+                write!(f, "{}", "Menu > Kiengir Map > Ebih West Mid")
+            }
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper => {
+                write!(f, "{}", "Menu > Kiengir Map > Ebih West Upper")
+            }
             SpotId::Menu__Kiengir_Map__Giguna_Base => {
                 write!(f, "{}", "Menu > Kiengir Map > Giguna Base")
             }
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth => {
+                write!(f, "{}", "Menu > Kiengir Map > Giguna Labyrinth")
+            }
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast => {
+                write!(f, "{}", "Menu > Kiengir Map > Giguna Northeast")
+            }
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top => {
+                write!(f, "{}", "Menu > Kiengir Map > Giguna Ruins Top")
+            }
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West => {
+                write!(f, "{}", "Menu > Kiengir Map > Giguna Ruins West")
+            }
+            SpotId::Menu__Kiengir_Map__Giguna_Separator => {
+                write!(f, "{}", "Menu > Kiengir Map > Giguna Separator")
+            }
             SpotId::Menu__Kiengir_Map__Glacier_Revival => {
                 write!(f, "{}", "Menu > Kiengir Map > Glacier Revival")
+            }
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save => {
+                write!(f, "{}", "Menu > Kiengir Map > Irikar Beach Save")
+            }
+            SpotId::Menu__Kiengir_Map__Irikar_Hub => {
+                write!(f, "{}", "Menu > Kiengir Map > Irikar Hub")
+            }
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest => {
+                write!(f, "{}", "Menu > Kiengir Map > Irikar Midwest")
+            }
+            SpotId::Menu__Kiengir_Map__Uhrum_Center => {
+                write!(f, "{}", "Menu > Kiengir Map > Uhrum Center")
+            }
+            SpotId::Menu__Kiengir_Map__Uhrum_East => {
+                write!(f, "{}", "Menu > Kiengir Map > Uhrum East")
+            }
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence => {
+                write!(f, "{}", "Menu > Kiengir Map > Uhrum Emergence")
+            }
+            SpotId::Menu__Kiengir_Map__Uhrum_West => {
+                write!(f, "{}", "Menu > Kiengir Map > Uhrum West")
             }
             SpotId::Menu__Upgrade_Menu__Combat => write!(f, "{}", "Menu > Upgrade Menu > Combat"),
             SpotId::Menu__Upgrade_Menu__Drone => write!(f, "{}", "Menu > Upgrade Menu > Drone"),
@@ -7276,10 +7384,73 @@ impl std::str::FromStr for SpotId {
             "Irikar Breach > Worm Rave > Corner" => Ok(SpotId::Irikar_Breach__Worm_Rave__Corner),
             "Irikar Breach > Worm Rave > East" => Ok(SpotId::Irikar_Breach__Worm_Rave__East),
             "Irikar Breach > Worm Rave > South" => Ok(SpotId::Irikar_Breach__Worm_Rave__South),
+            "Menu > Kiengir Map > Amagi East Lake" => {
+                Ok(SpotId::Menu__Kiengir_Map__Amagi_East_Lake)
+            }
+            "Menu > Kiengir Map > Amagi Isolation" => {
+                Ok(SpotId::Menu__Kiengir_Map__Amagi_Isolation)
+            }
+            "Menu > Kiengir Map > Amagi Main Area" => {
+                Ok(SpotId::Menu__Kiengir_Map__Amagi_Main_Area)
+            }
+            "Menu > Kiengir Map > Annuna Center Save" => {
+                Ok(SpotId::Menu__Kiengir_Map__Annuna_Center_Save)
+            }
+            "Menu > Kiengir Map > Annuna Factory Entrance" => {
+                Ok(SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance)
+            }
+            "Menu > Kiengir Map > Annuna Mirror Match" => {
+                Ok(SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match)
+            }
+            "Menu > Kiengir Map > Annuna Upper" => Ok(SpotId::Menu__Kiengir_Map__Annuna_Upper),
+            "Menu > Kiengir Map > Annuna Vertical Room" => {
+                Ok(SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room)
+            }
+            "Menu > Kiengir Map > Annuna West Bridge" => {
+                Ok(SpotId::Menu__Kiengir_Map__Annuna_West_Bridge)
+            }
+            "Menu > Kiengir Map > Apocalypse" => Ok(SpotId::Menu__Kiengir_Map__Apocalypse),
+            "Menu > Kiengir Map > Ebih Base Camp" => Ok(SpotId::Menu__Kiengir_Map__Ebih_Base_Camp),
+            "Menu > Kiengir Map > Ebih Observatory" => {
+                Ok(SpotId::Menu__Kiengir_Map__Ebih_Observatory)
+            }
+            "Menu > Kiengir Map > Ebih West Lower" => {
+                Ok(SpotId::Menu__Kiengir_Map__Ebih_West_Lower)
+            }
+            "Menu > Kiengir Map > Ebih West Mid" => Ok(SpotId::Menu__Kiengir_Map__Ebih_West_Mid),
+            "Menu > Kiengir Map > Ebih West Upper" => {
+                Ok(SpotId::Menu__Kiengir_Map__Ebih_West_Upper)
+            }
             "Menu > Kiengir Map > Giguna Base" => Ok(SpotId::Menu__Kiengir_Map__Giguna_Base),
+            "Menu > Kiengir Map > Giguna Labyrinth" => {
+                Ok(SpotId::Menu__Kiengir_Map__Giguna_Labyrinth)
+            }
+            "Menu > Kiengir Map > Giguna Northeast" => {
+                Ok(SpotId::Menu__Kiengir_Map__Giguna_Northeast)
+            }
+            "Menu > Kiengir Map > Giguna Ruins Top" => {
+                Ok(SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top)
+            }
+            "Menu > Kiengir Map > Giguna Ruins West" => {
+                Ok(SpotId::Menu__Kiengir_Map__Giguna_Ruins_West)
+            }
+            "Menu > Kiengir Map > Giguna Separator" => {
+                Ok(SpotId::Menu__Kiengir_Map__Giguna_Separator)
+            }
             "Menu > Kiengir Map > Glacier Revival" => {
                 Ok(SpotId::Menu__Kiengir_Map__Glacier_Revival)
             }
+            "Menu > Kiengir Map > Irikar Beach Save" => {
+                Ok(SpotId::Menu__Kiengir_Map__Irikar_Beach_Save)
+            }
+            "Menu > Kiengir Map > Irikar Hub" => Ok(SpotId::Menu__Kiengir_Map__Irikar_Hub),
+            "Menu > Kiengir Map > Irikar Midwest" => Ok(SpotId::Menu__Kiengir_Map__Irikar_Midwest),
+            "Menu > Kiengir Map > Uhrum Center" => Ok(SpotId::Menu__Kiengir_Map__Uhrum_Center),
+            "Menu > Kiengir Map > Uhrum East" => Ok(SpotId::Menu__Kiengir_Map__Uhrum_East),
+            "Menu > Kiengir Map > Uhrum Emergence" => {
+                Ok(SpotId::Menu__Kiengir_Map__Uhrum_Emergence)
+            }
+            "Menu > Kiengir Map > Uhrum West" => Ok(SpotId::Menu__Kiengir_Map__Uhrum_West),
             "Menu > Upgrade Menu > Combat" => Ok(SpotId::Menu__Upgrade_Menu__Combat),
             "Menu > Upgrade Menu > Drone" => Ok(SpotId::Menu__Upgrade_Menu__Drone),
             "Menu > Upgrade Menu > Infection" => Ok(SpotId::Menu__Upgrade_Menu__Infection),
@@ -10404,8 +10575,23 @@ pub enum ExitId {
     Irikar_Breach__Worm_Rave__South__ex__Corner_1,
     Irikar_Breach__Worm_Rave__South__ex__East_1,
     Irikar_Breach__Worm_Rave__South__ex__Exit_Corridor__North_12_1,
+    Menu__Kiengir_Map__Amagi_Main_Area__ex__Amagi__Main_Area__Save_Point_1,
+    Menu__Kiengir_Map__Annuna_Center_Save__ex__Annuna__Center_Save__Save_Point_1,
+    Menu__Kiengir_Map__Annuna_Factory_Entrance__ex__Annuna__Factory_Entrance__Save_Point_1,
+    Menu__Kiengir_Map__Annuna_Mirror_Match__ex__Annuna__Mirror_Match__Save_Point_1,
+    Menu__Kiengir_Map__Ebih_Base_Camp__ex__Ebih__Base_Camp__Save_Point_1,
+    Menu__Kiengir_Map__Ebih_West_Lower__ex__Ebih__Ebih_West__Lower_Save_1,
+    Menu__Kiengir_Map__Ebih_West_Mid__ex__Ebih__Ebih_West__Mid_Save_1,
+    Menu__Kiengir_Map__Ebih_West_Upper__ex__Ebih__Ebih_West__Upper_Save_1,
     Menu__Kiengir_Map__Giguna_Base__ex__Giguna__Giguna_Base__Save_Point_1,
+    Menu__Kiengir_Map__Giguna_Northeast__ex__Giguna__Giguna_Northeast__Save_Point_1,
+    Menu__Kiengir_Map__Giguna_Ruins_Top__ex__Giguna__Ruins_Top__Save_Point_1,
+    Menu__Kiengir_Map__Giguna_Ruins_West__ex__Giguna__Ruins_West__Save_Point_1,
     Menu__Kiengir_Map__Glacier_Revival__ex__Glacier__Revival__Save_Point_1,
+    Menu__Kiengir_Map__Irikar_Hub__ex__Irikar__Hub__Save_Point_1,
+    Menu__Kiengir_Map__Uhrum_Center__ex__Uhrum__Save_Room__Save_Point_1,
+    Menu__Kiengir_Map__Uhrum_East__ex__Uhrum__Annuna_Corridor__Save_Point_1,
+    Menu__Kiengir_Map__Uhrum_West__ex__Uhrum__West_Entrance__Save_Point_1,
     Menu__Upgrade_Menu__Combat__ex__Drone_1,
     Menu__Upgrade_Menu__Combat__ex__Infection_1,
     Menu__Upgrade_Menu__Combat__ex__Physiology_1,
@@ -11660,8 +11846,23 @@ impl fmt::Display for ExitId {
             ExitId::Irikar_Breach__Worm_Rave__South__ex__Corner_1 => write!(f, "{}", "Irikar Breach > Worm Rave > South ==> Corner (1)"),
             ExitId::Irikar_Breach__Worm_Rave__South__ex__East_1 => write!(f, "{}", "Irikar Breach > Worm Rave > South ==> East (1)"),
             ExitId::Irikar_Breach__Worm_Rave__South__ex__Exit_Corridor__North_12_1 => write!(f, "{}", "Irikar Breach > Worm Rave > South ==> Exit Corridor > North 12 (1)"),
+            ExitId::Menu__Kiengir_Map__Amagi_Main_Area__ex__Amagi__Main_Area__Save_Point_1 => write!(f, "{}", "Menu > Kiengir Map > Amagi Main Area ==> Amagi > Main Area > Save Point (1)"),
+            ExitId::Menu__Kiengir_Map__Annuna_Center_Save__ex__Annuna__Center_Save__Save_Point_1 => write!(f, "{}", "Menu > Kiengir Map > Annuna Center Save ==> Annuna > Center Save > Save Point (1)"),
+            ExitId::Menu__Kiengir_Map__Annuna_Factory_Entrance__ex__Annuna__Factory_Entrance__Save_Point_1 => write!(f, "{}", "Menu > Kiengir Map > Annuna Factory Entrance ==> Annuna > Factory Entrance > Save Point (1)"),
+            ExitId::Menu__Kiengir_Map__Annuna_Mirror_Match__ex__Annuna__Mirror_Match__Save_Point_1 => write!(f, "{}", "Menu > Kiengir Map > Annuna Mirror Match ==> Annuna > Mirror Match > Save Point (1)"),
+            ExitId::Menu__Kiengir_Map__Ebih_Base_Camp__ex__Ebih__Base_Camp__Save_Point_1 => write!(f, "{}", "Menu > Kiengir Map > Ebih Base Camp ==> Ebih > Base Camp > Save Point (1)"),
+            ExitId::Menu__Kiengir_Map__Ebih_West_Lower__ex__Ebih__Ebih_West__Lower_Save_1 => write!(f, "{}", "Menu > Kiengir Map > Ebih West Lower ==> Ebih > Ebih West > Lower Save (1)"),
+            ExitId::Menu__Kiengir_Map__Ebih_West_Mid__ex__Ebih__Ebih_West__Mid_Save_1 => write!(f, "{}", "Menu > Kiengir Map > Ebih West Mid ==> Ebih > Ebih West > Mid Save (1)"),
+            ExitId::Menu__Kiengir_Map__Ebih_West_Upper__ex__Ebih__Ebih_West__Upper_Save_1 => write!(f, "{}", "Menu > Kiengir Map > Ebih West Upper ==> Ebih > Ebih West > Upper Save (1)"),
             ExitId::Menu__Kiengir_Map__Giguna_Base__ex__Giguna__Giguna_Base__Save_Point_1 => write!(f, "{}", "Menu > Kiengir Map > Giguna Base ==> Giguna > Giguna Base > Save Point (1)"),
+            ExitId::Menu__Kiengir_Map__Giguna_Northeast__ex__Giguna__Giguna_Northeast__Save_Point_1 => write!(f, "{}", "Menu > Kiengir Map > Giguna Northeast ==> Giguna > Giguna Northeast > Save Point (1)"),
+            ExitId::Menu__Kiengir_Map__Giguna_Ruins_Top__ex__Giguna__Ruins_Top__Save_Point_1 => write!(f, "{}", "Menu > Kiengir Map > Giguna Ruins Top ==> Giguna > Ruins Top > Save Point (1)"),
+            ExitId::Menu__Kiengir_Map__Giguna_Ruins_West__ex__Giguna__Ruins_West__Save_Point_1 => write!(f, "{}", "Menu > Kiengir Map > Giguna Ruins West ==> Giguna > Ruins West > Save Point (1)"),
             ExitId::Menu__Kiengir_Map__Glacier_Revival__ex__Glacier__Revival__Save_Point_1 => write!(f, "{}", "Menu > Kiengir Map > Glacier Revival ==> Glacier > Revival > Save Point (1)"),
+            ExitId::Menu__Kiengir_Map__Irikar_Hub__ex__Irikar__Hub__Save_Point_1 => write!(f, "{}", "Menu > Kiengir Map > Irikar Hub ==> Irikar > Hub > Save Point (1)"),
+            ExitId::Menu__Kiengir_Map__Uhrum_Center__ex__Uhrum__Save_Room__Save_Point_1 => write!(f, "{}", "Menu > Kiengir Map > Uhrum Center ==> Uhrum > Save Room > Save Point (1)"),
+            ExitId::Menu__Kiengir_Map__Uhrum_East__ex__Uhrum__Annuna_Corridor__Save_Point_1 => write!(f, "{}", "Menu > Kiengir Map > Uhrum East ==> Uhrum > Annuna Corridor > Save Point (1)"),
+            ExitId::Menu__Kiengir_Map__Uhrum_West__ex__Uhrum__West_Entrance__Save_Point_1 => write!(f, "{}", "Menu > Kiengir Map > Uhrum West ==> Uhrum > West Entrance > Save Point (1)"),
             ExitId::Menu__Upgrade_Menu__Combat__ex__Drone_1 => write!(f, "{}", "Menu > Upgrade Menu > Combat ==> Drone (1)"),
             ExitId::Menu__Upgrade_Menu__Combat__ex__Infection_1 => write!(f, "{}", "Menu > Upgrade Menu > Combat ==> Infection (1)"),
             ExitId::Menu__Upgrade_Menu__Combat__ex__Physiology_1 => write!(f, "{}", "Menu > Upgrade Menu > Combat ==> Physiology (1)"),
@@ -12921,8 +13122,23 @@ impl std::str::FromStr for ExitId {
             "Irikar Breach > Worm Rave > South ==> Corner (1)" => Ok(ExitId::Irikar_Breach__Worm_Rave__South__ex__Corner_1),
             "Irikar Breach > Worm Rave > South ==> East (1)" => Ok(ExitId::Irikar_Breach__Worm_Rave__South__ex__East_1),
             "Irikar Breach > Worm Rave > South ==> Exit Corridor > North 12 (1)" => Ok(ExitId::Irikar_Breach__Worm_Rave__South__ex__Exit_Corridor__North_12_1),
+            "Menu > Kiengir Map > Amagi Main Area ==> Amagi > Main Area > Save Point (1)" => Ok(ExitId::Menu__Kiengir_Map__Amagi_Main_Area__ex__Amagi__Main_Area__Save_Point_1),
+            "Menu > Kiengir Map > Annuna Center Save ==> Annuna > Center Save > Save Point (1)" => Ok(ExitId::Menu__Kiengir_Map__Annuna_Center_Save__ex__Annuna__Center_Save__Save_Point_1),
+            "Menu > Kiengir Map > Annuna Factory Entrance ==> Annuna > Factory Entrance > Save Point (1)" => Ok(ExitId::Menu__Kiengir_Map__Annuna_Factory_Entrance__ex__Annuna__Factory_Entrance__Save_Point_1),
+            "Menu > Kiengir Map > Annuna Mirror Match ==> Annuna > Mirror Match > Save Point (1)" => Ok(ExitId::Menu__Kiengir_Map__Annuna_Mirror_Match__ex__Annuna__Mirror_Match__Save_Point_1),
+            "Menu > Kiengir Map > Ebih Base Camp ==> Ebih > Base Camp > Save Point (1)" => Ok(ExitId::Menu__Kiengir_Map__Ebih_Base_Camp__ex__Ebih__Base_Camp__Save_Point_1),
+            "Menu > Kiengir Map > Ebih West Lower ==> Ebih > Ebih West > Lower Save (1)" => Ok(ExitId::Menu__Kiengir_Map__Ebih_West_Lower__ex__Ebih__Ebih_West__Lower_Save_1),
+            "Menu > Kiengir Map > Ebih West Mid ==> Ebih > Ebih West > Mid Save (1)" => Ok(ExitId::Menu__Kiengir_Map__Ebih_West_Mid__ex__Ebih__Ebih_West__Mid_Save_1),
+            "Menu > Kiengir Map > Ebih West Upper ==> Ebih > Ebih West > Upper Save (1)" => Ok(ExitId::Menu__Kiengir_Map__Ebih_West_Upper__ex__Ebih__Ebih_West__Upper_Save_1),
             "Menu > Kiengir Map > Giguna Base ==> Giguna > Giguna Base > Save Point (1)" => Ok(ExitId::Menu__Kiengir_Map__Giguna_Base__ex__Giguna__Giguna_Base__Save_Point_1),
+            "Menu > Kiengir Map > Giguna Northeast ==> Giguna > Giguna Northeast > Save Point (1)" => Ok(ExitId::Menu__Kiengir_Map__Giguna_Northeast__ex__Giguna__Giguna_Northeast__Save_Point_1),
+            "Menu > Kiengir Map > Giguna Ruins Top ==> Giguna > Ruins Top > Save Point (1)" => Ok(ExitId::Menu__Kiengir_Map__Giguna_Ruins_Top__ex__Giguna__Ruins_Top__Save_Point_1),
+            "Menu > Kiengir Map > Giguna Ruins West ==> Giguna > Ruins West > Save Point (1)" => Ok(ExitId::Menu__Kiengir_Map__Giguna_Ruins_West__ex__Giguna__Ruins_West__Save_Point_1),
             "Menu > Kiengir Map > Glacier Revival ==> Glacier > Revival > Save Point (1)" => Ok(ExitId::Menu__Kiengir_Map__Glacier_Revival__ex__Glacier__Revival__Save_Point_1),
+            "Menu > Kiengir Map > Irikar Hub ==> Irikar > Hub > Save Point (1)" => Ok(ExitId::Menu__Kiengir_Map__Irikar_Hub__ex__Irikar__Hub__Save_Point_1),
+            "Menu > Kiengir Map > Uhrum Center ==> Uhrum > Save Room > Save Point (1)" => Ok(ExitId::Menu__Kiengir_Map__Uhrum_Center__ex__Uhrum__Save_Room__Save_Point_1),
+            "Menu > Kiengir Map > Uhrum East ==> Uhrum > Annuna Corridor > Save Point (1)" => Ok(ExitId::Menu__Kiengir_Map__Uhrum_East__ex__Uhrum__Annuna_Corridor__Save_Point_1),
+            "Menu > Kiengir Map > Uhrum West ==> Uhrum > West Entrance > Save Point (1)" => Ok(ExitId::Menu__Kiengir_Map__Uhrum_West__ex__Uhrum__West_Entrance__Save_Point_1),
             "Menu > Upgrade Menu > Combat ==> Drone (1)" => Ok(ExitId::Menu__Upgrade_Menu__Combat__ex__Drone_1),
             "Menu > Upgrade Menu > Combat ==> Infection (1)" => Ok(ExitId::Menu__Upgrade_Menu__Combat__ex__Infection_1),
             "Menu > Upgrade Menu > Combat ==> Physiology (1)" => Ok(ExitId::Menu__Upgrade_Menu__Combat__ex__Physiology_1),
@@ -14086,28 +14302,7 @@ pub enum WarpId {
     EarthSave,
     ExitBreach,
     ExitMenu,
-    FastTravelAmagiMainArea,
-    FastTravelAnnunaCenter,
-    FastTravelAnnunaFactoryEntrance,
-    FastTravelAnnunaMirrorMatch,
-    FastTravelEbihBaseCamp,
-    FastTravelEbihWestLower,
-    FastTravelEbihWestMid,
-    FastTravelEbihWestUpper,
-    FastTravelGigunaBase,
-    FastTravelGigunaBreachPeak,
-    FastTravelGigunaBreachSw,
-    FastTravelGigunaNortheast,
-    FastTravelGigunaRuinsWest,
-    FastTravelGlacierRevival,
-    FastTravelIrikarBreachBasement,
-    FastTravelIrikarBreachGauntlet,
-    FastTravelIrikarBreachSaveRoom,
-    FastTravelIrikarHub,
-    FastTravelUhrumAnnuna,
-    FastTravelUhrumEast,
-    FastTravelUhrumSaveRoom,
-    FastTravelUhrumWestEntrance,
+    FastTravelKiengir,
     MainSave,
     Menu,
 }
@@ -14118,36 +14313,7 @@ impl fmt::Display for WarpId {
             WarpId::EarthSave => write!(f, "{}", "EarthSave"),
             WarpId::ExitBreach => write!(f, "{}", "ExitBreach"),
             WarpId::ExitMenu => write!(f, "{}", "ExitMenu"),
-            WarpId::FastTravelAmagiMainArea => write!(f, "{}", "FastTravelAmagiMainArea"),
-            WarpId::FastTravelAnnunaCenter => write!(f, "{}", "FastTravelAnnunaCenter"),
-            WarpId::FastTravelAnnunaFactoryEntrance => {
-                write!(f, "{}", "FastTravelAnnunaFactoryEntrance")
-            }
-            WarpId::FastTravelAnnunaMirrorMatch => write!(f, "{}", "FastTravelAnnunaMirrorMatch"),
-            WarpId::FastTravelEbihBaseCamp => write!(f, "{}", "FastTravelEbihBaseCamp"),
-            WarpId::FastTravelEbihWestLower => write!(f, "{}", "FastTravelEbihWestLower"),
-            WarpId::FastTravelEbihWestMid => write!(f, "{}", "FastTravelEbihWestMid"),
-            WarpId::FastTravelEbihWestUpper => write!(f, "{}", "FastTravelEbihWestUpper"),
-            WarpId::FastTravelGigunaBase => write!(f, "{}", "FastTravelGigunaBase"),
-            WarpId::FastTravelGigunaBreachPeak => write!(f, "{}", "FastTravelGigunaBreachPeak"),
-            WarpId::FastTravelGigunaBreachSw => write!(f, "{}", "FastTravelGigunaBreachSw"),
-            WarpId::FastTravelGigunaNortheast => write!(f, "{}", "FastTravelGigunaNortheast"),
-            WarpId::FastTravelGigunaRuinsWest => write!(f, "{}", "FastTravelGigunaRuinsWest"),
-            WarpId::FastTravelGlacierRevival => write!(f, "{}", "FastTravelGlacierRevival"),
-            WarpId::FastTravelIrikarBreachBasement => {
-                write!(f, "{}", "FastTravelIrikarBreachBasement")
-            }
-            WarpId::FastTravelIrikarBreachGauntlet => {
-                write!(f, "{}", "FastTravelIrikarBreachGauntlet")
-            }
-            WarpId::FastTravelIrikarBreachSaveRoom => {
-                write!(f, "{}", "FastTravelIrikarBreachSaveRoom")
-            }
-            WarpId::FastTravelIrikarHub => write!(f, "{}", "FastTravelIrikarHub"),
-            WarpId::FastTravelUhrumAnnuna => write!(f, "{}", "FastTravelUhrumAnnuna"),
-            WarpId::FastTravelUhrumEast => write!(f, "{}", "FastTravelUhrumEast"),
-            WarpId::FastTravelUhrumSaveRoom => write!(f, "{}", "FastTravelUhrumSaveRoom"),
-            WarpId::FastTravelUhrumWestEntrance => write!(f, "{}", "FastTravelUhrumWestEntrance"),
+            WarpId::FastTravelKiengir => write!(f, "{}", "FastTravelKiengir"),
             WarpId::MainSave => write!(f, "{}", "MainSave"),
             WarpId::Menu => write!(f, "{}", "Menu"),
         }
@@ -14163,28 +14329,7 @@ impl std::str::FromStr for WarpId {
             "EarthSave" => Ok(WarpId::EarthSave),
             "ExitBreach" => Ok(WarpId::ExitBreach),
             "ExitMenu" => Ok(WarpId::ExitMenu),
-            "FastTravelAmagiMainArea" => Ok(WarpId::FastTravelAmagiMainArea),
-            "FastTravelAnnunaCenter" => Ok(WarpId::FastTravelAnnunaCenter),
-            "FastTravelAnnunaFactoryEntrance" => Ok(WarpId::FastTravelAnnunaFactoryEntrance),
-            "FastTravelAnnunaMirrorMatch" => Ok(WarpId::FastTravelAnnunaMirrorMatch),
-            "FastTravelEbihBaseCamp" => Ok(WarpId::FastTravelEbihBaseCamp),
-            "FastTravelEbihWestLower" => Ok(WarpId::FastTravelEbihWestLower),
-            "FastTravelEbihWestMid" => Ok(WarpId::FastTravelEbihWestMid),
-            "FastTravelEbihWestUpper" => Ok(WarpId::FastTravelEbihWestUpper),
-            "FastTravelGigunaBase" => Ok(WarpId::FastTravelGigunaBase),
-            "FastTravelGigunaBreachPeak" => Ok(WarpId::FastTravelGigunaBreachPeak),
-            "FastTravelGigunaBreachSw" => Ok(WarpId::FastTravelGigunaBreachSw),
-            "FastTravelGigunaNortheast" => Ok(WarpId::FastTravelGigunaNortheast),
-            "FastTravelGigunaRuinsWest" => Ok(WarpId::FastTravelGigunaRuinsWest),
-            "FastTravelGlacierRevival" => Ok(WarpId::FastTravelGlacierRevival),
-            "FastTravelIrikarBreachBasement" => Ok(WarpId::FastTravelIrikarBreachBasement),
-            "FastTravelIrikarBreachGauntlet" => Ok(WarpId::FastTravelIrikarBreachGauntlet),
-            "FastTravelIrikarBreachSaveRoom" => Ok(WarpId::FastTravelIrikarBreachSaveRoom),
-            "FastTravelIrikarHub" => Ok(WarpId::FastTravelIrikarHub),
-            "FastTravelUhrumAnnuna" => Ok(WarpId::FastTravelUhrumAnnuna),
-            "FastTravelUhrumEast" => Ok(WarpId::FastTravelUhrumEast),
-            "FastTravelUhrumSaveRoom" => Ok(WarpId::FastTravelUhrumSaveRoom),
-            "FastTravelUhrumWestEntrance" => Ok(WarpId::FastTravelUhrumWestEntrance),
+            "FastTravelKiengir" => Ok(WarpId::FastTravelKiengir),
             "MainSave" => Ok(WarpId::MainSave),
             "Menu" => Ok(WarpId::Menu),
             _ => Err(format!("Could not recognize as a WarpId: {}", s)),

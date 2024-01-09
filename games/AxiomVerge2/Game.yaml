@@ -174,7 +174,6 @@ warps:
     req: WITHIN `Menu > Upgrade Menu`
     to: ^last
     after: ^last = $default
-    base_movement: true
   exit_breach:
     time: 3
     req: ^realm == 'breach' and Exit_Breach and (^flipside NOT WITHIN $default)
@@ -182,178 +181,15 @@ warps:
     after: $clear_breach_save
     # Instead of making this base movement, anywhere it's strictly required needs a real Exit
     tags: [exit]
-  # Fast travel times are slightly different when travelling within an area
-  # TODO: Distance-based penalties (map scroll)
   # Fast travels are technically doable from the menu, but it costs time to switch tabs, so just model that
   # as exit menu time.
   # Fast travel isn't possible across realms: main/kiengir, breach, emergence, filter, interior(!)
   # TODO: fast travel collection skip... should these only be possible from a Menu > Map area?
-  fast_travel_amagi_main_area:
-    time: 12
-    req: $ft_main and ^map__amagi__main_area__save
-    to: Amagi > Main Area > Save Point
+  fast_travel_kiengir:
+    time: 0.1
+    req: $ft_main and (^map_spot WITHIN `Menu > Kiengir Map`)
+    to: ^map_spot
     after: $refill_energy
-    penalties:
-      - when: ^mode != 'drone'
-        add: 2.5
-  fast_travel_annuna_center:
-    time: 12
-    req: $ft_main and ^map__annuna__center_save__save
-    to: Annuna > Center Save > Save Point
-    after: $refill_energy
-    penalties:
-      - when: ^mode != 'drone'
-        add: 2.5
-  fast_travel_annuna_factory_entrance:
-    time: 12
-    req: $ft_main and ^map__annuna__factory_entrance__save
-    to: Annuna > Factory Entrance > Save Point
-    after: $refill_energy
-    penalties:
-      - when: ^mode != 'drone'
-        add: 2.5
-  fast_travel_annuna_mirror_match:
-    time: 12
-    req: $ft_main and ^map__annuna__mirror_match__save
-    to: Annuna > Mirror Match > Save Point
-    after: $refill_energy
-    penalties:
-      - when: ^mode != 'drone'
-        add: 2.5
-  fast_travel_ebih_base_camp:
-    time: 12
-    req: $ft_main and ^map__ebih__base_camp__save
-    to: Ebih > Base Camp > Save Point
-    after: $refill_energy
-    penalties:
-      - when: ^mode != 'drone'
-        add: 2.5
-  fast_travel_ebih_west_upper:
-    time: 12
-    req: $ft_main and ^map__ebih__ebih_west__upper_save
-    to: Ebih > Ebih West > Upper Save
-    after: $refill_energy
-    penalties:
-      - when: ^mode != 'drone'
-        add: 2.5
-  fast_travel_ebih_west_mid:
-    time: 12
-    req: $ft_main and ^map__ebih__ebih_west__mid_save
-    to: Ebih > Ebih West > Mid Save
-    after: $refill_energy
-    penalties:
-      - when: ^mode != 'drone'
-        add: 2.5
-  fast_travel_ebih_west_lower:
-    time: 12
-    req: $ft_main and ^map__ebih__ebih_west__lower_save
-    to: Ebih > Ebih West > Lower Save
-    after: $refill_energy
-    penalties:
-      - when: ^mode != 'drone'
-        add: 2.5
-  fast_travel_giguna_base:
-    time: 12
-    req: $ft_main and ^map__giguna__giguna_base__save
-    to: Giguna > Giguna Base > Save Point
-    after: $refill_energy
-    penalties:
-      - when: ^mode != 'drone'
-        add: 2.5
-  fast_travel_giguna_northeast:
-    time: 12
-    req: $ft_main and ^map__giguna__giguna_northeast__save
-    to: Giguna > Giguna Northeast > Save Point
-    after: $refill_energy
-    penalties:
-      - when: ^mode != 'drone'
-        add: 2.5
-  fast_travel_giguna_ruins_west:
-    time: 12
-    req: $ft_main and ^map__giguna__ruins_west__save
-    to: Giguna > Ruins West > Save Point
-    after: $refill_energy
-    penalties:
-      - when: ^mode != 'drone'
-        add: 2.5
-  fast_travel_glacier_revival:
-    time: 12
-    # Amashilama guarantees travel to this point
-    req: $ft_main and Amashilama
-    to: Glacier > Revival > Save Point
-    after: $refill_energy
-    penalties:
-      - when: ^mode != 'drone'
-        add: 2.5
-  fast_travel_irikar_hub:
-    time: 12
-    req: $ft_main and ^map__irikar__hub__save
-    to: Irikar > Hub > Save Point
-    after: $refill_energy
-    penalties:
-      - when: ^mode != 'drone'
-        add: 2.5
-  fast_travel_uhrum_annuna:
-    time: 12
-    req: $ft_main and ^map__uhrum__annuna_corridor__save
-    to: Uhrum > Annuna Corridor > Save Point
-    after: $refill_energy
-    penalties:
-      - when: ^mode != 'drone'
-        add: 2.5
-  fast_travel_uhrum_save_room:
-    time: 12
-    req: $ft_main and ^map__uhrum__save_room__save
-    to: Uhrum > Save Room > Save Point
-    after: $refill_energy
-    penalties:
-      - when: ^mode != 'drone'
-        add: 2.5
-  fast_travel_uhrum_west_entrance:
-    time: 12
-    req: $ft_main and ^map__uhrum__west_entrance__save
-    to: Uhrum > West Entrance > Save Point
-    after: $refill_energy
-    penalties:
-      - when: ^mode != 'drone'
-        add: 2.5
-  fast_travel_uhrum_east:
-    time: 12
-    req: $ft_main and ^map__uhrum__annuna_corridor__save
-    to: Uhrum > Annuna Corridor > Save Point
-    after: $refill_energy
-    penalties:
-      - when: ^mode != 'drone'
-        add: 2.5
-  # Fast travel in the breach can't be done as Indra
-  fast_travel_giguna_breach_peak:
-    time: 12
-    req: $ft_breach and ^map__giguna_breach__peak__save
-    to: Giguna Breach > Peak > Save Point
-    after: $refill_energy
-  fast_travel_giguna_breach_sw:
-    time: 12
-    req: $ft_breach and ^map__giguna_breach__sw_save__save
-    to: Giguna Breach > SW Save > Save Point
-    after: $refill_energy
-  fast_travel_irikar_breach_save_room:
-    time: 12
-    req: $ft_breach and ^map__irikar_breach__save_room__save
-    to: Irikar Breach > Save Room > Save Point
-    after: $refill_energy
-  fast_travel_irikar_breach_gauntlet:
-    time: 12
-    req: $ft_breach and ^map__irikar_breach__gauntlet__save
-    to: Irikar Breach > Gauntlet > Save Point
-    after: $refill_energy
-  fast_travel_irikar_breach_basement:
-    time: 12
-    req: $ft_breach and ^map__irikar_breach__basement_save__save
-    to: Irikar Breach > Basement Save > Save Point
-    after: $refill_energy
-
-# TODO: under some conditions, fast travel indra can appear standing up
-# 7s. I think it's immediately after savewarping though, so not very useful.
 
 actions:
   - name: Recall Drone
@@ -458,6 +294,7 @@ helpers:
     ^mode = 'drone'; ^indra = ^indrapos;
 
   # entry rules
+  # This is important for any area that's not really a room
   $save_last:action: ^last = ^position
   # ^position is the old value
   # testing to see if area(newpos) != area(position) != prev_area

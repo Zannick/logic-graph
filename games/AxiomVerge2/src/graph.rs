@@ -1228,9 +1228,35 @@ pub fn get_area(spot: SpotId) -> AreaId {
         | SpotId::Menu__Upgrade_Menu__Infection
         | SpotId::Menu__Upgrade_Menu__Drone => AreaId::Menu__Upgrade_Menu,
         SpotId::Menu__Warp_Only__Kiengir => AreaId::Menu__Warp_Only,
-        SpotId::Menu__Kiengir_Map__Giguna_Base | SpotId::Menu__Kiengir_Map__Glacier_Revival => {
-            AreaId::Menu__Kiengir_Map
-        }
+        SpotId::Menu__Kiengir_Map__Amagi_Main_Area
+        | SpotId::Menu__Kiengir_Map__Amagi_East_Lake
+        | SpotId::Menu__Kiengir_Map__Amagi_Isolation
+        | SpotId::Menu__Kiengir_Map__Annuna_Center_Save
+        | SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance
+        | SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match
+        | SpotId::Menu__Kiengir_Map__Annuna_Upper
+        | SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room
+        | SpotId::Menu__Kiengir_Map__Annuna_West_Bridge
+        | SpotId::Menu__Kiengir_Map__Apocalypse
+        | SpotId::Menu__Kiengir_Map__Ebih_Base_Camp
+        | SpotId::Menu__Kiengir_Map__Ebih_Observatory
+        | SpotId::Menu__Kiengir_Map__Ebih_West_Lower
+        | SpotId::Menu__Kiengir_Map__Ebih_West_Mid
+        | SpotId::Menu__Kiengir_Map__Ebih_West_Upper
+        | SpotId::Menu__Kiengir_Map__Giguna_Base
+        | SpotId::Menu__Kiengir_Map__Giguna_Labyrinth
+        | SpotId::Menu__Kiengir_Map__Giguna_Northeast
+        | SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top
+        | SpotId::Menu__Kiengir_Map__Giguna_Ruins_West
+        | SpotId::Menu__Kiengir_Map__Giguna_Separator
+        | SpotId::Menu__Kiengir_Map__Glacier_Revival
+        | SpotId::Menu__Kiengir_Map__Irikar_Beach_Save
+        | SpotId::Menu__Kiengir_Map__Irikar_Hub
+        | SpotId::Menu__Kiengir_Map__Irikar_Midwest
+        | SpotId::Menu__Kiengir_Map__Uhrum_Center
+        | SpotId::Menu__Kiengir_Map__Uhrum_East
+        | SpotId::Menu__Kiengir_Map__Uhrum_Emergence
+        | SpotId::Menu__Kiengir_Map__Uhrum_West => AreaId::Menu__Kiengir_Map,
         SpotId::Uhrum__West_Entrance__West_27
         | SpotId::Uhrum__West_Entrance__West_26
         | SpotId::Uhrum__West_Entrance__Hidden_Passage_West
@@ -2545,9 +2571,35 @@ pub fn get_region(spot: SpotId) -> RegionId {
         | SpotId::Menu__Upgrade_Menu__Infection
         | SpotId::Menu__Upgrade_Menu__Drone => RegionId::Menu,
         SpotId::Menu__Warp_Only__Kiengir => RegionId::Menu,
-        SpotId::Menu__Kiengir_Map__Giguna_Base | SpotId::Menu__Kiengir_Map__Glacier_Revival => {
-            RegionId::Menu
-        }
+        SpotId::Menu__Kiengir_Map__Amagi_Main_Area
+        | SpotId::Menu__Kiengir_Map__Amagi_East_Lake
+        | SpotId::Menu__Kiengir_Map__Amagi_Isolation
+        | SpotId::Menu__Kiengir_Map__Annuna_Center_Save
+        | SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance
+        | SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match
+        | SpotId::Menu__Kiengir_Map__Annuna_Upper
+        | SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room
+        | SpotId::Menu__Kiengir_Map__Annuna_West_Bridge
+        | SpotId::Menu__Kiengir_Map__Apocalypse
+        | SpotId::Menu__Kiengir_Map__Ebih_Base_Camp
+        | SpotId::Menu__Kiengir_Map__Ebih_Observatory
+        | SpotId::Menu__Kiengir_Map__Ebih_West_Lower
+        | SpotId::Menu__Kiengir_Map__Ebih_West_Mid
+        | SpotId::Menu__Kiengir_Map__Ebih_West_Upper
+        | SpotId::Menu__Kiengir_Map__Giguna_Base
+        | SpotId::Menu__Kiengir_Map__Giguna_Labyrinth
+        | SpotId::Menu__Kiengir_Map__Giguna_Northeast
+        | SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top
+        | SpotId::Menu__Kiengir_Map__Giguna_Ruins_West
+        | SpotId::Menu__Kiengir_Map__Giguna_Separator
+        | SpotId::Menu__Kiengir_Map__Glacier_Revival
+        | SpotId::Menu__Kiengir_Map__Irikar_Beach_Save
+        | SpotId::Menu__Kiengir_Map__Irikar_Hub
+        | SpotId::Menu__Kiengir_Map__Irikar_Midwest
+        | SpotId::Menu__Kiengir_Map__Uhrum_Center
+        | SpotId::Menu__Kiengir_Map__Uhrum_East
+        | SpotId::Menu__Kiengir_Map__Uhrum_Emergence
+        | SpotId::Menu__Kiengir_Map__Uhrum_West => RegionId::Menu,
         SpotId::Uhrum__West_Entrance__West_27
         | SpotId::Uhrum__West_Entrance__West_26
         | SpotId::Uhrum__West_Entrance__Hidden_Passage_West
@@ -4286,8 +4338,23 @@ impl world::Accessible for Exit {
             ExitId::Irikar_Breach__Worm_Rave__South__ex__Corner_1 => rules::access_hook(&ctx, world),
             ExitId::Irikar_Breach__Worm_Rave__South__ex__East_1 => rules::access_hook(&ctx, world),
             ExitId::Irikar_Breach__Worm_Rave__South__ex__Exit_Corridor__North_12_1 => true,
+            ExitId::Menu__Kiengir_Map__Amagi_Main_Area__ex__Amagi__Main_Area__Save_Point_1 => rules::access_map__amagi__main_area__save(&ctx, world),
+            ExitId::Menu__Kiengir_Map__Annuna_Center_Save__ex__Annuna__Center_Save__Save_Point_1 => rules::access_map__annuna__center_save__save(&ctx, world),
+            ExitId::Menu__Kiengir_Map__Annuna_Factory_Entrance__ex__Annuna__Factory_Entrance__Save_Point_1 => rules::access_map__annuna__factory_entrance__save(&ctx, world),
+            ExitId::Menu__Kiengir_Map__Annuna_Mirror_Match__ex__Annuna__Mirror_Match__Save_Point_1 => rules::access_map__annuna__mirror_match__save(&ctx, world),
+            ExitId::Menu__Kiengir_Map__Ebih_Base_Camp__ex__Ebih__Base_Camp__Save_Point_1 => rules::access_map__ebih__base_camp__save(&ctx, world),
+            ExitId::Menu__Kiengir_Map__Ebih_West_Lower__ex__Ebih__Ebih_West__Lower_Save_1 => rules::access_map__ebih__ebih_west__lower_save(&ctx, world),
+            ExitId::Menu__Kiengir_Map__Ebih_West_Mid__ex__Ebih__Ebih_West__Mid_Save_1 => rules::access_map__ebih__ebih_west__mid_save(&ctx, world),
+            ExitId::Menu__Kiengir_Map__Ebih_West_Upper__ex__Ebih__Ebih_West__Upper_Save_1 => rules::access_map__ebih__ebih_west__upper_save(&ctx, world),
             ExitId::Menu__Kiengir_Map__Giguna_Base__ex__Giguna__Giguna_Base__Save_Point_1 => rules::access_map__giguna__giguna_base__save(&ctx, world),
+            ExitId::Menu__Kiengir_Map__Giguna_Northeast__ex__Giguna__Giguna_Northeast__Save_Point_1 => rules::access_map__giguna__giguna_northeast__save(&ctx, world),
+            ExitId::Menu__Kiengir_Map__Giguna_Ruins_Top__ex__Giguna__Ruins_Top__Save_Point_1 => rules::access_map__giguna__ruins_top__save(&ctx, world),
+            ExitId::Menu__Kiengir_Map__Giguna_Ruins_West__ex__Giguna__Ruins_West__Save_Point_1 => rules::access_map__giguna__ruins_west__save(&ctx, world),
             ExitId::Menu__Kiengir_Map__Glacier_Revival__ex__Glacier__Revival__Save_Point_1 => rules::access_amashilama(&ctx, world),
+            ExitId::Menu__Kiengir_Map__Irikar_Hub__ex__Irikar__Hub__Save_Point_1 => rules::access_map__irikar__hub__save(&ctx, world),
+            ExitId::Menu__Kiengir_Map__Uhrum_Center__ex__Uhrum__Save_Room__Save_Point_1 => rules::access_map__uhrum__save_room__save(&ctx, world),
+            ExitId::Menu__Kiengir_Map__Uhrum_East__ex__Uhrum__Annuna_Corridor__Save_Point_1 => rules::access_map__uhrum__annuna_corridor__save(&ctx, world),
+            ExitId::Menu__Kiengir_Map__Uhrum_West__ex__Uhrum__West_Entrance__Save_Point_1 => rules::access_map__uhrum__west_entrance__save(&ctx, world),
             ExitId::Menu__Upgrade_Menu__Combat__ex__Drone_1 => rules::access_remote_drone(&ctx, world),
             ExitId::Menu__Upgrade_Menu__Combat__ex__Infection_1 => rules::access_infect(&ctx, world),
             ExitId::Menu__Upgrade_Menu__Combat__ex__Physiology_1 => true,
@@ -4469,28 +4536,134 @@ impl world::Accessible for Exit {
         self.time
     }
     fn time(&self, ctx: &Context, world: &World) -> u32 {
-        self.time + match self.id {
-            ExitId::Annuna__Sniper_Valley__Cavern_Outer_Rock_East__ex__Cavern_Inner_Rock_West_1 => {
-                if rules::access_not_slingshot_hook(ctx, world) {
-                    100
-                } else {
-                    0
+        self.time
+            + match self.id {
+                ExitId::Annuna__Sniper_Valley__Cavern_Outer_Rock_East__ex__Cavern_Inner_Rock_West_1 => {
+                    if rules::access_not_slingshot_hook(ctx, world) {
+                        100
+                    } else {
+                        0
+                    }
                 }
-            }
-            ExitId::Menu__Kiengir_Map__Giguna_Base__ex__Giguna__Giguna_Base__Save_Point_1 => {
-                if rules::access_mode_ne_drone(ctx, world) {
-                    2500
-                } else {
-                    0
+                ExitId::Menu__Kiengir_Map__Amagi_Main_Area__ex__Amagi__Main_Area__Save_Point_1 => {
+                    if rules::access_mode_ne_drone(ctx, world) {
+                        2500
+                    } else {
+                        0
+                    }
                 }
-            }
-            ExitId::Menu__Kiengir_Map__Glacier_Revival__ex__Glacier__Revival__Save_Point_1 => {
-                if rules::access_mode_eq_drone(ctx, world) {
-                    2500
-                } else {
-                    0
+                ExitId::Menu__Kiengir_Map__Annuna_Center_Save__ex__Annuna__Center_Save__Save_Point_1 => {
+                    if rules::access_mode_ne_drone(ctx, world) {
+                        2500
+                    } else {
+                        0
+                    }
                 }
-            }
+                ExitId::Menu__Kiengir_Map__Annuna_Factory_Entrance__ex__Annuna__Factory_Entrance__Save_Point_1 => {
+                    if rules::access_mode_ne_drone(ctx, world) {
+                        2500
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Menu__Kiengir_Map__Annuna_Mirror_Match__ex__Annuna__Mirror_Match__Save_Point_1 => {
+                    if rules::access_mode_ne_drone(ctx, world) {
+                        2500
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Menu__Kiengir_Map__Ebih_Base_Camp__ex__Ebih__Base_Camp__Save_Point_1 => {
+                    if rules::access_mode_ne_drone(ctx, world) {
+                        2500
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Menu__Kiengir_Map__Ebih_West_Lower__ex__Ebih__Ebih_West__Lower_Save_1 => {
+                    if rules::access_mode_ne_drone(ctx, world) {
+                        2500
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Menu__Kiengir_Map__Ebih_West_Mid__ex__Ebih__Ebih_West__Mid_Save_1 => {
+                    if rules::access_mode_ne_drone(ctx, world) {
+                        2500
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Menu__Kiengir_Map__Ebih_West_Upper__ex__Ebih__Ebih_West__Upper_Save_1 => {
+                    if rules::access_mode_ne_drone(ctx, world) {
+                        2500
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Menu__Kiengir_Map__Giguna_Base__ex__Giguna__Giguna_Base__Save_Point_1 => {
+                    if rules::access_mode_ne_drone(ctx, world) {
+                        2500
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Menu__Kiengir_Map__Giguna_Northeast__ex__Giguna__Giguna_Northeast__Save_Point_1 => {
+                    if rules::access_mode_ne_drone(ctx, world) {
+                        2500
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Menu__Kiengir_Map__Giguna_Ruins_Top__ex__Giguna__Ruins_Top__Save_Point_1 => {
+                    if rules::access_mode_ne_drone(ctx, world) {
+                        2500
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Menu__Kiengir_Map__Giguna_Ruins_West__ex__Giguna__Ruins_West__Save_Point_1 => {
+                    if rules::access_mode_ne_drone(ctx, world) {
+                        2500
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Menu__Kiengir_Map__Glacier_Revival__ex__Glacier__Revival__Save_Point_1 => {
+                    if rules::access_mode_eq_drone(ctx, world) {
+                        2500
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Menu__Kiengir_Map__Irikar_Hub__ex__Irikar__Hub__Save_Point_1 => {
+                    if rules::access_mode_ne_drone(ctx, world) {
+                        2500
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Menu__Kiengir_Map__Uhrum_Center__ex__Uhrum__Save_Room__Save_Point_1 => {
+                    if rules::access_mode_ne_drone(ctx, world) {
+                        2500
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Menu__Kiengir_Map__Uhrum_East__ex__Uhrum__Annuna_Corridor__Save_Point_1 => {
+                    if rules::access_mode_ne_drone(ctx, world) {
+                        2500
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Menu__Kiengir_Map__Uhrum_West__ex__Uhrum__West_Entrance__Save_Point_1 => {
+                    if rules::access_mode_ne_drone(ctx, world) {
+                        2500
+                    } else {
+                        0
+                    }
+                }
             _ => 0,
         }
     }
@@ -5456,71 +5629,8 @@ impl world::Accessible for Warp {
                     )
                 }
                 WarpId::ExitMenu => rules::access_within_menu_gt_upgrade_menu(ctx, world),
-                WarpId::FastTravelAmagiMainArea => {
-                    rules::access_ft_main_and_map__amagi__main_area__save(ctx, world)
-                }
-                WarpId::FastTravelAnnunaCenter => {
-                    rules::access_ft_main_and_map__annuna__center_save__save(ctx, world)
-                }
-                WarpId::FastTravelAnnunaFactoryEntrance => {
-                    rules::access_ft_main_and_map__annuna__factory_entrance__save(ctx, world)
-                }
-                WarpId::FastTravelAnnunaMirrorMatch => {
-                    rules::access_ft_main_and_map__annuna__mirror_match__save(ctx, world)
-                }
-                WarpId::FastTravelEbihBaseCamp => {
-                    rules::access_ft_main_and_map__ebih__base_camp__save(ctx, world)
-                }
-                WarpId::FastTravelEbihWestLower => {
-                    rules::access_ft_main_and_map__ebih__ebih_west__lower_save(ctx, world)
-                }
-                WarpId::FastTravelEbihWestMid => {
-                    rules::access_ft_main_and_map__ebih__ebih_west__mid_save(ctx, world)
-                }
-                WarpId::FastTravelEbihWestUpper => {
-                    rules::access_ft_main_and_map__ebih__ebih_west__upper_save(ctx, world)
-                }
-                WarpId::FastTravelGigunaBase => {
-                    rules::access_ft_main_and_map__giguna__giguna_base__save(ctx, world)
-                }
-                WarpId::FastTravelGigunaBreachPeak => {
-                    rules::access_ft_breach_and_map__giguna_breach__peak__save(ctx, world)
-                }
-                WarpId::FastTravelGigunaBreachSw => {
-                    rules::access_ft_breach_and_map__giguna_breach__sw_save__save(ctx, world)
-                }
-                WarpId::FastTravelGigunaNortheast => {
-                    rules::access_ft_main_and_map__giguna__giguna_northeast__save(ctx, world)
-                }
-                WarpId::FastTravelGigunaRuinsWest => {
-                    rules::access_ft_main_and_map__giguna__ruins_west__save(ctx, world)
-                }
-                WarpId::FastTravelGlacierRevival => {
-                    rules::access_ft_main_and_amashilama(ctx, world)
-                }
-                WarpId::FastTravelIrikarBreachBasement => {
-                    rules::access_ft_breach_and_map__irikar_breach__basement_save__save(ctx, world)
-                }
-                WarpId::FastTravelIrikarBreachGauntlet => {
-                    rules::access_ft_breach_and_map__irikar_breach__gauntlet__save(ctx, world)
-                }
-                WarpId::FastTravelIrikarBreachSaveRoom => {
-                    rules::access_ft_breach_and_map__irikar_breach__save_room__save(ctx, world)
-                }
-                WarpId::FastTravelIrikarHub => {
-                    rules::access_ft_main_and_map__irikar__hub__save(ctx, world)
-                }
-                WarpId::FastTravelUhrumAnnuna => {
-                    rules::access_ft_main_and_map__uhrum__annuna_corridor__save(ctx, world)
-                }
-                WarpId::FastTravelUhrumEast => {
-                    rules::access_ft_main_and_map__uhrum__annuna_corridor__save(ctx, world)
-                }
-                WarpId::FastTravelUhrumSaveRoom => {
-                    rules::access_ft_main_and_map__uhrum__save_room__save(ctx, world)
-                }
-                WarpId::FastTravelUhrumWestEntrance => {
-                    rules::access_ft_main_and_map__uhrum__west_entrance__save(ctx, world)
+                WarpId::FastTravelKiengir => {
+                    rules::access_ft_main_and___map_spot_within_menu_gt_kiengir_map(ctx, world)
                 }
                 WarpId::MainSave => {
                     rules::access_realm_in___main_interior_emergence_and_amashilama(ctx, world)
@@ -5534,125 +5644,6 @@ impl world::Accessible for Warp {
     fn time(&self, ctx: &Context, world: &World) -> u32 {
         self.time
             + match self.id {
-                WarpId::FastTravelAmagiMainArea => {
-                    if rules::access_mode_ne_drone(ctx, world) {
-                        2500
-                    } else {
-                        0
-                    }
-                }
-                WarpId::FastTravelAnnunaCenter => {
-                    if rules::access_mode_ne_drone(ctx, world) {
-                        2500
-                    } else {
-                        0
-                    }
-                }
-                WarpId::FastTravelAnnunaFactoryEntrance => {
-                    if rules::access_mode_ne_drone(ctx, world) {
-                        2500
-                    } else {
-                        0
-                    }
-                }
-                WarpId::FastTravelAnnunaMirrorMatch => {
-                    if rules::access_mode_ne_drone(ctx, world) {
-                        2500
-                    } else {
-                        0
-                    }
-                }
-                WarpId::FastTravelEbihBaseCamp => {
-                    if rules::access_mode_ne_drone(ctx, world) {
-                        2500
-                    } else {
-                        0
-                    }
-                }
-                WarpId::FastTravelEbihWestLower => {
-                    if rules::access_mode_ne_drone(ctx, world) {
-                        2500
-                    } else {
-                        0
-                    }
-                }
-                WarpId::FastTravelEbihWestMid => {
-                    if rules::access_mode_ne_drone(ctx, world) {
-                        2500
-                    } else {
-                        0
-                    }
-                }
-                WarpId::FastTravelEbihWestUpper => {
-                    if rules::access_mode_ne_drone(ctx, world) {
-                        2500
-                    } else {
-                        0
-                    }
-                }
-                WarpId::FastTravelGigunaBase => {
-                    if rules::access_mode_ne_drone(ctx, world) {
-                        2500
-                    } else {
-                        0
-                    }
-                }
-                WarpId::FastTravelGigunaNortheast => {
-                    if rules::access_mode_ne_drone(ctx, world) {
-                        2500
-                    } else {
-                        0
-                    }
-                }
-                WarpId::FastTravelGigunaRuinsWest => {
-                    if rules::access_mode_ne_drone(ctx, world) {
-                        2500
-                    } else {
-                        0
-                    }
-                }
-                WarpId::FastTravelGlacierRevival => {
-                    if rules::access_mode_ne_drone(ctx, world) {
-                        2500
-                    } else {
-                        0
-                    }
-                }
-                WarpId::FastTravelIrikarHub => {
-                    if rules::access_mode_ne_drone(ctx, world) {
-                        2500
-                    } else {
-                        0
-                    }
-                }
-                WarpId::FastTravelUhrumAnnuna => {
-                    if rules::access_mode_ne_drone(ctx, world) {
-                        2500
-                    } else {
-                        0
-                    }
-                }
-                WarpId::FastTravelUhrumEast => {
-                    if rules::access_mode_ne_drone(ctx, world) {
-                        2500
-                    } else {
-                        0
-                    }
-                }
-                WarpId::FastTravelUhrumSaveRoom => {
-                    if rules::access_mode_ne_drone(ctx, world) {
-                        2500
-                    } else {
-                        0
-                    }
-                }
-                WarpId::FastTravelUhrumWestEntrance => {
-                    if rules::access_mode_ne_drone(ctx, world) {
-                        2500
-                    } else {
-                        0
-                    }
-                }
                 WarpId::MainSave => {
                     if rules::access_mode_ne_drone(ctx, world) {
                         2500
@@ -5681,36 +5672,7 @@ impl world::Warp for Warp {
                 WarpId::EarthSave => ctx.save(),
                 WarpId::ExitBreach => data::flipside(ctx.position()),
                 WarpId::ExitMenu => ctx.last(),
-                WarpId::FastTravelAmagiMainArea => SpotId::Amagi__Main_Area__Save_Point,
-                WarpId::FastTravelAnnunaCenter => SpotId::Annuna__Center_Save__Save_Point,
-                WarpId::FastTravelAnnunaFactoryEntrance => {
-                    SpotId::Annuna__Factory_Entrance__Save_Point
-                }
-                WarpId::FastTravelAnnunaMirrorMatch => SpotId::Annuna__Mirror_Match__Save_Point,
-                WarpId::FastTravelEbihBaseCamp => SpotId::Ebih__Base_Camp__Save_Point,
-                WarpId::FastTravelEbihWestLower => SpotId::Ebih__Ebih_West__Lower_Save,
-                WarpId::FastTravelEbihWestMid => SpotId::Ebih__Ebih_West__Mid_Save,
-                WarpId::FastTravelEbihWestUpper => SpotId::Ebih__Ebih_West__Upper_Save,
-                WarpId::FastTravelGigunaBase => SpotId::Giguna__Giguna_Base__Save_Point,
-                WarpId::FastTravelGigunaBreachPeak => SpotId::Giguna_Breach__Peak__Save_Point,
-                WarpId::FastTravelGigunaBreachSw => SpotId::Giguna_Breach__SW_Save__Save_Point,
-                WarpId::FastTravelGigunaNortheast => SpotId::Giguna__Giguna_Northeast__Save_Point,
-                WarpId::FastTravelGigunaRuinsWest => SpotId::Giguna__Ruins_West__Save_Point,
-                WarpId::FastTravelGlacierRevival => SpotId::Glacier__Revival__Save_Point,
-                WarpId::FastTravelIrikarBreachBasement => {
-                    SpotId::Irikar_Breach__Basement_Save__Save_Point
-                }
-                WarpId::FastTravelIrikarBreachGauntlet => {
-                    SpotId::Irikar_Breach__Gauntlet__Save_Point
-                }
-                WarpId::FastTravelIrikarBreachSaveRoom => {
-                    SpotId::Irikar_Breach__Save_Room__Save_Point
-                }
-                WarpId::FastTravelIrikarHub => SpotId::Irikar__Hub__Save_Point,
-                WarpId::FastTravelUhrumAnnuna => SpotId::Uhrum__Annuna_Corridor__Save_Point,
-                WarpId::FastTravelUhrumEast => SpotId::Uhrum__Annuna_Corridor__Save_Point,
-                WarpId::FastTravelUhrumSaveRoom => SpotId::Uhrum__Save_Room__Save_Point,
-                WarpId::FastTravelUhrumWestEntrance => SpotId::Uhrum__West_Entrance__Save_Point,
+                WarpId::FastTravelKiengir => data::map_spot(ctx.position()),
                 WarpId::MainSave => ctx.save(),
                 WarpId::Menu => SpotId::Menu__Upgrade_Menu__Physiology,
             }
@@ -5732,28 +5694,7 @@ impl world::Warp for Warp {
             WarpId::BreachSave => rules::action_refill_energy(ctx, world),
             WarpId::ExitBreach => rules::action_clear_breach_save(ctx, world),
             WarpId::ExitMenu => rules::action_last_set_default(ctx, world),
-            WarpId::FastTravelAmagiMainArea => rules::action_refill_energy(ctx, world),
-            WarpId::FastTravelAnnunaCenter => rules::action_refill_energy(ctx, world),
-            WarpId::FastTravelAnnunaFactoryEntrance => rules::action_refill_energy(ctx, world),
-            WarpId::FastTravelAnnunaMirrorMatch => rules::action_refill_energy(ctx, world),
-            WarpId::FastTravelEbihBaseCamp => rules::action_refill_energy(ctx, world),
-            WarpId::FastTravelEbihWestLower => rules::action_refill_energy(ctx, world),
-            WarpId::FastTravelEbihWestMid => rules::action_refill_energy(ctx, world),
-            WarpId::FastTravelEbihWestUpper => rules::action_refill_energy(ctx, world),
-            WarpId::FastTravelGigunaBase => rules::action_refill_energy(ctx, world),
-            WarpId::FastTravelGigunaBreachPeak => rules::action_refill_energy(ctx, world),
-            WarpId::FastTravelGigunaBreachSw => rules::action_refill_energy(ctx, world),
-            WarpId::FastTravelGigunaNortheast => rules::action_refill_energy(ctx, world),
-            WarpId::FastTravelGigunaRuinsWest => rules::action_refill_energy(ctx, world),
-            WarpId::FastTravelGlacierRevival => rules::action_refill_energy(ctx, world),
-            WarpId::FastTravelIrikarBreachBasement => rules::action_refill_energy(ctx, world),
-            WarpId::FastTravelIrikarBreachGauntlet => rules::action_refill_energy(ctx, world),
-            WarpId::FastTravelIrikarBreachSaveRoom => rules::action_refill_energy(ctx, world),
-            WarpId::FastTravelIrikarHub => rules::action_refill_energy(ctx, world),
-            WarpId::FastTravelUhrumAnnuna => rules::action_refill_energy(ctx, world),
-            WarpId::FastTravelUhrumEast => rules::action_refill_energy(ctx, world),
-            WarpId::FastTravelUhrumSaveRoom => rules::action_refill_energy(ctx, world),
-            WarpId::FastTravelUhrumWestEntrance => rules::action_refill_energy(ctx, world),
+            WarpId::FastTravelKiengir => rules::action_refill_energy(ctx, world),
             WarpId::MainSave => rules::action_refill_energy(ctx, world),
             _ => (),
         }
@@ -5764,28 +5705,7 @@ impl world::Warp for Warp {
             WarpId::EarthSave => true,
             WarpId::ExitBreach => false,
             WarpId::ExitMenu => false,
-            WarpId::FastTravelAmagiMainArea => false,
-            WarpId::FastTravelAnnunaCenter => false,
-            WarpId::FastTravelAnnunaFactoryEntrance => false,
-            WarpId::FastTravelAnnunaMirrorMatch => false,
-            WarpId::FastTravelEbihBaseCamp => false,
-            WarpId::FastTravelEbihWestLower => false,
-            WarpId::FastTravelEbihWestMid => false,
-            WarpId::FastTravelEbihWestUpper => false,
-            WarpId::FastTravelGigunaBase => false,
-            WarpId::FastTravelGigunaBreachPeak => false,
-            WarpId::FastTravelGigunaBreachSw => false,
-            WarpId::FastTravelGigunaNortheast => false,
-            WarpId::FastTravelGigunaRuinsWest => false,
-            WarpId::FastTravelGlacierRevival => false,
-            WarpId::FastTravelIrikarBreachBasement => false,
-            WarpId::FastTravelIrikarBreachGauntlet => false,
-            WarpId::FastTravelIrikarBreachSaveRoom => false,
-            WarpId::FastTravelIrikarHub => false,
-            WarpId::FastTravelUhrumAnnuna => false,
-            WarpId::FastTravelUhrumEast => false,
-            WarpId::FastTravelUhrumSaveRoom => false,
-            WarpId::FastTravelUhrumWestEntrance => false,
+            WarpId::FastTravelKiengir => false,
             WarpId::MainSave => true,
             WarpId::Menu => false,
         }
@@ -5800,7 +5720,7 @@ pub struct Spot {
     pub actions: Range<usize>,
 }
 
-static RAW_SPOTS: [SpotId; 1307] = [
+static RAW_SPOTS: [SpotId; 1334] = [
     SpotId::None,
     SpotId::Amagi__Grid_31_19__East,
     SpotId::Amagi__Grid_31_19__West,
@@ -6985,8 +6905,35 @@ static RAW_SPOTS: [SpotId; 1307] = [
     SpotId::Irikar_Breach__Worm_Rave__Corner,
     SpotId::Irikar_Breach__Worm_Rave__East,
     SpotId::Irikar_Breach__Worm_Rave__South,
+    SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+    SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+    SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+    SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+    SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+    SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+    SpotId::Menu__Kiengir_Map__Annuna_Upper,
+    SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+    SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+    SpotId::Menu__Kiengir_Map__Apocalypse,
+    SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+    SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+    SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+    SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+    SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
     SpotId::Menu__Kiengir_Map__Giguna_Base,
+    SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+    SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+    SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+    SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+    SpotId::Menu__Kiengir_Map__Giguna_Separator,
     SpotId::Menu__Kiengir_Map__Glacier_Revival,
+    SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+    SpotId::Menu__Kiengir_Map__Irikar_Hub,
+    SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+    SpotId::Menu__Kiengir_Map__Uhrum_Center,
+    SpotId::Menu__Kiengir_Map__Uhrum_East,
+    SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+    SpotId::Menu__Kiengir_Map__Uhrum_West,
     SpotId::Menu__Upgrade_Menu__Combat,
     SpotId::Menu__Upgrade_Menu__Drone,
     SpotId::Menu__Upgrade_Menu__Infection,
@@ -7646,8 +7593,8 @@ lazy_static! {
             end: SpotId::Irikar__Sight_Room__West_24.into_usize() + 1,
         },
         AreaId::Menu__Kiengir_Map => Range {
-            start: SpotId::Menu__Kiengir_Map__Giguna_Base.into_usize(),
-            end: SpotId::Menu__Kiengir_Map__Glacier_Revival.into_usize() + 1,
+            start: SpotId::Menu__Kiengir_Map__Amagi_East_Lake.into_usize(),
+            end: SpotId::Menu__Kiengir_Map__Uhrum_West.into_usize() + 1,
         },
         AreaId::Menu__Upgrade_Menu => Range {
             start: SpotId::Menu__Upgrade_Menu__Combat.into_usize(),
@@ -9820,8 +9767,23 @@ impl world::World for World {
             ExitId::Menu__Upgrade_Menu__Combat__ex__Physiology_1 | ExitId:: Menu__Upgrade_Menu__Combat__ex__Infection_1 | ExitId:: Menu__Upgrade_Menu__Combat__ex__Drone_1 => SpotId::Menu__Upgrade_Menu__Combat,
             ExitId::Menu__Upgrade_Menu__Infection__ex__Physiology_1 | ExitId:: Menu__Upgrade_Menu__Infection__ex__Combat_1 | ExitId:: Menu__Upgrade_Menu__Infection__ex__Drone_1 => SpotId::Menu__Upgrade_Menu__Infection,
             ExitId::Menu__Upgrade_Menu__Drone__ex__Physiology_1 | ExitId:: Menu__Upgrade_Menu__Drone__ex__Combat_1 | ExitId:: Menu__Upgrade_Menu__Drone__ex__Infection_1 => SpotId::Menu__Upgrade_Menu__Drone,
+            ExitId::Menu__Kiengir_Map__Amagi_Main_Area__ex__Amagi__Main_Area__Save_Point_1 => SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            ExitId::Menu__Kiengir_Map__Annuna_Center_Save__ex__Annuna__Center_Save__Save_Point_1 => SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            ExitId::Menu__Kiengir_Map__Annuna_Factory_Entrance__ex__Annuna__Factory_Entrance__Save_Point_1 => SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            ExitId::Menu__Kiengir_Map__Annuna_Mirror_Match__ex__Annuna__Mirror_Match__Save_Point_1 => SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            ExitId::Menu__Kiengir_Map__Ebih_Base_Camp__ex__Ebih__Base_Camp__Save_Point_1 => SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            ExitId::Menu__Kiengir_Map__Ebih_West_Lower__ex__Ebih__Ebih_West__Lower_Save_1 => SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            ExitId::Menu__Kiengir_Map__Ebih_West_Mid__ex__Ebih__Ebih_West__Mid_Save_1 => SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+            ExitId::Menu__Kiengir_Map__Ebih_West_Upper__ex__Ebih__Ebih_West__Upper_Save_1 => SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
             ExitId::Menu__Kiengir_Map__Giguna_Base__ex__Giguna__Giguna_Base__Save_Point_1 => SpotId::Menu__Kiengir_Map__Giguna_Base,
+            ExitId::Menu__Kiengir_Map__Giguna_Northeast__ex__Giguna__Giguna_Northeast__Save_Point_1 => SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            ExitId::Menu__Kiengir_Map__Giguna_Ruins_Top__ex__Giguna__Ruins_Top__Save_Point_1 => SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            ExitId::Menu__Kiengir_Map__Giguna_Ruins_West__ex__Giguna__Ruins_West__Save_Point_1 => SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
             ExitId::Menu__Kiengir_Map__Glacier_Revival__ex__Glacier__Revival__Save_Point_1 => SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            ExitId::Menu__Kiengir_Map__Irikar_Hub__ex__Irikar__Hub__Save_Point_1 => SpotId::Menu__Kiengir_Map__Irikar_Hub,
+            ExitId::Menu__Kiengir_Map__Uhrum_Center__ex__Uhrum__Save_Room__Save_Point_1 => SpotId::Menu__Kiengir_Map__Uhrum_Center,
+            ExitId::Menu__Kiengir_Map__Uhrum_East__ex__Uhrum__Annuna_Corridor__Save_Point_1 => SpotId::Menu__Kiengir_Map__Uhrum_East,
+            ExitId::Menu__Kiengir_Map__Uhrum_West__ex__Uhrum__West_Entrance__Save_Point_1 => SpotId::Menu__Kiengir_Map__Uhrum_West,
             ExitId::Uhrum__West_Entrance__West_27__ex__Irikar__Lamassu__East_27_1 | ExitId:: Uhrum__West_Entrance__West_27__ex__South_Platform_1 => SpotId::Uhrum__West_Entrance__West_27,
             ExitId::Uhrum__West_Entrance__West_26__ex__Irikar__Lamassu__East_26_1 | ExitId:: Uhrum__West_Entrance__West_26__ex__Hidden_Passage_Entry_1 | ExitId:: Uhrum__West_Entrance__West_26__ex__Portal_Stand_1 | ExitId:: Uhrum__West_Entrance__West_26__ex__Portal_Stand_2 => SpotId::Uhrum__West_Entrance__West_26,
             ExitId::Uhrum__West_Entrance__Hidden_Passage_West__ex__Irikar__Lamassu__Hidden_Passage_East_1 => SpotId::Uhrum__West_Entrance__Hidden_Passage_West,
@@ -11116,8 +11078,23 @@ impl world::World for World {
             | SpotId::Irikar_Breach__Worm_Rave__Corner
             | SpotId::Irikar_Breach__Worm_Rave__East
             | SpotId::Irikar_Breach__Worm_Rave__South
+            | SpotId::Menu__Kiengir_Map__Amagi_Main_Area
+            | SpotId::Menu__Kiengir_Map__Annuna_Center_Save
+            | SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance
+            | SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match
+            | SpotId::Menu__Kiengir_Map__Ebih_Base_Camp
+            | SpotId::Menu__Kiengir_Map__Ebih_West_Lower
+            | SpotId::Menu__Kiengir_Map__Ebih_West_Mid
+            | SpotId::Menu__Kiengir_Map__Ebih_West_Upper
             | SpotId::Menu__Kiengir_Map__Giguna_Base
+            | SpotId::Menu__Kiengir_Map__Giguna_Northeast
+            | SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top
+            | SpotId::Menu__Kiengir_Map__Giguna_Ruins_West
             | SpotId::Menu__Kiengir_Map__Glacier_Revival
+            | SpotId::Menu__Kiengir_Map__Irikar_Hub
+            | SpotId::Menu__Kiengir_Map__Uhrum_Center
+            | SpotId::Menu__Kiengir_Map__Uhrum_East
+            | SpotId::Menu__Kiengir_Map__Uhrum_West
             | SpotId::Menu__Upgrade_Menu__Combat
             | SpotId::Menu__Upgrade_Menu__Drone
             | SpotId::Menu__Upgrade_Menu__Infection
@@ -20826,17 +20803,122 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
             price: Currency::Free,
             loc_id: None,
         },
+        ExitId::Menu__Kiengir_Map__Amagi_Main_Area__ex__Amagi__Main_Area__Save_Point_1 => Exit {
+            id: ExitId::Menu__Kiengir_Map__Amagi_Main_Area__ex__Amagi__Main_Area__Save_Point_1,
+            time: 12000,
+            dest: SpotId::Amagi__Main_Area__Save_Point,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Menu__Kiengir_Map__Annuna_Center_Save__ex__Annuna__Center_Save__Save_Point_1 => Exit {
+            id: ExitId::Menu__Kiengir_Map__Annuna_Center_Save__ex__Annuna__Center_Save__Save_Point_1,
+            time: 12000,
+            dest: SpotId::Annuna__Center_Save__Save_Point,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Menu__Kiengir_Map__Annuna_Factory_Entrance__ex__Annuna__Factory_Entrance__Save_Point_1 => Exit {
+            id: ExitId::Menu__Kiengir_Map__Annuna_Factory_Entrance__ex__Annuna__Factory_Entrance__Save_Point_1,
+            time: 12000,
+            dest: SpotId::Annuna__Factory_Entrance__Save_Point,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Menu__Kiengir_Map__Annuna_Mirror_Match__ex__Annuna__Mirror_Match__Save_Point_1 => Exit {
+            id: ExitId::Menu__Kiengir_Map__Annuna_Mirror_Match__ex__Annuna__Mirror_Match__Save_Point_1,
+            time: 12000,
+            dest: SpotId::Annuna__Mirror_Match__Save_Point,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Menu__Kiengir_Map__Ebih_Base_Camp__ex__Ebih__Base_Camp__Save_Point_1 => Exit {
+            id: ExitId::Menu__Kiengir_Map__Ebih_Base_Camp__ex__Ebih__Base_Camp__Save_Point_1,
+            time: 12000,
+            dest: SpotId::Ebih__Base_Camp__Save_Point,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Menu__Kiengir_Map__Ebih_West_Lower__ex__Ebih__Ebih_West__Lower_Save_1 => Exit {
+            id: ExitId::Menu__Kiengir_Map__Ebih_West_Lower__ex__Ebih__Ebih_West__Lower_Save_1,
+            time: 12000,
+            dest: SpotId::Ebih__Ebih_West__Lower_Save,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Menu__Kiengir_Map__Ebih_West_Mid__ex__Ebih__Ebih_West__Mid_Save_1 => Exit {
+            id: ExitId::Menu__Kiengir_Map__Ebih_West_Mid__ex__Ebih__Ebih_West__Mid_Save_1,
+            time: 12000,
+            dest: SpotId::Ebih__Ebih_West__Mid_Save,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Menu__Kiengir_Map__Ebih_West_Upper__ex__Ebih__Ebih_West__Upper_Save_1 => Exit {
+            id: ExitId::Menu__Kiengir_Map__Ebih_West_Upper__ex__Ebih__Ebih_West__Upper_Save_1,
+            time: 12000,
+            dest: SpotId::Ebih__Ebih_West__Upper_Save,
+            price: Currency::Free,
+            loc_id: None,
+        },
         ExitId::Menu__Kiengir_Map__Giguna_Base__ex__Giguna__Giguna_Base__Save_Point_1 => Exit {
             id: ExitId::Menu__Kiengir_Map__Giguna_Base__ex__Giguna__Giguna_Base__Save_Point_1,
-            time: 10000,
+            time: 12000,
             dest: SpotId::Giguna__Giguna_Base__Save_Point,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Menu__Kiengir_Map__Giguna_Northeast__ex__Giguna__Giguna_Northeast__Save_Point_1 => Exit {
+            id: ExitId::Menu__Kiengir_Map__Giguna_Northeast__ex__Giguna__Giguna_Northeast__Save_Point_1,
+            time: 12000,
+            dest: SpotId::Giguna__Giguna_Northeast__Save_Point,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Menu__Kiengir_Map__Giguna_Ruins_Top__ex__Giguna__Ruins_Top__Save_Point_1 => Exit {
+            id: ExitId::Menu__Kiengir_Map__Giguna_Ruins_Top__ex__Giguna__Ruins_Top__Save_Point_1,
+            time: 12000,
+            dest: SpotId::Giguna__Ruins_Top__Save_Point,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Menu__Kiengir_Map__Giguna_Ruins_West__ex__Giguna__Ruins_West__Save_Point_1 => Exit {
+            id: ExitId::Menu__Kiengir_Map__Giguna_Ruins_West__ex__Giguna__Ruins_West__Save_Point_1,
+            time: 12000,
+            dest: SpotId::Giguna__Ruins_West__Save_Point,
             price: Currency::Free,
             loc_id: None,
         },
         ExitId::Menu__Kiengir_Map__Glacier_Revival__ex__Glacier__Revival__Save_Point_1 => Exit {
             id: ExitId::Menu__Kiengir_Map__Glacier_Revival__ex__Glacier__Revival__Save_Point_1,
-            time: 10000,
+            time: 12000,
             dest: SpotId::Glacier__Revival__Save_Point,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Menu__Kiengir_Map__Irikar_Hub__ex__Irikar__Hub__Save_Point_1 => Exit {
+            id: ExitId::Menu__Kiengir_Map__Irikar_Hub__ex__Irikar__Hub__Save_Point_1,
+            time: 12000,
+            dest: SpotId::Irikar__Hub__Save_Point,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Menu__Kiengir_Map__Uhrum_Center__ex__Uhrum__Save_Room__Save_Point_1 => Exit {
+            id: ExitId::Menu__Kiengir_Map__Uhrum_Center__ex__Uhrum__Save_Room__Save_Point_1,
+            time: 12000,
+            dest: SpotId::Uhrum__Save_Room__Save_Point,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Menu__Kiengir_Map__Uhrum_East__ex__Uhrum__Annuna_Corridor__Save_Point_1 => Exit {
+            id: ExitId::Menu__Kiengir_Map__Uhrum_East__ex__Uhrum__Annuna_Corridor__Save_Point_1,
+            time: 12000,
+            dest: SpotId::Uhrum__Annuna_Corridor__Save_Point,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Menu__Kiengir_Map__Uhrum_West__ex__Uhrum__West_Entrance__Save_Point_1 => Exit {
+            id: ExitId::Menu__Kiengir_Map__Uhrum_West__ex__Uhrum__West_Entrance__Save_Point_1,
+            time: 12000,
+            dest: SpotId::Uhrum__West_Entrance__Save_Point,
             price: Currency::Free,
             loc_id: None,
         },
@@ -37688,6 +37770,194 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
         },
+        SpotId::Menu__Kiengir_Map__Amagi_Main_Area => Spot {
+            id: SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Menu__Kiengir_Map__Amagi_Main_Area__ex__Amagi__Main_Area__Save_Point_1.into_usize(),
+                end: ExitId::Menu__Kiengir_Map__Amagi_Main_Area__ex__Amagi__Main_Area__Save_Point_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Menu__Kiengir_Map__Amagi_East_Lake => Spot {
+            id: SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Menu__Kiengir_Map__Amagi_Isolation => Spot {
+            id: SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Menu__Kiengir_Map__Annuna_Center_Save => Spot {
+            id: SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Menu__Kiengir_Map__Annuna_Center_Save__ex__Annuna__Center_Save__Save_Point_1.into_usize(),
+                end: ExitId::Menu__Kiengir_Map__Annuna_Center_Save__ex__Annuna__Center_Save__Save_Point_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance => Spot {
+            id: SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Menu__Kiengir_Map__Annuna_Factory_Entrance__ex__Annuna__Factory_Entrance__Save_Point_1.into_usize(),
+                end: ExitId::Menu__Kiengir_Map__Annuna_Factory_Entrance__ex__Annuna__Factory_Entrance__Save_Point_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match => Spot {
+            id: SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Menu__Kiengir_Map__Annuna_Mirror_Match__ex__Annuna__Mirror_Match__Save_Point_1.into_usize(),
+                end: ExitId::Menu__Kiengir_Map__Annuna_Mirror_Match__ex__Annuna__Mirror_Match__Save_Point_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Menu__Kiengir_Map__Annuna_Upper => Spot {
+            id: SpotId::Menu__Kiengir_Map__Annuna_Upper,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room => Spot {
+            id: SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Menu__Kiengir_Map__Annuna_West_Bridge => Spot {
+            id: SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Menu__Kiengir_Map__Apocalypse => Spot {
+            id: SpotId::Menu__Kiengir_Map__Apocalypse,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Menu__Kiengir_Map__Ebih_Base_Camp => Spot {
+            id: SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Menu__Kiengir_Map__Ebih_Base_Camp__ex__Ebih__Base_Camp__Save_Point_1.into_usize(),
+                end: ExitId::Menu__Kiengir_Map__Ebih_Base_Camp__ex__Ebih__Base_Camp__Save_Point_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Menu__Kiengir_Map__Ebih_Observatory => Spot {
+            id: SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Menu__Kiengir_Map__Ebih_West_Lower => Spot {
+            id: SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Menu__Kiengir_Map__Ebih_West_Lower__ex__Ebih__Ebih_West__Lower_Save_1.into_usize(),
+                end: ExitId::Menu__Kiengir_Map__Ebih_West_Lower__ex__Ebih__Ebih_West__Lower_Save_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Menu__Kiengir_Map__Ebih_West_Mid => Spot {
+            id: SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Menu__Kiengir_Map__Ebih_West_Mid__ex__Ebih__Ebih_West__Mid_Save_1.into_usize(),
+                end: ExitId::Menu__Kiengir_Map__Ebih_West_Mid__ex__Ebih__Ebih_West__Mid_Save_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Menu__Kiengir_Map__Ebih_West_Upper => Spot {
+            id: SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Menu__Kiengir_Map__Ebih_West_Upper__ex__Ebih__Ebih_West__Upper_Save_1.into_usize(),
+                end: ExitId::Menu__Kiengir_Map__Ebih_West_Upper__ex__Ebih__Ebih_West__Upper_Save_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
         SpotId::Menu__Kiengir_Map__Giguna_Base => Spot {
             id: SpotId::Menu__Kiengir_Map__Giguna_Base,
             locations: Range {
@@ -37701,6 +37971,69 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
         },
+        SpotId::Menu__Kiengir_Map__Giguna_Labyrinth => Spot {
+            id: SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Menu__Kiengir_Map__Giguna_Northeast => Spot {
+            id: SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Menu__Kiengir_Map__Giguna_Northeast__ex__Giguna__Giguna_Northeast__Save_Point_1.into_usize(),
+                end: ExitId::Menu__Kiengir_Map__Giguna_Northeast__ex__Giguna__Giguna_Northeast__Save_Point_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top => Spot {
+            id: SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Menu__Kiengir_Map__Giguna_Ruins_Top__ex__Giguna__Ruins_Top__Save_Point_1.into_usize(),
+                end: ExitId::Menu__Kiengir_Map__Giguna_Ruins_Top__ex__Giguna__Ruins_Top__Save_Point_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Menu__Kiengir_Map__Giguna_Ruins_West => Spot {
+            id: SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Menu__Kiengir_Map__Giguna_Ruins_West__ex__Giguna__Ruins_West__Save_Point_1.into_usize(),
+                end: ExitId::Menu__Kiengir_Map__Giguna_Ruins_West__ex__Giguna__Ruins_West__Save_Point_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Menu__Kiengir_Map__Giguna_Separator => Spot {
+            id: SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
         SpotId::Menu__Kiengir_Map__Glacier_Revival => Spot {
             id: SpotId::Menu__Kiengir_Map__Glacier_Revival,
             locations: Range {
@@ -37709,6 +38042,94 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             exits: Range {
                 start: ExitId::Menu__Kiengir_Map__Glacier_Revival__ex__Glacier__Revival__Save_Point_1.into_usize(),
                 end: ExitId::Menu__Kiengir_Map__Glacier_Revival__ex__Glacier__Revival__Save_Point_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Menu__Kiengir_Map__Irikar_Beach_Save => Spot {
+            id: SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Menu__Kiengir_Map__Irikar_Hub => Spot {
+            id: SpotId::Menu__Kiengir_Map__Irikar_Hub,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Menu__Kiengir_Map__Irikar_Hub__ex__Irikar__Hub__Save_Point_1.into_usize(),
+                end: ExitId::Menu__Kiengir_Map__Irikar_Hub__ex__Irikar__Hub__Save_Point_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Menu__Kiengir_Map__Irikar_Midwest => Spot {
+            id: SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Menu__Kiengir_Map__Uhrum_Center => Spot {
+            id: SpotId::Menu__Kiengir_Map__Uhrum_Center,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Menu__Kiengir_Map__Uhrum_Center__ex__Uhrum__Save_Room__Save_Point_1.into_usize(),
+                end: ExitId::Menu__Kiengir_Map__Uhrum_Center__ex__Uhrum__Save_Room__Save_Point_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Menu__Kiengir_Map__Uhrum_East => Spot {
+            id: SpotId::Menu__Kiengir_Map__Uhrum_East,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Menu__Kiengir_Map__Uhrum_East__ex__Uhrum__Annuna_Corridor__Save_Point_1.into_usize(),
+                end: ExitId::Menu__Kiengir_Map__Uhrum_East__ex__Uhrum__Annuna_Corridor__Save_Point_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Menu__Kiengir_Map__Uhrum_Emergence => Spot {
+            id: SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Menu__Kiengir_Map__Uhrum_West => Spot {
+            id: SpotId::Menu__Kiengir_Map__Uhrum_West,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Menu__Kiengir_Map__Uhrum_West__ex__Uhrum__West_Entrance__Save_Point_1.into_usize(),
+                end: ExitId::Menu__Kiengir_Map__Uhrum_West__ex__Uhrum__West_Entrance__Save_Point_1.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
@@ -39241,136 +39662,10 @@ pub fn build_warps() -> EnumMap<WarpId, Warp> {
             time: 200,
             price: Currency::Free,
         },
-        WarpId::FastTravelAmagiMainArea => Warp {
-            id: WarpId::FastTravelAmagiMainArea,
+        WarpId::FastTravelKiengir => Warp {
+            id: WarpId::FastTravelKiengir,
             dest: SpotId::None,
-            time: 12000,
-            price: Currency::Free,
-        },
-        WarpId::FastTravelAnnunaCenter => Warp {
-            id: WarpId::FastTravelAnnunaCenter,
-            dest: SpotId::None,
-            time: 12000,
-            price: Currency::Free,
-        },
-        WarpId::FastTravelAnnunaFactoryEntrance => Warp {
-            id: WarpId::FastTravelAnnunaFactoryEntrance,
-            dest: SpotId::None,
-            time: 12000,
-            price: Currency::Free,
-        },
-        WarpId::FastTravelAnnunaMirrorMatch => Warp {
-            id: WarpId::FastTravelAnnunaMirrorMatch,
-            dest: SpotId::None,
-            time: 12000,
-            price: Currency::Free,
-        },
-        WarpId::FastTravelEbihBaseCamp => Warp {
-            id: WarpId::FastTravelEbihBaseCamp,
-            dest: SpotId::None,
-            time: 12000,
-            price: Currency::Free,
-        },
-        WarpId::FastTravelEbihWestLower => Warp {
-            id: WarpId::FastTravelEbihWestLower,
-            dest: SpotId::None,
-            time: 12000,
-            price: Currency::Free,
-        },
-        WarpId::FastTravelEbihWestMid => Warp {
-            id: WarpId::FastTravelEbihWestMid,
-            dest: SpotId::None,
-            time: 12000,
-            price: Currency::Free,
-        },
-        WarpId::FastTravelEbihWestUpper => Warp {
-            id: WarpId::FastTravelEbihWestUpper,
-            dest: SpotId::None,
-            time: 12000,
-            price: Currency::Free,
-        },
-        WarpId::FastTravelGigunaBase => Warp {
-            id: WarpId::FastTravelGigunaBase,
-            dest: SpotId::None,
-            time: 12000,
-            price: Currency::Free,
-        },
-        WarpId::FastTravelGigunaBreachPeak => Warp {
-            id: WarpId::FastTravelGigunaBreachPeak,
-            dest: SpotId::None,
-            time: 12000,
-            price: Currency::Free,
-        },
-        WarpId::FastTravelGigunaBreachSw => Warp {
-            id: WarpId::FastTravelGigunaBreachSw,
-            dest: SpotId::None,
-            time: 12000,
-            price: Currency::Free,
-        },
-        WarpId::FastTravelGigunaNortheast => Warp {
-            id: WarpId::FastTravelGigunaNortheast,
-            dest: SpotId::None,
-            time: 12000,
-            price: Currency::Free,
-        },
-        WarpId::FastTravelGigunaRuinsWest => Warp {
-            id: WarpId::FastTravelGigunaRuinsWest,
-            dest: SpotId::None,
-            time: 12000,
-            price: Currency::Free,
-        },
-        WarpId::FastTravelGlacierRevival => Warp {
-            id: WarpId::FastTravelGlacierRevival,
-            dest: SpotId::None,
-            time: 12000,
-            price: Currency::Free,
-        },
-        WarpId::FastTravelIrikarBreachBasement => Warp {
-            id: WarpId::FastTravelIrikarBreachBasement,
-            dest: SpotId::None,
-            time: 12000,
-            price: Currency::Free,
-        },
-        WarpId::FastTravelIrikarBreachGauntlet => Warp {
-            id: WarpId::FastTravelIrikarBreachGauntlet,
-            dest: SpotId::None,
-            time: 12000,
-            price: Currency::Free,
-        },
-        WarpId::FastTravelIrikarBreachSaveRoom => Warp {
-            id: WarpId::FastTravelIrikarBreachSaveRoom,
-            dest: SpotId::None,
-            time: 12000,
-            price: Currency::Free,
-        },
-        WarpId::FastTravelIrikarHub => Warp {
-            id: WarpId::FastTravelIrikarHub,
-            dest: SpotId::None,
-            time: 12000,
-            price: Currency::Free,
-        },
-        WarpId::FastTravelUhrumAnnuna => Warp {
-            id: WarpId::FastTravelUhrumAnnuna,
-            dest: SpotId::None,
-            time: 12000,
-            price: Currency::Free,
-        },
-        WarpId::FastTravelUhrumEast => Warp {
-            id: WarpId::FastTravelUhrumEast,
-            dest: SpotId::None,
-            time: 12000,
-            price: Currency::Free,
-        },
-        WarpId::FastTravelUhrumSaveRoom => Warp {
-            id: WarpId::FastTravelUhrumSaveRoom,
-            dest: SpotId::None,
-            time: 12000,
-            price: Currency::Free,
-        },
-        WarpId::FastTravelUhrumWestEntrance => Warp {
-            id: WarpId::FastTravelUhrumWestEntrance,
-            dest: SpotId::None,
-            time: 12000,
+            time: 100,
             price: Currency::Free,
         },
         WarpId::MainSave => Warp {

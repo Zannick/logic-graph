@@ -427,8 +427,35 @@ pub mod data {
             SpotId::Irikar_Breach__Worm_Rave__Corner => enums::Realm::Breach,
             SpotId::Irikar_Breach__Worm_Rave__East => enums::Realm::Breach,
             SpotId::Irikar_Breach__Worm_Rave__South => enums::Realm::Breach,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake => enums::Realm::Map,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation => enums::Realm::Map,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area => enums::Realm::Map,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save => enums::Realm::Map,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance => enums::Realm::Map,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match => enums::Realm::Map,
+            SpotId::Menu__Kiengir_Map__Annuna_Upper => enums::Realm::Map,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room => enums::Realm::Map,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge => enums::Realm::Map,
+            SpotId::Menu__Kiengir_Map__Apocalypse => enums::Realm::Map,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp => enums::Realm::Map,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory => enums::Realm::Map,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower => enums::Realm::Map,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid => enums::Realm::Map,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper => enums::Realm::Map,
             SpotId::Menu__Kiengir_Map__Giguna_Base => enums::Realm::Map,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth => enums::Realm::Map,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast => enums::Realm::Map,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top => enums::Realm::Map,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West => enums::Realm::Map,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator => enums::Realm::Map,
             SpotId::Menu__Kiengir_Map__Glacier_Revival => enums::Realm::Map,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save => enums::Realm::Map,
+            SpotId::Menu__Kiengir_Map__Irikar_Hub => enums::Realm::Map,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest => enums::Realm::Map,
+            SpotId::Menu__Kiengir_Map__Uhrum_Center => enums::Realm::Map,
+            SpotId::Menu__Kiengir_Map__Uhrum_East => enums::Realm::Map,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence => enums::Realm::Map,
+            SpotId::Menu__Kiengir_Map__Uhrum_West => enums::Realm::Map,
             SpotId::Menu__Upgrade_Menu__Combat => enums::Realm::Menu,
             SpotId::Menu__Upgrade_Menu__Drone => enums::Realm::Menu,
             SpotId::Menu__Upgrade_Menu__Infection => enums::Realm::Menu,
@@ -6952,7 +6979,7 @@ impl context::Ctx for Context {
             }
             AreaId::Menu__Kiengir_Map => {
                 if get_area(self.position) != area {
-                    rules::action_save_last_refill_energy(self, world, pos);
+                    rules::action_save_last(self, world, pos);
                 }
             }
             AreaId::Menu__Warp_Only => {

@@ -1481,8 +1481,35 @@ subgraph Menu
         Menu__Warp_Only__Kiengir(Kiengir);
     end
     subgraph Menu__Kiengir_Map[Kiengir Map]
+        Menu__Kiengir_Map__Amagi_Main_Area(Amagi Main Area);
+        Menu__Kiengir_Map__Amagi_East_Lake(Amagi East Lake);
+        Menu__Kiengir_Map__Amagi_Isolation(Amagi Isolation);
+        Menu__Kiengir_Map__Annuna_Center_Save(Annuna Center Save);
+        Menu__Kiengir_Map__Annuna_Factory_Entrance(Annuna Factory Entrance);
+        Menu__Kiengir_Map__Annuna_Mirror_Match(Annuna Mirror Match);
+        Menu__Kiengir_Map__Annuna_Upper(Annuna Upper);
+        Menu__Kiengir_Map__Annuna_Vertical_Room(Annuna Vertical Room);
+        Menu__Kiengir_Map__Annuna_West_Bridge(Annuna West Bridge);
+        Menu__Kiengir_Map__Apocalypse(Apocalypse);
+        Menu__Kiengir_Map__Ebih_Base_Camp(Ebih Base Camp);
+        Menu__Kiengir_Map__Ebih_Observatory(Ebih Observatory);
+        Menu__Kiengir_Map__Ebih_West_Lower(Ebih West Lower);
+        Menu__Kiengir_Map__Ebih_West_Mid(Ebih West Mid);
+        Menu__Kiengir_Map__Ebih_West_Upper(Ebih West Upper);
         Menu__Kiengir_Map__Giguna_Base(Giguna Base);
+        Menu__Kiengir_Map__Giguna_Labyrinth(Giguna Labyrinth);
+        Menu__Kiengir_Map__Giguna_Northeast(Giguna Northeast);
+        Menu__Kiengir_Map__Giguna_Ruins_Top(Giguna Ruins Top);
+        Menu__Kiengir_Map__Giguna_Ruins_West(Giguna Ruins West);
+        Menu__Kiengir_Map__Giguna_Separator(Giguna Separator);
         Menu__Kiengir_Map__Glacier_Revival(Glacier Revival);
+        Menu__Kiengir_Map__Irikar_Beach_Save(Irikar Beach Save);
+        Menu__Kiengir_Map__Irikar_Hub(Irikar Hub);
+        Menu__Kiengir_Map__Irikar_Midwest(Irikar Midwest);
+        Menu__Kiengir_Map__Uhrum_Center(Uhrum Center);
+        Menu__Kiengir_Map__Uhrum_East(Uhrum East);
+        Menu__Kiengir_Map__Uhrum_Emergence(Uhrum Emergence);
+        Menu__Kiengir_Map__Uhrum_West(Uhrum West);
     end
 end
 subgraph Uhrum
@@ -2323,8 +2350,23 @@ Irikar__Lamassu__East_26 <--> Uhrum__West_Entrance__West_26
 Irikar__Lamassu__East_27 <--> Uhrum__West_Entrance__West_27
 Irikar__Lamassu__Hidden_Passage_East <--> Uhrum__West_Entrance__Hidden_Passage_West
 Irikar__Sight_Room__Above_Room_East --> Irikar__East_Rooftops__Upper_West
+Menu__Kiengir_Map__Amagi_Main_Area --> Amagi__Main_Area__Save_Point
+Menu__Kiengir_Map__Annuna_Center_Save --> Annuna__Center_Save__Save_Point
+Menu__Kiengir_Map__Annuna_Factory_Entrance --> Annuna__Factory_Entrance__Save_Point
+Menu__Kiengir_Map__Annuna_Mirror_Match --> Annuna__Mirror_Match__Save_Point
+Menu__Kiengir_Map__Ebih_Base_Camp --> Ebih__Base_Camp__Save_Point
+Menu__Kiengir_Map__Ebih_West_Lower --> Ebih__Ebih_West__Lower_Save
+Menu__Kiengir_Map__Ebih_West_Mid --> Ebih__Ebih_West__Mid_Save
+Menu__Kiengir_Map__Ebih_West_Upper --> Ebih__Ebih_West__Upper_Save
 Menu__Kiengir_Map__Giguna_Base --> Giguna__Giguna_Base__Save_Point
+Menu__Kiengir_Map__Giguna_Northeast --> Giguna__Giguna_Northeast__Save_Point
+Menu__Kiengir_Map__Giguna_Ruins_Top --> Giguna__Ruins_Top__Save_Point
+Menu__Kiengir_Map__Giguna_Ruins_West --> Giguna__Ruins_West__Save_Point
 Menu__Kiengir_Map__Glacier_Revival --> Glacier__Revival__Save_Point
+Menu__Kiengir_Map__Irikar_Hub --> Irikar__Hub__Save_Point
+Menu__Kiengir_Map__Uhrum_Center --> Uhrum__Save_Room__Save_Point
+Menu__Kiengir_Map__Uhrum_East --> Uhrum__Annuna_Corridor__Save_Point
+Menu__Kiengir_Map__Uhrum_West --> Uhrum__West_Entrance__Save_Point
 Menu__Upgrade_Menu__Combat <--> Menu__Upgrade_Menu__Drone
 Menu__Upgrade_Menu__Combat <--> Menu__Upgrade_Menu__Infection
 Menu__Upgrade_Menu__Combat <--> Menu__Upgrade_Menu__Physiology

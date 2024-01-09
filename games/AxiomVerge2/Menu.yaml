@@ -216,38 +216,233 @@ areas:
 
 - name: Warp Only
   on_entry: $save_last
-  # These spots allow savewarp only by tagging the appropriate realm.
+  # These spots allow savewarp only by tagging the appropriate realm and having no other way out
+  tags: [cskip]
   spots:
     - name: Kiengir
       data:
         realm: main
 
+## Fast travel maps
+# These areas are representations of moving on the map.
+# TODO: Fast travel times are slightly different (faster) when travelling within an area
+# TODO: under some conditions, fast travel indra can appear standing up
+# 7s. I think it's immediately after savewarping/fast travelling though, so not very useful.
+# there's a similar trick opening the map as you die, you can fast travel in the middle of your respawn
+# that's only useful for changing your active/passive room? bleh
 - name: Kiengir Map
-  on_entry: $save_last; $refill_energy
+  on_entry: $save_last
   data:
     realm: map
   tags: [map]
+  all:
+    # We only need the fast travel locations specified here. Note self-edges are ignored.
+    # These would otherwise be repeated on all spots.
+    local:
+      - to: Amagi Main Area
+      - to: Amagi East Lake
+      - to: Amagi Isolation
+      - to: Annuna Center Save
+      - to: Annuna Factory Entrance
+      - to: Annuna Mirror Match
+      - to: Annuna Upper
+      - to: Annuna Vertical Room
+      - to: Annuna West Bridge
+      - to: Apocalypse
+      - to: Ebih Base Camp
+      - to: Ebih Observatory
+      - to: Ebih West Lower
+      - to: Ebih West Mid
+      - to: Ebih West Upper
+      - to: Giguna Base
+      - to: Giguna Labyrinth
+      - to: Giguna Northeast
+      - to: Giguna Ruins Top
+      - to: Giguna Ruins West
+      - to: Giguna Separator
+      - to: Glacier Revival
+      - to: Irikar Beach Save
+      - to: Irikar Hub
+      - to: Irikar Midwest
+      - to: Uhrum Center
+      - to: Uhrum East
+      - to: Uhrum Emergence
+      - to: Uhrum West
   spots:
-    - name: Giguna Base
-      coord: [13, 16]
-      local:
-        # These are going to be all the fast travel locations
-        - to: Glacier Revival
+    - name: Amagi Main Area
+      coord: [29, 19]
       exits:
-        - to: Giguna > Giguna Base > Save Point
-          req: ^map__giguna__giguna_base__save
-          time: 10
+        - to: Amagi > Main Area > Save Point
+          req: ^map__amagi__main_area__save
+          time: 12
           penalties:
             - when: ^mode != 'drone'
               add: 2.5
+    - name: Amagi East Lake
+      coord: [34, 18]
+    - name: Amagi Isolation
+      coord: [34, 21]
+    - name: Annuna Center Save
+      coord: [39, 21]
+      exits:
+        - to: Annuna > Center Save > Save Point
+          req: ^map__annuna__center_save__save
+          time: 12
+          penalties:
+            - when: ^mode != 'drone'
+              add: 2.5
+    - name: Annuna Factory Entrance
+      coord: [43, 25]
+      exits:
+        - to: Annuna > Factory Entrance > Save Point
+          req: ^map__annuna__factory_entrance__save
+          time: 12
+          penalties:
+            - when: ^mode != 'drone'
+              add: 2.5
+    - name: Annuna Mirror Match
+      coord: [32, 26]
+      exits:
+        - to: Annuna > Mirror Match > Save Point
+          req: ^map__annuna__mirror_match__save
+          time: 12
+          penalties:
+            - when: ^mode != 'drone'
+              add: 2.5
+    - name: Annuna Upper
+      coord: [39, 17]
+    - name: Annuna Vertical Room
+      coord: [40, 20]
+    - name: Annuna West Bridge
+      coord: [36, 27]
+    - name: Apocalypse
+      coord: [42, 17]
+    - name: Ebih Base Camp
+      coord: [29, 13]
+      exits:
+        - to: Ebih > Base Camp > Save Point
+          req: ^map__ebih__base_camp__save
+          time: 12
+          penalties:
+            - when: ^mode != 'drone'
+              add: 2.5
+    - name: Ebih Observatory
+      coord: [21, 3]
+    - name: Ebih West Lower
+      coord: [19, 13]
+      exits:
+        - to: Ebih > Ebih West > Lower Save
+          req: ^map__ebih__ebih_west__lower_save
+          time: 12
+          penalties:
+            - when: ^mode != 'drone'
+              add: 2.5
+    - name: Ebih West Mid
+      coord: [20, 10]
+      exits:
+        - to: Ebih > Ebih West > Mid Save
+          req: ^map__ebih__ebih_west__mid_save
+          time: 12
+          penalties:
+            - when: ^mode != 'drone'
+              add: 2.5
+    - name: Ebih West Upper
+      coord: [20, 7]
+      exits:
+        - to: Ebih > Ebih West > Upper Save
+          req: ^map__ebih__ebih_west__upper_save
+          time: 12
+          penalties:
+            - when: ^mode != 'drone'
+              add: 2.5
+    - name: Giguna Base
+      coord: [13, 16]
+      exits:
+        - to: Giguna > Giguna Base > Save Point
+          req: ^map__giguna__giguna_base__save
+          time: 12
+          penalties:
+            - when: ^mode != 'drone'
+              add: 2.5
+    - name: Giguna Labyrinth
+      coord: [17, 22]
+    - name: Giguna Northeast
+      coord: [17, 10]
+      exits:
+        - to: Giguna > Giguna Northeast > Save Point
+          req: ^map__giguna__giguna_northeast__save
+          time: 12
+          penalties:
+            - when: ^mode != 'drone'
+              add: 2.5
+    - name: Giguna Ruins Top
+      coord: [14, 6]
+      exits:
+        - to: Giguna > Ruins Top > Save Point
+          req: ^map__giguna__ruins_top__save
+          time: 12
+          penalties:
+            - when: ^mode != 'drone'
+              add: 2.5
+    - name: Giguna Ruins West
+      coord: [13, 9]
+      exits:
+        - to: Giguna > Ruins West > Save Point
+          req: ^map__giguna__ruins_west__save
+          time: 12
+          penalties:
+            - when: ^mode != 'drone'
+              add: 2.5
+    - name: Giguna Separator
+      coord: [18, 25]
     - name: Glacier Revival
       coord: [41, 8]
-      local:
-        - to: Giguna Base
       exits:
         - to: Glacier > Revival > Save Point
           req: Amashilama
-          time: 10
+          time: 12
           penalties:
             - when: ^mode == 'drone'
+              add: 2.5
+    - name: Irikar Beach Save
+      coord: [5, 28]
+    - name: Irikar Hub
+      coord: [12, 23]
+      exits:
+        - to: Irikar > Hub > Save Point
+          req: ^map__irikar__hub__save
+          time: 12
+          penalties:
+            - when: ^mode != 'drone'
+              add: 2.5
+    - name: Irikar Midwest
+      coord: [9, 25]
+    - name: Uhrum Center
+      coord: [25, 27]
+      exits:
+        - to: Uhrum > Save Room > Save Point
+          req: ^map__uhrum__save_room__save
+          time: 12
+          penalties:
+            - when: ^mode != 'drone'
+              add: 2.5
+    - name: Uhrum East
+      coord: [28, 26]
+      exits:
+        - to: Uhrum > Annuna Corridor > Save Point
+          req: ^map__uhrum__annuna_corridor__save
+          time: 12
+          penalties:
+            - when: ^mode != 'drone'
+              add: 2.5
+    - name: Uhrum Emergence
+      coord: [23, 22]
+    - name: Uhrum West
+      coord: [19, 28]
+      exits:
+        - to: Uhrum > West Entrance > Save Point
+          req: ^map__uhrum__west_entrance__save
+          time: 12
+          penalties:
+            - when: ^mode != 'drone'
               add: 2.5

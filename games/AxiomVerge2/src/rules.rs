@@ -666,137 +666,13 @@ pub fn access_ebih_west_block(ctx: &Context, world: &graph::World) -> bool {
     // Ebih_West_Block
     ctx.has(Item::Ebih_West_Block)
 }
-pub fn access_ft_breach_and_map__giguna_breach__peak__save(
+pub fn access_ft_main_and___map_spot_within_menu_gt_kiengir_map(
     ctx: &Context,
     world: &graph::World,
 ) -> bool {
-    // $ft_breach and ^map__giguna_breach__peak__save
-    (helper__ft_breach!(ctx, world) && ctx.map__giguna_breach__peak__save())
-}
-pub fn access_ft_breach_and_map__giguna_breach__sw_save__save(
-    ctx: &Context,
-    world: &graph::World,
-) -> bool {
-    // $ft_breach and ^map__giguna_breach__sw_save__save
-    (helper__ft_breach!(ctx, world) && ctx.map__giguna_breach__sw_save__save())
-}
-pub fn access_ft_breach_and_map__irikar_breach__basement_save__save(
-    ctx: &Context,
-    world: &graph::World,
-) -> bool {
-    // $ft_breach and ^map__irikar_breach__basement_save__save
-    (helper__ft_breach!(ctx, world) && ctx.map__irikar_breach__basement_save__save())
-}
-pub fn access_ft_breach_and_map__irikar_breach__gauntlet__save(
-    ctx: &Context,
-    world: &graph::World,
-) -> bool {
-    // $ft_breach and ^map__irikar_breach__gauntlet__save
-    (helper__ft_breach!(ctx, world) && ctx.map__irikar_breach__gauntlet__save())
-}
-pub fn access_ft_breach_and_map__irikar_breach__save_room__save(
-    ctx: &Context,
-    world: &graph::World,
-) -> bool {
-    // $ft_breach and ^map__irikar_breach__save_room__save
-    (helper__ft_breach!(ctx, world) && ctx.map__irikar_breach__save_room__save())
-}
-pub fn access_ft_main_and_amashilama(ctx: &Context, world: &graph::World) -> bool {
-    // $ft_main and Amashilama
-    (helper__ft_main!(ctx, world) && ctx.has(Item::Amashilama))
-}
-pub fn access_ft_main_and_map__amagi__main_area__save(ctx: &Context, world: &graph::World) -> bool {
-    // $ft_main and ^map__amagi__main_area__save
-    (helper__ft_main!(ctx, world) && ctx.map__amagi__main_area__save())
-}
-pub fn access_ft_main_and_map__annuna__center_save__save(
-    ctx: &Context,
-    world: &graph::World,
-) -> bool {
-    // $ft_main and ^map__annuna__center_save__save
-    (helper__ft_main!(ctx, world) && ctx.map__annuna__center_save__save())
-}
-pub fn access_ft_main_and_map__annuna__factory_entrance__save(
-    ctx: &Context,
-    world: &graph::World,
-) -> bool {
-    // $ft_main and ^map__annuna__factory_entrance__save
-    (helper__ft_main!(ctx, world) && ctx.map__annuna__factory_entrance__save())
-}
-pub fn access_ft_main_and_map__annuna__mirror_match__save(
-    ctx: &Context,
-    world: &graph::World,
-) -> bool {
-    // $ft_main and ^map__annuna__mirror_match__save
-    (helper__ft_main!(ctx, world) && ctx.map__annuna__mirror_match__save())
-}
-pub fn access_ft_main_and_map__ebih__base_camp__save(ctx: &Context, world: &graph::World) -> bool {
-    // $ft_main and ^map__ebih__base_camp__save
-    (helper__ft_main!(ctx, world) && ctx.map__ebih__base_camp__save())
-}
-pub fn access_ft_main_and_map__ebih__ebih_west__lower_save(
-    ctx: &Context,
-    world: &graph::World,
-) -> bool {
-    // $ft_main and ^map__ebih__ebih_west__lower_save
-    (helper__ft_main!(ctx, world) && ctx.map__ebih__ebih_west__lower_save())
-}
-pub fn access_ft_main_and_map__ebih__ebih_west__mid_save(
-    ctx: &Context,
-    world: &graph::World,
-) -> bool {
-    // $ft_main and ^map__ebih__ebih_west__mid_save
-    (helper__ft_main!(ctx, world) && ctx.map__ebih__ebih_west__mid_save())
-}
-pub fn access_ft_main_and_map__ebih__ebih_west__upper_save(
-    ctx: &Context,
-    world: &graph::World,
-) -> bool {
-    // $ft_main and ^map__ebih__ebih_west__upper_save
-    (helper__ft_main!(ctx, world) && ctx.map__ebih__ebih_west__upper_save())
-}
-pub fn access_ft_main_and_map__giguna__giguna_base__save(
-    ctx: &Context,
-    world: &graph::World,
-) -> bool {
-    // $ft_main and ^map__giguna__giguna_base__save
-    (helper__ft_main!(ctx, world) && ctx.map__giguna__giguna_base__save())
-}
-pub fn access_ft_main_and_map__giguna__giguna_northeast__save(
-    ctx: &Context,
-    world: &graph::World,
-) -> bool {
-    // $ft_main and ^map__giguna__giguna_northeast__save
-    (helper__ft_main!(ctx, world) && ctx.map__giguna__giguna_northeast__save())
-}
-pub fn access_ft_main_and_map__giguna__ruins_west__save(
-    ctx: &Context,
-    world: &graph::World,
-) -> bool {
-    // $ft_main and ^map__giguna__ruins_west__save
-    (helper__ft_main!(ctx, world) && ctx.map__giguna__ruins_west__save())
-}
-pub fn access_ft_main_and_map__irikar__hub__save(ctx: &Context, world: &graph::World) -> bool {
-    // $ft_main and ^map__irikar__hub__save
-    (helper__ft_main!(ctx, world) && ctx.map__irikar__hub__save())
-}
-pub fn access_ft_main_and_map__uhrum__annuna_corridor__save(
-    ctx: &Context,
-    world: &graph::World,
-) -> bool {
-    // $ft_main and ^map__uhrum__annuna_corridor__save
-    (helper__ft_main!(ctx, world) && ctx.map__uhrum__annuna_corridor__save())
-}
-pub fn access_ft_main_and_map__uhrum__save_room__save(ctx: &Context, world: &graph::World) -> bool {
-    // $ft_main and ^map__uhrum__save_room__save
-    (helper__ft_main!(ctx, world) && ctx.map__uhrum__save_room__save())
-}
-pub fn access_ft_main_and_map__uhrum__west_entrance__save(
-    ctx: &Context,
-    world: &graph::World,
-) -> bool {
-    // $ft_main and ^map__uhrum__west_entrance__save
-    (helper__ft_main!(ctx, world) && ctx.map__uhrum__west_entrance__save())
+    // $ft_main and (^map_spot WITHIN `Menu > Kiengir Map`)
+    (helper__ft_main!(ctx, world)
+        && (get_area(data::map_spot(ctx.position())) == AreaId::Menu__Kiengir_Map))
 }
 pub fn access_giguna__carnelian__door__ex__switch_1__req(
     ctx: &Context,
@@ -1680,9 +1556,69 @@ pub fn access_irikar_royal_storage_wall(ctx: &Context, world: &graph::World) -> 
     // Irikar_Royal_Storage_Wall
     ctx.has(Item::Irikar_Royal_Storage_Wall)
 }
+pub fn access_map__amagi__main_area__save(ctx: &Context, world: &graph::World) -> bool {
+    // ^map__amagi__main_area__save
+    ctx.map__amagi__main_area__save()
+}
+pub fn access_map__annuna__center_save__save(ctx: &Context, world: &graph::World) -> bool {
+    // ^map__annuna__center_save__save
+    ctx.map__annuna__center_save__save()
+}
+pub fn access_map__annuna__factory_entrance__save(ctx: &Context, world: &graph::World) -> bool {
+    // ^map__annuna__factory_entrance__save
+    ctx.map__annuna__factory_entrance__save()
+}
+pub fn access_map__annuna__mirror_match__save(ctx: &Context, world: &graph::World) -> bool {
+    // ^map__annuna__mirror_match__save
+    ctx.map__annuna__mirror_match__save()
+}
+pub fn access_map__ebih__base_camp__save(ctx: &Context, world: &graph::World) -> bool {
+    // ^map__ebih__base_camp__save
+    ctx.map__ebih__base_camp__save()
+}
+pub fn access_map__ebih__ebih_west__lower_save(ctx: &Context, world: &graph::World) -> bool {
+    // ^map__ebih__ebih_west__lower_save
+    ctx.map__ebih__ebih_west__lower_save()
+}
+pub fn access_map__ebih__ebih_west__mid_save(ctx: &Context, world: &graph::World) -> bool {
+    // ^map__ebih__ebih_west__mid_save
+    ctx.map__ebih__ebih_west__mid_save()
+}
+pub fn access_map__ebih__ebih_west__upper_save(ctx: &Context, world: &graph::World) -> bool {
+    // ^map__ebih__ebih_west__upper_save
+    ctx.map__ebih__ebih_west__upper_save()
+}
 pub fn access_map__giguna__giguna_base__save(ctx: &Context, world: &graph::World) -> bool {
     // ^map__giguna__giguna_base__save
     ctx.map__giguna__giguna_base__save()
+}
+pub fn access_map__giguna__giguna_northeast__save(ctx: &Context, world: &graph::World) -> bool {
+    // ^map__giguna__giguna_northeast__save
+    ctx.map__giguna__giguna_northeast__save()
+}
+pub fn access_map__giguna__ruins_top__save(ctx: &Context, world: &graph::World) -> bool {
+    // ^map__giguna__ruins_top__save
+    ctx.map__giguna__ruins_top__save()
+}
+pub fn access_map__giguna__ruins_west__save(ctx: &Context, world: &graph::World) -> bool {
+    // ^map__giguna__ruins_west__save
+    ctx.map__giguna__ruins_west__save()
+}
+pub fn access_map__irikar__hub__save(ctx: &Context, world: &graph::World) -> bool {
+    // ^map__irikar__hub__save
+    ctx.map__irikar__hub__save()
+}
+pub fn access_map__uhrum__annuna_corridor__save(ctx: &Context, world: &graph::World) -> bool {
+    // ^map__uhrum__annuna_corridor__save
+    ctx.map__uhrum__annuna_corridor__save()
+}
+pub fn access_map__uhrum__save_room__save(ctx: &Context, world: &graph::World) -> bool {
+    // ^map__uhrum__save_room__save
+    ctx.map__uhrum__save_room__save()
+}
+pub fn access_map__uhrum__west_entrance__save(ctx: &Context, world: &graph::World) -> bool {
+    // ^map__uhrum__west_entrance__save
+    ctx.map__uhrum__west_entrance__save()
 }
 pub fn access_melee_damage(ctx: &Context, world: &graph::World) -> bool {
     // Melee_Damage
@@ -2520,11 +2456,6 @@ pub fn action_save(ctx: &mut Context, world: &graph::World) {
 pub fn action_save_last(ctx: &mut Context, world: &graph::World, newpos: SpotId) {
     // $save_last
     helper__save_last!(ctx, world);
-}
-pub fn action_save_last_refill_energy(ctx: &mut Context, world: &graph::World, newpos: SpotId) {
-    // $save_last; $refill_energy
-    helper__save_last!(ctx, world);
-    helper__refill_energy!(ctx, world);
 }
 pub fn action_save_set_glacier_gt_revival_gt_save_point(ctx: &mut Context, world: &graph::World) {
     // ^save = `Glacier > Revival > Save Point`

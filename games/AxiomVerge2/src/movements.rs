@@ -7693,14 +7693,4040 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
         }
         (
             [false],
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+        ) => 300,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+        ) => 333,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => 333,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => 700,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => 800,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+        ) => 333,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => 400,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => 900,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+        ) => 533,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+        ) => 500,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+        ) => 1500,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+        ) => 1000,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+        ) => 933,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+        ) => 1100,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+        ) => 1400,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+        ) => 1133,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+        ) => 1133,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+        ) => 1333,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => 1400,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+        ) => 1066,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+        ) => 1000,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => 1933,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+        ) => 1466,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+        ) => 1666,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+        ) => 900,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+        ) => 800,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+        ) => 733,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+        ) => 1000,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+        ) => 300,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+        ) => 333,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => 333,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => 600,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => 500,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+        ) => 400,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => 400,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => 600,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+        ) => 533,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+        ) => 800,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+        ) => 1800,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+        ) => 1000,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+        ) => 1100,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+        ) => 1400,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+        ) => 1400,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+        ) => 1133,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+        ) => 1133,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+        ) => 1500,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => 1400,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+        ) => 1066,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+        ) => 1300,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => 1933,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+        ) => 1466,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+        ) => 1666,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+        ) => 600,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+        ) => 500,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+        ) => 733,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+        ) => 1000,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+        ) => 333,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+        ) => 333,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => 666,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => 933,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => 700,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+        ) => 666,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => 733,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => 800,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+        ) => 866,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+        ) => 600,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+        ) => 1600,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+        ) => 666,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+        ) => 900,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+        ) => 1200,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+        ) => 1066,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+        ) => 800,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+        ) => 900,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+        ) => 1300,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => 1066,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+        ) => 733,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+        ) => 1100,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => 1600,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+        ) => 1133,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+        ) => 1333,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+        ) => 800,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+        ) => 700,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+        ) => 400,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+        ) => 900,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+        ) => 333,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+        ) => 333,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+        ) => 666,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => 400,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => 500,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+        ) => 400,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => 100,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => 600,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+        ) => 400,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+        ) => 800,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+        ) => 1800,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+        ) => 1333,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+        ) => 1266,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+        ) => 1400,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+        ) => 1733,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+        ) => 1466,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+        ) => 1466,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+        ) => 1666,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => 1733,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+        ) => 1400,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+        ) => 1300,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => 2266,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+        ) => 1800,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+        ) => 2000,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+        ) => 933,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+        ) => 733,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+        ) => 1066,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+        ) => 1333,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+        ) => 700,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+        ) => 600,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+        ) => 933,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => 400,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => 733,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+        ) => 800,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => 500,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => 466,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+        ) => 800,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+        ) => 1200,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+        ) => 2200,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+        ) => 1600,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+        ) => 1533,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+        ) => 1800,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+        ) => 2000,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+        ) => 1733,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+        ) => 1733,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+        ) => 1933,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => 2000,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+        ) => 1666,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+        ) => 1700,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => 2533,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+        ) => 2066,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+        ) => 2266,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+        ) => 1200,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+        ) => 1000,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+        ) => 1333,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+        ) => 1600,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+        ) => 800,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+        ) => 500,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+        ) => 700,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => 500,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => 733,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+        ) => 900,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => 600,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => 266,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+        ) => 900,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+        ) => 1300,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+        ) => 2300,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+        ) => 1300,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+        ) => 1600,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+        ) => 1900,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+        ) => 1266,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+        ) => 1000,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+        ) => 1600,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+        ) => 2000,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => 1700,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+        ) => 933,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+        ) => 1800,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => 1800,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+        ) => 1333,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+        ) => 1533,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+        ) => 466,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+        ) => 266,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+        ) => 600,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+        ) => 866,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+        ) => 333,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+        ) => 400,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+        ) => 666,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => 400,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => 800,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => 900,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => 300,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => 1000,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+        ) => 200,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+        ) => 666,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+        ) => 1400,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+        ) => 1333,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+        ) => 1266,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+        ) => 1266,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+        ) => 1733,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+        ) => 1466,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+        ) => 1466,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+        ) => 1666,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => 1733,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+        ) => 1400,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+        ) => 900,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => 2266,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+        ) => 1800,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+        ) => 2000,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+        ) => 1000,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+        ) => 900,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+        ) => 1066,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+        ) => 1333,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+        ) => 400,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+        ) => 400,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+        ) => 733,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => 100,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => 500,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => 600,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+        ) => 300,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => 700,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+        ) => 300,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+        ) => 733,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+        ) => 1700,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+        ) => 1400,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+        ) => 1333,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+        ) => 1333,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+        ) => 1800,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+        ) => 1533,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+        ) => 1533,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+        ) => 1733,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => 1800,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+        ) => 1466,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+        ) => 1200,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => 2333,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+        ) => 1866,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+        ) => 2066,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+        ) => 1000,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+        ) => 800,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+        ) => 1133,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+        ) => 1400,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+        ) => 900,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+        ) => 600,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+        ) => 800,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => 600,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => 466,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => 266,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+        ) => 1000,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => 700,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+        ) => 1000,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+        ) => 1400,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+        ) => 2400,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+        ) => 1400,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+        ) => 1700,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+        ) => 2000,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+        ) => 1533,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+        ) => 1266,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+        ) => 1700,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+        ) => 2100,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => 1800,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+        ) => 1200,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+        ) => 1900,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => 2066,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+        ) => 1600,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+        ) => 1800,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+        ) => 733,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+        ) => 533,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+        ) => 866,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+        ) => 1133,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+        ) => 533,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+        ) => 533,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+        ) => 866,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => 400,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => 800,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => 900,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+        ) => 200,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => 300,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => 1000,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+        ) => 866,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+        ) => 1400,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+        ) => 1533,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+        ) => 1466,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+        ) => 1466,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+        ) => 1933,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+        ) => 1666,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+        ) => 1666,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+        ) => 1866,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => 1933,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+        ) => 1600,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+        ) => 900,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => 2466,
+        ([false], SpotId::Menu__Kiengir_Map__Apocalypse, SpotId::Menu__Kiengir_Map__Irikar_Hub) => {
+            2000
+        }
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+        ) => 2200,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+        ) => 1133,
+        ([false], SpotId::Menu__Kiengir_Map__Apocalypse, SpotId::Menu__Kiengir_Map__Uhrum_East) => {
+            933
+        }
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+        ) => 1266,
+        ([false], SpotId::Menu__Kiengir_Map__Apocalypse, SpotId::Menu__Kiengir_Map__Uhrum_West) => {
+            1533
+        }
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+        ) => 500,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+        ) => 800,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+        ) => 600,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => 800,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => 1200,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => 1300,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+        ) => 666,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => 733,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => 1400,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+        ) => 866,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+        ) => 1000,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+        ) => 666,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+        ) => 600,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+        ) => 600,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+        ) => 1066,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+        ) => 900,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+        ) => 800,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+        ) => 1000,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => 1066,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+        ) => 1200,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+        ) => 800,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => 1600,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+        ) => 1133,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+        ) => 1333,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+        ) => 1400,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+        ) => 1300,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+        ) => 900,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+        ) => 1500,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+        ) => 1500,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+        ) => 1800,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+        ) => 1600,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => 1800,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => 2200,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => 2300,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+        ) => 1400,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => 1700,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => 2400,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+        ) => 1400,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+        ) => 1000,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+        ) => 1000,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+        ) => 700,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+        ) => 400,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+        ) => 1300,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+        ) => 1900,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+        ) => 700,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+        ) => 466,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => 600,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+        ) => 2200,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+        ) => 1333,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => 2500,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+        ) => 2000,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+        ) => 2200,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+        ) => 2400,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+        ) => 2300,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+        ) => 1900,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+        ) => 2500,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+        ) => 1000,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+        ) => 1000,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+        ) => 666,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => 1333,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => 1600,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => 1300,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+        ) => 1333,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => 1400,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => 1400,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+        ) => 1533,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+        ) => 666,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+        ) => 1000,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+        ) => 300,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+        ) => 600,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+        ) => 400,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+        ) => 900,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+        ) => 300,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+        ) => 700,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => 400,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+        ) => 1200,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+        ) => 1466,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => 1500,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+        ) => 1000,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+        ) => 1200,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+        ) => 1400,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+        ) => 1300,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+        ) => 900,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+        ) => 1500,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+        ) => 933,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+        ) => 1100,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+        ) => 900,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => 1266,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => 1533,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => 1600,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+        ) => 1266,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => 1333,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => 1700,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+        ) => 1466,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+        ) => 600,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+        ) => 700,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+        ) => 300,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+        ) => 300,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+        ) => 600,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+        ) => 1200,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+        ) => 200,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+        ) => 400,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => 466,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+        ) => 1500,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+        ) => 1400,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => 1800,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+        ) => 1300,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+        ) => 1500,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+        ) => 1700,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+        ) => 1600,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+        ) => 1200,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+        ) => 1800,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+        ) => 1100,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+        ) => 1400,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+        ) => 1200,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => 1400,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => 1800,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => 1900,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+        ) => 1266,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => 1333,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => 2000,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+        ) => 1466,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+        ) => 600,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+        ) => 400,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+        ) => 600,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+        ) => 300,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+        ) => 900,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+        ) => 1500,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+        ) => 300,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+        ) => 400,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => 466,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+        ) => 1800,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+        ) => 1400,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => 2100,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+        ) => 1600,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+        ) => 1800,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+        ) => 2000,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+        ) => 1900,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+        ) => 1500,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+        ) => 2100,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+        ) => 1400,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+        ) => 1400,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+        ) => 1066,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => 1733,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => 2000,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => 1266,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+        ) => 1733,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => 1800,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => 1533,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+        ) => 1933,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+        ) => 1066,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+        ) => 1300,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+        ) => 400,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+        ) => 600,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+        ) => 900,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+        ) => 600,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+        ) => 600,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+        ) => 1000,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => 700,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+        ) => 900,
+        (
+            [false],
             SpotId::Menu__Kiengir_Map__Giguna_Base,
             SpotId::Menu__Kiengir_Map__Glacier_Revival,
         ) => 1866,
         (
             [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => 1200,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+        ) => 700,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+        ) => 900,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+        ) => 1100,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+        ) => 1000,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+        ) => 666,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+        ) => 1200,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+        ) => 1133,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+        ) => 1133,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+        ) => 800,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => 1466,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => 1733,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => 1000,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+        ) => 1466,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => 1533,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => 1266,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+        ) => 1666,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+        ) => 900,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+        ) => 1900,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+        ) => 900,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+        ) => 1200,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+        ) => 1500,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+        ) => 600,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+        ) => 1200,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+        ) => 1600,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => 1300,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+        ) => 300,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+        ) => 1600,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => 800,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+        ) => 333,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+        ) => 533,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+        ) => 533,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+        ) => 733,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+        ) => 400,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+        ) => 600,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+        ) => 1133,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+        ) => 1133,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+        ) => 900,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => 1466,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => 1733,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => 1600,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+        ) => 1466,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => 1533,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => 1700,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+        ) => 1666,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+        ) => 800,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+        ) => 700,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+        ) => 300,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+        ) => 200,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+        ) => 300,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+        ) => 600,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+        ) => 1200,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+        ) => 400,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => 266,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+        ) => 1500,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+        ) => 1600,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => 1800,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+        ) => 1300,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+        ) => 1500,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+        ) => 1700,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+        ) => 1600,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+        ) => 1200,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+        ) => 1800,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+        ) => 1333,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+        ) => 1500,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+        ) => 1300,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => 1666,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => 1933,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => 2000,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+        ) => 1666,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => 1733,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => 2100,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+        ) => 1866,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+        ) => 1000,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+        ) => 466,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+        ) => 700,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+        ) => 400,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+        ) => 400,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+        ) => 1000,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+        ) => 1600,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+        ) => 400,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => 300,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+        ) => 1900,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+        ) => 1800,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => 2200,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+        ) => 1700,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+        ) => 1900,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+        ) => 2100,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+        ) => 2000,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+        ) => 1600,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+        ) => 2200,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+        ) => 1400,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+        ) => 1400,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+        ) => 1066,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => 1733,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => 2000,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => 1700,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+        ) => 1733,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => 1800,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => 1800,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+        ) => 1933,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+        ) => 1066,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+        ) => 600,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+        ) => 400,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+        ) => 466,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+        ) => 466,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+        ) => 700,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+        ) => 1300,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+        ) => 266,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+        ) => 300,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+        ) => 1600,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+        ) => 1866,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => 1900,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+        ) => 1400,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+        ) => 1600,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+        ) => 1800,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+        ) => 1700,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+        ) => 1300,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+        ) => 1900,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+        ) => 1066,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+        ) => 1066,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+        ) => 733,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => 1400,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => 1666,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => 933,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+        ) => 1400,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => 1466,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => 1200,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+        ) => 1600,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+        ) => 1200,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+        ) => 2200,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+        ) => 1200,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+        ) => 1500,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+        ) => 1800,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+        ) => 900,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+        ) => 300,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+        ) => 1500,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+        ) => 1900,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => 1600,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+        ) => 1700,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => 866,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+        ) => 400,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+        ) => 600,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+        ) => 466,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+        ) => 666,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+        ) => 333,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+        ) => 300,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+        ) => 1000,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+        ) => 1300,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+        ) => 1100,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => 1300,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => 1700,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => 1800,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+        ) => 900,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => 1200,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => 1900,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+        ) => 900,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+        ) => 800,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+        ) => 1333,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+        ) => 1466,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+        ) => 1400,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+        ) => 1400,
+        (
+            [false],
             SpotId::Menu__Kiengir_Map__Glacier_Revival,
             SpotId::Menu__Kiengir_Map__Giguna_Base,
         ) => 1866,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+        ) => 1600,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+        ) => 1600,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+        ) => 1800,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => 1866,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+        ) => 1700,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => 2400,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+        ) => 1933,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+        ) => 2133,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+        ) => 1900,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+        ) => 1800,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+        ) => 1400,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+        ) => 2000,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+        ) => 1933,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+        ) => 1933,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+        ) => 1600,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => 2266,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => 2533,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => 1800,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+        ) => 2266,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => 2333,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => 2066,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+        ) => 2466,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+        ) => 1600,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+        ) => 2500,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+        ) => 1500,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+        ) => 1800,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+        ) => 2100,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+        ) => 1200,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+        ) => 800,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+        ) => 1800,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+        ) => 2200,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => 1900,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+        ) => 866,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+        ) => 2400,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+        ) => 500,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+        ) => 300,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+        ) => 1333,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+        ) => 1533,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+        ) => 1200,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+        ) => 933,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+        ) => 1466,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+        ) => 1466,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+        ) => 1133,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => 1800,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => 2066,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => 1333,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+        ) => 1800,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => 1866,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => 1600,
+        ([false], SpotId::Menu__Kiengir_Map__Irikar_Hub, SpotId::Menu__Kiengir_Map__Apocalypse) => {
+            2000
+        }
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+        ) => 1133,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+        ) => 2000,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+        ) => 1000,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+        ) => 1300,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+        ) => 1600,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+        ) => 700,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+        ) => 333,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+        ) => 1300,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+        ) => 1700,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => 1400,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+        ) => 400,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+        ) => 1933,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => 500,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+        ) => 200,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+        ) => 866,
+        ([false], SpotId::Menu__Kiengir_Map__Irikar_Hub, SpotId::Menu__Kiengir_Map__Uhrum_East) => {
+            1066
+        }
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+        ) => 733,
+        ([false], SpotId::Menu__Kiengir_Map__Irikar_Hub, SpotId::Menu__Kiengir_Map__Uhrum_West) => {
+            500
+        }
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+        ) => 1666,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+        ) => 1666,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+        ) => 1333,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => 2000,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => 2266,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => 1533,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+        ) => 2000,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => 2066,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => 1800,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+        ) => 2200,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+        ) => 1333,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+        ) => 2200,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+        ) => 1200,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+        ) => 1500,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+        ) => 1800,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+        ) => 900,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+        ) => 533,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+        ) => 1500,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+        ) => 1900,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => 1600,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+        ) => 600,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+        ) => 2133,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => 300,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+        ) => 200,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+        ) => 1066,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+        ) => 1266,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+        ) => 933,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+        ) => 666,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+        ) => 900,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+        ) => 600,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+        ) => 800,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => 933,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => 1200,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => 466,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+        ) => 1000,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => 1000,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => 733,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+        ) => 1133,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+        ) => 1400,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+        ) => 2400,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+        ) => 1400,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+        ) => 1700,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+        ) => 2000,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+        ) => 1100,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+        ) => 533,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+        ) => 1700,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+        ) => 2100,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => 1800,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+        ) => 466,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+        ) => 1900,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => 1333,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+        ) => 866,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+        ) => 1066,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+        ) => 200,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+        ) => 500,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+        ) => 400,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+        ) => 800,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+        ) => 500,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+        ) => 700,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => 733,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => 1000,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => 266,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+        ) => 900,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => 800,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => 533,
+        ([false], SpotId::Menu__Kiengir_Map__Uhrum_East, SpotId::Menu__Kiengir_Map__Apocalypse) => {
+            933
+        }
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+        ) => 1300,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+        ) => 2300,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+        ) => 1300,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+        ) => 1600,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+        ) => 1900,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+        ) => 1000,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+        ) => 733,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+        ) => 1600,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+        ) => 2000,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => 1700,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+        ) => 666,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+        ) => 1800,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => 1533,
+        ([false], SpotId::Menu__Kiengir_Map__Uhrum_East, SpotId::Menu__Kiengir_Map__Irikar_Hub) => {
+            1066
+        }
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+        ) => 1266,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+        ) => 200,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+        ) => 400,
+        ([false], SpotId::Menu__Kiengir_Map__Uhrum_East, SpotId::Menu__Kiengir_Map__Uhrum_West) => {
+            600
+        }
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+        ) => 733,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+        ) => 733,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+        ) => 400,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => 1066,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => 1333,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => 600,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+        ) => 1066,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => 1133,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => 866,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+        ) => 1266,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+        ) => 900,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+        ) => 1900,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+        ) => 900,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+        ) => 1200,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+        ) => 1500,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+        ) => 666,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+        ) => 400,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+        ) => 1200,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+        ) => 1600,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => 1300,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+        ) => 333,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+        ) => 1400,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => 1200,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+        ) => 733,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+        ) => 933,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+        ) => 500,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+        ) => 400,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+        ) => 600,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+        ) => 1000,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+        ) => 1000,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+        ) => 900,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => 1333,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => 1600,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => 866,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+        ) => 1333,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => 1400,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => 1133,
+        ([false], SpotId::Menu__Kiengir_Map__Uhrum_West, SpotId::Menu__Kiengir_Map__Apocalypse) => {
+            1533
+        }
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+        ) => 1500,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+        ) => 2500,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+        ) => 1500,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+        ) => 1800,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+        ) => 2100,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+        ) => 1200,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+        ) => 600,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+        ) => 1800,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+        ) => 2200,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => 1900,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+        ) => 300,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+        ) => 2000,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => 933,
+        ([false], SpotId::Menu__Kiengir_Map__Uhrum_West, SpotId::Menu__Kiengir_Map__Irikar_Hub) => {
+            500
+        }
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+        ) => 666,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+        ) => 400,
+        ([false], SpotId::Menu__Kiengir_Map__Uhrum_West, SpotId::Menu__Kiengir_Map__Uhrum_East) => {
+            600
+        }
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+        ) => 600,
         (
             [false],
             SpotId::Uhrum__Annuna_Corridor__Between_Two_Flowers,
@@ -16266,14 +20292,4024 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
         }
         (
             [true],
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+        ) => 300,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+        ) => 333,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => 333,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => 700,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => 800,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+        ) => 333,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => 400,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => 900,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+        ) => 533,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+        ) => 500,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+        ) => 1500,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+        ) => 1000,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+        ) => 933,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+        ) => 1100,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+        ) => 1400,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+        ) => 1133,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+        ) => 1133,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+        ) => 1333,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => 1400,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+        ) => 1066,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+        ) => 1000,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => 1933,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+        ) => 1466,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+        ) => 1666,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+        ) => 900,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+        ) => 800,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+        ) => 733,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+        ) => 1000,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+        ) => 300,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+        ) => 333,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => 333,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => 600,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => 500,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+        ) => 400,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => 400,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => 600,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+        ) => 533,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+        ) => 800,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+        ) => 1800,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+        ) => 1000,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+        ) => 1100,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+        ) => 1400,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+        ) => 1400,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+        ) => 1133,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+        ) => 1133,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+        ) => 1500,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => 1400,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+        ) => 1066,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+        ) => 1300,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => 1933,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+        ) => 1466,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+        ) => 1666,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+        ) => 600,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+        ) => 500,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+        ) => 733,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+        ) => 1000,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+        ) => 333,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+        ) => 333,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => 666,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => 933,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => 700,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+        ) => 666,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => 733,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => 800,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+        ) => 866,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+        ) => 600,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+        ) => 1600,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+        ) => 666,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+        ) => 900,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+        ) => 1200,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+        ) => 1066,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+        ) => 800,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+        ) => 900,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+        ) => 1300,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => 1066,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+        ) => 733,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+        ) => 1100,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => 1600,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+        ) => 1133,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+        ) => 1333,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+        ) => 800,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+        ) => 700,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+        ) => 400,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+        ) => 900,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+        ) => 333,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+        ) => 333,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+        ) => 666,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => 400,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => 500,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+        ) => 400,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => 100,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => 600,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+        ) => 400,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+        ) => 800,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+        ) => 1800,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+        ) => 1333,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+        ) => 1266,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+        ) => 1400,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+        ) => 1733,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+        ) => 1466,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+        ) => 1466,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+        ) => 1666,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => 1733,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+        ) => 1400,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+        ) => 1300,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => 2266,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+        ) => 1800,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+        ) => 2000,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+        ) => 933,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+        ) => 733,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+        ) => 1066,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+        ) => 1333,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+        ) => 700,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+        ) => 600,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+        ) => 933,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => 400,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => 733,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+        ) => 800,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => 500,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => 466,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+        ) => 800,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+        ) => 1200,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+        ) => 2200,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+        ) => 1600,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+        ) => 1533,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+        ) => 1800,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+        ) => 2000,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+        ) => 1733,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+        ) => 1733,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+        ) => 1933,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => 2000,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+        ) => 1666,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+        ) => 1700,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => 2533,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+        ) => 2066,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+        ) => 2266,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+        ) => 1200,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+        ) => 1000,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+        ) => 1333,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+        ) => 1600,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+        ) => 800,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+        ) => 500,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+        ) => 700,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => 500,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => 733,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+        ) => 900,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => 600,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => 266,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+        ) => 900,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+        ) => 1300,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+        ) => 2300,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+        ) => 1300,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+        ) => 1600,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+        ) => 1900,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+        ) => 1266,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+        ) => 1000,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+        ) => 1600,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+        ) => 2000,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => 1700,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+        ) => 933,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+        ) => 1800,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => 1800,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+        ) => 1333,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+        ) => 1533,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+        ) => 466,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+        ) => 266,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+        ) => 600,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+        ) => 866,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+        ) => 333,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+        ) => 400,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+        ) => 666,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => 400,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => 800,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => 900,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => 300,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => 1000,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+        ) => 200,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+        ) => 666,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+        ) => 1400,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+        ) => 1333,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+        ) => 1266,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+        ) => 1266,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+        ) => 1733,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+        ) => 1466,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+        ) => 1466,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+        ) => 1666,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => 1733,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+        ) => 1400,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+        ) => 900,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => 2266,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+        ) => 1800,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+        ) => 2000,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+        ) => 1000,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+        ) => 900,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+        ) => 1066,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+        ) => 1333,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+        ) => 400,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+        ) => 400,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+        ) => 733,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => 100,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => 500,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => 600,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+        ) => 300,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => 700,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+        ) => 300,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+        ) => 733,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+        ) => 1700,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+        ) => 1400,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+        ) => 1333,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+        ) => 1333,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+        ) => 1800,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+        ) => 1533,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+        ) => 1533,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+        ) => 1733,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => 1800,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+        ) => 1466,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+        ) => 1200,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => 2333,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+        ) => 1866,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+        ) => 2066,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+        ) => 1000,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+        ) => 800,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+        ) => 1133,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+        ) => 1400,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+        ) => 900,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+        ) => 600,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+        ) => 800,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => 600,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => 466,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => 266,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+        ) => 1000,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => 700,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+        ) => 1000,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+        ) => 1400,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+        ) => 2400,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+        ) => 1400,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+        ) => 1700,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+        ) => 2000,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+        ) => 1533,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+        ) => 1266,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+        ) => 1700,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+        ) => 2100,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => 1800,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+        ) => 1200,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+        ) => 1900,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => 2066,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+        ) => 1600,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+        ) => 1800,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+        ) => 733,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+        ) => 533,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+        ) => 866,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+        ) => 1133,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+        ) => 533,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+        ) => 533,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+        ) => 866,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => 400,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => 800,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => 900,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+        ) => 200,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => 300,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => 1000,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+        ) => 866,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+        ) => 1400,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+        ) => 1533,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+        ) => 1466,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+        ) => 1466,
+        ([true], SpotId::Menu__Kiengir_Map__Apocalypse, SpotId::Menu__Kiengir_Map__Giguna_Base) => {
+            1933
+        }
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+        ) => 1666,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+        ) => 1666,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+        ) => 1866,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => 1933,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+        ) => 1600,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+        ) => 900,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => 2466,
+        ([true], SpotId::Menu__Kiengir_Map__Apocalypse, SpotId::Menu__Kiengir_Map__Irikar_Hub) => {
+            2000
+        }
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+        ) => 2200,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+        ) => 1133,
+        ([true], SpotId::Menu__Kiengir_Map__Apocalypse, SpotId::Menu__Kiengir_Map__Uhrum_East) => {
+            933
+        }
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+        ) => 1266,
+        ([true], SpotId::Menu__Kiengir_Map__Apocalypse, SpotId::Menu__Kiengir_Map__Uhrum_West) => {
+            1533
+        }
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+        ) => 500,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+        ) => 800,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+        ) => 600,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => 800,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => 1200,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => 1300,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+        ) => 666,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => 733,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => 1400,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+        ) => 866,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+        ) => 1000,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+        ) => 666,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+        ) => 600,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+        ) => 600,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+        ) => 1066,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+        ) => 900,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+        ) => 800,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+        ) => 1000,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => 1066,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+        ) => 1200,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+        ) => 800,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => 1600,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+        ) => 1133,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+        ) => 1333,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+        ) => 1400,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+        ) => 1300,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+        ) => 900,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+        ) => 1500,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+        ) => 1500,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+        ) => 1800,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+        ) => 1600,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => 1800,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => 2200,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => 2300,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+        ) => 1400,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => 1700,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => 2400,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+        ) => 1400,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+        ) => 1000,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+        ) => 1000,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+        ) => 700,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+        ) => 400,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+        ) => 1300,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+        ) => 1900,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+        ) => 700,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+        ) => 466,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => 600,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+        ) => 2200,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+        ) => 1333,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => 2500,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+        ) => 2000,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+        ) => 2200,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+        ) => 2400,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+        ) => 2300,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+        ) => 1900,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+        ) => 2500,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+        ) => 1000,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+        ) => 1000,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+        ) => 666,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => 1333,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => 1600,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => 1300,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+        ) => 1333,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => 1400,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => 1400,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+        ) => 1533,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+        ) => 666,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+        ) => 1000,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+        ) => 300,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+        ) => 600,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+        ) => 400,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+        ) => 900,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+        ) => 300,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+        ) => 700,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => 400,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+        ) => 1200,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+        ) => 1466,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => 1500,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+        ) => 1000,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+        ) => 1200,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+        ) => 1400,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+        ) => 1300,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+        ) => 900,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+        ) => 1500,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+        ) => 933,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+        ) => 1100,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+        ) => 900,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => 1266,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => 1533,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => 1600,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+        ) => 1266,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => 1333,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => 1700,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+        ) => 1466,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+        ) => 600,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+        ) => 700,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+        ) => 300,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+        ) => 300,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+        ) => 600,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+        ) => 1200,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+        ) => 200,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+        ) => 400,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => 466,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+        ) => 1500,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+        ) => 1400,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => 1800,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+        ) => 1300,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+        ) => 1500,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+        ) => 1700,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+        ) => 1600,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+        ) => 1200,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+        ) => 1800,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+        ) => 1100,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+        ) => 1400,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+        ) => 1200,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => 1400,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => 1800,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => 1900,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+        ) => 1266,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => 1333,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => 2000,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+        ) => 1466,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+        ) => 600,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+        ) => 400,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+        ) => 600,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+        ) => 300,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+        ) => 900,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+        ) => 1500,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+        ) => 300,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+        ) => 400,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => 466,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+        ) => 1800,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+        ) => 1400,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => 2100,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+        ) => 1600,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+        ) => 1800,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+        ) => 2000,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+        ) => 1900,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+        ) => 1500,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+        ) => 2100,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+        ) => 1400,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+        ) => 1400,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+        ) => 1066,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => 1733,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => 2000,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => 1266,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+        ) => 1733,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => 1800,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => 1533,
+        ([true], SpotId::Menu__Kiengir_Map__Giguna_Base, SpotId::Menu__Kiengir_Map__Apocalypse) => {
+            1933
+        }
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+        ) => 1066,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+        ) => 1300,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+        ) => 400,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+        ) => 600,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+        ) => 900,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+        ) => 600,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+        ) => 600,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+        ) => 1000,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => 700,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+        ) => 900,
+        (
+            [true],
             SpotId::Menu__Kiengir_Map__Giguna_Base,
             SpotId::Menu__Kiengir_Map__Glacier_Revival,
         ) => 1866,
         (
             [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => 1200,
+        ([true], SpotId::Menu__Kiengir_Map__Giguna_Base, SpotId::Menu__Kiengir_Map__Irikar_Hub) => {
+            700
+        }
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+        ) => 900,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+        ) => 1100,
+        ([true], SpotId::Menu__Kiengir_Map__Giguna_Base, SpotId::Menu__Kiengir_Map__Uhrum_East) => {
+            1000
+        }
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+        ) => 666,
+        ([true], SpotId::Menu__Kiengir_Map__Giguna_Base, SpotId::Menu__Kiengir_Map__Uhrum_West) => {
+            1200
+        }
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+        ) => 1133,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+        ) => 1133,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+        ) => 800,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => 1466,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => 1733,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => 1000,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+        ) => 1466,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => 1533,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => 1266,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+        ) => 1666,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+        ) => 900,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+        ) => 1900,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+        ) => 900,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+        ) => 1200,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+        ) => 1500,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+        ) => 600,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+        ) => 1200,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+        ) => 1600,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => 1300,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+        ) => 300,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+        ) => 1600,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => 800,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+        ) => 333,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+        ) => 533,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+        ) => 533,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+        ) => 733,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+        ) => 400,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+        ) => 600,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+        ) => 1133,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+        ) => 1133,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+        ) => 900,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => 1466,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => 1733,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => 1600,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+        ) => 1466,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => 1533,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => 1700,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+        ) => 1666,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+        ) => 800,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+        ) => 700,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+        ) => 300,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+        ) => 200,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+        ) => 300,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+        ) => 600,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+        ) => 1200,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+        ) => 400,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => 266,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+        ) => 1500,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+        ) => 1600,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => 1800,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+        ) => 1300,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+        ) => 1500,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+        ) => 1700,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+        ) => 1600,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+        ) => 1200,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+        ) => 1800,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+        ) => 1333,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+        ) => 1500,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+        ) => 1300,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => 1666,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => 1933,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => 2000,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+        ) => 1666,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => 1733,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => 2100,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+        ) => 1866,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+        ) => 1000,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+        ) => 466,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+        ) => 700,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+        ) => 400,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+        ) => 400,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+        ) => 1000,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+        ) => 1600,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+        ) => 400,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => 300,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+        ) => 1900,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+        ) => 1800,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => 2200,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+        ) => 1700,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+        ) => 1900,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+        ) => 2100,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+        ) => 2000,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+        ) => 1600,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+        ) => 2200,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+        ) => 1400,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+        ) => 1400,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+        ) => 1066,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => 1733,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => 2000,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => 1700,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+        ) => 1733,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => 1800,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => 1800,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+        ) => 1933,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+        ) => 1066,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+        ) => 600,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+        ) => 400,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+        ) => 466,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+        ) => 466,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+        ) => 700,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+        ) => 1300,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+        ) => 266,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+        ) => 300,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+        ) => 1600,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+        ) => 1866,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => 1900,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+        ) => 1400,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+        ) => 1600,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+        ) => 1800,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+        ) => 1700,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+        ) => 1300,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+        ) => 1900,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+        ) => 1066,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+        ) => 1066,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+        ) => 733,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => 1400,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => 1666,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => 933,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+        ) => 1400,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => 1466,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => 1200,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+        ) => 1600,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+        ) => 1200,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+        ) => 2200,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+        ) => 1200,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+        ) => 1500,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+        ) => 1800,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+        ) => 900,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+        ) => 300,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+        ) => 1500,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+        ) => 1900,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => 1600,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+        ) => 1700,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => 866,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+        ) => 400,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+        ) => 600,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+        ) => 466,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+        ) => 666,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+        ) => 333,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+        ) => 300,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+        ) => 1000,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+        ) => 1300,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+        ) => 1100,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => 1300,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => 1700,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => 1800,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+        ) => 900,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => 1200,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => 1900,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+        ) => 900,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+        ) => 800,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+        ) => 1333,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+        ) => 1466,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+        ) => 1400,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+        ) => 1400,
+        (
+            [true],
             SpotId::Menu__Kiengir_Map__Glacier_Revival,
             SpotId::Menu__Kiengir_Map__Giguna_Base,
         ) => 1866,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+        ) => 1600,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+        ) => 1600,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+        ) => 1800,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => 1866,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+        ) => 1700,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => 2400,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+        ) => 1933,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+        ) => 2133,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+        ) => 1900,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+        ) => 1800,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+        ) => 1400,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+        ) => 2000,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+        ) => 1933,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+        ) => 1933,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+        ) => 1600,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => 2266,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => 2533,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => 1800,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+        ) => 2266,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => 2333,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => 2066,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+        ) => 2466,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+        ) => 1600,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+        ) => 2500,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+        ) => 1500,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+        ) => 1800,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+        ) => 2100,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+        ) => 1200,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+        ) => 800,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+        ) => 1800,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+        ) => 2200,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => 1900,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+        ) => 866,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+        ) => 2400,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+        ) => 500,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+        ) => 300,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+        ) => 1333,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+        ) => 1533,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+        ) => 1200,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+        ) => 933,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+        ) => 1466,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+        ) => 1466,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+        ) => 1133,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => 1800,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => 2066,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => 1333,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+        ) => 1800,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => 1866,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => 1600,
+        ([true], SpotId::Menu__Kiengir_Map__Irikar_Hub, SpotId::Menu__Kiengir_Map__Apocalypse) => {
+            2000
+        }
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+        ) => 1133,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+        ) => 2000,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+        ) => 1000,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+        ) => 1300,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+        ) => 1600,
+        ([true], SpotId::Menu__Kiengir_Map__Irikar_Hub, SpotId::Menu__Kiengir_Map__Giguna_Base) => {
+            700
+        }
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+        ) => 333,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+        ) => 1300,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+        ) => 1700,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => 1400,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+        ) => 400,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+        ) => 1933,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => 500,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+        ) => 200,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+        ) => 866,
+        ([true], SpotId::Menu__Kiengir_Map__Irikar_Hub, SpotId::Menu__Kiengir_Map__Uhrum_East) => {
+            1066
+        }
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+        ) => 733,
+        ([true], SpotId::Menu__Kiengir_Map__Irikar_Hub, SpotId::Menu__Kiengir_Map__Uhrum_West) => {
+            500
+        }
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+        ) => 1666,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+        ) => 1666,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+        ) => 1333,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => 2000,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => 2266,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => 1533,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+        ) => 2000,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => 2066,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => 1800,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+        ) => 2200,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+        ) => 1333,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+        ) => 2200,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+        ) => 1200,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+        ) => 1500,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+        ) => 1800,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+        ) => 900,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+        ) => 533,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+        ) => 1500,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+        ) => 1900,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => 1600,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+        ) => 600,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+        ) => 2133,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => 300,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+        ) => 200,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+        ) => 1066,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+        ) => 1266,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+        ) => 933,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+        ) => 666,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+        ) => 900,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+        ) => 600,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+        ) => 800,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => 933,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => 1200,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => 466,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+        ) => 1000,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => 1000,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => 733,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+        ) => 1133,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+        ) => 1400,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+        ) => 2400,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+        ) => 1400,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+        ) => 1700,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+        ) => 2000,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+        ) => 1100,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+        ) => 533,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+        ) => 1700,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+        ) => 2100,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => 1800,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+        ) => 466,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+        ) => 1900,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => 1333,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+        ) => 866,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+        ) => 1066,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+        ) => 200,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+        ) => 500,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+        ) => 400,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+        ) => 800,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+        ) => 500,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+        ) => 700,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => 733,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => 1000,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => 266,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+        ) => 900,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => 800,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => 533,
+        ([true], SpotId::Menu__Kiengir_Map__Uhrum_East, SpotId::Menu__Kiengir_Map__Apocalypse) => {
+            933
+        }
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+        ) => 1300,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+        ) => 2300,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+        ) => 1300,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+        ) => 1600,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+        ) => 1900,
+        ([true], SpotId::Menu__Kiengir_Map__Uhrum_East, SpotId::Menu__Kiengir_Map__Giguna_Base) => {
+            1000
+        }
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+        ) => 733,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+        ) => 1600,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+        ) => 2000,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => 1700,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+        ) => 666,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+        ) => 1800,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => 1533,
+        ([true], SpotId::Menu__Kiengir_Map__Uhrum_East, SpotId::Menu__Kiengir_Map__Irikar_Hub) => {
+            1066
+        }
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+        ) => 1266,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+        ) => 200,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+        ) => 400,
+        ([true], SpotId::Menu__Kiengir_Map__Uhrum_East, SpotId::Menu__Kiengir_Map__Uhrum_West) => {
+            600
+        }
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+        ) => 733,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+        ) => 733,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+        ) => 400,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => 1066,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => 1333,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => 600,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+        ) => 1066,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => 1133,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => 866,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+        ) => 1266,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+        ) => 900,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+        ) => 1900,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+        ) => 900,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+        ) => 1200,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+        ) => 1500,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+        ) => 666,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+        ) => 400,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+        ) => 1200,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+        ) => 1600,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => 1300,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+        ) => 333,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+        ) => 1400,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => 1200,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+        ) => 733,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+        ) => 933,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+        ) => 500,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+        ) => 400,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+        ) => 600,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+        ) => 1000,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+        ) => 1000,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+        ) => 900,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => 1333,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => 1600,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => 866,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+        ) => 1333,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => 1400,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => 1133,
+        ([true], SpotId::Menu__Kiengir_Map__Uhrum_West, SpotId::Menu__Kiengir_Map__Apocalypse) => {
+            1533
+        }
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+        ) => 1500,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+        ) => 2500,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+        ) => 1500,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+        ) => 1800,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+        ) => 2100,
+        ([true], SpotId::Menu__Kiengir_Map__Uhrum_West, SpotId::Menu__Kiengir_Map__Giguna_Base) => {
+            1200
+        }
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+        ) => 600,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+        ) => 1800,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+        ) => 2200,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => 1900,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+        ) => 300,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+        ) => 2000,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => 933,
+        ([true], SpotId::Menu__Kiengir_Map__Uhrum_West, SpotId::Menu__Kiengir_Map__Irikar_Hub) => {
+            500
+        }
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+        ) => 666,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+        ) => 400,
+        ([true], SpotId::Menu__Kiengir_Map__Uhrum_West, SpotId::Menu__Kiengir_Map__Uhrum_East) => {
+            600
+        }
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+        ) => 600,
         (
             [true],
             SpotId::Uhrum__Annuna_Corridor__Between_Two_Flowers,
@@ -21775,12 +29811,2716 @@ pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
         (SpotId::Irikar__Lamassu__Catwalk_West, SpotId::Irikar__Lamassu__Bottom_Middle) => true,
         (SpotId::Irikar__Lamassu__Catwalk_Middle, SpotId::Irikar__Lamassu__Catwalk_West) => true,
         (SpotId::Irikar__Lamassu__Catwalk_Middle, SpotId::Irikar__Lamassu__East_27) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Amagi_Main_Area, SpotId::Menu__Kiengir_Map__Annuna_Upper) => {
+            true
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Amagi_Main_Area, SpotId::Menu__Kiengir_Map__Apocalypse) => true,
+        (SpotId::Menu__Kiengir_Map__Amagi_Main_Area, SpotId::Menu__Kiengir_Map__Ebih_Base_Camp) => {
+            true
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Amagi_Main_Area, SpotId::Menu__Kiengir_Map__Ebih_West_Mid) => {
+            true
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Amagi_Main_Area, SpotId::Menu__Kiengir_Map__Giguna_Base) => {
+            true
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Amagi_Main_Area, SpotId::Menu__Kiengir_Map__Irikar_Hub) => true,
+        (SpotId::Menu__Kiengir_Map__Amagi_Main_Area, SpotId::Menu__Kiengir_Map__Irikar_Midwest) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Amagi_Main_Area, SpotId::Menu__Kiengir_Map__Uhrum_Center) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Amagi_Main_Area, SpotId::Menu__Kiengir_Map__Uhrum_East) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Amagi_Main_Area, SpotId::Menu__Kiengir_Map__Uhrum_West) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Amagi_East_Lake, SpotId::Menu__Kiengir_Map__Annuna_Upper) => {
+            true
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Amagi_East_Lake, SpotId::Menu__Kiengir_Map__Apocalypse) => true,
+        (SpotId::Menu__Kiengir_Map__Amagi_East_Lake, SpotId::Menu__Kiengir_Map__Ebih_Base_Camp) => {
+            true
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Amagi_East_Lake, SpotId::Menu__Kiengir_Map__Ebih_West_Mid) => {
+            true
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Amagi_East_Lake, SpotId::Menu__Kiengir_Map__Giguna_Base) => {
+            true
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Amagi_East_Lake, SpotId::Menu__Kiengir_Map__Irikar_Hub) => true,
+        (SpotId::Menu__Kiengir_Map__Amagi_East_Lake, SpotId::Menu__Kiengir_Map__Irikar_Midwest) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Amagi_East_Lake, SpotId::Menu__Kiengir_Map__Uhrum_Center) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Amagi_East_Lake, SpotId::Menu__Kiengir_Map__Uhrum_East) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Amagi_East_Lake, SpotId::Menu__Kiengir_Map__Uhrum_West) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Amagi_Isolation, SpotId::Menu__Kiengir_Map__Annuna_Upper) => {
+            true
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Amagi_Isolation, SpotId::Menu__Kiengir_Map__Apocalypse) => true,
+        (SpotId::Menu__Kiengir_Map__Amagi_Isolation, SpotId::Menu__Kiengir_Map__Ebih_Base_Camp) => {
+            true
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Amagi_Isolation, SpotId::Menu__Kiengir_Map__Ebih_West_Mid) => {
+            true
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Amagi_Isolation, SpotId::Menu__Kiengir_Map__Giguna_Base) => {
+            true
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Amagi_Isolation, SpotId::Menu__Kiengir_Map__Irikar_Hub) => true,
+        (SpotId::Menu__Kiengir_Map__Amagi_Isolation, SpotId::Menu__Kiengir_Map__Irikar_Midwest) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Amagi_Isolation, SpotId::Menu__Kiengir_Map__Uhrum_Center) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Amagi_Isolation, SpotId::Menu__Kiengir_Map__Uhrum_East) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Amagi_Isolation, SpotId::Menu__Kiengir_Map__Uhrum_West) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Annuna_Center_Save, SpotId::Menu__Kiengir_Map__Apocalypse) => {
+            true
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Annuna_Center_Save, SpotId::Menu__Kiengir_Map__Giguna_Base) => {
+            true
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Annuna_Center_Save, SpotId::Menu__Kiengir_Map__Irikar_Hub) => {
+            true
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Annuna_Center_Save, SpotId::Menu__Kiengir_Map__Uhrum_East) => {
+            true
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Annuna_Center_Save, SpotId::Menu__Kiengir_Map__Uhrum_West) => {
+            true
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match, SpotId::Menu__Kiengir_Map__Apocalypse) => {
+            true
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match, SpotId::Menu__Kiengir_Map__Irikar_Hub) => {
+            true
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match, SpotId::Menu__Kiengir_Map__Uhrum_East) => {
+            true
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match, SpotId::Menu__Kiengir_Map__Uhrum_West) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Annuna_Upper, SpotId::Menu__Kiengir_Map__Amagi_Main_Area) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Annuna_Upper, SpotId::Menu__Kiengir_Map__Amagi_East_Lake) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Annuna_Upper, SpotId::Menu__Kiengir_Map__Amagi_Isolation) => {
+            true
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Annuna_Upper, SpotId::Menu__Kiengir_Map__Annuna_Upper) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Annuna_Upper, SpotId::Menu__Kiengir_Map__Apocalypse) => true,
+        (SpotId::Menu__Kiengir_Map__Annuna_Upper, SpotId::Menu__Kiengir_Map__Ebih_Base_Camp) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Annuna_Upper, SpotId::Menu__Kiengir_Map__Ebih_Observatory) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Annuna_Upper, SpotId::Menu__Kiengir_Map__Ebih_West_Lower) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Annuna_Upper, SpotId::Menu__Kiengir_Map__Ebih_West_Mid) => true,
+        (SpotId::Menu__Kiengir_Map__Annuna_Upper, SpotId::Menu__Kiengir_Map__Ebih_West_Upper) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Annuna_Upper, SpotId::Menu__Kiengir_Map__Giguna_Base) => true,
+        (SpotId::Menu__Kiengir_Map__Annuna_Upper, SpotId::Menu__Kiengir_Map__Giguna_Labyrinth) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Annuna_Upper, SpotId::Menu__Kiengir_Map__Giguna_Northeast) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Annuna_Upper, SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Annuna_Upper, SpotId::Menu__Kiengir_Map__Giguna_Ruins_West) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Annuna_Upper, SpotId::Menu__Kiengir_Map__Giguna_Separator) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Annuna_Upper, SpotId::Menu__Kiengir_Map__Glacier_Revival) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Annuna_Upper, SpotId::Menu__Kiengir_Map__Irikar_Beach_Save) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Annuna_Upper, SpotId::Menu__Kiengir_Map__Irikar_Hub) => true,
+        (SpotId::Menu__Kiengir_Map__Annuna_Upper, SpotId::Menu__Kiengir_Map__Irikar_Midwest) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Annuna_Upper, SpotId::Menu__Kiengir_Map__Uhrum_Center) => true,
+        (SpotId::Menu__Kiengir_Map__Annuna_Upper, SpotId::Menu__Kiengir_Map__Uhrum_East) => true,
+        (SpotId::Menu__Kiengir_Map__Annuna_Upper, SpotId::Menu__Kiengir_Map__Uhrum_Emergence) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Annuna_Upper, SpotId::Menu__Kiengir_Map__Uhrum_West) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Annuna_West_Bridge, SpotId::Menu__Kiengir_Map__Apocalypse) => {
+            true
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Annuna_West_Bridge, SpotId::Menu__Kiengir_Map__Giguna_Base) => {
+            true
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Annuna_West_Bridge, SpotId::Menu__Kiengir_Map__Irikar_Hub) => {
+            true
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Annuna_West_Bridge, SpotId::Menu__Kiengir_Map__Uhrum_East) => {
+            true
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Annuna_West_Bridge, SpotId::Menu__Kiengir_Map__Uhrum_West) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Apocalypse, SpotId::Menu__Kiengir_Map__Amagi_Main_Area) => true,
+        (SpotId::Menu__Kiengir_Map__Apocalypse, SpotId::Menu__Kiengir_Map__Amagi_East_Lake) => true,
+        (SpotId::Menu__Kiengir_Map__Apocalypse, SpotId::Menu__Kiengir_Map__Amagi_Isolation) => true,
+        (SpotId::Menu__Kiengir_Map__Apocalypse, SpotId::Menu__Kiengir_Map__Annuna_Center_Save) => {
+            true
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Apocalypse, SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Apocalypse, SpotId::Menu__Kiengir_Map__Annuna_Upper) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Apocalypse, SpotId::Menu__Kiengir_Map__Annuna_West_Bridge) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Apocalypse, SpotId::Menu__Kiengir_Map__Apocalypse) => true,
+        (SpotId::Menu__Kiengir_Map__Apocalypse, SpotId::Menu__Kiengir_Map__Ebih_Base_Camp) => true,
+        (SpotId::Menu__Kiengir_Map__Apocalypse, SpotId::Menu__Kiengir_Map__Ebih_Observatory) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Apocalypse, SpotId::Menu__Kiengir_Map__Ebih_West_Lower) => true,
+        (SpotId::Menu__Kiengir_Map__Apocalypse, SpotId::Menu__Kiengir_Map__Ebih_West_Mid) => true,
+        (SpotId::Menu__Kiengir_Map__Apocalypse, SpotId::Menu__Kiengir_Map__Ebih_West_Upper) => true,
+        (SpotId::Menu__Kiengir_Map__Apocalypse, SpotId::Menu__Kiengir_Map__Giguna_Base) => true,
+        (SpotId::Menu__Kiengir_Map__Apocalypse, SpotId::Menu__Kiengir_Map__Giguna_Labyrinth) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Apocalypse, SpotId::Menu__Kiengir_Map__Giguna_Northeast) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Apocalypse, SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Apocalypse, SpotId::Menu__Kiengir_Map__Giguna_Ruins_West) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Apocalypse, SpotId::Menu__Kiengir_Map__Giguna_Separator) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Apocalypse, SpotId::Menu__Kiengir_Map__Glacier_Revival) => true,
+        (SpotId::Menu__Kiengir_Map__Apocalypse, SpotId::Menu__Kiengir_Map__Irikar_Beach_Save) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Apocalypse, SpotId::Menu__Kiengir_Map__Irikar_Hub) => true,
+        (SpotId::Menu__Kiengir_Map__Apocalypse, SpotId::Menu__Kiengir_Map__Irikar_Midwest) => true,
+        (SpotId::Menu__Kiengir_Map__Apocalypse, SpotId::Menu__Kiengir_Map__Uhrum_Center) => true,
+        (SpotId::Menu__Kiengir_Map__Apocalypse, SpotId::Menu__Kiengir_Map__Uhrum_East) => true,
+        (SpotId::Menu__Kiengir_Map__Apocalypse, SpotId::Menu__Kiengir_Map__Uhrum_Emergence) => true,
+        (SpotId::Menu__Kiengir_Map__Apocalypse, SpotId::Menu__Kiengir_Map__Uhrum_West) => true,
+        (SpotId::Menu__Kiengir_Map__Ebih_Base_Camp, SpotId::Menu__Kiengir_Map__Amagi_Main_Area) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Ebih_Base_Camp, SpotId::Menu__Kiengir_Map__Amagi_East_Lake) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Ebih_Base_Camp, SpotId::Menu__Kiengir_Map__Amagi_Isolation) => {
+            true
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Ebih_Base_Camp, SpotId::Menu__Kiengir_Map__Annuna_Upper) => {
+            true
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Ebih_Base_Camp, SpotId::Menu__Kiengir_Map__Apocalypse) => true,
+        (SpotId::Menu__Kiengir_Map__Ebih_Base_Camp, SpotId::Menu__Kiengir_Map__Ebih_Base_Camp) => {
+            true
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Ebih_Base_Camp, SpotId::Menu__Kiengir_Map__Ebih_West_Lower) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Ebih_Base_Camp, SpotId::Menu__Kiengir_Map__Ebih_West_Mid) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Ebih_Base_Camp, SpotId::Menu__Kiengir_Map__Ebih_West_Upper) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Ebih_Base_Camp, SpotId::Menu__Kiengir_Map__Giguna_Base) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Ebih_Base_Camp, SpotId::Menu__Kiengir_Map__Glacier_Revival) => {
+            true
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Ebih_Base_Camp, SpotId::Menu__Kiengir_Map__Irikar_Hub) => true,
+        (SpotId::Menu__Kiengir_Map__Ebih_Base_Camp, SpotId::Menu__Kiengir_Map__Irikar_Midwest) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Ebih_Base_Camp, SpotId::Menu__Kiengir_Map__Uhrum_Center) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Ebih_Base_Camp, SpotId::Menu__Kiengir_Map__Uhrum_East) => true,
+        (SpotId::Menu__Kiengir_Map__Ebih_Base_Camp, SpotId::Menu__Kiengir_Map__Uhrum_Emergence) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Ebih_Base_Camp, SpotId::Menu__Kiengir_Map__Uhrum_West) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Ebih_Observatory, SpotId::Menu__Kiengir_Map__Annuna_Upper) => {
+            true
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Ebih_Observatory, SpotId::Menu__Kiengir_Map__Apocalypse) => {
+            true
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Ebih_Observatory, SpotId::Menu__Kiengir_Map__Ebih_West_Mid) => {
+            true
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Ebih_Observatory, SpotId::Menu__Kiengir_Map__Giguna_Base) => {
+            true
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Ebih_Observatory, SpotId::Menu__Kiengir_Map__Irikar_Hub) => {
+            true
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Ebih_Observatory, SpotId::Menu__Kiengir_Map__Uhrum_Center) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Ebih_Observatory, SpotId::Menu__Kiengir_Map__Uhrum_East) => {
+            true
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Ebih_Observatory, SpotId::Menu__Kiengir_Map__Uhrum_West) => {
+            true
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Ebih_West_Lower, SpotId::Menu__Kiengir_Map__Annuna_Upper) => {
+            true
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Ebih_West_Lower, SpotId::Menu__Kiengir_Map__Apocalypse) => true,
+        (SpotId::Menu__Kiengir_Map__Ebih_West_Lower, SpotId::Menu__Kiengir_Map__Ebih_Base_Camp) => {
+            true
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Ebih_West_Lower, SpotId::Menu__Kiengir_Map__Ebih_West_Mid) => {
+            true
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Ebih_West_Lower, SpotId::Menu__Kiengir_Map__Giguna_Base) => {
+            true
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Ebih_West_Lower, SpotId::Menu__Kiengir_Map__Irikar_Hub) => true,
+        (SpotId::Menu__Kiengir_Map__Ebih_West_Lower, SpotId::Menu__Kiengir_Map__Irikar_Midwest) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Ebih_West_Lower, SpotId::Menu__Kiengir_Map__Uhrum_Center) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Ebih_West_Lower, SpotId::Menu__Kiengir_Map__Uhrum_East) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Ebih_West_Lower, SpotId::Menu__Kiengir_Map__Uhrum_West) => true,
+        (SpotId::Menu__Kiengir_Map__Ebih_West_Mid, SpotId::Menu__Kiengir_Map__Amagi_Main_Area) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Ebih_West_Mid, SpotId::Menu__Kiengir_Map__Amagi_East_Lake) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Ebih_West_Mid, SpotId::Menu__Kiengir_Map__Amagi_Isolation) => {
+            true
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Ebih_West_Mid, SpotId::Menu__Kiengir_Map__Annuna_Upper) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Ebih_West_Mid, SpotId::Menu__Kiengir_Map__Apocalypse) => true,
+        (SpotId::Menu__Kiengir_Map__Ebih_West_Mid, SpotId::Menu__Kiengir_Map__Ebih_Base_Camp) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Ebih_West_Mid, SpotId::Menu__Kiengir_Map__Ebih_Observatory) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Ebih_West_Mid, SpotId::Menu__Kiengir_Map__Ebih_West_Lower) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Ebih_West_Mid, SpotId::Menu__Kiengir_Map__Ebih_West_Mid) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Ebih_West_Mid, SpotId::Menu__Kiengir_Map__Ebih_West_Upper) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Ebih_West_Mid, SpotId::Menu__Kiengir_Map__Giguna_Base) => true,
+        (SpotId::Menu__Kiengir_Map__Ebih_West_Mid, SpotId::Menu__Kiengir_Map__Giguna_Labyrinth) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Ebih_West_Mid, SpotId::Menu__Kiengir_Map__Giguna_Northeast) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Ebih_West_Mid, SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top) => {
+            true
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Ebih_West_Mid, SpotId::Menu__Kiengir_Map__Giguna_Separator) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Ebih_West_Mid, SpotId::Menu__Kiengir_Map__Glacier_Revival) => {
+            true
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Ebih_West_Mid, SpotId::Menu__Kiengir_Map__Irikar_Hub) => true,
+        (SpotId::Menu__Kiengir_Map__Ebih_West_Mid, SpotId::Menu__Kiengir_Map__Irikar_Midwest) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Ebih_West_Mid, SpotId::Menu__Kiengir_Map__Uhrum_Center) => true,
+        (SpotId::Menu__Kiengir_Map__Ebih_West_Mid, SpotId::Menu__Kiengir_Map__Uhrum_East) => true,
+        (SpotId::Menu__Kiengir_Map__Ebih_West_Mid, SpotId::Menu__Kiengir_Map__Uhrum_Emergence) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Ebih_West_Mid, SpotId::Menu__Kiengir_Map__Uhrum_West) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Ebih_West_Upper, SpotId::Menu__Kiengir_Map__Annuna_Upper) => {
+            true
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Ebih_West_Upper, SpotId::Menu__Kiengir_Map__Apocalypse) => true,
+        (SpotId::Menu__Kiengir_Map__Ebih_West_Upper, SpotId::Menu__Kiengir_Map__Ebih_Base_Camp) => {
+            true
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Ebih_West_Upper, SpotId::Menu__Kiengir_Map__Ebih_West_Mid) => {
+            true
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Ebih_West_Upper, SpotId::Menu__Kiengir_Map__Giguna_Base) => {
+            true
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Ebih_West_Upper, SpotId::Menu__Kiengir_Map__Irikar_Hub) => true,
+        (SpotId::Menu__Kiengir_Map__Ebih_West_Upper, SpotId::Menu__Kiengir_Map__Irikar_Midwest) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Ebih_West_Upper, SpotId::Menu__Kiengir_Map__Uhrum_Center) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Ebih_West_Upper, SpotId::Menu__Kiengir_Map__Uhrum_East) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Ebih_West_Upper, SpotId::Menu__Kiengir_Map__Uhrum_West) => true,
+        (SpotId::Menu__Kiengir_Map__Giguna_Base, SpotId::Menu__Kiengir_Map__Amagi_Main_Area) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Giguna_Base, SpotId::Menu__Kiengir_Map__Amagi_East_Lake) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Giguna_Base, SpotId::Menu__Kiengir_Map__Amagi_Isolation) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Giguna_Base, SpotId::Menu__Kiengir_Map__Annuna_Center_Save) => {
+            true
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Giguna_Base, SpotId::Menu__Kiengir_Map__Annuna_Upper) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Giguna_Base, SpotId::Menu__Kiengir_Map__Annuna_West_Bridge) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Giguna_Base, SpotId::Menu__Kiengir_Map__Apocalypse) => true,
+        (SpotId::Menu__Kiengir_Map__Giguna_Base, SpotId::Menu__Kiengir_Map__Ebih_Base_Camp) => true,
+        (SpotId::Menu__Kiengir_Map__Giguna_Base, SpotId::Menu__Kiengir_Map__Ebih_Observatory) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Giguna_Base, SpotId::Menu__Kiengir_Map__Ebih_West_Lower) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Giguna_Base, SpotId::Menu__Kiengir_Map__Ebih_West_Mid) => true,
+        (SpotId::Menu__Kiengir_Map__Giguna_Base, SpotId::Menu__Kiengir_Map__Ebih_West_Upper) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Giguna_Base, SpotId::Menu__Kiengir_Map__Giguna_Base) => true,
+        (SpotId::Menu__Kiengir_Map__Giguna_Base, SpotId::Menu__Kiengir_Map__Giguna_Labyrinth) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Giguna_Base, SpotId::Menu__Kiengir_Map__Giguna_Northeast) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Giguna_Base, SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Giguna_Base, SpotId::Menu__Kiengir_Map__Giguna_Ruins_West) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Giguna_Base, SpotId::Menu__Kiengir_Map__Giguna_Separator) => {
+            true
+        }
         (SpotId::Menu__Kiengir_Map__Giguna_Base, SpotId::Menu__Kiengir_Map__Glacier_Revival) => {
             true
         }
+        (SpotId::Menu__Kiengir_Map__Giguna_Base, SpotId::Menu__Kiengir_Map__Irikar_Beach_Save) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Giguna_Base, SpotId::Menu__Kiengir_Map__Irikar_Hub) => true,
+        (SpotId::Menu__Kiengir_Map__Giguna_Base, SpotId::Menu__Kiengir_Map__Irikar_Midwest) => true,
+        (SpotId::Menu__Kiengir_Map__Giguna_Base, SpotId::Menu__Kiengir_Map__Uhrum_Center) => true,
+        (SpotId::Menu__Kiengir_Map__Giguna_Base, SpotId::Menu__Kiengir_Map__Uhrum_East) => true,
+        (SpotId::Menu__Kiengir_Map__Giguna_Base, SpotId::Menu__Kiengir_Map__Uhrum_Emergence) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Giguna_Base, SpotId::Menu__Kiengir_Map__Uhrum_West) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Giguna_Labyrinth, SpotId::Menu__Kiengir_Map__Annuna_Upper) => {
+            true
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Giguna_Labyrinth, SpotId::Menu__Kiengir_Map__Apocalypse) => {
+            true
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Giguna_Labyrinth, SpotId::Menu__Kiengir_Map__Ebih_West_Mid) => {
+            true
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Giguna_Labyrinth, SpotId::Menu__Kiengir_Map__Giguna_Base) => {
+            true
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Giguna_Labyrinth, SpotId::Menu__Kiengir_Map__Irikar_Hub) => {
+            true
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Giguna_Labyrinth, SpotId::Menu__Kiengir_Map__Uhrum_Center) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Giguna_Labyrinth, SpotId::Menu__Kiengir_Map__Uhrum_East) => {
+            true
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Giguna_Labyrinth, SpotId::Menu__Kiengir_Map__Uhrum_West) => {
+            true
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Giguna_Northeast, SpotId::Menu__Kiengir_Map__Annuna_Upper) => {
+            true
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Giguna_Northeast, SpotId::Menu__Kiengir_Map__Apocalypse) => {
+            true
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Giguna_Northeast, SpotId::Menu__Kiengir_Map__Ebih_West_Mid) => {
+            true
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Giguna_Northeast, SpotId::Menu__Kiengir_Map__Giguna_Base) => {
+            true
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Giguna_Northeast, SpotId::Menu__Kiengir_Map__Irikar_Hub) => {
+            true
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Giguna_Northeast, SpotId::Menu__Kiengir_Map__Uhrum_Center) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Giguna_Northeast, SpotId::Menu__Kiengir_Map__Uhrum_East) => {
+            true
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Giguna_Northeast, SpotId::Menu__Kiengir_Map__Uhrum_West) => {
+            true
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top, SpotId::Menu__Kiengir_Map__Annuna_Upper) => {
+            true
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top, SpotId::Menu__Kiengir_Map__Apocalypse) => {
+            true
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top, SpotId::Menu__Kiengir_Map__Ebih_West_Mid) => {
+            true
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top, SpotId::Menu__Kiengir_Map__Giguna_Base) => {
+            true
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top, SpotId::Menu__Kiengir_Map__Irikar_Hub) => {
+            true
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top, SpotId::Menu__Kiengir_Map__Uhrum_Center) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top, SpotId::Menu__Kiengir_Map__Uhrum_East) => {
+            true
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top, SpotId::Menu__Kiengir_Map__Uhrum_West) => {
+            true
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Giguna_Ruins_West, SpotId::Menu__Kiengir_Map__Annuna_Upper) => {
+            true
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Giguna_Ruins_West, SpotId::Menu__Kiengir_Map__Apocalypse) => {
+            true
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Giguna_Ruins_West, SpotId::Menu__Kiengir_Map__Giguna_Base) => {
+            true
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Giguna_Ruins_West, SpotId::Menu__Kiengir_Map__Irikar_Hub) => {
+            true
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Giguna_Ruins_West, SpotId::Menu__Kiengir_Map__Uhrum_Center) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Giguna_Ruins_West, SpotId::Menu__Kiengir_Map__Uhrum_East) => {
+            true
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Giguna_Ruins_West, SpotId::Menu__Kiengir_Map__Uhrum_West) => {
+            true
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Giguna_Separator, SpotId::Menu__Kiengir_Map__Annuna_Upper) => {
+            true
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Giguna_Separator, SpotId::Menu__Kiengir_Map__Apocalypse) => {
+            true
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Giguna_Separator, SpotId::Menu__Kiengir_Map__Ebih_West_Mid) => {
+            true
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Giguna_Separator, SpotId::Menu__Kiengir_Map__Giguna_Base) => {
+            true
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Giguna_Separator, SpotId::Menu__Kiengir_Map__Irikar_Hub) => {
+            true
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Giguna_Separator, SpotId::Menu__Kiengir_Map__Uhrum_Center) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Giguna_Separator, SpotId::Menu__Kiengir_Map__Uhrum_East) => {
+            true
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Giguna_Separator, SpotId::Menu__Kiengir_Map__Uhrum_West) => {
+            true
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Glacier_Revival, SpotId::Menu__Kiengir_Map__Annuna_Upper) => {
+            true
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Glacier_Revival, SpotId::Menu__Kiengir_Map__Apocalypse) => true,
+        (SpotId::Menu__Kiengir_Map__Glacier_Revival, SpotId::Menu__Kiengir_Map__Ebih_Base_Camp) => {
+            true
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Glacier_Revival, SpotId::Menu__Kiengir_Map__Ebih_West_Mid) => {
+            true
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+        ) => true,
         (SpotId::Menu__Kiengir_Map__Glacier_Revival, SpotId::Menu__Kiengir_Map__Giguna_Base) => {
             true
         }
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Glacier_Revival, SpotId::Menu__Kiengir_Map__Irikar_Hub) => true,
+        (SpotId::Menu__Kiengir_Map__Glacier_Revival, SpotId::Menu__Kiengir_Map__Irikar_Midwest) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Glacier_Revival, SpotId::Menu__Kiengir_Map__Uhrum_Center) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Glacier_Revival, SpotId::Menu__Kiengir_Map__Uhrum_East) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Glacier_Revival, SpotId::Menu__Kiengir_Map__Uhrum_West) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Irikar_Beach_Save, SpotId::Menu__Kiengir_Map__Annuna_Upper) => {
+            true
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Irikar_Beach_Save, SpotId::Menu__Kiengir_Map__Apocalypse) => {
+            true
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Irikar_Beach_Save, SpotId::Menu__Kiengir_Map__Giguna_Base) => {
+            true
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Irikar_Beach_Save, SpotId::Menu__Kiengir_Map__Irikar_Hub) => {
+            true
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Irikar_Beach_Save, SpotId::Menu__Kiengir_Map__Uhrum_Center) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Irikar_Beach_Save, SpotId::Menu__Kiengir_Map__Uhrum_East) => {
+            true
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Irikar_Beach_Save, SpotId::Menu__Kiengir_Map__Uhrum_West) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Irikar_Hub, SpotId::Menu__Kiengir_Map__Amagi_Main_Area) => true,
+        (SpotId::Menu__Kiengir_Map__Irikar_Hub, SpotId::Menu__Kiengir_Map__Amagi_East_Lake) => true,
+        (SpotId::Menu__Kiengir_Map__Irikar_Hub, SpotId::Menu__Kiengir_Map__Amagi_Isolation) => true,
+        (SpotId::Menu__Kiengir_Map__Irikar_Hub, SpotId::Menu__Kiengir_Map__Annuna_Center_Save) => {
+            true
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Irikar_Hub, SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Irikar_Hub, SpotId::Menu__Kiengir_Map__Annuna_Upper) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Irikar_Hub, SpotId::Menu__Kiengir_Map__Annuna_West_Bridge) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Irikar_Hub, SpotId::Menu__Kiengir_Map__Apocalypse) => true,
+        (SpotId::Menu__Kiengir_Map__Irikar_Hub, SpotId::Menu__Kiengir_Map__Ebih_Base_Camp) => true,
+        (SpotId::Menu__Kiengir_Map__Irikar_Hub, SpotId::Menu__Kiengir_Map__Ebih_Observatory) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Irikar_Hub, SpotId::Menu__Kiengir_Map__Ebih_West_Lower) => true,
+        (SpotId::Menu__Kiengir_Map__Irikar_Hub, SpotId::Menu__Kiengir_Map__Ebih_West_Mid) => true,
+        (SpotId::Menu__Kiengir_Map__Irikar_Hub, SpotId::Menu__Kiengir_Map__Ebih_West_Upper) => true,
+        (SpotId::Menu__Kiengir_Map__Irikar_Hub, SpotId::Menu__Kiengir_Map__Giguna_Base) => true,
+        (SpotId::Menu__Kiengir_Map__Irikar_Hub, SpotId::Menu__Kiengir_Map__Giguna_Labyrinth) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Irikar_Hub, SpotId::Menu__Kiengir_Map__Giguna_Northeast) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Irikar_Hub, SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Irikar_Hub, SpotId::Menu__Kiengir_Map__Giguna_Ruins_West) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Irikar_Hub, SpotId::Menu__Kiengir_Map__Giguna_Separator) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Irikar_Hub, SpotId::Menu__Kiengir_Map__Glacier_Revival) => true,
+        (SpotId::Menu__Kiengir_Map__Irikar_Hub, SpotId::Menu__Kiengir_Map__Irikar_Beach_Save) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Irikar_Hub, SpotId::Menu__Kiengir_Map__Irikar_Hub) => true,
+        (SpotId::Menu__Kiengir_Map__Irikar_Hub, SpotId::Menu__Kiengir_Map__Irikar_Midwest) => true,
+        (SpotId::Menu__Kiengir_Map__Irikar_Hub, SpotId::Menu__Kiengir_Map__Uhrum_Center) => true,
+        (SpotId::Menu__Kiengir_Map__Irikar_Hub, SpotId::Menu__Kiengir_Map__Uhrum_East) => true,
+        (SpotId::Menu__Kiengir_Map__Irikar_Hub, SpotId::Menu__Kiengir_Map__Uhrum_Emergence) => true,
+        (SpotId::Menu__Kiengir_Map__Irikar_Hub, SpotId::Menu__Kiengir_Map__Uhrum_West) => true,
+        (SpotId::Menu__Kiengir_Map__Irikar_Midwest, SpotId::Menu__Kiengir_Map__Amagi_Main_Area) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Irikar_Midwest, SpotId::Menu__Kiengir_Map__Amagi_East_Lake) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Irikar_Midwest, SpotId::Menu__Kiengir_Map__Amagi_Isolation) => {
+            true
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Irikar_Midwest, SpotId::Menu__Kiengir_Map__Annuna_Upper) => {
+            true
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Irikar_Midwest, SpotId::Menu__Kiengir_Map__Apocalypse) => true,
+        (SpotId::Menu__Kiengir_Map__Irikar_Midwest, SpotId::Menu__Kiengir_Map__Ebih_Base_Camp) => {
+            true
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Irikar_Midwest, SpotId::Menu__Kiengir_Map__Ebih_West_Lower) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Irikar_Midwest, SpotId::Menu__Kiengir_Map__Ebih_West_Mid) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Irikar_Midwest, SpotId::Menu__Kiengir_Map__Ebih_West_Upper) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Irikar_Midwest, SpotId::Menu__Kiengir_Map__Giguna_Base) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Irikar_Midwest, SpotId::Menu__Kiengir_Map__Glacier_Revival) => {
+            true
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Irikar_Midwest, SpotId::Menu__Kiengir_Map__Irikar_Hub) => true,
+        (SpotId::Menu__Kiengir_Map__Irikar_Midwest, SpotId::Menu__Kiengir_Map__Irikar_Midwest) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Irikar_Midwest, SpotId::Menu__Kiengir_Map__Uhrum_Center) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Irikar_Midwest, SpotId::Menu__Kiengir_Map__Uhrum_East) => true,
+        (SpotId::Menu__Kiengir_Map__Irikar_Midwest, SpotId::Menu__Kiengir_Map__Uhrum_Emergence) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Irikar_Midwest, SpotId::Menu__Kiengir_Map__Uhrum_West) => true,
+        (SpotId::Menu__Kiengir_Map__Uhrum_Center, SpotId::Menu__Kiengir_Map__Amagi_Main_Area) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_Center, SpotId::Menu__Kiengir_Map__Amagi_East_Lake) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_Center, SpotId::Menu__Kiengir_Map__Amagi_Isolation) => {
+            true
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Uhrum_Center, SpotId::Menu__Kiengir_Map__Annuna_Upper) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Uhrum_Center, SpotId::Menu__Kiengir_Map__Apocalypse) => true,
+        (SpotId::Menu__Kiengir_Map__Uhrum_Center, SpotId::Menu__Kiengir_Map__Ebih_Base_Camp) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_Center, SpotId::Menu__Kiengir_Map__Ebih_Observatory) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_Center, SpotId::Menu__Kiengir_Map__Ebih_West_Lower) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_Center, SpotId::Menu__Kiengir_Map__Ebih_West_Mid) => true,
+        (SpotId::Menu__Kiengir_Map__Uhrum_Center, SpotId::Menu__Kiengir_Map__Ebih_West_Upper) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_Center, SpotId::Menu__Kiengir_Map__Giguna_Base) => true,
+        (SpotId::Menu__Kiengir_Map__Uhrum_Center, SpotId::Menu__Kiengir_Map__Giguna_Labyrinth) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_Center, SpotId::Menu__Kiengir_Map__Giguna_Northeast) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_Center, SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_Center, SpotId::Menu__Kiengir_Map__Giguna_Ruins_West) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_Center, SpotId::Menu__Kiengir_Map__Giguna_Separator) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_Center, SpotId::Menu__Kiengir_Map__Glacier_Revival) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_Center, SpotId::Menu__Kiengir_Map__Irikar_Beach_Save) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_Center, SpotId::Menu__Kiengir_Map__Irikar_Hub) => true,
+        (SpotId::Menu__Kiengir_Map__Uhrum_Center, SpotId::Menu__Kiengir_Map__Irikar_Midwest) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_Center, SpotId::Menu__Kiengir_Map__Uhrum_Center) => true,
+        (SpotId::Menu__Kiengir_Map__Uhrum_Center, SpotId::Menu__Kiengir_Map__Uhrum_East) => true,
+        (SpotId::Menu__Kiengir_Map__Uhrum_Center, SpotId::Menu__Kiengir_Map__Uhrum_Emergence) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_Center, SpotId::Menu__Kiengir_Map__Uhrum_West) => true,
+        (SpotId::Menu__Kiengir_Map__Uhrum_East, SpotId::Menu__Kiengir_Map__Amagi_Main_Area) => true,
+        (SpotId::Menu__Kiengir_Map__Uhrum_East, SpotId::Menu__Kiengir_Map__Amagi_East_Lake) => true,
+        (SpotId::Menu__Kiengir_Map__Uhrum_East, SpotId::Menu__Kiengir_Map__Amagi_Isolation) => true,
+        (SpotId::Menu__Kiengir_Map__Uhrum_East, SpotId::Menu__Kiengir_Map__Annuna_Center_Save) => {
+            true
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Uhrum_East, SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_East, SpotId::Menu__Kiengir_Map__Annuna_Upper) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Uhrum_East, SpotId::Menu__Kiengir_Map__Annuna_West_Bridge) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_East, SpotId::Menu__Kiengir_Map__Apocalypse) => true,
+        (SpotId::Menu__Kiengir_Map__Uhrum_East, SpotId::Menu__Kiengir_Map__Ebih_Base_Camp) => true,
+        (SpotId::Menu__Kiengir_Map__Uhrum_East, SpotId::Menu__Kiengir_Map__Ebih_Observatory) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_East, SpotId::Menu__Kiengir_Map__Ebih_West_Lower) => true,
+        (SpotId::Menu__Kiengir_Map__Uhrum_East, SpotId::Menu__Kiengir_Map__Ebih_West_Mid) => true,
+        (SpotId::Menu__Kiengir_Map__Uhrum_East, SpotId::Menu__Kiengir_Map__Ebih_West_Upper) => true,
+        (SpotId::Menu__Kiengir_Map__Uhrum_East, SpotId::Menu__Kiengir_Map__Giguna_Base) => true,
+        (SpotId::Menu__Kiengir_Map__Uhrum_East, SpotId::Menu__Kiengir_Map__Giguna_Labyrinth) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_East, SpotId::Menu__Kiengir_Map__Giguna_Northeast) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_East, SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_East, SpotId::Menu__Kiengir_Map__Giguna_Ruins_West) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_East, SpotId::Menu__Kiengir_Map__Giguna_Separator) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_East, SpotId::Menu__Kiengir_Map__Glacier_Revival) => true,
+        (SpotId::Menu__Kiengir_Map__Uhrum_East, SpotId::Menu__Kiengir_Map__Irikar_Beach_Save) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_East, SpotId::Menu__Kiengir_Map__Irikar_Hub) => true,
+        (SpotId::Menu__Kiengir_Map__Uhrum_East, SpotId::Menu__Kiengir_Map__Irikar_Midwest) => true,
+        (SpotId::Menu__Kiengir_Map__Uhrum_East, SpotId::Menu__Kiengir_Map__Uhrum_Center) => true,
+        (SpotId::Menu__Kiengir_Map__Uhrum_East, SpotId::Menu__Kiengir_Map__Uhrum_East) => true,
+        (SpotId::Menu__Kiengir_Map__Uhrum_East, SpotId::Menu__Kiengir_Map__Uhrum_Emergence) => true,
+        (SpotId::Menu__Kiengir_Map__Uhrum_East, SpotId::Menu__Kiengir_Map__Uhrum_West) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Uhrum_Emergence, SpotId::Menu__Kiengir_Map__Annuna_Upper) => {
+            true
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Uhrum_Emergence, SpotId::Menu__Kiengir_Map__Apocalypse) => true,
+        (SpotId::Menu__Kiengir_Map__Uhrum_Emergence, SpotId::Menu__Kiengir_Map__Ebih_Base_Camp) => {
+            true
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Uhrum_Emergence, SpotId::Menu__Kiengir_Map__Ebih_West_Mid) => {
+            true
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Uhrum_Emergence, SpotId::Menu__Kiengir_Map__Giguna_Base) => {
+            true
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Uhrum_Emergence, SpotId::Menu__Kiengir_Map__Irikar_Hub) => true,
+        (SpotId::Menu__Kiengir_Map__Uhrum_Emergence, SpotId::Menu__Kiengir_Map__Irikar_Midwest) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_Emergence, SpotId::Menu__Kiengir_Map__Uhrum_Center) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_Emergence, SpotId::Menu__Kiengir_Map__Uhrum_East) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Uhrum_Emergence, SpotId::Menu__Kiengir_Map__Uhrum_West) => true,
+        (SpotId::Menu__Kiengir_Map__Uhrum_West, SpotId::Menu__Kiengir_Map__Amagi_Main_Area) => true,
+        (SpotId::Menu__Kiengir_Map__Uhrum_West, SpotId::Menu__Kiengir_Map__Amagi_East_Lake) => true,
+        (SpotId::Menu__Kiengir_Map__Uhrum_West, SpotId::Menu__Kiengir_Map__Amagi_Isolation) => true,
+        (SpotId::Menu__Kiengir_Map__Uhrum_West, SpotId::Menu__Kiengir_Map__Annuna_Center_Save) => {
+            true
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Uhrum_West, SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_West, SpotId::Menu__Kiengir_Map__Annuna_Upper) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Uhrum_West, SpotId::Menu__Kiengir_Map__Annuna_West_Bridge) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_West, SpotId::Menu__Kiengir_Map__Apocalypse) => true,
+        (SpotId::Menu__Kiengir_Map__Uhrum_West, SpotId::Menu__Kiengir_Map__Ebih_Base_Camp) => true,
+        (SpotId::Menu__Kiengir_Map__Uhrum_West, SpotId::Menu__Kiengir_Map__Ebih_Observatory) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_West, SpotId::Menu__Kiengir_Map__Ebih_West_Lower) => true,
+        (SpotId::Menu__Kiengir_Map__Uhrum_West, SpotId::Menu__Kiengir_Map__Ebih_West_Mid) => true,
+        (SpotId::Menu__Kiengir_Map__Uhrum_West, SpotId::Menu__Kiengir_Map__Ebih_West_Upper) => true,
+        (SpotId::Menu__Kiengir_Map__Uhrum_West, SpotId::Menu__Kiengir_Map__Giguna_Base) => true,
+        (SpotId::Menu__Kiengir_Map__Uhrum_West, SpotId::Menu__Kiengir_Map__Giguna_Labyrinth) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_West, SpotId::Menu__Kiengir_Map__Giguna_Northeast) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_West, SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_West, SpotId::Menu__Kiengir_Map__Giguna_Ruins_West) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_West, SpotId::Menu__Kiengir_Map__Giguna_Separator) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_West, SpotId::Menu__Kiengir_Map__Glacier_Revival) => true,
+        (SpotId::Menu__Kiengir_Map__Uhrum_West, SpotId::Menu__Kiengir_Map__Irikar_Beach_Save) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_West, SpotId::Menu__Kiengir_Map__Irikar_Hub) => true,
+        (SpotId::Menu__Kiengir_Map__Uhrum_West, SpotId::Menu__Kiengir_Map__Irikar_Midwest) => true,
+        (SpotId::Menu__Kiengir_Map__Uhrum_West, SpotId::Menu__Kiengir_Map__Uhrum_Center) => true,
+        (SpotId::Menu__Kiengir_Map__Uhrum_West, SpotId::Menu__Kiengir_Map__Uhrum_East) => true,
+        (SpotId::Menu__Kiengir_Map__Uhrum_West, SpotId::Menu__Kiengir_Map__Uhrum_Emergence) => true,
+        (SpotId::Menu__Kiengir_Map__Uhrum_West, SpotId::Menu__Kiengir_Map__Uhrum_West) => true,
         (SpotId::Uhrum__West_Entrance__West_27, SpotId::Uhrum__West_Entrance__Southeast_Tree) => {
             true
         }
@@ -42600,9 +53340,2324 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             1000,
         ),
         (
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            300,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            333,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            333,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            700,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            800,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+            333,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            400,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            900,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+            533,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            500,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            1500,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            1000,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+            933,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            1100,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+            1400,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            1133,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            1133,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            1333,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            1400,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            1066,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            1000,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            1933,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+            1466,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            1666,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+            900,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+            800,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            733,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+            1000,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            300,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            333,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            333,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            600,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            500,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+            400,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            400,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            600,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+            533,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            800,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            1800,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            1000,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+            1100,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            1400,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+            1400,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            1133,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            1133,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            1500,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            1400,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            1066,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            1300,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            1933,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+            1466,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            1666,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+            600,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+            500,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            733,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+            1000,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            SpotId::Amagi__Main_Area__Save_Point,
+            12000,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            333,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            333,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            666,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            933,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            700,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+            666,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            733,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            800,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+            866,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            600,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            1600,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            666,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+            900,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            1200,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+            1066,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            800,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            900,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            1300,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            1066,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            733,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            1100,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            1600,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+            1133,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            1333,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+            800,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+            700,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            400,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+            900,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            SpotId::Annuna__Center_Save__Save_Point,
+            12000,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            333,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            333,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            666,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            400,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            500,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+            400,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            100,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            600,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+            400,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            800,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            1800,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            1333,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+            1266,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            1400,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+            1733,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            1466,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            1466,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            1666,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            1733,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            1400,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            1300,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            2266,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+            1800,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            2000,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+            933,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+            733,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            1066,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+            1333,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Annuna__Factory_Entrance__Save_Point,
+            12000,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            700,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            600,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            933,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            400,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            733,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+            800,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            500,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            466,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+            800,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            1200,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            2200,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            1600,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+            1533,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            1800,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+            2000,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            1733,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            1733,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            1933,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            2000,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            1666,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            1700,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            2533,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+            2066,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            2266,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+            1200,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+            1000,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            1333,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+            1600,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            SpotId::Annuna__Mirror_Match__Save_Point,
+            12000,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            800,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            500,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            700,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            500,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            733,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+            900,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            600,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            266,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+            900,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            1300,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            2300,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            1300,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+            1600,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            1900,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+            1266,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            1000,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            1600,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            2000,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            1700,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            933,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            1800,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            1800,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+            1333,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            1533,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+            466,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+            266,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            600,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+            866,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            333,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            400,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            666,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            400,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            800,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            900,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            300,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            1000,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+            200,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            666,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            1400,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            1333,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+            1266,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            1266,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+            1733,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            1466,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            1466,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            1666,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            1733,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            1400,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            900,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            2266,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+            1800,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            2000,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+            1000,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+            900,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            1066,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+            1333,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            400,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            400,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            733,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            100,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            500,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            600,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+            300,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            700,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+            300,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            733,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            1700,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            1400,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+            1333,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            1333,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+            1800,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            1533,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            1533,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            1733,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            1800,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            1466,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            1200,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            2333,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+            1866,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            2066,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+            1000,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+            800,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            1133,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+            1400,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            900,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            600,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            800,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            600,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            466,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            266,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+            1000,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            700,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+            1000,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            1400,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            2400,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            1400,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+            1700,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            2000,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+            1533,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            1266,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            1700,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            2100,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            1800,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            1200,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            1900,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            2066,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+            1600,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            1800,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+            733,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+            533,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            866,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+            1133,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            533,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            533,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            866,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            400,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            800,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            900,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+            200,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            300,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            1000,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            866,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            1400,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            1533,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+            1466,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            1466,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+            1933,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            1666,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            1666,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            1866,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            1933,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            1600,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            900,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            2466,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+            2000,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            2200,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+            1133,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+            933,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            1266,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+            1533,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            SpotId::Ebih__Base_Camp__Save_Point,
+            12000,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            500,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            800,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            600,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            800,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            1200,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            1300,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+            666,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            733,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            1400,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+            866,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            1000,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            666,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+            600,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            600,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+            1066,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            900,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            800,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            1000,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            1066,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            1200,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            800,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            1600,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+            1133,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            1333,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+            1400,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+            1300,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            900,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+            1500,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            1500,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            1800,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            1600,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            1800,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            2200,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            2300,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+            1400,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            1700,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            2400,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+            1400,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            1000,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            1000,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+            700,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            400,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+            1300,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            1900,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            700,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            466,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            600,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            2200,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            1333,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            2500,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+            2000,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            2200,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+            2400,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+            2300,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            1900,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+            2500,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            SpotId::Ebih__Ebih_West__Lower_Save,
+            12000,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            1000,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            1000,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            666,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            1333,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            1600,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            1300,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+            1333,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            1400,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            1400,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+            1533,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            666,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            1000,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+            300,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            600,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+            400,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            900,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            300,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            700,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            400,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            1200,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            1466,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            1500,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+            1000,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            1200,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+            1400,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+            1300,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            900,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+            1500,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+            SpotId::Ebih__Ebih_West__Mid_Save,
+            12000,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            933,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            1100,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            900,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            1266,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            1533,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            1600,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+            1266,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            1333,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            1700,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+            1466,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            600,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            700,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            300,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            300,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+            600,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            1200,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            200,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            400,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            466,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            1500,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            1400,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            1800,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+            1300,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            1500,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+            1700,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+            1600,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            1200,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+            1800,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            SpotId::Ebih__Ebih_West__Upper_Save,
+            12000,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            1100,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            1400,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            1200,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            1400,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            1800,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            1900,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+            1266,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            1333,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            2000,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+            1466,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            600,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            400,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            600,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+            300,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+            900,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            1500,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            300,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            400,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            466,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            1800,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            1400,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            2100,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+            1600,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            1800,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+            2000,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+            1900,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            1500,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+            2100,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
             SpotId::Menu__Kiengir_Map__Giguna_Base,
             SpotId::Giguna__Giguna_Base__Save_Point,
-            10000,
+            12000,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            1400,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            1400,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            1066,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            1733,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            2000,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            1266,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+            1733,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            1800,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            1533,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+            1933,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            1066,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            1300,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            400,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+            600,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            900,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            600,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            600,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            1000,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            700,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            900,
         ),
         (
             SpotId::Menu__Kiengir_Map__Giguna_Base,
@@ -42611,13 +55666,863 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Menu__Kiengir_Map__Giguna_Base,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            1200,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+            700,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            900,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+            1100,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+            1000,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            666,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+            1200,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            1133,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            1133,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            800,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            1466,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            1733,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            1000,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+            1466,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            1533,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            1266,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+            1666,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            900,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            1900,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            900,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+            1200,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            1500,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+            600,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            1200,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            1600,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            1300,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            300,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            1600,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            800,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+            333,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            533,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+            533,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+            733,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            400,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+            600,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            SpotId::Giguna__Giguna_Northeast__Save_Point,
+            12000,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            1133,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            1133,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            900,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            1466,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            1733,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            1600,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+            1466,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            1533,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            1700,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+            1666,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            800,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            700,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            300,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+            200,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            300,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+            600,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            1200,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            400,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            266,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            1500,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            1600,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            1800,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+            1300,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            1500,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+            1700,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+            1600,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            1200,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+            1800,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            SpotId::Giguna__Ruins_Top__Save_Point,
+            12000,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            1333,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            1500,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            1300,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            1666,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            1933,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            2000,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+            1666,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            1733,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            2100,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+            1866,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            1000,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            466,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            700,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+            400,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            400,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+            1000,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            1600,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            400,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            300,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            1900,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            1800,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            2200,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+            1700,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            1900,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+            2100,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+            2000,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            1600,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+            2200,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            SpotId::Giguna__Ruins_West__Save_Point,
+            12000,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            1400,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            1400,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            1066,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            1733,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            2000,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            1700,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+            1733,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            1800,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            1800,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+            1933,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            1066,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            600,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            400,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+            466,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            466,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+            700,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            1300,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            266,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            300,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            1600,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            1866,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            1900,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+            1400,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            1600,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+            1800,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+            1700,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            1300,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+            1900,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            1066,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            1066,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            733,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            1400,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            1666,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            933,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+            1400,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            1466,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            1200,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+            1600,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            1200,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            2200,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            1200,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+            1500,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            1800,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+            900,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            300,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            1500,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            1900,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            1600,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            1700,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            866,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+            400,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            600,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+            466,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+            666,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            333,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+            300,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
         (
             SpotId::Menu__Kiengir_Map__Glacier_Revival,
             SpotId::Glacier__Revival__Save_Point,
-            10000,
+            12000,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            1000,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            1300,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            1100,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            1300,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            1700,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            1800,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+            900,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            1200,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            1900,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+            900,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            800,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            1333,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            1466,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+            1400,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            1400,
         ),
         (
             SpotId::Menu__Kiengir_Map__Glacier_Revival,
@@ -42626,8 +56531,1103 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            1600,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            1600,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            1800,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            1866,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            1700,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            2400,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+            1933,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            2133,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+            1900,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+            1800,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            1400,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+            2000,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            1933,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            1933,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            1600,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            2266,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            2533,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            1800,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+            2266,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            2333,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            2066,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+            2466,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            1600,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            2500,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            1500,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+            1800,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            2100,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+            1200,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            800,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            1800,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            2200,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            1900,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            866,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            2400,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+            500,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            300,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+            1333,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+            1533,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            1200,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+            933,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+            SpotId::Irikar__Hub__Save_Point,
+            12000,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            1466,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            1466,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            1133,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            1800,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            2066,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            1333,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+            1800,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            1866,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            1600,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+            2000,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            1133,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            2000,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            1000,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+            1300,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            1600,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+            700,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            333,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            1300,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            1700,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            1400,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            400,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            1933,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            500,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            200,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+            866,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+            1066,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            733,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+            500,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            1666,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            1666,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            1333,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            2000,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            2266,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            1533,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+            2000,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            2066,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            1800,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+            2200,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            1333,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            2200,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            1200,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+            1500,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            1800,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+            900,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            533,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            1500,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            1900,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            1600,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            600,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            2133,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            300,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+            200,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+            1066,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+            1266,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            933,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+            666,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            900,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            600,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            800,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            933,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            1200,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            466,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+            1000,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            1000,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            733,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+            1133,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            1400,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            2400,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            1400,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+            1700,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            2000,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+            1100,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            533,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            1700,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            2100,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            1800,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            466,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            1900,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            1333,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+            866,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            1066,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+            200,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            500,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+            400,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+            SpotId::Uhrum__Save_Room__Save_Point,
+            12000,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            800,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            500,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            700,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            733,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            1000,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            266,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+            900,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            800,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            533,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+            933,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            1300,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            2300,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            1300,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+            1600,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            1900,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+            1000,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            733,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            1600,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            2000,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            1700,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            666,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            1800,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            1533,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+            1066,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            1266,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+            200,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            400,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+            600,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+            SpotId::Uhrum__Annuna_Corridor__Save_Point,
+            12000,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            733,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            733,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            400,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            1066,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            1333,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            600,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+            1066,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            1133,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            866,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+            1266,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            900,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            1900,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            900,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+            1200,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            1500,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+            666,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            400,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            1200,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            1600,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            1300,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            333,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            1400,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            1200,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+            733,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            933,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+            500,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+            400,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+            600,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            1000,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            1000,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            900,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            1333,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            1600,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            866,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+            1333,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            1400,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            1133,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+            1533,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            1500,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            2500,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            1500,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+            1800,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            2100,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+            1200,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            600,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            1800,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            2200,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            1900,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            300,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            2000,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            933,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+            500,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            666,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+            400,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+            600,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            600,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+            SpotId::Uhrum__West_Entrance__Save_Point,
+            12000,
         ),
         (
             SpotId::Menu__Upgrade_Menu__Combat,
@@ -50275,11 +65275,2875 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
             Some(964)
         }
         (SpotId::Irikar__Sight_Room__West_24, SpotId::Irikar__Sight_Room__Lower_Ledge) => Some(701),
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+        ) => Some(300),
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+        ) => Some(333),
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => Some(333),
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => Some(700),
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => Some(800),
+        (SpotId::Menu__Kiengir_Map__Amagi_East_Lake, SpotId::Menu__Kiengir_Map__Annuna_Upper) => {
+            Some(333)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => Some(400),
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => Some(900),
+        (SpotId::Menu__Kiengir_Map__Amagi_East_Lake, SpotId::Menu__Kiengir_Map__Apocalypse) => {
+            Some(533)
+        }
+        (SpotId::Menu__Kiengir_Map__Amagi_East_Lake, SpotId::Menu__Kiengir_Map__Ebih_Base_Camp) => {
+            Some(500)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+        ) => Some(1500),
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+        ) => Some(1000),
+        (SpotId::Menu__Kiengir_Map__Amagi_East_Lake, SpotId::Menu__Kiengir_Map__Ebih_West_Mid) => {
+            Some(933)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+        ) => Some(1100),
+        (SpotId::Menu__Kiengir_Map__Amagi_East_Lake, SpotId::Menu__Kiengir_Map__Giguna_Base) => {
+            Some(1400)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+        ) => Some(1133),
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+        ) => Some(1133),
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+        ) => Some(1333),
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => Some(1400),
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+        ) => Some(1066),
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+        ) => Some(1000),
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => Some(1933),
+        (SpotId::Menu__Kiengir_Map__Amagi_East_Lake, SpotId::Menu__Kiengir_Map__Irikar_Hub) => {
+            Some(1466)
+        }
+        (SpotId::Menu__Kiengir_Map__Amagi_East_Lake, SpotId::Menu__Kiengir_Map__Irikar_Midwest) => {
+            Some(1666)
+        }
+        (SpotId::Menu__Kiengir_Map__Amagi_East_Lake, SpotId::Menu__Kiengir_Map__Uhrum_Center) => {
+            Some(900)
+        }
+        (SpotId::Menu__Kiengir_Map__Amagi_East_Lake, SpotId::Menu__Kiengir_Map__Uhrum_East) => {
+            Some(800)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+        ) => Some(733),
+        (SpotId::Menu__Kiengir_Map__Amagi_East_Lake, SpotId::Menu__Kiengir_Map__Uhrum_West) => {
+            Some(1000)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+        ) => Some(300),
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+        ) => Some(333),
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => Some(333),
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => Some(600),
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => Some(500),
+        (SpotId::Menu__Kiengir_Map__Amagi_Isolation, SpotId::Menu__Kiengir_Map__Annuna_Upper) => {
+            Some(400)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => Some(400),
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => Some(600),
+        (SpotId::Menu__Kiengir_Map__Amagi_Isolation, SpotId::Menu__Kiengir_Map__Apocalypse) => {
+            Some(533)
+        }
+        (SpotId::Menu__Kiengir_Map__Amagi_Isolation, SpotId::Menu__Kiengir_Map__Ebih_Base_Camp) => {
+            Some(800)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+        ) => Some(1800),
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+        ) => Some(1000),
+        (SpotId::Menu__Kiengir_Map__Amagi_Isolation, SpotId::Menu__Kiengir_Map__Ebih_West_Mid) => {
+            Some(1100)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+        ) => Some(1400),
+        (SpotId::Menu__Kiengir_Map__Amagi_Isolation, SpotId::Menu__Kiengir_Map__Giguna_Base) => {
+            Some(1400)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+        ) => Some(1133),
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+        ) => Some(1133),
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+        ) => Some(1500),
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => Some(1400),
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+        ) => Some(1066),
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+        ) => Some(1300),
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => Some(1933),
+        (SpotId::Menu__Kiengir_Map__Amagi_Isolation, SpotId::Menu__Kiengir_Map__Irikar_Hub) => {
+            Some(1466)
+        }
+        (SpotId::Menu__Kiengir_Map__Amagi_Isolation, SpotId::Menu__Kiengir_Map__Irikar_Midwest) => {
+            Some(1666)
+        }
+        (SpotId::Menu__Kiengir_Map__Amagi_Isolation, SpotId::Menu__Kiengir_Map__Uhrum_Center) => {
+            Some(600)
+        }
+        (SpotId::Menu__Kiengir_Map__Amagi_Isolation, SpotId::Menu__Kiengir_Map__Uhrum_East) => {
+            Some(500)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+        ) => Some(733),
+        (SpotId::Menu__Kiengir_Map__Amagi_Isolation, SpotId::Menu__Kiengir_Map__Uhrum_West) => {
+            Some(1000)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+        ) => Some(333),
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+        ) => Some(333),
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => Some(666),
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => Some(933),
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => Some(700),
+        (SpotId::Menu__Kiengir_Map__Amagi_Main_Area, SpotId::Menu__Kiengir_Map__Annuna_Upper) => {
+            Some(666)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => Some(733),
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => Some(800),
+        (SpotId::Menu__Kiengir_Map__Amagi_Main_Area, SpotId::Menu__Kiengir_Map__Apocalypse) => {
+            Some(866)
+        }
+        (SpotId::Menu__Kiengir_Map__Amagi_Main_Area, SpotId::Menu__Kiengir_Map__Ebih_Base_Camp) => {
+            Some(600)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+        ) => Some(1600),
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+        ) => Some(666),
+        (SpotId::Menu__Kiengir_Map__Amagi_Main_Area, SpotId::Menu__Kiengir_Map__Ebih_West_Mid) => {
+            Some(900)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+        ) => Some(1200),
+        (SpotId::Menu__Kiengir_Map__Amagi_Main_Area, SpotId::Menu__Kiengir_Map__Giguna_Base) => {
+            Some(1066)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+        ) => Some(800),
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+        ) => Some(900),
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+        ) => Some(1300),
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => Some(1066),
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+        ) => Some(733),
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+        ) => Some(1100),
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => Some(1600),
+        (SpotId::Menu__Kiengir_Map__Amagi_Main_Area, SpotId::Menu__Kiengir_Map__Irikar_Hub) => {
+            Some(1133)
+        }
+        (SpotId::Menu__Kiengir_Map__Amagi_Main_Area, SpotId::Menu__Kiengir_Map__Irikar_Midwest) => {
+            Some(1333)
+        }
+        (SpotId::Menu__Kiengir_Map__Amagi_Main_Area, SpotId::Menu__Kiengir_Map__Uhrum_Center) => {
+            Some(800)
+        }
+        (SpotId::Menu__Kiengir_Map__Amagi_Main_Area, SpotId::Menu__Kiengir_Map__Uhrum_East) => {
+            Some(700)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+        ) => Some(400),
+        (SpotId::Menu__Kiengir_Map__Amagi_Main_Area, SpotId::Menu__Kiengir_Map__Uhrum_West) => {
+            Some(900)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+        ) => Some(333),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+        ) => Some(333),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+        ) => Some(666),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => Some(400),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => Some(500),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+        ) => Some(400),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => Some(100),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => Some(600),
+        (SpotId::Menu__Kiengir_Map__Annuna_Center_Save, SpotId::Menu__Kiengir_Map__Apocalypse) => {
+            Some(400)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+        ) => Some(800),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+        ) => Some(1800),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+        ) => Some(1333),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+        ) => Some(1266),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+        ) => Some(1400),
+        (SpotId::Menu__Kiengir_Map__Annuna_Center_Save, SpotId::Menu__Kiengir_Map__Giguna_Base) => {
+            Some(1733)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+        ) => Some(1466),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+        ) => Some(1466),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+        ) => Some(1666),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => Some(1733),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+        ) => Some(1400),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+        ) => Some(1300),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => Some(2266),
+        (SpotId::Menu__Kiengir_Map__Annuna_Center_Save, SpotId::Menu__Kiengir_Map__Irikar_Hub) => {
+            Some(1800)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+        ) => Some(2000),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+        ) => Some(933),
+        (SpotId::Menu__Kiengir_Map__Annuna_Center_Save, SpotId::Menu__Kiengir_Map__Uhrum_East) => {
+            Some(733)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+        ) => Some(1066),
+        (SpotId::Menu__Kiengir_Map__Annuna_Center_Save, SpotId::Menu__Kiengir_Map__Uhrum_West) => {
+            Some(1333)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+        ) => Some(700),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+        ) => Some(600),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+        ) => Some(933),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => Some(400),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => Some(733),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+        ) => Some(800),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => Some(500),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => Some(466),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+        ) => Some(800),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+        ) => Some(1200),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+        ) => Some(2200),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+        ) => Some(1600),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+        ) => Some(1533),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+        ) => Some(1800),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+        ) => Some(2000),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+        ) => Some(1733),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+        ) => Some(1733),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+        ) => Some(1933),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => Some(2000),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+        ) => Some(1666),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+        ) => Some(1700),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => Some(2533),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+        ) => Some(2066),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+        ) => Some(2266),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+        ) => Some(1200),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+        ) => Some(1000),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+        ) => Some(1333),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+        ) => Some(1600),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+        ) => Some(800),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+        ) => Some(500),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+        ) => Some(700),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => Some(500),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => Some(733),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+        ) => Some(900),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => Some(600),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => Some(266),
+        (SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match, SpotId::Menu__Kiengir_Map__Apocalypse) => {
+            Some(900)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+        ) => Some(1300),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+        ) => Some(2300),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+        ) => Some(1300),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+        ) => Some(1600),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+        ) => Some(1900),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+        ) => Some(1266),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+        ) => Some(1000),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+        ) => Some(1600),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+        ) => Some(2000),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => Some(1700),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+        ) => Some(933),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+        ) => Some(1800),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => Some(1800),
+        (SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match, SpotId::Menu__Kiengir_Map__Irikar_Hub) => {
+            Some(1333)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+        ) => Some(1533),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+        ) => Some(466),
+        (SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match, SpotId::Menu__Kiengir_Map__Uhrum_East) => {
+            Some(266)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+        ) => Some(600),
+        (SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match, SpotId::Menu__Kiengir_Map__Uhrum_West) => {
+            Some(866)
+        }
+        (SpotId::Menu__Kiengir_Map__Annuna_Upper, SpotId::Menu__Kiengir_Map__Amagi_East_Lake) => {
+            Some(333)
+        }
+        (SpotId::Menu__Kiengir_Map__Annuna_Upper, SpotId::Menu__Kiengir_Map__Amagi_Isolation) => {
+            Some(400)
+        }
+        (SpotId::Menu__Kiengir_Map__Annuna_Upper, SpotId::Menu__Kiengir_Map__Amagi_Main_Area) => {
+            Some(666)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => Some(400),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => Some(800),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => Some(900),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => Some(300),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => Some(1000),
+        (SpotId::Menu__Kiengir_Map__Annuna_Upper, SpotId::Menu__Kiengir_Map__Apocalypse) => {
+            Some(200)
+        }
+        (SpotId::Menu__Kiengir_Map__Annuna_Upper, SpotId::Menu__Kiengir_Map__Ebih_Base_Camp) => {
+            Some(666)
+        }
+        (SpotId::Menu__Kiengir_Map__Annuna_Upper, SpotId::Menu__Kiengir_Map__Ebih_Observatory) => {
+            Some(1400)
+        }
+        (SpotId::Menu__Kiengir_Map__Annuna_Upper, SpotId::Menu__Kiengir_Map__Ebih_West_Lower) => {
+            Some(1333)
+        }
+        (SpotId::Menu__Kiengir_Map__Annuna_Upper, SpotId::Menu__Kiengir_Map__Ebih_West_Mid) => {
+            Some(1266)
+        }
+        (SpotId::Menu__Kiengir_Map__Annuna_Upper, SpotId::Menu__Kiengir_Map__Ebih_West_Upper) => {
+            Some(1266)
+        }
+        (SpotId::Menu__Kiengir_Map__Annuna_Upper, SpotId::Menu__Kiengir_Map__Giguna_Base) => {
+            Some(1733)
+        }
+        (SpotId::Menu__Kiengir_Map__Annuna_Upper, SpotId::Menu__Kiengir_Map__Giguna_Labyrinth) => {
+            Some(1466)
+        }
+        (SpotId::Menu__Kiengir_Map__Annuna_Upper, SpotId::Menu__Kiengir_Map__Giguna_Northeast) => {
+            Some(1466)
+        }
+        (SpotId::Menu__Kiengir_Map__Annuna_Upper, SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top) => {
+            Some(1666)
+        }
+        (SpotId::Menu__Kiengir_Map__Annuna_Upper, SpotId::Menu__Kiengir_Map__Giguna_Ruins_West) => {
+            Some(1733)
+        }
+        (SpotId::Menu__Kiengir_Map__Annuna_Upper, SpotId::Menu__Kiengir_Map__Giguna_Separator) => {
+            Some(1400)
+        }
+        (SpotId::Menu__Kiengir_Map__Annuna_Upper, SpotId::Menu__Kiengir_Map__Glacier_Revival) => {
+            Some(900)
+        }
+        (SpotId::Menu__Kiengir_Map__Annuna_Upper, SpotId::Menu__Kiengir_Map__Irikar_Beach_Save) => {
+            Some(2266)
+        }
+        (SpotId::Menu__Kiengir_Map__Annuna_Upper, SpotId::Menu__Kiengir_Map__Irikar_Hub) => {
+            Some(1800)
+        }
+        (SpotId::Menu__Kiengir_Map__Annuna_Upper, SpotId::Menu__Kiengir_Map__Irikar_Midwest) => {
+            Some(2000)
+        }
+        (SpotId::Menu__Kiengir_Map__Annuna_Upper, SpotId::Menu__Kiengir_Map__Uhrum_Center) => {
+            Some(1000)
+        }
+        (SpotId::Menu__Kiengir_Map__Annuna_Upper, SpotId::Menu__Kiengir_Map__Uhrum_East) => {
+            Some(900)
+        }
+        (SpotId::Menu__Kiengir_Map__Annuna_Upper, SpotId::Menu__Kiengir_Map__Uhrum_Emergence) => {
+            Some(1066)
+        }
+        (SpotId::Menu__Kiengir_Map__Annuna_Upper, SpotId::Menu__Kiengir_Map__Uhrum_West) => {
+            Some(1333)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+        ) => Some(400),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+        ) => Some(400),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+        ) => Some(733),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => Some(100),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => Some(500),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => Some(600),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+        ) => Some(300),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => Some(700),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+        ) => Some(300),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+        ) => Some(733),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+        ) => Some(1700),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+        ) => Some(1400),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+        ) => Some(1333),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+        ) => Some(1333),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+        ) => Some(1800),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+        ) => Some(1533),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+        ) => Some(1533),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+        ) => Some(1733),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => Some(1800),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+        ) => Some(1466),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+        ) => Some(1200),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => Some(2333),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+        ) => Some(1866),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+        ) => Some(2066),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+        ) => Some(1000),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+        ) => Some(800),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+        ) => Some(1133),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+        ) => Some(1400),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+        ) => Some(900),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+        ) => Some(600),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+        ) => Some(800),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => Some(600),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => Some(466),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => Some(266),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+        ) => Some(1000),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => Some(700),
+        (SpotId::Menu__Kiengir_Map__Annuna_West_Bridge, SpotId::Menu__Kiengir_Map__Apocalypse) => {
+            Some(1000)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+        ) => Some(1400),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+        ) => Some(2400),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+        ) => Some(1400),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+        ) => Some(1700),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+        ) => Some(2000),
+        (SpotId::Menu__Kiengir_Map__Annuna_West_Bridge, SpotId::Menu__Kiengir_Map__Giguna_Base) => {
+            Some(1533)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+        ) => Some(1266),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+        ) => Some(1700),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+        ) => Some(2100),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => Some(1800),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+        ) => Some(1200),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+        ) => Some(1900),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => Some(2066),
+        (SpotId::Menu__Kiengir_Map__Annuna_West_Bridge, SpotId::Menu__Kiengir_Map__Irikar_Hub) => {
+            Some(1600)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+        ) => Some(1800),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+        ) => Some(733),
+        (SpotId::Menu__Kiengir_Map__Annuna_West_Bridge, SpotId::Menu__Kiengir_Map__Uhrum_East) => {
+            Some(533)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+        ) => Some(866),
+        (SpotId::Menu__Kiengir_Map__Annuna_West_Bridge, SpotId::Menu__Kiengir_Map__Uhrum_West) => {
+            Some(1133)
+        }
+        (SpotId::Menu__Kiengir_Map__Apocalypse, SpotId::Menu__Kiengir_Map__Amagi_East_Lake) => {
+            Some(533)
+        }
+        (SpotId::Menu__Kiengir_Map__Apocalypse, SpotId::Menu__Kiengir_Map__Amagi_Isolation) => {
+            Some(533)
+        }
+        (SpotId::Menu__Kiengir_Map__Apocalypse, SpotId::Menu__Kiengir_Map__Amagi_Main_Area) => {
+            Some(866)
+        }
+        (SpotId::Menu__Kiengir_Map__Apocalypse, SpotId::Menu__Kiengir_Map__Annuna_Center_Save) => {
+            Some(400)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => Some(800),
+        (SpotId::Menu__Kiengir_Map__Apocalypse, SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match) => {
+            Some(900)
+        }
+        (SpotId::Menu__Kiengir_Map__Apocalypse, SpotId::Menu__Kiengir_Map__Annuna_Upper) => {
+            Some(200)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => Some(300),
+        (SpotId::Menu__Kiengir_Map__Apocalypse, SpotId::Menu__Kiengir_Map__Annuna_West_Bridge) => {
+            Some(1000)
+        }
+        (SpotId::Menu__Kiengir_Map__Apocalypse, SpotId::Menu__Kiengir_Map__Ebih_Base_Camp) => {
+            Some(866)
+        }
+        (SpotId::Menu__Kiengir_Map__Apocalypse, SpotId::Menu__Kiengir_Map__Ebih_Observatory) => {
+            Some(1400)
+        }
+        (SpotId::Menu__Kiengir_Map__Apocalypse, SpotId::Menu__Kiengir_Map__Ebih_West_Lower) => {
+            Some(1533)
+        }
+        (SpotId::Menu__Kiengir_Map__Apocalypse, SpotId::Menu__Kiengir_Map__Ebih_West_Mid) => {
+            Some(1466)
+        }
+        (SpotId::Menu__Kiengir_Map__Apocalypse, SpotId::Menu__Kiengir_Map__Ebih_West_Upper) => {
+            Some(1466)
+        }
+        (SpotId::Menu__Kiengir_Map__Apocalypse, SpotId::Menu__Kiengir_Map__Giguna_Base) => {
+            Some(1933)
+        }
+        (SpotId::Menu__Kiengir_Map__Apocalypse, SpotId::Menu__Kiengir_Map__Giguna_Labyrinth) => {
+            Some(1666)
+        }
+        (SpotId::Menu__Kiengir_Map__Apocalypse, SpotId::Menu__Kiengir_Map__Giguna_Northeast) => {
+            Some(1666)
+        }
+        (SpotId::Menu__Kiengir_Map__Apocalypse, SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top) => {
+            Some(1866)
+        }
+        (SpotId::Menu__Kiengir_Map__Apocalypse, SpotId::Menu__Kiengir_Map__Giguna_Ruins_West) => {
+            Some(1933)
+        }
+        (SpotId::Menu__Kiengir_Map__Apocalypse, SpotId::Menu__Kiengir_Map__Giguna_Separator) => {
+            Some(1600)
+        }
+        (SpotId::Menu__Kiengir_Map__Apocalypse, SpotId::Menu__Kiengir_Map__Glacier_Revival) => {
+            Some(900)
+        }
+        (SpotId::Menu__Kiengir_Map__Apocalypse, SpotId::Menu__Kiengir_Map__Irikar_Beach_Save) => {
+            Some(2466)
+        }
+        (SpotId::Menu__Kiengir_Map__Apocalypse, SpotId::Menu__Kiengir_Map__Irikar_Hub) => {
+            Some(2000)
+        }
+        (SpotId::Menu__Kiengir_Map__Apocalypse, SpotId::Menu__Kiengir_Map__Irikar_Midwest) => {
+            Some(2200)
+        }
+        (SpotId::Menu__Kiengir_Map__Apocalypse, SpotId::Menu__Kiengir_Map__Uhrum_Center) => {
+            Some(1133)
+        }
+        (SpotId::Menu__Kiengir_Map__Apocalypse, SpotId::Menu__Kiengir_Map__Uhrum_East) => Some(933),
+        (SpotId::Menu__Kiengir_Map__Apocalypse, SpotId::Menu__Kiengir_Map__Uhrum_Emergence) => {
+            Some(1266)
+        }
+        (SpotId::Menu__Kiengir_Map__Apocalypse, SpotId::Menu__Kiengir_Map__Uhrum_West) => {
+            Some(1533)
+        }
+        (SpotId::Menu__Kiengir_Map__Ebih_Base_Camp, SpotId::Menu__Kiengir_Map__Amagi_East_Lake) => {
+            Some(500)
+        }
+        (SpotId::Menu__Kiengir_Map__Ebih_Base_Camp, SpotId::Menu__Kiengir_Map__Amagi_Isolation) => {
+            Some(800)
+        }
+        (SpotId::Menu__Kiengir_Map__Ebih_Base_Camp, SpotId::Menu__Kiengir_Map__Amagi_Main_Area) => {
+            Some(600)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => Some(800),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => Some(1200),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => Some(1300),
+        (SpotId::Menu__Kiengir_Map__Ebih_Base_Camp, SpotId::Menu__Kiengir_Map__Annuna_Upper) => {
+            Some(666)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => Some(733),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => Some(1400),
+        (SpotId::Menu__Kiengir_Map__Ebih_Base_Camp, SpotId::Menu__Kiengir_Map__Apocalypse) => {
+            Some(866)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+        ) => Some(1000),
+        (SpotId::Menu__Kiengir_Map__Ebih_Base_Camp, SpotId::Menu__Kiengir_Map__Ebih_West_Lower) => {
+            Some(666)
+        }
+        (SpotId::Menu__Kiengir_Map__Ebih_Base_Camp, SpotId::Menu__Kiengir_Map__Ebih_West_Mid) => {
+            Some(600)
+        }
+        (SpotId::Menu__Kiengir_Map__Ebih_Base_Camp, SpotId::Menu__Kiengir_Map__Ebih_West_Upper) => {
+            Some(600)
+        }
+        (SpotId::Menu__Kiengir_Map__Ebih_Base_Camp, SpotId::Menu__Kiengir_Map__Giguna_Base) => {
+            Some(1066)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+        ) => Some(900),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+        ) => Some(800),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+        ) => Some(1000),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => Some(1066),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+        ) => Some(1200),
+        (SpotId::Menu__Kiengir_Map__Ebih_Base_Camp, SpotId::Menu__Kiengir_Map__Glacier_Revival) => {
+            Some(800)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => Some(1600),
+        (SpotId::Menu__Kiengir_Map__Ebih_Base_Camp, SpotId::Menu__Kiengir_Map__Irikar_Hub) => {
+            Some(1133)
+        }
+        (SpotId::Menu__Kiengir_Map__Ebih_Base_Camp, SpotId::Menu__Kiengir_Map__Irikar_Midwest) => {
+            Some(1333)
+        }
+        (SpotId::Menu__Kiengir_Map__Ebih_Base_Camp, SpotId::Menu__Kiengir_Map__Uhrum_Center) => {
+            Some(1400)
+        }
+        (SpotId::Menu__Kiengir_Map__Ebih_Base_Camp, SpotId::Menu__Kiengir_Map__Uhrum_East) => {
+            Some(1300)
+        }
+        (SpotId::Menu__Kiengir_Map__Ebih_Base_Camp, SpotId::Menu__Kiengir_Map__Uhrum_Emergence) => {
+            Some(900)
+        }
+        (SpotId::Menu__Kiengir_Map__Ebih_Base_Camp, SpotId::Menu__Kiengir_Map__Uhrum_West) => {
+            Some(1500)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+        ) => Some(1500),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+        ) => Some(1800),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+        ) => Some(1600),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => Some(1800),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => Some(2200),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => Some(2300),
+        (SpotId::Menu__Kiengir_Map__Ebih_Observatory, SpotId::Menu__Kiengir_Map__Annuna_Upper) => {
+            Some(1400)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => Some(1700),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => Some(2400),
+        (SpotId::Menu__Kiengir_Map__Ebih_Observatory, SpotId::Menu__Kiengir_Map__Apocalypse) => {
+            Some(1400)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+        ) => Some(1000),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+        ) => Some(1000),
+        (SpotId::Menu__Kiengir_Map__Ebih_Observatory, SpotId::Menu__Kiengir_Map__Ebih_West_Mid) => {
+            Some(700)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+        ) => Some(400),
+        (SpotId::Menu__Kiengir_Map__Ebih_Observatory, SpotId::Menu__Kiengir_Map__Giguna_Base) => {
+            Some(1300)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+        ) => Some(1900),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+        ) => Some(700),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+        ) => Some(466),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => Some(600),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+        ) => Some(2200),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+        ) => Some(1333),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => Some(2500),
+        (SpotId::Menu__Kiengir_Map__Ebih_Observatory, SpotId::Menu__Kiengir_Map__Irikar_Hub) => {
+            Some(2000)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+        ) => Some(2200),
+        (SpotId::Menu__Kiengir_Map__Ebih_Observatory, SpotId::Menu__Kiengir_Map__Uhrum_Center) => {
+            Some(2400)
+        }
+        (SpotId::Menu__Kiengir_Map__Ebih_Observatory, SpotId::Menu__Kiengir_Map__Uhrum_East) => {
+            Some(2300)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+        ) => Some(1900),
+        (SpotId::Menu__Kiengir_Map__Ebih_Observatory, SpotId::Menu__Kiengir_Map__Uhrum_West) => {
+            Some(2500)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+        ) => Some(1000),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+        ) => Some(1000),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+        ) => Some(666),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => Some(1333),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => Some(1600),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => Some(1300),
+        (SpotId::Menu__Kiengir_Map__Ebih_West_Lower, SpotId::Menu__Kiengir_Map__Annuna_Upper) => {
+            Some(1333)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => Some(1400),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => Some(1400),
+        (SpotId::Menu__Kiengir_Map__Ebih_West_Lower, SpotId::Menu__Kiengir_Map__Apocalypse) => {
+            Some(1533)
+        }
+        (SpotId::Menu__Kiengir_Map__Ebih_West_Lower, SpotId::Menu__Kiengir_Map__Ebih_Base_Camp) => {
+            Some(666)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+        ) => Some(1000),
+        (SpotId::Menu__Kiengir_Map__Ebih_West_Lower, SpotId::Menu__Kiengir_Map__Ebih_West_Mid) => {
+            Some(300)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+        ) => Some(600),
+        (SpotId::Menu__Kiengir_Map__Ebih_West_Lower, SpotId::Menu__Kiengir_Map__Giguna_Base) => {
+            Some(400)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+        ) => Some(900),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+        ) => Some(300),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+        ) => Some(700),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => Some(400),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+        ) => Some(1200),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+        ) => Some(1466),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => Some(1500),
+        (SpotId::Menu__Kiengir_Map__Ebih_West_Lower, SpotId::Menu__Kiengir_Map__Irikar_Hub) => {
+            Some(1000)
+        }
+        (SpotId::Menu__Kiengir_Map__Ebih_West_Lower, SpotId::Menu__Kiengir_Map__Irikar_Midwest) => {
+            Some(1200)
+        }
+        (SpotId::Menu__Kiengir_Map__Ebih_West_Lower, SpotId::Menu__Kiengir_Map__Uhrum_Center) => {
+            Some(1400)
+        }
+        (SpotId::Menu__Kiengir_Map__Ebih_West_Lower, SpotId::Menu__Kiengir_Map__Uhrum_East) => {
+            Some(1300)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+        ) => Some(900),
+        (SpotId::Menu__Kiengir_Map__Ebih_West_Lower, SpotId::Menu__Kiengir_Map__Uhrum_West) => {
+            Some(1500)
+        }
+        (SpotId::Menu__Kiengir_Map__Ebih_West_Mid, SpotId::Menu__Kiengir_Map__Amagi_East_Lake) => {
+            Some(933)
+        }
+        (SpotId::Menu__Kiengir_Map__Ebih_West_Mid, SpotId::Menu__Kiengir_Map__Amagi_Isolation) => {
+            Some(1100)
+        }
+        (SpotId::Menu__Kiengir_Map__Ebih_West_Mid, SpotId::Menu__Kiengir_Map__Amagi_Main_Area) => {
+            Some(900)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => Some(1266),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => Some(1533),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => Some(1600),
+        (SpotId::Menu__Kiengir_Map__Ebih_West_Mid, SpotId::Menu__Kiengir_Map__Annuna_Upper) => {
+            Some(1266)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => Some(1333),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => Some(1700),
+        (SpotId::Menu__Kiengir_Map__Ebih_West_Mid, SpotId::Menu__Kiengir_Map__Apocalypse) => {
+            Some(1466)
+        }
+        (SpotId::Menu__Kiengir_Map__Ebih_West_Mid, SpotId::Menu__Kiengir_Map__Ebih_Base_Camp) => {
+            Some(600)
+        }
+        (SpotId::Menu__Kiengir_Map__Ebih_West_Mid, SpotId::Menu__Kiengir_Map__Ebih_Observatory) => {
+            Some(700)
+        }
+        (SpotId::Menu__Kiengir_Map__Ebih_West_Mid, SpotId::Menu__Kiengir_Map__Ebih_West_Lower) => {
+            Some(300)
+        }
+        (SpotId::Menu__Kiengir_Map__Ebih_West_Mid, SpotId::Menu__Kiengir_Map__Ebih_West_Upper) => {
+            Some(300)
+        }
+        (SpotId::Menu__Kiengir_Map__Ebih_West_Mid, SpotId::Menu__Kiengir_Map__Giguna_Base) => {
+            Some(600)
+        }
+        (SpotId::Menu__Kiengir_Map__Ebih_West_Mid, SpotId::Menu__Kiengir_Map__Giguna_Labyrinth) => {
+            Some(1200)
+        }
+        (SpotId::Menu__Kiengir_Map__Ebih_West_Mid, SpotId::Menu__Kiengir_Map__Giguna_Northeast) => {
+            Some(200)
+        }
+        (SpotId::Menu__Kiengir_Map__Ebih_West_Mid, SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top) => {
+            Some(400)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => Some(466),
+        (SpotId::Menu__Kiengir_Map__Ebih_West_Mid, SpotId::Menu__Kiengir_Map__Giguna_Separator) => {
+            Some(1500)
+        }
+        (SpotId::Menu__Kiengir_Map__Ebih_West_Mid, SpotId::Menu__Kiengir_Map__Glacier_Revival) => {
+            Some(1400)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => Some(1800),
+        (SpotId::Menu__Kiengir_Map__Ebih_West_Mid, SpotId::Menu__Kiengir_Map__Irikar_Hub) => {
+            Some(1300)
+        }
+        (SpotId::Menu__Kiengir_Map__Ebih_West_Mid, SpotId::Menu__Kiengir_Map__Irikar_Midwest) => {
+            Some(1500)
+        }
+        (SpotId::Menu__Kiengir_Map__Ebih_West_Mid, SpotId::Menu__Kiengir_Map__Uhrum_Center) => {
+            Some(1700)
+        }
+        (SpotId::Menu__Kiengir_Map__Ebih_West_Mid, SpotId::Menu__Kiengir_Map__Uhrum_East) => {
+            Some(1600)
+        }
+        (SpotId::Menu__Kiengir_Map__Ebih_West_Mid, SpotId::Menu__Kiengir_Map__Uhrum_Emergence) => {
+            Some(1200)
+        }
+        (SpotId::Menu__Kiengir_Map__Ebih_West_Mid, SpotId::Menu__Kiengir_Map__Uhrum_West) => {
+            Some(1800)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+        ) => Some(1100),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+        ) => Some(1400),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+        ) => Some(1200),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => Some(1400),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => Some(1800),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => Some(1900),
+        (SpotId::Menu__Kiengir_Map__Ebih_West_Upper, SpotId::Menu__Kiengir_Map__Annuna_Upper) => {
+            Some(1266)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => Some(1333),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => Some(2000),
+        (SpotId::Menu__Kiengir_Map__Ebih_West_Upper, SpotId::Menu__Kiengir_Map__Apocalypse) => {
+            Some(1466)
+        }
+        (SpotId::Menu__Kiengir_Map__Ebih_West_Upper, SpotId::Menu__Kiengir_Map__Ebih_Base_Camp) => {
+            Some(600)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+        ) => Some(400),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+        ) => Some(600),
+        (SpotId::Menu__Kiengir_Map__Ebih_West_Upper, SpotId::Menu__Kiengir_Map__Ebih_West_Mid) => {
+            Some(300)
+        }
+        (SpotId::Menu__Kiengir_Map__Ebih_West_Upper, SpotId::Menu__Kiengir_Map__Giguna_Base) => {
+            Some(900)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+        ) => Some(1500),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+        ) => Some(300),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+        ) => Some(400),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => Some(466),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+        ) => Some(1800),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+        ) => Some(1400),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => Some(2100),
+        (SpotId::Menu__Kiengir_Map__Ebih_West_Upper, SpotId::Menu__Kiengir_Map__Irikar_Hub) => {
+            Some(1600)
+        }
+        (SpotId::Menu__Kiengir_Map__Ebih_West_Upper, SpotId::Menu__Kiengir_Map__Irikar_Midwest) => {
+            Some(1800)
+        }
+        (SpotId::Menu__Kiengir_Map__Ebih_West_Upper, SpotId::Menu__Kiengir_Map__Uhrum_Center) => {
+            Some(2000)
+        }
+        (SpotId::Menu__Kiengir_Map__Ebih_West_Upper, SpotId::Menu__Kiengir_Map__Uhrum_East) => {
+            Some(1900)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+        ) => Some(1500),
+        (SpotId::Menu__Kiengir_Map__Ebih_West_Upper, SpotId::Menu__Kiengir_Map__Uhrum_West) => {
+            Some(2100)
+        }
+        (SpotId::Menu__Kiengir_Map__Giguna_Base, SpotId::Menu__Kiengir_Map__Amagi_East_Lake) => {
+            Some(1400)
+        }
+        (SpotId::Menu__Kiengir_Map__Giguna_Base, SpotId::Menu__Kiengir_Map__Amagi_Isolation) => {
+            Some(1400)
+        }
+        (SpotId::Menu__Kiengir_Map__Giguna_Base, SpotId::Menu__Kiengir_Map__Amagi_Main_Area) => {
+            Some(1066)
+        }
+        (SpotId::Menu__Kiengir_Map__Giguna_Base, SpotId::Menu__Kiengir_Map__Annuna_Center_Save) => {
+            Some(1733)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => Some(2000),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => Some(1266),
+        (SpotId::Menu__Kiengir_Map__Giguna_Base, SpotId::Menu__Kiengir_Map__Annuna_Upper) => {
+            Some(1733)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => Some(1800),
+        (SpotId::Menu__Kiengir_Map__Giguna_Base, SpotId::Menu__Kiengir_Map__Annuna_West_Bridge) => {
+            Some(1533)
+        }
+        (SpotId::Menu__Kiengir_Map__Giguna_Base, SpotId::Menu__Kiengir_Map__Apocalypse) => {
+            Some(1933)
+        }
+        (SpotId::Menu__Kiengir_Map__Giguna_Base, SpotId::Menu__Kiengir_Map__Ebih_Base_Camp) => {
+            Some(1066)
+        }
+        (SpotId::Menu__Kiengir_Map__Giguna_Base, SpotId::Menu__Kiengir_Map__Ebih_Observatory) => {
+            Some(1300)
+        }
+        (SpotId::Menu__Kiengir_Map__Giguna_Base, SpotId::Menu__Kiengir_Map__Ebih_West_Lower) => {
+            Some(400)
+        }
+        (SpotId::Menu__Kiengir_Map__Giguna_Base, SpotId::Menu__Kiengir_Map__Ebih_West_Mid) => {
+            Some(600)
+        }
+        (SpotId::Menu__Kiengir_Map__Giguna_Base, SpotId::Menu__Kiengir_Map__Ebih_West_Upper) => {
+            Some(900)
+        }
+        (SpotId::Menu__Kiengir_Map__Giguna_Base, SpotId::Menu__Kiengir_Map__Giguna_Labyrinth) => {
+            Some(600)
+        }
+        (SpotId::Menu__Kiengir_Map__Giguna_Base, SpotId::Menu__Kiengir_Map__Giguna_Northeast) => {
+            Some(600)
+        }
+        (SpotId::Menu__Kiengir_Map__Giguna_Base, SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top) => {
+            Some(1000)
+        }
+        (SpotId::Menu__Kiengir_Map__Giguna_Base, SpotId::Menu__Kiengir_Map__Giguna_Ruins_West) => {
+            Some(700)
+        }
+        (SpotId::Menu__Kiengir_Map__Giguna_Base, SpotId::Menu__Kiengir_Map__Giguna_Separator) => {
+            Some(900)
+        }
         (SpotId::Menu__Kiengir_Map__Giguna_Base, SpotId::Menu__Kiengir_Map__Glacier_Revival) => {
             Some(1866)
         }
+        (SpotId::Menu__Kiengir_Map__Giguna_Base, SpotId::Menu__Kiengir_Map__Irikar_Beach_Save) => {
+            Some(1200)
+        }
+        (SpotId::Menu__Kiengir_Map__Giguna_Base, SpotId::Menu__Kiengir_Map__Irikar_Hub) => {
+            Some(700)
+        }
+        (SpotId::Menu__Kiengir_Map__Giguna_Base, SpotId::Menu__Kiengir_Map__Irikar_Midwest) => {
+            Some(900)
+        }
+        (SpotId::Menu__Kiengir_Map__Giguna_Base, SpotId::Menu__Kiengir_Map__Uhrum_Center) => {
+            Some(1100)
+        }
+        (SpotId::Menu__Kiengir_Map__Giguna_Base, SpotId::Menu__Kiengir_Map__Uhrum_East) => {
+            Some(1000)
+        }
+        (SpotId::Menu__Kiengir_Map__Giguna_Base, SpotId::Menu__Kiengir_Map__Uhrum_Emergence) => {
+            Some(666)
+        }
+        (SpotId::Menu__Kiengir_Map__Giguna_Base, SpotId::Menu__Kiengir_Map__Uhrum_West) => {
+            Some(1200)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+        ) => Some(1133),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+        ) => Some(1133),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+        ) => Some(800),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => Some(1466),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => Some(1733),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => Some(1000),
+        (SpotId::Menu__Kiengir_Map__Giguna_Labyrinth, SpotId::Menu__Kiengir_Map__Annuna_Upper) => {
+            Some(1466)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => Some(1533),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => Some(1266),
+        (SpotId::Menu__Kiengir_Map__Giguna_Labyrinth, SpotId::Menu__Kiengir_Map__Apocalypse) => {
+            Some(1666)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+        ) => Some(900),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+        ) => Some(1900),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+        ) => Some(900),
+        (SpotId::Menu__Kiengir_Map__Giguna_Labyrinth, SpotId::Menu__Kiengir_Map__Ebih_West_Mid) => {
+            Some(1200)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+        ) => Some(1500),
+        (SpotId::Menu__Kiengir_Map__Giguna_Labyrinth, SpotId::Menu__Kiengir_Map__Giguna_Base) => {
+            Some(600)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+        ) => Some(1200),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+        ) => Some(1600),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => Some(1300),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+        ) => Some(300),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+        ) => Some(1600),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => Some(800),
+        (SpotId::Menu__Kiengir_Map__Giguna_Labyrinth, SpotId::Menu__Kiengir_Map__Irikar_Hub) => {
+            Some(333)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+        ) => Some(533),
+        (SpotId::Menu__Kiengir_Map__Giguna_Labyrinth, SpotId::Menu__Kiengir_Map__Uhrum_Center) => {
+            Some(533)
+        }
+        (SpotId::Menu__Kiengir_Map__Giguna_Labyrinth, SpotId::Menu__Kiengir_Map__Uhrum_East) => {
+            Some(733)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+        ) => Some(400),
+        (SpotId::Menu__Kiengir_Map__Giguna_Labyrinth, SpotId::Menu__Kiengir_Map__Uhrum_West) => {
+            Some(600)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+        ) => Some(1133),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+        ) => Some(1133),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+        ) => Some(900),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => Some(1466),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => Some(1733),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => Some(1600),
+        (SpotId::Menu__Kiengir_Map__Giguna_Northeast, SpotId::Menu__Kiengir_Map__Annuna_Upper) => {
+            Some(1466)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => Some(1533),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => Some(1700),
+        (SpotId::Menu__Kiengir_Map__Giguna_Northeast, SpotId::Menu__Kiengir_Map__Apocalypse) => {
+            Some(1666)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+        ) => Some(800),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+        ) => Some(700),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+        ) => Some(300),
+        (SpotId::Menu__Kiengir_Map__Giguna_Northeast, SpotId::Menu__Kiengir_Map__Ebih_West_Mid) => {
+            Some(200)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+        ) => Some(300),
+        (SpotId::Menu__Kiengir_Map__Giguna_Northeast, SpotId::Menu__Kiengir_Map__Giguna_Base) => {
+            Some(600)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+        ) => Some(1200),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+        ) => Some(400),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => Some(266),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+        ) => Some(1500),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+        ) => Some(1600),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => Some(1800),
+        (SpotId::Menu__Kiengir_Map__Giguna_Northeast, SpotId::Menu__Kiengir_Map__Irikar_Hub) => {
+            Some(1300)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+        ) => Some(1500),
+        (SpotId::Menu__Kiengir_Map__Giguna_Northeast, SpotId::Menu__Kiengir_Map__Uhrum_Center) => {
+            Some(1700)
+        }
+        (SpotId::Menu__Kiengir_Map__Giguna_Northeast, SpotId::Menu__Kiengir_Map__Uhrum_East) => {
+            Some(1600)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+        ) => Some(1200),
+        (SpotId::Menu__Kiengir_Map__Giguna_Northeast, SpotId::Menu__Kiengir_Map__Uhrum_West) => {
+            Some(1800)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+        ) => Some(1333),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+        ) => Some(1500),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+        ) => Some(1300),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => Some(1666),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => Some(1933),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => Some(2000),
+        (SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top, SpotId::Menu__Kiengir_Map__Annuna_Upper) => {
+            Some(1666)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => Some(1733),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => Some(2100),
+        (SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top, SpotId::Menu__Kiengir_Map__Apocalypse) => {
+            Some(1866)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+        ) => Some(1000),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+        ) => Some(466),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+        ) => Some(700),
+        (SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top, SpotId::Menu__Kiengir_Map__Ebih_West_Mid) => {
+            Some(400)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+        ) => Some(400),
+        (SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top, SpotId::Menu__Kiengir_Map__Giguna_Base) => {
+            Some(1000)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+        ) => Some(1600),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+        ) => Some(400),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => Some(300),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+        ) => Some(1900),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+        ) => Some(1800),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => Some(2200),
+        (SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top, SpotId::Menu__Kiengir_Map__Irikar_Hub) => {
+            Some(1700)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+        ) => Some(1900),
+        (SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top, SpotId::Menu__Kiengir_Map__Uhrum_Center) => {
+            Some(2100)
+        }
+        (SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top, SpotId::Menu__Kiengir_Map__Uhrum_East) => {
+            Some(2000)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+        ) => Some(1600),
+        (SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top, SpotId::Menu__Kiengir_Map__Uhrum_West) => {
+            Some(2200)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+        ) => Some(1400),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+        ) => Some(1400),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+        ) => Some(1066),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => Some(1733),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => Some(2000),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => Some(1700),
+        (SpotId::Menu__Kiengir_Map__Giguna_Ruins_West, SpotId::Menu__Kiengir_Map__Annuna_Upper) => {
+            Some(1733)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => Some(1800),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => Some(1800),
+        (SpotId::Menu__Kiengir_Map__Giguna_Ruins_West, SpotId::Menu__Kiengir_Map__Apocalypse) => {
+            Some(1933)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+        ) => Some(1066),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+        ) => Some(600),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+        ) => Some(400),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+        ) => Some(466),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+        ) => Some(466),
+        (SpotId::Menu__Kiengir_Map__Giguna_Ruins_West, SpotId::Menu__Kiengir_Map__Giguna_Base) => {
+            Some(700)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+        ) => Some(1300),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+        ) => Some(266),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+        ) => Some(300),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+        ) => Some(1600),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+        ) => Some(1866),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => Some(1900),
+        (SpotId::Menu__Kiengir_Map__Giguna_Ruins_West, SpotId::Menu__Kiengir_Map__Irikar_Hub) => {
+            Some(1400)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+        ) => Some(1600),
+        (SpotId::Menu__Kiengir_Map__Giguna_Ruins_West, SpotId::Menu__Kiengir_Map__Uhrum_Center) => {
+            Some(1800)
+        }
+        (SpotId::Menu__Kiengir_Map__Giguna_Ruins_West, SpotId::Menu__Kiengir_Map__Uhrum_East) => {
+            Some(1700)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+        ) => Some(1300),
+        (SpotId::Menu__Kiengir_Map__Giguna_Ruins_West, SpotId::Menu__Kiengir_Map__Uhrum_West) => {
+            Some(1900)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+        ) => Some(1066),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+        ) => Some(1066),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+        ) => Some(733),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => Some(1400),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => Some(1666),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => Some(933),
+        (SpotId::Menu__Kiengir_Map__Giguna_Separator, SpotId::Menu__Kiengir_Map__Annuna_Upper) => {
+            Some(1400)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => Some(1466),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => Some(1200),
+        (SpotId::Menu__Kiengir_Map__Giguna_Separator, SpotId::Menu__Kiengir_Map__Apocalypse) => {
+            Some(1600)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+        ) => Some(1200),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+        ) => Some(2200),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+        ) => Some(1200),
+        (SpotId::Menu__Kiengir_Map__Giguna_Separator, SpotId::Menu__Kiengir_Map__Ebih_West_Mid) => {
+            Some(1500)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+        ) => Some(1800),
+        (SpotId::Menu__Kiengir_Map__Giguna_Separator, SpotId::Menu__Kiengir_Map__Giguna_Base) => {
+            Some(900)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+        ) => Some(300),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+        ) => Some(1500),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+        ) => Some(1900),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => Some(1600),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+        ) => Some(1700),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => Some(866),
+        (SpotId::Menu__Kiengir_Map__Giguna_Separator, SpotId::Menu__Kiengir_Map__Irikar_Hub) => {
+            Some(400)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+        ) => Some(600),
+        (SpotId::Menu__Kiengir_Map__Giguna_Separator, SpotId::Menu__Kiengir_Map__Uhrum_Center) => {
+            Some(466)
+        }
+        (SpotId::Menu__Kiengir_Map__Giguna_Separator, SpotId::Menu__Kiengir_Map__Uhrum_East) => {
+            Some(666)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+        ) => Some(333),
+        (SpotId::Menu__Kiengir_Map__Giguna_Separator, SpotId::Menu__Kiengir_Map__Uhrum_West) => {
+            Some(300)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+        ) => Some(1000),
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+        ) => Some(1300),
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+        ) => Some(1100),
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => Some(1300),
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => Some(1700),
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => Some(1800),
+        (SpotId::Menu__Kiengir_Map__Glacier_Revival, SpotId::Menu__Kiengir_Map__Annuna_Upper) => {
+            Some(900)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => Some(1200),
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => Some(1900),
+        (SpotId::Menu__Kiengir_Map__Glacier_Revival, SpotId::Menu__Kiengir_Map__Apocalypse) => {
+            Some(900)
+        }
+        (SpotId::Menu__Kiengir_Map__Glacier_Revival, SpotId::Menu__Kiengir_Map__Ebih_Base_Camp) => {
+            Some(800)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+        ) => Some(1333),
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+        ) => Some(1466),
+        (SpotId::Menu__Kiengir_Map__Glacier_Revival, SpotId::Menu__Kiengir_Map__Ebih_West_Mid) => {
+            Some(1400)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+        ) => Some(1400),
         (SpotId::Menu__Kiengir_Map__Glacier_Revival, SpotId::Menu__Kiengir_Map__Giguna_Base) => {
             Some(1866)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+        ) => Some(1600),
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+        ) => Some(1600),
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+        ) => Some(1800),
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => Some(1866),
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+        ) => Some(1700),
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => Some(2400),
+        (SpotId::Menu__Kiengir_Map__Glacier_Revival, SpotId::Menu__Kiengir_Map__Irikar_Hub) => {
+            Some(1933)
+        }
+        (SpotId::Menu__Kiengir_Map__Glacier_Revival, SpotId::Menu__Kiengir_Map__Irikar_Midwest) => {
+            Some(2133)
+        }
+        (SpotId::Menu__Kiengir_Map__Glacier_Revival, SpotId::Menu__Kiengir_Map__Uhrum_Center) => {
+            Some(1900)
+        }
+        (SpotId::Menu__Kiengir_Map__Glacier_Revival, SpotId::Menu__Kiengir_Map__Uhrum_East) => {
+            Some(1800)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+        ) => Some(1400),
+        (SpotId::Menu__Kiengir_Map__Glacier_Revival, SpotId::Menu__Kiengir_Map__Uhrum_West) => {
+            Some(2000)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+        ) => Some(1933),
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+        ) => Some(1933),
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+        ) => Some(1600),
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => Some(2266),
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => Some(2533),
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => Some(1800),
+        (SpotId::Menu__Kiengir_Map__Irikar_Beach_Save, SpotId::Menu__Kiengir_Map__Annuna_Upper) => {
+            Some(2266)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => Some(2333),
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => Some(2066),
+        (SpotId::Menu__Kiengir_Map__Irikar_Beach_Save, SpotId::Menu__Kiengir_Map__Apocalypse) => {
+            Some(2466)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+        ) => Some(1600),
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+        ) => Some(2500),
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+        ) => Some(1500),
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+        ) => Some(1800),
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+        ) => Some(2100),
+        (SpotId::Menu__Kiengir_Map__Irikar_Beach_Save, SpotId::Menu__Kiengir_Map__Giguna_Base) => {
+            Some(1200)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+        ) => Some(800),
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+        ) => Some(1800),
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+        ) => Some(2200),
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => Some(1900),
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+        ) => Some(866),
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+        ) => Some(2400),
+        (SpotId::Menu__Kiengir_Map__Irikar_Beach_Save, SpotId::Menu__Kiengir_Map__Irikar_Hub) => {
+            Some(500)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+        ) => Some(300),
+        (SpotId::Menu__Kiengir_Map__Irikar_Beach_Save, SpotId::Menu__Kiengir_Map__Uhrum_Center) => {
+            Some(1333)
+        }
+        (SpotId::Menu__Kiengir_Map__Irikar_Beach_Save, SpotId::Menu__Kiengir_Map__Uhrum_East) => {
+            Some(1533)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+        ) => Some(1200),
+        (SpotId::Menu__Kiengir_Map__Irikar_Beach_Save, SpotId::Menu__Kiengir_Map__Uhrum_West) => {
+            Some(933)
+        }
+        (SpotId::Menu__Kiengir_Map__Irikar_Hub, SpotId::Menu__Kiengir_Map__Amagi_East_Lake) => {
+            Some(1466)
+        }
+        (SpotId::Menu__Kiengir_Map__Irikar_Hub, SpotId::Menu__Kiengir_Map__Amagi_Isolation) => {
+            Some(1466)
+        }
+        (SpotId::Menu__Kiengir_Map__Irikar_Hub, SpotId::Menu__Kiengir_Map__Amagi_Main_Area) => {
+            Some(1133)
+        }
+        (SpotId::Menu__Kiengir_Map__Irikar_Hub, SpotId::Menu__Kiengir_Map__Annuna_Center_Save) => {
+            Some(1800)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => Some(2066),
+        (SpotId::Menu__Kiengir_Map__Irikar_Hub, SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match) => {
+            Some(1333)
+        }
+        (SpotId::Menu__Kiengir_Map__Irikar_Hub, SpotId::Menu__Kiengir_Map__Annuna_Upper) => {
+            Some(1800)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => Some(1866),
+        (SpotId::Menu__Kiengir_Map__Irikar_Hub, SpotId::Menu__Kiengir_Map__Annuna_West_Bridge) => {
+            Some(1600)
+        }
+        (SpotId::Menu__Kiengir_Map__Irikar_Hub, SpotId::Menu__Kiengir_Map__Apocalypse) => {
+            Some(2000)
+        }
+        (SpotId::Menu__Kiengir_Map__Irikar_Hub, SpotId::Menu__Kiengir_Map__Ebih_Base_Camp) => {
+            Some(1133)
+        }
+        (SpotId::Menu__Kiengir_Map__Irikar_Hub, SpotId::Menu__Kiengir_Map__Ebih_Observatory) => {
+            Some(2000)
+        }
+        (SpotId::Menu__Kiengir_Map__Irikar_Hub, SpotId::Menu__Kiengir_Map__Ebih_West_Lower) => {
+            Some(1000)
+        }
+        (SpotId::Menu__Kiengir_Map__Irikar_Hub, SpotId::Menu__Kiengir_Map__Ebih_West_Mid) => {
+            Some(1300)
+        }
+        (SpotId::Menu__Kiengir_Map__Irikar_Hub, SpotId::Menu__Kiengir_Map__Ebih_West_Upper) => {
+            Some(1600)
+        }
+        (SpotId::Menu__Kiengir_Map__Irikar_Hub, SpotId::Menu__Kiengir_Map__Giguna_Base) => {
+            Some(700)
+        }
+        (SpotId::Menu__Kiengir_Map__Irikar_Hub, SpotId::Menu__Kiengir_Map__Giguna_Labyrinth) => {
+            Some(333)
+        }
+        (SpotId::Menu__Kiengir_Map__Irikar_Hub, SpotId::Menu__Kiengir_Map__Giguna_Northeast) => {
+            Some(1300)
+        }
+        (SpotId::Menu__Kiengir_Map__Irikar_Hub, SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top) => {
+            Some(1700)
+        }
+        (SpotId::Menu__Kiengir_Map__Irikar_Hub, SpotId::Menu__Kiengir_Map__Giguna_Ruins_West) => {
+            Some(1400)
+        }
+        (SpotId::Menu__Kiengir_Map__Irikar_Hub, SpotId::Menu__Kiengir_Map__Giguna_Separator) => {
+            Some(400)
+        }
+        (SpotId::Menu__Kiengir_Map__Irikar_Hub, SpotId::Menu__Kiengir_Map__Glacier_Revival) => {
+            Some(1933)
+        }
+        (SpotId::Menu__Kiengir_Map__Irikar_Hub, SpotId::Menu__Kiengir_Map__Irikar_Beach_Save) => {
+            Some(500)
+        }
+        (SpotId::Menu__Kiengir_Map__Irikar_Hub, SpotId::Menu__Kiengir_Map__Irikar_Midwest) => {
+            Some(200)
+        }
+        (SpotId::Menu__Kiengir_Map__Irikar_Hub, SpotId::Menu__Kiengir_Map__Uhrum_Center) => {
+            Some(866)
+        }
+        (SpotId::Menu__Kiengir_Map__Irikar_Hub, SpotId::Menu__Kiengir_Map__Uhrum_East) => {
+            Some(1066)
+        }
+        (SpotId::Menu__Kiengir_Map__Irikar_Hub, SpotId::Menu__Kiengir_Map__Uhrum_Emergence) => {
+            Some(733)
+        }
+        (SpotId::Menu__Kiengir_Map__Irikar_Hub, SpotId::Menu__Kiengir_Map__Uhrum_West) => Some(500),
+        (SpotId::Menu__Kiengir_Map__Irikar_Midwest, SpotId::Menu__Kiengir_Map__Amagi_East_Lake) => {
+            Some(1666)
+        }
+        (SpotId::Menu__Kiengir_Map__Irikar_Midwest, SpotId::Menu__Kiengir_Map__Amagi_Isolation) => {
+            Some(1666)
+        }
+        (SpotId::Menu__Kiengir_Map__Irikar_Midwest, SpotId::Menu__Kiengir_Map__Amagi_Main_Area) => {
+            Some(1333)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => Some(2000),
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => Some(2266),
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => Some(1533),
+        (SpotId::Menu__Kiengir_Map__Irikar_Midwest, SpotId::Menu__Kiengir_Map__Annuna_Upper) => {
+            Some(2000)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => Some(2066),
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => Some(1800),
+        (SpotId::Menu__Kiengir_Map__Irikar_Midwest, SpotId::Menu__Kiengir_Map__Apocalypse) => {
+            Some(2200)
+        }
+        (SpotId::Menu__Kiengir_Map__Irikar_Midwest, SpotId::Menu__Kiengir_Map__Ebih_Base_Camp) => {
+            Some(1333)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+        ) => Some(2200),
+        (SpotId::Menu__Kiengir_Map__Irikar_Midwest, SpotId::Menu__Kiengir_Map__Ebih_West_Lower) => {
+            Some(1200)
+        }
+        (SpotId::Menu__Kiengir_Map__Irikar_Midwest, SpotId::Menu__Kiengir_Map__Ebih_West_Mid) => {
+            Some(1500)
+        }
+        (SpotId::Menu__Kiengir_Map__Irikar_Midwest, SpotId::Menu__Kiengir_Map__Ebih_West_Upper) => {
+            Some(1800)
+        }
+        (SpotId::Menu__Kiengir_Map__Irikar_Midwest, SpotId::Menu__Kiengir_Map__Giguna_Base) => {
+            Some(900)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+        ) => Some(533),
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+        ) => Some(1500),
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+        ) => Some(1900),
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => Some(1600),
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+        ) => Some(600),
+        (SpotId::Menu__Kiengir_Map__Irikar_Midwest, SpotId::Menu__Kiengir_Map__Glacier_Revival) => {
+            Some(2133)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => Some(300),
+        (SpotId::Menu__Kiengir_Map__Irikar_Midwest, SpotId::Menu__Kiengir_Map__Irikar_Hub) => {
+            Some(200)
+        }
+        (SpotId::Menu__Kiengir_Map__Irikar_Midwest, SpotId::Menu__Kiengir_Map__Uhrum_Center) => {
+            Some(1066)
+        }
+        (SpotId::Menu__Kiengir_Map__Irikar_Midwest, SpotId::Menu__Kiengir_Map__Uhrum_East) => {
+            Some(1266)
+        }
+        (SpotId::Menu__Kiengir_Map__Irikar_Midwest, SpotId::Menu__Kiengir_Map__Uhrum_Emergence) => {
+            Some(933)
+        }
+        (SpotId::Menu__Kiengir_Map__Irikar_Midwest, SpotId::Menu__Kiengir_Map__Uhrum_West) => {
+            Some(666)
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_Center, SpotId::Menu__Kiengir_Map__Amagi_East_Lake) => {
+            Some(900)
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_Center, SpotId::Menu__Kiengir_Map__Amagi_Isolation) => {
+            Some(600)
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_Center, SpotId::Menu__Kiengir_Map__Amagi_Main_Area) => {
+            Some(800)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => Some(933),
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => Some(1200),
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => Some(466),
+        (SpotId::Menu__Kiengir_Map__Uhrum_Center, SpotId::Menu__Kiengir_Map__Annuna_Upper) => {
+            Some(1000)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => Some(1000),
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => Some(733),
+        (SpotId::Menu__Kiengir_Map__Uhrum_Center, SpotId::Menu__Kiengir_Map__Apocalypse) => {
+            Some(1133)
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_Center, SpotId::Menu__Kiengir_Map__Ebih_Base_Camp) => {
+            Some(1400)
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_Center, SpotId::Menu__Kiengir_Map__Ebih_Observatory) => {
+            Some(2400)
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_Center, SpotId::Menu__Kiengir_Map__Ebih_West_Lower) => {
+            Some(1400)
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_Center, SpotId::Menu__Kiengir_Map__Ebih_West_Mid) => {
+            Some(1700)
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_Center, SpotId::Menu__Kiengir_Map__Ebih_West_Upper) => {
+            Some(2000)
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_Center, SpotId::Menu__Kiengir_Map__Giguna_Base) => {
+            Some(1100)
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_Center, SpotId::Menu__Kiengir_Map__Giguna_Labyrinth) => {
+            Some(533)
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_Center, SpotId::Menu__Kiengir_Map__Giguna_Northeast) => {
+            Some(1700)
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_Center, SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top) => {
+            Some(2100)
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_Center, SpotId::Menu__Kiengir_Map__Giguna_Ruins_West) => {
+            Some(1800)
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_Center, SpotId::Menu__Kiengir_Map__Giguna_Separator) => {
+            Some(466)
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_Center, SpotId::Menu__Kiengir_Map__Glacier_Revival) => {
+            Some(1900)
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_Center, SpotId::Menu__Kiengir_Map__Irikar_Beach_Save) => {
+            Some(1333)
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_Center, SpotId::Menu__Kiengir_Map__Irikar_Hub) => {
+            Some(866)
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_Center, SpotId::Menu__Kiengir_Map__Irikar_Midwest) => {
+            Some(1066)
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_Center, SpotId::Menu__Kiengir_Map__Uhrum_East) => {
+            Some(200)
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_Center, SpotId::Menu__Kiengir_Map__Uhrum_Emergence) => {
+            Some(500)
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_Center, SpotId::Menu__Kiengir_Map__Uhrum_West) => {
+            Some(400)
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_East, SpotId::Menu__Kiengir_Map__Amagi_East_Lake) => {
+            Some(800)
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_East, SpotId::Menu__Kiengir_Map__Amagi_Isolation) => {
+            Some(500)
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_East, SpotId::Menu__Kiengir_Map__Amagi_Main_Area) => {
+            Some(700)
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_East, SpotId::Menu__Kiengir_Map__Annuna_Center_Save) => {
+            Some(733)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => Some(1000),
+        (SpotId::Menu__Kiengir_Map__Uhrum_East, SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match) => {
+            Some(266)
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_East, SpotId::Menu__Kiengir_Map__Annuna_Upper) => {
+            Some(900)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => Some(800),
+        (SpotId::Menu__Kiengir_Map__Uhrum_East, SpotId::Menu__Kiengir_Map__Annuna_West_Bridge) => {
+            Some(533)
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_East, SpotId::Menu__Kiengir_Map__Apocalypse) => Some(933),
+        (SpotId::Menu__Kiengir_Map__Uhrum_East, SpotId::Menu__Kiengir_Map__Ebih_Base_Camp) => {
+            Some(1300)
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_East, SpotId::Menu__Kiengir_Map__Ebih_Observatory) => {
+            Some(2300)
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_East, SpotId::Menu__Kiengir_Map__Ebih_West_Lower) => {
+            Some(1300)
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_East, SpotId::Menu__Kiengir_Map__Ebih_West_Mid) => {
+            Some(1600)
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_East, SpotId::Menu__Kiengir_Map__Ebih_West_Upper) => {
+            Some(1900)
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_East, SpotId::Menu__Kiengir_Map__Giguna_Base) => {
+            Some(1000)
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_East, SpotId::Menu__Kiengir_Map__Giguna_Labyrinth) => {
+            Some(733)
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_East, SpotId::Menu__Kiengir_Map__Giguna_Northeast) => {
+            Some(1600)
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_East, SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top) => {
+            Some(2000)
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_East, SpotId::Menu__Kiengir_Map__Giguna_Ruins_West) => {
+            Some(1700)
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_East, SpotId::Menu__Kiengir_Map__Giguna_Separator) => {
+            Some(666)
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_East, SpotId::Menu__Kiengir_Map__Glacier_Revival) => {
+            Some(1800)
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_East, SpotId::Menu__Kiengir_Map__Irikar_Beach_Save) => {
+            Some(1533)
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_East, SpotId::Menu__Kiengir_Map__Irikar_Hub) => {
+            Some(1066)
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_East, SpotId::Menu__Kiengir_Map__Irikar_Midwest) => {
+            Some(1266)
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_East, SpotId::Menu__Kiengir_Map__Uhrum_Center) => {
+            Some(200)
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_East, SpotId::Menu__Kiengir_Map__Uhrum_Emergence) => {
+            Some(400)
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_East, SpotId::Menu__Kiengir_Map__Uhrum_West) => Some(600),
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+        ) => Some(733),
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+        ) => Some(733),
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+        ) => Some(400),
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => Some(1066),
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => Some(1333),
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => Some(600),
+        (SpotId::Menu__Kiengir_Map__Uhrum_Emergence, SpotId::Menu__Kiengir_Map__Annuna_Upper) => {
+            Some(1066)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => Some(1133),
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => Some(866),
+        (SpotId::Menu__Kiengir_Map__Uhrum_Emergence, SpotId::Menu__Kiengir_Map__Apocalypse) => {
+            Some(1266)
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_Emergence, SpotId::Menu__Kiengir_Map__Ebih_Base_Camp) => {
+            Some(900)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+        ) => Some(1900),
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+        ) => Some(900),
+        (SpotId::Menu__Kiengir_Map__Uhrum_Emergence, SpotId::Menu__Kiengir_Map__Ebih_West_Mid) => {
+            Some(1200)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+        ) => Some(1500),
+        (SpotId::Menu__Kiengir_Map__Uhrum_Emergence, SpotId::Menu__Kiengir_Map__Giguna_Base) => {
+            Some(666)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+        ) => Some(400),
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+        ) => Some(1200),
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+        ) => Some(1600),
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => Some(1300),
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+        ) => Some(333),
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+        ) => Some(1400),
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => Some(1200),
+        (SpotId::Menu__Kiengir_Map__Uhrum_Emergence, SpotId::Menu__Kiengir_Map__Irikar_Hub) => {
+            Some(733)
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_Emergence, SpotId::Menu__Kiengir_Map__Irikar_Midwest) => {
+            Some(933)
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_Emergence, SpotId::Menu__Kiengir_Map__Uhrum_Center) => {
+            Some(500)
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_Emergence, SpotId::Menu__Kiengir_Map__Uhrum_East) => {
+            Some(400)
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_Emergence, SpotId::Menu__Kiengir_Map__Uhrum_West) => {
+            Some(600)
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_West, SpotId::Menu__Kiengir_Map__Amagi_East_Lake) => {
+            Some(1000)
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_West, SpotId::Menu__Kiengir_Map__Amagi_Isolation) => {
+            Some(1000)
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_West, SpotId::Menu__Kiengir_Map__Amagi_Main_Area) => {
+            Some(900)
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_West, SpotId::Menu__Kiengir_Map__Annuna_Center_Save) => {
+            Some(1333)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => Some(1600),
+        (SpotId::Menu__Kiengir_Map__Uhrum_West, SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match) => {
+            Some(866)
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_West, SpotId::Menu__Kiengir_Map__Annuna_Upper) => {
+            Some(1333)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => Some(1400),
+        (SpotId::Menu__Kiengir_Map__Uhrum_West, SpotId::Menu__Kiengir_Map__Annuna_West_Bridge) => {
+            Some(1133)
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_West, SpotId::Menu__Kiengir_Map__Apocalypse) => {
+            Some(1533)
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_West, SpotId::Menu__Kiengir_Map__Ebih_Base_Camp) => {
+            Some(1500)
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_West, SpotId::Menu__Kiengir_Map__Ebih_Observatory) => {
+            Some(2500)
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_West, SpotId::Menu__Kiengir_Map__Ebih_West_Lower) => {
+            Some(1500)
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_West, SpotId::Menu__Kiengir_Map__Ebih_West_Mid) => {
+            Some(1800)
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_West, SpotId::Menu__Kiengir_Map__Ebih_West_Upper) => {
+            Some(2100)
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_West, SpotId::Menu__Kiengir_Map__Giguna_Base) => {
+            Some(1200)
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_West, SpotId::Menu__Kiengir_Map__Giguna_Labyrinth) => {
+            Some(600)
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_West, SpotId::Menu__Kiengir_Map__Giguna_Northeast) => {
+            Some(1800)
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_West, SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top) => {
+            Some(2200)
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_West, SpotId::Menu__Kiengir_Map__Giguna_Ruins_West) => {
+            Some(1900)
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_West, SpotId::Menu__Kiengir_Map__Giguna_Separator) => {
+            Some(300)
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_West, SpotId::Menu__Kiengir_Map__Glacier_Revival) => {
+            Some(2000)
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_West, SpotId::Menu__Kiengir_Map__Irikar_Beach_Save) => {
+            Some(933)
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_West, SpotId::Menu__Kiengir_Map__Irikar_Hub) => Some(500),
+        (SpotId::Menu__Kiengir_Map__Uhrum_West, SpotId::Menu__Kiengir_Map__Irikar_Midwest) => {
+            Some(666)
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_West, SpotId::Menu__Kiengir_Map__Uhrum_Center) => {
+            Some(400)
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_West, SpotId::Menu__Kiengir_Map__Uhrum_East) => Some(600),
+        (SpotId::Menu__Kiengir_Map__Uhrum_West, SpotId::Menu__Kiengir_Map__Uhrum_Emergence) => {
+            Some(600)
         }
         (
             SpotId::Uhrum__Annuna_Corridor__Between_Two_Flowers,
@@ -57412,11 +75276,2887 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
         (SpotId::Irikar__Sight_Room__West_24, SpotId::Irikar__Sight_Room__Lower_Ledge) => {
             (Some(701), vec![])
         }
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+        ) => (Some(300), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+        ) => (Some(333), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => (Some(333), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => (Some(700), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => (Some(800), vec![]),
+        (SpotId::Menu__Kiengir_Map__Amagi_East_Lake, SpotId::Menu__Kiengir_Map__Annuna_Upper) => {
+            (Some(333), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => (Some(400), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => (Some(900), vec![]),
+        (SpotId::Menu__Kiengir_Map__Amagi_East_Lake, SpotId::Menu__Kiengir_Map__Apocalypse) => {
+            (Some(533), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Amagi_East_Lake, SpotId::Menu__Kiengir_Map__Ebih_Base_Camp) => {
+            (Some(500), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+        ) => (Some(1500), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+        ) => (Some(1000), vec![]),
+        (SpotId::Menu__Kiengir_Map__Amagi_East_Lake, SpotId::Menu__Kiengir_Map__Ebih_West_Mid) => {
+            (Some(933), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+        ) => (Some(1100), vec![]),
+        (SpotId::Menu__Kiengir_Map__Amagi_East_Lake, SpotId::Menu__Kiengir_Map__Giguna_Base) => {
+            (Some(1400), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+        ) => (Some(1133), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+        ) => (Some(1133), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+        ) => (Some(1333), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => (Some(1400), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+        ) => (Some(1066), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+        ) => (Some(1000), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => (Some(1933), vec![]),
+        (SpotId::Menu__Kiengir_Map__Amagi_East_Lake, SpotId::Menu__Kiengir_Map__Irikar_Hub) => {
+            (Some(1466), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Amagi_East_Lake, SpotId::Menu__Kiengir_Map__Irikar_Midwest) => {
+            (Some(1666), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Amagi_East_Lake, SpotId::Menu__Kiengir_Map__Uhrum_Center) => {
+            (Some(900), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Amagi_East_Lake, SpotId::Menu__Kiengir_Map__Uhrum_East) => {
+            (Some(800), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+        ) => (Some(733), vec![]),
+        (SpotId::Menu__Kiengir_Map__Amagi_East_Lake, SpotId::Menu__Kiengir_Map__Uhrum_West) => {
+            (Some(1000), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+        ) => (Some(300), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+        ) => (Some(333), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => (Some(333), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => (Some(600), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => (Some(500), vec![]),
+        (SpotId::Menu__Kiengir_Map__Amagi_Isolation, SpotId::Menu__Kiengir_Map__Annuna_Upper) => {
+            (Some(400), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => (Some(400), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => (Some(600), vec![]),
+        (SpotId::Menu__Kiengir_Map__Amagi_Isolation, SpotId::Menu__Kiengir_Map__Apocalypse) => {
+            (Some(533), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Amagi_Isolation, SpotId::Menu__Kiengir_Map__Ebih_Base_Camp) => {
+            (Some(800), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+        ) => (Some(1800), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+        ) => (Some(1000), vec![]),
+        (SpotId::Menu__Kiengir_Map__Amagi_Isolation, SpotId::Menu__Kiengir_Map__Ebih_West_Mid) => {
+            (Some(1100), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+        ) => (Some(1400), vec![]),
+        (SpotId::Menu__Kiengir_Map__Amagi_Isolation, SpotId::Menu__Kiengir_Map__Giguna_Base) => {
+            (Some(1400), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+        ) => (Some(1133), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+        ) => (Some(1133), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+        ) => (Some(1500), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => (Some(1400), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+        ) => (Some(1066), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+        ) => (Some(1300), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => (Some(1933), vec![]),
+        (SpotId::Menu__Kiengir_Map__Amagi_Isolation, SpotId::Menu__Kiengir_Map__Irikar_Hub) => {
+            (Some(1466), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Amagi_Isolation, SpotId::Menu__Kiengir_Map__Irikar_Midwest) => {
+            (Some(1666), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Amagi_Isolation, SpotId::Menu__Kiengir_Map__Uhrum_Center) => {
+            (Some(600), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Amagi_Isolation, SpotId::Menu__Kiengir_Map__Uhrum_East) => {
+            (Some(500), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+        ) => (Some(733), vec![]),
+        (SpotId::Menu__Kiengir_Map__Amagi_Isolation, SpotId::Menu__Kiengir_Map__Uhrum_West) => {
+            (Some(1000), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+        ) => (Some(333), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+        ) => (Some(333), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => (Some(666), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => (Some(933), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => (Some(700), vec![]),
+        (SpotId::Menu__Kiengir_Map__Amagi_Main_Area, SpotId::Menu__Kiengir_Map__Annuna_Upper) => {
+            (Some(666), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => (Some(733), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => (Some(800), vec![]),
+        (SpotId::Menu__Kiengir_Map__Amagi_Main_Area, SpotId::Menu__Kiengir_Map__Apocalypse) => {
+            (Some(866), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Amagi_Main_Area, SpotId::Menu__Kiengir_Map__Ebih_Base_Camp) => {
+            (Some(600), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+        ) => (Some(1600), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+        ) => (Some(666), vec![]),
+        (SpotId::Menu__Kiengir_Map__Amagi_Main_Area, SpotId::Menu__Kiengir_Map__Ebih_West_Mid) => {
+            (Some(900), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+        ) => (Some(1200), vec![]),
+        (SpotId::Menu__Kiengir_Map__Amagi_Main_Area, SpotId::Menu__Kiengir_Map__Giguna_Base) => {
+            (Some(1066), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+        ) => (Some(800), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+        ) => (Some(900), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+        ) => (Some(1300), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => (Some(1066), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+        ) => (Some(733), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+        ) => (Some(1100), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => (Some(1600), vec![]),
+        (SpotId::Menu__Kiengir_Map__Amagi_Main_Area, SpotId::Menu__Kiengir_Map__Irikar_Hub) => {
+            (Some(1133), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Amagi_Main_Area, SpotId::Menu__Kiengir_Map__Irikar_Midwest) => {
+            (Some(1333), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Amagi_Main_Area, SpotId::Menu__Kiengir_Map__Uhrum_Center) => {
+            (Some(800), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Amagi_Main_Area, SpotId::Menu__Kiengir_Map__Uhrum_East) => {
+            (Some(700), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+        ) => (Some(400), vec![]),
+        (SpotId::Menu__Kiengir_Map__Amagi_Main_Area, SpotId::Menu__Kiengir_Map__Uhrum_West) => {
+            (Some(900), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+        ) => (Some(333), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+        ) => (Some(333), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+        ) => (Some(666), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => (Some(400), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => (Some(500), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+        ) => (Some(400), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => (Some(100), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => (Some(600), vec![]),
+        (SpotId::Menu__Kiengir_Map__Annuna_Center_Save, SpotId::Menu__Kiengir_Map__Apocalypse) => {
+            (Some(400), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+        ) => (Some(800), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+        ) => (Some(1800), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+        ) => (Some(1333), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+        ) => (Some(1266), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+        ) => (Some(1400), vec![]),
+        (SpotId::Menu__Kiengir_Map__Annuna_Center_Save, SpotId::Menu__Kiengir_Map__Giguna_Base) => {
+            (Some(1733), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+        ) => (Some(1466), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+        ) => (Some(1466), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+        ) => (Some(1666), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => (Some(1733), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+        ) => (Some(1400), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+        ) => (Some(1300), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => (Some(2266), vec![]),
+        (SpotId::Menu__Kiengir_Map__Annuna_Center_Save, SpotId::Menu__Kiengir_Map__Irikar_Hub) => {
+            (Some(1800), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+        ) => (Some(2000), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+        ) => (Some(933), vec![]),
+        (SpotId::Menu__Kiengir_Map__Annuna_Center_Save, SpotId::Menu__Kiengir_Map__Uhrum_East) => {
+            (Some(733), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+        ) => (Some(1066), vec![]),
+        (SpotId::Menu__Kiengir_Map__Annuna_Center_Save, SpotId::Menu__Kiengir_Map__Uhrum_West) => {
+            (Some(1333), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+        ) => (Some(700), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+        ) => (Some(600), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+        ) => (Some(933), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => (Some(400), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => (Some(733), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+        ) => (Some(800), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => (Some(500), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => (Some(466), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+        ) => (Some(800), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+        ) => (Some(1200), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+        ) => (Some(2200), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+        ) => (Some(1600), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+        ) => (Some(1533), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+        ) => (Some(1800), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+        ) => (Some(2000), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+        ) => (Some(1733), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+        ) => (Some(1733), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+        ) => (Some(1933), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => (Some(2000), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+        ) => (Some(1666), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+        ) => (Some(1700), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => (Some(2533), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+        ) => (Some(2066), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+        ) => (Some(2266), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+        ) => (Some(1200), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+        ) => (Some(1000), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+        ) => (Some(1333), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+        ) => (Some(1600), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+        ) => (Some(800), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+        ) => (Some(500), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+        ) => (Some(700), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => (Some(500), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => (Some(733), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+        ) => (Some(900), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => (Some(600), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => (Some(266), vec![]),
+        (SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match, SpotId::Menu__Kiengir_Map__Apocalypse) => {
+            (Some(900), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+        ) => (Some(1300), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+        ) => (Some(2300), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+        ) => (Some(1300), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+        ) => (Some(1600), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+        ) => (Some(1900), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+        ) => (Some(1266), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+        ) => (Some(1000), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+        ) => (Some(1600), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+        ) => (Some(2000), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => (Some(1700), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+        ) => (Some(933), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+        ) => (Some(1800), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => (Some(1800), vec![]),
+        (SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match, SpotId::Menu__Kiengir_Map__Irikar_Hub) => {
+            (Some(1333), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+        ) => (Some(1533), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+        ) => (Some(466), vec![]),
+        (SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match, SpotId::Menu__Kiengir_Map__Uhrum_East) => {
+            (Some(266), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+        ) => (Some(600), vec![]),
+        (SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match, SpotId::Menu__Kiengir_Map__Uhrum_West) => {
+            (Some(866), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Annuna_Upper, SpotId::Menu__Kiengir_Map__Amagi_East_Lake) => {
+            (Some(333), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Annuna_Upper, SpotId::Menu__Kiengir_Map__Amagi_Isolation) => {
+            (Some(400), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Annuna_Upper, SpotId::Menu__Kiengir_Map__Amagi_Main_Area) => {
+            (Some(666), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => (Some(400), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => (Some(800), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => (Some(900), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => (Some(300), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => (Some(1000), vec![]),
+        (SpotId::Menu__Kiengir_Map__Annuna_Upper, SpotId::Menu__Kiengir_Map__Apocalypse) => {
+            (Some(200), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Annuna_Upper, SpotId::Menu__Kiengir_Map__Ebih_Base_Camp) => {
+            (Some(666), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Annuna_Upper, SpotId::Menu__Kiengir_Map__Ebih_Observatory) => {
+            (Some(1400), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Annuna_Upper, SpotId::Menu__Kiengir_Map__Ebih_West_Lower) => {
+            (Some(1333), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Annuna_Upper, SpotId::Menu__Kiengir_Map__Ebih_West_Mid) => {
+            (Some(1266), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Annuna_Upper, SpotId::Menu__Kiengir_Map__Ebih_West_Upper) => {
+            (Some(1266), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Annuna_Upper, SpotId::Menu__Kiengir_Map__Giguna_Base) => {
+            (Some(1733), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Annuna_Upper, SpotId::Menu__Kiengir_Map__Giguna_Labyrinth) => {
+            (Some(1466), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Annuna_Upper, SpotId::Menu__Kiengir_Map__Giguna_Northeast) => {
+            (Some(1466), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Annuna_Upper, SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top) => {
+            (Some(1666), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Annuna_Upper, SpotId::Menu__Kiengir_Map__Giguna_Ruins_West) => {
+            (Some(1733), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Annuna_Upper, SpotId::Menu__Kiengir_Map__Giguna_Separator) => {
+            (Some(1400), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Annuna_Upper, SpotId::Menu__Kiengir_Map__Glacier_Revival) => {
+            (Some(900), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Annuna_Upper, SpotId::Menu__Kiengir_Map__Irikar_Beach_Save) => {
+            (Some(2266), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Annuna_Upper, SpotId::Menu__Kiengir_Map__Irikar_Hub) => {
+            (Some(1800), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Annuna_Upper, SpotId::Menu__Kiengir_Map__Irikar_Midwest) => {
+            (Some(2000), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Annuna_Upper, SpotId::Menu__Kiengir_Map__Uhrum_Center) => {
+            (Some(1000), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Annuna_Upper, SpotId::Menu__Kiengir_Map__Uhrum_East) => {
+            (Some(900), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Annuna_Upper, SpotId::Menu__Kiengir_Map__Uhrum_Emergence) => {
+            (Some(1066), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Annuna_Upper, SpotId::Menu__Kiengir_Map__Uhrum_West) => {
+            (Some(1333), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+        ) => (Some(400), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+        ) => (Some(400), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+        ) => (Some(733), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => (Some(100), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => (Some(500), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => (Some(600), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+        ) => (Some(300), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => (Some(700), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+        ) => (Some(300), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+        ) => (Some(733), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+        ) => (Some(1700), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+        ) => (Some(1400), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+        ) => (Some(1333), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+        ) => (Some(1333), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+        ) => (Some(1800), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+        ) => (Some(1533), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+        ) => (Some(1533), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+        ) => (Some(1733), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => (Some(1800), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+        ) => (Some(1466), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+        ) => (Some(1200), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => (Some(2333), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+        ) => (Some(1866), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+        ) => (Some(2066), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+        ) => (Some(1000), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+        ) => (Some(800), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+        ) => (Some(1133), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+        ) => (Some(1400), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+        ) => (Some(900), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+        ) => (Some(600), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+        ) => (Some(800), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => (Some(600), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => (Some(466), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => (Some(266), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+        ) => (Some(1000), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => (Some(700), vec![]),
+        (SpotId::Menu__Kiengir_Map__Annuna_West_Bridge, SpotId::Menu__Kiengir_Map__Apocalypse) => {
+            (Some(1000), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+        ) => (Some(1400), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+        ) => (Some(2400), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+        ) => (Some(1400), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+        ) => (Some(1700), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+        ) => (Some(2000), vec![]),
+        (SpotId::Menu__Kiengir_Map__Annuna_West_Bridge, SpotId::Menu__Kiengir_Map__Giguna_Base) => {
+            (Some(1533), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+        ) => (Some(1266), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+        ) => (Some(1700), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+        ) => (Some(2100), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => (Some(1800), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+        ) => (Some(1200), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+        ) => (Some(1900), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => (Some(2066), vec![]),
+        (SpotId::Menu__Kiengir_Map__Annuna_West_Bridge, SpotId::Menu__Kiengir_Map__Irikar_Hub) => {
+            (Some(1600), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+        ) => (Some(1800), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+        ) => (Some(733), vec![]),
+        (SpotId::Menu__Kiengir_Map__Annuna_West_Bridge, SpotId::Menu__Kiengir_Map__Uhrum_East) => {
+            (Some(533), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+        ) => (Some(866), vec![]),
+        (SpotId::Menu__Kiengir_Map__Annuna_West_Bridge, SpotId::Menu__Kiengir_Map__Uhrum_West) => {
+            (Some(1133), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Apocalypse, SpotId::Menu__Kiengir_Map__Amagi_East_Lake) => {
+            (Some(533), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Apocalypse, SpotId::Menu__Kiengir_Map__Amagi_Isolation) => {
+            (Some(533), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Apocalypse, SpotId::Menu__Kiengir_Map__Amagi_Main_Area) => {
+            (Some(866), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Apocalypse, SpotId::Menu__Kiengir_Map__Annuna_Center_Save) => {
+            (Some(400), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => (Some(800), vec![]),
+        (SpotId::Menu__Kiengir_Map__Apocalypse, SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match) => {
+            (Some(900), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Apocalypse, SpotId::Menu__Kiengir_Map__Annuna_Upper) => {
+            (Some(200), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => (Some(300), vec![]),
+        (SpotId::Menu__Kiengir_Map__Apocalypse, SpotId::Menu__Kiengir_Map__Annuna_West_Bridge) => {
+            (Some(1000), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Apocalypse, SpotId::Menu__Kiengir_Map__Ebih_Base_Camp) => {
+            (Some(866), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Apocalypse, SpotId::Menu__Kiengir_Map__Ebih_Observatory) => {
+            (Some(1400), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Apocalypse, SpotId::Menu__Kiengir_Map__Ebih_West_Lower) => {
+            (Some(1533), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Apocalypse, SpotId::Menu__Kiengir_Map__Ebih_West_Mid) => {
+            (Some(1466), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Apocalypse, SpotId::Menu__Kiengir_Map__Ebih_West_Upper) => {
+            (Some(1466), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Apocalypse, SpotId::Menu__Kiengir_Map__Giguna_Base) => {
+            (Some(1933), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Apocalypse, SpotId::Menu__Kiengir_Map__Giguna_Labyrinth) => {
+            (Some(1666), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Apocalypse, SpotId::Menu__Kiengir_Map__Giguna_Northeast) => {
+            (Some(1666), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Apocalypse, SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top) => {
+            (Some(1866), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Apocalypse, SpotId::Menu__Kiengir_Map__Giguna_Ruins_West) => {
+            (Some(1933), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Apocalypse, SpotId::Menu__Kiengir_Map__Giguna_Separator) => {
+            (Some(1600), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Apocalypse, SpotId::Menu__Kiengir_Map__Glacier_Revival) => {
+            (Some(900), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Apocalypse, SpotId::Menu__Kiengir_Map__Irikar_Beach_Save) => {
+            (Some(2466), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Apocalypse, SpotId::Menu__Kiengir_Map__Irikar_Hub) => {
+            (Some(2000), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Apocalypse, SpotId::Menu__Kiengir_Map__Irikar_Midwest) => {
+            (Some(2200), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Apocalypse, SpotId::Menu__Kiengir_Map__Uhrum_Center) => {
+            (Some(1133), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Apocalypse, SpotId::Menu__Kiengir_Map__Uhrum_East) => {
+            (Some(933), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Apocalypse, SpotId::Menu__Kiengir_Map__Uhrum_Emergence) => {
+            (Some(1266), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Apocalypse, SpotId::Menu__Kiengir_Map__Uhrum_West) => {
+            (Some(1533), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Ebih_Base_Camp, SpotId::Menu__Kiengir_Map__Amagi_East_Lake) => {
+            (Some(500), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Ebih_Base_Camp, SpotId::Menu__Kiengir_Map__Amagi_Isolation) => {
+            (Some(800), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Ebih_Base_Camp, SpotId::Menu__Kiengir_Map__Amagi_Main_Area) => {
+            (Some(600), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => (Some(800), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => (Some(1200), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => (Some(1300), vec![]),
+        (SpotId::Menu__Kiengir_Map__Ebih_Base_Camp, SpotId::Menu__Kiengir_Map__Annuna_Upper) => {
+            (Some(666), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => (Some(733), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => (Some(1400), vec![]),
+        (SpotId::Menu__Kiengir_Map__Ebih_Base_Camp, SpotId::Menu__Kiengir_Map__Apocalypse) => {
+            (Some(866), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+        ) => (Some(1000), vec![]),
+        (SpotId::Menu__Kiengir_Map__Ebih_Base_Camp, SpotId::Menu__Kiengir_Map__Ebih_West_Lower) => {
+            (Some(666), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Ebih_Base_Camp, SpotId::Menu__Kiengir_Map__Ebih_West_Mid) => {
+            (Some(600), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Ebih_Base_Camp, SpotId::Menu__Kiengir_Map__Ebih_West_Upper) => {
+            (Some(600), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Ebih_Base_Camp, SpotId::Menu__Kiengir_Map__Giguna_Base) => {
+            (Some(1066), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+        ) => (Some(900), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+        ) => (Some(800), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+        ) => (Some(1000), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => (Some(1066), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+        ) => (Some(1200), vec![]),
+        (SpotId::Menu__Kiengir_Map__Ebih_Base_Camp, SpotId::Menu__Kiengir_Map__Glacier_Revival) => {
+            (Some(800), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => (Some(1600), vec![]),
+        (SpotId::Menu__Kiengir_Map__Ebih_Base_Camp, SpotId::Menu__Kiengir_Map__Irikar_Hub) => {
+            (Some(1133), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Ebih_Base_Camp, SpotId::Menu__Kiengir_Map__Irikar_Midwest) => {
+            (Some(1333), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Ebih_Base_Camp, SpotId::Menu__Kiengir_Map__Uhrum_Center) => {
+            (Some(1400), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Ebih_Base_Camp, SpotId::Menu__Kiengir_Map__Uhrum_East) => {
+            (Some(1300), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Ebih_Base_Camp, SpotId::Menu__Kiengir_Map__Uhrum_Emergence) => {
+            (Some(900), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Ebih_Base_Camp, SpotId::Menu__Kiengir_Map__Uhrum_West) => {
+            (Some(1500), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+        ) => (Some(1500), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+        ) => (Some(1800), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+        ) => (Some(1600), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => (Some(1800), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => (Some(2200), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => (Some(2300), vec![]),
+        (SpotId::Menu__Kiengir_Map__Ebih_Observatory, SpotId::Menu__Kiengir_Map__Annuna_Upper) => {
+            (Some(1400), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => (Some(1700), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => (Some(2400), vec![]),
+        (SpotId::Menu__Kiengir_Map__Ebih_Observatory, SpotId::Menu__Kiengir_Map__Apocalypse) => {
+            (Some(1400), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+        ) => (Some(1000), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+        ) => (Some(1000), vec![]),
+        (SpotId::Menu__Kiengir_Map__Ebih_Observatory, SpotId::Menu__Kiengir_Map__Ebih_West_Mid) => {
+            (Some(700), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+        ) => (Some(400), vec![]),
+        (SpotId::Menu__Kiengir_Map__Ebih_Observatory, SpotId::Menu__Kiengir_Map__Giguna_Base) => {
+            (Some(1300), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+        ) => (Some(1900), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+        ) => (Some(700), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+        ) => (Some(466), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => (Some(600), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+        ) => (Some(2200), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+        ) => (Some(1333), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => (Some(2500), vec![]),
+        (SpotId::Menu__Kiengir_Map__Ebih_Observatory, SpotId::Menu__Kiengir_Map__Irikar_Hub) => {
+            (Some(2000), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+        ) => (Some(2200), vec![]),
+        (SpotId::Menu__Kiengir_Map__Ebih_Observatory, SpotId::Menu__Kiengir_Map__Uhrum_Center) => {
+            (Some(2400), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Ebih_Observatory, SpotId::Menu__Kiengir_Map__Uhrum_East) => {
+            (Some(2300), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+        ) => (Some(1900), vec![]),
+        (SpotId::Menu__Kiengir_Map__Ebih_Observatory, SpotId::Menu__Kiengir_Map__Uhrum_West) => {
+            (Some(2500), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+        ) => (Some(1000), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+        ) => (Some(1000), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+        ) => (Some(666), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => (Some(1333), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => (Some(1600), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => (Some(1300), vec![]),
+        (SpotId::Menu__Kiengir_Map__Ebih_West_Lower, SpotId::Menu__Kiengir_Map__Annuna_Upper) => {
+            (Some(1333), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => (Some(1400), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => (Some(1400), vec![]),
+        (SpotId::Menu__Kiengir_Map__Ebih_West_Lower, SpotId::Menu__Kiengir_Map__Apocalypse) => {
+            (Some(1533), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Ebih_West_Lower, SpotId::Menu__Kiengir_Map__Ebih_Base_Camp) => {
+            (Some(666), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+        ) => (Some(1000), vec![]),
+        (SpotId::Menu__Kiengir_Map__Ebih_West_Lower, SpotId::Menu__Kiengir_Map__Ebih_West_Mid) => {
+            (Some(300), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+        ) => (Some(600), vec![]),
+        (SpotId::Menu__Kiengir_Map__Ebih_West_Lower, SpotId::Menu__Kiengir_Map__Giguna_Base) => {
+            (Some(400), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+        ) => (Some(900), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+        ) => (Some(300), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+        ) => (Some(700), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => (Some(400), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+        ) => (Some(1200), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+        ) => (Some(1466), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => (Some(1500), vec![]),
+        (SpotId::Menu__Kiengir_Map__Ebih_West_Lower, SpotId::Menu__Kiengir_Map__Irikar_Hub) => {
+            (Some(1000), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Ebih_West_Lower, SpotId::Menu__Kiengir_Map__Irikar_Midwest) => {
+            (Some(1200), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Ebih_West_Lower, SpotId::Menu__Kiengir_Map__Uhrum_Center) => {
+            (Some(1400), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Ebih_West_Lower, SpotId::Menu__Kiengir_Map__Uhrum_East) => {
+            (Some(1300), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+        ) => (Some(900), vec![]),
+        (SpotId::Menu__Kiengir_Map__Ebih_West_Lower, SpotId::Menu__Kiengir_Map__Uhrum_West) => {
+            (Some(1500), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Ebih_West_Mid, SpotId::Menu__Kiengir_Map__Amagi_East_Lake) => {
+            (Some(933), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Ebih_West_Mid, SpotId::Menu__Kiengir_Map__Amagi_Isolation) => {
+            (Some(1100), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Ebih_West_Mid, SpotId::Menu__Kiengir_Map__Amagi_Main_Area) => {
+            (Some(900), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => (Some(1266), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => (Some(1533), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => (Some(1600), vec![]),
+        (SpotId::Menu__Kiengir_Map__Ebih_West_Mid, SpotId::Menu__Kiengir_Map__Annuna_Upper) => {
+            (Some(1266), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => (Some(1333), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => (Some(1700), vec![]),
+        (SpotId::Menu__Kiengir_Map__Ebih_West_Mid, SpotId::Menu__Kiengir_Map__Apocalypse) => {
+            (Some(1466), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Ebih_West_Mid, SpotId::Menu__Kiengir_Map__Ebih_Base_Camp) => {
+            (Some(600), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Ebih_West_Mid, SpotId::Menu__Kiengir_Map__Ebih_Observatory) => {
+            (Some(700), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Ebih_West_Mid, SpotId::Menu__Kiengir_Map__Ebih_West_Lower) => {
+            (Some(300), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Ebih_West_Mid, SpotId::Menu__Kiengir_Map__Ebih_West_Upper) => {
+            (Some(300), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Ebih_West_Mid, SpotId::Menu__Kiengir_Map__Giguna_Base) => {
+            (Some(600), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Ebih_West_Mid, SpotId::Menu__Kiengir_Map__Giguna_Labyrinth) => {
+            (Some(1200), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Ebih_West_Mid, SpotId::Menu__Kiengir_Map__Giguna_Northeast) => {
+            (Some(200), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Ebih_West_Mid, SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top) => {
+            (Some(400), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => (Some(466), vec![]),
+        (SpotId::Menu__Kiengir_Map__Ebih_West_Mid, SpotId::Menu__Kiengir_Map__Giguna_Separator) => {
+            (Some(1500), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Ebih_West_Mid, SpotId::Menu__Kiengir_Map__Glacier_Revival) => {
+            (Some(1400), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => (Some(1800), vec![]),
+        (SpotId::Menu__Kiengir_Map__Ebih_West_Mid, SpotId::Menu__Kiengir_Map__Irikar_Hub) => {
+            (Some(1300), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Ebih_West_Mid, SpotId::Menu__Kiengir_Map__Irikar_Midwest) => {
+            (Some(1500), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Ebih_West_Mid, SpotId::Menu__Kiengir_Map__Uhrum_Center) => {
+            (Some(1700), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Ebih_West_Mid, SpotId::Menu__Kiengir_Map__Uhrum_East) => {
+            (Some(1600), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Ebih_West_Mid, SpotId::Menu__Kiengir_Map__Uhrum_Emergence) => {
+            (Some(1200), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Ebih_West_Mid, SpotId::Menu__Kiengir_Map__Uhrum_West) => {
+            (Some(1800), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+        ) => (Some(1100), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+        ) => (Some(1400), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+        ) => (Some(1200), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => (Some(1400), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => (Some(1800), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => (Some(1900), vec![]),
+        (SpotId::Menu__Kiengir_Map__Ebih_West_Upper, SpotId::Menu__Kiengir_Map__Annuna_Upper) => {
+            (Some(1266), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => (Some(1333), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => (Some(2000), vec![]),
+        (SpotId::Menu__Kiengir_Map__Ebih_West_Upper, SpotId::Menu__Kiengir_Map__Apocalypse) => {
+            (Some(1466), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Ebih_West_Upper, SpotId::Menu__Kiengir_Map__Ebih_Base_Camp) => {
+            (Some(600), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+        ) => (Some(400), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+        ) => (Some(600), vec![]),
+        (SpotId::Menu__Kiengir_Map__Ebih_West_Upper, SpotId::Menu__Kiengir_Map__Ebih_West_Mid) => {
+            (Some(300), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Ebih_West_Upper, SpotId::Menu__Kiengir_Map__Giguna_Base) => {
+            (Some(900), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+        ) => (Some(1500), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+        ) => (Some(300), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+        ) => (Some(400), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => (Some(466), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+        ) => (Some(1800), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+        ) => (Some(1400), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => (Some(2100), vec![]),
+        (SpotId::Menu__Kiengir_Map__Ebih_West_Upper, SpotId::Menu__Kiengir_Map__Irikar_Hub) => {
+            (Some(1600), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Ebih_West_Upper, SpotId::Menu__Kiengir_Map__Irikar_Midwest) => {
+            (Some(1800), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Ebih_West_Upper, SpotId::Menu__Kiengir_Map__Uhrum_Center) => {
+            (Some(2000), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Ebih_West_Upper, SpotId::Menu__Kiengir_Map__Uhrum_East) => {
+            (Some(1900), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+        ) => (Some(1500), vec![]),
+        (SpotId::Menu__Kiengir_Map__Ebih_West_Upper, SpotId::Menu__Kiengir_Map__Uhrum_West) => {
+            (Some(2100), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Giguna_Base, SpotId::Menu__Kiengir_Map__Amagi_East_Lake) => {
+            (Some(1400), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Giguna_Base, SpotId::Menu__Kiengir_Map__Amagi_Isolation) => {
+            (Some(1400), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Giguna_Base, SpotId::Menu__Kiengir_Map__Amagi_Main_Area) => {
+            (Some(1066), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Giguna_Base, SpotId::Menu__Kiengir_Map__Annuna_Center_Save) => {
+            (Some(1733), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => (Some(2000), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => (Some(1266), vec![]),
+        (SpotId::Menu__Kiengir_Map__Giguna_Base, SpotId::Menu__Kiengir_Map__Annuna_Upper) => {
+            (Some(1733), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => (Some(1800), vec![]),
+        (SpotId::Menu__Kiengir_Map__Giguna_Base, SpotId::Menu__Kiengir_Map__Annuna_West_Bridge) => {
+            (Some(1533), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Giguna_Base, SpotId::Menu__Kiengir_Map__Apocalypse) => {
+            (Some(1933), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Giguna_Base, SpotId::Menu__Kiengir_Map__Ebih_Base_Camp) => {
+            (Some(1066), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Giguna_Base, SpotId::Menu__Kiengir_Map__Ebih_Observatory) => {
+            (Some(1300), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Giguna_Base, SpotId::Menu__Kiengir_Map__Ebih_West_Lower) => {
+            (Some(400), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Giguna_Base, SpotId::Menu__Kiengir_Map__Ebih_West_Mid) => {
+            (Some(600), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Giguna_Base, SpotId::Menu__Kiengir_Map__Ebih_West_Upper) => {
+            (Some(900), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Giguna_Base, SpotId::Menu__Kiengir_Map__Giguna_Labyrinth) => {
+            (Some(600), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Giguna_Base, SpotId::Menu__Kiengir_Map__Giguna_Northeast) => {
+            (Some(600), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Giguna_Base, SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top) => {
+            (Some(1000), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Giguna_Base, SpotId::Menu__Kiengir_Map__Giguna_Ruins_West) => {
+            (Some(700), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Giguna_Base, SpotId::Menu__Kiengir_Map__Giguna_Separator) => {
+            (Some(900), vec![])
+        }
         (SpotId::Menu__Kiengir_Map__Giguna_Base, SpotId::Menu__Kiengir_Map__Glacier_Revival) => {
             (Some(1866), vec![])
         }
+        (SpotId::Menu__Kiengir_Map__Giguna_Base, SpotId::Menu__Kiengir_Map__Irikar_Beach_Save) => {
+            (Some(1200), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Giguna_Base, SpotId::Menu__Kiengir_Map__Irikar_Hub) => {
+            (Some(700), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Giguna_Base, SpotId::Menu__Kiengir_Map__Irikar_Midwest) => {
+            (Some(900), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Giguna_Base, SpotId::Menu__Kiengir_Map__Uhrum_Center) => {
+            (Some(1100), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Giguna_Base, SpotId::Menu__Kiengir_Map__Uhrum_East) => {
+            (Some(1000), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Giguna_Base, SpotId::Menu__Kiengir_Map__Uhrum_Emergence) => {
+            (Some(666), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Giguna_Base, SpotId::Menu__Kiengir_Map__Uhrum_West) => {
+            (Some(1200), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+        ) => (Some(1133), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+        ) => (Some(1133), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+        ) => (Some(800), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => (Some(1466), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => (Some(1733), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => (Some(1000), vec![]),
+        (SpotId::Menu__Kiengir_Map__Giguna_Labyrinth, SpotId::Menu__Kiengir_Map__Annuna_Upper) => {
+            (Some(1466), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => (Some(1533), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => (Some(1266), vec![]),
+        (SpotId::Menu__Kiengir_Map__Giguna_Labyrinth, SpotId::Menu__Kiengir_Map__Apocalypse) => {
+            (Some(1666), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+        ) => (Some(900), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+        ) => (Some(1900), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+        ) => (Some(900), vec![]),
+        (SpotId::Menu__Kiengir_Map__Giguna_Labyrinth, SpotId::Menu__Kiengir_Map__Ebih_West_Mid) => {
+            (Some(1200), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+        ) => (Some(1500), vec![]),
+        (SpotId::Menu__Kiengir_Map__Giguna_Labyrinth, SpotId::Menu__Kiengir_Map__Giguna_Base) => {
+            (Some(600), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+        ) => (Some(1200), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+        ) => (Some(1600), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => (Some(1300), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+        ) => (Some(300), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+        ) => (Some(1600), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => (Some(800), vec![]),
+        (SpotId::Menu__Kiengir_Map__Giguna_Labyrinth, SpotId::Menu__Kiengir_Map__Irikar_Hub) => {
+            (Some(333), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+        ) => (Some(533), vec![]),
+        (SpotId::Menu__Kiengir_Map__Giguna_Labyrinth, SpotId::Menu__Kiengir_Map__Uhrum_Center) => {
+            (Some(533), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Giguna_Labyrinth, SpotId::Menu__Kiengir_Map__Uhrum_East) => {
+            (Some(733), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+        ) => (Some(400), vec![]),
+        (SpotId::Menu__Kiengir_Map__Giguna_Labyrinth, SpotId::Menu__Kiengir_Map__Uhrum_West) => {
+            (Some(600), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+        ) => (Some(1133), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+        ) => (Some(1133), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+        ) => (Some(900), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => (Some(1466), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => (Some(1733), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => (Some(1600), vec![]),
+        (SpotId::Menu__Kiengir_Map__Giguna_Northeast, SpotId::Menu__Kiengir_Map__Annuna_Upper) => {
+            (Some(1466), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => (Some(1533), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => (Some(1700), vec![]),
+        (SpotId::Menu__Kiengir_Map__Giguna_Northeast, SpotId::Menu__Kiengir_Map__Apocalypse) => {
+            (Some(1666), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+        ) => (Some(800), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+        ) => (Some(700), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+        ) => (Some(300), vec![]),
+        (SpotId::Menu__Kiengir_Map__Giguna_Northeast, SpotId::Menu__Kiengir_Map__Ebih_West_Mid) => {
+            (Some(200), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+        ) => (Some(300), vec![]),
+        (SpotId::Menu__Kiengir_Map__Giguna_Northeast, SpotId::Menu__Kiengir_Map__Giguna_Base) => {
+            (Some(600), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+        ) => (Some(1200), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+        ) => (Some(400), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => (Some(266), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+        ) => (Some(1500), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+        ) => (Some(1600), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => (Some(1800), vec![]),
+        (SpotId::Menu__Kiengir_Map__Giguna_Northeast, SpotId::Menu__Kiengir_Map__Irikar_Hub) => {
+            (Some(1300), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+        ) => (Some(1500), vec![]),
+        (SpotId::Menu__Kiengir_Map__Giguna_Northeast, SpotId::Menu__Kiengir_Map__Uhrum_Center) => {
+            (Some(1700), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Giguna_Northeast, SpotId::Menu__Kiengir_Map__Uhrum_East) => {
+            (Some(1600), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+        ) => (Some(1200), vec![]),
+        (SpotId::Menu__Kiengir_Map__Giguna_Northeast, SpotId::Menu__Kiengir_Map__Uhrum_West) => {
+            (Some(1800), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+        ) => (Some(1333), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+        ) => (Some(1500), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+        ) => (Some(1300), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => (Some(1666), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => (Some(1933), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => (Some(2000), vec![]),
+        (SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top, SpotId::Menu__Kiengir_Map__Annuna_Upper) => {
+            (Some(1666), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => (Some(1733), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => (Some(2100), vec![]),
+        (SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top, SpotId::Menu__Kiengir_Map__Apocalypse) => {
+            (Some(1866), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+        ) => (Some(1000), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+        ) => (Some(466), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+        ) => (Some(700), vec![]),
+        (SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top, SpotId::Menu__Kiengir_Map__Ebih_West_Mid) => {
+            (Some(400), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+        ) => (Some(400), vec![]),
+        (SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top, SpotId::Menu__Kiengir_Map__Giguna_Base) => {
+            (Some(1000), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+        ) => (Some(1600), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+        ) => (Some(400), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => (Some(300), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+        ) => (Some(1900), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+        ) => (Some(1800), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => (Some(2200), vec![]),
+        (SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top, SpotId::Menu__Kiengir_Map__Irikar_Hub) => {
+            (Some(1700), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+        ) => (Some(1900), vec![]),
+        (SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top, SpotId::Menu__Kiengir_Map__Uhrum_Center) => {
+            (Some(2100), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top, SpotId::Menu__Kiengir_Map__Uhrum_East) => {
+            (Some(2000), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+        ) => (Some(1600), vec![]),
+        (SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top, SpotId::Menu__Kiengir_Map__Uhrum_West) => {
+            (Some(2200), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+        ) => (Some(1400), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+        ) => (Some(1400), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+        ) => (Some(1066), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => (Some(1733), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => (Some(2000), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => (Some(1700), vec![]),
+        (SpotId::Menu__Kiengir_Map__Giguna_Ruins_West, SpotId::Menu__Kiengir_Map__Annuna_Upper) => {
+            (Some(1733), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => (Some(1800), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => (Some(1800), vec![]),
+        (SpotId::Menu__Kiengir_Map__Giguna_Ruins_West, SpotId::Menu__Kiengir_Map__Apocalypse) => {
+            (Some(1933), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+        ) => (Some(1066), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+        ) => (Some(600), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+        ) => (Some(400), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+        ) => (Some(466), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+        ) => (Some(466), vec![]),
+        (SpotId::Menu__Kiengir_Map__Giguna_Ruins_West, SpotId::Menu__Kiengir_Map__Giguna_Base) => {
+            (Some(700), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+        ) => (Some(1300), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+        ) => (Some(266), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+        ) => (Some(300), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+        ) => (Some(1600), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+        ) => (Some(1866), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => (Some(1900), vec![]),
+        (SpotId::Menu__Kiengir_Map__Giguna_Ruins_West, SpotId::Menu__Kiengir_Map__Irikar_Hub) => {
+            (Some(1400), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+        ) => (Some(1600), vec![]),
+        (SpotId::Menu__Kiengir_Map__Giguna_Ruins_West, SpotId::Menu__Kiengir_Map__Uhrum_Center) => {
+            (Some(1800), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Giguna_Ruins_West, SpotId::Menu__Kiengir_Map__Uhrum_East) => {
+            (Some(1700), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+        ) => (Some(1300), vec![]),
+        (SpotId::Menu__Kiengir_Map__Giguna_Ruins_West, SpotId::Menu__Kiengir_Map__Uhrum_West) => {
+            (Some(1900), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+        ) => (Some(1066), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+        ) => (Some(1066), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+        ) => (Some(733), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => (Some(1400), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => (Some(1666), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => (Some(933), vec![]),
+        (SpotId::Menu__Kiengir_Map__Giguna_Separator, SpotId::Menu__Kiengir_Map__Annuna_Upper) => {
+            (Some(1400), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => (Some(1466), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => (Some(1200), vec![]),
+        (SpotId::Menu__Kiengir_Map__Giguna_Separator, SpotId::Menu__Kiengir_Map__Apocalypse) => {
+            (Some(1600), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+        ) => (Some(1200), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+        ) => (Some(2200), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+        ) => (Some(1200), vec![]),
+        (SpotId::Menu__Kiengir_Map__Giguna_Separator, SpotId::Menu__Kiengir_Map__Ebih_West_Mid) => {
+            (Some(1500), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+        ) => (Some(1800), vec![]),
+        (SpotId::Menu__Kiengir_Map__Giguna_Separator, SpotId::Menu__Kiengir_Map__Giguna_Base) => {
+            (Some(900), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+        ) => (Some(300), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+        ) => (Some(1500), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+        ) => (Some(1900), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => (Some(1600), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+        ) => (Some(1700), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => (Some(866), vec![]),
+        (SpotId::Menu__Kiengir_Map__Giguna_Separator, SpotId::Menu__Kiengir_Map__Irikar_Hub) => {
+            (Some(400), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+        ) => (Some(600), vec![]),
+        (SpotId::Menu__Kiengir_Map__Giguna_Separator, SpotId::Menu__Kiengir_Map__Uhrum_Center) => {
+            (Some(466), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Giguna_Separator, SpotId::Menu__Kiengir_Map__Uhrum_East) => {
+            (Some(666), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+        ) => (Some(333), vec![]),
+        (SpotId::Menu__Kiengir_Map__Giguna_Separator, SpotId::Menu__Kiengir_Map__Uhrum_West) => {
+            (Some(300), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+        ) => (Some(1000), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+        ) => (Some(1300), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+        ) => (Some(1100), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => (Some(1300), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => (Some(1700), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => (Some(1800), vec![]),
+        (SpotId::Menu__Kiengir_Map__Glacier_Revival, SpotId::Menu__Kiengir_Map__Annuna_Upper) => {
+            (Some(900), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => (Some(1200), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => (Some(1900), vec![]),
+        (SpotId::Menu__Kiengir_Map__Glacier_Revival, SpotId::Menu__Kiengir_Map__Apocalypse) => {
+            (Some(900), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Glacier_Revival, SpotId::Menu__Kiengir_Map__Ebih_Base_Camp) => {
+            (Some(800), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+        ) => (Some(1333), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+        ) => (Some(1466), vec![]),
+        (SpotId::Menu__Kiengir_Map__Glacier_Revival, SpotId::Menu__Kiengir_Map__Ebih_West_Mid) => {
+            (Some(1400), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+        ) => (Some(1400), vec![]),
         (SpotId::Menu__Kiengir_Map__Glacier_Revival, SpotId::Menu__Kiengir_Map__Giguna_Base) => {
             (Some(1866), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+        ) => (Some(1600), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+        ) => (Some(1600), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+        ) => (Some(1800), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => (Some(1866), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+        ) => (Some(1700), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => (Some(2400), vec![]),
+        (SpotId::Menu__Kiengir_Map__Glacier_Revival, SpotId::Menu__Kiengir_Map__Irikar_Hub) => {
+            (Some(1933), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Glacier_Revival, SpotId::Menu__Kiengir_Map__Irikar_Midwest) => {
+            (Some(2133), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Glacier_Revival, SpotId::Menu__Kiengir_Map__Uhrum_Center) => {
+            (Some(1900), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Glacier_Revival, SpotId::Menu__Kiengir_Map__Uhrum_East) => {
+            (Some(1800), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+        ) => (Some(1400), vec![]),
+        (SpotId::Menu__Kiengir_Map__Glacier_Revival, SpotId::Menu__Kiengir_Map__Uhrum_West) => {
+            (Some(2000), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+        ) => (Some(1933), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+        ) => (Some(1933), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+        ) => (Some(1600), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => (Some(2266), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => (Some(2533), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => (Some(1800), vec![]),
+        (SpotId::Menu__Kiengir_Map__Irikar_Beach_Save, SpotId::Menu__Kiengir_Map__Annuna_Upper) => {
+            (Some(2266), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => (Some(2333), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => (Some(2066), vec![]),
+        (SpotId::Menu__Kiengir_Map__Irikar_Beach_Save, SpotId::Menu__Kiengir_Map__Apocalypse) => {
+            (Some(2466), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+        ) => (Some(1600), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+        ) => (Some(2500), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+        ) => (Some(1500), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+        ) => (Some(1800), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+        ) => (Some(2100), vec![]),
+        (SpotId::Menu__Kiengir_Map__Irikar_Beach_Save, SpotId::Menu__Kiengir_Map__Giguna_Base) => {
+            (Some(1200), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+        ) => (Some(800), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+        ) => (Some(1800), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+        ) => (Some(2200), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => (Some(1900), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+        ) => (Some(866), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+        ) => (Some(2400), vec![]),
+        (SpotId::Menu__Kiengir_Map__Irikar_Beach_Save, SpotId::Menu__Kiengir_Map__Irikar_Hub) => {
+            (Some(500), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+        ) => (Some(300), vec![]),
+        (SpotId::Menu__Kiengir_Map__Irikar_Beach_Save, SpotId::Menu__Kiengir_Map__Uhrum_Center) => {
+            (Some(1333), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Irikar_Beach_Save, SpotId::Menu__Kiengir_Map__Uhrum_East) => {
+            (Some(1533), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+        ) => (Some(1200), vec![]),
+        (SpotId::Menu__Kiengir_Map__Irikar_Beach_Save, SpotId::Menu__Kiengir_Map__Uhrum_West) => {
+            (Some(933), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Irikar_Hub, SpotId::Menu__Kiengir_Map__Amagi_East_Lake) => {
+            (Some(1466), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Irikar_Hub, SpotId::Menu__Kiengir_Map__Amagi_Isolation) => {
+            (Some(1466), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Irikar_Hub, SpotId::Menu__Kiengir_Map__Amagi_Main_Area) => {
+            (Some(1133), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Irikar_Hub, SpotId::Menu__Kiengir_Map__Annuna_Center_Save) => {
+            (Some(1800), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => (Some(2066), vec![]),
+        (SpotId::Menu__Kiengir_Map__Irikar_Hub, SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match) => {
+            (Some(1333), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Irikar_Hub, SpotId::Menu__Kiengir_Map__Annuna_Upper) => {
+            (Some(1800), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => (Some(1866), vec![]),
+        (SpotId::Menu__Kiengir_Map__Irikar_Hub, SpotId::Menu__Kiengir_Map__Annuna_West_Bridge) => {
+            (Some(1600), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Irikar_Hub, SpotId::Menu__Kiengir_Map__Apocalypse) => {
+            (Some(2000), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Irikar_Hub, SpotId::Menu__Kiengir_Map__Ebih_Base_Camp) => {
+            (Some(1133), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Irikar_Hub, SpotId::Menu__Kiengir_Map__Ebih_Observatory) => {
+            (Some(2000), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Irikar_Hub, SpotId::Menu__Kiengir_Map__Ebih_West_Lower) => {
+            (Some(1000), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Irikar_Hub, SpotId::Menu__Kiengir_Map__Ebih_West_Mid) => {
+            (Some(1300), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Irikar_Hub, SpotId::Menu__Kiengir_Map__Ebih_West_Upper) => {
+            (Some(1600), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Irikar_Hub, SpotId::Menu__Kiengir_Map__Giguna_Base) => {
+            (Some(700), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Irikar_Hub, SpotId::Menu__Kiengir_Map__Giguna_Labyrinth) => {
+            (Some(333), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Irikar_Hub, SpotId::Menu__Kiengir_Map__Giguna_Northeast) => {
+            (Some(1300), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Irikar_Hub, SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top) => {
+            (Some(1700), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Irikar_Hub, SpotId::Menu__Kiengir_Map__Giguna_Ruins_West) => {
+            (Some(1400), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Irikar_Hub, SpotId::Menu__Kiengir_Map__Giguna_Separator) => {
+            (Some(400), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Irikar_Hub, SpotId::Menu__Kiengir_Map__Glacier_Revival) => {
+            (Some(1933), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Irikar_Hub, SpotId::Menu__Kiengir_Map__Irikar_Beach_Save) => {
+            (Some(500), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Irikar_Hub, SpotId::Menu__Kiengir_Map__Irikar_Midwest) => {
+            (Some(200), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Irikar_Hub, SpotId::Menu__Kiengir_Map__Uhrum_Center) => {
+            (Some(866), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Irikar_Hub, SpotId::Menu__Kiengir_Map__Uhrum_East) => {
+            (Some(1066), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Irikar_Hub, SpotId::Menu__Kiengir_Map__Uhrum_Emergence) => {
+            (Some(733), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Irikar_Hub, SpotId::Menu__Kiengir_Map__Uhrum_West) => {
+            (Some(500), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Irikar_Midwest, SpotId::Menu__Kiengir_Map__Amagi_East_Lake) => {
+            (Some(1666), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Irikar_Midwest, SpotId::Menu__Kiengir_Map__Amagi_Isolation) => {
+            (Some(1666), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Irikar_Midwest, SpotId::Menu__Kiengir_Map__Amagi_Main_Area) => {
+            (Some(1333), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => (Some(2000), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => (Some(2266), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => (Some(1533), vec![]),
+        (SpotId::Menu__Kiengir_Map__Irikar_Midwest, SpotId::Menu__Kiengir_Map__Annuna_Upper) => {
+            (Some(2000), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => (Some(2066), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => (Some(1800), vec![]),
+        (SpotId::Menu__Kiengir_Map__Irikar_Midwest, SpotId::Menu__Kiengir_Map__Apocalypse) => {
+            (Some(2200), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Irikar_Midwest, SpotId::Menu__Kiengir_Map__Ebih_Base_Camp) => {
+            (Some(1333), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+        ) => (Some(2200), vec![]),
+        (SpotId::Menu__Kiengir_Map__Irikar_Midwest, SpotId::Menu__Kiengir_Map__Ebih_West_Lower) => {
+            (Some(1200), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Irikar_Midwest, SpotId::Menu__Kiengir_Map__Ebih_West_Mid) => {
+            (Some(1500), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Irikar_Midwest, SpotId::Menu__Kiengir_Map__Ebih_West_Upper) => {
+            (Some(1800), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Irikar_Midwest, SpotId::Menu__Kiengir_Map__Giguna_Base) => {
+            (Some(900), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+        ) => (Some(533), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+        ) => (Some(1500), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+        ) => (Some(1900), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => (Some(1600), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+        ) => (Some(600), vec![]),
+        (SpotId::Menu__Kiengir_Map__Irikar_Midwest, SpotId::Menu__Kiengir_Map__Glacier_Revival) => {
+            (Some(2133), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => (Some(300), vec![]),
+        (SpotId::Menu__Kiengir_Map__Irikar_Midwest, SpotId::Menu__Kiengir_Map__Irikar_Hub) => {
+            (Some(200), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Irikar_Midwest, SpotId::Menu__Kiengir_Map__Uhrum_Center) => {
+            (Some(1066), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Irikar_Midwest, SpotId::Menu__Kiengir_Map__Uhrum_East) => {
+            (Some(1266), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Irikar_Midwest, SpotId::Menu__Kiengir_Map__Uhrum_Emergence) => {
+            (Some(933), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Irikar_Midwest, SpotId::Menu__Kiengir_Map__Uhrum_West) => {
+            (Some(666), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_Center, SpotId::Menu__Kiengir_Map__Amagi_East_Lake) => {
+            (Some(900), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_Center, SpotId::Menu__Kiengir_Map__Amagi_Isolation) => {
+            (Some(600), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_Center, SpotId::Menu__Kiengir_Map__Amagi_Main_Area) => {
+            (Some(800), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => (Some(933), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => (Some(1200), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => (Some(466), vec![]),
+        (SpotId::Menu__Kiengir_Map__Uhrum_Center, SpotId::Menu__Kiengir_Map__Annuna_Upper) => {
+            (Some(1000), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => (Some(1000), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => (Some(733), vec![]),
+        (SpotId::Menu__Kiengir_Map__Uhrum_Center, SpotId::Menu__Kiengir_Map__Apocalypse) => {
+            (Some(1133), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_Center, SpotId::Menu__Kiengir_Map__Ebih_Base_Camp) => {
+            (Some(1400), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_Center, SpotId::Menu__Kiengir_Map__Ebih_Observatory) => {
+            (Some(2400), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_Center, SpotId::Menu__Kiengir_Map__Ebih_West_Lower) => {
+            (Some(1400), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_Center, SpotId::Menu__Kiengir_Map__Ebih_West_Mid) => {
+            (Some(1700), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_Center, SpotId::Menu__Kiengir_Map__Ebih_West_Upper) => {
+            (Some(2000), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_Center, SpotId::Menu__Kiengir_Map__Giguna_Base) => {
+            (Some(1100), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_Center, SpotId::Menu__Kiengir_Map__Giguna_Labyrinth) => {
+            (Some(533), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_Center, SpotId::Menu__Kiengir_Map__Giguna_Northeast) => {
+            (Some(1700), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_Center, SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top) => {
+            (Some(2100), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_Center, SpotId::Menu__Kiengir_Map__Giguna_Ruins_West) => {
+            (Some(1800), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_Center, SpotId::Menu__Kiengir_Map__Giguna_Separator) => {
+            (Some(466), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_Center, SpotId::Menu__Kiengir_Map__Glacier_Revival) => {
+            (Some(1900), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_Center, SpotId::Menu__Kiengir_Map__Irikar_Beach_Save) => {
+            (Some(1333), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_Center, SpotId::Menu__Kiengir_Map__Irikar_Hub) => {
+            (Some(866), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_Center, SpotId::Menu__Kiengir_Map__Irikar_Midwest) => {
+            (Some(1066), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_Center, SpotId::Menu__Kiengir_Map__Uhrum_East) => {
+            (Some(200), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_Center, SpotId::Menu__Kiengir_Map__Uhrum_Emergence) => {
+            (Some(500), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_Center, SpotId::Menu__Kiengir_Map__Uhrum_West) => {
+            (Some(400), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_East, SpotId::Menu__Kiengir_Map__Amagi_East_Lake) => {
+            (Some(800), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_East, SpotId::Menu__Kiengir_Map__Amagi_Isolation) => {
+            (Some(500), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_East, SpotId::Menu__Kiengir_Map__Amagi_Main_Area) => {
+            (Some(700), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_East, SpotId::Menu__Kiengir_Map__Annuna_Center_Save) => {
+            (Some(733), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => (Some(1000), vec![]),
+        (SpotId::Menu__Kiengir_Map__Uhrum_East, SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match) => {
+            (Some(266), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_East, SpotId::Menu__Kiengir_Map__Annuna_Upper) => {
+            (Some(900), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => (Some(800), vec![]),
+        (SpotId::Menu__Kiengir_Map__Uhrum_East, SpotId::Menu__Kiengir_Map__Annuna_West_Bridge) => {
+            (Some(533), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_East, SpotId::Menu__Kiengir_Map__Apocalypse) => {
+            (Some(933), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_East, SpotId::Menu__Kiengir_Map__Ebih_Base_Camp) => {
+            (Some(1300), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_East, SpotId::Menu__Kiengir_Map__Ebih_Observatory) => {
+            (Some(2300), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_East, SpotId::Menu__Kiengir_Map__Ebih_West_Lower) => {
+            (Some(1300), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_East, SpotId::Menu__Kiengir_Map__Ebih_West_Mid) => {
+            (Some(1600), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_East, SpotId::Menu__Kiengir_Map__Ebih_West_Upper) => {
+            (Some(1900), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_East, SpotId::Menu__Kiengir_Map__Giguna_Base) => {
+            (Some(1000), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_East, SpotId::Menu__Kiengir_Map__Giguna_Labyrinth) => {
+            (Some(733), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_East, SpotId::Menu__Kiengir_Map__Giguna_Northeast) => {
+            (Some(1600), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_East, SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top) => {
+            (Some(2000), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_East, SpotId::Menu__Kiengir_Map__Giguna_Ruins_West) => {
+            (Some(1700), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_East, SpotId::Menu__Kiengir_Map__Giguna_Separator) => {
+            (Some(666), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_East, SpotId::Menu__Kiengir_Map__Glacier_Revival) => {
+            (Some(1800), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_East, SpotId::Menu__Kiengir_Map__Irikar_Beach_Save) => {
+            (Some(1533), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_East, SpotId::Menu__Kiengir_Map__Irikar_Hub) => {
+            (Some(1066), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_East, SpotId::Menu__Kiengir_Map__Irikar_Midwest) => {
+            (Some(1266), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_East, SpotId::Menu__Kiengir_Map__Uhrum_Center) => {
+            (Some(200), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_East, SpotId::Menu__Kiengir_Map__Uhrum_Emergence) => {
+            (Some(400), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_East, SpotId::Menu__Kiengir_Map__Uhrum_West) => {
+            (Some(600), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+        ) => (Some(733), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+        ) => (Some(733), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+        ) => (Some(400), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => (Some(1066), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => (Some(1333), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => (Some(600), vec![]),
+        (SpotId::Menu__Kiengir_Map__Uhrum_Emergence, SpotId::Menu__Kiengir_Map__Annuna_Upper) => {
+            (Some(1066), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => (Some(1133), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => (Some(866), vec![]),
+        (SpotId::Menu__Kiengir_Map__Uhrum_Emergence, SpotId::Menu__Kiengir_Map__Apocalypse) => {
+            (Some(1266), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_Emergence, SpotId::Menu__Kiengir_Map__Ebih_Base_Camp) => {
+            (Some(900), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+        ) => (Some(1900), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+        ) => (Some(900), vec![]),
+        (SpotId::Menu__Kiengir_Map__Uhrum_Emergence, SpotId::Menu__Kiengir_Map__Ebih_West_Mid) => {
+            (Some(1200), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+        ) => (Some(1500), vec![]),
+        (SpotId::Menu__Kiengir_Map__Uhrum_Emergence, SpotId::Menu__Kiengir_Map__Giguna_Base) => {
+            (Some(666), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+        ) => (Some(400), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+        ) => (Some(1200), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+        ) => (Some(1600), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => (Some(1300), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+        ) => (Some(333), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+        ) => (Some(1400), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => (Some(1200), vec![]),
+        (SpotId::Menu__Kiengir_Map__Uhrum_Emergence, SpotId::Menu__Kiengir_Map__Irikar_Hub) => {
+            (Some(733), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_Emergence, SpotId::Menu__Kiengir_Map__Irikar_Midwest) => {
+            (Some(933), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_Emergence, SpotId::Menu__Kiengir_Map__Uhrum_Center) => {
+            (Some(500), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_Emergence, SpotId::Menu__Kiengir_Map__Uhrum_East) => {
+            (Some(400), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_Emergence, SpotId::Menu__Kiengir_Map__Uhrum_West) => {
+            (Some(600), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_West, SpotId::Menu__Kiengir_Map__Amagi_East_Lake) => {
+            (Some(1000), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_West, SpotId::Menu__Kiengir_Map__Amagi_Isolation) => {
+            (Some(1000), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_West, SpotId::Menu__Kiengir_Map__Amagi_Main_Area) => {
+            (Some(900), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_West, SpotId::Menu__Kiengir_Map__Annuna_Center_Save) => {
+            (Some(1333), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => (Some(1600), vec![]),
+        (SpotId::Menu__Kiengir_Map__Uhrum_West, SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match) => {
+            (Some(866), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_West, SpotId::Menu__Kiengir_Map__Annuna_Upper) => {
+            (Some(1333), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => (Some(1400), vec![]),
+        (SpotId::Menu__Kiengir_Map__Uhrum_West, SpotId::Menu__Kiengir_Map__Annuna_West_Bridge) => {
+            (Some(1133), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_West, SpotId::Menu__Kiengir_Map__Apocalypse) => {
+            (Some(1533), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_West, SpotId::Menu__Kiengir_Map__Ebih_Base_Camp) => {
+            (Some(1500), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_West, SpotId::Menu__Kiengir_Map__Ebih_Observatory) => {
+            (Some(2500), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_West, SpotId::Menu__Kiengir_Map__Ebih_West_Lower) => {
+            (Some(1500), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_West, SpotId::Menu__Kiengir_Map__Ebih_West_Mid) => {
+            (Some(1800), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_West, SpotId::Menu__Kiengir_Map__Ebih_West_Upper) => {
+            (Some(2100), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_West, SpotId::Menu__Kiengir_Map__Giguna_Base) => {
+            (Some(1200), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_West, SpotId::Menu__Kiengir_Map__Giguna_Labyrinth) => {
+            (Some(600), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_West, SpotId::Menu__Kiengir_Map__Giguna_Northeast) => {
+            (Some(1800), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_West, SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top) => {
+            (Some(2200), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_West, SpotId::Menu__Kiengir_Map__Giguna_Ruins_West) => {
+            (Some(1900), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_West, SpotId::Menu__Kiengir_Map__Giguna_Separator) => {
+            (Some(300), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_West, SpotId::Menu__Kiengir_Map__Glacier_Revival) => {
+            (Some(2000), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_West, SpotId::Menu__Kiengir_Map__Irikar_Beach_Save) => {
+            (Some(933), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_West, SpotId::Menu__Kiengir_Map__Irikar_Hub) => {
+            (Some(500), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_West, SpotId::Menu__Kiengir_Map__Irikar_Midwest) => {
+            (Some(666), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_West, SpotId::Menu__Kiengir_Map__Uhrum_Center) => {
+            (Some(400), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_West, SpotId::Menu__Kiengir_Map__Uhrum_East) => {
+            (Some(600), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Uhrum_West, SpotId::Menu__Kiengir_Map__Uhrum_Emergence) => {
+            (Some(600), vec![])
         }
         (
             SpotId::Uhrum__Annuna_Corridor__Between_Two_Flowers,
