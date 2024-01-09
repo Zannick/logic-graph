@@ -63,7 +63,25 @@ impl world::Accessible for Location {
         }
     }
     fn base_time(&self) -> u32 { self.time }
-    fn time(&self, ctx: &Context, world: &World) -> u32 { self.time }
+    fn time(&self, ctx: &Context, world: &World) -> u32 {
+        self.time
+            + match self.id {
+%% for loc in gl.locations()|sort(attribute='id')
+%% if loc.penalties
+                LocationId::{{ loc.id }} => {
+%% for pen in loc.penalties
+                    {% if not loop.first -%} } else {% endif %}if rules::access_{{ pen.access_id }}(ctx, world) {
+                        {{ (pen.add * 1000)|int }}
+%% endfor
+                    } else {
+                        0
+                    }
+                }
+%% endif
+%% endfor
+            _ => 0,
+        }
+    }
     fn price(&self) -> &Currency { &self.price }
 }
 
@@ -99,7 +117,25 @@ impl world::Accessible for Exit {
         }
     }
     fn base_time(&self) -> u32 { self.time }
-    fn time(&self, ctx: &Context, world: &World) -> u32 { self.time }
+    fn time(&self, ctx: &Context, world: &World) -> u32 {
+        self.time
+            + match self.id {
+%% for ex in gl.exits()|sort(attribute='id')
+%% if ex.penalties
+                ExitId::{{ ex.id }} => {
+%% for pen in ex.penalties
+                    {% if not loop.first -%} } else {% endif %}if rules::access_{{ pen.access_id }}(ctx, world) {
+                        {{ (pen.add * 1000)|int }}
+%% endfor
+                    } else {
+                        0
+                    }
+                }
+%% endif
+%% endfor
+            _ => 0,
+        }
+    }
     fn price(&self) -> &Currency { &self.price }
 }
 
@@ -144,7 +180,25 @@ impl world::Accessible for Action {
         }
     }
     fn base_time(&self) -> u32 { self.time }
-    fn time(&self, ctx: &Context, world: &World) -> u32 { self.time }
+    fn time(&self, ctx: &Context, world: &World) -> u32 { 
+        self.time
+            + match self.id {
+%% for act in gl.actions()|sort(attribute='id')
+%% if act.penalties
+                ActionId::{{ act.id }} => {
+%% for pen in act.penalties
+                    {% if not loop.first -%} } else {% endif %}if rules::access_{{ pen.access_id }}(ctx, world) {
+                        {{ (pen.add * 1000)|int }}
+%% endfor
+                    } else {
+                        0
+                    }
+                }
+%% endif
+%% endfor
+            _ => 0,
+        }
+    }
     fn price(&self) -> &Currency { &self.price }
 }
 impl world::Action for Action {
