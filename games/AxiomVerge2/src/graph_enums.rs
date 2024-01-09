@@ -1784,6 +1784,7 @@ pub enum SpotId {
     Menu__Kiengir_Map__Annuna_Vertical_Room,
     Menu__Kiengir_Map__Annuna_West_Bridge,
     Menu__Kiengir_Map__Apocalypse,
+    Menu__Kiengir_Map__Breach_Sight,
     Menu__Kiengir_Map__Ebih_Base_Camp,
     Menu__Kiengir_Map__Ebih_Observatory,
     Menu__Kiengir_Map__Ebih_West_Lower,
@@ -1796,9 +1797,11 @@ pub enum SpotId {
     Menu__Kiengir_Map__Giguna_Ruins_West,
     Menu__Kiengir_Map__Giguna_Separator,
     Menu__Kiengir_Map__Glacier_Revival,
+    Menu__Kiengir_Map__Infect,
     Menu__Kiengir_Map__Irikar_Beach_Save,
     Menu__Kiengir_Map__Irikar_Hub,
     Menu__Kiengir_Map__Irikar_Midwest,
+    Menu__Kiengir_Map__Remote_Drone,
     Menu__Kiengir_Map__Uhrum_Center,
     Menu__Kiengir_Map__Uhrum_East,
     Menu__Kiengir_Map__Uhrum_Emergence,
@@ -4971,6 +4974,9 @@ impl fmt::Display for SpotId {
             SpotId::Menu__Kiengir_Map__Apocalypse => {
                 write!(f, "{}", "Menu > Kiengir Map > Apocalypse")
             }
+            SpotId::Menu__Kiengir_Map__Breach_Sight => {
+                write!(f, "{}", "Menu > Kiengir Map > Breach Sight")
+            }
             SpotId::Menu__Kiengir_Map__Ebih_Base_Camp => {
                 write!(f, "{}", "Menu > Kiengir Map > Ebih Base Camp")
             }
@@ -5007,6 +5013,7 @@ impl fmt::Display for SpotId {
             SpotId::Menu__Kiengir_Map__Glacier_Revival => {
                 write!(f, "{}", "Menu > Kiengir Map > Glacier Revival")
             }
+            SpotId::Menu__Kiengir_Map__Infect => write!(f, "{}", "Menu > Kiengir Map > Infect"),
             SpotId::Menu__Kiengir_Map__Irikar_Beach_Save => {
                 write!(f, "{}", "Menu > Kiengir Map > Irikar Beach Save")
             }
@@ -5015,6 +5022,9 @@ impl fmt::Display for SpotId {
             }
             SpotId::Menu__Kiengir_Map__Irikar_Midwest => {
                 write!(f, "{}", "Menu > Kiengir Map > Irikar Midwest")
+            }
+            SpotId::Menu__Kiengir_Map__Remote_Drone => {
+                write!(f, "{}", "Menu > Kiengir Map > Remote Drone")
             }
             SpotId::Menu__Kiengir_Map__Uhrum_Center => {
                 write!(f, "{}", "Menu > Kiengir Map > Uhrum Center")
@@ -7434,6 +7444,7 @@ impl std::str::FromStr for SpotId {
                 Ok(SpotId::Menu__Kiengir_Map__Annuna_West_Bridge)
             }
             "Menu > Kiengir Map > Apocalypse" => Ok(SpotId::Menu__Kiengir_Map__Apocalypse),
+            "Menu > Kiengir Map > Breach Sight" => Ok(SpotId::Menu__Kiengir_Map__Breach_Sight),
             "Menu > Kiengir Map > Ebih Base Camp" => Ok(SpotId::Menu__Kiengir_Map__Ebih_Base_Camp),
             "Menu > Kiengir Map > Ebih Observatory" => {
                 Ok(SpotId::Menu__Kiengir_Map__Ebih_Observatory)
@@ -7464,11 +7475,13 @@ impl std::str::FromStr for SpotId {
             "Menu > Kiengir Map > Glacier Revival" => {
                 Ok(SpotId::Menu__Kiengir_Map__Glacier_Revival)
             }
+            "Menu > Kiengir Map > Infect" => Ok(SpotId::Menu__Kiengir_Map__Infect),
             "Menu > Kiengir Map > Irikar Beach Save" => {
                 Ok(SpotId::Menu__Kiengir_Map__Irikar_Beach_Save)
             }
             "Menu > Kiengir Map > Irikar Hub" => Ok(SpotId::Menu__Kiengir_Map__Irikar_Hub),
             "Menu > Kiengir Map > Irikar Midwest" => Ok(SpotId::Menu__Kiengir_Map__Irikar_Midwest),
+            "Menu > Kiengir Map > Remote Drone" => Ok(SpotId::Menu__Kiengir_Map__Remote_Drone),
             "Menu > Kiengir Map > Uhrum Center" => Ok(SpotId::Menu__Kiengir_Map__Uhrum_Center),
             "Menu > Kiengir Map > Uhrum East" => Ok(SpotId::Menu__Kiengir_Map__Uhrum_East),
             "Menu > Kiengir Map > Uhrum Emergence" => {
@@ -7795,6 +7808,7 @@ pub enum LocationId {
     Ebih__By_Garage__Crawlspace__Fragment,
     Ebih__Drone_Room__Item__Urn,
     Ebih__Drone_Room__Item__Urn_Collection_Skip,
+    Ebih__Drone_Room__Item__Urn_Fast_Travel,
     Ebih__Drone_Room__Middle_Platform__Urn_Quick_Grab,
     Ebih__Ebih_East__Corner__Urn,
     Ebih__Ebih_East__Dispenser__Vend,
@@ -7897,6 +7911,8 @@ pub enum LocationId {
     Irikar__Hub__Sat_Tower_Top_Ledge__Tablet,
     Irikar__Lamassu__Desk__Item,
     Irikar__Sight_Room__Item_Pedestal__Urn,
+    Irikar__Sight_Room__Item_Pedestal__Urn_Collection_Skip,
+    Irikar__Sight_Room__Item_Pedestal__Urn_Fast_Travel,
     Irikar_Breach__Gauntlet__Hidden_Path_Reward__Item,
     Irikar_Breach__Hover_Room__Bottom__Item,
     Irikar_Breach__Worm_Rave__Corner__Item,
@@ -8185,6 +8201,9 @@ impl fmt::Display for LocationId {
             }
             LocationId::Ebih__Drone_Room__Item__Urn_Collection_Skip => {
                 write!(f, "{}", "Ebih > Drone Room > Item > Urn Collection Skip")
+            }
+            LocationId::Ebih__Drone_Room__Item__Urn_Fast_Travel => {
+                write!(f, "{}", "Ebih > Drone Room > Item > Urn Fast Travel")
             }
             LocationId::Ebih__Drone_Room__Middle_Platform__Urn_Quick_Grab => write!(
                 f,
@@ -8552,6 +8571,16 @@ impl fmt::Display for LocationId {
             LocationId::Irikar__Sight_Room__Item_Pedestal__Urn => {
                 write!(f, "{}", "Irikar > Sight Room > Item Pedestal > Urn")
             }
+            LocationId::Irikar__Sight_Room__Item_Pedestal__Urn_Collection_Skip => write!(
+                f,
+                "{}",
+                "Irikar > Sight Room > Item Pedestal > Urn Collection Skip"
+            ),
+            LocationId::Irikar__Sight_Room__Item_Pedestal__Urn_Fast_Travel => write!(
+                f,
+                "{}",
+                "Irikar > Sight Room > Item Pedestal > Urn Fast Travel"
+            ),
             LocationId::Irikar_Breach__Gauntlet__Hidden_Path_Reward__Item => write!(
                 f,
                 "{}",
@@ -9002,6 +9031,9 @@ impl std::str::FromStr for LocationId {
             "Ebih > Drone Room > Item > Urn Collection Skip" => {
                 Ok(LocationId::Ebih__Drone_Room__Item__Urn_Collection_Skip)
             }
+            "Ebih > Drone Room > Item > Urn Fast Travel" => {
+                Ok(LocationId::Ebih__Drone_Room__Item__Urn_Fast_Travel)
+            }
             "Ebih > Drone Room > Middle Platform > Urn Quick Grab" => {
                 Ok(LocationId::Ebih__Drone_Room__Middle_Platform__Urn_Quick_Grab)
             }
@@ -9287,6 +9319,12 @@ impl std::str::FromStr for LocationId {
             "Irikar > Lamassu > Desk > Item" => Ok(LocationId::Irikar__Lamassu__Desk__Item),
             "Irikar > Sight Room > Item Pedestal > Urn" => {
                 Ok(LocationId::Irikar__Sight_Room__Item_Pedestal__Urn)
+            }
+            "Irikar > Sight Room > Item Pedestal > Urn Collection Skip" => {
+                Ok(LocationId::Irikar__Sight_Room__Item_Pedestal__Urn_Collection_Skip)
+            }
+            "Irikar > Sight Room > Item Pedestal > Urn Fast Travel" => {
+                Ok(LocationId::Irikar__Sight_Room__Item_Pedestal__Urn_Fast_Travel)
             }
             "Irikar Breach > Gauntlet > Hidden Path Reward > Item" => {
                 Ok(LocationId::Irikar_Breach__Gauntlet__Hidden_Path_Reward__Item)
@@ -9834,6 +9872,7 @@ pub enum ExitId {
     Ebih__By_Garage__West_12__ex__Grid_25_10_12__East_12_1,
     Ebih__Drone_Room__East_4__ex__Grid_25_2_6__West_4_1,
     Ebih__Drone_Room__Item__Urn_Collection_Skip,
+    Ebih__Drone_Room__Item__Urn_Fast_Travel,
     Ebih__Drone_Room__Middle_Platform__ex__Portal_Exit_1,
     Ebih__Drone_Room__Middle_Platform__Urn_Quick_Grab,
     Ebih__Drone_Room__Pit_Left__ex__Middle_Platform_1,
@@ -10557,6 +10596,8 @@ pub enum ExitId {
     Irikar__Lamassu__Hidden_Passage_East__ex__Uhrum__West_Entrance__Hidden_Passage_West_1,
     Irikar__Lamassu__West_28__ex__Boss_Room__East_28_1,
     Irikar__Sight_Room__Above_Room_East__ex__East_Rooftops__Upper_West_1,
+    Irikar__Sight_Room__Item_Pedestal__Urn_Collection_Skip,
+    Irikar__Sight_Room__Item_Pedestal__Urn_Fast_Travel,
     Irikar__Sight_Room__West_24__ex__Hub__Sat_Tower_East_24_1,
     Irikar_Breach__Exit_Corridor__East__ex__Uhrum_Connector__West_1,
     Irikar_Breach__Exit_Corridor__North_12__ex__Pillar_1,
@@ -11109,6 +11150,7 @@ impl fmt::Display for ExitId {
             ExitId::Ebih__By_Garage__West_12__ex__Grid_25_10_12__East_12_1 => write!(f, "{}", "Ebih > By Garage > West 12 ==> Grid 25,10-12 > East 12 (1)"),
             ExitId::Ebih__Drone_Room__East_4__ex__Grid_25_2_6__West_4_1 => write!(f, "{}", "Ebih > Drone Room > East 4 ==> Grid 25,2-6 > West 4 (1)"),
             ExitId::Ebih__Drone_Room__Item__Urn_Collection_Skip => write!(f, "{}", "Ebih > Drone Room > Item > Urn Collection Skip"),
+            ExitId::Ebih__Drone_Room__Item__Urn_Fast_Travel => write!(f, "{}", "Ebih > Drone Room > Item > Urn Fast Travel"),
             ExitId::Ebih__Drone_Room__Middle_Platform__ex__Portal_Exit_1 => write!(f, "{}", "Ebih > Drone Room > Middle Platform ==> Portal Exit (1)"),
             ExitId::Ebih__Drone_Room__Middle_Platform__Urn_Quick_Grab => write!(f, "{}", "Ebih > Drone Room > Middle Platform > Urn Quick Grab"),
             ExitId::Ebih__Drone_Room__Pit_Left__ex__Middle_Platform_1 => write!(f, "{}", "Ebih > Drone Room > Pit Left ==> Middle Platform (1)"),
@@ -11832,6 +11874,8 @@ impl fmt::Display for ExitId {
             ExitId::Irikar__Lamassu__Hidden_Passage_East__ex__Uhrum__West_Entrance__Hidden_Passage_West_1 => write!(f, "{}", "Irikar > Lamassu > Hidden Passage East ==> Uhrum > West Entrance > Hidden Passage West (1)"),
             ExitId::Irikar__Lamassu__West_28__ex__Boss_Room__East_28_1 => write!(f, "{}", "Irikar > Lamassu > West 28 ==> Boss Room > East 28 (1)"),
             ExitId::Irikar__Sight_Room__Above_Room_East__ex__East_Rooftops__Upper_West_1 => write!(f, "{}", "Irikar > Sight Room > Above Room East ==> East Rooftops > Upper West (1)"),
+            ExitId::Irikar__Sight_Room__Item_Pedestal__Urn_Collection_Skip => write!(f, "{}", "Irikar > Sight Room > Item Pedestal > Urn Collection Skip"),
+            ExitId::Irikar__Sight_Room__Item_Pedestal__Urn_Fast_Travel => write!(f, "{}", "Irikar > Sight Room > Item Pedestal > Urn Fast Travel"),
             ExitId::Irikar__Sight_Room__West_24__ex__Hub__Sat_Tower_East_24_1 => write!(f, "{}", "Irikar > Sight Room > West 24 ==> Hub > Sat Tower East 24 (1)"),
             ExitId::Irikar_Breach__Exit_Corridor__East__ex__Uhrum_Connector__West_1 => write!(f, "{}", "Irikar Breach > Exit Corridor > East ==> Uhrum Connector > West (1)"),
             ExitId::Irikar_Breach__Exit_Corridor__North_12__ex__Pillar_1 => write!(f, "{}", "Irikar Breach > Exit Corridor > North 12 ==> Pillar (1)"),
@@ -12389,6 +12433,7 @@ impl std::str::FromStr for ExitId {
             "Ebih > By Garage > West 12 ==> Grid 25,10-12 > East 12 (1)" => Ok(ExitId::Ebih__By_Garage__West_12__ex__Grid_25_10_12__East_12_1),
             "Ebih > Drone Room > East 4 ==> Grid 25,2-6 > West 4 (1)" => Ok(ExitId::Ebih__Drone_Room__East_4__ex__Grid_25_2_6__West_4_1),
             "Ebih > Drone Room > Item > Urn Collection Skip" => Ok(ExitId::Ebih__Drone_Room__Item__Urn_Collection_Skip),
+            "Ebih > Drone Room > Item > Urn Fast Travel" => Ok(ExitId::Ebih__Drone_Room__Item__Urn_Fast_Travel),
             "Ebih > Drone Room > Middle Platform ==> Portal Exit (1)" => Ok(ExitId::Ebih__Drone_Room__Middle_Platform__ex__Portal_Exit_1),
             "Ebih > Drone Room > Middle Platform > Urn Quick Grab" => Ok(ExitId::Ebih__Drone_Room__Middle_Platform__Urn_Quick_Grab),
             "Ebih > Drone Room > Pit Left ==> Middle Platform (1)" => Ok(ExitId::Ebih__Drone_Room__Pit_Left__ex__Middle_Platform_1),
@@ -13112,6 +13157,8 @@ impl std::str::FromStr for ExitId {
             "Irikar > Lamassu > Hidden Passage East ==> Uhrum > West Entrance > Hidden Passage West (1)" => Ok(ExitId::Irikar__Lamassu__Hidden_Passage_East__ex__Uhrum__West_Entrance__Hidden_Passage_West_1),
             "Irikar > Lamassu > West 28 ==> Boss Room > East 28 (1)" => Ok(ExitId::Irikar__Lamassu__West_28__ex__Boss_Room__East_28_1),
             "Irikar > Sight Room > Above Room East ==> East Rooftops > Upper West (1)" => Ok(ExitId::Irikar__Sight_Room__Above_Room_East__ex__East_Rooftops__Upper_West_1),
+            "Irikar > Sight Room > Item Pedestal > Urn Collection Skip" => Ok(ExitId::Irikar__Sight_Room__Item_Pedestal__Urn_Collection_Skip),
+            "Irikar > Sight Room > Item Pedestal > Urn Fast Travel" => Ok(ExitId::Irikar__Sight_Room__Item_Pedestal__Urn_Fast_Travel),
             "Irikar > Sight Room > West 24 ==> Hub > Sat Tower East 24 (1)" => Ok(ExitId::Irikar__Sight_Room__West_24__ex__Hub__Sat_Tower_East_24_1),
             "Irikar Breach > Exit Corridor > East ==> Uhrum Connector > West (1)" => Ok(ExitId::Irikar_Breach__Exit_Corridor__East__ex__Uhrum_Connector__West_1),
             "Irikar Breach > Exit Corridor > North 12 ==> Pillar (1)" => Ok(ExitId::Irikar_Breach__Exit_Corridor__North_12__ex__Pillar_1),
@@ -14200,6 +14247,7 @@ pub enum CanonId {
     Melee_Charge,
     Irikar_Royal_Storage_Wall,
     Irikar_Royal_Storage_Flask,
+    Breach_Sight,
     Irikar_Gudam,
     Uhrum_West_Entrance_Upper_Wall,
     Uhrum_West_Entrance_Lower_Wall,
@@ -14250,6 +14298,7 @@ impl fmt::Display for CanonId {
             CanonId::Melee_Charge => write!(f, "{}", "Melee_Charge"),
             CanonId::Irikar_Royal_Storage_Wall => write!(f, "{}", "Irikar_Royal_Storage_Wall"),
             CanonId::Irikar_Royal_Storage_Flask => write!(f, "{}", "Irikar_Royal_Storage_Flask"),
+            CanonId::Breach_Sight => write!(f, "{}", "Breach_Sight"),
             CanonId::Irikar_Gudam => write!(f, "{}", "Irikar_Gudam"),
             CanonId::Uhrum_West_Entrance_Upper_Wall => {
                 write!(f, "{}", "Uhrum_West_Entrance_Upper_Wall")
@@ -14306,6 +14355,7 @@ impl std::str::FromStr for CanonId {
             "Melee_Charge" => Ok(CanonId::Melee_Charge),
             "Irikar_Royal_Storage_Wall" => Ok(CanonId::Irikar_Royal_Storage_Wall),
             "Irikar_Royal_Storage_Flask" => Ok(CanonId::Irikar_Royal_Storage_Flask),
+            "Breach_Sight" => Ok(CanonId::Breach_Sight),
             "Irikar_Gudam" => Ok(CanonId::Irikar_Gudam),
             "Uhrum_West_Entrance_Upper_Wall" => Ok(CanonId::Uhrum_West_Entrance_Upper_Wall),
             "Uhrum_West_Entrance_Lower_Wall" => Ok(CanonId::Uhrum_West_Entrance_Lower_Wall),

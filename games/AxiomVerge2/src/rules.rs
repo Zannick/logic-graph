@@ -662,6 +662,10 @@ pub fn access_ebih_west_block(ctx: &Context, world: &graph::World) -> bool {
     // Ebih_West_Block
     ctx.has(Item::Ebih_West_Block)
 }
+pub fn access_fast_travel(ctx: &Context, world: &graph::World) -> bool {
+    // Fast_Travel
+    ctx.has(Item::Fast_Travel)
+}
 pub fn access_ft_main_and___map_spot_within_menu_gt_kiengir_map(
     ctx: &Context,
     world: &graph::World,

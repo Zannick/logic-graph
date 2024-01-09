@@ -269,6 +269,7 @@ areas:
       - to: Uhrum Emergence
       - to: Uhrum West
   spots:
+    #region fast travel points
     - name: Amagi Main Area
       coord: [29, 19]
       exits:
@@ -278,6 +279,7 @@ areas:
           penalties:
             - when: ^mode != 'drone'
               add: 2.5
+          tags: [warp]
     - name: Amagi East Lake
       coord: [34, 18]
     - name: Amagi Isolation
@@ -291,6 +293,7 @@ areas:
           penalties:
             - when: ^mode != 'drone'
               add: 2.5
+          tags: [warp]
     - name: Annuna Factory Entrance
       coord: [43, 25]
       exits:
@@ -300,6 +303,7 @@ areas:
           penalties:
             - when: ^mode != 'drone'
               add: 2.5
+          tags: [warp]
     - name: Annuna Mirror Match
       coord: [32, 26]
       exits:
@@ -309,6 +313,7 @@ areas:
           penalties:
             - when: ^mode != 'drone'
               add: 2.5
+          tags: [warp]
     - name: Annuna Upper
       coord: [39, 17]
     - name: Annuna Vertical Room
@@ -326,6 +331,7 @@ areas:
           penalties:
             - when: ^mode != 'drone'
               add: 2.5
+          tags: [warp]
     - name: Ebih Observatory
       coord: [21, 3]
     - name: Ebih West Lower
@@ -337,6 +343,7 @@ areas:
           penalties:
             - when: ^mode != 'drone'
               add: 2.5
+          tags: [warp]
     - name: Ebih West Mid
       coord: [20, 10]
       exits:
@@ -346,6 +353,7 @@ areas:
           penalties:
             - when: ^mode != 'drone'
               add: 2.5
+          tags: [warp]
     - name: Ebih West Upper
       coord: [20, 7]
       exits:
@@ -355,6 +363,7 @@ areas:
           penalties:
             - when: ^mode != 'drone'
               add: 2.5
+          tags: [warp]
     - name: Giguna Base
       coord: [13, 16]
       exits:
@@ -364,6 +373,7 @@ areas:
           penalties:
             - when: ^mode != 'drone'
               add: 2.5
+          tags: [warp]
     - name: Giguna Labyrinth
       coord: [17, 22]
     - name: Giguna Northeast
@@ -375,6 +385,7 @@ areas:
           penalties:
             - when: ^mode != 'drone'
               add: 2.5
+          tags: [warp]
     - name: Giguna Ruins Top
       coord: [14, 6]
       exits:
@@ -384,6 +395,7 @@ areas:
           penalties:
             - when: ^mode != 'drone'
               add: 2.5
+          tags: [warp]
     - name: Giguna Ruins West
       coord: [13, 9]
       exits:
@@ -393,6 +405,7 @@ areas:
           penalties:
             - when: ^mode != 'drone'
               add: 2.5
+          tags: [warp]
     - name: Giguna Separator
       coord: [18, 25]
     - name: Glacier Revival
@@ -404,6 +417,7 @@ areas:
           penalties:
             - when: ^mode == 'drone'
               add: 2.5
+          tags: [warp]
     - name: Irikar Beach Save
       coord: [5, 28]
     - name: Irikar Hub
@@ -415,6 +429,7 @@ areas:
           penalties:
             - when: ^mode != 'drone'
               add: 2.5
+          tags: [warp]
     - name: Irikar Midwest
       coord: [9, 25]
     - name: Uhrum Center
@@ -426,6 +441,7 @@ areas:
           penalties:
             - when: ^mode != 'drone'
               add: 2.5
+          tags: [warp]
     - name: Uhrum East
       coord: [28, 26]
       exits:
@@ -435,6 +451,7 @@ areas:
           penalties:
             - when: ^mode != 'drone'
               add: 2.5
+          tags: [warp]
     - name: Uhrum Emergence
       coord: [23, 22]
     - name: Uhrum West
@@ -446,6 +463,17 @@ areas:
           penalties:
             - when: ^mode != 'drone'
               add: 2.5
+          tags: [warp]
+    #endregion
+
+    #region entry points (urns)
+    - name: Infect
+      coord: [26, 9]
+    - name: Remote Drone
+      coord: [24, 6]
+    - name: Breach Sight
+      coord: [14, 26]
+    #endregion
 
 - name: Breach Map
   on_entry: $save_last
@@ -462,12 +490,14 @@ areas:
         - to: Giguna Breach > Peak > Save Point
           req: ^map__giguna_breach__peak__save
           time: 12
+          tags: [warp]
     - name: GB SW Save
       coord: [12, 12]
       exits:
         - to: Giguna Breach > SW Save > Save Point
           req: ^map__giguna_breach__sw_save__save
           time: 12
+          tags: [warp]
     - name: IB Basement
       coord: [12, 28]
     - name: IB Gauntlet
@@ -476,9 +506,11 @@ areas:
         - to: Irikar Breach > Gauntlet > Save Point
           req: ^map__irikar_breach__gauntlet__save
           time: 12
+          tags: [warp]
     - name: IB Save Room
       coord: [14, 26]
       exits:
         - to: Irikar Breach > Save Room > Save Point
           req: ^map__irikar_breach__save_room__save
           time: 12
+          tags: [warp]

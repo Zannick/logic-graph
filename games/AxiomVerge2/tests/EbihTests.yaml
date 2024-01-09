@@ -167,3 +167,12 @@ tests:
     route: |
       * Take hybrid exit Ebih > Drone Room > Item > Urn Collection Skip, collecting Remote_Drone
         MainSavewarp to Ebih > Ebih West > Upper Save
+
+  - name: collection_fast_travel
+    start: Ebih > Drone Room > Item
+    context:
+      save: Ebih > Ebih West > Upper Save
+      map__giguna__ruins_west__save: true
+    route: |
+      * Take hybrid exit Ebih > Drone Room > Item > Urn Fast Travel, collecting Remote_Drone
+        Move to Menu > Kiengir Map > Giguna Ruins West ==> Giguna > Ruins West > Save Point (1)

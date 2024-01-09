@@ -1256,7 +1256,10 @@ pub fn get_area(spot: SpotId) -> AreaId {
         | SpotId::Menu__Kiengir_Map__Uhrum_Center
         | SpotId::Menu__Kiengir_Map__Uhrum_East
         | SpotId::Menu__Kiengir_Map__Uhrum_Emergence
-        | SpotId::Menu__Kiengir_Map__Uhrum_West => AreaId::Menu__Kiengir_Map,
+        | SpotId::Menu__Kiengir_Map__Uhrum_West
+        | SpotId::Menu__Kiengir_Map__Infect
+        | SpotId::Menu__Kiengir_Map__Remote_Drone
+        | SpotId::Menu__Kiengir_Map__Breach_Sight => AreaId::Menu__Kiengir_Map,
         SpotId::Menu__Breach_Map__GB_Peak
         | SpotId::Menu__Breach_Map__GB_SW_Save
         | SpotId::Menu__Breach_Map__IB_Basement
@@ -2604,7 +2607,10 @@ pub fn get_region(spot: SpotId) -> RegionId {
         | SpotId::Menu__Kiengir_Map__Uhrum_Center
         | SpotId::Menu__Kiengir_Map__Uhrum_East
         | SpotId::Menu__Kiengir_Map__Uhrum_Emergence
-        | SpotId::Menu__Kiengir_Map__Uhrum_West => RegionId::Menu,
+        | SpotId::Menu__Kiengir_Map__Uhrum_West
+        | SpotId::Menu__Kiengir_Map__Infect
+        | SpotId::Menu__Kiengir_Map__Remote_Drone
+        | SpotId::Menu__Kiengir_Map__Breach_Sight => RegionId::Menu,
         SpotId::Menu__Breach_Map__GB_Peak
         | SpotId::Menu__Breach_Map__GB_SW_Save
         | SpotId::Menu__Breach_Map__IB_Basement
@@ -2856,6 +2862,9 @@ impl world::Accessible for Location {
             LocationId::Ebih__By_Garage__Crawlspace__Fragment => true,
             LocationId::Ebih__Drone_Room__Item__Urn => true,
             LocationId::Ebih__Drone_Room__Item__Urn_Collection_Skip => true,
+            LocationId::Ebih__Drone_Room__Item__Urn_Fast_Travel => {
+                rules::access_fast_travel(&ctx, world)
+            }
             LocationId::Ebih__Drone_Room__Middle_Platform__Urn_Quick_Grab => {
                 rules::access_boomerang2(&ctx, world)
             }
@@ -3054,6 +3063,10 @@ impl world::Accessible for Location {
             LocationId::Irikar__Hub__Sat_Tower_Top_Ledge__Tablet => true,
             LocationId::Irikar__Lamassu__Desk__Item => true,
             LocationId::Irikar__Sight_Room__Item_Pedestal__Urn => true,
+            LocationId::Irikar__Sight_Room__Item_Pedestal__Urn_Collection_Skip => true,
+            LocationId::Irikar__Sight_Room__Item_Pedestal__Urn_Fast_Travel => {
+                rules::access_fast_travel(&ctx, world)
+            }
             LocationId::Irikar_Breach__Gauntlet__Hidden_Path_Reward__Item => true,
             LocationId::Irikar_Breach__Hover_Room__Bottom__Item => true,
             LocationId::Irikar_Breach__Worm_Rave__Corner__Item => true,
@@ -3583,6 +3596,7 @@ impl world::Accessible for Exit {
             ExitId::Ebih__By_Garage__West_12__ex__Grid_25_10_12__East_12_1 => true,
             ExitId::Ebih__Drone_Room__East_4__ex__Grid_25_2_6__West_4_1 => rules::access_mode_eq_drone(&ctx, world),
             ExitId::Ebih__Drone_Room__Item__Urn_Collection_Skip => true,
+            ExitId::Ebih__Drone_Room__Item__Urn_Fast_Travel => rules::access_fast_travel(&ctx, world),
             ExitId::Ebih__Drone_Room__Middle_Platform__ex__Portal_Exit_1 => rules::access_grab(&ctx, world),
             ExitId::Ebih__Drone_Room__Middle_Platform__Urn_Quick_Grab => rules::access_boomerang2(&ctx, world),
             ExitId::Ebih__Drone_Room__Pit_Left__ex__Middle_Platform_1 => rules::access_climb(&ctx, world),
@@ -4306,6 +4320,8 @@ impl world::Accessible for Exit {
             ExitId::Irikar__Lamassu__Hidden_Passage_East__ex__Uhrum__West_Entrance__Hidden_Passage_West_1 => true,
             ExitId::Irikar__Lamassu__West_28__ex__Boss_Room__East_28_1 => true,
             ExitId::Irikar__Sight_Room__Above_Room_East__ex__East_Rooftops__Upper_West_1 => true,
+            ExitId::Irikar__Sight_Room__Item_Pedestal__Urn_Collection_Skip => true,
+            ExitId::Irikar__Sight_Room__Item_Pedestal__Urn_Fast_Travel => rules::access_fast_travel(&ctx, world),
             ExitId::Irikar__Sight_Room__West_24__ex__Hub__Sat_Tower_East_24_1 => true,
             ExitId::Irikar_Breach__Exit_Corridor__East__ex__Uhrum_Connector__West_1 => true,
             ExitId::Irikar_Breach__Exit_Corridor__North_12__ex__Pillar_1 => rules::access_hover_and_hook(&ctx, world),
@@ -5034,6 +5050,7 @@ impl world::Exit for Exit {
             ExitId::Irikar__Lamassu__Hidden_Passage_East__ex__Uhrum__West_Entrance__Hidden_Passage_West_1 => true,
             ExitId::Irikar__Lamassu__West_28__ex__Boss_Room__East_28_1 => true,
             ExitId::Irikar__Sight_Room__Above_Room_East__ex__East_Rooftops__Upper_West_1 => true,
+            ExitId::Irikar__Sight_Room__Item_Pedestal__Urn_Collection_Skip => true,
             ExitId::Irikar__Sight_Room__West_24__ex__Hub__Sat_Tower_East_24_1 => true,
             ExitId::Irikar_Breach__Exit_Corridor__East__ex__Uhrum_Connector__West_1 => true,
             ExitId::Irikar_Breach__Exit_Corridor__North_12__ex__Worm_Rave__South_1 => true,
@@ -5734,7 +5751,7 @@ pub struct Spot {
     pub actions: Range<usize>,
 }
 
-static RAW_SPOTS: [SpotId; 1339] = [
+static RAW_SPOTS: [SpotId; 1342] = [
     SpotId::None,
     SpotId::Amagi__Grid_31_19__East,
     SpotId::Amagi__Grid_31_19__West,
@@ -6934,6 +6951,7 @@ static RAW_SPOTS: [SpotId; 1339] = [
     SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
     SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
     SpotId::Menu__Kiengir_Map__Apocalypse,
+    SpotId::Menu__Kiengir_Map__Breach_Sight,
     SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
     SpotId::Menu__Kiengir_Map__Ebih_Observatory,
     SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
@@ -6946,9 +6964,11 @@ static RAW_SPOTS: [SpotId; 1339] = [
     SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
     SpotId::Menu__Kiengir_Map__Giguna_Separator,
     SpotId::Menu__Kiengir_Map__Glacier_Revival,
+    SpotId::Menu__Kiengir_Map__Infect,
     SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
     SpotId::Menu__Kiengir_Map__Irikar_Hub,
     SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+    SpotId::Menu__Kiengir_Map__Remote_Drone,
     SpotId::Menu__Kiengir_Map__Uhrum_Center,
     SpotId::Menu__Kiengir_Map__Uhrum_East,
     SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
@@ -7693,7 +7713,7 @@ impl world::World for World {
     type Exit = Exit;
     type Action = Action;
     type Warp = Warp;
-    const NUM_LOCATIONS: u32 = 227;
+    const NUM_LOCATIONS: u32 = 230;
 
     fn ruleset(&self) -> String {
         format!(
@@ -7821,6 +7841,7 @@ impl world::World for World {
             CanonId::Remote_Drone => vec![
                 LocationId::Ebih__Drone_Room__Item__Urn,
                 LocationId::Ebih__Drone_Room__Item__Urn_Collection_Skip,
+                LocationId::Ebih__Drone_Room__Item__Urn_Fast_Travel,
                 LocationId::Ebih__Drone_Room__Middle_Platform__Urn_Quick_Grab,
             ],
             CanonId::Giguna_Northeast_Gate => vec![
@@ -7880,6 +7901,10 @@ impl world::World for World {
             CanonId::Irikar_Royal_Storage_Flask => {
                 vec![LocationId::Irikar__Hub__Royal_Storage_in_Wall__Item]
             }
+            CanonId::Breach_Sight => vec![
+                LocationId::Irikar__Sight_Room__Item_Pedestal__Urn_Collection_Skip,
+                LocationId::Irikar__Sight_Room__Item_Pedestal__Urn_Fast_Travel,
+            ],
             CanonId::Irikar_Gudam => vec![
                 LocationId::Irikar__Boss_Room__Bulls_Feet__Defeat_Gudam,
                 LocationId::Irikar__Boss_Room__Bulls_Feet__Shockwave_Gudam,
@@ -8083,6 +8108,7 @@ impl world::World for World {
             Item::Remote_Drone => vec![
                 LocationId::Ebih__Drone_Room__Item__Urn,
                 LocationId::Ebih__Drone_Room__Item__Urn_Collection_Skip,
+                LocationId::Ebih__Drone_Room__Item__Urn_Fast_Travel,
                 LocationId::Ebih__Drone_Room__Middle_Platform__Urn_Quick_Grab,
             ],
             Item::Terminal_Breakthrough_1 => vec![LocationId::Ebih__Grid_26_10_11__Ledge__Note],
@@ -8167,7 +8193,11 @@ impl world::World for World {
                 LocationId::Irikar__Hub__Royal_Storage_By_Wall__Shockwave_Wall,
                 LocationId::Irikar__Hub__Royal_Storage_By_Wall__Mist_into_Wall,
             ],
-            Item::Breach_Sight => vec![LocationId::Irikar__Sight_Room__Item_Pedestal__Urn],
+            Item::Breach_Sight => vec![
+                LocationId::Irikar__Sight_Room__Item_Pedestal__Urn,
+                LocationId::Irikar__Sight_Room__Item_Pedestal__Urn_Collection_Skip,
+                LocationId::Irikar__Sight_Room__Item_Pedestal__Urn_Fast_Travel,
+            ],
             Item::Irikar_Gudam => vec![
                 LocationId::Irikar__Boss_Room__Bulls_Feet__Defeat_Gudam,
                 LocationId::Irikar__Boss_Room__Bulls_Feet__Shockwave_Gudam,
@@ -8489,9 +8519,8 @@ impl world::World for World {
             | LocationId::Ebih__Boss_Room__Boss__Hack_Alu => SpotId::Ebih__Boss_Room__Boss,
             LocationId::Ebih__Boss_Room__East_Ledge__Item => SpotId::Ebih__Boss_Room__East_Ledge,
             LocationId::Ebih__Drone_Room__Item__Urn => SpotId::Ebih__Drone_Room__Item,
-            LocationId::Ebih__Drone_Room__Item__Urn_Collection_Skip => {
-                SpotId::Ebih__Drone_Room__Item
-            }
+            LocationId::Ebih__Drone_Room__Item__Urn_Collection_Skip
+            | LocationId::Ebih__Drone_Room__Item__Urn_Fast_Travel => SpotId::Ebih__Drone_Room__Item,
             LocationId::Ebih__Drone_Room__Middle_Platform__Urn_Quick_Grab => {
                 SpotId::Ebih__Drone_Room__Middle_Platform
             }
@@ -8674,6 +8703,10 @@ impl world::World for World {
                 SpotId::Irikar__Hub__Royal_Storage_in_Wall
             }
             LocationId::Irikar__Sight_Room__Item_Pedestal__Urn => {
+                SpotId::Irikar__Sight_Room__Item_Pedestal
+            }
+            LocationId::Irikar__Sight_Room__Item_Pedestal__Urn_Collection_Skip
+            | LocationId::Irikar__Sight_Room__Item_Pedestal__Urn_Fast_Travel => {
                 SpotId::Irikar__Sight_Room__Item_Pedestal
             }
             LocationId::Irikar__Abandoned_Room__Corner_Core__Core => {
@@ -9331,7 +9364,7 @@ impl world::World for World {
             ExitId::Ebih__Drone_Room__West_4__ex__Boss_Room__East_4_1 => SpotId::Ebih__Drone_Room__West_4,
             ExitId::Ebih__Drone_Room__Pit_Left__ex__West_6_1 | ExitId:: Ebih__Drone_Room__Pit_Left__ex__West_6_2 | ExitId:: Ebih__Drone_Room__Pit_Left__ex__Middle_Platform_1 | ExitId:: Ebih__Drone_Room__Pit_Left__ex__Middle_Platform_2 => SpotId::Ebih__Drone_Room__Pit_Left,
             ExitId::Ebih__Drone_Room__Portal__ex__Portal_Exit_1 => SpotId::Ebih__Drone_Room__Portal,
-            ExitId::Ebih__Drone_Room__Item__Urn_Collection_Skip => SpotId::Ebih__Drone_Room__Item,
+            ExitId::Ebih__Drone_Room__Item__Urn_Collection_Skip | ExitId::Ebih__Drone_Room__Item__Urn_Fast_Travel => SpotId::Ebih__Drone_Room__Item,
             ExitId::Ebih__Drone_Room__Middle_Platform__ex__Portal_Exit_1 => SpotId::Ebih__Drone_Room__Middle_Platform,
             ExitId::Ebih__Drone_Room__Middle_Platform__Urn_Quick_Grab => SpotId::Ebih__Drone_Room__Middle_Platform,
             ExitId::Ebih__Drone_Room__Portal_Exit__ex__Moving_Platform_1 | ExitId:: Ebih__Drone_Room__Portal_Exit__ex__Moving_Platform_2 => SpotId::Ebih__Drone_Room__Portal_Exit,
@@ -9750,6 +9783,7 @@ impl world::World for World {
             ExitId::Irikar__Hub__Royal_Storage_By_Wall__Mist_into_Wall => SpotId::Irikar__Hub__Royal_Storage_By_Wall,
             ExitId::Irikar__Airy__Middle_South__ex__Sight_Room__Above_Room_North_1 => SpotId::Irikar__Airy__Middle_South,
             ExitId::Irikar__Sight_Room__West_24__ex__Hub__Sat_Tower_East_24_1 => SpotId::Irikar__Sight_Room__West_24,
+            ExitId::Irikar__Sight_Room__Item_Pedestal__Urn_Collection_Skip | ExitId::Irikar__Sight_Room__Item_Pedestal__Urn_Fast_Travel => SpotId::Irikar__Sight_Room__Item_Pedestal,
             ExitId::Irikar__Sight_Room__Above_Room_East__ex__East_Rooftops__Upper_West_1 => SpotId::Irikar__Sight_Room__Above_Room_East,
             ExitId::Irikar__Abandoned_Room__West__ex__Basement_Portal__East_27_1 => SpotId::Irikar__Abandoned_Room__West,
             ExitId::Irikar__Basement_Portal__East_27__ex__Abandoned_Room__West_1 => SpotId::Irikar__Basement_Portal__East_27,
@@ -11980,6 +12014,14 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
             time: 0,
             exit_id: Some(ExitId::Ebih__Drone_Room__Item__Urn_Collection_Skip),
         },
+        LocationId::Ebih__Drone_Room__Item__Urn_Fast_Travel => Location {
+            id: LocationId::Ebih__Drone_Room__Item__Urn_Fast_Travel,
+            canonical: CanonId::Remote_Drone,
+            item: Item::Remote_Drone,
+            price: Currency::Free,
+            time: 0,
+            exit_id: Some(ExitId::Ebih__Drone_Room__Item__Urn_Fast_Travel),
+        },
         LocationId::Ebih__Drone_Room__Middle_Platform__Urn_Quick_Grab => Location {
             id: LocationId::Ebih__Drone_Room__Middle_Platform__Urn_Quick_Grab,
             canonical: CanonId::Remote_Drone,
@@ -12603,6 +12645,22 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
             price: Currency::Free,
             time: 5500,
             exit_id: None,
+        },
+        LocationId::Irikar__Sight_Room__Item_Pedestal__Urn_Collection_Skip => Location {
+            id: LocationId::Irikar__Sight_Room__Item_Pedestal__Urn_Collection_Skip,
+            canonical: CanonId::Breach_Sight,
+            item: Item::Breach_Sight,
+            price: Currency::Free,
+            time: 0,
+            exit_id: Some(ExitId::Irikar__Sight_Room__Item_Pedestal__Urn_Collection_Skip),
+        },
+        LocationId::Irikar__Sight_Room__Item_Pedestal__Urn_Fast_Travel => Location {
+            id: LocationId::Irikar__Sight_Room__Item_Pedestal__Urn_Fast_Travel,
+            canonical: CanonId::Breach_Sight,
+            item: Item::Breach_Sight,
+            price: Currency::Free,
+            time: 0,
+            exit_id: Some(ExitId::Irikar__Sight_Room__Item_Pedestal__Urn_Fast_Travel),
         },
         LocationId::Irikar__Abandoned_Room__Corner_Core__Core => Location {
             id: LocationId::Irikar__Abandoned_Room__Corner_Core__Core,
@@ -16185,6 +16243,13 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
             dest: SpotId::Menu__Warp_Only__Kiengir,
             price: Currency::Free,
             loc_id: Some(LocationId::Ebih__Drone_Room__Item__Urn_Collection_Skip),
+        },
+        ExitId::Ebih__Drone_Room__Item__Urn_Fast_Travel => Exit {
+            id: ExitId::Ebih__Drone_Room__Item__Urn_Fast_Travel,
+            time: 0,
+            dest: SpotId::Menu__Kiengir_Map__Remote_Drone,
+            price: Currency::Free,
+            loc_id: Some(LocationId::Ebih__Drone_Room__Item__Urn_Fast_Travel),
         },
         ExitId::Ebih__Drone_Room__Middle_Platform__ex__Portal_Exit_1 => Exit {
             id: ExitId::Ebih__Drone_Room__Middle_Platform__ex__Portal_Exit_1,
@@ -20399,6 +20464,20 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
             dest: SpotId::Irikar__Hub__Sat_Tower_East_24,
             price: Currency::Free,
             loc_id: None,
+        },
+        ExitId::Irikar__Sight_Room__Item_Pedestal__Urn_Collection_Skip => Exit {
+            id: ExitId::Irikar__Sight_Room__Item_Pedestal__Urn_Collection_Skip,
+            time: 0,
+            dest: SpotId::Menu__Warp_Only__Kiengir,
+            price: Currency::Free,
+            loc_id: Some(LocationId::Irikar__Sight_Room__Item_Pedestal__Urn_Collection_Skip),
+        },
+        ExitId::Irikar__Sight_Room__Item_Pedestal__Urn_Fast_Travel => Exit {
+            id: ExitId::Irikar__Sight_Room__Item_Pedestal__Urn_Fast_Travel,
+            time: 0,
+            dest: SpotId::Menu__Kiengir_Map__Breach_Sight,
+            price: Currency::Free,
+            loc_id: Some(LocationId::Irikar__Sight_Room__Item_Pedestal__Urn_Fast_Travel),
         },
         ExitId::Irikar__Sight_Room__Above_Room_East__ex__East_Rooftops__Upper_West_1 => Exit {
             id: ExitId::Irikar__Sight_Room__Above_Room_East__ex__East_Rooftops__Upper_West_1,
@@ -28412,7 +28491,7 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             id: SpotId::Ebih__Drone_Room__Item,
             locations: Range {
                 start: LocationId::Ebih__Drone_Room__Item__Urn.into_usize(),
-                end: LocationId::Ebih__Drone_Room__Item__Urn_Collection_Skip.into_usize() + 1,
+                end: LocationId::Ebih__Drone_Room__Item__Urn_Fast_Travel.into_usize() + 1,
             },
             exits: Range {
                 start: 0, end: 0,
@@ -36940,7 +37019,7 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             id: SpotId::Irikar__Sight_Room__Item_Pedestal,
             locations: Range {
                 start: LocationId::Irikar__Sight_Room__Item_Pedestal__Urn.into_usize(),
-                end: LocationId::Irikar__Sight_Room__Item_Pedestal__Urn.into_usize() + 1,
+                end: LocationId::Irikar__Sight_Room__Item_Pedestal__Urn_Fast_Travel.into_usize() + 1,
             },
             exits: Range {
                 start: 0, end: 0,
@@ -38189,6 +38268,42 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             exits: Range {
                 start: ExitId::Menu__Kiengir_Map__Uhrum_West__ex__Uhrum__West_Entrance__Save_Point_1.into_usize(),
                 end: ExitId::Menu__Kiengir_Map__Uhrum_West__ex__Uhrum__West_Entrance__Save_Point_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Menu__Kiengir_Map__Infect => Spot {
+            id: SpotId::Menu__Kiengir_Map__Infect,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Menu__Kiengir_Map__Remote_Drone => Spot {
+            id: SpotId::Menu__Kiengir_Map__Remote_Drone,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Menu__Kiengir_Map__Breach_Sight => Spot {
+            id: SpotId::Menu__Kiengir_Map__Breach_Sight,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
             },
             actions: Range {
                 start: 0, end: 0,

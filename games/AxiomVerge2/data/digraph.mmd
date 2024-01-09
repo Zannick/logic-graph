@@ -1510,6 +1510,9 @@ subgraph Menu
         Menu__Kiengir_Map__Uhrum_East(Uhrum East);
         Menu__Kiengir_Map__Uhrum_Emergence(Uhrum Emergence);
         Menu__Kiengir_Map__Uhrum_West(Uhrum West);
+        Menu__Kiengir_Map__Infect(Infect);
+        Menu__Kiengir_Map__Remote_Drone(Remote Drone);
+        Menu__Kiengir_Map__Breach_Sight(Breach Sight);
     end
     subgraph Menu__Breach_Map[Breach Map]
         Menu__Breach_Map__GB_Peak(GB Peak);
@@ -1871,6 +1874,7 @@ Ebih__By_Garage__Lower_Platform --> Ebih__By_Garage__East_Bush
 Ebih__By_Garage__Lower_Platform --> Ebih__By_Garage__West_Bush
 Ebih__By_Garage__West_12 <--> Ebih__Grid_25_10_12__East_12
 Ebih__Drone_Room__East_4 <--> Ebih__Grid_25_2_6__West_4
+Ebih__Drone_Room__Item --> Menu__Kiengir_Map__Remote_Drone
 Ebih__Drone_Room__Item --> Menu__Warp_Only__Kiengir
 Ebih__Drone_Room__Middle_Platform --> Ebih__Drone_Room__Portal
 Ebih__Drone_Room__Middle_Platform --> Ebih__Drone_Room__Portal_Exit
@@ -2357,6 +2361,8 @@ Irikar__Lamassu__East_26 <--> Uhrum__West_Entrance__West_26
 Irikar__Lamassu__East_27 <--> Uhrum__West_Entrance__West_27
 Irikar__Lamassu__Hidden_Passage_East <--> Uhrum__West_Entrance__Hidden_Passage_West
 Irikar__Sight_Room__Above_Room_East --> Irikar__East_Rooftops__Upper_West
+Irikar__Sight_Room__Item_Pedestal --> Menu__Kiengir_Map__Breach_Sight
+Irikar__Sight_Room__Item_Pedestal --> Menu__Warp_Only__Kiengir
 Menu__Breach_Map__GB_Peak --> Giguna_Breach__Peak__Save_Point
 Menu__Breach_Map__GB_SW_Save --> Giguna_Breach__SW_Save__Save_Point
 Menu__Breach_Map__IB_Gauntlet --> Irikar_Breach__Gauntlet__Save_Point

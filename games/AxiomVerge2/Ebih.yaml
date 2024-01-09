@@ -1656,6 +1656,11 @@ areas:
   on_entry: $reset_old_area(^newpos)
   reset:
     _platform_moved: false
+  map:
+    urn: [24, 5, 25, 6]
+  datamap:
+    map_spot:
+      urn: Menu > Kiengir Map > Remote Drone
   spots:
     - name: West 6
       coord: [24.05, 5.0]
@@ -1736,6 +1741,12 @@ areas:
           item: Remote_Drone
           canon: Remote_Drone
           to: Menu > Warp Only > Kiengir
+          tags: [cskip]
+        - name: Urn Fast Travel
+          item: Remote_Drone
+          canon: Remote_Drone
+          req: Fast_Travel
+          to: Menu > Kiengir Map > Remote Drone
           tags: [cskip]
     - name: Middle Platform
       coord: [24.4, 5.1]

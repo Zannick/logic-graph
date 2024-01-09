@@ -9089,6 +9089,151 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
         }
         (
             [false],
+            SpotId::Menu__Kiengir_Map__Breach_Sight,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+        ) => 1333,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Breach_Sight,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+        ) => 1333,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Breach_Sight,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+        ) => 1000,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Breach_Sight,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => 1666,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Breach_Sight,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => 1933,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Breach_Sight,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => 1200,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Breach_Sight,
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+        ) => 1666,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Breach_Sight,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => 1733,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Breach_Sight,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => 1466,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Breach_Sight,
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+        ) => 1866,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Breach_Sight,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+        ) => 1300,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Breach_Sight,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+        ) => 2300,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Breach_Sight,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+        ) => 1300,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Breach_Sight,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+        ) => 1600,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Breach_Sight,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+        ) => 1900,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Breach_Sight,
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+        ) => 1000,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Breach_Sight,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+        ) => 400,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Breach_Sight,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+        ) => 1600,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Breach_Sight,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+        ) => 2000,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Breach_Sight,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => 1700,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Breach_Sight,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+        ) => 266,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Breach_Sight,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+        ) => 1800,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Breach_Sight,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => 600,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Breach_Sight,
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+        ) => 300,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Breach_Sight,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+        ) => 333,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Breach_Sight,
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+        ) => 733,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Breach_Sight,
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+        ) => 933,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Breach_Sight,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+        ) => 600,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Breach_Sight,
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+        ) => 333,
+        (
+            [false],
             SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
             SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
         ) => 500,
@@ -10767,6 +10912,121 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
             SpotId::Menu__Kiengir_Map__Glacier_Revival,
             SpotId::Menu__Kiengir_Map__Uhrum_West,
         ) => 2000,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Infect,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+        ) => 900,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Infect,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+        ) => 1200,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Infect,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+        ) => 1000,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Infect,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => 1200,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Infect,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => 1600,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Infect,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => 1700,
+        ([false], SpotId::Menu__Kiengir_Map__Infect, SpotId::Menu__Kiengir_Map__Annuna_Upper) => {
+            866
+        }
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Infect,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => 1100,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Infect,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => 1800,
+        ([false], SpotId::Menu__Kiengir_Map__Infect, SpotId::Menu__Kiengir_Map__Apocalypse) => 1066,
+        ([false], SpotId::Menu__Kiengir_Map__Infect, SpotId::Menu__Kiengir_Map__Ebih_Base_Camp) => {
+            400
+        }
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Infect,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+        ) => 600,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Infect,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+        ) => 466,
+        ([false], SpotId::Menu__Kiengir_Map__Infect, SpotId::Menu__Kiengir_Map__Ebih_West_Mid) => {
+            400
+        }
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Infect,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+        ) => 400,
+        ([false], SpotId::Menu__Kiengir_Map__Infect, SpotId::Menu__Kiengir_Map__Giguna_Base) => 866,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Infect,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+        ) => 1300,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Infect,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+        ) => 600,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Infect,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+        ) => 800,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Infect,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => 866,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Infect,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+        ) => 1600,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Infect,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+        ) => 1000,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Infect,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => 1900,
+        ([false], SpotId::Menu__Kiengir_Map__Infect, SpotId::Menu__Kiengir_Map__Irikar_Hub) => 1400,
+        ([false], SpotId::Menu__Kiengir_Map__Infect, SpotId::Menu__Kiengir_Map__Irikar_Midwest) => {
+            1600
+        }
+        ([false], SpotId::Menu__Kiengir_Map__Infect, SpotId::Menu__Kiengir_Map__Uhrum_Center) => {
+            1800
+        }
+        ([false], SpotId::Menu__Kiengir_Map__Infect, SpotId::Menu__Kiengir_Map__Uhrum_East) => 1700,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Infect,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+        ) => 1300,
+        ([false], SpotId::Menu__Kiengir_Map__Infect, SpotId::Menu__Kiengir_Map__Uhrum_West) => 1900,
         (
             [false],
             SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
@@ -11181,6 +11441,151 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
             SpotId::Menu__Kiengir_Map__Irikar_Midwest,
             SpotId::Menu__Kiengir_Map__Uhrum_West,
         ) => 666,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Remote_Drone,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+        ) => 1200,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Remote_Drone,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+        ) => 1500,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Remote_Drone,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+        ) => 1300,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Remote_Drone,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => 1500,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Remote_Drone,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => 1900,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Remote_Drone,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => 2000,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Remote_Drone,
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+        ) => 1100,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Remote_Drone,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => 1400,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Remote_Drone,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => 2100,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Remote_Drone,
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+        ) => 1200,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Remote_Drone,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+        ) => 700,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Remote_Drone,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+        ) => 300,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Remote_Drone,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+        ) => 700,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Remote_Drone,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+        ) => 400,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Remote_Drone,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+        ) => 266,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Remote_Drone,
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+        ) => 1000,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Remote_Drone,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+        ) => 1600,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Remote_Drone,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+        ) => 466,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Remote_Drone,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+        ) => 666,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Remote_Drone,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => 733,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Remote_Drone,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+        ) => 1900,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Remote_Drone,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+        ) => 1133,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Remote_Drone,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => 2200,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Remote_Drone,
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+        ) => 1700,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Remote_Drone,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+        ) => 1900,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Remote_Drone,
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+        ) => 2100,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Remote_Drone,
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+        ) => 2000,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Remote_Drone,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+        ) => 1600,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Remote_Drone,
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+        ) => 2200,
         (
             [false],
             SpotId::Menu__Kiengir_Map__Uhrum_Center,
@@ -21684,6 +22089,151 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
         }
         (
             [true],
+            SpotId::Menu__Kiengir_Map__Breach_Sight,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+        ) => 1333,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Breach_Sight,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+        ) => 1333,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Breach_Sight,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+        ) => 1000,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Breach_Sight,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => 1666,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Breach_Sight,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => 1933,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Breach_Sight,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => 1200,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Breach_Sight,
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+        ) => 1666,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Breach_Sight,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => 1733,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Breach_Sight,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => 1466,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Breach_Sight,
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+        ) => 1866,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Breach_Sight,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+        ) => 1300,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Breach_Sight,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+        ) => 2300,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Breach_Sight,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+        ) => 1300,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Breach_Sight,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+        ) => 1600,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Breach_Sight,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+        ) => 1900,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Breach_Sight,
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+        ) => 1000,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Breach_Sight,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+        ) => 400,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Breach_Sight,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+        ) => 1600,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Breach_Sight,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+        ) => 2000,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Breach_Sight,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => 1700,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Breach_Sight,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+        ) => 266,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Breach_Sight,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+        ) => 1800,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Breach_Sight,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => 600,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Breach_Sight,
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+        ) => 300,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Breach_Sight,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+        ) => 333,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Breach_Sight,
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+        ) => 733,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Breach_Sight,
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+        ) => 933,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Breach_Sight,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+        ) => 600,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Breach_Sight,
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+        ) => 333,
+        (
+            [true],
             SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
             SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
         ) => 500,
@@ -23354,6 +23904,105 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
             SpotId::Menu__Kiengir_Map__Glacier_Revival,
             SpotId::Menu__Kiengir_Map__Uhrum_West,
         ) => 2000,
+        ([true], SpotId::Menu__Kiengir_Map__Infect, SpotId::Menu__Kiengir_Map__Amagi_East_Lake) => {
+            900
+        }
+        ([true], SpotId::Menu__Kiengir_Map__Infect, SpotId::Menu__Kiengir_Map__Amagi_Isolation) => {
+            1200
+        }
+        ([true], SpotId::Menu__Kiengir_Map__Infect, SpotId::Menu__Kiengir_Map__Amagi_Main_Area) => {
+            1000
+        }
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Infect,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => 1200,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Infect,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => 1600,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Infect,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => 1700,
+        ([true], SpotId::Menu__Kiengir_Map__Infect, SpotId::Menu__Kiengir_Map__Annuna_Upper) => 866,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Infect,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => 1100,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Infect,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => 1800,
+        ([true], SpotId::Menu__Kiengir_Map__Infect, SpotId::Menu__Kiengir_Map__Apocalypse) => 1066,
+        ([true], SpotId::Menu__Kiengir_Map__Infect, SpotId::Menu__Kiengir_Map__Ebih_Base_Camp) => {
+            400
+        }
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Infect,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+        ) => 600,
+        ([true], SpotId::Menu__Kiengir_Map__Infect, SpotId::Menu__Kiengir_Map__Ebih_West_Lower) => {
+            466
+        }
+        ([true], SpotId::Menu__Kiengir_Map__Infect, SpotId::Menu__Kiengir_Map__Ebih_West_Mid) => {
+            400
+        }
+        ([true], SpotId::Menu__Kiengir_Map__Infect, SpotId::Menu__Kiengir_Map__Ebih_West_Upper) => {
+            400
+        }
+        ([true], SpotId::Menu__Kiengir_Map__Infect, SpotId::Menu__Kiengir_Map__Giguna_Base) => 866,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Infect,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+        ) => 1300,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Infect,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+        ) => 600,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Infect,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+        ) => 800,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Infect,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => 866,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Infect,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+        ) => 1600,
+        ([true], SpotId::Menu__Kiengir_Map__Infect, SpotId::Menu__Kiengir_Map__Glacier_Revival) => {
+            1000
+        }
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Infect,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => 1900,
+        ([true], SpotId::Menu__Kiengir_Map__Infect, SpotId::Menu__Kiengir_Map__Irikar_Hub) => 1400,
+        ([true], SpotId::Menu__Kiengir_Map__Infect, SpotId::Menu__Kiengir_Map__Irikar_Midwest) => {
+            1600
+        }
+        ([true], SpotId::Menu__Kiengir_Map__Infect, SpotId::Menu__Kiengir_Map__Uhrum_Center) => {
+            1800
+        }
+        ([true], SpotId::Menu__Kiengir_Map__Infect, SpotId::Menu__Kiengir_Map__Uhrum_East) => 1700,
+        ([true], SpotId::Menu__Kiengir_Map__Infect, SpotId::Menu__Kiengir_Map__Uhrum_Emergence) => {
+            1300
+        }
+        ([true], SpotId::Menu__Kiengir_Map__Infect, SpotId::Menu__Kiengir_Map__Uhrum_West) => 1900,
         (
             [true],
             SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
@@ -23766,6 +24415,151 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
             SpotId::Menu__Kiengir_Map__Irikar_Midwest,
             SpotId::Menu__Kiengir_Map__Uhrum_West,
         ) => 666,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Remote_Drone,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+        ) => 1200,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Remote_Drone,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+        ) => 1500,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Remote_Drone,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+        ) => 1300,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Remote_Drone,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => 1500,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Remote_Drone,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => 1900,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Remote_Drone,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => 2000,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Remote_Drone,
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+        ) => 1100,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Remote_Drone,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => 1400,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Remote_Drone,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => 2100,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Remote_Drone,
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+        ) => 1200,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Remote_Drone,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+        ) => 700,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Remote_Drone,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+        ) => 300,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Remote_Drone,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+        ) => 700,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Remote_Drone,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+        ) => 400,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Remote_Drone,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+        ) => 266,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Remote_Drone,
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+        ) => 1000,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Remote_Drone,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+        ) => 1600,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Remote_Drone,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+        ) => 466,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Remote_Drone,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+        ) => 666,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Remote_Drone,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => 733,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Remote_Drone,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+        ) => 1900,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Remote_Drone,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+        ) => 1133,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Remote_Drone,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => 2200,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Remote_Drone,
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+        ) => 1700,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Remote_Drone,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+        ) => 1900,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Remote_Drone,
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+        ) => 2100,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Remote_Drone,
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+        ) => 2000,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Remote_Drone,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+        ) => 1600,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Remote_Drone,
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+        ) => 2200,
         (
             [true],
             SpotId::Menu__Kiengir_Map__Uhrum_Center,
@@ -32520,6 +33314,191 @@ pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
         (SpotId::Menu__Kiengir_Map__Uhrum_West, SpotId::Menu__Kiengir_Map__Uhrum_East) => true,
         (SpotId::Menu__Kiengir_Map__Uhrum_West, SpotId::Menu__Kiengir_Map__Uhrum_Emergence) => true,
         (SpotId::Menu__Kiengir_Map__Uhrum_West, SpotId::Menu__Kiengir_Map__Uhrum_West) => true,
+        (SpotId::Menu__Kiengir_Map__Infect, SpotId::Menu__Kiengir_Map__Amagi_Main_Area) => true,
+        (SpotId::Menu__Kiengir_Map__Infect, SpotId::Menu__Kiengir_Map__Amagi_East_Lake) => true,
+        (SpotId::Menu__Kiengir_Map__Infect, SpotId::Menu__Kiengir_Map__Amagi_Isolation) => true,
+        (SpotId::Menu__Kiengir_Map__Infect, SpotId::Menu__Kiengir_Map__Annuna_Center_Save) => true,
+        (SpotId::Menu__Kiengir_Map__Infect, SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Infect, SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match) => true,
+        (SpotId::Menu__Kiengir_Map__Infect, SpotId::Menu__Kiengir_Map__Annuna_Upper) => true,
+        (SpotId::Menu__Kiengir_Map__Infect, SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Infect, SpotId::Menu__Kiengir_Map__Annuna_West_Bridge) => true,
+        (SpotId::Menu__Kiengir_Map__Infect, SpotId::Menu__Kiengir_Map__Apocalypse) => true,
+        (SpotId::Menu__Kiengir_Map__Infect, SpotId::Menu__Kiengir_Map__Ebih_Base_Camp) => true,
+        (SpotId::Menu__Kiengir_Map__Infect, SpotId::Menu__Kiengir_Map__Ebih_Observatory) => true,
+        (SpotId::Menu__Kiengir_Map__Infect, SpotId::Menu__Kiengir_Map__Ebih_West_Lower) => true,
+        (SpotId::Menu__Kiengir_Map__Infect, SpotId::Menu__Kiengir_Map__Ebih_West_Mid) => true,
+        (SpotId::Menu__Kiengir_Map__Infect, SpotId::Menu__Kiengir_Map__Ebih_West_Upper) => true,
+        (SpotId::Menu__Kiengir_Map__Infect, SpotId::Menu__Kiengir_Map__Giguna_Base) => true,
+        (SpotId::Menu__Kiengir_Map__Infect, SpotId::Menu__Kiengir_Map__Giguna_Labyrinth) => true,
+        (SpotId::Menu__Kiengir_Map__Infect, SpotId::Menu__Kiengir_Map__Giguna_Northeast) => true,
+        (SpotId::Menu__Kiengir_Map__Infect, SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top) => true,
+        (SpotId::Menu__Kiengir_Map__Infect, SpotId::Menu__Kiengir_Map__Giguna_Ruins_West) => true,
+        (SpotId::Menu__Kiengir_Map__Infect, SpotId::Menu__Kiengir_Map__Giguna_Separator) => true,
+        (SpotId::Menu__Kiengir_Map__Infect, SpotId::Menu__Kiengir_Map__Glacier_Revival) => true,
+        (SpotId::Menu__Kiengir_Map__Infect, SpotId::Menu__Kiengir_Map__Irikar_Beach_Save) => true,
+        (SpotId::Menu__Kiengir_Map__Infect, SpotId::Menu__Kiengir_Map__Irikar_Hub) => true,
+        (SpotId::Menu__Kiengir_Map__Infect, SpotId::Menu__Kiengir_Map__Irikar_Midwest) => true,
+        (SpotId::Menu__Kiengir_Map__Infect, SpotId::Menu__Kiengir_Map__Uhrum_Center) => true,
+        (SpotId::Menu__Kiengir_Map__Infect, SpotId::Menu__Kiengir_Map__Uhrum_East) => true,
+        (SpotId::Menu__Kiengir_Map__Infect, SpotId::Menu__Kiengir_Map__Uhrum_Emergence) => true,
+        (SpotId::Menu__Kiengir_Map__Infect, SpotId::Menu__Kiengir_Map__Uhrum_West) => true,
+        (SpotId::Menu__Kiengir_Map__Remote_Drone, SpotId::Menu__Kiengir_Map__Amagi_Main_Area) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Remote_Drone, SpotId::Menu__Kiengir_Map__Amagi_East_Lake) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Remote_Drone, SpotId::Menu__Kiengir_Map__Amagi_Isolation) => {
+            true
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Remote_Drone,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Remote_Drone,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Remote_Drone,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Remote_Drone, SpotId::Menu__Kiengir_Map__Annuna_Upper) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Remote_Drone,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Remote_Drone,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Remote_Drone, SpotId::Menu__Kiengir_Map__Apocalypse) => true,
+        (SpotId::Menu__Kiengir_Map__Remote_Drone, SpotId::Menu__Kiengir_Map__Ebih_Base_Camp) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Remote_Drone, SpotId::Menu__Kiengir_Map__Ebih_Observatory) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Remote_Drone, SpotId::Menu__Kiengir_Map__Ebih_West_Lower) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Remote_Drone, SpotId::Menu__Kiengir_Map__Ebih_West_Mid) => true,
+        (SpotId::Menu__Kiengir_Map__Remote_Drone, SpotId::Menu__Kiengir_Map__Ebih_West_Upper) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Remote_Drone, SpotId::Menu__Kiengir_Map__Giguna_Base) => true,
+        (SpotId::Menu__Kiengir_Map__Remote_Drone, SpotId::Menu__Kiengir_Map__Giguna_Labyrinth) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Remote_Drone, SpotId::Menu__Kiengir_Map__Giguna_Northeast) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Remote_Drone, SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Remote_Drone, SpotId::Menu__Kiengir_Map__Giguna_Ruins_West) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Remote_Drone, SpotId::Menu__Kiengir_Map__Giguna_Separator) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Remote_Drone, SpotId::Menu__Kiengir_Map__Glacier_Revival) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Remote_Drone, SpotId::Menu__Kiengir_Map__Irikar_Beach_Save) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Remote_Drone, SpotId::Menu__Kiengir_Map__Irikar_Hub) => true,
+        (SpotId::Menu__Kiengir_Map__Remote_Drone, SpotId::Menu__Kiengir_Map__Irikar_Midwest) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Remote_Drone, SpotId::Menu__Kiengir_Map__Uhrum_Center) => true,
+        (SpotId::Menu__Kiengir_Map__Remote_Drone, SpotId::Menu__Kiengir_Map__Uhrum_East) => true,
+        (SpotId::Menu__Kiengir_Map__Remote_Drone, SpotId::Menu__Kiengir_Map__Uhrum_Emergence) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Remote_Drone, SpotId::Menu__Kiengir_Map__Uhrum_West) => true,
+        (SpotId::Menu__Kiengir_Map__Breach_Sight, SpotId::Menu__Kiengir_Map__Amagi_Main_Area) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Breach_Sight, SpotId::Menu__Kiengir_Map__Amagi_East_Lake) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Breach_Sight, SpotId::Menu__Kiengir_Map__Amagi_Isolation) => {
+            true
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Breach_Sight,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Breach_Sight,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Breach_Sight,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Breach_Sight, SpotId::Menu__Kiengir_Map__Annuna_Upper) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Breach_Sight,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Breach_Sight,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Breach_Sight, SpotId::Menu__Kiengir_Map__Apocalypse) => true,
+        (SpotId::Menu__Kiengir_Map__Breach_Sight, SpotId::Menu__Kiengir_Map__Ebih_Base_Camp) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Breach_Sight, SpotId::Menu__Kiengir_Map__Ebih_Observatory) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Breach_Sight, SpotId::Menu__Kiengir_Map__Ebih_West_Lower) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Breach_Sight, SpotId::Menu__Kiengir_Map__Ebih_West_Mid) => true,
+        (SpotId::Menu__Kiengir_Map__Breach_Sight, SpotId::Menu__Kiengir_Map__Ebih_West_Upper) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Breach_Sight, SpotId::Menu__Kiengir_Map__Giguna_Base) => true,
+        (SpotId::Menu__Kiengir_Map__Breach_Sight, SpotId::Menu__Kiengir_Map__Giguna_Labyrinth) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Breach_Sight, SpotId::Menu__Kiengir_Map__Giguna_Northeast) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Breach_Sight, SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Breach_Sight, SpotId::Menu__Kiengir_Map__Giguna_Ruins_West) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Breach_Sight, SpotId::Menu__Kiengir_Map__Giguna_Separator) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Breach_Sight, SpotId::Menu__Kiengir_Map__Glacier_Revival) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Breach_Sight, SpotId::Menu__Kiengir_Map__Irikar_Beach_Save) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Breach_Sight, SpotId::Menu__Kiengir_Map__Irikar_Hub) => true,
+        (SpotId::Menu__Kiengir_Map__Breach_Sight, SpotId::Menu__Kiengir_Map__Irikar_Midwest) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Breach_Sight, SpotId::Menu__Kiengir_Map__Uhrum_Center) => true,
+        (SpotId::Menu__Kiengir_Map__Breach_Sight, SpotId::Menu__Kiengir_Map__Uhrum_East) => true,
+        (SpotId::Menu__Kiengir_Map__Breach_Sight, SpotId::Menu__Kiengir_Map__Uhrum_Emergence) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Breach_Sight, SpotId::Menu__Kiengir_Map__Uhrum_West) => true,
         (SpotId::Menu__Breach_Map__GB_Peak, SpotId::Menu__Breach_Map__GB_Peak) => true,
         (SpotId::Menu__Breach_Map__GB_SW_Save, SpotId::Menu__Breach_Map__GB_Peak) => true,
         (SpotId::Menu__Breach_Map__IB_Basement, SpotId::Menu__Breach_Map__GB_Peak) => true,
@@ -39257,6 +40236,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Ebih__Drone_Room__Item,
             SpotId::Ebih__Drone_Room__Portal,
             701,
+        ),
+        (
+            SpotId::Ebih__Drone_Room__Item,
+            SpotId::Menu__Kiengir_Map__Remote_Drone,
+            0,
         ),
         (
             SpotId::Ebih__Drone_Room__Item,
@@ -53290,8 +54274,18 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Irikar__Sight_Room__Item_Pedestal,
+            SpotId::Menu__Kiengir_Map__Breach_Sight,
+            0,
+        ),
+        (
+            SpotId::Irikar__Sight_Room__Item_Pedestal,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
+        ),
+        (
+            SpotId::Irikar__Sight_Room__Item_Pedestal,
+            SpotId::Menu__Warp_Only__Kiengir,
+            0,
         ),
         (
             SpotId::Irikar__Sight_Room__Lower_Ledge,
@@ -54875,6 +55869,156 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Menu__Kiengir_Map__Apocalypse,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Breach_Sight,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            1333,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Breach_Sight,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            1333,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Breach_Sight,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            1000,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Breach_Sight,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            1666,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Breach_Sight,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            1933,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Breach_Sight,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            1200,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Breach_Sight,
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+            1666,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Breach_Sight,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            1733,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Breach_Sight,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            1466,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Breach_Sight,
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+            1866,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Breach_Sight,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            1300,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Breach_Sight,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            2300,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Breach_Sight,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            1300,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Breach_Sight,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+            1600,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Breach_Sight,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            1900,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Breach_Sight,
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+            1000,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Breach_Sight,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            400,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Breach_Sight,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            1600,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Breach_Sight,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            2000,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Breach_Sight,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            1700,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Breach_Sight,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            266,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Breach_Sight,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            1800,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Breach_Sight,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            600,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Breach_Sight,
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+            300,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Breach_Sight,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            333,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Breach_Sight,
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+            733,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Breach_Sight,
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+            933,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Breach_Sight,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            600,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Breach_Sight,
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+            333,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Breach_Sight,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -56664,6 +57808,156 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             1000,
         ),
         (
+            SpotId::Menu__Kiengir_Map__Infect,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            900,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Infect,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            1200,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Infect,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            1000,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Infect,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            1200,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Infect,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            1600,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Infect,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            1700,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Infect,
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+            866,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Infect,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            1100,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Infect,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            1800,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Infect,
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+            1066,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Infect,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            400,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Infect,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            600,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Infect,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            466,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Infect,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+            400,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Infect,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            400,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Infect,
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+            866,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Infect,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            1300,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Infect,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            600,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Infect,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            800,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Infect,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            866,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Infect,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            1600,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Infect,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            1000,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Infect,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            1900,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Infect,
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+            1400,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Infect,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            1600,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Infect,
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+            1800,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Infect,
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+            1700,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Infect,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            1300,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Infect,
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+            1900,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Infect,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
             SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
             SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
             1933,
@@ -57100,6 +58394,156 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Remote_Drone,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            1200,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Remote_Drone,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            1500,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Remote_Drone,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            1300,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Remote_Drone,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            1500,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Remote_Drone,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            1900,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Remote_Drone,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            2000,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Remote_Drone,
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+            1100,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Remote_Drone,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            1400,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Remote_Drone,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            2100,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Remote_Drone,
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+            1200,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Remote_Drone,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            700,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Remote_Drone,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            300,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Remote_Drone,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            700,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Remote_Drone,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+            400,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Remote_Drone,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            266,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Remote_Drone,
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+            1000,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Remote_Drone,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            1600,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Remote_Drone,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            466,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Remote_Drone,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            666,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Remote_Drone,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            733,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Remote_Drone,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            1900,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Remote_Drone,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            1133,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Remote_Drone,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            2200,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Remote_Drone,
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+            1700,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Remote_Drone,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            1900,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Remote_Drone,
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+            2100,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Remote_Drone,
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+            2000,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Remote_Drone,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            1600,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Remote_Drone,
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+            2200,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Remote_Drone,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -66370,6 +67814,98 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
         (SpotId::Menu__Kiengir_Map__Apocalypse, SpotId::Menu__Kiengir_Map__Uhrum_West) => {
             Some(1533)
         }
+        (SpotId::Menu__Kiengir_Map__Breach_Sight, SpotId::Menu__Kiengir_Map__Amagi_East_Lake) => {
+            Some(1333)
+        }
+        (SpotId::Menu__Kiengir_Map__Breach_Sight, SpotId::Menu__Kiengir_Map__Amagi_Isolation) => {
+            Some(1333)
+        }
+        (SpotId::Menu__Kiengir_Map__Breach_Sight, SpotId::Menu__Kiengir_Map__Amagi_Main_Area) => {
+            Some(1000)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Breach_Sight,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => Some(1666),
+        (
+            SpotId::Menu__Kiengir_Map__Breach_Sight,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => Some(1933),
+        (
+            SpotId::Menu__Kiengir_Map__Breach_Sight,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => Some(1200),
+        (SpotId::Menu__Kiengir_Map__Breach_Sight, SpotId::Menu__Kiengir_Map__Annuna_Upper) => {
+            Some(1666)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Breach_Sight,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => Some(1733),
+        (
+            SpotId::Menu__Kiengir_Map__Breach_Sight,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => Some(1466),
+        (SpotId::Menu__Kiengir_Map__Breach_Sight, SpotId::Menu__Kiengir_Map__Apocalypse) => {
+            Some(1866)
+        }
+        (SpotId::Menu__Kiengir_Map__Breach_Sight, SpotId::Menu__Kiengir_Map__Ebih_Base_Camp) => {
+            Some(1300)
+        }
+        (SpotId::Menu__Kiengir_Map__Breach_Sight, SpotId::Menu__Kiengir_Map__Ebih_Observatory) => {
+            Some(2300)
+        }
+        (SpotId::Menu__Kiengir_Map__Breach_Sight, SpotId::Menu__Kiengir_Map__Ebih_West_Lower) => {
+            Some(1300)
+        }
+        (SpotId::Menu__Kiengir_Map__Breach_Sight, SpotId::Menu__Kiengir_Map__Ebih_West_Mid) => {
+            Some(1600)
+        }
+        (SpotId::Menu__Kiengir_Map__Breach_Sight, SpotId::Menu__Kiengir_Map__Ebih_West_Upper) => {
+            Some(1900)
+        }
+        (SpotId::Menu__Kiengir_Map__Breach_Sight, SpotId::Menu__Kiengir_Map__Giguna_Base) => {
+            Some(1000)
+        }
+        (SpotId::Menu__Kiengir_Map__Breach_Sight, SpotId::Menu__Kiengir_Map__Giguna_Labyrinth) => {
+            Some(400)
+        }
+        (SpotId::Menu__Kiengir_Map__Breach_Sight, SpotId::Menu__Kiengir_Map__Giguna_Northeast) => {
+            Some(1600)
+        }
+        (SpotId::Menu__Kiengir_Map__Breach_Sight, SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top) => {
+            Some(2000)
+        }
+        (SpotId::Menu__Kiengir_Map__Breach_Sight, SpotId::Menu__Kiengir_Map__Giguna_Ruins_West) => {
+            Some(1700)
+        }
+        (SpotId::Menu__Kiengir_Map__Breach_Sight, SpotId::Menu__Kiengir_Map__Giguna_Separator) => {
+            Some(266)
+        }
+        (SpotId::Menu__Kiengir_Map__Breach_Sight, SpotId::Menu__Kiengir_Map__Glacier_Revival) => {
+            Some(1800)
+        }
+        (SpotId::Menu__Kiengir_Map__Breach_Sight, SpotId::Menu__Kiengir_Map__Irikar_Beach_Save) => {
+            Some(600)
+        }
+        (SpotId::Menu__Kiengir_Map__Breach_Sight, SpotId::Menu__Kiengir_Map__Irikar_Hub) => {
+            Some(300)
+        }
+        (SpotId::Menu__Kiengir_Map__Breach_Sight, SpotId::Menu__Kiengir_Map__Irikar_Midwest) => {
+            Some(333)
+        }
+        (SpotId::Menu__Kiengir_Map__Breach_Sight, SpotId::Menu__Kiengir_Map__Uhrum_Center) => {
+            Some(733)
+        }
+        (SpotId::Menu__Kiengir_Map__Breach_Sight, SpotId::Menu__Kiengir_Map__Uhrum_East) => {
+            Some(933)
+        }
+        (SpotId::Menu__Kiengir_Map__Breach_Sight, SpotId::Menu__Kiengir_Map__Uhrum_Emergence) => {
+            Some(600)
+        }
+        (SpotId::Menu__Kiengir_Map__Breach_Sight, SpotId::Menu__Kiengir_Map__Uhrum_West) => {
+            Some(333)
+        }
         (SpotId::Menu__Kiengir_Map__Ebih_Base_Camp, SpotId::Menu__Kiengir_Map__Amagi_East_Lake) => {
             Some(500)
         }
@@ -67575,6 +69111,75 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
         (SpotId::Menu__Kiengir_Map__Glacier_Revival, SpotId::Menu__Kiengir_Map__Uhrum_West) => {
             Some(2000)
         }
+        (SpotId::Menu__Kiengir_Map__Infect, SpotId::Menu__Kiengir_Map__Amagi_East_Lake) => {
+            Some(900)
+        }
+        (SpotId::Menu__Kiengir_Map__Infect, SpotId::Menu__Kiengir_Map__Amagi_Isolation) => {
+            Some(1200)
+        }
+        (SpotId::Menu__Kiengir_Map__Infect, SpotId::Menu__Kiengir_Map__Amagi_Main_Area) => {
+            Some(1000)
+        }
+        (SpotId::Menu__Kiengir_Map__Infect, SpotId::Menu__Kiengir_Map__Annuna_Center_Save) => {
+            Some(1200)
+        }
+        (SpotId::Menu__Kiengir_Map__Infect, SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance) => {
+            Some(1600)
+        }
+        (SpotId::Menu__Kiengir_Map__Infect, SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match) => {
+            Some(1700)
+        }
+        (SpotId::Menu__Kiengir_Map__Infect, SpotId::Menu__Kiengir_Map__Annuna_Upper) => Some(866),
+        (SpotId::Menu__Kiengir_Map__Infect, SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room) => {
+            Some(1100)
+        }
+        (SpotId::Menu__Kiengir_Map__Infect, SpotId::Menu__Kiengir_Map__Annuna_West_Bridge) => {
+            Some(1800)
+        }
+        (SpotId::Menu__Kiengir_Map__Infect, SpotId::Menu__Kiengir_Map__Apocalypse) => Some(1066),
+        (SpotId::Menu__Kiengir_Map__Infect, SpotId::Menu__Kiengir_Map__Ebih_Base_Camp) => Some(400),
+        (SpotId::Menu__Kiengir_Map__Infect, SpotId::Menu__Kiengir_Map__Ebih_Observatory) => {
+            Some(600)
+        }
+        (SpotId::Menu__Kiengir_Map__Infect, SpotId::Menu__Kiengir_Map__Ebih_West_Lower) => {
+            Some(466)
+        }
+        (SpotId::Menu__Kiengir_Map__Infect, SpotId::Menu__Kiengir_Map__Ebih_West_Mid) => Some(400),
+        (SpotId::Menu__Kiengir_Map__Infect, SpotId::Menu__Kiengir_Map__Ebih_West_Upper) => {
+            Some(400)
+        }
+        (SpotId::Menu__Kiengir_Map__Infect, SpotId::Menu__Kiengir_Map__Giguna_Base) => Some(866),
+        (SpotId::Menu__Kiengir_Map__Infect, SpotId::Menu__Kiengir_Map__Giguna_Labyrinth) => {
+            Some(1300)
+        }
+        (SpotId::Menu__Kiengir_Map__Infect, SpotId::Menu__Kiengir_Map__Giguna_Northeast) => {
+            Some(600)
+        }
+        (SpotId::Menu__Kiengir_Map__Infect, SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top) => {
+            Some(800)
+        }
+        (SpotId::Menu__Kiengir_Map__Infect, SpotId::Menu__Kiengir_Map__Giguna_Ruins_West) => {
+            Some(866)
+        }
+        (SpotId::Menu__Kiengir_Map__Infect, SpotId::Menu__Kiengir_Map__Giguna_Separator) => {
+            Some(1600)
+        }
+        (SpotId::Menu__Kiengir_Map__Infect, SpotId::Menu__Kiengir_Map__Glacier_Revival) => {
+            Some(1000)
+        }
+        (SpotId::Menu__Kiengir_Map__Infect, SpotId::Menu__Kiengir_Map__Irikar_Beach_Save) => {
+            Some(1900)
+        }
+        (SpotId::Menu__Kiengir_Map__Infect, SpotId::Menu__Kiengir_Map__Irikar_Hub) => Some(1400),
+        (SpotId::Menu__Kiengir_Map__Infect, SpotId::Menu__Kiengir_Map__Irikar_Midwest) => {
+            Some(1600)
+        }
+        (SpotId::Menu__Kiengir_Map__Infect, SpotId::Menu__Kiengir_Map__Uhrum_Center) => Some(1800),
+        (SpotId::Menu__Kiengir_Map__Infect, SpotId::Menu__Kiengir_Map__Uhrum_East) => Some(1700),
+        (SpotId::Menu__Kiengir_Map__Infect, SpotId::Menu__Kiengir_Map__Uhrum_Emergence) => {
+            Some(1300)
+        }
+        (SpotId::Menu__Kiengir_Map__Infect, SpotId::Menu__Kiengir_Map__Uhrum_West) => Some(1900),
         (
             SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
             SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
@@ -67859,6 +69464,98 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
         }
         (SpotId::Menu__Kiengir_Map__Irikar_Midwest, SpotId::Menu__Kiengir_Map__Uhrum_West) => {
             Some(666)
+        }
+        (SpotId::Menu__Kiengir_Map__Remote_Drone, SpotId::Menu__Kiengir_Map__Amagi_East_Lake) => {
+            Some(1200)
+        }
+        (SpotId::Menu__Kiengir_Map__Remote_Drone, SpotId::Menu__Kiengir_Map__Amagi_Isolation) => {
+            Some(1500)
+        }
+        (SpotId::Menu__Kiengir_Map__Remote_Drone, SpotId::Menu__Kiengir_Map__Amagi_Main_Area) => {
+            Some(1300)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Remote_Drone,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => Some(1500),
+        (
+            SpotId::Menu__Kiengir_Map__Remote_Drone,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => Some(1900),
+        (
+            SpotId::Menu__Kiengir_Map__Remote_Drone,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => Some(2000),
+        (SpotId::Menu__Kiengir_Map__Remote_Drone, SpotId::Menu__Kiengir_Map__Annuna_Upper) => {
+            Some(1100)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Remote_Drone,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => Some(1400),
+        (
+            SpotId::Menu__Kiengir_Map__Remote_Drone,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => Some(2100),
+        (SpotId::Menu__Kiengir_Map__Remote_Drone, SpotId::Menu__Kiengir_Map__Apocalypse) => {
+            Some(1200)
+        }
+        (SpotId::Menu__Kiengir_Map__Remote_Drone, SpotId::Menu__Kiengir_Map__Ebih_Base_Camp) => {
+            Some(700)
+        }
+        (SpotId::Menu__Kiengir_Map__Remote_Drone, SpotId::Menu__Kiengir_Map__Ebih_Observatory) => {
+            Some(300)
+        }
+        (SpotId::Menu__Kiengir_Map__Remote_Drone, SpotId::Menu__Kiengir_Map__Ebih_West_Lower) => {
+            Some(700)
+        }
+        (SpotId::Menu__Kiengir_Map__Remote_Drone, SpotId::Menu__Kiengir_Map__Ebih_West_Mid) => {
+            Some(400)
+        }
+        (SpotId::Menu__Kiengir_Map__Remote_Drone, SpotId::Menu__Kiengir_Map__Ebih_West_Upper) => {
+            Some(266)
+        }
+        (SpotId::Menu__Kiengir_Map__Remote_Drone, SpotId::Menu__Kiengir_Map__Giguna_Base) => {
+            Some(1000)
+        }
+        (SpotId::Menu__Kiengir_Map__Remote_Drone, SpotId::Menu__Kiengir_Map__Giguna_Labyrinth) => {
+            Some(1600)
+        }
+        (SpotId::Menu__Kiengir_Map__Remote_Drone, SpotId::Menu__Kiengir_Map__Giguna_Northeast) => {
+            Some(466)
+        }
+        (SpotId::Menu__Kiengir_Map__Remote_Drone, SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top) => {
+            Some(666)
+        }
+        (SpotId::Menu__Kiengir_Map__Remote_Drone, SpotId::Menu__Kiengir_Map__Giguna_Ruins_West) => {
+            Some(733)
+        }
+        (SpotId::Menu__Kiengir_Map__Remote_Drone, SpotId::Menu__Kiengir_Map__Giguna_Separator) => {
+            Some(1900)
+        }
+        (SpotId::Menu__Kiengir_Map__Remote_Drone, SpotId::Menu__Kiengir_Map__Glacier_Revival) => {
+            Some(1133)
+        }
+        (SpotId::Menu__Kiengir_Map__Remote_Drone, SpotId::Menu__Kiengir_Map__Irikar_Beach_Save) => {
+            Some(2200)
+        }
+        (SpotId::Menu__Kiengir_Map__Remote_Drone, SpotId::Menu__Kiengir_Map__Irikar_Hub) => {
+            Some(1700)
+        }
+        (SpotId::Menu__Kiengir_Map__Remote_Drone, SpotId::Menu__Kiengir_Map__Irikar_Midwest) => {
+            Some(1900)
+        }
+        (SpotId::Menu__Kiengir_Map__Remote_Drone, SpotId::Menu__Kiengir_Map__Uhrum_Center) => {
+            Some(2100)
+        }
+        (SpotId::Menu__Kiengir_Map__Remote_Drone, SpotId::Menu__Kiengir_Map__Uhrum_East) => {
+            Some(2000)
+        }
+        (SpotId::Menu__Kiengir_Map__Remote_Drone, SpotId::Menu__Kiengir_Map__Uhrum_Emergence) => {
+            Some(1600)
+        }
+        (SpotId::Menu__Kiengir_Map__Remote_Drone, SpotId::Menu__Kiengir_Map__Uhrum_West) => {
+            Some(2200)
         }
         (SpotId::Menu__Kiengir_Map__Uhrum_Center, SpotId::Menu__Kiengir_Map__Amagi_East_Lake) => {
             Some(900)
@@ -76384,6 +78081,98 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
         (SpotId::Menu__Kiengir_Map__Apocalypse, SpotId::Menu__Kiengir_Map__Uhrum_West) => {
             (Some(1533), vec![])
         }
+        (SpotId::Menu__Kiengir_Map__Breach_Sight, SpotId::Menu__Kiengir_Map__Amagi_East_Lake) => {
+            (Some(1333), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Breach_Sight, SpotId::Menu__Kiengir_Map__Amagi_Isolation) => {
+            (Some(1333), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Breach_Sight, SpotId::Menu__Kiengir_Map__Amagi_Main_Area) => {
+            (Some(1000), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Breach_Sight,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => (Some(1666), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Breach_Sight,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => (Some(1933), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Breach_Sight,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => (Some(1200), vec![]),
+        (SpotId::Menu__Kiengir_Map__Breach_Sight, SpotId::Menu__Kiengir_Map__Annuna_Upper) => {
+            (Some(1666), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Breach_Sight,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => (Some(1733), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Breach_Sight,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => (Some(1466), vec![]),
+        (SpotId::Menu__Kiengir_Map__Breach_Sight, SpotId::Menu__Kiengir_Map__Apocalypse) => {
+            (Some(1866), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Breach_Sight, SpotId::Menu__Kiengir_Map__Ebih_Base_Camp) => {
+            (Some(1300), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Breach_Sight, SpotId::Menu__Kiengir_Map__Ebih_Observatory) => {
+            (Some(2300), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Breach_Sight, SpotId::Menu__Kiengir_Map__Ebih_West_Lower) => {
+            (Some(1300), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Breach_Sight, SpotId::Menu__Kiengir_Map__Ebih_West_Mid) => {
+            (Some(1600), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Breach_Sight, SpotId::Menu__Kiengir_Map__Ebih_West_Upper) => {
+            (Some(1900), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Breach_Sight, SpotId::Menu__Kiengir_Map__Giguna_Base) => {
+            (Some(1000), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Breach_Sight, SpotId::Menu__Kiengir_Map__Giguna_Labyrinth) => {
+            (Some(400), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Breach_Sight, SpotId::Menu__Kiengir_Map__Giguna_Northeast) => {
+            (Some(1600), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Breach_Sight, SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top) => {
+            (Some(2000), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Breach_Sight, SpotId::Menu__Kiengir_Map__Giguna_Ruins_West) => {
+            (Some(1700), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Breach_Sight, SpotId::Menu__Kiengir_Map__Giguna_Separator) => {
+            (Some(266), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Breach_Sight, SpotId::Menu__Kiengir_Map__Glacier_Revival) => {
+            (Some(1800), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Breach_Sight, SpotId::Menu__Kiengir_Map__Irikar_Beach_Save) => {
+            (Some(600), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Breach_Sight, SpotId::Menu__Kiengir_Map__Irikar_Hub) => {
+            (Some(300), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Breach_Sight, SpotId::Menu__Kiengir_Map__Irikar_Midwest) => {
+            (Some(333), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Breach_Sight, SpotId::Menu__Kiengir_Map__Uhrum_Center) => {
+            (Some(733), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Breach_Sight, SpotId::Menu__Kiengir_Map__Uhrum_East) => {
+            (Some(933), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Breach_Sight, SpotId::Menu__Kiengir_Map__Uhrum_Emergence) => {
+            (Some(600), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Breach_Sight, SpotId::Menu__Kiengir_Map__Uhrum_West) => {
+            (Some(333), vec![])
+        }
         (SpotId::Menu__Kiengir_Map__Ebih_Base_Camp, SpotId::Menu__Kiengir_Map__Amagi_East_Lake) => {
             (Some(500), vec![])
         }
@@ -77589,6 +79378,93 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
         (SpotId::Menu__Kiengir_Map__Glacier_Revival, SpotId::Menu__Kiengir_Map__Uhrum_West) => {
             (Some(2000), vec![])
         }
+        (SpotId::Menu__Kiengir_Map__Infect, SpotId::Menu__Kiengir_Map__Amagi_East_Lake) => {
+            (Some(900), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Infect, SpotId::Menu__Kiengir_Map__Amagi_Isolation) => {
+            (Some(1200), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Infect, SpotId::Menu__Kiengir_Map__Amagi_Main_Area) => {
+            (Some(1000), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Infect, SpotId::Menu__Kiengir_Map__Annuna_Center_Save) => {
+            (Some(1200), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Infect, SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance) => {
+            (Some(1600), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Infect, SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match) => {
+            (Some(1700), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Infect, SpotId::Menu__Kiengir_Map__Annuna_Upper) => {
+            (Some(866), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Infect, SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room) => {
+            (Some(1100), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Infect, SpotId::Menu__Kiengir_Map__Annuna_West_Bridge) => {
+            (Some(1800), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Infect, SpotId::Menu__Kiengir_Map__Apocalypse) => {
+            (Some(1066), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Infect, SpotId::Menu__Kiengir_Map__Ebih_Base_Camp) => {
+            (Some(400), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Infect, SpotId::Menu__Kiengir_Map__Ebih_Observatory) => {
+            (Some(600), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Infect, SpotId::Menu__Kiengir_Map__Ebih_West_Lower) => {
+            (Some(466), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Infect, SpotId::Menu__Kiengir_Map__Ebih_West_Mid) => {
+            (Some(400), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Infect, SpotId::Menu__Kiengir_Map__Ebih_West_Upper) => {
+            (Some(400), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Infect, SpotId::Menu__Kiengir_Map__Giguna_Base) => {
+            (Some(866), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Infect, SpotId::Menu__Kiengir_Map__Giguna_Labyrinth) => {
+            (Some(1300), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Infect, SpotId::Menu__Kiengir_Map__Giguna_Northeast) => {
+            (Some(600), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Infect, SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top) => {
+            (Some(800), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Infect, SpotId::Menu__Kiengir_Map__Giguna_Ruins_West) => {
+            (Some(866), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Infect, SpotId::Menu__Kiengir_Map__Giguna_Separator) => {
+            (Some(1600), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Infect, SpotId::Menu__Kiengir_Map__Glacier_Revival) => {
+            (Some(1000), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Infect, SpotId::Menu__Kiengir_Map__Irikar_Beach_Save) => {
+            (Some(1900), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Infect, SpotId::Menu__Kiengir_Map__Irikar_Hub) => {
+            (Some(1400), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Infect, SpotId::Menu__Kiengir_Map__Irikar_Midwest) => {
+            (Some(1600), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Infect, SpotId::Menu__Kiengir_Map__Uhrum_Center) => {
+            (Some(1800), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Infect, SpotId::Menu__Kiengir_Map__Uhrum_East) => {
+            (Some(1700), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Infect, SpotId::Menu__Kiengir_Map__Uhrum_Emergence) => {
+            (Some(1300), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Infect, SpotId::Menu__Kiengir_Map__Uhrum_West) => {
+            (Some(1900), vec![])
+        }
         (
             SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
             SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
@@ -77875,6 +79751,98 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
         }
         (SpotId::Menu__Kiengir_Map__Irikar_Midwest, SpotId::Menu__Kiengir_Map__Uhrum_West) => {
             (Some(666), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Remote_Drone, SpotId::Menu__Kiengir_Map__Amagi_East_Lake) => {
+            (Some(1200), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Remote_Drone, SpotId::Menu__Kiengir_Map__Amagi_Isolation) => {
+            (Some(1500), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Remote_Drone, SpotId::Menu__Kiengir_Map__Amagi_Main_Area) => {
+            (Some(1300), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Remote_Drone,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => (Some(1500), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Remote_Drone,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => (Some(1900), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Remote_Drone,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => (Some(2000), vec![]),
+        (SpotId::Menu__Kiengir_Map__Remote_Drone, SpotId::Menu__Kiengir_Map__Annuna_Upper) => {
+            (Some(1100), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Remote_Drone,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => (Some(1400), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Remote_Drone,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => (Some(2100), vec![]),
+        (SpotId::Menu__Kiengir_Map__Remote_Drone, SpotId::Menu__Kiengir_Map__Apocalypse) => {
+            (Some(1200), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Remote_Drone, SpotId::Menu__Kiengir_Map__Ebih_Base_Camp) => {
+            (Some(700), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Remote_Drone, SpotId::Menu__Kiengir_Map__Ebih_Observatory) => {
+            (Some(300), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Remote_Drone, SpotId::Menu__Kiengir_Map__Ebih_West_Lower) => {
+            (Some(700), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Remote_Drone, SpotId::Menu__Kiengir_Map__Ebih_West_Mid) => {
+            (Some(400), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Remote_Drone, SpotId::Menu__Kiengir_Map__Ebih_West_Upper) => {
+            (Some(266), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Remote_Drone, SpotId::Menu__Kiengir_Map__Giguna_Base) => {
+            (Some(1000), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Remote_Drone, SpotId::Menu__Kiengir_Map__Giguna_Labyrinth) => {
+            (Some(1600), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Remote_Drone, SpotId::Menu__Kiengir_Map__Giguna_Northeast) => {
+            (Some(466), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Remote_Drone, SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top) => {
+            (Some(666), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Remote_Drone, SpotId::Menu__Kiengir_Map__Giguna_Ruins_West) => {
+            (Some(733), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Remote_Drone, SpotId::Menu__Kiengir_Map__Giguna_Separator) => {
+            (Some(1900), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Remote_Drone, SpotId::Menu__Kiengir_Map__Glacier_Revival) => {
+            (Some(1133), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Remote_Drone, SpotId::Menu__Kiengir_Map__Irikar_Beach_Save) => {
+            (Some(2200), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Remote_Drone, SpotId::Menu__Kiengir_Map__Irikar_Hub) => {
+            (Some(1700), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Remote_Drone, SpotId::Menu__Kiengir_Map__Irikar_Midwest) => {
+            (Some(1900), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Remote_Drone, SpotId::Menu__Kiengir_Map__Uhrum_Center) => {
+            (Some(2100), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Remote_Drone, SpotId::Menu__Kiengir_Map__Uhrum_East) => {
+            (Some(2000), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Remote_Drone, SpotId::Menu__Kiengir_Map__Uhrum_Emergence) => {
+            (Some(1600), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Remote_Drone, SpotId::Menu__Kiengir_Map__Uhrum_West) => {
+            (Some(2200), vec![])
         }
         (SpotId::Menu__Kiengir_Map__Uhrum_Center, SpotId::Menu__Kiengir_Map__Amagi_East_Lake) => {
             (Some(900), vec![])

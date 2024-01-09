@@ -335,6 +335,11 @@ areas:
   on_entry: $reset_old_area(^newpos)
   data:
     portal_default: Irikar Breach > Save Room > Save Point
+  map:
+    urn: [14, 25, 15, 26]
+  datamap:
+    map_spot:
+      urn: Menu > Kiengir Map > Breach Sight
   spots:
     - name: West 24
       coord: [14.05, 24.55]
@@ -371,6 +376,18 @@ areas:
         - name: Urn
           item: Breach_Sight
           tags: [urn]
+      hybrid:
+        - name: Urn Collection Skip
+          item: Breach_Sight
+          canon: Breach_Sight
+          to: Menu > Warp Only > Kiengir
+          tags: [cskip]
+        - name: Urn Fast Travel
+          item: Breach_Sight
+          canon: Breach_Sight
+          req: Fast_Travel
+          to: Menu > Kiengir Map > Breach Sight
+          tags: [cskip]
 
     - name: Above Room North
       coord: [14.65, 23.1]
