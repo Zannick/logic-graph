@@ -11,6 +11,9 @@ areas:
     _combo: false
   map:
     save: [29, 18, 30, 19]
+  datamap:
+    map_spot:
+      save: Menu > Kiengir Map > Amagi Main Area
   spots:
     - name: East 15
       coord: [30.95, 14.85]

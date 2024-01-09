@@ -171,6 +171,9 @@ areas:
     _doors_opened: false
   map:
     save: [36, 26, 27, 27]
+  datamap:
+    map_spot:
+      save: Menu > Kiengir Map > Annuna West Bridge
   spots:
     #region Main Corridor
     - name: West 25 Lower
@@ -992,6 +995,9 @@ areas:
   on_entry: $reset_old_area(^newpos)
   map:
     save: [40, 19, 41, 20]
+  datamap:
+    map_spot:
+      save: Menu > Kiengir Map > Annuna Vertical Room
   spots:
     #region Lower
     - name: West 22
@@ -1181,6 +1187,8 @@ areas:
 - name: Factory Entrance
   on_entry: $reset_old_area(^newpos)
   map: save
+  data:
+    map_spot: Menu > Kiengir Map > Annuna Factory Entrance
   spots:
     - name: West
       coord: [43.05, 24.6]
@@ -1411,6 +1419,8 @@ areas:
 - name: Center Save
   on_entry: $reset_old_area(^newpos)
   map: save
+  data:
+    map_spot: Menu > Kiengir Map > Annuna Center Save
   spots:
     - name: East
       coord: [39.95, 20.6]
@@ -1836,6 +1846,8 @@ areas:
 - name: Final Save
   on_entry: $reset_old_area(^newpos)
   map: save
+  data:
+    map_spot: Menu > Kiengir Map > Apocalypse
   spots:
     - name: Upper West
       coord: [42.05, 16.4]

@@ -6,6 +6,9 @@ areas:
   on_entry: $reset_old_area(^newpos)
   map:
     save: [19, 27, 20, 28]
+  datamap:
+    map_spot:
+      save: Menu > Kiengir Map > Uhrum West
   spots:
     - name: West 27
       coord: [19.05, 26.8]
@@ -1275,6 +1278,8 @@ areas:
 - name: Save Room
   on_entry: $reset_old_area(^newpos)
   map: save
+  data:
+    map_spot: Menu > Kiengir Map > Uhrum Center
   spots:
     - name: East
       coord: [25.95, 26.75]
@@ -1322,6 +1327,9 @@ areas:
   on_entry: $reset_old_area(^newpos)
   map:
     save: [28, 25, 29, 26]
+  datamap:
+    map_spot:
+      save: Menu > Kiengir Map > Uhrum East
   spots:
     - name: West 25
       coord: [28.05, 24.75]

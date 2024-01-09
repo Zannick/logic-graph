@@ -103,10 +103,6 @@ pub fn access_amagi_west_lake_surface_wall(ctx: &Context, world: &graph::World) 
     // Amagi_West_Lake_Surface_Wall
     ctx.has(Item::Amagi_West_Lake_Surface_Wall)
 }
-pub fn access_amashilama(ctx: &Context, world: &graph::World) -> bool {
-    // Amashilama
-    ctx.has(Item::Amashilama)
-}
 pub fn access_annuna__east_bridge__tower_east_ledge__enter_combo__req(
     ctx: &Context,
     world: &graph::World,
@@ -1603,6 +1599,10 @@ pub fn access_map__giguna__ruins_top__save(ctx: &Context, world: &graph::World) 
 pub fn access_map__giguna__ruins_west__save(ctx: &Context, world: &graph::World) -> bool {
     // ^map__giguna__ruins_west__save
     ctx.map__giguna__ruins_west__save()
+}
+pub fn access_map__glacier__revival__save(ctx: &Context, world: &graph::World) -> bool {
+    // ^map__glacier__revival__save
+    ctx.map__glacier__revival__save()
 }
 pub fn access_map__irikar__hub__save(ctx: &Context, world: &graph::World) -> bool {
     // ^map__irikar__hub__save

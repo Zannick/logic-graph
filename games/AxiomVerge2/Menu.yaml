@@ -399,7 +399,7 @@ areas:
       coord: [41, 8]
       exits:
         - to: Glacier > Revival > Save Point
-          req: Amashilama
+          req: ^map__glacier__revival__save
           time: 12
           penalties:
             - when: ^mode == 'drone'

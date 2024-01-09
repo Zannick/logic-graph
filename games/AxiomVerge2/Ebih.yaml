@@ -8,6 +8,9 @@ areas:
   on_entry: $reset_old_area(^newpos)
   map:
     save: [29, 12, 30, 13]
+  datamap:
+    map_spot:
+      save: Menu > Kiengir Map > Ebih Base Camp
   spots:
     - name: East 11
       coord: [30.95, 10.35]
@@ -946,6 +949,11 @@ areas:
     mid_save: [20, 9, 21, 10]
     upper_save: [20, 6, 21, 7]
     lower_save: [19, 12, 20, 13]
+  datamap:
+    map_spot:
+      mid_save: Menu > Kiengir Map > Ebih West Mid
+      upper_save: Menu > Kiengir Map > Ebih West Upper
+      lower_save: Menu > Kiengir Map > Ebih West Lower
   spots:
     - name: East 10
       coord: [20.95, 9.7]

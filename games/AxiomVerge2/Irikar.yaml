@@ -7,6 +7,9 @@ areas:
     portal_default: Irikar Breach > Gauntlet > Save Point
   map:
     save: [12, 22, 13, 23]
+  datamap:
+    map_spot:
+      save: Menu > Kiengir Map > Irikar Hub
   spots:
     - name: Northwest
       coord: [11.0, 20.1]

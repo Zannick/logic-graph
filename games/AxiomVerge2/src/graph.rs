@@ -4350,7 +4350,7 @@ impl world::Accessible for Exit {
             ExitId::Menu__Kiengir_Map__Giguna_Northeast__ex__Giguna__Giguna_Northeast__Save_Point_1 => rules::access_map__giguna__giguna_northeast__save(&ctx, world),
             ExitId::Menu__Kiengir_Map__Giguna_Ruins_Top__ex__Giguna__Ruins_Top__Save_Point_1 => rules::access_map__giguna__ruins_top__save(&ctx, world),
             ExitId::Menu__Kiengir_Map__Giguna_Ruins_West__ex__Giguna__Ruins_West__Save_Point_1 => rules::access_map__giguna__ruins_west__save(&ctx, world),
-            ExitId::Menu__Kiengir_Map__Glacier_Revival__ex__Glacier__Revival__Save_Point_1 => rules::access_amashilama(&ctx, world),
+            ExitId::Menu__Kiengir_Map__Glacier_Revival__ex__Glacier__Revival__Save_Point_1 => rules::access_map__glacier__revival__save(&ctx, world),
             ExitId::Menu__Kiengir_Map__Irikar_Hub__ex__Irikar__Hub__Save_Point_1 => rules::access_map__irikar__hub__save(&ctx, world),
             ExitId::Menu__Kiengir_Map__Uhrum_Center__ex__Uhrum__Save_Room__Save_Point_1 => rules::access_map__uhrum__save_room__save(&ctx, world),
             ExitId::Menu__Kiengir_Map__Uhrum_East__ex__Uhrum__Annuna_Corridor__Save_Point_1 => rules::access_map__uhrum__annuna_corridor__save(&ctx, world),

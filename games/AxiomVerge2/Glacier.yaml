@@ -27,6 +27,11 @@ areas:
 
 - name: Revival
   on_entry: $reset_old_area(^newpos)
+  map:
+    save: [41, 7, 42, 8]
+  datamap:
+    map_spot:
+      save: Menu > Kiengir Map > Glacier Revival
   spots:
     - name: East 9
       coord: [41.95, 8.5]
