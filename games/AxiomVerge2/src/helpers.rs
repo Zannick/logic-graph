@@ -548,7 +548,9 @@ macro_rules! helper__reset_old_area {
     ($ctx:expr, $world:expr, $newpos:expr) => {{
         #[allow(unused_imports)]
         use $crate::items::Item;
-        if ((get_region($ctx.position()) != RegionId::Menu
+        if (($ctx.position() != SpotId::None
+            && get_region($ctx.position()) != RegionId::Menu
+            && $ctx.position() != SpotId::None
             && get_area($ctx.position()) != $ctx.prev_area())
             && get_area($newpos) != get_area($ctx.position()))
         {
@@ -556,7 +558,9 @@ macro_rules! helper__reset_old_area {
                 $ctx.reset_area($ctx.prev_area(), $world);
             }
             $ctx.set_prev_area(get_area($ctx.position()));
-        } else if ((get_area($ctx.position()) == AreaId::Menu__Warp_Only
+        } else if (($ctx.position() != SpotId::None
+            && get_area($ctx.position()) == AreaId::Menu__Warp_Only
+            && $ctx.last() != SpotId::None
             && get_area($ctx.last()) != $ctx.prev_area())
             && get_area($newpos) != get_area($ctx.last()))
         {

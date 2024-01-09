@@ -12,17 +12,17 @@ REF_GETTER_TYPE = re.compile(r'(?:ctx\.|data::)([^(]*)\(')
 
 class RustVisitor(RulesVisitor):
 
-    def __init__(self, rules, context_types, action_funcs, ctxdict, data_keys, name):
+    def __init__(self, rules, context_types, action_funcs, ctxdict, data_types, name):
         self.rules = rules
         self.context_types = context_types
         self.action_funcs = action_funcs
         self.ctxdict = ctxdict
-        self.data_keys = data_keys
+        self.data_types = data_types
         self.name = name
         self.rettype = None
 
     def _getRefGetter(self, ref):
-        if ref in self.data_keys:
+        if ref in self.data_types:
             return f'data::{ref}(ctx.position())'
         if ref in self.ctxdict:
             return f'ctx.{self.ctxdict[ref]}()'
@@ -39,6 +39,17 @@ class RustVisitor(RulesVisitor):
 
     def _getRefEnum(self, ref):
         return f'enums::{ref.capitalize()}'
+    
+    def _isRefSpotId(self, ref):
+        if ref in self.context_types:
+            return 'SpotId' == self.context_types[ref]
+        if ref in self.data_types:
+            return 'SpotId' == self.data_types[ref]
+        # TODO: This probably needs to handle access funcs as well
+        if func := self.action_funcs.get(self.name):
+            if ref in func.get('args', {}):
+                return 'SpotId' == func['args'][ref]
+        return False
 
     def _getFuncAndArgs(self, func):
         if func in BUILTINS:
@@ -273,28 +284,42 @@ class RustVisitor(RulesVisitor):
     def visitRefInPlaceRef(self, ctx):
         ptype = self.context_types[str(ctx.REF(1))[1:]]
         eq = '!' if ctx.NOT() else '='
-        get = f'{self._getRefGetter(str(ctx.REF(0))[1:])}'
+        ref = str(ctx.REF(0))[1:]
+        get = f'{self._getRefGetter(ref)}'
         if ptype != 'SpotId':
-            get = f'get_{ptype[:-2].lower()}({get})'
+            if self._isRefSpotId(ref):
+                get = f'{get} != SpotId::None && get_{ptype[:-2].lower()}({get})'
+            else:
+                get = f'get_{ptype[:-2].lower()}({get})'
         return f'{get} {eq}= {self._getRefGetter(str(ctx.REF(1))[1:])}'
     
     def visitRefInPlaceName(self, ctx):
         pl = str(ctx.PLACE())[1:-1]
         ptype = getPlaceType(pl)
         eq = '!' if ctx.NOT() else '='
-        get = f'{self._getRefGetter(str(ctx.REF())[1:])}'
+        ref = str(ctx.REF())[1:]
+        get = f'{self._getRefGetter(ref)}'
         if ptype == 'SpotId':
             val = construct_spot_id(*place_to_names(pl))
         else:
-            get = f'get_{ptype[:-2].lower()}({get})'
             val = f'{ptype}::{construct_id(pl)}'
+            if self._isRefSpotId(ref):
+                get = f'{get} != SpotId::None && get_{ptype[:-2].lower()}({get})'
+            else:
+                get = f'get_{ptype[:-2].lower()}({get})'
         return f'{get} {eq}= {val}'
 
     def visitRefInFunc(self, ctx):
         func = str(ctx.invoke().FUNC())[1:]
         eq = '!' if ctx.NOT() else '='
+        ref = str(ctx.REF())[1:]
+        get = self._getRefGetter(ref)
         if func == 'default':
-            return f'{self._getRefGetter(str(ctx.REF())[1:])} {eq}= {self.visit(ctx.invoke())}'
+            return f'{get} {eq}= {self.visit(ctx.invoke())}'
         assert func in ('get_area', 'get_region')
-        return (f'{func}({self._getRefGetter(str(ctx.REF())[1:])}) '
+        if self._isRefSpotId(ref):
+            check = f'{get} != SpotId && '
+        else:
+            check = ''
+        return (f'{check}{func}({get}) '
                 f'{eq}= {self.visit(ctx.invoke())}')

@@ -672,7 +672,8 @@ pub fn access_ft_main_and___map_spot_within_menu_gt_kiengir_map(
 ) -> bool {
     // $ft_main and (^map_spot WITHIN `Menu > Kiengir Map`)
     (helper__ft_main!(ctx, world)
-        && (get_area(data::map_spot(ctx.position())) == AreaId::Menu__Kiengir_Map))
+        && (data::map_spot(ctx.position()) != SpotId::None
+            && get_area(data::map_spot(ctx.position())) == AreaId::Menu__Kiengir_Map))
 }
 pub fn access_giguna__carnelian__door__ex__switch_1__req(
     ctx: &Context,

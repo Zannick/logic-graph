@@ -1637,7 +1637,7 @@ class GameLogic(object):
                            self.context_types,
                            self.action_funcs,
                            self.get_local_ctx(info),
-                           self.data_defaults.keys(),
+                           self.data_types,
                            id or pr.name).visit(pr.tree)
 
 
