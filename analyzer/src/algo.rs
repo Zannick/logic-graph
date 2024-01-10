@@ -277,7 +277,7 @@ where
                     start.elapsed(),
                     wonctx.elapsed(),
                     if oi > 0 {
-                        format!("on partial route #{}", oi + 1)
+                        format!("on partial route #{}", oi)
                     } else {
                         String::from("from scratch")
                     }
