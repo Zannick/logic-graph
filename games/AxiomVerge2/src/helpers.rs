@@ -396,7 +396,7 @@ macro_rules! helper__attract {
 }
 
 /// $all_notes (  )
-/// [Dear_Ernest, Researchers_Missing, Letter_from_Trace,  Heretics_Tablet, Terminal_Breakthrough_1, Companies_Layoff, Record_Losses,  Under_Siege, The_Ideal_Kiengir, Building_of_the_School, Commemorative_Speech,  Terminal_Breakthrough_2, Dangerous_Ideas, Storm_Bomb]
+/// [Dear_Ernest, Researchers_Missing, Letter_from_Trace,  Heretics_Tablet, Terminal_Breakthrough_1, Companies_Layoff, Record_Losses,  Under_Siege, The_Ideal_Kiengir, Building_of_the_School, Commemorative_Speech,  Terminal_Breakthrough_2, Dangerous_Ideas, Storm_Bomb, Suspension_Bridge, Plague_of_Thoughts,  Lament_for_Fools, Family_Tragedy, Destruction_Pogrom]
 #[macro_export]
 macro_rules! helper__all_notes {
     ($ctx:expr, $world:expr) => {{
@@ -416,17 +416,22 @@ macro_rules! helper__all_notes {
             && $ctx.has(Item::Terminal_Breakthrough_2)
             && $ctx.has(Item::Dangerous_Ideas)
             && $ctx.has(Item::Storm_Bomb)
+            && $ctx.has(Item::Suspension_Bridge)
+            && $ctx.has(Item::Plague_of_Thoughts)
+            && $ctx.has(Item::Lament_for_Fools)
+            && $ctx.has(Item::Family_Tragedy)
+            && $ctx.has(Item::Destruction_Pogrom)
     }};
 }
 
 /// $all_flasks (  )
-/// [Flask{12}, Big_Flask]
+/// [Flask{13}, Big_Flask]
 #[macro_export]
 macro_rules! helper__all_flasks {
     ($ctx:expr, $world:expr) => {{
         #[allow(unused_imports)]
         use $crate::items::Item;
-        $ctx.count(Item::Flask) >= 12 && $ctx.has(Item::Big_Flask)
+        $ctx.count(Item::Flask) >= 13 && $ctx.has(Item::Big_Flask)
     }};
 }
 
@@ -442,29 +447,32 @@ macro_rules! helper__all_health {
 }
 
 /// $all_weapons (  )
-/// [Ice_Axe, Bronze_Axe]
+/// [Boomerang, Ice_Axe, Bronze_Axe]
 #[macro_export]
 macro_rules! helper__all_weapons {
     ($ctx:expr, $world:expr) => {{
         #[allow(unused_imports)]
         use $crate::items::Item;
-        $ctx.has(Item::Ice_Axe) && $ctx.has(Item::Bronze_Axe)
+        $ctx.has(Item::Boomerang) && $ctx.has(Item::Ice_Axe) && $ctx.has(Item::Bronze_Axe)
     }};
 }
 
 /// $other_items (  )
-/// [Compass, Boomerang, Power_Matrix]
+/// [Compass, Power_Matrix, Nano_Lattice_2, Eye_Ring]
 #[macro_export]
 macro_rules! helper__other_items {
     ($ctx:expr, $world:expr) => {{
         #[allow(unused_imports)]
         use $crate::items::Item;
-        $ctx.has(Item::Compass) && $ctx.has(Item::Boomerang) && $ctx.has(Item::Power_Matrix)
+        $ctx.has(Item::Compass)
+            && $ctx.has(Item::Power_Matrix)
+            && $ctx.has(Item::Nano_Lattice_2)
+            && $ctx.has(Item::Eye_Ring)
     }};
 }
 
 /// $all_urns (  )
-/// [Amashilama, Ledge_Grab, Infect, Remote_Drone, Shockwave, Wall_Climb, Slingshot_Hook, Breach_Sight,  Drone_Hover, Fast_Travel]
+/// [Amashilama, Ledge_Grab, Infect, Remote_Drone, Shockwave, Wall_Climb, Slingshot_Hook, Breach_Sight,  Drone_Hover, Fast_Travel, Anuman]
 #[macro_export]
 macro_rules! helper__all_urns {
     ($ctx:expr, $world:expr) => {{
@@ -480,6 +488,7 @@ macro_rules! helper__all_urns {
             && $ctx.has(Item::Breach_Sight)
             && $ctx.has(Item::Drone_Hover)
             && $ctx.has(Item::Fast_Travel)
+            && $ctx.has(Item::Anuman)
     }};
 }
 

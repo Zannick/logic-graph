@@ -10022,6 +10022,11 @@ impl world::World for World {
                                 map.insert(Item::Amashilama, 1);
                             }
                         }
+                        if !ctx.has(Item::Anuman) {
+                            if !map.contains_key(&Item::Anuman) {
+                                map.insert(Item::Anuman, 1);
+                            }
+                        }
                         if !ctx.has(Item::Big_Flask) {
                             if !map.contains_key(&Item::Big_Flask) {
                                 map.insert(Item::Big_Flask, 1);
@@ -10072,9 +10077,24 @@ impl world::World for World {
                                 map.insert(Item::Dear_Ernest, 1);
                             }
                         }
+                        if !ctx.has(Item::Destruction_Pogrom) {
+                            if !map.contains_key(&Item::Destruction_Pogrom) {
+                                map.insert(Item::Destruction_Pogrom, 1);
+                            }
+                        }
                         if !ctx.has(Item::Drone_Hover) {
                             if !map.contains_key(&Item::Drone_Hover) {
                                 map.insert(Item::Drone_Hover, 1);
+                            }
+                        }
+                        if !ctx.has(Item::Eye_Ring) {
+                            if !map.contains_key(&Item::Eye_Ring) {
+                                map.insert(Item::Eye_Ring, 1);
+                            }
+                        }
+                        if !ctx.has(Item::Family_Tragedy) {
+                            if !map.contains_key(&Item::Family_Tragedy) {
+                                map.insert(Item::Family_Tragedy, 1);
                             }
                         }
                         if !ctx.has(Item::Fast_Travel) {
@@ -10082,11 +10102,11 @@ impl world::World for World {
                                 map.insert(Item::Fast_Travel, 1);
                             }
                         }
-                        if ctx.count(Item::Flask) < 12 {
+                        if ctx.count(Item::Flask) < 13 {
                             if let Some(val) = map.get_mut(&Item::Flask) {
-                                *val = std::cmp::max(*val, 12 - ctx.count(Item::Flask));
+                                *val = std::cmp::max(*val, 13 - ctx.count(Item::Flask));
                             } else {
-                                map.insert(Item::Flask, 12 - ctx.count(Item::Flask));
+                                map.insert(Item::Flask, 13 - ctx.count(Item::Flask));
                             }
                         }
                         if ctx.count(Item::Health_Fragment) < 6 {
@@ -10119,6 +10139,11 @@ impl world::World for World {
                                 map.insert(Item::Infect, 1);
                             }
                         }
+                        if !ctx.has(Item::Lament_for_Fools) {
+                            if !map.contains_key(&Item::Lament_for_Fools) {
+                                map.insert(Item::Lament_for_Fools, 1);
+                            }
+                        }
                         if !ctx.has(Item::Ledge_Grab) {
                             if !map.contains_key(&Item::Ledge_Grab) {
                                 map.insert(Item::Ledge_Grab, 1);
@@ -10127,6 +10152,16 @@ impl world::World for World {
                         if !ctx.has(Item::Letter_from_Trace) {
                             if !map.contains_key(&Item::Letter_from_Trace) {
                                 map.insert(Item::Letter_from_Trace, 1);
+                            }
+                        }
+                        if !ctx.has(Item::Nano_Lattice_2) {
+                            if !map.contains_key(&Item::Nano_Lattice_2) {
+                                map.insert(Item::Nano_Lattice_2, 1);
+                            }
+                        }
+                        if !ctx.has(Item::Plague_of_Thoughts) {
+                            if !map.contains_key(&Item::Plague_of_Thoughts) {
+                                map.insert(Item::Plague_of_Thoughts, 1);
                             }
                         }
                         if !ctx.has(Item::Power_Matrix) {
@@ -10162,6 +10197,11 @@ impl world::World for World {
                         if !ctx.has(Item::Storm_Bomb) {
                             if !map.contains_key(&Item::Storm_Bomb) {
                                 map.insert(Item::Storm_Bomb, 1);
+                            }
+                        }
+                        if !ctx.has(Item::Suspension_Bridge) {
+                            if !map.contains_key(&Item::Suspension_Bridge) {
+                                map.insert(Item::Suspension_Bridge, 1);
                             }
                         }
                         if !ctx.has(Item::Terminal_Breakthrough_1) {
@@ -10204,6 +10244,11 @@ impl world::World for World {
                     if !ctx.has(Item::Amashilama) {
                         if !map.contains_key(&Item::Amashilama) {
                             map.insert(Item::Amashilama, 1);
+                        }
+                    }
+                    if !ctx.has(Item::Anuman) {
+                        if !map.contains_key(&Item::Anuman) {
+                            map.insert(Item::Anuman, 1);
                         }
                     }
                     if !ctx.has(Item::Big_Flask) {
@@ -10256,9 +10301,24 @@ impl world::World for World {
                             map.insert(Item::Dear_Ernest, 1);
                         }
                     }
+                    if !ctx.has(Item::Destruction_Pogrom) {
+                        if !map.contains_key(&Item::Destruction_Pogrom) {
+                            map.insert(Item::Destruction_Pogrom, 1);
+                        }
+                    }
                     if !ctx.has(Item::Drone_Hover) {
                         if !map.contains_key(&Item::Drone_Hover) {
                             map.insert(Item::Drone_Hover, 1);
+                        }
+                    }
+                    if !ctx.has(Item::Eye_Ring) {
+                        if !map.contains_key(&Item::Eye_Ring) {
+                            map.insert(Item::Eye_Ring, 1);
+                        }
+                    }
+                    if !ctx.has(Item::Family_Tragedy) {
+                        if !map.contains_key(&Item::Family_Tragedy) {
+                            map.insert(Item::Family_Tragedy, 1);
                         }
                     }
                     if !ctx.has(Item::Fast_Travel) {
@@ -10266,11 +10326,11 @@ impl world::World for World {
                             map.insert(Item::Fast_Travel, 1);
                         }
                     }
-                    if ctx.count(Item::Flask) < 12 {
+                    if ctx.count(Item::Flask) < 13 {
                         if let Some(val) = map.get_mut(&Item::Flask) {
-                            *val = std::cmp::max(*val, 12 - ctx.count(Item::Flask));
+                            *val = std::cmp::max(*val, 13 - ctx.count(Item::Flask));
                         } else {
-                            map.insert(Item::Flask, 12 - ctx.count(Item::Flask));
+                            map.insert(Item::Flask, 13 - ctx.count(Item::Flask));
                         }
                     }
                     if ctx.count(Item::Health_Fragment) < 6 {
@@ -10300,6 +10360,11 @@ impl world::World for World {
                             map.insert(Item::Infect, 1);
                         }
                     }
+                    if !ctx.has(Item::Lament_for_Fools) {
+                        if !map.contains_key(&Item::Lament_for_Fools) {
+                            map.insert(Item::Lament_for_Fools, 1);
+                        }
+                    }
                     if !ctx.has(Item::Ledge_Grab) {
                         if !map.contains_key(&Item::Ledge_Grab) {
                             map.insert(Item::Ledge_Grab, 1);
@@ -10308,6 +10373,16 @@ impl world::World for World {
                     if !ctx.has(Item::Letter_from_Trace) {
                         if !map.contains_key(&Item::Letter_from_Trace) {
                             map.insert(Item::Letter_from_Trace, 1);
+                        }
+                    }
+                    if !ctx.has(Item::Nano_Lattice_2) {
+                        if !map.contains_key(&Item::Nano_Lattice_2) {
+                            map.insert(Item::Nano_Lattice_2, 1);
+                        }
+                    }
+                    if !ctx.has(Item::Plague_of_Thoughts) {
+                        if !map.contains_key(&Item::Plague_of_Thoughts) {
+                            map.insert(Item::Plague_of_Thoughts, 1);
                         }
                     }
                     if !ctx.has(Item::Power_Matrix) {
@@ -10343,6 +10418,11 @@ impl world::World for World {
                     if !ctx.has(Item::Storm_Bomb) {
                         if !map.contains_key(&Item::Storm_Bomb) {
                             map.insert(Item::Storm_Bomb, 1);
+                        }
+                    }
+                    if !ctx.has(Item::Suspension_Bridge) {
+                        if !map.contains_key(&Item::Suspension_Bridge) {
+                            map.insert(Item::Suspension_Bridge, 1);
                         }
                     }
                     if !ctx.has(Item::Terminal_Breakthrough_1) {
@@ -10393,6 +10473,9 @@ impl world::World for World {
                         if !map.contains_key(&Item::Amashilama) {
                             map.insert(Item::Amashilama, 1);
                         }
+                        if !map.contains_key(&Item::Anuman) {
+                            map.insert(Item::Anuman, 1);
+                        }
                         if !map.contains_key(&Item::Big_Flask) {
                             map.insert(Item::Big_Flask, 1);
                         }
@@ -10423,16 +10506,25 @@ impl world::World for World {
                         if !map.contains_key(&Item::Dear_Ernest) {
                             map.insert(Item::Dear_Ernest, 1);
                         }
+                        if !map.contains_key(&Item::Destruction_Pogrom) {
+                            map.insert(Item::Destruction_Pogrom, 1);
+                        }
                         if !map.contains_key(&Item::Drone_Hover) {
                             map.insert(Item::Drone_Hover, 1);
+                        }
+                        if !map.contains_key(&Item::Eye_Ring) {
+                            map.insert(Item::Eye_Ring, 1);
+                        }
+                        if !map.contains_key(&Item::Family_Tragedy) {
+                            map.insert(Item::Family_Tragedy, 1);
                         }
                         if !map.contains_key(&Item::Fast_Travel) {
                             map.insert(Item::Fast_Travel, 1);
                         }
                         if let Some(val) = map.get_mut(&Item::Flask) {
-                            *val = std::cmp::max(*val, 12);
+                            *val = std::cmp::max(*val, 13);
                         } else {
-                            map.insert(Item::Flask, 12);
+                            map.insert(Item::Flask, 13);
                         }
                         if let Some(val) = map.get_mut(&Item::Health_Fragment) {
                             *val = std::cmp::max(*val, 6);
@@ -10451,11 +10543,20 @@ impl world::World for World {
                         if !map.contains_key(&Item::Infect) {
                             map.insert(Item::Infect, 1);
                         }
+                        if !map.contains_key(&Item::Lament_for_Fools) {
+                            map.insert(Item::Lament_for_Fools, 1);
+                        }
                         if !map.contains_key(&Item::Ledge_Grab) {
                             map.insert(Item::Ledge_Grab, 1);
                         }
                         if !map.contains_key(&Item::Letter_from_Trace) {
                             map.insert(Item::Letter_from_Trace, 1);
+                        }
+                        if !map.contains_key(&Item::Nano_Lattice_2) {
+                            map.insert(Item::Nano_Lattice_2, 1);
+                        }
+                        if !map.contains_key(&Item::Plague_of_Thoughts) {
+                            map.insert(Item::Plague_of_Thoughts, 1);
                         }
                         if !map.contains_key(&Item::Power_Matrix) {
                             map.insert(Item::Power_Matrix, 1);
@@ -10477,6 +10578,9 @@ impl world::World for World {
                         }
                         if !map.contains_key(&Item::Storm_Bomb) {
                             map.insert(Item::Storm_Bomb, 1);
+                        }
+                        if !map.contains_key(&Item::Suspension_Bridge) {
+                            map.insert(Item::Suspension_Bridge, 1);
                         }
                         if !map.contains_key(&Item::Terminal_Breakthrough_1) {
                             map.insert(Item::Terminal_Breakthrough_1, 1);
@@ -10505,6 +10609,9 @@ impl world::World for World {
                 RuleObjective::AllItems => {
                     if !map.contains_key(&Item::Amashilama) {
                         map.insert(Item::Amashilama, 1);
+                    }
+                    if !map.contains_key(&Item::Anuman) {
+                        map.insert(Item::Anuman, 1);
                     }
                     if !map.contains_key(&Item::Big_Flask) {
                         map.insert(Item::Big_Flask, 1);
@@ -10536,16 +10643,25 @@ impl world::World for World {
                     if !map.contains_key(&Item::Dear_Ernest) {
                         map.insert(Item::Dear_Ernest, 1);
                     }
+                    if !map.contains_key(&Item::Destruction_Pogrom) {
+                        map.insert(Item::Destruction_Pogrom, 1);
+                    }
                     if !map.contains_key(&Item::Drone_Hover) {
                         map.insert(Item::Drone_Hover, 1);
+                    }
+                    if !map.contains_key(&Item::Eye_Ring) {
+                        map.insert(Item::Eye_Ring, 1);
+                    }
+                    if !map.contains_key(&Item::Family_Tragedy) {
+                        map.insert(Item::Family_Tragedy, 1);
                     }
                     if !map.contains_key(&Item::Fast_Travel) {
                         map.insert(Item::Fast_Travel, 1);
                     }
                     if let Some(val) = map.get_mut(&Item::Flask) {
-                        *val = std::cmp::max(*val, 12);
+                        *val = std::cmp::max(*val, 13);
                     } else {
-                        map.insert(Item::Flask, 12);
+                        map.insert(Item::Flask, 13);
                     }
                     if let Some(val) = map.get_mut(&Item::Health_Fragment) {
                         *val = std::cmp::max(*val, 6);
@@ -10564,11 +10680,20 @@ impl world::World for World {
                     if !map.contains_key(&Item::Infect) {
                         map.insert(Item::Infect, 1);
                     }
+                    if !map.contains_key(&Item::Lament_for_Fools) {
+                        map.insert(Item::Lament_for_Fools, 1);
+                    }
                     if !map.contains_key(&Item::Ledge_Grab) {
                         map.insert(Item::Ledge_Grab, 1);
                     }
                     if !map.contains_key(&Item::Letter_from_Trace) {
                         map.insert(Item::Letter_from_Trace, 1);
+                    }
+                    if !map.contains_key(&Item::Nano_Lattice_2) {
+                        map.insert(Item::Nano_Lattice_2, 1);
+                    }
+                    if !map.contains_key(&Item::Plague_of_Thoughts) {
+                        map.insert(Item::Plague_of_Thoughts, 1);
                     }
                     if !map.contains_key(&Item::Power_Matrix) {
                         map.insert(Item::Power_Matrix, 1);
@@ -10590,6 +10715,9 @@ impl world::World for World {
                     }
                     if !map.contains_key(&Item::Storm_Bomb) {
                         map.insert(Item::Storm_Bomb, 1);
+                    }
+                    if !map.contains_key(&Item::Suspension_Bridge) {
+                        map.insert(Item::Suspension_Bridge, 1);
                     }
                     if !map.contains_key(&Item::Terminal_Breakthrough_1) {
                         map.insert(Item::Terminal_Breakthrough_1, 1);
@@ -11369,30 +11497,23 @@ impl World {
                         Item::Aansur
                             | Item::Amagi_Stronghold_Left_Wall
                             | Item::Carnelian_Ring
-                            | Item::Destruction_Pogrom
                             | Item::Double_Axe
                             | Item::Drone_Melee_Damage_3
                             | Item::Drone_Melee_Speed_3
-                            | Item::Eye_Ring
-                            | Item::Family_Tragedy
                             | Item::Health_Upgrade_5
                             | Item::Heretics_Granddaughter
                             | Item::Infection_Speed_2
                             | Item::Journal_2049_10_29
-                            | Item::Lament_for_Fools
                             | Item::Melee_Charge
                             | Item::Melee_Damage_3
                             | Item::Melee_Speed_3
-                            | Item::Nano_Lattice_2
                             | Item::Nano_Points_3
                             | Item::Notes_2053_02_27
-                            | Item::Plague_of_Thoughts
                             | Item::Ranged_Damage_3
                             | Item::Ranged_Speed_3
                             | Item::Refill
                             | Item::Royal_Dagger
                             | Item::Royal_Ring
-                            | Item::Suspension_Bridge
                             | Item::Udusan
                     )
                 }
@@ -11454,31 +11575,24 @@ impl World {
                         Item::Aansur
                             | Item::Amagi_Stronghold_Left_Wall
                             | Item::Carnelian_Ring
-                            | Item::Destruction_Pogrom
                             | Item::Double_Axe
                             | Item::Drone_Melee_Damage_3
                             | Item::Drone_Melee_Speed_3
                             | Item::Escape
-                            | Item::Eye_Ring
-                            | Item::Family_Tragedy
                             | Item::Health_Upgrade_5
                             | Item::Heretics_Granddaughter
                             | Item::Infection_Speed_2
                             | Item::Journal_2049_10_29
-                            | Item::Lament_for_Fools
                             | Item::Melee_Charge
                             | Item::Melee_Damage_3
                             | Item::Melee_Speed_3
-                            | Item::Nano_Lattice_2
                             | Item::Nano_Points_3
                             | Item::Notes_2053_02_27
-                            | Item::Plague_of_Thoughts
                             | Item::Ranged_Damage_3
                             | Item::Ranged_Speed_3
                             | Item::Refill
                             | Item::Royal_Dagger
                             | Item::Royal_Ring
-                            | Item::Suspension_Bridge
                             | Item::Udusan
                     )
                 }
@@ -11782,7 +11896,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
             canonical: CanonId::None,
             item: Item::Destruction_Pogrom,
             price: Currency::Free,
-            time: 1000,
+            time: 0,
             exit_id: None,
         },
         LocationId::Annuna__Twisty_Passages__Northwest_Alcove__Refill => Location {

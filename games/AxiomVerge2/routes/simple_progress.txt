@@ -99,10 +99,13 @@
 * Collect Health_Fragment from Uhrum > Siege Corridor > Center Box > Box
 * Collect Storm_Bomb from Uhrum > Siege Corridor > Pond > Item
 * Collect Fast_Travel from Uhrum > Siege Corridor > Upper Rock Item > Urn
+* Collect Suspension_Bridge from Uhrum > Waterfalls > West Water Nook > Tablet
+  Move... to Uhrum > Save Room > East
 * Collect Health_Fragment from Ebih > By Garage > Crawlspace > Fragment
 ! Do Recall Drone
 * Collect Infect_L1 from Menu > Upgrade Menu > Infection > Infection Level 1
 * Collect Infect_L2 from Menu > Upgrade Menu > Infection > Infection Level 2
+* Collect Infect_L3 from Menu > Upgrade Menu > Infection > Infection Level 3
 
   Move... to Giguna > Lamassu > Wingtip
 ! Do Deploy Drone
@@ -123,3 +126,10 @@
   Collect Ebih_Waterfall_Block_Left from Ebih > Waterfall > Alcove Left > Block Left
 ! Do Deploy Drone
   Collect Bronze_Axe from Ebih > Waterfall > Alcove > Pedestal
+
+! Do Recall Fast Travel
+  Move... to Menu > Kiengir Map > Uhrum Center ==> Uhrum > Save Room > Save Point (1)
+
+* Collect Uhrum_Waterfalls_Block from Uhrum > Waterfalls > Below Block > Shockwave Block
+* Collect Uhrum_Annuna_Corridor_Block from Uhrum > Annuna Corridor > Block West > Dislodge Block
+# TODO: rest of route with more items
