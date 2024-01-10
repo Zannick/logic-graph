@@ -2487,6 +2487,10 @@ pub fn action_mode_set_indra_last_set_indra(ctx: &mut Context, world: &graph::Wo
     ctx.set_mode(enums::Mode::Indra);
     ctx.set_last(ctx.indra());
 }
+pub fn action_pass(ctx: &mut Context, world: &graph::World) {
+    // $pass
+    ();
+}
 pub fn action_refill_energy(ctx: &mut Context, world: &graph::World) {
     // $refill_energy
     helper__refill_energy!(ctx, world);

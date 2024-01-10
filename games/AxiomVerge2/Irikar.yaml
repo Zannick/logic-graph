@@ -375,6 +375,7 @@ areas:
       locations:
         - name: Urn
           item: Breach_Sight
+          canon: Breach_Sight
           tags: [urn]
       hybrid:
         - name: Urn Collection Skip

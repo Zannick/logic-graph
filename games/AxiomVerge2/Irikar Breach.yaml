@@ -375,7 +375,7 @@ areas:
           jumps: 3
       actions:
         - name: Enter Portal
-          do: $main_portal_save_update
+          do: $pass
           to: ^flipside
           after: $clear_breach_save
           tags: [portal]

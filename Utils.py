@@ -21,6 +21,7 @@ BUILTINS = {
     # TODO: $todo as a spot func
     '$skip': 'ctx.skip',
     '$visit': 'ctx.visit',
+    '$pass': '',
     '$count': 'ctx.count',
     '$add_item': 'ctx.add_item',
     '$default': 'Default::default',

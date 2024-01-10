@@ -5535,7 +5535,7 @@ impl world::Action for Action {
             ActionId::Giguna__Gateway__Flask_Ledge__Open_Door => rules::action_giguna__gateway__flask_ledge__open_door__do(ctx, world),
             ActionId::Glacier__Revival__Save_Point__Save => rules::action_save(ctx, world),
             ActionId::Interior__Cave_Behind_Waterfall__Middle__Throw_Drone => rules::action_deploy_drone(ctx, world),
-            ActionId::Irikar_Breach__Exit_Corridor__Portal_Stand__Enter_Portal => rules::action_main_portal_save_update(ctx, world),
+            ActionId::Irikar_Breach__Exit_Corridor__Portal_Stand__Enter_Portal => rules::action_pass(ctx, world),
             ActionId::Irikar__Hub__Save_Point__Save => rules::action_save(ctx, world),
             ActionId::Irikar__Hub__Portal_Stand__Enter_Portal => rules::action_breach_portal_save_update(ctx, world),
             ActionId::Irikar__Hub__Royal_Storage_By_Wall__Shockwave_Wall => rules::action_collect__irikar_royal_storage_wall_collect__flask_visit__irikar_gt_hub_gt_royal_storage_in_wall_gt_item(ctx, world),
@@ -7938,6 +7938,7 @@ impl world::World for World {
                 vec![LocationId::Irikar__Hub__Royal_Storage_in_Wall__Item]
             }
             CanonId::Breach_Sight => vec![
+                LocationId::Irikar__Sight_Room__Item_Pedestal__Urn,
                 LocationId::Irikar__Sight_Room__Item_Pedestal__Urn_Collection_Skip,
                 LocationId::Irikar__Sight_Room__Item_Pedestal__Urn_Fast_Travel,
             ],
@@ -12805,7 +12806,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         },
         LocationId::Irikar__Sight_Room__Item_Pedestal__Urn => Location {
             id: LocationId::Irikar__Sight_Room__Item_Pedestal__Urn,
-            canonical: CanonId::None,
+            canonical: CanonId::Breach_Sight,
             item: Item::Breach_Sight,
             price: Currency::Free,
             time: 5500,
