@@ -361,6 +361,7 @@ where
             .pop()
             .unwrap_or_else(|| Self::find_greedy_win(world, &startctx, &others));
 
+        log::info!("Attempting to minimize our solution");
         let start = Instant::now();
         let max_time =
             if let Some(m) = minimize_greedy(world, startctx.get(), &wonctx, wonctx.elapsed()) {
