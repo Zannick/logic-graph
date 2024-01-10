@@ -891,7 +891,7 @@ where
         .collect()
 }
 
-pub fn parse_route_file<W, T>(world: Arc<W>, filename: &PathBuf) -> Result<Trial, String>
+pub fn parse_route_file<W, T>(world: Arc<Box<W>>, filename: &PathBuf) -> Trial
 where
     T: Ctx<World = W> + 'static,
     W: World + Send + 'static,
@@ -914,10 +914,10 @@ where
                 .into_iter()
                 .map(|(h, s)| (h, format!("{}", s)))
                 .collect()
-        ))?;
-    Ok(Trial::test(format!("routes/{}", prefix), move || {
-        Ok(run_test(&*world, T::default(), mode, vec![])?)
-    }))
+        ));
+    Trial::test(format!("routes/{}", prefix), move || {
+        Ok(run_test(&**world, T::default(), mode?, vec![])?)
+    })
 }
 
 pub fn run_test_file<W, T>(world: Arc<Box<W>>, filename: &PathBuf)
@@ -931,7 +931,7 @@ where
     run(&args, tests); //.exit_if_failed();
 }
 
-pub fn run_all_tests_in_dir<W, T>(dirname: &PathBuf)
+pub fn run_all_tests_in_dir<W, T>(dirname: &PathBuf, route_dir: Option<&PathBuf>)
 where
     T: Ctx<World = W> + 'static,
     W: World + Send + 'static,
@@ -948,6 +948,16 @@ where
         let ext = path.extension().map(|s| s.to_str()).flatten();
         if matches!(ext, Some("yaml")) {
             tests.extend(parse_test_file::<W, T>(wp.clone(), &path));
+        }
+    }
+
+    if let Some(routedirname) = route_dir {
+        for entry in std::fs::read_dir(routedirname).unwrap() {
+            let path = entry.unwrap().path();
+            let ext = path.extension().map(|s| s.to_str()).flatten();
+            if matches!(ext, Some("txt")) {
+                tests.push(parse_route_file::<W, T>(wp.clone(), &path));
+            }    
         }
     }
 
