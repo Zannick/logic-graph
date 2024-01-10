@@ -186,14 +186,18 @@ where
         }
     }
     for exit in world.get_spot_exits(ctx.get().position()) {
-        if exit.time(ctx.get(), world) + ctx.elapsed() <= max_time && exit.can_access(ctx.get(), world) {
+        if exit.time(ctx.get(), world) + ctx.elapsed() <= max_time
+            && exit.can_access(ctx.get(), world)
+        {
             let mut newctx = ctx.clone();
             newctx.exit(world, exit);
             results.push(newctx);
         }
     }
     for warp in world.get_warps() {
-        if warp.time(ctx.get(), world) + ctx.elapsed() <= max_time && warp.can_access(ctx.get(), world) {
+        if warp.time(ctx.get(), world) + ctx.elapsed() <= max_time
+            && warp.can_access(ctx.get(), world)
+        {
             let mut newctx = ctx.clone();
             newctx.warp(world, warp);
             results.push(newctx);
@@ -253,8 +257,28 @@ where
     L: Location<Context = T>,
     E: Exit<Context = T, ExitId = L::ExitId, LocId = L::LocId, Currency = L::Currency>,
 {
-    fn find_greedy_win(world: &W, startctx: &ContextWrapper<T>) -> ContextWrapper<T> {
+    fn find_greedy_win(
+        world: &W,
+        startctx: &ContextWrapper<T>,
+        others: &[ContextWrapper<T>],
+    ) -> ContextWrapper<T> {
         let start = Instant::now();
+        if !others.is_empty() {
+            let others: Vec<_> = others.iter().enumerate().collect();
+            if let Some((oi, wonctx)) = others.into_par_iter().find_map_any(|(oi, octx)| {
+                greedy_search(world, octx, u32::MAX, 9)
+                    .ok()
+                    .map(|gr| (oi, gr))
+            }) {
+                log::info!(
+                    "Finished seeded greedy search in {:?} with a result of {}ms, on partial route #{}",
+                    start.elapsed(),
+                    wonctx.elapsed(),
+                    oi + 1
+                );
+                return wonctx;
+            }
+        }
         match greedy_search(world, startctx, u32::MAX, 9) {
             Ok(wonctx) => {
                 log::info!(
@@ -323,7 +347,7 @@ where
         }
         let wonctx = wins
             .pop()
-            .unwrap_or_else(|| Self::find_greedy_win(world, &startctx));
+            .unwrap_or_else(|| Self::find_greedy_win(world, &startctx, &others));
 
         let start = Instant::now();
         let max_time =
