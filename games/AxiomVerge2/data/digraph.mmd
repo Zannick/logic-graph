@@ -1513,6 +1513,8 @@ subgraph Menu
         Menu__Kiengir_Map__Infect(Infect);
         Menu__Kiengir_Map__Remote_Drone(Remote Drone);
         Menu__Kiengir_Map__Breach_Sight(Breach Sight);
+        Menu__Kiengir_Map__Shockwave(Shockwave);
+        Menu__Kiengir_Map__Anuman(Anuman);
     end
     subgraph Menu__Breach_Map[Breach Map]
         Menu__Breach_Map__GB_Peak(GB Peak);
@@ -1610,7 +1612,9 @@ subgraph Uhrum
         Uhrum__Waterfalls__East_Palm_Tree(East Palm Tree);
         Uhrum__Waterfalls__West_Waters_Edge(West Water's Edge);
         Uhrum__Waterfalls__West_Water_Surface(West Water Surface);
+        Uhrum__Waterfalls__West_Shallow_End(West Shallow End);
         Uhrum__Waterfalls__Center_Island_West(Center Island West);
+        Uhrum__Waterfalls__Center_Island_Middle(Center Island Middle);
         Uhrum__Waterfalls__Center_Island_East(Center Island East);
         Uhrum__Waterfalls__Island_Water_West(Island Water West);
         Uhrum__Waterfalls__West_Water_Ledge(West Water Ledge);
@@ -2395,6 +2399,8 @@ Uhrum__Annuna_Corridor__Block_East <--> Uhrum__Annuna_Corridor__Block_West
 Uhrum__Annuna_Corridor__Lower_Platform --> Uhrum__Annuna_Corridor__Middle_Platform
 Uhrum__Annuna_Corridor__Middle_Platform --> Uhrum__Annuna_Corridor__Upper_Ledge
 Uhrum__Annuna_Corridor__Middle_Platform --> Uhrum__Annuna_Corridor__Upper_Platform
+Uhrum__Annuna_Corridor__Pedestal --> Menu__Kiengir_Map__Anuman
+Uhrum__Annuna_Corridor__Pedestal --> Menu__Warp_Only__Kiengir
 Uhrum__Annuna_Corridor__Statue <--> Uhrum__Annuna_Corridor__Upper_Platform
 Uhrum__Annuna_Corridor__Upper_Ledge <--> Uhrum__Annuna_Corridor__Upper_Platform
 Uhrum__Annuna_Corridor__West_25 <--> Uhrum__Waterfalls__East_25
@@ -2452,6 +2458,7 @@ Uhrum__Waterfalls__West_24 --> Uhrum__Waterfalls__Below_Block
 Uhrum__Waterfalls__West_25 --> Uhrum__Waterfalls__Below_Block
 Uhrum__Waterfalls__West_27 --> Uhrum__Waterfalls__Large_Rock
 Uhrum__Waterfalls__West_Platform --> Uhrum__Waterfalls__Green_Middle_Ledge
+Uhrum__Waterfalls__West_Shallow_End --> Uhrum__Waterfalls__Center_Island_West
 Uhrum__Waterfalls__West_Wall --> Uhrum__Waterfalls__West_25
 Uhrum__Waterfalls__West_Water_Nook --> Uhrum__Waterfalls__West_Water_Ledge
 Uhrum__West_Entrance__Clear_Passage --> Uhrum__West_Entrance__Portal_Stand

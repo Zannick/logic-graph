@@ -1783,6 +1783,7 @@ pub enum SpotId {
     Menu__Kiengir_Map__Annuna_Upper,
     Menu__Kiengir_Map__Annuna_Vertical_Room,
     Menu__Kiengir_Map__Annuna_West_Bridge,
+    Menu__Kiengir_Map__Anuman,
     Menu__Kiengir_Map__Apocalypse,
     Menu__Kiengir_Map__Breach_Sight,
     Menu__Kiengir_Map__Ebih_Base_Camp,
@@ -1802,6 +1803,7 @@ pub enum SpotId {
     Menu__Kiengir_Map__Irikar_Hub,
     Menu__Kiengir_Map__Irikar_Midwest,
     Menu__Kiengir_Map__Remote_Drone,
+    Menu__Kiengir_Map__Shockwave,
     Menu__Kiengir_Map__Uhrum_Center,
     Menu__Kiengir_Map__Uhrum_East,
     Menu__Kiengir_Map__Uhrum_Emergence,
@@ -1870,6 +1872,7 @@ pub enum SpotId {
     Uhrum__Waterfalls__Ceiling_Cache,
     Uhrum__Waterfalls__Ceiling_Opening,
     Uhrum__Waterfalls__Center_Island_East,
+    Uhrum__Waterfalls__Center_Island_Middle,
     Uhrum__Waterfalls__Center_Island_West,
     Uhrum__Waterfalls__East_24,
     Uhrum__Waterfalls__East_24_in_Mid_air,
@@ -1895,6 +1898,7 @@ pub enum SpotId {
     Uhrum__Waterfalls__West_25,
     Uhrum__Waterfalls__West_27,
     Uhrum__Waterfalls__West_Platform,
+    Uhrum__Waterfalls__West_Shallow_End,
     Uhrum__Waterfalls__West_Wall,
     Uhrum__Waterfalls__West_Water_Ledge,
     Uhrum__Waterfalls__West_Water_Nook,
@@ -4971,6 +4975,7 @@ impl fmt::Display for SpotId {
             SpotId::Menu__Kiengir_Map__Annuna_West_Bridge => {
                 write!(f, "{}", "Menu > Kiengir Map > Annuna West Bridge")
             }
+            SpotId::Menu__Kiengir_Map__Anuman => write!(f, "{}", "Menu > Kiengir Map > Anuman"),
             SpotId::Menu__Kiengir_Map__Apocalypse => {
                 write!(f, "{}", "Menu > Kiengir Map > Apocalypse")
             }
@@ -5025,6 +5030,9 @@ impl fmt::Display for SpotId {
             }
             SpotId::Menu__Kiengir_Map__Remote_Drone => {
                 write!(f, "{}", "Menu > Kiengir Map > Remote Drone")
+            }
+            SpotId::Menu__Kiengir_Map__Shockwave => {
+                write!(f, "{}", "Menu > Kiengir Map > Shockwave")
             }
             SpotId::Menu__Kiengir_Map__Uhrum_Center => {
                 write!(f, "{}", "Menu > Kiengir Map > Uhrum Center")
@@ -5212,6 +5220,9 @@ impl fmt::Display for SpotId {
             SpotId::Uhrum__Waterfalls__Center_Island_East => {
                 write!(f, "{}", "Uhrum > Waterfalls > Center Island East")
             }
+            SpotId::Uhrum__Waterfalls__Center_Island_Middle => {
+                write!(f, "{}", "Uhrum > Waterfalls > Center Island Middle")
+            }
             SpotId::Uhrum__Waterfalls__Center_Island_West => {
                 write!(f, "{}", "Uhrum > Waterfalls > Center Island West")
             }
@@ -5270,6 +5281,9 @@ impl fmt::Display for SpotId {
             SpotId::Uhrum__Waterfalls__West_27 => write!(f, "{}", "Uhrum > Waterfalls > West 27"),
             SpotId::Uhrum__Waterfalls__West_Platform => {
                 write!(f, "{}", "Uhrum > Waterfalls > West Platform")
+            }
+            SpotId::Uhrum__Waterfalls__West_Shallow_End => {
+                write!(f, "{}", "Uhrum > Waterfalls > West Shallow End")
             }
             SpotId::Uhrum__Waterfalls__West_Wall => {
                 write!(f, "{}", "Uhrum > Waterfalls > West Wall")
@@ -7443,6 +7457,7 @@ impl std::str::FromStr for SpotId {
             "Menu > Kiengir Map > Annuna West Bridge" => {
                 Ok(SpotId::Menu__Kiengir_Map__Annuna_West_Bridge)
             }
+            "Menu > Kiengir Map > Anuman" => Ok(SpotId::Menu__Kiengir_Map__Anuman),
             "Menu > Kiengir Map > Apocalypse" => Ok(SpotId::Menu__Kiengir_Map__Apocalypse),
             "Menu > Kiengir Map > Breach Sight" => Ok(SpotId::Menu__Kiengir_Map__Breach_Sight),
             "Menu > Kiengir Map > Ebih Base Camp" => Ok(SpotId::Menu__Kiengir_Map__Ebih_Base_Camp),
@@ -7482,6 +7497,7 @@ impl std::str::FromStr for SpotId {
             "Menu > Kiengir Map > Irikar Hub" => Ok(SpotId::Menu__Kiengir_Map__Irikar_Hub),
             "Menu > Kiengir Map > Irikar Midwest" => Ok(SpotId::Menu__Kiengir_Map__Irikar_Midwest),
             "Menu > Kiengir Map > Remote Drone" => Ok(SpotId::Menu__Kiengir_Map__Remote_Drone),
+            "Menu > Kiengir Map > Shockwave" => Ok(SpotId::Menu__Kiengir_Map__Shockwave),
             "Menu > Kiengir Map > Uhrum Center" => Ok(SpotId::Menu__Kiengir_Map__Uhrum_Center),
             "Menu > Kiengir Map > Uhrum East" => Ok(SpotId::Menu__Kiengir_Map__Uhrum_East),
             "Menu > Kiengir Map > Uhrum Emergence" => {
@@ -7620,6 +7636,9 @@ impl std::str::FromStr for SpotId {
             "Uhrum > Waterfalls > Center Island East" => {
                 Ok(SpotId::Uhrum__Waterfalls__Center_Island_East)
             }
+            "Uhrum > Waterfalls > Center Island Middle" => {
+                Ok(SpotId::Uhrum__Waterfalls__Center_Island_Middle)
+            }
             "Uhrum > Waterfalls > Center Island West" => {
                 Ok(SpotId::Uhrum__Waterfalls__Center_Island_West)
             }
@@ -7663,6 +7682,9 @@ impl std::str::FromStr for SpotId {
             "Uhrum > Waterfalls > West 25" => Ok(SpotId::Uhrum__Waterfalls__West_25),
             "Uhrum > Waterfalls > West 27" => Ok(SpotId::Uhrum__Waterfalls__West_27),
             "Uhrum > Waterfalls > West Platform" => Ok(SpotId::Uhrum__Waterfalls__West_Platform),
+            "Uhrum > Waterfalls > West Shallow End" => {
+                Ok(SpotId::Uhrum__Waterfalls__West_Shallow_End)
+            }
             "Uhrum > Waterfalls > West Wall" => Ok(SpotId::Uhrum__Waterfalls__West_Wall),
             "Uhrum > Waterfalls > West Water Ledge" => {
                 Ok(SpotId::Uhrum__Waterfalls__West_Water_Ledge)
@@ -7955,6 +7977,8 @@ pub enum LocationId {
     Uhrum__Annuna_Corridor__Block_West__Dislodge_Block,
     Uhrum__Annuna_Corridor__East_Cubby__Tablet,
     Uhrum__Annuna_Corridor__Pedestal__Urn,
+    Uhrum__Annuna_Corridor__Pedestal__Urn_Collection_Skip,
+    Uhrum__Annuna_Corridor__Pedestal__Urn_Fast_Travel,
     Uhrum__Annuna_Corridor__Statue__Item,
     Uhrum__Annuna_Corridor__Upper_Trees__Remote_Urn,
     Uhrum__Siege_Corridor__Center_Box__Box,
@@ -8745,6 +8769,16 @@ impl fmt::Display for LocationId {
             LocationId::Uhrum__Annuna_Corridor__Pedestal__Urn => {
                 write!(f, "{}", "Uhrum > Annuna Corridor > Pedestal > Urn")
             }
+            LocationId::Uhrum__Annuna_Corridor__Pedestal__Urn_Collection_Skip => write!(
+                f,
+                "{}",
+                "Uhrum > Annuna Corridor > Pedestal > Urn Collection Skip"
+            ),
+            LocationId::Uhrum__Annuna_Corridor__Pedestal__Urn_Fast_Travel => write!(
+                f,
+                "{}",
+                "Uhrum > Annuna Corridor > Pedestal > Urn Fast Travel"
+            ),
             LocationId::Uhrum__Annuna_Corridor__Statue__Item => {
                 write!(f, "{}", "Uhrum > Annuna Corridor > Statue > Item")
             }
@@ -9451,6 +9485,12 @@ impl std::str::FromStr for LocationId {
             }
             "Uhrum > Annuna Corridor > Pedestal > Urn" => {
                 Ok(LocationId::Uhrum__Annuna_Corridor__Pedestal__Urn)
+            }
+            "Uhrum > Annuna Corridor > Pedestal > Urn Collection Skip" => {
+                Ok(LocationId::Uhrum__Annuna_Corridor__Pedestal__Urn_Collection_Skip)
+            }
+            "Uhrum > Annuna Corridor > Pedestal > Urn Fast Travel" => {
+                Ok(LocationId::Uhrum__Annuna_Corridor__Pedestal__Urn_Fast_Travel)
             }
             "Uhrum > Annuna Corridor > Statue > Item" => {
                 Ok(LocationId::Uhrum__Annuna_Corridor__Statue__Item)
@@ -10684,6 +10724,8 @@ pub enum ExitId {
     Uhrum__Annuna_Corridor__Middle_Platform__ex__Upper_Ledge_1,
     Uhrum__Annuna_Corridor__Middle_Platform__ex__Upper_Platform_1,
     Uhrum__Annuna_Corridor__Middle_Platform__ex__Upper_Platform_2,
+    Uhrum__Annuna_Corridor__Pedestal__Urn_Collection_Skip,
+    Uhrum__Annuna_Corridor__Pedestal__Urn_Fast_Travel,
     Uhrum__Annuna_Corridor__Statue__ex__Upper_Platform_1,
     Uhrum__Annuna_Corridor__Upper_Ledge__ex__Upper_Platform_1,
     Uhrum__Annuna_Corridor__Upper_Platform__ex__Statue_1,
@@ -10774,6 +10816,8 @@ pub enum ExitId {
     Uhrum__Waterfalls__West_27__ex__Save_Room__East_1,
     Uhrum__Waterfalls__West_Platform__ex__Green_Middle_Ledge_1,
     Uhrum__Waterfalls__West_Platform__ex__Green_Middle_Ledge_2,
+    Uhrum__Waterfalls__West_Shallow_End__ex__Center_Island_West_1,
+    Uhrum__Waterfalls__West_Shallow_End__ex__Center_Island_West_2,
     Uhrum__Waterfalls__West_Wall__ex__West_25_1,
     Uhrum__Waterfalls__West_Wall__ex__West_25_2,
     Uhrum__Waterfalls__West_Water_Nook__ex__West_Water_Ledge_1,
@@ -11962,6 +12006,8 @@ impl fmt::Display for ExitId {
             ExitId::Uhrum__Annuna_Corridor__Middle_Platform__ex__Upper_Ledge_1 => write!(f, "{}", "Uhrum > Annuna Corridor > Middle Platform ==> Upper Ledge (1)"),
             ExitId::Uhrum__Annuna_Corridor__Middle_Platform__ex__Upper_Platform_1 => write!(f, "{}", "Uhrum > Annuna Corridor > Middle Platform ==> Upper Platform (1)"),
             ExitId::Uhrum__Annuna_Corridor__Middle_Platform__ex__Upper_Platform_2 => write!(f, "{}", "Uhrum > Annuna Corridor > Middle Platform ==> Upper Platform (2)"),
+            ExitId::Uhrum__Annuna_Corridor__Pedestal__Urn_Collection_Skip => write!(f, "{}", "Uhrum > Annuna Corridor > Pedestal > Urn Collection Skip"),
+            ExitId::Uhrum__Annuna_Corridor__Pedestal__Urn_Fast_Travel => write!(f, "{}", "Uhrum > Annuna Corridor > Pedestal > Urn Fast Travel"),
             ExitId::Uhrum__Annuna_Corridor__Statue__ex__Upper_Platform_1 => write!(f, "{}", "Uhrum > Annuna Corridor > Statue ==> Upper Platform (1)"),
             ExitId::Uhrum__Annuna_Corridor__Upper_Ledge__ex__Upper_Platform_1 => write!(f, "{}", "Uhrum > Annuna Corridor > Upper Ledge ==> Upper Platform (1)"),
             ExitId::Uhrum__Annuna_Corridor__Upper_Platform__ex__Statue_1 => write!(f, "{}", "Uhrum > Annuna Corridor > Upper Platform ==> Statue (1)"),
@@ -12052,6 +12098,8 @@ impl fmt::Display for ExitId {
             ExitId::Uhrum__Waterfalls__West_27__ex__Save_Room__East_1 => write!(f, "{}", "Uhrum > Waterfalls > West 27 ==> Save Room > East (1)"),
             ExitId::Uhrum__Waterfalls__West_Platform__ex__Green_Middle_Ledge_1 => write!(f, "{}", "Uhrum > Waterfalls > West Platform ==> Green Middle Ledge (1)"),
             ExitId::Uhrum__Waterfalls__West_Platform__ex__Green_Middle_Ledge_2 => write!(f, "{}", "Uhrum > Waterfalls > West Platform ==> Green Middle Ledge (2)"),
+            ExitId::Uhrum__Waterfalls__West_Shallow_End__ex__Center_Island_West_1 => write!(f, "{}", "Uhrum > Waterfalls > West Shallow End ==> Center Island West (1)"),
+            ExitId::Uhrum__Waterfalls__West_Shallow_End__ex__Center_Island_West_2 => write!(f, "{}", "Uhrum > Waterfalls > West Shallow End ==> Center Island West (2)"),
             ExitId::Uhrum__Waterfalls__West_Wall__ex__West_25_1 => write!(f, "{}", "Uhrum > Waterfalls > West Wall ==> West 25 (1)"),
             ExitId::Uhrum__Waterfalls__West_Wall__ex__West_25_2 => write!(f, "{}", "Uhrum > Waterfalls > West Wall ==> West 25 (2)"),
             ExitId::Uhrum__Waterfalls__West_Water_Nook__ex__West_Water_Ledge_1 => write!(f, "{}", "Uhrum > Waterfalls > West Water Nook ==> West Water Ledge (1)"),
@@ -13245,6 +13293,8 @@ impl std::str::FromStr for ExitId {
             "Uhrum > Annuna Corridor > Middle Platform ==> Upper Ledge (1)" => Ok(ExitId::Uhrum__Annuna_Corridor__Middle_Platform__ex__Upper_Ledge_1),
             "Uhrum > Annuna Corridor > Middle Platform ==> Upper Platform (1)" => Ok(ExitId::Uhrum__Annuna_Corridor__Middle_Platform__ex__Upper_Platform_1),
             "Uhrum > Annuna Corridor > Middle Platform ==> Upper Platform (2)" => Ok(ExitId::Uhrum__Annuna_Corridor__Middle_Platform__ex__Upper_Platform_2),
+            "Uhrum > Annuna Corridor > Pedestal > Urn Collection Skip" => Ok(ExitId::Uhrum__Annuna_Corridor__Pedestal__Urn_Collection_Skip),
+            "Uhrum > Annuna Corridor > Pedestal > Urn Fast Travel" => Ok(ExitId::Uhrum__Annuna_Corridor__Pedestal__Urn_Fast_Travel),
             "Uhrum > Annuna Corridor > Statue ==> Upper Platform (1)" => Ok(ExitId::Uhrum__Annuna_Corridor__Statue__ex__Upper_Platform_1),
             "Uhrum > Annuna Corridor > Upper Ledge ==> Upper Platform (1)" => Ok(ExitId::Uhrum__Annuna_Corridor__Upper_Ledge__ex__Upper_Platform_1),
             "Uhrum > Annuna Corridor > Upper Platform ==> Statue (1)" => Ok(ExitId::Uhrum__Annuna_Corridor__Upper_Platform__ex__Statue_1),
@@ -13335,6 +13385,8 @@ impl std::str::FromStr for ExitId {
             "Uhrum > Waterfalls > West 27 ==> Save Room > East (1)" => Ok(ExitId::Uhrum__Waterfalls__West_27__ex__Save_Room__East_1),
             "Uhrum > Waterfalls > West Platform ==> Green Middle Ledge (1)" => Ok(ExitId::Uhrum__Waterfalls__West_Platform__ex__Green_Middle_Ledge_1),
             "Uhrum > Waterfalls > West Platform ==> Green Middle Ledge (2)" => Ok(ExitId::Uhrum__Waterfalls__West_Platform__ex__Green_Middle_Ledge_2),
+            "Uhrum > Waterfalls > West Shallow End ==> Center Island West (1)" => Ok(ExitId::Uhrum__Waterfalls__West_Shallow_End__ex__Center_Island_West_1),
+            "Uhrum > Waterfalls > West Shallow End ==> Center Island West (2)" => Ok(ExitId::Uhrum__Waterfalls__West_Shallow_End__ex__Center_Island_West_2),
             "Uhrum > Waterfalls > West Wall ==> West 25 (1)" => Ok(ExitId::Uhrum__Waterfalls__West_Wall__ex__West_25_1),
             "Uhrum > Waterfalls > West Wall ==> West 25 (2)" => Ok(ExitId::Uhrum__Waterfalls__West_Wall__ex__West_25_2),
             "Uhrum > Waterfalls > West Water Nook ==> West Water Ledge (1)" => Ok(ExitId::Uhrum__Waterfalls__West_Water_Nook__ex__West_Water_Ledge_1),
@@ -13505,6 +13557,7 @@ pub enum ActionId {
     Global__Become_Indra,
     Global__Deploy_Drone,
     Global__Recall_Drone,
+    Global__Recall_Fast_Travel,
     Interior__Cave_Behind_Waterfall__Middle__Throw_Drone,
     Irikar__Basement_Portal__Moving_Platform_Start__Activate_Platform,
     Irikar__Basement_Portal__Portal_Stand__Enter_Portal,
@@ -13517,6 +13570,7 @@ pub enum ActionId {
     Uhrum__Annuna_Corridor__Between_Two_Flowers__Throw_Drone_Up,
     Uhrum__Annuna_Corridor__Save_Point__Save,
     Uhrum__Save_Room__Save_Point__Save,
+    Uhrum__Waterfalls__Center_Island_Middle__Throw_Drone_Up,
     Uhrum__West_Entrance__Save_Point__Save,
 }
 impl fmt::Display for ActionId {
@@ -13834,6 +13888,7 @@ impl fmt::Display for ActionId {
             ActionId::Global__Become_Indra => write!(f, "{}", "Become Indra"),
             ActionId::Global__Deploy_Drone => write!(f, "{}", "Deploy Drone"),
             ActionId::Global__Recall_Drone => write!(f, "{}", "Recall Drone"),
+            ActionId::Global__Recall_Fast_Travel => write!(f, "{}", "Recall Fast Travel"),
             ActionId::Interior__Cave_Behind_Waterfall__Middle__Throw_Drone => write!(
                 f,
                 "{}",
@@ -13886,6 +13941,11 @@ impl fmt::Display for ActionId {
             ActionId::Uhrum__Save_Room__Save_Point__Save => {
                 write!(f, "{}", "Uhrum > Save Room > Save Point > Save")
             }
+            ActionId::Uhrum__Waterfalls__Center_Island_Middle__Throw_Drone_Up => write!(
+                f,
+                "{}",
+                "Uhrum > Waterfalls > Center Island Middle > Throw Drone Up"
+            ),
             ActionId::Uhrum__West_Entrance__Save_Point__Save => {
                 write!(f, "{}", "Uhrum > West Entrance > Save Point > Save")
             }
@@ -14152,6 +14212,7 @@ impl std::str::FromStr for ActionId {
             "Become Indra" => Ok(ActionId::Global__Become_Indra),
             "Deploy Drone" => Ok(ActionId::Global__Deploy_Drone),
             "Recall Drone" => Ok(ActionId::Global__Recall_Drone),
+            "Recall Fast Travel" => Ok(ActionId::Global__Recall_Fast_Travel),
             "Interior > Cave Behind Waterfall > Middle > Throw Drone" => {
                 Ok(ActionId::Interior__Cave_Behind_Waterfall__Middle__Throw_Drone)
             }
@@ -14185,6 +14246,9 @@ impl std::str::FromStr for ActionId {
             }
             "Uhrum > Save Room > Save Point > Save" => {
                 Ok(ActionId::Uhrum__Save_Room__Save_Point__Save)
+            }
+            "Uhrum > Waterfalls > Center Island Middle > Throw Drone Up" => {
+                Ok(ActionId::Uhrum__Waterfalls__Center_Island_Middle__Throw_Drone_Up)
             }
             "Uhrum > West Entrance > Save Point > Save" => {
                 Ok(ActionId::Uhrum__West_Entrance__Save_Point__Save)

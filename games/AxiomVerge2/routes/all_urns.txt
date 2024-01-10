@@ -1,0 +1,75 @@
+* Collect Ice_Axe from Antarctica > Shed > Interior > Shelf
+  EarthSavewarp to Antarctica > West > Helipad
+* Collect Station_Power from Antarctica > Power Room > Switch > Flip
+  EarthSavewarp to Antarctica > East > Save Point
+* Collect Compass from Glacier > Compass Room > Center > Table
+* Take hybrid exit Glacier > The Big Drop > Water Surface > Drown, collecting Amashilama
+* Collect Boomerang from Glacier > Boomerang Room > Pedestal > Item
+* Collect Switch_36_11 from Glacier > Vertical Room > Under Switch > Switch
+* Collect Ledge_Grab from Glacier > Ledge Grab Room > Cliff Bottom > Quick Grab
+* Collect Infect from Ebih > Ebih East > Lower Moving Platform > Remote Urn
+! Do Ebih > Ebih East > Lower Moving Platform > Activate Lift
+! Do Ebih > Ebih East > Moving Platform > Activate Ride
+! Do Ebih > Ebih West > Upper Save > Save
+
+* Take hybrid exit Ebih > Drone Room > Item > Urn Collection Skip, collecting Remote_Drone
+MainSavewarp to Ebih > Ebih West > Upper Save
+
+! Do Ebih > Ebih West > Medium High Platform > Throw Drone Long
+! Do Giguna > Giguna Northeast > Save Point > Save
+! Do Recall Drone
+  MainSavewarp to Giguna > Giguna Northeast > Save Point
+! Do Giguna > Carnelian > Upper Susar > Hack
+
+! Do Giguna > Giguna Base > Stone Knob > Throw Drone
+* Collect Wall_Climb from Giguna > Giguna Base > Ruin > Item
+! Do Recall Drone
+  MainSavewarp to Giguna > Giguna Northeast > Save Point
+
+! Do Giguna > Ruins West > Lower Ledge > Hack Kishib
+  Move... to Giguna > Ruins Top > Portal Left
+! Do Deploy Drone
+! Do Giguna > Ruins Top > Portal > Enter Portal
+* Collect Slingshot_Hook from Giguna Breach > Slingshot > Ravine > Urn
+! Do Giguna Breach > Peak > Portal > Portal
+! Do Recall Drone
+  MainSavewarp to Giguna > Ruins Top > Save Point
+
+! Do Giguna > Ruins Top > Turret Balcony West > Throw Drone onto Tower
+! Do Irikar > Hub > Save Point > Save
+* Take hybrid exit Irikar > Sight Room > Item Pedestal > Urn Collection Skip, collecting Breach_Sight
+  MainSavewarp to Irikar > Hub > Save Point
+! Do Irikar > Hub > Portal Stand > Enter Portal
+* Collect Drone_Hover from Irikar Breach > Hover Room > Bottom > Item
+! Do Irikar Breach > Exit Corridor > Portal Stand > Enter Portal
+
+# TODO: This is where we would peek the separator save point
+  Move... to Uhrum > West Entrance > West 25
+* Collect Fast_Travel from Uhrum > Siege Corridor > Upper Rock Item > Urn
+  Move... to Uhrum > Save Room > East
+
+! Do Recall Fast Travel
+  Move... to Menu > Kiengir Map > Ebih Base Camp ==> Ebih > Base Camp > Save Point (1)
+  Move... to Amagi > Main Area > Catwalk Center
+! Do Deploy Drone
+* Collect Underwater_Movement from Amagi > Liru Room > Shrine > Item
+! Do Recall Drone
+! Do Deploy Drone
+* Collect Shockwave from Amagi > West Lake > Stronghold Item > Item
+
+! Do Recall Fast Travel
+  Move... to Menu > Kiengir Map > Uhrum Center ==> Uhrum > Save Room > Save Point (1)
+
+# TODO: This is where we'd go to the Emergence
+* Collect Uhrum_Waterfalls_Block from Uhrum > Waterfalls > Below Block > Shockwave Block
+! Do Deploy Drone
+  Move... to Uhrum > Annuna Corridor > West 26
+* Take hybrid exit Uhrum > Annuna Corridor > Pedestal > Urn Fast Travel, collecting Anuman
+  Move... to Menu > Kiengir Map > Uhrum East ==> Uhrum > Annuna Corridor > Save Point (1)
+! Do Become Indra
+* Collect Uhrum_Annuna_Corridor_Block from Uhrum > Annuna Corridor > Block West > Dislodge Block
+! Do Become Drone
+* Collect Nano_Lattice_2 from Annuna > West Bridge > Plinth > Item
+
+# TODO: rest of route
+* Collect Destruction_Pogrom from Annuna > Twisty Passages > Top > Tablet

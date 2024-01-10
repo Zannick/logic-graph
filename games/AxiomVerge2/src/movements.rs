@@ -8955,6 +8955,123 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
         ) => 1133,
         (
             [false],
+            SpotId::Menu__Kiengir_Map__Anuman,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+        ) => 700,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Anuman,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+        ) => 400,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Anuman,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+        ) => 600,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Anuman,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => 666,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Anuman,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => 933,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Anuman,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => 200,
+        ([false], SpotId::Menu__Kiengir_Map__Anuman, SpotId::Menu__Kiengir_Map__Annuna_Upper) => {
+            800
+        }
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Anuman,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => 733,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Anuman,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => 466,
+        ([false], SpotId::Menu__Kiengir_Map__Anuman, SpotId::Menu__Kiengir_Map__Apocalypse) => 866,
+        ([false], SpotId::Menu__Kiengir_Map__Anuman, SpotId::Menu__Kiengir_Map__Ebih_Base_Camp) => {
+            1200
+        }
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Anuman,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+        ) => 2200,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Anuman,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+        ) => 1200,
+        ([false], SpotId::Menu__Kiengir_Map__Anuman, SpotId::Menu__Kiengir_Map__Ebih_West_Mid) => {
+            1500
+        }
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Anuman,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+        ) => 1800,
+        ([false], SpotId::Menu__Kiengir_Map__Anuman, SpotId::Menu__Kiengir_Map__Giguna_Base) => {
+            1066
+        }
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Anuman,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+        ) => 800,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Anuman,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+        ) => 1500,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Anuman,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+        ) => 1900,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Anuman,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => 1600,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Anuman,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+        ) => 733,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Anuman,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+        ) => 1700,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Anuman,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => 1600,
+        ([false], SpotId::Menu__Kiengir_Map__Anuman, SpotId::Menu__Kiengir_Map__Irikar_Hub) => 1133,
+        ([false], SpotId::Menu__Kiengir_Map__Anuman, SpotId::Menu__Kiengir_Map__Irikar_Midwest) => {
+            1333
+        }
+        ([false], SpotId::Menu__Kiengir_Map__Anuman, SpotId::Menu__Kiengir_Map__Uhrum_Center) => {
+            266
+        }
+        ([false], SpotId::Menu__Kiengir_Map__Anuman, SpotId::Menu__Kiengir_Map__Uhrum_East) => 100,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Anuman,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+        ) => 400,
+        ([false], SpotId::Menu__Kiengir_Map__Anuman, SpotId::Menu__Kiengir_Map__Uhrum_West) => 666,
+        (
+            [false],
             SpotId::Menu__Kiengir_Map__Apocalypse,
             SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
         ) => 533,
@@ -11588,6 +11705,141 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
         ) => 2200,
         (
             [false],
+            SpotId::Menu__Kiengir_Map__Shockwave,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+        ) => 733,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Shockwave,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+        ) => 733,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Shockwave,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+        ) => 400,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Shockwave,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => 1066,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Shockwave,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => 1333,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Shockwave,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => 600,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Shockwave,
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+        ) => 1066,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Shockwave,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => 1133,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Shockwave,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => 866,
+        ([false], SpotId::Menu__Kiengir_Map__Shockwave, SpotId::Menu__Kiengir_Map__Apocalypse) => {
+            1266
+        }
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Shockwave,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+        ) => 700,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Shockwave,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+        ) => 1700,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Shockwave,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+        ) => 700,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Shockwave,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+        ) => 1000,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Shockwave,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+        ) => 1300,
+        ([false], SpotId::Menu__Kiengir_Map__Shockwave, SpotId::Menu__Kiengir_Map__Giguna_Base) => {
+            666
+        }
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Shockwave,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+        ) => 400,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Shockwave,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+        ) => 1000,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Shockwave,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+        ) => 1400,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Shockwave,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => 1100,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Shockwave,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+        ) => 500,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Shockwave,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+        ) => 1200,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Shockwave,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => 1200,
+        ([false], SpotId::Menu__Kiengir_Map__Shockwave, SpotId::Menu__Kiengir_Map__Irikar_Hub) => {
+            733
+        }
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Shockwave,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+        ) => 933,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Shockwave,
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+        ) => 700,
+        ([false], SpotId::Menu__Kiengir_Map__Shockwave, SpotId::Menu__Kiengir_Map__Uhrum_East) => {
+            600
+        }
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Shockwave,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+        ) => 200,
+        ([false], SpotId::Menu__Kiengir_Map__Shockwave, SpotId::Menu__Kiengir_Map__Uhrum_West) => {
+            800
+        }
+        (
+            [false],
             SpotId::Menu__Kiengir_Map__Uhrum_Center,
             SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
         ) => 900,
@@ -12608,8 +12860,8 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
         (
             [false],
             SpotId::Uhrum__Waterfalls__Center_Island_East,
-            SpotId::Uhrum__Waterfalls__Center_Island_West,
-        ) => 1052,
+            SpotId::Uhrum__Waterfalls__Center_Island_Middle,
+        ) => 526,
         (
             [false],
             SpotId::Uhrum__Waterfalls__Center_Island_East,
@@ -12617,9 +12869,19 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
         ) => 350,
         (
             [false],
-            SpotId::Uhrum__Waterfalls__Center_Island_West,
+            SpotId::Uhrum__Waterfalls__Center_Island_Middle,
             SpotId::Uhrum__Waterfalls__Center_Island_East,
-        ) => 1052,
+        ) => 526,
+        (
+            [false],
+            SpotId::Uhrum__Waterfalls__Center_Island_Middle,
+            SpotId::Uhrum__Waterfalls__Center_Island_West,
+        ) => 526,
+        (
+            [false],
+            SpotId::Uhrum__Waterfalls__Center_Island_West,
+            SpotId::Uhrum__Waterfalls__Center_Island_Middle,
+        ) => 526,
         (
             [false],
             SpotId::Uhrum__Waterfalls__Center_Island_West,
@@ -12670,6 +12932,11 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
             SpotId::Uhrum__Waterfalls__East_Waters_Edge,
             SpotId::Uhrum__Waterfalls__East_Water_Surface,
         ) => 175,
+        (
+            [false],
+            SpotId::Uhrum__Waterfalls__East_Waters_Edge,
+            SpotId::Uhrum__Waterfalls__Lower_East_Platform,
+        ) => 600,
         (
             [false],
             SpotId::Uhrum__Waterfalls__East_Waters_Edge,
@@ -12774,9 +13041,19 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
             SpotId::Uhrum__Waterfalls__Small_Rock,
             SpotId::Uhrum__Waterfalls__Lower_East_Platform,
         ) => 1403,
+        (
+            [false],
+            SpotId::Uhrum__Waterfalls__Water_Pillar,
+            SpotId::Uhrum__Waterfalls__Center_Island_East,
+        ) => 1000,
         ([false], SpotId::Uhrum__Waterfalls__Water_Pillar, SpotId::Uhrum__Waterfalls__East_28) => {
             3828
         }
+        (
+            [false],
+            SpotId::Uhrum__Waterfalls__Water_Pillar,
+            SpotId::Uhrum__Waterfalls__East_Waters_Edge,
+        ) => 1576,
         (
             [false],
             SpotId::Uhrum__Waterfalls__Water_Pillar,
@@ -12862,6 +13139,16 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
         ) => 877,
         (
             [false],
+            SpotId::Uhrum__Waterfalls__West_Shallow_End,
+            SpotId::Uhrum__Waterfalls__West_Water_Ledge,
+        ) => 1126,
+        (
+            [false],
+            SpotId::Uhrum__Waterfalls__West_Shallow_End,
+            SpotId::Uhrum__Waterfalls__West_Water_Surface,
+        ) => 2000,
+        (
+            [false],
             SpotId::Uhrum__Waterfalls__West_Wall,
             SpotId::Uhrum__Waterfalls__Island_Water_West,
         ) => 1403,
@@ -12874,6 +13161,11 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
             SpotId::Uhrum__Waterfalls__West_Wall,
             SpotId::Uhrum__Waterfalls__West_Platform,
         ) => 877,
+        (
+            [false],
+            SpotId::Uhrum__Waterfalls__West_Water_Ledge,
+            SpotId::Uhrum__Waterfalls__West_Shallow_End,
+        ) => 1126,
         // [0.2, 2.252252]
         (
             [false],
@@ -12890,6 +13182,11 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
             SpotId::Uhrum__Waterfalls__West_Water_Nook,
             SpotId::Uhrum__Waterfalls__Water_Slope,
         ) => 3378,
+        (
+            [false],
+            SpotId::Uhrum__Waterfalls__West_Water_Surface,
+            SpotId::Uhrum__Waterfalls__West_Shallow_End,
+        ) => 300,
         (
             [false],
             SpotId::Uhrum__Waterfalls__West_Water_Surface,
@@ -13107,6 +13404,11 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
             SpotId::Uhrum__West_Entrance__Top_West_Ledge,
             SpotId::Uhrum__West_Entrance__Portal_Stand,
         ) => 1140,
+        (
+            [false],
+            SpotId::Uhrum__West_Entrance__Top_West_Ledge,
+            SpotId::Uhrum__West_Entrance__West_25,
+        ) => 600,
         (
             [false],
             SpotId::Uhrum__West_Entrance__Upper_Fork,
@@ -21955,6 +22257,103 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
             SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
             SpotId::Menu__Kiengir_Map__Uhrum_West,
         ) => 1133,
+        ([true], SpotId::Menu__Kiengir_Map__Anuman, SpotId::Menu__Kiengir_Map__Amagi_East_Lake) => {
+            700
+        }
+        ([true], SpotId::Menu__Kiengir_Map__Anuman, SpotId::Menu__Kiengir_Map__Amagi_Isolation) => {
+            400
+        }
+        ([true], SpotId::Menu__Kiengir_Map__Anuman, SpotId::Menu__Kiengir_Map__Amagi_Main_Area) => {
+            600
+        }
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Anuman,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => 666,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Anuman,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => 933,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Anuman,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => 200,
+        ([true], SpotId::Menu__Kiengir_Map__Anuman, SpotId::Menu__Kiengir_Map__Annuna_Upper) => 800,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Anuman,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => 733,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Anuman,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => 466,
+        ([true], SpotId::Menu__Kiengir_Map__Anuman, SpotId::Menu__Kiengir_Map__Apocalypse) => 866,
+        ([true], SpotId::Menu__Kiengir_Map__Anuman, SpotId::Menu__Kiengir_Map__Ebih_Base_Camp) => {
+            1200
+        }
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Anuman,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+        ) => 2200,
+        ([true], SpotId::Menu__Kiengir_Map__Anuman, SpotId::Menu__Kiengir_Map__Ebih_West_Lower) => {
+            1200
+        }
+        ([true], SpotId::Menu__Kiengir_Map__Anuman, SpotId::Menu__Kiengir_Map__Ebih_West_Mid) => {
+            1500
+        }
+        ([true], SpotId::Menu__Kiengir_Map__Anuman, SpotId::Menu__Kiengir_Map__Ebih_West_Upper) => {
+            1800
+        }
+        ([true], SpotId::Menu__Kiengir_Map__Anuman, SpotId::Menu__Kiengir_Map__Giguna_Base) => 1066,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Anuman,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+        ) => 800,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Anuman,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+        ) => 1500,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Anuman,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+        ) => 1900,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Anuman,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => 1600,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Anuman,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+        ) => 733,
+        ([true], SpotId::Menu__Kiengir_Map__Anuman, SpotId::Menu__Kiengir_Map__Glacier_Revival) => {
+            1700
+        }
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Anuman,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => 1600,
+        ([true], SpotId::Menu__Kiengir_Map__Anuman, SpotId::Menu__Kiengir_Map__Irikar_Hub) => 1133,
+        ([true], SpotId::Menu__Kiengir_Map__Anuman, SpotId::Menu__Kiengir_Map__Irikar_Midwest) => {
+            1333
+        }
+        ([true], SpotId::Menu__Kiengir_Map__Anuman, SpotId::Menu__Kiengir_Map__Uhrum_Center) => 266,
+        ([true], SpotId::Menu__Kiengir_Map__Anuman, SpotId::Menu__Kiengir_Map__Uhrum_East) => 100,
+        ([true], SpotId::Menu__Kiengir_Map__Anuman, SpotId::Menu__Kiengir_Map__Uhrum_Emergence) => {
+            400
+        }
+        ([true], SpotId::Menu__Kiengir_Map__Anuman, SpotId::Menu__Kiengir_Map__Uhrum_West) => 666,
         (
             [true],
             SpotId::Menu__Kiengir_Map__Apocalypse,
@@ -24562,6 +24961,137 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
         ) => 2200,
         (
             [true],
+            SpotId::Menu__Kiengir_Map__Shockwave,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+        ) => 733,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Shockwave,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+        ) => 733,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Shockwave,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+        ) => 400,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Shockwave,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => 1066,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Shockwave,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => 1333,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Shockwave,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => 600,
+        ([true], SpotId::Menu__Kiengir_Map__Shockwave, SpotId::Menu__Kiengir_Map__Annuna_Upper) => {
+            1066
+        }
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Shockwave,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => 1133,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Shockwave,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => 866,
+        ([true], SpotId::Menu__Kiengir_Map__Shockwave, SpotId::Menu__Kiengir_Map__Apocalypse) => {
+            1266
+        }
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Shockwave,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+        ) => 700,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Shockwave,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+        ) => 1700,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Shockwave,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+        ) => 700,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Shockwave,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+        ) => 1000,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Shockwave,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+        ) => 1300,
+        ([true], SpotId::Menu__Kiengir_Map__Shockwave, SpotId::Menu__Kiengir_Map__Giguna_Base) => {
+            666
+        }
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Shockwave,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+        ) => 400,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Shockwave,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+        ) => 1000,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Shockwave,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+        ) => 1400,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Shockwave,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => 1100,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Shockwave,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+        ) => 500,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Shockwave,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+        ) => 1200,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Shockwave,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => 1200,
+        ([true], SpotId::Menu__Kiengir_Map__Shockwave, SpotId::Menu__Kiengir_Map__Irikar_Hub) => {
+            733
+        }
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Shockwave,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+        ) => 933,
+        ([true], SpotId::Menu__Kiengir_Map__Shockwave, SpotId::Menu__Kiengir_Map__Uhrum_Center) => {
+            700
+        }
+        ([true], SpotId::Menu__Kiengir_Map__Shockwave, SpotId::Menu__Kiengir_Map__Uhrum_East) => {
+            600
+        }
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Shockwave,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+        ) => 200,
+        ([true], SpotId::Menu__Kiengir_Map__Shockwave, SpotId::Menu__Kiengir_Map__Uhrum_West) => {
+            800
+        }
+        (
+            [true],
             SpotId::Menu__Kiengir_Map__Uhrum_Center,
             SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
         ) => 900,
@@ -25576,8 +26106,8 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
         (
             [true],
             SpotId::Uhrum__Waterfalls__Center_Island_East,
-            SpotId::Uhrum__Waterfalls__Center_Island_West,
-        ) => 1052,
+            SpotId::Uhrum__Waterfalls__Center_Island_Middle,
+        ) => 526,
         (
             [true],
             SpotId::Uhrum__Waterfalls__Center_Island_East,
@@ -25585,9 +26115,19 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
         ) => 350,
         (
             [true],
-            SpotId::Uhrum__Waterfalls__Center_Island_West,
+            SpotId::Uhrum__Waterfalls__Center_Island_Middle,
             SpotId::Uhrum__Waterfalls__Center_Island_East,
-        ) => 1052,
+        ) => 526,
+        (
+            [true],
+            SpotId::Uhrum__Waterfalls__Center_Island_Middle,
+            SpotId::Uhrum__Waterfalls__Center_Island_West,
+        ) => 526,
+        (
+            [true],
+            SpotId::Uhrum__Waterfalls__Center_Island_West,
+            SpotId::Uhrum__Waterfalls__Center_Island_Middle,
+        ) => 526,
         (
             [true],
             SpotId::Uhrum__Waterfalls__Center_Island_West,
@@ -25636,6 +26176,11 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
             SpotId::Uhrum__Waterfalls__East_Waters_Edge,
             SpotId::Uhrum__Waterfalls__East_Water_Surface,
         ) => 175,
+        (
+            [true],
+            SpotId::Uhrum__Waterfalls__East_Waters_Edge,
+            SpotId::Uhrum__Waterfalls__Lower_East_Platform,
+        ) => 600,
         (
             [true],
             SpotId::Uhrum__Waterfalls__East_Waters_Edge,
@@ -25734,9 +26279,19 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
             SpotId::Uhrum__Waterfalls__Small_Rock,
             SpotId::Uhrum__Waterfalls__Lower_East_Platform,
         ) => 1403,
+        (
+            [true],
+            SpotId::Uhrum__Waterfalls__Water_Pillar,
+            SpotId::Uhrum__Waterfalls__Center_Island_East,
+        ) => 1000,
         ([true], SpotId::Uhrum__Waterfalls__Water_Pillar, SpotId::Uhrum__Waterfalls__East_28) => {
             2982
         }
+        (
+            [true],
+            SpotId::Uhrum__Waterfalls__Water_Pillar,
+            SpotId::Uhrum__Waterfalls__East_Waters_Edge,
+        ) => 1228,
         (
             [true],
             SpotId::Uhrum__Waterfalls__Water_Pillar,
@@ -25820,6 +26375,16 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
         ) => 877,
         (
             [true],
+            SpotId::Uhrum__Waterfalls__West_Shallow_End,
+            SpotId::Uhrum__Waterfalls__West_Water_Ledge,
+        ) => 877,
+        (
+            [true],
+            SpotId::Uhrum__Waterfalls__West_Shallow_End,
+            SpotId::Uhrum__Waterfalls__West_Water_Surface,
+        ) => 2000,
+        (
+            [true],
             SpotId::Uhrum__Waterfalls__West_Wall,
             SpotId::Uhrum__Waterfalls__Island_Water_West,
         ) => 1403,
@@ -25832,6 +26397,11 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
             SpotId::Uhrum__Waterfalls__West_Wall,
             SpotId::Uhrum__Waterfalls__West_Platform,
         ) => 877,
+        (
+            [true],
+            SpotId::Uhrum__Waterfalls__West_Water_Ledge,
+            SpotId::Uhrum__Waterfalls__West_Shallow_End,
+        ) => 1000,
         // [0.2, 1.754386]
         (
             [true],
@@ -25848,6 +26418,11 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
             SpotId::Uhrum__Waterfalls__West_Water_Nook,
             SpotId::Uhrum__Waterfalls__Water_Slope,
         ) => 2631,
+        (
+            [true],
+            SpotId::Uhrum__Waterfalls__West_Water_Surface,
+            SpotId::Uhrum__Waterfalls__West_Shallow_End,
+        ) => 300,
         (
             [true],
             SpotId::Uhrum__Waterfalls__West_Water_Surface,
@@ -26065,6 +26640,11 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
             SpotId::Uhrum__West_Entrance__Top_West_Ledge,
             SpotId::Uhrum__West_Entrance__Portal_Stand,
         ) => 1140,
+        (
+            [true],
+            SpotId::Uhrum__West_Entrance__Top_West_Ledge,
+            SpotId::Uhrum__West_Entrance__West_25,
+        ) => 600,
         (
             [true],
             SpotId::Uhrum__West_Entrance__Upper_Fork,
@@ -33499,6 +34079,83 @@ pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
             true
         }
         (SpotId::Menu__Kiengir_Map__Breach_Sight, SpotId::Menu__Kiengir_Map__Uhrum_West) => true,
+        (SpotId::Menu__Kiengir_Map__Shockwave, SpotId::Menu__Kiengir_Map__Amagi_Main_Area) => true,
+        (SpotId::Menu__Kiengir_Map__Shockwave, SpotId::Menu__Kiengir_Map__Amagi_East_Lake) => true,
+        (SpotId::Menu__Kiengir_Map__Shockwave, SpotId::Menu__Kiengir_Map__Amagi_Isolation) => true,
+        (SpotId::Menu__Kiengir_Map__Shockwave, SpotId::Menu__Kiengir_Map__Annuna_Center_Save) => {
+            true
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Shockwave,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Shockwave, SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Shockwave, SpotId::Menu__Kiengir_Map__Annuna_Upper) => true,
+        (SpotId::Menu__Kiengir_Map__Shockwave, SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Shockwave, SpotId::Menu__Kiengir_Map__Annuna_West_Bridge) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Shockwave, SpotId::Menu__Kiengir_Map__Apocalypse) => true,
+        (SpotId::Menu__Kiengir_Map__Shockwave, SpotId::Menu__Kiengir_Map__Ebih_Base_Camp) => true,
+        (SpotId::Menu__Kiengir_Map__Shockwave, SpotId::Menu__Kiengir_Map__Ebih_Observatory) => true,
+        (SpotId::Menu__Kiengir_Map__Shockwave, SpotId::Menu__Kiengir_Map__Ebih_West_Lower) => true,
+        (SpotId::Menu__Kiengir_Map__Shockwave, SpotId::Menu__Kiengir_Map__Ebih_West_Mid) => true,
+        (SpotId::Menu__Kiengir_Map__Shockwave, SpotId::Menu__Kiengir_Map__Ebih_West_Upper) => true,
+        (SpotId::Menu__Kiengir_Map__Shockwave, SpotId::Menu__Kiengir_Map__Giguna_Base) => true,
+        (SpotId::Menu__Kiengir_Map__Shockwave, SpotId::Menu__Kiengir_Map__Giguna_Labyrinth) => true,
+        (SpotId::Menu__Kiengir_Map__Shockwave, SpotId::Menu__Kiengir_Map__Giguna_Northeast) => true,
+        (SpotId::Menu__Kiengir_Map__Shockwave, SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top) => true,
+        (SpotId::Menu__Kiengir_Map__Shockwave, SpotId::Menu__Kiengir_Map__Giguna_Ruins_West) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Shockwave, SpotId::Menu__Kiengir_Map__Giguna_Separator) => true,
+        (SpotId::Menu__Kiengir_Map__Shockwave, SpotId::Menu__Kiengir_Map__Glacier_Revival) => true,
+        (SpotId::Menu__Kiengir_Map__Shockwave, SpotId::Menu__Kiengir_Map__Irikar_Beach_Save) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Shockwave, SpotId::Menu__Kiengir_Map__Irikar_Hub) => true,
+        (SpotId::Menu__Kiengir_Map__Shockwave, SpotId::Menu__Kiengir_Map__Irikar_Midwest) => true,
+        (SpotId::Menu__Kiengir_Map__Shockwave, SpotId::Menu__Kiengir_Map__Uhrum_Center) => true,
+        (SpotId::Menu__Kiengir_Map__Shockwave, SpotId::Menu__Kiengir_Map__Uhrum_East) => true,
+        (SpotId::Menu__Kiengir_Map__Shockwave, SpotId::Menu__Kiengir_Map__Uhrum_Emergence) => true,
+        (SpotId::Menu__Kiengir_Map__Shockwave, SpotId::Menu__Kiengir_Map__Uhrum_West) => true,
+        (SpotId::Menu__Kiengir_Map__Anuman, SpotId::Menu__Kiengir_Map__Amagi_Main_Area) => true,
+        (SpotId::Menu__Kiengir_Map__Anuman, SpotId::Menu__Kiengir_Map__Amagi_East_Lake) => true,
+        (SpotId::Menu__Kiengir_Map__Anuman, SpotId::Menu__Kiengir_Map__Amagi_Isolation) => true,
+        (SpotId::Menu__Kiengir_Map__Anuman, SpotId::Menu__Kiengir_Map__Annuna_Center_Save) => true,
+        (SpotId::Menu__Kiengir_Map__Anuman, SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Anuman, SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match) => true,
+        (SpotId::Menu__Kiengir_Map__Anuman, SpotId::Menu__Kiengir_Map__Annuna_Upper) => true,
+        (SpotId::Menu__Kiengir_Map__Anuman, SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Anuman, SpotId::Menu__Kiengir_Map__Annuna_West_Bridge) => true,
+        (SpotId::Menu__Kiengir_Map__Anuman, SpotId::Menu__Kiengir_Map__Apocalypse) => true,
+        (SpotId::Menu__Kiengir_Map__Anuman, SpotId::Menu__Kiengir_Map__Ebih_Base_Camp) => true,
+        (SpotId::Menu__Kiengir_Map__Anuman, SpotId::Menu__Kiengir_Map__Ebih_Observatory) => true,
+        (SpotId::Menu__Kiengir_Map__Anuman, SpotId::Menu__Kiengir_Map__Ebih_West_Lower) => true,
+        (SpotId::Menu__Kiengir_Map__Anuman, SpotId::Menu__Kiengir_Map__Ebih_West_Mid) => true,
+        (SpotId::Menu__Kiengir_Map__Anuman, SpotId::Menu__Kiengir_Map__Ebih_West_Upper) => true,
+        (SpotId::Menu__Kiengir_Map__Anuman, SpotId::Menu__Kiengir_Map__Giguna_Base) => true,
+        (SpotId::Menu__Kiengir_Map__Anuman, SpotId::Menu__Kiengir_Map__Giguna_Labyrinth) => true,
+        (SpotId::Menu__Kiengir_Map__Anuman, SpotId::Menu__Kiengir_Map__Giguna_Northeast) => true,
+        (SpotId::Menu__Kiengir_Map__Anuman, SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top) => true,
+        (SpotId::Menu__Kiengir_Map__Anuman, SpotId::Menu__Kiengir_Map__Giguna_Ruins_West) => true,
+        (SpotId::Menu__Kiengir_Map__Anuman, SpotId::Menu__Kiengir_Map__Giguna_Separator) => true,
+        (SpotId::Menu__Kiengir_Map__Anuman, SpotId::Menu__Kiengir_Map__Glacier_Revival) => true,
+        (SpotId::Menu__Kiengir_Map__Anuman, SpotId::Menu__Kiengir_Map__Irikar_Beach_Save) => true,
+        (SpotId::Menu__Kiengir_Map__Anuman, SpotId::Menu__Kiengir_Map__Irikar_Hub) => true,
+        (SpotId::Menu__Kiengir_Map__Anuman, SpotId::Menu__Kiengir_Map__Irikar_Midwest) => true,
+        (SpotId::Menu__Kiengir_Map__Anuman, SpotId::Menu__Kiengir_Map__Uhrum_Center) => true,
+        (SpotId::Menu__Kiengir_Map__Anuman, SpotId::Menu__Kiengir_Map__Uhrum_East) => true,
+        (SpotId::Menu__Kiengir_Map__Anuman, SpotId::Menu__Kiengir_Map__Uhrum_Emergence) => true,
+        (SpotId::Menu__Kiengir_Map__Anuman, SpotId::Menu__Kiengir_Map__Uhrum_West) => true,
         (SpotId::Menu__Breach_Map__GB_Peak, SpotId::Menu__Breach_Map__GB_Peak) => true,
         (SpotId::Menu__Breach_Map__GB_SW_Save, SpotId::Menu__Breach_Map__GB_Peak) => true,
         (SpotId::Menu__Breach_Map__IB_Basement, SpotId::Menu__Breach_Map__GB_Peak) => true,
@@ -33542,6 +34199,9 @@ pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
             SpotId::Uhrum__West_Entrance__Top_West_Ledge,
             SpotId::Uhrum__West_Entrance__Middle_West_Ledge,
         ) => true,
+        (SpotId::Uhrum__West_Entrance__Top_West_Ledge, SpotId::Uhrum__West_Entrance__West_25) => {
+            true
+        }
         (
             SpotId::Uhrum__West_Entrance__Middle_West_Ledge,
             SpotId::Uhrum__West_Entrance__Southeast_Tree,
@@ -34019,16 +34679,40 @@ pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
             SpotId::Uhrum__Waterfalls__West_Water_Ledge,
         ) => true,
         (
+            SpotId::Uhrum__Waterfalls__West_Water_Surface,
+            SpotId::Uhrum__Waterfalls__West_Shallow_End,
+        ) => true,
+        (
+            SpotId::Uhrum__Waterfalls__West_Shallow_End,
+            SpotId::Uhrum__Waterfalls__West_Water_Surface,
+        ) => true,
+        (
+            SpotId::Uhrum__Waterfalls__West_Shallow_End,
+            SpotId::Uhrum__Waterfalls__West_Water_Surface,
+        ) => true,
+        (
+            SpotId::Uhrum__Waterfalls__West_Shallow_End,
+            SpotId::Uhrum__Waterfalls__West_Water_Ledge,
+        ) => true,
+        (
             SpotId::Uhrum__Waterfalls__Center_Island_West,
-            SpotId::Uhrum__Waterfalls__Center_Island_East,
+            SpotId::Uhrum__Waterfalls__Center_Island_Middle,
         ) => true,
         (
             SpotId::Uhrum__Waterfalls__Center_Island_West,
             SpotId::Uhrum__Waterfalls__Island_Water_West,
         ) => true,
         (
-            SpotId::Uhrum__Waterfalls__Center_Island_East,
+            SpotId::Uhrum__Waterfalls__Center_Island_Middle,
             SpotId::Uhrum__Waterfalls__Center_Island_West,
+        ) => true,
+        (
+            SpotId::Uhrum__Waterfalls__Center_Island_Middle,
+            SpotId::Uhrum__Waterfalls__Center_Island_East,
+        ) => true,
+        (
+            SpotId::Uhrum__Waterfalls__Center_Island_East,
+            SpotId::Uhrum__Waterfalls__Center_Island_Middle,
         ) => true,
         (
             SpotId::Uhrum__Waterfalls__Center_Island_East,
@@ -34050,6 +34734,10 @@ pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
             SpotId::Uhrum__Waterfalls__West_Water_Ledge,
             SpotId::Uhrum__Waterfalls__West_Water_Nook,
         ) => true,
+        (
+            SpotId::Uhrum__Waterfalls__West_Water_Ledge,
+            SpotId::Uhrum__Waterfalls__West_Shallow_End,
+        ) => true,
         (SpotId::Uhrum__Waterfalls__West_Water_Nook, SpotId::Uhrum__Waterfalls__Water_Slope) => {
             true
         }
@@ -34066,6 +34754,13 @@ pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
         (SpotId::Uhrum__Waterfalls__Water_Pillar, SpotId::Uhrum__Waterfalls__Water_Slope) => true,
         (SpotId::Uhrum__Waterfalls__Water_Pillar, SpotId::Uhrum__Waterfalls__East_28) => true,
         (
+            SpotId::Uhrum__Waterfalls__Water_Pillar,
+            SpotId::Uhrum__Waterfalls__Center_Island_East,
+        ) => true,
+        (SpotId::Uhrum__Waterfalls__Water_Pillar, SpotId::Uhrum__Waterfalls__East_Waters_Edge) => {
+            true
+        }
+        (
             SpotId::Uhrum__Waterfalls__East_Water_Surface,
             SpotId::Uhrum__Waterfalls__Water_Pillar,
         ) => true,
@@ -34078,6 +34773,10 @@ pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
         (SpotId::Uhrum__Waterfalls__East_Waters_Edge, SpotId::Uhrum__Waterfalls__Water_Pillar) => {
             true
         }
+        (
+            SpotId::Uhrum__Waterfalls__East_Waters_Edge,
+            SpotId::Uhrum__Waterfalls__Lower_East_Platform,
+        ) => true,
         (SpotId::Uhrum__Waterfalls__East_27, SpotId::Uhrum__Waterfalls__East_Waters_Edge) => true,
         (SpotId::Uhrum__Waterfalls__East_27, SpotId::Uhrum__Waterfalls__Lower_East_Platform) => {
             true
@@ -55728,6 +56427,156 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             1000,
         ),
         (
+            SpotId::Menu__Kiengir_Map__Anuman,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            700,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Anuman,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            400,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Anuman,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            600,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Anuman,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            666,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Anuman,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            933,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Anuman,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            200,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Anuman,
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+            800,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Anuman,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            733,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Anuman,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            466,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Anuman,
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+            866,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Anuman,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            1200,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Anuman,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            2200,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Anuman,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            1200,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Anuman,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+            1500,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Anuman,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            1800,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Anuman,
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+            1066,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Anuman,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            800,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Anuman,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            1500,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Anuman,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            1900,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Anuman,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            1600,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Anuman,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            733,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Anuman,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            1700,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Anuman,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            1600,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Anuman,
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+            1133,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Anuman,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            1333,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Anuman,
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+            266,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Anuman,
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+            100,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Anuman,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            400,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Anuman,
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+            666,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Anuman,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
             SpotId::Menu__Kiengir_Map__Apocalypse,
             SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
             533,
@@ -58548,6 +59397,156 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             1000,
         ),
         (
+            SpotId::Menu__Kiengir_Map__Shockwave,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            733,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Shockwave,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            733,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Shockwave,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            400,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Shockwave,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            1066,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Shockwave,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            1333,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Shockwave,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            600,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Shockwave,
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+            1066,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Shockwave,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            1133,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Shockwave,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            866,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Shockwave,
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+            1266,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Shockwave,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            700,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Shockwave,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            1700,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Shockwave,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            700,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Shockwave,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+            1000,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Shockwave,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            1300,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Shockwave,
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+            666,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Shockwave,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            400,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Shockwave,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            1000,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Shockwave,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            1400,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Shockwave,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            1100,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Shockwave,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            500,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Shockwave,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            1200,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Shockwave,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            1200,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Shockwave,
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+            733,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Shockwave,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            933,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Shockwave,
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+            700,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Shockwave,
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+            600,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Shockwave,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            200,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Shockwave,
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+            800,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Shockwave,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
             SpotId::Menu__Kiengir_Map__Uhrum_Center,
             SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
             900,
@@ -59334,8 +60333,18 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Uhrum__Annuna_Corridor__Pedestal,
+            SpotId::Menu__Kiengir_Map__Anuman,
+            0,
+        ),
+        (
+            SpotId::Uhrum__Annuna_Corridor__Pedestal,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
+        ),
+        (
+            SpotId::Uhrum__Annuna_Corridor__Pedestal,
+            SpotId::Menu__Warp_Only__Kiengir,
+            0,
         ),
         (
             SpotId::Uhrum__Annuna_Corridor__Pedestal,
@@ -60229,8 +61238,8 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Uhrum__Waterfalls__Center_Island_East,
-            SpotId::Uhrum__Waterfalls__Center_Island_West,
-            1052,
+            SpotId::Uhrum__Waterfalls__Center_Island_Middle,
+            526,
         ),
         (
             SpotId::Uhrum__Waterfalls__Center_Island_East,
@@ -60248,14 +61257,34 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             350,
         ),
         (
+            SpotId::Uhrum__Waterfalls__Center_Island_Middle,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__Center_Island_Middle,
+            SpotId::Uhrum__Waterfalls__Center_Island_East,
+            526,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__Center_Island_Middle,
+            SpotId::Uhrum__Waterfalls__Center_Island_West,
+            526,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__Center_Island_Middle,
+            SpotId::Uhrum__Waterfalls__Medium_Rock,
+            2000,
+        ),
+        (
             SpotId::Uhrum__Waterfalls__Center_Island_West,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
         (
             SpotId::Uhrum__Waterfalls__Center_Island_West,
-            SpotId::Uhrum__Waterfalls__Center_Island_East,
-            1052,
+            SpotId::Uhrum__Waterfalls__Center_Island_Middle,
+            526,
         ),
         (
             SpotId::Uhrum__Waterfalls__Center_Island_West,
@@ -60406,6 +61435,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Uhrum__Waterfalls__East_Waters_Edge,
             SpotId::Uhrum__Waterfalls__East_Water_Surface,
             175,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__East_Waters_Edge,
+            SpotId::Uhrum__Waterfalls__Lower_East_Platform,
+            600,
         ),
         (
             SpotId::Uhrum__Waterfalls__East_Waters_Edge,
@@ -60635,7 +61669,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Uhrum__Waterfalls__Water_Pillar,
             SpotId::Uhrum__Waterfalls__East_Waters_Edge,
-            1576,
+            1228,
         ),
         (
             SpotId::Uhrum__Waterfalls__Water_Pillar,
@@ -60803,6 +61837,26 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             877,
         ),
         (
+            SpotId::Uhrum__Waterfalls__West_Shallow_End,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__West_Shallow_End,
+            SpotId::Uhrum__Waterfalls__Center_Island_West,
+            1351,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__West_Shallow_End,
+            SpotId::Uhrum__Waterfalls__West_Water_Ledge,
+            877,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__West_Shallow_End,
+            SpotId::Uhrum__Waterfalls__West_Water_Surface,
+            2000,
+        ),
+        (
             SpotId::Uhrum__Waterfalls__West_Wall,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
@@ -60839,6 +61893,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Uhrum__Waterfalls__West_Water_Ledge,
+            SpotId::Uhrum__Waterfalls__West_Shallow_End,
+            1000,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__West_Water_Ledge,
             SpotId::Uhrum__Waterfalls__West_Water_Nook,
             1954,
         ),
@@ -60866,6 +61925,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Uhrum__Waterfalls__West_Water_Surface,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
+        ),
+        (
+            SpotId::Uhrum__Waterfalls__West_Water_Surface,
+            SpotId::Uhrum__Waterfalls__West_Shallow_End,
+            300,
         ),
         (
             SpotId::Uhrum__Waterfalls__West_Water_Surface,
@@ -61301,6 +62365,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Uhrum__West_Entrance__Top_West_Ledge,
             SpotId::Uhrum__West_Entrance__Portal_Stand,
             1140,
+        ),
+        (
+            SpotId::Uhrum__West_Entrance__Top_West_Ledge,
+            SpotId::Uhrum__West_Entrance__West_25,
+            600,
         ),
         (
             SpotId::Uhrum__West_Entrance__Top_West_Ledge,
@@ -67730,6 +68799,77 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
         (SpotId::Menu__Kiengir_Map__Annuna_West_Bridge, SpotId::Menu__Kiengir_Map__Uhrum_West) => {
             Some(1133)
         }
+        (SpotId::Menu__Kiengir_Map__Anuman, SpotId::Menu__Kiengir_Map__Amagi_East_Lake) => {
+            Some(700)
+        }
+        (SpotId::Menu__Kiengir_Map__Anuman, SpotId::Menu__Kiengir_Map__Amagi_Isolation) => {
+            Some(400)
+        }
+        (SpotId::Menu__Kiengir_Map__Anuman, SpotId::Menu__Kiengir_Map__Amagi_Main_Area) => {
+            Some(600)
+        }
+        (SpotId::Menu__Kiengir_Map__Anuman, SpotId::Menu__Kiengir_Map__Annuna_Center_Save) => {
+            Some(666)
+        }
+        (SpotId::Menu__Kiengir_Map__Anuman, SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance) => {
+            Some(933)
+        }
+        (SpotId::Menu__Kiengir_Map__Anuman, SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match) => {
+            Some(200)
+        }
+        (SpotId::Menu__Kiengir_Map__Anuman, SpotId::Menu__Kiengir_Map__Annuna_Upper) => Some(800),
+        (SpotId::Menu__Kiengir_Map__Anuman, SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room) => {
+            Some(733)
+        }
+        (SpotId::Menu__Kiengir_Map__Anuman, SpotId::Menu__Kiengir_Map__Annuna_West_Bridge) => {
+            Some(466)
+        }
+        (SpotId::Menu__Kiengir_Map__Anuman, SpotId::Menu__Kiengir_Map__Apocalypse) => Some(866),
+        (SpotId::Menu__Kiengir_Map__Anuman, SpotId::Menu__Kiengir_Map__Ebih_Base_Camp) => {
+            Some(1200)
+        }
+        (SpotId::Menu__Kiengir_Map__Anuman, SpotId::Menu__Kiengir_Map__Ebih_Observatory) => {
+            Some(2200)
+        }
+        (SpotId::Menu__Kiengir_Map__Anuman, SpotId::Menu__Kiengir_Map__Ebih_West_Lower) => {
+            Some(1200)
+        }
+        (SpotId::Menu__Kiengir_Map__Anuman, SpotId::Menu__Kiengir_Map__Ebih_West_Mid) => Some(1500),
+        (SpotId::Menu__Kiengir_Map__Anuman, SpotId::Menu__Kiengir_Map__Ebih_West_Upper) => {
+            Some(1800)
+        }
+        (SpotId::Menu__Kiengir_Map__Anuman, SpotId::Menu__Kiengir_Map__Giguna_Base) => Some(1066),
+        (SpotId::Menu__Kiengir_Map__Anuman, SpotId::Menu__Kiengir_Map__Giguna_Labyrinth) => {
+            Some(800)
+        }
+        (SpotId::Menu__Kiengir_Map__Anuman, SpotId::Menu__Kiengir_Map__Giguna_Northeast) => {
+            Some(1500)
+        }
+        (SpotId::Menu__Kiengir_Map__Anuman, SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top) => {
+            Some(1900)
+        }
+        (SpotId::Menu__Kiengir_Map__Anuman, SpotId::Menu__Kiengir_Map__Giguna_Ruins_West) => {
+            Some(1600)
+        }
+        (SpotId::Menu__Kiengir_Map__Anuman, SpotId::Menu__Kiengir_Map__Giguna_Separator) => {
+            Some(733)
+        }
+        (SpotId::Menu__Kiengir_Map__Anuman, SpotId::Menu__Kiengir_Map__Glacier_Revival) => {
+            Some(1700)
+        }
+        (SpotId::Menu__Kiengir_Map__Anuman, SpotId::Menu__Kiengir_Map__Irikar_Beach_Save) => {
+            Some(1600)
+        }
+        (SpotId::Menu__Kiengir_Map__Anuman, SpotId::Menu__Kiengir_Map__Irikar_Hub) => Some(1133),
+        (SpotId::Menu__Kiengir_Map__Anuman, SpotId::Menu__Kiengir_Map__Irikar_Midwest) => {
+            Some(1333)
+        }
+        (SpotId::Menu__Kiengir_Map__Anuman, SpotId::Menu__Kiengir_Map__Uhrum_Center) => Some(266),
+        (SpotId::Menu__Kiengir_Map__Anuman, SpotId::Menu__Kiengir_Map__Uhrum_East) => Some(100),
+        (SpotId::Menu__Kiengir_Map__Anuman, SpotId::Menu__Kiengir_Map__Uhrum_Emergence) => {
+            Some(400)
+        }
+        (SpotId::Menu__Kiengir_Map__Anuman, SpotId::Menu__Kiengir_Map__Uhrum_West) => Some(666),
         (SpotId::Menu__Kiengir_Map__Apocalypse, SpotId::Menu__Kiengir_Map__Amagi_East_Lake) => {
             Some(533)
         }
@@ -69557,6 +70697,84 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
         (SpotId::Menu__Kiengir_Map__Remote_Drone, SpotId::Menu__Kiengir_Map__Uhrum_West) => {
             Some(2200)
         }
+        (SpotId::Menu__Kiengir_Map__Shockwave, SpotId::Menu__Kiengir_Map__Amagi_East_Lake) => {
+            Some(733)
+        }
+        (SpotId::Menu__Kiengir_Map__Shockwave, SpotId::Menu__Kiengir_Map__Amagi_Isolation) => {
+            Some(733)
+        }
+        (SpotId::Menu__Kiengir_Map__Shockwave, SpotId::Menu__Kiengir_Map__Amagi_Main_Area) => {
+            Some(400)
+        }
+        (SpotId::Menu__Kiengir_Map__Shockwave, SpotId::Menu__Kiengir_Map__Annuna_Center_Save) => {
+            Some(1066)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Shockwave,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => Some(1333),
+        (SpotId::Menu__Kiengir_Map__Shockwave, SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match) => {
+            Some(600)
+        }
+        (SpotId::Menu__Kiengir_Map__Shockwave, SpotId::Menu__Kiengir_Map__Annuna_Upper) => {
+            Some(1066)
+        }
+        (SpotId::Menu__Kiengir_Map__Shockwave, SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room) => {
+            Some(1133)
+        }
+        (SpotId::Menu__Kiengir_Map__Shockwave, SpotId::Menu__Kiengir_Map__Annuna_West_Bridge) => {
+            Some(866)
+        }
+        (SpotId::Menu__Kiengir_Map__Shockwave, SpotId::Menu__Kiengir_Map__Apocalypse) => Some(1266),
+        (SpotId::Menu__Kiengir_Map__Shockwave, SpotId::Menu__Kiengir_Map__Ebih_Base_Camp) => {
+            Some(700)
+        }
+        (SpotId::Menu__Kiengir_Map__Shockwave, SpotId::Menu__Kiengir_Map__Ebih_Observatory) => {
+            Some(1700)
+        }
+        (SpotId::Menu__Kiengir_Map__Shockwave, SpotId::Menu__Kiengir_Map__Ebih_West_Lower) => {
+            Some(700)
+        }
+        (SpotId::Menu__Kiengir_Map__Shockwave, SpotId::Menu__Kiengir_Map__Ebih_West_Mid) => {
+            Some(1000)
+        }
+        (SpotId::Menu__Kiengir_Map__Shockwave, SpotId::Menu__Kiengir_Map__Ebih_West_Upper) => {
+            Some(1300)
+        }
+        (SpotId::Menu__Kiengir_Map__Shockwave, SpotId::Menu__Kiengir_Map__Giguna_Base) => Some(666),
+        (SpotId::Menu__Kiengir_Map__Shockwave, SpotId::Menu__Kiengir_Map__Giguna_Labyrinth) => {
+            Some(400)
+        }
+        (SpotId::Menu__Kiengir_Map__Shockwave, SpotId::Menu__Kiengir_Map__Giguna_Northeast) => {
+            Some(1000)
+        }
+        (SpotId::Menu__Kiengir_Map__Shockwave, SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top) => {
+            Some(1400)
+        }
+        (SpotId::Menu__Kiengir_Map__Shockwave, SpotId::Menu__Kiengir_Map__Giguna_Ruins_West) => {
+            Some(1100)
+        }
+        (SpotId::Menu__Kiengir_Map__Shockwave, SpotId::Menu__Kiengir_Map__Giguna_Separator) => {
+            Some(500)
+        }
+        (SpotId::Menu__Kiengir_Map__Shockwave, SpotId::Menu__Kiengir_Map__Glacier_Revival) => {
+            Some(1200)
+        }
+        (SpotId::Menu__Kiengir_Map__Shockwave, SpotId::Menu__Kiengir_Map__Irikar_Beach_Save) => {
+            Some(1200)
+        }
+        (SpotId::Menu__Kiengir_Map__Shockwave, SpotId::Menu__Kiengir_Map__Irikar_Hub) => Some(733),
+        (SpotId::Menu__Kiengir_Map__Shockwave, SpotId::Menu__Kiengir_Map__Irikar_Midwest) => {
+            Some(933)
+        }
+        (SpotId::Menu__Kiengir_Map__Shockwave, SpotId::Menu__Kiengir_Map__Uhrum_Center) => {
+            Some(700)
+        }
+        (SpotId::Menu__Kiengir_Map__Shockwave, SpotId::Menu__Kiengir_Map__Uhrum_East) => Some(600),
+        (SpotId::Menu__Kiengir_Map__Shockwave, SpotId::Menu__Kiengir_Map__Uhrum_Emergence) => {
+            Some(200)
+        }
+        (SpotId::Menu__Kiengir_Map__Shockwave, SpotId::Menu__Kiengir_Map__Uhrum_West) => Some(800),
         (SpotId::Menu__Kiengir_Map__Uhrum_Center, SpotId::Menu__Kiengir_Map__Amagi_East_Lake) => {
             Some(900)
         }
@@ -70261,16 +71479,24 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
         ) => Some(877),
         (
             SpotId::Uhrum__Waterfalls__Center_Island_East,
-            SpotId::Uhrum__Waterfalls__Center_Island_West,
-        ) => Some(1052),
+            SpotId::Uhrum__Waterfalls__Center_Island_Middle,
+        ) => Some(526),
         (
             SpotId::Uhrum__Waterfalls__Center_Island_East,
             SpotId::Uhrum__Waterfalls__Water_Pillar,
         ) => Some(350),
         (
-            SpotId::Uhrum__Waterfalls__Center_Island_West,
+            SpotId::Uhrum__Waterfalls__Center_Island_Middle,
             SpotId::Uhrum__Waterfalls__Center_Island_East,
-        ) => Some(1052),
+        ) => Some(526),
+        (
+            SpotId::Uhrum__Waterfalls__Center_Island_Middle,
+            SpotId::Uhrum__Waterfalls__Center_Island_West,
+        ) => Some(526),
+        (
+            SpotId::Uhrum__Waterfalls__Center_Island_West,
+            SpotId::Uhrum__Waterfalls__Center_Island_Middle,
+        ) => Some(526),
         (
             SpotId::Uhrum__Waterfalls__Center_Island_West,
             SpotId::Uhrum__Waterfalls__Island_Water_West,
@@ -70301,6 +71527,10 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
             SpotId::Uhrum__Waterfalls__East_Waters_Edge,
             SpotId::Uhrum__Waterfalls__East_Water_Surface,
         ) => Some(175),
+        (
+            SpotId::Uhrum__Waterfalls__East_Waters_Edge,
+            SpotId::Uhrum__Waterfalls__Lower_East_Platform,
+        ) => Some(600),
         (SpotId::Uhrum__Waterfalls__East_Waters_Edge, SpotId::Uhrum__Waterfalls__Water_Pillar) => {
             Some(1228)
         }
@@ -70373,7 +71603,14 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
         (SpotId::Uhrum__Waterfalls__Small_Rock, SpotId::Uhrum__Waterfalls__Lower_East_Platform) => {
             Some(1403)
         }
+        (
+            SpotId::Uhrum__Waterfalls__Water_Pillar,
+            SpotId::Uhrum__Waterfalls__Center_Island_East,
+        ) => Some(1000),
         (SpotId::Uhrum__Waterfalls__Water_Pillar, SpotId::Uhrum__Waterfalls__East_28) => Some(3828),
+        (SpotId::Uhrum__Waterfalls__Water_Pillar, SpotId::Uhrum__Waterfalls__East_Waters_Edge) => {
+            Some(1576)
+        }
         (SpotId::Uhrum__Waterfalls__Water_Pillar, SpotId::Uhrum__Waterfalls__Water_Slope) => {
             Some(900)
         }
@@ -70429,6 +71666,14 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
         (SpotId::Uhrum__Waterfalls__West_Platform, SpotId::Uhrum__Waterfalls__West_Wall) => {
             Some(877)
         }
+        (
+            SpotId::Uhrum__Waterfalls__West_Shallow_End,
+            SpotId::Uhrum__Waterfalls__West_Water_Ledge,
+        ) => Some(1126),
+        (
+            SpotId::Uhrum__Waterfalls__West_Shallow_End,
+            SpotId::Uhrum__Waterfalls__West_Water_Surface,
+        ) => Some(2000),
         (SpotId::Uhrum__Waterfalls__West_Wall, SpotId::Uhrum__Waterfalls__Island_Water_West) => {
             Some(1403)
         }
@@ -70437,6 +71682,10 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
         (SpotId::Uhrum__Waterfalls__West_Wall, SpotId::Uhrum__Waterfalls__West_Platform) => {
             Some(877)
         }
+        (
+            SpotId::Uhrum__Waterfalls__West_Water_Ledge,
+            SpotId::Uhrum__Waterfalls__West_Shallow_End,
+        ) => Some(1126),
         (
             SpotId::Uhrum__Waterfalls__West_Water_Ledge,
             SpotId::Uhrum__Waterfalls__West_Water_Nook,
@@ -70448,6 +71697,10 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
         (SpotId::Uhrum__Waterfalls__West_Water_Nook, SpotId::Uhrum__Waterfalls__Water_Slope) => {
             Some(3378)
         }
+        (
+            SpotId::Uhrum__Waterfalls__West_Water_Surface,
+            SpotId::Uhrum__Waterfalls__West_Shallow_End,
+        ) => Some(300),
         (
             SpotId::Uhrum__Waterfalls__West_Water_Surface,
             SpotId::Uhrum__Waterfalls__West_Water_Ledge,
@@ -70608,6 +71861,9 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
             SpotId::Uhrum__West_Entrance__Top_West_Ledge,
             SpotId::Uhrum__West_Entrance__Portal_Stand,
         ) => Some(1140),
+        (SpotId::Uhrum__West_Entrance__Top_West_Ledge, SpotId::Uhrum__West_Entrance__West_25) => {
+            Some(600)
+        }
         (SpotId::Uhrum__West_Entrance__Upper_Fork, SpotId::Uhrum__West_Entrance__Clear_Passage) => {
             Some(2105)
         }
@@ -77995,6 +79251,93 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
         (SpotId::Menu__Kiengir_Map__Annuna_West_Bridge, SpotId::Menu__Kiengir_Map__Uhrum_West) => {
             (Some(1133), vec![])
         }
+        (SpotId::Menu__Kiengir_Map__Anuman, SpotId::Menu__Kiengir_Map__Amagi_East_Lake) => {
+            (Some(700), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Anuman, SpotId::Menu__Kiengir_Map__Amagi_Isolation) => {
+            (Some(400), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Anuman, SpotId::Menu__Kiengir_Map__Amagi_Main_Area) => {
+            (Some(600), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Anuman, SpotId::Menu__Kiengir_Map__Annuna_Center_Save) => {
+            (Some(666), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Anuman, SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance) => {
+            (Some(933), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Anuman, SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match) => {
+            (Some(200), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Anuman, SpotId::Menu__Kiengir_Map__Annuna_Upper) => {
+            (Some(800), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Anuman, SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room) => {
+            (Some(733), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Anuman, SpotId::Menu__Kiengir_Map__Annuna_West_Bridge) => {
+            (Some(466), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Anuman, SpotId::Menu__Kiengir_Map__Apocalypse) => {
+            (Some(866), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Anuman, SpotId::Menu__Kiengir_Map__Ebih_Base_Camp) => {
+            (Some(1200), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Anuman, SpotId::Menu__Kiengir_Map__Ebih_Observatory) => {
+            (Some(2200), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Anuman, SpotId::Menu__Kiengir_Map__Ebih_West_Lower) => {
+            (Some(1200), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Anuman, SpotId::Menu__Kiengir_Map__Ebih_West_Mid) => {
+            (Some(1500), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Anuman, SpotId::Menu__Kiengir_Map__Ebih_West_Upper) => {
+            (Some(1800), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Anuman, SpotId::Menu__Kiengir_Map__Giguna_Base) => {
+            (Some(1066), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Anuman, SpotId::Menu__Kiengir_Map__Giguna_Labyrinth) => {
+            (Some(800), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Anuman, SpotId::Menu__Kiengir_Map__Giguna_Northeast) => {
+            (Some(1500), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Anuman, SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top) => {
+            (Some(1900), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Anuman, SpotId::Menu__Kiengir_Map__Giguna_Ruins_West) => {
+            (Some(1600), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Anuman, SpotId::Menu__Kiengir_Map__Giguna_Separator) => {
+            (Some(733), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Anuman, SpotId::Menu__Kiengir_Map__Glacier_Revival) => {
+            (Some(1700), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Anuman, SpotId::Menu__Kiengir_Map__Irikar_Beach_Save) => {
+            (Some(1600), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Anuman, SpotId::Menu__Kiengir_Map__Irikar_Hub) => {
+            (Some(1133), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Anuman, SpotId::Menu__Kiengir_Map__Irikar_Midwest) => {
+            (Some(1333), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Anuman, SpotId::Menu__Kiengir_Map__Uhrum_Center) => {
+            (Some(266), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Anuman, SpotId::Menu__Kiengir_Map__Uhrum_East) => {
+            (Some(100), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Anuman, SpotId::Menu__Kiengir_Map__Uhrum_Emergence) => {
+            (Some(400), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Anuman, SpotId::Menu__Kiengir_Map__Uhrum_West) => {
+            (Some(666), vec![])
+        }
         (SpotId::Menu__Kiengir_Map__Apocalypse, SpotId::Menu__Kiengir_Map__Amagi_East_Lake) => {
             (Some(533), vec![])
         }
@@ -79844,6 +81187,94 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
         (SpotId::Menu__Kiengir_Map__Remote_Drone, SpotId::Menu__Kiengir_Map__Uhrum_West) => {
             (Some(2200), vec![])
         }
+        (SpotId::Menu__Kiengir_Map__Shockwave, SpotId::Menu__Kiengir_Map__Amagi_East_Lake) => {
+            (Some(733), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Shockwave, SpotId::Menu__Kiengir_Map__Amagi_Isolation) => {
+            (Some(733), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Shockwave, SpotId::Menu__Kiengir_Map__Amagi_Main_Area) => {
+            (Some(400), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Shockwave, SpotId::Menu__Kiengir_Map__Annuna_Center_Save) => {
+            (Some(1066), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Shockwave,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => (Some(1333), vec![]),
+        (SpotId::Menu__Kiengir_Map__Shockwave, SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match) => {
+            (Some(600), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Shockwave, SpotId::Menu__Kiengir_Map__Annuna_Upper) => {
+            (Some(1066), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Shockwave, SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room) => {
+            (Some(1133), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Shockwave, SpotId::Menu__Kiengir_Map__Annuna_West_Bridge) => {
+            (Some(866), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Shockwave, SpotId::Menu__Kiengir_Map__Apocalypse) => {
+            (Some(1266), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Shockwave, SpotId::Menu__Kiengir_Map__Ebih_Base_Camp) => {
+            (Some(700), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Shockwave, SpotId::Menu__Kiengir_Map__Ebih_Observatory) => {
+            (Some(1700), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Shockwave, SpotId::Menu__Kiengir_Map__Ebih_West_Lower) => {
+            (Some(700), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Shockwave, SpotId::Menu__Kiengir_Map__Ebih_West_Mid) => {
+            (Some(1000), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Shockwave, SpotId::Menu__Kiengir_Map__Ebih_West_Upper) => {
+            (Some(1300), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Shockwave, SpotId::Menu__Kiengir_Map__Giguna_Base) => {
+            (Some(666), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Shockwave, SpotId::Menu__Kiengir_Map__Giguna_Labyrinth) => {
+            (Some(400), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Shockwave, SpotId::Menu__Kiengir_Map__Giguna_Northeast) => {
+            (Some(1000), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Shockwave, SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top) => {
+            (Some(1400), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Shockwave, SpotId::Menu__Kiengir_Map__Giguna_Ruins_West) => {
+            (Some(1100), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Shockwave, SpotId::Menu__Kiengir_Map__Giguna_Separator) => {
+            (Some(500), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Shockwave, SpotId::Menu__Kiengir_Map__Glacier_Revival) => {
+            (Some(1200), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Shockwave, SpotId::Menu__Kiengir_Map__Irikar_Beach_Save) => {
+            (Some(1200), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Shockwave, SpotId::Menu__Kiengir_Map__Irikar_Hub) => {
+            (Some(733), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Shockwave, SpotId::Menu__Kiengir_Map__Irikar_Midwest) => {
+            (Some(933), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Shockwave, SpotId::Menu__Kiengir_Map__Uhrum_Center) => {
+            (Some(700), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Shockwave, SpotId::Menu__Kiengir_Map__Uhrum_East) => {
+            (Some(600), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Shockwave, SpotId::Menu__Kiengir_Map__Uhrum_Emergence) => {
+            (Some(200), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Shockwave, SpotId::Menu__Kiengir_Map__Uhrum_West) => {
+            (Some(800), vec![])
+        }
         (SpotId::Menu__Kiengir_Map__Uhrum_Center, SpotId::Menu__Kiengir_Map__Amagi_East_Lake) => {
             (Some(900), vec![])
         }
@@ -80568,16 +81999,24 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
         ) => (Some(877), vec![]),
         (
             SpotId::Uhrum__Waterfalls__Center_Island_East,
-            SpotId::Uhrum__Waterfalls__Center_Island_West,
-        ) => (Some(1052), vec![]),
+            SpotId::Uhrum__Waterfalls__Center_Island_Middle,
+        ) => (Some(526), vec![]),
         (
             SpotId::Uhrum__Waterfalls__Center_Island_East,
             SpotId::Uhrum__Waterfalls__Water_Pillar,
         ) => (Some(350), vec![]),
         (
-            SpotId::Uhrum__Waterfalls__Center_Island_West,
+            SpotId::Uhrum__Waterfalls__Center_Island_Middle,
             SpotId::Uhrum__Waterfalls__Center_Island_East,
-        ) => (Some(1052), vec![]),
+        ) => (Some(526), vec![]),
+        (
+            SpotId::Uhrum__Waterfalls__Center_Island_Middle,
+            SpotId::Uhrum__Waterfalls__Center_Island_West,
+        ) => (Some(526), vec![]),
+        (
+            SpotId::Uhrum__Waterfalls__Center_Island_West,
+            SpotId::Uhrum__Waterfalls__Center_Island_Middle,
+        ) => (Some(526), vec![]),
         (
             SpotId::Uhrum__Waterfalls__Center_Island_West,
             SpotId::Uhrum__Waterfalls__Island_Water_West,
@@ -80614,6 +82053,10 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
             SpotId::Uhrum__Waterfalls__East_Waters_Edge,
             SpotId::Uhrum__Waterfalls__East_Water_Surface,
         ) => (Some(175), vec![]),
+        (
+            SpotId::Uhrum__Waterfalls__East_Waters_Edge,
+            SpotId::Uhrum__Waterfalls__Lower_East_Platform,
+        ) => (Some(600), vec![]),
         (SpotId::Uhrum__Waterfalls__East_Waters_Edge, SpotId::Uhrum__Waterfalls__Water_Pillar) => {
             (Some(1228), vec![])
         }
@@ -80688,8 +82131,15 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
         (SpotId::Uhrum__Waterfalls__Small_Rock, SpotId::Uhrum__Waterfalls__Lower_East_Platform) => {
             (Some(1403), vec![])
         }
+        (
+            SpotId::Uhrum__Waterfalls__Water_Pillar,
+            SpotId::Uhrum__Waterfalls__Center_Island_East,
+        ) => (Some(1000), vec![]),
         (SpotId::Uhrum__Waterfalls__Water_Pillar, SpotId::Uhrum__Waterfalls__East_28) => {
             (Some(3828), vec![([true], 2982)])
+        }
+        (SpotId::Uhrum__Waterfalls__Water_Pillar, SpotId::Uhrum__Waterfalls__East_Waters_Edge) => {
+            (Some(1576), vec![([true], 1228)])
         }
         (SpotId::Uhrum__Waterfalls__Water_Pillar, SpotId::Uhrum__Waterfalls__Water_Slope) => {
             (Some(900), vec![([true], 701)])
@@ -80752,6 +82202,14 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
         (SpotId::Uhrum__Waterfalls__West_Platform, SpotId::Uhrum__Waterfalls__West_Wall) => {
             (Some(877), vec![])
         }
+        (
+            SpotId::Uhrum__Waterfalls__West_Shallow_End,
+            SpotId::Uhrum__Waterfalls__West_Water_Ledge,
+        ) => (Some(1126), vec![([true], 877)]),
+        (
+            SpotId::Uhrum__Waterfalls__West_Shallow_End,
+            SpotId::Uhrum__Waterfalls__West_Water_Surface,
+        ) => (Some(2000), vec![]),
         (SpotId::Uhrum__Waterfalls__West_Wall, SpotId::Uhrum__Waterfalls__Island_Water_West) => {
             (Some(1403), vec![])
         }
@@ -80766,6 +82224,10 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
         }
         (
             SpotId::Uhrum__Waterfalls__West_Water_Ledge,
+            SpotId::Uhrum__Waterfalls__West_Shallow_End,
+        ) => (Some(1126), vec![([true], 1000)]),
+        (
+            SpotId::Uhrum__Waterfalls__West_Water_Ledge,
             SpotId::Uhrum__Waterfalls__West_Water_Nook,
         ) => (Some(2452), vec![([true], 1954)]),
         (
@@ -80775,6 +82237,10 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
         (SpotId::Uhrum__Waterfalls__West_Water_Nook, SpotId::Uhrum__Waterfalls__Water_Slope) => {
             (Some(3378), vec![([true], 2631)])
         }
+        (
+            SpotId::Uhrum__Waterfalls__West_Water_Surface,
+            SpotId::Uhrum__Waterfalls__West_Shallow_End,
+        ) => (Some(300), vec![]),
         (
             SpotId::Uhrum__Waterfalls__West_Water_Surface,
             SpotId::Uhrum__Waterfalls__West_Water_Ledge,
@@ -80935,6 +82401,9 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
             SpotId::Uhrum__West_Entrance__Top_West_Ledge,
             SpotId::Uhrum__West_Entrance__Portal_Stand,
         ) => (Some(1140), vec![]),
+        (SpotId::Uhrum__West_Entrance__Top_West_Ledge, SpotId::Uhrum__West_Entrance__West_25) => {
+            (Some(600), vec![])
+        }
         (SpotId::Uhrum__West_Entrance__Upper_Fork, SpotId::Uhrum__West_Entrance__Clear_Passage) => {
             (Some(2105), vec![])
         }

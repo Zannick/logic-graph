@@ -1369,6 +1369,10 @@ pub fn access_grab_and_switch_40_12(ctx: &Context, world: &graph::World) -> bool
     // $grab and Switch_40_12
     (helper__grab!(ctx, world) && ctx.has(Item::Switch_40_12))
 }
+pub fn access_grab_and_water_movement(ctx: &Context, world: &graph::World) -> bool {
+    // $grab and Water_Movement
+    (helper__grab!(ctx, world) && ctx.has(Item::Water_Movement))
+}
 pub fn access_grab_or_anuman(ctx: &Context, world: &graph::World) -> bool {
     // $grab or Anuman
     (helper__grab!(ctx, world) || ctx.has(Item::Anuman))
@@ -1437,6 +1441,10 @@ pub fn access_hook_and_not_ebih_waterfall_block_right(ctx: &Context, world: &gra
 pub fn access_hook_and_underwater_movement(ctx: &Context, world: &graph::World) -> bool {
     // $hook and Underwater_Movement
     (helper__hook!(ctx, world) && ctx.has(Item::Underwater_Movement))
+}
+pub fn access_hook_and_water_movement(ctx: &Context, world: &graph::World) -> bool {
+    // $hook and Water_Movement
+    (helper__hook!(ctx, world) && ctx.has(Item::Water_Movement))
 }
 pub fn access_hook_or_hover(ctx: &Context, world: &graph::World) -> bool {
     // $hook or $hover
@@ -1796,6 +1804,17 @@ pub fn access_not_within_menu_and_flasks_gt_0(ctx: &Context, world: &graph::Worl
         RegionId::Menu => true,
         _ => false,
     }) && Into::<i32>::into(ctx.flasks()) > 0.into())
+}
+pub fn access_not_within_menu_and_ft_main_and_can_recall(
+    ctx: &Context,
+    world: &graph::World,
+) -> bool {
+    // NOT WITHIN `Menu` and $ft_main and $can_recall
+    ((!(match get_region(ctx.position()) {
+        RegionId::Menu => true,
+        _ => false,
+    }) && helper__ft_main!(ctx, world))
+        && helper__can_recall!(ctx, world))
 }
 pub fn access_not_within_menu_and_realm_ne_breach_and_anuman_and_mode_eq_drone(
     ctx: &Context,
@@ -2426,6 +2445,11 @@ pub fn action_indra_set_default(ctx: &mut Context, world: &graph::World) {
     // ^indra = $default
     ctx.set_indra(Default::default());
 }
+pub fn action_indra_set_default_refill_energy(ctx: &mut Context, world: &graph::World) {
+    // ^indra = $default; $refill_energy
+    ctx.set_indra(Default::default());
+    helper__refill_energy!(ctx, world);
+}
 pub fn action_irikar__basement_portal__moving_platform_start__activate_platform__do(
     ctx: &mut Context,
     world: &graph::World,
@@ -2457,6 +2481,11 @@ pub fn action_mode_set_drone_indra_set_position(ctx: &mut Context, world: &graph
 pub fn action_mode_set_indra(ctx: &mut Context, world: &graph::World) {
     // ^mode = 'Indra'
     ctx.set_mode(enums::Mode::Indra);
+}
+pub fn action_mode_set_indra_last_set_indra(ctx: &mut Context, world: &graph::World) {
+    // ^mode = 'Indra'; ^last = ^indra
+    ctx.set_mode(enums::Mode::Indra);
+    ctx.set_last(ctx.indra());
 }
 pub fn action_refill_energy(ctx: &mut Context, world: &graph::World) {
     // $refill_energy

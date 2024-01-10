@@ -1282,7 +1282,9 @@ digraph AxiomVerge2 {
         Uhrum__Waterfalls__East_Palm_Tree [label = "", pos = "82.35,-41.25!"];
         Uhrum__Waterfalls__West_Waters_Edge [label = "", pos = "78.9,-44.833333!"];
         Uhrum__Waterfalls__West_Water_Surface [label = "", pos = "79.05,-45.0!"];
+        Uhrum__Waterfalls__West_Shallow_End [label = "", pos = "79.2,-45.5!"];
         Uhrum__Waterfalls__Center_Island_West [label = "", pos = "80.1,-44.833333!"];
+        Uhrum__Waterfalls__Center_Island_Middle [label = "", pos = "80.55,-44.833333!"];
         Uhrum__Waterfalls__Center_Island_East [label = "", pos = "81.0,-44.833333!"];
         Uhrum__Waterfalls__Island_Water_West [label = "", pos = "79.95,-45.0!"];
         Uhrum__Waterfalls__West_Water_Ledge [label = "", pos = "79.95,-45.666667!"];
@@ -2470,6 +2472,8 @@ digraph AxiomVerge2 {
     Uhrum__Waterfalls__Green_Middle_Ledge -> Uhrum__Waterfalls__Below_Block;
     Uhrum__Waterfalls__East_Palm_Tree -> Uhrum__Waterfalls__Ledge_Above_Palm;
     Uhrum__Waterfalls__East_Palm_Tree -> Uhrum__Waterfalls__Ledge_Above_Palm;
+    Uhrum__Waterfalls__West_Shallow_End -> Uhrum__Waterfalls__Center_Island_West;
+    Uhrum__Waterfalls__West_Shallow_End -> Uhrum__Waterfalls__Center_Island_West;
     Uhrum__Waterfalls__Center_Island_West -> Uhrum__Waterfalls__West_27;
     Uhrum__Waterfalls__Center_Island_East -> Uhrum__Waterfalls__East_Waters_Edge;
     Uhrum__Waterfalls__Center_Island_East -> Uhrum__Waterfalls__Lower_East_Platform;
@@ -4472,6 +4476,7 @@ digraph AxiomVerge2 {
     Uhrum__West_Entrance__Hidden_Passage_Entry -> Uhrum__West_Entrance__Middle_West_Ledge;
     Uhrum__West_Entrance__Hidden_Passage_Entry -> Uhrum__West_Entrance__Portal_Stand;
     Uhrum__West_Entrance__West_25 -> Uhrum__West_Entrance__Top_West_Ledge;
+    Uhrum__West_Entrance__Top_West_Ledge -> Uhrum__West_Entrance__West_25;
     Uhrum__West_Entrance__Top_West_Ledge -> Uhrum__West_Entrance__Middle_West_Ledge;
     Uhrum__West_Entrance__Top_West_Ledge -> Uhrum__West_Entrance__Portal_Stand;
     Uhrum__West_Entrance__Middle_West_Ledge -> Uhrum__West_Entrance__Southeast_Tree;
@@ -4627,23 +4632,32 @@ digraph AxiomVerge2 {
     Uhrum__Waterfalls__West_Waters_Edge -> Uhrum__Waterfalls__West_27;
     Uhrum__Waterfalls__West_Waters_Edge -> Uhrum__Waterfalls__West_Water_Surface;
     Uhrum__Waterfalls__West_Water_Surface -> Uhrum__Waterfalls__West_Waters_Edge;
+    Uhrum__Waterfalls__West_Water_Surface -> Uhrum__Waterfalls__West_Shallow_End;
     Uhrum__Waterfalls__West_Water_Surface -> Uhrum__Waterfalls__West_Water_Ledge;
-    Uhrum__Waterfalls__Center_Island_West -> Uhrum__Waterfalls__Center_Island_East;
+    Uhrum__Waterfalls__West_Shallow_End -> Uhrum__Waterfalls__West_Water_Surface;
+    Uhrum__Waterfalls__West_Shallow_End -> Uhrum__Waterfalls__West_Water_Ledge;
+    Uhrum__Waterfalls__Center_Island_West -> Uhrum__Waterfalls__Center_Island_Middle;
     Uhrum__Waterfalls__Center_Island_West -> Uhrum__Waterfalls__Island_Water_West;
-    Uhrum__Waterfalls__Center_Island_East -> Uhrum__Waterfalls__Center_Island_West;
+    Uhrum__Waterfalls__Center_Island_Middle -> Uhrum__Waterfalls__Center_Island_West;
+    Uhrum__Waterfalls__Center_Island_Middle -> Uhrum__Waterfalls__Center_Island_East;
+    Uhrum__Waterfalls__Center_Island_East -> Uhrum__Waterfalls__Center_Island_Middle;
     Uhrum__Waterfalls__Center_Island_East -> Uhrum__Waterfalls__Water_Pillar;
     Uhrum__Waterfalls__Island_Water_West -> Uhrum__Waterfalls__West_Water_Ledge;
     Uhrum__Waterfalls__West_Water_Ledge -> Uhrum__Waterfalls__West_Waters_Edge;
+    Uhrum__Waterfalls__West_Water_Ledge -> Uhrum__Waterfalls__West_Shallow_End;
     Uhrum__Waterfalls__West_Water_Ledge -> Uhrum__Waterfalls__West_Water_Nook;
     Uhrum__Waterfalls__West_Water_Nook -> Uhrum__Waterfalls__Water_Slope;
     Uhrum__Waterfalls__Water_Slope -> Uhrum__Waterfalls__West_Water_Ledge;
     Uhrum__Waterfalls__Water_Slope -> Uhrum__Waterfalls__West_Water_Nook;
     Uhrum__Waterfalls__Water_Slope -> Uhrum__Waterfalls__Water_Pillar;
+    Uhrum__Waterfalls__Water_Pillar -> Uhrum__Waterfalls__Center_Island_East;
     Uhrum__Waterfalls__Water_Pillar -> Uhrum__Waterfalls__West_Water_Nook;
     Uhrum__Waterfalls__Water_Pillar -> Uhrum__Waterfalls__Water_Slope;
     Uhrum__Waterfalls__Water_Pillar -> Uhrum__Waterfalls__East_28;
+    Uhrum__Waterfalls__Water_Pillar -> Uhrum__Waterfalls__East_Waters_Edge;
     Uhrum__Waterfalls__East_Water_Surface -> Uhrum__Waterfalls__Water_Pillar;
     Uhrum__Waterfalls__East_Water_Surface -> Uhrum__Waterfalls__East_28;
+    Uhrum__Waterfalls__East_Waters_Edge -> Uhrum__Waterfalls__Lower_East_Platform;
     Uhrum__Waterfalls__East_Waters_Edge -> Uhrum__Waterfalls__Water_Pillar;
     Uhrum__Waterfalls__East_Waters_Edge -> Uhrum__Waterfalls__East_Water_Surface;
     Uhrum__Waterfalls__East_Waters_Edge -> Uhrum__Waterfalls__East_27;
@@ -4703,4 +4717,5 @@ digraph AxiomVerge2 {
     Irikar__Basement_Portal__Moving_Platform_Start -> Irikar__Basement_Portal__Moving_Platform_End;
     Uhrum__Annuna_Corridor__Between_Two_Flowers -> Uhrum__Annuna_Corridor__Lower_Platform;
     Uhrum__Annuna_Corridor__Between_Two_Flowers -> Uhrum__Annuna_Corridor__Middle_Platform;
+    Uhrum__Waterfalls__Center_Island_Middle -> Uhrum__Waterfalls__Medium_Rock;
 }

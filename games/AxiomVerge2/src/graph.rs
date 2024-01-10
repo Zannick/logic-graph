@@ -1259,7 +1259,9 @@ pub fn get_area(spot: SpotId) -> AreaId {
         | SpotId::Menu__Kiengir_Map__Uhrum_West
         | SpotId::Menu__Kiengir_Map__Infect
         | SpotId::Menu__Kiengir_Map__Remote_Drone
-        | SpotId::Menu__Kiengir_Map__Breach_Sight => AreaId::Menu__Kiengir_Map,
+        | SpotId::Menu__Kiengir_Map__Breach_Sight
+        | SpotId::Menu__Kiengir_Map__Shockwave
+        | SpotId::Menu__Kiengir_Map__Anuman => AreaId::Menu__Kiengir_Map,
         SpotId::Menu__Breach_Map__GB_Peak
         | SpotId::Menu__Breach_Map__GB_SW_Save
         | SpotId::Menu__Breach_Map__IB_Basement
@@ -1345,7 +1347,9 @@ pub fn get_area(spot: SpotId) -> AreaId {
         | SpotId::Uhrum__Waterfalls__East_Palm_Tree
         | SpotId::Uhrum__Waterfalls__West_Waters_Edge
         | SpotId::Uhrum__Waterfalls__West_Water_Surface
+        | SpotId::Uhrum__Waterfalls__West_Shallow_End
         | SpotId::Uhrum__Waterfalls__Center_Island_West
+        | SpotId::Uhrum__Waterfalls__Center_Island_Middle
         | SpotId::Uhrum__Waterfalls__Center_Island_East
         | SpotId::Uhrum__Waterfalls__Island_Water_West
         | SpotId::Uhrum__Waterfalls__West_Water_Ledge
@@ -2610,7 +2614,9 @@ pub fn get_region(spot: SpotId) -> RegionId {
         | SpotId::Menu__Kiengir_Map__Uhrum_West
         | SpotId::Menu__Kiengir_Map__Infect
         | SpotId::Menu__Kiengir_Map__Remote_Drone
-        | SpotId::Menu__Kiengir_Map__Breach_Sight => RegionId::Menu,
+        | SpotId::Menu__Kiengir_Map__Breach_Sight
+        | SpotId::Menu__Kiengir_Map__Shockwave
+        | SpotId::Menu__Kiengir_Map__Anuman => RegionId::Menu,
         SpotId::Menu__Breach_Map__GB_Peak
         | SpotId::Menu__Breach_Map__GB_SW_Save
         | SpotId::Menu__Breach_Map__IB_Basement
@@ -2696,7 +2702,9 @@ pub fn get_region(spot: SpotId) -> RegionId {
         | SpotId::Uhrum__Waterfalls__East_Palm_Tree
         | SpotId::Uhrum__Waterfalls__West_Waters_Edge
         | SpotId::Uhrum__Waterfalls__West_Water_Surface
+        | SpotId::Uhrum__Waterfalls__West_Shallow_End
         | SpotId::Uhrum__Waterfalls__Center_Island_West
+        | SpotId::Uhrum__Waterfalls__Center_Island_Middle
         | SpotId::Uhrum__Waterfalls__Center_Island_East
         | SpotId::Uhrum__Waterfalls__Island_Water_West
         | SpotId::Uhrum__Waterfalls__West_Water_Ledge
@@ -3161,6 +3169,10 @@ impl world::Accessible for Location {
             }
             LocationId::Uhrum__Annuna_Corridor__East_Cubby__Tablet => true,
             LocationId::Uhrum__Annuna_Corridor__Pedestal__Urn => true,
+            LocationId::Uhrum__Annuna_Corridor__Pedestal__Urn_Collection_Skip => true,
+            LocationId::Uhrum__Annuna_Corridor__Pedestal__Urn_Fast_Travel => {
+                rules::access_fast_travel(&ctx, world)
+            }
             LocationId::Uhrum__Annuna_Corridor__Statue__Item => true,
             LocationId::Uhrum__Annuna_Corridor__Upper_Trees__Remote_Urn => {
                 rules::access_boomerang(&ctx, world)
@@ -4408,6 +4420,8 @@ impl world::Accessible for Exit {
             ExitId::Uhrum__Annuna_Corridor__Middle_Platform__ex__Upper_Ledge_1 => rules::access_hook(&ctx, world),
             ExitId::Uhrum__Annuna_Corridor__Middle_Platform__ex__Upper_Platform_1 => rules::access_anuman(&ctx, world),
             ExitId::Uhrum__Annuna_Corridor__Middle_Platform__ex__Upper_Platform_2 => rules::access_hover(&ctx, world),
+            ExitId::Uhrum__Annuna_Corridor__Pedestal__Urn_Collection_Skip => true,
+            ExitId::Uhrum__Annuna_Corridor__Pedestal__Urn_Fast_Travel => rules::access_fast_travel(&ctx, world),
             ExitId::Uhrum__Annuna_Corridor__Statue__ex__Upper_Platform_1 => rules::access_hover(&ctx, world),
             ExitId::Uhrum__Annuna_Corridor__Upper_Ledge__ex__Upper_Platform_1 => rules::access_hover(&ctx, world),
             ExitId::Uhrum__Annuna_Corridor__Upper_Platform__ex__Statue_1 => rules::access_hover(&ctx, world),
@@ -4498,6 +4512,8 @@ impl world::Accessible for Exit {
             ExitId::Uhrum__Waterfalls__West_27__ex__Save_Room__East_1 => true,
             ExitId::Uhrum__Waterfalls__West_Platform__ex__Green_Middle_Ledge_1 => rules::access_grab(&ctx, world),
             ExitId::Uhrum__Waterfalls__West_Platform__ex__Green_Middle_Ledge_2 => rules::access_hook(&ctx, world),
+            ExitId::Uhrum__Waterfalls__West_Shallow_End__ex__Center_Island_West_1 => rules::access_grab_and_water_movement(&ctx, world),
+            ExitId::Uhrum__Waterfalls__West_Shallow_End__ex__Center_Island_West_2 => rules::access_hook_and_water_movement(&ctx, world),
             ExitId::Uhrum__Waterfalls__West_Wall__ex__West_25_1 => rules::access_grab_and_climb(&ctx, world),
             ExitId::Uhrum__Waterfalls__West_Wall__ex__West_25_2 => rules::access_hook(&ctx, world),
             ExitId::Uhrum__Waterfalls__West_Water_Nook__ex__West_Water_Ledge_1 => rules::access_underwater_movement_and_grab(&ctx, world),
@@ -5077,6 +5093,7 @@ impl world::Exit for Exit {
             ExitId::Menu__Upgrade_Menu__Infection__ex__Physiology_1 => true,
             ExitId::Menu__Upgrade_Menu__Physiology__ex__Combat_1 => true,
             ExitId::Uhrum__Annuna_Corridor__East_25__ex__Annuna__Mirror_Match__West_25_1 => true,
+            ExitId::Uhrum__Annuna_Corridor__Pedestal__Urn_Collection_Skip => true,
             ExitId::Uhrum__Annuna_Corridor__West_25__ex__Waterfalls__East_25_1 => true,
             ExitId::Uhrum__Annuna_Corridor__West_26__ex__Waterfalls__East_26_1 => true,
             ExitId::Uhrum__Save_Room__East__ex__Waterfalls__West_27_1 => true,
@@ -5370,6 +5387,9 @@ impl world::Accessible for Action {
                 ActionId::Global__Recall_Drone => {
                     rules::access_not_within_menu_and_realm_ne_breach_and_can_recall(&ctx, world)
                 }
+                ActionId::Global__Recall_Fast_Travel => {
+                    rules::access_not_within_menu_and_ft_main_and_can_recall(&ctx, world)
+                }
                 ActionId::Interior__Cave_Behind_Waterfall__Middle__Throw_Drone => {
                     rules::access_can_deploy(&ctx, world)
                 }
@@ -5398,6 +5418,9 @@ impl world::Accessible for Action {
                 }
                 ActionId::Uhrum__Annuna_Corridor__Save_Point__Save => true,
                 ActionId::Uhrum__Save_Room__Save_Point__Save => true,
+                ActionId::Uhrum__Waterfalls__Center_Island_Middle__Throw_Drone_Up => {
+                    rules::access_can_deploy_and_slingshot_hook(&ctx, world)
+                }
                 ActionId::Uhrum__West_Entrance__Save_Point__Save => true,
             }
     }
@@ -5423,6 +5446,7 @@ impl world::Action for Action {
     fn perform(&self, ctx: &mut Context, world: &World) {
         match self.id {
             ActionId::Global__Recall_Drone => rules::action_mode_set_indra(ctx, world),
+            ActionId::Global__Recall_Fast_Travel => rules::action_mode_set_indra_last_set_indra(ctx, world),
             ActionId::Global__Deploy_Drone => rules::action_mode_set_drone_indra_set_position(ctx, world),
             ActionId::Global__Become_Drone => rules::action_mode_set_drone(ctx, world),
             ActionId::Global__Become_Indra => rules::action_mode_set_indra(ctx, world),
@@ -5519,6 +5543,7 @@ impl world::Action for Action {
             ActionId::Irikar__Basement_Portal__Moving_Platform_Start__Activate_Platform => rules::action_irikar__basement_portal__moving_platform_start__activate_platform__do(ctx, world),
             ActionId::Irikar__Basement_Portal__Portal_Stand__Enter_Portal => rules::action_breach_portal_save_update(ctx, world),
             ActionId::Uhrum__West_Entrance__Save_Point__Save => rules::action_save(ctx, world),
+            ActionId::Uhrum__Waterfalls__Center_Island_Middle__Throw_Drone_Up => rules::action_deploy_drone(ctx, world),
             ActionId::Uhrum__Save_Room__Save_Point__Save => rules::action_save(ctx, world),
             ActionId::Uhrum__Annuna_Corridor__Save_Point__Save => rules::action_save(ctx, world),
             ActionId::Uhrum__Annuna_Corridor__Between_Two_Flowers__Throw_Drone_Up => rules::action_deploy_drone(ctx, world),
@@ -5530,6 +5555,9 @@ impl world::Action for Action {
         }
         match self.id {
             ActionId::Global__Recall_Drone => rules::action_indra_set_default(ctx, world),
+            ActionId::Global__Recall_Fast_Travel => {
+                rules::action_indra_set_default_refill_energy(ctx, world)
+            }
             ActionId::Irikar_Breach__Exit_Corridor__Portal_Stand__Enter_Portal => {
                 rules::action_clear_breach_save(ctx, world)
             }
@@ -5539,6 +5567,7 @@ impl world::Action for Action {
     fn dest(&self, ctx: &Context, world: &World) -> SpotId {
         match self.id {
             ActionId::Global__Recall_Drone => ctx.indra(),
+            ActionId::Global__Recall_Fast_Travel => data::map_spot(ctx.position()),
             ActionId::Annuna__East_Bridge__Center_Gap_West__Throw_Drone_into_Tower => {
                 SpotId::Annuna__East_Bridge__Tower_Core
             }
@@ -5626,6 +5655,9 @@ impl world::Action for Action {
             }
             ActionId::Irikar__Basement_Portal__Portal_Stand__Enter_Portal => {
                 SpotId::Irikar_Breach__Basement_Save__Save_Point
+            }
+            ActionId::Uhrum__Waterfalls__Center_Island_Middle__Throw_Drone_Up => {
+                SpotId::Uhrum__Waterfalls__Medium_Rock
             }
             ActionId::Uhrum__Annuna_Corridor__Between_Two_Flowers__Throw_Drone_Up => {
                 SpotId::Uhrum__Annuna_Corridor__Middle_Platform
@@ -5751,7 +5783,7 @@ pub struct Spot {
     pub actions: Range<usize>,
 }
 
-static RAW_SPOTS: [SpotId; 1342] = [
+static RAW_SPOTS: [SpotId; 1346] = [
     SpotId::None,
     SpotId::Amagi__Grid_31_19__East,
     SpotId::Amagi__Grid_31_19__West,
@@ -6950,6 +6982,7 @@ static RAW_SPOTS: [SpotId; 1342] = [
     SpotId::Menu__Kiengir_Map__Annuna_Upper,
     SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
     SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+    SpotId::Menu__Kiengir_Map__Anuman,
     SpotId::Menu__Kiengir_Map__Apocalypse,
     SpotId::Menu__Kiengir_Map__Breach_Sight,
     SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
@@ -6969,6 +7002,7 @@ static RAW_SPOTS: [SpotId; 1342] = [
     SpotId::Menu__Kiengir_Map__Irikar_Hub,
     SpotId::Menu__Kiengir_Map__Irikar_Midwest,
     SpotId::Menu__Kiengir_Map__Remote_Drone,
+    SpotId::Menu__Kiengir_Map__Shockwave,
     SpotId::Menu__Kiengir_Map__Uhrum_Center,
     SpotId::Menu__Kiengir_Map__Uhrum_East,
     SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
@@ -7037,6 +7071,7 @@ static RAW_SPOTS: [SpotId; 1342] = [
     SpotId::Uhrum__Waterfalls__Ceiling_Cache,
     SpotId::Uhrum__Waterfalls__Ceiling_Opening,
     SpotId::Uhrum__Waterfalls__Center_Island_East,
+    SpotId::Uhrum__Waterfalls__Center_Island_Middle,
     SpotId::Uhrum__Waterfalls__Center_Island_West,
     SpotId::Uhrum__Waterfalls__East_24,
     SpotId::Uhrum__Waterfalls__East_24_in_Mid_air,
@@ -7062,6 +7097,7 @@ static RAW_SPOTS: [SpotId; 1342] = [
     SpotId::Uhrum__Waterfalls__West_25,
     SpotId::Uhrum__Waterfalls__West_27,
     SpotId::Uhrum__Waterfalls__West_Platform,
+    SpotId::Uhrum__Waterfalls__West_Shallow_End,
     SpotId::Uhrum__Waterfalls__West_Wall,
     SpotId::Uhrum__Waterfalls__West_Water_Ledge,
     SpotId::Uhrum__Waterfalls__West_Water_Nook,
@@ -7713,7 +7749,7 @@ impl world::World for World {
     type Exit = Exit;
     type Action = Action;
     type Warp = Warp;
-    const NUM_LOCATIONS: u32 = 230;
+    const NUM_LOCATIONS: u32 = 232;
 
     fn ruleset(&self) -> String {
         format!(
@@ -7940,6 +7976,8 @@ impl world::World for World {
             CanonId::Anuman => vec![
                 LocationId::Uhrum__Annuna_Corridor__Upper_Trees__Remote_Urn,
                 LocationId::Uhrum__Annuna_Corridor__Pedestal__Urn,
+                LocationId::Uhrum__Annuna_Corridor__Pedestal__Urn_Collection_Skip,
+                LocationId::Uhrum__Annuna_Corridor__Pedestal__Urn_Fast_Travel,
             ],
             CanonId::Uhrum_Annuna_Corridor_Block => vec![
                 LocationId::Uhrum__Annuna_Corridor__Block_West__Dislodge_Block,
@@ -8311,6 +8349,8 @@ impl world::World for World {
             Item::Anuman => vec![
                 LocationId::Uhrum__Annuna_Corridor__Upper_Trees__Remote_Urn,
                 LocationId::Uhrum__Annuna_Corridor__Pedestal__Urn,
+                LocationId::Uhrum__Annuna_Corridor__Pedestal__Urn_Collection_Skip,
+                LocationId::Uhrum__Annuna_Corridor__Pedestal__Urn_Fast_Travel,
             ],
             Item::Uhrum_Annuna_Corridor_Block => vec![
                 LocationId::Uhrum__Annuna_Corridor__Block_West__Dislodge_Block,
@@ -8834,6 +8874,10 @@ impl world::World for World {
             LocationId::Uhrum__Annuna_Corridor__Pedestal__Urn => {
                 SpotId::Uhrum__Annuna_Corridor__Pedestal
             }
+            LocationId::Uhrum__Annuna_Corridor__Pedestal__Urn_Collection_Skip
+            | LocationId::Uhrum__Annuna_Corridor__Pedestal__Urn_Fast_Travel => {
+                SpotId::Uhrum__Annuna_Corridor__Pedestal
+            }
             LocationId::Uhrum__Annuna_Corridor__Block_West__Dislodge_Block => {
                 SpotId::Uhrum__Annuna_Corridor__Block_West
             }
@@ -9073,6 +9117,9 @@ impl world::World for World {
             }
             ActionId::Uhrum__West_Entrance__Save_Point__Save => {
                 SpotId::Uhrum__West_Entrance__Save_Point
+            }
+            ActionId::Uhrum__Waterfalls__Center_Island_Middle__Throw_Drone_Up => {
+                SpotId::Uhrum__Waterfalls__Center_Island_Middle
             }
             ActionId::Uhrum__Save_Room__Save_Point__Save => SpotId::Uhrum__Save_Room__Save_Point,
             ActionId::Uhrum__Annuna_Corridor__Save_Point__Save => {
@@ -9910,6 +9957,7 @@ impl world::World for World {
             ExitId::Uhrum__Waterfalls__East_25__ex__Annuna_Corridor__West_25_1 => SpotId::Uhrum__Waterfalls__East_25,
             ExitId::Uhrum__Waterfalls__Green_Middle_Ledge__ex__Below_Block_1 => SpotId::Uhrum__Waterfalls__Green_Middle_Ledge,
             ExitId::Uhrum__Waterfalls__East_Palm_Tree__ex__Ledge_Above_Palm_1 | ExitId:: Uhrum__Waterfalls__East_Palm_Tree__ex__Ledge_Above_Palm_2 => SpotId::Uhrum__Waterfalls__East_Palm_Tree,
+            ExitId::Uhrum__Waterfalls__West_Shallow_End__ex__Center_Island_West_1 | ExitId:: Uhrum__Waterfalls__West_Shallow_End__ex__Center_Island_West_2 => SpotId::Uhrum__Waterfalls__West_Shallow_End,
             ExitId::Uhrum__Waterfalls__Center_Island_West__ex__West_27_1 => SpotId::Uhrum__Waterfalls__Center_Island_West,
             ExitId::Uhrum__Waterfalls__Center_Island_East__ex__Lower_East_Platform_1 | ExitId:: Uhrum__Waterfalls__Center_Island_East__ex__East_Waters_Edge_1 => SpotId::Uhrum__Waterfalls__Center_Island_East,
             ExitId::Uhrum__Waterfalls__West_Water_Nook__ex__West_Water_Ledge_1 | ExitId:: Uhrum__Waterfalls__West_Water_Nook__ex__West_Water_Ledge_2 => SpotId::Uhrum__Waterfalls__West_Water_Nook,
@@ -9919,6 +9967,7 @@ impl world::World for World {
             ExitId::Uhrum__Save_Room__East__ex__Waterfalls__West_27_1 => SpotId::Uhrum__Save_Room__East,
             ExitId::Uhrum__Save_Room__West__ex__Glitchy_Corridor__East_27_1 => SpotId::Uhrum__Save_Room__West,
             ExitId::Uhrum__Annuna_Corridor__West_25__ex__Waterfalls__East_25_1 => SpotId::Uhrum__Annuna_Corridor__West_25,
+            ExitId::Uhrum__Annuna_Corridor__Pedestal__Urn_Collection_Skip | ExitId::Uhrum__Annuna_Corridor__Pedestal__Urn_Fast_Travel => SpotId::Uhrum__Annuna_Corridor__Pedestal,
             ExitId::Uhrum__Annuna_Corridor__West_26__ex__Waterfalls__East_26_1 => SpotId::Uhrum__Annuna_Corridor__West_26,
             ExitId::Uhrum__Annuna_Corridor__Block_West__ex__Block_East_1 | ExitId:: Uhrum__Annuna_Corridor__Block_West__ex__Block_East_2 => SpotId::Uhrum__Annuna_Corridor__Block_West,
             ExitId::Uhrum__Annuna_Corridor__Block_East__ex__Block_West_1 => SpotId::Uhrum__Annuna_Corridor__Block_East,
@@ -10595,6 +10644,7 @@ impl world::World for World {
             | SpotId::Amagi__Liru_Room__West_19
             | SpotId::Amagi__Main_Area__Broken_Wall
             | SpotId::Amagi__Main_Area__Carving
+            | SpotId::Amagi__Main_Area__Catwalk_Center
             | SpotId::Amagi__Main_Area__East_15
             | SpotId::Amagi__Main_Area__East_19
             | SpotId::Amagi__Main_Area__East_Ledge
@@ -11190,6 +11240,7 @@ impl world::World for World {
             | SpotId::Uhrum__Waterfalls__Barrier_West
             | SpotId::Uhrum__Waterfalls__Below_Block
             | SpotId::Uhrum__Waterfalls__Ceiling_Cache
+            | SpotId::Uhrum__Waterfalls__Center_Island_Middle
             | SpotId::Uhrum__Waterfalls__East_24
             | SpotId::Uhrum__Waterfalls__East_24_in_Mid_air
             | SpotId::Uhrum__Waterfalls__East_25
@@ -11253,9 +11304,9 @@ impl World {
             spots: build_spots(),
             global_actions: Range {
                 start: ActionId::Global__Become_Drone.into_usize(),
-                end: ActionId::Global__Recall_Drone.into_usize() + 1,
+                end: ActionId::Global__Recall_Fast_Travel.into_usize() + 1,
             },
-            min_warp_time: 3000,
+            min_warp_time: 2000,
             condensed: None,
         }
     }
@@ -13245,6 +13296,22 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
             price: Currency::Free,
             time: 5500,
             exit_id: None,
+        },
+        LocationId::Uhrum__Annuna_Corridor__Pedestal__Urn_Collection_Skip => Location {
+            id: LocationId::Uhrum__Annuna_Corridor__Pedestal__Urn_Collection_Skip,
+            canonical: CanonId::Anuman,
+            item: Item::Anuman,
+            price: Currency::Free,
+            time: 0,
+            exit_id: Some(ExitId::Uhrum__Annuna_Corridor__Pedestal__Urn_Collection_Skip),
+        },
+        LocationId::Uhrum__Annuna_Corridor__Pedestal__Urn_Fast_Travel => Location {
+            id: LocationId::Uhrum__Annuna_Corridor__Pedestal__Urn_Fast_Travel,
+            canonical: CanonId::Anuman,
+            item: Item::Anuman,
+            price: Currency::Free,
+            time: 0,
+            exit_id: Some(ExitId::Uhrum__Annuna_Corridor__Pedestal__Urn_Fast_Travel),
         },
         LocationId::Uhrum__Annuna_Corridor__Block_West__Dislodge_Block => Location {
             id: LocationId::Uhrum__Annuna_Corridor__Block_West__Dislodge_Block,
@@ -21998,6 +22065,20 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
             price: Currency::Free,
             loc_id: None,
         },
+        ExitId::Uhrum__Waterfalls__West_Shallow_End__ex__Center_Island_West_1 => Exit {
+            id: ExitId::Uhrum__Waterfalls__West_Shallow_End__ex__Center_Island_West_1,
+            time: 2000,
+            dest: SpotId::Uhrum__Waterfalls__Center_Island_West,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Uhrum__Waterfalls__West_Shallow_End__ex__Center_Island_West_2 => Exit {
+            id: ExitId::Uhrum__Waterfalls__West_Shallow_End__ex__Center_Island_West_2,
+            time: 1351,
+            dest: SpotId::Uhrum__Waterfalls__Center_Island_West,
+            price: Currency::Free,
+            loc_id: None,
+        },
         ExitId::Uhrum__Waterfalls__Center_Island_West__ex__West_27_1 => Exit {
             id: ExitId::Uhrum__Waterfalls__Center_Island_West__ex__West_27_1,
             time: 2280,
@@ -22088,6 +22169,20 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
             dest: SpotId::Uhrum__Waterfalls__East_25,
             price: Currency::Free,
             loc_id: None,
+        },
+        ExitId::Uhrum__Annuna_Corridor__Pedestal__Urn_Collection_Skip => Exit {
+            id: ExitId::Uhrum__Annuna_Corridor__Pedestal__Urn_Collection_Skip,
+            time: 0,
+            dest: SpotId::Menu__Warp_Only__Kiengir,
+            price: Currency::Free,
+            loc_id: Some(LocationId::Uhrum__Annuna_Corridor__Pedestal__Urn_Collection_Skip),
+        },
+        ExitId::Uhrum__Annuna_Corridor__Pedestal__Urn_Fast_Travel => Exit {
+            id: ExitId::Uhrum__Annuna_Corridor__Pedestal__Urn_Fast_Travel,
+            time: 0,
+            dest: SpotId::Menu__Kiengir_Map__Anuman,
+            price: Currency::Free,
+            loc_id: Some(LocationId::Uhrum__Annuna_Corridor__Pedestal__Urn_Fast_Travel),
         },
         ExitId::Uhrum__Annuna_Corridor__West_26__ex__Waterfalls__East_26_1 => Exit {
             id: ExitId::Uhrum__Annuna_Corridor__West_26__ex__Waterfalls__East_26_1,
@@ -22209,6 +22304,11 @@ pub fn build_actions() -> EnumMap<ActionId, Action> {
         ActionId::Global__Recall_Drone => Action {
             id: ActionId::Global__Recall_Drone,
             time: 3000,
+            price: Currency::Free,
+        },
+        ActionId::Global__Recall_Fast_Travel => Action {
+            id: ActionId::Global__Recall_Fast_Travel,
+            time: 2000,
             price: Currency::Free,
         },
         ActionId::Global__Deploy_Drone => Action {
@@ -22689,6 +22789,11 @@ pub fn build_actions() -> EnumMap<ActionId, Action> {
         ActionId::Uhrum__West_Entrance__Save_Point__Save => Action {
             id: ActionId::Uhrum__West_Entrance__Save_Point__Save,
             time: 1300,
+            price: Currency::Free,
+        },
+        ActionId::Uhrum__Waterfalls__Center_Island_Middle__Throw_Drone_Up => Action {
+            id: ActionId::Uhrum__Waterfalls__Center_Island_Middle__Throw_Drone_Up,
+            time: 2000,
             price: Currency::Free,
         },
         ActionId::Uhrum__Save_Room__Save_Point__Save => Action {
@@ -38309,6 +38414,30 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
         },
+        SpotId::Menu__Kiengir_Map__Shockwave => Spot {
+            id: SpotId::Menu__Kiengir_Map__Shockwave,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Menu__Kiengir_Map__Anuman => Spot {
+            id: SpotId::Menu__Kiengir_Map__Anuman,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
         SpotId::Menu__Breach_Map__GB_Peak => Spot {
             id: SpotId::Menu__Breach_Map__GB_Peak,
             locations: Range {
@@ -39410,6 +39539,19 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
         },
+        SpotId::Uhrum__Waterfalls__West_Shallow_End => Spot {
+            id: SpotId::Uhrum__Waterfalls__West_Shallow_End,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Uhrum__Waterfalls__West_Shallow_End__ex__Center_Island_West_1.into_usize(),
+                end: ExitId::Uhrum__Waterfalls__West_Shallow_End__ex__Center_Island_West_2.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
         SpotId::Uhrum__Waterfalls__Center_Island_West => Spot {
             id: SpotId::Uhrum__Waterfalls__Center_Island_West,
             locations: Range {
@@ -39421,6 +39563,19 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: 0, end: 0,
+            },
+        },
+        SpotId::Uhrum__Waterfalls__Center_Island_Middle => Spot {
+            id: SpotId::Uhrum__Waterfalls__Center_Island_Middle,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: ActionId::Uhrum__Waterfalls__Center_Island_Middle__Throw_Drone_Up.into_usize(),
+                end: ActionId::Uhrum__Waterfalls__Center_Island_Middle__Throw_Drone_Up.into_usize() + 1,
             },
         },
         SpotId::Uhrum__Waterfalls__Center_Island_East => Spot {
@@ -39666,7 +39821,7 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             id: SpotId::Uhrum__Annuna_Corridor__Pedestal,
             locations: Range {
                 start: LocationId::Uhrum__Annuna_Corridor__Pedestal__Urn.into_usize(),
-                end: LocationId::Uhrum__Annuna_Corridor__Pedestal__Urn.into_usize() + 1,
+                end: LocationId::Uhrum__Annuna_Corridor__Pedestal__Urn_Fast_Travel.into_usize() + 1,
             },
             exits: Range {
                 start: 0, end: 0,

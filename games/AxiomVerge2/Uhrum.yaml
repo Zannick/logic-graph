@@ -66,6 +66,8 @@ areas:
       local:
         - to: Portal Stand
         - to: Middle West Ledge
+        - to: West 25
+          jumps: 1
       exits:
         - to: Hidden Passage Entry
           req: ^mode == 'drone'
@@ -1150,20 +1152,52 @@ areas:
         - to: West Water's Edge
           jumps: 1
         - to: West Water Ledge
+        - to: West Shallow End
+    - name: West Shallow End
+      coord: [26.4, 27.3]
+      data:
+        water: true
+      local:
+        - to: West Water Surface
+          jumps: 2
+        - to: West Water Surface
+          jumps: 1
+          jump_mvmt: water
+        - to: West Water Ledge
+      exits:
+        - to: Center Island West
+          req: $grab and Water_Movement
+          movement: base
+          jumps: 2
+        - to: Center Island West
+          req: $hook and Water_Movement
+          movement: base
+          jumps: 1
     - name: Center Island West
       coord: [26.7, 26.9]
       local:
-        - to: Center Island East
+        - to: Center Island Middle
         - to: Island Water West
       exits:
         - to: West 27
           req: $hover
           movement: base
           jumps: 1
+    - name: Center Island Middle
+      coord: [26.85, 26.9]
+      local:
+        - to: Center Island West
+        - to: Center Island East
+      actions:
+        - name: Throw Drone Up
+          req: $can_deploy and Slingshot_Hook
+          do: $deploy_drone
+          to: Medium Rock
+          time: 2
     - name: Center Island East
       coord: [27.0, 26.9]
       local:
-        - to: Center Island West
+        - to: Center Island Middle
         - to: Water Pillar
       exits:
         - to: Lower East Platform
@@ -1191,6 +1225,8 @@ areas:
           jump_mvmt: water
         - to: West Water Nook
           thru: [26.65, 27.6]
+        - to: West Shallow End
+          jumps: 1
     - name: West Water Nook
       coord: [26.15, 27.75]
       data:
@@ -1231,6 +1267,12 @@ areas:
         - to: West Water Nook
         - to: Water Slope
         - to: East 28
+        - to: Center Island East
+          jumps: 1
+          jump_mvmt: water
+        - to: East Water's Edge
+          jumps: 1
+          jump_mvmt: water
       exits:
         - to: Center Island East
           req: $grab
@@ -1264,6 +1306,8 @@ areas:
         - to: East 27
         - to: East Water Surface
         - to: Water Pillar
+        - to: Lower East Platform
+          jumps: 1
     - name: East 27
       coord: [27.95, 26.9]
       local:
@@ -1327,9 +1371,11 @@ areas:
   on_entry: $reset_old_area(^newpos)
   map:
     save: [28, 25, 29, 26]
+    urn: [29, 24, 30, 25]
   datamap:
     map_spot:
       save: Menu > Kiengir Map > Uhrum East
+      urn: Menu > Kiengir Map > Anuman
   spots:
     - name: West 25
       coord: [28.05, 24.75]
@@ -1359,6 +1405,18 @@ areas:
           item: Anuman
           canon: Anuman
           tags: [urn]
+      hybrid:
+        - name: Urn Collection Skip
+          item: Anuman
+          canon: Anuman
+          to: Menu > Warp Only > Kiengir
+          tags: [cskip]
+        - name: Urn Fast Travel
+          item: Anuman
+          canon: Anuman
+          req: Fast_Travel
+          to: Menu > Kiengir Map > Anuman
+          tags: [cskip]
 
     - name: West 26
       coord: [28.05, 25.8]

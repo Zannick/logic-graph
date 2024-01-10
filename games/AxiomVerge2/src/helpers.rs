@@ -531,13 +531,15 @@ macro_rules! helper__deploy_drone_and_move {
 }
 
 /// $save_last (  )
-/// ^last = ^position
+/// IF (^last WITHIN $default) { ^last = ^position }
 #[macro_export]
 macro_rules! helper__save_last {
     ($ctx:expr, $world:expr) => {{
         #[allow(unused_imports)]
         use $crate::items::Item;
-        $ctx.set_last($ctx.position());
+        if $ctx.last() == Default::default() {
+            $ctx.set_last($ctx.position());
+        }
     }};
 }
 

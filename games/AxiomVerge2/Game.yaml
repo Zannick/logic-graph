@@ -199,6 +199,12 @@ actions:
     after: ^indra = $default
     # Can open the menu during this time
     time: 3  # it's slightly less in-area
+  - name: Recall Fast Travel
+    req: NOT WITHIN `Menu` and $ft_main and $can_recall
+    do: ^mode = 'Indra'; ^last = ^indra
+    to: ^map_spot  # Starts map movement in a different place
+    after: ^indra = $default; $refill_energy
+    time: 2  # Slight bonus to time for starting map movement immediately, but actually can't be less than recall time
   - name: Deploy Drone
     req: NOT WITHIN `Menu` and $can_deploy
     do: ^mode = 'drone'; ^indra = ^position
@@ -295,7 +301,7 @@ helpers:
 
   # entry rules
   # This is important for any area that's not really a room
-  $save_last:action: ^last = ^position
+  $save_last:action: IF (^last WITHIN $default) { ^last = ^position }
   # ^position is the old value
   # testing to see if area(newpos) != area(position) != prev_area
   # and we aren't coming from the menu. If so, then we check if we're returning to prev_area.

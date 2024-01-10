@@ -171,7 +171,8 @@ areas:
           time: 2
         - to: Platform 3  # simulate the Liru movement
           req: Underwater_Movement
-          time: 1.4  
+          time: 1.4
+      keep: true
     - name: Catwalk Broken Part
       coord: [29.05, 17.1]
       local:
@@ -457,6 +458,11 @@ areas:
 # but we can't (yet) restrict to that other than making exits
 - name: West Lake
   on_entry: $reset_old_area(^newpos)
+  map:
+    urn: [23, 19, 24, 20]
+  datamap:
+    map_spot:
+      urn: Menu > Kiengir Map > Shockwave
   spots:
     - name: East 15
       coord: [26.95, 14.85]

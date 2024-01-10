@@ -1590,6 +1590,7 @@ areas:
       locations:
         - name: Tablet
           item: Destruction_Pogrom
+          tags: [standing]
     - name: Southwest C
       coord: [37.5, 20.15]
       local:

@@ -473,6 +473,10 @@ areas:
       coord: [24, 6]
     - name: Breach Sight
       coord: [14, 26]
+    - name: Shockwave
+      coord: [23, 20]
+    - name: Anuman
+      coord: [29, 25]
     #endregion
 
 - name: Breach Map
