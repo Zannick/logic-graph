@@ -264,38 +264,50 @@ where
     ) -> ContextWrapper<T> {
         let start = Instant::now();
         if !others.is_empty() {
-            let others: Vec<_> = others.iter().enumerate().collect();
+            let mut vec = vec![startctx];
+            vec.extend(others.iter());
+            let others: Vec<_> = vec.into_iter().enumerate().collect();
             if let Some((oi, wonctx)) = others.into_par_iter().find_map_any(|(oi, octx)| {
                 greedy_search(world, octx, u32::MAX, 9)
                     .ok()
                     .map(|gr| (oi, gr))
             }) {
                 log::info!(
-                    "Finished seeded greedy search in {:?} with a result of {}ms, on partial route #{}",
+                    "Finished greedy search in {:?} with a result of {}ms, {}",
                     start.elapsed(),
                     wonctx.elapsed(),
-                    oi + 1
-                );
-                return wonctx;
-            }
-        }
-        match greedy_search(world, startctx, u32::MAX, 9) {
-            Ok(wonctx) => {
-                log::info!(
-                    "Finished greedy search in {:?} with a result of {}ms",
-                    start.elapsed(),
-                    wonctx.elapsed()
+                    if oi > 0 {
+                        format!("on partial route #{}", oi + 1)
+                    } else {
+                        String::from("from scratch")
+                    }
                 );
                 wonctx
-            }
-            Err(ctx) => {
+            } else {
                 panic!(
-                    "Found no greedy solution, maximal attempt reached dead-end after {}ms:\n{}\n{:#?}\nMissing: {:?}",
-                    ctx.elapsed(),
-                    history_summary::<T, _>(ctx.recent_history().iter().copied()),
-                    ctx.get(),
-                    world.items_needed(ctx.get())
+                    "Found no greedy solution from routes or from scratch after {:?}!",
+                    start.elapsed()
                 );
+            }
+        } else {
+            match greedy_search(world, startctx, u32::MAX, 9) {
+                Ok(wonctx) => {
+                    log::info!(
+                        "Finished greedy search in {:?} with a result of {}ms",
+                        start.elapsed(),
+                        wonctx.elapsed()
+                    );
+                    wonctx
+                }
+                Err(ctx) => {
+                    panic!(
+                        "Found no greedy solution, maximal attempt reached dead-end after {}ms:\n{}\n{:#?}\nMissing: {:?}",
+                        ctx.elapsed(),
+                        history_summary::<T, _>(ctx.recent_history().iter().copied()),
+                        ctx.get(),
+                        world.items_needed(ctx.get())
+                    );
+                }
             }
         }
     }
