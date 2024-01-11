@@ -592,7 +592,7 @@ where
                         hist,
                         ctx,
                         steps,
-                        next.iter().map(|c| c.recent_history().last())
+                        next.iter().map(|c| c.recent_history().last()).collect::<Vec<_>>()
                     );
                 }
             }
