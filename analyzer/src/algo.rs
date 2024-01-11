@@ -587,7 +587,13 @@ where
                         }
                     }
                     // Otherwise, something went wrong.
-                    panic!("Failed to recreate \"{}\" at {:?}\n{:?}", hist, ctx, steps);
+                    panic!(
+                        "Failed to recreate \"{}\" at {:?}\n{:?}\nOptions were: {:?}",
+                        hist,
+                        ctx,
+                        steps,
+                        next.iter().map(|c| c.recent_history().last())
+                    );
                 }
             }
         }
