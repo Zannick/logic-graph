@@ -70,32 +70,27 @@ where
     L: Location<Context = T>,
     E: Exit<ExitId = L::ExitId, Context = T, Currency = L::Currency>,
 {
-    let (mut locs, exit) = visitable_locations(world, ctx.get());
-    if locs.is_empty() && exit.is_none() {
-        return Vec::new();
-    }
-    locs.sort_unstable_by_key(|loc| loc.time(ctx.get(), world));
     let mut result = Vec::new();
-    for loc in locs {
-        if ctx.get().todo(loc.id()) && loc.can_access(ctx.get(), world) {
-            // Get the item and mark the location visited.
-            let mut newctx = ctx.clone();
-            newctx.visit(world, loc);
-            result.push(newctx);
-        }
-    }
-
-    if let Some(ExitWithLoc(l, e)) = exit {
-        let exit = world.get_exit(e);
-        let loc = world.get_location(l);
-        if ctx.get().todo(l)
-            && loc.can_access(ctx.get(), world)
-            && exit.can_access(ctx.get(), world)
-        {
-            // Get the item and move along the exit.
-            let mut newctx = ctx.clone();
-            newctx.visit_exit(world, loc, exit);
-            result.push(newctx);
+    for loc in world.get_spot_locations(ctx.get().position()) {
+        if let Some(e) = loc.exit_id() {
+            // hybrid case
+            let exit = world.get_exit(*e);
+            if ctx.get().todo(loc.id())
+                && loc.can_access(ctx.get(), world)
+                && exit.can_access(ctx.get(), world)
+            {
+                // Get the item and move along the exit.
+                let mut newctx = ctx.clone();
+                newctx.visit_exit(world, loc, exit);
+                result.push(newctx);
+            }
+        } else {
+            if ctx.get().todo(loc.id()) && loc.can_access(ctx.get(), world) {
+                // Get the item and mark the location visited.
+                let mut newctx = ctx.clone();
+                newctx.visit(world, loc);
+                result.push(newctx);
+            }
         }
     }
     result
@@ -592,7 +587,9 @@ where
                         hist,
                         ctx,
                         steps,
-                        next.iter().map(|c| c.recent_history().last()).collect::<Vec<_>>()
+                        next.iter()
+                            .map(|c| c.recent_history().last())
+                            .collect::<Vec<_>>()
                     );
                 }
             }

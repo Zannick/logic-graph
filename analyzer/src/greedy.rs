@@ -30,7 +30,7 @@ where
     let min_spot = orig_vec.first().expect("couldn't reach any spots!").clone();
     let max_spot = orig_vec.last().expect("couldn't reach any spots!");
     // Don't allow going all the way there then all the way back again.
-    let max_time = 2 * max_spot.elapsed()  - min_spot.elapsed();
+    let max_time = 2 * max_spot.elapsed() - min_spot.elapsed();
 
     let mut useful_spots = Vec::new();
     let mut seen = new_hashset();
@@ -111,21 +111,27 @@ where
     L: Location<ExitId = E::ExitId, Context = T, Currency = E::Currency>,
     E: Exit<Context = T>,
 {
-    let (locs, exit) = visitable_locations(world, ctx.get());
-    for loc in locs {
-        if ctx.get().todo(loc.id()) && loc.can_access(ctx.get(), world) {
-            ctx.visit(world, loc);
+    let mut hybrids = Vec::new();
+    for loc in world.get_spot_locations(ctx.get().position()) {
+        if let Some(e) = loc.exit_id() {
+            hybrids.push((loc, world.get_exit(*e)));
+        } else {
+            if ctx.get().todo(loc.id()) && loc.can_access(ctx.get(), world) {
+                ctx.visit(world, loc);
+            }
         }
     }
 
-    if let Some(ExitWithLoc(l, e)) = exit {
-        if ctx.get().todo(l) {
-            let exit = world.get_exit(e);
-            let loc = world.get_location(l);
-            if loc.can_access(ctx.get(), world) && exit.can_access(ctx.get(), world) {
-                ctx.visit_exit(world, loc, exit);
-            }
-        }
+    if let Some((loc, exit)) = hybrids
+        .into_iter()
+        .filter(|(loc, exit)| {
+            ctx.get().todo(loc.id())
+                && loc.can_access(ctx.get(), world)
+                && exit.can_access(ctx.get(), world)
+        })
+        .min_by_key(|(loc, exit)| loc.time(ctx.get(), world) + exit.time(ctx.get(), world))
+    {
+        ctx.visit_exit(world, loc, exit);
     }
 }
 

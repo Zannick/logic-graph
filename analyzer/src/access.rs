@@ -315,36 +315,6 @@ where
         .collect()
 }
 
-pub struct ExitWithLoc<L: Location, E: Exit>(pub <L as Location>::LocId, pub <E as Exit>::ExitId);
-pub fn visitable_locations<'a, W, T, L, E>(
-    world: &'a W,
-    ctx: &T,
-) -> (Vec<&'a L>, Option<ExitWithLoc<L, E>>)
-where
-    W: World<Location = L, Exit = E>,
-    T: Ctx<World = W>,
-    L: Location<ExitId = E::ExitId, Context = T>,
-    E: Exit<Context = T>,
-{
-    let mut exit = None;
-    let locs: Vec<&L> = world
-        .get_spot_locations(ctx.position())
-        .iter()
-        .filter(|loc| {
-            if !ctx.todo(loc.id()) || !loc.can_access(ctx, world) {
-                return false;
-            } else if let Some(e) = loc.exit_id() {
-                if exit.is_none() {
-                    exit = Some(ExitWithLoc(loc.id(), *e));
-                }
-                return false;
-            }
-            true
-        })
-        .collect();
-    (locs, exit)
-}
-
 pub fn can_win<W, T, L, E>(world: &W, ctx: &T, max_time: u32) -> Result<(), ContextWrapper<T>>
 where
     W: World<Location = L, Exit = E>,
