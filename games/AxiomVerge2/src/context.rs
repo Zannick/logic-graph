@@ -7960,6 +7960,14 @@ impl context::Ctx for Context {
             Currency::Refills(c) => self.refills >= *c,
         }
     }
+    fn amount_could_afford(&self, cost: &Currency) -> i16 {
+        match cost {
+            Currency::Free => 1,
+            Currency::Energy(_) => self.energy.into(),
+            Currency::Flasks(_) => self.flasks.into(),
+            Currency::Refills(_) => self.refills.into(),
+        }
+    }
     fn spend(&mut self, cost: &Currency) {
         match cost {
             Currency::Free => (),

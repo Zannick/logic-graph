@@ -12,6 +12,7 @@ use crate::prices::Currency;
 use crate::*;
 use analyzer::context::Ctx;
 use analyzer::world::{self, World};
+use rustc_hash::FxHashMap;
 
 pub fn access_default(_ctx: &Context, _world: &graph::World) -> bool { true }
 
@@ -26,5 +27,12 @@ pub fn access_{{ id }}(ctx: &Context, world: &graph::World) -> bool {
 pub fn action_{{ id }}(ctx: &mut Context, world: &graph::World{% for k, t in (info.args or {}).items() %}, {{ k }}: {{ t }}{% endfor %}) {
     // {{ info.actions.text.strip() }}
     {{ info.actions|prToRust(info, id) }}
+}
+%% endfor
+
+%% for id, info in access_funcs.items()|sort
+pub fn explain_{{ id }}(ctx: &Context, world: &graph::World, edict: &mut FxHashMap<String, String>) -> (bool, Vec<String>) {
+    // {{ (info.boolExpr or info.itemList).text|string|trim }}
+    (false, vec![])
 }
 %% endfor

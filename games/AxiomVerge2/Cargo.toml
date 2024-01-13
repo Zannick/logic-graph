@@ -19,6 +19,7 @@ clap = { version = "4.*", features = ["derive"] }
 enum-map = { version = ">=2.7.2", features = ["serde"] }
 lazy_static = "*"
 log4rs = "*"
+rustc-hash = "*"
 serde = { version = ">=1.0", features = ["derive"] }
 serde_repr = "*"
 yaml-rust = "*"

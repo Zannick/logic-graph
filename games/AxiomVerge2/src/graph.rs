@@ -15,6 +15,7 @@ use analyzer::context::Ctx;
 use analyzer::world;
 use enum_map::{enum_map, Enum, EnumMap};
 use lazy_static::lazy_static;
+use rustc_hash::FxHashMap;
 use std::ops::Range;
 use std::option::Option;
 
@@ -3263,6 +3264,429 @@ impl world::Accessible for Location {
     fn price(&self) -> &Currency {
         &self.price
     }
+
+    fn explain_rule(
+        &self,
+        ctx: &Self::Context,
+        world: &World,
+        edict: &mut FxHashMap<String, String>,
+    ) -> (bool, Vec<String>) {
+        match self.id {
+            LocationId::Amagi__West_Lake__Cavern_Rear_Pillar__Boss_Reward => {
+                rules::explain_defeat_mus_a_m20(ctx, world, edict)
+            }
+            LocationId::Amagi__West_Lake__Cavern_Refill_Station__Break_Wall => {
+                rules::explain_shockwave(ctx, world, edict)
+            }
+            LocationId::Amagi__West_Lake__Cavern_Refill_Station__Defeat_MUS_A_M20 => {
+                rules::explain_shockwave_and_not_defeat_mus_a_m20(ctx, world, edict)
+            }
+            LocationId::Amagi__West_Lake__Cavern_Tear_Duct__Remote_Flask => {
+                rules::explain_boomerang(ctx, world, edict)
+            }
+            LocationId::Amagi__West_Lake__Stronghold_Ceiling_Left__Knock_Down_Left_Boulder => {
+                rules::explain_shockwave(ctx, world, edict)
+            }
+            LocationId::Amagi__West_Lake__Stronghold_Ceiling_Right__Knock_Down_Right_Boulder => {
+                rules::explain_shockwave(ctx, world, edict)
+            }
+            LocationId::Amagi__West_Lake__Stronghold_Front_Door__Break_Wall => {
+                rules::explain_shockwave(ctx, world, edict)
+            }
+            LocationId::Amagi__West_Lake__Stronghold_Front_Room__Break_Wall => {
+                rules::explain_shockwave(ctx, world, edict)
+            }
+            LocationId::Amagi__West_Lake__Stronghold_Item__Break_Wall => {
+                rules::explain_shockwave(ctx, world, edict)
+            }
+            LocationId::Amagi__West_Lake__Stronghold_Middle_Column__Break_Wall => {
+                rules::explain_shockwave(ctx, world, edict)
+            }
+            LocationId::Amagi__West_Lake__Stronghold_Rear_Wall__Break_Left_Wall => {
+                rules::explain_shockwave(ctx, world, edict)
+            }
+            LocationId::Amagi__West_Lake__Stronghold_Top__Remote_Urn => {
+                rules::explain_boomerang(ctx, world, edict)
+            }
+            LocationId::Amagi__West_Lake__Surface_Wall_Left__Break_Wall => {
+                rules::explain_shockwave(ctx, world, edict)
+            }
+            LocationId::Amagi__West_Lake__Surface_Wall_Right__Break_Wall => {
+                rules::explain_shockwave(ctx, world, edict)
+            }
+            LocationId::Annuna__Apocalypse__Center_Scaffold_West__Boss_Fight => {
+                rules::explain_infect_and_anuman(ctx, world, edict)
+            }
+            LocationId::Annuna__Apocalypse__Center_Scaffold_West__Fill_It_Up => {
+                rules::explain_infect_and_not_anuman(ctx, world, edict)
+            }
+            LocationId::Annuna__East_Bridge__Below_Gate_Button__Switch_from_Below => {
+                rules::explain_boomerang(ctx, world, edict)
+            }
+            LocationId::Annuna__East_Bridge__Gate_Button__Switch => {
+                rules::explain_can_damage(ctx, world, edict)
+            }
+            LocationId::Annuna__Mirror_Match__Below_Switch__Hit_Switch => {
+                rules::explain_can_damage(ctx, world, edict)
+            }
+            LocationId::Annuna__Mirror_Match__East_26_Lower__Remote_Flask => {
+                rules::explain_boomerang(ctx, world, edict)
+            }
+            LocationId::Annuna__Mirror_Match__East_26_Upper__Remote_Flask => {
+                rules::explain_boomerang(ctx, world, edict)
+            }
+            LocationId::Annuna__Mirror_Match__Save_Point__Fight => {
+                rules::explain_separation(ctx, world, edict)
+            }
+            LocationId::Annuna__Sniper_Valley__Bridge_End__Health_Pickup => {
+                rules::explain_more_refills(ctx, world, edict)
+            }
+            LocationId::Annuna__Sniper_Valley__Cavern_Inner_Rock_East__Break_Inner_Wall => {
+                rules::explain_mode_eq_drone_and_mist2(ctx, world, edict)
+            }
+            LocationId::Annuna__Sniper_Valley__Cavern_Inner_Rock_West__Break_Inner_Wall => {
+                rules::explain_mode_eq_drone_and_mist2(ctx, world, edict)
+            }
+            LocationId::Annuna__Sniper_Valley__Cavern_Outer_Rock_East__Break_Outer_Wall => {
+                rules::explain_mist2(ctx, world, edict)
+            }
+            LocationId::Annuna__Sniper_Valley__Cavern_Outer_Rock_West__Break_Outer_Wall => {
+                rules::explain_mist2(ctx, world, edict)
+            }
+            LocationId::Annuna__Twisty_Passages__Northwest_Alcove__Refill => {
+                rules::explain_more_refills(ctx, world, edict)
+            }
+            LocationId::Ebih__Boss_Room__Boss__Boss_Reward => {
+                rules::explain_ebih_alu(ctx, world, edict)
+            }
+            LocationId::Ebih__Boss_Room__Boss__Fight_Alu => {
+                rules::explain_can_damage(ctx, world, edict)
+            }
+            LocationId::Ebih__Boss_Room__Boss__Hack_Alu => {
+                rules::explain_overheat_and_can_damage(ctx, world, edict)
+            }
+            LocationId::Ebih__Drone_Room__Item__Urn_Fast_Travel => {
+                rules::explain_fast_travel(ctx, world, edict)
+            }
+            LocationId::Ebih__Drone_Room__Middle_Platform__Urn_Quick_Grab => {
+                rules::explain_boomerang2(ctx, world, edict)
+            }
+            LocationId::Ebih__Ebih_East__Dispenser__Vend => {
+                rules::explain_infect(ctx, world, edict)
+            }
+            LocationId::Ebih__Ebih_East__Lower_Moving_Platform__Remote_Urn => {
+                rules::explain_boomerang1(ctx, world, edict)
+            }
+            LocationId::Ebih__Ebih_West__Block_Left__Break_Block => {
+                rules::explain_shockwave(ctx, world, edict)
+            }
+            LocationId::Ebih__Ebih_West__Block_Right__Break_Block => {
+                rules::explain_shockwave(ctx, world, edict)
+            }
+            LocationId::Ebih__Grid_25_10_12__East_10__Remote_Bush => {
+                rules::explain_bs(ctx, world, edict)
+            }
+            LocationId::Ebih__Vertical_Interchange__Switch__Activate_Switch => {
+                rules::explain_can_damage(ctx, world, edict)
+            }
+            LocationId::Ebih__Waterfall__Alcove__Block_Left => {
+                rules::explain_shockwave(ctx, world, edict)
+            }
+            LocationId::Ebih__Waterfall__Alcove__Block_Right => {
+                rules::explain_shockwave(ctx, world, edict)
+            }
+            LocationId::Ebih__Waterfall__Alcove_Left__Block_Left => {
+                rules::explain_shockwave(ctx, world, edict)
+            }
+            LocationId::Ebih__Waterfall__Alcove_Right__Block_Right => {
+                rules::explain_shockwave(ctx, world, edict)
+            }
+            LocationId::Ebih__Waterfall__Wall_Left__Break_Through_Wall => {
+                rules::explain_not_ebih_waterfall_wall_and_nanite_mist_and_mist_upgrade(
+                    ctx, world, edict,
+                )
+            }
+            LocationId::Ebih__Waterfall__Wall_Left__Break_Wall => {
+                rules::explain_shockwave(ctx, world, edict)
+            }
+            LocationId::Ebih__Waterfall__Wall_Right__Break_Through_Wall => {
+                rules::explain_not_ebih_waterfall_wall_and_nanite_mist_and_mist_upgrade(
+                    ctx, world, edict,
+                )
+            }
+            LocationId::Ebih__Waterfall__Wall_Right__Break_Wall => {
+                rules::explain_shockwave(ctx, world, edict)
+            }
+            LocationId::Ebih__Waterfall__Waterfall_Center_Center__Both_Blocks => {
+                rules::explain_shockwave(ctx, world, edict)
+            }
+            LocationId::Giguna__Dual_Path__Base_of_Wall__Break_Wall => {
+                rules::explain_shockwave(ctx, world, edict)
+            }
+            LocationId::Giguna__Dual_Path__Base_of_Wall__Mist_into_Wall => {
+                rules::explain_mode_eq_drone_and_mist_upgrade(ctx, world, edict)
+            }
+            LocationId::Giguna__Dual_Path__Below_Left_Switch__Remote_Switch => {
+                rules::explain_boomerang(ctx, world, edict)
+            }
+            LocationId::Giguna__Dual_Path__Below_Right_Switch__Remote_Switch => {
+                rules::explain_boomerang(ctx, world, edict)
+            }
+            LocationId::Giguna__Dual_Path__Left_Switch__Hit_Switch => {
+                rules::explain_can_damage(ctx, world, edict)
+            }
+            LocationId::Giguna__Dual_Path__Right_Switch__Hit_Switch => {
+                rules::explain_can_damage(ctx, world, edict)
+            }
+            LocationId::Giguna__Gateway__Block_Left__Shockwave => {
+                rules::explain_shockwave(ctx, world, edict)
+            }
+            LocationId::Giguna__Gateway__Block_Right__Shockwave => {
+                rules::explain_shockwave(ctx, world, edict)
+            }
+            LocationId::Giguna__Gateway__Button__Hit_Switch => {
+                rules::explain_can_damage(ctx, world, edict)
+            }
+            LocationId::Giguna__Giguna_Northeast__Door__Remote_Flask => {
+                rules::explain_boomerang(ctx, world, edict)
+            }
+            LocationId::Giguna__Giguna_Northeast__Gate_Right__Remote_Button => {
+                rules::explain_boomerang(ctx, world, edict)
+            }
+            LocationId::Giguna__Gubi_Lair__Center_Platform__Boss_Reward => {
+                rules::explain_giguna_gubi(ctx, world, edict)
+            }
+            LocationId::Giguna__Gubi_Lair__Center_Platform__Hack_Gubi => {
+                rules::explain_overheat(ctx, world, edict)
+            }
+            LocationId::Giguna__Hard_Rock__Rock_Left__Enter_Rock_as_Mist => {
+                rules::explain_nanite_mist_and_mist_upgrade(ctx, world, edict)
+            }
+            LocationId::Giguna__Hard_Rock__Rock_Left__Shockwave_Boulder => {
+                rules::explain_shockwave(ctx, world, edict)
+            }
+            LocationId::Giguna__Hard_Rock__Rock_Right__Enter_Rock_as_Mist => {
+                rules::explain_nanite_mist_and_mist_upgrade(ctx, world, edict)
+            }
+            LocationId::Giguna__Hard_Rock__Rock_Right__Shockwave_Boulder => {
+                rules::explain_shockwave(ctx, world, edict)
+            }
+            LocationId::Giguna__Wasteland__Passage_Cache__Clear_Horizontal_Passage_Manually => {
+                rules::explain_mode_eq_drone(ctx, world, edict)
+            }
+            LocationId::Giguna__Wasteland__Passage_Cache__Mist_through_Horizontal_Passage => {
+                rules::explain_mode_eq_drone_and_mist_upgrade(ctx, world, edict)
+            }
+            LocationId::Giguna__Wasteland__Passage_East__Clear_Horizontal_Passage_Manually => {
+                rules::explain_mode_eq_drone(ctx, world, edict)
+            }
+            LocationId::Giguna__Wasteland__Passage_East__Mist_through_Horizontal_Passage => {
+                rules::explain_mode_eq_drone_and_mist_upgrade(ctx, world, edict)
+            }
+            LocationId::Giguna__West_Caverns__Bush__Item => {
+                rules::explain_more_refills(ctx, world, edict)
+            }
+            LocationId::Glacier__Apocalypse_Entry__Grate_Ledge__Escape => {
+                rules::explain_apocalypse_bomb(ctx, world, edict)
+            }
+            LocationId::Glacier__Boomerang_Room__Pedestal__Switch => {
+                rules::explain_boomerang4(ctx, world, edict)
+            }
+            LocationId::Glacier__Ledge_Grab_Room__Cliff_Bottom__Quick_Grab => {
+                rules::explain_boomerang5(ctx, world, edict)
+            }
+            LocationId::Glacier__The_Big_Drop__Water_Surface__Drown => {
+                rules::explain_not_amashilama(ctx, world, edict)
+            }
+            LocationId::Glacier__Vertical_Room__Under_Switch__Switch => {
+                rules::explain_boomerang3(ctx, world, edict)
+            }
+            LocationId::Interior__Building_Interior__Entry__Remote_Urn => {
+                rules::explain_boomerang(ctx, world, edict)
+            }
+            LocationId::Interior__Building_Interior__Entry__Urn_Collection_Skip => {
+                rules::explain_boomerang(ctx, world, edict)
+            }
+            LocationId::Interior__Garage__Boxes__Under_Boxes => {
+                rules::explain_can_damage(ctx, world, edict)
+            }
+            LocationId::Irikar__Abandoned_Room__Corner_Core__Core => {
+                rules::explain_more_refills(ctx, world, edict)
+            }
+            LocationId::Irikar__Basement_Pipes__Left_Vertical_Pipe__Health_Pickup => {
+                rules::explain_more_refills(ctx, world, edict)
+            }
+            LocationId::Irikar__Boss_Room__Bulls_Feet__Boss_Reward => {
+                rules::explain_irikar_gudam(ctx, world, edict)
+            }
+            LocationId::Irikar__Boss_Room__Bulls_Feet__Defeat_Gudam => {
+                rules::explain_can_damage(ctx, world, edict)
+            }
+            LocationId::Irikar__Boss_Room__Bulls_Feet__Shockwave_Gudam => {
+                rules::explain_shockwave(ctx, world, edict)
+            }
+            LocationId::Irikar__Hub__Royal_Storage_By_Wall__Mist_into_Wall => {
+                rules::explain_not_irikar_royal_storage_wall_and_mist_upgrade(ctx, world, edict)
+            }
+            LocationId::Irikar__Sight_Room__Item_Pedestal__Urn_Fast_Travel => {
+                rules::explain_fast_travel(ctx, world, edict)
+            }
+            LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_2 => {
+                rules::explain_melee_damage(ctx, world, edict)
+            }
+            LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_3 => {
+                rules::explain_melee_damage_2(ctx, world, edict)
+            }
+            LocationId::Menu__Upgrade_Menu__Combat__Melee_Speed_2 => {
+                rules::explain_melee_speed(ctx, world, edict)
+            }
+            LocationId::Menu__Upgrade_Menu__Combat__Melee_Speed_3 => {
+                rules::explain_melee_speed_2(ctx, world, edict)
+            }
+            LocationId::Menu__Upgrade_Menu__Combat__Ranged_Damage_2 => {
+                rules::explain_ranged_damage(ctx, world, edict)
+            }
+            LocationId::Menu__Upgrade_Menu__Combat__Ranged_Damage_3 => {
+                rules::explain_ranged_damage_2(ctx, world, edict)
+            }
+            LocationId::Menu__Upgrade_Menu__Combat__Ranged_Speed_2 => {
+                rules::explain_ranged_speed(ctx, world, edict)
+            }
+            LocationId::Menu__Upgrade_Menu__Combat__Ranged_Speed_3 => {
+                rules::explain_ranged_speed_2(ctx, world, edict)
+            }
+            LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_2 => {
+                rules::explain_drone_melee_damage(ctx, world, edict)
+            }
+            LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_3 => {
+                rules::explain_drone_melee_damage_2(ctx, world, edict)
+            }
+            LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_2 => {
+                rules::explain_drone_melee_speed(ctx, world, edict)
+            }
+            LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_3 => {
+                rules::explain_drone_melee_speed_2(ctx, world, edict)
+            }
+            LocationId::Menu__Upgrade_Menu__Infection__Infection_Level_2 => {
+                rules::explain_infect_l1(ctx, world, edict)
+            }
+            LocationId::Menu__Upgrade_Menu__Infection__Infection_Level_3 => {
+                rules::explain_infect_l2(ctx, world, edict)
+            }
+            LocationId::Menu__Upgrade_Menu__Infection__Infection_Range_2 => {
+                rules::explain_infection_range(ctx, world, edict)
+            }
+            LocationId::Menu__Upgrade_Menu__Infection__Infection_Range_3 => {
+                rules::explain_infection_range_2(ctx, world, edict)
+            }
+            LocationId::Menu__Upgrade_Menu__Infection__Infection_Speed_2 => {
+                rules::explain_infection_speed(ctx, world, edict)
+            }
+            LocationId::Menu__Upgrade_Menu__Infection__Nano_Points_2 => {
+                rules::explain_nano_points(ctx, world, edict)
+            }
+            LocationId::Menu__Upgrade_Menu__Infection__Nano_Points_3 => {
+                rules::explain_nano_points_2(ctx, world, edict)
+            }
+            LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_2 => {
+                rules::explain_health_upgrade(ctx, world, edict)
+            }
+            LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_3 => {
+                rules::explain_health_upgrade_2(ctx, world, edict)
+            }
+            LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_4 => {
+                rules::explain_health_upgrade_3(ctx, world, edict)
+            }
+            LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_5 => {
+                rules::explain_health_upgrade_4(ctx, world, edict)
+            }
+            LocationId::Menu__Upgrade_Menu__Physiology__Mist_Upgrade => {
+                rules::explain_nanite_mist(ctx, world, edict)
+            }
+            LocationId::Uhrum__Annuna_Corridor__Block_East__Dislodge_Block => {
+                rules::explain_shockwave(ctx, world, edict)
+            }
+            LocationId::Uhrum__Annuna_Corridor__Block_West__Dislodge_Block => {
+                rules::explain_shockwave(ctx, world, edict)
+            }
+            LocationId::Uhrum__Annuna_Corridor__Pedestal__Urn_Fast_Travel => {
+                rules::explain_fast_travel(ctx, world, edict)
+            }
+            LocationId::Uhrum__Annuna_Corridor__Upper_Trees__Remote_Urn => {
+                rules::explain_boomerang(ctx, world, edict)
+            }
+            LocationId::Uhrum__Siege_Corridor__Center_Box__Box => {
+                rules::explain_can_damage(ctx, world, edict)
+            }
+            LocationId::Uhrum__Siege_Corridor__Western_Cache__Core => {
+                rules::explain_more_refills(ctx, world, edict)
+            }
+            LocationId::Uhrum__Waterfalls__Above_Block__Block => {
+                rules::explain_shockwave(ctx, world, edict)
+            }
+            LocationId::Uhrum__Waterfalls__Barrier_East__Charge_through_Wall => {
+                rules::explain_charge(ctx, world, edict)
+            }
+            LocationId::Uhrum__Waterfalls__Barrier_East__Mist_through_Wall => {
+                rules::explain_mist2(ctx, world, edict)
+            }
+            LocationId::Uhrum__Waterfalls__Barrier_East__Spin_through_Wall => {
+                rules::explain_spin(ctx, world, edict)
+            }
+            LocationId::Uhrum__Waterfalls__Barrier_West__Charge_through_Wall => {
+                rules::explain_charge(ctx, world, edict)
+            }
+            LocationId::Uhrum__Waterfalls__Barrier_West__Mist_through_Wall => {
+                rules::explain_mist2(ctx, world, edict)
+            }
+            LocationId::Uhrum__Waterfalls__Barrier_West__Spin_through_Wall => {
+                rules::explain_spin(ctx, world, edict)
+            }
+            LocationId::Uhrum__Waterfalls__Below_Block__Shockwave_Block => {
+                rules::explain_shockwave(ctx, world, edict)
+            }
+            LocationId::Uhrum__Waterfalls__East_26__Block => {
+                rules::explain_shockwave(ctx, world, edict)
+            }
+            LocationId::Uhrum__West_Entrance__Gate_Switch__Open_Gate => {
+                rules::explain_can_damage(ctx, world, edict)
+            }
+            LocationId::Uhrum__West_Entrance__Lower_Wall_East__Charge_through_Wall => {
+                rules::explain_charge(ctx, world, edict)
+            }
+            LocationId::Uhrum__West_Entrance__Lower_Wall_East__Mist_through_Wall => {
+                rules::explain_mist2(ctx, world, edict)
+            }
+            LocationId::Uhrum__West_Entrance__Lower_Wall_East__Spin_through_Wall => {
+                rules::explain_spin(ctx, world, edict)
+            }
+            LocationId::Uhrum__West_Entrance__Lower_Wall_West__Charge_through_Wall => {
+                rules::explain_charge(ctx, world, edict)
+            }
+            LocationId::Uhrum__West_Entrance__Lower_Wall_West__Mist_through_Wall => {
+                rules::explain_mist2(ctx, world, edict)
+            }
+            LocationId::Uhrum__West_Entrance__Lower_Wall_West__Spin_through_Wall => {
+                rules::explain_spin(ctx, world, edict)
+            }
+            LocationId::Uhrum__West_Entrance__Sand__Refill => {
+                rules::explain_more_refills(ctx, world, edict)
+            }
+            LocationId::Uhrum__West_Entrance__Upper_Wall_East__Charge_through_Wall => {
+                rules::explain_charge(ctx, world, edict)
+            }
+            LocationId::Uhrum__West_Entrance__Upper_Wall_East__Mist_through_Wall => {
+                rules::explain_mist2(ctx, world, edict)
+            }
+            LocationId::Uhrum__West_Entrance__Upper_Wall_East__Spin_through_Wall => {
+                rules::explain_spin(ctx, world, edict)
+            }
+            LocationId::Uhrum__West_Entrance__Upper_Wall_West__Mist_through_Wall => {
+                rules::explain_mist2(ctx, world, edict)
+            }
+            _ => (true, vec![]),
+        }
+    }
 }
 
 impl world::Location for Location {
@@ -4716,6 +5140,918 @@ impl world::Accessible for Exit {
     fn price(&self) -> &Currency {
         &self.price
     }
+
+    fn explain_rule(
+        &self,
+        ctx: &Self::Context,
+        world: &World,
+        edict: &mut FxHashMap<String, String>,
+    ) -> (bool, Vec<String>) {
+        match self.id {
+            ExitId::Amagi__Liru_Room__Platform_4_Left__ex__West_20_1 => rules::explain_hook_and_hover_and_underwater_movement(ctx, world, edict),
+            ExitId::Amagi__Liru_Room__Platform_4_Right__ex__East_Passage_1 => rules::explain_hook_and_underwater_movement(ctx, world, edict),
+            ExitId::Amagi__Liru_Room__West_20__ex__Platform_4_Left_1 => rules::explain_hover(ctx, world, edict),
+            ExitId::Amagi__Liru_Room__West_20__ex__Platform_4_Right_1 => rules::explain_hook(ctx, world, edict),
+            ExitId::Amagi__Liru_Room__West_20__ex__Shrine_1 => rules::explain_hook_and_hover(ctx, world, edict),
+            ExitId::Amagi__Main_Area__Carving__ex__Secret_Outcropping_1 => rules::explain_amagi__main_area__carving__ex__secret_outcropping_1__req(ctx, world, edict),
+            ExitId::Amagi__Main_Area__Carving__ex__Secret_Outcropping_2 => rules::explain_amagi__main_area__carving__ex__secret_outcropping_2__req(ctx, world, edict),
+            ExitId::Amagi__Main_Area__Catwalk_Center__ex__East_Ledge_1 => rules::explain_underwater_movement_and___grab_or_climb(ctx, world, edict),
+            ExitId::Amagi__Main_Area__Catwalk_Center__ex__Platform_3_1 => rules::explain_underwater_movement(ctx, world, edict),
+            ExitId::Amagi__Main_Area__Platform_2__ex__West_Shelf_1 => rules::explain_grab_or_climb_or_hook(ctx, world, edict),
+            ExitId::Amagi__Main_Area__Shallow_End__ex__Waters_Edge_1 => rules::explain_grab_or_underwater_movement(ctx, world, edict),
+            ExitId::Amagi__Main_Area__West_Side__ex__Carving_1 => rules::explain_underwater_movement_and___grab_or_climb(ctx, world, edict),
+            ExitId::Amagi__Main_Area__West_Side__ex__Carving_2 => rules::explain_underwater_movement_and_hook(ctx, world, edict),
+            ExitId::Amagi__West_Lake__Cavern_Refill_Station__Defeat_MUS_A_M20 => rules::explain_shockwave_and_not_defeat_mus_a_m20(ctx, world, edict),
+            ExitId::Amagi__West_Lake__Cavern_Refill_Station__ex__Cavern_Tear_Duct_1 => rules::explain_amagi_dragon_eye_passage(ctx, world, edict),
+            ExitId::Amagi__West_Lake__Cavern_Tear_Duct__ex__Cavern_Refill_Station_1 => rules::explain_amagi_dragon_eye_passage(ctx, world, edict),
+            ExitId::Amagi__West_Lake__Northwest_Platform__ex__West_Cliff_1 => rules::explain_grab(ctx, world, edict),
+            ExitId::Amagi__West_Lake__Stronghold_Ceiling_Left__ex__Stronghold_Middle_Column_1 => rules::explain_amagi_stronghold_boulder_1(ctx, world, edict),
+            ExitId::Amagi__West_Lake__Stronghold_Ceiling_Right__ex__Stronghold_Front_Room_1 => rules::explain_amagi_stronghold_boulder_2(ctx, world, edict),
+            ExitId::Amagi__West_Lake__Stronghold_Front_Door__ex__Stronghold_Front_Room_1 => rules::explain_amagi_stronghold_wall_2(ctx, world, edict),
+            ExitId::Amagi__West_Lake__Stronghold_Front_Room__ex__Stronghold_Ceiling_Right_1 => rules::explain_amagi_stronghold_boulder_2_and_grab(ctx, world, edict),
+            ExitId::Amagi__West_Lake__Stronghold_Front_Room__ex__Stronghold_Front_Door_1 => rules::explain_amagi_stronghold_wall_2(ctx, world, edict),
+            ExitId::Amagi__West_Lake__Stronghold_Item__ex__Stronghold_Middle_Column_1 => rules::explain_amagi_stronghold_wall_1(ctx, world, edict),
+            ExitId::Amagi__West_Lake__Stronghold_Middle_Column__ex__Stronghold_Ceiling_Left_1 => rules::explain_amagi_stronghold_boulder_1_and_underwater_movement_and___grab_or_climb(ctx, world, edict),
+            ExitId::Amagi__West_Lake__Stronghold_Middle_Column__ex__Stronghold_Item_1 => rules::explain_amagi_stronghold_wall_1(ctx, world, edict),
+            ExitId::Amagi__West_Lake__Stronghold_Top__Remote_Urn => rules::explain_boomerang(ctx, world, edict),
+            ExitId::Amagi__West_Lake__Surface_Wall_Left__ex__Surface_Wall_Right_1 => rules::explain_amagi_west_lake_surface_wall(ctx, world, edict),
+            ExitId::Amagi__West_Lake__Surface_Wall_Right__ex__Surface_Wall_Left_1 => rules::explain_amagi_west_lake_surface_wall(ctx, world, edict),
+            ExitId::Amagi__West_Lake__West_Bank__ex__West_Shore_1 => rules::explain_grab_or_climb(ctx, world, edict),
+            ExitId::Annuna__Apocalypse__Center_Scaffold_West__Boss_Fight => rules::explain_infect_and_anuman(ctx, world, edict),
+            ExitId::Annuna__Apocalypse__Center_Scaffold_West__Fill_It_Up => rules::explain_infect_and_not_anuman(ctx, world, edict),
+            ExitId::Annuna__Apocalypse__Northwest_Mid_air__ex__Northwest_Scaffold_2_West_1 => rules::explain_nanite_mist(ctx, world, edict),
+            ExitId::Annuna__Apocalypse__Northwest_Mid_air__ex__Northwest_Scaffold_2_West_2 => rules::explain_mist2(ctx, world, edict),
+            ExitId::Annuna__Apocalypse__Southwest_Capsule__ex__West_1 => rules::explain_grab(ctx, world, edict),
+            ExitId::Annuna__Apocalypse__Southwest_Capsule__ex__West_2 => rules::explain_hook(ctx, world, edict),
+            ExitId::Annuna__Center_Save__Save_Point__ex__West_Catwalk_1 => rules::explain_hover(ctx, world, edict),
+            ExitId::Annuna__East_Bridge__Below_Gate_Button__ex__Center_Gap_East_1 => rules::explain_annuna_east_bridge_gate(ctx, world, edict),
+            ExitId::Annuna__East_Bridge__Bridge_Top_East__ex__East_24_1 => rules::explain_grab(ctx, world, edict),
+            ExitId::Annuna__East_Bridge__Bridge_Top_East__ex__East_24_2 => rules::explain_hook(ctx, world, edict),
+            ExitId::Annuna__East_Bridge__Center_Gap_East__ex__Below_Gate_Button_1 => rules::explain_annuna_east_bridge_gate(ctx, world, edict),
+            ExitId::Annuna__East_Bridge__East_25_Lower__ex__Center_Corridor_1 => rules::explain_annuna_east_bridge_gate(ctx, world, edict),
+            ExitId::Annuna__East_Bridge__East_Gap_East__ex__Center_Corridor_1 => rules::explain_annuna_east_bridge_gate(ctx, world, edict),
+            ExitId::Annuna__East_Bridge__Flung_West__ex__Below_Cavern_1 => rules::explain_hover(ctx, world, edict),
+            ExitId::Annuna__East_Bridge__Flung_West__ex__West_Bridge__Below_Tunnel_1 => rules::explain_hover(ctx, world, edict),
+            ExitId::Annuna__East_Bridge__Flung_West__ex__West_Bridge__Tunnel_Wall_1 => rules::explain_hover_and_anuman(ctx, world, edict),
+            ExitId::Annuna__East_Bridge__Gate_Button__ex__Gate_Button_Gap_1 => rules::explain_climb_and_grab(ctx, world, edict),
+            ExitId::Annuna__East_Bridge__Tower_Base_East__ex__Tower_Opening_1 => rules::explain_grab_or_hook(ctx, world, edict),
+            ExitId::Annuna__East_Bridge__Tower_Base_West__ex__Tower_Gate_1 => rules::explain_climb_and_annuna_east_bridge_gate(ctx, world, edict),
+            ExitId::Annuna__East_Bridge__Tower_East_Ledge__ex__East_24_1 => rules::explain_hover(ctx, world, edict),
+            ExitId::Annuna__East_Bridge__Tower_East_Ledge__ex__Tower_Secret_1 => rules::explain_annuna__east_bridge__tower_east_ledge__ex__tower_secret_1__req(ctx, world, edict),
+            ExitId::Annuna__East_Bridge__Tower_Gate__ex__Tower_West_Ledge_1 => rules::explain_infinite_climb_and_annuna_east_bridge_gate(ctx, world, edict),
+            ExitId::Annuna__East_Bridge__Tower_Gate__ex__Tower_West_Ledge_2 => rules::explain_infinite_climb_and_annuna_east_bridge_gate(ctx, world, edict),
+            ExitId::Annuna__East_Bridge__Tower_Gate__ex__Upper_West_Gap_East_1 => rules::explain_annuna_east_bridge_gate(ctx, world, edict),
+            ExitId::Annuna__East_Bridge__Tower_Mid_air_East__ex__Below_Cavern_1 => rules::explain_hook_and_hover(ctx, world, edict),
+            ExitId::Annuna__East_Bridge__Tower_Mid_air_East__ex__Flung_West_1 => rules::explain_charge(ctx, world, edict),
+            ExitId::Annuna__East_Bridge__Tower_Mid_air_East__ex__Tower_Peak_1 => rules::explain_hook(ctx, world, edict),
+            ExitId::Annuna__East_Bridge__Tower_Mid_air_East__ex__West_Bridge__Below_Tunnel_1 => rules::explain_hook_and_hover(ctx, world, edict),
+            ExitId::Annuna__East_Bridge__Tower_Mid_air_West__ex__East_22_1 => rules::explain_hook_and_hover(ctx, world, edict),
+            ExitId::Annuna__East_Bridge__Tower_Mid_air_West__ex__Sniper_Valley__High_Ledge_1 => rules::explain_hook_and_hover(ctx, world, edict),
+            ExitId::Annuna__East_Bridge__Tower_Mid_air_West__ex__Tower_Peak_1 => rules::explain_hook(ctx, world, edict),
+            ExitId::Annuna__East_Bridge__Tower_Mid_air_West__ex__Tower_Secret_1 => rules::explain_annuna__east_bridge__tower_mid_air_west__ex__tower_secret_1__req(ctx, world, edict),
+            ExitId::Annuna__East_Bridge__Tower_Secret__ex__Tower_East_Ledge_1 => rules::explain_annuna__east_bridge__tower_secret__ex__tower_east_ledge_1__req(ctx, world, edict),
+            ExitId::Annuna__East_Bridge__Tower_Secret__ex__Tower_Mid_air_East_1 => rules::explain_annuna__east_bridge__tower_secret__ex__tower_mid_air_east_1__req(ctx, world, edict),
+            ExitId::Annuna__East_Bridge__Tower_Secret__ex__Tower_Mid_air_West_1 => rules::explain_annuna__east_bridge__tower_secret__ex__tower_mid_air_west_1__req(ctx, world, edict),
+            ExitId::Annuna__East_Bridge__Tower_Secret__ex__Tower_Peak_1 => rules::explain_annuna__east_bridge__tower_secret__ex__tower_peak_1__req(ctx, world, edict),
+            ExitId::Annuna__East_Bridge__Tower_Secret__ex__Tower_Peak_2 => rules::explain_annuna__east_bridge__tower_secret__ex__tower_peak_2__req(ctx, world, edict),
+            ExitId::Annuna__East_Bridge__Tower_Secret__ex__Tower_West_Ledge_1 => rules::explain_annuna__east_bridge__tower_secret__ex__tower_west_ledge_1__req(ctx, world, edict),
+            ExitId::Annuna__East_Bridge__Tower_West_Ledge__ex__Tower_Gate_1 => rules::explain_annuna_east_bridge_gate(ctx, world, edict),
+            ExitId::Annuna__East_Bridge__Tower_West_Ledge__ex__Tower_Secret_1 => rules::explain_annuna__east_bridge__tower_west_ledge__ex__tower_secret_1__req(ctx, world, edict),
+            ExitId::Annuna__East_Bridge__Tower_West_Ledge__ex__West_24_1 => rules::explain_hover(ctx, world, edict),
+            ExitId::Annuna__East_Bridge__Upper_East_Ledge__ex__East_23_1 => rules::explain_hover(ctx, world, edict),
+            ExitId::Annuna__East_Bridge__Upper_East_Ledge__ex__Tower_East_Ledge_1 => rules::explain_hover(ctx, world, edict),
+            ExitId::Annuna__East_Bridge__Upper_East_Ledge__ex__Tower_Mid_air_East_1 => rules::explain_hover(ctx, world, edict),
+            ExitId::Annuna__East_Bridge__Upper_East_Ledge__ex__Tower_Opening_1 => rules::explain_hover(ctx, world, edict),
+            ExitId::Annuna__East_Bridge__Upper_West_Gap__ex__West_24_1 => rules::explain_hook(ctx, world, edict),
+            ExitId::Annuna__East_Bridge__Upper_West_Gap__ex__West_24_2 => rules::explain_grab(ctx, world, edict),
+            ExitId::Annuna__East_Bridge__Upper_West_Gap_East__ex__Tower_Gate_1 => rules::explain_hook_and_annuna_east_bridge_gate(ctx, world, edict),
+            ExitId::Annuna__East_Bridge__Upper_West_Partway_East__ex__Tower_Gate_1 => rules::explain_hook_and_annuna_east_bridge_gate(ctx, world, edict),
+            ExitId::Annuna__East_Bridge__Upper_West_Partway_East__ex__Tower_Gate_2 => rules::explain_grab_and_annuna_east_bridge_gate(ctx, world, edict),
+            ExitId::Annuna__East_Bridge__Upper_West_Partway_East__ex__Tower_West_Ledge_1 => rules::explain_infinite_climb_and_not_annuna_east_bridge_gate(ctx, world, edict),
+            ExitId::Annuna__East_Bridge__Upper_West_Partway_East__ex__Tower_West_Ledge_2 => rules::explain_infinite_climb_and_slingshot_hook_and_not_annuna_east_bridge_gate(ctx, world, edict),
+            ExitId::Annuna__East_Bridge__West_Staircase_Upper_West__ex__Upper_West_Gap_1 => rules::explain_hook(ctx, world, edict),
+            ExitId::Annuna__East_Bridge__West_Staircase_Upper_West__ex__Upper_West_Gap_East_1 => rules::explain_hook(ctx, world, edict),
+            ExitId::Annuna__East_Bridge__West_Under_Gap__ex__Upper_West_Gap_1 => rules::explain_hook(ctx, world, edict),
+            ExitId::Annuna__East_Bridge__West_Under_Gap__ex__Upper_West_Gap_East_1 => rules::explain_hook(ctx, world, edict),
+            ExitId::Annuna__East_Climb__Platform_1_Left__ex__West_25_1 => rules::explain_climb_and_grab_and_anuman(ctx, world, edict),
+            ExitId::Annuna__East_Climb__Platform_1_Left__ex__West_25_2 => rules::explain_infinite_climb_and_slingshot_hook(ctx, world, edict),
+            ExitId::Annuna__East_Climb__Platform_2_Left__ex__Platform_3_Right_1 => rules::explain_hook(ctx, world, edict),
+            ExitId::Annuna__East_Climb__Platform_3_Left__ex__Platform_4_Left_1 => rules::explain_hook(ctx, world, edict),
+            ExitId::Annuna__East_Climb__Platform_3_Right__ex__Platform_4_Left_1 => rules::explain_hook(ctx, world, edict),
+            ExitId::Annuna__East_Climb__Platform_4_Left__ex__Upper_Ledge_1 => rules::explain_hook_and_hover(ctx, world, edict),
+            ExitId::Annuna__East_Climb__West_26__ex__Platform_1_Left_1 => rules::explain_hook(ctx, world, edict),
+            ExitId::Annuna__Factory_Access__Bottom__ex__Upper_Platform_1 => rules::explain_hook_and_hover(ctx, world, edict),
+            ExitId::Annuna__Factory_Access__East_22__ex__Grate_Left_1 => rules::explain_nanite_mist(ctx, world, edict),
+            ExitId::Annuna__Factory_Access__East_22__ex__Grate_Left_2 => rules::explain_mist2(ctx, world, edict),
+            ExitId::Annuna__Factory_Access__Grate_Left__ex__East_22_1 => rules::explain_nanite_mist(ctx, world, edict),
+            ExitId::Annuna__Factory_Access__Grate_Left__ex__East_22_2 => rules::explain_mist2(ctx, world, edict),
+            ExitId::Annuna__Factory_Access__Staircase_Top__ex__West_22_1 => rules::explain_hover(ctx, world, edict),
+            ExitId::Annuna__Factory_Access__Upper_Ledge__ex__West_22_1 => rules::explain_hook(ctx, world, edict),
+            ExitId::Annuna__Factory_Access__Upper_Ledge__ex__West_22_2 => rules::explain_hover(ctx, world, edict),
+            ExitId::Annuna__Factory_Access__Upper_Platform__ex__Upper_Ledge_1 => rules::explain_hook(ctx, world, edict),
+            ExitId::Annuna__Factory_Access__Upper_Platform__ex__Upper_Ledge_2 => rules::explain_grab(ctx, world, edict),
+            ExitId::Annuna__Factory_Access__Upper_Platform__ex__West_22_1 => rules::explain_hook_and_hover(ctx, world, edict),
+            ExitId::Annuna__Final_Save__East__ex__Upper_West_1 => rules::explain_hook_and_hover(ctx, world, edict),
+            ExitId::Annuna__Final_Save__Lower_West__ex__Pillar_1 => rules::explain_grab(ctx, world, edict),
+            ExitId::Annuna__Final_Save__Lower_West__ex__Pillar_2 => rules::explain_hook(ctx, world, edict),
+            ExitId::Annuna__Final_Save__Pillar__ex__Upper_West_1 => rules::explain_hover(ctx, world, edict),
+            ExitId::Annuna__Final_Save__Save_Point__ex__Apocalypse__Northwest_Mid_air_1 => rules::explain_hover(ctx, world, edict),
+            ExitId::Annuna__Final_Save__Save_Point__ex__Pillar_1 => rules::explain_grab(ctx, world, edict),
+            ExitId::Annuna__Final_Save__Save_Point__ex__Pillar_2 => rules::explain_hook(ctx, world, edict),
+            ExitId::Annuna__Final_Save__Upper_West__ex__Apocalypse__Northwest_Mid_air_1 => rules::explain_hook_and_hover(ctx, world, edict),
+            ExitId::Annuna__Mirror_Match__Below_Switch__ex__Central_Pillar_1 => rules::explain_hover_and_hook(ctx, world, edict),
+            ExitId::Annuna__Mirror_Match__Central_Pillar__ex__Below_Switch_1 => rules::explain_hover_and_hook(ctx, world, edict),
+            ExitId::Annuna__Mirror_Match__Central_Pillar__ex__Save_Point_1 => rules::explain_annuna_mirror_match_switch(ctx, world, edict),
+            ExitId::Annuna__Mirror_Match__Central_Pillar__ex__West_25_1 => rules::explain_annuna_mirror_match_switch(ctx, world, edict),
+            ExitId::Annuna__Mirror_Match__East_26_Upper__Remote_Flask => rules::explain_boomerang(ctx, world, edict),
+            ExitId::Annuna__Mirror_Match__Eastward__ex__Staircase_1 => rules::explain_not_separation_or_defeat_indra(ctx, world, edict),
+            ExitId::Annuna__Mirror_Match__Eastward__ex__Staircase_2 => rules::explain_separation_and_not_defeat_indra_and_mist2(ctx, world, edict),
+            ExitId::Annuna__Mirror_Match__Plinth__ex__East_26_Upper_1 => rules::explain_hover(ctx, world, edict),
+            ExitId::Annuna__Mirror_Match__Staircase__ex__Eastward_1 => rules::explain_not_separation_or_defeat_indra(ctx, world, edict),
+            ExitId::Annuna__Mirror_Match__Staircase__ex__Eastward_2 => rules::explain_separation_and_not_defeat_indra_and_mist2(ctx, world, edict),
+            ExitId::Annuna__Sniper_Valley__Bridge_End__ex__Bridge_Lower_Ledge_1 => rules::explain_hook(ctx, world, edict),
+            ExitId::Annuna__Sniper_Valley__Bridge_Upper_Middle__ex__West_24_1 => rules::explain_grab(ctx, world, edict),
+            ExitId::Annuna__Sniper_Valley__Bridge_Upper_Middle__ex__West_24_2 => rules::explain_hook(ctx, world, edict),
+            ExitId::Annuna__Sniper_Valley__Cavern_Cache__ex__Cavern_Tight_Corner_1 => rules::explain_mode_eq_drone(ctx, world, edict),
+            ExitId::Annuna__Sniper_Valley__Cavern_Inner_Rock_East__Break_Inner_Wall => rules::explain_mode_eq_drone_and_mist2(ctx, world, edict),
+            ExitId::Annuna__Sniper_Valley__Cavern_Inner_Rock_East__ex__Cavern_Inner_Rock_West_1 => rules::explain_mode_eq_drone_and_sniper_valley_rock_2(ctx, world, edict),
+            ExitId::Annuna__Sniper_Valley__Cavern_Inner_Rock_West__Break_Inner_Wall => rules::explain_mode_eq_drone_and_mist2(ctx, world, edict),
+            ExitId::Annuna__Sniper_Valley__Cavern_Inner_Rock_West__ex__Cavern_Inner_Rock_East_1 => rules::explain_mode_eq_drone_and_sniper_valley_rock_2(ctx, world, edict),
+            ExitId::Annuna__Sniper_Valley__Cavern_Outer_Rock_East__Break_Outer_Wall => rules::explain_mist2(ctx, world, edict),
+            ExitId::Annuna__Sniper_Valley__Cavern_Outer_Rock_East__ex__Cavern_Inner_Rock_West_1 => rules::explain_mode_eq_drone(ctx, world, edict),
+            ExitId::Annuna__Sniper_Valley__Cavern_Outer_Rock_East__ex__Cavern_Outer_Rock_West_1 => rules::explain_sniper_valley_rock_1(ctx, world, edict),
+            ExitId::Annuna__Sniper_Valley__Cavern_Outer_Rock_West__Break_Outer_Wall => rules::explain_mist2(ctx, world, edict),
+            ExitId::Annuna__Sniper_Valley__Cavern_Outer_Rock_West__ex__Cavern_Outer_Rock_East_1 => rules::explain_sniper_valley_rock_1(ctx, world, edict),
+            ExitId::Annuna__Sniper_Valley__Cavern_Tight_Corner__ex__Cavern_Cache_1 => rules::explain_mode_eq_drone(ctx, world, edict),
+            ExitId::Annuna__Sniper_Valley__West_23__ex__Cavern_Outer_Rock_West_1 => rules::explain_mist2(ctx, world, edict),
+            ExitId::Annuna__Sniper_Valley__West_23__ex__High_Ledge_1 => rules::explain_hook_or_hover(ctx, world, edict),
+            ExitId::Annuna__Twisty_Passages__Bottom_Middle__ex__Center_1 => rules::explain_hook(ctx, world, edict),
+            ExitId::Annuna__Twisty_Passages__Bottom_Middle__ex__East_Fork_1 => rules::explain_hook(ctx, world, edict),
+            ExitId::Annuna__Twisty_Passages__Bottom_West__ex__Southwest_C_1 => rules::explain_hook(ctx, world, edict),
+            ExitId::Annuna__Twisty_Passages__East_Fork__ex__Northeast_C_1 => rules::explain_hook(ctx, world, edict),
+            ExitId::Annuna__Twisty_Passages__East_Fork__ex__Northeast_C_2 => rules::explain_grab(ctx, world, edict),
+            ExitId::Annuna__Twisty_Passages__Northeast_C__ex__Northeast_D_1 => rules::explain_hook(ctx, world, edict),
+            ExitId::Annuna__Twisty_Passages__Northeast_C__ex__Southwest_C_1 => rules::explain_hook_and_hover(ctx, world, edict),
+            ExitId::Annuna__Twisty_Passages__Northeast_C__ex__West_Hill_Right_1 => rules::explain_hook_and_hover(ctx, world, edict),
+            ExitId::Annuna__Twisty_Passages__Northeast_D__ex__Top_1 => rules::explain_hook(ctx, world, edict),
+            ExitId::Annuna__Twisty_Passages__Southwest_C__ex__West_Dip_1 => rules::explain_hook(ctx, world, edict),
+            ExitId::Annuna__Twisty_Passages__Southwest_C__ex__West_Ledge_1 => rules::explain_hook(ctx, world, edict),
+            ExitId::Annuna__Twisty_Passages__West_Hill_Left__ex__Northwest_Alcove_1 => rules::explain_hook(ctx, world, edict),
+            ExitId::Annuna__Vertical_Room__Gate_Ledge__ex__Plinth_1 => rules::explain_anunna_vertical_room_gate(ctx, world, edict),
+            ExitId::Annuna__Vertical_Room__Lower_Mid__ex__Lower_Platform_1_Right_1 => rules::explain_grab(ctx, world, edict),
+            ExitId::Annuna__Vertical_Room__Lower_Mid__ex__Lower_Platform_2_Right_1 => rules::explain_hook(ctx, world, edict),
+            ExitId::Annuna__Vertical_Room__Lower_Platform_1_Right__ex__Lower_Platform_2_Right_1 => rules::explain_grab(ctx, world, edict),
+            ExitId::Annuna__Vertical_Room__Lower_Platform_1_Right__ex__Lower_Platform_2_Right_2 => rules::explain_hook(ctx, world, edict),
+            ExitId::Annuna__Vertical_Room__Lower_Platform_2_Left__ex__Gate_Ledge_1 => rules::explain_hook(ctx, world, edict),
+            ExitId::Annuna__Vertical_Room__Lower_Platform_2_Left__ex__Gate_Ledge_2 => rules::explain_grab_and_anuman(ctx, world, edict),
+            ExitId::Annuna__Vertical_Room__Lower_Platform_2_Left__ex__Lower_Ministair_1 => rules::explain_climb(ctx, world, edict),
+            ExitId::Annuna__Vertical_Room__Lower_Platform_2_Right__ex__Gate_Ledge_1 => rules::explain_hook(ctx, world, edict),
+            ExitId::Annuna__Vertical_Room__Lower_Platform_2_Right__ex__Gate_Ledge_2 => rules::explain_grab_and_anuman(ctx, world, edict),
+            ExitId::Annuna__Vertical_Room__Lower_Platform_2_Right__ex__Lower_Ministair_1 => rules::explain_climb(ctx, world, edict),
+            ExitId::Annuna__Vertical_Room__West_22__ex__Lower_Ledge_1 => rules::explain_hook(ctx, world, edict),
+            ExitId::Annuna__Vertical_Room__West_22__ex__Lower_Ledge_2 => rules::explain_grab_and_anuman(ctx, world, edict),
+            ExitId::Annuna__Vertical_Room__West_22__ex__Lower_Platform_1_Left_1 => rules::explain_grab(ctx, world, edict),
+            ExitId::Annuna__West_Bridge__Mid_Tunnel__ex__East_22_1 => rules::explain_hover(ctx, world, edict),
+            ExitId::Annuna__West_Bridge__Tunnel_Wall__ex__Mid_Tunnel_1 => rules::explain_climb(ctx, world, edict),
+            ExitId::Annuna__West_Climb__Cache__ex__Switch_Ledge_1 => rules::explain_annuna__west_climb__cache__ex__switch_ledge_1__req(ctx, world, edict),
+            ExitId::Annuna__West_Climb__East_19__ex__Platform_3_1 => rules::explain_hook(ctx, world, edict),
+            ExitId::Annuna__West_Climb__North__ex__East_19_1 => rules::explain_hook_or_hover(ctx, world, edict),
+            ExitId::Annuna__West_Climb__Platform_1__ex__Switch_Ledge_1 => rules::explain_hook(ctx, world, edict),
+            ExitId::Annuna__West_Climb__Platform_1__ex__Switch_Ledge_2 => rules::explain_climb(ctx, world, edict),
+            ExitId::Annuna__West_Climb__Platform_1__ex__Switch_Ledge_3 => rules::explain_grab_and_anuman(ctx, world, edict),
+            ExitId::Annuna__West_Climb__Platform_2__ex__East_19_1 => rules::explain_hook(ctx, world, edict),
+            ExitId::Annuna__West_Climb__South__ex__Platform_1_1 => rules::explain_hook_and_hover(ctx, world, edict),
+            ExitId::Annuna__West_Climb__South__ex__West_Ledge_1 => rules::explain_grab_or_anuman(ctx, world, edict),
+            ExitId::Annuna__West_Climb__Switch_Ledge__ex__Cache_1 => rules::explain_annuna__west_climb__switch_ledge__ex__cache_1__req(ctx, world, edict),
+            ExitId::Annuna__West_Climb__Switch_Ledge__ex__East_20_1 => rules::explain_hover(ctx, world, edict),
+            ExitId::Annuna__West_Climb__Switch_Ledge__ex__Platform_2_1 => rules::explain_hook_and_hover(ctx, world, edict),
+            ExitId::Annuna__West_Climb__West_Ledge__ex__Platform_1_1 => rules::explain_hover(ctx, world, edict),
+            ExitId::Antarctica__Building_1E__Connector__ex__East_Entry_1 => rules::explain_can_damage(ctx, world, edict),
+            ExitId::Antarctica__Building_2__Entry__ex__Freight_Elevator__Left_1 => rules::explain_station_power(ctx, world, edict),
+            ExitId::Antarctica__Building_2__Stairs__ex__Behind_Boxes_1 => rules::explain_can_damage(ctx, world, edict),
+            ExitId::Antarctica__East__Building_1_Entry__ex__Building_2_Upper_1 => rules::explain_mist_upgrade(ctx, world, edict),
+            ExitId::Antarctica__East__Building_2_Entry__ex__Building_2_Upper_1 => rules::explain_mist_upgrade(ctx, world, edict),
+            ExitId::Antarctica__West__Boxes__ex__Building_1W__West_Entry_1 => rules::explain_can_damage(ctx, world, edict),
+            ExitId::Antarctica__West__Shed_Entry__ex__Helipad_1 => rules::explain_can_damage(ctx, world, edict),
+            ExitId::Ebih__Base_Camp__East_11__ex__Top_Platform_1 => rules::explain_platform_and_hook_and_hover(ctx, world, edict),
+            ExitId::Ebih__Base_Camp__Left_Platform__ex__Top_Platform_1 => rules::explain_hover_and_hook(ctx, world, edict),
+            ExitId::Ebih__Base_Camp__Left_Platform_Moved__ex__Top_Platform_1 => rules::explain_grab(ctx, world, edict),
+            ExitId::Ebih__Base_Camp__Left_Platform_Moved__ex__Top_Platform_2 => rules::explain_hook(ctx, world, edict),
+            ExitId::Ebih__Base_Camp__Save_Point__ex__Top_Platform_1 => rules::explain_mist2(ctx, world, edict),
+            ExitId::Ebih__Base_Camp__Top_Platform__ex__Left_Platform_1 => rules::explain_ebih__base_camp__top_platform__ex__left_platform_1__req(ctx, world, edict),
+            ExitId::Ebih__Base_Camp__Top_Platform__ex__Left_Platform_Moved_1 => rules::explain_ebih__base_camp__top_platform__ex__left_platform_moved_1__req(ctx, world, edict),
+            ExitId::Ebih__Base_Camp__West_11__ex__Left_Platform_1 => rules::explain_ebih__base_camp__west_11__ex__left_platform_1__req(ctx, world, edict),
+            ExitId::Ebih__Base_Camp__West_11__ex__Left_Platform_2 => rules::explain_ebih__base_camp__west_11__ex__left_platform_2__req(ctx, world, edict),
+            ExitId::Ebih__Boss_Room__High_Platform__ex__East_4_1 => rules::explain_hover_and_hook(ctx, world, edict),
+            ExitId::Ebih__Boss_Room__Lower_Ledge__ex__Upper_Tree_1 => rules::explain_hover_and_hook(ctx, world, edict),
+            ExitId::Ebih__Boss_Room__Lower_Tree__ex__Lower_Ledge_1 => rules::explain_grab(ctx, world, edict),
+            ExitId::Ebih__Boss_Room__Lower_Tree__ex__Lower_Ledge_2 => rules::explain_hook(ctx, world, edict),
+            ExitId::Ebih__By_Garage__Crawlspace__ex__Crawlspace_Opening_1 => rules::explain_mode_eq_drone(ctx, world, edict),
+            ExitId::Ebih__By_Garage__Crawlspace_Opening__ex__Crawlspace_1 => rules::explain_mode_eq_drone(ctx, world, edict),
+            ExitId::Ebih__By_Garage__East_Platform__ex__Crawlspace_Opening_1 => rules::explain_grab(ctx, world, edict),
+            ExitId::Ebih__By_Garage__East_Platform__ex__Crawlspace_Opening_2 => rules::explain_hook(ctx, world, edict),
+            ExitId::Ebih__By_Garage__East_Platform__ex__Outcropping_1 => rules::explain_grab(ctx, world, edict),
+            ExitId::Ebih__By_Garage__East_Platform__ex__Outcropping_2 => rules::explain_hook(ctx, world, edict),
+            ExitId::Ebih__By_Garage__Lower_Platform__ex__East_Bush_1 => rules::explain_grab_or_climb(ctx, world, edict),
+            ExitId::Ebih__By_Garage__Lower_Platform__ex__East_Bush_2 => rules::explain_hook(ctx, world, edict),
+            ExitId::Ebih__By_Garage__Lower_Platform__ex__West_Bush_1 => rules::explain_grab_or_climb(ctx, world, edict),
+            ExitId::Ebih__By_Garage__Lower_Platform__ex__West_Bush_2 => rules::explain_hook(ctx, world, edict),
+            ExitId::Ebih__Drone_Room__East_4__ex__Grid_25_2_6__West_4_1 => rules::explain_mode_eq_drone(ctx, world, edict),
+            ExitId::Ebih__Drone_Room__Item__Urn_Fast_Travel => rules::explain_fast_travel(ctx, world, edict),
+            ExitId::Ebih__Drone_Room__Middle_Platform__ex__Portal_Exit_1 => rules::explain_grab(ctx, world, edict),
+            ExitId::Ebih__Drone_Room__Middle_Platform__Urn_Quick_Grab => rules::explain_boomerang2(ctx, world, edict),
+            ExitId::Ebih__Drone_Room__Pit_Left__ex__Middle_Platform_1 => rules::explain_climb(ctx, world, edict),
+            ExitId::Ebih__Drone_Room__Pit_Left__ex__Middle_Platform_2 => rules::explain_hook(ctx, world, edict),
+            ExitId::Ebih__Drone_Room__Pit_Left__ex__West_6_1 => rules::explain_climb(ctx, world, edict),
+            ExitId::Ebih__Drone_Room__Pit_Left__ex__West_6_2 => rules::explain_hook(ctx, world, edict),
+            ExitId::Ebih__Drone_Room__Portal__ex__Portal_Exit_1 => rules::explain_mode_eq_drone(ctx, world, edict),
+            ExitId::Ebih__Drone_Room__Portal_Exit__ex__Moving_Platform_1 => rules::explain_ebih__drone_room__portal_exit__ex__moving_platform_1__req(ctx, world, edict),
+            ExitId::Ebih__Drone_Room__Portal_Exit__ex__Moving_Platform_2 => rules::explain_ebih__drone_room__portal_exit__ex__moving_platform_2__req(ctx, world, edict),
+            ExitId::Ebih__Ebih_East__Dispenser__ex__Lower_Moving_Platform_1 => rules::explain_ebih__ebih_east__dispenser__ex__lower_moving_platform_1__req(ctx, world, edict),
+            ExitId::Ebih__Ebih_East__Dispenser__ex__Lower_Moving_Platform_2 => rules::explain_ebih__ebih_east__dispenser__ex__lower_moving_platform_2__req(ctx, world, edict),
+            ExitId::Ebih__Ebih_East__East_9__ex__East_Hill_1 => rules::explain_grab_or_climb(ctx, world, edict),
+            ExitId::Ebih__Ebih_East__Ledge_End__ex__East_Ledge_1 => rules::explain_hook(ctx, world, edict),
+            ExitId::Ebih__Ebih_East__Moving_Platform__ex__East_Ledge_1 => rules::explain_hover(ctx, world, edict),
+            ExitId::Ebih__Ebih_West__Above_Door__ex__Below_Door_1 => rules::explain_ebih__ebih_west__above_door__ex__below_door_1__req(ctx, world, edict),
+            ExitId::Ebih__Ebih_West__Above_Door__ex__Refill_Station_1 => rules::explain_ebih__ebih_west__above_door__ex__refill_station_1__req(ctx, world, edict),
+            ExitId::Ebih__Ebih_West__Above_Door__ex__Small_Gap_1 => rules::explain_ebih__ebih_west__above_door__ex__small_gap_1__req(ctx, world, edict),
+            ExitId::Ebih__Ebih_West__Alcove_Entrance__ex__Above_Alcove_1 => rules::explain_grab(ctx, world, edict),
+            ExitId::Ebih__Ebih_West__Alcove_Entrance__ex__Above_Alcove_2 => rules::explain_hook(ctx, world, edict),
+            ExitId::Ebih__Ebih_West__Below_Door__ex__Above_Door_1 => rules::explain_ebih__ebih_west__below_door__ex__above_door_1__req(ctx, world, edict),
+            ExitId::Ebih__Ebih_West__Below_Door__ex__Refill_Station_1 => rules::explain_ebih__ebih_west__below_door__ex__refill_station_1__req(ctx, world, edict),
+            ExitId::Ebih__Ebih_West__Block_Left__ex__Alcove_Entrance_1 => rules::explain_grab(ctx, world, edict),
+            ExitId::Ebih__Ebih_West__Block_Left__ex__Alcove_Entrance_2 => rules::explain_hook(ctx, world, edict),
+            ExitId::Ebih__Ebih_West__Block_Left__ex__Block_Right_1 => rules::explain_ebih_west_block(ctx, world, edict),
+            ExitId::Ebih__Ebih_West__Block_Left__ex__Mid_Save_1 => rules::explain_grab(ctx, world, edict),
+            ExitId::Ebih__Ebih_West__Block_Left__ex__Mid_Save_2 => rules::explain_hook(ctx, world, edict),
+            ExitId::Ebih__Ebih_West__Block_Right__ex__Block_Left_1 => rules::explain_ebih_west_block(ctx, world, edict),
+            ExitId::Ebih__Ebih_West__High_Platform__ex__High_Ledge_1 => rules::explain_grab(ctx, world, edict),
+            ExitId::Ebih__Ebih_West__High_Platform__ex__High_Ledge_2 => rules::explain_hook(ctx, world, edict),
+            ExitId::Ebih__Ebih_West__Left_of_Gap__ex__Small_Gap_1 => rules::explain_mode_eq_drone(ctx, world, edict),
+            ExitId::Ebih__Ebih_West__Lower_Hill__ex__Left_of_Gap_1 => rules::explain_hook(ctx, world, edict),
+            ExitId::Ebih__Ebih_West__Lower_Platform__ex__Lower_Cliff_1 => rules::explain_grab(ctx, world, edict),
+            ExitId::Ebih__Ebih_West__Middle_Middle__ex__Above_Chute_1 => rules::explain_grab_or_climb(ctx, world, edict),
+            ExitId::Ebih__Ebih_West__Middle_Middle__ex__Above_Chute_2 => rules::explain_hook(ctx, world, edict),
+            ExitId::Ebih__Ebih_West__Middle_Middle__ex__East_7_1 => rules::explain_grab_or_climb(ctx, world, edict),
+            ExitId::Ebih__Ebih_West__Middle_Middle__ex__East_7_2 => rules::explain_hook(ctx, world, edict),
+            ExitId::Ebih__Ebih_West__Small_Gap__ex__Left_of_Gap_1 => rules::explain_mode_eq_drone(ctx, world, edict),
+            ExitId::Ebih__Ebih_West__West_12__ex__West_Fork_1 => rules::explain_climb(ctx, world, edict),
+            ExitId::Ebih__Ebih_West__West_9__ex__Giguna_Pillar_1 => rules::explain_grab_or_climb(ctx, world, edict),
+            ExitId::Ebih__Grid_25_10_12__Below_Bush__ex__Bush_1 => rules::explain_grab(ctx, world, edict),
+            ExitId::Ebih__Grid_25_10_12__Bush__ex__Mid_Ledge_1 => rules::explain_grab(ctx, world, edict),
+            ExitId::Ebih__Grid_25_10_12__Door__ex__Door_Left_1 => rules::explain_ebih__grid_25_10_12__door__ex__door_left_1__req(ctx, world, edict),
+            ExitId::Ebih__Grid_25_10_12__Door__ex__East_11_1 => rules::explain_ebih__grid_25_10_12__door__ex__east_11_1__req(ctx, world, edict),
+            ExitId::Ebih__Grid_25_10_12__Door_Left__ex__Door_1 => rules::explain_ebih__grid_25_10_12__door_left__ex__door_1__req(ctx, world, edict),
+            ExitId::Ebih__Grid_25_10_12__East_11__ex__Door_1 => rules::explain_ebih__grid_25_10_12__east_11__ex__door_1__req(ctx, world, edict),
+            ExitId::Ebih__Grid_25_10_12__Hidden_Bush__ex__East_10_1 => rules::explain_grab(ctx, world, edict),
+            ExitId::Ebih__Grid_25_10_12__Hidden_Bush__ex__East_10_2 => rules::explain_hook(ctx, world, edict),
+            ExitId::Ebih__Grid_25_10_12__Mid_Ledge__ex__West_11_1 => rules::explain_grab(ctx, world, edict),
+            ExitId::Ebih__Grid_25_10_12__Mid_Ledge__ex__West_11_2 => rules::explain_hook(ctx, world, edict),
+            ExitId::Ebih__Grid_25_10_12__Top_Platform__ex__West_10_1 => rules::explain_grab(ctx, world, edict),
+            ExitId::Ebih__Grid_25_2_6__West_4__ex__Drone_Room__East_4_1 => rules::explain_mode_eq_drone(ctx, world, edict),
+            ExitId::Ebih__Grid_25_2_6__West_4__ex__Pit_1 => rules::explain_mode_eq_drone(ctx, world, edict),
+            ExitId::Ebih__Grid_26_10_11__Ledge__ex__Upper_Platform_1 => rules::explain_hover(ctx, world, edict),
+            ExitId::Ebih__Grid_26_10_11__Middle_Bottom__ex__Middle_Platform_1 => rules::explain_hover(ctx, world, edict),
+            ExitId::Ebih__Grid_26_10_11__Middle_Platform__ex__West_10_1 => rules::explain_grab(ctx, world, edict),
+            ExitId::Ebih__Grid_26_10_11__Middle_Platform__ex__West_10_2 => rules::explain_hook(ctx, world, edict),
+            ExitId::Ebih__Grid_26_10_11__Under_Ledge__ex__Ledge_1 => rules::explain_grab(ctx, world, edict),
+            ExitId::Ebih__Grid_26_10_11__Under_Ledge__ex__Ledge_2 => rules::explain_hook(ctx, world, edict),
+            ExitId::Ebih__Grid_26_10_11__Upper_Platform__ex__Cliff_1 => rules::explain_grab(ctx, world, edict),
+            ExitId::Ebih__Grid_26_10_11__Upper_Platform__ex__Cliff_2 => rules::explain_hook(ctx, world, edict),
+            ExitId::Ebih__Grid_26_10_11__Upper_Platform__ex__West_10_1 => rules::explain_grab(ctx, world, edict),
+            ExitId::Ebih__Grid_26_10_11__Upper_Platform__ex__West_10_2 => rules::explain_hook(ctx, world, edict),
+            ExitId::Ebih__Observation_Tower_Room__East_11__ex__Cliff_1 => rules::explain_grab_or_climb(ctx, world, edict),
+            ExitId::Ebih__Observation_Tower_Room__East_11__ex__Cliff_2 => rules::explain_hook(ctx, world, edict),
+            ExitId::Ebih__Observation_Tower_Room__Tower_Top__ex__West_9_1 => rules::explain_grab_or_climb(ctx, world, edict),
+            ExitId::Ebih__Observation_Tower_Room__Tower_Top__ex__West_9_2 => rules::explain_hover(ctx, world, edict),
+            ExitId::Ebih__Vertical_Interchange__Below_Door__ex__Blocked_Refill_Station_1 => rules::explain_ebih_interchange_gate_and_ebih_interchange_block_and_grab(ctx, world, edict),
+            ExitId::Ebih__Vertical_Interchange__Below_Door__ex__Blocked_Refill_Station_2 => rules::explain_ebih_interchange_gate_and_ebih_interchange_block_and_hook(ctx, world, edict),
+            ExitId::Ebih__Vertical_Interchange__Below_Door__ex__Refill_Station_1 => rules::explain_ebih_interchange_gate_and_not_ebih_interchange_block_and_grab(ctx, world, edict),
+            ExitId::Ebih__Vertical_Interchange__Below_Door__ex__Refill_Station_2 => rules::explain_ebih_interchange_gate_and_not_ebih_interchange_block_and_hook(ctx, world, edict),
+            ExitId::Ebih__Vertical_Interchange__Blocked_Refill_Station__ex__Below_Door_1 => rules::explain_ebih_interchange_gate(ctx, world, edict),
+            ExitId::Ebih__Vertical_Interchange__Blocked_Refill_Station__ex__Cliff_by_Refill_1 => rules::explain_grab(ctx, world, edict),
+            ExitId::Ebih__Vertical_Interchange__Cliff_by_Refill__ex__Blocked_Refill_Station_1 => rules::explain_ebih_interchange_block(ctx, world, edict),
+            ExitId::Ebih__Vertical_Interchange__Cliff_by_Refill__ex__Middle_Drop_1 => rules::explain_grab_or_climb(ctx, world, edict),
+            ExitId::Ebih__Vertical_Interchange__Cliff_by_Refill__ex__Refill_Station_1 => rules::explain_not_ebih_interchange_block(ctx, world, edict),
+            ExitId::Ebih__Vertical_Interchange__Cubby_Exit__ex__Below_Door_1 => rules::explain_ebih_interchange_gate(ctx, world, edict),
+            ExitId::Ebih__Vertical_Interchange__Cubby_Exit__ex__Blocked_Refill_Station_1 => rules::explain_ebih_interchange_block(ctx, world, edict),
+            ExitId::Ebih__Vertical_Interchange__Door__ex__Door_East_1 => rules::explain_ebih__vertical_interchange__door__ex__door_east_1__req(ctx, world, edict),
+            ExitId::Ebih__Vertical_Interchange__Door__ex__Door_West_1 => rules::explain_ebih__vertical_interchange__door__ex__door_west_1__req(ctx, world, edict),
+            ExitId::Ebih__Vertical_Interchange__Door_East__ex__Door_1 => rules::explain_ebih__vertical_interchange__door_east__ex__door_1__req(ctx, world, edict),
+            ExitId::Ebih__Vertical_Interchange__Door_West__ex__Door_1 => rules::explain_ebih__vertical_interchange__door_west__ex__door_1__req(ctx, world, edict),
+            ExitId::Ebih__Vertical_Interchange__East_Tunnel__ex__Below_Door_1 => rules::explain_ebih_interchange_gate(ctx, world, edict),
+            ExitId::Ebih__Vertical_Interchange__East_Tunnel__ex__Block_Cubby_1 => rules::explain_grab(ctx, world, edict),
+            ExitId::Ebih__Vertical_Interchange__East_Tunnel__ex__Blocked_Refill_Station_1 => rules::explain_ebih_interchange_block(ctx, world, edict),
+            ExitId::Ebih__Vertical_Interchange__East_Tunnel__ex__Refill_Station_1 => rules::explain_not_ebih_interchange_block(ctx, world, edict),
+            ExitId::Ebih__Vertical_Interchange__Middle_Descent__ex__East_13_1 => rules::explain_grab_or_climb(ctx, world, edict),
+            ExitId::Ebih__Vertical_Interchange__Middle_Descent__ex__Passage_East_1 => rules::explain_grab_or_climb(ctx, world, edict),
+            ExitId::Ebih__Vertical_Interchange__Passage_East__ex__Door_West_1 => rules::explain_climb(ctx, world, edict),
+            ExitId::Ebih__Vertical_Interchange__Passage_East__ex__Passage_West_1 => rules::explain_mode_eq_drone(ctx, world, edict),
+            ExitId::Ebih__Vertical_Interchange__Passage_West__ex__Door_West_1 => rules::explain_grab_or_climb(ctx, world, edict),
+            ExitId::Ebih__Vertical_Interchange__Passage_West__ex__Passage_East_1 => rules::explain_mode_eq_drone(ctx, world, edict),
+            ExitId::Ebih__Vertical_Interchange__Refill_Station__ex__Below_Door_1 => rules::explain_ebih_interchange_gate(ctx, world, edict),
+            ExitId::Ebih__Vertical_Interchange__Refill_Station__ex__Cliff_by_Refill_1 => rules::explain_climb(ctx, world, edict),
+            ExitId::Ebih__Vertical_Interchange__South__ex__Below_Door_1 => rules::explain_hook(ctx, world, edict),
+            ExitId::Ebih__Vertical_Interchange__Switch__ex__Below_Door_1 => rules::explain_hook(ctx, world, edict),
+            ExitId::Ebih__Waterfall__Alcove__ex__Alcove_Left_1 => rules::explain_mode_eq_drone_and_ebih_waterfall_block_left(ctx, world, edict),
+            ExitId::Ebih__Waterfall__Alcove__ex__Alcove_Left_2 => rules::explain_hook_and_not_ebih_waterfall_block_left(ctx, world, edict),
+            ExitId::Ebih__Waterfall__Alcove__ex__Alcove_Right_1 => rules::explain_mode_eq_drone_and_ebih_waterfall_block_right(ctx, world, edict),
+            ExitId::Ebih__Waterfall__Alcove__ex__Alcove_Right_2 => rules::explain_hook_and_not_ebih_waterfall_block_right(ctx, world, edict),
+            ExitId::Ebih__Waterfall__Alcove_Left__ex__Alcove_1 => rules::explain_mode_eq_drone_and_ebih_waterfall_block_left(ctx, world, edict),
+            ExitId::Ebih__Waterfall__Alcove_Left__ex__Alcove_2 => rules::explain_block_clip_and_not_ebih_waterfall_block_left(ctx, world, edict),
+            ExitId::Ebih__Waterfall__Alcove_Left__ex__Waterfall_Center_Left_1 => rules::explain_grab(ctx, world, edict),
+            ExitId::Ebih__Waterfall__Alcove_Left__ex__Waterfall_Center_Left_2 => rules::explain_hook(ctx, world, edict),
+            ExitId::Ebih__Waterfall__Alcove_Right__ex__Alcove_1 => rules::explain_mode_eq_drone_and_ebih_waterfall_block_right(ctx, world, edict),
+            ExitId::Ebih__Waterfall__Alcove_Right__ex__Alcove_2 => rules::explain_block_clip_and_not_ebih_waterfall_block_right(ctx, world, edict),
+            ExitId::Ebih__Waterfall__Alcove_Right__ex__Waterfall_Center_Right_1 => rules::explain_hook(ctx, world, edict),
+            ExitId::Ebih__Waterfall__Below_Left_Switch__ex__Ledge_Below_Hole_1 => rules::explain_mode_eq_drone(ctx, world, edict),
+            ExitId::Ebih__Waterfall__Below_Tree__ex__Big_Tree_1 => rules::explain_grab(ctx, world, edict),
+            ExitId::Ebih__Waterfall__Below_Tree__ex__Big_Tree_2 => rules::explain_hook(ctx, world, edict),
+            ExitId::Ebih__Waterfall__Ledge_Below_Hole__ex__Below_Left_Switch_1 => rules::explain_mode_eq_drone(ctx, world, edict),
+            ExitId::Ebih__Waterfall__Ledge_Below_Hole__ex__Middle_West_Tree_1 => rules::explain_grab(ctx, world, edict),
+            ExitId::Ebih__Waterfall__Ledge_Below_Hole__ex__Middle_West_Tree_2 => rules::explain_hook(ctx, world, edict),
+            ExitId::Ebih__Waterfall__Ledge_Below_Hole__ex__West_Door_Right_1 => rules::explain_hook(ctx, world, edict),
+            ExitId::Ebih__Waterfall__Lower_West_Tree__ex__West_Lower_Path_1 => rules::explain_grab(ctx, world, edict),
+            ExitId::Ebih__Waterfall__Middle_West_Tree__ex__West_Main_Path_1 => rules::explain_grab(ctx, world, edict),
+            ExitId::Ebih__Waterfall__Middle_West_Tree__ex__West_Main_Path_2 => rules::explain_hook(ctx, world, edict),
+            ExitId::Ebih__Waterfall__Near_East_Tree__ex__East_Ledge_1 => rules::explain_hover(ctx, world, edict),
+            ExitId::Ebih__Waterfall__Platform__ex__Big_Tree_1 => rules::explain_grab(ctx, world, edict),
+            ExitId::Ebih__Waterfall__Under_Waterfall__ex__Waterfall_Left_1 => rules::explain_grab(ctx, world, edict),
+            ExitId::Ebih__Waterfall__Wall_Left__Break_Through_Wall => rules::explain_not_ebih_waterfall_wall_and_nanite_mist_and_mist_upgrade(ctx, world, edict),
+            ExitId::Ebih__Waterfall__Wall_Left__ex__Wall_Right_1 => rules::explain_ebih_waterfall_wall(ctx, world, edict),
+            ExitId::Ebih__Waterfall__Wall_Right__Break_Through_Wall => rules::explain_not_ebih_waterfall_wall_and_nanite_mist_and_mist_upgrade(ctx, world, edict),
+            ExitId::Ebih__Waterfall__Wall_Right__ex__Lower_West_Tree_1 => rules::explain_nanite_mist_and_mist_upgrade(ctx, world, edict),
+            ExitId::Ebih__Waterfall__Wall_Right__ex__Wall_Left_1 => rules::explain_ebih_waterfall_wall(ctx, world, edict),
+            ExitId::Ebih__Waterfall__West_Climb__ex__Ledge_Below_Hole_1 => rules::explain_grab(ctx, world, edict),
+            ExitId::Ebih__Waterfall__West_Door__ex__West_Door_Left_1 => rules::explain_ebih__waterfall__west_door__ex__west_door_left_1__req(ctx, world, edict),
+            ExitId::Ebih__Waterfall__West_Door__ex__West_Door_Right_1 => rules::explain_ebih__waterfall__west_door__ex__west_door_right_1__req(ctx, world, edict),
+            ExitId::Ebih__Waterfall__West_Door_Left__ex__West_Door_1 => rules::explain_ebih__waterfall__west_door_left__ex__west_door_1__req(ctx, world, edict),
+            ExitId::Ebih__Waterfall__West_Door_Right__ex__West_Door_1 => rules::explain_ebih__waterfall__west_door_right__ex__west_door_1__req(ctx, world, edict),
+            ExitId::Giguna__Antechamber__Bottom__ex__Left_Wall_Lower_1 => rules::explain_hook(ctx, world, edict),
+            ExitId::Giguna__Antechamber__Left_Wall_Lower__ex__Left_Wall_Mid_1 => rules::explain_grab_and_climb(ctx, world, edict),
+            ExitId::Giguna__Antechamber__Left_Wall_Lower__ex__Left_Wall_Mid_2 => rules::explain_hook(ctx, world, edict),
+            ExitId::Giguna__Antechamber__Left_Wall_Mid__ex__West_15_1 => rules::explain_grab_and_climb(ctx, world, edict),
+            ExitId::Giguna__Antechamber__Left_Wall_Mid__ex__West_15_2 => rules::explain_hook(ctx, world, edict),
+            ExitId::Giguna__Antechamber__Middle_Bricks_Left__ex__West_15_1 => rules::explain_hook(ctx, world, edict),
+            ExitId::Giguna__Antechamber__Middle_Bricks_Right__ex__Statue_Head_1 => rules::explain_hover(ctx, world, edict),
+            ExitId::Giguna__Antechamber__Middle_Bricks_Right__ex__Statue_Head_2 => rules::explain_hook(ctx, world, edict),
+            ExitId::Giguna__Antechamber__Small_Bricks__ex__Middle_Bricks_Right_1 => rules::explain_hook(ctx, world, edict),
+            ExitId::Giguna__Antechamber__Small_Bricks__ex__Statue_Head_1 => rules::explain_hook(ctx, world, edict),
+            ExitId::Giguna__Antechamber__Statue_Head__ex__Middle_Bricks_Right_1 => rules::explain_hover(ctx, world, edict),
+            ExitId::Giguna__Antechamber__Statue_Head__ex__Middle_Bricks_Right_2 => rules::explain_hook(ctx, world, edict),
+            ExitId::Giguna__Antechamber__Statues_Ledge__ex__Small_Bricks_1 => rules::explain_hook(ctx, world, edict),
+            ExitId::Giguna__Antechamber__West_15__ex__Small_Bricks_1 => rules::explain_hook(ctx, world, edict),
+            ExitId::Giguna__Carnelian__Door__ex__Switch_1 => rules::explain_giguna__carnelian__door__ex__switch_1__req(ctx, world, edict),
+            ExitId::Giguna__Carnelian__Door__ex__Vault_1 => rules::explain_giguna__carnelian__door__ex__vault_1__req(ctx, world, edict),
+            ExitId::Giguna__Carnelian__Lower_Susar__ex__Rock_1 => rules::explain_giguna__carnelian__lower_susar__ex__rock_1__req(ctx, world, edict),
+            ExitId::Giguna__Carnelian__Lower_Susar__ex__West_Ledge_1 => rules::explain_giguna__carnelian__lower_susar__ex__west_ledge_1__req(ctx, world, edict),
+            ExitId::Giguna__Carnelian__Lower_Susar__ex__West_Ledge_2 => rules::explain_giguna__carnelian__lower_susar__ex__west_ledge_2__req(ctx, world, edict),
+            ExitId::Giguna__Carnelian__Middle_Platforms__ex__East_Cliff_1 => rules::explain_grab(ctx, world, edict),
+            ExitId::Giguna__Carnelian__Middle_Platforms__ex__Upper_Susar_1 => rules::explain_climb(ctx, world, edict),
+            ExitId::Giguna__Carnelian__Switch__ex__Door_1 => rules::explain_giguna__carnelian__switch__ex__door_1__req(ctx, world, edict),
+            ExitId::Giguna__Carnelian__Upper_Susar__ex__East_Cliff_1 => rules::explain_giguna__carnelian__upper_susar__ex__east_cliff_1__req(ctx, world, edict),
+            ExitId::Giguna__Carnelian__Upper_Susar__ex__Middle_Platforms_1 => rules::explain_giguna__carnelian__upper_susar__ex__middle_platforms_1__req(ctx, world, edict),
+            ExitId::Giguna__Carnelian__Upper_Susar__ex__Upper_Path_1 => rules::explain_giguna__carnelian__upper_susar__ex__upper_path_1__req(ctx, world, edict),
+            ExitId::Giguna__Carnelian__Vault__ex__Door_1 => rules::explain_giguna__carnelian__vault__ex__door_1__req(ctx, world, edict),
+            ExitId::Giguna__Carnelian__West_Ledge__ex__Upper_Path_1 => rules::explain_hook(ctx, world, edict),
+            ExitId::Giguna__Carnelian__West_Ledge__ex__West_10_1 => rules::explain_grab(ctx, world, edict),
+            ExitId::Giguna__Carnelian__West_Ledge__ex__West_10_2 => rules::explain_hook(ctx, world, edict),
+            ExitId::Giguna__Clouds__Platform_Stop__ex__flipside_1 => rules::explain_giguna__clouds__platform_stop__ex__flipside_1__req(ctx, world, edict),
+            ExitId::Giguna__Dual_Path__Base_of_Wall__ex__Wall_Secret_1 => rules::explain_mode_eq_drone_and_giguna_dual_path_wall(ctx, world, edict),
+            ExitId::Giguna__Dual_Path__Base_of_Wall__ex__Wall_Top_1 => rules::explain_grab_and_climb(ctx, world, edict),
+            ExitId::Giguna__Dual_Path__Base_of_Wall__ex__Wall_Top_2 => rules::explain_hook(ctx, world, edict),
+            ExitId::Giguna__Dual_Path__Base_of_Wall__Mist_into_Wall => rules::explain_mode_eq_drone_and_mist_upgrade(ctx, world, edict),
+            ExitId::Giguna__Dual_Path__East_Gate__ex__East_Gate_NW_1 => rules::explain_giguna_dual_path_switch_and___grab_or_climb(ctx, world, edict),
+            ExitId::Giguna__Dual_Path__East_Gate__ex__East_Gate_NW_2 => rules::explain_giguna_dual_path_switch_and_hook(ctx, world, edict),
+            ExitId::Giguna__Dual_Path__East_Gate_NE__ex__East_Gate_1 => rules::explain_giguna_dual_path_switch(ctx, world, edict),
+            ExitId::Giguna__Dual_Path__East_Gate_NW__ex__East_Gate_NE_1 => rules::explain_hook(ctx, world, edict),
+            ExitId::Giguna__Dual_Path__In_the_Grass__ex__Wall_Top_1 => rules::explain_grab_and_climb(ctx, world, edict),
+            ExitId::Giguna__Dual_Path__In_the_Grass__ex__Wall_Top_2 => rules::explain_hook(ctx, world, edict),
+            ExitId::Giguna__Dual_Path__Midway__ex__Midway_Plateau_1 => rules::explain_grab_or_climb(ctx, world, edict),
+            ExitId::Giguna__Dual_Path__Midway__ex__Midway_Plateau_2 => rules::explain_hook(ctx, world, edict),
+            ExitId::Giguna__Dual_Path__Wall_Secret__ex__Base_of_Wall_1 => rules::explain_mode_eq_drone(ctx, world, edict),
+            ExitId::Giguna__Dual_Path__West_18__ex__West_Gate_1 => rules::explain_grab(ctx, world, edict),
+            ExitId::Giguna__Dual_Path__West_18__ex__West_Gate_2 => rules::explain_hook(ctx, world, edict),
+            ExitId::Giguna__Dual_Path__West_Gate__ex__West_Gate_NE_1 => rules::explain_giguna_dual_path_switch_and_climb(ctx, world, edict),
+            ExitId::Giguna__Dual_Path__West_Gate__ex__West_Gate_NE_2 => rules::explain_giguna_dual_path_switch_and_hook(ctx, world, edict),
+            ExitId::Giguna__Dual_Path__West_Gate__ex__West_Gate_NW_1 => rules::explain_giguna_dual_path_switch_and_climb(ctx, world, edict),
+            ExitId::Giguna__Dual_Path__West_Gate__ex__West_Gate_NW_2 => rules::explain_giguna_dual_path_switch_and_hook(ctx, world, edict),
+            ExitId::Giguna__Dual_Path__West_Gate_NE__ex__West_Gate_1 => rules::explain_giguna_dual_path_switch(ctx, world, edict),
+            ExitId::Giguna__Dual_Path__West_Gate_NW__ex__West_Gate_1 => rules::explain_giguna_dual_path_switch(ctx, world, edict),
+            ExitId::Giguna__East_Caverns__Arc_Ledge__ex__Hidden_Passage_West_1 => rules::explain_giguna__east_caverns__arc_ledge__ex__hidden_passage_west_1__req(ctx, world, edict),
+            ExitId::Giguna__East_Caverns__Arc_Ledge__ex__Statues_Ledge_1 => rules::explain_hook(ctx, world, edict),
+            ExitId::Giguna__East_Caverns__Arc_Passage__ex__Hidden_Passage_West_1 => rules::explain_giguna__east_caverns__arc_passage__ex__hidden_passage_west_1__req(ctx, world, edict),
+            ExitId::Giguna__East_Caverns__Arc_Passage__ex__Hidden_Passage_West_2 => rules::explain_giguna__east_caverns__arc_passage__ex__hidden_passage_west_2__req(ctx, world, edict),
+            ExitId::Giguna__East_Caverns__Carving__ex__East_Side_1 => rules::explain_grab(ctx, world, edict),
+            ExitId::Giguna__East_Caverns__Carving__ex__East_Side_2 => rules::explain_hook(ctx, world, edict),
+            ExitId::Giguna__East_Caverns__Carving__ex__Middle_Rock_1 => rules::explain_grab_and_climb(ctx, world, edict),
+            ExitId::Giguna__East_Caverns__Carving__ex__Middle_Rock_2 => rules::explain_hook(ctx, world, edict),
+            ExitId::Giguna__East_Caverns__East_Grass__ex__East_17_1 => rules::explain_hook(ctx, world, edict),
+            ExitId::Giguna__East_Caverns__East_Side__ex__East_Shaft_1 => rules::explain_hook(ctx, world, edict),
+            ExitId::Giguna__East_Caverns__East_Side__ex__Middle_Rock_1 => rules::explain_hook(ctx, world, edict),
+            ExitId::Giguna__East_Caverns__Hidden_Passage_East__ex__Hidden_Passage_Center_1 => rules::explain_mode_eq_drone(ctx, world, edict),
+            ExitId::Giguna__East_Caverns__Hidden_Passage_West__ex__Hidden_Passage_Center_1 => rules::explain_mode_eq_drone(ctx, world, edict),
+            ExitId::Giguna__East_Caverns__Hidden_Passage_West__ex__Statues_Ledge_1 => rules::explain_hover(ctx, world, edict),
+            ExitId::Giguna__East_Caverns__Hidden_Passage_West__ex__Statues_Ledge_2 => rules::explain_hook(ctx, world, edict),
+            ExitId::Giguna__East_Caverns__Lower_Ledge__ex__Arc_Ledge_1 => rules::explain_grab(ctx, world, edict),
+            ExitId::Giguna__East_Caverns__Lower_Ledge__ex__Arc_Ledge_2 => rules::explain_hook(ctx, world, edict),
+            ExitId::Giguna__East_Caverns__Lower_Susar__ex__East_Grass_1 => rules::explain_giguna__east_caverns__lower_susar__ex__east_grass_1__req(ctx, world, edict),
+            ExitId::Giguna__East_Caverns__Lower_Susar__ex__Under_Lower_Ledge_1 => rules::explain_giguna__east_caverns__lower_susar__ex__under_lower_ledge_1__req(ctx, world, edict),
+            ExitId::Giguna__East_Caverns__Mid_Susar__ex__Middle_Ledge_1 => rules::explain_giguna__east_caverns__mid_susar__ex__middle_ledge_1__req(ctx, world, edict),
+            ExitId::Giguna__East_Caverns__Mid_Susar__ex__Middle_Ledge_2 => rules::explain_giguna__east_caverns__mid_susar__ex__middle_ledge_2__req(ctx, world, edict),
+            ExitId::Giguna__East_Caverns__Mid_Susar__ex__Middle_Rock_1 => rules::explain_giguna__east_caverns__mid_susar__ex__middle_rock_1__req(ctx, world, edict),
+            ExitId::Giguna__East_Caverns__Middle_Ledge__ex__Upper_Floor_Ledge_1 => rules::explain_hook(ctx, world, edict),
+            ExitId::Giguna__East_Caverns__Middle_Ledge__ex__Upper_Floor_Ledge_2 => rules::explain_grab(ctx, world, edict),
+            ExitId::Giguna__East_Caverns__Middle_Ledge__ex__Upper_Passage_West_1 => rules::explain_hook(ctx, world, edict),
+            ExitId::Giguna__East_Caverns__Middle_Rock__ex__Hidden_Passage_East_1 => rules::explain_giguna__east_caverns__middle_rock__ex__hidden_passage_east_1__req(ctx, world, edict),
+            ExitId::Giguna__East_Caverns__Midwest_Ledge__ex__Hidden_Passage_West_1 => rules::explain_giguna__east_caverns__midwest_ledge__ex__hidden_passage_west_1__req(ctx, world, edict),
+            ExitId::Giguna__East_Caverns__Midwest_Ledge__ex__Hidden_Passage_West_2 => rules::explain_giguna__east_caverns__midwest_ledge__ex__hidden_passage_west_2__req(ctx, world, edict),
+            ExitId::Giguna__East_Caverns__Midwest_Ledge__ex__Middle_Ledge_1 => rules::explain_grab(ctx, world, edict),
+            ExitId::Giguna__East_Caverns__Statues_Ledge__ex__Hidden_Passage_West_1 => rules::explain_giguna__east_caverns__statues_ledge__ex__hidden_passage_west_1__req(ctx, world, edict),
+            ExitId::Giguna__East_Caverns__Statues_Ledge__ex__Hidden_Passage_West_2 => rules::explain_giguna__east_caverns__statues_ledge__ex__hidden_passage_west_2__req(ctx, world, edict),
+            ExitId::Giguna__East_Caverns__Statues_Ledge__ex__Midwest_Ledge_1 => rules::explain_grab(ctx, world, edict),
+            ExitId::Giguna__East_Caverns__Statues_Ledge__ex__Midwest_Ledge_2 => rules::explain_hook(ctx, world, edict),
+            ExitId::Giguna__East_Caverns__Switch__ex__Door_1 => rules::explain_giguna__east_caverns__switch__ex__door_1__req(ctx, world, edict),
+            ExitId::Giguna__East_Caverns__Upper_Floor__ex__Upper_Passage_West_1 => rules::explain_hook_and_hover(ctx, world, edict),
+            ExitId::Giguna__East_Caverns__Upper_Floor__ex__West_14_1 => rules::explain_grab(ctx, world, edict),
+            ExitId::Giguna__East_Caverns__Upper_Passage_East__ex__Top_Ledge_1 => rules::explain_grab_and_climb(ctx, world, edict),
+            ExitId::Giguna__East_Caverns__Upper_Passage_East__ex__Top_Ledge_2 => rules::explain_hook(ctx, world, edict),
+            ExitId::Giguna__East_Caverns__Upper_Passage_East__ex__Upper_Passage_West_1 => rules::explain_mode_eq_drone(ctx, world, edict),
+            ExitId::Giguna__East_Caverns__Upper_Passage_West__ex__Upper_Passage_East_1 => rules::explain_mode_eq_drone(ctx, world, edict),
+            ExitId::Giguna__East_Caverns__Upper_Platforms_Right__ex__Upper_Passage_West_1 => rules::explain_hook_and_hover(ctx, world, edict),
+            ExitId::Giguna__East_Caverns__Upper_Susar__ex__Middle_Ledge_1 => rules::explain_giguna__east_caverns__upper_susar__ex__middle_ledge_1__req(ctx, world, edict),
+            ExitId::Giguna__East_Caverns__Upper_Susar__ex__Top_Past_Susar_1 => rules::explain_giguna__east_caverns__upper_susar__ex__top_past_susar_1__req(ctx, world, edict),
+            ExitId::Giguna__East_Caverns__Upper_Susar__ex__Upper_Floor_Ledge_1 => rules::explain_giguna__east_caverns__upper_susar__ex__upper_floor_ledge_1__req(ctx, world, edict),
+            ExitId::Giguna__East_Caverns__Upper_Susar__ex__Upper_Platforms_Right_1 => rules::explain_giguna__east_caverns__upper_susar__ex__upper_platforms_right_1__req(ctx, world, edict),
+            ExitId::Giguna__East_Caverns__Upper_Susar_Jump_from_East__ex__Middle_Ledge_1 => rules::explain_giguna__east_caverns__upper_susar_jump_from_east__ex__middle_ledge_1__req(ctx, world, edict),
+            ExitId::Giguna__East_Caverns__Upper_Susar_Jump_from_East__ex__Midwest_Ledge_1 => rules::explain_giguna__east_caverns__upper_susar_jump_from_east__ex__midwest_ledge_1__req(ctx, world, edict),
+            ExitId::Giguna__East_Caverns__Upper_Susar_Mid_jump__ex__Top_Past_Susar_1 => rules::explain_giguna__east_caverns__upper_susar_mid_jump__ex__top_past_susar_1__req(ctx, world, edict),
+            ExitId::Giguna__East_Caverns__West_16__ex__Door_1 => rules::explain_giguna__east_caverns__west_16__ex__door_1__req(ctx, world, edict),
+            ExitId::Giguna__East_Caverns__West_Grass__ex__Lower_Ledge_1 => rules::explain_hook_and_hover(ctx, world, edict),
+            ExitId::Giguna__Gateway__Block_Left__ex__Block_Lowered_1 => rules::explain_giguna_gateway_block(ctx, world, edict),
+            ExitId::Giguna__Gateway__Block_Lowered__ex__Block_Left_1 => rules::explain_grab_and_giguna_gateway_block(ctx, world, edict),
+            ExitId::Giguna__Gateway__Block_Lowered__ex__Block_Left_2 => rules::explain_hook_and_giguna_gateway_block(ctx, world, edict),
+            ExitId::Giguna__Gateway__Block_Lowered__ex__Block_Right_1 => rules::explain_grab_and_giguna_gateway_block(ctx, world, edict),
+            ExitId::Giguna__Gateway__Block_Lowered__ex__Block_Right_2 => rules::explain_hook_and_giguna_gateway_block(ctx, world, edict),
+            ExitId::Giguna__Gateway__Block_Right__ex__Block_Lowered_1 => rules::explain_giguna_gateway_block(ctx, world, edict),
+            ExitId::Giguna__Gateway__Button__ex__East_19_1 => rules::explain_giguna_gateway_gate(ctx, world, edict),
+            ExitId::Giguna__Gateway__Door__ex__Block_Left_1 => rules::explain_giguna__gateway__door__ex__block_left_1__req(ctx, world, edict),
+            ExitId::Giguna__Gateway__Door__ex__Left_Platform_1 => rules::explain_giguna__gateway__door__ex__left_platform_1__req(ctx, world, edict),
+            ExitId::Giguna__Gateway__Door__ex__Passage_Entry_1 => rules::explain_giguna__gateway__door__ex__passage_entry_1__req(ctx, world, edict),
+            ExitId::Giguna__Gateway__East_19__ex__Button_1 => rules::explain_giguna_gateway_gate(ctx, world, edict),
+            ExitId::Giguna__Gateway__Far_Ledge__ex__Flask_Ledge_1 => rules::explain_hook(ctx, world, edict),
+            ExitId::Giguna__Gateway__Far_Ledge__ex__Flask_Ledge_2 => rules::explain_grab_and_climb(ctx, world, edict),
+            ExitId::Giguna__Gateway__Far_Ledge__ex__Right_Platform_1 => rules::explain_hook(ctx, world, edict),
+            ExitId::Giguna__Gateway__Left_Platform__ex__Block_Lowered_1 => rules::explain_giguna_gateway_block(ctx, world, edict),
+            ExitId::Giguna__Gateway__Passage_Entry__ex__Door_1 => rules::explain_giguna__gateway__passage_entry__ex__door_1__req(ctx, world, edict),
+            ExitId::Giguna__Gateway__Passage_Entry__ex__Passage_Exit_1 => rules::explain_mode_eq_drone(ctx, world, edict),
+            ExitId::Giguna__Gateway__Passage_Exit__ex__Left_Platform_1 => rules::explain_hook(ctx, world, edict),
+            ExitId::Giguna__Gateway__Passage_Exit__ex__Passage_Entry_1 => rules::explain_mode_eq_drone(ctx, world, edict),
+            ExitId::Giguna__Gateway__Refill_Station__ex__Far_Ledge_1 => rules::explain_hook(ctx, world, edict),
+            ExitId::Giguna__Gateway__Right_Platform__ex__Far_Ledge_1 => rules::explain_hover_or_hook(ctx, world, edict),
+            ExitId::Giguna__Giguna_Base__Below_Gate__ex__Kari_1 => rules::explain_giguna__giguna_base__below_gate__ex__kari_1__req(ctx, world, edict),
+            ExitId::Giguna__Giguna_Base__Below_Gate__ex__Kari_2 => rules::explain_giguna__giguna_base__below_gate__ex__kari_2__req(ctx, world, edict),
+            ExitId::Giguna__Giguna_Base__Below_Gate__ex__Middle_Platform_1 => rules::explain_giguna__giguna_base__below_gate__ex__middle_platform_1__req(ctx, world, edict),
+            ExitId::Giguna__Giguna_Base__Below_Gate__ex__Middle_Platform_2 => rules::explain_giguna__giguna_base__below_gate__ex__middle_platform_2__req(ctx, world, edict),
+            ExitId::Giguna__Giguna_Base__Kari__ex__Below_Gate_1 => rules::explain_giguna__giguna_base__kari__ex__below_gate_1__req(ctx, world, edict),
+            ExitId::Giguna__Giguna_Base__Left_Pillar__ex__Right_Pillar_1 => rules::explain_grab(ctx, world, edict),
+            ExitId::Giguna__Giguna_Base__Lower_Fork__ex__Below_Gate_1 => rules::explain_grab(ctx, world, edict),
+            ExitId::Giguna__Giguna_Base__Lower_Fork__ex__Below_Gate_2 => rules::explain_hook(ctx, world, edict),
+            ExitId::Giguna__Giguna_Base__Middle_Platform__ex__Below_Gate_1 => rules::explain_giguna__giguna_base__middle_platform__ex__below_gate_1__req(ctx, world, edict),
+            ExitId::Giguna__Giguna_Base__Middle_Platform__ex__Staircase_Top_1 => rules::explain_hover(ctx, world, edict),
+            ExitId::Giguna__Giguna_Base__Middle_Platform__ex__Stone_Knob_1 => rules::explain_grab(ctx, world, edict),
+            ExitId::Giguna__Giguna_Base__Middle_Platform__ex__Stone_Knob_2 => rules::explain_hook(ctx, world, edict),
+            ExitId::Giguna__Giguna_Base__Right_Pillar__ex__Left_Pillar_1 => rules::explain_grab(ctx, world, edict),
+            ExitId::Giguna__Giguna_Base__Ruin__ex__Left_Pillar_1 => rules::explain_grab_and_climb(ctx, world, edict),
+            ExitId::Giguna__Giguna_Base__Ruin__ex__Right_Pillar_1 => rules::explain_climb(ctx, world, edict),
+            ExitId::Giguna__Giguna_Base__Staircase_Top__ex__Left_Pillar_1 => rules::explain_grab(ctx, world, edict),
+            ExitId::Giguna__Giguna_Base__Staircase_Top__ex__Left_Pillar_2 => rules::explain_hook(ctx, world, edict),
+            ExitId::Giguna__Giguna_Base__Stone_Knob__ex__Upper_Cliff_1 => rules::explain_climb(ctx, world, edict),
+            ExitId::Giguna__Giguna_Base__Stone_Knob__ex__Upper_Cliff_2 => rules::explain_hook(ctx, world, edict),
+            ExitId::Giguna__Giguna_Base__West_15__ex__West_Grate_1 => rules::explain_nanite_mist(ctx, world, edict),
+            ExitId::Giguna__Giguna_Base__West_Grate__ex__West_15_1 => rules::explain_nanite_mist(ctx, world, edict),
+            ExitId::Giguna__Giguna_Northeast__Crow_Eating__ex__Gate_Vent_1 => rules::explain_hover(ctx, world, edict),
+            ExitId::Giguna__Giguna_Northeast__Gate_Button__ex__Gate_Left_1 => rules::explain_giguna_northeast_gate(ctx, world, edict),
+            ExitId::Giguna__Giguna_Northeast__Gate_Left__ex__Gate_Button_1 => rules::explain_giguna_northeast_gate(ctx, world, edict),
+            ExitId::Giguna__Giguna_Northeast__Right_Column__ex__Door_1 => rules::explain_giguna__giguna_northeast__right_column__ex__door_1__req(ctx, world, edict),
+            ExitId::Giguna__Giguna_Northeast__Save_Point__ex__Gate_Vent_1 => rules::explain_hover_and_hook(ctx, world, edict),
+            ExitId::Giguna__Giguna_Northeast__Step__ex__Gate_Vent_1 => rules::explain_hover(ctx, world, edict),
+            ExitId::Giguna__Giguna_Northeast__Step__ex__West_9_1 => rules::explain_climb_or_hook(ctx, world, edict),
+            ExitId::Giguna__Giguna_Northeast__Step__ex__West_9_2 => rules::explain_grab(ctx, world, edict),
+            ExitId::Giguna__Giguna_Northeast__Switch__ex__Door_1 => rules::explain_giguna__giguna_northeast__switch__ex__door_1__req(ctx, world, edict),
+            ExitId::Giguna__Giguna_Northeast__Switch__ex__Right_Column_1 => rules::explain_grab_or_hook(ctx, world, edict),
+            ExitId::Giguna__Giguna_Northeast__Vault__ex__Door_1 => rules::explain_giguna__giguna_northeast__vault__ex__door_1__req(ctx, world, edict),
+            ExitId::Giguna__Giguna_Northeast__Vault__ex__Door_2 => rules::explain_giguna__giguna_northeast__vault__ex__door_2__req(ctx, world, edict),
+            ExitId::Giguna__Giguna_Northeast__West_9__ex__Crow_Eating_1 => rules::explain_hover(ctx, world, edict),
+            ExitId::Giguna__Gubi_Lair__East_15__ex__Center_Platform_1 => rules::explain_hover(ctx, world, edict),
+            ExitId::Giguna__Gubi_Lair__East_Tree__ex__Center_Platform_1 => rules::explain_hover(ctx, world, edict),
+            ExitId::Giguna__Gubi_Lair__East_Tree__ex__East_15_1 => rules::explain_grab(ctx, world, edict),
+            ExitId::Giguna__Gubi_Lair__East_Tree__ex__East_15_2 => rules::explain_hook(ctx, world, edict),
+            ExitId::Giguna__Gubi_Lair__Grass_by_Wall__ex__Center_West_Sapling_1 => rules::explain_grab_and_climb(ctx, world, edict),
+            ExitId::Giguna__Gubi_Lair__Rightmost_Platform__ex__Center_Platform_1 => rules::explain_hover(ctx, world, edict),
+            ExitId::Giguna__Gubi_Lair__Shaft_Bottom__ex__Pedestal_1 => rules::explain_hover_and_hook(ctx, world, edict),
+            ExitId::Giguna__Gubi_Lair__Shaft_Bottom__ex__Pedestal_2 => rules::explain_hook(ctx, world, edict),
+            ExitId::Giguna__Gubi_Lair__Shaft_Bottom__ex__Pedestal_3 => rules::explain_grab_and_climb(ctx, world, edict),
+            ExitId::Giguna__Hard_Rock__Rock_Left__Enter_Rock_as_Mist => rules::explain_nanite_mist_and_mist_upgrade(ctx, world, edict),
+            ExitId::Giguna__Hard_Rock__Rock_Left__ex__Rock_Center_1 => rules::explain_giguna_boulder(ctx, world, edict),
+            ExitId::Giguna__Hard_Rock__Rock_Right__Enter_Rock_as_Mist => rules::explain_nanite_mist_and_mist_upgrade(ctx, world, edict),
+            ExitId::Giguna__Hard_Rock__Rock_Right__ex__Rock_Center_1 => rules::explain_giguna_boulder(ctx, world, edict),
+            ExitId::Giguna__Helipad__Railing__ex__Wall_Top_1 => rules::explain_nanite_mist_and_mist_upgrade(ctx, world, edict),
+            ExitId::Giguna__Helipad__So_Close__ex__Tablet_Ledge_1 => rules::explain_hover(ctx, world, edict),
+            ExitId::Giguna__Helipad__So_Close__ex__Tablet_Ledge_2 => rules::explain_nanite_mist_and_mist_upgrade(ctx, world, edict),
+            ExitId::Giguna__Helipad__Wall_Top__ex__Railing_1 => rules::explain_hover(ctx, world, edict),
+            ExitId::Giguna__Labyrinth_East__Lower_Middle__ex__Middle_Tree_1 => rules::explain_hook(ctx, world, edict),
+            ExitId::Giguna__Labyrinth_East__Lower_Middle__ex__Middle_Tree_2 => rules::explain_grab(ctx, world, edict),
+            ExitId::Giguna__Lamassu__Broken_Pillar__ex__Staircase_Landing_1 => rules::explain_grab(ctx, world, edict),
+            ExitId::Giguna__Lamassu__Lower_Platform_Left__ex__Upper_Platform_Edge_1 => rules::explain_grab(ctx, world, edict),
+            ExitId::Giguna__Lamassu__Lower_Platform_Right__ex__Head_1 => rules::explain_grab_and_climb(ctx, world, edict),
+            ExitId::Giguna__Lamassu__Rear_Gap__ex__East_18_1 => rules::explain_grab(ctx, world, edict),
+            ExitId::Giguna__Ruins_Center__Wall_Bottom__ex__Wall_Top_1 => rules::explain_climb(ctx, world, edict),
+            ExitId::Giguna__Ruins_Center__Wall_Top__ex__Center_Top_1 => rules::explain_grab(ctx, world, edict),
+            ExitId::Giguna__Ruins_East__Bottom_Rock__ex__Cliff_1 => rules::explain_hook(ctx, world, edict),
+            ExitId::Giguna__Ruins_East__Cliff__ex__Ledge_1 => rules::explain_climb(ctx, world, edict),
+            ExitId::Giguna__Ruins_East__Cliff__ex__Ledge_2 => rules::explain_hook(ctx, world, edict),
+            ExitId::Giguna__Ruins_East__Ledge__ex__Pillar_1 => rules::explain_grab_and_climb(ctx, world, edict),
+            ExitId::Giguna__Ruins_East__Ledge__ex__Small_Passage_1 => rules::explain_mode_eq_drone(ctx, world, edict),
+            ExitId::Giguna__Ruins_East__Pillar__ex__Way_Up_High_1 => rules::explain_mist2(ctx, world, edict),
+            ExitId::Giguna__Ruins_East__Small_Passage__ex__Ledge_1 => rules::explain_mode_eq_drone(ctx, world, edict),
+            ExitId::Giguna__Ruins_East__West_7__ex__Pillar_1 => rules::explain_grab_and_climb(ctx, world, edict),
+            ExitId::Giguna__Ruins_Top__East_7__ex__East_Door_1 => rules::explain_giguna__ruins_top__east_7__ex__east_door_1__req(ctx, world, edict),
+            ExitId::Giguna__Ruins_Top__East_Door__ex__East_7_1 => rules::explain_giguna__ruins_top__east_door__ex__east_7_1__req(ctx, world, edict),
+            ExitId::Giguna__Ruins_Top__East_Door__ex__Portal_1 => rules::explain_giguna__ruins_top__east_door__ex__portal_1__req(ctx, world, edict),
+            ExitId::Giguna__Ruins_Top__Entryway__ex__West_Door_1 => rules::explain_giguna__ruins_top__entryway__ex__west_door_1__req(ctx, world, edict),
+            ExitId::Giguna__Ruins_Top__Interior_Ledge__ex__Portal_1 => rules::explain_mode_eq_drone(ctx, world, edict),
+            ExitId::Giguna__Ruins_Top__Interior_Ledge__ex__Upper_Tunnel_1 => rules::explain_grab_or_hook(ctx, world, edict),
+            ExitId::Giguna__Ruins_Top__Portal__ex__East_Door_1 => rules::explain_giguna__ruins_top__portal__ex__east_door_1__req(ctx, world, edict),
+            ExitId::Giguna__Ruins_Top__Portal__ex__Interior_Ledge_1 => rules::explain_hook(ctx, world, edict),
+            ExitId::Giguna__Ruins_Top__Portal_Left__ex__Small_Ledge_1 => rules::explain_grab_or_hook(ctx, world, edict),
+            ExitId::Giguna__Ruins_Top__Rooftop_West__ex__Turret_Balcony_East_1 => rules::explain_grab(ctx, world, edict),
+            ExitId::Giguna__Ruins_Top__Small_Ledge__ex__Interior_Ledge_1 => rules::explain_hook(ctx, world, edict),
+            ExitId::Giguna__Ruins_Top__Switch__ex__Rooftop_West_1 => rules::explain_grab(ctx, world, edict),
+            ExitId::Giguna__Ruins_Top__Switch__ex__Turret_Balcony_East_1 => rules::explain_grab(ctx, world, edict),
+            ExitId::Giguna__Ruins_Top__Turret_Balcony_East__ex__Rooftop_West_1 => rules::explain_grab(ctx, world, edict),
+            ExitId::Giguna__Ruins_Top__West_7__ex__West_Door_1 => rules::explain_giguna__ruins_top__west_7__ex__west_door_1__req(ctx, world, edict),
+            ExitId::Giguna__Ruins_Top__West_7__ex__West_Pillar_1 => rules::explain_grab_or_climb(ctx, world, edict),
+            ExitId::Giguna__Ruins_Top__West_Door__ex__Entryway_1 => rules::explain_giguna__ruins_top__west_door__ex__entryway_1__req(ctx, world, edict),
+            ExitId::Giguna__Ruins_Top__West_Door__ex__West_7_1 => rules::explain_giguna__ruins_top__west_door__ex__west_7_1__req(ctx, world, edict),
+            ExitId::Giguna__Ruins_West__East_7__ex__Upper_Ledge_1 => rules::explain_grab(ctx, world, edict),
+            ExitId::Giguna__Ruins_West__Lower_Ledge__ex__Upper_Ledge_1 => rules::explain_giguna__ruins_west__lower_ledge__ex__upper_ledge_1__req(ctx, world, edict),
+            ExitId::Giguna__Ruins_West__Nook__ex__Lower_Ledge_1 => rules::explain_grab_and_climb(ctx, world, edict),
+            ExitId::Giguna__Wasteland__Bluff_by_Door__ex__Door_Left_1 => rules::explain_grab_and_climb(ctx, world, edict),
+            ExitId::Giguna__Wasteland__Bluff_by_Door__ex__Door_Left_2 => rules::explain_hook(ctx, world, edict),
+            ExitId::Giguna__Wasteland__Center_Plains__ex__Steeper_Hill_1 => rules::explain_grab_or_climb(ctx, world, edict),
+            ExitId::Giguna__Wasteland__Door_Left__ex__Door_Right_1 => rules::explain_ebih_wasteland_door(ctx, world, edict),
+            ExitId::Giguna__Wasteland__Door_Right__ex__Door_Left_1 => rules::explain_ebih_wasteland_door(ctx, world, edict),
+            ExitId::Giguna__Wasteland__East_Ledge__ex__East_12_1 => rules::explain_grab_or_climb(ctx, world, edict),
+            ExitId::Giguna__Wasteland__East_Ledge__ex__East_12_2 => rules::explain_hook(ctx, world, edict),
+            ExitId::Giguna__Wasteland__Lower_Cliff__ex__Middle_Cliff_1 => rules::explain_climb(ctx, world, edict),
+            ExitId::Giguna__Wasteland__Lower_Cliff__ex__Middle_Cliff_2 => rules::explain_grab(ctx, world, edict),
+            ExitId::Giguna__Wasteland__Lower_Path_Right__ex__Lower_Cliff_1 => rules::explain_climb(ctx, world, edict),
+            ExitId::Giguna__Wasteland__Middle_Cliff__ex__Upper_Cliff_1 => rules::explain_hook(ctx, world, edict),
+            ExitId::Giguna__Wasteland__Passage_Cache__Clear_Horizontal_Passage_Manually => rules::explain_mode_eq_drone(ctx, world, edict),
+            ExitId::Giguna__Wasteland__Passage_Cache__ex__Lower_Path_Left_1 => rules::explain_grab(ctx, world, edict),
+            ExitId::Giguna__Wasteland__Passage_Cache__ex__Lower_Path_Left_2 => rules::explain_hook(ctx, world, edict),
+            ExitId::Giguna__Wasteland__Passage_Cache__ex__Passage_East_1 => rules::explain_mode_eq_drone_and_ebih_wasteland_passage_h(ctx, world, edict),
+            ExitId::Giguna__Wasteland__Passage_Cache__Mist_through_Horizontal_Passage => rules::explain_mode_eq_drone_and_mist_upgrade(ctx, world, edict),
+            ExitId::Giguna__Wasteland__Passage_East__Clear_Horizontal_Passage_Manually => rules::explain_mode_eq_drone(ctx, world, edict),
+            ExitId::Giguna__Wasteland__Passage_East__ex__Passage_Cache_1 => rules::explain_mode_eq_drone_and_ebih_wasteland_passage_h(ctx, world, edict),
+            ExitId::Giguna__Wasteland__Passage_East__Mist_through_Horizontal_Passage => rules::explain_mode_eq_drone_and_mist_upgrade(ctx, world, edict),
+            ExitId::Giguna__West_Caverns__East_10__ex__Column_2_Top_1 => rules::explain_hover(ctx, world, edict),
+            ExitId::Giguna__West_Caverns__East_Susar__ex__East_12_1 => rules::explain_giguna__west_caverns__east_susar__ex__east_12_1__req(ctx, world, edict),
+            ExitId::Giguna__West_Caverns__East_Susar__ex__Tunnel_Fork_1 => rules::explain_giguna__west_caverns__east_susar__ex__tunnel_fork_1__req(ctx, world, edict),
+            ExitId::Giguna__West_Caverns__Small_Staircase__ex__East_10_1 => rules::explain_climb(ctx, world, edict),
+            ExitId::Giguna__West_Caverns__Top_Gap_Right__ex__Column_1_Top_Right_1 => rules::explain_hover(ctx, world, edict),
+            ExitId::Giguna__West_Caverns__Tunnel_Bottom__ex__Tunnel_Entrance_1 => rules::explain_grab(ctx, world, edict),
+            ExitId::Giguna__West_Caverns__Tunnel_Bottom__ex__Tunnel_Entrance_2 => rules::explain_hook(ctx, world, edict),
+            ExitId::Giguna__West_Caverns__Tunnel_Fork__ex__Tunnel_Bottom_1 => rules::explain_grab(ctx, world, edict),
+            ExitId::Giguna__West_Caverns__Tunnel_Fork__ex__Tunnel_Entrance_1 => rules::explain_hook(ctx, world, edict),
+            ExitId::Giguna_Breach__Ascent__Bottom__ex__Top_1 => rules::explain_hook(ctx, world, edict),
+            ExitId::Giguna_Breach__Central__East_9__ex__East_Brick_1 => rules::explain_hook(ctx, world, edict),
+            ExitId::Giguna_Breach__Central__East_Brick__ex__Middle_Statue_1 => rules::explain_hook(ctx, world, edict),
+            ExitId::Giguna_Breach__Central__South__ex__Upper_Floating_Brick_1 => rules::explain_hook(ctx, world, edict),
+            ExitId::Giguna_Breach__Central__Upper_Floating_Brick__ex__West_Statue_1 => rules::explain_hook(ctx, world, edict),
+            ExitId::Giguna_Breach__Central__Wall__ex__Upper_Floating_Brick_1 => rules::explain_hook(ctx, world, edict),
+            ExitId::Giguna_Breach__Central__West_9__ex__Wall_1 => rules::explain_hook(ctx, world, edict),
+            ExitId::Giguna_Breach__Fire_Room__First_Fire__ex__West_Plateau_1 => rules::explain_hook(ctx, world, edict),
+            ExitId::Giguna_Breach__Fire_Room__South__ex__Cuesta_1 => rules::explain_hook(ctx, world, edict),
+            ExitId::Giguna_Breach__Fire_Room__West_Plateau__ex__West_10_1 => rules::explain_hook(ctx, world, edict),
+            ExitId::Giguna_Breach__Grid_14_10_11__East_10__ex__High_Ledge_1 => rules::explain_hook(ctx, world, edict),
+            ExitId::Giguna_Breach__Peak__East_6__ex__Upper_East_1 => rules::explain_hook(ctx, world, edict),
+            ExitId::Giguna_Breach__Peak__Portal__ex__Upper_West_1 => rules::explain_hook(ctx, world, edict),
+            ExitId::Giguna_Breach__Pink_Clouds__Normal_Entry__ex__Corner_1 => rules::explain_hover(ctx, world, edict),
+            ExitId::Giguna_Breach__Slingshot__Ravine__ex__Column_1 => rules::explain_hook(ctx, world, edict),
+            ExitId::Giguna_Breach__SW_Save__East_12__ex__Lower_Platform_1 => rules::explain_hook(ctx, world, edict),
+            ExitId::Giguna_Breach__SW_Save__Lower_Platform__ex__Side_Door_1 => rules::explain_hook(ctx, world, edict),
+            ExitId::Giguna_Breach__SW_Save__Save_Point__ex__Lower_Platform_1 => rules::explain_hook(ctx, world, edict),
+            ExitId::Giguna_Breach__SW_Save__Side_Door__ex__West_11_1 => rules::explain_giguna_breach__sw_save__side_door__ex__west_11_1__req(ctx, world, edict),
+            ExitId::Giguna_Breach__SW_Save__West_11__ex__Side_Door_1 => rules::explain_giguna_breach__sw_save__west_11__ex__side_door_1__req(ctx, world, edict),
+            ExitId::Glacier__Apocalypse_Entry__Above_Grate__ex__Below_Grate_1 => rules::explain_mist2(ctx, world, edict),
+            ExitId::Glacier__Apocalypse_Entry__Below_Grate__ex__Grate_Ledge_1 => rules::explain_apocalypse_bomb(ctx, world, edict),
+            ExitId::Glacier__Apocalypse_Entry__Grate_Ledge__Escape => rules::explain_apocalypse_bomb(ctx, world, edict),
+            ExitId::Glacier__Apocalypse_Entry__West_15_Lower__ex__Lowest_Stair_1 => rules::explain_hook(ctx, world, edict),
+            ExitId::Glacier__Boomerang_Antechamber__Upper_East__ex__Boomerang_Room__Upper_West_1 => rules::explain_switch_40_12(ctx, world, edict),
+            ExitId::Glacier__Boomerang_Room__Center_ish__ex__Center_Ledge_1 => rules::explain_grab_and_switch_40_12(ctx, world, edict),
+            ExitId::Glacier__Boomerang_Room__Center_Ledge__ex__Upper_Gate_East_1 => rules::explain_switch_40_12(ctx, world, edict),
+            ExitId::Glacier__Boomerang_Room__Pedestal__ex__Upper_Gate_East_1 => rules::explain_switch_40_12(ctx, world, edict),
+            ExitId::Glacier__Boomerang_Room__Platform__ex__Upper_West_1 => rules::explain_switch_40_12(ctx, world, edict),
+            ExitId::Glacier__Boomerang_Room__Upper_Gate_East__ex__Center_Ledge_1 => rules::explain_switch_40_12(ctx, world, edict),
+            ExitId::Glacier__Boomerang_Room__Upper_West__ex__Platform_1 => rules::explain_switch_40_12(ctx, world, edict),
+            ExitId::Glacier__Grid_32_7_10__Left_Rock__ex__Column_1 => rules::explain_grab_or_climb(ctx, world, edict),
+            ExitId::Glacier__Grid_32_7_10__Left_Rock__ex__Column_2 => rules::explain_hook(ctx, world, edict),
+            ExitId::Glacier__Grid_32_7_10__West_10__ex__Left_Rock_1 => rules::explain_grab_or_climb(ctx, world, edict),
+            ExitId::Glacier__Grid_32_7_10__West_10__ex__Left_Rock_2 => rules::explain_hook(ctx, world, edict),
+            ExitId::Glacier__Lake_Main_Entrance__Ledge__ex__Upper_1 => rules::explain_climb_and_grab(ctx, world, edict),
+            ExitId::Glacier__Lake_Main_Entrance__Ledge__ex__Upper_2 => rules::explain_hook(ctx, world, edict),
+            ExitId::Glacier__Lake_Main_Entrance__Lower_Platform__ex__Ledge_1 => rules::explain_grab(ctx, world, edict),
+            ExitId::Glacier__Lake_Main_Entrance__Lower_Platform__ex__Ledge_2 => rules::explain_hook(ctx, world, edict),
+            ExitId::Glacier__Lake_Main_Entrance__Upper_Platform__ex__Upper_1 => rules::explain_grab(ctx, world, edict),
+            ExitId::Glacier__Lake_Main_Entrance__Upper_Platform__ex__Upper_2 => rules::explain_hook(ctx, world, edict),
+            ExitId::Glacier__Ledge_Grab_Room__Cliff__ex__Lower_Platform_1 => rules::explain_grab(ctx, world, edict),
+            ExitId::Glacier__Ledge_Grab_Room__Cliff_Bottom__ex__Cliff_1 => rules::explain_grab(ctx, world, edict),
+            ExitId::Glacier__Ledge_Grab_Room__Cliff_Bottom__ex__Cliff_2 => rules::explain_hook(ctx, world, edict),
+            ExitId::Glacier__Ledge_Grab_Room__East_9__ex__Column_1 => rules::explain_grab(ctx, world, edict),
+            ExitId::Glacier__Ledge_Grab_Room__East_9__ex__Column_2 => rules::explain_hook(ctx, world, edict),
+            ExitId::Glacier__Ledge_Grab_Room__East_9__ex__Vertical_Room__Past_Gate_1 => rules::explain_offset(ctx, world, edict),
+            ExitId::Glacier__Ledge_Grab_Room__Fork__ex__Column_1 => rules::explain_grab(ctx, world, edict),
+            ExitId::Glacier__Ledge_Grab_Room__Fork__ex__Column_2 => rules::explain_hook(ctx, world, edict),
+            ExitId::Glacier__Ledge_Grab_Room__Fork__ex__Gate_Ledge_1 => rules::explain_grab(ctx, world, edict),
+            ExitId::Glacier__Ledge_Grab_Room__Fork__ex__Gate_Ledge_2 => rules::explain_hook(ctx, world, edict),
+            ExitId::Glacier__Ledge_Grab_Room__Gate__ex__West_End_1 => rules::explain_grab(ctx, world, edict),
+            ExitId::Glacier__Ledge_Grab_Room__Gate_Ledge__ex__Column_1 => rules::explain_grab_or_climb(ctx, world, edict),
+            ExitId::Glacier__Ledge_Grab_Room__Gate_Ledge__ex__Column_2 => rules::explain_hover_or_hook(ctx, world, edict),
+            ExitId::Glacier__Ledge_Grab_Room__Lower_Platform__ex__Upper_Platform_1 => rules::explain_grab(ctx, world, edict),
+            ExitId::Glacier__Ledge_Grab_Room__Lower_Platform__ex__Upper_Platform_2 => rules::explain_hook(ctx, world, edict),
+            ExitId::Glacier__Ledge_Grab_Room__Lower_Platform__ex__West_End_1 => rules::explain_climb(ctx, world, edict),
+            ExitId::Glacier__Ledge_Grab_Room__Mid_34__ex__Lower_Platform_1 => rules::explain_grab(ctx, world, edict),
+            ExitId::Glacier__Ledge_Grab_Room__Mid_34__ex__Lower_Platform_2 => rules::explain_hook(ctx, world, edict),
+            ExitId::Glacier__Ledge_Grab_Room__Mid_35__ex__Fork_1 => rules::explain_grab(ctx, world, edict),
+            ExitId::Glacier__Ledge_Grab_Room__Pedestal__ex__West_End_1 => rules::explain_grab(ctx, world, edict),
+            ExitId::Glacier__Ledge_Grab_Room__Upper_Platform__ex__Fork_1 => rules::explain_grab(ctx, world, edict),
+            ExitId::Glacier__Peak__East_8__ex__Top_Platform_East_1 => rules::explain_grab_or_climb(ctx, world, edict),
+            ExitId::Glacier__Peak__Top_Platform_East__ex__Highest_Platform_1 => rules::explain_hover(ctx, world, edict),
+            ExitId::Glacier__Peak__Top_Rock__ex__Highest_Platform_1 => rules::explain_hover(ctx, world, edict),
+            ExitId::Glacier__Peak__Under_West_Cliff__ex__West_Cliff_1 => rules::explain_grab(ctx, world, edict),
+            ExitId::Glacier__Peak__Under_West_Cliff__ex__West_Cliff_2 => rules::explain_hook(ctx, world, edict),
+            ExitId::Glacier__The_Big_Drop__Small_Path__ex__East_1 => rules::explain_mist2(ctx, world, edict),
+            ExitId::Glacier__The_Big_Drop__Water_Surface__Drown => rules::explain_not_amashilama(ctx, world, edict),
+            ExitId::Glacier__Vertical_Room__East_12__ex__Boomerang_Antechamber__West_12_1 => rules::explain_grab(ctx, world, edict),
+            ExitId::Glacier__Vertical_Room__East_9__ex__Peak_1 => rules::explain_grab(ctx, world, edict),
+            ExitId::Glacier__Vertical_Room__East_9__ex__Peak_2 => rules::explain_hook(ctx, world, edict),
+            ExitId::Glacier__Vertical_Room__East_Corner__ex__East_12_1 => rules::explain_grab(ctx, world, edict),
+            ExitId::Glacier__Vertical_Room__Mid_11__ex__Mid_9_1 => rules::explain_grab(ctx, world, edict),
+            ExitId::Glacier__Vertical_Room__Mid_9__ex__Peak_1 => rules::explain_grab(ctx, world, edict),
+            ExitId::Glacier__Vertical_Room__Mid_9__ex__Peak_2 => rules::explain_hook(ctx, world, edict),
+            ExitId::Glacier__Vertical_Room__Past_Gate__ex__Under_Switch_1 => rules::explain_switch_36_11(ctx, world, edict),
+            ExitId::Glacier__Vertical_Room__Peak__ex__West_8_1 => rules::explain_grab(ctx, world, edict),
+            ExitId::Glacier__Vertical_Room__Peak__ex__West_8_2 => rules::explain_hook(ctx, world, edict),
+            ExitId::Glacier__Vertical_Room__Under_Switch__ex__Mid_9_1 => rules::explain_grab(ctx, world, edict),
+            ExitId::Glacier__Vertical_Room__Under_Switch__ex__Past_Gate_1 => rules::explain_switch_36_11(ctx, world, edict),
+            ExitId::Interior__Building_Interior__Entry__Urn_Collection_Skip => rules::explain_boomerang(ctx, world, edict),
+            ExitId::Interior__Cave_Behind_Waterfall__Bottom__ex__Middle_1 => rules::explain_grab_or_climb(ctx, world, edict),
+            ExitId::Interior__Cave_Behind_Waterfall__Bottom__ex__Top_1 => rules::explain_hook(ctx, world, edict),
+            ExitId::Interior__Cave_Behind_Waterfall__Middle__ex__Top_1 => rules::explain_grab_or_climb(ctx, world, edict),
+            ExitId::Interior__Outpost_Interior__Entry__ex__Bookshelf_1 => rules::explain_grab_or_climb(ctx, world, edict),
+            ExitId::Interior__Outpost_Interior__Entry__ex__Bookshelf_2 => rules::explain_hook(ctx, world, edict),
+            ExitId::Irikar__Basement_Pipes__Bricks_Under_Pipes__ex__Double_Pipe_Right_1 => rules::explain_grab(ctx, world, edict),
+            ExitId::Irikar__Basement_Pipes__Bricks_Under_Pipes__ex__Double_Pipe_Right_2 => rules::explain_hook(ctx, world, edict),
+            ExitId::Irikar__Basement_Pipes__Double_Pipe_Left__ex__High_Pipe_1 => rules::explain_hover_and_hook(ctx, world, edict),
+            ExitId::Irikar__Basement_Pipes__Lower_Pipe_Under_Ledge__ex__Brick_Ledge_1 => rules::explain_hook(ctx, world, edict),
+            ExitId::Irikar__Basement_Pipes__Lower_Pipe_Under_Ledge__ex__Brick_Ledge_2 => rules::explain_climb(ctx, world, edict),
+            ExitId::Irikar__Basement_Pipes__Right_Vertical_Pipe__ex__Double_Pipe_Left_1 => rules::explain_grab(ctx, world, edict),
+            ExitId::Irikar__Basement_Pipes__Right_Vertical_Pipe__ex__Double_Pipe_Left_2 => rules::explain_grab_and_climb(ctx, world, edict),
+            ExitId::Irikar__Basement_Pipes__Right_Vertical_Pipe__ex__Double_Pipe_Left_3 => rules::explain_hook(ctx, world, edict),
+            ExitId::Irikar__Basement_Portal__Bottom_Middle__ex__Ledge_1 => rules::explain_mist2(ctx, world, edict),
+            ExitId::Irikar__Basement_Portal__East_28__ex__Ledge_1 => rules::explain_hover_and_hook_and_mist2(ctx, world, edict),
+            ExitId::Irikar__Basement_Portal__Ledge__ex__East_Platform_1 => rules::explain_mist2(ctx, world, edict),
+            ExitId::Irikar__Basement_Portal__Ledge__ex__Moving_Platform_Start_1 => rules::explain_irikar__basement_portal__ledge__ex__moving_platform_start_1__req(ctx, world, edict),
+            ExitId::Irikar__Basement_Portal__Ledge__ex__Westmost_Platform_1 => rules::explain_hover(ctx, world, edict),
+            ExitId::Irikar__Basement_Portal__Middle_Platform__ex__East_Platform_1 => rules::explain_hover(ctx, world, edict),
+            ExitId::Irikar__Basement_Portal__Middle_Platform__ex__Moving_Platform_End_1 => rules::explain_irikar__basement_portal__middle_platform__ex__moving_platform_end_1__req(ctx, world, edict),
+            ExitId::Irikar__Basement_Portal__Moving_Platform_End__ex__East_Platform_1 => rules::explain_hover(ctx, world, edict),
+            ExitId::Irikar__Basement_Portal__Moving_Platform_Start__ex__Ledge_1 => rules::explain_hook(ctx, world, edict),
+            ExitId::Irikar__Basement_Portal__Portal_Stand__ex__Ledge_1 => rules::explain_hover_and_hook(ctx, world, edict),
+            ExitId::Irikar__Basement_Portal__Portal_Stand__ex__Moving_Platform_Start_1 => rules::explain_irikar__basement_portal__portal_stand__ex__moving_platform_start_1__req(ctx, world, edict),
+            ExitId::Irikar__Basement_Portal__West_28__ex__Moving_Platform_Start_1 => rules::explain_hook(ctx, world, edict),
+            ExitId::Irikar__Boss_Room__Catwalk_West__ex__Upper_Rooftops_1 => rules::explain_hover(ctx, world, edict),
+            ExitId::Irikar__Boss_Room__Upper_Rooftops__ex__East_Rooftops__Off_the_Edge_1 => rules::explain_hover_or_mist2(ctx, world, edict),
+            ExitId::Irikar__East_Rooftops__East_Mid_air__ex__Top_Rooftop_1 => rules::explain_hover(ctx, world, edict),
+            ExitId::Irikar__East_Rooftops__Off_the_Edge__ex__Top_Rooftop_1 => rules::explain_hover(ctx, world, edict),
+            ExitId::Irikar__East_Rooftops__Off_the_Edge__ex__Top_Rooftop_2 => rules::explain_mist2(ctx, world, edict),
+            ExitId::Irikar__East_Rooftops__Upper_West__ex__East_Mid_air_1 => rules::explain_hover(ctx, world, edict),
+            ExitId::Irikar__Hub__Bowl_Middle_Ledge__ex__Bowl_Top_Platform_1 => rules::explain_hook(ctx, world, edict),
+            ExitId::Irikar__Hub__Bowl_Middle_Platform_Center__ex__Bowl_Middle_Ledge_1 => rules::explain_hook(ctx, world, edict),
+            ExitId::Irikar__Hub__Bowl_Middle_Platform_West__ex__Bowl_Middle_Ledge_1 => rules::explain_hook(ctx, world, edict),
+            ExitId::Irikar__Hub__Bowl_Platform_3__ex__Bowl_Middle_Platform_Center_1 => rules::explain_hook(ctx, world, edict),
+            ExitId::Irikar__Hub__Bowl_Top_Platform__ex__West_Rim_1 => rules::explain_hook(ctx, world, edict),
+            ExitId::Irikar__Hub__East_Rim__ex__Sat_Tower_Roof_West_1 => rules::explain_hover(ctx, world, edict),
+            ExitId::Irikar__Hub__NW_Staircase_Upper__ex__NW_Bowl_Edifice_1 => rules::explain_grab(ctx, world, edict),
+            ExitId::Irikar__Hub__NW_Staircase_Upper__ex__NW_Bowl_Edifice_2 => rules::explain_hook(ctx, world, edict),
+            ExitId::Irikar__Hub__Royal_Storage_By_Wall__ex__Royal_Storage_in_Wall_1 => rules::explain_irikar_royal_storage_wall(ctx, world, edict),
+            ExitId::Irikar__Hub__Royal_Storage_By_Wall__Mist_into_Wall => rules::explain_not_irikar_royal_storage_wall_and_mist_upgrade(ctx, world, edict),
+            ExitId::Irikar__Hub__Sat_Tower_Floating_Platform__ex__Sat_Tower_Top_Ledge_1 => rules::explain_hook(ctx, world, edict),
+            ExitId::Irikar__Hub__Sat_Tower_Middle_Ledge__ex__Sat_Tower_Floating_Platform_1 => rules::explain_hook(ctx, world, edict),
+            ExitId::Irikar__Hub__Save_Point__ex__Bowl_Hole_1 => rules::explain_hook(ctx, world, edict),
+            ExitId::Irikar__Hub__West_Rim__ex__East_Rim_1 => rules::explain_hover(ctx, world, edict),
+            ExitId::Irikar__Lamassu__Catwalk_Middle__ex__Desk_1 => rules::explain_hover(ctx, world, edict),
+            ExitId::Irikar__Lamassu__Catwalk_Middle__ex__Hidden_Passage_West_1 => rules::explain_hook(ctx, world, edict),
+            ExitId::Irikar__Sight_Room__Item_Pedestal__Urn_Fast_Travel => rules::explain_fast_travel(ctx, world, edict),
+            ExitId::Irikar_Breach__Exit_Corridor__North_12__ex__Pillar_1 => rules::explain_hover_and_hook(ctx, world, edict),
+            ExitId::Irikar_Breach__Exit_Corridor__North_13__ex__Pillar_1 => rules::explain_hover_and_mist_upgrade(ctx, world, edict),
+            ExitId::Irikar_Breach__Exit_Corridor__West_of_Pillar__ex__Pillar_1 => rules::explain_hook(ctx, world, edict),
+            ExitId::Irikar_Breach__Flappy_Drone__Initial_Drop__ex__Pillar_Underside_1 => rules::explain_hover(ctx, world, edict),
+            ExitId::Irikar_Breach__Flappy_Drone__Pillar_Underside__ex__Top_Pillar_1 => rules::explain_hover_and_hook(ctx, world, edict),
+            ExitId::Irikar_Breach__Flappy_Drone__Top_Pillar__ex__Pillar_Underside_1 => rules::explain_hover(ctx, world, edict),
+            ExitId::Irikar_Breach__Flappy_Drone__Upper_Valley_Right__ex__Top_Pillar_1 => rules::explain_hover_and_hook(ctx, world, edict),
+            ExitId::Irikar_Breach__Four_way__East__ex__Ledge_1 => rules::explain_hook(ctx, world, edict),
+            ExitId::Irikar_Breach__Four_way__Ledge__ex__North_1 => rules::explain_hover(ctx, world, edict),
+            ExitId::Irikar_Breach__Four_way__Ledge__ex__West_1 => rules::explain_hover(ctx, world, edict),
+            ExitId::Irikar_Breach__Four_way__North__ex__West_1 => rules::explain_hover(ctx, world, edict),
+            ExitId::Irikar_Breach__Four_way__South__ex__Ledge_1 => rules::explain_hook(ctx, world, edict),
+            ExitId::Irikar_Breach__Gauntlet__Hidden_Path_Reward__ex__Hidden_Path_Top_Ledge_1 => rules::explain_hook(ctx, world, edict),
+            ExitId::Irikar_Breach__Gauntlet__Save_Point__ex__Hidden_Path_Upper_Entry_1 => rules::explain_hover(ctx, world, edict),
+            ExitId::Irikar_Breach__Gauntlet__Save_Point__ex__Hidden_Path_Upper_Entry_2 => rules::explain_hook(ctx, world, edict),
+            ExitId::Irikar_Breach__Hover_Room__Bottom__ex__East_1 => rules::explain_hook_and_hover(ctx, world, edict),
+            ExitId::Irikar_Breach__Hover_Room__Bottom__ex__West_1 => rules::explain_hook(ctx, world, edict),
+            ExitId::Irikar_Breach__Hover_Room__East__ex__West_1 => rules::explain_hover_or_hook(ctx, world, edict),
+            ExitId::Irikar_Breach__Hover_Room__West__ex__East_1 => rules::explain_hover(ctx, world, edict),
+            ExitId::Irikar_Breach__Neon_Corridor__West_Basin__ex__Center_1 => rules::explain_hook(ctx, world, edict),
+            ExitId::Irikar_Breach__Neon_Corridor__West_Basin__ex__West_1 => rules::explain_hook(ctx, world, edict),
+            ExitId::Irikar_Breach__Worm_Rave__South__ex__Corner_1 => rules::explain_hook(ctx, world, edict),
+            ExitId::Irikar_Breach__Worm_Rave__South__ex__East_1 => rules::explain_hook(ctx, world, edict),
+            ExitId::Menu__Breach_Map__GB_Peak__ex__Giguna_Breach__Peak__Save_Point_1 => rules::explain_map__giguna_breach__peak__save(ctx, world, edict),
+            ExitId::Menu__Breach_Map__GB_SW_Save__ex__Giguna_Breach__SW_Save__Save_Point_1 => rules::explain_map__giguna_breach__sw_save__save(ctx, world, edict),
+            ExitId::Menu__Breach_Map__IB_Gauntlet__ex__Irikar_Breach__Gauntlet__Save_Point_1 => rules::explain_map__irikar_breach__gauntlet__save(ctx, world, edict),
+            ExitId::Menu__Breach_Map__IB_Save_Room__ex__Irikar_Breach__Save_Room__Save_Point_1 => rules::explain_map__irikar_breach__save_room__save(ctx, world, edict),
+            ExitId::Menu__Kiengir_Map__Amagi_Main_Area__ex__Amagi__Main_Area__Save_Point_1 => rules::explain_map__amagi__main_area__save(ctx, world, edict),
+            ExitId::Menu__Kiengir_Map__Annuna_Center_Save__ex__Annuna__Center_Save__Save_Point_1 => rules::explain_map__annuna__center_save__save(ctx, world, edict),
+            ExitId::Menu__Kiengir_Map__Annuna_Factory_Entrance__ex__Annuna__Factory_Entrance__Save_Point_1 => rules::explain_map__annuna__factory_entrance__save(ctx, world, edict),
+            ExitId::Menu__Kiengir_Map__Annuna_Mirror_Match__ex__Annuna__Mirror_Match__Save_Point_1 => rules::explain_map__annuna__mirror_match__save(ctx, world, edict),
+            ExitId::Menu__Kiengir_Map__Ebih_Base_Camp__ex__Ebih__Base_Camp__Save_Point_1 => rules::explain_map__ebih__base_camp__save(ctx, world, edict),
+            ExitId::Menu__Kiengir_Map__Ebih_West_Lower__ex__Ebih__Ebih_West__Lower_Save_1 => rules::explain_map__ebih__ebih_west__lower_save(ctx, world, edict),
+            ExitId::Menu__Kiengir_Map__Ebih_West_Mid__ex__Ebih__Ebih_West__Mid_Save_1 => rules::explain_map__ebih__ebih_west__mid_save(ctx, world, edict),
+            ExitId::Menu__Kiengir_Map__Ebih_West_Upper__ex__Ebih__Ebih_West__Upper_Save_1 => rules::explain_map__ebih__ebih_west__upper_save(ctx, world, edict),
+            ExitId::Menu__Kiengir_Map__Giguna_Base__ex__Giguna__Giguna_Base__Save_Point_1 => rules::explain_map__giguna__giguna_base__save(ctx, world, edict),
+            ExitId::Menu__Kiengir_Map__Giguna_Northeast__ex__Giguna__Giguna_Northeast__Save_Point_1 => rules::explain_map__giguna__giguna_northeast__save(ctx, world, edict),
+            ExitId::Menu__Kiengir_Map__Giguna_Ruins_Top__ex__Giguna__Ruins_Top__Save_Point_1 => rules::explain_map__giguna__ruins_top__save(ctx, world, edict),
+            ExitId::Menu__Kiengir_Map__Giguna_Ruins_West__ex__Giguna__Ruins_West__Save_Point_1 => rules::explain_map__giguna__ruins_west__save(ctx, world, edict),
+            ExitId::Menu__Kiengir_Map__Glacier_Revival__ex__Glacier__Revival__Save_Point_1 => rules::explain_map__glacier__revival__save(ctx, world, edict),
+            ExitId::Menu__Kiengir_Map__Irikar_Hub__ex__Irikar__Hub__Save_Point_1 => rules::explain_map__irikar__hub__save(ctx, world, edict),
+            ExitId::Menu__Kiengir_Map__Uhrum_Center__ex__Uhrum__Save_Room__Save_Point_1 => rules::explain_map__uhrum__save_room__save(ctx, world, edict),
+            ExitId::Menu__Kiengir_Map__Uhrum_East__ex__Uhrum__Annuna_Corridor__Save_Point_1 => rules::explain_map__uhrum__annuna_corridor__save(ctx, world, edict),
+            ExitId::Menu__Kiengir_Map__Uhrum_West__ex__Uhrum__West_Entrance__Save_Point_1 => rules::explain_map__uhrum__west_entrance__save(ctx, world, edict),
+            ExitId::Menu__Upgrade_Menu__Combat__ex__Drone_1 => rules::explain_remote_drone(ctx, world, edict),
+            ExitId::Menu__Upgrade_Menu__Combat__ex__Infection_1 => rules::explain_infect(ctx, world, edict),
+            ExitId::Menu__Upgrade_Menu__Drone__ex__Infection_1 => rules::explain_infect(ctx, world, edict),
+            ExitId::Menu__Upgrade_Menu__Infection__ex__Drone_1 => rules::explain_remote_drone(ctx, world, edict),
+            ExitId::Menu__Upgrade_Menu__Physiology__ex__Drone_1 => rules::explain_remote_drone(ctx, world, edict),
+            ExitId::Menu__Upgrade_Menu__Physiology__ex__Infection_1 => rules::explain_infect(ctx, world, edict),
+            ExitId::Uhrum__Annuna_Corridor__Between_Two_Flowers__ex__Lower_Platform_1 => rules::explain_anuman(ctx, world, edict),
+            ExitId::Uhrum__Annuna_Corridor__Between_Two_Flowers__ex__Lower_Platform_2 => rules::explain_hover(ctx, world, edict),
+            ExitId::Uhrum__Annuna_Corridor__Block_East__ex__Block_West_1 => rules::explain_uhrum_annuna_corridor_block(ctx, world, edict),
+            ExitId::Uhrum__Annuna_Corridor__Block_West__ex__Block_East_1 => rules::explain_uhrum_annuna_corridor_block(ctx, world, edict),
+            ExitId::Uhrum__Annuna_Corridor__Block_West__ex__Block_East_2 => rules::explain_block_clip_escape_and_not_uhrum_annuna_corridor_block(ctx, world, edict),
+            ExitId::Uhrum__Annuna_Corridor__Lower_Platform__ex__Middle_Platform_1 => rules::explain_hover(ctx, world, edict),
+            ExitId::Uhrum__Annuna_Corridor__Lower_Platform__ex__Middle_Platform_2 => rules::explain_anuman(ctx, world, edict),
+            ExitId::Uhrum__Annuna_Corridor__Middle_Platform__ex__Upper_Ledge_1 => rules::explain_hook(ctx, world, edict),
+            ExitId::Uhrum__Annuna_Corridor__Middle_Platform__ex__Upper_Platform_1 => rules::explain_anuman(ctx, world, edict),
+            ExitId::Uhrum__Annuna_Corridor__Middle_Platform__ex__Upper_Platform_2 => rules::explain_hover(ctx, world, edict),
+            ExitId::Uhrum__Annuna_Corridor__Pedestal__Urn_Fast_Travel => rules::explain_fast_travel(ctx, world, edict),
+            ExitId::Uhrum__Annuna_Corridor__Statue__ex__Upper_Platform_1 => rules::explain_hover(ctx, world, edict),
+            ExitId::Uhrum__Annuna_Corridor__Upper_Ledge__ex__Upper_Platform_1 => rules::explain_hover(ctx, world, edict),
+            ExitId::Uhrum__Annuna_Corridor__Upper_Platform__ex__Statue_1 => rules::explain_hover(ctx, world, edict),
+            ExitId::Uhrum__Annuna_Corridor__Upper_Platform__ex__Upper_Ledge_1 => rules::explain_hover(ctx, world, edict),
+            ExitId::Uhrum__Siege_Corridor__Center_Platform_3__ex__Upper_Rock_West_1 => rules::explain_hover(ctx, world, edict),
+            ExitId::Uhrum__Siege_Corridor__Center_Valley__ex__Center_East_1 => rules::explain_grab(ctx, world, edict),
+            ExitId::Uhrum__Siege_Corridor__Center_Valley__ex__Center_East_2 => rules::explain_hook(ctx, world, edict),
+            ExitId::Uhrum__Siege_Corridor__East_Hill__ex__Mideast_Tree_1 => rules::explain_hover(ctx, world, edict),
+            ExitId::Uhrum__Siege_Corridor__East_Hill__ex__Upper_Rock_East_1 => rules::explain_hook(ctx, world, edict),
+            ExitId::Uhrum__Siege_Corridor__East_Hill__ex__Upper_Rock_East_2 => rules::explain_anuman_and_grab(ctx, world, edict),
+            ExitId::Uhrum__Siege_Corridor__East_Hill__ex__Upper_Rock_East_3 => rules::explain_mist2(ctx, world, edict),
+            ExitId::Uhrum__Siege_Corridor__Mideast_Tree__ex__East_Hill_1 => rules::explain_hover(ctx, world, edict),
+            ExitId::Uhrum__Siege_Corridor__Mideast_Tree__ex__Upper_Rock_West_1 => rules::explain_hook(ctx, world, edict),
+            ExitId::Uhrum__Siege_Corridor__Northwest_Door__ex__Giguna__Vertical_Interchange__South_1 => rules::explain_mist2(ctx, world, edict),
+            ExitId::Uhrum__Siege_Corridor__Northwest_Door__ex__Western_Cache_1 => rules::explain_hover(ctx, world, edict),
+            ExitId::Uhrum__Siege_Corridor__Northwest_Platform__ex__Northwest_Door_1 => rules::explain_mist2(ctx, world, edict),
+            ExitId::Uhrum__Siege_Corridor__Northwest_Platform__ex__Western_Cache_1 => rules::explain_hover(ctx, world, edict),
+            ExitId::Uhrum__Siege_Corridor__Pond__ex__East_Hill_1 => rules::explain_climb(ctx, world, edict),
+            ExitId::Uhrum__Siege_Corridor__Pond__ex__East_Hill_2 => rules::explain_hover(ctx, world, edict),
+            ExitId::Uhrum__Siege_Corridor__Upper_Rock_Item__ex__Upper_Rock_West_1 => rules::explain_mode_eq_drone(ctx, world, edict),
+            ExitId::Uhrum__Siege_Corridor__Upper_Rock_West__ex__Upper_Rock_Item_1 => rules::explain_mode_eq_drone(ctx, world, edict),
+            ExitId::Uhrum__Siege_Corridor__West_Greenery__ex__West_Grassy_Ledge_1 => rules::explain_hook(ctx, world, edict),
+            ExitId::Uhrum__Siege_Corridor__Western_Cache__ex__Northwest_Door_1 => rules::explain_mist2(ctx, world, edict),
+            ExitId::Uhrum__Siege_Corridor__Western_Cache__ex__Northwest_Platform_1 => rules::explain_hover(ctx, world, edict),
+            ExitId::Uhrum__Siege_Corridor__Western_Rock__ex__Northwest_Platform_1 => rules::explain_hover(ctx, world, edict),
+            ExitId::Uhrum__Waterfalls__Above_Block__ex__Below_Block_1 => rules::explain_uhrum_waterfalls_block(ctx, world, edict),
+            ExitId::Uhrum__Waterfalls__Above_Block__ex__East_25_1 => rules::explain_hook(ctx, world, edict),
+            ExitId::Uhrum__Waterfalls__Barrier_East__Charge_through_Wall => rules::explain_charge(ctx, world, edict),
+            ExitId::Uhrum__Waterfalls__Barrier_East__ex__Barrier_West_1 => rules::explain_uhrum_waterfall_wall(ctx, world, edict),
+            ExitId::Uhrum__Waterfalls__Barrier_East__ex__East_24_in_Mid_air_1 => rules::explain_hover(ctx, world, edict),
+            ExitId::Uhrum__Waterfalls__Barrier_East__Mist_through_Wall => rules::explain_mist2(ctx, world, edict),
+            ExitId::Uhrum__Waterfalls__Barrier_East__Spin_through_Wall => rules::explain_spin(ctx, world, edict),
+            ExitId::Uhrum__Waterfalls__Barrier_West__Charge_through_Wall => rules::explain_charge(ctx, world, edict),
+            ExitId::Uhrum__Waterfalls__Barrier_West__ex__Barrier_East_1 => rules::explain_uhrum_waterfall_wall(ctx, world, edict),
+            ExitId::Uhrum__Waterfalls__Barrier_West__ex__Ceiling_Opening_1 => rules::explain_hover(ctx, world, edict),
+            ExitId::Uhrum__Waterfalls__Barrier_West__Mist_through_Wall => rules::explain_mist2(ctx, world, edict),
+            ExitId::Uhrum__Waterfalls__Barrier_West__Spin_through_Wall => rules::explain_spin(ctx, world, edict),
+            ExitId::Uhrum__Waterfalls__Below_Block__ex__Above_Block_1 => rules::explain_uhrum_waterfalls_block_and_grab(ctx, world, edict),
+            ExitId::Uhrum__Waterfalls__Below_Block__ex__Above_Block_2 => rules::explain_uhrum_waterfalls_block_and_hook(ctx, world, edict),
+            ExitId::Uhrum__Waterfalls__Below_Block__ex__East_26_1 => rules::explain_uhrum_waterfalls_block_and_grab(ctx, world, edict),
+            ExitId::Uhrum__Waterfalls__Below_Block__ex__East_26_2 => rules::explain_uhrum_waterfalls_block_and_hook(ctx, world, edict),
+            ExitId::Uhrum__Waterfalls__Below_Block__ex__Small_Rock_1 => rules::explain_hover(ctx, world, edict),
+            ExitId::Uhrum__Waterfalls__Ceiling_Cache__ex__Ceiling_Opening_1 => rules::explain_mode_eq_drone(ctx, world, edict),
+            ExitId::Uhrum__Waterfalls__Ceiling_Opening__ex__Barrier_West_1 => rules::explain_hover(ctx, world, edict),
+            ExitId::Uhrum__Waterfalls__Ceiling_Opening__ex__Ceiling_Cache_1 => rules::explain_mode_eq_drone(ctx, world, edict),
+            ExitId::Uhrum__Waterfalls__Ceiling_Opening__ex__West_24_1 => rules::explain_hover(ctx, world, edict),
+            ExitId::Uhrum__Waterfalls__Center_Island_East__ex__East_Waters_Edge_1 => rules::explain_hover(ctx, world, edict),
+            ExitId::Uhrum__Waterfalls__Center_Island_East__ex__Lower_East_Platform_1 => rules::explain_hover(ctx, world, edict),
+            ExitId::Uhrum__Waterfalls__Center_Island_West__ex__West_27_1 => rules::explain_hover(ctx, world, edict),
+            ExitId::Uhrum__Waterfalls__East_24_in_Mid_air__ex__Barrier_East_1 => rules::explain_hover(ctx, world, edict),
+            ExitId::Uhrum__Waterfalls__East_26__ex__Below_Block_1 => rules::explain_uhrum_waterfalls_block(ctx, world, edict),
+            ExitId::Uhrum__Waterfalls__East_Palm_Tree__ex__Ledge_Above_Palm_1 => rules::explain_grab(ctx, world, edict),
+            ExitId::Uhrum__Waterfalls__East_Palm_Tree__ex__Ledge_Above_Palm_2 => rules::explain_hook(ctx, world, edict),
+            ExitId::Uhrum__Waterfalls__Green_Middle_Ledge__ex__Below_Block_1 => rules::explain_hover(ctx, world, edict),
+            ExitId::Uhrum__Waterfalls__High_Platform__ex__Northeast_Ledge_1 => rules::explain_grab(ctx, world, edict),
+            ExitId::Uhrum__Waterfalls__High_Platform__ex__Northeast_Ledge_2 => rules::explain_hover_or_hook(ctx, world, edict),
+            ExitId::Uhrum__Waterfalls__Large_Rock__ex__Medium_Rock_1 => rules::explain_grab_or_hook(ctx, world, edict),
+            ExitId::Uhrum__Waterfalls__Large_Rock__ex__West_Wall_1 => rules::explain_hover_and_hook(ctx, world, edict),
+            ExitId::Uhrum__Waterfalls__Ledge_Above_Palm__ex__High_Platform_1 => rules::explain_hover(ctx, world, edict),
+            ExitId::Uhrum__Waterfalls__Ledge_Above_Palm__ex__Northeast_Ledge_1 => rules::explain_hook(ctx, world, edict),
+            ExitId::Uhrum__Waterfalls__Lower_East_Platform__ex__Below_Block_1 => rules::explain_climb(ctx, world, edict),
+            ExitId::Uhrum__Waterfalls__Lower_East_Platform__ex__Small_Rock_1 => rules::explain_hover(ctx, world, edict),
+            ExitId::Uhrum__Waterfalls__Medium_Rock__ex__Green_Middle_Ledge_1 => rules::explain_hover_and_hook(ctx, world, edict),
+            ExitId::Uhrum__Waterfalls__Medium_Rock__ex__West_Platform_1 => rules::explain_hover(ctx, world, edict),
+            ExitId::Uhrum__Waterfalls__Medium_Rock__ex__West_Wall_1 => rules::explain_hover(ctx, world, edict),
+            ExitId::Uhrum__Waterfalls__Northeast_Ledge__ex__Ceiling_Opening_1 => rules::explain_hook(ctx, world, edict),
+            ExitId::Uhrum__Waterfalls__Water_Pillar__ex__Center_Island_East_1 => rules::explain_grab(ctx, world, edict),
+            ExitId::Uhrum__Waterfalls__Water_Pillar__ex__Center_Island_East_2 => rules::explain_hook(ctx, world, edict),
+            ExitId::Uhrum__Waterfalls__Water_Pillar__ex__East_Waters_Edge_1 => rules::explain_hook(ctx, world, edict),
+            ExitId::Uhrum__Waterfalls__West_24__ex__Below_Block_1 => rules::explain_hover(ctx, world, edict),
+            ExitId::Uhrum__Waterfalls__West_25__ex__Below_Block_1 => rules::explain_hover(ctx, world, edict),
+            ExitId::Uhrum__Waterfalls__West_27__ex__Center_Island_West_1 => rules::explain_hover(ctx, world, edict),
+            ExitId::Uhrum__Waterfalls__West_27__ex__Large_Rock_1 => rules::explain_hook(ctx, world, edict),
+            ExitId::Uhrum__Waterfalls__West_Platform__ex__Green_Middle_Ledge_1 => rules::explain_grab(ctx, world, edict),
+            ExitId::Uhrum__Waterfalls__West_Platform__ex__Green_Middle_Ledge_2 => rules::explain_hook(ctx, world, edict),
+            ExitId::Uhrum__Waterfalls__West_Shallow_End__ex__Center_Island_West_1 => rules::explain_grab_and_water_movement(ctx, world, edict),
+            ExitId::Uhrum__Waterfalls__West_Shallow_End__ex__Center_Island_West_2 => rules::explain_hook_and_water_movement(ctx, world, edict),
+            ExitId::Uhrum__Waterfalls__West_Wall__ex__West_25_1 => rules::explain_grab_and_climb(ctx, world, edict),
+            ExitId::Uhrum__Waterfalls__West_Wall__ex__West_25_2 => rules::explain_hook(ctx, world, edict),
+            ExitId::Uhrum__Waterfalls__West_Water_Nook__ex__West_Water_Ledge_1 => rules::explain_underwater_movement_and_grab(ctx, world, edict),
+            ExitId::Uhrum__Waterfalls__West_Water_Nook__ex__West_Water_Ledge_2 => rules::explain_underwater_movement_and_hook(ctx, world, edict),
+            ExitId::Uhrum__West_Entrance__Clear_Passage__ex__Portal_Stand_1 => rules::explain_grab_and_climb(ctx, world, edict),
+            ExitId::Uhrum__West_Entrance__Clear_Passage__ex__Portal_Stand_2 => rules::explain_hook(ctx, world, edict),
+            ExitId::Uhrum__West_Entrance__East_28__ex__Lower_Path_Tree_Ledge_1 => rules::explain_grab(ctx, world, edict),
+            ExitId::Uhrum__West_Entrance__East_28__ex__Lower_Path_Tree_Ledge_2 => rules::explain_hook(ctx, world, edict),
+            ExitId::Uhrum__West_Entrance__Inner_Dais__ex__Top_West_Ledge_1 => rules::explain_uhrum_west_entrance_gate_and_hover(ctx, world, edict),
+            ExitId::Uhrum__West_Entrance__Inner_Dais__ex__West_of_Gate_1 => rules::explain_uhrum_west_entrance_gate(ctx, world, edict),
+            ExitId::Uhrum__West_Entrance__Lower_Path_Gap__ex__Lower_Path_Tree_Ledge_1 => rules::explain_hook(ctx, world, edict),
+            ExitId::Uhrum__West_Entrance__Lower_Path_Gap__ex__Lower_Wall_West_1 => rules::explain_hook(ctx, world, edict),
+            ExitId::Uhrum__West_Entrance__Lower_Wall_East__Charge_through_Wall => rules::explain_charge(ctx, world, edict),
+            ExitId::Uhrum__West_Entrance__Lower_Wall_East__ex__Lower_Wall_West_1 => rules::explain_uhrum_west_entrance_lower_wall(ctx, world, edict),
+            ExitId::Uhrum__West_Entrance__Lower_Wall_East__Mist_through_Wall => rules::explain_mist2(ctx, world, edict),
+            ExitId::Uhrum__West_Entrance__Lower_Wall_East__Spin_through_Wall => rules::explain_spin(ctx, world, edict),
+            ExitId::Uhrum__West_Entrance__Lower_Wall_West__Charge_through_Wall => rules::explain_charge(ctx, world, edict),
+            ExitId::Uhrum__West_Entrance__Lower_Wall_West__ex__Lower_Wall_East_1 => rules::explain_uhrum_west_entrance_lower_wall(ctx, world, edict),
+            ExitId::Uhrum__West_Entrance__Lower_Wall_West__ex__South_Platform_1 => rules::explain_hover(ctx, world, edict),
+            ExitId::Uhrum__West_Entrance__Lower_Wall_West__ex__South_Platform_2 => rules::explain_hook(ctx, world, edict),
+            ExitId::Uhrum__West_Entrance__Lower_Wall_West__ex__South_Platform_3 => rules::explain_grab(ctx, world, edict),
+            ExitId::Uhrum__West_Entrance__Lower_Wall_West__Mist_through_Wall => rules::explain_mist2(ctx, world, edict),
+            ExitId::Uhrum__West_Entrance__Lower_Wall_West__Spin_through_Wall => rules::explain_spin(ctx, world, edict),
+            ExitId::Uhrum__West_Entrance__Middle_West_Ledge__ex__Portal_Stand_1 => rules::explain_grab_and_climb(ctx, world, edict),
+            ExitId::Uhrum__West_Entrance__Middle_West_Ledge__ex__Portal_Stand_2 => rules::explain_hook(ctx, world, edict),
+            ExitId::Uhrum__West_Entrance__Portal_Stand__ex__Hidden_Passage_Entry_1 => rules::explain_hook(ctx, world, edict),
+            ExitId::Uhrum__West_Entrance__Portal_Stand__ex__West_of_Gate_1 => rules::explain_grab(ctx, world, edict),
+            ExitId::Uhrum__West_Entrance__Portal_Stand__ex__West_of_Gate_2 => rules::explain_hook(ctx, world, edict),
+            ExitId::Uhrum__West_Entrance__Sand__ex__Lower_Path_Gap_1 => rules::explain_hook(ctx, world, edict),
+            ExitId::Uhrum__West_Entrance__Sand__ex__Lower_Path_Tree_Ledge_1 => rules::explain_hook(ctx, world, edict),
+            ExitId::Uhrum__West_Entrance__Sand__ex__Lower_Path_Tree_Ledge_2 => rules::explain_grab_and_climb(ctx, world, edict),
+            ExitId::Uhrum__West_Entrance__Save_Point__ex__Lower_Wall_West_1 => rules::explain_grab(ctx, world, edict),
+            ExitId::Uhrum__West_Entrance__Save_Point__ex__Lower_Wall_West_2 => rules::explain_hook(ctx, world, edict),
+            ExitId::Uhrum__West_Entrance__Save_Point__ex__South_Platform_1 => rules::explain_hook(ctx, world, edict),
+            ExitId::Uhrum__West_Entrance__South_Platform__ex__Middle_West_Ledge_1 => rules::explain_hook(ctx, world, edict),
+            ExitId::Uhrum__West_Entrance__South_Platform__ex__West_27_1 => rules::explain_hover(ctx, world, edict),
+            ExitId::Uhrum__West_Entrance__Southeast_Tree__ex__South_Platform_1 => rules::explain_hook(ctx, world, edict),
+            ExitId::Uhrum__West_Entrance__Top_West_Ledge__ex__Hidden_Passage_Entry_1 => rules::explain_mode_eq_drone(ctx, world, edict),
+            ExitId::Uhrum__West_Entrance__Top_West_Ledge__ex__West_of_Gate_1 => rules::explain_hover(ctx, world, edict),
+            ExitId::Uhrum__West_Entrance__Upper_Fork__ex__Upper_Wall_East_1 => rules::explain_hook(ctx, world, edict),
+            ExitId::Uhrum__West_Entrance__Upper_Fork__ex__Upper_Wall_East_2 => rules::explain_mist2(ctx, world, edict),
+            ExitId::Uhrum__West_Entrance__Upper_Wall_East__Charge_through_Wall => rules::explain_charge(ctx, world, edict),
+            ExitId::Uhrum__West_Entrance__Upper_Wall_East__ex__Upper_Wall_West_1 => rules::explain_uhrum_west_entrance_upper_wall(ctx, world, edict),
+            ExitId::Uhrum__West_Entrance__Upper_Wall_East__Mist_through_Wall => rules::explain_mist2(ctx, world, edict),
+            ExitId::Uhrum__West_Entrance__Upper_Wall_East__Spin_through_Wall => rules::explain_spin(ctx, world, edict),
+            ExitId::Uhrum__West_Entrance__Upper_Wall_West__ex__Portal_Exit_1 => rules::explain_grab(ctx, world, edict),
+            ExitId::Uhrum__West_Entrance__Upper_Wall_West__ex__Portal_Exit_2 => rules::explain_hook(ctx, world, edict),
+            ExitId::Uhrum__West_Entrance__Upper_Wall_West__ex__Upper_Wall_East_1 => rules::explain_uhrum_west_entrance_upper_wall(ctx, world, edict),
+            ExitId::Uhrum__West_Entrance__Upper_Wall_West__Mist_through_Wall => rules::explain_mist2(ctx, world, edict),
+            ExitId::Uhrum__West_Entrance__West_26__ex__Hidden_Passage_Entry_1 => rules::explain_hook(ctx, world, edict),
+            ExitId::Uhrum__West_Entrance__West_26__ex__Portal_Stand_1 => rules::explain_grab_and_climb(ctx, world, edict),
+            ExitId::Uhrum__West_Entrance__West_26__ex__Portal_Stand_2 => rules::explain_hook(ctx, world, edict),
+            ExitId::Uhrum__West_Entrance__West_27__ex__South_Platform_1 => rules::explain_hover(ctx, world, edict),
+            ExitId::Uhrum__West_Entrance__West_of_Gate__ex__Inner_Dais_1 => rules::explain_uhrum_west_entrance_gate(ctx, world, edict),
+            ExitId::Uhrum__West_Entrance__West_of_Gate__ex__Top_West_Ledge_1 => rules::explain_hover(ctx, world, edict),
+            ExitId::Uhrum__West_Entrance__West_of_Gate__ex__Top_West_Ledge_2 => rules::explain_hook(ctx, world, edict),
+            _ => (true, vec![])
+        }
+    }
 }
 
 impl world::Exit for Exit {
@@ -5436,6 +6772,303 @@ impl world::Accessible for Action {
     fn price(&self) -> &Currency {
         &self.price
     }
+
+    fn explain_rule(
+        &self,
+        ctx: &Self::Context,
+        world: &World,
+        edict: &mut FxHashMap<String, String>,
+    ) -> (bool, Vec<String>) {
+        match self.id {
+            ActionId::Amagi__Main_Area__Carving__Key_Combo => {
+                rules::explain_amagi__main_area__carving__key_combo__req(ctx, world, edict)
+            }
+            ActionId::Annuna__East_Bridge__Center_Gap_East__Throw_Drone_into_Tower => {
+                rules::explain_can_deploy_and_slingshot_hook_and_drone_hover(ctx, world, edict)
+            }
+            ActionId::Annuna__East_Bridge__Center_Gap_West__Throw_Drone_into_Tower => {
+                rules::explain_can_deploy_and_slingshot_hook_and_drone_hover(ctx, world, edict)
+            }
+            ActionId::Annuna__East_Bridge__Tower_East_Ledge__Enter_Combo => {
+                rules::explain_annuna__east_bridge__tower_east_ledge__enter_combo__req(
+                    ctx, world, edict,
+                )
+            }
+            ActionId::Annuna__East_Bridge__Tower_Opening__Climb_and_Throw_Drone => {
+                rules::explain_climb_and_can_deploy_and_hover_and_slingshot_hook(ctx, world, edict)
+            }
+            ActionId::Annuna__East_Bridge__Tower_Secret__Enter_Combo => {
+                rules::explain_annuna__east_bridge__tower_secret__enter_combo__req(
+                    ctx, world, edict,
+                )
+            }
+            ActionId::Annuna__East_Bridge__Tower_West_Ledge__Enter_Combo => {
+                rules::explain_annuna__east_bridge__tower_west_ledge__enter_combo__req(
+                    ctx, world, edict,
+                )
+            }
+            ActionId::Annuna__Mirror_Match__Save_Point__Save => {
+                rules::explain_not_separation_or_defeat_indra(ctx, world, edict)
+            }
+            ActionId::Annuna__West_Climb__Switch_Ledge__Open_Door => {
+                rules::explain_annuna__west_climb__switch_ledge__open_door__req(ctx, world, edict)
+            }
+            ActionId::Ebih__Base_Camp__Left_Platform__Move_Left_Platform => {
+                rules::explain_ebih__base_camp__left_platform__move_left_platform__req(
+                    ctx, world, edict,
+                )
+            }
+            ActionId::Ebih__Base_Camp__Left_Platform_Moved__Reset_Left_Platform => {
+                rules::explain_ebih__base_camp__left_platform_moved__reset_left_platform__req(
+                    ctx, world, edict,
+                )
+            }
+            ActionId::Ebih__Drone_Room__Moving_Platform__Throw_Drone => {
+                rules::explain_can_deploy(ctx, world, edict)
+            }
+            ActionId::Ebih__Drone_Room__Pit_Left__Activate_Lift => {
+                rules::explain_ebih__drone_room__pit_left__activate_lift__req(ctx, world, edict)
+            }
+            ActionId::Ebih__Drone_Room__Pit_Left__Activate_Lift_But_Get_Off_Early => {
+                rules::explain_ebih__drone_room__pit_left__activate_lift_but_get_off_early__req(
+                    ctx, world, edict,
+                )
+            }
+            ActionId::Ebih__Drone_Room__Portal_Exit__Activate_Platform => {
+                rules::explain_ebih__drone_room__portal_exit__activate_platform__req(
+                    ctx, world, edict,
+                )
+            }
+            ActionId::Ebih__Ebih_East__Dispenser__Activate_Lift => {
+                rules::explain_ebih__ebih_east__dispenser__activate_lift__req(ctx, world, edict)
+            }
+            ActionId::Ebih__Ebih_East__Lower_Moving_Platform__Activate_Lift => {
+                rules::explain_ebih__ebih_east__lower_moving_platform__activate_lift__req(
+                    ctx, world, edict,
+                )
+            }
+            ActionId::Ebih__Ebih_East__Lower_Moving_Platform__Activate_Ride => {
+                rules::explain_ebih__ebih_east__lower_moving_platform__activate_ride__req(
+                    ctx, world, edict,
+                )
+            }
+            ActionId::Ebih__Ebih_East__Moving_Platform__Activate_Ride => {
+                rules::explain_ebih__ebih_east__moving_platform__activate_ride__req(
+                    ctx, world, edict,
+                )
+            }
+            ActionId::Ebih__Ebih_West__Below_Door__Open_Door => {
+                rules::explain_open(ctx, world, edict)
+            }
+            ActionId::Ebih__Ebih_West__Left_of_Switch__Open_Door => {
+                rules::explain_infect(ctx, world, edict)
+            }
+            ActionId::Ebih__Ebih_West__Medium_High_Platform__Throw_Drone_Long => {
+                rules::explain_can_deploy(ctx, world, edict)
+            }
+            ActionId::Ebih__Grid_25_10_12__Door_Left__Open_Door => {
+                rules::explain_open(ctx, world, edict)
+            }
+            ActionId::Ebih__Grid_25_10_12__East_11__Open_Door => {
+                rules::explain_open(ctx, world, edict)
+            }
+            ActionId::Ebih__Vertical_Interchange__West_13__Open_Door => {
+                rules::explain_ebih__vertical_interchange__west_13__open_door__req(
+                    ctx, world, edict,
+                )
+            }
+            ActionId::Ebih__Waterfall__Below_Left_Switch__Open_Door => {
+                rules::explain_open(ctx, world, edict)
+            }
+            ActionId::Ebih__Waterfall__Ledge_Below_Hole__Throw_Drone => {
+                rules::explain_can_deploy(ctx, world, edict)
+            }
+            ActionId::Ebih__Waterfall__West_8__Open_Door => rules::explain_open(ctx, world, edict),
+            ActionId::Giguna__Carnelian__Lower_Susar__Caught => {
+                rules::explain_giguna__carnelian__lower_susar__caught__req(ctx, world, edict)
+            }
+            ActionId::Giguna__Carnelian__Lower_Susar__Hack => {
+                rules::explain_giguna__carnelian__lower_susar__hack__req(ctx, world, edict)
+            }
+            ActionId::Giguna__Carnelian__Switch__Open_Door => {
+                rules::explain_giguna__carnelian__switch__open_door__req(ctx, world, edict)
+            }
+            ActionId::Giguna__Carnelian__Upper_Susar__Caught => {
+                rules::explain_giguna__carnelian__upper_susar__caught__req(ctx, world, edict)
+            }
+            ActionId::Giguna__Carnelian__Upper_Susar__Hack => {
+                rules::explain_giguna__carnelian__upper_susar__hack__req(ctx, world, edict)
+            }
+            ActionId::Giguna__Clouds__Platform_Start__Hack_and_Get_Off_Early => {
+                rules::explain_giguna__clouds__platform_start__hack_and_get_off_early__req(
+                    ctx, world, edict,
+                )
+            }
+            ActionId::Giguna__Clouds__Platform_Start__Hack_and_Ride_to_Portal => {
+                rules::explain_giguna__clouds__platform_start__hack_and_ride_to_portal__req(
+                    ctx, world, edict,
+                )
+            }
+            ActionId::Giguna__Clouds__Platform_Start__Hack_Deploy_Ride_to_Portal => {
+                rules::explain_giguna__clouds__platform_start__hack_deploy_ride_to_portal__req(
+                    ctx, world, edict,
+                )
+            }
+            ActionId::Giguna__East_Caverns__Lower_Susar__Caught => {
+                rules::explain_giguna__east_caverns__lower_susar__caught__req(ctx, world, edict)
+            }
+            ActionId::Giguna__East_Caverns__Lower_Susar__Hack => {
+                rules::explain_giguna__east_caverns__lower_susar__hack__req(ctx, world, edict)
+            }
+            ActionId::Giguna__East_Caverns__Mid_Susar__Caught => {
+                rules::explain_giguna__east_caverns__mid_susar__caught__req(ctx, world, edict)
+            }
+            ActionId::Giguna__East_Caverns__Mid_Susar__Hack => {
+                rules::explain_giguna__east_caverns__mid_susar__hack__req(ctx, world, edict)
+            }
+            ActionId::Giguna__East_Caverns__Statues_Ledge__Open_Door => {
+                rules::explain_giguna__east_caverns__statues_ledge__open_door__req(
+                    ctx, world, edict,
+                )
+            }
+            ActionId::Giguna__East_Caverns__Switch__Open_Door => {
+                rules::explain_giguna__east_caverns__switch__open_door__req(ctx, world, edict)
+            }
+            ActionId::Giguna__East_Caverns__Upper_Susar__Caught => {
+                rules::explain_giguna__east_caverns__upper_susar__caught__req(ctx, world, edict)
+            }
+            ActionId::Giguna__East_Caverns__Upper_Susar_Jump_from_East__Caught => {
+                rules::explain_giguna__east_caverns__upper_susar_jump_from_east__caught__req(
+                    ctx, world, edict,
+                )
+            }
+            ActionId::Giguna__East_Caverns__Upper_Susar_Jump_from_East__Hack => {
+                rules::explain_giguna__east_caverns__upper_susar_jump_from_east__hack__req(
+                    ctx, world, edict,
+                )
+            }
+            ActionId::Giguna__East_Caverns__Upper_Susar_Mid_jump__Hack => {
+                rules::explain_giguna__east_caverns__upper_susar_mid_jump__hack__req(
+                    ctx, world, edict,
+                )
+            }
+            ActionId::Giguna__East_Caverns__West_14__Enter_Combo => {
+                rules::explain_giguna__east_caverns__west_14__enter_combo__req(ctx, world, edict)
+            }
+            ActionId::Giguna__East_Caverns__West_16__Open_Door => {
+                rules::explain_giguna__east_caverns__west_16__open_door__req(ctx, world, edict)
+            }
+            ActionId::Giguna__Gateway__Flask_Ledge__Open_Door => {
+                rules::explain_open(ctx, world, edict)
+            }
+            ActionId::Giguna__Gateway__One_Jump__Open_Door => {
+                rules::explain_open_and_range2(ctx, world, edict)
+            }
+            ActionId::Giguna__Giguna_Base__Stone_Knob__Throw_Drone => {
+                rules::explain_can_deploy(ctx, world, edict)
+            }
+            ActionId::Giguna__Giguna_Base__Switch_Distance_1__Open_Door => {
+                rules::explain_open(ctx, world, edict)
+            }
+            ActionId::Giguna__Giguna_Base__Switch_Distance_2__Open_Door => {
+                rules::explain_open_and_range1(ctx, world, edict)
+            }
+            ActionId::Giguna__Giguna_Base__Switch_Distance_3__Open_Door => {
+                rules::explain_open_and_range2(ctx, world, edict)
+            }
+            ActionId::Giguna__Giguna_Base__Switch_Distance_4__Open_Door => {
+                rules::explain_open_and_range3(ctx, world, edict)
+            }
+            ActionId::Giguna__Giguna_Northeast__Gate_Left__Throw_Drone => {
+                rules::explain_can_deploy_and_slingshot_hook(ctx, world, edict)
+            }
+            ActionId::Giguna__Giguna_Northeast__Right_Column__Open_Door_From_Afar => {
+                rules::explain_giguna__giguna_northeast__right_column__open_door_from_afar__req(
+                    ctx, world, edict,
+                )
+            }
+            ActionId::Giguna__Giguna_Northeast__Switch__Open_Door => {
+                rules::explain_giguna__giguna_northeast__switch__open_door__req(ctx, world, edict)
+            }
+            ActionId::Giguna__Ruins_Top__Portal__Enter_Portal => {
+                rules::explain_mode_eq_drone(ctx, world, edict)
+            }
+            ActionId::Giguna__Ruins_Top__Switch__Open_Doors => {
+                rules::explain_open(ctx, world, edict)
+            }
+            ActionId::Giguna__Ruins_Top__Turret_Balcony_West__Throw_Drone_onto_Tower => {
+                rules::explain_grab_and_can_deploy(ctx, world, edict)
+            }
+            ActionId::Giguna__Ruins_West__Lower_Ledge__Destroy_Kishib => {
+                rules::explain_giguna__ruins_west__lower_ledge__destroy_kishib__req(
+                    ctx, world, edict,
+                )
+            }
+            ActionId::Giguna__Ruins_West__Lower_Ledge__Hack_Kishib => {
+                rules::explain_giguna__ruins_west__lower_ledge__hack_kishib__req(ctx, world, edict)
+            }
+            ActionId::Giguna__Wasteland__Middle_Cliff__Throw_Drone => {
+                rules::explain_can_deploy_and_slingshot_hook(ctx, world, edict)
+            }
+            ActionId::Giguna__West_Caverns__East_Susar__Caught => {
+                rules::explain_giguna__west_caverns__east_susar__caught__req(ctx, world, edict)
+            }
+            ActionId::Giguna__West_Caverns__East_Susar__Hack => {
+                rules::explain_giguna__west_caverns__east_susar__hack__req(ctx, world, edict)
+            }
+            ActionId::Giguna__West_Caverns__Small_Platform__Throw_Drone_Up => {
+                rules::explain_can_deploy(ctx, world, edict)
+            }
+            ActionId::Giguna_Breach__SW_Save__West_11__Open_Door => {
+                rules::explain_giguna_breach__sw_save__west_11__open_door__req(ctx, world, edict)
+            }
+            ActionId::Global__Become_Drone => {
+                rules::explain_not_within_menu_and_anuman_and_mode_ne_drone(ctx, world, edict)
+            }
+            ActionId::Global__Become_Indra => {
+                rules::explain_not_within_menu_and_realm_ne_breach_and_anuman_and_mode_eq_drone(
+                    ctx, world, edict,
+                )
+            }
+            ActionId::Global__Deploy_Drone => {
+                rules::explain_not_within_menu_and_can_deploy(ctx, world, edict)
+            }
+            ActionId::Global__Recall_Drone => {
+                rules::explain_not_within_menu_and_realm_ne_breach_and_can_recall(ctx, world, edict)
+            }
+            ActionId::Global__Recall_Fast_Travel => {
+                rules::explain_not_within_menu_and_ft_main_and_can_recall(ctx, world, edict)
+            }
+            ActionId::Interior__Cave_Behind_Waterfall__Middle__Throw_Drone => {
+                rules::explain_can_deploy(ctx, world, edict)
+            }
+            ActionId::Irikar__Basement_Portal__Moving_Platform_Start__Activate_Platform => {
+                rules::explain_activate(ctx, world, edict)
+            }
+            ActionId::Irikar__Basement_Portal__Portal_Stand__Enter_Portal => {
+                rules::explain_mode_eq_drone_and_breach_sight(ctx, world, edict)
+            }
+            ActionId::Irikar__Hub__Portal_Stand__Enter_Portal => {
+                rules::explain_mode_eq_drone_and_breach_sight(ctx, world, edict)
+            }
+            ActionId::Irikar__Hub__Royal_Storage_By_Wall__Shockwave_Wall => {
+                rules::explain_not_irikar_royal_storage_wall_and_shockwave(ctx, world, edict)
+            }
+            ActionId::Irikar__Sight_Room__Portal__Enter_Portal => {
+                rules::explain_mode_eq_drone_and_breach_sight(ctx, world, edict)
+            }
+            ActionId::Uhrum__Annuna_Corridor__Between_Two_Flowers__Throw_Drone_Not_As_High => {
+                rules::explain_can_deploy(ctx, world, edict)
+            }
+            ActionId::Uhrum__Annuna_Corridor__Between_Two_Flowers__Throw_Drone_Up => {
+                rules::explain_can_deploy_and_drone_hover(ctx, world, edict)
+            }
+            ActionId::Uhrum__Waterfalls__Center_Island_Middle__Throw_Drone_Up => {
+                rules::explain_can_deploy_and_slingshot_hook(ctx, world, edict)
+            }
+            _ => (true, vec![]),
+        }
+    }
 }
 impl world::Action for Action {
     type ActionId = ActionId;
@@ -5719,6 +7352,32 @@ impl world::Accessible for Warp {
     }
     fn price(&self) -> &Currency {
         &self.price
+    }
+
+    fn explain_rule(
+        &self,
+        ctx: &Self::Context,
+        world: &World,
+        edict: &mut FxHashMap<String, String>,
+    ) -> (bool, Vec<String>) {
+        match self.id {
+            WarpId::BreachSave => rules::explain_realm_eq_breach(ctx, world, edict),
+            WarpId::EarthSave => rules::explain_within_antarctica(ctx, world, edict),
+            WarpId::ExitBreach => {
+                rules::explain_realm_eq_breach_and_exit_breach_and___flipside_not_within_default(
+                    ctx, world, edict,
+                )
+            }
+            WarpId::ExitMenu => rules::explain_within_menu_gt_upgrade_menu(ctx, world, edict),
+            WarpId::FastTravelKiengir => {
+                rules::explain_ft_main_and___map_spot_within_menu_gt_kiengir_map(ctx, world, edict)
+            }
+            WarpId::MainSave => {
+                rules::explain_realm_in___main_interior_emergence_and_amashilama(ctx, world, edict)
+            }
+            WarpId::Menu => rules::explain_not_within_menu_and_flasks_gt_0(ctx, world, edict),
+            _ => (true, vec![]),
+        }
     }
 }
 impl world::Warp for Warp {

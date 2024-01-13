@@ -10,7 +10,7 @@ import inflection
 
 REF_GETTER_TYPE = re.compile(r'(?:ctx\.|data::)([^(]*)\(')
 
-class RustVisitor(RulesVisitor):
+class RustBaseVisitor(RulesVisitor):
 
     def __init__(self, rules, context_types, action_funcs, ctxdict, data_types, name):
         self.rules = rules
@@ -72,6 +72,12 @@ class RustVisitor(RulesVisitor):
             raise
         finally:
             self.rettype = last_rettype
+
+
+class RustVisitor(RustBaseVisitor):
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
 
     def visitBoolExpr(self, ctx):
         try:
@@ -323,3 +329,31 @@ class RustVisitor(RulesVisitor):
             check = ''
         return (f'{check}{func}({get}) '
                 f'{eq}= {self.visit(ctx.invoke())}')
+
+
+class RustExplainerVisitor(RustBaseVisitor):
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.code_writer = RustVisitor(*args, **kwargs)
+
+    def visitBoolExpr(self, ctx):
+        try:
+            if ctx.OR():
+                return f'({self.visit(ctx.boolExpr(0))} || {self.visit(ctx.boolExpr(1))})'
+            elif ctx.AND():
+                return f'({self.visit(ctx.boolExpr(0))} && {self.visit(ctx.boolExpr(1))})'
+            elif ctx.TRUE():
+                return f'true'
+            elif ctx.FALSE():
+                return f'false'
+            elif ctx.boolExpr():
+                return f'({self.visit(ctx.boolExpr(0))})'
+            elif ctx.NOT():
+                return '!' + super().visitBoolExpr(ctx)
+            else:
+                return super().visitBoolExpr(ctx)
+        except AttributeError as e:
+            raise AttributeError(str(e) + '; ' + ' '.join(
+                f'[{c.toStringTree(ruleNames = RulesParser.ruleNames)}]'
+                for c in ctx.boolExpr()))

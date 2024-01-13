@@ -1,5 +1,6 @@
 use crate::condense::CondensedEdge;
 use crate::context::Ctx;
+use rustc_hash::FxHashMap;
 use serde::{Deserialize, Serialize};
 use std::fmt::{Debug, Display};
 use std::hash::Hash;
@@ -26,6 +27,30 @@ pub trait Accessible: Sync {
     fn price(&self) -> &Self::Currency;
     fn is_free(&self) -> bool {
         *self.price() == Self::Currency::default()
+    }
+
+    fn explain_rule(
+        &self,
+        ctx: &Self::Context,
+        world: &<Self::Context as Ctx>::World,
+        edict: &mut FxHashMap<String, String>,
+    ) -> (bool, Vec<String>);
+    fn explain(&self, ctx: &Self::Context, world: &<Self::Context as Ctx>::World) -> String
+    where
+        <<Self::Context as Ctx>::World as World>::Location: Accessible<Currency = Self::Currency>,
+    {
+        let mut edict = FxHashMap::default();
+        let mut explains = Vec::new();
+        if !ctx.can_afford(self.price()) {
+            explains.push(format!(
+                "Can't afford {}: have {}",
+                self.price(),
+                ctx.amount_could_afford(self.price())
+            ));
+        }
+        let (_, named) = self.explain_rule(ctx, world, &mut edict);
+        explains.extend(named.into_iter().map(|k| format!("{}: {}", k, edict[&k])));
+        explains.join("\n")
     }
 }
 

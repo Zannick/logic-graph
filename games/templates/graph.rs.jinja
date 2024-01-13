@@ -15,6 +15,7 @@ use analyzer::context::Ctx;
 use analyzer::world;
 use enum_map::{enum_map, Enum, EnumMap};
 use lazy_static::lazy_static;
+use rustc_hash::FxHashMap;
 use std::ops::Range;
 use std::option::Option;
 
@@ -83,6 +84,17 @@ impl world::Accessible for Location {
         }
     }
     fn price(&self) -> &Currency { &self.price }
+
+    fn explain_rule(&self, ctx: &Self::Context, world: &World, edict: &mut FxHashMap<String, String>) -> (bool, Vec<String>) {
+        match self.id {
+%% for loc in gl.locations()|sort(attribute='id')
+%% if loc.access_id
+            LocationId::{{ loc.id }} => rules::explain_{{ loc.access_id }}(ctx, world, edict),
+%% endif
+%% endfor
+            _ => (true, vec![])
+        }
+    }
 }
 
 impl world::Location for Location {
@@ -137,6 +149,17 @@ impl world::Accessible for Exit {
         }
     }
     fn price(&self) -> &Currency { &self.price }
+    
+    fn explain_rule(&self, ctx: &Self::Context, world: &World, edict: &mut FxHashMap<String, String>) -> (bool, Vec<String>) {
+        match self.id {
+%% for ex in gl.exits()|sort(attribute='id')
+%% if ex.access_id
+            ExitId::{{ ex.id }} => rules::explain_{{ ex.access_id }}(ctx, world, edict),
+%% endif
+%% endfor
+            _ => (true, vec![])
+        }
+    }
 }
 
 impl world::Exit for Exit {
@@ -200,6 +223,17 @@ impl world::Accessible for Action {
         }
     }
     fn price(&self) -> &Currency { &self.price }
+
+    fn explain_rule(&self, ctx: &Self::Context, world: &World, edict: &mut FxHashMap<String, String>) -> (bool, Vec<String>) {
+        match self.id {
+%% for act in gl.actions()|sort(attribute='id')
+%% if act.access_id
+            ActionId::{{ act.id }} => rules::explain_{{ act.access_id }}(ctx, world, edict),
+%% endif
+%% endfor
+            _ => (true, vec![])
+        }
+    }
 }
 impl world::Action for Action {
     type ActionId = ActionId;
@@ -281,6 +315,17 @@ impl world::Accessible for Warp {
         }
     }
     fn price(&self) -> &Currency { &self.price }
+
+    fn explain_rule(&self, ctx: &Self::Context, world: &World, edict: &mut FxHashMap<String, String>) -> (bool, Vec<String>) {
+        match self.id {
+%% for w in warps.values()|sort(attribute='id')
+%% if w.access_id
+            WarpId::{{ w.id }} => rules::explain_{{ w.access_id }}(ctx, world, edict),
+%% endif
+%% endfor
+            _ => (true, vec![])
+        }
+    }
 }
 impl world::Warp for Warp {
     type WarpId = WarpId;
