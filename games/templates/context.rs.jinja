@@ -421,6 +421,14 @@ impl context::Ctx for Context {
 %% endfor
         }
     }
+    fn amount_could_afford(&self, cost: &Currency) -> i16 {
+        match cost {
+            Currency::Free => 1,
+%% for ptype in price_types
+            Currency::{{ ptype|capitalize }}(_) => self.{{ ptype }}.into(),
+%% endfor
+        }
+    }
     fn spend(&mut self, cost: &Currency) {
         match cost {
             Currency::Free => (),

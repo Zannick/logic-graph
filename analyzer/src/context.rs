@@ -69,6 +69,7 @@ pub trait Ctx:
 
     fn can_afford(&self, cost: &<<Self::World as World>::Location as Accessible>::Currency)
         -> bool;
+    fn amount_could_afford(&self, cost: &<<Self::World as World>::Location as Accessible>::Currency) -> i16;
     fn spend(&mut self, cost: &<<Self::World as World>::Location as Accessible>::Currency);
 
     fn visit(&mut self, loc_id: <<Self::World as World>::Location as Location>::LocId);
