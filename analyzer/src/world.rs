@@ -1,5 +1,6 @@
 use crate::condense::CondensedEdge;
 use crate::context::Ctx;
+use crate::new_hashset;
 use rustc_hash::FxHashMap;
 use serde::{Deserialize, Serialize};
 use std::fmt::{Debug, Display};
@@ -33,8 +34,8 @@ pub trait Accessible: Sync {
         &self,
         ctx: &Self::Context,
         world: &<Self::Context as Ctx>::World,
-        edict: &mut FxHashMap<String, String>,
-    ) -> (bool, Vec<String>);
+        edict: &mut FxHashMap<&'static str, String>,
+    ) -> (bool, Vec<&'static str>);
     fn explain(&self, ctx: &Self::Context, world: &<Self::Context as Ctx>::World) -> String
     where
         <<Self::Context as Ctx>::World as World>::Location: Accessible<Currency = Self::Currency>,
@@ -49,7 +50,14 @@ pub trait Accessible: Sync {
             ));
         }
         let (_, named) = self.explain_rule(ctx, world, &mut edict);
-        explains.extend(named.into_iter().map(|k| format!("{}: {}", k, edict[&k])));
+        // Only display each once.
+        let mut seen = new_hashset();
+        for key in named {
+            if !seen.contains(&key) {
+                explains.push(format!("{}: {}", key, edict[&key]));
+                seen.insert(key);
+            }
+        }
         explains.join("\n")
     }
 }

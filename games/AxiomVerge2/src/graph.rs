@@ -3269,8 +3269,8 @@ impl world::Accessible for Location {
         &self,
         ctx: &Self::Context,
         world: &World,
-        edict: &mut FxHashMap<String, String>,
-    ) -> (bool, Vec<String>) {
+        edict: &mut FxHashMap<&'static str, String>,
+    ) -> (bool, Vec<&'static str>) {
         match self.id {
             LocationId::Amagi__West_Lake__Cavern_Rear_Pillar__Boss_Reward => {
                 rules::explain_defeat_mus_a_m20(ctx, world, edict)
@@ -5145,8 +5145,8 @@ impl world::Accessible for Exit {
         &self,
         ctx: &Self::Context,
         world: &World,
-        edict: &mut FxHashMap<String, String>,
-    ) -> (bool, Vec<String>) {
+        edict: &mut FxHashMap<&'static str, String>,
+    ) -> (bool, Vec<&'static str>) {
         match self.id {
             ExitId::Amagi__Liru_Room__Platform_4_Left__ex__West_20_1 => rules::explain_hook_and_hover_and_underwater_movement(ctx, world, edict),
             ExitId::Amagi__Liru_Room__Platform_4_Right__ex__East_Passage_1 => rules::explain_hook_and_underwater_movement(ctx, world, edict),
@@ -6777,8 +6777,8 @@ impl world::Accessible for Action {
         &self,
         ctx: &Self::Context,
         world: &World,
-        edict: &mut FxHashMap<String, String>,
-    ) -> (bool, Vec<String>) {
+        edict: &mut FxHashMap<&'static str, String>,
+    ) -> (bool, Vec<&'static str>) {
         match self.id {
             ActionId::Amagi__Main_Area__Carving__Key_Combo => {
                 rules::explain_amagi__main_area__carving__key_combo__req(ctx, world, edict)
@@ -7358,8 +7358,8 @@ impl world::Accessible for Warp {
         &self,
         ctx: &Self::Context,
         world: &World,
-        edict: &mut FxHashMap<String, String>,
-    ) -> (bool, Vec<String>) {
+        edict: &mut FxHashMap<&'static str, String>,
+    ) -> (bool, Vec<&'static str>) {
         match self.id {
             WarpId::BreachSave => rules::explain_realm_eq_breach(ctx, world, edict),
             WarpId::EarthSave => rules::explain_within_antarctica(ctx, world, edict),

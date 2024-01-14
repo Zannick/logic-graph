@@ -337,23 +337,144 @@ class RustExplainerVisitor(RustBaseVisitor):
         super().__init__(*args, **kwargs)
         self.code_writer = RustVisitor(*args, **kwargs)
 
+    def _getRefExplainer(self, ref):
+        get = self._getRefGetter(ref)
+        if ref in BUILTINS:
+            return None
+        return f'edict.insert("{ref}", format!("{{:?}}", {get}))'
+
+    def _getExplainerFunc(self, func):
+        if func in BUILTINS:
+            return None
+        elif func in self.rules:
+            return f'rexplain__{construct_id(func[1:])}!'
+        else:
+            return f'hexplain__{construct_id(func[1:])}!'
+
+    # TODO: Remove the "or (false, vec![])" parts when all visits are supported
+    def visit(self, ctx):
+        val = super().visit(ctx)
+        if val is None:
+            return '(false, vec![])'
+        return val
+
     def visitBoolExpr(self, ctx):
         try:
             if ctx.OR():
-                return f'({self.visit(ctx.boolExpr(0))} || {self.visit(ctx.boolExpr(1))})'
+                lines = [
+                    f'let mut left = {self.visit(ctx.boolExpr(0))}',
+                    # short-circuit logic
+                    'if left.0 { left } else { let mut right = ' + str(self.visit(ctx.boolExpr(1))),
+                    'left.1.append(&mut right.1); (right.0, left.1) }'
+                ]
             elif ctx.AND():
-                return f'({self.visit(ctx.boolExpr(0))} && {self.visit(ctx.boolExpr(1))})'
+                lines = [
+                    f'let mut left = {self.visit(ctx.boolExpr(0))}',
+                    # short-circuit logic
+                    'if !left.0 { left } else { let mut right = ' + str(self.visit(ctx.boolExpr(1))),
+                    'left.1.append(&mut right.1); (right.0, left.1) }'
+                ]
             elif ctx.TRUE():
-                return f'true'
+                return f'(true, vec![])'
             elif ctx.FALSE():
-                return f'false'
+                return f'(false, vec![])'
             elif ctx.boolExpr():
                 return f'({self.visit(ctx.boolExpr(0))})'
             elif ctx.NOT():
-                return '!' + super().visitBoolExpr(ctx)
+                # TODO: Remove the "or (false, vec![])" parts
+                lines = [
+                    f'let val = {super().visitBoolExpr(ctx) or "(false, vec![])"}',
+                    '(!val.0, val.1)'
+                ]
             else:
-                return super().visitBoolExpr(ctx)
+                return super().visitBoolExpr(ctx) or "(false, vec![])"
+            return f'{{ {"; ".join(lines)} }}'
         except AttributeError as e:
             raise AttributeError(str(e) + '; ' + ' '.join(
                 f'[{c.toStringTree(ruleNames = RulesParser.ruleNames)}]'
                 for c in ctx.boolExpr()))
+
+    def visitInvoke(self, ctx):
+        items = ctx.ITEM()
+        func, args = self._getFuncAndArgs(str(ctx.FUNC()))
+        if items:
+            args.extend(f'Item::{item}' for item in items)
+        elif ctx.value():
+            args.append(str(self.code_writer.visit(ctx.value())))
+        elif ctx.PLACE():
+            places = [str(p)[1:-1] for p in ctx.PLACE()]
+            args.extend(construct_place_id(pl) for pl in places)
+        elif ctx.REF():
+            args.append(self._getRefGetter(str(ctx.REF())[1:]))
+        else:
+            arg = f'{ctx.LIT() or ctx.INT() or ctx.FLOAT() or ""}'
+            if arg:
+                args.append(arg)
+        efunc = self._getExplainerFunc(str(ctx.FUNC()))
+        if efunc:
+            lines = [
+                f'let (res, mut refs) = {efunc}({", ".join(args)}, edict)',
+                f'edict.insert("{ctx.getText()}", format!("{{:?}}", res))',
+                f'refs.push("{ctx.getText()}")',
+                f'({"!" if ctx.NOT() else ""}res, refs)'
+            ]
+            if ctx.REF():
+                if exp := self._getRefExplainer(str(ctx.REF())[1:]):
+                    # Insert before the last element
+                    lines[-1:-1] = [
+                        exp,
+                        f'refs.push("{ctx.REF}")'
+                    ]
+        else:
+            lines = [
+                f'let res = {func}({", ".join(args)})',
+                f'edict.insert("{ctx.getText()}", format!("{{:?}}", res))',
+                f'({"!" if ctx.NOT() else ""}res, vec!["{ctx.getText()}"])'
+            ]
+            if ctx.REF():
+                if exp := self._getRefExplainer(str(ctx.REF())[1:]):
+                    # Replace the last element
+                    lines[-1:] = [
+                        exp,
+                        f'({"!" if ctx.NOT() else ""}res, vec!["{ctx.getText()}", "{ctx.REF()}"])'
+                    ]
+        return f'{{ {"; ".join(lines)} }}'
+
+    def _visitConditional(self, *args):
+        cases = []
+        while len(args) > 1:
+            cond, then, *args = args
+            cases.append("; ".join([
+                f'let mut cond = {self.visit(cond)}',
+                'refs.append(cond.1)'
+                'if cond.0 { let mut then = ' + str(self.visit(then)),
+                'refs.append(&mut then.1)',
+                '(then.0, refs) }'
+            ]))
+        if args:
+            cases.append("; ".join([
+                f'let mut then = {self.visit(then)}',
+                'refs.append(&mut then.1)',
+                '(then.0, refs)',
+            ]))
+        else:
+            cases.append(' (false, refs)')
+        return f'{{ let mut refs = Vec::new(); {" else { ".join(cases)} {" }" * (len(cases) - 1)} }}'
+
+    def visitIfThenElse(self, ctx):
+        return self._visitConditional(*ctx.boolExpr())
+
+    def visitPyTernary(self, ctx):
+        return self._visitConditional(ctx.boolExpr(1), ctx.boolExpr(0), ctx.boolExpr(2))
+
+    def visitCmp(self, ctx):
+        left_str = ctx.value().getText()
+        right_str = ctx.num().getText()
+        lines = [
+            f'let left = Into::<i32>::into({self.code_writer.visit(ctx.value())})',
+            f'let right = {self.code_writer.visit(ctx.num())}',
+            f'edict.insert("{left_str}", format!("{{:?}}", left))',
+            f'edict.insert("{right_str}", format!("{{:?}}", right))',
+            f'(left {ctx.getChild(1)} right.into(), vec!["{left_str}", "{right_str}"])',
+        ]
+        return f'{{ {"; ".join(lines)} }}'

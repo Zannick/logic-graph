@@ -2557,2824 +2557,5700 @@ pub fn action_skip__ebih_gt_waterfall_gt_alcove_gt_block_left_skip__ebih_gt_wate
 pub fn explain___all_urns_all_weapons_other_items_all_notes_all_health_all_flasks(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // [$all_urns, $all_weapons, $other_items, $all_notes, $all_health, $all_flasks]
     (false, vec![])
 }
 pub fn explain___escape_objective(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // [Escape, $objective]
     (false, vec![])
 }
 pub fn explain___objective(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // [$objective]
     (false, vec![])
 }
 pub fn explain___remote_drone(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // [Remote_Drone]
     (false, vec![])
 }
 pub fn explain_activate(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // $activate
-    (false, vec![])
+    {
+        let (res, mut refs) = hexplain__activate!(ctx, world, edict);
+        edict.insert("$activate", format!("{:?}", res));
+        refs.push("$activate");
+        (res, refs)
+    }
 }
 pub fn explain_amagi__main_area__carving__ex__secret_outcropping_1__req(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // ^_combo and ($grab or $climb)
-    (false, vec![])
+    {
+        let mut left = (false, vec![]);
+        if !left.0 {
+            left
+        } else {
+            let mut right = ({
+                let mut left = {
+                    let (res, mut refs) = hexplain__grab!(ctx, world, edict);
+                    edict.insert("$grab", format!("{:?}", res));
+                    refs.push("$grab");
+                    (res, refs)
+                };
+                if left.0 {
+                    left
+                } else {
+                    let mut right = {
+                        let (res, mut refs) = hexplain__climb!(ctx, world, edict);
+                        edict.insert("$climb", format!("{:?}", res));
+                        refs.push("$climb");
+                        (res, refs)
+                    };
+                    left.1.append(&mut right.1);
+                    (right.0, left.1)
+                }
+            });
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
 }
 pub fn explain_amagi__main_area__carving__ex__secret_outcropping_2__req(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // ^_combo and $hook
-    (false, vec![])
+    {
+        let mut left = (false, vec![]);
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__hook!(ctx, world, edict);
+                edict.insert("$hook", format!("{:?}", res));
+                refs.push("$hook");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
 }
 pub fn explain_amagi__main_area__carving__key_combo__req(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // not ^_combo
-    (false, vec![])
+    {
+        let val = (false, vec![]);
+        (!val.0, val.1)
+    }
 }
 pub fn explain_amagi_dragon_eye_passage(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // Amagi_Dragon_Eye_Passage
     (false, vec![])
 }
 pub fn explain_amagi_stronghold_boulder_1(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // Amagi_Stronghold_Boulder_1
     (false, vec![])
 }
 pub fn explain_amagi_stronghold_boulder_1_and_underwater_movement_and___grab_or_climb(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // Amagi_Stronghold_Boulder_1 and Underwater_Movement and ($grab or $climb)
-    (false, vec![])
+    {
+        let mut left = {
+            let mut left = (false, vec![]);
+            if !left.0 {
+                left
+            } else {
+                let mut right = (false, vec![]);
+                left.1.append(&mut right.1);
+                (right.0, left.1)
+            }
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = ({
+                let mut left = {
+                    let (res, mut refs) = hexplain__grab!(ctx, world, edict);
+                    edict.insert("$grab", format!("{:?}", res));
+                    refs.push("$grab");
+                    (res, refs)
+                };
+                if left.0 {
+                    left
+                } else {
+                    let mut right = {
+                        let (res, mut refs) = hexplain__climb!(ctx, world, edict);
+                        edict.insert("$climb", format!("{:?}", res));
+                        refs.push("$climb");
+                        (res, refs)
+                    };
+                    left.1.append(&mut right.1);
+                    (right.0, left.1)
+                }
+            });
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
 }
 pub fn explain_amagi_stronghold_boulder_2(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // Amagi_Stronghold_Boulder_2
     (false, vec![])
 }
 pub fn explain_amagi_stronghold_boulder_2_and_grab(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // Amagi_Stronghold_Boulder_2 and $grab
-    (false, vec![])
+    {
+        let mut left = (false, vec![]);
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__grab!(ctx, world, edict);
+                edict.insert("$grab", format!("{:?}", res));
+                refs.push("$grab");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
 }
 pub fn explain_amagi_stronghold_wall_1(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // Amagi_Stronghold_Wall_1
     (false, vec![])
 }
 pub fn explain_amagi_stronghold_wall_2(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // Amagi_Stronghold_Wall_2
     (false, vec![])
 }
 pub fn explain_amagi_west_lake_surface_wall(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // Amagi_West_Lake_Surface_Wall
     (false, vec![])
 }
 pub fn explain_annuna__east_bridge__tower_east_ledge__enter_combo__req(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // not ^_combo
-    (false, vec![])
+    {
+        let val = (false, vec![]);
+        (!val.0, val.1)
+    }
 }
 pub fn explain_annuna__east_bridge__tower_east_ledge__ex__tower_secret_1__req(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // ^_combo
     (false, vec![])
 }
 pub fn explain_annuna__east_bridge__tower_mid_air_west__ex__tower_secret_1__req(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // ^_combo
     (false, vec![])
 }
 pub fn explain_annuna__east_bridge__tower_secret__enter_combo__req(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // not ^_combo
-    (false, vec![])
+    {
+        let val = (false, vec![]);
+        (!val.0, val.1)
+    }
 }
 pub fn explain_annuna__east_bridge__tower_secret__ex__tower_east_ledge_1__req(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // ^_combo
     (false, vec![])
 }
 pub fn explain_annuna__east_bridge__tower_secret__ex__tower_mid_air_east_1__req(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // ^_combo
     (false, vec![])
 }
 pub fn explain_annuna__east_bridge__tower_secret__ex__tower_mid_air_west_1__req(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // ^_combo
     (false, vec![])
 }
 pub fn explain_annuna__east_bridge__tower_secret__ex__tower_peak_1__req(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // ^_combo and $grab
-    (false, vec![])
+    {
+        let mut left = (false, vec![]);
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__grab!(ctx, world, edict);
+                edict.insert("$grab", format!("{:?}", res));
+                refs.push("$grab");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
 }
 pub fn explain_annuna__east_bridge__tower_secret__ex__tower_peak_2__req(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // ^_combo and $hook
-    (false, vec![])
+    {
+        let mut left = (false, vec![]);
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__hook!(ctx, world, edict);
+                edict.insert("$hook", format!("{:?}", res));
+                refs.push("$hook");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
 }
 pub fn explain_annuna__east_bridge__tower_secret__ex__tower_west_ledge_1__req(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // ^_combo
     (false, vec![])
 }
 pub fn explain_annuna__east_bridge__tower_west_ledge__enter_combo__req(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // not ^_combo
-    (false, vec![])
+    {
+        let val = (false, vec![]);
+        (!val.0, val.1)
+    }
 }
 pub fn explain_annuna__east_bridge__tower_west_ledge__ex__tower_secret_1__req(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // ^_combo
     (false, vec![])
 }
 pub fn explain_annuna__west_climb__cache__ex__switch_ledge_1__req(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // ^_door_opened
     (false, vec![])
 }
 pub fn explain_annuna__west_climb__switch_ledge__ex__cache_1__req(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // ^_door_opened
     (false, vec![])
 }
 pub fn explain_annuna__west_climb__switch_ledge__open_door__req(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // $unlock4 and not ^_door_opened
-    (false, vec![])
+    {
+        let mut left = {
+            let (res, mut refs) = hexplain__unlock4!(ctx, world, edict);
+            edict.insert("$unlock4", format!("{:?}", res));
+            refs.push("$unlock4");
+            (res, refs)
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let val = (false, vec![]);
+                (!val.0, val.1)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
 }
 pub fn explain_annuna_east_bridge_gate(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // Annuna_East_Bridge_Gate
     (false, vec![])
 }
 pub fn explain_annuna_mirror_match_switch(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // Annuna_Mirror_Match_Switch
     (false, vec![])
 }
 pub fn explain_anuman(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // Anuman
     (false, vec![])
 }
 pub fn explain_anuman_and_grab(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // Anuman and $grab
-    (false, vec![])
+    {
+        let mut left = (false, vec![]);
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__grab!(ctx, world, edict);
+                edict.insert("$grab", format!("{:?}", res));
+                refs.push("$grab");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
 }
 pub fn explain_anunna_vertical_room_gate(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // Anunna_Vertical_Room_Gate
     (false, vec![])
 }
 pub fn explain_apocalypse_bomb(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // Apocalypse_Bomb
     (false, vec![])
 }
 pub fn explain_block_clip_and_not_ebih_waterfall_block_left(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // $block_clip and not Ebih_Waterfall_Block_Left
-    (false, vec![])
+    {
+        let mut left = {
+            let (res, mut refs) = hexplain__block_clip!(ctx, world, edict);
+            edict.insert("$block_clip", format!("{:?}", res));
+            refs.push("$block_clip");
+            (res, refs)
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = (false, vec![]);
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
 }
 pub fn explain_block_clip_and_not_ebih_waterfall_block_right(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // $block_clip and not Ebih_Waterfall_Block_Right
-    (false, vec![])
+    {
+        let mut left = {
+            let (res, mut refs) = hexplain__block_clip!(ctx, world, edict);
+            edict.insert("$block_clip", format!("{:?}", res));
+            refs.push("$block_clip");
+            (res, refs)
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = (false, vec![]);
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
 }
 pub fn explain_block_clip_escape_and_not_uhrum_annuna_corridor_block(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // $block_clip_escape and not Uhrum_Annuna_Corridor_Block
-    (false, vec![])
+    {
+        let mut left = {
+            let (res, mut refs) = hexplain__block_clip_escape!(ctx, world, edict);
+            edict.insert("$block_clip_escape", format!("{:?}", res));
+            refs.push("$block_clip_escape");
+            (res, refs)
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = (false, vec![]);
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
 }
 pub fn explain_boomerang(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // $boomerang
-    (false, vec![])
+    {
+        let (res, mut refs) = hexplain__boomerang!(ctx, world, edict);
+        edict.insert("$boomerang", format!("{:?}", res));
+        refs.push("$boomerang");
+        (res, refs)
+    }
 }
 pub fn explain_boomerang1(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // Boomerang
     (false, vec![])
 }
 pub fn explain_boomerang2(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // Boomerang
     (false, vec![])
 }
 pub fn explain_boomerang3(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // Boomerang
     (false, vec![])
 }
 pub fn explain_boomerang4(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // Boomerang
     (false, vec![])
 }
 pub fn explain_boomerang5(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // Boomerang
     (false, vec![])
 }
 pub fn explain_bs(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // $bs
-    (false, vec![])
+    {
+        let (res, mut refs) = hexplain__bs!(ctx, world, edict);
+        edict.insert("$bs", format!("{:?}", res));
+        refs.push("$bs");
+        (res, refs)
+    }
 }
 pub fn explain_can_damage(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // $can_damage
-    (false, vec![])
+    {
+        let (res, mut refs) = hexplain__can_damage!(ctx, world, edict);
+        edict.insert("$can_damage", format!("{:?}", res));
+        refs.push("$can_damage");
+        (res, refs)
+    }
 }
 pub fn explain_can_deploy(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // $can_deploy
-    (false, vec![])
+    {
+        let (res, mut refs) = hexplain__can_deploy!(ctx, world, edict);
+        edict.insert("$can_deploy", format!("{:?}", res));
+        refs.push("$can_deploy");
+        (res, refs)
+    }
 }
 pub fn explain_can_deploy_and_drone_hover(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // $can_deploy and Drone_Hover
-    (false, vec![])
+    {
+        let mut left = {
+            let (res, mut refs) = hexplain__can_deploy!(ctx, world, edict);
+            edict.insert("$can_deploy", format!("{:?}", res));
+            refs.push("$can_deploy");
+            (res, refs)
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = (false, vec![]);
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
 }
 pub fn explain_can_deploy_and_slingshot_hook(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // $can_deploy and Slingshot_Hook
-    (false, vec![])
+    {
+        let mut left = {
+            let (res, mut refs) = hexplain__can_deploy!(ctx, world, edict);
+            edict.insert("$can_deploy", format!("{:?}", res));
+            refs.push("$can_deploy");
+            (res, refs)
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = (false, vec![]);
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
 }
 pub fn explain_can_deploy_and_slingshot_hook_and_drone_hover(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // $can_deploy and Slingshot_Hook and Drone_Hover
-    (false, vec![])
+    {
+        let mut left = {
+            let mut left = {
+                let (res, mut refs) = hexplain__can_deploy!(ctx, world, edict);
+                edict.insert("$can_deploy", format!("{:?}", res));
+                refs.push("$can_deploy");
+                (res, refs)
+            };
+            if !left.0 {
+                left
+            } else {
+                let mut right = (false, vec![]);
+                left.1.append(&mut right.1);
+                (right.0, left.1)
+            }
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = (false, vec![]);
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
 }
 pub fn explain_charge(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // $charge
-    (false, vec![])
+    {
+        let (res, mut refs) = hexplain__charge!(ctx, world, edict);
+        edict.insert("$charge", format!("{:?}", res));
+        refs.push("$charge");
+        (res, refs)
+    }
 }
 pub fn explain_climb(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // $climb
-    (false, vec![])
+    {
+        let (res, mut refs) = hexplain__climb!(ctx, world, edict);
+        edict.insert("$climb", format!("{:?}", res));
+        refs.push("$climb");
+        (res, refs)
+    }
 }
 pub fn explain_climb_and_annuna_east_bridge_gate(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // $climb and Annuna_East_Bridge_Gate
-    (false, vec![])
+    {
+        let mut left = {
+            let (res, mut refs) = hexplain__climb!(ctx, world, edict);
+            edict.insert("$climb", format!("{:?}", res));
+            refs.push("$climb");
+            (res, refs)
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = (false, vec![]);
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
 }
 pub fn explain_climb_and_can_deploy_and_hover_and_slingshot_hook(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // $climb and $can_deploy and Hover and Slingshot_Hook
-    (false, vec![])
+    {
+        let mut left = {
+            let mut left = {
+                let mut left = {
+                    let (res, mut refs) = hexplain__climb!(ctx, world, edict);
+                    edict.insert("$climb", format!("{:?}", res));
+                    refs.push("$climb");
+                    (res, refs)
+                };
+                if !left.0 {
+                    left
+                } else {
+                    let mut right = {
+                        let (res, mut refs) = hexplain__can_deploy!(ctx, world, edict);
+                        edict.insert("$can_deploy", format!("{:?}", res));
+                        refs.push("$can_deploy");
+                        (res, refs)
+                    };
+                    left.1.append(&mut right.1);
+                    (right.0, left.1)
+                }
+            };
+            if !left.0 {
+                left
+            } else {
+                let mut right = (false, vec![]);
+                left.1.append(&mut right.1);
+                (right.0, left.1)
+            }
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = (false, vec![]);
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
 }
 pub fn explain_climb_and_grab(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // $climb and $grab
-    (false, vec![])
+    {
+        let mut left = {
+            let (res, mut refs) = hexplain__climb!(ctx, world, edict);
+            edict.insert("$climb", format!("{:?}", res));
+            refs.push("$climb");
+            (res, refs)
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__grab!(ctx, world, edict);
+                edict.insert("$grab", format!("{:?}", res));
+                refs.push("$grab");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
 }
 pub fn explain_climb_and_grab_and_anuman(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // $climb and $grab and Anuman
-    (false, vec![])
+    {
+        let mut left = {
+            let mut left = {
+                let (res, mut refs) = hexplain__climb!(ctx, world, edict);
+                edict.insert("$climb", format!("{:?}", res));
+                refs.push("$climb");
+                (res, refs)
+            };
+            if !left.0 {
+                left
+            } else {
+                let mut right = {
+                    let (res, mut refs) = hexplain__grab!(ctx, world, edict);
+                    edict.insert("$grab", format!("{:?}", res));
+                    refs.push("$grab");
+                    (res, refs)
+                };
+                left.1.append(&mut right.1);
+                (right.0, left.1)
+            }
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = (false, vec![]);
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
 }
 pub fn explain_climb_or_hook(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // $climb or $hook
-    (false, vec![])
+    {
+        let mut left = {
+            let (res, mut refs) = hexplain__climb!(ctx, world, edict);
+            edict.insert("$climb", format!("{:?}", res));
+            refs.push("$climb");
+            (res, refs)
+        };
+        if left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__hook!(ctx, world, edict);
+                edict.insert("$hook", format!("{:?}", res));
+                refs.push("$hook");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
 }
 pub fn explain_defeat_mus_a_m20(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // Defeat_MUS_A_M20
     (false, vec![])
 }
 pub fn explain_drone_melee_damage(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // Drone_Melee_Damage
     (false, vec![])
 }
 pub fn explain_drone_melee_damage_2(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // Drone_Melee_Damage_2
     (false, vec![])
 }
 pub fn explain_drone_melee_speed(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // Drone_Melee_Speed
     (false, vec![])
 }
 pub fn explain_drone_melee_speed_2(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // Drone_Melee_Speed_2
     (false, vec![])
 }
 pub fn explain_ebih__base_camp__left_platform__move_left_platform__req(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // $activate and not ^_left_platform_moved
-    (false, vec![])
+    {
+        let mut left = {
+            let (res, mut refs) = hexplain__activate!(ctx, world, edict);
+            edict.insert("$activate", format!("{:?}", res));
+            refs.push("$activate");
+            (res, refs)
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let val = (false, vec![]);
+                (!val.0, val.1)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
 }
 pub fn explain_ebih__base_camp__left_platform_moved__reset_left_platform__req(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // $activate and ^_left_platform_moved
-    (false, vec![])
+    {
+        let mut left = {
+            let (res, mut refs) = hexplain__activate!(ctx, world, edict);
+            edict.insert("$activate", format!("{:?}", res));
+            refs.push("$activate");
+            (res, refs)
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = (false, vec![]);
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
 }
 pub fn explain_ebih__base_camp__top_platform__ex__left_platform_1__req(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // $hover and not ^_left_platform_moved
-    (false, vec![])
+    {
+        let mut left = {
+            let (res, mut refs) = hexplain__hover!(ctx, world, edict);
+            edict.insert("$hover", format!("{:?}", res));
+            refs.push("$hover");
+            (res, refs)
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let val = (false, vec![]);
+                (!val.0, val.1)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
 }
 pub fn explain_ebih__base_camp__top_platform__ex__left_platform_moved_1__req(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // ^_left_platform_moved
     (false, vec![])
 }
 pub fn explain_ebih__base_camp__west_11__ex__left_platform_1__req(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // $platform and $hook and not ^_left_platform_moved
-    (false, vec![])
+    {
+        let mut left = {
+            let mut left = {
+                let (res, mut refs) = hexplain__platform!(ctx, world, edict);
+                edict.insert("$platform", format!("{:?}", res));
+                refs.push("$platform");
+                (res, refs)
+            };
+            if !left.0 {
+                left
+            } else {
+                let mut right = {
+                    let (res, mut refs) = hexplain__hook!(ctx, world, edict);
+                    edict.insert("$hook", format!("{:?}", res));
+                    refs.push("$hook");
+                    (res, refs)
+                };
+                left.1.append(&mut right.1);
+                (right.0, left.1)
+            }
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let val = (false, vec![]);
+                (!val.0, val.1)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
 }
 pub fn explain_ebih__base_camp__west_11__ex__left_platform_2__req(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // $hover and not ^_left_platform_moved
-    (false, vec![])
+    {
+        let mut left = {
+            let (res, mut refs) = hexplain__hover!(ctx, world, edict);
+            edict.insert("$hover", format!("{:?}", res));
+            refs.push("$hover");
+            (res, refs)
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let val = (false, vec![]);
+                (!val.0, val.1)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
 }
 pub fn explain_ebih__drone_room__pit_left__activate_lift__req(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // Infect and ^_platform_moved
-    (false, vec![])
+    {
+        let mut left = (false, vec![]);
+        if !left.0 {
+            left
+        } else {
+            let mut right = (false, vec![]);
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
 }
 pub fn explain_ebih__drone_room__pit_left__activate_lift_but_get_off_early__req(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // Infect and ^_platform_moved
-    (false, vec![])
+    {
+        let mut left = (false, vec![]);
+        if !left.0 {
+            left
+        } else {
+            let mut right = (false, vec![]);
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
 }
 pub fn explain_ebih__drone_room__portal_exit__activate_platform__req(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // Infect and not ^_platform_moved
-    (false, vec![])
+    {
+        let mut left = (false, vec![]);
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let val = (false, vec![]);
+                (!val.0, val.1)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
 }
 pub fn explain_ebih__drone_room__portal_exit__ex__moving_platform_1__req(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // Infect and not ^_platform_moved
-    (false, vec![])
+    {
+        let mut left = (false, vec![]);
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let val = (false, vec![]);
+                (!val.0, val.1)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
 }
 pub fn explain_ebih__drone_room__portal_exit__ex__moving_platform_2__req(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // $hook and not ^_platform_moved
-    (false, vec![])
+    {
+        let mut left = {
+            let (res, mut refs) = hexplain__hook!(ctx, world, edict);
+            edict.insert("$hook", format!("{:?}", res));
+            refs.push("$hook");
+            (res, refs)
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let val = (false, vec![]);
+                (!val.0, val.1)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
 }
 pub fn explain_ebih__ebih_east__dispenser__activate_lift__req(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // Infect and ^_platform2_moved and ($grab or $hook)
-    (false, vec![])
+    {
+        let mut left = {
+            let mut left = (false, vec![]);
+            if !left.0 {
+                left
+            } else {
+                let mut right = (false, vec![]);
+                left.1.append(&mut right.1);
+                (right.0, left.1)
+            }
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = ({
+                let mut left = {
+                    let (res, mut refs) = hexplain__grab!(ctx, world, edict);
+                    edict.insert("$grab", format!("{:?}", res));
+                    refs.push("$grab");
+                    (res, refs)
+                };
+                if left.0 {
+                    left
+                } else {
+                    let mut right = {
+                        let (res, mut refs) = hexplain__hook!(ctx, world, edict);
+                        edict.insert("$hook", format!("{:?}", res));
+                        refs.push("$hook");
+                        (res, refs)
+                    };
+                    left.1.append(&mut right.1);
+                    (right.0, left.1)
+                }
+            });
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
 }
 pub fn explain_ebih__ebih_east__dispenser__ex__lower_moving_platform_1__req(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // $grab and not ^_platform2_moved
-    (false, vec![])
+    {
+        let mut left = {
+            let (res, mut refs) = hexplain__grab!(ctx, world, edict);
+            edict.insert("$grab", format!("{:?}", res));
+            refs.push("$grab");
+            (res, refs)
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let val = (false, vec![]);
+                (!val.0, val.1)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
 }
 pub fn explain_ebih__ebih_east__dispenser__ex__lower_moving_platform_2__req(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // $hook and not ^_platform2_moved
-    (false, vec![])
+    {
+        let mut left = {
+            let (res, mut refs) = hexplain__hook!(ctx, world, edict);
+            edict.insert("$hook", format!("{:?}", res));
+            refs.push("$hook");
+            (res, refs)
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let val = (false, vec![]);
+                (!val.0, val.1)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
 }
 pub fn explain_ebih__ebih_east__lower_moving_platform__activate_lift__req(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // Infect and $grab and not ^_platform2_moved
-    (false, vec![])
+    {
+        let mut left = {
+            let mut left = (false, vec![]);
+            if !left.0 {
+                left
+            } else {
+                let mut right = {
+                    let (res, mut refs) = hexplain__grab!(ctx, world, edict);
+                    edict.insert("$grab", format!("{:?}", res));
+                    refs.push("$grab");
+                    (res, refs)
+                };
+                left.1.append(&mut right.1);
+                (right.0, left.1)
+            }
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let val = (false, vec![]);
+                (!val.0, val.1)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
 }
 pub fn explain_ebih__ebih_east__lower_moving_platform__activate_ride__req(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // Infect and not ^_platform2_moved
-    (false, vec![])
+    {
+        let mut left = (false, vec![]);
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let val = (false, vec![]);
+                (!val.0, val.1)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
 }
 pub fn explain_ebih__ebih_east__moving_platform__activate_ride__req(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // Infect and $grab and not ^_platform1_moved
-    (false, vec![])
+    {
+        let mut left = {
+            let mut left = (false, vec![]);
+            if !left.0 {
+                left
+            } else {
+                let mut right = {
+                    let (res, mut refs) = hexplain__grab!(ctx, world, edict);
+                    edict.insert("$grab", format!("{:?}", res));
+                    refs.push("$grab");
+                    (res, refs)
+                };
+                left.1.append(&mut right.1);
+                (right.0, left.1)
+            }
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let val = (false, vec![]);
+                (!val.0, val.1)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
 }
 pub fn explain_ebih__ebih_west__above_door__ex__below_door_1__req(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // ^_door_open
     (false, vec![])
 }
 pub fn explain_ebih__ebih_west__above_door__ex__refill_station_1__req(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // not ^_door_open or $grab
-    (false, vec![])
+    {
+        let mut left = {
+            let val = (false, vec![]);
+            (!val.0, val.1)
+        };
+        if left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__grab!(ctx, world, edict);
+                edict.insert("$grab", format!("{:?}", res));
+                refs.push("$grab");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
 }
 pub fn explain_ebih__ebih_west__above_door__ex__small_gap_1__req(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // not ^_door_open
-    (false, vec![])
+    {
+        let val = (false, vec![]);
+        (!val.0, val.1)
+    }
 }
 pub fn explain_ebih__ebih_west__below_door__ex__above_door_1__req(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // $grab and ^_door_open
-    (false, vec![])
+    {
+        let mut left = {
+            let (res, mut refs) = hexplain__grab!(ctx, world, edict);
+            edict.insert("$grab", format!("{:?}", res));
+            refs.push("$grab");
+            (res, refs)
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = (false, vec![]);
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
 }
 pub fn explain_ebih__ebih_west__below_door__ex__refill_station_1__req(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // $hook and ^_door_open
-    (false, vec![])
+    {
+        let mut left = {
+            let (res, mut refs) = hexplain__hook!(ctx, world, edict);
+            edict.insert("$hook", format!("{:?}", res));
+            refs.push("$hook");
+            (res, refs)
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = (false, vec![]);
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
 }
 pub fn explain_ebih__grid_25_10_12__door__ex__door_left_1__req(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // ^_door_open
     (false, vec![])
 }
 pub fn explain_ebih__grid_25_10_12__door__ex__east_11_1__req(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // ^_door_open
     (false, vec![])
 }
 pub fn explain_ebih__grid_25_10_12__door_left__ex__door_1__req(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // ^_door_open
     (false, vec![])
 }
 pub fn explain_ebih__grid_25_10_12__east_11__ex__door_1__req(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // ^_door_open
     (false, vec![])
 }
 pub fn explain_ebih__vertical_interchange__door__ex__door_east_1__req(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // ^_door_open
     (false, vec![])
 }
 pub fn explain_ebih__vertical_interchange__door__ex__door_west_1__req(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // ^_door_open
     (false, vec![])
 }
 pub fn explain_ebih__vertical_interchange__door_east__ex__door_1__req(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // ^_door_open
     (false, vec![])
 }
 pub fn explain_ebih__vertical_interchange__door_west__ex__door_1__req(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // ^_door_open
     (false, vec![])
 }
 pub fn explain_ebih__vertical_interchange__west_13__open_door__req(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // $open and not ^_door_open
-    (false, vec![])
+    {
+        let mut left = {
+            let (res, mut refs) = hexplain__open!(ctx, world, edict);
+            edict.insert("$open", format!("{:?}", res));
+            refs.push("$open");
+            (res, refs)
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let val = (false, vec![]);
+                (!val.0, val.1)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
 }
 pub fn explain_ebih__waterfall__west_door__ex__west_door_left_1__req(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // ^_west_door_open
     (false, vec![])
 }
 pub fn explain_ebih__waterfall__west_door__ex__west_door_right_1__req(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // ^_west_door_open
     (false, vec![])
 }
 pub fn explain_ebih__waterfall__west_door_left__ex__west_door_1__req(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // ^_west_door_open
     (false, vec![])
 }
 pub fn explain_ebih__waterfall__west_door_right__ex__west_door_1__req(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // ^_west_door_open
     (false, vec![])
 }
 pub fn explain_ebih_alu(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // Ebih_Alu
     (false, vec![])
 }
 pub fn explain_ebih_interchange_block(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // Ebih_Interchange_Block
     (false, vec![])
 }
 pub fn explain_ebih_interchange_gate(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // Ebih_Interchange_Gate
     (false, vec![])
 }
 pub fn explain_ebih_interchange_gate_and_ebih_interchange_block_and_grab(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // Ebih_Interchange_Gate and Ebih_Interchange_Block and $grab
-    (false, vec![])
+    {
+        let mut left = {
+            let mut left = (false, vec![]);
+            if !left.0 {
+                left
+            } else {
+                let mut right = (false, vec![]);
+                left.1.append(&mut right.1);
+                (right.0, left.1)
+            }
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__grab!(ctx, world, edict);
+                edict.insert("$grab", format!("{:?}", res));
+                refs.push("$grab");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
 }
 pub fn explain_ebih_interchange_gate_and_ebih_interchange_block_and_hook(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // Ebih_Interchange_Gate and Ebih_Interchange_Block and $hook
-    (false, vec![])
+    {
+        let mut left = {
+            let mut left = (false, vec![]);
+            if !left.0 {
+                left
+            } else {
+                let mut right = (false, vec![]);
+                left.1.append(&mut right.1);
+                (right.0, left.1)
+            }
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__hook!(ctx, world, edict);
+                edict.insert("$hook", format!("{:?}", res));
+                refs.push("$hook");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
 }
 pub fn explain_ebih_interchange_gate_and_not_ebih_interchange_block_and_grab(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // Ebih_Interchange_Gate and not Ebih_Interchange_Block and $grab
-    (false, vec![])
+    {
+        let mut left = {
+            let mut left = (false, vec![]);
+            if !left.0 {
+                left
+            } else {
+                let mut right = (false, vec![]);
+                left.1.append(&mut right.1);
+                (right.0, left.1)
+            }
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__grab!(ctx, world, edict);
+                edict.insert("$grab", format!("{:?}", res));
+                refs.push("$grab");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
 }
 pub fn explain_ebih_interchange_gate_and_not_ebih_interchange_block_and_hook(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // Ebih_Interchange_Gate and not Ebih_Interchange_Block and $hook
-    (false, vec![])
+    {
+        let mut left = {
+            let mut left = (false, vec![]);
+            if !left.0 {
+                left
+            } else {
+                let mut right = (false, vec![]);
+                left.1.append(&mut right.1);
+                (right.0, left.1)
+            }
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__hook!(ctx, world, edict);
+                edict.insert("$hook", format!("{:?}", res));
+                refs.push("$hook");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
 }
 pub fn explain_ebih_wasteland_door(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // Ebih_Wasteland_Door
     (false, vec![])
 }
 pub fn explain_ebih_waterfall_wall(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // Ebih_Waterfall_Wall
     (false, vec![])
 }
 pub fn explain_ebih_west_block(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // Ebih_West_Block
     (false, vec![])
 }
 pub fn explain_fast_travel(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // Fast_Travel
     (false, vec![])
 }
 pub fn explain_ft_main_and___map_spot_within_menu_gt_kiengir_map(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // $ft_main and (^map_spot WITHIN `Menu > Kiengir Map`)
-    (false, vec![])
+    {
+        let mut left = {
+            let (res, mut refs) = hexplain__ft_main!(ctx, world, edict);
+            edict.insert("$ft_main", format!("{:?}", res));
+            refs.push("$ft_main");
+            (res, refs)
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = ((false, vec![]));
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
 }
 pub fn explain_giguna__carnelian__door__ex__switch_1__req(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // ^_door_opened
     (false, vec![])
 }
 pub fn explain_giguna__carnelian__door__ex__vault_1__req(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // ^_door_opened
     (false, vec![])
 }
 pub fn explain_giguna__carnelian__lower_susar__caught__req(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // not ^_lower_susar
-    (false, vec![])
+    {
+        let val = (false, vec![]);
+        (!val.0, val.1)
+    }
 }
 pub fn explain_giguna__carnelian__lower_susar__ex__rock_1__req(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // ^_lower_susar
     (false, vec![])
 }
 pub fn explain_giguna__carnelian__lower_susar__ex__west_ledge_1__req(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // ^_lower_susar and $grab
-    (false, vec![])
+    {
+        let mut left = (false, vec![]);
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__grab!(ctx, world, edict);
+                edict.insert("$grab", format!("{:?}", res));
+                refs.push("$grab");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
 }
 pub fn explain_giguna__carnelian__lower_susar__ex__west_ledge_2__req(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // ^_lower_susar and $hook
-    (false, vec![])
+    {
+        let mut left = (false, vec![]);
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__hook!(ctx, world, edict);
+                edict.insert("$hook", format!("{:?}", res));
+                refs.push("$hook");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
 }
 pub fn explain_giguna__carnelian__lower_susar__hack__req(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // not ^_lower_susar and $allegiance1
-    (false, vec![])
+    {
+        let mut left = {
+            let val = (false, vec![]);
+            (!val.0, val.1)
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__allegiance1!(ctx, world, edict);
+                edict.insert("$allegiance1", format!("{:?}", res));
+                refs.push("$allegiance1");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
 }
 pub fn explain_giguna__carnelian__switch__ex__door_1__req(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // ^_door_opened
     (false, vec![])
 }
 pub fn explain_giguna__carnelian__switch__open_door__req(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // $unlock3 and not ^_door_opened
-    (false, vec![])
+    {
+        let mut left = {
+            let (res, mut refs) = hexplain__unlock3!(ctx, world, edict);
+            edict.insert("$unlock3", format!("{:?}", res));
+            refs.push("$unlock3");
+            (res, refs)
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let val = (false, vec![]);
+                (!val.0, val.1)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
 }
 pub fn explain_giguna__carnelian__upper_susar__caught__req(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // not ^_upper_susar
-    (false, vec![])
+    {
+        let val = (false, vec![]);
+        (!val.0, val.1)
+    }
 }
 pub fn explain_giguna__carnelian__upper_susar__ex__east_cliff_1__req(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // ^_upper_susar
     (false, vec![])
 }
 pub fn explain_giguna__carnelian__upper_susar__ex__middle_platforms_1__req(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // ^_upper_susar
     (false, vec![])
 }
 pub fn explain_giguna__carnelian__upper_susar__ex__upper_path_1__req(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // ^_upper_susar
     (false, vec![])
 }
 pub fn explain_giguna__carnelian__upper_susar__hack__req(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // not ^_upper_susar and $allegiance1
-    (false, vec![])
+    {
+        let mut left = {
+            let val = (false, vec![]);
+            (!val.0, val.1)
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__allegiance1!(ctx, world, edict);
+                edict.insert("$allegiance1", format!("{:?}", res));
+                refs.push("$allegiance1");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
 }
 pub fn explain_giguna__carnelian__vault__ex__door_1__req(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // ^_door_opened
     (false, vec![])
 }
 pub fn explain_giguna__clouds__platform_start__hack_and_get_off_early__req(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // not ^_platform_and_portal and $activate
-    (false, vec![])
+    {
+        let mut left = {
+            let val = (false, vec![]);
+            (!val.0, val.1)
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__activate!(ctx, world, edict);
+                edict.insert("$activate", format!("{:?}", res));
+                refs.push("$activate");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
 }
 pub fn explain_giguna__clouds__platform_start__hack_and_ride_to_portal__req(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // not ^_platform_and_portal and $activate and $attract and Breach_Sight and Remote_Drone
-    (false, vec![])
+    {
+        let mut left = {
+            let mut left = {
+                let mut left = {
+                    let mut left = {
+                        let val = (false, vec![]);
+                        (!val.0, val.1)
+                    };
+                    if !left.0 {
+                        left
+                    } else {
+                        let mut right = {
+                            let (res, mut refs) = hexplain__activate!(ctx, world, edict);
+                            edict.insert("$activate", format!("{:?}", res));
+                            refs.push("$activate");
+                            (res, refs)
+                        };
+                        left.1.append(&mut right.1);
+                        (right.0, left.1)
+                    }
+                };
+                if !left.0 {
+                    left
+                } else {
+                    let mut right = {
+                        let (res, mut refs) = hexplain__attract!(ctx, world, edict);
+                        edict.insert("$attract", format!("{:?}", res));
+                        refs.push("$attract");
+                        (res, refs)
+                    };
+                    left.1.append(&mut right.1);
+                    (right.0, left.1)
+                }
+            };
+            if !left.0 {
+                left
+            } else {
+                let mut right = (false, vec![]);
+                left.1.append(&mut right.1);
+                (right.0, left.1)
+            }
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = (false, vec![]);
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
 }
 pub fn explain_giguna__clouds__platform_start__hack_deploy_ride_to_portal__req(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // not ^_platform_and_portal and $activate and $can_deploy and $attract and Breach_Sight
-    (false, vec![])
+    {
+        let mut left = {
+            let mut left = {
+                let mut left = {
+                    let mut left = {
+                        let val = (false, vec![]);
+                        (!val.0, val.1)
+                    };
+                    if !left.0 {
+                        left
+                    } else {
+                        let mut right = {
+                            let (res, mut refs) = hexplain__activate!(ctx, world, edict);
+                            edict.insert("$activate", format!("{:?}", res));
+                            refs.push("$activate");
+                            (res, refs)
+                        };
+                        left.1.append(&mut right.1);
+                        (right.0, left.1)
+                    }
+                };
+                if !left.0 {
+                    left
+                } else {
+                    let mut right = {
+                        let (res, mut refs) = hexplain__can_deploy!(ctx, world, edict);
+                        edict.insert("$can_deploy", format!("{:?}", res));
+                        refs.push("$can_deploy");
+                        (res, refs)
+                    };
+                    left.1.append(&mut right.1);
+                    (right.0, left.1)
+                }
+            };
+            if !left.0 {
+                left
+            } else {
+                let mut right = {
+                    let (res, mut refs) = hexplain__attract!(ctx, world, edict);
+                    edict.insert("$attract", format!("{:?}", res));
+                    refs.push("$attract");
+                    (res, refs)
+                };
+                left.1.append(&mut right.1);
+                (right.0, left.1)
+            }
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = (false, vec![]);
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
 }
 pub fn explain_giguna__clouds__platform_stop__ex__flipside_1__req(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // ^_platform_and_portal and ^mode == 'drone'
-    (false, vec![])
+    {
+        let mut left = (false, vec![]);
+        if !left.0 {
+            left
+        } else {
+            let mut right = (false, vec![]);
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
 }
 pub fn explain_giguna__east_caverns__arc_ledge__ex__hidden_passage_west_1__req(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // ^mode == 'drone' and Mist_Upgrade and ^_combo_entered
-    (false, vec![])
+    {
+        let mut left = {
+            let mut left = (false, vec![]);
+            if !left.0 {
+                left
+            } else {
+                let mut right = (false, vec![]);
+                left.1.append(&mut right.1);
+                (right.0, left.1)
+            }
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = (false, vec![]);
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
 }
 pub fn explain_giguna__east_caverns__arc_passage__ex__hidden_passage_west_1__req(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // ^mode == 'drone' and ^_combo_entered
-    (false, vec![])
+    {
+        let mut left = (false, vec![]);
+        if !left.0 {
+            left
+        } else {
+            let mut right = (false, vec![]);
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
 }
 pub fn explain_giguna__east_caverns__arc_passage__ex__hidden_passage_west_2__req(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // $hook and ^_combo_entered
-    (false, vec![])
+    {
+        let mut left = {
+            let (res, mut refs) = hexplain__hook!(ctx, world, edict);
+            edict.insert("$hook", format!("{:?}", res));
+            refs.push("$hook");
+            (res, refs)
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = (false, vec![]);
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
 }
 pub fn explain_giguna__east_caverns__lower_susar__caught__req(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // not ^_lower_susar
-    (false, vec![])
+    {
+        let val = (false, vec![]);
+        (!val.0, val.1)
+    }
 }
 pub fn explain_giguna__east_caverns__lower_susar__ex__east_grass_1__req(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // ^_lower_susar
     (false, vec![])
 }
 pub fn explain_giguna__east_caverns__lower_susar__ex__under_lower_ledge_1__req(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // ^_lower_susar
     (false, vec![])
 }
 pub fn explain_giguna__east_caverns__lower_susar__hack__req(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // not ^_lower_susar and $allegiance1
-    (false, vec![])
+    {
+        let mut left = {
+            let val = (false, vec![]);
+            (!val.0, val.1)
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__allegiance1!(ctx, world, edict);
+                edict.insert("$allegiance1", format!("{:?}", res));
+                refs.push("$allegiance1");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
 }
 pub fn explain_giguna__east_caverns__mid_susar__caught__req(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // not ^_mid_susar
-    (false, vec![])
+    {
+        let val = (false, vec![]);
+        (!val.0, val.1)
+    }
 }
 pub fn explain_giguna__east_caverns__mid_susar__ex__middle_ledge_1__req(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // $grab and ^_mid_susar
-    (false, vec![])
+    {
+        let mut left = {
+            let (res, mut refs) = hexplain__grab!(ctx, world, edict);
+            edict.insert("$grab", format!("{:?}", res));
+            refs.push("$grab");
+            (res, refs)
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = (false, vec![]);
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
 }
 pub fn explain_giguna__east_caverns__mid_susar__ex__middle_ledge_2__req(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // $hook and ^_mid_susar
-    (false, vec![])
+    {
+        let mut left = {
+            let (res, mut refs) = hexplain__hook!(ctx, world, edict);
+            edict.insert("$hook", format!("{:?}", res));
+            refs.push("$hook");
+            (res, refs)
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = (false, vec![]);
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
 }
 pub fn explain_giguna__east_caverns__mid_susar__ex__middle_rock_1__req(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // ^_mid_susar
     (false, vec![])
 }
 pub fn explain_giguna__east_caverns__mid_susar__hack__req(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // not ^_mid_susar and $allegiance1
-    (false, vec![])
+    {
+        let mut left = {
+            let val = (false, vec![]);
+            (!val.0, val.1)
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__allegiance1!(ctx, world, edict);
+                edict.insert("$allegiance1", format!("{:?}", res));
+                refs.push("$allegiance1");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
 }
 pub fn explain_giguna__east_caverns__middle_rock__ex__hidden_passage_east_1__req(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // ^mode == 'drone' and ^_combo_entered
-    (false, vec![])
+    {
+        let mut left = (false, vec![]);
+        if !left.0 {
+            left
+        } else {
+            let mut right = (false, vec![]);
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
 }
 pub fn explain_giguna__east_caverns__midwest_ledge__ex__hidden_passage_west_1__req(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // $hover and $hook and ^_combo_entered
-    (false, vec![])
+    {
+        let mut left = {
+            let mut left = {
+                let (res, mut refs) = hexplain__hover!(ctx, world, edict);
+                edict.insert("$hover", format!("{:?}", res));
+                refs.push("$hover");
+                (res, refs)
+            };
+            if !left.0 {
+                left
+            } else {
+                let mut right = {
+                    let (res, mut refs) = hexplain__hook!(ctx, world, edict);
+                    edict.insert("$hook", format!("{:?}", res));
+                    refs.push("$hook");
+                    (res, refs)
+                };
+                left.1.append(&mut right.1);
+                (right.0, left.1)
+            }
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = (false, vec![]);
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
 }
 pub fn explain_giguna__east_caverns__midwest_ledge__ex__hidden_passage_west_2__req(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // ^mode == 'drone' and Mist_Upgrade and ^_combo_entered
-    (false, vec![])
+    {
+        let mut left = {
+            let mut left = (false, vec![]);
+            if !left.0 {
+                left
+            } else {
+                let mut right = (false, vec![]);
+                left.1.append(&mut right.1);
+                (right.0, left.1)
+            }
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = (false, vec![]);
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
 }
 pub fn explain_giguna__east_caverns__statues_ledge__ex__hidden_passage_west_1__req(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // $hover and $hook and ^_combo_entered
-    (false, vec![])
+    {
+        let mut left = {
+            let mut left = {
+                let (res, mut refs) = hexplain__hover!(ctx, world, edict);
+                edict.insert("$hover", format!("{:?}", res));
+                refs.push("$hover");
+                (res, refs)
+            };
+            if !left.0 {
+                left
+            } else {
+                let mut right = {
+                    let (res, mut refs) = hexplain__hook!(ctx, world, edict);
+                    edict.insert("$hook", format!("{:?}", res));
+                    refs.push("$hook");
+                    (res, refs)
+                };
+                left.1.append(&mut right.1);
+                (right.0, left.1)
+            }
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = (false, vec![]);
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
 }
 pub fn explain_giguna__east_caverns__statues_ledge__ex__hidden_passage_west_2__req(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // ^mode == 'drone' and Mist_Upgrade and ^_combo_entered
-    (false, vec![])
+    {
+        let mut left = {
+            let mut left = (false, vec![]);
+            if !left.0 {
+                left
+            } else {
+                let mut right = (false, vec![]);
+                left.1.append(&mut right.1);
+                (right.0, left.1)
+            }
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = (false, vec![]);
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
 }
 pub fn explain_giguna__east_caverns__statues_ledge__open_door__req(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // not ^_door_opened and $unlock2 and $range1
-    (false, vec![])
+    {
+        let mut left = {
+            let mut left = {
+                let val = (false, vec![]);
+                (!val.0, val.1)
+            };
+            if !left.0 {
+                left
+            } else {
+                let mut right = {
+                    let (res, mut refs) = hexplain__unlock2!(ctx, world, edict);
+                    edict.insert("$unlock2", format!("{:?}", res));
+                    refs.push("$unlock2");
+                    (res, refs)
+                };
+                left.1.append(&mut right.1);
+                (right.0, left.1)
+            }
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__range1!(ctx, world, edict);
+                edict.insert("$range1", format!("{:?}", res));
+                refs.push("$range1");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
 }
 pub fn explain_giguna__east_caverns__switch__ex__door_1__req(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // ^_door_opened
     (false, vec![])
 }
 pub fn explain_giguna__east_caverns__switch__open_door__req(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // not ^_door_opened and $unlock2
-    (false, vec![])
+    {
+        let mut left = {
+            let val = (false, vec![]);
+            (!val.0, val.1)
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__unlock2!(ctx, world, edict);
+                edict.insert("$unlock2", format!("{:?}", res));
+                refs.push("$unlock2");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
 }
 pub fn explain_giguna__east_caverns__upper_susar__caught__req(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // not ^_upper_susar
-    (false, vec![])
+    {
+        let val = (false, vec![]);
+        (!val.0, val.1)
+    }
 }
 pub fn explain_giguna__east_caverns__upper_susar__ex__middle_ledge_1__req(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // ^_upper_susar
     (false, vec![])
 }
 pub fn explain_giguna__east_caverns__upper_susar__ex__top_past_susar_1__req(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // ^_upper_susar
     (false, vec![])
 }
 pub fn explain_giguna__east_caverns__upper_susar__ex__upper_floor_ledge_1__req(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // ^_upper_susar
     (false, vec![])
 }
 pub fn explain_giguna__east_caverns__upper_susar__ex__upper_platforms_right_1__req(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // ^_upper_susar
     (false, vec![])
 }
 pub fn explain_giguna__east_caverns__upper_susar_jump_from_east__caught__req(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // not ^_upper_susar
-    (false, vec![])
+    {
+        let val = (false, vec![]);
+        (!val.0, val.1)
+    }
 }
 pub fn explain_giguna__east_caverns__upper_susar_jump_from_east__ex__middle_ledge_1__req(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // ^_upper_susar
     (false, vec![])
 }
 pub fn explain_giguna__east_caverns__upper_susar_jump_from_east__ex__midwest_ledge_1__req(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // ^_upper_susar
     (false, vec![])
 }
 pub fn explain_giguna__east_caverns__upper_susar_jump_from_east__hack__req(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // not ^_upper_susar and $allegiance1
-    (false, vec![])
+    {
+        let mut left = {
+            let val = (false, vec![]);
+            (!val.0, val.1)
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__allegiance1!(ctx, world, edict);
+                edict.insert("$allegiance1", format!("{:?}", res));
+                refs.push("$allegiance1");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
 }
 pub fn explain_giguna__east_caverns__upper_susar_mid_jump__ex__top_past_susar_1__req(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // ^_upper_susar
     (false, vec![])
 }
 pub fn explain_giguna__east_caverns__upper_susar_mid_jump__hack__req(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // not ^_upper_susar and $allegiance1
-    (false, vec![])
+    {
+        let mut left = {
+            let val = (false, vec![]);
+            (!val.0, val.1)
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__allegiance1!(ctx, world, edict);
+                edict.insert("$allegiance1", format!("{:?}", res));
+                refs.push("$allegiance1");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
 }
 pub fn explain_giguna__east_caverns__west_14__enter_combo__req(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // not ^_combo_entered
-    (false, vec![])
+    {
+        let val = (false, vec![]);
+        (!val.0, val.1)
+    }
 }
 pub fn explain_giguna__east_caverns__west_16__ex__door_1__req(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // ^_door_opened
     (false, vec![])
 }
 pub fn explain_giguna__east_caverns__west_16__open_door__req(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // not ^_door_opened and $open and $range2
-    (false, vec![])
+    {
+        let mut left = {
+            let mut left = {
+                let val = (false, vec![]);
+                (!val.0, val.1)
+            };
+            if !left.0 {
+                left
+            } else {
+                let mut right = {
+                    let (res, mut refs) = hexplain__open!(ctx, world, edict);
+                    edict.insert("$open", format!("{:?}", res));
+                    refs.push("$open");
+                    (res, refs)
+                };
+                left.1.append(&mut right.1);
+                (right.0, left.1)
+            }
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__range2!(ctx, world, edict);
+                edict.insert("$range2", format!("{:?}", res));
+                refs.push("$range2");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
 }
 pub fn explain_giguna__gateway__door__ex__block_left_1__req(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // ^_door_opened
     (false, vec![])
 }
 pub fn explain_giguna__gateway__door__ex__left_platform_1__req(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // ^_door_opened
     (false, vec![])
 }
 pub fn explain_giguna__gateway__door__ex__passage_entry_1__req(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // ^_door_opened
     (false, vec![])
 }
 pub fn explain_giguna__gateway__passage_entry__ex__door_1__req(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // ^_door_opened
     (false, vec![])
 }
 pub fn explain_giguna__giguna_base__below_gate__ex__kari_1__req(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // ^_door_open and $grab and $climb
-    (false, vec![])
+    {
+        let mut left = {
+            let mut left = (false, vec![]);
+            if !left.0 {
+                left
+            } else {
+                let mut right = {
+                    let (res, mut refs) = hexplain__grab!(ctx, world, edict);
+                    edict.insert("$grab", format!("{:?}", res));
+                    refs.push("$grab");
+                    (res, refs)
+                };
+                left.1.append(&mut right.1);
+                (right.0, left.1)
+            }
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__climb!(ctx, world, edict);
+                edict.insert("$climb", format!("{:?}", res));
+                refs.push("$climb");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
 }
 pub fn explain_giguna__giguna_base__below_gate__ex__kari_2__req(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // ^_door_open and $hook
-    (false, vec![])
+    {
+        let mut left = (false, vec![]);
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__hook!(ctx, world, edict);
+                edict.insert("$hook", format!("{:?}", res));
+                refs.push("$hook");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
 }
 pub fn explain_giguna__giguna_base__below_gate__ex__middle_platform_1__req(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // ^_door_open and $grab and $climb
-    (false, vec![])
+    {
+        let mut left = {
+            let mut left = (false, vec![]);
+            if !left.0 {
+                left
+            } else {
+                let mut right = {
+                    let (res, mut refs) = hexplain__grab!(ctx, world, edict);
+                    edict.insert("$grab", format!("{:?}", res));
+                    refs.push("$grab");
+                    (res, refs)
+                };
+                left.1.append(&mut right.1);
+                (right.0, left.1)
+            }
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__climb!(ctx, world, edict);
+                edict.insert("$climb", format!("{:?}", res));
+                refs.push("$climb");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
 }
 pub fn explain_giguna__giguna_base__below_gate__ex__middle_platform_2__req(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // ^_door_open and $hook
-    (false, vec![])
+    {
+        let mut left = (false, vec![]);
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__hook!(ctx, world, edict);
+                edict.insert("$hook", format!("{:?}", res));
+                refs.push("$hook");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
 }
 pub fn explain_giguna__giguna_base__kari__ex__below_gate_1__req(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // ^_door_open
     (false, vec![])
 }
 pub fn explain_giguna__giguna_base__middle_platform__ex__below_gate_1__req(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // ^_door_open
     (false, vec![])
 }
 pub fn explain_giguna__giguna_northeast__right_column__ex__door_1__req(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // ^_door_opened
     (false, vec![])
 }
 pub fn explain_giguna__giguna_northeast__right_column__open_door_from_afar__req(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // $unlock3 and Infection_Range_3 and not ^_door_opened
-    (false, vec![])
+    {
+        let mut left = {
+            let mut left = {
+                let (res, mut refs) = hexplain__unlock3!(ctx, world, edict);
+                edict.insert("$unlock3", format!("{:?}", res));
+                refs.push("$unlock3");
+                (res, refs)
+            };
+            if !left.0 {
+                left
+            } else {
+                let mut right = (false, vec![]);
+                left.1.append(&mut right.1);
+                (right.0, left.1)
+            }
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let val = (false, vec![]);
+                (!val.0, val.1)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
 }
 pub fn explain_giguna__giguna_northeast__switch__ex__door_1__req(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // ^_door_opened and ($grab or $hook)
-    (false, vec![])
+    {
+        let mut left = (false, vec![]);
+        if !left.0 {
+            left
+        } else {
+            let mut right = ({
+                let mut left = {
+                    let (res, mut refs) = hexplain__grab!(ctx, world, edict);
+                    edict.insert("$grab", format!("{:?}", res));
+                    refs.push("$grab");
+                    (res, refs)
+                };
+                if left.0 {
+                    left
+                } else {
+                    let mut right = {
+                        let (res, mut refs) = hexplain__hook!(ctx, world, edict);
+                        edict.insert("$hook", format!("{:?}", res));
+                        refs.push("$hook");
+                        (res, refs)
+                    };
+                    left.1.append(&mut right.1);
+                    (right.0, left.1)
+                }
+            });
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
 }
 pub fn explain_giguna__giguna_northeast__switch__open_door__req(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // $unlock3 and not ^_door_opened
-    (false, vec![])
+    {
+        let mut left = {
+            let (res, mut refs) = hexplain__unlock3!(ctx, world, edict);
+            edict.insert("$unlock3", format!("{:?}", res));
+            refs.push("$unlock3");
+            (res, refs)
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let val = (false, vec![]);
+                (!val.0, val.1)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
 }
 pub fn explain_giguna__giguna_northeast__vault__ex__door_1__req(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // ^_door_opened
     (false, vec![])
 }
 pub fn explain_giguna__giguna_northeast__vault__ex__door_2__req(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // ^_door_opened and $hook
-    (false, vec![])
+    {
+        let mut left = (false, vec![]);
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__hook!(ctx, world, edict);
+                edict.insert("$hook", format!("{:?}", res));
+                refs.push("$hook");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
 }
 pub fn explain_giguna__ruins_top__east_7__ex__east_door_1__req(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // ^_doors_open
     (false, vec![])
 }
 pub fn explain_giguna__ruins_top__east_door__ex__east_7_1__req(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // ^_doors_open
     (false, vec![])
 }
 pub fn explain_giguna__ruins_top__east_door__ex__portal_1__req(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // ^_doors_open
     (false, vec![])
 }
 pub fn explain_giguna__ruins_top__entryway__ex__west_door_1__req(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // ^_doors_open
     (false, vec![])
 }
 pub fn explain_giguna__ruins_top__portal__ex__east_door_1__req(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // ^_doors_open
     (false, vec![])
 }
 pub fn explain_giguna__ruins_top__west_7__ex__west_door_1__req(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // ^_doors_open
     (false, vec![])
 }
 pub fn explain_giguna__ruins_top__west_door__ex__entryway_1__req(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // ^_doors_open
     (false, vec![])
 }
 pub fn explain_giguna__ruins_top__west_door__ex__west_7_1__req(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // ^_doors_open
     (false, vec![])
 }
 pub fn explain_giguna__ruins_west__lower_ledge__destroy_kishib__req(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // not ^_kishib_handled and $shockwave
-    (false, vec![])
+    {
+        let mut left = {
+            let val = (false, vec![]);
+            (!val.0, val.1)
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__shockwave!(ctx, world, edict);
+                edict.insert("$shockwave", format!("{:?}", res));
+                refs.push("$shockwave");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
 }
 pub fn explain_giguna__ruins_west__lower_ledge__ex__upper_ledge_1__req(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // $grab and ^_kishib_handled
-    (false, vec![])
+    {
+        let mut left = {
+            let (res, mut refs) = hexplain__grab!(ctx, world, edict);
+            edict.insert("$grab", format!("{:?}", res));
+            refs.push("$grab");
+            (res, refs)
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = (false, vec![]);
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
 }
 pub fn explain_giguna__ruins_west__lower_ledge__hack_kishib__req(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // not ^_kishib_handled and $allegiance1
-    (false, vec![])
+    {
+        let mut left = {
+            let val = (false, vec![]);
+            (!val.0, val.1)
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__allegiance1!(ctx, world, edict);
+                edict.insert("$allegiance1", format!("{:?}", res));
+                refs.push("$allegiance1");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
 }
 pub fn explain_giguna__west_caverns__east_susar__caught__req(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // not ^_east_susar
-    (false, vec![])
+    {
+        let val = (false, vec![]);
+        (!val.0, val.1)
+    }
 }
 pub fn explain_giguna__west_caverns__east_susar__ex__east_12_1__req(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // ^_east_susar
     (false, vec![])
 }
 pub fn explain_giguna__west_caverns__east_susar__ex__tunnel_fork_1__req(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // ^_east_susar
     (false, vec![])
 }
 pub fn explain_giguna__west_caverns__east_susar__hack__req(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // not ^_east_susar and $allegiance1
-    (false, vec![])
+    {
+        let mut left = {
+            let val = (false, vec![]);
+            (!val.0, val.1)
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__allegiance1!(ctx, world, edict);
+                edict.insert("$allegiance1", format!("{:?}", res));
+                refs.push("$allegiance1");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
 }
 pub fn explain_giguna_boulder(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // Giguna_Boulder
     (false, vec![])
 }
 pub fn explain_giguna_breach__sw_save__side_door__ex__west_11_1__req(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // ^_door_opened
     (false, vec![])
 }
 pub fn explain_giguna_breach__sw_save__west_11__ex__side_door_1__req(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // ^_door_opened
     (false, vec![])
 }
 pub fn explain_giguna_breach__sw_save__west_11__open_door__req(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // not ^_door_opened
-    (false, vec![])
+    {
+        let val = (false, vec![]);
+        (!val.0, val.1)
+    }
 }
 pub fn explain_giguna_dual_path_switch(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // Giguna_Dual_Path_Switch
     (false, vec![])
 }
 pub fn explain_giguna_dual_path_switch_and___grab_or_climb(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // Giguna_Dual_Path_Switch and ($grab or $climb)
-    (false, vec![])
+    {
+        let mut left = (false, vec![]);
+        if !left.0 {
+            left
+        } else {
+            let mut right = ({
+                let mut left = {
+                    let (res, mut refs) = hexplain__grab!(ctx, world, edict);
+                    edict.insert("$grab", format!("{:?}", res));
+                    refs.push("$grab");
+                    (res, refs)
+                };
+                if left.0 {
+                    left
+                } else {
+                    let mut right = {
+                        let (res, mut refs) = hexplain__climb!(ctx, world, edict);
+                        edict.insert("$climb", format!("{:?}", res));
+                        refs.push("$climb");
+                        (res, refs)
+                    };
+                    left.1.append(&mut right.1);
+                    (right.0, left.1)
+                }
+            });
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
 }
 pub fn explain_giguna_dual_path_switch_and_climb(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // Giguna_Dual_Path_Switch and $climb
-    (false, vec![])
+    {
+        let mut left = (false, vec![]);
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__climb!(ctx, world, edict);
+                edict.insert("$climb", format!("{:?}", res));
+                refs.push("$climb");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
 }
 pub fn explain_giguna_dual_path_switch_and_hook(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // Giguna_Dual_Path_Switch and $hook
-    (false, vec![])
+    {
+        let mut left = (false, vec![]);
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__hook!(ctx, world, edict);
+                edict.insert("$hook", format!("{:?}", res));
+                refs.push("$hook");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
 }
 pub fn explain_giguna_gateway_block(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // Giguna_Gateway_Block
     (false, vec![])
 }
 pub fn explain_giguna_gateway_gate(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // Giguna_Gateway_Gate
     (false, vec![])
 }
 pub fn explain_giguna_gubi(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // Giguna_Gubi
     (false, vec![])
 }
 pub fn explain_giguna_northeast_gate(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // Giguna_Northeast_Gate
     (false, vec![])
 }
 pub fn explain_grab(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // $grab
-    (false, vec![])
+    {
+        let (res, mut refs) = hexplain__grab!(ctx, world, edict);
+        edict.insert("$grab", format!("{:?}", res));
+        refs.push("$grab");
+        (res, refs)
+    }
 }
 pub fn explain_grab_and_annuna_east_bridge_gate(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // $grab and Annuna_East_Bridge_Gate
-    (false, vec![])
+    {
+        let mut left = {
+            let (res, mut refs) = hexplain__grab!(ctx, world, edict);
+            edict.insert("$grab", format!("{:?}", res));
+            refs.push("$grab");
+            (res, refs)
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = (false, vec![]);
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
 }
 pub fn explain_grab_and_anuman(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // $grab and Anuman
-    (false, vec![])
+    {
+        let mut left = {
+            let (res, mut refs) = hexplain__grab!(ctx, world, edict);
+            edict.insert("$grab", format!("{:?}", res));
+            refs.push("$grab");
+            (res, refs)
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = (false, vec![]);
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
 }
 pub fn explain_grab_and_can_deploy(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // $grab and $can_deploy
-    (false, vec![])
+    {
+        let mut left = {
+            let (res, mut refs) = hexplain__grab!(ctx, world, edict);
+            edict.insert("$grab", format!("{:?}", res));
+            refs.push("$grab");
+            (res, refs)
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__can_deploy!(ctx, world, edict);
+                edict.insert("$can_deploy", format!("{:?}", res));
+                refs.push("$can_deploy");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
 }
 pub fn explain_grab_and_climb(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // $grab and $climb
-    (false, vec![])
+    {
+        let mut left = {
+            let (res, mut refs) = hexplain__grab!(ctx, world, edict);
+            edict.insert("$grab", format!("{:?}", res));
+            refs.push("$grab");
+            (res, refs)
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__climb!(ctx, world, edict);
+                edict.insert("$climb", format!("{:?}", res));
+                refs.push("$climb");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
 }
 pub fn explain_grab_and_giguna_gateway_block(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // $grab and Giguna_Gateway_Block
-    (false, vec![])
+    {
+        let mut left = {
+            let (res, mut refs) = hexplain__grab!(ctx, world, edict);
+            edict.insert("$grab", format!("{:?}", res));
+            refs.push("$grab");
+            (res, refs)
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = (false, vec![]);
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
 }
 pub fn explain_grab_and_switch_40_12(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // $grab and Switch_40_12
-    (false, vec![])
+    {
+        let mut left = {
+            let (res, mut refs) = hexplain__grab!(ctx, world, edict);
+            edict.insert("$grab", format!("{:?}", res));
+            refs.push("$grab");
+            (res, refs)
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = (false, vec![]);
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
 }
 pub fn explain_grab_and_water_movement(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // $grab and Water_Movement
-    (false, vec![])
+    {
+        let mut left = {
+            let (res, mut refs) = hexplain__grab!(ctx, world, edict);
+            edict.insert("$grab", format!("{:?}", res));
+            refs.push("$grab");
+            (res, refs)
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = (false, vec![]);
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
 }
 pub fn explain_grab_or_anuman(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // $grab or Anuman
-    (false, vec![])
+    {
+        let mut left = {
+            let (res, mut refs) = hexplain__grab!(ctx, world, edict);
+            edict.insert("$grab", format!("{:?}", res));
+            refs.push("$grab");
+            (res, refs)
+        };
+        if left.0 {
+            left
+        } else {
+            let mut right = (false, vec![]);
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
 }
 pub fn explain_grab_or_climb(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // $grab or $climb
-    (false, vec![])
+    {
+        let mut left = {
+            let (res, mut refs) = hexplain__grab!(ctx, world, edict);
+            edict.insert("$grab", format!("{:?}", res));
+            refs.push("$grab");
+            (res, refs)
+        };
+        if left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__climb!(ctx, world, edict);
+                edict.insert("$climb", format!("{:?}", res));
+                refs.push("$climb");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
 }
 pub fn explain_grab_or_climb_or_hook(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // $grab or $climb or $hook
-    (false, vec![])
+    {
+        let mut left = {
+            let mut left = {
+                let (res, mut refs) = hexplain__grab!(ctx, world, edict);
+                edict.insert("$grab", format!("{:?}", res));
+                refs.push("$grab");
+                (res, refs)
+            };
+            if left.0 {
+                left
+            } else {
+                let mut right = {
+                    let (res, mut refs) = hexplain__climb!(ctx, world, edict);
+                    edict.insert("$climb", format!("{:?}", res));
+                    refs.push("$climb");
+                    (res, refs)
+                };
+                left.1.append(&mut right.1);
+                (right.0, left.1)
+            }
+        };
+        if left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__hook!(ctx, world, edict);
+                edict.insert("$hook", format!("{:?}", res));
+                refs.push("$hook");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
 }
 pub fn explain_grab_or_hook(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // $grab or $hook
-    (false, vec![])
+    {
+        let mut left = {
+            let (res, mut refs) = hexplain__grab!(ctx, world, edict);
+            edict.insert("$grab", format!("{:?}", res));
+            refs.push("$grab");
+            (res, refs)
+        };
+        if left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__hook!(ctx, world, edict);
+                edict.insert("$hook", format!("{:?}", res));
+                refs.push("$hook");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
 }
 pub fn explain_grab_or_underwater_movement(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // $grab or Underwater_Movement
-    (false, vec![])
+    {
+        let mut left = {
+            let (res, mut refs) = hexplain__grab!(ctx, world, edict);
+            edict.insert("$grab", format!("{:?}", res));
+            refs.push("$grab");
+            (res, refs)
+        };
+        if left.0 {
+            left
+        } else {
+            let mut right = (false, vec![]);
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
 }
 pub fn explain_health_upgrade(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // Health_Upgrade
     (false, vec![])
 }
 pub fn explain_health_upgrade_2(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // Health_Upgrade_2
     (false, vec![])
 }
 pub fn explain_health_upgrade_3(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // Health_Upgrade_3
     (false, vec![])
 }
 pub fn explain_health_upgrade_4(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // Health_Upgrade_4
     (false, vec![])
 }
 pub fn explain_hook(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // $hook
-    (false, vec![])
+    {
+        let (res, mut refs) = hexplain__hook!(ctx, world, edict);
+        edict.insert("$hook", format!("{:?}", res));
+        refs.push("$hook");
+        (res, refs)
+    }
 }
 pub fn explain_hook_and_annuna_east_bridge_gate(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // $hook and Annuna_East_Bridge_Gate
-    (false, vec![])
+    {
+        let mut left = {
+            let (res, mut refs) = hexplain__hook!(ctx, world, edict);
+            edict.insert("$hook", format!("{:?}", res));
+            refs.push("$hook");
+            (res, refs)
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = (false, vec![]);
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
 }
 pub fn explain_hook_and_giguna_gateway_block(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // $hook and Giguna_Gateway_Block
-    (false, vec![])
+    {
+        let mut left = {
+            let (res, mut refs) = hexplain__hook!(ctx, world, edict);
+            edict.insert("$hook", format!("{:?}", res));
+            refs.push("$hook");
+            (res, refs)
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = (false, vec![]);
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
 }
 pub fn explain_hook_and_hover(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // $hook and $hover
-    (false, vec![])
+    {
+        let mut left = {
+            let (res, mut refs) = hexplain__hook!(ctx, world, edict);
+            edict.insert("$hook", format!("{:?}", res));
+            refs.push("$hook");
+            (res, refs)
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__hover!(ctx, world, edict);
+                edict.insert("$hover", format!("{:?}", res));
+                refs.push("$hover");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
 }
 pub fn explain_hook_and_hover_and_underwater_movement(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // $hook and $hover and Underwater_Movement
-    (false, vec![])
+    {
+        let mut left = {
+            let mut left = {
+                let (res, mut refs) = hexplain__hook!(ctx, world, edict);
+                edict.insert("$hook", format!("{:?}", res));
+                refs.push("$hook");
+                (res, refs)
+            };
+            if !left.0 {
+                left
+            } else {
+                let mut right = {
+                    let (res, mut refs) = hexplain__hover!(ctx, world, edict);
+                    edict.insert("$hover", format!("{:?}", res));
+                    refs.push("$hover");
+                    (res, refs)
+                };
+                left.1.append(&mut right.1);
+                (right.0, left.1)
+            }
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = (false, vec![]);
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
 }
 pub fn explain_hook_and_not_ebih_waterfall_block_left(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // $hook and not Ebih_Waterfall_Block_Left
-    (false, vec![])
+    {
+        let mut left = {
+            let (res, mut refs) = hexplain__hook!(ctx, world, edict);
+            edict.insert("$hook", format!("{:?}", res));
+            refs.push("$hook");
+            (res, refs)
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = (false, vec![]);
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
 }
 pub fn explain_hook_and_not_ebih_waterfall_block_right(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // $hook and not Ebih_Waterfall_Block_Right
-    (false, vec![])
+    {
+        let mut left = {
+            let (res, mut refs) = hexplain__hook!(ctx, world, edict);
+            edict.insert("$hook", format!("{:?}", res));
+            refs.push("$hook");
+            (res, refs)
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = (false, vec![]);
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
 }
 pub fn explain_hook_and_underwater_movement(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // $hook and Underwater_Movement
-    (false, vec![])
+    {
+        let mut left = {
+            let (res, mut refs) = hexplain__hook!(ctx, world, edict);
+            edict.insert("$hook", format!("{:?}", res));
+            refs.push("$hook");
+            (res, refs)
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = (false, vec![]);
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
 }
 pub fn explain_hook_and_water_movement(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // $hook and Water_Movement
-    (false, vec![])
+    {
+        let mut left = {
+            let (res, mut refs) = hexplain__hook!(ctx, world, edict);
+            edict.insert("$hook", format!("{:?}", res));
+            refs.push("$hook");
+            (res, refs)
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = (false, vec![]);
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
 }
 pub fn explain_hook_or_hover(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // $hook or $hover
-    (false, vec![])
+    {
+        let mut left = {
+            let (res, mut refs) = hexplain__hook!(ctx, world, edict);
+            edict.insert("$hook", format!("{:?}", res));
+            refs.push("$hook");
+            (res, refs)
+        };
+        if left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__hover!(ctx, world, edict);
+                edict.insert("$hover", format!("{:?}", res));
+                refs.push("$hover");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
 }
 pub fn explain_hover(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // $hover
-    (false, vec![])
+    {
+        let (res, mut refs) = hexplain__hover!(ctx, world, edict);
+        edict.insert("$hover", format!("{:?}", res));
+        refs.push("$hover");
+        (res, refs)
+    }
 }
 pub fn explain_hover_and_anuman(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // $hover and Anuman
-    (false, vec![])
+    {
+        let mut left = {
+            let (res, mut refs) = hexplain__hover!(ctx, world, edict);
+            edict.insert("$hover", format!("{:?}", res));
+            refs.push("$hover");
+            (res, refs)
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = (false, vec![]);
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
 }
 pub fn explain_hover_and_hook(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // $hover and $hook
-    (false, vec![])
+    {
+        let mut left = {
+            let (res, mut refs) = hexplain__hover!(ctx, world, edict);
+            edict.insert("$hover", format!("{:?}", res));
+            refs.push("$hover");
+            (res, refs)
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__hook!(ctx, world, edict);
+                edict.insert("$hook", format!("{:?}", res));
+                refs.push("$hook");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
 }
 pub fn explain_hover_and_hook_and_mist2(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // $hover and $hook and $mist2
-    (false, vec![])
+    {
+        let mut left = {
+            let mut left = {
+                let (res, mut refs) = hexplain__hover!(ctx, world, edict);
+                edict.insert("$hover", format!("{:?}", res));
+                refs.push("$hover");
+                (res, refs)
+            };
+            if !left.0 {
+                left
+            } else {
+                let mut right = {
+                    let (res, mut refs) = hexplain__hook!(ctx, world, edict);
+                    edict.insert("$hook", format!("{:?}", res));
+                    refs.push("$hook");
+                    (res, refs)
+                };
+                left.1.append(&mut right.1);
+                (right.0, left.1)
+            }
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__mist2!(ctx, world, edict);
+                edict.insert("$mist2", format!("{:?}", res));
+                refs.push("$mist2");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
 }
 pub fn explain_hover_and_mist_upgrade(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // $hover and Mist_Upgrade
-    (false, vec![])
+    {
+        let mut left = {
+            let (res, mut refs) = hexplain__hover!(ctx, world, edict);
+            edict.insert("$hover", format!("{:?}", res));
+            refs.push("$hover");
+            (res, refs)
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = (false, vec![]);
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
 }
 pub fn explain_hover_or_hook(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // $hover or $hook
-    (false, vec![])
+    {
+        let mut left = {
+            let (res, mut refs) = hexplain__hover!(ctx, world, edict);
+            edict.insert("$hover", format!("{:?}", res));
+            refs.push("$hover");
+            (res, refs)
+        };
+        if left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__hook!(ctx, world, edict);
+                edict.insert("$hook", format!("{:?}", res));
+                refs.push("$hook");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
 }
 pub fn explain_hover_or_mist2(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // $hover or $mist2
-    (false, vec![])
+    {
+        let mut left = {
+            let (res, mut refs) = hexplain__hover!(ctx, world, edict);
+            edict.insert("$hover", format!("{:?}", res));
+            refs.push("$hover");
+            (res, refs)
+        };
+        if left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__mist2!(ctx, world, edict);
+                edict.insert("$mist2", format!("{:?}", res));
+                refs.push("$mist2");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
 }
 pub fn explain_infect(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // Infect
     (false, vec![])
 }
 pub fn explain_infect_and_anuman(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // Infect and Anuman
-    (false, vec![])
+    {
+        let mut left = (false, vec![]);
+        if !left.0 {
+            left
+        } else {
+            let mut right = (false, vec![]);
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
 }
 pub fn explain_infect_and_not_anuman(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // Infect and not Anuman
-    (false, vec![])
+    {
+        let mut left = (false, vec![]);
+        if !left.0 {
+            left
+        } else {
+            let mut right = (false, vec![]);
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
 }
 pub fn explain_infect_l1(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // Infect_L1
     (false, vec![])
 }
 pub fn explain_infect_l2(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // Infect_L2
     (false, vec![])
 }
 pub fn explain_infection_range(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // Infection_Range
     (false, vec![])
 }
 pub fn explain_infection_range_2(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // Infection_Range_2
     (false, vec![])
 }
 pub fn explain_infection_speed(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // Infection_Speed
     (false, vec![])
 }
 pub fn explain_infinite_climb_and_annuna_east_bridge_gate(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // $infinite_climb and Annuna_East_Bridge_Gate
-    (false, vec![])
+    {
+        let mut left = {
+            let (res, mut refs) = hexplain__infinite_climb!(ctx, world, edict);
+            edict.insert("$infinite_climb", format!("{:?}", res));
+            refs.push("$infinite_climb");
+            (res, refs)
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = (false, vec![]);
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
 }
 pub fn explain_infinite_climb_and_not_annuna_east_bridge_gate(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // $infinite_climb and not Annuna_East_Bridge_Gate
-    (false, vec![])
+    {
+        let mut left = {
+            let (res, mut refs) = hexplain__infinite_climb!(ctx, world, edict);
+            edict.insert("$infinite_climb", format!("{:?}", res));
+            refs.push("$infinite_climb");
+            (res, refs)
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = (false, vec![]);
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
 }
 pub fn explain_infinite_climb_and_slingshot_hook(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // $infinite_climb and Slingshot_Hook
-    (false, vec![])
+    {
+        let mut left = {
+            let (res, mut refs) = hexplain__infinite_climb!(ctx, world, edict);
+            edict.insert("$infinite_climb", format!("{:?}", res));
+            refs.push("$infinite_climb");
+            (res, refs)
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = (false, vec![]);
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
 }
 pub fn explain_infinite_climb_and_slingshot_hook_and_not_annuna_east_bridge_gate(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // $infinite_climb and Slingshot_Hook and not Annuna_East_Bridge_Gate
-    (false, vec![])
+    {
+        let mut left = {
+            let mut left = {
+                let (res, mut refs) = hexplain__infinite_climb!(ctx, world, edict);
+                edict.insert("$infinite_climb", format!("{:?}", res));
+                refs.push("$infinite_climb");
+                (res, refs)
+            };
+            if !left.0 {
+                left
+            } else {
+                let mut right = (false, vec![]);
+                left.1.append(&mut right.1);
+                (right.0, left.1)
+            }
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = (false, vec![]);
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
 }
 pub fn explain_irikar__basement_portal__ledge__ex__moving_platform_start_1__req(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // not ^_platform_moved
-    (false, vec![])
+    {
+        let val = (false, vec![]);
+        (!val.0, val.1)
+    }
 }
 pub fn explain_irikar__basement_portal__middle_platform__ex__moving_platform_end_1__req(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // ^_platform_moved and $hook
-    (false, vec![])
+    {
+        let mut left = (false, vec![]);
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__hook!(ctx, world, edict);
+                edict.insert("$hook", format!("{:?}", res));
+                refs.push("$hook");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
 }
 pub fn explain_irikar__basement_portal__portal_stand__ex__moving_platform_start_1__req(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // not ^_platform_moved
-    (false, vec![])
+    {
+        let val = (false, vec![]);
+        (!val.0, val.1)
+    }
 }
 pub fn explain_irikar_gudam(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // Irikar_Gudam
     (false, vec![])
 }
 pub fn explain_irikar_royal_storage_wall(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // Irikar_Royal_Storage_Wall
     (false, vec![])
 }
 pub fn explain_map__amagi__main_area__save(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // ^map__amagi__main_area__save
     (false, vec![])
 }
 pub fn explain_map__annuna__center_save__save(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // ^map__annuna__center_save__save
     (false, vec![])
 }
 pub fn explain_map__annuna__factory_entrance__save(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // ^map__annuna__factory_entrance__save
     (false, vec![])
 }
 pub fn explain_map__annuna__mirror_match__save(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // ^map__annuna__mirror_match__save
     (false, vec![])
 }
 pub fn explain_map__ebih__base_camp__save(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // ^map__ebih__base_camp__save
     (false, vec![])
 }
 pub fn explain_map__ebih__ebih_west__lower_save(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // ^map__ebih__ebih_west__lower_save
     (false, vec![])
 }
 pub fn explain_map__ebih__ebih_west__mid_save(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // ^map__ebih__ebih_west__mid_save
     (false, vec![])
 }
 pub fn explain_map__ebih__ebih_west__upper_save(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // ^map__ebih__ebih_west__upper_save
     (false, vec![])
 }
 pub fn explain_map__giguna__giguna_base__save(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // ^map__giguna__giguna_base__save
     (false, vec![])
 }
 pub fn explain_map__giguna__giguna_northeast__save(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // ^map__giguna__giguna_northeast__save
     (false, vec![])
 }
 pub fn explain_map__giguna__ruins_top__save(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // ^map__giguna__ruins_top__save
     (false, vec![])
 }
 pub fn explain_map__giguna__ruins_west__save(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // ^map__giguna__ruins_west__save
     (false, vec![])
 }
 pub fn explain_map__giguna_breach__peak__save(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // ^map__giguna_breach__peak__save
     (false, vec![])
 }
 pub fn explain_map__giguna_breach__sw_save__save(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // ^map__giguna_breach__sw_save__save
     (false, vec![])
 }
 pub fn explain_map__glacier__revival__save(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // ^map__glacier__revival__save
     (false, vec![])
 }
 pub fn explain_map__irikar__hub__save(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // ^map__irikar__hub__save
     (false, vec![])
 }
 pub fn explain_map__irikar_breach__gauntlet__save(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // ^map__irikar_breach__gauntlet__save
     (false, vec![])
 }
 pub fn explain_map__irikar_breach__save_room__save(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // ^map__irikar_breach__save_room__save
     (false, vec![])
 }
 pub fn explain_map__uhrum__annuna_corridor__save(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // ^map__uhrum__annuna_corridor__save
     (false, vec![])
 }
 pub fn explain_map__uhrum__save_room__save(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // ^map__uhrum__save_room__save
     (false, vec![])
 }
 pub fn explain_map__uhrum__west_entrance__save(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // ^map__uhrum__west_entrance__save
     (false, vec![])
 }
 pub fn explain_melee_damage(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // Melee_Damage
     (false, vec![])
 }
 pub fn explain_melee_damage_2(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // Melee_Damage_2
     (false, vec![])
 }
 pub fn explain_melee_speed(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // Melee_Speed
     (false, vec![])
 }
 pub fn explain_melee_speed_2(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // Melee_Speed_2
     (false, vec![])
 }
 pub fn explain_mist2(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // $mist2
-    (false, vec![])
+    {
+        let (res, mut refs) = hexplain__mist2!(ctx, world, edict);
+        edict.insert("$mist2", format!("{:?}", res));
+        refs.push("$mist2");
+        (res, refs)
+    }
 }
 pub fn explain_mist_upgrade(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // Mist_Upgrade
     (false, vec![])
 }
 pub fn explain_mode_eq_drone(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // ^mode == 'drone'
     (false, vec![])
 }
 pub fn explain_mode_eq_drone_and_breach_sight(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // ^mode == 'drone' and Breach_Sight
-    (false, vec![])
+    {
+        let mut left = (false, vec![]);
+        if !left.0 {
+            left
+        } else {
+            let mut right = (false, vec![]);
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
 }
 pub fn explain_mode_eq_drone_and_ebih_wasteland_passage_h(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // ^mode == 'drone' and Ebih_Wasteland_Passage_H
-    (false, vec![])
+    {
+        let mut left = (false, vec![]);
+        if !left.0 {
+            left
+        } else {
+            let mut right = (false, vec![]);
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
 }
 pub fn explain_mode_eq_drone_and_ebih_waterfall_block_left(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // ^mode == 'drone' and Ebih_Waterfall_Block_Left
-    (false, vec![])
+    {
+        let mut left = (false, vec![]);
+        if !left.0 {
+            left
+        } else {
+            let mut right = (false, vec![]);
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
 }
 pub fn explain_mode_eq_drone_and_ebih_waterfall_block_right(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // ^mode == 'drone' and Ebih_Waterfall_Block_Right
-    (false, vec![])
+    {
+        let mut left = (false, vec![]);
+        if !left.0 {
+            left
+        } else {
+            let mut right = (false, vec![]);
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
 }
 pub fn explain_mode_eq_drone_and_giguna_dual_path_wall(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // ^mode == 'drone' and Giguna_Dual_Path_Wall
-    (false, vec![])
+    {
+        let mut left = (false, vec![]);
+        if !left.0 {
+            left
+        } else {
+            let mut right = (false, vec![]);
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
 }
 pub fn explain_mode_eq_drone_and_mist2(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // ^mode == 'drone' and $mist2
-    (false, vec![])
+    {
+        let mut left = (false, vec![]);
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__mist2!(ctx, world, edict);
+                edict.insert("$mist2", format!("{:?}", res));
+                refs.push("$mist2");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
 }
 pub fn explain_mode_eq_drone_and_mist_upgrade(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // ^mode == 'drone' and Mist_Upgrade
-    (false, vec![])
+    {
+        let mut left = (false, vec![]);
+        if !left.0 {
+            left
+        } else {
+            let mut right = (false, vec![]);
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
 }
 pub fn explain_mode_eq_drone_and_sniper_valley_rock_2(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // ^mode == 'drone' and Sniper_Valley_Rock_2
-    (false, vec![])
+    {
+        let mut left = (false, vec![]);
+        if !left.0 {
+            left
+        } else {
+            let mut right = (false, vec![]);
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
 }
 pub fn explain_mode_ne_drone(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // ^mode != 'drone'
     (false, vec![])
 }
 pub fn explain_more_refills(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // $more_refills
-    (false, vec![])
+    {
+        let (res, mut refs) = hexplain__more_refills!(ctx, world, edict);
+        edict.insert("$more_refills", format!("{:?}", res));
+        refs.push("$more_refills");
+        (res, refs)
+    }
 }
 pub fn explain_nanite_mist(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // Nanite_Mist
     (false, vec![])
 }
 pub fn explain_nanite_mist_and_mist_upgrade(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // Nanite_Mist and Mist_Upgrade
-    (false, vec![])
+    {
+        let mut left = (false, vec![]);
+        if !left.0 {
+            left
+        } else {
+            let mut right = (false, vec![]);
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
 }
 pub fn explain_nano_points(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // Nano_Points
     (false, vec![])
 }
 pub fn explain_nano_points_2(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // Nano_Points_2
     (false, vec![])
 }
 pub fn explain_not_amashilama(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // NOT Amashilama
     (false, vec![])
 }
 pub fn explain_not_ebih_interchange_block(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // not Ebih_Interchange_Block
     (false, vec![])
 }
 pub fn explain_not_ebih_waterfall_wall_and_nanite_mist_and_mist_upgrade(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // not Ebih_Waterfall_Wall and Nanite_Mist and Mist_Upgrade
-    (false, vec![])
+    {
+        let mut left = {
+            let mut left = (false, vec![]);
+            if !left.0 {
+                left
+            } else {
+                let mut right = (false, vec![]);
+                left.1.append(&mut right.1);
+                (right.0, left.1)
+            }
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = (false, vec![]);
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
 }
 pub fn explain_not_irikar_royal_storage_wall_and_mist_upgrade(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // not Irikar_Royal_Storage_Wall and Mist_Upgrade
-    (false, vec![])
+    {
+        let mut left = (false, vec![]);
+        if !left.0 {
+            left
+        } else {
+            let mut right = (false, vec![]);
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
 }
 pub fn explain_not_irikar_royal_storage_wall_and_shockwave(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // not Irikar_Royal_Storage_Wall and $shockwave
-    (false, vec![])
+    {
+        let mut left = (false, vec![]);
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__shockwave!(ctx, world, edict);
+                edict.insert("$shockwave", format!("{:?}", res));
+                refs.push("$shockwave");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
 }
 pub fn explain_not_separation_or_defeat_indra(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // NOT Separation or Defeat_Indra
-    (false, vec![])
+    {
+        let mut left = (false, vec![]);
+        if left.0 {
+            left
+        } else {
+            let mut right = (false, vec![]);
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
 }
 pub fn explain_not_slingshot_hook(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // not Slingshot_Hook
     (false, vec![])
 }
 pub fn explain_not_within_menu_and_anuman_and_mode_ne_drone(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // NOT WITHIN `Menu` and Anuman and ^mode != 'drone'
-    (false, vec![])
+    {
+        let mut left = {
+            let mut left = (false, vec![]);
+            if !left.0 {
+                left
+            } else {
+                let mut right = (false, vec![]);
+                left.1.append(&mut right.1);
+                (right.0, left.1)
+            }
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = (false, vec![]);
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
 }
 pub fn explain_not_within_menu_and_can_deploy(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // NOT WITHIN `Menu` and $can_deploy
-    (false, vec![])
+    {
+        let mut left = (false, vec![]);
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__can_deploy!(ctx, world, edict);
+                edict.insert("$can_deploy", format!("{:?}", res));
+                refs.push("$can_deploy");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
 }
 pub fn explain_not_within_menu_and_flasks_gt_0(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // NOT WITHIN `Menu` and ^flasks > 0
-    (false, vec![])
+    {
+        let mut left = (false, vec![]);
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let left = Into::<i32>::into(ctx.flasks());
+                let right = 0;
+                edict.insert("^flasks", format!("{:?}", left));
+                edict.insert("0", format!("{:?}", right));
+                (left > right.into(), vec!["^flasks", "0"])
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
 }
 pub fn explain_not_within_menu_and_ft_main_and_can_recall(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // NOT WITHIN `Menu` and $ft_main and $can_recall
-    (false, vec![])
+    {
+        let mut left = {
+            let mut left = (false, vec![]);
+            if !left.0 {
+                left
+            } else {
+                let mut right = {
+                    let (res, mut refs) = hexplain__ft_main!(ctx, world, edict);
+                    edict.insert("$ft_main", format!("{:?}", res));
+                    refs.push("$ft_main");
+                    (res, refs)
+                };
+                left.1.append(&mut right.1);
+                (right.0, left.1)
+            }
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__can_recall!(ctx, world, edict);
+                edict.insert("$can_recall", format!("{:?}", res));
+                refs.push("$can_recall");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
 }
 pub fn explain_not_within_menu_and_realm_ne_breach_and_anuman_and_mode_eq_drone(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // NOT WITHIN `Menu` and ^realm != 'breach' and Anuman and ^mode == 'drone'
-    (false, vec![])
+    {
+        let mut left = {
+            let mut left = {
+                let mut left = (false, vec![]);
+                if !left.0 {
+                    left
+                } else {
+                    let mut right = (false, vec![]);
+                    left.1.append(&mut right.1);
+                    (right.0, left.1)
+                }
+            };
+            if !left.0 {
+                left
+            } else {
+                let mut right = (false, vec![]);
+                left.1.append(&mut right.1);
+                (right.0, left.1)
+            }
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = (false, vec![]);
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
 }
 pub fn explain_not_within_menu_and_realm_ne_breach_and_can_recall(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // NOT WITHIN `Menu` and ^realm != 'breach' and $can_recall
-    (false, vec![])
+    {
+        let mut left = {
+            let mut left = (false, vec![]);
+            if !left.0 {
+                left
+            } else {
+                let mut right = (false, vec![]);
+                left.1.append(&mut right.1);
+                (right.0, left.1)
+            }
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__can_recall!(ctx, world, edict);
+                edict.insert("$can_recall", format!("{:?}", res));
+                refs.push("$can_recall");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
 }
 pub fn explain_offset(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // $offset
-    (false, vec![])
+    {
+        let (res, mut refs) = hexplain__offset!(ctx, world, edict);
+        edict.insert("$offset", format!("{:?}", res));
+        refs.push("$offset");
+        (res, refs)
+    }
 }
 pub fn explain_open(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // $open
-    (false, vec![])
+    {
+        let (res, mut refs) = hexplain__open!(ctx, world, edict);
+        edict.insert("$open", format!("{:?}", res));
+        refs.push("$open");
+        (res, refs)
+    }
 }
 pub fn explain_open_and_range1(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // $open and $range1
-    (false, vec![])
+    {
+        let mut left = {
+            let (res, mut refs) = hexplain__open!(ctx, world, edict);
+            edict.insert("$open", format!("{:?}", res));
+            refs.push("$open");
+            (res, refs)
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__range1!(ctx, world, edict);
+                edict.insert("$range1", format!("{:?}", res));
+                refs.push("$range1");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
 }
 pub fn explain_open_and_range2(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // $open and $range2
-    (false, vec![])
+    {
+        let mut left = {
+            let (res, mut refs) = hexplain__open!(ctx, world, edict);
+            edict.insert("$open", format!("{:?}", res));
+            refs.push("$open");
+            (res, refs)
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__range2!(ctx, world, edict);
+                edict.insert("$range2", format!("{:?}", res));
+                refs.push("$range2");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
 }
 pub fn explain_open_and_range3(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // $open and $range3
-    (false, vec![])
+    {
+        let mut left = {
+            let (res, mut refs) = hexplain__open!(ctx, world, edict);
+            edict.insert("$open", format!("{:?}", res));
+            refs.push("$open");
+            (res, refs)
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__range3!(ctx, world, edict);
+                edict.insert("$range3", format!("{:?}", res));
+                refs.push("$range3");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
 }
 pub fn explain_overheat(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // $overheat
-    (false, vec![])
+    {
+        let (res, mut refs) = hexplain__overheat!(ctx, world, edict);
+        edict.insert("$overheat", format!("{:?}", res));
+        refs.push("$overheat");
+        (res, refs)
+    }
 }
 pub fn explain_overheat_and_can_damage(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // $overheat and $can_damage
-    (false, vec![])
+    {
+        let mut left = {
+            let (res, mut refs) = hexplain__overheat!(ctx, world, edict);
+            edict.insert("$overheat", format!("{:?}", res));
+            refs.push("$overheat");
+            (res, refs)
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__can_damage!(ctx, world, edict);
+                edict.insert("$can_damage", format!("{:?}", res));
+                refs.push("$can_damage");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
 }
 pub fn explain_platform_and_hook_and_hover(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // $platform and $hook and $hover
-    (false, vec![])
+    {
+        let mut left = {
+            let mut left = {
+                let (res, mut refs) = hexplain__platform!(ctx, world, edict);
+                edict.insert("$platform", format!("{:?}", res));
+                refs.push("$platform");
+                (res, refs)
+            };
+            if !left.0 {
+                left
+            } else {
+                let mut right = {
+                    let (res, mut refs) = hexplain__hook!(ctx, world, edict);
+                    edict.insert("$hook", format!("{:?}", res));
+                    refs.push("$hook");
+                    (res, refs)
+                };
+                left.1.append(&mut right.1);
+                (right.0, left.1)
+            }
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__hover!(ctx, world, edict);
+                edict.insert("$hover", format!("{:?}", res));
+                refs.push("$hover");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
 }
 pub fn explain_ranged_damage(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // Ranged_Damage
     (false, vec![])
 }
 pub fn explain_ranged_damage_2(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // Ranged_Damage_2
     (false, vec![])
 }
 pub fn explain_ranged_speed(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // Ranged_Speed
     (false, vec![])
 }
 pub fn explain_ranged_speed_2(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // Ranged_Speed_2
     (false, vec![])
 }
 pub fn explain_realm_eq_breach(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // ^realm == 'breach'
     (false, vec![])
 }
 pub fn explain_realm_eq_breach_and_exit_breach_and___flipside_not_within_default(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // ^realm == 'breach' and Exit_Breach and (^flipside NOT WITHIN $default)
-    (false, vec![])
+    {
+        let mut left = {
+            let mut left = (false, vec![]);
+            if !left.0 {
+                left
+            } else {
+                let mut right = (false, vec![]);
+                left.1.append(&mut right.1);
+                (right.0, left.1)
+            }
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = ({
+                let res = Default::default();
+                edict.insert("$default", format!("{:?}", res));
+                (res, vec!["$default"])
+            });
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
 }
 pub fn explain_realm_in___main_interior_emergence_and_amashilama(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // ^realm IN ['main', 'interior', 'emergence'] and Amashilama
-    (false, vec![])
+    {
+        let mut left = (false, vec![]);
+        if !left.0 {
+            left
+        } else {
+            let mut right = (false, vec![]);
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
 }
 pub fn explain_remote_drone(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // Remote_Drone
     (false, vec![])
 }
 pub fn explain_separation(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // Separation
     (false, vec![])
 }
 pub fn explain_separation_and_not_defeat_indra_and_mist2(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // Separation and NOT Defeat_Indra and $mist2
-    (false, vec![])
+    {
+        let mut left = {
+            let mut left = (false, vec![]);
+            if !left.0 {
+                left
+            } else {
+                let mut right = (false, vec![]);
+                left.1.append(&mut right.1);
+                (right.0, left.1)
+            }
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__mist2!(ctx, world, edict);
+                edict.insert("$mist2", format!("{:?}", res));
+                refs.push("$mist2");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
 }
 pub fn explain_shockwave(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // $shockwave
-    (false, vec![])
+    {
+        let (res, mut refs) = hexplain__shockwave!(ctx, world, edict);
+        edict.insert("$shockwave", format!("{:?}", res));
+        refs.push("$shockwave");
+        (res, refs)
+    }
 }
 pub fn explain_shockwave_and_not_defeat_mus_a_m20(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // $shockwave and not Defeat_MUS_A_M20
-    (false, vec![])
+    {
+        let mut left = {
+            let (res, mut refs) = hexplain__shockwave!(ctx, world, edict);
+            edict.insert("$shockwave", format!("{:?}", res));
+            refs.push("$shockwave");
+            (res, refs)
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = (false, vec![]);
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
 }
 pub fn explain_sniper_valley_rock_1(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // Sniper_Valley_Rock_1
     (false, vec![])
 }
 pub fn explain_spin(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // $spin
-    (false, vec![])
+    {
+        let (res, mut refs) = hexplain__spin!(ctx, world, edict);
+        edict.insert("$spin", format!("{:?}", res));
+        refs.push("$spin");
+        (res, refs)
+    }
 }
 pub fn explain_station_power(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // Station_Power
     (false, vec![])
 }
 pub fn explain_switch_36_11(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // Switch_36_11
     (false, vec![])
 }
 pub fn explain_switch_40_12(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // Switch_40_12
     (false, vec![])
 }
 pub fn explain_uhrum_annuna_corridor_block(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // Uhrum_Annuna_Corridor_Block
     (false, vec![])
 }
 pub fn explain_uhrum_waterfall_wall(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // Uhrum_Waterfall_Wall
     (false, vec![])
 }
 pub fn explain_uhrum_waterfalls_block(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // Uhrum_Waterfalls_Block
     (false, vec![])
 }
 pub fn explain_uhrum_waterfalls_block_and_grab(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // Uhrum_Waterfalls_Block and $grab
-    (false, vec![])
+    {
+        let mut left = (false, vec![]);
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__grab!(ctx, world, edict);
+                edict.insert("$grab", format!("{:?}", res));
+                refs.push("$grab");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
 }
 pub fn explain_uhrum_waterfalls_block_and_hook(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // Uhrum_Waterfalls_Block and $hook
-    (false, vec![])
+    {
+        let mut left = (false, vec![]);
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__hook!(ctx, world, edict);
+                edict.insert("$hook", format!("{:?}", res));
+                refs.push("$hook");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
 }
 pub fn explain_uhrum_west_entrance_gate(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // Uhrum_West_Entrance_Gate
     (false, vec![])
 }
 pub fn explain_uhrum_west_entrance_gate_and_hover(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // Uhrum_West_Entrance_Gate and $hover
-    (false, vec![])
+    {
+        let mut left = (false, vec![]);
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__hover!(ctx, world, edict);
+                edict.insert("$hover", format!("{:?}", res));
+                refs.push("$hover");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
 }
 pub fn explain_uhrum_west_entrance_lower_wall(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // Uhrum_West_Entrance_Lower_Wall
     (false, vec![])
 }
 pub fn explain_uhrum_west_entrance_upper_wall(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // Uhrum_West_Entrance_Upper_Wall
     (false, vec![])
 }
 pub fn explain_underwater_movement(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // Underwater_Movement
     (false, vec![])
 }
 pub fn explain_underwater_movement_and___grab_or_climb(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // Underwater_Movement and ($grab or $climb)
-    (false, vec![])
+    {
+        let mut left = (false, vec![]);
+        if !left.0 {
+            left
+        } else {
+            let mut right = ({
+                let mut left = {
+                    let (res, mut refs) = hexplain__grab!(ctx, world, edict);
+                    edict.insert("$grab", format!("{:?}", res));
+                    refs.push("$grab");
+                    (res, refs)
+                };
+                if left.0 {
+                    left
+                } else {
+                    let mut right = {
+                        let (res, mut refs) = hexplain__climb!(ctx, world, edict);
+                        edict.insert("$climb", format!("{:?}", res));
+                        refs.push("$climb");
+                        (res, refs)
+                    };
+                    left.1.append(&mut right.1);
+                    (right.0, left.1)
+                }
+            });
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
 }
 pub fn explain_underwater_movement_and_grab(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // Underwater_Movement and $grab
-    (false, vec![])
+    {
+        let mut left = (false, vec![]);
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__grab!(ctx, world, edict);
+                edict.insert("$grab", format!("{:?}", res));
+                refs.push("$grab");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
 }
 pub fn explain_underwater_movement_and_hook(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // Underwater_Movement and $hook
-    (false, vec![])
+    {
+        let mut left = (false, vec![]);
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__hook!(ctx, world, edict);
+                edict.insert("$hook", format!("{:?}", res));
+                refs.push("$hook");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
 }
 pub fn explain_within_antarctica(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // WITHIN `Antarctica`
     (false, vec![])
 }
 pub fn explain_within_menu_gt_upgrade_menu(
     ctx: &Context,
     world: &graph::World,
-    edict: &mut FxHashMap<String, String>,
-) -> (bool, Vec<String>) {
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
     // WITHIN `Menu > Upgrade Menu`
     (false, vec![])
 }

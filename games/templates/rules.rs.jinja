@@ -31,8 +31,8 @@ pub fn action_{{ id }}(ctx: &mut Context, world: &graph::World{% for k, t in (in
 %% endfor
 
 %% for id, info in access_funcs.items()|sort
-pub fn explain_{{ id }}(ctx: &Context, world: &graph::World, edict: &mut FxHashMap<String, String>) -> (bool, Vec<String>) {
+pub fn explain_{{ id }}(ctx: &Context, world: &graph::World, edict: &mut FxHashMap<&'static str, String>) -> (bool, Vec<&'static str>) {
     // {{ (info.boolExpr or info.itemList).text|string|trim }}
-    (false, vec![])
+    {{ (info.boolExpr or info.itemList)|prToRustExplain(info) }}
 }
 %% endfor

@@ -11,6 +11,17 @@ macro_rules! helper__{{ name|construct_id }} {
         {{ info.pr|prToRust({})|escape_ctx }}
     {{ '}}' }};
 }
+%% if not info.rule.startswith('action')
+#[macro_export]
+macro_rules! hexplain__{{ name|construct_id }} {
+    ($ctx:expr, $world:expr{% for a in info.args %}, ${{ a.name }}:expr{% endfor %}, $edict:expr) => {{ '{{' }}
+        #[allow(unused_imports)]
+        use $crate::items::Item;
+        {{ info.pr|prToRustExplain({})|string|escape_ctx }}
+    {{ '}}' }};
+}
+
+%% endif
 
 %% endfor
 
@@ -30,5 +41,22 @@ macro_rules! rule__{{ name|construct_id }} {
         }
     {{ '}}' }};
 }
+%% if rule.rule != 'actions'
+#[macro_export]
+macro_rules! rexplain__{{ name|construct_id }} {
+    ($ctx:expr, $world:expr, $edict:expr) => {{ '{{' }}
+        use $crate::graph_enums::*;
+        use $crate::rules;
+        match $world.rule_{{ name|construct_id }} {
+%% for v, info in rule.variants.items()
+            Rule{{ name[1:]|camelize }}::{{ v|construct_id|camelize }} => {
+                rules::explain_{{ info.func_id }}($ctx, $world)
+            }
+%% endfor
+        }
+    {{ '}}' }};
+}
+
+%% endif
 
 %% endfor

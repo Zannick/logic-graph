@@ -1639,6 +1639,15 @@ class GameLogic(object):
                            self.get_local_ctx(info),
                            self.data_types,
                            id or pr.name).visit(pr.tree)
+    
+
+    def prToRustExplain(self, pr, info, id=None):
+        return RustExplainerVisitor(self.rules,
+                                    self.context_types,
+                                    self.action_funcs,
+                                    self.get_local_ctx(info),
+                                    self.data_types,
+                                    id or pr.name).visit(pr.tree)
 
 
     def render(self):
@@ -1650,7 +1659,7 @@ class GameLogic(object):
             'construct_id': construct_id,
             'construct_place_id': construct_place_id,
             'construct_test_name': construct_test_name,
-            'escape_ctx': partial(re.compile(r'\b(ctx|world)\b').sub, r'$\1'),
+            'escape_ctx': partial(re.compile(r'\b(ctx|world|edict)\b').sub, r'$\1'),
             'field_size': field_size,
             'get_area': self.get_area,
             'get_exit_target': get_exit_target,
@@ -1659,6 +1668,7 @@ class GameLogic(object):
             'get_spot_reference': get_spot_reference,
             'hex': hex,
             'prToRust': self.prToRust,
+            'prToRustExplain': self.prToRustExplain,
             'region_id_from_id': self.region_id_from_id,
             'str_to_rusttype': str_to_rusttype,
             'target_id_from_id': self.target_id_from_id,

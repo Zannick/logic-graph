@@ -85,7 +85,7 @@ impl world::Accessible for Location {
     }
     fn price(&self) -> &Currency { &self.price }
 
-    fn explain_rule(&self, ctx: &Self::Context, world: &World, edict: &mut FxHashMap<String, String>) -> (bool, Vec<String>) {
+    fn explain_rule(&self, ctx: &Self::Context, world: &World, edict: &mut FxHashMap<&'static str, String>) -> (bool, Vec<&'static str>) {
         match self.id {
 %% for loc in gl.locations()|sort(attribute='id')
 %% if loc.access_id
@@ -150,7 +150,7 @@ impl world::Accessible for Exit {
     }
     fn price(&self) -> &Currency { &self.price }
     
-    fn explain_rule(&self, ctx: &Self::Context, world: &World, edict: &mut FxHashMap<String, String>) -> (bool, Vec<String>) {
+    fn explain_rule(&self, ctx: &Self::Context, world: &World, edict: &mut FxHashMap<&'static str, String>) -> (bool, Vec<&'static str>) {
         match self.id {
 %% for ex in gl.exits()|sort(attribute='id')
 %% if ex.access_id
@@ -224,7 +224,7 @@ impl world::Accessible for Action {
     }
     fn price(&self) -> &Currency { &self.price }
 
-    fn explain_rule(&self, ctx: &Self::Context, world: &World, edict: &mut FxHashMap<String, String>) -> (bool, Vec<String>) {
+    fn explain_rule(&self, ctx: &Self::Context, world: &World, edict: &mut FxHashMap<&'static str, String>) -> (bool, Vec<&'static str>) {
         match self.id {
 %% for act in gl.actions()|sort(attribute='id')
 %% if act.access_id
@@ -316,7 +316,7 @@ impl world::Accessible for Warp {
     }
     fn price(&self) -> &Currency { &self.price }
 
-    fn explain_rule(&self, ctx: &Self::Context, world: &World, edict: &mut FxHashMap<String, String>) -> (bool, Vec<String>) {
+    fn explain_rule(&self, ctx: &Self::Context, world: &World, edict: &mut FxHashMap<&'static str, String>) -> (bool, Vec<&'static str>) {
         match self.id {
 %% for w in warps.values()|sort(attribute='id')
 %% if w.access_id
