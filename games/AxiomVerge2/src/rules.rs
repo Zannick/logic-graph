@@ -2674,7 +2674,11 @@ pub fn explain_amagi_dragon_eye_passage(
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Amagi_Dragon_Eye_Passage
-    (false, vec![])
+    {
+        let h = ctx.has(Item::Amagi_Dragon_Eye_Passage);
+        edict.insert("Amagi_Dragon_Eye_Passage", format!("{}", h));
+        (h, vec!["Amagi_Dragon_Eye_Passage"])
+    }
 }
 pub fn explain_amagi_stronghold_boulder_1(
     ctx: &Context,
@@ -2682,7 +2686,11 @@ pub fn explain_amagi_stronghold_boulder_1(
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Amagi_Stronghold_Boulder_1
-    (false, vec![])
+    {
+        let h = ctx.has(Item::Amagi_Stronghold_Boulder_1);
+        edict.insert("Amagi_Stronghold_Boulder_1", format!("{}", h));
+        (h, vec!["Amagi_Stronghold_Boulder_1"])
+    }
 }
 pub fn explain_amagi_stronghold_boulder_1_and_underwater_movement_and___grab_or_climb(
     ctx: &Context,
@@ -2692,11 +2700,19 @@ pub fn explain_amagi_stronghold_boulder_1_and_underwater_movement_and___grab_or_
     // Amagi_Stronghold_Boulder_1 and Underwater_Movement and ($grab or $climb)
     {
         let mut left = {
-            let mut left = (false, vec![]);
+            let mut left = {
+                let h = ctx.has(Item::Amagi_Stronghold_Boulder_1);
+                edict.insert("Amagi_Stronghold_Boulder_1", format!("{}", h));
+                (h, vec!["Amagi_Stronghold_Boulder_1"])
+            };
             if !left.0 {
                 left
             } else {
-                let mut right = (false, vec![]);
+                let mut right = {
+                    let h = ctx.has(Item::Underwater_Movement);
+                    edict.insert("Underwater_Movement", format!("{}", h));
+                    (h, vec!["Underwater_Movement"])
+                };
                 left.1.append(&mut right.1);
                 (right.0, left.1)
             }
@@ -2735,7 +2751,11 @@ pub fn explain_amagi_stronghold_boulder_2(
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Amagi_Stronghold_Boulder_2
-    (false, vec![])
+    {
+        let h = ctx.has(Item::Amagi_Stronghold_Boulder_2);
+        edict.insert("Amagi_Stronghold_Boulder_2", format!("{}", h));
+        (h, vec!["Amagi_Stronghold_Boulder_2"])
+    }
 }
 pub fn explain_amagi_stronghold_boulder_2_and_grab(
     ctx: &Context,
@@ -2744,7 +2764,11 @@ pub fn explain_amagi_stronghold_boulder_2_and_grab(
 ) -> (bool, Vec<&'static str>) {
     // Amagi_Stronghold_Boulder_2 and $grab
     {
-        let mut left = (false, vec![]);
+        let mut left = {
+            let h = ctx.has(Item::Amagi_Stronghold_Boulder_2);
+            edict.insert("Amagi_Stronghold_Boulder_2", format!("{}", h));
+            (h, vec!["Amagi_Stronghold_Boulder_2"])
+        };
         if !left.0 {
             left
         } else {
@@ -2765,7 +2789,11 @@ pub fn explain_amagi_stronghold_wall_1(
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Amagi_Stronghold_Wall_1
-    (false, vec![])
+    {
+        let h = ctx.has(Item::Amagi_Stronghold_Wall_1);
+        edict.insert("Amagi_Stronghold_Wall_1", format!("{}", h));
+        (h, vec!["Amagi_Stronghold_Wall_1"])
+    }
 }
 pub fn explain_amagi_stronghold_wall_2(
     ctx: &Context,
@@ -2773,7 +2801,11 @@ pub fn explain_amagi_stronghold_wall_2(
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Amagi_Stronghold_Wall_2
-    (false, vec![])
+    {
+        let h = ctx.has(Item::Amagi_Stronghold_Wall_2);
+        edict.insert("Amagi_Stronghold_Wall_2", format!("{}", h));
+        (h, vec!["Amagi_Stronghold_Wall_2"])
+    }
 }
 pub fn explain_amagi_west_lake_surface_wall(
     ctx: &Context,
@@ -2781,7 +2813,11 @@ pub fn explain_amagi_west_lake_surface_wall(
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Amagi_West_Lake_Surface_Wall
-    (false, vec![])
+    {
+        let h = ctx.has(Item::Amagi_West_Lake_Surface_Wall);
+        edict.insert("Amagi_West_Lake_Surface_Wall", format!("{}", h));
+        (h, vec!["Amagi_West_Lake_Surface_Wall"])
+    }
 }
 pub fn explain_annuna__east_bridge__tower_east_ledge__enter_combo__req(
     ctx: &Context,
@@ -2963,7 +2999,11 @@ pub fn explain_annuna_east_bridge_gate(
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Annuna_East_Bridge_Gate
-    (false, vec![])
+    {
+        let h = ctx.has(Item::Annuna_East_Bridge_Gate);
+        edict.insert("Annuna_East_Bridge_Gate", format!("{}", h));
+        (h, vec!["Annuna_East_Bridge_Gate"])
+    }
 }
 pub fn explain_annuna_mirror_match_switch(
     ctx: &Context,
@@ -2971,7 +3011,11 @@ pub fn explain_annuna_mirror_match_switch(
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Annuna_Mirror_Match_Switch
-    (false, vec![])
+    {
+        let h = ctx.has(Item::Annuna_Mirror_Match_Switch);
+        edict.insert("Annuna_Mirror_Match_Switch", format!("{}", h));
+        (h, vec!["Annuna_Mirror_Match_Switch"])
+    }
 }
 pub fn explain_anuman(
     ctx: &Context,
@@ -2979,7 +3023,11 @@ pub fn explain_anuman(
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Anuman
-    (false, vec![])
+    {
+        let h = ctx.has(Item::Anuman);
+        edict.insert("Anuman", format!("{}", h));
+        (h, vec!["Anuman"])
+    }
 }
 pub fn explain_anuman_and_grab(
     ctx: &Context,
@@ -2988,7 +3036,11 @@ pub fn explain_anuman_and_grab(
 ) -> (bool, Vec<&'static str>) {
     // Anuman and $grab
     {
-        let mut left = (false, vec![]);
+        let mut left = {
+            let h = ctx.has(Item::Anuman);
+            edict.insert("Anuman", format!("{}", h));
+            (h, vec!["Anuman"])
+        };
         if !left.0 {
             left
         } else {
@@ -3009,7 +3061,11 @@ pub fn explain_anunna_vertical_room_gate(
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Anunna_Vertical_Room_Gate
-    (false, vec![])
+    {
+        let h = ctx.has(Item::Anunna_Vertical_Room_Gate);
+        edict.insert("Anunna_Vertical_Room_Gate", format!("{}", h));
+        (h, vec!["Anunna_Vertical_Room_Gate"])
+    }
 }
 pub fn explain_apocalypse_bomb(
     ctx: &Context,
@@ -3017,7 +3073,11 @@ pub fn explain_apocalypse_bomb(
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Apocalypse_Bomb
-    (false, vec![])
+    {
+        let h = ctx.has(Item::Apocalypse_Bomb);
+        edict.insert("Apocalypse_Bomb", format!("{}", h));
+        (h, vec!["Apocalypse_Bomb"])
+    }
 }
 pub fn explain_block_clip_and_not_ebih_waterfall_block_left(
     ctx: &Context,
@@ -3035,7 +3095,11 @@ pub fn explain_block_clip_and_not_ebih_waterfall_block_left(
         if !left.0 {
             left
         } else {
-            let mut right = (false, vec![]);
+            let mut right = {
+                let h = ctx.has(Item::Ebih_Waterfall_Block_Left);
+                edict.insert("Ebih_Waterfall_Block_Left", format!("{}", h));
+                (!h, vec!["Ebih_Waterfall_Block_Left"])
+            };
             left.1.append(&mut right.1);
             (right.0, left.1)
         }
@@ -3057,7 +3121,11 @@ pub fn explain_block_clip_and_not_ebih_waterfall_block_right(
         if !left.0 {
             left
         } else {
-            let mut right = (false, vec![]);
+            let mut right = {
+                let h = ctx.has(Item::Ebih_Waterfall_Block_Right);
+                edict.insert("Ebih_Waterfall_Block_Right", format!("{}", h));
+                (!h, vec!["Ebih_Waterfall_Block_Right"])
+            };
             left.1.append(&mut right.1);
             (right.0, left.1)
         }
@@ -3079,7 +3147,11 @@ pub fn explain_block_clip_escape_and_not_uhrum_annuna_corridor_block(
         if !left.0 {
             left
         } else {
-            let mut right = (false, vec![]);
+            let mut right = {
+                let h = ctx.has(Item::Uhrum_Annuna_Corridor_Block);
+                edict.insert("Uhrum_Annuna_Corridor_Block", format!("{}", h));
+                (!h, vec!["Uhrum_Annuna_Corridor_Block"])
+            };
             left.1.append(&mut right.1);
             (right.0, left.1)
         }
@@ -3104,7 +3176,11 @@ pub fn explain_boomerang1(
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Boomerang
-    (false, vec![])
+    {
+        let h = ctx.has(Item::Boomerang);
+        edict.insert("Boomerang", format!("{}", h));
+        (h, vec!["Boomerang"])
+    }
 }
 pub fn explain_boomerang2(
     ctx: &Context,
@@ -3112,7 +3188,11 @@ pub fn explain_boomerang2(
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Boomerang
-    (false, vec![])
+    {
+        let h = ctx.has(Item::Boomerang);
+        edict.insert("Boomerang", format!("{}", h));
+        (h, vec!["Boomerang"])
+    }
 }
 pub fn explain_boomerang3(
     ctx: &Context,
@@ -3120,7 +3200,11 @@ pub fn explain_boomerang3(
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Boomerang
-    (false, vec![])
+    {
+        let h = ctx.has(Item::Boomerang);
+        edict.insert("Boomerang", format!("{}", h));
+        (h, vec!["Boomerang"])
+    }
 }
 pub fn explain_boomerang4(
     ctx: &Context,
@@ -3128,7 +3212,11 @@ pub fn explain_boomerang4(
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Boomerang
-    (false, vec![])
+    {
+        let h = ctx.has(Item::Boomerang);
+        edict.insert("Boomerang", format!("{}", h));
+        (h, vec!["Boomerang"])
+    }
 }
 pub fn explain_boomerang5(
     ctx: &Context,
@@ -3136,7 +3224,11 @@ pub fn explain_boomerang5(
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Boomerang
-    (false, vec![])
+    {
+        let h = ctx.has(Item::Boomerang);
+        edict.insert("Boomerang", format!("{}", h));
+        (h, vec!["Boomerang"])
+    }
 }
 pub fn explain_bs(
     ctx: &Context,
@@ -3193,7 +3285,11 @@ pub fn explain_can_deploy_and_drone_hover(
         if !left.0 {
             left
         } else {
-            let mut right = (false, vec![]);
+            let mut right = {
+                let h = ctx.has(Item::Drone_Hover);
+                edict.insert("Drone_Hover", format!("{}", h));
+                (h, vec!["Drone_Hover"])
+            };
             left.1.append(&mut right.1);
             (right.0, left.1)
         }
@@ -3215,7 +3311,11 @@ pub fn explain_can_deploy_and_slingshot_hook(
         if !left.0 {
             left
         } else {
-            let mut right = (false, vec![]);
+            let mut right = {
+                let h = ctx.has(Item::Slingshot_Hook);
+                edict.insert("Slingshot_Hook", format!("{}", h));
+                (h, vec!["Slingshot_Hook"])
+            };
             left.1.append(&mut right.1);
             (right.0, left.1)
         }
@@ -3238,7 +3338,11 @@ pub fn explain_can_deploy_and_slingshot_hook_and_drone_hover(
             if !left.0 {
                 left
             } else {
-                let mut right = (false, vec![]);
+                let mut right = {
+                    let h = ctx.has(Item::Slingshot_Hook);
+                    edict.insert("Slingshot_Hook", format!("{}", h));
+                    (h, vec!["Slingshot_Hook"])
+                };
                 left.1.append(&mut right.1);
                 (right.0, left.1)
             }
@@ -3246,7 +3350,11 @@ pub fn explain_can_deploy_and_slingshot_hook_and_drone_hover(
         if !left.0 {
             left
         } else {
-            let mut right = (false, vec![]);
+            let mut right = {
+                let h = ctx.has(Item::Drone_Hover);
+                edict.insert("Drone_Hover", format!("{}", h));
+                (h, vec!["Drone_Hover"])
+            };
             left.1.append(&mut right.1);
             (right.0, left.1)
         }
@@ -3294,7 +3402,11 @@ pub fn explain_climb_and_annuna_east_bridge_gate(
         if !left.0 {
             left
         } else {
-            let mut right = (false, vec![]);
+            let mut right = {
+                let h = ctx.has(Item::Annuna_East_Bridge_Gate);
+                edict.insert("Annuna_East_Bridge_Gate", format!("{}", h));
+                (h, vec!["Annuna_East_Bridge_Gate"])
+            };
             left.1.append(&mut right.1);
             (right.0, left.1)
         }
@@ -3331,7 +3443,11 @@ pub fn explain_climb_and_can_deploy_and_hover_and_slingshot_hook(
             if !left.0 {
                 left
             } else {
-                let mut right = (false, vec![]);
+                let mut right = {
+                    let h = ctx.has(Item::Hover);
+                    edict.insert("Hover", format!("{}", h));
+                    (h, vec!["Hover"])
+                };
                 left.1.append(&mut right.1);
                 (right.0, left.1)
             }
@@ -3339,7 +3455,11 @@ pub fn explain_climb_and_can_deploy_and_hover_and_slingshot_hook(
         if !left.0 {
             left
         } else {
-            let mut right = (false, vec![]);
+            let mut right = {
+                let h = ctx.has(Item::Slingshot_Hook);
+                edict.insert("Slingshot_Hook", format!("{}", h));
+                (h, vec!["Slingshot_Hook"])
+            };
             left.1.append(&mut right.1);
             (right.0, left.1)
         }
@@ -3402,7 +3522,11 @@ pub fn explain_climb_and_grab_and_anuman(
         if !left.0 {
             left
         } else {
-            let mut right = (false, vec![]);
+            let mut right = {
+                let h = ctx.has(Item::Anuman);
+                edict.insert("Anuman", format!("{}", h));
+                (h, vec!["Anuman"])
+            };
             left.1.append(&mut right.1);
             (right.0, left.1)
         }
@@ -3441,7 +3565,11 @@ pub fn explain_defeat_mus_a_m20(
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Defeat_MUS_A_M20
-    (false, vec![])
+    {
+        let h = ctx.has(Item::Defeat_MUS_A_M20);
+        edict.insert("Defeat_MUS_A_M20", format!("{}", h));
+        (h, vec!["Defeat_MUS_A_M20"])
+    }
 }
 pub fn explain_drone_melee_damage(
     ctx: &Context,
@@ -3449,7 +3577,11 @@ pub fn explain_drone_melee_damage(
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Drone_Melee_Damage
-    (false, vec![])
+    {
+        let h = ctx.has(Item::Drone_Melee_Damage);
+        edict.insert("Drone_Melee_Damage", format!("{}", h));
+        (h, vec!["Drone_Melee_Damage"])
+    }
 }
 pub fn explain_drone_melee_damage_2(
     ctx: &Context,
@@ -3457,7 +3589,11 @@ pub fn explain_drone_melee_damage_2(
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Drone_Melee_Damage_2
-    (false, vec![])
+    {
+        let h = ctx.has(Item::Drone_Melee_Damage_2);
+        edict.insert("Drone_Melee_Damage_2", format!("{}", h));
+        (h, vec!["Drone_Melee_Damage_2"])
+    }
 }
 pub fn explain_drone_melee_speed(
     ctx: &Context,
@@ -3465,7 +3601,11 @@ pub fn explain_drone_melee_speed(
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Drone_Melee_Speed
-    (false, vec![])
+    {
+        let h = ctx.has(Item::Drone_Melee_Speed);
+        edict.insert("Drone_Melee_Speed", format!("{}", h));
+        (h, vec!["Drone_Melee_Speed"])
+    }
 }
 pub fn explain_drone_melee_speed_2(
     ctx: &Context,
@@ -3473,7 +3613,11 @@ pub fn explain_drone_melee_speed_2(
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Drone_Melee_Speed_2
-    (false, vec![])
+    {
+        let h = ctx.has(Item::Drone_Melee_Speed_2);
+        edict.insert("Drone_Melee_Speed_2", format!("{}", h));
+        (h, vec!["Drone_Melee_Speed_2"])
+    }
 }
 pub fn explain_ebih__base_camp__left_platform__move_left_platform__req(
     ctx: &Context,
@@ -3626,7 +3770,11 @@ pub fn explain_ebih__drone_room__pit_left__activate_lift__req(
 ) -> (bool, Vec<&'static str>) {
     // Infect and ^_platform_moved
     {
-        let mut left = (false, vec![]);
+        let mut left = {
+            let h = ctx.has(Item::Infect);
+            edict.insert("Infect", format!("{}", h));
+            (h, vec!["Infect"])
+        };
         if !left.0 {
             left
         } else {
@@ -3643,7 +3791,11 @@ pub fn explain_ebih__drone_room__pit_left__activate_lift_but_get_off_early__req(
 ) -> (bool, Vec<&'static str>) {
     // Infect and ^_platform_moved
     {
-        let mut left = (false, vec![]);
+        let mut left = {
+            let h = ctx.has(Item::Infect);
+            edict.insert("Infect", format!("{}", h));
+            (h, vec!["Infect"])
+        };
         if !left.0 {
             left
         } else {
@@ -3660,7 +3812,11 @@ pub fn explain_ebih__drone_room__portal_exit__activate_platform__req(
 ) -> (bool, Vec<&'static str>) {
     // Infect and not ^_platform_moved
     {
-        let mut left = (false, vec![]);
+        let mut left = {
+            let h = ctx.has(Item::Infect);
+            edict.insert("Infect", format!("{}", h));
+            (h, vec!["Infect"])
+        };
         if !left.0 {
             left
         } else {
@@ -3680,7 +3836,11 @@ pub fn explain_ebih__drone_room__portal_exit__ex__moving_platform_1__req(
 ) -> (bool, Vec<&'static str>) {
     // Infect and not ^_platform_moved
     {
-        let mut left = (false, vec![]);
+        let mut left = {
+            let h = ctx.has(Item::Infect);
+            edict.insert("Infect", format!("{}", h));
+            (h, vec!["Infect"])
+        };
         if !left.0 {
             left
         } else {
@@ -3726,7 +3886,11 @@ pub fn explain_ebih__ebih_east__dispenser__activate_lift__req(
     // Infect and ^_platform2_moved and ($grab or $hook)
     {
         let mut left = {
-            let mut left = (false, vec![]);
+            let mut left = {
+                let h = ctx.has(Item::Infect);
+                edict.insert("Infect", format!("{}", h));
+                (h, vec!["Infect"])
+            };
             if !left.0 {
                 left
             } else {
@@ -3821,7 +3985,11 @@ pub fn explain_ebih__ebih_east__lower_moving_platform__activate_lift__req(
     // Infect and $grab and not ^_platform2_moved
     {
         let mut left = {
-            let mut left = (false, vec![]);
+            let mut left = {
+                let h = ctx.has(Item::Infect);
+                edict.insert("Infect", format!("{}", h));
+                (h, vec!["Infect"])
+            };
             if !left.0 {
                 left
             } else {
@@ -3854,7 +4022,11 @@ pub fn explain_ebih__ebih_east__lower_moving_platform__activate_ride__req(
 ) -> (bool, Vec<&'static str>) {
     // Infect and not ^_platform2_moved
     {
-        let mut left = (false, vec![]);
+        let mut left = {
+            let h = ctx.has(Item::Infect);
+            edict.insert("Infect", format!("{}", h));
+            (h, vec!["Infect"])
+        };
         if !left.0 {
             left
         } else {
@@ -3875,7 +4047,11 @@ pub fn explain_ebih__ebih_east__moving_platform__activate_ride__req(
     // Infect and $grab and not ^_platform1_moved
     {
         let mut left = {
-            let mut left = (false, vec![]);
+            let mut left = {
+                let h = ctx.has(Item::Infect);
+                edict.insert("Infect", format!("{}", h));
+                (h, vec!["Infect"])
+            };
             if !left.0 {
                 left
             } else {
@@ -4116,7 +4292,11 @@ pub fn explain_ebih_alu(
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Ebih_Alu
-    (false, vec![])
+    {
+        let h = ctx.has(Item::Ebih_Alu);
+        edict.insert("Ebih_Alu", format!("{}", h));
+        (h, vec!["Ebih_Alu"])
+    }
 }
 pub fn explain_ebih_interchange_block(
     ctx: &Context,
@@ -4124,7 +4304,11 @@ pub fn explain_ebih_interchange_block(
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Ebih_Interchange_Block
-    (false, vec![])
+    {
+        let h = ctx.has(Item::Ebih_Interchange_Block);
+        edict.insert("Ebih_Interchange_Block", format!("{}", h));
+        (h, vec!["Ebih_Interchange_Block"])
+    }
 }
 pub fn explain_ebih_interchange_gate(
     ctx: &Context,
@@ -4132,7 +4316,11 @@ pub fn explain_ebih_interchange_gate(
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Ebih_Interchange_Gate
-    (false, vec![])
+    {
+        let h = ctx.has(Item::Ebih_Interchange_Gate);
+        edict.insert("Ebih_Interchange_Gate", format!("{}", h));
+        (h, vec!["Ebih_Interchange_Gate"])
+    }
 }
 pub fn explain_ebih_interchange_gate_and_ebih_interchange_block_and_grab(
     ctx: &Context,
@@ -4142,11 +4330,19 @@ pub fn explain_ebih_interchange_gate_and_ebih_interchange_block_and_grab(
     // Ebih_Interchange_Gate and Ebih_Interchange_Block and $grab
     {
         let mut left = {
-            let mut left = (false, vec![]);
+            let mut left = {
+                let h = ctx.has(Item::Ebih_Interchange_Gate);
+                edict.insert("Ebih_Interchange_Gate", format!("{}", h));
+                (h, vec!["Ebih_Interchange_Gate"])
+            };
             if !left.0 {
                 left
             } else {
-                let mut right = (false, vec![]);
+                let mut right = {
+                    let h = ctx.has(Item::Ebih_Interchange_Block);
+                    edict.insert("Ebih_Interchange_Block", format!("{}", h));
+                    (h, vec!["Ebih_Interchange_Block"])
+                };
                 left.1.append(&mut right.1);
                 (right.0, left.1)
             }
@@ -4173,11 +4369,19 @@ pub fn explain_ebih_interchange_gate_and_ebih_interchange_block_and_hook(
     // Ebih_Interchange_Gate and Ebih_Interchange_Block and $hook
     {
         let mut left = {
-            let mut left = (false, vec![]);
+            let mut left = {
+                let h = ctx.has(Item::Ebih_Interchange_Gate);
+                edict.insert("Ebih_Interchange_Gate", format!("{}", h));
+                (h, vec!["Ebih_Interchange_Gate"])
+            };
             if !left.0 {
                 left
             } else {
-                let mut right = (false, vec![]);
+                let mut right = {
+                    let h = ctx.has(Item::Ebih_Interchange_Block);
+                    edict.insert("Ebih_Interchange_Block", format!("{}", h));
+                    (h, vec!["Ebih_Interchange_Block"])
+                };
                 left.1.append(&mut right.1);
                 (right.0, left.1)
             }
@@ -4204,11 +4408,19 @@ pub fn explain_ebih_interchange_gate_and_not_ebih_interchange_block_and_grab(
     // Ebih_Interchange_Gate and not Ebih_Interchange_Block and $grab
     {
         let mut left = {
-            let mut left = (false, vec![]);
+            let mut left = {
+                let h = ctx.has(Item::Ebih_Interchange_Gate);
+                edict.insert("Ebih_Interchange_Gate", format!("{}", h));
+                (h, vec!["Ebih_Interchange_Gate"])
+            };
             if !left.0 {
                 left
             } else {
-                let mut right = (false, vec![]);
+                let mut right = {
+                    let h = ctx.has(Item::Ebih_Interchange_Block);
+                    edict.insert("Ebih_Interchange_Block", format!("{}", h));
+                    (!h, vec!["Ebih_Interchange_Block"])
+                };
                 left.1.append(&mut right.1);
                 (right.0, left.1)
             }
@@ -4235,11 +4447,19 @@ pub fn explain_ebih_interchange_gate_and_not_ebih_interchange_block_and_hook(
     // Ebih_Interchange_Gate and not Ebih_Interchange_Block and $hook
     {
         let mut left = {
-            let mut left = (false, vec![]);
+            let mut left = {
+                let h = ctx.has(Item::Ebih_Interchange_Gate);
+                edict.insert("Ebih_Interchange_Gate", format!("{}", h));
+                (h, vec!["Ebih_Interchange_Gate"])
+            };
             if !left.0 {
                 left
             } else {
-                let mut right = (false, vec![]);
+                let mut right = {
+                    let h = ctx.has(Item::Ebih_Interchange_Block);
+                    edict.insert("Ebih_Interchange_Block", format!("{}", h));
+                    (!h, vec!["Ebih_Interchange_Block"])
+                };
                 left.1.append(&mut right.1);
                 (right.0, left.1)
             }
@@ -4264,7 +4484,11 @@ pub fn explain_ebih_wasteland_door(
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Ebih_Wasteland_Door
-    (false, vec![])
+    {
+        let h = ctx.has(Item::Ebih_Wasteland_Door);
+        edict.insert("Ebih_Wasteland_Door", format!("{}", h));
+        (h, vec!["Ebih_Wasteland_Door"])
+    }
 }
 pub fn explain_ebih_waterfall_wall(
     ctx: &Context,
@@ -4272,7 +4496,11 @@ pub fn explain_ebih_waterfall_wall(
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Ebih_Waterfall_Wall
-    (false, vec![])
+    {
+        let h = ctx.has(Item::Ebih_Waterfall_Wall);
+        edict.insert("Ebih_Waterfall_Wall", format!("{}", h));
+        (h, vec!["Ebih_Waterfall_Wall"])
+    }
 }
 pub fn explain_ebih_west_block(
     ctx: &Context,
@@ -4280,7 +4508,11 @@ pub fn explain_ebih_west_block(
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Ebih_West_Block
-    (false, vec![])
+    {
+        let h = ctx.has(Item::Ebih_West_Block);
+        edict.insert("Ebih_West_Block", format!("{}", h));
+        (h, vec!["Ebih_West_Block"])
+    }
 }
 pub fn explain_fast_travel(
     ctx: &Context,
@@ -4288,7 +4520,11 @@ pub fn explain_fast_travel(
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Fast_Travel
-    (false, vec![])
+    {
+        let h = ctx.has(Item::Fast_Travel);
+        edict.insert("Fast_Travel", format!("{}", h));
+        (h, vec!["Fast_Travel"])
+    }
 }
 pub fn explain_ft_main_and___map_spot_within_menu_gt_kiengir_map(
     ctx: &Context,
@@ -4585,7 +4821,11 @@ pub fn explain_giguna__clouds__platform_start__hack_and_ride_to_portal__req(
             if !left.0 {
                 left
             } else {
-                let mut right = (false, vec![]);
+                let mut right = {
+                    let h = ctx.has(Item::Breach_Sight);
+                    edict.insert("Breach_Sight", format!("{}", h));
+                    (h, vec!["Breach_Sight"])
+                };
                 left.1.append(&mut right.1);
                 (right.0, left.1)
             }
@@ -4593,7 +4833,11 @@ pub fn explain_giguna__clouds__platform_start__hack_and_ride_to_portal__req(
         if !left.0 {
             left
         } else {
-            let mut right = (false, vec![]);
+            let mut right = {
+                let h = ctx.has(Item::Remote_Drone);
+                edict.insert("Remote_Drone", format!("{}", h));
+                (h, vec!["Remote_Drone"])
+            };
             left.1.append(&mut right.1);
             (right.0, left.1)
         }
@@ -4655,7 +4899,11 @@ pub fn explain_giguna__clouds__platform_start__hack_deploy_ride_to_portal__req(
         if !left.0 {
             left
         } else {
-            let mut right = (false, vec![]);
+            let mut right = {
+                let h = ctx.has(Item::Breach_Sight);
+                edict.insert("Breach_Sight", format!("{}", h));
+                (h, vec!["Breach_Sight"])
+            };
             left.1.append(&mut right.1);
             (right.0, left.1)
         }
@@ -4672,7 +4920,12 @@ pub fn explain_giguna__clouds__platform_stop__ex__flipside_1__req(
         if !left.0 {
             left
         } else {
-            let mut right = (false, vec![]);
+            let mut right = {
+                let left = ctx.mode();
+                let right = enums::Mode::Drone;
+                edict.insert("^mode", format!("{}", left));
+                (left == right, vec!["^mode"])
+            };
             left.1.append(&mut right.1);
             (right.0, left.1)
         }
@@ -4686,11 +4939,20 @@ pub fn explain_giguna__east_caverns__arc_ledge__ex__hidden_passage_west_1__req(
     // ^mode == 'drone' and Mist_Upgrade and ^_combo_entered
     {
         let mut left = {
-            let mut left = (false, vec![]);
+            let mut left = {
+                let left = ctx.mode();
+                let right = enums::Mode::Drone;
+                edict.insert("^mode", format!("{}", left));
+                (left == right, vec!["^mode"])
+            };
             if !left.0 {
                 left
             } else {
-                let mut right = (false, vec![]);
+                let mut right = {
+                    let h = ctx.has(Item::Mist_Upgrade);
+                    edict.insert("Mist_Upgrade", format!("{}", h));
+                    (h, vec!["Mist_Upgrade"])
+                };
                 left.1.append(&mut right.1);
                 (right.0, left.1)
             }
@@ -4711,7 +4973,12 @@ pub fn explain_giguna__east_caverns__arc_passage__ex__hidden_passage_west_1__req
 ) -> (bool, Vec<&'static str>) {
     // ^mode == 'drone' and ^_combo_entered
     {
-        let mut left = (false, vec![]);
+        let mut left = {
+            let left = ctx.mode();
+            let right = enums::Mode::Drone;
+            edict.insert("^mode", format!("{}", left));
+            (left == right, vec!["^mode"])
+        };
         if !left.0 {
             left
         } else {
@@ -4890,7 +5157,12 @@ pub fn explain_giguna__east_caverns__middle_rock__ex__hidden_passage_east_1__req
 ) -> (bool, Vec<&'static str>) {
     // ^mode == 'drone' and ^_combo_entered
     {
-        let mut left = (false, vec![]);
+        let mut left = {
+            let left = ctx.mode();
+            let right = enums::Mode::Drone;
+            edict.insert("^mode", format!("{}", left));
+            (left == right, vec!["^mode"])
+        };
         if !left.0 {
             left
         } else {
@@ -4944,11 +5216,20 @@ pub fn explain_giguna__east_caverns__midwest_ledge__ex__hidden_passage_west_2__r
     // ^mode == 'drone' and Mist_Upgrade and ^_combo_entered
     {
         let mut left = {
-            let mut left = (false, vec![]);
+            let mut left = {
+                let left = ctx.mode();
+                let right = enums::Mode::Drone;
+                edict.insert("^mode", format!("{}", left));
+                (left == right, vec!["^mode"])
+            };
             if !left.0 {
                 left
             } else {
-                let mut right = (false, vec![]);
+                let mut right = {
+                    let h = ctx.has(Item::Mist_Upgrade);
+                    edict.insert("Mist_Upgrade", format!("{}", h));
+                    (h, vec!["Mist_Upgrade"])
+                };
                 left.1.append(&mut right.1);
                 (right.0, left.1)
             }
@@ -5006,11 +5287,20 @@ pub fn explain_giguna__east_caverns__statues_ledge__ex__hidden_passage_west_2__r
     // ^mode == 'drone' and Mist_Upgrade and ^_combo_entered
     {
         let mut left = {
-            let mut left = (false, vec![]);
+            let mut left = {
+                let left = ctx.mode();
+                let right = enums::Mode::Drone;
+                edict.insert("^mode", format!("{}", left));
+                (left == right, vec!["^mode"])
+            };
             if !left.0 {
                 left
             } else {
-                let mut right = (false, vec![]);
+                let mut right = {
+                    let h = ctx.has(Item::Mist_Upgrade);
+                    edict.insert("Mist_Upgrade", format!("{}", h));
+                    (h, vec!["Mist_Upgrade"])
+                };
                 left.1.append(&mut right.1);
                 (right.0, left.1)
             }
@@ -5471,7 +5761,11 @@ pub fn explain_giguna__giguna_northeast__right_column__open_door_from_afar__req(
             if !left.0 {
                 left
             } else {
-                let mut right = (false, vec![]);
+                let mut right = {
+                    let h = ctx.has(Item::Infection_Range_3);
+                    edict.insert("Infection_Range_3", format!("{}", h));
+                    (h, vec!["Infection_Range_3"])
+                };
                 left.1.append(&mut right.1);
                 (right.0, left.1)
             }
@@ -5773,7 +6067,11 @@ pub fn explain_giguna_boulder(
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Giguna_Boulder
-    (false, vec![])
+    {
+        let h = ctx.has(Item::Giguna_Boulder);
+        edict.insert("Giguna_Boulder", format!("{}", h));
+        (h, vec!["Giguna_Boulder"])
+    }
 }
 pub fn explain_giguna_breach__sw_save__side_door__ex__west_11_1__req(
     ctx: &Context,
@@ -5808,7 +6106,11 @@ pub fn explain_giguna_dual_path_switch(
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Giguna_Dual_Path_Switch
-    (false, vec![])
+    {
+        let h = ctx.has(Item::Giguna_Dual_Path_Switch);
+        edict.insert("Giguna_Dual_Path_Switch", format!("{}", h));
+        (h, vec!["Giguna_Dual_Path_Switch"])
+    }
 }
 pub fn explain_giguna_dual_path_switch_and___grab_or_climb(
     ctx: &Context,
@@ -5817,7 +6119,11 @@ pub fn explain_giguna_dual_path_switch_and___grab_or_climb(
 ) -> (bool, Vec<&'static str>) {
     // Giguna_Dual_Path_Switch and ($grab or $climb)
     {
-        let mut left = (false, vec![]);
+        let mut left = {
+            let h = ctx.has(Item::Giguna_Dual_Path_Switch);
+            edict.insert("Giguna_Dual_Path_Switch", format!("{}", h));
+            (h, vec!["Giguna_Dual_Path_Switch"])
+        };
         if !left.0 {
             left
         } else {
@@ -5853,7 +6159,11 @@ pub fn explain_giguna_dual_path_switch_and_climb(
 ) -> (bool, Vec<&'static str>) {
     // Giguna_Dual_Path_Switch and $climb
     {
-        let mut left = (false, vec![]);
+        let mut left = {
+            let h = ctx.has(Item::Giguna_Dual_Path_Switch);
+            edict.insert("Giguna_Dual_Path_Switch", format!("{}", h));
+            (h, vec!["Giguna_Dual_Path_Switch"])
+        };
         if !left.0 {
             left
         } else {
@@ -5875,7 +6185,11 @@ pub fn explain_giguna_dual_path_switch_and_hook(
 ) -> (bool, Vec<&'static str>) {
     // Giguna_Dual_Path_Switch and $hook
     {
-        let mut left = (false, vec![]);
+        let mut left = {
+            let h = ctx.has(Item::Giguna_Dual_Path_Switch);
+            edict.insert("Giguna_Dual_Path_Switch", format!("{}", h));
+            (h, vec!["Giguna_Dual_Path_Switch"])
+        };
         if !left.0 {
             left
         } else {
@@ -5896,7 +6210,11 @@ pub fn explain_giguna_gateway_block(
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Giguna_Gateway_Block
-    (false, vec![])
+    {
+        let h = ctx.has(Item::Giguna_Gateway_Block);
+        edict.insert("Giguna_Gateway_Block", format!("{}", h));
+        (h, vec!["Giguna_Gateway_Block"])
+    }
 }
 pub fn explain_giguna_gateway_gate(
     ctx: &Context,
@@ -5904,7 +6222,11 @@ pub fn explain_giguna_gateway_gate(
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Giguna_Gateway_Gate
-    (false, vec![])
+    {
+        let h = ctx.has(Item::Giguna_Gateway_Gate);
+        edict.insert("Giguna_Gateway_Gate", format!("{}", h));
+        (h, vec!["Giguna_Gateway_Gate"])
+    }
 }
 pub fn explain_giguna_gubi(
     ctx: &Context,
@@ -5912,7 +6234,11 @@ pub fn explain_giguna_gubi(
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Giguna_Gubi
-    (false, vec![])
+    {
+        let h = ctx.has(Item::Giguna_Gubi);
+        edict.insert("Giguna_Gubi", format!("{}", h));
+        (h, vec!["Giguna_Gubi"])
+    }
 }
 pub fn explain_giguna_northeast_gate(
     ctx: &Context,
@@ -5920,7 +6246,11 @@ pub fn explain_giguna_northeast_gate(
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Giguna_Northeast_Gate
-    (false, vec![])
+    {
+        let h = ctx.has(Item::Giguna_Northeast_Gate);
+        edict.insert("Giguna_Northeast_Gate", format!("{}", h));
+        (h, vec!["Giguna_Northeast_Gate"])
+    }
 }
 pub fn explain_grab(
     ctx: &Context,
@@ -5951,7 +6281,11 @@ pub fn explain_grab_and_annuna_east_bridge_gate(
         if !left.0 {
             left
         } else {
-            let mut right = (false, vec![]);
+            let mut right = {
+                let h = ctx.has(Item::Annuna_East_Bridge_Gate);
+                edict.insert("Annuna_East_Bridge_Gate", format!("{}", h));
+                (h, vec!["Annuna_East_Bridge_Gate"])
+            };
             left.1.append(&mut right.1);
             (right.0, left.1)
         }
@@ -5973,7 +6307,11 @@ pub fn explain_grab_and_anuman(
         if !left.0 {
             left
         } else {
-            let mut right = (false, vec![]);
+            let mut right = {
+                let h = ctx.has(Item::Anuman);
+                edict.insert("Anuman", format!("{}", h));
+                (h, vec!["Anuman"])
+            };
             left.1.append(&mut right.1);
             (right.0, left.1)
         }
@@ -6049,7 +6387,11 @@ pub fn explain_grab_and_giguna_gateway_block(
         if !left.0 {
             left
         } else {
-            let mut right = (false, vec![]);
+            let mut right = {
+                let h = ctx.has(Item::Giguna_Gateway_Block);
+                edict.insert("Giguna_Gateway_Block", format!("{}", h));
+                (h, vec!["Giguna_Gateway_Block"])
+            };
             left.1.append(&mut right.1);
             (right.0, left.1)
         }
@@ -6071,7 +6413,11 @@ pub fn explain_grab_and_switch_40_12(
         if !left.0 {
             left
         } else {
-            let mut right = (false, vec![]);
+            let mut right = {
+                let h = ctx.has(Item::Switch_40_12);
+                edict.insert("Switch_40_12", format!("{}", h));
+                (h, vec!["Switch_40_12"])
+            };
             left.1.append(&mut right.1);
             (right.0, left.1)
         }
@@ -6093,7 +6439,11 @@ pub fn explain_grab_and_water_movement(
         if !left.0 {
             left
         } else {
-            let mut right = (false, vec![]);
+            let mut right = {
+                let h = ctx.has(Item::Water_Movement);
+                edict.insert("Water_Movement", format!("{}", h));
+                (h, vec!["Water_Movement"])
+            };
             left.1.append(&mut right.1);
             (right.0, left.1)
         }
@@ -6115,7 +6465,11 @@ pub fn explain_grab_or_anuman(
         if left.0 {
             left
         } else {
-            let mut right = (false, vec![]);
+            let mut right = {
+                let h = ctx.has(Item::Anuman);
+                edict.insert("Anuman", format!("{}", h));
+                (h, vec!["Anuman"])
+            };
             left.1.append(&mut right.1);
             (right.0, left.1)
         }
@@ -6232,7 +6586,11 @@ pub fn explain_grab_or_underwater_movement(
         if left.0 {
             left
         } else {
-            let mut right = (false, vec![]);
+            let mut right = {
+                let h = ctx.has(Item::Underwater_Movement);
+                edict.insert("Underwater_Movement", format!("{}", h));
+                (h, vec!["Underwater_Movement"])
+            };
             left.1.append(&mut right.1);
             (right.0, left.1)
         }
@@ -6244,7 +6602,11 @@ pub fn explain_health_upgrade(
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Health_Upgrade
-    (false, vec![])
+    {
+        let h = ctx.has(Item::Health_Upgrade);
+        edict.insert("Health_Upgrade", format!("{}", h));
+        (h, vec!["Health_Upgrade"])
+    }
 }
 pub fn explain_health_upgrade_2(
     ctx: &Context,
@@ -6252,7 +6614,11 @@ pub fn explain_health_upgrade_2(
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Health_Upgrade_2
-    (false, vec![])
+    {
+        let h = ctx.has(Item::Health_Upgrade_2);
+        edict.insert("Health_Upgrade_2", format!("{}", h));
+        (h, vec!["Health_Upgrade_2"])
+    }
 }
 pub fn explain_health_upgrade_3(
     ctx: &Context,
@@ -6260,7 +6626,11 @@ pub fn explain_health_upgrade_3(
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Health_Upgrade_3
-    (false, vec![])
+    {
+        let h = ctx.has(Item::Health_Upgrade_3);
+        edict.insert("Health_Upgrade_3", format!("{}", h));
+        (h, vec!["Health_Upgrade_3"])
+    }
 }
 pub fn explain_health_upgrade_4(
     ctx: &Context,
@@ -6268,7 +6638,11 @@ pub fn explain_health_upgrade_4(
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Health_Upgrade_4
-    (false, vec![])
+    {
+        let h = ctx.has(Item::Health_Upgrade_4);
+        edict.insert("Health_Upgrade_4", format!("{}", h));
+        (h, vec!["Health_Upgrade_4"])
+    }
 }
 pub fn explain_hook(
     ctx: &Context,
@@ -6299,7 +6673,11 @@ pub fn explain_hook_and_annuna_east_bridge_gate(
         if !left.0 {
             left
         } else {
-            let mut right = (false, vec![]);
+            let mut right = {
+                let h = ctx.has(Item::Annuna_East_Bridge_Gate);
+                edict.insert("Annuna_East_Bridge_Gate", format!("{}", h));
+                (h, vec!["Annuna_East_Bridge_Gate"])
+            };
             left.1.append(&mut right.1);
             (right.0, left.1)
         }
@@ -6321,7 +6699,11 @@ pub fn explain_hook_and_giguna_gateway_block(
         if !left.0 {
             left
         } else {
-            let mut right = (false, vec![]);
+            let mut right = {
+                let h = ctx.has(Item::Giguna_Gateway_Block);
+                edict.insert("Giguna_Gateway_Block", format!("{}", h));
+                (h, vec!["Giguna_Gateway_Block"])
+            };
             left.1.append(&mut right.1);
             (right.0, left.1)
         }
@@ -6384,7 +6766,11 @@ pub fn explain_hook_and_hover_and_underwater_movement(
         if !left.0 {
             left
         } else {
-            let mut right = (false, vec![]);
+            let mut right = {
+                let h = ctx.has(Item::Underwater_Movement);
+                edict.insert("Underwater_Movement", format!("{}", h));
+                (h, vec!["Underwater_Movement"])
+            };
             left.1.append(&mut right.1);
             (right.0, left.1)
         }
@@ -6406,7 +6792,11 @@ pub fn explain_hook_and_not_ebih_waterfall_block_left(
         if !left.0 {
             left
         } else {
-            let mut right = (false, vec![]);
+            let mut right = {
+                let h = ctx.has(Item::Ebih_Waterfall_Block_Left);
+                edict.insert("Ebih_Waterfall_Block_Left", format!("{}", h));
+                (!h, vec!["Ebih_Waterfall_Block_Left"])
+            };
             left.1.append(&mut right.1);
             (right.0, left.1)
         }
@@ -6428,7 +6818,11 @@ pub fn explain_hook_and_not_ebih_waterfall_block_right(
         if !left.0 {
             left
         } else {
-            let mut right = (false, vec![]);
+            let mut right = {
+                let h = ctx.has(Item::Ebih_Waterfall_Block_Right);
+                edict.insert("Ebih_Waterfall_Block_Right", format!("{}", h));
+                (!h, vec!["Ebih_Waterfall_Block_Right"])
+            };
             left.1.append(&mut right.1);
             (right.0, left.1)
         }
@@ -6450,7 +6844,11 @@ pub fn explain_hook_and_underwater_movement(
         if !left.0 {
             left
         } else {
-            let mut right = (false, vec![]);
+            let mut right = {
+                let h = ctx.has(Item::Underwater_Movement);
+                edict.insert("Underwater_Movement", format!("{}", h));
+                (h, vec!["Underwater_Movement"])
+            };
             left.1.append(&mut right.1);
             (right.0, left.1)
         }
@@ -6472,7 +6870,11 @@ pub fn explain_hook_and_water_movement(
         if !left.0 {
             left
         } else {
-            let mut right = (false, vec![]);
+            let mut right = {
+                let h = ctx.has(Item::Water_Movement);
+                edict.insert("Water_Movement", format!("{}", h));
+                (h, vec!["Water_Movement"])
+            };
             left.1.append(&mut right.1);
             (right.0, left.1)
         }
@@ -6534,7 +6936,11 @@ pub fn explain_hover_and_anuman(
         if !left.0 {
             left
         } else {
-            let mut right = (false, vec![]);
+            let mut right = {
+                let h = ctx.has(Item::Anuman);
+                edict.insert("Anuman", format!("{}", h));
+                (h, vec!["Anuman"])
+            };
             left.1.append(&mut right.1);
             (right.0, left.1)
         }
@@ -6624,7 +7030,11 @@ pub fn explain_hover_and_mist_upgrade(
         if !left.0 {
             left
         } else {
-            let mut right = (false, vec![]);
+            let mut right = {
+                let h = ctx.has(Item::Mist_Upgrade);
+                edict.insert("Mist_Upgrade", format!("{}", h));
+                (h, vec!["Mist_Upgrade"])
+            };
             left.1.append(&mut right.1);
             (right.0, left.1)
         }
@@ -6690,7 +7100,11 @@ pub fn explain_infect(
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Infect
-    (false, vec![])
+    {
+        let h = ctx.has(Item::Infect);
+        edict.insert("Infect", format!("{}", h));
+        (h, vec!["Infect"])
+    }
 }
 pub fn explain_infect_and_anuman(
     ctx: &Context,
@@ -6699,11 +7113,19 @@ pub fn explain_infect_and_anuman(
 ) -> (bool, Vec<&'static str>) {
     // Infect and Anuman
     {
-        let mut left = (false, vec![]);
+        let mut left = {
+            let h = ctx.has(Item::Infect);
+            edict.insert("Infect", format!("{}", h));
+            (h, vec!["Infect"])
+        };
         if !left.0 {
             left
         } else {
-            let mut right = (false, vec![]);
+            let mut right = {
+                let h = ctx.has(Item::Anuman);
+                edict.insert("Anuman", format!("{}", h));
+                (h, vec!["Anuman"])
+            };
             left.1.append(&mut right.1);
             (right.0, left.1)
         }
@@ -6716,11 +7138,19 @@ pub fn explain_infect_and_not_anuman(
 ) -> (bool, Vec<&'static str>) {
     // Infect and not Anuman
     {
-        let mut left = (false, vec![]);
+        let mut left = {
+            let h = ctx.has(Item::Infect);
+            edict.insert("Infect", format!("{}", h));
+            (h, vec!["Infect"])
+        };
         if !left.0 {
             left
         } else {
-            let mut right = (false, vec![]);
+            let mut right = {
+                let h = ctx.has(Item::Anuman);
+                edict.insert("Anuman", format!("{}", h));
+                (!h, vec!["Anuman"])
+            };
             left.1.append(&mut right.1);
             (right.0, left.1)
         }
@@ -6732,7 +7162,11 @@ pub fn explain_infect_l1(
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Infect_L1
-    (false, vec![])
+    {
+        let h = ctx.has(Item::Infect_L1);
+        edict.insert("Infect_L1", format!("{}", h));
+        (h, vec!["Infect_L1"])
+    }
 }
 pub fn explain_infect_l2(
     ctx: &Context,
@@ -6740,7 +7174,11 @@ pub fn explain_infect_l2(
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Infect_L2
-    (false, vec![])
+    {
+        let h = ctx.has(Item::Infect_L2);
+        edict.insert("Infect_L2", format!("{}", h));
+        (h, vec!["Infect_L2"])
+    }
 }
 pub fn explain_infection_range(
     ctx: &Context,
@@ -6748,7 +7186,11 @@ pub fn explain_infection_range(
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Infection_Range
-    (false, vec![])
+    {
+        let h = ctx.has(Item::Infection_Range);
+        edict.insert("Infection_Range", format!("{}", h));
+        (h, vec!["Infection_Range"])
+    }
 }
 pub fn explain_infection_range_2(
     ctx: &Context,
@@ -6756,7 +7198,11 @@ pub fn explain_infection_range_2(
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Infection_Range_2
-    (false, vec![])
+    {
+        let h = ctx.has(Item::Infection_Range_2);
+        edict.insert("Infection_Range_2", format!("{}", h));
+        (h, vec!["Infection_Range_2"])
+    }
 }
 pub fn explain_infection_speed(
     ctx: &Context,
@@ -6764,7 +7210,11 @@ pub fn explain_infection_speed(
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Infection_Speed
-    (false, vec![])
+    {
+        let h = ctx.has(Item::Infection_Speed);
+        edict.insert("Infection_Speed", format!("{}", h));
+        (h, vec!["Infection_Speed"])
+    }
 }
 pub fn explain_infinite_climb_and_annuna_east_bridge_gate(
     ctx: &Context,
@@ -6782,7 +7232,11 @@ pub fn explain_infinite_climb_and_annuna_east_bridge_gate(
         if !left.0 {
             left
         } else {
-            let mut right = (false, vec![]);
+            let mut right = {
+                let h = ctx.has(Item::Annuna_East_Bridge_Gate);
+                edict.insert("Annuna_East_Bridge_Gate", format!("{}", h));
+                (h, vec!["Annuna_East_Bridge_Gate"])
+            };
             left.1.append(&mut right.1);
             (right.0, left.1)
         }
@@ -6804,7 +7258,11 @@ pub fn explain_infinite_climb_and_not_annuna_east_bridge_gate(
         if !left.0 {
             left
         } else {
-            let mut right = (false, vec![]);
+            let mut right = {
+                let h = ctx.has(Item::Annuna_East_Bridge_Gate);
+                edict.insert("Annuna_East_Bridge_Gate", format!("{}", h));
+                (!h, vec!["Annuna_East_Bridge_Gate"])
+            };
             left.1.append(&mut right.1);
             (right.0, left.1)
         }
@@ -6826,7 +7284,11 @@ pub fn explain_infinite_climb_and_slingshot_hook(
         if !left.0 {
             left
         } else {
-            let mut right = (false, vec![]);
+            let mut right = {
+                let h = ctx.has(Item::Slingshot_Hook);
+                edict.insert("Slingshot_Hook", format!("{}", h));
+                (h, vec!["Slingshot_Hook"])
+            };
             left.1.append(&mut right.1);
             (right.0, left.1)
         }
@@ -6849,7 +7311,11 @@ pub fn explain_infinite_climb_and_slingshot_hook_and_not_annuna_east_bridge_gate
             if !left.0 {
                 left
             } else {
-                let mut right = (false, vec![]);
+                let mut right = {
+                    let h = ctx.has(Item::Slingshot_Hook);
+                    edict.insert("Slingshot_Hook", format!("{}", h));
+                    (h, vec!["Slingshot_Hook"])
+                };
                 left.1.append(&mut right.1);
                 (right.0, left.1)
             }
@@ -6857,7 +7323,11 @@ pub fn explain_infinite_climb_and_slingshot_hook_and_not_annuna_east_bridge_gate
         if !left.0 {
             left
         } else {
-            let mut right = (false, vec![]);
+            let mut right = {
+                let h = ctx.has(Item::Annuna_East_Bridge_Gate);
+                edict.insert("Annuna_East_Bridge_Gate", format!("{}", h));
+                (!h, vec!["Annuna_East_Bridge_Gate"])
+            };
             left.1.append(&mut right.1);
             (right.0, left.1)
         }
@@ -6913,7 +7383,11 @@ pub fn explain_irikar_gudam(
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Irikar_Gudam
-    (false, vec![])
+    {
+        let h = ctx.has(Item::Irikar_Gudam);
+        edict.insert("Irikar_Gudam", format!("{}", h));
+        (h, vec!["Irikar_Gudam"])
+    }
 }
 pub fn explain_irikar_royal_storage_wall(
     ctx: &Context,
@@ -6921,7 +7395,11 @@ pub fn explain_irikar_royal_storage_wall(
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Irikar_Royal_Storage_Wall
-    (false, vec![])
+    {
+        let h = ctx.has(Item::Irikar_Royal_Storage_Wall);
+        edict.insert("Irikar_Royal_Storage_Wall", format!("{}", h));
+        (h, vec!["Irikar_Royal_Storage_Wall"])
+    }
 }
 pub fn explain_map__amagi__main_area__save(
     ctx: &Context,
@@ -7097,7 +7575,11 @@ pub fn explain_melee_damage(
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Melee_Damage
-    (false, vec![])
+    {
+        let h = ctx.has(Item::Melee_Damage);
+        edict.insert("Melee_Damage", format!("{}", h));
+        (h, vec!["Melee_Damage"])
+    }
 }
 pub fn explain_melee_damage_2(
     ctx: &Context,
@@ -7105,7 +7587,11 @@ pub fn explain_melee_damage_2(
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Melee_Damage_2
-    (false, vec![])
+    {
+        let h = ctx.has(Item::Melee_Damage_2);
+        edict.insert("Melee_Damage_2", format!("{}", h));
+        (h, vec!["Melee_Damage_2"])
+    }
 }
 pub fn explain_melee_speed(
     ctx: &Context,
@@ -7113,7 +7599,11 @@ pub fn explain_melee_speed(
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Melee_Speed
-    (false, vec![])
+    {
+        let h = ctx.has(Item::Melee_Speed);
+        edict.insert("Melee_Speed", format!("{}", h));
+        (h, vec!["Melee_Speed"])
+    }
 }
 pub fn explain_melee_speed_2(
     ctx: &Context,
@@ -7121,7 +7611,11 @@ pub fn explain_melee_speed_2(
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Melee_Speed_2
-    (false, vec![])
+    {
+        let h = ctx.has(Item::Melee_Speed_2);
+        edict.insert("Melee_Speed_2", format!("{}", h));
+        (h, vec!["Melee_Speed_2"])
+    }
 }
 pub fn explain_mist2(
     ctx: &Context,
@@ -7142,7 +7636,11 @@ pub fn explain_mist_upgrade(
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Mist_Upgrade
-    (false, vec![])
+    {
+        let h = ctx.has(Item::Mist_Upgrade);
+        edict.insert("Mist_Upgrade", format!("{}", h));
+        (h, vec!["Mist_Upgrade"])
+    }
 }
 pub fn explain_mode_eq_drone(
     ctx: &Context,
@@ -7150,7 +7648,12 @@ pub fn explain_mode_eq_drone(
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ^mode == 'drone'
-    (false, vec![])
+    {
+        let left = ctx.mode();
+        let right = enums::Mode::Drone;
+        edict.insert("^mode", format!("{}", left));
+        (left == right, vec!["^mode"])
+    }
 }
 pub fn explain_mode_eq_drone_and_breach_sight(
     ctx: &Context,
@@ -7159,11 +7662,20 @@ pub fn explain_mode_eq_drone_and_breach_sight(
 ) -> (bool, Vec<&'static str>) {
     // ^mode == 'drone' and Breach_Sight
     {
-        let mut left = (false, vec![]);
+        let mut left = {
+            let left = ctx.mode();
+            let right = enums::Mode::Drone;
+            edict.insert("^mode", format!("{}", left));
+            (left == right, vec!["^mode"])
+        };
         if !left.0 {
             left
         } else {
-            let mut right = (false, vec![]);
+            let mut right = {
+                let h = ctx.has(Item::Breach_Sight);
+                edict.insert("Breach_Sight", format!("{}", h));
+                (h, vec!["Breach_Sight"])
+            };
             left.1.append(&mut right.1);
             (right.0, left.1)
         }
@@ -7176,11 +7688,20 @@ pub fn explain_mode_eq_drone_and_ebih_wasteland_passage_h(
 ) -> (bool, Vec<&'static str>) {
     // ^mode == 'drone' and Ebih_Wasteland_Passage_H
     {
-        let mut left = (false, vec![]);
+        let mut left = {
+            let left = ctx.mode();
+            let right = enums::Mode::Drone;
+            edict.insert("^mode", format!("{}", left));
+            (left == right, vec!["^mode"])
+        };
         if !left.0 {
             left
         } else {
-            let mut right = (false, vec![]);
+            let mut right = {
+                let h = ctx.has(Item::Ebih_Wasteland_Passage_H);
+                edict.insert("Ebih_Wasteland_Passage_H", format!("{}", h));
+                (h, vec!["Ebih_Wasteland_Passage_H"])
+            };
             left.1.append(&mut right.1);
             (right.0, left.1)
         }
@@ -7193,11 +7714,20 @@ pub fn explain_mode_eq_drone_and_ebih_waterfall_block_left(
 ) -> (bool, Vec<&'static str>) {
     // ^mode == 'drone' and Ebih_Waterfall_Block_Left
     {
-        let mut left = (false, vec![]);
+        let mut left = {
+            let left = ctx.mode();
+            let right = enums::Mode::Drone;
+            edict.insert("^mode", format!("{}", left));
+            (left == right, vec!["^mode"])
+        };
         if !left.0 {
             left
         } else {
-            let mut right = (false, vec![]);
+            let mut right = {
+                let h = ctx.has(Item::Ebih_Waterfall_Block_Left);
+                edict.insert("Ebih_Waterfall_Block_Left", format!("{}", h));
+                (h, vec!["Ebih_Waterfall_Block_Left"])
+            };
             left.1.append(&mut right.1);
             (right.0, left.1)
         }
@@ -7210,11 +7740,20 @@ pub fn explain_mode_eq_drone_and_ebih_waterfall_block_right(
 ) -> (bool, Vec<&'static str>) {
     // ^mode == 'drone' and Ebih_Waterfall_Block_Right
     {
-        let mut left = (false, vec![]);
+        let mut left = {
+            let left = ctx.mode();
+            let right = enums::Mode::Drone;
+            edict.insert("^mode", format!("{}", left));
+            (left == right, vec!["^mode"])
+        };
         if !left.0 {
             left
         } else {
-            let mut right = (false, vec![]);
+            let mut right = {
+                let h = ctx.has(Item::Ebih_Waterfall_Block_Right);
+                edict.insert("Ebih_Waterfall_Block_Right", format!("{}", h));
+                (h, vec!["Ebih_Waterfall_Block_Right"])
+            };
             left.1.append(&mut right.1);
             (right.0, left.1)
         }
@@ -7227,11 +7766,20 @@ pub fn explain_mode_eq_drone_and_giguna_dual_path_wall(
 ) -> (bool, Vec<&'static str>) {
     // ^mode == 'drone' and Giguna_Dual_Path_Wall
     {
-        let mut left = (false, vec![]);
+        let mut left = {
+            let left = ctx.mode();
+            let right = enums::Mode::Drone;
+            edict.insert("^mode", format!("{}", left));
+            (left == right, vec!["^mode"])
+        };
         if !left.0 {
             left
         } else {
-            let mut right = (false, vec![]);
+            let mut right = {
+                let h = ctx.has(Item::Giguna_Dual_Path_Wall);
+                edict.insert("Giguna_Dual_Path_Wall", format!("{}", h));
+                (h, vec!["Giguna_Dual_Path_Wall"])
+            };
             left.1.append(&mut right.1);
             (right.0, left.1)
         }
@@ -7244,7 +7792,12 @@ pub fn explain_mode_eq_drone_and_mist2(
 ) -> (bool, Vec<&'static str>) {
     // ^mode == 'drone' and $mist2
     {
-        let mut left = (false, vec![]);
+        let mut left = {
+            let left = ctx.mode();
+            let right = enums::Mode::Drone;
+            edict.insert("^mode", format!("{}", left));
+            (left == right, vec!["^mode"])
+        };
         if !left.0 {
             left
         } else {
@@ -7266,11 +7819,20 @@ pub fn explain_mode_eq_drone_and_mist_upgrade(
 ) -> (bool, Vec<&'static str>) {
     // ^mode == 'drone' and Mist_Upgrade
     {
-        let mut left = (false, vec![]);
+        let mut left = {
+            let left = ctx.mode();
+            let right = enums::Mode::Drone;
+            edict.insert("^mode", format!("{}", left));
+            (left == right, vec!["^mode"])
+        };
         if !left.0 {
             left
         } else {
-            let mut right = (false, vec![]);
+            let mut right = {
+                let h = ctx.has(Item::Mist_Upgrade);
+                edict.insert("Mist_Upgrade", format!("{}", h));
+                (h, vec!["Mist_Upgrade"])
+            };
             left.1.append(&mut right.1);
             (right.0, left.1)
         }
@@ -7283,11 +7845,20 @@ pub fn explain_mode_eq_drone_and_sniper_valley_rock_2(
 ) -> (bool, Vec<&'static str>) {
     // ^mode == 'drone' and Sniper_Valley_Rock_2
     {
-        let mut left = (false, vec![]);
+        let mut left = {
+            let left = ctx.mode();
+            let right = enums::Mode::Drone;
+            edict.insert("^mode", format!("{}", left));
+            (left == right, vec!["^mode"])
+        };
         if !left.0 {
             left
         } else {
-            let mut right = (false, vec![]);
+            let mut right = {
+                let h = ctx.has(Item::Sniper_Valley_Rock_2);
+                edict.insert("Sniper_Valley_Rock_2", format!("{}", h));
+                (h, vec!["Sniper_Valley_Rock_2"])
+            };
             left.1.append(&mut right.1);
             (right.0, left.1)
         }
@@ -7299,7 +7870,12 @@ pub fn explain_mode_ne_drone(
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ^mode != 'drone'
-    (false, vec![])
+    {
+        let left = ctx.mode();
+        let right = enums::Mode::Drone;
+        edict.insert("^mode", format!("{}", left));
+        (left != right, vec!["^mode"])
+    }
 }
 pub fn explain_more_refills(
     ctx: &Context,
@@ -7320,7 +7896,11 @@ pub fn explain_nanite_mist(
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Nanite_Mist
-    (false, vec![])
+    {
+        let h = ctx.has(Item::Nanite_Mist);
+        edict.insert("Nanite_Mist", format!("{}", h));
+        (h, vec!["Nanite_Mist"])
+    }
 }
 pub fn explain_nanite_mist_and_mist_upgrade(
     ctx: &Context,
@@ -7329,11 +7909,19 @@ pub fn explain_nanite_mist_and_mist_upgrade(
 ) -> (bool, Vec<&'static str>) {
     // Nanite_Mist and Mist_Upgrade
     {
-        let mut left = (false, vec![]);
+        let mut left = {
+            let h = ctx.has(Item::Nanite_Mist);
+            edict.insert("Nanite_Mist", format!("{}", h));
+            (h, vec!["Nanite_Mist"])
+        };
         if !left.0 {
             left
         } else {
-            let mut right = (false, vec![]);
+            let mut right = {
+                let h = ctx.has(Item::Mist_Upgrade);
+                edict.insert("Mist_Upgrade", format!("{}", h));
+                (h, vec!["Mist_Upgrade"])
+            };
             left.1.append(&mut right.1);
             (right.0, left.1)
         }
@@ -7345,7 +7933,11 @@ pub fn explain_nano_points(
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Nano_Points
-    (false, vec![])
+    {
+        let h = ctx.has(Item::Nano_Points);
+        edict.insert("Nano_Points", format!("{}", h));
+        (h, vec!["Nano_Points"])
+    }
 }
 pub fn explain_nano_points_2(
     ctx: &Context,
@@ -7353,7 +7945,11 @@ pub fn explain_nano_points_2(
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Nano_Points_2
-    (false, vec![])
+    {
+        let h = ctx.has(Item::Nano_Points_2);
+        edict.insert("Nano_Points_2", format!("{}", h));
+        (h, vec!["Nano_Points_2"])
+    }
 }
 pub fn explain_not_amashilama(
     ctx: &Context,
@@ -7361,7 +7957,11 @@ pub fn explain_not_amashilama(
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // NOT Amashilama
-    (false, vec![])
+    {
+        let h = ctx.has(Item::Amashilama);
+        edict.insert("Amashilama", format!("{}", h));
+        (!h, vec!["Amashilama"])
+    }
 }
 pub fn explain_not_ebih_interchange_block(
     ctx: &Context,
@@ -7369,7 +7969,11 @@ pub fn explain_not_ebih_interchange_block(
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // not Ebih_Interchange_Block
-    (false, vec![])
+    {
+        let h = ctx.has(Item::Ebih_Interchange_Block);
+        edict.insert("Ebih_Interchange_Block", format!("{}", h));
+        (!h, vec!["Ebih_Interchange_Block"])
+    }
 }
 pub fn explain_not_ebih_waterfall_wall_and_nanite_mist_and_mist_upgrade(
     ctx: &Context,
@@ -7379,11 +7983,19 @@ pub fn explain_not_ebih_waterfall_wall_and_nanite_mist_and_mist_upgrade(
     // not Ebih_Waterfall_Wall and Nanite_Mist and Mist_Upgrade
     {
         let mut left = {
-            let mut left = (false, vec![]);
+            let mut left = {
+                let h = ctx.has(Item::Ebih_Waterfall_Wall);
+                edict.insert("Ebih_Waterfall_Wall", format!("{}", h));
+                (!h, vec!["Ebih_Waterfall_Wall"])
+            };
             if !left.0 {
                 left
             } else {
-                let mut right = (false, vec![]);
+                let mut right = {
+                    let h = ctx.has(Item::Nanite_Mist);
+                    edict.insert("Nanite_Mist", format!("{}", h));
+                    (h, vec!["Nanite_Mist"])
+                };
                 left.1.append(&mut right.1);
                 (right.0, left.1)
             }
@@ -7391,7 +8003,11 @@ pub fn explain_not_ebih_waterfall_wall_and_nanite_mist_and_mist_upgrade(
         if !left.0 {
             left
         } else {
-            let mut right = (false, vec![]);
+            let mut right = {
+                let h = ctx.has(Item::Mist_Upgrade);
+                edict.insert("Mist_Upgrade", format!("{}", h));
+                (h, vec!["Mist_Upgrade"])
+            };
             left.1.append(&mut right.1);
             (right.0, left.1)
         }
@@ -7404,11 +8020,19 @@ pub fn explain_not_irikar_royal_storage_wall_and_mist_upgrade(
 ) -> (bool, Vec<&'static str>) {
     // not Irikar_Royal_Storage_Wall and Mist_Upgrade
     {
-        let mut left = (false, vec![]);
+        let mut left = {
+            let h = ctx.has(Item::Irikar_Royal_Storage_Wall);
+            edict.insert("Irikar_Royal_Storage_Wall", format!("{}", h));
+            (!h, vec!["Irikar_Royal_Storage_Wall"])
+        };
         if !left.0 {
             left
         } else {
-            let mut right = (false, vec![]);
+            let mut right = {
+                let h = ctx.has(Item::Mist_Upgrade);
+                edict.insert("Mist_Upgrade", format!("{}", h));
+                (h, vec!["Mist_Upgrade"])
+            };
             left.1.append(&mut right.1);
             (right.0, left.1)
         }
@@ -7421,7 +8045,11 @@ pub fn explain_not_irikar_royal_storage_wall_and_shockwave(
 ) -> (bool, Vec<&'static str>) {
     // not Irikar_Royal_Storage_Wall and $shockwave
     {
-        let mut left = (false, vec![]);
+        let mut left = {
+            let h = ctx.has(Item::Irikar_Royal_Storage_Wall);
+            edict.insert("Irikar_Royal_Storage_Wall", format!("{}", h));
+            (!h, vec!["Irikar_Royal_Storage_Wall"])
+        };
         if !left.0 {
             left
         } else {
@@ -7443,11 +8071,19 @@ pub fn explain_not_separation_or_defeat_indra(
 ) -> (bool, Vec<&'static str>) {
     // NOT Separation or Defeat_Indra
     {
-        let mut left = (false, vec![]);
+        let mut left = {
+            let h = ctx.has(Item::Separation);
+            edict.insert("Separation", format!("{}", h));
+            (!h, vec!["Separation"])
+        };
         if left.0 {
             left
         } else {
-            let mut right = (false, vec![]);
+            let mut right = {
+                let h = ctx.has(Item::Defeat_Indra);
+                edict.insert("Defeat_Indra", format!("{}", h));
+                (h, vec!["Defeat_Indra"])
+            };
             left.1.append(&mut right.1);
             (right.0, left.1)
         }
@@ -7459,7 +8095,11 @@ pub fn explain_not_slingshot_hook(
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // not Slingshot_Hook
-    (false, vec![])
+    {
+        let h = ctx.has(Item::Slingshot_Hook);
+        edict.insert("Slingshot_Hook", format!("{}", h));
+        (!h, vec!["Slingshot_Hook"])
+    }
 }
 pub fn explain_not_within_menu_and_anuman_and_mode_ne_drone(
     ctx: &Context,
@@ -7473,7 +8113,11 @@ pub fn explain_not_within_menu_and_anuman_and_mode_ne_drone(
             if !left.0 {
                 left
             } else {
-                let mut right = (false, vec![]);
+                let mut right = {
+                    let h = ctx.has(Item::Anuman);
+                    edict.insert("Anuman", format!("{}", h));
+                    (h, vec!["Anuman"])
+                };
                 left.1.append(&mut right.1);
                 (right.0, left.1)
             }
@@ -7481,7 +8125,12 @@ pub fn explain_not_within_menu_and_anuman_and_mode_ne_drone(
         if !left.0 {
             left
         } else {
-            let mut right = (false, vec![]);
+            let mut right = {
+                let left = ctx.mode();
+                let right = enums::Mode::Drone;
+                edict.insert("^mode", format!("{}", left));
+                (left != right, vec!["^mode"])
+            };
             left.1.append(&mut right.1);
             (right.0, left.1)
         }
@@ -7581,7 +8230,12 @@ pub fn explain_not_within_menu_and_realm_ne_breach_and_anuman_and_mode_eq_drone(
                 if !left.0 {
                     left
                 } else {
-                    let mut right = (false, vec![]);
+                    let mut right = {
+                        let left = data::realm(ctx.position());
+                        let right = enums::Realm::Breach;
+                        edict.insert("^realm", format!("{}", left));
+                        (left != right, vec!["^realm"])
+                    };
                     left.1.append(&mut right.1);
                     (right.0, left.1)
                 }
@@ -7589,7 +8243,11 @@ pub fn explain_not_within_menu_and_realm_ne_breach_and_anuman_and_mode_eq_drone(
             if !left.0 {
                 left
             } else {
-                let mut right = (false, vec![]);
+                let mut right = {
+                    let h = ctx.has(Item::Anuman);
+                    edict.insert("Anuman", format!("{}", h));
+                    (h, vec!["Anuman"])
+                };
                 left.1.append(&mut right.1);
                 (right.0, left.1)
             }
@@ -7597,7 +8255,12 @@ pub fn explain_not_within_menu_and_realm_ne_breach_and_anuman_and_mode_eq_drone(
         if !left.0 {
             left
         } else {
-            let mut right = (false, vec![]);
+            let mut right = {
+                let left = ctx.mode();
+                let right = enums::Mode::Drone;
+                edict.insert("^mode", format!("{}", left));
+                (left == right, vec!["^mode"])
+            };
             left.1.append(&mut right.1);
             (right.0, left.1)
         }
@@ -7615,7 +8278,12 @@ pub fn explain_not_within_menu_and_realm_ne_breach_and_can_recall(
             if !left.0 {
                 left
             } else {
-                let mut right = (false, vec![]);
+                let mut right = {
+                    let left = data::realm(ctx.position());
+                    let right = enums::Realm::Breach;
+                    edict.insert("^realm", format!("{}", left));
+                    (left != right, vec!["^realm"])
+                };
                 left.1.append(&mut right.1);
                 (right.0, left.1)
             }
@@ -7828,7 +8496,11 @@ pub fn explain_ranged_damage(
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Ranged_Damage
-    (false, vec![])
+    {
+        let h = ctx.has(Item::Ranged_Damage);
+        edict.insert("Ranged_Damage", format!("{}", h));
+        (h, vec!["Ranged_Damage"])
+    }
 }
 pub fn explain_ranged_damage_2(
     ctx: &Context,
@@ -7836,7 +8508,11 @@ pub fn explain_ranged_damage_2(
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Ranged_Damage_2
-    (false, vec![])
+    {
+        let h = ctx.has(Item::Ranged_Damage_2);
+        edict.insert("Ranged_Damage_2", format!("{}", h));
+        (h, vec!["Ranged_Damage_2"])
+    }
 }
 pub fn explain_ranged_speed(
     ctx: &Context,
@@ -7844,7 +8520,11 @@ pub fn explain_ranged_speed(
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Ranged_Speed
-    (false, vec![])
+    {
+        let h = ctx.has(Item::Ranged_Speed);
+        edict.insert("Ranged_Speed", format!("{}", h));
+        (h, vec!["Ranged_Speed"])
+    }
 }
 pub fn explain_ranged_speed_2(
     ctx: &Context,
@@ -7852,7 +8532,11 @@ pub fn explain_ranged_speed_2(
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Ranged_Speed_2
-    (false, vec![])
+    {
+        let h = ctx.has(Item::Ranged_Speed_2);
+        edict.insert("Ranged_Speed_2", format!("{}", h));
+        (h, vec!["Ranged_Speed_2"])
+    }
 }
 pub fn explain_realm_eq_breach(
     ctx: &Context,
@@ -7860,7 +8544,12 @@ pub fn explain_realm_eq_breach(
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ^realm == 'breach'
-    (false, vec![])
+    {
+        let left = data::realm(ctx.position());
+        let right = enums::Realm::Breach;
+        edict.insert("^realm", format!("{}", left));
+        (left == right, vec!["^realm"])
+    }
 }
 pub fn explain_realm_eq_breach_and_exit_breach_and___flipside_not_within_default(
     ctx: &Context,
@@ -7870,11 +8559,20 @@ pub fn explain_realm_eq_breach_and_exit_breach_and___flipside_not_within_default
     // ^realm == 'breach' and Exit_Breach and (^flipside NOT WITHIN $default)
     {
         let mut left = {
-            let mut left = (false, vec![]);
+            let mut left = {
+                let left = data::realm(ctx.position());
+                let right = enums::Realm::Breach;
+                edict.insert("^realm", format!("{}", left));
+                (left == right, vec!["^realm"])
+            };
             if !left.0 {
                 left
             } else {
-                let mut right = (false, vec![]);
+                let mut right = {
+                    let h = ctx.has(Item::Exit_Breach);
+                    edict.insert("Exit_Breach", format!("{}", h));
+                    (h, vec!["Exit_Breach"])
+                };
                 left.1.append(&mut right.1);
                 (right.0, left.1)
             }
@@ -7903,7 +8601,11 @@ pub fn explain_realm_in___main_interior_emergence_and_amashilama(
         if !left.0 {
             left
         } else {
-            let mut right = (false, vec![]);
+            let mut right = {
+                let h = ctx.has(Item::Amashilama);
+                edict.insert("Amashilama", format!("{}", h));
+                (h, vec!["Amashilama"])
+            };
             left.1.append(&mut right.1);
             (right.0, left.1)
         }
@@ -7915,7 +8617,11 @@ pub fn explain_remote_drone(
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Remote_Drone
-    (false, vec![])
+    {
+        let h = ctx.has(Item::Remote_Drone);
+        edict.insert("Remote_Drone", format!("{}", h));
+        (h, vec!["Remote_Drone"])
+    }
 }
 pub fn explain_separation(
     ctx: &Context,
@@ -7923,7 +8629,11 @@ pub fn explain_separation(
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Separation
-    (false, vec![])
+    {
+        let h = ctx.has(Item::Separation);
+        edict.insert("Separation", format!("{}", h));
+        (h, vec!["Separation"])
+    }
 }
 pub fn explain_separation_and_not_defeat_indra_and_mist2(
     ctx: &Context,
@@ -7933,11 +8643,19 @@ pub fn explain_separation_and_not_defeat_indra_and_mist2(
     // Separation and NOT Defeat_Indra and $mist2
     {
         let mut left = {
-            let mut left = (false, vec![]);
+            let mut left = {
+                let h = ctx.has(Item::Separation);
+                edict.insert("Separation", format!("{}", h));
+                (h, vec!["Separation"])
+            };
             if !left.0 {
                 left
             } else {
-                let mut right = (false, vec![]);
+                let mut right = {
+                    let h = ctx.has(Item::Defeat_Indra);
+                    edict.insert("Defeat_Indra", format!("{}", h));
+                    (!h, vec!["Defeat_Indra"])
+                };
                 left.1.append(&mut right.1);
                 (right.0, left.1)
             }
@@ -7985,7 +8703,11 @@ pub fn explain_shockwave_and_not_defeat_mus_a_m20(
         if !left.0 {
             left
         } else {
-            let mut right = (false, vec![]);
+            let mut right = {
+                let h = ctx.has(Item::Defeat_MUS_A_M20);
+                edict.insert("Defeat_MUS_A_M20", format!("{}", h));
+                (!h, vec!["Defeat_MUS_A_M20"])
+            };
             left.1.append(&mut right.1);
             (right.0, left.1)
         }
@@ -7997,7 +8719,11 @@ pub fn explain_sniper_valley_rock_1(
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Sniper_Valley_Rock_1
-    (false, vec![])
+    {
+        let h = ctx.has(Item::Sniper_Valley_Rock_1);
+        edict.insert("Sniper_Valley_Rock_1", format!("{}", h));
+        (h, vec!["Sniper_Valley_Rock_1"])
+    }
 }
 pub fn explain_spin(
     ctx: &Context,
@@ -8018,7 +8744,11 @@ pub fn explain_station_power(
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Station_Power
-    (false, vec![])
+    {
+        let h = ctx.has(Item::Station_Power);
+        edict.insert("Station_Power", format!("{}", h));
+        (h, vec!["Station_Power"])
+    }
 }
 pub fn explain_switch_36_11(
     ctx: &Context,
@@ -8026,7 +8756,11 @@ pub fn explain_switch_36_11(
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Switch_36_11
-    (false, vec![])
+    {
+        let h = ctx.has(Item::Switch_36_11);
+        edict.insert("Switch_36_11", format!("{}", h));
+        (h, vec!["Switch_36_11"])
+    }
 }
 pub fn explain_switch_40_12(
     ctx: &Context,
@@ -8034,7 +8768,11 @@ pub fn explain_switch_40_12(
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Switch_40_12
-    (false, vec![])
+    {
+        let h = ctx.has(Item::Switch_40_12);
+        edict.insert("Switch_40_12", format!("{}", h));
+        (h, vec!["Switch_40_12"])
+    }
 }
 pub fn explain_uhrum_annuna_corridor_block(
     ctx: &Context,
@@ -8042,7 +8780,11 @@ pub fn explain_uhrum_annuna_corridor_block(
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Uhrum_Annuna_Corridor_Block
-    (false, vec![])
+    {
+        let h = ctx.has(Item::Uhrum_Annuna_Corridor_Block);
+        edict.insert("Uhrum_Annuna_Corridor_Block", format!("{}", h));
+        (h, vec!["Uhrum_Annuna_Corridor_Block"])
+    }
 }
 pub fn explain_uhrum_waterfall_wall(
     ctx: &Context,
@@ -8050,7 +8792,11 @@ pub fn explain_uhrum_waterfall_wall(
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Uhrum_Waterfall_Wall
-    (false, vec![])
+    {
+        let h = ctx.has(Item::Uhrum_Waterfall_Wall);
+        edict.insert("Uhrum_Waterfall_Wall", format!("{}", h));
+        (h, vec!["Uhrum_Waterfall_Wall"])
+    }
 }
 pub fn explain_uhrum_waterfalls_block(
     ctx: &Context,
@@ -8058,7 +8804,11 @@ pub fn explain_uhrum_waterfalls_block(
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Uhrum_Waterfalls_Block
-    (false, vec![])
+    {
+        let h = ctx.has(Item::Uhrum_Waterfalls_Block);
+        edict.insert("Uhrum_Waterfalls_Block", format!("{}", h));
+        (h, vec!["Uhrum_Waterfalls_Block"])
+    }
 }
 pub fn explain_uhrum_waterfalls_block_and_grab(
     ctx: &Context,
@@ -8067,7 +8817,11 @@ pub fn explain_uhrum_waterfalls_block_and_grab(
 ) -> (bool, Vec<&'static str>) {
     // Uhrum_Waterfalls_Block and $grab
     {
-        let mut left = (false, vec![]);
+        let mut left = {
+            let h = ctx.has(Item::Uhrum_Waterfalls_Block);
+            edict.insert("Uhrum_Waterfalls_Block", format!("{}", h));
+            (h, vec!["Uhrum_Waterfalls_Block"])
+        };
         if !left.0 {
             left
         } else {
@@ -8089,7 +8843,11 @@ pub fn explain_uhrum_waterfalls_block_and_hook(
 ) -> (bool, Vec<&'static str>) {
     // Uhrum_Waterfalls_Block and $hook
     {
-        let mut left = (false, vec![]);
+        let mut left = {
+            let h = ctx.has(Item::Uhrum_Waterfalls_Block);
+            edict.insert("Uhrum_Waterfalls_Block", format!("{}", h));
+            (h, vec!["Uhrum_Waterfalls_Block"])
+        };
         if !left.0 {
             left
         } else {
@@ -8110,7 +8868,11 @@ pub fn explain_uhrum_west_entrance_gate(
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Uhrum_West_Entrance_Gate
-    (false, vec![])
+    {
+        let h = ctx.has(Item::Uhrum_West_Entrance_Gate);
+        edict.insert("Uhrum_West_Entrance_Gate", format!("{}", h));
+        (h, vec!["Uhrum_West_Entrance_Gate"])
+    }
 }
 pub fn explain_uhrum_west_entrance_gate_and_hover(
     ctx: &Context,
@@ -8119,7 +8881,11 @@ pub fn explain_uhrum_west_entrance_gate_and_hover(
 ) -> (bool, Vec<&'static str>) {
     // Uhrum_West_Entrance_Gate and $hover
     {
-        let mut left = (false, vec![]);
+        let mut left = {
+            let h = ctx.has(Item::Uhrum_West_Entrance_Gate);
+            edict.insert("Uhrum_West_Entrance_Gate", format!("{}", h));
+            (h, vec!["Uhrum_West_Entrance_Gate"])
+        };
         if !left.0 {
             left
         } else {
@@ -8140,7 +8906,11 @@ pub fn explain_uhrum_west_entrance_lower_wall(
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Uhrum_West_Entrance_Lower_Wall
-    (false, vec![])
+    {
+        let h = ctx.has(Item::Uhrum_West_Entrance_Lower_Wall);
+        edict.insert("Uhrum_West_Entrance_Lower_Wall", format!("{}", h));
+        (h, vec!["Uhrum_West_Entrance_Lower_Wall"])
+    }
 }
 pub fn explain_uhrum_west_entrance_upper_wall(
     ctx: &Context,
@@ -8148,7 +8918,11 @@ pub fn explain_uhrum_west_entrance_upper_wall(
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Uhrum_West_Entrance_Upper_Wall
-    (false, vec![])
+    {
+        let h = ctx.has(Item::Uhrum_West_Entrance_Upper_Wall);
+        edict.insert("Uhrum_West_Entrance_Upper_Wall", format!("{}", h));
+        (h, vec!["Uhrum_West_Entrance_Upper_Wall"])
+    }
 }
 pub fn explain_underwater_movement(
     ctx: &Context,
@@ -8156,7 +8930,11 @@ pub fn explain_underwater_movement(
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Underwater_Movement
-    (false, vec![])
+    {
+        let h = ctx.has(Item::Underwater_Movement);
+        edict.insert("Underwater_Movement", format!("{}", h));
+        (h, vec!["Underwater_Movement"])
+    }
 }
 pub fn explain_underwater_movement_and___grab_or_climb(
     ctx: &Context,
@@ -8165,7 +8943,11 @@ pub fn explain_underwater_movement_and___grab_or_climb(
 ) -> (bool, Vec<&'static str>) {
     // Underwater_Movement and ($grab or $climb)
     {
-        let mut left = (false, vec![]);
+        let mut left = {
+            let h = ctx.has(Item::Underwater_Movement);
+            edict.insert("Underwater_Movement", format!("{}", h));
+            (h, vec!["Underwater_Movement"])
+        };
         if !left.0 {
             left
         } else {
@@ -8201,7 +8983,11 @@ pub fn explain_underwater_movement_and_grab(
 ) -> (bool, Vec<&'static str>) {
     // Underwater_Movement and $grab
     {
-        let mut left = (false, vec![]);
+        let mut left = {
+            let h = ctx.has(Item::Underwater_Movement);
+            edict.insert("Underwater_Movement", format!("{}", h));
+            (h, vec!["Underwater_Movement"])
+        };
         if !left.0 {
             left
         } else {
@@ -8223,7 +9009,11 @@ pub fn explain_underwater_movement_and_hook(
 ) -> (bool, Vec<&'static str>) {
     // Underwater_Movement and $hook
     {
-        let mut left = (false, vec![]);
+        let mut left = {
+            let h = ctx.has(Item::Underwater_Movement);
+            edict.insert("Underwater_Movement", format!("{}", h));
+            (h, vec!["Underwater_Movement"])
+        };
         if !left.0 {
             left
         } else {

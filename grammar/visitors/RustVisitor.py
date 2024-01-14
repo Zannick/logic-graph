@@ -338,8 +338,10 @@ class RustExplainerVisitor(RustBaseVisitor):
         self.code_writer = RustVisitor(*args, **kwargs)
 
     def _getRefExplainer(self, ref):
-        get = self._getRefGetter(ref)
-        if ref in BUILTINS:
+        get = self._getRefGetter(ref[1:])
+        # we don't want to explain builtins or arguments.
+        # Arguments could differ by call
+        if ref[0] == '$':
             return None
         return f'edict.insert("{ref}", format!("{{:?}}", {get}))'
 
@@ -419,11 +421,12 @@ class RustExplainerVisitor(RustBaseVisitor):
                 f'({"!" if ctx.NOT() else ""}res, refs)'
             ]
             if ctx.REF():
-                if exp := self._getRefExplainer(str(ctx.REF())[1:]):
+                ref = str(ctx.REF())
+                if exp := self._getRefExplainer(ref):
                     # Insert before the last element
                     lines[-1:-1] = [
                         exp,
-                        f'refs.push("{ctx.REF}")'
+                        f'refs.push("{ref}")'
                     ]
         else:
             lines = [
@@ -432,11 +435,12 @@ class RustExplainerVisitor(RustBaseVisitor):
                 f'({"!" if ctx.NOT() else ""}res, vec!["{ctx.getText()}"])'
             ]
             if ctx.REF():
-                if exp := self._getRefExplainer(str(ctx.REF())[1:]):
+                ref = str(ctx.REF())
+                if exp := self._getRefExplainer(ref):
                     # Replace the last element
                     lines[-1:] = [
                         exp,
-                        f'({"!" if ctx.NOT() else ""}res, vec!["{ctx.getText()}", "{ctx.REF()}"])'
+                        f'({"!" if ctx.NOT() else ""}res, vec!["{ctx.getText()}", "{ref}"])'
                     ]
         return f'{{ {"; ".join(lines)} }}'
 
@@ -468,6 +472,7 @@ class RustExplainerVisitor(RustBaseVisitor):
         return self._visitConditional(ctx.boolExpr(1), ctx.boolExpr(0), ctx.boolExpr(2))
 
     def visitCmp(self, ctx):
+        # TODO: self visit and mark the type
         left_str = ctx.value().getText()
         right_str = ctx.num().getText()
         lines = [
@@ -478,3 +483,75 @@ class RustExplainerVisitor(RustBaseVisitor):
             f'(left {ctx.getChild(1)} right.into(), vec!["{left_str}", "{right_str}"])',
         ]
         return f'{{ {"; ".join(lines)} }}'
+
+    def visitCmpStr(self, ctx):
+        vstr = ctx.value().getText()
+        getter = self.code_writer.visit(ctx.value())
+        rtype = inflection.camelize(REF_GETTER_TYPE.match(getter).group(1))
+        lines = [
+            f'let left = {getter}',
+            f'let right = enums::{rtype}::{inflection.camelize(str(ctx.LIT())[1:-1])}',
+            f'edict.insert("{vstr}", format!("{{}}", left))',
+            f'(left {ctx.getChild(1)} right, vec!["{vstr}"])'
+        ]
+        return f'{{ {"; ".join(lines)} }}'
+
+    def visitFlagMatch(self, ctx):
+        # TODO: self visit and mark the type
+        vstr = ctx.value().getText()
+        nstr = ctx.num().getText()
+        lines = [
+            f'let left = {self.code_writer.visit(ctx.value())}',
+            f'let right = {self.code_writer.visit(ctx.num())}',
+            f'edict.insert("{vstr}", format!("{{}}", left))',
+            f'edict.insert("{nstr}", format!("{{}}", right))',
+            f'((left & right) == right, vec!["{vstr}", "{nstr}"])'
+        ]
+        return f'{{ {"; ".join(lines)} }}'
+
+    def visitRefEq(self, ctx):
+        ref = str(ctx.REF())
+        getter = self._getRefGetter(ref[1:])
+        rval = f'Item::{ctx.ITEM()}' if ctx.ITEM() else f'ctx.{ctx.SETTING()}()'
+        lines = [
+            f'let left = {getter}',
+            f'edict.insert("{ref}", format!("{{}}", left))',
+            f'(left == {rval}, vec!["{ref}"])'
+        ]
+        return f'{{ {"; ".join(lines)} }}'
+
+    def visitSetting(self, ctx):
+        # TODO: dict settings?
+        setting = ctx.SETTING().getText()
+        lines = [
+            f'let s = ctx.{ctx.SETTING()}()',
+            f'edict.insert("{setting}", format!("{{}}", s))',
+            f'(s, vec!["{setting}"])'
+        ]
+        return f'{{ {"; ".join(lines)} }}'
+
+    def visitItemCount(self, ctx):
+        vstr = f'{ctx.ITEM()} count'
+        lines = [
+            f'let ct = ctx.count(Item::{ctx.ITEM()})'
+            f'edict.insert("{vstr}", format!("{{}}", ct))',
+        ]
+        if ctx.INT():
+            lines.append(f'(ct >= {ctx.INT()}, vec!["{vstr}"])')
+        else:
+            sstr = ctx.SETTING().getText()
+            lines.extend([
+                f'let s = ctx.{ctx.SETTING()}()'
+                f'edict.insert("{sstr}", format!("{{}}", s))',
+                f'(ct >= s, vec!["{vstr}", "{sstr}"])'
+            ])
+        return f'{{ {"; ".join(lines)} }}'
+
+    def visitOneItem(self, ctx):
+        lines = [
+            f'let h = ctx.has(Item::{ctx.ITEM()})',
+            f'edict.insert("{ctx.ITEM()}", format!("{{}}", h))',
+            f'({"!" if ctx.NOT() else ''}h, vec!["{ctx.ITEM()}"])'
+        ]
+        return f'{{ {"; ".join(lines)} }}'
+
