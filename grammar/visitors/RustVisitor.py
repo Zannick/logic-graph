@@ -249,44 +249,6 @@ class RustVisitor(RustBaseVisitor):
                     ]
         return ('!' if ctx.NOT() else '') + ' || '.join(per_type)
 
-    ## Action-specific
-    def visitActions(self, ctx):
-        return ' '.join(map(str, (self.visit(ch) for ch in ctx.action())))
-
-    def visitSet(self, ctx):
-        var = str(ctx.REF(0))[1:]
-        if ctx.TRUE():
-            val = 'true'
-        elif ctx.FALSE():
-            val = 'false'
-        elif len(ctx.REF()) > 1:
-            val = self._getRefGetter(str(ctx.REF(1))[1:])
-        elif ctx.PLACE():
-            pl = str(ctx.PLACE())[1:-1]
-            val = construct_place_id(pl)
-        elif ctx.num():
-            val = self.visit(ctx.num())
-        else:
-            val = self.visit(ctx.str_(), self._getRefEnum(var))
-        return f'{self._getRefSetter(var)}({val});'
-
-    def visitAlter(self, ctx):
-        return f'{self._getRefRaw(str(ctx.REF())[1:])} {ctx.BINOP()}= {self.visit(ctx.num())};'
-
-    def visitFuncNum(self, ctx):
-        func, args = self._getFuncAndArgs(str(ctx.FUNC()))
-        if ctx.ITEM():
-            args.append(f'Item::{ctx.ITEM()}')
-        elif ctx.num():
-            args.extend(str(self.visit(n)) for n in ctx.num())
-        return f'{func}({", ".join(args)})'
-        
-    def visitActionHelper(self, ctx):
-        return self.visit(ctx.invoke()) + ';'
-        
-    def visitCondAction(self, ctx):
-        return self._visitConditional(*chain(*zip(ctx.boolExpr(), ctx.actions())), else_case=False)
-
     def visitRefInPlaceRef(self, ctx):
         ptype = self.context_types[str(ctx.REF(1))[1:]]
         eq = '!' if ctx.NOT() else '='
@@ -329,6 +291,45 @@ class RustVisitor(RustBaseVisitor):
             check = ''
         return (f'{check}{func}({get}) '
                 f'{eq}= {self.visit(ctx.invoke())}')
+
+    ## Action-specific
+    def visitActions(self, ctx):
+        return ' '.join(map(str, (self.visit(ch) for ch in ctx.action())))
+
+    def visitSet(self, ctx):
+        var = str(ctx.REF(0))[1:]
+        if ctx.TRUE():
+            val = 'true'
+        elif ctx.FALSE():
+            val = 'false'
+        elif len(ctx.REF()) > 1:
+            val = self._getRefGetter(str(ctx.REF(1))[1:])
+        elif ctx.PLACE():
+            pl = str(ctx.PLACE())[1:-1]
+            val = construct_place_id(pl)
+        elif ctx.num():
+            val = self.visit(ctx.num())
+        else:
+            val = self.visit(ctx.str_(), self._getRefEnum(var))
+        return f'{self._getRefSetter(var)}({val});'
+
+    def visitAlter(self, ctx):
+        return f'{self._getRefRaw(str(ctx.REF())[1:])} {ctx.BINOP()}= {self.visit(ctx.num())};'
+
+    def visitFuncNum(self, ctx):
+        func, args = self._getFuncAndArgs(str(ctx.FUNC()))
+        if ctx.ITEM():
+            args.append(f'Item::{ctx.ITEM()}')
+        elif ctx.num():
+            args.extend(str(self.visit(n)) for n in ctx.num())
+        return f'{func}({", ".join(args)})'
+        
+    def visitActionHelper(self, ctx):
+        return self.visit(ctx.invoke()) + ';'
+        
+    def visitCondAction(self, ctx):
+        return self._visitConditional(*chain(*zip(ctx.boolExpr(), ctx.actions())), else_case=False)
+
 
 
 class RustExplainerVisitor(RustBaseVisitor):
