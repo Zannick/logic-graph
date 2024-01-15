@@ -1786,24 +1786,24 @@ pub fn access_not_within_menu_and_anuman_and_mode_ne_drone(
     world: &graph::World,
 ) -> bool {
     // NOT WITHIN `Menu` and Anuman and ^mode != 'drone'
-    ((!(match get_region(ctx.position()) {
-        RegionId::Menu => true,
-        _ => false,
+    (((match get_region(ctx.position()) {
+        RegionId::Menu => false,
+        _ => true,
     }) && ctx.has(Item::Anuman))
         && ctx.mode() != enums::Mode::Drone)
 }
 pub fn access_not_within_menu_and_can_deploy(ctx: &Context, world: &graph::World) -> bool {
     // NOT WITHIN `Menu` and $can_deploy
-    (!(match get_region(ctx.position()) {
-        RegionId::Menu => true,
-        _ => false,
+    ((match get_region(ctx.position()) {
+        RegionId::Menu => false,
+        _ => true,
     }) && helper__can_deploy!(ctx, world))
 }
 pub fn access_not_within_menu_and_flasks_gt_0(ctx: &Context, world: &graph::World) -> bool {
     // NOT WITHIN `Menu` and ^flasks > 0
-    (!(match get_region(ctx.position()) {
-        RegionId::Menu => true,
-        _ => false,
+    ((match get_region(ctx.position()) {
+        RegionId::Menu => false,
+        _ => true,
     }) && Into::<i32>::into(ctx.flasks()) > 0.into())
 }
 pub fn access_not_within_menu_and_ft_main_and_can_recall(
@@ -1811,9 +1811,9 @@ pub fn access_not_within_menu_and_ft_main_and_can_recall(
     world: &graph::World,
 ) -> bool {
     // NOT WITHIN `Menu` and $ft_main and $can_recall
-    ((!(match get_region(ctx.position()) {
-        RegionId::Menu => true,
-        _ => false,
+    (((match get_region(ctx.position()) {
+        RegionId::Menu => false,
+        _ => true,
     }) && helper__ft_main!(ctx, world))
         && helper__can_recall!(ctx, world))
 }
@@ -1822,9 +1822,9 @@ pub fn access_not_within_menu_and_realm_ne_breach_and_anuman_and_mode_eq_drone(
     world: &graph::World,
 ) -> bool {
     // NOT WITHIN `Menu` and ^realm != 'breach' and Anuman and ^mode == 'drone'
-    (((!(match get_region(ctx.position()) {
-        RegionId::Menu => true,
-        _ => false,
+    ((((match get_region(ctx.position()) {
+        RegionId::Menu => false,
+        _ => true,
     }) && data::realm(ctx.position()) != enums::Realm::Breach)
         && ctx.has(Item::Anuman))
         && ctx.mode() == enums::Mode::Drone)
@@ -1834,9 +1834,9 @@ pub fn access_not_within_menu_and_realm_ne_breach_and_can_recall(
     world: &graph::World,
 ) -> bool {
     // NOT WITHIN `Menu` and ^realm != 'breach' and $can_recall
-    ((!(match get_region(ctx.position()) {
-        RegionId::Menu => true,
-        _ => false,
+    (((match get_region(ctx.position()) {
+        RegionId::Menu => false,
+        _ => true,
     }) && data::realm(ctx.position()) != enums::Realm::Breach)
         && helper__can_recall!(ctx, world))
 }
@@ -9096,7 +9096,13 @@ pub fn explain_not_within_menu_and_anuman_and_mode_ne_drone(
     // NOT WITHIN `Menu` and Anuman and ^mode != 'drone'
     {
         let mut left = {
-            let mut left = (false, vec![]);
+            let mut left = (
+                match get_region(ctx.position()) {
+                    RegionId::Menu => false,
+                    _ => true,
+                },
+                vec!["^position"],
+            );
             if !left.0 {
                 left
             } else {
@@ -9136,7 +9142,13 @@ pub fn explain_not_within_menu_and_can_deploy(
 ) -> (bool, Vec<&'static str>) {
     // NOT WITHIN `Menu` and $can_deploy
     {
-        let mut left = (false, vec![]);
+        let mut left = (
+            match get_region(ctx.position()) {
+                RegionId::Menu => false,
+                _ => true,
+            },
+            vec!["^position"],
+        );
         if !left.0 {
             left
         } else {
@@ -9158,7 +9170,13 @@ pub fn explain_not_within_menu_and_flasks_gt_0(
 ) -> (bool, Vec<&'static str>) {
     // NOT WITHIN `Menu` and ^flasks > 0
     {
-        let mut left = (false, vec![]);
+        let mut left = (
+            match get_region(ctx.position()) {
+                RegionId::Menu => false,
+                _ => true,
+            },
+            vec!["^position"],
+        );
         if !left.0 {
             left
         } else {
@@ -9189,7 +9207,13 @@ pub fn explain_not_within_menu_and_ft_main_and_can_recall(
     // NOT WITHIN `Menu` and $ft_main and $can_recall
     {
         let mut left = {
-            let mut left = (false, vec![]);
+            let mut left = (
+                match get_region(ctx.position()) {
+                    RegionId::Menu => false,
+                    _ => true,
+                },
+                vec!["^position"],
+            );
             if !left.0 {
                 left
             } else {
@@ -9226,7 +9250,13 @@ pub fn explain_not_within_menu_and_realm_ne_breach_and_anuman_and_mode_eq_drone(
     {
         let mut left = {
             let mut left = {
-                let mut left = (false, vec![]);
+                let mut left = (
+                    match get_region(ctx.position()) {
+                        RegionId::Menu => false,
+                        _ => true,
+                    },
+                    vec!["^position"],
+                );
                 if !left.0 {
                     left
                 } else {
@@ -9286,7 +9316,13 @@ pub fn explain_not_within_menu_and_realm_ne_breach_and_can_recall(
     // NOT WITHIN `Menu` and ^realm != 'breach' and $can_recall
     {
         let mut left = {
-            let mut left = (false, vec![]);
+            let mut left = (
+                match get_region(ctx.position()) {
+                    RegionId::Menu => false,
+                    _ => true,
+                },
+                vec!["^position"],
+            );
             if !left.0 {
                 left
             } else {
@@ -9627,7 +9663,17 @@ pub fn explain_realm_in___main_interior_emergence_and_amashilama(
 ) -> (bool, Vec<&'static str>) {
     // ^realm IN ['main', 'interior', 'emergence'] and Amashilama
     {
-        let mut left = (false, vec![]);
+        let mut left = {
+            let r = data::realm(ctx.position());
+            edict.insert("^realm", format!("{:?}", r));
+            (
+                matches!(
+                    r,
+                    enums::Realm::Main | enums::Realm::Interior | enums::Realm::Emergence
+                ),
+                vec!["^realm"],
+            )
+        };
         if !left.0 {
             left
         } else {
@@ -10064,7 +10110,13 @@ pub fn explain_within_antarctica(
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // WITHIN `Antarctica`
-    (false, vec![])
+    (
+        match get_region(ctx.position()) {
+            RegionId::Antarctica => true,
+            _ => false,
+        },
+        vec!["^position"],
+    )
 }
 pub fn explain_within_menu_gt_upgrade_menu(
     ctx: &Context,
@@ -10072,5 +10124,11 @@ pub fn explain_within_menu_gt_upgrade_menu(
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // WITHIN `Menu > Upgrade Menu`
-    (false, vec![])
+    (
+        match get_area(ctx.position()) {
+            AreaId::Menu__Upgrade_Menu => true,
+            _ => false,
+        },
+        vec!["^position"],
+    )
 }

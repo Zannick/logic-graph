@@ -38,7 +38,7 @@ class RustBaseVisitor(RulesVisitor):
         return f'ctx.set_{self.ctxdict[ref]}'
 
     def _getRefEnum(self, ref):
-        return f'enums::{ref.capitalize()}'
+        return f'enums::{self.ctxdict[ref].capitalize()}'
     
     def _isRefSpotId(self, ref):
         if ref in self.context_types:
@@ -215,9 +215,10 @@ class RustVisitor(RustBaseVisitor):
         return f'matches!({getter}, {' | '.join(values)})'
     
     def visitRefStrInList(self, ctx):
-        getter = self._getRefGetter(str(ctx.REF())[1:])
-        rtype = inflection.camelize(REF_GETTER_TYPE.match(getter).group(1))
-        values = [f'enums::{rtype}::{inflection.camelize(str(lit)[1:-1])}' for lit in ctx.LIT()]
+        ref = str(ctx.REF())[1:]
+        getter = self._getRefGetter(ref)
+        rtype = self._getRefEnum(ref)
+        values = [f'{rtype}::{inflection.camelize(str(lit)[1:-1])}' for lit in ctx.LIT()]
         return f'matches!({getter}, {' | '.join(values)})'
     
     # TODO: other REF/SETTING rules
@@ -241,13 +242,14 @@ class RustVisitor(RustBaseVisitor):
         for pl in ctx.PLACE():
             pl = str(pl)[1:-1]
             places[getPlaceType(pl)].append(pl)
+        matchcase, elsecase = ('false', 'true') if ctx.NOT() else ('true', 'false')
         per_type = [('(match ctx.position()' if pt == 'SpotId' else f'(match get_{pt.lower()[:-2]}(ctx.position())')
                     + ' {'
                     + ' | '.join(construct_place_id(pl) for pl in plist)
-                    + ' => true, _ => false })'
+                    + f' => {matchcase}, _ => {elsecase} }})'
                     for pt, plist in places.items()
                     ]
-        return ('!' if ctx.NOT() else '') + ' || '.join(per_type)
+        return ' || '.join(per_type)
 
     def visitRefInPlaceRef(self, ctx):
         ptype = self.context_types[str(ctx.REF(1))[1:]]
@@ -677,3 +679,49 @@ class RustExplainerVisitor(RustBaseVisitor):
             lines[-1:-1] = [exp]
         return f'{{ {"; ".join(lines)} }}'
     
+    def visitRefStrInList(self, ctx):
+        ref = str(ctx.REF())
+        getter = self._getRefGetter(ref[1:])
+        rtype = self._getRefEnum(ref[1:])
+        values = [f'{rtype}::{inflection.camelize(str(lit)[1:-1])}' for lit in ctx.LIT()]
+        exp, tag = self._getRefExplainerAndTag(ref, getter)
+        if exp:
+            return f'{{ let r = {getter}; {exp}; (matches!(r, {" | ".join(values)}), vec!["{tag}"]) }}'
+        return f'(matches!({getter}, {" | ".join(values)}), vec!["{tag}"])'
+    
+    # TODO: other REF/SETTING rules
+
+    def visitStr(self, ctx):
+        if ctx.LIT() and self.rettype:
+            return f'{self.rettype}::{inflection.camelize(str(ctx.LIT())[1:-1])}'
+        return super().visitStr(ctx)
+
+    def visitPerRefStr(self, ctx):
+        ref = str(ctx.REF())
+        getter = self._getRefGetter(ref[1:])
+        enum = self._getRefEnum(ref[1:])
+        cases = [f'{enum}::{str(c)[1:-1].capitalize()}' for c in ctx.LIT()] + [str(c) for c in ctx.INT()] + ['_']
+        results = [str(self.visit(s, self.rettype)) for s in ctx.str_()]
+        exp, tag = self._getRefExplainerAndTag(ref, getter)
+        lines = [
+            f'let r = {getter}',
+            f'(match r {{ {", ".join(f"{c} => {r}" for c, r in zip(cases, results))} }}, vec!["{tag}"]',
+        ]
+        if exp:
+            # Insert before the last line
+            lines[-1:-1] = exp
+        return f'{{ {"; ".join(lines)} }}'
+
+    def visitSomewhere(self, ctx):
+        places = defaultdict(list)
+        for pl in ctx.PLACE():
+            pl = str(pl)[1:-1]
+            places[getPlaceType(pl)].append(pl)
+        matchcase, elsecase = ('false', 'true') if ctx.NOT() else ('true', 'false')
+        per_type = [('match ctx.position()' if pt == 'SpotId' else f'match get_{pt.lower()[:-2]}(ctx.position())')
+                    + ' {'
+                    + ' | '.join(construct_place_id(pl) for pl in plist)
+                    + f' => {matchcase}, _ => {elsecase} }}'
+                    for pt, plist in places.items()
+                    ]
+        return f'({" || ".join(per_type)}, vec!["^position"])'
