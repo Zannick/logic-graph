@@ -50,7 +50,7 @@ macro_rules! rexplain__{{ name|construct_id }} {
         match $world.rule_{{ name|construct_id }} {
 %% for v, info in rule.variants.items()
             Rule{{ name[1:]|camelize }}::{{ v|construct_id|camelize }} => {
-                rules::explain_{{ info.func_id }}($ctx, $world)
+                rules::explain_{{ info.func_id }}($ctx, $world, $edict)
             }
 %% endfor
         }

@@ -25,10 +25,15 @@ macro_rules! hexplain__melee {
                 left
             } else {
                 let mut right = {
-                    let left = $ctx.mode();
+                    let mut refs = vec!["^mode"];
+                    let mut left = {
+                        $edict.insert("^mode", format!("{:?}", $ctx.mode()));
+                        ($ctx.mode(), vec!["^mode"])
+                    };
                     let right = enums::Mode::Drone;
-                    $edict.insert("^mode", format!("{}", left));
-                    (left == right, vec!["^mode"])
+                    $edict.insert("^mode", format!("{}", left.0));
+                    refs.append(&mut left.1);
+                    (left.0 == right, refs)
                 };
                 left.1.append(&mut right.1);
                 (right.0, left.1)
@@ -54,10 +59,15 @@ macro_rules! hexplain__boomerang {
         use $crate::items::Item;
         {
             let mut left = {
-                let left = $ctx.mode();
+                let mut refs = vec!["^mode"];
+                let mut left = {
+                    $edict.insert("^mode", format!("{:?}", $ctx.mode()));
+                    ($ctx.mode(), vec!["^mode"])
+                };
                 let right = enums::Mode::Drone;
-                $edict.insert("^mode", format!("{}", left));
-                (left != right, vec!["^mode"])
+                $edict.insert("^mode", format!("{}", left.0));
+                refs.append(&mut left.1);
+                (left.0 != right, refs)
             };
             if !left.0 {
                 left
@@ -128,10 +138,15 @@ macro_rules! hexplain__grab {
         use $crate::items::Item;
         {
             let mut left = {
-                let left = $ctx.mode();
+                let mut refs = vec!["^mode"];
+                let mut left = {
+                    $edict.insert("^mode", format!("{:?}", $ctx.mode()));
+                    ($ctx.mode(), vec!["^mode"])
+                };
                 let right = enums::Mode::Drone;
-                $edict.insert("^mode", format!("{}", left));
-                (left != right, vec!["^mode"])
+                $edict.insert("^mode", format!("{}", left.0));
+                refs.append(&mut left.1);
+                (left.0 != right, refs)
             };
             if !left.0 {
                 left
@@ -165,10 +180,15 @@ macro_rules! hexplain__climb {
         use $crate::items::Item;
         {
             let mut left = {
-                let left = $ctx.mode();
+                let mut refs = vec!["^mode"];
+                let mut left = {
+                    $edict.insert("^mode", format!("{:?}", $ctx.mode()));
+                    ($ctx.mode(), vec!["^mode"])
+                };
                 let right = enums::Mode::Drone;
-                $edict.insert("^mode", format!("{}", left));
-                (left != right, vec!["^mode"])
+                $edict.insert("^mode", format!("{}", left.0));
+                refs.append(&mut left.1);
+                (left.0 != right, refs)
             };
             if !left.0 {
                 left
@@ -202,10 +222,15 @@ macro_rules! hexplain__hook {
         use $crate::items::Item;
         {
             let mut left = {
-                let left = $ctx.mode();
+                let mut refs = vec!["^mode"];
+                let mut left = {
+                    $edict.insert("^mode", format!("{:?}", $ctx.mode()));
+                    ($ctx.mode(), vec!["^mode"])
+                };
                 let right = enums::Mode::Drone;
-                $edict.insert("^mode", format!("{}", left));
-                (left == right, vec!["^mode"])
+                $edict.insert("^mode", format!("{}", left.0));
+                refs.append(&mut left.1);
+                (left.0 == right, refs)
             };
             if !left.0 {
                 left
@@ -239,10 +264,15 @@ macro_rules! hexplain__hover {
         use $crate::items::Item;
         {
             let mut left = {
-                let left = $ctx.mode();
+                let mut refs = vec!["^mode"];
+                let mut left = {
+                    $edict.insert("^mode", format!("{:?}", $ctx.mode()));
+                    ($ctx.mode(), vec!["^mode"])
+                };
                 let right = enums::Mode::Drone;
-                $edict.insert("^mode", format!("{}", left));
-                (left == right, vec!["^mode"])
+                $edict.insert("^mode", format!("{}", left.0));
+                refs.append(&mut left.1);
+                (left.0 == right, refs)
             };
             if !left.0 {
                 left
@@ -276,10 +306,15 @@ macro_rules! hexplain__charge {
         use $crate::items::Item;
         {
             let mut left = {
-                let left = $ctx.mode();
+                let mut refs = vec!["^mode"];
+                let mut left = {
+                    $edict.insert("^mode", format!("{:?}", $ctx.mode()));
+                    ($ctx.mode(), vec!["^mode"])
+                };
                 let right = enums::Mode::Drone;
-                $edict.insert("^mode", format!("{}", left));
-                (left == right, vec!["^mode"])
+                $edict.insert("^mode", format!("{}", left.0));
+                refs.append(&mut left.1);
+                (left.0 == right, refs)
             };
             if !left.0 {
                 left
@@ -313,10 +348,15 @@ macro_rules! hexplain__spin {
         use $crate::items::Item;
         {
             let mut left = {
-                let left = $ctx.mode();
+                let mut refs = vec!["^mode"];
+                let mut left = {
+                    $edict.insert("^mode", format!("{:?}", $ctx.mode()));
+                    ($ctx.mode(), vec!["^mode"])
+                };
                 let right = enums::Mode::Drone;
-                $edict.insert("^mode", format!("{}", left));
-                (left == right, vec!["^mode"])
+                $edict.insert("^mode", format!("{}", left.0));
+                refs.append(&mut left.1);
+                (left.0 == right, refs)
             };
             if !left.0 {
                 left
@@ -360,10 +400,15 @@ macro_rules! hexplain__can_deploy {
                     left
                 } else {
                     let mut right = {
-                        let left = $ctx.mode();
+                        let mut refs = vec!["^mode"];
+                        let mut left = {
+                            $edict.insert("^mode", format!("{:?}", $ctx.mode()));
+                            ($ctx.mode(), vec!["^mode"])
+                        };
                         let right = enums::Mode::Drone;
-                        $edict.insert("^mode", format!("{}", left));
-                        (left != right, vec!["^mode"])
+                        $edict.insert("^mode", format!("{}", left.0));
+                        refs.append(&mut left.1);
+                        (left.0 != right, refs)
                     };
                     left.1.append(&mut right.1);
                     (right.0, left.1)
@@ -401,10 +446,15 @@ macro_rules! hexplain__can_recall {
         use $crate::items::Item;
         {
             let mut left = {
-                let left = $ctx.mode();
+                let mut refs = vec!["^mode"];
+                let mut left = {
+                    $edict.insert("^mode", format!("{:?}", $ctx.mode()));
+                    ($ctx.mode(), vec!["^mode"])
+                };
                 let right = enums::Mode::Drone;
-                $edict.insert("^mode", format!("{}", left));
-                (left == right, vec!["^mode"])
+                $edict.insert("^mode", format!("{}", left.0));
+                refs.append(&mut left.1);
+                (left.0 == right, refs)
             };
             if !left.0 {
                 left
@@ -438,10 +488,15 @@ macro_rules! hexplain__shockwave {
         use $crate::items::Item;
         {
             let mut left = {
-                let left = $ctx.mode();
+                let mut refs = vec!["^mode"];
+                let mut left = {
+                    $edict.insert("^mode", format!("{:?}", $ctx.mode()));
+                    ($ctx.mode(), vec!["^mode"])
+                };
                 let right = enums::Mode::Drone;
-                $edict.insert("^mode", format!("{}", left));
-                (left != right, vec!["^mode"])
+                $edict.insert("^mode", format!("{}", left.0));
+                refs.append(&mut left.1);
+                (left.0 != right, refs)
             };
             if !left.0 {
                 left
@@ -726,10 +781,15 @@ macro_rules! hexplain__ft_main {
                 left
             } else {
                 let mut right = {
-                    let left = data::realm($ctx.position());
+                    let mut refs = vec!["^realm"];
+                    let mut left = {
+                        $edict.insert("^realm", format!("{:?}", data::realm($ctx.position())));
+                        (data::realm($ctx.position()), vec!["^realm"])
+                    };
                     let right = enums::Realm::Main;
-                    $edict.insert("^realm", format!("{}", left));
-                    (left == right, vec!["^realm"])
+                    $edict.insert("^realm", format!("{}", left.0));
+                    refs.append(&mut left.1);
+                    (left.0 == right, refs)
                 };
                 left.1.append(&mut right.1);
                 (right.0, left.1)
@@ -763,10 +823,15 @@ macro_rules! hexplain__ft_breach {
                 left
             } else {
                 let mut right = {
-                    let left = data::realm($ctx.position());
+                    let mut refs = vec!["^realm"];
+                    let mut left = {
+                        $edict.insert("^realm", format!("{:?}", data::realm($ctx.position())));
+                        (data::realm($ctx.position()), vec!["^realm"])
+                    };
                     let right = enums::Realm::Breach;
-                    $edict.insert("^realm", format!("{}", left));
-                    (left == right, vec!["^realm"])
+                    $edict.insert("^realm", format!("{}", left.0));
+                    refs.append(&mut left.1);
+                    (left.0 == right, refs)
                 };
                 left.1.append(&mut right.1);
                 (right.0, left.1)
@@ -810,10 +875,15 @@ macro_rules! hexplain__range1 {
                         left
                     } else {
                         let mut right = {
-                            let left = $ctx.mode();
+                            let mut refs = vec!["^mode"];
+                            let mut left = {
+                                $edict.insert("^mode", format!("{:?}", $ctx.mode()));
+                                ($ctx.mode(), vec!["^mode"])
+                            };
                             let right = enums::Mode::Drone;
-                            $edict.insert("^mode", format!("{}", left));
-                            (left != right, vec!["^mode"])
+                            $edict.insert("^mode", format!("{}", left.0));
+                            refs.append(&mut left.1);
+                            (left.0 != right, refs)
                         };
                         left.1.append(&mut right.1);
                         (right.0, left.1)
@@ -861,10 +931,15 @@ macro_rules! hexplain__range2 {
                         left
                     } else {
                         let mut right = {
-                            let left = $ctx.mode();
+                            let mut refs = vec!["^mode"];
+                            let mut left = {
+                                $edict.insert("^mode", format!("{:?}", $ctx.mode()));
+                                ($ctx.mode(), vec!["^mode"])
+                            };
                             let right = enums::Mode::Drone;
-                            $edict.insert("^mode", format!("{}", left));
-                            (left != right, vec!["^mode"])
+                            $edict.insert("^mode", format!("{}", left.0));
+                            refs.append(&mut left.1);
+                            (left.0 != right, refs)
                         };
                         left.1.append(&mut right.1);
                         (right.0, left.1)
@@ -902,10 +977,15 @@ macro_rules! hexplain__range3 {
                 left
             } else {
                 let mut right = {
-                    let left = $ctx.mode();
+                    let mut refs = vec!["^mode"];
+                    let mut left = {
+                        $edict.insert("^mode", format!("{:?}", $ctx.mode()));
+                        ($ctx.mode(), vec!["^mode"])
+                    };
                     let right = enums::Mode::Drone;
-                    $edict.insert("^mode", format!("{}", left));
-                    (left != right, vec!["^mode"])
+                    $edict.insert("^mode", format!("{}", left.0));
+                    refs.append(&mut left.1);
+                    (left.0 != right, refs)
                 };
                 left.1.append(&mut right.1);
                 (right.0, left.1)
@@ -930,14 +1010,17 @@ macro_rules! hexplain__more_refills {
         #[allow(unused_imports)]
         use $crate::items::Item;
         {
-            let left = Into::<i32>::into($ctx.refills());
-            let right = $ctx.count(Item::Power_Matrix);
-            $edict.insert("^refills", format!("{:?}", left));
-            $edict.insert("$count(Power_Matrix)", format!("{:?}", right));
-            (
-                left < right.into(),
-                vec!["^refills", "$count(Power_Matrix)"],
-            )
+            let mut refs = vec!["^refills", "$count(Power_Matrix)"];
+            let mut left = {
+                $edict.insert("^refills", format!("{:?}", $ctx.refills()));
+                ($ctx.refills(), vec!["^refills"])
+            };
+            let mut right = (false, vec![]);
+            $edict.insert("^refills", format!("{:?}", left.0));
+            $edict.insert("$count(Power_Matrix)", format!("{:?}", right.0));
+            refs.append(&mut left.1);
+            refs.append(&mut right.1);
+            (Into::<i32>::into(left.0) < right.0.into(), refs)
         }
     }};
 }
@@ -1065,10 +1148,15 @@ macro_rules! hexplain__block_clip {
                 left
             } else {
                 let mut right = {
-                    let left = $ctx.mode();
+                    let mut refs = vec!["^mode"];
+                    let mut left = {
+                        $edict.insert("^mode", format!("{:?}", $ctx.mode()));
+                        ($ctx.mode(), vec!["^mode"])
+                    };
                     let right = enums::Mode::Drone;
-                    $edict.insert("^mode", format!("{}", left));
-                    (left == right, vec!["^mode"])
+                    $edict.insert("^mode", format!("{}", left.0));
+                    refs.append(&mut left.1);
+                    (left.0 == right, refs)
                 };
                 left.1.append(&mut right.1);
                 (right.0, left.1)
@@ -1200,10 +1288,15 @@ macro_rules! hexplain__attract {
                             left
                         } else {
                             let mut right = {
-                                let left = $ctx.mode();
+                                let mut refs = vec!["^mode"];
+                                let mut left = {
+                                    $edict.insert("^mode", format!("{:?}", $ctx.mode()));
+                                    ($ctx.mode(), vec!["^mode"])
+                                };
                                 let right = enums::Mode::Drone;
-                                $edict.insert("^mode", format!("{}", left));
-                                (left != right, vec!["^mode"])
+                                $edict.insert("^mode", format!("{}", left.0));
+                                refs.append(&mut left.1);
+                                (left.0 != right, refs)
                             };
                             left.1.append(&mut right.1);
                             (right.0, left.1)
@@ -1257,7 +1350,178 @@ macro_rules! hexplain__all_notes {
     ($ctx:expr, $world:expr, $edict:expr) => {{
         #[allow(unused_imports)]
         use $crate::items::Item;
-        (false, vec![])
+        {
+            let mut refs = Vec::new();
+            let mut h = {
+                let h = $ctx.has(Item::Dear_Ernest);
+                $edict.insert("Dear_Ernest", format!("{}", h));
+                (h, vec!["Dear_Ernest"])
+            };
+            refs.append(&mut h.1);
+            if !h.0 {
+                return (false, refs);
+            };
+            let mut h = {
+                let h = $ctx.has(Item::Researchers_Missing);
+                $edict.insert("Researchers_Missing", format!("{}", h));
+                (h, vec!["Researchers_Missing"])
+            };
+            refs.append(&mut h.1);
+            if !h.0 {
+                return (false, refs);
+            };
+            let mut h = {
+                let h = $ctx.has(Item::Letter_from_Trace);
+                $edict.insert("Letter_from_Trace", format!("{}", h));
+                (h, vec!["Letter_from_Trace"])
+            };
+            refs.append(&mut h.1);
+            if !h.0 {
+                return (false, refs);
+            };
+            let mut h = {
+                let h = $ctx.has(Item::Heretics_Tablet);
+                $edict.insert("Heretics_Tablet", format!("{}", h));
+                (h, vec!["Heretics_Tablet"])
+            };
+            refs.append(&mut h.1);
+            if !h.0 {
+                return (false, refs);
+            };
+            let mut h = {
+                let h = $ctx.has(Item::Terminal_Breakthrough_1);
+                $edict.insert("Terminal_Breakthrough_1", format!("{}", h));
+                (h, vec!["Terminal_Breakthrough_1"])
+            };
+            refs.append(&mut h.1);
+            if !h.0 {
+                return (false, refs);
+            };
+            let mut h = {
+                let h = $ctx.has(Item::Companies_Layoff);
+                $edict.insert("Companies_Layoff", format!("{}", h));
+                (h, vec!["Companies_Layoff"])
+            };
+            refs.append(&mut h.1);
+            if !h.0 {
+                return (false, refs);
+            };
+            let mut h = {
+                let h = $ctx.has(Item::Record_Losses);
+                $edict.insert("Record_Losses", format!("{}", h));
+                (h, vec!["Record_Losses"])
+            };
+            refs.append(&mut h.1);
+            if !h.0 {
+                return (false, refs);
+            };
+            let mut h = {
+                let h = $ctx.has(Item::Under_Siege);
+                $edict.insert("Under_Siege", format!("{}", h));
+                (h, vec!["Under_Siege"])
+            };
+            refs.append(&mut h.1);
+            if !h.0 {
+                return (false, refs);
+            };
+            let mut h = {
+                let h = $ctx.has(Item::The_Ideal_Kiengir);
+                $edict.insert("The_Ideal_Kiengir", format!("{}", h));
+                (h, vec!["The_Ideal_Kiengir"])
+            };
+            refs.append(&mut h.1);
+            if !h.0 {
+                return (false, refs);
+            };
+            let mut h = {
+                let h = $ctx.has(Item::Building_of_the_School);
+                $edict.insert("Building_of_the_School", format!("{}", h));
+                (h, vec!["Building_of_the_School"])
+            };
+            refs.append(&mut h.1);
+            if !h.0 {
+                return (false, refs);
+            };
+            let mut h = {
+                let h = $ctx.has(Item::Commemorative_Speech);
+                $edict.insert("Commemorative_Speech", format!("{}", h));
+                (h, vec!["Commemorative_Speech"])
+            };
+            refs.append(&mut h.1);
+            if !h.0 {
+                return (false, refs);
+            };
+            let mut h = {
+                let h = $ctx.has(Item::Terminal_Breakthrough_2);
+                $edict.insert("Terminal_Breakthrough_2", format!("{}", h));
+                (h, vec!["Terminal_Breakthrough_2"])
+            };
+            refs.append(&mut h.1);
+            if !h.0 {
+                return (false, refs);
+            };
+            let mut h = {
+                let h = $ctx.has(Item::Dangerous_Ideas);
+                $edict.insert("Dangerous_Ideas", format!("{}", h));
+                (h, vec!["Dangerous_Ideas"])
+            };
+            refs.append(&mut h.1);
+            if !h.0 {
+                return (false, refs);
+            };
+            let mut h = {
+                let h = $ctx.has(Item::Storm_Bomb);
+                $edict.insert("Storm_Bomb", format!("{}", h));
+                (h, vec!["Storm_Bomb"])
+            };
+            refs.append(&mut h.1);
+            if !h.0 {
+                return (false, refs);
+            };
+            let mut h = {
+                let h = $ctx.has(Item::Suspension_Bridge);
+                $edict.insert("Suspension_Bridge", format!("{}", h));
+                (h, vec!["Suspension_Bridge"])
+            };
+            refs.append(&mut h.1);
+            if !h.0 {
+                return (false, refs);
+            };
+            let mut h = {
+                let h = $ctx.has(Item::Plague_of_Thoughts);
+                $edict.insert("Plague_of_Thoughts", format!("{}", h));
+                (h, vec!["Plague_of_Thoughts"])
+            };
+            refs.append(&mut h.1);
+            if !h.0 {
+                return (false, refs);
+            };
+            let mut h = {
+                let h = $ctx.has(Item::Lament_for_Fools);
+                $edict.insert("Lament_for_Fools", format!("{}", h));
+                (h, vec!["Lament_for_Fools"])
+            };
+            refs.append(&mut h.1);
+            if !h.0 {
+                return (false, refs);
+            };
+            let mut h = {
+                let h = $ctx.has(Item::Family_Tragedy);
+                $edict.insert("Family_Tragedy", format!("{}", h));
+                (h, vec!["Family_Tragedy"])
+            };
+            refs.append(&mut h.1);
+            if !h.0 {
+                return (false, refs);
+            };
+            let mut h = {
+                let h = $ctx.has(Item::Destruction_Pogrom);
+                $edict.insert("Destruction_Pogrom", format!("{}", h));
+                (h, vec!["Destruction_Pogrom"])
+            };
+            refs.append(&mut h.1);
+            (h.0, refs)
+        }
     }};
 }
 
@@ -1276,7 +1540,25 @@ macro_rules! hexplain__all_flasks {
     ($ctx:expr, $world:expr, $edict:expr) => {{
         #[allow(unused_imports)]
         use $crate::items::Item;
-        (false, vec![])
+        {
+            let mut refs = Vec::new();
+            let mut h = {
+                let ct = $ctx.count(Item::Flask);
+                $edict.insert("Flask count", format!("{}", ct));
+                (ct >= 13, vec!["Flask count"])
+            };
+            refs.append(&mut h.1);
+            if !h.0 {
+                return (false, refs);
+            };
+            let mut h = {
+                let h = $ctx.has(Item::Big_Flask);
+                $edict.insert("Big_Flask", format!("{}", h));
+                (h, vec!["Big_Flask"])
+            };
+            refs.append(&mut h.1);
+            (h.0, refs)
+        }
     }};
 }
 
@@ -1295,7 +1577,25 @@ macro_rules! hexplain__all_health {
     ($ctx:expr, $world:expr, $edict:expr) => {{
         #[allow(unused_imports)]
         use $crate::items::Item;
-        (false, vec![])
+        {
+            let mut refs = Vec::new();
+            let mut h = {
+                let h = $ctx.has(Item::Health_Node);
+                $edict.insert("Health_Node", format!("{}", h));
+                (h, vec!["Health_Node"])
+            };
+            refs.append(&mut h.1);
+            if !h.0 {
+                return (false, refs);
+            };
+            let mut h = {
+                let ct = $ctx.count(Item::Health_Fragment);
+                $edict.insert("Health_Fragment count", format!("{}", ct));
+                (ct >= 6, vec!["Health_Fragment count"])
+            };
+            refs.append(&mut h.1);
+            (h.0, refs)
+        }
     }};
 }
 
@@ -1314,7 +1614,34 @@ macro_rules! hexplain__all_weapons {
     ($ctx:expr, $world:expr, $edict:expr) => {{
         #[allow(unused_imports)]
         use $crate::items::Item;
-        (false, vec![])
+        {
+            let mut refs = Vec::new();
+            let mut h = {
+                let h = $ctx.has(Item::Boomerang);
+                $edict.insert("Boomerang", format!("{}", h));
+                (h, vec!["Boomerang"])
+            };
+            refs.append(&mut h.1);
+            if !h.0 {
+                return (false, refs);
+            };
+            let mut h = {
+                let h = $ctx.has(Item::Ice_Axe);
+                $edict.insert("Ice_Axe", format!("{}", h));
+                (h, vec!["Ice_Axe"])
+            };
+            refs.append(&mut h.1);
+            if !h.0 {
+                return (false, refs);
+            };
+            let mut h = {
+                let h = $ctx.has(Item::Bronze_Axe);
+                $edict.insert("Bronze_Axe", format!("{}", h));
+                (h, vec!["Bronze_Axe"])
+            };
+            refs.append(&mut h.1);
+            (h.0, refs)
+        }
     }};
 }
 
@@ -1336,7 +1663,43 @@ macro_rules! hexplain__other_items {
     ($ctx:expr, $world:expr, $edict:expr) => {{
         #[allow(unused_imports)]
         use $crate::items::Item;
-        (false, vec![])
+        {
+            let mut refs = Vec::new();
+            let mut h = {
+                let h = $ctx.has(Item::Compass);
+                $edict.insert("Compass", format!("{}", h));
+                (h, vec!["Compass"])
+            };
+            refs.append(&mut h.1);
+            if !h.0 {
+                return (false, refs);
+            };
+            let mut h = {
+                let h = $ctx.has(Item::Power_Matrix);
+                $edict.insert("Power_Matrix", format!("{}", h));
+                (h, vec!["Power_Matrix"])
+            };
+            refs.append(&mut h.1);
+            if !h.0 {
+                return (false, refs);
+            };
+            let mut h = {
+                let h = $ctx.has(Item::Nano_Lattice_2);
+                $edict.insert("Nano_Lattice_2", format!("{}", h));
+                (h, vec!["Nano_Lattice_2"])
+            };
+            refs.append(&mut h.1);
+            if !h.0 {
+                return (false, refs);
+            };
+            let mut h = {
+                let h = $ctx.has(Item::Eye_Ring);
+                $edict.insert("Eye_Ring", format!("{}", h));
+                (h, vec!["Eye_Ring"])
+            };
+            refs.append(&mut h.1);
+            (h.0, refs)
+        }
     }};
 }
 
@@ -1365,7 +1728,106 @@ macro_rules! hexplain__all_urns {
     ($ctx:expr, $world:expr, $edict:expr) => {{
         #[allow(unused_imports)]
         use $crate::items::Item;
-        (false, vec![])
+        {
+            let mut refs = Vec::new();
+            let mut h = {
+                let h = $ctx.has(Item::Amashilama);
+                $edict.insert("Amashilama", format!("{}", h));
+                (h, vec!["Amashilama"])
+            };
+            refs.append(&mut h.1);
+            if !h.0 {
+                return (false, refs);
+            };
+            let mut h = {
+                let h = $ctx.has(Item::Ledge_Grab);
+                $edict.insert("Ledge_Grab", format!("{}", h));
+                (h, vec!["Ledge_Grab"])
+            };
+            refs.append(&mut h.1);
+            if !h.0 {
+                return (false, refs);
+            };
+            let mut h = {
+                let h = $ctx.has(Item::Infect);
+                $edict.insert("Infect", format!("{}", h));
+                (h, vec!["Infect"])
+            };
+            refs.append(&mut h.1);
+            if !h.0 {
+                return (false, refs);
+            };
+            let mut h = {
+                let h = $ctx.has(Item::Remote_Drone);
+                $edict.insert("Remote_Drone", format!("{}", h));
+                (h, vec!["Remote_Drone"])
+            };
+            refs.append(&mut h.1);
+            if !h.0 {
+                return (false, refs);
+            };
+            let mut h = {
+                let h = $ctx.has(Item::Shockwave);
+                $edict.insert("Shockwave", format!("{}", h));
+                (h, vec!["Shockwave"])
+            };
+            refs.append(&mut h.1);
+            if !h.0 {
+                return (false, refs);
+            };
+            let mut h = {
+                let h = $ctx.has(Item::Wall_Climb);
+                $edict.insert("Wall_Climb", format!("{}", h));
+                (h, vec!["Wall_Climb"])
+            };
+            refs.append(&mut h.1);
+            if !h.0 {
+                return (false, refs);
+            };
+            let mut h = {
+                let h = $ctx.has(Item::Slingshot_Hook);
+                $edict.insert("Slingshot_Hook", format!("{}", h));
+                (h, vec!["Slingshot_Hook"])
+            };
+            refs.append(&mut h.1);
+            if !h.0 {
+                return (false, refs);
+            };
+            let mut h = {
+                let h = $ctx.has(Item::Breach_Sight);
+                $edict.insert("Breach_Sight", format!("{}", h));
+                (h, vec!["Breach_Sight"])
+            };
+            refs.append(&mut h.1);
+            if !h.0 {
+                return (false, refs);
+            };
+            let mut h = {
+                let h = $ctx.has(Item::Drone_Hover);
+                $edict.insert("Drone_Hover", format!("{}", h));
+                (h, vec!["Drone_Hover"])
+            };
+            refs.append(&mut h.1);
+            if !h.0 {
+                return (false, refs);
+            };
+            let mut h = {
+                let h = $ctx.has(Item::Fast_Travel);
+                $edict.insert("Fast_Travel", format!("{}", h));
+                (h, vec!["Fast_Travel"])
+            };
+            refs.append(&mut h.1);
+            if !h.0 {
+                return (false, refs);
+            };
+            let mut h = {
+                let h = $ctx.has(Item::Anuman);
+                $edict.insert("Anuman", format!("{}", h));
+                (h, vec!["Anuman"])
+            };
+            refs.append(&mut h.1);
+            (h.0, refs)
+        }
     }};
 }
 
@@ -1503,8 +1965,8 @@ macro_rules! rexplain__victory {
         use $crate::graph_enums::*;
         use $crate::rules;
         match $world.rule_victory {
-            RuleVictory::Default => rules::explain___escape_objective($ctx, $world),
-            RuleVictory::JustObjective => rules::explain___objective($ctx, $world),
+            RuleVictory::Default => rules::explain___escape_objective($ctx, $world, $edict),
+            RuleVictory::JustObjective => rules::explain___objective($ctx, $world, $edict),
         }
     }};
 }
@@ -1531,10 +1993,10 @@ macro_rules! rexplain__objective {
         use $crate::graph_enums::*;
         use $crate::rules;
         match $world.rule_objective {
-            RuleObjective::Start => rules::explain___remote_drone($ctx, $world),
+            RuleObjective::Start => rules::explain___remote_drone($ctx, $world, $edict),
             RuleObjective::AllItems => {
                 rules::explain___all_urns_all_weapons_other_items_all_notes_all_health_all_flasks(
-                    $ctx, $world,
+                    $ctx, $world, $edict,
                 )
             }
         }

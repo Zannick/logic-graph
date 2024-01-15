@@ -187,7 +187,7 @@ class RustVisitor(RustBaseVisitor):
         helper_args = [self._getFuncAndArgs(helper) for helper in map(str, ctx.FUNC())]
         helpers = [f'{helper}({", ".join(args)})' for helper, args in helper_args]
         items = [self.visit(item) for item in ctx.item()]
-        return f'{" && ".join(helpers + items)}'
+        return f'{" && ".join(items + helpers)}'
 
     def visitBaseNum(self, ctx):
         if ctx.INT():
@@ -342,7 +342,7 @@ class RustExplainerVisitor(RustBaseVisitor):
         get = self._getRefGetter(ref[1:])
         # we don't want to explain builtins or arguments.
         # Arguments could differ by call
-        if ref[0] == '$':
+        if ref[0] == '$' or get[0] == '$':
             return None
         return f'edict.insert("{ref}", format!("{{:?}}", {get}))'
 
@@ -368,14 +368,14 @@ class RustExplainerVisitor(RustBaseVisitor):
                     f'let mut left = {self.visit(ctx.boolExpr(0))}',
                     # short-circuit logic
                     'if left.0 { left } else { let mut right = ' + str(self.visit(ctx.boolExpr(1))),
-                    'left.1.append(&mut right.1); (right.0, left.1) }'
+                    'left.1.append(&mut right.1); (right.0, left.1) }',
                 ]
             elif ctx.AND():
                 lines = [
                     f'let mut left = {self.visit(ctx.boolExpr(0))}',
                     # short-circuit logic
                     'if !left.0 { left } else { let mut right = ' + str(self.visit(ctx.boolExpr(1))),
-                    'left.1.append(&mut right.1); (right.0, left.1) }'
+                    'left.1.append(&mut right.1); (right.0, left.1) }',
                 ]
             elif ctx.TRUE():
                 return f'(true, vec![])'
@@ -419,7 +419,7 @@ class RustExplainerVisitor(RustBaseVisitor):
                 f'let (res, mut refs) = {efunc}({", ".join(args)}, edict)',
                 f'edict.insert("{ctx.getText()}", format!("{{:?}}", res))',
                 f'refs.push("{ctx.getText()}")',
-                f'({"!" if ctx.NOT() else ""}res, refs)'
+                f'({"!" if ctx.NOT() else ""}res, refs)',
             ]
             if ctx.REF():
                 ref = str(ctx.REF())
@@ -427,13 +427,13 @@ class RustExplainerVisitor(RustBaseVisitor):
                     # Insert before the last element
                     lines[-1:-1] = [
                         exp,
-                        f'refs.push("{ref}")'
+                        f'refs.push("{ref}")',
                     ]
         else:
             lines = [
                 f'let res = {func}({", ".join(args)})',
                 f'edict.insert("{ctx.getText()}", format!("{{:?}}", res))',
-                f'({"!" if ctx.NOT() else ""}res, vec!["{ctx.getText()}"])'
+                f'({"!" if ctx.NOT() else ""}res, vec!["{ctx.getText()}"])',
             ]
             if ctx.REF():
                 ref = str(ctx.REF())
@@ -451,10 +451,10 @@ class RustExplainerVisitor(RustBaseVisitor):
             cond, then, *args = args
             cases.append("; ".join([
                 f'let mut cond = {self.visit(cond)}',
-                'refs.append(cond.1)'
+                'refs.append(cond.1)',
                 'if cond.0 { let mut then = ' + str(self.visit(then)),
                 'refs.append(&mut then.1)',
-                '(then.0, refs) }'
+                '(then.0, refs) }',
             ]))
         if args:
             cases.append("; ".join([
@@ -473,39 +473,46 @@ class RustExplainerVisitor(RustBaseVisitor):
         return self._visitConditional(ctx.boolExpr(1), ctx.boolExpr(0), ctx.boolExpr(2))
 
     def visitCmp(self, ctx):
-        # TODO: self visit and mark the type
         left_str = ctx.value().getText()
         right_str = ctx.num().getText()
         lines = [
-            f'let left = Into::<i32>::into({self.code_writer.visit(ctx.value())})',
-            f'let right = {self.code_writer.visit(ctx.num())}',
-            f'edict.insert("{left_str}", format!("{{:?}}", left))',
-            f'edict.insert("{right_str}", format!("{{:?}}", right))',
-            f'(left {ctx.getChild(1)} right.into(), vec!["{left_str}", "{right_str}"])',
+            f'let mut refs = vec!["{left_str}", "{right_str}"]',
+            f'let mut left = {self.visit(ctx.value())}',
+            f'let mut right = {self.visit(ctx.num())}',
+            f'edict.insert("{left_str}", format!("{{:?}}", left.0))',
+            f'edict.insert("{right_str}", format!("{{:?}}", right.0))',
+            'refs.append(&mut left.1)',
+            'refs.append(&mut right.1)',
+            f'(Into::<i32>::into(left.0) {ctx.getChild(1)} right.0.into(), refs)',
         ]
         return f'{{ {"; ".join(lines)} }}'
 
     def visitCmpStr(self, ctx):
         vstr = ctx.value().getText()
+        # get the real getter to determine if this is a cvar/data
         getter = self.code_writer.visit(ctx.value())
         rtype = inflection.camelize(REF_GETTER_TYPE.match(getter).group(1))
         lines = [
-            f'let left = {getter}',
+            f'let mut refs = vec!["{vstr}"]',
+            f'let mut left = {self.visit(ctx.value())}',
             f'let right = enums::{rtype}::{inflection.camelize(str(ctx.LIT())[1:-1])}',
-            f'edict.insert("{vstr}", format!("{{}}", left))',
-            f'(left {ctx.getChild(1)} right, vec!["{vstr}"])'
+            f'edict.insert("{vstr}", format!("{{}}", left.0))',
+            'refs.append(&mut left.1)',
+            f'(left.0 {ctx.getChild(1)} right, refs)',
         ]
         return f'{{ {"; ".join(lines)} }}'
 
     def visitFlagMatch(self, ctx):
-        # TODO: self visit and mark the type
         vstr = ctx.value().getText()
         nstr = ctx.num().getText()
         lines = [
-            f'let left = {self.code_writer.visit(ctx.value())}',
-            f'let right = {self.code_writer.visit(ctx.num())}',
-            f'edict.insert("{vstr}", format!("{{}}", left))',
-            f'edict.insert("{nstr}", format!("{{}}", right))',
+            f'let mut refs = vec!["{vstr}", "{nstr}"]',
+            f'let mut left = {self.visit(ctx.value())}',
+            f'let mut right = {self.visit(ctx.num())}',
+            f'edict.insert("{vstr}", format!("{{}}", left.0))',
+            f'edict.insert("{nstr}", format!("{{}}", right.0))',
+            'refs.append(&mut left.1)'
+            'refs.append(&mut right.1)',
             f'((left & right) == right, vec!["{vstr}", "{nstr}"])'
         ]
         return f'{{ {"; ".join(lines)} }}'
@@ -517,7 +524,7 @@ class RustExplainerVisitor(RustBaseVisitor):
         lines = [
             f'let left = {getter}',
             f'edict.insert("{ref}", format!("{{}}", left))',
-            f'(left == {rval}, vec!["{ref}"])'
+            f'(left == {rval}, vec!["{ref}"])',
         ]
         return f'{{ {"; ".join(lines)} }}'
 
@@ -527,14 +534,21 @@ class RustExplainerVisitor(RustBaseVisitor):
         lines = [
             f'let s = ctx.{ctx.SETTING()}()',
             f'edict.insert("{setting}", format!("{{}}", s))',
-            f'(s, vec!["{setting}"])'
+            f'(s, vec!["{setting}"])',
         ]
         return f'{{ {"; ".join(lines)} }}'
+
+    def visitArgument(self, ctx):
+        ref = str(ctx.REF())
+        getter = self._getRefGetter(ref[1:])
+        if exp := self._getRefExplainer(ref):
+            return f'{{ {exp}; ({getter}, vec!["{ref}"]) }}'
+        return f'({getter}, vec![])'
 
     def visitItemCount(self, ctx):
         vstr = f'{ctx.ITEM()} count'
         lines = [
-            f'let ct = ctx.count(Item::{ctx.ITEM()})'
+            f'let ct = ctx.count(Item::{ctx.ITEM()})',
             f'edict.insert("{vstr}", format!("{{}}", ct))',
         ]
         if ctx.INT():
@@ -542,9 +556,9 @@ class RustExplainerVisitor(RustBaseVisitor):
         else:
             sstr = ctx.SETTING().getText()
             lines.extend([
-                f'let s = ctx.{ctx.SETTING()}()'
+                f'let s = ctx.{ctx.SETTING()}()',
                 f'edict.insert("{sstr}", format!("{{}}", s))',
-                f'(ct >= s, vec!["{vstr}", "{sstr}"])'
+                f'(ct >= s, vec!["{vstr}", "{sstr}"])',
             ])
         return f'{{ {"; ".join(lines)} }}'
 
@@ -552,7 +566,79 @@ class RustExplainerVisitor(RustBaseVisitor):
         lines = [
             f'let h = ctx.has(Item::{ctx.ITEM()})',
             f'edict.insert("{ctx.ITEM()}", format!("{{}}", h))',
-            f'({"!" if ctx.NOT() else ''}h, vec!["{ctx.ITEM()}"])'
+            f'({"!" if ctx.NOT() else ''}h, vec!["{ctx.ITEM()}"])',
+        ]
+        return f'{{ {"; ".join(lines)} }}'
+
+    def visitOneArgument(self, ctx):
+        ref = str(ctx.REF())
+        getter = self._getRefGetter(ref[1:])
+        exp = self._getRefExplainer(ref)
+        if exp is None:
+            lines = [
+                f'let h = ctx.has({getter})',
+                # Calling this function multiple times with different args;
+                # we could generate a string and leak it for the key, or we could just append all
+                # the uses to the explainer.
+                (f'if let Some(v) = edict.get_mut(&"{self.name}.{ref}") {{ '
+                 f'v.push_str(format!(" {getter}: {{}}", h)); }} '
+                 f'else {{ edict.insert("{self.name}.{ref}", format!("{getter}: {{}}", h)); }}'),
+                f'(h, vec!["{self.name}.{ref}"])',
+            ]
+        else:
+            lines = [
+                f'let h = {getter}',
+                exp,
+                f'(h, vec!["{ref}"])',
+            ]
+        return f'{{ {"; ".join(lines)} }}'
+    
+    # There's no need to optimize for bitflags here, as the compiler can handle that! Hopefully.
+    def visitItemList(self, ctx):
+        helpers = [f'{self._getExplainerFunc(helper)}(ctx, world, edict)' for helper in map(str, ctx.FUNC())]
+        items = [self.visit(item) for item in ctx.item()]
+        lines = [
+            [
+                # This tends to be one extra level of recursion than apparently necessary, but eh
+                f'let mut h = {item}',
+                f'refs.append(&mut h.1)',
+                # short-circuit logic
+                'if !h.0 { return (false, refs); }',
+            ]
+            for item in items + helpers
+        ]
+        lines[-1][-1] = '(h.0, refs)'
+        return f'{{ let mut refs = Vec::new(); {"; ".join(chain.from_iterable(lines))} }}'
+
+    def visitBaseNum(self, ctx):
+        if ctx.INT():
+            return f'({ctx.INT()}, vec![])'
+        if ctx.REF():
+            ref = str(ctx.REF())
+            if exp := self._getRefExplainer(ref):
+                lines = [
+                    f'let r = {self._getRefGetter(ref[1:])}',
+                    exp,
+                    f'(r, vec!["{ref}"])'
+                ]
+                return f'{{ {"; ".join(lines)} }}'
+            return f'({self._getRefGetter(str(ctx.REF())[1:])}, vec![])'
+        if ctx.SETTING():
+            sstr = str(ctx.SETTING())
+            lines.extend([
+                f'let s = ctx.{ctx.SETTING()}()',
+                f'edict.insert("{sstr}", format!("{{}}", s))',
+                f'(s, vec!["{sstr}"])',
+            ])
+        # TODO: constants
+        return self.visitChildren(ctx)
+
+    def visitMathNum(self, ctx):
+        lines = [
+            f'let mut left = {self.visit(ctx.baseNum())}',
+            f'let mut right = {self.visit(ctx.num())}',
+            'left.1.append(&mut right)',
+            f'(left {ctx.BINOP()} right, left.1)'
         ]
         return f'{{ {"; ".join(lines)} }}'
 
