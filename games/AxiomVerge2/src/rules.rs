@@ -2665,12 +2665,9 @@ pub fn explain_amagi__main_area__carving__ex__secret_outcropping_1__req(
     // ^_combo and ($grab or $climb)
     {
         let mut left = {
-            let h = ctx.amagi__main_area__ctx__combo();
-            edict.insert(
-                "^_combo",
-                format!("{:?}", ctx.amagi__main_area__ctx__combo()),
-            );
-            (h, vec!["^_combo"])
+            let r = ctx.amagi__main_area__ctx__combo();
+            edict.insert("^amagi__main_area__ctx__combo", format!("{:?}", r));
+            (r, vec!["^amagi__main_area__ctx__combo"])
         };
         if !left.0 {
             left
@@ -2708,12 +2705,9 @@ pub fn explain_amagi__main_area__carving__ex__secret_outcropping_2__req(
     // ^_combo and $hook
     {
         let mut left = {
-            let h = ctx.amagi__main_area__ctx__combo();
-            edict.insert(
-                "^_combo",
-                format!("{:?}", ctx.amagi__main_area__ctx__combo()),
-            );
-            (h, vec!["^_combo"])
+            let r = ctx.amagi__main_area__ctx__combo();
+            edict.insert("^amagi__main_area__ctx__combo", format!("{:?}", r));
+            (r, vec!["^amagi__main_area__ctx__combo"])
         };
         if !left.0 {
             left
@@ -2737,11 +2731,9 @@ pub fn explain_amagi__main_area__carving__key_combo__req(
     // not ^_combo
     {
         let val = {
-            edict.insert(
-                "^_combo",
-                format!("{:?}", ctx.amagi__main_area__ctx__combo()),
-            );
-            (ctx.amagi__main_area__ctx__combo(), vec!["^_combo"])
+            let r = ctx.amagi__main_area__ctx__combo();
+            edict.insert("^amagi__main_area__ctx__combo", format!("{:?}", r));
+            (r, vec!["^amagi__main_area__ctx__combo"])
         };
         (!val.0, val.1)
     }
@@ -2905,11 +2897,9 @@ pub fn explain_annuna__east_bridge__tower_east_ledge__enter_combo__req(
     // not ^_combo
     {
         let val = {
-            edict.insert(
-                "^_combo",
-                format!("{:?}", ctx.annuna__east_bridge__ctx__combo()),
-            );
-            (ctx.annuna__east_bridge__ctx__combo(), vec!["^_combo"])
+            let r = ctx.annuna__east_bridge__ctx__combo();
+            edict.insert("^annuna__east_bridge__ctx__combo", format!("{:?}", r));
+            (r, vec!["^annuna__east_bridge__ctx__combo"])
         };
         (!val.0, val.1)
     }
@@ -2921,12 +2911,9 @@ pub fn explain_annuna__east_bridge__tower_east_ledge__ex__tower_secret_1__req(
 ) -> (bool, Vec<&'static str>) {
     // ^_combo
     {
-        let h = ctx.annuna__east_bridge__ctx__combo();
-        edict.insert(
-            "^_combo",
-            format!("{:?}", ctx.annuna__east_bridge__ctx__combo()),
-        );
-        (h, vec!["^_combo"])
+        let r = ctx.annuna__east_bridge__ctx__combo();
+        edict.insert("^annuna__east_bridge__ctx__combo", format!("{:?}", r));
+        (r, vec!["^annuna__east_bridge__ctx__combo"])
     }
 }
 pub fn explain_annuna__east_bridge__tower_mid_air_west__ex__tower_secret_1__req(
@@ -2936,12 +2923,9 @@ pub fn explain_annuna__east_bridge__tower_mid_air_west__ex__tower_secret_1__req(
 ) -> (bool, Vec<&'static str>) {
     // ^_combo
     {
-        let h = ctx.annuna__east_bridge__ctx__combo();
-        edict.insert(
-            "^_combo",
-            format!("{:?}", ctx.annuna__east_bridge__ctx__combo()),
-        );
-        (h, vec!["^_combo"])
+        let r = ctx.annuna__east_bridge__ctx__combo();
+        edict.insert("^annuna__east_bridge__ctx__combo", format!("{:?}", r));
+        (r, vec!["^annuna__east_bridge__ctx__combo"])
     }
 }
 pub fn explain_annuna__east_bridge__tower_secret__enter_combo__req(
@@ -2952,11 +2936,9 @@ pub fn explain_annuna__east_bridge__tower_secret__enter_combo__req(
     // not ^_combo
     {
         let val = {
-            edict.insert(
-                "^_combo",
-                format!("{:?}", ctx.annuna__east_bridge__ctx__combo()),
-            );
-            (ctx.annuna__east_bridge__ctx__combo(), vec!["^_combo"])
+            let r = ctx.annuna__east_bridge__ctx__combo();
+            edict.insert("^annuna__east_bridge__ctx__combo", format!("{:?}", r));
+            (r, vec!["^annuna__east_bridge__ctx__combo"])
         };
         (!val.0, val.1)
     }
@@ -2968,12 +2950,9 @@ pub fn explain_annuna__east_bridge__tower_secret__ex__tower_east_ledge_1__req(
 ) -> (bool, Vec<&'static str>) {
     // ^_combo
     {
-        let h = ctx.annuna__east_bridge__ctx__combo();
-        edict.insert(
-            "^_combo",
-            format!("{:?}", ctx.annuna__east_bridge__ctx__combo()),
-        );
-        (h, vec!["^_combo"])
+        let r = ctx.annuna__east_bridge__ctx__combo();
+        edict.insert("^annuna__east_bridge__ctx__combo", format!("{:?}", r));
+        (r, vec!["^annuna__east_bridge__ctx__combo"])
     }
 }
 pub fn explain_annuna__east_bridge__tower_secret__ex__tower_mid_air_east_1__req(
@@ -2983,12 +2962,9 @@ pub fn explain_annuna__east_bridge__tower_secret__ex__tower_mid_air_east_1__req(
 ) -> (bool, Vec<&'static str>) {
     // ^_combo
     {
-        let h = ctx.annuna__east_bridge__ctx__combo();
-        edict.insert(
-            "^_combo",
-            format!("{:?}", ctx.annuna__east_bridge__ctx__combo()),
-        );
-        (h, vec!["^_combo"])
+        let r = ctx.annuna__east_bridge__ctx__combo();
+        edict.insert("^annuna__east_bridge__ctx__combo", format!("{:?}", r));
+        (r, vec!["^annuna__east_bridge__ctx__combo"])
     }
 }
 pub fn explain_annuna__east_bridge__tower_secret__ex__tower_mid_air_west_1__req(
@@ -2998,12 +2974,9 @@ pub fn explain_annuna__east_bridge__tower_secret__ex__tower_mid_air_west_1__req(
 ) -> (bool, Vec<&'static str>) {
     // ^_combo
     {
-        let h = ctx.annuna__east_bridge__ctx__combo();
-        edict.insert(
-            "^_combo",
-            format!("{:?}", ctx.annuna__east_bridge__ctx__combo()),
-        );
-        (h, vec!["^_combo"])
+        let r = ctx.annuna__east_bridge__ctx__combo();
+        edict.insert("^annuna__east_bridge__ctx__combo", format!("{:?}", r));
+        (r, vec!["^annuna__east_bridge__ctx__combo"])
     }
 }
 pub fn explain_annuna__east_bridge__tower_secret__ex__tower_peak_1__req(
@@ -3014,12 +2987,9 @@ pub fn explain_annuna__east_bridge__tower_secret__ex__tower_peak_1__req(
     // ^_combo and $grab
     {
         let mut left = {
-            let h = ctx.annuna__east_bridge__ctx__combo();
-            edict.insert(
-                "^_combo",
-                format!("{:?}", ctx.annuna__east_bridge__ctx__combo()),
-            );
-            (h, vec!["^_combo"])
+            let r = ctx.annuna__east_bridge__ctx__combo();
+            edict.insert("^annuna__east_bridge__ctx__combo", format!("{:?}", r));
+            (r, vec!["^annuna__east_bridge__ctx__combo"])
         };
         if !left.0 {
             left
@@ -3043,12 +3013,9 @@ pub fn explain_annuna__east_bridge__tower_secret__ex__tower_peak_2__req(
     // ^_combo and $hook
     {
         let mut left = {
-            let h = ctx.annuna__east_bridge__ctx__combo();
-            edict.insert(
-                "^_combo",
-                format!("{:?}", ctx.annuna__east_bridge__ctx__combo()),
-            );
-            (h, vec!["^_combo"])
+            let r = ctx.annuna__east_bridge__ctx__combo();
+            edict.insert("^annuna__east_bridge__ctx__combo", format!("{:?}", r));
+            (r, vec!["^annuna__east_bridge__ctx__combo"])
         };
         if !left.0 {
             left
@@ -3071,12 +3038,9 @@ pub fn explain_annuna__east_bridge__tower_secret__ex__tower_west_ledge_1__req(
 ) -> (bool, Vec<&'static str>) {
     // ^_combo
     {
-        let h = ctx.annuna__east_bridge__ctx__combo();
-        edict.insert(
-            "^_combo",
-            format!("{:?}", ctx.annuna__east_bridge__ctx__combo()),
-        );
-        (h, vec!["^_combo"])
+        let r = ctx.annuna__east_bridge__ctx__combo();
+        edict.insert("^annuna__east_bridge__ctx__combo", format!("{:?}", r));
+        (r, vec!["^annuna__east_bridge__ctx__combo"])
     }
 }
 pub fn explain_annuna__east_bridge__tower_west_ledge__enter_combo__req(
@@ -3087,11 +3051,9 @@ pub fn explain_annuna__east_bridge__tower_west_ledge__enter_combo__req(
     // not ^_combo
     {
         let val = {
-            edict.insert(
-                "^_combo",
-                format!("{:?}", ctx.annuna__east_bridge__ctx__combo()),
-            );
-            (ctx.annuna__east_bridge__ctx__combo(), vec!["^_combo"])
+            let r = ctx.annuna__east_bridge__ctx__combo();
+            edict.insert("^annuna__east_bridge__ctx__combo", format!("{:?}", r));
+            (r, vec!["^annuna__east_bridge__ctx__combo"])
         };
         (!val.0, val.1)
     }
@@ -3103,12 +3065,9 @@ pub fn explain_annuna__east_bridge__tower_west_ledge__ex__tower_secret_1__req(
 ) -> (bool, Vec<&'static str>) {
     // ^_combo
     {
-        let h = ctx.annuna__east_bridge__ctx__combo();
-        edict.insert(
-            "^_combo",
-            format!("{:?}", ctx.annuna__east_bridge__ctx__combo()),
-        );
-        (h, vec!["^_combo"])
+        let r = ctx.annuna__east_bridge__ctx__combo();
+        edict.insert("^annuna__east_bridge__ctx__combo", format!("{:?}", r));
+        (r, vec!["^annuna__east_bridge__ctx__combo"])
     }
 }
 pub fn explain_annuna__west_climb__cache__ex__switch_ledge_1__req(
@@ -3118,12 +3077,9 @@ pub fn explain_annuna__west_climb__cache__ex__switch_ledge_1__req(
 ) -> (bool, Vec<&'static str>) {
     // ^_door_opened
     {
-        let h = ctx.annuna__west_climb__ctx__door_opened();
-        edict.insert(
-            "^_door_opened",
-            format!("{:?}", ctx.annuna__west_climb__ctx__door_opened()),
-        );
-        (h, vec!["^_door_opened"])
+        let r = ctx.annuna__west_climb__ctx__door_opened();
+        edict.insert("^annuna__west_climb__ctx__door_opened", format!("{:?}", r));
+        (r, vec!["^annuna__west_climb__ctx__door_opened"])
     }
 }
 pub fn explain_annuna__west_climb__switch_ledge__ex__cache_1__req(
@@ -3133,12 +3089,9 @@ pub fn explain_annuna__west_climb__switch_ledge__ex__cache_1__req(
 ) -> (bool, Vec<&'static str>) {
     // ^_door_opened
     {
-        let h = ctx.annuna__west_climb__ctx__door_opened();
-        edict.insert(
-            "^_door_opened",
-            format!("{:?}", ctx.annuna__west_climb__ctx__door_opened()),
-        );
-        (h, vec!["^_door_opened"])
+        let r = ctx.annuna__west_climb__ctx__door_opened();
+        edict.insert("^annuna__west_climb__ctx__door_opened", format!("{:?}", r));
+        (r, vec!["^annuna__west_climb__ctx__door_opened"])
     }
 }
 pub fn explain_annuna__west_climb__switch_ledge__open_door__req(
@@ -3159,14 +3112,9 @@ pub fn explain_annuna__west_climb__switch_ledge__open_door__req(
         } else {
             let mut right = {
                 let val = {
-                    edict.insert(
-                        "^_door_opened",
-                        format!("{:?}", ctx.annuna__west_climb__ctx__door_opened()),
-                    );
-                    (
-                        ctx.annuna__west_climb__ctx__door_opened(),
-                        vec!["^_door_opened"],
-                    )
+                    let r = ctx.annuna__west_climb__ctx__door_opened();
+                    edict.insert("^annuna__west_climb__ctx__door_opened", format!("{:?}", r));
+                    (r, vec!["^annuna__west_climb__ctx__door_opened"])
                 };
                 (!val.0, val.1)
             };
@@ -3819,14 +3767,12 @@ pub fn explain_ebih__base_camp__left_platform__move_left_platform__req(
         } else {
             let mut right = {
                 let val = {
+                    let r = ctx.ebih__base_camp__ctx__left_platform_moved();
                     edict.insert(
-                        "^_left_platform_moved",
-                        format!("{:?}", ctx.ebih__base_camp__ctx__left_platform_moved()),
+                        "^ebih__base_camp__ctx__left_platform_moved",
+                        format!("{:?}", r),
                     );
-                    (
-                        ctx.ebih__base_camp__ctx__left_platform_moved(),
-                        vec!["^_left_platform_moved"],
-                    )
+                    (r, vec!["^ebih__base_camp__ctx__left_platform_moved"])
                 };
                 (!val.0, val.1)
             };
@@ -3852,12 +3798,12 @@ pub fn explain_ebih__base_camp__left_platform_moved__reset_left_platform__req(
             left
         } else {
             let mut right = {
-                let h = ctx.ebih__base_camp__ctx__left_platform_moved();
+                let r = ctx.ebih__base_camp__ctx__left_platform_moved();
                 edict.insert(
-                    "^_left_platform_moved",
-                    format!("{:?}", ctx.ebih__base_camp__ctx__left_platform_moved()),
+                    "^ebih__base_camp__ctx__left_platform_moved",
+                    format!("{:?}", r),
                 );
-                (h, vec!["^_left_platform_moved"])
+                (r, vec!["^ebih__base_camp__ctx__left_platform_moved"])
             };
             left.1.append(&mut right.1);
             (right.0, left.1)
@@ -3882,14 +3828,12 @@ pub fn explain_ebih__base_camp__top_platform__ex__left_platform_1__req(
         } else {
             let mut right = {
                 let val = {
+                    let r = ctx.ebih__base_camp__ctx__left_platform_moved();
                     edict.insert(
-                        "^_left_platform_moved",
-                        format!("{:?}", ctx.ebih__base_camp__ctx__left_platform_moved()),
+                        "^ebih__base_camp__ctx__left_platform_moved",
+                        format!("{:?}", r),
                     );
-                    (
-                        ctx.ebih__base_camp__ctx__left_platform_moved(),
-                        vec!["^_left_platform_moved"],
-                    )
+                    (r, vec!["^ebih__base_camp__ctx__left_platform_moved"])
                 };
                 (!val.0, val.1)
             };
@@ -3905,12 +3849,12 @@ pub fn explain_ebih__base_camp__top_platform__ex__left_platform_moved_1__req(
 ) -> (bool, Vec<&'static str>) {
     // ^_left_platform_moved
     {
-        let h = ctx.ebih__base_camp__ctx__left_platform_moved();
+        let r = ctx.ebih__base_camp__ctx__left_platform_moved();
         edict.insert(
-            "^_left_platform_moved",
-            format!("{:?}", ctx.ebih__base_camp__ctx__left_platform_moved()),
+            "^ebih__base_camp__ctx__left_platform_moved",
+            format!("{:?}", r),
         );
-        (h, vec!["^_left_platform_moved"])
+        (r, vec!["^ebih__base_camp__ctx__left_platform_moved"])
     }
 }
 pub fn explain_ebih__base_camp__west_11__ex__left_platform_1__req(
@@ -3945,14 +3889,12 @@ pub fn explain_ebih__base_camp__west_11__ex__left_platform_1__req(
         } else {
             let mut right = {
                 let val = {
+                    let r = ctx.ebih__base_camp__ctx__left_platform_moved();
                     edict.insert(
-                        "^_left_platform_moved",
-                        format!("{:?}", ctx.ebih__base_camp__ctx__left_platform_moved()),
+                        "^ebih__base_camp__ctx__left_platform_moved",
+                        format!("{:?}", r),
                     );
-                    (
-                        ctx.ebih__base_camp__ctx__left_platform_moved(),
-                        vec!["^_left_platform_moved"],
-                    )
+                    (r, vec!["^ebih__base_camp__ctx__left_platform_moved"])
                 };
                 (!val.0, val.1)
             };
@@ -3979,14 +3921,12 @@ pub fn explain_ebih__base_camp__west_11__ex__left_platform_2__req(
         } else {
             let mut right = {
                 let val = {
+                    let r = ctx.ebih__base_camp__ctx__left_platform_moved();
                     edict.insert(
-                        "^_left_platform_moved",
-                        format!("{:?}", ctx.ebih__base_camp__ctx__left_platform_moved()),
+                        "^ebih__base_camp__ctx__left_platform_moved",
+                        format!("{:?}", r),
                     );
-                    (
-                        ctx.ebih__base_camp__ctx__left_platform_moved(),
-                        vec!["^_left_platform_moved"],
-                    )
+                    (r, vec!["^ebih__base_camp__ctx__left_platform_moved"])
                 };
                 (!val.0, val.1)
             };
@@ -4011,12 +3951,9 @@ pub fn explain_ebih__drone_room__pit_left__activate_lift__req(
             left
         } else {
             let mut right = {
-                let h = ctx.ebih__drone_room__ctx__platform_moved();
-                edict.insert(
-                    "^_platform_moved",
-                    format!("{:?}", ctx.ebih__drone_room__ctx__platform_moved()),
-                );
-                (h, vec!["^_platform_moved"])
+                let r = ctx.ebih__drone_room__ctx__platform_moved();
+                edict.insert("^ebih__drone_room__ctx__platform_moved", format!("{:?}", r));
+                (r, vec!["^ebih__drone_room__ctx__platform_moved"])
             };
             left.1.append(&mut right.1);
             (right.0, left.1)
@@ -4039,12 +3976,9 @@ pub fn explain_ebih__drone_room__pit_left__activate_lift_but_get_off_early__req(
             left
         } else {
             let mut right = {
-                let h = ctx.ebih__drone_room__ctx__platform_moved();
-                edict.insert(
-                    "^_platform_moved",
-                    format!("{:?}", ctx.ebih__drone_room__ctx__platform_moved()),
-                );
-                (h, vec!["^_platform_moved"])
+                let r = ctx.ebih__drone_room__ctx__platform_moved();
+                edict.insert("^ebih__drone_room__ctx__platform_moved", format!("{:?}", r));
+                (r, vec!["^ebih__drone_room__ctx__platform_moved"])
             };
             left.1.append(&mut right.1);
             (right.0, left.1)
@@ -4068,14 +4002,9 @@ pub fn explain_ebih__drone_room__portal_exit__activate_platform__req(
         } else {
             let mut right = {
                 let val = {
-                    edict.insert(
-                        "^_platform_moved",
-                        format!("{:?}", ctx.ebih__drone_room__ctx__platform_moved()),
-                    );
-                    (
-                        ctx.ebih__drone_room__ctx__platform_moved(),
-                        vec!["^_platform_moved"],
-                    )
+                    let r = ctx.ebih__drone_room__ctx__platform_moved();
+                    edict.insert("^ebih__drone_room__ctx__platform_moved", format!("{:?}", r));
+                    (r, vec!["^ebih__drone_room__ctx__platform_moved"])
                 };
                 (!val.0, val.1)
             };
@@ -4101,14 +4030,9 @@ pub fn explain_ebih__drone_room__portal_exit__ex__moving_platform_1__req(
         } else {
             let mut right = {
                 let val = {
-                    edict.insert(
-                        "^_platform_moved",
-                        format!("{:?}", ctx.ebih__drone_room__ctx__platform_moved()),
-                    );
-                    (
-                        ctx.ebih__drone_room__ctx__platform_moved(),
-                        vec!["^_platform_moved"],
-                    )
+                    let r = ctx.ebih__drone_room__ctx__platform_moved();
+                    edict.insert("^ebih__drone_room__ctx__platform_moved", format!("{:?}", r));
+                    (r, vec!["^ebih__drone_room__ctx__platform_moved"])
                 };
                 (!val.0, val.1)
             };
@@ -4135,14 +4059,9 @@ pub fn explain_ebih__drone_room__portal_exit__ex__moving_platform_2__req(
         } else {
             let mut right = {
                 let val = {
-                    edict.insert(
-                        "^_platform_moved",
-                        format!("{:?}", ctx.ebih__drone_room__ctx__platform_moved()),
-                    );
-                    (
-                        ctx.ebih__drone_room__ctx__platform_moved(),
-                        vec!["^_platform_moved"],
-                    )
+                    let r = ctx.ebih__drone_room__ctx__platform_moved();
+                    edict.insert("^ebih__drone_room__ctx__platform_moved", format!("{:?}", r));
+                    (r, vec!["^ebih__drone_room__ctx__platform_moved"])
                 };
                 (!val.0, val.1)
             };
@@ -4168,12 +4087,9 @@ pub fn explain_ebih__ebih_east__dispenser__activate_lift__req(
                 left
             } else {
                 let mut right = {
-                    let h = ctx.ebih__ebih_east__ctx__platform2_moved();
-                    edict.insert(
-                        "^_platform2_moved",
-                        format!("{:?}", ctx.ebih__ebih_east__ctx__platform2_moved()),
-                    );
-                    (h, vec!["^_platform2_moved"])
+                    let r = ctx.ebih__ebih_east__ctx__platform2_moved();
+                    edict.insert("^ebih__ebih_east__ctx__platform2_moved", format!("{:?}", r));
+                    (r, vec!["^ebih__ebih_east__ctx__platform2_moved"])
                 };
                 left.1.append(&mut right.1);
                 (right.0, left.1)
@@ -4225,14 +4141,9 @@ pub fn explain_ebih__ebih_east__dispenser__ex__lower_moving_platform_1__req(
         } else {
             let mut right = {
                 let val = {
-                    edict.insert(
-                        "^_platform2_moved",
-                        format!("{:?}", ctx.ebih__ebih_east__ctx__platform2_moved()),
-                    );
-                    (
-                        ctx.ebih__ebih_east__ctx__platform2_moved(),
-                        vec!["^_platform2_moved"],
-                    )
+                    let r = ctx.ebih__ebih_east__ctx__platform2_moved();
+                    edict.insert("^ebih__ebih_east__ctx__platform2_moved", format!("{:?}", r));
+                    (r, vec!["^ebih__ebih_east__ctx__platform2_moved"])
                 };
                 (!val.0, val.1)
             };
@@ -4259,14 +4170,9 @@ pub fn explain_ebih__ebih_east__dispenser__ex__lower_moving_platform_2__req(
         } else {
             let mut right = {
                 let val = {
-                    edict.insert(
-                        "^_platform2_moved",
-                        format!("{:?}", ctx.ebih__ebih_east__ctx__platform2_moved()),
-                    );
-                    (
-                        ctx.ebih__ebih_east__ctx__platform2_moved(),
-                        vec!["^_platform2_moved"],
-                    )
+                    let r = ctx.ebih__ebih_east__ctx__platform2_moved();
+                    edict.insert("^ebih__ebih_east__ctx__platform2_moved", format!("{:?}", r));
+                    (r, vec!["^ebih__ebih_east__ctx__platform2_moved"])
                 };
                 (!val.0, val.1)
             };
@@ -4306,14 +4212,9 @@ pub fn explain_ebih__ebih_east__lower_moving_platform__activate_lift__req(
         } else {
             let mut right = {
                 let val = {
-                    edict.insert(
-                        "^_platform2_moved",
-                        format!("{:?}", ctx.ebih__ebih_east__ctx__platform2_moved()),
-                    );
-                    (
-                        ctx.ebih__ebih_east__ctx__platform2_moved(),
-                        vec!["^_platform2_moved"],
-                    )
+                    let r = ctx.ebih__ebih_east__ctx__platform2_moved();
+                    edict.insert("^ebih__ebih_east__ctx__platform2_moved", format!("{:?}", r));
+                    (r, vec!["^ebih__ebih_east__ctx__platform2_moved"])
                 };
                 (!val.0, val.1)
             };
@@ -4339,14 +4240,9 @@ pub fn explain_ebih__ebih_east__lower_moving_platform__activate_ride__req(
         } else {
             let mut right = {
                 let val = {
-                    edict.insert(
-                        "^_platform2_moved",
-                        format!("{:?}", ctx.ebih__ebih_east__ctx__platform2_moved()),
-                    );
-                    (
-                        ctx.ebih__ebih_east__ctx__platform2_moved(),
-                        vec!["^_platform2_moved"],
-                    )
+                    let r = ctx.ebih__ebih_east__ctx__platform2_moved();
+                    edict.insert("^ebih__ebih_east__ctx__platform2_moved", format!("{:?}", r));
+                    (r, vec!["^ebih__ebih_east__ctx__platform2_moved"])
                 };
                 (!val.0, val.1)
             };
@@ -4386,14 +4282,9 @@ pub fn explain_ebih__ebih_east__moving_platform__activate_ride__req(
         } else {
             let mut right = {
                 let val = {
-                    edict.insert(
-                        "^_platform1_moved",
-                        format!("{:?}", ctx.ebih__ebih_east__ctx__platform1_moved()),
-                    );
-                    (
-                        ctx.ebih__ebih_east__ctx__platform1_moved(),
-                        vec!["^_platform1_moved"],
-                    )
+                    let r = ctx.ebih__ebih_east__ctx__platform1_moved();
+                    edict.insert("^ebih__ebih_east__ctx__platform1_moved", format!("{:?}", r));
+                    (r, vec!["^ebih__ebih_east__ctx__platform1_moved"])
                 };
                 (!val.0, val.1)
             };
@@ -4409,12 +4300,9 @@ pub fn explain_ebih__ebih_west__above_door__ex__below_door_1__req(
 ) -> (bool, Vec<&'static str>) {
     // ^_door_open
     {
-        let h = ctx.ebih__ebih_west__ctx__door_open();
-        edict.insert(
-            "^_door_open",
-            format!("{:?}", ctx.ebih__ebih_west__ctx__door_open()),
-        );
-        (h, vec!["^_door_open"])
+        let r = ctx.ebih__ebih_west__ctx__door_open();
+        edict.insert("^ebih__ebih_west__ctx__door_open", format!("{:?}", r));
+        (r, vec!["^ebih__ebih_west__ctx__door_open"])
     }
 }
 pub fn explain_ebih__ebih_west__above_door__ex__refill_station_1__req(
@@ -4426,11 +4314,9 @@ pub fn explain_ebih__ebih_west__above_door__ex__refill_station_1__req(
     {
         let mut left = {
             let val = {
-                edict.insert(
-                    "^_door_open",
-                    format!("{:?}", ctx.ebih__ebih_west__ctx__door_open()),
-                );
-                (ctx.ebih__ebih_west__ctx__door_open(), vec!["^_door_open"])
+                let r = ctx.ebih__ebih_west__ctx__door_open();
+                edict.insert("^ebih__ebih_west__ctx__door_open", format!("{:?}", r));
+                (r, vec!["^ebih__ebih_west__ctx__door_open"])
             };
             (!val.0, val.1)
         };
@@ -4456,11 +4342,9 @@ pub fn explain_ebih__ebih_west__above_door__ex__small_gap_1__req(
     // not ^_door_open
     {
         let val = {
-            edict.insert(
-                "^_door_open",
-                format!("{:?}", ctx.ebih__ebih_west__ctx__door_open()),
-            );
-            (ctx.ebih__ebih_west__ctx__door_open(), vec!["^_door_open"])
+            let r = ctx.ebih__ebih_west__ctx__door_open();
+            edict.insert("^ebih__ebih_west__ctx__door_open", format!("{:?}", r));
+            (r, vec!["^ebih__ebih_west__ctx__door_open"])
         };
         (!val.0, val.1)
     }
@@ -4482,12 +4366,9 @@ pub fn explain_ebih__ebih_west__below_door__ex__above_door_1__req(
             left
         } else {
             let mut right = {
-                let h = ctx.ebih__ebih_west__ctx__door_open();
-                edict.insert(
-                    "^_door_open",
-                    format!("{:?}", ctx.ebih__ebih_west__ctx__door_open()),
-                );
-                (h, vec!["^_door_open"])
+                let r = ctx.ebih__ebih_west__ctx__door_open();
+                edict.insert("^ebih__ebih_west__ctx__door_open", format!("{:?}", r));
+                (r, vec!["^ebih__ebih_west__ctx__door_open"])
             };
             left.1.append(&mut right.1);
             (right.0, left.1)
@@ -4511,12 +4392,9 @@ pub fn explain_ebih__ebih_west__below_door__ex__refill_station_1__req(
             left
         } else {
             let mut right = {
-                let h = ctx.ebih__ebih_west__ctx__door_open();
-                edict.insert(
-                    "^_door_open",
-                    format!("{:?}", ctx.ebih__ebih_west__ctx__door_open()),
-                );
-                (h, vec!["^_door_open"])
+                let r = ctx.ebih__ebih_west__ctx__door_open();
+                edict.insert("^ebih__ebih_west__ctx__door_open", format!("{:?}", r));
+                (r, vec!["^ebih__ebih_west__ctx__door_open"])
             };
             left.1.append(&mut right.1);
             (right.0, left.1)
@@ -4530,12 +4408,9 @@ pub fn explain_ebih__grid_25_10_12__door__ex__door_left_1__req(
 ) -> (bool, Vec<&'static str>) {
     // ^_door_open
     {
-        let h = ctx.ebih__grid_25_10_12__ctx__door_open();
-        edict.insert(
-            "^_door_open",
-            format!("{:?}", ctx.ebih__grid_25_10_12__ctx__door_open()),
-        );
-        (h, vec!["^_door_open"])
+        let r = ctx.ebih__grid_25_10_12__ctx__door_open();
+        edict.insert("^ebih__grid_25_10_12__ctx__door_open", format!("{:?}", r));
+        (r, vec!["^ebih__grid_25_10_12__ctx__door_open"])
     }
 }
 pub fn explain_ebih__grid_25_10_12__door__ex__east_11_1__req(
@@ -4545,12 +4420,9 @@ pub fn explain_ebih__grid_25_10_12__door__ex__east_11_1__req(
 ) -> (bool, Vec<&'static str>) {
     // ^_door_open
     {
-        let h = ctx.ebih__grid_25_10_12__ctx__door_open();
-        edict.insert(
-            "^_door_open",
-            format!("{:?}", ctx.ebih__grid_25_10_12__ctx__door_open()),
-        );
-        (h, vec!["^_door_open"])
+        let r = ctx.ebih__grid_25_10_12__ctx__door_open();
+        edict.insert("^ebih__grid_25_10_12__ctx__door_open", format!("{:?}", r));
+        (r, vec!["^ebih__grid_25_10_12__ctx__door_open"])
     }
 }
 pub fn explain_ebih__grid_25_10_12__door_left__ex__door_1__req(
@@ -4560,12 +4432,9 @@ pub fn explain_ebih__grid_25_10_12__door_left__ex__door_1__req(
 ) -> (bool, Vec<&'static str>) {
     // ^_door_open
     {
-        let h = ctx.ebih__grid_25_10_12__ctx__door_open();
-        edict.insert(
-            "^_door_open",
-            format!("{:?}", ctx.ebih__grid_25_10_12__ctx__door_open()),
-        );
-        (h, vec!["^_door_open"])
+        let r = ctx.ebih__grid_25_10_12__ctx__door_open();
+        edict.insert("^ebih__grid_25_10_12__ctx__door_open", format!("{:?}", r));
+        (r, vec!["^ebih__grid_25_10_12__ctx__door_open"])
     }
 }
 pub fn explain_ebih__grid_25_10_12__east_11__ex__door_1__req(
@@ -4575,12 +4444,9 @@ pub fn explain_ebih__grid_25_10_12__east_11__ex__door_1__req(
 ) -> (bool, Vec<&'static str>) {
     // ^_door_open
     {
-        let h = ctx.ebih__grid_25_10_12__ctx__door_open();
-        edict.insert(
-            "^_door_open",
-            format!("{:?}", ctx.ebih__grid_25_10_12__ctx__door_open()),
-        );
-        (h, vec!["^_door_open"])
+        let r = ctx.ebih__grid_25_10_12__ctx__door_open();
+        edict.insert("^ebih__grid_25_10_12__ctx__door_open", format!("{:?}", r));
+        (r, vec!["^ebih__grid_25_10_12__ctx__door_open"])
     }
 }
 pub fn explain_ebih__vertical_interchange__door__ex__door_east_1__req(
@@ -4590,12 +4456,12 @@ pub fn explain_ebih__vertical_interchange__door__ex__door_east_1__req(
 ) -> (bool, Vec<&'static str>) {
     // ^_door_open
     {
-        let h = ctx.ebih__vertical_interchange__ctx__door_open();
+        let r = ctx.ebih__vertical_interchange__ctx__door_open();
         edict.insert(
-            "^_door_open",
-            format!("{:?}", ctx.ebih__vertical_interchange__ctx__door_open()),
+            "^ebih__vertical_interchange__ctx__door_open",
+            format!("{:?}", r),
         );
-        (h, vec!["^_door_open"])
+        (r, vec!["^ebih__vertical_interchange__ctx__door_open"])
     }
 }
 pub fn explain_ebih__vertical_interchange__door__ex__door_west_1__req(
@@ -4605,12 +4471,12 @@ pub fn explain_ebih__vertical_interchange__door__ex__door_west_1__req(
 ) -> (bool, Vec<&'static str>) {
     // ^_door_open
     {
-        let h = ctx.ebih__vertical_interchange__ctx__door_open();
+        let r = ctx.ebih__vertical_interchange__ctx__door_open();
         edict.insert(
-            "^_door_open",
-            format!("{:?}", ctx.ebih__vertical_interchange__ctx__door_open()),
+            "^ebih__vertical_interchange__ctx__door_open",
+            format!("{:?}", r),
         );
-        (h, vec!["^_door_open"])
+        (r, vec!["^ebih__vertical_interchange__ctx__door_open"])
     }
 }
 pub fn explain_ebih__vertical_interchange__door_east__ex__door_1__req(
@@ -4620,12 +4486,12 @@ pub fn explain_ebih__vertical_interchange__door_east__ex__door_1__req(
 ) -> (bool, Vec<&'static str>) {
     // ^_door_open
     {
-        let h = ctx.ebih__vertical_interchange__ctx__door_open();
+        let r = ctx.ebih__vertical_interchange__ctx__door_open();
         edict.insert(
-            "^_door_open",
-            format!("{:?}", ctx.ebih__vertical_interchange__ctx__door_open()),
+            "^ebih__vertical_interchange__ctx__door_open",
+            format!("{:?}", r),
         );
-        (h, vec!["^_door_open"])
+        (r, vec!["^ebih__vertical_interchange__ctx__door_open"])
     }
 }
 pub fn explain_ebih__vertical_interchange__door_west__ex__door_1__req(
@@ -4635,12 +4501,12 @@ pub fn explain_ebih__vertical_interchange__door_west__ex__door_1__req(
 ) -> (bool, Vec<&'static str>) {
     // ^_door_open
     {
-        let h = ctx.ebih__vertical_interchange__ctx__door_open();
+        let r = ctx.ebih__vertical_interchange__ctx__door_open();
         edict.insert(
-            "^_door_open",
-            format!("{:?}", ctx.ebih__vertical_interchange__ctx__door_open()),
+            "^ebih__vertical_interchange__ctx__door_open",
+            format!("{:?}", r),
         );
-        (h, vec!["^_door_open"])
+        (r, vec!["^ebih__vertical_interchange__ctx__door_open"])
     }
 }
 pub fn explain_ebih__vertical_interchange__west_13__open_door__req(
@@ -4661,14 +4527,12 @@ pub fn explain_ebih__vertical_interchange__west_13__open_door__req(
         } else {
             let mut right = {
                 let val = {
+                    let r = ctx.ebih__vertical_interchange__ctx__door_open();
                     edict.insert(
-                        "^_door_open",
-                        format!("{:?}", ctx.ebih__vertical_interchange__ctx__door_open()),
+                        "^ebih__vertical_interchange__ctx__door_open",
+                        format!("{:?}", r),
                     );
-                    (
-                        ctx.ebih__vertical_interchange__ctx__door_open(),
-                        vec!["^_door_open"],
-                    )
+                    (r, vec!["^ebih__vertical_interchange__ctx__door_open"])
                 };
                 (!val.0, val.1)
             };
@@ -4684,12 +4548,9 @@ pub fn explain_ebih__waterfall__west_door__ex__west_door_left_1__req(
 ) -> (bool, Vec<&'static str>) {
     // ^_west_door_open
     {
-        let h = ctx.ebih__waterfall__ctx__west_door_open();
-        edict.insert(
-            "^_west_door_open",
-            format!("{:?}", ctx.ebih__waterfall__ctx__west_door_open()),
-        );
-        (h, vec!["^_west_door_open"])
+        let r = ctx.ebih__waterfall__ctx__west_door_open();
+        edict.insert("^ebih__waterfall__ctx__west_door_open", format!("{:?}", r));
+        (r, vec!["^ebih__waterfall__ctx__west_door_open"])
     }
 }
 pub fn explain_ebih__waterfall__west_door__ex__west_door_right_1__req(
@@ -4699,12 +4560,9 @@ pub fn explain_ebih__waterfall__west_door__ex__west_door_right_1__req(
 ) -> (bool, Vec<&'static str>) {
     // ^_west_door_open
     {
-        let h = ctx.ebih__waterfall__ctx__west_door_open();
-        edict.insert(
-            "^_west_door_open",
-            format!("{:?}", ctx.ebih__waterfall__ctx__west_door_open()),
-        );
-        (h, vec!["^_west_door_open"])
+        let r = ctx.ebih__waterfall__ctx__west_door_open();
+        edict.insert("^ebih__waterfall__ctx__west_door_open", format!("{:?}", r));
+        (r, vec!["^ebih__waterfall__ctx__west_door_open"])
     }
 }
 pub fn explain_ebih__waterfall__west_door_left__ex__west_door_1__req(
@@ -4714,12 +4572,9 @@ pub fn explain_ebih__waterfall__west_door_left__ex__west_door_1__req(
 ) -> (bool, Vec<&'static str>) {
     // ^_west_door_open
     {
-        let h = ctx.ebih__waterfall__ctx__west_door_open();
-        edict.insert(
-            "^_west_door_open",
-            format!("{:?}", ctx.ebih__waterfall__ctx__west_door_open()),
-        );
-        (h, vec!["^_west_door_open"])
+        let r = ctx.ebih__waterfall__ctx__west_door_open();
+        edict.insert("^ebih__waterfall__ctx__west_door_open", format!("{:?}", r));
+        (r, vec!["^ebih__waterfall__ctx__west_door_open"])
     }
 }
 pub fn explain_ebih__waterfall__west_door_right__ex__west_door_1__req(
@@ -4729,12 +4584,9 @@ pub fn explain_ebih__waterfall__west_door_right__ex__west_door_1__req(
 ) -> (bool, Vec<&'static str>) {
     // ^_west_door_open
     {
-        let h = ctx.ebih__waterfall__ctx__west_door_open();
-        edict.insert(
-            "^_west_door_open",
-            format!("{:?}", ctx.ebih__waterfall__ctx__west_door_open()),
-        );
-        (h, vec!["^_west_door_open"])
+        let r = ctx.ebih__waterfall__ctx__west_door_open();
+        edict.insert("^ebih__waterfall__ctx__west_door_open", format!("{:?}", r));
+        (r, vec!["^ebih__waterfall__ctx__west_door_open"])
     }
 }
 pub fn explain_ebih_alu(
@@ -5006,12 +4858,9 @@ pub fn explain_giguna__carnelian__door__ex__switch_1__req(
 ) -> (bool, Vec<&'static str>) {
     // ^_door_opened
     {
-        let h = ctx.giguna__carnelian__ctx__door_opened();
-        edict.insert(
-            "^_door_opened",
-            format!("{:?}", ctx.giguna__carnelian__ctx__door_opened()),
-        );
-        (h, vec!["^_door_opened"])
+        let r = ctx.giguna__carnelian__ctx__door_opened();
+        edict.insert("^giguna__carnelian__ctx__door_opened", format!("{:?}", r));
+        (r, vec!["^giguna__carnelian__ctx__door_opened"])
     }
 }
 pub fn explain_giguna__carnelian__door__ex__vault_1__req(
@@ -5021,12 +4870,9 @@ pub fn explain_giguna__carnelian__door__ex__vault_1__req(
 ) -> (bool, Vec<&'static str>) {
     // ^_door_opened
     {
-        let h = ctx.giguna__carnelian__ctx__door_opened();
-        edict.insert(
-            "^_door_opened",
-            format!("{:?}", ctx.giguna__carnelian__ctx__door_opened()),
-        );
-        (h, vec!["^_door_opened"])
+        let r = ctx.giguna__carnelian__ctx__door_opened();
+        edict.insert("^giguna__carnelian__ctx__door_opened", format!("{:?}", r));
+        (r, vec!["^giguna__carnelian__ctx__door_opened"])
     }
 }
 pub fn explain_giguna__carnelian__lower_susar__caught__req(
@@ -5037,14 +4883,9 @@ pub fn explain_giguna__carnelian__lower_susar__caught__req(
     // not ^_lower_susar
     {
         let val = {
-            edict.insert(
-                "^_lower_susar",
-                format!("{:?}", ctx.giguna__carnelian__ctx__lower_susar()),
-            );
-            (
-                ctx.giguna__carnelian__ctx__lower_susar(),
-                vec!["^_lower_susar"],
-            )
+            let r = ctx.giguna__carnelian__ctx__lower_susar();
+            edict.insert("^giguna__carnelian__ctx__lower_susar", format!("{:?}", r));
+            (r, vec!["^giguna__carnelian__ctx__lower_susar"])
         };
         (!val.0, val.1)
     }
@@ -5056,12 +4897,9 @@ pub fn explain_giguna__carnelian__lower_susar__ex__rock_1__req(
 ) -> (bool, Vec<&'static str>) {
     // ^_lower_susar
     {
-        let h = ctx.giguna__carnelian__ctx__lower_susar();
-        edict.insert(
-            "^_lower_susar",
-            format!("{:?}", ctx.giguna__carnelian__ctx__lower_susar()),
-        );
-        (h, vec!["^_lower_susar"])
+        let r = ctx.giguna__carnelian__ctx__lower_susar();
+        edict.insert("^giguna__carnelian__ctx__lower_susar", format!("{:?}", r));
+        (r, vec!["^giguna__carnelian__ctx__lower_susar"])
     }
 }
 pub fn explain_giguna__carnelian__lower_susar__ex__west_ledge_1__req(
@@ -5072,12 +4910,9 @@ pub fn explain_giguna__carnelian__lower_susar__ex__west_ledge_1__req(
     // ^_lower_susar and $grab
     {
         let mut left = {
-            let h = ctx.giguna__carnelian__ctx__lower_susar();
-            edict.insert(
-                "^_lower_susar",
-                format!("{:?}", ctx.giguna__carnelian__ctx__lower_susar()),
-            );
-            (h, vec!["^_lower_susar"])
+            let r = ctx.giguna__carnelian__ctx__lower_susar();
+            edict.insert("^giguna__carnelian__ctx__lower_susar", format!("{:?}", r));
+            (r, vec!["^giguna__carnelian__ctx__lower_susar"])
         };
         if !left.0 {
             left
@@ -5101,12 +4936,9 @@ pub fn explain_giguna__carnelian__lower_susar__ex__west_ledge_2__req(
     // ^_lower_susar and $hook
     {
         let mut left = {
-            let h = ctx.giguna__carnelian__ctx__lower_susar();
-            edict.insert(
-                "^_lower_susar",
-                format!("{:?}", ctx.giguna__carnelian__ctx__lower_susar()),
-            );
-            (h, vec!["^_lower_susar"])
+            let r = ctx.giguna__carnelian__ctx__lower_susar();
+            edict.insert("^giguna__carnelian__ctx__lower_susar", format!("{:?}", r));
+            (r, vec!["^giguna__carnelian__ctx__lower_susar"])
         };
         if !left.0 {
             left
@@ -5131,14 +4963,9 @@ pub fn explain_giguna__carnelian__lower_susar__hack__req(
     {
         let mut left = {
             let val = {
-                edict.insert(
-                    "^_lower_susar",
-                    format!("{:?}", ctx.giguna__carnelian__ctx__lower_susar()),
-                );
-                (
-                    ctx.giguna__carnelian__ctx__lower_susar(),
-                    vec!["^_lower_susar"],
-                )
+                let r = ctx.giguna__carnelian__ctx__lower_susar();
+                edict.insert("^giguna__carnelian__ctx__lower_susar", format!("{:?}", r));
+                (r, vec!["^giguna__carnelian__ctx__lower_susar"])
             };
             (!val.0, val.1)
         };
@@ -5163,12 +4990,9 @@ pub fn explain_giguna__carnelian__switch__ex__door_1__req(
 ) -> (bool, Vec<&'static str>) {
     // ^_door_opened
     {
-        let h = ctx.giguna__carnelian__ctx__door_opened();
-        edict.insert(
-            "^_door_opened",
-            format!("{:?}", ctx.giguna__carnelian__ctx__door_opened()),
-        );
-        (h, vec!["^_door_opened"])
+        let r = ctx.giguna__carnelian__ctx__door_opened();
+        edict.insert("^giguna__carnelian__ctx__door_opened", format!("{:?}", r));
+        (r, vec!["^giguna__carnelian__ctx__door_opened"])
     }
 }
 pub fn explain_giguna__carnelian__switch__open_door__req(
@@ -5189,14 +5013,9 @@ pub fn explain_giguna__carnelian__switch__open_door__req(
         } else {
             let mut right = {
                 let val = {
-                    edict.insert(
-                        "^_door_opened",
-                        format!("{:?}", ctx.giguna__carnelian__ctx__door_opened()),
-                    );
-                    (
-                        ctx.giguna__carnelian__ctx__door_opened(),
-                        vec!["^_door_opened"],
-                    )
+                    let r = ctx.giguna__carnelian__ctx__door_opened();
+                    edict.insert("^giguna__carnelian__ctx__door_opened", format!("{:?}", r));
+                    (r, vec!["^giguna__carnelian__ctx__door_opened"])
                 };
                 (!val.0, val.1)
             };
@@ -5213,14 +5032,9 @@ pub fn explain_giguna__carnelian__upper_susar__caught__req(
     // not ^_upper_susar
     {
         let val = {
-            edict.insert(
-                "^_upper_susar",
-                format!("{:?}", ctx.giguna__carnelian__ctx__upper_susar()),
-            );
-            (
-                ctx.giguna__carnelian__ctx__upper_susar(),
-                vec!["^_upper_susar"],
-            )
+            let r = ctx.giguna__carnelian__ctx__upper_susar();
+            edict.insert("^giguna__carnelian__ctx__upper_susar", format!("{:?}", r));
+            (r, vec!["^giguna__carnelian__ctx__upper_susar"])
         };
         (!val.0, val.1)
     }
@@ -5232,12 +5046,9 @@ pub fn explain_giguna__carnelian__upper_susar__ex__east_cliff_1__req(
 ) -> (bool, Vec<&'static str>) {
     // ^_upper_susar
     {
-        let h = ctx.giguna__carnelian__ctx__upper_susar();
-        edict.insert(
-            "^_upper_susar",
-            format!("{:?}", ctx.giguna__carnelian__ctx__upper_susar()),
-        );
-        (h, vec!["^_upper_susar"])
+        let r = ctx.giguna__carnelian__ctx__upper_susar();
+        edict.insert("^giguna__carnelian__ctx__upper_susar", format!("{:?}", r));
+        (r, vec!["^giguna__carnelian__ctx__upper_susar"])
     }
 }
 pub fn explain_giguna__carnelian__upper_susar__ex__middle_platforms_1__req(
@@ -5247,12 +5058,9 @@ pub fn explain_giguna__carnelian__upper_susar__ex__middle_platforms_1__req(
 ) -> (bool, Vec<&'static str>) {
     // ^_upper_susar
     {
-        let h = ctx.giguna__carnelian__ctx__upper_susar();
-        edict.insert(
-            "^_upper_susar",
-            format!("{:?}", ctx.giguna__carnelian__ctx__upper_susar()),
-        );
-        (h, vec!["^_upper_susar"])
+        let r = ctx.giguna__carnelian__ctx__upper_susar();
+        edict.insert("^giguna__carnelian__ctx__upper_susar", format!("{:?}", r));
+        (r, vec!["^giguna__carnelian__ctx__upper_susar"])
     }
 }
 pub fn explain_giguna__carnelian__upper_susar__ex__upper_path_1__req(
@@ -5262,12 +5070,9 @@ pub fn explain_giguna__carnelian__upper_susar__ex__upper_path_1__req(
 ) -> (bool, Vec<&'static str>) {
     // ^_upper_susar
     {
-        let h = ctx.giguna__carnelian__ctx__upper_susar();
-        edict.insert(
-            "^_upper_susar",
-            format!("{:?}", ctx.giguna__carnelian__ctx__upper_susar()),
-        );
-        (h, vec!["^_upper_susar"])
+        let r = ctx.giguna__carnelian__ctx__upper_susar();
+        edict.insert("^giguna__carnelian__ctx__upper_susar", format!("{:?}", r));
+        (r, vec!["^giguna__carnelian__ctx__upper_susar"])
     }
 }
 pub fn explain_giguna__carnelian__upper_susar__hack__req(
@@ -5279,14 +5084,9 @@ pub fn explain_giguna__carnelian__upper_susar__hack__req(
     {
         let mut left = {
             let val = {
-                edict.insert(
-                    "^_upper_susar",
-                    format!("{:?}", ctx.giguna__carnelian__ctx__upper_susar()),
-                );
-                (
-                    ctx.giguna__carnelian__ctx__upper_susar(),
-                    vec!["^_upper_susar"],
-                )
+                let r = ctx.giguna__carnelian__ctx__upper_susar();
+                edict.insert("^giguna__carnelian__ctx__upper_susar", format!("{:?}", r));
+                (r, vec!["^giguna__carnelian__ctx__upper_susar"])
             };
             (!val.0, val.1)
         };
@@ -5311,12 +5111,9 @@ pub fn explain_giguna__carnelian__vault__ex__door_1__req(
 ) -> (bool, Vec<&'static str>) {
     // ^_door_opened
     {
-        let h = ctx.giguna__carnelian__ctx__door_opened();
-        edict.insert(
-            "^_door_opened",
-            format!("{:?}", ctx.giguna__carnelian__ctx__door_opened()),
-        );
-        (h, vec!["^_door_opened"])
+        let r = ctx.giguna__carnelian__ctx__door_opened();
+        edict.insert("^giguna__carnelian__ctx__door_opened", format!("{:?}", r));
+        (r, vec!["^giguna__carnelian__ctx__door_opened"])
     }
 }
 pub fn explain_giguna__clouds__platform_start__hack_and_get_off_early__req(
@@ -5328,14 +5125,12 @@ pub fn explain_giguna__clouds__platform_start__hack_and_get_off_early__req(
     {
         let mut left = {
             let val = {
+                let r = ctx.giguna__clouds__ctx__platform_and_portal();
                 edict.insert(
-                    "^_platform_and_portal",
-                    format!("{:?}", ctx.giguna__clouds__ctx__platform_and_portal()),
+                    "^giguna__clouds__ctx__platform_and_portal",
+                    format!("{:?}", r),
                 );
-                (
-                    ctx.giguna__clouds__ctx__platform_and_portal(),
-                    vec!["^_platform_and_portal"],
-                )
+                (r, vec!["^giguna__clouds__ctx__platform_and_portal"])
             };
             (!val.0, val.1)
         };
@@ -5365,14 +5160,12 @@ pub fn explain_giguna__clouds__platform_start__hack_and_ride_to_portal__req(
                 let mut left = {
                     let mut left = {
                         let val = {
+                            let r = ctx.giguna__clouds__ctx__platform_and_portal();
                             edict.insert(
-                                "^_platform_and_portal",
-                                format!("{:?}", ctx.giguna__clouds__ctx__platform_and_portal()),
+                                "^giguna__clouds__ctx__platform_and_portal",
+                                format!("{:?}", r),
                             );
-                            (
-                                ctx.giguna__clouds__ctx__platform_and_portal(),
-                                vec!["^_platform_and_portal"],
-                            )
+                            (r, vec!["^giguna__clouds__ctx__platform_and_portal"])
                         };
                         (!val.0, val.1)
                     };
@@ -5439,14 +5232,12 @@ pub fn explain_giguna__clouds__platform_start__hack_deploy_ride_to_portal__req(
                 let mut left = {
                     let mut left = {
                         let val = {
+                            let r = ctx.giguna__clouds__ctx__platform_and_portal();
                             edict.insert(
-                                "^_platform_and_portal",
-                                format!("{:?}", ctx.giguna__clouds__ctx__platform_and_portal()),
+                                "^giguna__clouds__ctx__platform_and_portal",
+                                format!("{:?}", r),
                             );
-                            (
-                                ctx.giguna__clouds__ctx__platform_and_portal(),
-                                vec!["^_platform_and_portal"],
-                            )
+                            (r, vec!["^giguna__clouds__ctx__platform_and_portal"])
                         };
                         (!val.0, val.1)
                     };
@@ -5510,12 +5301,12 @@ pub fn explain_giguna__clouds__platform_stop__ex__flipside_1__req(
     // ^_platform_and_portal and ^mode == 'drone'
     {
         let mut left = {
-            let h = ctx.giguna__clouds__ctx__platform_and_portal();
+            let r = ctx.giguna__clouds__ctx__platform_and_portal();
             edict.insert(
-                "^_platform_and_portal",
-                format!("{:?}", ctx.giguna__clouds__ctx__platform_and_portal()),
+                "^giguna__clouds__ctx__platform_and_portal",
+                format!("{:?}", r),
             );
-            (h, vec!["^_platform_and_portal"])
+            (r, vec!["^giguna__clouds__ctx__platform_and_portal"])
         };
         if !left.0 {
             left
@@ -5523,8 +5314,9 @@ pub fn explain_giguna__clouds__platform_stop__ex__flipside_1__req(
             let mut right = {
                 let mut refs = vec!["^mode"];
                 let mut left = {
-                    edict.insert("^mode", format!("{:?}", ctx.mode()));
-                    (ctx.mode(), vec!["^mode"])
+                    let r = ctx.mode();
+                    edict.insert("^mode", format!("{:?}", r));
+                    (r, vec!["^mode"])
                 };
                 let right = enums::Mode::Drone;
                 edict.insert("^mode", format!("{}", left.0));
@@ -5547,8 +5339,9 @@ pub fn explain_giguna__east_caverns__arc_ledge__ex__hidden_passage_west_1__req(
             let mut left = {
                 let mut refs = vec!["^mode"];
                 let mut left = {
-                    edict.insert("^mode", format!("{:?}", ctx.mode()));
-                    (ctx.mode(), vec!["^mode"])
+                    let r = ctx.mode();
+                    edict.insert("^mode", format!("{:?}", r));
+                    (r, vec!["^mode"])
                 };
                 let right = enums::Mode::Drone;
                 edict.insert("^mode", format!("{}", left.0));
@@ -5571,12 +5364,12 @@ pub fn explain_giguna__east_caverns__arc_ledge__ex__hidden_passage_west_1__req(
             left
         } else {
             let mut right = {
-                let h = ctx.giguna__east_caverns__ctx__combo_entered();
+                let r = ctx.giguna__east_caverns__ctx__combo_entered();
                 edict.insert(
-                    "^_combo_entered",
-                    format!("{:?}", ctx.giguna__east_caverns__ctx__combo_entered()),
+                    "^giguna__east_caverns__ctx__combo_entered",
+                    format!("{:?}", r),
                 );
-                (h, vec!["^_combo_entered"])
+                (r, vec!["^giguna__east_caverns__ctx__combo_entered"])
             };
             left.1.append(&mut right.1);
             (right.0, left.1)
@@ -5593,8 +5386,9 @@ pub fn explain_giguna__east_caverns__arc_passage__ex__hidden_passage_west_1__req
         let mut left = {
             let mut refs = vec!["^mode"];
             let mut left = {
-                edict.insert("^mode", format!("{:?}", ctx.mode()));
-                (ctx.mode(), vec!["^mode"])
+                let r = ctx.mode();
+                edict.insert("^mode", format!("{:?}", r));
+                (r, vec!["^mode"])
             };
             let right = enums::Mode::Drone;
             edict.insert("^mode", format!("{}", left.0));
@@ -5605,12 +5399,12 @@ pub fn explain_giguna__east_caverns__arc_passage__ex__hidden_passage_west_1__req
             left
         } else {
             let mut right = {
-                let h = ctx.giguna__east_caverns__ctx__combo_entered();
+                let r = ctx.giguna__east_caverns__ctx__combo_entered();
                 edict.insert(
-                    "^_combo_entered",
-                    format!("{:?}", ctx.giguna__east_caverns__ctx__combo_entered()),
+                    "^giguna__east_caverns__ctx__combo_entered",
+                    format!("{:?}", r),
                 );
-                (h, vec!["^_combo_entered"])
+                (r, vec!["^giguna__east_caverns__ctx__combo_entered"])
             };
             left.1.append(&mut right.1);
             (right.0, left.1)
@@ -5634,12 +5428,12 @@ pub fn explain_giguna__east_caverns__arc_passage__ex__hidden_passage_west_2__req
             left
         } else {
             let mut right = {
-                let h = ctx.giguna__east_caverns__ctx__combo_entered();
+                let r = ctx.giguna__east_caverns__ctx__combo_entered();
                 edict.insert(
-                    "^_combo_entered",
-                    format!("{:?}", ctx.giguna__east_caverns__ctx__combo_entered()),
+                    "^giguna__east_caverns__ctx__combo_entered",
+                    format!("{:?}", r),
                 );
-                (h, vec!["^_combo_entered"])
+                (r, vec!["^giguna__east_caverns__ctx__combo_entered"])
             };
             left.1.append(&mut right.1);
             (right.0, left.1)
@@ -5654,14 +5448,12 @@ pub fn explain_giguna__east_caverns__lower_susar__caught__req(
     // not ^_lower_susar
     {
         let val = {
+            let r = ctx.giguna__east_caverns__ctx__lower_susar();
             edict.insert(
-                "^_lower_susar",
-                format!("{:?}", ctx.giguna__east_caverns__ctx__lower_susar()),
+                "^giguna__east_caverns__ctx__lower_susar",
+                format!("{:?}", r),
             );
-            (
-                ctx.giguna__east_caverns__ctx__lower_susar(),
-                vec!["^_lower_susar"],
-            )
+            (r, vec!["^giguna__east_caverns__ctx__lower_susar"])
         };
         (!val.0, val.1)
     }
@@ -5673,12 +5465,12 @@ pub fn explain_giguna__east_caverns__lower_susar__ex__east_grass_1__req(
 ) -> (bool, Vec<&'static str>) {
     // ^_lower_susar
     {
-        let h = ctx.giguna__east_caverns__ctx__lower_susar();
+        let r = ctx.giguna__east_caverns__ctx__lower_susar();
         edict.insert(
-            "^_lower_susar",
-            format!("{:?}", ctx.giguna__east_caverns__ctx__lower_susar()),
+            "^giguna__east_caverns__ctx__lower_susar",
+            format!("{:?}", r),
         );
-        (h, vec!["^_lower_susar"])
+        (r, vec!["^giguna__east_caverns__ctx__lower_susar"])
     }
 }
 pub fn explain_giguna__east_caverns__lower_susar__ex__under_lower_ledge_1__req(
@@ -5688,12 +5480,12 @@ pub fn explain_giguna__east_caverns__lower_susar__ex__under_lower_ledge_1__req(
 ) -> (bool, Vec<&'static str>) {
     // ^_lower_susar
     {
-        let h = ctx.giguna__east_caverns__ctx__lower_susar();
+        let r = ctx.giguna__east_caverns__ctx__lower_susar();
         edict.insert(
-            "^_lower_susar",
-            format!("{:?}", ctx.giguna__east_caverns__ctx__lower_susar()),
+            "^giguna__east_caverns__ctx__lower_susar",
+            format!("{:?}", r),
         );
-        (h, vec!["^_lower_susar"])
+        (r, vec!["^giguna__east_caverns__ctx__lower_susar"])
     }
 }
 pub fn explain_giguna__east_caverns__lower_susar__hack__req(
@@ -5705,14 +5497,12 @@ pub fn explain_giguna__east_caverns__lower_susar__hack__req(
     {
         let mut left = {
             let val = {
+                let r = ctx.giguna__east_caverns__ctx__lower_susar();
                 edict.insert(
-                    "^_lower_susar",
-                    format!("{:?}", ctx.giguna__east_caverns__ctx__lower_susar()),
+                    "^giguna__east_caverns__ctx__lower_susar",
+                    format!("{:?}", r),
                 );
-                (
-                    ctx.giguna__east_caverns__ctx__lower_susar(),
-                    vec!["^_lower_susar"],
-                )
+                (r, vec!["^giguna__east_caverns__ctx__lower_susar"])
             };
             (!val.0, val.1)
         };
@@ -5738,14 +5528,9 @@ pub fn explain_giguna__east_caverns__mid_susar__caught__req(
     // not ^_mid_susar
     {
         let val = {
-            edict.insert(
-                "^_mid_susar",
-                format!("{:?}", ctx.giguna__east_caverns__ctx__mid_susar()),
-            );
-            (
-                ctx.giguna__east_caverns__ctx__mid_susar(),
-                vec!["^_mid_susar"],
-            )
+            let r = ctx.giguna__east_caverns__ctx__mid_susar();
+            edict.insert("^giguna__east_caverns__ctx__mid_susar", format!("{:?}", r));
+            (r, vec!["^giguna__east_caverns__ctx__mid_susar"])
         };
         (!val.0, val.1)
     }
@@ -5767,12 +5552,9 @@ pub fn explain_giguna__east_caverns__mid_susar__ex__middle_ledge_1__req(
             left
         } else {
             let mut right = {
-                let h = ctx.giguna__east_caverns__ctx__mid_susar();
-                edict.insert(
-                    "^_mid_susar",
-                    format!("{:?}", ctx.giguna__east_caverns__ctx__mid_susar()),
-                );
-                (h, vec!["^_mid_susar"])
+                let r = ctx.giguna__east_caverns__ctx__mid_susar();
+                edict.insert("^giguna__east_caverns__ctx__mid_susar", format!("{:?}", r));
+                (r, vec!["^giguna__east_caverns__ctx__mid_susar"])
             };
             left.1.append(&mut right.1);
             (right.0, left.1)
@@ -5796,12 +5578,9 @@ pub fn explain_giguna__east_caverns__mid_susar__ex__middle_ledge_2__req(
             left
         } else {
             let mut right = {
-                let h = ctx.giguna__east_caverns__ctx__mid_susar();
-                edict.insert(
-                    "^_mid_susar",
-                    format!("{:?}", ctx.giguna__east_caverns__ctx__mid_susar()),
-                );
-                (h, vec!["^_mid_susar"])
+                let r = ctx.giguna__east_caverns__ctx__mid_susar();
+                edict.insert("^giguna__east_caverns__ctx__mid_susar", format!("{:?}", r));
+                (r, vec!["^giguna__east_caverns__ctx__mid_susar"])
             };
             left.1.append(&mut right.1);
             (right.0, left.1)
@@ -5815,12 +5594,9 @@ pub fn explain_giguna__east_caverns__mid_susar__ex__middle_rock_1__req(
 ) -> (bool, Vec<&'static str>) {
     // ^_mid_susar
     {
-        let h = ctx.giguna__east_caverns__ctx__mid_susar();
-        edict.insert(
-            "^_mid_susar",
-            format!("{:?}", ctx.giguna__east_caverns__ctx__mid_susar()),
-        );
-        (h, vec!["^_mid_susar"])
+        let r = ctx.giguna__east_caverns__ctx__mid_susar();
+        edict.insert("^giguna__east_caverns__ctx__mid_susar", format!("{:?}", r));
+        (r, vec!["^giguna__east_caverns__ctx__mid_susar"])
     }
 }
 pub fn explain_giguna__east_caverns__mid_susar__hack__req(
@@ -5832,14 +5608,9 @@ pub fn explain_giguna__east_caverns__mid_susar__hack__req(
     {
         let mut left = {
             let val = {
-                edict.insert(
-                    "^_mid_susar",
-                    format!("{:?}", ctx.giguna__east_caverns__ctx__mid_susar()),
-                );
-                (
-                    ctx.giguna__east_caverns__ctx__mid_susar(),
-                    vec!["^_mid_susar"],
-                )
+                let r = ctx.giguna__east_caverns__ctx__mid_susar();
+                edict.insert("^giguna__east_caverns__ctx__mid_susar", format!("{:?}", r));
+                (r, vec!["^giguna__east_caverns__ctx__mid_susar"])
             };
             (!val.0, val.1)
         };
@@ -5867,8 +5638,9 @@ pub fn explain_giguna__east_caverns__middle_rock__ex__hidden_passage_east_1__req
         let mut left = {
             let mut refs = vec!["^mode"];
             let mut left = {
-                edict.insert("^mode", format!("{:?}", ctx.mode()));
-                (ctx.mode(), vec!["^mode"])
+                let r = ctx.mode();
+                edict.insert("^mode", format!("{:?}", r));
+                (r, vec!["^mode"])
             };
             let right = enums::Mode::Drone;
             edict.insert("^mode", format!("{}", left.0));
@@ -5879,12 +5651,12 @@ pub fn explain_giguna__east_caverns__middle_rock__ex__hidden_passage_east_1__req
             left
         } else {
             let mut right = {
-                let h = ctx.giguna__east_caverns__ctx__combo_entered();
+                let r = ctx.giguna__east_caverns__ctx__combo_entered();
                 edict.insert(
-                    "^_combo_entered",
-                    format!("{:?}", ctx.giguna__east_caverns__ctx__combo_entered()),
+                    "^giguna__east_caverns__ctx__combo_entered",
+                    format!("{:?}", r),
                 );
-                (h, vec!["^_combo_entered"])
+                (r, vec!["^giguna__east_caverns__ctx__combo_entered"])
             };
             left.1.append(&mut right.1);
             (right.0, left.1)
@@ -5922,12 +5694,12 @@ pub fn explain_giguna__east_caverns__midwest_ledge__ex__hidden_passage_west_1__r
             left
         } else {
             let mut right = {
-                let h = ctx.giguna__east_caverns__ctx__combo_entered();
+                let r = ctx.giguna__east_caverns__ctx__combo_entered();
                 edict.insert(
-                    "^_combo_entered",
-                    format!("{:?}", ctx.giguna__east_caverns__ctx__combo_entered()),
+                    "^giguna__east_caverns__ctx__combo_entered",
+                    format!("{:?}", r),
                 );
-                (h, vec!["^_combo_entered"])
+                (r, vec!["^giguna__east_caverns__ctx__combo_entered"])
             };
             left.1.append(&mut right.1);
             (right.0, left.1)
@@ -5945,8 +5717,9 @@ pub fn explain_giguna__east_caverns__midwest_ledge__ex__hidden_passage_west_2__r
             let mut left = {
                 let mut refs = vec!["^mode"];
                 let mut left = {
-                    edict.insert("^mode", format!("{:?}", ctx.mode()));
-                    (ctx.mode(), vec!["^mode"])
+                    let r = ctx.mode();
+                    edict.insert("^mode", format!("{:?}", r));
+                    (r, vec!["^mode"])
                 };
                 let right = enums::Mode::Drone;
                 edict.insert("^mode", format!("{}", left.0));
@@ -5969,12 +5742,12 @@ pub fn explain_giguna__east_caverns__midwest_ledge__ex__hidden_passage_west_2__r
             left
         } else {
             let mut right = {
-                let h = ctx.giguna__east_caverns__ctx__combo_entered();
+                let r = ctx.giguna__east_caverns__ctx__combo_entered();
                 edict.insert(
-                    "^_combo_entered",
-                    format!("{:?}", ctx.giguna__east_caverns__ctx__combo_entered()),
+                    "^giguna__east_caverns__ctx__combo_entered",
+                    format!("{:?}", r),
                 );
-                (h, vec!["^_combo_entered"])
+                (r, vec!["^giguna__east_caverns__ctx__combo_entered"])
             };
             left.1.append(&mut right.1);
             (right.0, left.1)
@@ -6012,12 +5785,12 @@ pub fn explain_giguna__east_caverns__statues_ledge__ex__hidden_passage_west_1__r
             left
         } else {
             let mut right = {
-                let h = ctx.giguna__east_caverns__ctx__combo_entered();
+                let r = ctx.giguna__east_caverns__ctx__combo_entered();
                 edict.insert(
-                    "^_combo_entered",
-                    format!("{:?}", ctx.giguna__east_caverns__ctx__combo_entered()),
+                    "^giguna__east_caverns__ctx__combo_entered",
+                    format!("{:?}", r),
                 );
-                (h, vec!["^_combo_entered"])
+                (r, vec!["^giguna__east_caverns__ctx__combo_entered"])
             };
             left.1.append(&mut right.1);
             (right.0, left.1)
@@ -6035,8 +5808,9 @@ pub fn explain_giguna__east_caverns__statues_ledge__ex__hidden_passage_west_2__r
             let mut left = {
                 let mut refs = vec!["^mode"];
                 let mut left = {
-                    edict.insert("^mode", format!("{:?}", ctx.mode()));
-                    (ctx.mode(), vec!["^mode"])
+                    let r = ctx.mode();
+                    edict.insert("^mode", format!("{:?}", r));
+                    (r, vec!["^mode"])
                 };
                 let right = enums::Mode::Drone;
                 edict.insert("^mode", format!("{}", left.0));
@@ -6059,12 +5833,12 @@ pub fn explain_giguna__east_caverns__statues_ledge__ex__hidden_passage_west_2__r
             left
         } else {
             let mut right = {
-                let h = ctx.giguna__east_caverns__ctx__combo_entered();
+                let r = ctx.giguna__east_caverns__ctx__combo_entered();
                 edict.insert(
-                    "^_combo_entered",
-                    format!("{:?}", ctx.giguna__east_caverns__ctx__combo_entered()),
+                    "^giguna__east_caverns__ctx__combo_entered",
+                    format!("{:?}", r),
                 );
-                (h, vec!["^_combo_entered"])
+                (r, vec!["^giguna__east_caverns__ctx__combo_entered"])
             };
             left.1.append(&mut right.1);
             (right.0, left.1)
@@ -6081,14 +5855,12 @@ pub fn explain_giguna__east_caverns__statues_ledge__open_door__req(
         let mut left = {
             let mut left = {
                 let val = {
+                    let r = ctx.giguna__east_caverns__ctx__door_opened();
                     edict.insert(
-                        "^_door_opened",
-                        format!("{:?}", ctx.giguna__east_caverns__ctx__door_opened()),
+                        "^giguna__east_caverns__ctx__door_opened",
+                        format!("{:?}", r),
                     );
-                    (
-                        ctx.giguna__east_caverns__ctx__door_opened(),
-                        vec!["^_door_opened"],
-                    )
+                    (r, vec!["^giguna__east_caverns__ctx__door_opened"])
                 };
                 (!val.0, val.1)
             };
@@ -6126,12 +5898,12 @@ pub fn explain_giguna__east_caverns__switch__ex__door_1__req(
 ) -> (bool, Vec<&'static str>) {
     // ^_door_opened
     {
-        let h = ctx.giguna__east_caverns__ctx__door_opened();
+        let r = ctx.giguna__east_caverns__ctx__door_opened();
         edict.insert(
-            "^_door_opened",
-            format!("{:?}", ctx.giguna__east_caverns__ctx__door_opened()),
+            "^giguna__east_caverns__ctx__door_opened",
+            format!("{:?}", r),
         );
-        (h, vec!["^_door_opened"])
+        (r, vec!["^giguna__east_caverns__ctx__door_opened"])
     }
 }
 pub fn explain_giguna__east_caverns__switch__open_door__req(
@@ -6143,14 +5915,12 @@ pub fn explain_giguna__east_caverns__switch__open_door__req(
     {
         let mut left = {
             let val = {
+                let r = ctx.giguna__east_caverns__ctx__door_opened();
                 edict.insert(
-                    "^_door_opened",
-                    format!("{:?}", ctx.giguna__east_caverns__ctx__door_opened()),
+                    "^giguna__east_caverns__ctx__door_opened",
+                    format!("{:?}", r),
                 );
-                (
-                    ctx.giguna__east_caverns__ctx__door_opened(),
-                    vec!["^_door_opened"],
-                )
+                (r, vec!["^giguna__east_caverns__ctx__door_opened"])
             };
             (!val.0, val.1)
         };
@@ -6176,14 +5946,12 @@ pub fn explain_giguna__east_caverns__upper_susar__caught__req(
     // not ^_upper_susar
     {
         let val = {
+            let r = ctx.giguna__east_caverns__ctx__upper_susar();
             edict.insert(
-                "^_upper_susar",
-                format!("{:?}", ctx.giguna__east_caverns__ctx__upper_susar()),
+                "^giguna__east_caverns__ctx__upper_susar",
+                format!("{:?}", r),
             );
-            (
-                ctx.giguna__east_caverns__ctx__upper_susar(),
-                vec!["^_upper_susar"],
-            )
+            (r, vec!["^giguna__east_caverns__ctx__upper_susar"])
         };
         (!val.0, val.1)
     }
@@ -6195,12 +5963,12 @@ pub fn explain_giguna__east_caverns__upper_susar__ex__middle_ledge_1__req(
 ) -> (bool, Vec<&'static str>) {
     // ^_upper_susar
     {
-        let h = ctx.giguna__east_caverns__ctx__upper_susar();
+        let r = ctx.giguna__east_caverns__ctx__upper_susar();
         edict.insert(
-            "^_upper_susar",
-            format!("{:?}", ctx.giguna__east_caverns__ctx__upper_susar()),
+            "^giguna__east_caverns__ctx__upper_susar",
+            format!("{:?}", r),
         );
-        (h, vec!["^_upper_susar"])
+        (r, vec!["^giguna__east_caverns__ctx__upper_susar"])
     }
 }
 pub fn explain_giguna__east_caverns__upper_susar__ex__top_past_susar_1__req(
@@ -6210,12 +5978,12 @@ pub fn explain_giguna__east_caverns__upper_susar__ex__top_past_susar_1__req(
 ) -> (bool, Vec<&'static str>) {
     // ^_upper_susar
     {
-        let h = ctx.giguna__east_caverns__ctx__upper_susar();
+        let r = ctx.giguna__east_caverns__ctx__upper_susar();
         edict.insert(
-            "^_upper_susar",
-            format!("{:?}", ctx.giguna__east_caverns__ctx__upper_susar()),
+            "^giguna__east_caverns__ctx__upper_susar",
+            format!("{:?}", r),
         );
-        (h, vec!["^_upper_susar"])
+        (r, vec!["^giguna__east_caverns__ctx__upper_susar"])
     }
 }
 pub fn explain_giguna__east_caverns__upper_susar__ex__upper_floor_ledge_1__req(
@@ -6225,12 +5993,12 @@ pub fn explain_giguna__east_caverns__upper_susar__ex__upper_floor_ledge_1__req(
 ) -> (bool, Vec<&'static str>) {
     // ^_upper_susar
     {
-        let h = ctx.giguna__east_caverns__ctx__upper_susar();
+        let r = ctx.giguna__east_caverns__ctx__upper_susar();
         edict.insert(
-            "^_upper_susar",
-            format!("{:?}", ctx.giguna__east_caverns__ctx__upper_susar()),
+            "^giguna__east_caverns__ctx__upper_susar",
+            format!("{:?}", r),
         );
-        (h, vec!["^_upper_susar"])
+        (r, vec!["^giguna__east_caverns__ctx__upper_susar"])
     }
 }
 pub fn explain_giguna__east_caverns__upper_susar__ex__upper_platforms_right_1__req(
@@ -6240,12 +6008,12 @@ pub fn explain_giguna__east_caverns__upper_susar__ex__upper_platforms_right_1__r
 ) -> (bool, Vec<&'static str>) {
     // ^_upper_susar
     {
-        let h = ctx.giguna__east_caverns__ctx__upper_susar();
+        let r = ctx.giguna__east_caverns__ctx__upper_susar();
         edict.insert(
-            "^_upper_susar",
-            format!("{:?}", ctx.giguna__east_caverns__ctx__upper_susar()),
+            "^giguna__east_caverns__ctx__upper_susar",
+            format!("{:?}", r),
         );
-        (h, vec!["^_upper_susar"])
+        (r, vec!["^giguna__east_caverns__ctx__upper_susar"])
     }
 }
 pub fn explain_giguna__east_caverns__upper_susar_jump_from_east__caught__req(
@@ -6256,14 +6024,12 @@ pub fn explain_giguna__east_caverns__upper_susar_jump_from_east__caught__req(
     // not ^_upper_susar
     {
         let val = {
+            let r = ctx.giguna__east_caverns__ctx__upper_susar();
             edict.insert(
-                "^_upper_susar",
-                format!("{:?}", ctx.giguna__east_caverns__ctx__upper_susar()),
+                "^giguna__east_caverns__ctx__upper_susar",
+                format!("{:?}", r),
             );
-            (
-                ctx.giguna__east_caverns__ctx__upper_susar(),
-                vec!["^_upper_susar"],
-            )
+            (r, vec!["^giguna__east_caverns__ctx__upper_susar"])
         };
         (!val.0, val.1)
     }
@@ -6275,12 +6041,12 @@ pub fn explain_giguna__east_caverns__upper_susar_jump_from_east__ex__middle_ledg
 ) -> (bool, Vec<&'static str>) {
     // ^_upper_susar
     {
-        let h = ctx.giguna__east_caverns__ctx__upper_susar();
+        let r = ctx.giguna__east_caverns__ctx__upper_susar();
         edict.insert(
-            "^_upper_susar",
-            format!("{:?}", ctx.giguna__east_caverns__ctx__upper_susar()),
+            "^giguna__east_caverns__ctx__upper_susar",
+            format!("{:?}", r),
         );
-        (h, vec!["^_upper_susar"])
+        (r, vec!["^giguna__east_caverns__ctx__upper_susar"])
     }
 }
 pub fn explain_giguna__east_caverns__upper_susar_jump_from_east__ex__midwest_ledge_1__req(
@@ -6290,12 +6056,12 @@ pub fn explain_giguna__east_caverns__upper_susar_jump_from_east__ex__midwest_led
 ) -> (bool, Vec<&'static str>) {
     // ^_upper_susar
     {
-        let h = ctx.giguna__east_caverns__ctx__upper_susar();
+        let r = ctx.giguna__east_caverns__ctx__upper_susar();
         edict.insert(
-            "^_upper_susar",
-            format!("{:?}", ctx.giguna__east_caverns__ctx__upper_susar()),
+            "^giguna__east_caverns__ctx__upper_susar",
+            format!("{:?}", r),
         );
-        (h, vec!["^_upper_susar"])
+        (r, vec!["^giguna__east_caverns__ctx__upper_susar"])
     }
 }
 pub fn explain_giguna__east_caverns__upper_susar_jump_from_east__hack__req(
@@ -6307,14 +6073,12 @@ pub fn explain_giguna__east_caverns__upper_susar_jump_from_east__hack__req(
     {
         let mut left = {
             let val = {
+                let r = ctx.giguna__east_caverns__ctx__upper_susar();
                 edict.insert(
-                    "^_upper_susar",
-                    format!("{:?}", ctx.giguna__east_caverns__ctx__upper_susar()),
+                    "^giguna__east_caverns__ctx__upper_susar",
+                    format!("{:?}", r),
                 );
-                (
-                    ctx.giguna__east_caverns__ctx__upper_susar(),
-                    vec!["^_upper_susar"],
-                )
+                (r, vec!["^giguna__east_caverns__ctx__upper_susar"])
             };
             (!val.0, val.1)
         };
@@ -6339,12 +6103,12 @@ pub fn explain_giguna__east_caverns__upper_susar_mid_jump__ex__top_past_susar_1_
 ) -> (bool, Vec<&'static str>) {
     // ^_upper_susar
     {
-        let h = ctx.giguna__east_caverns__ctx__upper_susar();
+        let r = ctx.giguna__east_caverns__ctx__upper_susar();
         edict.insert(
-            "^_upper_susar",
-            format!("{:?}", ctx.giguna__east_caverns__ctx__upper_susar()),
+            "^giguna__east_caverns__ctx__upper_susar",
+            format!("{:?}", r),
         );
-        (h, vec!["^_upper_susar"])
+        (r, vec!["^giguna__east_caverns__ctx__upper_susar"])
     }
 }
 pub fn explain_giguna__east_caverns__upper_susar_mid_jump__hack__req(
@@ -6356,14 +6120,12 @@ pub fn explain_giguna__east_caverns__upper_susar_mid_jump__hack__req(
     {
         let mut left = {
             let val = {
+                let r = ctx.giguna__east_caverns__ctx__upper_susar();
                 edict.insert(
-                    "^_upper_susar",
-                    format!("{:?}", ctx.giguna__east_caverns__ctx__upper_susar()),
+                    "^giguna__east_caverns__ctx__upper_susar",
+                    format!("{:?}", r),
                 );
-                (
-                    ctx.giguna__east_caverns__ctx__upper_susar(),
-                    vec!["^_upper_susar"],
-                )
+                (r, vec!["^giguna__east_caverns__ctx__upper_susar"])
             };
             (!val.0, val.1)
         };
@@ -6389,14 +6151,12 @@ pub fn explain_giguna__east_caverns__west_14__enter_combo__req(
     // not ^_combo_entered
     {
         let val = {
+            let r = ctx.giguna__east_caverns__ctx__combo_entered();
             edict.insert(
-                "^_combo_entered",
-                format!("{:?}", ctx.giguna__east_caverns__ctx__combo_entered()),
+                "^giguna__east_caverns__ctx__combo_entered",
+                format!("{:?}", r),
             );
-            (
-                ctx.giguna__east_caverns__ctx__combo_entered(),
-                vec!["^_combo_entered"],
-            )
+            (r, vec!["^giguna__east_caverns__ctx__combo_entered"])
         };
         (!val.0, val.1)
     }
@@ -6408,12 +6168,12 @@ pub fn explain_giguna__east_caverns__west_16__ex__door_1__req(
 ) -> (bool, Vec<&'static str>) {
     // ^_door_opened
     {
-        let h = ctx.giguna__east_caverns__ctx__door_opened();
+        let r = ctx.giguna__east_caverns__ctx__door_opened();
         edict.insert(
-            "^_door_opened",
-            format!("{:?}", ctx.giguna__east_caverns__ctx__door_opened()),
+            "^giguna__east_caverns__ctx__door_opened",
+            format!("{:?}", r),
         );
-        (h, vec!["^_door_opened"])
+        (r, vec!["^giguna__east_caverns__ctx__door_opened"])
     }
 }
 pub fn explain_giguna__east_caverns__west_16__open_door__req(
@@ -6426,14 +6186,12 @@ pub fn explain_giguna__east_caverns__west_16__open_door__req(
         let mut left = {
             let mut left = {
                 let val = {
+                    let r = ctx.giguna__east_caverns__ctx__door_opened();
                     edict.insert(
-                        "^_door_opened",
-                        format!("{:?}", ctx.giguna__east_caverns__ctx__door_opened()),
+                        "^giguna__east_caverns__ctx__door_opened",
+                        format!("{:?}", r),
                     );
-                    (
-                        ctx.giguna__east_caverns__ctx__door_opened(),
-                        vec!["^_door_opened"],
-                    )
+                    (r, vec!["^giguna__east_caverns__ctx__door_opened"])
                 };
                 (!val.0, val.1)
             };
@@ -6471,12 +6229,9 @@ pub fn explain_giguna__gateway__door__ex__block_left_1__req(
 ) -> (bool, Vec<&'static str>) {
     // ^_door_opened
     {
-        let h = ctx.giguna__gateway__ctx__door_opened();
-        edict.insert(
-            "^_door_opened",
-            format!("{:?}", ctx.giguna__gateway__ctx__door_opened()),
-        );
-        (h, vec!["^_door_opened"])
+        let r = ctx.giguna__gateway__ctx__door_opened();
+        edict.insert("^giguna__gateway__ctx__door_opened", format!("{:?}", r));
+        (r, vec!["^giguna__gateway__ctx__door_opened"])
     }
 }
 pub fn explain_giguna__gateway__door__ex__left_platform_1__req(
@@ -6486,12 +6241,9 @@ pub fn explain_giguna__gateway__door__ex__left_platform_1__req(
 ) -> (bool, Vec<&'static str>) {
     // ^_door_opened
     {
-        let h = ctx.giguna__gateway__ctx__door_opened();
-        edict.insert(
-            "^_door_opened",
-            format!("{:?}", ctx.giguna__gateway__ctx__door_opened()),
-        );
-        (h, vec!["^_door_opened"])
+        let r = ctx.giguna__gateway__ctx__door_opened();
+        edict.insert("^giguna__gateway__ctx__door_opened", format!("{:?}", r));
+        (r, vec!["^giguna__gateway__ctx__door_opened"])
     }
 }
 pub fn explain_giguna__gateway__door__ex__passage_entry_1__req(
@@ -6501,12 +6253,9 @@ pub fn explain_giguna__gateway__door__ex__passage_entry_1__req(
 ) -> (bool, Vec<&'static str>) {
     // ^_door_opened
     {
-        let h = ctx.giguna__gateway__ctx__door_opened();
-        edict.insert(
-            "^_door_opened",
-            format!("{:?}", ctx.giguna__gateway__ctx__door_opened()),
-        );
-        (h, vec!["^_door_opened"])
+        let r = ctx.giguna__gateway__ctx__door_opened();
+        edict.insert("^giguna__gateway__ctx__door_opened", format!("{:?}", r));
+        (r, vec!["^giguna__gateway__ctx__door_opened"])
     }
 }
 pub fn explain_giguna__gateway__passage_entry__ex__door_1__req(
@@ -6516,12 +6265,9 @@ pub fn explain_giguna__gateway__passage_entry__ex__door_1__req(
 ) -> (bool, Vec<&'static str>) {
     // ^_door_opened
     {
-        let h = ctx.giguna__gateway__ctx__door_opened();
-        edict.insert(
-            "^_door_opened",
-            format!("{:?}", ctx.giguna__gateway__ctx__door_opened()),
-        );
-        (h, vec!["^_door_opened"])
+        let r = ctx.giguna__gateway__ctx__door_opened();
+        edict.insert("^giguna__gateway__ctx__door_opened", format!("{:?}", r));
+        (r, vec!["^giguna__gateway__ctx__door_opened"])
     }
 }
 pub fn explain_giguna__giguna_base__below_gate__ex__kari_1__req(
@@ -6533,12 +6279,9 @@ pub fn explain_giguna__giguna_base__below_gate__ex__kari_1__req(
     {
         let mut left = {
             let mut left = {
-                let h = ctx.giguna__giguna_base__ctx__door_open();
-                edict.insert(
-                    "^_door_open",
-                    format!("{:?}", ctx.giguna__giguna_base__ctx__door_open()),
-                );
-                (h, vec!["^_door_open"])
+                let r = ctx.giguna__giguna_base__ctx__door_open();
+                edict.insert("^giguna__giguna_base__ctx__door_open", format!("{:?}", r));
+                (r, vec!["^giguna__giguna_base__ctx__door_open"])
             };
             if !left.0 {
                 left
@@ -6575,12 +6318,9 @@ pub fn explain_giguna__giguna_base__below_gate__ex__kari_2__req(
     // ^_door_open and $hook
     {
         let mut left = {
-            let h = ctx.giguna__giguna_base__ctx__door_open();
-            edict.insert(
-                "^_door_open",
-                format!("{:?}", ctx.giguna__giguna_base__ctx__door_open()),
-            );
-            (h, vec!["^_door_open"])
+            let r = ctx.giguna__giguna_base__ctx__door_open();
+            edict.insert("^giguna__giguna_base__ctx__door_open", format!("{:?}", r));
+            (r, vec!["^giguna__giguna_base__ctx__door_open"])
         };
         if !left.0 {
             left
@@ -6605,12 +6345,9 @@ pub fn explain_giguna__giguna_base__below_gate__ex__middle_platform_1__req(
     {
         let mut left = {
             let mut left = {
-                let h = ctx.giguna__giguna_base__ctx__door_open();
-                edict.insert(
-                    "^_door_open",
-                    format!("{:?}", ctx.giguna__giguna_base__ctx__door_open()),
-                );
-                (h, vec!["^_door_open"])
+                let r = ctx.giguna__giguna_base__ctx__door_open();
+                edict.insert("^giguna__giguna_base__ctx__door_open", format!("{:?}", r));
+                (r, vec!["^giguna__giguna_base__ctx__door_open"])
             };
             if !left.0 {
                 left
@@ -6647,12 +6384,9 @@ pub fn explain_giguna__giguna_base__below_gate__ex__middle_platform_2__req(
     // ^_door_open and $hook
     {
         let mut left = {
-            let h = ctx.giguna__giguna_base__ctx__door_open();
-            edict.insert(
-                "^_door_open",
-                format!("{:?}", ctx.giguna__giguna_base__ctx__door_open()),
-            );
-            (h, vec!["^_door_open"])
+            let r = ctx.giguna__giguna_base__ctx__door_open();
+            edict.insert("^giguna__giguna_base__ctx__door_open", format!("{:?}", r));
+            (r, vec!["^giguna__giguna_base__ctx__door_open"])
         };
         if !left.0 {
             left
@@ -6675,12 +6409,9 @@ pub fn explain_giguna__giguna_base__kari__ex__below_gate_1__req(
 ) -> (bool, Vec<&'static str>) {
     // ^_door_open
     {
-        let h = ctx.giguna__giguna_base__ctx__door_open();
-        edict.insert(
-            "^_door_open",
-            format!("{:?}", ctx.giguna__giguna_base__ctx__door_open()),
-        );
-        (h, vec!["^_door_open"])
+        let r = ctx.giguna__giguna_base__ctx__door_open();
+        edict.insert("^giguna__giguna_base__ctx__door_open", format!("{:?}", r));
+        (r, vec!["^giguna__giguna_base__ctx__door_open"])
     }
 }
 pub fn explain_giguna__giguna_base__middle_platform__ex__below_gate_1__req(
@@ -6690,12 +6421,9 @@ pub fn explain_giguna__giguna_base__middle_platform__ex__below_gate_1__req(
 ) -> (bool, Vec<&'static str>) {
     // ^_door_open
     {
-        let h = ctx.giguna__giguna_base__ctx__door_open();
-        edict.insert(
-            "^_door_open",
-            format!("{:?}", ctx.giguna__giguna_base__ctx__door_open()),
-        );
-        (h, vec!["^_door_open"])
+        let r = ctx.giguna__giguna_base__ctx__door_open();
+        edict.insert("^giguna__giguna_base__ctx__door_open", format!("{:?}", r));
+        (r, vec!["^giguna__giguna_base__ctx__door_open"])
     }
 }
 pub fn explain_giguna__giguna_northeast__right_column__ex__door_1__req(
@@ -6705,12 +6433,12 @@ pub fn explain_giguna__giguna_northeast__right_column__ex__door_1__req(
 ) -> (bool, Vec<&'static str>) {
     // ^_door_opened
     {
-        let h = ctx.giguna__giguna_northeast__ctx__door_opened();
+        let r = ctx.giguna__giguna_northeast__ctx__door_opened();
         edict.insert(
-            "^_door_opened",
-            format!("{:?}", ctx.giguna__giguna_northeast__ctx__door_opened()),
+            "^giguna__giguna_northeast__ctx__door_opened",
+            format!("{:?}", r),
         );
-        (h, vec!["^_door_opened"])
+        (r, vec!["^giguna__giguna_northeast__ctx__door_opened"])
     }
 }
 pub fn explain_giguna__giguna_northeast__right_column__open_door_from_afar__req(
@@ -6744,14 +6472,12 @@ pub fn explain_giguna__giguna_northeast__right_column__open_door_from_afar__req(
         } else {
             let mut right = {
                 let val = {
+                    let r = ctx.giguna__giguna_northeast__ctx__door_opened();
                     edict.insert(
-                        "^_door_opened",
-                        format!("{:?}", ctx.giguna__giguna_northeast__ctx__door_opened()),
+                        "^giguna__giguna_northeast__ctx__door_opened",
+                        format!("{:?}", r),
                     );
-                    (
-                        ctx.giguna__giguna_northeast__ctx__door_opened(),
-                        vec!["^_door_opened"],
-                    )
+                    (r, vec!["^giguna__giguna_northeast__ctx__door_opened"])
                 };
                 (!val.0, val.1)
             };
@@ -6768,12 +6494,12 @@ pub fn explain_giguna__giguna_northeast__switch__ex__door_1__req(
     // ^_door_opened and ($grab or $hook)
     {
         let mut left = {
-            let h = ctx.giguna__giguna_northeast__ctx__door_opened();
+            let r = ctx.giguna__giguna_northeast__ctx__door_opened();
             edict.insert(
-                "^_door_opened",
-                format!("{:?}", ctx.giguna__giguna_northeast__ctx__door_opened()),
+                "^giguna__giguna_northeast__ctx__door_opened",
+                format!("{:?}", r),
             );
-            (h, vec!["^_door_opened"])
+            (r, vec!["^giguna__giguna_northeast__ctx__door_opened"])
         };
         if !left.0 {
             left
@@ -6821,14 +6547,12 @@ pub fn explain_giguna__giguna_northeast__switch__open_door__req(
         } else {
             let mut right = {
                 let val = {
+                    let r = ctx.giguna__giguna_northeast__ctx__door_opened();
                     edict.insert(
-                        "^_door_opened",
-                        format!("{:?}", ctx.giguna__giguna_northeast__ctx__door_opened()),
+                        "^giguna__giguna_northeast__ctx__door_opened",
+                        format!("{:?}", r),
                     );
-                    (
-                        ctx.giguna__giguna_northeast__ctx__door_opened(),
-                        vec!["^_door_opened"],
-                    )
+                    (r, vec!["^giguna__giguna_northeast__ctx__door_opened"])
                 };
                 (!val.0, val.1)
             };
@@ -6844,12 +6568,12 @@ pub fn explain_giguna__giguna_northeast__vault__ex__door_1__req(
 ) -> (bool, Vec<&'static str>) {
     // ^_door_opened
     {
-        let h = ctx.giguna__giguna_northeast__ctx__door_opened();
+        let r = ctx.giguna__giguna_northeast__ctx__door_opened();
         edict.insert(
-            "^_door_opened",
-            format!("{:?}", ctx.giguna__giguna_northeast__ctx__door_opened()),
+            "^giguna__giguna_northeast__ctx__door_opened",
+            format!("{:?}", r),
         );
-        (h, vec!["^_door_opened"])
+        (r, vec!["^giguna__giguna_northeast__ctx__door_opened"])
     }
 }
 pub fn explain_giguna__giguna_northeast__vault__ex__door_2__req(
@@ -6860,12 +6584,12 @@ pub fn explain_giguna__giguna_northeast__vault__ex__door_2__req(
     // ^_door_opened and $hook
     {
         let mut left = {
-            let h = ctx.giguna__giguna_northeast__ctx__door_opened();
+            let r = ctx.giguna__giguna_northeast__ctx__door_opened();
             edict.insert(
-                "^_door_opened",
-                format!("{:?}", ctx.giguna__giguna_northeast__ctx__door_opened()),
+                "^giguna__giguna_northeast__ctx__door_opened",
+                format!("{:?}", r),
             );
-            (h, vec!["^_door_opened"])
+            (r, vec!["^giguna__giguna_northeast__ctx__door_opened"])
         };
         if !left.0 {
             left
@@ -6888,12 +6612,9 @@ pub fn explain_giguna__ruins_top__east_7__ex__east_door_1__req(
 ) -> (bool, Vec<&'static str>) {
     // ^_doors_open
     {
-        let h = ctx.giguna__ruins_top__ctx__doors_open();
-        edict.insert(
-            "^_doors_open",
-            format!("{:?}", ctx.giguna__ruins_top__ctx__doors_open()),
-        );
-        (h, vec!["^_doors_open"])
+        let r = ctx.giguna__ruins_top__ctx__doors_open();
+        edict.insert("^giguna__ruins_top__ctx__doors_open", format!("{:?}", r));
+        (r, vec!["^giguna__ruins_top__ctx__doors_open"])
     }
 }
 pub fn explain_giguna__ruins_top__east_door__ex__east_7_1__req(
@@ -6903,12 +6624,9 @@ pub fn explain_giguna__ruins_top__east_door__ex__east_7_1__req(
 ) -> (bool, Vec<&'static str>) {
     // ^_doors_open
     {
-        let h = ctx.giguna__ruins_top__ctx__doors_open();
-        edict.insert(
-            "^_doors_open",
-            format!("{:?}", ctx.giguna__ruins_top__ctx__doors_open()),
-        );
-        (h, vec!["^_doors_open"])
+        let r = ctx.giguna__ruins_top__ctx__doors_open();
+        edict.insert("^giguna__ruins_top__ctx__doors_open", format!("{:?}", r));
+        (r, vec!["^giguna__ruins_top__ctx__doors_open"])
     }
 }
 pub fn explain_giguna__ruins_top__east_door__ex__portal_1__req(
@@ -6918,12 +6636,9 @@ pub fn explain_giguna__ruins_top__east_door__ex__portal_1__req(
 ) -> (bool, Vec<&'static str>) {
     // ^_doors_open
     {
-        let h = ctx.giguna__ruins_top__ctx__doors_open();
-        edict.insert(
-            "^_doors_open",
-            format!("{:?}", ctx.giguna__ruins_top__ctx__doors_open()),
-        );
-        (h, vec!["^_doors_open"])
+        let r = ctx.giguna__ruins_top__ctx__doors_open();
+        edict.insert("^giguna__ruins_top__ctx__doors_open", format!("{:?}", r));
+        (r, vec!["^giguna__ruins_top__ctx__doors_open"])
     }
 }
 pub fn explain_giguna__ruins_top__entryway__ex__west_door_1__req(
@@ -6933,12 +6648,9 @@ pub fn explain_giguna__ruins_top__entryway__ex__west_door_1__req(
 ) -> (bool, Vec<&'static str>) {
     // ^_doors_open
     {
-        let h = ctx.giguna__ruins_top__ctx__doors_open();
-        edict.insert(
-            "^_doors_open",
-            format!("{:?}", ctx.giguna__ruins_top__ctx__doors_open()),
-        );
-        (h, vec!["^_doors_open"])
+        let r = ctx.giguna__ruins_top__ctx__doors_open();
+        edict.insert("^giguna__ruins_top__ctx__doors_open", format!("{:?}", r));
+        (r, vec!["^giguna__ruins_top__ctx__doors_open"])
     }
 }
 pub fn explain_giguna__ruins_top__portal__ex__east_door_1__req(
@@ -6948,12 +6660,9 @@ pub fn explain_giguna__ruins_top__portal__ex__east_door_1__req(
 ) -> (bool, Vec<&'static str>) {
     // ^_doors_open
     {
-        let h = ctx.giguna__ruins_top__ctx__doors_open();
-        edict.insert(
-            "^_doors_open",
-            format!("{:?}", ctx.giguna__ruins_top__ctx__doors_open()),
-        );
-        (h, vec!["^_doors_open"])
+        let r = ctx.giguna__ruins_top__ctx__doors_open();
+        edict.insert("^giguna__ruins_top__ctx__doors_open", format!("{:?}", r));
+        (r, vec!["^giguna__ruins_top__ctx__doors_open"])
     }
 }
 pub fn explain_giguna__ruins_top__west_7__ex__west_door_1__req(
@@ -6963,12 +6672,9 @@ pub fn explain_giguna__ruins_top__west_7__ex__west_door_1__req(
 ) -> (bool, Vec<&'static str>) {
     // ^_doors_open
     {
-        let h = ctx.giguna__ruins_top__ctx__doors_open();
-        edict.insert(
-            "^_doors_open",
-            format!("{:?}", ctx.giguna__ruins_top__ctx__doors_open()),
-        );
-        (h, vec!["^_doors_open"])
+        let r = ctx.giguna__ruins_top__ctx__doors_open();
+        edict.insert("^giguna__ruins_top__ctx__doors_open", format!("{:?}", r));
+        (r, vec!["^giguna__ruins_top__ctx__doors_open"])
     }
 }
 pub fn explain_giguna__ruins_top__west_door__ex__entryway_1__req(
@@ -6978,12 +6684,9 @@ pub fn explain_giguna__ruins_top__west_door__ex__entryway_1__req(
 ) -> (bool, Vec<&'static str>) {
     // ^_doors_open
     {
-        let h = ctx.giguna__ruins_top__ctx__doors_open();
-        edict.insert(
-            "^_doors_open",
-            format!("{:?}", ctx.giguna__ruins_top__ctx__doors_open()),
-        );
-        (h, vec!["^_doors_open"])
+        let r = ctx.giguna__ruins_top__ctx__doors_open();
+        edict.insert("^giguna__ruins_top__ctx__doors_open", format!("{:?}", r));
+        (r, vec!["^giguna__ruins_top__ctx__doors_open"])
     }
 }
 pub fn explain_giguna__ruins_top__west_door__ex__west_7_1__req(
@@ -6993,12 +6696,9 @@ pub fn explain_giguna__ruins_top__west_door__ex__west_7_1__req(
 ) -> (bool, Vec<&'static str>) {
     // ^_doors_open
     {
-        let h = ctx.giguna__ruins_top__ctx__doors_open();
-        edict.insert(
-            "^_doors_open",
-            format!("{:?}", ctx.giguna__ruins_top__ctx__doors_open()),
-        );
-        (h, vec!["^_doors_open"])
+        let r = ctx.giguna__ruins_top__ctx__doors_open();
+        edict.insert("^giguna__ruins_top__ctx__doors_open", format!("{:?}", r));
+        (r, vec!["^giguna__ruins_top__ctx__doors_open"])
     }
 }
 pub fn explain_giguna__ruins_west__lower_ledge__destroy_kishib__req(
@@ -7010,14 +6710,12 @@ pub fn explain_giguna__ruins_west__lower_ledge__destroy_kishib__req(
     {
         let mut left = {
             let val = {
+                let r = ctx.giguna__ruins_west__ctx__kishib_handled();
                 edict.insert(
-                    "^_kishib_handled",
-                    format!("{:?}", ctx.giguna__ruins_west__ctx__kishib_handled()),
+                    "^giguna__ruins_west__ctx__kishib_handled",
+                    format!("{:?}", r),
                 );
-                (
-                    ctx.giguna__ruins_west__ctx__kishib_handled(),
-                    vec!["^_kishib_handled"],
-                )
+                (r, vec!["^giguna__ruins_west__ctx__kishib_handled"])
             };
             (!val.0, val.1)
         };
@@ -7052,12 +6750,12 @@ pub fn explain_giguna__ruins_west__lower_ledge__ex__upper_ledge_1__req(
             left
         } else {
             let mut right = {
-                let h = ctx.giguna__ruins_west__ctx__kishib_handled();
+                let r = ctx.giguna__ruins_west__ctx__kishib_handled();
                 edict.insert(
-                    "^_kishib_handled",
-                    format!("{:?}", ctx.giguna__ruins_west__ctx__kishib_handled()),
+                    "^giguna__ruins_west__ctx__kishib_handled",
+                    format!("{:?}", r),
                 );
-                (h, vec!["^_kishib_handled"])
+                (r, vec!["^giguna__ruins_west__ctx__kishib_handled"])
             };
             left.1.append(&mut right.1);
             (right.0, left.1)
@@ -7073,14 +6771,12 @@ pub fn explain_giguna__ruins_west__lower_ledge__hack_kishib__req(
     {
         let mut left = {
             let val = {
+                let r = ctx.giguna__ruins_west__ctx__kishib_handled();
                 edict.insert(
-                    "^_kishib_handled",
-                    format!("{:?}", ctx.giguna__ruins_west__ctx__kishib_handled()),
+                    "^giguna__ruins_west__ctx__kishib_handled",
+                    format!("{:?}", r),
                 );
-                (
-                    ctx.giguna__ruins_west__ctx__kishib_handled(),
-                    vec!["^_kishib_handled"],
-                )
+                (r, vec!["^giguna__ruins_west__ctx__kishib_handled"])
             };
             (!val.0, val.1)
         };
@@ -7106,14 +6802,9 @@ pub fn explain_giguna__west_caverns__east_susar__caught__req(
     // not ^_east_susar
     {
         let val = {
-            edict.insert(
-                "^_east_susar",
-                format!("{:?}", ctx.giguna__west_caverns__ctx__east_susar()),
-            );
-            (
-                ctx.giguna__west_caverns__ctx__east_susar(),
-                vec!["^_east_susar"],
-            )
+            let r = ctx.giguna__west_caverns__ctx__east_susar();
+            edict.insert("^giguna__west_caverns__ctx__east_susar", format!("{:?}", r));
+            (r, vec!["^giguna__west_caverns__ctx__east_susar"])
         };
         (!val.0, val.1)
     }
@@ -7125,12 +6816,9 @@ pub fn explain_giguna__west_caverns__east_susar__ex__east_12_1__req(
 ) -> (bool, Vec<&'static str>) {
     // ^_east_susar
     {
-        let h = ctx.giguna__west_caverns__ctx__east_susar();
-        edict.insert(
-            "^_east_susar",
-            format!("{:?}", ctx.giguna__west_caverns__ctx__east_susar()),
-        );
-        (h, vec!["^_east_susar"])
+        let r = ctx.giguna__west_caverns__ctx__east_susar();
+        edict.insert("^giguna__west_caverns__ctx__east_susar", format!("{:?}", r));
+        (r, vec!["^giguna__west_caverns__ctx__east_susar"])
     }
 }
 pub fn explain_giguna__west_caverns__east_susar__ex__tunnel_fork_1__req(
@@ -7140,12 +6828,9 @@ pub fn explain_giguna__west_caverns__east_susar__ex__tunnel_fork_1__req(
 ) -> (bool, Vec<&'static str>) {
     // ^_east_susar
     {
-        let h = ctx.giguna__west_caverns__ctx__east_susar();
-        edict.insert(
-            "^_east_susar",
-            format!("{:?}", ctx.giguna__west_caverns__ctx__east_susar()),
-        );
-        (h, vec!["^_east_susar"])
+        let r = ctx.giguna__west_caverns__ctx__east_susar();
+        edict.insert("^giguna__west_caverns__ctx__east_susar", format!("{:?}", r));
+        (r, vec!["^giguna__west_caverns__ctx__east_susar"])
     }
 }
 pub fn explain_giguna__west_caverns__east_susar__hack__req(
@@ -7157,14 +6842,9 @@ pub fn explain_giguna__west_caverns__east_susar__hack__req(
     {
         let mut left = {
             let val = {
-                edict.insert(
-                    "^_east_susar",
-                    format!("{:?}", ctx.giguna__west_caverns__ctx__east_susar()),
-                );
-                (
-                    ctx.giguna__west_caverns__ctx__east_susar(),
-                    vec!["^_east_susar"],
-                )
+                let r = ctx.giguna__west_caverns__ctx__east_susar();
+                edict.insert("^giguna__west_caverns__ctx__east_susar", format!("{:?}", r));
+                (r, vec!["^giguna__west_caverns__ctx__east_susar"])
             };
             (!val.0, val.1)
         };
@@ -7201,12 +6881,12 @@ pub fn explain_giguna_breach__sw_save__side_door__ex__west_11_1__req(
 ) -> (bool, Vec<&'static str>) {
     // ^_door_opened
     {
-        let h = ctx.giguna_breach__sw_save__ctx__door_opened();
+        let r = ctx.giguna_breach__sw_save__ctx__door_opened();
         edict.insert(
-            "^_door_opened",
-            format!("{:?}", ctx.giguna_breach__sw_save__ctx__door_opened()),
+            "^giguna_breach__sw_save__ctx__door_opened",
+            format!("{:?}", r),
         );
-        (h, vec!["^_door_opened"])
+        (r, vec!["^giguna_breach__sw_save__ctx__door_opened"])
     }
 }
 pub fn explain_giguna_breach__sw_save__west_11__ex__side_door_1__req(
@@ -7216,12 +6896,12 @@ pub fn explain_giguna_breach__sw_save__west_11__ex__side_door_1__req(
 ) -> (bool, Vec<&'static str>) {
     // ^_door_opened
     {
-        let h = ctx.giguna_breach__sw_save__ctx__door_opened();
+        let r = ctx.giguna_breach__sw_save__ctx__door_opened();
         edict.insert(
-            "^_door_opened",
-            format!("{:?}", ctx.giguna_breach__sw_save__ctx__door_opened()),
+            "^giguna_breach__sw_save__ctx__door_opened",
+            format!("{:?}", r),
         );
-        (h, vec!["^_door_opened"])
+        (r, vec!["^giguna_breach__sw_save__ctx__door_opened"])
     }
 }
 pub fn explain_giguna_breach__sw_save__west_11__open_door__req(
@@ -7232,14 +6912,12 @@ pub fn explain_giguna_breach__sw_save__west_11__open_door__req(
     // not ^_door_opened
     {
         let val = {
+            let r = ctx.giguna_breach__sw_save__ctx__door_opened();
             edict.insert(
-                "^_door_opened",
-                format!("{:?}", ctx.giguna_breach__sw_save__ctx__door_opened()),
+                "^giguna_breach__sw_save__ctx__door_opened",
+                format!("{:?}", r),
             );
-            (
-                ctx.giguna_breach__sw_save__ctx__door_opened(),
-                vec!["^_door_opened"],
-            )
+            (r, vec!["^giguna_breach__sw_save__ctx__door_opened"])
         };
         (!val.0, val.1)
     }
@@ -8485,14 +8163,12 @@ pub fn explain_irikar__basement_portal__ledge__ex__moving_platform_start_1__req(
     // not ^_platform_moved
     {
         let val = {
+            let r = ctx.irikar__basement_portal__ctx__platform_moved();
             edict.insert(
-                "^_platform_moved",
-                format!("{:?}", ctx.irikar__basement_portal__ctx__platform_moved()),
+                "^irikar__basement_portal__ctx__platform_moved",
+                format!("{:?}", r),
             );
-            (
-                ctx.irikar__basement_portal__ctx__platform_moved(),
-                vec!["^_platform_moved"],
-            )
+            (r, vec!["^irikar__basement_portal__ctx__platform_moved"])
         };
         (!val.0, val.1)
     }
@@ -8505,12 +8181,12 @@ pub fn explain_irikar__basement_portal__middle_platform__ex__moving_platform_end
     // ^_platform_moved and $hook
     {
         let mut left = {
-            let h = ctx.irikar__basement_portal__ctx__platform_moved();
+            let r = ctx.irikar__basement_portal__ctx__platform_moved();
             edict.insert(
-                "^_platform_moved",
-                format!("{:?}", ctx.irikar__basement_portal__ctx__platform_moved()),
+                "^irikar__basement_portal__ctx__platform_moved",
+                format!("{:?}", r),
             );
-            (h, vec!["^_platform_moved"])
+            (r, vec!["^irikar__basement_portal__ctx__platform_moved"])
         };
         if !left.0 {
             left
@@ -8534,14 +8210,12 @@ pub fn explain_irikar__basement_portal__portal_stand__ex__moving_platform_start_
     // not ^_platform_moved
     {
         let val = {
+            let r = ctx.irikar__basement_portal__ctx__platform_moved();
             edict.insert(
-                "^_platform_moved",
-                format!("{:?}", ctx.irikar__basement_portal__ctx__platform_moved()),
+                "^irikar__basement_portal__ctx__platform_moved",
+                format!("{:?}", r),
             );
-            (
-                ctx.irikar__basement_portal__ctx__platform_moved(),
-                vec!["^_platform_moved"],
-            )
+            (r, vec!["^irikar__basement_portal__ctx__platform_moved"])
         };
         (!val.0, val.1)
     }
@@ -8577,12 +8251,9 @@ pub fn explain_map__amagi__main_area__save(
 ) -> (bool, Vec<&'static str>) {
     // ^map__amagi__main_area__save
     {
-        let h = ctx.map__amagi__main_area__save();
-        edict.insert(
-            "^map__amagi__main_area__save",
-            format!("{:?}", ctx.map__amagi__main_area__save()),
-        );
-        (h, vec!["^map__amagi__main_area__save"])
+        let r = ctx.map__amagi__main_area__save();
+        edict.insert("^map__amagi__main_area__save", format!("{:?}", r));
+        (r, vec!["^map__amagi__main_area__save"])
     }
 }
 pub fn explain_map__annuna__center_save__save(
@@ -8592,12 +8263,9 @@ pub fn explain_map__annuna__center_save__save(
 ) -> (bool, Vec<&'static str>) {
     // ^map__annuna__center_save__save
     {
-        let h = ctx.map__annuna__center_save__save();
-        edict.insert(
-            "^map__annuna__center_save__save",
-            format!("{:?}", ctx.map__annuna__center_save__save()),
-        );
-        (h, vec!["^map__annuna__center_save__save"])
+        let r = ctx.map__annuna__center_save__save();
+        edict.insert("^map__annuna__center_save__save", format!("{:?}", r));
+        (r, vec!["^map__annuna__center_save__save"])
     }
 }
 pub fn explain_map__annuna__factory_entrance__save(
@@ -8607,12 +8275,9 @@ pub fn explain_map__annuna__factory_entrance__save(
 ) -> (bool, Vec<&'static str>) {
     // ^map__annuna__factory_entrance__save
     {
-        let h = ctx.map__annuna__factory_entrance__save();
-        edict.insert(
-            "^map__annuna__factory_entrance__save",
-            format!("{:?}", ctx.map__annuna__factory_entrance__save()),
-        );
-        (h, vec!["^map__annuna__factory_entrance__save"])
+        let r = ctx.map__annuna__factory_entrance__save();
+        edict.insert("^map__annuna__factory_entrance__save", format!("{:?}", r));
+        (r, vec!["^map__annuna__factory_entrance__save"])
     }
 }
 pub fn explain_map__annuna__mirror_match__save(
@@ -8622,12 +8287,9 @@ pub fn explain_map__annuna__mirror_match__save(
 ) -> (bool, Vec<&'static str>) {
     // ^map__annuna__mirror_match__save
     {
-        let h = ctx.map__annuna__mirror_match__save();
-        edict.insert(
-            "^map__annuna__mirror_match__save",
-            format!("{:?}", ctx.map__annuna__mirror_match__save()),
-        );
-        (h, vec!["^map__annuna__mirror_match__save"])
+        let r = ctx.map__annuna__mirror_match__save();
+        edict.insert("^map__annuna__mirror_match__save", format!("{:?}", r));
+        (r, vec!["^map__annuna__mirror_match__save"])
     }
 }
 pub fn explain_map__ebih__base_camp__save(
@@ -8637,12 +8299,9 @@ pub fn explain_map__ebih__base_camp__save(
 ) -> (bool, Vec<&'static str>) {
     // ^map__ebih__base_camp__save
     {
-        let h = ctx.map__ebih__base_camp__save();
-        edict.insert(
-            "^map__ebih__base_camp__save",
-            format!("{:?}", ctx.map__ebih__base_camp__save()),
-        );
-        (h, vec!["^map__ebih__base_camp__save"])
+        let r = ctx.map__ebih__base_camp__save();
+        edict.insert("^map__ebih__base_camp__save", format!("{:?}", r));
+        (r, vec!["^map__ebih__base_camp__save"])
     }
 }
 pub fn explain_map__ebih__ebih_west__lower_save(
@@ -8652,12 +8311,9 @@ pub fn explain_map__ebih__ebih_west__lower_save(
 ) -> (bool, Vec<&'static str>) {
     // ^map__ebih__ebih_west__lower_save
     {
-        let h = ctx.map__ebih__ebih_west__lower_save();
-        edict.insert(
-            "^map__ebih__ebih_west__lower_save",
-            format!("{:?}", ctx.map__ebih__ebih_west__lower_save()),
-        );
-        (h, vec!["^map__ebih__ebih_west__lower_save"])
+        let r = ctx.map__ebih__ebih_west__lower_save();
+        edict.insert("^map__ebih__ebih_west__lower_save", format!("{:?}", r));
+        (r, vec!["^map__ebih__ebih_west__lower_save"])
     }
 }
 pub fn explain_map__ebih__ebih_west__mid_save(
@@ -8667,12 +8323,9 @@ pub fn explain_map__ebih__ebih_west__mid_save(
 ) -> (bool, Vec<&'static str>) {
     // ^map__ebih__ebih_west__mid_save
     {
-        let h = ctx.map__ebih__ebih_west__mid_save();
-        edict.insert(
-            "^map__ebih__ebih_west__mid_save",
-            format!("{:?}", ctx.map__ebih__ebih_west__mid_save()),
-        );
-        (h, vec!["^map__ebih__ebih_west__mid_save"])
+        let r = ctx.map__ebih__ebih_west__mid_save();
+        edict.insert("^map__ebih__ebih_west__mid_save", format!("{:?}", r));
+        (r, vec!["^map__ebih__ebih_west__mid_save"])
     }
 }
 pub fn explain_map__ebih__ebih_west__upper_save(
@@ -8682,12 +8335,9 @@ pub fn explain_map__ebih__ebih_west__upper_save(
 ) -> (bool, Vec<&'static str>) {
     // ^map__ebih__ebih_west__upper_save
     {
-        let h = ctx.map__ebih__ebih_west__upper_save();
-        edict.insert(
-            "^map__ebih__ebih_west__upper_save",
-            format!("{:?}", ctx.map__ebih__ebih_west__upper_save()),
-        );
-        (h, vec!["^map__ebih__ebih_west__upper_save"])
+        let r = ctx.map__ebih__ebih_west__upper_save();
+        edict.insert("^map__ebih__ebih_west__upper_save", format!("{:?}", r));
+        (r, vec!["^map__ebih__ebih_west__upper_save"])
     }
 }
 pub fn explain_map__giguna__giguna_base__save(
@@ -8697,12 +8347,9 @@ pub fn explain_map__giguna__giguna_base__save(
 ) -> (bool, Vec<&'static str>) {
     // ^map__giguna__giguna_base__save
     {
-        let h = ctx.map__giguna__giguna_base__save();
-        edict.insert(
-            "^map__giguna__giguna_base__save",
-            format!("{:?}", ctx.map__giguna__giguna_base__save()),
-        );
-        (h, vec!["^map__giguna__giguna_base__save"])
+        let r = ctx.map__giguna__giguna_base__save();
+        edict.insert("^map__giguna__giguna_base__save", format!("{:?}", r));
+        (r, vec!["^map__giguna__giguna_base__save"])
     }
 }
 pub fn explain_map__giguna__giguna_northeast__save(
@@ -8712,12 +8359,9 @@ pub fn explain_map__giguna__giguna_northeast__save(
 ) -> (bool, Vec<&'static str>) {
     // ^map__giguna__giguna_northeast__save
     {
-        let h = ctx.map__giguna__giguna_northeast__save();
-        edict.insert(
-            "^map__giguna__giguna_northeast__save",
-            format!("{:?}", ctx.map__giguna__giguna_northeast__save()),
-        );
-        (h, vec!["^map__giguna__giguna_northeast__save"])
+        let r = ctx.map__giguna__giguna_northeast__save();
+        edict.insert("^map__giguna__giguna_northeast__save", format!("{:?}", r));
+        (r, vec!["^map__giguna__giguna_northeast__save"])
     }
 }
 pub fn explain_map__giguna__ruins_top__save(
@@ -8727,12 +8371,9 @@ pub fn explain_map__giguna__ruins_top__save(
 ) -> (bool, Vec<&'static str>) {
     // ^map__giguna__ruins_top__save
     {
-        let h = ctx.map__giguna__ruins_top__save();
-        edict.insert(
-            "^map__giguna__ruins_top__save",
-            format!("{:?}", ctx.map__giguna__ruins_top__save()),
-        );
-        (h, vec!["^map__giguna__ruins_top__save"])
+        let r = ctx.map__giguna__ruins_top__save();
+        edict.insert("^map__giguna__ruins_top__save", format!("{:?}", r));
+        (r, vec!["^map__giguna__ruins_top__save"])
     }
 }
 pub fn explain_map__giguna__ruins_west__save(
@@ -8742,12 +8383,9 @@ pub fn explain_map__giguna__ruins_west__save(
 ) -> (bool, Vec<&'static str>) {
     // ^map__giguna__ruins_west__save
     {
-        let h = ctx.map__giguna__ruins_west__save();
-        edict.insert(
-            "^map__giguna__ruins_west__save",
-            format!("{:?}", ctx.map__giguna__ruins_west__save()),
-        );
-        (h, vec!["^map__giguna__ruins_west__save"])
+        let r = ctx.map__giguna__ruins_west__save();
+        edict.insert("^map__giguna__ruins_west__save", format!("{:?}", r));
+        (r, vec!["^map__giguna__ruins_west__save"])
     }
 }
 pub fn explain_map__giguna_breach__peak__save(
@@ -8757,12 +8395,9 @@ pub fn explain_map__giguna_breach__peak__save(
 ) -> (bool, Vec<&'static str>) {
     // ^map__giguna_breach__peak__save
     {
-        let h = ctx.map__giguna_breach__peak__save();
-        edict.insert(
-            "^map__giguna_breach__peak__save",
-            format!("{:?}", ctx.map__giguna_breach__peak__save()),
-        );
-        (h, vec!["^map__giguna_breach__peak__save"])
+        let r = ctx.map__giguna_breach__peak__save();
+        edict.insert("^map__giguna_breach__peak__save", format!("{:?}", r));
+        (r, vec!["^map__giguna_breach__peak__save"])
     }
 }
 pub fn explain_map__giguna_breach__sw_save__save(
@@ -8772,12 +8407,9 @@ pub fn explain_map__giguna_breach__sw_save__save(
 ) -> (bool, Vec<&'static str>) {
     // ^map__giguna_breach__sw_save__save
     {
-        let h = ctx.map__giguna_breach__sw_save__save();
-        edict.insert(
-            "^map__giguna_breach__sw_save__save",
-            format!("{:?}", ctx.map__giguna_breach__sw_save__save()),
-        );
-        (h, vec!["^map__giguna_breach__sw_save__save"])
+        let r = ctx.map__giguna_breach__sw_save__save();
+        edict.insert("^map__giguna_breach__sw_save__save", format!("{:?}", r));
+        (r, vec!["^map__giguna_breach__sw_save__save"])
     }
 }
 pub fn explain_map__glacier__revival__save(
@@ -8787,12 +8419,9 @@ pub fn explain_map__glacier__revival__save(
 ) -> (bool, Vec<&'static str>) {
     // ^map__glacier__revival__save
     {
-        let h = ctx.map__glacier__revival__save();
-        edict.insert(
-            "^map__glacier__revival__save",
-            format!("{:?}", ctx.map__glacier__revival__save()),
-        );
-        (h, vec!["^map__glacier__revival__save"])
+        let r = ctx.map__glacier__revival__save();
+        edict.insert("^map__glacier__revival__save", format!("{:?}", r));
+        (r, vec!["^map__glacier__revival__save"])
     }
 }
 pub fn explain_map__irikar__hub__save(
@@ -8802,12 +8431,9 @@ pub fn explain_map__irikar__hub__save(
 ) -> (bool, Vec<&'static str>) {
     // ^map__irikar__hub__save
     {
-        let h = ctx.map__irikar__hub__save();
-        edict.insert(
-            "^map__irikar__hub__save",
-            format!("{:?}", ctx.map__irikar__hub__save()),
-        );
-        (h, vec!["^map__irikar__hub__save"])
+        let r = ctx.map__irikar__hub__save();
+        edict.insert("^map__irikar__hub__save", format!("{:?}", r));
+        (r, vec!["^map__irikar__hub__save"])
     }
 }
 pub fn explain_map__irikar_breach__gauntlet__save(
@@ -8817,12 +8443,9 @@ pub fn explain_map__irikar_breach__gauntlet__save(
 ) -> (bool, Vec<&'static str>) {
     // ^map__irikar_breach__gauntlet__save
     {
-        let h = ctx.map__irikar_breach__gauntlet__save();
-        edict.insert(
-            "^map__irikar_breach__gauntlet__save",
-            format!("{:?}", ctx.map__irikar_breach__gauntlet__save()),
-        );
-        (h, vec!["^map__irikar_breach__gauntlet__save"])
+        let r = ctx.map__irikar_breach__gauntlet__save();
+        edict.insert("^map__irikar_breach__gauntlet__save", format!("{:?}", r));
+        (r, vec!["^map__irikar_breach__gauntlet__save"])
     }
 }
 pub fn explain_map__irikar_breach__save_room__save(
@@ -8832,12 +8455,9 @@ pub fn explain_map__irikar_breach__save_room__save(
 ) -> (bool, Vec<&'static str>) {
     // ^map__irikar_breach__save_room__save
     {
-        let h = ctx.map__irikar_breach__save_room__save();
-        edict.insert(
-            "^map__irikar_breach__save_room__save",
-            format!("{:?}", ctx.map__irikar_breach__save_room__save()),
-        );
-        (h, vec!["^map__irikar_breach__save_room__save"])
+        let r = ctx.map__irikar_breach__save_room__save();
+        edict.insert("^map__irikar_breach__save_room__save", format!("{:?}", r));
+        (r, vec!["^map__irikar_breach__save_room__save"])
     }
 }
 pub fn explain_map__uhrum__annuna_corridor__save(
@@ -8847,12 +8467,9 @@ pub fn explain_map__uhrum__annuna_corridor__save(
 ) -> (bool, Vec<&'static str>) {
     // ^map__uhrum__annuna_corridor__save
     {
-        let h = ctx.map__uhrum__annuna_corridor__save();
-        edict.insert(
-            "^map__uhrum__annuna_corridor__save",
-            format!("{:?}", ctx.map__uhrum__annuna_corridor__save()),
-        );
-        (h, vec!["^map__uhrum__annuna_corridor__save"])
+        let r = ctx.map__uhrum__annuna_corridor__save();
+        edict.insert("^map__uhrum__annuna_corridor__save", format!("{:?}", r));
+        (r, vec!["^map__uhrum__annuna_corridor__save"])
     }
 }
 pub fn explain_map__uhrum__save_room__save(
@@ -8862,12 +8479,9 @@ pub fn explain_map__uhrum__save_room__save(
 ) -> (bool, Vec<&'static str>) {
     // ^map__uhrum__save_room__save
     {
-        let h = ctx.map__uhrum__save_room__save();
-        edict.insert(
-            "^map__uhrum__save_room__save",
-            format!("{:?}", ctx.map__uhrum__save_room__save()),
-        );
-        (h, vec!["^map__uhrum__save_room__save"])
+        let r = ctx.map__uhrum__save_room__save();
+        edict.insert("^map__uhrum__save_room__save", format!("{:?}", r));
+        (r, vec!["^map__uhrum__save_room__save"])
     }
 }
 pub fn explain_map__uhrum__west_entrance__save(
@@ -8877,12 +8491,9 @@ pub fn explain_map__uhrum__west_entrance__save(
 ) -> (bool, Vec<&'static str>) {
     // ^map__uhrum__west_entrance__save
     {
-        let h = ctx.map__uhrum__west_entrance__save();
-        edict.insert(
-            "^map__uhrum__west_entrance__save",
-            format!("{:?}", ctx.map__uhrum__west_entrance__save()),
-        );
-        (h, vec!["^map__uhrum__west_entrance__save"])
+        let r = ctx.map__uhrum__west_entrance__save();
+        edict.insert("^map__uhrum__west_entrance__save", format!("{:?}", r));
+        (r, vec!["^map__uhrum__west_entrance__save"])
     }
 }
 pub fn explain_melee_damage(
@@ -8967,8 +8578,9 @@ pub fn explain_mode_eq_drone(
     {
         let mut refs = vec!["^mode"];
         let mut left = {
-            edict.insert("^mode", format!("{:?}", ctx.mode()));
-            (ctx.mode(), vec!["^mode"])
+            let r = ctx.mode();
+            edict.insert("^mode", format!("{:?}", r));
+            (r, vec!["^mode"])
         };
         let right = enums::Mode::Drone;
         edict.insert("^mode", format!("{}", left.0));
@@ -8986,8 +8598,9 @@ pub fn explain_mode_eq_drone_and_breach_sight(
         let mut left = {
             let mut refs = vec!["^mode"];
             let mut left = {
-                edict.insert("^mode", format!("{:?}", ctx.mode()));
-                (ctx.mode(), vec!["^mode"])
+                let r = ctx.mode();
+                edict.insert("^mode", format!("{:?}", r));
+                (r, vec!["^mode"])
             };
             let right = enums::Mode::Drone;
             edict.insert("^mode", format!("{}", left.0));
@@ -9017,8 +8630,9 @@ pub fn explain_mode_eq_drone_and_ebih_wasteland_passage_h(
         let mut left = {
             let mut refs = vec!["^mode"];
             let mut left = {
-                edict.insert("^mode", format!("{:?}", ctx.mode()));
-                (ctx.mode(), vec!["^mode"])
+                let r = ctx.mode();
+                edict.insert("^mode", format!("{:?}", r));
+                (r, vec!["^mode"])
             };
             let right = enums::Mode::Drone;
             edict.insert("^mode", format!("{}", left.0));
@@ -9048,8 +8662,9 @@ pub fn explain_mode_eq_drone_and_ebih_waterfall_block_left(
         let mut left = {
             let mut refs = vec!["^mode"];
             let mut left = {
-                edict.insert("^mode", format!("{:?}", ctx.mode()));
-                (ctx.mode(), vec!["^mode"])
+                let r = ctx.mode();
+                edict.insert("^mode", format!("{:?}", r));
+                (r, vec!["^mode"])
             };
             let right = enums::Mode::Drone;
             edict.insert("^mode", format!("{}", left.0));
@@ -9079,8 +8694,9 @@ pub fn explain_mode_eq_drone_and_ebih_waterfall_block_right(
         let mut left = {
             let mut refs = vec!["^mode"];
             let mut left = {
-                edict.insert("^mode", format!("{:?}", ctx.mode()));
-                (ctx.mode(), vec!["^mode"])
+                let r = ctx.mode();
+                edict.insert("^mode", format!("{:?}", r));
+                (r, vec!["^mode"])
             };
             let right = enums::Mode::Drone;
             edict.insert("^mode", format!("{}", left.0));
@@ -9110,8 +8726,9 @@ pub fn explain_mode_eq_drone_and_giguna_dual_path_wall(
         let mut left = {
             let mut refs = vec!["^mode"];
             let mut left = {
-                edict.insert("^mode", format!("{:?}", ctx.mode()));
-                (ctx.mode(), vec!["^mode"])
+                let r = ctx.mode();
+                edict.insert("^mode", format!("{:?}", r));
+                (r, vec!["^mode"])
             };
             let right = enums::Mode::Drone;
             edict.insert("^mode", format!("{}", left.0));
@@ -9141,8 +8758,9 @@ pub fn explain_mode_eq_drone_and_mist2(
         let mut left = {
             let mut refs = vec!["^mode"];
             let mut left = {
-                edict.insert("^mode", format!("{:?}", ctx.mode()));
-                (ctx.mode(), vec!["^mode"])
+                let r = ctx.mode();
+                edict.insert("^mode", format!("{:?}", r));
+                (r, vec!["^mode"])
             };
             let right = enums::Mode::Drone;
             edict.insert("^mode", format!("{}", left.0));
@@ -9173,8 +8791,9 @@ pub fn explain_mode_eq_drone_and_mist_upgrade(
         let mut left = {
             let mut refs = vec!["^mode"];
             let mut left = {
-                edict.insert("^mode", format!("{:?}", ctx.mode()));
-                (ctx.mode(), vec!["^mode"])
+                let r = ctx.mode();
+                edict.insert("^mode", format!("{:?}", r));
+                (r, vec!["^mode"])
             };
             let right = enums::Mode::Drone;
             edict.insert("^mode", format!("{}", left.0));
@@ -9204,8 +8823,9 @@ pub fn explain_mode_eq_drone_and_sniper_valley_rock_2(
         let mut left = {
             let mut refs = vec!["^mode"];
             let mut left = {
-                edict.insert("^mode", format!("{:?}", ctx.mode()));
-                (ctx.mode(), vec!["^mode"])
+                let r = ctx.mode();
+                edict.insert("^mode", format!("{:?}", r));
+                (r, vec!["^mode"])
             };
             let right = enums::Mode::Drone;
             edict.insert("^mode", format!("{}", left.0));
@@ -9234,8 +8854,9 @@ pub fn explain_mode_ne_drone(
     {
         let mut refs = vec!["^mode"];
         let mut left = {
-            edict.insert("^mode", format!("{:?}", ctx.mode()));
-            (ctx.mode(), vec!["^mode"])
+            let r = ctx.mode();
+            edict.insert("^mode", format!("{:?}", r));
+            (r, vec!["^mode"])
         };
         let right = enums::Mode::Drone;
         edict.insert("^mode", format!("{}", left.0));
@@ -9494,8 +9115,9 @@ pub fn explain_not_within_menu_and_anuman_and_mode_ne_drone(
             let mut right = {
                 let mut refs = vec!["^mode"];
                 let mut left = {
-                    edict.insert("^mode", format!("{:?}", ctx.mode()));
-                    (ctx.mode(), vec!["^mode"])
+                    let r = ctx.mode();
+                    edict.insert("^mode", format!("{:?}", r));
+                    (r, vec!["^mode"])
                 };
                 let right = enums::Mode::Drone;
                 edict.insert("^mode", format!("{}", left.0));
@@ -9543,8 +9165,9 @@ pub fn explain_not_within_menu_and_flasks_gt_0(
             let mut right = {
                 let mut refs = vec!["^flasks", "0"];
                 let mut left = {
-                    edict.insert("^flasks", format!("{:?}", ctx.flasks()));
-                    (ctx.flasks(), vec!["^flasks"])
+                    let r = ctx.flasks();
+                    edict.insert("^flasks", format!("{:?}", r));
+                    (r, vec!["^flasks"])
                 };
                 let mut right = (0, vec![]);
                 edict.insert("^flasks", format!("{:?}", left.0));
@@ -9610,8 +9233,9 @@ pub fn explain_not_within_menu_and_realm_ne_breach_and_anuman_and_mode_eq_drone(
                     let mut right = {
                         let mut refs = vec!["^realm"];
                         let mut left = {
-                            edict.insert("^realm", format!("{:?}", data::realm(ctx.position())));
-                            (data::realm(ctx.position()), vec!["^realm"])
+                            let r = data::realm(ctx.position());
+                            edict.insert("^realm", format!("{:?}", r));
+                            (r, vec!["^realm"])
                         };
                         let right = enums::Realm::Breach;
                         edict.insert("^realm", format!("{}", left.0));
@@ -9640,8 +9264,9 @@ pub fn explain_not_within_menu_and_realm_ne_breach_and_anuman_and_mode_eq_drone(
             let mut right = {
                 let mut refs = vec!["^mode"];
                 let mut left = {
-                    edict.insert("^mode", format!("{:?}", ctx.mode()));
-                    (ctx.mode(), vec!["^mode"])
+                    let r = ctx.mode();
+                    edict.insert("^mode", format!("{:?}", r));
+                    (r, vec!["^mode"])
                 };
                 let right = enums::Mode::Drone;
                 edict.insert("^mode", format!("{}", left.0));
@@ -9668,8 +9293,9 @@ pub fn explain_not_within_menu_and_realm_ne_breach_and_can_recall(
                 let mut right = {
                     let mut refs = vec!["^realm"];
                     let mut left = {
-                        edict.insert("^realm", format!("{:?}", data::realm(ctx.position())));
-                        (data::realm(ctx.position()), vec!["^realm"])
+                        let r = data::realm(ctx.position());
+                        edict.insert("^realm", format!("{:?}", r));
+                        (r, vec!["^realm"])
                     };
                     let right = enums::Realm::Breach;
                     edict.insert("^realm", format!("{}", left.0));
@@ -9939,8 +9565,9 @@ pub fn explain_realm_eq_breach(
     {
         let mut refs = vec!["^realm"];
         let mut left = {
-            edict.insert("^realm", format!("{:?}", data::realm(ctx.position())));
-            (data::realm(ctx.position()), vec!["^realm"])
+            let r = data::realm(ctx.position());
+            edict.insert("^realm", format!("{:?}", r));
+            (r, vec!["^realm"])
         };
         let right = enums::Realm::Breach;
         edict.insert("^realm", format!("{}", left.0));
@@ -9959,8 +9586,9 @@ pub fn explain_realm_eq_breach_and_exit_breach_and___flipside_not_within_default
             let mut left = {
                 let mut refs = vec!["^realm"];
                 let mut left = {
-                    edict.insert("^realm", format!("{:?}", data::realm(ctx.position())));
-                    (data::realm(ctx.position()), vec!["^realm"])
+                    let r = data::realm(ctx.position());
+                    edict.insert("^realm", format!("{:?}", r));
+                    (r, vec!["^realm"])
                 };
                 let right = enums::Realm::Breach;
                 edict.insert("^realm", format!("{}", left.0));

@@ -338,13 +338,23 @@ class RustExplainerVisitor(RustBaseVisitor):
         super().__init__(*args, **kwargs)
         self.code_writer = RustVisitor(*args, **kwargs)
 
-    def _getRefExplainer(self, ref):
-        get = self._getRefGetter(ref[1:])
+    def _getRefExplainerAndTag(self, ref, usage=None, var='r'):
+        if usage is None:
+            usage = self._getRefGetter(ref[1:])
         # we don't want to explain builtins or arguments.
         # Arguments could differ by call
-        if ref[0] == '$' or get[0] == '$':
-            return None
-        return f'edict.insert("{ref}", format!("{{:?}}", {get}))'
+        if ref in BUILTINS or ref[1:] in BUILTINS:
+            return None, ref
+        if usage[0] == '$':
+            tag = f'{self.name}.{ref}'
+            return (f'if let Some(v) = edict.get_mut(&"{tag}") {{ '
+                    f'v.push_str(format!(", {usage}: {{}}", {var})); }} '
+                    f'else {{ edict.insert("{tag}", format!("{usage}: {{}}", {var})); }}', tag)
+        elif ref[1:] in self.ctxdict:
+            tag = ref[0] + self.ctxdict[ref[1:]]
+        else:
+            tag = ref
+        return f'edict.insert("{tag}", format!("{{:?}}", {var}))', tag
 
     def _getExplainerFunc(self, func):
         if func in BUILTINS:
@@ -423,11 +433,13 @@ class RustExplainerVisitor(RustBaseVisitor):
             ]
             if ctx.REF():
                 ref = str(ctx.REF())
-                if exp := self._getRefExplainer(ref):
+                exp, tag = self._getRefExplainerAndTag(ref)
+                if exp:
                     # Insert before the last element
                     lines[-1:-1] = [
+                        f'let r = {self._getRefGetter(ref[1:])}',
                         exp,
-                        f'refs.push("{ref}")',
+                        f'refs.push("{tag}")',
                     ]
         else:
             lines = [
@@ -437,11 +449,13 @@ class RustExplainerVisitor(RustBaseVisitor):
             ]
             if ctx.REF():
                 ref = str(ctx.REF())
-                if exp := self._getRefExplainer(ref):
+                exp, tag = self._getRefExplainerAndTag(ref)
+                if exp:
                     # Replace the last element
                     lines[-1:] = [
+                        f'let r = {self._getRefGetter(ref[1:])}',
                         exp,
-                        f'({"!" if ctx.NOT() else ""}res, vec!["{ctx.getText()}", "{ref}"])'
+                        f'({"!" if ctx.NOT() else ""}res, vec!["{ctx.getText()}", "{tag}"])'
                     ]
         return f'{{ {"; ".join(lines)} }}'
 
@@ -541,8 +555,9 @@ class RustExplainerVisitor(RustBaseVisitor):
     def visitArgument(self, ctx):
         ref = str(ctx.REF())
         getter = self._getRefGetter(ref[1:])
-        if exp := self._getRefExplainer(ref):
-            return f'{{ {exp}; ({getter}, vec!["{ref}"]) }}'
+        exp, tag = self._getRefExplainerAndTag(ref, getter)
+        if exp:
+            return f'{{ let r = {getter}; {exp}; (r, vec!["{tag}"]) }}'
         return f'({getter}, vec![])'
 
     def visitItemCount(self, ctx):
@@ -573,24 +588,12 @@ class RustExplainerVisitor(RustBaseVisitor):
     def visitOneArgument(self, ctx):
         ref = str(ctx.REF())
         getter = self._getRefGetter(ref[1:])
-        exp = self._getRefExplainer(ref)
-        if exp is None:
-            lines = [
-                f'let h = ctx.has({getter})',
-                # Calling this function multiple times with different args;
-                # we could generate a string and leak it for the key, or we could just append all
-                # the uses to the explainer.
-                (f'if let Some(v) = edict.get_mut(&"{self.name}.{ref}") {{ '
-                 f'v.push_str(format!(" {getter}: {{}}", h)); }} '
-                 f'else {{ edict.insert("{self.name}.{ref}", format!("{getter}: {{}}", h)); }}'),
-                f'(h, vec!["{self.name}.{ref}"])',
-            ]
-        else:
-            lines = [
-                f'let h = {getter}',
-                exp,
-                f'(h, vec!["{ref}"])',
-            ]
+        exp, tag = self._getRefExplainerAndTag(ref, getter)
+        lines = [
+            f'let r = {getter}' if getter[0] != '$' else f'let r = ctx.has({getter})',
+            exp,
+            f'(r, vec!["{tag}"])',
+        ]
         return f'{{ {"; ".join(lines)} }}'
     
     # There's no need to optimize for bitflags here, as the compiler can handle that! Hopefully.
@@ -615,14 +618,16 @@ class RustExplainerVisitor(RustBaseVisitor):
             return f'({ctx.INT()}, vec![])'
         if ctx.REF():
             ref = str(ctx.REF())
-            if exp := self._getRefExplainer(ref):
+            getter = self._getRefGetter(ref[1:])
+            exp, tag = self._getRefExplainerAndTag(ref, getter)
+            if exp:
                 lines = [
-                    f'let r = {self._getRefGetter(ref[1:])}',
+                    f'let r = {getter}',
                     exp,
-                    f'(r, vec!["{ref}"])'
+                    f'(r, vec!["{tag}"])'
                 ]
                 return f'{{ {"; ".join(lines)} }}'
-            return f'({self._getRefGetter(str(ctx.REF())[1:])}, vec![])'
+            return f'({getter}, vec![])'
         if ctx.SETTING():
             sstr = str(ctx.SETTING())
             lines.extend([
@@ -642,3 +647,33 @@ class RustExplainerVisitor(RustBaseVisitor):
         ]
         return f'{{ {"; ".join(lines)} }}'
 
+    def visitPerItemInt(self, ctx):
+        cases = list(map(str, ctx.INT())) + ['_']
+        results = [str(self.visit(n)) for n in ctx.num()]
+        vstr = f'{ctx.ITEM()} count'
+        lines = [
+            f'let mut refs = vec!["{vstr}"]',
+            f'let ct = ctx.count(Item::{ctx.ITEM()})',
+            f'edict.insert("{vstr}", format!("{{}}", ct))',
+            ('let mut m = match ct { '
+             + ', '.join(f'{i} => {r}' for i, r in zip(cases, results))
+             + ', }'),
+            'refs.append(&mut m.1)',
+            'm'
+        ]
+        return f'{{ {"; ".join(lines)} }}'
+
+    def visitRefInList(self, ctx):
+        ref = str(ctx.REF())
+        getter = self._getRefGetter(ref[1:])
+        values = [f'Item::{i}' for i in ctx.ITEM()]
+        exp, tag = self._getRefExplainerAndTag(ref, getter)
+        lines = [
+            f'let r = {getter}',
+            f'(matches!(r, {" | ".join(values)}), vec!["{tag}"])'
+        ]
+        if exp:
+            # Insert before last line
+            lines[-1:-1] = [exp]
+        return f'{{ {"; ".join(lines)} }}'
+    

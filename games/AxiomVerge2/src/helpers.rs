@@ -27,8 +27,9 @@ macro_rules! hexplain__melee {
                 let mut right = {
                     let mut refs = vec!["^mode"];
                     let mut left = {
-                        $edict.insert("^mode", format!("{:?}", $ctx.mode()));
-                        ($ctx.mode(), vec!["^mode"])
+                        let r = $ctx.mode();
+                        $edict.insert("^mode", format!("{:?}", r));
+                        (r, vec!["^mode"])
                     };
                     let right = enums::Mode::Drone;
                     $edict.insert("^mode", format!("{}", left.0));
@@ -61,8 +62,9 @@ macro_rules! hexplain__boomerang {
             let mut left = {
                 let mut refs = vec!["^mode"];
                 let mut left = {
-                    $edict.insert("^mode", format!("{:?}", $ctx.mode()));
-                    ($ctx.mode(), vec!["^mode"])
+                    let r = $ctx.mode();
+                    $edict.insert("^mode", format!("{:?}", r));
+                    (r, vec!["^mode"])
                 };
                 let right = enums::Mode::Drone;
                 $edict.insert("^mode", format!("{}", left.0));
@@ -140,8 +142,9 @@ macro_rules! hexplain__grab {
             let mut left = {
                 let mut refs = vec!["^mode"];
                 let mut left = {
-                    $edict.insert("^mode", format!("{:?}", $ctx.mode()));
-                    ($ctx.mode(), vec!["^mode"])
+                    let r = $ctx.mode();
+                    $edict.insert("^mode", format!("{:?}", r));
+                    (r, vec!["^mode"])
                 };
                 let right = enums::Mode::Drone;
                 $edict.insert("^mode", format!("{}", left.0));
@@ -182,8 +185,9 @@ macro_rules! hexplain__climb {
             let mut left = {
                 let mut refs = vec!["^mode"];
                 let mut left = {
-                    $edict.insert("^mode", format!("{:?}", $ctx.mode()));
-                    ($ctx.mode(), vec!["^mode"])
+                    let r = $ctx.mode();
+                    $edict.insert("^mode", format!("{:?}", r));
+                    (r, vec!["^mode"])
                 };
                 let right = enums::Mode::Drone;
                 $edict.insert("^mode", format!("{}", left.0));
@@ -224,8 +228,9 @@ macro_rules! hexplain__hook {
             let mut left = {
                 let mut refs = vec!["^mode"];
                 let mut left = {
-                    $edict.insert("^mode", format!("{:?}", $ctx.mode()));
-                    ($ctx.mode(), vec!["^mode"])
+                    let r = $ctx.mode();
+                    $edict.insert("^mode", format!("{:?}", r));
+                    (r, vec!["^mode"])
                 };
                 let right = enums::Mode::Drone;
                 $edict.insert("^mode", format!("{}", left.0));
@@ -266,8 +271,9 @@ macro_rules! hexplain__hover {
             let mut left = {
                 let mut refs = vec!["^mode"];
                 let mut left = {
-                    $edict.insert("^mode", format!("{:?}", $ctx.mode()));
-                    ($ctx.mode(), vec!["^mode"])
+                    let r = $ctx.mode();
+                    $edict.insert("^mode", format!("{:?}", r));
+                    (r, vec!["^mode"])
                 };
                 let right = enums::Mode::Drone;
                 $edict.insert("^mode", format!("{}", left.0));
@@ -308,8 +314,9 @@ macro_rules! hexplain__charge {
             let mut left = {
                 let mut refs = vec!["^mode"];
                 let mut left = {
-                    $edict.insert("^mode", format!("{:?}", $ctx.mode()));
-                    ($ctx.mode(), vec!["^mode"])
+                    let r = $ctx.mode();
+                    $edict.insert("^mode", format!("{:?}", r));
+                    (r, vec!["^mode"])
                 };
                 let right = enums::Mode::Drone;
                 $edict.insert("^mode", format!("{}", left.0));
@@ -350,8 +357,9 @@ macro_rules! hexplain__spin {
             let mut left = {
                 let mut refs = vec!["^mode"];
                 let mut left = {
-                    $edict.insert("^mode", format!("{:?}", $ctx.mode()));
-                    ($ctx.mode(), vec!["^mode"])
+                    let r = $ctx.mode();
+                    $edict.insert("^mode", format!("{:?}", r));
+                    (r, vec!["^mode"])
                 };
                 let right = enums::Mode::Drone;
                 $edict.insert("^mode", format!("{}", left.0));
@@ -402,8 +410,9 @@ macro_rules! hexplain__can_deploy {
                     let mut right = {
                         let mut refs = vec!["^mode"];
                         let mut left = {
-                            $edict.insert("^mode", format!("{:?}", $ctx.mode()));
-                            ($ctx.mode(), vec!["^mode"])
+                            let r = $ctx.mode();
+                            $edict.insert("^mode", format!("{:?}", r));
+                            (r, vec!["^mode"])
                         };
                         let right = enums::Mode::Drone;
                         $edict.insert("^mode", format!("{}", left.0));
@@ -448,8 +457,9 @@ macro_rules! hexplain__can_recall {
             let mut left = {
                 let mut refs = vec!["^mode"];
                 let mut left = {
-                    $edict.insert("^mode", format!("{:?}", $ctx.mode()));
-                    ($ctx.mode(), vec!["^mode"])
+                    let r = $ctx.mode();
+                    $edict.insert("^mode", format!("{:?}", r));
+                    (r, vec!["^mode"])
                 };
                 let right = enums::Mode::Drone;
                 $edict.insert("^mode", format!("{}", left.0));
@@ -490,8 +500,9 @@ macro_rules! hexplain__shockwave {
             let mut left = {
                 let mut refs = vec!["^mode"];
                 let mut left = {
-                    $edict.insert("^mode", format!("{:?}", $ctx.mode()));
-                    ($ctx.mode(), vec!["^mode"])
+                    let r = $ctx.mode();
+                    $edict.insert("^mode", format!("{:?}", r));
+                    (r, vec!["^mode"])
                 };
                 let right = enums::Mode::Drone;
                 $edict.insert("^mode", format!("{}", left.0));
@@ -783,8 +794,9 @@ macro_rules! hexplain__ft_main {
                 let mut right = {
                     let mut refs = vec!["^realm"];
                     let mut left = {
-                        $edict.insert("^realm", format!("{:?}", data::realm($ctx.position())));
-                        (data::realm($ctx.position()), vec!["^realm"])
+                        let r = data::realm($ctx.position());
+                        $edict.insert("^realm", format!("{:?}", r));
+                        (r, vec!["^realm"])
                     };
                     let right = enums::Realm::Main;
                     $edict.insert("^realm", format!("{}", left.0));
@@ -825,8 +837,9 @@ macro_rules! hexplain__ft_breach {
                 let mut right = {
                     let mut refs = vec!["^realm"];
                     let mut left = {
-                        $edict.insert("^realm", format!("{:?}", data::realm($ctx.position())));
-                        (data::realm($ctx.position()), vec!["^realm"])
+                        let r = data::realm($ctx.position());
+                        $edict.insert("^realm", format!("{:?}", r));
+                        (r, vec!["^realm"])
                     };
                     let right = enums::Realm::Breach;
                     $edict.insert("^realm", format!("{}", left.0));
@@ -877,8 +890,9 @@ macro_rules! hexplain__range1 {
                         let mut right = {
                             let mut refs = vec!["^mode"];
                             let mut left = {
-                                $edict.insert("^mode", format!("{:?}", $ctx.mode()));
-                                ($ctx.mode(), vec!["^mode"])
+                                let r = $ctx.mode();
+                                $edict.insert("^mode", format!("{:?}", r));
+                                (r, vec!["^mode"])
                             };
                             let right = enums::Mode::Drone;
                             $edict.insert("^mode", format!("{}", left.0));
@@ -933,8 +947,9 @@ macro_rules! hexplain__range2 {
                         let mut right = {
                             let mut refs = vec!["^mode"];
                             let mut left = {
-                                $edict.insert("^mode", format!("{:?}", $ctx.mode()));
-                                ($ctx.mode(), vec!["^mode"])
+                                let r = $ctx.mode();
+                                $edict.insert("^mode", format!("{:?}", r));
+                                (r, vec!["^mode"])
                             };
                             let right = enums::Mode::Drone;
                             $edict.insert("^mode", format!("{}", left.0));
@@ -979,8 +994,9 @@ macro_rules! hexplain__range3 {
                 let mut right = {
                     let mut refs = vec!["^mode"];
                     let mut left = {
-                        $edict.insert("^mode", format!("{:?}", $ctx.mode()));
-                        ($ctx.mode(), vec!["^mode"])
+                        let r = $ctx.mode();
+                        $edict.insert("^mode", format!("{:?}", r));
+                        (r, vec!["^mode"])
                     };
                     let right = enums::Mode::Drone;
                     $edict.insert("^mode", format!("{}", left.0));
@@ -1012,8 +1028,9 @@ macro_rules! hexplain__more_refills {
         {
             let mut refs = vec!["^refills", "$count(Power_Matrix)"];
             let mut left = {
-                $edict.insert("^refills", format!("{:?}", $ctx.refills()));
-                ($ctx.refills(), vec!["^refills"])
+                let r = $ctx.refills();
+                $edict.insert("^refills", format!("{:?}", r));
+                (r, vec!["^refills"])
             };
             let mut right = (false, vec![]);
             $edict.insert("^refills", format!("{:?}", left.0));
@@ -1045,7 +1062,19 @@ macro_rules! hexplain__max_energy {
     ($ctx:expr, $world:expr, $edict:expr) => {{
         #[allow(unused_imports)]
         use $crate::items::Item;
-        (false, vec![])
+        {
+            let mut refs = vec!["Nano_Points count"];
+            let ct = $ctx.count(Item::Nano_Points);
+            $edict.insert("Nano_Points count", format!("{}", ct));
+            let mut m = match ct {
+                3 => (450, vec![]),
+                2 => (400, vec![]),
+                1 => (350, vec![]),
+                _ => (300, vec![]),
+            };
+            refs.append(&mut m.1);
+            m
+        }
     }};
 }
 
@@ -1150,8 +1179,9 @@ macro_rules! hexplain__block_clip {
                 let mut right = {
                     let mut refs = vec!["^mode"];
                     let mut left = {
-                        $edict.insert("^mode", format!("{:?}", $ctx.mode()));
-                        ($ctx.mode(), vec!["^mode"])
+                        let r = $ctx.mode();
+                        $edict.insert("^mode", format!("{:?}", r));
+                        (r, vec!["^mode"])
                     };
                     let right = enums::Mode::Drone;
                     $edict.insert("^mode", format!("{}", left.0));
@@ -1290,8 +1320,9 @@ macro_rules! hexplain__attract {
                             let mut right = {
                                 let mut refs = vec!["^mode"];
                                 let mut left = {
-                                    $edict.insert("^mode", format!("{:?}", $ctx.mode()));
-                                    ($ctx.mode(), vec!["^mode"])
+                                    let r = $ctx.mode();
+                                    $edict.insert("^mode", format!("{:?}", r));
+                                    (r, vec!["^mode"])
                                 };
                                 let right = enums::Mode::Drone;
                                 $edict.insert("^mode", format!("{}", left.0));
