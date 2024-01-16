@@ -371,13 +371,6 @@ class RustExplainerVisitor(RustBaseVisitor):
         else:
             return f'hexplain__{construct_id(func[1:])}!'
 
-    # TODO: Remove the "or (false, vec![])" parts when all visits are supported
-    def visit(self, ctx):
-        val = super().visit(ctx)
-        if val is None:
-            return '(false, vec![])'
-        return val
-
     def visitBoolExpr(self, ctx):
         try:
             if ctx.OR():
@@ -401,13 +394,12 @@ class RustExplainerVisitor(RustBaseVisitor):
             elif ctx.boolExpr():
                 return f'({self.visit(ctx.boolExpr(0))})'
             elif ctx.NOT():
-                # TODO: Remove the "or (false, vec![])" parts
                 lines = [
-                    f'let val = {super().visitBoolExpr(ctx) or "(false, vec![])"}',
+                    f'let val = {super().visitBoolExpr(ctx)}',
                     '(!val.0, val.1)'
                 ]
             else:
-                return super().visitBoolExpr(ctx) or "(false, vec![])"
+                return super().visitBoolExpr(ctx)
             return f'{{ {"; ".join(lines)} }}'
         except AttributeError as e:
             raise AttributeError(str(e) + '; ' + ' '.join(
