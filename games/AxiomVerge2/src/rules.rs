@@ -4845,7 +4845,11 @@ pub fn explain_ft_main_and___map_spot_within_menu_gt_kiengir_map(
         if !left.0 {
             left
         } else {
-            let mut right = ((false, vec![]));
+            let mut right = ({
+                let r = data::map_spot(ctx.position());
+                edict.insert("^map_spot", format!("{:?}", r));
+                (get_area(r) == AreaId::Menu__Kiengir_Map, vec!["^map_spot"])
+            });
             left.1.append(&mut right.1);
             (right.0, left.1)
         }
@@ -9647,9 +9651,13 @@ pub fn explain_realm_eq_breach_and_exit_breach_and___flipside_not_within_default
             left
         } else {
             let mut right = ({
-                let res = Default::default();
-                edict.insert("$default", format!("{:?}", res));
-                (res, vec!["$default"])
+                let mut refs = vec!["^flipside"];
+                let r = data::flipside(ctx.position());
+                let mut f = (Default::default(), vec![]);
+                edict.insert("$default", format!("{}", f.0));
+                refs.append(&mut f.1);
+                edict.insert("^flipside", format!("{:?}", r));
+                (r != f.0, refs)
             });
             left.1.append(&mut right.1);
             (right.0, left.1)

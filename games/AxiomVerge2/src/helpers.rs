@@ -1032,7 +1032,11 @@ macro_rules! hexplain__more_refills {
                 $edict.insert("^refills", format!("{:?}", r));
                 (r, vec!["^refills"])
             };
-            let mut right = (false, vec![]);
+            let mut right = {
+                let f = $ctx.count(Item::Power_Matrix);
+                $edict.insert("$count(Power_Matrix)", format!("{}", f));
+                (f, vec!["$count(Power_Matrix)"])
+            };
             $edict.insert("^refills", format!("{:?}", left.0));
             $edict.insert("$count(Power_Matrix)", format!("{:?}", right.0));
             refs.append(&mut left.1);
@@ -1336,7 +1340,13 @@ macro_rules! hexplain__attract {
                     if left.0 {
                         left
                     } else {
-                        let mut right = (false, vec![]);
+                        let mut right = {
+                            let r0 = $ctx.indra();
+                            $edict.insert("^indra", format!("{:?}", r0));
+                            let r1 = $ctx.position();
+                            $edict.insert("^position", format!("{:?}", r1));
+                            (r0 == r1, vec!["^indra", "^position"])
+                        };
                         left.1.append(&mut right.1);
                         (right.0, left.1)
                     }

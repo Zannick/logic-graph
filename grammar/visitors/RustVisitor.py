@@ -39,16 +39,21 @@ class RustBaseVisitor(RulesVisitor):
 
     def _getRefEnum(self, ref):
         return f'enums::{self.ctxdict[ref].capitalize()}'
-    
-    def _isRefSpotId(self, ref):
+
+    def _getRefType(self, ref):
         if ref in self.context_types:
-            return 'SpotId' == self.context_types[ref]
+            return self.context_types[ref]
         if ref in self.data_types:
-            return 'SpotId' == self.data_types[ref]
+            return self.data_types[ref]
         # TODO: This probably needs to handle access funcs as well
         if func := self.action_funcs.get(self.name):
             if ref in func.get('args', {}):
-                return 'SpotId' == func['args'][ref]
+                return func['args'][ref]
+
+    def _isRefSpotId(self, ref):
+        rtype = self._getRefType(ref)
+        if rtype:
+            return 'SpotId' == rtype
         return False
 
     def _getFuncAndArgs(self, func):
@@ -281,18 +286,26 @@ class RustVisitor(RustBaseVisitor):
 
     def visitRefInFunc(self, ctx):
         func = str(ctx.invoke().FUNC())[1:]
+        assert func in ('default', 'get_area', 'get_region')
         eq = '!' if ctx.NOT() else '='
         ref = str(ctx.REF())[1:]
         get = self._getRefGetter(ref)
         if func == 'default':
             return f'{get} {eq}= {self.visit(ctx.invoke())}'
-        assert func in ('get_area', 'get_region')
         if self._isRefSpotId(ref):
-            check = f'{get} != SpotId && '
+            check = f'{get} != SpotId::None && '
         else:
             check = ''
         return (f'{check}{func}({get}) '
                 f'{eq}= {self.visit(ctx.invoke())}')
+
+    def visitFuncNum(self, ctx):
+        func, args = self._getFuncAndArgs(str(ctx.FUNC()))
+        if ctx.ITEM():
+            args.append(f'Item::{ctx.ITEM()}')
+        elif ctx.num():
+            args.extend(str(self.visit(n)) for n in ctx.num())
+        return f'{func}({", ".join(args)})'
 
     ## Action-specific
     def visitActions(self, ctx):
@@ -318,14 +331,6 @@ class RustVisitor(RustBaseVisitor):
     def visitAlter(self, ctx):
         return f'{self._getRefRaw(str(ctx.REF())[1:])} {ctx.BINOP()}= {self.visit(ctx.num())};'
 
-    def visitFuncNum(self, ctx):
-        func, args = self._getFuncAndArgs(str(ctx.FUNC()))
-        if ctx.ITEM():
-            args.append(f'Item::{ctx.ITEM()}')
-        elif ctx.num():
-            args.extend(str(self.visit(n)) for n in ctx.num())
-        return f'{func}({", ".join(args)})'
-        
     def visitActionHelper(self, ctx):
         return self.visit(ctx.invoke()) + ';'
         
@@ -379,14 +384,14 @@ class RustExplainerVisitor(RustBaseVisitor):
                 lines = [
                     f'let mut left = {self.visit(ctx.boolExpr(0))}',
                     # short-circuit logic
-                    'if left.0 { left } else { let mut right = ' + str(self.visit(ctx.boolExpr(1))),
+                    f'if left.0 {{ left }} else {{ let mut right = {self.visit(ctx.boolExpr(1))}',
                     'left.1.append(&mut right.1); (right.0, left.1) }',
                 ]
             elif ctx.AND():
                 lines = [
                     f'let mut left = {self.visit(ctx.boolExpr(0))}',
                     # short-circuit logic
-                    'if !left.0 { left } else { let mut right = ' + str(self.visit(ctx.boolExpr(1))),
+                    f'if !left.0 {{ left }} else {{ let mut right = {self.visit(ctx.boolExpr(1))}',
                     'left.1.append(&mut right.1); (right.0, left.1) }',
                 ]
             elif ctx.TRUE():
@@ -443,6 +448,8 @@ class RustExplainerVisitor(RustBaseVisitor):
                         exp,
                         f'refs.push("{tag}")',
                     ]
+        elif func == 'Default::default':
+            return '(Default::default(), vec![])'
         else:
             lines = [
                 f'let res = {func}({", ".join(args)})',
@@ -725,3 +732,83 @@ class RustExplainerVisitor(RustBaseVisitor):
                     for pt, plist in places.items()
                     ]
         return f'({" || ".join(per_type)}, vec!["^position"])'
+
+    def visitRefInPlaceRef(self, ctx):
+        ref0 = str(ctx.REF(0))
+        ref1 = str(ctx.REF(1))
+        ptype = self.context_types[ref1[1:]]
+        eq = '!' if ctx.NOT() else '='
+        ref = str(ctx.REF(0))[1:]
+        get0 = self._getRefGetter(ref0[1:])
+        get1 = self._getRefGetter(ref1[1:])
+        exp0, tag0 = self._getRefExplainerAndTag(ref0, get0, 'r0')
+        exp1, tag1 = self._getRefExplainerAndTag(ref1, get1, 'r1')
+        lines = [
+            f'let r0 = {get0}{"; " + exp0 if exp0 else ""}',
+            f'let r1 = {get1}{"; " + exp1 if exp1 else ""}',
+        ]
+        if ptype == 'SpotId':
+            lines.append(f'(r0 {eq}= r1, vec!["{tag0}", "{tag1}"])')
+        elif self._isRefSpotId(ref0[1:]):
+            lines.append(f'(r0 != SpotId::None && get_{ptype[:-2].lower()}(r0) {eq}= r1, vec!["{tag0}", "{tag1}"])')
+        else:
+            lines.append(f'(get_{ptype[:-2].lower()}(r0) {eq}= r1, vec!["{tag0}", "{tag1}"])')
+        return f'{{ {"; ".join(lines)} }}'
+    
+    def visitRefInPlaceName(self, ctx):
+        pl = str(ctx.PLACE())[1:-1]
+        ptype = getPlaceType(pl)
+        eq = '!' if ctx.NOT() else '='
+        ref = str(ctx.REF())
+        get = self._getRefGetter(ref[1:])
+        exp, tag = self._getRefExplainerAndTag(ref, get)
+        lines = [
+            f'let r = {get}',
+        ]
+        if exp:
+            lines.append(exp)
+        if ptype == 'SpotId':
+            lines.append(f'(r {eq}= {construct_spot_id(*place_to_names(pl))}, vec!["{tag}"])')
+        else:
+            val = f'{ptype}::{construct_id(pl)}'
+            if self._isRefSpotId(ref):
+                lines.append(f'(r != SpotId::None && get_{ptype[:-2].lower()}(r) {eq}= {val}, vec!["{tag}"])')
+            else:
+                lines.append(f'(get_{ptype[:-2].lower()}(r) {eq}= {val}, vec!["{tag}"])')
+        return f'{{ {"; ".join(lines)} }}'
+
+    def visitRefInFunc(self, ctx):
+        func = str(ctx.invoke().FUNC())[1:]
+        assert func in ('default', 'get_area', 'get_region')
+        eq = '!' if ctx.NOT() else '='
+        ref = str(ctx.REF())
+        get = self._getRefGetter(ref[1:])
+        exp, tag = self._getRefExplainerAndTag(ref, get)
+        ftag = ctx.invoke().getText()
+        lines = [
+            f'let mut refs = vec!["{tag}"]',
+            f'let r = {get if func == 'default' else f"{func}({get})"}',
+            f'let mut f = {self.visit(ctx.invoke())}',
+            f'edict.insert("{ftag}", format!("{{}}", f.0))',
+            'refs.append(&mut f.1)',
+        ]
+        if exp:
+            lines.append(exp)
+
+        if func != 'default' and self._isRefSpotId(ref):
+            return f'{{ {"; ".join(lines)}; (r != SpotId::None && r {eq}= f.0, refs) }}'
+        return f'{{ {"; ".join(lines)}; (r {eq}= f.0, refs) }}'
+
+    def visitFuncNum(self, ctx):
+        func, args = self._getFuncAndArgs(str(ctx.FUNC()))
+        if ctx.ITEM():
+            args.append(f'Item::{ctx.ITEM()}')
+        elif ctx.num():
+            args.extend(str(self.code_writer.visit(n)) for n in ctx.num())
+        tag = ctx.getText()
+        lines = [
+            f'let f = {func}({", ".join(args)})',
+            f'edict.insert("{tag}", format!("{{}}", f))',
+            f'(f, vec!["{tag}"])'
+        ]
+        return f'{{ {"; ".join(lines)} }}'
