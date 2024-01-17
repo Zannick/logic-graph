@@ -78,6 +78,8 @@ where
         self.reqs.iter().all(|&e| world.get_exit(e).can_access(ctx, world))
     }
 
+    // TODO: explain()
+
     pub fn is_empty(&self) -> bool {
         self.movement.is_none() && self.reqs.is_empty()
     }

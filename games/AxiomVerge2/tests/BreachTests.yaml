@@ -49,6 +49,9 @@ tests:
       - Breach_Attractor
       - Breach_Sight
       - Exit_Breach
+    context:
+      mode: Indra
+      indra: None
     route: |
       ! Do Giguna > Clouds > Platform Start > Hack, Deploy, Ride to Portal
         Move... to Giguna Breach > Pink Clouds > Corner

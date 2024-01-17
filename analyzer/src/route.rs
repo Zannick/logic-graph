@@ -86,9 +86,9 @@ where
             }
             if item == Default::default() {
                 let item = world.get_location(loc_id).item();
-                ctx.replay(world, History::G(item, loc_id));
+                ctx.assert_and_replay(world, History::G(item, loc_id));
             } else {
-                ctx.replay(world, h);
+                ctx.assert_and_replay(world, h);
             }
         }
         History::H(item, exit_id) => {
@@ -106,12 +106,12 @@ where
                 let exit = world.get_exit(exit_id);
                 if let Some(loc_id) = exit.loc_id() {
                     let item = world.get_location(*loc_id).item();
-                    ctx.replay(world, History::H(item, exit_id));
+                    ctx.assert_and_replay(world, History::H(item, exit_id));
                 } else {
                     return Err(format!("Not a hybrid exit: {}", exit_id));
                 }
             } else {
-                ctx.replay(world, h);
+                ctx.assert_and_replay(world, h);
             }
         }
         History::E(exit_id) => {
@@ -132,7 +132,9 @@ where
                 )
             });
         }
-        History::W(..) => ctx.replay(world, h),
+        History::W(..) => {
+            ctx.assert_and_replay(world, h);
+        }
         History::A(action_id) => {
             let spot_id = world.get_action_spot(action_id);
             if spot_id != Default::default() && pos != spot_id {
@@ -143,7 +145,7 @@ where
                     )
                 });
             }
-            ctx.replay(world, h);
+            ctx.assert_and_replay(world, h);
         }
     }
     Ok(ctx)
@@ -201,12 +203,21 @@ where
         output.push(next.get().diff(ctx.get()));
         let est = scorer.estimate_remaining_time(next.get());
         let el: u64 = next.elapsed().into();
-        output.push(format!("progress={}, est={}, elapsed={}, score={}", scorer.required_visits(next.get()), est, el, el + est));
+        output.push(format!(
+            "progress={}, est={}, elapsed={}, score={}",
+            scorer.required_visits(next.get()),
+            est,
+            el,
+            el + est
+        ));
         ctx = next;
     }
     output.push(format!("Elapsed: {}ms", ctx.elapsed()));
     if !world.won(ctx.get()) {
-        output.push(format!("Remaining items needed: {:?}", world.items_needed(ctx.get())));
+        output.push(format!(
+            "Remaining items needed: {:?}",
+            world.items_needed(ctx.get())
+        ));
     }
     Ok(output.join("\n"))
 }

@@ -69,7 +69,10 @@ pub trait Ctx:
 
     fn can_afford(&self, cost: &<<Self::World as World>::Location as Accessible>::Currency)
         -> bool;
-    fn amount_could_afford(&self, cost: &<<Self::World as World>::Location as Accessible>::Currency) -> i16;
+    fn amount_could_afford(
+        &self,
+        cost: &<<Self::World as World>::Location as Accessible>::Currency,
+    ) -> i16;
     fn spend(&mut self, cost: &<<Self::World as World>::Location as Accessible>::Currency);
 
     fn visit(&mut self, loc_id: <<Self::World as World>::Location as Location>::LocId);
@@ -654,6 +657,57 @@ impl<T: Ctx> ContextWrapper<T> {
                 );
             }
         }
+    }
+
+    pub fn explain_pre_replay<W, L, E, Wp>(&self, world: &W, step: HistoryAlias<T>) -> String
+    where
+        W: World<Location = L, Exit = E, Warp = Wp>,
+        L: Location<Context = T>,
+        T: Ctx<World = W>,
+        E: Exit<Context = T, Currency = <L as Accessible>::Currency, LocId = L::LocId>,
+        Wp: Warp<SpotId = <E as Exit>::SpotId, Context = T, Currency = <L as Accessible>::Currency>,
+    {
+        match step {
+            History::W(wp, _) => world.get_warp(wp).explain(self.get(), world),
+            History::G(_, loc_id) => world.get_location(loc_id).explain(self.get(), world),
+            History::E(exit_id) | History::H(_, exit_id) => {
+                world.get_exit(exit_id).explain(self.get(), world)
+            }
+            History::L(spot) => {
+                let movement_state = self.ctx.get_movement_state(world);
+                let time = self.ctx.local_travel_time(movement_state, spot);
+                if time == u32::MAX {
+                    format!(
+                        "move-local to {} can't be done with movement state {:?}",
+                        spot, movement_state
+                    )
+                } else {
+                    format!(
+                        "move-local to {} in {}ms with movement state {:?}",
+                        spot, time, movement_state
+                    )
+                }
+            }
+            History::A(act_id) => world.get_action(act_id).explain(self.get(), world),
+            History::C(_) => String::from("No explainer for Condensed Edges yet"),
+        }
+    }
+
+    pub fn assert_and_replay<W, L, E, Wp>(&mut self, world: &W, step: HistoryAlias<T>)
+    where
+        W: World<Location = L, Exit = E, Warp = Wp>,
+        L: Location<Context = T>,
+        T: Ctx<World = W>,
+        E: Exit<Context = T, Currency = <L as Accessible>::Currency, LocId = L::LocId>,
+        Wp: Warp<SpotId = <E as Exit>::SpotId, Context = T, Currency = <L as Accessible>::Currency>,
+    {
+        assert!(
+            self.can_replay(world, step),
+            "can't replay \"{}\":\n{}",
+            step,
+            self.explain_pre_replay(world, step)
+        );
+        self.replay(world, step);
     }
 
     pub fn info(&self, est: u32, progress: usize, last: Option<HistoryAlias<T>>) -> String {

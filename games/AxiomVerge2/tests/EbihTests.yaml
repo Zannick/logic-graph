@@ -170,6 +170,8 @@ tests:
 
   - name: collection_fast_travel
     start: Ebih > Drone Room > Item
+    with:
+      - Fast_Travel
     context:
       save: Ebih > Ebih West > Upper Save
       map__giguna__ruins_west__save: true
