@@ -3,10 +3,12 @@
 use crate::context::*;
 use crate::greedy::greedy_search_from;
 use crate::heap::HeapElement;
+use crate::steiner::graph::ExternalNodeId;
+use crate::steiner::{EdgeId, NodeId, ShortestPaths};
 use crate::world::*;
-use crate::{new_hashmap, CommonHasher};
+use crate::{new_hashmap, new_hashset, CommonHasher};
 use std::cmp::Reverse;
-use std::collections::{BinaryHeap, HashMap};
+use std::collections::{BinaryHeap, HashMap, HashSet};
 
 /// Check whether there are available locations at this position.
 pub fn spot_has_locations<W, T, L, E>(world: &W, ctx: &T) -> bool
@@ -125,6 +127,33 @@ fn expand_exits<W, T, E>(
     }
 }
 
+fn expand_exits_astar<W, T, E>(
+    world: &W,
+    ctx: &ContextWrapper<T>,
+    states_seen: &HashSet<T, CommonHasher>,
+    max_time: u32,
+    spot_heap: &mut BinaryHeap<Reverse<HeapElement<T>>>,
+    score_func: &impl Fn(&ContextWrapper<T>) -> Option<u32>,
+) where
+    W: World<Exit = E>,
+    T: Ctx<World = W>,
+    E: Exit<Context = T, Currency = <W::Location as Accessible>::Currency>,
+    W::Location: Location<Context = T>,
+{
+    for exit in world.get_spot_exits(ctx.get().position()) {
+        if exit.can_access(ctx.get(), world) {
+            let mut newctx = ctx.clone();
+            newctx.exit(world, exit);
+            let elapsed = newctx.elapsed();
+            if !states_seen.contains(newctx.get()) && elapsed <= max_time {
+                if let Some(score) = score_func(&newctx) {
+                    spot_heap.push(Reverse(HeapElement { score, el: newctx }));
+                }
+            }
+        }
+    }
+}
+
 // This is mainly for move_to which is used from tests.
 fn expand_local<W, T, E, Wp>(
     world: &W,
@@ -151,6 +180,37 @@ fn expand_local<W, T, E, Wp>(
                     score: elapsed,
                     el: newctx,
                 }));
+            }
+        }
+    }
+}
+
+// This is mainly for move_to.
+fn expand_local_astar<W, T, E, Wp>(
+    world: &W,
+    ctx: &ContextWrapper<T>,
+    movement_state: T::MovementState,
+    states_seen: &HashSet<T, CommonHasher>,
+    max_time: u32,
+    spot_heap: &mut BinaryHeap<Reverse<HeapElement<T>>>,
+    score_func: &impl Fn(&ContextWrapper<T>) -> Option<u32>,
+) where
+    W: World<Exit = E, Warp = Wp>,
+    T: Ctx<World = W>,
+    E: Exit<Context = T, Currency = <W::Location as Accessible>::Currency>,
+    W::Location: Location<Context = T>,
+    Wp: Warp<Context = T, SpotId = E::SpotId, Currency = <W::Location as Accessible>::Currency>,
+{
+    for &dest in world.get_area_spots(ctx.get().position()) {
+        let ltt = ctx.get().local_travel_time(movement_state, dest);
+        if ltt < u32::MAX {
+            let mut newctx = ctx.clone();
+            newctx.move_local(world, dest, ltt);
+            let elapsed = newctx.elapsed();
+            if !states_seen.contains(newctx.get()) && elapsed <= max_time {
+                if let Some(score) = score_func(&newctx) {
+                    spot_heap.push(Reverse(HeapElement { score, el: newctx }));
+                }
             }
         }
     }
@@ -199,6 +259,136 @@ where
     }
 
     spot_enum_map
+}
+
+fn expand_astar<W, T, E, Wp>(
+    world: &W,
+    ctx: &ContextWrapper<T>,
+    states_seen: &HashSet<T, CommonHasher>,
+    max_time: u32,
+    spot_heap: &mut BinaryHeap<Reverse<HeapElement<T>>>,
+    score_func: &impl Fn(&ContextWrapper<T>) -> Option<u32>,
+    allow_local: bool,
+) where
+    W: World<Exit = E, Warp = Wp>,
+    T: Ctx<World = W>,
+    E: Exit<Context = T, Currency = <W::Location as Accessible>::Currency>,
+    W::Location: Location<Context = T>,
+    Wp: Warp<Context = T, SpotId = E::SpotId, Currency = <W::Location as Accessible>::Currency>,
+{
+    let movement_state = ctx.get().get_movement_state(world);
+    let cedges = world.get_condensed_edges_from(ctx.get().position());
+    if !cedges.is_empty() {
+        for ce in cedges {
+            if ce.can_access(world, ctx.get(), movement_state) {
+                let mut newctx = ctx.clone();
+                newctx.move_condensed_edge(world, ce);
+                let elapsed = newctx.elapsed();
+                if !states_seen.contains(newctx.get()) && elapsed <= max_time {
+                    if let Some(score) = score_func(&newctx) {
+                        spot_heap.push(Reverse(HeapElement { score, el: newctx }));
+                    }
+                }
+            }
+        }
+        if allow_local {
+            expand_local_astar(
+                world,
+                ctx,
+                movement_state,
+                states_seen,
+                max_time,
+                spot_heap,
+                score_func,
+            );
+        }
+    } else {
+        expand_local_astar(
+            world,
+            ctx,
+            movement_state,
+            states_seen,
+            max_time,
+            spot_heap,
+            score_func,
+        );
+    }
+
+    expand_exits_astar(world, ctx, states_seen, max_time, spot_heap, score_func);
+
+    for warp in world.get_warps() {
+        if warp.can_access(ctx.get(), world) {
+            let mut newctx = ctx.clone();
+            newctx.warp(world, warp);
+            let elapsed = newctx.elapsed();
+            if !states_seen.contains(newctx.get()) && elapsed <= max_time {
+                if let Some(score) = score_func(&newctx) {
+                    spot_heap.push(Reverse(HeapElement { score, el: newctx }));
+                }
+            }
+        }
+    }
+}
+
+/// Finds the shortest route to the given spot, if any, and moves there.
+pub fn move_to_astar<W, T, E>(
+    world: &W,
+    ctx: ContextWrapper<T>,
+    spot: E::SpotId,
+    shortest_paths: &ShortestPaths<NodeId<W>, EdgeId<W>>,
+) -> Option<ContextWrapper<T>>
+where
+    W: World<Exit = E>,
+    T: Ctx<World = W>,
+    E: Exit<Context = T, Currency = <W::Location as Accessible>::Currency>,
+    W::Location: Location<Context = T>,
+    W::Warp:
+        Warp<Context = T, SpotId = E::SpotId, Currency = <W::Location as Accessible>::Currency>,
+{
+    if ctx.get().position() == spot {
+        return Some(ctx);
+    }
+
+    let goal = ExternalNodeId::Spot(spot);
+    let score_func = |ctx: &ContextWrapper<T>| -> Option<u32> {
+        if let Some(md) =
+            shortest_paths.min_distance(ExternalNodeId::Spot(ctx.get().position()), goal)
+        {
+            Some(ctx.elapsed() + <u64 as TryInto<u32>>::try_into(md).unwrap())
+        } else {
+            None
+        }
+    };
+
+    // Using A* and allowing backtracking
+    let mut states_seen = new_hashset();
+    let mut spot_heap = BinaryHeap::new();
+
+    if let Some(score) = score_func(&ctx) {
+        states_seen.insert(ctx.get().clone());
+        spot_heap.push(Reverse(HeapElement { score, el: ctx }));
+    }
+
+    while let Some(Reverse(el)) = spot_heap.pop() {
+        let ctx = el.el;
+        if ctx.get().position() == spot {
+            return Some(ctx);
+        }
+        if !states_seen.insert(ctx.get().clone()) {
+            continue;
+        }
+        expand_astar(
+            world,
+            &ctx,
+            &mut states_seen,
+            u32::MAX,
+            &mut spot_heap,
+            &score_func,
+            W::same_area(ctx.get().position(), spot),
+        );
+    }
+
+    None
 }
 
 /// Finds the shortest route to the given spot, if any, and moves there.

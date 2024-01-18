@@ -24,6 +24,17 @@ pub struct ShortestPaths<V, E> {
     paths: Vec<Vec<(Vec<usize>, Option<u64>)>>,
 }
 
+impl<V, E> ShortestPaths<V, E>
+where
+    V: Copy + Clone + Eq + PartialEq + std::hash::Hash,
+{
+    pub fn min_distance(&self, start: V, end: V) -> Option<u64> {
+        let start_index = self.graph.node_index_map[&start];
+        let end_index = self.graph.node_index_map[&end];
+        self.paths[start_index][end_index].1
+    }
+}
+
 impl<V, E> SteinerAlgo<V, E> for ShortestPaths<V, E>
 where
     V: Copy + Clone + Debug + Eq + PartialEq + std::hash::Hash,
@@ -153,13 +164,19 @@ where
                                     let mut path = vec![self.graph.edges.len() + new_ei];
                                     path.extend(&self.paths[e.dst][ri].0);
                                     newpath_holder.push(path);
-                                    min = Some((newpath_holder.last().unwrap(), time, *req, root_index));
+                                    min = Some((
+                                        newpath_holder.last().unwrap(),
+                                        time,
+                                        *req,
+                                        root_index,
+                                    ));
                                 }
                             } else {
                                 let mut path = vec![self.graph.edges.len() + new_ei];
                                 path.extend(&self.paths[e.dst][ri].0);
                                 newpath_holder.push(path);
-                                min = Some((newpath_holder.last().unwrap(), time, *req, root_index));
+                                min =
+                                    Some((newpath_holder.last().unwrap(), time, *req, root_index));
                             }
                         }
                     }
@@ -195,13 +212,11 @@ where
                 // Because the graph has no negative edges,
                 // the minimum path must have no intermediate nodes or edges already in the tree
                 nodes.extend(
-                    path
-                        .iter()
+                    path.iter()
                         .map(|&ei| chain_index!(self.graph.edges, extra_edges, ei).dst),
                 );
                 edges.extend(
-                    path
-                        .iter()
+                    path.iter()
                         .map(|&ei| chain_index!(self.graph.edges, extra_edges, ei).id),
                 );
                 cost += best;
