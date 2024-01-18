@@ -1,0 +1,14 @@
+appenders:
+  testlog:
+    kind: file
+    path: "log/tests.log"
+    encoder:
+      pattern: "{level:<5} [{date(%F %T.%6f %Z)}] {target}.{line} | {m}{n}"
+    filters:
+      - kind: threshold
+        level: debug
+
+root:
+  level: debug
+  appenders:
+    - testlog
