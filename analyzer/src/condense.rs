@@ -75,10 +75,34 @@ where
                 return false;
             }
         }
-        self.reqs.iter().all(|&e| world.get_exit(e).can_access(ctx, world))
+        self.reqs
+            .iter()
+            .all(|&e| world.get_exit(e).can_access(ctx, world))
     }
 
-    // TODO: explain()
+    pub fn explain<W>(&self, world: &W, ctx: &T, movements: T::MovementState) -> String
+    where
+        W: World,
+        T: Ctx<World = W>,
+        W::Exit: Exit<ExitId = E>,
+        W::Location: Location<Context = T>,
+    {
+        if let Some(m) = &self.movement {
+            if !T::is_subset(*m, movements) {
+                return format!(
+                    "Missing required movements on this route: {:?} but need {:?}",
+                    movements, m
+                );
+            }
+        }
+        for req in &self.reqs {
+            let e = world.get_exit(*req);
+            if !e.can_access(ctx, world) {
+                return e.explain(ctx, world);
+            }
+        }
+        String::from("CE Success")
+    }
 
     pub fn is_empty(&self) -> bool {
         self.movement.is_none() && self.reqs.is_empty()
@@ -106,6 +130,16 @@ where
     {
         self.reqs.can_access(world, ctx, movements)
     }
+
+    pub fn explain<W>(&self, world: &W, ctx: &T, movements: T::MovementState) -> String
+    where
+        W: World,
+        T: Ctx<World = W>,
+        W::Exit: Exit<ExitId = E>,
+        W::Location: Location<Context = T>,
+    {
+        self.reqs.explain(world, ctx, movements)
+    }
 }
 
 #[derive(Copy, Clone, Debug, Hash, Eq, PartialEq)]
@@ -116,7 +150,7 @@ enum HeapEdge<M, S, E> {
 }
 
 /// Creates a map of condensed edges, keyed by SpotIds.
-/// 
+///
 /// Not every spot may be represented in the map, but every value is guaranteed to be non-empty.
 pub fn condense_graph<T, W, S, E>(
     world: &W,

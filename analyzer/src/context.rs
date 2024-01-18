@@ -689,7 +689,21 @@ impl<T: Ctx> ContextWrapper<T> {
                 }
             }
             History::A(act_id) => world.get_action(act_id).explain(self.get(), world),
-            History::C(_) => String::from("No explainer for Condensed Edges yet"),
+            History::C(spot_id) => {
+                let vce: Vec<_> = world
+                    .get_condensed_edges_from(self.ctx.position())
+                    .iter()
+                    .filter(|&c| c.dst == spot_id)
+                    .collect();
+                let mut exp = Vec::new();
+                let mvs = self.ctx.get_movement_state(world);
+                for ce in vce {
+                    if !ce.can_access(world, self.get(), mvs) {
+                        exp.push(ce.explain(world, self.get(), mvs));
+                    }
+                }
+                exp.join("\n")
+            }
         }
     }
 
