@@ -725,6 +725,8 @@ impl World {
                     }
 %% endfor
                 }
+%% else
+                matches!(item, Item::{{ unused_by_rule['$victory'][v]|sort|join(' | Item::') }})
 %% endfor
             }
 %% endfor

@@ -12,11 +12,15 @@ use criterion::{black_box, criterion_group, criterion_main, Criterion};
 use enum_map::EnumMap;
 use lib{{ package }}::context::Context;
 use lib{{ package }}::graph;
+use lib{{ package }}::graph_enums::RuleVictory;
 use lib{{ package }}::items::Item;
 use std::path::PathBuf;
 
 pub fn criterion_benchmark(c: &mut Criterion) {
     let mut world = graph::World::new();
+%% if 'bench' in rules['$victory'].variants
+    world.rule_victory = RuleVictory::Bench;
+%% endif
     analyzer::world::World::condense_graph(&mut world);
     let mut ctx = Context::default();
     world.skip_unused_items(&mut ctx);

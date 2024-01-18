@@ -35,6 +35,7 @@ rules:
   $victory:
     default: "[Escape, $objective]"
     just_objective: "[$objective]"
+    bench: "[Remote_Drone, Flask{6}]"
   $objective:
     Start: "[Remote_Drone]"
     # Greedy search will have a problem with purchases if there are insufficient funds;

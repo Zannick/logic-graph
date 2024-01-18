@@ -14505,12 +14505,14 @@ pub enum RuleVictory {
     #[default]
     Default,
     JustObjective,
+    Bench,
 }
 impl fmt::Display for RuleVictory {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         match self {
             RuleVictory::Default => write!(f, "{}", "default"),
             RuleVictory::JustObjective => write!(f, "{}", "just_objective"),
+            RuleVictory::Bench => write!(f, "{}", "bench"),
         }
     }
 }
@@ -14521,6 +14523,7 @@ impl std::str::FromStr for RuleVictory {
         match s {
             "default" => Ok(RuleVictory::Default),
             "just_objective" => Ok(RuleVictory::JustObjective),
+            "bench" => Ok(RuleVictory::Bench),
             _ => Err(format!("Could not recognize as a RuleVictory: {}", s)),
         }
     }

@@ -12,11 +12,13 @@ use criterion::{black_box, criterion_group, criterion_main, Criterion};
 use enum_map::EnumMap;
 use libaxiom_verge2::context::Context;
 use libaxiom_verge2::graph;
+use libaxiom_verge2::graph_enums::RuleVictory;
 use libaxiom_verge2::items::Item;
 use std::path::PathBuf;
 
 pub fn criterion_benchmark(c: &mut Criterion) {
     let mut world = graph::World::new();
+    world.rule_victory = RuleVictory::Bench;
     analyzer::world::World::condense_graph(&mut world);
     let mut ctx = Context::default();
     world.skip_unused_items(&mut ctx);

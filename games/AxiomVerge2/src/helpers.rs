@@ -1997,6 +1997,7 @@ macro_rules! rule__victory {
         match $world.rule_victory {
             RuleVictory::Default => rules::access___escape_objective($ctx, $world),
             RuleVictory::JustObjective => rules::access___objective($ctx, $world),
+            RuleVictory::Bench => rules::access___remote_drone_flask__6($ctx, $world),
         }
     }};
 }
@@ -2008,6 +2009,7 @@ macro_rules! rexplain__victory {
         match $world.rule_victory {
             RuleVictory::Default => rules::explain___escape_objective($ctx, $world, $edict),
             RuleVictory::JustObjective => rules::explain___objective($ctx, $world, $edict),
+            RuleVictory::Bench => rules::explain___remote_drone_flask__6($ctx, $world, $edict),
         }
     }};
 }
