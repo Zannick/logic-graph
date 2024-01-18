@@ -552,7 +552,7 @@ where
                 break;
             }
             if self.queue.db().remember_processed(ctx.get()).unwrap() {
-                ctx.replay(self.world, *hist);
+                ctx.assert_and_replay(self.world, *hist);
                 ctx.remove_history();
             } else {
                 let prev = Some(ctx.get().clone());
@@ -583,8 +583,9 @@ where
                     }
                     // Otherwise, something went wrong.
                     panic!(
-                        "Failed to recreate \"{}\" at {:?}\n{:?}\nOptions were: {:?}",
+                        "Failed to recreate \"{}\":\n{}\nat {:?}\n{:?}\nOptions were: {:?}",
                         hist,
+                        ctx.explain_pre_replay(self.world, *hist),
                         ctx,
                         steps,
                         next.iter()

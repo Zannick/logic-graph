@@ -106,7 +106,7 @@ where
                 if sub.can_replay(world, history[j]) {
                     sub.replay(world, history[j]);
                 } else {
-                    ctx.replay(world, step);
+                    ctx.assert_and_replay(world, step);
                     continue 'main;
                 }
             }
@@ -116,11 +116,11 @@ where
                 // now we'll skip this step and continue with ctx
                 continue 'main;
             } else {
-                ctx.replay(world, step);
+                ctx.assert_and_replay(world, step);
                 continue 'main;
             }
         } else {
-            ctx.replay(world, step);
+            ctx.assert_and_replay(world, step);
         }
     }
 
