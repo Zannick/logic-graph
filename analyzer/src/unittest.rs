@@ -957,7 +957,7 @@ where
             let ext = path.extension().map(|s| s.to_str()).flatten();
             if matches!(ext, Some("txt")) {
                 tests.push(parse_route_file::<W, T>(wp.clone(), &path));
-            }    
+            }
         }
     }
 

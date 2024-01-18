@@ -3,14 +3,17 @@
 #![allow(unused)]
 
 use analyzer::access::*;
+use analyzer::cli::read_from_file;
 use analyzer::context::*;
 use analyzer::greedy::*;
+use analyzer::route::route_from_string;
 use analyzer::world::*;
 use criterion::{black_box, criterion_group, criterion_main, Criterion};
 use enum_map::EnumMap;
 use lib{{ package }}::context::Context;
 use lib{{ package }}::graph;
 use lib{{ package }}::items::Item;
+use std::path::PathBuf;
 
 pub fn criterion_benchmark(c: &mut Criterion) {
     let mut world = graph::World::new();
@@ -24,6 +27,27 @@ pub fn criterion_benchmark(c: &mut Criterion) {
     c.bench_function("minimal playthrough", |b| {
         b.iter(|| minimal_greedy_playthrough(&world, &ctx, u32::MAX))
     });
+
+    let mut dir = PathBuf::from(file!());
+    dir.pop();
+    dir.pop();
+    dir.push("routes");
+    let mut routes = Vec::new();
+    for entry in std::fs::read_dir(dir).unwrap() {
+        let path = entry.unwrap().path();
+        let ext = path.extension().map(|s| s.to_str()).flatten();
+        if matches!(ext, Some("txt")) {
+            routes.push(read_from_file(&path));
+        }   
+    }
+
+    if !routes.is_empty() {
+        c.bench_function("load routes", |b| {
+            b.iter(|| for rstr in &routes {
+                route_from_string(&world, ctx.get(), rstr).unwrap();
+            })
+        });
+    }
 }
 
 criterion_group! {
