@@ -1,6 +1,7 @@
 use crate::algo::Search;
 use crate::context::*;
 use crate::db::HeapDB;
+use crate::estimates::ContextScorer;
 use crate::route::*;
 use crate::world::*;
 use clap::{Parser, Subcommand};
@@ -81,12 +82,14 @@ where
     L: Location<Context = T>,
 {
     log::info!("{:?}", std::env::args());
+    // This duplicates the creation later by the heap wrapper.
+    let scorer = ContextScorer::shortest_paths(world, &startctx, 32_768);
 
     match &args.command {
         Commands::Search { routes, db } => {
             route_ctxs.extend(routes.into_iter().map(|route| {
                 let rstr = read_from_file(route);
-                route_from_string(world, &startctx, &rstr).unwrap()
+                route_from_string(world, &startctx, &rstr, scorer.get_algo()).unwrap()
             }));
             let search = Search::new(
                 world,
@@ -100,7 +103,9 @@ where
             let rstr = read_from_file(route);
             println!(
                 "{}",
-                match debug_route(world, &startctx, &rstr) {
+                match debug_route::<W, T, L, <W::Exit as Exit>::SpotId>(
+                    world, &startctx, &rstr, &scorer
+                ) {
                     Ok(s) | Err(s) => s,
                 }
             );

@@ -1,7 +1,9 @@
 #![allow(unused)]
 
 use crate::context::*;
+use crate::estimates::ContextScorer;
 use crate::route::*;
+use crate::steiner::*;
 use crate::world::*;
 use crate::*;
 use lazy_static::lazy_static;
@@ -606,7 +608,7 @@ where
                         tname
                     )
                 }
-                Some("path")|Some("route") => assign_mode_or_append_err!(
+                Some("path") | Some("route") => assign_mode_or_append_err!(
                     mode,
                     errs,
                     match value {
@@ -707,6 +709,7 @@ pub fn run_test<W, T>(
     mut initial: T,
     mode: TestMode<T>,
     expects: Vec<T::Expectation>,
+    shortest_paths: &ShortestPaths<NodeId<W>, EdgeId<W>>,
 ) -> Result<(), String>
 where
     T: Ctx<World = W>,
@@ -758,7 +761,7 @@ where
         TestMode::Route(route) => {
             let mut ctx = ContextWrapper::new(initial);
             for (i, (h, s)) in route.into_iter().enumerate() {
-                ctx = step_from_route(ctx, i, h, world)
+                ctx = step_from_route(ctx, i, h, world, &shortest_paths)
                     .map_err(|e| format!("At \"{}\": {}", s, e))?;
             }
             ctx.get().assert_expectations(&expects)?;
@@ -827,7 +830,11 @@ where
     Ok(())
 }
 
-pub fn parse_test_file<W, T>(world: Arc<Box<W>>, filename: &PathBuf) -> Vec<Trial>
+pub fn parse_test_file<W, T>(
+    world: Arc<Box<W>>,
+    filename: &PathBuf,
+    shortest_paths: Arc<Box<ShortestPaths<NodeId<W>, EdgeId<W>>>>,
+) -> Vec<Trial>
 where
     T: Ctx<World = W> + 'static,
     W: World + Send + 'static,
@@ -884,14 +891,19 @@ where
         .into_iter()
         .map(|t| {
             let wp = world.clone();
+            let sp = shortest_paths.clone();
             Trial::test(format!("{}:{}", prefix, t.name), move || {
-                Ok(run_test(&**wp, t.initial, t.mode, t.expects)?)
+                Ok(run_test(&**wp, t.initial, t.mode, t.expects, &**sp)?)
             })
         })
         .collect()
 }
 
-pub fn parse_route_file<W, T>(world: Arc<Box<W>>, filename: &PathBuf) -> Trial
+pub fn parse_route_file<W, T>(
+    world: Arc<Box<W>>,
+    filename: &PathBuf,
+    shortest_paths: Arc<Box<ShortestPaths<NodeId<W>, EdgeId<W>>>>,
+) -> Trial
 where
     T: Ctx<World = W> + 'static,
     W: World + Send + 'static,
@@ -908,25 +920,35 @@ where
     file.read_to_string(&mut route_str)
         .unwrap_or_else(|e| panic!("Couldn't read from file \"{:?}\": {:?}", filename, e));
 
-    let mode = histlines_from_string::<W, T, W::Location>(&route_str)
-        .map(|route| TestMode::Route(
+    let mode = histlines_from_string::<W, T, W::Location>(&route_str).map(|route| {
+        TestMode::Route(
             route
                 .into_iter()
                 .map(|(h, s)| (h, format!("{}", s)))
-                .collect()
-        ));
+                .collect(),
+        )
+    });
     Trial::test(format!("routes/{}", prefix), move || {
-        Ok(run_test(&**world, T::default(), mode?, vec![])?)
+        Ok(run_test(
+            &**world,
+            T::default(),
+            mode?,
+            vec![],
+            &**shortest_paths,
+        )?)
     })
 }
 
-pub fn run_test_file<W, T>(world: Arc<Box<W>>, filename: &PathBuf)
-where
+pub fn run_test_file<W, T>(
+    world: Arc<Box<W>>,
+    filename: &PathBuf,
+    shortest_paths: Arc<Box<ShortestPaths<NodeId<W>, EdgeId<W>>>>,
+) where
     T: Ctx<World = W> + 'static,
     W: World + Send + 'static,
     W::Location: Location<Context = T>,
 {
-    let tests = parse_test_file(world, filename);
+    let tests = parse_test_file(world, filename, shortest_paths);
     let args = Arguments::from_args();
     run(&args, tests); //.exit_if_failed();
 }
@@ -939,6 +961,10 @@ where
 {
     let mut world = Box::<W>::default();
     world.condense_graph();
+    let startctx = T::default();
+    let shortest_paths = Arc::new(Box::new(ContextScorer::shortest_paths_tree_only(
+        &*world, &startctx,
+    )));
 
     let wp = Arc::new(world);
     let mut tests = Vec::new();
@@ -947,7 +973,11 @@ where
         let path = entry.unwrap().path();
         let ext = path.extension().map(|s| s.to_str()).flatten();
         if matches!(ext, Some("yaml")) {
-            tests.extend(parse_test_file::<W, T>(wp.clone(), &path));
+            tests.extend(parse_test_file::<W, T>(
+                wp.clone(),
+                &path,
+                shortest_paths.clone(),
+            ));
         }
     }
 
@@ -956,7 +986,11 @@ where
             let path = entry.unwrap().path();
             let ext = path.extension().map(|s| s.to_str()).flatten();
             if matches!(ext, Some("txt")) {
-                tests.push(parse_route_file::<W, T>(wp.clone(), &path));
+                tests.push(parse_route_file::<W, T>(
+                    wp.clone(),
+                    &path,
+                    shortest_paths.clone(),
+                ));
             }
         }
     }

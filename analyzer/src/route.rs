@@ -1,6 +1,8 @@
 use crate::access::move_to;
 use crate::context::*;
 use crate::estimates::ContextScorer;
+use crate::steiner::graph::*;
+use crate::steiner::*;
 use crate::world::{Exit, Location, World};
 use std::str::FromStr;
 use yaml_rust::Yaml;
@@ -66,6 +68,7 @@ pub(crate) fn step_from_route<W, T, L>(
     i: usize,
     h: HistoryAlias<T>,
     world: &W,
+    shortest_paths: &ShortestPaths<NodeId<W>, EdgeId<W>>,
 ) -> Result<ContextWrapper<T>, String>
 where
     W: World<Location = L>,
@@ -77,7 +80,7 @@ where
         History::G(item, loc_id) => {
             let spot_id = world.get_location_spot(loc_id);
             if pos != spot_id {
-                ctx = move_to(world, ctx, spot_id).unwrap_or_else(|| {
+                ctx = move_to(world, ctx, spot_id, shortest_paths).unwrap_or_else(|| {
                     panic!(
                         "Could not complete route step {}: couldn't reach {} from {}",
                         i, spot_id, pos
@@ -94,7 +97,7 @@ where
         History::H(item, exit_id) => {
             let spot_id = world.get_exit_spot(exit_id);
             if pos != spot_id {
-                ctx = move_to(world, ctx, spot_id).unwrap_or_else(|| {
+                ctx = move_to(world, ctx, spot_id, shortest_paths).unwrap_or_else(|| {
                     panic!(
                         "Could not complete route step {}: couldn't reach {} from {}",
                         i, spot_id, pos
@@ -116,7 +119,7 @@ where
         }
         History::E(exit_id) => {
             let exit = world.get_exit(exit_id);
-            ctx = move_to(world, ctx, exit.dest()).unwrap_or_else(|| {
+            ctx = move_to(world, ctx, exit.dest(), shortest_paths).unwrap_or_else(|| {
                 panic!(
                     "Could not complete route step {}: couldn't reach {}",
                     i,
@@ -125,7 +128,7 @@ where
             });
         }
         History::L(spot_id) | History::C(spot_id) => {
-            ctx = move_to(world, ctx, spot_id).unwrap_or_else(|| {
+            ctx = move_to(world, ctx, spot_id, shortest_paths).unwrap_or_else(|| {
                 panic!(
                     "Could not complete route step {}: couldn't reach {} from {}",
                     i, spot_id, pos
@@ -138,7 +141,7 @@ where
         History::A(action_id) => {
             let spot_id = world.get_action_spot(action_id);
             if spot_id != Default::default() && pos != spot_id {
-                ctx = move_to(world, ctx, spot_id).unwrap_or_else(|| {
+                ctx = move_to(world, ctx, spot_id, shortest_paths).unwrap_or_else(|| {
                     panic!(
                         "Could not complete route step {}: couldn't reach {} from {}",
                         i, spot_id, pos
@@ -155,6 +158,7 @@ pub fn route_from_string<W, T, L>(
     world: &W,
     startctx: &T,
     route: &str,
+    shortest_paths: &ShortestPaths<NodeId<W>, EdgeId<W>>,
 ) -> Result<ContextWrapper<T>, String>
 where
     W: World<Location = L>,
@@ -164,7 +168,7 @@ where
     let hist = hist_from_string::<W, T, L>(route)?;
     let mut ctx = ContextWrapper::new(startctx.clone());
     for (i, h) in hist.into_iter().enumerate() {
-        ctx = step_from_route(ctx, i, h, world)?;
+        ctx = step_from_route(ctx, i, h, world, shortest_paths)?;
     }
     Ok(ctx)
 }
@@ -173,6 +177,7 @@ pub fn route_from_yaml_string<W, T, L>(
     world: &W,
     startctx: &T,
     route: &Yaml,
+    shortest_paths: &ShortestPaths<NodeId<W>, EdgeId<W>>,
 ) -> Result<ContextWrapper<T>, String>
 where
     W: World<Location = L>,
@@ -180,12 +185,23 @@ where
     L: Location<Context = T>,
 {
     match route {
-        Yaml::String(s) => route_from_string(world, startctx, s),
+        Yaml::String(s) => route_from_string(world, startctx, s, shortest_paths),
         _ => Err(format!("Value for route is not str: {:?}", route)),
     }
 }
 
-pub fn debug_route<W, T, L>(world: &W, startctx: &T, route: &str) -> Result<String, String>
+pub fn debug_route<W, T, L, S>(
+    world: &W,
+    startctx: &T,
+    route: &str,
+    scorer: &ContextScorer<
+        W,
+        <W::Exit as Exit>::SpotId,
+        L::LocId,
+        EdgeId<W>,
+        ShortestPaths<NodeId<W>, EdgeId<W>>,
+    >,
+) -> Result<String, String>
 where
     W: World<Location = L>,
     T: Ctx<World = W>,
@@ -193,12 +209,11 @@ where
 {
     let histlines = histlines_from_string::<W, T, L>(route)?;
     let mut ctx = ContextWrapper::new(startctx.clone());
-    let scorer = ContextScorer::shortest_paths(world, startctx, 32_768);
     let mut output: Vec<String> = Vec::new();
 
     for (i, (h, line)) in histlines.into_iter().enumerate() {
         output.push(format!("== {}. {} ==", i + 1, line));
-        let mut next = step_from_route(ctx.clone(), i, h, world)?;
+        let mut next = step_from_route(ctx.clone(), i, h, world, scorer.get_algo())?;
         output.push(history_str::<T, _>(next.remove_history().0.into_iter()));
         output.push(next.get().diff(ctx.get()));
         let est = scorer.estimate_remaining_time(next.get());

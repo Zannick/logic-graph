@@ -331,7 +331,7 @@ fn expand_astar<W, T, E, Wp>(
 }
 
 /// Finds the shortest route to the given spot, if any, and moves there.
-pub fn move_to_astar<W, T, E>(
+pub fn move_to<W, T, E>(
     world: &W,
     ctx: ContextWrapper<T>,
     spot: E::SpotId,
@@ -388,100 +388,6 @@ where
         );
     }
 
-    None
-}
-
-/// Finds the shortest route to the given spot, if any, and moves there.
-pub fn move_to<W, T, E>(
-    world: &W,
-    ctx: ContextWrapper<T>,
-    spot: E::SpotId,
-) -> Option<ContextWrapper<T>>
-where
-    W: World<Exit = E>,
-    T: Ctx<World = W>,
-    E: Exit<Context = T, Currency = <W::Location as Accessible>::Currency>,
-    W::Location: Location<Context = T>,
-    W::Warp:
-        Warp<Context = T, SpotId = E::SpotId, Currency = <W::Location as Accessible>::Currency>,
-{
-    if ctx.get().position() == spot {
-        return Some(ctx);
-    }
-    let mut spot_enum_map = new_hashmap();
-    let mut spot_heap = BinaryHeap::new();
-    let pos = ctx.get().position();
-    spot_enum_map.insert(pos, ctx);
-
-    expand(
-        world,
-        &spot_enum_map[&pos],
-        &spot_enum_map,
-        u32::MAX,
-        &mut spot_heap,
-    );
-
-    while let Some(Reverse(el)) = spot_heap.pop() {
-        let spot_found = el.el;
-        let pos = spot_found.get().position();
-        if pos == spot {
-            return Some(spot_found);
-        }
-        if !spot_enum_map.contains_key(&pos) {
-            spot_enum_map.insert(pos, spot_found);
-            expand(
-                world,
-                &spot_enum_map[&pos],
-                &spot_enum_map,
-                u32::MAX,
-                &mut spot_heap,
-            );
-        }
-    }
-
-    // Didn't find a condensed-edge-only route, so process all local edges
-    for pos in world.get_area_spots(spot) {
-        if let Some(ctx) = spot_enum_map.get(&pos) {
-            spot_heap.push(Reverse(HeapElement {
-                score: ctx.elapsed(),
-                el: ctx.clone(),
-            }));
-            expand_local(
-                world,
-                ctx,
-                ctx.get().get_movement_state(world),
-                &spot_enum_map,
-                u32::MAX,
-                &mut spot_heap,
-            );
-            expand_exits(world, ctx, &spot_enum_map, u32::MAX, &mut spot_heap);
-        }
-    }
-    while let Some(Reverse(el)) = spot_heap.pop() {
-        let spot_found = el.el;
-        let pos = spot_found.get().position();
-        if pos == spot {
-            return Some(spot_found);
-        }
-        // Process this position if it's better than our best or not found.
-        if let Some(c) = spot_enum_map.get(&pos) {
-            if spot_found.elapsed() >= c.elapsed() {
-                continue;
-            }
-        }
-        spot_enum_map.insert(pos, spot_found);
-        let ctx = &spot_enum_map[&pos];
-        let movement_state = ctx.get().get_movement_state(world);
-        expand_local(
-            world,
-            ctx,
-            movement_state,
-            &spot_enum_map,
-            u32::MAX,
-            &mut spot_heap,
-        );
-        expand_exits(world, ctx, &spot_enum_map, u32::MAX, &mut spot_heap);
-    }
     None
 }
 

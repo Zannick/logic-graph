@@ -174,7 +174,9 @@ where
                 }
             })
             .chain(self.world.get_global_actions().iter().filter_map(|act| {
-                if Action::dest(act, ctx, self.world) != Default::default() && act.can_access(ctx, self.world) {
+                if Action::dest(act, ctx, self.world) != Default::default()
+                    && act.can_access(ctx, self.world)
+                {
                     Some(self.algo.graph().new_edge(
                         ExternalEdgeId::Action(act.id()),
                         ExternalNodeId::Spot(ctx.position()),
@@ -258,5 +260,19 @@ where
         T: Ctx<World = W>,
     {
         Self::new(world, startctx, cache_size)
+    }
+
+    pub fn shortest_paths_tree_only<T>(
+        world: &'w W,
+        startctx: &T,
+    ) -> ShortestPaths<NodeId<W>, EdgeId<W>>
+    where
+        T: Ctx<World = W>,
+    {
+        ShortestPaths::from_graph(build_simple_graph(world, startctx))
+    }
+
+    pub fn get_algo(&self) -> &ShortestPaths<NodeId<W>, EdgeId<W>> {
+        &self.algo
     }
 }
