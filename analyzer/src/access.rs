@@ -210,6 +210,8 @@ fn expand_local_astar<W, T, E, Wp>(
             if !states_seen.contains(newctx.get()) && elapsed <= max_time {
                 if let Some(score) = score_func(&newctx) {
                     spot_heap.push(Reverse(HeapElement { score, el: newctx }));
+                } else {
+                    log::warn!("Moved locally to {} but got no score; disconnected?", dest);
                 }
             }
         }
@@ -287,6 +289,8 @@ fn expand_astar<W, T, E, Wp>(
                 if !states_seen.contains(newctx.get()) && elapsed <= max_time {
                     if let Some(score) = score_func(&newctx) {
                         spot_heap.push(Reverse(HeapElement { score, el: newctx }));
+                    } else {
+                        log::warn!("Followed CE to {} but got no score; disconnected?", ce.dst);
                     }
                 }
             }
@@ -367,7 +371,11 @@ where
                     }),
             );
         }
-        scores.into_iter().filter_map(|u| u).min().map(|u| u + ctx.elapsed())
+        scores
+            .into_iter()
+            .filter_map(|u| u)
+            .min()
+            .map(|u| u + ctx.elapsed())
     };
 
     // Using A* and allowing backtracking
@@ -523,6 +531,56 @@ where
                     "{}: exit not usable:\n{}",
                     exit.id(),
                     exit.explain(ctx.get(), world)
+                ));
+            }
+        }
+    }
+    vec.join("\n")
+}
+
+pub fn explain_unused_links<W, T, E, Wp>(
+    world: &W,
+    states_seen: &HashSet<T, CommonHasher>,
+) -> String
+where
+    W: World<Exit = E, Warp = Wp>,
+    T: Ctx<World = W>,
+    E: Exit<Context = T, Currency = <W::Location as Accessible>::Currency>,
+    Wp: Warp<Context = T, SpotId = E::SpotId, Currency = <W::Location as Accessible>::Currency>,
+    W::Location: Location<Context = T>,
+{
+    let known_spots: HashSet<E::SpotId, CommonHasher> =
+        states_seen.iter().map(|c| c.position()).collect();
+    let mut vec = Vec::new();
+    for ctx in states_seen {
+        let movements = ctx.get_movement_state(world);
+        for spot in world.get_area_spots(ctx.position()) {
+            if !known_spots.contains(spot) {
+                for ce in world.get_condensed_edges_from(ctx.position()) {
+                    if ce.dst == *spot {
+                        vec.push(format!(
+                            "CE not available from {}: {:?}\n{}",
+                            ctx.position(),
+                            ce,
+                            ce.explain(world, ctx, movements)
+                        ));
+                    }
+                }
+            }
+        }
+
+        for exit in world.get_spot_exits(ctx.position()) {
+            if !known_spots.contains(&exit.dest())
+                && (!W::same_area(ctx.position(), exit.dest())
+                    || world
+                        .get_condensed_edges_from(ctx.position())
+                        .into_iter()
+                        .any(|ce| ce.dst == exit.dest()))
+            {
+                vec.push(format!(
+                    "{}: exit not usable:\n{}",
+                    exit.id(),
+                    exit.explain(&ctx, world)
                 ));
             }
         }
