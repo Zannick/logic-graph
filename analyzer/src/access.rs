@@ -351,13 +351,23 @@ where
 
     let goal = ExternalNodeId::Spot(spot);
     let score_func = |ctx: &ContextWrapper<T>| -> Option<u32> {
-        if let Some(md) =
-            shortest_paths.min_distance(ExternalNodeId::Spot(ctx.get().position()), goal)
-        {
-            Some(ctx.elapsed() + <u64 as TryInto<u32>>::try_into(md).unwrap())
-        } else {
-            None
+        let mut scores: Vec<Option<u32>> = vec![shortest_paths
+            .min_distance(ExternalNodeId::Spot(ctx.get().position()), goal)
+            .map(|u| u.try_into().unwrap())];
+        // We need to take into account contextual warps which aren't otherwise part
+        // of a normal shortest paths graph. We do that by measuring the shortest path
+        // from their destination and adding in the warp time.
+        // TODO: Only do this on contextual warps.
+        for warp in world.get_warps() {
+            scores.push(
+                shortest_paths
+                    .min_distance(ExternalNodeId::Spot(warp.dest(ctx.get(), world)), goal)
+                    .map(|u| {
+                        warp.time(ctx.get(), world) + <u64 as TryInto<u32>>::try_into(u).unwrap()
+                    }),
+            );
         }
+        scores.into_iter().filter_map(|u| u).min().map(|u| u + ctx.elapsed())
     };
 
     // Using A* and allowing backtracking
@@ -509,7 +519,11 @@ where
                         .into_iter()
                         .any(|ce| ce.dst == exit.dest()))
             {
-                vec.push(format!("{}: exit not usable", exit.id()));
+                vec.push(format!(
+                    "{}: exit not usable:\n{}",
+                    exit.id(),
+                    exit.explain(ctx.get(), world)
+                ));
             }
         }
     }
