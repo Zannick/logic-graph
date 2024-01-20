@@ -365,7 +365,6 @@ where
     let mut spot_heap = BinaryHeap::new();
 
     if let Some(score) = score_func(&ctx) {
-        states_seen.insert(ctx.get().clone());
         spot_heap.push(Reverse(HeapElement { score, el: ctx }));
     }
 
