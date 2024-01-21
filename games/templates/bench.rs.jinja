@@ -5,6 +5,7 @@
 use analyzer::access::*;
 use analyzer::cli::read_from_file;
 use analyzer::context::*;
+use analyzer::estimates::ContextScorer;
 use analyzer::greedy::*;
 use analyzer::route::route_from_string;
 use analyzer::world::*;
@@ -43,6 +44,7 @@ pub fn criterion_benchmark(c: &mut Criterion) {
     }
 
     if !routes.is_empty() {
+        let shortest_paths = ContextScorer::shortest_paths_tree_only(&world, ctx.get());
         c.bench_function("load routes", |b| {
             b.iter(|| for rstr in &routes {
                 route_from_string(&world, ctx.get(), rstr).unwrap();
