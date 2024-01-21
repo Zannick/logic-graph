@@ -50,7 +50,7 @@ pub fn criterion_benchmark(c: &mut Criterion) {
         c.bench_function("load routes", |b| {
             b.iter(|| {
                 for rstr in &routes {
-                    route_from_string(&world, ctx.get(), rstr).unwrap();
+                    route_from_string(&world, ctx.get(), rstr, &shortest_paths).unwrap();
                 }
             })
         });
