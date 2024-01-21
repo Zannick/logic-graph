@@ -340,7 +340,7 @@ pub fn move_to<W, T, E>(
     ctx: ContextWrapper<T>,
     spot: E::SpotId,
     shortest_paths: &ShortestPaths<NodeId<W>, EdgeId<W>>,
-) -> Option<ContextWrapper<T>>
+) -> Result<ContextWrapper<T>, String>
 where
     W: World<Exit = E>,
     T: Ctx<World = W>,
@@ -350,7 +350,7 @@ where
         Warp<Context = T, SpotId = E::SpotId, Currency = <W::Location as Accessible>::Currency>,
 {
     if ctx.get().position() == spot {
-        return Some(ctx);
+        return Ok(ctx);
     }
 
     let goal = ExternalNodeId::Spot(spot);
@@ -389,7 +389,7 @@ where
     while let Some(Reverse(el)) = spot_heap.pop() {
         let ctx = el.el;
         if ctx.get().position() == spot {
-            return Some(ctx);
+            return Ok(ctx);
         }
         if !states_seen.insert(ctx.get().clone()) {
             continue;
@@ -405,7 +405,7 @@ where
         );
     }
 
-    None
+    Err(explain_unused_links(world, &states_seen))
 }
 
 pub fn all_visitable_locations<W, T, L, E>(world: &W, ctx: &T) -> Vec<L::LocId>

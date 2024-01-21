@@ -80,10 +80,10 @@ where
         History::G(item, loc_id) => {
             let spot_id = world.get_location_spot(loc_id);
             if pos != spot_id {
-                ctx = move_to(world, ctx, spot_id, shortest_paths).unwrap_or_else(|| {
+                ctx = move_to(world, ctx, spot_id, shortest_paths).unwrap_or_else(|s| {
                     panic!(
-                        "Could not complete route step {}: couldn't reach {} from {}",
-                        i, spot_id, pos
+                        "Could not complete route step {}: couldn't reach {} from {}\n{}",
+                        i, spot_id, pos, s
                     )
                 });
             }
@@ -97,10 +97,10 @@ where
         History::H(item, exit_id) => {
             let spot_id = world.get_exit_spot(exit_id);
             if pos != spot_id {
-                ctx = move_to(world, ctx, spot_id, shortest_paths).unwrap_or_else(|| {
+                ctx = move_to(world, ctx, spot_id, shortest_paths).unwrap_or_else(|s| {
                     panic!(
-                        "Could not complete route step {}: couldn't reach {} from {}",
-                        i, spot_id, pos
+                        "Could not complete route step {}: couldn't reach {} from {}\n{}",
+                        i, spot_id, pos, s
                     )
                 });
             }
@@ -119,19 +119,20 @@ where
         }
         History::E(exit_id) => {
             let exit = world.get_exit(exit_id);
-            ctx = move_to(world, ctx, exit.dest(), shortest_paths).unwrap_or_else(|| {
+            ctx = move_to(world, ctx, exit.dest(), shortest_paths).unwrap_or_else(|s| {
                 panic!(
-                    "Could not complete route step {}: couldn't reach {}",
+                    "Could not complete route step {}: couldn't reach {}\n{}",
                     i,
-                    exit.dest()
+                    exit.dest(),
+                    s
                 )
             });
         }
         History::L(spot_id) | History::C(spot_id) => {
-            ctx = move_to(world, ctx, spot_id, shortest_paths).unwrap_or_else(|| {
+            ctx = move_to(world, ctx, spot_id, shortest_paths).unwrap_or_else(|s| {
                 panic!(
-                    "Could not complete route step {}: couldn't reach {} from {}",
-                    i, spot_id, pos
+                    "Could not complete route step {}: couldn't reach {} from {}\n{}",
+                    i, spot_id, pos, s
                 )
             });
         }
@@ -141,10 +142,10 @@ where
         History::A(action_id) => {
             let spot_id = world.get_action_spot(action_id);
             if spot_id != Default::default() && pos != spot_id {
-                ctx = move_to(world, ctx, spot_id, shortest_paths).unwrap_or_else(|| {
+                ctx = move_to(world, ctx, spot_id, shortest_paths).unwrap_or_else(|s| {
                     panic!(
-                        "Could not complete route step {}: couldn't reach {} from {}",
-                        i, spot_id, pos
+                        "Could not complete route step {}: couldn't reach {} from {}\n{}",
+                        i, spot_id, pos, s
                     )
                 });
             }
