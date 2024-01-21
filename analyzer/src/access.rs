@@ -408,6 +408,76 @@ where
     Err(explain_unused_links(world, &states_seen))
 }
 
+pub fn find_nearest_location_with_actions<W, T, E>(
+    world: &W,
+    ctx: ContextWrapper<T>,
+    shortest_paths: &ShortestPaths<NodeId<W>, EdgeId<W>>,
+) -> Result<ContextWrapper<T>, String>
+where
+    W: World<Exit = E>,
+    T: Ctx<World = W>,
+    E: Exit<Context = T, Currency = <W::Location as Accessible>::Currency>,
+    W::Location: Location<Context = T>,
+    W::Warp:
+        Warp<Context = T, SpotId = E::SpotId, Currency = <W::Location as Accessible>::Currency>,
+{
+    if world
+        .get_spot_locations(ctx.get().position())
+        .into_iter()
+        .any(|loc| loc.can_access(ctx.get(), world))
+    {
+        return Ok(ctx);
+    }
+
+    let mut todo_spots = new_hashmap();
+    for loc in world.get_all_locations() {
+        if ctx.get().todo(loc.id()) {
+            let spot_id = ExternalNodeId::Spot(world.get_location_spot(loc.id()));
+            if let Some(spot_min) = todo_spots.get_mut(&spot_id) {
+                *spot_min = std::cmp::min(*spot_min, loc.base_time());
+            } else {
+                todo_spots.insert(spot_id, loc.base_time());
+            }
+        }
+    }
+    if todo_spots.is_empty() {
+        return Ok(ctx);
+    }
+
+    let score_func = |ctx: &ContextWrapper<T>| -> Option<u32> {
+        let mut origins = new_hashmap();
+        origins.insert(ExternalNodeId::Spot(ctx.get().position()), 0);
+        // We need to take into account contextual warps which aren't otherwise part
+        // of a normal shortest paths graph. We do that by measuring the shortest path
+        // from their destination and adding in the warp time.
+        // TODO: Only do this on contextual warps.
+        for warp in world.get_warps() {
+            let dst = ExternalNodeId::Spot(warp.dest(ctx.get(), world));
+            let time = warp.time(ctx.get(), world);
+            if !origins.contains_key(&dst) || time < origins[&dst] {
+                origins.insert(dst, time);
+            }
+        }
+
+        let mut min = None;
+        for (origin, base_time) in origins {
+            for (goal, min_time) in &todo_spots {
+                let time: Option<u32> = shortest_paths
+                    .min_distance(origin, *goal)
+                    .map(|u| <u64 as TryInto<u32>>::try_into(u).unwrap() + *min_time + base_time);
+                min = match (min, time) {
+                    (Some(m), Some(t)) => Some(std::cmp::min(m, t)),
+                    (None, Some(_)) => time,
+                    (_, None) => min,
+                }
+            }
+        }
+
+        min
+    };
+    Err(String::from("No locations found"))
+}
+
 pub fn all_visitable_locations<W, T, L, E>(world: &W, ctx: &T) -> Vec<L::LocId>
 where
     W: World<Location = L, Exit = E>,
