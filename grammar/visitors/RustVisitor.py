@@ -217,14 +217,14 @@ class RustVisitor(RustBaseVisitor):
     def visitRefInList(self, ctx):
         getter = self._getRefGetter(str(ctx.REF())[1:])
         values = [f'Item::{i}' for i in ctx.ITEM()]
-        return f'matches!({getter}, {' | '.join(values)})'
+        return f'matches!({getter}, {" | ".join(values)})'
     
     def visitRefStrInList(self, ctx):
         ref = str(ctx.REF())[1:]
         getter = self._getRefGetter(ref)
         rtype = self._getRefEnum(ref)
         values = [f'{rtype}::{inflection.camelize(str(lit)[1:-1])}' for lit in ctx.LIT()]
-        return f'matches!({getter}, {' | '.join(values)})'
+        return f'matches!({getter}, {" | ".join(values)})'
     
     # TODO: other REF/SETTING rules
 
@@ -582,7 +582,7 @@ class RustExplainerVisitor(RustBaseVisitor):
         lines = [
             f'let h = ctx.has(Item::{ctx.ITEM()})',
             f'edict.insert("{ctx.ITEM()}", format!("{{}}", h))',
-            f'({"!" if ctx.NOT() else ''}h, vec!["{ctx.ITEM()}"])',
+            f'({"!" if ctx.NOT() else ""}h, vec!["{ctx.ITEM()}"])',
         ]
         return f'{{ {"; ".join(lines)} }}'
 
@@ -779,7 +779,7 @@ class RustExplainerVisitor(RustBaseVisitor):
         ftag = ctx.invoke().getText()
         lines = [
             f'let mut refs = vec!["{tag}"]',
-            f'let r = {get if func == 'default' else f"{func}({get})"}',
+            f'let r = {get if func == "default" else f"{func}({get})"}',
             f'let mut f = {self.visit(ctx.invoke())}',
             f'edict.insert("{ftag}", format!("{{}}", f.0))',
             'refs.append(&mut f.1)',
