@@ -456,7 +456,7 @@ where
     if world
         .get_spot_locations(ctx.get().position())
         .into_iter()
-        .any(|loc| loc.can_access(ctx.get(), world))
+        .any(|loc| ctx.get().todo(loc.id()) && loc.can_access(ctx.get(), world))
     {
         return Ok(ctx);
     }
