@@ -154,6 +154,37 @@ fn expand_exits_astar<W, T, E>(
     }
 }
 
+fn expand_actions_astar<W, T, E>(
+    world: &W,
+    ctx: &ContextWrapper<T>,
+    states_seen: &HashSet<T, CommonHasher>,
+    max_time: u32,
+    spot_heap: &mut BinaryHeap<Reverse<HeapElement<T>>>,
+    score_func: &impl Fn(&ContextWrapper<T>) -> Option<u32>,
+) where
+    W: World<Exit = E>,
+    T: Ctx<World = W>,
+    E: Exit<Context = T, Currency = <W::Location as Accessible>::Currency>,
+    W::Location: Location<Context = T>,
+{
+    for act in world
+        .get_global_actions()
+        .iter()
+        .chain(world.get_spot_actions(ctx.get().position()))
+    {
+        if act.can_access(ctx.get(), world) {
+            let mut newctx = ctx.clone();
+            newctx.activate(world, act);
+            let elapsed = newctx.elapsed();
+            if !states_seen.contains(newctx.get()) && elapsed <= max_time {
+                if let Some(score) = score_func(&newctx) {
+                    spot_heap.push(Reverse(HeapElement { score, el: newctx }));
+                }
+            }
+        }
+    }
+}
+
 // This is mainly for move_to which is used from tests.
 fn expand_local<W, T, E, Wp>(
     world: &W,
@@ -411,6 +442,7 @@ where
 pub fn find_nearest_location_with_actions<W, T, E>(
     world: &W,
     ctx: ContextWrapper<T>,
+    max_time: u32,
     shortest_paths: &ShortestPaths<NodeId<W>, EdgeId<W>>,
 ) -> Result<ContextWrapper<T>, String>
 where
@@ -475,7 +507,48 @@ where
 
         min
     };
-    Err(String::from("No locations found"))
+
+    // Using A* and allowing backtracking
+    let mut states_seen = new_hashset();
+    let mut spot_heap = BinaryHeap::new();
+
+    if let Some(score) = score_func(&ctx) {
+        spot_heap.push(Reverse(HeapElement { score, el: ctx }));
+    }
+
+    while let Some(Reverse(el)) = spot_heap.pop() {
+        let ctx = el.el;
+        if world
+            .get_spot_locations(ctx.get().position())
+            .into_iter()
+            .any(|loc| ctx.get().todo(loc.id()) && loc.can_access(ctx.get(), world))
+        {
+            return Ok(ctx);
+        }
+        if !states_seen.insert(ctx.get().clone()) {
+            continue;
+        }
+        expand_astar(
+            world,
+            &ctx,
+            &mut states_seen,
+            max_time,
+            &mut spot_heap,
+            &score_func,
+            false,
+        );
+
+        expand_actions_astar(
+            world,
+            &ctx,
+            &mut states_seen,
+            max_time,
+            &mut spot_heap,
+            &score_func,
+        );
+    }
+
+    Err(explain_unused_links(world, &states_seen))
 }
 
 pub fn all_visitable_locations<W, T, L, E>(world: &W, ctx: &T) -> Vec<L::LocId>
