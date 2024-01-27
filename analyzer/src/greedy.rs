@@ -1,5 +1,6 @@
 use crate::access::*;
 use crate::context::*;
+use crate::estimates::ContextScorer;
 use crate::minimize::*;
 use crate::new_hashset;
 use crate::world::*;
@@ -139,7 +140,7 @@ fn greedy_internal<W, T, L, E>(
     world: &W,
     mut ctx: ContextWrapper<T>,
     max_time: u32,
-    max_depth: i8,
+    _max_depth: i8,
 ) -> Result<ContextWrapper<T>, ContextWrapper<T>>
 where
     W: World<Location = L, Exit = E>,
@@ -148,16 +149,20 @@ where
     E: Exit<Context = T>,
 {
     world.skip_unused_items(ctx.get_mut());
+    let shortest_paths = ContextScorer::shortest_paths_tree_only(world, ctx.get());
     while !world.won(ctx.get()) {
         if ctx.elapsed() > max_time {
             return Err(ctx);
         }
-        match first_spot_with_locations_after_actions(world, ctx, max_depth, max_time) {
+        match find_nearest_location_with_actions(world, ctx, max_time, &shortest_paths) {
             Ok(c) => {
                 ctx = c;
                 grab_all(world, &mut ctx);
             }
-            Err(c) => return Err(c),
+            Err(s) => {
+                println!("Couldn't find a location, panicking");
+                panic!("Couldn't find a location:\n{}", s);
+            }
         }
     }
     Ok(ctx)
