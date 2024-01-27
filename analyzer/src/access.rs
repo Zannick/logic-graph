@@ -495,7 +495,9 @@ where
         for warp in world.get_warps() {
             let dst = ExternalNodeId::Spot(warp.dest(ctx.get(), world));
             let time = warp.time(ctx.get(), world);
-            if !origins.contains_key(&dst) || time < origins[&dst] {
+            if (!origins.contains_key(&dst) || time < origins[&dst])
+                && warp.can_access(ctx.get(), world)
+            {
                 origins.insert(dst, time);
             }
         }
