@@ -7,7 +7,6 @@ use crate::steiner::graph::ExternalNodeId;
 use crate::steiner::{EdgeId, NodeId, ShortestPaths};
 use crate::world::*;
 use crate::{new_hashmap, new_hashset, CommonHasher};
-use priority_queue::PriorityQueue;
 use std::cmp::Reverse;
 use std::collections::{BinaryHeap, HashMap, HashSet};
 
@@ -133,7 +132,7 @@ fn expand_exits_astar<W, T, E>(
     ctx: &ContextWrapper<T>,
     states_seen: &HashSet<T, CommonHasher>,
     max_time: u32,
-    insert_func: &mut impl FnMut(ContextWrapper<T>, u32),
+    spot_heap: &mut BinaryHeap<Reverse<HeapElement<T>>>,
     score_func: &impl Fn(&ContextWrapper<T>) -> Option<u32>,
 ) where
     W: World<Exit = E>,
@@ -148,7 +147,7 @@ fn expand_exits_astar<W, T, E>(
             let elapsed = newctx.elapsed();
             if !states_seen.contains(newctx.get()) && elapsed <= max_time {
                 if let Some(score) = score_func(&newctx) {
-                    insert_func(newctx, score);
+                    spot_heap.push(Reverse(HeapElement { score, el: newctx }));
                 }
             }
         }
@@ -158,10 +157,9 @@ fn expand_exits_astar<W, T, E>(
 fn expand_actions_astar<W, T, E>(
     world: &W,
     ctx: &ContextWrapper<T>,
-    used_globals: Vec<<W::Action as Action>::ActionId>,
     states_seen: &HashSet<T, CommonHasher>,
     max_time: u32,
-    insert_func: &mut impl FnMut(ContextWrapper<T>, u32, Vec<<W::Action as Action>::ActionId>),
+    spot_heap: &mut BinaryHeap<Reverse<HeapElement<T>>>,
     score_func: &impl Fn(&ContextWrapper<T>) -> Option<u32>,
 ) where
     W: World<Exit = E>,
@@ -172,7 +170,6 @@ fn expand_actions_astar<W, T, E>(
     for act in world
         .get_global_actions()
         .iter()
-        .filter(|a| !used_globals.contains(&a.id()))
         .chain(world.get_spot_actions(ctx.get().position()))
     {
         if act.can_access(ctx.get(), world) {
@@ -181,11 +178,7 @@ fn expand_actions_astar<W, T, E>(
             let elapsed = newctx.elapsed();
             if !states_seen.contains(newctx.get()) && elapsed <= max_time {
                 if let Some(score) = score_func(&newctx) {
-                    let mut new_globals = used_globals.clone();
-                    if world.is_global_action(act.id()) {
-                        new_globals.push(act.id());
-                    }
-                    insert_func(newctx, score, new_globals);
+                    spot_heap.push(Reverse(HeapElement { score, el: newctx }));
                 }
             }
         }
@@ -230,7 +223,7 @@ fn expand_local_astar<W, T, E, Wp>(
     movement_state: T::MovementState,
     states_seen: &HashSet<T, CommonHasher>,
     max_time: u32,
-    insert_func: &mut impl FnMut(ContextWrapper<T>, u32),
+    spot_heap: &mut BinaryHeap<Reverse<HeapElement<T>>>,
     score_func: &impl Fn(&ContextWrapper<T>) -> Option<u32>,
 ) where
     W: World<Exit = E, Warp = Wp>,
@@ -247,7 +240,7 @@ fn expand_local_astar<W, T, E, Wp>(
             let elapsed = newctx.elapsed();
             if !states_seen.contains(newctx.get()) && elapsed <= max_time {
                 if let Some(score) = score_func(&newctx) {
-                    insert_func(newctx, score);
+                    spot_heap.push(Reverse(HeapElement { score, el: newctx }));
                 } else {
                     log::warn!("Moved locally to {} but got no score; disconnected?", dest);
                 }
@@ -306,7 +299,7 @@ fn expand_astar<W, T, E, Wp>(
     ctx: &ContextWrapper<T>,
     states_seen: &HashSet<T, CommonHasher>,
     max_time: u32,
-    insert_func: &mut impl FnMut(ContextWrapper<T>, u32),
+    spot_heap: &mut BinaryHeap<Reverse<HeapElement<T>>>,
     score_func: &impl Fn(&ContextWrapper<T>) -> Option<u32>,
     allow_local: bool,
 ) where
@@ -326,7 +319,7 @@ fn expand_astar<W, T, E, Wp>(
                 let elapsed = newctx.elapsed();
                 if !states_seen.contains(newctx.get()) && elapsed <= max_time {
                     if let Some(score) = score_func(&newctx) {
-                        insert_func(newctx, score);
+                        spot_heap.push(Reverse(HeapElement { score, el: newctx }));
                     } else {
                         log::warn!("Followed CE to {} but got no score; disconnected?", ce.dst);
                     }
@@ -340,7 +333,7 @@ fn expand_astar<W, T, E, Wp>(
                 movement_state,
                 states_seen,
                 max_time,
-                insert_func,
+                spot_heap,
                 score_func,
             );
         }
@@ -351,12 +344,12 @@ fn expand_astar<W, T, E, Wp>(
             movement_state,
             states_seen,
             max_time,
-            insert_func,
+            spot_heap,
             score_func,
         );
     }
 
-    expand_exits_astar(world, ctx, states_seen, max_time, insert_func, score_func);
+    expand_exits_astar(world, ctx, states_seen, max_time, spot_heap, score_func);
 
     for warp in world.get_warps() {
         if warp.can_access(ctx.get(), world) {
@@ -365,7 +358,7 @@ fn expand_astar<W, T, E, Wp>(
             let elapsed = newctx.elapsed();
             if !states_seen.contains(newctx.get()) && elapsed <= max_time {
                 if let Some(score) = score_func(&newctx) {
-                    insert_func(newctx, score);
+                    spot_heap.push(Reverse(HeapElement { score, el: newctx }));
                 }
             }
         }
@@ -437,9 +430,7 @@ where
             &ctx,
             &mut states_seen,
             u32::MAX,
-            &mut |ctx: ContextWrapper<T>, score: u32| {
-                spot_heap.push(Reverse(HeapElement { score, el: ctx }));
-            },
+            &mut spot_heap,
             &score_func,
             W::same_area(ctx.get().position(), spot),
         );
@@ -519,15 +510,16 @@ where
         min
     };
 
-    let mut states_seen = new_hashset();
-    let mut spot_heap = PriorityQueue::new();
-
     // Using A* and allowing backtracking
+    let mut states_seen = new_hashset();
+    let mut spot_heap = BinaryHeap::new();
+
     if let Some(score) = score_func(&ctx) {
-        spot_heap.push((ctx, Vec::new()), Reverse(score));
+        spot_heap.push(Reverse(HeapElement { score, el: ctx }));
     }
 
-    while let Some(((ctx, used_globals), _)) = spot_heap.pop() {
+    while let Some(Reverse(el)) = spot_heap.pop() {
+        let ctx = el.el;
         if world
             .get_spot_locations(ctx.get().position())
             .into_iter()
@@ -538,15 +530,12 @@ where
         if !states_seen.insert(ctx.get().clone()) {
             continue;
         }
-        let mut insert_func = |ctx: ContextWrapper<T>, score: u32| {
-            spot_heap.push((ctx, used_globals.clone()), Reverse(score));
-        };
         expand_astar(
             world,
             &ctx,
             &mut states_seen,
             max_time,
-            &mut insert_func,
+            &mut spot_heap,
             &score_func,
             false,
         );
@@ -554,14 +543,9 @@ where
         expand_actions_astar(
             world,
             &ctx,
-            used_globals,
             &mut states_seen,
             max_time,
-            &mut |ctx: ContextWrapper<T>,
-                  score: u32,
-                  new_globals: Vec<<W::Action as Action>::ActionId>| {
-                spot_heap.push((ctx, new_globals), Reverse(score));
-            },
+            &mut spot_heap,
             &score_func,
         );
     }
