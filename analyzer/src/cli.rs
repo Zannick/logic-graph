@@ -2,6 +2,7 @@ use crate::algo::Search;
 use crate::context::*;
 use crate::db::HeapDB;
 use crate::estimates::ContextScorer;
+use crate::greedy::*;
 use crate::route::*;
 use crate::world::*;
 use clap::{Parser, Subcommand};
@@ -53,6 +54,13 @@ pub enum Commands {
         /// text file with route
         #[arg(value_name = "FILE")]
         route: PathBuf,
+    },
+
+    /// performs a greedy search and exits
+    Greedy {
+        /// text file with route to start from
+        #[arg(value_name = "FILE")]
+        route: Option<PathBuf>,
     },
 
     /// provides debug info about the binary
@@ -109,6 +117,25 @@ where
                     Ok(s) | Err(s) => s,
                 }
             );
+            Ok(())
+        }
+        Commands::Greedy { route } => {
+            let result = if let Some(r) = route {
+                let ctx =
+                    route_from_string(world, &startctx, &read_from_file(r), scorer.get_algo())
+                        .unwrap();
+                greedy_search(world, &ctx, u32::MAX, 2)
+            } else {
+                greedy_search_from(world, &startctx, u32::MAX)
+            };
+            if let Ok(found) = result {
+                println!(
+                    "{}",
+                    history_summary::<T, _>(found.recent_history().iter().copied())
+                );
+            } else {
+                println!("Could not find a greedy route");
+            }
             Ok(())
         }
         Commands::Info => {
