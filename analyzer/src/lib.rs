@@ -12,6 +12,7 @@ extern crate serde;
 extern crate sort_by_derive;
 extern crate yaml_rust;
 
+mod a_star;
 pub mod access;
 pub mod algo;
 pub mod bucket;
