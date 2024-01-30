@@ -257,16 +257,16 @@ where
     }
 
     while let Some(Reverse(el)) = spot_heap.pop() {
-        let ctx = el.el;
+        let ctx = &el.el;
         if ctx.get().position() == spot {
-            return Ok(ctx);
+            return Ok(el.el);
         }
         if !states_seen.insert(ctx.get().clone()) {
             continue;
         }
         expand_astar(
             world,
-            &ctx,
+            &el,
             &mut states_seen,
             u32::MAX,
             &mut spot_heap,
@@ -358,20 +358,20 @@ where
     }
 
     while let Some(Reverse(el)) = spot_heap.pop() {
-        let ctx = el.el;
+        let ctx = &el.el;
         if world
             .get_spot_locations(ctx.get().position())
             .into_iter()
             .any(|loc| ctx.get().todo(loc.id()) && loc.can_access(ctx.get(), world))
         {
-            return Ok(ctx);
+            return Ok(el.el);
         }
         if !states_seen.insert(ctx.get().clone()) {
             continue;
         }
         expand_astar(
             world,
-            &ctx,
+            &el,
             &mut states_seen,
             max_time,
             &mut spot_heap,
@@ -381,7 +381,7 @@ where
 
         expand_actions_astar(
             world,
-            &ctx,
+            &el,
             &mut states_seen,
             max_time,
             &mut spot_heap,
