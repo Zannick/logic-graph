@@ -9,6 +9,7 @@ use std::collections::{BinaryHeap, HashSet};
 pub trait SortableCtxWrapper<T: Ctx, P: Ord>: std::fmt::Debug + Ord {
     fn ctx(&self) -> &ContextWrapper<T>;
     fn copy_update(&self, newctx: ContextWrapper<T>, score: P) -> Self;
+    fn new_incr(&self, newctx: ContextWrapper<T>, score: P) -> Self;
     fn should_keep(&self, _max_depth: i8) -> bool {
         true
     }
@@ -22,6 +23,9 @@ impl<T: Ctx> SortableCtxWrapper<T, u32> for HeapElement<T> {
         &self.el
     }
     fn copy_update(&self, newctx: ContextWrapper<T>, score: u32) -> Self {
+        HeapElement { score, el: newctx }
+    }
+    fn new_incr(&self, newctx: ContextWrapper<T>, score: u32) -> Self {
         HeapElement { score, el: newctx }
     }
 }
@@ -48,6 +52,13 @@ impl<T: Ctx> SortableCtxWrapper<T, u32> for ScoredCtxWithActionCounter<T> {
             score,
             el: newctx,
             counter,
+        }
+    }
+    fn new_incr(&self, newctx: ContextWrapper<T>, score: u32) -> Self {
+        ScoredCtxWithActionCounter {
+            score,
+            el: newctx,
+            counter: self.counter + 1,
         }
     }
     fn should_keep(&self, max_depth: i8) -> bool {
@@ -113,8 +124,7 @@ pub fn expand_actions_astar<W, T, E, H>(
             let elapsed = newctx.elapsed();
             if !states_seen.contains(newctx.get()) && elapsed <= max_time {
                 if let Some(score) = score_func(&newctx) {
-                    let new_el = el.copy_update(newctx, score);
-                    spot_heap.push(Reverse(new_el));
+                    spot_heap.push(Reverse(el.new_incr(newctx, score)));
                 }
             }
         }

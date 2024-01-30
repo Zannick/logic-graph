@@ -355,7 +355,11 @@ where
     let mut spot_heap = BinaryHeap::new();
 
     if let Some(score) = score_func(&ctx) {
-        spot_heap.push(Reverse(ScoredCtxWithActionCounter { score, el: ctx, counter: 0 }));
+        spot_heap.push(Reverse(ScoredCtxWithActionCounter {
+            score,
+            el: ctx,
+            counter: 0,
+        }));
     }
 
     while let Some(Reverse(el)) = spot_heap.pop() {
@@ -378,6 +382,103 @@ where
             &mut spot_heap,
             &score_func,
             false,
+        );
+
+        if el.can_continue(max_depth) {
+            expand_actions_astar(
+                world,
+                &el,
+                &mut states_seen,
+                max_time,
+                &mut spot_heap,
+                &score_func,
+            );
+        }
+    }
+
+    Err(explain_unused_links(world, &states_seen))
+}
+
+pub fn access_location_after_actions<W, T, E, L>(
+    world: &W,
+    ctx: ContextWrapper<T>,
+    loc_id: L,
+    max_time: u32,
+    max_depth: i8,
+    shortest_paths: &ShortestPaths<NodeId<W>, EdgeId<W>>,
+) -> Result<ContextWrapper<T>, String>
+where
+    W: World<Exit = E>,
+    T: Ctx<World = W>,
+    E: Exit<Context = T, Currency = <W::Location as Accessible>::Currency>,
+    W::Location: Location<Context = T, LocId = L>,
+    W::Warp:
+        Warp<Context = T, SpotId = E::SpotId, Currency = <W::Location as Accessible>::Currency>,
+    L: Id,
+{
+    if ctx.get().visited(loc_id) {
+        return Ok(ctx);
+    } else if ctx.get().skipped(loc_id) {
+        return Err(format!("Location already skipped: {}", loc_id));
+    }
+
+    let goal = ExternalNodeId::Location(loc_id);
+    let score_func = |ctx: &ContextWrapper<T>| -> Option<u32> {
+        let mut scores: Vec<Option<u32>> = vec![shortest_paths
+            .min_distance(ExternalNodeId::Spot(ctx.get().position()), goal)
+            .map(|u| u.try_into().unwrap())];
+        // We need to take into account contextual warps which aren't otherwise part
+        // of a normal shortest paths graph. We do that by measuring the shortest path
+        // from their destination and adding in the warp time.
+        // TODO: Only do this on contextual warps.
+        for warp in world.get_warps() {
+            scores.push(
+                shortest_paths
+                    .min_distance(ExternalNodeId::Spot(warp.dest(ctx.get(), world)), goal)
+                    .map(|u| {
+                        warp.time(ctx.get(), world) + <u64 as TryInto<u32>>::try_into(u).unwrap()
+                    }),
+            );
+        }
+        scores
+            .into_iter()
+            .filter_map(|u| u)
+            .min()
+            .map(|u| u + ctx.elapsed())
+    };
+
+    // Using A* and allowing backtracking
+    let mut states_seen = new_hashset();
+    let mut spot_heap = BinaryHeap::new();
+
+    if let Some(score) = score_func(&ctx) {
+        spot_heap.push(Reverse(ScoredCtxWithActionCounter {
+            score,
+            el: ctx,
+            counter: 0,
+        }));
+    }
+
+    let spot = world.get_location_spot(loc_id);
+    let loc = world.get_location(loc_id);
+    while let Some(Reverse(el)) = spot_heap.pop() {
+        let ctx = &el.el;
+        if ctx.get().position() == spot && loc.can_access(ctx.get(), world) {
+            let mut newctx = ctx.clone();
+            newctx.visit(world, loc);
+            return Ok(newctx);
+        }
+        if !states_seen.insert(ctx.get().clone()) {
+            continue;
+        }
+        expand_astar(
+            world,
+            &el,
+            &mut states_seen,
+            u32::MAX,
+            &mut spot_heap,
+            &score_func,
+            W::same_area(ctx.get().position(), spot),
         );
 
         if el.can_continue(max_depth) {
