@@ -158,8 +158,6 @@ pub fn expand_local_astar<W, T, E, Wp, H>(
             if !states_seen.contains(newctx.get()) && elapsed <= max_time {
                 if let Some(score) = score_func(&newctx) {
                     spot_heap.push(Reverse(el.copy_update(newctx, score)));
-                } else {
-                    log::warn!("Moved locally to {} but got no score; disconnected?", dest);
                 }
             }
         }
@@ -194,8 +192,6 @@ pub fn expand_astar<W, T, E, Wp, H>(
                 if !states_seen.contains(newctx.get()) && elapsed <= max_time {
                     if let Some(score) = score_func(&newctx) {
                         spot_heap.push(Reverse(el.copy_update(newctx, score)));
-                    } else {
-                        log::warn!("Followed CE to {} but got no score; disconnected?", ce.dst);
                     }
                 }
             }
