@@ -380,15 +380,16 @@ where
             false,
         );
 
-        expand_actions_astar(
-            world,
-            &el,
-            &mut states_seen,
-            max_time,
-            max_depth,
-            &mut spot_heap,
-            &score_func,
-        );
+        if el.can_continue(max_depth) {
+            expand_actions_astar(
+                world,
+                &el,
+                &mut states_seen,
+                max_time,
+                &mut spot_heap,
+                &score_func,
+            );
+        }
     }
 
     Err(explain_unused_links(world, &states_seen))
