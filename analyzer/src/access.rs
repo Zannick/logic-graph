@@ -5,6 +5,7 @@ use crate::context::*;
 use crate::greedy::greedy_search_from;
 use crate::heap::HeapElement;
 use crate::steiner::graph::ExternalNodeId;
+use crate::steiner::SteinerAlgo;
 use crate::steiner::{loc_to_graph_node, EdgeId, NodeId, ShortestPaths};
 use crate::world::*;
 use crate::{new_hashmap, new_hashset, CommonHasher};
@@ -424,6 +425,12 @@ where
 
     let goal = loc_to_graph_node(world, loc_id);
     let score_func = |ctx: &ContextWrapper<T>| -> Option<u32> {
+        if !shortest_paths.graph().node_index_map.contains_key(&ExternalNodeId::Spot(ctx.get().position())) {
+            panic!("SP Graph missing position: {}", ctx.get().position());
+        }
+        if !shortest_paths.graph().node_index_map.contains_key(&goal) {
+            panic!("SP Graph missing goal: {}", loc_id);
+        }
         let mut scores: Vec<Option<u32>> = vec![shortest_paths
             .min_distance(ExternalNodeId::Spot(ctx.get().position()), goal)
             .map(|u| u.try_into().unwrap())];
