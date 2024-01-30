@@ -5,7 +5,7 @@ use crate::context::*;
 use crate::greedy::greedy_search_from;
 use crate::heap::HeapElement;
 use crate::steiner::graph::ExternalNodeId;
-use crate::steiner::{EdgeId, NodeId, ShortestPaths};
+use crate::steiner::{loc_to_graph_node, EdgeId, NodeId, ShortestPaths};
 use crate::world::*;
 use crate::{new_hashmap, new_hashset, CommonHasher};
 use std::cmp::Reverse;
@@ -422,7 +422,7 @@ where
         return Err(format!("Location already skipped: {}", loc_id));
     }
 
-    let goal = ExternalNodeId::Location(loc_id);
+    let goal = loc_to_graph_node(world, loc_id);
     let score_func = |ctx: &ContextWrapper<T>| -> Option<u32> {
         let mut scores: Vec<Option<u32>> = vec![shortest_paths
             .min_distance(ExternalNodeId::Spot(ctx.get().position()), goal)
