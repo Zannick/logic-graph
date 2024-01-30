@@ -282,6 +282,7 @@ pub fn find_nearest_location_with_actions<W, T, E>(
     world: &W,
     ctx: ContextWrapper<T>,
     max_time: u32,
+    max_depth: i8,
     shortest_paths: &ShortestPaths<NodeId<W>, EdgeId<W>>,
 ) -> Result<ContextWrapper<T>, String>
 where
@@ -354,7 +355,7 @@ where
     let mut spot_heap = BinaryHeap::new();
 
     if let Some(score) = score_func(&ctx) {
-        spot_heap.push(Reverse(HeapElement { score, el: ctx }));
+        spot_heap.push(Reverse(ScoredCtxWithActionCounter { score, el: ctx, counter: 0 }));
     }
 
     while let Some(Reverse(el)) = spot_heap.pop() {
@@ -384,6 +385,7 @@ where
             &el,
             &mut states_seen,
             max_time,
+            max_depth,
             &mut spot_heap,
             &score_func,
         );

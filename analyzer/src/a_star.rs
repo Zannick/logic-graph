@@ -9,6 +9,9 @@ use std::collections::{BinaryHeap, HashSet};
 pub trait SortableCtxWrapper<T: Ctx, P: Ord>: std::fmt::Debug + Ord {
     fn ctx(&self) -> &ContextWrapper<T>;
     fn copy_update(&self, newctx: ContextWrapper<T>, score: P) -> Self;
+    fn should_keep(&self, _max_depth: i8) -> bool {
+        true
+    }
 }
 
 impl<T: Ctx> SortableCtxWrapper<T, u32> for HeapElement<T> {
@@ -21,19 +24,31 @@ impl<T: Ctx> SortableCtxWrapper<T, u32> for HeapElement<T> {
 }
 
 #[derive(Debug, SortBy)]
-pub struct ScoredCtxWithCounter<T: Ctx> {
+pub struct ScoredCtxWithActionCounter<T: Ctx> {
     #[sort_by]
     pub(crate) score: u32,
     pub(crate) el: ContextWrapper<T>,
     pub(crate) counter: i8,
 }
 
-impl<T: Ctx> SortableCtxWrapper<T, u32> for ScoredCtxWithCounter<T> {
+impl<T: Ctx> SortableCtxWrapper<T, u32> for ScoredCtxWithActionCounter<T> {
     fn ctx(&self) -> &ContextWrapper<T> {
         &self.el
     }
     fn copy_update(&self, newctx: ContextWrapper<T>, score: u32) -> Self {
-        ScoredCtxWithCounter { score, el: newctx, counter: self.counter }
+        let counter = if matches!(newctx.recent_history().last(), Some(History::A(..))) {
+            self.counter + 1
+        } else {
+            self.counter
+        };
+        ScoredCtxWithActionCounter {
+            score,
+            el: newctx,
+            counter,
+        }
+    }
+    fn should_keep(&self, max_depth: i8) -> bool {
+        self.counter <= max_depth
     }
 }
 
@@ -71,6 +86,7 @@ pub fn expand_actions_astar<W, T, E, H>(
     el: &H,
     states_seen: &HashSet<T, CommonHasher>,
     max_time: u32,
+    max_depth: i8,
     spot_heap: &mut BinaryHeap<Reverse<H>>,
     score_func: &impl Fn(&ContextWrapper<T>) -> Option<u32>,
 ) where
@@ -92,7 +108,10 @@ pub fn expand_actions_astar<W, T, E, H>(
             let elapsed = newctx.elapsed();
             if !states_seen.contains(newctx.get()) && elapsed <= max_time {
                 if let Some(score) = score_func(&newctx) {
-                    spot_heap.push(Reverse(el.copy_update(newctx, score)));
+                    let new_el = el.copy_update(newctx, score);
+                    if new_el.should_keep(max_depth) {
+                        spot_heap.push(Reverse(new_el));
+                    }
                 }
             }
         }
