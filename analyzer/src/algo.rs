@@ -683,25 +683,33 @@ where
                                 let progress = self.queue.db().progress(ctx.get());
 
                                 // get remaining locations
-                                let remaining =
-                                    self.queue.db().scorer().remaining_locations(ctx.get());
+                                let remaining: Vec<_> = self
+                                    .world
+                                    .get_all_locations()
+                                    .into_iter()
+                                    .filter_map(|loc| {
+                                        if ctx.get().todo(loc.id()) {
+                                            Some(loc.id())
+                                        } else {
+                                            None
+                                        }
+                                    })
+                                    .collect();
 
                                 let max_time = self.queue.max_time();
-                                let mut psearch = ctx.clone();
-
-                                for loc_id in &remaining {
-                                    psearch.get_mut().skip(*loc_id);
-                                }
 
                                 let results: Vec<_> = remaining
                                     .into_par_iter()
-                                    .map(|loc_id| {
-                                        let mut c = psearch.clone();
-                                        c.get_mut().reset(loc_id);
-
-                                        match greedy_search(self.world, &c, max_time, 2) {
-                                            Ok(c) | Err(c) => c,
-                                        }
+                                    .filter_map(|loc_id| {
+                                        access_location_after_actions(
+                                            self.world,
+                                            ctx.clone(),
+                                            loc_id,
+                                            max_time,
+                                            2,
+                                            self.queue.db().scorer().get_algo(),
+                                        )
+                                        .ok()
                                     })
                                     .collect();
 
