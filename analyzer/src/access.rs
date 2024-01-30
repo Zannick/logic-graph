@@ -491,6 +491,14 @@ where
                 &score_func,
             );
         }
+
+        if states_seen.len() > world.get_all_spots().len() * 3 {
+            return Err(format!(
+                "Excessive A* search stopping at {} states explored, {} left in queue",
+                states_seen.len(),
+                spot_heap.len()
+            ));
+        }
     }
 
     Err(explain_unused_links(world, &states_seen))
