@@ -8,5 +8,13 @@ use std::path::PathBuf;
 fn main() {
     let mut dir = PathBuf::from(file!());
     dir.pop();
-    run_all_tests_in_dir::<graph::World, Context>(&dir);
+    let mut routedir = dir.clone();
+    routedir.pop();
+    routedir.push("routes");
+    log4rs::init_file(
+        &PathBuf::from("settings/log4unittest.yml"),
+        Default::default(),
+    )
+    .unwrap();
+    run_all_tests_in_dir::<graph::World, Context>(&dir, Some(&routedir));
 }

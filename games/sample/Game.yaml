@@ -20,11 +20,6 @@ rules:
     Triforce Hunt: "[Triforce_Piece{triforce_count}]"
     #Deku Full Clear: $all_region_checks(`Deku Tree`)
 
-  Gohma: "[Deku_Lobby_Web, Kokiri_Emerald]"
-  Ganon: "[Defeat_Ganon]"
-  Triforce Hunt: "[Triforce_Piece{triforce_count}]"
-  #Deku Full Clear: $all_region_checks(`Deku Tree`)
-
 base_movements:
   # Movement types:
   #   free: move freely in 2d (3D games like OoT qualify)

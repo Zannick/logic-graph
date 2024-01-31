@@ -1372,6 +1372,12 @@ impl context::Ctx for Context {
             Currency::Rupees(c) => self.rupees >= *c,
         }
     }
+    fn amount_could_afford(&self, cost: &Currency) -> i16 {
+        match cost {
+            Currency::Free => 1,
+            Currency::Rupees(_) => self.rupees.into(),
+        }
+    }
     fn spend(&mut self, cost: &Currency) {
         match cost {
             Currency::Free => (),

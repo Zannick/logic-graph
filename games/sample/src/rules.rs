@@ -12,6 +12,7 @@ use crate::prices::Currency;
 use crate::*;
 use analyzer::context::Ctx;
 use analyzer::world::{self, World};
+use rustc_hash::FxHashMap;
 
 pub fn access_default(_ctx: &Context, _world: &graph::World) -> bool {
     true
@@ -39,7 +40,7 @@ pub fn access___triforce_piece__triforce_count(ctx: &Context, world: &graph::Wor
 }
 pub fn access___victory_objective(ctx: &Context, world: &graph::World) -> bool {
     // [Victory, $objective]
-    rule__objective!(ctx, world) && ctx.has(Item::Victory)
+    ctx.has(Item::Victory) && rule__objective!(ctx, world)
 }
 pub fn access_can_play__minuet_of_forest(ctx: &Context, world: &graph::World) -> bool {
     // $can_play(Minuet_of_Forest)
@@ -259,4 +260,934 @@ pub fn action_tod_set_match_tod____day_setgt_night_night_setgt_day___setgt_day_(
         enums::Tod::Night => enums::Tod::Day,
         _ => enums::Tod::Day,
     });
+}
+pub fn explain___defeat_ganon(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // [Defeat_Ganon]
+    {
+        let mut refs = Vec::new();
+        let mut h = {
+            let h = ctx.has(Item::Defeat_Ganon);
+            edict.insert("Defeat_Ganon", format!("{}", h));
+            (h, vec!["Defeat_Ganon"])
+        };
+        refs.append(&mut h.1);
+        (h.0, refs)
+    }
+}
+pub fn explain___deku_lobby_web_kokiri_emerald(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // [Deku_Lobby_Web, Kokiri_Emerald]
+    {
+        let mut refs = Vec::new();
+        let mut h = {
+            let h = ctx.has(Item::Deku_Lobby_Web);
+            edict.insert("Deku_Lobby_Web", format!("{}", h));
+            (h, vec!["Deku_Lobby_Web"])
+        };
+        refs.append(&mut h.1);
+        if !h.0 {
+            return (false, refs);
+        };
+        let mut h = {
+            let h = ctx.has(Item::Kokiri_Emerald);
+            edict.insert("Kokiri_Emerald", format!("{}", h));
+            (h, vec!["Kokiri_Emerald"])
+        };
+        refs.append(&mut h.1);
+        (h.0, refs)
+    }
+}
+pub fn explain___nuts_or_can_use__slingshot_and_can_jumpslash(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // ($Nuts or $can_use(Slingshot)) and $can_jumpslash
+    {
+        let mut left = ({
+            let mut left = {
+                let (res, mut refs) = hexplain__Nuts!(ctx, world, edict);
+                edict.insert("$Nuts", format!("{:?}", res));
+                refs.push("$Nuts");
+                (res, refs)
+            };
+            if left.0 {
+                left
+            } else {
+                let mut right = {
+                    let (res, mut refs) = hexplain__can_use!(ctx, world, Item::Slingshot, edict);
+                    edict.insert("$can_use(Slingshot)", format!("{:?}", res));
+                    refs.push("$can_use(Slingshot)");
+                    (res, refs)
+                };
+                left.1.append(&mut right.1);
+                (right.0, left.1)
+            }
+        });
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__can_jumpslash!(ctx, world, edict);
+                edict.insert("$can_jumpslash", format!("{:?}", res));
+                refs.push("$can_jumpslash");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain___triforce_piece__triforce_count(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // [Triforce_Piece{triforce_count}]
+    {
+        let mut refs = Vec::new();
+        let mut h = {
+            let ct = ctx.count(Item::Triforce_Piece);
+            edict.insert("Triforce_Piece count", format!("{}", ct));
+            let s = ctx.triforce_count();
+            edict.insert("triforce_count", format!("{}", s));
+            (ct >= s, vec!["Triforce_Piece count", "triforce_count"])
+        };
+        refs.append(&mut h.1);
+        (h.0, refs)
+    }
+}
+pub fn explain___victory_objective(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // [Victory, $objective]
+    {
+        let mut refs = Vec::new();
+        let mut h = {
+            let h = ctx.has(Item::Victory);
+            edict.insert("Victory", format!("{}", h));
+            (h, vec!["Victory"])
+        };
+        refs.append(&mut h.1);
+        if !h.0 {
+            return (false, refs);
+        };
+        let mut h = rexplain__objective!(ctx, world, edict);
+        refs.append(&mut h.1);
+        (h.0, refs)
+    }
+}
+pub fn explain_can_play__minuet_of_forest(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $can_play(Minuet_of_Forest)
+    {
+        let (res, mut refs) = hexplain__can_play!(ctx, world, Item::Minuet_of_Forest, edict);
+        edict.insert("$can_play(Minuet_of_Forest)", format!("{:?}", res));
+        refs.push("$can_play(Minuet_of_Forest)");
+        (res, refs)
+    }
+}
+pub fn explain_can_use__boomerang_or_can_use__hookshot(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $can_use(Boomerang) or $can_use(Hookshot)
+    {
+        let mut left = {
+            let (res, mut refs) = hexplain__can_use!(ctx, world, Item::Boomerang, edict);
+            edict.insert("$can_use(Boomerang)", format!("{:?}", res));
+            refs.push("$can_use(Boomerang)");
+            (res, refs)
+        };
+        if left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__can_use!(ctx, world, Item::Hookshot, edict);
+                edict.insert("$can_use(Hookshot)", format!("{:?}", res));
+                refs.push("$can_use(Hookshot)");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_can_use__slingshot(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $can_use(Slingshot)
+    {
+        let (res, mut refs) = hexplain__can_use!(ctx, world, Item::Slingshot, edict);
+        edict.insert("$can_use(Slingshot)", format!("{:?}", res));
+        refs.push("$can_use(Slingshot)");
+        (res, refs)
+    }
+}
+pub fn explain_defeat_gohma(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // Defeat_Gohma
+    {
+        let h = ctx.has(Item::Defeat_Gohma);
+        edict.insert("Defeat_Gohma", format!("{}", h));
+        (h, vec!["Defeat_Gohma"])
+    }
+}
+pub fn explain_deku_back_room_web_and_can_blast_or_smash(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // Deku_Back_Room_Web and $can_blast_or_smash
+    {
+        let mut left = {
+            let h = ctx.has(Item::Deku_Back_Room_Web);
+            edict.insert("Deku_Back_Room_Web", format!("{}", h));
+            (h, vec!["Deku_Back_Room_Web"])
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__can_blast_or_smash!(ctx, world, edict);
+                edict.insert("$can_blast_or_smash", format!("{:?}", res));
+                refs.push("$can_blast_or_smash");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_deku_back_room_web_and_deku_back_room_wall(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // Deku_Back_Room_Web and Deku_Back_Room_Wall
+    {
+        let mut left = {
+            let h = ctx.has(Item::Deku_Back_Room_Web);
+            edict.insert("Deku_Back_Room_Web", format!("{}", h));
+            (h, vec!["Deku_Back_Room_Web"])
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let h = ctx.has(Item::Deku_Back_Room_Wall);
+                edict.insert("Deku_Back_Room_Wall", format!("{}", h));
+                (h, vec!["Deku_Back_Room_Wall"])
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_deku_basement_block_and_is_child_and_sticks(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // Deku_Basement_Block and $is_child and $Sticks
+    {
+        let mut left = {
+            let mut left = {
+                let h = ctx.has(Item::Deku_Basement_Block);
+                edict.insert("Deku_Basement_Block", format!("{}", h));
+                (h, vec!["Deku_Basement_Block"])
+            };
+            if !left.0 {
+                left
+            } else {
+                let mut right = {
+                    let (res, mut refs) = hexplain__is_child!(ctx, world, edict);
+                    edict.insert("$is_child", format!("{:?}", res));
+                    refs.push("$is_child");
+                    (res, refs)
+                };
+                left.1.append(&mut right.1);
+                (right.0, left.1)
+            }
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__Sticks!(ctx, world, edict);
+                edict.insert("$Sticks", format!("{:?}", res));
+                refs.push("$Sticks");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_deku_basement_scrubs(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // Deku_Basement_Scrubs
+    {
+        let h = ctx.has(Item::Deku_Basement_Scrubs);
+        edict.insert("Deku_Basement_Scrubs", format!("{}", h));
+        (h, vec!["Deku_Basement_Scrubs"])
+    }
+}
+pub fn explain_deku_basement_switch(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // Deku_Basement_Switch
+    {
+        let h = ctx.has(Item::Deku_Basement_Switch);
+        edict.insert("Deku_Basement_Switch", format!("{}", h));
+        (h, vec!["Deku_Basement_Switch"])
+    }
+}
+pub fn explain_deku_basement_web(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // Deku_Basement_Web
+    {
+        let h = ctx.has(Item::Deku_Basement_Web);
+        edict.insert("Deku_Basement_Web", format!("{}", h));
+        (h, vec!["Deku_Basement_Web"])
+    }
+}
+pub fn explain_deku_lobby_web(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // Deku_Lobby_Web
+    {
+        let h = ctx.has(Item::Deku_Lobby_Web);
+        edict.insert("Deku_Lobby_Web", format!("{}", h));
+        (h, vec!["Deku_Lobby_Web"])
+    }
+}
+pub fn explain_deku_lobby_web_and_logic_deku_b1_skip(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // Deku_Lobby_Web and logic_deku_b1_skip
+    {
+        let mut left = {
+            let h = ctx.has(Item::Deku_Lobby_Web);
+            edict.insert("Deku_Lobby_Web", format!("{}", h));
+            (h, vec!["Deku_Lobby_Web"])
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let s = ctx.logic_deku_b1_skip();
+                edict.insert("logic_deku_b1_skip", format!("{}", s));
+                (s, vec!["logic_deku_b1_skip"])
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_deku_slingshot_scrub(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // Deku_Slingshot_Scrub
+    {
+        let h = ctx.has(Item::Deku_Slingshot_Scrub);
+        edict.insert("Deku_Slingshot_Scrub", format!("{}", h));
+        (h, vec!["Deku_Slingshot_Scrub"])
+    }
+}
+pub fn explain_deku_tree__compass_room__entry__ex__floor_3__door_1__req(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // ^_torch
+    {
+        let r = ctx.deku_tree__compass_room__ctx__torch();
+        edict.insert("^deku_tree__compass_room__ctx__torch", format!("{:?}", r));
+        (r, vec!["^deku_tree__compass_room__ctx__torch"])
+    }
+}
+pub fn explain_deku_tree__compass_room__entry__light_torch__req(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $is_child and $Sticks and not ^_torch
+    {
+        let mut left = {
+            let mut left = {
+                let (res, mut refs) = hexplain__is_child!(ctx, world, edict);
+                edict.insert("$is_child", format!("{:?}", res));
+                refs.push("$is_child");
+                (res, refs)
+            };
+            if !left.0 {
+                left
+            } else {
+                let mut right = {
+                    let (res, mut refs) = hexplain__Sticks!(ctx, world, edict);
+                    edict.insert("$Sticks", format!("{:?}", res));
+                    refs.push("$Sticks");
+                    (res, refs)
+                };
+                left.1.append(&mut right.1);
+                (right.0, left.1)
+            }
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let val = {
+                    let r = ctx.deku_tree__compass_room__ctx__torch();
+                    edict.insert("^deku_tree__compass_room__ctx__torch", format!("{:?}", r));
+                    (r, vec!["^deku_tree__compass_room__ctx__torch"])
+                };
+                (!val.0, val.1)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_false(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // False
+    (false, vec![])
+}
+pub fn explain_gold_skulltula_token__10(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // Gold_Skulltula_Token{10}
+    {
+        let ct = ctx.count(Item::Gold_Skulltula_Token);
+        edict.insert("Gold_Skulltula_Token count", format!("{}", ct));
+        (ct >= 10, vec!["Gold_Skulltula_Token count"])
+    }
+}
+pub fn explain_has_fire_source(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $has_fire_source
+    {
+        let (res, mut refs) = hexplain__has_fire_source!(ctx, world, edict);
+        edict.insert("$has_fire_source", format!("{:?}", res));
+        refs.push("$has_fire_source");
+        (res, refs)
+    }
+}
+pub fn explain_has_fire_source_with_torch_or_can_use__bow(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $has_fire_source_with_torch or $can_use(Bow)
+    {
+        let mut left = {
+            let (res, mut refs) = hexplain__has_fire_source_with_torch!(ctx, world, edict);
+            edict.insert("$has_fire_source_with_torch", format!("{:?}", res));
+            refs.push("$has_fire_source_with_torch");
+            (res, refs)
+        };
+        if left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__can_use!(ctx, world, Item::Bow, edict);
+                edict.insert("$can_use(Bow)", format!("{:?}", res));
+                refs.push("$can_use(Bow)");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_has_shield(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $has_shield
+    {
+        let (res, mut refs) = hexplain__has_shield!(ctx, world, edict);
+        edict.insert("$has_shield", format!("{:?}", res));
+        refs.push("$has_shield");
+        (res, refs)
+    }
+}
+pub fn explain_is_adult(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $is_adult
+    {
+        let (res, mut refs) = hexplain__is_adult!(ctx, world, edict);
+        edict.insert("$is_adult", format!("{:?}", res));
+        refs.push("$is_adult");
+        (res, refs)
+    }
+}
+pub fn explain_is_adult_or_can_child_attack(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $is_adult or $can_child_attack
+    {
+        let mut left = {
+            let (res, mut refs) = hexplain__is_adult!(ctx, world, edict);
+            edict.insert("$is_adult", format!("{:?}", res));
+            refs.push("$is_adult");
+            (res, refs)
+        };
+        if left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__can_child_attack!(ctx, world, edict);
+                edict.insert("$can_child_attack", format!("{:?}", res));
+                refs.push("$can_child_attack");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_is_adult_or_can_child_attack_or_nuts(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $is_adult or $can_child_attack or $Nuts
+    {
+        let mut left = {
+            let mut left = {
+                let (res, mut refs) = hexplain__is_adult!(ctx, world, edict);
+                edict.insert("$is_adult", format!("{:?}", res));
+                refs.push("$is_adult");
+                (res, refs)
+            };
+            if left.0 {
+                left
+            } else {
+                let mut right = {
+                    let (res, mut refs) = hexplain__can_child_attack!(ctx, world, edict);
+                    edict.insert("$can_child_attack", format!("{:?}", res));
+                    refs.push("$can_child_attack");
+                    (res, refs)
+                };
+                left.1.append(&mut right.1);
+                (right.0, left.1)
+            }
+        };
+        if left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__Nuts!(ctx, world, edict);
+                edict.insert("$Nuts", format!("{:?}", res));
+                refs.push("$Nuts");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_is_adult_or_deku_basement_block(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $is_adult or Deku_Basement_Block
+    {
+        let mut left = {
+            let (res, mut refs) = hexplain__is_adult!(ctx, world, edict);
+            edict.insert("$is_adult", format!("{:?}", res));
+            refs.push("$is_adult");
+            (res, refs)
+        };
+        if left.0 {
+            left
+        } else {
+            let mut right = {
+                let h = ctx.has(Item::Deku_Basement_Block);
+                edict.insert("Deku_Basement_Block", format!("{}", h));
+                (h, vec!["Deku_Basement_Block"])
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_is_adult_or_kokiri_sword_or_boomerang(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $is_adult or Kokiri_Sword or Boomerang
+    {
+        let mut left = {
+            let mut left = {
+                let (res, mut refs) = hexplain__is_adult!(ctx, world, edict);
+                edict.insert("$is_adult", format!("{:?}", res));
+                refs.push("$is_adult");
+                (res, refs)
+            };
+            if left.0 {
+                left
+            } else {
+                let mut right = {
+                    let h = ctx.has(Item::Kokiri_Sword);
+                    edict.insert("Kokiri_Sword", format!("{}", h));
+                    (h, vec!["Kokiri_Sword"])
+                };
+                left.1.append(&mut right.1);
+                (right.0, left.1)
+            }
+        };
+        if left.0 {
+            left
+        } else {
+            let mut right = {
+                let h = ctx.has(Item::Boomerang);
+                edict.insert("Boomerang", format!("{}", h));
+                (h, vec!["Boomerang"])
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_is_adult_or_showed_mido(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $is_adult or Showed_Mido
+    {
+        let mut left = {
+            let (res, mut refs) = hexplain__is_adult!(ctx, world, edict);
+            edict.insert("$is_adult", format!("{:?}", res));
+            refs.push("$is_adult");
+            (res, refs)
+        };
+        if left.0 {
+            left
+        } else {
+            let mut right = {
+                let h = ctx.has(Item::Showed_Mido);
+                edict.insert("Showed_Mido", format!("{}", h));
+                (h, vec!["Showed_Mido"])
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_is_adult_or_slingshot_or_sticks_or_kokiri_sword(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $is_adult or Slingshot or $Sticks or Kokiri_Sword
+    {
+        let mut left = {
+            let mut left = {
+                let mut left = {
+                    let (res, mut refs) = hexplain__is_adult!(ctx, world, edict);
+                    edict.insert("$is_adult", format!("{:?}", res));
+                    refs.push("$is_adult");
+                    (res, refs)
+                };
+                if left.0 {
+                    left
+                } else {
+                    let mut right = {
+                        let h = ctx.has(Item::Slingshot);
+                        edict.insert("Slingshot", format!("{}", h));
+                        (h, vec!["Slingshot"])
+                    };
+                    left.1.append(&mut right.1);
+                    (right.0, left.1)
+                }
+            };
+            if left.0 {
+                left
+            } else {
+                let mut right = {
+                    let (res, mut refs) = hexplain__Sticks!(ctx, world, edict);
+                    edict.insert("$Sticks", format!("{:?}", res));
+                    refs.push("$Sticks");
+                    (res, refs)
+                };
+                left.1.append(&mut right.1);
+                (right.0, left.1)
+            }
+        };
+        if left.0 {
+            left
+        } else {
+            let mut right = {
+                let h = ctx.has(Item::Kokiri_Sword);
+                edict.insert("Kokiri_Sword", format!("{}", h));
+                (h, vec!["Kokiri_Sword"])
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_is_adult_or_sticks_or_kokiri_sword(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $is_adult or $Sticks or Kokiri_Sword
+    {
+        let mut left = {
+            let mut left = {
+                let (res, mut refs) = hexplain__is_adult!(ctx, world, edict);
+                edict.insert("$is_adult", format!("{:?}", res));
+                refs.push("$is_adult");
+                (res, refs)
+            };
+            if left.0 {
+                left
+            } else {
+                let mut right = {
+                    let (res, mut refs) = hexplain__Sticks!(ctx, world, edict);
+                    edict.insert("$Sticks", format!("{:?}", res));
+                    refs.push("$Sticks");
+                    (res, refs)
+                };
+                left.1.append(&mut right.1);
+                (right.0, left.1)
+            }
+        };
+        if left.0 {
+            left
+        } else {
+            let mut right = {
+                let h = ctx.has(Item::Kokiri_Sword);
+                edict.insert("Kokiri_Sword", format!("{}", h));
+                (h, vec!["Kokiri_Sword"])
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_is_child(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $is_child
+    {
+        let (res, mut refs) = hexplain__is_child!(ctx, world, edict);
+        edict.insert("$is_child", format!("{:?}", res));
+        refs.push("$is_child");
+        (res, refs)
+    }
+}
+pub fn explain_is_child_and_kokiri_sword_and_deku_shield(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $is_child and Kokiri_Sword and $Deku_Shield
+    {
+        let mut left = {
+            let mut left = {
+                let (res, mut refs) = hexplain__is_child!(ctx, world, edict);
+                edict.insert("$is_child", format!("{:?}", res));
+                refs.push("$is_child");
+                (res, refs)
+            };
+            if !left.0 {
+                left
+            } else {
+                let mut right = {
+                    let h = ctx.has(Item::Kokiri_Sword);
+                    edict.insert("Kokiri_Sword", format!("{}", h));
+                    (h, vec!["Kokiri_Sword"])
+                };
+                left.1.append(&mut right.1);
+                (right.0, left.1)
+            }
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__Deku_Shield!(ctx, world, edict);
+                edict.insert("$Deku_Shield", format!("{:?}", res));
+                refs.push("$Deku_Shield");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_is_child_and_sticks_and_nuts(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $is_child and $Sticks and $Nuts
+    {
+        let mut left = {
+            let mut left = {
+                let (res, mut refs) = hexplain__is_child!(ctx, world, edict);
+                edict.insert("$is_child", format!("{:?}", res));
+                refs.push("$is_child");
+                (res, refs)
+            };
+            if !left.0 {
+                left
+            } else {
+                let mut right = {
+                    let (res, mut refs) = hexplain__Sticks!(ctx, world, edict);
+                    edict.insert("$Sticks", format!("{:?}", res));
+                    refs.push("$Sticks");
+                    (res, refs)
+                };
+                left.1.append(&mut right.1);
+                (right.0, left.1)
+            }
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__Nuts!(ctx, world, edict);
+                edict.insert("$Nuts", format!("{:?}", res));
+                refs.push("$Nuts");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_nuts_and_has_shield_and_if___is_child____sticks__else____biggoron_sword_(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $Nuts and $has_shield and if ($is_child) { $Sticks } else { Biggoron_Sword }
+    {
+        let mut left = {
+            let mut left = {
+                let (res, mut refs) = hexplain__Nuts!(ctx, world, edict);
+                edict.insert("$Nuts", format!("{:?}", res));
+                refs.push("$Nuts");
+                (res, refs)
+            };
+            if !left.0 {
+                left
+            } else {
+                let mut right = {
+                    let (res, mut refs) = hexplain__has_shield!(ctx, world, edict);
+                    edict.insert("$has_shield", format!("{:?}", res));
+                    refs.push("$has_shield");
+                    (res, refs)
+                };
+                left.1.append(&mut right.1);
+                (right.0, left.1)
+            }
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let mut refs = Vec::new();
+                let mut cond = {
+                    let (res, mut refs) = hexplain__is_child!(ctx, world, edict);
+                    edict.insert("$is_child", format!("{:?}", res));
+                    refs.push("$is_child");
+                    (res, refs)
+                };
+                refs.append(cond.1);
+                if cond.0 {
+                    let mut then = {
+                        let (res, mut refs) = hexplain__Sticks!(ctx, world, edict);
+                        edict.insert("$Sticks", format!("{:?}", res));
+                        refs.push("$Sticks");
+                        (res, refs)
+                    };
+                    refs.append(&mut then.1);
+                    (then.0, refs)
+                } else {
+                    let mut then = {
+                        let (res, mut refs) = hexplain__Sticks!(ctx, world, edict);
+                        edict.insert("$Sticks", format!("{:?}", res));
+                        refs.push("$Sticks");
+                        (res, refs)
+                    };
+                    refs.append(&mut then.1);
+                    (then.0, refs)
+                }
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_objective(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $objective
+    {
+        let (res, mut refs) = rexplain__objective!(ctx, world, edict);
+        edict.insert("$objective", format!("{:?}", res));
+        refs.push("$objective");
+        (res, refs)
+    }
 }

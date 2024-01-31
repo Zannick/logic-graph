@@ -10,6 +10,18 @@ macro_rules! helper__is_child {
         $ctx.child()
     }};
 }
+#[macro_export]
+macro_rules! hexplain__is_child {
+    ($ctx:expr, $world:expr, $edict:expr) => {{
+        #[allow(unused_imports)]
+        use $crate::items::Item;
+        {
+            let r = $ctx.child();
+            $edict.insert("^child", format!("{:?}", r));
+            (r, vec!["^child"])
+        }
+    }};
+}
 
 /// $is_adult (  )
 /// NOT ^child
@@ -21,6 +33,21 @@ macro_rules! helper__is_adult {
         !$ctx.child()
     }};
 }
+#[macro_export]
+macro_rules! hexplain__is_adult {
+    ($ctx:expr, $world:expr, $edict:expr) => {{
+        #[allow(unused_imports)]
+        use $crate::items::Item;
+        {
+            let val = {
+                let r = $ctx.child();
+                $edict.insert("^child", format!("{:?}", r));
+                (r, vec!["^child"])
+            };
+            (!val.0, val.1)
+        }
+    }};
+}
 
 /// $Deku_Shield (  )
 /// Buy_Deku_Shield or Deku_Shield_Drop
@@ -30,6 +57,31 @@ macro_rules! helper__Deku_Shield {
         #[allow(unused_imports)]
         use $crate::items::Item;
         ($ctx.has(Item::Buy_Deku_Shield) || $ctx.has(Item::Deku_Shield_Drop))
+    }};
+}
+#[macro_export]
+macro_rules! hexplain__Deku_Shield {
+    ($ctx:expr, $world:expr, $edict:expr) => {{
+        #[allow(unused_imports)]
+        use $crate::items::Item;
+        {
+            let mut left = {
+                let h = $ctx.has(Item::Buy_Deku_Shield);
+                $edict.insert("Buy_Deku_Shield", format!("{}", h));
+                (h, vec!["Buy_Deku_Shield"])
+            };
+            if left.0 {
+                left
+            } else {
+                let mut right = {
+                    let h = $ctx.has(Item::Deku_Shield_Drop);
+                    $edict.insert("Deku_Shield_Drop", format!("{}", h));
+                    (h, vec!["Deku_Shield_Drop"])
+                };
+                left.1.append(&mut right.1);
+                (right.0, left.1)
+            }
+        }
     }};
 }
 
@@ -44,6 +96,44 @@ macro_rules! helper__Nuts {
             || $ctx.has(Item::Deku_Nut_Drop))
     }};
 }
+#[macro_export]
+macro_rules! hexplain__Nuts {
+    ($ctx:expr, $world:expr, $edict:expr) => {{
+        #[allow(unused_imports)]
+        use $crate::items::Item;
+        {
+            let mut left = {
+                let mut left = {
+                    let h = $ctx.has(Item::Buy_Deku_Nut_5);
+                    $edict.insert("Buy_Deku_Nut_5", format!("{}", h));
+                    (h, vec!["Buy_Deku_Nut_5"])
+                };
+                if left.0 {
+                    left
+                } else {
+                    let mut right = {
+                        let h = $ctx.has(Item::Buy_Deku_Nut_10);
+                        $edict.insert("Buy_Deku_Nut_10", format!("{}", h));
+                        (h, vec!["Buy_Deku_Nut_10"])
+                    };
+                    left.1.append(&mut right.1);
+                    (right.0, left.1)
+                }
+            };
+            if left.0 {
+                left
+            } else {
+                let mut right = {
+                    let h = $ctx.has(Item::Deku_Nut_Drop);
+                    $edict.insert("Deku_Nut_Drop", format!("{}", h));
+                    (h, vec!["Deku_Nut_Drop"])
+                };
+                left.1.append(&mut right.1);
+                (right.0, left.1)
+            }
+        }
+    }};
+}
 
 /// $Sticks (  )
 /// Buy_Deku_Stick_1 or Deku_Stick_Drop
@@ -53,6 +143,31 @@ macro_rules! helper__Sticks {
         #[allow(unused_imports)]
         use $crate::items::Item;
         ($ctx.has(Item::Buy_Deku_Stick_1) || $ctx.has(Item::Deku_Stick_Drop))
+    }};
+}
+#[macro_export]
+macro_rules! hexplain__Sticks {
+    ($ctx:expr, $world:expr, $edict:expr) => {{
+        #[allow(unused_imports)]
+        use $crate::items::Item;
+        {
+            let mut left = {
+                let h = $ctx.has(Item::Buy_Deku_Stick_1);
+                $edict.insert("Buy_Deku_Stick_1", format!("{}", h));
+                (h, vec!["Buy_Deku_Stick_1"])
+            };
+            if left.0 {
+                left
+            } else {
+                let mut right = {
+                    let h = $ctx.has(Item::Deku_Stick_Drop);
+                    $edict.insert("Deku_Stick_Drop", format!("{}", h));
+                    (h, vec!["Deku_Stick_Drop"])
+                };
+                left.1.append(&mut right.1);
+                (right.0, left.1)
+            }
+        }
     }};
 }
 
@@ -71,6 +186,26 @@ macro_rules! helper__wallet_max {
         }
     }};
 }
+#[macro_export]
+macro_rules! hexplain__wallet_max {
+    ($ctx:expr, $world:expr, $edict:expr) => {{
+        #[allow(unused_imports)]
+        use $crate::items::Item;
+        {
+            let mut refs = vec!["Progressive_Wallet count"];
+            let ct = $ctx.count(Item::Progressive_Wallet);
+            $edict.insert("Progressive_Wallet count", format!("{}", ct));
+            let mut m = match ct {
+                3 => (999, vec![]),
+                2 => (500, vec![]),
+                1 => (200, vec![]),
+                _ => (99, vec![]),
+            };
+            refs.append(&mut m.1);
+            m
+        }
+    }};
+}
 
 /// $has_shield (  )
 /// ($is_adult and Hylian_Shield) or ($is_child and $Deku_Shield)
@@ -81,6 +216,60 @@ macro_rules! helper__has_shield {
         use $crate::items::Item;
         ((helper__is_adult!($ctx, $world) && $ctx.has(Item::Hylian_Shield))
             || (helper__is_child!($ctx, $world) && helper__Deku_Shield!($ctx, $world)))
+    }};
+}
+#[macro_export]
+macro_rules! hexplain__has_shield {
+    ($ctx:expr, $world:expr, $edict:expr) => {{
+        #[allow(unused_imports)]
+        use $crate::items::Item;
+        {
+            let mut left = ({
+                let mut left = {
+                    let (res, mut refs) = hexplain__is_adult!($ctx, $world, $edict);
+                    $edict.insert("$is_adult", format!("{:?}", res));
+                    refs.push("$is_adult");
+                    (res, refs)
+                };
+                if !left.0 {
+                    left
+                } else {
+                    let mut right = {
+                        let h = $ctx.has(Item::Hylian_Shield);
+                        $edict.insert("Hylian_Shield", format!("{}", h));
+                        (h, vec!["Hylian_Shield"])
+                    };
+                    left.1.append(&mut right.1);
+                    (right.0, left.1)
+                }
+            });
+            if left.0 {
+                left
+            } else {
+                let mut right = ({
+                    let mut left = {
+                        let (res, mut refs) = hexplain__is_child!($ctx, $world, $edict);
+                        $edict.insert("$is_child", format!("{:?}", res));
+                        refs.push("$is_child");
+                        (res, refs)
+                    };
+                    if !left.0 {
+                        left
+                    } else {
+                        let mut right = {
+                            let (res, mut refs) = hexplain__Deku_Shield!($ctx, $world, $edict);
+                            $edict.insert("$Deku_Shield", format!("{:?}", res));
+                            refs.push("$Deku_Shield");
+                            (res, refs)
+                        };
+                        left.1.append(&mut right.1);
+                        (right.0, left.1)
+                    }
+                });
+                left.1.append(&mut right.1);
+                (right.0, left.1)
+            }
+        }
     }};
 }
 
@@ -94,6 +283,35 @@ macro_rules! helper__can_play {
         ($ctx.has(Item::Ocarina) && $ctx.has($song))
     }};
 }
+#[macro_export]
+macro_rules! hexplain__can_play {
+    ($ctx:expr, $world:expr, $song:expr, $edict:expr) => {{
+        #[allow(unused_imports)]
+        use $crate::items::Item;
+        {
+            let mut left = {
+                let h = $ctx.has(Item::Ocarina);
+                $edict.insert("Ocarina", format!("{}", h));
+                (h, vec!["Ocarina"])
+            };
+            if !left.0 {
+                left
+            } else {
+                let mut right = {
+                    let r = $ctx.has($song);
+                    if let Some(v) = $edict.get_mut(&"helpers:$can_play.^song") {
+                        v.push_str(format!(", $song: {}", r));
+                    } else {
+                        $edict.insert("helpers:$can_play.^song", format!("$song: {}", r));
+                    };
+                    (r, vec!["helpers:$can_play.^song"])
+                };
+                left.1.append(&mut right.1);
+                (right.0, left.1)
+            }
+        }
+    }};
+}
 
 /// $can_jumpslash (  )
 /// $is_adult or $Sticks or Kokiri_Sword
@@ -104,6 +322,46 @@ macro_rules! helper__can_jumpslash {
         use $crate::items::Item;
         ((helper__is_adult!($ctx, $world) || helper__Sticks!($ctx, $world))
             || $ctx.has(Item::Kokiri_Sword))
+    }};
+}
+#[macro_export]
+macro_rules! hexplain__can_jumpslash {
+    ($ctx:expr, $world:expr, $edict:expr) => {{
+        #[allow(unused_imports)]
+        use $crate::items::Item;
+        {
+            let mut left = {
+                let mut left = {
+                    let (res, mut refs) = hexplain__is_adult!($ctx, $world, $edict);
+                    $edict.insert("$is_adult", format!("{:?}", res));
+                    refs.push("$is_adult");
+                    (res, refs)
+                };
+                if left.0 {
+                    left
+                } else {
+                    let mut right = {
+                        let (res, mut refs) = hexplain__Sticks!($ctx, $world, $edict);
+                        $edict.insert("$Sticks", format!("{:?}", res));
+                        refs.push("$Sticks");
+                        (res, refs)
+                    };
+                    left.1.append(&mut right.1);
+                    (right.0, left.1)
+                }
+            };
+            if left.0 {
+                left
+            } else {
+                let mut right = {
+                    let h = $ctx.has(Item::Kokiri_Sword);
+                    $edict.insert("Kokiri_Sword", format!("{}", h));
+                    (h, vec!["Kokiri_Sword"])
+                };
+                left.1.append(&mut right.1);
+                (right.0, left.1)
+            }
+        }
     }};
 }
 
@@ -128,6 +386,194 @@ macro_rules! helper__can_use {
         }
     }};
 }
+#[macro_export]
+macro_rules! hexplain__can_use {
+    ($ctx:expr, $world:expr, $item:expr, $edict:expr) => {{
+        #[allow(unused_imports)]
+        use $crate::items::Item;
+        {
+            let mut refs = Vec::new();
+            let mut cond = {
+                let (res, mut refs) = hexplain___is_magic_item!($ctx, $world, $item, $edict);
+                $edict.insert("$_is_magic_item(^item)", format!("{:?}", res));
+                refs.push("$_is_magic_item(^item)");
+                (res, refs)
+            };
+            refs.append(cond.1);
+            if cond.0 {
+                let mut then = {
+                    let mut left = {
+                        let r = $ctx.has($item);
+                        if let Some(v) = $edict.get_mut(&"helpers:$can_use.^item") {
+                            v.push_str(format!(", $item: {}", r));
+                        } else {
+                            $edict.insert("helpers:$can_use.^item", format!("$item: {}", r));
+                        };
+                        (r, vec!["helpers:$can_use.^item"])
+                    };
+                    if !left.0 {
+                        left
+                    } else {
+                        let mut right = {
+                            let h = $ctx.has(Item::Magic_Meter);
+                            $edict.insert("Magic_Meter", format!("{}", h));
+                            (h, vec!["Magic_Meter"])
+                        };
+                        left.1.append(&mut right.1);
+                        (right.0, left.1)
+                    }
+                };
+                refs.append(&mut then.1);
+                (then.0, refs)
+            } else {
+                let mut cond = {
+                    let (res, mut refs) = hexplain___is_adult_item!($ctx, $world, $item, $edict);
+                    $edict.insert("$_is_adult_item(^item)", format!("{:?}", res));
+                    refs.push("$_is_adult_item(^item)");
+                    (res, refs)
+                };
+                refs.append(cond.1);
+                if cond.0 {
+                    let mut then = {
+                        let mut left = {
+                            let (res, mut refs) = hexplain__is_adult!($ctx, $world, $edict);
+                            $edict.insert("$is_adult", format!("{:?}", res));
+                            refs.push("$is_adult");
+                            (res, refs)
+                        };
+                        if !left.0 {
+                            left
+                        } else {
+                            let mut right = {
+                                let r = $ctx.has($item);
+                                if let Some(v) = $edict.get_mut(&"helpers:$can_use.^item") {
+                                    v.push_str(format!(", $item: {}", r));
+                                } else {
+                                    $edict
+                                        .insert("helpers:$can_use.^item", format!("$item: {}", r));
+                                };
+                                (r, vec!["helpers:$can_use.^item"])
+                            };
+                            left.1.append(&mut right.1);
+                            (right.0, left.1)
+                        }
+                    };
+                    refs.append(&mut then.1);
+                    (then.0, refs)
+                } else {
+                    let mut cond = {
+                        let (res, mut refs) =
+                            hexplain___is_magic_arrow!($ctx, $world, $item, $edict);
+                        $edict.insert("$_is_magic_arrow(^item)", format!("{:?}", res));
+                        refs.push("$_is_magic_arrow(^item)");
+                        (res, refs)
+                    };
+                    refs.append(cond.1);
+                    if cond.0 {
+                        let mut then = {
+                            let mut left = {
+                                let mut left = {
+                                    let mut left = {
+                                        let (res, mut refs) =
+                                            hexplain__is_adult!($ctx, $world, $edict);
+                                        $edict.insert("$is_adult", format!("{:?}", res));
+                                        refs.push("$is_adult");
+                                        (res, refs)
+                                    };
+                                    if !left.0 {
+                                        left
+                                    } else {
+                                        let mut right = {
+                                            let r = $ctx.has($item);
+                                            if let Some(v) =
+                                                $edict.get_mut(&"helpers:$can_use.^item")
+                                            {
+                                                v.push_str(format!(", $item: {}", r));
+                                            } else {
+                                                $edict.insert(
+                                                    "helpers:$can_use.^item",
+                                                    format!("$item: {}", r),
+                                                );
+                                            };
+                                            (r, vec!["helpers:$can_use.^item"])
+                                        };
+                                        left.1.append(&mut right.1);
+                                        (right.0, left.1)
+                                    }
+                                };
+                                if !left.0 {
+                                    left
+                                } else {
+                                    let mut right = {
+                                        let h = $ctx.has(Item::Bow);
+                                        $edict.insert("Bow", format!("{}", h));
+                                        (h, vec!["Bow"])
+                                    };
+                                    left.1.append(&mut right.1);
+                                    (right.0, left.1)
+                                }
+                            };
+                            if !left.0 {
+                                left
+                            } else {
+                                let mut right = {
+                                    let h = $ctx.has(Item::Magic_Meter);
+                                    $edict.insert("Magic_Meter", format!("{}", h));
+                                    (h, vec!["Magic_Meter"])
+                                };
+                                left.1.append(&mut right.1);
+                                (right.0, left.1)
+                            }
+                        };
+                        refs.append(&mut then.1);
+                        (then.0, refs)
+                    } else {
+                        let mut cond = {
+                            let (res, mut refs) =
+                                hexplain___is_child_item!($ctx, $world, $item, $edict);
+                            $edict.insert("$_is_child_item(^item)", format!("{:?}", res));
+                            refs.push("$_is_child_item(^item)");
+                            (res, refs)
+                        };
+                        refs.append(cond.1);
+                        if cond.0 {
+                            let mut then = {
+                                let mut left = {
+                                    let (res, mut refs) = hexplain__is_child!($ctx, $world, $edict);
+                                    $edict.insert("$is_child", format!("{:?}", res));
+                                    refs.push("$is_child");
+                                    (res, refs)
+                                };
+                                if !left.0 {
+                                    left
+                                } else {
+                                    let mut right = {
+                                        let r = $ctx.has($item);
+                                        if let Some(v) = $edict.get_mut(&"helpers:$can_use.^item") {
+                                            v.push_str(format!(", $item: {}", r));
+                                        } else {
+                                            $edict.insert(
+                                                "helpers:$can_use.^item",
+                                                format!("$item: {}", r),
+                                            );
+                                        };
+                                        (r, vec!["helpers:$can_use.^item"])
+                                    };
+                                    left.1.append(&mut right.1);
+                                    (right.0, left.1)
+                                }
+                            };
+                            refs.append(&mut then.1);
+                            (then.0, refs)
+                        } else {
+                            (false, refs)
+                        }
+                    }
+                }
+            }
+        }
+    }};
+}
 
 /// $_is_magic_item ( TypedVar(name='item', type='Item') )
 /// ^item IN [Dins_Fire, Farores_Wind, Nayrus_Love, Lens_of_Truth]
@@ -136,9 +582,31 @@ macro_rules! helper___is_magic_item {
     ($ctx:expr, $world:expr, $item:expr) => {{
         #[allow(unused_imports)]
         use $crate::items::Item;
-        match $item {
-            Item::Dins_Fire | Item::Farores_Wind | Item::Nayrus_Love | Item::Lens_of_Truth => true,
-            _ => false,
+        matches!(
+            $item,
+            Item::Dins_Fire | Item::Farores_Wind | Item::Nayrus_Love | Item::Lens_of_Truth
+        )
+    }};
+}
+#[macro_export]
+macro_rules! hexplain___is_magic_item {
+    ($ctx:expr, $world:expr, $item:expr, $edict:expr) => {{
+        #[allow(unused_imports)]
+        use $crate::items::Item;
+        {
+            let r = $item;
+            if let Some(v) = $edict.get_mut(&"helpers:$_is_magic_item.^item") {
+                v.push_str(format!(", $item: {}", r));
+            } else {
+                $edict.insert("helpers:$_is_magic_item.^item", format!("$item: {}", r));
+            };
+            (
+                matches!(
+                    r,
+                    Item::Dins_Fire | Item::Farores_Wind | Item::Nayrus_Love | Item::Lens_of_Truth
+                ),
+                vec!["helpers:$_is_magic_item.^item"],
+            )
         }
     }};
 }
@@ -150,16 +618,45 @@ macro_rules! helper___is_adult_item {
     ($ctx:expr, $world:expr, $item:expr) => {{
         #[allow(unused_imports)]
         use $crate::items::Item;
-        match $item {
+        matches!(
+            $item,
             Item::Bow
-            | Item::Megaton_Hammer
-            | Item::Iron_Boots
-            | Item::Hover_Boots
-            | Item::Hookshot
-            | Item::Goron_Tunic
-            | Item::Zora_Tunic
-            | Item::Mirror_Shield => true,
-            _ => false,
+                | Item::Megaton_Hammer
+                | Item::Iron_Boots
+                | Item::Hover_Boots
+                | Item::Hookshot
+                | Item::Goron_Tunic
+                | Item::Zora_Tunic
+                | Item::Mirror_Shield
+        )
+    }};
+}
+#[macro_export]
+macro_rules! hexplain___is_adult_item {
+    ($ctx:expr, $world:expr, $item:expr, $edict:expr) => {{
+        #[allow(unused_imports)]
+        use $crate::items::Item;
+        {
+            let r = $item;
+            if let Some(v) = $edict.get_mut(&"helpers:$_is_adult_item.^item") {
+                v.push_str(format!(", $item: {}", r));
+            } else {
+                $edict.insert("helpers:$_is_adult_item.^item", format!("$item: {}", r));
+            };
+            (
+                matches!(
+                    r,
+                    Item::Bow
+                        | Item::Megaton_Hammer
+                        | Item::Iron_Boots
+                        | Item::Hover_Boots
+                        | Item::Hookshot
+                        | Item::Goron_Tunic
+                        | Item::Zora_Tunic
+                        | Item::Mirror_Shield
+                ),
+                vec!["helpers:$_is_adult_item.^item"],
+            )
         }
     }};
 }
@@ -171,9 +668,28 @@ macro_rules! helper___is_child_item {
     ($ctx:expr, $world:expr, $item:expr) => {{
         #[allow(unused_imports)]
         use $crate::items::Item;
-        match $item {
-            Item::Slingshot | Item::Boomerang | Item::Kokiri_Sword => true,
-            _ => false,
+        matches!(
+            $item,
+            Item::Slingshot | Item::Boomerang | Item::Kokiri_Sword
+        )
+    }};
+}
+#[macro_export]
+macro_rules! hexplain___is_child_item {
+    ($ctx:expr, $world:expr, $item:expr, $edict:expr) => {{
+        #[allow(unused_imports)]
+        use $crate::items::Item;
+        {
+            let r = $item;
+            if let Some(v) = $edict.get_mut(&"helpers:$_is_child_item.^item") {
+                v.push_str(format!(", $item: {}", r));
+            } else {
+                $edict.insert("helpers:$_is_child_item.^item", format!("$item: {}", r));
+            };
+            (
+                matches!(r, Item::Slingshot | Item::Boomerang | Item::Kokiri_Sword),
+                vec!["helpers:$_is_child_item.^item"],
+            )
         }
     }};
 }
@@ -185,9 +701,31 @@ macro_rules! helper___is_magic_arrow {
     ($ctx:expr, $world:expr, $item:expr) => {{
         #[allow(unused_imports)]
         use $crate::items::Item;
-        match $item {
-            Item::Fire_Arrows | Item::Light_Arrows | Item::Blue_Fire_Arrows => true,
-            _ => false,
+        matches!(
+            $item,
+            Item::Fire_Arrows | Item::Light_Arrows | Item::Blue_Fire_Arrows
+        )
+    }};
+}
+#[macro_export]
+macro_rules! hexplain___is_magic_arrow {
+    ($ctx:expr, $world:expr, $item:expr, $edict:expr) => {{
+        #[allow(unused_imports)]
+        use $crate::items::Item;
+        {
+            let r = $item;
+            if let Some(v) = $edict.get_mut(&"helpers:$_is_magic_arrow.^item") {
+                v.push_str(format!(", $item: {}", r));
+            } else {
+                $edict.insert("helpers:$_is_magic_arrow.^item", format!("$item: {}", r));
+            };
+            (
+                matches!(
+                    r,
+                    Item::Fire_Arrows | Item::Light_Arrows | Item::Blue_Fire_Arrows
+                ),
+                vec!["helpers:$_is_magic_arrow.^item"],
+            )
         }
     }};
 }
@@ -202,6 +740,18 @@ macro_rules! helper__has_explosives {
         $ctx.has(Item::Bombs)
     }};
 }
+#[macro_export]
+macro_rules! hexplain__has_explosives {
+    ($ctx:expr, $world:expr, $edict:expr) => {{
+        #[allow(unused_imports)]
+        use $crate::items::Item;
+        {
+            let h = $ctx.has(Item::Bombs);
+            $edict.insert("Bombs", format!("{}", h));
+            (h, vec!["Bombs"])
+        }
+    }};
+}
 
 /// $can_blast_or_smash (  )
 /// $has_explosives or $can_use(Megaton_Hammer)
@@ -212,6 +762,34 @@ macro_rules! helper__can_blast_or_smash {
         use $crate::items::Item;
         (helper__has_explosives!($ctx, $world)
             || helper__can_use!($ctx, $world, Item::Megaton_Hammer))
+    }};
+}
+#[macro_export]
+macro_rules! hexplain__can_blast_or_smash {
+    ($ctx:expr, $world:expr, $edict:expr) => {{
+        #[allow(unused_imports)]
+        use $crate::items::Item;
+        {
+            let mut left = {
+                let (res, mut refs) = hexplain__has_explosives!($ctx, $world, $edict);
+                $edict.insert("$has_explosives", format!("{:?}", res));
+                refs.push("$has_explosives");
+                (res, refs)
+            };
+            if left.0 {
+                left
+            } else {
+                let mut right = {
+                    let (res, mut refs) =
+                        hexplain__can_use!($ctx, $world, Item::Megaton_Hammer, $edict);
+                    $edict.insert("$can_use(Megaton_Hammer)", format!("{:?}", res));
+                    refs.push("$can_use(Megaton_Hammer)");
+                    (res, refs)
+                };
+                left.1.append(&mut right.1);
+                (right.0, left.1)
+            }
+        }
     }};
 }
 
@@ -228,6 +806,72 @@ macro_rules! helper__can_child_attack {
                 || $ctx.has(Item::Kokiri_Sword)))
     }};
 }
+#[macro_export]
+macro_rules! hexplain__can_child_attack {
+    ($ctx:expr, $world:expr, $edict:expr) => {{
+        #[allow(unused_imports)]
+        use $crate::items::Item;
+        {
+            let mut left = {
+                let (res, mut refs) = hexplain__is_child!($ctx, $world, $edict);
+                $edict.insert("$is_child", format!("{:?}", res));
+                refs.push("$is_child");
+                (res, refs)
+            };
+            if !left.0 {
+                left
+            } else {
+                let mut right = ({
+                    let mut left = {
+                        let mut left = {
+                            let mut left = {
+                                let h = $ctx.has(Item::Slingshot);
+                                $edict.insert("Slingshot", format!("{}", h));
+                                (h, vec!["Slingshot"])
+                            };
+                            if left.0 {
+                                left
+                            } else {
+                                let mut right = {
+                                    let h = $ctx.has(Item::Boomerang);
+                                    $edict.insert("Boomerang", format!("{}", h));
+                                    (h, vec!["Boomerang"])
+                                };
+                                left.1.append(&mut right.1);
+                                (right.0, left.1)
+                            }
+                        };
+                        if left.0 {
+                            left
+                        } else {
+                            let mut right = {
+                                let (res, mut refs) = hexplain__Sticks!($ctx, $world, $edict);
+                                $edict.insert("$Sticks", format!("{:?}", res));
+                                refs.push("$Sticks");
+                                (res, refs)
+                            };
+                            left.1.append(&mut right.1);
+                            (right.0, left.1)
+                        }
+                    };
+                    if left.0 {
+                        left
+                    } else {
+                        let mut right = {
+                            let h = $ctx.has(Item::Kokiri_Sword);
+                            $edict.insert("Kokiri_Sword", format!("{}", h));
+                            (h, vec!["Kokiri_Sword"])
+                        };
+                        left.1.append(&mut right.1);
+                        (right.0, left.1)
+                    }
+                });
+                left.1.append(&mut right.1);
+                (right.0, left.1)
+            }
+        }
+    }};
+}
 
 /// $has_fire_source (  )
 /// $can_use(Dins_Fire) or $can_use(Fire_Arrows)
@@ -238,6 +882,34 @@ macro_rules! helper__has_fire_source {
         use $crate::items::Item;
         (helper__can_use!($ctx, $world, Item::Dins_Fire)
             || helper__can_use!($ctx, $world, Item::Fire_Arrows))
+    }};
+}
+#[macro_export]
+macro_rules! hexplain__has_fire_source {
+    ($ctx:expr, $world:expr, $edict:expr) => {{
+        #[allow(unused_imports)]
+        use $crate::items::Item;
+        {
+            let mut left = {
+                let (res, mut refs) = hexplain__can_use!($ctx, $world, Item::Dins_Fire, $edict);
+                $edict.insert("$can_use(Dins_Fire)", format!("{:?}", res));
+                refs.push("$can_use(Dins_Fire)");
+                (res, refs)
+            };
+            if left.0 {
+                left
+            } else {
+                let mut right = {
+                    let (res, mut refs) =
+                        hexplain__can_use!($ctx, $world, Item::Fire_Arrows, $edict);
+                    $edict.insert("$can_use(Fire_Arrows)", format!("{:?}", res));
+                    refs.push("$can_use(Fire_Arrows)");
+                    (res, refs)
+                };
+                left.1.append(&mut right.1);
+                (right.0, left.1)
+            }
+        }
     }};
 }
 
@@ -252,6 +924,47 @@ macro_rules! helper__has_fire_source_with_torch {
             || (helper__is_child!($ctx, $world) && helper__Sticks!($ctx, $world)))
     }};
 }
+#[macro_export]
+macro_rules! hexplain__has_fire_source_with_torch {
+    ($ctx:expr, $world:expr, $edict:expr) => {{
+        #[allow(unused_imports)]
+        use $crate::items::Item;
+        {
+            let mut left = {
+                let (res, mut refs) = hexplain__has_fire_source!($ctx, $world, $edict);
+                $edict.insert("$has_fire_source", format!("{:?}", res));
+                refs.push("$has_fire_source");
+                (res, refs)
+            };
+            if left.0 {
+                left
+            } else {
+                let mut right = ({
+                    let mut left = {
+                        let (res, mut refs) = hexplain__is_child!($ctx, $world, $edict);
+                        $edict.insert("$is_child", format!("{:?}", res));
+                        refs.push("$is_child");
+                        (res, refs)
+                    };
+                    if !left.0 {
+                        left
+                    } else {
+                        let mut right = {
+                            let (res, mut refs) = hexplain__Sticks!($ctx, $world, $edict);
+                            $edict.insert("$Sticks", format!("{:?}", res));
+                            refs.push("$Sticks");
+                            (res, refs)
+                        };
+                        left.1.append(&mut right.1);
+                        (right.0, left.1)
+                    }
+                });
+                left.1.append(&mut right.1);
+                (right.0, left.1)
+            }
+        }
+    }};
+}
 
 /// Rule $victory
 #[macro_export]
@@ -261,6 +974,16 @@ macro_rules! rule__victory {
         use $crate::rules;
         match $world.rule_victory {
             RuleVictory::Default => rules::access___victory_objective($ctx, $world),
+        }
+    }};
+}
+#[macro_export]
+macro_rules! rexplain__victory {
+    ($ctx:expr, $world:expr, $edict:expr) => {{
+        use $crate::graph_enums::*;
+        use $crate::rules;
+        match $world.rule_victory {
+            RuleVictory::Default => rules::explain___victory_objective($ctx, $world, $edict),
         }
     }};
 }
@@ -276,6 +999,22 @@ macro_rules! rule__objective {
             RuleObjective::Ganon => rules::access___defeat_ganon($ctx, $world),
             RuleObjective::TriforceHunt => {
                 rules::access___triforce_piece__triforce_count($ctx, $world)
+            }
+        }
+    }};
+}
+#[macro_export]
+macro_rules! rexplain__objective {
+    ($ctx:expr, $world:expr, $edict:expr) => {{
+        use $crate::graph_enums::*;
+        use $crate::rules;
+        match $world.rule_objective {
+            RuleObjective::Gohma => {
+                rules::explain___deku_lobby_web_kokiri_emerald($ctx, $world, $edict)
+            }
+            RuleObjective::Ganon => rules::explain___defeat_ganon($ctx, $world, $edict),
+            RuleObjective::TriforceHunt => {
+                rules::explain___triforce_piece__triforce_count($ctx, $world, $edict)
             }
         }
     }};

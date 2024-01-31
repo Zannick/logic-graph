@@ -3,14 +3,19 @@
 #![allow(unused)]
 
 use analyzer::access::*;
+use analyzer::cli::read_from_file;
 use analyzer::context::*;
+use analyzer::estimates::ContextScorer;
 use analyzer::greedy::*;
+use analyzer::route::route_from_string;
 use analyzer::world::*;
 use criterion::{black_box, criterion_group, criterion_main, Criterion};
 use enum_map::EnumMap;
 use libsample::context::Context;
 use libsample::graph;
+use libsample::graph_enums::RuleVictory;
 use libsample::items::Item;
+use std::path::PathBuf;
 
 pub fn criterion_benchmark(c: &mut Criterion) {
     let mut world = graph::World::new();
@@ -25,6 +30,31 @@ pub fn criterion_benchmark(c: &mut Criterion) {
     c.bench_function("greedy search", |b| {
         b.iter(|| greedy_search(&world, &ctx, u32::MAX, 2))
     });
+
+    let mut dir = PathBuf::from(file!());
+    dir.pop();
+    dir.pop();
+    dir.push("routes");
+    let mut routes = Vec::new();
+    for entry in std::fs::read_dir(dir).unwrap() {
+        let path = entry.unwrap().path();
+        let ext = path.extension().map(|s| s.to_str()).flatten();
+        if matches!(ext, Some("txt")) {
+            routes.push(read_from_file(&path));
+        }
+    }
+
+    if !routes.is_empty() {
+        let shortest_paths = ContextScorer::shortest_paths_tree_only(&world, ctx.get());
+        c.bench_function("load routes", |b| {
+            b.iter(|| {
+                for rstr in &routes {
+                    route_from_string(&world, ctx.get(), rstr, &shortest_paths).unwrap();
+                }
+            })
+        });
+    }
+
     c.bench_function("minimal playthrough", |b| {
         b.iter(|| minimal_greedy_playthrough(&world, &ctx, u32::MAX))
     });

@@ -1395,48 +1395,6 @@ impl std::str::FromStr for WarpId {
     serde_repr::Deserialize_repr,
 )]
 #[repr(u8)]
-pub enum Objective {
-    #[default]
-    Gohma,
-    Ganon,
-    Triforce_Hunt,
-}
-impl fmt::Display for Objective {
-    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        match self {
-            Objective::Gohma => write!(f, "{}", "Gohma"),
-            Objective::Ganon => write!(f, "{}", "Ganon"),
-            Objective::Triforce_Hunt => write!(f, "{}", "Triforce Hunt"),
-        }
-    }
-}
-impl std::str::FromStr for Objective {
-    type Err = String;
-
-    fn from_str(s: &str) -> Result<Self, Self::Err> {
-        match s {
-            "Gohma" => Ok(Objective::Gohma),
-            "Ganon" => Ok(Objective::Ganon),
-            "Triforce Hunt" => Ok(Objective::Triforce_Hunt),
-            _ => Err(format!("Could not recognize as a Objective: {}", s)),
-        }
-    }
-}
-
-#[derive(
-    Debug,
-    PartialEq,
-    Eq,
-    Copy,
-    Clone,
-    Hash,
-    Ord,
-    PartialOrd,
-    Default,
-    serde_repr::Serialize_repr,
-    serde_repr::Deserialize_repr,
-)]
-#[repr(u8)]
 pub enum RuleVictory {
     #[default]
     Default,

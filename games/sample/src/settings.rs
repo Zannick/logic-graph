@@ -3,6 +3,7 @@
 use crate::context::{flags, Context};
 use crate::graph::World;
 use analyzer::context::ContextWrapper;
+use analyzer::estimates::ContextScorer;
 use analyzer::route::route_from_yaml_string;
 use analyzer::settings::*;
 use std::fs::File;
@@ -17,9 +18,6 @@ fn read_key_value(
     val: &Yaml,
 ) -> Result<(), String> {
     match key.as_str() {
-        Some("objective") => {
-            world.objective = parse_str_into(key, val)?;
-        }
         Some("rules") => {
             for (rkey, rval) in val.as_hash().expect("rules YAML should be a key-value map") {
                 match rkey.as_str() {
@@ -88,10 +86,14 @@ pub fn load_settings(
                 errs.push(e);
             }
         }
-        for s in route_strs {
-            match route_from_yaml_string(world.as_ref(), &ctx, s) {
-                Ok(c) => vec.push(c),
-                Err(e) => errs.push(e),
+        if !route_strs.is_empty() {
+            // This is duplicative, but yaml routes are also inefficient.
+            let shortest_paths = ContextScorer::shortest_paths_tree_only(world.as_ref(), &ctx);
+            for s in route_strs {
+                match route_from_yaml_string(world.as_ref(), &ctx, s, &shortest_paths) {
+                    Ok(c) => vec.push(c),
+                    Err(e) => errs.push(e),
+                }
             }
         }
         if !errs.is_empty() {

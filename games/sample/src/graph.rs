@@ -15,6 +15,7 @@ use analyzer::context::Ctx;
 use analyzer::world;
 use enum_map::{enum_map, Enum, EnumMap};
 use lazy_static::lazy_static;
+use rustc_hash::FxHashMap;
 use std::ops::Range;
 use std::option::Option;
 
@@ -212,9 +213,48 @@ impl world::Accessible for Location {
     }
     fn time(&self, ctx: &Context, world: &World) -> u32 {
         self.time
+            + match self.id {
+                _ => 0,
+            }
     }
     fn price(&self) -> &Currency {
         &self.price
+    }
+
+    fn explain_rule(
+        &self,
+        ctx: &Self::Context,
+        world: &World,
+        edict: &mut FxHashMap<&'static str, String>,
+    ) -> (bool, Vec<&'static str>) {
+        match self.id {
+            LocationId::Deku_Tree__Back_Room__Northwest__Break_Wall => rules::explain_deku_back_room_web_and_can_blast_or_smash(ctx, world, edict),
+            LocationId::Deku_Tree__Back_Room__Northwest__Burn_Web => rules::explain_has_fire_source_with_torch_or_can_use__bow(ctx, world, edict),
+            LocationId::Deku_Tree__Basement_1__Center__Vines_GS => rules::explain_is_adult_or_sticks_or_kokiri_sword(ctx, world, edict),
+            LocationId::Deku_Tree__Basement_1__Corner__Burn_Basement_Web => rules::explain_deku_basement_block_and_is_child_and_sticks(ctx, world, edict),
+            LocationId::Deku_Tree__Basement_1__Corner__Chest => rules::explain_deku_basement_switch(ctx, world, edict),
+            LocationId::Deku_Tree__Basement_1__Corner__Gate_GS => rules::explain_is_adult_or_can_child_attack(ctx, world, edict),
+            LocationId::Deku_Tree__Basement_2__Boss_Door__Scrubs => rules::explain_has_shield(ctx, world, edict),
+            LocationId::Deku_Tree__Basement_Ledge__Web__Burn_Web => rules::explain_has_fire_source(ctx, world, edict),
+            LocationId::Deku_Tree__Boss_Room__Arena__Blue_Warp => rules::explain_defeat_gohma(ctx, world, edict),
+            LocationId::Deku_Tree__Boss_Room__Arena__Gohma => rules::explain___nuts_or_can_use__slingshot_and_can_jumpslash(ctx, world, edict),
+            LocationId::Deku_Tree__Boss_Room__Arena__Gohma_Heart => rules::explain_defeat_gohma(ctx, world, edict),
+            LocationId::Deku_Tree__Boss_Room__Arena__Gohma_Quick_Kill => rules::explain_nuts_and_has_shield_and_if___is_child____sticks__else____biggoron_sword_(ctx, world, edict),
+            LocationId::Deku_Tree__Compass_Room__Entry__Burn_Web => rules::explain_is_child_and_sticks_and_nuts(ctx, world, edict),
+            LocationId::Deku_Tree__Compass_Room__Ledge__GS => rules::explain_is_adult_or_can_child_attack(ctx, world, edict),
+            LocationId::Deku_Tree__Floor_3__Door__Break_Web => rules::explain_is_adult_or_can_child_attack_or_nuts(ctx, world, edict),
+            LocationId::Deku_Tree__Lobby__Center__Deku_Baba_Nuts => rules::explain_is_adult_or_slingshot_or_sticks_or_kokiri_sword(ctx, world, edict),
+            LocationId::Deku_Tree__Lobby__Center__Deku_Baba_Sticks => rules::explain_is_adult_or_kokiri_sword_or_boomerang(ctx, world, edict),
+            LocationId::Deku_Tree__Lobby__Center__Web => rules::explain_false(ctx, world, edict),
+            LocationId::Deku_Tree__Scrub_Room__Entry__Scrub => rules::explain_has_shield(ctx, world, edict),
+            LocationId::Deku_Tree__Skull_Room__Entry__GS => rules::explain_can_use__boomerang_or_can_use__hookshot(ctx, world, edict),
+            LocationId::Kak__Spider_House__Entry__Skulls_10 => rules::explain_gold_skulltula_token__10(ctx, world, edict),
+            LocationId::KF__Baba_Corridor__Deku_Babas__Nuts => rules::explain_is_adult(ctx, world, edict),
+            LocationId::KF__Baba_Corridor__Deku_Babas__Sticks => rules::explain_is_adult_or_kokiri_sword_or_boomerang(ctx, world, edict),
+            LocationId::KF__Kokiri_Village__Midos_Guardpost__Show_Mido => rules::explain_is_child_and_kokiri_sword_and_deku_shield(ctx, world, edict),
+            LocationId::KF__Kokiri_Village__Training_Center__Victory => rules::explain_objective(ctx, world, edict),
+            _ => (true, vec![])
+        }
     }
 }
 
@@ -355,9 +395,79 @@ impl world::Accessible for Exit {
     }
     fn time(&self, ctx: &Context, world: &World) -> u32 {
         self.time
+            + match self.id {
+                _ => 0,
+            }
     }
     fn price(&self) -> &Currency {
         &self.price
+    }
+
+    fn explain_rule(
+        &self,
+        ctx: &Self::Context,
+        world: &World,
+        edict: &mut FxHashMap<&'static str, String>,
+    ) -> (bool, Vec<&'static str>) {
+        match self.id {
+            ExitId::Deku_Tree__Back_Room__East__ex__Basement_Ledge__Web_1 => {
+                rules::explain_is_child(ctx, world, edict)
+            }
+            ExitId::Deku_Tree__Back_Room__Northwest__ex__Skull_Room__Entry_1 => {
+                rules::explain_deku_back_room_web_and_deku_back_room_wall(ctx, world, edict)
+            }
+            ExitId::Deku_Tree__Basement_1__Corner__Burn_Basement_Web => {
+                rules::explain_deku_basement_block_and_is_child_and_sticks(ctx, world, edict)
+            }
+            ExitId::Deku_Tree__Basement_1__Corner__ex__Basement_Ledge__Block_1 => {
+                rules::explain_is_adult_or_deku_basement_block(ctx, world, edict)
+            }
+            ExitId::Deku_Tree__Basement_2__Boss_Door__ex__Boss_Room__Entry_1 => {
+                rules::explain_deku_basement_scrubs(ctx, world, edict)
+            }
+            ExitId::Deku_Tree__Basement_Ledge__Web__ex__Basement_2__Pool_1 => {
+                rules::explain_deku_basement_web(ctx, world, edict)
+            }
+            ExitId::Deku_Tree__Boss_Room__Arena__Blue_Warp => {
+                rules::explain_defeat_gohma(ctx, world, edict)
+            }
+            ExitId::Deku_Tree__Compass_Room__Entry__Burn_Web => {
+                rules::explain_is_child_and_sticks_and_nuts(ctx, world, edict)
+            }
+            ExitId::Deku_Tree__Compass_Room__Entry__ex__Floor_3__Door_1 => {
+                rules::explain_deku_tree__compass_room__entry__ex__floor_3__door_1__req(
+                    ctx, world, edict,
+                )
+            }
+            ExitId::Deku_Tree__Floor_2__Vines__ex__Floor_3__Climb_2 => {
+                rules::explain_can_use__slingshot(ctx, world, edict)
+            }
+            ExitId::Deku_Tree__Floor_3__Door__Break_Web => {
+                rules::explain_is_adult_or_can_child_attack_or_nuts(ctx, world, edict)
+            }
+            ExitId::Deku_Tree__Floor_3__Door__ex__Lobby__Center_1 => {
+                rules::explain_is_adult_or_can_child_attack_or_nuts(ctx, world, edict)
+            }
+            ExitId::Deku_Tree__Lobby__Center__ex__Basement_1__Center_1 => {
+                rules::explain_deku_lobby_web(ctx, world, edict)
+            }
+            ExitId::Deku_Tree__Lobby__Center__ex__Basement_Ledge__Block_1 => {
+                rules::explain_deku_lobby_web_and_logic_deku_b1_skip(ctx, world, edict)
+            }
+            ExitId::Deku_Tree__Scrub_Room__Rear__ex__Slingshot_Room__Entry_1 => {
+                rules::explain_deku_slingshot_scrub(ctx, world, edict)
+            }
+            ExitId::KF__Boulder_Maze__Entry__ex__Kokiri_Village__Training_Center_1 => {
+                rules::explain_is_child(ctx, world, edict)
+            }
+            ExitId::KF__Kokiri_Village__Midos_Guardpost__ex__Baba_Corridor__Village_Side_1 => {
+                rules::explain_is_adult_or_showed_mido(ctx, world, edict)
+            }
+            ExitId::KF__Kokiri_Village__Training_Center__ex__Boulder_Maze__Entry_1 => {
+                rules::explain_is_child(ctx, world, edict)
+            }
+            _ => (true, vec![]),
+        }
     }
 }
 
@@ -446,9 +556,26 @@ impl world::Accessible for Action {
     }
     fn time(&self, ctx: &Context, world: &World) -> u32 {
         self.time
+            + match self.id {
+                _ => 0,
+            }
     }
     fn price(&self) -> &Currency {
         &self.price
+    }
+
+    fn explain_rule(
+        &self,
+        ctx: &Self::Context,
+        world: &World,
+        edict: &mut FxHashMap<&'static str, String>,
+    ) -> (bool, Vec<&'static str>) {
+        match self.id {
+            ActionId::Deku_Tree__Compass_Room__Entry__Light_Torch => {
+                rules::explain_deku_tree__compass_room__entry__light_torch__req(ctx, world, edict)
+            }
+            _ => (true, vec![]),
+        }
     }
 }
 impl world::Action for Action {
@@ -518,6 +645,18 @@ impl world::Accessible for Warp {
     }
     fn price(&self) -> &Currency {
         &self.price
+    }
+
+    fn explain_rule(
+        &self,
+        ctx: &Self::Context,
+        world: &World,
+        edict: &mut FxHashMap<&'static str, String>,
+    ) -> (bool, Vec<&'static str>) {
+        match self.id {
+            WarpId::Minuet => rules::explain_can_play__minuet_of_forest(ctx, world, edict),
+            _ => (true, vec![]),
+        }
     }
 }
 impl world::Warp for Warp {
@@ -717,7 +856,6 @@ lazy_static! {
 
 #[derive(Clone, Debug)]
 pub struct World {
-    pub objective: Objective,
     pub rule_victory: RuleVictory,
     pub rule_objective: RuleObjective,
     // These are arrays that group the items together by their parent.
@@ -747,7 +885,7 @@ impl world::World for World {
 
     fn ruleset(&self) -> String {
         format!(
-            "$victory: {}\n$objective: {}",
+            "[$victory: {}, $objective: {}]",
             self.rule_victory, self.rule_objective,
         )
     }
@@ -1166,14 +1304,6 @@ impl world::World for World {
         crate::rule__victory!(ctx, self)
     }
 
-    fn objective_met(&self, ctx: &Context) -> bool {
-        match self.objective {
-            Objective::Gohma => rules::access___deku_lobby_web_kokiri_emerald(ctx, self),
-            Objective::Ganon => rules::access___defeat_ganon(ctx, self),
-            Objective::Triforce_Hunt => rules::access___triforce_piece__triforce_count(ctx, self),
-        }
-    }
-
     fn items_needed(&self, ctx: &Context) -> Vec<(Item, i16)> {
         let mut map = analyzer::new_hashmap();
 
@@ -1356,7 +1486,6 @@ impl Default for World {
 impl World {
     pub fn new() -> World {
         World {
-            objective: Objective::default(),
             rule_victory: RuleVictory::default(),
             rule_objective: RuleObjective::default(),
             locations: build_locations(),
