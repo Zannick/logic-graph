@@ -29,9 +29,9 @@ MAIN_FILENAME = 'Game.yaml'
 GAME_FIELDS = {'name', 'objectives', 'base_movements', 'movements', 'exit_movements',
                'warps', 'actions', 'time', 'context', 'start', 'load', 'data',
                'rules', 'helpers', 'collect', 'settings', 'special', '_filename'}
-REGION_FIELDS = {'name', 'short', 'data', 'here', 'graph_offset'}
-AREA_FIELDS = {'name', 'enter', 'spots', 'data', 'here', 'map'}
-SPOT_FIELDS = {'name', 'coord', 'actions', 'locations', 'exits', 'hybrid', 'local', 'data', 'here',
+REGION_FIELDS = {'name', 'short', 'data', 'graph_offset'}
+AREA_FIELDS = {'name', 'enter', 'spots', 'data', 'map'}
+SPOT_FIELDS = {'name', 'coord', 'actions', 'locations', 'exits', 'hybrid', 'local', 'data',
                'keep', 'enter'}
 LOCATION_FIELDS = {'name', 'item', 'req', 'canon'}
 TYPEHINT_FIELDS = {'type', 'max', 'opts', 'default'}
@@ -1304,7 +1304,6 @@ class GameLogic(object):
         def _check_types(v1, v2, ctx, category, *names, local=False):
             t1 = typenameof(v1)
             t2 = typenameof(v2)
-            # here overrides may look like a higher-order place type
             if local:
                 if t1 == 'SpotId' and t2 in ('AreaId', 'RegionId'):
                     return
@@ -1330,7 +1329,7 @@ class GameLogic(object):
                         f'{" > ".join(names)} in "{category}" section')
 
         # self._info: start, data
-        # regions/areas: here, start, enter, data
+        # regions/areas: start, enter, data
         gc = dict(self._info['start'])
         for ctx, hints in self.context_type_hints.items():
             if d := hints.get('default'):
@@ -1384,17 +1383,6 @@ class GameLogic(object):
             else:
                 gc[ctx] = val
 
-        def _handle_here(ctx, val, category, *names):
-            _check_data(ctx, val, category, *names)
-            if ctx[0] == '_':
-                self._errors.append(
-                    f'"here" overrides cannot be local: {" > ".join(names)} {ctx}')
-            elif ctx not in gc:
-                self._errors.append(
-                    f'"here" overrides must be predefined: {" > ".join(names)} {ctx}')
-            else:
-                _check_types(gc[ctx], val, ctx, category, *names, local=True)
-
         for region in self.regions:
             for ctx, val in region.get('start', {}).items():
                 _handle_start(ctx, val, 'start', region['name'])
@@ -1403,8 +1391,6 @@ class GameLogic(object):
                     _handle_triggers(ctx, val, trigger, region['name'])
             for ctx, val in region.get('data', {}).items():
                 _check_data(ctx, val, 'data', region['name'], data=True)
-            for ctx, val in region.get('here', {}).items():
-                _handle_here(ctx, val, 'here', region['name'])
         # Areas must be handled second to check for shadowing
         for area in self.areas():
             for ctx, val in area.get('start', {}).items():
@@ -1414,8 +1400,6 @@ class GameLogic(object):
                     _handle_triggers(ctx, val, trigger, area['region'], area['name'])
             for ctx, val in area.get('data', {}).items():
                 _check_data(ctx, val, 'data', area['region'], area['name'], data=True)
-            for ctx, val in area.get('here', {}).items():
-                _handle_here(ctx, val, 'here', area['region'], area['name'])
 
         self.context_values = gc
 
@@ -1482,37 +1466,6 @@ class GameLogic(object):
             if cname in self.context_values:
                 return cname
         return ctx
-
-    @cached_property
-    def context_here_overrides(self):
-        d = {c: {'region': defaultdict(dict), 'area': defaultdict(dict),
-                 'spot': defaultdict(dict)}
-             for c in self.context_types}
-        for r in self.regions:
-            localctx = self.get_local_ctx(r)
-            if here := r.get('here'):
-                for k, v in here.items():
-                    t = self.context_types[localctx[k]]
-                    if t == 'SpotId':
-                        v = f'{r["name"]} > {v}'
-                    d[localctx[k]]['region'][r['id']] = str_to_rusttype(v, t)
-        for a in self.areas():
-            localctx = self.get_local_ctx(a)
-            if here := a.get('here'):
-                for k, v in here.items():
-                    t = self.context_types[localctx[k]]
-                    if t == 'SpotId':
-                        v = f'{a["fullname"]} > {v}'
-                    d[localctx[k]]['area'][a['id']] = str_to_rusttype(v, t)
-        for s in self.spots():
-            localctx = self.get_local_ctx(s)
-            if here := s.get('here'):
-                for k, v in here.items():
-                    t = self.context_types[localctx[k]]
-                    if t == 'SpotId':
-                        v = f'{s["region"]} > {s["area"]} > {v}'
-                    d[localctx[k]]['spot'][s['id']] = str_to_rusttype(v, t)
-        return d
 
     @cached_property
     def data_values(self):
@@ -1689,7 +1642,6 @@ class GameLogic(object):
         self.base_distances
         self.context_trigger_rules
         self.context_position_watchers
-        self.context_here_overrides
         self.all_connections
         self.adjacent_regions
         files = {
@@ -1707,7 +1659,7 @@ class GameLogic(object):
             for tname in fnames:
                 template = env.get_template(tname + '.jinja')
                 name = os.path.join(self.game_dir, dirname, tname)
-                if name.endswith('.rs'):
+                if name.endswith('.rs') and tname not in ('lib.rs', 'context.rs'):
                     rustfiles.append(name)
                 with open(name, 'w', encoding='utf-8') as f:
                     f.write(template.render(gl=self, int_types=int_types, **self.__dict__))

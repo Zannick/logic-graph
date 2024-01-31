@@ -32,7 +32,7 @@ use std::fmt;
 #[derive(Debug, Copy, Clone, Eq, PartialEq)]
 pub enum Expectation {
 %% for ctx, t in context_types.items()
-    pub {{ ctx|camelize|camelize }}({{ t }}),
+    {{ ctx|camelize|camelize }}({{ t }}),
 %% endfor
     // items
 %% for item, ct in gl.item_max_counts.items()|sort
@@ -93,7 +93,7 @@ impl Default for ContextBits{{ loop.index }} {
 
 #[derive(Clone, Debug, Eq, PartialEq, Hash, Serialize, Deserialize)]
 pub struct Context {
-%# Splitting into separate Cow structs performs worse :(
+%#- Splitting into separate Cow structs performs worse :(
     // context vars
 %% for ctx, t in context_types.items() if ctx not in bfp.varmap
     pub {{ ctx }}: {{ t }},
@@ -180,7 +180,7 @@ impl context::Ctx for Context {
 %% if item in collect
                 rules::action_{{ collect[item].action_id }}(self, world);
 %% endif
-            },
+            }
 %% endfor
 %% for item, info in collect.items()
 %% if item not in gl.item_max_counts
@@ -202,9 +202,9 @@ impl context::Ctx for Context {
 %% else
                 self.{{ item|lower }}{% if ct > 1 %} += 1{% else %} = true{% endif %};
 %% endif
-            },
+            }
 %% endfor
-            _ => ()
+            _ => (),
         }
     }
 
@@ -330,7 +330,7 @@ impl context::Ctx for Context {
                     self.cbits{{ bfp.varmap[tile] }}.insert(flags::ContextBits{{ bfp.varmap[tile] }}::{{ tile|upper }});
 %% endfor
                 }
-            },
+            }
 %% endfor
             _ => (),
         }
@@ -602,27 +602,11 @@ impl Context {
     // context
 %% for ctx, t in context_types.items()
     pub fn {{ ctx }}(&self) -> {{ t }} {
-%#- Spots have priority over areas which have priority over regions
-        match self.position {
-%% for spot, override in context_here_overrides[ctx]['spot'].items()
-            {{ spot|target_id_from_id }} => {{ override }},
-%% endfor
-            _ => match get_area(self.position) {
-%% for area, override in context_here_overrides[ctx]['area'].items()
-                AreaId::{{ area }} => {{ override }},
-%% endfor
-                _ => match get_region(self.position) {
-%% for region, override in context_here_overrides[ctx]['region'].items()
-                    RegionId::{{ region }} => {{ override }},
-%% endfor
 %% if ctx in bfp.varmap
-                    _ => self.cbits{{ bfp.varmap[ctx] }}.contains(flags::ContextBits{{ bfp.varmap[ctx] }}::{{ ctx|upper }})
+        self.cbits{{ bfp.varmap[ctx] }}.contains(flags::ContextBits{{ bfp.varmap[ctx] }}::{{ ctx|upper }})
 %% else
-                    _ => self.{{ ctx }}
+        self.{{ ctx }}
 %% endif
-                }
-            }
-        }
     }
 %% if ctx != 'position'
     pub fn set_{{ ctx }}(&mut self, val: {{ t }}) {

@@ -1810,16 +1810,17 @@ pub fn access_not_within_menu_and_flasks_gt_0(ctx: &Context, world: &graph::Worl
         _ => true,
     }) && Into::<i32>::into(ctx.flasks()) > 0.into())
 }
-pub fn access_not_within_menu_and_ft_main_and_can_recall(
+pub fn access_not_within_menu_and_ft_main_and_can_recall_and___map_spot_not_within_default(
     ctx: &Context,
     world: &graph::World,
 ) -> bool {
-    // NOT WITHIN `Menu` and $ft_main and $can_recall
-    (((match get_region(ctx.position()) {
+    // NOT WITHIN `Menu` and $ft_main and $can_recall and (^map_spot NOT WITHIN $default)
+    ((((match get_region(ctx.position()) {
         RegionId::Menu => false,
         _ => true,
     }) && helper__ft_main!(ctx, world))
         && helper__can_recall!(ctx, world))
+        && (data::map_spot(ctx.position()) != Default::default()))
 }
 pub fn access_not_within_menu_and_realm_ne_breach_and_anuman_and_mode_eq_drone(
     ctx: &Context,
@@ -9233,28 +9234,42 @@ pub fn explain_not_within_menu_and_flasks_gt_0(
         }
     }
 }
-pub fn explain_not_within_menu_and_ft_main_and_can_recall(
+pub fn explain_not_within_menu_and_ft_main_and_can_recall_and___map_spot_not_within_default(
     ctx: &Context,
     world: &graph::World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
-    // NOT WITHIN `Menu` and $ft_main and $can_recall
+    // NOT WITHIN `Menu` and $ft_main and $can_recall and (^map_spot NOT WITHIN $default)
     {
         let mut left = {
-            let mut left = (
-                match get_region(ctx.position()) {
-                    RegionId::Menu => false,
-                    _ => true,
-                },
-                vec!["^position"],
-            );
+            let mut left = {
+                let mut left = (
+                    match get_region(ctx.position()) {
+                        RegionId::Menu => false,
+                        _ => true,
+                    },
+                    vec!["^position"],
+                );
+                if !left.0 {
+                    left
+                } else {
+                    let mut right = {
+                        let (res, mut refs) = hexplain__ft_main!(ctx, world, edict);
+                        edict.insert("$ft_main", format!("{:?}", res));
+                        refs.push("$ft_main");
+                        (res, refs)
+                    };
+                    left.1.append(&mut right.1);
+                    (right.0, left.1)
+                }
+            };
             if !left.0 {
                 left
             } else {
                 let mut right = {
-                    let (res, mut refs) = hexplain__ft_main!(ctx, world, edict);
-                    edict.insert("$ft_main", format!("{:?}", res));
-                    refs.push("$ft_main");
+                    let (res, mut refs) = hexplain__can_recall!(ctx, world, edict);
+                    edict.insert("$can_recall", format!("{:?}", res));
+                    refs.push("$can_recall");
                     (res, refs)
                 };
                 left.1.append(&mut right.1);
@@ -9264,12 +9279,15 @@ pub fn explain_not_within_menu_and_ft_main_and_can_recall(
         if !left.0 {
             left
         } else {
-            let mut right = {
-                let (res, mut refs) = hexplain__can_recall!(ctx, world, edict);
-                edict.insert("$can_recall", format!("{:?}", res));
-                refs.push("$can_recall");
-                (res, refs)
-            };
+            let mut right = ({
+                let mut refs = vec!["^map_spot"];
+                let r = data::map_spot(ctx.position());
+                let mut f = (Default::default(), vec![]);
+                edict.insert("$default", format!("{}", f.0));
+                refs.append(&mut f.1);
+                edict.insert("^map_spot", format!("{:?}", r));
+                (r != f.0, refs)
+            });
             left.1.append(&mut right.1);
             (right.0, left.1)
         }

@@ -1,11 +1,13 @@
 # A simpler version of OoT for initial testing purposes
 name: sample
 
-start:  # default initial context, global context values
-  position: KF > Link's House > Start Point
+data:
   # where the player will warp to. Place names are formatted
   # Region (name or short) > Area > Spot
   save: KF > Link's House > Start Point
+
+start:  # default initial context, global context values
+  position: KF > Link's House > Start Point
   # game-specific stuff
   child: True
   tod: day  # affected by realtime will be tough to handle

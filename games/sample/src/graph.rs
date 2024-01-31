@@ -670,7 +670,7 @@ impl world::Warp for Warp {
         if self.dest == SpotId::None {
             match self.id {
                 WarpId::Minuet => SpotId::KF__Kokiri_Village__Shop_Porch,
-                WarpId::Save => ctx.save(),
+                WarpId::Save => data::save(ctx.position()),
             }
         } else {
             self.dest

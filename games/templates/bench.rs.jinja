@@ -40,7 +40,7 @@ pub fn criterion_benchmark(c: &mut Criterion) {
         let ext = path.extension().map(|s| s.to_str()).flatten();
         if matches!(ext, Some("txt")) {
             routes.push(read_from_file(&path));
-        }   
+        }
     }
 
     if !routes.is_empty() {

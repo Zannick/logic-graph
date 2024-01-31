@@ -89,7 +89,6 @@ Each other yaml file in the top-level game directory is considered a dictionary 
 * **graph_offset**: Optionally, a pair of floats used to offset where this region is placed in the graphviz generated graph. No effect on the game graph itself.
 * **graph_attrs**: Optionally, a string of graphviz node attributes to apply to spots within this region. No effect on the game graph itself.
 * **data**: A dictionary of values for Place-based data. Format is the same as in `Game.yaml` but the values here override those values, and in turn can be overridden by **data** definitions in more specific places.
-* **here**: A dictionary of context variable overrides. The actual values of those variables are ignored and overridden with the given values when the player is in this **Region**.
 * **enter**, **load**, **reset**: A dictionary of context variable values to be set on a certain trigger: respectively, whenever the player *enters* the **Region** (i.e. the previous position was not in the **Region** and the new position is), whenever the game is *loaded* (by using a warp that loads the game), and whenever the area is *reset* (via a call to the [built-in function](#built-in-functions) `$reset` or whenever the game is *loaded*). Context variables may be defined here and omitted from `Game.yaml` fields as long as the type is inferrable from the value, and the name does not collide with any other context variable. You may prefix context variables used only in this Region (i.e. *local context variables*) with `_`; other Regions or Places may have a similarly named local context variable without collision.
 * **on_entry**: An effect that triggers whenever the player *enters* the Region, similar to **enter** except this field supports deeper customization. The effect is written as a logic rule of type `action`; during this effect's execution, `^position` is the player's previous position, and `^newpos` is the **Spot** the player is moving into. See the [Logic grammar reference](#logic-grammar-reference) below.
 * **areas**: A list of [Areas](#areas).
@@ -100,7 +99,7 @@ Each other yaml file in the top-level game directory is considered a dictionary 
 
 * **name**: The name of the area. Area names must be unique within a Region. **Required**.
 * **data**: A dictionary of values for Place-based data. Format is the same everywhere. These values override the data at higher levels: the containing Region and the defaults defined in `Game.yaml`, and can in turn be overridden by the **data** fields in **Spots** or in **datamap**.
-* **here**, **enter**, **load**, **reset**, **on_entry**, **graph_offset**, **graph_attrs**: Same as in **Region** but applying to this **Area** instead.
+* **enter**, **load**, **reset**, **on_entry**, **graph_offset**, **graph_attrs**: Same as in **Region** but applying to this **Area** instead.
 * **map**: Map tile definitions for the Area. This is usually a dictionary of a short-form tile name (string) with values that are bounding boxes&mdash;any Spots in the bounding box (including on the edges) mark that tile as seen when reached.
     * The bounding box is a sequence of 4 numbers (floats allowed). The first two are the corner with the smallest coordinates, and the other two are the opposite corner. For example, the unit circle's bounding box would be `[-1, -1, 1, 1]`.
     * If all Spots in the Area see all map tiles, then you can provide a string or list of strings instead of a dictionary. For example, `map: save`.
@@ -122,7 +121,7 @@ These take precedence over the **data** definitions in the Area but are overridd
 Spots are only defined within **Areas**. They may have the following fields:
 
 * **name**: The name of the spot. Spot names must be unique within an Area. **Required**.
-* **data**, **here**, **graph_offset**, **graph_attrs**: Same as in **Areas** but applying/overriding at this **Spot** instead.
+* **data**, **graph_offset**, **graph_attrs**: Same as in **Areas** but applying/overriding at this **Spot** instead.
 * **coord**: A list of coordinates, relative to other Spots in the same **Area**. Only two dimensions are presently supported. Floats are allowed.
 * **local**: A list of [Local connections](#local-connections) from this Spot.
 * **locations**: A list of [Locations](#locations) accessible from this Spot.
