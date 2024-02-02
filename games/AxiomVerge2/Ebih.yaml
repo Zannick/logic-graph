@@ -485,6 +485,11 @@ areas:
   on_entry: $reset_old_area(^newpos)
   start:
     _west_door_open: false
+  map:
+    axe: [22, 10, 23, 11]
+  datamap:
+    map_spot:
+      axe: Menu > Kiengir Map > Bronze Axe
   spots:
     - name: East 10
       coord: [24.95, 9.7]

@@ -1786,6 +1786,7 @@ pub enum SpotId {
     Menu__Kiengir_Map__Anuman,
     Menu__Kiengir_Map__Apocalypse,
     Menu__Kiengir_Map__Breach_Sight,
+    Menu__Kiengir_Map__Bronze_Axe,
     Menu__Kiengir_Map__Ebih_Base_Camp,
     Menu__Kiengir_Map__Ebih_Observatory,
     Menu__Kiengir_Map__Ebih_West_Lower,
@@ -4982,6 +4983,9 @@ impl fmt::Display for SpotId {
             SpotId::Menu__Kiengir_Map__Breach_Sight => {
                 write!(f, "{}", "Menu > Kiengir Map > Breach Sight")
             }
+            SpotId::Menu__Kiengir_Map__Bronze_Axe => {
+                write!(f, "{}", "Menu > Kiengir Map > Bronze Axe")
+            }
             SpotId::Menu__Kiengir_Map__Ebih_Base_Camp => {
                 write!(f, "{}", "Menu > Kiengir Map > Ebih Base Camp")
             }
@@ -7460,6 +7464,7 @@ impl std::str::FromStr for SpotId {
             "Menu > Kiengir Map > Anuman" => Ok(SpotId::Menu__Kiengir_Map__Anuman),
             "Menu > Kiengir Map > Apocalypse" => Ok(SpotId::Menu__Kiengir_Map__Apocalypse),
             "Menu > Kiengir Map > Breach Sight" => Ok(SpotId::Menu__Kiengir_Map__Breach_Sight),
+            "Menu > Kiengir Map > Bronze Axe" => Ok(SpotId::Menu__Kiengir_Map__Bronze_Axe),
             "Menu > Kiengir Map > Ebih Base Camp" => Ok(SpotId::Menu__Kiengir_Map__Ebih_Base_Camp),
             "Menu > Kiengir Map > Ebih Observatory" => {
                 Ok(SpotId::Menu__Kiengir_Map__Ebih_Observatory)

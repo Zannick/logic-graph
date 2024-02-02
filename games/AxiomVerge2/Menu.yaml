@@ -466,7 +466,7 @@ areas:
           tags: [warp]
     #endregion
 
-    #region entry points (urns)
+    #region entry points (mostly items)
     - name: Infect
       coord: [26, 9]
     - name: Remote Drone
@@ -477,6 +477,8 @@ areas:
       coord: [23, 20]
     - name: Anuman
       coord: [29, 25]
+    - name: Bronze Axe
+      coord: [22, 10]
     #endregion
 
 - name: Breach Map

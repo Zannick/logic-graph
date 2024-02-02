@@ -1262,7 +1262,8 @@ pub fn get_area(spot: SpotId) -> AreaId {
         | SpotId::Menu__Kiengir_Map__Remote_Drone
         | SpotId::Menu__Kiengir_Map__Breach_Sight
         | SpotId::Menu__Kiengir_Map__Shockwave
-        | SpotId::Menu__Kiengir_Map__Anuman => AreaId::Menu__Kiengir_Map,
+        | SpotId::Menu__Kiengir_Map__Anuman
+        | SpotId::Menu__Kiengir_Map__Bronze_Axe => AreaId::Menu__Kiengir_Map,
         SpotId::Menu__Breach_Map__GB_Peak
         | SpotId::Menu__Breach_Map__GB_SW_Save
         | SpotId::Menu__Breach_Map__IB_Basement
@@ -2617,7 +2618,8 @@ pub fn get_region(spot: SpotId) -> RegionId {
         | SpotId::Menu__Kiengir_Map__Remote_Drone
         | SpotId::Menu__Kiengir_Map__Breach_Sight
         | SpotId::Menu__Kiengir_Map__Shockwave
-        | SpotId::Menu__Kiengir_Map__Anuman => RegionId::Menu,
+        | SpotId::Menu__Kiengir_Map__Anuman
+        | SpotId::Menu__Kiengir_Map__Bronze_Axe => RegionId::Menu,
         SpotId::Menu__Breach_Map__GB_Peak
         | SpotId::Menu__Breach_Map__GB_SW_Save
         | SpotId::Menu__Breach_Map__IB_Basement
@@ -7051,7 +7053,7 @@ pub struct Spot {
     pub actions: Range<usize>,
 }
 
-static RAW_SPOTS: [SpotId; 1346] = [
+static RAW_SPOTS: [SpotId; 1347] = [
     SpotId::None,
     SpotId::Amagi__Grid_31_19__East,
     SpotId::Amagi__Grid_31_19__West,
@@ -8253,6 +8255,7 @@ static RAW_SPOTS: [SpotId; 1346] = [
     SpotId::Menu__Kiengir_Map__Anuman,
     SpotId::Menu__Kiengir_Map__Apocalypse,
     SpotId::Menu__Kiengir_Map__Breach_Sight,
+    SpotId::Menu__Kiengir_Map__Bronze_Axe,
     SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
     SpotId::Menu__Kiengir_Map__Ebih_Observatory,
     SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
@@ -39873,6 +39876,18 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
         },
         SpotId::Menu__Kiengir_Map__Anuman => Spot {
             id: SpotId::Menu__Kiengir_Map__Anuman,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Menu__Kiengir_Map__Bronze_Axe => Spot {
+            id: SpotId::Menu__Kiengir_Map__Bronze_Axe,
             locations: Range {
                 start: 0, end: 0,
             },

@@ -9131,13 +9131,17 @@ pub fn explain_not_within_menu_and_anuman_and_mode_ne_drone(
     // NOT WITHIN `Menu` and Anuman and ^mode != 'drone'
     {
         let mut left = {
-            let mut left = (
-                match get_region(ctx.position()) {
-                    RegionId::Menu => false,
-                    _ => true,
-                },
-                vec!["^position"],
-            );
+            let mut left = {
+                let r = ctx.position();
+                edict.insert("^position", format!("{:?}", r));
+                (
+                    match get_region(r) {
+                        RegionId::Menu => false,
+                        _ => true,
+                    },
+                    vec!["^position"],
+                )
+            };
             if !left.0 {
                 left
             } else {
@@ -9177,13 +9181,17 @@ pub fn explain_not_within_menu_and_can_deploy(
 ) -> (bool, Vec<&'static str>) {
     // NOT WITHIN `Menu` and $can_deploy
     {
-        let mut left = (
-            match get_region(ctx.position()) {
-                RegionId::Menu => false,
-                _ => true,
-            },
-            vec!["^position"],
-        );
+        let mut left = {
+            let r = ctx.position();
+            edict.insert("^position", format!("{:?}", r));
+            (
+                match get_region(r) {
+                    RegionId::Menu => false,
+                    _ => true,
+                },
+                vec!["^position"],
+            )
+        };
         if !left.0 {
             left
         } else {
@@ -9205,13 +9213,17 @@ pub fn explain_not_within_menu_and_flasks_gt_0(
 ) -> (bool, Vec<&'static str>) {
     // NOT WITHIN `Menu` and ^flasks > 0
     {
-        let mut left = (
-            match get_region(ctx.position()) {
-                RegionId::Menu => false,
-                _ => true,
-            },
-            vec!["^position"],
-        );
+        let mut left = {
+            let r = ctx.position();
+            edict.insert("^position", format!("{:?}", r));
+            (
+                match get_region(r) {
+                    RegionId::Menu => false,
+                    _ => true,
+                },
+                vec!["^position"],
+            )
+        };
         if !left.0 {
             left
         } else {
@@ -9243,13 +9255,17 @@ pub fn explain_not_within_menu_and_ft_main_and_can_recall_and___map_spot_not_wit
     {
         let mut left = {
             let mut left = {
-                let mut left = (
-                    match get_region(ctx.position()) {
-                        RegionId::Menu => false,
-                        _ => true,
-                    },
-                    vec!["^position"],
-                );
+                let mut left = {
+                    let r = ctx.position();
+                    edict.insert("^position", format!("{:?}", r));
+                    (
+                        match get_region(r) {
+                            RegionId::Menu => false,
+                            _ => true,
+                        },
+                        vec!["^position"],
+                    )
+                };
                 if !left.0 {
                     left
                 } else {
@@ -9302,13 +9318,17 @@ pub fn explain_not_within_menu_and_realm_ne_breach_and_anuman_and_mode_eq_drone(
     {
         let mut left = {
             let mut left = {
-                let mut left = (
-                    match get_region(ctx.position()) {
-                        RegionId::Menu => false,
-                        _ => true,
-                    },
-                    vec!["^position"],
-                );
+                let mut left = {
+                    let r = ctx.position();
+                    edict.insert("^position", format!("{:?}", r));
+                    (
+                        match get_region(r) {
+                            RegionId::Menu => false,
+                            _ => true,
+                        },
+                        vec!["^position"],
+                    )
+                };
                 if !left.0 {
                     left
                 } else {
@@ -9368,13 +9388,17 @@ pub fn explain_not_within_menu_and_realm_ne_breach_and_can_recall(
     // NOT WITHIN `Menu` and ^realm != 'breach' and $can_recall
     {
         let mut left = {
-            let mut left = (
-                match get_region(ctx.position()) {
-                    RegionId::Menu => false,
-                    _ => true,
-                },
-                vec!["^position"],
-            );
+            let mut left = {
+                let r = ctx.position();
+                edict.insert("^position", format!("{:?}", r));
+                (
+                    match get_region(r) {
+                        RegionId::Menu => false,
+                        _ => true,
+                    },
+                    vec!["^position"],
+                )
+            };
             if !left.0 {
                 left
             } else {
@@ -10166,13 +10190,17 @@ pub fn explain_within_antarctica(
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // WITHIN `Antarctica`
-    (
-        match get_region(ctx.position()) {
-            RegionId::Antarctica => true,
-            _ => false,
-        },
-        vec!["^position"],
-    )
+    {
+        let r = ctx.position();
+        edict.insert("^position", format!("{:?}", r));
+        (
+            match get_region(r) {
+                RegionId::Antarctica => true,
+                _ => false,
+            },
+            vec!["^position"],
+        )
+    }
 }
 pub fn explain_within_menu_gt_upgrade_menu(
     ctx: &Context,
@@ -10180,11 +10208,15 @@ pub fn explain_within_menu_gt_upgrade_menu(
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // WITHIN `Menu > Upgrade Menu`
-    (
-        match get_area(ctx.position()) {
-            AreaId::Menu__Upgrade_Menu => true,
-            _ => false,
-        },
-        vec!["^position"],
-    )
+    {
+        let r = ctx.position();
+        edict.insert("^position", format!("{:?}", r));
+        (
+            match get_area(r) {
+                AreaId::Menu__Upgrade_Menu => true,
+                _ => false,
+            },
+            vec!["^position"],
+        )
+    }
 }

@@ -9351,6 +9351,143 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
         ) => 333,
         (
             [false],
+            SpotId::Menu__Kiengir_Map__Bronze_Axe,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+        ) => 800,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Bronze_Axe,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+        ) => 1100,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Bronze_Axe,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+        ) => 900,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Bronze_Axe,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => 1133,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Bronze_Axe,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => 1500,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Bronze_Axe,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => 1600,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Bronze_Axe,
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+        ) => 1133,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Bronze_Axe,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => 1200,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Bronze_Axe,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => 1700,
+        ([false], SpotId::Menu__Kiengir_Map__Bronze_Axe, SpotId::Menu__Kiengir_Map__Apocalypse) => {
+            1333
+        }
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Bronze_Axe,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+        ) => 466,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Bronze_Axe,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+        ) => 700,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Bronze_Axe,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+        ) => 300,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Bronze_Axe,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+        ) => 133,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Bronze_Axe,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+        ) => 300,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Bronze_Axe,
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+        ) => 600,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Bronze_Axe,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+        ) => 1200,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Bronze_Axe,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+        ) => 333,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Bronze_Axe,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+        ) => 533,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Bronze_Axe,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => 600,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Bronze_Axe,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+        ) => 1500,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Bronze_Axe,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+        ) => 1266,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Bronze_Axe,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => 1800,
+        ([false], SpotId::Menu__Kiengir_Map__Bronze_Axe, SpotId::Menu__Kiengir_Map__Irikar_Hub) => {
+            1300
+        }
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Bronze_Axe,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+        ) => 1500,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Bronze_Axe,
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+        ) => 1700,
+        ([false], SpotId::Menu__Kiengir_Map__Bronze_Axe, SpotId::Menu__Kiengir_Map__Uhrum_East) => {
+            1600
+        }
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Bronze_Axe,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+        ) => 1200,
+        ([false], SpotId::Menu__Kiengir_Map__Bronze_Axe, SpotId::Menu__Kiengir_Map__Uhrum_West) => {
+            1800
+        }
+        (
+            [false],
             SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
             SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
         ) => 500,
@@ -22633,6 +22770,141 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
         ) => 333,
         (
             [true],
+            SpotId::Menu__Kiengir_Map__Bronze_Axe,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+        ) => 800,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Bronze_Axe,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+        ) => 1100,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Bronze_Axe,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+        ) => 900,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Bronze_Axe,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => 1133,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Bronze_Axe,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => 1500,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Bronze_Axe,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => 1600,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Bronze_Axe,
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+        ) => 1133,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Bronze_Axe,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => 1200,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Bronze_Axe,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => 1700,
+        ([true], SpotId::Menu__Kiengir_Map__Bronze_Axe, SpotId::Menu__Kiengir_Map__Apocalypse) => {
+            1333
+        }
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Bronze_Axe,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+        ) => 466,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Bronze_Axe,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+        ) => 700,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Bronze_Axe,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+        ) => 300,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Bronze_Axe,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+        ) => 133,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Bronze_Axe,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+        ) => 300,
+        ([true], SpotId::Menu__Kiengir_Map__Bronze_Axe, SpotId::Menu__Kiengir_Map__Giguna_Base) => {
+            600
+        }
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Bronze_Axe,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+        ) => 1200,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Bronze_Axe,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+        ) => 333,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Bronze_Axe,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+        ) => 533,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Bronze_Axe,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => 600,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Bronze_Axe,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+        ) => 1500,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Bronze_Axe,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+        ) => 1266,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Bronze_Axe,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => 1800,
+        ([true], SpotId::Menu__Kiengir_Map__Bronze_Axe, SpotId::Menu__Kiengir_Map__Irikar_Hub) => {
+            1300
+        }
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Bronze_Axe,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+        ) => 1500,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Bronze_Axe,
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+        ) => 1700,
+        ([true], SpotId::Menu__Kiengir_Map__Bronze_Axe, SpotId::Menu__Kiengir_Map__Uhrum_East) => {
+            1600
+        }
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Bronze_Axe,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+        ) => 1200,
+        ([true], SpotId::Menu__Kiengir_Map__Bronze_Axe, SpotId::Menu__Kiengir_Map__Uhrum_West) => {
+            1800
+        }
+        (
+            [true],
             SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
             SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
         ) => 500,
@@ -34156,6 +34428,61 @@ pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
         (SpotId::Menu__Kiengir_Map__Anuman, SpotId::Menu__Kiengir_Map__Uhrum_East) => true,
         (SpotId::Menu__Kiengir_Map__Anuman, SpotId::Menu__Kiengir_Map__Uhrum_Emergence) => true,
         (SpotId::Menu__Kiengir_Map__Anuman, SpotId::Menu__Kiengir_Map__Uhrum_West) => true,
+        (SpotId::Menu__Kiengir_Map__Bronze_Axe, SpotId::Menu__Kiengir_Map__Amagi_Main_Area) => true,
+        (SpotId::Menu__Kiengir_Map__Bronze_Axe, SpotId::Menu__Kiengir_Map__Amagi_East_Lake) => true,
+        (SpotId::Menu__Kiengir_Map__Bronze_Axe, SpotId::Menu__Kiengir_Map__Amagi_Isolation) => true,
+        (SpotId::Menu__Kiengir_Map__Bronze_Axe, SpotId::Menu__Kiengir_Map__Annuna_Center_Save) => {
+            true
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Bronze_Axe,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Bronze_Axe, SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Bronze_Axe, SpotId::Menu__Kiengir_Map__Annuna_Upper) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Bronze_Axe,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Bronze_Axe, SpotId::Menu__Kiengir_Map__Annuna_West_Bridge) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Bronze_Axe, SpotId::Menu__Kiengir_Map__Apocalypse) => true,
+        (SpotId::Menu__Kiengir_Map__Bronze_Axe, SpotId::Menu__Kiengir_Map__Ebih_Base_Camp) => true,
+        (SpotId::Menu__Kiengir_Map__Bronze_Axe, SpotId::Menu__Kiengir_Map__Ebih_Observatory) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Bronze_Axe, SpotId::Menu__Kiengir_Map__Ebih_West_Lower) => true,
+        (SpotId::Menu__Kiengir_Map__Bronze_Axe, SpotId::Menu__Kiengir_Map__Ebih_West_Mid) => true,
+        (SpotId::Menu__Kiengir_Map__Bronze_Axe, SpotId::Menu__Kiengir_Map__Ebih_West_Upper) => true,
+        (SpotId::Menu__Kiengir_Map__Bronze_Axe, SpotId::Menu__Kiengir_Map__Giguna_Base) => true,
+        (SpotId::Menu__Kiengir_Map__Bronze_Axe, SpotId::Menu__Kiengir_Map__Giguna_Labyrinth) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Bronze_Axe, SpotId::Menu__Kiengir_Map__Giguna_Northeast) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Bronze_Axe, SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Bronze_Axe, SpotId::Menu__Kiengir_Map__Giguna_Ruins_West) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Bronze_Axe, SpotId::Menu__Kiengir_Map__Giguna_Separator) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Bronze_Axe, SpotId::Menu__Kiengir_Map__Glacier_Revival) => true,
+        (SpotId::Menu__Kiengir_Map__Bronze_Axe, SpotId::Menu__Kiengir_Map__Irikar_Beach_Save) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Bronze_Axe, SpotId::Menu__Kiengir_Map__Irikar_Hub) => true,
+        (SpotId::Menu__Kiengir_Map__Bronze_Axe, SpotId::Menu__Kiengir_Map__Irikar_Midwest) => true,
+        (SpotId::Menu__Kiengir_Map__Bronze_Axe, SpotId::Menu__Kiengir_Map__Uhrum_Center) => true,
+        (SpotId::Menu__Kiengir_Map__Bronze_Axe, SpotId::Menu__Kiengir_Map__Uhrum_East) => true,
+        (SpotId::Menu__Kiengir_Map__Bronze_Axe, SpotId::Menu__Kiengir_Map__Uhrum_Emergence) => true,
+        (SpotId::Menu__Kiengir_Map__Bronze_Axe, SpotId::Menu__Kiengir_Map__Uhrum_West) => true,
         (SpotId::Menu__Breach_Map__GB_Peak, SpotId::Menu__Breach_Map__GB_Peak) => true,
         (SpotId::Menu__Breach_Map__GB_SW_Save, SpotId::Menu__Breach_Map__GB_Peak) => true,
         (SpotId::Menu__Breach_Map__IB_Basement, SpotId::Menu__Breach_Map__GB_Peak) => true,
@@ -56872,6 +57199,156 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             1000,
         ),
         (
+            SpotId::Menu__Kiengir_Map__Bronze_Axe,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            800,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Bronze_Axe,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            1100,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Bronze_Axe,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            900,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Bronze_Axe,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            1133,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Bronze_Axe,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            1500,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Bronze_Axe,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            1600,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Bronze_Axe,
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+            1133,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Bronze_Axe,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            1200,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Bronze_Axe,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            1700,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Bronze_Axe,
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+            1333,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Bronze_Axe,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            466,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Bronze_Axe,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            700,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Bronze_Axe,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            300,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Bronze_Axe,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+            133,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Bronze_Axe,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            300,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Bronze_Axe,
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+            600,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Bronze_Axe,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            1200,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Bronze_Axe,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            333,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Bronze_Axe,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            533,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Bronze_Axe,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            600,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Bronze_Axe,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            1500,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Bronze_Axe,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            1266,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Bronze_Axe,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            1800,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Bronze_Axe,
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+            1300,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Bronze_Axe,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            1500,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Bronze_Axe,
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+            1700,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Bronze_Axe,
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+            1600,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Bronze_Axe,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            1200,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Bronze_Axe,
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+            1800,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Bronze_Axe,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
             SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
             SpotId::Ebih__Base_Camp__Save_Point,
             12000,
@@ -69046,6 +69523,95 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
         (SpotId::Menu__Kiengir_Map__Breach_Sight, SpotId::Menu__Kiengir_Map__Uhrum_West) => {
             Some(333)
         }
+        (SpotId::Menu__Kiengir_Map__Bronze_Axe, SpotId::Menu__Kiengir_Map__Amagi_East_Lake) => {
+            Some(800)
+        }
+        (SpotId::Menu__Kiengir_Map__Bronze_Axe, SpotId::Menu__Kiengir_Map__Amagi_Isolation) => {
+            Some(1100)
+        }
+        (SpotId::Menu__Kiengir_Map__Bronze_Axe, SpotId::Menu__Kiengir_Map__Amagi_Main_Area) => {
+            Some(900)
+        }
+        (SpotId::Menu__Kiengir_Map__Bronze_Axe, SpotId::Menu__Kiengir_Map__Annuna_Center_Save) => {
+            Some(1133)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Bronze_Axe,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => Some(1500),
+        (SpotId::Menu__Kiengir_Map__Bronze_Axe, SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match) => {
+            Some(1600)
+        }
+        (SpotId::Menu__Kiengir_Map__Bronze_Axe, SpotId::Menu__Kiengir_Map__Annuna_Upper) => {
+            Some(1133)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Bronze_Axe,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => Some(1200),
+        (SpotId::Menu__Kiengir_Map__Bronze_Axe, SpotId::Menu__Kiengir_Map__Annuna_West_Bridge) => {
+            Some(1700)
+        }
+        (SpotId::Menu__Kiengir_Map__Bronze_Axe, SpotId::Menu__Kiengir_Map__Apocalypse) => {
+            Some(1333)
+        }
+        (SpotId::Menu__Kiengir_Map__Bronze_Axe, SpotId::Menu__Kiengir_Map__Ebih_Base_Camp) => {
+            Some(466)
+        }
+        (SpotId::Menu__Kiengir_Map__Bronze_Axe, SpotId::Menu__Kiengir_Map__Ebih_Observatory) => {
+            Some(700)
+        }
+        (SpotId::Menu__Kiengir_Map__Bronze_Axe, SpotId::Menu__Kiengir_Map__Ebih_West_Lower) => {
+            Some(300)
+        }
+        (SpotId::Menu__Kiengir_Map__Bronze_Axe, SpotId::Menu__Kiengir_Map__Ebih_West_Mid) => {
+            Some(133)
+        }
+        (SpotId::Menu__Kiengir_Map__Bronze_Axe, SpotId::Menu__Kiengir_Map__Ebih_West_Upper) => {
+            Some(300)
+        }
+        (SpotId::Menu__Kiengir_Map__Bronze_Axe, SpotId::Menu__Kiengir_Map__Giguna_Base) => {
+            Some(600)
+        }
+        (SpotId::Menu__Kiengir_Map__Bronze_Axe, SpotId::Menu__Kiengir_Map__Giguna_Labyrinth) => {
+            Some(1200)
+        }
+        (SpotId::Menu__Kiengir_Map__Bronze_Axe, SpotId::Menu__Kiengir_Map__Giguna_Northeast) => {
+            Some(333)
+        }
+        (SpotId::Menu__Kiengir_Map__Bronze_Axe, SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top) => {
+            Some(533)
+        }
+        (SpotId::Menu__Kiengir_Map__Bronze_Axe, SpotId::Menu__Kiengir_Map__Giguna_Ruins_West) => {
+            Some(600)
+        }
+        (SpotId::Menu__Kiengir_Map__Bronze_Axe, SpotId::Menu__Kiengir_Map__Giguna_Separator) => {
+            Some(1500)
+        }
+        (SpotId::Menu__Kiengir_Map__Bronze_Axe, SpotId::Menu__Kiengir_Map__Glacier_Revival) => {
+            Some(1266)
+        }
+        (SpotId::Menu__Kiengir_Map__Bronze_Axe, SpotId::Menu__Kiengir_Map__Irikar_Beach_Save) => {
+            Some(1800)
+        }
+        (SpotId::Menu__Kiengir_Map__Bronze_Axe, SpotId::Menu__Kiengir_Map__Irikar_Hub) => {
+            Some(1300)
+        }
+        (SpotId::Menu__Kiengir_Map__Bronze_Axe, SpotId::Menu__Kiengir_Map__Irikar_Midwest) => {
+            Some(1500)
+        }
+        (SpotId::Menu__Kiengir_Map__Bronze_Axe, SpotId::Menu__Kiengir_Map__Uhrum_Center) => {
+            Some(1700)
+        }
+        (SpotId::Menu__Kiengir_Map__Bronze_Axe, SpotId::Menu__Kiengir_Map__Uhrum_East) => {
+            Some(1600)
+        }
+        (SpotId::Menu__Kiengir_Map__Bronze_Axe, SpotId::Menu__Kiengir_Map__Uhrum_Emergence) => {
+            Some(1200)
+        }
+        (SpotId::Menu__Kiengir_Map__Bronze_Axe, SpotId::Menu__Kiengir_Map__Uhrum_West) => {
+            Some(1800)
+        }
         (SpotId::Menu__Kiengir_Map__Ebih_Base_Camp, SpotId::Menu__Kiengir_Map__Amagi_East_Lake) => {
             Some(500)
         }
@@ -79515,6 +80081,95 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
         }
         (SpotId::Menu__Kiengir_Map__Breach_Sight, SpotId::Menu__Kiengir_Map__Uhrum_West) => {
             (Some(333), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Bronze_Axe, SpotId::Menu__Kiengir_Map__Amagi_East_Lake) => {
+            (Some(800), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Bronze_Axe, SpotId::Menu__Kiengir_Map__Amagi_Isolation) => {
+            (Some(1100), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Bronze_Axe, SpotId::Menu__Kiengir_Map__Amagi_Main_Area) => {
+            (Some(900), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Bronze_Axe, SpotId::Menu__Kiengir_Map__Annuna_Center_Save) => {
+            (Some(1133), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Bronze_Axe,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => (Some(1500), vec![]),
+        (SpotId::Menu__Kiengir_Map__Bronze_Axe, SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match) => {
+            (Some(1600), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Bronze_Axe, SpotId::Menu__Kiengir_Map__Annuna_Upper) => {
+            (Some(1133), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Bronze_Axe,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => (Some(1200), vec![]),
+        (SpotId::Menu__Kiengir_Map__Bronze_Axe, SpotId::Menu__Kiengir_Map__Annuna_West_Bridge) => {
+            (Some(1700), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Bronze_Axe, SpotId::Menu__Kiengir_Map__Apocalypse) => {
+            (Some(1333), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Bronze_Axe, SpotId::Menu__Kiengir_Map__Ebih_Base_Camp) => {
+            (Some(466), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Bronze_Axe, SpotId::Menu__Kiengir_Map__Ebih_Observatory) => {
+            (Some(700), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Bronze_Axe, SpotId::Menu__Kiengir_Map__Ebih_West_Lower) => {
+            (Some(300), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Bronze_Axe, SpotId::Menu__Kiengir_Map__Ebih_West_Mid) => {
+            (Some(133), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Bronze_Axe, SpotId::Menu__Kiengir_Map__Ebih_West_Upper) => {
+            (Some(300), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Bronze_Axe, SpotId::Menu__Kiengir_Map__Giguna_Base) => {
+            (Some(600), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Bronze_Axe, SpotId::Menu__Kiengir_Map__Giguna_Labyrinth) => {
+            (Some(1200), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Bronze_Axe, SpotId::Menu__Kiengir_Map__Giguna_Northeast) => {
+            (Some(333), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Bronze_Axe, SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top) => {
+            (Some(533), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Bronze_Axe, SpotId::Menu__Kiengir_Map__Giguna_Ruins_West) => {
+            (Some(600), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Bronze_Axe, SpotId::Menu__Kiengir_Map__Giguna_Separator) => {
+            (Some(1500), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Bronze_Axe, SpotId::Menu__Kiengir_Map__Glacier_Revival) => {
+            (Some(1266), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Bronze_Axe, SpotId::Menu__Kiengir_Map__Irikar_Beach_Save) => {
+            (Some(1800), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Bronze_Axe, SpotId::Menu__Kiengir_Map__Irikar_Hub) => {
+            (Some(1300), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Bronze_Axe, SpotId::Menu__Kiengir_Map__Irikar_Midwest) => {
+            (Some(1500), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Bronze_Axe, SpotId::Menu__Kiengir_Map__Uhrum_Center) => {
+            (Some(1700), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Bronze_Axe, SpotId::Menu__Kiengir_Map__Uhrum_East) => {
+            (Some(1600), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Bronze_Axe, SpotId::Menu__Kiengir_Map__Uhrum_Emergence) => {
+            (Some(1200), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Bronze_Axe, SpotId::Menu__Kiengir_Map__Uhrum_West) => {
+            (Some(1800), vec![])
         }
         (SpotId::Menu__Kiengir_Map__Ebih_Base_Camp, SpotId::Menu__Kiengir_Map__Amagi_East_Lake) => {
             (Some(500), vec![])
