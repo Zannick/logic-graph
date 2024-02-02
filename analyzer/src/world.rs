@@ -54,6 +54,11 @@ pub trait Accessible: Sync {
         let mut seen = new_hashset();
         for key in named {
             if !seen.contains(&key) {
+                assert!(
+                    edict.contains_key(&key),
+                    "Attempting to explain {} but it's not in edict",
+                    key
+                );
                 explains.push(format!("{}: {}", key, edict[&key]));
                 seen.insert(key);
             }

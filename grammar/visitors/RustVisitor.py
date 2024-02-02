@@ -717,13 +717,14 @@ class RustExplainerVisitor(RustBaseVisitor):
             pl = str(pl)[1:-1]
             places[getPlaceType(pl)].append(pl)
         matchcase, elsecase = ('false', 'true') if ctx.NOT() else ('true', 'false')
-        per_type = [('match ctx.position()' if pt == 'SpotId' else f'match get_{pt.lower()[:-2]}(ctx.position())')
+        per_type = [('match r' if pt == 'SpotId' else f'match get_{pt.lower()[:-2]}(r)')
                     + ' {'
                     + ' | '.join(construct_place_id(pl) for pl in plist)
                     + f' => {matchcase}, _ => {elsecase} }}'
                     for pt, plist in places.items()
                     ]
-        return f'({" || ".join(per_type)}, vec!["^position"])'
+        exp, tag = self._getRefExplainerAndTag("^position", 'ctx.position()')
+        return f'{{ let r = ctx.position(); {exp}; ({" || ".join(per_type)}, vec!["{tag}"]) }}'
 
     def visitRefInPlaceRef(self, ctx):
         ref0 = str(ctx.REF(0))
