@@ -2,9 +2,10 @@
 
 use crate::{new_hashmap, CommonHasher};
 use std::collections::HashMap;
+use std::fmt::Debug;
 use std::hash::Hash;
 use std::marker::PhantomData;
-use std::ops::BitAnd;
+use std::ops::Deref;
 use std::sync::{Arc, Mutex};
 
 /// This is a trait to be implemented on enums with individual matcher types
@@ -13,7 +14,7 @@ pub trait MatcherDispatch<NodeType, ValueType, PropValueType> {
     fn new(pv: &PropValueType) -> (Arc<Mutex<NodeType>>, Self);
 
     /// The individual matcher will retrieve a property of the value provided, and evaluate the value of that property.
-    fn lookup(&self, val: &ValueType) -> (Option<Arc<Mutex<NodeType>>>, Option<&ValueType>);
+    fn lookup(&self, val: &ValueType) -> (Option<Arc<Mutex<NodeType>>>, Option<ValueType>);
 
     fn insert(&mut self, pv: &PropValueType) -> Option<Arc<Mutex<NodeType>>>;
     fn set_value(&mut self, pv: &PropValueType, value: ValueType);
@@ -21,13 +22,14 @@ pub trait MatcherDispatch<NodeType, ValueType, PropValueType> {
 
 pub trait Matcher<NodeType, ValueType, IntType>
 where
-    IntType: BitAnd + Copy + Eq + Hash,
+    IntType: Copy + Eq + Hash,
+    ValueType: Clone,
 {
     /// Performs a lookup of val against this matcher, and if there is a matching edge,
     /// returns a pointer to the next node if one exists and a reference to the value
     /// stored (if the path terminates). Both may exist, but usually if both do not exist,
     /// val was not a match.
-    fn lookup(&self, val: IntType) -> (Option<Arc<Mutex<NodeType>>>, Option<&ValueType>);
+    fn lookup(&self, val: IntType) -> (Option<Arc<Mutex<NodeType>>>, Option<ValueType>);
 
     /// Inserts matchers
     fn insert(&mut self, obs: IntType) -> Arc<Mutex<NodeType>>;
@@ -36,21 +38,48 @@ where
 
 pub struct LookupMatcher<NodeType, ValueType, IntType>
 where
-    IntType: BitAnd + Copy + Eq + Hash,
+    IntType: Copy + Eq + Hash,
 {
     map: HashMap<IntType, (Option<Arc<Mutex<NodeType>>>, Option<ValueType>), CommonHasher>,
+}
+
+impl<NodeType, ValueType, IntType> Debug for LookupMatcher<NodeType, ValueType, IntType>
+where
+    NodeType: Debug,
+    IntType: Debug + Copy + Eq + Hash,
+    ValueType: Debug,
+{
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        f.write_fmt(format_args!(
+            "map: {{{}}}",
+            self.map
+                .iter()
+                .map(|(k, (n, v))| format!(
+                    "{:?} => ({}, {:?})",
+                    k,
+                    n.as_ref().map_or(String::from("No node"), |mutex| format!(
+                        "{:?}",
+                        mutex.lock().unwrap().deref()
+                    )),
+                    v
+                ))
+                .collect::<Vec<_>>()
+                .join(", ")
+        ))
+    }
 }
 
 impl<NodeType, ValueType, IntType> Matcher<NodeType, ValueType, IntType>
     for LookupMatcher<NodeType, ValueType, IntType>
 where
     NodeType: Default,
-    IntType: BitAnd + Copy + Eq + Hash,
+    IntType: Copy + Eq + Hash,
+    ValueType: Clone,
 {
-    fn lookup(&self, val: IntType) -> (Option<Arc<Mutex<NodeType>>>, Option<&ValueType>) {
+    fn lookup(&self, val: IntType) -> (Option<Arc<Mutex<NodeType>>>, Option<ValueType>) {
         self.map
             .get(&val)
-            .map_or((None, None), |(node, val)| (node.clone(), val.as_ref()))
+            .map_or((None, None), |(node, val)| (node.clone(), val.clone()))
     }
 
     fn insert(&mut self, obs: IntType) -> Arc<Mutex<NodeType>> {
@@ -88,15 +117,20 @@ where
 impl<NodeType, ValueType, IntType> LookupMatcher<NodeType, ValueType, IntType>
 where
     NodeType: Default,
-    IntType: BitAnd + Copy + Eq + Hash,
+    IntType: Copy + Eq + Hash,
 {
     pub fn new() -> Self {
         Self { map: new_hashmap() }
+    }
+
+    pub fn contains_key(&self, key: &IntType) -> bool {
+        self.map.contains_key(key)
     }
 }
 
 // Draft implementations for the final handlers that will go in games/
 // We already have the Context type.
+#[derive(Clone)]
 pub struct Ctx {
     pub flasks: i8,
     pub flag: u16,
@@ -109,11 +143,11 @@ enum PropertyValue {
 }
 
 // This will probably become Node<MultiMatcherType> and then we just mark our MultiMatcher enum.
-pub struct Node {
+pub struct NodeT {
     matchers: Vec<MatcherMulti>,
 }
 
-impl Default for Node {
+impl Default for NodeT {
     fn default() -> Self {
         Self {
             matchers: Vec::new(),
@@ -125,20 +159,20 @@ impl Default for Node {
 // Each property could be represented here multiple times if there are different types of observations,
 // e.g. one for plain lookup, one for masked lookup, two for cmp (ge/lt or le/gt)...
 enum MatcherMulti {
-    LookupFlasks(LookupMatcher<Node, Ctx, i8>),
-    MaskLookupFlag(LookupMatcher<Node, Ctx, u16>, u16),
+    LookupFlasks(LookupMatcher<NodeT, Ctx, i8>),
+    MaskLookupFlag(LookupMatcher<NodeT, Ctx, u16>, u16),
 }
 
 // That enum needs to have impls of the dispatch trait.
-impl MatcherDispatch<Node, Ctx, PropertyValue> for MatcherMulti {
-    fn new(pv: &PropertyValue) -> (Arc<Mutex<Node>>, Self) {
+impl MatcherDispatch<NodeT, Ctx, PropertyValue> for MatcherMulti {
+    fn new(pv: &PropertyValue) -> (Arc<Mutex<NodeT>>, Self) {
         match pv {
             PropertyValue::Flasks(f) => {
                 let mut m = LookupMatcher::new();
                 let node = m.insert(*f);
                 (node, Self::LookupFlasks(m))
             }
-            PropertyValue::Flag{mask, result} => {
+            PropertyValue::Flag { mask, result } => {
                 let mut m = LookupMatcher::new();
                 let node = m.insert(*result);
                 (node, Self::MaskLookupFlag(m, *mask))
@@ -146,14 +180,14 @@ impl MatcherDispatch<Node, Ctx, PropertyValue> for MatcherMulti {
         }
     }
 
-    fn lookup(&self, val: &Ctx) -> (Option<Arc<Mutex<Node>>>, Option<&Ctx>) {
+    fn lookup(&self, val: &Ctx) -> (Option<Arc<Mutex<NodeT>>>, Option<Ctx>) {
         match self {
             Self::LookupFlasks(m) => m.lookup(val.flasks),
             Self::MaskLookupFlag(m, mask) => m.lookup(val.flag & mask),
         }
     }
 
-    fn insert(&mut self, pv: &PropertyValue) -> Option<Arc<Mutex<Node>>> {
+    fn insert(&mut self, pv: &PropertyValue) -> Option<Arc<Mutex<NodeT>>> {
         match (self, pv) {
             (Self::LookupFlasks(m), PropertyValue::Flasks(f)) => Some(m.insert(*f)),
             (Self::MaskLookupFlag(m, used_mask), PropertyValue::Flag { mask, result })
