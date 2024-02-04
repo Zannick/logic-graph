@@ -23,6 +23,7 @@ pub mod db;
 pub mod estimates;
 pub mod greedy;
 pub mod heap;
+pub mod matchertrie;
 pub mod minimize;
 pub mod route;
 pub mod settings;
