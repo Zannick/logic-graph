@@ -79,29 +79,30 @@ where
         MatcherDispatch<Node<MultiMatcherType, ValueType, PropValueType>, ValueType, PropValueType>,
     ValueType: Clone,
 {
-    pub fn lookup(&self, similar: &ValueType) -> Option<ValueType> {
-        match self.root.lookup(similar) {
-            (_, Some(v)) => Some(v.clone()),
-            (None, None) => None,
-            // use a queue instead
-            (Some(mut node), None) => {
-                let mut node_queue = VecDeque::new();
-                node_queue.push_back(node);
-                'outer: while let Some(node) = node_queue.pop_front() {
-                    let locked_node = node.lock().unwrap();
-                    for matcher in locked_node.matchers.iter() {
-                        match matcher.lookup(similar) {
-                            (_, Some(v)) => return Some(v.clone()),
-                            (None, None) => (),
-                            (Some(n), None) => {
-                                node_queue.push_back(n);
-                            }
-                        }
+    /// Performs a lookup for all states similar to this one.
+    pub fn lookup(&self, similar: &ValueType) -> Vec<ValueType> {
+        let mut vec = Vec::new();
+        let (node, val) = self.root.lookup(similar);
+        if let Some(v) = val {
+            vec.push(v.clone());
+        }
+        if let Some(mut node) = node {
+            let mut node_queue = VecDeque::new();
+            node_queue.push_back(node);
+            'outer: while let Some(node) = node_queue.pop_front() {
+                let locked_node = node.lock().unwrap();
+                for matcher in locked_node.matchers.iter() {
+                    let (inner, val) = matcher.lookup(similar);
+                    if let Some(v) = val {
+                        vec.push(v.clone());
+                    }
+                    if let Some(n) = inner {
+                        node_queue.push_back(n);
                     }
                 }
-                None
             }
         }
+        vec
     }
 
     pub fn insert(
@@ -413,12 +414,32 @@ mod test {
         };
 
         assert_eq!(
-            Some(CTX_1.clone()),
+            vec![CTX_1.clone()],
             trie.lookup(&CTX_TEST_1),
             "trie: {:?}",
             trie
         );
-        assert_eq!(Some(CTX_2.clone()), trie.lookup(&CTX_2), "trie: {:?}", trie);
-        assert_eq!(None, trie.lookup(&t2));
+        assert_eq!(vec![CTX_2], trie.lookup(&CTX_2), "trie: {:?}", trie);
+        assert_eq!(0, trie.lookup(&t2).len());
+    }
+
+    #[test]
+    fn multiple() {
+        let mut trie = make_trie();
+        let observations = vec![
+            PropertyValue::Flag {
+                mask: 0x9,
+                result: 0x9,
+            },
+        ];
+        let c3 = Ctx {
+            pos: Position::Start,
+            flasks: 1,
+            flag: 0x19,
+        };
+        trie.insert(PropertyValue::Pos(Position::Start), observations, c3.clone());
+        let results = trie.lookup(&c3);
+        assert_eq!(2, results.len());
+        assert_ne!(results[0], results[1]);
     }
 }

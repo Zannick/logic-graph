@@ -105,6 +105,9 @@ where
             Some((_, val)) => {
                 if let None = val {
                     *val = Some(value);
+                } else {
+                    log::debug!("Replacing a value in matcher trie");
+                    *val = Some(value);
                 }
             }
             None => {
