@@ -4,6 +4,7 @@ use log;
 use std::collections::HashMap;
 use std::fs::File;
 use std::io::{self, Write};
+use std::sync::Arc;
 
 fn is_subset<T, Iter>(mut subset: Iter, mut superset: Iter) -> bool
 where
@@ -32,7 +33,7 @@ pub struct SolutionCollector<T>
 where
     T: Ctx,
 {
-    map: HashMap<Vec<HistoryAlias<T>>, Vec<Solution<T>>, CommonHasher>,
+    map: HashMap<Vec<HistoryAlias<T>>, Vec<Arc<Solution<T>>>, CommonHasher>,
     path: &'static str,
     previews: &'static str,
     best_file: &'static str,
@@ -103,7 +104,7 @@ where
 
         self.count += 1;
         if let Some(vec) = self.map.get_mut(&loc_history) {
-            vec.push(Solution { elapsed, history });
+            vec.push(Arc::new(Solution { elapsed, history }));
             self.write_previews().unwrap();
             self.write_best().unwrap();
             None
@@ -111,14 +112,14 @@ where
             let mut locs = loc_history.clone();
             locs.reverse();
             self.map
-                .insert(loc_history, vec![Solution { elapsed, history }]);
+                .insert(loc_history, vec![Arc::new(Solution { elapsed, history })]);
             self.write_previews().unwrap();
             self.write_best().unwrap();
             Some(locs)
         }
     }
 
-    pub fn get_best(&self) -> Solution<T> {
+    pub fn get_best(&self) -> Arc<Solution<T>> {
         self.map
             .values()
             .map(|v| v.iter().min_by_key(|c| c.elapsed).unwrap())
@@ -207,7 +208,7 @@ where
         for vec in self.map.values_mut() {
             vec.sort_unstable_by_key(|el| el.elapsed);
         }
-        let mut vec: Vec<&Solution<T>> = self.map.values().filter_map(|v| v.first()).collect();
+        let mut vec: Vec<_> = self.map.values().filter_map(|v| v.first()).collect();
         vec.sort_by_key(|c| c.elapsed);
         for (i, c) in vec.iter().enumerate() {
             Self::write_one_preview(&mut file, i, c, self.best)?;
@@ -241,7 +242,7 @@ where
             return Ok(());
         }
         self.sort_and_clean();
-        let mut vecs: Vec<Vec<Solution<T>>> = self.map.values().cloned().collect();
+        let mut vecs: Vec<Vec<_>> = self.map.values().cloned().collect();
         vecs.sort_by_key(|v| v[0].elapsed);
         let mut total = 0;
         let mut types = 0;
