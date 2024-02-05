@@ -65,10 +65,10 @@ where
     }
 }
 
-impl<MultiMatcherType, StructType, ValueType>
-    MatcherTrie<MultiMatcherType>
+impl<MultiMatcherType, StructType, ValueType> MatcherTrie<MultiMatcherType>
 where
-    MultiMatcherType: MatcherDispatch<Node = Node<MultiMatcherType>, Struct = StructType, Value = ValueType>,
+    MultiMatcherType:
+        MatcherDispatch<Node = Node<MultiMatcherType>, Struct = StructType, Value = ValueType>,
     StructType: Observable,
     ValueType: Clone,
 {
@@ -230,13 +230,7 @@ mod test {
             }
         }
 
-        fn lookup(
-            &self,
-            val: &Ctx,
-        ) -> (
-            Option<Arc<Mutex<Node<Self>>>>,
-            Option<Ctx>,
-        ) {
+        fn lookup(&self, val: &Ctx) -> (Option<Arc<Mutex<Node<Self>>>>, Option<Ctx>) {
             match self {
                 Self::LookupPosition(m) => m.lookup(val.pos),
                 Self::LookupFlasks(m) => m.lookup(val.flasks),
@@ -244,10 +238,7 @@ mod test {
             }
         }
 
-        fn insert(
-            &mut self,
-            pv: &PropertyValue,
-        ) -> Option<Arc<Mutex<Node<Self>>>> {
+        fn insert(&mut self, pv: &PropertyValue) -> Option<Arc<Mutex<Node<Self>>>> {
             match (self, pv) {
                 (Self::LookupPosition(m), PropertyValue::Pos(p)) => Some(m.insert(*p)),
                 (Self::LookupFlasks(m), PropertyValue::Flasks(f)) => Some(m.insert(*f)),
