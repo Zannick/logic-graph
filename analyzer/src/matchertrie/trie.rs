@@ -1,33 +1,30 @@
 #![allow(unused)]
 
-use crate::matchertrie::matcher::MatcherDispatch;
+use super::matcher::MatcherDispatch;
+use super::matcher::MatcherStruct;
 use std::collections::VecDeque;
 use std::fmt::Debug;
 use std::marker::PhantomData;
 use std::sync::MutexGuard;
 
-pub struct Node<MultiMatcherType, ValueType, PropValueType> {
+pub struct Node<MultiMatcherType> {
     matchers: Vec<MultiMatcherType>,
-    phantom: PhantomData<(ValueType, PropValueType)>,
 }
 
-impl<MultiMatcherType, ValueType, PropValueType> Default
-    for Node<MultiMatcherType, ValueType, PropValueType>
-{
+impl<MultiMatcherType> Default for Node<MultiMatcherType> {
     fn default() -> Self {
         Self {
             matchers: Vec::new(),
-            phantom: PhantomData::default(),
         }
     }
 }
 
-impl<MultiMatcherType, ValueType, PropValueType> Debug
-    for Node<MultiMatcherType, ValueType, PropValueType>
+impl<MultiMatcherType, StructType, ValueType> Debug for Node<MultiMatcherType>
 where
-    MultiMatcherType: Debug,
+    MultiMatcherType: Debug + MatcherDispatch<Node = Self, Struct = StructType, Value = ValueType>,
     ValueType: Debug,
-    PropValueType: Debug,
+    StructType: Debug + MatcherStruct,
+    <StructType as MatcherStruct>::PropertyValue: Debug,
 {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         f.write_fmt(format_args!(
@@ -41,26 +38,22 @@ where
     }
 }
 
-pub struct MatcherTrie<MultiMatcherType, ValueType, PropValueType> {
+pub struct MatcherTrie<MultiMatcherType> {
     root: MultiMatcherType,
-    phantom: PhantomData<(ValueType, PropValueType)>,
 }
 
-impl<MultiMatcherType, ValueType, PropValueType> Default
-    for MatcherTrie<MultiMatcherType, ValueType, PropValueType>
+impl<MultiMatcherType> Default for MatcherTrie<MultiMatcherType>
 where
     MultiMatcherType: Default,
 {
     fn default() -> Self {
         Self {
             root: MultiMatcherType::default(),
-            phantom: PhantomData::default(),
         }
     }
 }
 
-impl<MultiMatcherType, ValueType, PropValueType> Debug
-    for MatcherTrie<MultiMatcherType, ValueType, PropValueType>
+impl<MultiMatcherType> Debug for MatcherTrie<MultiMatcherType>
 where
     MultiMatcherType: Debug,
 {
@@ -72,15 +65,15 @@ where
     }
 }
 
-impl<MultiMatcherType, ValueType, PropValueType>
-    MatcherTrie<MultiMatcherType, ValueType, PropValueType>
+impl<MultiMatcherType, StructType, ValueType>
+    MatcherTrie<MultiMatcherType>
 where
-    MultiMatcherType:
-        MatcherDispatch<Node<MultiMatcherType, ValueType, PropValueType>, ValueType, PropValueType>,
+    MultiMatcherType: MatcherDispatch<Node = Node<MultiMatcherType>, Struct = StructType, Value = ValueType>,
+    StructType: MatcherStruct,
     ValueType: Clone,
 {
     /// Performs a lookup for all states similar to this one.
-    pub fn lookup(&self, similar: &ValueType) -> Vec<ValueType> {
+    pub fn lookup(&self, similar: &StructType) -> Vec<ValueType> {
         let mut vec = Vec::new();
         let (node, val) = self.root.lookup(similar);
         if let Some(v) = val {
@@ -107,8 +100,8 @@ where
 
     pub fn insert(
         &mut self,
-        root_observation: PropValueType,
-        observations: Vec<PropValueType>,
+        root_observation: StructType::PropertyValue,
+        observations: Vec<StructType::PropertyValue>,
         value: ValueType,
     ) {
         if let Some((last, most)) = observations.split_last() {
@@ -198,9 +191,9 @@ mod test {
     // e.g. one for plain lookup, one for masked lookup, two for cmp (ge/lt or le/gt)...
     #[derive(Debug)]
     enum MatcherMulti {
-        LookupPosition(LookupMatcher<Node<Self, Ctx, PropertyValue>, Ctx, Position>),
-        LookupFlasks(LookupMatcher<Node<Self, Ctx, PropertyValue>, Ctx, i8>),
-        MaskLookupFlag(LookupMatcher<Node<Self, Ctx, PropertyValue>, Ctx, u16>, u16),
+        LookupPosition(LookupMatcher<Node<Self>, Ctx, Position>),
+        LookupFlasks(LookupMatcher<Node<Self>, Ctx, i8>),
+        MaskLookupFlag(LookupMatcher<Node<Self>, Ctx, u16>, u16),
     }
 
     impl Default for MatcherMulti {
@@ -209,9 +202,15 @@ mod test {
         }
     }
 
+    impl MatcherStruct for Ctx {
+        type PropertyValue = PropertyValue;
+    }
     // That enum needs to have impls of the dispatch trait.
-    impl MatcherDispatch<Node<Self, Ctx, PropertyValue>, Ctx, PropertyValue> for MatcherMulti {
-        fn new(pv: &PropertyValue) -> (Arc<Mutex<Node<Self, Ctx, PropertyValue>>>, Self) {
+    impl MatcherDispatch for MatcherMulti {
+        type Node = Node<Self>;
+        type Struct = Ctx;
+        type Value = Ctx;
+        fn new(pv: &PropertyValue) -> (Arc<Mutex<Node<Self>>>, Self) {
             match pv {
                 PropertyValue::Pos(p) => {
                     let mut m = LookupMatcher::new();
@@ -235,7 +234,7 @@ mod test {
             &self,
             val: &Ctx,
         ) -> (
-            Option<Arc<Mutex<Node<Self, Ctx, PropertyValue>>>>,
+            Option<Arc<Mutex<Node<Self>>>>,
             Option<Ctx>,
         ) {
             match self {
@@ -248,7 +247,7 @@ mod test {
         fn insert(
             &mut self,
             pv: &PropertyValue,
-        ) -> Option<Arc<Mutex<Node<Self, Ctx, PropertyValue>>>> {
+        ) -> Option<Arc<Mutex<Node<Self>>>> {
             match (self, pv) {
                 (Self::LookupPosition(m), PropertyValue::Pos(p)) => Some(m.insert(*p)),
                 (Self::LookupFlasks(m), PropertyValue::Flasks(f)) => Some(m.insert(*f)),
@@ -275,8 +274,8 @@ mod test {
         }
     }
 
-    fn make_trie() -> MatcherTrie<MatcherMulti, Ctx, PropertyValue> {
-        let mut trie = MatcherTrie::<MatcherMulti, _, _>::default();
+    fn make_trie() -> MatcherTrie<MatcherMulti> {
+        let mut trie = MatcherTrie::default();
         let observations = vec![
             PropertyValue::Flag {
                 mask: 0x9,
@@ -426,18 +425,20 @@ mod test {
     #[test]
     fn multiple() {
         let mut trie = make_trie();
-        let observations = vec![
-            PropertyValue::Flag {
-                mask: 0x9,
-                result: 0x9,
-            },
-        ];
+        let observations = vec![PropertyValue::Flag {
+            mask: 0x9,
+            result: 0x9,
+        }];
         let c3 = Ctx {
             pos: Position::Start,
             flasks: 1,
             flag: 0x19,
         };
-        trie.insert(PropertyValue::Pos(Position::Start), observations, c3.clone());
+        trie.insert(
+            PropertyValue::Pos(Position::Start),
+            observations,
+            c3.clone(),
+        );
         let results = trie.lookup(&c3);
         assert_eq!(2, results.len());
         assert_ne!(results[0], results[1]);

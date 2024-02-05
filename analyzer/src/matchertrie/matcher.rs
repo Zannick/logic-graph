@@ -8,16 +8,24 @@ use std::marker::PhantomData;
 use std::ops::Deref;
 use std::sync::{Arc, Mutex};
 
+/// Trait that marks the associated property-and-value type for observations.
+pub trait MatcherStruct {
+    type PropertyValue;
+}
+
 /// This is a trait to be implemented on enums with individual matcher types
-pub trait MatcherDispatch<NodeType, ValueType, PropValueType> {
+pub trait MatcherDispatch {
+    type Node;
+    type Struct: MatcherStruct;
+    type Value;
     /// Creates a new Matcher for the given Prop and Value.
-    fn new(pv: &PropValueType) -> (Arc<Mutex<NodeType>>, Self);
+    fn new(pv: &<Self::Struct as MatcherStruct>::PropertyValue) -> (Arc<Mutex<Self::Node>>, Self);
 
-    /// The individual matcher will retrieve a property of the value provided, and evaluate the value of that property.
-    fn lookup(&self, val: &ValueType) -> (Option<Arc<Mutex<NodeType>>>, Option<ValueType>);
+    /// The individual matcher will retrieve a property of the struct provided, and evaluate the value of that property.
+    fn lookup(&self, val: &Self::Struct) -> (Option<Arc<Mutex<Self::Node>>>, Option<Self::Value>);
 
-    fn insert(&mut self, pv: &PropValueType) -> Option<Arc<Mutex<NodeType>>>;
-    fn set_value(&mut self, pv: &PropValueType, value: ValueType);
+    fn insert(&mut self, pv: &<Self::Struct as MatcherStruct>::PropertyValue) -> Option<Arc<Mutex<Self::Node>>>;
+    fn set_value(&mut self, pv: &<Self::Struct as MatcherStruct>::PropertyValue, value: Self::Value);
 }
 
 pub trait Matcher<NodeType, ValueType, IntType>
@@ -128,89 +136,5 @@ where
 
     pub fn contains_key(&self, key: &IntType) -> bool {
         self.map.contains_key(key)
-    }
-}
-
-// Draft implementations for the final handlers that will go in games/
-// We already have the Context type.
-#[derive(Clone)]
-pub struct Ctx {
-    pub flasks: i8,
-    pub flag: u16,
-}
-
-// An enum with a list of properties and value internals. Bitflags have both a mask and result.
-enum PropertyValue {
-    Flasks(i8),
-    Flag { mask: u16, result: u16 },
-}
-
-// This will probably become Node<MultiMatcherType> and then we just mark our MultiMatcher enum.
-pub struct NodeT {
-    matchers: Vec<MatcherMulti>,
-}
-
-impl Default for NodeT {
-    fn default() -> Self {
-        Self {
-            matchers: Vec::new(),
-        }
-    }
-}
-
-// An enum with type-specific matchers.
-// Each property could be represented here multiple times if there are different types of observations,
-// e.g. one for plain lookup, one for masked lookup, two for cmp (ge/lt or le/gt)...
-enum MatcherMulti {
-    LookupFlasks(LookupMatcher<NodeT, Ctx, i8>),
-    MaskLookupFlag(LookupMatcher<NodeT, Ctx, u16>, u16),
-}
-
-// That enum needs to have impls of the dispatch trait.
-impl MatcherDispatch<NodeT, Ctx, PropertyValue> for MatcherMulti {
-    fn new(pv: &PropertyValue) -> (Arc<Mutex<NodeT>>, Self) {
-        match pv {
-            PropertyValue::Flasks(f) => {
-                let mut m = LookupMatcher::new();
-                let node = m.insert(*f);
-                (node, Self::LookupFlasks(m))
-            }
-            PropertyValue::Flag { mask, result } => {
-                let mut m = LookupMatcher::new();
-                let node = m.insert(*result);
-                (node, Self::MaskLookupFlag(m, *mask))
-            }
-        }
-    }
-
-    fn lookup(&self, val: &Ctx) -> (Option<Arc<Mutex<NodeT>>>, Option<Ctx>) {
-        match self {
-            Self::LookupFlasks(m) => m.lookup(val.flasks),
-            Self::MaskLookupFlag(m, mask) => m.lookup(val.flag & mask),
-        }
-    }
-
-    fn insert(&mut self, pv: &PropertyValue) -> Option<Arc<Mutex<NodeT>>> {
-        match (self, pv) {
-            (Self::LookupFlasks(m), PropertyValue::Flasks(f)) => Some(m.insert(*f)),
-            (Self::MaskLookupFlag(m, used_mask), PropertyValue::Flag { mask, result })
-                if used_mask == mask =>
-            {
-                Some(m.insert(*result))
-            }
-            _ => None,
-        }
-    }
-
-    fn set_value(&mut self, pv: &PropertyValue, value: Ctx) {
-        match (self, pv) {
-            (Self::LookupFlasks(m), PropertyValue::Flasks(f)) => m.set_value(*f, value),
-            (Self::MaskLookupFlag(m, used_mask), PropertyValue::Flag { mask, result })
-                if used_mask == mask =>
-            {
-                m.set_value(*result, value)
-            }
-            _ => (),
-        }
     }
 }
