@@ -1,7 +1,7 @@
 #![allow(unused)]
 
 use super::matcher::MatcherDispatch;
-use super::matcher::MatcherStruct;
+use super::matcher::Observable;
 use std::collections::VecDeque;
 use std::fmt::Debug;
 use std::marker::PhantomData;
@@ -23,8 +23,8 @@ impl<MultiMatcherType, StructType, ValueType> Debug for Node<MultiMatcherType>
 where
     MultiMatcherType: Debug + MatcherDispatch<Node = Self, Struct = StructType, Value = ValueType>,
     ValueType: Debug,
-    StructType: Debug + MatcherStruct,
-    <StructType as MatcherStruct>::PropertyValue: Debug,
+    StructType: Debug + Observable,
+    <StructType as Observable>::PropertyValue: Debug,
 {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         f.write_fmt(format_args!(
@@ -69,7 +69,7 @@ impl<MultiMatcherType, StructType, ValueType>
     MatcherTrie<MultiMatcherType>
 where
     MultiMatcherType: MatcherDispatch<Node = Node<MultiMatcherType>, Struct = StructType, Value = ValueType>,
-    StructType: MatcherStruct,
+    StructType: Observable,
     ValueType: Clone,
 {
     /// Performs a lookup for all states similar to this one.
@@ -202,7 +202,7 @@ mod test {
         }
     }
 
-    impl MatcherStruct for Ctx {
+    impl Observable for Ctx {
         type PropertyValue = PropertyValue;
     }
     // That enum needs to have impls of the dispatch trait.

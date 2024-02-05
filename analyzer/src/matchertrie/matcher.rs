@@ -9,23 +9,23 @@ use std::ops::Deref;
 use std::sync::{Arc, Mutex};
 
 /// Trait that marks the associated property-and-value type for observations.
-pub trait MatcherStruct {
+pub trait Observable {
     type PropertyValue;
 }
 
 /// This is a trait to be implemented on enums with individual matcher types
 pub trait MatcherDispatch {
     type Node;
-    type Struct: MatcherStruct;
+    type Struct: Observable;
     type Value;
     /// Creates a new Matcher for the given Prop and Value.
-    fn new(pv: &<Self::Struct as MatcherStruct>::PropertyValue) -> (Arc<Mutex<Self::Node>>, Self);
+    fn new(pv: &<Self::Struct as Observable>::PropertyValue) -> (Arc<Mutex<Self::Node>>, Self);
 
     /// The individual matcher will retrieve a property of the struct provided, and evaluate the value of that property.
     fn lookup(&self, val: &Self::Struct) -> (Option<Arc<Mutex<Self::Node>>>, Option<Self::Value>);
 
-    fn insert(&mut self, pv: &<Self::Struct as MatcherStruct>::PropertyValue) -> Option<Arc<Mutex<Self::Node>>>;
-    fn set_value(&mut self, pv: &<Self::Struct as MatcherStruct>::PropertyValue, value: Self::Value);
+    fn insert(&mut self, pv: &<Self::Struct as Observable>::PropertyValue) -> Option<Arc<Mutex<Self::Node>>>;
+    fn set_value(&mut self, pv: &<Self::Struct as Observable>::PropertyValue, value: Self::Value);
 }
 
 pub trait Matcher<NodeType, ValueType, IntType>
