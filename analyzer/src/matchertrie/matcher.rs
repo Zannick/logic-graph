@@ -47,6 +47,7 @@ where
     fn set_value(&mut self, obs: KeyType, value: ValueType);
 }
 
+#[derive(Default)]
 pub struct LookupMatcher<NodeType, KeyType, ValueType>
 where
     KeyType: Copy + Eq + Hash,
@@ -139,5 +140,98 @@ where
 
     pub fn contains_key(&self, key: &KeyType) -> bool {
         self.map.contains_key(key)
+    }
+}
+
+// Comparison matchers are inevitably binary: the test is whether they conform to the comparison.
+// Thus, we defer the actual comparison to the MatcherDispatch, which shall pass the result to
+// this matcher which is essentially a special case lookup with exactly two possible values.
+#[derive(Default)]
+pub struct BooleanMatcher<NodeType, ValueType> {
+    true_node: Option<Arc<Mutex<NodeType>>>,
+    true_value: Option<ValueType>,
+    false_node: Option<Arc<Mutex<NodeType>>>,
+    false_value: Option<ValueType>,
+}
+
+impl<NodeType, ValueType> Debug for BooleanMatcher<NodeType, ValueType>
+where
+    NodeType: Debug,
+    ValueType: Debug,
+{
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        f.write_fmt(format_args!(
+            "{{ T => ({}, {:?}, F => ({}, {:?}) }}",
+            self.true_node
+                .as_ref()
+                .map_or(String::from("No node"), |mutex| format!(
+                    "{:?}",
+                    mutex.lock().unwrap().deref()
+                )),
+            self.true_value,
+            self.false_node
+                .as_ref()
+                .map_or(String::from("No node"), |mutex| format!(
+                    "{:?}",
+                    mutex.lock().unwrap().deref()
+                )),
+            self.false_value
+        ))
+    }
+}
+
+impl<NodeType, ValueType> Matcher<NodeType, bool, ValueType> for BooleanMatcher<NodeType, ValueType>
+where
+    NodeType: Default,
+    ValueType: Clone,
+{
+    fn lookup(&self, obs: bool) -> (Option<Arc<Mutex<NodeType>>>, Option<ValueType>) {
+        if obs {
+            (self.true_node.clone(), self.true_value.clone())
+        } else {
+            (self.false_node.clone(), self.false_value.clone())
+        }
+    }
+
+    fn insert(&mut self, obs: bool) -> Arc<Mutex<NodeType>> {
+        let node = if obs {
+            &mut self.true_node
+        } else {
+            &mut self.false_node
+        };
+
+        if let Some(n) = node {
+            n.clone()
+        } else {
+            let n: Arc<Mutex<NodeType>> = Arc::default();
+            *node = Some(n.clone());
+            n
+        }
+    }
+
+    fn set_value(&mut self, obs: bool, value: ValueType) {
+        let val = if obs {
+            &mut self.true_value
+        } else {
+            &mut self.false_value
+        };
+
+        if let None = val {
+            *val = Some(value);
+        } else {
+            log::debug!("Replacing a value in matcher trie");
+            *val = Some(value);
+        }
+    }
+}
+
+impl<NodeType, ValueType> BooleanMatcher<NodeType, ValueType> {
+    pub fn new() -> Self {
+        Self {
+            true_node: None,
+            true_value: None,
+            false_node: None,
+            false_value: None,
+        }
     }
 }

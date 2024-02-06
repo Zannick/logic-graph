@@ -1,7 +1,6 @@
 #![allow(unused)]
 
-use super::matcher::MatcherDispatch;
-use super::matcher::Observable;
+use super::matcher::{MatcherDispatch, Observable};
 use std::collections::VecDeque;
 use std::fmt::Debug;
 use std::marker::PhantomData;
@@ -178,11 +177,18 @@ mod test {
         flag: 0x9,
     };
 
+    static CTX_3: Ctx = Ctx {
+        pos: Position::Middle,
+        flasks: 3,
+        flag: 0x1F,
+    };
+
     // An enum with a list of properties and value internals. Bitflags have both a mask and result.
     #[derive(Clone, Copy, Debug)]
     enum PropertyValue {
         Pos(Position),
         Flasks(i8),
+        FlasksGe(i8, bool),
         Flag { mask: u16, result: u16 },
     }
 
@@ -194,6 +200,7 @@ mod test {
         LookupPosition(LookupMatcher<Node<Self>, Position, Ctx>),
         LookupFlasks(LookupMatcher<Node<Self>, i8, Ctx>),
         MaskLookupFlag(LookupMatcher<Node<Self>, u16, Ctx>, u16),
+        EnoughFlasks(BooleanMatcher<Node<Self>, Ctx>, i8),
     }
 
     impl Default for MatcherMulti {
@@ -222,6 +229,11 @@ mod test {
                     let node = m.insert(*f);
                     (node, Self::LookupFlasks(m))
                 }
+                PropertyValue::FlasksGe(f, res) => {
+                    let mut m = BooleanMatcher::new();
+                    let node = m.insert(*res);
+                    (node, Self::EnoughFlasks(m, *f))
+                }
                 PropertyValue::Flag { mask, result } => {
                     let mut m = LookupMatcher::new();
                     let node = m.insert(*result);
@@ -235,6 +247,7 @@ mod test {
                 Self::LookupPosition(m) => m.lookup(val.pos),
                 Self::LookupFlasks(m) => m.lookup(val.flasks),
                 Self::MaskLookupFlag(m, mask) => m.lookup(val.flag & mask),
+                Self::EnoughFlasks(m, x) => m.lookup(val.flasks >= *x),
             }
         }
 
@@ -246,6 +259,9 @@ mod test {
                     if used_mask == mask =>
                 {
                     Some(m.insert(*result))
+                }
+                (Self::EnoughFlasks(m, x), PropertyValue::FlasksGe(y, res)) if x == y => {
+                    Some(m.insert(*res))
                 }
                 _ => None,
             }
@@ -259,6 +275,9 @@ mod test {
                     if used_mask == mask =>
                 {
                     m.set_value(*result, value)
+                }
+                (Self::EnoughFlasks(m, x), PropertyValue::FlasksGe(y, res)) if x == y => {
+                    m.set_value(*res, value)
                 }
                 _ => (),
             }
@@ -292,6 +311,15 @@ mod test {
             observations,
             CTX_2.clone(),
         );
+
+        trie.insert(
+            PropertyValue::Pos(Position::Middle),
+            vec![
+                PropertyValue::FlasksGe(2, true),
+            ],
+            CTX_3.clone(),
+        );
+
         trie
     }
 
@@ -411,6 +439,13 @@ mod test {
         );
         assert_eq!(vec![CTX_2], trie.lookup(&CTX_2), "trie: {:?}", trie);
         assert_eq!(0, trie.lookup(&t2).len());
+
+        let t3 = Ctx {
+            pos: Position::Middle,
+            flasks: 7,
+            flag: 0x5,
+        };
+        assert_eq!(vec![CTX_3], trie.lookup(&t3), "trie: {:?}", trie);
     }
 
     #[test]
