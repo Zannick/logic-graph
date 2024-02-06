@@ -13,6 +13,7 @@ pub mod graph_enums;
 pub mod helpers;
 pub mod items;
 pub mod movements;
+pub mod observe;
 pub mod prices;
 mod rules;
 pub mod settings;

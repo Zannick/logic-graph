@@ -219,8 +219,8 @@ mod test {
         type Node = Node<Self>;
         type Struct = Ctx;
         type Value = Ctx;
-        fn new(pv: &OneObservedThing) -> (Arc<Mutex<Node<Self>>>, Self) {
-            match pv {
+        fn new(obs: &OneObservedThing) -> (Arc<Mutex<Node<Self>>>, Self) {
+            match obs {
                 OneObservedThing::Pos(p) => {
                     let (node, m) = LookupMatcher::new_with(*p);
                     (node, Self::LookupPosition(m))
@@ -249,8 +249,8 @@ mod test {
             }
         }
 
-        fn insert(&mut self, pv: &OneObservedThing) -> Option<Arc<Mutex<Node<Self>>>> {
-            match (self, pv) {
+        fn insert(&mut self, obs: &OneObservedThing) -> Option<Arc<Mutex<Node<Self>>>> {
+            match (self, obs) {
                 (Self::LookupPosition(m), OneObservedThing::Pos(p)) => Some(m.insert(*p)),
                 (Self::LookupFlasks(m), OneObservedThing::Flasks(f)) => Some(m.insert(*f)),
                 (Self::MaskLookupFlag(m, used_mask), OneObservedThing::Flag { mask, result })
@@ -265,8 +265,8 @@ mod test {
             }
         }
 
-        fn set_value(&mut self, pv: &OneObservedThing, value: Ctx) {
-            match (self, pv) {
+        fn set_value(&mut self, obs: &OneObservedThing, value: Ctx) {
+            match (self, obs) {
                 (Self::LookupPosition(m), OneObservedThing::Pos(p)) => m.set_value(*p, value),
                 (Self::LookupFlasks(m), OneObservedThing::Flasks(f)) => m.set_value(*f, value),
                 (Self::MaskLookupFlag(m, used_mask), OneObservedThing::Flag { mask, result })

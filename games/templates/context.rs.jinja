@@ -134,6 +134,10 @@ impl Default for Context {
     }
 }
 
+impl analyzer::matchertrie::matcher::Observable for Context {
+    type PropertyObservation = crate::observe::OneObservation;
+}
+
 impl context::Ctx for Context {
     type World = graph::World;
     type ItemId = Item;

@@ -32,19 +32,22 @@ pub trait MatcherDispatch {
     type Value;
     /// Creates a new Matcher for the given Prop and Value.
     fn new(
-        pv: &<Self::Struct as Observable>::PropertyObservation,
+        obs: &<Self::Struct as Observable>::PropertyObservation,
     ) -> (Arc<Mutex<Self::Node>>, Self);
 
     /// The individual matcher will retrieve a property of the struct provided, and evaluate the value of that property.
     fn lookup(&self, val: &Self::Struct) -> (Option<Arc<Mutex<Self::Node>>>, Option<Self::Value>);
 
+    /// Creates a new node in the individual matcher.
+    ///
+    /// Implementations should only add if the observation is an exact match, and not merely within the same range.
     fn insert(
         &mut self,
-        pv: &<Self::Struct as Observable>::PropertyObservation,
+        obs: &<Self::Struct as Observable>::PropertyObservation,
     ) -> Option<Arc<Mutex<Self::Node>>>;
     fn set_value(
         &mut self,
-        pv: &<Self::Struct as Observable>::PropertyObservation,
+        obs: &<Self::Struct as Observable>::PropertyObservation,
         value: Self::Value,
     );
 }
@@ -54,11 +57,11 @@ where
     KeyType: Copy + Eq + Hash,
     ValueType: Clone,
 {
-    /// Performs a lookup of val against this matcher, and if there is a matching edge,
+    /// Performs a lookup of obs against this matcher, and if there is a matching edge,
     /// returns a pointer to the next node if one exists and a reference to the value
     /// stored (if the path terminates). Both may exist, but usually if both do not exist,
-    /// val was not a match.
-    fn lookup(&self, val: KeyType) -> (Option<Arc<Mutex<NodeType>>>, Option<ValueType>);
+    /// obs was not a match for this matcher.
+    fn lookup(&self, obs: KeyType) -> (Option<Arc<Mutex<NodeType>>>, Option<ValueType>);
 
     /// Inserts matchers
     fn insert(&mut self, obs: KeyType) -> Arc<Mutex<NodeType>>;
@@ -106,9 +109,9 @@ where
     KeyType: Copy + Eq + Hash,
     ValueType: Clone,
 {
-    fn lookup(&self, val: KeyType) -> (Option<Arc<Mutex<NodeType>>>, Option<ValueType>) {
+    fn lookup(&self, obs: KeyType) -> (Option<Arc<Mutex<NodeType>>>, Option<ValueType>) {
         self.map
-            .get(&val)
+            .get(&obs)
             .map_or((None, None), |(node, val)| (node.clone(), val.clone()))
     }
 
