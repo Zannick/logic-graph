@@ -23,7 +23,7 @@ where
     MultiMatcherType: Debug + MatcherDispatch<Node = Self, Struct = StructType, Value = ValueType>,
     ValueType: Debug,
     StructType: Debug + Observable,
-    <StructType as Observable>::PropertyValue: Debug,
+    <StructType as Observable>::PropertyObservation: Debug,
 {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         f.write_fmt(format_args!(
@@ -99,8 +99,8 @@ where
 
     pub fn insert(
         &mut self,
-        root_observation: StructType::PropertyValue,
-        observations: Vec<StructType::PropertyValue>,
+        root_observation: StructType::PropertyObservation,
+        observations: Vec<StructType::PropertyObservation>,
         value: ValueType,
     ) {
         if let Some((last, most)) = observations.split_last() {
@@ -183,9 +183,9 @@ mod test {
         flag: 0x1F,
     };
 
-    // An enum with a list of properties and value internals. Bitflags have both a mask and result.
+    // An enum with a list of properties and observations internals. Bitflags have both a mask and result.
     #[derive(Clone, Copy, Debug)]
-    enum PropertyValue {
+    enum OneObservedThing {
         Pos(Position),
         Flasks(i8),
         FlasksGe(i8, bool),
@@ -210,31 +210,31 @@ mod test {
     }
 
     impl Observable for Ctx {
-        type PropertyValue = PropertyValue;
+        type PropertyObservation = OneObservedThing;
     }
     // That enum needs to have impls of the dispatch trait.
     impl MatcherDispatch for MatcherMulti {
         type Node = Node<Self>;
         type Struct = Ctx;
         type Value = Ctx;
-        fn new(pv: &PropertyValue) -> (Arc<Mutex<Node<Self>>>, Self) {
+        fn new(pv: &OneObservedThing) -> (Arc<Mutex<Node<Self>>>, Self) {
             match pv {
-                PropertyValue::Pos(p) => {
+                OneObservedThing::Pos(p) => {
                     let mut m = LookupMatcher::new();
                     let node = m.insert(*p);
                     (node, Self::LookupPosition(m))
                 }
-                PropertyValue::Flasks(f) => {
+                OneObservedThing::Flasks(f) => {
                     let mut m = LookupMatcher::new();
                     let node = m.insert(*f);
                     (node, Self::LookupFlasks(m))
                 }
-                PropertyValue::FlasksGe(f, res) => {
+                OneObservedThing::FlasksGe(f, res) => {
                     let mut m = BooleanMatcher::new();
                     let node = m.insert(*res);
                     (node, Self::EnoughFlasks(m, *f))
                 }
-                PropertyValue::Flag { mask, result } => {
+                OneObservedThing::Flag { mask, result } => {
                     let mut m = LookupMatcher::new();
                     let node = m.insert(*result);
                     (node, Self::MaskLookupFlag(m, *mask))
@@ -251,32 +251,32 @@ mod test {
             }
         }
 
-        fn insert(&mut self, pv: &PropertyValue) -> Option<Arc<Mutex<Node<Self>>>> {
+        fn insert(&mut self, pv: &OneObservedThing) -> Option<Arc<Mutex<Node<Self>>>> {
             match (self, pv) {
-                (Self::LookupPosition(m), PropertyValue::Pos(p)) => Some(m.insert(*p)),
-                (Self::LookupFlasks(m), PropertyValue::Flasks(f)) => Some(m.insert(*f)),
-                (Self::MaskLookupFlag(m, used_mask), PropertyValue::Flag { mask, result })
+                (Self::LookupPosition(m), OneObservedThing::Pos(p)) => Some(m.insert(*p)),
+                (Self::LookupFlasks(m), OneObservedThing::Flasks(f)) => Some(m.insert(*f)),
+                (Self::MaskLookupFlag(m, used_mask), OneObservedThing::Flag { mask, result })
                     if used_mask == mask =>
                 {
                     Some(m.insert(*result))
                 }
-                (Self::EnoughFlasks(m, x), PropertyValue::FlasksGe(y, res)) if x == y => {
+                (Self::EnoughFlasks(m, x), OneObservedThing::FlasksGe(y, res)) if x == y => {
                     Some(m.insert(*res))
                 }
                 _ => None,
             }
         }
 
-        fn set_value(&mut self, pv: &PropertyValue, value: Ctx) {
+        fn set_value(&mut self, pv: &OneObservedThing, value: Ctx) {
             match (self, pv) {
-                (Self::LookupPosition(m), PropertyValue::Pos(p)) => m.set_value(*p, value),
-                (Self::LookupFlasks(m), PropertyValue::Flasks(f)) => m.set_value(*f, value),
-                (Self::MaskLookupFlag(m, used_mask), PropertyValue::Flag { mask, result })
+                (Self::LookupPosition(m), OneObservedThing::Pos(p)) => m.set_value(*p, value),
+                (Self::LookupFlasks(m), OneObservedThing::Flasks(f)) => m.set_value(*f, value),
+                (Self::MaskLookupFlag(m, used_mask), OneObservedThing::Flag { mask, result })
                     if used_mask == mask =>
                 {
                     m.set_value(*result, value)
                 }
-                (Self::EnoughFlasks(m, x), PropertyValue::FlasksGe(y, res)) if x == y => {
+                (Self::EnoughFlasks(m, x), OneObservedThing::FlasksGe(y, res)) if x == y => {
                     m.set_value(*res, value)
                 }
                 _ => (),
@@ -287,35 +287,35 @@ mod test {
     fn make_trie() -> MatcherTrie<MatcherMulti> {
         let mut trie = MatcherTrie::default();
         let observations = vec![
-            PropertyValue::Flag {
+            OneObservedThing::Flag {
                 mask: 0x9,
                 result: 0x9,
             },
-            PropertyValue::Flasks(1),
+            OneObservedThing::Flasks(1),
         ];
         trie.insert(
-            PropertyValue::Pos(Position::Start),
+            OneObservedThing::Pos(Position::Start),
             observations,
             CTX_1.clone(),
         );
 
         let observations = vec![
-            PropertyValue::Flag {
+            OneObservedThing::Flag {
                 mask: 0x7,
                 result: 0x3,
             },
-            PropertyValue::Flasks(2),
+            OneObservedThing::Flasks(2),
         ];
         trie.insert(
-            PropertyValue::Pos(Position::Start),
+            OneObservedThing::Pos(Position::Start),
             observations,
             CTX_2.clone(),
         );
 
         trie.insert(
-            PropertyValue::Pos(Position::Middle),
+            OneObservedThing::Pos(Position::Middle),
             vec![
-                PropertyValue::FlasksGe(2, true),
+                OneObservedThing::FlasksGe(2, true),
             ],
             CTX_3.clone(),
         );
@@ -451,7 +451,7 @@ mod test {
     #[test]
     fn multiple() {
         let mut trie = make_trie();
-        let observations = vec![PropertyValue::Flag {
+        let observations = vec![OneObservedThing::Flag {
             mask: 0x9,
             result: 0x9,
         }];
@@ -461,7 +461,7 @@ mod test {
             flag: 0x19,
         };
         trie.insert(
-            PropertyValue::Pos(Position::Start),
+            OneObservedThing::Pos(Position::Start),
             observations,
             c3.clone(),
         );

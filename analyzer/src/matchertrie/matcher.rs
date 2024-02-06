@@ -1,3 +1,15 @@
+//! Matcher traits and definitions for the Matcher Trie.
+//! 
+//! When designing your PropertyObservation type and the MatcherDispatch type, some tips:
+//!   1. Enums are probably best.
+//!   2. It's easiest to build your `match` rules if each PropertyObservation element
+//!      maps directly to exactly one MatcherDispatch element.
+//!   3. PropertyObservations should contain two parts: the property and the observed value. E.g.:
+//!        `Flask(i8)`, in which `Flask` is the property and `i8` is the (type of the) value.
+//!        `FlaskGe{g: i8, res: bool}`, in which `Flask >= g` is the property, and `res` is the value.
+//!      The property part is how you'll distinguish whether the matcher is the right one for
+//!      `insert()` and `set_value()`, and the value part is the key into the correct matcher.
+
 #![allow(unused)]
 
 use crate::{new_hashmap, CommonHasher};
@@ -10,7 +22,7 @@ use std::sync::{Arc, Mutex};
 
 /// Trait that marks the associated property-and-value type for observations.
 pub trait Observable {
-    type PropertyValue;
+    type PropertyObservation;
 }
 
 /// This is a trait to be implemented on enums with individual matcher types
@@ -19,16 +31,16 @@ pub trait MatcherDispatch {
     type Struct: Observable;
     type Value;
     /// Creates a new Matcher for the given Prop and Value.
-    fn new(pv: &<Self::Struct as Observable>::PropertyValue) -> (Arc<Mutex<Self::Node>>, Self);
+    fn new(pv: &<Self::Struct as Observable>::PropertyObservation) -> (Arc<Mutex<Self::Node>>, Self);
 
     /// The individual matcher will retrieve a property of the struct provided, and evaluate the value of that property.
     fn lookup(&self, val: &Self::Struct) -> (Option<Arc<Mutex<Self::Node>>>, Option<Self::Value>);
 
     fn insert(
         &mut self,
-        pv: &<Self::Struct as Observable>::PropertyValue,
+        pv: &<Self::Struct as Observable>::PropertyObservation,
     ) -> Option<Arc<Mutex<Self::Node>>>;
-    fn set_value(&mut self, pv: &<Self::Struct as Observable>::PropertyValue, value: Self::Value);
+    fn set_value(&mut self, pv: &<Self::Struct as Observable>::PropertyObservation, value: Self::Value);
 }
 
 pub trait Matcher<NodeType, KeyType, ValueType>
