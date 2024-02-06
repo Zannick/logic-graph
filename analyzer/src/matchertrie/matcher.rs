@@ -24,37 +24,40 @@ pub trait MatcherDispatch {
     /// The individual matcher will retrieve a property of the struct provided, and evaluate the value of that property.
     fn lookup(&self, val: &Self::Struct) -> (Option<Arc<Mutex<Self::Node>>>, Option<Self::Value>);
 
-    fn insert(&mut self, pv: &<Self::Struct as Observable>::PropertyValue) -> Option<Arc<Mutex<Self::Node>>>;
+    fn insert(
+        &mut self,
+        pv: &<Self::Struct as Observable>::PropertyValue,
+    ) -> Option<Arc<Mutex<Self::Node>>>;
     fn set_value(&mut self, pv: &<Self::Struct as Observable>::PropertyValue, value: Self::Value);
 }
 
-pub trait Matcher<NodeType, ValueType, IntType>
+pub trait Matcher<NodeType, KeyType, ValueType>
 where
-    IntType: Copy + Eq + Hash,
+    KeyType: Copy + Eq + Hash,
     ValueType: Clone,
 {
     /// Performs a lookup of val against this matcher, and if there is a matching edge,
     /// returns a pointer to the next node if one exists and a reference to the value
     /// stored (if the path terminates). Both may exist, but usually if both do not exist,
     /// val was not a match.
-    fn lookup(&self, val: IntType) -> (Option<Arc<Mutex<NodeType>>>, Option<ValueType>);
+    fn lookup(&self, val: KeyType) -> (Option<Arc<Mutex<NodeType>>>, Option<ValueType>);
 
     /// Inserts matchers
-    fn insert(&mut self, obs: IntType) -> Arc<Mutex<NodeType>>;
-    fn set_value(&mut self, obs: IntType, value: ValueType);
+    fn insert(&mut self, obs: KeyType) -> Arc<Mutex<NodeType>>;
+    fn set_value(&mut self, obs: KeyType, value: ValueType);
 }
 
-pub struct LookupMatcher<NodeType, ValueType, IntType>
+pub struct LookupMatcher<NodeType, KeyType, ValueType>
 where
-    IntType: Copy + Eq + Hash,
+    KeyType: Copy + Eq + Hash,
 {
-    map: HashMap<IntType, (Option<Arc<Mutex<NodeType>>>, Option<ValueType>), CommonHasher>,
+    map: HashMap<KeyType, (Option<Arc<Mutex<NodeType>>>, Option<ValueType>), CommonHasher>,
 }
 
-impl<NodeType, ValueType, IntType> Debug for LookupMatcher<NodeType, ValueType, IntType>
+impl<NodeType, KeyType, ValueType> Debug for LookupMatcher<NodeType, KeyType, ValueType>
 where
     NodeType: Debug,
-    IntType: Debug + Copy + Eq + Hash,
+    KeyType: Debug + Copy + Eq + Hash,
     ValueType: Debug,
 {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
@@ -77,20 +80,20 @@ where
     }
 }
 
-impl<NodeType, ValueType, IntType> Matcher<NodeType, ValueType, IntType>
-    for LookupMatcher<NodeType, ValueType, IntType>
+impl<NodeType, KeyType, ValueType> Matcher<NodeType, KeyType, ValueType>
+    for LookupMatcher<NodeType, KeyType, ValueType>
 where
     NodeType: Default,
-    IntType: Copy + Eq + Hash,
+    KeyType: Copy + Eq + Hash,
     ValueType: Clone,
 {
-    fn lookup(&self, val: IntType) -> (Option<Arc<Mutex<NodeType>>>, Option<ValueType>) {
+    fn lookup(&self, val: KeyType) -> (Option<Arc<Mutex<NodeType>>>, Option<ValueType>) {
         self.map
             .get(&val)
             .map_or((None, None), |(node, val)| (node.clone(), val.clone()))
     }
 
-    fn insert(&mut self, obs: IntType) -> Arc<Mutex<NodeType>> {
+    fn insert(&mut self, obs: KeyType) -> Arc<Mutex<NodeType>> {
         match self.map.get_mut(&obs) {
             Some((node, _)) => {
                 if let Some(n) = node {
@@ -108,7 +111,7 @@ where
             }
         }
     }
-    fn set_value(&mut self, obs: IntType, value: ValueType) {
+    fn set_value(&mut self, obs: KeyType, value: ValueType) {
         match self.map.get_mut(&obs) {
             Some((_, val)) => {
                 if let None = val {
@@ -125,16 +128,16 @@ where
     }
 }
 
-impl<NodeType, ValueType, IntType> LookupMatcher<NodeType, ValueType, IntType>
+impl<NodeType, KeyType, ValueType> LookupMatcher<NodeType, KeyType, ValueType>
 where
     NodeType: Default,
-    IntType: Copy + Eq + Hash,
+    KeyType: Copy + Eq + Hash,
 {
     pub fn new() -> Self {
         Self { map: new_hashmap() }
     }
 
-    pub fn contains_key(&self, key: &IntType) -> bool {
+    pub fn contains_key(&self, key: &KeyType) -> bool {
         self.map.contains_key(key)
     }
 }
