@@ -1,5 +1,5 @@
 //! Matcher traits and definitions for the Matcher Trie.
-//! 
+//!
 //! When designing your PropertyObservation type and the MatcherDispatch type, some tips:
 //!   1. Enums are probably best.
 //!   2. It's easiest to build your `match` rules if each PropertyObservation element
@@ -31,7 +31,9 @@ pub trait MatcherDispatch {
     type Struct: Observable;
     type Value;
     /// Creates a new Matcher for the given Prop and Value.
-    fn new(pv: &<Self::Struct as Observable>::PropertyObservation) -> (Arc<Mutex<Self::Node>>, Self);
+    fn new(
+        pv: &<Self::Struct as Observable>::PropertyObservation,
+    ) -> (Arc<Mutex<Self::Node>>, Self);
 
     /// The individual matcher will retrieve a property of the struct provided, and evaluate the value of that property.
     fn lookup(&self, val: &Self::Struct) -> (Option<Arc<Mutex<Self::Node>>>, Option<Self::Value>);
@@ -40,7 +42,11 @@ pub trait MatcherDispatch {
         &mut self,
         pv: &<Self::Struct as Observable>::PropertyObservation,
     ) -> Option<Arc<Mutex<Self::Node>>>;
-    fn set_value(&mut self, pv: &<Self::Struct as Observable>::PropertyObservation, value: Self::Value);
+    fn set_value(
+        &mut self,
+        pv: &<Self::Struct as Observable>::PropertyObservation,
+        value: Self::Value,
+    );
 }
 
 pub trait Matcher<NodeType, KeyType, ValueType>
@@ -155,6 +161,18 @@ where
     }
 }
 
+impl<NodeType, KeyType, ValueType> LookupMatcher<NodeType, KeyType, ValueType>
+where
+    NodeType: Default,
+    KeyType: Copy + Eq + Hash,
+    ValueType: Clone,
+{
+    pub fn new_with(obs: KeyType) -> (Arc<Mutex<NodeType>>, Self) {
+        let mut m = Self::new();
+        (m.insert(obs), m)
+    }
+}
+
 // Comparison matchers are inevitably binary: the test is whether they conform to the comparison.
 // Thus, we defer the actual comparison to the MatcherDispatch, which shall pass the result to
 // this matcher which is essentially a special case lookup with exactly two possible values.
@@ -245,5 +263,16 @@ impl<NodeType, ValueType> BooleanMatcher<NodeType, ValueType> {
             false_node: None,
             false_value: None,
         }
+    }
+}
+
+impl<NodeType, ValueType> BooleanMatcher<NodeType, ValueType>
+where
+    NodeType: Default,
+    ValueType: Clone,
+{
+    pub fn new_with(obs: bool) -> (Arc<Mutex<NodeType>>, Self) {
+        let mut m = Self::new();
+        (m.insert(obs), m)
     }
 }

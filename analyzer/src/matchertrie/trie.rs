@@ -6,6 +6,8 @@ use std::fmt::Debug;
 use std::marker::PhantomData;
 use std::sync::MutexGuard;
 
+// The implementation only works for MatcherDispatch impls that use this Node struct specifically.
+// TODO: Make a Node trait that allow modification and iteration over the matchers.
 pub struct Node<MultiMatcherType> {
     matchers: Vec<MultiMatcherType>,
 }
@@ -220,23 +222,19 @@ mod test {
         fn new(pv: &OneObservedThing) -> (Arc<Mutex<Node<Self>>>, Self) {
             match pv {
                 OneObservedThing::Pos(p) => {
-                    let mut m = LookupMatcher::new();
-                    let node = m.insert(*p);
+                    let (node, m) = LookupMatcher::new_with(*p);
                     (node, Self::LookupPosition(m))
                 }
                 OneObservedThing::Flasks(f) => {
-                    let mut m = LookupMatcher::new();
-                    let node = m.insert(*f);
+                    let (node, m) = LookupMatcher::new_with(*f);
                     (node, Self::LookupFlasks(m))
                 }
                 OneObservedThing::FlasksGe(f, res) => {
-                    let mut m = BooleanMatcher::new();
-                    let node = m.insert(*res);
+                    let (node, m) = BooleanMatcher::new_with(*res);
                     (node, Self::EnoughFlasks(m, *f))
                 }
                 OneObservedThing::Flag { mask, result } => {
-                    let mut m = LookupMatcher::new();
-                    let node = m.insert(*result);
+                    let (node, m) = LookupMatcher::new_with(*result);
                     (node, Self::MaskLookupFlag(m, *mask))
                 }
             }
@@ -314,9 +312,7 @@ mod test {
 
         trie.insert(
             OneObservedThing::Pos(Position::Middle),
-            vec![
-                OneObservedThing::FlasksGe(2, true),
-            ],
+            vec![OneObservedThing::FlasksGe(2, true)],
             CTX_3.clone(),
         );
 
