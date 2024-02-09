@@ -785,6 +785,157 @@ impl MatcherDispatch for ObservationMatcher {
     }
 
     fn set_value(&mut self, obs: &OneObservation, value: Self::Value) {
-        todo!()
+        match (self, obs) {
+            (Self::PositionLookup(m), OneObservation::Position(v)) => m.set_value(*v, value),
+            (Self::EnergyLookup(m), OneObservation::EnergyEq(v)) => m.set_value(*v, value),
+            (Self::EnergyGe { lo, matcher }, OneObservation::EnergyGe(lo2, v)) if lo2 == lo => {
+                matcher.set_value(*v, value)
+            }
+            (Self::EnergyLe { hi, matcher }, OneObservation::EnergyLe(hi2, v)) if hi2 == hi => {
+                matcher.set_value(*v, value)
+            }
+            (Self::EnergyRange { lo, hi, matcher }, OneObservation::EnergyRange(lo2, hi2, v))
+                if lo2 == lo && hi2 == hi =>
+            {
+                matcher.set_value(*v, value)
+            }
+            (Self::FlasksLookup(m), OneObservation::FlasksEq(v)) => m.set_value(*v, value),
+            (Self::FlasksGe { lo, matcher }, OneObservation::FlasksGe(lo2, v)) if lo2 == lo => {
+                matcher.set_value(*v, value)
+            }
+            (Self::FlasksLe { hi, matcher }, OneObservation::FlasksLe(hi2, v)) if hi2 == hi => {
+                matcher.set_value(*v, value)
+            }
+            (Self::FlasksRange { lo, hi, matcher }, OneObservation::FlasksRange(lo2, hi2, v))
+                if lo2 == lo && hi2 == hi =>
+            {
+                matcher.set_value(*v, value)
+            }
+            (Self::RefillsLookup(m), OneObservation::RefillsEq(v)) => m.set_value(*v, value),
+            (Self::RefillsGe { lo, matcher }, OneObservation::RefillsGe(lo2, v)) if lo2 == lo => {
+                matcher.set_value(*v, value)
+            }
+            (Self::RefillsLe { hi, matcher }, OneObservation::RefillsLe(hi2, v)) if hi2 == hi => {
+                matcher.set_value(*v, value)
+            }
+            (Self::RefillsRange { lo, hi, matcher }, OneObservation::RefillsRange(lo2, hi2, v))
+                if lo2 == lo && hi2 == hi =>
+            {
+                matcher.set_value(*v, value)
+            }
+            (Self::ModeLookup(m), OneObservation::Mode(v)) => m.set_value(*v, value),
+            (Self::SaveLookup(m), OneObservation::Save(v)) => m.set_value(*v, value),
+            (Self::BreachSaveLookup(m), OneObservation::BreachSave(v)) => m.set_value(*v, value),
+            (Self::IndraLookup(m), OneObservation::Indra(v)) => m.set_value(*v, value),
+            (Self::LastLookup(m), OneObservation::Last(v)) => m.set_value(*v, value),
+            (Self::PrevAreaLookup(m), OneObservation::PrevArea(v)) => m.set_value(*v, value),
+            (Self::FlaskLookup(m), OneObservation::FlaskEq(v)) => m.set_value(*v, value),
+            (Self::FlaskGe { lo, matcher }, OneObservation::FlaskGe(lo2, v)) if lo2 == lo => {
+                matcher.set_value(*v, value)
+            }
+            (Self::FlaskLe { hi, matcher }, OneObservation::FlaskLe(hi2, v)) if hi2 == hi => {
+                matcher.set_value(*v, value)
+            }
+            (Self::FlaskRange { lo, hi, matcher }, OneObservation::FlaskRange(lo2, hi2, v))
+                if lo2 == lo && hi2 == hi =>
+            {
+                matcher.set_value(*v, value)
+            }
+            (Self::HealthFragmentLookup(m), OneObservation::HealthFragmentEq(v)) => {
+                m.set_value(*v, value)
+            }
+            (Self::HealthFragmentGe { lo, matcher }, OneObservation::HealthFragmentGe(lo2, v))
+                if lo2 == lo =>
+            {
+                matcher.set_value(*v, value)
+            }
+            (Self::HealthFragmentLe { hi, matcher }, OneObservation::HealthFragmentLe(hi2, v))
+                if hi2 == hi =>
+            {
+                matcher.set_value(*v, value)
+            }
+            (
+                Self::HealthFragmentRange { lo, hi, matcher },
+                OneObservation::HealthFragmentRange(lo2, hi2, v),
+            ) if lo2 == lo && hi2 == hi => matcher.set_value(*v, value),
+            (
+                Self::LookupCBits1 { mask, matcher },
+                OneObservation::CBits1 {
+                    mask: mask2,
+                    result,
+                },
+            ) if mask == mask2 => matcher.set_value(*result, value),
+            (
+                Self::LookupCBits2 { mask, matcher },
+                OneObservation::CBits2 {
+                    mask: mask2,
+                    result,
+                },
+            ) if mask == mask2 => matcher.set_value(*result, value),
+            (
+                Self::LookupCBits3 { mask, matcher },
+                OneObservation::CBits3 {
+                    mask: mask2,
+                    result,
+                },
+            ) if mask == mask2 => matcher.set_value(*result, value),
+            (
+                Self::LookupCBits4 { mask, matcher },
+                OneObservation::CBits4 {
+                    mask: mask2,
+                    result,
+                },
+            ) if mask == mask2 => matcher.set_value(*result, value),
+            (
+                Self::LookupCBits5 { mask, matcher },
+                OneObservation::CBits5 {
+                    mask: mask2,
+                    result,
+                },
+            ) if mask == mask2 => matcher.set_value(*result, value),
+            (
+                Self::LookupCBits6 { mask, matcher },
+                OneObservation::CBits6 {
+                    mask: mask2,
+                    result,
+                },
+            ) if mask == mask2 => matcher.set_value(*result, value),
+            (
+                Self::LookupCBits7 { mask, matcher },
+                OneObservation::CBits7 {
+                    mask: mask2,
+                    result,
+                },
+            ) if mask == mask2 => matcher.set_value(*result, value),
+            (
+                Self::LookupCBits8 { mask, matcher },
+                OneObservation::CBits8 {
+                    mask: mask2,
+                    result,
+                },
+            ) if mask == mask2 => matcher.set_value(*result, value),
+            (
+                Self::LookupCBits9 { mask, matcher },
+                OneObservation::CBits9 {
+                    mask: mask2,
+                    result,
+                },
+            ) if mask == mask2 => matcher.set_value(*result, value),
+            (
+                Self::LookupCBits10 { mask, matcher },
+                OneObservation::CBits10 {
+                    mask: mask2,
+                    result,
+                },
+            ) if mask == mask2 => matcher.set_value(*result, value),
+            (
+                Self::LookupCBits11 { mask, matcher },
+                OneObservation::CBits11 {
+                    mask: mask2,
+                    result,
+                },
+            ) if mask == mask2 => matcher.set_value(*result, value),
+            _ => (),
+        }
     }
 }

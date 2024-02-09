@@ -272,12 +272,34 @@ impl MatcherDispatch for ObservationMatcher {
 %% for group in bfp.flag_groups
             (Self::LookupCBits{{ loop.index }} { mask, matcher }, OneObservation::CBits{{ loop.index }} { mask: mask2, result }) if mask == mask2 => Some(matcher.insert(*result)),
 %% endfor
-
             _ => None,
         }
     }
 
     fn set_value(&mut self, obs: &OneObservation, value: Self::Value) {
-        todo!()
+        match (self, obs) {
+%% for ctx, t in context_types.items() if ctx not in bfp.varmap
+%% set c = ctx|camelize|camelize
+%% if t in int_types
+            (Self::{{ c }}Lookup(m), OneObservation::{{ c }}Eq(v)) => m.set_value(*v, value),
+            (Self::{{ c }}Ge { lo, matcher }, OneObservation::{{ c }}Ge(lo2, v)) if lo2 == lo => matcher.set_value(*v, value),
+            (Self::{{ c }}Le { hi, matcher }, OneObservation::{{ c }}Le(hi2, v)) if hi2 == hi => matcher.set_value(*v, value),
+            (Self::{{ c }}Range { lo, hi, matcher }, OneObservation::{{ c }}Range(lo2, hi2, v)) if lo2 == lo && hi2 == hi => matcher.set_value(*v, value),
+%% else
+            (Self::{{ c }}Lookup(m), OneObservation::{{ c }}(v)) => m.set_value(*v, value),
+%% endif
+%% endfor
+%% for item in gl.item_max_counts|sort if item not in bfp.varmap
+%% set c = item|camelize
+            (Self::{{ c }}Lookup(m), OneObservation::{{ c }}Eq(v)) => m.set_value(*v, value),
+            (Self::{{ c }}Ge { lo, matcher }, OneObservation::{{ c }}Ge(lo2, v)) if lo2 == lo => matcher.set_value(*v, value),
+            (Self::{{ c }}Le { hi, matcher }, OneObservation::{{ c }}Le(hi2, v)) if hi2 == hi => matcher.set_value(*v, value),
+            (Self::{{ c }}Range { lo, hi, matcher }, OneObservation::{{ c }}Range(lo2, hi2, v)) if lo2 == lo && hi2 == hi => matcher.set_value(*v, value),
+%% endfor
+%% for group in bfp.flag_groups
+            (Self::LookupCBits{{ loop.index }} { mask, matcher }, OneObservation::CBits{{ loop.index }} { mask: mask2, result }) if mask == mask2 => matcher.set_value(*result, value),
+%% endfor
+            _ => (),
+        }
     }
 }
