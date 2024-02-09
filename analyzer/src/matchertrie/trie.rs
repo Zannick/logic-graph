@@ -4,7 +4,7 @@ use super::matcher::{MatcherDispatch, Observable};
 use std::collections::VecDeque;
 use std::fmt::Debug;
 use std::marker::PhantomData;
-use std::sync::MutexGuard;
+use std::sync::{Arc, Mutex, MutexGuard};
 
 // The implementation only works for MatcherDispatch impls that use this Node struct specifically.
 // TODO: Make a Node trait that allow modification and iteration over the matchers.
@@ -40,7 +40,7 @@ where
 }
 
 pub struct MatcherTrie<MultiMatcherType> {
-    root: MultiMatcherType,
+    root: Arc<Mutex<MultiMatcherType>>,
 }
 
 impl<MultiMatcherType> Default for MatcherTrie<MultiMatcherType>
@@ -49,7 +49,7 @@ where
 {
     fn default() -> Self {
         Self {
-            root: MultiMatcherType::default(),
+            root: Arc::default(),
         }
     }
 }
@@ -76,7 +76,7 @@ where
     /// Performs a lookup for all states similar to this one.
     pub fn lookup(&self, similar: &StructType) -> Vec<ValueType> {
         let mut vec = Vec::new();
-        let (node, val) = self.root.lookup(similar);
+        let (node, val) = self.root.lock().unwrap().lookup(similar);
         if let Some(v) = val {
             vec.push(v.clone());
         }
@@ -100,15 +100,14 @@ where
     }
 
     pub fn insert(
-        &mut self,
+        &self,
         root_observation: StructType::PropertyObservation,
         observations: Vec<StructType::PropertyObservation>,
         value: ValueType,
     ) {
         if let Some((last, most)) = observations.split_last() {
-            let mut current_node = self.root.insert(&root_observation).unwrap();
+            let mut current_node = self.root.lock().unwrap().insert(&root_observation).unwrap();
 
-            let (last, most) = observations.split_last().unwrap();
             'observe: for obs in most.into_iter() {
                 let mut locked_node = current_node.lock().unwrap();
                 for matcher in locked_node.matchers.iter_mut() {
@@ -136,8 +135,9 @@ where
             matcher.set_value(last, value);
             locked_node.matchers.push(matcher);
         } else {
-            self.root.insert(&root_observation);
-            self.root.set_value(&root_observation, value);
+            let mut locked_root = self.root.lock().unwrap();
+            locked_root.insert(&root_observation);
+            locked_root.set_value(&root_observation, value);
         }
     }
 }
@@ -146,7 +146,7 @@ where
 mod test {
     use super::*;
     use crate::matchertrie::matcher::*;
-    use std::sync::{Arc, Mutex};
+    use std::{ops::Deref, sync::{Arc, Mutex}};
 
     #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash)]
     enum Position {
@@ -323,12 +323,12 @@ mod test {
     fn node_lookup1() {
         let trie = make_trie();
 
-        if let MatcherMulti::LookupPosition(m) = &trie.root {
+        if let MatcherMulti::LookupPosition(m) = &trie.root.lock().unwrap().deref() {
             assert!(m.contains_key(&Position::Start));
         } else {
             panic!("Root is wrong type: {:?}", trie);
         }
-        let (node, val) = trie.root.lookup(&CTX_TEST_1);
+        let (node, val) = trie.root.lock().unwrap().lookup(&CTX_TEST_1);
         assert_eq!(None, val);
         let node = node.expect("Root has Start but not next");
         let lock1 = node.lock().unwrap();
@@ -361,12 +361,12 @@ mod test {
     fn node_lookup2() {
         let trie = make_trie();
 
-        if let MatcherMulti::LookupPosition(m) = &trie.root {
+        if let MatcherMulti::LookupPosition(m) = &trie.root.lock().unwrap().deref() {
             assert!(m.contains_key(&Position::Start));
         } else {
             panic!("Root is wrong type: {:?}", trie);
         }
-        let (node, val) = trie.root.lookup(&CTX_2);
+        let (node, val) = trie.root.lock().unwrap().lookup(&CTX_2);
         assert_eq!(None, val);
         let node = node.expect("Root has Start but not next");
         let lock1 = node.lock().unwrap();
