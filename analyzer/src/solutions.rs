@@ -84,7 +84,7 @@ where
         &mut self,
         elapsed: u32,
         history: Vec<HistoryAlias<T>>,
-    ) -> Option<Vec<HistoryAlias<T>>> {
+    ) -> bool {
         let loc_history: Vec<HistoryAlias<T>> = history
             .iter()
             .filter_map(|h| {
@@ -99,7 +99,7 @@ where
             self.best = elapsed;
         } else if elapsed - self.best > self.best / 10 {
             log::info!("Excluding solution as too slow: {} > 1.1 * {}", elapsed, self.best);
-            return None;
+            return false;
         }
 
         self.count += 1;
@@ -107,7 +107,7 @@ where
             vec.push(Arc::new(Solution { elapsed, history }));
             self.write_previews().unwrap();
             self.write_best().unwrap();
-            None
+            false
         } else {
             let mut locs = loc_history.clone();
             locs.reverse();
@@ -115,7 +115,7 @@ where
                 .insert(loc_history, vec![Arc::new(Solution { elapsed, history })]);
             self.write_previews().unwrap();
             self.write_best().unwrap();
-            Some(locs)
+            true
         }
     }
 

@@ -461,7 +461,7 @@ where
             log::info!("Max time to consider is now: {}ms", old_time);
         }
 
-        if sols.insert(elapsed, history).is_some() {
+        if sols.insert(elapsed, history) {
             log::info!("{:?} mode found new unique solution", mode);
         }
 
@@ -483,7 +483,7 @@ where
             }
 
             let history = ctx.recent_history();
-            if sols.insert(ctx.elapsed(), history.to_vec()).is_some() {
+            if sols.insert(ctx.elapsed(), history.to_vec()) {
                 log::info!("Minimized found new unique solution");
             }
 
