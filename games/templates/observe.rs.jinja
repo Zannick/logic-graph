@@ -21,7 +21,8 @@ pub enum OneObservation {
 %% for ctx, t in context_types.items() if ctx not in bfp.varmap
 %% set c = ctx|camelize|camelize
 %% if t in int_types
-    {{ c }}Eq({{ t }}),
+    {{ c }}Exact({{ t }}),
+    {{ c }}Eq({{ t }}, bool),
     {{ c }}Ge({{ t }}, bool),
     {{ c }}Le({{ t }}, bool),
     {{ c }}Range({{ t }}, {{ t }}, bool),
@@ -33,7 +34,8 @@ pub enum OneObservation {
 %% for item, ct in gl.item_max_counts.items()|sort if item not in bfp.varmap
 %% set t = ct|get_int_type_for_max
 %% set c = item|camelize
-    {{ c }}Eq({{ t }}),
+    {{ c }}Exact({{ t }}),
+    {{ c }}Eq({{ t }}, bool),
     {{ c }}Ge({{ t }}, bool),
     {{ c }}Le({{ t }}, bool),
     {{ c }}Range({{ t }}, {{ t }}, bool),
@@ -47,7 +49,9 @@ pub enum OneObservation {
 
 #[derive(Debug, Default)]
 pub struct FullObservation {
-    // context vars: observed or not. Ints get comparisons as well
+    // context vars: observed or not. Ints get comparisons as well but they are observed-as-true comparisons,
+    // or otherwise partitioned as exact
+%# TODO: Allow disjoint comparisons so we can generalize into boolean better without the actual observation here.
 %% for ctx, t in context_types.items() if ctx not in bfp.varmap
 %% if t in int_types
     {{ ctx }}: IntegerObservation<{{ t }}>,
@@ -91,9 +95,10 @@ impl FullObservation {
 %% if t in int_types
             match self.{{ ctx }} {
                 IntegerObservation::Unknown => (),
-                IntegerObservation::Eq(i) => vec.push(OneObservation::{{ c }}Eq(i)),
-                IntegerObservation::Ge(i) => vec.push(OneObservation::{{ c }}Ge(i, ctx.{{ ctx }}() >= i)),
-                IntegerObservation::Le(i) => vec.push(OneObservation::{{ c }}Le(i, ctx.{{ ctx }}() <= i)),
+                IntegerObservation::Exact => vec.push(OneObservation::{{ c }}Exact(ctx.{{ ctx }})),
+                IntegerObservation::Eq(i) => vec.push(OneObservation::{{ c }}Eq(i, ctx.{{ ctx }} == i)),
+                IntegerObservation::Ge(i) => vec.push(OneObservation::{{ c }}Ge(i, ctx.{{ ctx }} >= i)),
+                IntegerObservation::Le(i) => vec.push(OneObservation::{{ c }}Le(i, ctx.{{ ctx }} <= i)),
                 IntegerObservation::Range(lo, hi) => vec.push(OneObservation::{{ c }}Range(lo, hi, ctx.{{ ctx }} >= lo && ctx.{{ ctx }} <= hi)),
             }
 %% else
@@ -107,7 +112,8 @@ impl FullObservation {
 %% set ctx = item|lower
             match self.{{ ctx }} {
                 IntegerObservation::Unknown => (),
-                IntegerObservation::Eq(i) => vec.push(OneObservation::{{ c }}Eq(i)),
+                IntegerObservation::Exact => vec.push(OneObservation::{{ c }}Exact(ctx.{{ ctx }})),
+                IntegerObservation::Eq(i) => vec.push(OneObservation::{{ c }}Eq(i, ctx.{{ ctx }} == i)),
                 IntegerObservation::Ge(i) => vec.push(OneObservation::{{ c }}Ge(i, ctx.{{ ctx }} >= i)),
                 IntegerObservation::Le(i) => vec.push(OneObservation::{{ c }}Le(i, ctx.{{ ctx }} <= i)),
                 IntegerObservation::Range(lo, hi) => vec.push(OneObservation::{{ c }}Range(lo, hi, ctx.{{ ctx }} >= lo && ctx.{{ ctx }} <= hi)),
@@ -126,8 +132,15 @@ impl FullObservation {
 %% for ctx, t in context_types.items() if ctx not in bfp.varmap
 %% set c = ctx|camelize|camelize
 %% if t in int_types
-            OneObservation::{{ c }}Eq(v) => {
-                self.{{ ctx }} = self.{{ ctx }}.combine(IntegerObservation::Eq(v));
+            OneObservation::{{ c }}Exact(v) => {
+                self.{{ ctx }} = IntegerObservation::Exact;
+            }
+            OneObservation::{{ c }}Eq(v, res) => {
+                if res {
+                    self.{{ ctx }} = self.{{ ctx }}.combine(IntegerObservation::Eq(v));
+                } else {
+                    self.{{ ctx }} = IntegerObservation::Exact;
+                }
             }
             OneObservation::{{ c }}Ge(lo, res) => {
                 self.{{ ctx }} = self.{{ ctx }}.combine(
@@ -148,8 +161,11 @@ impl FullObservation {
                 );
             }
             OneObservation::{{ c }}Range(lo, hi, res) => {
-                assert!(res, "Negated ranges/multiple additive ranges not supported, use Eq instead");
-                self.{{ ctx }} = self.{{ ctx }}.combine(IntegerObservation::Range(lo, hi));
+                if res {
+                    self.{{ ctx }} = self.{{ ctx }}.combine(IntegerObservation::Range(lo, hi));
+                } else {
+                    self.{{ ctx }} = IntegerObservation::Exact;
+                }
             }
 %% else
             OneObservation::{{ c }}(v) => {
@@ -160,8 +176,15 @@ impl FullObservation {
 %% for item in gl.item_max_counts|sort if item not in bfp.varmap
 %% set c = item|camelize
 %% set ctx = item|lower
-            OneObservation::{{ c }}Eq(v) => {
-                self.{{ ctx }} = self.{{ ctx }}.combine(IntegerObservation::Eq(v));
+            OneObservation::{{ c }}Exact(v) => {
+                self.{{ ctx }} = IntegerObservation::Exact;
+            }
+            OneObservation::{{ c }}Eq(v, res) => {
+                if res {
+                    self.{{ ctx }} = self.{{ ctx }}.combine(IntegerObservation::Eq(v));
+                } else {
+                    self.{{ ctx }} = IntegerObservation::Exact;
+                }
             }
             OneObservation::{{ c }}Ge(lo, res) => {
                 self.{{ ctx }} = self.{{ ctx }}.combine(
@@ -182,8 +205,11 @@ impl FullObservation {
                 );
             }
             OneObservation::{{ c }}Range(lo, hi, res) => {
-                assert!(res, "Negated ranges/multiple additive ranges not supported, use Eq instead");
-                self.{{ ctx }} = self.{{ ctx }}.combine(IntegerObservation::Range(lo, hi));
+                if res {
+                    self.{{ ctx }} = self.{{ ctx }}.combine(IntegerObservation::Range(lo, hi));
+                } else {
+                    self.{{ ctx }} = IntegerObservation::Exact;
+                }
             }
 %% endfor
 %% for group in bfp.flag_groups
@@ -205,6 +231,10 @@ pub enum ObservationMatcher {
 %% set c = ctx|camelize|camelize
 %% if t in int_types
     {{ c }}Lookup(LookupMatcher<Node<Self>, {{ t }}, (Arc<Solution<Context>>, usize)>),
+    {{ c }}Eq {
+        eq: {{ t }},
+        matcher: BooleanMatcher<Node<Self>, (Arc<Solution<Context>>, usize)>,
+    },
     {{ c }}Ge {
         lo: {{ t }},
         matcher: BooleanMatcher<Node<Self>, (Arc<Solution<Context>>, usize)>,
@@ -227,6 +257,10 @@ pub enum ObservationMatcher {
 %% set c = item|camelize
 %% set t = ct|get_int_type_for_max
     {{ c }}Lookup(LookupMatcher<Node<Self>, {{ t }}, (Arc<Solution<Context>>, usize)>),
+    {{ c }}Eq {
+        eq: {{ t }},
+        matcher: BooleanMatcher<Node<Self>, (Arc<Solution<Context>>, usize)>,
+    },
     {{ c }}Ge {
         lo: {{ t }},
         matcher: BooleanMatcher<Node<Self>, (Arc<Solution<Context>>, usize)>,
@@ -265,9 +299,13 @@ impl MatcherDispatch for ObservationMatcher {
 %% for ctx, t in context_types.items() if ctx not in bfp.varmap
 %% set c = ctx|camelize|camelize
 %% if t in int_types
-            &OneObservation::{{ c }}Eq(v) => {
+            &OneObservation::{{ c }}Exact(v) => {
                 let (node, m) = LookupMatcher::new_with(v);
                 (node, ObservationMatcher::{{ c }}Lookup(m))
+            }
+            &OneObservation::{{ c }}Eq(eq, res) => {
+                let (node, matcher) = BooleanMatcher::new_with(res);
+                (node, ObservationMatcher::{{ c }}Eq { eq, matcher })
             }
             &OneObservation::{{ c }}Ge(lo, res) => {
                 let (node, matcher) = BooleanMatcher::new_with(res);
@@ -290,9 +328,13 @@ impl MatcherDispatch for ObservationMatcher {
 %% endfor
 %% for item in gl.item_max_counts|sort if item not in bfp.varmap
 %% set c = item|camelize
-            &OneObservation::{{ c }}Eq(v) => {
+            &OneObservation::{{ c }}Exact(v) => {
                 let (node, m) = LookupMatcher::new_with(v);
                 (node, ObservationMatcher::{{ c }}Lookup(m))
+            }
+            &OneObservation::{{ c }}Eq(eq, res) => {
+                let (node, matcher) = BooleanMatcher::new_with(res);
+                (node, ObservationMatcher::{{ c }}Eq { eq, matcher })
             }
             &OneObservation::{{ c }}Ge(lo, res) => {
                 let (node, matcher) = BooleanMatcher::new_with(res);
@@ -322,6 +364,7 @@ impl MatcherDispatch for ObservationMatcher {
 %% set c = ctx|camelize|camelize
 %% if t in int_types
             Self::{{ c }}Lookup(m) => m.lookup(val.{{ ctx }}),
+            Self::{{ c }}Eq { eq, matcher } => matcher.lookup(val.{{ ctx }} == *eq),
             Self::{{ c }}Ge { lo, matcher } => matcher.lookup(val.{{ ctx }} >= *lo),
             Self::{{ c }}Le { hi, matcher } => matcher.lookup(val.{{ ctx }} <= *hi),
             Self::{{ c }}Range { lo, hi, matcher } => matcher.lookup(val.{{ ctx }} >= *lo && val.{{ ctx }} <= *hi),
@@ -333,6 +376,7 @@ impl MatcherDispatch for ObservationMatcher {
 %% set c = item|camelize
 %% set ctx = item|lower
             Self::{{ c }}Lookup(m) => m.lookup(val.{{ ctx }}),
+            Self::{{ c }}Eq { eq, matcher } => matcher.lookup(val.{{ ctx }} == *eq),
             Self::{{ c }}Ge { lo, matcher } => matcher.lookup(val.{{ ctx }} >= *lo),
             Self::{{ c }}Le { hi, matcher } => matcher.lookup(val.{{ ctx }} <= *hi),
             Self::{{ c }}Range { lo, hi, matcher } => matcher.lookup(val.{{ ctx }} >= *lo && val.{{ ctx }} <= *hi),
@@ -348,7 +392,8 @@ impl MatcherDispatch for ObservationMatcher {
 %% for ctx, t in context_types.items() if ctx not in bfp.varmap
 %% set c = ctx|camelize|camelize
 %% if t in int_types
-            (Self::{{ c }}Lookup(m), OneObservation::{{ c }}Eq(v)) => Some(m.insert(*v)),
+            (Self::{{ c }}Lookup(m), OneObservation::{{ c }}Exact(v)) => Some(m.insert(*v)),
+            (Self::{{ c }}Eq { eq, matcher }, OneObservation::{{ c }}Eq(eq2, v)) if eq2 == eq => Some(matcher.insert(*v)),
             (Self::{{ c }}Ge { lo, matcher }, OneObservation::{{ c }}Ge(lo2, v)) if lo2 == lo => Some(matcher.insert(*v)),
             (Self::{{ c }}Le { hi, matcher }, OneObservation::{{ c }}Le(hi2, v)) if hi2 == hi => Some(matcher.insert(*v)),
             (Self::{{ c }}Range { lo, hi, matcher }, OneObservation::{{ c }}Range(lo2, hi2, v)) if lo2 == lo && hi2 == hi => Some(matcher.insert(*v)),
@@ -358,7 +403,8 @@ impl MatcherDispatch for ObservationMatcher {
 %% endfor
 %% for item in gl.item_max_counts|sort if item not in bfp.varmap
 %% set c = item|camelize
-            (Self::{{ c }}Lookup(m), OneObservation::{{ c }}Eq(v)) => Some(m.insert(*v)),
+            (Self::{{ c }}Lookup(m), OneObservation::{{ c }}Exact(v)) => Some(m.insert(*v)),
+            (Self::{{ c }}Eq { eq, matcher }, OneObservation::{{ c }}Eq(eq2, v)) if eq2 == eq => Some(matcher.insert(*v)),
             (Self::{{ c }}Ge { lo, matcher }, OneObservation::{{ c }}Ge(lo2, v)) if lo2 == lo => Some(matcher.insert(*v)),
             (Self::{{ c }}Le { hi, matcher }, OneObservation::{{ c }}Le(hi2, v)) if hi2 == hi => Some(matcher.insert(*v)),
             (Self::{{ c }}Range { lo, hi, matcher }, OneObservation::{{ c }}Range(lo2, hi2, v)) if lo2 == lo && hi2 == hi => Some(matcher.insert(*v)),
@@ -375,7 +421,8 @@ impl MatcherDispatch for ObservationMatcher {
 %% for ctx, t in context_types.items() if ctx not in bfp.varmap
 %% set c = ctx|camelize|camelize
 %% if t in int_types
-            (Self::{{ c }}Lookup(m), OneObservation::{{ c }}Eq(v)) => m.set_value(*v, value),
+            (Self::{{ c }}Lookup(m), OneObservation::{{ c }}Exact(v)) => m.set_value(*v, value),
+            (Self::{{ c }}Eq { eq, matcher }, OneObservation::{{ c }}Eq(eq2, v)) if eq2 == eq => matcher.set_value(*v, value),
             (Self::{{ c }}Ge { lo, matcher }, OneObservation::{{ c }}Ge(lo2, v)) if lo2 == lo => matcher.set_value(*v, value),
             (Self::{{ c }}Le { hi, matcher }, OneObservation::{{ c }}Le(hi2, v)) if hi2 == hi => matcher.set_value(*v, value),
             (Self::{{ c }}Range { lo, hi, matcher }, OneObservation::{{ c }}Range(lo2, hi2, v)) if lo2 == lo && hi2 == hi => matcher.set_value(*v, value),
@@ -385,7 +432,8 @@ impl MatcherDispatch for ObservationMatcher {
 %% endfor
 %% for item in gl.item_max_counts|sort if item not in bfp.varmap
 %% set c = item|camelize
-            (Self::{{ c }}Lookup(m), OneObservation::{{ c }}Eq(v)) => m.set_value(*v, value),
+            (Self::{{ c }}Lookup(m), OneObservation::{{ c }}Exact(v)) => m.set_value(*v, value),
+            (Self::{{ c }}Eq { eq, matcher }, OneObservation::{{ c }}Eq(eq2, v)) if eq2 == eq => matcher.set_value(*v, value),
             (Self::{{ c }}Ge { lo, matcher }, OneObservation::{{ c }}Ge(lo2, v)) if lo2 == lo => matcher.set_value(*v, value),
             (Self::{{ c }}Le { hi, matcher }, OneObservation::{{ c }}Le(hi2, v)) if hi2 == hi => matcher.set_value(*v, value),
             (Self::{{ c }}Range { lo, hi, matcher }, OneObservation::{{ c }}Range(lo2, hi2, v)) if lo2 == lo && hi2 == hi => matcher.set_value(*v, value),

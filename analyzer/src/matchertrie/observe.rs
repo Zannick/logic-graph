@@ -6,10 +6,17 @@ use std::fmt::Debug;
 #[derive(Debug, Default, Copy, Clone, Eq, PartialEq)]
 pub enum IntegerObservation<T> {
     #[default]
+    // We haven't observed it.
     Unknown,
+    // We observed what it is.
+    Exact,
+    // We observed whether it is equal to the given value.
     Eq(T),
+    // We observed whether it's at least the given value.
     Ge(T),
+    // We observed whether it's at most the given value.
     Le(T),
+    // We observed whether it's in the given fully-inclusive range [lo, hi].
     Range(T, T),
 }
 
@@ -20,6 +27,7 @@ where
     pub fn combine(self, other: Self) -> Self {
         match (self, other) {
             (Self::Unknown, obs) | (obs, Self::Unknown) => obs,
+            (Self::Exact, _) | (_, Self::Exact) => Self::Exact,
             (Self::Eq(i), Self::Eq(j)) if i == j => self,
             (Self::Eq(i), Self::Ge(v)) | (Self::Ge(v), Self::Eq(i)) if i >= v => Self::Eq(i),
             (Self::Eq(i), Self::Le(v)) | (Self::Le(v), Self::Eq(i)) if i <= v => Self::Eq(i),
@@ -59,17 +67,18 @@ where
                     Self::Range(lo, hi)
                 }
             }
-            _ => panic!("Contradictory observations: {:?} vs {:?}", self, other),
+            // all others have to observe the exact value
+            _ => Self::Exact,
         }
     }
 
     pub fn shift(self, i: T) -> Self {
         match self {
-            IntegerObservation::Unknown => self,
-            IntegerObservation::Eq(v) => IntegerObservation::Eq(v + i),
-            IntegerObservation::Ge(v) => IntegerObservation::Ge(v + i),
-            IntegerObservation::Le(v) => IntegerObservation::Le(v + i),
-            IntegerObservation::Range(lo, hi) => IntegerObservation::Range(lo + i, hi + i),
+            Self::Unknown | Self::Exact => self,
+            Self::Eq(v) => Self::Eq(v + i),
+            Self::Ge(v) => Self::Ge(v + i),
+            Self::Le(v) => Self::Le(v + i),
+            Self::Range(lo, hi) => Self::Range(lo + i, hi + i),
         }
     }
 }
