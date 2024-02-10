@@ -1,22 +1,19 @@
 %% include 'header.rs.jinja'
 
 %% for name, info in helpers.items()
+%% set funcname = name|construct_id
 /// {{ name }} ( {{ info.args|join(',') }} )
 /// {{ info.pr.text.replace('\n', ' ') }}
 #[macro_export]
-macro_rules! helper__{{ name|construct_id }} {
+macro_rules! helper__{{ funcname }} {
     ($ctx:expr, $world:expr{% for a in info.args %}, ${{ a.name }}:expr{% endfor %}) => {{ '{{' }}
-        #[allow(unused_imports)]
-        use $crate::items::Item;
         {{ info.pr|prToRust({})|escape_ctx }}
     {{ '}}' }};
 }
 %% if not info.rule.startswith('action')
 #[macro_export]
-macro_rules! hexplain__{{ name|construct_id }} {
+macro_rules! hexplain__{{ funcname }} {
     ($ctx:expr, $world:expr{% for a in info.args %}, ${{ a.name }}:expr{% endfor %}, $edict:expr) => {{ '{{' }}
-        #[allow(unused_imports)]
-        use $crate::items::Item;
         {{ info.pr|prToRustExplain({})|string|escape_ctx }}
     {{ '}}' }};
 }
@@ -26,13 +23,13 @@ macro_rules! hexplain__{{ name|construct_id }} {
 %% endfor
 
 %% for name, rule in rules.items()
+%% set funcname = name|construct_id
 /// Rule {{ name }}
 #[macro_export]
-macro_rules! rule__{{ name|construct_id }} {
+macro_rules! rule__{{ funcname }} {
     ($ctx:expr, $world:expr) => {{ '{{' }}
-        use $crate::graph_enums::*;
         use $crate::rules;
-        match $world.rule_{{ name|construct_id }} {
+        match $world.rule_{{ funcname }} {
 %% for v, info in rule.variants.items()
             Rule{{ name[1:]|camelize }}::{{ v|construct_id|camelize }} => {
                 rules::{% if rule.rule == 'actions' %}action_{% else %}access_{% endif %}{{ info.func_id }}($ctx, $world)
@@ -43,11 +40,10 @@ macro_rules! rule__{{ name|construct_id }} {
 }
 %% if rule.rule != 'actions'
 #[macro_export]
-macro_rules! rexplain__{{ name|construct_id }} {
+macro_rules! rexplain__{{ funcname }} {
     ($ctx:expr, $world:expr, $edict:expr) => {{ '{{' }}
-        use $crate::graph_enums::*;
         use $crate::rules;
-        match $world.rule_{{ name|construct_id }} {
+        match $world.rule_{{ funcname }} {
 %% for v, info in rule.variants.items()
             Rule{{ name[1:]|camelize }}::{{ v|construct_id|camelize }} => {
                 rules::explain_{{ info.func_id }}($ctx, $world, $edict)
