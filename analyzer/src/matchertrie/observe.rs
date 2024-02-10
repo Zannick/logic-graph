@@ -15,7 +15,7 @@ pub enum IntegerObservation<T> {
 
 impl<T> IntegerObservation<T>
 where
-    T: Copy + Ord + Debug + Eq,
+    T: Copy + Ord + Debug + Eq + std::ops::Add<Output = T>,
 {
     pub fn combine(self, other: Self) -> Self {
         match (self, other) {
@@ -60,6 +60,16 @@ where
                 }
             }
             _ => panic!("Contradictory observations: {:?} vs {:?}", self, other),
+        }
+    }
+
+    pub fn shift(self, i: T) -> Self {
+        match self {
+            IntegerObservation::Unknown => self,
+            IntegerObservation::Eq(v) => IntegerObservation::Eq(v + i),
+            IntegerObservation::Ge(v) => IntegerObservation::Ge(v + i),
+            IntegerObservation::Le(v) => IntegerObservation::Le(v + i),
+            IntegerObservation::Range(lo, hi) => IntegerObservation::Range(lo + i, hi + i),
         }
     }
 }

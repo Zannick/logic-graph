@@ -121,12 +121,85 @@ pub struct FullObservation {
     cbits9: Option<flags::ContextBits9>,
     cbits10: Option<flags::ContextBits10>,
     cbits11: Option<flags::ContextBits11>,
-    fields_observed: usize,
 }
 
 impl FullObservation {
+    fn fields_observed(&self) -> usize {
+        let mut fields = 0;
+        if self.position {
+            fields += 1;
+        }
+        if self.energy != IntegerObservation::Unknown {
+            fields += 1;
+        }
+        if self.flasks != IntegerObservation::Unknown {
+            fields += 1;
+        }
+        if self.refills != IntegerObservation::Unknown {
+            fields += 1;
+        }
+        if self.mode {
+            fields += 1;
+        }
+        if self.save {
+            fields += 1;
+        }
+        if self.breach_save {
+            fields += 1;
+        }
+        if self.indra {
+            fields += 1;
+        }
+        if self.last {
+            fields += 1;
+        }
+        if self.prev_area {
+            fields += 1;
+        }
+        if self.flask != IntegerObservation::Unknown {
+            fields += 1;
+        }
+        if self.health_fragment != IntegerObservation::Unknown {
+            fields += 1;
+        }
+        if self.cbits1.is_some() {
+            fields += 1;
+        }
+        if self.cbits2.is_some() {
+            fields += 1;
+        }
+        if self.cbits3.is_some() {
+            fields += 1;
+        }
+        if self.cbits4.is_some() {
+            fields += 1;
+        }
+        if self.cbits5.is_some() {
+            fields += 1;
+        }
+        if self.cbits6.is_some() {
+            fields += 1;
+        }
+        if self.cbits7.is_some() {
+            fields += 1;
+        }
+        if self.cbits8.is_some() {
+            fields += 1;
+        }
+        if self.cbits9.is_some() {
+            fields += 1;
+        }
+        if self.cbits10.is_some() {
+            fields += 1;
+        }
+        if self.cbits11.is_some() {
+            fields += 1;
+        }
+        fields
+    }
+
     pub fn to_vec(&self, ctx: &Context) -> Vec<OneObservation> {
-        let mut vec = Vec::with_capacity(self.fields_observed);
+        let mut vec = Vec::with_capacity(self.fields_observed());
         if self.position {
             vec.push(OneObservation::Position(ctx.position));
         }
@@ -276,6 +349,231 @@ impl FullObservation {
             });
         }
         vec
+    }
+
+    pub fn apply(&mut self, obs: OneObservation) {
+        match obs {
+            OneObservation::Position(v) => {
+                self.position = true;
+            }
+            OneObservation::EnergyEq(v) => {
+                self.energy = self.energy.combine(IntegerObservation::Eq(v));
+            }
+            OneObservation::EnergyGe(lo, res) => {
+                self.energy = self.energy.combine(if res {
+                    IntegerObservation::Ge(lo)
+                } else {
+                    IntegerObservation::Le(lo - 1)
+                });
+            }
+            OneObservation::EnergyLe(hi, res) => {
+                self.energy = self.energy.combine(if res {
+                    IntegerObservation::Le(hi)
+                } else {
+                    IntegerObservation::Ge(hi + 1)
+                });
+            }
+            OneObservation::EnergyRange(lo, hi, res) => {
+                assert!(
+                    res,
+                    "Negated ranges/multiple additive ranges not supported, use Eq instead"
+                );
+                self.energy = self.energy.combine(IntegerObservation::Range(lo, hi));
+            }
+            OneObservation::FlasksEq(v) => {
+                self.flasks = self.flasks.combine(IntegerObservation::Eq(v));
+            }
+            OneObservation::FlasksGe(lo, res) => {
+                self.flasks = self.flasks.combine(if res {
+                    IntegerObservation::Ge(lo)
+                } else {
+                    IntegerObservation::Le(lo - 1)
+                });
+            }
+            OneObservation::FlasksLe(hi, res) => {
+                self.flasks = self.flasks.combine(if res {
+                    IntegerObservation::Le(hi)
+                } else {
+                    IntegerObservation::Ge(hi + 1)
+                });
+            }
+            OneObservation::FlasksRange(lo, hi, res) => {
+                assert!(
+                    res,
+                    "Negated ranges/multiple additive ranges not supported, use Eq instead"
+                );
+                self.flasks = self.flasks.combine(IntegerObservation::Range(lo, hi));
+            }
+            OneObservation::RefillsEq(v) => {
+                self.refills = self.refills.combine(IntegerObservation::Eq(v));
+            }
+            OneObservation::RefillsGe(lo, res) => {
+                self.refills = self.refills.combine(if res {
+                    IntegerObservation::Ge(lo)
+                } else {
+                    IntegerObservation::Le(lo - 1)
+                });
+            }
+            OneObservation::RefillsLe(hi, res) => {
+                self.refills = self.refills.combine(if res {
+                    IntegerObservation::Le(hi)
+                } else {
+                    IntegerObservation::Ge(hi + 1)
+                });
+            }
+            OneObservation::RefillsRange(lo, hi, res) => {
+                assert!(
+                    res,
+                    "Negated ranges/multiple additive ranges not supported, use Eq instead"
+                );
+                self.refills = self.refills.combine(IntegerObservation::Range(lo, hi));
+            }
+            OneObservation::Mode(v) => {
+                self.mode = true;
+            }
+            OneObservation::Save(v) => {
+                self.save = true;
+            }
+            OneObservation::BreachSave(v) => {
+                self.breach_save = true;
+            }
+            OneObservation::Indra(v) => {
+                self.indra = true;
+            }
+            OneObservation::Last(v) => {
+                self.last = true;
+            }
+            OneObservation::PrevArea(v) => {
+                self.prev_area = true;
+            }
+            OneObservation::FlaskEq(v) => {
+                self.flask = self.flask.combine(IntegerObservation::Eq(v));
+            }
+            OneObservation::FlaskGe(lo, res) => {
+                self.flask = self.flask.combine(if res {
+                    IntegerObservation::Ge(lo)
+                } else {
+                    IntegerObservation::Le(lo - 1)
+                });
+            }
+            OneObservation::FlaskLe(hi, res) => {
+                self.flask = self.flask.combine(if res {
+                    IntegerObservation::Le(hi)
+                } else {
+                    IntegerObservation::Ge(hi + 1)
+                });
+            }
+            OneObservation::FlaskRange(lo, hi, res) => {
+                assert!(
+                    res,
+                    "Negated ranges/multiple additive ranges not supported, use Eq instead"
+                );
+                self.flask = self.flask.combine(IntegerObservation::Range(lo, hi));
+            }
+            OneObservation::HealthFragmentEq(v) => {
+                self.health_fragment = self.health_fragment.combine(IntegerObservation::Eq(v));
+            }
+            OneObservation::HealthFragmentGe(lo, res) => {
+                self.health_fragment = self.health_fragment.combine(if res {
+                    IntegerObservation::Ge(lo)
+                } else {
+                    IntegerObservation::Le(lo - 1)
+                });
+            }
+            OneObservation::HealthFragmentLe(hi, res) => {
+                self.health_fragment = self.health_fragment.combine(if res {
+                    IntegerObservation::Le(hi)
+                } else {
+                    IntegerObservation::Ge(hi + 1)
+                });
+            }
+            OneObservation::HealthFragmentRange(lo, hi, res) => {
+                assert!(
+                    res,
+                    "Negated ranges/multiple additive ranges not supported, use Eq instead"
+                );
+                self.health_fragment = self
+                    .health_fragment
+                    .combine(IntegerObservation::Range(lo, hi));
+            }
+            OneObservation::CBits1 { mask, .. } => {
+                if let Some(old_mask) = self.cbits1 {
+                    self.cbits1 = Some(old_mask | mask);
+                } else {
+                    self.cbits1 = Some(mask);
+                }
+            }
+            OneObservation::CBits2 { mask, .. } => {
+                if let Some(old_mask) = self.cbits2 {
+                    self.cbits2 = Some(old_mask | mask);
+                } else {
+                    self.cbits2 = Some(mask);
+                }
+            }
+            OneObservation::CBits3 { mask, .. } => {
+                if let Some(old_mask) = self.cbits3 {
+                    self.cbits3 = Some(old_mask | mask);
+                } else {
+                    self.cbits3 = Some(mask);
+                }
+            }
+            OneObservation::CBits4 { mask, .. } => {
+                if let Some(old_mask) = self.cbits4 {
+                    self.cbits4 = Some(old_mask | mask);
+                } else {
+                    self.cbits4 = Some(mask);
+                }
+            }
+            OneObservation::CBits5 { mask, .. } => {
+                if let Some(old_mask) = self.cbits5 {
+                    self.cbits5 = Some(old_mask | mask);
+                } else {
+                    self.cbits5 = Some(mask);
+                }
+            }
+            OneObservation::CBits6 { mask, .. } => {
+                if let Some(old_mask) = self.cbits6 {
+                    self.cbits6 = Some(old_mask | mask);
+                } else {
+                    self.cbits6 = Some(mask);
+                }
+            }
+            OneObservation::CBits7 { mask, .. } => {
+                if let Some(old_mask) = self.cbits7 {
+                    self.cbits7 = Some(old_mask | mask);
+                } else {
+                    self.cbits7 = Some(mask);
+                }
+            }
+            OneObservation::CBits8 { mask, .. } => {
+                if let Some(old_mask) = self.cbits8 {
+                    self.cbits8 = Some(old_mask | mask);
+                } else {
+                    self.cbits8 = Some(mask);
+                }
+            }
+            OneObservation::CBits9 { mask, .. } => {
+                if let Some(old_mask) = self.cbits9 {
+                    self.cbits9 = Some(old_mask | mask);
+                } else {
+                    self.cbits9 = Some(mask);
+                }
+            }
+            OneObservation::CBits10 { mask, .. } => {
+                if let Some(old_mask) = self.cbits10 {
+                    self.cbits10 = Some(old_mask | mask);
+                } else {
+                    self.cbits10 = Some(mask);
+                }
+            }
+            OneObservation::CBits11 { mask, .. } => {
+                if let Some(old_mask) = self.cbits11 {
+                    self.cbits11 = Some(old_mask | mask);
+                } else {
+                    self.cbits11 = Some(mask);
+                }
+            }
+        }
     }
 }
 

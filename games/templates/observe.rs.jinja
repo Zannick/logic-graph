@@ -63,12 +63,29 @@ pub struct FullObservation {
 %% for group in bfp.flag_groups
     cbits{{ loop.index }}: Option<flags::ContextBits{{ loop.index }}>,
 %% endfor
-    fields_observed: usize,
 }
 
 impl FullObservation {
+    fn fields_observed(&self) -> usize {
+        let mut fields = 0;
+%% for ctx, t in context_types.items() if ctx not in bfp.varmap
+%% if t in int_types
+        if self.{{ ctx }} != IntegerObservation::Unknown { fields += 1; }
+%% else
+        if self.{{ ctx }} { fields += 1; }
+%% endif
+%% endfor
+%% for item, ct in gl.item_max_counts.items()|sort if item not in bfp.varmap
+        if self.{{ item|lower }} != IntegerObservation::Unknown { fields += 1; }
+%% endfor
+%% for group in bfp.flag_groups
+        if self.cbits{{ loop.index }}.is_some() { fields += 1; }
+%% endfor
+        fields
+    }
+
     pub fn to_vec(&self, ctx: &Context) -> Vec<OneObservation> {
-        let mut vec = Vec::with_capacity(self.fields_observed);
+        let mut vec = Vec::with_capacity(self.fields_observed());
 %% for ctx, t in context_types.items() if ctx not in bfp.varmap
 %% set c = ctx|camelize|camelize
 %% if t in int_types
@@ -102,6 +119,83 @@ impl FullObservation {
             }
 %% endfor
         vec
+    }
+
+    pub fn apply(&mut self, obs: OneObservation) {
+        match obs {
+%% for ctx, t in context_types.items() if ctx not in bfp.varmap
+%% set c = ctx|camelize|camelize
+%% if t in int_types
+            OneObservation::{{ c }}Eq(v) => {
+                self.{{ ctx }} = self.{{ ctx }}.combine(IntegerObservation::Eq(v));
+            }
+            OneObservation::{{ c }}Ge(lo, res) => {
+                self.{{ ctx }} = self.{{ ctx }}.combine(
+                    if res {
+                        IntegerObservation::Ge(lo)
+                    } else {
+                        IntegerObservation::Le(lo - 1)
+                    }
+                );
+            }
+            OneObservation::{{ c }}Le(hi, res) => {
+                self.{{ ctx }} = self.{{ ctx }}.combine(
+                    if res {
+                        IntegerObservation::Le(hi)
+                    } else {
+                        IntegerObservation::Ge(hi + 1)
+                    }
+                );
+            }
+            OneObservation::{{ c }}Range(lo, hi, res) => {
+                assert!(res, "Negated ranges/multiple additive ranges not supported, use Eq instead");
+                self.{{ ctx }} = self.{{ ctx }}.combine(IntegerObservation::Range(lo, hi));
+            }
+%% else
+            OneObservation::{{ c }}(v) => {
+                self.{{ ctx }} = true;
+            }
+%% endif
+%% endfor
+%% for item in gl.item_max_counts|sort if item not in bfp.varmap
+%% set c = item|camelize
+%% set ctx = item|lower
+            OneObservation::{{ c }}Eq(v) => {
+                self.{{ ctx }} = self.{{ ctx }}.combine(IntegerObservation::Eq(v));
+            }
+            OneObservation::{{ c }}Ge(lo, res) => {
+                self.{{ ctx }} = self.{{ ctx }}.combine(
+                    if res {
+                        IntegerObservation::Ge(lo)
+                    } else {
+                        IntegerObservation::Le(lo - 1)
+                    }
+                );
+            }
+            OneObservation::{{ c }}Le(hi, res) => {
+                self.{{ ctx }} = self.{{ ctx }}.combine(
+                    if res {
+                        IntegerObservation::Le(hi)
+                    } else {
+                        IntegerObservation::Ge(hi + 1)
+                    }
+                );
+            }
+            OneObservation::{{ c }}Range(lo, hi, res) => {
+                assert!(res, "Negated ranges/multiple additive ranges not supported, use Eq instead");
+                self.{{ ctx }} = self.{{ ctx }}.combine(IntegerObservation::Range(lo, hi));
+            }
+%% endfor
+%% for group in bfp.flag_groups
+            OneObservation::CBits{{ loop.index }}{ mask, .. } => {
+                if let Some(old_mask) = self.cbits{{ loop.index }} {
+                    self.cbits{{ loop.index }} = Some(old_mask | mask);
+                } else {
+                    self.cbits{{ loop.index }} = Some(mask);
+                }
+            }
+%% endfor
+        }
     }
 }
 
