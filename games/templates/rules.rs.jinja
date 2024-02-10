@@ -8,9 +8,11 @@ use crate::context::*;
 use crate::graph::{self, *};
 use crate::graph_enums::*;
 use crate::items::Item;
+use crate::observe::*;
 use crate::prices::Currency;
 use crate::*;
 use analyzer::context::Ctx;
+use analyzer::matchertrie::observe::IntegerObservation;
 use analyzer::world::{self, World};
 use rustc_hash::FxHashMap;
 
@@ -36,3 +38,18 @@ pub fn explain_{{ id }}(ctx: &Context, world: &graph::World, edict: &mut FxHashM
     {{ (info.boolExpr or info.itemList)|prToRustExplain(info) }}
 }
 %% endfor
+
+%% for id, info in access_funcs.items()|sort
+pub fn observe_access_{{ id }}(ctx: &Context, world: &graph::World, full_obs: &mut FullObservation) {
+    // {{ (info.boolExpr or info.itemList).text|string|trim }}
+    {{ (info.boolExpr or info.itemList)|prToRustObserve(info) }}
+}
+%% endfor
+
+%% for id, info in action_funcs.items()|sort
+pub fn observe_action_{{ id }}(ctx: &Context, world: &graph::World, full_obs: &mut FullObservation) {
+    // {{ info.actions.text.strip() }}
+    {{ info.actions|prToRustObserve(info, id) }}
+}
+%% endfor
+

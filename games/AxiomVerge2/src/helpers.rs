@@ -5,16 +5,12 @@
 #[macro_export]
 macro_rules! helper__melee {
     ($ctx:expr, $world:expr) => {{
-        #[allow(unused_imports)]
-        use $crate::items::Item;
         ($ctx.has(Item::Ice_Axe) || $ctx.mode() == enums::Mode::Drone)
     }};
 }
 #[macro_export]
 macro_rules! hexplain__melee {
     ($ctx:expr, $world:expr, $edict:expr) => {{
-        #[allow(unused_imports)]
-        use $crate::items::Item;
         {
             let mut left = {
                 let h = $ctx.has(Item::Ice_Axe);
@@ -42,22 +38,29 @@ macro_rules! hexplain__melee {
         }
     }};
 }
+#[macro_export]
+macro_rules! hobserve__melee {
+    ($ctx:expr, $world:expr, $full_obs:expr) => {{
+        {
+            todo!();
+            if $ctx.has(Item::Ice_Axe) {
+                todo!();
+            }
+        }
+    }};
+}
 
 /// $boomerang (  )
 /// ^mode != 'drone' and Boomerang
 #[macro_export]
 macro_rules! helper__boomerang {
     ($ctx:expr, $world:expr) => {{
-        #[allow(unused_imports)]
-        use $crate::items::Item;
         ($ctx.mode() != enums::Mode::Drone && $ctx.has(Item::Boomerang))
     }};
 }
 #[macro_export]
 macro_rules! hexplain__boomerang {
     ($ctx:expr, $world:expr, $edict:expr) => {{
-        #[allow(unused_imports)]
-        use $crate::items::Item;
         {
             let mut left = {
                 let mut refs = vec!["^mode"];
@@ -85,22 +88,29 @@ macro_rules! hexplain__boomerang {
         }
     }};
 }
+#[macro_export]
+macro_rules! hobserve__boomerang {
+    ($ctx:expr, $world:expr, $full_obs:expr) => {{
+        {
+            todo!();
+            if !($ctx.mode() != enums::Mode::Drone) {
+                todo!();
+            }
+        }
+    }};
+}
 
 /// $can_damage (  )
 /// $melee or Boomerang
 #[macro_export]
 macro_rules! helper__can_damage {
     ($ctx:expr, $world:expr) => {{
-        #[allow(unused_imports)]
-        use $crate::items::Item;
         (helper__melee!($ctx, $world) || $ctx.has(Item::Boomerang))
     }};
 }
 #[macro_export]
 macro_rules! hexplain__can_damage {
     ($ctx:expr, $world:expr, $edict:expr) => {{
-        #[allow(unused_imports)]
-        use $crate::items::Item;
         {
             let mut left = {
                 let (res, mut refs) = hexplain__melee!($ctx, $world, $edict);
@@ -122,22 +132,31 @@ macro_rules! hexplain__can_damage {
         }
     }};
 }
+#[macro_export]
+macro_rules! hobserve__can_damage {
+    ($ctx:expr, $world:expr, $full_obs:expr) => {{
+        {
+            {
+                hobserve__melee!($ctx, $world, full_obs);
+            }
+            if helper__melee!($ctx, $world) {
+                todo!();
+            }
+        }
+    }};
+}
 
 /// $grab (  )
 /// ^mode != 'drone' and Ledge_Grab
 #[macro_export]
 macro_rules! helper__grab {
     ($ctx:expr, $world:expr) => {{
-        #[allow(unused_imports)]
-        use $crate::items::Item;
         ($ctx.mode() != enums::Mode::Drone && $ctx.has(Item::Ledge_Grab))
     }};
 }
 #[macro_export]
 macro_rules! hexplain__grab {
     ($ctx:expr, $world:expr, $edict:expr) => {{
-        #[allow(unused_imports)]
-        use $crate::items::Item;
         {
             let mut left = {
                 let mut refs = vec!["^mode"];
@@ -165,22 +184,29 @@ macro_rules! hexplain__grab {
         }
     }};
 }
+#[macro_export]
+macro_rules! hobserve__grab {
+    ($ctx:expr, $world:expr, $full_obs:expr) => {{
+        {
+            todo!();
+            if !($ctx.mode() != enums::Mode::Drone) {
+                todo!();
+            }
+        }
+    }};
+}
 
 /// $climb (  )
 /// ^mode != 'drone' and Wall_Climb
 #[macro_export]
 macro_rules! helper__climb {
     ($ctx:expr, $world:expr) => {{
-        #[allow(unused_imports)]
-        use $crate::items::Item;
         ($ctx.mode() != enums::Mode::Drone && $ctx.has(Item::Wall_Climb))
     }};
 }
 #[macro_export]
 macro_rules! hexplain__climb {
     ($ctx:expr, $world:expr, $edict:expr) => {{
-        #[allow(unused_imports)]
-        use $crate::items::Item;
         {
             let mut left = {
                 let mut refs = vec!["^mode"];
@@ -208,22 +234,29 @@ macro_rules! hexplain__climb {
         }
     }};
 }
+#[macro_export]
+macro_rules! hobserve__climb {
+    ($ctx:expr, $world:expr, $full_obs:expr) => {{
+        {
+            todo!();
+            if !($ctx.mode() != enums::Mode::Drone) {
+                todo!();
+            }
+        }
+    }};
+}
 
 /// $hook (  )
 /// ^mode == 'drone' and Slingshot_Hook
 #[macro_export]
 macro_rules! helper__hook {
     ($ctx:expr, $world:expr) => {{
-        #[allow(unused_imports)]
-        use $crate::items::Item;
         ($ctx.mode() == enums::Mode::Drone && $ctx.has(Item::Slingshot_Hook))
     }};
 }
 #[macro_export]
 macro_rules! hexplain__hook {
     ($ctx:expr, $world:expr, $edict:expr) => {{
-        #[allow(unused_imports)]
-        use $crate::items::Item;
         {
             let mut left = {
                 let mut refs = vec!["^mode"];
@@ -251,22 +284,29 @@ macro_rules! hexplain__hook {
         }
     }};
 }
+#[macro_export]
+macro_rules! hobserve__hook {
+    ($ctx:expr, $world:expr, $full_obs:expr) => {{
+        {
+            todo!();
+            if !($ctx.mode() == enums::Mode::Drone) {
+                todo!();
+            }
+        }
+    }};
+}
 
 /// $hover (  )
 /// ^mode == 'drone' and Drone_Hover
 #[macro_export]
 macro_rules! helper__hover {
     ($ctx:expr, $world:expr) => {{
-        #[allow(unused_imports)]
-        use $crate::items::Item;
         ($ctx.mode() == enums::Mode::Drone && $ctx.has(Item::Drone_Hover))
     }};
 }
 #[macro_export]
 macro_rules! hexplain__hover {
     ($ctx:expr, $world:expr, $edict:expr) => {{
-        #[allow(unused_imports)]
-        use $crate::items::Item;
         {
             let mut left = {
                 let mut refs = vec!["^mode"];
@@ -294,22 +334,29 @@ macro_rules! hexplain__hover {
         }
     }};
 }
+#[macro_export]
+macro_rules! hobserve__hover {
+    ($ctx:expr, $world:expr, $full_obs:expr) => {{
+        {
+            todo!();
+            if !($ctx.mode() == enums::Mode::Drone) {
+                todo!();
+            }
+        }
+    }};
+}
 
 /// $charge (  )
 /// ^mode == 'drone' and Slingshot_Charge
 #[macro_export]
 macro_rules! helper__charge {
     ($ctx:expr, $world:expr) => {{
-        #[allow(unused_imports)]
-        use $crate::items::Item;
         ($ctx.mode() == enums::Mode::Drone && $ctx.has(Item::Slingshot_Charge))
     }};
 }
 #[macro_export]
 macro_rules! hexplain__charge {
     ($ctx:expr, $world:expr, $edict:expr) => {{
-        #[allow(unused_imports)]
-        use $crate::items::Item;
         {
             let mut left = {
                 let mut refs = vec!["^mode"];
@@ -337,22 +384,29 @@ macro_rules! hexplain__charge {
         }
     }};
 }
+#[macro_export]
+macro_rules! hobserve__charge {
+    ($ctx:expr, $world:expr, $full_obs:expr) => {{
+        {
+            todo!();
+            if !($ctx.mode() == enums::Mode::Drone) {
+                todo!();
+            }
+        }
+    }};
+}
 
 /// $spin (  )
 /// ^mode == 'drone' and Slingshot_Weapon
 #[macro_export]
 macro_rules! helper__spin {
     ($ctx:expr, $world:expr) => {{
-        #[allow(unused_imports)]
-        use $crate::items::Item;
         ($ctx.mode() == enums::Mode::Drone && $ctx.has(Item::Slingshot_Weapon))
     }};
 }
 #[macro_export]
 macro_rules! hexplain__spin {
     ($ctx:expr, $world:expr, $edict:expr) => {{
-        #[allow(unused_imports)]
-        use $crate::items::Item;
         {
             let mut left = {
                 let mut refs = vec!["^mode"];
@@ -380,14 +434,23 @@ macro_rules! hexplain__spin {
         }
     }};
 }
+#[macro_export]
+macro_rules! hobserve__spin {
+    ($ctx:expr, $world:expr, $full_obs:expr) => {{
+        {
+            todo!();
+            if !($ctx.mode() == enums::Mode::Drone) {
+                todo!();
+            }
+        }
+    }};
+}
 
 /// $can_deploy (  )
 /// Remote_Drone and ^mode != 'drone' and not Anuman
 #[macro_export]
 macro_rules! helper__can_deploy {
     ($ctx:expr, $world:expr) => {{
-        #[allow(unused_imports)]
-        use $crate::items::Item;
         (($ctx.has(Item::Remote_Drone) && $ctx.mode() != enums::Mode::Drone)
             && !$ctx.has(Item::Anuman))
     }};
@@ -395,8 +458,6 @@ macro_rules! helper__can_deploy {
 #[macro_export]
 macro_rules! hexplain__can_deploy {
     ($ctx:expr, $world:expr, $edict:expr) => {{
-        #[allow(unused_imports)]
-        use $crate::items::Item;
         {
             let mut left = {
                 let mut left = {
@@ -437,22 +498,34 @@ macro_rules! hexplain__can_deploy {
         }
     }};
 }
+#[macro_export]
+macro_rules! hobserve__can_deploy {
+    ($ctx:expr, $world:expr, $full_obs:expr) => {{
+        {
+            {
+                todo!();
+                if !($ctx.has(Item::Remote_Drone)) {
+                    todo!();
+                }
+            }
+            if !($ctx.has(Item::Remote_Drone) && $ctx.mode() != enums::Mode::Drone) {
+                todo!();
+            }
+        }
+    }};
+}
 
 /// $can_recall (  )
 /// ^mode == 'drone' and not Anuman
 #[macro_export]
 macro_rules! helper__can_recall {
     ($ctx:expr, $world:expr) => {{
-        #[allow(unused_imports)]
-        use $crate::items::Item;
         ($ctx.mode() == enums::Mode::Drone && !$ctx.has(Item::Anuman))
     }};
 }
 #[macro_export]
 macro_rules! hexplain__can_recall {
     ($ctx:expr, $world:expr, $edict:expr) => {{
-        #[allow(unused_imports)]
-        use $crate::items::Item;
         {
             let mut left = {
                 let mut refs = vec!["^mode"];
@@ -480,22 +553,29 @@ macro_rules! hexplain__can_recall {
         }
     }};
 }
+#[macro_export]
+macro_rules! hobserve__can_recall {
+    ($ctx:expr, $world:expr, $full_obs:expr) => {{
+        {
+            todo!();
+            if !($ctx.mode() == enums::Mode::Drone) {
+                todo!();
+            }
+        }
+    }};
+}
 
 /// $shockwave (  )
 /// ^mode != 'drone' and Shockwave
 #[macro_export]
 macro_rules! helper__shockwave {
     ($ctx:expr, $world:expr) => {{
-        #[allow(unused_imports)]
-        use $crate::items::Item;
         ($ctx.mode() != enums::Mode::Drone && $ctx.has(Item::Shockwave))
     }};
 }
 #[macro_export]
 macro_rules! hexplain__shockwave {
     ($ctx:expr, $world:expr, $edict:expr) => {{
-        #[allow(unused_imports)]
-        use $crate::items::Item;
         {
             let mut left = {
                 let mut refs = vec!["^mode"];
@@ -523,27 +603,40 @@ macro_rules! hexplain__shockwave {
         }
     }};
 }
+#[macro_export]
+macro_rules! hobserve__shockwave {
+    ($ctx:expr, $world:expr, $full_obs:expr) => {{
+        {
+            todo!();
+            if !($ctx.mode() != enums::Mode::Drone) {
+                todo!();
+            }
+        }
+    }};
+}
 
 /// $open (  )
 /// Infect
 #[macro_export]
 macro_rules! helper__open {
     ($ctx:expr, $world:expr) => {{
-        #[allow(unused_imports)]
-        use $crate::items::Item;
         $ctx.has(Item::Infect)
     }};
 }
 #[macro_export]
 macro_rules! hexplain__open {
     ($ctx:expr, $world:expr, $edict:expr) => {{
-        #[allow(unused_imports)]
-        use $crate::items::Item;
         {
             let h = $ctx.has(Item::Infect);
             $edict.insert("Infect", format!("{}", h));
             (h, vec!["Infect"])
         }
+    }};
+}
+#[macro_export]
+macro_rules! hobserve__open {
+    ($ctx:expr, $world:expr, $full_obs:expr) => {{
+        todo!();
     }};
 }
 
@@ -552,21 +645,23 @@ macro_rules! hexplain__open {
 #[macro_export]
 macro_rules! helper__activate {
     ($ctx:expr, $world:expr) => {{
-        #[allow(unused_imports)]
-        use $crate::items::Item;
         $ctx.has(Item::Infect)
     }};
 }
 #[macro_export]
 macro_rules! hexplain__activate {
     ($ctx:expr, $world:expr, $edict:expr) => {{
-        #[allow(unused_imports)]
-        use $crate::items::Item;
         {
             let h = $ctx.has(Item::Infect);
             $edict.insert("Infect", format!("{}", h));
             (h, vec!["Infect"])
         }
+    }};
+}
+#[macro_export]
+macro_rules! hobserve__activate {
+    ($ctx:expr, $world:expr, $full_obs:expr) => {{
+        todo!();
     }};
 }
 
@@ -575,21 +670,23 @@ macro_rules! hexplain__activate {
 #[macro_export]
 macro_rules! helper__platform {
     ($ctx:expr, $world:expr) => {{
-        #[allow(unused_imports)]
-        use $crate::items::Item;
         $ctx.has(Item::Infect)
     }};
 }
 #[macro_export]
 macro_rules! hexplain__platform {
     ($ctx:expr, $world:expr, $edict:expr) => {{
-        #[allow(unused_imports)]
-        use $crate::items::Item;
         {
             let h = $ctx.has(Item::Infect);
             $edict.insert("Infect", format!("{}", h));
             (h, vec!["Infect"])
         }
+    }};
+}
+#[macro_export]
+macro_rules! hobserve__platform {
+    ($ctx:expr, $world:expr, $full_obs:expr) => {{
+        todo!();
     }};
 }
 
@@ -598,21 +695,23 @@ macro_rules! hexplain__platform {
 #[macro_export]
 macro_rules! helper__overheat {
     ($ctx:expr, $world:expr) => {{
-        #[allow(unused_imports)]
-        use $crate::items::Item;
         $ctx.has(Item::Infect)
     }};
 }
 #[macro_export]
 macro_rules! hexplain__overheat {
     ($ctx:expr, $world:expr, $edict:expr) => {{
-        #[allow(unused_imports)]
-        use $crate::items::Item;
         {
             let h = $ctx.has(Item::Infect);
             $edict.insert("Infect", format!("{}", h));
             (h, vec!["Infect"])
         }
+    }};
+}
+#[macro_export]
+macro_rules! hobserve__overheat {
+    ($ctx:expr, $world:expr, $full_obs:expr) => {{
+        todo!();
     }};
 }
 
@@ -621,21 +720,23 @@ macro_rules! hexplain__overheat {
 #[macro_export]
 macro_rules! helper__allegiance1 {
     ($ctx:expr, $world:expr) => {{
-        #[allow(unused_imports)]
-        use $crate::items::Item;
         $ctx.has(Item::Infect)
     }};
 }
 #[macro_export]
 macro_rules! hexplain__allegiance1 {
     ($ctx:expr, $world:expr, $edict:expr) => {{
-        #[allow(unused_imports)]
-        use $crate::items::Item;
         {
             let h = $ctx.has(Item::Infect);
             $edict.insert("Infect", format!("{}", h));
             (h, vec!["Infect"])
         }
+    }};
+}
+#[macro_export]
+macro_rules! hobserve__allegiance1 {
+    ($ctx:expr, $world:expr, $full_obs:expr) => {{
+        todo!();
     }};
 }
 
@@ -644,21 +745,23 @@ macro_rules! hexplain__allegiance1 {
 #[macro_export]
 macro_rules! helper__allegiance2 {
     ($ctx:expr, $world:expr) => {{
-        #[allow(unused_imports)]
-        use $crate::items::Item;
         $ctx.has(Item::Infect_L1)
     }};
 }
 #[macro_export]
 macro_rules! hexplain__allegiance2 {
     ($ctx:expr, $world:expr, $edict:expr) => {{
-        #[allow(unused_imports)]
-        use $crate::items::Item;
         {
             let h = $ctx.has(Item::Infect_L1);
             $edict.insert("Infect_L1", format!("{}", h));
             (h, vec!["Infect_L1"])
         }
+    }};
+}
+#[macro_export]
+macro_rules! hobserve__allegiance2 {
+    ($ctx:expr, $world:expr, $full_obs:expr) => {{
+        todo!();
     }};
 }
 
@@ -667,21 +770,23 @@ macro_rules! hexplain__allegiance2 {
 #[macro_export]
 macro_rules! helper__unlock2 {
     ($ctx:expr, $world:expr) => {{
-        #[allow(unused_imports)]
-        use $crate::items::Item;
         $ctx.has(Item::Infect_L1)
     }};
 }
 #[macro_export]
 macro_rules! hexplain__unlock2 {
     ($ctx:expr, $world:expr, $edict:expr) => {{
-        #[allow(unused_imports)]
-        use $crate::items::Item;
         {
             let h = $ctx.has(Item::Infect_L1);
             $edict.insert("Infect_L1", format!("{}", h));
             (h, vec!["Infect_L1"])
         }
+    }};
+}
+#[macro_export]
+macro_rules! hobserve__unlock2 {
+    ($ctx:expr, $world:expr, $full_obs:expr) => {{
+        todo!();
     }};
 }
 
@@ -690,21 +795,23 @@ macro_rules! hexplain__unlock2 {
 #[macro_export]
 macro_rules! helper__unlock3 {
     ($ctx:expr, $world:expr) => {{
-        #[allow(unused_imports)]
-        use $crate::items::Item;
         $ctx.has(Item::Infect_L2)
     }};
 }
 #[macro_export]
 macro_rules! hexplain__unlock3 {
     ($ctx:expr, $world:expr, $edict:expr) => {{
-        #[allow(unused_imports)]
-        use $crate::items::Item;
         {
             let h = $ctx.has(Item::Infect_L2);
             $edict.insert("Infect_L2", format!("{}", h));
             (h, vec!["Infect_L2"])
         }
+    }};
+}
+#[macro_export]
+macro_rules! hobserve__unlock3 {
+    ($ctx:expr, $world:expr, $full_obs:expr) => {{
+        todo!();
     }};
 }
 
@@ -713,21 +820,23 @@ macro_rules! hexplain__unlock3 {
 #[macro_export]
 macro_rules! helper__unlock4 {
     ($ctx:expr, $world:expr) => {{
-        #[allow(unused_imports)]
-        use $crate::items::Item;
         $ctx.has(Item::Infect_L3)
     }};
 }
 #[macro_export]
 macro_rules! hexplain__unlock4 {
     ($ctx:expr, $world:expr, $edict:expr) => {{
-        #[allow(unused_imports)]
-        use $crate::items::Item;
         {
             let h = $ctx.has(Item::Infect_L3);
             $edict.insert("Infect_L3", format!("{}", h));
             (h, vec!["Infect_L3"])
         }
+    }};
+}
+#[macro_export]
+macro_rules! hobserve__unlock4 {
+    ($ctx:expr, $world:expr, $full_obs:expr) => {{
+        todo!();
     }};
 }
 
@@ -736,16 +845,12 @@ macro_rules! hexplain__unlock4 {
 #[macro_export]
 macro_rules! helper__mist2 {
     ($ctx:expr, $world:expr) => {{
-        #[allow(unused_imports)]
-        use $crate::items::Item;
         ($ctx.has(Item::Nanite_Mist) && $ctx.has(Item::Mist_Upgrade))
     }};
 }
 #[macro_export]
 macro_rules! hexplain__mist2 {
     ($ctx:expr, $world:expr, $edict:expr) => {{
-        #[allow(unused_imports)]
-        use $crate::items::Item;
         {
             let mut left = {
                 let h = $ctx.has(Item::Nanite_Mist);
@@ -766,22 +871,29 @@ macro_rules! hexplain__mist2 {
         }
     }};
 }
+#[macro_export]
+macro_rules! hobserve__mist2 {
+    ($ctx:expr, $world:expr, $full_obs:expr) => {{
+        {
+            todo!();
+            if !($ctx.has(Item::Nanite_Mist)) {
+                todo!();
+            }
+        }
+    }};
+}
 
 /// $ft_main (  )
 /// Fast_Travel and ^realm == 'main'
 #[macro_export]
 macro_rules! helper__ft_main {
     ($ctx:expr, $world:expr) => {{
-        #[allow(unused_imports)]
-        use $crate::items::Item;
         ($ctx.has(Item::Fast_Travel) && data::realm($ctx.position()) == enums::Realm::Main)
     }};
 }
 #[macro_export]
 macro_rules! hexplain__ft_main {
     ($ctx:expr, $world:expr, $edict:expr) => {{
-        #[allow(unused_imports)]
-        use $crate::items::Item;
         {
             let mut left = {
                 let h = $ctx.has(Item::Fast_Travel);
@@ -809,22 +921,29 @@ macro_rules! hexplain__ft_main {
         }
     }};
 }
+#[macro_export]
+macro_rules! hobserve__ft_main {
+    ($ctx:expr, $world:expr, $full_obs:expr) => {{
+        {
+            todo!();
+            if !($ctx.has(Item::Fast_Travel)) {
+                todo!();
+            }
+        }
+    }};
+}
 
 /// $ft_breach (  )
 /// Fast_Travel and ^realm == 'breach'
 #[macro_export]
 macro_rules! helper__ft_breach {
     ($ctx:expr, $world:expr) => {{
-        #[allow(unused_imports)]
-        use $crate::items::Item;
         ($ctx.has(Item::Fast_Travel) && data::realm($ctx.position()) == enums::Realm::Breach)
     }};
 }
 #[macro_export]
 macro_rules! hexplain__ft_breach {
     ($ctx:expr, $world:expr, $edict:expr) => {{
-        #[allow(unused_imports)]
-        use $crate::items::Item;
         {
             let mut left = {
                 let h = $ctx.has(Item::Fast_Travel);
@@ -852,14 +971,23 @@ macro_rules! hexplain__ft_breach {
         }
     }};
 }
+#[macro_export]
+macro_rules! hobserve__ft_breach {
+    ($ctx:expr, $world:expr, $full_obs:expr) => {{
+        {
+            todo!();
+            if !($ctx.has(Item::Fast_Travel)) {
+                todo!();
+            }
+        }
+    }};
+}
 
 /// $range1 (  )
 /// Infection_Range_2 or (Infection_Range and ^mode != 'drone')
 #[macro_export]
 macro_rules! helper__range1 {
     ($ctx:expr, $world:expr) => {{
-        #[allow(unused_imports)]
-        use $crate::items::Item;
         ($ctx.has(Item::Infection_Range_2)
             || ($ctx.has(Item::Infection_Range) && $ctx.mode() != enums::Mode::Drone))
     }};
@@ -867,8 +995,6 @@ macro_rules! helper__range1 {
 #[macro_export]
 macro_rules! hexplain__range1 {
     ($ctx:expr, $world:expr, $edict:expr) => {{
-        #[allow(unused_imports)]
-        use $crate::items::Item;
         {
             let mut left = {
                 let h = $ctx.has(Item::Infection_Range_2);
@@ -909,14 +1035,28 @@ macro_rules! hexplain__range1 {
         }
     }};
 }
+#[macro_export]
+macro_rules! hobserve__range1 {
+    ($ctx:expr, $world:expr, $full_obs:expr) => {{
+        {
+            todo!();
+            if $ctx.has(Item::Infection_Range_2) {
+                {
+                    todo!();
+                    if !($ctx.has(Item::Infection_Range)) {
+                        todo!();
+                    }
+                }
+            }
+        }
+    }};
+}
 
 /// $range2 (  )
 /// Infection_Range_3 or (Infection_Range_2 and ^mode != 'drone')
 #[macro_export]
 macro_rules! helper__range2 {
     ($ctx:expr, $world:expr) => {{
-        #[allow(unused_imports)]
-        use $crate::items::Item;
         ($ctx.has(Item::Infection_Range_3)
             || ($ctx.has(Item::Infection_Range_2) && $ctx.mode() != enums::Mode::Drone))
     }};
@@ -924,8 +1064,6 @@ macro_rules! helper__range2 {
 #[macro_export]
 macro_rules! hexplain__range2 {
     ($ctx:expr, $world:expr, $edict:expr) => {{
-        #[allow(unused_imports)]
-        use $crate::items::Item;
         {
             let mut left = {
                 let h = $ctx.has(Item::Infection_Range_3);
@@ -966,22 +1104,34 @@ macro_rules! hexplain__range2 {
         }
     }};
 }
+#[macro_export]
+macro_rules! hobserve__range2 {
+    ($ctx:expr, $world:expr, $full_obs:expr) => {{
+        {
+            todo!();
+            if $ctx.has(Item::Infection_Range_3) {
+                {
+                    todo!();
+                    if !($ctx.has(Item::Infection_Range_2)) {
+                        todo!();
+                    }
+                }
+            }
+        }
+    }};
+}
 
 /// $range3 (  )
 /// Infection_Range_3 and ^mode != 'drone'
 #[macro_export]
 macro_rules! helper__range3 {
     ($ctx:expr, $world:expr) => {{
-        #[allow(unused_imports)]
-        use $crate::items::Item;
         ($ctx.has(Item::Infection_Range_3) && $ctx.mode() != enums::Mode::Drone)
     }};
 }
 #[macro_export]
 macro_rules! hexplain__range3 {
     ($ctx:expr, $world:expr, $edict:expr) => {{
-        #[allow(unused_imports)]
-        use $crate::items::Item;
         {
             let mut left = {
                 let h = $ctx.has(Item::Infection_Range_3);
@@ -1009,22 +1159,29 @@ macro_rules! hexplain__range3 {
         }
     }};
 }
+#[macro_export]
+macro_rules! hobserve__range3 {
+    ($ctx:expr, $world:expr, $full_obs:expr) => {{
+        {
+            todo!();
+            if !($ctx.has(Item::Infection_Range_3)) {
+                todo!();
+            }
+        }
+    }};
+}
 
 /// $more_refills (  )
 /// ^refills < $count(Power_Matrix)
 #[macro_export]
 macro_rules! helper__more_refills {
     ($ctx:expr, $world:expr) => {{
-        #[allow(unused_imports)]
-        use $crate::items::Item;
         Into::<i32>::into($ctx.refills()) < $ctx.count(Item::Power_Matrix).into()
     }};
 }
 #[macro_export]
 macro_rules! hexplain__more_refills {
     ($ctx:expr, $world:expr, $edict:expr) => {{
-        #[allow(unused_imports)]
-        use $crate::items::Item;
         {
             let mut refs = vec!["^refills", "$count(Power_Matrix)"];
             let mut left = {
@@ -1045,14 +1202,18 @@ macro_rules! hexplain__more_refills {
         }
     }};
 }
+#[macro_export]
+macro_rules! hobserve__more_refills {
+    ($ctx:expr, $world:expr, $full_obs:expr) => {{
+        todo!();
+    }};
+}
 
 /// $max_energy (  )
 /// PER Nano_Points { 3 => 450, 2 => 400, 1 => 350, _ => 300 }
 #[macro_export]
 macro_rules! helper__max_energy {
     ($ctx:expr, $world:expr) => {{
-        #[allow(unused_imports)]
-        use $crate::items::Item;
         match $ctx.count(Item::Nano_Points) {
             3 => 450,
             2 => 400,
@@ -1064,8 +1225,6 @@ macro_rules! helper__max_energy {
 #[macro_export]
 macro_rules! hexplain__max_energy {
     ($ctx:expr, $world:expr, $edict:expr) => {{
-        #[allow(unused_imports)]
-        use $crate::items::Item;
         {
             let mut refs = vec!["Nano_Points count"];
             let ct = $ctx.count(Item::Nano_Points);
@@ -1081,22 +1240,24 @@ macro_rules! hexplain__max_energy {
         }
     }};
 }
+#[macro_export]
+macro_rules! hobserve__max_energy {
+    ($ctx:expr, $world:expr, $full_obs:expr) => {{
+        todo!();
+    }};
+}
 
 /// $bs (  )
 /// boomerang_steering and $boomerang
 #[macro_export]
 macro_rules! helper__bs {
     ($ctx:expr, $world:expr) => {{
-        #[allow(unused_imports)]
-        use $crate::items::Item;
         ($ctx.boomerang_steering() && helper__boomerang!($ctx, $world))
     }};
 }
 #[macro_export]
 macro_rules! hexplain__bs {
     ($ctx:expr, $world:expr, $edict:expr) => {{
-        #[allow(unused_imports)]
-        use $crate::items::Item;
         {
             let mut left = {
                 let s = $ctx.boomerang_steering();
@@ -1118,22 +1279,31 @@ macro_rules! hexplain__bs {
         }
     }};
 }
+#[macro_export]
+macro_rules! hobserve__bs {
+    ($ctx:expr, $world:expr, $full_obs:expr) => {{
+        {
+            todo!();
+            if !($ctx.boomerang_steering()) {
+                {
+                    hobserve__boomerang!($ctx, $world, full_obs);
+                }
+            }
+        }
+    }};
+}
 
 /// $offset (  )
 /// major_glitches and $melee
 #[macro_export]
 macro_rules! helper__offset {
     ($ctx:expr, $world:expr) => {{
-        #[allow(unused_imports)]
-        use $crate::items::Item;
         ($ctx.major_glitches() && helper__melee!($ctx, $world))
     }};
 }
 #[macro_export]
 macro_rules! hexplain__offset {
     ($ctx:expr, $world:expr, $edict:expr) => {{
-        #[allow(unused_imports)]
-        use $crate::items::Item;
         {
             let mut left = {
                 let s = $ctx.major_glitches();
@@ -1155,22 +1325,31 @@ macro_rules! hexplain__offset {
         }
     }};
 }
+#[macro_export]
+macro_rules! hobserve__offset {
+    ($ctx:expr, $world:expr, $full_obs:expr) => {{
+        {
+            todo!();
+            if !($ctx.major_glitches()) {
+                {
+                    hobserve__melee!($ctx, $world, full_obs);
+                }
+            }
+        }
+    }};
+}
 
 /// $block_clip (  )
 /// minor_glitches and ^mode == 'drone'
 #[macro_export]
 macro_rules! helper__block_clip {
     ($ctx:expr, $world:expr) => {{
-        #[allow(unused_imports)]
-        use $crate::items::Item;
         ($ctx.minor_glitches() && $ctx.mode() == enums::Mode::Drone)
     }};
 }
 #[macro_export]
 macro_rules! hexplain__block_clip {
     ($ctx:expr, $world:expr, $edict:expr) => {{
-        #[allow(unused_imports)]
-        use $crate::items::Item;
         {
             let mut left = {
                 let s = $ctx.minor_glitches();
@@ -1198,22 +1377,29 @@ macro_rules! hexplain__block_clip {
         }
     }};
 }
+#[macro_export]
+macro_rules! hobserve__block_clip {
+    ($ctx:expr, $world:expr, $full_obs:expr) => {{
+        {
+            todo!();
+            if !($ctx.minor_glitches()) {
+                todo!();
+            }
+        }
+    }};
+}
 
 /// $block_clip_escape (  )
 /// minor_glitches and $hook
 #[macro_export]
 macro_rules! helper__block_clip_escape {
     ($ctx:expr, $world:expr) => {{
-        #[allow(unused_imports)]
-        use $crate::items::Item;
         ($ctx.minor_glitches() && helper__hook!($ctx, $world))
     }};
 }
 #[macro_export]
 macro_rules! hexplain__block_clip_escape {
     ($ctx:expr, $world:expr, $edict:expr) => {{
-        #[allow(unused_imports)]
-        use $crate::items::Item;
         {
             let mut left = {
                 let s = $ctx.minor_glitches();
@@ -1235,22 +1421,31 @@ macro_rules! hexplain__block_clip_escape {
         }
     }};
 }
+#[macro_export]
+macro_rules! hobserve__block_clip_escape {
+    ($ctx:expr, $world:expr, $full_obs:expr) => {{
+        {
+            todo!();
+            if !($ctx.minor_glitches()) {
+                {
+                    hobserve__hook!($ctx, $world, full_obs);
+                }
+            }
+        }
+    }};
+}
 
 /// $infinite_climb (  )
 /// Anuman and Wall_Climb and Drone_Hover
 #[macro_export]
 macro_rules! helper__infinite_climb {
     ($ctx:expr, $world:expr) => {{
-        #[allow(unused_imports)]
-        use $crate::items::Item;
         (($ctx.has(Item::Anuman) && $ctx.has(Item::Wall_Climb)) && $ctx.has(Item::Drone_Hover))
     }};
 }
 #[macro_export]
 macro_rules! hexplain__infinite_climb {
     ($ctx:expr, $world:expr, $edict:expr) => {{
-        #[allow(unused_imports)]
-        use $crate::items::Item;
         {
             let mut left = {
                 let mut left = {
@@ -1284,14 +1479,28 @@ macro_rules! hexplain__infinite_climb {
         }
     }};
 }
+#[macro_export]
+macro_rules! hobserve__infinite_climb {
+    ($ctx:expr, $world:expr, $full_obs:expr) => {{
+        {
+            {
+                todo!();
+                if !($ctx.has(Item::Anuman)) {
+                    todo!();
+                }
+            }
+            if !($ctx.has(Item::Anuman) && $ctx.has(Item::Wall_Climb)) {
+                todo!();
+            }
+        }
+    }};
+}
 
 /// $attract (  )
 /// Breach_Attractor and (Anuman or ^mode != 'drone' or ^indra WITHIN ^position)
 #[macro_export]
 macro_rules! helper__attract {
     ($ctx:expr, $world:expr) => {{
-        #[allow(unused_imports)]
-        use $crate::items::Item;
         ($ctx.has(Item::Breach_Attractor)
             && (($ctx.has(Item::Anuman) || $ctx.mode() != enums::Mode::Drone)
                 || $ctx.indra() == $ctx.position()))
@@ -1300,8 +1509,6 @@ macro_rules! helper__attract {
 #[macro_export]
 macro_rules! hexplain__attract {
     ($ctx:expr, $world:expr, $edict:expr) => {{
-        #[allow(unused_imports)]
-        use $crate::items::Item;
         {
             let mut left = {
                 let h = $ctx.has(Item::Breach_Attractor);
@@ -1357,14 +1564,33 @@ macro_rules! hexplain__attract {
         }
     }};
 }
+#[macro_export]
+macro_rules! hobserve__attract {
+    ($ctx:expr, $world:expr, $full_obs:expr) => {{
+        {
+            todo!();
+            if !($ctx.has(Item::Breach_Attractor)) {
+                {
+                    {
+                        todo!();
+                        if $ctx.has(Item::Anuman) {
+                            todo!();
+                        }
+                    }
+                    if ($ctx.has(Item::Anuman) || $ctx.mode() != enums::Mode::Drone) {
+                        todo!();
+                    }
+                }
+            }
+        }
+    }};
+}
 
 /// $all_notes (  )
 /// [Dear_Ernest, Researchers_Missing, Letter_from_Trace,  Heretics_Tablet, Terminal_Breakthrough_1, Companies_Layoff, Record_Losses,  Under_Siege, The_Ideal_Kiengir, Building_of_the_School, Commemorative_Speech,  Terminal_Breakthrough_2, Dangerous_Ideas, Storm_Bomb, Suspension_Bridge, Plague_of_Thoughts,  Lament_for_Fools, Family_Tragedy, Destruction_Pogrom]
 #[macro_export]
 macro_rules! helper__all_notes {
     ($ctx:expr, $world:expr) => {{
-        #[allow(unused_imports)]
-        use $crate::items::Item;
         $ctx.has(Item::Dear_Ernest)
             && $ctx.has(Item::Researchers_Missing)
             && $ctx.has(Item::Letter_from_Trace)
@@ -1389,8 +1615,6 @@ macro_rules! helper__all_notes {
 #[macro_export]
 macro_rules! hexplain__all_notes {
     ($ctx:expr, $world:expr, $edict:expr) => {{
-        #[allow(unused_imports)]
-        use $crate::items::Item;
         {
             let mut refs = Vec::new();
             let mut h = {
@@ -1565,22 +1789,24 @@ macro_rules! hexplain__all_notes {
         }
     }};
 }
+#[macro_export]
+macro_rules! hobserve__all_notes {
+    ($ctx:expr, $world:expr, $full_obs:expr) => {{
+        todo!();
+    }};
+}
 
 /// $all_flasks (  )
 /// [Flask{13}, Big_Flask]
 #[macro_export]
 macro_rules! helper__all_flasks {
     ($ctx:expr, $world:expr) => {{
-        #[allow(unused_imports)]
-        use $crate::items::Item;
         $ctx.count(Item::Flask) >= 13 && $ctx.has(Item::Big_Flask)
     }};
 }
 #[macro_export]
 macro_rules! hexplain__all_flasks {
     ($ctx:expr, $world:expr, $edict:expr) => {{
-        #[allow(unused_imports)]
-        use $crate::items::Item;
         {
             let mut refs = Vec::new();
             let mut h = {
@@ -1602,22 +1828,24 @@ macro_rules! hexplain__all_flasks {
         }
     }};
 }
+#[macro_export]
+macro_rules! hobserve__all_flasks {
+    ($ctx:expr, $world:expr, $full_obs:expr) => {{
+        todo!();
+    }};
+}
 
 /// $all_health (  )
 /// [Health_Node, Health_Fragment{6}]
 #[macro_export]
 macro_rules! helper__all_health {
     ($ctx:expr, $world:expr) => {{
-        #[allow(unused_imports)]
-        use $crate::items::Item;
         $ctx.has(Item::Health_Node) && $ctx.count(Item::Health_Fragment) >= 6
     }};
 }
 #[macro_export]
 macro_rules! hexplain__all_health {
     ($ctx:expr, $world:expr, $edict:expr) => {{
-        #[allow(unused_imports)]
-        use $crate::items::Item;
         {
             let mut refs = Vec::new();
             let mut h = {
@@ -1639,22 +1867,24 @@ macro_rules! hexplain__all_health {
         }
     }};
 }
+#[macro_export]
+macro_rules! hobserve__all_health {
+    ($ctx:expr, $world:expr, $full_obs:expr) => {{
+        todo!();
+    }};
+}
 
 /// $all_weapons (  )
 /// [Boomerang, Ice_Axe, Bronze_Axe]
 #[macro_export]
 macro_rules! helper__all_weapons {
     ($ctx:expr, $world:expr) => {{
-        #[allow(unused_imports)]
-        use $crate::items::Item;
         $ctx.has(Item::Boomerang) && $ctx.has(Item::Ice_Axe) && $ctx.has(Item::Bronze_Axe)
     }};
 }
 #[macro_export]
 macro_rules! hexplain__all_weapons {
     ($ctx:expr, $world:expr, $edict:expr) => {{
-        #[allow(unused_imports)]
-        use $crate::items::Item;
         {
             let mut refs = Vec::new();
             let mut h = {
@@ -1685,14 +1915,18 @@ macro_rules! hexplain__all_weapons {
         }
     }};
 }
+#[macro_export]
+macro_rules! hobserve__all_weapons {
+    ($ctx:expr, $world:expr, $full_obs:expr) => {{
+        todo!();
+    }};
+}
 
 /// $other_items (  )
 /// [Compass, Power_Matrix, Nano_Lattice_2, Eye_Ring]
 #[macro_export]
 macro_rules! helper__other_items {
     ($ctx:expr, $world:expr) => {{
-        #[allow(unused_imports)]
-        use $crate::items::Item;
         $ctx.has(Item::Compass)
             && $ctx.has(Item::Power_Matrix)
             && $ctx.has(Item::Nano_Lattice_2)
@@ -1702,8 +1936,6 @@ macro_rules! helper__other_items {
 #[macro_export]
 macro_rules! hexplain__other_items {
     ($ctx:expr, $world:expr, $edict:expr) => {{
-        #[allow(unused_imports)]
-        use $crate::items::Item;
         {
             let mut refs = Vec::new();
             let mut h = {
@@ -1743,14 +1975,18 @@ macro_rules! hexplain__other_items {
         }
     }};
 }
+#[macro_export]
+macro_rules! hobserve__other_items {
+    ($ctx:expr, $world:expr, $full_obs:expr) => {{
+        todo!();
+    }};
+}
 
 /// $all_urns (  )
 /// [Amashilama, Ledge_Grab, Infect, Remote_Drone, Shockwave, Wall_Climb, Slingshot_Hook, Breach_Sight,  Drone_Hover, Fast_Travel, Anuman]
 #[macro_export]
 macro_rules! helper__all_urns {
     ($ctx:expr, $world:expr) => {{
-        #[allow(unused_imports)]
-        use $crate::items::Item;
         $ctx.has(Item::Amashilama)
             && $ctx.has(Item::Ledge_Grab)
             && $ctx.has(Item::Infect)
@@ -1767,8 +2003,6 @@ macro_rules! helper__all_urns {
 #[macro_export]
 macro_rules! hexplain__all_urns {
     ($ctx:expr, $world:expr, $edict:expr) => {{
-        #[allow(unused_imports)]
-        use $crate::items::Item;
         {
             let mut refs = Vec::new();
             let mut h = {
@@ -1871,69 +2105,100 @@ macro_rules! hexplain__all_urns {
         }
     }};
 }
+#[macro_export]
+macro_rules! hobserve__all_urns {
+    ($ctx:expr, $world:expr, $full_obs:expr) => {{
+        todo!();
+    }};
+}
 
 /// $save (  )
 /// ^save = ^position; $refill_energy
 #[macro_export]
 macro_rules! helper__save {
     ($ctx:expr, $world:expr) => {{
-        #[allow(unused_imports)]
-        use $crate::items::Item;
         $ctx.set_save($ctx.position());
         helper__refill_energy!($ctx, $world);
     }};
 }
+#[macro_export]
+macro_rules! hobserve__save {
+    ($ctx:expr, $world:expr, $full_obs:expr) => {{
+        {
+            hobserve__refill_energy!($ctx, $world, full_obs);
+        }
+    }};
+}
+
 /// $refill_energy (  )
 /// ^energy = $max_energy
 #[macro_export]
 macro_rules! helper__refill_energy {
     ($ctx:expr, $world:expr) => {{
-        #[allow(unused_imports)]
-        use $crate::items::Item;
         $ctx.set_energy(helper__max_energy!($ctx, $world));
     }};
 }
+#[macro_export]
+macro_rules! hobserve__refill_energy {
+    ($ctx:expr, $world:expr, $full_obs:expr) => {{
+        todo!();
+    }};
+}
+
 /// $deploy_drone (  )
 /// ^mode = 'drone'; ^indra = ^position;
 #[macro_export]
 macro_rules! helper__deploy_drone {
     ($ctx:expr, $world:expr) => {{
-        #[allow(unused_imports)]
-        use $crate::items::Item;
         $ctx.set_mode(enums::Mode::Drone);
         $ctx.set_indra($ctx.position());
     }};
 }
+#[macro_export]
+macro_rules! hobserve__deploy_drone {
+    ($ctx:expr, $world:expr, $full_obs:expr) => {{
+        todo!();
+    }};
+}
+
 /// $deploy_drone_and_move ( TypedVar(name='indrapos', type='SpotId') )
 /// ^mode = 'drone'; ^indra = ^indrapos;
 #[macro_export]
 macro_rules! helper__deploy_drone_and_move {
     ($ctx:expr, $world:expr, $indrapos:expr) => {{
-        #[allow(unused_imports)]
-        use $crate::items::Item;
         $ctx.set_mode(enums::Mode::Drone);
         $ctx.set_indra($indrapos);
     }};
 }
+#[macro_export]
+macro_rules! hobserve__deploy_drone_and_move {
+    ($ctx:expr, $world:expr, $indrapos:expr, $full_obs:expr) => {{
+        todo!();
+    }};
+}
+
 /// $save_last (  )
 /// IF (^last WITHIN $default) { ^last = ^position }
 #[macro_export]
 macro_rules! helper__save_last {
     ($ctx:expr, $world:expr) => {{
-        #[allow(unused_imports)]
-        use $crate::items::Item;
         if $ctx.last() == Default::default() {
             $ctx.set_last($ctx.position());
         }
     }};
 }
+#[macro_export]
+macro_rules! hobserve__save_last {
+    ($ctx:expr, $world:expr, $full_obs:expr) => {{
+        todo!();
+    }};
+}
+
 /// $reset_old_area ( TypedVar(name='newpos', type='SpotId') )
 /// IF (^position NOT WITHIN `Menu`     AND ^position NOT WITHIN ^prev_area     AND ^newpos NOT WITHIN $get_area(^position)) {         IF (^newpos NOT WITHIN ^prev_area) {             $reset_area(^prev_area);         };         ^prev_area = $get_area(^position); } ELSE IF (^position WITHIN `Menu > Warp Only`            AND ^last NOT WITHIN ^prev_area            AND ^newpos NOT WITHIN $get_area(^last)) {                IF (^newpos NOT WITHIN ^prev_area) {                    $reset_area(^prev_area);                };                ^prev_area = $get_area(^last);                ^last = $default; }
 #[macro_export]
 macro_rules! helper__reset_old_area {
     ($ctx:expr, $world:expr, $newpos:expr) => {{
-        #[allow(unused_imports)]
-        use $crate::items::Item;
         if (($ctx.position() != SpotId::None
             && get_region($ctx.position()) != RegionId::Menu
             && $ctx.position() != SpotId::None
@@ -1958,41 +2223,62 @@ macro_rules! helper__reset_old_area {
         }
     }};
 }
+#[macro_export]
+macro_rules! hobserve__reset_old_area {
+    ($ctx:expr, $world:expr, $newpos:expr, $full_obs:expr) => {{
+        todo!();
+    }};
+}
+
 /// $main_portal_save_update (  )
 /// ^save = ^portal_default
 #[macro_export]
 macro_rules! helper__main_portal_save_update {
     ($ctx:expr, $world:expr) => {{
-        #[allow(unused_imports)]
-        use $crate::items::Item;
         $ctx.set_save(data::portal_default($ctx.position()));
     }};
 }
+#[macro_export]
+macro_rules! hobserve__main_portal_save_update {
+    ($ctx:expr, $world:expr, $full_obs:expr) => {{
+        todo!();
+    }};
+}
+
 /// $breach_portal_save_update (  )
 /// ^breach_save = ^portal_default
 #[macro_export]
 macro_rules! helper__breach_portal_save_update {
     ($ctx:expr, $world:expr) => {{
-        #[allow(unused_imports)]
-        use $crate::items::Item;
         $ctx.set_breach_save(data::portal_default($ctx.position()));
     }};
 }
+#[macro_export]
+macro_rules! hobserve__breach_portal_save_update {
+    ($ctx:expr, $world:expr, $full_obs:expr) => {{
+        todo!();
+    }};
+}
+
 /// $clear_breach_save (  )
 /// ^breach_save = $default
 #[macro_export]
 macro_rules! helper__clear_breach_save {
     ($ctx:expr, $world:expr) => {{
-        #[allow(unused_imports)]
-        use $crate::items::Item;
         $ctx.set_breach_save(Default::default());
     }};
 }
+#[macro_export]
+macro_rules! hobserve__clear_breach_save {
+    ($ctx:expr, $world:expr, $full_obs:expr) => {{
+        todo!();
+    }};
+}
+
 /// Rule $victory
 #[macro_export]
 macro_rules! rule__victory {
     ($ctx:expr, $world:expr) => {{
-        use $crate::graph_enums::*;
         use $crate::rules;
         match $world.rule_victory {
             RuleVictory::Default => rules::access___escape_objective($ctx, $world),
@@ -2004,7 +2290,6 @@ macro_rules! rule__victory {
 #[macro_export]
 macro_rules! rexplain__victory {
     ($ctx:expr, $world:expr, $edict:expr) => {{
-        use $crate::graph_enums::*;
         use $crate::rules;
         match $world.rule_victory {
             RuleVictory::Default => rules::explain___escape_objective($ctx, $world, $edict),
@@ -2013,12 +2298,22 @@ macro_rules! rexplain__victory {
         }
     }};
 }
+#[macro_export]
+macro_rules! robserve__victory {
+    ($ctx:expr, $world:expr, $full_obs:expr) => {{
+        use $crate::rules;
+        match $world.rule_victory {
+            RuleVictory::Default => rules::observe_access___escape_objective($ctx, $world),
+            RuleVictory::JustObjective => rules::observe_access___objective($ctx, $world),
+            RuleVictory::Bench => rules::observe_access___remote_drone_flask__6($ctx, $world),
+        }
+    }};
+}
 
 /// Rule $objective
 #[macro_export]
 macro_rules! rule__objective {
     ($ctx:expr, $world:expr) => {{
-        use $crate::graph_enums::*;
         use $crate::rules;
         match $world.rule_objective {
             RuleObjective::Start => rules::access___remote_drone($ctx, $world),
@@ -2033,7 +2328,6 @@ macro_rules! rule__objective {
 #[macro_export]
 macro_rules! rexplain__objective {
     ($ctx:expr, $world:expr, $edict:expr) => {{
-        use $crate::graph_enums::*;
         use $crate::rules;
         match $world.rule_objective {
             RuleObjective::Start => rules::explain___remote_drone($ctx, $world, $edict),
@@ -2041,6 +2335,20 @@ macro_rules! rexplain__objective {
                 rules::explain___all_urns_all_weapons_other_items_all_notes_all_health_all_flasks(
                     $ctx, $world, $edict,
                 )
+            }
+        }
+    }};
+}
+#[macro_export]
+macro_rules! robserve__objective {
+    ($ctx:expr, $world:expr, $full_obs:expr) => {{
+        use $crate::rules;
+        match $world.rule_objective {
+            RuleObjective::Start => {
+                rules::observe_access___remote_drone($ctx, $world)
+            }
+            RuleObjective::AllItems => {
+                rules::observe_access___all_urns_all_weapons_other_items_all_notes_all_health_all_flasks($ctx, $world)
             }
         }
     }};

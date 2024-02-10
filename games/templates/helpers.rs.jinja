@@ -17,8 +17,13 @@ macro_rules! hexplain__{{ funcname }} {
         {{ info.pr|prToRustExplain({})|string|escape_ctx }}
     {{ '}}' }};
 }
-
 %% endif
+#[macro_export]
+macro_rules! hobserve__{{ funcname }} {
+    ($ctx:expr, $world:expr{% for a in info.args %}, ${{ a.name }}:expr{% endfor %}, $full_obs:expr) => {{ '{{' }}
+        {{ info.pr|prToRustObserve({})|string|escape_ctx }}
+    {{ '}}' }};
+}
 
 %% endfor
 
@@ -52,7 +57,19 @@ macro_rules! rexplain__{{ funcname }} {
         }
     {{ '}}' }};
 }
-
 %% endif
+#[macro_export]
+macro_rules! robserve__{{ funcname }} {
+    ($ctx:expr, $world:expr, $full_obs:expr) => {{ '{{' }}
+        use $crate::rules;
+        match $world.rule_{{ funcname }} {
+%% for v, info in rule.variants.items()
+            Rule{{ name[1:]|camelize }}::{{ v|construct_id|camelize }} => {
+                rules::observe_{% if rule.rule == 'actions' %}action_{% else %}access_{% endif %}{{ info.func_id }}($ctx, $world)
+            }
+%% endfor
+        }
+    {{ '}}' }};
+}
 
 %% endfor

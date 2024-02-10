@@ -1601,7 +1601,15 @@ class GameLogic(object):
                                     self.get_local_ctx(info),
                                     self.data_types,
                                     id or pr.name).visit(pr.tree)
-
+    
+    def prToRustObserve(self, pr, info, id=None):
+        return RustObservationVisitor(self.item_max_counts,
+                                      self.rules,
+                                      self.context_types,
+                                      self.action_funcs,
+                                      self.get_local_ctx(info),
+                                      self.data_types,
+                                      id or pr.name).visit(pr.tree)
 
     def render(self):
         env = jinja2.Environment(loader=jinja2.FileSystemLoader(templates_dir),
@@ -1622,6 +1630,7 @@ class GameLogic(object):
             'hex': hex,
             'prToRust': self.prToRust,
             'prToRustExplain': self.prToRustExplain,
+            'prToRustObserve': self.prToRustObserve,
             'region_id_from_id': self.region_id_from_id,
             'str_to_rusttype': str_to_rusttype,
             'target_id_from_id': self.target_id_from_id,

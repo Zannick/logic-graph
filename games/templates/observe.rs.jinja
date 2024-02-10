@@ -223,6 +223,66 @@ impl FullObservation {
 %% endfor
         }
     }
+
+%# This might get used instead of apply.-
+%% for ctx, t in context_types.items()
+%% if ctx in bfp.varmap
+    pub fn observe_{{ ctx }}(&mut self) {
+        self.cbits{{ bfp.varmap[ctx] }}.insert(flags::ContextBits{{ bfp.varmap[ctx] }}::{{ ctx|upper }});
+    }
+%% elif t in int_types
+    pub fn observe_{{ ctx }}(&mut self, obs: IntegerObservation<{{ t }}>) {
+        self.{{ ctx }} = self.{{ ctx }}.combine(obs);
+    }
+%% else
+    pub fn observe_{{ ctx }}(&mut self) {
+        self.{{ ctx }} = true;
+    }
+%% endif
+%% endfor
+%% for item, ct in gl.item_max_counts.items()|sort
+%% set ctx = item|lower
+%% if item in bfp.varmap
+    pub fn observe_{{ ctx }}(&mut self) {
+        self.cbits{{ bfp.varmap[item] }}.insert(flags::ContextBits{{ bfp.varmap[item] }}::{{ item|upper }});
+    }
+%% else
+    pub fn observe_{{ ctx }}(&mut self, obs: IntegerObservation<{{ ct|get_int_type_for_max }}>) {
+        self.{{ ctx }} = self.{{ ctx }}.combine(obs);
+    }
+%% endif
+%% endfor
+
+    pub fn observe_visit(&mut self, loc_id: LocationId) {
+        match loc_id {
+%% for loc in gl.locations()
+%% set visit = 'VISITED_' + loc.id
+%% set skip = 'SKIPPED_' + loc.id
+            LocationId::{{ loc.id }} =>  {
+                self.cbits{{ bfp.varmap[visit] }}.insert(flags::ContextBits{{ bfp.varmap[visit] }}::{{ visit|upper }});
+                self.cbits{{ bfp.varmap[skip] }}.insert(flags::ContextBits{{ bfp.varmap[skip] }}::{{ skip|upper }});
+            }
+%% endfor
+        }
+    }
+
+%# We compare all the integer observations since the bounds have to change.-
+%# Otherwise we have to understand all the action rules to reverse them.-
+    pub fn update(&mut self, from: &Context, to: &Context) {
+%% for ctx, t in context_types.items() if ctx not in bfp.varmap
+%% if t in int_types
+        if from.{{ ctx }} != to.{{ ctx }} {
+            self.{{ ctx }} = self.{{ ctx }}.shift(to.{{ ctx }} - from.{{ ctx }});
+        }
+%% endif
+%% endfor
+%% for item in gl.item_max_counts|sort if item not in bfp.varmap
+%% set ctx = item|lower
+        if from.{{ ctx }} != to.{{ ctx }} {
+            self.{{ ctx }} = self.{{ ctx }}.shift(to.{{ ctx }} - from.{{ ctx }});
+        }
+%% endfor
+    }
 }
 
 #[derive(Debug)]

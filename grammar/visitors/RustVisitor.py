@@ -4,7 +4,7 @@ import logging
 import re
 
 from grammar import RulesParser, RulesVisitor
-from Utils import construct_id, construct_place_id, construct_spot_id, getPlaceType, place_to_names, BUILTINS
+from Utils import construct_id, construct_place_id, construct_spot_id, getPlaceType, place_to_names, BUILTINS, int_types
 
 import inflection
 
@@ -804,4 +804,115 @@ class RustExplainerVisitor(RustBaseVisitor):
             f'edict.insert("{tag}", format!("{{}}", f))',
             f'(f, vec!["{tag}"])'
         ]
+        return f'{{ {"; ".join(lines)} }}'
+
+
+class RustObservationVisitor(RustBaseVisitor):
+    def __init__(self, item_max_counts, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.item_max_counts = item_max_counts
+        self.code_writer = RustVisitor(*args, **kwargs)
+
+    def _getObserverFunc(self, func):
+        if func in BUILTINS:
+            return None
+        elif func in self.rules:
+            return f'robserve__{construct_id(func[1:])}!'
+        else:
+            return f'hobserve__{construct_id(func[1:])}!'
+
+    # TODO: remove this temporary override
+    def visit(self, tree, rettype=None):
+        last_rettype = self.rettype
+        self.rettype = rettype
+        try:
+            ret = super().visit(tree)
+            if ret is None:
+                return 'todo!();'
+            return ret
+        except:
+            logging.error(f'Encountered exception rendering {self.name}: {self.ctxdict}')
+            raise
+        finally:
+            self.rettype = last_rettype
+
+    def visitBoolExpr(self, ctx):
+        try:
+            if ctx.OR():
+                lines = [
+                    self.visit(ctx.boolExpr(0)),
+                    # short-circuit logic
+                    f'if {self.code_writer.visit(ctx.boolExpr(0))}',
+                    f'{{ {self.visit(ctx.boolExpr(1))} }}',
+                ]
+            elif ctx.AND():
+                lines = [
+                    self.visit(ctx.boolExpr(0)),
+                    # short-circuit logic
+                    f'if !({self.code_writer.visit(ctx.boolExpr(0))})',
+                    f'{{ {self.visit(ctx.boolExpr(1))} }}',
+                ]
+            elif ctx.TRUE() or ctx.FALSE():
+                return ''
+            elif ctx.boolExpr():
+                # No need to parenthesize anymore.
+                return self.visit(ctx.boolExpr(0))
+            elif ctx.NOT():
+                # this is still an observation that it is what it is.
+                # Should work for integer comparisons but recommend avoiding it--invert the comparator instead.
+                return super().visitBoolExpr(ctx)
+            else:
+                return super().visitBoolExpr(ctx)
+            return f'{{ {" ".join(lines)} }}'
+        except AttributeError as e:
+            raise AttributeError(str(e) + '; ' + ' '.join(
+                f'[{c.toStringTree(ruleNames = RulesParser.ruleNames)}]'
+                for c in ctx.boolExpr()))
+        
+    def visitInvoke(self, ctx):
+        items = ctx.ITEM()
+        func, args = self._getFuncAndArgs(str(ctx.FUNC()))
+        if items:
+            args.extend(f'Item::{item}' for item in items)
+        elif ctx.value():
+            args.append(str(self.code_writer.visit(ctx.value())))
+        elif ctx.PLACE():
+            places = [str(p)[1:-1] for p in ctx.PLACE()]
+            args.extend(construct_place_id(pl) for pl in places)
+        elif ctx.REF():
+            args.append(self._getRefGetter(str(ctx.REF())[1:]))
+        else:
+            arg = f'{ctx.LIT() or ctx.INT() or ctx.FLOAT() or ""}'
+            if arg:
+                args.append(arg)
+        ofunc = self._getObserverFunc(str(ctx.FUNC()))
+        if ofunc:
+            lines = [
+                f'{ofunc}({", ".join(args)}, full_obs);',
+            ]
+            if ctx.REF():
+                ref = str(ctx.REF())
+                if ref in self.context_types:
+                    if self.context_types[ref] in int_types:
+                        lines.append(f'full_obs.observe_{ref}(IntegerObservation::Exact)')
+                    else:
+                        lines.append(f'full_obs.observe_{ref}()')
+        elif func == 'Default::default':
+            return ''
+        elif func == 'ctx.count':
+            lines = [
+                '/* TODO: handle count() at the comparison layer */'
+                f'full_obs.observe_{item.lower()}(IntegerObservation::Exact)'
+                for item in items
+            ]
+        else:
+            lines = []
+            if ctx.REF():
+                ref = str(ctx.REF())
+                if ref in self.context_types:
+                    if self.context_types[ref] in int_types:
+                        lines.append(f'full_obs.observe_{ref}(IntegerObservation::Exact)')
+                    else:
+                        lines.append(f'full_obs.observe_{ref}()')
+
         return f'{{ {"; ".join(lines)} }}'
