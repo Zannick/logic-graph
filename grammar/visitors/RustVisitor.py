@@ -257,7 +257,7 @@ class RustVisitor(RustBaseVisitor):
         return ' || '.join(per_type)
 
     def visitRefInPlaceRef(self, ctx):
-        ptype = self.context_types[str(ctx.REF(1))[1:]]
+        ptype = self._getRefType(str(ctx.REF(1))[1:])
         eq = '!' if ctx.NOT() else '='
         ref = str(ctx.REF(0))[1:]
         get = f'{self._getRefGetter(ref)}'
@@ -729,7 +729,7 @@ class RustExplainerVisitor(RustBaseVisitor):
     def visitRefInPlaceRef(self, ctx):
         ref0 = str(ctx.REF(0))
         ref1 = str(ctx.REF(1))
-        ptype = self.context_types[ref1[1:]]
+        ptype = self._getRefType(ref1[1:])
         eq = '!' if ctx.NOT() else '='
         ref = str(ctx.REF(0))[1:]
         get0 = self._getRefGetter(ref0[1:])
