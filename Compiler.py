@@ -116,16 +116,6 @@ def get_func_args(helper_key: str) -> list[str]:
     return []
 
 
-def get_int_type_for_max(count: int) -> str:
-    if count == 1:
-        return 'bool'
-    if count < 128:
-        return 'i8'
-    if count < 32768:
-        return 'i16'
-    return 'i32'
-
-
 def trim_type_prefix(s: str) -> str:
     if '::' in s:
         return s[s.index('::') + 2:]
@@ -1620,7 +1610,7 @@ class GameLogic(object):
             'construct_id': construct_id,
             'construct_place_id': construct_place_id,
             'construct_test_name': construct_test_name,
-            'escape_ctx': partial(re.compile(r'\b(ctx|world|edict)\b').sub, r'$\1'),
+            'escape_ctx': partial(re.compile(r'\b(ctx|world|edict|full_obs)\b').sub, r'$\1'),
             'field_size': field_size,
             'get_area': self.get_area,
             'get_exit_target': get_exit_target,

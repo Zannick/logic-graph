@@ -41,12 +41,16 @@ macro_rules! hexplain__melee {
 #[macro_export]
 macro_rules! hobserve__melee {
     ($ctx:expr, $world:expr, $full_obs:expr) => {{
-        {
-            todo!();
-            if $ctx.has(Item::Ice_Axe) {
-                todo!();
-            }
-        }
+        ({
+            $full_obs.observe_ice_axe();
+            $ctx.has(Item::Ice_Axe)
+        } || {
+            let v = {
+                $full_obs.observe_mode();
+                $ctx.mode()
+            };
+            v == enums::Mode::Drone
+        })
     }};
 }
 
@@ -91,12 +95,16 @@ macro_rules! hexplain__boomerang {
 #[macro_export]
 macro_rules! hobserve__boomerang {
     ($ctx:expr, $world:expr, $full_obs:expr) => {{
-        {
-            todo!();
-            if !($ctx.mode() != enums::Mode::Drone) {
-                todo!();
-            }
-        }
+        ({
+            let v = {
+                $full_obs.observe_mode();
+                $ctx.mode()
+            };
+            v != enums::Mode::Drone
+        } && {
+            $full_obs.observe_boomerang();
+            $ctx.has(Item::Boomerang)
+        })
     }};
 }
 
@@ -135,14 +143,10 @@ macro_rules! hexplain__can_damage {
 #[macro_export]
 macro_rules! hobserve__can_damage {
     ($ctx:expr, $world:expr, $full_obs:expr) => {{
-        {
-            {
-                hobserve__melee!($ctx, $world, full_obs);
-            }
-            if helper__melee!($ctx, $world) {
-                todo!();
-            }
-        }
+        (hobserve__melee!($ctx, $world, $full_obs) || {
+            $full_obs.observe_boomerang();
+            $ctx.has(Item::Boomerang)
+        })
     }};
 }
 
@@ -187,12 +191,16 @@ macro_rules! hexplain__grab {
 #[macro_export]
 macro_rules! hobserve__grab {
     ($ctx:expr, $world:expr, $full_obs:expr) => {{
-        {
-            todo!();
-            if !($ctx.mode() != enums::Mode::Drone) {
-                todo!();
-            }
-        }
+        ({
+            let v = {
+                $full_obs.observe_mode();
+                $ctx.mode()
+            };
+            v != enums::Mode::Drone
+        } && {
+            $full_obs.observe_ledge_grab();
+            $ctx.has(Item::Ledge_Grab)
+        })
     }};
 }
 
@@ -237,12 +245,16 @@ macro_rules! hexplain__climb {
 #[macro_export]
 macro_rules! hobserve__climb {
     ($ctx:expr, $world:expr, $full_obs:expr) => {{
-        {
-            todo!();
-            if !($ctx.mode() != enums::Mode::Drone) {
-                todo!();
-            }
-        }
+        ({
+            let v = {
+                $full_obs.observe_mode();
+                $ctx.mode()
+            };
+            v != enums::Mode::Drone
+        } && {
+            $full_obs.observe_wall_climb();
+            $ctx.has(Item::Wall_Climb)
+        })
     }};
 }
 
@@ -287,12 +299,16 @@ macro_rules! hexplain__hook {
 #[macro_export]
 macro_rules! hobserve__hook {
     ($ctx:expr, $world:expr, $full_obs:expr) => {{
-        {
-            todo!();
-            if !($ctx.mode() == enums::Mode::Drone) {
-                todo!();
-            }
-        }
+        ({
+            let v = {
+                $full_obs.observe_mode();
+                $ctx.mode()
+            };
+            v == enums::Mode::Drone
+        } && {
+            $full_obs.observe_slingshot_hook();
+            $ctx.has(Item::Slingshot_Hook)
+        })
     }};
 }
 
@@ -337,12 +353,16 @@ macro_rules! hexplain__hover {
 #[macro_export]
 macro_rules! hobserve__hover {
     ($ctx:expr, $world:expr, $full_obs:expr) => {{
-        {
-            todo!();
-            if !($ctx.mode() == enums::Mode::Drone) {
-                todo!();
-            }
-        }
+        ({
+            let v = {
+                $full_obs.observe_mode();
+                $ctx.mode()
+            };
+            v == enums::Mode::Drone
+        } && {
+            $full_obs.observe_drone_hover();
+            $ctx.has(Item::Drone_Hover)
+        })
     }};
 }
 
@@ -387,12 +407,16 @@ macro_rules! hexplain__charge {
 #[macro_export]
 macro_rules! hobserve__charge {
     ($ctx:expr, $world:expr, $full_obs:expr) => {{
-        {
-            todo!();
-            if !($ctx.mode() == enums::Mode::Drone) {
-                todo!();
-            }
-        }
+        ({
+            let v = {
+                $full_obs.observe_mode();
+                $ctx.mode()
+            };
+            v == enums::Mode::Drone
+        } && {
+            $full_obs.observe_slingshot_charge();
+            $ctx.has(Item::Slingshot_Charge)
+        })
     }};
 }
 
@@ -437,12 +461,16 @@ macro_rules! hexplain__spin {
 #[macro_export]
 macro_rules! hobserve__spin {
     ($ctx:expr, $world:expr, $full_obs:expr) => {{
-        {
-            todo!();
-            if !($ctx.mode() == enums::Mode::Drone) {
-                todo!();
-            }
-        }
+        ({
+            let v = {
+                $full_obs.observe_mode();
+                $ctx.mode()
+            };
+            v == enums::Mode::Drone
+        } && {
+            $full_obs.observe_slingshot_weapon();
+            $ctx.has(Item::Slingshot_Weapon)
+        })
     }};
 }
 
@@ -501,17 +529,19 @@ macro_rules! hexplain__can_deploy {
 #[macro_export]
 macro_rules! hobserve__can_deploy {
     ($ctx:expr, $world:expr, $full_obs:expr) => {{
-        {
-            {
-                todo!();
-                if !($ctx.has(Item::Remote_Drone)) {
-                    todo!();
-                }
-            }
-            if !($ctx.has(Item::Remote_Drone) && $ctx.mode() != enums::Mode::Drone) {
-                todo!();
-            }
-        }
+        (({
+            $full_obs.observe_remote_drone();
+            $ctx.has(Item::Remote_Drone)
+        } && {
+            let v = {
+                $full_obs.observe_mode();
+                $ctx.mode()
+            };
+            v != enums::Mode::Drone
+        }) && {
+            $full_obs.observe_anuman();
+            !$ctx.has(Item::Anuman)
+        })
     }};
 }
 
@@ -556,12 +586,16 @@ macro_rules! hexplain__can_recall {
 #[macro_export]
 macro_rules! hobserve__can_recall {
     ($ctx:expr, $world:expr, $full_obs:expr) => {{
-        {
-            todo!();
-            if !($ctx.mode() == enums::Mode::Drone) {
-                todo!();
-            }
-        }
+        ({
+            let v = {
+                $full_obs.observe_mode();
+                $ctx.mode()
+            };
+            v == enums::Mode::Drone
+        } && {
+            $full_obs.observe_anuman();
+            !$ctx.has(Item::Anuman)
+        })
     }};
 }
 
@@ -606,12 +640,16 @@ macro_rules! hexplain__shockwave {
 #[macro_export]
 macro_rules! hobserve__shockwave {
     ($ctx:expr, $world:expr, $full_obs:expr) => {{
-        {
-            todo!();
-            if !($ctx.mode() != enums::Mode::Drone) {
-                todo!();
-            }
-        }
+        ({
+            let v = {
+                $full_obs.observe_mode();
+                $ctx.mode()
+            };
+            v != enums::Mode::Drone
+        } && {
+            $full_obs.observe_shockwave();
+            $ctx.has(Item::Shockwave)
+        })
     }};
 }
 
@@ -636,7 +674,10 @@ macro_rules! hexplain__open {
 #[macro_export]
 macro_rules! hobserve__open {
     ($ctx:expr, $world:expr, $full_obs:expr) => {{
-        todo!();
+        {
+            $full_obs.observe_infect();
+            $ctx.has(Item::Infect)
+        }
     }};
 }
 
@@ -661,7 +702,10 @@ macro_rules! hexplain__activate {
 #[macro_export]
 macro_rules! hobserve__activate {
     ($ctx:expr, $world:expr, $full_obs:expr) => {{
-        todo!();
+        {
+            $full_obs.observe_infect();
+            $ctx.has(Item::Infect)
+        }
     }};
 }
 
@@ -686,7 +730,10 @@ macro_rules! hexplain__platform {
 #[macro_export]
 macro_rules! hobserve__platform {
     ($ctx:expr, $world:expr, $full_obs:expr) => {{
-        todo!();
+        {
+            $full_obs.observe_infect();
+            $ctx.has(Item::Infect)
+        }
     }};
 }
 
@@ -711,7 +758,10 @@ macro_rules! hexplain__overheat {
 #[macro_export]
 macro_rules! hobserve__overheat {
     ($ctx:expr, $world:expr, $full_obs:expr) => {{
-        todo!();
+        {
+            $full_obs.observe_infect();
+            $ctx.has(Item::Infect)
+        }
     }};
 }
 
@@ -736,7 +786,10 @@ macro_rules! hexplain__allegiance1 {
 #[macro_export]
 macro_rules! hobserve__allegiance1 {
     ($ctx:expr, $world:expr, $full_obs:expr) => {{
-        todo!();
+        {
+            $full_obs.observe_infect();
+            $ctx.has(Item::Infect)
+        }
     }};
 }
 
@@ -761,7 +814,10 @@ macro_rules! hexplain__allegiance2 {
 #[macro_export]
 macro_rules! hobserve__allegiance2 {
     ($ctx:expr, $world:expr, $full_obs:expr) => {{
-        todo!();
+        {
+            $full_obs.observe_infect_l1();
+            $ctx.has(Item::Infect_L1)
+        }
     }};
 }
 
@@ -786,7 +842,10 @@ macro_rules! hexplain__unlock2 {
 #[macro_export]
 macro_rules! hobserve__unlock2 {
     ($ctx:expr, $world:expr, $full_obs:expr) => {{
-        todo!();
+        {
+            $full_obs.observe_infect_l1();
+            $ctx.has(Item::Infect_L1)
+        }
     }};
 }
 
@@ -811,7 +870,10 @@ macro_rules! hexplain__unlock3 {
 #[macro_export]
 macro_rules! hobserve__unlock3 {
     ($ctx:expr, $world:expr, $full_obs:expr) => {{
-        todo!();
+        {
+            $full_obs.observe_infect_l2();
+            $ctx.has(Item::Infect_L2)
+        }
     }};
 }
 
@@ -836,7 +898,10 @@ macro_rules! hexplain__unlock4 {
 #[macro_export]
 macro_rules! hobserve__unlock4 {
     ($ctx:expr, $world:expr, $full_obs:expr) => {{
-        todo!();
+        {
+            $full_obs.observe_infect_l3();
+            $ctx.has(Item::Infect_L3)
+        }
     }};
 }
 
@@ -874,12 +939,13 @@ macro_rules! hexplain__mist2 {
 #[macro_export]
 macro_rules! hobserve__mist2 {
     ($ctx:expr, $world:expr, $full_obs:expr) => {{
-        {
-            todo!();
-            if !($ctx.has(Item::Nanite_Mist)) {
-                todo!();
-            }
-        }
+        ({
+            $full_obs.observe_nanite_mist();
+            $ctx.has(Item::Nanite_Mist)
+        } && {
+            $full_obs.observe_mist_upgrade();
+            $ctx.has(Item::Mist_Upgrade)
+        })
     }};
 }
 
@@ -924,12 +990,13 @@ macro_rules! hexplain__ft_main {
 #[macro_export]
 macro_rules! hobserve__ft_main {
     ($ctx:expr, $world:expr, $full_obs:expr) => {{
-        {
-            todo!();
-            if !($ctx.has(Item::Fast_Travel)) {
-                todo!();
-            }
-        }
+        ({
+            $full_obs.observe_fast_travel();
+            $ctx.has(Item::Fast_Travel)
+        } && {
+            let v = data::realm($ctx.position());
+            v == enums::Realm::Main
+        })
     }};
 }
 
@@ -974,12 +1041,13 @@ macro_rules! hexplain__ft_breach {
 #[macro_export]
 macro_rules! hobserve__ft_breach {
     ($ctx:expr, $world:expr, $full_obs:expr) => {{
-        {
-            todo!();
-            if !($ctx.has(Item::Fast_Travel)) {
-                todo!();
-            }
-        }
+        ({
+            $full_obs.observe_fast_travel();
+            $ctx.has(Item::Fast_Travel)
+        } && {
+            let v = data::realm($ctx.position());
+            v == enums::Realm::Breach
+        })
     }};
 }
 
@@ -1038,17 +1106,19 @@ macro_rules! hexplain__range1 {
 #[macro_export]
 macro_rules! hobserve__range1 {
     ($ctx:expr, $world:expr, $full_obs:expr) => {{
-        {
-            todo!();
-            if $ctx.has(Item::Infection_Range_2) {
-                {
-                    todo!();
-                    if !($ctx.has(Item::Infection_Range)) {
-                        todo!();
-                    }
-                }
-            }
-        }
+        ({
+            $full_obs.observe_infection_range_2();
+            $ctx.has(Item::Infection_Range_2)
+        } || ({
+            $full_obs.observe_infection_range();
+            $ctx.has(Item::Infection_Range)
+        } && {
+            let v = {
+                $full_obs.observe_mode();
+                $ctx.mode()
+            };
+            v != enums::Mode::Drone
+        }))
     }};
 }
 
@@ -1107,17 +1177,19 @@ macro_rules! hexplain__range2 {
 #[macro_export]
 macro_rules! hobserve__range2 {
     ($ctx:expr, $world:expr, $full_obs:expr) => {{
-        {
-            todo!();
-            if $ctx.has(Item::Infection_Range_3) {
-                {
-                    todo!();
-                    if !($ctx.has(Item::Infection_Range_2)) {
-                        todo!();
-                    }
-                }
-            }
-        }
+        ({
+            $full_obs.observe_infection_range_3();
+            $ctx.has(Item::Infection_Range_3)
+        } || ({
+            $full_obs.observe_infection_range_2();
+            $ctx.has(Item::Infection_Range_2)
+        } && {
+            let v = {
+                $full_obs.observe_mode();
+                $ctx.mode()
+            };
+            v != enums::Mode::Drone
+        }))
     }};
 }
 
@@ -1162,12 +1234,16 @@ macro_rules! hexplain__range3 {
 #[macro_export]
 macro_rules! hobserve__range3 {
     ($ctx:expr, $world:expr, $full_obs:expr) => {{
-        {
-            todo!();
-            if !($ctx.has(Item::Infection_Range_3)) {
-                todo!();
-            }
-        }
+        ({
+            $full_obs.observe_infection_range_3();
+            $ctx.has(Item::Infection_Range_3)
+        } && {
+            let v = {
+                $full_obs.observe_mode();
+                $ctx.mode()
+            };
+            v != enums::Mode::Drone
+        })
     }};
 }
 
@@ -1205,7 +1281,11 @@ macro_rules! hexplain__more_refills {
 #[macro_export]
 macro_rules! hobserve__more_refills {
     ($ctx:expr, $world:expr, $full_obs:expr) => {{
-        todo!();
+        {
+            let n: i32 = todo!().into();
+            $full_obs.observe_refills(IntegerObservation::Ge(n as i8));
+            $ctx.refills() < n
+        }
     }};
 }
 
@@ -1243,7 +1323,7 @@ macro_rules! hexplain__max_energy {
 #[macro_export]
 macro_rules! hobserve__max_energy {
     ($ctx:expr, $world:expr, $full_obs:expr) => {{
-        todo!();
+        todo!()
     }};
 }
 
@@ -1282,14 +1362,7 @@ macro_rules! hexplain__bs {
 #[macro_export]
 macro_rules! hobserve__bs {
     ($ctx:expr, $world:expr, $full_obs:expr) => {{
-        {
-            todo!();
-            if !($ctx.boomerang_steering()) {
-                {
-                    hobserve__boomerang!($ctx, $world, full_obs);
-                }
-            }
-        }
+        ($ctx.boomerang_steering() && hobserve__boomerang!($ctx, $world, $full_obs))
     }};
 }
 
@@ -1328,14 +1401,7 @@ macro_rules! hexplain__offset {
 #[macro_export]
 macro_rules! hobserve__offset {
     ($ctx:expr, $world:expr, $full_obs:expr) => {{
-        {
-            todo!();
-            if !($ctx.major_glitches()) {
-                {
-                    hobserve__melee!($ctx, $world, full_obs);
-                }
-            }
-        }
+        ($ctx.major_glitches() && hobserve__melee!($ctx, $world, $full_obs))
     }};
 }
 
@@ -1380,12 +1446,13 @@ macro_rules! hexplain__block_clip {
 #[macro_export]
 macro_rules! hobserve__block_clip {
     ($ctx:expr, $world:expr, $full_obs:expr) => {{
-        {
-            todo!();
-            if !($ctx.minor_glitches()) {
-                todo!();
-            }
-        }
+        ($ctx.minor_glitches() && {
+            let v = {
+                $full_obs.observe_mode();
+                $ctx.mode()
+            };
+            v == enums::Mode::Drone
+        })
     }};
 }
 
@@ -1424,14 +1491,7 @@ macro_rules! hexplain__block_clip_escape {
 #[macro_export]
 macro_rules! hobserve__block_clip_escape {
     ($ctx:expr, $world:expr, $full_obs:expr) => {{
-        {
-            todo!();
-            if !($ctx.minor_glitches()) {
-                {
-                    hobserve__hook!($ctx, $world, full_obs);
-                }
-            }
-        }
+        ($ctx.minor_glitches() && hobserve__hook!($ctx, $world, $full_obs))
     }};
 }
 
@@ -1482,17 +1542,16 @@ macro_rules! hexplain__infinite_climb {
 #[macro_export]
 macro_rules! hobserve__infinite_climb {
     ($ctx:expr, $world:expr, $full_obs:expr) => {{
-        {
-            {
-                todo!();
-                if !($ctx.has(Item::Anuman)) {
-                    todo!();
-                }
-            }
-            if !($ctx.has(Item::Anuman) && $ctx.has(Item::Wall_Climb)) {
-                todo!();
-            }
-        }
+        (({
+            $full_obs.observe_anuman();
+            $ctx.has(Item::Anuman)
+        } && {
+            $full_obs.observe_wall_climb();
+            $ctx.has(Item::Wall_Climb)
+        }) && {
+            $full_obs.observe_drone_hover();
+            $ctx.has(Item::Drone_Hover)
+        })
     }};
 }
 
@@ -1567,22 +1626,19 @@ macro_rules! hexplain__attract {
 #[macro_export]
 macro_rules! hobserve__attract {
     ($ctx:expr, $world:expr, $full_obs:expr) => {{
-        {
-            todo!();
-            if !($ctx.has(Item::Breach_Attractor)) {
-                {
-                    {
-                        todo!();
-                        if $ctx.has(Item::Anuman) {
-                            todo!();
-                        }
-                    }
-                    if ($ctx.has(Item::Anuman) || $ctx.mode() != enums::Mode::Drone) {
-                        todo!();
-                    }
-                }
-            }
-        }
+        ({
+            $full_obs.observe_breach_attractor();
+            $ctx.has(Item::Breach_Attractor)
+        } && (({
+            $full_obs.observe_anuman();
+            $ctx.has(Item::Anuman)
+        } || {
+            let v = {
+                $full_obs.observe_mode();
+                $ctx.mode()
+            };
+            v != enums::Mode::Drone
+        }) || todo!()))
     }};
 }
 
@@ -1792,7 +1848,7 @@ macro_rules! hexplain__all_notes {
 #[macro_export]
 macro_rules! hobserve__all_notes {
     ($ctx:expr, $world:expr, $full_obs:expr) => {{
-        todo!();
+        todo!()
     }};
 }
 
@@ -1831,7 +1887,7 @@ macro_rules! hexplain__all_flasks {
 #[macro_export]
 macro_rules! hobserve__all_flasks {
     ($ctx:expr, $world:expr, $full_obs:expr) => {{
-        todo!();
+        todo!()
     }};
 }
 
@@ -1870,7 +1926,7 @@ macro_rules! hexplain__all_health {
 #[macro_export]
 macro_rules! hobserve__all_health {
     ($ctx:expr, $world:expr, $full_obs:expr) => {{
-        todo!();
+        todo!()
     }};
 }
 
@@ -1918,7 +1974,7 @@ macro_rules! hexplain__all_weapons {
 #[macro_export]
 macro_rules! hobserve__all_weapons {
     ($ctx:expr, $world:expr, $full_obs:expr) => {{
-        todo!();
+        todo!()
     }};
 }
 
@@ -1978,7 +2034,7 @@ macro_rules! hexplain__other_items {
 #[macro_export]
 macro_rules! hobserve__other_items {
     ($ctx:expr, $world:expr, $full_obs:expr) => {{
-        todo!();
+        todo!()
     }};
 }
 
@@ -2108,7 +2164,7 @@ macro_rules! hexplain__all_urns {
 #[macro_export]
 macro_rules! hobserve__all_urns {
     ($ctx:expr, $world:expr, $full_obs:expr) => {{
-        todo!();
+        todo!()
     }};
 }
 
@@ -2124,9 +2180,7 @@ macro_rules! helper__save {
 #[macro_export]
 macro_rules! hobserve__save {
     ($ctx:expr, $world:expr, $full_obs:expr) => {{
-        {
-            hobserve__refill_energy!($ctx, $world, full_obs);
-        }
+        hobserve__refill_energy!($ctx, $world, $full_obs)
     }};
 }
 
@@ -2141,7 +2195,7 @@ macro_rules! helper__refill_energy {
 #[macro_export]
 macro_rules! hobserve__refill_energy {
     ($ctx:expr, $world:expr, $full_obs:expr) => {{
-        todo!();
+        todo!()
     }};
 }
 
@@ -2157,7 +2211,7 @@ macro_rules! helper__deploy_drone {
 #[macro_export]
 macro_rules! hobserve__deploy_drone {
     ($ctx:expr, $world:expr, $full_obs:expr) => {{
-        todo!();
+        todo!()
     }};
 }
 
@@ -2173,7 +2227,7 @@ macro_rules! helper__deploy_drone_and_move {
 #[macro_export]
 macro_rules! hobserve__deploy_drone_and_move {
     ($ctx:expr, $world:expr, $indrapos:expr, $full_obs:expr) => {{
-        todo!();
+        todo!()
     }};
 }
 
@@ -2190,7 +2244,7 @@ macro_rules! helper__save_last {
 #[macro_export]
 macro_rules! hobserve__save_last {
     ($ctx:expr, $world:expr, $full_obs:expr) => {{
-        todo!();
+        todo!()
     }};
 }
 
@@ -2226,7 +2280,7 @@ macro_rules! helper__reset_old_area {
 #[macro_export]
 macro_rules! hobserve__reset_old_area {
     ($ctx:expr, $world:expr, $newpos:expr, $full_obs:expr) => {{
-        todo!();
+        todo!()
     }};
 }
 
@@ -2241,7 +2295,7 @@ macro_rules! helper__main_portal_save_update {
 #[macro_export]
 macro_rules! hobserve__main_portal_save_update {
     ($ctx:expr, $world:expr, $full_obs:expr) => {{
-        todo!();
+        todo!()
     }};
 }
 
@@ -2256,7 +2310,7 @@ macro_rules! helper__breach_portal_save_update {
 #[macro_export]
 macro_rules! hobserve__breach_portal_save_update {
     ($ctx:expr, $world:expr, $full_obs:expr) => {{
-        todo!();
+        todo!()
     }};
 }
 
@@ -2271,7 +2325,7 @@ macro_rules! helper__clear_breach_save {
 #[macro_export]
 macro_rules! hobserve__clear_breach_save {
     ($ctx:expr, $world:expr, $full_obs:expr) => {{
-        todo!();
+        todo!()
     }};
 }
 

@@ -43,6 +43,15 @@ OPS = {
     '-=': 'decr',
 }
 
+MIRROR_OPS = {
+    '>': '<',
+    '<': '>',
+    '>=': '<=',
+    '<=': '>=',
+}
+def mirror(op):
+    return MIRROR_OPS.get(op, op)
+
 disallowed_chars = re.compile(r'[^A-Za-z_0-9]')
 punct = re.compile(r'[,./| -]+')
 nested = re.compile(r'[({\[:]')
@@ -129,6 +138,15 @@ def typenameof(val: Any) -> str:
     return ctx_types.get(rname, rname)
 
 int_types = ['i8', 'i16', 'i32']
+
+def get_int_type_for_max(count: int) -> str:
+    if count == 1:
+        return 'bool'
+    if count < 128:
+        return 'i8'
+    if count < 32768:
+        return 'i16'
+    return 'i32'
 
 def fits_in_expected_int(t, expected):
     if t in int_types and expected in int_types:

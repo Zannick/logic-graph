@@ -10226,4218 +10226,3987 @@ pub fn observe_access___all_urns_all_weapons_other_items_all_notes_all_health_al
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // [$all_urns, $all_weapons, $other_items, $all_notes, $all_health, $all_flasks]
-    todo!();
+    todo!()
 }
 pub fn observe_access___escape_objective(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // [Escape, $objective]
-    todo!();
+    todo!()
 }
 pub fn observe_access___objective(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // [$objective]
-    todo!();
+    todo!()
 }
 pub fn observe_access___remote_drone(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // [Remote_Drone]
-    todo!();
+    todo!()
 }
 pub fn observe_access___remote_drone_flask__6(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // [Remote_Drone, Flask{6}]
-    todo!();
+    todo!()
 }
 pub fn observe_access_activate(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // $activate
-    {
-        hobserve__activate!(ctx, world, full_obs);
-    }
+    hobserve__activate!(ctx, world, full_obs)
 }
 pub fn observe_access_amagi__main_area__carving__ex__secret_outcropping_1__req(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // ^_combo and ($grab or $climb)
-    {
-        todo!();
-        if !(ctx.amagi__main_area__ctx__combo()) {
-            {
-                {
-                    hobserve__grab!(ctx, world, full_obs);
-                }
-                if helper__grab!(ctx, world) {
-                    {
-                        hobserve__climb!(ctx, world, full_obs);
-                    }
-                }
-            }
-        }
-    }
+    ({
+        full_obs.observe_amagi__main_area__ctx__combo();
+        ctx.amagi__main_area__ctx__combo()
+    } && (hobserve__grab!(ctx, world, full_obs) || hobserve__climb!(ctx, world, full_obs)))
 }
 pub fn observe_access_amagi__main_area__carving__ex__secret_outcropping_2__req(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // ^_combo and $hook
-    {
-        todo!();
-        if !(ctx.amagi__main_area__ctx__combo()) {
-            {
-                hobserve__hook!(ctx, world, full_obs);
-            }
-        }
-    }
+    ({
+        full_obs.observe_amagi__main_area__ctx__combo();
+        ctx.amagi__main_area__ctx__combo()
+    } && hobserve__hook!(ctx, world, full_obs))
 }
 pub fn observe_access_amagi__main_area__carving__key_combo__req(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // not ^_combo
-    todo!();
+    !({
+        full_obs.observe_amagi__main_area__ctx__combo();
+        ctx.amagi__main_area__ctx__combo()
+    })
 }
 pub fn observe_access_amagi_dragon_eye_passage(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // Amagi_Dragon_Eye_Passage
-    todo!();
+    {
+        full_obs.observe_amagi_dragon_eye_passage();
+        ctx.has(Item::Amagi_Dragon_Eye_Passage)
+    }
 }
 pub fn observe_access_amagi_stronghold_boulder_1(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // Amagi_Stronghold_Boulder_1
-    todo!();
+    {
+        full_obs.observe_amagi_stronghold_boulder_1();
+        ctx.has(Item::Amagi_Stronghold_Boulder_1)
+    }
 }
 pub fn observe_access_amagi_stronghold_boulder_1_and_underwater_movement_and___grab_or_climb(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // Amagi_Stronghold_Boulder_1 and Underwater_Movement and ($grab or $climb)
-    {
-        {
-            todo!();
-            if !(ctx.has(Item::Amagi_Stronghold_Boulder_1)) {
-                todo!();
-            }
-        }
-        if !(ctx.has(Item::Amagi_Stronghold_Boulder_1) && ctx.has(Item::Underwater_Movement)) {
-            {
-                {
-                    hobserve__grab!(ctx, world, full_obs);
-                }
-                if helper__grab!(ctx, world) {
-                    {
-                        hobserve__climb!(ctx, world, full_obs);
-                    }
-                }
-            }
-        }
-    }
+    (({
+        full_obs.observe_amagi_stronghold_boulder_1();
+        ctx.has(Item::Amagi_Stronghold_Boulder_1)
+    } && {
+        full_obs.observe_underwater_movement();
+        ctx.has(Item::Underwater_Movement)
+    }) && (hobserve__grab!(ctx, world, full_obs) || hobserve__climb!(ctx, world, full_obs)))
 }
 pub fn observe_access_amagi_stronghold_boulder_2(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // Amagi_Stronghold_Boulder_2
-    todo!();
+    {
+        full_obs.observe_amagi_stronghold_boulder_2();
+        ctx.has(Item::Amagi_Stronghold_Boulder_2)
+    }
 }
 pub fn observe_access_amagi_stronghold_boulder_2_and_grab(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // Amagi_Stronghold_Boulder_2 and $grab
-    {
-        todo!();
-        if !(ctx.has(Item::Amagi_Stronghold_Boulder_2)) {
-            {
-                hobserve__grab!(ctx, world, full_obs);
-            }
-        }
-    }
+    ({
+        full_obs.observe_amagi_stronghold_boulder_2();
+        ctx.has(Item::Amagi_Stronghold_Boulder_2)
+    } && hobserve__grab!(ctx, world, full_obs))
 }
 pub fn observe_access_amagi_stronghold_wall_1(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // Amagi_Stronghold_Wall_1
-    todo!();
+    {
+        full_obs.observe_amagi_stronghold_wall_1();
+        ctx.has(Item::Amagi_Stronghold_Wall_1)
+    }
 }
 pub fn observe_access_amagi_stronghold_wall_2(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // Amagi_Stronghold_Wall_2
-    todo!();
+    {
+        full_obs.observe_amagi_stronghold_wall_2();
+        ctx.has(Item::Amagi_Stronghold_Wall_2)
+    }
 }
 pub fn observe_access_amagi_west_lake_surface_wall(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // Amagi_West_Lake_Surface_Wall
-    todo!();
+    {
+        full_obs.observe_amagi_west_lake_surface_wall();
+        ctx.has(Item::Amagi_West_Lake_Surface_Wall)
+    }
 }
 pub fn observe_access_annuna__east_bridge__tower_east_ledge__enter_combo__req(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // not ^_combo
-    todo!();
+    !({
+        full_obs.observe_annuna__east_bridge__ctx__combo();
+        ctx.annuna__east_bridge__ctx__combo()
+    })
 }
 pub fn observe_access_annuna__east_bridge__tower_east_ledge__ex__tower_secret_1__req(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // ^_combo
-    todo!();
+    {
+        full_obs.observe_annuna__east_bridge__ctx__combo();
+        ctx.annuna__east_bridge__ctx__combo()
+    }
 }
 pub fn observe_access_annuna__east_bridge__tower_mid_air_west__ex__tower_secret_1__req(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // ^_combo
-    todo!();
+    {
+        full_obs.observe_annuna__east_bridge__ctx__combo();
+        ctx.annuna__east_bridge__ctx__combo()
+    }
 }
 pub fn observe_access_annuna__east_bridge__tower_secret__enter_combo__req(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // not ^_combo
-    todo!();
+    !({
+        full_obs.observe_annuna__east_bridge__ctx__combo();
+        ctx.annuna__east_bridge__ctx__combo()
+    })
 }
 pub fn observe_access_annuna__east_bridge__tower_secret__ex__tower_east_ledge_1__req(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // ^_combo
-    todo!();
+    {
+        full_obs.observe_annuna__east_bridge__ctx__combo();
+        ctx.annuna__east_bridge__ctx__combo()
+    }
 }
 pub fn observe_access_annuna__east_bridge__tower_secret__ex__tower_mid_air_east_1__req(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // ^_combo
-    todo!();
+    {
+        full_obs.observe_annuna__east_bridge__ctx__combo();
+        ctx.annuna__east_bridge__ctx__combo()
+    }
 }
 pub fn observe_access_annuna__east_bridge__tower_secret__ex__tower_mid_air_west_1__req(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // ^_combo
-    todo!();
+    {
+        full_obs.observe_annuna__east_bridge__ctx__combo();
+        ctx.annuna__east_bridge__ctx__combo()
+    }
 }
 pub fn observe_access_annuna__east_bridge__tower_secret__ex__tower_peak_1__req(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // ^_combo and $grab
-    {
-        todo!();
-        if !(ctx.annuna__east_bridge__ctx__combo()) {
-            {
-                hobserve__grab!(ctx, world, full_obs);
-            }
-        }
-    }
+    ({
+        full_obs.observe_annuna__east_bridge__ctx__combo();
+        ctx.annuna__east_bridge__ctx__combo()
+    } && hobserve__grab!(ctx, world, full_obs))
 }
 pub fn observe_access_annuna__east_bridge__tower_secret__ex__tower_peak_2__req(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // ^_combo and $hook
-    {
-        todo!();
-        if !(ctx.annuna__east_bridge__ctx__combo()) {
-            {
-                hobserve__hook!(ctx, world, full_obs);
-            }
-        }
-    }
+    ({
+        full_obs.observe_annuna__east_bridge__ctx__combo();
+        ctx.annuna__east_bridge__ctx__combo()
+    } && hobserve__hook!(ctx, world, full_obs))
 }
 pub fn observe_access_annuna__east_bridge__tower_secret__ex__tower_west_ledge_1__req(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // ^_combo
-    todo!();
+    {
+        full_obs.observe_annuna__east_bridge__ctx__combo();
+        ctx.annuna__east_bridge__ctx__combo()
+    }
 }
 pub fn observe_access_annuna__east_bridge__tower_west_ledge__enter_combo__req(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // not ^_combo
-    todo!();
+    !({
+        full_obs.observe_annuna__east_bridge__ctx__combo();
+        ctx.annuna__east_bridge__ctx__combo()
+    })
 }
 pub fn observe_access_annuna__east_bridge__tower_west_ledge__ex__tower_secret_1__req(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // ^_combo
-    todo!();
+    {
+        full_obs.observe_annuna__east_bridge__ctx__combo();
+        ctx.annuna__east_bridge__ctx__combo()
+    }
 }
 pub fn observe_access_annuna__west_climb__cache__ex__switch_ledge_1__req(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // ^_door_opened
-    todo!();
+    {
+        full_obs.observe_annuna__west_climb__ctx__door_opened();
+        ctx.annuna__west_climb__ctx__door_opened()
+    }
 }
 pub fn observe_access_annuna__west_climb__switch_ledge__ex__cache_1__req(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // ^_door_opened
-    todo!();
+    {
+        full_obs.observe_annuna__west_climb__ctx__door_opened();
+        ctx.annuna__west_climb__ctx__door_opened()
+    }
 }
 pub fn observe_access_annuna__west_climb__switch_ledge__open_door__req(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // $unlock4 and not ^_door_opened
-    {
-        {
-            hobserve__unlock4!(ctx, world, full_obs);
-        }
-        if !(helper__unlock4!(ctx, world)) {
-            todo!();
-        }
-    }
+    (hobserve__unlock4!(ctx, world, full_obs)
+        && !({
+            full_obs.observe_annuna__west_climb__ctx__door_opened();
+            ctx.annuna__west_climb__ctx__door_opened()
+        }))
 }
 pub fn observe_access_annuna_east_bridge_gate(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // Annuna_East_Bridge_Gate
-    todo!();
+    {
+        full_obs.observe_annuna_east_bridge_gate();
+        ctx.has(Item::Annuna_East_Bridge_Gate)
+    }
 }
 pub fn observe_access_annuna_mirror_match_switch(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // Annuna_Mirror_Match_Switch
-    todo!();
+    {
+        full_obs.observe_annuna_mirror_match_switch();
+        ctx.has(Item::Annuna_Mirror_Match_Switch)
+    }
 }
-pub fn observe_access_anuman(ctx: &Context, world: &graph::World, full_obs: &mut FullObservation) {
+pub fn observe_access_anuman(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
     // Anuman
-    todo!();
+    {
+        full_obs.observe_anuman();
+        ctx.has(Item::Anuman)
+    }
 }
 pub fn observe_access_anuman_and_grab(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // Anuman and $grab
-    {
-        todo!();
-        if !(ctx.has(Item::Anuman)) {
-            {
-                hobserve__grab!(ctx, world, full_obs);
-            }
-        }
-    }
+    ({
+        full_obs.observe_anuman();
+        ctx.has(Item::Anuman)
+    } && hobserve__grab!(ctx, world, full_obs))
 }
 pub fn observe_access_anunna_vertical_room_gate(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // Anunna_Vertical_Room_Gate
-    todo!();
+    {
+        full_obs.observe_anunna_vertical_room_gate();
+        ctx.has(Item::Anunna_Vertical_Room_Gate)
+    }
 }
 pub fn observe_access_apocalypse_bomb(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // Apocalypse_Bomb
-    todo!();
+    {
+        full_obs.observe_apocalypse_bomb();
+        ctx.has(Item::Apocalypse_Bomb)
+    }
 }
 pub fn observe_access_block_clip_and_not_ebih_waterfall_block_left(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // $block_clip and not Ebih_Waterfall_Block_Left
-    {
-        {
-            hobserve__block_clip!(ctx, world, full_obs);
-        }
-        if !(helper__block_clip!(ctx, world)) {
-            todo!();
-        }
-    }
+    (hobserve__block_clip!(ctx, world, full_obs) && {
+        full_obs.observe_ebih_waterfall_block_left();
+        !ctx.has(Item::Ebih_Waterfall_Block_Left)
+    })
 }
 pub fn observe_access_block_clip_and_not_ebih_waterfall_block_right(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // $block_clip and not Ebih_Waterfall_Block_Right
-    {
-        {
-            hobserve__block_clip!(ctx, world, full_obs);
-        }
-        if !(helper__block_clip!(ctx, world)) {
-            todo!();
-        }
-    }
+    (hobserve__block_clip!(ctx, world, full_obs) && {
+        full_obs.observe_ebih_waterfall_block_right();
+        !ctx.has(Item::Ebih_Waterfall_Block_Right)
+    })
 }
 pub fn observe_access_block_clip_escape_and_not_uhrum_annuna_corridor_block(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // $block_clip_escape and not Uhrum_Annuna_Corridor_Block
-    {
-        {
-            hobserve__block_clip_escape!(ctx, world, full_obs);
-        }
-        if !(helper__block_clip_escape!(ctx, world)) {
-            todo!();
-        }
-    }
+    (hobserve__block_clip_escape!(ctx, world, full_obs) && {
+        full_obs.observe_uhrum_annuna_corridor_block();
+        !ctx.has(Item::Uhrum_Annuna_Corridor_Block)
+    })
 }
 pub fn observe_access_boomerang(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // $boomerang
-    {
-        hobserve__boomerang!(ctx, world, full_obs);
-    }
+    hobserve__boomerang!(ctx, world, full_obs)
 }
 pub fn observe_access_boomerang1(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // Boomerang
-    todo!();
+    {
+        full_obs.observe_boomerang();
+        ctx.has(Item::Boomerang)
+    }
 }
 pub fn observe_access_boomerang2(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // Boomerang
-    todo!();
+    {
+        full_obs.observe_boomerang();
+        ctx.has(Item::Boomerang)
+    }
 }
 pub fn observe_access_boomerang3(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // Boomerang
-    todo!();
+    {
+        full_obs.observe_boomerang();
+        ctx.has(Item::Boomerang)
+    }
 }
 pub fn observe_access_boomerang4(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // Boomerang
-    todo!();
+    {
+        full_obs.observe_boomerang();
+        ctx.has(Item::Boomerang)
+    }
 }
 pub fn observe_access_boomerang5(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // Boomerang
-    todo!();
-}
-pub fn observe_access_bs(ctx: &Context, world: &graph::World, full_obs: &mut FullObservation) {
-    // $bs
     {
-        hobserve__bs!(ctx, world, full_obs);
+        full_obs.observe_boomerang();
+        ctx.has(Item::Boomerang)
     }
+}
+pub fn observe_access_bs(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $bs
+    hobserve__bs!(ctx, world, full_obs)
 }
 pub fn observe_access_can_damage(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // $can_damage
-    {
-        hobserve__can_damage!(ctx, world, full_obs);
-    }
+    hobserve__can_damage!(ctx, world, full_obs)
 }
 pub fn observe_access_can_deploy(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // $can_deploy
-    {
-        hobserve__can_deploy!(ctx, world, full_obs);
-    }
+    hobserve__can_deploy!(ctx, world, full_obs)
 }
 pub fn observe_access_can_deploy_and_drone_hover(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // $can_deploy and Drone_Hover
-    {
-        {
-            hobserve__can_deploy!(ctx, world, full_obs);
-        }
-        if !(helper__can_deploy!(ctx, world)) {
-            todo!();
-        }
-    }
+    (hobserve__can_deploy!(ctx, world, full_obs) && {
+        full_obs.observe_drone_hover();
+        ctx.has(Item::Drone_Hover)
+    })
 }
 pub fn observe_access_can_deploy_and_slingshot_hook(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // $can_deploy and Slingshot_Hook
-    {
-        {
-            hobserve__can_deploy!(ctx, world, full_obs);
-        }
-        if !(helper__can_deploy!(ctx, world)) {
-            todo!();
-        }
-    }
+    (hobserve__can_deploy!(ctx, world, full_obs) && {
+        full_obs.observe_slingshot_hook();
+        ctx.has(Item::Slingshot_Hook)
+    })
 }
 pub fn observe_access_can_deploy_and_slingshot_hook_and_drone_hover(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // $can_deploy and Slingshot_Hook and Drone_Hover
-    {
-        {
-            {
-                hobserve__can_deploy!(ctx, world, full_obs);
-            }
-            if !(helper__can_deploy!(ctx, world)) {
-                todo!();
-            }
-        }
-        if !(helper__can_deploy!(ctx, world) && ctx.has(Item::Slingshot_Hook)) {
-            todo!();
-        }
-    }
+    ((hobserve__can_deploy!(ctx, world, full_obs) && {
+        full_obs.observe_slingshot_hook();
+        ctx.has(Item::Slingshot_Hook)
+    }) && {
+        full_obs.observe_drone_hover();
+        ctx.has(Item::Drone_Hover)
+    })
 }
-pub fn observe_access_charge(ctx: &Context, world: &graph::World, full_obs: &mut FullObservation) {
+pub fn observe_access_charge(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
     // $charge
-    {
-        hobserve__charge!(ctx, world, full_obs);
-    }
+    hobserve__charge!(ctx, world, full_obs)
 }
-pub fn observe_access_climb(ctx: &Context, world: &graph::World, full_obs: &mut FullObservation) {
+pub fn observe_access_climb(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
     // $climb
-    {
-        hobserve__climb!(ctx, world, full_obs);
-    }
+    hobserve__climb!(ctx, world, full_obs)
 }
 pub fn observe_access_climb_and_annuna_east_bridge_gate(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // $climb and Annuna_East_Bridge_Gate
-    {
-        {
-            hobserve__climb!(ctx, world, full_obs);
-        }
-        if !(helper__climb!(ctx, world)) {
-            todo!();
-        }
-    }
+    (hobserve__climb!(ctx, world, full_obs) && {
+        full_obs.observe_annuna_east_bridge_gate();
+        ctx.has(Item::Annuna_East_Bridge_Gate)
+    })
 }
 pub fn observe_access_climb_and_can_deploy_and_hover_and_slingshot_hook(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // $climb and $can_deploy and Hover and Slingshot_Hook
-    {
-        {
-            {
-                {
-                    hobserve__climb!(ctx, world, full_obs);
-                }
-                if !(helper__climb!(ctx, world)) {
-                    {
-                        hobserve__can_deploy!(ctx, world, full_obs);
-                    }
-                }
-            }
-            if !(helper__climb!(ctx, world) && helper__can_deploy!(ctx, world)) {
-                todo!();
-            }
-        }
-        if !((helper__climb!(ctx, world) && helper__can_deploy!(ctx, world))
-            && ctx.has(Item::Hover))
-        {
-            todo!();
-        }
-    }
+    (((hobserve__climb!(ctx, world, full_obs) && hobserve__can_deploy!(ctx, world, full_obs)) && {
+        full_obs.observe_hover();
+        ctx.has(Item::Hover)
+    }) && {
+        full_obs.observe_slingshot_hook();
+        ctx.has(Item::Slingshot_Hook)
+    })
 }
 pub fn observe_access_climb_and_grab(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // $climb and $grab
-    {
-        {
-            hobserve__climb!(ctx, world, full_obs);
-        }
-        if !(helper__climb!(ctx, world)) {
-            {
-                hobserve__grab!(ctx, world, full_obs);
-            }
-        }
-    }
+    (hobserve__climb!(ctx, world, full_obs) && hobserve__grab!(ctx, world, full_obs))
 }
 pub fn observe_access_climb_and_grab_and_anuman(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // $climb and $grab and Anuman
-    {
-        {
-            {
-                hobserve__climb!(ctx, world, full_obs);
-            }
-            if !(helper__climb!(ctx, world)) {
-                {
-                    hobserve__grab!(ctx, world, full_obs);
-                }
-            }
-        }
-        if !(helper__climb!(ctx, world) && helper__grab!(ctx, world)) {
-            todo!();
-        }
-    }
+    ((hobserve__climb!(ctx, world, full_obs) && hobserve__grab!(ctx, world, full_obs)) && {
+        full_obs.observe_anuman();
+        ctx.has(Item::Anuman)
+    })
 }
 pub fn observe_access_climb_or_hook(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // $climb or $hook
-    {
-        {
-            hobserve__climb!(ctx, world, full_obs);
-        }
-        if helper__climb!(ctx, world) {
-            {
-                hobserve__hook!(ctx, world, full_obs);
-            }
-        }
-    }
+    (hobserve__climb!(ctx, world, full_obs) || hobserve__hook!(ctx, world, full_obs))
 }
 pub fn observe_access_defeat_mus_a_m20(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // Defeat_MUS_A_M20
-    todo!();
+    {
+        full_obs.observe_defeat_mus_a_m20();
+        ctx.has(Item::Defeat_MUS_A_M20)
+    }
 }
 pub fn observe_access_drone_melee_damage(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // Drone_Melee_Damage
-    todo!();
+    {
+        full_obs.observe_drone_melee_damage();
+        ctx.has(Item::Drone_Melee_Damage)
+    }
 }
 pub fn observe_access_drone_melee_damage_2(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // Drone_Melee_Damage_2
-    todo!();
+    {
+        full_obs.observe_drone_melee_damage_2();
+        ctx.has(Item::Drone_Melee_Damage_2)
+    }
 }
 pub fn observe_access_drone_melee_speed(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // Drone_Melee_Speed
-    todo!();
+    {
+        full_obs.observe_drone_melee_speed();
+        ctx.has(Item::Drone_Melee_Speed)
+    }
 }
 pub fn observe_access_drone_melee_speed_2(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // Drone_Melee_Speed_2
-    todo!();
+    {
+        full_obs.observe_drone_melee_speed_2();
+        ctx.has(Item::Drone_Melee_Speed_2)
+    }
 }
 pub fn observe_access_ebih__base_camp__left_platform__move_left_platform__req(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // $activate and not ^_left_platform_moved
-    {
-        {
-            hobserve__activate!(ctx, world, full_obs);
-        }
-        if !(helper__activate!(ctx, world)) {
-            todo!();
-        }
-    }
+    (hobserve__activate!(ctx, world, full_obs)
+        && !({
+            full_obs.observe_ebih__base_camp__ctx__left_platform_moved();
+            ctx.ebih__base_camp__ctx__left_platform_moved()
+        }))
 }
 pub fn observe_access_ebih__base_camp__left_platform_moved__reset_left_platform__req(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // $activate and ^_left_platform_moved
-    {
-        {
-            hobserve__activate!(ctx, world, full_obs);
-        }
-        if !(helper__activate!(ctx, world)) {
-            todo!();
-        }
-    }
+    (hobserve__activate!(ctx, world, full_obs) && {
+        full_obs.observe_ebih__base_camp__ctx__left_platform_moved();
+        ctx.ebih__base_camp__ctx__left_platform_moved()
+    })
 }
 pub fn observe_access_ebih__base_camp__top_platform__ex__left_platform_1__req(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // $hover and not ^_left_platform_moved
-    {
-        {
-            hobserve__hover!(ctx, world, full_obs);
-        }
-        if !(helper__hover!(ctx, world)) {
-            todo!();
-        }
-    }
+    (hobserve__hover!(ctx, world, full_obs)
+        && !({
+            full_obs.observe_ebih__base_camp__ctx__left_platform_moved();
+            ctx.ebih__base_camp__ctx__left_platform_moved()
+        }))
 }
 pub fn observe_access_ebih__base_camp__top_platform__ex__left_platform_moved_1__req(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // ^_left_platform_moved
-    todo!();
+    {
+        full_obs.observe_ebih__base_camp__ctx__left_platform_moved();
+        ctx.ebih__base_camp__ctx__left_platform_moved()
+    }
 }
 pub fn observe_access_ebih__base_camp__west_11__ex__left_platform_1__req(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // $platform and $hook and not ^_left_platform_moved
-    {
-        {
-            {
-                hobserve__platform!(ctx, world, full_obs);
-            }
-            if !(helper__platform!(ctx, world)) {
-                {
-                    hobserve__hook!(ctx, world, full_obs);
-                }
-            }
-        }
-        if !(helper__platform!(ctx, world) && helper__hook!(ctx, world)) {
-            todo!();
-        }
-    }
+    ((hobserve__platform!(ctx, world, full_obs) && hobserve__hook!(ctx, world, full_obs))
+        && !({
+            full_obs.observe_ebih__base_camp__ctx__left_platform_moved();
+            ctx.ebih__base_camp__ctx__left_platform_moved()
+        }))
 }
 pub fn observe_access_ebih__base_camp__west_11__ex__left_platform_2__req(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // $hover and not ^_left_platform_moved
-    {
-        {
-            hobserve__hover!(ctx, world, full_obs);
-        }
-        if !(helper__hover!(ctx, world)) {
-            todo!();
-        }
-    }
+    (hobserve__hover!(ctx, world, full_obs)
+        && !({
+            full_obs.observe_ebih__base_camp__ctx__left_platform_moved();
+            ctx.ebih__base_camp__ctx__left_platform_moved()
+        }))
 }
 pub fn observe_access_ebih__drone_room__pit_left__activate_lift__req(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // Infect and ^_platform_moved
-    {
-        todo!();
-        if !(ctx.has(Item::Infect)) {
-            todo!();
-        }
-    }
+    ({
+        full_obs.observe_infect();
+        ctx.has(Item::Infect)
+    } && {
+        full_obs.observe_ebih__drone_room__ctx__platform_moved();
+        ctx.ebih__drone_room__ctx__platform_moved()
+    })
 }
 pub fn observe_access_ebih__drone_room__pit_left__activate_lift_but_get_off_early__req(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // Infect and ^_platform_moved
-    {
-        todo!();
-        if !(ctx.has(Item::Infect)) {
-            todo!();
-        }
-    }
+    ({
+        full_obs.observe_infect();
+        ctx.has(Item::Infect)
+    } && {
+        full_obs.observe_ebih__drone_room__ctx__platform_moved();
+        ctx.ebih__drone_room__ctx__platform_moved()
+    })
 }
 pub fn observe_access_ebih__drone_room__portal_exit__activate_platform__req(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // Infect and not ^_platform_moved
-    {
-        todo!();
-        if !(ctx.has(Item::Infect)) {
-            todo!();
-        }
-    }
+    ({
+        full_obs.observe_infect();
+        ctx.has(Item::Infect)
+    } && !({
+        full_obs.observe_ebih__drone_room__ctx__platform_moved();
+        ctx.ebih__drone_room__ctx__platform_moved()
+    }))
 }
 pub fn observe_access_ebih__drone_room__portal_exit__ex__moving_platform_1__req(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // Infect and not ^_platform_moved
-    {
-        todo!();
-        if !(ctx.has(Item::Infect)) {
-            todo!();
-        }
-    }
+    ({
+        full_obs.observe_infect();
+        ctx.has(Item::Infect)
+    } && !({
+        full_obs.observe_ebih__drone_room__ctx__platform_moved();
+        ctx.ebih__drone_room__ctx__platform_moved()
+    }))
 }
 pub fn observe_access_ebih__drone_room__portal_exit__ex__moving_platform_2__req(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // $hook and not ^_platform_moved
-    {
-        {
-            hobserve__hook!(ctx, world, full_obs);
-        }
-        if !(helper__hook!(ctx, world)) {
-            todo!();
-        }
-    }
+    (hobserve__hook!(ctx, world, full_obs)
+        && !({
+            full_obs.observe_ebih__drone_room__ctx__platform_moved();
+            ctx.ebih__drone_room__ctx__platform_moved()
+        }))
 }
 pub fn observe_access_ebih__ebih_east__dispenser__activate_lift__req(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // Infect and ^_platform2_moved and ($grab or $hook)
-    {
-        {
-            todo!();
-            if !(ctx.has(Item::Infect)) {
-                todo!();
-            }
-        }
-        if !(ctx.has(Item::Infect) && ctx.ebih__ebih_east__ctx__platform2_moved()) {
-            {
-                {
-                    hobserve__grab!(ctx, world, full_obs);
-                }
-                if helper__grab!(ctx, world) {
-                    {
-                        hobserve__hook!(ctx, world, full_obs);
-                    }
-                }
-            }
-        }
-    }
+    (({
+        full_obs.observe_infect();
+        ctx.has(Item::Infect)
+    } && {
+        full_obs.observe_ebih__ebih_east__ctx__platform2_moved();
+        ctx.ebih__ebih_east__ctx__platform2_moved()
+    }) && (hobserve__grab!(ctx, world, full_obs) || hobserve__hook!(ctx, world, full_obs)))
 }
 pub fn observe_access_ebih__ebih_east__dispenser__ex__lower_moving_platform_1__req(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // $grab and not ^_platform2_moved
-    {
-        {
-            hobserve__grab!(ctx, world, full_obs);
-        }
-        if !(helper__grab!(ctx, world)) {
-            todo!();
-        }
-    }
+    (hobserve__grab!(ctx, world, full_obs)
+        && !({
+            full_obs.observe_ebih__ebih_east__ctx__platform2_moved();
+            ctx.ebih__ebih_east__ctx__platform2_moved()
+        }))
 }
 pub fn observe_access_ebih__ebih_east__dispenser__ex__lower_moving_platform_2__req(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // $hook and not ^_platform2_moved
-    {
-        {
-            hobserve__hook!(ctx, world, full_obs);
-        }
-        if !(helper__hook!(ctx, world)) {
-            todo!();
-        }
-    }
+    (hobserve__hook!(ctx, world, full_obs)
+        && !({
+            full_obs.observe_ebih__ebih_east__ctx__platform2_moved();
+            ctx.ebih__ebih_east__ctx__platform2_moved()
+        }))
 }
 pub fn observe_access_ebih__ebih_east__lower_moving_platform__activate_lift__req(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // Infect and $grab and not ^_platform2_moved
-    {
-        {
-            todo!();
-            if !(ctx.has(Item::Infect)) {
-                {
-                    hobserve__grab!(ctx, world, full_obs);
-                }
-            }
-        }
-        if !(ctx.has(Item::Infect) && helper__grab!(ctx, world)) {
-            todo!();
-        }
-    }
+    (({
+        full_obs.observe_infect();
+        ctx.has(Item::Infect)
+    } && hobserve__grab!(ctx, world, full_obs))
+        && !({
+            full_obs.observe_ebih__ebih_east__ctx__platform2_moved();
+            ctx.ebih__ebih_east__ctx__platform2_moved()
+        }))
 }
 pub fn observe_access_ebih__ebih_east__lower_moving_platform__activate_ride__req(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // Infect and not ^_platform2_moved
-    {
-        todo!();
-        if !(ctx.has(Item::Infect)) {
-            todo!();
-        }
-    }
+    ({
+        full_obs.observe_infect();
+        ctx.has(Item::Infect)
+    } && !({
+        full_obs.observe_ebih__ebih_east__ctx__platform2_moved();
+        ctx.ebih__ebih_east__ctx__platform2_moved()
+    }))
 }
 pub fn observe_access_ebih__ebih_east__moving_platform__activate_ride__req(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // Infect and $grab and not ^_platform1_moved
-    {
-        {
-            todo!();
-            if !(ctx.has(Item::Infect)) {
-                {
-                    hobserve__grab!(ctx, world, full_obs);
-                }
-            }
-        }
-        if !(ctx.has(Item::Infect) && helper__grab!(ctx, world)) {
-            todo!();
-        }
-    }
+    (({
+        full_obs.observe_infect();
+        ctx.has(Item::Infect)
+    } && hobserve__grab!(ctx, world, full_obs))
+        && !({
+            full_obs.observe_ebih__ebih_east__ctx__platform1_moved();
+            ctx.ebih__ebih_east__ctx__platform1_moved()
+        }))
 }
 pub fn observe_access_ebih__ebih_west__above_door__ex__below_door_1__req(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // ^_door_open
-    todo!();
+    {
+        full_obs.observe_ebih__ebih_west__ctx__door_open();
+        ctx.ebih__ebih_west__ctx__door_open()
+    }
 }
 pub fn observe_access_ebih__ebih_west__above_door__ex__refill_station_1__req(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // not ^_door_open or $grab
-    {
-        todo!();
-        if !ctx.ebih__ebih_west__ctx__door_open() {
-            {
-                hobserve__grab!(ctx, world, full_obs);
-            }
-        }
-    }
+    (!({
+        full_obs.observe_ebih__ebih_west__ctx__door_open();
+        ctx.ebih__ebih_west__ctx__door_open()
+    }) || hobserve__grab!(ctx, world, full_obs))
 }
 pub fn observe_access_ebih__ebih_west__above_door__ex__small_gap_1__req(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // not ^_door_open
-    todo!();
+    !({
+        full_obs.observe_ebih__ebih_west__ctx__door_open();
+        ctx.ebih__ebih_west__ctx__door_open()
+    })
 }
 pub fn observe_access_ebih__ebih_west__below_door__ex__above_door_1__req(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // $grab and ^_door_open
-    {
-        {
-            hobserve__grab!(ctx, world, full_obs);
-        }
-        if !(helper__grab!(ctx, world)) {
-            todo!();
-        }
-    }
+    (hobserve__grab!(ctx, world, full_obs) && {
+        full_obs.observe_ebih__ebih_west__ctx__door_open();
+        ctx.ebih__ebih_west__ctx__door_open()
+    })
 }
 pub fn observe_access_ebih__ebih_west__below_door__ex__refill_station_1__req(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // $hook and ^_door_open
-    {
-        {
-            hobserve__hook!(ctx, world, full_obs);
-        }
-        if !(helper__hook!(ctx, world)) {
-            todo!();
-        }
-    }
+    (hobserve__hook!(ctx, world, full_obs) && {
+        full_obs.observe_ebih__ebih_west__ctx__door_open();
+        ctx.ebih__ebih_west__ctx__door_open()
+    })
 }
 pub fn observe_access_ebih__grid_25_10_12__door__ex__door_left_1__req(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // ^_door_open
-    todo!();
+    {
+        full_obs.observe_ebih__grid_25_10_12__ctx__door_open();
+        ctx.ebih__grid_25_10_12__ctx__door_open()
+    }
 }
 pub fn observe_access_ebih__grid_25_10_12__door__ex__east_11_1__req(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // ^_door_open
-    todo!();
+    {
+        full_obs.observe_ebih__grid_25_10_12__ctx__door_open();
+        ctx.ebih__grid_25_10_12__ctx__door_open()
+    }
 }
 pub fn observe_access_ebih__grid_25_10_12__door_left__ex__door_1__req(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // ^_door_open
-    todo!();
+    {
+        full_obs.observe_ebih__grid_25_10_12__ctx__door_open();
+        ctx.ebih__grid_25_10_12__ctx__door_open()
+    }
 }
 pub fn observe_access_ebih__grid_25_10_12__east_11__ex__door_1__req(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // ^_door_open
-    todo!();
+    {
+        full_obs.observe_ebih__grid_25_10_12__ctx__door_open();
+        ctx.ebih__grid_25_10_12__ctx__door_open()
+    }
 }
 pub fn observe_access_ebih__vertical_interchange__door__ex__door_east_1__req(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // ^_door_open
-    todo!();
+    {
+        full_obs.observe_ebih__vertical_interchange__ctx__door_open();
+        ctx.ebih__vertical_interchange__ctx__door_open()
+    }
 }
 pub fn observe_access_ebih__vertical_interchange__door__ex__door_west_1__req(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // ^_door_open
-    todo!();
+    {
+        full_obs.observe_ebih__vertical_interchange__ctx__door_open();
+        ctx.ebih__vertical_interchange__ctx__door_open()
+    }
 }
 pub fn observe_access_ebih__vertical_interchange__door_east__ex__door_1__req(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // ^_door_open
-    todo!();
+    {
+        full_obs.observe_ebih__vertical_interchange__ctx__door_open();
+        ctx.ebih__vertical_interchange__ctx__door_open()
+    }
 }
 pub fn observe_access_ebih__vertical_interchange__door_west__ex__door_1__req(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // ^_door_open
-    todo!();
+    {
+        full_obs.observe_ebih__vertical_interchange__ctx__door_open();
+        ctx.ebih__vertical_interchange__ctx__door_open()
+    }
 }
 pub fn observe_access_ebih__vertical_interchange__west_13__open_door__req(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // $open and not ^_door_open
-    {
-        {
-            hobserve__open!(ctx, world, full_obs);
-        }
-        if !(helper__open!(ctx, world)) {
-            todo!();
-        }
-    }
+    (hobserve__open!(ctx, world, full_obs)
+        && !({
+            full_obs.observe_ebih__vertical_interchange__ctx__door_open();
+            ctx.ebih__vertical_interchange__ctx__door_open()
+        }))
 }
 pub fn observe_access_ebih__waterfall__west_door__ex__west_door_left_1__req(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // ^_west_door_open
-    todo!();
+    {
+        full_obs.observe_ebih__waterfall__ctx__west_door_open();
+        ctx.ebih__waterfall__ctx__west_door_open()
+    }
 }
 pub fn observe_access_ebih__waterfall__west_door__ex__west_door_right_1__req(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // ^_west_door_open
-    todo!();
+    {
+        full_obs.observe_ebih__waterfall__ctx__west_door_open();
+        ctx.ebih__waterfall__ctx__west_door_open()
+    }
 }
 pub fn observe_access_ebih__waterfall__west_door_left__ex__west_door_1__req(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // ^_west_door_open
-    todo!();
+    {
+        full_obs.observe_ebih__waterfall__ctx__west_door_open();
+        ctx.ebih__waterfall__ctx__west_door_open()
+    }
 }
 pub fn observe_access_ebih__waterfall__west_door_right__ex__west_door_1__req(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // ^_west_door_open
-    todo!();
+    {
+        full_obs.observe_ebih__waterfall__ctx__west_door_open();
+        ctx.ebih__waterfall__ctx__west_door_open()
+    }
 }
 pub fn observe_access_ebih_alu(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // Ebih_Alu
-    todo!();
+    {
+        full_obs.observe_ebih_alu();
+        ctx.has(Item::Ebih_Alu)
+    }
 }
 pub fn observe_access_ebih_interchange_block(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // Ebih_Interchange_Block
-    todo!();
+    {
+        full_obs.observe_ebih_interchange_block();
+        ctx.has(Item::Ebih_Interchange_Block)
+    }
 }
 pub fn observe_access_ebih_interchange_gate(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // Ebih_Interchange_Gate
-    todo!();
+    {
+        full_obs.observe_ebih_interchange_gate();
+        ctx.has(Item::Ebih_Interchange_Gate)
+    }
 }
 pub fn observe_access_ebih_interchange_gate_and_ebih_interchange_block_and_grab(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // Ebih_Interchange_Gate and Ebih_Interchange_Block and $grab
-    {
-        {
-            todo!();
-            if !(ctx.has(Item::Ebih_Interchange_Gate)) {
-                todo!();
-            }
-        }
-        if !(ctx.has(Item::Ebih_Interchange_Gate) && ctx.has(Item::Ebih_Interchange_Block)) {
-            {
-                hobserve__grab!(ctx, world, full_obs);
-            }
-        }
-    }
+    (({
+        full_obs.observe_ebih_interchange_gate();
+        ctx.has(Item::Ebih_Interchange_Gate)
+    } && {
+        full_obs.observe_ebih_interchange_block();
+        ctx.has(Item::Ebih_Interchange_Block)
+    }) && hobserve__grab!(ctx, world, full_obs))
 }
 pub fn observe_access_ebih_interchange_gate_and_ebih_interchange_block_and_hook(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // Ebih_Interchange_Gate and Ebih_Interchange_Block and $hook
-    {
-        {
-            todo!();
-            if !(ctx.has(Item::Ebih_Interchange_Gate)) {
-                todo!();
-            }
-        }
-        if !(ctx.has(Item::Ebih_Interchange_Gate) && ctx.has(Item::Ebih_Interchange_Block)) {
-            {
-                hobserve__hook!(ctx, world, full_obs);
-            }
-        }
-    }
+    (({
+        full_obs.observe_ebih_interchange_gate();
+        ctx.has(Item::Ebih_Interchange_Gate)
+    } && {
+        full_obs.observe_ebih_interchange_block();
+        ctx.has(Item::Ebih_Interchange_Block)
+    }) && hobserve__hook!(ctx, world, full_obs))
 }
 pub fn observe_access_ebih_interchange_gate_and_not_ebih_interchange_block_and_grab(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // Ebih_Interchange_Gate and not Ebih_Interchange_Block and $grab
-    {
-        {
-            todo!();
-            if !(ctx.has(Item::Ebih_Interchange_Gate)) {
-                todo!();
-            }
-        }
-        if !(ctx.has(Item::Ebih_Interchange_Gate) && !ctx.has(Item::Ebih_Interchange_Block)) {
-            {
-                hobserve__grab!(ctx, world, full_obs);
-            }
-        }
-    }
+    (({
+        full_obs.observe_ebih_interchange_gate();
+        ctx.has(Item::Ebih_Interchange_Gate)
+    } && {
+        full_obs.observe_ebih_interchange_block();
+        !ctx.has(Item::Ebih_Interchange_Block)
+    }) && hobserve__grab!(ctx, world, full_obs))
 }
 pub fn observe_access_ebih_interchange_gate_and_not_ebih_interchange_block_and_hook(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // Ebih_Interchange_Gate and not Ebih_Interchange_Block and $hook
-    {
-        {
-            todo!();
-            if !(ctx.has(Item::Ebih_Interchange_Gate)) {
-                todo!();
-            }
-        }
-        if !(ctx.has(Item::Ebih_Interchange_Gate) && !ctx.has(Item::Ebih_Interchange_Block)) {
-            {
-                hobserve__hook!(ctx, world, full_obs);
-            }
-        }
-    }
+    (({
+        full_obs.observe_ebih_interchange_gate();
+        ctx.has(Item::Ebih_Interchange_Gate)
+    } && {
+        full_obs.observe_ebih_interchange_block();
+        !ctx.has(Item::Ebih_Interchange_Block)
+    }) && hobserve__hook!(ctx, world, full_obs))
 }
 pub fn observe_access_ebih_wasteland_door(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // Ebih_Wasteland_Door
-    todo!();
+    {
+        full_obs.observe_ebih_wasteland_door();
+        ctx.has(Item::Ebih_Wasteland_Door)
+    }
 }
 pub fn observe_access_ebih_waterfall_wall(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // Ebih_Waterfall_Wall
-    todo!();
+    {
+        full_obs.observe_ebih_waterfall_wall();
+        ctx.has(Item::Ebih_Waterfall_Wall)
+    }
 }
 pub fn observe_access_ebih_west_block(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // Ebih_West_Block
-    todo!();
+    {
+        full_obs.observe_ebih_west_block();
+        ctx.has(Item::Ebih_West_Block)
+    }
 }
 pub fn observe_access_fast_travel(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // Fast_Travel
-    todo!();
+    {
+        full_obs.observe_fast_travel();
+        ctx.has(Item::Fast_Travel)
+    }
 }
 pub fn observe_access_ft_main_and___map_spot_within_menu_gt_kiengir_map(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // $ft_main and (^map_spot WITHIN `Menu > Kiengir Map`)
-    {
-        {
-            hobserve__ft_main!(ctx, world, full_obs);
-        }
-        if !(helper__ft_main!(ctx, world)) {
-            todo!();
-        }
-    }
+    (hobserve__ft_main!(ctx, world, full_obs) && (todo!()))
 }
 pub fn observe_access_giguna__carnelian__door__ex__switch_1__req(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // ^_door_opened
-    todo!();
+    {
+        full_obs.observe_giguna__carnelian__ctx__door_opened();
+        ctx.giguna__carnelian__ctx__door_opened()
+    }
 }
 pub fn observe_access_giguna__carnelian__door__ex__vault_1__req(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // ^_door_opened
-    todo!();
+    {
+        full_obs.observe_giguna__carnelian__ctx__door_opened();
+        ctx.giguna__carnelian__ctx__door_opened()
+    }
 }
 pub fn observe_access_giguna__carnelian__lower_susar__caught__req(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // not ^_lower_susar
-    todo!();
+    !({
+        full_obs.observe_giguna__carnelian__ctx__lower_susar();
+        ctx.giguna__carnelian__ctx__lower_susar()
+    })
 }
 pub fn observe_access_giguna__carnelian__lower_susar__ex__rock_1__req(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // ^_lower_susar
-    todo!();
+    {
+        full_obs.observe_giguna__carnelian__ctx__lower_susar();
+        ctx.giguna__carnelian__ctx__lower_susar()
+    }
 }
 pub fn observe_access_giguna__carnelian__lower_susar__ex__west_ledge_1__req(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // ^_lower_susar and $grab
-    {
-        todo!();
-        if !(ctx.giguna__carnelian__ctx__lower_susar()) {
-            {
-                hobserve__grab!(ctx, world, full_obs);
-            }
-        }
-    }
+    ({
+        full_obs.observe_giguna__carnelian__ctx__lower_susar();
+        ctx.giguna__carnelian__ctx__lower_susar()
+    } && hobserve__grab!(ctx, world, full_obs))
 }
 pub fn observe_access_giguna__carnelian__lower_susar__ex__west_ledge_2__req(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // ^_lower_susar and $hook
-    {
-        todo!();
-        if !(ctx.giguna__carnelian__ctx__lower_susar()) {
-            {
-                hobserve__hook!(ctx, world, full_obs);
-            }
-        }
-    }
+    ({
+        full_obs.observe_giguna__carnelian__ctx__lower_susar();
+        ctx.giguna__carnelian__ctx__lower_susar()
+    } && hobserve__hook!(ctx, world, full_obs))
 }
 pub fn observe_access_giguna__carnelian__lower_susar__hack__req(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // not ^_lower_susar and $allegiance1
-    {
-        todo!();
-        if !(!ctx.giguna__carnelian__ctx__lower_susar()) {
-            {
-                hobserve__allegiance1!(ctx, world, full_obs);
-            }
-        }
-    }
+    (!({
+        full_obs.observe_giguna__carnelian__ctx__lower_susar();
+        ctx.giguna__carnelian__ctx__lower_susar()
+    }) && hobserve__allegiance1!(ctx, world, full_obs))
 }
 pub fn observe_access_giguna__carnelian__switch__ex__door_1__req(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // ^_door_opened
-    todo!();
+    {
+        full_obs.observe_giguna__carnelian__ctx__door_opened();
+        ctx.giguna__carnelian__ctx__door_opened()
+    }
 }
 pub fn observe_access_giguna__carnelian__switch__open_door__req(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // $unlock3 and not ^_door_opened
-    {
-        {
-            hobserve__unlock3!(ctx, world, full_obs);
-        }
-        if !(helper__unlock3!(ctx, world)) {
-            todo!();
-        }
-    }
+    (hobserve__unlock3!(ctx, world, full_obs)
+        && !({
+            full_obs.observe_giguna__carnelian__ctx__door_opened();
+            ctx.giguna__carnelian__ctx__door_opened()
+        }))
 }
 pub fn observe_access_giguna__carnelian__upper_susar__caught__req(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // not ^_upper_susar
-    todo!();
+    !({
+        full_obs.observe_giguna__carnelian__ctx__upper_susar();
+        ctx.giguna__carnelian__ctx__upper_susar()
+    })
 }
 pub fn observe_access_giguna__carnelian__upper_susar__ex__east_cliff_1__req(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // ^_upper_susar
-    todo!();
+    {
+        full_obs.observe_giguna__carnelian__ctx__upper_susar();
+        ctx.giguna__carnelian__ctx__upper_susar()
+    }
 }
 pub fn observe_access_giguna__carnelian__upper_susar__ex__middle_platforms_1__req(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // ^_upper_susar
-    todo!();
+    {
+        full_obs.observe_giguna__carnelian__ctx__upper_susar();
+        ctx.giguna__carnelian__ctx__upper_susar()
+    }
 }
 pub fn observe_access_giguna__carnelian__upper_susar__ex__upper_path_1__req(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // ^_upper_susar
-    todo!();
+    {
+        full_obs.observe_giguna__carnelian__ctx__upper_susar();
+        ctx.giguna__carnelian__ctx__upper_susar()
+    }
 }
 pub fn observe_access_giguna__carnelian__upper_susar__hack__req(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // not ^_upper_susar and $allegiance1
-    {
-        todo!();
-        if !(!ctx.giguna__carnelian__ctx__upper_susar()) {
-            {
-                hobserve__allegiance1!(ctx, world, full_obs);
-            }
-        }
-    }
+    (!({
+        full_obs.observe_giguna__carnelian__ctx__upper_susar();
+        ctx.giguna__carnelian__ctx__upper_susar()
+    }) && hobserve__allegiance1!(ctx, world, full_obs))
 }
 pub fn observe_access_giguna__carnelian__vault__ex__door_1__req(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // ^_door_opened
-    todo!();
+    {
+        full_obs.observe_giguna__carnelian__ctx__door_opened();
+        ctx.giguna__carnelian__ctx__door_opened()
+    }
 }
 pub fn observe_access_giguna__clouds__platform_start__hack_and_get_off_early__req(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // not ^_platform_and_portal and $activate
-    {
-        todo!();
-        if !(!ctx.giguna__clouds__ctx__platform_and_portal()) {
-            {
-                hobserve__activate!(ctx, world, full_obs);
-            }
-        }
-    }
+    (!({
+        full_obs.observe_giguna__clouds__ctx__platform_and_portal();
+        ctx.giguna__clouds__ctx__platform_and_portal()
+    }) && hobserve__activate!(ctx, world, full_obs))
 }
 pub fn observe_access_giguna__clouds__platform_start__hack_and_ride_to_portal__req(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // not ^_platform_and_portal and $activate and $attract and Breach_Sight and Remote_Drone
-    {
-        {
-            {
-                {
-                    todo!();
-                    if !(!ctx.giguna__clouds__ctx__platform_and_portal()) {
-                        {
-                            hobserve__activate!(ctx, world, full_obs);
-                        }
-                    }
-                }
-                if !(!ctx.giguna__clouds__ctx__platform_and_portal()
-                    && helper__activate!(ctx, world))
-                {
-                    {
-                        hobserve__attract!(ctx, world, full_obs);
-                    }
-                }
-            }
-            if !((!ctx.giguna__clouds__ctx__platform_and_portal() && helper__activate!(ctx, world))
-                && helper__attract!(ctx, world))
-            {
-                todo!();
-            }
-        }
-        if !(((!ctx.giguna__clouds__ctx__platform_and_portal() && helper__activate!(ctx, world))
-            && helper__attract!(ctx, world))
-            && ctx.has(Item::Breach_Sight))
-        {
-            todo!();
-        }
-    }
+    ((((!({
+        full_obs.observe_giguna__clouds__ctx__platform_and_portal();
+        ctx.giguna__clouds__ctx__platform_and_portal()
+    }) && hobserve__activate!(ctx, world, full_obs))
+        && hobserve__attract!(ctx, world, full_obs))
+        && {
+            full_obs.observe_breach_sight();
+            ctx.has(Item::Breach_Sight)
+        })
+        && {
+            full_obs.observe_remote_drone();
+            ctx.has(Item::Remote_Drone)
+        })
 }
 pub fn observe_access_giguna__clouds__platform_start__hack_deploy_ride_to_portal__req(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // not ^_platform_and_portal and $activate and $can_deploy and $attract and Breach_Sight
-    {
-        {
-            {
-                {
-                    todo!();
-                    if !(!ctx.giguna__clouds__ctx__platform_and_portal()) {
-                        {
-                            hobserve__activate!(ctx, world, full_obs);
-                        }
-                    }
-                }
-                if !(!ctx.giguna__clouds__ctx__platform_and_portal()
-                    && helper__activate!(ctx, world))
-                {
-                    {
-                        hobserve__can_deploy!(ctx, world, full_obs);
-                    }
-                }
-            }
-            if !((!ctx.giguna__clouds__ctx__platform_and_portal() && helper__activate!(ctx, world))
-                && helper__can_deploy!(ctx, world))
-            {
-                {
-                    hobserve__attract!(ctx, world, full_obs);
-                }
-            }
-        }
-        if !(((!ctx.giguna__clouds__ctx__platform_and_portal() && helper__activate!(ctx, world))
-            && helper__can_deploy!(ctx, world))
-            && helper__attract!(ctx, world))
-        {
-            todo!();
-        }
-    }
+    ((((!({
+        full_obs.observe_giguna__clouds__ctx__platform_and_portal();
+        ctx.giguna__clouds__ctx__platform_and_portal()
+    }) && hobserve__activate!(ctx, world, full_obs))
+        && hobserve__can_deploy!(ctx, world, full_obs))
+        && hobserve__attract!(ctx, world, full_obs))
+        && {
+            full_obs.observe_breach_sight();
+            ctx.has(Item::Breach_Sight)
+        })
 }
 pub fn observe_access_giguna__clouds__platform_stop__ex__flipside_1__req(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // ^_platform_and_portal and ^mode == 'drone'
-    {
-        todo!();
-        if !(ctx.giguna__clouds__ctx__platform_and_portal()) {
-            todo!();
-        }
-    }
+    ({
+        full_obs.observe_giguna__clouds__ctx__platform_and_portal();
+        ctx.giguna__clouds__ctx__platform_and_portal()
+    } && {
+        let v = {
+            full_obs.observe_mode();
+            ctx.mode()
+        };
+        v == enums::Mode::Drone
+    })
 }
 pub fn observe_access_giguna__east_caverns__arc_ledge__ex__hidden_passage_west_1__req(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // ^mode == 'drone' and Mist_Upgrade and ^_combo_entered
-    {
-        {
-            todo!();
-            if !(ctx.mode() == enums::Mode::Drone) {
-                todo!();
-            }
-        }
-        if !(ctx.mode() == enums::Mode::Drone && ctx.has(Item::Mist_Upgrade)) {
-            todo!();
-        }
-    }
+    (({
+        let v = {
+            full_obs.observe_mode();
+            ctx.mode()
+        };
+        v == enums::Mode::Drone
+    } && {
+        full_obs.observe_mist_upgrade();
+        ctx.has(Item::Mist_Upgrade)
+    }) && {
+        full_obs.observe_giguna__east_caverns__ctx__combo_entered();
+        ctx.giguna__east_caverns__ctx__combo_entered()
+    })
 }
 pub fn observe_access_giguna__east_caverns__arc_passage__ex__hidden_passage_west_1__req(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // ^mode == 'drone' and ^_combo_entered
-    {
-        todo!();
-        if !(ctx.mode() == enums::Mode::Drone) {
-            todo!();
-        }
-    }
+    ({
+        let v = {
+            full_obs.observe_mode();
+            ctx.mode()
+        };
+        v == enums::Mode::Drone
+    } && {
+        full_obs.observe_giguna__east_caverns__ctx__combo_entered();
+        ctx.giguna__east_caverns__ctx__combo_entered()
+    })
 }
 pub fn observe_access_giguna__east_caverns__arc_passage__ex__hidden_passage_west_2__req(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // $hook and ^_combo_entered
-    {
-        {
-            hobserve__hook!(ctx, world, full_obs);
-        }
-        if !(helper__hook!(ctx, world)) {
-            todo!();
-        }
-    }
+    (hobserve__hook!(ctx, world, full_obs) && {
+        full_obs.observe_giguna__east_caverns__ctx__combo_entered();
+        ctx.giguna__east_caverns__ctx__combo_entered()
+    })
 }
 pub fn observe_access_giguna__east_caverns__lower_susar__caught__req(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // not ^_lower_susar
-    todo!();
+    !({
+        full_obs.observe_giguna__east_caverns__ctx__lower_susar();
+        ctx.giguna__east_caverns__ctx__lower_susar()
+    })
 }
 pub fn observe_access_giguna__east_caverns__lower_susar__ex__east_grass_1__req(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // ^_lower_susar
-    todo!();
+    {
+        full_obs.observe_giguna__east_caverns__ctx__lower_susar();
+        ctx.giguna__east_caverns__ctx__lower_susar()
+    }
 }
 pub fn observe_access_giguna__east_caverns__lower_susar__ex__under_lower_ledge_1__req(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // ^_lower_susar
-    todo!();
+    {
+        full_obs.observe_giguna__east_caverns__ctx__lower_susar();
+        ctx.giguna__east_caverns__ctx__lower_susar()
+    }
 }
 pub fn observe_access_giguna__east_caverns__lower_susar__hack__req(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // not ^_lower_susar and $allegiance1
-    {
-        todo!();
-        if !(!ctx.giguna__east_caverns__ctx__lower_susar()) {
-            {
-                hobserve__allegiance1!(ctx, world, full_obs);
-            }
-        }
-    }
+    (!({
+        full_obs.observe_giguna__east_caverns__ctx__lower_susar();
+        ctx.giguna__east_caverns__ctx__lower_susar()
+    }) && hobserve__allegiance1!(ctx, world, full_obs))
 }
 pub fn observe_access_giguna__east_caverns__mid_susar__caught__req(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // not ^_mid_susar
-    todo!();
+    !({
+        full_obs.observe_giguna__east_caverns__ctx__mid_susar();
+        ctx.giguna__east_caverns__ctx__mid_susar()
+    })
 }
 pub fn observe_access_giguna__east_caverns__mid_susar__ex__middle_ledge_1__req(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // $grab and ^_mid_susar
-    {
-        {
-            hobserve__grab!(ctx, world, full_obs);
-        }
-        if !(helper__grab!(ctx, world)) {
-            todo!();
-        }
-    }
+    (hobserve__grab!(ctx, world, full_obs) && {
+        full_obs.observe_giguna__east_caverns__ctx__mid_susar();
+        ctx.giguna__east_caverns__ctx__mid_susar()
+    })
 }
 pub fn observe_access_giguna__east_caverns__mid_susar__ex__middle_ledge_2__req(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // $hook and ^_mid_susar
-    {
-        {
-            hobserve__hook!(ctx, world, full_obs);
-        }
-        if !(helper__hook!(ctx, world)) {
-            todo!();
-        }
-    }
+    (hobserve__hook!(ctx, world, full_obs) && {
+        full_obs.observe_giguna__east_caverns__ctx__mid_susar();
+        ctx.giguna__east_caverns__ctx__mid_susar()
+    })
 }
 pub fn observe_access_giguna__east_caverns__mid_susar__ex__middle_rock_1__req(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // ^_mid_susar
-    todo!();
+    {
+        full_obs.observe_giguna__east_caverns__ctx__mid_susar();
+        ctx.giguna__east_caverns__ctx__mid_susar()
+    }
 }
 pub fn observe_access_giguna__east_caverns__mid_susar__hack__req(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // not ^_mid_susar and $allegiance1
-    {
-        todo!();
-        if !(!ctx.giguna__east_caverns__ctx__mid_susar()) {
-            {
-                hobserve__allegiance1!(ctx, world, full_obs);
-            }
-        }
-    }
+    (!({
+        full_obs.observe_giguna__east_caverns__ctx__mid_susar();
+        ctx.giguna__east_caverns__ctx__mid_susar()
+    }) && hobserve__allegiance1!(ctx, world, full_obs))
 }
 pub fn observe_access_giguna__east_caverns__middle_rock__ex__hidden_passage_east_1__req(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // ^mode == 'drone' and ^_combo_entered
-    {
-        todo!();
-        if !(ctx.mode() == enums::Mode::Drone) {
-            todo!();
-        }
-    }
+    ({
+        let v = {
+            full_obs.observe_mode();
+            ctx.mode()
+        };
+        v == enums::Mode::Drone
+    } && {
+        full_obs.observe_giguna__east_caverns__ctx__combo_entered();
+        ctx.giguna__east_caverns__ctx__combo_entered()
+    })
 }
 pub fn observe_access_giguna__east_caverns__midwest_ledge__ex__hidden_passage_west_1__req(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // $hover and $hook and ^_combo_entered
-    {
-        {
-            {
-                hobserve__hover!(ctx, world, full_obs);
-            }
-            if !(helper__hover!(ctx, world)) {
-                {
-                    hobserve__hook!(ctx, world, full_obs);
-                }
-            }
-        }
-        if !(helper__hover!(ctx, world) && helper__hook!(ctx, world)) {
-            todo!();
-        }
-    }
+    ((hobserve__hover!(ctx, world, full_obs) && hobserve__hook!(ctx, world, full_obs)) && {
+        full_obs.observe_giguna__east_caverns__ctx__combo_entered();
+        ctx.giguna__east_caverns__ctx__combo_entered()
+    })
 }
 pub fn observe_access_giguna__east_caverns__midwest_ledge__ex__hidden_passage_west_2__req(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // ^mode == 'drone' and Mist_Upgrade and ^_combo_entered
-    {
-        {
-            todo!();
-            if !(ctx.mode() == enums::Mode::Drone) {
-                todo!();
-            }
-        }
-        if !(ctx.mode() == enums::Mode::Drone && ctx.has(Item::Mist_Upgrade)) {
-            todo!();
-        }
-    }
+    (({
+        let v = {
+            full_obs.observe_mode();
+            ctx.mode()
+        };
+        v == enums::Mode::Drone
+    } && {
+        full_obs.observe_mist_upgrade();
+        ctx.has(Item::Mist_Upgrade)
+    }) && {
+        full_obs.observe_giguna__east_caverns__ctx__combo_entered();
+        ctx.giguna__east_caverns__ctx__combo_entered()
+    })
 }
 pub fn observe_access_giguna__east_caverns__statues_ledge__ex__hidden_passage_west_1__req(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // $hover and $hook and ^_combo_entered
-    {
-        {
-            {
-                hobserve__hover!(ctx, world, full_obs);
-            }
-            if !(helper__hover!(ctx, world)) {
-                {
-                    hobserve__hook!(ctx, world, full_obs);
-                }
-            }
-        }
-        if !(helper__hover!(ctx, world) && helper__hook!(ctx, world)) {
-            todo!();
-        }
-    }
+    ((hobserve__hover!(ctx, world, full_obs) && hobserve__hook!(ctx, world, full_obs)) && {
+        full_obs.observe_giguna__east_caverns__ctx__combo_entered();
+        ctx.giguna__east_caverns__ctx__combo_entered()
+    })
 }
 pub fn observe_access_giguna__east_caverns__statues_ledge__ex__hidden_passage_west_2__req(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // ^mode == 'drone' and Mist_Upgrade and ^_combo_entered
-    {
-        {
-            todo!();
-            if !(ctx.mode() == enums::Mode::Drone) {
-                todo!();
-            }
-        }
-        if !(ctx.mode() == enums::Mode::Drone && ctx.has(Item::Mist_Upgrade)) {
-            todo!();
-        }
-    }
+    (({
+        let v = {
+            full_obs.observe_mode();
+            ctx.mode()
+        };
+        v == enums::Mode::Drone
+    } && {
+        full_obs.observe_mist_upgrade();
+        ctx.has(Item::Mist_Upgrade)
+    }) && {
+        full_obs.observe_giguna__east_caverns__ctx__combo_entered();
+        ctx.giguna__east_caverns__ctx__combo_entered()
+    })
 }
 pub fn observe_access_giguna__east_caverns__statues_ledge__open_door__req(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // not ^_door_opened and $unlock2 and $range1
-    {
-        {
-            todo!();
-            if !(!ctx.giguna__east_caverns__ctx__door_opened()) {
-                {
-                    hobserve__unlock2!(ctx, world, full_obs);
-                }
-            }
-        }
-        if !(!ctx.giguna__east_caverns__ctx__door_opened() && helper__unlock2!(ctx, world)) {
-            {
-                hobserve__range1!(ctx, world, full_obs);
-            }
-        }
-    }
+    ((!({
+        full_obs.observe_giguna__east_caverns__ctx__door_opened();
+        ctx.giguna__east_caverns__ctx__door_opened()
+    }) && hobserve__unlock2!(ctx, world, full_obs))
+        && hobserve__range1!(ctx, world, full_obs))
 }
 pub fn observe_access_giguna__east_caverns__switch__ex__door_1__req(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // ^_door_opened
-    todo!();
+    {
+        full_obs.observe_giguna__east_caverns__ctx__door_opened();
+        ctx.giguna__east_caverns__ctx__door_opened()
+    }
 }
 pub fn observe_access_giguna__east_caverns__switch__open_door__req(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // not ^_door_opened and $unlock2
-    {
-        todo!();
-        if !(!ctx.giguna__east_caverns__ctx__door_opened()) {
-            {
-                hobserve__unlock2!(ctx, world, full_obs);
-            }
-        }
-    }
+    (!({
+        full_obs.observe_giguna__east_caverns__ctx__door_opened();
+        ctx.giguna__east_caverns__ctx__door_opened()
+    }) && hobserve__unlock2!(ctx, world, full_obs))
 }
 pub fn observe_access_giguna__east_caverns__upper_susar__caught__req(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // not ^_upper_susar
-    todo!();
+    !({
+        full_obs.observe_giguna__east_caverns__ctx__upper_susar();
+        ctx.giguna__east_caverns__ctx__upper_susar()
+    })
 }
 pub fn observe_access_giguna__east_caverns__upper_susar__ex__middle_ledge_1__req(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // ^_upper_susar
-    todo!();
+    {
+        full_obs.observe_giguna__east_caverns__ctx__upper_susar();
+        ctx.giguna__east_caverns__ctx__upper_susar()
+    }
 }
 pub fn observe_access_giguna__east_caverns__upper_susar__ex__top_past_susar_1__req(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // ^_upper_susar
-    todo!();
+    {
+        full_obs.observe_giguna__east_caverns__ctx__upper_susar();
+        ctx.giguna__east_caverns__ctx__upper_susar()
+    }
 }
 pub fn observe_access_giguna__east_caverns__upper_susar__ex__upper_floor_ledge_1__req(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // ^_upper_susar
-    todo!();
+    {
+        full_obs.observe_giguna__east_caverns__ctx__upper_susar();
+        ctx.giguna__east_caverns__ctx__upper_susar()
+    }
 }
 pub fn observe_access_giguna__east_caverns__upper_susar__ex__upper_platforms_right_1__req(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // ^_upper_susar
-    todo!();
+    {
+        full_obs.observe_giguna__east_caverns__ctx__upper_susar();
+        ctx.giguna__east_caverns__ctx__upper_susar()
+    }
 }
 pub fn observe_access_giguna__east_caverns__upper_susar_jump_from_east__caught__req(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // not ^_upper_susar
-    todo!();
+    !({
+        full_obs.observe_giguna__east_caverns__ctx__upper_susar();
+        ctx.giguna__east_caverns__ctx__upper_susar()
+    })
 }
 pub fn observe_access_giguna__east_caverns__upper_susar_jump_from_east__ex__middle_ledge_1__req(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // ^_upper_susar
-    todo!();
+    {
+        full_obs.observe_giguna__east_caverns__ctx__upper_susar();
+        ctx.giguna__east_caverns__ctx__upper_susar()
+    }
 }
 pub fn observe_access_giguna__east_caverns__upper_susar_jump_from_east__ex__midwest_ledge_1__req(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // ^_upper_susar
-    todo!();
+    {
+        full_obs.observe_giguna__east_caverns__ctx__upper_susar();
+        ctx.giguna__east_caverns__ctx__upper_susar()
+    }
 }
 pub fn observe_access_giguna__east_caverns__upper_susar_jump_from_east__hack__req(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // not ^_upper_susar and $allegiance1
-    {
-        todo!();
-        if !(!ctx.giguna__east_caverns__ctx__upper_susar()) {
-            {
-                hobserve__allegiance1!(ctx, world, full_obs);
-            }
-        }
-    }
+    (!({
+        full_obs.observe_giguna__east_caverns__ctx__upper_susar();
+        ctx.giguna__east_caverns__ctx__upper_susar()
+    }) && hobserve__allegiance1!(ctx, world, full_obs))
 }
 pub fn observe_access_giguna__east_caverns__upper_susar_mid_jump__ex__top_past_susar_1__req(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // ^_upper_susar
-    todo!();
+    {
+        full_obs.observe_giguna__east_caverns__ctx__upper_susar();
+        ctx.giguna__east_caverns__ctx__upper_susar()
+    }
 }
 pub fn observe_access_giguna__east_caverns__upper_susar_mid_jump__hack__req(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // not ^_upper_susar and $allegiance1
-    {
-        todo!();
-        if !(!ctx.giguna__east_caverns__ctx__upper_susar()) {
-            {
-                hobserve__allegiance1!(ctx, world, full_obs);
-            }
-        }
-    }
+    (!({
+        full_obs.observe_giguna__east_caverns__ctx__upper_susar();
+        ctx.giguna__east_caverns__ctx__upper_susar()
+    }) && hobserve__allegiance1!(ctx, world, full_obs))
 }
 pub fn observe_access_giguna__east_caverns__west_14__enter_combo__req(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // not ^_combo_entered
-    todo!();
+    !({
+        full_obs.observe_giguna__east_caverns__ctx__combo_entered();
+        ctx.giguna__east_caverns__ctx__combo_entered()
+    })
 }
 pub fn observe_access_giguna__east_caverns__west_16__ex__door_1__req(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // ^_door_opened
-    todo!();
+    {
+        full_obs.observe_giguna__east_caverns__ctx__door_opened();
+        ctx.giguna__east_caverns__ctx__door_opened()
+    }
 }
 pub fn observe_access_giguna__east_caverns__west_16__open_door__req(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // not ^_door_opened and $open and $range2
-    {
-        {
-            todo!();
-            if !(!ctx.giguna__east_caverns__ctx__door_opened()) {
-                {
-                    hobserve__open!(ctx, world, full_obs);
-                }
-            }
-        }
-        if !(!ctx.giguna__east_caverns__ctx__door_opened() && helper__open!(ctx, world)) {
-            {
-                hobserve__range2!(ctx, world, full_obs);
-            }
-        }
-    }
+    ((!({
+        full_obs.observe_giguna__east_caverns__ctx__door_opened();
+        ctx.giguna__east_caverns__ctx__door_opened()
+    }) && hobserve__open!(ctx, world, full_obs))
+        && hobserve__range2!(ctx, world, full_obs))
 }
 pub fn observe_access_giguna__gateway__door__ex__block_left_1__req(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // ^_door_opened
-    todo!();
+    {
+        full_obs.observe_giguna__gateway__ctx__door_opened();
+        ctx.giguna__gateway__ctx__door_opened()
+    }
 }
 pub fn observe_access_giguna__gateway__door__ex__left_platform_1__req(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // ^_door_opened
-    todo!();
+    {
+        full_obs.observe_giguna__gateway__ctx__door_opened();
+        ctx.giguna__gateway__ctx__door_opened()
+    }
 }
 pub fn observe_access_giguna__gateway__door__ex__passage_entry_1__req(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // ^_door_opened
-    todo!();
+    {
+        full_obs.observe_giguna__gateway__ctx__door_opened();
+        ctx.giguna__gateway__ctx__door_opened()
+    }
 }
 pub fn observe_access_giguna__gateway__passage_entry__ex__door_1__req(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // ^_door_opened
-    todo!();
+    {
+        full_obs.observe_giguna__gateway__ctx__door_opened();
+        ctx.giguna__gateway__ctx__door_opened()
+    }
 }
 pub fn observe_access_giguna__giguna_base__below_gate__ex__kari_1__req(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // ^_door_open and $grab and $climb
-    {
-        {
-            todo!();
-            if !(ctx.giguna__giguna_base__ctx__door_open()) {
-                {
-                    hobserve__grab!(ctx, world, full_obs);
-                }
-            }
-        }
-        if !(ctx.giguna__giguna_base__ctx__door_open() && helper__grab!(ctx, world)) {
-            {
-                hobserve__climb!(ctx, world, full_obs);
-            }
-        }
-    }
+    (({
+        full_obs.observe_giguna__giguna_base__ctx__door_open();
+        ctx.giguna__giguna_base__ctx__door_open()
+    } && hobserve__grab!(ctx, world, full_obs))
+        && hobserve__climb!(ctx, world, full_obs))
 }
 pub fn observe_access_giguna__giguna_base__below_gate__ex__kari_2__req(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // ^_door_open and $hook
-    {
-        todo!();
-        if !(ctx.giguna__giguna_base__ctx__door_open()) {
-            {
-                hobserve__hook!(ctx, world, full_obs);
-            }
-        }
-    }
+    ({
+        full_obs.observe_giguna__giguna_base__ctx__door_open();
+        ctx.giguna__giguna_base__ctx__door_open()
+    } && hobserve__hook!(ctx, world, full_obs))
 }
 pub fn observe_access_giguna__giguna_base__below_gate__ex__middle_platform_1__req(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // ^_door_open and $grab and $climb
-    {
-        {
-            todo!();
-            if !(ctx.giguna__giguna_base__ctx__door_open()) {
-                {
-                    hobserve__grab!(ctx, world, full_obs);
-                }
-            }
-        }
-        if !(ctx.giguna__giguna_base__ctx__door_open() && helper__grab!(ctx, world)) {
-            {
-                hobserve__climb!(ctx, world, full_obs);
-            }
-        }
-    }
+    (({
+        full_obs.observe_giguna__giguna_base__ctx__door_open();
+        ctx.giguna__giguna_base__ctx__door_open()
+    } && hobserve__grab!(ctx, world, full_obs))
+        && hobserve__climb!(ctx, world, full_obs))
 }
 pub fn observe_access_giguna__giguna_base__below_gate__ex__middle_platform_2__req(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // ^_door_open and $hook
-    {
-        todo!();
-        if !(ctx.giguna__giguna_base__ctx__door_open()) {
-            {
-                hobserve__hook!(ctx, world, full_obs);
-            }
-        }
-    }
+    ({
+        full_obs.observe_giguna__giguna_base__ctx__door_open();
+        ctx.giguna__giguna_base__ctx__door_open()
+    } && hobserve__hook!(ctx, world, full_obs))
 }
 pub fn observe_access_giguna__giguna_base__kari__ex__below_gate_1__req(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // ^_door_open
-    todo!();
+    {
+        full_obs.observe_giguna__giguna_base__ctx__door_open();
+        ctx.giguna__giguna_base__ctx__door_open()
+    }
 }
 pub fn observe_access_giguna__giguna_base__middle_platform__ex__below_gate_1__req(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // ^_door_open
-    todo!();
+    {
+        full_obs.observe_giguna__giguna_base__ctx__door_open();
+        ctx.giguna__giguna_base__ctx__door_open()
+    }
 }
 pub fn observe_access_giguna__giguna_northeast__right_column__ex__door_1__req(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // ^_door_opened
-    todo!();
+    {
+        full_obs.observe_giguna__giguna_northeast__ctx__door_opened();
+        ctx.giguna__giguna_northeast__ctx__door_opened()
+    }
 }
 pub fn observe_access_giguna__giguna_northeast__right_column__open_door_from_afar__req(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // $unlock3 and Infection_Range_3 and not ^_door_opened
-    {
-        {
-            {
-                hobserve__unlock3!(ctx, world, full_obs);
-            }
-            if !(helper__unlock3!(ctx, world)) {
-                todo!();
-            }
-        }
-        if !(helper__unlock3!(ctx, world) && ctx.has(Item::Infection_Range_3)) {
-            todo!();
-        }
-    }
+    ((hobserve__unlock3!(ctx, world, full_obs) && {
+        full_obs.observe_infection_range_3();
+        ctx.has(Item::Infection_Range_3)
+    }) && !({
+        full_obs.observe_giguna__giguna_northeast__ctx__door_opened();
+        ctx.giguna__giguna_northeast__ctx__door_opened()
+    }))
 }
 pub fn observe_access_giguna__giguna_northeast__switch__ex__door_1__req(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // ^_door_opened and ($grab or $hook)
-    {
-        todo!();
-        if !(ctx.giguna__giguna_northeast__ctx__door_opened()) {
-            {
-                {
-                    hobserve__grab!(ctx, world, full_obs);
-                }
-                if helper__grab!(ctx, world) {
-                    {
-                        hobserve__hook!(ctx, world, full_obs);
-                    }
-                }
-            }
-        }
-    }
+    ({
+        full_obs.observe_giguna__giguna_northeast__ctx__door_opened();
+        ctx.giguna__giguna_northeast__ctx__door_opened()
+    } && (hobserve__grab!(ctx, world, full_obs) || hobserve__hook!(ctx, world, full_obs)))
 }
 pub fn observe_access_giguna__giguna_northeast__switch__open_door__req(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // $unlock3 and not ^_door_opened
-    {
-        {
-            hobserve__unlock3!(ctx, world, full_obs);
-        }
-        if !(helper__unlock3!(ctx, world)) {
-            todo!();
-        }
-    }
+    (hobserve__unlock3!(ctx, world, full_obs)
+        && !({
+            full_obs.observe_giguna__giguna_northeast__ctx__door_opened();
+            ctx.giguna__giguna_northeast__ctx__door_opened()
+        }))
 }
 pub fn observe_access_giguna__giguna_northeast__vault__ex__door_1__req(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // ^_door_opened
-    todo!();
+    {
+        full_obs.observe_giguna__giguna_northeast__ctx__door_opened();
+        ctx.giguna__giguna_northeast__ctx__door_opened()
+    }
 }
 pub fn observe_access_giguna__giguna_northeast__vault__ex__door_2__req(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // ^_door_opened and $hook
-    {
-        todo!();
-        if !(ctx.giguna__giguna_northeast__ctx__door_opened()) {
-            {
-                hobserve__hook!(ctx, world, full_obs);
-            }
-        }
-    }
+    ({
+        full_obs.observe_giguna__giguna_northeast__ctx__door_opened();
+        ctx.giguna__giguna_northeast__ctx__door_opened()
+    } && hobserve__hook!(ctx, world, full_obs))
 }
 pub fn observe_access_giguna__ruins_top__east_7__ex__east_door_1__req(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // ^_doors_open
-    todo!();
+    {
+        full_obs.observe_giguna__ruins_top__ctx__doors_open();
+        ctx.giguna__ruins_top__ctx__doors_open()
+    }
 }
 pub fn observe_access_giguna__ruins_top__east_door__ex__east_7_1__req(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // ^_doors_open
-    todo!();
+    {
+        full_obs.observe_giguna__ruins_top__ctx__doors_open();
+        ctx.giguna__ruins_top__ctx__doors_open()
+    }
 }
 pub fn observe_access_giguna__ruins_top__east_door__ex__portal_1__req(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // ^_doors_open
-    todo!();
+    {
+        full_obs.observe_giguna__ruins_top__ctx__doors_open();
+        ctx.giguna__ruins_top__ctx__doors_open()
+    }
 }
 pub fn observe_access_giguna__ruins_top__entryway__ex__west_door_1__req(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // ^_doors_open
-    todo!();
+    {
+        full_obs.observe_giguna__ruins_top__ctx__doors_open();
+        ctx.giguna__ruins_top__ctx__doors_open()
+    }
 }
 pub fn observe_access_giguna__ruins_top__portal__ex__east_door_1__req(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // ^_doors_open
-    todo!();
+    {
+        full_obs.observe_giguna__ruins_top__ctx__doors_open();
+        ctx.giguna__ruins_top__ctx__doors_open()
+    }
 }
 pub fn observe_access_giguna__ruins_top__west_7__ex__west_door_1__req(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // ^_doors_open
-    todo!();
+    {
+        full_obs.observe_giguna__ruins_top__ctx__doors_open();
+        ctx.giguna__ruins_top__ctx__doors_open()
+    }
 }
 pub fn observe_access_giguna__ruins_top__west_door__ex__entryway_1__req(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // ^_doors_open
-    todo!();
+    {
+        full_obs.observe_giguna__ruins_top__ctx__doors_open();
+        ctx.giguna__ruins_top__ctx__doors_open()
+    }
 }
 pub fn observe_access_giguna__ruins_top__west_door__ex__west_7_1__req(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // ^_doors_open
-    todo!();
+    {
+        full_obs.observe_giguna__ruins_top__ctx__doors_open();
+        ctx.giguna__ruins_top__ctx__doors_open()
+    }
 }
 pub fn observe_access_giguna__ruins_west__lower_ledge__destroy_kishib__req(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // not ^_kishib_handled and $shockwave
-    {
-        todo!();
-        if !(!ctx.giguna__ruins_west__ctx__kishib_handled()) {
-            {
-                hobserve__shockwave!(ctx, world, full_obs);
-            }
-        }
-    }
+    (!({
+        full_obs.observe_giguna__ruins_west__ctx__kishib_handled();
+        ctx.giguna__ruins_west__ctx__kishib_handled()
+    }) && hobserve__shockwave!(ctx, world, full_obs))
 }
 pub fn observe_access_giguna__ruins_west__lower_ledge__ex__upper_ledge_1__req(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // $grab and ^_kishib_handled
-    {
-        {
-            hobserve__grab!(ctx, world, full_obs);
-        }
-        if !(helper__grab!(ctx, world)) {
-            todo!();
-        }
-    }
+    (hobserve__grab!(ctx, world, full_obs) && {
+        full_obs.observe_giguna__ruins_west__ctx__kishib_handled();
+        ctx.giguna__ruins_west__ctx__kishib_handled()
+    })
 }
 pub fn observe_access_giguna__ruins_west__lower_ledge__hack_kishib__req(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // not ^_kishib_handled and $allegiance1
-    {
-        todo!();
-        if !(!ctx.giguna__ruins_west__ctx__kishib_handled()) {
-            {
-                hobserve__allegiance1!(ctx, world, full_obs);
-            }
-        }
-    }
+    (!({
+        full_obs.observe_giguna__ruins_west__ctx__kishib_handled();
+        ctx.giguna__ruins_west__ctx__kishib_handled()
+    }) && hobserve__allegiance1!(ctx, world, full_obs))
 }
 pub fn observe_access_giguna__west_caverns__east_susar__caught__req(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // not ^_east_susar
-    todo!();
+    !({
+        full_obs.observe_giguna__west_caverns__ctx__east_susar();
+        ctx.giguna__west_caverns__ctx__east_susar()
+    })
 }
 pub fn observe_access_giguna__west_caverns__east_susar__ex__east_12_1__req(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // ^_east_susar
-    todo!();
+    {
+        full_obs.observe_giguna__west_caverns__ctx__east_susar();
+        ctx.giguna__west_caverns__ctx__east_susar()
+    }
 }
 pub fn observe_access_giguna__west_caverns__east_susar__ex__tunnel_fork_1__req(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // ^_east_susar
-    todo!();
+    {
+        full_obs.observe_giguna__west_caverns__ctx__east_susar();
+        ctx.giguna__west_caverns__ctx__east_susar()
+    }
 }
 pub fn observe_access_giguna__west_caverns__east_susar__hack__req(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // not ^_east_susar and $allegiance1
-    {
-        todo!();
-        if !(!ctx.giguna__west_caverns__ctx__east_susar()) {
-            {
-                hobserve__allegiance1!(ctx, world, full_obs);
-            }
-        }
-    }
+    (!({
+        full_obs.observe_giguna__west_caverns__ctx__east_susar();
+        ctx.giguna__west_caverns__ctx__east_susar()
+    }) && hobserve__allegiance1!(ctx, world, full_obs))
 }
 pub fn observe_access_giguna_boulder(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // Giguna_Boulder
-    todo!();
+    {
+        full_obs.observe_giguna_boulder();
+        ctx.has(Item::Giguna_Boulder)
+    }
 }
 pub fn observe_access_giguna_breach__sw_save__side_door__ex__west_11_1__req(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // ^_door_opened
-    todo!();
+    {
+        full_obs.observe_giguna_breach__sw_save__ctx__door_opened();
+        ctx.giguna_breach__sw_save__ctx__door_opened()
+    }
 }
 pub fn observe_access_giguna_breach__sw_save__west_11__ex__side_door_1__req(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // ^_door_opened
-    todo!();
+    {
+        full_obs.observe_giguna_breach__sw_save__ctx__door_opened();
+        ctx.giguna_breach__sw_save__ctx__door_opened()
+    }
 }
 pub fn observe_access_giguna_breach__sw_save__west_11__open_door__req(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // not ^_door_opened
-    todo!();
+    !({
+        full_obs.observe_giguna_breach__sw_save__ctx__door_opened();
+        ctx.giguna_breach__sw_save__ctx__door_opened()
+    })
 }
 pub fn observe_access_giguna_dual_path_switch(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // Giguna_Dual_Path_Switch
-    todo!();
+    {
+        full_obs.observe_giguna_dual_path_switch();
+        ctx.has(Item::Giguna_Dual_Path_Switch)
+    }
 }
 pub fn observe_access_giguna_dual_path_switch_and___grab_or_climb(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // Giguna_Dual_Path_Switch and ($grab or $climb)
-    {
-        todo!();
-        if !(ctx.has(Item::Giguna_Dual_Path_Switch)) {
-            {
-                {
-                    hobserve__grab!(ctx, world, full_obs);
-                }
-                if helper__grab!(ctx, world) {
-                    {
-                        hobserve__climb!(ctx, world, full_obs);
-                    }
-                }
-            }
-        }
-    }
+    ({
+        full_obs.observe_giguna_dual_path_switch();
+        ctx.has(Item::Giguna_Dual_Path_Switch)
+    } && (hobserve__grab!(ctx, world, full_obs) || hobserve__climb!(ctx, world, full_obs)))
 }
 pub fn observe_access_giguna_dual_path_switch_and_climb(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // Giguna_Dual_Path_Switch and $climb
-    {
-        todo!();
-        if !(ctx.has(Item::Giguna_Dual_Path_Switch)) {
-            {
-                hobserve__climb!(ctx, world, full_obs);
-            }
-        }
-    }
+    ({
+        full_obs.observe_giguna_dual_path_switch();
+        ctx.has(Item::Giguna_Dual_Path_Switch)
+    } && hobserve__climb!(ctx, world, full_obs))
 }
 pub fn observe_access_giguna_dual_path_switch_and_hook(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // Giguna_Dual_Path_Switch and $hook
-    {
-        todo!();
-        if !(ctx.has(Item::Giguna_Dual_Path_Switch)) {
-            {
-                hobserve__hook!(ctx, world, full_obs);
-            }
-        }
-    }
+    ({
+        full_obs.observe_giguna_dual_path_switch();
+        ctx.has(Item::Giguna_Dual_Path_Switch)
+    } && hobserve__hook!(ctx, world, full_obs))
 }
 pub fn observe_access_giguna_gateway_block(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // Giguna_Gateway_Block
-    todo!();
+    {
+        full_obs.observe_giguna_gateway_block();
+        ctx.has(Item::Giguna_Gateway_Block)
+    }
 }
 pub fn observe_access_giguna_gateway_gate(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // Giguna_Gateway_Gate
-    todo!();
+    {
+        full_obs.observe_giguna_gateway_gate();
+        ctx.has(Item::Giguna_Gateway_Gate)
+    }
 }
 pub fn observe_access_giguna_gubi(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // Giguna_Gubi
-    todo!();
+    {
+        full_obs.observe_giguna_gubi();
+        ctx.has(Item::Giguna_Gubi)
+    }
 }
 pub fn observe_access_giguna_northeast_gate(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // Giguna_Northeast_Gate
-    todo!();
-}
-pub fn observe_access_grab(ctx: &Context, world: &graph::World, full_obs: &mut FullObservation) {
-    // $grab
     {
-        hobserve__grab!(ctx, world, full_obs);
+        full_obs.observe_giguna_northeast_gate();
+        ctx.has(Item::Giguna_Northeast_Gate)
     }
+}
+pub fn observe_access_grab(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $grab
+    hobserve__grab!(ctx, world, full_obs)
 }
 pub fn observe_access_grab_and_annuna_east_bridge_gate(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // $grab and Annuna_East_Bridge_Gate
-    {
-        {
-            hobserve__grab!(ctx, world, full_obs);
-        }
-        if !(helper__grab!(ctx, world)) {
-            todo!();
-        }
-    }
+    (hobserve__grab!(ctx, world, full_obs) && {
+        full_obs.observe_annuna_east_bridge_gate();
+        ctx.has(Item::Annuna_East_Bridge_Gate)
+    })
 }
 pub fn observe_access_grab_and_anuman(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // $grab and Anuman
-    {
-        {
-            hobserve__grab!(ctx, world, full_obs);
-        }
-        if !(helper__grab!(ctx, world)) {
-            todo!();
-        }
-    }
+    (hobserve__grab!(ctx, world, full_obs) && {
+        full_obs.observe_anuman();
+        ctx.has(Item::Anuman)
+    })
 }
 pub fn observe_access_grab_and_can_deploy(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // $grab and $can_deploy
-    {
-        {
-            hobserve__grab!(ctx, world, full_obs);
-        }
-        if !(helper__grab!(ctx, world)) {
-            {
-                hobserve__can_deploy!(ctx, world, full_obs);
-            }
-        }
-    }
+    (hobserve__grab!(ctx, world, full_obs) && hobserve__can_deploy!(ctx, world, full_obs))
 }
 pub fn observe_access_grab_and_climb(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // $grab and $climb
-    {
-        {
-            hobserve__grab!(ctx, world, full_obs);
-        }
-        if !(helper__grab!(ctx, world)) {
-            {
-                hobserve__climb!(ctx, world, full_obs);
-            }
-        }
-    }
+    (hobserve__grab!(ctx, world, full_obs) && hobserve__climb!(ctx, world, full_obs))
 }
 pub fn observe_access_grab_and_giguna_gateway_block(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // $grab and Giguna_Gateway_Block
-    {
-        {
-            hobserve__grab!(ctx, world, full_obs);
-        }
-        if !(helper__grab!(ctx, world)) {
-            todo!();
-        }
-    }
+    (hobserve__grab!(ctx, world, full_obs) && {
+        full_obs.observe_giguna_gateway_block();
+        ctx.has(Item::Giguna_Gateway_Block)
+    })
 }
 pub fn observe_access_grab_and_switch_40_12(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // $grab and Switch_40_12
-    {
-        {
-            hobserve__grab!(ctx, world, full_obs);
-        }
-        if !(helper__grab!(ctx, world)) {
-            todo!();
-        }
-    }
+    (hobserve__grab!(ctx, world, full_obs) && {
+        full_obs.observe_switch_40_12();
+        ctx.has(Item::Switch_40_12)
+    })
 }
 pub fn observe_access_grab_and_water_movement(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // $grab and Water_Movement
-    {
-        {
-            hobserve__grab!(ctx, world, full_obs);
-        }
-        if !(helper__grab!(ctx, world)) {
-            todo!();
-        }
-    }
+    (hobserve__grab!(ctx, world, full_obs) && {
+        full_obs.observe_water_movement();
+        ctx.has(Item::Water_Movement)
+    })
 }
 pub fn observe_access_grab_or_anuman(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // $grab or Anuman
-    {
-        {
-            hobserve__grab!(ctx, world, full_obs);
-        }
-        if helper__grab!(ctx, world) {
-            todo!();
-        }
-    }
+    (hobserve__grab!(ctx, world, full_obs) || {
+        full_obs.observe_anuman();
+        ctx.has(Item::Anuman)
+    })
 }
 pub fn observe_access_grab_or_climb(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // $grab or $climb
-    {
-        {
-            hobserve__grab!(ctx, world, full_obs);
-        }
-        if helper__grab!(ctx, world) {
-            {
-                hobserve__climb!(ctx, world, full_obs);
-            }
-        }
-    }
+    (hobserve__grab!(ctx, world, full_obs) || hobserve__climb!(ctx, world, full_obs))
 }
 pub fn observe_access_grab_or_climb_or_hook(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // $grab or $climb or $hook
-    {
-        {
-            {
-                hobserve__grab!(ctx, world, full_obs);
-            }
-            if helper__grab!(ctx, world) {
-                {
-                    hobserve__climb!(ctx, world, full_obs);
-                }
-            }
-        }
-        if (helper__grab!(ctx, world) || helper__climb!(ctx, world)) {
-            {
-                hobserve__hook!(ctx, world, full_obs);
-            }
-        }
-    }
+    ((hobserve__grab!(ctx, world, full_obs) || hobserve__climb!(ctx, world, full_obs))
+        || hobserve__hook!(ctx, world, full_obs))
 }
 pub fn observe_access_grab_or_hook(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // $grab or $hook
-    {
-        {
-            hobserve__grab!(ctx, world, full_obs);
-        }
-        if helper__grab!(ctx, world) {
-            {
-                hobserve__hook!(ctx, world, full_obs);
-            }
-        }
-    }
+    (hobserve__grab!(ctx, world, full_obs) || hobserve__hook!(ctx, world, full_obs))
 }
 pub fn observe_access_grab_or_underwater_movement(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // $grab or Underwater_Movement
-    {
-        {
-            hobserve__grab!(ctx, world, full_obs);
-        }
-        if helper__grab!(ctx, world) {
-            todo!();
-        }
-    }
+    (hobserve__grab!(ctx, world, full_obs) || {
+        full_obs.observe_underwater_movement();
+        ctx.has(Item::Underwater_Movement)
+    })
 }
 pub fn observe_access_health_upgrade(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // Health_Upgrade
-    todo!();
+    {
+        full_obs.observe_health_upgrade();
+        ctx.has(Item::Health_Upgrade)
+    }
 }
 pub fn observe_access_health_upgrade_2(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // Health_Upgrade_2
-    todo!();
+    {
+        full_obs.observe_health_upgrade_2();
+        ctx.has(Item::Health_Upgrade_2)
+    }
 }
 pub fn observe_access_health_upgrade_3(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // Health_Upgrade_3
-    todo!();
+    {
+        full_obs.observe_health_upgrade_3();
+        ctx.has(Item::Health_Upgrade_3)
+    }
 }
 pub fn observe_access_health_upgrade_4(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // Health_Upgrade_4
-    todo!();
-}
-pub fn observe_access_hook(ctx: &Context, world: &graph::World, full_obs: &mut FullObservation) {
-    // $hook
     {
-        hobserve__hook!(ctx, world, full_obs);
+        full_obs.observe_health_upgrade_4();
+        ctx.has(Item::Health_Upgrade_4)
     }
+}
+pub fn observe_access_hook(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $hook
+    hobserve__hook!(ctx, world, full_obs)
 }
 pub fn observe_access_hook_and_annuna_east_bridge_gate(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // $hook and Annuna_East_Bridge_Gate
-    {
-        {
-            hobserve__hook!(ctx, world, full_obs);
-        }
-        if !(helper__hook!(ctx, world)) {
-            todo!();
-        }
-    }
+    (hobserve__hook!(ctx, world, full_obs) && {
+        full_obs.observe_annuna_east_bridge_gate();
+        ctx.has(Item::Annuna_East_Bridge_Gate)
+    })
 }
 pub fn observe_access_hook_and_giguna_gateway_block(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // $hook and Giguna_Gateway_Block
-    {
-        {
-            hobserve__hook!(ctx, world, full_obs);
-        }
-        if !(helper__hook!(ctx, world)) {
-            todo!();
-        }
-    }
+    (hobserve__hook!(ctx, world, full_obs) && {
+        full_obs.observe_giguna_gateway_block();
+        ctx.has(Item::Giguna_Gateway_Block)
+    })
 }
 pub fn observe_access_hook_and_hover(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // $hook and $hover
-    {
-        {
-            hobserve__hook!(ctx, world, full_obs);
-        }
-        if !(helper__hook!(ctx, world)) {
-            {
-                hobserve__hover!(ctx, world, full_obs);
-            }
-        }
-    }
+    (hobserve__hook!(ctx, world, full_obs) && hobserve__hover!(ctx, world, full_obs))
 }
 pub fn observe_access_hook_and_hover_and_underwater_movement(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // $hook and $hover and Underwater_Movement
-    {
-        {
-            {
-                hobserve__hook!(ctx, world, full_obs);
-            }
-            if !(helper__hook!(ctx, world)) {
-                {
-                    hobserve__hover!(ctx, world, full_obs);
-                }
-            }
-        }
-        if !(helper__hook!(ctx, world) && helper__hover!(ctx, world)) {
-            todo!();
-        }
-    }
+    ((hobserve__hook!(ctx, world, full_obs) && hobserve__hover!(ctx, world, full_obs)) && {
+        full_obs.observe_underwater_movement();
+        ctx.has(Item::Underwater_Movement)
+    })
 }
 pub fn observe_access_hook_and_not_ebih_waterfall_block_left(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // $hook and not Ebih_Waterfall_Block_Left
-    {
-        {
-            hobserve__hook!(ctx, world, full_obs);
-        }
-        if !(helper__hook!(ctx, world)) {
-            todo!();
-        }
-    }
+    (hobserve__hook!(ctx, world, full_obs) && {
+        full_obs.observe_ebih_waterfall_block_left();
+        !ctx.has(Item::Ebih_Waterfall_Block_Left)
+    })
 }
 pub fn observe_access_hook_and_not_ebih_waterfall_block_right(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // $hook and not Ebih_Waterfall_Block_Right
-    {
-        {
-            hobserve__hook!(ctx, world, full_obs);
-        }
-        if !(helper__hook!(ctx, world)) {
-            todo!();
-        }
-    }
+    (hobserve__hook!(ctx, world, full_obs) && {
+        full_obs.observe_ebih_waterfall_block_right();
+        !ctx.has(Item::Ebih_Waterfall_Block_Right)
+    })
 }
 pub fn observe_access_hook_and_underwater_movement(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // $hook and Underwater_Movement
-    {
-        {
-            hobserve__hook!(ctx, world, full_obs);
-        }
-        if !(helper__hook!(ctx, world)) {
-            todo!();
-        }
-    }
+    (hobserve__hook!(ctx, world, full_obs) && {
+        full_obs.observe_underwater_movement();
+        ctx.has(Item::Underwater_Movement)
+    })
 }
 pub fn observe_access_hook_and_water_movement(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // $hook and Water_Movement
-    {
-        {
-            hobserve__hook!(ctx, world, full_obs);
-        }
-        if !(helper__hook!(ctx, world)) {
-            todo!();
-        }
-    }
+    (hobserve__hook!(ctx, world, full_obs) && {
+        full_obs.observe_water_movement();
+        ctx.has(Item::Water_Movement)
+    })
 }
 pub fn observe_access_hook_or_hover(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // $hook or $hover
-    {
-        {
-            hobserve__hook!(ctx, world, full_obs);
-        }
-        if helper__hook!(ctx, world) {
-            {
-                hobserve__hover!(ctx, world, full_obs);
-            }
-        }
-    }
+    (hobserve__hook!(ctx, world, full_obs) || hobserve__hover!(ctx, world, full_obs))
 }
-pub fn observe_access_hover(ctx: &Context, world: &graph::World, full_obs: &mut FullObservation) {
+pub fn observe_access_hover(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
     // $hover
-    {
-        hobserve__hover!(ctx, world, full_obs);
-    }
+    hobserve__hover!(ctx, world, full_obs)
 }
 pub fn observe_access_hover_and_anuman(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // $hover and Anuman
-    {
-        {
-            hobserve__hover!(ctx, world, full_obs);
-        }
-        if !(helper__hover!(ctx, world)) {
-            todo!();
-        }
-    }
+    (hobserve__hover!(ctx, world, full_obs) && {
+        full_obs.observe_anuman();
+        ctx.has(Item::Anuman)
+    })
 }
 pub fn observe_access_hover_and_hook(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // $hover and $hook
-    {
-        {
-            hobserve__hover!(ctx, world, full_obs);
-        }
-        if !(helper__hover!(ctx, world)) {
-            {
-                hobserve__hook!(ctx, world, full_obs);
-            }
-        }
-    }
+    (hobserve__hover!(ctx, world, full_obs) && hobserve__hook!(ctx, world, full_obs))
 }
 pub fn observe_access_hover_and_hook_and_mist2(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // $hover and $hook and $mist2
-    {
-        {
-            {
-                hobserve__hover!(ctx, world, full_obs);
-            }
-            if !(helper__hover!(ctx, world)) {
-                {
-                    hobserve__hook!(ctx, world, full_obs);
-                }
-            }
-        }
-        if !(helper__hover!(ctx, world) && helper__hook!(ctx, world)) {
-            {
-                hobserve__mist2!(ctx, world, full_obs);
-            }
-        }
-    }
+    ((hobserve__hover!(ctx, world, full_obs) && hobserve__hook!(ctx, world, full_obs))
+        && hobserve__mist2!(ctx, world, full_obs))
 }
 pub fn observe_access_hover_and_mist_upgrade(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // $hover and Mist_Upgrade
-    {
-        {
-            hobserve__hover!(ctx, world, full_obs);
-        }
-        if !(helper__hover!(ctx, world)) {
-            todo!();
-        }
-    }
+    (hobserve__hover!(ctx, world, full_obs) && {
+        full_obs.observe_mist_upgrade();
+        ctx.has(Item::Mist_Upgrade)
+    })
 }
 pub fn observe_access_hover_or_hook(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // $hover or $hook
-    {
-        {
-            hobserve__hover!(ctx, world, full_obs);
-        }
-        if helper__hover!(ctx, world) {
-            {
-                hobserve__hook!(ctx, world, full_obs);
-            }
-        }
-    }
+    (hobserve__hover!(ctx, world, full_obs) || hobserve__hook!(ctx, world, full_obs))
 }
 pub fn observe_access_hover_or_mist2(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // $hover or $mist2
-    {
-        {
-            hobserve__hover!(ctx, world, full_obs);
-        }
-        if helper__hover!(ctx, world) {
-            {
-                hobserve__mist2!(ctx, world, full_obs);
-            }
-        }
-    }
+    (hobserve__hover!(ctx, world, full_obs) || hobserve__mist2!(ctx, world, full_obs))
 }
-pub fn observe_access_infect(ctx: &Context, world: &graph::World, full_obs: &mut FullObservation) {
+pub fn observe_access_infect(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
     // Infect
-    todo!();
+    {
+        full_obs.observe_infect();
+        ctx.has(Item::Infect)
+    }
 }
 pub fn observe_access_infect_and_anuman(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // Infect and Anuman
-    {
-        todo!();
-        if !(ctx.has(Item::Infect)) {
-            todo!();
-        }
-    }
+    ({
+        full_obs.observe_infect();
+        ctx.has(Item::Infect)
+    } && {
+        full_obs.observe_anuman();
+        ctx.has(Item::Anuman)
+    })
 }
 pub fn observe_access_infect_and_not_anuman(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // Infect and not Anuman
-    {
-        todo!();
-        if !(ctx.has(Item::Infect)) {
-            todo!();
-        }
-    }
+    ({
+        full_obs.observe_infect();
+        ctx.has(Item::Infect)
+    } && {
+        full_obs.observe_anuman();
+        !ctx.has(Item::Anuman)
+    })
 }
 pub fn observe_access_infect_l1(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // Infect_L1
-    todo!();
+    {
+        full_obs.observe_infect_l1();
+        ctx.has(Item::Infect_L1)
+    }
 }
 pub fn observe_access_infect_l2(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // Infect_L2
-    todo!();
+    {
+        full_obs.observe_infect_l2();
+        ctx.has(Item::Infect_L2)
+    }
 }
 pub fn observe_access_infection_range(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // Infection_Range
-    todo!();
+    {
+        full_obs.observe_infection_range();
+        ctx.has(Item::Infection_Range)
+    }
 }
 pub fn observe_access_infection_range_2(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // Infection_Range_2
-    todo!();
+    {
+        full_obs.observe_infection_range_2();
+        ctx.has(Item::Infection_Range_2)
+    }
 }
 pub fn observe_access_infection_speed(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // Infection_Speed
-    todo!();
+    {
+        full_obs.observe_infection_speed();
+        ctx.has(Item::Infection_Speed)
+    }
 }
 pub fn observe_access_infinite_climb_and_annuna_east_bridge_gate(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // $infinite_climb and Annuna_East_Bridge_Gate
-    {
-        {
-            hobserve__infinite_climb!(ctx, world, full_obs);
-        }
-        if !(helper__infinite_climb!(ctx, world)) {
-            todo!();
-        }
-    }
+    (hobserve__infinite_climb!(ctx, world, full_obs) && {
+        full_obs.observe_annuna_east_bridge_gate();
+        ctx.has(Item::Annuna_East_Bridge_Gate)
+    })
 }
 pub fn observe_access_infinite_climb_and_not_annuna_east_bridge_gate(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // $infinite_climb and not Annuna_East_Bridge_Gate
-    {
-        {
-            hobserve__infinite_climb!(ctx, world, full_obs);
-        }
-        if !(helper__infinite_climb!(ctx, world)) {
-            todo!();
-        }
-    }
+    (hobserve__infinite_climb!(ctx, world, full_obs) && {
+        full_obs.observe_annuna_east_bridge_gate();
+        !ctx.has(Item::Annuna_East_Bridge_Gate)
+    })
 }
 pub fn observe_access_infinite_climb_and_slingshot_hook(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // $infinite_climb and Slingshot_Hook
-    {
-        {
-            hobserve__infinite_climb!(ctx, world, full_obs);
-        }
-        if !(helper__infinite_climb!(ctx, world)) {
-            todo!();
-        }
-    }
+    (hobserve__infinite_climb!(ctx, world, full_obs) && {
+        full_obs.observe_slingshot_hook();
+        ctx.has(Item::Slingshot_Hook)
+    })
 }
 pub fn observe_access_infinite_climb_and_slingshot_hook_and_not_annuna_east_bridge_gate(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // $infinite_climb and Slingshot_Hook and not Annuna_East_Bridge_Gate
-    {
-        {
-            {
-                hobserve__infinite_climb!(ctx, world, full_obs);
-            }
-            if !(helper__infinite_climb!(ctx, world)) {
-                todo!();
-            }
-        }
-        if !(helper__infinite_climb!(ctx, world) && ctx.has(Item::Slingshot_Hook)) {
-            todo!();
-        }
-    }
+    ((hobserve__infinite_climb!(ctx, world, full_obs) && {
+        full_obs.observe_slingshot_hook();
+        ctx.has(Item::Slingshot_Hook)
+    }) && {
+        full_obs.observe_annuna_east_bridge_gate();
+        !ctx.has(Item::Annuna_East_Bridge_Gate)
+    })
 }
 pub fn observe_access_irikar__basement_portal__ledge__ex__moving_platform_start_1__req(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // not ^_platform_moved
-    todo!();
+    !({
+        full_obs.observe_irikar__basement_portal__ctx__platform_moved();
+        ctx.irikar__basement_portal__ctx__platform_moved()
+    })
 }
 pub fn observe_access_irikar__basement_portal__middle_platform__ex__moving_platform_end_1__req(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // ^_platform_moved and $hook
-    {
-        todo!();
-        if !(ctx.irikar__basement_portal__ctx__platform_moved()) {
-            {
-                hobserve__hook!(ctx, world, full_obs);
-            }
-        }
-    }
+    ({
+        full_obs.observe_irikar__basement_portal__ctx__platform_moved();
+        ctx.irikar__basement_portal__ctx__platform_moved()
+    } && hobserve__hook!(ctx, world, full_obs))
 }
 pub fn observe_access_irikar__basement_portal__portal_stand__ex__moving_platform_start_1__req(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // not ^_platform_moved
-    todo!();
+    !({
+        full_obs.observe_irikar__basement_portal__ctx__platform_moved();
+        ctx.irikar__basement_portal__ctx__platform_moved()
+    })
 }
 pub fn observe_access_irikar_gudam(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // Irikar_Gudam
-    todo!();
+    {
+        full_obs.observe_irikar_gudam();
+        ctx.has(Item::Irikar_Gudam)
+    }
 }
 pub fn observe_access_irikar_royal_storage_wall(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // Irikar_Royal_Storage_Wall
-    todo!();
+    {
+        full_obs.observe_irikar_royal_storage_wall();
+        ctx.has(Item::Irikar_Royal_Storage_Wall)
+    }
 }
 pub fn observe_access_map__amagi__main_area__save(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // ^map__amagi__main_area__save
-    todo!();
+    {
+        full_obs.observe_map__amagi__main_area__save();
+        ctx.map__amagi__main_area__save()
+    }
 }
 pub fn observe_access_map__annuna__center_save__save(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // ^map__annuna__center_save__save
-    todo!();
+    {
+        full_obs.observe_map__annuna__center_save__save();
+        ctx.map__annuna__center_save__save()
+    }
 }
 pub fn observe_access_map__annuna__factory_entrance__save(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // ^map__annuna__factory_entrance__save
-    todo!();
+    {
+        full_obs.observe_map__annuna__factory_entrance__save();
+        ctx.map__annuna__factory_entrance__save()
+    }
 }
 pub fn observe_access_map__annuna__mirror_match__save(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // ^map__annuna__mirror_match__save
-    todo!();
+    {
+        full_obs.observe_map__annuna__mirror_match__save();
+        ctx.map__annuna__mirror_match__save()
+    }
 }
 pub fn observe_access_map__ebih__base_camp__save(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // ^map__ebih__base_camp__save
-    todo!();
+    {
+        full_obs.observe_map__ebih__base_camp__save();
+        ctx.map__ebih__base_camp__save()
+    }
 }
 pub fn observe_access_map__ebih__ebih_west__lower_save(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // ^map__ebih__ebih_west__lower_save
-    todo!();
+    {
+        full_obs.observe_map__ebih__ebih_west__lower_save();
+        ctx.map__ebih__ebih_west__lower_save()
+    }
 }
 pub fn observe_access_map__ebih__ebih_west__mid_save(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // ^map__ebih__ebih_west__mid_save
-    todo!();
+    {
+        full_obs.observe_map__ebih__ebih_west__mid_save();
+        ctx.map__ebih__ebih_west__mid_save()
+    }
 }
 pub fn observe_access_map__ebih__ebih_west__upper_save(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // ^map__ebih__ebih_west__upper_save
-    todo!();
+    {
+        full_obs.observe_map__ebih__ebih_west__upper_save();
+        ctx.map__ebih__ebih_west__upper_save()
+    }
 }
 pub fn observe_access_map__giguna__giguna_base__save(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // ^map__giguna__giguna_base__save
-    todo!();
+    {
+        full_obs.observe_map__giguna__giguna_base__save();
+        ctx.map__giguna__giguna_base__save()
+    }
 }
 pub fn observe_access_map__giguna__giguna_northeast__save(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // ^map__giguna__giguna_northeast__save
-    todo!();
+    {
+        full_obs.observe_map__giguna__giguna_northeast__save();
+        ctx.map__giguna__giguna_northeast__save()
+    }
 }
 pub fn observe_access_map__giguna__ruins_top__save(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // ^map__giguna__ruins_top__save
-    todo!();
+    {
+        full_obs.observe_map__giguna__ruins_top__save();
+        ctx.map__giguna__ruins_top__save()
+    }
 }
 pub fn observe_access_map__giguna__ruins_west__save(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // ^map__giguna__ruins_west__save
-    todo!();
+    {
+        full_obs.observe_map__giguna__ruins_west__save();
+        ctx.map__giguna__ruins_west__save()
+    }
 }
 pub fn observe_access_map__giguna_breach__peak__save(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // ^map__giguna_breach__peak__save
-    todo!();
+    {
+        full_obs.observe_map__giguna_breach__peak__save();
+        ctx.map__giguna_breach__peak__save()
+    }
 }
 pub fn observe_access_map__giguna_breach__sw_save__save(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // ^map__giguna_breach__sw_save__save
-    todo!();
+    {
+        full_obs.observe_map__giguna_breach__sw_save__save();
+        ctx.map__giguna_breach__sw_save__save()
+    }
 }
 pub fn observe_access_map__glacier__revival__save(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // ^map__glacier__revival__save
-    todo!();
+    {
+        full_obs.observe_map__glacier__revival__save();
+        ctx.map__glacier__revival__save()
+    }
 }
 pub fn observe_access_map__irikar__hub__save(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // ^map__irikar__hub__save
-    todo!();
+    {
+        full_obs.observe_map__irikar__hub__save();
+        ctx.map__irikar__hub__save()
+    }
 }
 pub fn observe_access_map__irikar_breach__gauntlet__save(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // ^map__irikar_breach__gauntlet__save
-    todo!();
+    {
+        full_obs.observe_map__irikar_breach__gauntlet__save();
+        ctx.map__irikar_breach__gauntlet__save()
+    }
 }
 pub fn observe_access_map__irikar_breach__save_room__save(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // ^map__irikar_breach__save_room__save
-    todo!();
+    {
+        full_obs.observe_map__irikar_breach__save_room__save();
+        ctx.map__irikar_breach__save_room__save()
+    }
 }
 pub fn observe_access_map__uhrum__annuna_corridor__save(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // ^map__uhrum__annuna_corridor__save
-    todo!();
+    {
+        full_obs.observe_map__uhrum__annuna_corridor__save();
+        ctx.map__uhrum__annuna_corridor__save()
+    }
 }
 pub fn observe_access_map__uhrum__save_room__save(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // ^map__uhrum__save_room__save
-    todo!();
+    {
+        full_obs.observe_map__uhrum__save_room__save();
+        ctx.map__uhrum__save_room__save()
+    }
 }
 pub fn observe_access_map__uhrum__west_entrance__save(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // ^map__uhrum__west_entrance__save
-    todo!();
+    {
+        full_obs.observe_map__uhrum__west_entrance__save();
+        ctx.map__uhrum__west_entrance__save()
+    }
 }
 pub fn observe_access_melee_damage(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // Melee_Damage
-    todo!();
+    {
+        full_obs.observe_melee_damage();
+        ctx.has(Item::Melee_Damage)
+    }
 }
 pub fn observe_access_melee_damage_2(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // Melee_Damage_2
-    todo!();
+    {
+        full_obs.observe_melee_damage_2();
+        ctx.has(Item::Melee_Damage_2)
+    }
 }
 pub fn observe_access_melee_speed(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // Melee_Speed
-    todo!();
+    {
+        full_obs.observe_melee_speed();
+        ctx.has(Item::Melee_Speed)
+    }
 }
 pub fn observe_access_melee_speed_2(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // Melee_Speed_2
-    todo!();
-}
-pub fn observe_access_mist2(ctx: &Context, world: &graph::World, full_obs: &mut FullObservation) {
-    // $mist2
     {
-        hobserve__mist2!(ctx, world, full_obs);
+        full_obs.observe_melee_speed_2();
+        ctx.has(Item::Melee_Speed_2)
     }
+}
+pub fn observe_access_mist2(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $mist2
+    hobserve__mist2!(ctx, world, full_obs)
 }
 pub fn observe_access_mist_upgrade(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // Mist_Upgrade
-    todo!();
+    {
+        full_obs.observe_mist_upgrade();
+        ctx.has(Item::Mist_Upgrade)
+    }
 }
 pub fn observe_access_mode_eq_drone(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // ^mode == 'drone'
-    todo!();
+    {
+        let v = {
+            full_obs.observe_mode();
+            ctx.mode()
+        };
+        v == enums::Mode::Drone
+    }
 }
 pub fn observe_access_mode_eq_drone_and_breach_sight(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // ^mode == 'drone' and Breach_Sight
-    {
-        todo!();
-        if !(ctx.mode() == enums::Mode::Drone) {
-            todo!();
-        }
-    }
+    ({
+        let v = {
+            full_obs.observe_mode();
+            ctx.mode()
+        };
+        v == enums::Mode::Drone
+    } && {
+        full_obs.observe_breach_sight();
+        ctx.has(Item::Breach_Sight)
+    })
 }
 pub fn observe_access_mode_eq_drone_and_ebih_wasteland_passage_h(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // ^mode == 'drone' and Ebih_Wasteland_Passage_H
-    {
-        todo!();
-        if !(ctx.mode() == enums::Mode::Drone) {
-            todo!();
-        }
-    }
+    ({
+        let v = {
+            full_obs.observe_mode();
+            ctx.mode()
+        };
+        v == enums::Mode::Drone
+    } && {
+        full_obs.observe_ebih_wasteland_passage_h();
+        ctx.has(Item::Ebih_Wasteland_Passage_H)
+    })
 }
 pub fn observe_access_mode_eq_drone_and_ebih_waterfall_block_left(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // ^mode == 'drone' and Ebih_Waterfall_Block_Left
-    {
-        todo!();
-        if !(ctx.mode() == enums::Mode::Drone) {
-            todo!();
-        }
-    }
+    ({
+        let v = {
+            full_obs.observe_mode();
+            ctx.mode()
+        };
+        v == enums::Mode::Drone
+    } && {
+        full_obs.observe_ebih_waterfall_block_left();
+        ctx.has(Item::Ebih_Waterfall_Block_Left)
+    })
 }
 pub fn observe_access_mode_eq_drone_and_ebih_waterfall_block_right(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // ^mode == 'drone' and Ebih_Waterfall_Block_Right
-    {
-        todo!();
-        if !(ctx.mode() == enums::Mode::Drone) {
-            todo!();
-        }
-    }
+    ({
+        let v = {
+            full_obs.observe_mode();
+            ctx.mode()
+        };
+        v == enums::Mode::Drone
+    } && {
+        full_obs.observe_ebih_waterfall_block_right();
+        ctx.has(Item::Ebih_Waterfall_Block_Right)
+    })
 }
 pub fn observe_access_mode_eq_drone_and_giguna_dual_path_wall(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // ^mode == 'drone' and Giguna_Dual_Path_Wall
-    {
-        todo!();
-        if !(ctx.mode() == enums::Mode::Drone) {
-            todo!();
-        }
-    }
+    ({
+        let v = {
+            full_obs.observe_mode();
+            ctx.mode()
+        };
+        v == enums::Mode::Drone
+    } && {
+        full_obs.observe_giguna_dual_path_wall();
+        ctx.has(Item::Giguna_Dual_Path_Wall)
+    })
 }
 pub fn observe_access_mode_eq_drone_and_mist2(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // ^mode == 'drone' and $mist2
-    {
-        todo!();
-        if !(ctx.mode() == enums::Mode::Drone) {
-            {
-                hobserve__mist2!(ctx, world, full_obs);
-            }
-        }
-    }
+    ({
+        let v = {
+            full_obs.observe_mode();
+            ctx.mode()
+        };
+        v == enums::Mode::Drone
+    } && hobserve__mist2!(ctx, world, full_obs))
 }
 pub fn observe_access_mode_eq_drone_and_mist_upgrade(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // ^mode == 'drone' and Mist_Upgrade
-    {
-        todo!();
-        if !(ctx.mode() == enums::Mode::Drone) {
-            todo!();
-        }
-    }
+    ({
+        let v = {
+            full_obs.observe_mode();
+            ctx.mode()
+        };
+        v == enums::Mode::Drone
+    } && {
+        full_obs.observe_mist_upgrade();
+        ctx.has(Item::Mist_Upgrade)
+    })
 }
 pub fn observe_access_mode_eq_drone_and_sniper_valley_rock_2(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // ^mode == 'drone' and Sniper_Valley_Rock_2
-    {
-        todo!();
-        if !(ctx.mode() == enums::Mode::Drone) {
-            todo!();
-        }
-    }
+    ({
+        let v = {
+            full_obs.observe_mode();
+            ctx.mode()
+        };
+        v == enums::Mode::Drone
+    } && {
+        full_obs.observe_sniper_valley_rock_2();
+        ctx.has(Item::Sniper_Valley_Rock_2)
+    })
 }
 pub fn observe_access_mode_ne_drone(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // ^mode != 'drone'
-    todo!();
+    {
+        let v = {
+            full_obs.observe_mode();
+            ctx.mode()
+        };
+        v != enums::Mode::Drone
+    }
 }
 pub fn observe_access_more_refills(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // $more_refills
-    {
-        hobserve__more_refills!(ctx, world, full_obs);
-    }
+    hobserve__more_refills!(ctx, world, full_obs)
 }
 pub fn observe_access_nanite_mist(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // Nanite_Mist
-    todo!();
+    {
+        full_obs.observe_nanite_mist();
+        ctx.has(Item::Nanite_Mist)
+    }
 }
 pub fn observe_access_nanite_mist_and_mist_upgrade(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // Nanite_Mist and Mist_Upgrade
-    {
-        todo!();
-        if !(ctx.has(Item::Nanite_Mist)) {
-            todo!();
-        }
-    }
+    ({
+        full_obs.observe_nanite_mist();
+        ctx.has(Item::Nanite_Mist)
+    } && {
+        full_obs.observe_mist_upgrade();
+        ctx.has(Item::Mist_Upgrade)
+    })
 }
 pub fn observe_access_nano_points(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // Nano_Points
-    todo!();
+    {
+        full_obs.observe_nano_points();
+        ctx.has(Item::Nano_Points)
+    }
 }
 pub fn observe_access_nano_points_2(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // Nano_Points_2
-    todo!();
+    {
+        full_obs.observe_nano_points_2();
+        ctx.has(Item::Nano_Points_2)
+    }
 }
 pub fn observe_access_not_amashilama(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // NOT Amashilama
-    todo!();
+    {
+        full_obs.observe_amashilama();
+        !ctx.has(Item::Amashilama)
+    }
 }
 pub fn observe_access_not_ebih_interchange_block(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // not Ebih_Interchange_Block
-    todo!();
+    {
+        full_obs.observe_ebih_interchange_block();
+        !ctx.has(Item::Ebih_Interchange_Block)
+    }
 }
 pub fn observe_access_not_ebih_waterfall_wall_and_nanite_mist_and_mist_upgrade(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // not Ebih_Waterfall_Wall and Nanite_Mist and Mist_Upgrade
-    {
-        {
-            todo!();
-            if !(!ctx.has(Item::Ebih_Waterfall_Wall)) {
-                todo!();
-            }
-        }
-        if !(!ctx.has(Item::Ebih_Waterfall_Wall) && ctx.has(Item::Nanite_Mist)) {
-            todo!();
-        }
-    }
+    (({
+        full_obs.observe_ebih_waterfall_wall();
+        !ctx.has(Item::Ebih_Waterfall_Wall)
+    } && {
+        full_obs.observe_nanite_mist();
+        ctx.has(Item::Nanite_Mist)
+    }) && {
+        full_obs.observe_mist_upgrade();
+        ctx.has(Item::Mist_Upgrade)
+    })
 }
 pub fn observe_access_not_irikar_royal_storage_wall_and_mist_upgrade(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // not Irikar_Royal_Storage_Wall and Mist_Upgrade
-    {
-        todo!();
-        if !(!ctx.has(Item::Irikar_Royal_Storage_Wall)) {
-            todo!();
-        }
-    }
+    ({
+        full_obs.observe_irikar_royal_storage_wall();
+        !ctx.has(Item::Irikar_Royal_Storage_Wall)
+    } && {
+        full_obs.observe_mist_upgrade();
+        ctx.has(Item::Mist_Upgrade)
+    })
 }
 pub fn observe_access_not_irikar_royal_storage_wall_and_shockwave(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // not Irikar_Royal_Storage_Wall and $shockwave
-    {
-        todo!();
-        if !(!ctx.has(Item::Irikar_Royal_Storage_Wall)) {
-            {
-                hobserve__shockwave!(ctx, world, full_obs);
-            }
-        }
-    }
+    ({
+        full_obs.observe_irikar_royal_storage_wall();
+        !ctx.has(Item::Irikar_Royal_Storage_Wall)
+    } && hobserve__shockwave!(ctx, world, full_obs))
 }
 pub fn observe_access_not_separation_or_defeat_indra(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // NOT Separation or Defeat_Indra
-    {
-        todo!();
-        if !ctx.has(Item::Separation) {
-            todo!();
-        }
-    }
+    ({
+        full_obs.observe_separation();
+        !ctx.has(Item::Separation)
+    } || {
+        full_obs.observe_defeat_indra();
+        ctx.has(Item::Defeat_Indra)
+    })
 }
 pub fn observe_access_not_slingshot_hook(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // not Slingshot_Hook
-    todo!();
+    {
+        full_obs.observe_slingshot_hook();
+        !ctx.has(Item::Slingshot_Hook)
+    }
 }
 pub fn observe_access_not_within_menu_and_anuman_and_mode_ne_drone(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // NOT WITHIN `Menu` and Anuman and ^mode != 'drone'
-    {
-        {
-            todo!();
-            if !(match get_region(ctx.position()) {
-                RegionId::Menu => false,
-                _ => true,
-            }) {
-                todo!();
-            }
-        }
-        if !((match get_region(ctx.position()) {
-            RegionId::Menu => false,
-            _ => true,
-        }) && ctx.has(Item::Anuman))
-        {
-            todo!();
-        }
-    }
+    ((todo!() && {
+        full_obs.observe_anuman();
+        ctx.has(Item::Anuman)
+    }) && {
+        let v = {
+            full_obs.observe_mode();
+            ctx.mode()
+        };
+        v != enums::Mode::Drone
+    })
 }
 pub fn observe_access_not_within_menu_and_can_deploy(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // NOT WITHIN `Menu` and $can_deploy
-    {
-        todo!();
-        if !(match get_region(ctx.position()) {
-            RegionId::Menu => false,
-            _ => true,
-        }) {
-            {
-                hobserve__can_deploy!(ctx, world, full_obs);
-            }
-        }
-    }
+    (todo!() && hobserve__can_deploy!(ctx, world, full_obs))
 }
 pub fn observe_access_not_within_menu_and_flasks_gt_0(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // NOT WITHIN `Menu` and ^flasks > 0
-    {
-        todo!();
-        if !(match get_region(ctx.position()) {
-            RegionId::Menu => false,
-            _ => true,
-        }) {
-            todo!();
-        }
-    }
+    (todo!() && {
+        let n: i32 = todo!().into();
+        full_obs.observe_flasks(IntegerObservation::Le(n as i8));
+        ctx.flasks() > n
+    })
 }
 pub fn observe_access_not_within_menu_and_ft_main_and_can_recall_and___map_spot_not_within_default(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // NOT WITHIN `Menu` and $ft_main and $can_recall and (^map_spot NOT WITHIN $default)
-    {
-        {
-            {
-                todo!();
-                if !(match get_region(ctx.position()) {
-                    RegionId::Menu => false,
-                    _ => true,
-                }) {
-                    {
-                        hobserve__ft_main!(ctx, world, full_obs);
-                    }
-                }
-            }
-            if !((match get_region(ctx.position()) {
-                RegionId::Menu => false,
-                _ => true,
-            }) && helper__ft_main!(ctx, world))
-            {
-                {
-                    hobserve__can_recall!(ctx, world, full_obs);
-                }
-            }
-        }
-        if !(((match get_region(ctx.position()) {
-            RegionId::Menu => false,
-            _ => true,
-        }) && helper__ft_main!(ctx, world))
-            && helper__can_recall!(ctx, world))
-        {}
-    }
+    (((todo!() && hobserve__ft_main!(ctx, world, full_obs))
+        && hobserve__can_recall!(ctx, world, full_obs))
+        && (Default::default()))
 }
 pub fn observe_access_not_within_menu_and_realm_ne_breach_and_anuman_and_mode_eq_drone(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // NOT WITHIN `Menu` and ^realm != 'breach' and Anuman and ^mode == 'drone'
-    {
-        {
-            {
-                todo!();
-                if !(match get_region(ctx.position()) {
-                    RegionId::Menu => false,
-                    _ => true,
-                }) {
-                    todo!();
-                }
-            }
-            if !((match get_region(ctx.position()) {
-                RegionId::Menu => false,
-                _ => true,
-            }) && data::realm(ctx.position()) != enums::Realm::Breach)
-            {
-                todo!();
-            }
-        }
-        if !(((match get_region(ctx.position()) {
-            RegionId::Menu => false,
-            _ => true,
-        }) && data::realm(ctx.position()) != enums::Realm::Breach)
-            && ctx.has(Item::Anuman))
-        {
-            todo!();
-        }
-    }
+    (((todo!() && {
+        let v = data::realm(ctx.position());
+        v != enums::Realm::Breach
+    }) && {
+        full_obs.observe_anuman();
+        ctx.has(Item::Anuman)
+    }) && {
+        let v = {
+            full_obs.observe_mode();
+            ctx.mode()
+        };
+        v == enums::Mode::Drone
+    })
 }
 pub fn observe_access_not_within_menu_and_realm_ne_breach_and_can_recall(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // NOT WITHIN `Menu` and ^realm != 'breach' and $can_recall
-    {
-        {
-            todo!();
-            if !(match get_region(ctx.position()) {
-                RegionId::Menu => false,
-                _ => true,
-            }) {
-                todo!();
-            }
-        }
-        if !((match get_region(ctx.position()) {
-            RegionId::Menu => false,
-            _ => true,
-        }) && data::realm(ctx.position()) != enums::Realm::Breach)
-        {
-            {
-                hobserve__can_recall!(ctx, world, full_obs);
-            }
-        }
-    }
+    ((todo!() && {
+        let v = data::realm(ctx.position());
+        v != enums::Realm::Breach
+    }) && hobserve__can_recall!(ctx, world, full_obs))
 }
-pub fn observe_access_offset(ctx: &Context, world: &graph::World, full_obs: &mut FullObservation) {
+pub fn observe_access_offset(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
     // $offset
-    {
-        hobserve__offset!(ctx, world, full_obs);
-    }
+    hobserve__offset!(ctx, world, full_obs)
 }
-pub fn observe_access_open(ctx: &Context, world: &graph::World, full_obs: &mut FullObservation) {
+pub fn observe_access_open(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
     // $open
-    {
-        hobserve__open!(ctx, world, full_obs);
-    }
+    hobserve__open!(ctx, world, full_obs)
 }
 pub fn observe_access_open_and_range1(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // $open and $range1
-    {
-        {
-            hobserve__open!(ctx, world, full_obs);
-        }
-        if !(helper__open!(ctx, world)) {
-            {
-                hobserve__range1!(ctx, world, full_obs);
-            }
-        }
-    }
+    (hobserve__open!(ctx, world, full_obs) && hobserve__range1!(ctx, world, full_obs))
 }
 pub fn observe_access_open_and_range2(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // $open and $range2
-    {
-        {
-            hobserve__open!(ctx, world, full_obs);
-        }
-        if !(helper__open!(ctx, world)) {
-            {
-                hobserve__range2!(ctx, world, full_obs);
-            }
-        }
-    }
+    (hobserve__open!(ctx, world, full_obs) && hobserve__range2!(ctx, world, full_obs))
 }
 pub fn observe_access_open_and_range3(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // $open and $range3
-    {
-        {
-            hobserve__open!(ctx, world, full_obs);
-        }
-        if !(helper__open!(ctx, world)) {
-            {
-                hobserve__range3!(ctx, world, full_obs);
-            }
-        }
-    }
+    (hobserve__open!(ctx, world, full_obs) && hobserve__range3!(ctx, world, full_obs))
 }
 pub fn observe_access_overheat(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // $overheat
-    {
-        hobserve__overheat!(ctx, world, full_obs);
-    }
+    hobserve__overheat!(ctx, world, full_obs)
 }
 pub fn observe_access_overheat_and_can_damage(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // $overheat and $can_damage
-    {
-        {
-            hobserve__overheat!(ctx, world, full_obs);
-        }
-        if !(helper__overheat!(ctx, world)) {
-            {
-                hobserve__can_damage!(ctx, world, full_obs);
-            }
-        }
-    }
+    (hobserve__overheat!(ctx, world, full_obs) && hobserve__can_damage!(ctx, world, full_obs))
 }
 pub fn observe_access_platform_and_hook_and_hover(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // $platform and $hook and $hover
-    {
-        {
-            {
-                hobserve__platform!(ctx, world, full_obs);
-            }
-            if !(helper__platform!(ctx, world)) {
-                {
-                    hobserve__hook!(ctx, world, full_obs);
-                }
-            }
-        }
-        if !(helper__platform!(ctx, world) && helper__hook!(ctx, world)) {
-            {
-                hobserve__hover!(ctx, world, full_obs);
-            }
-        }
-    }
+    ((hobserve__platform!(ctx, world, full_obs) && hobserve__hook!(ctx, world, full_obs))
+        && hobserve__hover!(ctx, world, full_obs))
 }
 pub fn observe_access_ranged_damage(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // Ranged_Damage
-    todo!();
+    {
+        full_obs.observe_ranged_damage();
+        ctx.has(Item::Ranged_Damage)
+    }
 }
 pub fn observe_access_ranged_damage_2(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // Ranged_Damage_2
-    todo!();
+    {
+        full_obs.observe_ranged_damage_2();
+        ctx.has(Item::Ranged_Damage_2)
+    }
 }
 pub fn observe_access_ranged_speed(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // Ranged_Speed
-    todo!();
+    {
+        full_obs.observe_ranged_speed();
+        ctx.has(Item::Ranged_Speed)
+    }
 }
 pub fn observe_access_ranged_speed_2(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // Ranged_Speed_2
-    todo!();
+    {
+        full_obs.observe_ranged_speed_2();
+        ctx.has(Item::Ranged_Speed_2)
+    }
 }
 pub fn observe_access_realm_eq_breach(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // ^realm == 'breach'
-    todo!();
+    {
+        let v = data::realm(ctx.position());
+        v == enums::Realm::Breach
+    }
 }
 pub fn observe_access_realm_eq_breach_and_exit_breach_and___flipside_not_within_default(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // ^realm == 'breach' and Exit_Breach and (^flipside NOT WITHIN $default)
-    {
-        {
-            todo!();
-            if !(data::realm(ctx.position()) == enums::Realm::Breach) {
-                todo!();
-            }
-        }
-        if !(data::realm(ctx.position()) == enums::Realm::Breach && ctx.has(Item::Exit_Breach)) {}
-    }
+    (({
+        let v = data::realm(ctx.position());
+        v == enums::Realm::Breach
+    } && {
+        full_obs.observe_exit_breach();
+        ctx.has(Item::Exit_Breach)
+    }) && (Default::default()))
 }
 pub fn observe_access_realm_in___main_interior_emergence_and_amashilama(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // ^realm IN ['main', 'interior', 'emergence'] and Amashilama
-    {
-        todo!();
-        if !(matches!(
-            data::realm(ctx.position()),
-            enums::Realm::Main | enums::Realm::Interior | enums::Realm::Emergence
-        )) {
-            todo!();
-        }
-    }
+    (todo!() && {
+        full_obs.observe_amashilama();
+        ctx.has(Item::Amashilama)
+    })
 }
 pub fn observe_access_remote_drone(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // Remote_Drone
-    todo!();
+    {
+        full_obs.observe_remote_drone();
+        ctx.has(Item::Remote_Drone)
+    }
 }
 pub fn observe_access_separation(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // Separation
-    todo!();
+    {
+        full_obs.observe_separation();
+        ctx.has(Item::Separation)
+    }
 }
 pub fn observe_access_separation_and_not_defeat_indra_and_mist2(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // Separation and NOT Defeat_Indra and $mist2
-    {
-        {
-            todo!();
-            if !(ctx.has(Item::Separation)) {
-                todo!();
-            }
-        }
-        if !(ctx.has(Item::Separation) && !ctx.has(Item::Defeat_Indra)) {
-            {
-                hobserve__mist2!(ctx, world, full_obs);
-            }
-        }
-    }
+    (({
+        full_obs.observe_separation();
+        ctx.has(Item::Separation)
+    } && {
+        full_obs.observe_defeat_indra();
+        !ctx.has(Item::Defeat_Indra)
+    }) && hobserve__mist2!(ctx, world, full_obs))
 }
 pub fn observe_access_shockwave(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // $shockwave
-    {
-        hobserve__shockwave!(ctx, world, full_obs);
-    }
+    hobserve__shockwave!(ctx, world, full_obs)
 }
 pub fn observe_access_shockwave_and_not_defeat_mus_a_m20(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // $shockwave and not Defeat_MUS_A_M20
-    {
-        {
-            hobserve__shockwave!(ctx, world, full_obs);
-        }
-        if !(helper__shockwave!(ctx, world)) {
-            todo!();
-        }
-    }
+    (hobserve__shockwave!(ctx, world, full_obs) && {
+        full_obs.observe_defeat_mus_a_m20();
+        !ctx.has(Item::Defeat_MUS_A_M20)
+    })
 }
 pub fn observe_access_sniper_valley_rock_1(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // Sniper_Valley_Rock_1
-    todo!();
-}
-pub fn observe_access_spin(ctx: &Context, world: &graph::World, full_obs: &mut FullObservation) {
-    // $spin
     {
-        hobserve__spin!(ctx, world, full_obs);
+        full_obs.observe_sniper_valley_rock_1();
+        ctx.has(Item::Sniper_Valley_Rock_1)
     }
+}
+pub fn observe_access_spin(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $spin
+    hobserve__spin!(ctx, world, full_obs)
 }
 pub fn observe_access_station_power(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // Station_Power
-    todo!();
+    {
+        full_obs.observe_station_power();
+        ctx.has(Item::Station_Power)
+    }
 }
 pub fn observe_access_switch_36_11(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // Switch_36_11
-    todo!();
+    {
+        full_obs.observe_switch_36_11();
+        ctx.has(Item::Switch_36_11)
+    }
 }
 pub fn observe_access_switch_40_12(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // Switch_40_12
-    todo!();
+    {
+        full_obs.observe_switch_40_12();
+        ctx.has(Item::Switch_40_12)
+    }
 }
 pub fn observe_access_uhrum_annuna_corridor_block(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // Uhrum_Annuna_Corridor_Block
-    todo!();
+    {
+        full_obs.observe_uhrum_annuna_corridor_block();
+        ctx.has(Item::Uhrum_Annuna_Corridor_Block)
+    }
 }
 pub fn observe_access_uhrum_waterfall_wall(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // Uhrum_Waterfall_Wall
-    todo!();
+    {
+        full_obs.observe_uhrum_waterfall_wall();
+        ctx.has(Item::Uhrum_Waterfall_Wall)
+    }
 }
 pub fn observe_access_uhrum_waterfalls_block(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // Uhrum_Waterfalls_Block
-    todo!();
+    {
+        full_obs.observe_uhrum_waterfalls_block();
+        ctx.has(Item::Uhrum_Waterfalls_Block)
+    }
 }
 pub fn observe_access_uhrum_waterfalls_block_and_grab(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // Uhrum_Waterfalls_Block and $grab
-    {
-        todo!();
-        if !(ctx.has(Item::Uhrum_Waterfalls_Block)) {
-            {
-                hobserve__grab!(ctx, world, full_obs);
-            }
-        }
-    }
+    ({
+        full_obs.observe_uhrum_waterfalls_block();
+        ctx.has(Item::Uhrum_Waterfalls_Block)
+    } && hobserve__grab!(ctx, world, full_obs))
 }
 pub fn observe_access_uhrum_waterfalls_block_and_hook(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // Uhrum_Waterfalls_Block and $hook
-    {
-        todo!();
-        if !(ctx.has(Item::Uhrum_Waterfalls_Block)) {
-            {
-                hobserve__hook!(ctx, world, full_obs);
-            }
-        }
-    }
+    ({
+        full_obs.observe_uhrum_waterfalls_block();
+        ctx.has(Item::Uhrum_Waterfalls_Block)
+    } && hobserve__hook!(ctx, world, full_obs))
 }
 pub fn observe_access_uhrum_west_entrance_gate(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // Uhrum_West_Entrance_Gate
-    todo!();
+    {
+        full_obs.observe_uhrum_west_entrance_gate();
+        ctx.has(Item::Uhrum_West_Entrance_Gate)
+    }
 }
 pub fn observe_access_uhrum_west_entrance_gate_and_hover(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // Uhrum_West_Entrance_Gate and $hover
-    {
-        todo!();
-        if !(ctx.has(Item::Uhrum_West_Entrance_Gate)) {
-            {
-                hobserve__hover!(ctx, world, full_obs);
-            }
-        }
-    }
+    ({
+        full_obs.observe_uhrum_west_entrance_gate();
+        ctx.has(Item::Uhrum_West_Entrance_Gate)
+    } && hobserve__hover!(ctx, world, full_obs))
 }
 pub fn observe_access_uhrum_west_entrance_lower_wall(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // Uhrum_West_Entrance_Lower_Wall
-    todo!();
+    {
+        full_obs.observe_uhrum_west_entrance_lower_wall();
+        ctx.has(Item::Uhrum_West_Entrance_Lower_Wall)
+    }
 }
 pub fn observe_access_uhrum_west_entrance_upper_wall(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // Uhrum_West_Entrance_Upper_Wall
-    todo!();
+    {
+        full_obs.observe_uhrum_west_entrance_upper_wall();
+        ctx.has(Item::Uhrum_West_Entrance_Upper_Wall)
+    }
 }
 pub fn observe_access_underwater_movement(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // Underwater_Movement
-    todo!();
+    {
+        full_obs.observe_underwater_movement();
+        ctx.has(Item::Underwater_Movement)
+    }
 }
 pub fn observe_access_underwater_movement_and___grab_or_climb(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // Underwater_Movement and ($grab or $climb)
-    {
-        todo!();
-        if !(ctx.has(Item::Underwater_Movement)) {
-            {
-                {
-                    hobserve__grab!(ctx, world, full_obs);
-                }
-                if helper__grab!(ctx, world) {
-                    {
-                        hobserve__climb!(ctx, world, full_obs);
-                    }
-                }
-            }
-        }
-    }
+    ({
+        full_obs.observe_underwater_movement();
+        ctx.has(Item::Underwater_Movement)
+    } && (hobserve__grab!(ctx, world, full_obs) || hobserve__climb!(ctx, world, full_obs)))
 }
 pub fn observe_access_underwater_movement_and_grab(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // Underwater_Movement and $grab
-    {
-        todo!();
-        if !(ctx.has(Item::Underwater_Movement)) {
-            {
-                hobserve__grab!(ctx, world, full_obs);
-            }
-        }
-    }
+    ({
+        full_obs.observe_underwater_movement();
+        ctx.has(Item::Underwater_Movement)
+    } && hobserve__grab!(ctx, world, full_obs))
 }
 pub fn observe_access_underwater_movement_and_hook(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // Underwater_Movement and $hook
-    {
-        todo!();
-        if !(ctx.has(Item::Underwater_Movement)) {
-            {
-                hobserve__hook!(ctx, world, full_obs);
-            }
-        }
-    }
+    ({
+        full_obs.observe_underwater_movement();
+        ctx.has(Item::Underwater_Movement)
+    } && hobserve__hook!(ctx, world, full_obs))
 }
 pub fn observe_access_within_antarctica(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // WITHIN `Antarctica`
-    todo!();
+    todo!()
 }
 pub fn observe_access_within_menu_gt_upgrade_menu(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
-) {
+) -> bool {
     // WITHIN `Menu > Upgrade Menu`
-    todo!();
+    todo!()
 }
 pub fn observe_action_amagi__main_area__carving__key_combo__do(
     ctx: &Context,
@@ -14445,7 +14214,7 @@ pub fn observe_action_amagi__main_area__carving__key_combo__do(
     full_obs: &mut FullObservation,
 ) {
     // ^_combo = true
-    todo!();
+    todo!()
 }
 pub fn observe_action_annuna__east_bridge__tower_east_ledge__enter_combo__do(
     ctx: &Context,
@@ -14453,7 +14222,7 @@ pub fn observe_action_annuna__east_bridge__tower_east_ledge__enter_combo__do(
     full_obs: &mut FullObservation,
 ) {
     // ^_combo = true
-    todo!();
+    todo!()
 }
 pub fn observe_action_annuna__east_bridge__tower_secret__enter_combo__do(
     ctx: &Context,
@@ -14461,7 +14230,7 @@ pub fn observe_action_annuna__east_bridge__tower_secret__enter_combo__do(
     full_obs: &mut FullObservation,
 ) {
     // ^_combo = true
-    todo!();
+    todo!()
 }
 pub fn observe_action_annuna__east_bridge__tower_west_ledge__enter_combo__do(
     ctx: &Context,
@@ -14469,7 +14238,7 @@ pub fn observe_action_annuna__east_bridge__tower_west_ledge__enter_combo__do(
     full_obs: &mut FullObservation,
 ) {
     // ^_combo = true
-    todo!();
+    todo!()
 }
 pub fn observe_action_annuna__west_climb__switch_ledge__open_door__do(
     ctx: &Context,
@@ -14477,7 +14246,7 @@ pub fn observe_action_annuna__west_climb__switch_ledge__open_door__do(
     full_obs: &mut FullObservation,
 ) {
     // ^_door_opened = true
-    todo!();
+    todo!()
 }
 pub fn observe_action_breach_portal_save_update(
     ctx: &Context,
@@ -14485,9 +14254,7 @@ pub fn observe_action_breach_portal_save_update(
     full_obs: &mut FullObservation,
 ) {
     // $breach_portal_save_update
-    {
-        hobserve__breach_portal_save_update!(ctx, world, full_obs);
-    }
+    hobserve__breach_portal_save_update!(ctx, world, full_obs)
 }
 pub fn observe_action_clear_breach_save(
     ctx: &Context,
@@ -14495,9 +14262,7 @@ pub fn observe_action_clear_breach_save(
     full_obs: &mut FullObservation,
 ) {
     // $clear_breach_save
-    {
-        hobserve__clear_breach_save!(ctx, world, full_obs);
-    }
+    hobserve__clear_breach_save!(ctx, world, full_obs)
 }
 pub fn observe_action_collect__irikar_royal_storage_wall_collect__flask_visit__irikar_gt_hub_gt_royal_storage_in_wall_gt_item(
     ctx: &Context,
@@ -14505,7 +14270,7 @@ pub fn observe_action_collect__irikar_royal_storage_wall_collect__flask_visit__i
     full_obs: &mut FullObservation,
 ) {
     // $collect(Irikar_Royal_Storage_Wall); $collect(Flask); $visit(`Irikar > Hub > Royal Storage in Wall > Item`);
-    todo!();
+    todo!()
 }
 pub fn observe_action_deploy_drone(
     ctx: &Context,
@@ -14513,9 +14278,7 @@ pub fn observe_action_deploy_drone(
     full_obs: &mut FullObservation,
 ) {
     // $deploy_drone
-    {
-        hobserve__deploy_drone!(ctx, world, full_obs);
-    }
+    hobserve__deploy_drone!(ctx, world, full_obs)
 }
 pub fn observe_action_deploy_drone_and_move__annuna_gt_east_bridge_gt_center_corridor(
     ctx: &Context,
@@ -14523,14 +14286,12 @@ pub fn observe_action_deploy_drone_and_move__annuna_gt_east_bridge_gt_center_cor
     full_obs: &mut FullObservation,
 ) {
     // $deploy_drone_and_move(`Annuna > East Bridge > Center Corridor`)
-    {
-        hobserve__deploy_drone_and_move!(
-            ctx,
-            world,
-            SpotId::Annuna__East_Bridge__Center_Corridor,
-            full_obs
-        );
-    }
+    hobserve__deploy_drone_and_move!(
+        ctx,
+        world,
+        SpotId::Annuna__East_Bridge__Center_Corridor,
+        full_obs
+    )
 }
 pub fn observe_action_deploy_drone_and_move__annuna_gt_east_bridge_gt_tower_base_east(
     ctx: &Context,
@@ -14538,14 +14299,12 @@ pub fn observe_action_deploy_drone_and_move__annuna_gt_east_bridge_gt_tower_base
     full_obs: &mut FullObservation,
 ) {
     // $deploy_drone_and_move(`Annuna > East Bridge > Tower Base East`)
-    {
-        hobserve__deploy_drone_and_move!(
-            ctx,
-            world,
-            SpotId::Annuna__East_Bridge__Tower_Base_East,
-            full_obs
-        );
-    }
+    hobserve__deploy_drone_and_move!(
+        ctx,
+        world,
+        SpotId::Annuna__East_Bridge__Tower_Base_East,
+        full_obs
+    )
 }
 pub fn observe_action_deploy_drone_and_move__ebih_gt_drone_room_gt_tree(
     ctx: &Context,
@@ -14553,9 +14312,7 @@ pub fn observe_action_deploy_drone_and_move__ebih_gt_drone_room_gt_tree(
     full_obs: &mut FullObservation,
 ) {
     // $deploy_drone_and_move(`Ebih > Drone Room > Tree`)
-    {
-        hobserve__deploy_drone_and_move!(ctx, world, SpotId::Ebih__Drone_Room__Tree, full_obs);
-    }
+    hobserve__deploy_drone_and_move!(ctx, world, SpotId::Ebih__Drone_Room__Tree, full_obs)
 }
 pub fn observe_action_deploy_drone_and_move__ebih_gt_ebih_west_gt_alcove_entrance(
     ctx: &Context,
@@ -14563,14 +14320,12 @@ pub fn observe_action_deploy_drone_and_move__ebih_gt_ebih_west_gt_alcove_entranc
     full_obs: &mut FullObservation,
 ) {
     // $deploy_drone_and_move(`Ebih > Ebih West > Alcove Entrance`)
-    {
-        hobserve__deploy_drone_and_move!(
-            ctx,
-            world,
-            SpotId::Ebih__Ebih_West__Alcove_Entrance,
-            full_obs
-        );
-    }
+    hobserve__deploy_drone_and_move!(
+        ctx,
+        world,
+        SpotId::Ebih__Ebih_West__Alcove_Entrance,
+        full_obs
+    )
 }
 pub fn observe_action_deploy_drone_and_move__giguna_gt_giguna_base_gt_kari(
     ctx: &Context,
@@ -14578,9 +14333,7 @@ pub fn observe_action_deploy_drone_and_move__giguna_gt_giguna_base_gt_kari(
     full_obs: &mut FullObservation,
 ) {
     // $deploy_drone_and_move(`Giguna > Giguna Base > Kari`)
-    {
-        hobserve__deploy_drone_and_move!(ctx, world, SpotId::Giguna__Giguna_Base__Kari, full_obs);
-    }
+    hobserve__deploy_drone_and_move!(ctx, world, SpotId::Giguna__Giguna_Base__Kari, full_obs)
 }
 pub fn observe_action_deploy_drone_and_move__giguna_gt_ruins_top_gt_west_7(
     ctx: &Context,
@@ -14588,9 +14341,7 @@ pub fn observe_action_deploy_drone_and_move__giguna_gt_ruins_top_gt_west_7(
     full_obs: &mut FullObservation,
 ) {
     // $deploy_drone_and_move(`Giguna > Ruins Top > West 7`)
-    {
-        hobserve__deploy_drone_and_move!(ctx, world, SpotId::Giguna__Ruins_Top__West_7, full_obs);
-    }
+    hobserve__deploy_drone_and_move!(ctx, world, SpotId::Giguna__Ruins_Top__West_7, full_obs)
 }
 pub fn observe_action_deploy_drone_and_move__giguna_gt_wasteland_gt_middle_path(
     ctx: &Context,
@@ -14598,14 +14349,7 @@ pub fn observe_action_deploy_drone_and_move__giguna_gt_wasteland_gt_middle_path(
     full_obs: &mut FullObservation,
 ) {
     // $deploy_drone_and_move(`Giguna > Wasteland > Middle Path`)
-    {
-        hobserve__deploy_drone_and_move!(
-            ctx,
-            world,
-            SpotId::Giguna__Wasteland__Middle_Path,
-            full_obs
-        );
-    }
+    hobserve__deploy_drone_and_move!(ctx, world, SpotId::Giguna__Wasteland__Middle_Path, full_obs)
 }
 pub fn observe_action_ebih__base_camp__left_platform__move_left_platform__do(
     ctx: &Context,
@@ -14613,7 +14357,7 @@ pub fn observe_action_ebih__base_camp__left_platform__move_left_platform__do(
     full_obs: &mut FullObservation,
 ) {
     // ^_left_platform_moved = true
-    todo!();
+    todo!()
 }
 pub fn observe_action_ebih__base_camp__left_platform_moved__reset_left_platform__do(
     ctx: &Context,
@@ -14621,7 +14365,7 @@ pub fn observe_action_ebih__base_camp__left_platform_moved__reset_left_platform_
     full_obs: &mut FullObservation,
 ) {
     // ^_left_platform_moved = false
-    todo!();
+    todo!()
 }
 pub fn observe_action_ebih__drone_room__pit_left__activate_lift__do(
     ctx: &Context,
@@ -14629,7 +14373,7 @@ pub fn observe_action_ebih__drone_room__pit_left__activate_lift__do(
     full_obs: &mut FullObservation,
 ) {
     // ^_platform_moved = false
-    todo!();
+    todo!()
 }
 pub fn observe_action_ebih__drone_room__pit_left__activate_lift_but_get_off_early__do(
     ctx: &Context,
@@ -14637,7 +14381,7 @@ pub fn observe_action_ebih__drone_room__pit_left__activate_lift_but_get_off_earl
     full_obs: &mut FullObservation,
 ) {
     // ^_platform_moved = false
-    todo!();
+    todo!()
 }
 pub fn observe_action_ebih__drone_room__portal_exit__activate_platform__do(
     ctx: &Context,
@@ -14645,7 +14389,7 @@ pub fn observe_action_ebih__drone_room__portal_exit__activate_platform__do(
     full_obs: &mut FullObservation,
 ) {
     // ^_platform_moved = true
-    todo!();
+    todo!()
 }
 pub fn observe_action_ebih__ebih_east__dispenser__activate_lift__do(
     ctx: &Context,
@@ -14653,7 +14397,7 @@ pub fn observe_action_ebih__ebih_east__dispenser__activate_lift__do(
     full_obs: &mut FullObservation,
 ) {
     // ^_platform2_moved = false
-    todo!();
+    todo!()
 }
 pub fn observe_action_ebih__ebih_east__lower_moving_platform__activate_lift__do(
     ctx: &Context,
@@ -14661,7 +14405,7 @@ pub fn observe_action_ebih__ebih_east__lower_moving_platform__activate_lift__do(
     full_obs: &mut FullObservation,
 ) {
     // ^_platform2_moved = true
-    todo!();
+    todo!()
 }
 pub fn observe_action_ebih__ebih_east__lower_moving_platform__activate_ride__do(
     ctx: &Context,
@@ -14669,7 +14413,7 @@ pub fn observe_action_ebih__ebih_east__lower_moving_platform__activate_ride__do(
     full_obs: &mut FullObservation,
 ) {
     // ^_platform2_moved = true
-    todo!();
+    todo!()
 }
 pub fn observe_action_ebih__ebih_east__moving_platform__activate_ride__do(
     ctx: &Context,
@@ -14677,7 +14421,7 @@ pub fn observe_action_ebih__ebih_east__moving_platform__activate_ride__do(
     full_obs: &mut FullObservation,
 ) {
     // ^_platform1_moved = true
-    todo!();
+    todo!()
 }
 pub fn observe_action_ebih__ebih_west__below_door__open_door__do(
     ctx: &Context,
@@ -14685,7 +14429,7 @@ pub fn observe_action_ebih__ebih_west__below_door__open_door__do(
     full_obs: &mut FullObservation,
 ) {
     // ^_door_open = true; IF (^indra WITHIN `Ebih > Ebih West > Above Door`) { ^indra = `Ebih > Ebih West > Below Door`; }
-    todo!();
+    todo!()
 }
 pub fn observe_action_ebih__ebih_west__left_of_switch__open_door__do(
     ctx: &Context,
@@ -14693,7 +14437,7 @@ pub fn observe_action_ebih__ebih_west__left_of_switch__open_door__do(
     full_obs: &mut FullObservation,
 ) {
     // ^_door_open = true; IF (^indra WITHIN `Ebih > Ebih West > Above Door`) { ^indra = `Ebih > Ebih West > Below Door`; }
-    todo!();
+    todo!()
 }
 pub fn observe_action_ebih__grid_25_10_12__door_left__open_door__do(
     ctx: &Context,
@@ -14701,7 +14445,7 @@ pub fn observe_action_ebih__grid_25_10_12__door_left__open_door__do(
     full_obs: &mut FullObservation,
 ) {
     // ^_door_open = true
-    todo!();
+    todo!()
 }
 pub fn observe_action_ebih__grid_25_10_12__east_11__open_door__do(
     ctx: &Context,
@@ -14709,7 +14453,7 @@ pub fn observe_action_ebih__grid_25_10_12__east_11__open_door__do(
     full_obs: &mut FullObservation,
 ) {
     // ^_door_open = true
-    todo!();
+    todo!()
 }
 pub fn observe_action_ebih__vertical_interchange__west_13__open_door__do(
     ctx: &Context,
@@ -14717,7 +14461,7 @@ pub fn observe_action_ebih__vertical_interchange__west_13__open_door__do(
     full_obs: &mut FullObservation,
 ) {
     // ^_door_open = true
-    todo!();
+    todo!()
 }
 pub fn observe_action_ebih__waterfall__below_left_switch__open_door__do(
     ctx: &Context,
@@ -14725,7 +14469,7 @@ pub fn observe_action_ebih__waterfall__below_left_switch__open_door__do(
     full_obs: &mut FullObservation,
 ) {
     // ^_west_door_open = true
-    todo!();
+    todo!()
 }
 pub fn observe_action_ebih__waterfall__west_8__open_door__do(
     ctx: &Context,
@@ -14733,7 +14477,7 @@ pub fn observe_action_ebih__waterfall__west_8__open_door__do(
     full_obs: &mut FullObservation,
 ) {
     // ^_west_door_open = true
-    todo!();
+    todo!()
 }
 pub fn observe_action_flasks_incr_1(
     ctx: &Context,
@@ -14741,7 +14485,7 @@ pub fn observe_action_flasks_incr_1(
     full_obs: &mut FullObservation,
 ) {
     // ^flasks += 1
-    todo!();
+    todo!()
 }
 pub fn observe_action_flasks_incr_2(
     ctx: &Context,
@@ -14749,7 +14493,7 @@ pub fn observe_action_flasks_incr_2(
     full_obs: &mut FullObservation,
 ) {
     // ^flasks += 2
-    todo!();
+    todo!()
 }
 pub fn observe_action_giguna__carnelian__lower_susar__caught__do(
     ctx: &Context,
@@ -14757,7 +14501,7 @@ pub fn observe_action_giguna__carnelian__lower_susar__caught__do(
     full_obs: &mut FullObservation,
 ) {
     // ^_lower_susar = true
-    todo!();
+    todo!()
 }
 pub fn observe_action_giguna__carnelian__lower_susar__hack__do(
     ctx: &Context,
@@ -14765,7 +14509,7 @@ pub fn observe_action_giguna__carnelian__lower_susar__hack__do(
     full_obs: &mut FullObservation,
 ) {
     // ^_lower_susar = true
-    todo!();
+    todo!()
 }
 pub fn observe_action_giguna__carnelian__switch__open_door__do(
     ctx: &Context,
@@ -14773,7 +14517,7 @@ pub fn observe_action_giguna__carnelian__switch__open_door__do(
     full_obs: &mut FullObservation,
 ) {
     // ^_door_opened = true
-    todo!();
+    todo!()
 }
 pub fn observe_action_giguna__carnelian__upper_susar__caught__do(
     ctx: &Context,
@@ -14781,7 +14525,7 @@ pub fn observe_action_giguna__carnelian__upper_susar__caught__do(
     full_obs: &mut FullObservation,
 ) {
     // ^_upper_susar = true
-    todo!();
+    todo!()
 }
 pub fn observe_action_giguna__carnelian__upper_susar__hack__do(
     ctx: &Context,
@@ -14789,7 +14533,7 @@ pub fn observe_action_giguna__carnelian__upper_susar__hack__do(
     full_obs: &mut FullObservation,
 ) {
     // ^_upper_susar = true
-    todo!();
+    todo!()
 }
 pub fn observe_action_giguna__clouds__platform_start__hack_and_get_off_early__do(
     ctx: &Context,
@@ -14797,7 +14541,7 @@ pub fn observe_action_giguna__clouds__platform_start__hack_and_get_off_early__do
     full_obs: &mut FullObservation,
 ) {
     // ^_platform_and_portal = true
-    todo!();
+    todo!()
 }
 pub fn observe_action_giguna__clouds__platform_start__hack_and_ride_to_portal__do(
     ctx: &Context,
@@ -14805,7 +14549,7 @@ pub fn observe_action_giguna__clouds__platform_start__hack_and_ride_to_portal__d
     full_obs: &mut FullObservation,
 ) {
     // ^_platform_and_portal = true; if (^indra WITHIN ^position) { ^indra = `Giguna > Clouds > Platform Stop` }
-    todo!();
+    todo!()
 }
 pub fn observe_action_giguna__clouds__platform_start__hack_deploy_ride_to_portal__do(
     ctx: &Context,
@@ -14813,14 +14557,7 @@ pub fn observe_action_giguna__clouds__platform_start__hack_deploy_ride_to_portal
     full_obs: &mut FullObservation,
 ) {
     // ^_platform_and_portal = true; $deploy_drone_and_move(`Giguna > Clouds > Platform Stop`)
-    {
-        hobserve__deploy_drone_and_move!(
-            ctx,
-            world,
-            SpotId::Giguna__Clouds__Platform_Stop,
-            full_obs
-        );
-    }
+    hobserve__deploy_drone_and_move!(ctx, world, SpotId::Giguna__Clouds__Platform_Stop, full_obs)
 }
 pub fn observe_action_giguna__east_caverns__lower_susar__caught__do(
     ctx: &Context,
@@ -14828,7 +14565,7 @@ pub fn observe_action_giguna__east_caverns__lower_susar__caught__do(
     full_obs: &mut FullObservation,
 ) {
     // ^_lower_susar = true
-    todo!();
+    todo!()
 }
 pub fn observe_action_giguna__east_caverns__lower_susar__hack__do(
     ctx: &Context,
@@ -14836,7 +14573,7 @@ pub fn observe_action_giguna__east_caverns__lower_susar__hack__do(
     full_obs: &mut FullObservation,
 ) {
     // ^_lower_susar = true
-    todo!();
+    todo!()
 }
 pub fn observe_action_giguna__east_caverns__mid_susar__caught__do(
     ctx: &Context,
@@ -14844,7 +14581,7 @@ pub fn observe_action_giguna__east_caverns__mid_susar__caught__do(
     full_obs: &mut FullObservation,
 ) {
     // ^_mid_susar = true
-    todo!();
+    todo!()
 }
 pub fn observe_action_giguna__east_caverns__mid_susar__hack__do(
     ctx: &Context,
@@ -14852,7 +14589,7 @@ pub fn observe_action_giguna__east_caverns__mid_susar__hack__do(
     full_obs: &mut FullObservation,
 ) {
     // ^_mid_susar = true
-    todo!();
+    todo!()
 }
 pub fn observe_action_giguna__east_caverns__statues_ledge__open_door__do(
     ctx: &Context,
@@ -14860,7 +14597,7 @@ pub fn observe_action_giguna__east_caverns__statues_ledge__open_door__do(
     full_obs: &mut FullObservation,
 ) {
     // ^_door_opened = true
-    todo!();
+    todo!()
 }
 pub fn observe_action_giguna__east_caverns__switch__open_door__do(
     ctx: &Context,
@@ -14868,7 +14605,7 @@ pub fn observe_action_giguna__east_caverns__switch__open_door__do(
     full_obs: &mut FullObservation,
 ) {
     // ^_door_opened = true
-    todo!();
+    todo!()
 }
 pub fn observe_action_giguna__east_caverns__upper_susar__caught__do(
     ctx: &Context,
@@ -14876,7 +14613,7 @@ pub fn observe_action_giguna__east_caverns__upper_susar__caught__do(
     full_obs: &mut FullObservation,
 ) {
     // ^_upper_susar = true
-    todo!();
+    todo!()
 }
 pub fn observe_action_giguna__east_caverns__upper_susar_jump_from_east__caught__do(
     ctx: &Context,
@@ -14884,7 +14621,7 @@ pub fn observe_action_giguna__east_caverns__upper_susar_jump_from_east__caught__
     full_obs: &mut FullObservation,
 ) {
     // ^_upper_susar = true
-    todo!();
+    todo!()
 }
 pub fn observe_action_giguna__east_caverns__upper_susar_jump_from_east__hack__do(
     ctx: &Context,
@@ -14892,7 +14629,7 @@ pub fn observe_action_giguna__east_caverns__upper_susar_jump_from_east__hack__do
     full_obs: &mut FullObservation,
 ) {
     // ^_upper_susar = true
-    todo!();
+    todo!()
 }
 pub fn observe_action_giguna__east_caverns__upper_susar_mid_jump__hack__do(
     ctx: &Context,
@@ -14900,7 +14637,7 @@ pub fn observe_action_giguna__east_caverns__upper_susar_mid_jump__hack__do(
     full_obs: &mut FullObservation,
 ) {
     // ^_upper_susar = true
-    todo!();
+    todo!()
 }
 pub fn observe_action_giguna__east_caverns__west_14__enter_combo__do(
     ctx: &Context,
@@ -14908,7 +14645,7 @@ pub fn observe_action_giguna__east_caverns__west_14__enter_combo__do(
     full_obs: &mut FullObservation,
 ) {
     // ^_combo_entered = true
-    todo!();
+    todo!()
 }
 pub fn observe_action_giguna__east_caverns__west_16__open_door__do(
     ctx: &Context,
@@ -14916,7 +14653,7 @@ pub fn observe_action_giguna__east_caverns__west_16__open_door__do(
     full_obs: &mut FullObservation,
 ) {
     // ^_door_opened = true
-    todo!();
+    todo!()
 }
 pub fn observe_action_giguna__gateway__flask_ledge__open_door__do(
     ctx: &Context,
@@ -14924,7 +14661,7 @@ pub fn observe_action_giguna__gateway__flask_ledge__open_door__do(
     full_obs: &mut FullObservation,
 ) {
     // ^_door_opened = true
-    todo!();
+    todo!()
 }
 pub fn observe_action_giguna__gateway__one_jump__open_door__do(
     ctx: &Context,
@@ -14932,7 +14669,7 @@ pub fn observe_action_giguna__gateway__one_jump__open_door__do(
     full_obs: &mut FullObservation,
 ) {
     // ^_door_opened = true
-    todo!();
+    todo!()
 }
 pub fn observe_action_giguna__giguna_base__switch_distance_1__open_door__do(
     ctx: &Context,
@@ -14940,7 +14677,7 @@ pub fn observe_action_giguna__giguna_base__switch_distance_1__open_door__do(
     full_obs: &mut FullObservation,
 ) {
     // ^_door_open = true
-    todo!();
+    todo!()
 }
 pub fn observe_action_giguna__giguna_base__switch_distance_2__open_door__do(
     ctx: &Context,
@@ -14948,7 +14685,7 @@ pub fn observe_action_giguna__giguna_base__switch_distance_2__open_door__do(
     full_obs: &mut FullObservation,
 ) {
     // ^_door_open = true
-    todo!();
+    todo!()
 }
 pub fn observe_action_giguna__giguna_base__switch_distance_3__open_door__do(
     ctx: &Context,
@@ -14956,7 +14693,7 @@ pub fn observe_action_giguna__giguna_base__switch_distance_3__open_door__do(
     full_obs: &mut FullObservation,
 ) {
     // ^_door_open = true
-    todo!();
+    todo!()
 }
 pub fn observe_action_giguna__giguna_base__switch_distance_4__open_door__do(
     ctx: &Context,
@@ -14964,7 +14701,7 @@ pub fn observe_action_giguna__giguna_base__switch_distance_4__open_door__do(
     full_obs: &mut FullObservation,
 ) {
     // ^_door_open = true
-    todo!();
+    todo!()
 }
 pub fn observe_action_giguna__giguna_northeast__right_column__open_door_from_afar__do(
     ctx: &Context,
@@ -14972,7 +14709,7 @@ pub fn observe_action_giguna__giguna_northeast__right_column__open_door_from_afa
     full_obs: &mut FullObservation,
 ) {
     // ^_door_opened = true
-    todo!();
+    todo!()
 }
 pub fn observe_action_giguna__giguna_northeast__switch__open_door__do(
     ctx: &Context,
@@ -14980,7 +14717,7 @@ pub fn observe_action_giguna__giguna_northeast__switch__open_door__do(
     full_obs: &mut FullObservation,
 ) {
     // ^_door_opened = true
-    todo!();
+    todo!()
 }
 pub fn observe_action_giguna__ruins_top__switch__open_doors__do(
     ctx: &Context,
@@ -14988,7 +14725,7 @@ pub fn observe_action_giguna__ruins_top__switch__open_doors__do(
     full_obs: &mut FullObservation,
 ) {
     // ^_doors_open = true
-    todo!();
+    todo!()
 }
 pub fn observe_action_giguna__ruins_west__lower_ledge__destroy_kishib__do(
     ctx: &Context,
@@ -14996,7 +14733,7 @@ pub fn observe_action_giguna__ruins_west__lower_ledge__destroy_kishib__do(
     full_obs: &mut FullObservation,
 ) {
     // ^_kishib_handled = true
-    todo!();
+    todo!()
 }
 pub fn observe_action_giguna__ruins_west__lower_ledge__hack_kishib__do(
     ctx: &Context,
@@ -15004,7 +14741,7 @@ pub fn observe_action_giguna__ruins_west__lower_ledge__hack_kishib__do(
     full_obs: &mut FullObservation,
 ) {
     // ^_kishib_handled = true
-    todo!();
+    todo!()
 }
 pub fn observe_action_giguna__west_caverns__east_susar__caught__do(
     ctx: &Context,
@@ -15012,7 +14749,7 @@ pub fn observe_action_giguna__west_caverns__east_susar__caught__do(
     full_obs: &mut FullObservation,
 ) {
     // ^_east_susar = true
-    todo!();
+    todo!()
 }
 pub fn observe_action_giguna__west_caverns__east_susar__hack__do(
     ctx: &Context,
@@ -15020,7 +14757,7 @@ pub fn observe_action_giguna__west_caverns__east_susar__hack__do(
     full_obs: &mut FullObservation,
 ) {
     // ^_east_susar = true
-    todo!();
+    todo!()
 }
 pub fn observe_action_giguna_breach__sw_save__west_11__open_door__do(
     ctx: &Context,
@@ -15028,7 +14765,7 @@ pub fn observe_action_giguna_breach__sw_save__west_11__open_door__do(
     full_obs: &mut FullObservation,
 ) {
     // ^_door_opened = true
-    todo!();
+    todo!()
 }
 pub fn observe_action_indra_set_default(
     ctx: &Context,
@@ -15036,7 +14773,7 @@ pub fn observe_action_indra_set_default(
     full_obs: &mut FullObservation,
 ) {
     // ^indra = $default
-    todo!();
+    todo!()
 }
 pub fn observe_action_indra_set_default_refill_energy(
     ctx: &Context,
@@ -15044,9 +14781,7 @@ pub fn observe_action_indra_set_default_refill_energy(
     full_obs: &mut FullObservation,
 ) {
     // ^indra = $default; $refill_energy
-    {
-        hobserve__refill_energy!(ctx, world, full_obs);
-    }
+    hobserve__refill_energy!(ctx, world, full_obs)
 }
 pub fn observe_action_irikar__basement_portal__moving_platform_start__activate_platform__do(
     ctx: &Context,
@@ -15054,7 +14789,7 @@ pub fn observe_action_irikar__basement_portal__moving_platform_start__activate_p
     full_obs: &mut FullObservation,
 ) {
     // ^_platform_moved = true
-    todo!();
+    todo!()
 }
 pub fn observe_action_last_set_default(
     ctx: &Context,
@@ -15062,7 +14797,7 @@ pub fn observe_action_last_set_default(
     full_obs: &mut FullObservation,
 ) {
     // ^last = $default
-    todo!();
+    todo!()
 }
 pub fn observe_action_last_set_position(
     ctx: &Context,
@@ -15070,7 +14805,7 @@ pub fn observe_action_last_set_position(
     full_obs: &mut FullObservation,
 ) {
     // ^last = ^position
-    todo!();
+    todo!()
 }
 pub fn observe_action_main_portal_save_update(
     ctx: &Context,
@@ -15078,9 +14813,7 @@ pub fn observe_action_main_portal_save_update(
     full_obs: &mut FullObservation,
 ) {
     // $main_portal_save_update
-    {
-        hobserve__main_portal_save_update!(ctx, world, full_obs);
-    }
+    hobserve__main_portal_save_update!(ctx, world, full_obs)
 }
 pub fn observe_action_mode_set_drone(
     ctx: &Context,
@@ -15088,7 +14821,7 @@ pub fn observe_action_mode_set_drone(
     full_obs: &mut FullObservation,
 ) {
     // ^mode = 'drone'
-    todo!();
+    todo!()
 }
 pub fn observe_action_mode_set_drone_indra_set_position(
     ctx: &Context,
@@ -15096,7 +14829,7 @@ pub fn observe_action_mode_set_drone_indra_set_position(
     full_obs: &mut FullObservation,
 ) {
     // ^mode = 'drone'; ^indra = ^position
-    todo!();
+    todo!()
 }
 pub fn observe_action_mode_set_indra(
     ctx: &Context,
@@ -15104,7 +14837,7 @@ pub fn observe_action_mode_set_indra(
     full_obs: &mut FullObservation,
 ) {
     // ^mode = 'Indra'
-    todo!();
+    todo!()
 }
 pub fn observe_action_mode_set_indra_last_set_indra(
     ctx: &Context,
@@ -15112,11 +14845,11 @@ pub fn observe_action_mode_set_indra_last_set_indra(
     full_obs: &mut FullObservation,
 ) {
     // ^mode = 'Indra'; ^last = ^indra
-    todo!();
+    todo!()
 }
 pub fn observe_action_pass(ctx: &Context, world: &graph::World, full_obs: &mut FullObservation) {
     // $pass
-    {}
+    ()
 }
 pub fn observe_action_refill_energy(
     ctx: &Context,
@@ -15124,9 +14857,7 @@ pub fn observe_action_refill_energy(
     full_obs: &mut FullObservation,
 ) {
     // $refill_energy
-    {
-        hobserve__refill_energy!(ctx, world, full_obs);
-    }
+    hobserve__refill_energy!(ctx, world, full_obs)
 }
 pub fn observe_action_refills_incr_1(
     ctx: &Context,
@@ -15134,7 +14865,7 @@ pub fn observe_action_refills_incr_1(
     full_obs: &mut FullObservation,
 ) {
     // ^refills += 1
-    todo!();
+    todo!()
 }
 pub fn observe_action_reset_old_area__newpos(
     ctx: &Context,
@@ -15142,15 +14873,11 @@ pub fn observe_action_reset_old_area__newpos(
     full_obs: &mut FullObservation,
 ) {
     // $reset_old_area(^newpos)
-    {
-        hobserve__reset_old_area!(ctx, world, newpos, full_obs);
-    }
+    hobserve__reset_old_area!(ctx, world, newpos, full_obs)
 }
 pub fn observe_action_save(ctx: &Context, world: &graph::World, full_obs: &mut FullObservation) {
     // $save
-    {
-        hobserve__save!(ctx, world, full_obs);
-    }
+    hobserve__save!(ctx, world, full_obs)
 }
 pub fn observe_action_save_last(
     ctx: &Context,
@@ -15158,9 +14885,7 @@ pub fn observe_action_save_last(
     full_obs: &mut FullObservation,
 ) {
     // $save_last
-    {
-        hobserve__save_last!(ctx, world, full_obs);
-    }
+    hobserve__save_last!(ctx, world, full_obs)
 }
 pub fn observe_action_save_set_glacier_gt_revival_gt_save_point(
     ctx: &Context,
@@ -15168,7 +14893,7 @@ pub fn observe_action_save_set_glacier_gt_revival_gt_save_point(
     full_obs: &mut FullObservation,
 ) {
     // ^save = `Glacier > Revival > Save Point`
-    todo!();
+    todo!()
 }
 pub fn observe_action_skip__amagi_gt_west_lake_gt_cavern_refill_station_gt_break_wall_add_item__amagi_dragon_eye_passage(
     ctx: &Context,
@@ -15176,7 +14901,7 @@ pub fn observe_action_skip__amagi_gt_west_lake_gt_cavern_refill_station_gt_break
     full_obs: &mut FullObservation,
 ) {
     // $skip(`Amagi > West Lake > Cavern Refill Station > Break Wall`); $add_item(Amagi_Dragon_Eye_Passage);
-    todo!();
+    todo!()
 }
 pub fn observe_action_skip__amagi_gt_west_lake_gt_stronghold_ceiling_left_gt_knock_down_left_boulder_add_item__amagi_stronghold_wall_1_add_item__amagi_stronghold_boulder_1(
     ctx: &Context,
@@ -15184,7 +14909,7 @@ pub fn observe_action_skip__amagi_gt_west_lake_gt_stronghold_ceiling_left_gt_kno
     full_obs: &mut FullObservation,
 ) {
     // $skip(`Amagi > West Lake > Stronghold Ceiling Left > Knock Down Left Boulder`); $add_item(Amagi_Stronghold_Wall_1); $add_item(Amagi_Stronghold_Boulder_1);
-    todo!();
+    todo!()
 }
 pub fn observe_action_skip__amagi_gt_west_lake_gt_stronghold_ceiling_right_gt_knock_down_right_boulder_add_item__amagi_stronghold_wall_2_add_item__amagi_stronghold_boulder_2(
     ctx: &Context,
@@ -15192,7 +14917,7 @@ pub fn observe_action_skip__amagi_gt_west_lake_gt_stronghold_ceiling_right_gt_kn
     full_obs: &mut FullObservation,
 ) {
     // $skip(`Amagi > West Lake > Stronghold Ceiling Right > Knock Down Right Boulder`); $add_item(Amagi_Stronghold_Wall_2); $add_item(Amagi_Stronghold_Boulder_2);
-    todo!();
+    todo!()
 }
 pub fn observe_action_skip__ebih_gt_waterfall_gt_alcove_gt_block_left_skip__ebih_gt_waterfall_gt_alcove_gt_block_right_skip__ebih_gt_waterfall_gt_alcove_left_gt_block_left_skip__ebih_gt_waterfall_gt_alcove_right_gt_block_right_add_item__ebih_waterfall_block_right_add_item__ebih_waterfall_block_left(
     ctx: &Context,
@@ -15200,5 +14925,5 @@ pub fn observe_action_skip__ebih_gt_waterfall_gt_alcove_gt_block_left_skip__ebih
     full_obs: &mut FullObservation,
 ) {
     // $skip(`Ebih > Waterfall > Alcove > Block Left`); $skip(`Ebih > Waterfall > Alcove > Block Right`); $skip(`Ebih > Waterfall > Alcove Left > Block Left`); $skip(`Ebih > Waterfall > Alcove Right > Block Right`); $add_item(Ebih_Waterfall_Block_Right); $add_item(Ebih_Waterfall_Block_Left);
-    todo!();
+    todo!()
 }

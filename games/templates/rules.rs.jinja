@@ -40,7 +40,7 @@ pub fn explain_{{ id }}(ctx: &Context, world: &graph::World, edict: &mut FxHashM
 %% endfor
 
 %% for id, info in access_funcs.items()|sort
-pub fn observe_access_{{ id }}(ctx: &Context, world: &graph::World, full_obs: &mut FullObservation) {
+pub fn observe_access_{{ id }}(ctx: &Context, world: &graph::World, full_obs: &mut FullObservation) -> bool {
     // {{ (info.boolExpr or info.itemList).text|string|trim }}
     {{ (info.boolExpr or info.itemList)|prToRustObserve(info) }}
 }

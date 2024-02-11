@@ -4,7 +4,7 @@ import logging
 import re
 
 from grammar import RulesParser, RulesVisitor
-from Utils import construct_id, construct_place_id, construct_spot_id, getPlaceType, place_to_names, BUILTINS, int_types
+from Utils import *
 
 import inflection
 
@@ -32,7 +32,7 @@ class RustBaseVisitor(RulesVisitor):
         return BUILTINS.get(ref, '$' + ref)
     
     def _getRefRaw(self, ref):
-        return f'ctx.{self.ctxdict[ref]}'
+        return self.ctxdict.get(ref, ref)
     
     def _getRefSetter(self, ref):
         return f'ctx.set_{self.ctxdict[ref]}'
@@ -71,12 +71,21 @@ class RustBaseVisitor(RulesVisitor):
         last_rettype = self.rettype
         self.rettype = rettype
         try:
-            return super().visit(tree)
+            ret = super().visit(tree)
+            if ret is None:
+                return 'todo!()'
+            return ret
         except:
             logging.error(f'Encountered exception rendering {self.name}: {self.ctxdict}')
             raise
         finally:
             self.rettype = last_rettype
+
+    def visitBoolExpr(self, ctx):
+        ret = super().visitBoolExpr(ctx)
+        if ret is None:
+            return 'todo!()'
+        return ret
 
 
 class RustVisitor(RustBaseVisitor):
@@ -329,7 +338,7 @@ class RustVisitor(RustBaseVisitor):
         return f'{self._getRefSetter(var)}({val});'
 
     def visitAlter(self, ctx):
-        return f'{self._getRefRaw(str(ctx.REF())[1:])} {ctx.BINOP()}= {self.visit(ctx.num())};'
+        return f'ctx.{self._getRefRaw(str(ctx.REF())[1:])} {ctx.BINOP()}= {self.visit(ctx.num())};'
 
     def visitActionHelper(self, ctx):
         return self.visit(ctx.invoke()) + ';'
@@ -813,6 +822,9 @@ class RustObservationVisitor(RustBaseVisitor):
         self.item_max_counts = item_max_counts
         self.code_writer = RustVisitor(*args, **kwargs)
 
+    def _getItemType(self, item):
+        return get_int_type_for_max(self.item_max_counts[item])
+
     def _getObserverFunc(self, func):
         if func in BUILTINS:
             return None
@@ -821,49 +833,41 @@ class RustObservationVisitor(RustBaseVisitor):
         else:
             return f'hobserve__{construct_id(func[1:])}!'
 
-    # TODO: remove this temporary override
-    def visit(self, tree, rettype=None):
-        last_rettype = self.rettype
-        self.rettype = rettype
-        try:
-            ret = super().visit(tree)
-            if ret is None:
-                return 'todo!();'
-            return ret
-        except:
-            logging.error(f'Encountered exception rendering {self.name}: {self.ctxdict}')
-            raise
-        finally:
-            self.rettype = last_rettype
+    def _getRefObserver(self, ref, op=None, var=None):
+        if ref[0] == '^':
+            ref = self._getRefRaw(ref[1:])
+            if ty := self.context_types.get(ref):
+                if ty in int_types:
+                    cmp = f'{self._opToComparison(op, var, ty)}' if op else 'Exact'
+                    return f'full_obs.observe_{ref}(IntegerObservation::{cmp});'
+                else:
+                    assert op not in ('>', '<', '>=', '<='), f'Int comparison of bool ref {ref} not allowed'
+                    return f'full_obs.observe_{ref}();'
+
+    def _opToComparison(self, op, v, t):
+        if op == '>=' or op == '<':
+            return f'Ge({v} as {t})'
+        if op == '<=' or op == '>':
+            return f'Le({v} as {t})'
+        assert op == '==' or op == '!=', f'Invalid operand: "{op}"'
+        return f'Eq({v} as {t})'
 
     def visitBoolExpr(self, ctx):
         try:
             if ctx.OR():
-                lines = [
-                    self.visit(ctx.boolExpr(0)),
-                    # short-circuit logic
-                    f'if {self.code_writer.visit(ctx.boolExpr(0))}',
-                    f'{{ {self.visit(ctx.boolExpr(1))} }}',
-                ]
+                return f'({self.visit(ctx.boolExpr(0))} || {self.visit(ctx.boolExpr(1))})'
             elif ctx.AND():
-                lines = [
-                    self.visit(ctx.boolExpr(0)),
-                    # short-circuit logic
-                    f'if !({self.code_writer.visit(ctx.boolExpr(0))})',
-                    f'{{ {self.visit(ctx.boolExpr(1))} }}',
-                ]
-            elif ctx.TRUE() or ctx.FALSE():
-                return ''
+                return f'({self.visit(ctx.boolExpr(0))} && {self.visit(ctx.boolExpr(1))})'
+            elif ctx.TRUE():
+                return 'true'
+            elif ctx.FALSE():
+                return 'false'
             elif ctx.boolExpr():
-                # No need to parenthesize anymore.
-                return self.visit(ctx.boolExpr(0))
+                return f'({self.visit(ctx.boolExpr(0))})'
             elif ctx.NOT():
-                # this is still an observation that it is what it is.
-                # Should work for integer comparisons but recommend avoiding it--invert the comparator instead.
-                return super().visitBoolExpr(ctx)
+                return f'!({super().visitBoolExpr(ctx)})'
             else:
                 return super().visitBoolExpr(ctx)
-            return f'{{ {" ".join(lines)} }}'
         except AttributeError as e:
             raise AttributeError(str(e) + '; ' + ' '.join(
                 f'[{c.toStringTree(ruleNames = RulesParser.ruleNames)}]'
@@ -887,32 +891,173 @@ class RustObservationVisitor(RustBaseVisitor):
                 args.append(arg)
         ofunc = self._getObserverFunc(str(ctx.FUNC()))
         if ofunc:
-            lines = [
-                f'{ofunc}({", ".join(args)}, full_obs);',
-            ]
+            lines = []
             if ctx.REF():
-                ref = str(ctx.REF())
-                if ref in self.context_types:
-                    if self.context_types[ref] in int_types:
-                        lines.append(f'full_obs.observe_{ref}(IntegerObservation::Exact)')
-                    else:
-                        lines.append(f'full_obs.observe_{ref}()')
-        elif func == 'Default::default':
-            return ''
+                if obs := self._getRefObserver(str(ctx.REF())):
+                    lines.append(obs)
+            lines.append(f'{ofunc}({", ".join(args)}, full_obs)')
         elif func == 'ctx.count':
             lines = [
-                '/* TODO: handle count() at the comparison layer */'
-                f'full_obs.observe_{item.lower()}(IntegerObservation::Exact)'
+                f'full_obs.observe_{item.lower()}(IntegerObservation::Exact);'
                 for item in items
             ]
+            lines.append('/* TODO: handle count() at the comparison layer */')
+            lines.append(f'{func}({", ".join(args)})')
         else:
             lines = []
             if ctx.REF():
-                ref = str(ctx.REF())
-                if ref in self.context_types:
-                    if self.context_types[ref] in int_types:
-                        lines.append(f'full_obs.observe_{ref}(IntegerObservation::Exact)')
-                    else:
-                        lines.append(f'full_obs.observe_{ref}()')
+                if obs := self._getRefObserver(str(ctx.REF())):
+                    lines.append(obs)
+            lines.append(f'{func}({", ".join(args)})')
+        if len(lines) == 1:
+            return lines[0]
+        return f'{{ {" ".join(lines)} }}'
 
-        return f'{{ {"; ".join(lines)} }}'
+    def _visitConditional(self, *args):
+        lines = []
+        while len(args) > 1:
+            cond, then, *args = args
+            lines.append(f'{self.visit(cond)}; if {self.code_writer.visit(cond)} {{ {self.visit(then)} }}')
+        if args:
+            lines.append(f'{{ {self.visit(args[0])} }}')
+        return ' else '.join(lines)
+
+    def visitIfThenElse(self, ctx):
+        return self._visitConditional(*ctx.boolExpr())
+
+    def visitPyTernary(self, ctx):
+        return self._visitConditional(ctx.boolExpr(1), ctx.boolExpr(0), ctx.boolExpr(2))
+
+    def visitCmp(self, ctx):
+        if ctx.value().REF():
+            op = str(ctx.getChild(1))
+            ref = str(ctx.value().REF())
+            if obs := self._getRefObserver(ref, op=op, var='n'):
+                lines = [
+                    f'let n: i32 = {self.visit(ctx.num())}.into();',
+                    obs,
+                    f'{self._getRefGetter(ref[1:])} {op} n'
+                ]
+                return f'{{ {" ".join(lines)} }}'
+            # If we don't have an observation to make (i.e. a constant), fall through
+        # Check for baseNum rather than mathNum to avoid annoyances
+        if str(ctx.num()).startswith('$count('):
+            lines = [
+                f'let v: i32 = {self.visit(ctx.value())}.into();',
+            ]
+            if ctx.num().baseNum():
+                item = str(ctx.num().baseNum().funcNum().ITEM(0))
+                ty = self._getItemType(item)
+                if ty == 'bool':
+                    lines.extend([
+                        f'full_obs.observe_{item.lower()}();',
+                        f'v {op} {self.code_writer.visit(ctx.num())}.into()'
+                    ])
+                else:
+                    op = str(ctx.getChild(1))
+                    lines.extend([
+                        f'if v < {ty}::MAX as i32 {{',
+                        # Mirror the op as this is the right operand
+                        f'full_obs.observe_{item.lower()}(IntegerObservation::{self._opToComparison(mirror(op), 'v', ty)});',
+                        f'}}',
+                        f'v {op} {self.code_writer.visit(ctx.num())}.into()'
+                    ])
+            else:
+                lines.extend([
+                    '/* TODO: support $count in mathNum */',
+                    f'v {ctx.getChild(1)} {self.visit(ctx.num())}.into()',
+                ])
+        else:
+            # Observe exact values.
+            lines = [
+                f'let v: i32 = {self.visit(ctx.value())}.into();',
+                f'let n: i32 = {self.visit(ctx.num())}.into();',
+                f'v {ctx.getChild(1)} n',
+            ]
+        return f'{{ {" ".join(lines)} }}'
+
+    # This could be easier if str enum values are required to be unique among all enums
+    # otherwise we have to get the appropriate ref/setting enum
+    def visitCmpStr(self, ctx):
+        getter = self.code_writer.visit(ctx.value())
+        rtype = inflection.camelize(REF_GETTER_TYPE.match(getter).group(1))
+        lines = [
+            f'let v = {self.visit(ctx.value())};',
+            f'v {ctx.getChild(1)} enums::{rtype}::{inflection.camelize(str(ctx.LIT())[1:-1])}'
+        ]
+        return f'{{ {" ".join(lines)} }}'
+
+    def visitFlagMatch(self, ctx):
+        return f'{{ let n = {self.visit(ctx.num())}; ({self.visit(ctx.value())} & n) == n }}'
+
+    def visitRefEq(self, ctx):
+        ref = str(ctx.REF())
+        getter = self._getRefGetter(ref[1:])
+        lines = []
+        if obs := self._getRefObserver(ref):
+            lines.append(obs)
+        if ctx.ITEM():
+            lines.append(f'{getter} == Item::{ctx.ITEM()}')
+        else:
+            lines.append(f'{getter} == ctx.{ctx.SETTING()}()')
+        if len(lines) == 1:
+            return lines[0]
+        return f'{{ {" ".join(lines)} }}'
+
+    def visitSetting(self, ctx):
+        # TODO: dict settings?
+        return f'ctx.{ctx.SETTING()}()'
+
+    def visitArgument(self, ctx):
+        ref = str(ctx.REF())
+        getter = self._getRefGetter(ref[1:])
+        if obs := self._getRefObserver(ref):
+            return f'{{ {obs} {getter} }}'
+        return getter
+
+    def visitItemCount(self, ctx):
+        if ctx.INT():
+            val = str(ctx.INT())
+        else:
+            val = f'ctx.{ctx.SETTING()}()'
+        item = str(ctx.ITEM())
+        if self._getItemType(item) == 'bool':
+            obs = f'full_obs.observe_{item.lower()}()'
+        else:
+            obs = f'full_obs.observe_{item.lower()}(IntegerObservation::Ge({val}))'
+        return f'{{ {obs}; ctx.count(Item::{ctx.ITEM()}) >= {val} }}'
+
+    def visitOneItem(self, ctx):
+        item = str(ctx.ITEM())
+        if self._getItemType(item) == 'bool':
+            obs = f'full_obs.observe_{item.lower()}()'
+        else:
+            obs = f'full_obs.observe_{item.lower()}(IntegerObservation::Ge(1))'
+        return f'{{ {obs}; {'!' if ctx.NOT() else ''}ctx.has(Item::{ctx.ITEM()}) }}'
+
+    def visitOneArgument(self, ctx):
+        ref = str(ctx.REF())
+        getter = self._getRefGetter(ref[1:])
+        if obs := self._getRefObserver(ref):
+            return f'{{ {obs} {getter} }}'
+        elif getter.startswith('data::'):
+            return getter
+        return f'/* TODO: runtime observe_item */ ctx.has({getter})'
+
+    # There's no need to optimize for bitflags here, as the compiler can handle that! Hopefully.
+    def visitItemList(self, ctx):
+        helper_args = [self._getFuncAndArgs(helper) for helper in map(str, ctx.FUNC())]
+        helpers = [f'{helper}({", ".join(args)})' for helper, args in helper_args]
+        items = [self.visit(item) for item in ctx.item()]
+        return f'{" && ".join(items + helpers)}'
+
+    def visitBaseNum(self, ctx):
+        if ctx.INT():
+            return str(ctx.INT())
+        if ctx.REF():
+            return self._getRefGetter(str(ctx.REF())[1:])
+        if ctx.SETTING():
+            return f'ctx.{ctx::SETTING()}()'
+        # TODO: constants
+        return self.visitChildren(ctx)
+
