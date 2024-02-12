@@ -1282,7 +1282,7 @@ macro_rules! hexplain__more_refills {
 macro_rules! hobserve__more_refills {
     ($ctx:expr, $world:expr, $full_obs:expr) => {{
         {
-            let n: i32 = todo!().into();
+            let n: i32 = $ctx.count(Item::Power_Matrix).into();
             $full_obs.observe_refills(IntegerObservation::Ge(n as i8));
             i32::from($ctx.refills()) < n
         }
@@ -1647,7 +1647,11 @@ macro_rules! hobserve__attract {
                 $ctx.mode()
             };
             v != enums::Mode::Drone
-        }) || todo!()))
+        }) || {
+            $full_obs.observe_indra();
+            $full_obs.observe_position();
+            $ctx.indra() == $ctx.position()
+        }))
     }};
 }
 
@@ -2326,9 +2330,7 @@ macro_rules! helper__refill_energy {
 }
 #[macro_export]
 macro_rules! hobserve__refill_energy {
-    ($ctx:expr, $world:expr, $full_obs:expr) => {{
-        todo!();
-    }};
+    ($ctx:expr, $world:expr, $full_obs:expr) => {{}};
 }
 
 /// $deploy_drone (  )
@@ -2342,9 +2344,7 @@ macro_rules! helper__deploy_drone {
 }
 #[macro_export]
 macro_rules! hobserve__deploy_drone {
-    ($ctx:expr, $world:expr, $full_obs:expr) => {{
-        todo!();
-    }};
+    ($ctx:expr, $world:expr, $full_obs:expr) => {{}};
 }
 
 /// $deploy_drone_and_move ( TypedVar(name='indrapos', type='SpotId') )
@@ -2358,9 +2358,7 @@ macro_rules! helper__deploy_drone_and_move {
 }
 #[macro_export]
 macro_rules! hobserve__deploy_drone_and_move {
-    ($ctx:expr, $world:expr, $indrapos:expr, $full_obs:expr) => {{
-        todo!();
-    }};
+    ($ctx:expr, $world:expr, $indrapos:expr, $full_obs:expr) => {{}};
 }
 
 /// $save_last (  )
@@ -2376,7 +2374,10 @@ macro_rules! helper__save_last {
 #[macro_export]
 macro_rules! hobserve__save_last {
     ($ctx:expr, $world:expr, $full_obs:expr) => {{
-        Default::default();
+        {
+            $full_obs.observe_last();
+            $ctx.last() == Default::default()
+        };
         if $ctx.last() == Default::default() {}
     }};
 }
@@ -2413,7 +2414,7 @@ macro_rules! helper__reset_old_area {
 #[macro_export]
 macro_rules! hobserve__reset_old_area {
     ($ctx:expr, $world:expr, $newpos:expr, $full_obs:expr) => {{
-        ((todo!() && (todo!())) && (get_area($ctx.position()))); if (($ctx.position() != SpotId::None && get_region($ctx.position()) != RegionId::Menu && $ctx.position() != SpotId::None && get_area($ctx.position()) != $ctx.prev_area()) && get_area($newpos) != get_area($ctx.position())) { todo!(); if get_area($newpos) != $ctx.prev_area() { ; } todo!(); } else ((todo!() && (todo!())) && (get_area($ctx.last()))); if (($ctx.position() != SpotId::None && get_area($ctx.position()) == AreaId::Menu__Warp_Only && $ctx.last() != SpotId::None && get_area($ctx.last()) != $ctx.prev_area()) && get_area($newpos) != get_area($ctx.last())) { todo!(); if get_area($newpos) != $ctx.prev_area() { ; } todo!(); todo!(); }
+        (({ $full_obs.observe_position(); $ctx.position() != SpotId::None && get_region($ctx.position()) != RegionId::Menu } && ({ $full_obs.observe_position(); $full_obs.observe_prev_area(); $ctx.position() != SpotId::None && get_area($ctx.position()) != $ctx.prev_area() })) && (get_area($newpos) != get_area($ctx.position()))); if (($ctx.position() != SpotId::None && get_region($ctx.position()) != RegionId::Menu && $ctx.position() != SpotId::None && get_area($ctx.position()) != $ctx.prev_area()) && get_area($newpos) != get_area($ctx.position())) { {  $full_obs.observe_prev_area(); get_area($newpos) != $ctx.prev_area() }; if get_area($newpos) != $ctx.prev_area() { ; } { let _set = get_area({ $full_obs.observe_position(); $ctx.position() }); } } else (({ $full_obs.observe_position(); $ctx.position() != SpotId::None && get_area($ctx.position()) == AreaId::Menu__Warp_Only } && ({ $full_obs.observe_last(); $full_obs.observe_prev_area(); $ctx.last() != SpotId::None && get_area($ctx.last()) != $ctx.prev_area() })) && (get_area($newpos) != get_area($ctx.last()))); if (($ctx.position() != SpotId::None && get_area($ctx.position()) == AreaId::Menu__Warp_Only && $ctx.last() != SpotId::None && get_area($ctx.last()) != $ctx.prev_area()) && get_area($newpos) != get_area($ctx.last())) { {  $full_obs.observe_prev_area(); get_area($newpos) != $ctx.prev_area() }; if get_area($newpos) != $ctx.prev_area() { ; } { let _set = get_area({ $full_obs.observe_last(); $ctx.last() }); }  }
     }};
 }
 
@@ -2453,9 +2454,7 @@ macro_rules! helper__clear_breach_save {
 }
 #[macro_export]
 macro_rules! hobserve__clear_breach_save {
-    ($ctx:expr, $world:expr, $full_obs:expr) => {{
-        todo!();
-    }};
+    ($ctx:expr, $world:expr, $full_obs:expr) => {{}};
 }
 
 /// Rule $victory

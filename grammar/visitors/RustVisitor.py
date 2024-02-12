@@ -891,7 +891,7 @@ class RustObservationVisitor(RustBaseVisitor):
                 item = str(items[0])
                 if item in self.collect_funcs:
                     func = f'rules::observe_action_{self.collect_funcs[item]['action_id']}'
-                    args = ['ctx', 'world', 'full_obs']
+                    return f'{func}(ctx, world, full_obs)'
                 else:
                     return ''
         elif ctx.value():
@@ -1107,9 +1107,9 @@ class RustObservationVisitor(RustBaseVisitor):
         return match
     
     def visitRefStrInList(self, ctx):
-        ref = str(ctx.REF())[1:]
-        getter = self._getRefGetter(ref)
-        rtype = self._getRefEnum(ref)
+        ref = str(ctx.REF())
+        getter = self._getRefGetter(ref[1:])
+        rtype = self._getRefEnum(ref[1:])
         values = [f'{rtype}::{inflection.camelize(str(lit)[1:-1])}' for lit in ctx.LIT()]
         match = f'matches!({getter}, {" | ".join(values)})'
         if obs := self._getRefObserver(ref):
@@ -1117,6 +1117,106 @@ class RustObservationVisitor(RustBaseVisitor):
         return match
     
     # TODO: other REF/SETTING rules
+    # TODO: move unchanged functions to common class
+
+    # unchanged
+    def visitStr(self, ctx):
+        if ctx.LIT() and self.rettype:
+            return f'{self.rettype}::{inflection.camelize(str(ctx.LIT())[1:-1])}'
+        return super().visitStr(ctx)
+
+    def visitPerRefStr(self, ctx):
+        ref = str(ctx.REF())
+        enum = self._getRefEnum(ref[1:])
+        cases = [f'{enum}::{str(c)[1:-1].capitalize()}' for c in ctx.LIT()] + [str(c) for c in ctx.INT()] + ['_']
+        results = [str(self.visit(s, self.rettype)) for s in ctx.str_()]
+        match = (f'match {self._getRefGetter(ref)} {{ '
+                 + ', '.join(f'{c} => {r}' for c, r in zip(cases, results))
+                 + f' }}')
+        if obs := self._getRefObserver(ref):
+            return f'{{ {obs} {match} }}'
+        return match
+
+    # unchanged
+    def visitSomewhere(self, ctx):
+        places = defaultdict(list)
+        for pl in ctx.PLACE():
+            pl = str(pl)[1:-1]
+            places[getPlaceType(pl)].append(pl)
+        matchcase, elsecase = ('false', 'true') if ctx.NOT() else ('true', 'false')
+        per_type = [('(match ctx.position()' if pt == 'SpotId' else f'(match get_{pt.lower()[:-2]}(ctx.position())')
+                    + f' {{'
+                    + ' | '.join(construct_place_id(pl) for pl in plist)
+                    + f' => {matchcase}, _ => {elsecase} }})'
+                    for pt, plist in places.items()
+                    ]
+        return ' || '.join(per_type)
+
+    def visitRefInPlaceRef(self, ctx):
+        ref1 = str(ctx.REF(0))
+        ref2 = str(ctx.REF(1))
+        ptype = self._getRefType(ref2[1:])
+        eq = '!' if ctx.NOT() else '='
+        get1 = self._getRefGetter(ref1[1:])
+        get2 = self._getRefGetter(ref2[1:])
+        if ptype != 'SpotId':
+            if self._isRefSpotId(ref1[1:]):
+                get1 = f'{get1} != SpotId::None && get_{ptype[:-2].lower()}({get1})'
+            else:
+                get1 = f'get_{ptype[:-2].lower()}({get1})'
+        obs1 = self._getRefObserver(ref1)
+        obs2 = self._getRefObserver(ref2)
+        if obs1 or obs2:
+            return f'{{ {obs1 or ''} {obs2 or ''} {get1} {eq}= {get2} }}'
+        return f'{get1} {eq}= {get2}'
+
+    def visitRefInPlaceName(self, ctx):
+        pl = str(ctx.PLACE())[1:-1]
+        ptype = getPlaceType(pl)
+        eq = '!' if ctx.NOT() else '='
+        ref = str(ctx.REF())
+        get = f'{self._getRefGetter(ref[1:])}'
+        if ptype == 'SpotId':
+            val = construct_spot_id(*place_to_names(pl))
+        else:
+            val = f'{ptype}::{construct_id(pl)}'
+            if self._isRefSpotId(ref[1:]):
+                get = f'{get} != SpotId::None && get_{ptype[:-2].lower()}({get})'
+            else:
+                get = f'get_{ptype[:-2].lower()}({get})'
+        if obs := self._getRefObserver(ref):
+            return f'{{ {obs} {get} {eq}= {val} }}'
+        return f'{get} {eq}= {val}'
+
+    def visitRefInFunc(self, ctx):
+        func = str(ctx.invoke().FUNC())[1:]
+        assert func in ('default', 'get_area', 'get_region')
+        eq = '!' if ctx.NOT() else '='
+        ref = str(ctx.REF())
+        get = self._getRefGetter(ref[1:])
+        obs = self._getRefObserver(ref)
+        if func == 'default':
+            res = f'{get} {eq}= {self.visit(ctx.invoke())}'
+            if obs:
+                return f'{{ {obs} {res} }}'
+            return res
+        if self._isRefSpotId(ref[1:]):
+            check = f'{get} != SpotId::None && '
+        else:
+            check = ''
+        inv = f'{check}{func}({get}) {eq}= {self.visit(ctx.invoke())}'
+        if obs:
+            return f'{{ {obs} {inv} }}'
+        return inv
+
+    # unchanged
+    def visitFuncNum(self, ctx):
+        func, args = self._getFuncAndArgs(str(ctx.FUNC()))
+        if ctx.ITEM():
+            args.append(f'Item::{ctx.ITEM()}')
+        elif ctx.num():
+            args.extend(str(self.visit(n)) for n in ctx.num())
+        return f'{func}({", ".join(args)})'
 
     ## Action-specific
     # We have to eliminate all the ctx mutations, we're only interested in conditions
@@ -1131,10 +1231,15 @@ class RustObservationVisitor(RustBaseVisitor):
             val = self.visit(ctx.str_(), self._getRefEnum(var))
         else:
             return ''
-        return val + ';'
+        if 'full_obs' not in val:
+            return ''
+        return f'{{ let _set = {val}; }}'
 
     def visitAlter(self, ctx):
-        return self.visit(ctx.num()) + ';'
+        val = self.visit(ctx.num())
+        if 'full_obs' not in val:
+            return ''
+        return f'{{ let _alter = {val}; }}'
 
     def visitActionHelper(self, ctx):
         return self.visit(ctx.invoke()) + ';'

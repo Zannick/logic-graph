@@ -11494,7 +11494,9 @@ pub fn observe_access_ft_main_and___map_spot_within_menu_gt_kiengir_map(
     full_obs: &mut FullObservation,
 ) -> bool {
     // $ft_main and (^map_spot WITHIN `Menu > Kiengir Map`)
-    (hobserve__ft_main!(ctx, world, full_obs) && (todo!()))
+    (hobserve__ft_main!(ctx, world, full_obs)
+        && (data::map_spot(ctx.position()) != SpotId::None
+            && get_area(data::map_spot(ctx.position())) == AreaId::Menu__Kiengir_Map))
 }
 pub fn observe_access_giguna__carnelian__door__ex__switch_1__req(
     ctx: &Context,
@@ -13783,18 +13785,19 @@ pub fn observe_access_not_within_menu_and_anuman_and_mode_ne_drone(
     full_obs: &mut FullObservation,
 ) -> bool {
     // NOT WITHIN `Menu` and Anuman and ^mode != 'drone'
-    ((todo!()
-        && ({
-            full_obs.observe_anuman();
-            ctx.has(Item::Anuman)
-        }))
-        && ({
-            let v = {
-                full_obs.observe_mode();
-                ctx.mode()
-            };
-            v != enums::Mode::Drone
-        }))
+    (((match get_region(ctx.position()) {
+        RegionId::Menu => false,
+        _ => true,
+    }) && ({
+        full_obs.observe_anuman();
+        ctx.has(Item::Anuman)
+    })) && ({
+        let v = {
+            full_obs.observe_mode();
+            ctx.mode()
+        };
+        v != enums::Mode::Drone
+    }))
 }
 pub fn observe_access_not_within_menu_and_can_deploy(
     ctx: &Context,
@@ -13802,7 +13805,10 @@ pub fn observe_access_not_within_menu_and_can_deploy(
     full_obs: &mut FullObservation,
 ) -> bool {
     // NOT WITHIN `Menu` and $can_deploy
-    (todo!() && (hobserve__can_deploy!(ctx, world, full_obs)))
+    ((match get_region(ctx.position()) {
+        RegionId::Menu => false,
+        _ => true,
+    }) && (hobserve__can_deploy!(ctx, world, full_obs)))
 }
 pub fn observe_access_not_within_menu_and_flasks_gt_0(
     ctx: &Context,
@@ -13810,12 +13816,14 @@ pub fn observe_access_not_within_menu_and_flasks_gt_0(
     full_obs: &mut FullObservation,
 ) -> bool {
     // NOT WITHIN `Menu` and ^flasks > 0
-    (todo!()
-        && ({
-            let n: i32 = 0.into();
-            full_obs.observe_flasks(IntegerObservation::Le(n as i8));
-            i32::from(ctx.flasks()) > n
-        }))
+    ((match get_region(ctx.position()) {
+        RegionId::Menu => false,
+        _ => true,
+    }) && ({
+        let n: i32 = 0.into();
+        full_obs.observe_flasks(IntegerObservation::Le(n as i8));
+        i32::from(ctx.flasks()) > n
+    }))
 }
 pub fn observe_access_not_within_menu_and_ft_main_and_can_recall_and___map_spot_not_within_default(
     ctx: &Context,
@@ -13823,9 +13831,12 @@ pub fn observe_access_not_within_menu_and_ft_main_and_can_recall_and___map_spot_
     full_obs: &mut FullObservation,
 ) -> bool {
     // NOT WITHIN `Menu` and $ft_main and $can_recall and (^map_spot NOT WITHIN $default)
-    (((todo!() && (hobserve__ft_main!(ctx, world, full_obs)))
+    ((((match get_region(ctx.position()) {
+        RegionId::Menu => false,
+        _ => true,
+    }) && (hobserve__ft_main!(ctx, world, full_obs)))
         && (hobserve__can_recall!(ctx, world, full_obs)))
-        && (Default::default()))
+        && (data::map_spot(ctx.position()) != Default::default()))
 }
 pub fn observe_access_not_within_menu_and_realm_ne_breach_and_anuman_and_mode_eq_drone(
     ctx: &Context,
@@ -13833,22 +13844,22 @@ pub fn observe_access_not_within_menu_and_realm_ne_breach_and_anuman_and_mode_eq
     full_obs: &mut FullObservation,
 ) -> bool {
     // NOT WITHIN `Menu` and ^realm != 'breach' and Anuman and ^mode == 'drone'
-    (((todo!()
-        && ({
-            let v = data::realm(ctx.position());
-            v != enums::Realm::Breach
-        }))
-        && ({
-            full_obs.observe_anuman();
-            ctx.has(Item::Anuman)
-        }))
-        && ({
-            let v = {
-                full_obs.observe_mode();
-                ctx.mode()
-            };
-            v == enums::Mode::Drone
-        }))
+    ((((match get_region(ctx.position()) {
+        RegionId::Menu => false,
+        _ => true,
+    }) && ({
+        let v = data::realm(ctx.position());
+        v != enums::Realm::Breach
+    })) && ({
+        full_obs.observe_anuman();
+        ctx.has(Item::Anuman)
+    })) && ({
+        let v = {
+            full_obs.observe_mode();
+            ctx.mode()
+        };
+        v == enums::Mode::Drone
+    }))
 }
 pub fn observe_access_not_within_menu_and_realm_ne_breach_and_can_recall(
     ctx: &Context,
@@ -13856,12 +13867,13 @@ pub fn observe_access_not_within_menu_and_realm_ne_breach_and_can_recall(
     full_obs: &mut FullObservation,
 ) -> bool {
     // NOT WITHIN `Menu` and ^realm != 'breach' and $can_recall
-    ((todo!()
-        && ({
-            let v = data::realm(ctx.position());
-            v != enums::Realm::Breach
-        }))
-        && (hobserve__can_recall!(ctx, world, full_obs)))
+    (((match get_region(ctx.position()) {
+        RegionId::Menu => false,
+        _ => true,
+    }) && ({
+        let v = data::realm(ctx.position());
+        v != enums::Realm::Breach
+    })) && (hobserve__can_recall!(ctx, world, full_obs)))
 }
 pub fn observe_access_offset(
     ctx: &Context,
@@ -13995,7 +14007,7 @@ pub fn observe_access_realm_eq_breach_and_exit_breach_and___flipside_not_within_
     } && ({
         full_obs.observe_exit_breach();
         ctx.has(Item::Exit_Breach)
-    })) && (Default::default()))
+    })) && (data::flipside(ctx.position()) != Default::default()))
 }
 pub fn observe_access_realm_in___main_interior_emergence_and_amashilama(
     ctx: &Context,
@@ -14268,7 +14280,10 @@ pub fn observe_access_within_antarctica(
     full_obs: &mut FullObservation,
 ) -> bool {
     // WITHIN `Antarctica`
-    todo!()
+    (match get_region(ctx.position()) {
+        RegionId::Antarctica => true,
+        _ => false,
+    })
 }
 pub fn observe_access_within_menu_gt_upgrade_menu(
     ctx: &Context,
@@ -14276,7 +14291,10 @@ pub fn observe_access_within_menu_gt_upgrade_menu(
     full_obs: &mut FullObservation,
 ) -> bool {
     // WITHIN `Menu > Upgrade Menu`
-    todo!()
+    (match get_area(ctx.position()) {
+        AreaId::Menu__Upgrade_Menu => true,
+        _ => false,
+    })
 }
 pub fn observe_action_amagi__main_area__carving__key_combo__do(
     ctx: &Context,
@@ -14335,7 +14353,7 @@ pub fn observe_action_collect__irikar_royal_storage_wall_collect__flask_visit__i
     full_obs: &mut FullObservation,
 ) {
     // $collect(Irikar_Royal_Storage_Wall); $collect(Flask); $visit(`Irikar > Hub > Royal Storage in Wall > Item`);
-    rules::observe_action_flasks_incr_1(ctx, world, full_obs, full_obs);
+    rules::observe_action_flasks_incr_1(ctx, world, full_obs);
 }
 pub fn observe_action_deploy_drone(
     ctx: &Context,
@@ -14485,7 +14503,10 @@ pub fn observe_action_ebih__ebih_west__below_door__open_door__do(
     full_obs: &mut FullObservation,
 ) {
     // ^_door_open = true; IF (^indra WITHIN `Ebih > Ebih West > Above Door`) { ^indra = `Ebih > Ebih West > Below Door`; }
-    todo!();
+    {
+        full_obs.observe_indra();
+        ctx.indra() == SpotId::Ebih__Ebih_West__Above_Door
+    };
     if ctx.indra() == SpotId::Ebih__Ebih_West__Above_Door {}
 }
 pub fn observe_action_ebih__ebih_west__left_of_switch__open_door__do(
@@ -14494,7 +14515,10 @@ pub fn observe_action_ebih__ebih_west__left_of_switch__open_door__do(
     full_obs: &mut FullObservation,
 ) {
     // ^_door_open = true; IF (^indra WITHIN `Ebih > Ebih West > Above Door`) { ^indra = `Ebih > Ebih West > Below Door`; }
-    todo!();
+    {
+        full_obs.observe_indra();
+        ctx.indra() == SpotId::Ebih__Ebih_West__Above_Door
+    };
     if ctx.indra() == SpotId::Ebih__Ebih_West__Above_Door {}
 }
 pub fn observe_action_ebih__grid_25_10_12__door_left__open_door__do(
@@ -14538,7 +14562,6 @@ pub fn observe_action_flasks_incr_1(
     full_obs: &mut FullObservation,
 ) {
     // ^flasks += 1
-    1;
 }
 pub fn observe_action_flasks_incr_2(
     ctx: &Context,
@@ -14546,7 +14569,6 @@ pub fn observe_action_flasks_incr_2(
     full_obs: &mut FullObservation,
 ) {
     // ^flasks += 2
-    2;
 }
 pub fn observe_action_giguna__carnelian__lower_susar__caught__do(
     ctx: &Context,
@@ -14596,7 +14618,11 @@ pub fn observe_action_giguna__clouds__platform_start__hack_and_ride_to_portal__d
     full_obs: &mut FullObservation,
 ) {
     // ^_platform_and_portal = true; if (^indra WITHIN ^position) { ^indra = `Giguna > Clouds > Platform Stop` }
-    todo!();
+    {
+        full_obs.observe_indra();
+        full_obs.observe_position();
+        ctx.indra() == ctx.position()
+    };
     if ctx.indra() == ctx.position() {}
 }
 pub fn observe_action_giguna__clouds__platform_start__hack_deploy_ride_to_portal__do(
@@ -14795,7 +14821,6 @@ pub fn observe_action_indra_set_default(
     full_obs: &mut FullObservation,
 ) {
     // ^indra = $default
-    todo!();
 }
 pub fn observe_action_indra_set_default_refill_energy(
     ctx: &Context,
@@ -14803,7 +14828,6 @@ pub fn observe_action_indra_set_default_refill_energy(
     full_obs: &mut FullObservation,
 ) {
     // ^indra = $default; $refill_energy
-    todo!();
     hobserve__refill_energy!(ctx, world, full_obs);
 }
 pub fn observe_action_irikar__basement_portal__moving_platform_start__activate_platform__do(
@@ -14819,7 +14843,6 @@ pub fn observe_action_last_set_default(
     full_obs: &mut FullObservation,
 ) {
     // ^last = $default
-    todo!();
 }
 pub fn observe_action_last_set_position(
     ctx: &Context,
@@ -14842,7 +14865,6 @@ pub fn observe_action_mode_set_drone(
     full_obs: &mut FullObservation,
 ) {
     // ^mode = 'drone'
-    todo!();
 }
 pub fn observe_action_mode_set_drone_indra_set_position(
     ctx: &Context,
@@ -14850,7 +14872,6 @@ pub fn observe_action_mode_set_drone_indra_set_position(
     full_obs: &mut FullObservation,
 ) {
     // ^mode = 'drone'; ^indra = ^position
-    todo!();
 }
 pub fn observe_action_mode_set_indra(
     ctx: &Context,
@@ -14858,7 +14879,6 @@ pub fn observe_action_mode_set_indra(
     full_obs: &mut FullObservation,
 ) {
     // ^mode = 'Indra'
-    todo!();
 }
 pub fn observe_action_mode_set_indra_last_set_indra(
     ctx: &Context,
@@ -14866,7 +14886,6 @@ pub fn observe_action_mode_set_indra_last_set_indra(
     full_obs: &mut FullObservation,
 ) {
     // ^mode = 'Indra'; ^last = ^indra
-    todo!();
 }
 pub fn observe_action_pass(ctx: &Context, world: &graph::World, full_obs: &mut FullObservation) {
     // $pass
@@ -14886,7 +14905,6 @@ pub fn observe_action_refills_incr_1(
     full_obs: &mut FullObservation,
 ) {
     // ^refills += 1
-    1;
 }
 pub fn observe_action_reset_old_area__newpos(
     ctx: &Context,
