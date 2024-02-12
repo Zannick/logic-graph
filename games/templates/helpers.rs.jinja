@@ -65,7 +65,7 @@ macro_rules! robserve__{{ funcname }} {
         match $world.rule_{{ funcname }} {
 %% for v, info in rule.variants.items()
             Rule{{ name[1:]|camelize }}::{{ v|construct_id|camelize }} => {
-                rules::observe_{% if rule.rule == 'actions' %}action_{% else %}access_{% endif %}{{ info.func_id }}($ctx, $world)
+                rules::observe_{% if rule.rule == 'actions' %}action_{% else %}access_{% endif %}{{ info.func_id }}($ctx, $world, $full_obs)
             }
 %% endfor
         }

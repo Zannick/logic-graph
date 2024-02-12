@@ -431,8 +431,7 @@ class RustExplainerVisitor(RustBaseVisitor):
             arg = f'{ctx.LIT() or ctx.INT() or ctx.FLOAT() or ""}'
             if arg:
                 args.append(arg)
-        efunc = self._getExplainerFunc(str(ctx.FUNC()))
-        if efunc:
+        if efunc := self._getExplainerFunc(str(ctx.FUNC())):
             lines = [
                 f'let (res, mut refs) = {efunc}({", ".join(args)}, edict)',
                 f'edict.insert("{ctx.getText()}", format!("{{:?}}", res))',
@@ -817,9 +816,10 @@ class RustExplainerVisitor(RustBaseVisitor):
 
 
 class RustObservationVisitor(RustBaseVisitor):
-    def __init__(self, item_max_counts, *args, **kwargs):
+    def __init__(self, item_max_counts, collect_funcs, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.item_max_counts = item_max_counts
+        self.collect_funcs = collect_funcs
         self.code_writer = RustVisitor(*args, **kwargs)
 
     def _getItemType(self, item):
@@ -832,6 +832,11 @@ class RustObservationVisitor(RustBaseVisitor):
             return f'robserve__{construct_id(func[1:])}!'
         else:
             return f'hobserve__{construct_id(func[1:])}!'
+        
+    def _getItemObserver(self, item):
+        if self._getItemType(item) == 'bool':
+            return f'full_obs.observe_{item.lower()}();'
+        return f'full_obs.observe_{item.lower()}(IntegerObservation::Exact);'
 
     def _getRefObserver(self, ref, op=None, var=None):
         if ref[0] == '^':
@@ -857,7 +862,7 @@ class RustObservationVisitor(RustBaseVisitor):
             if ctx.OR():
                 return f'({self.visit(ctx.boolExpr(0))} || {self.visit(ctx.boolExpr(1))})'
             elif ctx.AND():
-                return f'({self.visit(ctx.boolExpr(0))} && {self.visit(ctx.boolExpr(1))})'
+                return f'({self.visit(ctx.boolExpr(0))} && ({self.visit(ctx.boolExpr(1))}))'
             elif ctx.TRUE():
                 return 'true'
             elif ctx.FALSE():
@@ -875,9 +880,20 @@ class RustObservationVisitor(RustBaseVisitor):
         
     def visitInvoke(self, ctx):
         items = ctx.ITEM()
-        func, args = self._getFuncAndArgs(str(ctx.FUNC()))
+        func = str(ctx.FUNC())
+        # We never need these to be observed.
+        if func in ('$add_item', '$skip', '$visit') or func.startswith('$reset'):
+            return ''
+        func, args = self._getFuncAndArgs(func)
         if items:
             args.extend(f'Item::{item}' for item in items)
+            if func == 'ctx.collect':
+                item = str(items[0])
+                if item in self.collect_funcs:
+                    func = f'rules::observe_action_{self.collect_funcs[item]['action_id']}'
+                    args = ['ctx', 'world', 'full_obs']
+                else:
+                    return ''
         elif ctx.value():
             args.append(str(self.code_writer.visit(ctx.value())))
         elif ctx.PLACE():
@@ -889,8 +905,7 @@ class RustObservationVisitor(RustBaseVisitor):
             arg = f'{ctx.LIT() or ctx.INT() or ctx.FLOAT() or ""}'
             if arg:
                 args.append(arg)
-        ofunc = self._getObserverFunc(str(ctx.FUNC()))
-        if ofunc:
+        if ofunc := self._getObserverFunc(str(ctx.FUNC())):
             lines = []
             if ctx.REF():
                 if obs := self._getRefObserver(str(ctx.REF())):
@@ -908,18 +923,23 @@ class RustObservationVisitor(RustBaseVisitor):
             if ctx.REF():
                 if obs := self._getRefObserver(str(ctx.REF())):
                     lines.append(obs)
-            lines.append(f'{func}({", ".join(args)})')
+            if func.startswith('rules::'):
+                lines.append(f'{func}({", ".join(args)}, full_obs)')
+            else:
+                lines.append(f'{func}({", ".join(args)})')
         if len(lines) == 1:
             return lines[0]
         return f'{{ {" ".join(lines)} }}'
 
-    def _visitConditional(self, *args):
+    def _visitConditional(self, *args, else_case=True):
         lines = []
         while len(args) > 1:
             cond, then, *args = args
             lines.append(f'{self.visit(cond)}; if {self.code_writer.visit(cond)} {{ {self.visit(then)} }}')
         if args:
             lines.append(f'{{ {self.visit(args[0])} }}')
+        if else_case:
+            lines.append('false')
         return ' else '.join(lines)
 
     def visitIfThenElse(self, ctx):
@@ -936,7 +956,7 @@ class RustObservationVisitor(RustBaseVisitor):
                 lines = [
                     f'let n: i32 = {self.visit(ctx.num())}.into();',
                     obs,
-                    f'{self._getRefGetter(ref[1:])} {op} n'
+                    f'i32::from({self._getRefGetter(ref[1:])}) {op} n'
                 ]
                 return f'{{ {" ".join(lines)} }}'
             # If we don't have an observation to make (i.e. a constant), fall through
@@ -1046,18 +1066,78 @@ class RustObservationVisitor(RustBaseVisitor):
 
     # There's no need to optimize for bitflags here, as the compiler can handle that! Hopefully.
     def visitItemList(self, ctx):
-        helper_args = [self._getFuncAndArgs(helper) for helper in map(str, ctx.FUNC())]
-        helpers = [f'{helper}({", ".join(args)})' for helper, args in helper_args]
-        items = [self.visit(item) for item in ctx.item()]
+        # These visits create the observations necessary.
+        helpers = [f'{self._getObserverFunc(helper)}(ctx, world, full_obs)' for helper in map(str, ctx.FUNC())]
+        items = [f'({self.visit(item)})' for item in ctx.item()]
         return f'{" && ".join(items + helpers)}'
 
     def visitBaseNum(self, ctx):
         if ctx.INT():
             return str(ctx.INT())
         if ctx.REF():
-            return self._getRefGetter(str(ctx.REF())[1:])
+            ref = str(ctx.REF())
+            getter = self._getRefGetter(ref[1:])
+            if obs := self._getRefObserver(ref):
+                return f'{{ {obs} {getter} }}'
+            return getter
         if ctx.SETTING():
             return f'ctx.{ctx::SETTING()}()'
         # TODO: constants
         return self.visitChildren(ctx)
 
+    def visitMathNum(self, ctx):
+        return f'{self.visit(ctx.baseNum())} {ctx.BINOP()} {self.visit(ctx.num())}'
+
+    def visitPerItemInt(self, ctx):
+        cases = list(map(str, ctx.INT())) + ['_']
+        results = [str(self.visit(n)) for n in ctx.num()]
+        item = str(ctx.ITEM())
+        obs = self._getItemObserver(item)
+        return (f'{{ {obs} match ctx.count(Item::{ctx.ITEM()}) {{ '
+                + ', '.join(f'{i} => {r}' for i, r in zip(cases, results))
+                + f'}} }}')
+
+    def visitRefInList(self, ctx):
+        ref = str(ctx.REF())
+        getter = self._getRefGetter(ref[1:])
+        values = [f'Item::{i}' for i in ctx.ITEM()]
+        match = f'matches!({getter}, {" | ".join(values)})'
+        if obs := self._getRefObserver(ref):
+            return f'{{ {obs} {match} }}'
+        return match
+    
+    def visitRefStrInList(self, ctx):
+        ref = str(ctx.REF())[1:]
+        getter = self._getRefGetter(ref)
+        rtype = self._getRefEnum(ref)
+        values = [f'{rtype}::{inflection.camelize(str(lit)[1:-1])}' for lit in ctx.LIT()]
+        match = f'matches!({getter}, {" | ".join(values)})'
+        if obs := self._getRefObserver(ref):
+            return f'{{ {obs} {match} }}'
+        return match
+    
+    # TODO: other REF/SETTING rules
+
+    ## Action-specific
+    # We have to eliminate all the ctx mutations, we're only interested in conditions
+    def visitActions(self, ctx):
+        return ' '.join(map(str, (self.visit(ch) for ch in ctx.action())))
+
+    def visitSet(self, ctx):
+        var = str(ctx.REF(0))[1:]
+        if ctx.num():
+            val = self.visit(ctx.num())
+        elif ctx.str_():
+            val = self.visit(ctx.str_(), self._getRefEnum(var))
+        else:
+            return ''
+        return val + ';'
+
+    def visitAlter(self, ctx):
+        return self.visit(ctx.num()) + ';'
+
+    def visitActionHelper(self, ctx):
+        return self.visit(ctx.invoke()) + ';'
+        
+    def visitCondAction(self, ctx):
+        return self._visitConditional(*chain(*zip(ctx.boolExpr(), ctx.actions())), else_case=False)

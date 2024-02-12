@@ -1594,6 +1594,7 @@ class GameLogic(object):
     
     def prToRustObserve(self, pr, info, id=None):
         return RustObservationVisitor(self.item_max_counts,
+                                      self.collect,
                                       self.rules,
                                       self.context_types,
                                       self.action_funcs,
