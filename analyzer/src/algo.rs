@@ -238,7 +238,7 @@ where
     world: &'a W,
     startctx: ContextWrapper<T>,
     solve_trie:
-        Arc<MatcherTrie<<T::Observation as Observation<(Arc<Solution<T>>, usize)>>::Matcher>>,
+        Arc<MatcherTrie<<T::Observation as Observation>::Matcher>>,
     solutions: Arc<Mutex<SolutionCollector<T>>>,
     queue: RocksBackedQueue<'a, W, T>,
     iters: AtomicUsize,
@@ -323,7 +323,7 @@ where
         world.skip_unused_items(&mut ctx);
 
         let solve_trie: Arc<
-            MatcherTrie<<T::Observation as Observation<(Arc<Solution<T>>, usize)>>::Matcher>,
+            MatcherTrie<<T::Observation as Observation>::Matcher>,
         > = Arc::default();
         let mut solutions = SolutionCollector::<T>::new(
             "data/solutions.txt",

@@ -99,45 +99,42 @@ where
         vec
     }
 
-    pub fn insert(
-        &self,
-        root_observation: StructType::PropertyObservation,
-        observations: Vec<StructType::PropertyObservation>,
-        value: ValueType,
-    ) {
-        if let Some((last, most)) = observations.split_last() {
-            let mut current_node = self.root.lock().unwrap().insert(&root_observation).unwrap();
+    pub fn insert(&self, observations: Vec<StructType::PropertyObservation>, value: ValueType) {
+        if let Some((first, rest)) = observations.split_first() {
+            if let Some((last, most)) = rest.split_last() {
+                let mut current_node = self.root.lock().unwrap().insert(first).unwrap();
 
-            'observe: for obs in most.into_iter() {
+                'observe: for obs in most.into_iter() {
+                    let mut locked_node = current_node.lock().unwrap();
+                    for matcher in locked_node.matchers.iter_mut() {
+                        if let Some(next) = matcher.insert(obs) {
+                            drop(locked_node);
+                            current_node = next;
+                            continue 'observe;
+                        }
+                    }
+                    // We didn't match a matcher so we have to make a new one.
+                    let (next, matcher) = MultiMatcherType::new(&obs);
+                    locked_node.matchers.push(matcher);
+                    drop(locked_node);
+                    current_node = next;
+                }
                 let mut locked_node = current_node.lock().unwrap();
                 for matcher in locked_node.matchers.iter_mut() {
-                    if let Some(next) = matcher.insert(obs) {
-                        drop(locked_node);
-                        current_node = next;
-                        continue 'observe;
+                    if let Some(_) = matcher.insert(last) {
+                        matcher.set_value(last, value);
+                        return;
                     }
                 }
-                // We didn't match a matcher so we have to make a new one.
-                let (next, matcher) = MultiMatcherType::new(&obs);
+                // We didn't match a matcher, so we have to make a new one.
+                let (_, mut matcher) = MultiMatcherType::new(last);
+                matcher.set_value(last, value);
                 locked_node.matchers.push(matcher);
-                drop(locked_node);
-                current_node = next;
+            } else {
+                let mut locked_root = self.root.lock().unwrap();
+                locked_root.insert(first);
+                locked_root.set_value(first, value);
             }
-            let mut locked_node = current_node.lock().unwrap();
-            for matcher in locked_node.matchers.iter_mut() {
-                if let Some(_) = matcher.insert(last) {
-                    matcher.set_value(last, value);
-                    return;
-                }
-            }
-            // We didn't match a matcher, so we have to make a new one.
-            let (_, mut matcher) = MultiMatcherType::new(last);
-            matcher.set_value(last, value);
-            locked_node.matchers.push(matcher);
-        } else {
-            let mut locked_root = self.root.lock().unwrap();
-            locked_root.insert(&root_observation);
-            locked_root.set_value(&root_observation, value);
         }
     }
 }
@@ -146,7 +143,10 @@ where
 mod test {
     use super::*;
     use crate::matchertrie::matcher::*;
-    use std::{ops::Deref, sync::{Arc, Mutex}};
+    use std::{
+        ops::Deref,
+        sync::{Arc, Mutex},
+    };
 
     #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash)]
     enum Position {
@@ -285,34 +285,30 @@ mod test {
     fn make_trie() -> MatcherTrie<MatcherMulti> {
         let mut trie = MatcherTrie::default();
         let observations = vec![
+            OneObservedThing::Pos(Position::Start),
             OneObservedThing::Flag {
                 mask: 0x9,
                 result: 0x9,
             },
             OneObservedThing::Flasks(1),
         ];
-        trie.insert(
-            OneObservedThing::Pos(Position::Start),
-            observations,
-            CTX_1.clone(),
-        );
+        trie.insert(observations, CTX_1.clone());
 
         let observations = vec![
+            OneObservedThing::Pos(Position::Start),
             OneObservedThing::Flag {
                 mask: 0x7,
                 result: 0x3,
             },
             OneObservedThing::Flasks(2),
         ];
-        trie.insert(
-            OneObservedThing::Pos(Position::Start),
-            observations,
-            CTX_2.clone(),
-        );
+        trie.insert(observations, CTX_2.clone());
 
         trie.insert(
-            OneObservedThing::Pos(Position::Middle),
-            vec![OneObservedThing::FlasksGe(2, true)],
+            vec![
+                OneObservedThing::Pos(Position::Middle),
+                OneObservedThing::FlasksGe(2, true),
+            ],
             CTX_3.clone(),
         );
 
@@ -447,20 +443,19 @@ mod test {
     #[test]
     fn multiple() {
         let mut trie = make_trie();
-        let observations = vec![OneObservedThing::Flag {
-            mask: 0x9,
-            result: 0x9,
-        }];
+        let observations = vec![
+            OneObservedThing::Pos(Position::Start),
+            OneObservedThing::Flag {
+                mask: 0x9,
+                result: 0x9,
+            },
+        ];
         let c3 = Ctx {
             pos: Position::Start,
             flasks: 1,
             flag: 0x19,
         };
-        trie.insert(
-            OneObservedThing::Pos(Position::Start),
-            observations,
-            c3.clone(),
-        );
+        trie.insert(observations, c3.clone());
         let results = trie.lookup(&c3);
         assert_eq!(2, results.len());
         assert_ne!(results[0], results[1]);

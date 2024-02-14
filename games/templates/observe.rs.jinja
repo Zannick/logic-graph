@@ -68,32 +68,91 @@ pub struct FullObservation {
 %% endfor
 }
 
-impl Observation<(Arc<Solution<Context>>, usize)> for FullObservation {
+impl Observation for FullObservation {
     type Ctx = Context;
-    type LocId = LocationId;
     type Matcher = ObservationMatcher;
-}
 
-impl FullObservation {
-    fn fields_observed(&self) -> usize {
-        let mut fields = 0;
-%% for ctx, t in context_types.items() if ctx not in bfp.varmap
-%% if t in int_types
-        if self.{{ ctx }} != IntegerObservation::Unknown { fields += 1; }
-%% else
-        if self.{{ ctx }} { fields += 1; }
-%% endif
+    fn from_victory_state(won: &Context, world: &World) -> Self {
+        let mut full_obs = Self::default();
+        match world.rule_victory {
+%% for v, info in rules['$victory'].variants.items()
+            RuleVictory::{{ v|construct_id|camelize }} => {
+                rules::observe_access_{{ info.func_id }}(won, world, &mut full_obs);
+            }
 %% endfor
-%% for item, ct in gl.item_max_counts.items()|sort if item not in bfp.varmap
-        if self.{{ item|lower }} != IntegerObservation::Unknown { fields += 1; }
-%% endfor
-%% for group in bfp.flag_groups
-        if self.cbits{{ loop.index }}.is_some() { fields += 1; }
-%% endfor
-        fields
+        }
+        full_obs
     }
 
-    pub fn to_vec(&self, ctx: &Context) -> Vec<OneObservation> {
+    fn observe_visit(&mut self, loc_id: LocationId) {
+        match loc_id {
+%% for loc in gl.locations()
+%% set visit = 'VISITED_' + loc.id
+%% set skip = 'SKIPPED_' + loc.id
+            LocationId::{{ loc.id }} =>  {
+                self.cbits{{ bfp.varmap[visit] }}.insert(flags::ContextBits{{ bfp.varmap[visit] }}::{{ visit|upper }});
+                self.cbits{{ bfp.varmap[skip] }}.insert(flags::ContextBits{{ bfp.varmap[skip] }}::{{ skip|upper }});
+            }
+%% endfor
+        }
+    }
+
+    fn observe_on_entry(&mut self, cur: &Context, dest: SpotId, world: &World) {
+%% for pltype in ['Region', 'Area']
+%% if context_position_watchers[pltype|lower]
+        let {{ pltype|lower }} = get_{{ pltype|lower }}(dest);
+        match {{ pltype|lower }} {
+%% for r in context_position_watchers[pltype|lower]|sort
+%% set place = id_lookup[r]
+%% if place.action_id
+            {{ pltype }}Id::{{ r }} => {
+                if get_{{ pltype|lower }}(cur.position) != {{ pltype|lower }} {
+                    rules::observe_action_{{ place.action_id }}(cur, world, dest, self);
+                }
+            }
+%% endif
+%% endfor
+            _ => (),
+        }
+%% endif
+%% endfor
+%% if context_position_watchers['spot']
+        if cur.position != dest {
+            match dest {
+%% for s in context_position_watchers['spot']|sort
+%% set spot = id_lookup[s]
+%# Reset rules would go here if we want them.
+%% if spot.action_id
+                SpotId::{{ s }} => {
+                    rules::observe_action_{{ spot.action_id }}(cur, world, dest, self);
+                }
+%% endif
+%% endfor
+                _ => (),
+            }
+        }
+%% endif
+    }
+
+%# We compare all the integer observations since the bounds have to change.-
+%# Otherwise we have to understand all the action rules to reverse them.-
+    fn update(&mut self, from: &Context, to: &Context) {
+%% for ctx, t in context_types.items() if ctx not in bfp.varmap
+%% if t in int_types
+        if from.{{ ctx }} != to.{{ ctx }} {
+            self.{{ ctx }} = self.{{ ctx }}.shift(to.{{ ctx }} - from.{{ ctx }});
+        }
+%% endif
+%% endfor
+%% for item in gl.item_max_counts|sort if item not in bfp.varmap
+%% set ctx = item|lower
+        if from.{{ ctx }} != to.{{ ctx }} {
+            self.{{ ctx }} = self.{{ ctx }}.shift(to.{{ ctx }} - from.{{ ctx }});
+        }
+%% endfor
+    }
+
+    fn to_vec(&self, ctx: &Context) -> Vec<OneObservation> {
         let mut vec = Vec::with_capacity(self.fields_observed());
 %% for ctx, t in context_types.items() if ctx not in bfp.varmap
 %% set c = ctx|camelize|camelize
@@ -131,6 +190,27 @@ impl FullObservation {
 %% endfor
         vec
     }
+}
+
+impl FullObservation {
+    fn fields_observed(&self) -> usize {
+        let mut fields = 0;
+%% for ctx, t in context_types.items() if ctx not in bfp.varmap
+%% if t in int_types
+        if self.{{ ctx }} != IntegerObservation::Unknown { fields += 1; }
+%% else
+        if self.{{ ctx }} { fields += 1; }
+%% endif
+%% endfor
+%% for item, ct in gl.item_max_counts.items()|sort if item not in bfp.varmap
+        if self.{{ item|lower }} != IntegerObservation::Unknown { fields += 1; }
+%% endfor
+%% for group in bfp.flag_groups
+        if self.cbits{{ loop.index }}.is_some() { fields += 1; }
+%% endfor
+        fields
+    }
+
 
     pub fn apply(&mut self, obs: OneObservation) {
         match obs {
@@ -257,37 +337,6 @@ impl FullObservation {
     }
 %% endif
 %% endfor
-
-    pub fn observe_visit(&mut self, loc_id: LocationId) {
-        match loc_id {
-%% for loc in gl.locations()
-%% set visit = 'VISITED_' + loc.id
-%% set skip = 'SKIPPED_' + loc.id
-            LocationId::{{ loc.id }} =>  {
-                self.cbits{{ bfp.varmap[visit] }}.insert(flags::ContextBits{{ bfp.varmap[visit] }}::{{ visit|upper }});
-                self.cbits{{ bfp.varmap[skip] }}.insert(flags::ContextBits{{ bfp.varmap[skip] }}::{{ skip|upper }});
-            }
-%% endfor
-        }
-    }
-
-%# We compare all the integer observations since the bounds have to change.-
-%# Otherwise we have to understand all the action rules to reverse them.-
-    pub fn update(&mut self, from: &Context, to: &Context) {
-%% for ctx, t in context_types.items() if ctx not in bfp.varmap
-%% if t in int_types
-        if from.{{ ctx }} != to.{{ ctx }} {
-            self.{{ ctx }} = self.{{ ctx }}.shift(to.{{ ctx }} - from.{{ ctx }});
-        }
-%% endif
-%% endfor
-%% for item in gl.item_max_counts|sort if item not in bfp.varmap
-%% set ctx = item|lower
-        if from.{{ ctx }} != to.{{ ctx }} {
-            self.{{ ctx }} = self.{{ ctx }}.shift(to.{{ ctx }} - from.{{ ctx }});
-        }
-%% endfor
-    }
 }
 
 #[derive(Debug)]

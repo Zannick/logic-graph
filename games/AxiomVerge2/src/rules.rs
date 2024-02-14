@@ -14503,11 +14503,10 @@ pub fn observe_action_ebih__ebih_west__below_door__open_door__do(
     full_obs: &mut FullObservation,
 ) {
     // ^_door_open = true; IF (^indra WITHIN `Ebih > Ebih West > Above Door`) { ^indra = `Ebih > Ebih West > Below Door`; }
-    {
+    if {
         full_obs.observe_indra();
         ctx.indra() == SpotId::Ebih__Ebih_West__Above_Door
-    };
-    if ctx.indra() == SpotId::Ebih__Ebih_West__Above_Door {}
+    } {}
 }
 pub fn observe_action_ebih__ebih_west__left_of_switch__open_door__do(
     ctx: &Context,
@@ -14515,11 +14514,10 @@ pub fn observe_action_ebih__ebih_west__left_of_switch__open_door__do(
     full_obs: &mut FullObservation,
 ) {
     // ^_door_open = true; IF (^indra WITHIN `Ebih > Ebih West > Above Door`) { ^indra = `Ebih > Ebih West > Below Door`; }
-    {
+    if {
         full_obs.observe_indra();
         ctx.indra() == SpotId::Ebih__Ebih_West__Above_Door
-    };
-    if ctx.indra() == SpotId::Ebih__Ebih_West__Above_Door {}
+    } {}
 }
 pub fn observe_action_ebih__grid_25_10_12__door_left__open_door__do(
     ctx: &Context,
@@ -14618,12 +14616,11 @@ pub fn observe_action_giguna__clouds__platform_start__hack_and_ride_to_portal__d
     full_obs: &mut FullObservation,
 ) {
     // ^_platform_and_portal = true; if (^indra WITHIN ^position) { ^indra = `Giguna > Clouds > Platform Stop` }
-    {
+    if {
         full_obs.observe_indra();
         full_obs.observe_position();
         ctx.indra() == ctx.position()
-    };
-    if ctx.indra() == ctx.position() {}
+    } {}
 }
 pub fn observe_action_giguna__clouds__platform_start__hack_deploy_ride_to_portal__do(
     ctx: &Context,
@@ -14909,9 +14906,11 @@ pub fn observe_action_refills_incr_1(
 pub fn observe_action_reset_old_area__newpos(
     ctx: &Context,
     world: &graph::World,
+    newpos: SpotId,
     full_obs: &mut FullObservation,
 ) {
     // $reset_old_area(^newpos)
+    hobserve__reset_old_area!(ctx, world, newpos, full_obs);
 }
 pub fn observe_action_save(ctx: &Context, world: &graph::World, full_obs: &mut FullObservation) {
     // $save
@@ -14920,6 +14919,7 @@ pub fn observe_action_save(ctx: &Context, world: &graph::World, full_obs: &mut F
 pub fn observe_action_save_last(
     ctx: &Context,
     world: &graph::World,
+    newpos: SpotId,
     full_obs: &mut FullObservation,
 ) {
     // $save_last

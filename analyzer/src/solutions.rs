@@ -42,7 +42,7 @@ where
     best_file: &'static str,
     file: File,
     startctx: T,
-    solve_trie: Arc<MatcherTrie<<T::Observation as Observation<(Arc<Solution<T>>, usize)>>::Matcher>>,
+    solve_trie: Arc<MatcherTrie<<T::Observation as Observation>::Matcher>>,
     count: usize,
     best: u32,
 }
@@ -56,7 +56,7 @@ where
         previews_file: &'static str,
         best_file: &'static str,
         startctx: T,
-        solve_trie: Arc<MatcherTrie<<T::Observation as Observation<(Arc<Solution<T>>, usize)>>::Matcher>>,
+        solve_trie: Arc<MatcherTrie<<T::Observation as Observation>::Matcher>>,
     ) -> io::Result<SolutionCollector<T>> {
         Ok(SolutionCollector {
             map: new_hashmap(),
@@ -155,6 +155,32 @@ where
         // The history entries are the steps "in between" the states in full_history, so we should have
         // one more state than history steps.
         assert!(full_history.len() == solution.history.len() + 1);
+        let mut prev = full_history.last().unwrap();
+        let mut solve = <T::Observation as Observation>::from_victory_state(prev, world);
+
+        self.solve_trie.insert(
+            solve.to_vec(prev),
+            (solution.clone(), solution.history.len()),
+        );
+
+        for (idx, (step, state)) in solution
+            .history
+            .iter()
+            .zip(full_history.iter())
+            .enumerate()
+            .rev()
+        {
+            // Basic process of iterating backwards:
+            // 1. Update the existing observations for changes.
+            solve.update(prev, state);
+            // 2. Observe the history step requirements/effects itself.
+
+            // 3. Insert the new observation list.
+            self.solve_trie
+                .insert(solve.to_vec(state), (solution.clone(), idx));
+
+            prev = state;
+        }
     }
 
     pub fn get_best(&self) -> Arc<Solution<T>> {

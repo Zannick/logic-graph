@@ -1,6 +1,5 @@
 use crate::condense::CondensedEdge;
 use crate::observation::Observation;
-use crate::solutions::Solution;
 use crate::world::*;
 use as_slice::{AsMutSlice, AsSlice};
 use lazy_static::lazy_static;
@@ -13,7 +12,16 @@ use std::sync::Arc;
 use yaml_rust::Yaml;
 
 pub trait Ctx:
-    Clone + Eq + Debug + Default + Hash + Send + Sync + Serialize + for<'a> Deserialize<'a>
+    Clone
+    + Eq
+    + Debug
+    + Default
+    + Hash
+    + Send
+    + Sync
+    + Serialize
+    + for<'a> Deserialize<'a>
+    + crate::matchertrie::Observable
 {
     type World: World;
     type ItemId: Id + Default;
@@ -26,10 +34,7 @@ pub trait Ctx:
         + Hash
         + AsSlice<Element = bool>
         + AsMutSlice<Element = bool>;
-    type Observation: Observation<(Arc<Solution<Self>>, usize),
-        Ctx = Self,
-        LocId = <<Self::World as World>::Location as Location>::LocId,
-    >;
+    type Observation: Observation<Ctx = Self>;
     type Expectation: Copy + Clone + Debug + Eq + Send;
     const NUM_ITEMS: u32;
 

@@ -128,1163 +128,27 @@ pub struct FullObservation {
     cbits11: Option<flags::ContextBits11>,
 }
 
-impl Observation<(Arc<Solution<Context>>, usize)> for FullObservation {
+impl Observation for FullObservation {
     type Ctx = Context;
-    type LocId = LocationId;
     type Matcher = ObservationMatcher;
-}
 
-impl FullObservation {
-    fn fields_observed(&self) -> usize {
-        let mut fields = 0;
-        if self.position {
-            fields += 1;
+    fn from_victory_state(won: &Context, world: &World) -> Self {
+        let mut full_obs = Self::default();
+        match world.rule_victory {
+            RuleVictory::Default => {
+                rules::observe_access___escape_objective(won, world, &mut full_obs);
+            }
+            RuleVictory::JustObjective => {
+                rules::observe_access___objective(won, world, &mut full_obs);
+            }
+            RuleVictory::Bench => {
+                rules::observe_access___remote_drone_flask__6(won, world, &mut full_obs);
+            }
         }
-        if self.energy != IntegerObservation::Unknown {
-            fields += 1;
-        }
-        if self.flasks != IntegerObservation::Unknown {
-            fields += 1;
-        }
-        if self.refills != IntegerObservation::Unknown {
-            fields += 1;
-        }
-        if self.mode {
-            fields += 1;
-        }
-        if self.save {
-            fields += 1;
-        }
-        if self.breach_save {
-            fields += 1;
-        }
-        if self.indra {
-            fields += 1;
-        }
-        if self.last {
-            fields += 1;
-        }
-        if self.prev_area {
-            fields += 1;
-        }
-        if self.flask != IntegerObservation::Unknown {
-            fields += 1;
-        }
-        if self.health_fragment != IntegerObservation::Unknown {
-            fields += 1;
-        }
-        if self.cbits1.is_some() {
-            fields += 1;
-        }
-        if self.cbits2.is_some() {
-            fields += 1;
-        }
-        if self.cbits3.is_some() {
-            fields += 1;
-        }
-        if self.cbits4.is_some() {
-            fields += 1;
-        }
-        if self.cbits5.is_some() {
-            fields += 1;
-        }
-        if self.cbits6.is_some() {
-            fields += 1;
-        }
-        if self.cbits7.is_some() {
-            fields += 1;
-        }
-        if self.cbits8.is_some() {
-            fields += 1;
-        }
-        if self.cbits9.is_some() {
-            fields += 1;
-        }
-        if self.cbits10.is_some() {
-            fields += 1;
-        }
-        if self.cbits11.is_some() {
-            fields += 1;
-        }
-        fields
+        full_obs
     }
 
-    pub fn to_vec(&self, ctx: &Context) -> Vec<OneObservation> {
-        let mut vec = Vec::with_capacity(self.fields_observed());
-        if self.position {
-            vec.push(OneObservation::Position(ctx.position));
-        }
-        match self.energy {
-            IntegerObservation::Unknown => (),
-            IntegerObservation::Exact => vec.push(OneObservation::EnergyExact(ctx.energy)),
-            IntegerObservation::Eq(i) => vec.push(OneObservation::EnergyEq(i, ctx.energy == i)),
-            IntegerObservation::Ge(i) => vec.push(OneObservation::EnergyGe(i, ctx.energy >= i)),
-            IntegerObservation::Le(i) => vec.push(OneObservation::EnergyLe(i, ctx.energy <= i)),
-            IntegerObservation::Range(lo, hi) => vec.push(OneObservation::EnergyRange(
-                lo,
-                hi,
-                ctx.energy >= lo && ctx.energy <= hi,
-            )),
-        }
-        match self.flasks {
-            IntegerObservation::Unknown => (),
-            IntegerObservation::Exact => vec.push(OneObservation::FlasksExact(ctx.flasks)),
-            IntegerObservation::Eq(i) => vec.push(OneObservation::FlasksEq(i, ctx.flasks == i)),
-            IntegerObservation::Ge(i) => vec.push(OneObservation::FlasksGe(i, ctx.flasks >= i)),
-            IntegerObservation::Le(i) => vec.push(OneObservation::FlasksLe(i, ctx.flasks <= i)),
-            IntegerObservation::Range(lo, hi) => vec.push(OneObservation::FlasksRange(
-                lo,
-                hi,
-                ctx.flasks >= lo && ctx.flasks <= hi,
-            )),
-        }
-        match self.refills {
-            IntegerObservation::Unknown => (),
-            IntegerObservation::Exact => vec.push(OneObservation::RefillsExact(ctx.refills)),
-            IntegerObservation::Eq(i) => vec.push(OneObservation::RefillsEq(i, ctx.refills == i)),
-            IntegerObservation::Ge(i) => vec.push(OneObservation::RefillsGe(i, ctx.refills >= i)),
-            IntegerObservation::Le(i) => vec.push(OneObservation::RefillsLe(i, ctx.refills <= i)),
-            IntegerObservation::Range(lo, hi) => vec.push(OneObservation::RefillsRange(
-                lo,
-                hi,
-                ctx.refills >= lo && ctx.refills <= hi,
-            )),
-        }
-        if self.mode {
-            vec.push(OneObservation::Mode(ctx.mode));
-        }
-        if self.save {
-            vec.push(OneObservation::Save(ctx.save));
-        }
-        if self.breach_save {
-            vec.push(OneObservation::BreachSave(ctx.breach_save));
-        }
-        if self.indra {
-            vec.push(OneObservation::Indra(ctx.indra));
-        }
-        if self.last {
-            vec.push(OneObservation::Last(ctx.last));
-        }
-        if self.prev_area {
-            vec.push(OneObservation::PrevArea(ctx.prev_area));
-        }
-        match self.flask {
-            IntegerObservation::Unknown => (),
-            IntegerObservation::Exact => vec.push(OneObservation::FlaskExact(ctx.flask)),
-            IntegerObservation::Eq(i) => vec.push(OneObservation::FlaskEq(i, ctx.flask == i)),
-            IntegerObservation::Ge(i) => vec.push(OneObservation::FlaskGe(i, ctx.flask >= i)),
-            IntegerObservation::Le(i) => vec.push(OneObservation::FlaskLe(i, ctx.flask <= i)),
-            IntegerObservation::Range(lo, hi) => vec.push(OneObservation::FlaskRange(
-                lo,
-                hi,
-                ctx.flask >= lo && ctx.flask <= hi,
-            )),
-        }
-        match self.health_fragment {
-            IntegerObservation::Unknown => (),
-            IntegerObservation::Exact => {
-                vec.push(OneObservation::HealthFragmentExact(ctx.health_fragment))
-            }
-            IntegerObservation::Eq(i) => vec.push(OneObservation::HealthFragmentEq(
-                i,
-                ctx.health_fragment == i,
-            )),
-            IntegerObservation::Ge(i) => vec.push(OneObservation::HealthFragmentGe(
-                i,
-                ctx.health_fragment >= i,
-            )),
-            IntegerObservation::Le(i) => vec.push(OneObservation::HealthFragmentLe(
-                i,
-                ctx.health_fragment <= i,
-            )),
-            IntegerObservation::Range(lo, hi) => vec.push(OneObservation::HealthFragmentRange(
-                lo,
-                hi,
-                ctx.health_fragment >= lo && ctx.health_fragment <= hi,
-            )),
-        }
-        if let Some(mask) = self.cbits1 {
-            vec.push(OneObservation::CBits1 {
-                mask,
-                result: mask & ctx.cbits1,
-            });
-        }
-        if let Some(mask) = self.cbits2 {
-            vec.push(OneObservation::CBits2 {
-                mask,
-                result: mask & ctx.cbits2,
-            });
-        }
-        if let Some(mask) = self.cbits3 {
-            vec.push(OneObservation::CBits3 {
-                mask,
-                result: mask & ctx.cbits3,
-            });
-        }
-        if let Some(mask) = self.cbits4 {
-            vec.push(OneObservation::CBits4 {
-                mask,
-                result: mask & ctx.cbits4,
-            });
-        }
-        if let Some(mask) = self.cbits5 {
-            vec.push(OneObservation::CBits5 {
-                mask,
-                result: mask & ctx.cbits5,
-            });
-        }
-        if let Some(mask) = self.cbits6 {
-            vec.push(OneObservation::CBits6 {
-                mask,
-                result: mask & ctx.cbits6,
-            });
-        }
-        if let Some(mask) = self.cbits7 {
-            vec.push(OneObservation::CBits7 {
-                mask,
-                result: mask & ctx.cbits7,
-            });
-        }
-        if let Some(mask) = self.cbits8 {
-            vec.push(OneObservation::CBits8 {
-                mask,
-                result: mask & ctx.cbits8,
-            });
-        }
-        if let Some(mask) = self.cbits9 {
-            vec.push(OneObservation::CBits9 {
-                mask,
-                result: mask & ctx.cbits9,
-            });
-        }
-        if let Some(mask) = self.cbits10 {
-            vec.push(OneObservation::CBits10 {
-                mask,
-                result: mask & ctx.cbits10,
-            });
-        }
-        if let Some(mask) = self.cbits11 {
-            vec.push(OneObservation::CBits11 {
-                mask,
-                result: mask & ctx.cbits11,
-            });
-        }
-        vec
-    }
-
-    pub fn apply(&mut self, obs: OneObservation) {
-        match obs {
-            OneObservation::Position(v) => {
-                self.position = true;
-            }
-            OneObservation::EnergyExact(v) => {
-                self.energy = IntegerObservation::Exact;
-            }
-            OneObservation::EnergyEq(v, res) => {
-                if res {
-                    self.energy = self.energy.combine(IntegerObservation::Eq(v));
-                } else {
-                    self.energy = IntegerObservation::Exact;
-                }
-            }
-            OneObservation::EnergyGe(lo, res) => {
-                self.energy = self.energy.combine(if res {
-                    IntegerObservation::Ge(lo)
-                } else {
-                    IntegerObservation::Le(lo - 1)
-                });
-            }
-            OneObservation::EnergyLe(hi, res) => {
-                self.energy = self.energy.combine(if res {
-                    IntegerObservation::Le(hi)
-                } else {
-                    IntegerObservation::Ge(hi + 1)
-                });
-            }
-            OneObservation::EnergyRange(lo, hi, res) => {
-                if res {
-                    self.energy = self.energy.combine(IntegerObservation::Range(lo, hi));
-                } else {
-                    self.energy = IntegerObservation::Exact;
-                }
-            }
-            OneObservation::FlasksExact(v) => {
-                self.flasks = IntegerObservation::Exact;
-            }
-            OneObservation::FlasksEq(v, res) => {
-                if res {
-                    self.flasks = self.flasks.combine(IntegerObservation::Eq(v));
-                } else {
-                    self.flasks = IntegerObservation::Exact;
-                }
-            }
-            OneObservation::FlasksGe(lo, res) => {
-                self.flasks = self.flasks.combine(if res {
-                    IntegerObservation::Ge(lo)
-                } else {
-                    IntegerObservation::Le(lo - 1)
-                });
-            }
-            OneObservation::FlasksLe(hi, res) => {
-                self.flasks = self.flasks.combine(if res {
-                    IntegerObservation::Le(hi)
-                } else {
-                    IntegerObservation::Ge(hi + 1)
-                });
-            }
-            OneObservation::FlasksRange(lo, hi, res) => {
-                if res {
-                    self.flasks = self.flasks.combine(IntegerObservation::Range(lo, hi));
-                } else {
-                    self.flasks = IntegerObservation::Exact;
-                }
-            }
-            OneObservation::RefillsExact(v) => {
-                self.refills = IntegerObservation::Exact;
-            }
-            OneObservation::RefillsEq(v, res) => {
-                if res {
-                    self.refills = self.refills.combine(IntegerObservation::Eq(v));
-                } else {
-                    self.refills = IntegerObservation::Exact;
-                }
-            }
-            OneObservation::RefillsGe(lo, res) => {
-                self.refills = self.refills.combine(if res {
-                    IntegerObservation::Ge(lo)
-                } else {
-                    IntegerObservation::Le(lo - 1)
-                });
-            }
-            OneObservation::RefillsLe(hi, res) => {
-                self.refills = self.refills.combine(if res {
-                    IntegerObservation::Le(hi)
-                } else {
-                    IntegerObservation::Ge(hi + 1)
-                });
-            }
-            OneObservation::RefillsRange(lo, hi, res) => {
-                if res {
-                    self.refills = self.refills.combine(IntegerObservation::Range(lo, hi));
-                } else {
-                    self.refills = IntegerObservation::Exact;
-                }
-            }
-            OneObservation::Mode(v) => {
-                self.mode = true;
-            }
-            OneObservation::Save(v) => {
-                self.save = true;
-            }
-            OneObservation::BreachSave(v) => {
-                self.breach_save = true;
-            }
-            OneObservation::Indra(v) => {
-                self.indra = true;
-            }
-            OneObservation::Last(v) => {
-                self.last = true;
-            }
-            OneObservation::PrevArea(v) => {
-                self.prev_area = true;
-            }
-            OneObservation::FlaskExact(v) => {
-                self.flask = IntegerObservation::Exact;
-            }
-            OneObservation::FlaskEq(v, res) => {
-                if res {
-                    self.flask = self.flask.combine(IntegerObservation::Eq(v));
-                } else {
-                    self.flask = IntegerObservation::Exact;
-                }
-            }
-            OneObservation::FlaskGe(lo, res) => {
-                self.flask = self.flask.combine(if res {
-                    IntegerObservation::Ge(lo)
-                } else {
-                    IntegerObservation::Le(lo - 1)
-                });
-            }
-            OneObservation::FlaskLe(hi, res) => {
-                self.flask = self.flask.combine(if res {
-                    IntegerObservation::Le(hi)
-                } else {
-                    IntegerObservation::Ge(hi + 1)
-                });
-            }
-            OneObservation::FlaskRange(lo, hi, res) => {
-                if res {
-                    self.flask = self.flask.combine(IntegerObservation::Range(lo, hi));
-                } else {
-                    self.flask = IntegerObservation::Exact;
-                }
-            }
-            OneObservation::HealthFragmentExact(v) => {
-                self.health_fragment = IntegerObservation::Exact;
-            }
-            OneObservation::HealthFragmentEq(v, res) => {
-                if res {
-                    self.health_fragment = self.health_fragment.combine(IntegerObservation::Eq(v));
-                } else {
-                    self.health_fragment = IntegerObservation::Exact;
-                }
-            }
-            OneObservation::HealthFragmentGe(lo, res) => {
-                self.health_fragment = self.health_fragment.combine(if res {
-                    IntegerObservation::Ge(lo)
-                } else {
-                    IntegerObservation::Le(lo - 1)
-                });
-            }
-            OneObservation::HealthFragmentLe(hi, res) => {
-                self.health_fragment = self.health_fragment.combine(if res {
-                    IntegerObservation::Le(hi)
-                } else {
-                    IntegerObservation::Ge(hi + 1)
-                });
-            }
-            OneObservation::HealthFragmentRange(lo, hi, res) => {
-                if res {
-                    self.health_fragment = self
-                        .health_fragment
-                        .combine(IntegerObservation::Range(lo, hi));
-                } else {
-                    self.health_fragment = IntegerObservation::Exact;
-                }
-            }
-            OneObservation::CBits1 { mask, .. } => {
-                if let Some(old_mask) = self.cbits1 {
-                    self.cbits1 = Some(old_mask | mask);
-                } else {
-                    self.cbits1 = Some(mask);
-                }
-            }
-            OneObservation::CBits2 { mask, .. } => {
-                if let Some(old_mask) = self.cbits2 {
-                    self.cbits2 = Some(old_mask | mask);
-                } else {
-                    self.cbits2 = Some(mask);
-                }
-            }
-            OneObservation::CBits3 { mask, .. } => {
-                if let Some(old_mask) = self.cbits3 {
-                    self.cbits3 = Some(old_mask | mask);
-                } else {
-                    self.cbits3 = Some(mask);
-                }
-            }
-            OneObservation::CBits4 { mask, .. } => {
-                if let Some(old_mask) = self.cbits4 {
-                    self.cbits4 = Some(old_mask | mask);
-                } else {
-                    self.cbits4 = Some(mask);
-                }
-            }
-            OneObservation::CBits5 { mask, .. } => {
-                if let Some(old_mask) = self.cbits5 {
-                    self.cbits5 = Some(old_mask | mask);
-                } else {
-                    self.cbits5 = Some(mask);
-                }
-            }
-            OneObservation::CBits6 { mask, .. } => {
-                if let Some(old_mask) = self.cbits6 {
-                    self.cbits6 = Some(old_mask | mask);
-                } else {
-                    self.cbits6 = Some(mask);
-                }
-            }
-            OneObservation::CBits7 { mask, .. } => {
-                if let Some(old_mask) = self.cbits7 {
-                    self.cbits7 = Some(old_mask | mask);
-                } else {
-                    self.cbits7 = Some(mask);
-                }
-            }
-            OneObservation::CBits8 { mask, .. } => {
-                if let Some(old_mask) = self.cbits8 {
-                    self.cbits8 = Some(old_mask | mask);
-                } else {
-                    self.cbits8 = Some(mask);
-                }
-            }
-            OneObservation::CBits9 { mask, .. } => {
-                if let Some(old_mask) = self.cbits9 {
-                    self.cbits9 = Some(old_mask | mask);
-                } else {
-                    self.cbits9 = Some(mask);
-                }
-            }
-            OneObservation::CBits10 { mask, .. } => {
-                if let Some(old_mask) = self.cbits10 {
-                    self.cbits10 = Some(old_mask | mask);
-                } else {
-                    self.cbits10 = Some(mask);
-                }
-            }
-            OneObservation::CBits11 { mask, .. } => {
-                if let Some(old_mask) = self.cbits11 {
-                    self.cbits11 = Some(old_mask | mask);
-                } else {
-                    self.cbits11 = Some(mask);
-                }
-            }
-        }
-    }
-
-    pub fn observe_position(&mut self) {
-        self.position = true;
-    }
-    pub fn observe_energy(&mut self, obs: IntegerObservation<i16>) {
-        self.energy = self.energy.combine(obs);
-    }
-    pub fn observe_flasks(&mut self, obs: IntegerObservation<i8>) {
-        self.flasks = self.flasks.combine(obs);
-    }
-    pub fn observe_refills(&mut self, obs: IntegerObservation<i8>) {
-        self.refills = self.refills.combine(obs);
-    }
-    pub fn observe_mode(&mut self) {
-        self.mode = true;
-    }
-    pub fn observe_save(&mut self) {
-        self.save = true;
-    }
-    pub fn observe_breach_save(&mut self) {
-        self.breach_save = true;
-    }
-    pub fn observe_indra(&mut self) {
-        self.indra = true;
-    }
-    pub fn observe_last(&mut self) {
-        self.last = true;
-    }
-    pub fn observe_prev_area(&mut self) {
-        self.prev_area = true;
-    }
-    pub fn observe_map__amagi__main_area__save(&mut self) {
-        self.cbits1
-            .insert(flags::ContextBits1::MAP__AMAGI__MAIN_AREA__SAVE);
-    }
-    pub fn observe_map__amagi__west_lake__urn(&mut self) {
-        self.cbits1
-            .insert(flags::ContextBits1::MAP__AMAGI__WEST_LAKE__URN);
-    }
-    pub fn observe_map__annuna__mirror_match__save(&mut self) {
-        self.cbits1
-            .insert(flags::ContextBits1::MAP__ANNUNA__MIRROR_MATCH__SAVE);
-    }
-    pub fn observe_map__annuna__west_bridge__save(&mut self) {
-        self.cbits1
-            .insert(flags::ContextBits1::MAP__ANNUNA__WEST_BRIDGE__SAVE);
-    }
-    pub fn observe_map__annuna__vertical_room__save(&mut self) {
-        self.cbits1
-            .insert(flags::ContextBits1::MAP__ANNUNA__VERTICAL_ROOM__SAVE);
-    }
-    pub fn observe_map__annuna__factory_entrance__save(&mut self) {
-        self.cbits1
-            .insert(flags::ContextBits1::MAP__ANNUNA__FACTORY_ENTRANCE__SAVE);
-    }
-    pub fn observe_map__annuna__center_save__save(&mut self) {
-        self.cbits1
-            .insert(flags::ContextBits1::MAP__ANNUNA__CENTER_SAVE__SAVE);
-    }
-    pub fn observe_map__annuna__final_save__save(&mut self) {
-        self.cbits1
-            .insert(flags::ContextBits1::MAP__ANNUNA__FINAL_SAVE__SAVE);
-    }
-    pub fn observe_map__ebih__base_camp__save(&mut self) {
-        self.cbits1
-            .insert(flags::ContextBits1::MAP__EBIH__BASE_CAMP__SAVE);
-    }
-    pub fn observe_map__ebih__waterfall__axe(&mut self) {
-        self.cbits1
-            .insert(flags::ContextBits1::MAP__EBIH__WATERFALL__AXE);
-    }
-    pub fn observe_map__ebih__ebih_west__mid_save(&mut self) {
-        self.cbits1
-            .insert(flags::ContextBits1::MAP__EBIH__EBIH_WEST__MID_SAVE);
-    }
-    pub fn observe_map__ebih__ebih_west__upper_save(&mut self) {
-        self.cbits1
-            .insert(flags::ContextBits1::MAP__EBIH__EBIH_WEST__UPPER_SAVE);
-    }
-    pub fn observe_map__ebih__ebih_west__lower_save(&mut self) {
-        self.cbits1
-            .insert(flags::ContextBits1::MAP__EBIH__EBIH_WEST__LOWER_SAVE);
-    }
-    pub fn observe_map__ebih__drone_room__urn(&mut self) {
-        self.cbits1
-            .insert(flags::ContextBits1::MAP__EBIH__DRONE_ROOM__URN);
-    }
-    pub fn observe_map__giguna_breach__peak__save(&mut self) {
-        self.cbits1
-            .insert(flags::ContextBits1::MAP__GIGUNA_BREACH__PEAK__SAVE);
-    }
-    pub fn observe_map__giguna_breach__sw_save__save(&mut self) {
-        self.cbits1
-            .insert(flags::ContextBits1::MAP__GIGUNA_BREACH__SW_SAVE__SAVE);
-    }
-    pub fn observe_map__giguna__giguna_northeast__save(&mut self) {
-        self.cbits1
-            .insert(flags::ContextBits1::MAP__GIGUNA__GIGUNA_NORTHEAST__SAVE);
-    }
-    pub fn observe_map__giguna__giguna_base__save(&mut self) {
-        self.cbits1
-            .insert(flags::ContextBits1::MAP__GIGUNA__GIGUNA_BASE__SAVE);
-    }
-    pub fn observe_map__giguna__ruins_west__save(&mut self) {
-        self.cbits1
-            .insert(flags::ContextBits1::MAP__GIGUNA__RUINS_WEST__SAVE);
-    }
-    pub fn observe_map__giguna__ruins_top__save(&mut self) {
-        self.cbits1
-            .insert(flags::ContextBits1::MAP__GIGUNA__RUINS_TOP__SAVE);
-    }
-    pub fn observe_map__glacier__revival__save(&mut self) {
-        self.cbits1
-            .insert(flags::ContextBits1::MAP__GLACIER__REVIVAL__SAVE);
-    }
-    pub fn observe_map__irikar_breach__save_room__save(&mut self) {
-        self.cbits1
-            .insert(flags::ContextBits1::MAP__IRIKAR_BREACH__SAVE_ROOM__SAVE);
-    }
-    pub fn observe_map__irikar_breach__gauntlet__save(&mut self) {
-        self.cbits1
-            .insert(flags::ContextBits1::MAP__IRIKAR_BREACH__GAUNTLET__SAVE);
-    }
-    pub fn observe_map__irikar_breach__basement_save__save(&mut self) {
-        self.cbits1
-            .insert(flags::ContextBits1::MAP__IRIKAR_BREACH__BASEMENT_SAVE__SAVE);
-    }
-    pub fn observe_map__irikar__hub__save(&mut self) {
-        self.cbits1
-            .insert(flags::ContextBits1::MAP__IRIKAR__HUB__SAVE);
-    }
-    pub fn observe_map__irikar__sight_room__urn(&mut self) {
-        self.cbits1
-            .insert(flags::ContextBits1::MAP__IRIKAR__SIGHT_ROOM__URN);
-    }
-    pub fn observe_map__uhrum__west_entrance__save(&mut self) {
-        self.cbits1
-            .insert(flags::ContextBits1::MAP__UHRUM__WEST_ENTRANCE__SAVE);
-    }
-    pub fn observe_map__uhrum__save_room__save(&mut self) {
-        self.cbits1
-            .insert(flags::ContextBits1::MAP__UHRUM__SAVE_ROOM__SAVE);
-    }
-    pub fn observe_map__uhrum__annuna_corridor__save(&mut self) {
-        self.cbits1
-            .insert(flags::ContextBits1::MAP__UHRUM__ANNUNA_CORRIDOR__SAVE);
-    }
-    pub fn observe_map__uhrum__annuna_corridor__urn(&mut self) {
-        self.cbits1
-            .insert(flags::ContextBits1::MAP__UHRUM__ANNUNA_CORRIDOR__URN);
-    }
-    pub fn observe_amagi__main_area__ctx__combo(&mut self) {
-        self.cbits1
-            .insert(flags::ContextBits1::AMAGI__MAIN_AREA__CTX__COMBO);
-    }
-    pub fn observe_annuna__west_bridge__ctx__doors_opened(&mut self) {
-        self.cbits1
-            .insert(flags::ContextBits1::ANNUNA__WEST_BRIDGE__CTX__DOORS_OPENED);
-    }
-    pub fn observe_annuna__east_bridge__ctx__combo(&mut self) {
-        self.cbits1
-            .insert(flags::ContextBits1::ANNUNA__EAST_BRIDGE__CTX__COMBO);
-    }
-    pub fn observe_annuna__west_climb__ctx__door_opened(&mut self) {
-        self.cbits1
-            .insert(flags::ContextBits1::ANNUNA__WEST_CLIMB__CTX__DOOR_OPENED);
-    }
-    pub fn observe_ebih__base_camp__ctx__left_platform_moved(&mut self) {
-        self.cbits1
-            .insert(flags::ContextBits1::EBIH__BASE_CAMP__CTX__LEFT_PLATFORM_MOVED);
-    }
-    pub fn observe_ebih__grid_25_10_12__ctx__door_open(&mut self) {
-        self.cbits1
-            .insert(flags::ContextBits1::EBIH__GRID_25_10_12__CTX__DOOR_OPEN);
-    }
-    pub fn observe_ebih__waterfall__ctx__west_door_open(&mut self) {
-        self.cbits1
-            .insert(flags::ContextBits1::EBIH__WATERFALL__CTX__WEST_DOOR_OPEN);
-    }
-    pub fn observe_ebih__ebih_west__ctx__door_open(&mut self) {
-        self.cbits1
-            .insert(flags::ContextBits1::EBIH__EBIH_WEST__CTX__DOOR_OPEN);
-    }
-    pub fn observe_ebih__ebih_east__ctx__platform1_moved(&mut self) {
-        self.cbits1
-            .insert(flags::ContextBits1::EBIH__EBIH_EAST__CTX__PLATFORM1_MOVED);
-    }
-    pub fn observe_ebih__ebih_east__ctx__platform2_moved(&mut self) {
-        self.cbits1
-            .insert(flags::ContextBits1::EBIH__EBIH_EAST__CTX__PLATFORM2_MOVED);
-    }
-    pub fn observe_ebih__drone_room__ctx__platform_moved(&mut self) {
-        self.cbits1
-            .insert(flags::ContextBits1::EBIH__DRONE_ROOM__CTX__PLATFORM_MOVED);
-    }
-    pub fn observe_ebih__vertical_interchange__ctx__door_open(&mut self) {
-        self.cbits1
-            .insert(flags::ContextBits1::EBIH__VERTICAL_INTERCHANGE__CTX__DOOR_OPEN);
-    }
-    pub fn observe_giguna_breach__sw_save__ctx__door_opened(&mut self) {
-        self.cbits1
-            .insert(flags::ContextBits1::GIGUNA_BREACH__SW_SAVE__CTX__DOOR_OPENED);
-    }
-    pub fn observe_giguna__giguna_northeast__ctx__door_opened(&mut self) {
-        self.cbits1
-            .insert(flags::ContextBits1::GIGUNA__GIGUNA_NORTHEAST__CTX__DOOR_OPENED);
-    }
-    pub fn observe_giguna__carnelian__ctx__door_opened(&mut self) {
-        self.cbits1
-            .insert(flags::ContextBits1::GIGUNA__CARNELIAN__CTX__DOOR_OPENED);
-    }
-    pub fn observe_giguna__carnelian__ctx__upper_susar(&mut self) {
-        self.cbits1
-            .insert(flags::ContextBits1::GIGUNA__CARNELIAN__CTX__UPPER_SUSAR);
-    }
-    pub fn observe_giguna__carnelian__ctx__lower_susar(&mut self) {
-        self.cbits1
-            .insert(flags::ContextBits1::GIGUNA__CARNELIAN__CTX__LOWER_SUSAR);
-    }
-    pub fn observe_giguna__west_caverns__ctx__east_susar(&mut self) {
-        self.cbits1
-            .insert(flags::ContextBits1::GIGUNA__WEST_CAVERNS__CTX__EAST_SUSAR);
-    }
-    pub fn observe_giguna__giguna_base__ctx__door_open(&mut self) {
-        self.cbits1
-            .insert(flags::ContextBits1::GIGUNA__GIGUNA_BASE__CTX__DOOR_OPEN);
-    }
-    pub fn observe_giguna__ruins_west__ctx__kishib_handled(&mut self) {
-        self.cbits1
-            .insert(flags::ContextBits1::GIGUNA__RUINS_WEST__CTX__KISHIB_HANDLED);
-    }
-    pub fn observe_giguna__ruins_top__ctx__doors_open(&mut self) {
-        self.cbits1
-            .insert(flags::ContextBits1::GIGUNA__RUINS_TOP__CTX__DOORS_OPEN);
-    }
-    pub fn observe_giguna__clouds__ctx__platform_and_portal(&mut self) {
-        self.cbits1
-            .insert(flags::ContextBits1::GIGUNA__CLOUDS__CTX__PLATFORM_AND_PORTAL);
-    }
-    pub fn observe_giguna__east_caverns__ctx__door_opened(&mut self) {
-        self.cbits1
-            .insert(flags::ContextBits1::GIGUNA__EAST_CAVERNS__CTX__DOOR_OPENED);
-    }
-    pub fn observe_giguna__east_caverns__ctx__combo_entered(&mut self) {
-        self.cbits1
-            .insert(flags::ContextBits1::GIGUNA__EAST_CAVERNS__CTX__COMBO_ENTERED);
-    }
-    pub fn observe_giguna__east_caverns__ctx__upper_susar(&mut self) {
-        self.cbits1
-            .insert(flags::ContextBits1::GIGUNA__EAST_CAVERNS__CTX__UPPER_SUSAR);
-    }
-    pub fn observe_giguna__east_caverns__ctx__mid_susar(&mut self) {
-        self.cbits1
-            .insert(flags::ContextBits1::GIGUNA__EAST_CAVERNS__CTX__MID_SUSAR);
-    }
-    pub fn observe_giguna__east_caverns__ctx__lower_susar(&mut self) {
-        self.cbits1
-            .insert(flags::ContextBits1::GIGUNA__EAST_CAVERNS__CTX__LOWER_SUSAR);
-    }
-    pub fn observe_giguna__gateway__ctx__door_opened(&mut self) {
-        self.cbits1
-            .insert(flags::ContextBits1::GIGUNA__GATEWAY__CTX__DOOR_OPENED);
-    }
-    pub fn observe_irikar__basement_portal__ctx__platform_moved(&mut self) {
-        self.cbits1
-            .insert(flags::ContextBits1::IRIKAR__BASEMENT_PORTAL__CTX__PLATFORM_MOVED);
-    }
-    pub fn observe_amagi_dragon_eye_passage(&mut self) {
-        self.cbits1
-            .insert(flags::ContextBits1::AMAGI_DRAGON_EYE_PASSAGE);
-    }
-    pub fn observe_amagi_stronghold_boulder_1(&mut self) {
-        self.cbits1
-            .insert(flags::ContextBits1::AMAGI_STRONGHOLD_BOULDER_1);
-    }
-    pub fn observe_amagi_stronghold_boulder_2(&mut self) {
-        self.cbits2
-            .insert(flags::ContextBits2::AMAGI_STRONGHOLD_BOULDER_2);
-    }
-    pub fn observe_amagi_stronghold_wall_1(&mut self) {
-        self.cbits2
-            .insert(flags::ContextBits2::AMAGI_STRONGHOLD_WALL_1);
-    }
-    pub fn observe_amagi_stronghold_wall_2(&mut self) {
-        self.cbits2
-            .insert(flags::ContextBits2::AMAGI_STRONGHOLD_WALL_2);
-    }
-    pub fn observe_amagi_west_lake_surface_wall(&mut self) {
-        self.cbits2
-            .insert(flags::ContextBits2::AMAGI_WEST_LAKE_SURFACE_WALL);
-    }
-    pub fn observe_amashilama(&mut self) {
-        self.cbits2.insert(flags::ContextBits2::AMASHILAMA);
-    }
-    pub fn observe_annuna_east_bridge_gate(&mut self) {
-        self.cbits2
-            .insert(flags::ContextBits2::ANNUNA_EAST_BRIDGE_GATE);
-    }
-    pub fn observe_annuna_mirror_match_switch(&mut self) {
-        self.cbits2
-            .insert(flags::ContextBits2::ANNUNA_MIRROR_MATCH_SWITCH);
-    }
-    pub fn observe_anuman(&mut self) {
-        self.cbits2.insert(flags::ContextBits2::ANUMAN);
-    }
-    pub fn observe_anunna_vertical_room_gate(&mut self) {
-        self.cbits2
-            .insert(flags::ContextBits2::ANUNNA_VERTICAL_ROOM_GATE);
-    }
-    pub fn observe_apocalypse_bomb(&mut self) {
-        self.cbits2.insert(flags::ContextBits2::APOCALYPSE_BOMB);
-    }
-    pub fn observe_big_flask(&mut self) {
-        self.cbits2.insert(flags::ContextBits2::BIG_FLASK);
-    }
-    pub fn observe_boomerang(&mut self) {
-        self.cbits2.insert(flags::ContextBits2::BOOMERANG);
-    }
-    pub fn observe_breach_attractor(&mut self) {
-        self.cbits2.insert(flags::ContextBits2::BREACH_ATTRACTOR);
-    }
-    pub fn observe_breach_sight(&mut self) {
-        self.cbits2.insert(flags::ContextBits2::BREACH_SIGHT);
-    }
-    pub fn observe_bronze_axe(&mut self) {
-        self.cbits2.insert(flags::ContextBits2::BRONZE_AXE);
-    }
-    pub fn observe_building_of_the_school(&mut self) {
-        self.cbits2
-            .insert(flags::ContextBits2::BUILDING_OF_THE_SCHOOL);
-    }
-    pub fn observe_commemorative_speech(&mut self) {
-        self.cbits2
-            .insert(flags::ContextBits2::COMMEMORATIVE_SPEECH);
-    }
-    pub fn observe_companies_layoff(&mut self) {
-        self.cbits2.insert(flags::ContextBits2::COMPANIES_LAYOFF);
-    }
-    pub fn observe_compass(&mut self) {
-        self.cbits2.insert(flags::ContextBits2::COMPASS);
-    }
-    pub fn observe_dangerous_ideas(&mut self) {
-        self.cbits2.insert(flags::ContextBits2::DANGEROUS_IDEAS);
-    }
-    pub fn observe_dear_ernest(&mut self) {
-        self.cbits2.insert(flags::ContextBits2::DEAR_ERNEST);
-    }
-    pub fn observe_defeat_indra(&mut self) {
-        self.cbits2.insert(flags::ContextBits2::DEFEAT_INDRA);
-    }
-    pub fn observe_defeat_mus_a_m20(&mut self) {
-        self.cbits2.insert(flags::ContextBits2::DEFEAT_MUS_A_M20);
-    }
-    pub fn observe_destruction_pogrom(&mut self) {
-        self.cbits2.insert(flags::ContextBits2::DESTRUCTION_POGROM);
-    }
-    pub fn observe_drone_hover(&mut self) {
-        self.cbits2.insert(flags::ContextBits2::DRONE_HOVER);
-    }
-    pub fn observe_drone_melee_damage(&mut self) {
-        self.cbits2.insert(flags::ContextBits2::DRONE_MELEE_DAMAGE);
-    }
-    pub fn observe_drone_melee_damage_2(&mut self) {
-        self.cbits2
-            .insert(flags::ContextBits2::DRONE_MELEE_DAMAGE_2);
-    }
-    pub fn observe_drone_melee_speed(&mut self) {
-        self.cbits2.insert(flags::ContextBits2::DRONE_MELEE_SPEED);
-    }
-    pub fn observe_drone_melee_speed_2(&mut self) {
-        self.cbits2.insert(flags::ContextBits2::DRONE_MELEE_SPEED_2);
-    }
-    pub fn observe_ebih_alu(&mut self) {
-        self.cbits2.insert(flags::ContextBits2::EBIH_ALU);
-    }
-    pub fn observe_ebih_interchange_block(&mut self) {
-        self.cbits2
-            .insert(flags::ContextBits2::EBIH_INTERCHANGE_BLOCK);
-    }
-    pub fn observe_ebih_interchange_gate(&mut self) {
-        self.cbits2
-            .insert(flags::ContextBits2::EBIH_INTERCHANGE_GATE);
-    }
-    pub fn observe_ebih_wasteland_door(&mut self) {
-        self.cbits2.insert(flags::ContextBits2::EBIH_WASTELAND_DOOR);
-    }
-    pub fn observe_ebih_wasteland_passage_h(&mut self) {
-        self.cbits2
-            .insert(flags::ContextBits2::EBIH_WASTELAND_PASSAGE_H);
-    }
-    pub fn observe_ebih_waterfall_block_left(&mut self) {
-        self.cbits2
-            .insert(flags::ContextBits2::EBIH_WATERFALL_BLOCK_LEFT);
-    }
-    pub fn observe_ebih_waterfall_block_right(&mut self) {
-        self.cbits2
-            .insert(flags::ContextBits2::EBIH_WATERFALL_BLOCK_RIGHT);
-    }
-    pub fn observe_ebih_waterfall_wall(&mut self) {
-        self.cbits2.insert(flags::ContextBits2::EBIH_WATERFALL_WALL);
-    }
-    pub fn observe_ebih_west_block(&mut self) {
-        self.cbits2.insert(flags::ContextBits2::EBIH_WEST_BLOCK);
-    }
-    pub fn observe_escape(&mut self) {
-        self.cbits2.insert(flags::ContextBits2::ESCAPE);
-    }
-    pub fn observe_exit_breach(&mut self) {
-        self.cbits2.insert(flags::ContextBits2::EXIT_BREACH);
-    }
-    pub fn observe_eye_ring(&mut self) {
-        self.cbits2.insert(flags::ContextBits2::EYE_RING);
-    }
-    pub fn observe_family_tragedy(&mut self) {
-        self.cbits2.insert(flags::ContextBits2::FAMILY_TRAGEDY);
-    }
-    pub fn observe_fast_travel(&mut self) {
-        self.cbits2.insert(flags::ContextBits2::FAST_TRAVEL);
-    }
-    pub fn observe_flask(&mut self, obs: IntegerObservation<i8>) {
-        self.flask = self.flask.combine(obs);
-    }
-    pub fn observe_giguna_boulder(&mut self) {
-        self.cbits2.insert(flags::ContextBits2::GIGUNA_BOULDER);
-    }
-    pub fn observe_giguna_dual_path_switch(&mut self) {
-        self.cbits2
-            .insert(flags::ContextBits2::GIGUNA_DUAL_PATH_SWITCH);
-    }
-    pub fn observe_giguna_dual_path_wall(&mut self) {
-        self.cbits2
-            .insert(flags::ContextBits2::GIGUNA_DUAL_PATH_WALL);
-    }
-    pub fn observe_giguna_gateway_block(&mut self) {
-        self.cbits2
-            .insert(flags::ContextBits2::GIGUNA_GATEWAY_BLOCK);
-    }
-    pub fn observe_giguna_gateway_gate(&mut self) {
-        self.cbits2.insert(flags::ContextBits2::GIGUNA_GATEWAY_GATE);
-    }
-    pub fn observe_giguna_gubi(&mut self) {
-        self.cbits2.insert(flags::ContextBits2::GIGUNA_GUBI);
-    }
-    pub fn observe_giguna_northeast_gate(&mut self) {
-        self.cbits2
-            .insert(flags::ContextBits2::GIGUNA_NORTHEAST_GATE);
-    }
-    pub fn observe_health_fragment(&mut self, obs: IntegerObservation<i8>) {
-        self.health_fragment = self.health_fragment.combine(obs);
-    }
-    pub fn observe_health_node(&mut self) {
-        self.cbits2.insert(flags::ContextBits2::HEALTH_NODE);
-    }
-    pub fn observe_health_upgrade(&mut self) {
-        self.cbits2.insert(flags::ContextBits2::HEALTH_UPGRADE);
-    }
-    pub fn observe_health_upgrade_2(&mut self) {
-        self.cbits2.insert(flags::ContextBits2::HEALTH_UPGRADE_2);
-    }
-    pub fn observe_health_upgrade_3(&mut self) {
-        self.cbits2.insert(flags::ContextBits2::HEALTH_UPGRADE_3);
-    }
-    pub fn observe_health_upgrade_4(&mut self) {
-        self.cbits2.insert(flags::ContextBits2::HEALTH_UPGRADE_4);
-    }
-    pub fn observe_heretics_tablet(&mut self) {
-        self.cbits2.insert(flags::ContextBits2::HERETICS_TABLET);
-    }
-    pub fn observe_hover(&mut self) {
-        self.cbits2.insert(flags::ContextBits2::HOVER);
-    }
-    pub fn observe_ice_axe(&mut self) {
-        self.cbits2.insert(flags::ContextBits2::ICE_AXE);
-    }
-    pub fn observe_infect(&mut self) {
-        self.cbits2.insert(flags::ContextBits2::INFECT);
-    }
-    pub fn observe_infect_l1(&mut self) {
-        self.cbits2.insert(flags::ContextBits2::INFECT_L1);
-    }
-    pub fn observe_infect_l2(&mut self) {
-        self.cbits2.insert(flags::ContextBits2::INFECT_L2);
-    }
-    pub fn observe_infect_l3(&mut self) {
-        self.cbits2.insert(flags::ContextBits2::INFECT_L3);
-    }
-    pub fn observe_infection_range(&mut self) {
-        self.cbits2.insert(flags::ContextBits2::INFECTION_RANGE);
-    }
-    pub fn observe_infection_range_2(&mut self) {
-        self.cbits2.insert(flags::ContextBits2::INFECTION_RANGE_2);
-    }
-    pub fn observe_infection_range_3(&mut self) {
-        self.cbits3.insert(flags::ContextBits3::INFECTION_RANGE_3);
-    }
-    pub fn observe_infection_speed(&mut self) {
-        self.cbits3.insert(flags::ContextBits3::INFECTION_SPEED);
-    }
-    pub fn observe_irikar_gudam(&mut self) {
-        self.cbits3.insert(flags::ContextBits3::IRIKAR_GUDAM);
-    }
-    pub fn observe_irikar_royal_storage_wall(&mut self) {
-        self.cbits3
-            .insert(flags::ContextBits3::IRIKAR_ROYAL_STORAGE_WALL);
-    }
-    pub fn observe_lament_for_fools(&mut self) {
-        self.cbits3.insert(flags::ContextBits3::LAMENT_FOR_FOOLS);
-    }
-    pub fn observe_ledge_grab(&mut self) {
-        self.cbits3.insert(flags::ContextBits3::LEDGE_GRAB);
-    }
-    pub fn observe_letter_from_trace(&mut self) {
-        self.cbits3.insert(flags::ContextBits3::LETTER_FROM_TRACE);
-    }
-    pub fn observe_melee_damage(&mut self) {
-        self.cbits3.insert(flags::ContextBits3::MELEE_DAMAGE);
-    }
-    pub fn observe_melee_damage_2(&mut self) {
-        self.cbits3.insert(flags::ContextBits3::MELEE_DAMAGE_2);
-    }
-    pub fn observe_melee_speed(&mut self) {
-        self.cbits3.insert(flags::ContextBits3::MELEE_SPEED);
-    }
-    pub fn observe_melee_speed_2(&mut self) {
-        self.cbits3.insert(flags::ContextBits3::MELEE_SPEED_2);
-    }
-    pub fn observe_mist_upgrade(&mut self) {
-        self.cbits3.insert(flags::ContextBits3::MIST_UPGRADE);
-    }
-    pub fn observe_nanite_mist(&mut self) {
-        self.cbits3.insert(flags::ContextBits3::NANITE_MIST);
-    }
-    pub fn observe_nano_lattice_2(&mut self) {
-        self.cbits3.insert(flags::ContextBits3::NANO_LATTICE_2);
-    }
-    pub fn observe_nano_points(&mut self) {
-        self.cbits3.insert(flags::ContextBits3::NANO_POINTS);
-    }
-    pub fn observe_nano_points_2(&mut self) {
-        self.cbits3.insert(flags::ContextBits3::NANO_POINTS_2);
-    }
-    pub fn observe_plague_of_thoughts(&mut self) {
-        self.cbits3.insert(flags::ContextBits3::PLAGUE_OF_THOUGHTS);
-    }
-    pub fn observe_power_matrix(&mut self) {
-        self.cbits3.insert(flags::ContextBits3::POWER_MATRIX);
-    }
-    pub fn observe_ranged_damage(&mut self) {
-        self.cbits3.insert(flags::ContextBits3::RANGED_DAMAGE);
-    }
-    pub fn observe_ranged_damage_2(&mut self) {
-        self.cbits3.insert(flags::ContextBits3::RANGED_DAMAGE_2);
-    }
-    pub fn observe_ranged_speed(&mut self) {
-        self.cbits3.insert(flags::ContextBits3::RANGED_SPEED);
-    }
-    pub fn observe_ranged_speed_2(&mut self) {
-        self.cbits3.insert(flags::ContextBits3::RANGED_SPEED_2);
-    }
-    pub fn observe_record_losses(&mut self) {
-        self.cbits3.insert(flags::ContextBits3::RECORD_LOSSES);
-    }
-    pub fn observe_remote_drone(&mut self) {
-        self.cbits3.insert(flags::ContextBits3::REMOTE_DRONE);
-    }
-    pub fn observe_researchers_missing(&mut self) {
-        self.cbits3.insert(flags::ContextBits3::RESEARCHERS_MISSING);
-    }
-    pub fn observe_separation(&mut self) {
-        self.cbits3.insert(flags::ContextBits3::SEPARATION);
-    }
-    pub fn observe_shockwave(&mut self) {
-        self.cbits3.insert(flags::ContextBits3::SHOCKWAVE);
-    }
-    pub fn observe_slingshot_charge(&mut self) {
-        self.cbits3.insert(flags::ContextBits3::SLINGSHOT_CHARGE);
-    }
-    pub fn observe_slingshot_hook(&mut self) {
-        self.cbits3.insert(flags::ContextBits3::SLINGSHOT_HOOK);
-    }
-    pub fn observe_slingshot_weapon(&mut self) {
-        self.cbits3.insert(flags::ContextBits3::SLINGSHOT_WEAPON);
-    }
-    pub fn observe_sniper_valley_rock_1(&mut self) {
-        self.cbits3
-            .insert(flags::ContextBits3::SNIPER_VALLEY_ROCK_1);
-    }
-    pub fn observe_sniper_valley_rock_2(&mut self) {
-        self.cbits3
-            .insert(flags::ContextBits3::SNIPER_VALLEY_ROCK_2);
-    }
-    pub fn observe_station_power(&mut self) {
-        self.cbits3.insert(flags::ContextBits3::STATION_POWER);
-    }
-    pub fn observe_storm_bomb(&mut self) {
-        self.cbits3.insert(flags::ContextBits3::STORM_BOMB);
-    }
-    pub fn observe_suspension_bridge(&mut self) {
-        self.cbits3.insert(flags::ContextBits3::SUSPENSION_BRIDGE);
-    }
-    pub fn observe_switch_36_11(&mut self) {
-        self.cbits3.insert(flags::ContextBits3::SWITCH_36_11);
-    }
-    pub fn observe_switch_40_12(&mut self) {
-        self.cbits3.insert(flags::ContextBits3::SWITCH_40_12);
-    }
-    pub fn observe_terminal_breakthrough_1(&mut self) {
-        self.cbits3
-            .insert(flags::ContextBits3::TERMINAL_BREAKTHROUGH_1);
-    }
-    pub fn observe_terminal_breakthrough_2(&mut self) {
-        self.cbits3
-            .insert(flags::ContextBits3::TERMINAL_BREAKTHROUGH_2);
-    }
-    pub fn observe_the_ideal_kiengir(&mut self) {
-        self.cbits3.insert(flags::ContextBits3::THE_IDEAL_KIENGIR);
-    }
-    pub fn observe_uhrum_annuna_corridor_block(&mut self) {
-        self.cbits3
-            .insert(flags::ContextBits3::UHRUM_ANNUNA_CORRIDOR_BLOCK);
-    }
-    pub fn observe_uhrum_waterfall_wall(&mut self) {
-        self.cbits3
-            .insert(flags::ContextBits3::UHRUM_WATERFALL_WALL);
-    }
-    pub fn observe_uhrum_waterfalls_block(&mut self) {
-        self.cbits3
-            .insert(flags::ContextBits3::UHRUM_WATERFALLS_BLOCK);
-    }
-    pub fn observe_uhrum_west_entrance_gate(&mut self) {
-        self.cbits3
-            .insert(flags::ContextBits3::UHRUM_WEST_ENTRANCE_GATE);
-    }
-    pub fn observe_uhrum_west_entrance_lower_wall(&mut self) {
-        self.cbits3
-            .insert(flags::ContextBits3::UHRUM_WEST_ENTRANCE_LOWER_WALL);
-    }
-    pub fn observe_uhrum_west_entrance_upper_wall(&mut self) {
-        self.cbits3
-            .insert(flags::ContextBits3::UHRUM_WEST_ENTRANCE_UPPER_WALL);
-    }
-    pub fn observe_under_siege(&mut self) {
-        self.cbits3.insert(flags::ContextBits3::UNDER_SIEGE);
-    }
-    pub fn observe_underwater_movement(&mut self) {
-        self.cbits3.insert(flags::ContextBits3::UNDERWATER_MOVEMENT);
-    }
-    pub fn observe_wall_climb(&mut self) {
-        self.cbits3.insert(flags::ContextBits3::WALL_CLIMB);
-    }
-    pub fn observe_water_movement(&mut self) {
-        self.cbits3.insert(flags::ContextBits3::WATER_MOVEMENT);
-    }
-    pub fn observe_visit(&mut self, loc_id: LocationId) {
+    fn observe_visit(&mut self, loc_id: LocationId) {
         match loc_id {
             LocationId::Amagi__Main_Area__Way_Off_To_The_Side__Item => {
                 self.cbits3.insert(
@@ -2774,7 +1638,689 @@ impl FullObservation {
         }
     }
 
-    pub fn update(&mut self, from: &Context, to: &Context) {
+    fn observe_on_entry(&mut self, cur: &Context, dest: SpotId, world: &World) {
+        let area = get_area(dest);
+        match area {
+            AreaId::Amagi__Grid_31_19 => {
+                if get_area(cur.position) != area {
+                    rules::observe_action_reset_old_area__newpos(cur, world, dest, self);
+                }
+            }
+            AreaId::Amagi__Liru_Room => {
+                if get_area(cur.position) != area {
+                    rules::observe_action_reset_old_area__newpos(cur, world, dest, self);
+                }
+            }
+            AreaId::Amagi__Main_Area => {
+                if get_area(cur.position) != area {
+                    rules::observe_action_reset_old_area__newpos(cur, world, dest, self);
+                }
+            }
+            AreaId::Amagi__West_Lake => {
+                if get_area(cur.position) != area {
+                    rules::observe_action_reset_old_area__newpos(cur, world, dest, self);
+                }
+            }
+            AreaId::Annuna__Apocalypse => {
+                if get_area(cur.position) != area {
+                    rules::observe_action_reset_old_area__newpos(cur, world, dest, self);
+                }
+            }
+            AreaId::Annuna__Apocalypse_Hallway => {
+                if get_area(cur.position) != area {
+                    rules::observe_action_reset_old_area__newpos(cur, world, dest, self);
+                }
+            }
+            AreaId::Annuna__Center_Save => {
+                if get_area(cur.position) != area {
+                    rules::observe_action_reset_old_area__newpos(cur, world, dest, self);
+                }
+            }
+            AreaId::Annuna__East_Bridge => {
+                if get_area(cur.position) != area {
+                    rules::observe_action_reset_old_area__newpos(cur, world, dest, self);
+                }
+            }
+            AreaId::Annuna__East_Climb => {
+                if get_area(cur.position) != area {
+                    rules::observe_action_reset_old_area__newpos(cur, world, dest, self);
+                }
+            }
+            AreaId::Annuna__East_Hideout => {
+                if get_area(cur.position) != area {
+                    rules::observe_action_reset_old_area__newpos(cur, world, dest, self);
+                }
+            }
+            AreaId::Annuna__Egg_Room => {
+                if get_area(cur.position) != area {
+                    rules::observe_action_reset_old_area__newpos(cur, world, dest, self);
+                }
+            }
+            AreaId::Annuna__Factory_Access => {
+                if get_area(cur.position) != area {
+                    rules::observe_action_reset_old_area__newpos(cur, world, dest, self);
+                }
+            }
+            AreaId::Annuna__Factory_Entrance => {
+                if get_area(cur.position) != area {
+                    rules::observe_action_reset_old_area__newpos(cur, world, dest, self);
+                }
+            }
+            AreaId::Annuna__Final_Save => {
+                if get_area(cur.position) != area {
+                    rules::observe_action_reset_old_area__newpos(cur, world, dest, self);
+                }
+            }
+            AreaId::Annuna__Lower_Hallway => {
+                if get_area(cur.position) != area {
+                    rules::observe_action_reset_old_area__newpos(cur, world, dest, self);
+                }
+            }
+            AreaId::Annuna__Mirror_Match => {
+                if get_area(cur.position) != area {
+                    rules::observe_action_reset_old_area__newpos(cur, world, dest, self);
+                }
+            }
+            AreaId::Annuna__Seals => {
+                if get_area(cur.position) != area {
+                    rules::observe_action_reset_old_area__newpos(cur, world, dest, self);
+                }
+            }
+            AreaId::Annuna__Sniper_Valley => {
+                if get_area(cur.position) != area {
+                    rules::observe_action_reset_old_area__newpos(cur, world, dest, self);
+                }
+            }
+            AreaId::Annuna__Twisty_Passages => {
+                if get_area(cur.position) != area {
+                    rules::observe_action_reset_old_area__newpos(cur, world, dest, self);
+                }
+            }
+            AreaId::Annuna__Udug_Gate => {
+                if get_area(cur.position) != area {
+                    rules::observe_action_reset_old_area__newpos(cur, world, dest, self);
+                }
+            }
+            AreaId::Annuna__Vertical_Room => {
+                if get_area(cur.position) != area {
+                    rules::observe_action_reset_old_area__newpos(cur, world, dest, self);
+                }
+            }
+            AreaId::Annuna__West_Bridge => {
+                if get_area(cur.position) != area {
+                    rules::observe_action_reset_old_area__newpos(cur, world, dest, self);
+                }
+            }
+            AreaId::Annuna__West_Climb => {
+                if get_area(cur.position) != area {
+                    rules::observe_action_reset_old_area__newpos(cur, world, dest, self);
+                }
+            }
+            AreaId::Ebih__Base_Camp => {
+                if get_area(cur.position) != area {
+                    rules::observe_action_reset_old_area__newpos(cur, world, dest, self);
+                }
+            }
+            AreaId::Ebih__Boss_Room => {
+                if get_area(cur.position) != area {
+                    rules::observe_action_reset_old_area__newpos(cur, world, dest, self);
+                }
+            }
+            AreaId::Ebih__By_Garage => {
+                if get_area(cur.position) != area {
+                    rules::observe_action_reset_old_area__newpos(cur, world, dest, self);
+                }
+            }
+            AreaId::Ebih__Drone_Room => {
+                if get_area(cur.position) != area {
+                    rules::observe_action_reset_old_area__newpos(cur, world, dest, self);
+                }
+            }
+            AreaId::Ebih__Ebih_East => {
+                if get_area(cur.position) != area {
+                    rules::observe_action_reset_old_area__newpos(cur, world, dest, self);
+                }
+            }
+            AreaId::Ebih__Ebih_West => {
+                if get_area(cur.position) != area {
+                    rules::observe_action_reset_old_area__newpos(cur, world, dest, self);
+                }
+            }
+            AreaId::Ebih__Gem_Room => {
+                if get_area(cur.position) != area {
+                    rules::observe_action_reset_old_area__newpos(cur, world, dest, self);
+                }
+            }
+            AreaId::Ebih__Grid_21_2_6 => {
+                if get_area(cur.position) != area {
+                    rules::observe_action_reset_old_area__newpos(cur, world, dest, self);
+                }
+            }
+            AreaId::Ebih__Grid_25_10_12 => {
+                if get_area(cur.position) != area {
+                    rules::observe_action_reset_old_area__newpos(cur, world, dest, self);
+                }
+            }
+            AreaId::Ebih__Grid_25_2_6 => {
+                if get_area(cur.position) != area {
+                    rules::observe_action_reset_old_area__newpos(cur, world, dest, self);
+                }
+            }
+            AreaId::Ebih__Grid_26_10_11 => {
+                if get_area(cur.position) != area {
+                    rules::observe_action_reset_old_area__newpos(cur, world, dest, self);
+                }
+            }
+            AreaId::Ebih__Observation_Tower_Room => {
+                if get_area(cur.position) != area {
+                    rules::observe_action_reset_old_area__newpos(cur, world, dest, self);
+                }
+            }
+            AreaId::Ebih__Vertical_Interchange => {
+                if get_area(cur.position) != area {
+                    rules::observe_action_reset_old_area__newpos(cur, world, dest, self);
+                }
+            }
+            AreaId::Ebih__Waterfall => {
+                if get_area(cur.position) != area {
+                    rules::observe_action_reset_old_area__newpos(cur, world, dest, self);
+                }
+            }
+            AreaId::Giguna__Antechamber => {
+                if get_area(cur.position) != area {
+                    rules::observe_action_reset_old_area__newpos(cur, world, dest, self);
+                }
+            }
+            AreaId::Giguna__Breachable_Wall => {
+                if get_area(cur.position) != area {
+                    rules::observe_action_reset_old_area__newpos(cur, world, dest, self);
+                }
+            }
+            AreaId::Giguna__Carnelian => {
+                if get_area(cur.position) != area {
+                    rules::observe_action_reset_old_area__newpos(cur, world, dest, self);
+                }
+            }
+            AreaId::Giguna__Clouds => {
+                if get_area(cur.position) != area {
+                    rules::observe_action_reset_old_area__newpos(cur, world, dest, self);
+                }
+            }
+            AreaId::Giguna__Dual_Path => {
+                if get_area(cur.position) != area {
+                    rules::observe_action_reset_old_area__newpos(cur, world, dest, self);
+                }
+            }
+            AreaId::Giguna__East_Caverns => {
+                if get_area(cur.position) != area {
+                    rules::observe_action_reset_old_area__newpos(cur, world, dest, self);
+                }
+            }
+            AreaId::Giguna__Far_Corner => {
+                if get_area(cur.position) != area {
+                    rules::observe_action_reset_old_area__newpos(cur, world, dest, self);
+                }
+            }
+            AreaId::Giguna__Gateway => {
+                if get_area(cur.position) != area {
+                    rules::observe_action_reset_old_area__newpos(cur, world, dest, self);
+                }
+            }
+            AreaId::Giguna__Giguna_Base => {
+                if get_area(cur.position) != area {
+                    rules::observe_action_reset_old_area__newpos(cur, world, dest, self);
+                }
+            }
+            AreaId::Giguna__Giguna_Northeast => {
+                if get_area(cur.position) != area {
+                    rules::observe_action_reset_old_area__newpos(cur, world, dest, self);
+                }
+            }
+            AreaId::Giguna__Gubi_Lair => {
+                if get_area(cur.position) != area {
+                    rules::observe_action_reset_old_area__newpos(cur, world, dest, self);
+                }
+            }
+            AreaId::Giguna__Hard_Rock => {
+                if get_area(cur.position) != area {
+                    rules::observe_action_reset_old_area__newpos(cur, world, dest, self);
+                }
+            }
+            AreaId::Giguna__Helipad => {
+                if get_area(cur.position) != area {
+                    rules::observe_action_reset_old_area__newpos(cur, world, dest, self);
+                }
+            }
+            AreaId::Giguna__Labyrinth => {
+                if get_area(cur.position) != area {
+                    rules::observe_action_reset_old_area__newpos(cur, world, dest, self);
+                }
+            }
+            AreaId::Giguna__Labyrinth_East => {
+                if get_area(cur.position) != area {
+                    rules::observe_action_reset_old_area__newpos(cur, world, dest, self);
+                }
+            }
+            AreaId::Giguna__Lamassu => {
+                if get_area(cur.position) != area {
+                    rules::observe_action_reset_old_area__newpos(cur, world, dest, self);
+                }
+            }
+            AreaId::Giguna__Mural => {
+                if get_area(cur.position) != area {
+                    rules::observe_action_reset_old_area__newpos(cur, world, dest, self);
+                }
+            }
+            AreaId::Giguna__Ruins_Center => {
+                if get_area(cur.position) != area {
+                    rules::observe_action_reset_old_area__newpos(cur, world, dest, self);
+                }
+            }
+            AreaId::Giguna__Ruins_East => {
+                if get_area(cur.position) != area {
+                    rules::observe_action_reset_old_area__newpos(cur, world, dest, self);
+                }
+            }
+            AreaId::Giguna__Ruins_Top => {
+                if get_area(cur.position) != area {
+                    rules::observe_action_reset_old_area__newpos(cur, world, dest, self);
+                }
+            }
+            AreaId::Giguna__Ruins_West => {
+                if get_area(cur.position) != area {
+                    rules::observe_action_reset_old_area__newpos(cur, world, dest, self);
+                }
+            }
+            AreaId::Giguna__Separator => {
+                if get_area(cur.position) != area {
+                    rules::observe_action_reset_old_area__newpos(cur, world, dest, self);
+                }
+            }
+            AreaId::Giguna__Vertical_Interchange => {
+                if get_area(cur.position) != area {
+                    rules::observe_action_reset_old_area__newpos(cur, world, dest, self);
+                }
+            }
+            AreaId::Giguna__Wasteland => {
+                if get_area(cur.position) != area {
+                    rules::observe_action_reset_old_area__newpos(cur, world, dest, self);
+                }
+            }
+            AreaId::Giguna__West_Caverns => {
+                if get_area(cur.position) != area {
+                    rules::observe_action_reset_old_area__newpos(cur, world, dest, self);
+                }
+            }
+            AreaId::Giguna__West_Tower => {
+                if get_area(cur.position) != area {
+                    rules::observe_action_reset_old_area__newpos(cur, world, dest, self);
+                }
+            }
+            AreaId::Giguna_Breach__Antechamber => {
+                if get_area(cur.position) != area {
+                    rules::observe_action_reset_old_area__newpos(cur, world, dest, self);
+                }
+            }
+            AreaId::Giguna_Breach__Ascent => {
+                if get_area(cur.position) != area {
+                    rules::observe_action_reset_old_area__newpos(cur, world, dest, self);
+                }
+            }
+            AreaId::Giguna_Breach__Below_Chimney => {
+                if get_area(cur.position) != area {
+                    rules::observe_action_reset_old_area__newpos(cur, world, dest, self);
+                }
+            }
+            AreaId::Giguna_Breach__Central => {
+                if get_area(cur.position) != area {
+                    rules::observe_action_reset_old_area__newpos(cur, world, dest, self);
+                }
+            }
+            AreaId::Giguna_Breach__Chimney => {
+                if get_area(cur.position) != area {
+                    rules::observe_action_reset_old_area__newpos(cur, world, dest, self);
+                }
+            }
+            AreaId::Giguna_Breach__Cubby => {
+                if get_area(cur.position) != area {
+                    rules::observe_action_reset_old_area__newpos(cur, world, dest, self);
+                }
+            }
+            AreaId::Giguna_Breach__Fire_Room => {
+                if get_area(cur.position) != area {
+                    rules::observe_action_reset_old_area__newpos(cur, world, dest, self);
+                }
+            }
+            AreaId::Giguna_Breach__Grid_14_10_11 => {
+                if get_area(cur.position) != area {
+                    rules::observe_action_reset_old_area__newpos(cur, world, dest, self);
+                }
+            }
+            AreaId::Giguna_Breach__Peak => {
+                if get_area(cur.position) != area {
+                    rules::observe_action_reset_old_area__newpos(cur, world, dest, self);
+                }
+            }
+            AreaId::Giguna_Breach__Pink_Clouds => {
+                if get_area(cur.position) != area {
+                    rules::observe_action_reset_old_area__newpos(cur, world, dest, self);
+                }
+            }
+            AreaId::Giguna_Breach__Robopede => {
+                if get_area(cur.position) != area {
+                    rules::observe_action_reset_old_area__newpos(cur, world, dest, self);
+                }
+            }
+            AreaId::Giguna_Breach__Slingshot => {
+                if get_area(cur.position) != area {
+                    rules::observe_action_reset_old_area__newpos(cur, world, dest, self);
+                }
+            }
+            AreaId::Giguna_Breach__SW_Save => {
+                if get_area(cur.position) != area {
+                    rules::observe_action_reset_old_area__newpos(cur, world, dest, self);
+                }
+            }
+            AreaId::Glacier__Apocalypse_Entry => {
+                if get_area(cur.position) != area {
+                    rules::observe_action_reset_old_area__newpos(cur, world, dest, self);
+                }
+            }
+            AreaId::Glacier__Boomerang_Antechamber => {
+                if get_area(cur.position) != area {
+                    rules::observe_action_reset_old_area__newpos(cur, world, dest, self);
+                }
+            }
+            AreaId::Glacier__Boomerang_Room => {
+                if get_area(cur.position) != area {
+                    rules::observe_action_reset_old_area__newpos(cur, world, dest, self);
+                }
+            }
+            AreaId::Glacier__Compass_Room => {
+                if get_area(cur.position) != area {
+                    rules::observe_action_reset_old_area__newpos(cur, world, dest, self);
+                }
+            }
+            AreaId::Glacier__Dock_Outside => {
+                if get_area(cur.position) != area {
+                    rules::observe_action_reset_old_area__newpos(cur, world, dest, self);
+                }
+            }
+            AreaId::Glacier__Grid_31_9_12 => {
+                if get_area(cur.position) != area {
+                    rules::observe_action_reset_old_area__newpos(cur, world, dest, self);
+                }
+            }
+            AreaId::Glacier__Grid_32_7_10 => {
+                if get_area(cur.position) != area {
+                    rules::observe_action_reset_old_area__newpos(cur, world, dest, self);
+                }
+            }
+            AreaId::Glacier__Grid_37_38_9 => {
+                if get_area(cur.position) != area {
+                    rules::observe_action_reset_old_area__newpos(cur, world, dest, self);
+                }
+            }
+            AreaId::Glacier__Grid_39_40_7_9 => {
+                if get_area(cur.position) != area {
+                    rules::observe_action_reset_old_area__newpos(cur, world, dest, self);
+                }
+            }
+            AreaId::Glacier__Grid_42_10 => {
+                if get_area(cur.position) != area {
+                    rules::observe_action_reset_old_area__newpos(cur, world, dest, self);
+                }
+            }
+            AreaId::Glacier__Grid_43_10_11 => {
+                if get_area(cur.position) != area {
+                    rules::observe_action_reset_old_area__newpos(cur, world, dest, self);
+                }
+            }
+            AreaId::Glacier__Lake_Main_Entrance => {
+                if get_area(cur.position) != area {
+                    rules::observe_action_reset_old_area__newpos(cur, world, dest, self);
+                }
+            }
+            AreaId::Glacier__Ledge_Grab_Room => {
+                if get_area(cur.position) != area {
+                    rules::observe_action_reset_old_area__newpos(cur, world, dest, self);
+                }
+            }
+            AreaId::Glacier__Peak => {
+                if get_area(cur.position) != area {
+                    rules::observe_action_reset_old_area__newpos(cur, world, dest, self);
+                }
+            }
+            AreaId::Glacier__Revival => {
+                if get_area(cur.position) != area {
+                    rules::observe_action_reset_old_area__newpos(cur, world, dest, self);
+                }
+            }
+            AreaId::Glacier__The_Big_Drop => {
+                if get_area(cur.position) != area {
+                    rules::observe_action_reset_old_area__newpos(cur, world, dest, self);
+                }
+            }
+            AreaId::Glacier__Vertical_Room => {
+                if get_area(cur.position) != area {
+                    rules::observe_action_reset_old_area__newpos(cur, world, dest, self);
+                }
+            }
+            AreaId::Interior__Building_Interior => {
+                if get_area(cur.position) != area {
+                    rules::observe_action_reset_old_area__newpos(cur, world, dest, self);
+                }
+            }
+            AreaId::Interior__Bunker_Interior => {
+                if get_area(cur.position) != area {
+                    rules::observe_action_reset_old_area__newpos(cur, world, dest, self);
+                }
+            }
+            AreaId::Interior__Cave_Behind_Waterfall => {
+                if get_area(cur.position) != area {
+                    rules::observe_action_reset_old_area__newpos(cur, world, dest, self);
+                }
+            }
+            AreaId::Interior__Ebih_Cave => {
+                if get_area(cur.position) != area {
+                    rules::observe_action_reset_old_area__newpos(cur, world, dest, self);
+                }
+            }
+            AreaId::Interior__Garage => {
+                if get_area(cur.position) != area {
+                    rules::observe_action_reset_old_area__newpos(cur, world, dest, self);
+                }
+            }
+            AreaId::Interior__Outpost_Interior => {
+                if get_area(cur.position) != area {
+                    rules::observe_action_reset_old_area__newpos(cur, world, dest, self);
+                }
+            }
+            AreaId::Interior__Tent_Interior => {
+                if get_area(cur.position) != area {
+                    rules::observe_action_reset_old_area__newpos(cur, world, dest, self);
+                }
+            }
+            AreaId::Irikar__Abandoned_Room => {
+                if get_area(cur.position) != area {
+                    rules::observe_action_reset_old_area__newpos(cur, world, dest, self);
+                }
+            }
+            AreaId::Irikar__Airy => {
+                if get_area(cur.position) != area {
+                    rules::observe_action_reset_old_area__newpos(cur, world, dest, self);
+                }
+            }
+            AreaId::Irikar__Basement_Pipes => {
+                if get_area(cur.position) != area {
+                    rules::observe_action_reset_old_area__newpos(cur, world, dest, self);
+                }
+            }
+            AreaId::Irikar__Basement_Portal => {
+                if get_area(cur.position) != area {
+                    rules::observe_action_reset_old_area__newpos(cur, world, dest, self);
+                }
+            }
+            AreaId::Irikar__Boss_Room => {
+                if get_area(cur.position) != area {
+                    rules::observe_action_reset_old_area__newpos(cur, world, dest, self);
+                }
+            }
+            AreaId::Irikar__East_Rooftops => {
+                if get_area(cur.position) != area {
+                    rules::observe_action_reset_old_area__newpos(cur, world, dest, self);
+                }
+            }
+            AreaId::Irikar__Empty_Foyer => {
+                if get_area(cur.position) != area {
+                    rules::observe_action_reset_old_area__newpos(cur, world, dest, self);
+                }
+            }
+            AreaId::Irikar__Hub => {
+                if get_area(cur.position) != area {
+                    rules::observe_action_reset_old_area__newpos(cur, world, dest, self);
+                }
+            }
+            AreaId::Irikar__Lamassu => {
+                if get_area(cur.position) != area {
+                    rules::observe_action_reset_old_area__newpos(cur, world, dest, self);
+                }
+            }
+            AreaId::Irikar__Midwest => {
+                if get_area(cur.position) != area {
+                    rules::observe_action_reset_old_area__newpos(cur, world, dest, self);
+                }
+            }
+            AreaId::Irikar__Sight_Room => {
+                if get_area(cur.position) != area {
+                    rules::observe_action_reset_old_area__newpos(cur, world, dest, self);
+                }
+            }
+            AreaId::Irikar_Breach__Basement_Save => {
+                if get_area(cur.position) != area {
+                    rules::observe_action_reset_old_area__newpos(cur, world, dest, self);
+                }
+            }
+            AreaId::Irikar_Breach__Exit_Corridor => {
+                if get_area(cur.position) != area {
+                    rules::observe_action_reset_old_area__newpos(cur, world, dest, self);
+                }
+            }
+            AreaId::Irikar_Breach__Flappy_Drone => {
+                if get_area(cur.position) != area {
+                    rules::observe_action_reset_old_area__newpos(cur, world, dest, self);
+                }
+            }
+            AreaId::Irikar_Breach__Four_way => {
+                if get_area(cur.position) != area {
+                    rules::observe_action_reset_old_area__newpos(cur, world, dest, self);
+                }
+            }
+            AreaId::Irikar_Breach__Gauntlet => {
+                if get_area(cur.position) != area {
+                    rules::observe_action_reset_old_area__newpos(cur, world, dest, self);
+                }
+            }
+            AreaId::Irikar_Breach__Hover_Room => {
+                if get_area(cur.position) != area {
+                    rules::observe_action_reset_old_area__newpos(cur, world, dest, self);
+                }
+            }
+            AreaId::Irikar_Breach__Neon_Corridor => {
+                if get_area(cur.position) != area {
+                    rules::observe_action_reset_old_area__newpos(cur, world, dest, self);
+                }
+            }
+            AreaId::Irikar_Breach__Sandy_Lair => {
+                if get_area(cur.position) != area {
+                    rules::observe_action_reset_old_area__newpos(cur, world, dest, self);
+                }
+            }
+            AreaId::Irikar_Breach__Save_Room => {
+                if get_area(cur.position) != area {
+                    rules::observe_action_reset_old_area__newpos(cur, world, dest, self);
+                }
+            }
+            AreaId::Irikar_Breach__Uhrum_Connector => {
+                if get_area(cur.position) != area {
+                    rules::observe_action_reset_old_area__newpos(cur, world, dest, self);
+                }
+            }
+            AreaId::Irikar_Breach__Worm_Rave => {
+                if get_area(cur.position) != area {
+                    rules::observe_action_reset_old_area__newpos(cur, world, dest, self);
+                }
+            }
+            AreaId::Menu__Breach_Map => {
+                if get_area(cur.position) != area {
+                    rules::observe_action_save_last(cur, world, dest, self);
+                }
+            }
+            AreaId::Menu__Kiengir_Map => {
+                if get_area(cur.position) != area {
+                    rules::observe_action_save_last(cur, world, dest, self);
+                }
+            }
+            AreaId::Menu__Warp_Only => {
+                if get_area(cur.position) != area {
+                    rules::observe_action_save_last(cur, world, dest, self);
+                }
+            }
+            AreaId::Uhrum__Annuna_Corridor => {
+                if get_area(cur.position) != area {
+                    rules::observe_action_reset_old_area__newpos(cur, world, dest, self);
+                }
+            }
+            AreaId::Uhrum__Artillery_Practice => {
+                if get_area(cur.position) != area {
+                    rules::observe_action_reset_old_area__newpos(cur, world, dest, self);
+                }
+            }
+            AreaId::Uhrum__East_Lake => {
+                if get_area(cur.position) != area {
+                    rules::observe_action_reset_old_area__newpos(cur, world, dest, self);
+                }
+            }
+            AreaId::Uhrum__Glitchy_Corridor => {
+                if get_area(cur.position) != area {
+                    rules::observe_action_reset_old_area__newpos(cur, world, dest, self);
+                }
+            }
+            AreaId::Uhrum__Save_Room => {
+                if get_area(cur.position) != area {
+                    rules::observe_action_reset_old_area__newpos(cur, world, dest, self);
+                }
+            }
+            AreaId::Uhrum__Siege_Corridor => {
+                if get_area(cur.position) != area {
+                    rules::observe_action_reset_old_area__newpos(cur, world, dest, self);
+                }
+            }
+            AreaId::Uhrum__Tulip_Tower => {
+                if get_area(cur.position) != area {
+                    rules::observe_action_reset_old_area__newpos(cur, world, dest, self);
+                }
+            }
+            AreaId::Uhrum__Waterfalls => {
+                if get_area(cur.position) != area {
+                    rules::observe_action_reset_old_area__newpos(cur, world, dest, self);
+                }
+            }
+            AreaId::Uhrum__West_Entrance => {
+                if get_area(cur.position) != area {
+                    rules::observe_action_reset_old_area__newpos(cur, world, dest, self);
+                }
+            }
+            _ => (),
+        }
+        if cur.position != dest {
+            match dest {
+                _ => (),
+            }
+        }
+    }
+
+    fn update(&mut self, from: &Context, to: &Context) {
         if from.energy != to.energy {
             self.energy = self.energy.shift(to.energy - from.energy);
         }
@@ -2792,6 +2338,1158 @@ impl FullObservation {
                 .health_fragment
                 .shift(to.health_fragment - from.health_fragment);
         }
+    }
+
+    fn to_vec(&self, ctx: &Context) -> Vec<OneObservation> {
+        let mut vec = Vec::with_capacity(self.fields_observed());
+        if self.position {
+            vec.push(OneObservation::Position(ctx.position));
+        }
+        match self.energy {
+            IntegerObservation::Unknown => (),
+            IntegerObservation::Exact => vec.push(OneObservation::EnergyExact(ctx.energy)),
+            IntegerObservation::Eq(i) => vec.push(OneObservation::EnergyEq(i, ctx.energy == i)),
+            IntegerObservation::Ge(i) => vec.push(OneObservation::EnergyGe(i, ctx.energy >= i)),
+            IntegerObservation::Le(i) => vec.push(OneObservation::EnergyLe(i, ctx.energy <= i)),
+            IntegerObservation::Range(lo, hi) => vec.push(OneObservation::EnergyRange(
+                lo,
+                hi,
+                ctx.energy >= lo && ctx.energy <= hi,
+            )),
+        }
+        match self.flasks {
+            IntegerObservation::Unknown => (),
+            IntegerObservation::Exact => vec.push(OneObservation::FlasksExact(ctx.flasks)),
+            IntegerObservation::Eq(i) => vec.push(OneObservation::FlasksEq(i, ctx.flasks == i)),
+            IntegerObservation::Ge(i) => vec.push(OneObservation::FlasksGe(i, ctx.flasks >= i)),
+            IntegerObservation::Le(i) => vec.push(OneObservation::FlasksLe(i, ctx.flasks <= i)),
+            IntegerObservation::Range(lo, hi) => vec.push(OneObservation::FlasksRange(
+                lo,
+                hi,
+                ctx.flasks >= lo && ctx.flasks <= hi,
+            )),
+        }
+        match self.refills {
+            IntegerObservation::Unknown => (),
+            IntegerObservation::Exact => vec.push(OneObservation::RefillsExact(ctx.refills)),
+            IntegerObservation::Eq(i) => vec.push(OneObservation::RefillsEq(i, ctx.refills == i)),
+            IntegerObservation::Ge(i) => vec.push(OneObservation::RefillsGe(i, ctx.refills >= i)),
+            IntegerObservation::Le(i) => vec.push(OneObservation::RefillsLe(i, ctx.refills <= i)),
+            IntegerObservation::Range(lo, hi) => vec.push(OneObservation::RefillsRange(
+                lo,
+                hi,
+                ctx.refills >= lo && ctx.refills <= hi,
+            )),
+        }
+        if self.mode {
+            vec.push(OneObservation::Mode(ctx.mode));
+        }
+        if self.save {
+            vec.push(OneObservation::Save(ctx.save));
+        }
+        if self.breach_save {
+            vec.push(OneObservation::BreachSave(ctx.breach_save));
+        }
+        if self.indra {
+            vec.push(OneObservation::Indra(ctx.indra));
+        }
+        if self.last {
+            vec.push(OneObservation::Last(ctx.last));
+        }
+        if self.prev_area {
+            vec.push(OneObservation::PrevArea(ctx.prev_area));
+        }
+        match self.flask {
+            IntegerObservation::Unknown => (),
+            IntegerObservation::Exact => vec.push(OneObservation::FlaskExact(ctx.flask)),
+            IntegerObservation::Eq(i) => vec.push(OneObservation::FlaskEq(i, ctx.flask == i)),
+            IntegerObservation::Ge(i) => vec.push(OneObservation::FlaskGe(i, ctx.flask >= i)),
+            IntegerObservation::Le(i) => vec.push(OneObservation::FlaskLe(i, ctx.flask <= i)),
+            IntegerObservation::Range(lo, hi) => vec.push(OneObservation::FlaskRange(
+                lo,
+                hi,
+                ctx.flask >= lo && ctx.flask <= hi,
+            )),
+        }
+        match self.health_fragment {
+            IntegerObservation::Unknown => (),
+            IntegerObservation::Exact => {
+                vec.push(OneObservation::HealthFragmentExact(ctx.health_fragment))
+            }
+            IntegerObservation::Eq(i) => vec.push(OneObservation::HealthFragmentEq(
+                i,
+                ctx.health_fragment == i,
+            )),
+            IntegerObservation::Ge(i) => vec.push(OneObservation::HealthFragmentGe(
+                i,
+                ctx.health_fragment >= i,
+            )),
+            IntegerObservation::Le(i) => vec.push(OneObservation::HealthFragmentLe(
+                i,
+                ctx.health_fragment <= i,
+            )),
+            IntegerObservation::Range(lo, hi) => vec.push(OneObservation::HealthFragmentRange(
+                lo,
+                hi,
+                ctx.health_fragment >= lo && ctx.health_fragment <= hi,
+            )),
+        }
+        if let Some(mask) = self.cbits1 {
+            vec.push(OneObservation::CBits1 {
+                mask,
+                result: mask & ctx.cbits1,
+            });
+        }
+        if let Some(mask) = self.cbits2 {
+            vec.push(OneObservation::CBits2 {
+                mask,
+                result: mask & ctx.cbits2,
+            });
+        }
+        if let Some(mask) = self.cbits3 {
+            vec.push(OneObservation::CBits3 {
+                mask,
+                result: mask & ctx.cbits3,
+            });
+        }
+        if let Some(mask) = self.cbits4 {
+            vec.push(OneObservation::CBits4 {
+                mask,
+                result: mask & ctx.cbits4,
+            });
+        }
+        if let Some(mask) = self.cbits5 {
+            vec.push(OneObservation::CBits5 {
+                mask,
+                result: mask & ctx.cbits5,
+            });
+        }
+        if let Some(mask) = self.cbits6 {
+            vec.push(OneObservation::CBits6 {
+                mask,
+                result: mask & ctx.cbits6,
+            });
+        }
+        if let Some(mask) = self.cbits7 {
+            vec.push(OneObservation::CBits7 {
+                mask,
+                result: mask & ctx.cbits7,
+            });
+        }
+        if let Some(mask) = self.cbits8 {
+            vec.push(OneObservation::CBits8 {
+                mask,
+                result: mask & ctx.cbits8,
+            });
+        }
+        if let Some(mask) = self.cbits9 {
+            vec.push(OneObservation::CBits9 {
+                mask,
+                result: mask & ctx.cbits9,
+            });
+        }
+        if let Some(mask) = self.cbits10 {
+            vec.push(OneObservation::CBits10 {
+                mask,
+                result: mask & ctx.cbits10,
+            });
+        }
+        if let Some(mask) = self.cbits11 {
+            vec.push(OneObservation::CBits11 {
+                mask,
+                result: mask & ctx.cbits11,
+            });
+        }
+        vec
+    }
+}
+
+impl FullObservation {
+    fn fields_observed(&self) -> usize {
+        let mut fields = 0;
+        if self.position {
+            fields += 1;
+        }
+        if self.energy != IntegerObservation::Unknown {
+            fields += 1;
+        }
+        if self.flasks != IntegerObservation::Unknown {
+            fields += 1;
+        }
+        if self.refills != IntegerObservation::Unknown {
+            fields += 1;
+        }
+        if self.mode {
+            fields += 1;
+        }
+        if self.save {
+            fields += 1;
+        }
+        if self.breach_save {
+            fields += 1;
+        }
+        if self.indra {
+            fields += 1;
+        }
+        if self.last {
+            fields += 1;
+        }
+        if self.prev_area {
+            fields += 1;
+        }
+        if self.flask != IntegerObservation::Unknown {
+            fields += 1;
+        }
+        if self.health_fragment != IntegerObservation::Unknown {
+            fields += 1;
+        }
+        if self.cbits1.is_some() {
+            fields += 1;
+        }
+        if self.cbits2.is_some() {
+            fields += 1;
+        }
+        if self.cbits3.is_some() {
+            fields += 1;
+        }
+        if self.cbits4.is_some() {
+            fields += 1;
+        }
+        if self.cbits5.is_some() {
+            fields += 1;
+        }
+        if self.cbits6.is_some() {
+            fields += 1;
+        }
+        if self.cbits7.is_some() {
+            fields += 1;
+        }
+        if self.cbits8.is_some() {
+            fields += 1;
+        }
+        if self.cbits9.is_some() {
+            fields += 1;
+        }
+        if self.cbits10.is_some() {
+            fields += 1;
+        }
+        if self.cbits11.is_some() {
+            fields += 1;
+        }
+        fields
+    }
+
+    pub fn apply(&mut self, obs: OneObservation) {
+        match obs {
+            OneObservation::Position(v) => {
+                self.position = true;
+            }
+            OneObservation::EnergyExact(v) => {
+                self.energy = IntegerObservation::Exact;
+            }
+            OneObservation::EnergyEq(v, res) => {
+                if res {
+                    self.energy = self.energy.combine(IntegerObservation::Eq(v));
+                } else {
+                    self.energy = IntegerObservation::Exact;
+                }
+            }
+            OneObservation::EnergyGe(lo, res) => {
+                self.energy = self.energy.combine(if res {
+                    IntegerObservation::Ge(lo)
+                } else {
+                    IntegerObservation::Le(lo - 1)
+                });
+            }
+            OneObservation::EnergyLe(hi, res) => {
+                self.energy = self.energy.combine(if res {
+                    IntegerObservation::Le(hi)
+                } else {
+                    IntegerObservation::Ge(hi + 1)
+                });
+            }
+            OneObservation::EnergyRange(lo, hi, res) => {
+                if res {
+                    self.energy = self.energy.combine(IntegerObservation::Range(lo, hi));
+                } else {
+                    self.energy = IntegerObservation::Exact;
+                }
+            }
+            OneObservation::FlasksExact(v) => {
+                self.flasks = IntegerObservation::Exact;
+            }
+            OneObservation::FlasksEq(v, res) => {
+                if res {
+                    self.flasks = self.flasks.combine(IntegerObservation::Eq(v));
+                } else {
+                    self.flasks = IntegerObservation::Exact;
+                }
+            }
+            OneObservation::FlasksGe(lo, res) => {
+                self.flasks = self.flasks.combine(if res {
+                    IntegerObservation::Ge(lo)
+                } else {
+                    IntegerObservation::Le(lo - 1)
+                });
+            }
+            OneObservation::FlasksLe(hi, res) => {
+                self.flasks = self.flasks.combine(if res {
+                    IntegerObservation::Le(hi)
+                } else {
+                    IntegerObservation::Ge(hi + 1)
+                });
+            }
+            OneObservation::FlasksRange(lo, hi, res) => {
+                if res {
+                    self.flasks = self.flasks.combine(IntegerObservation::Range(lo, hi));
+                } else {
+                    self.flasks = IntegerObservation::Exact;
+                }
+            }
+            OneObservation::RefillsExact(v) => {
+                self.refills = IntegerObservation::Exact;
+            }
+            OneObservation::RefillsEq(v, res) => {
+                if res {
+                    self.refills = self.refills.combine(IntegerObservation::Eq(v));
+                } else {
+                    self.refills = IntegerObservation::Exact;
+                }
+            }
+            OneObservation::RefillsGe(lo, res) => {
+                self.refills = self.refills.combine(if res {
+                    IntegerObservation::Ge(lo)
+                } else {
+                    IntegerObservation::Le(lo - 1)
+                });
+            }
+            OneObservation::RefillsLe(hi, res) => {
+                self.refills = self.refills.combine(if res {
+                    IntegerObservation::Le(hi)
+                } else {
+                    IntegerObservation::Ge(hi + 1)
+                });
+            }
+            OneObservation::RefillsRange(lo, hi, res) => {
+                if res {
+                    self.refills = self.refills.combine(IntegerObservation::Range(lo, hi));
+                } else {
+                    self.refills = IntegerObservation::Exact;
+                }
+            }
+            OneObservation::Mode(v) => {
+                self.mode = true;
+            }
+            OneObservation::Save(v) => {
+                self.save = true;
+            }
+            OneObservation::BreachSave(v) => {
+                self.breach_save = true;
+            }
+            OneObservation::Indra(v) => {
+                self.indra = true;
+            }
+            OneObservation::Last(v) => {
+                self.last = true;
+            }
+            OneObservation::PrevArea(v) => {
+                self.prev_area = true;
+            }
+            OneObservation::FlaskExact(v) => {
+                self.flask = IntegerObservation::Exact;
+            }
+            OneObservation::FlaskEq(v, res) => {
+                if res {
+                    self.flask = self.flask.combine(IntegerObservation::Eq(v));
+                } else {
+                    self.flask = IntegerObservation::Exact;
+                }
+            }
+            OneObservation::FlaskGe(lo, res) => {
+                self.flask = self.flask.combine(if res {
+                    IntegerObservation::Ge(lo)
+                } else {
+                    IntegerObservation::Le(lo - 1)
+                });
+            }
+            OneObservation::FlaskLe(hi, res) => {
+                self.flask = self.flask.combine(if res {
+                    IntegerObservation::Le(hi)
+                } else {
+                    IntegerObservation::Ge(hi + 1)
+                });
+            }
+            OneObservation::FlaskRange(lo, hi, res) => {
+                if res {
+                    self.flask = self.flask.combine(IntegerObservation::Range(lo, hi));
+                } else {
+                    self.flask = IntegerObservation::Exact;
+                }
+            }
+            OneObservation::HealthFragmentExact(v) => {
+                self.health_fragment = IntegerObservation::Exact;
+            }
+            OneObservation::HealthFragmentEq(v, res) => {
+                if res {
+                    self.health_fragment = self.health_fragment.combine(IntegerObservation::Eq(v));
+                } else {
+                    self.health_fragment = IntegerObservation::Exact;
+                }
+            }
+            OneObservation::HealthFragmentGe(lo, res) => {
+                self.health_fragment = self.health_fragment.combine(if res {
+                    IntegerObservation::Ge(lo)
+                } else {
+                    IntegerObservation::Le(lo - 1)
+                });
+            }
+            OneObservation::HealthFragmentLe(hi, res) => {
+                self.health_fragment = self.health_fragment.combine(if res {
+                    IntegerObservation::Le(hi)
+                } else {
+                    IntegerObservation::Ge(hi + 1)
+                });
+            }
+            OneObservation::HealthFragmentRange(lo, hi, res) => {
+                if res {
+                    self.health_fragment = self
+                        .health_fragment
+                        .combine(IntegerObservation::Range(lo, hi));
+                } else {
+                    self.health_fragment = IntegerObservation::Exact;
+                }
+            }
+            OneObservation::CBits1 { mask, .. } => {
+                if let Some(old_mask) = self.cbits1 {
+                    self.cbits1 = Some(old_mask | mask);
+                } else {
+                    self.cbits1 = Some(mask);
+                }
+            }
+            OneObservation::CBits2 { mask, .. } => {
+                if let Some(old_mask) = self.cbits2 {
+                    self.cbits2 = Some(old_mask | mask);
+                } else {
+                    self.cbits2 = Some(mask);
+                }
+            }
+            OneObservation::CBits3 { mask, .. } => {
+                if let Some(old_mask) = self.cbits3 {
+                    self.cbits3 = Some(old_mask | mask);
+                } else {
+                    self.cbits3 = Some(mask);
+                }
+            }
+            OneObservation::CBits4 { mask, .. } => {
+                if let Some(old_mask) = self.cbits4 {
+                    self.cbits4 = Some(old_mask | mask);
+                } else {
+                    self.cbits4 = Some(mask);
+                }
+            }
+            OneObservation::CBits5 { mask, .. } => {
+                if let Some(old_mask) = self.cbits5 {
+                    self.cbits5 = Some(old_mask | mask);
+                } else {
+                    self.cbits5 = Some(mask);
+                }
+            }
+            OneObservation::CBits6 { mask, .. } => {
+                if let Some(old_mask) = self.cbits6 {
+                    self.cbits6 = Some(old_mask | mask);
+                } else {
+                    self.cbits6 = Some(mask);
+                }
+            }
+            OneObservation::CBits7 { mask, .. } => {
+                if let Some(old_mask) = self.cbits7 {
+                    self.cbits7 = Some(old_mask | mask);
+                } else {
+                    self.cbits7 = Some(mask);
+                }
+            }
+            OneObservation::CBits8 { mask, .. } => {
+                if let Some(old_mask) = self.cbits8 {
+                    self.cbits8 = Some(old_mask | mask);
+                } else {
+                    self.cbits8 = Some(mask);
+                }
+            }
+            OneObservation::CBits9 { mask, .. } => {
+                if let Some(old_mask) = self.cbits9 {
+                    self.cbits9 = Some(old_mask | mask);
+                } else {
+                    self.cbits9 = Some(mask);
+                }
+            }
+            OneObservation::CBits10 { mask, .. } => {
+                if let Some(old_mask) = self.cbits10 {
+                    self.cbits10 = Some(old_mask | mask);
+                } else {
+                    self.cbits10 = Some(mask);
+                }
+            }
+            OneObservation::CBits11 { mask, .. } => {
+                if let Some(old_mask) = self.cbits11 {
+                    self.cbits11 = Some(old_mask | mask);
+                } else {
+                    self.cbits11 = Some(mask);
+                }
+            }
+        }
+    }
+
+    pub fn observe_position(&mut self) {
+        self.position = true;
+    }
+    pub fn observe_energy(&mut self, obs: IntegerObservation<i16>) {
+        self.energy = self.energy.combine(obs);
+    }
+    pub fn observe_flasks(&mut self, obs: IntegerObservation<i8>) {
+        self.flasks = self.flasks.combine(obs);
+    }
+    pub fn observe_refills(&mut self, obs: IntegerObservation<i8>) {
+        self.refills = self.refills.combine(obs);
+    }
+    pub fn observe_mode(&mut self) {
+        self.mode = true;
+    }
+    pub fn observe_save(&mut self) {
+        self.save = true;
+    }
+    pub fn observe_breach_save(&mut self) {
+        self.breach_save = true;
+    }
+    pub fn observe_indra(&mut self) {
+        self.indra = true;
+    }
+    pub fn observe_last(&mut self) {
+        self.last = true;
+    }
+    pub fn observe_prev_area(&mut self) {
+        self.prev_area = true;
+    }
+    pub fn observe_map__amagi__main_area__save(&mut self) {
+        self.cbits1
+            .insert(flags::ContextBits1::MAP__AMAGI__MAIN_AREA__SAVE);
+    }
+    pub fn observe_map__amagi__west_lake__urn(&mut self) {
+        self.cbits1
+            .insert(flags::ContextBits1::MAP__AMAGI__WEST_LAKE__URN);
+    }
+    pub fn observe_map__annuna__mirror_match__save(&mut self) {
+        self.cbits1
+            .insert(flags::ContextBits1::MAP__ANNUNA__MIRROR_MATCH__SAVE);
+    }
+    pub fn observe_map__annuna__west_bridge__save(&mut self) {
+        self.cbits1
+            .insert(flags::ContextBits1::MAP__ANNUNA__WEST_BRIDGE__SAVE);
+    }
+    pub fn observe_map__annuna__vertical_room__save(&mut self) {
+        self.cbits1
+            .insert(flags::ContextBits1::MAP__ANNUNA__VERTICAL_ROOM__SAVE);
+    }
+    pub fn observe_map__annuna__factory_entrance__save(&mut self) {
+        self.cbits1
+            .insert(flags::ContextBits1::MAP__ANNUNA__FACTORY_ENTRANCE__SAVE);
+    }
+    pub fn observe_map__annuna__center_save__save(&mut self) {
+        self.cbits1
+            .insert(flags::ContextBits1::MAP__ANNUNA__CENTER_SAVE__SAVE);
+    }
+    pub fn observe_map__annuna__final_save__save(&mut self) {
+        self.cbits1
+            .insert(flags::ContextBits1::MAP__ANNUNA__FINAL_SAVE__SAVE);
+    }
+    pub fn observe_map__ebih__base_camp__save(&mut self) {
+        self.cbits1
+            .insert(flags::ContextBits1::MAP__EBIH__BASE_CAMP__SAVE);
+    }
+    pub fn observe_map__ebih__waterfall__axe(&mut self) {
+        self.cbits1
+            .insert(flags::ContextBits1::MAP__EBIH__WATERFALL__AXE);
+    }
+    pub fn observe_map__ebih__ebih_west__mid_save(&mut self) {
+        self.cbits1
+            .insert(flags::ContextBits1::MAP__EBIH__EBIH_WEST__MID_SAVE);
+    }
+    pub fn observe_map__ebih__ebih_west__upper_save(&mut self) {
+        self.cbits1
+            .insert(flags::ContextBits1::MAP__EBIH__EBIH_WEST__UPPER_SAVE);
+    }
+    pub fn observe_map__ebih__ebih_west__lower_save(&mut self) {
+        self.cbits1
+            .insert(flags::ContextBits1::MAP__EBIH__EBIH_WEST__LOWER_SAVE);
+    }
+    pub fn observe_map__ebih__drone_room__urn(&mut self) {
+        self.cbits1
+            .insert(flags::ContextBits1::MAP__EBIH__DRONE_ROOM__URN);
+    }
+    pub fn observe_map__giguna_breach__peak__save(&mut self) {
+        self.cbits1
+            .insert(flags::ContextBits1::MAP__GIGUNA_BREACH__PEAK__SAVE);
+    }
+    pub fn observe_map__giguna_breach__sw_save__save(&mut self) {
+        self.cbits1
+            .insert(flags::ContextBits1::MAP__GIGUNA_BREACH__SW_SAVE__SAVE);
+    }
+    pub fn observe_map__giguna__giguna_northeast__save(&mut self) {
+        self.cbits1
+            .insert(flags::ContextBits1::MAP__GIGUNA__GIGUNA_NORTHEAST__SAVE);
+    }
+    pub fn observe_map__giguna__giguna_base__save(&mut self) {
+        self.cbits1
+            .insert(flags::ContextBits1::MAP__GIGUNA__GIGUNA_BASE__SAVE);
+    }
+    pub fn observe_map__giguna__ruins_west__save(&mut self) {
+        self.cbits1
+            .insert(flags::ContextBits1::MAP__GIGUNA__RUINS_WEST__SAVE);
+    }
+    pub fn observe_map__giguna__ruins_top__save(&mut self) {
+        self.cbits1
+            .insert(flags::ContextBits1::MAP__GIGUNA__RUINS_TOP__SAVE);
+    }
+    pub fn observe_map__glacier__revival__save(&mut self) {
+        self.cbits1
+            .insert(flags::ContextBits1::MAP__GLACIER__REVIVAL__SAVE);
+    }
+    pub fn observe_map__irikar_breach__save_room__save(&mut self) {
+        self.cbits1
+            .insert(flags::ContextBits1::MAP__IRIKAR_BREACH__SAVE_ROOM__SAVE);
+    }
+    pub fn observe_map__irikar_breach__gauntlet__save(&mut self) {
+        self.cbits1
+            .insert(flags::ContextBits1::MAP__IRIKAR_BREACH__GAUNTLET__SAVE);
+    }
+    pub fn observe_map__irikar_breach__basement_save__save(&mut self) {
+        self.cbits1
+            .insert(flags::ContextBits1::MAP__IRIKAR_BREACH__BASEMENT_SAVE__SAVE);
+    }
+    pub fn observe_map__irikar__hub__save(&mut self) {
+        self.cbits1
+            .insert(flags::ContextBits1::MAP__IRIKAR__HUB__SAVE);
+    }
+    pub fn observe_map__irikar__sight_room__urn(&mut self) {
+        self.cbits1
+            .insert(flags::ContextBits1::MAP__IRIKAR__SIGHT_ROOM__URN);
+    }
+    pub fn observe_map__uhrum__west_entrance__save(&mut self) {
+        self.cbits1
+            .insert(flags::ContextBits1::MAP__UHRUM__WEST_ENTRANCE__SAVE);
+    }
+    pub fn observe_map__uhrum__save_room__save(&mut self) {
+        self.cbits1
+            .insert(flags::ContextBits1::MAP__UHRUM__SAVE_ROOM__SAVE);
+    }
+    pub fn observe_map__uhrum__annuna_corridor__save(&mut self) {
+        self.cbits1
+            .insert(flags::ContextBits1::MAP__UHRUM__ANNUNA_CORRIDOR__SAVE);
+    }
+    pub fn observe_map__uhrum__annuna_corridor__urn(&mut self) {
+        self.cbits1
+            .insert(flags::ContextBits1::MAP__UHRUM__ANNUNA_CORRIDOR__URN);
+    }
+    pub fn observe_amagi__main_area__ctx__combo(&mut self) {
+        self.cbits1
+            .insert(flags::ContextBits1::AMAGI__MAIN_AREA__CTX__COMBO);
+    }
+    pub fn observe_annuna__west_bridge__ctx__doors_opened(&mut self) {
+        self.cbits1
+            .insert(flags::ContextBits1::ANNUNA__WEST_BRIDGE__CTX__DOORS_OPENED);
+    }
+    pub fn observe_annuna__east_bridge__ctx__combo(&mut self) {
+        self.cbits1
+            .insert(flags::ContextBits1::ANNUNA__EAST_BRIDGE__CTX__COMBO);
+    }
+    pub fn observe_annuna__west_climb__ctx__door_opened(&mut self) {
+        self.cbits1
+            .insert(flags::ContextBits1::ANNUNA__WEST_CLIMB__CTX__DOOR_OPENED);
+    }
+    pub fn observe_ebih__base_camp__ctx__left_platform_moved(&mut self) {
+        self.cbits1
+            .insert(flags::ContextBits1::EBIH__BASE_CAMP__CTX__LEFT_PLATFORM_MOVED);
+    }
+    pub fn observe_ebih__grid_25_10_12__ctx__door_open(&mut self) {
+        self.cbits1
+            .insert(flags::ContextBits1::EBIH__GRID_25_10_12__CTX__DOOR_OPEN);
+    }
+    pub fn observe_ebih__waterfall__ctx__west_door_open(&mut self) {
+        self.cbits1
+            .insert(flags::ContextBits1::EBIH__WATERFALL__CTX__WEST_DOOR_OPEN);
+    }
+    pub fn observe_ebih__ebih_west__ctx__door_open(&mut self) {
+        self.cbits1
+            .insert(flags::ContextBits1::EBIH__EBIH_WEST__CTX__DOOR_OPEN);
+    }
+    pub fn observe_ebih__ebih_east__ctx__platform1_moved(&mut self) {
+        self.cbits1
+            .insert(flags::ContextBits1::EBIH__EBIH_EAST__CTX__PLATFORM1_MOVED);
+    }
+    pub fn observe_ebih__ebih_east__ctx__platform2_moved(&mut self) {
+        self.cbits1
+            .insert(flags::ContextBits1::EBIH__EBIH_EAST__CTX__PLATFORM2_MOVED);
+    }
+    pub fn observe_ebih__drone_room__ctx__platform_moved(&mut self) {
+        self.cbits1
+            .insert(flags::ContextBits1::EBIH__DRONE_ROOM__CTX__PLATFORM_MOVED);
+    }
+    pub fn observe_ebih__vertical_interchange__ctx__door_open(&mut self) {
+        self.cbits1
+            .insert(flags::ContextBits1::EBIH__VERTICAL_INTERCHANGE__CTX__DOOR_OPEN);
+    }
+    pub fn observe_giguna_breach__sw_save__ctx__door_opened(&mut self) {
+        self.cbits1
+            .insert(flags::ContextBits1::GIGUNA_BREACH__SW_SAVE__CTX__DOOR_OPENED);
+    }
+    pub fn observe_giguna__giguna_northeast__ctx__door_opened(&mut self) {
+        self.cbits1
+            .insert(flags::ContextBits1::GIGUNA__GIGUNA_NORTHEAST__CTX__DOOR_OPENED);
+    }
+    pub fn observe_giguna__carnelian__ctx__door_opened(&mut self) {
+        self.cbits1
+            .insert(flags::ContextBits1::GIGUNA__CARNELIAN__CTX__DOOR_OPENED);
+    }
+    pub fn observe_giguna__carnelian__ctx__upper_susar(&mut self) {
+        self.cbits1
+            .insert(flags::ContextBits1::GIGUNA__CARNELIAN__CTX__UPPER_SUSAR);
+    }
+    pub fn observe_giguna__carnelian__ctx__lower_susar(&mut self) {
+        self.cbits1
+            .insert(flags::ContextBits1::GIGUNA__CARNELIAN__CTX__LOWER_SUSAR);
+    }
+    pub fn observe_giguna__west_caverns__ctx__east_susar(&mut self) {
+        self.cbits1
+            .insert(flags::ContextBits1::GIGUNA__WEST_CAVERNS__CTX__EAST_SUSAR);
+    }
+    pub fn observe_giguna__giguna_base__ctx__door_open(&mut self) {
+        self.cbits1
+            .insert(flags::ContextBits1::GIGUNA__GIGUNA_BASE__CTX__DOOR_OPEN);
+    }
+    pub fn observe_giguna__ruins_west__ctx__kishib_handled(&mut self) {
+        self.cbits1
+            .insert(flags::ContextBits1::GIGUNA__RUINS_WEST__CTX__KISHIB_HANDLED);
+    }
+    pub fn observe_giguna__ruins_top__ctx__doors_open(&mut self) {
+        self.cbits1
+            .insert(flags::ContextBits1::GIGUNA__RUINS_TOP__CTX__DOORS_OPEN);
+    }
+    pub fn observe_giguna__clouds__ctx__platform_and_portal(&mut self) {
+        self.cbits1
+            .insert(flags::ContextBits1::GIGUNA__CLOUDS__CTX__PLATFORM_AND_PORTAL);
+    }
+    pub fn observe_giguna__east_caverns__ctx__door_opened(&mut self) {
+        self.cbits1
+            .insert(flags::ContextBits1::GIGUNA__EAST_CAVERNS__CTX__DOOR_OPENED);
+    }
+    pub fn observe_giguna__east_caverns__ctx__combo_entered(&mut self) {
+        self.cbits1
+            .insert(flags::ContextBits1::GIGUNA__EAST_CAVERNS__CTX__COMBO_ENTERED);
+    }
+    pub fn observe_giguna__east_caverns__ctx__upper_susar(&mut self) {
+        self.cbits1
+            .insert(flags::ContextBits1::GIGUNA__EAST_CAVERNS__CTX__UPPER_SUSAR);
+    }
+    pub fn observe_giguna__east_caverns__ctx__mid_susar(&mut self) {
+        self.cbits1
+            .insert(flags::ContextBits1::GIGUNA__EAST_CAVERNS__CTX__MID_SUSAR);
+    }
+    pub fn observe_giguna__east_caverns__ctx__lower_susar(&mut self) {
+        self.cbits1
+            .insert(flags::ContextBits1::GIGUNA__EAST_CAVERNS__CTX__LOWER_SUSAR);
+    }
+    pub fn observe_giguna__gateway__ctx__door_opened(&mut self) {
+        self.cbits1
+            .insert(flags::ContextBits1::GIGUNA__GATEWAY__CTX__DOOR_OPENED);
+    }
+    pub fn observe_irikar__basement_portal__ctx__platform_moved(&mut self) {
+        self.cbits1
+            .insert(flags::ContextBits1::IRIKAR__BASEMENT_PORTAL__CTX__PLATFORM_MOVED);
+    }
+    pub fn observe_amagi_dragon_eye_passage(&mut self) {
+        self.cbits1
+            .insert(flags::ContextBits1::AMAGI_DRAGON_EYE_PASSAGE);
+    }
+    pub fn observe_amagi_stronghold_boulder_1(&mut self) {
+        self.cbits1
+            .insert(flags::ContextBits1::AMAGI_STRONGHOLD_BOULDER_1);
+    }
+    pub fn observe_amagi_stronghold_boulder_2(&mut self) {
+        self.cbits2
+            .insert(flags::ContextBits2::AMAGI_STRONGHOLD_BOULDER_2);
+    }
+    pub fn observe_amagi_stronghold_wall_1(&mut self) {
+        self.cbits2
+            .insert(flags::ContextBits2::AMAGI_STRONGHOLD_WALL_1);
+    }
+    pub fn observe_amagi_stronghold_wall_2(&mut self) {
+        self.cbits2
+            .insert(flags::ContextBits2::AMAGI_STRONGHOLD_WALL_2);
+    }
+    pub fn observe_amagi_west_lake_surface_wall(&mut self) {
+        self.cbits2
+            .insert(flags::ContextBits2::AMAGI_WEST_LAKE_SURFACE_WALL);
+    }
+    pub fn observe_amashilama(&mut self) {
+        self.cbits2.insert(flags::ContextBits2::AMASHILAMA);
+    }
+    pub fn observe_annuna_east_bridge_gate(&mut self) {
+        self.cbits2
+            .insert(flags::ContextBits2::ANNUNA_EAST_BRIDGE_GATE);
+    }
+    pub fn observe_annuna_mirror_match_switch(&mut self) {
+        self.cbits2
+            .insert(flags::ContextBits2::ANNUNA_MIRROR_MATCH_SWITCH);
+    }
+    pub fn observe_anuman(&mut self) {
+        self.cbits2.insert(flags::ContextBits2::ANUMAN);
+    }
+    pub fn observe_anunna_vertical_room_gate(&mut self) {
+        self.cbits2
+            .insert(flags::ContextBits2::ANUNNA_VERTICAL_ROOM_GATE);
+    }
+    pub fn observe_apocalypse_bomb(&mut self) {
+        self.cbits2.insert(flags::ContextBits2::APOCALYPSE_BOMB);
+    }
+    pub fn observe_big_flask(&mut self) {
+        self.cbits2.insert(flags::ContextBits2::BIG_FLASK);
+    }
+    pub fn observe_boomerang(&mut self) {
+        self.cbits2.insert(flags::ContextBits2::BOOMERANG);
+    }
+    pub fn observe_breach_attractor(&mut self) {
+        self.cbits2.insert(flags::ContextBits2::BREACH_ATTRACTOR);
+    }
+    pub fn observe_breach_sight(&mut self) {
+        self.cbits2.insert(flags::ContextBits2::BREACH_SIGHT);
+    }
+    pub fn observe_bronze_axe(&mut self) {
+        self.cbits2.insert(flags::ContextBits2::BRONZE_AXE);
+    }
+    pub fn observe_building_of_the_school(&mut self) {
+        self.cbits2
+            .insert(flags::ContextBits2::BUILDING_OF_THE_SCHOOL);
+    }
+    pub fn observe_commemorative_speech(&mut self) {
+        self.cbits2
+            .insert(flags::ContextBits2::COMMEMORATIVE_SPEECH);
+    }
+    pub fn observe_companies_layoff(&mut self) {
+        self.cbits2.insert(flags::ContextBits2::COMPANIES_LAYOFF);
+    }
+    pub fn observe_compass(&mut self) {
+        self.cbits2.insert(flags::ContextBits2::COMPASS);
+    }
+    pub fn observe_dangerous_ideas(&mut self) {
+        self.cbits2.insert(flags::ContextBits2::DANGEROUS_IDEAS);
+    }
+    pub fn observe_dear_ernest(&mut self) {
+        self.cbits2.insert(flags::ContextBits2::DEAR_ERNEST);
+    }
+    pub fn observe_defeat_indra(&mut self) {
+        self.cbits2.insert(flags::ContextBits2::DEFEAT_INDRA);
+    }
+    pub fn observe_defeat_mus_a_m20(&mut self) {
+        self.cbits2.insert(flags::ContextBits2::DEFEAT_MUS_A_M20);
+    }
+    pub fn observe_destruction_pogrom(&mut self) {
+        self.cbits2.insert(flags::ContextBits2::DESTRUCTION_POGROM);
+    }
+    pub fn observe_drone_hover(&mut self) {
+        self.cbits2.insert(flags::ContextBits2::DRONE_HOVER);
+    }
+    pub fn observe_drone_melee_damage(&mut self) {
+        self.cbits2.insert(flags::ContextBits2::DRONE_MELEE_DAMAGE);
+    }
+    pub fn observe_drone_melee_damage_2(&mut self) {
+        self.cbits2
+            .insert(flags::ContextBits2::DRONE_MELEE_DAMAGE_2);
+    }
+    pub fn observe_drone_melee_speed(&mut self) {
+        self.cbits2.insert(flags::ContextBits2::DRONE_MELEE_SPEED);
+    }
+    pub fn observe_drone_melee_speed_2(&mut self) {
+        self.cbits2.insert(flags::ContextBits2::DRONE_MELEE_SPEED_2);
+    }
+    pub fn observe_ebih_alu(&mut self) {
+        self.cbits2.insert(flags::ContextBits2::EBIH_ALU);
+    }
+    pub fn observe_ebih_interchange_block(&mut self) {
+        self.cbits2
+            .insert(flags::ContextBits2::EBIH_INTERCHANGE_BLOCK);
+    }
+    pub fn observe_ebih_interchange_gate(&mut self) {
+        self.cbits2
+            .insert(flags::ContextBits2::EBIH_INTERCHANGE_GATE);
+    }
+    pub fn observe_ebih_wasteland_door(&mut self) {
+        self.cbits2.insert(flags::ContextBits2::EBIH_WASTELAND_DOOR);
+    }
+    pub fn observe_ebih_wasteland_passage_h(&mut self) {
+        self.cbits2
+            .insert(flags::ContextBits2::EBIH_WASTELAND_PASSAGE_H);
+    }
+    pub fn observe_ebih_waterfall_block_left(&mut self) {
+        self.cbits2
+            .insert(flags::ContextBits2::EBIH_WATERFALL_BLOCK_LEFT);
+    }
+    pub fn observe_ebih_waterfall_block_right(&mut self) {
+        self.cbits2
+            .insert(flags::ContextBits2::EBIH_WATERFALL_BLOCK_RIGHT);
+    }
+    pub fn observe_ebih_waterfall_wall(&mut self) {
+        self.cbits2.insert(flags::ContextBits2::EBIH_WATERFALL_WALL);
+    }
+    pub fn observe_ebih_west_block(&mut self) {
+        self.cbits2.insert(flags::ContextBits2::EBIH_WEST_BLOCK);
+    }
+    pub fn observe_escape(&mut self) {
+        self.cbits2.insert(flags::ContextBits2::ESCAPE);
+    }
+    pub fn observe_exit_breach(&mut self) {
+        self.cbits2.insert(flags::ContextBits2::EXIT_BREACH);
+    }
+    pub fn observe_eye_ring(&mut self) {
+        self.cbits2.insert(flags::ContextBits2::EYE_RING);
+    }
+    pub fn observe_family_tragedy(&mut self) {
+        self.cbits2.insert(flags::ContextBits2::FAMILY_TRAGEDY);
+    }
+    pub fn observe_fast_travel(&mut self) {
+        self.cbits2.insert(flags::ContextBits2::FAST_TRAVEL);
+    }
+    pub fn observe_flask(&mut self, obs: IntegerObservation<i8>) {
+        self.flask = self.flask.combine(obs);
+    }
+    pub fn observe_giguna_boulder(&mut self) {
+        self.cbits2.insert(flags::ContextBits2::GIGUNA_BOULDER);
+    }
+    pub fn observe_giguna_dual_path_switch(&mut self) {
+        self.cbits2
+            .insert(flags::ContextBits2::GIGUNA_DUAL_PATH_SWITCH);
+    }
+    pub fn observe_giguna_dual_path_wall(&mut self) {
+        self.cbits2
+            .insert(flags::ContextBits2::GIGUNA_DUAL_PATH_WALL);
+    }
+    pub fn observe_giguna_gateway_block(&mut self) {
+        self.cbits2
+            .insert(flags::ContextBits2::GIGUNA_GATEWAY_BLOCK);
+    }
+    pub fn observe_giguna_gateway_gate(&mut self) {
+        self.cbits2.insert(flags::ContextBits2::GIGUNA_GATEWAY_GATE);
+    }
+    pub fn observe_giguna_gubi(&mut self) {
+        self.cbits2.insert(flags::ContextBits2::GIGUNA_GUBI);
+    }
+    pub fn observe_giguna_northeast_gate(&mut self) {
+        self.cbits2
+            .insert(flags::ContextBits2::GIGUNA_NORTHEAST_GATE);
+    }
+    pub fn observe_health_fragment(&mut self, obs: IntegerObservation<i8>) {
+        self.health_fragment = self.health_fragment.combine(obs);
+    }
+    pub fn observe_health_node(&mut self) {
+        self.cbits2.insert(flags::ContextBits2::HEALTH_NODE);
+    }
+    pub fn observe_health_upgrade(&mut self) {
+        self.cbits2.insert(flags::ContextBits2::HEALTH_UPGRADE);
+    }
+    pub fn observe_health_upgrade_2(&mut self) {
+        self.cbits2.insert(flags::ContextBits2::HEALTH_UPGRADE_2);
+    }
+    pub fn observe_health_upgrade_3(&mut self) {
+        self.cbits2.insert(flags::ContextBits2::HEALTH_UPGRADE_3);
+    }
+    pub fn observe_health_upgrade_4(&mut self) {
+        self.cbits2.insert(flags::ContextBits2::HEALTH_UPGRADE_4);
+    }
+    pub fn observe_heretics_tablet(&mut self) {
+        self.cbits2.insert(flags::ContextBits2::HERETICS_TABLET);
+    }
+    pub fn observe_hover(&mut self) {
+        self.cbits2.insert(flags::ContextBits2::HOVER);
+    }
+    pub fn observe_ice_axe(&mut self) {
+        self.cbits2.insert(flags::ContextBits2::ICE_AXE);
+    }
+    pub fn observe_infect(&mut self) {
+        self.cbits2.insert(flags::ContextBits2::INFECT);
+    }
+    pub fn observe_infect_l1(&mut self) {
+        self.cbits2.insert(flags::ContextBits2::INFECT_L1);
+    }
+    pub fn observe_infect_l2(&mut self) {
+        self.cbits2.insert(flags::ContextBits2::INFECT_L2);
+    }
+    pub fn observe_infect_l3(&mut self) {
+        self.cbits2.insert(flags::ContextBits2::INFECT_L3);
+    }
+    pub fn observe_infection_range(&mut self) {
+        self.cbits2.insert(flags::ContextBits2::INFECTION_RANGE);
+    }
+    pub fn observe_infection_range_2(&mut self) {
+        self.cbits2.insert(flags::ContextBits2::INFECTION_RANGE_2);
+    }
+    pub fn observe_infection_range_3(&mut self) {
+        self.cbits3.insert(flags::ContextBits3::INFECTION_RANGE_3);
+    }
+    pub fn observe_infection_speed(&mut self) {
+        self.cbits3.insert(flags::ContextBits3::INFECTION_SPEED);
+    }
+    pub fn observe_irikar_gudam(&mut self) {
+        self.cbits3.insert(flags::ContextBits3::IRIKAR_GUDAM);
+    }
+    pub fn observe_irikar_royal_storage_wall(&mut self) {
+        self.cbits3
+            .insert(flags::ContextBits3::IRIKAR_ROYAL_STORAGE_WALL);
+    }
+    pub fn observe_lament_for_fools(&mut self) {
+        self.cbits3.insert(flags::ContextBits3::LAMENT_FOR_FOOLS);
+    }
+    pub fn observe_ledge_grab(&mut self) {
+        self.cbits3.insert(flags::ContextBits3::LEDGE_GRAB);
+    }
+    pub fn observe_letter_from_trace(&mut self) {
+        self.cbits3.insert(flags::ContextBits3::LETTER_FROM_TRACE);
+    }
+    pub fn observe_melee_damage(&mut self) {
+        self.cbits3.insert(flags::ContextBits3::MELEE_DAMAGE);
+    }
+    pub fn observe_melee_damage_2(&mut self) {
+        self.cbits3.insert(flags::ContextBits3::MELEE_DAMAGE_2);
+    }
+    pub fn observe_melee_speed(&mut self) {
+        self.cbits3.insert(flags::ContextBits3::MELEE_SPEED);
+    }
+    pub fn observe_melee_speed_2(&mut self) {
+        self.cbits3.insert(flags::ContextBits3::MELEE_SPEED_2);
+    }
+    pub fn observe_mist_upgrade(&mut self) {
+        self.cbits3.insert(flags::ContextBits3::MIST_UPGRADE);
+    }
+    pub fn observe_nanite_mist(&mut self) {
+        self.cbits3.insert(flags::ContextBits3::NANITE_MIST);
+    }
+    pub fn observe_nano_lattice_2(&mut self) {
+        self.cbits3.insert(flags::ContextBits3::NANO_LATTICE_2);
+    }
+    pub fn observe_nano_points(&mut self) {
+        self.cbits3.insert(flags::ContextBits3::NANO_POINTS);
+    }
+    pub fn observe_nano_points_2(&mut self) {
+        self.cbits3.insert(flags::ContextBits3::NANO_POINTS_2);
+    }
+    pub fn observe_plague_of_thoughts(&mut self) {
+        self.cbits3.insert(flags::ContextBits3::PLAGUE_OF_THOUGHTS);
+    }
+    pub fn observe_power_matrix(&mut self) {
+        self.cbits3.insert(flags::ContextBits3::POWER_MATRIX);
+    }
+    pub fn observe_ranged_damage(&mut self) {
+        self.cbits3.insert(flags::ContextBits3::RANGED_DAMAGE);
+    }
+    pub fn observe_ranged_damage_2(&mut self) {
+        self.cbits3.insert(flags::ContextBits3::RANGED_DAMAGE_2);
+    }
+    pub fn observe_ranged_speed(&mut self) {
+        self.cbits3.insert(flags::ContextBits3::RANGED_SPEED);
+    }
+    pub fn observe_ranged_speed_2(&mut self) {
+        self.cbits3.insert(flags::ContextBits3::RANGED_SPEED_2);
+    }
+    pub fn observe_record_losses(&mut self) {
+        self.cbits3.insert(flags::ContextBits3::RECORD_LOSSES);
+    }
+    pub fn observe_remote_drone(&mut self) {
+        self.cbits3.insert(flags::ContextBits3::REMOTE_DRONE);
+    }
+    pub fn observe_researchers_missing(&mut self) {
+        self.cbits3.insert(flags::ContextBits3::RESEARCHERS_MISSING);
+    }
+    pub fn observe_separation(&mut self) {
+        self.cbits3.insert(flags::ContextBits3::SEPARATION);
+    }
+    pub fn observe_shockwave(&mut self) {
+        self.cbits3.insert(flags::ContextBits3::SHOCKWAVE);
+    }
+    pub fn observe_slingshot_charge(&mut self) {
+        self.cbits3.insert(flags::ContextBits3::SLINGSHOT_CHARGE);
+    }
+    pub fn observe_slingshot_hook(&mut self) {
+        self.cbits3.insert(flags::ContextBits3::SLINGSHOT_HOOK);
+    }
+    pub fn observe_slingshot_weapon(&mut self) {
+        self.cbits3.insert(flags::ContextBits3::SLINGSHOT_WEAPON);
+    }
+    pub fn observe_sniper_valley_rock_1(&mut self) {
+        self.cbits3
+            .insert(flags::ContextBits3::SNIPER_VALLEY_ROCK_1);
+    }
+    pub fn observe_sniper_valley_rock_2(&mut self) {
+        self.cbits3
+            .insert(flags::ContextBits3::SNIPER_VALLEY_ROCK_2);
+    }
+    pub fn observe_station_power(&mut self) {
+        self.cbits3.insert(flags::ContextBits3::STATION_POWER);
+    }
+    pub fn observe_storm_bomb(&mut self) {
+        self.cbits3.insert(flags::ContextBits3::STORM_BOMB);
+    }
+    pub fn observe_suspension_bridge(&mut self) {
+        self.cbits3.insert(flags::ContextBits3::SUSPENSION_BRIDGE);
+    }
+    pub fn observe_switch_36_11(&mut self) {
+        self.cbits3.insert(flags::ContextBits3::SWITCH_36_11);
+    }
+    pub fn observe_switch_40_12(&mut self) {
+        self.cbits3.insert(flags::ContextBits3::SWITCH_40_12);
+    }
+    pub fn observe_terminal_breakthrough_1(&mut self) {
+        self.cbits3
+            .insert(flags::ContextBits3::TERMINAL_BREAKTHROUGH_1);
+    }
+    pub fn observe_terminal_breakthrough_2(&mut self) {
+        self.cbits3
+            .insert(flags::ContextBits3::TERMINAL_BREAKTHROUGH_2);
+    }
+    pub fn observe_the_ideal_kiengir(&mut self) {
+        self.cbits3.insert(flags::ContextBits3::THE_IDEAL_KIENGIR);
+    }
+    pub fn observe_uhrum_annuna_corridor_block(&mut self) {
+        self.cbits3
+            .insert(flags::ContextBits3::UHRUM_ANNUNA_CORRIDOR_BLOCK);
+    }
+    pub fn observe_uhrum_waterfall_wall(&mut self) {
+        self.cbits3
+            .insert(flags::ContextBits3::UHRUM_WATERFALL_WALL);
+    }
+    pub fn observe_uhrum_waterfalls_block(&mut self) {
+        self.cbits3
+            .insert(flags::ContextBits3::UHRUM_WATERFALLS_BLOCK);
+    }
+    pub fn observe_uhrum_west_entrance_gate(&mut self) {
+        self.cbits3
+            .insert(flags::ContextBits3::UHRUM_WEST_ENTRANCE_GATE);
+    }
+    pub fn observe_uhrum_west_entrance_lower_wall(&mut self) {
+        self.cbits3
+            .insert(flags::ContextBits3::UHRUM_WEST_ENTRANCE_LOWER_WALL);
+    }
+    pub fn observe_uhrum_west_entrance_upper_wall(&mut self) {
+        self.cbits3
+            .insert(flags::ContextBits3::UHRUM_WEST_ENTRANCE_UPPER_WALL);
+    }
+    pub fn observe_under_siege(&mut self) {
+        self.cbits3.insert(flags::ContextBits3::UNDER_SIEGE);
+    }
+    pub fn observe_underwater_movement(&mut self) {
+        self.cbits3.insert(flags::ContextBits3::UNDERWATER_MOVEMENT);
+    }
+    pub fn observe_wall_climb(&mut self) {
+        self.cbits3.insert(flags::ContextBits3::WALL_CLIMB);
+    }
+    pub fn observe_water_movement(&mut self) {
+        self.cbits3.insert(flags::ContextBits3::WATER_MOVEMENT);
     }
 }
 

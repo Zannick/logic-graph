@@ -47,7 +47,7 @@ pub fn observe_access_{{ id }}(ctx: &Context, world: &graph::World, full_obs: &m
 %% endfor
 
 %% for id, info in action_funcs.items()|sort
-pub fn observe_action_{{ id }}(ctx: &Context, world: &graph::World, full_obs: &mut FullObservation) {
+pub fn observe_action_{{ id }}(ctx: &Context, world: &graph::World{% for k, t in (info.args or {}).items() %}, {{ k }}: {{ t }}{% endfor %}, full_obs: &mut FullObservation) {
     // {{ info.actions.text.strip() }}
     {{ info.actions|prToRustObserve(info, id) }}
 }

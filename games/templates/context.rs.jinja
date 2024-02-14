@@ -340,6 +340,9 @@ impl context::Ctx for Context {
 %% endfor
             _ => (),
         }
+%% endif
+%% endfor
+%% if context_position_watchers['spot']
         if self.position != pos {
             match pos {
 %% for s in context_position_watchers['spot']|sort
@@ -365,7 +368,6 @@ impl context::Ctx for Context {
             }
         }
 %% endif
-%% endfor
         self.position = pos;
     }
 

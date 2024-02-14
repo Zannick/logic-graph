@@ -2374,11 +2374,10 @@ macro_rules! helper__save_last {
 #[macro_export]
 macro_rules! hobserve__save_last {
     ($ctx:expr, $world:expr, $full_obs:expr) => {{
-        {
+        if {
             $full_obs.observe_last();
             $ctx.last() == Default::default()
-        };
-        if $ctx.last() == Default::default() {}
+        } {}
     }};
 }
 
@@ -2414,7 +2413,45 @@ macro_rules! helper__reset_old_area {
 #[macro_export]
 macro_rules! hobserve__reset_old_area {
     ($ctx:expr, $world:expr, $newpos:expr, $full_obs:expr) => {{
-        (({ $full_obs.observe_position(); $ctx.position() != SpotId::None && get_region($ctx.position()) != RegionId::Menu } && ({ $full_obs.observe_position(); $full_obs.observe_prev_area(); $ctx.position() != SpotId::None && get_area($ctx.position()) != $ctx.prev_area() })) && (get_area($newpos) != get_area($ctx.position()))); if (($ctx.position() != SpotId::None && get_region($ctx.position()) != RegionId::Menu && $ctx.position() != SpotId::None && get_area($ctx.position()) != $ctx.prev_area()) && get_area($newpos) != get_area($ctx.position())) { {  $full_obs.observe_prev_area(); get_area($newpos) != $ctx.prev_area() }; if get_area($newpos) != $ctx.prev_area() { ; } { let _set = get_area({ $full_obs.observe_position(); $ctx.position() }); } } else (({ $full_obs.observe_position(); $ctx.position() != SpotId::None && get_area($ctx.position()) == AreaId::Menu__Warp_Only } && ({ $full_obs.observe_last(); $full_obs.observe_prev_area(); $ctx.last() != SpotId::None && get_area($ctx.last()) != $ctx.prev_area() })) && (get_area($newpos) != get_area($ctx.last()))); if (($ctx.position() != SpotId::None && get_area($ctx.position()) == AreaId::Menu__Warp_Only && $ctx.last() != SpotId::None && get_area($ctx.last()) != $ctx.prev_area()) && get_area($newpos) != get_area($ctx.last())) { {  $full_obs.observe_prev_area(); get_area($newpos) != $ctx.prev_area() }; if get_area($newpos) != $ctx.prev_area() { ; } { let _set = get_area({ $full_obs.observe_last(); $ctx.last() }); }  }
+        if (({
+            $full_obs.observe_position();
+            $ctx.position() != SpotId::None && get_region($ctx.position()) != RegionId::Menu
+        } && ({
+            $full_obs.observe_position();
+            $full_obs.observe_prev_area();
+            $ctx.position() != SpotId::None && get_area($ctx.position()) != $ctx.prev_area()
+        })) && (get_area($newpos) != get_area($ctx.position())))
+        {
+            if {
+                $full_obs.observe_prev_area();
+                get_area($newpos) != $ctx.prev_area()
+            } {}
+            {
+                let _set = get_area({
+                    $full_obs.observe_position();
+                    $ctx.position()
+                });
+            }
+        } else if (({
+            $full_obs.observe_position();
+            $ctx.position() != SpotId::None && get_area($ctx.position()) == AreaId::Menu__Warp_Only
+        } && ({
+            $full_obs.observe_last();
+            $full_obs.observe_prev_area();
+            $ctx.last() != SpotId::None && get_area($ctx.last()) != $ctx.prev_area()
+        })) && (get_area($newpos) != get_area($ctx.last())))
+        {
+            if {
+                $full_obs.observe_prev_area();
+                get_area($newpos) != $ctx.prev_area()
+            } {}
+            {
+                let _set = get_area({
+                    $full_obs.observe_last();
+                    $ctx.last()
+                });
+            }
+        }
     }};
 }
 

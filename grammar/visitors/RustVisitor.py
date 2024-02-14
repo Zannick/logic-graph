@@ -882,7 +882,7 @@ class RustObservationVisitor(RustBaseVisitor):
         items = ctx.ITEM()
         func = str(ctx.FUNC())
         # We never need these to be observed.
-        if func in ('$add_item', '$skip', '$visit') or func.startswith('$reset'):
+        if func in ('$add_item', '$skip', '$visit', '$reset_area', '$reset_region'):
             return ''
         func, args = self._getFuncAndArgs(func)
         if items:
@@ -935,13 +935,13 @@ class RustObservationVisitor(RustBaseVisitor):
         lines = []
         while len(args) > 1:
             cond, then, *args = args
-            lines.append(f'{self.visit(cond)}; if {self.code_writer.visit(cond)} {{ {self.visit(then)} }}')
+            lines.append(f'if {self.visit(cond)} {{ {self.visit(then)} }}')
         if args:
             lines.append(f'{{ {self.visit(args[0])} }}')
-        if else_case:
-            lines.append('false')
+        elif else_case:
+            lines.append('{ false }')
         return ' else '.join(lines)
-
+    
     def visitIfThenElse(self, ctx):
         return self._visitConditional(*ctx.boolExpr())
 
