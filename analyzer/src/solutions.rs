@@ -1,4 +1,6 @@
 use crate::context::*;
+use crate::matchertrie::MatcherTrie;
+use crate::observation::Observation;
 use crate::{new_hashmap, CommonHasher};
 use log;
 use std::collections::HashMap;
@@ -38,6 +40,7 @@ where
     previews: &'static str,
     best_file: &'static str,
     file: File,
+    solve_trie: Arc<MatcherTrie<<T::Observation as Observation>::Matcher>>,
     count: usize,
     best: u32,
 }
@@ -50,6 +53,7 @@ where
         sols_file: &'static str,
         previews_file: &'static str,
         best_file: &'static str,
+        solve_trie: Arc<MatcherTrie<<T::Observation as Observation>::Matcher>>,
     ) -> io::Result<SolutionCollector<T>> {
         Ok(SolutionCollector {
             map: new_hashmap(),
@@ -57,6 +61,7 @@ where
             path: sols_file,
             previews: previews_file,
             best_file,
+            solve_trie,
             count: 0,
             best: 0,
         })
@@ -103,6 +108,7 @@ where
         }
 
         self.count += 1;
+        // This is where we generate the observations and insert them to the solve_trie.
         if let Some(vec) = self.map.get_mut(&loc_history) {
             vec.push(Arc::new(Solution { elapsed, history }));
             self.write_previews().unwrap();

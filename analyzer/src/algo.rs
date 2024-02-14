@@ -2,7 +2,9 @@ use crate::access::*;
 use crate::context::*;
 use crate::greedy::*;
 use crate::heap::RocksBackedQueue;
+use crate::matchertrie::*;
 use crate::minimize::pinpoint_minimize;
+use crate::observation::Observation;
 use crate::solutions::SolutionCollector;
 use crate::world::*;
 use anyhow::Result;
@@ -235,6 +237,7 @@ where
 {
     world: &'a W,
     startctx: ContextWrapper<T>,
+    solve_trie: Arc<MatcherTrie<<T::Observation as Observation>::Matcher>>,
     solutions: Arc<Mutex<SolutionCollector<T>>>,
     queue: RocksBackedQueue<'a, W, T>,
     iters: AtomicUsize,
@@ -319,10 +322,12 @@ where
         world.skip_unused_items(&mut ctx);
 
         let startctx = ContextWrapper::new(ctx);
+        let solve_trie: Arc<MatcherTrie<<T::Observation as Observation>::Matcher>> = Arc::default();
         let mut solutions = SolutionCollector::<T>::new(
             "data/solutions.txt",
             "data/previews.txt",
             "data/best.txt",
+            solve_trie.clone(),
         )?;
 
         let mut wins = Vec::new();
@@ -399,6 +404,7 @@ where
         let s = Search {
             world,
             startctx,
+            solve_trie,
             solutions,
             queue,
             iters: 0.into(),
@@ -671,6 +677,8 @@ where
                         }
 
                         self.held.fetch_add(items.len(), Ordering::Release);
+
+                        // This is probably where we lookup in the solve trie and attempt to recreate if we find something.
 
                         if current_mode == SearchMode::Greedy {
                             for ctx in items {

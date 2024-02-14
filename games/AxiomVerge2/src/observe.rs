@@ -10,9 +10,8 @@ use crate::items::Item;
 use crate::movements;
 use crate::prices::Currency;
 use crate::rules;
-use analyzer::matchertrie::matcher::*;
-use analyzer::matchertrie::observe::*;
-use analyzer::matchertrie::trie::Node;
+use analyzer::matchertrie::*;
+use analyzer::observation::*;
 use analyzer::solutions::Solution;
 use std::sync::{Arc, Mutex};
 
@@ -127,6 +126,12 @@ pub struct FullObservation {
     cbits9: Option<flags::ContextBits9>,
     cbits10: Option<flags::ContextBits10>,
     cbits11: Option<flags::ContextBits11>,
+}
+
+impl Observation for FullObservation {
+    type Ctx = Context;
+    type LocId = LocationId;
+    type Matcher = ObservationMatcher;
 }
 
 impl FullObservation {

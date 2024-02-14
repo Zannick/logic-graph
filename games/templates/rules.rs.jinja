@@ -12,7 +12,7 @@ use crate::observe::*;
 use crate::prices::Currency;
 use crate::*;
 use analyzer::context::Ctx;
-use analyzer::matchertrie::observe::IntegerObservation;
+use analyzer::matchertrie::IntegerObservation;
 use analyzer::world::{self, World};
 use rustc_hash::FxHashMap;
 

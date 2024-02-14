@@ -7,6 +7,7 @@ use crate::graph::{self, *};
 use crate::graph_enums::*;
 use crate::items::Item;
 use crate::movements;
+use crate::observe::*;
 use crate::prices::Currency;
 use crate::rules;
 use analyzer::context;
@@ -1561,8 +1562,8 @@ impl Default for Context {
     }
 }
 
-impl analyzer::matchertrie::matcher::Observable for Context {
-    type PropertyObservation = crate::observe::OneObservation;
+impl analyzer::matchertrie::Observable for Context {
+    type PropertyObservation = OneObservation;
 }
 
 impl context::Ctx for Context {
@@ -1571,6 +1572,7 @@ impl context::Ctx for Context {
     type AreaId = AreaId;
     type RegionId = RegionId;
     type MovementState = movements::MovementState;
+    type Observation = FullObservation;
     type Expectation = Expectation;
     const NUM_ITEMS: u32 = 118;
 

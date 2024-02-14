@@ -1,4 +1,5 @@
 use crate::condense::CondensedEdge;
+use crate::observation::Observation;
 use crate::world::*;
 use as_slice::{AsMutSlice, AsSlice};
 use lazy_static::lazy_static;
@@ -24,6 +25,7 @@ pub trait Ctx:
         + Hash
         + AsSlice<Element = bool>
         + AsMutSlice<Element = bool>;
+    type Observation: Observation<Ctx = Self, LocId = <<Self::World as World>::Location as Location>::LocId>;
     type Expectation: Copy + Clone + Debug + Eq + Send;
     const NUM_ITEMS: u32;
 
