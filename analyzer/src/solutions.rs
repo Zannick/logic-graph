@@ -1,6 +1,7 @@
 use crate::context::*;
 use crate::matchertrie::MatcherTrie;
 use crate::observation::Observation;
+use crate::world::*;
 use crate::{new_hashmap, CommonHasher};
 use log;
 use std::collections::HashMap;
@@ -40,7 +41,8 @@ where
     previews: &'static str,
     best_file: &'static str,
     file: File,
-    solve_trie: Arc<MatcherTrie<<T::Observation as Observation>::Matcher>>,
+    startctx: T,
+    solve_trie: Arc<MatcherTrie<<T::Observation as Observation<(Arc<Solution<T>>, usize)>>::Matcher>>,
     count: usize,
     best: u32,
 }
@@ -53,7 +55,8 @@ where
         sols_file: &'static str,
         previews_file: &'static str,
         best_file: &'static str,
-        solve_trie: Arc<MatcherTrie<<T::Observation as Observation>::Matcher>>,
+        startctx: T,
+        solve_trie: Arc<MatcherTrie<<T::Observation as Observation<(Arc<Solution<T>>, usize)>>::Matcher>>,
     ) -> io::Result<SolutionCollector<T>> {
         Ok(SolutionCollector {
             map: new_hashmap(),
@@ -61,6 +64,7 @@ where
             path: sols_file,
             previews: previews_file,
             best_file,
+            startctx,
             solve_trie,
             count: 0,
             best: 0,
@@ -85,11 +89,19 @@ where
 
     /// Inserts a solution into the collection and returns whether this solution
     /// is unique compared to the prior solutions.
-    pub fn insert(
+    pub fn insert<W, L, E, Wp>(
         &mut self,
         elapsed: u32,
         history: Vec<HistoryAlias<T>>,
-    ) -> bool {
+        world: &W,
+    ) -> bool
+    where
+        W: World<Location = L, Exit = E, Warp = Wp>,
+        L: Location<Context = T>,
+        T: Ctx<World = W>,
+        E: Exit<Context = T, Currency = <L as Accessible>::Currency, LocId = L::LocId>,
+        Wp: Warp<SpotId = <E as Exit>::SpotId, Context = T, Currency = <L as Accessible>::Currency>,
+    {
         let loc_history: Vec<HistoryAlias<T>> = history
             .iter()
             .filter_map(|h| {
@@ -103,26 +115,46 @@ where
         if self.count == 0 || elapsed < self.best {
             self.best = elapsed;
         } else if elapsed - self.best > self.best / 10 {
-            log::info!("Excluding solution as too slow: {} > 1.1 * {}", elapsed, self.best);
+            log::info!(
+                "Excluding solution as too slow: {} > 1.1 * {}",
+                elapsed,
+                self.best
+            );
             return false;
         }
 
         self.count += 1;
-        // This is where we generate the observations and insert them to the solve_trie.
-        if let Some(vec) = self.map.get_mut(&loc_history) {
-            vec.push(Arc::new(Solution { elapsed, history }));
+        let sol = Arc::new(Solution { elapsed, history });
+        let unique = if let Some(vec) = self.map.get_mut(&loc_history) {
+            vec.push(sol.clone());
             self.write_previews().unwrap();
             self.write_best().unwrap();
             false
         } else {
             let mut locs = loc_history.clone();
             locs.reverse();
-            self.map
-                .insert(loc_history, vec![Arc::new(Solution { elapsed, history })]);
+            self.map.insert(loc_history, vec![sol.clone()]);
             self.write_previews().unwrap();
             self.write_best().unwrap();
             true
-        }
+        };
+        self.record_observations(world, sol);
+        unique
+    }
+
+    fn record_observations<W, L, E, Wp>(&mut self, world: &W, solution: Arc<Solution<T>>)
+    where
+        W: World<Location = L, Exit = E, Warp = Wp>,
+        L: Location<Context = T>,
+        T: Ctx<World = W>,
+        E: Exit<Context = T, Currency = <L as Accessible>::Currency, LocId = L::LocId>,
+        Wp: Warp<SpotId = <E as Exit>::SpotId, Context = T, Currency = <L as Accessible>::Currency>,
+    {
+        let full_history =
+            history_to_full_series(&self.startctx, world, solution.history.iter().copied());
+        // The history entries are the steps "in between" the states in full_history, so we should have
+        // one more state than history steps.
+        assert!(full_history.len() == solution.history.len() + 1);
     }
 
     pub fn get_best(&self) -> Arc<Solution<T>> {
@@ -233,7 +265,12 @@ where
             vec.sort_unstable_by_key(|el| el.elapsed);
             while let Some(last) = vec.last() {
                 if last.elapsed - self.best > self.best / 10 {
-                    assert!(vec.len() > 1, "Eliminated all solutions! best={} but first={}", self.best, last.elapsed);
+                    assert!(
+                        vec.len() > 1,
+                        "Eliminated all solutions! best={} but first={}",
+                        self.best,
+                        last.elapsed
+                    );
                     vec.pop();
                 } else {
                     break;

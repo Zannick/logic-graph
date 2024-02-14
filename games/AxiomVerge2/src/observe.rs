@@ -128,7 +128,7 @@ pub struct FullObservation {
     cbits11: Option<flags::ContextBits11>,
 }
 
-impl Observation for FullObservation {
+impl Observation<(Arc<Solution<Context>>, usize)> for FullObservation {
     type Ctx = Context;
     type LocId = LocationId;
     type Matcher = ObservationMatcher;

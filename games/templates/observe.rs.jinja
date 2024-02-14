@@ -68,7 +68,7 @@ pub struct FullObservation {
 %% endfor
 }
 
-impl Observation for FullObservation {
+impl Observation<(Arc<Solution<Context>>, usize)> for FullObservation {
     type Ctx = Context;
     type LocId = LocationId;
     type Matcher = ObservationMatcher;

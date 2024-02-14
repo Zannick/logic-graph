@@ -5,7 +5,7 @@ use crate::heap::RocksBackedQueue;
 use crate::matchertrie::*;
 use crate::minimize::pinpoint_minimize;
 use crate::observation::Observation;
-use crate::solutions::SolutionCollector;
+use crate::solutions::{Solution, SolutionCollector};
 use crate::world::*;
 use anyhow::Result;
 use log;
@@ -237,7 +237,8 @@ where
 {
     world: &'a W,
     startctx: ContextWrapper<T>,
-    solve_trie: Arc<MatcherTrie<<T::Observation as Observation>::Matcher>>,
+    solve_trie:
+        Arc<MatcherTrie<<T::Observation as Observation<(Arc<Solution<T>>, usize)>>::Matcher>>,
     solutions: Arc<Mutex<SolutionCollector<T>>>,
     queue: RocksBackedQueue<'a, W, T>,
     iters: AtomicUsize,
@@ -321,15 +322,18 @@ where
     {
         world.skip_unused_items(&mut ctx);
 
-        let startctx = ContextWrapper::new(ctx);
-        let solve_trie: Arc<MatcherTrie<<T::Observation as Observation>::Matcher>> = Arc::default();
+        let solve_trie: Arc<
+            MatcherTrie<<T::Observation as Observation<(Arc<Solution<T>>, usize)>>::Matcher>,
+        > = Arc::default();
         let mut solutions = SolutionCollector::<T>::new(
             "data/solutions.txt",
             "data/previews.txt",
             "data/best.txt",
+            ctx.clone(),
             solve_trie.clone(),
         )?;
 
+        let startctx = ContextWrapper::new(ctx);
         let mut wins = Vec::new();
         let mut others = Vec::new();
         for c in routes {
@@ -372,16 +376,16 @@ where
                     m.elapsed()
                 );
                 let max_time = std::cmp::min(wonctx.elapsed(), m.elapsed());
-                solutions.insert(m.elapsed(), m.recent_history().to_vec());
+                solutions.insert(m.elapsed(), m.recent_history().to_vec(), world);
                 max_time
             } else {
                 log::info!("Minimized-greedy solution wasn't faster than original");
                 wonctx.elapsed()
             };
 
-        solutions.insert(wonctx.elapsed(), wonctx.recent_history().to_vec());
+        solutions.insert(wonctx.elapsed(), wonctx.recent_history().to_vec(), world);
         for w in &wins {
-            solutions.insert(w.elapsed(), w.recent_history().to_vec());
+            solutions.insert(w.elapsed(), w.recent_history().to_vec(), world);
         }
 
         let solutions = Arc::new(Mutex::new(solutions));
@@ -467,7 +471,7 @@ where
             log::info!("Max time to consider is now: {}ms", old_time);
         }
 
-        if sols.insert(elapsed, history) {
+        if sols.insert(elapsed, history, self.world) {
             log::info!("{:?} mode found new unique solution", mode);
         }
 
@@ -489,7 +493,7 @@ where
             }
 
             let history = ctx.recent_history();
-            if sols.insert(ctx.elapsed(), history.to_vec()) {
+            if sols.insert(ctx.elapsed(), history.to_vec(), self.world) {
                 log::info!("Minimized found new unique solution");
             }
 

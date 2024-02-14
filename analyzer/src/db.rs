@@ -178,7 +178,7 @@ impl<'w, W, T, L, E> HeapDB<'w, W, T>
 where
     W: World<Location = L, Exit = E> + 'w,
     T: Ctx<World = W>,
-    L: Location<ExitId = E::ExitId, Context = T, Currency = E::Currency>,
+    L: Location<ExitId = E::ExitId, LocId = E::LocId, Context = T, Currency = E::Currency>,
     E: Exit<Context = T>,
     W::Warp: Warp<Context = T, SpotId = E::SpotId, Currency = E::Currency>,
 {
@@ -934,6 +934,7 @@ where
                             self.solutions.lock().unwrap().insert(
                                 new_elapsed,
                                 self.get_history_raw(new_ctx_key.clone()).unwrap(),
+                                self.world
                             );
                         }
 

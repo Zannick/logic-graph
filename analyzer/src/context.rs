@@ -1,5 +1,6 @@
 use crate::condense::CondensedEdge;
 use crate::observation::Observation;
+use crate::solutions::Solution;
 use crate::world::*;
 use as_slice::{AsMutSlice, AsSlice};
 use lazy_static::lazy_static;
@@ -25,7 +26,10 @@ pub trait Ctx:
         + Hash
         + AsSlice<Element = bool>
         + AsMutSlice<Element = bool>;
-    type Observation: Observation<Ctx = Self, LocId = <<Self::World as World>::Location as Location>::LocId>;
+    type Observation: Observation<(Arc<Solution<Self>>, usize),
+        Ctx = Self,
+        LocId = <<Self::World as World>::Location as Location>::LocId,
+    >;
     type Expectation: Copy + Clone + Debug + Eq + Send;
     const NUM_ITEMS: u32;
 
@@ -801,4 +805,25 @@ where
         })
         .collect();
     vec.join("\n")
+}
+
+pub fn history_to_full_series<T, W, L, E, Wp, I>(startctx: &T, world: &W, history: I) -> Vec<T>
+where
+    W: World<Location = L, Exit = E, Warp = Wp>,
+    L: Location<Context = T>,
+    T: Ctx<World = W>,
+    E: Exit<Context = T, Currency = <L as Accessible>::Currency, LocId = L::LocId>,
+    Wp: Warp<SpotId = <E as Exit>::SpotId, Context = T, Currency = <L as Accessible>::Currency>,
+    I: Iterator<Item = HistoryAlias<T>>,
+{
+    let mut vec = Vec::new();
+    let mut prev = ContextWrapper::new(startctx.clone());
+    for step in history {
+        let mut next = prev.clone();
+        next.assert_and_replay(world, step);
+        vec.push(prev.into_inner());
+        prev = next;
+    }
+    vec.push(prev.into_inner());
+    vec
 }

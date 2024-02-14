@@ -344,7 +344,7 @@ impl<'w, W, T, L, E> RocksBackedQueue<'w, W, T>
 where
     W: World<Location = L, Exit = E>,
     T: Ctx<World = W>,
-    L: Location<ExitId = E::ExitId, Context = T, Currency = E::Currency>,
+    L: Location<ExitId = E::ExitId, LocId = E::LocId, Context = T, Currency = E::Currency>,
     E: Exit<Context = T>,
     W::Warp: Warp<Context = T, SpotId = E::SpotId, Currency = E::Currency>,
 {
