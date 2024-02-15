@@ -301,6 +301,18 @@ impl world::Action for Action {
             _ => SpotId::None,
         }
     }
+    fn observe_effects(&self, ctx: &Context, world: &World, full_obs: &mut FullObservation) {
+        match self.id {
+%% for act in gl.actions()
+            ActionId::{{ act.id }} => {
+                rules::observe_action_{{ act.action_id }}(ctx, world, full_obs);
+%% if act.act_post
+                rules::observe_action_{{ act.after_id }}(ctx, world, full_obs);
+%% endif
+            }
+%% endfor
+        }
+    }
 }
 
 #[derive(Copy, Clone, Debug)]
@@ -383,20 +395,16 @@ impl world::Warp for Warp {
     fn connect(&mut self, dest: SpotId) { self.dest = dest; }
     fn prewarp(&self, ctx: &mut Context, world: &World) {
         match self.id {
-%% for w in warps.values()|sort(attribute='id')
-%% if 'before_id' in w:
+%% for w in warps.values()|selectattr('before_id')|sort(attribute='id')
             WarpId::{{ w.id }} => rules::action_{{ w.before_id }}(ctx, world),
-%% endif
 %% endfor
             _ => (),
         }
     }
     fn postwarp(&self, ctx: &mut Context, world: &World) {
         match self.id {
-%% for w in warps.values()|sort(attribute='id')
-%% if 'after_id' in w:
+%% for w in warps.values()|selectattr('after_id')|sort(attribute='id')
             WarpId::{{ w.id }} => rules::action_{{ w.after_id }}(ctx, world),
-%% endif
 %% endfor
             _ => (),
         }
@@ -405,6 +413,20 @@ impl world::Warp for Warp {
         match self.id {
 %% for w in warps.values()|sort(attribute='id')
             WarpId::{{ w.id }} => {{ 'true' if w.loads else 'false' }},
+%% endfor
+        }
+    }
+    fn observe_effects(&self, ctx: &Context, world: &World, full_obs: &mut FullObservation) {
+        match self.id {
+%% for w in warps.values()|sort(attribute='id')
+            WarpId::{{ w.id }} => {
+%% if 'before_id' in w
+                rules::observe_action_{{ w.before_id }}(ctx, world, full_obs);
+%% endif
+%% if 'after_id' in w
+                rules::observe_action_{{ w.after_id }}(ctx, world, full_obs);
+%% endif
+            }
 %% endfor
         }
     }

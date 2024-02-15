@@ -121,6 +121,12 @@ pub trait Action: Accessible {
     fn id(&self) -> Self::ActionId;
     fn perform(&self, ctx: &mut Self::Context, world: &<Self::Context as Ctx>::World);
     fn dest(&self, ctx: &Self::Context, world: &<Self::Context as Ctx>::World) -> Self::SpotId;
+    fn observe_effects(
+        &self,
+        ctx: &Self::Context,
+        world: &<Self::Context as Ctx>::World,
+        observer: &mut <Self::Context as Ctx>::Observation,
+    );
 }
 
 pub trait Warp: Accessible {
@@ -133,6 +139,12 @@ pub trait Warp: Accessible {
     fn prewarp(&self, ctx: &mut Self::Context, world: &<Self::Context as Ctx>::World);
     fn postwarp(&self, ctx: &mut Self::Context, world: &<Self::Context as Ctx>::World);
     fn should_reload(&self) -> bool;
+    fn observe_effects(
+        &self,
+        ctx: &Self::Context,
+        world: &<Self::Context as Ctx>::World,
+        observer: &mut <Self::Context as Ctx>::Observation,
+    );
 }
 
 pub trait World: Sync + Default {

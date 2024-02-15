@@ -8324,6 +8324,434 @@ impl world::Action for Action {
             _ => SpotId::None,
         }
     }
+    fn observe_effects(&self, ctx: &Context, world: &World, full_obs: &mut FullObservation) {
+        match self.id {
+            ActionId::Global__Recall_Drone => {
+                rules::observe_action_mode_set_indra(ctx, world, full_obs);
+                rules::observe_action_indra_set_default(ctx, world, full_obs);
+            }
+            ActionId::Global__Recall_Fast_Travel => {
+                rules::observe_action_mode_set_indra_last_set_indra(ctx, world, full_obs);
+                rules::observe_action_indra_set_default_refill_energy(ctx, world, full_obs);
+            }
+            ActionId::Global__Deploy_Drone => {
+                rules::observe_action_mode_set_drone_indra_set_position(ctx, world, full_obs);
+            }
+            ActionId::Global__Become_Drone => {
+                rules::observe_action_mode_set_drone(ctx, world, full_obs);
+            }
+            ActionId::Global__Become_Indra => {
+                rules::observe_action_mode_set_indra(ctx, world, full_obs);
+            }
+            ActionId::Amagi__Main_Area__Carving__Key_Combo => {
+                rules::observe_action_amagi__main_area__carving__key_combo__do(
+                    ctx, world, full_obs,
+                );
+            }
+            ActionId::Amagi__Main_Area__Save_Point__Save => {
+                rules::observe_action_save(ctx, world, full_obs);
+            }
+            ActionId::Annuna__Mirror_Match__Save_Point__Save => {
+                rules::observe_action_save(ctx, world, full_obs);
+            }
+            ActionId::Annuna__East_Bridge__Center_Gap_West__Throw_Drone_into_Tower => {
+                rules::observe_action_deploy_drone_and_move__annuna_gt_east_bridge_gt_center_corridor(ctx, world, full_obs);
+            }
+            ActionId::Annuna__East_Bridge__Center_Gap_East__Throw_Drone_into_Tower => {
+                rules::observe_action_deploy_drone(ctx, world, full_obs);
+            }
+            ActionId::Annuna__East_Bridge__Tower_Opening__Climb_and_Throw_Drone => {
+                rules::observe_action_deploy_drone_and_move__annuna_gt_east_bridge_gt_tower_base_east(ctx, world, full_obs);
+            }
+            ActionId::Annuna__East_Bridge__Tower_West_Ledge__Enter_Combo => {
+                rules::observe_action_annuna__east_bridge__tower_west_ledge__enter_combo__do(
+                    ctx, world, full_obs,
+                );
+            }
+            ActionId::Annuna__East_Bridge__Tower_East_Ledge__Enter_Combo => {
+                rules::observe_action_annuna__east_bridge__tower_east_ledge__enter_combo__do(
+                    ctx, world, full_obs,
+                );
+            }
+            ActionId::Annuna__East_Bridge__Tower_Secret__Enter_Combo => {
+                rules::observe_action_annuna__east_bridge__tower_secret__enter_combo__do(
+                    ctx, world, full_obs,
+                );
+            }
+            ActionId::Annuna__Factory_Entrance__Save_Point__Save => {
+                rules::observe_action_save(ctx, world, full_obs);
+            }
+            ActionId::Annuna__Center_Save__Save_Point__Save => {
+                rules::observe_action_save(ctx, world, full_obs);
+            }
+            ActionId::Annuna__West_Climb__Switch_Ledge__Open_Door => {
+                rules::observe_action_annuna__west_climb__switch_ledge__open_door__do(
+                    ctx, world, full_obs,
+                );
+            }
+            ActionId::Annuna__Final_Save__Save_Point__Save => {
+                rules::observe_action_save(ctx, world, full_obs);
+            }
+            ActionId::Ebih__Base_Camp__Save_Point__Save => {
+                rules::observe_action_save(ctx, world, full_obs);
+            }
+            ActionId::Ebih__Base_Camp__Left_Platform__Move_Left_Platform => {
+                rules::observe_action_ebih__base_camp__left_platform__move_left_platform__do(
+                    ctx, world, full_obs,
+                );
+            }
+            ActionId::Ebih__Base_Camp__Left_Platform_Moved__Reset_Left_Platform => {
+                rules::observe_action_ebih__base_camp__left_platform_moved__reset_left_platform__do(
+                    ctx, world, full_obs,
+                );
+            }
+            ActionId::Ebih__Grid_25_10_12__Door_Left__Open_Door => {
+                rules::observe_action_ebih__grid_25_10_12__door_left__open_door__do(
+                    ctx, world, full_obs,
+                );
+            }
+            ActionId::Ebih__Grid_25_10_12__East_11__Open_Door => {
+                rules::observe_action_ebih__grid_25_10_12__east_11__open_door__do(
+                    ctx, world, full_obs,
+                );
+            }
+            ActionId::Ebih__Waterfall__Ledge_Below_Hole__Throw_Drone => {
+                rules::observe_action_deploy_drone(ctx, world, full_obs);
+            }
+            ActionId::Ebih__Waterfall__Below_Left_Switch__Open_Door => {
+                rules::observe_action_ebih__waterfall__below_left_switch__open_door__do(
+                    ctx, world, full_obs,
+                );
+            }
+            ActionId::Ebih__Waterfall__West_8__Open_Door => {
+                rules::observe_action_ebih__waterfall__west_8__open_door__do(ctx, world, full_obs);
+            }
+            ActionId::Ebih__Ebih_West__Mid_Save__Save => {
+                rules::observe_action_save(ctx, world, full_obs);
+            }
+            ActionId::Ebih__Ebih_West__Upper_Save__Save => {
+                rules::observe_action_save(ctx, world, full_obs);
+            }
+            ActionId::Ebih__Ebih_West__Medium_High_Platform__Throw_Drone_Long => {
+                rules::observe_action_deploy_drone_and_move__ebih_gt_ebih_west_gt_alcove_entrance(
+                    ctx, world, full_obs,
+                );
+            }
+            ActionId::Ebih__Ebih_West__Below_Door__Open_Door => {
+                rules::observe_action_ebih__ebih_west__below_door__open_door__do(
+                    ctx, world, full_obs,
+                );
+            }
+            ActionId::Ebih__Ebih_West__Left_of_Switch__Open_Door => {
+                rules::observe_action_ebih__ebih_west__left_of_switch__open_door__do(
+                    ctx, world, full_obs,
+                );
+            }
+            ActionId::Ebih__Ebih_West__Lower_Save__Save => {
+                rules::observe_action_save(ctx, world, full_obs);
+            }
+            ActionId::Ebih__Ebih_East__Moving_Platform__Activate_Ride => {
+                rules::observe_action_ebih__ebih_east__moving_platform__activate_ride__do(
+                    ctx, world, full_obs,
+                );
+            }
+            ActionId::Ebih__Ebih_East__Lower_Moving_Platform__Activate_Ride => {
+                rules::observe_action_ebih__ebih_east__lower_moving_platform__activate_ride__do(
+                    ctx, world, full_obs,
+                );
+            }
+            ActionId::Ebih__Ebih_East__Lower_Moving_Platform__Activate_Lift => {
+                rules::observe_action_ebih__ebih_east__lower_moving_platform__activate_lift__do(
+                    ctx, world, full_obs,
+                );
+            }
+            ActionId::Ebih__Ebih_East__Dispenser__Activate_Lift => {
+                rules::observe_action_ebih__ebih_east__dispenser__activate_lift__do(
+                    ctx, world, full_obs,
+                );
+            }
+            ActionId::Ebih__Drone_Room__Pit_Left__Activate_Lift => {
+                rules::observe_action_ebih__drone_room__pit_left__activate_lift__do(
+                    ctx, world, full_obs,
+                );
+            }
+            ActionId::Ebih__Drone_Room__Pit_Left__Activate_Lift_But_Get_Off_Early => {
+                rules::observe_action_ebih__drone_room__pit_left__activate_lift_but_get_off_early__do(ctx, world, full_obs);
+            }
+            ActionId::Ebih__Drone_Room__Portal_Exit__Activate_Platform => {
+                rules::observe_action_ebih__drone_room__portal_exit__activate_platform__do(
+                    ctx, world, full_obs,
+                );
+            }
+            ActionId::Ebih__Drone_Room__Moving_Platform__Throw_Drone => {
+                rules::observe_action_deploy_drone_and_move__ebih_gt_drone_room_gt_tree(
+                    ctx, world, full_obs,
+                );
+            }
+            ActionId::Ebih__Vertical_Interchange__West_13__Open_Door => {
+                rules::observe_action_ebih__vertical_interchange__west_13__open_door__do(
+                    ctx, world, full_obs,
+                );
+            }
+            ActionId::Giguna_Breach__Peak__Save_Point__Save => {
+                rules::observe_action_save(ctx, world, full_obs);
+            }
+            ActionId::Giguna_Breach__Peak__Portal__Portal => {
+                rules::observe_action_main_portal_save_update(ctx, world, full_obs);
+            }
+            ActionId::Giguna_Breach__SW_Save__West_11__Open_Door => {
+                rules::observe_action_giguna_breach__sw_save__west_11__open_door__do(
+                    ctx, world, full_obs,
+                );
+            }
+            ActionId::Giguna_Breach__SW_Save__Save_Point__Save => {
+                rules::observe_action_save(ctx, world, full_obs);
+            }
+            ActionId::Giguna__Giguna_Northeast__Save_Point__Save => {
+                rules::observe_action_save(ctx, world, full_obs);
+            }
+            ActionId::Giguna__Giguna_Northeast__Gate_Left__Throw_Drone => {
+                rules::observe_action_deploy_drone(ctx, world, full_obs);
+            }
+            ActionId::Giguna__Giguna_Northeast__Right_Column__Open_Door_From_Afar => {
+                rules::observe_action_giguna__giguna_northeast__right_column__open_door_from_afar__do(ctx, world, full_obs);
+            }
+            ActionId::Giguna__Giguna_Northeast__Switch__Open_Door => {
+                rules::observe_action_giguna__giguna_northeast__switch__open_door__do(
+                    ctx, world, full_obs,
+                );
+            }
+            ActionId::Giguna__Carnelian__Upper_Susar__Caught => {
+                rules::observe_action_giguna__carnelian__upper_susar__caught__do(
+                    ctx, world, full_obs,
+                );
+            }
+            ActionId::Giguna__Carnelian__Upper_Susar__Hack => {
+                rules::observe_action_giguna__carnelian__upper_susar__hack__do(
+                    ctx, world, full_obs,
+                );
+            }
+            ActionId::Giguna__Carnelian__Switch__Open_Door => {
+                rules::observe_action_giguna__carnelian__switch__open_door__do(
+                    ctx, world, full_obs,
+                );
+            }
+            ActionId::Giguna__Carnelian__Lower_Susar__Caught => {
+                rules::observe_action_giguna__carnelian__lower_susar__caught__do(
+                    ctx, world, full_obs,
+                );
+            }
+            ActionId::Giguna__Carnelian__Lower_Susar__Hack => {
+                rules::observe_action_giguna__carnelian__lower_susar__hack__do(
+                    ctx, world, full_obs,
+                );
+            }
+            ActionId::Giguna__West_Caverns__Small_Platform__Throw_Drone_Up => {
+                rules::observe_action_deploy_drone(ctx, world, full_obs);
+            }
+            ActionId::Giguna__West_Caverns__East_Susar__Caught => {
+                rules::observe_action_giguna__west_caverns__east_susar__caught__do(
+                    ctx, world, full_obs,
+                );
+            }
+            ActionId::Giguna__West_Caverns__East_Susar__Hack => {
+                rules::observe_action_giguna__west_caverns__east_susar__hack__do(
+                    ctx, world, full_obs,
+                );
+            }
+            ActionId::Giguna__Wasteland__Middle_Cliff__Throw_Drone => {
+                rules::observe_action_deploy_drone_and_move__giguna_gt_wasteland_gt_middle_path(
+                    ctx, world, full_obs,
+                );
+            }
+            ActionId::Giguna__Giguna_Base__Stone_Knob__Throw_Drone => {
+                rules::observe_action_deploy_drone_and_move__giguna_gt_giguna_base_gt_kari(
+                    ctx, world, full_obs,
+                );
+            }
+            ActionId::Giguna__Giguna_Base__Save_Point__Save => {
+                rules::observe_action_save(ctx, world, full_obs);
+            }
+            ActionId::Giguna__Giguna_Base__Switch_Distance_1__Open_Door => {
+                rules::observe_action_giguna__giguna_base__switch_distance_1__open_door__do(
+                    ctx, world, full_obs,
+                );
+            }
+            ActionId::Giguna__Giguna_Base__Switch_Distance_2__Open_Door => {
+                rules::observe_action_giguna__giguna_base__switch_distance_2__open_door__do(
+                    ctx, world, full_obs,
+                );
+            }
+            ActionId::Giguna__Giguna_Base__Switch_Distance_3__Open_Door => {
+                rules::observe_action_giguna__giguna_base__switch_distance_3__open_door__do(
+                    ctx, world, full_obs,
+                );
+            }
+            ActionId::Giguna__Giguna_Base__Switch_Distance_4__Open_Door => {
+                rules::observe_action_giguna__giguna_base__switch_distance_4__open_door__do(
+                    ctx, world, full_obs,
+                );
+            }
+            ActionId::Giguna__Ruins_West__Save_Point__Save => {
+                rules::observe_action_save(ctx, world, full_obs);
+            }
+            ActionId::Giguna__Ruins_West__Lower_Ledge__Hack_Kishib => {
+                rules::observe_action_giguna__ruins_west__lower_ledge__hack_kishib__do(
+                    ctx, world, full_obs,
+                );
+            }
+            ActionId::Giguna__Ruins_West__Lower_Ledge__Destroy_Kishib => {
+                rules::observe_action_giguna__ruins_west__lower_ledge__destroy_kishib__do(
+                    ctx, world, full_obs,
+                );
+            }
+            ActionId::Giguna__Ruins_Top__Portal__Enter_Portal => {
+                rules::observe_action_breach_portal_save_update(ctx, world, full_obs);
+            }
+            ActionId::Giguna__Ruins_Top__Save_Point__Save => {
+                rules::observe_action_save(ctx, world, full_obs);
+            }
+            ActionId::Giguna__Ruins_Top__Switch__Open_Doors => {
+                rules::observe_action_giguna__ruins_top__switch__open_doors__do(
+                    ctx, world, full_obs,
+                );
+            }
+            ActionId::Giguna__Ruins_Top__Turret_Balcony_West__Throw_Drone_onto_Tower => {
+                rules::observe_action_deploy_drone_and_move__giguna_gt_ruins_top_gt_west_7(
+                    ctx, world, full_obs,
+                );
+            }
+            ActionId::Giguna__Clouds__Platform_Start__Hack_and_Ride_to_Portal => {
+                rules::observe_action_giguna__clouds__platform_start__hack_and_ride_to_portal__do(
+                    ctx, world, full_obs,
+                );
+            }
+            ActionId::Giguna__Clouds__Platform_Start__Hack_Deploy_Ride_to_Portal => {
+                rules::observe_action_giguna__clouds__platform_start__hack_deploy_ride_to_portal__do(ctx, world, full_obs);
+            }
+            ActionId::Giguna__Clouds__Platform_Start__Hack_and_Get_Off_Early => {
+                rules::observe_action_giguna__clouds__platform_start__hack_and_get_off_early__do(
+                    ctx, world, full_obs,
+                );
+            }
+            ActionId::Giguna__East_Caverns__West_14__Enter_Combo => {
+                rules::observe_action_giguna__east_caverns__west_14__enter_combo__do(
+                    ctx, world, full_obs,
+                );
+            }
+            ActionId::Giguna__East_Caverns__Upper_Susar__Caught => {
+                rules::observe_action_giguna__east_caverns__upper_susar__caught__do(
+                    ctx, world, full_obs,
+                );
+            }
+            ActionId::Giguna__East_Caverns__Upper_Susar_Mid_jump__Hack => {
+                rules::observe_action_giguna__east_caverns__upper_susar_mid_jump__hack__do(
+                    ctx, world, full_obs,
+                );
+            }
+            ActionId::Giguna__East_Caverns__Upper_Susar_Jump_from_East__Hack => {
+                rules::observe_action_giguna__east_caverns__upper_susar_jump_from_east__hack__do(
+                    ctx, world, full_obs,
+                );
+            }
+            ActionId::Giguna__East_Caverns__Upper_Susar_Jump_from_East__Caught => {
+                rules::observe_action_giguna__east_caverns__upper_susar_jump_from_east__caught__do(
+                    ctx, world, full_obs,
+                );
+            }
+            ActionId::Giguna__East_Caverns__Mid_Susar__Hack => {
+                rules::observe_action_giguna__east_caverns__mid_susar__hack__do(
+                    ctx, world, full_obs,
+                );
+            }
+            ActionId::Giguna__East_Caverns__Mid_Susar__Caught => {
+                rules::observe_action_giguna__east_caverns__mid_susar__caught__do(
+                    ctx, world, full_obs,
+                );
+            }
+            ActionId::Giguna__East_Caverns__Statues_Ledge__Open_Door => {
+                rules::observe_action_giguna__east_caverns__statues_ledge__open_door__do(
+                    ctx, world, full_obs,
+                );
+            }
+            ActionId::Giguna__East_Caverns__Switch__Open_Door => {
+                rules::observe_action_giguna__east_caverns__switch__open_door__do(
+                    ctx, world, full_obs,
+                );
+            }
+            ActionId::Giguna__East_Caverns__West_16__Open_Door => {
+                rules::observe_action_giguna__east_caverns__west_16__open_door__do(
+                    ctx, world, full_obs,
+                );
+            }
+            ActionId::Giguna__East_Caverns__Lower_Susar__Hack => {
+                rules::observe_action_giguna__east_caverns__lower_susar__hack__do(
+                    ctx, world, full_obs,
+                );
+            }
+            ActionId::Giguna__East_Caverns__Lower_Susar__Caught => {
+                rules::observe_action_giguna__east_caverns__lower_susar__caught__do(
+                    ctx, world, full_obs,
+                );
+            }
+            ActionId::Giguna__Gateway__One_Jump__Open_Door => {
+                rules::observe_action_giguna__gateway__one_jump__open_door__do(
+                    ctx, world, full_obs,
+                );
+            }
+            ActionId::Giguna__Gateway__Flask_Ledge__Open_Door => {
+                rules::observe_action_giguna__gateway__flask_ledge__open_door__do(
+                    ctx, world, full_obs,
+                );
+            }
+            ActionId::Glacier__Revival__Save_Point__Save => {
+                rules::observe_action_save(ctx, world, full_obs);
+            }
+            ActionId::Interior__Cave_Behind_Waterfall__Middle__Throw_Drone => {
+                rules::observe_action_deploy_drone(ctx, world, full_obs);
+            }
+            ActionId::Irikar_Breach__Exit_Corridor__Portal_Stand__Enter_Portal => {
+                rules::observe_action_pass(ctx, world, full_obs);
+                rules::observe_action_clear_breach_save(ctx, world, full_obs);
+            }
+            ActionId::Irikar__Hub__Save_Point__Save => {
+                rules::observe_action_save(ctx, world, full_obs);
+            }
+            ActionId::Irikar__Hub__Portal_Stand__Enter_Portal => {
+                rules::observe_action_breach_portal_save_update(ctx, world, full_obs);
+            }
+            ActionId::Irikar__Hub__Royal_Storage_By_Wall__Shockwave_Wall => {
+                rules::observe_action_collect__irikar_royal_storage_wall_collect__flask_visit__irikar_gt_hub_gt_royal_storage_in_wall_gt_item(ctx, world, full_obs);
+            }
+            ActionId::Irikar__Sight_Room__Portal__Enter_Portal => {
+                rules::observe_action_breach_portal_save_update(ctx, world, full_obs);
+            }
+            ActionId::Irikar__Basement_Portal__Moving_Platform_Start__Activate_Platform => {
+                rules::observe_action_irikar__basement_portal__moving_platform_start__activate_platform__do(ctx, world, full_obs);
+            }
+            ActionId::Irikar__Basement_Portal__Portal_Stand__Enter_Portal => {
+                rules::observe_action_breach_portal_save_update(ctx, world, full_obs);
+            }
+            ActionId::Uhrum__West_Entrance__Save_Point__Save => {
+                rules::observe_action_save(ctx, world, full_obs);
+            }
+            ActionId::Uhrum__Waterfalls__Center_Island_Middle__Throw_Drone_Up => {
+                rules::observe_action_deploy_drone(ctx, world, full_obs);
+            }
+            ActionId::Uhrum__Save_Room__Save_Point__Save => {
+                rules::observe_action_save(ctx, world, full_obs);
+            }
+            ActionId::Uhrum__Annuna_Corridor__Save_Point__Save => {
+                rules::observe_action_save(ctx, world, full_obs);
+            }
+            ActionId::Uhrum__Annuna_Corridor__Between_Two_Flowers__Throw_Drone_Up => {
+                rules::observe_action_deploy_drone(ctx, world, full_obs);
+            }
+            ActionId::Uhrum__Annuna_Corridor__Between_Two_Flowers__Throw_Drone_Not_As_High => {
+                rules::observe_action_deploy_drone(ctx, world, full_obs);
+            }
+        }
+    }
 }
 
 #[derive(Copy, Clone, Debug)]
@@ -8466,6 +8894,29 @@ impl world::Warp for Warp {
             WarpId::FastTravelKiengir => false,
             WarpId::MainSave => true,
             WarpId::Menu => false,
+        }
+    }
+    fn observe_effects(&self, ctx: &Context, world: &World, full_obs: &mut FullObservation) {
+        match self.id {
+            WarpId::BreachSave => {
+                rules::observe_action_refill_energy(ctx, world, full_obs);
+            }
+            WarpId::EarthSave => {}
+            WarpId::ExitBreach => {
+                rules::observe_action_clear_breach_save(ctx, world, full_obs);
+            }
+            WarpId::ExitMenu => {
+                rules::observe_action_last_set_default(ctx, world, full_obs);
+            }
+            WarpId::FastTravelKiengir => {
+                rules::observe_action_refill_energy(ctx, world, full_obs);
+            }
+            WarpId::MainSave => {
+                rules::observe_action_refill_energy(ctx, world, full_obs);
+            }
+            WarpId::Menu => {
+                rules::observe_action_last_set_position(ctx, world, full_obs);
+            }
         }
     }
 }
