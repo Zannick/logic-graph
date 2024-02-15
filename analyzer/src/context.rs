@@ -85,6 +85,11 @@ pub trait Ctx:
         cost: &<<Self::World as World>::Location as Accessible>::Currency,
     ) -> i16;
     fn spend(&mut self, cost: &<<Self::World as World>::Location as Accessible>::Currency);
+    fn observe_afford(
+        &self,
+        cost: &<<Self::World as World>::Location as Accessible>::Currency,
+        observer: &mut Self::Observation,
+    );
 
     fn visit(&mut self, loc_id: <<Self::World as World>::Location as Location>::LocId);
     fn skip(&mut self, loc_id: <<Self::World as World>::Location as Location>::LocId);

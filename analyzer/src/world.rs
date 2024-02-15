@@ -21,6 +21,12 @@ pub trait Accessible: Sync {
     type Context: Ctx;
     type Currency: Id + Default;
     fn can_access(&self, ctx: &Self::Context, world: &<Self::Context as Ctx>::World) -> bool;
+    fn observe_access(
+        &self,
+        ctx: &Self::Context,
+        world: &<Self::Context as Ctx>::World,
+        observer: &mut <Self::Context as Ctx>::Observation,
+    );
     /// Base access time, assumed to be a constant.
     fn base_time(&self) -> u32;
     /// Actual access time. Must be at least base_time.

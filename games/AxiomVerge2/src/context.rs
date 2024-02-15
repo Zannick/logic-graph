@@ -11,6 +11,7 @@ use crate::observe::*;
 use crate::prices::Currency;
 use crate::rules;
 use analyzer::context;
+use analyzer::matchertrie::IntegerObservation;
 use analyzer::world::World;
 use enum_map::EnumMap;
 use serde::{Deserialize, Serialize};
@@ -5441,6 +5442,14 @@ impl context::Ctx for Context {
             Currency::Energy(c) => self.energy -= *c,
             Currency::Flasks(c) => self.flasks -= *c,
             Currency::Refills(c) => self.refills -= *c,
+        }
+    }
+    fn observe_afford(&self, cost: &Currency, full_obs: &mut FullObservation) {
+        match cost {
+            Currency::Free => (),
+            Currency::Energy(c) => full_obs.observe_energy(IntegerObservation::Ge(*c)),
+            Currency::Flasks(c) => full_obs.observe_flasks(IntegerObservation::Ge(*c)),
+            Currency::Refills(c) => full_obs.observe_refills(IntegerObservation::Ge(*c)),
         }
     }
 
