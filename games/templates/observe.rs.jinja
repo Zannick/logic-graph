@@ -11,7 +11,7 @@ use crate::movements;
 use crate::prices::Currency;
 use crate::rules;
 use analyzer::matchertrie::*;
-use analyzer::observation::*;
+use analyzer::observer::*;
 use analyzer::solutions::Solution;
 use std::sync::{Arc, Mutex};
 
@@ -69,7 +69,7 @@ pub struct FullObservation {
     pub strict: bool,
 }
 
-impl Observation for FullObservation {
+impl Observer for FullObservation {
     type Ctx = Context;
     type Matcher = ObservationMatcher;
 

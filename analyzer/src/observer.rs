@@ -5,7 +5,7 @@ use crate::world::{Exit, Location, World};
 use std::fmt::Debug;
 use std::sync::Arc;
 
-pub trait Observation: Debug {
+pub trait Observer: Debug {
     type Ctx: Ctx;
     type Matcher: MatcherDispatch<
             Node = Node<Self::Matcher>,

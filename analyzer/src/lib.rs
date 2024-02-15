@@ -25,7 +25,7 @@ pub mod greedy;
 pub mod heap;
 pub mod matchertrie;
 pub mod minimize;
-pub mod observation;
+pub mod observer;
 pub mod route;
 pub mod settings;
 pub mod solutions;

@@ -1573,7 +1573,7 @@ impl context::Ctx for Context {
     type AreaId = AreaId;
     type RegionId = RegionId;
     type MovementState = movements::MovementState;
-    type Observation = FullObservation;
+    type Observer = FullObservation;
     type Expectation = Expectation;
     const NUM_ITEMS: u32 = 118;
 

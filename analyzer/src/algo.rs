@@ -4,7 +4,7 @@ use crate::greedy::*;
 use crate::heap::RocksBackedQueue;
 use crate::matchertrie::*;
 use crate::minimize::pinpoint_minimize;
-use crate::observation::Observation;
+use crate::observer::Observer;
 use crate::solutions::{Solution, SolutionCollector};
 use crate::world::*;
 use anyhow::Result;
@@ -238,7 +238,7 @@ where
     world: &'a W,
     startctx: ContextWrapper<T>,
     solve_trie:
-        Arc<MatcherTrie<<T::Observation as Observation>::Matcher>>,
+        Arc<MatcherTrie<<T::Observer as Observer>::Matcher>>,
     solutions: Arc<Mutex<SolutionCollector<T>>>,
     queue: RocksBackedQueue<'a, W, T>,
     iters: AtomicUsize,
@@ -323,7 +323,7 @@ where
         world.skip_unused_items(&mut ctx);
 
         let solve_trie: Arc<
-            MatcherTrie<<T::Observation as Observation>::Matcher>,
+            MatcherTrie<<T::Observer as Observer>::Matcher>,
         > = Arc::default();
         let mut solutions = SolutionCollector::<T>::new(
             "data/solutions.txt",

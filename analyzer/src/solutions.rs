@@ -1,6 +1,6 @@
 use crate::context::*;
 use crate::matchertrie::MatcherTrie;
-use crate::observation::Observation;
+use crate::observer::Observer;
 use crate::world::*;
 use crate::{new_hashmap, CommonHasher};
 use log;
@@ -42,7 +42,7 @@ where
     best_file: &'static str,
     file: File,
     startctx: T,
-    solve_trie: Arc<MatcherTrie<<T::Observation as Observation>::Matcher>>,
+    solve_trie: Arc<MatcherTrie<<T::Observer as Observer>::Matcher>>,
     count: usize,
     best: u32,
 }
@@ -56,7 +56,7 @@ where
         previews_file: &'static str,
         best_file: &'static str,
         startctx: T,
-        solve_trie: Arc<MatcherTrie<<T::Observation as Observation>::Matcher>>,
+        solve_trie: Arc<MatcherTrie<<T::Observer as Observer>::Matcher>>,
     ) -> io::Result<SolutionCollector<T>> {
         Ok(SolutionCollector {
             map: new_hashmap(),
@@ -156,7 +156,7 @@ where
         // one more state than history steps.
         assert!(full_history.len() == solution.history.len() + 1);
         let mut prev = full_history.last().unwrap();
-        let mut solve = <T::Observation as Observation>::from_victory_state(prev, world);
+        let mut solve = <T::Observer as Observer>::from_victory_state(prev, world);
 
         self.solve_trie.insert(
             solve.to_vec(prev),

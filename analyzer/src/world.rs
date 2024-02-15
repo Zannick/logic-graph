@@ -25,7 +25,7 @@ pub trait Accessible: Sync {
         &self,
         ctx: &Self::Context,
         world: &<Self::Context as Ctx>::World,
-        observer: &mut <Self::Context as Ctx>::Observation,
+        observer: &mut <Self::Context as Ctx>::Observer,
     );
     /// Base access time, assumed to be a constant.
     fn base_time(&self) -> u32;
@@ -125,7 +125,7 @@ pub trait Action: Accessible {
         &self,
         ctx: &Self::Context,
         world: &<Self::Context as Ctx>::World,
-        observer: &mut <Self::Context as Ctx>::Observation,
+        observer: &mut <Self::Context as Ctx>::Observer,
     );
 }
 
@@ -143,7 +143,7 @@ pub trait Warp: Accessible {
         &self,
         ctx: &Self::Context,
         world: &<Self::Context as Ctx>::World,
-        observer: &mut <Self::Context as Ctx>::Observation,
+        observer: &mut <Self::Context as Ctx>::Observer,
     );
 }
 
