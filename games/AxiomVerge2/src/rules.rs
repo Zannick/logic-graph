@@ -14337,7 +14337,10 @@ pub fn observe_action_breach_portal_save_update(
     full_obs: &mut FullObservation,
 ) {
     // $breach_portal_save_update
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
     hobserve__breach_portal_save_update!(ctx, world, full_obs);
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_clear_breach_save(
     ctx: &Context,
@@ -14345,7 +14348,10 @@ pub fn observe_action_clear_breach_save(
     full_obs: &mut FullObservation,
 ) {
     // $clear_breach_save
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
     hobserve__clear_breach_save!(ctx, world, full_obs);
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_collect__irikar_royal_storage_wall_collect__flask_visit__irikar_gt_hub_gt_royal_storage_in_wall_gt_item(
     ctx: &Context,
@@ -14353,7 +14359,10 @@ pub fn observe_action_collect__irikar_royal_storage_wall_collect__flask_visit__i
     full_obs: &mut FullObservation,
 ) {
     // $collect(Irikar_Royal_Storage_Wall); $collect(Flask); $visit(`Irikar > Hub > Royal Storage in Wall > Item`);
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
     rules::observe_action_flasks_incr_1(ctx, world, full_obs);
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_deploy_drone(
     ctx: &Context,
@@ -14361,7 +14370,10 @@ pub fn observe_action_deploy_drone(
     full_obs: &mut FullObservation,
 ) {
     // $deploy_drone
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
     hobserve__deploy_drone!(ctx, world, full_obs);
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_deploy_drone_and_move__annuna_gt_east_bridge_gt_center_corridor(
     ctx: &Context,
@@ -14369,12 +14381,15 @@ pub fn observe_action_deploy_drone_and_move__annuna_gt_east_bridge_gt_center_cor
     full_obs: &mut FullObservation,
 ) {
     // $deploy_drone_and_move(`Annuna > East Bridge > Center Corridor`)
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
     hobserve__deploy_drone_and_move!(
         ctx,
         world,
         SpotId::Annuna__East_Bridge__Center_Corridor,
         full_obs
     );
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_deploy_drone_and_move__annuna_gt_east_bridge_gt_tower_base_east(
     ctx: &Context,
@@ -14382,12 +14397,15 @@ pub fn observe_action_deploy_drone_and_move__annuna_gt_east_bridge_gt_tower_base
     full_obs: &mut FullObservation,
 ) {
     // $deploy_drone_and_move(`Annuna > East Bridge > Tower Base East`)
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
     hobserve__deploy_drone_and_move!(
         ctx,
         world,
         SpotId::Annuna__East_Bridge__Tower_Base_East,
         full_obs
     );
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_deploy_drone_and_move__ebih_gt_drone_room_gt_tree(
     ctx: &Context,
@@ -14395,7 +14413,10 @@ pub fn observe_action_deploy_drone_and_move__ebih_gt_drone_room_gt_tree(
     full_obs: &mut FullObservation,
 ) {
     // $deploy_drone_and_move(`Ebih > Drone Room > Tree`)
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
     hobserve__deploy_drone_and_move!(ctx, world, SpotId::Ebih__Drone_Room__Tree, full_obs);
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_deploy_drone_and_move__ebih_gt_ebih_west_gt_alcove_entrance(
     ctx: &Context,
@@ -14403,12 +14424,15 @@ pub fn observe_action_deploy_drone_and_move__ebih_gt_ebih_west_gt_alcove_entranc
     full_obs: &mut FullObservation,
 ) {
     // $deploy_drone_and_move(`Ebih > Ebih West > Alcove Entrance`)
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
     hobserve__deploy_drone_and_move!(
         ctx,
         world,
         SpotId::Ebih__Ebih_West__Alcove_Entrance,
         full_obs
     );
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_deploy_drone_and_move__giguna_gt_giguna_base_gt_kari(
     ctx: &Context,
@@ -14416,7 +14440,10 @@ pub fn observe_action_deploy_drone_and_move__giguna_gt_giguna_base_gt_kari(
     full_obs: &mut FullObservation,
 ) {
     // $deploy_drone_and_move(`Giguna > Giguna Base > Kari`)
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
     hobserve__deploy_drone_and_move!(ctx, world, SpotId::Giguna__Giguna_Base__Kari, full_obs);
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_deploy_drone_and_move__giguna_gt_ruins_top_gt_west_7(
     ctx: &Context,
@@ -14424,7 +14451,10 @@ pub fn observe_action_deploy_drone_and_move__giguna_gt_ruins_top_gt_west_7(
     full_obs: &mut FullObservation,
 ) {
     // $deploy_drone_and_move(`Giguna > Ruins Top > West 7`)
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
     hobserve__deploy_drone_and_move!(ctx, world, SpotId::Giguna__Ruins_Top__West_7, full_obs);
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_deploy_drone_and_move__giguna_gt_wasteland_gt_middle_path(
     ctx: &Context,
@@ -14432,7 +14462,10 @@ pub fn observe_action_deploy_drone_and_move__giguna_gt_wasteland_gt_middle_path(
     full_obs: &mut FullObservation,
 ) {
     // $deploy_drone_and_move(`Giguna > Wasteland > Middle Path`)
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
     hobserve__deploy_drone_and_move!(ctx, world, SpotId::Giguna__Wasteland__Middle_Path, full_obs);
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_ebih__base_camp__left_platform__move_left_platform__do(
     ctx: &Context,
@@ -14503,10 +14536,13 @@ pub fn observe_action_ebih__ebih_west__below_door__open_door__do(
     full_obs: &mut FullObservation,
 ) {
     // ^_door_open = true; IF (^indra WITHIN `Ebih > Ebih West > Above Door`) { ^indra = `Ebih > Ebih West > Below Door`; }
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
     if {
         full_obs.observe_indra();
         ctx.indra() == SpotId::Ebih__Ebih_West__Above_Door
-    } {}
+    } {};
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_ebih__ebih_west__left_of_switch__open_door__do(
     ctx: &Context,
@@ -14514,10 +14550,13 @@ pub fn observe_action_ebih__ebih_west__left_of_switch__open_door__do(
     full_obs: &mut FullObservation,
 ) {
     // ^_door_open = true; IF (^indra WITHIN `Ebih > Ebih West > Above Door`) { ^indra = `Ebih > Ebih West > Below Door`; }
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
     if {
         full_obs.observe_indra();
         ctx.indra() == SpotId::Ebih__Ebih_West__Above_Door
-    } {}
+    } {};
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_ebih__grid_25_10_12__door_left__open_door__do(
     ctx: &Context,
@@ -14616,11 +14655,14 @@ pub fn observe_action_giguna__clouds__platform_start__hack_and_ride_to_portal__d
     full_obs: &mut FullObservation,
 ) {
     // ^_platform_and_portal = true; if (^indra WITHIN ^position) { ^indra = `Giguna > Clouds > Platform Stop` }
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
     if {
         full_obs.observe_indra();
         full_obs.observe_position();
         ctx.indra() == ctx.position()
-    } {}
+    } {};
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_giguna__clouds__platform_start__hack_deploy_ride_to_portal__do(
     ctx: &Context,
@@ -14628,7 +14670,10 @@ pub fn observe_action_giguna__clouds__platform_start__hack_deploy_ride_to_portal
     full_obs: &mut FullObservation,
 ) {
     // ^_platform_and_portal = true; $deploy_drone_and_move(`Giguna > Clouds > Platform Stop`)
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
     hobserve__deploy_drone_and_move!(ctx, world, SpotId::Giguna__Clouds__Platform_Stop, full_obs);
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_giguna__east_caverns__lower_susar__caught__do(
     ctx: &Context,
@@ -14825,7 +14870,10 @@ pub fn observe_action_indra_set_default_refill_energy(
     full_obs: &mut FullObservation,
 ) {
     // ^indra = $default; $refill_energy
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
     hobserve__refill_energy!(ctx, world, full_obs);
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_irikar__basement_portal__moving_platform_start__activate_platform__do(
     ctx: &Context,
@@ -14854,7 +14902,10 @@ pub fn observe_action_main_portal_save_update(
     full_obs: &mut FullObservation,
 ) {
     // $main_portal_save_update
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
     hobserve__main_portal_save_update!(ctx, world, full_obs);
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_mode_set_drone(
     ctx: &Context,
@@ -14886,7 +14937,10 @@ pub fn observe_action_mode_set_indra_last_set_indra(
 }
 pub fn observe_action_pass(ctx: &Context, world: &graph::World, full_obs: &mut FullObservation) {
     // $pass
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
     ();
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_refill_energy(
     ctx: &Context,
@@ -14894,7 +14948,10 @@ pub fn observe_action_refill_energy(
     full_obs: &mut FullObservation,
 ) {
     // $refill_energy
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
     hobserve__refill_energy!(ctx, world, full_obs);
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_refills_incr_1(
     ctx: &Context,
@@ -14910,11 +14967,17 @@ pub fn observe_action_reset_old_area__newpos(
     full_obs: &mut FullObservation,
 ) {
     // $reset_old_area(^newpos)
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
     hobserve__reset_old_area!(ctx, world, newpos, full_obs);
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_save(ctx: &Context, world: &graph::World, full_obs: &mut FullObservation) {
     // $save
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
     hobserve__save!(ctx, world, full_obs);
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_save_last(
     ctx: &Context,
@@ -14923,7 +14986,10 @@ pub fn observe_action_save_last(
     full_obs: &mut FullObservation,
 ) {
     // $save_last
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
     hobserve__save_last!(ctx, world, full_obs);
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_save_set_glacier_gt_revival_gt_save_point(
     ctx: &Context,

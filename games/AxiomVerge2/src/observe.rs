@@ -126,6 +126,7 @@ pub struct FullObservation {
     cbits9: Option<flags::ContextBits9>,
     cbits10: Option<flags::ContextBits10>,
     cbits11: Option<flags::ContextBits11>,
+    pub strict: bool,
 }
 
 impl Observation for FullObservation {
@@ -134,6 +135,7 @@ impl Observation for FullObservation {
 
     fn from_victory_state(won: &Context, world: &World) -> Self {
         let mut full_obs = Self::default();
+        full_obs.position = true;
         match world.rule_victory {
             RuleVictory::Default => {
                 rules::observe_access___escape_objective(won, world, &mut full_obs);
@@ -2843,13 +2845,25 @@ impl FullObservation {
         self.position = true;
     }
     pub fn observe_energy(&mut self, obs: IntegerObservation<i16>) {
-        self.energy = self.energy.combine(obs);
+        if self.strict {
+            self.energy = IntegerObservation::Exact;
+        } else {
+            self.energy = self.energy.combine(obs);
+        }
     }
     pub fn observe_flasks(&mut self, obs: IntegerObservation<i8>) {
-        self.flasks = self.flasks.combine(obs);
+        if self.strict {
+            self.flasks = IntegerObservation::Exact;
+        } else {
+            self.flasks = self.flasks.combine(obs);
+        }
     }
     pub fn observe_refills(&mut self, obs: IntegerObservation<i8>) {
-        self.refills = self.refills.combine(obs);
+        if self.strict {
+            self.refills = IntegerObservation::Exact;
+        } else {
+            self.refills = self.refills.combine(obs);
+        }
     }
     pub fn observe_mode(&mut self) {
         self.mode = true;
@@ -3258,7 +3272,11 @@ impl FullObservation {
         self.cbits2.insert(flags::ContextBits2::FAST_TRAVEL);
     }
     pub fn observe_flask(&mut self, obs: IntegerObservation<i8>) {
-        self.flask = self.flask.combine(obs);
+        if self.strict {
+            self.flask = IntegerObservation::Exact;
+        } else {
+            self.flask = self.flask.combine(obs);
+        }
     }
     pub fn observe_giguna_boulder(&mut self) {
         self.cbits2.insert(flags::ContextBits2::GIGUNA_BOULDER);
@@ -3286,7 +3304,11 @@ impl FullObservation {
             .insert(flags::ContextBits2::GIGUNA_NORTHEAST_GATE);
     }
     pub fn observe_health_fragment(&mut self, obs: IntegerObservation<i8>) {
-        self.health_fragment = self.health_fragment.combine(obs);
+        if self.strict {
+            self.health_fragment = IntegerObservation::Exact;
+        } else {
+            self.health_fragment = self.health_fragment.combine(obs);
+        }
     }
     pub fn observe_health_node(&mut self) {
         self.cbits2.insert(flags::ContextBits2::HEALTH_NODE);

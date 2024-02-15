@@ -66,6 +66,7 @@ pub struct FullObservation {
 %% for group in bfp.flag_groups
     cbits{{ loop.index }}: Option<flags::ContextBits{{ loop.index }}>,
 %% endfor
+    pub strict: bool,
 }
 
 impl Observation for FullObservation {
@@ -74,6 +75,7 @@ impl Observation for FullObservation {
 
     fn from_victory_state(won: &Context, world: &World) -> Self {
         let mut full_obs = Self::default();
+        full_obs.position = true;
         match world.rule_victory {
 %% for v, info in rules['$victory'].variants.items()
             RuleVictory::{{ v|construct_id|camelize }} => {
@@ -317,7 +319,11 @@ impl FullObservation {
     }
 %% elif t in int_types
     pub fn observe_{{ ctx }}(&mut self, obs: IntegerObservation<{{ t }}>) {
-        self.{{ ctx }} = self.{{ ctx }}.combine(obs);
+        if self.strict {
+            self.{{ ctx }} = IntegerObservation::Exact;
+        } else {
+            self.{{ ctx }} = self.{{ ctx }}.combine(obs);
+        }
     }
 %% else
     pub fn observe_{{ ctx }}(&mut self) {
@@ -333,7 +339,11 @@ impl FullObservation {
     }
 %% else
     pub fn observe_{{ ctx }}(&mut self, obs: IntegerObservation<{{ ct|get_int_type_for_max }}>) {
-        self.{{ ctx }} = self.{{ ctx }}.combine(obs);
+        if self.strict {
+            self.{{ ctx }} = IntegerObservation::Exact;
+        } else {
+            self.{{ ctx }} = self.{{ ctx }}.combine(obs);
+        }
     }
 %% endif
 %% endfor
