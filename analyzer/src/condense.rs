@@ -80,6 +80,23 @@ where
             .all(|&e| world.get_exit(e).can_access(ctx, world))
     }
 
+    pub fn observe_access<W>(&self, world: &W, ctx: &T, movements: T::MovementState, observer: &mut T::Observer) -> bool
+    where
+        W: World,
+        T: Ctx<World = W>,
+        W::Exit: Exit<ExitId = E>,
+        W::Location: Location<Context = T>,
+    {
+        if let Some(m) = &self.movement {
+            if !T::is_subset(*m, movements) {
+                return false;
+            }
+        }
+        self.reqs
+            .iter()
+            .all(|&e| world.get_exit(e).observe_access(ctx, world, observer))
+    }
+
     pub fn explain<W>(&self, world: &W, ctx: &T, movements: T::MovementState) -> String
     where
         W: World,
@@ -129,6 +146,16 @@ where
         W::Location: Location<Context = T>,
     {
         self.reqs.can_access(world, ctx, movements)
+    }
+
+    pub fn observe_access<W>(&self, world: &W, ctx: &T, movements: T::MovementState, observer: &mut T::Observer) -> bool
+    where
+        W: World,
+        T: Ctx<World = W>,
+        W::Exit: Exit<ExitId = E>,
+        W::Location: Location<Context = T>,
+    {
+        self.reqs.observe_access(world, ctx, movements, observer)
     }
 
     pub fn explain<W>(&self, world: &W, ctx: &T, movements: T::MovementState) -> String

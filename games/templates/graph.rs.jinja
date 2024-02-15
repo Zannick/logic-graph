@@ -64,14 +64,14 @@ impl world::Accessible for Location {
 %% endfor
         }
     }
-    fn observe_access(&self, ctx: &Context, world: &World, full_obs: &mut FullObservation) {
+    fn observe_access(&self, ctx: &Context, world: &World, full_obs: &mut FullObservation) -> bool {
         ctx.observe_afford(&self.price, full_obs);
         match self.id {
 %% for loc in gl.locations()|selectattr('access_id')|sort(attribute='id')
             LocationId::{{ loc.id }} => rules::observe_access_{{ loc.access_id }}(ctx, world, full_obs),
 %% endfor
             _ => true,
-        };
+        }
     }
     fn base_time(&self) -> u32 { self.time }
     fn time(&self, ctx: &Context, world: &World) -> u32 {
@@ -138,14 +138,14 @@ impl world::Accessible for Exit {
 %% endfor
         }
     }
-    fn observe_access(&self, ctx: &Context, world: &World, full_obs: &mut FullObservation) {
+    fn observe_access(&self, ctx: &Context, world: &World, full_obs: &mut FullObservation) -> bool {
         ctx.observe_afford(&self.price, full_obs);
         match self.id {
 %% for ex in gl.exits()|selectattr('access_id')|sort(attribute='id')
             ExitId::{{ ex.id }} => rules::observe_access_{{ ex.access_id }}(ctx, world, full_obs),
 %% endfor
             _ => true,
-        };
+        }
     }
     fn base_time(&self) -> u32 { self.time }
     fn time(&self, ctx: &Context, world: &World) -> u32 {
@@ -221,14 +221,14 @@ impl world::Accessible for Action {
 %% endfor
         }
     }
-    fn observe_access(&self, ctx: &Context, world: &World, full_obs: &mut FullObservation) {
+    fn observe_access(&self, ctx: &Context, world: &World, full_obs: &mut FullObservation) -> bool {
         ctx.observe_afford(&self.price, full_obs);
         match self.id {
 %% for act in gl.actions()|selectattr('access_id')|sort(attribute='id')
             ActionId::{{ act.id }} => rules::observe_access_{{ act.access_id }}(ctx, world, full_obs),
 %% endfor
             _ => true,
-        };
+        }
     }
     fn base_time(&self) -> u32 { self.time }
     fn time(&self, ctx: &Context, world: &World) -> u32 { 
@@ -334,14 +334,14 @@ impl world::Accessible for Warp {
 %% endfor
         }
     }
-    fn observe_access(&self, ctx: &Context, world: &World, full_obs: &mut FullObservation) {
+    fn observe_access(&self, ctx: &Context, world: &World, full_obs: &mut FullObservation) -> bool {
         ctx.observe_afford(&self.price, full_obs);
         match self.id {
 %% for w in warps.values()|selectattr('access_id')|sort(attribute='id')
             WarpId::{{ w.id }} => rules::observe_access_{{ w.access_id }}(ctx, world, full_obs),
 %% endfor
             _ => true,
-        };
+        }
     }
     fn base_time(&self) -> u32 { self.time }
     fn time(&self, ctx: &Context, world: &World) -> u32 {

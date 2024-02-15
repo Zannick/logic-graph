@@ -99,6 +99,15 @@ impl Observer for FullObservation {
         }
     }
 
+    fn observe_collect(&mut self, ctx: &Context, item: Item, world: &World) {
+        match item {
+%% for item, info in collect.items()
+            Item::{{ item }} => rules::observe_action_{{ info.action_id }}(ctx, world, self),
+%% endfor
+            _ => (),
+        }
+    }
+
     fn observe_on_entry(&mut self, cur: &Context, dest: SpotId, world: &World) {
 %% for pltype in ['Region', 'Area']
 %% if context_position_watchers[pltype|lower]

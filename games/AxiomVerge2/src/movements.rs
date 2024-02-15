@@ -7,6 +7,7 @@
 use crate::context::Context;
 use crate::graph::World;
 use crate::graph_enums::*;
+use crate::observe::FullObservation;
 use crate::rules;
 use analyzer::context::Ctx;
 
@@ -27,7 +28,17 @@ fn has_movement(ctx: &Context, world: &World, m: Movement) -> bool {
 pub type MovementState = [bool; 1];
 
 pub fn get_movement_state(ctx: &Context, world: &World) -> MovementState {
-    [has_movement(ctx, world, Movement::Water)]
+    [rules::access_underwater_movement(ctx, world)]
+}
+
+pub fn observe_movement_state(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> MovementState {
+    [rules::observe_access_underwater_movement(
+        ctx, world, full_obs,
+    )]
 }
 
 pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotId) -> u32 {

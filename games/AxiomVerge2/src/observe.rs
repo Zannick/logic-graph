@@ -1640,6 +1640,24 @@ impl Observer for FullObservation {
         }
     }
 
+    fn observe_collect(&mut self, ctx: &Context, item: Item, world: &World) {
+        match item {
+            Item::Amashilama => rules::observe_action_save_set_glacier_gt_revival_gt_save_point(ctx, world, self),
+            Item::Anuman => rules::observe_action_indra_set_default(ctx, world, self),
+            Item::Flask => rules::observe_action_flasks_incr_1(ctx, world, self),
+            Item::Big_Flask => rules::observe_action_flasks_incr_2(ctx, world, self),
+            Item::Infect => rules::observe_action_refill_energy(ctx, world, self),
+            Item::Health_Fragment => rules::observe_action_refill_energy(ctx, world, self),
+            Item::Health_Node => rules::observe_action_refill_energy(ctx, world, self),
+            Item::Power_Core => rules::observe_action_refills_incr_1(ctx, world, self),
+            Item::Amagi_Stronghold_Wall_And_Boulder_1 => rules::observe_action_skip__amagi_gt_west_lake_gt_stronghold_ceiling_left_gt_knock_down_left_boulder_add_item__amagi_stronghold_wall_1_add_item__amagi_stronghold_boulder_1(ctx, world, self),
+            Item::Amagi_Stronghold_Boulder_And_Wall_2 => rules::observe_action_skip__amagi_gt_west_lake_gt_stronghold_ceiling_right_gt_knock_down_right_boulder_add_item__amagi_stronghold_wall_2_add_item__amagi_stronghold_boulder_2(ctx, world, self),
+            Item::Ebih_Waterfall_Both_Blocks => rules::observe_action_skip__ebih_gt_waterfall_gt_alcove_gt_block_left_skip__ebih_gt_waterfall_gt_alcove_gt_block_right_skip__ebih_gt_waterfall_gt_alcove_left_gt_block_left_skip__ebih_gt_waterfall_gt_alcove_right_gt_block_right_add_item__ebih_waterfall_block_right_add_item__ebih_waterfall_block_left(ctx, world, self),
+            Item::Defeat_MUS_A_M20 => rules::observe_action_skip__amagi_gt_west_lake_gt_cavern_refill_station_gt_break_wall_add_item__amagi_dragon_eye_passage(ctx, world, self),
+            _ => (),
+        }
+    }
+
     fn observe_on_entry(&mut self, cur: &Context, dest: SpotId, world: &World) {
         let area = get_area(dest);
         match area {

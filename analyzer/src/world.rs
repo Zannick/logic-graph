@@ -26,7 +26,7 @@ pub trait Accessible: Sync {
         ctx: &Self::Context,
         world: &<Self::Context as Ctx>::World,
         observer: &mut <Self::Context as Ctx>::Observer,
-    );
+    ) -> bool;
     /// Base access time, assumed to be a constant.
     fn base_time(&self) -> u32;
     /// Actual access time. Must be at least base_time.

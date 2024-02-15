@@ -5,6 +5,7 @@ use crate::world::{Exit, Location, World};
 use std::fmt::Debug;
 use std::sync::Arc;
 
+/// An Observer tracks a set of observations.
 pub trait Observer: Debug {
     type Ctx: Ctx;
     type Matcher: MatcherDispatch<
@@ -23,6 +24,14 @@ pub trait Observer: Debug {
     fn observe_visit(
         &mut self,
         loc_id: <<<Self::Ctx as Ctx>::World as World>::Location as Location>::LocId,
+    );
+
+    /// Updates this observation set based on any checks that would be made by collect rules.
+    fn observe_collect(
+        &mut self,
+        ctx: &Self::Ctx,
+        item_id: <Self::Ctx as Ctx>::ItemId,
+        world: &<Self::Ctx as Ctx>::World,
     );
 
     /// Updates this observation set based on any checks that would be made by on_entry rules.

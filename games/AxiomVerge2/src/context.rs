@@ -10132,6 +10132,10 @@ impl context::Ctx for Context {
         movements::get_movement_state(self, world)
     }
 
+    fn observe_movement_state(&self, world: &graph::World, full_obs: &mut FullObservation) -> movements::MovementState {
+        movements::observe_movement_state(self, world, full_obs)
+    }
+
     fn local_travel_time(&self, movement_state: movements::MovementState, dest: SpotId) -> u32 {
         movements::local_travel_time(movement_state, self.position, dest)
     }

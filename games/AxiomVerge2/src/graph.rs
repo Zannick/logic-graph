@@ -3251,7 +3251,7 @@ impl world::Accessible for Location {
             }
         }
     }
-    fn observe_access(&self, ctx: &Context, world: &World, full_obs: &mut FullObservation) {
+    fn observe_access(&self, ctx: &Context, world: &World, full_obs: &mut FullObservation) -> bool {
         ctx.observe_afford(&self.price, full_obs);
         match self.id {
             LocationId::Amagi__West_Lake__Cavern_Rear_Pillar__Boss_Reward => {
@@ -3669,7 +3669,7 @@ impl world::Accessible for Location {
                 rules::observe_access_mist2(ctx, world, full_obs)
             }
             _ => true,
-        };
+        }
     }
     fn base_time(&self) -> u32 {
         self.time
@@ -5421,7 +5421,7 @@ impl world::Accessible for Exit {
             ExitId::Uhrum__West_Entrance__West_of_Gate__ex__Top_West_Ledge_2 => rules::access_hook(ctx, world),
         }
     }
-    fn observe_access(&self, ctx: &Context, world: &World, full_obs: &mut FullObservation) {
+    fn observe_access(&self, ctx: &Context, world: &World, full_obs: &mut FullObservation) -> bool {
         ctx.observe_afford(&self.price, full_obs);
         match self.id {
             ExitId::Amagi__Liru_Room__Platform_4_Left__ex__West_20_1 => rules::observe_access_hook_and_hover_and_underwater_movement(ctx, world, full_obs),
@@ -6326,7 +6326,7 @@ impl world::Accessible for Exit {
             ExitId::Uhrum__West_Entrance__West_of_Gate__ex__Top_West_Ledge_1 => rules::observe_access_hover(ctx, world, full_obs),
             ExitId::Uhrum__West_Entrance__West_of_Gate__ex__Top_West_Ledge_2 => rules::observe_access_hook(ctx, world, full_obs),
             _ => true,
-        };
+        }
     }
     fn base_time(&self) -> u32 {
         self.time
@@ -7899,7 +7899,7 @@ impl world::Accessible for Action {
             ActionId::Uhrum__West_Entrance__Save_Point__Save => true,
         }
     }
-    fn observe_access(&self, ctx: &Context, world: &World, full_obs: &mut FullObservation) {
+    fn observe_access(&self, ctx: &Context, world: &World, full_obs: &mut FullObservation) -> bool {
         ctx.observe_afford(&self.price, full_obs);
         match self.id {
             ActionId::Amagi__Main_Area__Carving__Key_Combo => rules::observe_access_amagi__main_area__carving__key_combo__req(ctx, world, full_obs),
@@ -7985,7 +7985,7 @@ impl world::Accessible for Action {
             ActionId::Uhrum__Annuna_Corridor__Between_Two_Flowers__Throw_Drone_Up => rules::observe_access_can_deploy_and_drone_hover(ctx, world, full_obs),
             ActionId::Uhrum__Waterfalls__Center_Island_Middle__Throw_Drone_Up => rules::observe_access_can_deploy_and_slingshot_hook(ctx, world, full_obs),
             _ => true,
-        };
+        }
     }
     fn base_time(&self) -> u32 {
         self.time
@@ -8785,7 +8785,7 @@ impl world::Accessible for Warp {
                 WarpId::Menu => rules::access_not_within_menu_and_flasks_gt_0(ctx, world),
             }
     }
-    fn observe_access(&self, ctx: &Context, world: &World, full_obs: &mut FullObservation) {
+    fn observe_access(&self, ctx: &Context, world: &World, full_obs: &mut FullObservation) -> bool {
         ctx.observe_afford(&self.price, full_obs);
         match self.id {
             WarpId::BreachSave => rules::observe_access_realm_eq_breach(ctx, world, full_obs),
@@ -8796,7 +8796,7 @@ impl world::Accessible for Warp {
             WarpId::MainSave => rules::observe_access_realm_in___main_interior_emergence_and_amashilama(ctx, world, full_obs),
             WarpId::Menu => rules::observe_access_not_within_menu_and_flasks_gt_0(ctx, world, full_obs),
             _ => true,
-        };
+        }
     }
     fn base_time(&self) -> u32 {
         self.time
