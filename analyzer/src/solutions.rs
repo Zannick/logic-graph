@@ -1,6 +1,6 @@
 use crate::context::*;
 use crate::matchertrie::MatcherTrie;
-use crate::observer::Observer;
+use crate::observer::{Observer, record_observations};
 use crate::world::*;
 use crate::{new_hashmap, CommonHasher};
 use log;
@@ -8,6 +8,7 @@ use std::collections::{HashMap, HashSet};
 use std::fs::File;
 use std::io::{self, Write};
 use std::sync::Arc;
+use std::time::Instant;
 
 fn is_subset<T, Iter>(mut subset: Iter, mut superset: Iter) -> bool
 where
@@ -145,71 +146,17 @@ where
             self.write_best().unwrap();
             true
         };
-        self.record_observations(world, sol, min_progress_for_trie);
+        let start = Instant::now();
+        record_observations(
+            &self.startctx,
+            world,
+            sol,
+            min_progress_for_trie,
+            &self.progress_locations,
+            &self.solve_trie,
+        );
+        log::debug!("Recording solution into trie took {:?}", start.elapsed());
         unique
-    }
-
-    fn record_observations<W, L, E, Wp>(
-        &mut self,
-        world: &W,
-        solution: Arc<Solution<T>>,
-        min_progress: usize,
-    ) where
-        W: World<Location = L, Exit = E, Warp = Wp>,
-        L: Location<Context = T>,
-        T: Ctx<World = W>,
-        E: Exit<Context = T, Currency = <L as Accessible>::Currency, LocId = L::LocId>,
-        Wp: Warp<SpotId = <E as Exit>::SpotId, Context = T, Currency = <L as Accessible>::Currency>,
-    {
-        let full_history =
-            history_to_full_series(&self.startctx, world, solution.history.iter().copied());
-        // The history entries are the steps "in between" the states in full_history, so we should have
-        // one more state than history steps.
-        assert!(full_history.len() == solution.history.len() + 1);
-        let mut prev = full_history.last().unwrap();
-        let mut solve = <T::Observer as Observer>::from_victory_state(prev, world);
-
-        let mut pcount = 0;
-        let skippable = solution.history.iter().position(|h| match h {
-            History::G(_, loc_id) => {
-                if self.progress_locations.contains(&loc_id) {
-                    pcount += 1;
-                }
-                pcount == min_progress
-            }
-            History::H(_, exit_id) => {
-                let exit = world.get_exit(*exit_id);
-                if let Some(loc_id) = exit.loc_id() {
-                    if self.progress_locations.contains(&loc_id) {
-                        pcount += 1;
-                    }
-                }
-                pcount == min_progress
-            }
-            _ => false,
-        }).unwrap_or(1);
-
-        for (idx, (step, state)) in solution
-            .history
-            .iter()
-            .zip(full_history.iter())
-            .enumerate()
-            .skip(skippable)
-            .rev()
-        {
-            // Basic process of iterating backwards:
-            // 1. Update the existing observations for changes.
-            solve.update(prev, state);
-
-            // 2. Observe the history step requirements/effects itself.
-            state.observe_replay(world, *step, &mut solve);
-
-            // 3. Insert the new observation list.
-            self.solve_trie
-                .insert(solve.to_vec(state), (solution.clone(), idx));
-
-            prev = state;
-        }
     }
 
     pub fn get_best(&self) -> Arc<Solution<T>> {

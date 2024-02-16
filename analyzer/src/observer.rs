@@ -1,7 +1,9 @@
-use crate::context::Ctx;
-use crate::matchertrie::{MatcherDispatch, Node, Observable};
+use crate::context::{Ctx, History, history_to_full_series};
+use crate::matchertrie::*;
 use crate::solutions::Solution;
-use crate::world::{Exit, Location, World};
+use crate::world::*;
+use crate::CommonHasher;
+use std::collections::HashSet;
 use std::fmt::Debug;
 use std::sync::Arc;
 
@@ -50,4 +52,76 @@ pub trait Observer: Debug {
 
     /// Exports a list of individual property observations for consumption by the matcher trie.
     fn to_vec(&self, ctx: &Self::Ctx) -> Vec<<Self::Ctx as Observable>::PropertyObservation>;
+}
+
+// This is here to allow benchmarking without a SolutionCollector.
+/// Records a full solution's observations into the solve trie.
+/// 
+/// Every state that has visited at least |min_progress| of the progress_locations is recorded in the trie,
+/// except for the winning state.
+pub fn record_observations<W, T, L, E, Wp>(
+    startctx: &T,
+    world: &W,
+    solution: Arc<Solution<T>>,
+    min_progress: usize,
+    progress_locations: &HashSet<L::LocId, CommonHasher>,
+    solve_trie: &MatcherTrie<<T::Observer as Observer>::Matcher>,
+) where
+    W: World<Location = L, Exit = E, Warp = Wp>,
+    L: Location<Context = T>,
+    T: Ctx<World = W>,
+    E: Exit<Context = T, Currency = <L as Accessible>::Currency, LocId = L::LocId>,
+    Wp: Warp<SpotId = <E as Exit>::SpotId, Context = T, Currency = <L as Accessible>::Currency>,
+{
+    let full_history = history_to_full_series(startctx, world, solution.history.iter().copied());
+    // The history entries are the steps "in between" the states in full_history, so we should have
+    // one more state than history steps.
+    assert!(full_history.len() == solution.history.len() + 1);
+    let mut prev = full_history.last().unwrap();
+    let mut solve = <T::Observer as Observer>::from_victory_state(prev, world);
+
+    let mut pcount = 0;
+    let skippable = solution
+        .history
+        .iter()
+        .position(|h| match h {
+            History::G(_, loc_id) => {
+                if progress_locations.contains(&loc_id) {
+                    pcount += 1;
+                }
+                pcount == min_progress
+            }
+            History::H(_, exit_id) => {
+                let exit = world.get_exit(*exit_id);
+                if let Some(loc_id) = exit.loc_id() {
+                    if progress_locations.contains(&loc_id) {
+                        pcount += 1;
+                    }
+                }
+                pcount == min_progress
+            }
+            _ => false,
+        })
+        .unwrap_or(1);
+
+    for (idx, (step, state)) in solution
+        .history
+        .iter()
+        .zip(full_history.iter())
+        .enumerate()
+        .skip(skippable)
+        .rev()
+    {
+        // Basic process of iterating backwards:
+        // 1. Update the existing observations for changes.
+        solve.update(prev, state);
+
+        // 2. Observe the history step requirements/effects itself.
+        state.observe_replay(world, *step, &mut solve);
+
+        // 3. Insert the new observation list.
+        solve_trie.insert(solve.to_vec(state), (solution.clone(), idx));
+
+        prev = state;
+    }
 }
