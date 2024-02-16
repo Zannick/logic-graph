@@ -171,6 +171,24 @@ where
         }
         depth
     }
+
+    pub fn num_values(&self) -> usize {
+        let locked_root = self.root.lock().unwrap();
+        let mut num_values = locked_root.num_values();
+        let mut node_queue = VecDeque::new();
+        let nodes = locked_root.nodes();
+        drop(locked_root);
+        node_queue.extend(nodes);
+        while let Some(node) = node_queue.pop_front() {
+            let locked_node = node.lock().unwrap();
+            for matcher in &locked_node.matchers {
+                let nodes = matcher.nodes();
+                num_values += matcher.num_values();
+                node_queue.extend(nodes);
+            }
+        }
+        num_values
+    }
 }
 
 #[cfg(test)]
@@ -321,6 +339,15 @@ mod test {
                 MatcherMulti::LookupFlasks(m) => m.nodes(),
                 MatcherMulti::MaskLookupFlag(m, _) => m.nodes(),
                 MatcherMulti::EnoughFlasks(m, _) => m.nodes(),
+            }
+        }
+
+        fn num_values(&self) -> usize {
+            match self {
+                MatcherMulti::LookupPosition(m) => m.num_values(),
+                MatcherMulti::LookupFlasks(m) => m.num_values(),
+                MatcherMulti::MaskLookupFlag(m, _) => m.num_values(),
+                MatcherMulti::EnoughFlasks(m, _) => m.num_values(),
             }
         }
     }

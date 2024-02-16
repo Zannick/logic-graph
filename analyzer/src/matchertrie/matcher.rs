@@ -52,6 +52,7 @@ pub trait MatcherDispatch {
     );
 
     fn nodes(&self) -> Vec<Arc<Mutex<Self::Node>>>;
+    fn num_values(&self) -> usize;
 }
 
 pub trait Matcher<NodeType, KeyType, ValueType>
@@ -70,6 +71,7 @@ where
     fn set_value(&mut self, obs: KeyType, value: ValueType);
 
     fn nodes(&self) -> Vec<Arc<Mutex<NodeType>>>;
+    fn num_values(&self) -> usize;
 }
 
 #[derive(Default)]
@@ -154,6 +156,10 @@ where
 
     fn nodes(&self) -> Vec<Arc<Mutex<NodeType>>> {
         self.map.values().filter_map(|(n, _)| n.clone()).collect()
+    }
+
+    fn num_values(&self) -> usize {
+        self.map.values().filter(|(_, v)| v.is_some()).count()
     }
 }
 
@@ -273,6 +279,11 @@ where
             vec.push(n.clone());
         }
         vec
+    }
+
+    fn num_values(&self) -> usize {
+        (if self.true_value.is_some() { 1 } else { 0 }
+            + if self.false_value.is_some() { 1 } else { 0 })
     }
 }
 

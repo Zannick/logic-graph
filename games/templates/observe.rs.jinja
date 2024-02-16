@@ -508,4 +508,33 @@ impl MatcherDispatch for ObservationMatcher {
 %% endfor
         }
     }
+
+    fn num_values(&self) -> usize {
+        match self {
+%% for ctx, t in context_types.items() if ctx not in bfp.varmap
+%% set c = ctx|camelize|camelize
+%% if t in int_types
+            Self::{{ c }}Lookup(m) => m.num_values(),
+            Self::{{ c }}Eq { matcher, .. } => matcher.num_values(),
+            Self::{{ c }}Ge { matcher, .. } => matcher.num_values(),
+            Self::{{ c }}Le { matcher, .. } => matcher.num_values(),
+            Self::{{ c }}Range { matcher, .. } => matcher.num_values(),
+%% else
+            Self::{{ c }}Lookup(m) => m.num_values(),
+%% endif
+%% endfor
+%% for item in gl.item_max_counts|sort if item not in bfp.varmap
+%% set c = item|camelize
+%% set ctx = item|lower
+            Self::{{ c }}Lookup(m) => m.num_values(),
+            Self::{{ c }}Eq { matcher, .. } => matcher.num_values(),
+            Self::{{ c }}Ge { matcher, .. } => matcher.num_values(),
+            Self::{{ c }}Le { matcher, .. } => matcher.num_values(),
+            Self::{{ c }}Range { matcher, .. } => matcher.num_values(),
+%% endfor
+%% for group in bfp.flag_groups
+            Self::LookupCBits{{ loop.index }} { matcher, .. } => matcher.num_values(),
+%% endfor
+        }
+    }
 }
