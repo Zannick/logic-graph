@@ -62,10 +62,6 @@ pub fn criterion_benchmark(c: &mut Criterion) {
         });
     }
 
-    c.bench_function("minimal playthrough", |b| {
-        b.iter(|| minimal_greedy_playthrough(&world, &ctx, u32::MAX))
-    });
-
     let progress_locations: FxHashSet<_> = world
         .required_items()
         .into_iter()
@@ -94,6 +90,10 @@ pub fn criterion_benchmark(c: &mut Criterion) {
             );
         });
     }
+
+    c.bench_function("minimal playthrough", |b| {
+        b.iter(|| minimal_greedy_playthrough(&world, &ctx, u32::MAX))
+    });
 }
 
 criterion_group! {
