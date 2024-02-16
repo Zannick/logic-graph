@@ -119,6 +119,127 @@ pub trait Ctx:
     fn progress(&self) -> u32;
 
     fn diff(&self, old: &Self) -> String;
+
+    /// Observes the access checks and, if they pass, any side effects of the step.
+    fn observe_replay<L, E, Wp>(
+        &self,
+        world: &Self::World,
+        step: HistoryAlias<Self>,
+        observer: &mut Self::Observer,
+    ) -> bool
+    where
+        Self::World: World<Location = L, Exit = E, Warp = Wp>,
+        L: Location<Context = Self>,
+        E: Exit<Context = Self, Currency = <L as Accessible>::Currency, LocId = L::LocId>,
+        Wp: Warp<
+            SpotId = <E as Exit>::SpotId,
+            Context = Self,
+            Currency = <L as Accessible>::Currency,
+        >,
+    {
+        match step {
+            History::W(wp, dest) => {
+                let warp = world.get_warp(wp);
+                if warp.dest(self, world) == dest && warp.observe_access(self, world, observer) {
+                    warp.observe_effects(self, world, observer);
+                    observer.observe_on_entry(self, dest, world);
+                    true
+                } else {
+                    false
+                }
+            }
+            History::G(item, loc_id) => {
+                let spot_id = world.get_location_spot(loc_id);
+                let loc = world.get_location(loc_id);
+                if spot_id == self.position()
+                    && loc.item() == item
+                    && loc.observe_access(self, world, observer)
+                {
+                    observer.observe_visit(loc_id);
+                    observer.observe_collect(self, item, world);
+                    true
+                } else {
+                    false
+                }
+            }
+            History::E(exit_id) => {
+                let spot_id = world.get_exit_spot(exit_id);
+                let exit = world.get_exit(exit_id);
+                if spot_id == self.position() && exit.observe_access(self, world, observer) {
+                    observer.observe_on_entry(self, exit.dest(), world);
+                    true
+                } else {
+                    false
+                }
+            }
+            History::H(item, exit_id) => {
+                let spot_id = world.get_exit_spot(exit_id);
+                let exit = world.get_exit(exit_id);
+                if let Some(loc_id) = exit.loc_id() {
+                    let loc = world.get_location(*loc_id);
+                    if spot_id == self.position()
+                        && exit.observe_access(self, world, observer)
+                        && loc.item() == item
+                        && loc.observe_access(self, world, observer)
+                    {
+                        observer.observe_visit(*loc_id);
+                        observer.observe_collect(self, item, world);
+                        observer.observe_on_entry(self, exit.dest(), world);
+                        true
+                    } else {
+                        false
+                    }
+                } else {
+                    false
+                }
+            }
+            History::L(spot_id) => {
+                let movement_state = self.observe_movement_state(world, observer);
+                let (best_free, best_mvmts) = Self::World::best_movements(self.position(), spot_id);
+                if self.position() != spot_id
+                    && Self::World::same_area(self.position(), spot_id)
+                    && (best_free.is_some()
+                        || best_mvmts
+                            .into_iter()
+                            .any(|(m, _)| Self::is_subset(m, movement_state)))
+                {
+                    observer.observe_on_entry(self, spot_id, world);
+                    true
+                } else {
+                    false
+                }
+            }
+            History::A(act_id) => {
+                let spot_id = world.get_action_spot(act_id);
+                let action = world.get_action(act_id);
+                if (world.is_global_action(act_id) || self.position() == spot_id)
+                    && action.observe_access(self, world, observer)
+                {
+                    action.observe_effects(self, world, observer);
+                    let dest = action.dest(self, world);
+                    if dest != spot_id && dest != <E as Exit>::SpotId::default() {
+                        observer.observe_on_entry(self, dest, world);
+                    }
+                    true
+                } else {
+                    false
+                }
+            }
+            History::C(spot_id) => {
+                let movement_state = self.observe_movement_state(world, observer);
+                let edges = world.get_condensed_edges_from(self.position());
+                if edges.iter().any(|edge| {
+                    edge.dst == spot_id
+                        && edge.observe_access(world, self, movement_state, observer)
+                }) {
+                    observer.observe_on_entry(self, spot_id, world);
+                    true
+                } else {
+                    false
+                }
+            }
+        }
+    }
 }
 
 #[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize)]
@@ -743,125 +864,6 @@ impl<T: Ctx> ContextWrapper<T> {
             self.explain_pre_replay(world, step)
         );
         self.replay(world, step);
-    }
-
-    /// Observes the access checks and, if they pass, any side effects of the step.
-    pub fn observe_replay<W, L, E, Wp>(
-        &self,
-        world: &W,
-        step: HistoryAlias<T>,
-        observer: &mut T::Observer,
-    ) -> bool
-    where
-        W: World<Location = L, Exit = E, Warp = Wp>,
-        L: Location<Context = T>,
-        T: Ctx<World = W>,
-        E: Exit<Context = T, Currency = <L as Accessible>::Currency, LocId = L::LocId>,
-        Wp: Warp<SpotId = <E as Exit>::SpotId, Context = T, Currency = <L as Accessible>::Currency>,
-    {
-        match step {
-            History::W(wp, dest) => {
-                let warp = world.get_warp(wp);
-                if warp.dest(&self.ctx, world) == dest
-                    && warp.observe_access(&self.ctx, world, observer)
-                {
-                    warp.observe_effects(&self.ctx, world, observer);
-                    observer.observe_on_entry(&self.ctx, dest, world);
-                    true
-                } else {
-                    false
-                }
-            }
-            History::G(item, loc_id) => {
-                let spot_id = world.get_location_spot(loc_id);
-                let loc = world.get_location(loc_id);
-                if spot_id == self.ctx.position()
-                    && loc.item() == item
-                    && loc.observe_access(&self.ctx, world, observer)
-                {
-                    observer.observe_visit(loc_id);
-                    observer.observe_collect(&self.ctx, item, world);
-                    true
-                } else {
-                    false
-                }
-            }
-            History::E(exit_id) => {
-                let spot_id = world.get_exit_spot(exit_id);
-                let exit = world.get_exit(exit_id);
-                if spot_id == self.ctx.position() && exit.observe_access(&self.ctx, world, observer)
-                {
-                    observer.observe_on_entry(&self.ctx, exit.dest(), world);
-                    true
-                } else {
-                    false
-                }
-            }
-            History::H(item, exit_id) => {
-                let spot_id = world.get_exit_spot(exit_id);
-                let exit = world.get_exit(exit_id);
-                if let Some(loc_id) = exit.loc_id() {
-                    let loc = world.get_location(*loc_id);
-                    if spot_id == self.ctx.position()
-                        && exit.observe_access(&self.ctx, world, observer)
-                        && loc.item() == item
-                        && loc.observe_access(&self.ctx, world, observer)
-                    {
-                        observer.observe_visit(*loc_id);
-                        observer.observe_collect(&self.ctx, item, world);
-                        observer.observe_on_entry(&self.ctx, exit.dest(), world);
-                        true
-                    } else {
-                        false
-                    }
-                } else {
-                    false
-                }
-            }
-            History::L(spot_id) => {
-                let movement_state = self.ctx.observe_movement_state(world, observer);
-                let (best_free, best_mvmts) = W::best_movements(self.ctx.position(), spot_id);
-                if self.ctx.position() != spot_id
-                    && W::same_area(self.ctx.position(), spot_id)
-                    && (best_free.is_some()
-                        || best_mvmts
-                            .into_iter()
-                            .any(|(m, _)| T::is_subset(m, movement_state)))
-                {
-                    observer.observe_on_entry(&self.ctx, spot_id, world);
-                    true
-                } else {
-                    false
-                }
-            }
-            History::A(act_id) => {
-                let spot_id = world.get_action_spot(act_id);
-                let action = world.get_action(act_id);
-                if (world.is_global_action(act_id) || self.ctx.position() == spot_id)
-                    && action.observe_access(&self.ctx, world, observer) {
-                        action.observe_effects(&self.ctx, world, observer);
-                        let dest = action.dest(&self.ctx, world);
-                        if dest != spot_id && dest != <E as Exit>::SpotId::default() {
-                            observer.observe_on_entry(&self.ctx, dest, world);
-                        }
-                        true
-                    } else {
-                        false
-                    }
-            }
-            History::C(spot_id) => {
-                let movement_state = self.ctx.observe_movement_state(world, observer);
-                let edges = world.get_condensed_edges_from(self.ctx.position());
-                if edges.iter().any(|edge| {
-                    edge.dst == spot_id && edge.observe_access(world, &self.ctx, movement_state, observer)
-                }) {
-                    observer.observe_on_entry(&self.ctx, spot_id, world);
-                    true
-                } else {
-                    false
-                }
-            }
-        }
     }
 
     pub fn info(&self, est: u32, progress: usize, last: Option<HistoryAlias<T>>) -> String {

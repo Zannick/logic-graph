@@ -349,6 +349,10 @@ where
             .collect()
     }
 
+    pub fn min_progress(&self) -> Option<usize> {
+        self.min_db_estimates.iter().position(|a| a.load(Ordering::Acquire) != u32::MAX)
+    }
+
     /// Returns the number of cache hits for estimated remaining time.
     /// Winning states aren't counted in this.
     pub fn cached_estimates(&self) -> usize {
@@ -934,7 +938,8 @@ where
                             self.solutions.lock().unwrap().insert(
                                 new_elapsed,
                                 self.get_history_raw(new_ctx_key.clone()).unwrap(),
-                                self.world
+                                self.world,
+                                self.min_progress().unwrap_or(1),
                             );
                         }
 

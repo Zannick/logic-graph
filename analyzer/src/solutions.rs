@@ -4,7 +4,7 @@ use crate::observer::Observer;
 use crate::world::*;
 use crate::{new_hashmap, CommonHasher};
 use log;
-use std::collections::HashMap;
+use std::collections::{HashMap, HashSet};
 use std::fs::File;
 use std::io::{self, Write};
 use std::sync::Arc;
@@ -45,6 +45,7 @@ where
     solve_trie: Arc<MatcherTrie<<T::Observer as Observer>::Matcher>>,
     count: usize,
     best: u32,
+    progress_locations: HashSet<<<T::World as World>::Location as Location>::LocId, CommonHasher>,
 }
 
 impl<T> SolutionCollector<T>
@@ -57,6 +58,10 @@ where
         best_file: &'static str,
         startctx: T,
         solve_trie: Arc<MatcherTrie<<T::Observer as Observer>::Matcher>>,
+        progress_locations: HashSet<
+            <<T::World as World>::Location as Location>::LocId,
+            CommonHasher,
+        >,
     ) -> io::Result<SolutionCollector<T>> {
         Ok(SolutionCollector {
             map: new_hashmap(),
@@ -68,6 +73,7 @@ where
             solve_trie,
             count: 0,
             best: 0,
+            progress_locations,
         })
     }
 
@@ -94,6 +100,7 @@ where
         elapsed: u32,
         history: Vec<HistoryAlias<T>>,
         world: &W,
+        min_progress_for_trie: usize,
     ) -> bool
     where
         W: World<Location = L, Exit = E, Warp = Wp>,
@@ -138,12 +145,16 @@ where
             self.write_best().unwrap();
             true
         };
-        self.record_observations(world, sol);
+        self.record_observations(world, sol, min_progress_for_trie);
         unique
     }
 
-    fn record_observations<W, L, E, Wp>(&mut self, world: &W, solution: Arc<Solution<T>>)
-    where
+    fn record_observations<W, L, E, Wp>(
+        &mut self,
+        world: &W,
+        solution: Arc<Solution<T>>,
+        min_progress: usize,
+    ) where
         W: World<Location = L, Exit = E, Warp = Wp>,
         L: Location<Context = T>,
         T: Ctx<World = W>,
@@ -158,22 +169,40 @@ where
         let mut prev = full_history.last().unwrap();
         let mut solve = <T::Observer as Observer>::from_victory_state(prev, world);
 
-        self.solve_trie.insert(
-            solve.to_vec(prev),
-            (solution.clone(), solution.history.len()),
-        );
+        let mut pcount = 0;
+        let skippable = solution.history.iter().position(|h| match h {
+            History::G(_, loc_id) => {
+                if self.progress_locations.contains(&loc_id) {
+                    pcount += 1;
+                }
+                pcount == min_progress
+            }
+            History::H(_, exit_id) => {
+                let exit = world.get_exit(*exit_id);
+                if let Some(loc_id) = exit.loc_id() {
+                    if self.progress_locations.contains(&loc_id) {
+                        pcount += 1;
+                    }
+                }
+                pcount == min_progress
+            }
+            _ => false,
+        }).unwrap_or(1);
 
         for (idx, (step, state)) in solution
             .history
             .iter()
             .zip(full_history.iter())
             .enumerate()
+            .skip(skippable)
             .rev()
         {
             // Basic process of iterating backwards:
             // 1. Update the existing observations for changes.
             solve.update(prev, state);
+
             // 2. Observe the history step requirements/effects itself.
+            state.observe_replay(world, *step, &mut solve);
 
             // 3. Insert the new observation list.
             self.solve_trie

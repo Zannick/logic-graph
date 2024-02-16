@@ -7,9 +7,11 @@ use crate::minimize::pinpoint_minimize;
 use crate::observer::Observer;
 use crate::solutions::{Solution, SolutionCollector};
 use crate::world::*;
+use crate::CommonHasher;
 use anyhow::Result;
 use log;
 use rayon::prelude::*;
+use std::collections::HashSet;
 use std::fmt::Debug;
 use std::path::Path;
 use std::sync::atomic::{AtomicBool, AtomicU32, AtomicUsize, Ordering};
@@ -237,8 +239,7 @@ where
 {
     world: &'a W,
     startctx: ContextWrapper<T>,
-    solve_trie:
-        Arc<MatcherTrie<<T::Observer as Observer>::Matcher>>,
+    solve_trie: Arc<MatcherTrie<<T::Observer as Observer>::Matcher>>,
     solutions: Arc<Mutex<SolutionCollector<T>>>,
     queue: RocksBackedQueue<'a, W, T>,
     iters: AtomicUsize,
@@ -322,15 +323,19 @@ where
     {
         world.skip_unused_items(&mut ctx);
 
-        let solve_trie: Arc<
-            MatcherTrie<<T::Observer as Observer>::Matcher>,
-        > = Arc::default();
+        let solve_trie: Arc<MatcherTrie<<T::Observer as Observer>::Matcher>> = Arc::default();
+        let required_locations: HashSet<_, CommonHasher> = world
+            .required_items()
+            .into_iter()
+            .flat_map(|(item, _)| world.get_item_locations(item))
+            .collect();
         let mut solutions = SolutionCollector::<T>::new(
             "data/solutions.txt",
             "data/previews.txt",
             "data/best.txt",
             ctx.clone(),
             solve_trie.clone(),
+            required_locations,
         )?;
 
         let startctx = ContextWrapper::new(ctx);
@@ -376,16 +381,16 @@ where
                     m.elapsed()
                 );
                 let max_time = std::cmp::min(wonctx.elapsed(), m.elapsed());
-                solutions.insert(m.elapsed(), m.recent_history().to_vec(), world);
+                solutions.insert(m.elapsed(), m.recent_history().to_vec(), world, 1);
                 max_time
             } else {
                 log::info!("Minimized-greedy solution wasn't faster than original");
                 wonctx.elapsed()
             };
 
-        solutions.insert(wonctx.elapsed(), wonctx.recent_history().to_vec(), world);
+        solutions.insert(wonctx.elapsed(), wonctx.recent_history().to_vec(), world, 1);
         for w in &wins {
-            solutions.insert(w.elapsed(), w.recent_history().to_vec(), world);
+            solutions.insert(w.elapsed(), w.recent_history().to_vec(), world, 1);
         }
 
         let solutions = Arc::new(Mutex::new(solutions));
@@ -471,7 +476,18 @@ where
             log::info!("Max time to consider is now: {}ms", old_time);
         }
 
-        if sols.insert(elapsed, history, self.world) {
+        let min_progress = if let Some(qmp) = self.queue.min_progress() {
+            if let Some(dbmp) = self.queue.db().min_progress() {
+                std::cmp::min(qmp, dbmp)
+            } else {
+                qmp
+            }
+        } else if let Some(dbmp) = self.queue.db().min_progress() {
+            dbmp
+        } else {
+            1
+        };
+        if sols.insert(elapsed, history, self.world, min_progress) {
             log::info!("{:?} mode found new unique solution", mode);
         }
 
@@ -493,7 +509,7 @@ where
             }
 
             let history = ctx.recent_history();
-            if sols.insert(ctx.elapsed(), history.to_vec(), self.world) {
+            if sols.insert(ctx.elapsed(), history.to_vec(), self.world, min_progress) {
                 log::info!("Minimized found new unique solution");
             }
 
