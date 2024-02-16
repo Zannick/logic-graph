@@ -12,10 +12,11 @@
 
 #![allow(unused)]
 
-use crate::{new_hashmap, CommonHasher};
-use std::collections::HashMap;
+use crate::{new_hashmap, new_hashset, new_hashset_with, CommonHasher};
+use std::collections::{HashMap, HashSet};
 use std::fmt::Debug;
 use std::hash::Hash;
+use std::iter::empty;
 use std::marker::PhantomData;
 use std::ops::Deref;
 use std::sync::{Arc, Mutex};
@@ -36,7 +37,13 @@ pub trait MatcherDispatch {
     ) -> (Arc<Mutex<Self::Node>>, Self);
 
     /// The individual matcher will retrieve a property of the struct provided, and evaluate the value of that property.
-    fn lookup(&self, val: &Self::Struct) -> (Option<Arc<Mutex<Self::Node>>>, Option<Self::Value>);
+    fn lookup(
+        &self,
+        val: &Self::Struct,
+    ) -> (
+        Option<Arc<Mutex<Self::Node>>>,
+        Vec<Self::Value>,
+    );
 
     /// Creates a new node in the individual matcher.
     ///
@@ -45,7 +52,7 @@ pub trait MatcherDispatch {
         &mut self,
         obs: &<Self::Struct as Observable>::PropertyObservation,
     ) -> Option<Arc<Mutex<Self::Node>>>;
-    fn set_value(
+    fn add_value(
         &mut self,
         obs: &<Self::Struct as Observable>::PropertyObservation,
         value: Self::Value,
@@ -64,11 +71,11 @@ where
     /// returns a pointer to the next node if one exists and a reference to the value
     /// stored (if the path terminates). Both may exist, but usually if both do not exist,
     /// obs was not a match for this matcher.
-    fn lookup(&self, obs: KeyType) -> (Option<Arc<Mutex<NodeType>>>, Option<ValueType>);
+    fn lookup(&self, obs: KeyType) -> (Option<Arc<Mutex<NodeType>>>, Vec<ValueType>);
 
     /// Inserts matchers
     fn insert(&mut self, obs: KeyType) -> Arc<Mutex<NodeType>>;
-    fn set_value(&mut self, obs: KeyType, value: ValueType);
+    fn add_value(&mut self, obs: KeyType, value: ValueType);
 
     fn nodes(&self) -> Vec<Arc<Mutex<NodeType>>>;
     fn num_values(&self) -> usize;
@@ -78,15 +85,23 @@ where
 pub struct LookupMatcher<NodeType, KeyType, ValueType>
 where
     KeyType: Copy + Eq + Hash,
+    ValueType: Eq + Hash,
 {
-    map: HashMap<KeyType, (Option<Arc<Mutex<NodeType>>>, Option<ValueType>), CommonHasher>,
+    map: HashMap<
+        KeyType,
+        (
+            Option<Arc<Mutex<NodeType>>>,
+            HashSet<ValueType, CommonHasher>,
+        ),
+        CommonHasher,
+    >,
 }
 
 impl<NodeType, KeyType, ValueType> Debug for LookupMatcher<NodeType, KeyType, ValueType>
 where
     NodeType: Debug,
     KeyType: Debug + Copy + Eq + Hash,
-    ValueType: Debug,
+    ValueType: Debug + Eq + Hash,
 {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         f.write_fmt(format_args!(
@@ -113,12 +128,14 @@ impl<NodeType, KeyType, ValueType> Matcher<NodeType, KeyType, ValueType>
 where
     NodeType: Default,
     KeyType: Copy + Eq + Hash,
-    ValueType: Clone,
+    ValueType: Clone + Eq + Hash,
 {
-    fn lookup(&self, obs: KeyType) -> (Option<Arc<Mutex<NodeType>>>, Option<ValueType>) {
+    fn lookup(&self, obs: KeyType) -> (Option<Arc<Mutex<NodeType>>>, Vec<ValueType>) {
         self.map
             .get(&obs)
-            .map_or((None, None), |(node, val)| (node.clone(), val.clone()))
+            .map_or((None, Vec::new()), |(node, val)| {
+                (node.clone(), val.iter().cloned().collect())
+            })
     }
 
     fn insert(&mut self, obs: KeyType) -> Arc<Mutex<NodeType>> {
@@ -134,22 +151,19 @@ where
             }
             None => {
                 let n: Arc<Mutex<NodeType>> = Arc::default();
-                self.map.insert(obs, (Some(n.clone()), None));
+                self.map.insert(obs, (Some(n.clone()), new_hashset()));
                 n
             }
         }
     }
-    fn set_value(&mut self, obs: KeyType, value: ValueType) {
+    fn add_value(&mut self, obs: KeyType, value: ValueType) {
         match self.map.get_mut(&obs) {
             Some((_, val)) => {
-                if let None = val {
-                    *val = Some(value);
-                } else {
-                    *val = Some(value);
-                }
+                val.insert(value);
             }
             None => {
-                self.map.insert(obs, (Some(Arc::default()), Some(value)));
+                self.map
+                    .insert(obs, (Some(Arc::default()), new_hashset_with(value)));
             }
         }
     }
@@ -159,7 +173,7 @@ where
     }
 
     fn num_values(&self) -> usize {
-        self.map.values().filter(|(_, v)| v.is_some()).count()
+        self.map.values().map(|(_, v)| v.len()).sum()
     }
 }
 
@@ -167,6 +181,7 @@ impl<NodeType, KeyType, ValueType> LookupMatcher<NodeType, KeyType, ValueType>
 where
     NodeType: Default,
     KeyType: Copy + Eq + Hash,
+    ValueType: Eq + Hash,
 {
     pub fn new() -> Self {
         Self { map: new_hashmap() }
@@ -181,7 +196,7 @@ impl<NodeType, KeyType, ValueType> LookupMatcher<NodeType, KeyType, ValueType>
 where
     NodeType: Default,
     KeyType: Copy + Eq + Hash,
-    ValueType: Clone,
+    ValueType: Clone + Eq + Hash,
 {
     pub fn new_with(obs: KeyType) -> (Arc<Mutex<NodeType>>, Self) {
         let mut m = Self::new();
@@ -193,17 +208,20 @@ where
 // Thus, we defer the actual comparison to the MatcherDispatch, which shall pass the result to
 // this matcher which is essentially a special case lookup with exactly two possible values.
 #[derive(Default)]
-pub struct BooleanMatcher<NodeType, ValueType> {
+pub struct BooleanMatcher<NodeType, ValueType>
+where
+    ValueType: Eq + Hash,
+{
     true_node: Option<Arc<Mutex<NodeType>>>,
-    true_value: Option<ValueType>,
+    true_values: HashSet<ValueType, CommonHasher>,
     false_node: Option<Arc<Mutex<NodeType>>>,
-    false_value: Option<ValueType>,
+    false_values: HashSet<ValueType, CommonHasher>,
 }
 
 impl<NodeType, ValueType> Debug for BooleanMatcher<NodeType, ValueType>
 where
     NodeType: Debug,
-    ValueType: Debug,
+    ValueType: Debug + Eq + Hash,
 {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         f.write_fmt(format_args!(
@@ -214,14 +232,14 @@ where
                     "{:?}",
                     mutex.lock().unwrap().deref()
                 )),
-            self.true_value,
+            self.true_values,
             self.false_node
                 .as_ref()
                 .map_or(String::from("No node"), |mutex| format!(
                     "{:?}",
                     mutex.lock().unwrap().deref()
                 )),
-            self.false_value
+            self.false_values
         ))
     }
 }
@@ -229,13 +247,19 @@ where
 impl<NodeType, ValueType> Matcher<NodeType, bool, ValueType> for BooleanMatcher<NodeType, ValueType>
 where
     NodeType: Default,
-    ValueType: Clone,
+    ValueType: Clone + Eq + Hash,
 {
-    fn lookup(&self, obs: bool) -> (Option<Arc<Mutex<NodeType>>>, Option<ValueType>) {
+    fn lookup(
+        &self,
+        obs: bool,
+    ) -> (
+        Option<Arc<Mutex<NodeType>>>,
+        Vec<ValueType>,
+    ) {
         if obs {
-            (self.true_node.clone(), self.true_value.clone())
+            (self.true_node.clone(), self.true_values.iter().cloned().collect())
         } else {
-            (self.false_node.clone(), self.false_value.clone())
+            (self.false_node.clone(), self.false_values.iter().cloned().collect())
         }
     }
 
@@ -255,19 +279,14 @@ where
         }
     }
 
-    fn set_value(&mut self, obs: bool, value: ValueType) {
+    fn add_value(&mut self, obs: bool, value: ValueType) {
         let val = if obs {
-            &mut self.true_value
+            &mut self.true_values
         } else {
-            &mut self.false_value
+            &mut self.false_values
         };
 
-        if let None = val {
-            *val = Some(value);
-        } else {
-            log::debug!("Replacing a value in matcher trie");
-            *val = Some(value);
-        }
+        val.insert(value);
     }
 
     fn nodes(&self) -> Vec<Arc<Mutex<NodeType>>> {
@@ -282,18 +301,20 @@ where
     }
 
     fn num_values(&self) -> usize {
-        (if self.true_value.is_some() { 1 } else { 0 }
-            + if self.false_value.is_some() { 1 } else { 0 })
+        self.true_values.len() + self.false_values.len()
     }
 }
 
-impl<NodeType, ValueType> BooleanMatcher<NodeType, ValueType> {
+impl<NodeType, ValueType> BooleanMatcher<NodeType, ValueType>
+where
+    ValueType: Eq + Hash,
+{
     pub fn new() -> Self {
         Self {
             true_node: None,
-            true_value: None,
+            true_values: new_hashset(),
             false_node: None,
-            false_value: None,
+            false_values: new_hashset(),
         }
     }
 }
@@ -301,7 +322,7 @@ impl<NodeType, ValueType> BooleanMatcher<NodeType, ValueType> {
 impl<NodeType, ValueType> BooleanMatcher<NodeType, ValueType>
 where
     NodeType: Default,
-    ValueType: Clone,
+    ValueType: Clone + Eq + Hash,
 {
     pub fn new_with(obs: bool) -> (Arc<Mutex<NodeType>>, Self) {
         let mut m = Self::new();

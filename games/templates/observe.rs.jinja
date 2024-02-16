@@ -12,7 +12,7 @@ use crate::prices::Currency;
 use crate::rules;
 use analyzer::matchertrie::*;
 use analyzer::observer::*;
-use analyzer::solutions::Solution;
+use analyzer::solutions::{Solution, SolutionSuffix};
 use std::sync::{Arc, Mutex};
 
 #[derive(Debug, Copy, Clone, Eq, PartialEq)]
@@ -265,56 +265,56 @@ pub enum ObservationMatcher {
 %% for ctx, t in context_types.items() if ctx not in bfp.varmap
 %% set c = ctx|camelize|camelize
 %% if t in int_types
-    {{ c }}Lookup(LookupMatcher<Node<Self>, {{ t }}, (Arc<Solution<Context>>, usize)>),
+    {{ c }}Lookup(LookupMatcher<Node<Self>, {{ t }}, SolutionSuffix<Context>>),
     {{ c }}Eq {
         eq: {{ t }},
-        matcher: BooleanMatcher<Node<Self>, (Arc<Solution<Context>>, usize)>,
+        matcher: BooleanMatcher<Node<Self>, SolutionSuffix<Context>>,
     },
     {{ c }}Ge {
         lo: {{ t }},
-        matcher: BooleanMatcher<Node<Self>, (Arc<Solution<Context>>, usize)>,
+        matcher: BooleanMatcher<Node<Self>, SolutionSuffix<Context>>,
     },
     {{ c }}Le {
         hi: {{ t }},
-        matcher: BooleanMatcher<Node<Self>, (Arc<Solution<Context>>, usize)>,
+        matcher: BooleanMatcher<Node<Self>, SolutionSuffix<Context>>,
     },
     {{ c }}Range {
         lo: {{ t }},
         hi: {{ t }},
-        matcher: BooleanMatcher<Node<Self>, (Arc<Solution<Context>>, usize)>,
+        matcher: BooleanMatcher<Node<Self>, SolutionSuffix<Context>>,
     },
 %% else
-    {{ c }}Lookup(LookupMatcher<Node<Self>, {{ t }}, (Arc<Solution<Context>>, usize)>),
+    {{ c }}Lookup(LookupMatcher<Node<Self>, {{ t }}, SolutionSuffix<Context>>),
 %% endif
 %% endfor
     // items
 %% for item, ct in gl.item_max_counts.items()|sort if item not in bfp.varmap
 %% set c = item|camelize
 %% set t = ct|get_int_type_for_max
-    {{ c }}Lookup(LookupMatcher<Node<Self>, {{ t }}, (Arc<Solution<Context>>, usize)>),
+    {{ c }}Lookup(LookupMatcher<Node<Self>, {{ t }}, SolutionSuffix<Context>>),
     {{ c }}Eq {
         eq: {{ t }},
-        matcher: BooleanMatcher<Node<Self>, (Arc<Solution<Context>>, usize)>,
+        matcher: BooleanMatcher<Node<Self>, SolutionSuffix<Context>>,
     },
     {{ c }}Ge {
         lo: {{ t }},
-        matcher: BooleanMatcher<Node<Self>, (Arc<Solution<Context>>, usize)>,
+        matcher: BooleanMatcher<Node<Self>, SolutionSuffix<Context>>,
     },
     {{ c }}Le {
         hi: {{ t }},
-        matcher: BooleanMatcher<Node<Self>, (Arc<Solution<Context>>, usize)>,
+        matcher: BooleanMatcher<Node<Self>, SolutionSuffix<Context>>,
     },
     {{ c }}Range {
         lo: {{ t }},
         hi: {{ t }},
-        matcher: BooleanMatcher<Node<Self>, (Arc<Solution<Context>>, usize)>,
+        matcher: BooleanMatcher<Node<Self>, SolutionSuffix<Context>>,
     },
 %% endfor
     // bitflags
 %% for group in bfp.flag_groups
     LookupCBits{{ loop.index }} {
         mask: flags::ContextBits{{ loop.index }},
-        matcher: LookupMatcher<Node<Self>, flags::ContextBits{{ loop.index }}, (Arc<Solution<Context>>, usize)>,
+        matcher: LookupMatcher<Node<Self>, flags::ContextBits{{ loop.index }}, SolutionSuffix<Context>>,
     },
 %% endfor
 }
@@ -328,7 +328,7 @@ impl Default for ObservationMatcher {
 impl MatcherDispatch for ObservationMatcher {
     type Node = Node<Self>;
     type Struct = Context;
-    type Value = (Arc<Solution<Context>>, usize);
+    type Value = SolutionSuffix<Context>;
     fn new(obs: &OneObservation) -> (Arc<Mutex<Node<Self>>>, Self) {
         match obs {
 %% for ctx, t in context_types.items() if ctx not in bfp.varmap
@@ -393,7 +393,7 @@ impl MatcherDispatch for ObservationMatcher {
         }
     }
 
-    fn lookup(&self, val: &Context) -> (Option<Arc<Mutex<Node<Self>>>>, Option<Self::Value>) {
+    fn lookup(&self, val: &Context) -> (Option<Arc<Mutex<Node<Self>>>>, Vec<Self::Value>) {
         match self {
 %% for ctx, t in context_types.items() if ctx not in bfp.varmap
 %% set c = ctx|camelize|camelize
@@ -451,30 +451,30 @@ impl MatcherDispatch for ObservationMatcher {
         }
     }
 
-    fn set_value(&mut self, obs: &OneObservation, value: Self::Value) {
+    fn add_value(&mut self, obs: &OneObservation, value: Self::Value) {
         match (self, obs) {
 %% for ctx, t in context_types.items() if ctx not in bfp.varmap
 %% set c = ctx|camelize|camelize
 %% if t in int_types
-            (Self::{{ c }}Lookup(m), OneObservation::{{ c }}Exact(v)) => m.set_value(*v, value),
-            (Self::{{ c }}Eq { eq, matcher }, OneObservation::{{ c }}Eq(eq2, v)) if eq2 == eq => matcher.set_value(*v, value),
-            (Self::{{ c }}Ge { lo, matcher }, OneObservation::{{ c }}Ge(lo2, v)) if lo2 == lo => matcher.set_value(*v, value),
-            (Self::{{ c }}Le { hi, matcher }, OneObservation::{{ c }}Le(hi2, v)) if hi2 == hi => matcher.set_value(*v, value),
-            (Self::{{ c }}Range { lo, hi, matcher }, OneObservation::{{ c }}Range(lo2, hi2, v)) if lo2 == lo && hi2 == hi => matcher.set_value(*v, value),
+            (Self::{{ c }}Lookup(m), OneObservation::{{ c }}Exact(v)) => m.add_value(*v, value),
+            (Self::{{ c }}Eq { eq, matcher }, OneObservation::{{ c }}Eq(eq2, v)) if eq2 == eq => matcher.add_value(*v, value),
+            (Self::{{ c }}Ge { lo, matcher }, OneObservation::{{ c }}Ge(lo2, v)) if lo2 == lo => matcher.add_value(*v, value),
+            (Self::{{ c }}Le { hi, matcher }, OneObservation::{{ c }}Le(hi2, v)) if hi2 == hi => matcher.add_value(*v, value),
+            (Self::{{ c }}Range { lo, hi, matcher }, OneObservation::{{ c }}Range(lo2, hi2, v)) if lo2 == lo && hi2 == hi => matcher.add_value(*v, value),
 %% else
-            (Self::{{ c }}Lookup(m), OneObservation::{{ c }}(v)) => m.set_value(*v, value),
+            (Self::{{ c }}Lookup(m), OneObservation::{{ c }}(v)) => m.add_value(*v, value),
 %% endif
 %% endfor
 %% for item in gl.item_max_counts|sort if item not in bfp.varmap
 %% set c = item|camelize
-            (Self::{{ c }}Lookup(m), OneObservation::{{ c }}Exact(v)) => m.set_value(*v, value),
-            (Self::{{ c }}Eq { eq, matcher }, OneObservation::{{ c }}Eq(eq2, v)) if eq2 == eq => matcher.set_value(*v, value),
-            (Self::{{ c }}Ge { lo, matcher }, OneObservation::{{ c }}Ge(lo2, v)) if lo2 == lo => matcher.set_value(*v, value),
-            (Self::{{ c }}Le { hi, matcher }, OneObservation::{{ c }}Le(hi2, v)) if hi2 == hi => matcher.set_value(*v, value),
-            (Self::{{ c }}Range { lo, hi, matcher }, OneObservation::{{ c }}Range(lo2, hi2, v)) if lo2 == lo && hi2 == hi => matcher.set_value(*v, value),
+            (Self::{{ c }}Lookup(m), OneObservation::{{ c }}Exact(v)) => m.add_value(*v, value),
+            (Self::{{ c }}Eq { eq, matcher }, OneObservation::{{ c }}Eq(eq2, v)) if eq2 == eq => matcher.add_value(*v, value),
+            (Self::{{ c }}Ge { lo, matcher }, OneObservation::{{ c }}Ge(lo2, v)) if lo2 == lo => matcher.add_value(*v, value),
+            (Self::{{ c }}Le { hi, matcher }, OneObservation::{{ c }}Le(hi2, v)) if hi2 == hi => matcher.add_value(*v, value),
+            (Self::{{ c }}Range { lo, hi, matcher }, OneObservation::{{ c }}Range(lo2, hi2, v)) if lo2 == lo && hi2 == hi => matcher.add_value(*v, value),
 %% endfor
 %% for group in bfp.flag_groups
-            (Self::LookupCBits{{ loop.index }} { mask, matcher }, OneObservation::CBits{{ loop.index }} { mask: mask2, result }) if mask == mask2 => matcher.set_value(*result, value),
+            (Self::LookupCBits{{ loop.index }} { mask, matcher }, OneObservation::CBits{{ loop.index }} { mask: mask2, result }) if mask == mask2 => matcher.add_value(*result, value),
 %% endfor
             _ => (),
         }

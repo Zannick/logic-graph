@@ -42,6 +42,12 @@ pub fn new_hashmap<T, U>() -> std::collections::HashMap<T, U, CommonHasher> {
 pub(crate) fn new_hashset<T>() -> std::collections::HashSet<T, CommonHasher> {
     rustc_hash::FxHashSet::default()
 }
+pub(crate) fn new_hashset_with<T>(el: T) -> std::collections::HashSet<T, CommonHasher>
+where T: Eq + std::hash::Hash {
+    let mut hs = new_hashset();
+    hs.insert(el);
+    hs
+}
 
 pub mod testlib {
     #[macro_export]

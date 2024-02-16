@@ -12,7 +12,7 @@ use crate::prices::Currency;
 use crate::rules;
 use analyzer::matchertrie::*;
 use analyzer::observer::*;
-use analyzer::solutions::Solution;
+use analyzer::solutions::{Solution, SolutionSuffix};
 use std::sync::{Arc, Mutex};
 
 #[derive(Debug, Copy, Clone, Eq, PartialEq)]
@@ -3275,148 +3275,148 @@ impl FullObservation {
 
 #[derive(Debug)]
 pub enum ObservationMatcher {
-    PositionLookup(LookupMatcher<Node<Self>, SpotId, (Arc<Solution<Context>>, usize)>),
-    EnergyLookup(LookupMatcher<Node<Self>, i16, (Arc<Solution<Context>>, usize)>),
+    PositionLookup(LookupMatcher<Node<Self>, SpotId, SolutionSuffix<Context>>),
+    EnergyLookup(LookupMatcher<Node<Self>, i16, SolutionSuffix<Context>>),
     EnergyEq {
         eq: i16,
-        matcher: BooleanMatcher<Node<Self>, (Arc<Solution<Context>>, usize)>,
+        matcher: BooleanMatcher<Node<Self>, SolutionSuffix<Context>>,
     },
     EnergyGe {
         lo: i16,
-        matcher: BooleanMatcher<Node<Self>, (Arc<Solution<Context>>, usize)>,
+        matcher: BooleanMatcher<Node<Self>, SolutionSuffix<Context>>,
     },
     EnergyLe {
         hi: i16,
-        matcher: BooleanMatcher<Node<Self>, (Arc<Solution<Context>>, usize)>,
+        matcher: BooleanMatcher<Node<Self>, SolutionSuffix<Context>>,
     },
     EnergyRange {
         lo: i16,
         hi: i16,
-        matcher: BooleanMatcher<Node<Self>, (Arc<Solution<Context>>, usize)>,
+        matcher: BooleanMatcher<Node<Self>, SolutionSuffix<Context>>,
     },
-    FlasksLookup(LookupMatcher<Node<Self>, i8, (Arc<Solution<Context>>, usize)>),
+    FlasksLookup(LookupMatcher<Node<Self>, i8, SolutionSuffix<Context>>),
     FlasksEq {
         eq: i8,
-        matcher: BooleanMatcher<Node<Self>, (Arc<Solution<Context>>, usize)>,
+        matcher: BooleanMatcher<Node<Self>, SolutionSuffix<Context>>,
     },
     FlasksGe {
         lo: i8,
-        matcher: BooleanMatcher<Node<Self>, (Arc<Solution<Context>>, usize)>,
+        matcher: BooleanMatcher<Node<Self>, SolutionSuffix<Context>>,
     },
     FlasksLe {
         hi: i8,
-        matcher: BooleanMatcher<Node<Self>, (Arc<Solution<Context>>, usize)>,
+        matcher: BooleanMatcher<Node<Self>, SolutionSuffix<Context>>,
     },
     FlasksRange {
         lo: i8,
         hi: i8,
-        matcher: BooleanMatcher<Node<Self>, (Arc<Solution<Context>>, usize)>,
+        matcher: BooleanMatcher<Node<Self>, SolutionSuffix<Context>>,
     },
-    RefillsLookup(LookupMatcher<Node<Self>, i8, (Arc<Solution<Context>>, usize)>),
+    RefillsLookup(LookupMatcher<Node<Self>, i8, SolutionSuffix<Context>>),
     RefillsEq {
         eq: i8,
-        matcher: BooleanMatcher<Node<Self>, (Arc<Solution<Context>>, usize)>,
+        matcher: BooleanMatcher<Node<Self>, SolutionSuffix<Context>>,
     },
     RefillsGe {
         lo: i8,
-        matcher: BooleanMatcher<Node<Self>, (Arc<Solution<Context>>, usize)>,
+        matcher: BooleanMatcher<Node<Self>, SolutionSuffix<Context>>,
     },
     RefillsLe {
         hi: i8,
-        matcher: BooleanMatcher<Node<Self>, (Arc<Solution<Context>>, usize)>,
+        matcher: BooleanMatcher<Node<Self>, SolutionSuffix<Context>>,
     },
     RefillsRange {
         lo: i8,
         hi: i8,
-        matcher: BooleanMatcher<Node<Self>, (Arc<Solution<Context>>, usize)>,
+        matcher: BooleanMatcher<Node<Self>, SolutionSuffix<Context>>,
     },
-    ModeLookup(LookupMatcher<Node<Self>, enums::Mode, (Arc<Solution<Context>>, usize)>),
-    SaveLookup(LookupMatcher<Node<Self>, SpotId, (Arc<Solution<Context>>, usize)>),
-    BreachSaveLookup(LookupMatcher<Node<Self>, SpotId, (Arc<Solution<Context>>, usize)>),
-    IndraLookup(LookupMatcher<Node<Self>, SpotId, (Arc<Solution<Context>>, usize)>),
-    LastLookup(LookupMatcher<Node<Self>, SpotId, (Arc<Solution<Context>>, usize)>),
-    PrevAreaLookup(LookupMatcher<Node<Self>, AreaId, (Arc<Solution<Context>>, usize)>),
+    ModeLookup(LookupMatcher<Node<Self>, enums::Mode, SolutionSuffix<Context>>),
+    SaveLookup(LookupMatcher<Node<Self>, SpotId, SolutionSuffix<Context>>),
+    BreachSaveLookup(LookupMatcher<Node<Self>, SpotId, SolutionSuffix<Context>>),
+    IndraLookup(LookupMatcher<Node<Self>, SpotId, SolutionSuffix<Context>>),
+    LastLookup(LookupMatcher<Node<Self>, SpotId, SolutionSuffix<Context>>),
+    PrevAreaLookup(LookupMatcher<Node<Self>, AreaId, SolutionSuffix<Context>>),
     // items
-    FlaskLookup(LookupMatcher<Node<Self>, i8, (Arc<Solution<Context>>, usize)>),
+    FlaskLookup(LookupMatcher<Node<Self>, i8, SolutionSuffix<Context>>),
     FlaskEq {
         eq: i8,
-        matcher: BooleanMatcher<Node<Self>, (Arc<Solution<Context>>, usize)>,
+        matcher: BooleanMatcher<Node<Self>, SolutionSuffix<Context>>,
     },
     FlaskGe {
         lo: i8,
-        matcher: BooleanMatcher<Node<Self>, (Arc<Solution<Context>>, usize)>,
+        matcher: BooleanMatcher<Node<Self>, SolutionSuffix<Context>>,
     },
     FlaskLe {
         hi: i8,
-        matcher: BooleanMatcher<Node<Self>, (Arc<Solution<Context>>, usize)>,
+        matcher: BooleanMatcher<Node<Self>, SolutionSuffix<Context>>,
     },
     FlaskRange {
         lo: i8,
         hi: i8,
-        matcher: BooleanMatcher<Node<Self>, (Arc<Solution<Context>>, usize)>,
+        matcher: BooleanMatcher<Node<Self>, SolutionSuffix<Context>>,
     },
-    HealthFragmentLookup(LookupMatcher<Node<Self>, i8, (Arc<Solution<Context>>, usize)>),
+    HealthFragmentLookup(LookupMatcher<Node<Self>, i8, SolutionSuffix<Context>>),
     HealthFragmentEq {
         eq: i8,
-        matcher: BooleanMatcher<Node<Self>, (Arc<Solution<Context>>, usize)>,
+        matcher: BooleanMatcher<Node<Self>, SolutionSuffix<Context>>,
     },
     HealthFragmentGe {
         lo: i8,
-        matcher: BooleanMatcher<Node<Self>, (Arc<Solution<Context>>, usize)>,
+        matcher: BooleanMatcher<Node<Self>, SolutionSuffix<Context>>,
     },
     HealthFragmentLe {
         hi: i8,
-        matcher: BooleanMatcher<Node<Self>, (Arc<Solution<Context>>, usize)>,
+        matcher: BooleanMatcher<Node<Self>, SolutionSuffix<Context>>,
     },
     HealthFragmentRange {
         lo: i8,
         hi: i8,
-        matcher: BooleanMatcher<Node<Self>, (Arc<Solution<Context>>, usize)>,
+        matcher: BooleanMatcher<Node<Self>, SolutionSuffix<Context>>,
     },
     // bitflags
     LookupCBits1 {
         mask: flags::ContextBits1,
-        matcher: LookupMatcher<Node<Self>, flags::ContextBits1, (Arc<Solution<Context>>, usize)>,
+        matcher: LookupMatcher<Node<Self>, flags::ContextBits1, SolutionSuffix<Context>>,
     },
     LookupCBits2 {
         mask: flags::ContextBits2,
-        matcher: LookupMatcher<Node<Self>, flags::ContextBits2, (Arc<Solution<Context>>, usize)>,
+        matcher: LookupMatcher<Node<Self>, flags::ContextBits2, SolutionSuffix<Context>>,
     },
     LookupCBits3 {
         mask: flags::ContextBits3,
-        matcher: LookupMatcher<Node<Self>, flags::ContextBits3, (Arc<Solution<Context>>, usize)>,
+        matcher: LookupMatcher<Node<Self>, flags::ContextBits3, SolutionSuffix<Context>>,
     },
     LookupCBits4 {
         mask: flags::ContextBits4,
-        matcher: LookupMatcher<Node<Self>, flags::ContextBits4, (Arc<Solution<Context>>, usize)>,
+        matcher: LookupMatcher<Node<Self>, flags::ContextBits4, SolutionSuffix<Context>>,
     },
     LookupCBits5 {
         mask: flags::ContextBits5,
-        matcher: LookupMatcher<Node<Self>, flags::ContextBits5, (Arc<Solution<Context>>, usize)>,
+        matcher: LookupMatcher<Node<Self>, flags::ContextBits5, SolutionSuffix<Context>>,
     },
     LookupCBits6 {
         mask: flags::ContextBits6,
-        matcher: LookupMatcher<Node<Self>, flags::ContextBits6, (Arc<Solution<Context>>, usize)>,
+        matcher: LookupMatcher<Node<Self>, flags::ContextBits6, SolutionSuffix<Context>>,
     },
     LookupCBits7 {
         mask: flags::ContextBits7,
-        matcher: LookupMatcher<Node<Self>, flags::ContextBits7, (Arc<Solution<Context>>, usize)>,
+        matcher: LookupMatcher<Node<Self>, flags::ContextBits7, SolutionSuffix<Context>>,
     },
     LookupCBits8 {
         mask: flags::ContextBits8,
-        matcher: LookupMatcher<Node<Self>, flags::ContextBits8, (Arc<Solution<Context>>, usize)>,
+        matcher: LookupMatcher<Node<Self>, flags::ContextBits8, SolutionSuffix<Context>>,
     },
     LookupCBits9 {
         mask: flags::ContextBits9,
-        matcher: LookupMatcher<Node<Self>, flags::ContextBits9, (Arc<Solution<Context>>, usize)>,
+        matcher: LookupMatcher<Node<Self>, flags::ContextBits9, SolutionSuffix<Context>>,
     },
     LookupCBits10 {
         mask: flags::ContextBits10,
-        matcher: LookupMatcher<Node<Self>, flags::ContextBits10, (Arc<Solution<Context>>, usize)>,
+        matcher: LookupMatcher<Node<Self>, flags::ContextBits10, SolutionSuffix<Context>>,
     },
     LookupCBits11 {
         mask: flags::ContextBits11,
-        matcher: LookupMatcher<Node<Self>, flags::ContextBits11, (Arc<Solution<Context>>, usize)>,
+        matcher: LookupMatcher<Node<Self>, flags::ContextBits11, SolutionSuffix<Context>>,
     },
 }
 
@@ -3429,7 +3429,7 @@ impl Default for ObservationMatcher {
 impl MatcherDispatch for ObservationMatcher {
     type Node = Node<Self>;
     type Struct = Context;
-    type Value = (Arc<Solution<Context>>, usize);
+    type Value = SolutionSuffix<Context>;
     fn new(obs: &OneObservation) -> (Arc<Mutex<Node<Self>>>, Self) {
         match obs {
             &OneObservation::Position(v) => {
@@ -3610,7 +3610,7 @@ impl MatcherDispatch for ObservationMatcher {
         }
     }
 
-    fn lookup(&self, val: &Context) -> (Option<Arc<Mutex<Node<Self>>>>, Option<Self::Value>) {
+    fn lookup(&self, val: &Context) -> (Option<Arc<Mutex<Node<Self>>>>, Vec<Self::Value>) {
         match self {
             Self::PositionLookup(m) => m.lookup(val.position),
             Self::EnergyLookup(m) => m.lookup(val.energy),
@@ -3840,174 +3840,174 @@ impl MatcherDispatch for ObservationMatcher {
         }
     }
 
-    fn set_value(&mut self, obs: &OneObservation, value: Self::Value) {
+    fn add_value(&mut self, obs: &OneObservation, value: Self::Value) {
         match (self, obs) {
-            (Self::PositionLookup(m), OneObservation::Position(v)) => m.set_value(*v, value),
-            (Self::EnergyLookup(m), OneObservation::EnergyExact(v)) => m.set_value(*v, value),
+            (Self::PositionLookup(m), OneObservation::Position(v)) => m.add_value(*v, value),
+            (Self::EnergyLookup(m), OneObservation::EnergyExact(v)) => m.add_value(*v, value),
             (Self::EnergyEq { eq, matcher }, OneObservation::EnergyEq(eq2, v)) if eq2 == eq => {
-                matcher.set_value(*v, value)
+                matcher.add_value(*v, value)
             }
             (Self::EnergyGe { lo, matcher }, OneObservation::EnergyGe(lo2, v)) if lo2 == lo => {
-                matcher.set_value(*v, value)
+                matcher.add_value(*v, value)
             }
             (Self::EnergyLe { hi, matcher }, OneObservation::EnergyLe(hi2, v)) if hi2 == hi => {
-                matcher.set_value(*v, value)
+                matcher.add_value(*v, value)
             }
             (Self::EnergyRange { lo, hi, matcher }, OneObservation::EnergyRange(lo2, hi2, v))
                 if lo2 == lo && hi2 == hi =>
             {
-                matcher.set_value(*v, value)
+                matcher.add_value(*v, value)
             }
-            (Self::FlasksLookup(m), OneObservation::FlasksExact(v)) => m.set_value(*v, value),
+            (Self::FlasksLookup(m), OneObservation::FlasksExact(v)) => m.add_value(*v, value),
             (Self::FlasksEq { eq, matcher }, OneObservation::FlasksEq(eq2, v)) if eq2 == eq => {
-                matcher.set_value(*v, value)
+                matcher.add_value(*v, value)
             }
             (Self::FlasksGe { lo, matcher }, OneObservation::FlasksGe(lo2, v)) if lo2 == lo => {
-                matcher.set_value(*v, value)
+                matcher.add_value(*v, value)
             }
             (Self::FlasksLe { hi, matcher }, OneObservation::FlasksLe(hi2, v)) if hi2 == hi => {
-                matcher.set_value(*v, value)
+                matcher.add_value(*v, value)
             }
             (Self::FlasksRange { lo, hi, matcher }, OneObservation::FlasksRange(lo2, hi2, v))
                 if lo2 == lo && hi2 == hi =>
             {
-                matcher.set_value(*v, value)
+                matcher.add_value(*v, value)
             }
-            (Self::RefillsLookup(m), OneObservation::RefillsExact(v)) => m.set_value(*v, value),
+            (Self::RefillsLookup(m), OneObservation::RefillsExact(v)) => m.add_value(*v, value),
             (Self::RefillsEq { eq, matcher }, OneObservation::RefillsEq(eq2, v)) if eq2 == eq => {
-                matcher.set_value(*v, value)
+                matcher.add_value(*v, value)
             }
             (Self::RefillsGe { lo, matcher }, OneObservation::RefillsGe(lo2, v)) if lo2 == lo => {
-                matcher.set_value(*v, value)
+                matcher.add_value(*v, value)
             }
             (Self::RefillsLe { hi, matcher }, OneObservation::RefillsLe(hi2, v)) if hi2 == hi => {
-                matcher.set_value(*v, value)
+                matcher.add_value(*v, value)
             }
             (Self::RefillsRange { lo, hi, matcher }, OneObservation::RefillsRange(lo2, hi2, v))
                 if lo2 == lo && hi2 == hi =>
             {
-                matcher.set_value(*v, value)
+                matcher.add_value(*v, value)
             }
-            (Self::ModeLookup(m), OneObservation::Mode(v)) => m.set_value(*v, value),
-            (Self::SaveLookup(m), OneObservation::Save(v)) => m.set_value(*v, value),
-            (Self::BreachSaveLookup(m), OneObservation::BreachSave(v)) => m.set_value(*v, value),
-            (Self::IndraLookup(m), OneObservation::Indra(v)) => m.set_value(*v, value),
-            (Self::LastLookup(m), OneObservation::Last(v)) => m.set_value(*v, value),
-            (Self::PrevAreaLookup(m), OneObservation::PrevArea(v)) => m.set_value(*v, value),
-            (Self::FlaskLookup(m), OneObservation::FlaskExact(v)) => m.set_value(*v, value),
+            (Self::ModeLookup(m), OneObservation::Mode(v)) => m.add_value(*v, value),
+            (Self::SaveLookup(m), OneObservation::Save(v)) => m.add_value(*v, value),
+            (Self::BreachSaveLookup(m), OneObservation::BreachSave(v)) => m.add_value(*v, value),
+            (Self::IndraLookup(m), OneObservation::Indra(v)) => m.add_value(*v, value),
+            (Self::LastLookup(m), OneObservation::Last(v)) => m.add_value(*v, value),
+            (Self::PrevAreaLookup(m), OneObservation::PrevArea(v)) => m.add_value(*v, value),
+            (Self::FlaskLookup(m), OneObservation::FlaskExact(v)) => m.add_value(*v, value),
             (Self::FlaskEq { eq, matcher }, OneObservation::FlaskEq(eq2, v)) if eq2 == eq => {
-                matcher.set_value(*v, value)
+                matcher.add_value(*v, value)
             }
             (Self::FlaskGe { lo, matcher }, OneObservation::FlaskGe(lo2, v)) if lo2 == lo => {
-                matcher.set_value(*v, value)
+                matcher.add_value(*v, value)
             }
             (Self::FlaskLe { hi, matcher }, OneObservation::FlaskLe(hi2, v)) if hi2 == hi => {
-                matcher.set_value(*v, value)
+                matcher.add_value(*v, value)
             }
             (Self::FlaskRange { lo, hi, matcher }, OneObservation::FlaskRange(lo2, hi2, v))
                 if lo2 == lo && hi2 == hi =>
             {
-                matcher.set_value(*v, value)
+                matcher.add_value(*v, value)
             }
             (Self::HealthFragmentLookup(m), OneObservation::HealthFragmentExact(v)) => {
-                m.set_value(*v, value)
+                m.add_value(*v, value)
             }
             (Self::HealthFragmentEq { eq, matcher }, OneObservation::HealthFragmentEq(eq2, v))
                 if eq2 == eq =>
             {
-                matcher.set_value(*v, value)
+                matcher.add_value(*v, value)
             }
             (Self::HealthFragmentGe { lo, matcher }, OneObservation::HealthFragmentGe(lo2, v))
                 if lo2 == lo =>
             {
-                matcher.set_value(*v, value)
+                matcher.add_value(*v, value)
             }
             (Self::HealthFragmentLe { hi, matcher }, OneObservation::HealthFragmentLe(hi2, v))
                 if hi2 == hi =>
             {
-                matcher.set_value(*v, value)
+                matcher.add_value(*v, value)
             }
             (
                 Self::HealthFragmentRange { lo, hi, matcher },
                 OneObservation::HealthFragmentRange(lo2, hi2, v),
-            ) if lo2 == lo && hi2 == hi => matcher.set_value(*v, value),
+            ) if lo2 == lo && hi2 == hi => matcher.add_value(*v, value),
             (
                 Self::LookupCBits1 { mask, matcher },
                 OneObservation::CBits1 {
                     mask: mask2,
                     result,
                 },
-            ) if mask == mask2 => matcher.set_value(*result, value),
+            ) if mask == mask2 => matcher.add_value(*result, value),
             (
                 Self::LookupCBits2 { mask, matcher },
                 OneObservation::CBits2 {
                     mask: mask2,
                     result,
                 },
-            ) if mask == mask2 => matcher.set_value(*result, value),
+            ) if mask == mask2 => matcher.add_value(*result, value),
             (
                 Self::LookupCBits3 { mask, matcher },
                 OneObservation::CBits3 {
                     mask: mask2,
                     result,
                 },
-            ) if mask == mask2 => matcher.set_value(*result, value),
+            ) if mask == mask2 => matcher.add_value(*result, value),
             (
                 Self::LookupCBits4 { mask, matcher },
                 OneObservation::CBits4 {
                     mask: mask2,
                     result,
                 },
-            ) if mask == mask2 => matcher.set_value(*result, value),
+            ) if mask == mask2 => matcher.add_value(*result, value),
             (
                 Self::LookupCBits5 { mask, matcher },
                 OneObservation::CBits5 {
                     mask: mask2,
                     result,
                 },
-            ) if mask == mask2 => matcher.set_value(*result, value),
+            ) if mask == mask2 => matcher.add_value(*result, value),
             (
                 Self::LookupCBits6 { mask, matcher },
                 OneObservation::CBits6 {
                     mask: mask2,
                     result,
                 },
-            ) if mask == mask2 => matcher.set_value(*result, value),
+            ) if mask == mask2 => matcher.add_value(*result, value),
             (
                 Self::LookupCBits7 { mask, matcher },
                 OneObservation::CBits7 {
                     mask: mask2,
                     result,
                 },
-            ) if mask == mask2 => matcher.set_value(*result, value),
+            ) if mask == mask2 => matcher.add_value(*result, value),
             (
                 Self::LookupCBits8 { mask, matcher },
                 OneObservation::CBits8 {
                     mask: mask2,
                     result,
                 },
-            ) if mask == mask2 => matcher.set_value(*result, value),
+            ) if mask == mask2 => matcher.add_value(*result, value),
             (
                 Self::LookupCBits9 { mask, matcher },
                 OneObservation::CBits9 {
                     mask: mask2,
                     result,
                 },
-            ) if mask == mask2 => matcher.set_value(*result, value),
+            ) if mask == mask2 => matcher.add_value(*result, value),
             (
                 Self::LookupCBits10 { mask, matcher },
                 OneObservation::CBits10 {
                     mask: mask2,
                     result,
                 },
-            ) if mask == mask2 => matcher.set_value(*result, value),
+            ) if mask == mask2 => matcher.add_value(*result, value),
             (
                 Self::LookupCBits11 { mask, matcher },
                 OneObservation::CBits11 {
                     mask: mask2,
                     result,
                 },
-            ) if mask == mask2 => matcher.set_value(*result, value),
+            ) if mask == mask2 => matcher.add_value(*result, value),
             _ => (),
         }
     }

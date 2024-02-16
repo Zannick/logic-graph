@@ -75,11 +75,7 @@ where
 {
     /// Performs a lookup for all states similar to this one.
     pub fn lookup(&self, similar: &StructType) -> Vec<ValueType> {
-        let mut vec = Vec::new();
-        let (node, val) = self.root.lock().unwrap().lookup(similar);
-        if let Some(v) = val {
-            vec.push(v.clone());
-        }
+        let (node, mut vec) = self.root.lock().unwrap().lookup(similar);
         if let Some(mut node) = node {
             let mut node_queue = VecDeque::new();
             node_queue.push_back(node);
@@ -87,9 +83,7 @@ where
                 let locked_node = node.lock().unwrap();
                 for matcher in locked_node.matchers.iter() {
                     let (inner, val) = matcher.lookup(similar);
-                    if let Some(v) = val {
-                        vec.push(v.clone());
-                    }
+                    vec.extend(val);
                     if let Some(n) = inner {
                         node_queue.push_back(n);
                     }
@@ -122,18 +116,18 @@ where
                 let mut locked_node = current_node.lock().unwrap();
                 for matcher in locked_node.matchers.iter_mut() {
                     if let Some(_) = matcher.insert(last) {
-                        matcher.set_value(last, value);
+                        matcher.add_value(last, value);
                         return;
                     }
                 }
                 // We didn't match a matcher, so we have to make a new one.
                 let (_, mut matcher) = MultiMatcherType::new(last);
-                matcher.set_value(last, value);
+                matcher.add_value(last, value);
                 locked_node.matchers.push(matcher);
             } else {
                 let mut locked_root = self.root.lock().unwrap();
                 locked_root.insert(first);
-                locked_root.set_value(first, value);
+                locked_root.add_value(first, value);
             }
         }
     }
@@ -207,7 +201,7 @@ mod test {
         End,
     }
 
-    #[derive(Clone, Copy, Debug, PartialEq, Eq)]
+    #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash)]
     struct Ctx {
         pub pos: Position,
         pub flasks: i8,
@@ -292,7 +286,7 @@ mod test {
             }
         }
 
-        fn lookup(&self, val: &Ctx) -> (Option<Arc<Mutex<Node<Self>>>>, Option<Ctx>) {
+        fn lookup(&self, val: &Ctx) -> (Option<Arc<Mutex<Node<Self>>>>, Vec<Ctx>) {
             match self {
                 Self::LookupPosition(m) => m.lookup(val.pos),
                 Self::LookupFlasks(m) => m.lookup(val.flasks),
@@ -317,17 +311,17 @@ mod test {
             }
         }
 
-        fn set_value(&mut self, obs: &OneObservedThing, value: Ctx) {
+        fn add_value(&mut self, obs: &OneObservedThing, value: Ctx) {
             match (self, obs) {
-                (Self::LookupPosition(m), OneObservedThing::Pos(p)) => m.set_value(*p, value),
-                (Self::LookupFlasks(m), OneObservedThing::Flasks(f)) => m.set_value(*f, value),
+                (Self::LookupPosition(m), OneObservedThing::Pos(p)) => m.add_value(*p, value),
+                (Self::LookupFlasks(m), OneObservedThing::Flasks(f)) => m.add_value(*f, value),
                 (Self::MaskLookupFlag(m, used_mask), OneObservedThing::Flag { mask, result })
                     if used_mask == mask =>
                 {
-                    m.set_value(*result, value)
+                    m.add_value(*result, value)
                 }
                 (Self::EnoughFlasks(m, x), OneObservedThing::FlasksGe(y, res)) if x == y => {
-                    m.set_value(*res, value)
+                    m.add_value(*res, value)
                 }
                 _ => (),
             }
@@ -395,7 +389,7 @@ mod test {
             panic!("Root is wrong type: {:?}", trie);
         }
         let (node, val) = trie.root.lock().unwrap().lookup(&CTX_TEST_1);
-        assert_eq!(None, val);
+        assert!(val.is_empty());
         let node = node.expect("Root has Start but not next");
         let lock1 = node.lock().unwrap();
         assert_eq!(2, lock1.matchers.len());
@@ -407,7 +401,7 @@ mod test {
         }
 
         let (node2, val) = lock1.matchers[0].lookup(&CTX_TEST_1);
-        assert_eq!(None, val);
+        assert!(val.is_empty());
         let node2 = node2.expect("Node 2 has flag but no node");
         drop(lock1);
         let lock2 = node2.lock().unwrap();
@@ -420,7 +414,7 @@ mod test {
         }
         let (node3, val) = lock2.matchers[0].lookup(&CTX_TEST_1);
 
-        assert_eq!(Some(CTX_1.clone()), val);
+        assert_eq!(vec![CTX_1.clone()], val);
     }
 
     #[test]
@@ -433,7 +427,7 @@ mod test {
             panic!("Root is wrong type: {:?}", trie);
         }
         let (node, val) = trie.root.lock().unwrap().lookup(&CTX_2);
-        assert_eq!(None, val);
+        assert!(val.is_empty());
         let node = node.expect("Root has Start but not next");
         let lock1 = node.lock().unwrap();
         assert_eq!(2, lock1.matchers.len());
@@ -445,7 +439,7 @@ mod test {
         }
 
         let (node2, val) = lock1.matchers[0].lookup(&CTX_2);
-        assert_eq!(None, val);
+        assert!(val.is_empty());
         let node2 = node2.expect("Node 2 has flag but no node");
         drop(lock1);
         let lock2 = node2.lock().unwrap();
@@ -467,7 +461,7 @@ mod test {
         }
 
         let (node3, val) = lock1.matchers[1].lookup(&CTX_2);
-        assert_eq!(None, val);
+        assert!(val.is_empty());
         let node3 = node3.expect("Node 2 has flag but no node");
         drop(lock1);
         let lock3 = node3.lock().unwrap();
@@ -480,7 +474,7 @@ mod test {
         }
         let (node4, val) = lock3.matchers[0].lookup(&CTX_2);
 
-        assert_eq!(Some(CTX_2.clone()), val);
+        assert_eq!(vec![CTX_2.clone()], val);
     }
 
     #[test]

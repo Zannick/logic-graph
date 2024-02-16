@@ -30,6 +30,23 @@ pub struct Solution<T: Ctx> {
     pub history: Vec<HistoryAlias<T>>,
 }
 
+#[derive(Clone, Debug)]
+pub struct SolutionSuffix<T>(pub Arc<Solution<T>>, pub usize)
+where
+    T: Ctx;
+
+impl<T> PartialEq for SolutionSuffix<T> where T: Ctx {
+    fn eq(&self, other: &Self) -> bool {
+        self.0.history[self.1..] == other.0.history[other.1..]
+    }
+}
+impl<T> Eq for SolutionSuffix<T> where T: Ctx {}
+impl<T> std::hash::Hash for SolutionSuffix<T> where T: Ctx {
+    fn hash<H: std::hash::Hasher>(&self, state: &mut H) {
+        self.0.history[self.1..].hash(state);
+    }
+}
+
 pub struct SolutionCollector<T>
 where
     T: Ctx,

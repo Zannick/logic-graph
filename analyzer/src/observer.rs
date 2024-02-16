@@ -1,6 +1,6 @@
-use crate::context::{Ctx, History, history_to_full_series};
+use crate::context::{history_to_full_series, Ctx, History};
 use crate::matchertrie::*;
-use crate::solutions::Solution;
+use crate::solutions::{Solution, SolutionSuffix};
 use crate::world::*;
 use crate::CommonHasher;
 use std::collections::HashSet;
@@ -13,7 +13,7 @@ pub trait Observer: Debug {
     type Matcher: MatcherDispatch<
             Node = Node<Self::Matcher>,
             Struct = Self::Ctx,
-            Value = (Arc<Solution<Self::Ctx>>, usize),
+            Value = SolutionSuffix<Self::Ctx>,
         > + Default
         + Send
         + Sync
@@ -56,7 +56,7 @@ pub trait Observer: Debug {
 
 // This is here to allow benchmarking without a SolutionCollector.
 /// Records a full solution's observations into the solve trie.
-/// 
+///
 /// Every state that has visited at least |min_progress| of the progress_locations is recorded in the trie,
 /// except for the winning state.
 pub fn record_observations<W, T, L, E, Wp>(
@@ -120,7 +120,7 @@ pub fn record_observations<W, T, L, E, Wp>(
         state.observe_replay(world, *step, &mut solve);
 
         // 3. Insert the new observation list.
-        solve_trie.insert(solve.to_vec(state), (solution.clone(), idx));
+        solve_trie.insert(solve.to_vec(state), SolutionSuffix(solution.clone(), idx));
 
         prev = state;
     }
