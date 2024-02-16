@@ -154,6 +154,23 @@ where
         }
         node_count
     }
+
+    pub fn max_depth(&self) -> usize {
+        let mut depth = 0;
+        let mut current_depth = self.root.lock().unwrap().nodes();
+        while !current_depth.is_empty() {
+            depth += 1;
+            let mut next_depth = Vec::new();
+            for node in current_depth {
+                let locked_node = node.lock().unwrap();
+                for matcher in &locked_node.matchers {
+                    next_depth.extend(matcher.nodes());
+                }
+            }
+            current_depth = next_depth;
+        }
+        depth
+    }
 }
 
 #[cfg(test)]

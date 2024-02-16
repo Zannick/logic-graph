@@ -908,7 +908,7 @@ where
         println!(
             "--- Round {} (solutions={}, unique={}, dead-ends={}, limit={}ms, best={}ms, greedy={}, org={}) ---\n\
             Stats: heap={}; pending={}; db={}; total={}; seen={}; proc={};\n\
-            trie size={}; estimates={}; cached={}; evictions={}; retrievals={}\n\
+            trie size={}, depth={}; estimates={}; cached={}; evictions={}; retrievals={}\n\
             skips: push:{} time, {} dups; pop: {} time, {} dups; bgdel={}\n\
             heap min: {}\n\
             db bests: {}\n\
@@ -928,6 +928,7 @@ where
             self.queue.seen(),
             self.queue.db().processed(),
             self.solve_trie.size(),
+            self.solve_trie.max_depth(),
             self.queue.estimates(),
             self.queue.cached_estimates(),
             self.queue.evictions(),
