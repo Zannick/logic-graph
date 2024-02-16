@@ -50,6 +50,8 @@ pub trait MatcherDispatch {
         obs: &<Self::Struct as Observable>::PropertyObservation,
         value: Self::Value,
     );
+
+    fn nodes(&self) -> Vec<Arc<Mutex<Self::Node>>>;
 }
 
 pub trait Matcher<NodeType, KeyType, ValueType>
@@ -66,6 +68,8 @@ where
     /// Inserts matchers
     fn insert(&mut self, obs: KeyType) -> Arc<Mutex<NodeType>>;
     fn set_value(&mut self, obs: KeyType, value: ValueType);
+
+    fn nodes(&self) -> Vec<Arc<Mutex<NodeType>>>;
 }
 
 #[derive(Default)]
@@ -139,7 +143,6 @@ where
                 if let None = val {
                     *val = Some(value);
                 } else {
-                    log::debug!("Replacing a value in matcher trie");
                     *val = Some(value);
                 }
             }
@@ -147,6 +150,10 @@ where
                 self.map.insert(obs, (Some(Arc::default()), Some(value)));
             }
         }
+    }
+
+    fn nodes(&self) -> Vec<Arc<Mutex<NodeType>>> {
+        self.map.values().filter_map(|(n, _)| n.clone()).collect()
     }
 }
 
@@ -255,6 +262,17 @@ where
             log::debug!("Replacing a value in matcher trie");
             *val = Some(value);
         }
+    }
+
+    fn nodes(&self) -> Vec<Arc<Mutex<NodeType>>> {
+        let mut vec = Vec::new();
+        if let Some(n) = &self.true_node {
+            vec.push(n.clone());
+        }
+        if let Some(n) = &self.false_node {
+            vec.push(n.clone());
+        }
+        vec
     }
 }
 

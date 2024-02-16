@@ -137,6 +137,23 @@ where
             }
         }
     }
+
+    pub fn size(&self) -> usize {
+        let mut node_count = 0;
+        let mut node_queue = VecDeque::new();
+        let nodes = self.root.lock().unwrap().nodes();
+        node_count += nodes.len();
+        node_queue.extend(nodes);
+        while let Some(node) = node_queue.pop_front() {
+            let locked_node = node.lock().unwrap();
+            for matcher in &locked_node.matchers {
+                let nodes = matcher.nodes();
+                node_count += nodes.len();
+                node_queue.extend(nodes);
+            }
+        }
+        node_count
+    }
 }
 
 #[cfg(test)]
@@ -278,6 +295,15 @@ mod test {
                     m.set_value(*res, value)
                 }
                 _ => (),
+            }
+        }
+
+        fn nodes(&self) -> Vec<Arc<Mutex<Self::Node>>> {
+            match self {
+                MatcherMulti::LookupPosition(m) => m.nodes(),
+                MatcherMulti::LookupFlasks(m) => m.nodes(),
+                MatcherMulti::MaskLookupFlag(m, _) => m.nodes(),
+                MatcherMulti::EnoughFlasks(m, _) => m.nodes(),
             }
         }
     }

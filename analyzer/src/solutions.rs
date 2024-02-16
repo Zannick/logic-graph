@@ -1,6 +1,6 @@
 use crate::context::*;
 use crate::matchertrie::MatcherTrie;
-use crate::observer::{Observer, record_observations};
+use crate::observer::{record_observations, Observer};
 use crate::world::*;
 use crate::{new_hashmap, CommonHasher};
 use log;
@@ -155,7 +155,11 @@ where
             &self.progress_locations,
             &self.solve_trie,
         );
-        log::debug!("Recording solution into trie took {:?}", start.elapsed());
+        log::debug!(
+            "Recording solution into trie took {:?}, size is now {} nodes",
+            start.elapsed(),
+            self.solve_trie.size()
+        );
         unique
     }
 
