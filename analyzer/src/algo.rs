@@ -370,23 +370,7 @@ where
             .pop()
             .unwrap_or_else(|| Self::find_greedy_win(world, &startctx, &others));
 
-        log::info!("Attempting to minimize our solution");
-        let start = Instant::now();
-        let max_time =
-            if let Some(m) = minimize_greedy(world, startctx.get(), &wonctx, wonctx.elapsed()) {
-                log::info!("Minimized in {:?}", start.elapsed());
-                log::info!(
-                    "Initial solution of {}ms was minimized to {}ms",
-                    wonctx.elapsed(),
-                    m.elapsed()
-                );
-                let max_time = std::cmp::min(wonctx.elapsed(), m.elapsed());
-                solutions.insert(m.elapsed(), m.recent_history().to_vec(), world, 1);
-                max_time
-            } else {
-                log::info!("Minimized-greedy solution wasn't faster than original");
-                wonctx.elapsed()
-            };
+        let max_time = wonctx.elapsed();
 
         solutions.insert(wonctx.elapsed(), wonctx.recent_history().to_vec(), world, 1);
         for w in &wins {
