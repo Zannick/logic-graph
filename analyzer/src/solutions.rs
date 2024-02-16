@@ -8,7 +8,6 @@ use std::collections::{HashMap, HashSet};
 use std::fs::File;
 use std::io::{self, Write};
 use std::sync::Arc;
-use std::time::Instant;
 
 fn is_subset<T, Iter>(mut subset: Iter, mut superset: Iter) -> bool
 where
@@ -146,7 +145,6 @@ where
             self.write_best().unwrap();
             true
         };
-        let start = Instant::now();
         record_observations(
             &self.startctx,
             world,
@@ -154,11 +152,6 @@ where
             min_progress_for_trie,
             &self.progress_locations,
             &self.solve_trie,
-        );
-        log::debug!(
-            "Recording solution into trie took {:?}, size is now {} nodes",
-            start.elapsed(),
-            self.solve_trie.size()
         );
         unique
     }
