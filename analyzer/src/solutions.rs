@@ -35,6 +35,12 @@ pub struct SolutionSuffix<T>(pub Arc<Solution<T>>, pub usize)
 where
     T: Ctx;
 
+impl<T> SolutionSuffix<T> where T: Ctx {
+    pub fn suffix(&self) -> &[HistoryAlias<T>] {
+        &self.0.history[self.1..]
+    }
+}
+
 impl<T> PartialEq for SolutionSuffix<T> where T: Ctx {
     fn eq(&self, other: &Self) -> bool {
         self.0.history[self.1..] == other.0.history[other.1..]

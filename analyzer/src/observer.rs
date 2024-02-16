@@ -64,7 +64,7 @@ pub fn record_observations<W, T, L, E, Wp>(
     world: &W,
     solution: Arc<Solution<T>>,
     min_progress: usize,
-    progress_locations: &HashSet<L::LocId, CommonHasher>,
+    progress_locations: Option<&HashSet<L::LocId, CommonHasher>>,
     solve_trie: &MatcherTrie<<T::Observer as Observer>::Matcher>,
 ) where
     W: World<Location = L, Exit = E, Warp = Wp>,
@@ -81,28 +81,36 @@ pub fn record_observations<W, T, L, E, Wp>(
     let mut solve = <T::Observer as Observer>::from_victory_state(prev, world);
 
     let mut pcount = 0;
-    let skippable = solution
-        .history
-        .iter()
-        .position(|h| match h {
-            History::G(_, loc_id) => {
-                if progress_locations.contains(&loc_id) {
-                    pcount += 1;
-                }
-                pcount == min_progress
-            }
-            History::H(_, exit_id) => {
-                let exit = world.get_exit(*exit_id);
-                if let Some(loc_id) = exit.loc_id() {
-                    if progress_locations.contains(&loc_id) {
+    let skippable = if let Some(plocs) = progress_locations {
+        solution
+            .history
+            .iter()
+            .position(|h| match h {
+                History::G(_, loc_id) => {
+                    if plocs.contains(&loc_id) {
                         pcount += 1;
                     }
+                    pcount == min_progress
                 }
-                pcount == min_progress
-            }
-            _ => false,
-        })
-        .unwrap_or(1);
+                History::H(_, exit_id) => {
+                    let exit = world.get_exit(*exit_id);
+                    if let Some(loc_id) = exit.loc_id() {
+                        if plocs.contains(&loc_id) {
+                            pcount += 1;
+                        }
+                    }
+                    pcount == min_progress
+                }
+                _ => false,
+            })
+            .unwrap_or(1)
+    } else {
+        solution
+            .history
+            .iter()
+            .position(|h| matches!(h, History::G(..) | History::H(..)))
+            .unwrap_or(1)
+    };
 
     for (idx, (step, state)) in solution
         .history

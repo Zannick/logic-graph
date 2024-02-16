@@ -9,6 +9,7 @@ extern crate regex;
 extern crate rmp_serde;
 extern crate rustc_hash;
 extern crate serde;
+extern crate similar;
 extern crate sort_by_derive;
 extern crate yaml_rust;
 

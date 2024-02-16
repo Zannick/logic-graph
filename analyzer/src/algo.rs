@@ -5,7 +5,7 @@ use crate::heap::RocksBackedQueue;
 use crate::matchertrie::*;
 use crate::minimize::pinpoint_minimize;
 use crate::observer::{record_observations, Observer};
-use crate::solutions::{Solution, SolutionCollector};
+use crate::solutions::SolutionCollector;
 use crate::world::*;
 use crate::CommonHasher;
 use anyhow::Result;
@@ -379,7 +379,7 @@ where
                 world,
                 sol,
                 1,
-                &progress_locations,
+                Some(&progress_locations),
                 &solve_trie,
             );
         }
@@ -390,7 +390,7 @@ where
                     world,
                     sol,
                     1,
-                    &progress_locations,
+                    Some(&progress_locations),
                     &solve_trie,
                 );
             }
@@ -501,7 +501,7 @@ where
                 self.world,
                 sol,
                 min_progress,
-                &self.progress_locations,
+                Some(&self.progress_locations),
                 &self.solve_trie,
             );
         }
@@ -534,7 +534,7 @@ where
                     self.world,
                     sol,
                     min_progress,
-                    &self.progress_locations,
+                    Some(&self.progress_locations),
                     &self.solve_trie,
                 );
             }

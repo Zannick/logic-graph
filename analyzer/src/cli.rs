@@ -3,14 +3,21 @@ use crate::context::*;
 use crate::db::HeapDB;
 use crate::estimates::ContextScorer;
 use crate::greedy::*;
+use crate::matchertrie::MatcherTrie;
+use crate::observer::record_observations;
+use crate::observer::Observer;
 use crate::route::*;
+use crate::solutions::Solution;
 use crate::world::*;
 use clap::{Parser, Subcommand};
+use similar::TextDiff;
+use std::collections::VecDeque;
 use std::fmt::Debug;
 use std::fs::File;
 use std::io::Read;
 use std::mem::size_of;
 use std::path::{Path, PathBuf};
+use std::sync::Arc;
 
 #[derive(Parser)]
 #[command(about = "Graph algorithm analysis", long_about = None)]
@@ -61,6 +68,13 @@ pub enum Commands {
         /// text file with route to start from
         #[arg(value_name = "FILE")]
         route: Option<PathBuf>,
+    },
+
+    /// Attempts to minimize the given route (must be a winning route)
+    Minimize {
+        /// test file with winning route
+        #[arg(value_name = "FILE")]
+        route: PathBuf,
     },
 
     /// provides debug info about the binary
@@ -135,6 +149,78 @@ where
                 );
             } else {
                 println!("Could not find a greedy route");
+            }
+            Ok(())
+        }
+        Commands::Minimize { route } => {
+            let ctx =
+                route_from_string(world, &startctx, &read_from_file(route), scorer.get_algo())
+                    .unwrap();
+            if !world.won(ctx.get()) {
+                println!("Route did not win");
+                return Ok(());
+            }
+            let mut trie = MatcherTrie::<<T::Observer as Observer>::Matcher>::default();
+            let solution = Arc::new(Solution {
+                elapsed: ctx.elapsed(),
+                history: ctx.recent_history().to_vec(),
+            });
+            record_observations(&startctx, world, solution.clone(), 0, None, &mut trie);
+
+            // TODO: move into a new minimize function?
+            let mut valid = 0;
+            let mut invalid = 0;
+            let mut replay = ContextWrapper::new(startctx.clone());
+            let mut best = ctx;
+            let mut index = 0;
+            while index < best.recent_history().len() {
+                replay.assert_and_replay(world, best.recent_history()[index]);
+                index += 1;
+                let mut queue = VecDeque::new();
+                queue.extend(trie.lookup(replay.get()));
+                'q: while let Some(suffix) = queue.pop_front() {
+                    let mut r2 = replay.clone();
+                    for step in suffix.suffix() {
+                        if !r2.can_replay(world, *step) {
+                            invalid += 1;
+                            continue 'q;
+                        }
+                        r2.replay(world, *step);
+                    }
+                    if !world.won(r2.get()) {
+                        invalid += 1;
+                        continue 'q;
+                    }
+
+                    valid += 1;
+                    record_observations(
+                        &startctx,
+                        world,
+                        Arc::new(Solution {
+                            elapsed: r2.elapsed(),
+                            history: r2.recent_history().to_vec(),
+                        }),
+                        0,
+                        None,
+                        &mut trie
+                    );
+                    if r2.elapsed() < best.elapsed() {
+                        best = r2;
+                    }
+                }
+            }
+            println!("Found {} valid and {} invalid derivative paths.", valid, invalid);
+            if best.elapsed() < solution.elapsed {
+                println!("Improved route from {}ms to {}ms", solution.elapsed, best.elapsed());
+                let old_hist = history_str::<T, _>(solution.history.iter().copied());
+                let new_hist = history_str::<T, _>(best.recent_history().iter().copied());
+                let text_diff = TextDiff::from_lines(&old_hist, &new_hist);
+                print!("{}", text_diff
+                    .unified_diff()
+                    .context_radius(3)
+                    .header("original", "best"));
+            } else {
+                println!("Could not improve solution.");
             }
             Ok(())
         }
