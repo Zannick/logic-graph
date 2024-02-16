@@ -1,10 +1,8 @@
 use crate::context::*;
-use crate::matchertrie::MatcherTrie;
-use crate::observer::{record_observations, Observer};
 use crate::world::*;
 use crate::{new_hashmap, CommonHasher};
 use log;
-use std::collections::{HashMap, HashSet};
+use std::collections::HashMap;
 use std::fs::File;
 use std::io::{self, Write};
 use std::sync::Arc;
@@ -41,11 +39,8 @@ where
     previews: &'static str,
     best_file: &'static str,
     file: File,
-    startctx: T,
-    solve_trie: Arc<MatcherTrie<<T::Observer as Observer>::Matcher>>,
     count: usize,
     best: u32,
-    progress_locations: HashSet<<<T::World as World>::Location as Location>::LocId, CommonHasher>,
 }
 
 impl<T> SolutionCollector<T>
@@ -56,12 +51,6 @@ where
         sols_file: &'static str,
         previews_file: &'static str,
         best_file: &'static str,
-        startctx: T,
-        solve_trie: Arc<MatcherTrie<<T::Observer as Observer>::Matcher>>,
-        progress_locations: HashSet<
-            <<T::World as World>::Location as Location>::LocId,
-            CommonHasher,
-        >,
     ) -> io::Result<SolutionCollector<T>> {
         Ok(SolutionCollector {
             map: new_hashmap(),
@@ -69,11 +58,8 @@ where
             path: sols_file,
             previews: previews_file,
             best_file,
-            startctx,
-            solve_trie,
             count: 0,
             best: 0,
-            progress_locations,
         })
     }
 
@@ -99,9 +85,7 @@ where
         &mut self,
         elapsed: u32,
         history: Vec<HistoryAlias<T>>,
-        world: &W,
-        min_progress_for_trie: usize,
-    ) -> bool
+    ) -> (bool, Option<Arc<Solution<T>>>)
     where
         W: World<Location = L, Exit = E, Warp = Wp>,
         L: Location<Context = T>,
@@ -127,33 +111,24 @@ where
                 elapsed,
                 self.best
             );
-            return false;
+            return (false, None);
         }
 
         self.count += 1;
         let sol = Arc::new(Solution { elapsed, history });
-        let unique = if let Some(vec) = self.map.get_mut(&loc_history) {
+        if let Some(vec) = self.map.get_mut(&loc_history) {
             vec.push(sol.clone());
             self.write_previews().unwrap();
             self.write_best().unwrap();
-            false
+            (false, Some(sol))
         } else {
             let mut locs = loc_history.clone();
             locs.reverse();
             self.map.insert(loc_history, vec![sol.clone()]);
             self.write_previews().unwrap();
             self.write_best().unwrap();
-            true
-        };
-        record_observations(
-            &self.startctx,
-            world,
-            sol,
-            min_progress_for_trie,
-            &self.progress_locations,
-            &self.solve_trie,
-        );
-        unique
+            (true, Some(sol))
+        }
     }
 
     pub fn get_best(&self) -> Arc<Solution<T>> {

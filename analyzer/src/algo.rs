@@ -4,7 +4,7 @@ use crate::greedy::*;
 use crate::heap::RocksBackedQueue;
 use crate::matchertrie::*;
 use crate::minimize::pinpoint_minimize;
-use crate::observer::Observer;
+use crate::observer::{record_observations, Observer};
 use crate::solutions::{Solution, SolutionCollector};
 use crate::world::*;
 use crate::CommonHasher;
@@ -248,6 +248,7 @@ where
     held: AtomicUsize,
     organic_solution: AtomicBool,
     organic_level: AtomicUsize,
+    progress_locations: HashSet<<W::Location as Location>::LocId, CommonHasher>,
 }
 
 impl<'a, W, T, L, E> Search<'a, W, T>
@@ -324,7 +325,7 @@ where
         world.skip_unused_items(&mut ctx);
 
         let solve_trie: Arc<MatcherTrie<<T::Observer as Observer>::Matcher>> = Arc::default();
-        let required_locations: HashSet<_, CommonHasher> = world
+        let progress_locations: HashSet<_, CommonHasher> = world
             .required_items()
             .into_iter()
             .flat_map(|(item, _)| world.get_item_locations(item))
@@ -333,9 +334,6 @@ where
             "data/solutions.txt",
             "data/previews.txt",
             "data/best.txt",
-            ctx.clone(),
-            solve_trie.clone(),
-            required_locations,
         )?;
 
         let startctx = ContextWrapper::new(ctx);
@@ -372,9 +370,30 @@ where
 
         let max_time = wonctx.elapsed();
 
-        solutions.insert(wonctx.elapsed(), wonctx.recent_history().to_vec(), world, 1);
+        if let Some(sol) = solutions
+            .insert(wonctx.elapsed(), wonctx.recent_history().to_vec())
+            .1
+        {
+            record_observations(
+                startctx.get(),
+                world,
+                sol,
+                1,
+                &progress_locations,
+                &solve_trie,
+            );
+        }
         for w in &wins {
-            solutions.insert(w.elapsed(), w.recent_history().to_vec(), world, 1);
+            if let Some(sol) = solutions.insert(w.elapsed(), w.recent_history().to_vec()).1 {
+                record_observations(
+                    startctx.get(),
+                    world,
+                    sol,
+                    1,
+                    &progress_locations,
+                    &solve_trie,
+                );
+            }
         }
 
         let solutions = Arc::new(Mutex::new(solutions));
@@ -406,6 +425,7 @@ where
             greedies: 0.into(),
             organic_solution: false.into(),
             organic_level: 0.into(),
+            progress_locations,
         };
         s.recreate_store(&s.startctx, wonctx.recent_history(), SearchMode::Start)
             .unwrap();
@@ -471,8 +491,19 @@ where
         } else {
             1
         };
-        if sols.insert(elapsed, history, self.world, min_progress) {
+        let (unique, sol) = sols.insert(elapsed, history);
+        if unique {
             log::info!("{:?} mode found new unique solution", mode);
+        }
+        if let Some(sol) = sol {
+            record_observations(
+                self.startctx.get(),
+                self.world,
+                sol,
+                min_progress,
+                &self.progress_locations,
+                &self.solve_trie,
+            );
         }
 
         if let Some(ctx) = min_ctx {
@@ -493,8 +524,19 @@ where
             }
 
             let history = ctx.recent_history();
-            if sols.insert(ctx.elapsed(), history.to_vec(), self.world, min_progress) {
+            let (unique, sol) = sols.insert(ctx.elapsed(), history.to_vec());
+            if unique {
                 log::info!("Minimized found new unique solution");
+            }
+            if let Some(sol) = sol {
+                record_observations(
+                    self.startctx.get(),
+                    self.world,
+                    sol,
+                    min_progress,
+                    &self.progress_locations,
+                    &self.solve_trie,
+                );
             }
 
             drop(sols);

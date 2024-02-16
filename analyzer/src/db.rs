@@ -938,8 +938,6 @@ where
                             self.solutions.lock().unwrap().insert(
                                 new_elapsed,
                                 self.get_history_raw(new_ctx_key.clone()).unwrap(),
-                                self.world,
-                                self.min_progress().unwrap_or(1),
                             );
                         }
 
