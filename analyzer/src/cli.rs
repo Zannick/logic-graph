@@ -175,6 +175,7 @@ where
             // TODO: move into a new minimize function?
             let mut valid = 0;
             let mut invalid = 0;
+            let mut equiv = 0;
             let mut replay = ContextWrapper::new(startctx.clone());
             let mut best = ctx;
             let mut index = 0;
@@ -184,6 +185,10 @@ where
                 let mut queue = VecDeque::new();
                 queue.extend(trie.lookup(replay.get()));
                 'q: while let Some(suffix) = queue.pop_front() {
+                    if suffix.suffix() == &solution.history[index..] {
+                        equiv += 1;
+                        continue;
+                    }
                     let mut r2 = replay.clone();
                     for step in suffix.suffix() {
                         if !r2.can_replay(world, *step) {
@@ -215,8 +220,8 @@ where
                 }
             }
             println!(
-                "Found {} valid and {} invalid derivative paths.",
-                valid, invalid
+                "Found {} equivalent, {} valid, and {} invalid derivative paths.",
+                equiv, valid, invalid
             );
             if best.elapsed() < solution.elapsed {
                 println!(
