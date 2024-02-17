@@ -473,7 +473,6 @@ where
 
         let history = self.queue.db().get_history(ctx.get()).unwrap();
         let elapsed = self.queue.db().get_best_elapsed(ctx.get()).unwrap();
-        log::info!("Recording solution from {:?} mode: {}ms", mode, elapsed);
 
         let solution = Arc::new(Solution { elapsed, history });
         let min_ctx = trie_minimize(
@@ -514,10 +513,16 @@ where
             1
         };
         let res = sols.insert_solution(solution.clone());
-        if res == SolutionResult::IsUnique {
-            log::info!("{:?} mode found new unique solution", mode);
-        }
         if res.accepted() {
+            if res == SolutionResult::IsUnique {
+                log::info!(
+                    "Recording new unique solution from {:?} mode: {}ms",
+                    mode,
+                    elapsed
+                );
+            } else {
+                log::info!("Recording solution from {:?} mode: {}ms", mode, elapsed);
+            }
             record_observations(
                 self.startctx.get(),
                 self.world,

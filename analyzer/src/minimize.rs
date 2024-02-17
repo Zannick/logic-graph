@@ -9,7 +9,6 @@ use crate::solutions::Solution;
 use crate::world::*;
 use std::collections::VecDeque;
 use std::sync::Arc;
-use std::time::Instant;
 
 pub fn remove_all_unvisited<W, T, L, E>(world: &W, startctx: &T, wonctx: &ContextWrapper<T>) -> T
 where
@@ -120,12 +119,8 @@ where
     L: Location<ExitId = E::ExitId, LocId = E::LocId, Context = T, Currency = E::Currency>,
     E: Exit<Context = T>,
 {
-    let mut valid = 0;
-    let mut invalid = 0;
-    let mut equiv = 0;
     let mut replay = ContextWrapper::new(startctx.clone());
     let mut index = 0;
-    let start = Instant::now();
     let mut best_elapsed = best_solution.elapsed;
     let mut best = None;
     while index < best_solution.history.len() {
@@ -134,23 +129,19 @@ where
         let mut queue = VecDeque::from(trie.lookup(replay.get()));
         'q: while let Some(suffix) = queue.pop_front() {
             if suffix.suffix() == &best_solution.history[index..] {
-                equiv += 1;
                 continue;
             }
             let mut r2 = replay.clone();
             for step in suffix.suffix() {
                 if !r2.can_replay(world, *step) {
-                    invalid += 1;
                     continue 'q;
                 }
                 r2.replay(world, *step);
             }
             if !world.won(r2.get()) {
-                invalid += 1;
                 continue 'q;
             }
 
-            valid += 1;
             if r2.elapsed() < best_elapsed {
                 best_solution = suffix.0.clone();
                 index = suffix.1;
@@ -159,10 +150,6 @@ where
             }
         }
     }
-    log::info!(
-        "Trie minimize took {:?} and found {} equivalent, {} valid, and {} invalid derivative paths.",
-        start.elapsed(), equiv, valid, invalid,
-    );
     best
 }
 
@@ -187,6 +174,9 @@ pub fn trie_search<W, T, L, E>(
                 continue 'q;
             }
             r2.replay(world, *step);
+            if r2.elapsed() >= best_elapsed {
+                continue 'q;
+            }
         }
         if !world.won(r2.get()) {
             continue 'q;
