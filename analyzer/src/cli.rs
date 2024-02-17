@@ -212,8 +212,8 @@ where
                 }
             }
             println!(
-                "Found {} equivalent, {} valid, and {} invalid derivative paths. Final trie: {} size, {} depth, {} values",
-                equiv, valid, invalid, trie.size(), trie.max_depth(), trie.num_values()
+                "Found {} equivalent, {} valid, and {} invalid derivative paths.",
+                equiv, valid, invalid,
             );
             if best.elapsed() < solution.elapsed {
                 println!(
