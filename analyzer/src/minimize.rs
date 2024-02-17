@@ -169,6 +169,7 @@ where
 pub fn trie_search<W, T, L, E>(
     world: &W,
     ctx: &ContextWrapper<T>,
+    max_time: u32,
     trie: &MatcherTrie<<T::Observer as Observer>::Matcher>,
 ) -> Option<ContextWrapper<T>> where
     W: World<Location = L, Exit = E>,
@@ -178,7 +179,7 @@ pub fn trie_search<W, T, L, E>(
 {
     let mut queue = VecDeque::from(trie.lookup(ctx.get()));
     let mut best = None;
-    let mut best_elapsed = u32::MAX;
+    let mut best_elapsed = max_time;
     'q: while let Some(suffix) = queue.pop_front() {
         let mut r2 = ctx.clone();
         for step in suffix.suffix() {

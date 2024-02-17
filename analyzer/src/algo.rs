@@ -4,6 +4,7 @@ use crate::greedy::*;
 use crate::heap::RocksBackedQueue;
 use crate::matchertrie::*;
 use crate::minimize::trie_minimize;
+use crate::minimize::trie_search;
 use crate::observer::{record_observations, Observer};
 use crate::solutions::{Solution, SolutionCollector, SolutionResult};
 use crate::world::*;
@@ -33,6 +34,7 @@ enum SearchMode {
     Minimized,
     Mode(usize),
     Unknown,
+    Similar,
 }
 
 fn mode_by_index(index: usize) -> SearchMode {
@@ -454,14 +456,17 @@ where
 
     fn handle_solution(&self, ctx: &mut ContextWrapper<T>, prev: &Option<T>, mode: SearchMode) {
         // If prev is None we don't know the prev state
-        // but also we should have no recent history in ctx.
+        // nor whether we have recent history in ctx--either we got this state from the queue and it has none
+        // or it was recreated and stored in the db, in which case we can get it from the db as well.
         // But if prev is true, we must only record the state, since
         // recording `next` requires all the states at once.
         if prev.is_some() {
             self.queue.db().record_one(ctx, prev, true).unwrap();
         }
 
-        self.organic_solution.store(true, Ordering::Release);
+        if mode != SearchMode::Similar {
+            self.organic_solution.store(true, Ordering::Release);
+        }
 
         let mut old_time = self.queue.max_time();
         let iters = self.iters.load(Ordering::Acquire);
@@ -823,16 +828,19 @@ where
                                     let iters = self.iters.fetch_add(1, Ordering::AcqRel) + 1;
                                     let progress = self.queue.db().progress(ctx.get());
                                     let prev = Some(ctx.get().clone());
-                                    let vec = self.process_one(ctx, iters, &start);
-                                    if progress == self.organic_level.load(Ordering::Acquire)
-                                        && vec.iter().any(|c| {
-                                            self.queue.db().progress(c.get()) == progress + 1
-                                        })
-                                    {
-                                        self.organic_level
-                                            .fetch_max(progress + 1, Ordering::Release);
+                                    if let Some(vec) = self.process_one(ctx, iters, &start) {
+                                        if progress == self.organic_level.load(Ordering::Acquire)
+                                            && vec.iter().any(|c| {
+                                                self.queue.db().progress(c.get()) == progress + 1
+                                            })
+                                        {
+                                            self.organic_level
+                                                .fetch_max(progress + 1, Ordering::Release);
+                                        }
+                                        Some((prev, vec))
+                                    } else {
+                                        None
                                     }
-                                    Some((prev, vec))
                                 })
                                 .collect();
                             if results.is_empty() {
@@ -843,9 +851,9 @@ where
                                 }
                                 sleep(Duration::from_secs(no_progress));
                                 continue;
-                            } else {
-                                no_progress = 0;
                             }
+
+                            no_progress = 0;
                             if let Err(e) = self.queue.extend_groups(results.into_iter().map(
                                 |(prev, nexts)| (self.extract_solutions(nexts, &prev, mode), prev),
                             )) {
@@ -922,7 +930,7 @@ where
         mut ctx: ContextWrapper<T>,
         iters: usize,
         start: &Mutex<Instant>,
-    ) -> Vec<ContextWrapper<T>> {
+    ) -> Option<Vec<ContextWrapper<T>>> {
         self.check_status_update(start, iters, &ctx);
 
         if ctx.get().count_visits() + ctx.get().count_skips() >= W::NUM_LOCATIONS {
@@ -931,10 +939,19 @@ where
             } else {
                 self.deadends.fetch_add(1, Ordering::Release);
             }
-            return Vec::new();
+            return Some(Vec::new());
         }
 
-        self.single_step(ctx)
+        if let Some(mut win) =
+            trie_search(self.world, &ctx, self.queue.max_time(), &self.solve_trie)
+        {
+            self.recreate_store(&ctx, win.recent_history(), SearchMode::Similar)
+                .unwrap();
+            self.handle_solution(&mut win, &None, SearchMode::Similar);
+            None
+        } else {
+            Some(self.single_step(ctx))
+        }
     }
 
     fn check_status_update(&self, start: &Mutex<Instant>, iters: usize, ctx: &ContextWrapper<T>) {
