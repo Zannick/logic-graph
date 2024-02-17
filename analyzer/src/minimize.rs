@@ -3,6 +3,7 @@ use enum_map::EnumMap;
 use crate::access::*;
 use crate::context::*;
 use crate::matchertrie::MatcherTrie;
+use crate::observer::record_observations;
 use crate::observer::Observer;
 use crate::solutions::Solution;
 use crate::world::*;
@@ -89,12 +90,11 @@ where
     ContextWrapper::new(ctx)
 }
 
-/// Attempts to create better solutions by removing items collected from a route.
-/// Returns only one such possibility.
+/// Attempts to create better solutions by removing sections of the route.
 pub fn pinpoint_minimize<W, T, L, E>(
     world: &W,
     startctx: &T,
-    history: &[HistoryAlias<T>],
+    solution: Arc<Solution<T>>,
 ) -> Option<ContextWrapper<T>>
 where
     W: World<Location = L, Exit = E>,
@@ -102,31 +102,9 @@ where
     L: Location<ExitId = E::ExitId, LocId = E::LocId, Context = T, Currency = E::Currency>,
     E: Exit<Context = T>,
 {
-    let mut ctx = ContextWrapper::new(startctx.clone());
-    let mut best = None;
-    'main: for i in 0..history.len() {
-        let step = history[i];
-        if matches!(step, History::G(_, _)) {
-            let mut sub = ctx.clone();
-            for j in (i + 1)..history.len() {
-                if sub.can_replay(world, history[j]) {
-                    sub.replay(world, history[j]);
-                } else {
-                    ctx.assert_and_replay(world, step);
-                    continue 'main;
-                }
-            }
-            // successfully applied all, but we still have to check whether we won
-            if world.won(sub.get()) {
-                best = Some(sub);
-                // now we'll skip this step and continue with ctx
-                continue 'main;
-            }
-        }
-        ctx.assert_and_replay(world, step);
-    }
-
-    best
+    let mut trie = MatcherTrie::<<T::Observer as Observer>::Matcher>::default();
+    record_observations(startctx, world, solution.clone(), 0, None, &mut trie);
+    trie_minimize(world, startctx, solution, &trie)
 }
 
 /// Use a matcher trie to minimize a solution
@@ -153,8 +131,7 @@ where
     while index < best_solution.history.len() {
         replay.assert_and_replay(world, best_solution.history[index]);
         index += 1;
-        let mut queue = VecDeque::new();
-        queue.extend(trie.lookup(replay.get()));
+        let mut queue = VecDeque::from(trie.lookup(replay.get()));
         'q: while let Some(suffix) = queue.pop_front() {
             if suffix.suffix() == &best_solution.history[index..] {
                 equiv += 1;
@@ -186,5 +163,39 @@ where
         "Trie minimize took {:?} and found {} equivalent, {} valid, and {} invalid derivative paths.",
         start.elapsed(), equiv, valid, invalid,
     );
+    best
+}
+
+pub fn trie_search<W, T, L, E>(
+    world: &W,
+    ctx: &ContextWrapper<T>,
+    trie: &MatcherTrie<<T::Observer as Observer>::Matcher>,
+) -> Option<ContextWrapper<T>> where
+    W: World<Location = L, Exit = E>,
+    T: Ctx<World = W>,
+    L: Location<ExitId = E::ExitId, LocId = E::LocId, Context = T, Currency = E::Currency>,
+    E: Exit<Context = T>,
+{
+    let mut queue = VecDeque::from(trie.lookup(ctx.get()));
+    let mut best = None;
+    let mut best_elapsed = u32::MAX;
+    'q: while let Some(suffix) = queue.pop_front() {
+        let mut r2 = ctx.clone();
+        for step in suffix.suffix() {
+            if !r2.can_replay(world, *step) {
+                continue 'q;
+            }
+            r2.replay(world, *step);
+        }
+        if !world.won(r2.get()) {
+            continue 'q;
+        }
+
+        if r2.elapsed() < best_elapsed {
+            best_elapsed = r2.elapsed();
+            best = Some(r2);
+        }
+    }
+
     best
 }
