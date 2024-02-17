@@ -206,17 +206,6 @@ where
                     }
 
                     valid += 1;
-                    record_observations(
-                        &startctx,
-                        world,
-                        Arc::new(Solution {
-                            elapsed: r2.elapsed(),
-                            history: r2.recent_history().to_vec(),
-                        }),
-                        0,
-                        None,
-                        &mut trie,
-                    );
                     if r2.elapsed() < best.elapsed() {
                         best = r2;
                     }
