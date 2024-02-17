@@ -1,8 +1,9 @@
 use crate::context::*;
+use crate::new_hashset_with;
 use crate::world::*;
 use crate::{new_hashmap, CommonHasher};
 use log;
-use std::collections::HashMap;
+use std::collections::{HashMap, HashSet};
 use std::fs::File;
 use std::io::{self, Write};
 use std::sync::Arc;
@@ -24,7 +25,7 @@ where
     true
 }
 
-#[derive(Clone, Debug)]
+#[derive(Clone, Debug, Eq, PartialEq, Hash)]
 pub struct Solution<T: Ctx> {
     pub elapsed: u32,
     pub history: Vec<HistoryAlias<T>>,
@@ -80,7 +81,7 @@ pub struct SolutionCollector<T>
 where
     T: Ctx,
 {
-    map: HashMap<Vec<HistoryAlias<T>>, Vec<Arc<Solution<T>>>, CommonHasher>,
+    map: HashMap<Vec<HistoryAlias<T>>, HashSet<Arc<Solution<T>>, CommonHasher>, CommonHasher>,
     path: &'static str,
     previews: &'static str,
     best_file: &'static str,
@@ -158,15 +159,19 @@ where
         }
 
         self.count += 1;
-        if let Some(vec) = self.map.get_mut(&loc_history) {
-            vec.push(solution);
-            self.write_previews().unwrap();
-            self.write_best().unwrap();
-            SolutionResult::Included
+        if let Some(set) = self.map.get_mut(&loc_history) {
+            if set.contains(&solution) {
+                SolutionResult::Duplicate
+            } else {
+                set.insert(solution);
+                self.write_previews().unwrap();
+                self.write_best().unwrap();
+                SolutionResult::Included
+            }
         } else {
             let mut locs = loc_history.clone();
             locs.reverse();
-            self.map.insert(loc_history, vec![solution]);
+            self.map.insert(loc_history, new_hashset_with(solution));
             self.write_previews().unwrap();
             self.write_best().unwrap();
             SolutionResult::IsUnique
@@ -257,12 +262,13 @@ where
         )
     }
 
-    pub fn write_previews(&mut self) -> io::Result<()> {
+    pub fn write_previews(&self) -> io::Result<()> {
         let mut file = File::create(self.previews)?;
-        for vec in self.map.values_mut() {
-            vec.sort_unstable_by_key(|el| el.elapsed);
-        }
-        let mut vec: Vec<_> = self.map.values().filter_map(|v| v.first()).collect();
+        let mut vec: Vec<_> = self
+            .map
+            .values()
+            .filter_map(|set| set.iter().min_by_key(|sol| sol.elapsed))
+            .collect();
         vec.sort_by_key(|c| c.elapsed);
         for (i, c) in vec.iter().enumerate() {
             Self::write_one_preview(&mut file, i, c, self.best)?;
@@ -276,22 +282,16 @@ where
         Self::write_one(&mut file, 0, 0, &sol, self.best)
     }
 
-    pub fn sort_and_clean(&mut self) {
-        for vec in self.map.values_mut() {
-            vec.sort_unstable_by_key(|el| el.elapsed);
-            while let Some(last) = vec.last() {
-                if last.elapsed - self.best > self.best / 10 {
-                    assert!(
-                        vec.len() > 1,
-                        "Eliminated all solutions! best={} but first={}",
-                        self.best,
-                        last.elapsed
-                    );
-                    vec.pop();
-                } else {
-                    break;
-                }
-            }
+    pub fn clean(&mut self) {
+        for set in self.map.values_mut() {
+            assert!(
+                set.iter()
+                    .any(|sol| sol.elapsed - self.best < self.best / 10),
+                "Eliminated all solutions! best={} but min={:?}",
+                self.best,
+                set.iter().map(|sol| sol.elapsed).min()
+            );
+            set.retain(|sol| sol.elapsed - self.best <= self.best / 10);
         }
     }
 
@@ -300,8 +300,16 @@ where
             log::info!("No solutions");
             return Ok(());
         }
-        self.sort_and_clean();
-        let mut vecs: Vec<Vec<_>> = self.map.values().cloned().collect();
+        self.clean();
+        let mut vecs: Vec<Vec<_>> = self
+            .map
+            .values()
+            .map(|set| {
+                let mut vec: Vec<_> = set.iter().cloned().collect();
+                vec.sort_by_key(|sol| sol.elapsed);
+                vec
+            })
+            .collect();
         vecs.sort_by_key(|v| v[0].elapsed);
         let mut total = 0;
         let mut types = 0;
