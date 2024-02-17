@@ -1,5 +1,6 @@
 use crate::condense::CondensedEdge;
 use crate::observer::Observer;
+use crate::solutions::Solution;
 use crate::world::*;
 use as_slice::{AsMutSlice, AsSlice};
 use lazy_static::lazy_static;
@@ -507,6 +508,13 @@ impl<T: Ctx> ContextWrapper<T> {
 
     pub fn into_inner(self) -> T {
         self.ctx
+    }
+
+    pub fn to_solution(&self) -> Arc<Solution<T>> {
+        Arc::new(Solution {
+            elapsed: self.elapsed(),
+            history: self.hist.clone(),
+        })
     }
 
     pub fn with_elapsed(ctx: T, elapsed: u32) -> ContextWrapper<T> {

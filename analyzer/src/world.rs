@@ -89,6 +89,7 @@ pub trait Id:
     + Sync
     + Serialize
     + for<'a> Deserialize<'a>
+    + 'static
 {
 }
 

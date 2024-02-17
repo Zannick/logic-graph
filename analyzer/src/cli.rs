@@ -173,9 +173,7 @@ where
                 trie.max_depth(),
                 trie.num_values()
             );
-            if let Some(best) =
-                trie_minimize(world, &startctx, ctx, &trie)
-            {
+            if let Some(best) = trie_minimize(world, &startctx, solution.clone(), &trie) {
                 println!(
                     "Improved route from {}ms to {}ms",
                     solution.elapsed,

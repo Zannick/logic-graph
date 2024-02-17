@@ -35,21 +35,44 @@ pub struct SolutionSuffix<T>(pub Arc<Solution<T>>, pub usize)
 where
     T: Ctx;
 
-impl<T> SolutionSuffix<T> where T: Ctx {
+impl<T> SolutionSuffix<T>
+where
+    T: Ctx,
+{
     pub fn suffix(&self) -> &[HistoryAlias<T>] {
         &self.0.history[self.1..]
     }
 }
 
-impl<T> PartialEq for SolutionSuffix<T> where T: Ctx {
+impl<T> PartialEq for SolutionSuffix<T>
+where
+    T: Ctx,
+{
     fn eq(&self, other: &Self) -> bool {
         self.0.history[self.1..] == other.0.history[other.1..]
     }
 }
 impl<T> Eq for SolutionSuffix<T> where T: Ctx {}
-impl<T> std::hash::Hash for SolutionSuffix<T> where T: Ctx {
+impl<T> std::hash::Hash for SolutionSuffix<T>
+where
+    T: Ctx,
+{
     fn hash<H: std::hash::Hasher>(&self, state: &mut H) {
         self.0.history[self.1..].hash(state);
+    }
+}
+
+#[derive(Clone, Copy, Eq, PartialEq)]
+pub enum SolutionResult {
+    TooSlow,
+    Included,
+    IsUnique,
+    Duplicate,
+}
+
+impl SolutionResult {
+    pub fn accepted(self) -> bool {
+        self == Self::Included || self == Self::IsUnique
     }
 }
 
@@ -102,13 +125,9 @@ where
         self.best
     }
 
-    /// Inserts a solution into the collection and returns whether this solution
-    /// is unique compared to the prior solutions.
-    pub fn insert<W, L, E, Wp>(
-        &mut self,
-        elapsed: u32,
-        history: Vec<HistoryAlias<T>>,
-    ) -> (bool, Option<Arc<Solution<T>>>)
+    /// Inserts a solution into the collection and returns a status detailing
+    /// whether this solution was accepted and if it's unique.
+    pub fn insert_solution<W, L, E, Wp>(&mut self, solution: Arc<Solution<T>>) -> SolutionResult
     where
         W: World<Location = L, Exit = E, Warp = Wp>,
         L: Location<Context = T>,
@@ -116,7 +135,8 @@ where
         E: Exit<Context = T, Currency = <L as Accessible>::Currency, LocId = L::LocId>,
         Wp: Warp<SpotId = <E as Exit>::SpotId, Context = T, Currency = <L as Accessible>::Currency>,
     {
-        let loc_history: Vec<HistoryAlias<T>> = history
+        let loc_history: Vec<HistoryAlias<T>> = solution
+            .history
             .iter()
             .filter_map(|h| {
                 if matches!(h, History::G(_, _) | History::H(_, _)) {
@@ -126,31 +146,30 @@ where
                 }
             })
             .collect();
-        if self.count == 0 || elapsed < self.best {
-            self.best = elapsed;
-        } else if elapsed - self.best > self.best / 10 {
+        if self.count == 0 || solution.elapsed < self.best {
+            self.best = solution.elapsed;
+        } else if solution.elapsed - self.best > self.best / 10 {
             log::info!(
                 "Excluding solution as too slow: {} > 1.1 * {}",
-                elapsed,
+                solution.elapsed,
                 self.best
             );
-            return (false, None);
+            return SolutionResult::TooSlow;
         }
 
         self.count += 1;
-        let sol = Arc::new(Solution { elapsed, history });
         if let Some(vec) = self.map.get_mut(&loc_history) {
-            vec.push(sol.clone());
+            vec.push(solution);
             self.write_previews().unwrap();
             self.write_best().unwrap();
-            (false, Some(sol))
+            SolutionResult::Included
         } else {
             let mut locs = loc_history.clone();
             locs.reverse();
-            self.map.insert(loc_history, vec![sol.clone()]);
+            self.map.insert(loc_history, vec![solution]);
             self.write_previews().unwrap();
             self.write_best().unwrap();
-            (true, Some(sol))
+            SolutionResult::IsUnique
         }
     }
 

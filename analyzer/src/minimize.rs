@@ -4,8 +4,10 @@ use crate::access::*;
 use crate::context::*;
 use crate::matchertrie::MatcherTrie;
 use crate::observer::Observer;
+use crate::solutions::Solution;
 use crate::world::*;
 use std::collections::VecDeque;
+use std::sync::Arc;
 use std::time::Instant;
 
 pub fn remove_all_unvisited<W, T, L, E>(world: &W, startctx: &T, wonctx: &ContextWrapper<T>) -> T
@@ -119,13 +121,9 @@ where
                 best = Some(sub);
                 // now we'll skip this step and continue with ctx
                 continue 'main;
-            } else {
-                ctx.assert_and_replay(world, step);
-                continue 'main;
             }
-        } else {
-            ctx.assert_and_replay(world, step);
         }
+        ctx.assert_and_replay(world, step);
     }
 
     best
@@ -135,7 +133,7 @@ where
 pub fn trie_minimize<W, T, L, E>(
     world: &W,
     startctx: &T,
-    mut best: ContextWrapper<T>,
+    mut best_solution: Arc<Solution<T>>,
     trie: &MatcherTrie<<T::Observer as Observer>::Matcher>,
 ) -> Option<ContextWrapper<T>>
 where
@@ -147,17 +145,18 @@ where
     let mut valid = 0;
     let mut invalid = 0;
     let mut equiv = 0;
-    let orig = best.elapsed();
     let mut replay = ContextWrapper::new(startctx.clone());
     let mut index = 0;
     let start = Instant::now();
-    while index < best.recent_history().len() {
-        replay.assert_and_replay(world, best.recent_history()[index]);
+    let mut best_elapsed = best_solution.elapsed;
+    let mut best = None;
+    while index < best_solution.history.len() {
+        replay.assert_and_replay(world, best_solution.history[index]);
         index += 1;
         let mut queue = VecDeque::new();
         queue.extend(trie.lookup(replay.get()));
         'q: while let Some(suffix) = queue.pop_front() {
-            if suffix.suffix() == &best.recent_history()[index..] {
+            if suffix.suffix() == &best_solution.history[index..] {
                 equiv += 1;
                 continue;
             }
@@ -175,8 +174,11 @@ where
             }
 
             valid += 1;
-            if r2.elapsed() < best.elapsed() {
-                best = r2;
+            if r2.elapsed() < best_elapsed {
+                best_solution = suffix.0.clone();
+                index = suffix.1;
+                best_elapsed = r2.elapsed();
+                best = Some(r2);
             }
         }
     }
@@ -184,9 +186,5 @@ where
         "Trie minimize took {:?} and found {} equivalent, {} valid, and {} invalid derivative paths.",
         start.elapsed(), equiv, valid, invalid,
     );
-    if best.elapsed() < orig {
-        Some(best)
-    } else {
-        None
-    }
+    best
 }

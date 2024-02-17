@@ -3,9 +3,9 @@ use crate::context::*;
 use crate::greedy::*;
 use crate::heap::RocksBackedQueue;
 use crate::matchertrie::*;
-use crate::minimize::pinpoint_minimize;
+use crate::minimize::trie_minimize;
 use crate::observer::{record_observations, Observer};
-use crate::solutions::SolutionCollector;
+use crate::solutions::{Solution, SolutionCollector, SolutionResult};
 use crate::world::*;
 use crate::CommonHasher;
 use anyhow::Result;
@@ -369,11 +369,8 @@ where
             .unwrap_or_else(|| Self::find_greedy_win(world, &startctx, &others));
 
         let max_time = wonctx.elapsed();
-
-        if let Some(sol) = solutions
-            .insert(wonctx.elapsed(), wonctx.recent_history().to_vec())
-            .1
-        {
+        let sol = wonctx.to_solution();
+        if solutions.insert_solution(sol.clone()).accepted() {
             record_observations(
                 startctx.get(),
                 world,
@@ -384,15 +381,29 @@ where
             );
         }
         for w in &wins {
-            if let Some(sol) = solutions.insert(w.elapsed(), w.recent_history().to_vec()).1 {
+            let sol = w.to_solution();
+            if solutions.insert_solution(sol.clone()).accepted() {
                 record_observations(
                     startctx.get(),
                     world,
-                    sol,
+                    sol.clone(),
                     1,
                     Some(&progress_locations),
                     &solve_trie,
                 );
+            }
+            if let Some(better) = trie_minimize(world, startctx.get(), sol, &solve_trie) {
+                let solution = better.to_solution();
+                if solutions.insert_solution(solution.clone()).accepted() {
+                    record_observations(
+                        startctx.get(),
+                        world,
+                        solution,
+                        1,
+                        Some(&progress_locations),
+                        &solve_trie,
+                    );
+                }
             }
         }
 
@@ -459,7 +470,13 @@ where
         let elapsed = self.queue.db().get_best_elapsed(ctx.get()).unwrap();
         log::info!("Recording solution from {:?} mode: {}ms", mode, elapsed);
 
-        let min_ctx = pinpoint_minimize(self.world, self.startctx.get(), &history);
+        let solution = Arc::new(Solution { elapsed, history });
+        let min_ctx = trie_minimize(
+            self.world,
+            self.startctx.get(),
+            solution.clone(),
+            &self.solve_trie,
+        );
 
         let mut sols = self.solutions.lock().unwrap();
         if iters > 10_000_000 && sols.unique() > 4 {
@@ -491,15 +508,15 @@ where
         } else {
             1
         };
-        let (unique, sol) = sols.insert(elapsed, history);
-        if unique {
+        let res = sols.insert_solution(solution.clone());
+        if res == SolutionResult::IsUnique {
             log::info!("{:?} mode found new unique solution", mode);
         }
-        if let Some(sol) = sol {
+        if res.accepted() {
             record_observations(
                 self.startctx.get(),
                 self.world,
-                sol,
+                solution,
                 min_progress,
                 Some(&self.progress_locations),
                 &self.solve_trie,
@@ -523,16 +540,16 @@ where
                 log::info!("Max time to consider is now: {}ms", self.queue.max_time());
             }
 
-            let history = ctx.recent_history();
-            let (unique, sol) = sols.insert(ctx.elapsed(), history.to_vec());
-            if unique {
+            let solution = ctx.to_solution();
+            let res = sols.insert_solution(solution.clone());
+            if res == SolutionResult::IsUnique {
                 log::info!("Minimized found new unique solution");
             }
-            if let Some(sol) = sol {
+            if res.accepted() {
                 record_observations(
                     self.startctx.get(),
                     self.world,
-                    sol,
+                    solution.clone(),
                     min_progress,
                     Some(&self.progress_locations),
                     &self.solve_trie,
@@ -540,7 +557,7 @@ where
             }
 
             drop(sols);
-            self.recreate_store(&self.startctx, history, SearchMode::Minimized)
+            self.recreate_store(&self.startctx, &solution.history, SearchMode::Minimized)
                 .unwrap();
         }
     }

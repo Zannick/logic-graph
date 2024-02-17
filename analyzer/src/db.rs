@@ -3,6 +3,7 @@ extern crate rocksdb;
 
 use crate::context::*;
 use crate::estimates::ContextScorer;
+use crate::solutions::Solution;
 use crate::solutions::SolutionCollector;
 use crate::steiner::*;
 use crate::world::*;
@@ -350,7 +351,9 @@ where
     }
 
     pub fn min_progress(&self) -> Option<usize> {
-        self.min_db_estimates.iter().position(|a| a.load(Ordering::Acquire) != u32::MAX)
+        self.min_db_estimates
+            .iter()
+            .position(|a| a.load(Ordering::Acquire) != u32::MAX)
     }
 
     /// Returns the number of cache hits for estimated remaining time.
@@ -935,10 +938,13 @@ where
                         // handle solution by just inserting a new one
                         let ctx = Self::deserialize_state(&new_ctx_key).unwrap();
                         if self.world.won(&ctx) {
-                            self.solutions.lock().unwrap().insert(
-                                new_elapsed,
-                                self.get_history_raw(new_ctx_key.clone()).unwrap(),
-                            );
+                            let this = &mut self.solutions.lock().unwrap();
+                            let history = self.get_history_raw(new_ctx_key.clone()).unwrap();
+                            let sol = Arc::new(Solution {
+                                elapsed: new_elapsed,
+                                history,
+                            });
+                            this.insert_solution(sol.clone());
                         }
 
                         // It doesn't really matter the order in which we update,
@@ -1181,7 +1187,10 @@ where
             if pskips > 0 || dup_pskips > 0 || rescores > 0 {
                 log::debug!(
                     "Background thread (from prog={}): {} expired, {} duplicate, {} rescored",
-                    start_progress, pskips, dup_pskips, rescores
+                    start_progress,
+                    pskips,
+                    dup_pskips,
+                    rescores
                 );
             }
             if compact {
