@@ -18,6 +18,7 @@ use std::io::Read;
 use std::mem::size_of;
 use std::path::{Path, PathBuf};
 use std::sync::Arc;
+use std::time::Instant;
 
 #[derive(Parser)]
 #[command(about = "Graph algorithm analysis", long_about = None)]
@@ -180,6 +181,7 @@ where
             let mut replay = ContextWrapper::new(startctx.clone());
             let mut best = ctx;
             let mut index = 0;
+            let start = Instant::now();
             while index < best.recent_history().len() {
                 replay.assert_and_replay(world, best.recent_history()[index]);
                 index += 1;
@@ -226,9 +228,10 @@ where
             );
             if best.elapsed() < solution.elapsed {
                 println!(
-                    "Improved route from {}ms to {}ms",
+                    "Improved route from {}ms to {}ms in {:?}",
                     solution.elapsed,
-                    best.elapsed()
+                    best.elapsed(),
+                    start.elapsed()
                 );
                 let old_hist = history_str::<T, _>(solution.history.iter().copied());
                 let new_hist = history_str::<T, _>(best.recent_history().iter().copied());
