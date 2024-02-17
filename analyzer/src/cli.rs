@@ -186,7 +186,7 @@ where
                 let mut queue = VecDeque::new();
                 queue.extend(trie.lookup(replay.get()));
                 'q: while let Some(suffix) = queue.pop_front() {
-                    if suffix.suffix() == &solution.history[index..] {
+                    if suffix.suffix() == &best.recent_history()[index..] {
                         equiv += 1;
                         continue;
                     }
