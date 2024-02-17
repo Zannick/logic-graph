@@ -2,7 +2,11 @@ use enum_map::EnumMap;
 
 use crate::access::*;
 use crate::context::*;
+use crate::matchertrie::MatcherTrie;
+use crate::observer::Observer;
 use crate::world::*;
+use std::collections::VecDeque;
+use std::time::Instant;
 
 pub fn remove_all_unvisited<W, T, L, E>(world: &W, startctx: &T, wonctx: &ContextWrapper<T>) -> T
 where
@@ -125,4 +129,64 @@ where
     }
 
     best
+}
+
+/// Use a matcher trie to minimize a solution
+pub fn trie_minimize<W, T, L, E>(
+    world: &W,
+    startctx: &T,
+    mut best: ContextWrapper<T>,
+    trie: &MatcherTrie<<T::Observer as Observer>::Matcher>,
+) -> Option<ContextWrapper<T>>
+where
+    W: World<Location = L, Exit = E>,
+    T: Ctx<World = W>,
+    L: Location<ExitId = E::ExitId, LocId = E::LocId, Context = T, Currency = E::Currency>,
+    E: Exit<Context = T>,
+{
+    let mut valid = 0;
+    let mut invalid = 0;
+    let mut equiv = 0;
+    let orig = best.elapsed();
+    let mut replay = ContextWrapper::new(startctx.clone());
+    let mut index = 0;
+    let start = Instant::now();
+    while index < best.recent_history().len() {
+        replay.assert_and_replay(world, best.recent_history()[index]);
+        index += 1;
+        let mut queue = VecDeque::new();
+        queue.extend(trie.lookup(replay.get()));
+        'q: while let Some(suffix) = queue.pop_front() {
+            if suffix.suffix() == &best.recent_history()[index..] {
+                equiv += 1;
+                continue;
+            }
+            let mut r2 = replay.clone();
+            for step in suffix.suffix() {
+                if !r2.can_replay(world, *step) {
+                    invalid += 1;
+                    continue 'q;
+                }
+                r2.replay(world, *step);
+            }
+            if !world.won(r2.get()) {
+                invalid += 1;
+                continue 'q;
+            }
+
+            valid += 1;
+            if r2.elapsed() < best.elapsed() {
+                best = r2;
+            }
+        }
+    }
+    log::info!(
+        "Trie minimize took {:?} and found {} equivalent, {} valid, and {} invalid derivative paths.",
+        start.elapsed(), equiv, valid, invalid,
+    );
+    if best.elapsed() < orig {
+        Some(best)
+    } else {
+        None
+    }
 }

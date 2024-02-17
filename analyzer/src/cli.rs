@@ -4,6 +4,7 @@ use crate::db::HeapDB;
 use crate::estimates::ContextScorer;
 use crate::greedy::*;
 use crate::matchertrie::MatcherTrie;
+use crate::minimize::trie_minimize;
 use crate::observer::record_observations;
 use crate::observer::Observer;
 use crate::route::*;
@@ -11,14 +12,12 @@ use crate::solutions::Solution;
 use crate::world::*;
 use clap::{Parser, Subcommand};
 use similar::TextDiff;
-use std::collections::VecDeque;
 use std::fmt::Debug;
 use std::fs::File;
 use std::io::Read;
 use std::mem::size_of;
 use std::path::{Path, PathBuf};
 use std::sync::Arc;
-use std::time::Instant;
 
 #[derive(Parser)]
 #[command(about = "Graph algorithm analysis", long_about = None)]
@@ -174,53 +173,13 @@ where
                 trie.max_depth(),
                 trie.num_values()
             );
-            // TODO: move into a new minimize function?
-            let mut valid = 0;
-            let mut invalid = 0;
-            let mut equiv = 0;
-            let mut replay = ContextWrapper::new(startctx.clone());
-            let mut best = ctx;
-            let mut index = 0;
-            let start = Instant::now();
-            while index < best.recent_history().len() {
-                replay.assert_and_replay(world, best.recent_history()[index]);
-                index += 1;
-                let mut queue = VecDeque::new();
-                queue.extend(trie.lookup(replay.get()));
-                'q: while let Some(suffix) = queue.pop_front() {
-                    if suffix.suffix() == &best.recent_history()[index..] {
-                        equiv += 1;
-                        continue;
-                    }
-                    let mut r2 = replay.clone();
-                    for step in suffix.suffix() {
-                        if !r2.can_replay(world, *step) {
-                            invalid += 1;
-                            continue 'q;
-                        }
-                        r2.replay(world, *step);
-                    }
-                    if !world.won(r2.get()) {
-                        invalid += 1;
-                        continue 'q;
-                    }
-
-                    valid += 1;
-                    if r2.elapsed() < best.elapsed() {
-                        best = r2;
-                    }
-                }
-            }
-            println!(
-                "Found {} equivalent, {} valid, and {} invalid derivative paths.",
-                equiv, valid, invalid,
-            );
-            if best.elapsed() < solution.elapsed {
+            if let Some(best) =
+                trie_minimize(world, &startctx, ctx, &trie)
+            {
                 println!(
-                    "Improved route from {}ms to {}ms in {:?}",
+                    "Improved route from {}ms to {}ms",
                     solution.elapsed,
-                    best.elapsed(),
-                    start.elapsed()
+                    best.elapsed()
                 );
                 let old_hist = history_str::<T, _>(solution.history.iter().copied());
                 let new_hist = history_str::<T, _>(best.recent_history().iter().copied());
