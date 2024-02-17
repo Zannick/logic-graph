@@ -166,7 +166,12 @@ where
                 history: ctx.recent_history().to_vec(),
             });
             record_observations(&startctx, world, solution.clone(), 0, None, &mut trie);
-
+            println!(
+                "Initial solution produces trie of size {} depth {} and num values {}",
+                trie.size(),
+                trie.max_depth(),
+                trie.num_values()
+            );
             // TODO: move into a new minimize function?
             let mut valid = 0;
             let mut invalid = 0;
@@ -202,23 +207,33 @@ where
                         }),
                         0,
                         None,
-                        &mut trie
+                        &mut trie,
                     );
                     if r2.elapsed() < best.elapsed() {
                         best = r2;
                     }
                 }
             }
-            println!("Found {} valid and {} invalid derivative paths.", valid, invalid);
+            println!(
+                "Found {} valid and {} invalid derivative paths.",
+                valid, invalid
+            );
             if best.elapsed() < solution.elapsed {
-                println!("Improved route from {}ms to {}ms", solution.elapsed, best.elapsed());
+                println!(
+                    "Improved route from {}ms to {}ms",
+                    solution.elapsed,
+                    best.elapsed()
+                );
                 let old_hist = history_str::<T, _>(solution.history.iter().copied());
                 let new_hist = history_str::<T, _>(best.recent_history().iter().copied());
                 let text_diff = TextDiff::from_lines(&old_hist, &new_hist);
-                print!("{}", text_diff
-                    .unified_diff()
-                    .context_radius(3)
-                    .header("original", "best"));
+                print!(
+                    "{}",
+                    text_diff
+                        .unified_diff()
+                        .context_radius(3)
+                        .header("original", "best")
+                );
             } else {
                 println!("Could not improve solution.");
             }
