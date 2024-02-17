@@ -363,7 +363,7 @@ where
             static ref MOVE: Regex = Regex::new(
                 // Move
                 //   Move... to Antarctica > West > Shed Entry ==> Shed > Interior (1)
-                r"[Mm]ove(?:\.\.\.)? to (?P<exit>.* ==> .*$)").unwrap();
+                r"(?:[Mm]ove(?:\.\.\.)? to |Take exit )(?P<exit>.* ==> .*$)").unwrap();
             static ref MOVE_GET: Regex = Regex::new(
                 // MoveGet
                 // * Take hybrid exit Glacier > The Big Drop > Water Surface: Drown, collecting Amashilama
