@@ -167,7 +167,8 @@ where
             });
             record_observations(&startctx, world, solution.clone(), 0, None, &mut trie);
             println!(
-                "Initial solution produces trie of size {} depth {} and num values {}",
+                "Initial solution of length {} produces trie of size {} depth {} and num values {}",
+                solution.history.len(),
                 trie.size(),
                 trie.max_depth(),
                 trie.num_values()
