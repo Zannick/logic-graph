@@ -947,12 +947,12 @@ where
             return Some(Vec::new());
         }
 
-        if let Some(mut win) =
+        if let Some(win) =
             trie_search(self.world, &ctx, self.queue.max_time(), &self.solve_trie)
         {
+            // Handles recording the solution as well.
             self.recreate_store(&ctx, win.recent_history(), SearchMode::Similar)
                 .unwrap();
-            self.handle_solution(&mut win, &None, SearchMode::Similar);
             None
         } else {
             Some(self.single_step(ctx))
