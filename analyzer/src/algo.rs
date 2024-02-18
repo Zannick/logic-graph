@@ -464,7 +464,7 @@ where
             self.queue.db().record_one(ctx, prev, true).unwrap();
         }
 
-        if mode != SearchMode::Similar {
+        if !matches!(mode, SearchMode::Similar | SearchMode::Minimized) {
             self.organic_solution.store(true, Ordering::Release);
         }
 
@@ -475,12 +475,16 @@ where
         let elapsed = self.queue.db().get_best_elapsed(ctx.get()).unwrap();
 
         let solution = Arc::new(Solution { elapsed, history });
-        let min_ctx = trie_minimize(
-            self.world,
-            self.startctx.get(),
-            solution.clone(),
-            &self.solve_trie,
-        );
+        let min_ctx = if mode != SearchMode::Minimized {
+            trie_minimize(
+                self.world,
+                self.startctx.get(),
+                solution.clone(),
+                &self.solve_trie,
+            )
+        } else {
+            None
+        };
 
         let mut sols = self.solutions.lock().unwrap();
         if iters > 10_000_000 && sols.unique() > 4 {
@@ -947,9 +951,7 @@ where
             return Some(Vec::new());
         }
 
-        if let Some(win) =
-            trie_search(self.world, &ctx, self.queue.max_time(), &self.solve_trie)
-        {
+        if let Some(win) = trie_search(self.world, &ctx, self.queue.max_time(), &self.solve_trie) {
             // Handles recording the solution as well.
             self.recreate_store(&ctx, win.recent_history(), SearchMode::Similar)
                 .unwrap();
