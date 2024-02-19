@@ -938,13 +938,13 @@ where
                         // handle solution by just inserting a new one
                         let ctx = Self::deserialize_state(&new_ctx_key).unwrap();
                         if self.world.won(&ctx) {
-                            let this = &mut self.solutions.lock().unwrap();
-                            let history = self.get_history_raw(new_ctx_key.clone()).unwrap();
                             let sol = Arc::new(Solution {
                                 elapsed: new_elapsed,
-                                history,
+                                history: self.get_history_raw(new_ctx_key.clone()).unwrap(),
                             });
-                            this.insert_solution(sol.clone());
+                            if self.solutions.lock().unwrap().insert_solution(sol).accepted() {
+                                log::info!("New solution found by db improvement: {}ms", new_elapsed);
+                            }
                         }
 
                         // It doesn't really matter the order in which we update,
