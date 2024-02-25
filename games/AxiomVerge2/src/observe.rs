@@ -3610,6 +3610,54 @@ impl MatcherDispatch for ObservationMatcher {
         }
     }
 
+    fn clear(&mut self) {
+        match self {
+            Self::PositionLookup(m) => m.clear(),
+            Self::EnergyLookup(m) => m.clear(),
+            Self::EnergyEq { matcher, .. } => matcher.clear(),
+            Self::EnergyGe { matcher, .. } => matcher.clear(),
+            Self::EnergyLe { matcher, .. } => matcher.clear(),
+            Self::EnergyRange { matcher, .. } => matcher.clear(),
+            Self::FlasksLookup(m) => m.clear(),
+            Self::FlasksEq { matcher, .. } => matcher.clear(),
+            Self::FlasksGe { matcher, .. } => matcher.clear(),
+            Self::FlasksLe { matcher, .. } => matcher.clear(),
+            Self::FlasksRange { matcher, .. } => matcher.clear(),
+            Self::RefillsLookup(m) => m.clear(),
+            Self::RefillsEq { matcher, .. } => matcher.clear(),
+            Self::RefillsGe { matcher, .. } => matcher.clear(),
+            Self::RefillsLe { matcher, .. } => matcher.clear(),
+            Self::RefillsRange { matcher, .. } => matcher.clear(),
+            Self::ModeLookup(m) => m.clear(),
+            Self::SaveLookup(m) => m.clear(),
+            Self::BreachSaveLookup(m) => m.clear(),
+            Self::IndraLookup(m) => m.clear(),
+            Self::LastLookup(m) => m.clear(),
+            Self::PrevAreaLookup(m) => m.clear(),
+            Self::FlaskLookup(m) => m.clear(),
+            Self::FlaskEq { matcher, .. } => matcher.clear(),
+            Self::FlaskGe { matcher, .. } => matcher.clear(),
+            Self::FlaskLe { matcher, .. } => matcher.clear(),
+            Self::FlaskRange { matcher, .. } => matcher.clear(),
+            Self::HealthFragmentLookup(m) => m.clear(),
+            Self::HealthFragmentEq { matcher, .. } => matcher.clear(),
+            Self::HealthFragmentGe { matcher, .. } => matcher.clear(),
+            Self::HealthFragmentLe { matcher, .. } => matcher.clear(),
+            Self::HealthFragmentRange { matcher, .. } => matcher.clear(),
+            Self::LookupCBits1 { matcher, .. } => matcher.clear(),
+            Self::LookupCBits2 { matcher, .. } => matcher.clear(),
+            Self::LookupCBits3 { matcher, .. } => matcher.clear(),
+            Self::LookupCBits4 { matcher, .. } => matcher.clear(),
+            Self::LookupCBits5 { matcher, .. } => matcher.clear(),
+            Self::LookupCBits6 { matcher, .. } => matcher.clear(),
+            Self::LookupCBits7 { matcher, .. } => matcher.clear(),
+            Self::LookupCBits8 { matcher, .. } => matcher.clear(),
+            Self::LookupCBits9 { matcher, .. } => matcher.clear(),
+            Self::LookupCBits10 { matcher, .. } => matcher.clear(),
+            Self::LookupCBits11 { matcher, .. } => matcher.clear(),
+        }
+    }
+
     fn lookup(&self, val: &Context) -> (Option<Arc<Mutex<Node<Self>>>>, Vec<Self::Value>) {
         match self {
             Self::PositionLookup(m) => m.lookup(val.position),

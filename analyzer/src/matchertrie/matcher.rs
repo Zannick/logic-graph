@@ -36,6 +36,9 @@ pub trait MatcherDispatch {
         obs: &<Self::Struct as Observable>::PropertyObservation,
     ) -> (Arc<Mutex<Self::Node>>, Self);
 
+    /// Clears the data out of the matcher.
+    fn clear(&mut self);
+
     /// The individual matcher will retrieve a property of the struct provided, and evaluate the value of that property.
     fn lookup(
         &self,
@@ -67,6 +70,9 @@ where
     KeyType: Copy + Eq + Hash,
     ValueType: Clone,
 {
+    /// Clears the data out of this matcher's nodes.
+    fn clear(&mut self);
+
     /// Performs a lookup of obs against this matcher, and if there is a matching edge,
     /// returns a pointer to the next node if one exists and a reference to the value
     /// stored (if the path terminates). Both may exist, but usually if both do not exist,
@@ -130,6 +136,10 @@ where
     KeyType: Copy + Eq + Hash,
     ValueType: Clone + Eq + Hash,
 {
+    fn clear(&mut self) {
+        self.map.clear();
+    }
+
     fn lookup(&self, obs: KeyType) -> (Option<Arc<Mutex<NodeType>>>, Vec<ValueType>) {
         self.map
             .get(&obs)
@@ -249,6 +259,13 @@ where
     NodeType: Default,
     ValueType: Clone + Eq + Hash,
 {
+    fn clear(&mut self) {
+        self.true_node = None;
+        self.false_node = None;
+        self.true_values.clear();
+        self.false_values.clear();
+    }
+
     fn lookup(
         &self,
         obs: bool,

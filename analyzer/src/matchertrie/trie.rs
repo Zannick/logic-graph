@@ -73,6 +73,11 @@ where
     StructType: Observable,
     ValueType: Clone,
 {
+    /// Clears the root node. This resets the trie.
+    pub fn clear(&self) {
+        self.root.lock().unwrap().clear();
+    }
+
     /// Performs a lookup for all states similar to this one.
     pub fn lookup(&self, similar: &StructType) -> Vec<ValueType> {
         let (node, mut vec) = self.root.lock().unwrap().lookup(similar);
@@ -283,6 +288,15 @@ mod test {
                     let (node, m) = LookupMatcher::new_with(*result);
                     (node, Self::MaskLookupFlag(m, *mask))
                 }
+            }
+        }
+
+        fn clear(&mut self) {
+            match self {
+                Self::LookupPosition(m) => m.clear(),
+                Self::LookupFlasks(m) => m.clear(),
+                Self::MaskLookupFlag(_, _) => todo!(),
+                Self::EnoughFlasks(_, _) => todo!(),
             }
         }
 

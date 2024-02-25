@@ -393,6 +393,35 @@ impl MatcherDispatch for ObservationMatcher {
         }
     }
 
+    fn clear(&mut self) {
+        match self {
+%% for ctx, t in context_types.items() if ctx not in bfp.varmap
+%% set c = ctx|camelize|camelize
+%% if t in int_types
+            Self::{{ c }}Lookup(m) => m.clear(),
+            Self::{{ c }}Eq { matcher, .. } => matcher.clear(),
+            Self::{{ c }}Ge { matcher, .. } => matcher.clear(),
+            Self::{{ c }}Le { matcher, .. } => matcher.clear(),
+            Self::{{ c }}Range { matcher, .. } => matcher.clear(),
+%% else
+            Self::{{ c }}Lookup(m) => m.clear(),
+%% endif
+%% endfor
+%% for item in gl.item_max_counts|sort if item not in bfp.varmap
+%% set c = item|camelize
+%% set ctx = item|lower
+            Self::{{ c }}Lookup(m) => m.clear(),
+            Self::{{ c }}Eq { matcher, .. } => matcher.clear(),
+            Self::{{ c }}Ge { matcher, .. } => matcher.clear(),
+            Self::{{ c }}Le { matcher, .. } => matcher.clear(),
+            Self::{{ c }}Range { matcher, .. } => matcher.clear(),
+%% endfor
+%% for group in bfp.flag_groups
+            Self::LookupCBits{{ loop.index }} { matcher, .. } => matcher.clear(),
+%% endfor
+        }
+    }
+
     fn lookup(&self, val: &Context) -> (Option<Arc<Mutex<Node<Self>>>>, Vec<Self::Value>) {
         match self {
 %% for ctx, t in context_types.items() if ctx not in bfp.varmap
