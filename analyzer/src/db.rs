@@ -21,7 +21,6 @@ use rocksdb::{
 };
 use serde::{Deserialize, Serialize};
 use std::collections::{HashMap, HashSet};
-use std::marker::PhantomData;
 use std::path::{Path, PathBuf};
 use std::sync::atomic::{AtomicBool, AtomicU32, AtomicU64, AtomicUsize, Ordering};
 use std::sync::{Arc, Mutex};
@@ -103,7 +102,6 @@ pub struct HeapDB<'w, W: World, T: Ctx> {
 
     bg_deletes: AtomicUsize,
 
-    phantom: PhantomData<T>,
     retrieve_lock: Mutex<()>,
     solutions: Arc<Mutex<SolutionCollector<T>>>,
     world: &'w W,
@@ -295,7 +293,6 @@ where
             max_possible_progress,
             min_db_estimates,
             bg_deletes: 0.into(),
-            phantom: PhantomData,
             retrieve_lock: Mutex::new(()),
             solutions,
             world,
@@ -942,8 +939,17 @@ where
                                 elapsed: new_elapsed,
                                 history: self.get_history_raw(new_ctx_key.clone()).unwrap(),
                             });
-                            if self.solutions.lock().unwrap().insert_solution(sol).accepted() {
-                                log::info!("New solution found by db improvement: {}ms", new_elapsed);
+                            if self
+                                .solutions
+                                .lock()
+                                .unwrap()
+                                .insert_solution(sol)
+                                .accepted()
+                            {
+                                log::info!(
+                                    "New solution found by db improvement: {}ms",
+                                    new_elapsed
+                                );
                             }
                         }
 
