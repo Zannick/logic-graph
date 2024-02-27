@@ -248,6 +248,9 @@ where
     deadends: AtomicU32,
     greedies: AtomicUsize,
     held: AtomicUsize,
+    last_clean: AtomicUsize,
+    solves_since_clean: AtomicUsize,
+    last_solve: AtomicUsize,
     organic_solution: AtomicBool,
     organic_level: AtomicUsize,
     progress_locations: HashSet<<W::Location as Location>::LocId, CommonHasher>,
@@ -436,6 +439,9 @@ where
             deadends: 0.into(),
             held: 0.into(),
             greedies: 0.into(),
+            last_clean: 0.into(),
+            solves_since_clean: 0.into(),
+            last_solve: 0.into(),
             organic_solution: false.into(),
             organic_level: 0.into(),
             progress_locations,
@@ -452,6 +458,40 @@ where
         }
         log::info!("Queue starts with {} elements", s.queue.len());
         Ok(s)
+    }
+
+    fn clean_solutions(&self) {
+        let mut sols = self.solutions.lock().unwrap();
+        let min_progress = self.min_progress();
+        let orig = sols.len();
+        sols.clean();
+        if sols.len() < orig {
+            self.solve_trie.clear();
+            for solution in sols.iter() {
+                record_observations(
+                    self.startctx.get(),
+                    self.world,
+                    solution,
+                    min_progress,
+                    Some(&self.progress_locations),
+                    &self.solve_trie,
+                );
+            }
+        }
+    }
+
+    fn min_progress(&self) -> usize {
+        if let Some(qmp) = self.queue.min_progress() {
+            if let Some(dbmp) = self.queue.db().min_progress() {
+                std::cmp::min(qmp, dbmp)
+            } else {
+                qmp
+            }
+        } else if let Some(dbmp) = self.queue.db().min_progress() {
+            dbmp
+        } else {
+            1
+        }
     }
 
     fn handle_solution(&self, ctx: &mut ContextWrapper<T>, prev: &Option<T>, mode: SearchMode) {
@@ -505,17 +545,7 @@ where
             log::info!("Max time to consider is now: {}ms", old_time);
         }
 
-        let min_progress = if let Some(qmp) = self.queue.min_progress() {
-            if let Some(dbmp) = self.queue.db().min_progress() {
-                std::cmp::min(qmp, dbmp)
-            } else {
-                qmp
-            }
-        } else if let Some(dbmp) = self.queue.db().min_progress() {
-            dbmp
-        } else {
-            1
-        };
+        let min_progress = self.min_progress();
         let res = sols.insert_solution(solution.clone());
         if res.accepted() {
             if res == SolutionResult::IsUnique {
@@ -535,6 +565,9 @@ where
                 Some(&self.progress_locations),
                 &self.solve_trie,
             );
+            self.solves_since_clean.fetch_add(1, Ordering::Release);
+            self.last_solve
+                .fetch_max(self.iters.load(Ordering::Acquire), Ordering::Release);
         }
 
         if let Some(ctx) = min_ctx {
@@ -964,6 +997,19 @@ where
     fn check_status_update(&self, start: &Mutex<Instant>, iters: usize, ctx: &ContextWrapper<T>) {
         if iters % 100_000 == 0 {
             self.print_status_update(start, iters, 100_000, ctx);
+
+            if iters % 1_000_000 == 0 {
+                let last_clean = self.last_clean.load(Ordering::Acquire);
+                let solves_since = self.solves_since_clean.load(Ordering::Acquire);
+                if last_clean + 5_000_000 <= iters && solves_since > 0 {
+                    let last_solve = self.last_solve.load(Ordering::Acquire);
+                    if solves_since > 20 || last_solve + 10_000_000 <= iters {
+                        self.solves_since_clean.store(0, Ordering::Release);
+                        self.last_clean.store(iters, Ordering::Release);
+                        self.clean_solutions();
+                    }
+                }
+            }
         }
     }
 

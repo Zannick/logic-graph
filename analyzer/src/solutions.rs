@@ -205,6 +205,10 @@ where
             .collect()
     }
 
+    pub fn iter(&self) -> impl Iterator<Item = Arc<Solution<T>>> + '_ {
+        self.map.values().map(|v| v.iter().cloned()).flatten()
+    }
+
     fn write_one(
         file: &mut File,
         num: usize,
@@ -283,15 +287,30 @@ where
     }
 
     pub fn clean(&mut self) {
-        for set in self.map.values_mut() {
+        let mut keys_to_drop = Vec::new();
+        if let Some(min) = self
+            .map
+            .values()
+            .map(|set| set.iter().map(|sol| sol.elapsed).min())
+            .flatten()
+            .min()
+        {
+            for (key, set) in self.map.iter_mut() {
+                set.retain(|sol| sol.elapsed - self.best <= self.best / 10);
+                if set.is_empty() {
+                    keys_to_drop.push(key.clone());
+                }
+            }
+            for key in keys_to_drop {
+                self.map.remove_entry(&key);
+            }
             assert!(
-                set.iter()
-                    .any(|sol| sol.elapsed - self.best < self.best / 10),
+                !self.map.is_empty(),
                 "Eliminated all solutions! best={} but min={:?}",
                 self.best,
-                set.iter().map(|sol| sol.elapsed).min()
+                min
             );
-            set.retain(|sol| sol.elapsed - self.best <= self.best / 10);
+            self.count = self.map.values().map(|set| set.len()).sum();
         }
     }
 
