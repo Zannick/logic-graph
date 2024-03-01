@@ -9,6 +9,7 @@ use std::collections::HashSet;
 use std::num::NonZeroUsize;
 use std::sync::atomic::{AtomicUsize, Ordering};
 use std::sync::Mutex;
+use std::time::Instant;
 
 // What we basically need is a helper that contains the necessary cache elements
 // for scoring, that the DB can fall back to. Probably better than bloating the
@@ -259,7 +260,10 @@ where
     where
         T: Ctx<World = W>,
     {
-        Self::new(world, startctx, cache_size)
+        let now = Instant::now();
+        let sp = Self::new(world, startctx, cache_size);
+        log::info!("Built shortest_paths scorer in {:?}", now.elapsed());
+        sp
     }
 
     pub fn shortest_paths_tree_only<T>(
@@ -269,7 +273,10 @@ where
     where
         T: Ctx<World = W>,
     {
-        ShortestPaths::from_graph(build_simple_graph(world, startctx))
+        let now = Instant::now();
+        let sp = ShortestPaths::from_graph(build_simple_graph(world, startctx));
+        log::info!("Built shortest_paths tree only in {:?}", now.elapsed());
+        sp
     }
 
     pub fn get_algo(&self) -> &ShortestPaths<NodeId<W>, EdgeId<W>> {

@@ -104,11 +104,12 @@ where
     L: Location<Context = T>,
 {
     log::info!("{:?}", std::env::args());
-    // This duplicates the creation later by the heap wrapper.
-    let scorer = ContextScorer::shortest_paths(world, &startctx, 32_768);
 
     match &args.command {
         Commands::Search { routes, db } => {
+            // This duplicates the creation later by the heap wrapper.
+            let scorer = ContextScorer::shortest_paths(world, &startctx, 32_768);
+
             route_ctxs.extend(routes.into_iter().map(|route| {
                 let rstr = read_from_file(route);
                 route_from_string(world, &startctx, &rstr, scorer.get_algo()).unwrap()
@@ -122,6 +123,8 @@ where
             search.search()
         }
         Commands::Route { route, .. } => {
+            // This duplicates the creation later by the heap wrapper.
+            let scorer = ContextScorer::shortest_paths(world, &startctx, 32_768);
             let rstr = read_from_file(route);
             println!(
                 "{}",
@@ -134,6 +137,8 @@ where
             Ok(())
         }
         Commands::Greedy { route } => {
+            // This duplicates the creation later by the heap wrapper.
+            let scorer = ContextScorer::shortest_paths(world, &startctx, 32_768);
             let result = if let Some(r) = route {
                 let ctx =
                     route_from_string(world, &startctx, &read_from_file(r), scorer.get_algo())
@@ -153,6 +158,8 @@ where
             Ok(())
         }
         Commands::Minimize { route } => {
+            // This duplicates the creation later by the heap wrapper.
+            let scorer = ContextScorer::shortest_paths(world, &startctx, 32_768);
             let ctx =
                 route_from_string(world, &startctx, &read_from_file(route), scorer.get_algo())
                     .unwrap();
