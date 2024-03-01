@@ -27,11 +27,10 @@ class BitFlagProcessor(object):
 
     def process(self):
         context_vars = [c for c, val in self.context_values.items() if typenameof(val) == 'bool']
-        settings = sorted(s for s, t in self.settings.items() if t['type'] == 'bool')
         items = sorted(i for i, n in self.item_max_counts.items() if n == 1)
         visits = sorted('VISITED_' + loc['id'] for loc in self.locations)
         skips = sorted('SKIPPED_' + loc['id'] for loc in self.locations)
-        basic = context_vars + settings + items
+        basic = context_vars + items
         basic_len = len(basic)
         everything = basic + visits + skips
         while len(everything) > MAX_GROUP_SIZE:

@@ -100,10 +100,6 @@ pub struct Context {
 %% for ctx, t in context_types.items() if ctx not in bfp.varmap
     pub {{ ctx }}: {{ t }},
 %% endfor
-    // settings
-%% for s, info in settings.items() if s not in bfp.varmap
-    pub {{ s }}: {{ info.rust_type }},
-%% endfor
     // items
 %% for item, ct in gl.item_max_counts.items()|sort if item not in bfp.varmap
     pub {{ item|lower }}: {{ ct|get_int_type_for_max }},
@@ -119,10 +115,6 @@ impl Default for Context {
         Context {
 %% for k, v in context_values.items() if k not in bfp.varmap
             {{ k }}: {{ v|str_to_rusttype(context_types[k]) }},
-%% endfor
-            // settings
-%% for s, info in settings.items() if s not in bfp.varmap
-            {{ s }}: Default::default(),
 %% endfor
             // items
 %% for item, ct in gl.item_max_counts.items()|sort if item not in bfp.varmap
@@ -229,16 +221,6 @@ impl context::Ctx for Context {
             ("{{ ctx }}", Yaml::String(s)) => self.set_{{ ctx }}({{ t }}::from_str(s).map_err(|e| format!("{}", e))?),
 %% endif
             ("{{ ctx }}", _) => { return Err(format!("Key {:?} has value of disallowed type: {:?}", ckey, cval)); },
-%% endfor
-%% for s, info in settings.items()
-%% if info.rust_type in int_types
-            ("{{ s }}", Yaml::Integer(i)) => self.set_{{ s }}({{ info.rust_type }}::try_from(*i).map_err(|e| format!("{}", e))?),
-%% elif info.rust_type == "bool"
-            ("{{ s }}", Yaml::Boolean(b)) => self.set_{{ s }}(*b),
-%% else
-            ("{{ s }}", Yaml::String(s)) => self.set_{{ s }}({{ info.rust_type }}::from_str(s).map_err(|e| format!("{}", e))?),
-%% endif
-            ("{{ s }}", _) => { return Err(format!("Key {:?} has value of disallowed type: {:?}", ckey, cval)); },
 %% endfor
             _ => { return Err(format!("Unrecognized context key: {:?}", ckey)); }
         }
@@ -567,11 +549,6 @@ impl context::Ctx for Context {
             list.push(format!("{{ ctx }}: {:?} → {:?}", old.{{ ctx }}, self.{{ ctx }}));
         }
 %% endfor
-%% for s, info in settings.items() if s not in bfp.varmap
-        if old.{{ s }} != self.{{ s }} {
-            list.push(format!("{{ s }}: {:?} → {:?}", old.{{ s }}, self.{{ s }}));
-        }
-%% endfor
 %% for item, ct in gl.item_max_counts.items()|sort if item not in bfp.varmap
         if old.{{ item|lower }} != self.{{ item|lower }} {
 %% if ct == 1
@@ -602,25 +579,7 @@ impl context::Ctx for Context {
 }
 
 impl Context {
-    // settings
-%% for s, info in settings.items()
-    pub fn {{ s }}(&self) -> {{ info.rust_type }} {
-%% if s in bfp.varmap
-        self.cbits{{ bfp.varmap[s] }}.contains(flags::ContextBits{{ bfp.varmap[s] }}::{{ s|upper }})
-%% else
-        self.{{ s }}
-%% endif
-    }
-    pub fn set_{{ s }}(&mut self, val: {{ info.rust_type }}) {
-%% if s in bfp.varmap
-        self.cbits{{ bfp.varmap[s] }}.set(flags::ContextBits{{ bfp.varmap[s] }}::{{ s|upper }}, val);
-%% else
-        self.{{ s }} = val;
-%% endif
-    }
-%% endfor
-
-    // context
+    // accessors
 %% for ctx, t in context_types.items()
     pub fn {{ ctx }}(&self) -> {{ t }} {
 %% if ctx in bfp.varmap
@@ -629,6 +588,7 @@ impl Context {
         self.{{ ctx }}
 %% endif
     }
+    // setters
 %% if ctx != 'position'
     pub fn set_{{ ctx }}(&mut self, val: {{ t }}) {
 %% if ctx in bfp.varmap

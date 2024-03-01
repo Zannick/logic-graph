@@ -1,6 +1,6 @@
     %% include 'header.rs.jinja'
 
-use crate::context::{flags, Context};
+use crate::context::Context;
 use crate::graph::World;
 use analyzer::context::ContextWrapper;
 use analyzer::estimates::ContextScorer;
@@ -13,7 +13,6 @@ use yaml_rust::{Yaml, YamlLoader};
 
 fn read_key_value(
     world: &mut World,
-    ctx: &mut Context,
     key: &Yaml,
     val: &Yaml,
 ) -> Result<(), String> {
@@ -32,15 +31,7 @@ fn read_key_value(
         }
 %% for s, info in settings.items()
         Some("{{ s }}") => {
-%% if s in bfp.varmap
-            world.{{ s }} = parse_bool(key, val)?;
-            ctx.cbits{{ bfp.varmap[s] }}.set(flags::ContextBits{{ bfp.varmap[s] }}::{{ s|upper }},
-                world.{{ s }}
-            );
-%% else
-            ctx.{{ s }} = parse_{% if info['type'] in ('bool', 'int') %}{{ info['type'] }}{% else %}str_into{% endif %}(key, val)?;
-            world.{{ s }} = ctx.{{ s }};
-%% endif
+            world.{{ s }} = parse_{% if info['type'] in ('bool', 'int') %}{{ info['type'] }}{% else %}str_into{% endif %}(key, val)?;
         }
 %% endfor
         _ => {
@@ -74,7 +65,7 @@ pub fn load_settings(filename: Option<&PathBuf>) -> (Box<World>, Context, Vec<Co
                 } else {
                     errs.push(format!("routes must be list of strings, but was {:?}", value));
                 }
-            } else if let Err(e) = read_key_value(world.as_mut(), &mut ctx, key, value) {
+            } else if let Err(e) = read_key_value(world.as_mut(), key, value) {
                 errs.push(e);
             }
         }

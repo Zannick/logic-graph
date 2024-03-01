@@ -91,10 +91,6 @@ pub enum OneObservation {
         mask: flags::ContextBits10,
         result: flags::ContextBits10,
     },
-    CBits11 {
-        mask: flags::ContextBits11,
-        result: flags::ContextBits11,
-    },
 }
 
 #[derive(Debug, Default)]
@@ -125,7 +121,6 @@ pub struct FullObservation {
     cbits8: Option<flags::ContextBits8>,
     cbits9: Option<flags::ContextBits9>,
     cbits10: Option<flags::ContextBits10>,
-    cbits11: Option<flags::ContextBits11>,
     pub strict: bool,
 }
 
@@ -197,8 +192,8 @@ impl Observer for FullObservation {
                 );
             }
             LocationId::Amagi__West_Lake__Stronghold_Top__Remote_Urn => {
-                self.cbits4.insert(
-                    flags::ContextBits4::VISITED_AMAGI__WEST_LAKE__STRONGHOLD_TOP__REMOTE_URN,
+                self.cbits3.insert(
+                    flags::ContextBits3::VISITED_AMAGI__WEST_LAKE__STRONGHOLD_TOP__REMOTE_URN,
                 );
                 self.cbits7.insert(
                     flags::ContextBits7::SKIPPED_AMAGI__WEST_LAKE__STRONGHOLD_TOP__REMOTE_URN,
@@ -219,7 +214,7 @@ impl Observer for FullObservation {
                 );
             }
             LocationId::Amagi__West_Lake__Stronghold_Rear_Wall__Break_Left_Wall => {
-                self.cbits4.insert(flags::ContextBits4::VISITED_AMAGI__WEST_LAKE__STRONGHOLD_REAR_WALL__BREAK_LEFT_WALL);
+                self.cbits3.insert(flags::ContextBits3::VISITED_AMAGI__WEST_LAKE__STRONGHOLD_REAR_WALL__BREAK_LEFT_WALL);
                 self.cbits7.insert(flags::ContextBits7::SKIPPED_AMAGI__WEST_LAKE__STRONGHOLD_REAR_WALL__BREAK_LEFT_WALL);
             }
             LocationId::Amagi__West_Lake__Stronghold_Middle_Column__Break_Wall => {
@@ -251,8 +246,8 @@ impl Observer for FullObservation {
                 );
             }
             LocationId::Amagi__West_Lake__Surface_Wall_Left__Break_Wall => {
-                self.cbits4.insert(
-                    flags::ContextBits4::VISITED_AMAGI__WEST_LAKE__SURFACE_WALL_LEFT__BREAK_WALL,
+                self.cbits3.insert(
+                    flags::ContextBits3::VISITED_AMAGI__WEST_LAKE__SURFACE_WALL_LEFT__BREAK_WALL,
                 );
                 self.cbits7.insert(
                     flags::ContextBits7::SKIPPED_AMAGI__WEST_LAKE__SURFACE_WALL_LEFT__BREAK_WALL,
@@ -301,8 +296,8 @@ impl Observer for FullObservation {
             LocationId::Annuna__West_Bridge__Plinth__Item => {
                 self.cbits4
                     .insert(flags::ContextBits4::VISITED_ANNUNA__WEST_BRIDGE__PLINTH__ITEM);
-                self.cbits8
-                    .insert(flags::ContextBits8::SKIPPED_ANNUNA__WEST_BRIDGE__PLINTH__ITEM);
+                self.cbits7
+                    .insert(flags::ContextBits7::SKIPPED_ANNUNA__WEST_BRIDGE__PLINTH__ITEM);
             }
             LocationId::Annuna__East_Bridge__Gate_Button__Switch => {
                 self.cbits4
@@ -365,8 +360,8 @@ impl Observer for FullObservation {
             LocationId::Annuna__Twisty_Passages__Top__Tablet => {
                 self.cbits4
                     .insert(flags::ContextBits4::VISITED_ANNUNA__TWISTY_PASSAGES__TOP__TABLET);
-                self.cbits8
-                    .insert(flags::ContextBits8::SKIPPED_ANNUNA__TWISTY_PASSAGES__TOP__TABLET);
+                self.cbits7
+                    .insert(flags::ContextBits7::SKIPPED_ANNUNA__TWISTY_PASSAGES__TOP__TABLET);
             }
             LocationId::Annuna__Twisty_Passages__Northwest_Alcove__Refill => {
                 self.cbits4.insert(
@@ -379,8 +374,8 @@ impl Observer for FullObservation {
             LocationId::Annuna__West_Climb__Cache__Item => {
                 self.cbits4
                     .insert(flags::ContextBits4::VISITED_ANNUNA__WEST_CLIMB__CACHE__ITEM);
-                self.cbits8
-                    .insert(flags::ContextBits8::SKIPPED_ANNUNA__WEST_CLIMB__CACHE__ITEM);
+                self.cbits7
+                    .insert(flags::ContextBits7::SKIPPED_ANNUNA__WEST_CLIMB__CACHE__ITEM);
             }
             LocationId::Annuna__Apocalypse__Center_Scaffold_West__Boss_Fight => {
                 self.cbits4.insert(flags::ContextBits4::VISITED_ANNUNA__APOCALYPSE__CENTER_SCAFFOLD_WEST__BOSS_FIGHT);
@@ -623,14 +618,14 @@ impl Observer for FullObservation {
                     .insert(flags::ContextBits8::SKIPPED_GIGUNA_BREACH__CHIMNEY__CACHE__FLASK);
             }
             LocationId::Giguna_Breach__Cubby__Rocks__Health => {
-                self.cbits5
-                    .insert(flags::ContextBits5::VISITED_GIGUNA_BREACH__CUBBY__ROCKS__HEALTH);
+                self.cbits4
+                    .insert(flags::ContextBits4::VISITED_GIGUNA_BREACH__CUBBY__ROCKS__HEALTH);
                 self.cbits8
                     .insert(flags::ContextBits8::SKIPPED_GIGUNA_BREACH__CUBBY__ROCKS__HEALTH);
             }
             LocationId::Giguna_Breach__Slingshot__Ravine__Urn => {
-                self.cbits5
-                    .insert(flags::ContextBits5::VISITED_GIGUNA_BREACH__SLINGSHOT__RAVINE__URN);
+                self.cbits4
+                    .insert(flags::ContextBits4::VISITED_GIGUNA_BREACH__SLINGSHOT__RAVINE__URN);
                 self.cbits8
                     .insert(flags::ContextBits8::SKIPPED_GIGUNA_BREACH__SLINGSHOT__RAVINE__URN);
             }
@@ -881,8 +876,8 @@ impl Observer for FullObservation {
                     .insert(flags::ContextBits8::SKIPPED_GIGUNA__GATEWAY__BUTTON__HIT_SWITCH);
             }
             LocationId::Giguna__Antechamber__Statue_Head__Tablet => {
-                self.cbits5
-                    .insert(flags::ContextBits5::VISITED_GIGUNA__ANTECHAMBER__STATUE_HEAD__TABLET);
+                self.cbits4
+                    .insert(flags::ContextBits4::VISITED_GIGUNA__ANTECHAMBER__STATUE_HEAD__TABLET);
                 self.cbits8
                     .insert(flags::ContextBits8::SKIPPED_GIGUNA__ANTECHAMBER__STATUE_HEAD__TABLET);
             }
@@ -890,24 +885,24 @@ impl Observer for FullObservation {
                 self.cbits5.insert(
                     flags::ContextBits5::VISITED_GIGUNA__GUBI_LAIR__CENTER_PLATFORM__HACK_GUBI,
                 );
-                self.cbits9.insert(
-                    flags::ContextBits9::SKIPPED_GIGUNA__GUBI_LAIR__CENTER_PLATFORM__HACK_GUBI,
+                self.cbits8.insert(
+                    flags::ContextBits8::SKIPPED_GIGUNA__GUBI_LAIR__CENTER_PLATFORM__HACK_GUBI,
                 );
             }
             LocationId::Giguna__Gubi_Lair__Center_Platform__Fight_Gubi => {
                 self.cbits5.insert(
                     flags::ContextBits5::VISITED_GIGUNA__GUBI_LAIR__CENTER_PLATFORM__FIGHT_GUBI,
                 );
-                self.cbits9.insert(
-                    flags::ContextBits9::SKIPPED_GIGUNA__GUBI_LAIR__CENTER_PLATFORM__FIGHT_GUBI,
+                self.cbits8.insert(
+                    flags::ContextBits8::SKIPPED_GIGUNA__GUBI_LAIR__CENTER_PLATFORM__FIGHT_GUBI,
                 );
             }
             LocationId::Giguna__Gubi_Lair__Center_Platform__Boss_Reward => {
                 self.cbits5.insert(
                     flags::ContextBits5::VISITED_GIGUNA__GUBI_LAIR__CENTER_PLATFORM__BOSS_REWARD,
                 );
-                self.cbits9.insert(
-                    flags::ContextBits9::SKIPPED_GIGUNA__GUBI_LAIR__CENTER_PLATFORM__BOSS_REWARD,
+                self.cbits8.insert(
+                    flags::ContextBits8::SKIPPED_GIGUNA__GUBI_LAIR__CENTER_PLATFORM__BOSS_REWARD,
                 );
             }
             LocationId::Giguna__Gubi_Lair__Pedestal__Axe => {
@@ -1029,22 +1024,22 @@ impl Observer for FullObservation {
                 );
             }
             LocationId::Irikar_Breach__Gauntlet__Hidden_Path_Reward__Item => {
-                self.cbits6.insert(
-                    flags::ContextBits6::VISITED_IRIKAR_BREACH__GAUNTLET__HIDDEN_PATH_REWARD__ITEM,
+                self.cbits5.insert(
+                    flags::ContextBits5::VISITED_IRIKAR_BREACH__GAUNTLET__HIDDEN_PATH_REWARD__ITEM,
                 );
                 self.cbits9.insert(
                     flags::ContextBits9::SKIPPED_IRIKAR_BREACH__GAUNTLET__HIDDEN_PATH_REWARD__ITEM,
                 );
             }
             LocationId::Irikar_Breach__Hover_Room__Bottom__Item => {
-                self.cbits6
-                    .insert(flags::ContextBits6::VISITED_IRIKAR_BREACH__HOVER_ROOM__BOTTOM__ITEM);
+                self.cbits5
+                    .insert(flags::ContextBits5::VISITED_IRIKAR_BREACH__HOVER_ROOM__BOTTOM__ITEM);
                 self.cbits9
                     .insert(flags::ContextBits9::SKIPPED_IRIKAR_BREACH__HOVER_ROOM__BOTTOM__ITEM);
             }
             LocationId::Irikar_Breach__Worm_Rave__Corner__Item => {
-                self.cbits6
-                    .insert(flags::ContextBits6::VISITED_IRIKAR_BREACH__WORM_RAVE__CORNER__ITEM);
+                self.cbits5
+                    .insert(flags::ContextBits5::VISITED_IRIKAR_BREACH__WORM_RAVE__CORNER__ITEM);
                 self.cbits9
                     .insert(flags::ContextBits9::SKIPPED_IRIKAR_BREACH__WORM_RAVE__CORNER__ITEM);
             }
@@ -1243,24 +1238,23 @@ impl Observer for FullObservation {
             LocationId::Menu__Upgrade_Menu__Combat__Melee_Speed_3 => {
                 self.cbits6
                     .insert(flags::ContextBits6::VISITED_MENU__UPGRADE_MENU__COMBAT__MELEE_SPEED_3);
-                self.cbits10.insert(
-                    flags::ContextBits10::SKIPPED_MENU__UPGRADE_MENU__COMBAT__MELEE_SPEED_3,
-                );
+                self.cbits9
+                    .insert(flags::ContextBits9::SKIPPED_MENU__UPGRADE_MENU__COMBAT__MELEE_SPEED_3);
             }
             LocationId::Menu__Upgrade_Menu__Combat__Ranged_Damage_1 => {
                 self.cbits6.insert(
                     flags::ContextBits6::VISITED_MENU__UPGRADE_MENU__COMBAT__RANGED_DAMAGE_1,
                 );
-                self.cbits10.insert(
-                    flags::ContextBits10::SKIPPED_MENU__UPGRADE_MENU__COMBAT__RANGED_DAMAGE_1,
+                self.cbits9.insert(
+                    flags::ContextBits9::SKIPPED_MENU__UPGRADE_MENU__COMBAT__RANGED_DAMAGE_1,
                 );
             }
             LocationId::Menu__Upgrade_Menu__Combat__Ranged_Damage_2 => {
                 self.cbits6.insert(
                     flags::ContextBits6::VISITED_MENU__UPGRADE_MENU__COMBAT__RANGED_DAMAGE_2,
                 );
-                self.cbits10.insert(
-                    flags::ContextBits10::SKIPPED_MENU__UPGRADE_MENU__COMBAT__RANGED_DAMAGE_2,
+                self.cbits9.insert(
+                    flags::ContextBits9::SKIPPED_MENU__UPGRADE_MENU__COMBAT__RANGED_DAMAGE_2,
                 );
             }
             LocationId::Menu__Upgrade_Menu__Combat__Ranged_Damage_3 => {
@@ -1447,7 +1441,7 @@ impl Observer for FullObservation {
             }
             LocationId::Uhrum__West_Entrance__Upper_Wall_West__Mist_through_Wall => {
                 self.cbits7.insert(flags::ContextBits7::VISITED_UHRUM__WEST_ENTRANCE__UPPER_WALL_WEST__MIST_THROUGH_WALL);
-                self.cbits11.insert(flags::ContextBits11::SKIPPED_UHRUM__WEST_ENTRANCE__UPPER_WALL_WEST__MIST_THROUGH_WALL);
+                self.cbits10.insert(flags::ContextBits10::SKIPPED_UHRUM__WEST_ENTRANCE__UPPER_WALL_WEST__MIST_THROUGH_WALL);
             }
             LocationId::Uhrum__West_Entrance__Upper_Wall_East__Charge_through_Wall => {
                 self.cbits7.insert(flags::ContextBits7::VISITED_UHRUM__WEST_ENTRANCE__UPPER_WALL_EAST__CHARGE_THROUGH_WALL);
@@ -1455,7 +1449,7 @@ impl Observer for FullObservation {
             }
             LocationId::Uhrum__West_Entrance__Upper_Wall_East__Spin_through_Wall => {
                 self.cbits7.insert(flags::ContextBits7::VISITED_UHRUM__WEST_ENTRANCE__UPPER_WALL_EAST__SPIN_THROUGH_WALL);
-                self.cbits11.insert(flags::ContextBits11::SKIPPED_UHRUM__WEST_ENTRANCE__UPPER_WALL_EAST__SPIN_THROUGH_WALL);
+                self.cbits10.insert(flags::ContextBits10::SKIPPED_UHRUM__WEST_ENTRANCE__UPPER_WALL_EAST__SPIN_THROUGH_WALL);
             }
             LocationId::Uhrum__West_Entrance__Upper_Wall_East__Mist_through_Wall => {
                 self.cbits7.insert(flags::ContextBits7::VISITED_UHRUM__WEST_ENTRANCE__UPPER_WALL_EAST__MIST_THROUGH_WALL);
@@ -1492,8 +1486,8 @@ impl Observer for FullObservation {
                     .insert(flags::ContextBits10::SKIPPED_UHRUM__WEST_ENTRANCE__SAND__REFILL);
             }
             LocationId::Uhrum__Siege_Corridor__Western_Cache__Core => {
-                self.cbits7.insert(
-                    flags::ContextBits7::VISITED_UHRUM__SIEGE_CORRIDOR__WESTERN_CACHE__CORE,
+                self.cbits6.insert(
+                    flags::ContextBits6::VISITED_UHRUM__SIEGE_CORRIDOR__WESTERN_CACHE__CORE,
                 );
                 self.cbits10.insert(
                     flags::ContextBits10::SKIPPED_UHRUM__SIEGE_CORRIDOR__WESTERN_CACHE__CORE,
@@ -1506,8 +1500,8 @@ impl Observer for FullObservation {
                     .insert(flags::ContextBits10::SKIPPED_UHRUM__SIEGE_CORRIDOR__CENTER_BOX__BOX);
             }
             LocationId::Uhrum__Siege_Corridor__Upper_Rock_Item__Urn => {
-                self.cbits7.insert(
-                    flags::ContextBits7::VISITED_UHRUM__SIEGE_CORRIDOR__UPPER_ROCK_ITEM__URN,
+                self.cbits6.insert(
+                    flags::ContextBits6::VISITED_UHRUM__SIEGE_CORRIDOR__UPPER_ROCK_ITEM__URN,
                 );
                 self.cbits10.insert(
                     flags::ContextBits10::SKIPPED_UHRUM__SIEGE_CORRIDOR__UPPER_ROCK_ITEM__URN,
@@ -1566,8 +1560,8 @@ impl Observer for FullObservation {
                 );
             }
             LocationId::Uhrum__Waterfalls__Above_Block__Block => {
-                self.cbits7
-                    .insert(flags::ContextBits7::VISITED_UHRUM__WATERFALLS__ABOVE_BLOCK__BLOCK);
+                self.cbits6
+                    .insert(flags::ContextBits6::VISITED_UHRUM__WATERFALLS__ABOVE_BLOCK__BLOCK);
                 self.cbits10
                     .insert(flags::ContextBits10::SKIPPED_UHRUM__WATERFALLS__ABOVE_BLOCK__BLOCK);
             }
@@ -2514,12 +2508,6 @@ impl Observer for FullObservation {
                 result: mask & ctx.cbits10,
             });
         }
-        if let Some(mask) = self.cbits11 {
-            vec.push(OneObservation::CBits11 {
-                mask,
-                result: mask & ctx.cbits11,
-            });
-        }
         vec
     }
 }
@@ -2591,9 +2579,6 @@ impl FullObservation {
             fields += 1;
         }
         if self.cbits10.is_some() {
-            fields += 1;
-        }
-        if self.cbits11.is_some() {
             fields += 1;
         }
         fields
@@ -2886,16 +2871,16 @@ impl FullObservation {
             .insert(flags::ContextBits1::AMAGI_STRONGHOLD_BOULDER_1);
     }
     pub fn observe_amagi_stronghold_boulder_2(&mut self) {
-        self.cbits2
-            .insert(flags::ContextBits2::AMAGI_STRONGHOLD_BOULDER_2);
+        self.cbits1
+            .insert(flags::ContextBits1::AMAGI_STRONGHOLD_BOULDER_2);
     }
     pub fn observe_amagi_stronghold_wall_1(&mut self) {
-        self.cbits2
-            .insert(flags::ContextBits2::AMAGI_STRONGHOLD_WALL_1);
+        self.cbits1
+            .insert(flags::ContextBits1::AMAGI_STRONGHOLD_WALL_1);
     }
     pub fn observe_amagi_stronghold_wall_2(&mut self) {
-        self.cbits2
-            .insert(flags::ContextBits2::AMAGI_STRONGHOLD_WALL_2);
+        self.cbits1
+            .insert(flags::ContextBits1::AMAGI_STRONGHOLD_WALL_2);
     }
     pub fn observe_amagi_west_lake_surface_wall(&mut self) {
         self.cbits2
@@ -3111,13 +3096,13 @@ impl FullObservation {
         self.cbits2.insert(flags::ContextBits2::INFECTION_RANGE_2);
     }
     pub fn observe_infection_range_3(&mut self) {
-        self.cbits3.insert(flags::ContextBits3::INFECTION_RANGE_3);
+        self.cbits2.insert(flags::ContextBits2::INFECTION_RANGE_3);
     }
     pub fn observe_infection_speed(&mut self) {
-        self.cbits3.insert(flags::ContextBits3::INFECTION_SPEED);
+        self.cbits2.insert(flags::ContextBits2::INFECTION_SPEED);
     }
     pub fn observe_irikar_gudam(&mut self) {
-        self.cbits3.insert(flags::ContextBits3::IRIKAR_GUDAM);
+        self.cbits2.insert(flags::ContextBits2::IRIKAR_GUDAM);
     }
     pub fn observe_irikar_royal_storage_wall(&mut self) {
         self.cbits3
@@ -3414,10 +3399,6 @@ pub enum ObservationMatcher {
         mask: flags::ContextBits10,
         matcher: LookupMatcher<Node<Self>, flags::ContextBits10, SolutionSuffix<Context>>,
     },
-    LookupCBits11 {
-        mask: flags::ContextBits11,
-        matcher: LookupMatcher<Node<Self>, flags::ContextBits11, SolutionSuffix<Context>>,
-    },
 }
 
 impl Default for ObservationMatcher {
@@ -3603,10 +3584,6 @@ impl MatcherDispatch for ObservationMatcher {
                 let (node, matcher) = LookupMatcher::new_with(result);
                 (node, ObservationMatcher::LookupCBits10 { mask, matcher })
             }
-            &OneObservation::CBits11 { mask, result } => {
-                let (node, matcher) = LookupMatcher::new_with(result);
-                (node, ObservationMatcher::LookupCBits11 { mask, matcher })
-            }
         }
     }
 
@@ -3654,7 +3631,6 @@ impl MatcherDispatch for ObservationMatcher {
             Self::LookupCBits8 { matcher, .. } => matcher.clear(),
             Self::LookupCBits9 { matcher, .. } => matcher.clear(),
             Self::LookupCBits10 { matcher, .. } => matcher.clear(),
-            Self::LookupCBits11 { matcher, .. } => matcher.clear(),
         }
     }
 
@@ -3712,7 +3688,6 @@ impl MatcherDispatch for ObservationMatcher {
             Self::LookupCBits8 { mask, matcher } => matcher.lookup(val.cbits8 & *mask),
             Self::LookupCBits9 { mask, matcher } => matcher.lookup(val.cbits9 & *mask),
             Self::LookupCBits10 { mask, matcher } => matcher.lookup(val.cbits10 & *mask),
-            Self::LookupCBits11 { mask, matcher } => matcher.lookup(val.cbits11 & *mask),
         }
     }
 
@@ -3873,13 +3848,6 @@ impl MatcherDispatch for ObservationMatcher {
             (
                 Self::LookupCBits10 { mask, matcher },
                 OneObservation::CBits10 {
-                    mask: mask2,
-                    result,
-                },
-            ) if mask == mask2 => Some(matcher.insert(*result)),
-            (
-                Self::LookupCBits11 { mask, matcher },
-                OneObservation::CBits11 {
                     mask: mask2,
                     result,
                 },
@@ -4049,13 +4017,6 @@ impl MatcherDispatch for ObservationMatcher {
                     result,
                 },
             ) if mask == mask2 => matcher.add_value(*result, value),
-            (
-                Self::LookupCBits11 { mask, matcher },
-                OneObservation::CBits11 {
-                    mask: mask2,
-                    result,
-                },
-            ) if mask == mask2 => matcher.add_value(*result, value),
             _ => (),
         }
     }
@@ -4104,7 +4065,6 @@ impl MatcherDispatch for ObservationMatcher {
             Self::LookupCBits8 { matcher, .. } => matcher.nodes(),
             Self::LookupCBits9 { matcher, .. } => matcher.nodes(),
             Self::LookupCBits10 { matcher, .. } => matcher.nodes(),
-            Self::LookupCBits11 { matcher, .. } => matcher.nodes(),
         }
     }
 
@@ -4152,7 +4112,6 @@ impl MatcherDispatch for ObservationMatcher {
             Self::LookupCBits8 { matcher, .. } => matcher.num_values(),
             Self::LookupCBits9 { matcher, .. } => matcher.num_values(),
             Self::LookupCBits10 { matcher, .. } => matcher.num_values(),
-            Self::LookupCBits11 { matcher, .. } => matcher.num_values(),
         }
     }
 }
