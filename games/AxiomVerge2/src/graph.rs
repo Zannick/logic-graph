@@ -10873,6 +10873,10 @@ lazy_static! {
 pub struct World {
     pub rule_victory: RuleVictory,
     pub rule_objective: RuleObjective,
+    // settings
+    pub boomerang_steering: bool,
+    pub major_glitches: bool,
+    pub minor_glitches: bool,
     // These are arrays that group the items together by their parent.
     // Using EnumMap for this ONLY WORKS if the keys are properly ordered to group
     // nearby things together.
@@ -14585,6 +14589,9 @@ impl World {
         World {
             rule_victory: RuleVictory::default(),
             rule_objective: RuleObjective::default(),
+            boomerang_steering: Default::default(),
+            major_glitches: Default::default(),
+            minor_glitches: Default::default(),
             locations: build_locations(),
             exits: build_exits(),
             actions: build_actions(),

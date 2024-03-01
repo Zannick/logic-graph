@@ -466,6 +466,10 @@ pub struct World {
 %% for rule in rules
     pub rule_{{ rule|construct_id }}: Rule{{ rule[1:]|camelize }},
 %% endfor
+    // settings
+%% for s, info in settings.items()
+    pub {{ s }}: {{ info.rust_type }},
+%% endfor
     // These are arrays that group the items together by their parent.
     // Using EnumMap for this ONLY WORKS if the keys are properly ordered to group
     // nearby things together.
@@ -746,6 +750,9 @@ impl World {
         World {
 %% for rule in rules
             rule_{{ rule|construct_id }}: Rule{{ rule[1:]|camelize }}::default(),
+%% endfor
+%% for s, info in settings.items()
+            {{ s }}: Default::default(),
 %% endfor
             locations: build_locations(),
             exits: build_exits(),
