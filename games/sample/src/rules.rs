@@ -8,9 +8,11 @@ use crate::context::*;
 use crate::graph::{self, *};
 use crate::graph_enums::*;
 use crate::items::Item;
+use crate::observe::*;
 use crate::prices::Currency;
 use crate::*;
 use analyzer::context::Ctx;
+use analyzer::matchertrie::IntegerObservation;
 use analyzer::world::{self, World};
 use rustc_hash::FxHashMap;
 
@@ -98,7 +100,7 @@ pub fn access_deku_lobby_web(ctx: &Context, world: &graph::World) -> bool {
 }
 pub fn access_deku_lobby_web_and_logic_deku_b1_skip(ctx: &Context, world: &graph::World) -> bool {
     // Deku_Lobby_Web and logic_deku_b1_skip
-    (ctx.has(Item::Deku_Lobby_Web) && ctx.logic_deku_b1_skip())
+    (ctx.has(Item::Deku_Lobby_Web) && world.logic_deku_b1_skip)
 }
 pub fn access_deku_slingshot_scrub(ctx: &Context, world: &graph::World) -> bool {
     // Deku_Slingshot_Scrub
@@ -606,7 +608,7 @@ pub fn explain_deku_lobby_web_and_logic_deku_b1_skip(
             left
         } else {
             let mut right = {
-                let s = ctx.logic_deku_b1_skip();
+                let s = world.logic_deku_b1_skip;
                 edict.insert("logic_deku_b1_skip", format!("{}", s));
                 (s, vec!["logic_deku_b1_skip"])
             };
@@ -1190,4 +1192,519 @@ pub fn explain_objective(
         refs.push("$objective");
         (res, refs)
     }
+}
+pub fn observe_access___defeat_ganon(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // [Defeat_Ganon]
+    ({
+        full_obs.observe_defeat_ganon();
+        ctx.has(Item::Defeat_Ganon)
+    })
+}
+pub fn observe_access___deku_lobby_web_kokiri_emerald(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // [Deku_Lobby_Web, Kokiri_Emerald]
+    ({
+        full_obs.observe_deku_lobby_web();
+        ctx.has(Item::Deku_Lobby_Web)
+    }) && ({
+        full_obs.observe_kokiri_emerald();
+        ctx.has(Item::Kokiri_Emerald)
+    })
+}
+pub fn observe_access___nuts_or_can_use__slingshot_and_can_jumpslash(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // ($Nuts or $can_use(Slingshot)) and $can_jumpslash
+    ((hobserve__Nuts!(ctx, world, full_obs)
+        || hobserve__can_use!(ctx, world, Item::Slingshot, full_obs))
+        && (hobserve__can_jumpslash!(ctx, world, full_obs)))
+}
+pub fn observe_access___triforce_piece__triforce_count(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // [Triforce_Piece{triforce_count}]
+    ({
+        full_obs.observe_triforce_piece(IntegerObservation::Ge(ctx.triforce_count()));
+        ctx.count(Item::Triforce_Piece) >= ctx.triforce_count()
+    })
+}
+pub fn observe_access___victory_objective(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // [Victory, $objective]
+    ({
+        full_obs.observe_victory();
+        ctx.has(Item::Victory)
+    }) && robserve__objective!(ctx, world, full_obs)
+}
+pub fn observe_access_can_play__minuet_of_forest(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $can_play(Minuet_of_Forest)
+    hobserve__can_play!(ctx, world, Item::Minuet_of_Forest, full_obs)
+}
+pub fn observe_access_can_use__boomerang_or_can_use__hookshot(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $can_use(Boomerang) or $can_use(Hookshot)
+    (hobserve__can_use!(ctx, world, Item::Boomerang, full_obs)
+        || hobserve__can_use!(ctx, world, Item::Hookshot, full_obs))
+}
+pub fn observe_access_can_use__slingshot(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $can_use(Slingshot)
+    hobserve__can_use!(ctx, world, Item::Slingshot, full_obs)
+}
+pub fn observe_access_defeat_gohma(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // Defeat_Gohma
+    {
+        full_obs.observe_defeat_gohma();
+        ctx.has(Item::Defeat_Gohma)
+    }
+}
+pub fn observe_access_deku_back_room_web_and_can_blast_or_smash(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // Deku_Back_Room_Web and $can_blast_or_smash
+    ({
+        full_obs.observe_deku_back_room_web();
+        ctx.has(Item::Deku_Back_Room_Web)
+    } && (hobserve__can_blast_or_smash!(ctx, world, full_obs)))
+}
+pub fn observe_access_deku_back_room_web_and_deku_back_room_wall(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // Deku_Back_Room_Web and Deku_Back_Room_Wall
+    ({
+        full_obs.observe_deku_back_room_web();
+        ctx.has(Item::Deku_Back_Room_Web)
+    } && ({
+        full_obs.observe_deku_back_room_wall();
+        ctx.has(Item::Deku_Back_Room_Wall)
+    }))
+}
+pub fn observe_access_deku_basement_block_and_is_child_and_sticks(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // Deku_Basement_Block and $is_child and $Sticks
+    (({
+        full_obs.observe_deku_basement_block();
+        ctx.has(Item::Deku_Basement_Block)
+    } && (hobserve__is_child!(ctx, world, full_obs)))
+        && (hobserve__Sticks!(ctx, world, full_obs)))
+}
+pub fn observe_access_deku_basement_scrubs(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // Deku_Basement_Scrubs
+    {
+        full_obs.observe_deku_basement_scrubs();
+        ctx.has(Item::Deku_Basement_Scrubs)
+    }
+}
+pub fn observe_access_deku_basement_switch(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // Deku_Basement_Switch
+    {
+        full_obs.observe_deku_basement_switch();
+        ctx.has(Item::Deku_Basement_Switch)
+    }
+}
+pub fn observe_access_deku_basement_web(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // Deku_Basement_Web
+    {
+        full_obs.observe_deku_basement_web();
+        ctx.has(Item::Deku_Basement_Web)
+    }
+}
+pub fn observe_access_deku_lobby_web(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // Deku_Lobby_Web
+    {
+        full_obs.observe_deku_lobby_web();
+        ctx.has(Item::Deku_Lobby_Web)
+    }
+}
+pub fn observe_access_deku_lobby_web_and_logic_deku_b1_skip(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // Deku_Lobby_Web and logic_deku_b1_skip
+    ({
+        full_obs.observe_deku_lobby_web();
+        ctx.has(Item::Deku_Lobby_Web)
+    } && (world.logic_deku_b1_skip))
+}
+pub fn observe_access_deku_slingshot_scrub(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // Deku_Slingshot_Scrub
+    {
+        full_obs.observe_deku_slingshot_scrub();
+        ctx.has(Item::Deku_Slingshot_Scrub)
+    }
+}
+pub fn observe_access_deku_tree__compass_room__entry__ex__floor_3__door_1__req(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // ^_torch
+    {
+        full_obs.observe_deku_tree__compass_room__ctx__torch();
+        ctx.deku_tree__compass_room__ctx__torch()
+    }
+}
+pub fn observe_access_deku_tree__compass_room__entry__light_torch__req(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $is_child and $Sticks and not ^_torch
+    ((hobserve__is_child!(ctx, world, full_obs) && (hobserve__Sticks!(ctx, world, full_obs)))
+        && (!({
+            full_obs.observe_deku_tree__compass_room__ctx__torch();
+            ctx.deku_tree__compass_room__ctx__torch()
+        })))
+}
+pub fn observe_access_false(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // False
+    false
+}
+pub fn observe_access_gold_skulltula_token__10(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // Gold_Skulltula_Token{10}
+    {
+        full_obs.observe_gold_skulltula_token(IntegerObservation::Ge(10));
+        ctx.count(Item::Gold_Skulltula_Token) >= 10
+    }
+}
+pub fn observe_access_has_fire_source(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $has_fire_source
+    hobserve__has_fire_source!(ctx, world, full_obs)
+}
+pub fn observe_access_has_fire_source_with_torch_or_can_use__bow(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $has_fire_source_with_torch or $can_use(Bow)
+    (hobserve__has_fire_source_with_torch!(ctx, world, full_obs)
+        || hobserve__can_use!(ctx, world, Item::Bow, full_obs))
+}
+pub fn observe_access_has_shield(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $has_shield
+    hobserve__has_shield!(ctx, world, full_obs)
+}
+pub fn observe_access_is_adult(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $is_adult
+    hobserve__is_adult!(ctx, world, full_obs)
+}
+pub fn observe_access_is_adult_or_can_child_attack(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $is_adult or $can_child_attack
+    (hobserve__is_adult!(ctx, world, full_obs) || hobserve__can_child_attack!(ctx, world, full_obs))
+}
+pub fn observe_access_is_adult_or_can_child_attack_or_nuts(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $is_adult or $can_child_attack or $Nuts
+    ((hobserve__is_adult!(ctx, world, full_obs)
+        || hobserve__can_child_attack!(ctx, world, full_obs))
+        || hobserve__Nuts!(ctx, world, full_obs))
+}
+pub fn observe_access_is_adult_or_deku_basement_block(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $is_adult or Deku_Basement_Block
+    (hobserve__is_adult!(ctx, world, full_obs) || {
+        full_obs.observe_deku_basement_block();
+        ctx.has(Item::Deku_Basement_Block)
+    })
+}
+pub fn observe_access_is_adult_or_kokiri_sword_or_boomerang(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $is_adult or Kokiri_Sword or Boomerang
+    ((hobserve__is_adult!(ctx, world, full_obs) || {
+        full_obs.observe_kokiri_sword();
+        ctx.has(Item::Kokiri_Sword)
+    }) || {
+        full_obs.observe_boomerang();
+        ctx.has(Item::Boomerang)
+    })
+}
+pub fn observe_access_is_adult_or_showed_mido(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $is_adult or Showed_Mido
+    (hobserve__is_adult!(ctx, world, full_obs) || {
+        full_obs.observe_showed_mido();
+        ctx.has(Item::Showed_Mido)
+    })
+}
+pub fn observe_access_is_adult_or_slingshot_or_sticks_or_kokiri_sword(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $is_adult or Slingshot or $Sticks or Kokiri_Sword
+    (((hobserve__is_adult!(ctx, world, full_obs) || {
+        full_obs.observe_slingshot();
+        ctx.has(Item::Slingshot)
+    }) || hobserve__Sticks!(ctx, world, full_obs))
+        || {
+            full_obs.observe_kokiri_sword();
+            ctx.has(Item::Kokiri_Sword)
+        })
+}
+pub fn observe_access_is_adult_or_sticks_or_kokiri_sword(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $is_adult or $Sticks or Kokiri_Sword
+    ((hobserve__is_adult!(ctx, world, full_obs) || hobserve__Sticks!(ctx, world, full_obs)) || {
+        full_obs.observe_kokiri_sword();
+        ctx.has(Item::Kokiri_Sword)
+    })
+}
+pub fn observe_access_is_child(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $is_child
+    hobserve__is_child!(ctx, world, full_obs)
+}
+pub fn observe_access_is_child_and_kokiri_sword_and_deku_shield(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $is_child and Kokiri_Sword and $Deku_Shield
+    ((hobserve__is_child!(ctx, world, full_obs)
+        && ({
+            full_obs.observe_kokiri_sword();
+            ctx.has(Item::Kokiri_Sword)
+        }))
+        && (hobserve__Deku_Shield!(ctx, world, full_obs)))
+}
+pub fn observe_access_is_child_and_sticks_and_nuts(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $is_child and $Sticks and $Nuts
+    ((hobserve__is_child!(ctx, world, full_obs) && (hobserve__Sticks!(ctx, world, full_obs)))
+        && (hobserve__Nuts!(ctx, world, full_obs)))
+}
+pub fn observe_access_nuts_and_has_shield_and_if___is_child____sticks__else____biggoron_sword_(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $Nuts and $has_shield and if ($is_child) { $Sticks } else { Biggoron_Sword }
+    ((hobserve__Nuts!(ctx, world, full_obs) && (hobserve__has_shield!(ctx, world, full_obs)))
+        && (if hobserve__is_child!(ctx, world, full_obs) {
+            hobserve__Sticks!(ctx, world, full_obs)
+        } else {
+            {
+                full_obs.observe_biggoron_sword();
+                ctx.has(Item::Biggoron_Sword)
+            }
+        }))
+}
+pub fn observe_access_objective(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $objective
+    robserve__objective!(ctx, world, full_obs)
+}
+pub fn observe_action_deku_tree__compass_room__entry__light_torch__do(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) {
+    // ^_torch = True
+}
+pub fn observe_action_rupees_set_max__rupees_add_20_wallet_max(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) {
+    // ^rupees = $max(^rupees + 20, $wallet_max)
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    {
+        let _set = std::cmp::max(
+            {
+                full_obs.observe_rupees(IntegerObservation::Exact);
+                ctx.rupees()
+            } + 20,
+            helper__wallet_max!(ctx, world),
+        );
+    };
+    full_obs.strict = old_strict;
+}
+pub fn observe_action_rupees_set_min__rupees_add_1_wallet_max(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) {
+    // ^rupees = $min(^rupees + 1, $wallet_max)
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    {
+        let _set = std::cmp::min(
+            {
+                full_obs.observe_rupees(IntegerObservation::Exact);
+                ctx.rupees()
+            } + 1,
+            helper__wallet_max!(ctx, world),
+        );
+    };
+    full_obs.strict = old_strict;
+}
+pub fn observe_action_rupees_set_min__rupees_add_50_wallet_max(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) {
+    // ^rupees = $min(^rupees + 50, $wallet_max)
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    {
+        let _set = std::cmp::min(
+            {
+                full_obs.observe_rupees(IntegerObservation::Exact);
+                ctx.rupees()
+            } + 50,
+            helper__wallet_max!(ctx, world),
+        );
+    };
+    full_obs.strict = old_strict;
+}
+pub fn observe_action_rupees_set_min__rupees_add_5_wallet_max(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) {
+    // ^rupees = $min(^rupees + 5, $wallet_max)
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    {
+        let _set = std::cmp::min(
+            {
+                full_obs.observe_rupees(IntegerObservation::Exact);
+                ctx.rupees()
+            } + 5,
+            helper__wallet_max!(ctx, world),
+        );
+    };
+    full_obs.strict = old_strict;
+}
+pub fn observe_action_save_set_position(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) {
+    // ^save = ^position
+}
+pub fn observe_action_tod_set_match_tod____day_setgt_night_night_setgt_day___setgt_day_(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) {
+    // ^tod = MATCH ^tod { 'day' => 'night', 'night' => 'day', _ => 'day' }
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    {
+        let _set = {
+            full_obs.observe_tod();
+            match ctx.tod() {
+                enums::Tod::Day => enums::Tod::Night,
+                enums::Tod::Night => enums::Tod::Day,
+                _ => enums::Tod::Day,
+            }
+        };
+    };
+    full_obs.strict = old_strict;
 }

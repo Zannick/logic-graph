@@ -1130,7 +1130,7 @@ class RustObservationVisitor(RustBaseVisitor):
         enum = self._getRefEnum(ref[1:])
         cases = [f'{enum}::{str(c)[1:-1].capitalize()}' for c in ctx.LIT()] + [str(c) for c in ctx.INT()] + ['_']
         results = [str(self.visit(s, self.rettype)) for s in ctx.str_()]
-        match = (f'match {self._getRefGetter(ref)} {{ '
+        match = (f'match {self._getRefGetter(ref[1:])} {{ '
                  + ', '.join(f'{c} => {r}' for c, r in zip(cases, results))
                  + f' }}')
         if obs := self._getRefObserver(ref):

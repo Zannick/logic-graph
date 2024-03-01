@@ -52,7 +52,7 @@ pub fn load_settings(
 ) -> (Box<World>, Context, Vec<ContextWrapper<Context>>) {
     let mut world: Box<World> = Box::default();
     analyzer::world::World::condense_graph(world.as_mut());
-    let mut ctx = Context::default();
+    let ctx = Context::default();
     let mut vec = Vec::new();
     let route_key = Yaml::String(String::from("routes"));
     if let Some(filename) = filename {

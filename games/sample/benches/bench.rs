@@ -7,15 +7,21 @@ use analyzer::cli::read_from_file;
 use analyzer::context::*;
 use analyzer::estimates::ContextScorer;
 use analyzer::greedy::*;
+use analyzer::matchertrie::MatcherTrie;
+use analyzer::observer::record_observations;
 use analyzer::route::route_from_string;
+use analyzer::solutions::Solution;
 use analyzer::world::*;
-use criterion::{black_box, criterion_group, criterion_main, Criterion};
+use criterion::{black_box, criterion_group, criterion_main, BatchSize, Criterion};
 use enum_map::EnumMap;
 use libsample::context::Context;
 use libsample::graph;
 use libsample::graph_enums::RuleVictory;
 use libsample::items::Item;
+use libsample::observe::ObservationMatcher;
+use rustc_hash::FxHashSet;
 use std::path::PathBuf;
+use std::sync::Arc;
 
 pub fn criterion_benchmark(c: &mut Criterion) {
     let mut world = graph::World::new();
@@ -52,6 +58,35 @@ pub fn criterion_benchmark(c: &mut Criterion) {
                     route_from_string(&world, ctx.get(), rstr, &shortest_paths).unwrap();
                 }
             })
+        });
+    }
+
+    let progress_locations: FxHashSet<_> = world
+        .required_items()
+        .into_iter()
+        .flat_map(|(item, _)| world.get_item_locations(item))
+        .collect();
+
+    if let Ok(win) = greedy_search(&world, &ctx, u32::MAX, 2) {
+        let sol = Arc::new(Solution {
+            elapsed: win.elapsed(),
+            history: win.recent_history().to_vec(),
+        });
+        c.bench_function("trie insert greedy search", |b| {
+            b.iter_batched_ref(
+                || MatcherTrie::<ObservationMatcher>::default(),
+                |trie| {
+                    record_observations(
+                        ctx.get(),
+                        &world,
+                        sol.clone(),
+                        1,
+                        &progress_locations,
+                        trie,
+                    )
+                },
+                BatchSize::SmallInput,
+            );
         });
     }
 

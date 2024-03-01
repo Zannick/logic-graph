@@ -8,6 +8,7 @@ use crate::context::*;
 use crate::graph_enums::*;
 use crate::items::*;
 use crate::movements;
+use crate::observe::FullObservation;
 use crate::prices::Currency;
 use crate::rules;
 use analyzer::condense::{condense_graph, CondensedEdge};
@@ -158,39 +159,39 @@ impl world::Accessible for Location {
 
     fn can_access(&self, ctx: &Context, world: &World) -> bool {
         ctx.can_afford(&self.price) && match self.id {
-            LocationId::Deku_Tree__Back_Room__Northwest__Break_Wall => rules::access_deku_back_room_web_and_can_blast_or_smash(&ctx, world),
-            LocationId::Deku_Tree__Back_Room__Northwest__Burn_Web => rules::access_has_fire_source_with_torch_or_can_use__bow(&ctx, world),
-            LocationId::Deku_Tree__Basement_1__Center__Vines_GS => rules::access_is_adult_or_sticks_or_kokiri_sword(&ctx, world),
-            LocationId::Deku_Tree__Basement_1__Corner__Burn_Basement_Web => rules::access_deku_basement_block_and_is_child_and_sticks(&ctx, world),
-            LocationId::Deku_Tree__Basement_1__Corner__Chest => rules::access_deku_basement_switch(&ctx, world),
-            LocationId::Deku_Tree__Basement_1__Corner__Gate_GS => rules::access_is_adult_or_can_child_attack(&ctx, world),
+            LocationId::Deku_Tree__Back_Room__Northwest__Break_Wall => rules::access_deku_back_room_web_and_can_blast_or_smash(ctx, world),
+            LocationId::Deku_Tree__Back_Room__Northwest__Burn_Web => rules::access_has_fire_source_with_torch_or_can_use__bow(ctx, world),
+            LocationId::Deku_Tree__Basement_1__Center__Vines_GS => rules::access_is_adult_or_sticks_or_kokiri_sword(ctx, world),
+            LocationId::Deku_Tree__Basement_1__Corner__Burn_Basement_Web => rules::access_deku_basement_block_and_is_child_and_sticks(ctx, world),
+            LocationId::Deku_Tree__Basement_1__Corner__Chest => rules::access_deku_basement_switch(ctx, world),
+            LocationId::Deku_Tree__Basement_1__Corner__Gate_GS => rules::access_is_adult_or_can_child_attack(ctx, world),
             LocationId::Deku_Tree__Basement_1__Corner__Switch => true,
-            LocationId::Deku_Tree__Basement_2__Boss_Door__Scrubs => rules::access_has_shield(&ctx, world),
+            LocationId::Deku_Tree__Basement_2__Boss_Door__Scrubs => rules::access_has_shield(ctx, world),
             LocationId::Deku_Tree__Basement_Ledge__Block__Push_Block => true,
-            LocationId::Deku_Tree__Basement_Ledge__Web__Burn_Web => rules::access_has_fire_source(&ctx, world),
-            LocationId::Deku_Tree__Boss_Room__Arena__Blue_Warp => rules::access_defeat_gohma(&ctx, world),
-            LocationId::Deku_Tree__Boss_Room__Arena__Gohma => rules::access___nuts_or_can_use__slingshot_and_can_jumpslash(&ctx, world),
-            LocationId::Deku_Tree__Boss_Room__Arena__Gohma_Heart => rules::access_defeat_gohma(&ctx, world),
-            LocationId::Deku_Tree__Boss_Room__Arena__Gohma_Quick_Kill => rules::access_nuts_and_has_shield_and_if___is_child____sticks__else____biggoron_sword_(&ctx, world),
+            LocationId::Deku_Tree__Basement_Ledge__Web__Burn_Web => rules::access_has_fire_source(ctx, world),
+            LocationId::Deku_Tree__Boss_Room__Arena__Blue_Warp => rules::access_defeat_gohma(ctx, world),
+            LocationId::Deku_Tree__Boss_Room__Arena__Gohma => rules::access___nuts_or_can_use__slingshot_and_can_jumpslash(ctx, world),
+            LocationId::Deku_Tree__Boss_Room__Arena__Gohma_Heart => rules::access_defeat_gohma(ctx, world),
+            LocationId::Deku_Tree__Boss_Room__Arena__Gohma_Quick_Kill => rules::access_nuts_and_has_shield_and_if___is_child____sticks__else____biggoron_sword_(ctx, world),
             LocationId::Deku_Tree__Compass_Room__Compass__Chest => true,
-            LocationId::Deku_Tree__Compass_Room__Entry__Burn_Web => rules::access_is_child_and_sticks_and_nuts(&ctx, world),
+            LocationId::Deku_Tree__Compass_Room__Entry__Burn_Web => rules::access_is_child_and_sticks_and_nuts(ctx, world),
             LocationId::Deku_Tree__Compass_Room__Ledge__Chest => true,
-            LocationId::Deku_Tree__Compass_Room__Ledge__GS => rules::access_is_adult_or_can_child_attack(&ctx, world),
+            LocationId::Deku_Tree__Compass_Room__Ledge__GS => rules::access_is_adult_or_can_child_attack(ctx, world),
             LocationId::Deku_Tree__Floor_2__Vines__Map_Chest => true,
-            LocationId::Deku_Tree__Floor_3__Door__Break_Web => rules::access_is_adult_or_can_child_attack_or_nuts(&ctx, world),
-            LocationId::Deku_Tree__Lobby__Center__Deku_Baba_Nuts => rules::access_is_adult_or_slingshot_or_sticks_or_kokiri_sword(&ctx, world),
-            LocationId::Deku_Tree__Lobby__Center__Deku_Baba_Sticks => rules::access_is_adult_or_kokiri_sword_or_boomerang(&ctx, world),
-            LocationId::Deku_Tree__Lobby__Center__Web => rules::access_false(&ctx, world),
-            LocationId::Deku_Tree__Scrub_Room__Entry__Scrub => rules::access_has_shield(&ctx, world),
-            LocationId::Deku_Tree__Skull_Room__Entry__GS => rules::access_can_use__boomerang_or_can_use__hookshot(&ctx, world),
+            LocationId::Deku_Tree__Floor_3__Door__Break_Web => rules::access_is_adult_or_can_child_attack_or_nuts(ctx, world),
+            LocationId::Deku_Tree__Lobby__Center__Deku_Baba_Nuts => rules::access_is_adult_or_slingshot_or_sticks_or_kokiri_sword(ctx, world),
+            LocationId::Deku_Tree__Lobby__Center__Deku_Baba_Sticks => rules::access_is_adult_or_kokiri_sword_or_boomerang(ctx, world),
+            LocationId::Deku_Tree__Lobby__Center__Web => rules::access_false(ctx, world),
+            LocationId::Deku_Tree__Scrub_Room__Entry__Scrub => rules::access_has_shield(ctx, world),
+            LocationId::Deku_Tree__Skull_Room__Entry__GS => rules::access_can_use__boomerang_or_can_use__hookshot(ctx, world),
             LocationId::Deku_Tree__Slingshot_Room__Slingshot__Chest => true,
             LocationId::Deku_Tree__Slingshot_Upper__Ledge__Chest => true,
-            LocationId::Kak__Spider_House__Entry__Skulls_10 => rules::access_gold_skulltula_token__10(&ctx, world),
-            LocationId::KF__Baba_Corridor__Deku_Babas__Nuts => rules::access_is_adult(&ctx, world),
-            LocationId::KF__Baba_Corridor__Deku_Babas__Sticks => rules::access_is_adult_or_kokiri_sword_or_boomerang(&ctx, world),
+            LocationId::Kak__Spider_House__Entry__Skulls_10 => rules::access_gold_skulltula_token__10(ctx, world),
+            LocationId::KF__Baba_Corridor__Deku_Babas__Nuts => rules::access_is_adult(ctx, world),
+            LocationId::KF__Baba_Corridor__Deku_Babas__Sticks => rules::access_is_adult_or_kokiri_sword_or_boomerang(ctx, world),
             LocationId::KF__Boulder_Maze__Reward__Chest => true,
-            LocationId::KF__Kokiri_Village__Midos_Guardpost__Show_Mido => rules::access_is_child_and_kokiri_sword_and_deku_shield(&ctx, world),
-            LocationId::KF__Kokiri_Village__Training_Center__Victory => rules::access_objective(&ctx, world),
+            LocationId::KF__Kokiri_Village__Midos_Guardpost__Show_Mido => rules::access_is_child_and_kokiri_sword_and_deku_shield(ctx, world),
+            LocationId::KF__Kokiri_Village__Training_Center__Victory => rules::access_objective(ctx, world),
             LocationId::KF__Midos_House__Entry__Bottom_Left_Chest => true,
             LocationId::KF__Midos_House__Entry__Bottom_Right_Chest => true,
             LocationId::KF__Midos_House__Entry__Top_Left_Chest => true,
@@ -206,6 +207,37 @@ impl world::Accessible for Location {
             LocationId::KF__Shop__Entry__Item_6 => true,
             LocationId::KF__Shop__Entry__Item_7 => true,
             LocationId::KF__Shop__Entry__Item_8 => true,
+        }
+    }
+    fn observe_access(&self, ctx: &Context, world: &World, full_obs: &mut FullObservation) -> bool {
+        ctx.observe_afford(&self.price, full_obs);
+        match self.id {
+            LocationId::Deku_Tree__Back_Room__Northwest__Break_Wall => rules::observe_access_deku_back_room_web_and_can_blast_or_smash(ctx, world, full_obs),
+            LocationId::Deku_Tree__Back_Room__Northwest__Burn_Web => rules::observe_access_has_fire_source_with_torch_or_can_use__bow(ctx, world, full_obs),
+            LocationId::Deku_Tree__Basement_1__Center__Vines_GS => rules::observe_access_is_adult_or_sticks_or_kokiri_sword(ctx, world, full_obs),
+            LocationId::Deku_Tree__Basement_1__Corner__Burn_Basement_Web => rules::observe_access_deku_basement_block_and_is_child_and_sticks(ctx, world, full_obs),
+            LocationId::Deku_Tree__Basement_1__Corner__Chest => rules::observe_access_deku_basement_switch(ctx, world, full_obs),
+            LocationId::Deku_Tree__Basement_1__Corner__Gate_GS => rules::observe_access_is_adult_or_can_child_attack(ctx, world, full_obs),
+            LocationId::Deku_Tree__Basement_2__Boss_Door__Scrubs => rules::observe_access_has_shield(ctx, world, full_obs),
+            LocationId::Deku_Tree__Basement_Ledge__Web__Burn_Web => rules::observe_access_has_fire_source(ctx, world, full_obs),
+            LocationId::Deku_Tree__Boss_Room__Arena__Blue_Warp => rules::observe_access_defeat_gohma(ctx, world, full_obs),
+            LocationId::Deku_Tree__Boss_Room__Arena__Gohma => rules::observe_access___nuts_or_can_use__slingshot_and_can_jumpslash(ctx, world, full_obs),
+            LocationId::Deku_Tree__Boss_Room__Arena__Gohma_Heart => rules::observe_access_defeat_gohma(ctx, world, full_obs),
+            LocationId::Deku_Tree__Boss_Room__Arena__Gohma_Quick_Kill => rules::observe_access_nuts_and_has_shield_and_if___is_child____sticks__else____biggoron_sword_(ctx, world, full_obs),
+            LocationId::Deku_Tree__Compass_Room__Entry__Burn_Web => rules::observe_access_is_child_and_sticks_and_nuts(ctx, world, full_obs),
+            LocationId::Deku_Tree__Compass_Room__Ledge__GS => rules::observe_access_is_adult_or_can_child_attack(ctx, world, full_obs),
+            LocationId::Deku_Tree__Floor_3__Door__Break_Web => rules::observe_access_is_adult_or_can_child_attack_or_nuts(ctx, world, full_obs),
+            LocationId::Deku_Tree__Lobby__Center__Deku_Baba_Nuts => rules::observe_access_is_adult_or_slingshot_or_sticks_or_kokiri_sword(ctx, world, full_obs),
+            LocationId::Deku_Tree__Lobby__Center__Deku_Baba_Sticks => rules::observe_access_is_adult_or_kokiri_sword_or_boomerang(ctx, world, full_obs),
+            LocationId::Deku_Tree__Lobby__Center__Web => rules::observe_access_false(ctx, world, full_obs),
+            LocationId::Deku_Tree__Scrub_Room__Entry__Scrub => rules::observe_access_has_shield(ctx, world, full_obs),
+            LocationId::Deku_Tree__Skull_Room__Entry__GS => rules::observe_access_can_use__boomerang_or_can_use__hookshot(ctx, world, full_obs),
+            LocationId::Kak__Spider_House__Entry__Skulls_10 => rules::observe_access_gold_skulltula_token__10(ctx, world, full_obs),
+            LocationId::KF__Baba_Corridor__Deku_Babas__Nuts => rules::observe_access_is_adult(ctx, world, full_obs),
+            LocationId::KF__Baba_Corridor__Deku_Babas__Sticks => rules::observe_access_is_adult_or_kokiri_sword_or_boomerang(ctx, world, full_obs),
+            LocationId::KF__Kokiri_Village__Midos_Guardpost__Show_Mido => rules::observe_access_is_child_and_kokiri_sword_and_deku_shield(ctx, world, full_obs),
+            LocationId::KF__Kokiri_Village__Training_Center__Victory => rules::observe_access_objective(ctx, world, full_obs),
+            _ => true,
         }
     }
     fn base_time(&self) -> u32 {
@@ -293,36 +325,36 @@ impl world::Accessible for Exit {
         ctx.can_afford(&self.price)
             && match self.id {
                 ExitId::Deku_Tree__Back_Room__East__ex__Basement_Ledge__Web_1 => {
-                    rules::access_is_child(&ctx, world)
+                    rules::access_is_child(ctx, world)
                 }
                 ExitId::Deku_Tree__Back_Room__Northwest__ex__Skull_Room__Entry_1 => {
-                    rules::access_deku_back_room_web_and_deku_back_room_wall(&ctx, world)
+                    rules::access_deku_back_room_web_and_deku_back_room_wall(ctx, world)
                 }
                 ExitId::Deku_Tree__Basement_1__Center__ex__Lobby__Center_1 => true,
                 ExitId::Deku_Tree__Basement_1__Corner__Burn_Basement_Web => {
-                    rules::access_deku_basement_block_and_is_child_and_sticks(&ctx, world)
+                    rules::access_deku_basement_block_and_is_child_and_sticks(ctx, world)
                 }
                 ExitId::Deku_Tree__Basement_1__Corner__ex__Basement_Ledge__Block_1 => {
-                    rules::access_is_adult_or_deku_basement_block(&ctx, world)
+                    rules::access_is_adult_or_deku_basement_block(ctx, world)
                 }
                 ExitId::Deku_Tree__Basement_1__South_Door__ex__Back_Room__South_1 => true,
                 ExitId::Deku_Tree__Basement_2__Boss_Door__ex__Boss_Room__Entry_1 => {
-                    rules::access_deku_basement_scrubs(&ctx, world)
+                    rules::access_deku_basement_scrubs(ctx, world)
                 }
                 ExitId::Deku_Tree__Basement_2__Pool__ex__Basement_Ledge__Web_1 => true,
                 ExitId::Deku_Tree__Basement_Ledge__Block__ex__Basement_1__Corner_1 => true,
                 ExitId::Deku_Tree__Basement_Ledge__Web__ex__Basement_2__Pool_1 => {
-                    rules::access_deku_basement_web(&ctx, world)
+                    rules::access_deku_basement_web(ctx, world)
                 }
                 ExitId::Deku_Tree__Boss_Room__Arena__Blue_Warp => {
-                    rules::access_defeat_gohma(&ctx, world)
+                    rules::access_defeat_gohma(ctx, world)
                 }
                 ExitId::Deku_Tree__Compass_Room__Entry__Burn_Web => {
-                    rules::access_is_child_and_sticks_and_nuts(&ctx, world)
+                    rules::access_is_child_and_sticks_and_nuts(ctx, world)
                 }
                 ExitId::Deku_Tree__Compass_Room__Entry__ex__Floor_3__Door_1 => {
                     rules::access_deku_tree__compass_room__entry__ex__floor_3__door_1__req(
-                        &ctx, world,
+                        ctx, world,
                     )
                 }
                 ExitId::Deku_Tree__Floor_2__Lower__ex__Lobby__Center_1 => true,
@@ -332,28 +364,28 @@ impl world::Accessible for Exit {
                 ExitId::Deku_Tree__Floor_2__Slingshot_Door__ex__Scrub_Room__Entry_1 => true,
                 ExitId::Deku_Tree__Floor_2__Vines__ex__Floor_3__Climb_1 => true,
                 ExitId::Deku_Tree__Floor_2__Vines__ex__Floor_3__Climb_2 => {
-                    rules::access_can_use__slingshot(&ctx, world)
+                    rules::access_can_use__slingshot(ctx, world)
                 }
                 ExitId::Deku_Tree__Floor_2__Vines__ex__Lobby__Center_1 => true,
                 ExitId::Deku_Tree__Floor_2__Vines__ex__Lobby__Entry_1 => true,
                 ExitId::Deku_Tree__Floor_2__Vines__ex__Lobby__Vines_1 => true,
                 ExitId::Deku_Tree__Floor_3__Door__Break_Web => {
-                    rules::access_is_adult_or_can_child_attack_or_nuts(&ctx, world)
+                    rules::access_is_adult_or_can_child_attack_or_nuts(ctx, world)
                 }
                 ExitId::Deku_Tree__Floor_3__Door__ex__Compass_Room__Entry_1 => true,
                 ExitId::Deku_Tree__Floor_3__Door__ex__Lobby__Center_1 => {
-                    rules::access_is_adult_or_can_child_attack_or_nuts(&ctx, world)
+                    rules::access_is_adult_or_can_child_attack_or_nuts(ctx, world)
                 }
                 ExitId::Deku_Tree__Lobby__Center__ex__Basement_1__Center_1 => {
-                    rules::access_deku_lobby_web(&ctx, world)
+                    rules::access_deku_lobby_web(ctx, world)
                 }
                 ExitId::Deku_Tree__Lobby__Center__ex__Basement_Ledge__Block_1 => {
-                    rules::access_deku_lobby_web_and_logic_deku_b1_skip(&ctx, world)
+                    rules::access_deku_lobby_web_and_logic_deku_b1_skip(ctx, world)
                 }
                 ExitId::Deku_Tree__Lobby__Vines__ex__Floor_2__Lower_1 => true,
                 ExitId::Deku_Tree__Scrub_Room__Entry__ex__Floor_2__Slingshot_Door_1 => true,
                 ExitId::Deku_Tree__Scrub_Room__Rear__ex__Slingshot_Room__Entry_1 => {
-                    rules::access_deku_slingshot_scrub(&ctx, world)
+                    rules::access_deku_slingshot_scrub(ctx, world)
                 }
                 ExitId::Deku_Tree__Skull_Room__Entry__ex__Back_Room__Northwest_1 => true,
                 ExitId::Deku_Tree__Slingshot_Room__Entry__ex__Scrub_Room__Rear_1 => true,
@@ -365,7 +397,7 @@ impl world::Accessible for Exit {
                     true
                 }
                 ExitId::KF__Boulder_Maze__Entry__ex__Kokiri_Village__Training_Center_1 => {
-                    rules::access_is_child(&ctx, world)
+                    rules::access_is_child(ctx, world)
                 }
                 ExitId::KF__Know_it_all_House__Entry__ex__Kokiri_Village__Know_it_all_Porch_1 => {
                     true
@@ -375,13 +407,13 @@ impl world::Accessible for Exit {
                 }
                 ExitId::KF__Kokiri_Village__Links_Porch__ex__Links_House__Entry_1 => true,
                 ExitId::KF__Kokiri_Village__Midos_Guardpost__ex__Baba_Corridor__Village_Side_1 => {
-                    rules::access_is_adult_or_showed_mido(&ctx, world)
+                    rules::access_is_adult_or_showed_mido(ctx, world)
                 }
                 ExitId::KF__Kokiri_Village__Midos_Porch__ex__Midos_House__Entry_1 => true,
                 ExitId::KF__Kokiri_Village__Sarias_Porch__ex__Kak__Spider_House__Entry_1 => true,
                 ExitId::KF__Kokiri_Village__Shop_Porch__ex__Shop__Entry_1 => true,
                 ExitId::KF__Kokiri_Village__Training_Center__ex__Boulder_Maze__Entry_1 => {
-                    rules::access_is_child(&ctx, world)
+                    rules::access_is_child(ctx, world)
                 }
                 ExitId::KF__Links_House__Entry__ex__Kokiri_Village__Links_Porch_1 => true,
                 ExitId::KF__Midos_House__Entry__ex__Kokiri_Village__Midos_Porch_1 => true,
@@ -389,6 +421,72 @@ impl world::Accessible for Exit {
                 ExitId::KF__Outside_Deku_Tree__Mouth__ex__Deku_Tree__Lobby__Entry_1 => true,
                 ExitId::KF__Shop__Entry__ex__Kokiri_Village__Shop_Porch_1 => true,
             }
+    }
+    fn observe_access(&self, ctx: &Context, world: &World, full_obs: &mut FullObservation) -> bool {
+        ctx.observe_afford(&self.price, full_obs);
+        match self.id {
+            ExitId::Deku_Tree__Back_Room__East__ex__Basement_Ledge__Web_1 => {
+                rules::observe_access_is_child(ctx, world, full_obs)
+            }
+            ExitId::Deku_Tree__Back_Room__Northwest__ex__Skull_Room__Entry_1 => {
+                rules::observe_access_deku_back_room_web_and_deku_back_room_wall(
+                    ctx, world, full_obs,
+                )
+            }
+            ExitId::Deku_Tree__Basement_1__Corner__Burn_Basement_Web => {
+                rules::observe_access_deku_basement_block_and_is_child_and_sticks(
+                    ctx, world, full_obs,
+                )
+            }
+            ExitId::Deku_Tree__Basement_1__Corner__ex__Basement_Ledge__Block_1 => {
+                rules::observe_access_is_adult_or_deku_basement_block(ctx, world, full_obs)
+            }
+            ExitId::Deku_Tree__Basement_2__Boss_Door__ex__Boss_Room__Entry_1 => {
+                rules::observe_access_deku_basement_scrubs(ctx, world, full_obs)
+            }
+            ExitId::Deku_Tree__Basement_Ledge__Web__ex__Basement_2__Pool_1 => {
+                rules::observe_access_deku_basement_web(ctx, world, full_obs)
+            }
+            ExitId::Deku_Tree__Boss_Room__Arena__Blue_Warp => {
+                rules::observe_access_defeat_gohma(ctx, world, full_obs)
+            }
+            ExitId::Deku_Tree__Compass_Room__Entry__Burn_Web => {
+                rules::observe_access_is_child_and_sticks_and_nuts(ctx, world, full_obs)
+            }
+            ExitId::Deku_Tree__Compass_Room__Entry__ex__Floor_3__Door_1 => {
+                rules::observe_access_deku_tree__compass_room__entry__ex__floor_3__door_1__req(
+                    ctx, world, full_obs,
+                )
+            }
+            ExitId::Deku_Tree__Floor_2__Vines__ex__Floor_3__Climb_2 => {
+                rules::observe_access_can_use__slingshot(ctx, world, full_obs)
+            }
+            ExitId::Deku_Tree__Floor_3__Door__Break_Web => {
+                rules::observe_access_is_adult_or_can_child_attack_or_nuts(ctx, world, full_obs)
+            }
+            ExitId::Deku_Tree__Floor_3__Door__ex__Lobby__Center_1 => {
+                rules::observe_access_is_adult_or_can_child_attack_or_nuts(ctx, world, full_obs)
+            }
+            ExitId::Deku_Tree__Lobby__Center__ex__Basement_1__Center_1 => {
+                rules::observe_access_deku_lobby_web(ctx, world, full_obs)
+            }
+            ExitId::Deku_Tree__Lobby__Center__ex__Basement_Ledge__Block_1 => {
+                rules::observe_access_deku_lobby_web_and_logic_deku_b1_skip(ctx, world, full_obs)
+            }
+            ExitId::Deku_Tree__Scrub_Room__Rear__ex__Slingshot_Room__Entry_1 => {
+                rules::observe_access_deku_slingshot_scrub(ctx, world, full_obs)
+            }
+            ExitId::KF__Boulder_Maze__Entry__ex__Kokiri_Village__Training_Center_1 => {
+                rules::observe_access_is_child(ctx, world, full_obs)
+            }
+            ExitId::KF__Kokiri_Village__Midos_Guardpost__ex__Baba_Corridor__Village_Side_1 => {
+                rules::observe_access_is_adult_or_showed_mido(ctx, world, full_obs)
+            }
+            ExitId::KF__Kokiri_Village__Training_Center__ex__Boulder_Maze__Entry_1 => {
+                rules::observe_access_is_child(ctx, world, full_obs)
+            }
+            _ => true,
+        }
     }
     fn base_time(&self) -> u32 {
         self.time
@@ -544,12 +642,23 @@ impl world::Accessible for Action {
         ctx.can_afford(&self.price)
             && match self.id {
                 ActionId::Deku_Tree__Compass_Room__Entry__Light_Torch => {
-                    rules::access_deku_tree__compass_room__entry__light_torch__req(&ctx, world)
+                    rules::access_deku_tree__compass_room__entry__light_torch__req(ctx, world)
                 }
                 ActionId::Global__Change_Time => true,
                 ActionId::KF__Kokiri_Village__Midos_Porch__Gather_Rupees => true,
                 ActionId::KF__Kokiri_Village__Sarias_Porch__Save => true,
             }
+    }
+    fn observe_access(&self, ctx: &Context, world: &World, full_obs: &mut FullObservation) -> bool {
+        ctx.observe_afford(&self.price, full_obs);
+        match self.id {
+            ActionId::Deku_Tree__Compass_Room__Entry__Light_Torch => {
+                rules::observe_access_deku_tree__compass_room__entry__light_torch__req(
+                    ctx, world, full_obs,
+                )
+            }
+            _ => true,
+        }
     }
     fn base_time(&self) -> u32 {
         self.time
@@ -614,6 +723,26 @@ impl world::Action for Action {
             _ => SpotId::None,
         }
     }
+    fn observe_effects(&self, ctx: &Context, world: &World, full_obs: &mut FullObservation) {
+        match self.id {
+            ActionId::Global__Change_Time => {
+                rules::observe_action_tod_set_match_tod____day_setgt_night_night_setgt_day___setgt_day_(ctx, world, full_obs);
+            }
+            ActionId::Deku_Tree__Compass_Room__Entry__Light_Torch => {
+                rules::observe_action_deku_tree__compass_room__entry__light_torch__do(
+                    ctx, world, full_obs,
+                );
+            }
+            ActionId::KF__Kokiri_Village__Midos_Porch__Gather_Rupees => {
+                rules::observe_action_rupees_set_max__rupees_add_20_wallet_max(
+                    ctx, world, full_obs,
+                );
+            }
+            ActionId::KF__Kokiri_Village__Sarias_Porch__Save => {
+                rules::observe_action_save_set_position(ctx, world, full_obs);
+            }
+        }
+    }
 }
 
 #[derive(Copy, Clone, Debug)]
@@ -633,6 +762,15 @@ impl world::Accessible for Warp {
                 WarpId::Minuet => rules::access_can_play__minuet_of_forest(ctx, world),
                 WarpId::Save => true,
             }
+    }
+    fn observe_access(&self, ctx: &Context, world: &World, full_obs: &mut FullObservation) -> bool {
+        ctx.observe_afford(&self.price, full_obs);
+        match self.id {
+            WarpId::Minuet => {
+                rules::observe_access_can_play__minuet_of_forest(ctx, world, full_obs)
+            }
+            _ => true,
+        }
     }
     fn base_time(&self) -> u32 {
         self.time
@@ -693,6 +831,12 @@ impl world::Warp for Warp {
         match self.id {
             WarpId::Minuet => false,
             WarpId::Save => false,
+        }
+    }
+    fn observe_effects(&self, ctx: &Context, world: &World, full_obs: &mut FullObservation) {
+        match self.id {
+            WarpId::Minuet => {}
+            WarpId::Save => {}
         }
     }
 }
@@ -858,6 +1002,9 @@ lazy_static! {
 pub struct World {
     pub rule_victory: RuleVictory,
     pub rule_objective: RuleObjective,
+    // settings
+    pub triforce_count: i16,
+    pub logic_deku_b1_skip: bool,
     // These are arrays that group the items together by their parent.
     // Using EnumMap for this ONLY WORKS if the keys are properly ordered to group
     // nearby things together.
@@ -1488,6 +1635,8 @@ impl World {
         World {
             rule_victory: RuleVictory::default(),
             rule_objective: RuleObjective::default(),
+            triforce_count: Default::default(),
+            logic_deku_b1_skip: Default::default(),
             locations: build_locations(),
             exits: build_exits(),
             actions: build_actions(),

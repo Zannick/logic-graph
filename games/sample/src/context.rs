@@ -7,9 +7,11 @@ use crate::graph::{self, *};
 use crate::graph_enums::*;
 use crate::items::Item;
 use crate::movements;
+use crate::observe::*;
 use crate::prices::Currency;
 use crate::rules;
 use analyzer::context;
+use analyzer::matchertrie::IntegerObservation;
 use analyzer::world::World;
 use enum_map::EnumMap;
 use serde::{Deserialize, Serialize};
@@ -83,6 +85,7 @@ pub enum Expectation {
     KokiriSword(bool),
     MagicMeter(bool),
     Ocarina(bool),
+    ProgressiveWallet(i8),
     ShowedMido(bool),
     Slingshot(bool),
     TriforcePiece(i16),
@@ -138,69 +141,69 @@ bitflags!{
     pub struct ContextBits1 : u64 {
         const CHILD = 0x1;
         const DEKU_TREE__COMPASS_ROOM__CTX__TORCH = 0x2;
-        const LOGIC_DEKU_B1_SKIP = 0x4;
-        const BIGGORON_SWORD = 0x8;
-        const BOMBS = 0x10;
-        const BOOMERANG = 0x20;
-        const BOW = 0x40;
-        const BUY_DEKU_NUT_10 = 0x80;
-        const BUY_DEKU_NUT_5 = 0x100;
-        const BUY_DEKU_SHIELD = 0x200;
-        const BUY_DEKU_STICK_1 = 0x400;
-        const DEFEAT_GANON = 0x800;
-        const DEFEAT_GOHMA = 0x1000;
-        const DEKU_BACK_ROOM_WALL = 0x2000;
-        const DEKU_BACK_ROOM_WEB = 0x4000;
-        const DEKU_BASEMENT_BLOCK = 0x8000;
-        const DEKU_BASEMENT_SCRUBS = 0x10000;
-        const DEKU_BASEMENT_SWITCH = 0x20000;
-        const DEKU_BASEMENT_WEB = 0x40000;
-        const DEKU_LOBBY_WEB = 0x80000;
-        const DEKU_NUT_DROP = 0x100000;
-        const DEKU_SHIELD_DROP = 0x200000;
-        const DEKU_SLINGSHOT_SCRUB = 0x400000;
-        const DEKU_STICK_DROP = 0x800000;
-        const HYLIAN_SHIELD = 0x1000000;
-        const KOKIRI_EMERALD = 0x2000000;
-        const KOKIRI_SWORD = 0x4000000;
-        const MAGIC_METER = 0x8000000;
-        const OCARINA = 0x10000000;
-        const SHOWED_MIDO = 0x20000000;
-        const SLINGSHOT = 0x40000000;
-        const VICTORY = 0x80000000;
-        const VISITED_DEKU_TREE__BACK_ROOM__NORTHWEST__BREAK_WALL = 0x100000000;
-        const VISITED_DEKU_TREE__BACK_ROOM__NORTHWEST__BURN_WEB = 0x200000000;
-        const VISITED_DEKU_TREE__BASEMENT_1__CENTER__VINES_GS = 0x400000000;
-        const VISITED_DEKU_TREE__BASEMENT_1__CORNER__BURN_BASEMENT_WEB = 0x800000000;
-        const VISITED_DEKU_TREE__BASEMENT_1__CORNER__CHEST = 0x1000000000;
-        const VISITED_DEKU_TREE__BASEMENT_1__CORNER__GATE_GS = 0x2000000000;
-        const VISITED_DEKU_TREE__BASEMENT_1__CORNER__SWITCH = 0x4000000000;
-        const VISITED_DEKU_TREE__BASEMENT_2__BOSS_DOOR__SCRUBS = 0x8000000000;
-        const VISITED_DEKU_TREE__BASEMENT_LEDGE__BLOCK__PUSH_BLOCK = 0x10000000000;
-        const VISITED_DEKU_TREE__BASEMENT_LEDGE__WEB__BURN_WEB = 0x20000000000;
-        const VISITED_DEKU_TREE__BOSS_ROOM__ARENA__BLUE_WARP = 0x40000000000;
-        const VISITED_DEKU_TREE__BOSS_ROOM__ARENA__GOHMA = 0x80000000000;
-        const VISITED_DEKU_TREE__BOSS_ROOM__ARENA__GOHMA_HEART = 0x100000000000;
-        const VISITED_DEKU_TREE__BOSS_ROOM__ARENA__GOHMA_QUICK_KILL = 0x200000000000;
-        const VISITED_DEKU_TREE__COMPASS_ROOM__COMPASS__CHEST = 0x400000000000;
-        const VISITED_DEKU_TREE__COMPASS_ROOM__ENTRY__BURN_WEB = 0x800000000000;
-        const VISITED_DEKU_TREE__COMPASS_ROOM__LEDGE__CHEST = 0x1000000000000;
-        const VISITED_DEKU_TREE__COMPASS_ROOM__LEDGE__GS = 0x2000000000000;
-        const VISITED_DEKU_TREE__FLOOR_2__VINES__MAP_CHEST = 0x4000000000000;
-        const VISITED_DEKU_TREE__FLOOR_3__DOOR__BREAK_WEB = 0x8000000000000;
-        const VISITED_DEKU_TREE__LOBBY__CENTER__DEKU_BABA_NUTS = 0x10000000000000;
-        const VISITED_DEKU_TREE__LOBBY__CENTER__DEKU_BABA_STICKS = 0x20000000000000;
-        const VISITED_DEKU_TREE__LOBBY__CENTER__WEB = 0x40000000000000;
-        const VISITED_DEKU_TREE__SCRUB_ROOM__ENTRY__SCRUB = 0x80000000000000;
-        const VISITED_DEKU_TREE__SKULL_ROOM__ENTRY__GS = 0x100000000000000;
-        const VISITED_DEKU_TREE__SLINGSHOT_ROOM__SLINGSHOT__CHEST = 0x200000000000000;
-        const VISITED_DEKU_TREE__SLINGSHOT_UPPER__LEDGE__CHEST = 0x400000000000000;
-        const VISITED_KF__BABA_CORRIDOR__DEKU_BABAS__NUTS = 0x800000000000000;
-        const VISITED_KF__BABA_CORRIDOR__DEKU_BABAS__STICKS = 0x1000000000000000;
-        const VISITED_KF__BOULDER_MAZE__REWARD__CHEST = 0x2000000000000000;
-        const VISITED_KF__KOKIRI_VILLAGE__MIDOS_GUARDPOST__SHOW_MIDO = 0x4000000000000000;
-        const VISITED_KF__KOKIRI_VILLAGE__TRAINING_CENTER__VICTORY = 0x8000000000000000;
-        const ALL_VISIT_FLAGS = 0xffffffff00000000;
+        const BIGGORON_SWORD = 0x4;
+        const BOMBS = 0x8;
+        const BOOMERANG = 0x10;
+        const BOW = 0x20;
+        const BUY_DEKU_NUT_10 = 0x40;
+        const BUY_DEKU_NUT_5 = 0x80;
+        const BUY_DEKU_SHIELD = 0x100;
+        const BUY_DEKU_STICK_1 = 0x200;
+        const DEFEAT_GANON = 0x400;
+        const DEFEAT_GOHMA = 0x800;
+        const DEKU_BACK_ROOM_WALL = 0x1000;
+        const DEKU_BACK_ROOM_WEB = 0x2000;
+        const DEKU_BASEMENT_BLOCK = 0x4000;
+        const DEKU_BASEMENT_SCRUBS = 0x8000;
+        const DEKU_BASEMENT_SWITCH = 0x10000;
+        const DEKU_BASEMENT_WEB = 0x20000;
+        const DEKU_LOBBY_WEB = 0x40000;
+        const DEKU_NUT_DROP = 0x80000;
+        const DEKU_SHIELD_DROP = 0x100000;
+        const DEKU_SLINGSHOT_SCRUB = 0x200000;
+        const DEKU_STICK_DROP = 0x400000;
+        const HYLIAN_SHIELD = 0x800000;
+        const KOKIRI_EMERALD = 0x1000000;
+        const KOKIRI_SWORD = 0x2000000;
+        const MAGIC_METER = 0x4000000;
+        const OCARINA = 0x8000000;
+        const SHOWED_MIDO = 0x10000000;
+        const SLINGSHOT = 0x20000000;
+        const VICTORY = 0x40000000;
+        const VISITED_DEKU_TREE__BACK_ROOM__NORTHWEST__BREAK_WALL = 0x80000000;
+        const VISITED_DEKU_TREE__BACK_ROOM__NORTHWEST__BURN_WEB = 0x100000000;
+        const VISITED_DEKU_TREE__BASEMENT_1__CENTER__VINES_GS = 0x200000000;
+        const VISITED_DEKU_TREE__BASEMENT_1__CORNER__BURN_BASEMENT_WEB = 0x400000000;
+        const VISITED_DEKU_TREE__BASEMENT_1__CORNER__CHEST = 0x800000000;
+        const VISITED_DEKU_TREE__BASEMENT_1__CORNER__GATE_GS = 0x1000000000;
+        const VISITED_DEKU_TREE__BASEMENT_1__CORNER__SWITCH = 0x2000000000;
+        const VISITED_DEKU_TREE__BASEMENT_2__BOSS_DOOR__SCRUBS = 0x4000000000;
+        const VISITED_DEKU_TREE__BASEMENT_LEDGE__BLOCK__PUSH_BLOCK = 0x8000000000;
+        const VISITED_DEKU_TREE__BASEMENT_LEDGE__WEB__BURN_WEB = 0x10000000000;
+        const VISITED_DEKU_TREE__BOSS_ROOM__ARENA__BLUE_WARP = 0x20000000000;
+        const VISITED_DEKU_TREE__BOSS_ROOM__ARENA__GOHMA = 0x40000000000;
+        const VISITED_DEKU_TREE__BOSS_ROOM__ARENA__GOHMA_HEART = 0x80000000000;
+        const VISITED_DEKU_TREE__BOSS_ROOM__ARENA__GOHMA_QUICK_KILL = 0x100000000000;
+        const VISITED_DEKU_TREE__COMPASS_ROOM__COMPASS__CHEST = 0x200000000000;
+        const VISITED_DEKU_TREE__COMPASS_ROOM__ENTRY__BURN_WEB = 0x400000000000;
+        const VISITED_DEKU_TREE__COMPASS_ROOM__LEDGE__CHEST = 0x800000000000;
+        const VISITED_DEKU_TREE__COMPASS_ROOM__LEDGE__GS = 0x1000000000000;
+        const VISITED_DEKU_TREE__FLOOR_2__VINES__MAP_CHEST = 0x2000000000000;
+        const VISITED_DEKU_TREE__FLOOR_3__DOOR__BREAK_WEB = 0x4000000000000;
+        const VISITED_DEKU_TREE__LOBBY__CENTER__DEKU_BABA_NUTS = 0x8000000000000;
+        const VISITED_DEKU_TREE__LOBBY__CENTER__DEKU_BABA_STICKS = 0x10000000000000;
+        const VISITED_DEKU_TREE__LOBBY__CENTER__WEB = 0x20000000000000;
+        const VISITED_DEKU_TREE__SCRUB_ROOM__ENTRY__SCRUB = 0x40000000000000;
+        const VISITED_DEKU_TREE__SKULL_ROOM__ENTRY__GS = 0x80000000000000;
+        const VISITED_DEKU_TREE__SLINGSHOT_ROOM__SLINGSHOT__CHEST = 0x100000000000000;
+        const VISITED_DEKU_TREE__SLINGSHOT_UPPER__LEDGE__CHEST = 0x200000000000000;
+        const VISITED_KF__BABA_CORRIDOR__DEKU_BABAS__NUTS = 0x400000000000000;
+        const VISITED_KF__BABA_CORRIDOR__DEKU_BABAS__STICKS = 0x800000000000000;
+        const VISITED_KF__BOULDER_MAZE__REWARD__CHEST = 0x1000000000000000;
+        const VISITED_KF__KOKIRI_VILLAGE__MIDOS_GUARDPOST__SHOW_MIDO = 0x2000000000000000;
+        const VISITED_KF__KOKIRI_VILLAGE__TRAINING_CENTER__VICTORY = 0x4000000000000000;
+        const VISITED_KF__MIDOS_HOUSE__ENTRY__BOTTOM_LEFT_CHEST = 0x8000000000000000;
+        const ALL_VISIT_FLAGS = 0xffffffff80000000;
     }
 }
 impl Default for ContextBits1 {
@@ -211,72 +214,71 @@ impl Default for ContextBits1 {
 bitflags!{
     #[derive(Copy, Clone, Debug, Default, PartialEq, Eq, Hash, Serialize, Deserialize)]
     pub struct ContextBits2 : u64 {
-        const VISITED_KF__MIDOS_HOUSE__ENTRY__BOTTOM_LEFT_CHEST = 0x1;
-        const VISITED_KF__MIDOS_HOUSE__ENTRY__BOTTOM_RIGHT_CHEST = 0x2;
-        const VISITED_KF__MIDOS_HOUSE__ENTRY__TOP_LEFT_CHEST = 0x4;
-        const VISITED_KF__MIDOS_HOUSE__ENTRY__TOP_RIGHT_CHEST = 0x8;
-        const VISITED_KF__OUTSIDE_DEKU_TREE__LEFT__GOSSIP_STONE = 0x10;
-        const VISITED_KF__OUTSIDE_DEKU_TREE__RIGHT__GOSSIP_STONE = 0x20;
-        const VISITED_KF__SHOP__ENTRY__BLUE_RUPEE = 0x40;
-        const VISITED_KF__SHOP__ENTRY__ITEM_1 = 0x80;
-        const VISITED_KF__SHOP__ENTRY__ITEM_2 = 0x100;
-        const VISITED_KF__SHOP__ENTRY__ITEM_3 = 0x200;
-        const VISITED_KF__SHOP__ENTRY__ITEM_4 = 0x400;
-        const VISITED_KF__SHOP__ENTRY__ITEM_5 = 0x800;
-        const VISITED_KF__SHOP__ENTRY__ITEM_6 = 0x1000;
-        const VISITED_KF__SHOP__ENTRY__ITEM_7 = 0x2000;
-        const VISITED_KF__SHOP__ENTRY__ITEM_8 = 0x4000;
-        const VISITED_KAK__SPIDER_HOUSE__ENTRY__SKULLS_10 = 0x8000;
-        const SKIPPED_DEKU_TREE__BACK_ROOM__NORTHWEST__BREAK_WALL = 0x10000;
-        const SKIPPED_DEKU_TREE__BACK_ROOM__NORTHWEST__BURN_WEB = 0x20000;
-        const SKIPPED_DEKU_TREE__BASEMENT_1__CENTER__VINES_GS = 0x40000;
-        const SKIPPED_DEKU_TREE__BASEMENT_1__CORNER__BURN_BASEMENT_WEB = 0x80000;
-        const SKIPPED_DEKU_TREE__BASEMENT_1__CORNER__CHEST = 0x100000;
-        const SKIPPED_DEKU_TREE__BASEMENT_1__CORNER__GATE_GS = 0x200000;
-        const SKIPPED_DEKU_TREE__BASEMENT_1__CORNER__SWITCH = 0x400000;
-        const SKIPPED_DEKU_TREE__BASEMENT_2__BOSS_DOOR__SCRUBS = 0x800000;
-        const SKIPPED_DEKU_TREE__BASEMENT_LEDGE__BLOCK__PUSH_BLOCK = 0x1000000;
-        const SKIPPED_DEKU_TREE__BASEMENT_LEDGE__WEB__BURN_WEB = 0x2000000;
-        const SKIPPED_DEKU_TREE__BOSS_ROOM__ARENA__BLUE_WARP = 0x4000000;
-        const SKIPPED_DEKU_TREE__BOSS_ROOM__ARENA__GOHMA = 0x8000000;
-        const SKIPPED_DEKU_TREE__BOSS_ROOM__ARENA__GOHMA_HEART = 0x10000000;
-        const SKIPPED_DEKU_TREE__BOSS_ROOM__ARENA__GOHMA_QUICK_KILL = 0x20000000;
-        const SKIPPED_DEKU_TREE__COMPASS_ROOM__COMPASS__CHEST = 0x40000000;
-        const SKIPPED_DEKU_TREE__COMPASS_ROOM__ENTRY__BURN_WEB = 0x80000000;
-        const SKIPPED_DEKU_TREE__COMPASS_ROOM__LEDGE__CHEST = 0x100000000;
-        const SKIPPED_DEKU_TREE__COMPASS_ROOM__LEDGE__GS = 0x200000000;
-        const SKIPPED_DEKU_TREE__FLOOR_2__VINES__MAP_CHEST = 0x400000000;
-        const SKIPPED_DEKU_TREE__FLOOR_3__DOOR__BREAK_WEB = 0x800000000;
-        const SKIPPED_DEKU_TREE__LOBBY__CENTER__DEKU_BABA_NUTS = 0x1000000000;
-        const SKIPPED_DEKU_TREE__LOBBY__CENTER__DEKU_BABA_STICKS = 0x2000000000;
-        const SKIPPED_DEKU_TREE__LOBBY__CENTER__WEB = 0x4000000000;
-        const SKIPPED_DEKU_TREE__SCRUB_ROOM__ENTRY__SCRUB = 0x8000000000;
-        const SKIPPED_DEKU_TREE__SKULL_ROOM__ENTRY__GS = 0x10000000000;
-        const SKIPPED_DEKU_TREE__SLINGSHOT_ROOM__SLINGSHOT__CHEST = 0x20000000000;
-        const SKIPPED_DEKU_TREE__SLINGSHOT_UPPER__LEDGE__CHEST = 0x40000000000;
-        const SKIPPED_KF__BABA_CORRIDOR__DEKU_BABAS__NUTS = 0x80000000000;
-        const SKIPPED_KF__BABA_CORRIDOR__DEKU_BABAS__STICKS = 0x100000000000;
-        const SKIPPED_KF__BOULDER_MAZE__REWARD__CHEST = 0x200000000000;
-        const SKIPPED_KF__KOKIRI_VILLAGE__MIDOS_GUARDPOST__SHOW_MIDO = 0x400000000000;
-        const SKIPPED_KF__KOKIRI_VILLAGE__TRAINING_CENTER__VICTORY = 0x800000000000;
-        const SKIPPED_KF__MIDOS_HOUSE__ENTRY__BOTTOM_LEFT_CHEST = 0x1000000000000;
-        const SKIPPED_KF__MIDOS_HOUSE__ENTRY__BOTTOM_RIGHT_CHEST = 0x2000000000000;
-        const SKIPPED_KF__MIDOS_HOUSE__ENTRY__TOP_LEFT_CHEST = 0x4000000000000;
-        const SKIPPED_KF__MIDOS_HOUSE__ENTRY__TOP_RIGHT_CHEST = 0x8000000000000;
-        const SKIPPED_KF__OUTSIDE_DEKU_TREE__LEFT__GOSSIP_STONE = 0x10000000000000;
-        const SKIPPED_KF__OUTSIDE_DEKU_TREE__RIGHT__GOSSIP_STONE = 0x20000000000000;
-        const SKIPPED_KF__SHOP__ENTRY__BLUE_RUPEE = 0x40000000000000;
-        const SKIPPED_KF__SHOP__ENTRY__ITEM_1 = 0x80000000000000;
-        const SKIPPED_KF__SHOP__ENTRY__ITEM_2 = 0x100000000000000;
-        const SKIPPED_KF__SHOP__ENTRY__ITEM_3 = 0x200000000000000;
-        const SKIPPED_KF__SHOP__ENTRY__ITEM_4 = 0x400000000000000;
-        const SKIPPED_KF__SHOP__ENTRY__ITEM_5 = 0x800000000000000;
-        const SKIPPED_KF__SHOP__ENTRY__ITEM_6 = 0x1000000000000000;
-        const SKIPPED_KF__SHOP__ENTRY__ITEM_7 = 0x2000000000000000;
-        const SKIPPED_KF__SHOP__ENTRY__ITEM_8 = 0x4000000000000000;
-        const SKIPPED_KAK__SPIDER_HOUSE__ENTRY__SKULLS_10 = 0x8000000000000000;
-        const ALL_VISIT_FLAGS = 0xffff;
-        const ALL_SKIP_FLAGS = 0xffffffffffff0000;
+        const VISITED_KF__MIDOS_HOUSE__ENTRY__BOTTOM_RIGHT_CHEST = 0x1;
+        const VISITED_KF__MIDOS_HOUSE__ENTRY__TOP_LEFT_CHEST = 0x2;
+        const VISITED_KF__MIDOS_HOUSE__ENTRY__TOP_RIGHT_CHEST = 0x4;
+        const VISITED_KF__OUTSIDE_DEKU_TREE__LEFT__GOSSIP_STONE = 0x8;
+        const VISITED_KF__OUTSIDE_DEKU_TREE__RIGHT__GOSSIP_STONE = 0x10;
+        const VISITED_KF__SHOP__ENTRY__BLUE_RUPEE = 0x20;
+        const VISITED_KF__SHOP__ENTRY__ITEM_1 = 0x40;
+        const VISITED_KF__SHOP__ENTRY__ITEM_2 = 0x80;
+        const VISITED_KF__SHOP__ENTRY__ITEM_3 = 0x100;
+        const VISITED_KF__SHOP__ENTRY__ITEM_4 = 0x200;
+        const VISITED_KF__SHOP__ENTRY__ITEM_5 = 0x400;
+        const VISITED_KF__SHOP__ENTRY__ITEM_6 = 0x800;
+        const VISITED_KF__SHOP__ENTRY__ITEM_7 = 0x1000;
+        const VISITED_KF__SHOP__ENTRY__ITEM_8 = 0x2000;
+        const VISITED_KAK__SPIDER_HOUSE__ENTRY__SKULLS_10 = 0x4000;
+        const SKIPPED_DEKU_TREE__BACK_ROOM__NORTHWEST__BREAK_WALL = 0x8000;
+        const SKIPPED_DEKU_TREE__BACK_ROOM__NORTHWEST__BURN_WEB = 0x10000;
+        const SKIPPED_DEKU_TREE__BASEMENT_1__CENTER__VINES_GS = 0x20000;
+        const SKIPPED_DEKU_TREE__BASEMENT_1__CORNER__BURN_BASEMENT_WEB = 0x40000;
+        const SKIPPED_DEKU_TREE__BASEMENT_1__CORNER__CHEST = 0x80000;
+        const SKIPPED_DEKU_TREE__BASEMENT_1__CORNER__GATE_GS = 0x100000;
+        const SKIPPED_DEKU_TREE__BASEMENT_1__CORNER__SWITCH = 0x200000;
+        const SKIPPED_DEKU_TREE__BASEMENT_2__BOSS_DOOR__SCRUBS = 0x400000;
+        const SKIPPED_DEKU_TREE__BASEMENT_LEDGE__BLOCK__PUSH_BLOCK = 0x800000;
+        const SKIPPED_DEKU_TREE__BASEMENT_LEDGE__WEB__BURN_WEB = 0x1000000;
+        const SKIPPED_DEKU_TREE__BOSS_ROOM__ARENA__BLUE_WARP = 0x2000000;
+        const SKIPPED_DEKU_TREE__BOSS_ROOM__ARENA__GOHMA = 0x4000000;
+        const SKIPPED_DEKU_TREE__BOSS_ROOM__ARENA__GOHMA_HEART = 0x8000000;
+        const SKIPPED_DEKU_TREE__BOSS_ROOM__ARENA__GOHMA_QUICK_KILL = 0x10000000;
+        const SKIPPED_DEKU_TREE__COMPASS_ROOM__COMPASS__CHEST = 0x20000000;
+        const SKIPPED_DEKU_TREE__COMPASS_ROOM__ENTRY__BURN_WEB = 0x40000000;
+        const SKIPPED_DEKU_TREE__COMPASS_ROOM__LEDGE__CHEST = 0x80000000;
+        const SKIPPED_DEKU_TREE__COMPASS_ROOM__LEDGE__GS = 0x100000000;
+        const SKIPPED_DEKU_TREE__FLOOR_2__VINES__MAP_CHEST = 0x200000000;
+        const SKIPPED_DEKU_TREE__FLOOR_3__DOOR__BREAK_WEB = 0x400000000;
+        const SKIPPED_DEKU_TREE__LOBBY__CENTER__DEKU_BABA_NUTS = 0x800000000;
+        const SKIPPED_DEKU_TREE__LOBBY__CENTER__DEKU_BABA_STICKS = 0x1000000000;
+        const SKIPPED_DEKU_TREE__LOBBY__CENTER__WEB = 0x2000000000;
+        const SKIPPED_DEKU_TREE__SCRUB_ROOM__ENTRY__SCRUB = 0x4000000000;
+        const SKIPPED_DEKU_TREE__SKULL_ROOM__ENTRY__GS = 0x8000000000;
+        const SKIPPED_DEKU_TREE__SLINGSHOT_ROOM__SLINGSHOT__CHEST = 0x10000000000;
+        const SKIPPED_DEKU_TREE__SLINGSHOT_UPPER__LEDGE__CHEST = 0x20000000000;
+        const SKIPPED_KF__BABA_CORRIDOR__DEKU_BABAS__NUTS = 0x40000000000;
+        const SKIPPED_KF__BABA_CORRIDOR__DEKU_BABAS__STICKS = 0x80000000000;
+        const SKIPPED_KF__BOULDER_MAZE__REWARD__CHEST = 0x100000000000;
+        const SKIPPED_KF__KOKIRI_VILLAGE__MIDOS_GUARDPOST__SHOW_MIDO = 0x200000000000;
+        const SKIPPED_KF__KOKIRI_VILLAGE__TRAINING_CENTER__VICTORY = 0x400000000000;
+        const SKIPPED_KF__MIDOS_HOUSE__ENTRY__BOTTOM_LEFT_CHEST = 0x800000000000;
+        const SKIPPED_KF__MIDOS_HOUSE__ENTRY__BOTTOM_RIGHT_CHEST = 0x1000000000000;
+        const SKIPPED_KF__MIDOS_HOUSE__ENTRY__TOP_LEFT_CHEST = 0x2000000000000;
+        const SKIPPED_KF__MIDOS_HOUSE__ENTRY__TOP_RIGHT_CHEST = 0x4000000000000;
+        const SKIPPED_KF__OUTSIDE_DEKU_TREE__LEFT__GOSSIP_STONE = 0x8000000000000;
+        const SKIPPED_KF__OUTSIDE_DEKU_TREE__RIGHT__GOSSIP_STONE = 0x10000000000000;
+        const SKIPPED_KF__SHOP__ENTRY__BLUE_RUPEE = 0x20000000000000;
+        const SKIPPED_KF__SHOP__ENTRY__ITEM_1 = 0x40000000000000;
+        const SKIPPED_KF__SHOP__ENTRY__ITEM_2 = 0x80000000000000;
+        const SKIPPED_KF__SHOP__ENTRY__ITEM_3 = 0x100000000000000;
+        const SKIPPED_KF__SHOP__ENTRY__ITEM_4 = 0x200000000000000;
+        const SKIPPED_KF__SHOP__ENTRY__ITEM_5 = 0x400000000000000;
+        const SKIPPED_KF__SHOP__ENTRY__ITEM_6 = 0x800000000000000;
+        const SKIPPED_KF__SHOP__ENTRY__ITEM_7 = 0x1000000000000000;
+        const SKIPPED_KF__SHOP__ENTRY__ITEM_8 = 0x2000000000000000;
+        const SKIPPED_KAK__SPIDER_HOUSE__ENTRY__SKULLS_10 = 0x4000000000000000;
+        const ALL_VISIT_FLAGS = 0x7fff;
+        const ALL_SKIP_FLAGS = 0x7fffffffffff8000;
     }
 }
 }
@@ -288,10 +290,9 @@ pub struct Context {
     pub position: SpotId,
     pub tod: enums::Tod,
     pub rupees: i32,
-    // settings
-    pub triforce_count: i16,
     // items
     pub gold_skulltula_token: i8,
+    pub progressive_wallet: i8,
     pub triforce_piece: i16,
     // bitflags
     pub cbits1: flags::ContextBits1,
@@ -304,10 +305,9 @@ impl Default for Context {
             position: SpotId::KF__Links_House__Start_Point,
             tod: enums::Tod::Day,
             rupees: 0,
-            // settings
-            triforce_count: Default::default(),
             // items
             gold_skulltula_token: Default::default(),
+            progressive_wallet: Default::default(),
             triforce_piece: Default::default(),
             // bitflags
             cbits1: Default::default(),
@@ -316,14 +316,19 @@ impl Default for Context {
     }
 }
 
+impl analyzer::matchertrie::Observable for Context {
+    type PropertyObservation = OneObservation;
+}
+
 impl context::Ctx for Context {
     type World = graph::World;
     type ItemId = Item;
     type AreaId = AreaId;
     type RegionId = RegionId;
     type MovementState = movements::MovementState;
+    type Observer = FullObservation;
     type Expectation = Expectation;
-    const NUM_ITEMS: u32 = 31;
+    const NUM_ITEMS: u32 = 32;
 
 
     fn has(&self, item: Item) -> bool {
@@ -355,6 +360,7 @@ impl context::Ctx for Context {
             Item::Kokiri_Sword => self.cbits1.contains(flags::ContextBits1::KOKIRI_SWORD),
             Item::Magic_Meter => self.cbits1.contains(flags::ContextBits1::MAGIC_METER),
             Item::Ocarina => self.cbits1.contains(flags::ContextBits1::OCARINA),
+            Item::Progressive_Wallet => self.progressive_wallet,
             Item::Showed_Mido => self.cbits1.contains(flags::ContextBits1::SHOWED_MIDO),
             Item::Slingshot => self.cbits1.contains(flags::ContextBits1::SLINGSHOT),
             Item::Triforce_Piece => self.triforce_piece >= 1,
@@ -391,6 +397,7 @@ impl context::Ctx for Context {
             Item::Kokiri_Sword => self.cbits1.contains(flags::ContextBits1::KOKIRI_SWORD).into(),
             Item::Magic_Meter => self.cbits1.contains(flags::ContextBits1::MAGIC_METER).into(),
             Item::Ocarina => self.cbits1.contains(flags::ContextBits1::OCARINA).into(),
+            Item::Progressive_Wallet => self.progressive_wallet.into(),
             Item::Showed_Mido => self.cbits1.contains(flags::ContextBits1::SHOWED_MIDO).into(),
             Item::Slingshot => self.cbits1.contains(flags::ContextBits1::SLINGSHOT).into(),
             Item::Triforce_Piece => self.triforce_piece.into(),
@@ -402,97 +409,100 @@ impl context::Ctx for Context {
         match item {
             Item::Biggoron_Sword => {
                 self.cbits1.insert(flags::ContextBits1::BIGGORON_SWORD);
-            },
+            }
             Item::Bombs => {
                 self.cbits1.insert(flags::ContextBits1::BOMBS);
-            },
+            }
             Item::Boomerang => {
                 self.cbits1.insert(flags::ContextBits1::BOOMERANG);
-            },
+            }
             Item::Bow => {
                 self.cbits1.insert(flags::ContextBits1::BOW);
-            },
+            }
             Item::Buy_Deku_Nut_10 => {
                 self.cbits1.insert(flags::ContextBits1::BUY_DEKU_NUT_10);
-            },
+            }
             Item::Buy_Deku_Nut_5 => {
                 self.cbits1.insert(flags::ContextBits1::BUY_DEKU_NUT_5);
-            },
+            }
             Item::Buy_Deku_Shield => {
                 self.cbits1.insert(flags::ContextBits1::BUY_DEKU_SHIELD);
-            },
+            }
             Item::Buy_Deku_Stick_1 => {
                 self.cbits1.insert(flags::ContextBits1::BUY_DEKU_STICK_1);
-            },
+            }
             Item::Defeat_Ganon => {
                 self.cbits1.insert(flags::ContextBits1::DEFEAT_GANON);
-            },
+            }
             Item::Defeat_Gohma => {
                 self.cbits1.insert(flags::ContextBits1::DEFEAT_GOHMA);
-            },
+            }
             Item::Deku_Back_Room_Wall => {
                 self.cbits1.insert(flags::ContextBits1::DEKU_BACK_ROOM_WALL);
-            },
+            }
             Item::Deku_Back_Room_Web => {
                 self.cbits1.insert(flags::ContextBits1::DEKU_BACK_ROOM_WEB);
-            },
+            }
             Item::Deku_Basement_Block => {
                 self.cbits1.insert(flags::ContextBits1::DEKU_BASEMENT_BLOCK);
-            },
+            }
             Item::Deku_Basement_Scrubs => {
                 self.cbits1.insert(flags::ContextBits1::DEKU_BASEMENT_SCRUBS);
-            },
+            }
             Item::Deku_Basement_Switch => {
                 self.cbits1.insert(flags::ContextBits1::DEKU_BASEMENT_SWITCH);
-            },
+            }
             Item::Deku_Basement_Web => {
                 self.cbits1.insert(flags::ContextBits1::DEKU_BASEMENT_WEB);
-            },
+            }
             Item::Deku_Lobby_Web => {
                 self.cbits1.insert(flags::ContextBits1::DEKU_LOBBY_WEB);
-            },
+            }
             Item::Deku_Nut_Drop => {
                 self.cbits1.insert(flags::ContextBits1::DEKU_NUT_DROP);
-            },
+            }
             Item::Deku_Shield_Drop => {
                 self.cbits1.insert(flags::ContextBits1::DEKU_SHIELD_DROP);
-            },
+            }
             Item::Deku_Slingshot_Scrub => {
                 self.cbits1.insert(flags::ContextBits1::DEKU_SLINGSHOT_SCRUB);
-            },
+            }
             Item::Deku_Stick_Drop => {
                 self.cbits1.insert(flags::ContextBits1::DEKU_STICK_DROP);
-            },
+            }
             Item::Gold_Skulltula_Token => {
                 self.gold_skulltula_token += 1;
-            },
+            }
             Item::Hylian_Shield => {
                 self.cbits1.insert(flags::ContextBits1::HYLIAN_SHIELD);
-            },
+            }
             Item::Kokiri_Emerald => {
                 self.cbits1.insert(flags::ContextBits1::KOKIRI_EMERALD);
-            },
+            }
             Item::Kokiri_Sword => {
                 self.cbits1.insert(flags::ContextBits1::KOKIRI_SWORD);
-            },
+            }
             Item::Magic_Meter => {
                 self.cbits1.insert(flags::ContextBits1::MAGIC_METER);
-            },
+            }
             Item::Ocarina => {
                 self.cbits1.insert(flags::ContextBits1::OCARINA);
-            },
+            }
+            Item::Progressive_Wallet => {
+                self.progressive_wallet = true;
+            }
             Item::Showed_Mido => {
                 self.cbits1.insert(flags::ContextBits1::SHOWED_MIDO);
-            },
+            }
             Item::Slingshot => {
                 self.cbits1.insert(flags::ContextBits1::SLINGSHOT);
-            },
+            }
             Item::Triforce_Piece => {
                 self.triforce_piece += 1;
-            },
+            }
             Item::Victory => {
                 self.cbits1.insert(flags::ContextBits1::VICTORY);
-            },
+            }
             Item::Rupee_1 => rules::action_rupees_set_min__rupees_add_1_wallet_max(self, world),
             Item::Rupees_5 => rules::action_rupees_set_min__rupees_add_5_wallet_max(self, world),
             Item::Rupees_50 => rules::action_rupees_set_min__rupees_add_50_wallet_max(self, world),
@@ -506,98 +516,101 @@ impl context::Ctx for Context {
         match item {
             Item::Biggoron_Sword => {
                 self.cbits1.insert(flags::ContextBits1::BIGGORON_SWORD);
-            },
+            }
             Item::Bombs => {
                 self.cbits1.insert(flags::ContextBits1::BOMBS);
-            },
+            }
             Item::Boomerang => {
                 self.cbits1.insert(flags::ContextBits1::BOOMERANG);
-            },
+            }
             Item::Bow => {
                 self.cbits1.insert(flags::ContextBits1::BOW);
-            },
+            }
             Item::Buy_Deku_Nut_10 => {
                 self.cbits1.insert(flags::ContextBits1::BUY_DEKU_NUT_10);
-            },
+            }
             Item::Buy_Deku_Nut_5 => {
                 self.cbits1.insert(flags::ContextBits1::BUY_DEKU_NUT_5);
-            },
+            }
             Item::Buy_Deku_Shield => {
                 self.cbits1.insert(flags::ContextBits1::BUY_DEKU_SHIELD);
-            },
+            }
             Item::Buy_Deku_Stick_1 => {
                 self.cbits1.insert(flags::ContextBits1::BUY_DEKU_STICK_1);
-            },
+            }
             Item::Defeat_Ganon => {
                 self.cbits1.insert(flags::ContextBits1::DEFEAT_GANON);
-            },
+            }
             Item::Defeat_Gohma => {
                 self.cbits1.insert(flags::ContextBits1::DEFEAT_GOHMA);
-            },
+            }
             Item::Deku_Back_Room_Wall => {
                 self.cbits1.insert(flags::ContextBits1::DEKU_BACK_ROOM_WALL);
-            },
+            }
             Item::Deku_Back_Room_Web => {
                 self.cbits1.insert(flags::ContextBits1::DEKU_BACK_ROOM_WEB);
-            },
+            }
             Item::Deku_Basement_Block => {
                 self.cbits1.insert(flags::ContextBits1::DEKU_BASEMENT_BLOCK);
-            },
+            }
             Item::Deku_Basement_Scrubs => {
                 self.cbits1.insert(flags::ContextBits1::DEKU_BASEMENT_SCRUBS);
-            },
+            }
             Item::Deku_Basement_Switch => {
                 self.cbits1.insert(flags::ContextBits1::DEKU_BASEMENT_SWITCH);
-            },
+            }
             Item::Deku_Basement_Web => {
                 self.cbits1.insert(flags::ContextBits1::DEKU_BASEMENT_WEB);
-            },
+            }
             Item::Deku_Lobby_Web => {
                 self.cbits1.insert(flags::ContextBits1::DEKU_LOBBY_WEB);
-            },
+            }
             Item::Deku_Nut_Drop => {
                 self.cbits1.insert(flags::ContextBits1::DEKU_NUT_DROP);
-            },
+            }
             Item::Deku_Shield_Drop => {
                 self.cbits1.insert(flags::ContextBits1::DEKU_SHIELD_DROP);
-            },
+            }
             Item::Deku_Slingshot_Scrub => {
                 self.cbits1.insert(flags::ContextBits1::DEKU_SLINGSHOT_SCRUB);
-            },
+            }
             Item::Deku_Stick_Drop => {
                 self.cbits1.insert(flags::ContextBits1::DEKU_STICK_DROP);
-            },
+            }
             Item::Gold_Skulltula_Token => {
                 self.gold_skulltula_token += 1;
-            },
+            }
             Item::Hylian_Shield => {
                 self.cbits1.insert(flags::ContextBits1::HYLIAN_SHIELD);
-            },
+            }
             Item::Kokiri_Emerald => {
                 self.cbits1.insert(flags::ContextBits1::KOKIRI_EMERALD);
-            },
+            }
             Item::Kokiri_Sword => {
                 self.cbits1.insert(flags::ContextBits1::KOKIRI_SWORD);
-            },
+            }
             Item::Magic_Meter => {
                 self.cbits1.insert(flags::ContextBits1::MAGIC_METER);
-            },
+            }
             Item::Ocarina => {
                 self.cbits1.insert(flags::ContextBits1::OCARINA);
-            },
+            }
+            Item::Progressive_Wallet => {
+                self.progressive_wallet = true;
+            }
             Item::Showed_Mido => {
                 self.cbits1.insert(flags::ContextBits1::SHOWED_MIDO);
-            },
+            }
             Item::Slingshot => {
                 self.cbits1.insert(flags::ContextBits1::SLINGSHOT);
-            },
+            }
             Item::Triforce_Piece => {
                 self.triforce_piece += 1;
-            },
+            }
             Item::Victory => {
                 self.cbits1.insert(flags::ContextBits1::VICTORY);
-            },
-            _ => ()
+            }
+            _ => (),
         }
     }
 
@@ -614,10 +627,6 @@ impl context::Ctx for Context {
             ("rupees", _) => { return Err(format!("Key {:?} has value of disallowed type: {:?}", ckey, cval)); },
             ("deku_tree__compass_room__ctx__torch", Yaml::Boolean(b)) => self.set_deku_tree__compass_room__ctx__torch(*b),
             ("deku_tree__compass_room__ctx__torch", _) => { return Err(format!("Key {:?} has value of disallowed type: {:?}", ckey, cval)); },
-            ("triforce_count", Yaml::Integer(i)) => self.set_triforce_count(i16::try_from(*i).map_err(|e| format!("{}", e))?),
-            ("triforce_count", _) => { return Err(format!("Key {:?} has value of disallowed type: {:?}", ckey, cval)); },
-            ("logic_deku_b1_skip", Yaml::Boolean(b)) => self.set_logic_deku_b1_skip(*b),
-            ("logic_deku_b1_skip", _) => { return Err(format!("Key {:?} has value of disallowed type: {:?}", ckey, cval)); },
             _ => { return Err(format!("Unrecognized context key: {:?}", ckey)); }
         }
         Ok(())
@@ -715,6 +724,8 @@ impl context::Ctx for Context {
             ("Ocarina", Yaml::Boolean(b)) => Expectation::Ocarina(*b),
             ("Ocarina", Yaml::Integer(i)) => Expectation::Ocarina(*i > 0),
             ("Ocarina", _) => { return Err(format!("Key {:?} has value of disallowed type: {:?}", ckey, cval)); },
+            ("Progressive_Wallet", Yaml::Integer(i)) => Expectation::ProgressiveWallet(i8::try_from(*i).map_err(|e| format!("{}", e))?),
+            ("Progressive_Wallet", _) => { return Err(format!("Key {:?} has value of disallowed type: {:?}", ckey, cval)); },
             ("Showed_Mido", Yaml::Boolean(b)) => Expectation::ShowedMido(*b),
             ("Showed_Mido", Yaml::Integer(i)) => Expectation::ShowedMido(*i > 0),
             ("Showed_Mido", _) => { return Err(format!("Key {:?} has value of disallowed type: {:?}", ckey, cval)); },
@@ -926,6 +937,12 @@ impl context::Ctx for Context {
                     errs.push(format!("Expected {} = {}, got: {}", "Ocarina", e, v));
                 }
             }
+            Expectation::ProgressiveWallet(e) => {
+                let v = self.count(Item::Progressive_Wallet);
+                if v != <i8 as Into<i16>>::into(*e) {
+                    errs.push(format!("Expected {} = {}, got: {}", "Progressive_Wallet", e, v));
+                }
+            }
             Expectation::ShowedMido(e) => {
                 let v = self.has(Item::Showed_Mido);
                 if v != *e {
@@ -972,13 +989,8 @@ impl context::Ctx for Context {
                 if get_area(self.position) != area {
                     self.cbits1.remove(flags::ContextBits1::DEKU_TREE__COMPASS_ROOM__CTX__TORCH);
                 }
-            },
-            _ => (),
-        }
-        if self.position != pos {
-            match pos {
-                _ => (),
             }
+            _ => (),
         }
         self.position = pos;
     }
@@ -1010,6 +1022,12 @@ impl context::Ctx for Context {
         match cost {
             Currency::Free => (),
             Currency::Rupees(c) => self.rupees -= *c,
+        }
+    }
+    fn observe_afford(&self, cost: &Currency, full_obs: &mut FullObservation) {
+        match cost {
+            Currency::Free => (),
+            Currency::Rupees(c) => full_obs.observe_rupees(IntegerObservation::Ge(*c)),
         }
     }
 
@@ -1051,7 +1069,7 @@ impl context::Ctx for Context {
             LocationId::KF__Outside_Deku_Tree__Right__Gossip_Stone => self.cbits2.insert(flags::ContextBits2::VISITED_KF__OUTSIDE_DEKU_TREE__RIGHT__GOSSIP_STONE),
             LocationId::KF__Midos_House__Entry__Top_Left_Chest => self.cbits2.insert(flags::ContextBits2::VISITED_KF__MIDOS_HOUSE__ENTRY__TOP_LEFT_CHEST),
             LocationId::KF__Midos_House__Entry__Top_Right_Chest => self.cbits2.insert(flags::ContextBits2::VISITED_KF__MIDOS_HOUSE__ENTRY__TOP_RIGHT_CHEST),
-            LocationId::KF__Midos_House__Entry__Bottom_Left_Chest => self.cbits2.insert(flags::ContextBits2::VISITED_KF__MIDOS_HOUSE__ENTRY__BOTTOM_LEFT_CHEST),
+            LocationId::KF__Midos_House__Entry__Bottom_Left_Chest => self.cbits1.insert(flags::ContextBits1::VISITED_KF__MIDOS_HOUSE__ENTRY__BOTTOM_LEFT_CHEST),
             LocationId::KF__Midos_House__Entry__Bottom_Right_Chest => self.cbits2.insert(flags::ContextBits2::VISITED_KF__MIDOS_HOUSE__ENTRY__BOTTOM_RIGHT_CHEST),
             LocationId::KF__Shop__Entry__Blue_Rupee => self.cbits2.insert(flags::ContextBits2::VISITED_KF__SHOP__ENTRY__BLUE_RUPEE),
             LocationId::KF__Shop__Entry__Item_1 => self.cbits2.insert(flags::ContextBits2::VISITED_KF__SHOP__ENTRY__ITEM_1),
@@ -1248,7 +1266,7 @@ impl context::Ctx for Context {
                 }
             }
             LocationId::KF__Midos_House__Entry__Bottom_Left_Chest =>  {
-                if !self.cbits2.contains(flags::ContextBits2::VISITED_KF__MIDOS_HOUSE__ENTRY__BOTTOM_LEFT_CHEST) {
+                if !self.cbits1.contains(flags::ContextBits1::VISITED_KF__MIDOS_HOUSE__ENTRY__BOTTOM_LEFT_CHEST) {
                     self.cbits2.insert(flags::ContextBits2::SKIPPED_KF__MIDOS_HOUSE__ENTRY__BOTTOM_LEFT_CHEST);
                 }
             }
@@ -1456,7 +1474,7 @@ impl context::Ctx for Context {
                 self.cbits2.remove(flags::ContextBits2::SKIPPED_KF__MIDOS_HOUSE__ENTRY__TOP_RIGHT_CHEST);
             }
             LocationId::KF__Midos_House__Entry__Bottom_Left_Chest => {
-                self.cbits2.remove(flags::ContextBits2::VISITED_KF__MIDOS_HOUSE__ENTRY__BOTTOM_LEFT_CHEST);
+                self.cbits1.remove(flags::ContextBits1::VISITED_KF__MIDOS_HOUSE__ENTRY__BOTTOM_LEFT_CHEST);
                 self.cbits2.remove(flags::ContextBits2::SKIPPED_KF__MIDOS_HOUSE__ENTRY__BOTTOM_LEFT_CHEST);
             }
             LocationId::KF__Midos_House__Entry__Bottom_Right_Chest => {
@@ -1653,7 +1671,7 @@ impl context::Ctx for Context {
                 && !self.cbits2.contains(flags::ContextBits2::SKIPPED_KF__MIDOS_HOUSE__ENTRY__TOP_RIGHT_CHEST)
             }
             LocationId::KF__Midos_House__Entry__Bottom_Left_Chest => {
-                !self.cbits2.contains(flags::ContextBits2::VISITED_KF__MIDOS_HOUSE__ENTRY__BOTTOM_LEFT_CHEST)
+                !self.cbits1.contains(flags::ContextBits1::VISITED_KF__MIDOS_HOUSE__ENTRY__BOTTOM_LEFT_CHEST)
                 && !self.cbits2.contains(flags::ContextBits2::SKIPPED_KF__MIDOS_HOUSE__ENTRY__BOTTOM_LEFT_CHEST)
             }
             LocationId::KF__Midos_House__Entry__Bottom_Right_Chest => {
@@ -1813,7 +1831,7 @@ impl context::Ctx for Context {
                 self.cbits2.contains(flags::ContextBits2::VISITED_KF__MIDOS_HOUSE__ENTRY__TOP_RIGHT_CHEST)
             }
             LocationId::KF__Midos_House__Entry__Bottom_Left_Chest => {
-                self.cbits2.contains(flags::ContextBits2::VISITED_KF__MIDOS_HOUSE__ENTRY__BOTTOM_LEFT_CHEST)
+                self.cbits1.contains(flags::ContextBits1::VISITED_KF__MIDOS_HOUSE__ENTRY__BOTTOM_LEFT_CHEST)
             }
             LocationId::KF__Midos_House__Entry__Bottom_Right_Chest => {
                 self.cbits2.contains(flags::ContextBits2::VISITED_KF__MIDOS_HOUSE__ENTRY__BOTTOM_RIGHT_CHEST)
@@ -2012,6 +2030,10 @@ impl context::Ctx for Context {
         movements::get_movement_state(self, world)
     }
 
+    fn observe_movement_state(&self, world: &graph::World, full_obs: &mut FullObservation) -> movements::MovementState {
+        movements::observe_movement_state(self, world, full_obs)
+    }
+
     fn local_travel_time(&self, movement_state: movements::MovementState, dest: SpotId) -> u32 {
         movements::local_travel_time(movement_state, self.position, dest)
     }
@@ -2044,11 +2066,11 @@ impl context::Ctx for Context {
         if old.rupees != self.rupees {
             list.push(format!("rupees: {:?} → {:?}", old.rupees, self.rupees));
         }
-        if old.triforce_count != self.triforce_count {
-            list.push(format!("triforce_count: {:?} → {:?}", old.triforce_count, self.triforce_count));
-        }
         if old.gold_skulltula_token != self.gold_skulltula_token {
             list.push(format!("Gold_Skulltula_Token: {:+}", self.gold_skulltula_token - old.gold_skulltula_token));
+        }
+        if old.progressive_wallet != self.progressive_wallet {
+            list.push(format!("Progressive_Wallet: {:+}", self.progressive_wallet - old.progressive_wallet));
         }
         if old.triforce_piece != self.triforce_piece {
             list.push(format!("Triforce_Piece: {:+}", self.triforce_piece - old.triforce_piece));
@@ -2063,11 +2085,6 @@ impl context::Ctx for Context {
         let p = old.cbits1.contains(flags::ContextBits1::DEKU_TREE__COMPASS_ROOM__CTX__TORCH);
         if n != p {
             list.push(format!("{}DEKU_TREE__COMPASS_ROOM__CTX__TORCH", if n { "+" } else { "-" }));
-        }
-        let n = self.cbits1.contains(flags::ContextBits1::LOGIC_DEKU_B1_SKIP);
-        let p = old.cbits1.contains(flags::ContextBits1::LOGIC_DEKU_B1_SKIP);
-        if n != p {
-            list.push(format!("{}LOGIC_DEKU_B1_SKIP", if n { "+" } else { "-" }));
         }
         let n = self.cbits1.contains(flags::ContextBits1::BIGGORON_SWORD);
         let p = old.cbits1.contains(flags::ContextBits1::BIGGORON_SWORD);
@@ -2374,8 +2391,8 @@ impl context::Ctx for Context {
         if n != p {
             list.push(format!("{}VISITED_KF__KOKIRI_VILLAGE__TRAINING_CENTER__VICTORY", if n { "+" } else { "-" }));
         }
-        let n = self.cbits2.contains(flags::ContextBits2::VISITED_KF__MIDOS_HOUSE__ENTRY__BOTTOM_LEFT_CHEST);
-        let p = old.cbits2.contains(flags::ContextBits2::VISITED_KF__MIDOS_HOUSE__ENTRY__BOTTOM_LEFT_CHEST);
+        let n = self.cbits1.contains(flags::ContextBits1::VISITED_KF__MIDOS_HOUSE__ENTRY__BOTTOM_LEFT_CHEST);
+        let p = old.cbits1.contains(flags::ContextBits1::VISITED_KF__MIDOS_HOUSE__ENTRY__BOTTOM_LEFT_CHEST);
         if n != p {
             list.push(format!("{}VISITED_KF__MIDOS_HOUSE__ENTRY__BOTTOM_LEFT_CHEST", if n { "+" } else { "-" }));
         }
@@ -2703,44 +2720,36 @@ impl context::Ctx for Context {
 }
 
 impl Context {
-    // settings
-    pub fn triforce_count(&self) -> i16 {
-        self.triforce_count
-    }
-    pub fn set_triforce_count(&mut self, val: i16) {
-        self.triforce_count = val;
-    }
-    pub fn logic_deku_b1_skip(&self) -> bool {
-        self.cbits1.contains(flags::ContextBits1::LOGIC_DEKU_B1_SKIP)
-    }
-    pub fn set_logic_deku_b1_skip(&mut self, val: bool) {
-        self.cbits1.set(flags::ContextBits1::LOGIC_DEKU_B1_SKIP, val);
-    }
-    // context
+    // accessors
     pub fn position(&self) -> SpotId {
         self.position
     }
+    // setters
     pub fn child(&self) -> bool {
         self.cbits1.contains(flags::ContextBits1::CHILD)
     }
+    // setters
     pub fn set_child(&mut self, val: bool) {
         self.cbits1.set(flags::ContextBits1::CHILD, val);
     }
     pub fn tod(&self) -> enums::Tod {
         self.tod
     }
+    // setters
     pub fn set_tod(&mut self, val: enums::Tod) {
         self.tod = val;
     }
     pub fn rupees(&self) -> i32 {
         self.rupees
     }
+    // setters
     pub fn set_rupees(&mut self, val: i32) {
         self.rupees = val;
     }
     pub fn deku_tree__compass_room__ctx__torch(&self) -> bool {
         self.cbits1.contains(flags::ContextBits1::DEKU_TREE__COMPASS_ROOM__CTX__TORCH)
     }
+    // setters
     pub fn set_deku_tree__compass_room__ctx__torch(&mut self, val: bool) {
         self.cbits1.set(flags::ContextBits1::DEKU_TREE__COMPASS_ROOM__CTX__TORCH, val);
     }

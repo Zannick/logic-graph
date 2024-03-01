@@ -5,20 +5,25 @@
 #[macro_export]
 macro_rules! helper__is_child {
     ($ctx:expr, $world:expr) => {{
-        #[allow(unused_imports)]
-        use $crate::items::Item;
         $ctx.child()
     }};
 }
 #[macro_export]
 macro_rules! hexplain__is_child {
     ($ctx:expr, $world:expr, $edict:expr) => {{
-        #[allow(unused_imports)]
-        use $crate::items::Item;
         {
             let r = $ctx.child();
             $edict.insert("^child", format!("{:?}", r));
             (r, vec!["^child"])
+        }
+    }};
+}
+#[macro_export]
+macro_rules! hobserve__is_child {
+    ($ctx:expr, $world:expr, $full_obs:expr) => {{
+        {
+            $full_obs.observe_child();
+            $ctx.child()
         }
     }};
 }
@@ -28,16 +33,12 @@ macro_rules! hexplain__is_child {
 #[macro_export]
 macro_rules! helper__is_adult {
     ($ctx:expr, $world:expr) => {{
-        #[allow(unused_imports)]
-        use $crate::items::Item;
         !$ctx.child()
     }};
 }
 #[macro_export]
 macro_rules! hexplain__is_adult {
     ($ctx:expr, $world:expr, $edict:expr) => {{
-        #[allow(unused_imports)]
-        use $crate::items::Item;
         {
             let val = {
                 let r = $ctx.child();
@@ -48,22 +49,27 @@ macro_rules! hexplain__is_adult {
         }
     }};
 }
+#[macro_export]
+macro_rules! hobserve__is_adult {
+    ($ctx:expr, $world:expr, $full_obs:expr) => {{
+        !({
+            $full_obs.observe_child();
+            $ctx.child()
+        })
+    }};
+}
 
 /// $Deku_Shield (  )
 /// Buy_Deku_Shield or Deku_Shield_Drop
 #[macro_export]
 macro_rules! helper__Deku_Shield {
     ($ctx:expr, $world:expr) => {{
-        #[allow(unused_imports)]
-        use $crate::items::Item;
         ($ctx.has(Item::Buy_Deku_Shield) || $ctx.has(Item::Deku_Shield_Drop))
     }};
 }
 #[macro_export]
 macro_rules! hexplain__Deku_Shield {
     ($ctx:expr, $world:expr, $edict:expr) => {{
-        #[allow(unused_imports)]
-        use $crate::items::Item;
         {
             let mut left = {
                 let h = $ctx.has(Item::Buy_Deku_Shield);
@@ -84,14 +90,24 @@ macro_rules! hexplain__Deku_Shield {
         }
     }};
 }
+#[macro_export]
+macro_rules! hobserve__Deku_Shield {
+    ($ctx:expr, $world:expr, $full_obs:expr) => {{
+        ({
+            $full_obs.observe_buy_deku_shield();
+            $ctx.has(Item::Buy_Deku_Shield)
+        } || {
+            $full_obs.observe_deku_shield_drop();
+            $ctx.has(Item::Deku_Shield_Drop)
+        })
+    }};
+}
 
 /// $Nuts (  )
 /// Buy_Deku_Nut_5 or Buy_Deku_Nut_10 or Deku_Nut_Drop
 #[macro_export]
 macro_rules! helper__Nuts {
     ($ctx:expr, $world:expr) => {{
-        #[allow(unused_imports)]
-        use $crate::items::Item;
         (($ctx.has(Item::Buy_Deku_Nut_5) || $ctx.has(Item::Buy_Deku_Nut_10))
             || $ctx.has(Item::Deku_Nut_Drop))
     }};
@@ -99,8 +115,6 @@ macro_rules! helper__Nuts {
 #[macro_export]
 macro_rules! hexplain__Nuts {
     ($ctx:expr, $world:expr, $edict:expr) => {{
-        #[allow(unused_imports)]
-        use $crate::items::Item;
         {
             let mut left = {
                 let mut left = {
@@ -134,22 +148,33 @@ macro_rules! hexplain__Nuts {
         }
     }};
 }
+#[macro_export]
+macro_rules! hobserve__Nuts {
+    ($ctx:expr, $world:expr, $full_obs:expr) => {{
+        (({
+            $full_obs.observe_buy_deku_nut_5();
+            $ctx.has(Item::Buy_Deku_Nut_5)
+        } || {
+            $full_obs.observe_buy_deku_nut_10();
+            $ctx.has(Item::Buy_Deku_Nut_10)
+        }) || {
+            $full_obs.observe_deku_nut_drop();
+            $ctx.has(Item::Deku_Nut_Drop)
+        })
+    }};
+}
 
 /// $Sticks (  )
 /// Buy_Deku_Stick_1 or Deku_Stick_Drop
 #[macro_export]
 macro_rules! helper__Sticks {
     ($ctx:expr, $world:expr) => {{
-        #[allow(unused_imports)]
-        use $crate::items::Item;
         ($ctx.has(Item::Buy_Deku_Stick_1) || $ctx.has(Item::Deku_Stick_Drop))
     }};
 }
 #[macro_export]
 macro_rules! hexplain__Sticks {
     ($ctx:expr, $world:expr, $edict:expr) => {{
-        #[allow(unused_imports)]
-        use $crate::items::Item;
         {
             let mut left = {
                 let h = $ctx.has(Item::Buy_Deku_Stick_1);
@@ -170,14 +195,24 @@ macro_rules! hexplain__Sticks {
         }
     }};
 }
+#[macro_export]
+macro_rules! hobserve__Sticks {
+    ($ctx:expr, $world:expr, $full_obs:expr) => {{
+        ({
+            $full_obs.observe_buy_deku_stick_1();
+            $ctx.has(Item::Buy_Deku_Stick_1)
+        } || {
+            $full_obs.observe_deku_stick_drop();
+            $ctx.has(Item::Deku_Stick_Drop)
+        })
+    }};
+}
 
 /// $wallet_max (  )
 /// PER Progressive_Wallet { 3 => 999, 2 => 500, 1 => 200, _ => 99 }
 #[macro_export]
 macro_rules! helper__wallet_max {
     ($ctx:expr, $world:expr) => {{
-        #[allow(unused_imports)]
-        use $crate::items::Item;
         match $ctx.count(Item::Progressive_Wallet) {
             3 => 999,
             2 => 500,
@@ -189,8 +224,6 @@ macro_rules! helper__wallet_max {
 #[macro_export]
 macro_rules! hexplain__wallet_max {
     ($ctx:expr, $world:expr, $edict:expr) => {{
-        #[allow(unused_imports)]
-        use $crate::items::Item;
         {
             let mut refs = vec!["Progressive_Wallet count"];
             let ct = $ctx.count(Item::Progressive_Wallet);
@@ -206,14 +239,26 @@ macro_rules! hexplain__wallet_max {
         }
     }};
 }
+#[macro_export]
+macro_rules! hobserve__wallet_max {
+    ($ctx:expr, $world:expr, $full_obs:expr) => {{
+        {
+            $full_obs.observe_progressive_wallet(IntegerObservation::Exact);
+            match $ctx.count(Item::Progressive_Wallet) {
+                3 => 999,
+                2 => 500,
+                1 => 200,
+                _ => 99,
+            }
+        }
+    }};
+}
 
 /// $has_shield (  )
 /// ($is_adult and Hylian_Shield) or ($is_child and $Deku_Shield)
 #[macro_export]
 macro_rules! helper__has_shield {
     ($ctx:expr, $world:expr) => {{
-        #[allow(unused_imports)]
-        use $crate::items::Item;
         ((helper__is_adult!($ctx, $world) && $ctx.has(Item::Hylian_Shield))
             || (helper__is_child!($ctx, $world) && helper__Deku_Shield!($ctx, $world)))
     }};
@@ -221,8 +266,6 @@ macro_rules! helper__has_shield {
 #[macro_export]
 macro_rules! hexplain__has_shield {
     ($ctx:expr, $world:expr, $edict:expr) => {{
-        #[allow(unused_imports)]
-        use $crate::items::Item;
         {
             let mut left = ({
                 let mut left = {
@@ -272,22 +315,30 @@ macro_rules! hexplain__has_shield {
         }
     }};
 }
+#[macro_export]
+macro_rules! hobserve__has_shield {
+    ($ctx:expr, $world:expr, $full_obs:expr) => {{
+        ((hobserve__is_adult!($ctx, $world, $full_obs)
+            && ({
+                $full_obs.observe_hylian_shield();
+                $ctx.has(Item::Hylian_Shield)
+            }))
+            || (hobserve__is_child!($ctx, $world, $full_obs)
+                && (hobserve__Deku_Shield!($ctx, $world, $full_obs))))
+    }};
+}
 
 /// $can_play ( TypedVar(name='song', type='Item') )
 /// Ocarina and ^song
 #[macro_export]
 macro_rules! helper__can_play {
     ($ctx:expr, $world:expr, $song:expr) => {{
-        #[allow(unused_imports)]
-        use $crate::items::Item;
         ($ctx.has(Item::Ocarina) && $ctx.has($song))
     }};
 }
 #[macro_export]
 macro_rules! hexplain__can_play {
     ($ctx:expr, $world:expr, $song:expr, $edict:expr) => {{
-        #[allow(unused_imports)]
-        use $crate::items::Item;
         {
             let mut left = {
                 let h = $ctx.has(Item::Ocarina);
@@ -312,14 +363,21 @@ macro_rules! hexplain__can_play {
         }
     }};
 }
+#[macro_export]
+macro_rules! hobserve__can_play {
+    ($ctx:expr, $world:expr, $song:expr, $full_obs:expr) => {{
+        ({
+            $full_obs.observe_ocarina();
+            $ctx.has(Item::Ocarina)
+        } && (/* TODO: runtime observe_item */$ctx.has($song)))
+    }};
+}
 
 /// $can_jumpslash (  )
 /// $is_adult or $Sticks or Kokiri_Sword
 #[macro_export]
 macro_rules! helper__can_jumpslash {
     ($ctx:expr, $world:expr) => {{
-        #[allow(unused_imports)]
-        use $crate::items::Item;
         ((helper__is_adult!($ctx, $world) || helper__Sticks!($ctx, $world))
             || $ctx.has(Item::Kokiri_Sword))
     }};
@@ -327,8 +385,6 @@ macro_rules! helper__can_jumpslash {
 #[macro_export]
 macro_rules! hexplain__can_jumpslash {
     ($ctx:expr, $world:expr, $edict:expr) => {{
-        #[allow(unused_imports)]
-        use $crate::items::Item;
         {
             let mut left = {
                 let mut left = {
@@ -364,14 +420,23 @@ macro_rules! hexplain__can_jumpslash {
         }
     }};
 }
+#[macro_export]
+macro_rules! hobserve__can_jumpslash {
+    ($ctx:expr, $world:expr, $full_obs:expr) => {{
+        ((hobserve__is_adult!($ctx, $world, $full_obs)
+            || hobserve__Sticks!($ctx, $world, $full_obs))
+            || {
+                $full_obs.observe_kokiri_sword();
+                $ctx.has(Item::Kokiri_Sword)
+            })
+    }};
+}
 
 /// $can_use ( TypedVar(name='item', type='Item') )
 /// IF ($_is_magic_item(^item)) { ^item and Magic_Meter } ELSE IF ($_is_adult_item(^item)) { $is_adult and ^item } ELSE IF ($_is_magic_arrow(^item)) { $is_adult and ^item and Bow and Magic_Meter } ELSE IF ($_is_child_item(^item)) { $is_child and ^item }
 #[macro_export]
 macro_rules! helper__can_use {
     ($ctx:expr, $world:expr, $item:expr) => {{
-        #[allow(unused_imports)]
-        use $crate::items::Item;
         if helper___is_magic_item!($ctx, $world, $item) {
             ($ctx.has($item) && $ctx.has(Item::Magic_Meter))
         } else if helper___is_adult_item!($ctx, $world, $item) {
@@ -389,8 +454,6 @@ macro_rules! helper__can_use {
 #[macro_export]
 macro_rules! hexplain__can_use {
     ($ctx:expr, $world:expr, $item:expr, $edict:expr) => {{
-        #[allow(unused_imports)]
-        use $crate::items::Item;
         {
             let mut refs = Vec::new();
             let mut cond = {
@@ -574,14 +637,43 @@ macro_rules! hexplain__can_use {
         }
     }};
 }
+#[macro_export]
+macro_rules! hobserve__can_use {
+    ($ctx:expr, $world:expr, $item:expr, $full_obs:expr) => {{
+        if hobserve___is_magic_item!($ctx, $world, $item, $full_obs) {
+            (/* TODO: runtime observe_item */$ctx.has($item)
+                && ({
+                    $full_obs.observe_magic_meter();
+                    $ctx.has(Item::Magic_Meter)
+                }))
+        } else if hobserve___is_adult_item!($ctx, $world, $item, $full_obs) {
+            (hobserve__is_adult!($ctx, $world, $full_obs)
+                && (/* TODO: runtime observe_item */$ctx.has($item)))
+        } else if hobserve___is_magic_arrow!($ctx, $world, $item, $full_obs) {
+            (((hobserve__is_adult!($ctx, $world, $full_obs)
+                && (/* TODO: runtime observe_item */$ctx.has($item)))
+                && ({
+                    $full_obs.observe_bow();
+                    $ctx.has(Item::Bow)
+                }))
+                && ({
+                    $full_obs.observe_magic_meter();
+                    $ctx.has(Item::Magic_Meter)
+                }))
+        } else if hobserve___is_child_item!($ctx, $world, $item, $full_obs) {
+            (hobserve__is_child!($ctx, $world, $full_obs)
+                && (/* TODO: runtime observe_item */$ctx.has($item)))
+        } else {
+            false
+        }
+    }};
+}
 
 /// $_is_magic_item ( TypedVar(name='item', type='Item') )
 /// ^item IN [Dins_Fire, Farores_Wind, Nayrus_Love, Lens_of_Truth]
 #[macro_export]
 macro_rules! helper___is_magic_item {
     ($ctx:expr, $world:expr, $item:expr) => {{
-        #[allow(unused_imports)]
-        use $crate::items::Item;
         matches!(
             $item,
             Item::Dins_Fire | Item::Farores_Wind | Item::Nayrus_Love | Item::Lens_of_Truth
@@ -591,8 +683,6 @@ macro_rules! helper___is_magic_item {
 #[macro_export]
 macro_rules! hexplain___is_magic_item {
     ($ctx:expr, $world:expr, $item:expr, $edict:expr) => {{
-        #[allow(unused_imports)]
-        use $crate::items::Item;
         {
             let r = $item;
             if let Some(v) = $edict.get_mut(&"helpers:$_is_magic_item.^item") {
@@ -610,14 +700,21 @@ macro_rules! hexplain___is_magic_item {
         }
     }};
 }
+#[macro_export]
+macro_rules! hobserve___is_magic_item {
+    ($ctx:expr, $world:expr, $item:expr, $full_obs:expr) => {{
+        matches!(
+            $item,
+            Item::Dins_Fire | Item::Farores_Wind | Item::Nayrus_Love | Item::Lens_of_Truth
+        )
+    }};
+}
 
 /// $_is_adult_item ( TypedVar(name='item', type='Item') )
 /// ^item IN [Bow, Megaton_Hammer, Iron_Boots, Hover_Boots, Hookshot, Goron_Tunic, Zora_Tunic, Mirror_Shield]
 #[macro_export]
 macro_rules! helper___is_adult_item {
     ($ctx:expr, $world:expr, $item:expr) => {{
-        #[allow(unused_imports)]
-        use $crate::items::Item;
         matches!(
             $item,
             Item::Bow
@@ -634,8 +731,6 @@ macro_rules! helper___is_adult_item {
 #[macro_export]
 macro_rules! hexplain___is_adult_item {
     ($ctx:expr, $world:expr, $item:expr, $edict:expr) => {{
-        #[allow(unused_imports)]
-        use $crate::items::Item;
         {
             let r = $item;
             if let Some(v) = $edict.get_mut(&"helpers:$_is_adult_item.^item") {
@@ -660,14 +755,28 @@ macro_rules! hexplain___is_adult_item {
         }
     }};
 }
+#[macro_export]
+macro_rules! hobserve___is_adult_item {
+    ($ctx:expr, $world:expr, $item:expr, $full_obs:expr) => {{
+        matches!(
+            $item,
+            Item::Bow
+                | Item::Megaton_Hammer
+                | Item::Iron_Boots
+                | Item::Hover_Boots
+                | Item::Hookshot
+                | Item::Goron_Tunic
+                | Item::Zora_Tunic
+                | Item::Mirror_Shield
+        )
+    }};
+}
 
 /// $_is_child_item ( TypedVar(name='item', type='Item') )
 /// ^item IN [Slingshot, Boomerang, Kokiri_Sword]
 #[macro_export]
 macro_rules! helper___is_child_item {
     ($ctx:expr, $world:expr, $item:expr) => {{
-        #[allow(unused_imports)]
-        use $crate::items::Item;
         matches!(
             $item,
             Item::Slingshot | Item::Boomerang | Item::Kokiri_Sword
@@ -677,8 +786,6 @@ macro_rules! helper___is_child_item {
 #[macro_export]
 macro_rules! hexplain___is_child_item {
     ($ctx:expr, $world:expr, $item:expr, $edict:expr) => {{
-        #[allow(unused_imports)]
-        use $crate::items::Item;
         {
             let r = $item;
             if let Some(v) = $edict.get_mut(&"helpers:$_is_child_item.^item") {
@@ -693,14 +800,21 @@ macro_rules! hexplain___is_child_item {
         }
     }};
 }
+#[macro_export]
+macro_rules! hobserve___is_child_item {
+    ($ctx:expr, $world:expr, $item:expr, $full_obs:expr) => {{
+        matches!(
+            $item,
+            Item::Slingshot | Item::Boomerang | Item::Kokiri_Sword
+        )
+    }};
+}
 
 /// $_is_magic_arrow ( TypedVar(name='item', type='Item') )
 /// ^item IN [Fire_Arrows, Light_Arrows, Blue_Fire_Arrows]
 #[macro_export]
 macro_rules! helper___is_magic_arrow {
     ($ctx:expr, $world:expr, $item:expr) => {{
-        #[allow(unused_imports)]
-        use $crate::items::Item;
         matches!(
             $item,
             Item::Fire_Arrows | Item::Light_Arrows | Item::Blue_Fire_Arrows
@@ -710,8 +824,6 @@ macro_rules! helper___is_magic_arrow {
 #[macro_export]
 macro_rules! hexplain___is_magic_arrow {
     ($ctx:expr, $world:expr, $item:expr, $edict:expr) => {{
-        #[allow(unused_imports)]
-        use $crate::items::Item;
         {
             let r = $item;
             if let Some(v) = $edict.get_mut(&"helpers:$_is_magic_arrow.^item") {
@@ -729,26 +841,40 @@ macro_rules! hexplain___is_magic_arrow {
         }
     }};
 }
+#[macro_export]
+macro_rules! hobserve___is_magic_arrow {
+    ($ctx:expr, $world:expr, $item:expr, $full_obs:expr) => {{
+        matches!(
+            $item,
+            Item::Fire_Arrows | Item::Light_Arrows | Item::Blue_Fire_Arrows
+        )
+    }};
+}
 
 /// $has_explosives (  )
 /// Bombs
 #[macro_export]
 macro_rules! helper__has_explosives {
     ($ctx:expr, $world:expr) => {{
-        #[allow(unused_imports)]
-        use $crate::items::Item;
         $ctx.has(Item::Bombs)
     }};
 }
 #[macro_export]
 macro_rules! hexplain__has_explosives {
     ($ctx:expr, $world:expr, $edict:expr) => {{
-        #[allow(unused_imports)]
-        use $crate::items::Item;
         {
             let h = $ctx.has(Item::Bombs);
             $edict.insert("Bombs", format!("{}", h));
             (h, vec!["Bombs"])
+        }
+    }};
+}
+#[macro_export]
+macro_rules! hobserve__has_explosives {
+    ($ctx:expr, $world:expr, $full_obs:expr) => {{
+        {
+            $full_obs.observe_bombs();
+            $ctx.has(Item::Bombs)
         }
     }};
 }
@@ -758,8 +884,6 @@ macro_rules! hexplain__has_explosives {
 #[macro_export]
 macro_rules! helper__can_blast_or_smash {
     ($ctx:expr, $world:expr) => {{
-        #[allow(unused_imports)]
-        use $crate::items::Item;
         (helper__has_explosives!($ctx, $world)
             || helper__can_use!($ctx, $world, Item::Megaton_Hammer))
     }};
@@ -767,8 +891,6 @@ macro_rules! helper__can_blast_or_smash {
 #[macro_export]
 macro_rules! hexplain__can_blast_or_smash {
     ($ctx:expr, $world:expr, $edict:expr) => {{
-        #[allow(unused_imports)]
-        use $crate::items::Item;
         {
             let mut left = {
                 let (res, mut refs) = hexplain__has_explosives!($ctx, $world, $edict);
@@ -792,14 +914,19 @@ macro_rules! hexplain__can_blast_or_smash {
         }
     }};
 }
+#[macro_export]
+macro_rules! hobserve__can_blast_or_smash {
+    ($ctx:expr, $world:expr, $full_obs:expr) => {{
+        (hobserve__has_explosives!($ctx, $world, $full_obs)
+            || hobserve__can_use!($ctx, $world, Item::Megaton_Hammer, $full_obs))
+    }};
+}
 
 /// $can_child_attack (  )
 /// $is_child and (Slingshot or Boomerang or $Sticks or Kokiri_Sword)
 #[macro_export]
 macro_rules! helper__can_child_attack {
     ($ctx:expr, $world:expr) => {{
-        #[allow(unused_imports)]
-        use $crate::items::Item;
         (helper__is_child!($ctx, $world)
             && ((($ctx.has(Item::Slingshot) || $ctx.has(Item::Boomerang))
                 || helper__Sticks!($ctx, $world))
@@ -809,8 +936,6 @@ macro_rules! helper__can_child_attack {
 #[macro_export]
 macro_rules! hexplain__can_child_attack {
     ($ctx:expr, $world:expr, $edict:expr) => {{
-        #[allow(unused_imports)]
-        use $crate::items::Item;
         {
             let mut left = {
                 let (res, mut refs) = hexplain__is_child!($ctx, $world, $edict);
@@ -872,14 +997,29 @@ macro_rules! hexplain__can_child_attack {
         }
     }};
 }
+#[macro_export]
+macro_rules! hobserve__can_child_attack {
+    ($ctx:expr, $world:expr, $full_obs:expr) => {{
+        (hobserve__is_child!($ctx, $world, $full_obs)
+            && ((({
+                $full_obs.observe_slingshot();
+                $ctx.has(Item::Slingshot)
+            } || {
+                $full_obs.observe_boomerang();
+                $ctx.has(Item::Boomerang)
+            }) || hobserve__Sticks!($ctx, $world, $full_obs))
+                || {
+                    $full_obs.observe_kokiri_sword();
+                    $ctx.has(Item::Kokiri_Sword)
+                }))
+    }};
+}
 
 /// $has_fire_source (  )
 /// $can_use(Dins_Fire) or $can_use(Fire_Arrows)
 #[macro_export]
 macro_rules! helper__has_fire_source {
     ($ctx:expr, $world:expr) => {{
-        #[allow(unused_imports)]
-        use $crate::items::Item;
         (helper__can_use!($ctx, $world, Item::Dins_Fire)
             || helper__can_use!($ctx, $world, Item::Fire_Arrows))
     }};
@@ -887,8 +1027,6 @@ macro_rules! helper__has_fire_source {
 #[macro_export]
 macro_rules! hexplain__has_fire_source {
     ($ctx:expr, $world:expr, $edict:expr) => {{
-        #[allow(unused_imports)]
-        use $crate::items::Item;
         {
             let mut left = {
                 let (res, mut refs) = hexplain__can_use!($ctx, $world, Item::Dins_Fire, $edict);
@@ -912,14 +1050,19 @@ macro_rules! hexplain__has_fire_source {
         }
     }};
 }
+#[macro_export]
+macro_rules! hobserve__has_fire_source {
+    ($ctx:expr, $world:expr, $full_obs:expr) => {{
+        (hobserve__can_use!($ctx, $world, Item::Dins_Fire, $full_obs)
+            || hobserve__can_use!($ctx, $world, Item::Fire_Arrows, $full_obs))
+    }};
+}
 
 /// $has_fire_source_with_torch (  )
 /// $has_fire_source or ($is_child and $Sticks)
 #[macro_export]
 macro_rules! helper__has_fire_source_with_torch {
     ($ctx:expr, $world:expr) => {{
-        #[allow(unused_imports)]
-        use $crate::items::Item;
         (helper__has_fire_source!($ctx, $world)
             || (helper__is_child!($ctx, $world) && helper__Sticks!($ctx, $world)))
     }};
@@ -927,8 +1070,6 @@ macro_rules! helper__has_fire_source_with_torch {
 #[macro_export]
 macro_rules! hexplain__has_fire_source_with_torch {
     ($ctx:expr, $world:expr, $edict:expr) => {{
-        #[allow(unused_imports)]
-        use $crate::items::Item;
         {
             let mut left = {
                 let (res, mut refs) = hexplain__has_fire_source!($ctx, $world, $edict);
@@ -965,12 +1106,19 @@ macro_rules! hexplain__has_fire_source_with_torch {
         }
     }};
 }
+#[macro_export]
+macro_rules! hobserve__has_fire_source_with_torch {
+    ($ctx:expr, $world:expr, $full_obs:expr) => {{
+        (hobserve__has_fire_source!($ctx, $world, $full_obs)
+            || (hobserve__is_child!($ctx, $world, $full_obs)
+                && (hobserve__Sticks!($ctx, $world, $full_obs))))
+    }};
+}
 
 /// Rule $victory
 #[macro_export]
 macro_rules! rule__victory {
     ($ctx:expr, $world:expr) => {{
-        use $crate::graph_enums::*;
         use $crate::rules;
         match $world.rule_victory {
             RuleVictory::Default => rules::access___victory_objective($ctx, $world),
@@ -980,10 +1128,20 @@ macro_rules! rule__victory {
 #[macro_export]
 macro_rules! rexplain__victory {
     ($ctx:expr, $world:expr, $edict:expr) => {{
-        use $crate::graph_enums::*;
         use $crate::rules;
         match $world.rule_victory {
             RuleVictory::Default => rules::explain___victory_objective($ctx, $world, $edict),
+        }
+    }};
+}
+#[macro_export]
+macro_rules! robserve__victory {
+    ($ctx:expr, $world:expr, $full_obs:expr) => {{
+        use $crate::rules;
+        match $world.rule_victory {
+            RuleVictory::Default => {
+                rules::observe_access___victory_objective($ctx, $world, $full_obs)
+            }
         }
     }};
 }
@@ -992,7 +1150,6 @@ macro_rules! rexplain__victory {
 #[macro_export]
 macro_rules! rule__objective {
     ($ctx:expr, $world:expr) => {{
-        use $crate::graph_enums::*;
         use $crate::rules;
         match $world.rule_objective {
             RuleObjective::Gohma => rules::access___deku_lobby_web_kokiri_emerald($ctx, $world),
@@ -1006,7 +1163,6 @@ macro_rules! rule__objective {
 #[macro_export]
 macro_rules! rexplain__objective {
     ($ctx:expr, $world:expr, $edict:expr) => {{
-        use $crate::graph_enums::*;
         use $crate::rules;
         match $world.rule_objective {
             RuleObjective::Gohma => {
@@ -1015,6 +1171,21 @@ macro_rules! rexplain__objective {
             RuleObjective::Ganon => rules::explain___defeat_ganon($ctx, $world, $edict),
             RuleObjective::TriforceHunt => {
                 rules::explain___triforce_piece__triforce_count($ctx, $world, $edict)
+            }
+        }
+    }};
+}
+#[macro_export]
+macro_rules! robserve__objective {
+    ($ctx:expr, $world:expr, $full_obs:expr) => {{
+        use $crate::rules;
+        match $world.rule_objective {
+            RuleObjective::Gohma => {
+                rules::observe_access___deku_lobby_web_kokiri_emerald($ctx, $world, $full_obs)
+            }
+            RuleObjective::Ganon => rules::observe_access___defeat_ganon($ctx, $world, $full_obs),
+            RuleObjective::TriforceHunt => {
+                rules::observe_access___triforce_piece__triforce_count($ctx, $world, $full_obs)
             }
         }
     }};
