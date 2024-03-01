@@ -464,8 +464,11 @@ where
         let mut sols = self.solutions.lock().unwrap();
         let min_progress = self.min_progress();
         let orig = sols.len();
+        let start = Instant::now();
         sols.clean();
+        log::info!("Cleaned out solutions in {:?}", start.elapsed());
         if sols.len() < orig {
+            let start = Instant::now();
             self.solve_trie.clear();
             for solution in sols.iter() {
                 record_observations(
@@ -477,6 +480,7 @@ where
                     &self.solve_trie,
                 );
             }
+            log::info!("Reset solve trie in {:?}", start.elapsed());
         }
     }
 
