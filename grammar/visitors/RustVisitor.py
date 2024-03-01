@@ -175,7 +175,7 @@ class RustVisitor(RustBaseVisitor):
 
     def visitSetting(self, ctx):
         # TODO: dict settings?
-        return f'ctx.{ctx.SETTING()}()'
+        return f'world.{ctx.SETTING()}'
 
     def visitArgument(self, ctx):
         return self._getRefGetter(str(ctx.REF())[1:])
@@ -555,7 +555,7 @@ class RustExplainerVisitor(RustBaseVisitor):
         # TODO: dict settings?
         setting = ctx.SETTING().getText()
         lines = [
-            f'let s = ctx.{ctx.SETTING()}()',
+            f'let s = world.{ctx.SETTING()}',
             f'edict.insert("{setting}", format!("{{}}", s))',
             f'(s, vec!["{setting}"])',
         ]
@@ -1026,7 +1026,7 @@ class RustObservationVisitor(RustBaseVisitor):
 
     def visitSetting(self, ctx):
         # TODO: dict settings?
-        return f'ctx.{ctx.SETTING()}()'
+        return f'world.{ctx.SETTING()}'
 
     def visitArgument(self, ctx):
         ref = str(ctx.REF())

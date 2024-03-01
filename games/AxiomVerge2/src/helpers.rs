@@ -1340,7 +1340,7 @@ macro_rules! hobserve__max_energy {
 #[macro_export]
 macro_rules! helper__bs {
     ($ctx:expr, $world:expr) => {{
-        ($ctx.boomerang_steering() && helper__boomerang!($ctx, $world))
+        ($world.boomerang_steering && helper__boomerang!($ctx, $world))
     }};
 }
 #[macro_export]
@@ -1348,7 +1348,7 @@ macro_rules! hexplain__bs {
     ($ctx:expr, $world:expr, $edict:expr) => {{
         {
             let mut left = {
-                let s = $ctx.boomerang_steering();
+                let s = $world.boomerang_steering;
                 $edict.insert("boomerang_steering", format!("{}", s));
                 (s, vec!["boomerang_steering"])
             };
@@ -1370,7 +1370,7 @@ macro_rules! hexplain__bs {
 #[macro_export]
 macro_rules! hobserve__bs {
     ($ctx:expr, $world:expr, $full_obs:expr) => {{
-        ($ctx.boomerang_steering() && (hobserve__boomerang!($ctx, $world, $full_obs)))
+        ($world.boomerang_steering && (hobserve__boomerang!($ctx, $world, $full_obs)))
     }};
 }
 
@@ -1379,7 +1379,7 @@ macro_rules! hobserve__bs {
 #[macro_export]
 macro_rules! helper__offset {
     ($ctx:expr, $world:expr) => {{
-        ($ctx.major_glitches() && helper__melee!($ctx, $world))
+        ($world.major_glitches && helper__melee!($ctx, $world))
     }};
 }
 #[macro_export]
@@ -1387,7 +1387,7 @@ macro_rules! hexplain__offset {
     ($ctx:expr, $world:expr, $edict:expr) => {{
         {
             let mut left = {
-                let s = $ctx.major_glitches();
+                let s = $world.major_glitches;
                 $edict.insert("major_glitches", format!("{}", s));
                 (s, vec!["major_glitches"])
             };
@@ -1409,7 +1409,7 @@ macro_rules! hexplain__offset {
 #[macro_export]
 macro_rules! hobserve__offset {
     ($ctx:expr, $world:expr, $full_obs:expr) => {{
-        ($ctx.major_glitches() && (hobserve__melee!($ctx, $world, $full_obs)))
+        ($world.major_glitches && (hobserve__melee!($ctx, $world, $full_obs)))
     }};
 }
 
@@ -1418,7 +1418,7 @@ macro_rules! hobserve__offset {
 #[macro_export]
 macro_rules! helper__block_clip {
     ($ctx:expr, $world:expr) => {{
-        ($ctx.minor_glitches() && $ctx.mode() == enums::Mode::Drone)
+        ($world.minor_glitches && $ctx.mode() == enums::Mode::Drone)
     }};
 }
 #[macro_export]
@@ -1426,7 +1426,7 @@ macro_rules! hexplain__block_clip {
     ($ctx:expr, $world:expr, $edict:expr) => {{
         {
             let mut left = {
-                let s = $ctx.minor_glitches();
+                let s = $world.minor_glitches;
                 $edict.insert("minor_glitches", format!("{}", s));
                 (s, vec!["minor_glitches"])
             };
@@ -1454,7 +1454,7 @@ macro_rules! hexplain__block_clip {
 #[macro_export]
 macro_rules! hobserve__block_clip {
     ($ctx:expr, $world:expr, $full_obs:expr) => {{
-        ($ctx.minor_glitches()
+        ($world.minor_glitches
             && ({
                 let v = {
                     $full_obs.observe_mode();
@@ -1470,7 +1470,7 @@ macro_rules! hobserve__block_clip {
 #[macro_export]
 macro_rules! helper__block_clip_escape {
     ($ctx:expr, $world:expr) => {{
-        ($ctx.minor_glitches() && helper__hook!($ctx, $world))
+        ($world.minor_glitches && helper__hook!($ctx, $world))
     }};
 }
 #[macro_export]
@@ -1478,7 +1478,7 @@ macro_rules! hexplain__block_clip_escape {
     ($ctx:expr, $world:expr, $edict:expr) => {{
         {
             let mut left = {
-                let s = $ctx.minor_glitches();
+                let s = $world.minor_glitches;
                 $edict.insert("minor_glitches", format!("{}", s));
                 (s, vec!["minor_glitches"])
             };
@@ -1500,7 +1500,7 @@ macro_rules! hexplain__block_clip_escape {
 #[macro_export]
 macro_rules! hobserve__block_clip_escape {
     ($ctx:expr, $world:expr, $full_obs:expr) => {{
-        ($ctx.minor_glitches() && (hobserve__hook!($ctx, $world, $full_obs)))
+        ($world.minor_glitches && (hobserve__hook!($ctx, $world, $full_obs)))
     }};
 }
 
