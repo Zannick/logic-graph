@@ -217,7 +217,8 @@ pub fn get_area(spot: SpotId) -> AreaId {
         | SpotId::Annuna__Vertical_Room__Plinth
         | SpotId::Annuna__Vertical_Room__Gate_Button
         | SpotId::Annuna__Vertical_Room__Middle_Overhang
-        | SpotId::Annuna__Vertical_Room__East_21 => AreaId::Annuna__Vertical_Room,
+        | SpotId::Annuna__Vertical_Room__East_21
+        | SpotId::Annuna__Vertical_Room__West_20 => AreaId::Annuna__Vertical_Room,
         SpotId::Annuna__Lower_Hallway__West
         | SpotId::Annuna__Lower_Hallway__Dais_Left
         | SpotId::Annuna__Lower_Hallway__Dais_Right
@@ -275,7 +276,19 @@ pub fn get_area(spot: SpotId) -> AreaId {
         | SpotId::Annuna__West_Climb__Platform_3
         | SpotId::Annuna__West_Climb__North
         | SpotId::Annuna__West_Climb__East_19 => AreaId::Annuna__West_Climb,
-        SpotId::Annuna__Egg_Room__West => AreaId::Annuna__Egg_Room,
+        SpotId::Annuna__Egg_Room__West
+        | SpotId::Annuna__Egg_Room__First_Egg
+        | SpotId::Annuna__Egg_Room__Second_Egg
+        | SpotId::Annuna__Egg_Room__Third_Egg
+        | SpotId::Annuna__Egg_Room__East
+        | SpotId::Annuna__Egg_Room__Passage_Entrance
+        | SpotId::Annuna__Egg_Room__Cache
+        | SpotId::Annuna__Egg_Room__Corner_Platform => AreaId::Annuna__Egg_Room,
+        SpotId::Annuna__Center_Climb__West
+        | SpotId::Annuna__Center_Climb__Upper_Platform
+        | SpotId::Annuna__Center_Climb__Middle_Platform
+        | SpotId::Annuna__Center_Climb__Lower_Platform
+        | SpotId::Annuna__Center_Climb__East => AreaId::Annuna__Center_Climb,
         SpotId::Annuna__Apocalypse_Hallway__Lower_East
         | SpotId::Annuna__Apocalypse_Hallway__Upper_East
         | SpotId::Annuna__Apocalypse_Hallway__East_Pillar
@@ -1587,7 +1600,8 @@ pub fn get_region(spot: SpotId) -> RegionId {
         | SpotId::Annuna__Vertical_Room__Plinth
         | SpotId::Annuna__Vertical_Room__Gate_Button
         | SpotId::Annuna__Vertical_Room__Middle_Overhang
-        | SpotId::Annuna__Vertical_Room__East_21 => RegionId::Annuna,
+        | SpotId::Annuna__Vertical_Room__East_21
+        | SpotId::Annuna__Vertical_Room__West_20 => RegionId::Annuna,
         SpotId::Annuna__Lower_Hallway__West
         | SpotId::Annuna__Lower_Hallway__Dais_Left
         | SpotId::Annuna__Lower_Hallway__Dais_Right
@@ -1645,7 +1659,19 @@ pub fn get_region(spot: SpotId) -> RegionId {
         | SpotId::Annuna__West_Climb__Platform_3
         | SpotId::Annuna__West_Climb__North
         | SpotId::Annuna__West_Climb__East_19 => RegionId::Annuna,
-        SpotId::Annuna__Egg_Room__West => RegionId::Annuna,
+        SpotId::Annuna__Egg_Room__West
+        | SpotId::Annuna__Egg_Room__First_Egg
+        | SpotId::Annuna__Egg_Room__Second_Egg
+        | SpotId::Annuna__Egg_Room__Third_Egg
+        | SpotId::Annuna__Egg_Room__East
+        | SpotId::Annuna__Egg_Room__Passage_Entrance
+        | SpotId::Annuna__Egg_Room__Cache
+        | SpotId::Annuna__Egg_Room__Corner_Platform => RegionId::Annuna,
+        SpotId::Annuna__Center_Climb__West
+        | SpotId::Annuna__Center_Climb__Upper_Platform
+        | SpotId::Annuna__Center_Climb__Middle_Platform
+        | SpotId::Annuna__Center_Climb__Lower_Platform
+        | SpotId::Annuna__Center_Climb__East => RegionId::Annuna,
         SpotId::Annuna__Apocalypse_Hallway__Lower_East
         | SpotId::Annuna__Apocalypse_Hallway__Upper_East
         | SpotId::Annuna__Apocalypse_Hallway__East_Pillar
@@ -2823,6 +2849,19 @@ impl world::Accessible for Location {
             }
             LocationId::Annuna__East_Bridge__Tower_Gate__Tablet => true,
             LocationId::Annuna__East_Bridge__Tower_Secret__Item => true,
+            LocationId::Annuna__Egg_Room__Cache__Flask => true,
+            LocationId::Annuna__Egg_Room__Cache__Shockwave_Flask => {
+                rules::access_shockwave(ctx, world)
+            }
+            LocationId::Annuna__Egg_Room__Corner_Platform__Remote_Boomerang_Flask => {
+                rules::access_remote_boomerang(ctx, world)
+            }
+            LocationId::Annuna__Egg_Room__Corner_Platform__Shockwave_from_Outside => {
+                rules::access_shockwave(ctx, world)
+            }
+            LocationId::Annuna__Egg_Room__Second_Egg__Remote_Boomerang_Flask => {
+                rules::access_remote_boomerang(ctx, world)
+            }
             LocationId::Annuna__Mirror_Match__Below_Switch__Hit_Switch => {
                 rules::access_can_damage(ctx, world)
             }
@@ -3308,6 +3347,18 @@ impl world::Accessible for Location {
             LocationId::Annuna__East_Bridge__Gate_Button__Switch => {
                 rules::observe_access_can_damage(ctx, world, full_obs)
             }
+            LocationId::Annuna__Egg_Room__Cache__Shockwave_Flask => {
+                rules::observe_access_shockwave(ctx, world, full_obs)
+            }
+            LocationId::Annuna__Egg_Room__Corner_Platform__Remote_Boomerang_Flask => {
+                rules::observe_access_remote_boomerang(ctx, world, full_obs)
+            }
+            LocationId::Annuna__Egg_Room__Corner_Platform__Shockwave_from_Outside => {
+                rules::observe_access_shockwave(ctx, world, full_obs)
+            }
+            LocationId::Annuna__Egg_Room__Second_Egg__Remote_Boomerang_Flask => {
+                rules::observe_access_remote_boomerang(ctx, world, full_obs)
+            }
             LocationId::Annuna__Mirror_Match__Below_Switch__Hit_Switch => {
                 rules::observe_access_can_damage(ctx, world, full_obs)
             }
@@ -3744,6 +3795,18 @@ impl world::Accessible for Location {
             }
             LocationId::Annuna__East_Bridge__Gate_Button__Switch => {
                 rules::explain_can_damage(ctx, world, edict)
+            }
+            LocationId::Annuna__Egg_Room__Cache__Shockwave_Flask => {
+                rules::explain_shockwave(ctx, world, edict)
+            }
+            LocationId::Annuna__Egg_Room__Corner_Platform__Remote_Boomerang_Flask => {
+                rules::explain_remote_boomerang(ctx, world, edict)
+            }
+            LocationId::Annuna__Egg_Room__Corner_Platform__Shockwave_from_Outside => {
+                rules::explain_shockwave(ctx, world, edict)
+            }
+            LocationId::Annuna__Egg_Room__Second_Egg__Remote_Boomerang_Flask => {
+                rules::explain_remote_boomerang(ctx, world, edict)
             }
             LocationId::Annuna__Mirror_Match__Below_Switch__Hit_Switch => {
                 rules::explain_can_damage(ctx, world, edict)
@@ -4191,6 +4254,13 @@ impl world::Accessible for Exit {
             ExitId::Annuna__Apocalypse__Southwest_Capsule__ex__West_1 => rules::access_grab(ctx, world),
             ExitId::Annuna__Apocalypse__Southwest_Capsule__ex__West_2 => rules::access_hook(ctx, world),
             ExitId::Annuna__Apocalypse__West__ex__Final_Save__East_1 => true,
+            ExitId::Annuna__Center_Climb__East__ex__Lower_Platform_1 => rules::access_hook(ctx, world),
+            ExitId::Annuna__Center_Climb__East__ex__Middle_Platform_1 => rules::access_anuman_and_slingshot_hook_and_drone_hover(ctx, world),
+            ExitId::Annuna__Center_Climb__East__ex__Vertical_Room__West_20_1 => true,
+            ExitId::Annuna__Center_Climb__Lower_Platform__ex__Middle_Platform_1 => rules::access_hook(ctx, world),
+            ExitId::Annuna__Center_Climb__Middle_Platform__ex__Upper_Platform_1 => rules::access_hook(ctx, world),
+            ExitId::Annuna__Center_Climb__Upper_Platform__ex__West_1 => rules::access_hook(ctx, world),
+            ExitId::Annuna__Center_Climb__West__ex__Egg_Room__East_1 => true,
             ExitId::Annuna__Center_Save__East__ex__Vertical_Room__West_21_1 => true,
             ExitId::Annuna__Center_Save__Save_Point__ex__West_Catwalk_1 => rules::access_hover(ctx, world),
             ExitId::Annuna__Center_Save__West_Catwalk__ex__Twisty_Passages__East_Catwalk_1 => true,
@@ -4266,6 +4336,21 @@ impl world::Accessible for Exit {
             ExitId::Annuna__East_Climb__West_25__ex__Factory_Entrance__East_1 => true,
             ExitId::Annuna__East_Climb__West_26__ex__Platform_1_Left_1 => rules::access_hook(ctx, world),
             ExitId::Annuna__East_Climb__West_26__ex__Udug_Gate__East_1 => true,
+            ExitId::Annuna__Egg_Room__Corner_Platform__ex__East_1 => rules::access_hover(ctx, world),
+            ExitId::Annuna__Egg_Room__East__ex__Center_Climb__West_1 => true,
+            ExitId::Annuna__Egg_Room__East__ex__Corner_Platform_1 => rules::access_hover(ctx, world),
+            ExitId::Annuna__Egg_Room__First_Egg__ex__Second_Egg_1 => rules::access_hook_and_hover(ctx, world),
+            ExitId::Annuna__Egg_Room__Passage_Entrance__ex__First_Egg_1 => rules::access_mode_eq_drone(ctx, world),
+            ExitId::Annuna__Egg_Room__Passage_Entrance__ex__Second_Egg_1 => rules::access_mode_eq_drone(ctx, world),
+            ExitId::Annuna__Egg_Room__Passage_Entrance__ex__Third_Egg_1 => rules::access_hover(ctx, world),
+            ExitId::Annuna__Egg_Room__Second_Egg__ex__Third_Egg_1 => rules::access_hook(ctx, world),
+            ExitId::Annuna__Egg_Room__Second_Egg__ex__Third_Egg_2 => rules::access_hook(ctx, world),
+            ExitId::Annuna__Egg_Room__Third_Egg__ex__Corner_Platform_1 => rules::access_anuman(ctx, world),
+            ExitId::Annuna__Egg_Room__Third_Egg__ex__East_1 => rules::access_hook(ctx, world),
+            ExitId::Annuna__Egg_Room__Third_Egg__ex__Passage_Entrance_1 => rules::access_nanite_mist_and_mode_eq_drone(ctx, world),
+            ExitId::Annuna__Egg_Room__Third_Egg__ex__Passage_Entrance_2 => rules::access_mist2_and_mode_eq_drone(ctx, world),
+            ExitId::Annuna__Egg_Room__West__ex__First_Egg_1 => rules::access_hook(ctx, world),
+            ExitId::Annuna__Egg_Room__West__ex__West_Climb__East_19_1 => true,
             ExitId::Annuna__Factory_Access__Bottom__ex__Upper_Platform_1 => rules::access_hook_and_hover(ctx, world),
             ExitId::Annuna__Factory_Access__East_22__ex__East_Hideout__West_1 => true,
             ExitId::Annuna__Factory_Access__East_22__ex__Grate_Left_1 => rules::access_nanite_mist(ctx, world),
@@ -5459,6 +5544,11 @@ impl world::Accessible for Exit {
             ExitId::Annuna__Apocalypse__Northwest_Mid_air__ex__Northwest_Scaffold_2_West_2 => rules::observe_access_mist2(ctx, world, full_obs),
             ExitId::Annuna__Apocalypse__Southwest_Capsule__ex__West_1 => rules::observe_access_grab(ctx, world, full_obs),
             ExitId::Annuna__Apocalypse__Southwest_Capsule__ex__West_2 => rules::observe_access_hook(ctx, world, full_obs),
+            ExitId::Annuna__Center_Climb__East__ex__Lower_Platform_1 => rules::observe_access_hook(ctx, world, full_obs),
+            ExitId::Annuna__Center_Climb__East__ex__Middle_Platform_1 => rules::observe_access_anuman_and_slingshot_hook_and_drone_hover(ctx, world, full_obs),
+            ExitId::Annuna__Center_Climb__Lower_Platform__ex__Middle_Platform_1 => rules::observe_access_hook(ctx, world, full_obs),
+            ExitId::Annuna__Center_Climb__Middle_Platform__ex__Upper_Platform_1 => rules::observe_access_hook(ctx, world, full_obs),
+            ExitId::Annuna__Center_Climb__Upper_Platform__ex__West_1 => rules::observe_access_hook(ctx, world, full_obs),
             ExitId::Annuna__Center_Save__Save_Point__ex__West_Catwalk_1 => rules::observe_access_hover(ctx, world, full_obs),
             ExitId::Annuna__East_Bridge__Below_Gate_Button__ex__Center_Gap_East_1 => rules::observe_access_annuna_east_bridge_gate(ctx, world, full_obs),
             ExitId::Annuna__East_Bridge__Bridge_Top_East__ex__East_24_1 => rules::observe_access_grab(ctx, world, full_obs),
@@ -5516,6 +5606,19 @@ impl world::Accessible for Exit {
             ExitId::Annuna__East_Climb__Platform_3_Right__ex__Platform_4_Left_1 => rules::observe_access_hook(ctx, world, full_obs),
             ExitId::Annuna__East_Climb__Platform_4_Left__ex__Upper_Ledge_1 => rules::observe_access_hook_and_hover(ctx, world, full_obs),
             ExitId::Annuna__East_Climb__West_26__ex__Platform_1_Left_1 => rules::observe_access_hook(ctx, world, full_obs),
+            ExitId::Annuna__Egg_Room__Corner_Platform__ex__East_1 => rules::observe_access_hover(ctx, world, full_obs),
+            ExitId::Annuna__Egg_Room__East__ex__Corner_Platform_1 => rules::observe_access_hover(ctx, world, full_obs),
+            ExitId::Annuna__Egg_Room__First_Egg__ex__Second_Egg_1 => rules::observe_access_hook_and_hover(ctx, world, full_obs),
+            ExitId::Annuna__Egg_Room__Passage_Entrance__ex__First_Egg_1 => rules::observe_access_mode_eq_drone(ctx, world, full_obs),
+            ExitId::Annuna__Egg_Room__Passage_Entrance__ex__Second_Egg_1 => rules::observe_access_mode_eq_drone(ctx, world, full_obs),
+            ExitId::Annuna__Egg_Room__Passage_Entrance__ex__Third_Egg_1 => rules::observe_access_hover(ctx, world, full_obs),
+            ExitId::Annuna__Egg_Room__Second_Egg__ex__Third_Egg_1 => rules::observe_access_hook(ctx, world, full_obs),
+            ExitId::Annuna__Egg_Room__Second_Egg__ex__Third_Egg_2 => rules::observe_access_hook(ctx, world, full_obs),
+            ExitId::Annuna__Egg_Room__Third_Egg__ex__Corner_Platform_1 => rules::observe_access_anuman(ctx, world, full_obs),
+            ExitId::Annuna__Egg_Room__Third_Egg__ex__East_1 => rules::observe_access_hook(ctx, world, full_obs),
+            ExitId::Annuna__Egg_Room__Third_Egg__ex__Passage_Entrance_1 => rules::observe_access_nanite_mist_and_mode_eq_drone(ctx, world, full_obs),
+            ExitId::Annuna__Egg_Room__Third_Egg__ex__Passage_Entrance_2 => rules::observe_access_mist2_and_mode_eq_drone(ctx, world, full_obs),
+            ExitId::Annuna__Egg_Room__West__ex__First_Egg_1 => rules::observe_access_hook(ctx, world, full_obs),
             ExitId::Annuna__Factory_Access__Bottom__ex__Upper_Platform_1 => rules::observe_access_hook_and_hover(ctx, world, full_obs),
             ExitId::Annuna__Factory_Access__East_22__ex__Grate_Left_1 => rules::observe_access_nanite_mist(ctx, world, full_obs),
             ExitId::Annuna__Factory_Access__East_22__ex__Grate_Left_2 => rules::observe_access_mist2(ctx, world, full_obs),
@@ -6509,6 +6612,11 @@ impl world::Accessible for Exit {
             ExitId::Annuna__Apocalypse__Northwest_Mid_air__ex__Northwest_Scaffold_2_West_2 => rules::explain_mist2(ctx, world, edict),
             ExitId::Annuna__Apocalypse__Southwest_Capsule__ex__West_1 => rules::explain_grab(ctx, world, edict),
             ExitId::Annuna__Apocalypse__Southwest_Capsule__ex__West_2 => rules::explain_hook(ctx, world, edict),
+            ExitId::Annuna__Center_Climb__East__ex__Lower_Platform_1 => rules::explain_hook(ctx, world, edict),
+            ExitId::Annuna__Center_Climb__East__ex__Middle_Platform_1 => rules::explain_anuman_and_slingshot_hook_and_drone_hover(ctx, world, edict),
+            ExitId::Annuna__Center_Climb__Lower_Platform__ex__Middle_Platform_1 => rules::explain_hook(ctx, world, edict),
+            ExitId::Annuna__Center_Climb__Middle_Platform__ex__Upper_Platform_1 => rules::explain_hook(ctx, world, edict),
+            ExitId::Annuna__Center_Climb__Upper_Platform__ex__West_1 => rules::explain_hook(ctx, world, edict),
             ExitId::Annuna__Center_Save__Save_Point__ex__West_Catwalk_1 => rules::explain_hover(ctx, world, edict),
             ExitId::Annuna__East_Bridge__Below_Gate_Button__ex__Center_Gap_East_1 => rules::explain_annuna_east_bridge_gate(ctx, world, edict),
             ExitId::Annuna__East_Bridge__Bridge_Top_East__ex__East_24_1 => rules::explain_grab(ctx, world, edict),
@@ -6566,6 +6674,19 @@ impl world::Accessible for Exit {
             ExitId::Annuna__East_Climb__Platform_3_Right__ex__Platform_4_Left_1 => rules::explain_hook(ctx, world, edict),
             ExitId::Annuna__East_Climb__Platform_4_Left__ex__Upper_Ledge_1 => rules::explain_hook_and_hover(ctx, world, edict),
             ExitId::Annuna__East_Climb__West_26__ex__Platform_1_Left_1 => rules::explain_hook(ctx, world, edict),
+            ExitId::Annuna__Egg_Room__Corner_Platform__ex__East_1 => rules::explain_hover(ctx, world, edict),
+            ExitId::Annuna__Egg_Room__East__ex__Corner_Platform_1 => rules::explain_hover(ctx, world, edict),
+            ExitId::Annuna__Egg_Room__First_Egg__ex__Second_Egg_1 => rules::explain_hook_and_hover(ctx, world, edict),
+            ExitId::Annuna__Egg_Room__Passage_Entrance__ex__First_Egg_1 => rules::explain_mode_eq_drone(ctx, world, edict),
+            ExitId::Annuna__Egg_Room__Passage_Entrance__ex__Second_Egg_1 => rules::explain_mode_eq_drone(ctx, world, edict),
+            ExitId::Annuna__Egg_Room__Passage_Entrance__ex__Third_Egg_1 => rules::explain_hover(ctx, world, edict),
+            ExitId::Annuna__Egg_Room__Second_Egg__ex__Third_Egg_1 => rules::explain_hook(ctx, world, edict),
+            ExitId::Annuna__Egg_Room__Second_Egg__ex__Third_Egg_2 => rules::explain_hook(ctx, world, edict),
+            ExitId::Annuna__Egg_Room__Third_Egg__ex__Corner_Platform_1 => rules::explain_anuman(ctx, world, edict),
+            ExitId::Annuna__Egg_Room__Third_Egg__ex__East_1 => rules::explain_hook(ctx, world, edict),
+            ExitId::Annuna__Egg_Room__Third_Egg__ex__Passage_Entrance_1 => rules::explain_nanite_mist_and_mode_eq_drone(ctx, world, edict),
+            ExitId::Annuna__Egg_Room__Third_Egg__ex__Passage_Entrance_2 => rules::explain_mist2_and_mode_eq_drone(ctx, world, edict),
+            ExitId::Annuna__Egg_Room__West__ex__First_Egg_1 => rules::explain_hook(ctx, world, edict),
             ExitId::Annuna__Factory_Access__Bottom__ex__Upper_Platform_1 => rules::explain_hook_and_hover(ctx, world, edict),
             ExitId::Annuna__Factory_Access__East_22__ex__Grate_Left_1 => rules::explain_nanite_mist(ctx, world, edict),
             ExitId::Annuna__Factory_Access__East_22__ex__Grate_Left_2 => rules::explain_mist2(ctx, world, edict),
@@ -7415,6 +7536,8 @@ impl world::Exit for Exit {
             ExitId::Amagi__West_Lake__East_19__ex__Main_Area__West_19_1 => true,
             ExitId::Amagi__West_Lake__West_15__ex__Ebih__Vertical_Interchange__East_15_1 => true,
             ExitId::Annuna__Apocalypse__West__ex__Final_Save__East_1 => true,
+            ExitId::Annuna__Center_Climb__East__ex__Vertical_Room__West_20_1 => true,
+            ExitId::Annuna__Center_Climb__West__ex__Egg_Room__East_1 => true,
             ExitId::Annuna__Center_Save__East__ex__Vertical_Room__West_21_1 => true,
             ExitId::Annuna__Center_Save__West_Catwalk__ex__Twisty_Passages__East_Catwalk_1 => true,
             ExitId::Annuna__Center_Save__West_Floor__ex__Twisty_Passages__East_Floor_1 => true,
@@ -7433,6 +7556,8 @@ impl world::Exit for Exit {
             ExitId::Annuna__East_Climb__West_24__ex__Factory_Access__East_24_1 => true,
             ExitId::Annuna__East_Climb__West_25__ex__Factory_Entrance__East_1 => true,
             ExitId::Annuna__East_Climb__West_26__ex__Udug_Gate__East_1 => true,
+            ExitId::Annuna__Egg_Room__East__ex__Center_Climb__West_1 => true,
+            ExitId::Annuna__Egg_Room__West__ex__West_Climb__East_19_1 => true,
             ExitId::Annuna__Factory_Access__East_22__ex__East_Hideout__West_1 => true,
             ExitId::Annuna__Factory_Access__East_24__ex__East_Climb__West_24_1 => true,
             ExitId::Annuna__Factory_Access__West_22__ex__Lower_Hallway__East_1 => true,
@@ -8929,7 +9054,7 @@ pub struct Spot {
     pub actions: Range<usize>,
 }
 
-static RAW_SPOTS: [SpotId; 1347] = [
+static RAW_SPOTS: [SpotId; 1360] = [
     SpotId::None,
     SpotId::Amagi__Grid_31_19__East,
     SpotId::Amagi__Grid_31_19__West,
@@ -9038,6 +9163,11 @@ static RAW_SPOTS: [SpotId; 1347] = [
     SpotId::Annuna__Apocalypse_Hallway__Lower_East,
     SpotId::Annuna__Apocalypse_Hallway__Upper_East,
     SpotId::Annuna__Apocalypse_Hallway__West,
+    SpotId::Annuna__Center_Climb__East,
+    SpotId::Annuna__Center_Climb__Lower_Platform,
+    SpotId::Annuna__Center_Climb__Middle_Platform,
+    SpotId::Annuna__Center_Climb__Upper_Platform,
+    SpotId::Annuna__Center_Climb__West,
     SpotId::Annuna__Center_Save__East,
     SpotId::Annuna__Center_Save__Save_Point,
     SpotId::Annuna__Center_Save__West_Catwalk,
@@ -9096,6 +9226,13 @@ static RAW_SPOTS: [SpotId; 1347] = [
     SpotId::Annuna__East_Climb__West_25,
     SpotId::Annuna__East_Climb__West_26,
     SpotId::Annuna__East_Hideout__West,
+    SpotId::Annuna__Egg_Room__Cache,
+    SpotId::Annuna__Egg_Room__Corner_Platform,
+    SpotId::Annuna__Egg_Room__East,
+    SpotId::Annuna__Egg_Room__First_Egg,
+    SpotId::Annuna__Egg_Room__Passage_Entrance,
+    SpotId::Annuna__Egg_Room__Second_Egg,
+    SpotId::Annuna__Egg_Room__Third_Egg,
     SpotId::Annuna__Egg_Room__West,
     SpotId::Annuna__Factory_Access__Bottom,
     SpotId::Annuna__Factory_Access__East_22,
@@ -9187,6 +9324,7 @@ static RAW_SPOTS: [SpotId; 1347] = [
     SpotId::Annuna__Vertical_Room__Lower_Platform_2_Right,
     SpotId::Annuna__Vertical_Room__Middle_Overhang,
     SpotId::Annuna__Vertical_Room__Plinth,
+    SpotId::Annuna__Vertical_Room__West_20,
     SpotId::Annuna__Vertical_Room__West_21,
     SpotId::Annuna__Vertical_Room__West_22,
     SpotId::Annuna__West_Bridge__Below_Tunnel,
@@ -10306,6 +10444,10 @@ lazy_static! {
             start: SpotId::Annuna__Apocalypse_Hallway__Center_Pillar.into_usize(),
             end: SpotId::Annuna__Apocalypse_Hallway__West.into_usize() + 1,
         },
+        AreaId::Annuna__Center_Climb => Range {
+            start: SpotId::Annuna__Center_Climb__East.into_usize(),
+            end: SpotId::Annuna__Center_Climb__West.into_usize() + 1,
+        },
         AreaId::Annuna__Center_Save => Range {
             start: SpotId::Annuna__Center_Save__East.into_usize(),
             end: SpotId::Annuna__Center_Save__West_Floor.into_usize() + 1,
@@ -10323,7 +10465,7 @@ lazy_static! {
             end: SpotId::Annuna__East_Hideout__West.into_usize() + 1,
         },
         AreaId::Annuna__Egg_Room => Range {
-            start: SpotId::Annuna__Egg_Room__West.into_usize(),
+            start: SpotId::Annuna__Egg_Room__Cache.into_usize(),
             end: SpotId::Annuna__Egg_Room__West.into_usize() + 1,
         },
         AreaId::Annuna__Factory_Access => Range {
@@ -10900,7 +11042,7 @@ impl world::World for World {
     type Exit = Exit;
     type Action = Action;
     type Warp = Warp;
-    const NUM_LOCATIONS: u32 = 232;
+    const NUM_LOCATIONS: u32 = 237;
 
     fn ruleset(&self) -> String {
         format!(
@@ -10983,6 +11125,13 @@ impl world::World for World {
             CanonId::Sniper_Valley_Rock_2 => vec![
                 LocationId::Annuna__Sniper_Valley__Cavern_Inner_Rock_West__Break_Inner_Wall,
                 LocationId::Annuna__Sniper_Valley__Cavern_Inner_Rock_East__Break_Inner_Wall,
+            ],
+            CanonId::Egg_Room_Flask => vec![
+                LocationId::Annuna__Egg_Room__Second_Egg__Remote_Boomerang_Flask,
+                LocationId::Annuna__Egg_Room__Cache__Flask,
+                LocationId::Annuna__Egg_Room__Cache__Shockwave_Flask,
+                LocationId::Annuna__Egg_Room__Corner_Platform__Shockwave_from_Outside,
+                LocationId::Annuna__Egg_Room__Corner_Platform__Remote_Boomerang_Flask,
             ],
             CanonId::Apocalypse_Bomb => vec![
                 LocationId::Annuna__Apocalypse__Center_Scaffold_West__Boss_Fight,
@@ -11213,6 +11362,11 @@ impl world::World for World {
                 LocationId::Annuna__Mirror_Match__East_26_Lower__Remote_Flask,
                 LocationId::Annuna__Mirror_Match__East_26_Upper__Remote_Flask,
                 LocationId::Annuna__Sniper_Valley__Cavern_Cache__Item,
+                LocationId::Annuna__Egg_Room__Second_Egg__Remote_Boomerang_Flask,
+                LocationId::Annuna__Egg_Room__Cache__Flask,
+                LocationId::Annuna__Egg_Room__Cache__Shockwave_Flask,
+                LocationId::Annuna__Egg_Room__Corner_Platform__Shockwave_from_Outside,
+                LocationId::Annuna__Egg_Room__Corner_Platform__Remote_Boomerang_Flask,
                 LocationId::Giguna__Clouds__Cache__Item,
                 LocationId::Giguna__Gubi_Lair__Center_Platform__Boss_Reward,
                 LocationId::Irikar__Boss_Room__Bulls_Feet__Boss_Reward,
@@ -11643,6 +11797,17 @@ impl world::World for World {
                 SpotId::Annuna__Twisty_Passages__Northwest_Alcove
             }
             LocationId::Annuna__West_Climb__Cache__Item => SpotId::Annuna__West_Climb__Cache,
+            LocationId::Annuna__Egg_Room__Second_Egg__Remote_Boomerang_Flask => {
+                SpotId::Annuna__Egg_Room__Second_Egg
+            }
+            LocationId::Annuna__Egg_Room__Cache__Flask
+            | LocationId::Annuna__Egg_Room__Cache__Shockwave_Flask => {
+                SpotId::Annuna__Egg_Room__Cache
+            }
+            LocationId::Annuna__Egg_Room__Corner_Platform__Remote_Boomerang_Flask
+            | LocationId::Annuna__Egg_Room__Corner_Platform__Shockwave_from_Outside => {
+                SpotId::Annuna__Egg_Room__Corner_Platform
+            }
             LocationId::Annuna__Apocalypse__Center_Scaffold_West__Boss_Fight
             | LocationId::Annuna__Apocalypse__Center_Scaffold_West__Fill_It_Up => {
                 SpotId::Annuna__Apocalypse__Center_Scaffold_West
@@ -12435,6 +12600,18 @@ impl world::World for World {
             ExitId::Annuna__West_Climb__Platform_2__ex__East_19_1 => SpotId::Annuna__West_Climb__Platform_2,
             ExitId::Annuna__West_Climb__North__ex__East_19_1 | ExitId:: Annuna__West_Climb__North__ex__Glacier__Vertical_Room__South_1 => SpotId::Annuna__West_Climb__North,
             ExitId::Annuna__West_Climb__East_19__ex__Egg_Room__West_1 | ExitId:: Annuna__West_Climb__East_19__ex__Platform_3_1 => SpotId::Annuna__West_Climb__East_19,
+            ExitId::Annuna__Egg_Room__West__ex__West_Climb__East_19_1 | ExitId:: Annuna__Egg_Room__West__ex__First_Egg_1 => SpotId::Annuna__Egg_Room__West,
+            ExitId::Annuna__Egg_Room__First_Egg__ex__Second_Egg_1 => SpotId::Annuna__Egg_Room__First_Egg,
+            ExitId::Annuna__Egg_Room__Second_Egg__ex__Third_Egg_1 | ExitId:: Annuna__Egg_Room__Second_Egg__ex__Third_Egg_2 => SpotId::Annuna__Egg_Room__Second_Egg,
+            ExitId::Annuna__Egg_Room__Third_Egg__ex__East_1 | ExitId:: Annuna__Egg_Room__Third_Egg__ex__Passage_Entrance_1 | ExitId:: Annuna__Egg_Room__Third_Egg__ex__Passage_Entrance_2 | ExitId:: Annuna__Egg_Room__Third_Egg__ex__Corner_Platform_1 => SpotId::Annuna__Egg_Room__Third_Egg,
+            ExitId::Annuna__Egg_Room__East__ex__Center_Climb__West_1 | ExitId:: Annuna__Egg_Room__East__ex__Corner_Platform_1 => SpotId::Annuna__Egg_Room__East,
+            ExitId::Annuna__Egg_Room__Passage_Entrance__ex__First_Egg_1 | ExitId:: Annuna__Egg_Room__Passage_Entrance__ex__Second_Egg_1 | ExitId:: Annuna__Egg_Room__Passage_Entrance__ex__Third_Egg_1 => SpotId::Annuna__Egg_Room__Passage_Entrance,
+            ExitId::Annuna__Egg_Room__Corner_Platform__ex__East_1 => SpotId::Annuna__Egg_Room__Corner_Platform,
+            ExitId::Annuna__Center_Climb__West__ex__Egg_Room__East_1 => SpotId::Annuna__Center_Climb__West,
+            ExitId::Annuna__Center_Climb__Upper_Platform__ex__West_1 => SpotId::Annuna__Center_Climb__Upper_Platform,
+            ExitId::Annuna__Center_Climb__Middle_Platform__ex__Upper_Platform_1 => SpotId::Annuna__Center_Climb__Middle_Platform,
+            ExitId::Annuna__Center_Climb__Lower_Platform__ex__Middle_Platform_1 => SpotId::Annuna__Center_Climb__Lower_Platform,
+            ExitId::Annuna__Center_Climb__East__ex__Vertical_Room__West_20_1 | ExitId:: Annuna__Center_Climb__East__ex__Lower_Platform_1 | ExitId:: Annuna__Center_Climb__East__ex__Middle_Platform_1 => SpotId::Annuna__Center_Climb__East,
             ExitId::Annuna__Final_Save__Upper_West__ex__Seals__East_17_Upper_1 | ExitId:: Annuna__Final_Save__Upper_West__ex__Apocalypse__Northwest_Mid_air_1 => SpotId::Annuna__Final_Save__Upper_West,
             ExitId::Annuna__Final_Save__Lower_West__ex__Seals__East_17_Lower_1 | ExitId:: Annuna__Final_Save__Lower_West__ex__Pillar_1 | ExitId:: Annuna__Final_Save__Lower_West__ex__Pillar_2 => SpotId::Annuna__Final_Save__Lower_West,
             ExitId::Annuna__Final_Save__Pillar__ex__Upper_West_1 => SpotId::Annuna__Final_Save__Pillar,
@@ -13969,6 +14146,8 @@ impl world::World for World {
             | SpotId::Amagi__West_Lake__West_15
             | SpotId::Annuna__Apocalypse__Center_Scaffold_West
             | SpotId::Annuna__Apocalypse__West
+            | SpotId::Annuna__Center_Climb__East
+            | SpotId::Annuna__Center_Climb__West
             | SpotId::Annuna__Center_Save__East
             | SpotId::Annuna__Center_Save__Save_Point
             | SpotId::Annuna__Center_Save__West_Catwalk
@@ -13996,6 +14175,11 @@ impl world::World for World {
             | SpotId::Annuna__East_Climb__West_24
             | SpotId::Annuna__East_Climb__West_25
             | SpotId::Annuna__East_Climb__West_26
+            | SpotId::Annuna__Egg_Room__Cache
+            | SpotId::Annuna__Egg_Room__Corner_Platform
+            | SpotId::Annuna__Egg_Room__East
+            | SpotId::Annuna__Egg_Room__Second_Egg
+            | SpotId::Annuna__Egg_Room__West
             | SpotId::Annuna__Factory_Access__East_22
             | SpotId::Annuna__Factory_Access__East_24
             | SpotId::Annuna__Factory_Access__West_22
@@ -15130,6 +15314,46 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
             item: Item::Eye_Ring,
             price: Currency::Free,
             time: 0,
+            exit_id: None,
+        },
+        LocationId::Annuna__Egg_Room__Second_Egg__Remote_Boomerang_Flask => Location {
+            id: LocationId::Annuna__Egg_Room__Second_Egg__Remote_Boomerang_Flask,
+            canonical: CanonId::Egg_Room_Flask,
+            item: Item::Big_Flask,
+            price: Currency::Free,
+            time: 10000,
+            exit_id: None,
+        },
+        LocationId::Annuna__Egg_Room__Cache__Flask => Location {
+            id: LocationId::Annuna__Egg_Room__Cache__Flask,
+            canonical: CanonId::Egg_Room_Flask,
+            item: Item::Big_Flask,
+            price: Currency::Free,
+            time: 5500,
+            exit_id: None,
+        },
+        LocationId::Annuna__Egg_Room__Cache__Shockwave_Flask => Location {
+            id: LocationId::Annuna__Egg_Room__Cache__Shockwave_Flask,
+            canonical: CanonId::Egg_Room_Flask,
+            item: Item::Big_Flask,
+            price: Currency::Energy(100),
+            time: 3500,
+            exit_id: None,
+        },
+        LocationId::Annuna__Egg_Room__Corner_Platform__Shockwave_from_Outside => Location {
+            id: LocationId::Annuna__Egg_Room__Corner_Platform__Shockwave_from_Outside,
+            canonical: CanonId::Egg_Room_Flask,
+            item: Item::Big_Flask,
+            price: Currency::Energy(100),
+            time: 3500,
+            exit_id: None,
+        },
+        LocationId::Annuna__Egg_Room__Corner_Platform__Remote_Boomerang_Flask => Location {
+            id: LocationId::Annuna__Egg_Room__Corner_Platform__Remote_Boomerang_Flask,
+            canonical: CanonId::Egg_Room_Flask,
+            item: Item::Big_Flask,
+            price: Currency::Free,
+            time: 9500,
             exit_id: None,
         },
         LocationId::Annuna__Apocalypse__Center_Scaffold_West__Boss_Fight => Location {
@@ -18260,6 +18484,160 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
             id: ExitId::Annuna__West_Climb__East_19__ex__Platform_3_1,
             time: 1578,
             dest: SpotId::Annuna__West_Climb__Platform_3,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__Egg_Room__West__ex__West_Climb__East_19_1 => Exit {
+            id: ExitId::Annuna__Egg_Room__West__ex__West_Climb__East_19_1,
+            time: 1350,
+            dest: SpotId::Annuna__West_Climb__East_19,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__Egg_Room__West__ex__First_Egg_1 => Exit {
+            id: ExitId::Annuna__Egg_Room__West__ex__First_Egg_1,
+            time: 1200,
+            dest: SpotId::Annuna__Egg_Room__First_Egg,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__Egg_Room__First_Egg__ex__Second_Egg_1 => Exit {
+            id: ExitId::Annuna__Egg_Room__First_Egg__ex__Second_Egg_1,
+            time: 1624,
+            dest: SpotId::Annuna__Egg_Room__Second_Egg,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__Egg_Room__Second_Egg__ex__Third_Egg_1 => Exit {
+            id: ExitId::Annuna__Egg_Room__Second_Egg__ex__Third_Egg_1,
+            time: 2105,
+            dest: SpotId::Annuna__Egg_Room__Third_Egg,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__Egg_Room__Second_Egg__ex__Third_Egg_2 => Exit {
+            id: ExitId::Annuna__Egg_Room__Second_Egg__ex__Third_Egg_2,
+            time: 1500,
+            dest: SpotId::Annuna__Egg_Room__Third_Egg,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__Egg_Room__Third_Egg__ex__East_1 => Exit {
+            id: ExitId::Annuna__Egg_Room__Third_Egg__ex__East_1,
+            time: 1228,
+            dest: SpotId::Annuna__Egg_Room__East,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__Egg_Room__Third_Egg__ex__Passage_Entrance_1 => Exit {
+            id: ExitId::Annuna__Egg_Room__Third_Egg__ex__Passage_Entrance_1,
+            time: 2599,
+            dest: SpotId::Annuna__Egg_Room__Passage_Entrance,
+            price: Currency::Energy(120),
+            loc_id: None,
+        },
+        ExitId::Annuna__Egg_Room__Third_Egg__ex__Passage_Entrance_2 => Exit {
+            id: ExitId::Annuna__Egg_Room__Third_Egg__ex__Passage_Entrance_2,
+            time: 1578,
+            dest: SpotId::Annuna__Egg_Room__Passage_Entrance,
+            price: Currency::Energy(60),
+            loc_id: None,
+        },
+        ExitId::Annuna__Egg_Room__Third_Egg__ex__Corner_Platform_1 => Exit {
+            id: ExitId::Annuna__Egg_Room__Third_Egg__ex__Corner_Platform_1,
+            time: 600,
+            dest: SpotId::Annuna__Egg_Room__Corner_Platform,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__Egg_Room__East__ex__Center_Climb__West_1 => Exit {
+            id: ExitId::Annuna__Egg_Room__East__ex__Center_Climb__West_1,
+            time: 1350,
+            dest: SpotId::Annuna__Center_Climb__West,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__Egg_Room__East__ex__Corner_Platform_1 => Exit {
+            id: ExitId::Annuna__Egg_Room__East__ex__Corner_Platform_1,
+            time: 1666,
+            dest: SpotId::Annuna__Egg_Room__Corner_Platform,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__Egg_Room__Passage_Entrance__ex__First_Egg_1 => Exit {
+            id: ExitId::Annuna__Egg_Room__Passage_Entrance__ex__First_Egg_1,
+            time: 2807,
+            dest: SpotId::Annuna__Egg_Room__First_Egg,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__Egg_Room__Passage_Entrance__ex__Second_Egg_1 => Exit {
+            id: ExitId::Annuna__Egg_Room__Passage_Entrance__ex__Second_Egg_1,
+            time: 949,
+            dest: SpotId::Annuna__Egg_Room__Second_Egg,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__Egg_Room__Passage_Entrance__ex__Third_Egg_1 => Exit {
+            id: ExitId::Annuna__Egg_Room__Passage_Entrance__ex__Third_Egg_1,
+            time: 1578,
+            dest: SpotId::Annuna__Egg_Room__Third_Egg,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__Egg_Room__Corner_Platform__ex__East_1 => Exit {
+            id: ExitId::Annuna__Egg_Room__Corner_Platform__ex__East_1,
+            time: 1666,
+            dest: SpotId::Annuna__Egg_Room__East,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__Center_Climb__West__ex__Egg_Room__East_1 => Exit {
+            id: ExitId::Annuna__Center_Climb__West__ex__Egg_Room__East_1,
+            time: 1350,
+            dest: SpotId::Annuna__Egg_Room__East,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__Center_Climb__Upper_Platform__ex__West_1 => Exit {
+            id: ExitId::Annuna__Center_Climb__Upper_Platform__ex__West_1,
+            time: 1929,
+            dest: SpotId::Annuna__Center_Climb__West,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__Center_Climb__Middle_Platform__ex__Upper_Platform_1 => Exit {
+            id: ExitId::Annuna__Center_Climb__Middle_Platform__ex__Upper_Platform_1,
+            time: 2400,
+            dest: SpotId::Annuna__Center_Climb__Upper_Platform,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__Center_Climb__Lower_Platform__ex__Middle_Platform_1 => Exit {
+            id: ExitId::Annuna__Center_Climb__Lower_Platform__ex__Middle_Platform_1,
+            time: 1200,
+            dest: SpotId::Annuna__Center_Climb__Middle_Platform,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__Center_Climb__East__ex__Vertical_Room__West_20_1 => Exit {
+            id: ExitId::Annuna__Center_Climb__East__ex__Vertical_Room__West_20_1,
+            time: 1350,
+            dest: SpotId::Annuna__Vertical_Room__West_20,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__Center_Climb__East__ex__Lower_Platform_1 => Exit {
+            id: ExitId::Annuna__Center_Climb__East__ex__Lower_Platform_1,
+            time: 1929,
+            dest: SpotId::Annuna__Center_Climb__Lower_Platform,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__Center_Climb__East__ex__Middle_Platform_1 => Exit {
+            id: ExitId::Annuna__Center_Climb__East__ex__Middle_Platform_1,
+            time: 1929,
+            dest: SpotId::Annuna__Center_Climb__Middle_Platform,
             price: Currency::Free,
             loc_id: None,
         },
@@ -28622,6 +29000,18 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
         },
+        SpotId::Annuna__Vertical_Room__West_20 => Spot {
+            id: SpotId::Annuna__Vertical_Room__West_20,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
         SpotId::Annuna__Lower_Hallway__West => Spot {
             id: SpotId::Annuna__Lower_Hallway__West,
             locations: Range {
@@ -29361,7 +29751,166 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             exits: Range {
+                start: ExitId::Annuna__Egg_Room__West__ex__First_Egg_1.into_usize(),
+                end: ExitId::Annuna__Egg_Room__West__ex__West_Climb__East_19_1.into_usize() + 1,
+            },
+            actions: Range {
                 start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__Egg_Room__First_Egg => Spot {
+            id: SpotId::Annuna__Egg_Room__First_Egg,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Annuna__Egg_Room__First_Egg__ex__Second_Egg_1.into_usize(),
+                end: ExitId::Annuna__Egg_Room__First_Egg__ex__Second_Egg_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__Egg_Room__Second_Egg => Spot {
+            id: SpotId::Annuna__Egg_Room__Second_Egg,
+            locations: Range {
+                start: LocationId::Annuna__Egg_Room__Second_Egg__Remote_Boomerang_Flask.into_usize(),
+                end: LocationId::Annuna__Egg_Room__Second_Egg__Remote_Boomerang_Flask.into_usize() + 1,
+            },
+            exits: Range {
+                start: ExitId::Annuna__Egg_Room__Second_Egg__ex__Third_Egg_1.into_usize(),
+                end: ExitId::Annuna__Egg_Room__Second_Egg__ex__Third_Egg_2.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__Egg_Room__Third_Egg => Spot {
+            id: SpotId::Annuna__Egg_Room__Third_Egg,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Annuna__Egg_Room__Third_Egg__ex__Corner_Platform_1.into_usize(),
+                end: ExitId::Annuna__Egg_Room__Third_Egg__ex__Passage_Entrance_2.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__Egg_Room__East => Spot {
+            id: SpotId::Annuna__Egg_Room__East,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Annuna__Egg_Room__East__ex__Center_Climb__West_1.into_usize(),
+                end: ExitId::Annuna__Egg_Room__East__ex__Corner_Platform_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__Egg_Room__Passage_Entrance => Spot {
+            id: SpotId::Annuna__Egg_Room__Passage_Entrance,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Annuna__Egg_Room__Passage_Entrance__ex__First_Egg_1.into_usize(),
+                end: ExitId::Annuna__Egg_Room__Passage_Entrance__ex__Third_Egg_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__Egg_Room__Cache => Spot {
+            id: SpotId::Annuna__Egg_Room__Cache,
+            locations: Range {
+                start: LocationId::Annuna__Egg_Room__Cache__Flask.into_usize(),
+                end: LocationId::Annuna__Egg_Room__Cache__Shockwave_Flask.into_usize() + 1,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__Egg_Room__Corner_Platform => Spot {
+            id: SpotId::Annuna__Egg_Room__Corner_Platform,
+            locations: Range {
+                start: LocationId::Annuna__Egg_Room__Corner_Platform__Remote_Boomerang_Flask.into_usize(),
+                end: LocationId::Annuna__Egg_Room__Corner_Platform__Shockwave_from_Outside.into_usize() + 1,
+            },
+            exits: Range {
+                start: ExitId::Annuna__Egg_Room__Corner_Platform__ex__East_1.into_usize(),
+                end: ExitId::Annuna__Egg_Room__Corner_Platform__ex__East_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__Center_Climb__West => Spot {
+            id: SpotId::Annuna__Center_Climb__West,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Annuna__Center_Climb__West__ex__Egg_Room__East_1.into_usize(),
+                end: ExitId::Annuna__Center_Climb__West__ex__Egg_Room__East_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__Center_Climb__Upper_Platform => Spot {
+            id: SpotId::Annuna__Center_Climb__Upper_Platform,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Annuna__Center_Climb__Upper_Platform__ex__West_1.into_usize(),
+                end: ExitId::Annuna__Center_Climb__Upper_Platform__ex__West_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__Center_Climb__Middle_Platform => Spot {
+            id: SpotId::Annuna__Center_Climb__Middle_Platform,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Annuna__Center_Climb__Middle_Platform__ex__Upper_Platform_1.into_usize(),
+                end: ExitId::Annuna__Center_Climb__Middle_Platform__ex__Upper_Platform_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__Center_Climb__Lower_Platform => Spot {
+            id: SpotId::Annuna__Center_Climb__Lower_Platform,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Annuna__Center_Climb__Lower_Platform__ex__Middle_Platform_1.into_usize(),
+                end: ExitId::Annuna__Center_Climb__Lower_Platform__ex__Middle_Platform_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__Center_Climb__East => Spot {
+            id: SpotId::Annuna__Center_Climb__East,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Annuna__Center_Climb__East__ex__Lower_Platform_1.into_usize(),
+                end: ExitId::Annuna__Center_Climb__East__ex__Vertical_Room__West_20_1.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,

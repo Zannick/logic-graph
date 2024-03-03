@@ -108,6 +108,60 @@ macro_rules! hobserve__boomerang {
     }};
 }
 
+/// $remote_boomerang (  )
+/// ^mode != 'drone' and Remote_Boomerang
+#[macro_export]
+macro_rules! helper__remote_boomerang {
+    ($ctx:expr, $world:expr) => {{
+        ($ctx.mode() != enums::Mode::Drone && $ctx.has(Item::Remote_Boomerang))
+    }};
+}
+#[macro_export]
+macro_rules! hexplain__remote_boomerang {
+    ($ctx:expr, $world:expr, $edict:expr) => {{
+        {
+            let mut left = {
+                let mut refs = vec!["^mode"];
+                let mut left = {
+                    let r = $ctx.mode();
+                    $edict.insert("^mode", format!("{:?}", r));
+                    (r, vec!["^mode"])
+                };
+                let right = enums::Mode::Drone;
+                $edict.insert("^mode", format!("{}", left.0));
+                refs.append(&mut left.1);
+                (left.0 != right, refs)
+            };
+            if !left.0 {
+                left
+            } else {
+                let mut right = {
+                    let h = $ctx.has(Item::Remote_Boomerang);
+                    $edict.insert("Remote_Boomerang", format!("{}", h));
+                    (h, vec!["Remote_Boomerang"])
+                };
+                left.1.append(&mut right.1);
+                (right.0, left.1)
+            }
+        }
+    }};
+}
+#[macro_export]
+macro_rules! hobserve__remote_boomerang {
+    ($ctx:expr, $world:expr, $full_obs:expr) => {{
+        ({
+            let v = {
+                $full_obs.observe_mode();
+                $ctx.mode()
+            };
+            v != enums::Mode::Drone
+        } && ({
+            $full_obs.observe_remote_boomerang();
+            $ctx.has(Item::Remote_Boomerang)
+        }))
+    }};
+}
+
 /// $can_damage (  )
 /// $melee or Boomerang
 #[macro_export]

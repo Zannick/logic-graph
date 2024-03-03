@@ -215,6 +215,7 @@ subgraph Annuna
         Annuna__Vertical_Room__Gate_Button(Gate Button);
         Annuna__Vertical_Room__Middle_Overhang(Middle Overhang);
         Annuna__Vertical_Room__East_21(East 21);
+        Annuna__Vertical_Room__West_20(West 20);
     end
     subgraph Annuna__Lower_Hallway[Lower Hallway]
         Annuna__Lower_Hallway__West(West);
@@ -293,6 +294,20 @@ subgraph Annuna
     end
     subgraph Annuna__Egg_Room[Egg Room]
         Annuna__Egg_Room__West(West);
+        Annuna__Egg_Room__First_Egg(First Egg);
+        Annuna__Egg_Room__Second_Egg(Second Egg);
+        Annuna__Egg_Room__Third_Egg(Third Egg);
+        Annuna__Egg_Room__East(East);
+        Annuna__Egg_Room__Passage_Entrance(Passage Entrance);
+        Annuna__Egg_Room__Cache(Cache);
+        Annuna__Egg_Room__Corner_Platform(Corner Platform);
+    end
+    subgraph Annuna__Center_Climb[Center Climb]
+        Annuna__Center_Climb__West(West);
+        Annuna__Center_Climb__Upper_Platform(Upper Platform);
+        Annuna__Center_Climb__Middle_Platform(Middle Platform);
+        Annuna__Center_Climb__Lower_Platform(Lower Platform);
+        Annuna__Center_Climb__East(East);
     end
     subgraph Annuna__Apocalypse_Hallway[Apocalypse Hallway]
         Annuna__Apocalypse_Hallway__Lower_East(Lower East);
@@ -1697,6 +1712,13 @@ Annuna__Apocalypse__Center_Scaffold_West --> Annuna__Apocalypse__Bomb_Northwest
 Annuna__Apocalypse__Northwest_Mid_air --> Annuna__Apocalypse__Northwest_Scaffold_2_West
 Annuna__Apocalypse__Southwest_Capsule --> Annuna__Apocalypse__West
 Annuna__Apocalypse__West <--> Annuna__Final_Save__East
+Annuna__Center_Climb__East --> Annuna__Center_Climb__Lower_Platform
+Annuna__Center_Climb__East --> Annuna__Center_Climb__Middle_Platform
+Annuna__Center_Climb__East --> Annuna__Vertical_Room__West_20
+Annuna__Center_Climb__Lower_Platform --> Annuna__Center_Climb__Middle_Platform
+Annuna__Center_Climb__Middle_Platform --> Annuna__Center_Climb__Upper_Platform
+Annuna__Center_Climb__Upper_Platform --> Annuna__Center_Climb__West
+Annuna__Center_Climb__West <--> Annuna__Egg_Room__East
 Annuna__Center_Save__East <--> Annuna__Vertical_Room__West_21
 Annuna__Center_Save__Save_Point --> Annuna__Center_Save__West_Catwalk
 Annuna__Center_Save__West_Catwalk <--> Annuna__Twisty_Passages__East_Catwalk
@@ -1759,6 +1781,16 @@ Annuna__East_Climb__West_24 <--> Annuna__Factory_Access__East_24
 Annuna__East_Climb__West_25 <--> Annuna__Factory_Entrance__East
 Annuna__East_Climb__West_26 --> Annuna__East_Climb__Platform_1_Left
 Annuna__East_Climb__West_26 --> Annuna__Udug_Gate__East
+Annuna__Egg_Room__Corner_Platform <--> Annuna__Egg_Room__East
+Annuna__Egg_Room__First_Egg --> Annuna__Egg_Room__Second_Egg
+Annuna__Egg_Room__Passage_Entrance --> Annuna__Egg_Room__First_Egg
+Annuna__Egg_Room__Passage_Entrance --> Annuna__Egg_Room__Second_Egg
+Annuna__Egg_Room__Passage_Entrance <--> Annuna__Egg_Room__Third_Egg
+Annuna__Egg_Room__Second_Egg --> Annuna__Egg_Room__Third_Egg
+Annuna__Egg_Room__Third_Egg --> Annuna__Egg_Room__Corner_Platform
+Annuna__Egg_Room__Third_Egg --> Annuna__Egg_Room__East
+Annuna__Egg_Room__West --> Annuna__Egg_Room__First_Egg
+Annuna__Egg_Room__West <--> Annuna__West_Climb__East_19
 Annuna__Factory_Access__Bottom --> Annuna__Factory_Access__Upper_Platform
 Annuna__Factory_Access__East_22 --> Annuna__East_Hideout__West
 Annuna__Factory_Access__East_22 <--> Annuna__Factory_Access__Grate_Left
@@ -1824,7 +1856,6 @@ Annuna__West_Bridge__Mid_Tunnel --> Annuna__West_Bridge__East_22
 Annuna__West_Bridge__North <--> Annuna__West_Climb__South
 Annuna__West_Bridge__Tunnel_Wall --> Annuna__West_Bridge__Mid_Tunnel
 Annuna__West_Climb__Cache <--> Annuna__West_Climb__Switch_Ledge
-Annuna__West_Climb__East_19 --> Annuna__Egg_Room__West
 Annuna__West_Climb__East_19 --> Annuna__West_Climb__Platform_3
 Annuna__West_Climb__North --> Annuna__West_Climb__East_19
 Annuna__West_Climb__North --> Glacier__Vertical_Room__South

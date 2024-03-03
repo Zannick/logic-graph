@@ -105,12 +105,15 @@ time:
   # when grabbing the urn/flask with the boomerang while falling or otherwise closer
   nearby_urn: 6
   nearby_flask: 6
+  # The remote boomerang has a slower speed but can go a more variable amount of distance
+  # so we need a speed reference to estimate or time each one
+
   # item is freestanding -> can be picked up with no delay
   standing: 0
 
   ## common actions
   save: 1.3
-  shockwave: 3.5  # even when shockwaving flasks and urns? at least 1
+  shockwave: 3.5  # even when shockwaving flasks and urns. price=100
   hack: 0.5
   susar: 3.0  # caught by susar
   # need to test slingshot charge time
@@ -222,6 +225,7 @@ actions:
 helpers:
   $melee: Ice_Axe or ^mode == 'drone'
   $boomerang: ^mode != 'drone' and Boomerang
+  $remote_boomerang: ^mode != 'drone' and Remote_Boomerang
   $can_damage: $melee or Boomerang
   $grab: ^mode != 'drone' and Ledge_Grab
   $climb: ^mode != 'drone' and Wall_Climb

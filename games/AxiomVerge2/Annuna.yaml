@@ -1149,6 +1149,9 @@ areas:
       coord: [40.9, 20.6]
     - name: East 21
       coord: [40.95, 20.75]
+
+    - name: West 20
+      coord: [40.05, 19.6]
     #endregion
 
     #region Upper
@@ -1806,8 +1809,186 @@ areas:
   spots:
     - name: West
       coord: [37.05, 18.75]
+      local:
+        - to: First Egg
+          jumps: 4
+      exits:
+        - to: West Climb > East 19
+          tags: [xshift]
+        - to: First Egg
+          req: $hook
+          movement: base
+          jumps: 2
+    - name: First Egg
+      coord: [37.35, 18.3]
+      local:
+        - to: West
+        - to: Second Egg
+      exits:
+        - to: Second Egg
+          req: $hook and $hover
+          movement: fast_hover
+    - name: Second Egg
+      coord: [38.0, 18.3]
+      local:
+        - to: First Egg
+      locations:
+        - name: Remote Boomerang Flask
+          canon: Egg_Room_Flask
+          item: Big_Flask
+          req: $remote_boomerang
+          time: 10  # ~4 + 5.5
+      exits:
+        - to: Third Egg
+          req: $hook
+          movement: base
+          jumps: 1
+        - to: Third Egg
+          req: $hook
+          movement: fast_hover
+          jumps: 1
+    - name: Third Egg
+      coord: [38.6, 18.0]
+      local:
+        - to: Second Egg
+      exits:
+        - to: East
+          req: $hook
+          movement: base
+          jumps: 2
+        - to: Passage Entrance
+          req: Nanite_Mist and ^mode == 'drone'
+          movement: mist1
+          price: 120  # ?
+        - to: Passage Entrance
+          req: $mist2 and ^mode == 'drone'
+          movement: mist2
+          price: 60  # ?
+        - to: Corner Platform
+          req: Anuman
+          movement: base
+          jumps: 1
+    - name: East
+      coord: [38.95, 17.6]
+      local:
+        - to: Third Egg
+      exits:
+        - to: Center Climb > West
+          tags: [xshift]
+        - to: Corner Platform
+          req: $hover
+          movement: base
 
+    - name: Passage Entrance
+      coord: [38.15, 17.35]
+      local:
+        - to: Cache
+          jumps: 1
+      exits:
+        - to: First Egg
+          req: ^mode == 'drone'
+          movement: base
+        - to: Second Egg
+          req: ^mode == 'drone'
+          movement: base
+        - to: Third Egg
+          req: $hover
+          movement: base
+    - name: Cache
+      coord: [38.4, 17.35]
+      local:
+        - to: Passage Entrance
+          jumps: 1
+      locations:
+        - name: Flask
+          canon: Egg_Room_Flask
+          item: Big_Flask
+          tags: [flask]
+        - name: Shockwave Flask
+          canon: Egg_Room_Flask
+          item: Big_Flask
+          req: $shockwave
+          price: 100
+          tags: [shockwave]
+    - name: Corner Platform
+      coord: [38.475, 17.75]
+      local:
+        - to: Second Egg
+        - to: Third Egg
+      locations:
+        - name: Shockwave from Outside
+          canon: Egg_Room_Flask
+          item: Big_Flask
+          req: $shockwave
+          price: 100
+          tags: [shockwave]
+        - name: Remote Boomerang Flask
+          canon: Egg_Room_Flask
+          item: Big_Flask
+          req: $remote_boomerang
+          time: 9.5  # ~4 + 5.5
+      exits:
+        - to: East
+          req: $hover
+          movement: base
+          jumps: 1
+    # TODO: also the upper left quadrant for the map
 
+- name: Center Climb
+  on_entry: $reset_old_area(^newpos)
+  spots:
+    - name: West
+      coord: [39.05, 17.6]
+      local:
+        - to: Upper Platform
+      exits:
+        - to: Egg Room > East
+          tags: [xshift]
+    - name: Upper Platform
+      coord: [39.6, 18.2]
+      local:
+        - to: Middle Platform
+        - to: East
+          thru: [39.8, 19.3]
+      exits:
+        - to: West
+          req: $hook
+          movement: base
+          jumps: 3
+    - name: Middle Platform
+      coord: [39.4, 19.0]
+      local:
+        - to: East
+        - to: Lower Platform
+      exits:
+        - to: Upper Platform
+          req: $hook
+          movement: base
+          jumps: 4
+    - name: Lower Platform
+      coord: [39.4, 19.4]
+      local:
+        - to: East
+      exits:
+        - to: Middle Platform
+          req: $hook
+          movement: base
+          jumps: 2
+    - name: East
+      coord: [39.95, 19.6]
+      exits:
+        - to: Vertical Room > West 20
+          tags: [xshift]
+        - to: Lower Platform
+          req: $hook
+          movement: base
+          jumps: 1
+        - to: Middle Platform
+          req: Anuman and Slingshot_Hook and Drone_Hover
+          movement: base
+          jumps: 3
+
+#region Apocalypse
 - name: Apocalypse Hallway
   on_entry: $reset_old_area(^newpos)
   spots:
@@ -2002,3 +2183,5 @@ areas:
       local:
         - to: Bomb East
           jumps: 1
+
+#endregion

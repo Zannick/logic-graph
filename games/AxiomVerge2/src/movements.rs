@@ -739,6 +739,37 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
             SpotId::Annuna__Apocalypse__West,
             SpotId::Annuna__Apocalypse__Southwest_Switch,
         ) => 600,
+        (
+            [false],
+            SpotId::Annuna__Center_Climb__Lower_Platform,
+            SpotId::Annuna__Center_Climb__East,
+        ) => 1929,
+        (
+            [false],
+            SpotId::Annuna__Center_Climb__Middle_Platform,
+            SpotId::Annuna__Center_Climb__East,
+        ) => 1929,
+        (
+            [false],
+            SpotId::Annuna__Center_Climb__Middle_Platform,
+            SpotId::Annuna__Center_Climb__Lower_Platform,
+        ) => 399,
+        // [1.1, 0.526316]
+        (
+            [false],
+            SpotId::Annuna__Center_Climb__Upper_Platform,
+            SpotId::Annuna__Center_Climb__East,
+        ) => 1626,
+        (
+            [false],
+            SpotId::Annuna__Center_Climb__Upper_Platform,
+            SpotId::Annuna__Center_Climb__Middle_Platform,
+        ) => 800,
+        (
+            [false],
+            SpotId::Annuna__Center_Climb__West,
+            SpotId::Annuna__Center_Climb__Upper_Platform,
+        ) => 1929,
         ([false], SpotId::Annuna__Center_Save__East, SpotId::Annuna__Center_Save__Save_Point) => {
             1578
         }
@@ -1214,6 +1245,34 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
         ) => 877,
         // [0.350877, 0.85]
         ([false], SpotId::Annuna__East_Climb__West_25, SpotId::Annuna__East_Climb__West_26) => 1200,
+        ([false], SpotId::Annuna__Egg_Room__Cache, SpotId::Annuna__Egg_Room__Passage_Entrance) => {
+            877
+        }
+        (
+            [false],
+            SpotId::Annuna__Egg_Room__Corner_Platform,
+            SpotId::Annuna__Egg_Room__Second_Egg,
+        ) => 1666,
+        (
+            [false],
+            SpotId::Annuna__Egg_Room__Corner_Platform,
+            SpotId::Annuna__Egg_Room__Third_Egg,
+        ) => 438,
+        ([false], SpotId::Annuna__Egg_Room__East, SpotId::Annuna__Egg_Room__Third_Egg) => 1228,
+        ([false], SpotId::Annuna__Egg_Room__First_Egg, SpotId::Annuna__Egg_Room__Second_Egg) => {
+            2280
+        }
+        ([false], SpotId::Annuna__Egg_Room__First_Egg, SpotId::Annuna__Egg_Room__West) => 1052,
+        ([false], SpotId::Annuna__Egg_Room__Passage_Entrance, SpotId::Annuna__Egg_Room__Cache) => {
+            877
+        }
+        ([false], SpotId::Annuna__Egg_Room__Second_Egg, SpotId::Annuna__Egg_Room__First_Egg) => {
+            2280
+        }
+        ([false], SpotId::Annuna__Egg_Room__Third_Egg, SpotId::Annuna__Egg_Room__Second_Egg) => {
+            2105
+        }
+        ([false], SpotId::Annuna__Egg_Room__West, SpotId::Annuna__Egg_Room__First_Egg) => 2400,
         (
             [false],
             SpotId::Annuna__Factory_Access__Bottom,
@@ -14450,6 +14509,37 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
             SpotId::Annuna__Apocalypse__West,
             SpotId::Annuna__Apocalypse__Southwest_Switch,
         ) => 600,
+        (
+            [true],
+            SpotId::Annuna__Center_Climb__Lower_Platform,
+            SpotId::Annuna__Center_Climb__East,
+        ) => 1929,
+        (
+            [true],
+            SpotId::Annuna__Center_Climb__Middle_Platform,
+            SpotId::Annuna__Center_Climb__East,
+        ) => 1929,
+        (
+            [true],
+            SpotId::Annuna__Center_Climb__Middle_Platform,
+            SpotId::Annuna__Center_Climb__Lower_Platform,
+        ) => 399,
+        // [1.1, 0.526316]
+        (
+            [true],
+            SpotId::Annuna__Center_Climb__Upper_Platform,
+            SpotId::Annuna__Center_Climb__East,
+        ) => 1626,
+        (
+            [true],
+            SpotId::Annuna__Center_Climb__Upper_Platform,
+            SpotId::Annuna__Center_Climb__Middle_Platform,
+        ) => 800,
+        (
+            [true],
+            SpotId::Annuna__Center_Climb__West,
+            SpotId::Annuna__Center_Climb__Upper_Platform,
+        ) => 1929,
         ([true], SpotId::Annuna__Center_Save__East, SpotId::Annuna__Center_Save__Save_Point) => {
             1578
         }
@@ -14925,6 +15015,28 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
         ) => 877,
         // [0.350877, 0.85]
         ([true], SpotId::Annuna__East_Climb__West_25, SpotId::Annuna__East_Climb__West_26) => 1200,
+        ([true], SpotId::Annuna__Egg_Room__Cache, SpotId::Annuna__Egg_Room__Passage_Entrance) => {
+            877
+        }
+        (
+            [true],
+            SpotId::Annuna__Egg_Room__Corner_Platform,
+            SpotId::Annuna__Egg_Room__Second_Egg,
+        ) => 1666,
+        (
+            [true],
+            SpotId::Annuna__Egg_Room__Corner_Platform,
+            SpotId::Annuna__Egg_Room__Third_Egg,
+        ) => 438,
+        ([true], SpotId::Annuna__Egg_Room__East, SpotId::Annuna__Egg_Room__Third_Egg) => 1228,
+        ([true], SpotId::Annuna__Egg_Room__First_Egg, SpotId::Annuna__Egg_Room__Second_Egg) => 2280,
+        ([true], SpotId::Annuna__Egg_Room__First_Egg, SpotId::Annuna__Egg_Room__West) => 1052,
+        ([true], SpotId::Annuna__Egg_Room__Passage_Entrance, SpotId::Annuna__Egg_Room__Cache) => {
+            877
+        }
+        ([true], SpotId::Annuna__Egg_Room__Second_Egg, SpotId::Annuna__Egg_Room__First_Egg) => 2280,
+        ([true], SpotId::Annuna__Egg_Room__Third_Egg, SpotId::Annuna__Egg_Room__Second_Egg) => 2105,
+        ([true], SpotId::Annuna__Egg_Room__West, SpotId::Annuna__Egg_Room__First_Egg) => 2400,
         (
             [true],
             SpotId::Annuna__Factory_Access__Bottom,
@@ -28230,6 +28342,28 @@ pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
         (SpotId::Annuna__West_Climb__East_19, SpotId::Annuna__West_Climb__Platform_2) => true,
         (SpotId::Annuna__West_Climb__East_19, SpotId::Annuna__West_Climb__East_20) => true,
         (SpotId::Annuna__West_Climb__East_19, SpotId::Annuna__West_Climb__Platform_1) => true,
+        (SpotId::Annuna__Egg_Room__West, SpotId::Annuna__Egg_Room__First_Egg) => true,
+        (SpotId::Annuna__Egg_Room__First_Egg, SpotId::Annuna__Egg_Room__West) => true,
+        (SpotId::Annuna__Egg_Room__First_Egg, SpotId::Annuna__Egg_Room__Second_Egg) => true,
+        (SpotId::Annuna__Egg_Room__Second_Egg, SpotId::Annuna__Egg_Room__First_Egg) => true,
+        (SpotId::Annuna__Egg_Room__Third_Egg, SpotId::Annuna__Egg_Room__Second_Egg) => true,
+        (SpotId::Annuna__Egg_Room__East, SpotId::Annuna__Egg_Room__Third_Egg) => true,
+        (SpotId::Annuna__Egg_Room__Passage_Entrance, SpotId::Annuna__Egg_Room__Cache) => true,
+        (SpotId::Annuna__Egg_Room__Cache, SpotId::Annuna__Egg_Room__Passage_Entrance) => true,
+        (SpotId::Annuna__Egg_Room__Corner_Platform, SpotId::Annuna__Egg_Room__Second_Egg) => true,
+        (SpotId::Annuna__Egg_Room__Corner_Platform, SpotId::Annuna__Egg_Room__Third_Egg) => true,
+        (SpotId::Annuna__Center_Climb__West, SpotId::Annuna__Center_Climb__Upper_Platform) => true,
+        (
+            SpotId::Annuna__Center_Climb__Upper_Platform,
+            SpotId::Annuna__Center_Climb__Middle_Platform,
+        ) => true,
+        (SpotId::Annuna__Center_Climb__Upper_Platform, SpotId::Annuna__Center_Climb__East) => true,
+        (SpotId::Annuna__Center_Climb__Middle_Platform, SpotId::Annuna__Center_Climb__East) => true,
+        (
+            SpotId::Annuna__Center_Climb__Middle_Platform,
+            SpotId::Annuna__Center_Climb__Lower_Platform,
+        ) => true,
+        (SpotId::Annuna__Center_Climb__Lower_Platform, SpotId::Annuna__Center_Climb__East) => true,
         (SpotId::Annuna__Final_Save__Pillar, SpotId::Annuna__Final_Save__Save_Point) => true,
         (SpotId::Annuna__Final_Save__Pillar, SpotId::Annuna__Final_Save__Lower_West) => true,
         (SpotId::Annuna__Final_Save__Save_Point, SpotId::Annuna__Final_Save__East) => true,
@@ -37080,6 +37214,96 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             1000,
         ),
         (
+            SpotId::Annuna__Center_Climb__East,
+            SpotId::Annuna__Center_Climb__Lower_Platform,
+            1929,
+        ),
+        (
+            SpotId::Annuna__Center_Climb__East,
+            SpotId::Annuna__Center_Climb__Middle_Platform,
+            1929,
+        ),
+        (
+            SpotId::Annuna__Center_Climb__East,
+            SpotId::Annuna__Vertical_Room__West_20,
+            1350,
+        ),
+        (
+            SpotId::Annuna__Center_Climb__East,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Center_Climb__Lower_Platform,
+            SpotId::Annuna__Center_Climb__East,
+            1929,
+        ),
+        (
+            SpotId::Annuna__Center_Climb__Lower_Platform,
+            SpotId::Annuna__Center_Climb__Middle_Platform,
+            1200,
+        ),
+        (
+            SpotId::Annuna__Center_Climb__Lower_Platform,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Center_Climb__Middle_Platform,
+            SpotId::Annuna__Center_Climb__East,
+            1929,
+        ),
+        (
+            SpotId::Annuna__Center_Climb__Middle_Platform,
+            SpotId::Annuna__Center_Climb__Lower_Platform,
+            399,
+        ),
+        (
+            SpotId::Annuna__Center_Climb__Middle_Platform,
+            SpotId::Annuna__Center_Climb__Upper_Platform,
+            2400,
+        ),
+        (
+            SpotId::Annuna__Center_Climb__Middle_Platform,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Center_Climb__Upper_Platform,
+            SpotId::Annuna__Center_Climb__East,
+            1626,
+        ),
+        (
+            SpotId::Annuna__Center_Climb__Upper_Platform,
+            SpotId::Annuna__Center_Climb__Middle_Platform,
+            800,
+        ),
+        (
+            SpotId::Annuna__Center_Climb__Upper_Platform,
+            SpotId::Annuna__Center_Climb__West,
+            1929,
+        ),
+        (
+            SpotId::Annuna__Center_Climb__Upper_Platform,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Center_Climb__West,
+            SpotId::Annuna__Center_Climb__Upper_Platform,
+            1929,
+        ),
+        (
+            SpotId::Annuna__Center_Climb__West,
+            SpotId::Annuna__Egg_Room__East,
+            1350,
+        ),
+        (
+            SpotId::Annuna__Center_Climb__West,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
             SpotId::Annuna__Center_Save__East,
             SpotId::Annuna__Center_Save__Save_Point,
             1578,
@@ -38208,6 +38432,146 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Annuna__East_Hideout__West,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
+        ),
+        (
+            SpotId::Annuna__Egg_Room__Cache,
+            SpotId::Annuna__Egg_Room__Passage_Entrance,
+            877,
+        ),
+        (
+            SpotId::Annuna__Egg_Room__Cache,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Egg_Room__Corner_Platform,
+            SpotId::Annuna__Egg_Room__East,
+            1666,
+        ),
+        (
+            SpotId::Annuna__Egg_Room__Corner_Platform,
+            SpotId::Annuna__Egg_Room__Second_Egg,
+            1666,
+        ),
+        (
+            SpotId::Annuna__Egg_Room__Corner_Platform,
+            SpotId::Annuna__Egg_Room__Third_Egg,
+            438,
+        ),
+        (
+            SpotId::Annuna__Egg_Room__Corner_Platform,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Egg_Room__East,
+            SpotId::Annuna__Center_Climb__West,
+            1350,
+        ),
+        (
+            SpotId::Annuna__Egg_Room__East,
+            SpotId::Annuna__Egg_Room__Corner_Platform,
+            1666,
+        ),
+        (
+            SpotId::Annuna__Egg_Room__East,
+            SpotId::Annuna__Egg_Room__Third_Egg,
+            1228,
+        ),
+        (
+            SpotId::Annuna__Egg_Room__East,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Egg_Room__First_Egg,
+            SpotId::Annuna__Egg_Room__Second_Egg,
+            1624,
+        ),
+        (
+            SpotId::Annuna__Egg_Room__First_Egg,
+            SpotId::Annuna__Egg_Room__West,
+            1052,
+        ),
+        (
+            SpotId::Annuna__Egg_Room__First_Egg,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Egg_Room__Passage_Entrance,
+            SpotId::Annuna__Egg_Room__Cache,
+            877,
+        ),
+        (
+            SpotId::Annuna__Egg_Room__Passage_Entrance,
+            SpotId::Annuna__Egg_Room__First_Egg,
+            2807,
+        ),
+        (
+            SpotId::Annuna__Egg_Room__Passage_Entrance,
+            SpotId::Annuna__Egg_Room__Second_Egg,
+            949,
+        ),
+        (
+            SpotId::Annuna__Egg_Room__Passage_Entrance,
+            SpotId::Annuna__Egg_Room__Third_Egg,
+            1578,
+        ),
+        (
+            SpotId::Annuna__Egg_Room__Passage_Entrance,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Egg_Room__Second_Egg,
+            SpotId::Annuna__Egg_Room__First_Egg,
+            2280,
+        ),
+        (
+            SpotId::Annuna__Egg_Room__Second_Egg,
+            SpotId::Annuna__Egg_Room__Third_Egg,
+            1500,
+        ),
+        (
+            SpotId::Annuna__Egg_Room__Second_Egg,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Egg_Room__Third_Egg,
+            SpotId::Annuna__Egg_Room__Corner_Platform,
+            600,
+        ),
+        (
+            SpotId::Annuna__Egg_Room__Third_Egg,
+            SpotId::Annuna__Egg_Room__East,
+            1228,
+        ),
+        (
+            SpotId::Annuna__Egg_Room__Third_Egg,
+            SpotId::Annuna__Egg_Room__Passage_Entrance,
+            1578,
+        ),
+        (
+            SpotId::Annuna__Egg_Room__Third_Egg,
+            SpotId::Annuna__Egg_Room__Second_Egg,
+            2105,
+        ),
+        (
+            SpotId::Annuna__Egg_Room__Third_Egg,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Egg_Room__West,
+            SpotId::Annuna__Egg_Room__First_Egg,
+            1200,
+        ),
+        (
+            SpotId::Annuna__Egg_Room__West,
+            SpotId::Annuna__West_Climb__East_19,
+            1350,
         ),
         (
             SpotId::Annuna__Egg_Room__West,
@@ -39676,6 +40040,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Annuna__Vertical_Room__Plinth,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Vertical_Room__West_20,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -63564,6 +63933,26 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
         (SpotId::Annuna__Apocalypse__West, SpotId::Annuna__Apocalypse__Southwest_Switch) => {
             Some(600)
         }
+        (SpotId::Annuna__Center_Climb__Lower_Platform, SpotId::Annuna__Center_Climb__East) => {
+            Some(1929)
+        }
+        (SpotId::Annuna__Center_Climb__Middle_Platform, SpotId::Annuna__Center_Climb__East) => {
+            Some(1929)
+        }
+        (
+            SpotId::Annuna__Center_Climb__Middle_Platform,
+            SpotId::Annuna__Center_Climb__Lower_Platform,
+        ) => Some(399),
+        (SpotId::Annuna__Center_Climb__Upper_Platform, SpotId::Annuna__Center_Climb__East) => {
+            Some(1626)
+        }
+        (
+            SpotId::Annuna__Center_Climb__Upper_Platform,
+            SpotId::Annuna__Center_Climb__Middle_Platform,
+        ) => Some(800),
+        (SpotId::Annuna__Center_Climb__West, SpotId::Annuna__Center_Climb__Upper_Platform) => {
+            Some(1929)
+        }
         (SpotId::Annuna__Center_Save__East, SpotId::Annuna__Center_Save__Save_Point) => Some(1578),
         (SpotId::Annuna__Center_Save__Save_Point, SpotId::Annuna__Center_Save__East) => Some(1578),
         (SpotId::Annuna__Center_Save__Save_Point, SpotId::Annuna__Center_Save__West_Floor) => {
@@ -63919,6 +64308,20 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
             Some(877)
         }
         (SpotId::Annuna__East_Climb__West_25, SpotId::Annuna__East_Climb__West_26) => Some(1200),
+        (SpotId::Annuna__Egg_Room__Cache, SpotId::Annuna__Egg_Room__Passage_Entrance) => Some(877),
+        (SpotId::Annuna__Egg_Room__Corner_Platform, SpotId::Annuna__Egg_Room__Second_Egg) => {
+            Some(1666)
+        }
+        (SpotId::Annuna__Egg_Room__Corner_Platform, SpotId::Annuna__Egg_Room__Third_Egg) => {
+            Some(438)
+        }
+        (SpotId::Annuna__Egg_Room__East, SpotId::Annuna__Egg_Room__Third_Egg) => Some(1228),
+        (SpotId::Annuna__Egg_Room__First_Egg, SpotId::Annuna__Egg_Room__Second_Egg) => Some(2280),
+        (SpotId::Annuna__Egg_Room__First_Egg, SpotId::Annuna__Egg_Room__West) => Some(1052),
+        (SpotId::Annuna__Egg_Room__Passage_Entrance, SpotId::Annuna__Egg_Room__Cache) => Some(877),
+        (SpotId::Annuna__Egg_Room__Second_Egg, SpotId::Annuna__Egg_Room__First_Egg) => Some(2280),
+        (SpotId::Annuna__Egg_Room__Third_Egg, SpotId::Annuna__Egg_Room__Second_Egg) => Some(2105),
+        (SpotId::Annuna__Egg_Room__West, SpotId::Annuna__Egg_Room__First_Egg) => Some(2400),
         (SpotId::Annuna__Factory_Access__Bottom, SpotId::Annuna__Factory_Access__East_24) => {
             Some(1052)
         }
@@ -73205,6 +73608,26 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
         (SpotId::Annuna__Apocalypse__West, SpotId::Annuna__Apocalypse__Southwest_Switch) => {
             (Some(600), vec![])
         }
+        (SpotId::Annuna__Center_Climb__Lower_Platform, SpotId::Annuna__Center_Climb__East) => {
+            (Some(1929), vec![])
+        }
+        (SpotId::Annuna__Center_Climb__Middle_Platform, SpotId::Annuna__Center_Climb__East) => {
+            (Some(1929), vec![])
+        }
+        (
+            SpotId::Annuna__Center_Climb__Middle_Platform,
+            SpotId::Annuna__Center_Climb__Lower_Platform,
+        ) => (Some(399), vec![]),
+        (SpotId::Annuna__Center_Climb__Upper_Platform, SpotId::Annuna__Center_Climb__East) => {
+            (Some(1626), vec![])
+        }
+        (
+            SpotId::Annuna__Center_Climb__Upper_Platform,
+            SpotId::Annuna__Center_Climb__Middle_Platform,
+        ) => (Some(800), vec![]),
+        (SpotId::Annuna__Center_Climb__West, SpotId::Annuna__Center_Climb__Upper_Platform) => {
+            (Some(1929), vec![])
+        }
         (SpotId::Annuna__Center_Save__East, SpotId::Annuna__Center_Save__Save_Point) => {
             (Some(1578), vec![])
         }
@@ -73565,6 +73988,36 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
         }
         (SpotId::Annuna__East_Climb__West_25, SpotId::Annuna__East_Climb__West_26) => {
             (Some(1200), vec![])
+        }
+        (SpotId::Annuna__Egg_Room__Cache, SpotId::Annuna__Egg_Room__Passage_Entrance) => {
+            (Some(877), vec![])
+        }
+        (SpotId::Annuna__Egg_Room__Corner_Platform, SpotId::Annuna__Egg_Room__Second_Egg) => {
+            (Some(1666), vec![])
+        }
+        (SpotId::Annuna__Egg_Room__Corner_Platform, SpotId::Annuna__Egg_Room__Third_Egg) => {
+            (Some(438), vec![])
+        }
+        (SpotId::Annuna__Egg_Room__East, SpotId::Annuna__Egg_Room__Third_Egg) => {
+            (Some(1228), vec![])
+        }
+        (SpotId::Annuna__Egg_Room__First_Egg, SpotId::Annuna__Egg_Room__Second_Egg) => {
+            (Some(2280), vec![])
+        }
+        (SpotId::Annuna__Egg_Room__First_Egg, SpotId::Annuna__Egg_Room__West) => {
+            (Some(1052), vec![])
+        }
+        (SpotId::Annuna__Egg_Room__Passage_Entrance, SpotId::Annuna__Egg_Room__Cache) => {
+            (Some(877), vec![])
+        }
+        (SpotId::Annuna__Egg_Room__Second_Egg, SpotId::Annuna__Egg_Room__First_Egg) => {
+            (Some(2280), vec![])
+        }
+        (SpotId::Annuna__Egg_Room__Third_Egg, SpotId::Annuna__Egg_Room__Second_Egg) => {
+            (Some(2105), vec![])
+        }
+        (SpotId::Annuna__Egg_Room__West, SpotId::Annuna__Egg_Room__First_Egg) => {
+            (Some(2400), vec![])
         }
         (SpotId::Annuna__Factory_Access__Bottom, SpotId::Annuna__Factory_Access__East_24) => {
             (Some(1052), vec![])

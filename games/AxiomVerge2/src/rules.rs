@@ -231,6 +231,13 @@ pub fn access_anuman_and_grab(ctx: &Context, world: &graph::World) -> bool {
     // Anuman and $grab
     (ctx.has(Item::Anuman) && helper__grab!(ctx, world))
 }
+pub fn access_anuman_and_slingshot_hook_and_drone_hover(
+    ctx: &Context,
+    world: &graph::World,
+) -> bool {
+    // Anuman and Slingshot_Hook and Drone_Hover
+    ((ctx.has(Item::Anuman) && ctx.has(Item::Slingshot_Hook)) && ctx.has(Item::Drone_Hover))
+}
 pub fn access_anunna_vertical_room_gate(ctx: &Context, world: &graph::World) -> bool {
     // Anunna_Vertical_Room_Gate
     ctx.has(Item::Anunna_Vertical_Room_Gate)
@@ -1676,6 +1683,10 @@ pub fn access_mist2(ctx: &Context, world: &graph::World) -> bool {
     // $mist2
     helper__mist2!(ctx, world)
 }
+pub fn access_mist2_and_mode_eq_drone(ctx: &Context, world: &graph::World) -> bool {
+    // $mist2 and ^mode == 'drone'
+    (helper__mist2!(ctx, world) && ctx.mode() == enums::Mode::Drone)
+}
 pub fn access_mist_upgrade(ctx: &Context, world: &graph::World) -> bool {
     // Mist_Upgrade
     ctx.has(Item::Mist_Upgrade)
@@ -1740,6 +1751,10 @@ pub fn access_nanite_mist(ctx: &Context, world: &graph::World) -> bool {
 pub fn access_nanite_mist_and_mist_upgrade(ctx: &Context, world: &graph::World) -> bool {
     // Nanite_Mist and Mist_Upgrade
     (ctx.has(Item::Nanite_Mist) && ctx.has(Item::Mist_Upgrade))
+}
+pub fn access_nanite_mist_and_mode_eq_drone(ctx: &Context, world: &graph::World) -> bool {
+    // Nanite_Mist and ^mode == 'drone'
+    (ctx.has(Item::Nanite_Mist) && ctx.mode() == enums::Mode::Drone)
 }
 pub fn access_nano_points(ctx: &Context, world: &graph::World) -> bool {
     // Nano_Points
@@ -1916,6 +1931,10 @@ pub fn access_realm_in___main_interior_emergence_and_amashilama(
         data::realm(ctx.position()),
         enums::Realm::Main | enums::Realm::Interior | enums::Realm::Emergence
     ) && ctx.has(Item::Amashilama))
+}
+pub fn access_remote_boomerang(ctx: &Context, world: &graph::World) -> bool {
+    // $remote_boomerang
+    helper__remote_boomerang!(ctx, world)
 }
 pub fn access_remote_drone(ctx: &Context, world: &graph::World) -> bool {
     // Remote_Drone
@@ -3212,6 +3231,44 @@ pub fn explain_anuman_and_grab(
                 edict.insert("$grab", format!("{:?}", res));
                 refs.push("$grab");
                 (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_anuman_and_slingshot_hook_and_drone_hover(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // Anuman and Slingshot_Hook and Drone_Hover
+    {
+        let mut left = {
+            let mut left = {
+                let h = ctx.has(Item::Anuman);
+                edict.insert("Anuman", format!("{}", h));
+                (h, vec!["Anuman"])
+            };
+            if !left.0 {
+                left
+            } else {
+                let mut right = {
+                    let h = ctx.has(Item::Slingshot_Hook);
+                    edict.insert("Slingshot_Hook", format!("{}", h));
+                    (h, vec!["Slingshot_Hook"])
+                };
+                left.1.append(&mut right.1);
+                (right.0, left.1)
+            }
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let h = ctx.has(Item::Drone_Hover);
+                edict.insert("Drone_Hover", format!("{}", h));
+                (h, vec!["Drone_Hover"])
             };
             left.1.append(&mut right.1);
             (right.0, left.1)
@@ -8594,6 +8651,39 @@ pub fn explain_mist2(
         (res, refs)
     }
 }
+pub fn explain_mist2_and_mode_eq_drone(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $mist2 and ^mode == 'drone'
+    {
+        let mut left = {
+            let (res, mut refs) = hexplain__mist2!(ctx, world, edict);
+            edict.insert("$mist2", format!("{:?}", res));
+            refs.push("$mist2");
+            (res, refs)
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let mut refs = vec!["^mode"];
+                let mut left = {
+                    let r = ctx.mode();
+                    edict.insert("^mode", format!("{:?}", r));
+                    (r, vec!["^mode"])
+                };
+                let right = enums::Mode::Drone;
+                edict.insert("^mode", format!("{}", left.0));
+                refs.append(&mut left.1);
+                (left.0 == right, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
 pub fn explain_mist_upgrade(
     ctx: &Context,
     world: &graph::World,
@@ -8945,6 +9035,38 @@ pub fn explain_nanite_mist_and_mist_upgrade(
                 let h = ctx.has(Item::Mist_Upgrade);
                 edict.insert("Mist_Upgrade", format!("{}", h));
                 (h, vec!["Mist_Upgrade"])
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_nanite_mist_and_mode_eq_drone(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // Nanite_Mist and ^mode == 'drone'
+    {
+        let mut left = {
+            let h = ctx.has(Item::Nanite_Mist);
+            edict.insert("Nanite_Mist", format!("{}", h));
+            (h, vec!["Nanite_Mist"])
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let mut refs = vec!["^mode"];
+                let mut left = {
+                    let r = ctx.mode();
+                    edict.insert("^mode", format!("{:?}", r));
+                    (r, vec!["^mode"])
+                };
+                let right = enums::Mode::Drone;
+                edict.insert("^mode", format!("{}", left.0));
+                refs.append(&mut left.1);
+                (left.0 == right, refs)
             };
             left.1.append(&mut right.1);
             (right.0, left.1)
@@ -9767,6 +9889,19 @@ pub fn explain_realm_in___main_interior_emergence_and_amashilama(
             left.1.append(&mut right.1);
             (right.0, left.1)
         }
+    }
+}
+pub fn explain_remote_boomerang(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $remote_boomerang
+    {
+        let (res, mut refs) = hexplain__remote_boomerang!(ctx, world, edict);
+        edict.insert("$remote_boomerang", format!("{:?}", res));
+        refs.push("$remote_boomerang");
+        (res, refs)
     }
 }
 pub fn explain_remote_drone(
@@ -10620,6 +10755,23 @@ pub fn observe_access_anuman_and_grab(
         full_obs.observe_anuman();
         ctx.has(Item::Anuman)
     } && (hobserve__grab!(ctx, world, full_obs)))
+}
+pub fn observe_access_anuman_and_slingshot_hook_and_drone_hover(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // Anuman and Slingshot_Hook and Drone_Hover
+    (({
+        full_obs.observe_anuman();
+        ctx.has(Item::Anuman)
+    } && ({
+        full_obs.observe_slingshot_hook();
+        ctx.has(Item::Slingshot_Hook)
+    })) && ({
+        full_obs.observe_drone_hover();
+        ctx.has(Item::Drone_Hover)
+    }))
 }
 pub fn observe_access_anunna_vertical_room_gate(
     ctx: &Context,
@@ -13463,6 +13615,21 @@ pub fn observe_access_mist2(
     // $mist2
     hobserve__mist2!(ctx, world, full_obs)
 }
+pub fn observe_access_mist2_and_mode_eq_drone(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $mist2 and ^mode == 'drone'
+    (hobserve__mist2!(ctx, world, full_obs)
+        && ({
+            let v = {
+                full_obs.observe_mode();
+                ctx.mode()
+            };
+            v == enums::Mode::Drone
+        }))
+}
 pub fn observe_access_mist_upgrade(
     ctx: &Context,
     world: &graph::World,
@@ -13666,6 +13833,23 @@ pub fn observe_access_nanite_mist_and_mist_upgrade(
     } && ({
         full_obs.observe_mist_upgrade();
         ctx.has(Item::Mist_Upgrade)
+    }))
+}
+pub fn observe_access_nanite_mist_and_mode_eq_drone(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // Nanite_Mist and ^mode == 'drone'
+    ({
+        full_obs.observe_nanite_mist();
+        ctx.has(Item::Nanite_Mist)
+    } && ({
+        let v = {
+            full_obs.observe_mode();
+            ctx.mode()
+        };
+        v == enums::Mode::Drone
     }))
 }
 pub fn observe_access_nano_points(
@@ -14022,6 +14206,14 @@ pub fn observe_access_realm_in___main_interior_emergence_and_amashilama(
         full_obs.observe_amashilama();
         ctx.has(Item::Amashilama)
     }))
+}
+pub fn observe_access_remote_boomerang(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $remote_boomerang
+    hobserve__remote_boomerang!(ctx, world, full_obs)
 }
 pub fn observe_access_remote_drone(
     ctx: &Context,
