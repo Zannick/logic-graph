@@ -381,7 +381,7 @@ areas:
           item: Annuna_East_Bridge_Gate
           canon: Annuna_East_Bridge_Gate
           req: $can_damage
-          time: 0
+          tags: [button]
       exits:
         - to: Gate Button Gap
           req: $climb and $grab
@@ -1143,19 +1143,197 @@ areas:
     #region Mid
     - name: Plinth
       coord: [40.675, 20.6]
+      local:
+        - to: Gate Button
+      locations:
+        - name: Item
+          item: Boomerang_Upgrade
+          tags: [standing]
+      exits:
+        - to: Gate Ledge
+          req: Annuna_Vertical_Room_Gate
+          movement: base
+        - to: Above Plinth
+          req: $hook
+          movement: base
+          jumps: 2
     - name: Gate Button
       coord: [40.8, 20.7]
+      local:
+        - to: Plinth
+          jumps: 1
+        - to: East 21
+      locations:
+        - name: Hit Button
+          item: Annuna_Vertical_Room_Gate
+          req: $can_damage
+          tags: [button]
+
     - name: Middle Overhang
       coord: [40.9, 20.6]
+      local:
+        - to: East 21
+      exits:
+        # This spot is only accessible with fast hover
+        - to: Middle Hallway > Middle
+          req: $hook and $hover
+          movement: fast_hover
+          penalty_tags: [xshift, -fast_hover.1]
     - name: East 21
       coord: [40.95, 20.75]
+      local:
+        - to: Gate Button
+          jumps: 1
+      exits:
+        - to: Middle Hallway > West
+          tags: [xshift]
 
     - name: West 20
       coord: [40.05, 19.6]
+      local:
+        - to: Middle Ministair
+        - to: Save Point Left
+      exits:
+        - to: Center Climb > East
+          tags: [xshift]
+    - name: Middle Ministair
+      coord: [40.2, 19.7]
+      local:
+        - to: West 20
+          jumps: 1
+        - to: Save Point Left
+          jumps: 1
+        - to: Above Plinth
+        - to: Middle West Shaft
+      exits:
+        - to: Middle Overhang
+          req: $hook and $hover
+          movement: fast_hover
+    - name: Save Point Left
+      coord: [40.3, 19.6]
+      local:
+        - to: West 20
+        - to: Middle Ministair
+        - to: Middle West Shaft
+        - to: Above Plinth
+          thru: [40.3, 19.9]
+        - to: Save Point
+          jumps: 1
+    - name: Save Point
+      coord: [40.5, 19.5]
+      local:
+        - to: Save Point Left
+        - to: Save Point Right
+      actions:
+        - name: Save
+          do: $save
+          tags: [save]
+    - name: Save Point Right
+      coord: [40.7, 19.6]
+      local:
+        - to: Save Point
+          jumps: 1
+        - to: East 20
+        - to: Above Plinth
+          thru: [40.7, 19.85]
+        - to: Plinth
+        - to: Gate Button
+        - to: East 21
+    - name: East 20
+      coord: [40.95, 19.6]
+      local:
+        - to: Save Point Right
+        - to: Plinth
+          thru: [40.8, 19.7]
+        - to: Gate Button
+          thru: [40.8, 19.7]
+        - to: East 21
+          thru: [[40.8, 19.7], [40.8, 20.3]]
+      exits:
+        - to: Upper Hallway > West
+          tags: [xshift]
+    - name: Above Plinth
+      coord: [40.6, 20.2]
+      local:
+        - to: Plinth
+        - to: Gate Button
+        - to: East 21
+        - to: Middle West Shaft
+          jumps: 1
+      exits:
+        - to: Save Point Right
+          req: $hook and $hover
+          movement: base
+          jumps: 3
+    - name: Middle West Shaft
+      coord: [40.25, 20.0]
+      local:
+        - to: Above Plinth
+      exits:
+        - to: Middle Ministair
+          req: $climb
+          movement: base
+          jumps: 2
+        - to: Save Point Left
+          req: $hook
+          movement: base
+          jumps: 2
     #endregion
 
     #region Upper
     #endregion
+
+- name: Upper Hallway
+  on_entry: $reset_old_area(^newpos)
+  spots:
+    - name: West
+      coord: [41.05, 19.6]
+      local:
+        - to: Portal Stand
+          jumps: 1
+      exits:
+        - to: Vertical Room > East 20
+          tags: [xshift]
+    - name: Portal Stand
+      coord: [42.5, 19.7]
+      local:
+        - to: West
+          jumps: 1
+        - to: Behind Pedestal
+    - name: Behind Pedestal
+      coord: [42.7, 19.8]
+      local:
+        - to: Portal Stand
+          jumps: 1
+      locations:
+        - name: Health Pickup
+          item: Power_Core
+          req: $more_refills
+          tags: [standing]
+
+- name: Middle Hallway
+  on_entry: $reset_old_area(^newpos)
+  spots:
+    - name: West
+      coord: [41.05, 20.75]
+      local:
+        - to: Middle
+      exits:
+        - to: Vertical Room > East 21
+          tags: [xshift]
+    - name: Middle
+      coord: [42.15, 20.75]
+      local:
+        - to: West
+        - to: East
+          jumps: 1
+    - name: East
+      coord: [42.95, 20.7]
+      local:
+        - to: Middle
+      exits:
+        - to: Filter Teleporter > West 21
+          tags: [xshift]
 
 - name: Lower Hallway
   on_entry: $reset_old_area(^newpos)
@@ -1406,6 +1584,219 @@ areas:
           req: $mist2
           price: 20
           movement: mist2
+
+- name: Filter Teleporter
+  on_entry: $reset_old_area(^newpos)
+  spots:
+    - name: West 21
+      coord: [43.05, 20.7]
+      local:
+        - to: Stair Top
+          jumps: 2
+      exits:
+        - to: Middle Hallway > East
+          tags: [xshift]
+    - name: Stair Top
+      coord: [43.6, 20.4]
+      local:
+        - to: West 21
+        - to: Egg
+          jumps: 3
+      exits:
+        - to: Door Ledge
+          req: Anuman
+          movement: base
+          jumps: 1
+        - to: Door Ledge
+          req: $grab
+          movement: base
+          jumps: 2
+        - to: Door Ledge
+          req: $hook
+          movement: base
+          jumps: 0.5
+        - to: Egg
+          req: $hook
+          movement: base
+          jumps: 2
+    - name: Egg
+      coord: [44.0, 20.0]
+      local:
+        - to: Stair Top
+      # TODO: replace with exit to the Filter
+      locations:
+        - name: Authorize Hammond
+          canon: Authorize Hammond
+          item: Hammond_Auth
+          req: $activate
+          tags: [hack, event]
+          time: 60
+      exits:
+        - to: Door Ledge
+          req: $hook
+          movement: base
+        - to: East Platform 3
+          req: $hook and $hover
+          movement: base
+          jumps: 3
+    - name: Door Ledge
+      coord: [43.5, 20.1]
+      local:
+        - to: Stair Top
+        - to: West 21
+          thru: [43.5, 20.3]
+      locations:
+        - name: Shockwave Flask
+          canon: Filter_Teleporter_Flask
+          item: Flask
+          req: $shockwave
+          price: 100
+          tags: [shockwave]
+      exits:
+        - to: Egg
+          req: $hover
+          movement: base
+          jumps: 1
+        - to: Shaft Bottom
+          req: Hammond_Auth
+          movement: base
+    - name: Shaft Bottom
+      coord: [43.3, 20.1]
+      locations:
+        - name: Flask
+          canon: Filter_Teleporter_Flask
+          item: Flask
+          tags: [flask]
+      exits:
+        - to: Door Ledge
+          req: Hammond_Auth
+          movement: base
+        - to: Shaft Upper Platform
+          req: $grab or $climb
+          movement: base
+          jumps: 6
+        - to: Shaft Upper Platform
+          req: $hook
+          movement: base
+          jumps: 3
+    - name: Shaft Upper Platform
+      coord: [43.25, 19.15]
+      local:
+        - to: Shaft Bottom
+      exits:
+        - to: Shaft Top
+          req: $grab or $climb
+          movement: base
+          jumps: 2
+        - to: Shaft Top
+          req: $hook
+          movement: base
+          jumps: 1
+        - to: West 19 Mid-flight
+          req: $charge
+          tags: [charge_time]
+    - name: Shaft Top
+      coord: [43.15, 18.8]
+      local:
+        - to: Shaft Upper Platform
+        - to: Shaft Bottom
+        - to: West 19
+      actions:
+        - name: Throw Drone
+          req: $can_deploy
+          do: $deploy_drone
+          to: West 19 Mid-flight
+          time: 0.5
+    - name: West 19 Mid-flight
+      coord: [43.05, 18.7]
+      local:
+        - to: West 19
+        - to: Shaft Top
+      exits:
+        - to: Spider Room > Southwest
+          req: $hover
+          movement: fast_hover
+          penalty_tags: [xshift, -fast_hover.1]
+    - name: West 19
+      coord: [43.05, 18.8]
+      local:
+        - to: Shaft Top
+      exits:
+        - to: Spider Room > East
+          tags: [xshift]
+
+    # Northeast side
+    - name: East Platform 3
+      coord: [44.65, 19.5]
+      local:
+        - to: Egg
+          jumps: 2
+      exits:
+        - to: East Platform 4
+          req: $grab
+          movement: base
+          jumps: 2
+        - to: East Platform 4
+          req: $hook
+          movement: base
+          jumps: 1
+    - name: East Platform 4
+      coord: [44.6, 19.15]
+      local:
+        - to: Egg
+        - to: East Platform 3
+      exits:
+        - to: Northeast Ministair
+          req: $hover
+          movement: base
+          jumps: 1
+        - to: Northeast Ministair
+          req: $climb
+          movement: base
+          jumps: 2
+    - name: Northeast Ministair
+      coord: [44.85, 18.8]
+      local:
+        - to: East Platform 4
+        - to: East Platform 3
+      exits:
+        - to: Northeast Cubby
+          req: $hook
+          movement: base
+          jumps: 2
+      actions:
+        - name: Throw Drone Up
+          req: $can_deploy and Slingshot_Hook
+          do: $deploy_drone
+          to: Northeast Cubby
+          time: 2
+    - name: Northeast Cubby
+      coord: [44.9, 18.35]
+      local:
+        - to: Northeast Ministair
+        - to: East Platform 4
+      locations:
+        - name: Tablet
+          item: The_Eternal_Arm
+          tags: [standing]
+
+- name: Spider Room
+  on_entry: $reset_old_area(^newpos)
+  spots:
+    - name: East 
+      coord: [42.95, 18.8]
+    - name: Southwest
+      coord: [41.25, 18.8]
+    - name: Center
+      coord: [42.1, 17.95]
+    - name: Healthy Corner
+      coord: [42.8, 17.95]
+    - name: Northeast Ledge
+      coord: [42.7, 17.5]
+    - name: Upper Seam
+      coord: [42.15, 17.5]
+    - name: West
+      coord: [41.05, 17.6]
 
 - name: Udug Gate
   on_entry: $reset_old_area(^newpos)

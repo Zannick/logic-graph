@@ -1350,6 +1350,107 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
             SpotId::Annuna__Factory_Entrance__West,
             SpotId::Annuna__Factory_Entrance__Save_Point,
         ) => 1578,
+        (
+            [false],
+            SpotId::Annuna__Filter_Teleporter__Door_Ledge,
+            SpotId::Annuna__Filter_Teleporter__Stair_Top,
+        ) => 350,
+        // [0.2, 1.578947]
+        (
+            [false],
+            SpotId::Annuna__Filter_Teleporter__Door_Ledge,
+            SpotId::Annuna__Filter_Teleporter__West_21,
+        ) => 1778,
+        (
+            [false],
+            SpotId::Annuna__Filter_Teleporter__East_Platform_3,
+            SpotId::Annuna__Filter_Teleporter__Egg,
+        ) => 2280,
+        (
+            [false],
+            SpotId::Annuna__Filter_Teleporter__East_Platform_4,
+            SpotId::Annuna__Filter_Teleporter__East_Platform_3,
+        ) => 350,
+        (
+            [false],
+            SpotId::Annuna__Filter_Teleporter__East_Platform_4,
+            SpotId::Annuna__Filter_Teleporter__Egg,
+        ) => 2105,
+        (
+            [false],
+            SpotId::Annuna__Filter_Teleporter__Egg,
+            SpotId::Annuna__Filter_Teleporter__Stair_Top,
+        ) => 1403,
+        (
+            [false],
+            SpotId::Annuna__Filter_Teleporter__Northeast_Cubby,
+            SpotId::Annuna__Filter_Teleporter__East_Platform_4,
+        ) => 1052,
+        (
+            [false],
+            SpotId::Annuna__Filter_Teleporter__Northeast_Cubby,
+            SpotId::Annuna__Filter_Teleporter__Northeast_Ministair,
+        ) => 449,
+        (
+            [false],
+            SpotId::Annuna__Filter_Teleporter__Northeast_Ministair,
+            SpotId::Annuna__Filter_Teleporter__East_Platform_3,
+        ) => 701,
+        (
+            [false],
+            SpotId::Annuna__Filter_Teleporter__Northeast_Ministair,
+            SpotId::Annuna__Filter_Teleporter__East_Platform_4,
+        ) => 877,
+        (
+            [false],
+            SpotId::Annuna__Filter_Teleporter__Shaft_Top,
+            SpotId::Annuna__Filter_Teleporter__Shaft_Bottom,
+        ) => 1300,
+        (
+            [false],
+            SpotId::Annuna__Filter_Teleporter__Shaft_Top,
+            SpotId::Annuna__Filter_Teleporter__Shaft_Upper_Platform,
+        ) => 350,
+        (
+            [false],
+            SpotId::Annuna__Filter_Teleporter__Shaft_Top,
+            SpotId::Annuna__Filter_Teleporter__West_19,
+        ) => 350,
+        (
+            [false],
+            SpotId::Annuna__Filter_Teleporter__Shaft_Upper_Platform,
+            SpotId::Annuna__Filter_Teleporter__Shaft_Bottom,
+        ) => 950,
+        (
+            [false],
+            SpotId::Annuna__Filter_Teleporter__Stair_Top,
+            SpotId::Annuna__Filter_Teleporter__Egg,
+        ) => 1799,
+        (
+            [false],
+            SpotId::Annuna__Filter_Teleporter__Stair_Top,
+            SpotId::Annuna__Filter_Teleporter__West_21,
+        ) => 1929,
+        (
+            [false],
+            SpotId::Annuna__Filter_Teleporter__West_19,
+            SpotId::Annuna__Filter_Teleporter__Shaft_Top,
+        ) => 350,
+        (
+            [false],
+            SpotId::Annuna__Filter_Teleporter__West_19_Mid_flight,
+            SpotId::Annuna__Filter_Teleporter__Shaft_Top,
+        ) => 350,
+        (
+            [false],
+            SpotId::Annuna__Filter_Teleporter__West_19_Mid_flight,
+            SpotId::Annuna__Filter_Teleporter__West_19,
+        ) => 100,
+        (
+            [false],
+            SpotId::Annuna__Filter_Teleporter__West_21,
+            SpotId::Annuna__Filter_Teleporter__Stair_Top,
+        ) => 1929,
         ([false], SpotId::Annuna__Final_Save__East, SpotId::Annuna__Final_Save__Save_Point) => 1578,
         ([false], SpotId::Annuna__Final_Save__Pillar, SpotId::Annuna__Final_Save__Lower_West) => {
             1052
@@ -1388,6 +1489,18 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
             SpotId::Annuna__Lower_Hallway__West,
             SpotId::Annuna__Lower_Hallway__Dais_Left,
         ) => 2807,
+        ([false], SpotId::Annuna__Middle_Hallway__East, SpotId::Annuna__Middle_Hallway__Middle) => {
+            2807
+        }
+        ([false], SpotId::Annuna__Middle_Hallway__Middle, SpotId::Annuna__Middle_Hallway__East) => {
+            2807
+        }
+        ([false], SpotId::Annuna__Middle_Hallway__Middle, SpotId::Annuna__Middle_Hallway__West) => {
+            3859
+        }
+        ([false], SpotId::Annuna__Middle_Hallway__West, SpotId::Annuna__Middle_Hallway__Middle) => {
+            3859
+        }
         (
             [false],
             SpotId::Annuna__Mirror_Match__Below_Switch,
@@ -1817,9 +1930,87 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
         ) => 1403,
         (
             [false],
+            SpotId::Annuna__Upper_Hallway__Behind_Pedestal,
+            SpotId::Annuna__Upper_Hallway__Portal_Stand,
+        ) => 701,
+        (
+            [false],
+            SpotId::Annuna__Upper_Hallway__Portal_Stand,
+            SpotId::Annuna__Upper_Hallway__Behind_Pedestal,
+        ) => 701,
+        (
+            [false],
+            SpotId::Annuna__Upper_Hallway__Portal_Stand,
+            SpotId::Annuna__Upper_Hallway__West,
+        ) => 5087,
+        (
+            [false],
+            SpotId::Annuna__Upper_Hallway__West,
+            SpotId::Annuna__Upper_Hallway__Portal_Stand,
+        ) => 5087,
+        (
+            [false],
+            SpotId::Annuna__Vertical_Room__Above_Plinth,
+            SpotId::Annuna__Vertical_Room__East_21,
+        ) => 1228,
+        (
+            [false],
+            SpotId::Annuna__Vertical_Room__Above_Plinth,
+            SpotId::Annuna__Vertical_Room__Gate_Button,
+        ) => 701,
+        (
+            [false],
+            SpotId::Annuna__Vertical_Room__Above_Plinth,
+            SpotId::Annuna__Vertical_Room__Middle_West_Shaft,
+        ) => 1228,
+        (
+            [false],
+            SpotId::Annuna__Vertical_Room__Above_Plinth,
+            SpotId::Annuna__Vertical_Room__Plinth,
+        ) => 400,
+        // [0.526316, 0.6, 0.526316]
+        (
+            [false],
+            SpotId::Annuna__Vertical_Room__East_20,
+            SpotId::Annuna__Vertical_Room__East_21,
+        ) => 1652,
+        // [0.526316, 1.0]
+        (
+            [false],
+            SpotId::Annuna__Vertical_Room__East_20,
+            SpotId::Annuna__Vertical_Room__Gate_Button,
+        ) => 1526,
+        // [0.526316, 0.9]
+        (
+            [false],
+            SpotId::Annuna__Vertical_Room__East_20,
+            SpotId::Annuna__Vertical_Room__Plinth,
+        ) => 1426,
+        (
+            [false],
+            SpotId::Annuna__Vertical_Room__East_20,
+            SpotId::Annuna__Vertical_Room__Save_Point_Right,
+        ) => 877,
+        (
+            [false],
+            SpotId::Annuna__Vertical_Room__East_21,
+            SpotId::Annuna__Vertical_Room__Gate_Button,
+        ) => 600,
+        (
+            [false],
             SpotId::Annuna__Vertical_Room__East_22,
             SpotId::Annuna__Vertical_Room__Lower_Mid,
         ) => 1403,
+        (
+            [false],
+            SpotId::Annuna__Vertical_Room__Gate_Button,
+            SpotId::Annuna__Vertical_Room__East_21,
+        ) => 526,
+        (
+            [false],
+            SpotId::Annuna__Vertical_Room__Gate_Button,
+            SpotId::Annuna__Vertical_Room__Plinth,
+        ) => 600,
         (
             [false],
             SpotId::Annuna__Vertical_Room__Gate_Ledge,
@@ -1937,6 +2128,118 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
             SpotId::Annuna__Vertical_Room__Lower_Platform_2_Right,
             SpotId::Annuna__Vertical_Room__Lower_Platform_2_Left,
         ) => 701,
+        (
+            [false],
+            SpotId::Annuna__Vertical_Room__Middle_Ministair,
+            SpotId::Annuna__Vertical_Room__Above_Plinth,
+        ) => 1403,
+        (
+            [false],
+            SpotId::Annuna__Vertical_Room__Middle_Ministair,
+            SpotId::Annuna__Vertical_Room__Middle_West_Shaft,
+        ) => 300,
+        (
+            [false],
+            SpotId::Annuna__Vertical_Room__Middle_Ministair,
+            SpotId::Annuna__Vertical_Room__Save_Point_Left,
+        ) => 600,
+        (
+            [false],
+            SpotId::Annuna__Vertical_Room__Middle_Ministair,
+            SpotId::Annuna__Vertical_Room__West_20,
+        ) => 600,
+        (
+            [false],
+            SpotId::Annuna__Vertical_Room__Middle_Overhang,
+            SpotId::Annuna__Vertical_Room__East_21,
+        ) => 175,
+        (
+            [false],
+            SpotId::Annuna__Vertical_Room__Middle_West_Shaft,
+            SpotId::Annuna__Vertical_Room__Above_Plinth,
+        ) => 1228,
+        (
+            [false],
+            SpotId::Annuna__Vertical_Room__Plinth,
+            SpotId::Annuna__Vertical_Room__Gate_Button,
+        ) => 438,
+        (
+            [false],
+            SpotId::Annuna__Vertical_Room__Save_Point,
+            SpotId::Annuna__Vertical_Room__Save_Point_Left,
+        ) => 701,
+        (
+            [false],
+            SpotId::Annuna__Vertical_Room__Save_Point,
+            SpotId::Annuna__Vertical_Room__Save_Point_Right,
+        ) => 701,
+        // [0.3, 1.052632]
+        (
+            [false],
+            SpotId::Annuna__Vertical_Room__Save_Point_Left,
+            SpotId::Annuna__Vertical_Room__Above_Plinth,
+        ) => 1352,
+        (
+            [false],
+            SpotId::Annuna__Vertical_Room__Save_Point_Left,
+            SpotId::Annuna__Vertical_Room__Middle_Ministair,
+        ) => 350,
+        (
+            [false],
+            SpotId::Annuna__Vertical_Room__Save_Point_Left,
+            SpotId::Annuna__Vertical_Room__Middle_West_Shaft,
+        ) => 399,
+        (
+            [false],
+            SpotId::Annuna__Vertical_Room__Save_Point_Left,
+            SpotId::Annuna__Vertical_Room__Save_Point,
+        ) => 701,
+        (
+            [false],
+            SpotId::Annuna__Vertical_Room__Save_Point_Left,
+            SpotId::Annuna__Vertical_Room__West_20,
+        ) => 877,
+        // [0.25, 0.350877]
+        (
+            [false],
+            SpotId::Annuna__Vertical_Room__Save_Point_Right,
+            SpotId::Annuna__Vertical_Room__Above_Plinth,
+        ) => 600,
+        (
+            [false],
+            SpotId::Annuna__Vertical_Room__Save_Point_Right,
+            SpotId::Annuna__Vertical_Room__East_20,
+        ) => 877,
+        (
+            [false],
+            SpotId::Annuna__Vertical_Room__Save_Point_Right,
+            SpotId::Annuna__Vertical_Room__East_21,
+        ) => 1149,
+        (
+            [false],
+            SpotId::Annuna__Vertical_Room__Save_Point_Right,
+            SpotId::Annuna__Vertical_Room__Gate_Button,
+        ) => 1099,
+        (
+            [false],
+            SpotId::Annuna__Vertical_Room__Save_Point_Right,
+            SpotId::Annuna__Vertical_Room__Plinth,
+        ) => 1000,
+        (
+            [false],
+            SpotId::Annuna__Vertical_Room__Save_Point_Right,
+            SpotId::Annuna__Vertical_Room__Save_Point,
+        ) => 701,
+        (
+            [false],
+            SpotId::Annuna__Vertical_Room__West_20,
+            SpotId::Annuna__Vertical_Room__Middle_Ministair,
+        ) => 526,
+        (
+            [false],
+            SpotId::Annuna__Vertical_Room__West_20,
+            SpotId::Annuna__Vertical_Room__Save_Point_Left,
+        ) => 877,
         (
             [false],
             SpotId::Annuna__Vertical_Room__West_21,
@@ -15114,6 +15417,107 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
             SpotId::Annuna__Factory_Entrance__West,
             SpotId::Annuna__Factory_Entrance__Save_Point,
         ) => 1578,
+        (
+            [true],
+            SpotId::Annuna__Filter_Teleporter__Door_Ledge,
+            SpotId::Annuna__Filter_Teleporter__Stair_Top,
+        ) => 350,
+        // [0.2, 1.578947]
+        (
+            [true],
+            SpotId::Annuna__Filter_Teleporter__Door_Ledge,
+            SpotId::Annuna__Filter_Teleporter__West_21,
+        ) => 1778,
+        (
+            [true],
+            SpotId::Annuna__Filter_Teleporter__East_Platform_3,
+            SpotId::Annuna__Filter_Teleporter__Egg,
+        ) => 2280,
+        (
+            [true],
+            SpotId::Annuna__Filter_Teleporter__East_Platform_4,
+            SpotId::Annuna__Filter_Teleporter__East_Platform_3,
+        ) => 350,
+        (
+            [true],
+            SpotId::Annuna__Filter_Teleporter__East_Platform_4,
+            SpotId::Annuna__Filter_Teleporter__Egg,
+        ) => 2105,
+        (
+            [true],
+            SpotId::Annuna__Filter_Teleporter__Egg,
+            SpotId::Annuna__Filter_Teleporter__Stair_Top,
+        ) => 1403,
+        (
+            [true],
+            SpotId::Annuna__Filter_Teleporter__Northeast_Cubby,
+            SpotId::Annuna__Filter_Teleporter__East_Platform_4,
+        ) => 1052,
+        (
+            [true],
+            SpotId::Annuna__Filter_Teleporter__Northeast_Cubby,
+            SpotId::Annuna__Filter_Teleporter__Northeast_Ministair,
+        ) => 449,
+        (
+            [true],
+            SpotId::Annuna__Filter_Teleporter__Northeast_Ministair,
+            SpotId::Annuna__Filter_Teleporter__East_Platform_3,
+        ) => 701,
+        (
+            [true],
+            SpotId::Annuna__Filter_Teleporter__Northeast_Ministair,
+            SpotId::Annuna__Filter_Teleporter__East_Platform_4,
+        ) => 877,
+        (
+            [true],
+            SpotId::Annuna__Filter_Teleporter__Shaft_Top,
+            SpotId::Annuna__Filter_Teleporter__Shaft_Bottom,
+        ) => 1300,
+        (
+            [true],
+            SpotId::Annuna__Filter_Teleporter__Shaft_Top,
+            SpotId::Annuna__Filter_Teleporter__Shaft_Upper_Platform,
+        ) => 350,
+        (
+            [true],
+            SpotId::Annuna__Filter_Teleporter__Shaft_Top,
+            SpotId::Annuna__Filter_Teleporter__West_19,
+        ) => 350,
+        (
+            [true],
+            SpotId::Annuna__Filter_Teleporter__Shaft_Upper_Platform,
+            SpotId::Annuna__Filter_Teleporter__Shaft_Bottom,
+        ) => 950,
+        (
+            [true],
+            SpotId::Annuna__Filter_Teleporter__Stair_Top,
+            SpotId::Annuna__Filter_Teleporter__Egg,
+        ) => 1799,
+        (
+            [true],
+            SpotId::Annuna__Filter_Teleporter__Stair_Top,
+            SpotId::Annuna__Filter_Teleporter__West_21,
+        ) => 1929,
+        (
+            [true],
+            SpotId::Annuna__Filter_Teleporter__West_19,
+            SpotId::Annuna__Filter_Teleporter__Shaft_Top,
+        ) => 350,
+        (
+            [true],
+            SpotId::Annuna__Filter_Teleporter__West_19_Mid_flight,
+            SpotId::Annuna__Filter_Teleporter__Shaft_Top,
+        ) => 350,
+        (
+            [true],
+            SpotId::Annuna__Filter_Teleporter__West_19_Mid_flight,
+            SpotId::Annuna__Filter_Teleporter__West_19,
+        ) => 100,
+        (
+            [true],
+            SpotId::Annuna__Filter_Teleporter__West_21,
+            SpotId::Annuna__Filter_Teleporter__Stair_Top,
+        ) => 1929,
         ([true], SpotId::Annuna__Final_Save__East, SpotId::Annuna__Final_Save__Save_Point) => 1578,
         ([true], SpotId::Annuna__Final_Save__Pillar, SpotId::Annuna__Final_Save__Lower_West) => {
             1052
@@ -15145,6 +15549,18 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
         ) => 2807,
         ([true], SpotId::Annuna__Lower_Hallway__West, SpotId::Annuna__Lower_Hallway__Dais_Left) => {
             2807
+        }
+        ([true], SpotId::Annuna__Middle_Hallway__East, SpotId::Annuna__Middle_Hallway__Middle) => {
+            2807
+        }
+        ([true], SpotId::Annuna__Middle_Hallway__Middle, SpotId::Annuna__Middle_Hallway__East) => {
+            2807
+        }
+        ([true], SpotId::Annuna__Middle_Hallway__Middle, SpotId::Annuna__Middle_Hallway__West) => {
+            3859
+        }
+        ([true], SpotId::Annuna__Middle_Hallway__West, SpotId::Annuna__Middle_Hallway__Middle) => {
+            3859
         }
         (
             [true],
@@ -15569,9 +15985,85 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
         ) => 1403,
         (
             [true],
+            SpotId::Annuna__Upper_Hallway__Behind_Pedestal,
+            SpotId::Annuna__Upper_Hallway__Portal_Stand,
+        ) => 701,
+        (
+            [true],
+            SpotId::Annuna__Upper_Hallway__Portal_Stand,
+            SpotId::Annuna__Upper_Hallway__Behind_Pedestal,
+        ) => 701,
+        (
+            [true],
+            SpotId::Annuna__Upper_Hallway__Portal_Stand,
+            SpotId::Annuna__Upper_Hallway__West,
+        ) => 5087,
+        (
+            [true],
+            SpotId::Annuna__Upper_Hallway__West,
+            SpotId::Annuna__Upper_Hallway__Portal_Stand,
+        ) => 5087,
+        (
+            [true],
+            SpotId::Annuna__Vertical_Room__Above_Plinth,
+            SpotId::Annuna__Vertical_Room__East_21,
+        ) => 1228,
+        (
+            [true],
+            SpotId::Annuna__Vertical_Room__Above_Plinth,
+            SpotId::Annuna__Vertical_Room__Gate_Button,
+        ) => 701,
+        (
+            [true],
+            SpotId::Annuna__Vertical_Room__Above_Plinth,
+            SpotId::Annuna__Vertical_Room__Middle_West_Shaft,
+        ) => 1228,
+        (
+            [true],
+            SpotId::Annuna__Vertical_Room__Above_Plinth,
+            SpotId::Annuna__Vertical_Room__Plinth,
+        ) => 400,
+        // [0.526316, 0.6, 0.526316]
+        (
+            [true],
+            SpotId::Annuna__Vertical_Room__East_20,
+            SpotId::Annuna__Vertical_Room__East_21,
+        ) => 1652,
+        // [0.526316, 1.0]
+        (
+            [true],
+            SpotId::Annuna__Vertical_Room__East_20,
+            SpotId::Annuna__Vertical_Room__Gate_Button,
+        ) => 1526,
+        // [0.526316, 0.9]
+        ([true], SpotId::Annuna__Vertical_Room__East_20, SpotId::Annuna__Vertical_Room__Plinth) => {
+            1426
+        }
+        (
+            [true],
+            SpotId::Annuna__Vertical_Room__East_20,
+            SpotId::Annuna__Vertical_Room__Save_Point_Right,
+        ) => 877,
+        (
+            [true],
+            SpotId::Annuna__Vertical_Room__East_21,
+            SpotId::Annuna__Vertical_Room__Gate_Button,
+        ) => 600,
+        (
+            [true],
             SpotId::Annuna__Vertical_Room__East_22,
             SpotId::Annuna__Vertical_Room__Lower_Mid,
         ) => 1403,
+        (
+            [true],
+            SpotId::Annuna__Vertical_Room__Gate_Button,
+            SpotId::Annuna__Vertical_Room__East_21,
+        ) => 526,
+        (
+            [true],
+            SpotId::Annuna__Vertical_Room__Gate_Button,
+            SpotId::Annuna__Vertical_Room__Plinth,
+        ) => 600,
         (
             [true],
             SpotId::Annuna__Vertical_Room__Gate_Ledge,
@@ -15689,6 +16181,118 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
             SpotId::Annuna__Vertical_Room__Lower_Platform_2_Right,
             SpotId::Annuna__Vertical_Room__Lower_Platform_2_Left,
         ) => 701,
+        (
+            [true],
+            SpotId::Annuna__Vertical_Room__Middle_Ministair,
+            SpotId::Annuna__Vertical_Room__Above_Plinth,
+        ) => 1403,
+        (
+            [true],
+            SpotId::Annuna__Vertical_Room__Middle_Ministair,
+            SpotId::Annuna__Vertical_Room__Middle_West_Shaft,
+        ) => 300,
+        (
+            [true],
+            SpotId::Annuna__Vertical_Room__Middle_Ministair,
+            SpotId::Annuna__Vertical_Room__Save_Point_Left,
+        ) => 600,
+        (
+            [true],
+            SpotId::Annuna__Vertical_Room__Middle_Ministair,
+            SpotId::Annuna__Vertical_Room__West_20,
+        ) => 600,
+        (
+            [true],
+            SpotId::Annuna__Vertical_Room__Middle_Overhang,
+            SpotId::Annuna__Vertical_Room__East_21,
+        ) => 175,
+        (
+            [true],
+            SpotId::Annuna__Vertical_Room__Middle_West_Shaft,
+            SpotId::Annuna__Vertical_Room__Above_Plinth,
+        ) => 1228,
+        (
+            [true],
+            SpotId::Annuna__Vertical_Room__Plinth,
+            SpotId::Annuna__Vertical_Room__Gate_Button,
+        ) => 438,
+        (
+            [true],
+            SpotId::Annuna__Vertical_Room__Save_Point,
+            SpotId::Annuna__Vertical_Room__Save_Point_Left,
+        ) => 701,
+        (
+            [true],
+            SpotId::Annuna__Vertical_Room__Save_Point,
+            SpotId::Annuna__Vertical_Room__Save_Point_Right,
+        ) => 701,
+        // [0.3, 1.052632]
+        (
+            [true],
+            SpotId::Annuna__Vertical_Room__Save_Point_Left,
+            SpotId::Annuna__Vertical_Room__Above_Plinth,
+        ) => 1352,
+        (
+            [true],
+            SpotId::Annuna__Vertical_Room__Save_Point_Left,
+            SpotId::Annuna__Vertical_Room__Middle_Ministair,
+        ) => 350,
+        (
+            [true],
+            SpotId::Annuna__Vertical_Room__Save_Point_Left,
+            SpotId::Annuna__Vertical_Room__Middle_West_Shaft,
+        ) => 399,
+        (
+            [true],
+            SpotId::Annuna__Vertical_Room__Save_Point_Left,
+            SpotId::Annuna__Vertical_Room__Save_Point,
+        ) => 701,
+        (
+            [true],
+            SpotId::Annuna__Vertical_Room__Save_Point_Left,
+            SpotId::Annuna__Vertical_Room__West_20,
+        ) => 877,
+        // [0.25, 0.350877]
+        (
+            [true],
+            SpotId::Annuna__Vertical_Room__Save_Point_Right,
+            SpotId::Annuna__Vertical_Room__Above_Plinth,
+        ) => 600,
+        (
+            [true],
+            SpotId::Annuna__Vertical_Room__Save_Point_Right,
+            SpotId::Annuna__Vertical_Room__East_20,
+        ) => 877,
+        (
+            [true],
+            SpotId::Annuna__Vertical_Room__Save_Point_Right,
+            SpotId::Annuna__Vertical_Room__East_21,
+        ) => 1149,
+        (
+            [true],
+            SpotId::Annuna__Vertical_Room__Save_Point_Right,
+            SpotId::Annuna__Vertical_Room__Gate_Button,
+        ) => 1099,
+        (
+            [true],
+            SpotId::Annuna__Vertical_Room__Save_Point_Right,
+            SpotId::Annuna__Vertical_Room__Plinth,
+        ) => 1000,
+        (
+            [true],
+            SpotId::Annuna__Vertical_Room__Save_Point_Right,
+            SpotId::Annuna__Vertical_Room__Save_Point,
+        ) => 701,
+        (
+            [true],
+            SpotId::Annuna__Vertical_Room__West_20,
+            SpotId::Annuna__Vertical_Room__Middle_Ministair,
+        ) => 526,
+        (
+            [true],
+            SpotId::Annuna__Vertical_Room__West_20,
+            SpotId::Annuna__Vertical_Room__Save_Point_Left,
+        ) => 877,
         (
             [true],
             SpotId::Annuna__Vertical_Room__West_21,
@@ -28056,6 +28660,135 @@ pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
             SpotId::Annuna__Vertical_Room__West_21,
             SpotId::Annuna__Vertical_Room__Lower_Ministair,
         ) => true,
+        (SpotId::Annuna__Vertical_Room__Plinth, SpotId::Annuna__Vertical_Room__Gate_Button) => true,
+        (SpotId::Annuna__Vertical_Room__Gate_Button, SpotId::Annuna__Vertical_Room__Plinth) => true,
+        (SpotId::Annuna__Vertical_Room__Gate_Button, SpotId::Annuna__Vertical_Room__East_21) => {
+            true
+        }
+        (
+            SpotId::Annuna__Vertical_Room__Middle_Overhang,
+            SpotId::Annuna__Vertical_Room__East_21,
+        ) => true,
+        (SpotId::Annuna__Vertical_Room__East_21, SpotId::Annuna__Vertical_Room__Gate_Button) => {
+            true
+        }
+        (
+            SpotId::Annuna__Vertical_Room__West_20,
+            SpotId::Annuna__Vertical_Room__Middle_Ministair,
+        ) => true,
+        (
+            SpotId::Annuna__Vertical_Room__West_20,
+            SpotId::Annuna__Vertical_Room__Save_Point_Left,
+        ) => true,
+        (
+            SpotId::Annuna__Vertical_Room__Middle_Ministair,
+            SpotId::Annuna__Vertical_Room__West_20,
+        ) => true,
+        (
+            SpotId::Annuna__Vertical_Room__Middle_Ministair,
+            SpotId::Annuna__Vertical_Room__Save_Point_Left,
+        ) => true,
+        (
+            SpotId::Annuna__Vertical_Room__Middle_Ministair,
+            SpotId::Annuna__Vertical_Room__Above_Plinth,
+        ) => true,
+        (
+            SpotId::Annuna__Vertical_Room__Middle_Ministair,
+            SpotId::Annuna__Vertical_Room__Middle_West_Shaft,
+        ) => true,
+        (
+            SpotId::Annuna__Vertical_Room__Save_Point_Left,
+            SpotId::Annuna__Vertical_Room__West_20,
+        ) => true,
+        (
+            SpotId::Annuna__Vertical_Room__Save_Point_Left,
+            SpotId::Annuna__Vertical_Room__Middle_Ministair,
+        ) => true,
+        (
+            SpotId::Annuna__Vertical_Room__Save_Point_Left,
+            SpotId::Annuna__Vertical_Room__Middle_West_Shaft,
+        ) => true,
+        (
+            SpotId::Annuna__Vertical_Room__Save_Point_Left,
+            SpotId::Annuna__Vertical_Room__Above_Plinth,
+        ) => true,
+        (
+            SpotId::Annuna__Vertical_Room__Save_Point_Left,
+            SpotId::Annuna__Vertical_Room__Save_Point,
+        ) => true,
+        (
+            SpotId::Annuna__Vertical_Room__Save_Point,
+            SpotId::Annuna__Vertical_Room__Save_Point_Left,
+        ) => true,
+        (
+            SpotId::Annuna__Vertical_Room__Save_Point,
+            SpotId::Annuna__Vertical_Room__Save_Point_Right,
+        ) => true,
+        (
+            SpotId::Annuna__Vertical_Room__Save_Point_Right,
+            SpotId::Annuna__Vertical_Room__Save_Point,
+        ) => true,
+        (
+            SpotId::Annuna__Vertical_Room__Save_Point_Right,
+            SpotId::Annuna__Vertical_Room__East_20,
+        ) => true,
+        (
+            SpotId::Annuna__Vertical_Room__Save_Point_Right,
+            SpotId::Annuna__Vertical_Room__Above_Plinth,
+        ) => true,
+        (
+            SpotId::Annuna__Vertical_Room__Save_Point_Right,
+            SpotId::Annuna__Vertical_Room__Plinth,
+        ) => true,
+        (
+            SpotId::Annuna__Vertical_Room__Save_Point_Right,
+            SpotId::Annuna__Vertical_Room__Gate_Button,
+        ) => true,
+        (
+            SpotId::Annuna__Vertical_Room__Save_Point_Right,
+            SpotId::Annuna__Vertical_Room__East_21,
+        ) => true,
+        (
+            SpotId::Annuna__Vertical_Room__East_20,
+            SpotId::Annuna__Vertical_Room__Save_Point_Right,
+        ) => true,
+        (SpotId::Annuna__Vertical_Room__East_20, SpotId::Annuna__Vertical_Room__Plinth) => true,
+        (SpotId::Annuna__Vertical_Room__East_20, SpotId::Annuna__Vertical_Room__Gate_Button) => {
+            true
+        }
+        (SpotId::Annuna__Vertical_Room__East_20, SpotId::Annuna__Vertical_Room__East_21) => true,
+        (SpotId::Annuna__Vertical_Room__Above_Plinth, SpotId::Annuna__Vertical_Room__Plinth) => {
+            true
+        }
+        (
+            SpotId::Annuna__Vertical_Room__Above_Plinth,
+            SpotId::Annuna__Vertical_Room__Gate_Button,
+        ) => true,
+        (SpotId::Annuna__Vertical_Room__Above_Plinth, SpotId::Annuna__Vertical_Room__East_21) => {
+            true
+        }
+        (
+            SpotId::Annuna__Vertical_Room__Above_Plinth,
+            SpotId::Annuna__Vertical_Room__Middle_West_Shaft,
+        ) => true,
+        (
+            SpotId::Annuna__Vertical_Room__Middle_West_Shaft,
+            SpotId::Annuna__Vertical_Room__Above_Plinth,
+        ) => true,
+        (SpotId::Annuna__Upper_Hallway__West, SpotId::Annuna__Upper_Hallway__Portal_Stand) => true,
+        (SpotId::Annuna__Upper_Hallway__Portal_Stand, SpotId::Annuna__Upper_Hallway__West) => true,
+        (
+            SpotId::Annuna__Upper_Hallway__Portal_Stand,
+            SpotId::Annuna__Upper_Hallway__Behind_Pedestal,
+        ) => true,
+        (
+            SpotId::Annuna__Upper_Hallway__Behind_Pedestal,
+            SpotId::Annuna__Upper_Hallway__Portal_Stand,
+        ) => true,
+        (SpotId::Annuna__Middle_Hallway__West, SpotId::Annuna__Middle_Hallway__Middle) => true,
+        (SpotId::Annuna__Middle_Hallway__Middle, SpotId::Annuna__Middle_Hallway__West) => true,
+        (SpotId::Annuna__Middle_Hallway__Middle, SpotId::Annuna__Middle_Hallway__East) => true,
+        (SpotId::Annuna__Middle_Hallway__East, SpotId::Annuna__Middle_Hallway__Middle) => true,
         (SpotId::Annuna__Lower_Hallway__West, SpotId::Annuna__Lower_Hallway__Dais_Left) => true,
         (SpotId::Annuna__Lower_Hallway__Dais_Left, SpotId::Annuna__Lower_Hallway__West) => true,
         (SpotId::Annuna__Lower_Hallway__Dais_Left, SpotId::Annuna__Lower_Hallway__Dais_Right) => {
@@ -28144,6 +28877,84 @@ pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
         (
             SpotId::Annuna__Factory_Access__Grate_Left,
             SpotId::Annuna__Factory_Access__Staircase_Top,
+        ) => true,
+        (
+            SpotId::Annuna__Filter_Teleporter__West_21,
+            SpotId::Annuna__Filter_Teleporter__Stair_Top,
+        ) => true,
+        (
+            SpotId::Annuna__Filter_Teleporter__Stair_Top,
+            SpotId::Annuna__Filter_Teleporter__West_21,
+        ) => true,
+        (SpotId::Annuna__Filter_Teleporter__Stair_Top, SpotId::Annuna__Filter_Teleporter__Egg) => {
+            true
+        }
+        (SpotId::Annuna__Filter_Teleporter__Egg, SpotId::Annuna__Filter_Teleporter__Stair_Top) => {
+            true
+        }
+        (
+            SpotId::Annuna__Filter_Teleporter__Door_Ledge,
+            SpotId::Annuna__Filter_Teleporter__Stair_Top,
+        ) => true,
+        (
+            SpotId::Annuna__Filter_Teleporter__Door_Ledge,
+            SpotId::Annuna__Filter_Teleporter__West_21,
+        ) => true,
+        (
+            SpotId::Annuna__Filter_Teleporter__Shaft_Upper_Platform,
+            SpotId::Annuna__Filter_Teleporter__Shaft_Bottom,
+        ) => true,
+        (
+            SpotId::Annuna__Filter_Teleporter__Shaft_Top,
+            SpotId::Annuna__Filter_Teleporter__Shaft_Upper_Platform,
+        ) => true,
+        (
+            SpotId::Annuna__Filter_Teleporter__Shaft_Top,
+            SpotId::Annuna__Filter_Teleporter__Shaft_Bottom,
+        ) => true,
+        (
+            SpotId::Annuna__Filter_Teleporter__Shaft_Top,
+            SpotId::Annuna__Filter_Teleporter__West_19,
+        ) => true,
+        (
+            SpotId::Annuna__Filter_Teleporter__West_19_Mid_flight,
+            SpotId::Annuna__Filter_Teleporter__West_19,
+        ) => true,
+        (
+            SpotId::Annuna__Filter_Teleporter__West_19_Mid_flight,
+            SpotId::Annuna__Filter_Teleporter__Shaft_Top,
+        ) => true,
+        (
+            SpotId::Annuna__Filter_Teleporter__West_19,
+            SpotId::Annuna__Filter_Teleporter__Shaft_Top,
+        ) => true,
+        (
+            SpotId::Annuna__Filter_Teleporter__East_Platform_3,
+            SpotId::Annuna__Filter_Teleporter__Egg,
+        ) => true,
+        (
+            SpotId::Annuna__Filter_Teleporter__East_Platform_4,
+            SpotId::Annuna__Filter_Teleporter__Egg,
+        ) => true,
+        (
+            SpotId::Annuna__Filter_Teleporter__East_Platform_4,
+            SpotId::Annuna__Filter_Teleporter__East_Platform_3,
+        ) => true,
+        (
+            SpotId::Annuna__Filter_Teleporter__Northeast_Ministair,
+            SpotId::Annuna__Filter_Teleporter__East_Platform_4,
+        ) => true,
+        (
+            SpotId::Annuna__Filter_Teleporter__Northeast_Ministair,
+            SpotId::Annuna__Filter_Teleporter__East_Platform_3,
+        ) => true,
+        (
+            SpotId::Annuna__Filter_Teleporter__Northeast_Cubby,
+            SpotId::Annuna__Filter_Teleporter__Northeast_Ministair,
+        ) => true,
+        (
+            SpotId::Annuna__Filter_Teleporter__Northeast_Cubby,
+            SpotId::Annuna__Filter_Teleporter__East_Platform_4,
         ) => true,
         (SpotId::Annuna__Center_Save__East, SpotId::Annuna__Center_Save__Save_Point) => true,
         (SpotId::Annuna__Center_Save__Save_Point, SpotId::Annuna__Center_Save__West_Floor) => true,
@@ -38769,6 +39580,251 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             1000,
         ),
         (
+            SpotId::Annuna__Filter_Teleporter__Door_Ledge,
+            SpotId::Annuna__Filter_Teleporter__Egg,
+            1754,
+        ),
+        (
+            SpotId::Annuna__Filter_Teleporter__Door_Ledge,
+            SpotId::Annuna__Filter_Teleporter__Shaft_Bottom,
+            701,
+        ),
+        (
+            SpotId::Annuna__Filter_Teleporter__Door_Ledge,
+            SpotId::Annuna__Filter_Teleporter__Stair_Top,
+            350,
+        ),
+        (
+            SpotId::Annuna__Filter_Teleporter__Door_Ledge,
+            SpotId::Annuna__Filter_Teleporter__West_21,
+            1778,
+        ),
+        (
+            SpotId::Annuna__Filter_Teleporter__Door_Ledge,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Filter_Teleporter__East_Platform_3,
+            SpotId::Annuna__Filter_Teleporter__East_Platform_4,
+            600,
+        ),
+        (
+            SpotId::Annuna__Filter_Teleporter__East_Platform_3,
+            SpotId::Annuna__Filter_Teleporter__Egg,
+            2280,
+        ),
+        (
+            SpotId::Annuna__Filter_Teleporter__East_Platform_3,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Filter_Teleporter__East_Platform_4,
+            SpotId::Annuna__Filter_Teleporter__East_Platform_3,
+            350,
+        ),
+        (
+            SpotId::Annuna__Filter_Teleporter__East_Platform_4,
+            SpotId::Annuna__Filter_Teleporter__Egg,
+            2105,
+        ),
+        (
+            SpotId::Annuna__Filter_Teleporter__East_Platform_4,
+            SpotId::Annuna__Filter_Teleporter__Northeast_Ministair,
+            877,
+        ),
+        (
+            SpotId::Annuna__Filter_Teleporter__East_Platform_4,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Filter_Teleporter__Egg,
+            SpotId::Annuna__Filter_Teleporter__Door_Ledge,
+            1754,
+        ),
+        (
+            SpotId::Annuna__Filter_Teleporter__Egg,
+            SpotId::Annuna__Filter_Teleporter__East_Platform_3,
+            2280,
+        ),
+        (
+            SpotId::Annuna__Filter_Teleporter__Egg,
+            SpotId::Annuna__Filter_Teleporter__Stair_Top,
+            1403,
+        ),
+        (
+            SpotId::Annuna__Filter_Teleporter__Egg,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Filter_Teleporter__Northeast_Cubby,
+            SpotId::Annuna__Filter_Teleporter__East_Platform_4,
+            1052,
+        ),
+        (
+            SpotId::Annuna__Filter_Teleporter__Northeast_Cubby,
+            SpotId::Annuna__Filter_Teleporter__Northeast_Ministair,
+            449,
+        ),
+        (
+            SpotId::Annuna__Filter_Teleporter__Northeast_Cubby,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Filter_Teleporter__Northeast_Ministair,
+            SpotId::Annuna__Filter_Teleporter__East_Platform_3,
+            701,
+        ),
+        (
+            SpotId::Annuna__Filter_Teleporter__Northeast_Ministair,
+            SpotId::Annuna__Filter_Teleporter__East_Platform_4,
+            877,
+        ),
+        (
+            SpotId::Annuna__Filter_Teleporter__Northeast_Ministair,
+            SpotId::Annuna__Filter_Teleporter__Northeast_Cubby,
+            1200,
+        ),
+        (
+            SpotId::Annuna__Filter_Teleporter__Northeast_Ministair,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Filter_Teleporter__Shaft_Bottom,
+            SpotId::Annuna__Filter_Teleporter__Door_Ledge,
+            701,
+        ),
+        (
+            SpotId::Annuna__Filter_Teleporter__Shaft_Bottom,
+            SpotId::Annuna__Filter_Teleporter__Shaft_Upper_Platform,
+            1799,
+        ),
+        (
+            SpotId::Annuna__Filter_Teleporter__Shaft_Bottom,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Filter_Teleporter__Shaft_Top,
+            SpotId::Annuna__Filter_Teleporter__Shaft_Bottom,
+            1300,
+        ),
+        (
+            SpotId::Annuna__Filter_Teleporter__Shaft_Top,
+            SpotId::Annuna__Filter_Teleporter__Shaft_Upper_Platform,
+            350,
+        ),
+        (
+            SpotId::Annuna__Filter_Teleporter__Shaft_Top,
+            SpotId::Annuna__Filter_Teleporter__West_19,
+            350,
+        ),
+        (
+            SpotId::Annuna__Filter_Teleporter__Shaft_Top,
+            SpotId::Annuna__Filter_Teleporter__West_19_Mid_flight,
+            500,
+        ),
+        (
+            SpotId::Annuna__Filter_Teleporter__Shaft_Top,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Filter_Teleporter__Shaft_Upper_Platform,
+            SpotId::Annuna__Filter_Teleporter__Shaft_Bottom,
+            950,
+        ),
+        (
+            SpotId::Annuna__Filter_Teleporter__Shaft_Upper_Platform,
+            SpotId::Annuna__Filter_Teleporter__Shaft_Top,
+            600,
+        ),
+        (
+            SpotId::Annuna__Filter_Teleporter__Shaft_Upper_Platform,
+            SpotId::Annuna__Filter_Teleporter__West_19_Mid_flight,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Filter_Teleporter__Shaft_Upper_Platform,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Filter_Teleporter__Stair_Top,
+            SpotId::Annuna__Filter_Teleporter__Door_Ledge,
+            350,
+        ),
+        (
+            SpotId::Annuna__Filter_Teleporter__Stair_Top,
+            SpotId::Annuna__Filter_Teleporter__Egg,
+            1403,
+        ),
+        (
+            SpotId::Annuna__Filter_Teleporter__Stair_Top,
+            SpotId::Annuna__Filter_Teleporter__West_21,
+            1929,
+        ),
+        (
+            SpotId::Annuna__Filter_Teleporter__Stair_Top,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Filter_Teleporter__West_19,
+            SpotId::Annuna__Filter_Teleporter__Shaft_Top,
+            350,
+        ),
+        (
+            SpotId::Annuna__Filter_Teleporter__West_19,
+            SpotId::Annuna__Spider_Room__East,
+            1350,
+        ),
+        (
+            SpotId::Annuna__Filter_Teleporter__West_19,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Filter_Teleporter__West_19_Mid_flight,
+            SpotId::Annuna__Filter_Teleporter__Shaft_Top,
+            350,
+        ),
+        (
+            SpotId::Annuna__Filter_Teleporter__West_19_Mid_flight,
+            SpotId::Annuna__Filter_Teleporter__West_19,
+            100,
+        ),
+        (
+            SpotId::Annuna__Filter_Teleporter__West_19_Mid_flight,
+            SpotId::Annuna__Spider_Room__Southwest,
+            5599,
+        ),
+        (
+            SpotId::Annuna__Filter_Teleporter__West_19_Mid_flight,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Filter_Teleporter__West_21,
+            SpotId::Annuna__Filter_Teleporter__Stair_Top,
+            1929,
+        ),
+        (
+            SpotId::Annuna__Filter_Teleporter__West_21,
+            SpotId::Annuna__Middle_Hallway__East,
+            1350,
+        ),
+        (
+            SpotId::Annuna__Filter_Teleporter__West_21,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
             SpotId::Annuna__Final_Save__East,
             SpotId::Annuna__Apocalypse__West,
             1350,
@@ -38915,6 +39971,51 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Annuna__Lower_Hallway__West,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Middle_Hallway__East,
+            SpotId::Annuna__Filter_Teleporter__West_21,
+            1350,
+        ),
+        (
+            SpotId::Annuna__Middle_Hallway__East,
+            SpotId::Annuna__Middle_Hallway__Middle,
+            2807,
+        ),
+        (
+            SpotId::Annuna__Middle_Hallway__East,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Middle_Hallway__Middle,
+            SpotId::Annuna__Middle_Hallway__East,
+            2807,
+        ),
+        (
+            SpotId::Annuna__Middle_Hallway__Middle,
+            SpotId::Annuna__Middle_Hallway__West,
+            3859,
+        ),
+        (
+            SpotId::Annuna__Middle_Hallway__Middle,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Middle_Hallway__West,
+            SpotId::Annuna__Middle_Hallway__Middle,
+            3859,
+        ),
+        (
+            SpotId::Annuna__Middle_Hallway__West,
+            SpotId::Annuna__Vertical_Room__East_21,
+            1350,
+        ),
+        (
+            SpotId::Annuna__Middle_Hallway__West,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -39449,6 +40550,41 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             1000,
         ),
         (
+            SpotId::Annuna__Spider_Room__Center,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Spider_Room__East,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Spider_Room__Healthy_Corner,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Spider_Room__Northeast_Ledge,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Spider_Room__Southwest,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Spider_Room__Upper_Seam,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Spider_Room__West,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
             SpotId::Annuna__Twisty_Passages__Bottom_Middle,
             SpotId::Annuna__Twisty_Passages__Bottom_West,
             1754,
@@ -39819,6 +40955,116 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             1000,
         ),
         (
+            SpotId::Annuna__Upper_Hallway__Behind_Pedestal,
+            SpotId::Annuna__Upper_Hallway__Portal_Stand,
+            701,
+        ),
+        (
+            SpotId::Annuna__Upper_Hallway__Behind_Pedestal,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Upper_Hallway__Portal_Stand,
+            SpotId::Annuna__Upper_Hallway__Behind_Pedestal,
+            701,
+        ),
+        (
+            SpotId::Annuna__Upper_Hallway__Portal_Stand,
+            SpotId::Annuna__Upper_Hallway__West,
+            5087,
+        ),
+        (
+            SpotId::Annuna__Upper_Hallway__Portal_Stand,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Upper_Hallway__West,
+            SpotId::Annuna__Upper_Hallway__Portal_Stand,
+            5087,
+        ),
+        (
+            SpotId::Annuna__Upper_Hallway__West,
+            SpotId::Annuna__Vertical_Room__East_20,
+            1350,
+        ),
+        (
+            SpotId::Annuna__Upper_Hallway__West,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Vertical_Room__Above_Plinth,
+            SpotId::Annuna__Vertical_Room__East_21,
+            1228,
+        ),
+        (
+            SpotId::Annuna__Vertical_Room__Above_Plinth,
+            SpotId::Annuna__Vertical_Room__Gate_Button,
+            701,
+        ),
+        (
+            SpotId::Annuna__Vertical_Room__Above_Plinth,
+            SpotId::Annuna__Vertical_Room__Middle_West_Shaft,
+            1228,
+        ),
+        (
+            SpotId::Annuna__Vertical_Room__Above_Plinth,
+            SpotId::Annuna__Vertical_Room__Plinth,
+            400,
+        ),
+        (
+            SpotId::Annuna__Vertical_Room__Above_Plinth,
+            SpotId::Annuna__Vertical_Room__Save_Point_Right,
+            1799,
+        ),
+        (
+            SpotId::Annuna__Vertical_Room__Above_Plinth,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Vertical_Room__East_20,
+            SpotId::Annuna__Upper_Hallway__West,
+            1350,
+        ),
+        (
+            SpotId::Annuna__Vertical_Room__East_20,
+            SpotId::Annuna__Vertical_Room__East_21,
+            1652,
+        ),
+        (
+            SpotId::Annuna__Vertical_Room__East_20,
+            SpotId::Annuna__Vertical_Room__Gate_Button,
+            1526,
+        ),
+        (
+            SpotId::Annuna__Vertical_Room__East_20,
+            SpotId::Annuna__Vertical_Room__Plinth,
+            1426,
+        ),
+        (
+            SpotId::Annuna__Vertical_Room__East_20,
+            SpotId::Annuna__Vertical_Room__Save_Point_Right,
+            877,
+        ),
+        (
+            SpotId::Annuna__Vertical_Room__East_20,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Vertical_Room__East_21,
+            SpotId::Annuna__Middle_Hallway__West,
+            1350,
+        ),
+        (
+            SpotId::Annuna__Vertical_Room__East_21,
+            SpotId::Annuna__Vertical_Room__Gate_Button,
+            600,
+        ),
+        (
             SpotId::Annuna__Vertical_Room__East_21,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
@@ -39837,6 +41083,16 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Annuna__Vertical_Room__East_22,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
+        ),
+        (
+            SpotId::Annuna__Vertical_Room__Gate_Button,
+            SpotId::Annuna__Vertical_Room__East_21,
+            526,
+        ),
+        (
+            SpotId::Annuna__Vertical_Room__Gate_Button,
+            SpotId::Annuna__Vertical_Room__Plinth,
+            600,
         ),
         (
             SpotId::Annuna__Vertical_Room__Gate_Button,
@@ -40034,14 +41290,184 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             1000,
         ),
         (
+            SpotId::Annuna__Vertical_Room__Middle_Ministair,
+            SpotId::Annuna__Vertical_Room__Above_Plinth,
+            1403,
+        ),
+        (
+            SpotId::Annuna__Vertical_Room__Middle_Ministair,
+            SpotId::Annuna__Vertical_Room__Middle_Overhang,
+            1749,
+        ),
+        (
+            SpotId::Annuna__Vertical_Room__Middle_Ministair,
+            SpotId::Annuna__Vertical_Room__Middle_West_Shaft,
+            300,
+        ),
+        (
+            SpotId::Annuna__Vertical_Room__Middle_Ministair,
+            SpotId::Annuna__Vertical_Room__Save_Point_Left,
+            600,
+        ),
+        (
+            SpotId::Annuna__Vertical_Room__Middle_Ministair,
+            SpotId::Annuna__Vertical_Room__West_20,
+            600,
+        ),
+        (
+            SpotId::Annuna__Vertical_Room__Middle_Ministair,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Vertical_Room__Middle_Overhang,
+            SpotId::Annuna__Middle_Hallway__Middle,
+            4225,
+        ),
+        (
+            SpotId::Annuna__Vertical_Room__Middle_Overhang,
+            SpotId::Annuna__Vertical_Room__East_21,
+            175,
+        ),
+        (
             SpotId::Annuna__Vertical_Room__Middle_Overhang,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
         (
+            SpotId::Annuna__Vertical_Room__Middle_West_Shaft,
+            SpotId::Annuna__Vertical_Room__Above_Plinth,
+            1228,
+        ),
+        (
+            SpotId::Annuna__Vertical_Room__Middle_West_Shaft,
+            SpotId::Annuna__Vertical_Room__Middle_Ministair,
+            1200,
+        ),
+        (
+            SpotId::Annuna__Vertical_Room__Middle_West_Shaft,
+            SpotId::Annuna__Vertical_Room__Save_Point_Left,
+            1200,
+        ),
+        (
+            SpotId::Annuna__Vertical_Room__Middle_West_Shaft,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Vertical_Room__Plinth,
+            SpotId::Annuna__Vertical_Room__Above_Plinth,
+            1200,
+        ),
+        (
+            SpotId::Annuna__Vertical_Room__Plinth,
+            SpotId::Annuna__Vertical_Room__Gate_Button,
+            438,
+        ),
+        (
+            SpotId::Annuna__Vertical_Room__Plinth,
+            SpotId::Annuna__Vertical_Room__Gate_Ledge,
+            1140,
+        ),
+        (
             SpotId::Annuna__Vertical_Room__Plinth,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
+        ),
+        (
+            SpotId::Annuna__Vertical_Room__Save_Point,
+            SpotId::Annuna__Vertical_Room__Save_Point_Left,
+            701,
+        ),
+        (
+            SpotId::Annuna__Vertical_Room__Save_Point,
+            SpotId::Annuna__Vertical_Room__Save_Point_Right,
+            701,
+        ),
+        (
+            SpotId::Annuna__Vertical_Room__Save_Point,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Vertical_Room__Save_Point_Left,
+            SpotId::Annuna__Vertical_Room__Above_Plinth,
+            1352,
+        ),
+        (
+            SpotId::Annuna__Vertical_Room__Save_Point_Left,
+            SpotId::Annuna__Vertical_Room__Middle_Ministair,
+            350,
+        ),
+        (
+            SpotId::Annuna__Vertical_Room__Save_Point_Left,
+            SpotId::Annuna__Vertical_Room__Middle_West_Shaft,
+            399,
+        ),
+        (
+            SpotId::Annuna__Vertical_Room__Save_Point_Left,
+            SpotId::Annuna__Vertical_Room__Save_Point,
+            701,
+        ),
+        (
+            SpotId::Annuna__Vertical_Room__Save_Point_Left,
+            SpotId::Annuna__Vertical_Room__West_20,
+            877,
+        ),
+        (
+            SpotId::Annuna__Vertical_Room__Save_Point_Left,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Vertical_Room__Save_Point_Right,
+            SpotId::Annuna__Vertical_Room__Above_Plinth,
+            600,
+        ),
+        (
+            SpotId::Annuna__Vertical_Room__Save_Point_Right,
+            SpotId::Annuna__Vertical_Room__East_20,
+            877,
+        ),
+        (
+            SpotId::Annuna__Vertical_Room__Save_Point_Right,
+            SpotId::Annuna__Vertical_Room__East_21,
+            1149,
+        ),
+        (
+            SpotId::Annuna__Vertical_Room__Save_Point_Right,
+            SpotId::Annuna__Vertical_Room__Gate_Button,
+            1099,
+        ),
+        (
+            SpotId::Annuna__Vertical_Room__Save_Point_Right,
+            SpotId::Annuna__Vertical_Room__Plinth,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Vertical_Room__Save_Point_Right,
+            SpotId::Annuna__Vertical_Room__Save_Point,
+            701,
+        ),
+        (
+            SpotId::Annuna__Vertical_Room__Save_Point_Right,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Vertical_Room__West_20,
+            SpotId::Annuna__Center_Climb__East,
+            1350,
+        ),
+        (
+            SpotId::Annuna__Vertical_Room__West_20,
+            SpotId::Annuna__Vertical_Room__Middle_Ministair,
+            526,
+        ),
+        (
+            SpotId::Annuna__Vertical_Room__West_20,
+            SpotId::Annuna__Vertical_Room__Save_Point_Left,
+            877,
         ),
         (
             SpotId::Annuna__Vertical_Room__West_20,
@@ -64375,6 +65801,84 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
         (SpotId::Annuna__Factory_Entrance__West, SpotId::Annuna__Factory_Entrance__Save_Point) => {
             Some(1578)
         }
+        (
+            SpotId::Annuna__Filter_Teleporter__Door_Ledge,
+            SpotId::Annuna__Filter_Teleporter__Stair_Top,
+        ) => Some(350),
+        (
+            SpotId::Annuna__Filter_Teleporter__Door_Ledge,
+            SpotId::Annuna__Filter_Teleporter__West_21,
+        ) => Some(1778),
+        (
+            SpotId::Annuna__Filter_Teleporter__East_Platform_3,
+            SpotId::Annuna__Filter_Teleporter__Egg,
+        ) => Some(2280),
+        (
+            SpotId::Annuna__Filter_Teleporter__East_Platform_4,
+            SpotId::Annuna__Filter_Teleporter__East_Platform_3,
+        ) => Some(350),
+        (
+            SpotId::Annuna__Filter_Teleporter__East_Platform_4,
+            SpotId::Annuna__Filter_Teleporter__Egg,
+        ) => Some(2105),
+        (SpotId::Annuna__Filter_Teleporter__Egg, SpotId::Annuna__Filter_Teleporter__Stair_Top) => {
+            Some(1403)
+        }
+        (
+            SpotId::Annuna__Filter_Teleporter__Northeast_Cubby,
+            SpotId::Annuna__Filter_Teleporter__East_Platform_4,
+        ) => Some(1052),
+        (
+            SpotId::Annuna__Filter_Teleporter__Northeast_Cubby,
+            SpotId::Annuna__Filter_Teleporter__Northeast_Ministair,
+        ) => Some(449),
+        (
+            SpotId::Annuna__Filter_Teleporter__Northeast_Ministair,
+            SpotId::Annuna__Filter_Teleporter__East_Platform_3,
+        ) => Some(701),
+        (
+            SpotId::Annuna__Filter_Teleporter__Northeast_Ministair,
+            SpotId::Annuna__Filter_Teleporter__East_Platform_4,
+        ) => Some(877),
+        (
+            SpotId::Annuna__Filter_Teleporter__Shaft_Top,
+            SpotId::Annuna__Filter_Teleporter__Shaft_Bottom,
+        ) => Some(1300),
+        (
+            SpotId::Annuna__Filter_Teleporter__Shaft_Top,
+            SpotId::Annuna__Filter_Teleporter__Shaft_Upper_Platform,
+        ) => Some(350),
+        (
+            SpotId::Annuna__Filter_Teleporter__Shaft_Top,
+            SpotId::Annuna__Filter_Teleporter__West_19,
+        ) => Some(350),
+        (
+            SpotId::Annuna__Filter_Teleporter__Shaft_Upper_Platform,
+            SpotId::Annuna__Filter_Teleporter__Shaft_Bottom,
+        ) => Some(950),
+        (SpotId::Annuna__Filter_Teleporter__Stair_Top, SpotId::Annuna__Filter_Teleporter__Egg) => {
+            Some(1799)
+        }
+        (
+            SpotId::Annuna__Filter_Teleporter__Stair_Top,
+            SpotId::Annuna__Filter_Teleporter__West_21,
+        ) => Some(1929),
+        (
+            SpotId::Annuna__Filter_Teleporter__West_19,
+            SpotId::Annuna__Filter_Teleporter__Shaft_Top,
+        ) => Some(350),
+        (
+            SpotId::Annuna__Filter_Teleporter__West_19_Mid_flight,
+            SpotId::Annuna__Filter_Teleporter__Shaft_Top,
+        ) => Some(350),
+        (
+            SpotId::Annuna__Filter_Teleporter__West_19_Mid_flight,
+            SpotId::Annuna__Filter_Teleporter__West_19,
+        ) => Some(100),
+        (
+            SpotId::Annuna__Filter_Teleporter__West_21,
+            SpotId::Annuna__Filter_Teleporter__Stair_Top,
+        ) => Some(1929),
         (SpotId::Annuna__Final_Save__East, SpotId::Annuna__Final_Save__Save_Point) => Some(1578),
         (SpotId::Annuna__Final_Save__Pillar, SpotId::Annuna__Final_Save__Lower_West) => Some(1052),
         (SpotId::Annuna__Final_Save__Pillar, SpotId::Annuna__Final_Save__Save_Point) => Some(526),
@@ -64396,6 +65900,18 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
         }
         (SpotId::Annuna__Lower_Hallway__West, SpotId::Annuna__Lower_Hallway__Dais_Left) => {
             Some(2807)
+        }
+        (SpotId::Annuna__Middle_Hallway__East, SpotId::Annuna__Middle_Hallway__Middle) => {
+            Some(2807)
+        }
+        (SpotId::Annuna__Middle_Hallway__Middle, SpotId::Annuna__Middle_Hallway__East) => {
+            Some(2807)
+        }
+        (SpotId::Annuna__Middle_Hallway__Middle, SpotId::Annuna__Middle_Hallway__West) => {
+            Some(3859)
+        }
+        (SpotId::Annuna__Middle_Hallway__West, SpotId::Annuna__Middle_Hallway__Middle) => {
+            Some(3859)
         }
         (
             SpotId::Annuna__Mirror_Match__Below_Switch,
@@ -64705,8 +66221,58 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
             SpotId::Annuna__Twisty_Passages__West_Ledge,
             SpotId::Annuna__Twisty_Passages__West_Hill_Right,
         ) => Some(1403),
+        (
+            SpotId::Annuna__Upper_Hallway__Behind_Pedestal,
+            SpotId::Annuna__Upper_Hallway__Portal_Stand,
+        ) => Some(701),
+        (
+            SpotId::Annuna__Upper_Hallway__Portal_Stand,
+            SpotId::Annuna__Upper_Hallway__Behind_Pedestal,
+        ) => Some(701),
+        (SpotId::Annuna__Upper_Hallway__Portal_Stand, SpotId::Annuna__Upper_Hallway__West) => {
+            Some(5087)
+        }
+        (SpotId::Annuna__Upper_Hallway__West, SpotId::Annuna__Upper_Hallway__Portal_Stand) => {
+            Some(5087)
+        }
+        (SpotId::Annuna__Vertical_Room__Above_Plinth, SpotId::Annuna__Vertical_Room__East_21) => {
+            Some(1228)
+        }
+        (
+            SpotId::Annuna__Vertical_Room__Above_Plinth,
+            SpotId::Annuna__Vertical_Room__Gate_Button,
+        ) => Some(701),
+        (
+            SpotId::Annuna__Vertical_Room__Above_Plinth,
+            SpotId::Annuna__Vertical_Room__Middle_West_Shaft,
+        ) => Some(1228),
+        (SpotId::Annuna__Vertical_Room__Above_Plinth, SpotId::Annuna__Vertical_Room__Plinth) => {
+            Some(400)
+        }
+        (SpotId::Annuna__Vertical_Room__East_20, SpotId::Annuna__Vertical_Room__East_21) => {
+            Some(1652)
+        }
+        (SpotId::Annuna__Vertical_Room__East_20, SpotId::Annuna__Vertical_Room__Gate_Button) => {
+            Some(1526)
+        }
+        (SpotId::Annuna__Vertical_Room__East_20, SpotId::Annuna__Vertical_Room__Plinth) => {
+            Some(1426)
+        }
+        (
+            SpotId::Annuna__Vertical_Room__East_20,
+            SpotId::Annuna__Vertical_Room__Save_Point_Right,
+        ) => Some(877),
+        (SpotId::Annuna__Vertical_Room__East_21, SpotId::Annuna__Vertical_Room__Gate_Button) => {
+            Some(600)
+        }
         (SpotId::Annuna__Vertical_Room__East_22, SpotId::Annuna__Vertical_Room__Lower_Mid) => {
             Some(1403)
+        }
+        (SpotId::Annuna__Vertical_Room__Gate_Button, SpotId::Annuna__Vertical_Room__East_21) => {
+            Some(526)
+        }
+        (SpotId::Annuna__Vertical_Room__Gate_Button, SpotId::Annuna__Vertical_Room__Plinth) => {
+            Some(600)
         }
         (
             SpotId::Annuna__Vertical_Room__Gate_Ledge,
@@ -64797,6 +66363,93 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
             SpotId::Annuna__Vertical_Room__Lower_Platform_2_Right,
             SpotId::Annuna__Vertical_Room__Lower_Platform_2_Left,
         ) => Some(701),
+        (
+            SpotId::Annuna__Vertical_Room__Middle_Ministair,
+            SpotId::Annuna__Vertical_Room__Above_Plinth,
+        ) => Some(1403),
+        (
+            SpotId::Annuna__Vertical_Room__Middle_Ministair,
+            SpotId::Annuna__Vertical_Room__Middle_West_Shaft,
+        ) => Some(300),
+        (
+            SpotId::Annuna__Vertical_Room__Middle_Ministair,
+            SpotId::Annuna__Vertical_Room__Save_Point_Left,
+        ) => Some(600),
+        (
+            SpotId::Annuna__Vertical_Room__Middle_Ministair,
+            SpotId::Annuna__Vertical_Room__West_20,
+        ) => Some(600),
+        (
+            SpotId::Annuna__Vertical_Room__Middle_Overhang,
+            SpotId::Annuna__Vertical_Room__East_21,
+        ) => Some(175),
+        (
+            SpotId::Annuna__Vertical_Room__Middle_West_Shaft,
+            SpotId::Annuna__Vertical_Room__Above_Plinth,
+        ) => Some(1228),
+        (SpotId::Annuna__Vertical_Room__Plinth, SpotId::Annuna__Vertical_Room__Gate_Button) => {
+            Some(438)
+        }
+        (
+            SpotId::Annuna__Vertical_Room__Save_Point,
+            SpotId::Annuna__Vertical_Room__Save_Point_Left,
+        ) => Some(701),
+        (
+            SpotId::Annuna__Vertical_Room__Save_Point,
+            SpotId::Annuna__Vertical_Room__Save_Point_Right,
+        ) => Some(701),
+        (
+            SpotId::Annuna__Vertical_Room__Save_Point_Left,
+            SpotId::Annuna__Vertical_Room__Above_Plinth,
+        ) => Some(1352),
+        (
+            SpotId::Annuna__Vertical_Room__Save_Point_Left,
+            SpotId::Annuna__Vertical_Room__Middle_Ministair,
+        ) => Some(350),
+        (
+            SpotId::Annuna__Vertical_Room__Save_Point_Left,
+            SpotId::Annuna__Vertical_Room__Middle_West_Shaft,
+        ) => Some(399),
+        (
+            SpotId::Annuna__Vertical_Room__Save_Point_Left,
+            SpotId::Annuna__Vertical_Room__Save_Point,
+        ) => Some(701),
+        (
+            SpotId::Annuna__Vertical_Room__Save_Point_Left,
+            SpotId::Annuna__Vertical_Room__West_20,
+        ) => Some(877),
+        (
+            SpotId::Annuna__Vertical_Room__Save_Point_Right,
+            SpotId::Annuna__Vertical_Room__Above_Plinth,
+        ) => Some(600),
+        (
+            SpotId::Annuna__Vertical_Room__Save_Point_Right,
+            SpotId::Annuna__Vertical_Room__East_20,
+        ) => Some(877),
+        (
+            SpotId::Annuna__Vertical_Room__Save_Point_Right,
+            SpotId::Annuna__Vertical_Room__East_21,
+        ) => Some(1149),
+        (
+            SpotId::Annuna__Vertical_Room__Save_Point_Right,
+            SpotId::Annuna__Vertical_Room__Gate_Button,
+        ) => Some(1099),
+        (
+            SpotId::Annuna__Vertical_Room__Save_Point_Right,
+            SpotId::Annuna__Vertical_Room__Plinth,
+        ) => Some(1000),
+        (
+            SpotId::Annuna__Vertical_Room__Save_Point_Right,
+            SpotId::Annuna__Vertical_Room__Save_Point,
+        ) => Some(701),
+        (
+            SpotId::Annuna__Vertical_Room__West_20,
+            SpotId::Annuna__Vertical_Room__Middle_Ministair,
+        ) => Some(526),
+        (
+            SpotId::Annuna__Vertical_Room__West_20,
+            SpotId::Annuna__Vertical_Room__Save_Point_Left,
+        ) => Some(877),
         (
             SpotId::Annuna__Vertical_Room__West_21,
             SpotId::Annuna__Vertical_Room__Lower_Ministair,
@@ -74072,6 +75725,84 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
         (SpotId::Annuna__Factory_Entrance__West, SpotId::Annuna__Factory_Entrance__Save_Point) => {
             (Some(1578), vec![])
         }
+        (
+            SpotId::Annuna__Filter_Teleporter__Door_Ledge,
+            SpotId::Annuna__Filter_Teleporter__Stair_Top,
+        ) => (Some(350), vec![]),
+        (
+            SpotId::Annuna__Filter_Teleporter__Door_Ledge,
+            SpotId::Annuna__Filter_Teleporter__West_21,
+        ) => (Some(1778), vec![]),
+        (
+            SpotId::Annuna__Filter_Teleporter__East_Platform_3,
+            SpotId::Annuna__Filter_Teleporter__Egg,
+        ) => (Some(2280), vec![]),
+        (
+            SpotId::Annuna__Filter_Teleporter__East_Platform_4,
+            SpotId::Annuna__Filter_Teleporter__East_Platform_3,
+        ) => (Some(350), vec![]),
+        (
+            SpotId::Annuna__Filter_Teleporter__East_Platform_4,
+            SpotId::Annuna__Filter_Teleporter__Egg,
+        ) => (Some(2105), vec![]),
+        (SpotId::Annuna__Filter_Teleporter__Egg, SpotId::Annuna__Filter_Teleporter__Stair_Top) => {
+            (Some(1403), vec![])
+        }
+        (
+            SpotId::Annuna__Filter_Teleporter__Northeast_Cubby,
+            SpotId::Annuna__Filter_Teleporter__East_Platform_4,
+        ) => (Some(1052), vec![]),
+        (
+            SpotId::Annuna__Filter_Teleporter__Northeast_Cubby,
+            SpotId::Annuna__Filter_Teleporter__Northeast_Ministair,
+        ) => (Some(449), vec![]),
+        (
+            SpotId::Annuna__Filter_Teleporter__Northeast_Ministair,
+            SpotId::Annuna__Filter_Teleporter__East_Platform_3,
+        ) => (Some(701), vec![]),
+        (
+            SpotId::Annuna__Filter_Teleporter__Northeast_Ministair,
+            SpotId::Annuna__Filter_Teleporter__East_Platform_4,
+        ) => (Some(877), vec![]),
+        (
+            SpotId::Annuna__Filter_Teleporter__Shaft_Top,
+            SpotId::Annuna__Filter_Teleporter__Shaft_Bottom,
+        ) => (Some(1300), vec![]),
+        (
+            SpotId::Annuna__Filter_Teleporter__Shaft_Top,
+            SpotId::Annuna__Filter_Teleporter__Shaft_Upper_Platform,
+        ) => (Some(350), vec![]),
+        (
+            SpotId::Annuna__Filter_Teleporter__Shaft_Top,
+            SpotId::Annuna__Filter_Teleporter__West_19,
+        ) => (Some(350), vec![]),
+        (
+            SpotId::Annuna__Filter_Teleporter__Shaft_Upper_Platform,
+            SpotId::Annuna__Filter_Teleporter__Shaft_Bottom,
+        ) => (Some(950), vec![]),
+        (SpotId::Annuna__Filter_Teleporter__Stair_Top, SpotId::Annuna__Filter_Teleporter__Egg) => {
+            (Some(1799), vec![])
+        }
+        (
+            SpotId::Annuna__Filter_Teleporter__Stair_Top,
+            SpotId::Annuna__Filter_Teleporter__West_21,
+        ) => (Some(1929), vec![]),
+        (
+            SpotId::Annuna__Filter_Teleporter__West_19,
+            SpotId::Annuna__Filter_Teleporter__Shaft_Top,
+        ) => (Some(350), vec![]),
+        (
+            SpotId::Annuna__Filter_Teleporter__West_19_Mid_flight,
+            SpotId::Annuna__Filter_Teleporter__Shaft_Top,
+        ) => (Some(350), vec![]),
+        (
+            SpotId::Annuna__Filter_Teleporter__West_19_Mid_flight,
+            SpotId::Annuna__Filter_Teleporter__West_19,
+        ) => (Some(100), vec![]),
+        (
+            SpotId::Annuna__Filter_Teleporter__West_21,
+            SpotId::Annuna__Filter_Teleporter__Stair_Top,
+        ) => (Some(1929), vec![]),
         (SpotId::Annuna__Final_Save__East, SpotId::Annuna__Final_Save__Save_Point) => {
             (Some(1578), vec![])
         }
@@ -74101,6 +75832,18 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
         }
         (SpotId::Annuna__Lower_Hallway__West, SpotId::Annuna__Lower_Hallway__Dais_Left) => {
             (Some(2807), vec![])
+        }
+        (SpotId::Annuna__Middle_Hallway__East, SpotId::Annuna__Middle_Hallway__Middle) => {
+            (Some(2807), vec![])
+        }
+        (SpotId::Annuna__Middle_Hallway__Middle, SpotId::Annuna__Middle_Hallway__East) => {
+            (Some(2807), vec![])
+        }
+        (SpotId::Annuna__Middle_Hallway__Middle, SpotId::Annuna__Middle_Hallway__West) => {
+            (Some(3859), vec![])
+        }
+        (SpotId::Annuna__Middle_Hallway__West, SpotId::Annuna__Middle_Hallway__Middle) => {
+            (Some(3859), vec![])
         }
         (
             SpotId::Annuna__Mirror_Match__Below_Switch,
@@ -74414,8 +76157,58 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
             SpotId::Annuna__Twisty_Passages__West_Ledge,
             SpotId::Annuna__Twisty_Passages__West_Hill_Right,
         ) => (Some(1403), vec![]),
+        (
+            SpotId::Annuna__Upper_Hallway__Behind_Pedestal,
+            SpotId::Annuna__Upper_Hallway__Portal_Stand,
+        ) => (Some(701), vec![]),
+        (
+            SpotId::Annuna__Upper_Hallway__Portal_Stand,
+            SpotId::Annuna__Upper_Hallway__Behind_Pedestal,
+        ) => (Some(701), vec![]),
+        (SpotId::Annuna__Upper_Hallway__Portal_Stand, SpotId::Annuna__Upper_Hallway__West) => {
+            (Some(5087), vec![])
+        }
+        (SpotId::Annuna__Upper_Hallway__West, SpotId::Annuna__Upper_Hallway__Portal_Stand) => {
+            (Some(5087), vec![])
+        }
+        (SpotId::Annuna__Vertical_Room__Above_Plinth, SpotId::Annuna__Vertical_Room__East_21) => {
+            (Some(1228), vec![])
+        }
+        (
+            SpotId::Annuna__Vertical_Room__Above_Plinth,
+            SpotId::Annuna__Vertical_Room__Gate_Button,
+        ) => (Some(701), vec![]),
+        (
+            SpotId::Annuna__Vertical_Room__Above_Plinth,
+            SpotId::Annuna__Vertical_Room__Middle_West_Shaft,
+        ) => (Some(1228), vec![]),
+        (SpotId::Annuna__Vertical_Room__Above_Plinth, SpotId::Annuna__Vertical_Room__Plinth) => {
+            (Some(400), vec![])
+        }
+        (SpotId::Annuna__Vertical_Room__East_20, SpotId::Annuna__Vertical_Room__East_21) => {
+            (Some(1652), vec![])
+        }
+        (SpotId::Annuna__Vertical_Room__East_20, SpotId::Annuna__Vertical_Room__Gate_Button) => {
+            (Some(1526), vec![])
+        }
+        (SpotId::Annuna__Vertical_Room__East_20, SpotId::Annuna__Vertical_Room__Plinth) => {
+            (Some(1426), vec![])
+        }
+        (
+            SpotId::Annuna__Vertical_Room__East_20,
+            SpotId::Annuna__Vertical_Room__Save_Point_Right,
+        ) => (Some(877), vec![]),
+        (SpotId::Annuna__Vertical_Room__East_21, SpotId::Annuna__Vertical_Room__Gate_Button) => {
+            (Some(600), vec![])
+        }
         (SpotId::Annuna__Vertical_Room__East_22, SpotId::Annuna__Vertical_Room__Lower_Mid) => {
             (Some(1403), vec![])
+        }
+        (SpotId::Annuna__Vertical_Room__Gate_Button, SpotId::Annuna__Vertical_Room__East_21) => {
+            (Some(526), vec![])
+        }
+        (SpotId::Annuna__Vertical_Room__Gate_Button, SpotId::Annuna__Vertical_Room__Plinth) => {
+            (Some(600), vec![])
         }
         (
             SpotId::Annuna__Vertical_Room__Gate_Ledge,
@@ -74506,6 +76299,93 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
             SpotId::Annuna__Vertical_Room__Lower_Platform_2_Right,
             SpotId::Annuna__Vertical_Room__Lower_Platform_2_Left,
         ) => (Some(701), vec![]),
+        (
+            SpotId::Annuna__Vertical_Room__Middle_Ministair,
+            SpotId::Annuna__Vertical_Room__Above_Plinth,
+        ) => (Some(1403), vec![]),
+        (
+            SpotId::Annuna__Vertical_Room__Middle_Ministair,
+            SpotId::Annuna__Vertical_Room__Middle_West_Shaft,
+        ) => (Some(300), vec![]),
+        (
+            SpotId::Annuna__Vertical_Room__Middle_Ministair,
+            SpotId::Annuna__Vertical_Room__Save_Point_Left,
+        ) => (Some(600), vec![]),
+        (
+            SpotId::Annuna__Vertical_Room__Middle_Ministair,
+            SpotId::Annuna__Vertical_Room__West_20,
+        ) => (Some(600), vec![]),
+        (
+            SpotId::Annuna__Vertical_Room__Middle_Overhang,
+            SpotId::Annuna__Vertical_Room__East_21,
+        ) => (Some(175), vec![]),
+        (
+            SpotId::Annuna__Vertical_Room__Middle_West_Shaft,
+            SpotId::Annuna__Vertical_Room__Above_Plinth,
+        ) => (Some(1228), vec![]),
+        (SpotId::Annuna__Vertical_Room__Plinth, SpotId::Annuna__Vertical_Room__Gate_Button) => {
+            (Some(438), vec![])
+        }
+        (
+            SpotId::Annuna__Vertical_Room__Save_Point,
+            SpotId::Annuna__Vertical_Room__Save_Point_Left,
+        ) => (Some(701), vec![]),
+        (
+            SpotId::Annuna__Vertical_Room__Save_Point,
+            SpotId::Annuna__Vertical_Room__Save_Point_Right,
+        ) => (Some(701), vec![]),
+        (
+            SpotId::Annuna__Vertical_Room__Save_Point_Left,
+            SpotId::Annuna__Vertical_Room__Above_Plinth,
+        ) => (Some(1352), vec![]),
+        (
+            SpotId::Annuna__Vertical_Room__Save_Point_Left,
+            SpotId::Annuna__Vertical_Room__Middle_Ministair,
+        ) => (Some(350), vec![]),
+        (
+            SpotId::Annuna__Vertical_Room__Save_Point_Left,
+            SpotId::Annuna__Vertical_Room__Middle_West_Shaft,
+        ) => (Some(399), vec![]),
+        (
+            SpotId::Annuna__Vertical_Room__Save_Point_Left,
+            SpotId::Annuna__Vertical_Room__Save_Point,
+        ) => (Some(701), vec![]),
+        (
+            SpotId::Annuna__Vertical_Room__Save_Point_Left,
+            SpotId::Annuna__Vertical_Room__West_20,
+        ) => (Some(877), vec![]),
+        (
+            SpotId::Annuna__Vertical_Room__Save_Point_Right,
+            SpotId::Annuna__Vertical_Room__Above_Plinth,
+        ) => (Some(600), vec![]),
+        (
+            SpotId::Annuna__Vertical_Room__Save_Point_Right,
+            SpotId::Annuna__Vertical_Room__East_20,
+        ) => (Some(877), vec![]),
+        (
+            SpotId::Annuna__Vertical_Room__Save_Point_Right,
+            SpotId::Annuna__Vertical_Room__East_21,
+        ) => (Some(1149), vec![]),
+        (
+            SpotId::Annuna__Vertical_Room__Save_Point_Right,
+            SpotId::Annuna__Vertical_Room__Gate_Button,
+        ) => (Some(1099), vec![]),
+        (
+            SpotId::Annuna__Vertical_Room__Save_Point_Right,
+            SpotId::Annuna__Vertical_Room__Plinth,
+        ) => (Some(1000), vec![]),
+        (
+            SpotId::Annuna__Vertical_Room__Save_Point_Right,
+            SpotId::Annuna__Vertical_Room__Save_Point,
+        ) => (Some(701), vec![]),
+        (
+            SpotId::Annuna__Vertical_Room__West_20,
+            SpotId::Annuna__Vertical_Room__Middle_Ministair,
+        ) => (Some(526), vec![]),
+        (
+            SpotId::Annuna__Vertical_Room__West_20,
+            SpotId::Annuna__Vertical_Room__Save_Point_Left,
+        ) => (Some(877), vec![]),
         (
             SpotId::Annuna__Vertical_Room__West_21,
             SpotId::Annuna__Vertical_Room__Lower_Ministair,

@@ -115,6 +115,7 @@ time:
   save: 1.3
   shockwave: 3.5  # even when shockwaving flasks and urns. price=100
   hack: 0.5
+  button: 0.1  # melee button
   susar: 3.0  # caught by susar
   # need to test slingshot charge time
 
@@ -224,15 +225,15 @@ actions:
 
 helpers:
   $melee: Ice_Axe or ^mode == 'drone'
-  $boomerang: ^mode != 'drone' and Boomerang
+  $boomerang: ^mode != 'drone' and (Boomerang or Boomerang_Upgrade)
   $remote_boomerang: ^mode != 'drone' and Remote_Boomerang
-  $can_damage: $melee or Boomerang
+  $can_damage: $melee or Boomerang or Boomerang_Upgrade
   $grab: ^mode != 'drone' and Ledge_Grab
   $climb: ^mode != 'drone' and Wall_Climb
   $hook: ^mode == 'drone' and Slingshot_Hook
   $hover: ^mode == 'drone' and Drone_Hover
-  $charge: ^mode == 'drone' and Slingshot_Charge
-  $spin: ^mode == 'drone' and Slingshot_Weapon
+  $charge: ^mode == 'drone' and Slingshot_Hook and Slingshot_Charge
+  $spin: ^mode == 'drone' and Slingshot_Hook and Slingshot_Weapon
 
   $can_deploy: Remote_Drone and ^mode != 'drone' and not Anuman
   $can_recall: ^mode == 'drone' and not Anuman
@@ -282,9 +283,9 @@ helpers:
      Heretics_Tablet, Terminal_Breakthrough_1, Companies_Layoff, Record_Losses,
      Under_Siege, The_Ideal_Kiengir, Building_of_the_School, Commemorative_Speech,
      Terminal_Breakthrough_2, Dangerous_Ideas, Storm_Bomb, Suspension_Bridge, Plague_of_Thoughts,
-     Lament_for_Fools, Family_Tragedy, Destruction_Pogrom]
+     Lament_for_Fools, Family_Tragedy, Destruction_Pogrom, The_Eternal_Arm]
   $all_flasks:itemList: >
-    [Flask{13}, Big_Flask]
+    [Flask{14}, Big_Flask]
   $all_health:itemList: >
     [Health_Node, Health_Fragment{6}]
   $all_weapons:itemList: >
@@ -294,7 +295,7 @@ helpers:
   $all_urns:itemList: >
     [Amashilama, Ledge_Grab, Infect, Remote_Drone, Shockwave, Wall_Climb, Slingshot_Hook, Breach_Sight,
      Drone_Hover, Fast_Travel, Anuman]
-  # To be added: 4 Flask, 3 Big_Flask, Double_Axe, Royal_Dagger, Udusan
+  # To be added: 4 Flask, 4 Big_Flask, Double_Axe, Royal_Dagger, Udusan
   # 1 Health_Fragment, The_Student, Heretics_Granddaughter,
 
   $save:action: ^save = ^position; $refill_energy

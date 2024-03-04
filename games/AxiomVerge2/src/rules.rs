@@ -223,6 +223,10 @@ pub fn access_annuna_mirror_match_switch(ctx: &Context, world: &graph::World) ->
     // Annuna_Mirror_Match_Switch
     ctx.has(Item::Annuna_Mirror_Match_Switch)
 }
+pub fn access_annuna_vertical_room_gate(ctx: &Context, world: &graph::World) -> bool {
+    // Annuna_Vertical_Room_Gate
+    ctx.has(Item::Annuna_Vertical_Room_Gate)
+}
 pub fn access_anuman(ctx: &Context, world: &graph::World) -> bool {
     // Anuman
     ctx.has(Item::Anuman)
@@ -1406,6 +1410,10 @@ pub fn access_grab_or_hook(ctx: &Context, world: &graph::World) -> bool {
 pub fn access_grab_or_underwater_movement(ctx: &Context, world: &graph::World) -> bool {
     // $grab or Underwater_Movement
     (helper__grab!(ctx, world) || ctx.has(Item::Underwater_Movement))
+}
+pub fn access_hammond_auth(ctx: &Context, world: &graph::World) -> bool {
+    // Hammond_Auth
+    ctx.has(Item::Hammond_Auth)
 }
 pub fn access_health_upgrade(ctx: &Context, world: &graph::World) -> bool {
     // Health_Upgrade
@@ -3197,6 +3205,18 @@ pub fn explain_annuna_mirror_match_switch(
         let h = ctx.has(Item::Annuna_Mirror_Match_Switch);
         edict.insert("Annuna_Mirror_Match_Switch", format!("{}", h));
         (h, vec!["Annuna_Mirror_Match_Switch"])
+    }
+}
+pub fn explain_annuna_vertical_room_gate(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // Annuna_Vertical_Room_Gate
+    {
+        let h = ctx.has(Item::Annuna_Vertical_Room_Gate);
+        edict.insert("Annuna_Vertical_Room_Gate", format!("{}", h));
+        (h, vec!["Annuna_Vertical_Room_Gate"])
     }
 }
 pub fn explain_anuman(
@@ -7512,6 +7532,18 @@ pub fn explain_grab_or_underwater_movement(
         }
     }
 }
+pub fn explain_hammond_auth(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // Hammond_Auth
+    {
+        let h = ctx.has(Item::Hammond_Auth);
+        edict.insert("Hammond_Auth", format!("{}", h));
+        (h, vec!["Hammond_Auth"])
+    }
+}
 pub fn explain_health_upgrade(
     ctx: &Context,
     world: &graph::World,
@@ -10734,6 +10766,17 @@ pub fn observe_access_annuna_mirror_match_switch(
         ctx.has(Item::Annuna_Mirror_Match_Switch)
     }
 }
+pub fn observe_access_annuna_vertical_room_gate(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // Annuna_Vertical_Room_Gate
+    {
+        full_obs.observe_annuna_vertical_room_gate();
+        ctx.has(Item::Annuna_Vertical_Room_Gate)
+    }
+}
 pub fn observe_access_anuman(
     ctx: &Context,
     world: &graph::World,
@@ -12913,6 +12956,17 @@ pub fn observe_access_grab_or_underwater_movement(
         full_obs.observe_underwater_movement();
         ctx.has(Item::Underwater_Movement)
     })
+}
+pub fn observe_access_hammond_auth(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // Hammond_Auth
+    {
+        full_obs.observe_hammond_auth();
+        ctx.has(Item::Hammond_Auth)
+    }
 }
 pub fn observe_access_health_upgrade(
     ctx: &Context,

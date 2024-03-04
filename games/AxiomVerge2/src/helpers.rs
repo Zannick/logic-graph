@@ -55,11 +55,12 @@ macro_rules! hobserve__melee {
 }
 
 /// $boomerang (  )
-/// ^mode != 'drone' and Boomerang
+/// ^mode != 'drone' and (Boomerang or Boomerang_Upgrade)
 #[macro_export]
 macro_rules! helper__boomerang {
     ($ctx:expr, $world:expr) => {{
-        ($ctx.mode() != enums::Mode::Drone && $ctx.has(Item::Boomerang))
+        ($ctx.mode() != enums::Mode::Drone
+            && ($ctx.has(Item::Boomerang) || $ctx.has(Item::Boomerang_Upgrade)))
     }};
 }
 #[macro_export]
@@ -81,11 +82,24 @@ macro_rules! hexplain__boomerang {
             if !left.0 {
                 left
             } else {
-                let mut right = {
-                    let h = $ctx.has(Item::Boomerang);
-                    $edict.insert("Boomerang", format!("{}", h));
-                    (h, vec!["Boomerang"])
-                };
+                let mut right = ({
+                    let mut left = {
+                        let h = $ctx.has(Item::Boomerang);
+                        $edict.insert("Boomerang", format!("{}", h));
+                        (h, vec!["Boomerang"])
+                    };
+                    if left.0 {
+                        left
+                    } else {
+                        let mut right = {
+                            let h = $ctx.has(Item::Boomerang_Upgrade);
+                            $edict.insert("Boomerang_Upgrade", format!("{}", h));
+                            (h, vec!["Boomerang_Upgrade"])
+                        };
+                        left.1.append(&mut right.1);
+                        (right.0, left.1)
+                    }
+                });
                 left.1.append(&mut right.1);
                 (right.0, left.1)
             }
@@ -104,6 +118,9 @@ macro_rules! hobserve__boomerang {
         } && ({
             $full_obs.observe_boomerang();
             $ctx.has(Item::Boomerang)
+        } || {
+            $full_obs.observe_boomerang_upgrade();
+            $ctx.has(Item::Boomerang_Upgrade)
         }))
     }};
 }
@@ -163,11 +180,12 @@ macro_rules! hobserve__remote_boomerang {
 }
 
 /// $can_damage (  )
-/// $melee or Boomerang
+/// $melee or Boomerang or Boomerang_Upgrade
 #[macro_export]
 macro_rules! helper__can_damage {
     ($ctx:expr, $world:expr) => {{
-        (helper__melee!($ctx, $world) || $ctx.has(Item::Boomerang))
+        ((helper__melee!($ctx, $world) || $ctx.has(Item::Boomerang))
+            || $ctx.has(Item::Boomerang_Upgrade))
     }};
 }
 #[macro_export]
@@ -175,18 +193,31 @@ macro_rules! hexplain__can_damage {
     ($ctx:expr, $world:expr, $edict:expr) => {{
         {
             let mut left = {
-                let (res, mut refs) = hexplain__melee!($ctx, $world, $edict);
-                $edict.insert("$melee", format!("{:?}", res));
-                refs.push("$melee");
-                (res, refs)
+                let mut left = {
+                    let (res, mut refs) = hexplain__melee!($ctx, $world, $edict);
+                    $edict.insert("$melee", format!("{:?}", res));
+                    refs.push("$melee");
+                    (res, refs)
+                };
+                if left.0 {
+                    left
+                } else {
+                    let mut right = {
+                        let h = $ctx.has(Item::Boomerang);
+                        $edict.insert("Boomerang", format!("{}", h));
+                        (h, vec!["Boomerang"])
+                    };
+                    left.1.append(&mut right.1);
+                    (right.0, left.1)
+                }
             };
             if left.0 {
                 left
             } else {
                 let mut right = {
-                    let h = $ctx.has(Item::Boomerang);
-                    $edict.insert("Boomerang", format!("{}", h));
-                    (h, vec!["Boomerang"])
+                    let h = $ctx.has(Item::Boomerang_Upgrade);
+                    $edict.insert("Boomerang_Upgrade", format!("{}", h));
+                    (h, vec!["Boomerang_Upgrade"])
                 };
                 left.1.append(&mut right.1);
                 (right.0, left.1)
@@ -197,9 +228,12 @@ macro_rules! hexplain__can_damage {
 #[macro_export]
 macro_rules! hobserve__can_damage {
     ($ctx:expr, $world:expr, $full_obs:expr) => {{
-        (hobserve__melee!($ctx, $world, $full_obs) || {
+        ((hobserve__melee!($ctx, $world, $full_obs) || {
             $full_obs.observe_boomerang();
             $ctx.has(Item::Boomerang)
+        }) || {
+            $full_obs.observe_boomerang_upgrade();
+            $ctx.has(Item::Boomerang_Upgrade)
         })
     }};
 }
@@ -421,11 +455,12 @@ macro_rules! hobserve__hover {
 }
 
 /// $charge (  )
-/// ^mode == 'drone' and Slingshot_Charge
+/// ^mode == 'drone' and Slingshot_Hook and Slingshot_Charge
 #[macro_export]
 macro_rules! helper__charge {
     ($ctx:expr, $world:expr) => {{
-        ($ctx.mode() == enums::Mode::Drone && $ctx.has(Item::Slingshot_Charge))
+        (($ctx.mode() == enums::Mode::Drone && $ctx.has(Item::Slingshot_Hook))
+            && $ctx.has(Item::Slingshot_Charge))
     }};
 }
 #[macro_export]
@@ -433,16 +468,29 @@ macro_rules! hexplain__charge {
     ($ctx:expr, $world:expr, $edict:expr) => {{
         {
             let mut left = {
-                let mut refs = vec!["^mode"];
                 let mut left = {
-                    let r = $ctx.mode();
-                    $edict.insert("^mode", format!("{:?}", r));
-                    (r, vec!["^mode"])
+                    let mut refs = vec!["^mode"];
+                    let mut left = {
+                        let r = $ctx.mode();
+                        $edict.insert("^mode", format!("{:?}", r));
+                        (r, vec!["^mode"])
+                    };
+                    let right = enums::Mode::Drone;
+                    $edict.insert("^mode", format!("{}", left.0));
+                    refs.append(&mut left.1);
+                    (left.0 == right, refs)
                 };
-                let right = enums::Mode::Drone;
-                $edict.insert("^mode", format!("{}", left.0));
-                refs.append(&mut left.1);
-                (left.0 == right, refs)
+                if !left.0 {
+                    left
+                } else {
+                    let mut right = {
+                        let h = $ctx.has(Item::Slingshot_Hook);
+                        $edict.insert("Slingshot_Hook", format!("{}", h));
+                        (h, vec!["Slingshot_Hook"])
+                    };
+                    left.1.append(&mut right.1);
+                    (right.0, left.1)
+                }
             };
             if !left.0 {
                 left
@@ -461,13 +509,16 @@ macro_rules! hexplain__charge {
 #[macro_export]
 macro_rules! hobserve__charge {
     ($ctx:expr, $world:expr, $full_obs:expr) => {{
-        ({
+        (({
             let v = {
                 $full_obs.observe_mode();
                 $ctx.mode()
             };
             v == enums::Mode::Drone
         } && ({
+            $full_obs.observe_slingshot_hook();
+            $ctx.has(Item::Slingshot_Hook)
+        })) && ({
             $full_obs.observe_slingshot_charge();
             $ctx.has(Item::Slingshot_Charge)
         }))
@@ -475,11 +526,12 @@ macro_rules! hobserve__charge {
 }
 
 /// $spin (  )
-/// ^mode == 'drone' and Slingshot_Weapon
+/// ^mode == 'drone' and Slingshot_Hook and Slingshot_Weapon
 #[macro_export]
 macro_rules! helper__spin {
     ($ctx:expr, $world:expr) => {{
-        ($ctx.mode() == enums::Mode::Drone && $ctx.has(Item::Slingshot_Weapon))
+        (($ctx.mode() == enums::Mode::Drone && $ctx.has(Item::Slingshot_Hook))
+            && $ctx.has(Item::Slingshot_Weapon))
     }};
 }
 #[macro_export]
@@ -487,16 +539,29 @@ macro_rules! hexplain__spin {
     ($ctx:expr, $world:expr, $edict:expr) => {{
         {
             let mut left = {
-                let mut refs = vec!["^mode"];
                 let mut left = {
-                    let r = $ctx.mode();
-                    $edict.insert("^mode", format!("{:?}", r));
-                    (r, vec!["^mode"])
+                    let mut refs = vec!["^mode"];
+                    let mut left = {
+                        let r = $ctx.mode();
+                        $edict.insert("^mode", format!("{:?}", r));
+                        (r, vec!["^mode"])
+                    };
+                    let right = enums::Mode::Drone;
+                    $edict.insert("^mode", format!("{}", left.0));
+                    refs.append(&mut left.1);
+                    (left.0 == right, refs)
                 };
-                let right = enums::Mode::Drone;
-                $edict.insert("^mode", format!("{}", left.0));
-                refs.append(&mut left.1);
-                (left.0 == right, refs)
+                if !left.0 {
+                    left
+                } else {
+                    let mut right = {
+                        let h = $ctx.has(Item::Slingshot_Hook);
+                        $edict.insert("Slingshot_Hook", format!("{}", h));
+                        (h, vec!["Slingshot_Hook"])
+                    };
+                    left.1.append(&mut right.1);
+                    (right.0, left.1)
+                }
             };
             if !left.0 {
                 left
@@ -515,13 +580,16 @@ macro_rules! hexplain__spin {
 #[macro_export]
 macro_rules! hobserve__spin {
     ($ctx:expr, $world:expr, $full_obs:expr) => {{
-        ({
+        (({
             let v = {
                 $full_obs.observe_mode();
                 $ctx.mode()
             };
             v == enums::Mode::Drone
         } && ({
+            $full_obs.observe_slingshot_hook();
+            $ctx.has(Item::Slingshot_Hook)
+        })) && ({
             $full_obs.observe_slingshot_weapon();
             $ctx.has(Item::Slingshot_Weapon)
         }))

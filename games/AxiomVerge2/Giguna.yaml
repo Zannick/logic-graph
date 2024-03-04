@@ -111,7 +111,7 @@ areas:
         - name: Open Gate
           item: Giguna_Northeast_Gate
           canon: Giguna_Northeast_Gate
-          time: 0.5
+          tags: [button]
       exits:
         - to: Gate Left
           req: Giguna_Northeast_Gate

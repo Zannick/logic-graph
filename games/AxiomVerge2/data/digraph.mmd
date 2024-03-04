@@ -216,6 +216,23 @@ subgraph Annuna
         Annuna__Vertical_Room__Middle_Overhang(Middle Overhang);
         Annuna__Vertical_Room__East_21(East 21);
         Annuna__Vertical_Room__West_20(West 20);
+        Annuna__Vertical_Room__Middle_Ministair(Middle Ministair);
+        Annuna__Vertical_Room__Save_Point_Left(Save Point Left);
+        Annuna__Vertical_Room__Save_Point(Save Point);
+        Annuna__Vertical_Room__Save_Point_Right(Save Point Right);
+        Annuna__Vertical_Room__East_20(East 20);
+        Annuna__Vertical_Room__Above_Plinth(Above Plinth);
+        Annuna__Vertical_Room__Middle_West_Shaft(Middle West Shaft);
+    end
+    subgraph Annuna__Upper_Hallway[Upper Hallway]
+        Annuna__Upper_Hallway__West(West);
+        Annuna__Upper_Hallway__Portal_Stand(Portal Stand);
+        Annuna__Upper_Hallway__Behind_Pedestal(Behind Pedestal);
+    end
+    subgraph Annuna__Middle_Hallway[Middle Hallway]
+        Annuna__Middle_Hallway__West(West);
+        Annuna__Middle_Hallway__Middle(Middle);
+        Annuna__Middle_Hallway__East(East);
     end
     subgraph Annuna__Lower_Hallway[Lower Hallway]
         Annuna__Lower_Hallway__West(West);
@@ -248,6 +265,30 @@ subgraph Annuna
         Annuna__Factory_Access__Upper_Ledge(Upper Ledge);
         Annuna__Factory_Access__Staircase_Top(Staircase Top);
         Annuna__Factory_Access__Grate_Left(Grate Left);
+    end
+    subgraph Annuna__Filter_Teleporter[Filter Teleporter]
+        Annuna__Filter_Teleporter__West_21(West 21);
+        Annuna__Filter_Teleporter__Stair_Top(Stair Top);
+        Annuna__Filter_Teleporter__Egg(Egg);
+        Annuna__Filter_Teleporter__Door_Ledge(Door Ledge);
+        Annuna__Filter_Teleporter__Shaft_Bottom(Shaft Bottom);
+        Annuna__Filter_Teleporter__Shaft_Upper_Platform(Shaft Upper Platform);
+        Annuna__Filter_Teleporter__Shaft_Top(Shaft Top);
+        Annuna__Filter_Teleporter__West_19_Mid_flight(West 19 Mid-flight);
+        Annuna__Filter_Teleporter__West_19(West 19);
+        Annuna__Filter_Teleporter__East_Platform_3(East Platform 3);
+        Annuna__Filter_Teleporter__East_Platform_4(East Platform 4);
+        Annuna__Filter_Teleporter__Northeast_Ministair(Northeast Ministair);
+        Annuna__Filter_Teleporter__Northeast_Cubby(Northeast Cubby);
+    end
+    subgraph Annuna__Spider_Room[Spider Room]
+        Annuna__Spider_Room__East(East);
+        Annuna__Spider_Room__Southwest(Southwest);
+        Annuna__Spider_Room__Center(Center);
+        Annuna__Spider_Room__Healthy_Corner(Healthy Corner);
+        Annuna__Spider_Room__Northeast_Ledge(Northeast Ledge);
+        Annuna__Spider_Room__Upper_Seam(Upper Seam);
+        Annuna__Spider_Room__West(West);
     end
     subgraph Annuna__Udug_Gate[Udug Gate]
         Annuna__Udug_Gate__East(East);
@@ -1714,7 +1755,7 @@ Annuna__Apocalypse__Southwest_Capsule --> Annuna__Apocalypse__West
 Annuna__Apocalypse__West <--> Annuna__Final_Save__East
 Annuna__Center_Climb__East --> Annuna__Center_Climb__Lower_Platform
 Annuna__Center_Climb__East --> Annuna__Center_Climb__Middle_Platform
-Annuna__Center_Climb__East --> Annuna__Vertical_Room__West_20
+Annuna__Center_Climb__East <--> Annuna__Vertical_Room__West_20
 Annuna__Center_Climb__Lower_Platform --> Annuna__Center_Climb__Middle_Platform
 Annuna__Center_Climb__Middle_Platform --> Annuna__Center_Climb__Upper_Platform
 Annuna__Center_Climb__Upper_Platform --> Annuna__Center_Climb__West
@@ -1800,6 +1841,20 @@ Annuna__Factory_Access__Upper_Platform --> Annuna__Factory_Access__Upper_Ledge
 Annuna__Factory_Access__Upper_Platform --> Annuna__Factory_Access__West_22
 Annuna__Factory_Access__West_22 <--> Annuna__Lower_Hallway__East
 Annuna__Factory_Entrance__West <--> Annuna__Sniper_Valley__East
+Annuna__Filter_Teleporter__Door_Ledge <--> Annuna__Filter_Teleporter__Egg
+Annuna__Filter_Teleporter__Door_Ledge <--> Annuna__Filter_Teleporter__Shaft_Bottom
+Annuna__Filter_Teleporter__East_Platform_3 --> Annuna__Filter_Teleporter__East_Platform_4
+Annuna__Filter_Teleporter__East_Platform_4 --> Annuna__Filter_Teleporter__Northeast_Ministair
+Annuna__Filter_Teleporter__Egg --> Annuna__Filter_Teleporter__East_Platform_3
+Annuna__Filter_Teleporter__Northeast_Ministair --> Annuna__Filter_Teleporter__Northeast_Cubby
+Annuna__Filter_Teleporter__Shaft_Bottom --> Annuna__Filter_Teleporter__Shaft_Upper_Platform
+Annuna__Filter_Teleporter__Shaft_Upper_Platform --> Annuna__Filter_Teleporter__Shaft_Top
+Annuna__Filter_Teleporter__Shaft_Upper_Platform --> Annuna__Filter_Teleporter__West_19_Mid_flight
+Annuna__Filter_Teleporter__Stair_Top --> Annuna__Filter_Teleporter__Door_Ledge
+Annuna__Filter_Teleporter__Stair_Top --> Annuna__Filter_Teleporter__Egg
+Annuna__Filter_Teleporter__West_19 --> Annuna__Spider_Room__East
+Annuna__Filter_Teleporter__West_19_Mid_flight --> Annuna__Spider_Room__Southwest
+Annuna__Filter_Teleporter__West_21 <--> Annuna__Middle_Hallway__East
 Annuna__Final_Save__East --> Annuna__Final_Save__Upper_West
 Annuna__Final_Save__Lower_West --> Annuna__Final_Save__Pillar
 Annuna__Final_Save__Lower_West --> Annuna__Seals__East_17_Lower
@@ -1809,6 +1864,7 @@ Annuna__Final_Save__Save_Point --> Annuna__Final_Save__Pillar
 Annuna__Final_Save__Upper_West --> Annuna__Apocalypse__Northwest_Mid_air
 Annuna__Final_Save__Upper_West --> Annuna__Seals__East_17_Upper
 Annuna__Lower_Hallway__West <--> Annuna__Vertical_Room__East_22
+Annuna__Middle_Hallway__West <--> Annuna__Vertical_Room__East_21
 Annuna__Mirror_Match__Below_Switch <--> Annuna__Mirror_Match__Central_Pillar
 Annuna__Mirror_Match__Central_Pillar --> Annuna__Mirror_Match__Save_Point
 Annuna__Mirror_Match__Central_Pillar --> Annuna__Mirror_Match__West_25
@@ -1841,7 +1897,9 @@ Annuna__Twisty_Passages__Southwest_C --> Annuna__Twisty_Passages__West_Dip
 Annuna__Twisty_Passages__Southwest_C --> Annuna__Twisty_Passages__West_Ledge
 Annuna__Twisty_Passages__West <--> Annuna__West_Climb__East_20
 Annuna__Twisty_Passages__West_Hill_Left --> Annuna__Twisty_Passages__Northwest_Alcove
-Annuna__Vertical_Room__Gate_Ledge --> Annuna__Vertical_Room__Plinth
+Annuna__Upper_Hallway__West <--> Annuna__Vertical_Room__East_20
+Annuna__Vertical_Room__Above_Plinth --> Annuna__Vertical_Room__Save_Point_Right
+Annuna__Vertical_Room__Gate_Ledge <--> Annuna__Vertical_Room__Plinth
 Annuna__Vertical_Room__Lower_Mid --> Annuna__Vertical_Room__Lower_Platform_1_Right
 Annuna__Vertical_Room__Lower_Mid --> Annuna__Vertical_Room__Lower_Platform_2_Right
 Annuna__Vertical_Room__Lower_Platform_1_Right --> Annuna__Vertical_Room__Lower_Platform_2_Right
@@ -1849,6 +1907,11 @@ Annuna__Vertical_Room__Lower_Platform_2_Left --> Annuna__Vertical_Room__Gate_Led
 Annuna__Vertical_Room__Lower_Platform_2_Left --> Annuna__Vertical_Room__Lower_Ministair
 Annuna__Vertical_Room__Lower_Platform_2_Right --> Annuna__Vertical_Room__Gate_Ledge
 Annuna__Vertical_Room__Lower_Platform_2_Right --> Annuna__Vertical_Room__Lower_Ministair
+Annuna__Vertical_Room__Middle_Ministair --> Annuna__Vertical_Room__Middle_Overhang
+Annuna__Vertical_Room__Middle_Overhang --> Annuna__Middle_Hallway__Middle
+Annuna__Vertical_Room__Middle_West_Shaft --> Annuna__Vertical_Room__Middle_Ministair
+Annuna__Vertical_Room__Middle_West_Shaft --> Annuna__Vertical_Room__Save_Point_Left
+Annuna__Vertical_Room__Plinth --> Annuna__Vertical_Room__Above_Plinth
 Annuna__Vertical_Room__West_22 --> Annuna__Vertical_Room__Lower_Ledge
 Annuna__Vertical_Room__West_22 --> Annuna__Vertical_Room__Lower_Platform_1_Left
 Annuna__West_Bridge__East_25_Lower --> Annuna__East_Bridge__West_25_Lower
