@@ -568,6 +568,27 @@ pub fn get_area(spot: SpotId) -> AreaId {
         | SpotId::Ebih__Vertical_Interchange__Switch
         | SpotId::Ebih__Vertical_Interchange__South => AreaId::Ebih__Vertical_Interchange,
         SpotId::Ebih__Gem_Room__West_13 => AreaId::Ebih__Gem_Room,
+        SpotId::Filter__Entrance__Egg | SpotId::Filter__Entrance__East => AreaId::Filter__Entrance,
+        SpotId::Filter__Lower_Hallway__West | SpotId::Filter__Lower_Hallway__East => {
+            AreaId::Filter__Lower_Hallway
+        }
+        SpotId::Filter__Scaffolding__Lower_West
+        | SpotId::Filter__Scaffolding__P1
+        | SpotId::Filter__Scaffolding__P2
+        | SpotId::Filter__Scaffolding__Catwalk_Hook_Point
+        | SpotId::Filter__Scaffolding__Upper_West => AreaId::Filter__Scaffolding,
+        SpotId::Filter__Upper_Hallway__East
+        | SpotId::Filter__Upper_Hallway__Corner
+        | SpotId::Filter__Upper_Hallway__West => AreaId::Filter__Upper_Hallway,
+        SpotId::Filter__Core__East
+        | SpotId::Filter__Core__Bottom
+        | SpotId::Filter__Core__Terminal_East
+        | SpotId::Filter__Core__Terminal_West
+        | SpotId::Filter__Core__Catwalk_West
+        | SpotId::Filter__Core__West => AreaId::Filter__Core,
+        SpotId::Filter__Exit__East | SpotId::Filter__Exit__Ledge | SpotId::Filter__Exit__Egg => {
+            AreaId::Filter__Exit
+        }
         SpotId::Giguna_Breach__Peak__Save_Point
         | SpotId::Giguna_Breach__Peak__East_Passage
         | SpotId::Giguna_Breach__Peak__Column
@@ -1982,6 +2003,27 @@ pub fn get_region(spot: SpotId) -> RegionId {
         | SpotId::Ebih__Vertical_Interchange__Switch
         | SpotId::Ebih__Vertical_Interchange__South => RegionId::Ebih,
         SpotId::Ebih__Gem_Room__West_13 => RegionId::Ebih,
+        SpotId::Filter__Entrance__Egg | SpotId::Filter__Entrance__East => RegionId::Filter,
+        SpotId::Filter__Lower_Hallway__West | SpotId::Filter__Lower_Hallway__East => {
+            RegionId::Filter
+        }
+        SpotId::Filter__Scaffolding__Lower_West
+        | SpotId::Filter__Scaffolding__P1
+        | SpotId::Filter__Scaffolding__P2
+        | SpotId::Filter__Scaffolding__Catwalk_Hook_Point
+        | SpotId::Filter__Scaffolding__Upper_West => RegionId::Filter,
+        SpotId::Filter__Upper_Hallway__East
+        | SpotId::Filter__Upper_Hallway__Corner
+        | SpotId::Filter__Upper_Hallway__West => RegionId::Filter,
+        SpotId::Filter__Core__East
+        | SpotId::Filter__Core__Bottom
+        | SpotId::Filter__Core__Terminal_East
+        | SpotId::Filter__Core__Terminal_West
+        | SpotId::Filter__Core__Catwalk_West
+        | SpotId::Filter__Core__West => RegionId::Filter,
+        SpotId::Filter__Exit__East | SpotId::Filter__Exit__Ledge | SpotId::Filter__Exit__Egg => {
+            RegionId::Filter
+        }
         SpotId::Giguna_Breach__Peak__Save_Point
         | SpotId::Giguna_Breach__Peak__East_Passage
         | SpotId::Giguna_Breach__Peak__Column
@@ -2931,9 +2973,6 @@ impl world::Accessible for Location {
             LocationId::Annuna__Filter_Teleporter__Door_Ledge__Shockwave_Flask => {
                 rules::access_shockwave(ctx, world)
             }
-            LocationId::Annuna__Filter_Teleporter__Egg__Authorize_Hammond => {
-                rules::access_activate(ctx, world)
-            }
             LocationId::Annuna__Filter_Teleporter__Northeast_Cubby__Tablet => true,
             LocationId::Annuna__Filter_Teleporter__Shaft_Bottom__Flask => true,
             LocationId::Annuna__Mirror_Match__Below_Switch__Hit_Switch => {
@@ -3043,6 +3082,9 @@ impl world::Accessible for Location {
             }
             LocationId::Ebih__Waterfall__Waterfall_Center_Center__Both_Blocks => {
                 rules::access_shockwave(ctx, world)
+            }
+            LocationId::Filter__Core__Terminal_East__Authorize_Hammond => {
+                rules::access_activate(ctx, world)
             }
             LocationId::Giguna__Antechamber__Statue_Head__Tablet => true,
             LocationId::Giguna__Carnelian__Vault__Item => true,
@@ -3443,9 +3485,6 @@ impl world::Accessible for Location {
             LocationId::Annuna__Filter_Teleporter__Door_Ledge__Shockwave_Flask => {
                 rules::observe_access_shockwave(ctx, world, full_obs)
             }
-            LocationId::Annuna__Filter_Teleporter__Egg__Authorize_Hammond => {
-                rules::observe_access_activate(ctx, world, full_obs)
-            }
             LocationId::Annuna__Mirror_Match__Below_Switch__Hit_Switch => {
                 rules::observe_access_can_damage(ctx, world, full_obs)
             }
@@ -3545,6 +3584,9 @@ impl world::Accessible for Location {
             }
             LocationId::Ebih__Waterfall__Waterfall_Center_Center__Both_Blocks => {
                 rules::observe_access_shockwave(ctx, world, full_obs)
+            }
+            LocationId::Filter__Core__Terminal_East__Authorize_Hammond => {
+                rules::observe_access_activate(ctx, world, full_obs)
             }
             LocationId::Giguna__Dual_Path__Base_of_Wall__Break_Wall => {
                 rules::observe_access_shockwave(ctx, world, full_obs)
@@ -3904,9 +3946,6 @@ impl world::Accessible for Location {
             LocationId::Annuna__Filter_Teleporter__Door_Ledge__Shockwave_Flask => {
                 rules::explain_shockwave(ctx, world, edict)
             }
-            LocationId::Annuna__Filter_Teleporter__Egg__Authorize_Hammond => {
-                rules::explain_activate(ctx, world, edict)
-            }
             LocationId::Annuna__Mirror_Match__Below_Switch__Hit_Switch => {
                 rules::explain_can_damage(ctx, world, edict)
             }
@@ -4006,6 +4045,9 @@ impl world::Accessible for Location {
             }
             LocationId::Ebih__Waterfall__Waterfall_Center_Center__Both_Blocks => {
                 rules::explain_shockwave(ctx, world, edict)
+            }
+            LocationId::Filter__Core__Terminal_East__Authorize_Hammond => {
+                rules::explain_activate(ctx, world, edict)
             }
             LocationId::Giguna__Dual_Path__Base_of_Wall__Break_Wall => {
                 rules::explain_shockwave(ctx, world, edict)
@@ -4480,6 +4522,7 @@ impl world::Accessible for Exit {
             ExitId::Annuna__Filter_Teleporter__East_Platform_4__ex__Northeast_Ministair_2 => rules::access_climb(ctx, world),
             ExitId::Annuna__Filter_Teleporter__Egg__ex__Door_Ledge_1 => rules::access_hook(ctx, world),
             ExitId::Annuna__Filter_Teleporter__Egg__ex__East_Platform_3_1 => rules::access_hook_and_hover(ctx, world),
+            ExitId::Annuna__Filter_Teleporter__Egg__ex__Filter__Entrance__Egg_1 => rules::access_not_hammond_auth(ctx, world),
             ExitId::Annuna__Filter_Teleporter__Northeast_Ministair__ex__Northeast_Cubby_1 => rules::access_hook(ctx, world),
             ExitId::Annuna__Filter_Teleporter__Shaft_Bottom__ex__Door_Ledge_1 => rules::access_hammond_auth(ctx, world),
             ExitId::Annuna__Filter_Teleporter__Shaft_Bottom__ex__Shaft_Upper_Platform_1 => rules::access_grab_or_climb(ctx, world),
@@ -4850,6 +4893,23 @@ impl world::Accessible for Exit {
             ExitId::Ebih__Waterfall__West_Door__ex__West_Door_Right_1 => rules::access_ebih__waterfall__west_door__ex__west_door_right_1__req(ctx, world),
             ExitId::Ebih__Waterfall__West_Door_Left__ex__West_Door_1 => rules::access_ebih__waterfall__west_door_left__ex__west_door_1__req(ctx, world),
             ExitId::Ebih__Waterfall__West_Door_Right__ex__West_Door_1 => rules::access_ebih__waterfall__west_door_right__ex__west_door_1__req(ctx, world),
+            ExitId::Filter__Core__Bottom__ex__Terminal_East_1 => rules::access_hook(ctx, world),
+            ExitId::Filter__Core__Catwalk_West__ex__West_1 => rules::access_hammond_auth(ctx, world),
+            ExitId::Filter__Core__Terminal_East__ex__Catwalk_West_1 => rules::access_hook_and_hover(ctx, world),
+            ExitId::Filter__Core__Terminal_West__ex__West_1 => rules::access_hammond_auth(ctx, world),
+            ExitId::Filter__Core__West__ex__Exit__East_1 => true,
+            ExitId::Filter__Entrance__East__ex__Lower_Hallway__West_1 => true,
+            ExitId::Filter__Exit__East__ex__Core__West_1 => true,
+            ExitId::Filter__Exit__Egg__ex__Annuna__Filter_Teleporter__Egg_1 => true,
+            ExitId::Filter__Lower_Hallway__East__ex__Scaffolding__Lower_West_1 => true,
+            ExitId::Filter__Lower_Hallway__West__ex__East_1 => rules::access_hook_and_hover(ctx, world),
+            ExitId::Filter__Lower_Hallway__West__ex__Entrance__East_1 => true,
+            ExitId::Filter__Scaffolding__Catwalk_Hook_Point__ex__Upper_Hallway__Corner_1 => rules::access_hook_and_hover(ctx, world),
+            ExitId::Filter__Scaffolding__Lower_West__ex__Lower_Hallway__East_1 => true,
+            ExitId::Filter__Scaffolding__Upper_West__ex__Upper_Hallway__East_1 => true,
+            ExitId::Filter__Upper_Hallway__Corner__ex__Core__Bottom_1 => rules::access_hook_and_hover(ctx, world),
+            ExitId::Filter__Upper_Hallway__East__ex__Scaffolding__Upper_West_1 => true,
+            ExitId::Filter__Upper_Hallway__West__ex__Core__East_1 => true,
             ExitId::Giguna__Antechamber__Bottom__ex__Left_Wall_Lower_1 => rules::access_hook(ctx, world),
             ExitId::Giguna__Antechamber__East_16__ex__East_Caverns__West_16_1 => true,
             ExitId::Giguna__Antechamber__Left_Wall_Lower__ex__Left_Wall_Mid_1 => rules::access_grab_and_climb(ctx, world),
@@ -5452,6 +5512,7 @@ impl world::Accessible for Exit {
             ExitId::Menu__Kiengir_Map__Annuna_Center_Save__ex__Annuna__Center_Save__Save_Point_1 => rules::access_map__annuna__center_save__save(ctx, world),
             ExitId::Menu__Kiengir_Map__Annuna_Factory_Entrance__ex__Annuna__Factory_Entrance__Save_Point_1 => rules::access_map__annuna__factory_entrance__save(ctx, world),
             ExitId::Menu__Kiengir_Map__Annuna_Mirror_Match__ex__Annuna__Mirror_Match__Save_Point_1 => rules::access_map__annuna__mirror_match__save(ctx, world),
+            ExitId::Menu__Kiengir_Map__Annuna_Vertical_Room__ex__Annuna__Vertical_Room__Save_Point_1 => rules::access_map__annuna__vertical_room__save(ctx, world),
             ExitId::Menu__Kiengir_Map__Ebih_Base_Camp__ex__Ebih__Base_Camp__Save_Point_1 => rules::access_map__ebih__base_camp__save(ctx, world),
             ExitId::Menu__Kiengir_Map__Ebih_West_Lower__ex__Ebih__Ebih_West__Lower_Save_1 => rules::access_map__ebih__ebih_west__lower_save(ctx, world),
             ExitId::Menu__Kiengir_Map__Ebih_West_Mid__ex__Ebih__Ebih_West__Mid_Save_1 => rules::access_map__ebih__ebih_west__mid_save(ctx, world),
@@ -5778,6 +5839,7 @@ impl world::Accessible for Exit {
             ExitId::Annuna__Filter_Teleporter__East_Platform_4__ex__Northeast_Ministair_2 => rules::observe_access_climb(ctx, world, full_obs),
             ExitId::Annuna__Filter_Teleporter__Egg__ex__Door_Ledge_1 => rules::observe_access_hook(ctx, world, full_obs),
             ExitId::Annuna__Filter_Teleporter__Egg__ex__East_Platform_3_1 => rules::observe_access_hook_and_hover(ctx, world, full_obs),
+            ExitId::Annuna__Filter_Teleporter__Egg__ex__Filter__Entrance__Egg_1 => rules::observe_access_not_hammond_auth(ctx, world, full_obs),
             ExitId::Annuna__Filter_Teleporter__Northeast_Ministair__ex__Northeast_Cubby_1 => rules::observe_access_hook(ctx, world, full_obs),
             ExitId::Annuna__Filter_Teleporter__Shaft_Bottom__ex__Door_Ledge_1 => rules::observe_access_hammond_auth(ctx, world, full_obs),
             ExitId::Annuna__Filter_Teleporter__Shaft_Bottom__ex__Shaft_Upper_Platform_1 => rules::observe_access_grab_or_climb(ctx, world, full_obs),
@@ -6033,6 +6095,13 @@ impl world::Accessible for Exit {
             ExitId::Ebih__Waterfall__West_Door__ex__West_Door_Right_1 => rules::observe_access_ebih__waterfall__west_door__ex__west_door_right_1__req(ctx, world, full_obs),
             ExitId::Ebih__Waterfall__West_Door_Left__ex__West_Door_1 => rules::observe_access_ebih__waterfall__west_door_left__ex__west_door_1__req(ctx, world, full_obs),
             ExitId::Ebih__Waterfall__West_Door_Right__ex__West_Door_1 => rules::observe_access_ebih__waterfall__west_door_right__ex__west_door_1__req(ctx, world, full_obs),
+            ExitId::Filter__Core__Bottom__ex__Terminal_East_1 => rules::observe_access_hook(ctx, world, full_obs),
+            ExitId::Filter__Core__Catwalk_West__ex__West_1 => rules::observe_access_hammond_auth(ctx, world, full_obs),
+            ExitId::Filter__Core__Terminal_East__ex__Catwalk_West_1 => rules::observe_access_hook_and_hover(ctx, world, full_obs),
+            ExitId::Filter__Core__Terminal_West__ex__West_1 => rules::observe_access_hammond_auth(ctx, world, full_obs),
+            ExitId::Filter__Lower_Hallway__West__ex__East_1 => rules::observe_access_hook_and_hover(ctx, world, full_obs),
+            ExitId::Filter__Scaffolding__Catwalk_Hook_Point__ex__Upper_Hallway__Corner_1 => rules::observe_access_hook_and_hover(ctx, world, full_obs),
+            ExitId::Filter__Upper_Hallway__Corner__ex__Core__Bottom_1 => rules::observe_access_hook_and_hover(ctx, world, full_obs),
             ExitId::Giguna__Antechamber__Bottom__ex__Left_Wall_Lower_1 => rules::observe_access_hook(ctx, world, full_obs),
             ExitId::Giguna__Antechamber__Left_Wall_Lower__ex__Left_Wall_Mid_1 => rules::observe_access_grab_and_climb(ctx, world, full_obs),
             ExitId::Giguna__Antechamber__Left_Wall_Lower__ex__Left_Wall_Mid_2 => rules::observe_access_hook(ctx, world, full_obs),
@@ -6432,6 +6501,7 @@ impl world::Accessible for Exit {
             ExitId::Menu__Kiengir_Map__Annuna_Center_Save__ex__Annuna__Center_Save__Save_Point_1 => rules::observe_access_map__annuna__center_save__save(ctx, world, full_obs),
             ExitId::Menu__Kiengir_Map__Annuna_Factory_Entrance__ex__Annuna__Factory_Entrance__Save_Point_1 => rules::observe_access_map__annuna__factory_entrance__save(ctx, world, full_obs),
             ExitId::Menu__Kiengir_Map__Annuna_Mirror_Match__ex__Annuna__Mirror_Match__Save_Point_1 => rules::observe_access_map__annuna__mirror_match__save(ctx, world, full_obs),
+            ExitId::Menu__Kiengir_Map__Annuna_Vertical_Room__ex__Annuna__Vertical_Room__Save_Point_1 => rules::observe_access_map__annuna__vertical_room__save(ctx, world, full_obs),
             ExitId::Menu__Kiengir_Map__Ebih_Base_Camp__ex__Ebih__Base_Camp__Save_Point_1 => rules::observe_access_map__ebih__base_camp__save(ctx, world, full_obs),
             ExitId::Menu__Kiengir_Map__Ebih_West_Lower__ex__Ebih__Ebih_West__Lower_Save_1 => rules::observe_access_map__ebih__ebih_west__lower_save(ctx, world, full_obs),
             ExitId::Menu__Kiengir_Map__Ebih_West_Mid__ex__Ebih__Ebih_West__Mid_Save_1 => rules::observe_access_map__ebih__ebih_west__mid_save(ctx, world, full_obs),
@@ -6633,6 +6703,13 @@ impl world::Accessible for Exit {
                     }
                 }
                 ExitId::Menu__Kiengir_Map__Annuna_Mirror_Match__ex__Annuna__Mirror_Match__Save_Point_1 => {
+                    if rules::access_mode_ne_drone(ctx, world) {
+                        2500
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Menu__Kiengir_Map__Annuna_Vertical_Room__ex__Annuna__Vertical_Room__Save_Point_1 => {
                     if rules::access_mode_ne_drone(ctx, world) {
                         2500
                     } else {
@@ -6873,6 +6950,7 @@ impl world::Accessible for Exit {
             ExitId::Annuna__Filter_Teleporter__East_Platform_4__ex__Northeast_Ministair_2 => rules::explain_climb(ctx, world, edict),
             ExitId::Annuna__Filter_Teleporter__Egg__ex__Door_Ledge_1 => rules::explain_hook(ctx, world, edict),
             ExitId::Annuna__Filter_Teleporter__Egg__ex__East_Platform_3_1 => rules::explain_hook_and_hover(ctx, world, edict),
+            ExitId::Annuna__Filter_Teleporter__Egg__ex__Filter__Entrance__Egg_1 => rules::explain_not_hammond_auth(ctx, world, edict),
             ExitId::Annuna__Filter_Teleporter__Northeast_Ministair__ex__Northeast_Cubby_1 => rules::explain_hook(ctx, world, edict),
             ExitId::Annuna__Filter_Teleporter__Shaft_Bottom__ex__Door_Ledge_1 => rules::explain_hammond_auth(ctx, world, edict),
             ExitId::Annuna__Filter_Teleporter__Shaft_Bottom__ex__Shaft_Upper_Platform_1 => rules::explain_grab_or_climb(ctx, world, edict),
@@ -7128,6 +7206,13 @@ impl world::Accessible for Exit {
             ExitId::Ebih__Waterfall__West_Door__ex__West_Door_Right_1 => rules::explain_ebih__waterfall__west_door__ex__west_door_right_1__req(ctx, world, edict),
             ExitId::Ebih__Waterfall__West_Door_Left__ex__West_Door_1 => rules::explain_ebih__waterfall__west_door_left__ex__west_door_1__req(ctx, world, edict),
             ExitId::Ebih__Waterfall__West_Door_Right__ex__West_Door_1 => rules::explain_ebih__waterfall__west_door_right__ex__west_door_1__req(ctx, world, edict),
+            ExitId::Filter__Core__Bottom__ex__Terminal_East_1 => rules::explain_hook(ctx, world, edict),
+            ExitId::Filter__Core__Catwalk_West__ex__West_1 => rules::explain_hammond_auth(ctx, world, edict),
+            ExitId::Filter__Core__Terminal_East__ex__Catwalk_West_1 => rules::explain_hook_and_hover(ctx, world, edict),
+            ExitId::Filter__Core__Terminal_West__ex__West_1 => rules::explain_hammond_auth(ctx, world, edict),
+            ExitId::Filter__Lower_Hallway__West__ex__East_1 => rules::explain_hook_and_hover(ctx, world, edict),
+            ExitId::Filter__Scaffolding__Catwalk_Hook_Point__ex__Upper_Hallway__Corner_1 => rules::explain_hook_and_hover(ctx, world, edict),
+            ExitId::Filter__Upper_Hallway__Corner__ex__Core__Bottom_1 => rules::explain_hook_and_hover(ctx, world, edict),
             ExitId::Giguna__Antechamber__Bottom__ex__Left_Wall_Lower_1 => rules::explain_hook(ctx, world, edict),
             ExitId::Giguna__Antechamber__Left_Wall_Lower__ex__Left_Wall_Mid_1 => rules::explain_grab_and_climb(ctx, world, edict),
             ExitId::Giguna__Antechamber__Left_Wall_Lower__ex__Left_Wall_Mid_2 => rules::explain_hook(ctx, world, edict),
@@ -7527,6 +7612,7 @@ impl world::Accessible for Exit {
             ExitId::Menu__Kiengir_Map__Annuna_Center_Save__ex__Annuna__Center_Save__Save_Point_1 => rules::explain_map__annuna__center_save__save(ctx, world, edict),
             ExitId::Menu__Kiengir_Map__Annuna_Factory_Entrance__ex__Annuna__Factory_Entrance__Save_Point_1 => rules::explain_map__annuna__factory_entrance__save(ctx, world, edict),
             ExitId::Menu__Kiengir_Map__Annuna_Mirror_Match__ex__Annuna__Mirror_Match__Save_Point_1 => rules::explain_map__annuna__mirror_match__save(ctx, world, edict),
+            ExitId::Menu__Kiengir_Map__Annuna_Vertical_Room__ex__Annuna__Vertical_Room__Save_Point_1 => rules::explain_map__annuna__vertical_room__save(ctx, world, edict),
             ExitId::Menu__Kiengir_Map__Ebih_Base_Camp__ex__Ebih__Base_Camp__Save_Point_1 => rules::explain_map__ebih__base_camp__save(ctx, world, edict),
             ExitId::Menu__Kiengir_Map__Ebih_West_Lower__ex__Ebih__Ebih_West__Lower_Save_1 => rules::explain_map__ebih__ebih_west__lower_save(ctx, world, edict),
             ExitId::Menu__Kiengir_Map__Ebih_West_Mid__ex__Ebih__Ebih_West__Mid_Save_1 => rules::explain_map__ebih__ebih_west__mid_save(ctx, world, edict),
@@ -7872,6 +7958,16 @@ impl world::Exit for Exit {
             ExitId::Ebih__Waterfall__West_7__ex__Ebih_West__East_7_1 => true,
             ExitId::Ebih__Waterfall__West_8__ex__Ebih_West__East_8_1 => true,
             ExitId::Ebih__Waterfall__West_9__ex__Ebih_West__East_9_1 => true,
+            ExitId::Filter__Core__West__ex__Exit__East_1 => true,
+            ExitId::Filter__Entrance__East__ex__Lower_Hallway__West_1 => true,
+            ExitId::Filter__Exit__East__ex__Core__West_1 => true,
+            ExitId::Filter__Exit__Egg__ex__Annuna__Filter_Teleporter__Egg_1 => true,
+            ExitId::Filter__Lower_Hallway__East__ex__Scaffolding__Lower_West_1 => true,
+            ExitId::Filter__Lower_Hallway__West__ex__Entrance__East_1 => true,
+            ExitId::Filter__Scaffolding__Lower_West__ex__Lower_Hallway__East_1 => true,
+            ExitId::Filter__Scaffolding__Upper_West__ex__Upper_Hallway__East_1 => true,
+            ExitId::Filter__Upper_Hallway__East__ex__Scaffolding__Upper_West_1 => true,
+            ExitId::Filter__Upper_Hallway__West__ex__Core__East_1 => true,
             ExitId::Giguna__Antechamber__East_16__ex__East_Caverns__West_16_1 => true,
             ExitId::Giguna__Antechamber__West_15__ex__Gubi_Lair__East_15_1 => true,
             ExitId::Giguna__Breachable_Wall__Above_West_Catwalk__ex__Irikar__Boss_Room__Above_Catwalk_1 => true,
@@ -9281,7 +9377,7 @@ pub struct Spot {
     pub actions: Range<usize>,
 }
 
-static RAW_SPOTS: [SpotId; 1393] = [
+static RAW_SPOTS: [SpotId; 1414] = [
     SpotId::None,
     SpotId::Amagi__Grid_31_19__East,
     SpotId::Amagi__Grid_31_19__West,
@@ -9825,6 +9921,27 @@ static RAW_SPOTS: [SpotId; 1393] = [
     SpotId::Ebih__Waterfall__West_Door_Right,
     SpotId::Ebih__Waterfall__West_Lower_Path,
     SpotId::Ebih__Waterfall__West_Main_Path,
+    SpotId::Filter__Core__Bottom,
+    SpotId::Filter__Core__Catwalk_West,
+    SpotId::Filter__Core__East,
+    SpotId::Filter__Core__Terminal_East,
+    SpotId::Filter__Core__Terminal_West,
+    SpotId::Filter__Core__West,
+    SpotId::Filter__Entrance__East,
+    SpotId::Filter__Entrance__Egg,
+    SpotId::Filter__Exit__East,
+    SpotId::Filter__Exit__Egg,
+    SpotId::Filter__Exit__Ledge,
+    SpotId::Filter__Lower_Hallway__East,
+    SpotId::Filter__Lower_Hallway__West,
+    SpotId::Filter__Scaffolding__Catwalk_Hook_Point,
+    SpotId::Filter__Scaffolding__Lower_West,
+    SpotId::Filter__Scaffolding__P1,
+    SpotId::Filter__Scaffolding__P2,
+    SpotId::Filter__Scaffolding__Upper_West,
+    SpotId::Filter__Upper_Hallway__Corner,
+    SpotId::Filter__Upper_Hallway__East,
+    SpotId::Filter__Upper_Hallway__West,
     SpotId::Giguna__Antechamber__Bottom,
     SpotId::Giguna__Antechamber__East_16,
     SpotId::Giguna__Antechamber__Left_Wall_Lower,
@@ -10884,6 +11001,30 @@ lazy_static! {
             start: SpotId::Ebih__Waterfall__Alcove.into_usize(),
             end: SpotId::Ebih__Waterfall__West_Main_Path.into_usize() + 1,
         },
+        AreaId::Filter__Core => Range {
+            start: SpotId::Filter__Core__Bottom.into_usize(),
+            end: SpotId::Filter__Core__West.into_usize() + 1,
+        },
+        AreaId::Filter__Entrance => Range {
+            start: SpotId::Filter__Entrance__East.into_usize(),
+            end: SpotId::Filter__Entrance__Egg.into_usize() + 1,
+        },
+        AreaId::Filter__Exit => Range {
+            start: SpotId::Filter__Exit__East.into_usize(),
+            end: SpotId::Filter__Exit__Ledge.into_usize() + 1,
+        },
+        AreaId::Filter__Lower_Hallway => Range {
+            start: SpotId::Filter__Lower_Hallway__East.into_usize(),
+            end: SpotId::Filter__Lower_Hallway__West.into_usize() + 1,
+        },
+        AreaId::Filter__Scaffolding => Range {
+            start: SpotId::Filter__Scaffolding__Catwalk_Hook_Point.into_usize(),
+            end: SpotId::Filter__Scaffolding__Upper_West.into_usize() + 1,
+        },
+        AreaId::Filter__Upper_Hallway => Range {
+            start: SpotId::Filter__Upper_Hallway__Corner.into_usize(),
+            end: SpotId::Filter__Upper_Hallway__West.into_usize() + 1,
+        },
         AreaId::Giguna_Breach__Antechamber => Range {
             start: SpotId::Giguna_Breach__Antechamber__North.into_usize(),
             end: SpotId::Giguna_Breach__Antechamber__North.into_usize() + 1,
@@ -11402,9 +11543,6 @@ impl world::World for World {
                 LocationId::Annuna__Sniper_Valley__Cavern_Inner_Rock_West__Break_Inner_Wall,
                 LocationId::Annuna__Sniper_Valley__Cavern_Inner_Rock_East__Break_Inner_Wall,
             ],
-            CanonId::Authorize_Hammond => {
-                vec![LocationId::Annuna__Filter_Teleporter__Egg__Authorize_Hammond]
-            }
             CanonId::Filter_Teleporter_Flask => vec![
                 LocationId::Annuna__Filter_Teleporter__Door_Ledge__Shockwave_Flask,
                 LocationId::Annuna__Filter_Teleporter__Shaft_Bottom__Flask,
@@ -11685,9 +11823,6 @@ impl world::World for World {
             Item::Annuna_Vertical_Room_Gate => {
                 vec![LocationId::Annuna__Vertical_Room__Gate_Button__Hit_Button]
             }
-            Item::Hammond_Auth => {
-                vec![LocationId::Annuna__Filter_Teleporter__Egg__Authorize_Hammond]
-            }
             Item::The_Eternal_Arm => {
                 vec![LocationId::Annuna__Filter_Teleporter__Northeast_Cubby__Tablet]
             }
@@ -11755,6 +11890,7 @@ impl world::World for World {
             Item::Ebih_Interchange_Gate => {
                 vec![LocationId::Ebih__Vertical_Interchange__Switch__Activate_Switch]
             }
+            Item::Hammond_Auth => vec![LocationId::Filter__Core__Terminal_East__Authorize_Hammond],
             Item::Slingshot_Hook => vec![LocationId::Giguna_Breach__Slingshot__Ravine__Urn],
             Item::Giguna_Northeast_Gate => vec![
                 LocationId::Giguna__Giguna_Northeast__Gate_Button__Open_Gate,
@@ -12095,9 +12231,6 @@ impl world::World for World {
             LocationId::Annuna__Upper_Hallway__Behind_Pedestal__Health_Pickup => {
                 SpotId::Annuna__Upper_Hallway__Behind_Pedestal
             }
-            LocationId::Annuna__Filter_Teleporter__Egg__Authorize_Hammond => {
-                SpotId::Annuna__Filter_Teleporter__Egg
-            }
             LocationId::Annuna__Filter_Teleporter__Door_Ledge__Shockwave_Flask => {
                 SpotId::Annuna__Filter_Teleporter__Door_Ledge
             }
@@ -12202,6 +12335,9 @@ impl world::World for World {
             LocationId::Ebih__Grid_26_10_11__Ledge__Note => SpotId::Ebih__Grid_26_10_11__Ledge,
             LocationId::Ebih__Vertical_Interchange__Switch__Activate_Switch => {
                 SpotId::Ebih__Vertical_Interchange__Switch
+            }
+            LocationId::Filter__Core__Terminal_East__Authorize_Hammond => {
+                SpotId::Filter__Core__Terminal_East
             }
             LocationId::Giguna_Breach__Chimney__Cache__Flask => {
                 SpotId::Giguna_Breach__Chimney__Cache
@@ -12916,7 +13052,7 @@ impl world::World for World {
             ExitId::Annuna__Factory_Access__Grate_Left__ex__East_22_1 | ExitId:: Annuna__Factory_Access__Grate_Left__ex__East_22_2 => SpotId::Annuna__Factory_Access__Grate_Left,
             ExitId::Annuna__Filter_Teleporter__West_21__ex__Middle_Hallway__East_1 => SpotId::Annuna__Filter_Teleporter__West_21,
             ExitId::Annuna__Filter_Teleporter__Stair_Top__ex__Door_Ledge_1 | ExitId:: Annuna__Filter_Teleporter__Stair_Top__ex__Door_Ledge_2 | ExitId:: Annuna__Filter_Teleporter__Stair_Top__ex__Door_Ledge_3 | ExitId:: Annuna__Filter_Teleporter__Stair_Top__ex__Egg_1 => SpotId::Annuna__Filter_Teleporter__Stair_Top,
-            ExitId::Annuna__Filter_Teleporter__Egg__ex__Door_Ledge_1 | ExitId:: Annuna__Filter_Teleporter__Egg__ex__East_Platform_3_1 => SpotId::Annuna__Filter_Teleporter__Egg,
+            ExitId::Annuna__Filter_Teleporter__Egg__ex__Door_Ledge_1 | ExitId:: Annuna__Filter_Teleporter__Egg__ex__East_Platform_3_1 | ExitId:: Annuna__Filter_Teleporter__Egg__ex__Filter__Entrance__Egg_1 => SpotId::Annuna__Filter_Teleporter__Egg,
             ExitId::Annuna__Filter_Teleporter__Door_Ledge__ex__Egg_1 | ExitId:: Annuna__Filter_Teleporter__Door_Ledge__ex__Shaft_Bottom_1 => SpotId::Annuna__Filter_Teleporter__Door_Ledge,
             ExitId::Annuna__Filter_Teleporter__Shaft_Bottom__ex__Door_Ledge_1 | ExitId:: Annuna__Filter_Teleporter__Shaft_Bottom__ex__Shaft_Upper_Platform_1 | ExitId:: Annuna__Filter_Teleporter__Shaft_Bottom__ex__Shaft_Upper_Platform_2 => SpotId::Annuna__Filter_Teleporter__Shaft_Bottom,
             ExitId::Annuna__Filter_Teleporter__Shaft_Upper_Platform__ex__Shaft_Top_1 | ExitId:: Annuna__Filter_Teleporter__Shaft_Upper_Platform__ex__Shaft_Top_2 | ExitId:: Annuna__Filter_Teleporter__Shaft_Upper_Platform__ex__West_19_Mid_flight_1 => SpotId::Annuna__Filter_Teleporter__Shaft_Upper_Platform,
@@ -13124,6 +13260,22 @@ impl world::World for World {
             ExitId::Ebih__Vertical_Interchange__Switch__ex__Below_Door_1 => SpotId::Ebih__Vertical_Interchange__Switch,
             ExitId::Ebih__Vertical_Interchange__South__ex__Below_Door_1 => SpotId::Ebih__Vertical_Interchange__South,
             ExitId::Ebih__Gem_Room__West_13__ex__Vertical_Interchange__East_13_1 => SpotId::Ebih__Gem_Room__West_13,
+            ExitId::Filter__Entrance__East__ex__Lower_Hallway__West_1 => SpotId::Filter__Entrance__East,
+            ExitId::Filter__Lower_Hallway__West__ex__Entrance__East_1 | ExitId:: Filter__Lower_Hallway__West__ex__East_1 => SpotId::Filter__Lower_Hallway__West,
+            ExitId::Filter__Lower_Hallway__East__ex__Scaffolding__Lower_West_1 => SpotId::Filter__Lower_Hallway__East,
+            ExitId::Filter__Scaffolding__Lower_West__ex__Lower_Hallway__East_1 => SpotId::Filter__Scaffolding__Lower_West,
+            ExitId::Filter__Scaffolding__Catwalk_Hook_Point__ex__Upper_Hallway__Corner_1 => SpotId::Filter__Scaffolding__Catwalk_Hook_Point,
+            ExitId::Filter__Scaffolding__Upper_West__ex__Upper_Hallway__East_1 => SpotId::Filter__Scaffolding__Upper_West,
+            ExitId::Filter__Upper_Hallway__East__ex__Scaffolding__Upper_West_1 => SpotId::Filter__Upper_Hallway__East,
+            ExitId::Filter__Upper_Hallway__Corner__ex__Core__Bottom_1 => SpotId::Filter__Upper_Hallway__Corner,
+            ExitId::Filter__Upper_Hallway__West__ex__Core__East_1 => SpotId::Filter__Upper_Hallway__West,
+            ExitId::Filter__Core__Bottom__ex__Terminal_East_1 => SpotId::Filter__Core__Bottom,
+            ExitId::Filter__Core__Terminal_East__ex__Catwalk_West_1 => SpotId::Filter__Core__Terminal_East,
+            ExitId::Filter__Core__Terminal_West__ex__West_1 => SpotId::Filter__Core__Terminal_West,
+            ExitId::Filter__Core__Catwalk_West__ex__West_1 => SpotId::Filter__Core__Catwalk_West,
+            ExitId::Filter__Core__West__ex__Exit__East_1 => SpotId::Filter__Core__West,
+            ExitId::Filter__Exit__East__ex__Core__West_1 => SpotId::Filter__Exit__East,
+            ExitId::Filter__Exit__Egg__ex__Annuna__Filter_Teleporter__Egg_1 => SpotId::Filter__Exit__Egg,
             ExitId::Giguna_Breach__Peak__West_7__ex__Chimney__East_7_1 => SpotId::Giguna_Breach__Peak__West_7,
             ExitId::Giguna_Breach__Peak__East_6__ex__Upper_East_1 | ExitId:: Giguna_Breach__Peak__East_6__ex__Ascent__West_6_1 => SpotId::Giguna_Breach__Peak__East_6,
             ExitId::Giguna_Breach__Peak__Portal__ex__Upper_West_1 => SpotId::Giguna_Breach__Peak__Portal,
@@ -13552,6 +13704,7 @@ impl world::World for World {
             ExitId::Menu__Kiengir_Map__Annuna_Center_Save__ex__Annuna__Center_Save__Save_Point_1 => SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
             ExitId::Menu__Kiengir_Map__Annuna_Factory_Entrance__ex__Annuna__Factory_Entrance__Save_Point_1 => SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
             ExitId::Menu__Kiengir_Map__Annuna_Mirror_Match__ex__Annuna__Mirror_Match__Save_Point_1 => SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            ExitId::Menu__Kiengir_Map__Annuna_Vertical_Room__ex__Annuna__Vertical_Room__Save_Point_1 => SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
             ExitId::Menu__Kiengir_Map__Ebih_Base_Camp__ex__Ebih__Base_Camp__Save_Point_1 => SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
             ExitId::Menu__Kiengir_Map__Ebih_West_Lower__ex__Ebih__Ebih_West__Lower_Save_1 => SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
             ExitId::Menu__Kiengir_Map__Ebih_West_Mid__ex__Ebih__Ebih_West__Mid_Save_1 => SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
@@ -13779,11 +13932,16 @@ impl world::World for World {
                                 map.insert(Item::Fast_Travel, 1);
                             }
                         }
-                        if ctx.count(Item::Flask) < 13 {
+                        if ctx.count(Item::Flask) < 14 {
                             if let Some(val) = map.get_mut(&Item::Flask) {
-                                *val = std::cmp::max(*val, 13 - ctx.count(Item::Flask));
+                                *val = std::cmp::max(*val, 14 - ctx.count(Item::Flask));
                             } else {
-                                map.insert(Item::Flask, 13 - ctx.count(Item::Flask));
+                                map.insert(Item::Flask, 14 - ctx.count(Item::Flask));
+                            }
+                        }
+                        if !ctx.has(Item::Hammond_Auth) {
+                            if !map.contains_key(&Item::Hammond_Auth) {
+                                map.insert(Item::Hammond_Auth, 1);
                             }
                         }
                         if ctx.count(Item::Health_Fragment) < 6 {
@@ -13889,6 +14047,11 @@ impl world::World for World {
                         if !ctx.has(Item::Terminal_Breakthrough_2) {
                             if !map.contains_key(&Item::Terminal_Breakthrough_2) {
                                 map.insert(Item::Terminal_Breakthrough_2, 1);
+                            }
+                        }
+                        if !ctx.has(Item::The_Eternal_Arm) {
+                            if !map.contains_key(&Item::The_Eternal_Arm) {
+                                map.insert(Item::The_Eternal_Arm, 1);
                             }
                         }
                         if !ctx.has(Item::The_Ideal_Kiengir) {
@@ -14003,11 +14166,16 @@ impl world::World for World {
                             map.insert(Item::Fast_Travel, 1);
                         }
                     }
-                    if ctx.count(Item::Flask) < 13 {
+                    if ctx.count(Item::Flask) < 14 {
                         if let Some(val) = map.get_mut(&Item::Flask) {
-                            *val = std::cmp::max(*val, 13 - ctx.count(Item::Flask));
+                            *val = std::cmp::max(*val, 14 - ctx.count(Item::Flask));
                         } else {
-                            map.insert(Item::Flask, 13 - ctx.count(Item::Flask));
+                            map.insert(Item::Flask, 14 - ctx.count(Item::Flask));
+                        }
+                    }
+                    if !ctx.has(Item::Hammond_Auth) {
+                        if !map.contains_key(&Item::Hammond_Auth) {
+                            map.insert(Item::Hammond_Auth, 1);
                         }
                     }
                     if ctx.count(Item::Health_Fragment) < 6 {
@@ -14112,6 +14280,11 @@ impl world::World for World {
                             map.insert(Item::Terminal_Breakthrough_2, 1);
                         }
                     }
+                    if !ctx.has(Item::The_Eternal_Arm) {
+                        if !map.contains_key(&Item::The_Eternal_Arm) {
+                            map.insert(Item::The_Eternal_Arm, 1);
+                        }
+                    }
                     if !ctx.has(Item::The_Ideal_Kiengir) {
                         if !map.contains_key(&Item::The_Ideal_Kiengir) {
                             map.insert(Item::The_Ideal_Kiengir, 1);
@@ -14207,9 +14380,12 @@ impl world::World for World {
                             map.insert(Item::Fast_Travel, 1);
                         }
                         if let Some(val) = map.get_mut(&Item::Flask) {
-                            *val = std::cmp::max(*val, 13);
+                            *val = std::cmp::max(*val, 14);
                         } else {
-                            map.insert(Item::Flask, 13);
+                            map.insert(Item::Flask, 14);
+                        }
+                        if !map.contains_key(&Item::Hammond_Auth) {
+                            map.insert(Item::Hammond_Auth, 1);
                         }
                         if let Some(val) = map.get_mut(&Item::Health_Fragment) {
                             *val = std::cmp::max(*val, 6);
@@ -14272,6 +14448,9 @@ impl world::World for World {
                         }
                         if !map.contains_key(&Item::Terminal_Breakthrough_2) {
                             map.insert(Item::Terminal_Breakthrough_2, 1);
+                        }
+                        if !map.contains_key(&Item::The_Eternal_Arm) {
+                            map.insert(Item::The_Eternal_Arm, 1);
                         }
                         if !map.contains_key(&Item::The_Ideal_Kiengir) {
                             map.insert(Item::The_Ideal_Kiengir, 1);
@@ -14344,9 +14523,12 @@ impl world::World for World {
                         map.insert(Item::Fast_Travel, 1);
                     }
                     if let Some(val) = map.get_mut(&Item::Flask) {
-                        *val = std::cmp::max(*val, 13);
+                        *val = std::cmp::max(*val, 14);
                     } else {
-                        map.insert(Item::Flask, 13);
+                        map.insert(Item::Flask, 14);
+                    }
+                    if !map.contains_key(&Item::Hammond_Auth) {
+                        map.insert(Item::Hammond_Auth, 1);
                     }
                     if let Some(val) = map.get_mut(&Item::Health_Fragment) {
                         *val = std::cmp::max(*val, 6);
@@ -14409,6 +14591,9 @@ impl world::World for World {
                     }
                     if !map.contains_key(&Item::Terminal_Breakthrough_2) {
                         map.insert(Item::Terminal_Breakthrough_2, 1);
+                    }
+                    if !map.contains_key(&Item::The_Eternal_Arm) {
+                        map.insert(Item::The_Eternal_Arm, 1);
                     }
                     if !map.contains_key(&Item::The_Ideal_Kiengir) {
                         map.insert(Item::The_Ideal_Kiengir, 1);
@@ -14718,6 +14903,19 @@ impl world::World for World {
             | SpotId::Ebih__Waterfall__West_7
             | SpotId::Ebih__Waterfall__West_8
             | SpotId::Ebih__Waterfall__West_9
+            | SpotId::Filter__Core__Terminal_East
+            | SpotId::Filter__Core__West
+            | SpotId::Filter__Entrance__East
+            | SpotId::Filter__Exit__East
+            | SpotId::Filter__Exit__Egg
+            | SpotId::Filter__Lower_Hallway__East
+            | SpotId::Filter__Lower_Hallway__West
+            | SpotId::Filter__Scaffolding__Catwalk_Hook_Point
+            | SpotId::Filter__Scaffolding__Lower_West
+            | SpotId::Filter__Scaffolding__Upper_West
+            | SpotId::Filter__Upper_Hallway__Corner
+            | SpotId::Filter__Upper_Hallway__East
+            | SpotId::Filter__Upper_Hallway__West
             | SpotId::Giguna__Antechamber__East_16
             | SpotId::Giguna__Antechamber__Statue_Head
             | SpotId::Giguna__Antechamber__West_15
@@ -15041,6 +15239,7 @@ impl world::World for World {
             | SpotId::Menu__Kiengir_Map__Annuna_Center_Save
             | SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance
             | SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match
+            | SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room
             | SpotId::Menu__Kiengir_Map__Ebih_Base_Camp
             | SpotId::Menu__Kiengir_Map__Ebih_West_Lower
             | SpotId::Menu__Kiengir_Map__Ebih_West_Mid
@@ -15234,7 +15433,6 @@ impl World {
                             | Item::Refill
                             | Item::Royal_Dagger
                             | Item::Royal_Ring
-                            | Item::The_Eternal_Arm
                             | Item::Udusan
                     )
                 }
@@ -15315,7 +15513,6 @@ impl World {
                             | Item::Refill
                             | Item::Royal_Dagger
                             | Item::Royal_Ring
-                            | Item::The_Eternal_Arm
                             | Item::Udusan
                     )
                 }
@@ -15687,14 +15884,6 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
             item: Item::Power_Core,
             price: Currency::Free,
             time: 0,
-            exit_id: None,
-        },
-        LocationId::Annuna__Filter_Teleporter__Egg__Authorize_Hammond => Location {
-            id: LocationId::Annuna__Filter_Teleporter__Egg__Authorize_Hammond,
-            canonical: CanonId::Authorize_Hammond,
-            item: Item::Hammond_Auth,
-            price: Currency::Free,
-            time: 60000,
             exit_id: None,
         },
         LocationId::Annuna__Filter_Teleporter__Door_Ledge__Shockwave_Flask => Location {
@@ -16087,6 +16276,14 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
             item: Item::Ebih_Interchange_Gate,
             price: Currency::Free,
             time: 250,
+            exit_id: None,
+        },
+        LocationId::Filter__Core__Terminal_East__Authorize_Hammond => Location {
+            id: LocationId::Filter__Core__Terminal_East__Authorize_Hammond,
+            canonical: CanonId::None,
+            item: Item::Hammond_Auth,
+            price: Currency::Free,
+            time: 500,
             exit_id: None,
         },
         LocationId::Giguna_Breach__Chimney__Cache__Flask => Location {
@@ -18804,6 +19001,13 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
             price: Currency::Free,
             loc_id: None,
         },
+        ExitId::Annuna__Filter_Teleporter__Egg__ex__Filter__Entrance__Egg_1 => Exit {
+            id: ExitId::Annuna__Filter_Teleporter__Egg__ex__Filter__Entrance__Egg_1,
+            time: 13000,
+            dest: SpotId::Filter__Entrance__Egg,
+            price: Currency::Free,
+            loc_id: None,
+        },
         ExitId::Annuna__Filter_Teleporter__Door_Ledge__ex__Egg_1 => Exit {
             id: ExitId::Annuna__Filter_Teleporter__Door_Ledge__ex__Egg_1,
             time: 1754,
@@ -21118,6 +21322,125 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
             id: ExitId::Ebih__Gem_Room__West_13__ex__Vertical_Interchange__East_13_1,
             time: 1350,
             dest: SpotId::Ebih__Vertical_Interchange__East_13,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Filter__Entrance__East__ex__Lower_Hallway__West_1 => Exit {
+            id: ExitId::Filter__Entrance__East__ex__Lower_Hallway__West_1,
+            time: 1350,
+            dest: SpotId::Filter__Lower_Hallway__West,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Filter__Lower_Hallway__West__ex__Entrance__East_1 => Exit {
+            id: ExitId::Filter__Lower_Hallway__West__ex__Entrance__East_1,
+            time: 1350,
+            dest: SpotId::Filter__Entrance__East,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Filter__Lower_Hallway__West__ex__East_1 => Exit {
+            id: ExitId::Filter__Lower_Hallway__West__ex__East_1,
+            time: 2250,
+            dest: SpotId::Filter__Lower_Hallway__East,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Filter__Lower_Hallway__East__ex__Scaffolding__Lower_West_1 => Exit {
+            id: ExitId::Filter__Lower_Hallway__East__ex__Scaffolding__Lower_West_1,
+            time: 1350,
+            dest: SpotId::Filter__Scaffolding__Lower_West,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Filter__Scaffolding__Lower_West__ex__Lower_Hallway__East_1 => Exit {
+            id: ExitId::Filter__Scaffolding__Lower_West__ex__Lower_Hallway__East_1,
+            time: 1350,
+            dest: SpotId::Filter__Lower_Hallway__East,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Filter__Scaffolding__Catwalk_Hook_Point__ex__Upper_Hallway__Corner_1 => Exit {
+            id: ExitId::Filter__Scaffolding__Catwalk_Hook_Point__ex__Upper_Hallway__Corner_1,
+            time: 3475,
+            dest: SpotId::Filter__Upper_Hallway__Corner,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Filter__Scaffolding__Upper_West__ex__Upper_Hallway__East_1 => Exit {
+            id: ExitId::Filter__Scaffolding__Upper_West__ex__Upper_Hallway__East_1,
+            time: 1350,
+            dest: SpotId::Filter__Upper_Hallway__East,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Filter__Upper_Hallway__East__ex__Scaffolding__Upper_West_1 => Exit {
+            id: ExitId::Filter__Upper_Hallway__East__ex__Scaffolding__Upper_West_1,
+            time: 1350,
+            dest: SpotId::Filter__Scaffolding__Upper_West,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Filter__Upper_Hallway__Corner__ex__Core__Bottom_1 => Exit {
+            id: ExitId::Filter__Upper_Hallway__Corner__ex__Core__Bottom_1,
+            time: 3350,
+            dest: SpotId::Filter__Core__Bottom,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Filter__Upper_Hallway__West__ex__Core__East_1 => Exit {
+            id: ExitId::Filter__Upper_Hallway__West__ex__Core__East_1,
+            time: 1350,
+            dest: SpotId::Filter__Core__East,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Filter__Core__Bottom__ex__Terminal_East_1 => Exit {
+            id: ExitId::Filter__Core__Bottom__ex__Terminal_East_1,
+            time: 2280,
+            dest: SpotId::Filter__Core__Terminal_East,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Filter__Core__Terminal_East__ex__Catwalk_West_1 => Exit {
+            id: ExitId::Filter__Core__Terminal_East__ex__Catwalk_West_1,
+            time: 2250,
+            dest: SpotId::Filter__Core__Catwalk_West,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Filter__Core__Terminal_West__ex__West_1 => Exit {
+            id: ExitId::Filter__Core__Terminal_West__ex__West_1,
+            time: 4210,
+            dest: SpotId::Filter__Core__West,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Filter__Core__Catwalk_West__ex__West_1 => Exit {
+            id: ExitId::Filter__Core__Catwalk_West__ex__West_1,
+            time: 2631,
+            dest: SpotId::Filter__Core__West,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Filter__Core__West__ex__Exit__East_1 => Exit {
+            id: ExitId::Filter__Core__West__ex__Exit__East_1,
+            time: 1350,
+            dest: SpotId::Filter__Exit__East,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Filter__Exit__East__ex__Core__West_1 => Exit {
+            id: ExitId::Filter__Exit__East__ex__Core__West_1,
+            time: 1350,
+            dest: SpotId::Filter__Core__West,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Filter__Exit__Egg__ex__Annuna__Filter_Teleporter__Egg_1 => Exit {
+            id: ExitId::Filter__Exit__Egg__ex__Annuna__Filter_Teleporter__Egg_1,
+            time: 13000,
+            dest: SpotId::Annuna__Filter_Teleporter__Egg,
             price: Currency::Free,
             loc_id: None,
         },
@@ -25388,6 +25711,13 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
             id: ExitId::Menu__Kiengir_Map__Annuna_Mirror_Match__ex__Annuna__Mirror_Match__Save_Point_1,
             time: 12000,
             dest: SpotId::Annuna__Mirror_Match__Save_Point,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Menu__Kiengir_Map__Annuna_Vertical_Room__ex__Annuna__Vertical_Room__Save_Point_1 => Exit {
+            id: ExitId::Menu__Kiengir_Map__Annuna_Vertical_Room__ex__Annuna__Vertical_Room__Save_Point_1,
+            time: 12000,
+            dest: SpotId::Annuna__Vertical_Room__Save_Point,
             price: Currency::Free,
             loc_id: None,
         },
@@ -30210,12 +30540,11 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
         SpotId::Annuna__Filter_Teleporter__Egg => Spot {
             id: SpotId::Annuna__Filter_Teleporter__Egg,
             locations: Range {
-                start: LocationId::Annuna__Filter_Teleporter__Egg__Authorize_Hammond.into_usize(),
-                end: LocationId::Annuna__Filter_Teleporter__Egg__Authorize_Hammond.into_usize() + 1,
+                start: 0, end: 0,
             },
             exits: Range {
                 start: ExitId::Annuna__Filter_Teleporter__Egg__ex__Door_Ledge_1.into_usize(),
-                end: ExitId::Annuna__Filter_Teleporter__Egg__ex__East_Platform_3_1.into_usize() + 1,
+                end: ExitId::Annuna__Filter_Teleporter__Egg__ex__Filter__Entrance__Egg_1.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
@@ -34166,6 +34495,275 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             exits: Range {
                 start: ExitId::Ebih__Gem_Room__West_13__ex__Vertical_Interchange__East_13_1.into_usize(),
                 end: ExitId::Ebih__Gem_Room__West_13__ex__Vertical_Interchange__East_13_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Filter__Entrance__Egg => Spot {
+            id: SpotId::Filter__Entrance__Egg,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Filter__Entrance__East => Spot {
+            id: SpotId::Filter__Entrance__East,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Filter__Entrance__East__ex__Lower_Hallway__West_1.into_usize(),
+                end: ExitId::Filter__Entrance__East__ex__Lower_Hallway__West_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Filter__Lower_Hallway__West => Spot {
+            id: SpotId::Filter__Lower_Hallway__West,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Filter__Lower_Hallway__West__ex__East_1.into_usize(),
+                end: ExitId::Filter__Lower_Hallway__West__ex__Entrance__East_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Filter__Lower_Hallway__East => Spot {
+            id: SpotId::Filter__Lower_Hallway__East,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Filter__Lower_Hallway__East__ex__Scaffolding__Lower_West_1.into_usize(),
+                end: ExitId::Filter__Lower_Hallway__East__ex__Scaffolding__Lower_West_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Filter__Scaffolding__Lower_West => Spot {
+            id: SpotId::Filter__Scaffolding__Lower_West,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Filter__Scaffolding__Lower_West__ex__Lower_Hallway__East_1.into_usize(),
+                end: ExitId::Filter__Scaffolding__Lower_West__ex__Lower_Hallway__East_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Filter__Scaffolding__P1 => Spot {
+            id: SpotId::Filter__Scaffolding__P1,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Filter__Scaffolding__P2 => Spot {
+            id: SpotId::Filter__Scaffolding__P2,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Filter__Scaffolding__Catwalk_Hook_Point => Spot {
+            id: SpotId::Filter__Scaffolding__Catwalk_Hook_Point,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Filter__Scaffolding__Catwalk_Hook_Point__ex__Upper_Hallway__Corner_1.into_usize(),
+                end: ExitId::Filter__Scaffolding__Catwalk_Hook_Point__ex__Upper_Hallway__Corner_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Filter__Scaffolding__Upper_West => Spot {
+            id: SpotId::Filter__Scaffolding__Upper_West,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Filter__Scaffolding__Upper_West__ex__Upper_Hallway__East_1.into_usize(),
+                end: ExitId::Filter__Scaffolding__Upper_West__ex__Upper_Hallway__East_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Filter__Upper_Hallway__East => Spot {
+            id: SpotId::Filter__Upper_Hallway__East,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Filter__Upper_Hallway__East__ex__Scaffolding__Upper_West_1.into_usize(),
+                end: ExitId::Filter__Upper_Hallway__East__ex__Scaffolding__Upper_West_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Filter__Upper_Hallway__Corner => Spot {
+            id: SpotId::Filter__Upper_Hallway__Corner,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Filter__Upper_Hallway__Corner__ex__Core__Bottom_1.into_usize(),
+                end: ExitId::Filter__Upper_Hallway__Corner__ex__Core__Bottom_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Filter__Upper_Hallway__West => Spot {
+            id: SpotId::Filter__Upper_Hallway__West,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Filter__Upper_Hallway__West__ex__Core__East_1.into_usize(),
+                end: ExitId::Filter__Upper_Hallway__West__ex__Core__East_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Filter__Core__East => Spot {
+            id: SpotId::Filter__Core__East,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Filter__Core__Bottom => Spot {
+            id: SpotId::Filter__Core__Bottom,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Filter__Core__Bottom__ex__Terminal_East_1.into_usize(),
+                end: ExitId::Filter__Core__Bottom__ex__Terminal_East_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Filter__Core__Terminal_East => Spot {
+            id: SpotId::Filter__Core__Terminal_East,
+            locations: Range {
+                start: LocationId::Filter__Core__Terminal_East__Authorize_Hammond.into_usize(),
+                end: LocationId::Filter__Core__Terminal_East__Authorize_Hammond.into_usize() + 1,
+            },
+            exits: Range {
+                start: ExitId::Filter__Core__Terminal_East__ex__Catwalk_West_1.into_usize(),
+                end: ExitId::Filter__Core__Terminal_East__ex__Catwalk_West_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Filter__Core__Terminal_West => Spot {
+            id: SpotId::Filter__Core__Terminal_West,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Filter__Core__Terminal_West__ex__West_1.into_usize(),
+                end: ExitId::Filter__Core__Terminal_West__ex__West_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Filter__Core__Catwalk_West => Spot {
+            id: SpotId::Filter__Core__Catwalk_West,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Filter__Core__Catwalk_West__ex__West_1.into_usize(),
+                end: ExitId::Filter__Core__Catwalk_West__ex__West_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Filter__Core__West => Spot {
+            id: SpotId::Filter__Core__West,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Filter__Core__West__ex__Exit__East_1.into_usize(),
+                end: ExitId::Filter__Core__West__ex__Exit__East_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Filter__Exit__East => Spot {
+            id: SpotId::Filter__Exit__East,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Filter__Exit__East__ex__Core__West_1.into_usize(),
+                end: ExitId::Filter__Exit__East__ex__Core__West_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Filter__Exit__Ledge => Spot {
+            id: SpotId::Filter__Exit__Ledge,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Filter__Exit__Egg => Spot {
+            id: SpotId::Filter__Exit__Egg,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Filter__Exit__Egg__ex__Annuna__Filter_Teleporter__Egg_1.into_usize(),
+                end: ExitId::Filter__Exit__Egg__ex__Annuna__Filter_Teleporter__Egg_1.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
@@ -43104,7 +43702,8 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             exits: Range {
-                start: 0, end: 0,
+                start: ExitId::Menu__Kiengir_Map__Annuna_Vertical_Room__ex__Annuna__Vertical_Room__Save_Point_1.into_usize(),
+                end: ExitId::Menu__Kiengir_Map__Annuna_Vertical_Room__ex__Annuna__Vertical_Room__Save_Point_1.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,

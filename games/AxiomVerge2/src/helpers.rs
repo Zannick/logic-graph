@@ -1778,7 +1778,7 @@ macro_rules! hobserve__attract {
 }
 
 /// $all_notes (  )
-/// [Dear_Ernest, Researchers_Missing, Letter_from_Trace,  Heretics_Tablet, Terminal_Breakthrough_1, Companies_Layoff, Record_Losses,  Under_Siege, The_Ideal_Kiengir, Building_of_the_School, Commemorative_Speech,  Terminal_Breakthrough_2, Dangerous_Ideas, Storm_Bomb, Suspension_Bridge, Plague_of_Thoughts,  Lament_for_Fools, Family_Tragedy, Destruction_Pogrom]
+/// [Dear_Ernest, Researchers_Missing, Letter_from_Trace,  Heretics_Tablet, Terminal_Breakthrough_1, Companies_Layoff, Record_Losses,  Under_Siege, The_Ideal_Kiengir, Building_of_the_School, Commemorative_Speech,  Terminal_Breakthrough_2, Dangerous_Ideas, Storm_Bomb, Suspension_Bridge, Plague_of_Thoughts,  Lament_for_Fools, Family_Tragedy, Destruction_Pogrom, The_Eternal_Arm]
 #[macro_export]
 macro_rules! helper__all_notes {
     ($ctx:expr, $world:expr) => {{
@@ -1801,6 +1801,7 @@ macro_rules! helper__all_notes {
             && $ctx.has(Item::Lament_for_Fools)
             && $ctx.has(Item::Family_Tragedy)
             && $ctx.has(Item::Destruction_Pogrom)
+            && $ctx.has(Item::The_Eternal_Arm)
     }};
 }
 #[macro_export]
@@ -1976,6 +1977,15 @@ macro_rules! hexplain__all_notes {
                 (h, vec!["Destruction_Pogrom"])
             };
             refs.append(&mut h.1);
+            if !h.0 {
+                return (false, refs);
+            };
+            let mut h = {
+                let h = $ctx.has(Item::The_Eternal_Arm);
+                $edict.insert("The_Eternal_Arm", format!("{}", h));
+                (h, vec!["The_Eternal_Arm"])
+            };
+            refs.append(&mut h.1);
             (h.0, refs)
         }
     }};
@@ -2040,16 +2050,19 @@ macro_rules! hobserve__all_notes {
         }) && ({
             $full_obs.observe_destruction_pogrom();
             $ctx.has(Item::Destruction_Pogrom)
+        }) && ({
+            $full_obs.observe_the_eternal_arm();
+            $ctx.has(Item::The_Eternal_Arm)
         })
     }};
 }
 
 /// $all_flasks (  )
-/// [Flask{13}, Big_Flask]
+/// [Flask{14}, Big_Flask]
 #[macro_export]
 macro_rules! helper__all_flasks {
     ($ctx:expr, $world:expr) => {{
-        $ctx.count(Item::Flask) >= 13 && $ctx.has(Item::Big_Flask)
+        $ctx.count(Item::Flask) >= 14 && $ctx.has(Item::Big_Flask)
     }};
 }
 #[macro_export]
@@ -2060,7 +2073,7 @@ macro_rules! hexplain__all_flasks {
             let mut h = {
                 let ct = $ctx.count(Item::Flask);
                 $edict.insert("Flask count", format!("{}", ct));
-                (ct >= 13, vec!["Flask count"])
+                (ct >= 14, vec!["Flask count"])
             };
             refs.append(&mut h.1);
             if !h.0 {
@@ -2080,8 +2093,8 @@ macro_rules! hexplain__all_flasks {
 macro_rules! hobserve__all_flasks {
     ($ctx:expr, $world:expr, $full_obs:expr) => {{
         ({
-            $full_obs.observe_flask(IntegerObservation::Ge(13));
-            $ctx.count(Item::Flask) >= 13
+            $full_obs.observe_flask(IntegerObservation::Ge(14));
+            $ctx.count(Item::Flask) >= 14
         }) && ({
             $full_obs.observe_big_flask();
             $ctx.has(Item::Big_Flask)
@@ -2663,11 +2676,11 @@ macro_rules! rule__objective {
     ($ctx:expr, $world:expr) => {{
         use $crate::rules;
         match $world.rule_objective {
-            RuleObjective::Start => rules::access___remote_drone($ctx, $world),
+            RuleObjective::Start => {
+                rules::access___remote_drone($ctx, $world)
+            }
             RuleObjective::AllItems => {
-                rules::access___all_urns_all_weapons_other_items_all_notes_all_health_all_flasks(
-                    $ctx, $world,
-                )
+                rules::access___all_urns_all_weapons_other_items_all_notes_all_health_all_flasks_hammond_auth($ctx, $world)
             }
         }
     }};
@@ -2677,11 +2690,11 @@ macro_rules! rexplain__objective {
     ($ctx:expr, $world:expr, $edict:expr) => {{
         use $crate::rules;
         match $world.rule_objective {
-            RuleObjective::Start => rules::explain___remote_drone($ctx, $world, $edict),
+            RuleObjective::Start => {
+                rules::explain___remote_drone($ctx, $world, $edict)
+            }
             RuleObjective::AllItems => {
-                rules::explain___all_urns_all_weapons_other_items_all_notes_all_health_all_flasks(
-                    $ctx, $world, $edict,
-                )
+                rules::explain___all_urns_all_weapons_other_items_all_notes_all_health_all_flasks_hammond_auth($ctx, $world, $edict)
             }
         }
     }};
@@ -2695,7 +2708,7 @@ macro_rules! robserve__objective {
                 rules::observe_access___remote_drone($ctx, $world, $full_obs)
             }
             RuleObjective::AllItems => {
-                rules::observe_access___all_urns_all_weapons_other_items_all_notes_all_health_all_flasks($ctx, $world, $full_obs)
+                rules::observe_access___all_urns_all_weapons_other_items_all_notes_all_health_all_flasks_hammond_auth($ctx, $world, $full_obs)
             }
         }
     }};

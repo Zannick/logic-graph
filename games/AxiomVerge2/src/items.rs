@@ -517,7 +517,6 @@ pub fn unused_item(id: Item) -> bool {
             | Item::Refill
             | Item::Royal_Dagger
             | Item::Royal_Ring
-            | Item::The_Eternal_Arm
             | Item::Udusan
     )
 }

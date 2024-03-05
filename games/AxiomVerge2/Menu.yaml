@@ -318,6 +318,14 @@ areas:
       coord: [39, 17]
     - name: Annuna Vertical Room
       coord: [40, 20]
+      exits:
+        - to: Annuna > Vertical Room > Save Point
+          req: ^map__annuna__vertical_room__save
+          time: 12
+          penalties:
+            - when: ^mode != 'drone'
+              add: 2.5
+          tags: [warp]
     - name: Annuna West Bridge
       coord: [36, 27]
     - name: Apocalypse

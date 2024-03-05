@@ -653,6 +653,41 @@ subgraph Ebih
         Ebih__Gem_Room__West_13(West 13);
     end
 end
+subgraph Filter
+    subgraph Filter__Entrance[Entrance]
+        Filter__Entrance__Egg(Egg);
+        Filter__Entrance__East(East);
+    end
+    subgraph Filter__Lower_Hallway[Lower Hallway]
+        Filter__Lower_Hallway__West(West);
+        Filter__Lower_Hallway__East(East);
+    end
+    subgraph Filter__Scaffolding[Scaffolding]
+        Filter__Scaffolding__Lower_West(Lower West);
+        Filter__Scaffolding__P1(P1);
+        Filter__Scaffolding__P2(P2);
+        Filter__Scaffolding__Catwalk_Hook_Point(Catwalk Hook Point);
+        Filter__Scaffolding__Upper_West(Upper West);
+    end
+    subgraph Filter__Upper_Hallway[Upper Hallway]
+        Filter__Upper_Hallway__East(East);
+        Filter__Upper_Hallway__Corner(Corner);
+        Filter__Upper_Hallway__West(West);
+    end
+    subgraph Filter__Core[Core]
+        Filter__Core__East(East);
+        Filter__Core__Bottom(Bottom);
+        Filter__Core__Terminal_East(Terminal East);
+        Filter__Core__Terminal_West(Terminal West);
+        Filter__Core__Catwalk_West(Catwalk West);
+        Filter__Core__West(West);
+    end
+    subgraph Filter__Exit[Exit]
+        Filter__Exit__East(East);
+        Filter__Exit__Ledge(Ledge);
+        Filter__Exit__Egg(Egg);
+    end
+end
 subgraph Giguna_Breach
     subgraph Giguna_Breach__Peak[Peak]
         Giguna_Breach__Peak__Save_Point(Save Point);
@@ -1846,6 +1881,7 @@ Annuna__Filter_Teleporter__Door_Ledge <--> Annuna__Filter_Teleporter__Shaft_Bott
 Annuna__Filter_Teleporter__East_Platform_3 --> Annuna__Filter_Teleporter__East_Platform_4
 Annuna__Filter_Teleporter__East_Platform_4 --> Annuna__Filter_Teleporter__Northeast_Ministair
 Annuna__Filter_Teleporter__Egg --> Annuna__Filter_Teleporter__East_Platform_3
+Annuna__Filter_Teleporter__Egg --> Filter__Entrance__Egg
 Annuna__Filter_Teleporter__Northeast_Ministair --> Annuna__Filter_Teleporter__Northeast_Cubby
 Annuna__Filter_Teleporter__Shaft_Bottom --> Annuna__Filter_Teleporter__Shaft_Upper_Platform
 Annuna__Filter_Teleporter__Shaft_Upper_Platform --> Annuna__Filter_Teleporter__Shaft_Top
@@ -2077,6 +2113,19 @@ Ebih__Waterfall__Wall_Right --> Ebih__Waterfall__Lower_West_Tree
 Ebih__Waterfall__West_Climb --> Ebih__Waterfall__Ledge_Below_Hole
 Ebih__Waterfall__West_Door <--> Ebih__Waterfall__West_Door_Left
 Ebih__Waterfall__West_Door <--> Ebih__Waterfall__West_Door_Right
+Filter__Core__Bottom --> Filter__Core__Terminal_East
+Filter__Core__Catwalk_West --> Filter__Core__West
+Filter__Core__Terminal_East --> Filter__Core__Catwalk_West
+Filter__Core__Terminal_West --> Filter__Core__West
+Filter__Core__West <--> Filter__Exit__East
+Filter__Entrance__East <--> Filter__Lower_Hallway__West
+Filter__Exit__Egg --> Annuna__Filter_Teleporter__Egg
+Filter__Lower_Hallway__East <--> Filter__Scaffolding__Lower_West
+Filter__Lower_Hallway__West --> Filter__Lower_Hallway__East
+Filter__Scaffolding__Catwalk_Hook_Point --> Filter__Upper_Hallway__Corner
+Filter__Scaffolding__Upper_West <--> Filter__Upper_Hallway__East
+Filter__Upper_Hallway__Corner --> Filter__Core__Bottom
+Filter__Upper_Hallway__West --> Filter__Core__East
 Giguna_Breach__Antechamber__North <--> Giguna_Breach__Fire_Room__South
 Giguna_Breach__Ascent__Bottom --> Giguna_Breach__Ascent__Top
 Giguna_Breach__Ascent__West_6 <--> Giguna_Breach__Peak__East_6
@@ -2470,6 +2519,7 @@ Menu__Kiengir_Map__Amagi_Main_Area --> Amagi__Main_Area__Save_Point
 Menu__Kiengir_Map__Annuna_Center_Save --> Annuna__Center_Save__Save_Point
 Menu__Kiengir_Map__Annuna_Factory_Entrance --> Annuna__Factory_Entrance__Save_Point
 Menu__Kiengir_Map__Annuna_Mirror_Match --> Annuna__Mirror_Match__Save_Point
+Menu__Kiengir_Map__Annuna_Vertical_Room --> Annuna__Vertical_Room__Save_Point
 Menu__Kiengir_Map__Ebih_Base_Camp --> Ebih__Base_Camp__Save_Point
 Menu__Kiengir_Map__Ebih_West_Lower --> Ebih__Ebih_West__Lower_Save
 Menu__Kiengir_Map__Ebih_West_Mid --> Ebih__Ebih_West__Mid_Save

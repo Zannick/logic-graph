@@ -1,0 +1,199 @@
+name: Filter
+data:
+  realm: filter
+
+areas:
+- name: Entrance
+  on_entry: $reset_old_area(^newpos)
+  spots:
+    - name: Egg
+      coord: [4.525, 18.35]
+      local:
+        - to: East
+    - name: East
+      coord: [4.95, 18.8]
+      local:
+        - to: Egg
+          jumps: 3
+      exits:
+        - to: Lower Hallway > West
+          tags: [xshift]
+
+- name: Lower Hallway
+  on_entry: $reset_old_area(^newpos)
+  spots:
+    - name: West
+      coord: [5.05, 18.8]
+      local:
+        - to: East
+          jumps: 1
+      exits:
+        - to: Entrance > East
+          tags: [xshift]
+        - to: East
+          req: $hook and $hover
+          movement: fast_hover
+          jumps: 1
+    - name: East
+      coord: [5.95, 18.75]
+      local:
+        - to: West
+      exits:
+        - to: Scaffolding > Lower West
+          tags: [xshift]
+
+- name: Scaffolding
+  on_entry: $reset_old_area(^newpos)
+  spots:
+    - name: Lower West
+      coord: [6.05, 18.75]
+      local:
+        - to: P1
+          jumps: 4
+      exits:
+        - to: Lower Hallway > East
+          tags: [xshift]
+    - name: P1
+      coord: [7.1, 17.95]
+      local:
+        - to: Lower West
+        - to: P2
+          jumps: 9
+    - name: P2
+      coord: [6.75, 16.15]
+      local:
+        - to: Lower West
+        - to: Catwalk Hook Point
+          jumps: 1
+    - name: Catwalk Hook Point
+      coord: [6.2, 15.95]
+      local:
+        - to: Lower West
+          jumps_down: 1
+        - to: Upper West
+          jumps: 1
+      exits:
+        - to: Upper Hallway > Corner
+          req: $hook and $hover
+          movement: fast_hover
+          jumps: 1
+          penalty_tags: [xshift, -fast_hover.1]
+    - name: Upper West
+      coord: [6.05, 15.8]
+      local:
+        - to: Catwalk Hook Point
+          jumps_down: 1
+      exits:
+        - to: Upper Hallway > East
+          tags: [xshift]
+
+- name: Upper Hallway
+  on_entry: $reset_old_area(^newpos)
+  spots:
+    - name: East
+      coord: [5.95, 15.8]
+      local:
+        - to: Corner
+      exits:
+        - to: Scaffolding > Upper West
+          tags: [xshift]
+    - name: Corner
+      coord: [5.25, 15.8]
+      local:
+        - to: East
+        - to: West
+          jumps: 1
+      exits:
+        - to: Core > Bottom
+          req: $hook and $hover
+          movement: fast_hover
+          jumps: 1
+          penalty_tags: [xshift, -fast_hover.1]
+    - name: West
+      coord: [5.05, 15.75]
+      local:
+        - to: Corner
+      exits:
+        - to: Core > East
+          tags: [xshift]
+
+- name: Core
+  on_entry: $reset_old_area(^newpos)
+  spots:
+    - name: East
+      coord: [4.95, 15.75]
+      local:
+        - to: Bottom
+        - to: Terminal East
+          jumps: 6
+    - name: Bottom
+      coord: [4.35, 15.75]
+      exits:
+        - to: Terminal East
+          req: $hook
+          movement: base
+          jumps: 3
+    - name: Terminal East
+      coord: [3.7, 14.55]
+      local:
+        - to: East
+          jumps_down: 1
+        - to: Terminal West
+      locations:
+        - name: Authorize Hammond
+          item: Hammond_Auth
+          req: $activate
+          tags: [hack, event]
+      exits:
+        - to: Catwalk West
+          req: $hook and $hover
+          movement: fast_hover
+    - name: Terminal West
+      coord: [3.25, 14.55]
+      local:
+        - to: Terminal East
+        - to: Catwalk West
+      exits:
+        - to: West
+          req: Hammond_Auth
+          movement: base
+          jumps_down: 1
+    - name: Catwalk West
+      coord: [2.8, 14.55]
+      local:
+        - to: Terminal West
+      exits:
+        - to: West
+          req: Hammond_Auth
+          movement: base
+          jumps_down: 1
+    - name: West
+      coord: [2.05, 15.75]
+      local:
+        - to: Terminal West
+          jumps: 6
+      exits:
+        - to: Exit > East
+          tags: [xshift]
+
+- name: Exit
+  on_entry: $reset_old_area(^newpos)
+  spots:
+    - name: East
+      coord: [1.95, 15.75]
+      local:
+        - to: Ledge
+      exits:
+        - to: Core > West
+          tags: [xshift]
+    - name: Ledge
+      coord: [1.8, 15.75]
+      local:
+        - to: East
+        - to: Egg
+    - name: Egg
+      coord: [1.525, 16.35]
+      exits:
+        - to: Annuna > Filter Teleporter > Egg
+          time: 13
+          tags: [warp]

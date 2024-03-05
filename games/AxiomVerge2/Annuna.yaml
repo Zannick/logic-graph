@@ -1623,14 +1623,6 @@ areas:
       coord: [44.0, 20.0]
       local:
         - to: Stair Top
-      # TODO: replace with exit to the Filter
-      locations:
-        - name: Authorize Hammond
-          canon: Authorize Hammond
-          item: Hammond_Auth
-          req: $activate
-          tags: [hack, event]
-          time: 60
       exits:
         - to: Door Ledge
           req: $hook
@@ -1639,6 +1631,10 @@ areas:
           req: $hook and $hover
           movement: base
           jumps: 3
+        - to: Filter > Entrance > Egg
+          req: not Hammond_Auth
+          time: 13
+          tags: [warp]
     - name: Door Ledge
       coord: [43.5, 20.1]
       local:

@@ -25,6 +25,7 @@ pub enum RegionId {
     Annuna,
     Antarctica,
     Ebih,
+    Filter,
     Giguna,
     Giguna_Breach,
     Glacier,
@@ -41,6 +42,7 @@ impl fmt::Display for RegionId {
             RegionId::Annuna => write!(f, "{}", "Annuna Gorge"),
             RegionId::Antarctica => write!(f, "{}", "Antarctica"),
             RegionId::Ebih => write!(f, "{}", "Mt Ebih"),
+            RegionId::Filter => write!(f, "{}", "Filter"),
             RegionId::Giguna => write!(f, "{}", "Giguna Steppes"),
             RegionId::Giguna_Breach => write!(f, "{}", "Giguna Breach"),
             RegionId::Glacier => write!(f, "{}", "Glacier"),
@@ -62,6 +64,7 @@ impl std::str::FromStr for RegionId {
             "Annuna Gorge" => Ok(RegionId::Annuna),
             "Antarctica" => Ok(RegionId::Antarctica),
             "Mt Ebih" => Ok(RegionId::Ebih),
+            "Filter" => Ok(RegionId::Filter),
             "Giguna Steppes" => Ok(RegionId::Giguna),
             "Giguna Breach" => Ok(RegionId::Giguna_Breach),
             "Glacier" => Ok(RegionId::Glacier),
@@ -141,6 +144,12 @@ pub enum AreaId {
     Ebih__Observation_Tower_Room,
     Ebih__Vertical_Interchange,
     Ebih__Waterfall,
+    Filter__Core,
+    Filter__Entrance,
+    Filter__Exit,
+    Filter__Lower_Hallway,
+    Filter__Scaffolding,
+    Filter__Upper_Hallway,
     Giguna__Antechamber,
     Giguna__Breachable_Wall,
     Giguna__Carnelian,
@@ -300,6 +309,12 @@ impl fmt::Display for AreaId {
             }
             AreaId::Ebih__Vertical_Interchange => write!(f, "{}", "Ebih > Vertical Interchange"),
             AreaId::Ebih__Waterfall => write!(f, "{}", "Ebih > Waterfall"),
+            AreaId::Filter__Core => write!(f, "{}", "Filter > Core"),
+            AreaId::Filter__Entrance => write!(f, "{}", "Filter > Entrance"),
+            AreaId::Filter__Exit => write!(f, "{}", "Filter > Exit"),
+            AreaId::Filter__Lower_Hallway => write!(f, "{}", "Filter > Lower Hallway"),
+            AreaId::Filter__Scaffolding => write!(f, "{}", "Filter > Scaffolding"),
+            AreaId::Filter__Upper_Hallway => write!(f, "{}", "Filter > Upper Hallway"),
             AreaId::Giguna__Antechamber => write!(f, "{}", "Giguna > Antechamber"),
             AreaId::Giguna__Breachable_Wall => write!(f, "{}", "Giguna > Breachable Wall"),
             AreaId::Giguna__Carnelian => write!(f, "{}", "Giguna > Carnelian"),
@@ -478,6 +493,12 @@ impl std::str::FromStr for AreaId {
             "Ebih > Observation Tower Room" => Ok(AreaId::Ebih__Observation_Tower_Room),
             "Ebih > Vertical Interchange" => Ok(AreaId::Ebih__Vertical_Interchange),
             "Ebih > Waterfall" => Ok(AreaId::Ebih__Waterfall),
+            "Filter > Core" => Ok(AreaId::Filter__Core),
+            "Filter > Entrance" => Ok(AreaId::Filter__Entrance),
+            "Filter > Exit" => Ok(AreaId::Filter__Exit),
+            "Filter > Lower Hallway" => Ok(AreaId::Filter__Lower_Hallway),
+            "Filter > Scaffolding" => Ok(AreaId::Filter__Scaffolding),
+            "Filter > Upper Hallway" => Ok(AreaId::Filter__Upper_Hallway),
             "Giguna > Antechamber" => Ok(AreaId::Giguna__Antechamber),
             "Giguna > Breachable Wall" => Ok(AreaId::Giguna__Breachable_Wall),
             "Giguna > Carnelian" => Ok(AreaId::Giguna__Carnelian),
@@ -1143,6 +1164,27 @@ pub enum SpotId {
     Ebih__Waterfall__West_Door_Right,
     Ebih__Waterfall__West_Lower_Path,
     Ebih__Waterfall__West_Main_Path,
+    Filter__Core__Bottom,
+    Filter__Core__Catwalk_West,
+    Filter__Core__East,
+    Filter__Core__Terminal_East,
+    Filter__Core__Terminal_West,
+    Filter__Core__West,
+    Filter__Entrance__East,
+    Filter__Entrance__Egg,
+    Filter__Exit__East,
+    Filter__Exit__Egg,
+    Filter__Exit__Ledge,
+    Filter__Lower_Hallway__East,
+    Filter__Lower_Hallway__West,
+    Filter__Scaffolding__Catwalk_Hook_Point,
+    Filter__Scaffolding__Lower_West,
+    Filter__Scaffolding__P1,
+    Filter__Scaffolding__P2,
+    Filter__Scaffolding__Upper_West,
+    Filter__Upper_Hallway__Corner,
+    Filter__Upper_Hallway__East,
+    Filter__Upper_Hallway__West,
     Giguna__Antechamber__Bottom,
     Giguna__Antechamber__East_16,
     Giguna__Antechamber__Left_Wall_Lower,
@@ -3322,6 +3364,35 @@ impl fmt::Display for SpotId {
             SpotId::Ebih__Waterfall__West_Main_Path => {
                 write!(f, "{}", "Ebih > Waterfall > West Main Path")
             }
+            SpotId::Filter__Core__Bottom => write!(f, "{}", "Filter > Core > Bottom"),
+            SpotId::Filter__Core__Catwalk_West => write!(f, "{}", "Filter > Core > Catwalk West"),
+            SpotId::Filter__Core__East => write!(f, "{}", "Filter > Core > East"),
+            SpotId::Filter__Core__Terminal_East => write!(f, "{}", "Filter > Core > Terminal East"),
+            SpotId::Filter__Core__Terminal_West => write!(f, "{}", "Filter > Core > Terminal West"),
+            SpotId::Filter__Core__West => write!(f, "{}", "Filter > Core > West"),
+            SpotId::Filter__Entrance__East => write!(f, "{}", "Filter > Entrance > East"),
+            SpotId::Filter__Entrance__Egg => write!(f, "{}", "Filter > Entrance > Egg"),
+            SpotId::Filter__Exit__East => write!(f, "{}", "Filter > Exit > East"),
+            SpotId::Filter__Exit__Egg => write!(f, "{}", "Filter > Exit > Egg"),
+            SpotId::Filter__Exit__Ledge => write!(f, "{}", "Filter > Exit > Ledge"),
+            SpotId::Filter__Lower_Hallway__East => write!(f, "{}", "Filter > Lower Hallway > East"),
+            SpotId::Filter__Lower_Hallway__West => write!(f, "{}", "Filter > Lower Hallway > West"),
+            SpotId::Filter__Scaffolding__Catwalk_Hook_Point => {
+                write!(f, "{}", "Filter > Scaffolding > Catwalk Hook Point")
+            }
+            SpotId::Filter__Scaffolding__Lower_West => {
+                write!(f, "{}", "Filter > Scaffolding > Lower West")
+            }
+            SpotId::Filter__Scaffolding__P1 => write!(f, "{}", "Filter > Scaffolding > P1"),
+            SpotId::Filter__Scaffolding__P2 => write!(f, "{}", "Filter > Scaffolding > P2"),
+            SpotId::Filter__Scaffolding__Upper_West => {
+                write!(f, "{}", "Filter > Scaffolding > Upper West")
+            }
+            SpotId::Filter__Upper_Hallway__Corner => {
+                write!(f, "{}", "Filter > Upper Hallway > Corner")
+            }
+            SpotId::Filter__Upper_Hallway__East => write!(f, "{}", "Filter > Upper Hallway > East"),
+            SpotId::Filter__Upper_Hallway__West => write!(f, "{}", "Filter > Upper Hallway > West"),
             SpotId::Giguna__Antechamber__Bottom => write!(f, "{}", "Giguna > Antechamber > Bottom"),
             SpotId::Giguna__Antechamber__East_16 => {
                 write!(f, "{}", "Giguna > Antechamber > East 16")
@@ -6511,6 +6582,29 @@ impl std::str::FromStr for SpotId {
             "Ebih > Waterfall > West Door Right" => Ok(SpotId::Ebih__Waterfall__West_Door_Right),
             "Ebih > Waterfall > West Lower Path" => Ok(SpotId::Ebih__Waterfall__West_Lower_Path),
             "Ebih > Waterfall > West Main Path" => Ok(SpotId::Ebih__Waterfall__West_Main_Path),
+            "Filter > Core > Bottom" => Ok(SpotId::Filter__Core__Bottom),
+            "Filter > Core > Catwalk West" => Ok(SpotId::Filter__Core__Catwalk_West),
+            "Filter > Core > East" => Ok(SpotId::Filter__Core__East),
+            "Filter > Core > Terminal East" => Ok(SpotId::Filter__Core__Terminal_East),
+            "Filter > Core > Terminal West" => Ok(SpotId::Filter__Core__Terminal_West),
+            "Filter > Core > West" => Ok(SpotId::Filter__Core__West),
+            "Filter > Entrance > East" => Ok(SpotId::Filter__Entrance__East),
+            "Filter > Entrance > Egg" => Ok(SpotId::Filter__Entrance__Egg),
+            "Filter > Exit > East" => Ok(SpotId::Filter__Exit__East),
+            "Filter > Exit > Egg" => Ok(SpotId::Filter__Exit__Egg),
+            "Filter > Exit > Ledge" => Ok(SpotId::Filter__Exit__Ledge),
+            "Filter > Lower Hallway > East" => Ok(SpotId::Filter__Lower_Hallway__East),
+            "Filter > Lower Hallway > West" => Ok(SpotId::Filter__Lower_Hallway__West),
+            "Filter > Scaffolding > Catwalk Hook Point" => {
+                Ok(SpotId::Filter__Scaffolding__Catwalk_Hook_Point)
+            }
+            "Filter > Scaffolding > Lower West" => Ok(SpotId::Filter__Scaffolding__Lower_West),
+            "Filter > Scaffolding > P1" => Ok(SpotId::Filter__Scaffolding__P1),
+            "Filter > Scaffolding > P2" => Ok(SpotId::Filter__Scaffolding__P2),
+            "Filter > Scaffolding > Upper West" => Ok(SpotId::Filter__Scaffolding__Upper_West),
+            "Filter > Upper Hallway > Corner" => Ok(SpotId::Filter__Upper_Hallway__Corner),
+            "Filter > Upper Hallway > East" => Ok(SpotId::Filter__Upper_Hallway__East),
+            "Filter > Upper Hallway > West" => Ok(SpotId::Filter__Upper_Hallway__West),
             "Giguna > Antechamber > Bottom" => Ok(SpotId::Giguna__Antechamber__Bottom),
             "Giguna > Antechamber > East 16" => Ok(SpotId::Giguna__Antechamber__East_16),
             "Giguna > Antechamber > Left Wall Lower" => {
@@ -8087,7 +8181,6 @@ pub enum LocationId {
     Annuna__Egg_Room__Corner_Platform__Shockwave_from_Outside,
     Annuna__Egg_Room__Second_Egg__Remote_Boomerang_Flask,
     Annuna__Filter_Teleporter__Door_Ledge__Shockwave_Flask,
-    Annuna__Filter_Teleporter__Egg__Authorize_Hammond,
     Annuna__Filter_Teleporter__Northeast_Cubby__Tablet,
     Annuna__Filter_Teleporter__Shaft_Bottom__Flask,
     Annuna__Mirror_Match__Below_Switch__Hit_Switch,
@@ -8146,6 +8239,7 @@ pub enum LocationId {
     Ebih__Waterfall__Wall_Right__Break_Through_Wall,
     Ebih__Waterfall__Wall_Right__Break_Wall,
     Ebih__Waterfall__Waterfall_Center_Center__Both_Blocks,
+    Filter__Core__Terminal_East__Authorize_Hammond,
     Giguna__Antechamber__Statue_Head__Tablet,
     Giguna__Carnelian__Vault__Item,
     Giguna__Clouds__Cache__Item,
@@ -8437,11 +8531,6 @@ impl fmt::Display for LocationId {
                 "{}",
                 "Annuna > Filter Teleporter > Door Ledge > Shockwave Flask"
             ),
-            LocationId::Annuna__Filter_Teleporter__Egg__Authorize_Hammond => write!(
-                f,
-                "{}",
-                "Annuna > Filter Teleporter > Egg > Authorize Hammond"
-            ),
             LocationId::Annuna__Filter_Teleporter__Northeast_Cubby__Tablet => write!(
                 f,
                 "{}",
@@ -8650,6 +8739,9 @@ impl fmt::Display for LocationId {
                 "{}",
                 "Ebih > Waterfall > Waterfall Center Center > Both Blocks"
             ),
+            LocationId::Filter__Core__Terminal_East__Authorize_Hammond => {
+                write!(f, "{}", "Filter > Core > Terminal East > Authorize Hammond")
+            }
             LocationId::Giguna__Antechamber__Statue_Head__Tablet => {
                 write!(f, "{}", "Giguna > Antechamber > Statue Head > Tablet")
             }
@@ -9342,9 +9434,6 @@ impl std::str::FromStr for LocationId {
             "Annuna > Filter Teleporter > Door Ledge > Shockwave Flask" => {
                 Ok(LocationId::Annuna__Filter_Teleporter__Door_Ledge__Shockwave_Flask)
             }
-            "Annuna > Filter Teleporter > Egg > Authorize Hammond" => {
-                Ok(LocationId::Annuna__Filter_Teleporter__Egg__Authorize_Hammond)
-            }
             "Annuna > Filter Teleporter > Northeast Cubby > Tablet" => {
                 Ok(LocationId::Annuna__Filter_Teleporter__Northeast_Cubby__Tablet)
             }
@@ -9506,6 +9595,9 @@ impl std::str::FromStr for LocationId {
             }
             "Ebih > Waterfall > Waterfall Center Center > Both Blocks" => {
                 Ok(LocationId::Ebih__Waterfall__Waterfall_Center_Center__Both_Blocks)
+            }
+            "Filter > Core > Terminal East > Authorize Hammond" => {
+                Ok(LocationId::Filter__Core__Terminal_East__Authorize_Hammond)
             }
             "Giguna > Antechamber > Statue Head > Tablet" => {
                 Ok(LocationId::Giguna__Antechamber__Statue_Head__Tablet)
@@ -10149,6 +10241,7 @@ pub enum ExitId {
     Annuna__Filter_Teleporter__East_Platform_4__ex__Northeast_Ministair_2,
     Annuna__Filter_Teleporter__Egg__ex__Door_Ledge_1,
     Annuna__Filter_Teleporter__Egg__ex__East_Platform_3_1,
+    Annuna__Filter_Teleporter__Egg__ex__Filter__Entrance__Egg_1,
     Annuna__Filter_Teleporter__Northeast_Ministair__ex__Northeast_Cubby_1,
     Annuna__Filter_Teleporter__Shaft_Bottom__ex__Door_Ledge_1,
     Annuna__Filter_Teleporter__Shaft_Bottom__ex__Shaft_Upper_Platform_1,
@@ -10519,6 +10612,23 @@ pub enum ExitId {
     Ebih__Waterfall__West_Door__ex__West_Door_Right_1,
     Ebih__Waterfall__West_Door_Left__ex__West_Door_1,
     Ebih__Waterfall__West_Door_Right__ex__West_Door_1,
+    Filter__Core__Bottom__ex__Terminal_East_1,
+    Filter__Core__Catwalk_West__ex__West_1,
+    Filter__Core__Terminal_East__ex__Catwalk_West_1,
+    Filter__Core__Terminal_West__ex__West_1,
+    Filter__Core__West__ex__Exit__East_1,
+    Filter__Entrance__East__ex__Lower_Hallway__West_1,
+    Filter__Exit__East__ex__Core__West_1,
+    Filter__Exit__Egg__ex__Annuna__Filter_Teleporter__Egg_1,
+    Filter__Lower_Hallway__East__ex__Scaffolding__Lower_West_1,
+    Filter__Lower_Hallway__West__ex__East_1,
+    Filter__Lower_Hallway__West__ex__Entrance__East_1,
+    Filter__Scaffolding__Catwalk_Hook_Point__ex__Upper_Hallway__Corner_1,
+    Filter__Scaffolding__Lower_West__ex__Lower_Hallway__East_1,
+    Filter__Scaffolding__Upper_West__ex__Upper_Hallway__East_1,
+    Filter__Upper_Hallway__Corner__ex__Core__Bottom_1,
+    Filter__Upper_Hallway__East__ex__Scaffolding__Upper_West_1,
+    Filter__Upper_Hallway__West__ex__Core__East_1,
     Giguna__Antechamber__Bottom__ex__Left_Wall_Lower_1,
     Giguna__Antechamber__East_16__ex__East_Caverns__West_16_1,
     Giguna__Antechamber__Left_Wall_Lower__ex__Left_Wall_Mid_1,
@@ -11121,6 +11231,7 @@ pub enum ExitId {
     Menu__Kiengir_Map__Annuna_Center_Save__ex__Annuna__Center_Save__Save_Point_1,
     Menu__Kiengir_Map__Annuna_Factory_Entrance__ex__Annuna__Factory_Entrance__Save_Point_1,
     Menu__Kiengir_Map__Annuna_Mirror_Match__ex__Annuna__Mirror_Match__Save_Point_1,
+    Menu__Kiengir_Map__Annuna_Vertical_Room__ex__Annuna__Vertical_Room__Save_Point_1,
     Menu__Kiengir_Map__Ebih_Base_Camp__ex__Ebih__Base_Camp__Save_Point_1,
     Menu__Kiengir_Map__Ebih_West_Lower__ex__Ebih__Ebih_West__Lower_Save_1,
     Menu__Kiengir_Map__Ebih_West_Mid__ex__Ebih__Ebih_West__Mid_Save_1,
@@ -11488,6 +11599,7 @@ impl fmt::Display for ExitId {
             ExitId::Annuna__Filter_Teleporter__East_Platform_4__ex__Northeast_Ministair_2 => write!(f, "{}", "Annuna > Filter Teleporter > East Platform 4 ==> Northeast Ministair (2)"),
             ExitId::Annuna__Filter_Teleporter__Egg__ex__Door_Ledge_1 => write!(f, "{}", "Annuna > Filter Teleporter > Egg ==> Door Ledge (1)"),
             ExitId::Annuna__Filter_Teleporter__Egg__ex__East_Platform_3_1 => write!(f, "{}", "Annuna > Filter Teleporter > Egg ==> East Platform 3 (1)"),
+            ExitId::Annuna__Filter_Teleporter__Egg__ex__Filter__Entrance__Egg_1 => write!(f, "{}", "Annuna > Filter Teleporter > Egg ==> Filter > Entrance > Egg (1)"),
             ExitId::Annuna__Filter_Teleporter__Northeast_Ministair__ex__Northeast_Cubby_1 => write!(f, "{}", "Annuna > Filter Teleporter > Northeast Ministair ==> Northeast Cubby (1)"),
             ExitId::Annuna__Filter_Teleporter__Shaft_Bottom__ex__Door_Ledge_1 => write!(f, "{}", "Annuna > Filter Teleporter > Shaft Bottom ==> Door Ledge (1)"),
             ExitId::Annuna__Filter_Teleporter__Shaft_Bottom__ex__Shaft_Upper_Platform_1 => write!(f, "{}", "Annuna > Filter Teleporter > Shaft Bottom ==> Shaft Upper Platform (1)"),
@@ -11858,6 +11970,23 @@ impl fmt::Display for ExitId {
             ExitId::Ebih__Waterfall__West_Door__ex__West_Door_Right_1 => write!(f, "{}", "Ebih > Waterfall > West Door ==> West Door Right (1)"),
             ExitId::Ebih__Waterfall__West_Door_Left__ex__West_Door_1 => write!(f, "{}", "Ebih > Waterfall > West Door Left ==> West Door (1)"),
             ExitId::Ebih__Waterfall__West_Door_Right__ex__West_Door_1 => write!(f, "{}", "Ebih > Waterfall > West Door Right ==> West Door (1)"),
+            ExitId::Filter__Core__Bottom__ex__Terminal_East_1 => write!(f, "{}", "Filter > Core > Bottom ==> Terminal East (1)"),
+            ExitId::Filter__Core__Catwalk_West__ex__West_1 => write!(f, "{}", "Filter > Core > Catwalk West ==> West (1)"),
+            ExitId::Filter__Core__Terminal_East__ex__Catwalk_West_1 => write!(f, "{}", "Filter > Core > Terminal East ==> Catwalk West (1)"),
+            ExitId::Filter__Core__Terminal_West__ex__West_1 => write!(f, "{}", "Filter > Core > Terminal West ==> West (1)"),
+            ExitId::Filter__Core__West__ex__Exit__East_1 => write!(f, "{}", "Filter > Core > West ==> Exit > East (1)"),
+            ExitId::Filter__Entrance__East__ex__Lower_Hallway__West_1 => write!(f, "{}", "Filter > Entrance > East ==> Lower Hallway > West (1)"),
+            ExitId::Filter__Exit__East__ex__Core__West_1 => write!(f, "{}", "Filter > Exit > East ==> Core > West (1)"),
+            ExitId::Filter__Exit__Egg__ex__Annuna__Filter_Teleporter__Egg_1 => write!(f, "{}", "Filter > Exit > Egg ==> Annuna > Filter Teleporter > Egg (1)"),
+            ExitId::Filter__Lower_Hallway__East__ex__Scaffolding__Lower_West_1 => write!(f, "{}", "Filter > Lower Hallway > East ==> Scaffolding > Lower West (1)"),
+            ExitId::Filter__Lower_Hallway__West__ex__East_1 => write!(f, "{}", "Filter > Lower Hallway > West ==> East (1)"),
+            ExitId::Filter__Lower_Hallway__West__ex__Entrance__East_1 => write!(f, "{}", "Filter > Lower Hallway > West ==> Entrance > East (1)"),
+            ExitId::Filter__Scaffolding__Catwalk_Hook_Point__ex__Upper_Hallway__Corner_1 => write!(f, "{}", "Filter > Scaffolding > Catwalk Hook Point ==> Upper Hallway > Corner (1)"),
+            ExitId::Filter__Scaffolding__Lower_West__ex__Lower_Hallway__East_1 => write!(f, "{}", "Filter > Scaffolding > Lower West ==> Lower Hallway > East (1)"),
+            ExitId::Filter__Scaffolding__Upper_West__ex__Upper_Hallway__East_1 => write!(f, "{}", "Filter > Scaffolding > Upper West ==> Upper Hallway > East (1)"),
+            ExitId::Filter__Upper_Hallway__Corner__ex__Core__Bottom_1 => write!(f, "{}", "Filter > Upper Hallway > Corner ==> Core > Bottom (1)"),
+            ExitId::Filter__Upper_Hallway__East__ex__Scaffolding__Upper_West_1 => write!(f, "{}", "Filter > Upper Hallway > East ==> Scaffolding > Upper West (1)"),
+            ExitId::Filter__Upper_Hallway__West__ex__Core__East_1 => write!(f, "{}", "Filter > Upper Hallway > West ==> Core > East (1)"),
             ExitId::Giguna__Antechamber__Bottom__ex__Left_Wall_Lower_1 => write!(f, "{}", "Giguna > Antechamber > Bottom ==> Left Wall Lower (1)"),
             ExitId::Giguna__Antechamber__East_16__ex__East_Caverns__West_16_1 => write!(f, "{}", "Giguna > Antechamber > East 16 ==> East Caverns > West 16 (1)"),
             ExitId::Giguna__Antechamber__Left_Wall_Lower__ex__Left_Wall_Mid_1 => write!(f, "{}", "Giguna > Antechamber > Left Wall Lower ==> Left Wall Mid (1)"),
@@ -12460,6 +12589,7 @@ impl fmt::Display for ExitId {
             ExitId::Menu__Kiengir_Map__Annuna_Center_Save__ex__Annuna__Center_Save__Save_Point_1 => write!(f, "{}", "Menu > Kiengir Map > Annuna Center Save ==> Annuna > Center Save > Save Point (1)"),
             ExitId::Menu__Kiengir_Map__Annuna_Factory_Entrance__ex__Annuna__Factory_Entrance__Save_Point_1 => write!(f, "{}", "Menu > Kiengir Map > Annuna Factory Entrance ==> Annuna > Factory Entrance > Save Point (1)"),
             ExitId::Menu__Kiengir_Map__Annuna_Mirror_Match__ex__Annuna__Mirror_Match__Save_Point_1 => write!(f, "{}", "Menu > Kiengir Map > Annuna Mirror Match ==> Annuna > Mirror Match > Save Point (1)"),
+            ExitId::Menu__Kiengir_Map__Annuna_Vertical_Room__ex__Annuna__Vertical_Room__Save_Point_1 => write!(f, "{}", "Menu > Kiengir Map > Annuna Vertical Room ==> Annuna > Vertical Room > Save Point (1)"),
             ExitId::Menu__Kiengir_Map__Ebih_Base_Camp__ex__Ebih__Base_Camp__Save_Point_1 => write!(f, "{}", "Menu > Kiengir Map > Ebih Base Camp ==> Ebih > Base Camp > Save Point (1)"),
             ExitId::Menu__Kiengir_Map__Ebih_West_Lower__ex__Ebih__Ebih_West__Lower_Save_1 => write!(f, "{}", "Menu > Kiengir Map > Ebih West Lower ==> Ebih > Ebih West > Lower Save (1)"),
             ExitId::Menu__Kiengir_Map__Ebih_West_Mid__ex__Ebih__Ebih_West__Mid_Save_1 => write!(f, "{}", "Menu > Kiengir Map > Ebih West Mid ==> Ebih > Ebih West > Mid Save (1)"),
@@ -12832,6 +12962,7 @@ impl std::str::FromStr for ExitId {
             "Annuna > Filter Teleporter > East Platform 4 ==> Northeast Ministair (2)" => Ok(ExitId::Annuna__Filter_Teleporter__East_Platform_4__ex__Northeast_Ministair_2),
             "Annuna > Filter Teleporter > Egg ==> Door Ledge (1)" => Ok(ExitId::Annuna__Filter_Teleporter__Egg__ex__Door_Ledge_1),
             "Annuna > Filter Teleporter > Egg ==> East Platform 3 (1)" => Ok(ExitId::Annuna__Filter_Teleporter__Egg__ex__East_Platform_3_1),
+            "Annuna > Filter Teleporter > Egg ==> Filter > Entrance > Egg (1)" => Ok(ExitId::Annuna__Filter_Teleporter__Egg__ex__Filter__Entrance__Egg_1),
             "Annuna > Filter Teleporter > Northeast Ministair ==> Northeast Cubby (1)" => Ok(ExitId::Annuna__Filter_Teleporter__Northeast_Ministair__ex__Northeast_Cubby_1),
             "Annuna > Filter Teleporter > Shaft Bottom ==> Door Ledge (1)" => Ok(ExitId::Annuna__Filter_Teleporter__Shaft_Bottom__ex__Door_Ledge_1),
             "Annuna > Filter Teleporter > Shaft Bottom ==> Shaft Upper Platform (1)" => Ok(ExitId::Annuna__Filter_Teleporter__Shaft_Bottom__ex__Shaft_Upper_Platform_1),
@@ -13202,6 +13333,23 @@ impl std::str::FromStr for ExitId {
             "Ebih > Waterfall > West Door ==> West Door Right (1)" => Ok(ExitId::Ebih__Waterfall__West_Door__ex__West_Door_Right_1),
             "Ebih > Waterfall > West Door Left ==> West Door (1)" => Ok(ExitId::Ebih__Waterfall__West_Door_Left__ex__West_Door_1),
             "Ebih > Waterfall > West Door Right ==> West Door (1)" => Ok(ExitId::Ebih__Waterfall__West_Door_Right__ex__West_Door_1),
+            "Filter > Core > Bottom ==> Terminal East (1)" => Ok(ExitId::Filter__Core__Bottom__ex__Terminal_East_1),
+            "Filter > Core > Catwalk West ==> West (1)" => Ok(ExitId::Filter__Core__Catwalk_West__ex__West_1),
+            "Filter > Core > Terminal East ==> Catwalk West (1)" => Ok(ExitId::Filter__Core__Terminal_East__ex__Catwalk_West_1),
+            "Filter > Core > Terminal West ==> West (1)" => Ok(ExitId::Filter__Core__Terminal_West__ex__West_1),
+            "Filter > Core > West ==> Exit > East (1)" => Ok(ExitId::Filter__Core__West__ex__Exit__East_1),
+            "Filter > Entrance > East ==> Lower Hallway > West (1)" => Ok(ExitId::Filter__Entrance__East__ex__Lower_Hallway__West_1),
+            "Filter > Exit > East ==> Core > West (1)" => Ok(ExitId::Filter__Exit__East__ex__Core__West_1),
+            "Filter > Exit > Egg ==> Annuna > Filter Teleporter > Egg (1)" => Ok(ExitId::Filter__Exit__Egg__ex__Annuna__Filter_Teleporter__Egg_1),
+            "Filter > Lower Hallway > East ==> Scaffolding > Lower West (1)" => Ok(ExitId::Filter__Lower_Hallway__East__ex__Scaffolding__Lower_West_1),
+            "Filter > Lower Hallway > West ==> East (1)" => Ok(ExitId::Filter__Lower_Hallway__West__ex__East_1),
+            "Filter > Lower Hallway > West ==> Entrance > East (1)" => Ok(ExitId::Filter__Lower_Hallway__West__ex__Entrance__East_1),
+            "Filter > Scaffolding > Catwalk Hook Point ==> Upper Hallway > Corner (1)" => Ok(ExitId::Filter__Scaffolding__Catwalk_Hook_Point__ex__Upper_Hallway__Corner_1),
+            "Filter > Scaffolding > Lower West ==> Lower Hallway > East (1)" => Ok(ExitId::Filter__Scaffolding__Lower_West__ex__Lower_Hallway__East_1),
+            "Filter > Scaffolding > Upper West ==> Upper Hallway > East (1)" => Ok(ExitId::Filter__Scaffolding__Upper_West__ex__Upper_Hallway__East_1),
+            "Filter > Upper Hallway > Corner ==> Core > Bottom (1)" => Ok(ExitId::Filter__Upper_Hallway__Corner__ex__Core__Bottom_1),
+            "Filter > Upper Hallway > East ==> Scaffolding > Upper West (1)" => Ok(ExitId::Filter__Upper_Hallway__East__ex__Scaffolding__Upper_West_1),
+            "Filter > Upper Hallway > West ==> Core > East (1)" => Ok(ExitId::Filter__Upper_Hallway__West__ex__Core__East_1),
             "Giguna > Antechamber > Bottom ==> Left Wall Lower (1)" => Ok(ExitId::Giguna__Antechamber__Bottom__ex__Left_Wall_Lower_1),
             "Giguna > Antechamber > East 16 ==> East Caverns > West 16 (1)" => Ok(ExitId::Giguna__Antechamber__East_16__ex__East_Caverns__West_16_1),
             "Giguna > Antechamber > Left Wall Lower ==> Left Wall Mid (1)" => Ok(ExitId::Giguna__Antechamber__Left_Wall_Lower__ex__Left_Wall_Mid_1),
@@ -13804,6 +13952,7 @@ impl std::str::FromStr for ExitId {
             "Menu > Kiengir Map > Annuna Center Save ==> Annuna > Center Save > Save Point (1)" => Ok(ExitId::Menu__Kiengir_Map__Annuna_Center_Save__ex__Annuna__Center_Save__Save_Point_1),
             "Menu > Kiengir Map > Annuna Factory Entrance ==> Annuna > Factory Entrance > Save Point (1)" => Ok(ExitId::Menu__Kiengir_Map__Annuna_Factory_Entrance__ex__Annuna__Factory_Entrance__Save_Point_1),
             "Menu > Kiengir Map > Annuna Mirror Match ==> Annuna > Mirror Match > Save Point (1)" => Ok(ExitId::Menu__Kiengir_Map__Annuna_Mirror_Match__ex__Annuna__Mirror_Match__Save_Point_1),
+            "Menu > Kiengir Map > Annuna Vertical Room ==> Annuna > Vertical Room > Save Point (1)" => Ok(ExitId::Menu__Kiengir_Map__Annuna_Vertical_Room__ex__Annuna__Vertical_Room__Save_Point_1),
             "Menu > Kiengir Map > Ebih Base Camp ==> Ebih > Base Camp > Save Point (1)" => Ok(ExitId::Menu__Kiengir_Map__Ebih_Base_Camp__ex__Ebih__Base_Camp__Save_Point_1),
             "Menu > Kiengir Map > Ebih West Lower ==> Ebih > Ebih West > Lower Save (1)" => Ok(ExitId::Menu__Kiengir_Map__Ebih_West_Lower__ex__Ebih__Ebih_West__Lower_Save_1),
             "Menu > Kiengir Map > Ebih West Mid ==> Ebih > Ebih West > Mid Save (1)" => Ok(ExitId::Menu__Kiengir_Map__Ebih_West_Mid__ex__Ebih__Ebih_West__Mid_Save_1),
@@ -14859,7 +15008,6 @@ pub enum CanonId {
     Annuna_East_Bridge_Gate,
     Sniper_Valley_Rock_1,
     Sniper_Valley_Rock_2,
-    Authorize_Hammond,
     Filter_Teleporter_Flask,
     Egg_Room_Flask,
     Apocalypse_Bomb,
@@ -14913,7 +15061,6 @@ impl fmt::Display for CanonId {
             CanonId::Annuna_East_Bridge_Gate => write!(f, "{}", "Annuna_East_Bridge_Gate"),
             CanonId::Sniper_Valley_Rock_1 => write!(f, "{}", "Sniper_Valley_Rock_1"),
             CanonId::Sniper_Valley_Rock_2 => write!(f, "{}", "Sniper_Valley_Rock_2"),
-            CanonId::Authorize_Hammond => write!(f, "{}", "Authorize Hammond"),
             CanonId::Filter_Teleporter_Flask => write!(f, "{}", "Filter_Teleporter_Flask"),
             CanonId::Egg_Room_Flask => write!(f, "{}", "Egg_Room_Flask"),
             CanonId::Apocalypse_Bomb => write!(f, "{}", "Apocalypse_Bomb"),
@@ -14973,7 +15120,6 @@ impl std::str::FromStr for CanonId {
             "Annuna_East_Bridge_Gate" => Ok(CanonId::Annuna_East_Bridge_Gate),
             "Sniper_Valley_Rock_1" => Ok(CanonId::Sniper_Valley_Rock_1),
             "Sniper_Valley_Rock_2" => Ok(CanonId::Sniper_Valley_Rock_2),
-            "Authorize Hammond" => Ok(CanonId::Authorize_Hammond),
             "Filter_Teleporter_Flask" => Ok(CanonId::Filter_Teleporter_Flask),
             "Egg_Room_Flask" => Ok(CanonId::Egg_Room_Flask),
             "Apocalypse_Bomb" => Ok(CanonId::Apocalypse_Bomb),

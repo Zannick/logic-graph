@@ -20,12 +20,13 @@ pub fn access_default(_ctx: &Context, _world: &graph::World) -> bool {
     true
 }
 
-pub fn access___all_urns_all_weapons_other_items_all_notes_all_health_all_flasks(
+pub fn access___all_urns_all_weapons_other_items_all_notes_all_health_all_flasks_hammond_auth(
     ctx: &Context,
     world: &graph::World,
 ) -> bool {
-    // [$all_urns, $all_weapons, $other_items, $all_notes, $all_health, $all_flasks]
-    helper__all_urns!(ctx, world)
+    // [$all_urns, $all_weapons, $other_items, $all_notes, $all_health, $all_flasks, Hammond_Auth]
+    ctx.has(Item::Hammond_Auth)
+        && helper__all_urns!(ctx, world)
         && helper__all_weapons!(ctx, world)
         && helper__other_items!(ctx, world)
         && helper__all_notes!(ctx, world)
@@ -1603,6 +1604,10 @@ pub fn access_map__annuna__mirror_match__save(ctx: &Context, world: &graph::Worl
     // ^map__annuna__mirror_match__save
     ctx.map__annuna__mirror_match__save()
 }
+pub fn access_map__annuna__vertical_room__save(ctx: &Context, world: &graph::World) -> bool {
+    // ^map__annuna__vertical_room__save
+    ctx.map__annuna__vertical_room__save()
+}
 pub fn access_map__ebih__base_camp__save(ctx: &Context, world: &graph::World) -> bool {
     // ^map__ebih__base_camp__save
     ctx.map__ebih__base_camp__save()
@@ -1787,6 +1792,10 @@ pub fn access_not_ebih_waterfall_wall_and_nanite_mist_and_mist_upgrade(
     // not Ebih_Waterfall_Wall and Nanite_Mist and Mist_Upgrade
     ((!ctx.has(Item::Ebih_Waterfall_Wall) && ctx.has(Item::Nanite_Mist))
         && ctx.has(Item::Mist_Upgrade))
+}
+pub fn access_not_hammond_auth(ctx: &Context, world: &graph::World) -> bool {
+    // not Hammond_Auth
+    !ctx.has(Item::Hammond_Auth)
 }
 pub fn access_not_irikar_royal_storage_wall_and_mist_upgrade(
     ctx: &Context,
@@ -2588,14 +2597,23 @@ pub fn action_skip__ebih_gt_waterfall_gt_alcove_gt_block_left_skip__ebih_gt_wate
     ctx.add_item(Item::Ebih_Waterfall_Block_Right);
     ctx.add_item(Item::Ebih_Waterfall_Block_Left);
 }
-pub fn explain___all_urns_all_weapons_other_items_all_notes_all_health_all_flasks(
+pub fn explain___all_urns_all_weapons_other_items_all_notes_all_health_all_flasks_hammond_auth(
     ctx: &Context,
     world: &graph::World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
-    // [$all_urns, $all_weapons, $other_items, $all_notes, $all_health, $all_flasks]
+    // [$all_urns, $all_weapons, $other_items, $all_notes, $all_health, $all_flasks, Hammond_Auth]
     {
         let mut refs = Vec::new();
+        let mut h = {
+            let h = ctx.has(Item::Hammond_Auth);
+            edict.insert("Hammond_Auth", format!("{}", h));
+            (h, vec!["Hammond_Auth"])
+        };
+        refs.append(&mut h.1);
+        if !h.0 {
+            return (false, refs);
+        };
         let mut h = hexplain__all_urns!(ctx, world, edict);
         refs.append(&mut h.1);
         if !h.0 {
@@ -8418,6 +8436,18 @@ pub fn explain_map__annuna__mirror_match__save(
         (r, vec!["^map__annuna__mirror_match__save"])
     }
 }
+pub fn explain_map__annuna__vertical_room__save(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // ^map__annuna__vertical_room__save
+    {
+        let r = ctx.map__annuna__vertical_room__save();
+        edict.insert("^map__annuna__vertical_room__save", format!("{:?}", r));
+        (r, vec!["^map__annuna__vertical_room__save"])
+    }
+}
 pub fn explain_map__ebih__base_camp__save(
     ctx: &Context,
     world: &graph::World,
@@ -9189,6 +9219,18 @@ pub fn explain_not_ebih_waterfall_wall_and_nanite_mist_and_mist_upgrade(
             left.1.append(&mut right.1);
             (right.0, left.1)
         }
+    }
+}
+pub fn explain_not_hammond_auth(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // not Hammond_Auth
+    {
+        let h = ctx.has(Item::Hammond_Auth);
+        edict.insert("Hammond_Auth", format!("{}", h));
+        (!h, vec!["Hammond_Auth"])
     }
 }
 pub fn explain_not_irikar_royal_storage_wall_and_mist_upgrade(
@@ -10389,13 +10431,16 @@ pub fn explain_within_menu_gt_upgrade_menu(
         )
     }
 }
-pub fn observe_access___all_urns_all_weapons_other_items_all_notes_all_health_all_flasks(
+pub fn observe_access___all_urns_all_weapons_other_items_all_notes_all_health_all_flasks_hammond_auth(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
 ) -> bool {
-    // [$all_urns, $all_weapons, $other_items, $all_notes, $all_health, $all_flasks]
-    hobserve__all_urns!(ctx, world, full_obs)
+    // [$all_urns, $all_weapons, $other_items, $all_notes, $all_health, $all_flasks, Hammond_Auth]
+    ({
+        full_obs.observe_hammond_auth();
+        ctx.has(Item::Hammond_Auth)
+    }) && hobserve__all_urns!(ctx, world, full_obs)
         && hobserve__all_weapons!(ctx, world, full_obs)
         && hobserve__other_items!(ctx, world, full_obs)
         && hobserve__all_notes!(ctx, world, full_obs)
@@ -13430,6 +13475,17 @@ pub fn observe_access_map__annuna__mirror_match__save(
         ctx.map__annuna__mirror_match__save()
     }
 }
+pub fn observe_access_map__annuna__vertical_room__save(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // ^map__annuna__vertical_room__save
+    {
+        full_obs.observe_map__annuna__vertical_room__save();
+        ctx.map__annuna__vertical_room__save()
+    }
+}
 pub fn observe_access_map__ebih__base_camp__save(
     ctx: &Context,
     world: &graph::World,
@@ -13966,6 +14022,17 @@ pub fn observe_access_not_ebih_waterfall_wall_and_nanite_mist_and_mist_upgrade(
         full_obs.observe_mist_upgrade();
         ctx.has(Item::Mist_Upgrade)
     }))
+}
+pub fn observe_access_not_hammond_auth(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // not Hammond_Auth
+    {
+        full_obs.observe_hammond_auth();
+        !ctx.has(Item::Hammond_Auth)
+    }
 }
 pub fn observe_access_not_irikar_royal_storage_wall_and_mist_upgrade(
     ctx: &Context,

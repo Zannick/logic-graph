@@ -3686,6 +3686,57 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
         ([false], SpotId::Ebih__Waterfall__West_Main_Path, SpotId::Ebih__Waterfall__West_Climb) => {
             1000
         }
+        ([false], SpotId::Filter__Core__Catwalk_West, SpotId::Filter__Core__Terminal_West) => 1578,
+        ([false], SpotId::Filter__Core__East, SpotId::Filter__Core__Bottom) => 2105,
+        ([false], SpotId::Filter__Core__East, SpotId::Filter__Core__Terminal_East) => 4385,
+        ([false], SpotId::Filter__Core__Terminal_East, SpotId::Filter__Core__East) => 4385,
+        ([false], SpotId::Filter__Core__Terminal_East, SpotId::Filter__Core__Terminal_West) => 1578,
+        ([false], SpotId::Filter__Core__Terminal_West, SpotId::Filter__Core__Catwalk_West) => 1578,
+        ([false], SpotId::Filter__Core__Terminal_West, SpotId::Filter__Core__Terminal_East) => 1578,
+        ([false], SpotId::Filter__Core__West, SpotId::Filter__Core__Terminal_West) => 4210,
+        ([false], SpotId::Filter__Entrance__East, SpotId::Filter__Entrance__Egg) => 1799,
+        ([false], SpotId::Filter__Entrance__Egg, SpotId::Filter__Entrance__East) => 1491,
+        ([false], SpotId::Filter__Exit__East, SpotId::Filter__Exit__Ledge) => 526,
+        ([false], SpotId::Filter__Exit__Ledge, SpotId::Filter__Exit__East) => 526,
+        ([false], SpotId::Filter__Exit__Ledge, SpotId::Filter__Exit__Egg) => 964,
+        ([false], SpotId::Filter__Lower_Hallway__East, SpotId::Filter__Lower_Hallway__West) => 3157,
+        ([false], SpotId::Filter__Lower_Hallway__West, SpotId::Filter__Lower_Hallway__East) => 3157,
+        (
+            [false],
+            SpotId::Filter__Scaffolding__Catwalk_Hook_Point,
+            SpotId::Filter__Scaffolding__Lower_West,
+        ) => 2900,
+        (
+            [false],
+            SpotId::Filter__Scaffolding__Catwalk_Hook_Point,
+            SpotId::Filter__Scaffolding__Upper_West,
+        ) => 600,
+        ([false], SpotId::Filter__Scaffolding__Lower_West, SpotId::Filter__Scaffolding__P1) => 3684,
+        ([false], SpotId::Filter__Scaffolding__P1, SpotId::Filter__Scaffolding__Lower_West) => 3684,
+        ([false], SpotId::Filter__Scaffolding__P1, SpotId::Filter__Scaffolding__P2) => 5399,
+        (
+            [false],
+            SpotId::Filter__Scaffolding__P2,
+            SpotId::Filter__Scaffolding__Catwalk_Hook_Point,
+        ) => 1929,
+        ([false], SpotId::Filter__Scaffolding__P2, SpotId::Filter__Scaffolding__Lower_West) => 2600,
+        (
+            [false],
+            SpotId::Filter__Scaffolding__Upper_West,
+            SpotId::Filter__Scaffolding__Catwalk_Hook_Point,
+        ) => 526,
+        ([false], SpotId::Filter__Upper_Hallway__Corner, SpotId::Filter__Upper_Hallway__East) => {
+            2456
+        }
+        ([false], SpotId::Filter__Upper_Hallway__Corner, SpotId::Filter__Upper_Hallway__West) => {
+            701
+        }
+        ([false], SpotId::Filter__Upper_Hallway__East, SpotId::Filter__Upper_Hallway__Corner) => {
+            2456
+        }
+        ([false], SpotId::Filter__Upper_Hallway__West, SpotId::Filter__Upper_Hallway__Corner) => {
+            701
+        }
         ([false], SpotId::Giguna_Breach__Ascent__Bottom, SpotId::Giguna_Breach__Ascent__West_9) => {
             701
         }
@@ -17643,6 +17694,53 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
         ([true], SpotId::Ebih__Waterfall__West_Main_Path, SpotId::Ebih__Waterfall__West_Climb) => {
             1000
         }
+        ([true], SpotId::Filter__Core__Catwalk_West, SpotId::Filter__Core__Terminal_West) => 1578,
+        ([true], SpotId::Filter__Core__East, SpotId::Filter__Core__Bottom) => 2105,
+        ([true], SpotId::Filter__Core__East, SpotId::Filter__Core__Terminal_East) => 4385,
+        ([true], SpotId::Filter__Core__Terminal_East, SpotId::Filter__Core__East) => 4385,
+        ([true], SpotId::Filter__Core__Terminal_East, SpotId::Filter__Core__Terminal_West) => 1578,
+        ([true], SpotId::Filter__Core__Terminal_West, SpotId::Filter__Core__Catwalk_West) => 1578,
+        ([true], SpotId::Filter__Core__Terminal_West, SpotId::Filter__Core__Terminal_East) => 1578,
+        ([true], SpotId::Filter__Core__West, SpotId::Filter__Core__Terminal_West) => 4210,
+        ([true], SpotId::Filter__Entrance__East, SpotId::Filter__Entrance__Egg) => 1799,
+        ([true], SpotId::Filter__Entrance__Egg, SpotId::Filter__Entrance__East) => 1491,
+        ([true], SpotId::Filter__Exit__East, SpotId::Filter__Exit__Ledge) => 526,
+        ([true], SpotId::Filter__Exit__Ledge, SpotId::Filter__Exit__East) => 526,
+        ([true], SpotId::Filter__Exit__Ledge, SpotId::Filter__Exit__Egg) => 964,
+        ([true], SpotId::Filter__Lower_Hallway__East, SpotId::Filter__Lower_Hallway__West) => 3157,
+        ([true], SpotId::Filter__Lower_Hallway__West, SpotId::Filter__Lower_Hallway__East) => 3157,
+        (
+            [true],
+            SpotId::Filter__Scaffolding__Catwalk_Hook_Point,
+            SpotId::Filter__Scaffolding__Lower_West,
+        ) => 2900,
+        (
+            [true],
+            SpotId::Filter__Scaffolding__Catwalk_Hook_Point,
+            SpotId::Filter__Scaffolding__Upper_West,
+        ) => 600,
+        ([true], SpotId::Filter__Scaffolding__Lower_West, SpotId::Filter__Scaffolding__P1) => 3684,
+        ([true], SpotId::Filter__Scaffolding__P1, SpotId::Filter__Scaffolding__Lower_West) => 3684,
+        ([true], SpotId::Filter__Scaffolding__P1, SpotId::Filter__Scaffolding__P2) => 5399,
+        (
+            [true],
+            SpotId::Filter__Scaffolding__P2,
+            SpotId::Filter__Scaffolding__Catwalk_Hook_Point,
+        ) => 1929,
+        ([true], SpotId::Filter__Scaffolding__P2, SpotId::Filter__Scaffolding__Lower_West) => 2600,
+        (
+            [true],
+            SpotId::Filter__Scaffolding__Upper_West,
+            SpotId::Filter__Scaffolding__Catwalk_Hook_Point,
+        ) => 526,
+        ([true], SpotId::Filter__Upper_Hallway__Corner, SpotId::Filter__Upper_Hallway__East) => {
+            2456
+        }
+        ([true], SpotId::Filter__Upper_Hallway__Corner, SpotId::Filter__Upper_Hallway__West) => 701,
+        ([true], SpotId::Filter__Upper_Hallway__East, SpotId::Filter__Upper_Hallway__Corner) => {
+            2456
+        }
+        ([true], SpotId::Filter__Upper_Hallway__West, SpotId::Filter__Upper_Hallway__Corner) => 701,
         ([true], SpotId::Giguna_Breach__Ascent__Bottom, SpotId::Giguna_Breach__Ascent__West_9) => {
             701
         }
@@ -29873,6 +29971,42 @@ pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
         (SpotId::Ebih__Vertical_Interchange__South, SpotId::Ebih__Vertical_Interchange__Switch) => {
             true
         }
+        (SpotId::Filter__Entrance__Egg, SpotId::Filter__Entrance__East) => true,
+        (SpotId::Filter__Entrance__East, SpotId::Filter__Entrance__Egg) => true,
+        (SpotId::Filter__Lower_Hallway__West, SpotId::Filter__Lower_Hallway__East) => true,
+        (SpotId::Filter__Lower_Hallway__East, SpotId::Filter__Lower_Hallway__West) => true,
+        (SpotId::Filter__Scaffolding__Lower_West, SpotId::Filter__Scaffolding__P1) => true,
+        (SpotId::Filter__Scaffolding__P1, SpotId::Filter__Scaffolding__Lower_West) => true,
+        (SpotId::Filter__Scaffolding__P1, SpotId::Filter__Scaffolding__P2) => true,
+        (SpotId::Filter__Scaffolding__P2, SpotId::Filter__Scaffolding__Lower_West) => true,
+        (SpotId::Filter__Scaffolding__P2, SpotId::Filter__Scaffolding__Catwalk_Hook_Point) => true,
+        (
+            SpotId::Filter__Scaffolding__Catwalk_Hook_Point,
+            SpotId::Filter__Scaffolding__Lower_West,
+        ) => true,
+        (
+            SpotId::Filter__Scaffolding__Catwalk_Hook_Point,
+            SpotId::Filter__Scaffolding__Upper_West,
+        ) => true,
+        (
+            SpotId::Filter__Scaffolding__Upper_West,
+            SpotId::Filter__Scaffolding__Catwalk_Hook_Point,
+        ) => true,
+        (SpotId::Filter__Upper_Hallway__East, SpotId::Filter__Upper_Hallway__Corner) => true,
+        (SpotId::Filter__Upper_Hallway__Corner, SpotId::Filter__Upper_Hallway__East) => true,
+        (SpotId::Filter__Upper_Hallway__Corner, SpotId::Filter__Upper_Hallway__West) => true,
+        (SpotId::Filter__Upper_Hallway__West, SpotId::Filter__Upper_Hallway__Corner) => true,
+        (SpotId::Filter__Core__East, SpotId::Filter__Core__Bottom) => true,
+        (SpotId::Filter__Core__East, SpotId::Filter__Core__Terminal_East) => true,
+        (SpotId::Filter__Core__Terminal_East, SpotId::Filter__Core__East) => true,
+        (SpotId::Filter__Core__Terminal_East, SpotId::Filter__Core__Terminal_West) => true,
+        (SpotId::Filter__Core__Terminal_West, SpotId::Filter__Core__Terminal_East) => true,
+        (SpotId::Filter__Core__Terminal_West, SpotId::Filter__Core__Catwalk_West) => true,
+        (SpotId::Filter__Core__Catwalk_West, SpotId::Filter__Core__Terminal_West) => true,
+        (SpotId::Filter__Core__West, SpotId::Filter__Core__Terminal_West) => true,
+        (SpotId::Filter__Exit__East, SpotId::Filter__Exit__Ledge) => true,
+        (SpotId::Filter__Exit__Ledge, SpotId::Filter__Exit__East) => true,
+        (SpotId::Filter__Exit__Ledge, SpotId::Filter__Exit__Egg) => true,
         (SpotId::Giguna_Breach__Peak__Save_Point, SpotId::Giguna_Breach__Peak__East_Passage) => {
             true
         }
@@ -39656,6 +39790,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Annuna__Filter_Teleporter__Egg,
+            SpotId::Filter__Entrance__Egg,
+            13000,
+        ),
+        (
+            SpotId::Annuna__Filter_Teleporter__Egg,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -46016,6 +46155,306 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Ebih__Waterfall__West_Main_Path,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Filter__Core__Bottom,
+            SpotId::Filter__Core__Terminal_East,
+            2280,
+        ),
+        (
+            SpotId::Filter__Core__Bottom,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Filter__Core__Catwalk_West,
+            SpotId::Filter__Core__Terminal_West,
+            1578,
+        ),
+        (
+            SpotId::Filter__Core__Catwalk_West,
+            SpotId::Filter__Core__West,
+            2631,
+        ),
+        (
+            SpotId::Filter__Core__Catwalk_West,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Filter__Core__East,
+            SpotId::Filter__Core__Bottom,
+            2105,
+        ),
+        (
+            SpotId::Filter__Core__East,
+            SpotId::Filter__Core__Terminal_East,
+            4385,
+        ),
+        (
+            SpotId::Filter__Core__East,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Filter__Core__Terminal_East,
+            SpotId::Filter__Core__Catwalk_West,
+            2250,
+        ),
+        (
+            SpotId::Filter__Core__Terminal_East,
+            SpotId::Filter__Core__East,
+            4385,
+        ),
+        (
+            SpotId::Filter__Core__Terminal_East,
+            SpotId::Filter__Core__Terminal_West,
+            1578,
+        ),
+        (
+            SpotId::Filter__Core__Terminal_East,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Filter__Core__Terminal_West,
+            SpotId::Filter__Core__Catwalk_West,
+            1578,
+        ),
+        (
+            SpotId::Filter__Core__Terminal_West,
+            SpotId::Filter__Core__Terminal_East,
+            1578,
+        ),
+        (
+            SpotId::Filter__Core__Terminal_West,
+            SpotId::Filter__Core__West,
+            4210,
+        ),
+        (
+            SpotId::Filter__Core__Terminal_West,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Filter__Core__West,
+            SpotId::Filter__Core__Terminal_West,
+            4210,
+        ),
+        (SpotId::Filter__Core__West, SpotId::Filter__Exit__East, 1350),
+        (
+            SpotId::Filter__Core__West,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Filter__Entrance__East,
+            SpotId::Filter__Entrance__Egg,
+            1799,
+        ),
+        (
+            SpotId::Filter__Entrance__East,
+            SpotId::Filter__Lower_Hallway__West,
+            1350,
+        ),
+        (
+            SpotId::Filter__Entrance__East,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Filter__Entrance__Egg,
+            SpotId::Filter__Entrance__East,
+            1491,
+        ),
+        (
+            SpotId::Filter__Entrance__Egg,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (SpotId::Filter__Exit__East, SpotId::Filter__Core__West, 1350),
+        (SpotId::Filter__Exit__East, SpotId::Filter__Exit__Ledge, 526),
+        (
+            SpotId::Filter__Exit__East,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Filter__Exit__Egg,
+            SpotId::Annuna__Filter_Teleporter__Egg,
+            13000,
+        ),
+        (
+            SpotId::Filter__Exit__Egg,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (SpotId::Filter__Exit__Ledge, SpotId::Filter__Exit__East, 526),
+        (SpotId::Filter__Exit__Ledge, SpotId::Filter__Exit__Egg, 964),
+        (
+            SpotId::Filter__Exit__Ledge,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Filter__Lower_Hallway__East,
+            SpotId::Filter__Lower_Hallway__West,
+            3157,
+        ),
+        (
+            SpotId::Filter__Lower_Hallway__East,
+            SpotId::Filter__Scaffolding__Lower_West,
+            1350,
+        ),
+        (
+            SpotId::Filter__Lower_Hallway__East,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Filter__Lower_Hallway__West,
+            SpotId::Filter__Entrance__East,
+            1350,
+        ),
+        (
+            SpotId::Filter__Lower_Hallway__West,
+            SpotId::Filter__Lower_Hallway__East,
+            2250,
+        ),
+        (
+            SpotId::Filter__Lower_Hallway__West,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Filter__Scaffolding__Catwalk_Hook_Point,
+            SpotId::Filter__Scaffolding__Lower_West,
+            2900,
+        ),
+        (
+            SpotId::Filter__Scaffolding__Catwalk_Hook_Point,
+            SpotId::Filter__Scaffolding__Upper_West,
+            600,
+        ),
+        (
+            SpotId::Filter__Scaffolding__Catwalk_Hook_Point,
+            SpotId::Filter__Upper_Hallway__Corner,
+            3475,
+        ),
+        (
+            SpotId::Filter__Scaffolding__Catwalk_Hook_Point,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Filter__Scaffolding__Lower_West,
+            SpotId::Filter__Lower_Hallway__East,
+            1350,
+        ),
+        (
+            SpotId::Filter__Scaffolding__Lower_West,
+            SpotId::Filter__Scaffolding__P1,
+            3684,
+        ),
+        (
+            SpotId::Filter__Scaffolding__Lower_West,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Filter__Scaffolding__P1,
+            SpotId::Filter__Scaffolding__Lower_West,
+            3684,
+        ),
+        (
+            SpotId::Filter__Scaffolding__P1,
+            SpotId::Filter__Scaffolding__P2,
+            5399,
+        ),
+        (
+            SpotId::Filter__Scaffolding__P1,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Filter__Scaffolding__P2,
+            SpotId::Filter__Scaffolding__Catwalk_Hook_Point,
+            1929,
+        ),
+        (
+            SpotId::Filter__Scaffolding__P2,
+            SpotId::Filter__Scaffolding__Lower_West,
+            2600,
+        ),
+        (
+            SpotId::Filter__Scaffolding__P2,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Filter__Scaffolding__Upper_West,
+            SpotId::Filter__Scaffolding__Catwalk_Hook_Point,
+            526,
+        ),
+        (
+            SpotId::Filter__Scaffolding__Upper_West,
+            SpotId::Filter__Upper_Hallway__East,
+            1350,
+        ),
+        (
+            SpotId::Filter__Scaffolding__Upper_West,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Filter__Upper_Hallway__Corner,
+            SpotId::Filter__Core__Bottom,
+            3350,
+        ),
+        (
+            SpotId::Filter__Upper_Hallway__Corner,
+            SpotId::Filter__Upper_Hallway__East,
+            2456,
+        ),
+        (
+            SpotId::Filter__Upper_Hallway__Corner,
+            SpotId::Filter__Upper_Hallway__West,
+            701,
+        ),
+        (
+            SpotId::Filter__Upper_Hallway__Corner,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Filter__Upper_Hallway__East,
+            SpotId::Filter__Scaffolding__Upper_West,
+            1350,
+        ),
+        (
+            SpotId::Filter__Upper_Hallway__East,
+            SpotId::Filter__Upper_Hallway__Corner,
+            2456,
+        ),
+        (
+            SpotId::Filter__Upper_Hallway__East,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Filter__Upper_Hallway__West,
+            SpotId::Filter__Core__East,
+            1350,
+        ),
+        (
+            SpotId::Filter__Upper_Hallway__West,
+            SpotId::Filter__Upper_Hallway__Corner,
+            701,
+        ),
+        (
+            SpotId::Filter__Upper_Hallway__West,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -58271,6 +58710,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            SpotId::Annuna__Vertical_Room__Save_Point,
+            12000,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
             SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
             400,
         ),
@@ -67401,6 +67845,44 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
         (SpotId::Ebih__Waterfall__West_Main_Path, SpotId::Ebih__Waterfall__West_Climb) => {
             Some(1000)
         }
+        (SpotId::Filter__Core__Catwalk_West, SpotId::Filter__Core__Terminal_West) => Some(1578),
+        (SpotId::Filter__Core__East, SpotId::Filter__Core__Bottom) => Some(2105),
+        (SpotId::Filter__Core__East, SpotId::Filter__Core__Terminal_East) => Some(4385),
+        (SpotId::Filter__Core__Terminal_East, SpotId::Filter__Core__East) => Some(4385),
+        (SpotId::Filter__Core__Terminal_East, SpotId::Filter__Core__Terminal_West) => Some(1578),
+        (SpotId::Filter__Core__Terminal_West, SpotId::Filter__Core__Catwalk_West) => Some(1578),
+        (SpotId::Filter__Core__Terminal_West, SpotId::Filter__Core__Terminal_East) => Some(1578),
+        (SpotId::Filter__Core__West, SpotId::Filter__Core__Terminal_West) => Some(4210),
+        (SpotId::Filter__Entrance__East, SpotId::Filter__Entrance__Egg) => Some(1799),
+        (SpotId::Filter__Entrance__Egg, SpotId::Filter__Entrance__East) => Some(1491),
+        (SpotId::Filter__Exit__East, SpotId::Filter__Exit__Ledge) => Some(526),
+        (SpotId::Filter__Exit__Ledge, SpotId::Filter__Exit__East) => Some(526),
+        (SpotId::Filter__Exit__Ledge, SpotId::Filter__Exit__Egg) => Some(964),
+        (SpotId::Filter__Lower_Hallway__East, SpotId::Filter__Lower_Hallway__West) => Some(3157),
+        (SpotId::Filter__Lower_Hallway__West, SpotId::Filter__Lower_Hallway__East) => Some(3157),
+        (
+            SpotId::Filter__Scaffolding__Catwalk_Hook_Point,
+            SpotId::Filter__Scaffolding__Lower_West,
+        ) => Some(2900),
+        (
+            SpotId::Filter__Scaffolding__Catwalk_Hook_Point,
+            SpotId::Filter__Scaffolding__Upper_West,
+        ) => Some(600),
+        (SpotId::Filter__Scaffolding__Lower_West, SpotId::Filter__Scaffolding__P1) => Some(3684),
+        (SpotId::Filter__Scaffolding__P1, SpotId::Filter__Scaffolding__Lower_West) => Some(3684),
+        (SpotId::Filter__Scaffolding__P1, SpotId::Filter__Scaffolding__P2) => Some(5399),
+        (SpotId::Filter__Scaffolding__P2, SpotId::Filter__Scaffolding__Catwalk_Hook_Point) => {
+            Some(1929)
+        }
+        (SpotId::Filter__Scaffolding__P2, SpotId::Filter__Scaffolding__Lower_West) => Some(2600),
+        (
+            SpotId::Filter__Scaffolding__Upper_West,
+            SpotId::Filter__Scaffolding__Catwalk_Hook_Point,
+        ) => Some(526),
+        (SpotId::Filter__Upper_Hallway__Corner, SpotId::Filter__Upper_Hallway__East) => Some(2456),
+        (SpotId::Filter__Upper_Hallway__Corner, SpotId::Filter__Upper_Hallway__West) => Some(701),
+        (SpotId::Filter__Upper_Hallway__East, SpotId::Filter__Upper_Hallway__Corner) => Some(2456),
+        (SpotId::Filter__Upper_Hallway__West, SpotId::Filter__Upper_Hallway__Corner) => Some(701),
         (SpotId::Giguna_Breach__Ascent__Bottom, SpotId::Giguna_Breach__Ascent__West_9) => Some(701),
         (SpotId::Giguna_Breach__Ascent__Top, SpotId::Giguna_Breach__Ascent__Bottom) => Some(4605),
         (SpotId::Giguna_Breach__Ascent__Top, SpotId::Giguna_Breach__Ascent__West_6) => Some(1403),
@@ -77738,6 +78220,70 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
         }
         (SpotId::Ebih__Waterfall__West_Main_Path, SpotId::Ebih__Waterfall__West_Climb) => {
             (Some(1000), vec![])
+        }
+        (SpotId::Filter__Core__Catwalk_West, SpotId::Filter__Core__Terminal_West) => {
+            (Some(1578), vec![])
+        }
+        (SpotId::Filter__Core__East, SpotId::Filter__Core__Bottom) => (Some(2105), vec![]),
+        (SpotId::Filter__Core__East, SpotId::Filter__Core__Terminal_East) => (Some(4385), vec![]),
+        (SpotId::Filter__Core__Terminal_East, SpotId::Filter__Core__East) => (Some(4385), vec![]),
+        (SpotId::Filter__Core__Terminal_East, SpotId::Filter__Core__Terminal_West) => {
+            (Some(1578), vec![])
+        }
+        (SpotId::Filter__Core__Terminal_West, SpotId::Filter__Core__Catwalk_West) => {
+            (Some(1578), vec![])
+        }
+        (SpotId::Filter__Core__Terminal_West, SpotId::Filter__Core__Terminal_East) => {
+            (Some(1578), vec![])
+        }
+        (SpotId::Filter__Core__West, SpotId::Filter__Core__Terminal_West) => (Some(4210), vec![]),
+        (SpotId::Filter__Entrance__East, SpotId::Filter__Entrance__Egg) => (Some(1799), vec![]),
+        (SpotId::Filter__Entrance__Egg, SpotId::Filter__Entrance__East) => (Some(1491), vec![]),
+        (SpotId::Filter__Exit__East, SpotId::Filter__Exit__Ledge) => (Some(526), vec![]),
+        (SpotId::Filter__Exit__Ledge, SpotId::Filter__Exit__East) => (Some(526), vec![]),
+        (SpotId::Filter__Exit__Ledge, SpotId::Filter__Exit__Egg) => (Some(964), vec![]),
+        (SpotId::Filter__Lower_Hallway__East, SpotId::Filter__Lower_Hallway__West) => {
+            (Some(3157), vec![])
+        }
+        (SpotId::Filter__Lower_Hallway__West, SpotId::Filter__Lower_Hallway__East) => {
+            (Some(3157), vec![])
+        }
+        (
+            SpotId::Filter__Scaffolding__Catwalk_Hook_Point,
+            SpotId::Filter__Scaffolding__Lower_West,
+        ) => (Some(2900), vec![]),
+        (
+            SpotId::Filter__Scaffolding__Catwalk_Hook_Point,
+            SpotId::Filter__Scaffolding__Upper_West,
+        ) => (Some(600), vec![]),
+        (SpotId::Filter__Scaffolding__Lower_West, SpotId::Filter__Scaffolding__P1) => {
+            (Some(3684), vec![])
+        }
+        (SpotId::Filter__Scaffolding__P1, SpotId::Filter__Scaffolding__Lower_West) => {
+            (Some(3684), vec![])
+        }
+        (SpotId::Filter__Scaffolding__P1, SpotId::Filter__Scaffolding__P2) => (Some(5399), vec![]),
+        (SpotId::Filter__Scaffolding__P2, SpotId::Filter__Scaffolding__Catwalk_Hook_Point) => {
+            (Some(1929), vec![])
+        }
+        (SpotId::Filter__Scaffolding__P2, SpotId::Filter__Scaffolding__Lower_West) => {
+            (Some(2600), vec![])
+        }
+        (
+            SpotId::Filter__Scaffolding__Upper_West,
+            SpotId::Filter__Scaffolding__Catwalk_Hook_Point,
+        ) => (Some(526), vec![]),
+        (SpotId::Filter__Upper_Hallway__Corner, SpotId::Filter__Upper_Hallway__East) => {
+            (Some(2456), vec![])
+        }
+        (SpotId::Filter__Upper_Hallway__Corner, SpotId::Filter__Upper_Hallway__West) => {
+            (Some(701), vec![])
+        }
+        (SpotId::Filter__Upper_Hallway__East, SpotId::Filter__Upper_Hallway__Corner) => {
+            (Some(2456), vec![])
+        }
+        (SpotId::Filter__Upper_Hallway__West, SpotId::Filter__Upper_Hallway__Corner) => {
+            (Some(701), vec![])
         }
         (SpotId::Giguna_Breach__Ascent__Bottom, SpotId::Giguna_Breach__Ascent__West_9) => {
             (Some(701), vec![])
