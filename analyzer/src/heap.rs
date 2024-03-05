@@ -1224,9 +1224,6 @@ where
     }
 
     pub fn print_queue_histogram(&self) {
-        let max_progress = <usize as TryInto<u32>>::try_into(self.max_possible_progress + 1)
-            .unwrap()
-            .into();
         let queue = self.queue.lock().unwrap();
         if queue.is_empty() {
             println!("Queue is empty, no graph to print");
@@ -1271,7 +1268,7 @@ where
             .add(p)
             .x_label("progress")
             .y_label("score")
-            .x_range(-1., max_progress);
+            .x_range(-1., 1. + self.max_possible_progress as f64);
         println!(
             "Heap scores by progress level:\n{}",
             Page::single(&v).dimensions(90, 10).to_text().unwrap()
