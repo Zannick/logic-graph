@@ -1030,7 +1030,7 @@ where
 
         let sols = self.solutions.lock().unwrap();
         if iters > 10_000_000 && sols.unique() > 4 {
-            self.queue.set_max_time(sols.best());
+            self.queue.set_max_time(sols.best() + sols.best() / 100);
         }
         if iters == 100_000 || iters % 1_000_000 == 0 {
             self.queue.print_queue_histogram();
