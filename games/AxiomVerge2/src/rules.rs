@@ -195,6 +195,55 @@ pub fn access_annuna__east_bridge__tower_west_ledge__ex__tower_secret_1__req(
     // ^_combo
     ctx.annuna__east_bridge__ctx__combo()
 }
+pub fn access_annuna__vertical_room__middle_platform_2__ex__upper_doorway_1__req(
+    ctx: &Context,
+    world: &graph::World,
+) -> bool {
+    // $hook and ^_door_opened
+    (helper__hook!(ctx, world) && ctx.annuna__vertical_room__ctx__door_opened())
+}
+pub fn access_annuna__vertical_room__upper_doorway__ex__east_20_1__req(
+    ctx: &Context,
+    world: &graph::World,
+) -> bool {
+    // ^_door_opened
+    ctx.annuna__vertical_room__ctx__door_opened()
+}
+pub fn access_annuna__vertical_room__upper_doorway__ex__middle_ministair_1__req(
+    ctx: &Context,
+    world: &graph::World,
+) -> bool {
+    // ^_door_opened
+    ctx.annuna__vertical_room__ctx__door_opened()
+}
+pub fn access_annuna__vertical_room__upper_doorway__ex__middle_platform_2_1__req(
+    ctx: &Context,
+    world: &graph::World,
+) -> bool {
+    // ^_door_opened
+    ctx.annuna__vertical_room__ctx__door_opened()
+}
+pub fn access_annuna__vertical_room__upper_doorway__ex__save_point_left_1__req(
+    ctx: &Context,
+    world: &graph::World,
+) -> bool {
+    // ^_door_opened
+    ctx.annuna__vertical_room__ctx__door_opened()
+}
+pub fn access_annuna__vertical_room__upper_doorway__ex__save_point_right_1__req(
+    ctx: &Context,
+    world: &graph::World,
+) -> bool {
+    // ^_door_opened
+    ctx.annuna__vertical_room__ctx__door_opened()
+}
+pub fn access_annuna__vertical_room__upper_doorway__ex__west_20_1__req(
+    ctx: &Context,
+    world: &graph::World,
+) -> bool {
+    // ^_door_opened
+    ctx.annuna__vertical_room__ctx__door_opened()
+}
 pub fn access_annuna__west_climb__cache__ex__switch_ledge_1__req(
     ctx: &Context,
     world: &graph::World,
@@ -1604,6 +1653,10 @@ pub fn access_map__annuna__mirror_match__save(ctx: &Context, world: &graph::Worl
     // ^map__annuna__mirror_match__save
     ctx.map__annuna__mirror_match__save()
 }
+pub fn access_map__annuna__upper_save__save(ctx: &Context, world: &graph::World) -> bool {
+    // ^map__annuna__upper_save__save
+    ctx.map__annuna__upper_save__save()
+}
 pub fn access_map__annuna__vertical_room__save(ctx: &Context, world: &graph::World) -> bool {
     // ^map__annuna__vertical_room__save
     ctx.map__annuna__vertical_room__save()
@@ -1976,6 +2029,10 @@ pub fn access_shockwave_and_not_defeat_mus_a_m20(ctx: &Context, world: &graph::W
     // $shockwave and not Defeat_MUS_A_M20
     (helper__shockwave!(ctx, world) && !ctx.has(Item::Defeat_MUS_A_M20))
 }
+pub fn access_slow(ctx: &Context, world: &graph::World) -> bool {
+    // $slow
+    helper__slow!(ctx, world)
+}
 pub fn access_sniper_valley_rock_1(ctx: &Context, world: &graph::World) -> bool {
     // Sniper_Valley_Rock_1
     ctx.has(Item::Sniper_Valley_Rock_1)
@@ -2087,6 +2144,13 @@ pub fn action_annuna__east_bridge__tower_west_ledge__enter_combo__do(
 ) {
     // ^_combo = true
     ctx.set_annuna__east_bridge__ctx__combo(true);
+}
+pub fn action_annuna__vertical_room__door_switch__open_door__do(
+    ctx: &mut Context,
+    world: &graph::World,
+) {
+    // ^_door_opened = true
+    ctx.set_annuna__vertical_room__ctx__door_opened(true);
 }
 pub fn action_annuna__west_climb__switch_ledge__open_door__do(
     ctx: &mut Context,
@@ -3146,6 +3210,125 @@ pub fn explain_annuna__east_bridge__tower_west_ledge__ex__tower_secret_1__req(
         let r = ctx.annuna__east_bridge__ctx__combo();
         edict.insert("^annuna__east_bridge__ctx__combo", format!("{:?}", r));
         (r, vec!["^annuna__east_bridge__ctx__combo"])
+    }
+}
+pub fn explain_annuna__vertical_room__middle_platform_2__ex__upper_doorway_1__req(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $hook and ^_door_opened
+    {
+        let mut left = {
+            let (res, mut refs) = hexplain__hook!(ctx, world, edict);
+            edict.insert("$hook", format!("{:?}", res));
+            refs.push("$hook");
+            (res, refs)
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let r = ctx.annuna__vertical_room__ctx__door_opened();
+                edict.insert(
+                    "^annuna__vertical_room__ctx__door_opened",
+                    format!("{:?}", r),
+                );
+                (r, vec!["^annuna__vertical_room__ctx__door_opened"])
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_annuna__vertical_room__upper_doorway__ex__east_20_1__req(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // ^_door_opened
+    {
+        let r = ctx.annuna__vertical_room__ctx__door_opened();
+        edict.insert(
+            "^annuna__vertical_room__ctx__door_opened",
+            format!("{:?}", r),
+        );
+        (r, vec!["^annuna__vertical_room__ctx__door_opened"])
+    }
+}
+pub fn explain_annuna__vertical_room__upper_doorway__ex__middle_ministair_1__req(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // ^_door_opened
+    {
+        let r = ctx.annuna__vertical_room__ctx__door_opened();
+        edict.insert(
+            "^annuna__vertical_room__ctx__door_opened",
+            format!("{:?}", r),
+        );
+        (r, vec!["^annuna__vertical_room__ctx__door_opened"])
+    }
+}
+pub fn explain_annuna__vertical_room__upper_doorway__ex__middle_platform_2_1__req(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // ^_door_opened
+    {
+        let r = ctx.annuna__vertical_room__ctx__door_opened();
+        edict.insert(
+            "^annuna__vertical_room__ctx__door_opened",
+            format!("{:?}", r),
+        );
+        (r, vec!["^annuna__vertical_room__ctx__door_opened"])
+    }
+}
+pub fn explain_annuna__vertical_room__upper_doorway__ex__save_point_left_1__req(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // ^_door_opened
+    {
+        let r = ctx.annuna__vertical_room__ctx__door_opened();
+        edict.insert(
+            "^annuna__vertical_room__ctx__door_opened",
+            format!("{:?}", r),
+        );
+        (r, vec!["^annuna__vertical_room__ctx__door_opened"])
+    }
+}
+pub fn explain_annuna__vertical_room__upper_doorway__ex__save_point_right_1__req(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // ^_door_opened
+    {
+        let r = ctx.annuna__vertical_room__ctx__door_opened();
+        edict.insert(
+            "^annuna__vertical_room__ctx__door_opened",
+            format!("{:?}", r),
+        );
+        (r, vec!["^annuna__vertical_room__ctx__door_opened"])
+    }
+}
+pub fn explain_annuna__vertical_room__upper_doorway__ex__west_20_1__req(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // ^_door_opened
+    {
+        let r = ctx.annuna__vertical_room__ctx__door_opened();
+        edict.insert(
+            "^annuna__vertical_room__ctx__door_opened",
+            format!("{:?}", r),
+        );
+        (r, vec!["^annuna__vertical_room__ctx__door_opened"])
     }
 }
 pub fn explain_annuna__west_climb__cache__ex__switch_ledge_1__req(
@@ -8436,6 +8619,18 @@ pub fn explain_map__annuna__mirror_match__save(
         (r, vec!["^map__annuna__mirror_match__save"])
     }
 }
+pub fn explain_map__annuna__upper_save__save(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // ^map__annuna__upper_save__save
+    {
+        let r = ctx.map__annuna__upper_save__save();
+        edict.insert("^map__annuna__upper_save__save", format!("{:?}", r));
+        (r, vec!["^map__annuna__upper_save__save"])
+    }
+}
 pub fn explain_map__annuna__vertical_room__save(
     ctx: &Context,
     world: &graph::World,
@@ -10080,6 +10275,19 @@ pub fn explain_shockwave_and_not_defeat_mus_a_m20(
         }
     }
 }
+pub fn explain_slow(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $slow
+    {
+        let (res, mut refs) = hexplain__slow!(ctx, world, edict);
+        edict.insert("$slow", format!("{:?}", res));
+        refs.push("$slow");
+        (res, refs)
+    }
+}
 pub fn explain_sniper_valley_rock_1(
     ctx: &Context,
     world: &graph::World,
@@ -10753,6 +10961,84 @@ pub fn observe_access_annuna__east_bridge__tower_west_ledge__ex__tower_secret_1_
     {
         full_obs.observe_annuna__east_bridge__ctx__combo();
         ctx.annuna__east_bridge__ctx__combo()
+    }
+}
+pub fn observe_access_annuna__vertical_room__middle_platform_2__ex__upper_doorway_1__req(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $hook and ^_door_opened
+    (hobserve__hook!(ctx, world, full_obs)
+        && ({
+            full_obs.observe_annuna__vertical_room__ctx__door_opened();
+            ctx.annuna__vertical_room__ctx__door_opened()
+        }))
+}
+pub fn observe_access_annuna__vertical_room__upper_doorway__ex__east_20_1__req(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // ^_door_opened
+    {
+        full_obs.observe_annuna__vertical_room__ctx__door_opened();
+        ctx.annuna__vertical_room__ctx__door_opened()
+    }
+}
+pub fn observe_access_annuna__vertical_room__upper_doorway__ex__middle_ministair_1__req(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // ^_door_opened
+    {
+        full_obs.observe_annuna__vertical_room__ctx__door_opened();
+        ctx.annuna__vertical_room__ctx__door_opened()
+    }
+}
+pub fn observe_access_annuna__vertical_room__upper_doorway__ex__middle_platform_2_1__req(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // ^_door_opened
+    {
+        full_obs.observe_annuna__vertical_room__ctx__door_opened();
+        ctx.annuna__vertical_room__ctx__door_opened()
+    }
+}
+pub fn observe_access_annuna__vertical_room__upper_doorway__ex__save_point_left_1__req(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // ^_door_opened
+    {
+        full_obs.observe_annuna__vertical_room__ctx__door_opened();
+        ctx.annuna__vertical_room__ctx__door_opened()
+    }
+}
+pub fn observe_access_annuna__vertical_room__upper_doorway__ex__save_point_right_1__req(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // ^_door_opened
+    {
+        full_obs.observe_annuna__vertical_room__ctx__door_opened();
+        ctx.annuna__vertical_room__ctx__door_opened()
+    }
+}
+pub fn observe_access_annuna__vertical_room__upper_doorway__ex__west_20_1__req(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // ^_door_opened
+    {
+        full_obs.observe_annuna__vertical_room__ctx__door_opened();
+        ctx.annuna__vertical_room__ctx__door_opened()
     }
 }
 pub fn observe_access_annuna__west_climb__cache__ex__switch_ledge_1__req(
@@ -13475,6 +13761,17 @@ pub fn observe_access_map__annuna__mirror_match__save(
         ctx.map__annuna__mirror_match__save()
     }
 }
+pub fn observe_access_map__annuna__upper_save__save(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // ^map__annuna__upper_save__save
+    {
+        full_obs.observe_map__annuna__upper_save__save();
+        ctx.map__annuna__upper_save__save()
+    }
+}
 pub fn observe_access_map__annuna__vertical_room__save(
     ctx: &Context,
     world: &graph::World,
@@ -14392,6 +14689,14 @@ pub fn observe_access_shockwave_and_not_defeat_mus_a_m20(
             !ctx.has(Item::Defeat_MUS_A_M20)
         }))
 }
+pub fn observe_access_slow(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $slow
+    hobserve__slow!(ctx, world, full_obs)
+}
 pub fn observe_access_sniper_valley_rock_1(
     ctx: &Context,
     world: &graph::World,
@@ -14636,6 +14941,13 @@ pub fn observe_action_annuna__east_bridge__tower_west_ledge__enter_combo__do(
     full_obs: &mut FullObservation,
 ) {
     // ^_combo = true
+}
+pub fn observe_action_annuna__vertical_room__door_switch__open_door__do(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) {
+    // ^_door_opened = true
 }
 pub fn observe_action_annuna__west_climb__switch_ledge__open_door__do(
     ctx: &Context,

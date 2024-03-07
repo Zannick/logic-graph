@@ -316,6 +316,14 @@ areas:
           tags: [warp]
     - name: Annuna Upper
       coord: [39, 17]
+      exits:
+        - to: Annuna > Upper Save > Save Point
+          req: ^map__annuna__upper_save__save
+          time: 12
+          penalties:
+            - when: ^mode != 'drone'
+              add: 2.5
+          tags: [warp]
     - name: Annuna Vertical Room
       coord: [40, 20]
       exits:

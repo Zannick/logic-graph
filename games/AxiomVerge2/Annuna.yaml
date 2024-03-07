@@ -998,6 +998,8 @@ areas:
   datamap:
     map_spot:
       save: Menu > Kiengir Map > Annuna Vertical Room
+  start:
+    _door_opened: false
   spots:
     #region Lower
     - name: West 22
@@ -1219,11 +1221,21 @@ areas:
           thru: [40.3, 19.9]
         - to: Save Point
           jumps: 1
+      exits:
+        - to: Middle Platform 1
+          req: $hook and $hover
+          movement: base
+          jumps: 3
     - name: Save Point
       coord: [40.5, 19.5]
       local:
         - to: Save Point Left
         - to: Save Point Right
+      exits:
+        - to: Middle Platform 2
+          req: $hook
+          movement: base
+          jumps: 3
       actions:
         - name: Save
           do: $save
@@ -1252,6 +1264,10 @@ areas:
       exits:
         - to: Upper Hallway > West
           tags: [xshift]
+        - to: Middle Platform 1
+          req: $hook and $hover
+          movement: base
+          jumps: 3
     - name: Above Plinth
       coord: [40.6, 20.2]
       local:
@@ -1278,9 +1294,100 @@ areas:
           req: $hook
           movement: base
           jumps: 2
+
+    - name: Middle Platform 1
+      coord: [40.575, 18.95]
+      local:
+        - to: Save Point
+        - to: Save Point Left
+        - to: Save Point Right
+        - to: East 20
+    - name: Middle Platform 2
+      coord: [40.475, 18.475]
+      local:
+        - to: Middle Platform 1
+        - to: Save Point
+        - to: East 20
+      exits:
+        - to: Upper Doorway
+          req: $hook and ^_door_opened
+          movement: base
+          jumps: 3
     #endregion
 
     #region Upper
+    - name: East 18
+      coord: [40.95, 17.6]
+      local:
+        - to: Upper Platform
+          jumps: 1
+        - to: Upper Doorway
+    - name: Upper Platform
+      coord: [40.65, 17.4]
+      local:
+        - to: Door Switch
+        - to: East 18
+      exits:
+        - to: Near Upper Ledge
+          req: $hover
+          movement: base
+          jumps: 1
+    - name: Upper Doorway
+      coord: [40.5, 17.9]
+      local:
+        - to: Door Switch
+          jumps: 2
+        - to: East 18
+          jumps: 2
+      exits:
+        - to: Middle Platform 2
+          req: ^_door_opened
+          movement: base
+        - to: Save Point Left
+          req: ^_door_opened
+          movement: base
+        - to: Save Point Right
+          req: ^_door_opened
+          movement: base
+        - to: East 20
+          req: ^_door_opened
+          movement: base
+        - to: Middle Ministair
+          req: ^_door_opened
+          movement: base
+        - to: West 20
+          req: ^_door_opened
+          movement: base
+    - name: Door Switch
+      coord: [40.2, 17.6]
+      local:
+        - to: Upper Doorway
+      actions:
+        - name: Open Door
+          req: $open
+          do: ^_door_opened = true
+          tags: [hack]
+    - name: Near Upper Ledge
+      coord: [40.2, 17.15]
+      local:
+        - to: Door Switch
+        - to: Upper Doorway
+      exits:
+        - to: West 17
+          req: $hook
+          movement: base
+          jumps: 1
+    - name: West 17
+      coord: [40.1, 16.75]
+      local:
+        - to: Near Upper Ledge
+        - to: Upper Doorway
+      exits:
+        - to: Upper Platform
+          req: $hover
+          movement: base
+        - to: Upper Save > East
+          tags: [xdoor]
     #endregion
 
 - name: Upper Hallway
@@ -1781,18 +1888,105 @@ areas:
   spots:
     - name: East 
       coord: [42.95, 18.8]
+      local:
+        - to: Southwest
+      exits:
+        - to: Filter Teleporter > West 19
+          tags: [xshift]
     - name: Southwest
       coord: [41.25, 18.8]
+      local:
+        - to: East
+      exits:
+        - to: Center
+          req: $hook and $hover
+          movement: base
+          jumps: 3
     - name: Center
       coord: [42.1, 17.95]
+      local:
+        - to: Healthy Corner
+        - to: Southwest
+      exits:
+        - to: Northeast Ledge
+          req: $hook and $hover
+          movement: base
+          jumps: 2
     - name: Healthy Corner
       coord: [42.8, 17.95]
+      local:
+        - to: Center
+      locations:
+        - name: Health Refill
+          item: Power_Core
+          req: $more_refills
+          tags: [standing]
+      exits:
+        - to: Northeast Ledge
+          req: $hook
+          movement: base
+          jumps: 2
     - name: Northeast Ledge
       coord: [42.7, 17.5]
+      local:
+        - to: Healthy Corner
+        - to: Center
+      exits:
+        - to: Upper Seam
+          req: $slow
+          price: 50
+          movement: base
     - name: Upper Seam
       coord: [42.15, 17.5]
+      local:
+        - to: West
+        - to: Northeast Ledge
     - name: West
       coord: [41.05, 17.6]
+      local:
+        - to: Upper Seam
+          jumps: 1
+      exits:
+        - to: Vertical Room > East 18
+          tags: [xshift]
+
+- name: Upper Save
+  on_entry: $reset_old_area(^newpos)
+  map: save
+  data:
+    map_spot: Menu > Kiengir Map > Annuna Upper
+  spots:
+    - name: East
+      coord: [39.95, 16.75]
+      local:
+        - to: Save Point
+          jumps: 1
+      exits:
+        - to: Vertical Room > West 17
+          tags: [xdoor]
+    - name: Save Point
+      coord: [39.5, 16.6]
+      local:
+        - to: East
+        - to: West
+      actions:
+        - name: Save
+          do: $save
+          tags: [save]
+    - name: West
+      coord: [39.05, 16.75]
+      local:
+        - to: Save Point
+          jumps: 1
+      exits:
+        - to: Lamassu > East 17
+          tags: [xshift]
+
+- name: Lamassu
+  on_entry: $reset_old_area(^newpos)
+  spots:
+    - name: East 17
+      coord: [38.95, 16.75]
 
 - name: Udug Gate
   on_entry: $reset_old_area(^newpos)

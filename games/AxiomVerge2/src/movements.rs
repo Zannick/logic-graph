@@ -1692,6 +1692,46 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
         ) => 2982,
         (
             [false],
+            SpotId::Annuna__Spider_Room__Center,
+            SpotId::Annuna__Spider_Room__Healthy_Corner,
+        ) => 2456,
+        ([false], SpotId::Annuna__Spider_Room__Center, SpotId::Annuna__Spider_Room__Southwest) => {
+            2982
+        }
+        ([false], SpotId::Annuna__Spider_Room__East, SpotId::Annuna__Spider_Room__Southwest) => {
+            5964
+        }
+        (
+            [false],
+            SpotId::Annuna__Spider_Room__Healthy_Corner,
+            SpotId::Annuna__Spider_Room__Center,
+        ) => 2456,
+        (
+            [false],
+            SpotId::Annuna__Spider_Room__Northeast_Ledge,
+            SpotId::Annuna__Spider_Room__Center,
+        ) => 2105,
+        (
+            [false],
+            SpotId::Annuna__Spider_Room__Northeast_Ledge,
+            SpotId::Annuna__Spider_Room__Healthy_Corner,
+        ) => 449,
+        ([false], SpotId::Annuna__Spider_Room__Southwest, SpotId::Annuna__Spider_Room__East) => {
+            5964
+        }
+        (
+            [false],
+            SpotId::Annuna__Spider_Room__Upper_Seam,
+            SpotId::Annuna__Spider_Room__Northeast_Ledge,
+        ) => 1929,
+        ([false], SpotId::Annuna__Spider_Room__Upper_Seam, SpotId::Annuna__Spider_Room__West) => {
+            3859
+        }
+        ([false], SpotId::Annuna__Spider_Room__West, SpotId::Annuna__Spider_Room__Upper_Seam) => {
+            3859
+        }
+        (
+            [false],
             SpotId::Annuna__Twisty_Passages__Bottom_Middle,
             SpotId::Annuna__Twisty_Passages__Bottom_West,
         ) => 1754,
@@ -1948,6 +1988,10 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
             SpotId::Annuna__Upper_Hallway__West,
             SpotId::Annuna__Upper_Hallway__Portal_Stand,
         ) => 5087,
+        ([false], SpotId::Annuna__Upper_Save__East, SpotId::Annuna__Upper_Save__Save_Point) => 1578,
+        ([false], SpotId::Annuna__Upper_Save__Save_Point, SpotId::Annuna__Upper_Save__East) => 1578,
+        ([false], SpotId::Annuna__Upper_Save__Save_Point, SpotId::Annuna__Upper_Save__West) => 1578,
+        ([false], SpotId::Annuna__Upper_Save__West, SpotId::Annuna__Upper_Save__Save_Point) => 1578,
         (
             [false],
             SpotId::Annuna__Vertical_Room__Above_Plinth,
@@ -1968,6 +2012,21 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
             SpotId::Annuna__Vertical_Room__Above_Plinth,
             SpotId::Annuna__Vertical_Room__Plinth,
         ) => 400,
+        (
+            [false],
+            SpotId::Annuna__Vertical_Room__Door_Switch,
+            SpotId::Annuna__Vertical_Room__Upper_Doorway,
+        ) => 1052,
+        (
+            [false],
+            SpotId::Annuna__Vertical_Room__East_18,
+            SpotId::Annuna__Vertical_Room__Upper_Doorway,
+        ) => 1578,
+        (
+            [false],
+            SpotId::Annuna__Vertical_Room__East_18,
+            SpotId::Annuna__Vertical_Room__Upper_Platform,
+        ) => 1052,
         // [0.526316, 0.6, 0.526316]
         (
             [false],
@@ -2155,9 +2214,54 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
         ) => 175,
         (
             [false],
+            SpotId::Annuna__Vertical_Room__Middle_Platform_1,
+            SpotId::Annuna__Vertical_Room__East_20,
+        ) => 1315,
+        (
+            [false],
+            SpotId::Annuna__Vertical_Room__Middle_Platform_1,
+            SpotId::Annuna__Vertical_Room__Save_Point,
+        ) => 550,
+        (
+            [false],
+            SpotId::Annuna__Vertical_Room__Middle_Platform_1,
+            SpotId::Annuna__Vertical_Room__Save_Point_Left,
+        ) => 964,
+        (
+            [false],
+            SpotId::Annuna__Vertical_Room__Middle_Platform_1,
+            SpotId::Annuna__Vertical_Room__Save_Point_Right,
+        ) => 650,
+        (
+            [false],
+            SpotId::Annuna__Vertical_Room__Middle_Platform_2,
+            SpotId::Annuna__Vertical_Room__East_20,
+        ) => 1666,
+        (
+            [false],
+            SpotId::Annuna__Vertical_Room__Middle_Platform_2,
+            SpotId::Annuna__Vertical_Room__Middle_Platform_1,
+        ) => 474,
+        (
+            [false],
+            SpotId::Annuna__Vertical_Room__Middle_Platform_2,
+            SpotId::Annuna__Vertical_Room__Save_Point,
+        ) => 1024,
+        (
+            [false],
             SpotId::Annuna__Vertical_Room__Middle_West_Shaft,
             SpotId::Annuna__Vertical_Room__Above_Plinth,
         ) => 1228,
+        (
+            [false],
+            SpotId::Annuna__Vertical_Room__Near_Upper_Ledge,
+            SpotId::Annuna__Vertical_Room__Door_Switch,
+        ) => 450,
+        (
+            [false],
+            SpotId::Annuna__Vertical_Room__Near_Upper_Ledge,
+            SpotId::Annuna__Vertical_Room__Upper_Doorway,
+        ) => 1052,
         (
             [false],
             SpotId::Annuna__Vertical_Room__Plinth,
@@ -2230,6 +2334,36 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
             SpotId::Annuna__Vertical_Room__Save_Point_Right,
             SpotId::Annuna__Vertical_Room__Save_Point,
         ) => 701,
+        (
+            [false],
+            SpotId::Annuna__Vertical_Room__Upper_Doorway,
+            SpotId::Annuna__Vertical_Room__Door_Switch,
+        ) => 1200,
+        (
+            [false],
+            SpotId::Annuna__Vertical_Room__Upper_Doorway,
+            SpotId::Annuna__Vertical_Room__East_18,
+        ) => 1578,
+        (
+            [false],
+            SpotId::Annuna__Vertical_Room__Upper_Platform,
+            SpotId::Annuna__Vertical_Room__Door_Switch,
+        ) => 1578,
+        (
+            [false],
+            SpotId::Annuna__Vertical_Room__Upper_Platform,
+            SpotId::Annuna__Vertical_Room__East_18,
+        ) => 1052,
+        (
+            [false],
+            SpotId::Annuna__Vertical_Room__West_17,
+            SpotId::Annuna__Vertical_Room__Near_Upper_Ledge,
+        ) => 399,
+        (
+            [false],
+            SpotId::Annuna__Vertical_Room__West_17,
+            SpotId::Annuna__Vertical_Room__Upper_Doorway,
+        ) => 1403,
         (
             [false],
             SpotId::Annuna__Vertical_Room__West_20,
@@ -15798,6 +15932,42 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
         ) => 2982,
         (
             [true],
+            SpotId::Annuna__Spider_Room__Center,
+            SpotId::Annuna__Spider_Room__Healthy_Corner,
+        ) => 2456,
+        ([true], SpotId::Annuna__Spider_Room__Center, SpotId::Annuna__Spider_Room__Southwest) => {
+            2982
+        }
+        ([true], SpotId::Annuna__Spider_Room__East, SpotId::Annuna__Spider_Room__Southwest) => 5964,
+        (
+            [true],
+            SpotId::Annuna__Spider_Room__Healthy_Corner,
+            SpotId::Annuna__Spider_Room__Center,
+        ) => 2456,
+        (
+            [true],
+            SpotId::Annuna__Spider_Room__Northeast_Ledge,
+            SpotId::Annuna__Spider_Room__Center,
+        ) => 2105,
+        (
+            [true],
+            SpotId::Annuna__Spider_Room__Northeast_Ledge,
+            SpotId::Annuna__Spider_Room__Healthy_Corner,
+        ) => 449,
+        ([true], SpotId::Annuna__Spider_Room__Southwest, SpotId::Annuna__Spider_Room__East) => 5964,
+        (
+            [true],
+            SpotId::Annuna__Spider_Room__Upper_Seam,
+            SpotId::Annuna__Spider_Room__Northeast_Ledge,
+        ) => 1929,
+        ([true], SpotId::Annuna__Spider_Room__Upper_Seam, SpotId::Annuna__Spider_Room__West) => {
+            3859
+        }
+        ([true], SpotId::Annuna__Spider_Room__West, SpotId::Annuna__Spider_Room__Upper_Seam) => {
+            3859
+        }
+        (
+            [true],
             SpotId::Annuna__Twisty_Passages__Bottom_Middle,
             SpotId::Annuna__Twisty_Passages__Bottom_West,
         ) => 1754,
@@ -16054,6 +16224,10 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
             SpotId::Annuna__Upper_Hallway__West,
             SpotId::Annuna__Upper_Hallway__Portal_Stand,
         ) => 5087,
+        ([true], SpotId::Annuna__Upper_Save__East, SpotId::Annuna__Upper_Save__Save_Point) => 1578,
+        ([true], SpotId::Annuna__Upper_Save__Save_Point, SpotId::Annuna__Upper_Save__East) => 1578,
+        ([true], SpotId::Annuna__Upper_Save__Save_Point, SpotId::Annuna__Upper_Save__West) => 1578,
+        ([true], SpotId::Annuna__Upper_Save__West, SpotId::Annuna__Upper_Save__Save_Point) => 1578,
         (
             [true],
             SpotId::Annuna__Vertical_Room__Above_Plinth,
@@ -16074,6 +16248,21 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
             SpotId::Annuna__Vertical_Room__Above_Plinth,
             SpotId::Annuna__Vertical_Room__Plinth,
         ) => 400,
+        (
+            [true],
+            SpotId::Annuna__Vertical_Room__Door_Switch,
+            SpotId::Annuna__Vertical_Room__Upper_Doorway,
+        ) => 1052,
+        (
+            [true],
+            SpotId::Annuna__Vertical_Room__East_18,
+            SpotId::Annuna__Vertical_Room__Upper_Doorway,
+        ) => 1578,
+        (
+            [true],
+            SpotId::Annuna__Vertical_Room__East_18,
+            SpotId::Annuna__Vertical_Room__Upper_Platform,
+        ) => 1052,
         // [0.526316, 0.6, 0.526316]
         (
             [true],
@@ -16259,9 +16448,54 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
         ) => 175,
         (
             [true],
+            SpotId::Annuna__Vertical_Room__Middle_Platform_1,
+            SpotId::Annuna__Vertical_Room__East_20,
+        ) => 1315,
+        (
+            [true],
+            SpotId::Annuna__Vertical_Room__Middle_Platform_1,
+            SpotId::Annuna__Vertical_Room__Save_Point,
+        ) => 550,
+        (
+            [true],
+            SpotId::Annuna__Vertical_Room__Middle_Platform_1,
+            SpotId::Annuna__Vertical_Room__Save_Point_Left,
+        ) => 964,
+        (
+            [true],
+            SpotId::Annuna__Vertical_Room__Middle_Platform_1,
+            SpotId::Annuna__Vertical_Room__Save_Point_Right,
+        ) => 650,
+        (
+            [true],
+            SpotId::Annuna__Vertical_Room__Middle_Platform_2,
+            SpotId::Annuna__Vertical_Room__East_20,
+        ) => 1666,
+        (
+            [true],
+            SpotId::Annuna__Vertical_Room__Middle_Platform_2,
+            SpotId::Annuna__Vertical_Room__Middle_Platform_1,
+        ) => 474,
+        (
+            [true],
+            SpotId::Annuna__Vertical_Room__Middle_Platform_2,
+            SpotId::Annuna__Vertical_Room__Save_Point,
+        ) => 1024,
+        (
+            [true],
             SpotId::Annuna__Vertical_Room__Middle_West_Shaft,
             SpotId::Annuna__Vertical_Room__Above_Plinth,
         ) => 1228,
+        (
+            [true],
+            SpotId::Annuna__Vertical_Room__Near_Upper_Ledge,
+            SpotId::Annuna__Vertical_Room__Door_Switch,
+        ) => 450,
+        (
+            [true],
+            SpotId::Annuna__Vertical_Room__Near_Upper_Ledge,
+            SpotId::Annuna__Vertical_Room__Upper_Doorway,
+        ) => 1052,
         (
             [true],
             SpotId::Annuna__Vertical_Room__Plinth,
@@ -16334,6 +16568,36 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
             SpotId::Annuna__Vertical_Room__Save_Point_Right,
             SpotId::Annuna__Vertical_Room__Save_Point,
         ) => 701,
+        (
+            [true],
+            SpotId::Annuna__Vertical_Room__Upper_Doorway,
+            SpotId::Annuna__Vertical_Room__Door_Switch,
+        ) => 1200,
+        (
+            [true],
+            SpotId::Annuna__Vertical_Room__Upper_Doorway,
+            SpotId::Annuna__Vertical_Room__East_18,
+        ) => 1578,
+        (
+            [true],
+            SpotId::Annuna__Vertical_Room__Upper_Platform,
+            SpotId::Annuna__Vertical_Room__Door_Switch,
+        ) => 1578,
+        (
+            [true],
+            SpotId::Annuna__Vertical_Room__Upper_Platform,
+            SpotId::Annuna__Vertical_Room__East_18,
+        ) => 1052,
+        (
+            [true],
+            SpotId::Annuna__Vertical_Room__West_17,
+            SpotId::Annuna__Vertical_Room__Near_Upper_Ledge,
+        ) => 399,
+        (
+            [true],
+            SpotId::Annuna__Vertical_Room__West_17,
+            SpotId::Annuna__Vertical_Room__Upper_Doorway,
+        ) => 1403,
         (
             [true],
             SpotId::Annuna__Vertical_Room__West_20,
@@ -28873,6 +29137,73 @@ pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
             SpotId::Annuna__Vertical_Room__Middle_West_Shaft,
             SpotId::Annuna__Vertical_Room__Above_Plinth,
         ) => true,
+        (
+            SpotId::Annuna__Vertical_Room__Middle_Platform_1,
+            SpotId::Annuna__Vertical_Room__Save_Point,
+        ) => true,
+        (
+            SpotId::Annuna__Vertical_Room__Middle_Platform_1,
+            SpotId::Annuna__Vertical_Room__Save_Point_Left,
+        ) => true,
+        (
+            SpotId::Annuna__Vertical_Room__Middle_Platform_1,
+            SpotId::Annuna__Vertical_Room__Save_Point_Right,
+        ) => true,
+        (
+            SpotId::Annuna__Vertical_Room__Middle_Platform_1,
+            SpotId::Annuna__Vertical_Room__East_20,
+        ) => true,
+        (
+            SpotId::Annuna__Vertical_Room__Middle_Platform_2,
+            SpotId::Annuna__Vertical_Room__Middle_Platform_1,
+        ) => true,
+        (
+            SpotId::Annuna__Vertical_Room__Middle_Platform_2,
+            SpotId::Annuna__Vertical_Room__Save_Point,
+        ) => true,
+        (
+            SpotId::Annuna__Vertical_Room__Middle_Platform_2,
+            SpotId::Annuna__Vertical_Room__East_20,
+        ) => true,
+        (SpotId::Annuna__Vertical_Room__East_18, SpotId::Annuna__Vertical_Room__Upper_Platform) => {
+            true
+        }
+        (SpotId::Annuna__Vertical_Room__East_18, SpotId::Annuna__Vertical_Room__Upper_Doorway) => {
+            true
+        }
+        (
+            SpotId::Annuna__Vertical_Room__Upper_Platform,
+            SpotId::Annuna__Vertical_Room__Door_Switch,
+        ) => true,
+        (SpotId::Annuna__Vertical_Room__Upper_Platform, SpotId::Annuna__Vertical_Room__East_18) => {
+            true
+        }
+        (
+            SpotId::Annuna__Vertical_Room__Upper_Doorway,
+            SpotId::Annuna__Vertical_Room__Door_Switch,
+        ) => true,
+        (SpotId::Annuna__Vertical_Room__Upper_Doorway, SpotId::Annuna__Vertical_Room__East_18) => {
+            true
+        }
+        (
+            SpotId::Annuna__Vertical_Room__Door_Switch,
+            SpotId::Annuna__Vertical_Room__Upper_Doorway,
+        ) => true,
+        (
+            SpotId::Annuna__Vertical_Room__Near_Upper_Ledge,
+            SpotId::Annuna__Vertical_Room__Door_Switch,
+        ) => true,
+        (
+            SpotId::Annuna__Vertical_Room__Near_Upper_Ledge,
+            SpotId::Annuna__Vertical_Room__Upper_Doorway,
+        ) => true,
+        (
+            SpotId::Annuna__Vertical_Room__West_17,
+            SpotId::Annuna__Vertical_Room__Near_Upper_Ledge,
+        ) => true,
+        (SpotId::Annuna__Vertical_Room__West_17, SpotId::Annuna__Vertical_Room__Upper_Doorway) => {
+            true
+        }
         (SpotId::Annuna__Upper_Hallway__West, SpotId::Annuna__Upper_Hallway__Portal_Stand) => true,
         (SpotId::Annuna__Upper_Hallway__Portal_Stand, SpotId::Annuna__Upper_Hallway__West) => true,
         (
@@ -29054,6 +29385,25 @@ pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
             SpotId::Annuna__Filter_Teleporter__Northeast_Cubby,
             SpotId::Annuna__Filter_Teleporter__East_Platform_4,
         ) => true,
+        (SpotId::Annuna__Spider_Room__East, SpotId::Annuna__Spider_Room__Southwest) => true,
+        (SpotId::Annuna__Spider_Room__Southwest, SpotId::Annuna__Spider_Room__East) => true,
+        (SpotId::Annuna__Spider_Room__Center, SpotId::Annuna__Spider_Room__Healthy_Corner) => true,
+        (SpotId::Annuna__Spider_Room__Center, SpotId::Annuna__Spider_Room__Southwest) => true,
+        (SpotId::Annuna__Spider_Room__Healthy_Corner, SpotId::Annuna__Spider_Room__Center) => true,
+        (
+            SpotId::Annuna__Spider_Room__Northeast_Ledge,
+            SpotId::Annuna__Spider_Room__Healthy_Corner,
+        ) => true,
+        (SpotId::Annuna__Spider_Room__Northeast_Ledge, SpotId::Annuna__Spider_Room__Center) => true,
+        (SpotId::Annuna__Spider_Room__Upper_Seam, SpotId::Annuna__Spider_Room__West) => true,
+        (SpotId::Annuna__Spider_Room__Upper_Seam, SpotId::Annuna__Spider_Room__Northeast_Ledge) => {
+            true
+        }
+        (SpotId::Annuna__Spider_Room__West, SpotId::Annuna__Spider_Room__Upper_Seam) => true,
+        (SpotId::Annuna__Upper_Save__East, SpotId::Annuna__Upper_Save__Save_Point) => true,
+        (SpotId::Annuna__Upper_Save__Save_Point, SpotId::Annuna__Upper_Save__East) => true,
+        (SpotId::Annuna__Upper_Save__Save_Point, SpotId::Annuna__Upper_Save__West) => true,
+        (SpotId::Annuna__Upper_Save__West, SpotId::Annuna__Upper_Save__Save_Point) => true,
         (SpotId::Annuna__Center_Save__East, SpotId::Annuna__Center_Save__Save_Point) => true,
         (SpotId::Annuna__Center_Save__Save_Point, SpotId::Annuna__Center_Save__West_Floor) => true,
         (SpotId::Annuna__Center_Save__Save_Point, SpotId::Annuna__Center_Save__East) => true,
@@ -40054,6 +40404,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             1000,
         ),
         (
+            SpotId::Annuna__Lamassu__East_17,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
             SpotId::Annuna__Lower_Hallway__Dais_Left,
             SpotId::Annuna__Lower_Hallway__Dais_Right,
             1052,
@@ -40690,8 +41045,33 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Annuna__Spider_Room__Center,
+            SpotId::Annuna__Spider_Room__Healthy_Corner,
+            2456,
+        ),
+        (
+            SpotId::Annuna__Spider_Room__Center,
+            SpotId::Annuna__Spider_Room__Northeast_Ledge,
+            2105,
+        ),
+        (
+            SpotId::Annuna__Spider_Room__Center,
+            SpotId::Annuna__Spider_Room__Southwest,
+            2982,
+        ),
+        (
+            SpotId::Annuna__Spider_Room__Center,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
+        ),
+        (
+            SpotId::Annuna__Spider_Room__East,
+            SpotId::Annuna__Filter_Teleporter__West_19,
+            1350,
+        ),
+        (
+            SpotId::Annuna__Spider_Room__East,
+            SpotId::Annuna__Spider_Room__Southwest,
+            5964,
         ),
         (
             SpotId::Annuna__Spider_Room__East,
@@ -40700,8 +41080,33 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Annuna__Spider_Room__Healthy_Corner,
+            SpotId::Annuna__Spider_Room__Center,
+            2456,
+        ),
+        (
+            SpotId::Annuna__Spider_Room__Healthy_Corner,
+            SpotId::Annuna__Spider_Room__Northeast_Ledge,
+            1200,
+        ),
+        (
+            SpotId::Annuna__Spider_Room__Healthy_Corner,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
+        ),
+        (
+            SpotId::Annuna__Spider_Room__Northeast_Ledge,
+            SpotId::Annuna__Spider_Room__Center,
+            2105,
+        ),
+        (
+            SpotId::Annuna__Spider_Room__Northeast_Ledge,
+            SpotId::Annuna__Spider_Room__Healthy_Corner,
+            449,
+        ),
+        (
+            SpotId::Annuna__Spider_Room__Northeast_Ledge,
+            SpotId::Annuna__Spider_Room__Upper_Seam,
+            1929,
         ),
         (
             SpotId::Annuna__Spider_Room__Northeast_Ledge,
@@ -40710,13 +41115,43 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Annuna__Spider_Room__Southwest,
+            SpotId::Annuna__Spider_Room__Center,
+            2982,
+        ),
+        (
+            SpotId::Annuna__Spider_Room__Southwest,
+            SpotId::Annuna__Spider_Room__East,
+            5964,
+        ),
+        (
+            SpotId::Annuna__Spider_Room__Southwest,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
         (
             SpotId::Annuna__Spider_Room__Upper_Seam,
+            SpotId::Annuna__Spider_Room__Northeast_Ledge,
+            1929,
+        ),
+        (
+            SpotId::Annuna__Spider_Room__Upper_Seam,
+            SpotId::Annuna__Spider_Room__West,
+            3859,
+        ),
+        (
+            SpotId::Annuna__Spider_Room__Upper_Seam,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
+        ),
+        (
+            SpotId::Annuna__Spider_Room__West,
+            SpotId::Annuna__Spider_Room__Upper_Seam,
+            3859,
+        ),
+        (
+            SpotId::Annuna__Spider_Room__West,
+            SpotId::Annuna__Vertical_Room__East_18,
+            1350,
         ),
         (
             SpotId::Annuna__Spider_Room__West,
@@ -41134,6 +41569,51 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             1000,
         ),
         (
+            SpotId::Annuna__Upper_Save__East,
+            SpotId::Annuna__Upper_Save__Save_Point,
+            1578,
+        ),
+        (
+            SpotId::Annuna__Upper_Save__East,
+            SpotId::Annuna__Vertical_Room__West_17,
+            1600,
+        ),
+        (
+            SpotId::Annuna__Upper_Save__East,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Upper_Save__Save_Point,
+            SpotId::Annuna__Upper_Save__East,
+            1578,
+        ),
+        (
+            SpotId::Annuna__Upper_Save__Save_Point,
+            SpotId::Annuna__Upper_Save__West,
+            1578,
+        ),
+        (
+            SpotId::Annuna__Upper_Save__Save_Point,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Upper_Save__West,
+            SpotId::Annuna__Lamassu__East_17,
+            1350,
+        ),
+        (
+            SpotId::Annuna__Upper_Save__West,
+            SpotId::Annuna__Upper_Save__Save_Point,
+            1578,
+        ),
+        (
+            SpotId::Annuna__Upper_Save__West,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
             SpotId::Annuna__Vertical_Room__Above_Plinth,
             SpotId::Annuna__Vertical_Room__East_21,
             1228,
@@ -41164,6 +41644,31 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             1000,
         ),
         (
+            SpotId::Annuna__Vertical_Room__Door_Switch,
+            SpotId::Annuna__Vertical_Room__Upper_Doorway,
+            1052,
+        ),
+        (
+            SpotId::Annuna__Vertical_Room__Door_Switch,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Vertical_Room__East_18,
+            SpotId::Annuna__Vertical_Room__Upper_Doorway,
+            1578,
+        ),
+        (
+            SpotId::Annuna__Vertical_Room__East_18,
+            SpotId::Annuna__Vertical_Room__Upper_Platform,
+            1052,
+        ),
+        (
+            SpotId::Annuna__Vertical_Room__East_18,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
             SpotId::Annuna__Vertical_Room__East_20,
             SpotId::Annuna__Upper_Hallway__West,
             1350,
@@ -41177,6 +41682,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Annuna__Vertical_Room__East_20,
             SpotId::Annuna__Vertical_Room__Gate_Button,
             1526,
+        ),
+        (
+            SpotId::Annuna__Vertical_Room__East_20,
+            SpotId::Annuna__Vertical_Room__Middle_Platform_1,
+            1799,
         ),
         (
             SpotId::Annuna__Vertical_Room__East_20,
@@ -41474,6 +41984,56 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             1000,
         ),
         (
+            SpotId::Annuna__Vertical_Room__Middle_Platform_1,
+            SpotId::Annuna__Vertical_Room__East_20,
+            1315,
+        ),
+        (
+            SpotId::Annuna__Vertical_Room__Middle_Platform_1,
+            SpotId::Annuna__Vertical_Room__Save_Point,
+            550,
+        ),
+        (
+            SpotId::Annuna__Vertical_Room__Middle_Platform_1,
+            SpotId::Annuna__Vertical_Room__Save_Point_Left,
+            964,
+        ),
+        (
+            SpotId::Annuna__Vertical_Room__Middle_Platform_1,
+            SpotId::Annuna__Vertical_Room__Save_Point_Right,
+            650,
+        ),
+        (
+            SpotId::Annuna__Vertical_Room__Middle_Platform_1,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Vertical_Room__Middle_Platform_2,
+            SpotId::Annuna__Vertical_Room__East_20,
+            1666,
+        ),
+        (
+            SpotId::Annuna__Vertical_Room__Middle_Platform_2,
+            SpotId::Annuna__Vertical_Room__Middle_Platform_1,
+            474,
+        ),
+        (
+            SpotId::Annuna__Vertical_Room__Middle_Platform_2,
+            SpotId::Annuna__Vertical_Room__Save_Point,
+            1024,
+        ),
+        (
+            SpotId::Annuna__Vertical_Room__Middle_Platform_2,
+            SpotId::Annuna__Vertical_Room__Upper_Doorway,
+            1799,
+        ),
+        (
+            SpotId::Annuna__Vertical_Room__Middle_Platform_2,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
             SpotId::Annuna__Vertical_Room__Middle_West_Shaft,
             SpotId::Annuna__Vertical_Room__Above_Plinth,
             1228,
@@ -41490,6 +42050,26 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Annuna__Vertical_Room__Middle_West_Shaft,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Vertical_Room__Near_Upper_Ledge,
+            SpotId::Annuna__Vertical_Room__Door_Switch,
+            450,
+        ),
+        (
+            SpotId::Annuna__Vertical_Room__Near_Upper_Ledge,
+            SpotId::Annuna__Vertical_Room__Upper_Doorway,
+            1052,
+        ),
+        (
+            SpotId::Annuna__Vertical_Room__Near_Upper_Ledge,
+            SpotId::Annuna__Vertical_Room__West_17,
+            600,
+        ),
+        (
+            SpotId::Annuna__Vertical_Room__Near_Upper_Ledge,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -41515,6 +42095,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Annuna__Vertical_Room__Save_Point,
+            SpotId::Annuna__Vertical_Room__Middle_Platform_2,
+            1799,
+        ),
+        (
+            SpotId::Annuna__Vertical_Room__Save_Point,
             SpotId::Annuna__Vertical_Room__Save_Point_Left,
             701,
         ),
@@ -41537,6 +42122,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Annuna__Vertical_Room__Save_Point_Left,
             SpotId::Annuna__Vertical_Room__Middle_Ministair,
             350,
+        ),
+        (
+            SpotId::Annuna__Vertical_Room__Save_Point_Left,
+            SpotId::Annuna__Vertical_Room__Middle_Platform_1,
+            1799,
         ),
         (
             SpotId::Annuna__Vertical_Room__Save_Point_Left,
@@ -41590,6 +42180,96 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Annuna__Vertical_Room__Save_Point_Right,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Vertical_Room__Upper_Doorway,
+            SpotId::Annuna__Vertical_Room__Door_Switch,
+            1200,
+        ),
+        (
+            SpotId::Annuna__Vertical_Room__Upper_Doorway,
+            SpotId::Annuna__Vertical_Room__East_18,
+            1578,
+        ),
+        (
+            SpotId::Annuna__Vertical_Room__Upper_Doorway,
+            SpotId::Annuna__Vertical_Room__East_20,
+            1700,
+        ),
+        (
+            SpotId::Annuna__Vertical_Room__Upper_Doorway,
+            SpotId::Annuna__Vertical_Room__Middle_Ministair,
+            1800,
+        ),
+        (
+            SpotId::Annuna__Vertical_Room__Upper_Doorway,
+            SpotId::Annuna__Vertical_Room__Middle_Platform_2,
+            575,
+        ),
+        (
+            SpotId::Annuna__Vertical_Room__Upper_Doorway,
+            SpotId::Annuna__Vertical_Room__Save_Point_Left,
+            1700,
+        ),
+        (
+            SpotId::Annuna__Vertical_Room__Upper_Doorway,
+            SpotId::Annuna__Vertical_Room__Save_Point_Right,
+            1700,
+        ),
+        (
+            SpotId::Annuna__Vertical_Room__Upper_Doorway,
+            SpotId::Annuna__Vertical_Room__West_20,
+            1700,
+        ),
+        (
+            SpotId::Annuna__Vertical_Room__Upper_Doorway,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Vertical_Room__Upper_Platform,
+            SpotId::Annuna__Vertical_Room__Door_Switch,
+            1578,
+        ),
+        (
+            SpotId::Annuna__Vertical_Room__Upper_Platform,
+            SpotId::Annuna__Vertical_Room__East_18,
+            1052,
+        ),
+        (
+            SpotId::Annuna__Vertical_Room__Upper_Platform,
+            SpotId::Annuna__Vertical_Room__Near_Upper_Ledge,
+            1578,
+        ),
+        (
+            SpotId::Annuna__Vertical_Room__Upper_Platform,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Vertical_Room__West_17,
+            SpotId::Annuna__Upper_Save__East,
+            1600,
+        ),
+        (
+            SpotId::Annuna__Vertical_Room__West_17,
+            SpotId::Annuna__Vertical_Room__Near_Upper_Ledge,
+            399,
+        ),
+        (
+            SpotId::Annuna__Vertical_Room__West_17,
+            SpotId::Annuna__Vertical_Room__Upper_Doorway,
+            1403,
+        ),
+        (
+            SpotId::Annuna__Vertical_Room__West_17,
+            SpotId::Annuna__Vertical_Room__Upper_Platform,
+            1929,
+        ),
+        (
+            SpotId::Annuna__Vertical_Room__West_17,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -58565,6 +59245,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Menu__Kiengir_Map__Annuna_Upper,
+            SpotId::Annuna__Upper_Save__Save_Point,
+            12000,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
             SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
             333,
         ),
@@ -66490,6 +67175,27 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
             SpotId::Annuna__Sniper_Valley__West_25_Upper,
             SpotId::Annuna__Sniper_Valley__Bridge_Lower_Ledge,
         ) => Some(2982),
+        (SpotId::Annuna__Spider_Room__Center, SpotId::Annuna__Spider_Room__Healthy_Corner) => {
+            Some(2456)
+        }
+        (SpotId::Annuna__Spider_Room__Center, SpotId::Annuna__Spider_Room__Southwest) => Some(2982),
+        (SpotId::Annuna__Spider_Room__East, SpotId::Annuna__Spider_Room__Southwest) => Some(5964),
+        (SpotId::Annuna__Spider_Room__Healthy_Corner, SpotId::Annuna__Spider_Room__Center) => {
+            Some(2456)
+        }
+        (SpotId::Annuna__Spider_Room__Northeast_Ledge, SpotId::Annuna__Spider_Room__Center) => {
+            Some(2105)
+        }
+        (
+            SpotId::Annuna__Spider_Room__Northeast_Ledge,
+            SpotId::Annuna__Spider_Room__Healthy_Corner,
+        ) => Some(449),
+        (SpotId::Annuna__Spider_Room__Southwest, SpotId::Annuna__Spider_Room__East) => Some(5964),
+        (SpotId::Annuna__Spider_Room__Upper_Seam, SpotId::Annuna__Spider_Room__Northeast_Ledge) => {
+            Some(1929)
+        }
+        (SpotId::Annuna__Spider_Room__Upper_Seam, SpotId::Annuna__Spider_Room__West) => Some(3859),
+        (SpotId::Annuna__Spider_Room__West, SpotId::Annuna__Spider_Room__Upper_Seam) => Some(3859),
         (
             SpotId::Annuna__Twisty_Passages__Bottom_Middle,
             SpotId::Annuna__Twisty_Passages__Bottom_West,
@@ -66679,6 +67385,10 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
         (SpotId::Annuna__Upper_Hallway__West, SpotId::Annuna__Upper_Hallway__Portal_Stand) => {
             Some(5087)
         }
+        (SpotId::Annuna__Upper_Save__East, SpotId::Annuna__Upper_Save__Save_Point) => Some(1578),
+        (SpotId::Annuna__Upper_Save__Save_Point, SpotId::Annuna__Upper_Save__East) => Some(1578),
+        (SpotId::Annuna__Upper_Save__Save_Point, SpotId::Annuna__Upper_Save__West) => Some(1578),
+        (SpotId::Annuna__Upper_Save__West, SpotId::Annuna__Upper_Save__Save_Point) => Some(1578),
         (SpotId::Annuna__Vertical_Room__Above_Plinth, SpotId::Annuna__Vertical_Room__East_21) => {
             Some(1228)
         }
@@ -66692,6 +67402,16 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
         ) => Some(1228),
         (SpotId::Annuna__Vertical_Room__Above_Plinth, SpotId::Annuna__Vertical_Room__Plinth) => {
             Some(400)
+        }
+        (
+            SpotId::Annuna__Vertical_Room__Door_Switch,
+            SpotId::Annuna__Vertical_Room__Upper_Doorway,
+        ) => Some(1052),
+        (SpotId::Annuna__Vertical_Room__East_18, SpotId::Annuna__Vertical_Room__Upper_Doorway) => {
+            Some(1578)
+        }
+        (SpotId::Annuna__Vertical_Room__East_18, SpotId::Annuna__Vertical_Room__Upper_Platform) => {
+            Some(1052)
         }
         (SpotId::Annuna__Vertical_Room__East_20, SpotId::Annuna__Vertical_Room__East_21) => {
             Some(1652)
@@ -66828,9 +67548,45 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
             SpotId::Annuna__Vertical_Room__East_21,
         ) => Some(175),
         (
+            SpotId::Annuna__Vertical_Room__Middle_Platform_1,
+            SpotId::Annuna__Vertical_Room__East_20,
+        ) => Some(1315),
+        (
+            SpotId::Annuna__Vertical_Room__Middle_Platform_1,
+            SpotId::Annuna__Vertical_Room__Save_Point,
+        ) => Some(550),
+        (
+            SpotId::Annuna__Vertical_Room__Middle_Platform_1,
+            SpotId::Annuna__Vertical_Room__Save_Point_Left,
+        ) => Some(964),
+        (
+            SpotId::Annuna__Vertical_Room__Middle_Platform_1,
+            SpotId::Annuna__Vertical_Room__Save_Point_Right,
+        ) => Some(650),
+        (
+            SpotId::Annuna__Vertical_Room__Middle_Platform_2,
+            SpotId::Annuna__Vertical_Room__East_20,
+        ) => Some(1666),
+        (
+            SpotId::Annuna__Vertical_Room__Middle_Platform_2,
+            SpotId::Annuna__Vertical_Room__Middle_Platform_1,
+        ) => Some(474),
+        (
+            SpotId::Annuna__Vertical_Room__Middle_Platform_2,
+            SpotId::Annuna__Vertical_Room__Save_Point,
+        ) => Some(1024),
+        (
             SpotId::Annuna__Vertical_Room__Middle_West_Shaft,
             SpotId::Annuna__Vertical_Room__Above_Plinth,
         ) => Some(1228),
+        (
+            SpotId::Annuna__Vertical_Room__Near_Upper_Ledge,
+            SpotId::Annuna__Vertical_Room__Door_Switch,
+        ) => Some(450),
+        (
+            SpotId::Annuna__Vertical_Room__Near_Upper_Ledge,
+            SpotId::Annuna__Vertical_Room__Upper_Doorway,
+        ) => Some(1052),
         (SpotId::Annuna__Vertical_Room__Plinth, SpotId::Annuna__Vertical_Room__Gate_Button) => {
             Some(438)
         }
@@ -66886,6 +67642,27 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
             SpotId::Annuna__Vertical_Room__Save_Point_Right,
             SpotId::Annuna__Vertical_Room__Save_Point,
         ) => Some(701),
+        (
+            SpotId::Annuna__Vertical_Room__Upper_Doorway,
+            SpotId::Annuna__Vertical_Room__Door_Switch,
+        ) => Some(1200),
+        (SpotId::Annuna__Vertical_Room__Upper_Doorway, SpotId::Annuna__Vertical_Room__East_18) => {
+            Some(1578)
+        }
+        (
+            SpotId::Annuna__Vertical_Room__Upper_Platform,
+            SpotId::Annuna__Vertical_Room__Door_Switch,
+        ) => Some(1578),
+        (SpotId::Annuna__Vertical_Room__Upper_Platform, SpotId::Annuna__Vertical_Room__East_18) => {
+            Some(1052)
+        }
+        (
+            SpotId::Annuna__Vertical_Room__West_17,
+            SpotId::Annuna__Vertical_Room__Near_Upper_Ledge,
+        ) => Some(399),
+        (SpotId::Annuna__Vertical_Room__West_17, SpotId::Annuna__Vertical_Room__Upper_Doorway) => {
+            Some(1403)
+        }
         (
             SpotId::Annuna__Vertical_Room__West_20,
             SpotId::Annuna__Vertical_Room__Middle_Ministair,
@@ -76464,6 +77241,37 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
             SpotId::Annuna__Sniper_Valley__West_25_Upper,
             SpotId::Annuna__Sniper_Valley__Bridge_Lower_Ledge,
         ) => (Some(2982), vec![]),
+        (SpotId::Annuna__Spider_Room__Center, SpotId::Annuna__Spider_Room__Healthy_Corner) => {
+            (Some(2456), vec![])
+        }
+        (SpotId::Annuna__Spider_Room__Center, SpotId::Annuna__Spider_Room__Southwest) => {
+            (Some(2982), vec![])
+        }
+        (SpotId::Annuna__Spider_Room__East, SpotId::Annuna__Spider_Room__Southwest) => {
+            (Some(5964), vec![])
+        }
+        (SpotId::Annuna__Spider_Room__Healthy_Corner, SpotId::Annuna__Spider_Room__Center) => {
+            (Some(2456), vec![])
+        }
+        (SpotId::Annuna__Spider_Room__Northeast_Ledge, SpotId::Annuna__Spider_Room__Center) => {
+            (Some(2105), vec![])
+        }
+        (
+            SpotId::Annuna__Spider_Room__Northeast_Ledge,
+            SpotId::Annuna__Spider_Room__Healthy_Corner,
+        ) => (Some(449), vec![]),
+        (SpotId::Annuna__Spider_Room__Southwest, SpotId::Annuna__Spider_Room__East) => {
+            (Some(5964), vec![])
+        }
+        (SpotId::Annuna__Spider_Room__Upper_Seam, SpotId::Annuna__Spider_Room__Northeast_Ledge) => {
+            (Some(1929), vec![])
+        }
+        (SpotId::Annuna__Spider_Room__Upper_Seam, SpotId::Annuna__Spider_Room__West) => {
+            (Some(3859), vec![])
+        }
+        (SpotId::Annuna__Spider_Room__West, SpotId::Annuna__Spider_Room__Upper_Seam) => {
+            (Some(3859), vec![])
+        }
         (
             SpotId::Annuna__Twisty_Passages__Bottom_Middle,
             SpotId::Annuna__Twisty_Passages__Bottom_West,
@@ -76653,6 +77461,18 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
         (SpotId::Annuna__Upper_Hallway__West, SpotId::Annuna__Upper_Hallway__Portal_Stand) => {
             (Some(5087), vec![])
         }
+        (SpotId::Annuna__Upper_Save__East, SpotId::Annuna__Upper_Save__Save_Point) => {
+            (Some(1578), vec![])
+        }
+        (SpotId::Annuna__Upper_Save__Save_Point, SpotId::Annuna__Upper_Save__East) => {
+            (Some(1578), vec![])
+        }
+        (SpotId::Annuna__Upper_Save__Save_Point, SpotId::Annuna__Upper_Save__West) => {
+            (Some(1578), vec![])
+        }
+        (SpotId::Annuna__Upper_Save__West, SpotId::Annuna__Upper_Save__Save_Point) => {
+            (Some(1578), vec![])
+        }
         (SpotId::Annuna__Vertical_Room__Above_Plinth, SpotId::Annuna__Vertical_Room__East_21) => {
             (Some(1228), vec![])
         }
@@ -76666,6 +77486,16 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
         ) => (Some(1228), vec![]),
         (SpotId::Annuna__Vertical_Room__Above_Plinth, SpotId::Annuna__Vertical_Room__Plinth) => {
             (Some(400), vec![])
+        }
+        (
+            SpotId::Annuna__Vertical_Room__Door_Switch,
+            SpotId::Annuna__Vertical_Room__Upper_Doorway,
+        ) => (Some(1052), vec![]),
+        (SpotId::Annuna__Vertical_Room__East_18, SpotId::Annuna__Vertical_Room__Upper_Doorway) => {
+            (Some(1578), vec![])
+        }
+        (SpotId::Annuna__Vertical_Room__East_18, SpotId::Annuna__Vertical_Room__Upper_Platform) => {
+            (Some(1052), vec![])
         }
         (SpotId::Annuna__Vertical_Room__East_20, SpotId::Annuna__Vertical_Room__East_21) => {
             (Some(1652), vec![])
@@ -76802,9 +77632,45 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
             SpotId::Annuna__Vertical_Room__East_21,
         ) => (Some(175), vec![]),
         (
+            SpotId::Annuna__Vertical_Room__Middle_Platform_1,
+            SpotId::Annuna__Vertical_Room__East_20,
+        ) => (Some(1315), vec![]),
+        (
+            SpotId::Annuna__Vertical_Room__Middle_Platform_1,
+            SpotId::Annuna__Vertical_Room__Save_Point,
+        ) => (Some(550), vec![]),
+        (
+            SpotId::Annuna__Vertical_Room__Middle_Platform_1,
+            SpotId::Annuna__Vertical_Room__Save_Point_Left,
+        ) => (Some(964), vec![]),
+        (
+            SpotId::Annuna__Vertical_Room__Middle_Platform_1,
+            SpotId::Annuna__Vertical_Room__Save_Point_Right,
+        ) => (Some(650), vec![]),
+        (
+            SpotId::Annuna__Vertical_Room__Middle_Platform_2,
+            SpotId::Annuna__Vertical_Room__East_20,
+        ) => (Some(1666), vec![]),
+        (
+            SpotId::Annuna__Vertical_Room__Middle_Platform_2,
+            SpotId::Annuna__Vertical_Room__Middle_Platform_1,
+        ) => (Some(474), vec![]),
+        (
+            SpotId::Annuna__Vertical_Room__Middle_Platform_2,
+            SpotId::Annuna__Vertical_Room__Save_Point,
+        ) => (Some(1024), vec![]),
+        (
             SpotId::Annuna__Vertical_Room__Middle_West_Shaft,
             SpotId::Annuna__Vertical_Room__Above_Plinth,
         ) => (Some(1228), vec![]),
+        (
+            SpotId::Annuna__Vertical_Room__Near_Upper_Ledge,
+            SpotId::Annuna__Vertical_Room__Door_Switch,
+        ) => (Some(450), vec![]),
+        (
+            SpotId::Annuna__Vertical_Room__Near_Upper_Ledge,
+            SpotId::Annuna__Vertical_Room__Upper_Doorway,
+        ) => (Some(1052), vec![]),
         (SpotId::Annuna__Vertical_Room__Plinth, SpotId::Annuna__Vertical_Room__Gate_Button) => {
             (Some(438), vec![])
         }
@@ -76860,6 +77726,27 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
             SpotId::Annuna__Vertical_Room__Save_Point_Right,
             SpotId::Annuna__Vertical_Room__Save_Point,
         ) => (Some(701), vec![]),
+        (
+            SpotId::Annuna__Vertical_Room__Upper_Doorway,
+            SpotId::Annuna__Vertical_Room__Door_Switch,
+        ) => (Some(1200), vec![]),
+        (SpotId::Annuna__Vertical_Room__Upper_Doorway, SpotId::Annuna__Vertical_Room__East_18) => {
+            (Some(1578), vec![])
+        }
+        (
+            SpotId::Annuna__Vertical_Room__Upper_Platform,
+            SpotId::Annuna__Vertical_Room__Door_Switch,
+        ) => (Some(1578), vec![]),
+        (SpotId::Annuna__Vertical_Room__Upper_Platform, SpotId::Annuna__Vertical_Room__East_18) => {
+            (Some(1052), vec![])
+        }
+        (
+            SpotId::Annuna__Vertical_Room__West_17,
+            SpotId::Annuna__Vertical_Room__Near_Upper_Ledge,
+        ) => (Some(399), vec![]),
+        (SpotId::Annuna__Vertical_Room__West_17, SpotId::Annuna__Vertical_Room__Upper_Doorway) => {
+            (Some(1403), vec![])
+        }
         (
             SpotId::Annuna__Vertical_Room__West_20,
             SpotId::Annuna__Vertical_Room__Middle_Ministair,

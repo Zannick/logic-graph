@@ -887,6 +887,34 @@ macro_rules! hobserve__overheat {
     }};
 }
 
+/// $slow (  )
+/// Infect
+#[macro_export]
+macro_rules! helper__slow {
+    ($ctx:expr, $world:expr) => {{
+        $ctx.has(Item::Infect)
+    }};
+}
+#[macro_export]
+macro_rules! hexplain__slow {
+    ($ctx:expr, $world:expr, $edict:expr) => {{
+        {
+            let h = $ctx.has(Item::Infect);
+            $edict.insert("Infect", format!("{}", h));
+            (h, vec!["Infect"])
+        }
+    }};
+}
+#[macro_export]
+macro_rules! hobserve__slow {
+    ($ctx:expr, $world:expr, $full_obs:expr) => {{
+        {
+            $full_obs.observe_infect();
+            $ctx.has(Item::Infect)
+        }
+    }};
+}
+
 /// $allegiance1 (  )
 /// Infect
 #[macro_export]

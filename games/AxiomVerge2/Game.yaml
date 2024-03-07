@@ -244,6 +244,7 @@ helpers:
   $activate: Infect
   $platform: Infect
   $overheat: Infect
+  $slow: Infect
   $allegiance1: Infect
   $allegiance2: Infect_L1
   $unlock2: Infect_L1
