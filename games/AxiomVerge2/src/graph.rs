@@ -287,7 +287,29 @@ pub fn get_area(spot: SpotId) -> AreaId {
         SpotId::Annuna__Upper_Save__East
         | SpotId::Annuna__Upper_Save__Save_Point
         | SpotId::Annuna__Upper_Save__West => AreaId::Annuna__Upper_Save,
-        SpotId::Annuna__Lamassu__East_17 => AreaId::Annuna__Lamassu,
+        SpotId::Annuna__Lamassu__East_17
+        | SpotId::Annuna__Lamassu__Bottom_Hill_East
+        | SpotId::Annuna__Lamassu__Bottom_Hill
+        | SpotId::Annuna__Lamassu__Bottom_Hill_West
+        | SpotId::Annuna__Lamassu__West_17
+        | SpotId::Annuna__Lamassu__Bottom_East_Ledge
+        | SpotId::Annuna__Lamassu__Bottom_Middle_Ledge
+        | SpotId::Annuna__Lamassu__Bottom_West_Ledge
+        | SpotId::Annuna__Lamassu__Flat_Ground
+        | SpotId::Annuna__Lamassu__Above_Flat_Ground
+        | SpotId::Annuna__Lamassu__East_16
+        | SpotId::Annuna__Lamassu__Ledge_By_Grate
+        | SpotId::Annuna__Lamassu__Lower_Brick_Ledge
+        | SpotId::Annuna__Lamassu__Portal_Stand
+        | SpotId::Annuna__Lamassu__West_15
+        | SpotId::Annuna__Lamassu__Upper_Brick_Ledge
+        | SpotId::Annuna__Lamassu__East_14 => AreaId::Annuna__Lamassu,
+        SpotId::Annuna__Hidden_Portal__East
+        | SpotId::Annuna__Hidden_Portal__Portal_Stand
+        | SpotId::Annuna__Hidden_Portal__Plinth_Right
+        | SpotId::Annuna__Hidden_Portal__Plinth_Left
+        | SpotId::Annuna__Hidden_Portal__West => AreaId::Annuna__Hidden_Portal,
+        SpotId::Annuna__Crystals__East => AreaId::Annuna__Crystals,
         SpotId::Annuna__Udug_Gate__East => AreaId::Annuna__Udug_Gate,
         SpotId::Annuna__East_Hideout__West => AreaId::Annuna__East_Hideout,
         SpotId::Annuna__Center_Save__East
@@ -334,6 +356,7 @@ pub fn get_area(spot: SpotId) -> AreaId {
         | SpotId::Annuna__Center_Climb__Middle_Platform
         | SpotId::Annuna__Center_Climb__Lower_Platform
         | SpotId::Annuna__Center_Climb__East => AreaId::Annuna__Center_Climb,
+        SpotId::Annuna__Siuna_Storage__West => AreaId::Annuna__Siuna_Storage,
         SpotId::Annuna__Apocalypse_Hallway__Lower_East
         | SpotId::Annuna__Apocalypse_Hallway__Upper_East
         | SpotId::Annuna__Apocalypse_Hallway__East_Pillar
@@ -1040,6 +1063,9 @@ pub fn get_area(spot: SpotId) -> AreaId {
         SpotId::Glacier__The_Big_Drop__East
         | SpotId::Glacier__The_Big_Drop__Small_Path
         | SpotId::Glacier__The_Big_Drop__Water_Surface => AreaId::Glacier__The_Big_Drop,
+        SpotId::Glacier__Sea_Burial__West_13 | SpotId::Glacier__Sea_Burial__West_14 => {
+            AreaId::Glacier__Sea_Burial
+        }
         SpotId::Glacier__Grid_39_40_7_9__Upper_East | SpotId::Glacier__Grid_39_40_7_9__West => {
             AreaId::Glacier__Grid_39_40_7_9
         }
@@ -1736,7 +1762,29 @@ pub fn get_region(spot: SpotId) -> RegionId {
         SpotId::Annuna__Upper_Save__East
         | SpotId::Annuna__Upper_Save__Save_Point
         | SpotId::Annuna__Upper_Save__West => RegionId::Annuna,
-        SpotId::Annuna__Lamassu__East_17 => RegionId::Annuna,
+        SpotId::Annuna__Lamassu__East_17
+        | SpotId::Annuna__Lamassu__Bottom_Hill_East
+        | SpotId::Annuna__Lamassu__Bottom_Hill
+        | SpotId::Annuna__Lamassu__Bottom_Hill_West
+        | SpotId::Annuna__Lamassu__West_17
+        | SpotId::Annuna__Lamassu__Bottom_East_Ledge
+        | SpotId::Annuna__Lamassu__Bottom_Middle_Ledge
+        | SpotId::Annuna__Lamassu__Bottom_West_Ledge
+        | SpotId::Annuna__Lamassu__Flat_Ground
+        | SpotId::Annuna__Lamassu__Above_Flat_Ground
+        | SpotId::Annuna__Lamassu__East_16
+        | SpotId::Annuna__Lamassu__Ledge_By_Grate
+        | SpotId::Annuna__Lamassu__Lower_Brick_Ledge
+        | SpotId::Annuna__Lamassu__Portal_Stand
+        | SpotId::Annuna__Lamassu__West_15
+        | SpotId::Annuna__Lamassu__Upper_Brick_Ledge
+        | SpotId::Annuna__Lamassu__East_14 => RegionId::Annuna,
+        SpotId::Annuna__Hidden_Portal__East
+        | SpotId::Annuna__Hidden_Portal__Portal_Stand
+        | SpotId::Annuna__Hidden_Portal__Plinth_Right
+        | SpotId::Annuna__Hidden_Portal__Plinth_Left
+        | SpotId::Annuna__Hidden_Portal__West => RegionId::Annuna,
+        SpotId::Annuna__Crystals__East => RegionId::Annuna,
         SpotId::Annuna__Udug_Gate__East => RegionId::Annuna,
         SpotId::Annuna__East_Hideout__West => RegionId::Annuna,
         SpotId::Annuna__Center_Save__East
@@ -1783,6 +1831,7 @@ pub fn get_region(spot: SpotId) -> RegionId {
         | SpotId::Annuna__Center_Climb__Middle_Platform
         | SpotId::Annuna__Center_Climb__Lower_Platform
         | SpotId::Annuna__Center_Climb__East => RegionId::Annuna,
+        SpotId::Annuna__Siuna_Storage__West => RegionId::Annuna,
         SpotId::Annuna__Apocalypse_Hallway__Lower_East
         | SpotId::Annuna__Apocalypse_Hallway__Upper_East
         | SpotId::Annuna__Apocalypse_Hallway__East_Pillar
@@ -2483,6 +2532,9 @@ pub fn get_region(spot: SpotId) -> RegionId {
         SpotId::Glacier__The_Big_Drop__East
         | SpotId::Glacier__The_Big_Drop__Small_Path
         | SpotId::Glacier__The_Big_Drop__Water_Surface => RegionId::Glacier,
+        SpotId::Glacier__Sea_Burial__West_13 | SpotId::Glacier__Sea_Burial__West_14 => {
+            RegionId::Glacier
+        }
         SpotId::Glacier__Grid_39_40_7_9__Upper_East | SpotId::Glacier__Grid_39_40_7_9__West => {
             RegionId::Glacier
         }
@@ -4581,6 +4633,36 @@ impl world::Accessible for Exit {
             ExitId::Annuna__Final_Save__Save_Point__ex__Pillar_2 => rules::access_hook(ctx, world),
             ExitId::Annuna__Final_Save__Upper_West__ex__Apocalypse__Northwest_Mid_air_1 => rules::access_hook_and_hover(ctx, world),
             ExitId::Annuna__Final_Save__Upper_West__ex__Seals__East_17_Upper_1 => true,
+            ExitId::Annuna__Lamassu__Above_Flat_Ground__ex__East_16_1 => rules::access_nanite_mist(ctx, world),
+            ExitId::Annuna__Lamassu__Above_Flat_Ground__ex__Ledge_By_Grate_1 => rules::access_hook(ctx, world),
+            ExitId::Annuna__Lamassu__Bottom_East_Ledge__ex__Bottom_Middle_Ledge_1 => rules::access_grab(ctx, world),
+            ExitId::Annuna__Lamassu__Bottom_East_Ledge__ex__Bottom_Middle_Ledge_2 => rules::access_hook(ctx, world),
+            ExitId::Annuna__Lamassu__Bottom_Hill__ex__Bottom_Middle_Ledge_1 => rules::access_hook(ctx, world),
+            ExitId::Annuna__Lamassu__Bottom_Hill_East__ex__Bottom_East_Ledge_1 => rules::access_hook(ctx, world),
+            ExitId::Annuna__Lamassu__Bottom_Hill_West__ex__Hidden_Portal__Plinth_Right_1 => rules::access_hook_and_hover(ctx, world),
+            ExitId::Annuna__Lamassu__Bottom_Middle_Ledge__ex__Bottom_West_Ledge_1 => rules::access_grab(ctx, world),
+            ExitId::Annuna__Lamassu__Bottom_Middle_Ledge__ex__Bottom_West_Ledge_2 => rules::access_hook_and_hover(ctx, world),
+            ExitId::Annuna__Lamassu__Bottom_Middle_Ledge__ex__Bottom_West_Ledge_3 => rules::access_hook(ctx, world),
+            ExitId::Annuna__Lamassu__Bottom_West_Ledge__ex__Above_Flat_Ground_1 => rules::access_hook_and_hover(ctx, world),
+            ExitId::Annuna__Lamassu__East_14__ex__Glacier__Sea_Burial__West_14_1 => true,
+            ExitId::Annuna__Lamassu__East_16__ex__Above_Flat_Ground_1 => rules::access_nanite_mist(ctx, world),
+            ExitId::Annuna__Lamassu__East_16__ex__Flat_Ground_1 => rules::access_nanite_mist(ctx, world),
+            ExitId::Annuna__Lamassu__East_16__ex__Ledge_By_Grate_1 => rules::access_nanite_mist(ctx, world),
+            ExitId::Annuna__Lamassu__East_16__ex__Siuna_Storage__West_1 => true,
+            ExitId::Annuna__Lamassu__East_17__ex__Upper_Save__West_1 => true,
+            ExitId::Annuna__Lamassu__Flat_Ground__ex__East_16_1 => rules::access_nanite_mist(ctx, world),
+            ExitId::Annuna__Lamassu__Flat_Ground__ex__Ledge_By_Grate_1 => rules::access_climb(ctx, world),
+            ExitId::Annuna__Lamassu__Flat_Ground__ex__Ledge_By_Grate_2 => rules::access_hook(ctx, world),
+            ExitId::Annuna__Lamassu__Ledge_By_Grate__ex__East_16_1 => rules::access_nanite_mist(ctx, world),
+            ExitId::Annuna__Lamassu__Ledge_By_Grate__ex__Lower_Brick_Ledge_1 => rules::access_grab(ctx, world),
+            ExitId::Annuna__Lamassu__Ledge_By_Grate__ex__Lower_Brick_Ledge_2 => rules::access_hook(ctx, world),
+            ExitId::Annuna__Lamassu__Lower_Brick_Ledge__ex__Portal_Stand_1 => rules::access_hook(ctx, world),
+            ExitId::Annuna__Lamassu__Lower_Brick_Ledge__ex__Upper_Brick_Ledge_1 => rules::access_hook(ctx, world),
+            ExitId::Annuna__Lamassu__Portal_Stand__ex__Upper_Brick_Ledge_1 => rules::access_hook(ctx, world),
+            ExitId::Annuna__Lamassu__Upper_Brick_Ledge__ex__East_14_1 => rules::access_grab_and_climb(ctx, world),
+            ExitId::Annuna__Lamassu__Upper_Brick_Ledge__ex__East_14_2 => rules::access_hook(ctx, world),
+            ExitId::Annuna__Lamassu__West_15__ex__Crystals__East_1 => true,
+            ExitId::Annuna__Lamassu__West_17__ex__Hidden_Portal__East_1 => true,
             ExitId::Annuna__Lower_Hallway__East__ex__Factory_Access__West_22_1 => true,
             ExitId::Annuna__Lower_Hallway__West__ex__Vertical_Room__East_22_1 => true,
             ExitId::Annuna__Middle_Hallway__East__ex__Filter_Teleporter__West_21_1 => true,
@@ -5916,6 +5998,31 @@ impl world::Accessible for Exit {
             ExitId::Annuna__Final_Save__Save_Point__ex__Pillar_1 => rules::observe_access_grab(ctx, world, full_obs),
             ExitId::Annuna__Final_Save__Save_Point__ex__Pillar_2 => rules::observe_access_hook(ctx, world, full_obs),
             ExitId::Annuna__Final_Save__Upper_West__ex__Apocalypse__Northwest_Mid_air_1 => rules::observe_access_hook_and_hover(ctx, world, full_obs),
+            ExitId::Annuna__Lamassu__Above_Flat_Ground__ex__East_16_1 => rules::observe_access_nanite_mist(ctx, world, full_obs),
+            ExitId::Annuna__Lamassu__Above_Flat_Ground__ex__Ledge_By_Grate_1 => rules::observe_access_hook(ctx, world, full_obs),
+            ExitId::Annuna__Lamassu__Bottom_East_Ledge__ex__Bottom_Middle_Ledge_1 => rules::observe_access_grab(ctx, world, full_obs),
+            ExitId::Annuna__Lamassu__Bottom_East_Ledge__ex__Bottom_Middle_Ledge_2 => rules::observe_access_hook(ctx, world, full_obs),
+            ExitId::Annuna__Lamassu__Bottom_Hill__ex__Bottom_Middle_Ledge_1 => rules::observe_access_hook(ctx, world, full_obs),
+            ExitId::Annuna__Lamassu__Bottom_Hill_East__ex__Bottom_East_Ledge_1 => rules::observe_access_hook(ctx, world, full_obs),
+            ExitId::Annuna__Lamassu__Bottom_Hill_West__ex__Hidden_Portal__Plinth_Right_1 => rules::observe_access_hook_and_hover(ctx, world, full_obs),
+            ExitId::Annuna__Lamassu__Bottom_Middle_Ledge__ex__Bottom_West_Ledge_1 => rules::observe_access_grab(ctx, world, full_obs),
+            ExitId::Annuna__Lamassu__Bottom_Middle_Ledge__ex__Bottom_West_Ledge_2 => rules::observe_access_hook_and_hover(ctx, world, full_obs),
+            ExitId::Annuna__Lamassu__Bottom_Middle_Ledge__ex__Bottom_West_Ledge_3 => rules::observe_access_hook(ctx, world, full_obs),
+            ExitId::Annuna__Lamassu__Bottom_West_Ledge__ex__Above_Flat_Ground_1 => rules::observe_access_hook_and_hover(ctx, world, full_obs),
+            ExitId::Annuna__Lamassu__East_16__ex__Above_Flat_Ground_1 => rules::observe_access_nanite_mist(ctx, world, full_obs),
+            ExitId::Annuna__Lamassu__East_16__ex__Flat_Ground_1 => rules::observe_access_nanite_mist(ctx, world, full_obs),
+            ExitId::Annuna__Lamassu__East_16__ex__Ledge_By_Grate_1 => rules::observe_access_nanite_mist(ctx, world, full_obs),
+            ExitId::Annuna__Lamassu__Flat_Ground__ex__East_16_1 => rules::observe_access_nanite_mist(ctx, world, full_obs),
+            ExitId::Annuna__Lamassu__Flat_Ground__ex__Ledge_By_Grate_1 => rules::observe_access_climb(ctx, world, full_obs),
+            ExitId::Annuna__Lamassu__Flat_Ground__ex__Ledge_By_Grate_2 => rules::observe_access_hook(ctx, world, full_obs),
+            ExitId::Annuna__Lamassu__Ledge_By_Grate__ex__East_16_1 => rules::observe_access_nanite_mist(ctx, world, full_obs),
+            ExitId::Annuna__Lamassu__Ledge_By_Grate__ex__Lower_Brick_Ledge_1 => rules::observe_access_grab(ctx, world, full_obs),
+            ExitId::Annuna__Lamassu__Ledge_By_Grate__ex__Lower_Brick_Ledge_2 => rules::observe_access_hook(ctx, world, full_obs),
+            ExitId::Annuna__Lamassu__Lower_Brick_Ledge__ex__Portal_Stand_1 => rules::observe_access_hook(ctx, world, full_obs),
+            ExitId::Annuna__Lamassu__Lower_Brick_Ledge__ex__Upper_Brick_Ledge_1 => rules::observe_access_hook(ctx, world, full_obs),
+            ExitId::Annuna__Lamassu__Portal_Stand__ex__Upper_Brick_Ledge_1 => rules::observe_access_hook(ctx, world, full_obs),
+            ExitId::Annuna__Lamassu__Upper_Brick_Ledge__ex__East_14_1 => rules::observe_access_grab_and_climb(ctx, world, full_obs),
+            ExitId::Annuna__Lamassu__Upper_Brick_Ledge__ex__East_14_2 => rules::observe_access_hook(ctx, world, full_obs),
             ExitId::Annuna__Mirror_Match__Below_Switch__ex__Central_Pillar_1 => rules::observe_access_hover_and_hook(ctx, world, full_obs),
             ExitId::Annuna__Mirror_Match__Central_Pillar__ex__Below_Switch_1 => rules::observe_access_hover_and_hook(ctx, world, full_obs),
             ExitId::Annuna__Mirror_Match__Central_Pillar__ex__Save_Point_1 => rules::observe_access_annuna_mirror_match_switch(ctx, world, full_obs),
@@ -7052,6 +7159,31 @@ impl world::Accessible for Exit {
             ExitId::Annuna__Final_Save__Save_Point__ex__Pillar_1 => rules::explain_grab(ctx, world, edict),
             ExitId::Annuna__Final_Save__Save_Point__ex__Pillar_2 => rules::explain_hook(ctx, world, edict),
             ExitId::Annuna__Final_Save__Upper_West__ex__Apocalypse__Northwest_Mid_air_1 => rules::explain_hook_and_hover(ctx, world, edict),
+            ExitId::Annuna__Lamassu__Above_Flat_Ground__ex__East_16_1 => rules::explain_nanite_mist(ctx, world, edict),
+            ExitId::Annuna__Lamassu__Above_Flat_Ground__ex__Ledge_By_Grate_1 => rules::explain_hook(ctx, world, edict),
+            ExitId::Annuna__Lamassu__Bottom_East_Ledge__ex__Bottom_Middle_Ledge_1 => rules::explain_grab(ctx, world, edict),
+            ExitId::Annuna__Lamassu__Bottom_East_Ledge__ex__Bottom_Middle_Ledge_2 => rules::explain_hook(ctx, world, edict),
+            ExitId::Annuna__Lamassu__Bottom_Hill__ex__Bottom_Middle_Ledge_1 => rules::explain_hook(ctx, world, edict),
+            ExitId::Annuna__Lamassu__Bottom_Hill_East__ex__Bottom_East_Ledge_1 => rules::explain_hook(ctx, world, edict),
+            ExitId::Annuna__Lamassu__Bottom_Hill_West__ex__Hidden_Portal__Plinth_Right_1 => rules::explain_hook_and_hover(ctx, world, edict),
+            ExitId::Annuna__Lamassu__Bottom_Middle_Ledge__ex__Bottom_West_Ledge_1 => rules::explain_grab(ctx, world, edict),
+            ExitId::Annuna__Lamassu__Bottom_Middle_Ledge__ex__Bottom_West_Ledge_2 => rules::explain_hook_and_hover(ctx, world, edict),
+            ExitId::Annuna__Lamassu__Bottom_Middle_Ledge__ex__Bottom_West_Ledge_3 => rules::explain_hook(ctx, world, edict),
+            ExitId::Annuna__Lamassu__Bottom_West_Ledge__ex__Above_Flat_Ground_1 => rules::explain_hook_and_hover(ctx, world, edict),
+            ExitId::Annuna__Lamassu__East_16__ex__Above_Flat_Ground_1 => rules::explain_nanite_mist(ctx, world, edict),
+            ExitId::Annuna__Lamassu__East_16__ex__Flat_Ground_1 => rules::explain_nanite_mist(ctx, world, edict),
+            ExitId::Annuna__Lamassu__East_16__ex__Ledge_By_Grate_1 => rules::explain_nanite_mist(ctx, world, edict),
+            ExitId::Annuna__Lamassu__Flat_Ground__ex__East_16_1 => rules::explain_nanite_mist(ctx, world, edict),
+            ExitId::Annuna__Lamassu__Flat_Ground__ex__Ledge_By_Grate_1 => rules::explain_climb(ctx, world, edict),
+            ExitId::Annuna__Lamassu__Flat_Ground__ex__Ledge_By_Grate_2 => rules::explain_hook(ctx, world, edict),
+            ExitId::Annuna__Lamassu__Ledge_By_Grate__ex__East_16_1 => rules::explain_nanite_mist(ctx, world, edict),
+            ExitId::Annuna__Lamassu__Ledge_By_Grate__ex__Lower_Brick_Ledge_1 => rules::explain_grab(ctx, world, edict),
+            ExitId::Annuna__Lamassu__Ledge_By_Grate__ex__Lower_Brick_Ledge_2 => rules::explain_hook(ctx, world, edict),
+            ExitId::Annuna__Lamassu__Lower_Brick_Ledge__ex__Portal_Stand_1 => rules::explain_hook(ctx, world, edict),
+            ExitId::Annuna__Lamassu__Lower_Brick_Ledge__ex__Upper_Brick_Ledge_1 => rules::explain_hook(ctx, world, edict),
+            ExitId::Annuna__Lamassu__Portal_Stand__ex__Upper_Brick_Ledge_1 => rules::explain_hook(ctx, world, edict),
+            ExitId::Annuna__Lamassu__Upper_Brick_Ledge__ex__East_14_1 => rules::explain_grab_and_climb(ctx, world, edict),
+            ExitId::Annuna__Lamassu__Upper_Brick_Ledge__ex__East_14_2 => rules::explain_hook(ctx, world, edict),
             ExitId::Annuna__Mirror_Match__Below_Switch__ex__Central_Pillar_1 => rules::explain_hover_and_hook(ctx, world, edict),
             ExitId::Annuna__Mirror_Match__Central_Pillar__ex__Below_Switch_1 => rules::explain_hover_and_hook(ctx, world, edict),
             ExitId::Annuna__Mirror_Match__Central_Pillar__ex__Save_Point_1 => rules::explain_annuna_mirror_match_switch(ctx, world, edict),
@@ -7947,6 +8079,11 @@ impl world::Exit for Exit {
             ExitId::Annuna__Final_Save__East__ex__Apocalypse__West_1 => true,
             ExitId::Annuna__Final_Save__Lower_West__ex__Seals__East_17_Lower_1 => true,
             ExitId::Annuna__Final_Save__Upper_West__ex__Seals__East_17_Upper_1 => true,
+            ExitId::Annuna__Lamassu__East_14__ex__Glacier__Sea_Burial__West_14_1 => true,
+            ExitId::Annuna__Lamassu__East_16__ex__Siuna_Storage__West_1 => true,
+            ExitId::Annuna__Lamassu__East_17__ex__Upper_Save__West_1 => true,
+            ExitId::Annuna__Lamassu__West_15__ex__Crystals__East_1 => true,
+            ExitId::Annuna__Lamassu__West_17__ex__Hidden_Portal__East_1 => true,
             ExitId::Annuna__Lower_Hallway__East__ex__Factory_Access__West_22_1 => true,
             ExitId::Annuna__Lower_Hallway__West__ex__Vertical_Room__East_22_1 => true,
             ExitId::Annuna__Middle_Hallway__East__ex__Filter_Teleporter__West_21_1 => true,
@@ -9495,7 +9632,7 @@ pub struct Spot {
     pub actions: Range<usize>,
 }
 
-static RAW_SPOTS: [SpotId; 1426] = [
+static RAW_SPOTS: [SpotId; 1451] = [
     SpotId::None,
     SpotId::Amagi__Grid_31_19__East,
     SpotId::Amagi__Grid_31_19__West,
@@ -9613,6 +9750,7 @@ static RAW_SPOTS: [SpotId; 1426] = [
     SpotId::Annuna__Center_Save__Save_Point,
     SpotId::Annuna__Center_Save__West_Catwalk,
     SpotId::Annuna__Center_Save__West_Floor,
+    SpotId::Annuna__Crystals__East,
     SpotId::Annuna__East_Bridge__Below_Cavern,
     SpotId::Annuna__East_Bridge__Below_Gate_Button,
     SpotId::Annuna__East_Bridge__Bridge_Top_East,
@@ -9704,7 +9842,28 @@ static RAW_SPOTS: [SpotId; 1426] = [
     SpotId::Annuna__Final_Save__Pillar,
     SpotId::Annuna__Final_Save__Save_Point,
     SpotId::Annuna__Final_Save__Upper_West,
+    SpotId::Annuna__Hidden_Portal__East,
+    SpotId::Annuna__Hidden_Portal__Plinth_Left,
+    SpotId::Annuna__Hidden_Portal__Plinth_Right,
+    SpotId::Annuna__Hidden_Portal__Portal_Stand,
+    SpotId::Annuna__Hidden_Portal__West,
+    SpotId::Annuna__Lamassu__Above_Flat_Ground,
+    SpotId::Annuna__Lamassu__Bottom_East_Ledge,
+    SpotId::Annuna__Lamassu__Bottom_Hill,
+    SpotId::Annuna__Lamassu__Bottom_Hill_East,
+    SpotId::Annuna__Lamassu__Bottom_Hill_West,
+    SpotId::Annuna__Lamassu__Bottom_Middle_Ledge,
+    SpotId::Annuna__Lamassu__Bottom_West_Ledge,
+    SpotId::Annuna__Lamassu__East_14,
+    SpotId::Annuna__Lamassu__East_16,
     SpotId::Annuna__Lamassu__East_17,
+    SpotId::Annuna__Lamassu__Flat_Ground,
+    SpotId::Annuna__Lamassu__Ledge_By_Grate,
+    SpotId::Annuna__Lamassu__Lower_Brick_Ledge,
+    SpotId::Annuna__Lamassu__Portal_Stand,
+    SpotId::Annuna__Lamassu__Upper_Brick_Ledge,
+    SpotId::Annuna__Lamassu__West_15,
+    SpotId::Annuna__Lamassu__West_17,
     SpotId::Annuna__Lower_Hallway__Dais_Left,
     SpotId::Annuna__Lower_Hallway__Dais_Right,
     SpotId::Annuna__Lower_Hallway__East,
@@ -9734,6 +9893,7 @@ static RAW_SPOTS: [SpotId; 1426] = [
     SpotId::Annuna__Seals__Middle_Ledge,
     SpotId::Annuna__Seals__Upper_Ledge,
     SpotId::Annuna__Seals__Upper_Seal,
+    SpotId::Annuna__Siuna_Storage__West,
     SpotId::Annuna__Sniper_Valley__Bridge_End,
     SpotId::Annuna__Sniper_Valley__Bridge_Lower_Ledge,
     SpotId::Annuna__Sniper_Valley__Bridge_Upper_Ledge,
@@ -10571,6 +10731,8 @@ static RAW_SPOTS: [SpotId; 1426] = [
     SpotId::Glacier__Revival__Overhang,
     SpotId::Glacier__Revival__Save_Point,
     SpotId::Glacier__Revival__West_8,
+    SpotId::Glacier__Sea_Burial__West_13,
+    SpotId::Glacier__Sea_Burial__West_14,
     SpotId::Glacier__The_Big_Drop__East,
     SpotId::Glacier__The_Big_Drop__Small_Path,
     SpotId::Glacier__The_Big_Drop__Water_Surface,
@@ -10959,6 +11121,10 @@ lazy_static! {
             start: SpotId::Annuna__Center_Save__East.into_usize(),
             end: SpotId::Annuna__Center_Save__West_Floor.into_usize() + 1,
         },
+        AreaId::Annuna__Crystals => Range {
+            start: SpotId::Annuna__Crystals__East.into_usize(),
+            end: SpotId::Annuna__Crystals__East.into_usize() + 1,
+        },
         AreaId::Annuna__East_Bridge => Range {
             start: SpotId::Annuna__East_Bridge__Below_Cavern.into_usize(),
             end: SpotId::Annuna__East_Bridge__West_Under_Gap.into_usize() + 1,
@@ -10991,9 +11157,13 @@ lazy_static! {
             start: SpotId::Annuna__Final_Save__East.into_usize(),
             end: SpotId::Annuna__Final_Save__Upper_West.into_usize() + 1,
         },
+        AreaId::Annuna__Hidden_Portal => Range {
+            start: SpotId::Annuna__Hidden_Portal__East.into_usize(),
+            end: SpotId::Annuna__Hidden_Portal__West.into_usize() + 1,
+        },
         AreaId::Annuna__Lamassu => Range {
-            start: SpotId::Annuna__Lamassu__East_17.into_usize(),
-            end: SpotId::Annuna__Lamassu__East_17.into_usize() + 1,
+            start: SpotId::Annuna__Lamassu__Above_Flat_Ground.into_usize(),
+            end: SpotId::Annuna__Lamassu__West_17.into_usize() + 1,
         },
         AreaId::Annuna__Lower_Hallway => Range {
             start: SpotId::Annuna__Lower_Hallway__Dais_Left.into_usize(),
@@ -11010,6 +11180,10 @@ lazy_static! {
         AreaId::Annuna__Seals => Range {
             start: SpotId::Annuna__Seals__Breakable_Rock.into_usize(),
             end: SpotId::Annuna__Seals__Upper_Seal.into_usize() + 1,
+        },
+        AreaId::Annuna__Siuna_Storage => Range {
+            start: SpotId::Annuna__Siuna_Storage__West.into_usize(),
+            end: SpotId::Annuna__Siuna_Storage__West.into_usize() + 1,
         },
         AreaId::Annuna__Sniper_Valley => Range {
             start: SpotId::Annuna__Sniper_Valley__Bridge_End.into_usize(),
@@ -11378,6 +11552,10 @@ lazy_static! {
         AreaId::Glacier__Revival => Range {
             start: SpotId::Glacier__Revival__East_9.into_usize(),
             end: SpotId::Glacier__Revival__West_8.into_usize() + 1,
+        },
+        AreaId::Glacier__Sea_Burial => Range {
+            start: SpotId::Glacier__Sea_Burial__West_13.into_usize(),
+            end: SpotId::Glacier__Sea_Burial__West_14.into_usize() + 1,
         },
         AreaId::Glacier__The_Big_Drop => Range {
             start: SpotId::Glacier__The_Big_Drop__East.into_usize(),
@@ -13224,6 +13402,23 @@ impl world::World for World {
             ExitId::Annuna__Spider_Room__West__ex__Vertical_Room__East_18_1 => SpotId::Annuna__Spider_Room__West,
             ExitId::Annuna__Upper_Save__East__ex__Vertical_Room__West_17_1 => SpotId::Annuna__Upper_Save__East,
             ExitId::Annuna__Upper_Save__West__ex__Lamassu__East_17_1 => SpotId::Annuna__Upper_Save__West,
+            ExitId::Annuna__Lamassu__East_17__ex__Upper_Save__West_1 => SpotId::Annuna__Lamassu__East_17,
+            ExitId::Annuna__Lamassu__Bottom_Hill_East__ex__Bottom_East_Ledge_1 => SpotId::Annuna__Lamassu__Bottom_Hill_East,
+            ExitId::Annuna__Lamassu__Bottom_Hill__ex__Bottom_Middle_Ledge_1 => SpotId::Annuna__Lamassu__Bottom_Hill,
+            ExitId::Annuna__Lamassu__Bottom_Hill_West__ex__Hidden_Portal__Plinth_Right_1 => SpotId::Annuna__Lamassu__Bottom_Hill_West,
+            ExitId::Annuna__Lamassu__West_17__ex__Hidden_Portal__East_1 => SpotId::Annuna__Lamassu__West_17,
+            ExitId::Annuna__Lamassu__Bottom_East_Ledge__ex__Bottom_Middle_Ledge_1 | ExitId:: Annuna__Lamassu__Bottom_East_Ledge__ex__Bottom_Middle_Ledge_2 => SpotId::Annuna__Lamassu__Bottom_East_Ledge,
+            ExitId::Annuna__Lamassu__Bottom_Middle_Ledge__ex__Bottom_West_Ledge_1 | ExitId:: Annuna__Lamassu__Bottom_Middle_Ledge__ex__Bottom_West_Ledge_2 | ExitId:: Annuna__Lamassu__Bottom_Middle_Ledge__ex__Bottom_West_Ledge_3 => SpotId::Annuna__Lamassu__Bottom_Middle_Ledge,
+            ExitId::Annuna__Lamassu__Bottom_West_Ledge__ex__Above_Flat_Ground_1 => SpotId::Annuna__Lamassu__Bottom_West_Ledge,
+            ExitId::Annuna__Lamassu__Flat_Ground__ex__Ledge_By_Grate_1 | ExitId:: Annuna__Lamassu__Flat_Ground__ex__Ledge_By_Grate_2 | ExitId:: Annuna__Lamassu__Flat_Ground__ex__East_16_1 => SpotId::Annuna__Lamassu__Flat_Ground,
+            ExitId::Annuna__Lamassu__Above_Flat_Ground__ex__Ledge_By_Grate_1 | ExitId:: Annuna__Lamassu__Above_Flat_Ground__ex__East_16_1 => SpotId::Annuna__Lamassu__Above_Flat_Ground,
+            ExitId::Annuna__Lamassu__East_16__ex__Siuna_Storage__West_1 | ExitId:: Annuna__Lamassu__East_16__ex__Flat_Ground_1 | ExitId:: Annuna__Lamassu__East_16__ex__Above_Flat_Ground_1 | ExitId:: Annuna__Lamassu__East_16__ex__Ledge_By_Grate_1 => SpotId::Annuna__Lamassu__East_16,
+            ExitId::Annuna__Lamassu__Ledge_By_Grate__ex__East_16_1 | ExitId:: Annuna__Lamassu__Ledge_By_Grate__ex__Lower_Brick_Ledge_1 | ExitId:: Annuna__Lamassu__Ledge_By_Grate__ex__Lower_Brick_Ledge_2 => SpotId::Annuna__Lamassu__Ledge_By_Grate,
+            ExitId::Annuna__Lamassu__Lower_Brick_Ledge__ex__Portal_Stand_1 | ExitId:: Annuna__Lamassu__Lower_Brick_Ledge__ex__Upper_Brick_Ledge_1 => SpotId::Annuna__Lamassu__Lower_Brick_Ledge,
+            ExitId::Annuna__Lamassu__Portal_Stand__ex__Upper_Brick_Ledge_1 => SpotId::Annuna__Lamassu__Portal_Stand,
+            ExitId::Annuna__Lamassu__West_15__ex__Crystals__East_1 => SpotId::Annuna__Lamassu__West_15,
+            ExitId::Annuna__Lamassu__Upper_Brick_Ledge__ex__East_14_1 | ExitId:: Annuna__Lamassu__Upper_Brick_Ledge__ex__East_14_2 => SpotId::Annuna__Lamassu__Upper_Brick_Ledge,
+            ExitId::Annuna__Lamassu__East_14__ex__Glacier__Sea_Burial__West_14_1 => SpotId::Annuna__Lamassu__East_14,
             ExitId::Annuna__Center_Save__East__ex__Vertical_Room__West_21_1 => SpotId::Annuna__Center_Save__East,
             ExitId::Annuna__Center_Save__Save_Point__ex__West_Catwalk_1 => SpotId::Annuna__Center_Save__Save_Point,
             ExitId::Annuna__Center_Save__West_Floor__ex__Twisty_Passages__East_Floor_1 => SpotId::Annuna__Center_Save__West_Floor,
@@ -14896,6 +15091,12 @@ impl world::World for World {
             | SpotId::Annuna__Final_Save__Lower_West
             | SpotId::Annuna__Final_Save__Save_Point
             | SpotId::Annuna__Final_Save__Upper_West
+            | SpotId::Annuna__Lamassu__Bottom_Hill_West
+            | SpotId::Annuna__Lamassu__East_14
+            | SpotId::Annuna__Lamassu__East_16
+            | SpotId::Annuna__Lamassu__East_17
+            | SpotId::Annuna__Lamassu__West_15
+            | SpotId::Annuna__Lamassu__West_17
             | SpotId::Annuna__Lower_Hallway__East
             | SpotId::Annuna__Lower_Hallway__West
             | SpotId::Annuna__Middle_Hallway__East
@@ -19445,6 +19646,216 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
             id: ExitId::Annuna__Upper_Save__West__ex__Lamassu__East_17_1,
             time: 1350,
             dest: SpotId::Annuna__Lamassu__East_17,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__Lamassu__East_17__ex__Upper_Save__West_1 => Exit {
+            id: ExitId::Annuna__Lamassu__East_17__ex__Upper_Save__West_1,
+            time: 1350,
+            dest: SpotId::Annuna__Upper_Save__West,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__Lamassu__Bottom_Hill_East__ex__Bottom_East_Ledge_1 => Exit {
+            id: ExitId::Annuna__Lamassu__Bottom_Hill_East__ex__Bottom_East_Ledge_1,
+            time: 600,
+            dest: SpotId::Annuna__Lamassu__Bottom_East_Ledge,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__Lamassu__Bottom_Hill__ex__Bottom_Middle_Ledge_1 => Exit {
+            id: ExitId::Annuna__Lamassu__Bottom_Hill__ex__Bottom_Middle_Ledge_1,
+            time: 600,
+            dest: SpotId::Annuna__Lamassu__Bottom_Middle_Ledge,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__Lamassu__Bottom_Hill_West__ex__Hidden_Portal__Plinth_Right_1 => Exit {
+            id: ExitId::Annuna__Lamassu__Bottom_Hill_West__ex__Hidden_Portal__Plinth_Right_1,
+            time: 2850,
+            dest: SpotId::Annuna__Hidden_Portal__Plinth_Right,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__Lamassu__West_17__ex__Hidden_Portal__East_1 => Exit {
+            id: ExitId::Annuna__Lamassu__West_17__ex__Hidden_Portal__East_1,
+            time: 1350,
+            dest: SpotId::Annuna__Hidden_Portal__East,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__Lamassu__Bottom_East_Ledge__ex__Bottom_Middle_Ledge_1 => Exit {
+            id: ExitId::Annuna__Lamassu__Bottom_East_Ledge__ex__Bottom_Middle_Ledge_1,
+            time: 1200,
+            dest: SpotId::Annuna__Lamassu__Bottom_Middle_Ledge,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__Lamassu__Bottom_East_Ledge__ex__Bottom_Middle_Ledge_2 => Exit {
+            id: ExitId::Annuna__Lamassu__Bottom_East_Ledge__ex__Bottom_Middle_Ledge_2,
+            time: 701,
+            dest: SpotId::Annuna__Lamassu__Bottom_Middle_Ledge,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__Lamassu__Bottom_Middle_Ledge__ex__Bottom_West_Ledge_1 => Exit {
+            id: ExitId::Annuna__Lamassu__Bottom_Middle_Ledge__ex__Bottom_West_Ledge_1,
+            time: 1200,
+            dest: SpotId::Annuna__Lamassu__Bottom_West_Ledge,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__Lamassu__Bottom_Middle_Ledge__ex__Bottom_West_Ledge_2 => Exit {
+            id: ExitId::Annuna__Lamassu__Bottom_Middle_Ledge__ex__Bottom_West_Ledge_2,
+            time: 749,
+            dest: SpotId::Annuna__Lamassu__Bottom_West_Ledge,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__Lamassu__Bottom_Middle_Ledge__ex__Bottom_West_Ledge_3 => Exit {
+            id: ExitId::Annuna__Lamassu__Bottom_Middle_Ledge__ex__Bottom_West_Ledge_3,
+            time: 1052,
+            dest: SpotId::Annuna__Lamassu__Bottom_West_Ledge,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__Lamassu__Bottom_West_Ledge__ex__Above_Flat_Ground_1 => Exit {
+            id: ExitId::Annuna__Lamassu__Bottom_West_Ledge__ex__Above_Flat_Ground_1,
+            time: 1374,
+            dest: SpotId::Annuna__Lamassu__Above_Flat_Ground,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__Lamassu__Flat_Ground__ex__Ledge_By_Grate_1 => Exit {
+            id: ExitId::Annuna__Lamassu__Flat_Ground__ex__Ledge_By_Grate_1,
+            time: 1200,
+            dest: SpotId::Annuna__Lamassu__Ledge_By_Grate,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__Lamassu__Flat_Ground__ex__Ledge_By_Grate_2 => Exit {
+            id: ExitId::Annuna__Lamassu__Flat_Ground__ex__Ledge_By_Grate_2,
+            time: 600,
+            dest: SpotId::Annuna__Lamassu__Ledge_By_Grate,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__Lamassu__Flat_Ground__ex__East_16_1 => Exit {
+            id: ExitId::Annuna__Lamassu__Flat_Ground__ex__East_16_1,
+            time: 701,
+            dest: SpotId::Annuna__Lamassu__East_16,
+            price: Currency::Energy(40),
+            loc_id: None,
+        },
+        ExitId::Annuna__Lamassu__Above_Flat_Ground__ex__Ledge_By_Grate_1 => Exit {
+            id: ExitId::Annuna__Lamassu__Above_Flat_Ground__ex__Ledge_By_Grate_1,
+            time: 600,
+            dest: SpotId::Annuna__Lamassu__Ledge_By_Grate,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__Lamassu__Above_Flat_Ground__ex__East_16_1 => Exit {
+            id: ExitId::Annuna__Lamassu__Above_Flat_Ground__ex__East_16_1,
+            time: 701,
+            dest: SpotId::Annuna__Lamassu__East_16,
+            price: Currency::Energy(40),
+            loc_id: None,
+        },
+        ExitId::Annuna__Lamassu__East_16__ex__Siuna_Storage__West_1 => Exit {
+            id: ExitId::Annuna__Lamassu__East_16__ex__Siuna_Storage__West_1,
+            time: 1350,
+            dest: SpotId::Annuna__Siuna_Storage__West,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__Lamassu__East_16__ex__Flat_Ground_1 => Exit {
+            id: ExitId::Annuna__Lamassu__East_16__ex__Flat_Ground_1,
+            time: 701,
+            dest: SpotId::Annuna__Lamassu__Flat_Ground,
+            price: Currency::Energy(40),
+            loc_id: None,
+        },
+        ExitId::Annuna__Lamassu__East_16__ex__Above_Flat_Ground_1 => Exit {
+            id: ExitId::Annuna__Lamassu__East_16__ex__Above_Flat_Ground_1,
+            time: 701,
+            dest: SpotId::Annuna__Lamassu__Above_Flat_Ground,
+            price: Currency::Energy(40),
+            loc_id: None,
+        },
+        ExitId::Annuna__Lamassu__East_16__ex__Ledge_By_Grate_1 => Exit {
+            id: ExitId::Annuna__Lamassu__East_16__ex__Ledge_By_Grate_1,
+            time: 1600,
+            dest: SpotId::Annuna__Lamassu__Ledge_By_Grate,
+            price: Currency::Energy(80),
+            loc_id: None,
+        },
+        ExitId::Annuna__Lamassu__Ledge_By_Grate__ex__East_16_1 => Exit {
+            id: ExitId::Annuna__Lamassu__Ledge_By_Grate__ex__East_16_1,
+            time: 701,
+            dest: SpotId::Annuna__Lamassu__East_16,
+            price: Currency::Energy(40),
+            loc_id: None,
+        },
+        ExitId::Annuna__Lamassu__Ledge_By_Grate__ex__Lower_Brick_Ledge_1 => Exit {
+            id: ExitId::Annuna__Lamassu__Ledge_By_Grate__ex__Lower_Brick_Ledge_1,
+            time: 2400,
+            dest: SpotId::Annuna__Lamassu__Lower_Brick_Ledge,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__Lamassu__Ledge_By_Grate__ex__Lower_Brick_Ledge_2 => Exit {
+            id: ExitId::Annuna__Lamassu__Ledge_By_Grate__ex__Lower_Brick_Ledge_2,
+            time: 1200,
+            dest: SpotId::Annuna__Lamassu__Lower_Brick_Ledge,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__Lamassu__Lower_Brick_Ledge__ex__Portal_Stand_1 => Exit {
+            id: ExitId::Annuna__Lamassu__Lower_Brick_Ledge__ex__Portal_Stand_1,
+            time: 614,
+            dest: SpotId::Annuna__Lamassu__Portal_Stand,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__Lamassu__Lower_Brick_Ledge__ex__Upper_Brick_Ledge_1 => Exit {
+            id: ExitId::Annuna__Lamassu__Lower_Brick_Ledge__ex__Upper_Brick_Ledge_1,
+            time: 1799,
+            dest: SpotId::Annuna__Lamassu__Upper_Brick_Ledge,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__Lamassu__Portal_Stand__ex__Upper_Brick_Ledge_1 => Exit {
+            id: ExitId::Annuna__Lamassu__Portal_Stand__ex__Upper_Brick_Ledge_1,
+            time: 1200,
+            dest: SpotId::Annuna__Lamassu__Upper_Brick_Ledge,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__Lamassu__West_15__ex__Crystals__East_1 => Exit {
+            id: ExitId::Annuna__Lamassu__West_15__ex__Crystals__East_1,
+            time: 1350,
+            dest: SpotId::Annuna__Crystals__East,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__Lamassu__Upper_Brick_Ledge__ex__East_14_1 => Exit {
+            id: ExitId::Annuna__Lamassu__Upper_Brick_Ledge__ex__East_14_1,
+            time: 1799,
+            dest: SpotId::Annuna__Lamassu__East_14,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__Lamassu__Upper_Brick_Ledge__ex__East_14_2 => Exit {
+            id: ExitId::Annuna__Lamassu__Upper_Brick_Ledge__ex__East_14_2,
+            time: 1200,
+            dest: SpotId::Annuna__Lamassu__East_14,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__Lamassu__East_14__ex__Glacier__Sea_Burial__West_14_1 => Exit {
+            id: ExitId::Annuna__Lamassu__East_14__ex__Glacier__Sea_Burial__West_14_1,
+            time: 1600,
+            dest: SpotId::Glacier__Sea_Burial__West_14,
             price: Currency::Free,
             loc_id: None,
         },
@@ -31275,6 +31686,287 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             exits: Range {
+                start: ExitId::Annuna__Lamassu__East_17__ex__Upper_Save__West_1.into_usize(),
+                end: ExitId::Annuna__Lamassu__East_17__ex__Upper_Save__West_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__Lamassu__Bottom_Hill_East => Spot {
+            id: SpotId::Annuna__Lamassu__Bottom_Hill_East,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Annuna__Lamassu__Bottom_Hill_East__ex__Bottom_East_Ledge_1.into_usize(),
+                end: ExitId::Annuna__Lamassu__Bottom_Hill_East__ex__Bottom_East_Ledge_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__Lamassu__Bottom_Hill => Spot {
+            id: SpotId::Annuna__Lamassu__Bottom_Hill,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Annuna__Lamassu__Bottom_Hill__ex__Bottom_Middle_Ledge_1.into_usize(),
+                end: ExitId::Annuna__Lamassu__Bottom_Hill__ex__Bottom_Middle_Ledge_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__Lamassu__Bottom_Hill_West => Spot {
+            id: SpotId::Annuna__Lamassu__Bottom_Hill_West,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Annuna__Lamassu__Bottom_Hill_West__ex__Hidden_Portal__Plinth_Right_1.into_usize(),
+                end: ExitId::Annuna__Lamassu__Bottom_Hill_West__ex__Hidden_Portal__Plinth_Right_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__Lamassu__West_17 => Spot {
+            id: SpotId::Annuna__Lamassu__West_17,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Annuna__Lamassu__West_17__ex__Hidden_Portal__East_1.into_usize(),
+                end: ExitId::Annuna__Lamassu__West_17__ex__Hidden_Portal__East_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__Lamassu__Bottom_East_Ledge => Spot {
+            id: SpotId::Annuna__Lamassu__Bottom_East_Ledge,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Annuna__Lamassu__Bottom_East_Ledge__ex__Bottom_Middle_Ledge_1.into_usize(),
+                end: ExitId::Annuna__Lamassu__Bottom_East_Ledge__ex__Bottom_Middle_Ledge_2.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__Lamassu__Bottom_Middle_Ledge => Spot {
+            id: SpotId::Annuna__Lamassu__Bottom_Middle_Ledge,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Annuna__Lamassu__Bottom_Middle_Ledge__ex__Bottom_West_Ledge_1.into_usize(),
+                end: ExitId::Annuna__Lamassu__Bottom_Middle_Ledge__ex__Bottom_West_Ledge_3.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__Lamassu__Bottom_West_Ledge => Spot {
+            id: SpotId::Annuna__Lamassu__Bottom_West_Ledge,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Annuna__Lamassu__Bottom_West_Ledge__ex__Above_Flat_Ground_1.into_usize(),
+                end: ExitId::Annuna__Lamassu__Bottom_West_Ledge__ex__Above_Flat_Ground_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__Lamassu__Flat_Ground => Spot {
+            id: SpotId::Annuna__Lamassu__Flat_Ground,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Annuna__Lamassu__Flat_Ground__ex__East_16_1.into_usize(),
+                end: ExitId::Annuna__Lamassu__Flat_Ground__ex__Ledge_By_Grate_2.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__Lamassu__Above_Flat_Ground => Spot {
+            id: SpotId::Annuna__Lamassu__Above_Flat_Ground,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Annuna__Lamassu__Above_Flat_Ground__ex__East_16_1.into_usize(),
+                end: ExitId::Annuna__Lamassu__Above_Flat_Ground__ex__Ledge_By_Grate_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__Lamassu__East_16 => Spot {
+            id: SpotId::Annuna__Lamassu__East_16,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Annuna__Lamassu__East_16__ex__Above_Flat_Ground_1.into_usize(),
+                end: ExitId::Annuna__Lamassu__East_16__ex__Siuna_Storage__West_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__Lamassu__Ledge_By_Grate => Spot {
+            id: SpotId::Annuna__Lamassu__Ledge_By_Grate,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Annuna__Lamassu__Ledge_By_Grate__ex__East_16_1.into_usize(),
+                end: ExitId::Annuna__Lamassu__Ledge_By_Grate__ex__Lower_Brick_Ledge_2.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__Lamassu__Lower_Brick_Ledge => Spot {
+            id: SpotId::Annuna__Lamassu__Lower_Brick_Ledge,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Annuna__Lamassu__Lower_Brick_Ledge__ex__Portal_Stand_1.into_usize(),
+                end: ExitId::Annuna__Lamassu__Lower_Brick_Ledge__ex__Upper_Brick_Ledge_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__Lamassu__Portal_Stand => Spot {
+            id: SpotId::Annuna__Lamassu__Portal_Stand,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Annuna__Lamassu__Portal_Stand__ex__Upper_Brick_Ledge_1.into_usize(),
+                end: ExitId::Annuna__Lamassu__Portal_Stand__ex__Upper_Brick_Ledge_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__Lamassu__West_15 => Spot {
+            id: SpotId::Annuna__Lamassu__West_15,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Annuna__Lamassu__West_15__ex__Crystals__East_1.into_usize(),
+                end: ExitId::Annuna__Lamassu__West_15__ex__Crystals__East_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__Lamassu__Upper_Brick_Ledge => Spot {
+            id: SpotId::Annuna__Lamassu__Upper_Brick_Ledge,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Annuna__Lamassu__Upper_Brick_Ledge__ex__East_14_1.into_usize(),
+                end: ExitId::Annuna__Lamassu__Upper_Brick_Ledge__ex__East_14_2.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__Lamassu__East_14 => Spot {
+            id: SpotId::Annuna__Lamassu__East_14,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Annuna__Lamassu__East_14__ex__Glacier__Sea_Burial__West_14_1.into_usize(),
+                end: ExitId::Annuna__Lamassu__East_14__ex__Glacier__Sea_Burial__West_14_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__Hidden_Portal__East => Spot {
+            id: SpotId::Annuna__Hidden_Portal__East,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__Hidden_Portal__Portal_Stand => Spot {
+            id: SpotId::Annuna__Hidden_Portal__Portal_Stand,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__Hidden_Portal__Plinth_Right => Spot {
+            id: SpotId::Annuna__Hidden_Portal__Plinth_Right,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__Hidden_Portal__Plinth_Left => Spot {
+            id: SpotId::Annuna__Hidden_Portal__Plinth_Left,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__Hidden_Portal__West => Spot {
+            id: SpotId::Annuna__Hidden_Portal__West,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__Crystals__East => Spot {
+            id: SpotId::Annuna__Crystals__East,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
                 start: 0, end: 0,
             },
             actions: Range {
@@ -31871,6 +32563,18 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             exits: Range {
                 start: ExitId::Annuna__Center_Climb__East__ex__Lower_Platform_1.into_usize(),
                 end: ExitId::Annuna__Center_Climb__East__ex__Vertical_Room__West_20_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__Siuna_Storage__West => Spot {
+            id: SpotId::Annuna__Siuna_Storage__West,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
             },
             actions: Range {
                 start: 0, end: 0,
@@ -40832,6 +41536,30 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             locations: Range {
                 start: LocationId::Glacier__The_Big_Drop__Water_Surface__Drown.into_usize(),
                 end: LocationId::Glacier__The_Big_Drop__Water_Surface__Drown.into_usize() + 1,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Glacier__Sea_Burial__West_13 => Spot {
+            id: SpotId::Glacier__Sea_Burial__West_13,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Glacier__Sea_Burial__West_14 => Spot {
+            id: SpotId::Glacier__Sea_Burial__West_14,
+            locations: Range {
+                start: 0, end: 0,
             },
             exits: Range {
                 start: 0, end: 0,

@@ -1461,6 +1461,135 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
         ([false], SpotId::Annuna__Final_Save__Save_Point, SpotId::Annuna__Final_Save__East) => 1578,
         (
             [false],
+            SpotId::Annuna__Lamassu__Above_Flat_Ground,
+            SpotId::Annuna__Lamassu__Bottom_West_Ledge,
+        ) => 1929,
+        (
+            [false],
+            SpotId::Annuna__Lamassu__Above_Flat_Ground,
+            SpotId::Annuna__Lamassu__Flat_Ground,
+        ) => 100,
+        (
+            [false],
+            SpotId::Annuna__Lamassu__Bottom_East_Ledge,
+            SpotId::Annuna__Lamassu__Bottom_Hill,
+        ) => 701,
+        (
+            [false],
+            SpotId::Annuna__Lamassu__Bottom_East_Ledge,
+            SpotId::Annuna__Lamassu__Bottom_Hill_East,
+        ) => 400,
+        (
+            [false],
+            SpotId::Annuna__Lamassu__Bottom_Hill,
+            SpotId::Annuna__Lamassu__Bottom_East_Ledge,
+        ) => 701,
+        (
+            [false],
+            SpotId::Annuna__Lamassu__Bottom_Hill,
+            SpotId::Annuna__Lamassu__Bottom_Hill_East,
+        ) => 701,
+        (
+            [false],
+            SpotId::Annuna__Lamassu__Bottom_Hill,
+            SpotId::Annuna__Lamassu__Bottom_Hill_West,
+        ) => 877,
+        (
+            [false],
+            SpotId::Annuna__Lamassu__Bottom_Hill_East,
+            SpotId::Annuna__Lamassu__Bottom_Hill,
+        ) => 701,
+        ([false], SpotId::Annuna__Lamassu__Bottom_Hill_East, SpotId::Annuna__Lamassu__East_17) => {
+            877
+        }
+        (
+            [false],
+            SpotId::Annuna__Lamassu__Bottom_Hill_West,
+            SpotId::Annuna__Lamassu__Bottom_Hill,
+        ) => 1200,
+        ([false], SpotId::Annuna__Lamassu__Bottom_Hill_West, SpotId::Annuna__Lamassu__West_17) => {
+            701
+        }
+        (
+            [false],
+            SpotId::Annuna__Lamassu__Bottom_Middle_Ledge,
+            SpotId::Annuna__Lamassu__Bottom_East_Ledge,
+        ) => 701,
+        (
+            [false],
+            SpotId::Annuna__Lamassu__Bottom_Middle_Ledge,
+            SpotId::Annuna__Lamassu__Bottom_Hill,
+        ) => 400,
+        (
+            [false],
+            SpotId::Annuna__Lamassu__Bottom_Middle_Ledge,
+            SpotId::Annuna__Lamassu__Bottom_Hill_East,
+        ) => 701,
+        (
+            [false],
+            SpotId::Annuna__Lamassu__Bottom_West_Ledge,
+            SpotId::Annuna__Lamassu__Bottom_Middle_Ledge,
+        ) => 1052,
+        (
+            [false],
+            SpotId::Annuna__Lamassu__Bottom_West_Ledge,
+            SpotId::Annuna__Lamassu__Flat_Ground,
+        ) => 1929,
+        ([false], SpotId::Annuna__Lamassu__East_14, SpotId::Annuna__Lamassu__Portal_Stand) => 1491,
+        ([false], SpotId::Annuna__Lamassu__East_14, SpotId::Annuna__Lamassu__Upper_Brick_Ledge) => {
+            549
+        }
+        ([false], SpotId::Annuna__Lamassu__East_14, SpotId::Annuna__Lamassu__West_15) => 2982,
+        ([false], SpotId::Annuna__Lamassu__East_17, SpotId::Annuna__Lamassu__Bottom_Hill_East) => {
+            877
+        }
+        (
+            [false],
+            SpotId::Annuna__Lamassu__Flat_Ground,
+            SpotId::Annuna__Lamassu__Bottom_West_Ledge,
+        ) => 1929,
+        (
+            [false],
+            SpotId::Annuna__Lamassu__Ledge_By_Grate,
+            SpotId::Annuna__Lamassu__Above_Flat_Ground,
+        ) => 299,
+        (
+            [false],
+            SpotId::Annuna__Lamassu__Lower_Brick_Ledge,
+            SpotId::Annuna__Lamassu__Ledge_By_Grate,
+        ) => 500,
+        (
+            [false],
+            SpotId::Annuna__Lamassu__Lower_Brick_Ledge,
+            SpotId::Annuna__Lamassu__Portal_Stand,
+        ) => 1200,
+        (
+            [false],
+            SpotId::Annuna__Lamassu__Portal_Stand,
+            SpotId::Annuna__Lamassu__Lower_Brick_Ledge,
+        ) => 614,
+        ([false], SpotId::Annuna__Lamassu__Portal_Stand, SpotId::Annuna__Lamassu__West_15) => 1491,
+        (
+            [false],
+            SpotId::Annuna__Lamassu__Upper_Brick_Ledge,
+            SpotId::Annuna__Lamassu__Ledge_By_Grate,
+        ) => 1200,
+        (
+            [false],
+            SpotId::Annuna__Lamassu__Upper_Brick_Ledge,
+            SpotId::Annuna__Lamassu__Lower_Brick_Ledge,
+        ) => 700,
+        (
+            [false],
+            SpotId::Annuna__Lamassu__Upper_Brick_Ledge,
+            SpotId::Annuna__Lamassu__Portal_Stand,
+        ) => 964,
+        ([false], SpotId::Annuna__Lamassu__West_15, SpotId::Annuna__Lamassu__Portal_Stand) => 1491,
+        ([false], SpotId::Annuna__Lamassu__West_17, SpotId::Annuna__Lamassu__Bottom_Hill_East) => {
+            2280
+        }
+        (
+            [false],
             SpotId::Annuna__Lower_Hallway__Dais_Left,
             SpotId::Annuna__Lower_Hallway__Dais_Right,
         ) => 1052,
@@ -15711,6 +15840,135 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
         ([true], SpotId::Annuna__Final_Save__Save_Point, SpotId::Annuna__Final_Save__East) => 1578,
         (
             [true],
+            SpotId::Annuna__Lamassu__Above_Flat_Ground,
+            SpotId::Annuna__Lamassu__Bottom_West_Ledge,
+        ) => 1929,
+        (
+            [true],
+            SpotId::Annuna__Lamassu__Above_Flat_Ground,
+            SpotId::Annuna__Lamassu__Flat_Ground,
+        ) => 100,
+        (
+            [true],
+            SpotId::Annuna__Lamassu__Bottom_East_Ledge,
+            SpotId::Annuna__Lamassu__Bottom_Hill,
+        ) => 701,
+        (
+            [true],
+            SpotId::Annuna__Lamassu__Bottom_East_Ledge,
+            SpotId::Annuna__Lamassu__Bottom_Hill_East,
+        ) => 400,
+        (
+            [true],
+            SpotId::Annuna__Lamassu__Bottom_Hill,
+            SpotId::Annuna__Lamassu__Bottom_East_Ledge,
+        ) => 701,
+        (
+            [true],
+            SpotId::Annuna__Lamassu__Bottom_Hill,
+            SpotId::Annuna__Lamassu__Bottom_Hill_East,
+        ) => 701,
+        (
+            [true],
+            SpotId::Annuna__Lamassu__Bottom_Hill,
+            SpotId::Annuna__Lamassu__Bottom_Hill_West,
+        ) => 877,
+        (
+            [true],
+            SpotId::Annuna__Lamassu__Bottom_Hill_East,
+            SpotId::Annuna__Lamassu__Bottom_Hill,
+        ) => 701,
+        ([true], SpotId::Annuna__Lamassu__Bottom_Hill_East, SpotId::Annuna__Lamassu__East_17) => {
+            877
+        }
+        (
+            [true],
+            SpotId::Annuna__Lamassu__Bottom_Hill_West,
+            SpotId::Annuna__Lamassu__Bottom_Hill,
+        ) => 1200,
+        ([true], SpotId::Annuna__Lamassu__Bottom_Hill_West, SpotId::Annuna__Lamassu__West_17) => {
+            701
+        }
+        (
+            [true],
+            SpotId::Annuna__Lamassu__Bottom_Middle_Ledge,
+            SpotId::Annuna__Lamassu__Bottom_East_Ledge,
+        ) => 701,
+        (
+            [true],
+            SpotId::Annuna__Lamassu__Bottom_Middle_Ledge,
+            SpotId::Annuna__Lamassu__Bottom_Hill,
+        ) => 400,
+        (
+            [true],
+            SpotId::Annuna__Lamassu__Bottom_Middle_Ledge,
+            SpotId::Annuna__Lamassu__Bottom_Hill_East,
+        ) => 701,
+        (
+            [true],
+            SpotId::Annuna__Lamassu__Bottom_West_Ledge,
+            SpotId::Annuna__Lamassu__Bottom_Middle_Ledge,
+        ) => 1052,
+        (
+            [true],
+            SpotId::Annuna__Lamassu__Bottom_West_Ledge,
+            SpotId::Annuna__Lamassu__Flat_Ground,
+        ) => 1929,
+        ([true], SpotId::Annuna__Lamassu__East_14, SpotId::Annuna__Lamassu__Portal_Stand) => 1491,
+        ([true], SpotId::Annuna__Lamassu__East_14, SpotId::Annuna__Lamassu__Upper_Brick_Ledge) => {
+            549
+        }
+        ([true], SpotId::Annuna__Lamassu__East_14, SpotId::Annuna__Lamassu__West_15) => 2982,
+        ([true], SpotId::Annuna__Lamassu__East_17, SpotId::Annuna__Lamassu__Bottom_Hill_East) => {
+            877
+        }
+        (
+            [true],
+            SpotId::Annuna__Lamassu__Flat_Ground,
+            SpotId::Annuna__Lamassu__Bottom_West_Ledge,
+        ) => 1929,
+        (
+            [true],
+            SpotId::Annuna__Lamassu__Ledge_By_Grate,
+            SpotId::Annuna__Lamassu__Above_Flat_Ground,
+        ) => 299,
+        (
+            [true],
+            SpotId::Annuna__Lamassu__Lower_Brick_Ledge,
+            SpotId::Annuna__Lamassu__Ledge_By_Grate,
+        ) => 500,
+        (
+            [true],
+            SpotId::Annuna__Lamassu__Lower_Brick_Ledge,
+            SpotId::Annuna__Lamassu__Portal_Stand,
+        ) => 1200,
+        (
+            [true],
+            SpotId::Annuna__Lamassu__Portal_Stand,
+            SpotId::Annuna__Lamassu__Lower_Brick_Ledge,
+        ) => 614,
+        ([true], SpotId::Annuna__Lamassu__Portal_Stand, SpotId::Annuna__Lamassu__West_15) => 1491,
+        (
+            [true],
+            SpotId::Annuna__Lamassu__Upper_Brick_Ledge,
+            SpotId::Annuna__Lamassu__Ledge_By_Grate,
+        ) => 1200,
+        (
+            [true],
+            SpotId::Annuna__Lamassu__Upper_Brick_Ledge,
+            SpotId::Annuna__Lamassu__Lower_Brick_Ledge,
+        ) => 700,
+        (
+            [true],
+            SpotId::Annuna__Lamassu__Upper_Brick_Ledge,
+            SpotId::Annuna__Lamassu__Portal_Stand,
+        ) => 964,
+        ([true], SpotId::Annuna__Lamassu__West_15, SpotId::Annuna__Lamassu__Portal_Stand) => 1491,
+        ([true], SpotId::Annuna__Lamassu__West_17, SpotId::Annuna__Lamassu__Bottom_Hill_East) => {
+            2280
+        }
+        (
+            [true],
             SpotId::Annuna__Lower_Hallway__Dais_Left,
             SpotId::Annuna__Lower_Hallway__Dais_Right,
         ) => 1052,
@@ -29404,6 +29662,62 @@ pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
         (SpotId::Annuna__Upper_Save__Save_Point, SpotId::Annuna__Upper_Save__East) => true,
         (SpotId::Annuna__Upper_Save__Save_Point, SpotId::Annuna__Upper_Save__West) => true,
         (SpotId::Annuna__Upper_Save__West, SpotId::Annuna__Upper_Save__Save_Point) => true,
+        (SpotId::Annuna__Lamassu__East_17, SpotId::Annuna__Lamassu__Bottom_Hill_East) => true,
+        (SpotId::Annuna__Lamassu__Bottom_Hill_East, SpotId::Annuna__Lamassu__Bottom_Hill) => true,
+        (SpotId::Annuna__Lamassu__Bottom_Hill_East, SpotId::Annuna__Lamassu__East_17) => true,
+        (SpotId::Annuna__Lamassu__Bottom_Hill, SpotId::Annuna__Lamassu__Bottom_Hill_West) => true,
+        (SpotId::Annuna__Lamassu__Bottom_Hill, SpotId::Annuna__Lamassu__Bottom_Hill_East) => true,
+        (SpotId::Annuna__Lamassu__Bottom_Hill, SpotId::Annuna__Lamassu__Bottom_East_Ledge) => true,
+        (SpotId::Annuna__Lamassu__Bottom_Hill_West, SpotId::Annuna__Lamassu__West_17) => true,
+        (SpotId::Annuna__Lamassu__Bottom_Hill_West, SpotId::Annuna__Lamassu__Bottom_Hill) => true,
+        (SpotId::Annuna__Lamassu__West_17, SpotId::Annuna__Lamassu__Bottom_Hill_East) => true,
+        (SpotId::Annuna__Lamassu__Bottom_East_Ledge, SpotId::Annuna__Lamassu__Bottom_Hill) => true,
+        (SpotId::Annuna__Lamassu__Bottom_East_Ledge, SpotId::Annuna__Lamassu__Bottom_Hill_East) => {
+            true
+        }
+        (
+            SpotId::Annuna__Lamassu__Bottom_Middle_Ledge,
+            SpotId::Annuna__Lamassu__Bottom_East_Ledge,
+        ) => true,
+        (SpotId::Annuna__Lamassu__Bottom_Middle_Ledge, SpotId::Annuna__Lamassu__Bottom_Hill) => {
+            true
+        }
+        (
+            SpotId::Annuna__Lamassu__Bottom_Middle_Ledge,
+            SpotId::Annuna__Lamassu__Bottom_Hill_East,
+        ) => true,
+        (
+            SpotId::Annuna__Lamassu__Bottom_West_Ledge,
+            SpotId::Annuna__Lamassu__Bottom_Middle_Ledge,
+        ) => true,
+        (SpotId::Annuna__Lamassu__Bottom_West_Ledge, SpotId::Annuna__Lamassu__Flat_Ground) => true,
+        (SpotId::Annuna__Lamassu__Flat_Ground, SpotId::Annuna__Lamassu__Bottom_West_Ledge) => true,
+        (SpotId::Annuna__Lamassu__Above_Flat_Ground, SpotId::Annuna__Lamassu__Flat_Ground) => true,
+        (
+            SpotId::Annuna__Lamassu__Above_Flat_Ground,
+            SpotId::Annuna__Lamassu__Bottom_West_Ledge,
+        ) => true,
+        (SpotId::Annuna__Lamassu__Ledge_By_Grate, SpotId::Annuna__Lamassu__Above_Flat_Ground) => {
+            true
+        }
+        (SpotId::Annuna__Lamassu__Lower_Brick_Ledge, SpotId::Annuna__Lamassu__Ledge_By_Grate) => {
+            true
+        }
+        (SpotId::Annuna__Lamassu__Lower_Brick_Ledge, SpotId::Annuna__Lamassu__Portal_Stand) => true,
+        (SpotId::Annuna__Lamassu__Portal_Stand, SpotId::Annuna__Lamassu__West_15) => true,
+        (SpotId::Annuna__Lamassu__Portal_Stand, SpotId::Annuna__Lamassu__Lower_Brick_Ledge) => true,
+        (SpotId::Annuna__Lamassu__West_15, SpotId::Annuna__Lamassu__Portal_Stand) => true,
+        (SpotId::Annuna__Lamassu__Upper_Brick_Ledge, SpotId::Annuna__Lamassu__Portal_Stand) => true,
+        (
+            SpotId::Annuna__Lamassu__Upper_Brick_Ledge,
+            SpotId::Annuna__Lamassu__Lower_Brick_Ledge,
+        ) => true,
+        (SpotId::Annuna__Lamassu__Upper_Brick_Ledge, SpotId::Annuna__Lamassu__Ledge_By_Grate) => {
+            true
+        }
+        (SpotId::Annuna__Lamassu__East_14, SpotId::Annuna__Lamassu__Upper_Brick_Ledge) => true,
+        (SpotId::Annuna__Lamassu__East_14, SpotId::Annuna__Lamassu__Portal_Stand) => true,
+        (SpotId::Annuna__Lamassu__East_14, SpotId::Annuna__Lamassu__West_15) => true,
         (SpotId::Annuna__Center_Save__East, SpotId::Annuna__Center_Save__Save_Point) => true,
         (SpotId::Annuna__Center_Save__Save_Point, SpotId::Annuna__Center_Save__West_Floor) => true,
         (SpotId::Annuna__Center_Save__Save_Point, SpotId::Annuna__Center_Save__East) => true,
@@ -38664,6 +38978,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             1000,
         ),
         (
+            SpotId::Annuna__Crystals__East,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
             SpotId::Annuna__East_Bridge__Below_Cavern,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
@@ -40404,7 +40723,382 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             1000,
         ),
         (
+            SpotId::Annuna__Hidden_Portal__East,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Hidden_Portal__Plinth_Left,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Hidden_Portal__Plinth_Right,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Hidden_Portal__Portal_Stand,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Hidden_Portal__West,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Lamassu__Above_Flat_Ground,
+            SpotId::Annuna__Lamassu__Bottom_West_Ledge,
+            1929,
+        ),
+        (
+            SpotId::Annuna__Lamassu__Above_Flat_Ground,
+            SpotId::Annuna__Lamassu__East_16,
+            701,
+        ),
+        (
+            SpotId::Annuna__Lamassu__Above_Flat_Ground,
+            SpotId::Annuna__Lamassu__Flat_Ground,
+            100,
+        ),
+        (
+            SpotId::Annuna__Lamassu__Above_Flat_Ground,
+            SpotId::Annuna__Lamassu__Ledge_By_Grate,
+            600,
+        ),
+        (
+            SpotId::Annuna__Lamassu__Above_Flat_Ground,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Lamassu__Bottom_East_Ledge,
+            SpotId::Annuna__Lamassu__Bottom_Hill,
+            701,
+        ),
+        (
+            SpotId::Annuna__Lamassu__Bottom_East_Ledge,
+            SpotId::Annuna__Lamassu__Bottom_Hill_East,
+            400,
+        ),
+        (
+            SpotId::Annuna__Lamassu__Bottom_East_Ledge,
+            SpotId::Annuna__Lamassu__Bottom_Middle_Ledge,
+            701,
+        ),
+        (
+            SpotId::Annuna__Lamassu__Bottom_East_Ledge,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Lamassu__Bottom_Hill,
+            SpotId::Annuna__Lamassu__Bottom_East_Ledge,
+            701,
+        ),
+        (
+            SpotId::Annuna__Lamassu__Bottom_Hill,
+            SpotId::Annuna__Lamassu__Bottom_Hill_East,
+            701,
+        ),
+        (
+            SpotId::Annuna__Lamassu__Bottom_Hill,
+            SpotId::Annuna__Lamassu__Bottom_Hill_West,
+            877,
+        ),
+        (
+            SpotId::Annuna__Lamassu__Bottom_Hill,
+            SpotId::Annuna__Lamassu__Bottom_Middle_Ledge,
+            600,
+        ),
+        (
+            SpotId::Annuna__Lamassu__Bottom_Hill,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Lamassu__Bottom_Hill_East,
+            SpotId::Annuna__Lamassu__Bottom_East_Ledge,
+            600,
+        ),
+        (
+            SpotId::Annuna__Lamassu__Bottom_Hill_East,
+            SpotId::Annuna__Lamassu__Bottom_Hill,
+            701,
+        ),
+        (
+            SpotId::Annuna__Lamassu__Bottom_Hill_East,
             SpotId::Annuna__Lamassu__East_17,
+            877,
+        ),
+        (
+            SpotId::Annuna__Lamassu__Bottom_Hill_East,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Lamassu__Bottom_Hill_West,
+            SpotId::Annuna__Hidden_Portal__Plinth_Right,
+            2850,
+        ),
+        (
+            SpotId::Annuna__Lamassu__Bottom_Hill_West,
+            SpotId::Annuna__Lamassu__Bottom_Hill,
+            1200,
+        ),
+        (
+            SpotId::Annuna__Lamassu__Bottom_Hill_West,
+            SpotId::Annuna__Lamassu__West_17,
+            701,
+        ),
+        (
+            SpotId::Annuna__Lamassu__Bottom_Hill_West,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Lamassu__Bottom_Middle_Ledge,
+            SpotId::Annuna__Lamassu__Bottom_East_Ledge,
+            701,
+        ),
+        (
+            SpotId::Annuna__Lamassu__Bottom_Middle_Ledge,
+            SpotId::Annuna__Lamassu__Bottom_Hill,
+            400,
+        ),
+        (
+            SpotId::Annuna__Lamassu__Bottom_Middle_Ledge,
+            SpotId::Annuna__Lamassu__Bottom_Hill_East,
+            701,
+        ),
+        (
+            SpotId::Annuna__Lamassu__Bottom_Middle_Ledge,
+            SpotId::Annuna__Lamassu__Bottom_West_Ledge,
+            749,
+        ),
+        (
+            SpotId::Annuna__Lamassu__Bottom_Middle_Ledge,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Lamassu__Bottom_West_Ledge,
+            SpotId::Annuna__Lamassu__Above_Flat_Ground,
+            1374,
+        ),
+        (
+            SpotId::Annuna__Lamassu__Bottom_West_Ledge,
+            SpotId::Annuna__Lamassu__Bottom_Middle_Ledge,
+            1052,
+        ),
+        (
+            SpotId::Annuna__Lamassu__Bottom_West_Ledge,
+            SpotId::Annuna__Lamassu__Flat_Ground,
+            1929,
+        ),
+        (
+            SpotId::Annuna__Lamassu__Bottom_West_Ledge,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Lamassu__East_14,
+            SpotId::Annuna__Lamassu__Portal_Stand,
+            1491,
+        ),
+        (
+            SpotId::Annuna__Lamassu__East_14,
+            SpotId::Annuna__Lamassu__Upper_Brick_Ledge,
+            549,
+        ),
+        (
+            SpotId::Annuna__Lamassu__East_14,
+            SpotId::Annuna__Lamassu__West_15,
+            2982,
+        ),
+        (
+            SpotId::Annuna__Lamassu__East_14,
+            SpotId::Glacier__Sea_Burial__West_14,
+            1600,
+        ),
+        (
+            SpotId::Annuna__Lamassu__East_14,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Lamassu__East_16,
+            SpotId::Annuna__Lamassu__Above_Flat_Ground,
+            701,
+        ),
+        (
+            SpotId::Annuna__Lamassu__East_16,
+            SpotId::Annuna__Lamassu__Flat_Ground,
+            701,
+        ),
+        (
+            SpotId::Annuna__Lamassu__East_16,
+            SpotId::Annuna__Lamassu__Ledge_By_Grate,
+            1600,
+        ),
+        (
+            SpotId::Annuna__Lamassu__East_16,
+            SpotId::Annuna__Siuna_Storage__West,
+            1350,
+        ),
+        (
+            SpotId::Annuna__Lamassu__East_16,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Lamassu__East_17,
+            SpotId::Annuna__Lamassu__Bottom_Hill_East,
+            877,
+        ),
+        (
+            SpotId::Annuna__Lamassu__East_17,
+            SpotId::Annuna__Upper_Save__West,
+            1350,
+        ),
+        (
+            SpotId::Annuna__Lamassu__East_17,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Lamassu__Flat_Ground,
+            SpotId::Annuna__Lamassu__Bottom_West_Ledge,
+            1929,
+        ),
+        (
+            SpotId::Annuna__Lamassu__Flat_Ground,
+            SpotId::Annuna__Lamassu__East_16,
+            701,
+        ),
+        (
+            SpotId::Annuna__Lamassu__Flat_Ground,
+            SpotId::Annuna__Lamassu__Ledge_By_Grate,
+            600,
+        ),
+        (
+            SpotId::Annuna__Lamassu__Flat_Ground,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Lamassu__Ledge_By_Grate,
+            SpotId::Annuna__Lamassu__Above_Flat_Ground,
+            299,
+        ),
+        (
+            SpotId::Annuna__Lamassu__Ledge_By_Grate,
+            SpotId::Annuna__Lamassu__East_16,
+            701,
+        ),
+        (
+            SpotId::Annuna__Lamassu__Ledge_By_Grate,
+            SpotId::Annuna__Lamassu__Lower_Brick_Ledge,
+            1200,
+        ),
+        (
+            SpotId::Annuna__Lamassu__Ledge_By_Grate,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Lamassu__Lower_Brick_Ledge,
+            SpotId::Annuna__Lamassu__Ledge_By_Grate,
+            500,
+        ),
+        (
+            SpotId::Annuna__Lamassu__Lower_Brick_Ledge,
+            SpotId::Annuna__Lamassu__Portal_Stand,
+            614,
+        ),
+        (
+            SpotId::Annuna__Lamassu__Lower_Brick_Ledge,
+            SpotId::Annuna__Lamassu__Upper_Brick_Ledge,
+            1799,
+        ),
+        (
+            SpotId::Annuna__Lamassu__Lower_Brick_Ledge,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Lamassu__Portal_Stand,
+            SpotId::Annuna__Lamassu__Lower_Brick_Ledge,
+            614,
+        ),
+        (
+            SpotId::Annuna__Lamassu__Portal_Stand,
+            SpotId::Annuna__Lamassu__Upper_Brick_Ledge,
+            1200,
+        ),
+        (
+            SpotId::Annuna__Lamassu__Portal_Stand,
+            SpotId::Annuna__Lamassu__West_15,
+            1491,
+        ),
+        (
+            SpotId::Annuna__Lamassu__Portal_Stand,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Lamassu__Upper_Brick_Ledge,
+            SpotId::Annuna__Lamassu__East_14,
+            1200,
+        ),
+        (
+            SpotId::Annuna__Lamassu__Upper_Brick_Ledge,
+            SpotId::Annuna__Lamassu__Ledge_By_Grate,
+            1200,
+        ),
+        (
+            SpotId::Annuna__Lamassu__Upper_Brick_Ledge,
+            SpotId::Annuna__Lamassu__Lower_Brick_Ledge,
+            700,
+        ),
+        (
+            SpotId::Annuna__Lamassu__Upper_Brick_Ledge,
+            SpotId::Annuna__Lamassu__Portal_Stand,
+            964,
+        ),
+        (
+            SpotId::Annuna__Lamassu__Upper_Brick_Ledge,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Lamassu__West_15,
+            SpotId::Annuna__Crystals__East,
+            1350,
+        ),
+        (
+            SpotId::Annuna__Lamassu__West_15,
+            SpotId::Annuna__Lamassu__Portal_Stand,
+            1491,
+        ),
+        (
+            SpotId::Annuna__Lamassu__West_15,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Lamassu__West_17,
+            SpotId::Annuna__Hidden_Portal__East,
+            1350,
+        ),
+        (
+            SpotId::Annuna__Lamassu__West_17,
+            SpotId::Annuna__Lamassu__Bottom_Hill_East,
+            2280,
+        ),
+        (
+            SpotId::Annuna__Lamassu__West_17,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -40765,6 +41459,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Annuna__Seals__Upper_Seal,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Siuna_Storage__West,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -55259,6 +55958,16 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             1000,
         ),
         (
+            SpotId::Glacier__Sea_Burial__West_13,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Glacier__Sea_Burial__West_14,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
             SpotId::Glacier__The_Big_Drop__East,
             SpotId::Glacier__Compass_Room__West,
             1350,
@@ -67012,6 +67721,86 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
         (SpotId::Annuna__Final_Save__Pillar, SpotId::Annuna__Final_Save__Lower_West) => Some(1052),
         (SpotId::Annuna__Final_Save__Pillar, SpotId::Annuna__Final_Save__Save_Point) => Some(526),
         (SpotId::Annuna__Final_Save__Save_Point, SpotId::Annuna__Final_Save__East) => Some(1578),
+        (
+            SpotId::Annuna__Lamassu__Above_Flat_Ground,
+            SpotId::Annuna__Lamassu__Bottom_West_Ledge,
+        ) => Some(1929),
+        (SpotId::Annuna__Lamassu__Above_Flat_Ground, SpotId::Annuna__Lamassu__Flat_Ground) => {
+            Some(100)
+        }
+        (SpotId::Annuna__Lamassu__Bottom_East_Ledge, SpotId::Annuna__Lamassu__Bottom_Hill) => {
+            Some(701)
+        }
+        (SpotId::Annuna__Lamassu__Bottom_East_Ledge, SpotId::Annuna__Lamassu__Bottom_Hill_East) => {
+            Some(400)
+        }
+        (SpotId::Annuna__Lamassu__Bottom_Hill, SpotId::Annuna__Lamassu__Bottom_East_Ledge) => {
+            Some(701)
+        }
+        (SpotId::Annuna__Lamassu__Bottom_Hill, SpotId::Annuna__Lamassu__Bottom_Hill_East) => {
+            Some(701)
+        }
+        (SpotId::Annuna__Lamassu__Bottom_Hill, SpotId::Annuna__Lamassu__Bottom_Hill_West) => {
+            Some(877)
+        }
+        (SpotId::Annuna__Lamassu__Bottom_Hill_East, SpotId::Annuna__Lamassu__Bottom_Hill) => {
+            Some(701)
+        }
+        (SpotId::Annuna__Lamassu__Bottom_Hill_East, SpotId::Annuna__Lamassu__East_17) => Some(877),
+        (SpotId::Annuna__Lamassu__Bottom_Hill_West, SpotId::Annuna__Lamassu__Bottom_Hill) => {
+            Some(1200)
+        }
+        (SpotId::Annuna__Lamassu__Bottom_Hill_West, SpotId::Annuna__Lamassu__West_17) => Some(701),
+        (
+            SpotId::Annuna__Lamassu__Bottom_Middle_Ledge,
+            SpotId::Annuna__Lamassu__Bottom_East_Ledge,
+        ) => Some(701),
+        (SpotId::Annuna__Lamassu__Bottom_Middle_Ledge, SpotId::Annuna__Lamassu__Bottom_Hill) => {
+            Some(400)
+        }
+        (
+            SpotId::Annuna__Lamassu__Bottom_Middle_Ledge,
+            SpotId::Annuna__Lamassu__Bottom_Hill_East,
+        ) => Some(701),
+        (
+            SpotId::Annuna__Lamassu__Bottom_West_Ledge,
+            SpotId::Annuna__Lamassu__Bottom_Middle_Ledge,
+        ) => Some(1052),
+        (SpotId::Annuna__Lamassu__Bottom_West_Ledge, SpotId::Annuna__Lamassu__Flat_Ground) => {
+            Some(1929)
+        }
+        (SpotId::Annuna__Lamassu__East_14, SpotId::Annuna__Lamassu__Portal_Stand) => Some(1491),
+        (SpotId::Annuna__Lamassu__East_14, SpotId::Annuna__Lamassu__Upper_Brick_Ledge) => Some(549),
+        (SpotId::Annuna__Lamassu__East_14, SpotId::Annuna__Lamassu__West_15) => Some(2982),
+        (SpotId::Annuna__Lamassu__East_17, SpotId::Annuna__Lamassu__Bottom_Hill_East) => Some(877),
+        (SpotId::Annuna__Lamassu__Flat_Ground, SpotId::Annuna__Lamassu__Bottom_West_Ledge) => {
+            Some(1929)
+        }
+        (SpotId::Annuna__Lamassu__Ledge_By_Grate, SpotId::Annuna__Lamassu__Above_Flat_Ground) => {
+            Some(299)
+        }
+        (SpotId::Annuna__Lamassu__Lower_Brick_Ledge, SpotId::Annuna__Lamassu__Ledge_By_Grate) => {
+            Some(500)
+        }
+        (SpotId::Annuna__Lamassu__Lower_Brick_Ledge, SpotId::Annuna__Lamassu__Portal_Stand) => {
+            Some(1200)
+        }
+        (SpotId::Annuna__Lamassu__Portal_Stand, SpotId::Annuna__Lamassu__Lower_Brick_Ledge) => {
+            Some(614)
+        }
+        (SpotId::Annuna__Lamassu__Portal_Stand, SpotId::Annuna__Lamassu__West_15) => Some(1491),
+        (SpotId::Annuna__Lamassu__Upper_Brick_Ledge, SpotId::Annuna__Lamassu__Ledge_By_Grate) => {
+            Some(1200)
+        }
+        (
+            SpotId::Annuna__Lamassu__Upper_Brick_Ledge,
+            SpotId::Annuna__Lamassu__Lower_Brick_Ledge,
+        ) => Some(700),
+        (SpotId::Annuna__Lamassu__Upper_Brick_Ledge, SpotId::Annuna__Lamassu__Portal_Stand) => {
+            Some(964)
+        }
+        (SpotId::Annuna__Lamassu__West_15, SpotId::Annuna__Lamassu__Portal_Stand) => Some(1491),
+        (SpotId::Annuna__Lamassu__West_17, SpotId::Annuna__Lamassu__Bottom_Hill_East) => Some(2280),
         (SpotId::Annuna__Lower_Hallway__Dais_Left, SpotId::Annuna__Lower_Hallway__Dais_Right) => {
             Some(1052)
         }
@@ -77073,6 +77862,104 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
         }
         (SpotId::Annuna__Final_Save__Save_Point, SpotId::Annuna__Final_Save__East) => {
             (Some(1578), vec![])
+        }
+        (
+            SpotId::Annuna__Lamassu__Above_Flat_Ground,
+            SpotId::Annuna__Lamassu__Bottom_West_Ledge,
+        ) => (Some(1929), vec![]),
+        (SpotId::Annuna__Lamassu__Above_Flat_Ground, SpotId::Annuna__Lamassu__Flat_Ground) => {
+            (Some(100), vec![])
+        }
+        (SpotId::Annuna__Lamassu__Bottom_East_Ledge, SpotId::Annuna__Lamassu__Bottom_Hill) => {
+            (Some(701), vec![])
+        }
+        (SpotId::Annuna__Lamassu__Bottom_East_Ledge, SpotId::Annuna__Lamassu__Bottom_Hill_East) => {
+            (Some(400), vec![])
+        }
+        (SpotId::Annuna__Lamassu__Bottom_Hill, SpotId::Annuna__Lamassu__Bottom_East_Ledge) => {
+            (Some(701), vec![])
+        }
+        (SpotId::Annuna__Lamassu__Bottom_Hill, SpotId::Annuna__Lamassu__Bottom_Hill_East) => {
+            (Some(701), vec![])
+        }
+        (SpotId::Annuna__Lamassu__Bottom_Hill, SpotId::Annuna__Lamassu__Bottom_Hill_West) => {
+            (Some(877), vec![])
+        }
+        (SpotId::Annuna__Lamassu__Bottom_Hill_East, SpotId::Annuna__Lamassu__Bottom_Hill) => {
+            (Some(701), vec![])
+        }
+        (SpotId::Annuna__Lamassu__Bottom_Hill_East, SpotId::Annuna__Lamassu__East_17) => {
+            (Some(877), vec![])
+        }
+        (SpotId::Annuna__Lamassu__Bottom_Hill_West, SpotId::Annuna__Lamassu__Bottom_Hill) => {
+            (Some(1200), vec![])
+        }
+        (SpotId::Annuna__Lamassu__Bottom_Hill_West, SpotId::Annuna__Lamassu__West_17) => {
+            (Some(701), vec![])
+        }
+        (
+            SpotId::Annuna__Lamassu__Bottom_Middle_Ledge,
+            SpotId::Annuna__Lamassu__Bottom_East_Ledge,
+        ) => (Some(701), vec![]),
+        (SpotId::Annuna__Lamassu__Bottom_Middle_Ledge, SpotId::Annuna__Lamassu__Bottom_Hill) => {
+            (Some(400), vec![])
+        }
+        (
+            SpotId::Annuna__Lamassu__Bottom_Middle_Ledge,
+            SpotId::Annuna__Lamassu__Bottom_Hill_East,
+        ) => (Some(701), vec![]),
+        (
+            SpotId::Annuna__Lamassu__Bottom_West_Ledge,
+            SpotId::Annuna__Lamassu__Bottom_Middle_Ledge,
+        ) => (Some(1052), vec![]),
+        (SpotId::Annuna__Lamassu__Bottom_West_Ledge, SpotId::Annuna__Lamassu__Flat_Ground) => {
+            (Some(1929), vec![])
+        }
+        (SpotId::Annuna__Lamassu__East_14, SpotId::Annuna__Lamassu__Portal_Stand) => {
+            (Some(1491), vec![])
+        }
+        (SpotId::Annuna__Lamassu__East_14, SpotId::Annuna__Lamassu__Upper_Brick_Ledge) => {
+            (Some(549), vec![])
+        }
+        (SpotId::Annuna__Lamassu__East_14, SpotId::Annuna__Lamassu__West_15) => {
+            (Some(2982), vec![])
+        }
+        (SpotId::Annuna__Lamassu__East_17, SpotId::Annuna__Lamassu__Bottom_Hill_East) => {
+            (Some(877), vec![])
+        }
+        (SpotId::Annuna__Lamassu__Flat_Ground, SpotId::Annuna__Lamassu__Bottom_West_Ledge) => {
+            (Some(1929), vec![])
+        }
+        (SpotId::Annuna__Lamassu__Ledge_By_Grate, SpotId::Annuna__Lamassu__Above_Flat_Ground) => {
+            (Some(299), vec![])
+        }
+        (SpotId::Annuna__Lamassu__Lower_Brick_Ledge, SpotId::Annuna__Lamassu__Ledge_By_Grate) => {
+            (Some(500), vec![])
+        }
+        (SpotId::Annuna__Lamassu__Lower_Brick_Ledge, SpotId::Annuna__Lamassu__Portal_Stand) => {
+            (Some(1200), vec![])
+        }
+        (SpotId::Annuna__Lamassu__Portal_Stand, SpotId::Annuna__Lamassu__Lower_Brick_Ledge) => {
+            (Some(614), vec![])
+        }
+        (SpotId::Annuna__Lamassu__Portal_Stand, SpotId::Annuna__Lamassu__West_15) => {
+            (Some(1491), vec![])
+        }
+        (SpotId::Annuna__Lamassu__Upper_Brick_Ledge, SpotId::Annuna__Lamassu__Ledge_By_Grate) => {
+            (Some(1200), vec![])
+        }
+        (
+            SpotId::Annuna__Lamassu__Upper_Brick_Ledge,
+            SpotId::Annuna__Lamassu__Lower_Brick_Ledge,
+        ) => (Some(700), vec![]),
+        (SpotId::Annuna__Lamassu__Upper_Brick_Ledge, SpotId::Annuna__Lamassu__Portal_Stand) => {
+            (Some(964), vec![])
+        }
+        (SpotId::Annuna__Lamassu__West_15, SpotId::Annuna__Lamassu__Portal_Stand) => {
+            (Some(1491), vec![])
+        }
+        (SpotId::Annuna__Lamassu__West_17, SpotId::Annuna__Lamassu__Bottom_Hill_East) => {
+            (Some(2280), vec![])
         }
         (SpotId::Annuna__Lower_Hallway__Dais_Left, SpotId::Annuna__Lower_Hallway__Dais_Right) => {
             (Some(1052), vec![])

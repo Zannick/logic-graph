@@ -1776,6 +1776,11 @@ impl Observer for FullObservation {
                     rules::observe_action_reset_old_area__newpos(cur, world, dest, self);
                 }
             }
+            AreaId::Annuna__Crystals => {
+                if get_area(cur.position) != area {
+                    rules::observe_action_reset_old_area__newpos(cur, world, dest, self);
+                }
+            }
             AreaId::Annuna__East_Bridge => {
                 if get_area(cur.position) != area {
                     rules::observe_action_reset_old_area__newpos(cur, world, dest, self);
@@ -1816,6 +1821,11 @@ impl Observer for FullObservation {
                     rules::observe_action_reset_old_area__newpos(cur, world, dest, self);
                 }
             }
+            AreaId::Annuna__Hidden_Portal => {
+                if get_area(cur.position) != area {
+                    rules::observe_action_reset_old_area__newpos(cur, world, dest, self);
+                }
+            }
             AreaId::Annuna__Lamassu => {
                 if get_area(cur.position) != area {
                     rules::observe_action_reset_old_area__newpos(cur, world, dest, self);
@@ -1837,6 +1847,11 @@ impl Observer for FullObservation {
                 }
             }
             AreaId::Annuna__Seals => {
+                if get_area(cur.position) != area {
+                    rules::observe_action_reset_old_area__newpos(cur, world, dest, self);
+                }
+            }
+            AreaId::Annuna__Siuna_Storage => {
                 if get_area(cur.position) != area {
                     rules::observe_action_reset_old_area__newpos(cur, world, dest, self);
                 }
@@ -2252,6 +2267,11 @@ impl Observer for FullObservation {
                 }
             }
             AreaId::Glacier__Revival => {
+                if get_area(cur.position) != area {
+                    rules::observe_action_reset_old_area__newpos(cur, world, dest, self);
+                }
+            }
+            AreaId::Glacier__Sea_Burial => {
                 if get_area(cur.position) != area {
                     rules::observe_action_reset_old_area__newpos(cur, world, dest, self);
                 }

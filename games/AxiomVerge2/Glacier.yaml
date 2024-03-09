@@ -189,6 +189,14 @@ areas:
           time: 48.5
           item_time: 0
 
+- name: Sea Burial
+  on_entry: $reset_old_area(^newpos)
+  spots:
+    - name: West 13
+      coord: [39.05, 13.75]
+    - name: West 14
+      coord: [39.05, 14.65]
+
 - name: Grid 39-40,7-9
   on_entry: $reset_old_area(^newpos)
   spots:

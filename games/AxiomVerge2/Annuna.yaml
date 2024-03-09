@@ -1987,6 +1987,244 @@ areas:
   spots:
     - name: East 17
       coord: [38.95, 16.75]
+      local:
+        - to: Bottom Hill East
+      exits:
+        - to: Upper Save > West
+          tags: [xshift]
+    - name: Bottom Hill East
+      coord: [38.7, 16.8]
+      local:
+        - to: Bottom Hill
+          jumps: 1
+        - to: East 17
+          jumps: 1
+      exits:
+        - to: Bottom East Ledge
+          req: $hook
+          movement: base
+          jumps: 1
+    - name: Bottom Hill
+      coord: [38.5, 16.6]
+      local:
+        - to: Bottom Hill West
+        - to: Bottom Hill East
+        - to: Bottom East Ledge
+          jumps: 1  # ?
+      exits:
+        - to: Bottom Middle Ledge
+          req: $hook
+          movement: base
+          jumps: 1
+    - name: Bottom Hill West
+      coord: [38.25, 16.8]
+      local:
+        - to: West 17
+          jumps: 1
+        - to: Bottom Hill
+          jumps: 2
+      exits:
+        - to: Hidden Portal > Plinth Right
+          req: $hook and $hover
+          movement: fast_hover
+          jumps: 1
+          penalty_tags: [xshift, -fast_hover.1]
+    - name: West 17
+      coord: [38.05, 16.75]
+      local:
+        - to: Bottom Hill East
+      exits:
+        - to: Hidden Portal > East
+          tags: [xshift]
+
+    - name: Bottom East Ledge
+      coord: [38.7, 16.4]
+      local:
+        - to: Bottom Hill
+        - to: Bottom Hill East
+      exits:
+        - to: Bottom Middle Ledge
+          req: $grab
+          movement: base
+          jumps: 2
+        - to: Bottom Middle Ledge
+          req: $hook
+          movement: base
+          jumps: 1
+    - name: Bottom Middle Ledge
+      coord: [38.5, 16.2]
+      local:
+        - to: Bottom East Ledge
+        - to: Bottom Hill
+        - to: Bottom Hill East
+      exits:
+        - to: Bottom West Ledge
+          req: $grab
+          movement: base
+          jumps: 2
+        - to: Bottom West Ledge
+          req: $hook and $hover
+          movement: fast_hover
+          jumps: 1
+        - to: Bottom West Ledge
+          req: $hook
+          movement: base
+          jumps: 1
+    - name: Bottom West Ledge
+      coord: [38.2, 16.0]
+      local:
+        - to: Bottom Middle Ledge
+        - to: Flat Ground
+          jumps: 2
+      exits:
+        - to: Above Flat Ground
+          req: $hook and $hover
+          movement: fast_hover
+          jumps: 1
+
+    - name: Flat Ground
+      coord: [38.75, 15.8]
+      local:
+        - to: Bottom West Ledge
+      exits:
+        - to: Ledge By Grate
+          req: $climb
+          movement: base
+          jumps: 2
+        - to: Ledge By Grate
+          req: $hook
+          movement: base
+          jumps: 1
+        - to: East 16
+          req: Nanite_Mist
+          price: 40
+          movement: base
+    - name: Above Flat Ground
+      coord: [38.75, 15.7]
+      local:
+        - to: Flat Ground
+        - to: Bottom West Ledge
+      exits:
+        - to: Ledge By Grate
+          req: $hook
+          movement: base
+          jumps: 1
+        - to: East 16
+          req: Nanite_Mist
+          price: 40
+          movement: base
+
+    - name: East 16
+      coord: [38.95, 15.8]
+      exits:
+        - to: Siuna Storage > West
+          tags: [xshift]
+        - to: Flat Ground
+          req: Nanite_Mist
+          price: 40
+          movement: mist1
+        - to: Above Flat Ground
+          req: Nanite_Mist
+          price: 40
+          movement: mist1
+        - to: Ledge By Grate
+          req: Nanite_Mist
+          price: 80
+          movement: mist1
+    - name: Ledge By Grate
+      coord: [38.75, 15.4]
+      local:
+        - to: Above Flat Ground
+      exits:
+        - to: East 16
+          req: Nanite_Mist
+          price: 40
+          movement: base
+        - to: Lower Brick Ledge
+          req: $grab
+          movement: base
+          jumps: 4
+        - to: Lower Brick Ledge
+          req: $hook
+          movement: base
+          jumps: 2
+
+    - name: Lower Brick Ledge
+      coord: [38.65, 14.9]
+      local:
+        - to: Ledge By Grate
+        - to: Portal Stand
+          jumps: 2
+      exits:
+        - to: Portal Stand
+          req: $hook
+          movement: base
+          jumps: 1
+        - to: Upper Brick Ledge
+          req: $hook
+          movement: base
+          jumps: 3
+    - name: Portal Stand
+      coord: [38.475, 14.6]
+      local:
+        - to: West 15
+        - to: Lower Brick Ledge
+      exits:
+        - to: Upper Brick Ledge
+          req: $hook
+          movement: base
+          jumps: 2
+    - name: West 15
+      coord: [38.05, 14.6]
+      local:
+        - to: Portal Stand
+      exits:
+        - to: Crystals > East
+          tags: [xshift]
+    - name: Upper Brick Ledge
+      coord: [38.75, 14.2]
+      local:
+        - to: Portal Stand
+        - to: Lower Brick Ledge
+        - to: Ledge By Grate
+      exits:
+        - to: East 14
+          req: $grab and $climb
+          movement: base
+          jumps: 3
+        - to: East 14
+          req: $hook
+          movement: base
+          jumps: 2
+    - name: East 14
+      coord: [38.9, 13.65]
+      local:
+        - to: Upper Brick Ledge
+        - to: Portal Stand
+        - to: West 15
+      exits:
+        - to: Glacier > Sea Burial > West 14
+          tags: [xdoor]
+
+- name: Hidden Portal
+  on_entry: $reset_old_area(^newpos)
+  spots:
+    - name: East
+      coord: [37.95, 16.75]
+    - name: Portal Stand
+      coord: [37.475, 16.7]
+    - name: Plinth Right
+      coord: [37.55, 16.7]
+    - name: Plinth Left
+      coord: [37.4, 16.7]
+    - name: West
+      coord: [37.1, 16.75]
+
+- name: Crystals
+  on_entry: $reset_old_area(^newpos)
+  spots:
+    - name: East
+      coord: [37.95, 14.6]
 
 - name: Udug Gate
   on_entry: $reset_old_area(^newpos)
@@ -2568,6 +2806,12 @@ areas:
           req: Anuman and Slingshot_Hook and Drone_Hover
           movement: base
           jumps: 3
+
+- name: Siuna Storage
+  on_entry: $reset_old_area(^newpos)
+  spots:
+    - name: West
+      coord: [39.05, 15.8]
 
 #region Apocalypse
 - name: Apocalypse Hallway

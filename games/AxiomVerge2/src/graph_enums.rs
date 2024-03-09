@@ -101,6 +101,7 @@ pub enum AreaId {
     Annuna__Apocalypse_Hallway,
     Annuna__Center_Climb,
     Annuna__Center_Save,
+    Annuna__Crystals,
     Annuna__East_Bridge,
     Annuna__East_Climb,
     Annuna__East_Hideout,
@@ -109,11 +110,13 @@ pub enum AreaId {
     Annuna__Factory_Entrance,
     Annuna__Filter_Teleporter,
     Annuna__Final_Save,
+    Annuna__Hidden_Portal,
     Annuna__Lamassu,
     Annuna__Lower_Hallway,
     Annuna__Middle_Hallway,
     Annuna__Mirror_Match,
     Annuna__Seals,
+    Annuna__Siuna_Storage,
     Annuna__Sniper_Valley,
     Annuna__Spider_Room,
     Annuna__Twisty_Passages,
@@ -206,6 +209,7 @@ pub enum AreaId {
     Glacier__Ledge_Grab_Room,
     Glacier__Peak,
     Glacier__Revival,
+    Glacier__Sea_Burial,
     Glacier__The_Big_Drop,
     Glacier__Vertical_Room,
     Interior__Building_Interior,
@@ -264,6 +268,7 @@ impl fmt::Display for AreaId {
             AreaId::Annuna__Apocalypse_Hallway => write!(f, "{}", "Annuna > Apocalypse Hallway"),
             AreaId::Annuna__Center_Climb => write!(f, "{}", "Annuna > Center Climb"),
             AreaId::Annuna__Center_Save => write!(f, "{}", "Annuna > Center Save"),
+            AreaId::Annuna__Crystals => write!(f, "{}", "Annuna > Crystals"),
             AreaId::Annuna__East_Bridge => write!(f, "{}", "Annuna > East Bridge"),
             AreaId::Annuna__East_Climb => write!(f, "{}", "Annuna > East Climb"),
             AreaId::Annuna__East_Hideout => write!(f, "{}", "Annuna > East Hideout"),
@@ -272,11 +277,13 @@ impl fmt::Display for AreaId {
             AreaId::Annuna__Factory_Entrance => write!(f, "{}", "Annuna > Factory Entrance"),
             AreaId::Annuna__Filter_Teleporter => write!(f, "{}", "Annuna > Filter Teleporter"),
             AreaId::Annuna__Final_Save => write!(f, "{}", "Annuna > Final Save"),
+            AreaId::Annuna__Hidden_Portal => write!(f, "{}", "Annuna > Hidden Portal"),
             AreaId::Annuna__Lamassu => write!(f, "{}", "Annuna > Lamassu"),
             AreaId::Annuna__Lower_Hallway => write!(f, "{}", "Annuna > Lower Hallway"),
             AreaId::Annuna__Middle_Hallway => write!(f, "{}", "Annuna > Middle Hallway"),
             AreaId::Annuna__Mirror_Match => write!(f, "{}", "Annuna > Mirror Match"),
             AreaId::Annuna__Seals => write!(f, "{}", "Annuna > Seals"),
+            AreaId::Annuna__Siuna_Storage => write!(f, "{}", "Annuna > Siuna Storage"),
             AreaId::Annuna__Sniper_Valley => write!(f, "{}", "Annuna > Sniper Valley"),
             AreaId::Annuna__Spider_Room => write!(f, "{}", "Annuna > Spider Room"),
             AreaId::Annuna__Twisty_Passages => write!(f, "{}", "Annuna > Twisty Passages"),
@@ -381,6 +388,7 @@ impl fmt::Display for AreaId {
             AreaId::Glacier__Ledge_Grab_Room => write!(f, "{}", "Glacier > Ledge Grab Room"),
             AreaId::Glacier__Peak => write!(f, "{}", "Glacier > Peak"),
             AreaId::Glacier__Revival => write!(f, "{}", "Glacier > Revival"),
+            AreaId::Glacier__Sea_Burial => write!(f, "{}", "Glacier > Sea Burial"),
             AreaId::Glacier__The_Big_Drop => write!(f, "{}", "Glacier > The Big Drop"),
             AreaId::Glacier__Vertical_Room => write!(f, "{}", "Glacier > Vertical Room"),
             AreaId::Interior__Building_Interior => write!(f, "{}", "Interior > Building Interior"),
@@ -454,6 +462,7 @@ impl std::str::FromStr for AreaId {
             "Annuna > Apocalypse Hallway" => Ok(AreaId::Annuna__Apocalypse_Hallway),
             "Annuna > Center Climb" => Ok(AreaId::Annuna__Center_Climb),
             "Annuna > Center Save" => Ok(AreaId::Annuna__Center_Save),
+            "Annuna > Crystals" => Ok(AreaId::Annuna__Crystals),
             "Annuna > East Bridge" => Ok(AreaId::Annuna__East_Bridge),
             "Annuna > East Climb" => Ok(AreaId::Annuna__East_Climb),
             "Annuna > East Hideout" => Ok(AreaId::Annuna__East_Hideout),
@@ -462,11 +471,13 @@ impl std::str::FromStr for AreaId {
             "Annuna > Factory Entrance" => Ok(AreaId::Annuna__Factory_Entrance),
             "Annuna > Filter Teleporter" => Ok(AreaId::Annuna__Filter_Teleporter),
             "Annuna > Final Save" => Ok(AreaId::Annuna__Final_Save),
+            "Annuna > Hidden Portal" => Ok(AreaId::Annuna__Hidden_Portal),
             "Annuna > Lamassu" => Ok(AreaId::Annuna__Lamassu),
             "Annuna > Lower Hallway" => Ok(AreaId::Annuna__Lower_Hallway),
             "Annuna > Middle Hallway" => Ok(AreaId::Annuna__Middle_Hallway),
             "Annuna > Mirror Match" => Ok(AreaId::Annuna__Mirror_Match),
             "Annuna > Seals" => Ok(AreaId::Annuna__Seals),
+            "Annuna > Siuna Storage" => Ok(AreaId::Annuna__Siuna_Storage),
             "Annuna > Sniper Valley" => Ok(AreaId::Annuna__Sniper_Valley),
             "Annuna > Spider Room" => Ok(AreaId::Annuna__Spider_Room),
             "Annuna > Twisty Passages" => Ok(AreaId::Annuna__Twisty_Passages),
@@ -559,6 +570,7 @@ impl std::str::FromStr for AreaId {
             "Glacier > Ledge Grab Room" => Ok(AreaId::Glacier__Ledge_Grab_Room),
             "Glacier > Peak" => Ok(AreaId::Glacier__Peak),
             "Glacier > Revival" => Ok(AreaId::Glacier__Revival),
+            "Glacier > Sea Burial" => Ok(AreaId::Glacier__Sea_Burial),
             "Glacier > The Big Drop" => Ok(AreaId::Glacier__The_Big_Drop),
             "Glacier > Vertical Room" => Ok(AreaId::Glacier__Vertical_Room),
             "Interior > Building Interior" => Ok(AreaId::Interior__Building_Interior),
@@ -744,6 +756,7 @@ pub enum SpotId {
     Annuna__Center_Save__Save_Point,
     Annuna__Center_Save__West_Catwalk,
     Annuna__Center_Save__West_Floor,
+    Annuna__Crystals__East,
     Annuna__East_Bridge__Below_Cavern,
     Annuna__East_Bridge__Below_Gate_Button,
     Annuna__East_Bridge__Bridge_Top_East,
@@ -835,7 +848,28 @@ pub enum SpotId {
     Annuna__Final_Save__Pillar,
     Annuna__Final_Save__Save_Point,
     Annuna__Final_Save__Upper_West,
+    Annuna__Hidden_Portal__East,
+    Annuna__Hidden_Portal__Plinth_Left,
+    Annuna__Hidden_Portal__Plinth_Right,
+    Annuna__Hidden_Portal__Portal_Stand,
+    Annuna__Hidden_Portal__West,
+    Annuna__Lamassu__Above_Flat_Ground,
+    Annuna__Lamassu__Bottom_East_Ledge,
+    Annuna__Lamassu__Bottom_Hill,
+    Annuna__Lamassu__Bottom_Hill_East,
+    Annuna__Lamassu__Bottom_Hill_West,
+    Annuna__Lamassu__Bottom_Middle_Ledge,
+    Annuna__Lamassu__Bottom_West_Ledge,
+    Annuna__Lamassu__East_14,
+    Annuna__Lamassu__East_16,
     Annuna__Lamassu__East_17,
+    Annuna__Lamassu__Flat_Ground,
+    Annuna__Lamassu__Ledge_By_Grate,
+    Annuna__Lamassu__Lower_Brick_Ledge,
+    Annuna__Lamassu__Portal_Stand,
+    Annuna__Lamassu__Upper_Brick_Ledge,
+    Annuna__Lamassu__West_15,
+    Annuna__Lamassu__West_17,
     Annuna__Lower_Hallway__Dais_Left,
     Annuna__Lower_Hallway__Dais_Right,
     Annuna__Lower_Hallway__East,
@@ -865,6 +899,7 @@ pub enum SpotId {
     Annuna__Seals__Middle_Ledge,
     Annuna__Seals__Upper_Ledge,
     Annuna__Seals__Upper_Seal,
+    Annuna__Siuna_Storage__West,
     Annuna__Sniper_Valley__Bridge_End,
     Annuna__Sniper_Valley__Bridge_Lower_Ledge,
     Annuna__Sniper_Valley__Bridge_Upper_Ledge,
@@ -1702,6 +1737,8 @@ pub enum SpotId {
     Glacier__Revival__Overhang,
     Glacier__Revival__Save_Point,
     Glacier__Revival__West_8,
+    Glacier__Sea_Burial__West_13,
+    Glacier__Sea_Burial__West_14,
     Glacier__The_Big_Drop__East,
     Glacier__The_Big_Drop__Small_Path,
     Glacier__The_Big_Drop__Water_Surface,
@@ -2348,6 +2385,7 @@ impl fmt::Display for SpotId {
             SpotId::Annuna__Center_Save__West_Floor => {
                 write!(f, "{}", "Annuna > Center Save > West Floor")
             }
+            SpotId::Annuna__Crystals__East => write!(f, "{}", "Annuna > Crystals > East"),
             SpotId::Annuna__East_Bridge__Below_Cavern => {
                 write!(f, "{}", "Annuna > East Bridge > Below Cavern")
             }
@@ -2599,7 +2637,58 @@ impl fmt::Display for SpotId {
             SpotId::Annuna__Final_Save__Upper_West => {
                 write!(f, "{}", "Annuna > Final Save > Upper West")
             }
+            SpotId::Annuna__Hidden_Portal__East => write!(f, "{}", "Annuna > Hidden Portal > East"),
+            SpotId::Annuna__Hidden_Portal__Plinth_Left => {
+                write!(f, "{}", "Annuna > Hidden Portal > Plinth Left")
+            }
+            SpotId::Annuna__Hidden_Portal__Plinth_Right => {
+                write!(f, "{}", "Annuna > Hidden Portal > Plinth Right")
+            }
+            SpotId::Annuna__Hidden_Portal__Portal_Stand => {
+                write!(f, "{}", "Annuna > Hidden Portal > Portal Stand")
+            }
+            SpotId::Annuna__Hidden_Portal__West => write!(f, "{}", "Annuna > Hidden Portal > West"),
+            SpotId::Annuna__Lamassu__Above_Flat_Ground => {
+                write!(f, "{}", "Annuna > Lamassu > Above Flat Ground")
+            }
+            SpotId::Annuna__Lamassu__Bottom_East_Ledge => {
+                write!(f, "{}", "Annuna > Lamassu > Bottom East Ledge")
+            }
+            SpotId::Annuna__Lamassu__Bottom_Hill => {
+                write!(f, "{}", "Annuna > Lamassu > Bottom Hill")
+            }
+            SpotId::Annuna__Lamassu__Bottom_Hill_East => {
+                write!(f, "{}", "Annuna > Lamassu > Bottom Hill East")
+            }
+            SpotId::Annuna__Lamassu__Bottom_Hill_West => {
+                write!(f, "{}", "Annuna > Lamassu > Bottom Hill West")
+            }
+            SpotId::Annuna__Lamassu__Bottom_Middle_Ledge => {
+                write!(f, "{}", "Annuna > Lamassu > Bottom Middle Ledge")
+            }
+            SpotId::Annuna__Lamassu__Bottom_West_Ledge => {
+                write!(f, "{}", "Annuna > Lamassu > Bottom West Ledge")
+            }
+            SpotId::Annuna__Lamassu__East_14 => write!(f, "{}", "Annuna > Lamassu > East 14"),
+            SpotId::Annuna__Lamassu__East_16 => write!(f, "{}", "Annuna > Lamassu > East 16"),
             SpotId::Annuna__Lamassu__East_17 => write!(f, "{}", "Annuna > Lamassu > East 17"),
+            SpotId::Annuna__Lamassu__Flat_Ground => {
+                write!(f, "{}", "Annuna > Lamassu > Flat Ground")
+            }
+            SpotId::Annuna__Lamassu__Ledge_By_Grate => {
+                write!(f, "{}", "Annuna > Lamassu > Ledge By Grate")
+            }
+            SpotId::Annuna__Lamassu__Lower_Brick_Ledge => {
+                write!(f, "{}", "Annuna > Lamassu > Lower Brick Ledge")
+            }
+            SpotId::Annuna__Lamassu__Portal_Stand => {
+                write!(f, "{}", "Annuna > Lamassu > Portal Stand")
+            }
+            SpotId::Annuna__Lamassu__Upper_Brick_Ledge => {
+                write!(f, "{}", "Annuna > Lamassu > Upper Brick Ledge")
+            }
+            SpotId::Annuna__Lamassu__West_15 => write!(f, "{}", "Annuna > Lamassu > West 15"),
+            SpotId::Annuna__Lamassu__West_17 => write!(f, "{}", "Annuna > Lamassu > West 17"),
             SpotId::Annuna__Lower_Hallway__Dais_Left => {
                 write!(f, "{}", "Annuna > Lower Hallway > Dais Left")
             }
@@ -2671,6 +2760,7 @@ impl fmt::Display for SpotId {
             SpotId::Annuna__Seals__Middle_Ledge => write!(f, "{}", "Annuna > Seals > Middle Ledge"),
             SpotId::Annuna__Seals__Upper_Ledge => write!(f, "{}", "Annuna > Seals > Upper Ledge"),
             SpotId::Annuna__Seals__Upper_Seal => write!(f, "{}", "Annuna > Seals > Upper Seal"),
+            SpotId::Annuna__Siuna_Storage__West => write!(f, "{}", "Annuna > Siuna Storage > West"),
             SpotId::Annuna__Sniper_Valley__Bridge_End => {
                 write!(f, "{}", "Annuna > Sniper Valley > Bridge End")
             }
@@ -4724,6 +4814,12 @@ impl fmt::Display for SpotId {
                 write!(f, "{}", "Glacier > Revival > Save Point")
             }
             SpotId::Glacier__Revival__West_8 => write!(f, "{}", "Glacier > Revival > West 8"),
+            SpotId::Glacier__Sea_Burial__West_13 => {
+                write!(f, "{}", "Glacier > Sea Burial > West 13")
+            }
+            SpotId::Glacier__Sea_Burial__West_14 => {
+                write!(f, "{}", "Glacier > Sea Burial > West 14")
+            }
             SpotId::Glacier__The_Big_Drop__East => write!(f, "{}", "Glacier > The Big Drop > East"),
             SpotId::Glacier__The_Big_Drop__Small_Path => {
                 write!(f, "{}", "Glacier > The Big Drop > Small Path")
@@ -5894,6 +5990,7 @@ impl std::str::FromStr for SpotId {
             "Annuna > Center Save > Save Point" => Ok(SpotId::Annuna__Center_Save__Save_Point),
             "Annuna > Center Save > West Catwalk" => Ok(SpotId::Annuna__Center_Save__West_Catwalk),
             "Annuna > Center Save > West Floor" => Ok(SpotId::Annuna__Center_Save__West_Floor),
+            "Annuna > Crystals > East" => Ok(SpotId::Annuna__Crystals__East),
             "Annuna > East Bridge > Below Cavern" => Ok(SpotId::Annuna__East_Bridge__Below_Cavern),
             "Annuna > East Bridge > Below Gate Button" => {
                 Ok(SpotId::Annuna__East_Bridge__Below_Gate_Button)
@@ -6089,7 +6186,46 @@ impl std::str::FromStr for SpotId {
             "Annuna > Final Save > Pillar" => Ok(SpotId::Annuna__Final_Save__Pillar),
             "Annuna > Final Save > Save Point" => Ok(SpotId::Annuna__Final_Save__Save_Point),
             "Annuna > Final Save > Upper West" => Ok(SpotId::Annuna__Final_Save__Upper_West),
+            "Annuna > Hidden Portal > East" => Ok(SpotId::Annuna__Hidden_Portal__East),
+            "Annuna > Hidden Portal > Plinth Left" => {
+                Ok(SpotId::Annuna__Hidden_Portal__Plinth_Left)
+            }
+            "Annuna > Hidden Portal > Plinth Right" => {
+                Ok(SpotId::Annuna__Hidden_Portal__Plinth_Right)
+            }
+            "Annuna > Hidden Portal > Portal Stand" => {
+                Ok(SpotId::Annuna__Hidden_Portal__Portal_Stand)
+            }
+            "Annuna > Hidden Portal > West" => Ok(SpotId::Annuna__Hidden_Portal__West),
+            "Annuna > Lamassu > Above Flat Ground" => {
+                Ok(SpotId::Annuna__Lamassu__Above_Flat_Ground)
+            }
+            "Annuna > Lamassu > Bottom East Ledge" => {
+                Ok(SpotId::Annuna__Lamassu__Bottom_East_Ledge)
+            }
+            "Annuna > Lamassu > Bottom Hill" => Ok(SpotId::Annuna__Lamassu__Bottom_Hill),
+            "Annuna > Lamassu > Bottom Hill East" => Ok(SpotId::Annuna__Lamassu__Bottom_Hill_East),
+            "Annuna > Lamassu > Bottom Hill West" => Ok(SpotId::Annuna__Lamassu__Bottom_Hill_West),
+            "Annuna > Lamassu > Bottom Middle Ledge" => {
+                Ok(SpotId::Annuna__Lamassu__Bottom_Middle_Ledge)
+            }
+            "Annuna > Lamassu > Bottom West Ledge" => {
+                Ok(SpotId::Annuna__Lamassu__Bottom_West_Ledge)
+            }
+            "Annuna > Lamassu > East 14" => Ok(SpotId::Annuna__Lamassu__East_14),
+            "Annuna > Lamassu > East 16" => Ok(SpotId::Annuna__Lamassu__East_16),
             "Annuna > Lamassu > East 17" => Ok(SpotId::Annuna__Lamassu__East_17),
+            "Annuna > Lamassu > Flat Ground" => Ok(SpotId::Annuna__Lamassu__Flat_Ground),
+            "Annuna > Lamassu > Ledge By Grate" => Ok(SpotId::Annuna__Lamassu__Ledge_By_Grate),
+            "Annuna > Lamassu > Lower Brick Ledge" => {
+                Ok(SpotId::Annuna__Lamassu__Lower_Brick_Ledge)
+            }
+            "Annuna > Lamassu > Portal Stand" => Ok(SpotId::Annuna__Lamassu__Portal_Stand),
+            "Annuna > Lamassu > Upper Brick Ledge" => {
+                Ok(SpotId::Annuna__Lamassu__Upper_Brick_Ledge)
+            }
+            "Annuna > Lamassu > West 15" => Ok(SpotId::Annuna__Lamassu__West_15),
+            "Annuna > Lamassu > West 17" => Ok(SpotId::Annuna__Lamassu__West_17),
             "Annuna > Lower Hallway > Dais Left" => Ok(SpotId::Annuna__Lower_Hallway__Dais_Left),
             "Annuna > Lower Hallway > Dais Right" => Ok(SpotId::Annuna__Lower_Hallway__Dais_Right),
             "Annuna > Lower Hallway > East" => Ok(SpotId::Annuna__Lower_Hallway__East),
@@ -6133,6 +6269,7 @@ impl std::str::FromStr for SpotId {
             "Annuna > Seals > Middle Ledge" => Ok(SpotId::Annuna__Seals__Middle_Ledge),
             "Annuna > Seals > Upper Ledge" => Ok(SpotId::Annuna__Seals__Upper_Ledge),
             "Annuna > Seals > Upper Seal" => Ok(SpotId::Annuna__Seals__Upper_Seal),
+            "Annuna > Siuna Storage > West" => Ok(SpotId::Annuna__Siuna_Storage__West),
             "Annuna > Sniper Valley > Bridge End" => Ok(SpotId::Annuna__Sniper_Valley__Bridge_End),
             "Annuna > Sniper Valley > Bridge Lower Ledge" => {
                 Ok(SpotId::Annuna__Sniper_Valley__Bridge_Lower_Ledge)
@@ -7510,6 +7647,8 @@ impl std::str::FromStr for SpotId {
             "Glacier > Revival > Overhang" => Ok(SpotId::Glacier__Revival__Overhang),
             "Glacier > Revival > Save Point" => Ok(SpotId::Glacier__Revival__Save_Point),
             "Glacier > Revival > West 8" => Ok(SpotId::Glacier__Revival__West_8),
+            "Glacier > Sea Burial > West 13" => Ok(SpotId::Glacier__Sea_Burial__West_13),
+            "Glacier > Sea Burial > West 14" => Ok(SpotId::Glacier__Sea_Burial__West_14),
             "Glacier > The Big Drop > East" => Ok(SpotId::Glacier__The_Big_Drop__East),
             "Glacier > The Big Drop > Small Path" => Ok(SpotId::Glacier__The_Big_Drop__Small_Path),
             "Glacier > The Big Drop > Water Surface" => {
@@ -10348,6 +10487,36 @@ pub enum ExitId {
     Annuna__Final_Save__Save_Point__ex__Pillar_2,
     Annuna__Final_Save__Upper_West__ex__Apocalypse__Northwest_Mid_air_1,
     Annuna__Final_Save__Upper_West__ex__Seals__East_17_Upper_1,
+    Annuna__Lamassu__Above_Flat_Ground__ex__East_16_1,
+    Annuna__Lamassu__Above_Flat_Ground__ex__Ledge_By_Grate_1,
+    Annuna__Lamassu__Bottom_East_Ledge__ex__Bottom_Middle_Ledge_1,
+    Annuna__Lamassu__Bottom_East_Ledge__ex__Bottom_Middle_Ledge_2,
+    Annuna__Lamassu__Bottom_Hill__ex__Bottom_Middle_Ledge_1,
+    Annuna__Lamassu__Bottom_Hill_East__ex__Bottom_East_Ledge_1,
+    Annuna__Lamassu__Bottom_Hill_West__ex__Hidden_Portal__Plinth_Right_1,
+    Annuna__Lamassu__Bottom_Middle_Ledge__ex__Bottom_West_Ledge_1,
+    Annuna__Lamassu__Bottom_Middle_Ledge__ex__Bottom_West_Ledge_2,
+    Annuna__Lamassu__Bottom_Middle_Ledge__ex__Bottom_West_Ledge_3,
+    Annuna__Lamassu__Bottom_West_Ledge__ex__Above_Flat_Ground_1,
+    Annuna__Lamassu__East_14__ex__Glacier__Sea_Burial__West_14_1,
+    Annuna__Lamassu__East_16__ex__Above_Flat_Ground_1,
+    Annuna__Lamassu__East_16__ex__Flat_Ground_1,
+    Annuna__Lamassu__East_16__ex__Ledge_By_Grate_1,
+    Annuna__Lamassu__East_16__ex__Siuna_Storage__West_1,
+    Annuna__Lamassu__East_17__ex__Upper_Save__West_1,
+    Annuna__Lamassu__Flat_Ground__ex__East_16_1,
+    Annuna__Lamassu__Flat_Ground__ex__Ledge_By_Grate_1,
+    Annuna__Lamassu__Flat_Ground__ex__Ledge_By_Grate_2,
+    Annuna__Lamassu__Ledge_By_Grate__ex__East_16_1,
+    Annuna__Lamassu__Ledge_By_Grate__ex__Lower_Brick_Ledge_1,
+    Annuna__Lamassu__Ledge_By_Grate__ex__Lower_Brick_Ledge_2,
+    Annuna__Lamassu__Lower_Brick_Ledge__ex__Portal_Stand_1,
+    Annuna__Lamassu__Lower_Brick_Ledge__ex__Upper_Brick_Ledge_1,
+    Annuna__Lamassu__Portal_Stand__ex__Upper_Brick_Ledge_1,
+    Annuna__Lamassu__Upper_Brick_Ledge__ex__East_14_1,
+    Annuna__Lamassu__Upper_Brick_Ledge__ex__East_14_2,
+    Annuna__Lamassu__West_15__ex__Crystals__East_1,
+    Annuna__Lamassu__West_17__ex__Hidden_Portal__East_1,
     Annuna__Lower_Hallway__East__ex__Factory_Access__West_22_1,
     Annuna__Lower_Hallway__West__ex__Vertical_Room__East_22_1,
     Annuna__Middle_Hallway__East__ex__Filter_Teleporter__West_21_1,
@@ -11729,6 +11898,36 @@ impl fmt::Display for ExitId {
             ExitId::Annuna__Final_Save__Save_Point__ex__Pillar_2 => write!(f, "{}", "Annuna > Final Save > Save Point ==> Pillar (2)"),
             ExitId::Annuna__Final_Save__Upper_West__ex__Apocalypse__Northwest_Mid_air_1 => write!(f, "{}", "Annuna > Final Save > Upper West ==> Apocalypse > Northwest Mid-air (1)"),
             ExitId::Annuna__Final_Save__Upper_West__ex__Seals__East_17_Upper_1 => write!(f, "{}", "Annuna > Final Save > Upper West ==> Seals > East 17 Upper (1)"),
+            ExitId::Annuna__Lamassu__Above_Flat_Ground__ex__East_16_1 => write!(f, "{}", "Annuna > Lamassu > Above Flat Ground ==> East 16 (1)"),
+            ExitId::Annuna__Lamassu__Above_Flat_Ground__ex__Ledge_By_Grate_1 => write!(f, "{}", "Annuna > Lamassu > Above Flat Ground ==> Ledge By Grate (1)"),
+            ExitId::Annuna__Lamassu__Bottom_East_Ledge__ex__Bottom_Middle_Ledge_1 => write!(f, "{}", "Annuna > Lamassu > Bottom East Ledge ==> Bottom Middle Ledge (1)"),
+            ExitId::Annuna__Lamassu__Bottom_East_Ledge__ex__Bottom_Middle_Ledge_2 => write!(f, "{}", "Annuna > Lamassu > Bottom East Ledge ==> Bottom Middle Ledge (2)"),
+            ExitId::Annuna__Lamassu__Bottom_Hill__ex__Bottom_Middle_Ledge_1 => write!(f, "{}", "Annuna > Lamassu > Bottom Hill ==> Bottom Middle Ledge (1)"),
+            ExitId::Annuna__Lamassu__Bottom_Hill_East__ex__Bottom_East_Ledge_1 => write!(f, "{}", "Annuna > Lamassu > Bottom Hill East ==> Bottom East Ledge (1)"),
+            ExitId::Annuna__Lamassu__Bottom_Hill_West__ex__Hidden_Portal__Plinth_Right_1 => write!(f, "{}", "Annuna > Lamassu > Bottom Hill West ==> Hidden Portal > Plinth Right (1)"),
+            ExitId::Annuna__Lamassu__Bottom_Middle_Ledge__ex__Bottom_West_Ledge_1 => write!(f, "{}", "Annuna > Lamassu > Bottom Middle Ledge ==> Bottom West Ledge (1)"),
+            ExitId::Annuna__Lamassu__Bottom_Middle_Ledge__ex__Bottom_West_Ledge_2 => write!(f, "{}", "Annuna > Lamassu > Bottom Middle Ledge ==> Bottom West Ledge (2)"),
+            ExitId::Annuna__Lamassu__Bottom_Middle_Ledge__ex__Bottom_West_Ledge_3 => write!(f, "{}", "Annuna > Lamassu > Bottom Middle Ledge ==> Bottom West Ledge (3)"),
+            ExitId::Annuna__Lamassu__Bottom_West_Ledge__ex__Above_Flat_Ground_1 => write!(f, "{}", "Annuna > Lamassu > Bottom West Ledge ==> Above Flat Ground (1)"),
+            ExitId::Annuna__Lamassu__East_14__ex__Glacier__Sea_Burial__West_14_1 => write!(f, "{}", "Annuna > Lamassu > East 14 ==> Glacier > Sea Burial > West 14 (1)"),
+            ExitId::Annuna__Lamassu__East_16__ex__Above_Flat_Ground_1 => write!(f, "{}", "Annuna > Lamassu > East 16 ==> Above Flat Ground (1)"),
+            ExitId::Annuna__Lamassu__East_16__ex__Flat_Ground_1 => write!(f, "{}", "Annuna > Lamassu > East 16 ==> Flat Ground (1)"),
+            ExitId::Annuna__Lamassu__East_16__ex__Ledge_By_Grate_1 => write!(f, "{}", "Annuna > Lamassu > East 16 ==> Ledge By Grate (1)"),
+            ExitId::Annuna__Lamassu__East_16__ex__Siuna_Storage__West_1 => write!(f, "{}", "Annuna > Lamassu > East 16 ==> Siuna Storage > West (1)"),
+            ExitId::Annuna__Lamassu__East_17__ex__Upper_Save__West_1 => write!(f, "{}", "Annuna > Lamassu > East 17 ==> Upper Save > West (1)"),
+            ExitId::Annuna__Lamassu__Flat_Ground__ex__East_16_1 => write!(f, "{}", "Annuna > Lamassu > Flat Ground ==> East 16 (1)"),
+            ExitId::Annuna__Lamassu__Flat_Ground__ex__Ledge_By_Grate_1 => write!(f, "{}", "Annuna > Lamassu > Flat Ground ==> Ledge By Grate (1)"),
+            ExitId::Annuna__Lamassu__Flat_Ground__ex__Ledge_By_Grate_2 => write!(f, "{}", "Annuna > Lamassu > Flat Ground ==> Ledge By Grate (2)"),
+            ExitId::Annuna__Lamassu__Ledge_By_Grate__ex__East_16_1 => write!(f, "{}", "Annuna > Lamassu > Ledge By Grate ==> East 16 (1)"),
+            ExitId::Annuna__Lamassu__Ledge_By_Grate__ex__Lower_Brick_Ledge_1 => write!(f, "{}", "Annuna > Lamassu > Ledge By Grate ==> Lower Brick Ledge (1)"),
+            ExitId::Annuna__Lamassu__Ledge_By_Grate__ex__Lower_Brick_Ledge_2 => write!(f, "{}", "Annuna > Lamassu > Ledge By Grate ==> Lower Brick Ledge (2)"),
+            ExitId::Annuna__Lamassu__Lower_Brick_Ledge__ex__Portal_Stand_1 => write!(f, "{}", "Annuna > Lamassu > Lower Brick Ledge ==> Portal Stand (1)"),
+            ExitId::Annuna__Lamassu__Lower_Brick_Ledge__ex__Upper_Brick_Ledge_1 => write!(f, "{}", "Annuna > Lamassu > Lower Brick Ledge ==> Upper Brick Ledge (1)"),
+            ExitId::Annuna__Lamassu__Portal_Stand__ex__Upper_Brick_Ledge_1 => write!(f, "{}", "Annuna > Lamassu > Portal Stand ==> Upper Brick Ledge (1)"),
+            ExitId::Annuna__Lamassu__Upper_Brick_Ledge__ex__East_14_1 => write!(f, "{}", "Annuna > Lamassu > Upper Brick Ledge ==> East 14 (1)"),
+            ExitId::Annuna__Lamassu__Upper_Brick_Ledge__ex__East_14_2 => write!(f, "{}", "Annuna > Lamassu > Upper Brick Ledge ==> East 14 (2)"),
+            ExitId::Annuna__Lamassu__West_15__ex__Crystals__East_1 => write!(f, "{}", "Annuna > Lamassu > West 15 ==> Crystals > East (1)"),
+            ExitId::Annuna__Lamassu__West_17__ex__Hidden_Portal__East_1 => write!(f, "{}", "Annuna > Lamassu > West 17 ==> Hidden Portal > East (1)"),
             ExitId::Annuna__Lower_Hallway__East__ex__Factory_Access__West_22_1 => write!(f, "{}", "Annuna > Lower Hallway > East ==> Factory Access > West 22 (1)"),
             ExitId::Annuna__Lower_Hallway__West__ex__Vertical_Room__East_22_1 => write!(f, "{}", "Annuna > Lower Hallway > West ==> Vertical Room > East 22 (1)"),
             ExitId::Annuna__Middle_Hallway__East__ex__Filter_Teleporter__West_21_1 => write!(f, "{}", "Annuna > Middle Hallway > East ==> Filter Teleporter > West 21 (1)"),
@@ -13115,6 +13314,36 @@ impl std::str::FromStr for ExitId {
             "Annuna > Final Save > Save Point ==> Pillar (2)" => Ok(ExitId::Annuna__Final_Save__Save_Point__ex__Pillar_2),
             "Annuna > Final Save > Upper West ==> Apocalypse > Northwest Mid-air (1)" => Ok(ExitId::Annuna__Final_Save__Upper_West__ex__Apocalypse__Northwest_Mid_air_1),
             "Annuna > Final Save > Upper West ==> Seals > East 17 Upper (1)" => Ok(ExitId::Annuna__Final_Save__Upper_West__ex__Seals__East_17_Upper_1),
+            "Annuna > Lamassu > Above Flat Ground ==> East 16 (1)" => Ok(ExitId::Annuna__Lamassu__Above_Flat_Ground__ex__East_16_1),
+            "Annuna > Lamassu > Above Flat Ground ==> Ledge By Grate (1)" => Ok(ExitId::Annuna__Lamassu__Above_Flat_Ground__ex__Ledge_By_Grate_1),
+            "Annuna > Lamassu > Bottom East Ledge ==> Bottom Middle Ledge (1)" => Ok(ExitId::Annuna__Lamassu__Bottom_East_Ledge__ex__Bottom_Middle_Ledge_1),
+            "Annuna > Lamassu > Bottom East Ledge ==> Bottom Middle Ledge (2)" => Ok(ExitId::Annuna__Lamassu__Bottom_East_Ledge__ex__Bottom_Middle_Ledge_2),
+            "Annuna > Lamassu > Bottom Hill ==> Bottom Middle Ledge (1)" => Ok(ExitId::Annuna__Lamassu__Bottom_Hill__ex__Bottom_Middle_Ledge_1),
+            "Annuna > Lamassu > Bottom Hill East ==> Bottom East Ledge (1)" => Ok(ExitId::Annuna__Lamassu__Bottom_Hill_East__ex__Bottom_East_Ledge_1),
+            "Annuna > Lamassu > Bottom Hill West ==> Hidden Portal > Plinth Right (1)" => Ok(ExitId::Annuna__Lamassu__Bottom_Hill_West__ex__Hidden_Portal__Plinth_Right_1),
+            "Annuna > Lamassu > Bottom Middle Ledge ==> Bottom West Ledge (1)" => Ok(ExitId::Annuna__Lamassu__Bottom_Middle_Ledge__ex__Bottom_West_Ledge_1),
+            "Annuna > Lamassu > Bottom Middle Ledge ==> Bottom West Ledge (2)" => Ok(ExitId::Annuna__Lamassu__Bottom_Middle_Ledge__ex__Bottom_West_Ledge_2),
+            "Annuna > Lamassu > Bottom Middle Ledge ==> Bottom West Ledge (3)" => Ok(ExitId::Annuna__Lamassu__Bottom_Middle_Ledge__ex__Bottom_West_Ledge_3),
+            "Annuna > Lamassu > Bottom West Ledge ==> Above Flat Ground (1)" => Ok(ExitId::Annuna__Lamassu__Bottom_West_Ledge__ex__Above_Flat_Ground_1),
+            "Annuna > Lamassu > East 14 ==> Glacier > Sea Burial > West 14 (1)" => Ok(ExitId::Annuna__Lamassu__East_14__ex__Glacier__Sea_Burial__West_14_1),
+            "Annuna > Lamassu > East 16 ==> Above Flat Ground (1)" => Ok(ExitId::Annuna__Lamassu__East_16__ex__Above_Flat_Ground_1),
+            "Annuna > Lamassu > East 16 ==> Flat Ground (1)" => Ok(ExitId::Annuna__Lamassu__East_16__ex__Flat_Ground_1),
+            "Annuna > Lamassu > East 16 ==> Ledge By Grate (1)" => Ok(ExitId::Annuna__Lamassu__East_16__ex__Ledge_By_Grate_1),
+            "Annuna > Lamassu > East 16 ==> Siuna Storage > West (1)" => Ok(ExitId::Annuna__Lamassu__East_16__ex__Siuna_Storage__West_1),
+            "Annuna > Lamassu > East 17 ==> Upper Save > West (1)" => Ok(ExitId::Annuna__Lamassu__East_17__ex__Upper_Save__West_1),
+            "Annuna > Lamassu > Flat Ground ==> East 16 (1)" => Ok(ExitId::Annuna__Lamassu__Flat_Ground__ex__East_16_1),
+            "Annuna > Lamassu > Flat Ground ==> Ledge By Grate (1)" => Ok(ExitId::Annuna__Lamassu__Flat_Ground__ex__Ledge_By_Grate_1),
+            "Annuna > Lamassu > Flat Ground ==> Ledge By Grate (2)" => Ok(ExitId::Annuna__Lamassu__Flat_Ground__ex__Ledge_By_Grate_2),
+            "Annuna > Lamassu > Ledge By Grate ==> East 16 (1)" => Ok(ExitId::Annuna__Lamassu__Ledge_By_Grate__ex__East_16_1),
+            "Annuna > Lamassu > Ledge By Grate ==> Lower Brick Ledge (1)" => Ok(ExitId::Annuna__Lamassu__Ledge_By_Grate__ex__Lower_Brick_Ledge_1),
+            "Annuna > Lamassu > Ledge By Grate ==> Lower Brick Ledge (2)" => Ok(ExitId::Annuna__Lamassu__Ledge_By_Grate__ex__Lower_Brick_Ledge_2),
+            "Annuna > Lamassu > Lower Brick Ledge ==> Portal Stand (1)" => Ok(ExitId::Annuna__Lamassu__Lower_Brick_Ledge__ex__Portal_Stand_1),
+            "Annuna > Lamassu > Lower Brick Ledge ==> Upper Brick Ledge (1)" => Ok(ExitId::Annuna__Lamassu__Lower_Brick_Ledge__ex__Upper_Brick_Ledge_1),
+            "Annuna > Lamassu > Portal Stand ==> Upper Brick Ledge (1)" => Ok(ExitId::Annuna__Lamassu__Portal_Stand__ex__Upper_Brick_Ledge_1),
+            "Annuna > Lamassu > Upper Brick Ledge ==> East 14 (1)" => Ok(ExitId::Annuna__Lamassu__Upper_Brick_Ledge__ex__East_14_1),
+            "Annuna > Lamassu > Upper Brick Ledge ==> East 14 (2)" => Ok(ExitId::Annuna__Lamassu__Upper_Brick_Ledge__ex__East_14_2),
+            "Annuna > Lamassu > West 15 ==> Crystals > East (1)" => Ok(ExitId::Annuna__Lamassu__West_15__ex__Crystals__East_1),
+            "Annuna > Lamassu > West 17 ==> Hidden Portal > East (1)" => Ok(ExitId::Annuna__Lamassu__West_17__ex__Hidden_Portal__East_1),
             "Annuna > Lower Hallway > East ==> Factory Access > West 22 (1)" => Ok(ExitId::Annuna__Lower_Hallway__East__ex__Factory_Access__West_22_1),
             "Annuna > Lower Hallway > West ==> Vertical Room > East 22 (1)" => Ok(ExitId::Annuna__Lower_Hallway__West__ex__Vertical_Room__East_22_1),
             "Annuna > Middle Hallway > East ==> Filter Teleporter > West 21 (1)" => Ok(ExitId::Annuna__Middle_Hallway__East__ex__Filter_Teleporter__West_21_1),

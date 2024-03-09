@@ -305,6 +305,32 @@ subgraph Annuna
     end
     subgraph Annuna__Lamassu[Lamassu]
         Annuna__Lamassu__East_17(East 17);
+        Annuna__Lamassu__Bottom_Hill_East(Bottom Hill East);
+        Annuna__Lamassu__Bottom_Hill(Bottom Hill);
+        Annuna__Lamassu__Bottom_Hill_West(Bottom Hill West);
+        Annuna__Lamassu__West_17(West 17);
+        Annuna__Lamassu__Bottom_East_Ledge(Bottom East Ledge);
+        Annuna__Lamassu__Bottom_Middle_Ledge(Bottom Middle Ledge);
+        Annuna__Lamassu__Bottom_West_Ledge(Bottom West Ledge);
+        Annuna__Lamassu__Flat_Ground(Flat Ground);
+        Annuna__Lamassu__Above_Flat_Ground(Above Flat Ground);
+        Annuna__Lamassu__East_16(East 16);
+        Annuna__Lamassu__Ledge_By_Grate(Ledge By Grate);
+        Annuna__Lamassu__Lower_Brick_Ledge(Lower Brick Ledge);
+        Annuna__Lamassu__Portal_Stand(Portal Stand);
+        Annuna__Lamassu__West_15(West 15);
+        Annuna__Lamassu__Upper_Brick_Ledge(Upper Brick Ledge);
+        Annuna__Lamassu__East_14(East 14);
+    end
+    subgraph Annuna__Hidden_Portal[Hidden Portal]
+        Annuna__Hidden_Portal__East(East);
+        Annuna__Hidden_Portal__Portal_Stand(Portal Stand);
+        Annuna__Hidden_Portal__Plinth_Right(Plinth Right);
+        Annuna__Hidden_Portal__Plinth_Left(Plinth Left);
+        Annuna__Hidden_Portal__West(West);
+    end
+    subgraph Annuna__Crystals[Crystals]
+        Annuna__Crystals__East(East);
     end
     subgraph Annuna__Udug_Gate[Udug Gate]
         Annuna__Udug_Gate__East(East);
@@ -365,6 +391,9 @@ subgraph Annuna
         Annuna__Center_Climb__Middle_Platform(Middle Platform);
         Annuna__Center_Climb__Lower_Platform(Lower Platform);
         Annuna__Center_Climb__East(East);
+    end
+    subgraph Annuna__Siuna_Storage[Siuna Storage]
+        Annuna__Siuna_Storage__West(West);
     end
     subgraph Annuna__Apocalypse_Hallway[Apocalypse Hallway]
         Annuna__Apocalypse_Hallway__Lower_East(Lower East);
@@ -1234,6 +1263,10 @@ subgraph Glacier
         Glacier__The_Big_Drop__Small_Path(Small Path);
         Glacier__The_Big_Drop__Water_Surface(Water Surface);
     end
+    subgraph Glacier__Sea_Burial[Sea Burial]
+        Glacier__Sea_Burial__West_13(West 13);
+        Glacier__Sea_Burial__West_14(West 14);
+    end
     subgraph Glacier__Grid_39_40_7_9[Grid 39-40,7-9]
         Glacier__Grid_39_40_7_9__Upper_East(Upper East);
         Glacier__Grid_39_40_7_9__West(West);
@@ -1915,6 +1948,27 @@ Annuna__Final_Save__Save_Point --> Annuna__Apocalypse__Northwest_Mid_air
 Annuna__Final_Save__Save_Point --> Annuna__Final_Save__Pillar
 Annuna__Final_Save__Upper_West --> Annuna__Apocalypse__Northwest_Mid_air
 Annuna__Final_Save__Upper_West --> Annuna__Seals__East_17_Upper
+Annuna__Lamassu__Above_Flat_Ground <--> Annuna__Lamassu__East_16
+Annuna__Lamassu__Above_Flat_Ground --> Annuna__Lamassu__Ledge_By_Grate
+Annuna__Lamassu__Bottom_East_Ledge --> Annuna__Lamassu__Bottom_Middle_Ledge
+Annuna__Lamassu__Bottom_Hill --> Annuna__Lamassu__Bottom_Middle_Ledge
+Annuna__Lamassu__Bottom_Hill_East --> Annuna__Lamassu__Bottom_East_Ledge
+Annuna__Lamassu__Bottom_Hill_West --> Annuna__Hidden_Portal__Plinth_Right
+Annuna__Lamassu__Bottom_Middle_Ledge --> Annuna__Lamassu__Bottom_West_Ledge
+Annuna__Lamassu__Bottom_West_Ledge --> Annuna__Lamassu__Above_Flat_Ground
+Annuna__Lamassu__East_14 --> Glacier__Sea_Burial__West_14
+Annuna__Lamassu__East_16 <--> Annuna__Lamassu__Flat_Ground
+Annuna__Lamassu__East_16 <--> Annuna__Lamassu__Ledge_By_Grate
+Annuna__Lamassu__East_16 --> Annuna__Siuna_Storage__West
+Annuna__Lamassu__East_17 <--> Annuna__Upper_Save__West
+Annuna__Lamassu__Flat_Ground --> Annuna__Lamassu__Ledge_By_Grate
+Annuna__Lamassu__Ledge_By_Grate --> Annuna__Lamassu__Lower_Brick_Ledge
+Annuna__Lamassu__Lower_Brick_Ledge --> Annuna__Lamassu__Portal_Stand
+Annuna__Lamassu__Lower_Brick_Ledge --> Annuna__Lamassu__Upper_Brick_Ledge
+Annuna__Lamassu__Portal_Stand --> Annuna__Lamassu__Upper_Brick_Ledge
+Annuna__Lamassu__Upper_Brick_Ledge --> Annuna__Lamassu__East_14
+Annuna__Lamassu__West_15 --> Annuna__Crystals__East
+Annuna__Lamassu__West_17 --> Annuna__Hidden_Portal__East
 Annuna__Lower_Hallway__West <--> Annuna__Vertical_Room__East_22
 Annuna__Middle_Hallway__West <--> Annuna__Vertical_Room__East_21
 Annuna__Mirror_Match__Below_Switch <--> Annuna__Mirror_Match__Central_Pillar
@@ -1956,7 +2010,6 @@ Annuna__Twisty_Passages__West <--> Annuna__West_Climb__East_20
 Annuna__Twisty_Passages__West_Hill_Left --> Annuna__Twisty_Passages__Northwest_Alcove
 Annuna__Upper_Hallway__West <--> Annuna__Vertical_Room__East_20
 Annuna__Upper_Save__East <--> Annuna__Vertical_Room__West_17
-Annuna__Upper_Save__West --> Annuna__Lamassu__East_17
 Annuna__Vertical_Room__Above_Plinth --> Annuna__Vertical_Room__Save_Point_Right
 Annuna__Vertical_Room__East_20 --> Annuna__Vertical_Room__Middle_Platform_1
 Annuna__Vertical_Room__Gate_Ledge <--> Annuna__Vertical_Room__Plinth
